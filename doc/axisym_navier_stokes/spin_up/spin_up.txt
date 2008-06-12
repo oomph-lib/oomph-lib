@@ -1,0 +1,28 @@
+\mainpage Demo problem: Spin-up of a viscous fluid -- the spatially adaptive solution of the unsteady axisymmetric Navier-Stokes equations
+
+Detailed documentation to be written; well-documented driver code
+is at the end of this document.
+
+The key feature of this problem is the fact that the flow field
+approaches a "trivial" solution (rigid body rotation) which can be
+fully-resolved by the discretsation. In that case, equidistribution of
+the error (normalised by the norm of the global error which tends to
+zero!) leads to strong uniform mesh refinement as the solution
+approaches the trivial solution. To avoid this, it is possible to
+set a constant reference value error norm. 
+
+
+Here are a few pretty pictures, taken from the
+animations of the <A HREF="../figures/spin_up_stream.avi">streamline plots for the
+instantaneous secondary fluid velocities</A> and 
+ <A HREF="../figures/spin_up_carpet.avi">carpet plots of the velocity components
+and the pressure</A>.
+
+@I w 0.75\textwidth spin_up_stream "Plot of the velocity and pressure fields computed with axisymmetric Taylor-Hood elements for Re=50. " 
+
+@I w 0.75\textwidth spin_up_carpet "Carpet plot of the velocity and pressure fields computed with axisymmetric Taylor-Hood elements for Re=50. " 
+
+
+\include spin_up.cc
+
+

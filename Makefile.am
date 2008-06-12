@@ -1,0 +1,120 @@
+# Initialisation script for self-tests wipes the master log validation.log
+TESTS = validate.sh
+
+
+# My own target for distributions that allow long filenames
+# assuming there is some general purpose tar without the
+# idiotic restrictions to the length of the filenames
+# available on the machine
+mydist: distdir
+	tar cvfz $(distdir).tar.gz $(distdir)
+	$(am__remove_distdir)
+
+# Do we want to build the demo_drivers?
+#--------------------------------------
+if WANT_DEMO
+   demo_dirs = demo_drivers
+else
+   demo_dirs =
+endif
+
+
+
+# Do we want to build the user sources?
+#-------------------------------------
+if WANT_USER_SRC
+   user_src_dirs = user_src
+else
+   user_src_dirs =
+endif
+
+
+# Directories which should be built
+#------------------------------------------
+# NOTE: Order matters! 
+#       (0) bin
+#       (1) external_src, src and user_src first because libraries 
+#           need to built before demo and/or user codes can be built.
+#           Src order: External libraries cannot depend on 
+#           internal ones and internal ones cannot depend on
+#           user ones.
+#       (2) . because test script in top level directory (=here) needs
+#           to be run before the tests in the sub-directories
+#       (3) demo driver codes.
+sub_dirs = bin external_src external_distributions src $(user_src_dirs) . \
+                   $(demo_dirs) 
+
+
+
+# Doc directory (only make doc if doxygen is available and if it's wanted)
+#-------------------------------------------------------------------------
+# [NOTE: automake only allows single conditionals]
+#-------------------------------------------------
+if HAVE_DOXYGEN 
+if WANT_DOC
+   doc_dirs = doc
+else
+   doc_dirs =
+endif
+else
+  doc_dirs =
+endif
+
+
+
+
+# The ultimate list of sub-directories (does not include user drivers!)
+#----------------------------------------------------------------------
+SUBDIRS = $(sub_dirs) $(doc_dirs) self_test 
+
+# The ultimate list of sub-directories that are to be distributed
+#----------------------------------------------------------------
+# includes the user drivers
+#--------------------------
+DIST_SUBDIRS = user_drivers $(sub_dirs) $(doc_dirs) self_test
+
+
+# A few extract scripts to be included into the distribution
+#-----------------------------------------------------------
+EXTRA_DIST = \
+validate.sh \
+autogen.sh \
+config \
+depcomp config.guess config.sub install-sh 
+
+
+# Customise the distribution
+dist-hook:
+# Kill stray symbolic links to private configure options
+	(cd config/configure_options && find . -type l -exec rm {} \; )
+	($(top_builddir)/bin/customise_dist.sh  `(cd $(top_builddir); pwd .)`  `(cd $(distdir); pwd .)` $(distdir) )
+	(cd  $(distdir)/config/configure_options && cp -f default current)
+
+
+clean-local: 
+	rm -rf build validation.log
+# We've taken the user drivers out of the SUBDIRS variable
+# so they need to be cleaned by hand for normal clean.
+# However, only do a clean if a Makefile exists!
+	(cd $(user_drivers_dirs) && if test -e Makefile; then ${MAKE} clean; fi )
+# Kill stray symbolic links to private configure options
+	(cd config/configure_options && find . -type l -exec rm {} \; )
+# The private files are also not in the SUBDIRS variable
+# so they also need to be cleaned by hand. Again we test
+# whether a makefile exists before cleaning
+if HAVE_PRIVATE_DIRECTORY
+	(cd private && if test -e Makefile; then ${MAKE} clean; fi)
+endif
+
+# Not necessary to force a descend in to user_drivers as they're
+# cleaned automatically during distclean (because they're mentioned
+# in DIST_SUBDIRS
+distclean-local:
+#We need to distclean the private directories because they are not
+#mentioned in DIST_SUBDIRS
+if HAVE_PRIVATE_DIRECTORY
+	(cd private && if test -e Makefile; then ${MAKE} distclean; fi)
+endif
+	rm -f old_symbolic_links.txt
+	rm -f config/configure.ac_scripts/private*.dir_list
+

@@ -1,0 +1,174 @@
+#!MC 1000
+
+$!VARSET |PNG|=0
+
+#$!GETUSERINPUT |lostep| INSTRUCTIONS = "Loop. First Step??"
+$!VARSET  |lostep|=0
+#$!GETUSERINPUT |dlstep| INSTRUCTIONS = "Loop. Step Increment?"
+$!VARSET  |dlstep|=1
+$!GETUSERINPUT |nstep| INSTRUCTIONS = "Loop. Number of Steps??"
+#$!VARSET |nstep| = 50
+
+$!LOOP |nstep|
+$!VarSet |nnstep| = |LOOP|
+$!VarSet |nnstep| -= 1
+$!VarSet |iistep| = |dlstep|
+$!VarSet |iistep| *= |nnstep|
+$!VarSet |iistep| += |lostep|
+$!NEWLAYOUT
+$!DRAWGRAPHICS FALSE
+#    $!IF |iistep| < 10 
+#      $!VARSET |istep|='00|iistep|'
+#    $!ENDIF
+#    $!IF |iistep| > 9 
+#      $!VARSET |istep|='0|iistep|'
+#    $!ENDIF
+#    $!IF |iistep| > 99 
+#      $!VARSET |istep|=|iistep|
+#    $!ENDIF
+$!VARSET |istep|=|iistep|
+#$!VARSET |istep|+=1
+#$!VARSET |istep|*=10
+
+$!DRAWGRAPHICS FALSE
+
+
+$!READDATASET  '"RESLT/soln|istep|.dat" ' 
+  READDATAOPTION = NEW
+  RESETSTYLE = YES
+  INCLUDECUSTOMLABELS = NO
+  VARLOADMODE = BYNAME
+  INITIALPLOTTYPE = CARTESIAN3D
+$!FIELD [1-|NUMZONES|]  MESH{COLOR = RED}
+$!FIELDLAYERS SHOWMESH = NO
+$!FIELDLAYERS SHOWSHADE = YES
+$!FIELD [1-|NUMZONES|]  BOUNDARY{COLOR = RED}
+$!FIELD [1-|NUMZONES|]  SHADE{COLOR = RED}
+$!FIELDLAYERS USETRANSLUCENCY = YES
+$!VARSET |DUMMY1_START|=(|NUMZONES|-1)
+$!FIELD [|DUMMY1_START|-|NUMZONES|]  GROUP = 2
+$!FIELD [|DUMMY1_START|-|NUMZONES|]  BOUNDARY{SHOW = NO}
+$!FIELD [|DUMMY1_START|-|NUMZONES|]  SHADE{SHOW = NO}
+
+$!VARSET |EXACT_START|=(|NUMZONES|+1)
+
+$!READDATASET  '"RESLT/exact_soln|istep|.dat" ' 
+  READDATAOPTION = APPEND
+  RESETSTYLE = NO
+  INCLUDETEXT = NO
+  INCLUDEGEOM = NO
+  INCLUDECUSTOMLABELS = NO
+  VARLOADMODE = BYNAME
+  INITIALPLOTTYPE = CARTESIAN3D
+$!FIELD [|EXACT_START|-|NUMZONES|]  GROUP = 3
+$!FIELD [|EXACT_START|-|NUMZONES|]  SHADE{COLOR = GREEN}
+$!FIELD [|EXACT_START|-|NUMZONES|]  BOUNDARY{COLOR = GREEN}
+$!ACTIVEFIELDZONES += [|EXACT_START|-|NUMZONES|]
+$!VARSET |DUMMY2_START|=(|NUMZONES|-1)
+$!FIELD [|DUMMY2_START|-|NUMZONES|]  GROUP = 2
+$!FIELD [|DUMMY2_START|-|NUMZONES|]  BOUNDARY{SHOW = NO}
+$!FIELD [|DUMMY2_START|-|NUMZONES|]  SHADE{SHOW = NO}
+
+$!THREEDVIEW 
+  PSIANGLE = 51.2131
+  THETAANGLE = -23.248
+  ALPHAANGLE = 0
+  VIEWERPOSITION
+    {
+    X = 4.35254425751
+    Y = -8.46788546065
+    Z = 8.34388907952
+    }
+$!VIEW PUSH
+$!THREEDAXIS XDETAIL{TITLE{TITLEMODE = USETEXT}}
+$!THREEDAXIS XDETAIL{TITLE{TEXT = 'x'}}
+$!THREEDAXIS YDETAIL{TITLE{TITLEMODE = USETEXT}}
+$!THREEDAXIS YDETAIL{TITLE{TEXT = 'y'}}
+$!THREEDAXIS ZDETAIL{TITLE{TITLEMODE = USETEXT}}
+$!THREEDAXIS ZDETAIL{TITLE{TEXT = 'u'}}
+$!VIEW FIT
+
+$!ATTACHTEXT
+  ANCHORPOS
+    {
+    X = 75
+    Y = 17
+    }
+  COLOR = RED
+  TEXTSHAPE
+    {
+    HEIGHT = 26
+    }
+  BOX
+    {
+    MARGIN = 10
+    LINETHICKNESS = 0.4
+    }
+  SCOPE = GLOBAL
+  MACROFUNCTIONCOMMAND = ''
+  TEXT = 'FE solution'
+
+$!ATTACHTEXT
+  ANCHORPOS
+    {
+    X = 75
+    Y = 23
+    }
+  COLOR = GREEN
+  TEXTSHAPE
+    {
+    HEIGHT = 26
+    }
+  BOX
+    {
+    MARGIN = 10
+    LINETHICKNESS = 0.4
+    }
+  SCOPE = GLOBAL
+  MACROFUNCTIONCOMMAND = ''
+  TEXT = 'Exact solution'
+
+$!REDRAWALL
+
+
+
+
+$!IF |PNG|==1
+
+
+        $!EXPORTSETUP EXPORTFORMAT = PNG
+        $!EXPORTSETUP IMAGEWIDTH = 600
+        $!EXPORTSETUP EXPORTFNAME = 'unsteady_heat_soln|istep|.png'
+        $!EXPORT
+          EXPORTREGION = CURRENTFRAME
+
+        $!EXPORTSETUP EXPORTFORMAT = EPS
+        $!EXPORTSETUP IMAGEWIDTH = 1423
+        $!EXPORTSETUP EXPORTFNAME = 'unsteady_heat_soln|istep|.eps'
+
+        $!EXPORTSETUP PRINTRENDERTYPE = IMAGE
+        $!EXPORTSETUP EXPORTFNAME = 'unsteady_heat_soln|istep|.img.eps'
+        $!EXPORT
+          EXPORTREGION = CURRENTFRAME
+
+$!ELSE
+
+        $!IF |istep|>0
+                $!EXPORTNEXTFRAME
+        $!ELSE
+                $!EXPORTSETUP
+                  EXPORTFORMAT = AVI
+                  EXPORTFNAME = "unsteady_heat_soln.avi"
+                $!EXPORTSETUP IMAGEWIDTH = 829
+                $!EXPORTSTART
+        $!ENDIF
+
+$!ENDIF
+
+
+$!EndLoop
+
+$!IF |PNG|==0
+        $!EXPORTFINISH
+$!ENDIF
+

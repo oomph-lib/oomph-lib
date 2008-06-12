@@ -1,0 +1,3180 @@
+------------------------------------------------------------------------
+r207 | ahazel | 2008-06-11 22:45:16 +0100 (Wed, 11 Jun 2008) | 8 lines
+
+A few final cofiguration tweaks and additions to the documentation about 
+subversion and the distribution.
+
+Removed one configure option whose name was over the magic 99 characters
+
+Modified the intel configuration file so that the fortran compiler is ifort
+
+
+------------------------------------------------------------------------
+r206 | mheil | 2008-06-11 15:56:44 +0100 (Wed, 11 Jun 2008) | 7 lines
+
+-- Fixed memory leaks in hypre and trilinos wrappers
+   (an internal memory leak in trilinos remains -- nothing
+   we can do about this!)
+-- fixed a few doxygen problems that appeared after attaching
+   the licencing information. 
+-- added a few more sample configure_options files.
+
+------------------------------------------------------------------------
+r205 | mheil | 2008-06-11 13:47:47 +0100 (Wed, 11 Jun 2008) | 2 lines
+
+Fixed the build machinery for external trilinos.
+
+------------------------------------------------------------------------
+r204 | ahazel | 2008-06-10 21:24:50 +0100 (Tue, 10 Jun 2008) | 21 lines
+
+Changes to the build in external_distributions so that they now works 
+in serial on a machine other than the biowulf. Hopefully this will 
+now be general enough for it to work anywhere.
+
+Filled in details of where the subversion repository will live in 
+documentation.
+
+Added a few this pointers in block_preconditioner.h.
+
+Modified the PointIntegral integration scheme to return the value at the point
+(a sensible default).
+
+Modified tolerances in validate.sh so that all tests pass on Mac (hopefully
+these are now correct).
+
+Added Makefile.am to private.
+
+Changed order of compilation of external_distributions and external_src so that
+the oomph_blas and oomph_flapack can be used in the trilinos build.
+
+
+------------------------------------------------------------------------
+r203 | mheil | 2008-06-09 18:53:59 +0100 (Mon, 09 Jun 2008) | 4 lines
+
+Sorry folks -- there were a few problems with
+the fsi_preconditioner. Now fixed...
+
+
+------------------------------------------------------------------------
+r202 | mheil | 2008-06-09 10:38:13 +0100 (Mon, 09 Jun 2008) | 15 lines
+
+- (Permanently) attached licence information to all of
+  our *.h and *.cc files.
+
+- Fixed documentation by
+  - fixing broken hooks for doxygen
+  - getting rid of dangling "<a" (usually caused by linebreak
+    introduced by emacs).
+
+  Both of these can be checked with the new shell script
+  
+    bin/find_missing_doxygen_hooks.sh
+
+- Cleaned up the block preconditioning framework.
+
+
+------------------------------------------------------------------------
+r201 | ahazel | 2008-06-06 09:42:08 +0100 (Fri, 06 Jun 2008) | 3 lines
+
+Modified hopf test so that it passes under cygwin
+Added intel-compiler based configure options
+
+------------------------------------------------------------------------
+r200 | ahazel | 2008-06-05 20:06:18 +0100 (Thu, 05 Jun 2008) | 11 lines
+
+Modified the build machinery to take proper account of the new location
+of any private files that are not for distribution.
+
+Added the missing binary in the womersley test that dropped off the last 
+revision during a rename
+
+Added modified timesteppers from Jonathan
+
+Added new fsi_preconditioners.h from Richard
+
+
+------------------------------------------------------------------------
+r199 | ahazel | 2008-06-04 15:48:14 +0100 (Wed, 04 Jun 2008) | 7 lines
+
+Moved private_external_src private_user_src and private_user_drivers
+into a single private directory and modified the build machinary to
+handle these changes
+
+Also altered the start script to fix a nasty bug that means that the mpi fortran
+compiler was not spotted (Thanks Richard)
+
+------------------------------------------------------------------------
+r198 | ahazel | 2008-06-04 13:50:09 +0100 (Wed, 04 Jun 2008) | 8 lines
+
+Removed the naughty CXXFLAGS= in Makefile.am's
+
+Removed lists of contents of private directories
+and modified the regenerate_config_files.sh to build these on the fly
+
+Modified cfortran.h to avoid a name clash
+
+
+------------------------------------------------------------------------
+r197 | ahazel | 2008-06-04 10:40:05 +0100 (Wed, 04 Jun 2008) | 3 lines
+
+Modified the arpack sources so that they are safely tucked away in a private 
+directory
+
+------------------------------------------------------------------------
+r196 | ahazel | 2008-06-03 17:30:16 +0100 (Tue, 03 Jun 2008) | 13 lines
+
+Changed validation tolerance in a number of places to correct finite-precision
+difference between different architectures.
+
+Removed echo -e from the build_mesh_makefile.sh because it's not portable.
+
+Added --jobs flag to autogen.sh to specify make -j type compilation
+
+Replaced builddir by srcdir in a number of Makefile.am's to allow builds outside the source tree.
+
+Added Andy's changes to generic to fix SuperLU_dist and also to redistribute elements if a processor is not assigned any elements. Also fixes a problem with discrepant hanging nodes.
+
+
+
+------------------------------------------------------------------------
+r195 | ahazel | 2008-05-27 12:05:36 +0100 (Tue, 27 May 2008) | 2 lines
+
+Yet more name changes and updates to documentation
+
+------------------------------------------------------------------------
+r194 | ahazel | 2008-05-27 10:22:54 +0100 (Tue, 27 May 2008) | 2 lines
+
+More name changes, but now it works!
+
+------------------------------------------------------------------------
+r193 | ahazel | 2008-05-27 09:52:04 +0100 (Tue, 27 May 2008) | 2 lines
+
+Changed a number of filenames so that they are under the magic 99 characters
+
+------------------------------------------------------------------------
+r192 | ahazel | 2008-05-26 17:01:00 +0100 (Mon, 26 May 2008) | 4 lines
+
+Fixed one validate.sh so that all tests pass under intel compiler
+
+Removed all assert(false)'s from src and demo_drivers (I hope)
+
+------------------------------------------------------------------------
+r191 | ahazel | 2008-05-24 18:13:26 +0100 (Sat, 24 May 2008) | 32 lines
+
+The main change here has been to rationalise the Algebraic, Spine and 
+MacroElement node-update strategies as much as possible. A new 
+ElementWithMovingNodes class has been added from which all three inherit. This 
+class assembles and stores pointers to all geometric data that are used in 
+the update of the Nodes of the element. The generic finite-differencing and 
+local equation numbering are all handled by this class.
+
+There is scope for further rationalisation of the appropriate Node classes and
+the memory usage can be streamlined, but that's for another time.
+
+A major advantage is that one no longer needs to add Spines to SpineElements, 
+the appropriate Spines will be gathered from the Nodes. The second advantage is
+that the algebraic_element.template.cc and 
+macro_element_node_update_element.template.cc files are no longer needed!
+
+A consequence of the removal of Spines from the SpineElement is that if there
+are external Spines that affect the Element's residuals through subtle 
+interactions, for example Spines in a Bulk element which affect derivatives thatare computed on a Face, these must be added as external data. 
+
+An additional (boolean) flag has been added to add_external_data and 
+add_internal_data that specified whether that data should be finite-differenced or not. It is now possible, therefore,  to selectively finite-difference 
+external and internal data. In addition, virtual functions have been added 
+that are called after the increment and reset of the variables in 
+finite-difference loops, permitting fine-grained updates of slaved variables.
+
+In Algebraic and MacroElementNodeUpdate Element's the 
+update_previous_time_values is now correct, in that it loops only over the 
+previously stored time values, not all time data (accelerations, etc in Newmark schemes, for example).
+
+Finally, there are trivial changes to allow compilation under gcc 4.2
+
+
+------------------------------------------------------------------------
+r190 | mheil | 2008-05-24 17:17:17 +0100 (Sat, 24 May 2008) | 5 lines
+
+Sorry -- the last one was broken. Removed a few
+stray references to deleted include files in 
+config/makefile_templates.
+
+
+------------------------------------------------------------------------
+r189 | mheil | 2008-05-24 16:08:20 +0100 (Sat, 24 May 2008) | 12 lines
+
+Stripped all references to 
+
+$(top_srcdir)/config/makefile_templates/serial_driver
+$(top_srcdir)/config/makefile_templates/serial_src
+
+out of the Makefile.ams and deleted the associated
+files. Also killed the mpi directory lists. 
+This should now be a fully-functional distribution
+again...
+
+
+
+------------------------------------------------------------------------
+r188 | mheil | 2008-05-24 15:46:48 +0100 (Sat, 24 May 2008) | 16 lines
+
+Reconfigured build machinery so that it works 
+with serial OR (exclusive or) mpi versions of
+trilinos and hypre so there's just one flag
+for each, HAVE_HYPRE and HAVE_TRILINOS.
+
+Stripped out the mpi directory from everywhere
+(incl. the many scripts that used to descend
+into it). 
+
+Lots of tidying up/finishing off in the documentation.
+ 
+Will come back immediately to get rid of a few additional
+files and references to them in the Makefile.ams.
+
+
+
+------------------------------------------------------------------------
+r187 | mheil | 2008-05-23 16:09:01 +0100 (Fri, 23 May 2008) | 6 lines
+
+Rushed check-in after merging with Richard. Lots
+of tidied up bits and more documentation. This version
+does not work properly with serial-only trilinos
+or hypre but Andrew wants it checked in anyway...
+ 
+
+------------------------------------------------------------------------
+r186 | rmuddle | 2008-05-22 17:33:09 +0100 (Thu, 22 May 2008) | 50 lines
+
+-- Rewrote the trilinos wrappers so they live in 
+   generic and serial and parallel versions are
+   distinguished by #ifdefs.
+
+-- Removed the BlockPreconditionableElementBase
+   (or something like this). Now all GeneralisedElements
+   have broken virtual functions that implement
+   the required functionality. 
+
+-- Rewrote the BlockPrecondtitioner class a lot.
+   In particular, rather than inheriting (e.g. in FSI) 
+   they have subsidiary and master block
+   preconditioners.
+
+-- Introduced DistributedVector<T> which does NOT
+   inherit from Vector<T>. It contains the relevant
+   subset of the distributed vector; entries are
+   identified by their local index. Any offset 
+   would have to be added by hand -- but in fact
+   this not used at the moment as Hypre and Trilinos
+   want their distributed vectors in exactly this form.
+
+-- Introduced a DistributionInfo.
+
+-- Distributed matrices rewritten to work with DistributionInfo
+
+-- parallel Problem::get_jacobian(...) can now handle
+   distributed vectors. 
+
+-- The default preconditioner for all oomph-lib IterativeLinearSolvers
+   is now the newly created IdentityPreconditioner (the Preconditioner
+   base class is now no longer functional -- it contains broken
+   virtual implementations of preconditioner_solve(...). May revisit
+   this in future (the potential problem is that we don't want to force
+   preconditioner writers to implement (broken) mpi versions of 
+   their serial preconditioners.)
+
+-- Added broken virtual solve functions to LinearSolver to deal
+   with distributed vectors.
+
+-- Updated the Navier Stokes LSC and FSI preconditioners to work with
+   the new BlockPreconditioner class. A few FSI preconditioner
+   interfaces were changed. Removed ExactFSIPreconditioner and 
+   ExactNavierStokesPreconditioner - replaced with general purpose
+   ExactBlockPreconditioner.
+
+
+
+
+
+------------------------------------------------------------------------
+r185 | mheil | 2008-05-21 08:35:14 +0100 (Wed, 21 May 2008) | 13 lines
+
+-- moved current and default config files back
+   in config/configure_options.
+-- disabled automatic deletion of Mesh and TimeSteppers
+   in Problem destructor (easy) and edited all 
+   demo driver codes to remove explicit references
+   to the no-longer-true fact that they are deleted
+   in the base class. Will now have to check that
+   the documentation still works. Will do this 
+   with attached licence information since
+   this is also has the potential to screw up 
+   doxygen mark-ups...
+
+
+------------------------------------------------------------------------
+r184 | jboyle | 2008-05-20 18:15:22 +0100 (Tue, 20 May 2008) | 11 lines
+
+-- Mainly Jonathan's check-in of the unified Hypre wrappers
+  (Hypre and MPI Hypre merged via #ifdefs and 
+  we now have a clear distinction between solvers
+  and preconditioners). 
+
+-- Also added hybrid BDF/Newmark timestepper.
+
+-- Some timings changed to MPI timings. May want
+   to unify this in future...
+ 
+
+------------------------------------------------------------------------
+r183 | mheil | 2008-05-19 18:43:31 +0100 (Mon, 19 May 2008) | 7 lines
+
+Moved configure option files into private.
+Will rescue a few during the next release.
+There's also a problem with the symbolic links
+which should be deleted automatically but they
+weren't just now...
+
+
+------------------------------------------------------------------------
+r182 | mheil | 2008-05-19 14:36:50 +0100 (Mon, 19 May 2008) | 49 lines
+
+-- fixed the problem with the algebraic node update for turek mesh
+   (nice side-effect is that the code now runs fine at smaller
+   timesteps; overall results are unchanged). 
+
+-- added demo drivers for preconditoned fsi channel solver.
+
+-- lots of additional test codes for the iterative linear solvers
+   so the documentation refers to specific code.
+
+-- made pinning of redundant pressure nodes consistent between
+   fluid and solid elements.
+
+-- finished off the build machinery for trilinos and hypre.
+   If relevant tar files (available via oomph-lib webpages)
+   are dropped into approprite sub-directories, oomph-lib's
+   build machinery now builds these two libraries with the
+   same flags. WARNING: Trilinos takes VERY long to build,
+   with O2, with O6 it becomes completely ridiculous.
+
+-- Added config/configure_options/private_configure_options
+   which will soon store the private configure options.
+   The old directory will only contain a few selected
+   ones that illustrate the general idea.
+
+-- changed description of configure flags to 
+   --enable-suppress-doc and -enable-suppress-demo 
+   (which is what they're actually called).
+
+-- Doc now automatically builds pdf version of all
+   tutorials and makes them available via link
+   at the bottom of the webpage. (Major cleanup
+   in intro.txt where the nesting of lists was far too
+   deep for latex to cope.) Build is now done with
+   pdflatex (if available on machine). (NOTE: Must
+   strip out the now redudant references to dvipdf)
+
+-- Tutorials for linear solvers, and problem specific
+   preconditioners written.
+
+-- Created stubs for doc of subversion and paraview.
+
+-- updated the_distribution.txt to reflect the new
+   layout. 
+
+-- Updated bugs.txt and referred to bugzilla.
+
+
+
+
+------------------------------------------------------------------------
+r181 | ahazel | 2008-05-15 14:28:37 +0100 (Thu, 15 May 2008) | 2 lines
+
+Trivial change to comments
+
+------------------------------------------------------------------------
+r180 | ahazel | 2008-05-15 14:27:01 +0100 (Thu, 15 May 2008) | 5 lines
+
+Added new functionality to correctly handle hanging nodes over a periodic
+boundary in two-d refineable quad elements. Tested in 
+refineable_periodic_load.cc, but not comprehensively.
+
+
+------------------------------------------------------------------------
+r179 | ahazel | 2008-05-14 17:20:44 +0100 (Wed, 14 May 2008) | 7 lines
+
+Modified nodes to handle hanging nodes on boundaries on which Dirichlet
+(pinned) boundary conditions are applied. Nodal values that are fixed because 
+the node is hanging, which we term "constrained" nodes are now marked 
+differently from those that are "pinned". This means that pinning boundary 
+conditions do not need to be reapplied after adaption in 
+refineable_simple_shear.cc.
+
+------------------------------------------------------------------------
+r178 | ahazel | 2008-05-13 18:03:26 +0100 (Tue, 13 May 2008) | 10 lines
+
+Documented the segregated solver example and introduced a new 
+simple_segregated_driver.cc 
+
+Added analytic off-diagonal Jacobian terms to the boussinesq convection example
+
+Modified the solid theory documentation
+
+Added a couple of user drivers, one of which tests the refineable "problem" discovered by Phil in its simplest incarnation --- a Poisson problem.
+
+
+------------------------------------------------------------------------
+r177 | mheil | 2008-05-05 20:41:10 +0100 (Mon, 05 May 2008) | 10 lines
+
+Updated the customisation of "make dist" to take the
+private directories (which may be missing) into account.
+(Also added the temporary  driver 
+
+  demo_drivers/interaction/turek_flag/turek_flag_work.cc
+ 
+to the distribution).
+
+
+
+------------------------------------------------------------------------
+r176 | mheil | 2008-05-04 12:51:47 +0100 (Sun, 04 May 2008) | 14 lines
+
+Moved Manchester-based user directories into private_ and 
+updated the build process accordingly. Also, moved
+the hsl sources into a separate directory private_external_src/hsl.
+This contains only the source file. When the actual library
+(linked against with -loomph_hsl) is built, the build machinery
+first checks if frontal.f exists in external_src/oomph_hsl
+(this is where the user would drop his/her own copy). If this
+is not the case, we check if there's a copy in private_external_src/hsl.
+If so, we create a symbolic link to it (this is deleted during clean)
+and if not we proceed with the previously existing dummy build.
+
+  Note: make dist hasn't been adjusted yet -- will do this next.
+
+
+------------------------------------------------------------------------
+r175 | mheil | 2008-05-02 09:04:13 +0100 (Fri, 02 May 2008) | 35 lines
+
+Interface changes to bring things in line with our coding conventions:
+
+ - No underscore following the "n" in an access function to the
+   "number of things" stored in an object. E.g.:
+
+        FiniteElement::n_nodal_position_type()
+
+   becomes
+
+        FiniteElement::nnodal_position_type()
+
+- No underscore following the "N" in the corresponding member
+  data.
+
+- Order of "time" arguments. The (discrete) time index always
+  goes first (but didn't in some cases). This is dangerous
+  if the change results in exchanging the order of two unsigneds,
+  say, because the compiler can then not issue a warning if the
+  old interface is used. Functions in which such changes
+  were necessary now contain the block of the form
+
+#ifdef WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES
+   // Warn about time argument being moved to the front
+   OomphLibWarning(
+    "Order of function arguments has changed between versions 0.8 and 0.85",
+    "CylinderWithFlagDomain::macro_element_boundary(...)",
+    OOMPH_EXCEPTION_LOCATION);
+#endif
+
+  which (if the code is compiled with -DWARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES)
+  issues a warning. This is supposed to be a last resort if any user 
+  codes behave strangely after upgrading to the new version.
+
+ 
+
+------------------------------------------------------------------------
+r174 | ahazel | 2008-04-28 09:26:27 +0100 (Mon, 28 Apr 2008) | 3 lines
+
+Trivial changes to ensure that the womersley tests validate under
+the intel compiler
+
+------------------------------------------------------------------------
+r173 | ahazel | 2008-04-27 18:49:35 +0100 (Sun, 27 Apr 2008) | 17 lines
+
+Changed the interface of to the FaceElements so that the faces are represented
+by an integer face_index, rather than the combination s_fixed_index and s_limit
+which was not sufficiently general. All demo drivers and src codes have been updated, but user_drivers may be inconsistent
+
+Also separated NavierStokesSurfacePowerElements into their own header file,
+made the sources consistent with gcc 4.2 and fixed a few other niggles.
+
+The documentation should not include any reference to s_limit or s_fixed_index,
+but I have not checked this fully
+
+Also added an empty validate.sh to the biharmonic tests
+
+Notes: matrix_multiply and biharmonic tests do nothing
+       make distclean does not clean up everything that it should 
+       (turek flag, flag channel and the bash scripts in trilinos stuff)
+
+
+------------------------------------------------------------------------
+r172 | mheil | 2008-04-23 08:19:23 +0100 (Wed, 23 Apr 2008) | 29 lines
+
+Matthias check-in after merge with Andy. 
+
+- Completed first draft for FSI/non-FSI channel with leaflet tutorials
+  and created self-test for associated driver codes (there's still an
+  unresolved issue with the macro-element-based node update!)
+
+- Completed first draft for non-FSI Turek tutorial and about 1/5 through
+  tutorial for FSI equivalent.
+
+- Added Womersley equations class and demo drivers, illustrating how
+  to attach traction-elements that mimick the behaviour of a long tube
+  downstream of an outflow cross-section.
+
+- Added Lagrange-multiplier-based elements that apply non-coordinate
+  aligned boundary conditions to beams and shells. New demo code
+  in beam directory shows to discretise ring that buckles in N=3
+  mode; new demo code in shell directory shows how to apply either
+  clamped or pinned (or pinned periodic) boundary conditions for
+  shell.
+
+- First draft for machinery that automatically builds and installs
+  hypre or trilinos from tar file, using the same configure
+  flags used for oomph-lib. Needs to be bullet-proofed and documented
+  once the parallel hypre and trilinos solvers have been merged
+  with the serial versions (from that point onwards we'll only
+  link against either the serial or the parallel version, tidying
+  the build process considerably).
+
+
+------------------------------------------------------------------------
+r171 | agait | 2008-04-21 10:20:51 +0100 (Mon, 21 Apr 2008) | 29 lines
+
+Mainly check-in of Andy's mesh distribution routines.
+All hidden away behind #ifdef OOMPH_HAS_MPI flags.
+Modulo some final bullet-proofing (catching cases where
+the initial mesh too coarse to be sensibly distributed,
+etc), this now works for single physics problems on a single
+mesh.
+
+Also emptied mpi subdirectory of pretty much everything
+(apart from the parallel hypre and trilinos solvers which
+will be moved by Richard and Jonathan). The MPIProblem
+is now gone and whatever functionality it had has now
+been incorporated (with #ifdef OOMPH_HAS_MPI) into
+Problem, etc. Also moved SuperLU_dist into 
+external_src. 
+
+Lots of mpi self tests still sitting in Andy's mpi_user_drivers
+directory. Will be merged into the proper demo drivers
+directory when mpi self-test machinery (how to specify
+mpirun -np * on different machines) has been
+fully implemented. 
+
+IMPORTANT: When linking against hypre both configure
+flags should point to the same (either the serial or
+the parallel) installation. Trilinos still requires
+linking against separate mpi and serial installations.
+Will also tidy this up when Richard and Jonathan
+merge things with the serial code.
+
+
+------------------------------------------------------------------------
+r170 | ahazel | 2008-04-16 17:22:20 +0100 (Wed, 16 Apr 2008) | 23 lines
+
+Added Advection-Diffusion-Reaction elements that solve a number of
+(potentially coupled) transport equations for reactive scalars. These are 
+used and tested in new demo drivers under reaction_diffusion (no advection)
+and in multiphysics: double-diffusive convection.
+
+In addition, surface transport equations for surfactant have been included in
+the demo driver multiphysics section. These are not rigorously tested yet, but
+are included so that I have them checked in. Pure advection round a disc
+is checked in the code user_drivers/andrew/advect.cc.
+I *think* that aside from non-dimensionalisation issues they are OK.
+
+Modified the test for the fsi_channel_segregated_solver so that it *should*
+work on intel architectures by reducing the number of timesteps taken
+and upping the relative tolerance to 1% (from 0.1%).
+
+Modified the fluid interface elements to include a strouhal number in the
+kinematic condition.
+
+Corrected a missing u_index in the Navier-Stokes equations and also passed
+the ALE_is_disabled flag down to sons in those refineable elements that have
+ALE capability.
+
+
+------------------------------------------------------------------------
+r169 | ahazel | 2008-03-18 09:13:58 +0000 (Tue, 18 Mar 2008) | 28 lines
+
+Advection-Diffusion Elements: Multiplied all residuals (and jacobian terms)
+                              by minus one so that the mass matrix is
+			      positive semi-definite
+
+InterfaceElements: Added functionality to permit the simulation of
+                   Marangoni flows and new demo_drivers in
+		   multiphysics/marangoni_convection for tests.
+
+Meshes: Removed some unnecessary (and dangerous) empty constructors
+        in some of the specific Mesh classes.
+	Also added a remove_boundary_node(Node* node_pt) function
+	to the base Mesh class.
+
+Nodes: Added functionality so that the position variables of a SolidNode
+       can be shared (copied) from another Node. Allowing true periodic
+       SolidNodes.
+
+User_drivers: Added a whole bunch of new drivers in andrew to cover
+              Tom's collapsing ring problem (a noddy test case)
+	      Natasha's inclusion problem should now work (for nearly all cases)
+              Bretherton problem with gravity is now done accurately
+	      and systematically.
+              Maxwell's wave equations for the Electric Field with
+	      penalty term to enforce divergence-free-ness are also
+	      included.
+
+
+
+------------------------------------------------------------------------
+r168 | mheil | 2008-01-18 15:12:25 +0000 (Fri, 18 Jan 2008) | 37 lines
+
+This is Matthias' check-in of Jonathan's sources:
+
+-- Made the sparse assembly in Problem consistent with distributed
+   methodology, implemented in MPI_Problem.
+
+-- Quite a number of minor additions/changes to stuff in generic
+   that shouldn't affect anybody else.
+
+-- Implemented RefineableQElement<3>::interpolated_zeta()
+
+-- Tidy up of mpi_linear_solvers (still work in progress)
+
+-- MPI_CRDoubleMatrix_dist becomes DistributedCRDoubleMatrix
+
+-- Rewrote parallel matrix assembly and
+   removed use of (leaky and overly costly) matrix/vector
+   send/broadcast etc. functions from MPI_Helpers from mpi_problem.cc
+   (The old versions are still in there but commented-out; should 
+    probably removed at some point)
+
+-- Cleaned up (and de-leaked) helper fcts in MPI_Helpers.
+   (This still needs some tidying (lots of commented-
+    out #ifdef PARANOIDs)
+
+-- Tidy-up in mpi subdirectories is on-going. There's a comment in
+   mpi_problem.h:
+
+   // FUNCTION NAMES NOT CONSISTENT WITH PROBLEM, NOR IS INTERFACE WHICH
+   // HAS A COMPRESSED_ROW_FLAG
+
+   I assume this will be rectified.
+
+-- NOTE: super_lu_dist_bridge.c has become superlu_dist.c
+         but cannot move at the moment since it's got changes.
+         Do this next time around.
+
+
+------------------------------------------------------------------------
+r167 | mheil | 2007-12-14 18:18:48 +0000 (Fri, 14 Dec 2007) | 7 lines
+
+Just a merge with Andrew's latest distribution to 
+faciliate getting the various MPI updates into the
+system. The shell elements now allow for pre-stress
+and there's a bit of extra stuff on Robert's asymptotics
+in sarah's user_driver directory. 
+
+
+------------------------------------------------------------------------
+r166 | ahazel | 2007-12-13 18:07:08 +0000 (Thu, 13 Dec 2007) | 15 lines
+
+Modified falling_jet output so that the surface elements are not
+output.
+
+Modified the creation of meshes from triangle to use the attributes
+to sort elements into region, if a boolean flag is specified.
+
+Added triangular linear elasticity elements
+
+Corrected integration scheme for triangular elements
+
+Corrected a couple of typos in the symmetries of the elasticity tensor
+
+Added the homogenisation problem using triangle.
+
+
+------------------------------------------------------------------------
+r165 | ahazel | 2007-12-03 16:47:54 +0000 (Mon, 03 Dec 2007) | 18 lines
+
+Modified periodic nodes so that they are now (and will always be)
+nodes that have copies of another nodes data. The cooridinates are
+always stored as separate data, even though this will lead to a bit
+of wasted storage in many cases, it is more general and easier to 
+understand. There is now no periodic direction required when making
+periodic nodes.
+
+It is now also possible to have nodes that are periodic in multiple directions
+which is accessed by a different interface. Multiple nodes can be made
+periodic from a single "master" node.
+
+Tweaked some of the validate scripts so that they should be OK with
+Rich's machine.
+
+Added FaceElements to TElements and added tests of the computation
+of outer unit normals for all 2D and 3D Q and T Elements. 
+ 
+
+------------------------------------------------------------------------
+r164 | ahazel | 2007-11-17 12:00:41 +0000 (Sat, 17 Nov 2007) | 24 lines
+
+The main changes are:
+
+  i) Finally fixed the Crozier -> Crouzeix misspelling.
+ ii) Changes to the names of some of the fluid interface elements and
+     additions so that contact angle conditions can be enforced in weak
+     and strong formulations (in 2D only at the moment, but easy to extend)
+iii) Added the equations of linear elasticity in a displacement formulation. 
+     These are not formulated via SolidElements, but the displacements are 
+     stored as values at the nodes.
+ iv) Modified the functionality of 2D RefineableElements so that periodic 
+     boundaries can be handled. There is likely to be an error, however, if
+     we ever get a periodic node that hangs from one side only. The problem
+     is that the master nodes need to be set to be the versions on the 
+     "same side" as the present node; another detail to be filled in, 
+     but it does not happen in the test case. I can/will fix it later.
+  v) Added two additional demos/tests: 
+      1) navier_stokes/falling_jet, which tests the line-tension terms 
+         that must be added at boundaries of free surfaces
+         in three dimensions;  
+      2) linear_elasiticity/periodic_load, which validates the equations of 
+         homogeneous, isotropic linear elasticity in a periodic problem. It 
+	 also has refineability in the presence of periodic boundaries.
+
+
+------------------------------------------------------------------------
+r163 | mheil | 2007-11-06 17:01:26 +0000 (Tue, 06 Nov 2007) | 27 lines
+
+
+-- Tidied up segregated fsi solver. Now dies if any of the Newton solvers
+   explodes. Throws a "segregated solver error" if the Picard iteration
+   runs out of iterations. Is currently caught in the driver and the
+   run continues anyway.
+
+-- Changed non-dim for shell traction to be consistent with write-up
+   in Comp. Mech. paper. Now shell and beam tractions are non-dimensionalised
+   on E/(1-nu^2). Hacked the output from the clamped shell driver
+   codes to ensure that the trace files in validata stay consistent.
+
+-- Introduced --with-blas and --with-lapack into configure script
+   (needs absolute location of the *.a libraries; nothing
+   else would work, probably because of the non-static libraries.
+   Trilinos does the same!)
+
+-- Removed dlamch.c from the two superlu sources as it's an lapack file.
+
+-- Added Airy cantilever doc
+ 
+-- Finished off solid theory doc
+
+-- Upgraded osc. tube (Sarah's code) to be able to handle
+   Robert's wall shape; bumped up counter for input data.
+
+
+
+------------------------------------------------------------------------
+r162 | ahazel | 2007-10-08 18:03:08 +0100 (Mon, 08 Oct 2007) | 28 lines
+
+Some serious tidying on the segregated solver.
+This has necessitated the following MAJOR change
+Problem::actions_before_solve()
+and 
+Problem::actions_after_solve()
+
+have become
+
+Problem::actions_before_newton_solve()
+and
+Problem::actions_after_newton_solve()
+
+This will, no doubt, be annoying, but it is essential.
+
+The segregated solver has the equivalent functions
+actions_before/after_segregated_solve()
+and 
+actions_before_segregated_convergence_check()
+
+The documentation function calls that were in the solver have
+now been mostly moved in the the associated driver code
+in demo_drivers/interaction/fsi_channel_segregated_solver.
+
+The results of the segregated solver and now (I believe) correct and
+the solver is consistent with our (monolithic) newton solver.
+
+
+
+------------------------------------------------------------------------
+r161 | mheil | 2007-09-24 18:15:11 +0100 (Mon, 24 Sep 2007) | 5 lines
+
+Nothing much -- just checking in to give Andrew a definite
+version to refer to before he starts sanity checking the segregated
+FSI solver.
+
+
+------------------------------------------------------------------------
+r160 | mheil | 2007-09-14 12:30:14 +0100 (Fri, 14 Sep 2007) | 22 lines
+
+Check-in after final tweaks and performance tweaks to
+mesh ditsribution stuff before return from Munich. 
+The mesh distribution will now be handed over to Andy
+when he starts. Overview and planned extensions can be
+found in my final report -- one bug that isn't mentioned
+is that in 3D without pruning of superfluous halo[ed]
+nodes/elements, the halo/haloed nodes are out of sync.
+Haven't had time to look into this and we should sort this
+out even though this option is unlikely to be used a lot.
+
+  This commit also includes the final version of the 
+Turek FSI (and CSM) benchmarks and the fsi driven
+cavity, soon to be used for the comparison between
+segregated and monolithic solvers.
+
+  Finally, removed some long-dead files and directories.
+
+  ...plus probably a bit more...
+
+
+
+
+------------------------------------------------------------------------
+r159 | ahazel | 2007-09-11 13:13:56 +0100 (Tue, 11 Sep 2007) | 9 lines
+
+Fixed a few GNU/Intel compatilbilty issues
+Added the "dynamic contact line" options to free surfaces: This is not
+yet quite finished, but the general framework is in place. There are now
+two ways to specify a contact angle, by overloading the kinematic equation 
+(strong form) or by replacing the appropriate part of the surface integral
+terms in the Navier--Stokes momentum equation (weak form). Precisely which
+one to use depends upon the application, but the strong form is the default.
+
+
+------------------------------------------------------------------------
+r158 | ahazel | 2007-09-11 09:11:34 +0100 (Tue, 11 Sep 2007) | 12 lines
+
+Modified the RefineableSolid elements to that they are templated by dimension
+removing the need for the explicit Quad and Brick elements.
+
+In addition commented out the node_update() function in a Mesh class
+in macro_element_free_boundary_poisson.cc that was generating an Intel
+compiler complaint --- hiding rather than overloading virtual function.
+
+This check in also includes modified validate.sh's in simple_shear and
+3d_static_cap to make sure that checks pass with the different floating
+point precision on my home machine with the Intel compiler.
+
+
+------------------------------------------------------------------------
+r157 | mheil | 2007-08-31 10:00:56 +0100 (Fri, 31 Aug 2007) | 30 lines
+
+Merged MPI-based problem distribution with the main sources.
+All of this is still subject to approval but it wasn't
+possible to keep it out of the generic directory, and a result
+the distinction between the mpi and normal directories is
+becoming blurred and will probably disappear at some point.
+Everything that requires mpi is now #ifdef-ed away with
+#ifdef OOMPH_HAS_MPI (rather than the more tempting HAVE_MPI
+which is so obvious that other packages use it too, leading
+to clashes). OOMPH_HAS_MPI is set to true during the configure
+stage when the code is compiled with --enable_MPI.
+
+ I've also moved Floraine's codes into demo_drivers and will finish
+them off in the next revision. One issue is that because
+domains now live in the meshes directory, we now have to link
+against the mesh directory because some domain.cc files are 
+sufficiently big to warrant pre-compilation. This will require
+a few tweaks in the Makefile.am-s, probably via a global change
+(I suggest we always link against generic and meshes to avoid
+confusion).
+
+ Four of Andrew's 3D static cap problems fail on the wulf 
+because of differences in (relatively) small numbers. 
+I can't judge how significant this is and left it for now.
+
+ The linear shear solid examples required larger tolerances
+to pass too but it seemed less controversial there so I've changed
+the tolerances.
+
+
+
+------------------------------------------------------------------------
+r156 | ahazel | 2007-08-29 17:09:07 +0100 (Wed, 29 Aug 2007) | 3 lines
+
+Fixed an off-by-one error in the BlockFold and BlockPitchFork tracking
+routines that meant that continuation did not work
+
+------------------------------------------------------------------------
+r155 | ahazel | 2007-08-28 17:02:47 +0100 (Tue, 28 Aug 2007) | 10 lines
+
+A number of modifications in the free surface sources to tidy things up
+and to include static contact angles in 3D free surface problems.
+3D PVD elasticity in refineable and non-refineable forms has been added
+Thus, we can have 3D PseduoSolidNodeUpdate free surface problems.
+
+In addition, in order to prevent potential virtual inheritence problems
+all the fill_in_generic_ style functions in Equations classes have been
+given unique sufficies.
+
+
+------------------------------------------------------------------------
+r154 | ahazel | 2007-08-09 17:23:57 +0100 (Thu, 09 Aug 2007) | 14 lines
+
+Add the u_index stuff to free surface elements (finally)
+Added block decomposition of Hopf bifurcation tracking (now much faster)
+Owing to a nasty bug(let) to do with uninitialised member data I 
+have removed the empty RectangularQuadMesh() constructor and replaced
+it by a proctected constructor that suppresses the build of the mesh so
+that the overloaded spacing functions can be used. This will, of course,
+be superseded soon by a more general spacing method. All meshes that used 
+the empty constructor have been modified to use the new constructor.
+
+Added a (2D, but should work for any D) DGdriver code to my user drivers.
+It should also work for non-uniform refinement, but I have not tested it
+yet.
+
+
+------------------------------------------------------------------------
+r153 | ahazel | 2007-07-25 09:41:26 +0100 (Wed, 25 Jul 2007) | 3 lines
+
+Inclusion of one additional this-> to make
+the library work with intel compilers
+
+------------------------------------------------------------------------
+r152 | ahazel | 2007-07-24 16:10:52 +0100 (Tue, 24 Jul 2007) | 12 lines
+
+Fixed this pointer problems from 151
+Modified orr_sommerfeld.cc so that it works under Intel
+Modified the ARPACK eigen solver so that the computation of eigenvectors
+can be switched off.
+Added the static-cap, free-surface problem with an elastic mesh deformation
+to the demo drivers.
+Modified the form of the interface elements so that more general constraints
+can be used for the additional unknowns required to enforce the 
+kinematic condition.
+Modified the configure script end so that we don't recompile every time
+we call autogen.sh if nothing has actually changed.
+
+------------------------------------------------------------------------
+r151 | mheil | 2007-07-20 17:02:57 +0100 (Fri, 20 Jul 2007) | 33 lines
+
+Quite a few things -- interrupted by move, so I might
+forget a few changes, especially since pretty much every
+file has changed due item 1:
+
+- changed config.h to oomph-lib-config.h to avoid clashes
+  with third-party libraries that import their own (naughty
+  but it happens! At least their #define-s don't now clash
+  with ours. Globally changed all references to config.h
+  to make them consistent with the rename. 
+
+- Merged Jonathan's Trilinos stuff (serial and parallel)
+  and generated validata for both (as well as for hypre).
+  Introduced the required magic to ensure that no
+  trilinos/hypre containing stuff gets compiled if trilinos
+  isn't available. NOTE: Two of the member functions
+  in the MPI_CRDoubleMatrix_dist class (the matrix vector
+  product and the matrix matrix product) use trilinos
+  functions if trilinos is available, and are broken 
+  otherwise.
+
+-  Created space for floraine's driver codes and
+   documentation.
+
+- Created a demo code (and doc stub) for the "Airy Cantilever" problem 
+  which gives such pleasing agreement with the St. Venant solution...
+
+- Moved the solid theory section from leftover to solid/solid_theory
+  and started to edit it. Still not finished but getting there.
+
+- Probably a few more things...
+
+
+
+------------------------------------------------------------------------
+r150 | mheil | 2007-06-26 05:56:29 +0100 (Tue, 26 Jun 2007) | 16 lines
+
+Added Richard's biharmonic example codes (without validation) and 3D
+Hartree Fock drivers.
+
+Prepared SolidTractionElements for FSI (implemented as FSISolidTractionElemens
+user_drivers/mattthias/cantilever.cc; to be merged with Floraine's
+DFG test code). Changed interfaces to prescribed traction function
+(removed time, added Lagrangian coordinate -- it's now consistent
+with Beam/FSIBeam). Made the pinning of redundant nodal solid pressure dofs
+consistent with the method used for Navier-Stokes (act on Vector of
+pointers to element, rather than elements individually). 
+
+Added doc directory for channel_with_leaflet code.
+
+Added Rich's OSX compilation hints to FAQ.
+ 
+
+------------------------------------------------------------------------
+r149 | ahazel | 2007-06-22 16:46:19 +0100 (Fri, 22 Jun 2007) | 11 lines
+
+Fixed up a few this-> problems.
+Added mass matrix to navier stokes equations.
+Commented out EXTERNAL ETIME in all_arpack_sources.f (caused problem's on
+Apple OSX).
+Wrote new flow_past_cylinder user driver that determines the Hopf bifucation
+for 2D navier stokes equations testing the new mass matrix. (convert to
+demo driver soon).
+Added NArnoldi member data to the ARPACK class and reduced the default number
+from 100 to 30 (speeds up eigenvalue calculations)
+
+
+------------------------------------------------------------------------
+r148 | mheil | 2007-06-12 18:01:48 +0100 (Tue, 12 Jun 2007) | 14 lines
+
+Timed all preconditioned NSt and FSI driver codes
+to ensure that they still perform as documented
+at the Ibiza meeting.
+
+Fixed a "bug-let" that ignored fsi interaction terms
+when the fluid mesh was added before the wall mesh
+(or was it the other way around?). Anyway, it works
+now, by introducing an empty virtual function called
+GeneralisedElement::complete_setup_of_dependencies()
+that is overloaded for the AlgebraicElements and
+the MacroElementNodeUpdateElements to store the
+Geom_data_pt before assigning the equation numbers.
+
+
+------------------------------------------------------------------------
+r147 | mheil | 2007-06-08 07:35:15 +0100 (Fri, 08 Jun 2007) | 14 lines
+
+- Moved all iterative linear solver stuff into generic. 
+  src/iterative_linear_solvers is now empty and can be
+  removed next time round.
+
+- Re-implemented displacement control for shells and
+  renamed the into ...Element. 
+
+- Made a copy of the clamped_shell demo code in which
+  the arclength continuation is removed. The previous
+  version is still alive for self-test purposes.
+  However, it's a strange demo code as the load 
+  doesn't make much sense mechanically...
+
+
+------------------------------------------------------------------------
+r146 | mheil | 2007-06-06 19:30:52 +0100 (Wed, 06 Jun 2007) | 28 lines
+
+WARNING:
+--------
+
+  /////////////////////////////////////////////////////////////////////
+  This is a broken check-in, needed in preparation of some file moves...
+  /////////////////////////////////////////////////////////////////////
+
+- Used the new LinearSolver interfaces to for Jonathan's NavierStokes
+  preconditioner (and the derived FSIPreconditioner). We now have a wrapper
+  to SuperLU as an exact preconditioner that can be used to solve
+  linear systems that arise in a preconditioning context. Richard
+  will use this functinonitly next in his biharmonic block preconditioners.
+
+- Changed the specification of the serial and parallel hypre libraries.
+  We now follow standard autotools procedures and provide the 
+  library location via a ---with*=DIR argument to configure. 
+  The default location on the wulf (in my home directory) is
+  mentioned in all the wulf build scripts.
+
+- Added include guards to all *.template.cc files.
+
+- The main purpose of the present check-in is to enable the
+  move of everything in the iterative_linear_solver directory into
+  generic... 
+
+
+
+
+------------------------------------------------------------------------
+r145 | mheil | 2007-06-03 18:48:00 +0100 (Sun, 03 Jun 2007) | 42 lines
+
+Incorporated serial and parallel hypre solvers into the
+distribution. Linking is a bit subtle as hypre (and presumably
+many other libraries that we'll use in future) come with their
+own distribution and are too big to incorporate into oomph-lib
+in the same way that we currently handle superlu, say. 
+
+The solution is as follows: config/configure.ac_scripts/start
+contains variables that define a default location for the
+serial and parallel hypre libraries (these are in mheil's home directory
+on the wulf). If the libraries arent't found there (i.e. if 
+you're on a different machine) the variables HAVE_SERIAL_HYPRE
+and/or HAVE_MPI_HYPRE (exported to all Makefiles via AC_SUBST)
+are set to false. Automatic linking against these libraries is
+done by adding the relevant commands to AM_CPPFLAGS and
+to the EXTERNAL_LIBS variable. The subtlety that arises here
+is that both serial and mpi versions of hypre (and, most likely,
+other parallel libraries) are built from the same set of sources
+and we cannot link against both -- mainly because the serial
+version provides a dummy mpi.h which clashes with the real mpi.h
+in the mpi sub-directory tree in our distribution. The additions
+to AM_CPPFLAGS and EXTERNAL_LIBS (unfortunately, they cannot 
+be over-written, only added to!) are therefore handled differently
+depending on whether we are in the serial or parallel part of
+the oomph-lib distribution. This handled by having four
+separate include files (in config/configure.ac_scripts)
+that were pre-pended (does that word exist) to the relevant
+Makefile.ams (the four cases are: Serial/parallel src/driver 
+directories). 
+
+ I've also provided a (currently practically empty) directory 
+external_distributions that can/will be used to automatically
+build any external libraries from their tar files -- for the
+ignorant user who doesn't want to know anything about 
+configure/make/make install etc. The idea is that such people can
+drop the relevant tar file in the specified directory; if the
+tar file is detected during oomph-lib's autogen.sh-based build
+process, the third-party library gets installed there, using the flags
+that are used for the main oomph-lib build. 
+
+  
+
+
+------------------------------------------------------------------------
+r144 | mheil | 2007-05-29 06:47:20 +0100 (Tue, 29 May 2007) | 5 lines
+
+Not much change -- mainly a merge with Andrew's update of the
+linear solvers/matrices. Added Floraine's user_driver
+directory and the HartreeFock stuff.
+
+
+------------------------------------------------------------------------
+r143 | ahazel | 2007-05-20 11:26:56 +0100 (Sun, 20 May 2007) | 4 lines
+
+Fixes to the distrubuted matrix version of SuperLU so that it
+actually works over more than one processor
+
+
+------------------------------------------------------------------------
+r142 | ahazel | 2007-05-18 17:41:37 +0100 (Fri, 18 May 2007) | 13 lines
+
+Modified the MPI matrices to be consistent with the 
+separation of matrices and linear solvers.
+Hence, changed CR and CC matrix build functions so that
+the number of rows and columns MUST be passed as arguments.
+Check any construction of these matrices VERY carefully.
+
+Removed static defaults for linear and eigen solvers in Problem.
+
+Put DisplacementControl element in separate header file.
+
+Added error checking for duplicate global equation numbers
+in elements
+
+------------------------------------------------------------------------
+r141 | ahazel | 2007-05-16 18:46:24 +0100 (Wed, 16 May 2007) | 10 lines
+
+Rearranged the SuperLU and DenseLU linear solvers so that all the guts
+are in the linear solver classes and NOT in the matrices.
+
+Removed the problem_pt from the linear-algebra interface to the solve()
+function and removed the problem_pt from the resolve() function in the
+LinearSolver class.
+
+Corrected a small error in the HSL_MA42 solver disable_resolve() function.
+
+
+------------------------------------------------------------------------
+r140 | ahazel | 2007-05-10 23:18:35 +0100 (Thu, 10 May 2007) | 3 lines
+
+Tiny modifications to make the tests work under the intel compiler.
+
+
+------------------------------------------------------------------------
+r139 | ahazel | 2007-05-10 11:24:58 +0100 (Thu, 10 May 2007) | 15 lines
+
+Removed assert(false) from adv_diff_iterative_liner_solver_tester.cc,
+and the joe and jack_cool drivers.
+
+Finally sorted out the arc_length continuation routine so that it
+takes a sensible second step by applying the rescaling after it has
+been calculated. Modified the associated tests and data.
+
+Added two-dimensional free surface elements 
+and a test code to the library. The line (boundary) terms have not
+yet been added and this will require a re-write of the FreeSurfaceBoundary
+elements.
+
+Added Phil's polar navier-stokes code.
+
+
+------------------------------------------------------------------------
+r138 | mheil | 2007-04-18 16:10:26 +0100 (Wed, 18 Apr 2007) | 18 lines
+
+Implemented the resolve() and linear-algebra-style solve() function
+for all existing LinearSolvers (where appropriate -- the frontal solver doesn't
+have a LA-style solve fct). Also changed the "store_matrix" access fct
+to "enable/disable_resolve()" where the "disable_resolve()" also deletes
+storage.
+
+Made Navier-Stokes elements (and various others) block-preconditionable
+and extended block preconditioning framework so that it can handle multiple
+meshes. As a result the iterative linear solvers directory had to 
+be moved into the src directory. Currently, there's an ugly include from
+src/generic/elements.h to src/iterative_linear_solvers but this problem
+will disappear when the linear solvers move across into generic.
+
+ Annotated/cleaned up the LSC Navier-Stokes preconditioner and implemented
+the various FSI preconditioners. Extensive test suite is now located
+in user_drivers/matthias_and_jonathan_fsi.
+
+
+------------------------------------------------------------------------
+r137 | ahazel | 2007-04-13 16:15:06 +0100 (Fri, 13 Apr 2007) | 7 lines
+
+Removed Sign_of_jacobian from LinearSolver
+and modified the linear solvers to set the
+member data Problem::Sign_of_jacobian in their solve() functions.
+
+Modified the continuation algorithms in accordance with these changes.
+
+
+------------------------------------------------------------------------
+r136 | ahazel | 2007-04-12 16:54:51 +0100 (Thu, 12 Apr 2007) | 13 lines
+
+Modified the pitchfork and fold dectection routines to use block 
+factorisations which use less memory and are also faster. 
+
+Introduced the function 
+Problem::actions_after_change_in_bifurcation_parameter() to
+distinguish changes in the two different parameters that arise when
+continuing bifurcations.
+
+Corrected a nasty memory leak when resolving using superlu
+
+Corrected an assumption in the two_layer_spine_mesh that the initial
+interface is always located at 1.
+
+------------------------------------------------------------------------
+r135 | mheil | 2007-03-23 08:01:58 +0000 (Fri, 23 Mar 2007) | 15 lines
+
+Mainly a merge with the latest versions to reconcile potential
+clashes in the small changes made in the LinearSolver class.
+Andrew introduced the resolve function; Richard, Jonathan and I
+introduced a second (broken virtual) solve fct that takes a
+matrix and a rhs as an argument. (richard also introduced
+broken virtual interfaces for timers into the base class). 
+
+ Minor post-beta-release changes are that config.status is no
+longer included in the distribution. 
+
+  Other than that, removed a few superfluous files from the
+repository and merged in Jonthan's latest solvers/preconditioners,
+as well as lots of scripts in Sarah's directory.
+
+
+------------------------------------------------------------------------
+r134 | ahazel | 2007-03-22 13:10:17 +0000 (Thu, 22 Mar 2007) | 16 lines
+
+Modified bifurcation_tracking demos so that the tests should pass on all
+machines.
+
+Introduced a new EigenProblemHandler class and, as a result, removed the
+get_all_vectors_and_matrices() functions from GeneralisedElement and derived
+Eigenproblem elements.
+This functionality should be included by writing custom handlers that 
+assemble the appropriate matrices and vectors. Note that all assembly routines
+should, therefore, assemble problems via the assembly_handler_pt.
+
+Added the mass matrix to (non-refineable) axisymmetric navier stokes elements
+and tested the pitchfork detection and tracking for "real" 2D Navier--Stokes
+problems. It works, but it's slow. Next revision is to use block decomposition
+to speed this up. This will require another custom handler class, I think.
+
+
+------------------------------------------------------------------------
+r133 | ahazel | 2007-03-16 19:45:27 +0000 (Fri, 16 Mar 2007) | 26 lines
+
+Added functionality to detect and track the following bifurcations:
+Fold (Limit Point),
+Pitchfork (Symmetry Breaking)
+Hopf (Steady -> Periodic)
+
+This has necessitated a few additions and changes to the linear solver
+construction. The solve_continuation() routine has gone and has been replaced
+by a resolve() function that makes use of an existing factorisation to solve
+with a new RHS quickly.
+
+A new AssemblyHandler class has been added; this is used to 
+construct the jacobian matrices and residuals. The default simply calls
+the underlying elemental assembly routines. The new bifurcation handlers
+assemble augmented systems that define each type of bifurcation.
+
+The EigenElement class has been removed and the necessary functionality 
+(constructing a mass matrix) has been added to GeneralisedElement. The 
+default is broken; i.e. no mass matrix is implemented by default.
+
+In the process, the continuation routine has been corrected to solve the
+bordered system properly!
+
+Test cases are included in the new demo_driver subdirectory 
+bifurcation_tracking/
+
+
+------------------------------------------------------------------------
+r132 | mheil | 2007-03-02 14:52:55 +0000 (Fri, 02 Mar 2007) | 19 lines
+
+The release version -- at last...
+
+- provided some dummy returns to broken virtual
+  functions in some of the Matrix classes.
+- Gave the quick guide and the data structure
+  documents a final tidy
+- added a "known bugs" section to the menu.
+- tidied up some problems in Andrew's complex matrices.
+
+[NOTE: The one_d_poisson code in its various incarnations
+       dies under MH's cygwin at home when compiled with full
+       optimisation. This problem is not observed anywhere
+       else. Symptoms smell of uninitialised variables
+       (problem disppears when compiled without optimisation!).
+       Will check again over the weekend but will leave this
+       for the test-release.]
+
+
+
+------------------------------------------------------------------------
+r131 | ahazel | 2007-02-27 14:53:29 +0000 (Tue, 27 Feb 2007) | 13 lines
+
+Added time-derivative terms to the advection-diffusion equations so that
+the boussinesq convection example actually does what we say it does! Note
+that these terms have not been fully tested yet.
+
+Modified the Makefile.am in external_src/oomph_flapack so that the function
+that we use (only) are compiled and distributed.
+
+Added a DenseComplexMatrix class
+
+Added an interface to the complex LAPACK QZ algorithm.
+
+Corrected all GCC warnings in our sources.
+
+------------------------------------------------------------------------
+r130 | mheil | 2007-02-26 20:56:44 +0000 (Mon, 26 Feb 2007) | 15 lines
+
+- Hacked around the two bounssinesq examples (expanded the discussion of the 
+  multiphysics implementation; introduced gravity properly (in 3D and using
+  the direction of gravity defined in the NavierStokes elements); 
+  made the refinement pattern symmetric).
+- Re-activated the oscillating tube code.
+- Removed beta release ToDo items 'cos they're done!
+
+WARNING:  The unsteady Boussinesq example is currently incorrect as the
+          code doesn't actually solve the unsteady advection diffusion equations. 
+          Will fix this either by making advection diffusion time-dependent
+          or by re-formulating the problem with quasi-steady 
+          advection-diffusion (though Andrew keeps telling me this
+          can't be done...).
+
+
+------------------------------------------------------------------------
+r129 | ahazel | 2007-02-21 09:57:59 +0000 (Wed, 21 Feb 2007) | 18 lines
+
+Updated to the latest LAPACK sources (v3.1). The complete FORTRAN sources
+are now includes in external_src/oomph_flapack. Perhaps some could be
+removed at a later date. We don't use them all!
+
+Updated to the latest SuperLU (v3.0 Jan 5 2006) and included support for
+complex matrices.
+
+Add CRComplexMatrix and CCComplexMatrix types. These will only be required
+in eigenvalue problems, but it's useful to have that functionality in place.
+
+Based of Rich's hard work, added interface to the real 
+DGGEV LAPACK QZ eigensolver and tested in harmonic.cc. 
+Complex interface to follow ...
+
+Fixed the sorting in sparse_assemble so that it does perform a lexocographical
+numerical sort.
+
+
+------------------------------------------------------------------------
+r128 | mheil | 2007-02-18 12:45:18 +0000 (Sun, 18 Feb 2007) | 6 lines
+
+A few minor changes, mainly to establish a definite reference revision
+for Cedric before passing the ConcusFinn/YoungLaplace stuff back to him.
+This was full of dumb mistakes (mainly my own!) but now works like a dream
+and has its own validata. Also tidied up a few compiler warnings.
+
+
+------------------------------------------------------------------------
+r127 | mheil | 2007-02-14 18:07:15 +0000 (Wed, 14 Feb 2007) | 8 lines
+
+- Latest revision of Cedric's ConcusFinn/YoungLaplace stuff -- still need to check
+  some unused variables. 
+- Added first version of Jonathan's Navier Stokes block preconditioning metholodogy.
+- Included a few fixes to the the block preconditioning stuff in 
+  user_src/iterative_linear_solver.
+- The segregated FSI solver in user_drivers/matthias is the one that was used for
+  the conference abstract. 
+
+------------------------------------------------------------------------
+r126 | ahazel | 2007-02-13 19:53:40 +0000 (Tue, 13 Feb 2007) | 12 lines
+
+Added thermoelasticity example with sketchy documentation.
+Updated documentation about periodic nodes
+Issue warning if flux elements are called with 3D Refineable elements
+
+Changes to our equations classes:
+    JFLAG -> flag in elements
+    add_generic_residuals... -> fill_in_generic_...
+    a static dummy matrix is defined in GeneralisedElement and used as
+    and argument to "generic" residuals functions (rather than creating
+    a matrix object every call (expensive))
+
+
+------------------------------------------------------------------------
+r125 | ahazel | 2007-02-09 13:08:01 +0000 (Fri, 09 Feb 2007) | 16 lines
+
+Small optimization changes: 
+
+ i) modify our resize functions so that if the size is the same, nothing
+  happens
+
+ ii) Alter the sparse assemble routines so that the vector of residuals
+ and matrices is only constructed once (not for every element)
+
+Renamed functions get_source(), etc so that they are unique in each element
+that could be used in a multi-physics context:
+e.g.
+ get_wind_adv_diff()
+ get_source_nst()
+and so on
+
+
+------------------------------------------------------------------------
+r124 | ahazel | 2007-02-06 13:13:18 +0000 (Tue, 06 Feb 2007) | 5 lines
+
+Updated documentation to be consistent with the lastest changes.
+Added and documented multi physics (boussinesq convection) examples. 
+The additional example is a non-refineable, but unsteady problem.
+
+
+------------------------------------------------------------------------
+r123 | mheil | 2007-01-29 18:40:54 +0000 (Mon, 29 Jan 2007) | 11 lines
+
+Sparse matrix assembly via vectors of pairs turned out to be 
+by far the best strategy under -O6. Not only the fastest for a
+wide range of discretisations (based on 2D driven cavity) and
+is now the default. Have added item to the optimisation menu that
+explains how to explore the performance of the different methods on
+different machines. Problem now has a boolean flag that can halt
+the code execution at the most memory intensive part of the
+assembly process to allow the assessment of the memory usage.
+
+
+
+------------------------------------------------------------------------
+r122 | ahazel | 2007-01-29 09:03:52 +0000 (Mon, 29 Jan 2007) | 19 lines
+
+More changes in the name of efficiency:
+
+i) Introduced the Curiously Recursive Template Pattern into the
+   Matrix<> base class so that the round bracket access operator() will
+   be inlined for the DenseMatrix<> class. This appears to give a 10-50%
+   speed-up in code execution time.
+
+ii) The one-dimensional shape functions that are used to construct our
+    tensor product functions are now calculated by functions in namespaces
+    rather than by instantiating new objects (greater run-time efficiency).
+    The shape() functions of QElements and HermiteElements have now been
+    moved into the .cc files (they can't ever be in-lined because they are
+    virtual).
+
+iii) Removal of the un-necessary argument refine_level to the constructor in
+    RefineableElements. Now there are NO arguments to any ELEMENT 
+    constructors. 
+    
+
+------------------------------------------------------------------------
+r121 | mheil | 2007-01-24 15:56:52 +0000 (Wed, 24 Jan 2007) | 71 lines
+
+- added/completed mesh list in documentation
+
+- moved all specific domains from src/generic into
+  src/meshes since they're only used by specific 
+  meshes. Updated the description of the distribution
+  accordingly
+
+- removed BROKEN_... flag that bypassed the conversion
+  of normal to boundary nodes, as this now seems to be stable
+  under all compilers.
+
+- Removed the check for the malloc.h header in the automake
+  machinery as it causes problems under apple's linux (and probably
+  other BSD-based linuces) and does not actually be required under
+  gnu linux.
+
+- Added FaceElements::local_coordinate_in_bulk(s_local) function
+  which does what it says.
+
+- Corrected description of the arguments to pin_position(k,i)
+  and x_gen(k,i) [k=type; i=direction] in tensioned_string example.
+  and checked that it is consistent with the use throughout the
+  the library (it is!). Also corrected error in Richard's meshes
+  for the biharmonic eqns where the generalised coordinates 
+  were assigned wrongly (used to work by accident until Andrew
+  reimplemented the internal storage recently)
+
+- Updated the discussion of value_pt in the two_d_poisson_adapt
+  tutorial
+
+- Renamed TimeStepper::make_static() to TimeStepper::make_steady()
+  and added access functions that determine the is_steady() status.
+
+- Changed the implementation of Problem::steady_newton_solve()
+  Now backs up the make_steady status of the various timesteppers
+  before making all of them static. 
+
+- Default timestep dt for Time object is now 1.0 rather than 0.0
+  to avoid divisions by zero.
+
+- Made TimeStepper::weight(...) non-virtual and replaced lots
+  of unnecessary calls to the access fct by direct read access to the
+  internal storage.
+
+- Removed all explicit template instantiations from the various
+  flux-type FaceElements and moved the content of the relevant
+  *.cc (or *.template.cc) files into the headers.
+
+- Added Jonathan's two additional sparse assembly routines to 
+  Problem and changed the way they are selected: Protected flag
+  in Problem can be set to one of the values enumerated in there. 
+  If compiled with -g -DPARANOID, the map-based version is fastest
+  on the wulf -- this is therefore the default for now. Jonathan
+  found the new vector based methods to slightly faster 
+  (when compiled with full optimisation) and certainly a lot less
+  memory hungry. Will investigate this in detail and add item to
+  optimisation section. The relevant code has already been
+  added to demo_drivers/optimisation/sparse_assemble but isn't
+  actually run yet. 
+
+- Added links to the driver codes and their diretories to all 
+  tutorials to aid the navigation. 
+
+- Wrote comprehensive FAQ section.
+
+- Updated Cedric's concus finn elements.  
+
+
+
+
+
+------------------------------------------------------------------------
+r120 | ahazel | 2007-01-19 17:42:00 +0000 (Fri, 19 Jan 2007) | 15 lines
+
+Removed StorableShape and StorableDShape objects and replaced their functionality by storing one
+additional pointer in Shape and DShape objects. This removes a lot of duplicate code and clarifies
+all sorts of things.
+
+Modified dlmach.c in SuperLU sources to fix the ARPACK hanging problem on newer pentium chips.
+
+Changed geometric transformation rules so that fewer function evaluations and allocations take
+place and they are, therefore, faster. In addition provide overloaded versions so that hanging
+data are NOT used in non-refineable elements.
+
+Modified local equation number storage in Algebraic Spine and Macro_Node_Update Elements
+to be C-style arrays for fast access and less memory wastage for the cases when geometric Data
+have different numbers of stored values.
+
+
+------------------------------------------------------------------------
+r119 | ahazel | 2007-01-15 13:18:17 +0000 (Mon, 15 Jan 2007) | 23 lines
+
+Finished changes to the base Node and Data classes for memory (and hopefully
+speed) efficiencies. 
+
+All references to node_pt() have been removed apart from where a pointer
+is explicitly required. Values should be accessed using the Node::value() member
+functions and set using Data::set_value(). Note that the member function
+Data::value() is NOT virtual so that if a Node is explicitly cast to a
+Data object and the Node is hanging, the wrong value will be called!! This
+NEVER happens in our code, but is a potential gotcha.
+
+Provided the functions Node::raw_value() so that the true nodal values can
+be accessed if required when we KNOW there will be no hanging nodes. The
+funcitons FiniteElement::raw_nodal_value() and 
+FiniteElement::raw_nodal_position() can be used to access these values from
+within Elements. Note that the FiniteElement functions x() have been replaced
+by nodal_position() for consistency with the naming convention in Nodes.
+This will need to be changed in some drivers in user_drivers.
+
+Have checked that code still compiles with Intel 9.1 compilers.
+Note that the hanging problem with ARPACK can be fixed by recompiling
+dlmach.c in external_src/superlu without optimization ... investigate further.
+
+
+------------------------------------------------------------------------
+r118 | ahazel | 2007-01-10 17:46:12 +0000 (Wed, 10 Jan 2007) | 17 lines
+
+Mainly work on the base Data and Node classes to try and minimize memory consumption,
+but retain all functionality. The storage is now entirely in C-style arrays with
+custom range_check() functions used rather than our Vector class. This gives nearly a 50%
+memory saving in Data and Node classes.
+
+Modified functionality is that Nodes are now made periodic AFTER construction which
+reduces the number of constructors required for each Node type.
+
+Renamed Node::is_copied() to Node::is_a_copy() to avoid ambiguity.
+
+In addition functionality has been added to handle
+resizing of copied data gracefully (hopefully).
+
+Optimisation of the residual calculation in shell_elements.cc gives 60% speedup
+
+
+
+------------------------------------------------------------------------
+r117 | mheil | 2007-01-10 08:55:32 +0000 (Wed, 10 Jan 2007) | 41 lines
+
+- Finished documentation for FSI:
+  - tidied up cross-references
+  - added tutorials for sparse (=fast) algebraic node updates and adaptivity
+  - made self tests more comprehensive
+  - fixed a problem Andrew had introduced when he re-distributed the
+    internal pressure data in CR elements -- the FSI tests still passed
+    but only just! The Newton method did not converge quadratically
+    any more. Now it does. Am now including doc of fsi lookup schemes
+    in validata.
+  - Added TH/CR validation cases.
+- Replaced Steady by Steady<NSTEPS> and replaced default timestepper
+  for Data and Mesh by Steady<0>. The preliminary implementation 
+  as NewSteady<NSTEPS> in the adaptive fsi collapsible channel driver
+  is now gone.
+- GeomObjects no longer contain the Geom_data_pt vector but broken
+  virtual interfaces GeomObject::ngeom_data() and GeomObject::geom_data_pt(...)
+  This chance was made to get around the awkward problem of having to keep
+  different containers synchronised (e.g. in FSI problems: An FSIWallElement's
+  geometric Data is stored in the SolidNode's nodal position data; should this
+  be copied across into the GeomObject::Geom_data_pt vector? If there are any
+  changes, who's in charge? Etc. Now the synchronisation is done by
+  overloading the GeomObject::geom_data_pt(...) fct by whatever means is
+  appropriate. For isolated GeomObjects (e.g. a Circle), the Geom_data_pt
+  can be reintroduces in that class; for FSIWallElements the access function
+  can point to the SolidNode's positional Data. [Question: Why broken
+  virtual rather than pure virtual? Answer: Because GeomObjects should be
+  easy to use for simple tasks such as parametrising domain boundaries].
+- MeshAsGeomObject now has three rather than two template parameters:
+  The third one specifies the element type, ELEMENT This is needed to ensure
+  that ELEMENT::geom_data_pt(...) rather than GeomObject::geom_data_pt(...)
+  is called when working out the geometric Data of the compound GeomObject.
+- Moved the navbar_toggle.js script into doc (used to be stored in MH's 
+  departmental webspace, so the toggling of the navigation bar didn't
+  work when the documentation was viewed offline). 
+- Added prototype segregated solver in mh's user driver, using collapsible
+  channel problem as in MH's 2004 preconditioning paper. 
+- Added Gly'n's latest geometric multigrid. The iterative_linear_solver.* files
+  in his user_src directory are the latest version. Have to synchronise 
+  all this a.s.a.p.
+
+
+------------------------------------------------------------------------
+r116 | mheil | 2006-12-14 17:04:30 +0000 (Thu, 14 Dec 2006) | 11 lines
+
+- Tidied up a few far-too-clever auto-tricks that Andrew introduced
+  (automatic detection of intel-like compilers)
+- removed the demo_drivers/poisson/optimisation directory whose 
+  contents now live in separate directories in demo_drivers/optimisation
+- made sure that the re-redistribution of the sources in which
+  the arpack sources have been removed still works (required a
+  touch to recreate the empty *.f file). 
+
+          That's it -- Merry Christmas!
+
+
+------------------------------------------------------------------------
+r115 | ahazel | 2006-12-14 13:20:09 +0000 (Thu, 14 Dec 2006) | 23 lines
+
+Fixed this-> problems associated with ALE_is_disabled booleans (gcc > 4.0)
+
+Modified the config script to include the -mp1 flag for the Intel C compiler
+which fixes a problem with eigenproblems hanging. The optimisations that can 
+affect floating point accuracy are disabled by this flag. 
+In fact, the offending file is dlamch.c in 
+external_src/oomph_superlu_3.0, but automake provides
+no convenient way to specify a different set of flags for one file.
+
+This version *should* work on the following platforms:
+
+ gcc compiler >= 3.2.3 
+ g77 or gfortran >= 3.2.3
+ icc compiler >= 9.1
+ ifort compiler >= 9.1
+
+  There is a known issue with the ifc 7.1 compiler and the code has not
+ been tested with the Intel compilers of major revision 8.
+
+ Note that there is still something funny about virtual inheritance of 
+classes in the intel compiler, but work-arounds have been 
+implemented in the code.
+
+------------------------------------------------------------------------
+r114 | mheil | 2006-12-13 20:31:37 +0000 (Wed, 13 Dec 2006) | 11 lines
+
+Added empty FiniteElement::disable_ALE() and
+FiniteElement::enable_ALE() (empty with warnings)
+and overloaded for Navier Stokes and unsteady heat.
+Leads to about 10% speedup. Created suitable
+directory (and links to it from the navigation menu
+and the optimisation document) in demo_drivers/optimisation
+and copied the other optimisation driver codes fom
+demo_drivers/poisson into there. demo_drivers/poisson/
+optimisation can now be deleted. 
+ 
+
+------------------------------------------------------------------------
+r113 | ahazel | 2006-12-13 18:00:51 +0000 (Wed, 13 Dec 2006) | 10 lines
+
+Upgraded to the latest version of cfortran.h (obtained from the Debian tree)
+and modified the config script to use gFortran and INTEL_COMPILER flags
+when the appropriate compilers are detected.
+
+Changes delete [] to delete[].
+
+Changed all floating point equalities in node detection to be comparisons
+added default arguments to control parameters passed to ARPACK in 
+eigen_solvers.cc
+
+------------------------------------------------------------------------
+r112 | ahazel | 2006-12-12 15:23:41 +0000 (Tue, 12 Dec 2006) | 2 lines
+
+Bug fixes 
+
+------------------------------------------------------------------------
+r111 | ahazel | 2006-12-12 11:55:49 +0000 (Tue, 12 Dec 2006) | 12 lines
+
+Fixed a particularly pernicious bug in 
+Qelements.h::get_node_at_local_coordinate() which meant that the wrong
+nodes were calculated when refining 3D non-spectral cubic QElements on
+certain compilers/processors. 
+(Never assume anything about floating-point to integer conversion)
+
+In addition, fixed the code so that it *should* work with the latest Intel
+compiler (9.1). There is a possible issue with version 7.1 to do with
+RefineableNavierStokesElements, which I suspect is due to incorrect handling
+of virtual inheritence.
+
+
+------------------------------------------------------------------------
+r110 | mheil | 2006-12-08 13:34:55 +0000 (Fri, 08 Dec 2006) | 45 lines
+
+First round of check-ins after the attempt to make the code
+compile under the intal compiler (more to come from Andrew soon).
+Fixed a few issues that were rightly flagged up/objected to by
+the compiler and introduced a temporary workaround for a bizarre
+problem to do with the conversion of Nodes to BoundaryNodes. 
+This completely screws up the code as it turns out that
+some Nodes that are NOT BoundaryNodes, still have boundary IDs 
+associated with them. This is (should be!) impossible because the
+function get_boundaries_pt(...) implemented in the Node base class 
+always returns NULL --> Something is ****ed up. Not sure if 
+it's a problem with the intel compiler or something we ****ed
+up ourselves. All versions of the gcc compilers that we have
+access to handle the code fine. 
+
+NOTE:  When attempting to resolve this problem, I noticed
+a problem with the implementation of the function
+BrickMeshBase::setup_boundary_element_info(...). This function
+currently ignores the possibility that some elements may
+only have their edges, and not an entire face, on the mesh boundary. 
+This will cause the code to throw an error (the same error
+that is thrown erroneously by the intel compiler). 
+I've kept the current version in there to make sure we
+can continue to investigate the intel problem with later
+versions of the compiler. The message printed when the
+error is thrown gives specific instructions how to rewrite
+the code when we're done, or if the functionity is required.
+
+  Two problems could not be resolved with version 7 of the
+intel compiler (on biolaptop): 
+
+- Any code with refineable Navier-Stokes elements (2D/3D, CR/TH)
+  dies with a segmentation fault when calling  
+  RefineableNavierStokesEquations::add_generic_residual_contribution(...)
+  Very bizarre. Problem disappears in later versions of the intel
+  compiler, so, for now, we (cautiously) blame the compiler...
+
+- A similar problem arises with all problems that involve
+  hijacked elements. In these codes we get a seg fault
+  even earlier, when the problem constructor is entered. 
+  Again no problem with later versions of the intel compiler, 
+  so ....
+
+
+
+
+------------------------------------------------------------------------
+r109 | ahazel | 2006-12-05 13:32:37 +0000 (Tue, 05 Dec 2006) | 8 lines
+
+Made compatible with gcc 4.0
+Updated a little bit of the documentation to be consistent with the
+new regime (i.e. set_ functions not required_)
+Modified all drivers in user_drivers/andrew to compile with new code
+Note to self, something funny is going on with the eigenvalue problem
+in ss_porous_channel.cc. Initialisation?
+
+
+------------------------------------------------------------------------
+r108 | mheil | 2006-12-04 20:47:59 +0000 (Mon, 04 Dec 2006) | 4 lines
+
+overzealous with my cleanup... here are the files that shouldn't have been deleted....
+Also tidied up a few additional doxygen complaints. Otherwise unchanged.
+
+
+------------------------------------------------------------------------
+r107 | mheil | 2006-12-04 17:33:36 +0000 (Mon, 04 Dec 2006) | 17 lines
+
+- Cleaned up figures directories in doc (killed gunk and moved useful
+  tecplot macros and shell scripts to nondist_figures directory)
+- Elminated all latex errors in the documentation.
+- svn directories now get included properly in the "the lot"-version of
+  make dist. 
+- Added a few "this->" in spectral elements and fixed a problem (as requested 
+  by Andrew) in refineable axisymmetric NSt elements.
+- Added validation script for spin up problem.
+- updated Stefan Kollmannsberger's flow past cylinder to his cleaned up
+  version; and changed it to boundary nodes. 
+- changed *_equation_* in all function names to *_eqn_* for consistency. 
+- added optimisation directory to demo drivers -- it documents/tests
+  the C-style output routines and compares their speed against the
+  stream-based C++ equivalents. (Also mentioned in the optimisation
+  drop-down menu) 
+   
+
+------------------------------------------------------------------------
+r106 | mheil | 2006-12-01 20:28:58 +0000 (Fri, 01 Dec 2006) | 9 lines
+
+At last: The [true] edge neighbour detection works for brick elements
+and its excessively tested in self_test/octree_test. Also 
+wrote drafts for most missing top-level documents reached from the
+new drop-down navigation menu and added Stefan Kollmannsberger's
+flow_past_cylinder problem to the Navier-Stokes examples. 
+Finally, merged Cedric/my latest changes to the ConcusFinn
+(soon to be renamed into YoungLaplace) elements, incl a refinable
+version. Added a few missing "this" to version 105.
+
+------------------------------------------------------------------------
+r105 | ahazel | 2006-12-01 14:46:06 +0000 (Fri, 01 Dec 2006) | 16 lines
+
+An awful lot of changes in the name of efficiency. The main aim was
+to reduce the memory footprint of our basic Elements. This was achieved
+by removing standard containers and replacing them by simple pointers and
+unsigned's that represent the length of the container. In addition, a number
+of virtual function calls have been avoided by caching the values in local
+variables in equations and numbering classes.
+
+Wasted storage associated with local equation numbers in "hanging node" problems
+has also been removed, which also leads to faster assignment in the case when
+there are no hanging nodes in an element. Overall the code does appear to be snappier and use less memory.
+
+Major change in that the virtual functions required_ndim(), required_n_position_type() have been removed and replaced by set_dimension() and set_n_position_type() which must be called in the appropriate geometric element's constructor.
+
+Also, any nodal or internal information associated with SolidProblems is now stored in the usual Internal_data or Nodal_data objects, rather the as separate data. This means that we can present a uniform interface for hanging-type problems, although we do have to do more work for multi-physics problems; but no more than "non-solid" multi-physics.
+
+
+------------------------------------------------------------------------
+r104 | ahazel | 2006-11-17 11:03:04 +0000 (Fri, 17 Nov 2006) | 12 lines
+
+Added a new BoundaryNode class that is used so that we don't carry around
+storage for boundary information for each Node. This is a modest saving in
+the overall scheme of things. The class is called via construct_boundary_node()
+functions in the Element classes. For ease of writing Meshes, 
+a new Mesh function convert_to_boundary_node() is provided that does what it
+says. The function finds all pointers to the node in the elements and updates
+them to point to the new boundary node object.
+
+A few code clarifications and corrected validation data for one of the
+demo driver codes.
+ 
+
+------------------------------------------------------------------------
+r103 | mheil | 2006-11-02 18:41:26 +0000 (Thu, 02 Nov 2006) | 5 lines
+
+Really just quick update to sync my sources with Andrew's latest
+revision (need to rename some validata). Mainly worked on the
+FSI documentation, the documentation. No major changes...
+
+
+------------------------------------------------------------------------
+r102 | ahazel | 2006-11-02 11:58:17 +0000 (Thu, 02 Nov 2006) | 14 lines
+
+Added a 3D cubic mesh (analogous to the 2D rectangular mesh).
+Added tree rotation tests for two- and three- dimensions. These
+can take some time, but should check all possible relative rotations
+of neighbouring trees in forests. Fixed the bugs that these tests threw up.
+Modified our sources to remove all warnings generated by gcc 4.1.1 
+under -Wall, apart from warnings about multi-line comments, about which I 
+don't know what to do.
+Updated and clarified documentation of RefineableElements and modified the
+RefineableMesh procedures to append the documentation files by the number
+in the DocInfo object.
+Renamed various data files to be under the 99 character limit imposed by tar.
+Note that the only remaining problem files are in 
+interaction/free_boundary_poisson (and the associated doc directories)
+
+------------------------------------------------------------------------
+r101 | ahazel | 2006-10-27 11:30:55 +0100 (Fri, 27 Oct 2006) | 16 lines
+
+Merged two and three-d adapt_mesh() functions into the base
+RefineableMeshBase class, which has been renamed to add the
+word Base. The new RefineableMesh<ELEMENT> class is the one
+that should be called in all actual meshes. The template
+parameter is only required when elements are split, so
+RefineableMesh<ELEMENT> merely overloads one template-free
+interface function in RefineableMeshBase.
+
+Also, tried to remove some header-file includes in generic
+by using forward class definitions. Note there is a mysterious seg
+fault on ALH's machine under -O3 that can be fixed by using
+-O3 -finline-limit=600 (supposedly the default!). 
+The problem has been tracked doen to the EighthSphereMesh when
+used with linear elements. Something is funny there!
+
+
+------------------------------------------------------------------------
+r100 | mheil | 2006-10-24 18:45:59 +0100 (Tue, 24 Oct 2006) | 23 lines
+
+- moved fix2poly stuff into separate directory in demo-drivers
+  user_src/xfig* and user_drivers/xfig* is now obsolete.
+
+- Provided default customisations for distribution in bin/customise_dist.sh. 
+  The two main "public" distributions (w/o nondist_figures, svn
+  hsl, user_src, user_drivers,...) with and without doc, and 
+  a distribution that contains "everything" (useful for developers (i.e. me!)
+  can now be created with a single input argument. The option to create
+  a properly customised distribution still exists.
+
+- Cleaned up remnants of the *.incl.cc files (many of them had simply 
+  been copied into the corresponding cc files without changing their
+  comments. 
+
+- makefile.sample removed from the distribution so it's rebuilt.
+
+- Filled in GNU top level files INSTALL, README etc.
+
+- Moved hello_world.* back into user_src/jonathan/Makefile.am 
+  to ensure something gets compiled if the hypre sources aren't available.
+
+
+
+------------------------------------------------------------------------
+r99 | ahazel | 2006-10-24 11:21:18 +0100 (Tue, 24 Oct 2006) | 4 lines
+
+Removed the accidentally included makefile.sample and done the
+necessary this->ifying to be compatible with gcc 4.1.1.
+
+
+------------------------------------------------------------------------
+r98 | mheil | 2006-10-23 18:04:24 +0100 (Mon, 23 Oct 2006) | 27 lines
+
+- Cleaned up "make dist" procedure and added option to add licence
+  information to all oomph-lib cc and h files (excluding third-party
+  sources
+
+- Built in automake magic to detect (or not) locally installed hypre sources
+  (they currently live in Jonathan's home directory)
+
+- Upgraded to new webpage style, using Hykel's clever menu.
+
+- Added demo_drivers/linking which generates an externally useable
+  makefile.sample that can be used to link against the library
+  from outside the automake/autoconf framework.
+
+- Added fig2poly.cc to triangle mesh sub-directory -- Can process
+  xfig files and turn them into input for triangle.
+
+- Added Richard's block preconditioning stuff and test code
+  for the biharmonic equations (direct and iterative solve).
+
+- Added/moved SUPG sources into advection_diffusion directory.
+
+- Installed HYPRE/AMG solvers in Jonathan's user_src directory and
+  driver codes for 2D/3D Poisson/AdvDiff in his user directory.
+  NOTE: There's a problem with the refinement of the eighth-sphere 
+        mesh in the 3D Poisson example. Will investigate this further!
+ 
+
+------------------------------------------------------------------------
+r97 | mheil | 2006-10-16 08:42:16 +0100 (Mon, 16 Oct 2006) | 27 lines
+
+--final (?) rewrite of the AlgebraicElements: AlgebraicNodes don't have to
+  store the "fixed" reference values as they are typically mesh specific
+  and may therefore be stored in the AlgebraicMesh itself. Should save
+  quite a bit of memory. The structure of the AlgebraicElements is now
+  very similar to the SpineElements.
+
+--final check of FSI; tidied up documentation and renamed various classes:
+  We now have FaceElementAsGeomObject (rather than FaceAsGeomObjecElement),
+  MeshAsGeomObject (rather than WallMeshGeometry), FSIFluidElement
+  (rather than LoadOnSolidElement).FSIBeamElement::dposition() was confusing
+  and inconsistent (terminal confusion between the (too) many intrinsic and
+  global coordinates. Nobody was using it anyway so I killed it.
+
+--Most of the FSI capabilities are now dimension-independent, those
+  that aren't have been buffered and will issue warnings/errors.
+
+--Added broken copy constructors/assignment operators to all revised
+  FSI-related source files -- only hijacked_elements.h, 
+  pseudosolid_node_update.h and spines.h have not been done in generic.
+
+--Added Cedric's ConcusFinn elements and driver code into
+  user_src/cedric and user_drivers/cedric
+
+--Added Richards biharmonic elements and the corresponding driver code, and the
+  block-preconditioning classes to iterative_linear_solvers. 
+
+
+------------------------------------------------------------------------
+r96 | mheil | 2006-10-04 11:08:32 +0100 (Wed, 04 Oct 2006) | 18 lines
+
+Rewrote AlgebraicElements/Meshes to make them consistent with the
+SpineElements -- they now store a node_update_fct id that may be
+used in the mesh that implements the remesh fct to distinguish
+between various different cases. There's a (static) dummy default mesh
+that doesn't do any node update (i.e. just leaves the node alone)
+that is used as the default mesh to perform the node update
+for all AlgebraicNodes. Therefore node_update info only needs
+to be provided for nodes whose position actually changes.
+
+Renamed add_contribution_to{residual,jacobian} to fill_in_contribution_*
+Also add_jacobian_..._fd functions were renamed to fill_in_jacobian_..._fd.
+This change is required to reflect that we're not necessarily adding
+contributions. 
+
+Added Algebraic node update version of fsi collapsible channel to demo
+drivers As expected, it's MUCH faster than the MacroElement based version. 
+
+
+------------------------------------------------------------------------
+r95 | ahazel | 2006-10-03 18:06:41 +0100 (Tue, 03 Oct 2006) | 17 lines
+
+Removed all references to Identifier in Nodes and demo_driver codes.
+
+Specified unique suffices for variables in our standard equations to
+facilitate use in multi-phsyics, i.e. u_poisson()... In order to use
+multiphysics it should suffice to overload the functions u_index_poisson(), 
+etc, that specifiy where the appropriate variable is stored at the node. 
+The function is used in both Refineable and non-refineable versions of the
+equations classes. 
+
+One example multi-physics driver is located in 
+multi_physics/boussinesq_convection
+
+In addition additional std:: namespace qualifiers have been added in the
+sources (most important is that std::abs is called NOT abs)
+
+
+
+------------------------------------------------------------------------
+r94 | mheil | 2006-09-27 10:16:07 +0100 (Wed, 27 Sep 2006) | 26 lines
+
+POSTSCRIPT TO PREVIOUS REVISION:
+ Updated autogen.sh and bin/regenerate_config_files.sh
+ so that all questions are asked before the actual
+ build process begins. All questions now indicate the
+ the default behaviour.
+ 
+This revision just involves a few additional tidies: 
+- All "unsigned int" replaced by "unsigned"
+
+- All "unsigned long" in demo_drivers were replaced by
+  "unsigned" as none of them actually needed to be
+  long. Had a quick look through src and unsigned long
+  is used in quite a number of places, usually justifiably
+  though I don't think it's done consistently, i.e. 
+  I'm sure the code would still die if we actually
+  went into a regime where long storage is required. 
+
+- Removed the empty [oc/quad]tree.template.cc files
+
+- Killed various user_src and user_driver directories 
+  that have become obsolete because people have left.
+
+- Removed many of my own driver codes as they've been
+  moved into demo_drivers. 
+
+
+------------------------------------------------------------------------
+r93 | mheil | 2006-09-26 17:50:32 +0100 (Tue, 26 Sep 2006) | 34 lines
+
+The mother-of-all-cleanups Part II: 
+- Removed over-the-top PARANOID checks in GeomObjects and in 
+   Domain::macro_element_boundary()
+- Removed all "using namespace" statements from all sources
+- Replaced the exit() statements by proper OomphLibErrors
+- Wrapped the entire library in the namespace oomph
+   and added "using namespace oomph" to the top of all  
+   demo/user driver codes.
+- Introduced the oomph-lib info stream and defined single
+   global instatiation of it -- all based on Andrew's
+   draft for this, of course! Everything in src and user_src
+   now writes to oomph_info rather than std::cout, though, by
+   default, the two are, of course, the same. Specified
+   an MPI output modifier that preprepends all output by
+   the processor ID. This  gets switched on by default
+   for all MPIProblems in the MPIProblem constructor.
+- Removed >99% (I think) of all unneccessary C++ library
+   includes.
+- Tidied up naming inconsistencies: Now only private 
+   class members start with capital letters. Copies of
+   those (obtained by access functions) are now generally
+   stored in local variables called n_value, say, rather
+   than Nvalue, etc.
+- Checked that the nplot argument for all output functions
+   is an unsigned, rather than an int.
+- Made the few remaining #define statements (INIT_DENSE
+   in matrices.h and VERBOSE in stored shape functions
+   more explicit and prepended them with OOMPH_)
+- Removed all global "using namespace...." statements
+   in the src/user_src files.
+- Renamed HermiteElement into QHermiteElement
+- Renamed TaylorHood to QTaylorHood and CrozierRaviart
+   to QCrozierRaviart.
+
+------------------------------------------------------------------------
+r92 | mheil | 2006-09-22 16:05:12 +0100 (Fri, 22 Sep 2006) | 22 lines
+
+Finished the cleanup of the error messages by removing
+all assert(false) from the mpi sources and changing
+to the new OomphException class.
+
+ Removed all kinds of unneccesary range checks in 
+GeomObject::position() etc and Domain::macro_element_boundary() 
+as they can be caught be range checking anyway. 
+
+ Created oomph_definitions.[h,cc] and renamed utilities.[h,cc]
+to  oomph_utilities.[h,cc]. Deleted the separate file
+for the exceptions. They (and the new default info/output
+stream to be activated in the next revision) now live
+in oomph_definitions.[h,cc].
+
+Renamed the delaunay_mesh user drivers and src 
+directories to xfig_delaunay_mesh to avoid deletion
+of delaunay_mesh.h during make clean. 
+
+Rewrote autogen.sh so that all questions are asked at
+the beginning. 
+
+
+------------------------------------------------------------------------
+r91 | ahazel | 2006-09-21 16:07:59 +0100 (Thu, 21 Sep 2006) | 5 lines
+
+Large number of changes so that errors are now thrown exceptions of the
+type OomphLibError and warnings are issued by OomphLibWarning. In addition,
+the process of removing the standard namespace from the library has been started
+
+
+------------------------------------------------------------------------
+r90 | ahazel | 2006-09-19 16:12:12 +0100 (Tue, 19 Sep 2006) | 3 lines
+
+Changed all include guards to begin with the string OOMPH
+Added OomphLibError and OomphLibWarning classes
+
+------------------------------------------------------------------------
+r89 | mheil | 2006-09-18 18:06:22 +0100 (Mon, 18 Sep 2006) | 17 lines
+
+Moved directories around and changed "Adaptive" to "Refineable"
+nearly everywhere (changed it back in the context of adaptive timestepping
+and in the documentation). 
+
+TODO:
+----
+
+1) user_src/delaunay_mesh/delaunay_mesh.h gets overwritten by the 
+   combined library header. Must change this next time.
+2) Can't get the logic for the exclusion of FaceElements from the
+   "inverted element" test right... If the logic is as it should
+   be the Bretherton test fails, otherwise all others fail...
+   Reverted to the case where only the J_eulerian() is checked 
+   in self test. Inverted volume elements are still caught
+   by PARANOID. 
+
+
+------------------------------------------------------------------------
+r88 | mheil | 2006-09-15 17:49:28 +0100 (Fri, 15 Sep 2006) | 7 lines
+
+Moved various directories around. Andrew's already reported
+that the q_convergence_3d seg faults when it builds the problem
+with trilinear elements and when compiled with O3. Also, there
+appear to be inverted jacobians in t_convergence_3d when run
+with PARANOID switched on. Will check this a.s.a.p.
+
+
+------------------------------------------------------------------------
+r87 | mheil | 2006-09-15 11:47:45 +0100 (Fri, 15 Sep 2006) | 28 lines
+
+Moved the unstructured mesh generation codes into the main distribution
+(xfig-based mesh generation will be removed in the next revision
+as it's too buggy and we don't have time to fix this at the moment;
+we have an indirect interface to triangle anyway...).
+
+Fully documented the logic behind the default integration schemes [Andrew: 
+at some point you should do the same for the spectral integration 
+schemes -- I didn't have enough information to to do this at the moment.]
+and added a convergence test for 2D/3D T/QElements. 
+
+Renamed
+
+       actions_before/after_timestep()
+
+to 
+
+       actions_before/after_implicit_timestep()
+
+and added corresponding (empty) functions *_explicit_* to problem.h.
+
+Moved bessel.h and bessel.cc into external_src. Isn't actually 
+used at the moment. Will contact C.R. Bond to check if he's
+happy to have this re-distributed with our code.
+
+NOTE: Will immedately check out again to move some directories...
+
+
+
+------------------------------------------------------------------------
+r86 | mheil | 2006-09-07 18:27:47 +0100 (Thu, 07 Sep 2006) | 14 lines
+
+This version contains all the new third-party mesh generators with validation cases and
+doc. The drivers and the trimesh stuff still lives in user_src and user_drivers.
+Will move this into demo_drivers and src a.s.a.p.
+
+Also buffered the case where the global system of equations has no dofs (can happen with
+low-order triangles). In this case the solver issues a warning, executes all action functions
+and then returns. 
+
+Doc and self test for prescribed wall motion collapsible channel is in. The doc for the
+fsi version is written but with deliberate gaps -- to be filled once the fsi stuff 
+settles down.
+
+ 
+
+------------------------------------------------------------------------
+r85 | ahazel | 2006-09-06 17:36:45 +0100 (Wed, 06 Sep 2006) | 23 lines
+
+Added additional changes to allow non-uniform h-refinement for quad and brick
+elements with non-uniformly spaced nodes. Added the QSpectralPoissonElement
+class and three new demo drivers in order to test this functionality. 
+Note that the lack of sum factorization in the equations class means that 
+the current elements are inefficient. The most wide-ranging change is the
+introduction of the mesh_pt argument to RefineableElement::rebuild_from_sons()
+because new Nodes can now be created during unrefinement as well as during
+refinement.
+
+Most standard meshes rewritten to use local_fraction_of_node() to calculate
+the nodal spacing, rather than assuming uniformly spaced nodes.
+
+Documentation updated in line with the changes to the refinement schemes.
+
+Fixed nasty (lack of) initialisation error in CR and CCMatrices.
+
+Updated SuperLU_dist sources to work with gcc 4. Essentially removed a
+horible static nested function. 
+
+Moved mpi.h in header and cc files in mpi_src, which needs to be at the 
+top of files to avoid a namespace clash for mpich2. 
+
+
+------------------------------------------------------------------------
+r84 | mheil | 2006-08-17 19:39:02 +0100 (Thu, 17 Aug 2006) | 16 lines
+
+Created additional directory structure for Alice's meshes (demo codes -- temporarily
+parked in user_drivers/mesh_from* -- and doc). Also buffered the case in which
+newton_solve() is called for a Problem without dofs. In this case, all the 
+action_*() functions are executed (so that bc that are set in actions_before_solve()
+get updated) and a warning message is issued before the code returns without 
+doing anything else. Problems with zero dofs are most likely to arise in Problems
+with Dirichlet-only BCs and third-party mesh generators that do not create
+any nodes in the interior. The mesh_from_xfig demo directory contains an example
+(for the A-shaped region). Note: mpi demo codes (e.g. eight_sphere_poisson 
+die with seg fault even if solve is suppressed. No time to investigate this
+further at the moment but I suspect that something got broken when Andrew
+muddled with the matrices without fixing things in the mpi part of the
+code -- will investigate when the version got broken. Jonathan needs this
+stuff fairly urgently...
+
+
+------------------------------------------------------------------------
+r83 | mheil | 2006-08-15 15:45:26 +0100 (Tue, 15 Aug 2006) | 7 lines
+
+Merge with Andrew's spectral element additions after returning
+from Munich. Moved collapsible channel stuff into meshes and generic
+directories and had a first stab at documenting the existing
+meshes in the doc directory. Also added a few "this->" in Andrew's
+code (This must be a first!!).
+
+
+------------------------------------------------------------------------
+r82 | ahazel | 2006-08-10 17:54:44 +0100 (Thu, 10 Aug 2006) | 17 lines
+
+Quite a large number of changes concerned with making non-uniform refinement
+work for spectral elements, or rather elements with non-uniform nodal spacing.
+A new class Tree has been defined that abstracts most of the common features
+between Quad and Oc Trees. The construction of hanging_node information has
+been implemented in generic terms in the RefineableQElements. This has necessitated the introduction of additional virtual function interfaces in RefineableElements, in order to distinguish between the different interpolation schemes in
+mixed problems. The default is to assume isoparametric interpolation of all
+quantities.
+
+Many, many tidies and clarifications have been implemented along the way and I
+hope that it makes the code easier to read and maintain. Missing is a comprehensive test driver code that tests all possible rotations of elements. I've been too busy to write it, but I will.
+
+In addition SpectralElements have been added into generic and I have written a couple of test drivers in /user_drivers/andrew.
+
+I'm sure that there are more changes, but I can't think of them now. Documentation has been updated where appropriate.
+
+
+
+------------------------------------------------------------------------
+r81 | mheil | 2006-07-25 18:16:46 +0100 (Tue, 25 Jul 2006) | 6 lines
+
+Sanity-checked the MacroElementNodeUpdateElements and deemed them to be in their final
+form. Yippee! Doc. for MacroElement based free-boundary Poisson problem nearly finished.
+Also added the fsi_collapsible_channel driver code and preliminary doc. Also
+user driver/src for Stefan's Fisher eqns. 
+
+
+------------------------------------------------------------------------
+r80 | ahazel | 2006-07-11 17:45:14 +0100 (Tue, 11 Jul 2006) | 21 lines
+
+Fixed "bug" that caused fsi_osc_ring to fail on my machine. 
+This was achieved by sorting the elements on boundary coordinate when
+assembled into a WallMeshAsGeometricObject.
+
+Implemented an improved inheritance scheme for Refineable elements. The idea
+was to introduce RefineableEquations classes that inherit from RefineableElement
+and overload the calculation of the residuals and the jacobian. The advantage is
+a cleaner inheritance structure and the deletion of the .incl.cc file (at last).
+
+A renaming of RefineableQuadElement and RefineableBrickElement to
+RefineableQElement<2> and RefineableQElement<3> means that totally templated
+refineable elements, e.g. RefineableQPoisson<DIM,NNODE_1D>, are now possible.
+
+This is not quite possible for Navier--Stokes equations because of the 
+complications of handling the pressures. This could be handled by introducing
+additional functions into the RefineableQuad and Brick elements that permit
+the construction of hanging information based on shape functions that are
+provided at a later stage. I suspect that this can be done by using a 
+member function pointer, and perhaps I'll do it ... later.
+
+
+------------------------------------------------------------------------
+r79 | mheil | 2006-07-04 13:06:58 +0100 (Tue, 04 Jul 2006) | 2 lines
+
+Updated demo directory in Doxyfile...
+
+------------------------------------------------------------------------
+r78 | mheil | 2006-07-04 11:49:49 +0100 (Tue, 04 Jul 2006) | 3 lines
+
+renamed all the elastic_poisson directories into free_boundary_poisson
+
+
+------------------------------------------------------------------------
+r77 | mheil | 2006-07-04 09:42:22 +0100 (Tue, 04 Jul 2006) | 17 lines
+
+Memory audit and general cleanup in generic is nearly complete: checked 
+that all new statements have corresponding deletes and added broken 
+copy constructors and assignment operators to all classes. 
+The only files not checked yet are those that definitely need a final
+sanity check which will be done in parallel with writing the documentation:
+algebraic_elements.h face_elements_as_geometric_object.h fsi.h 
+hijacked_elements.h macro_element_node_update_element.h 
+mesh_as_geometric_object.h pseudosolid_node_update_elements.h and spines.h
+Also Andrew's eigenstuff. Done the same and switched to StorableShape functions
+in all scalar equation directories: Poisson, AdvectionDiffusion, LinearWave
+and UnsteadyHeat. Added directories for Claire's collapsible channel codes too.
+Other are yet to be done. 
+
+  NOTE: Will check in/out immediately to rename the "elastic" Poisson stuff
+to free boundary Poisson. 
+
+
+------------------------------------------------------------------------
+r76 | mheil | 2006-06-27 11:28:14 +0100 (Tue, 27 Jun 2006) | 8 lines
+
+Replaced DenseDoubleMatrix by DenseMatrix<double> and changed it back
+only where the additional functionality is actually required. 
+Also worked my way through about 50% of the sources in generic
+to give them a final check/memory audit/add of broken copy constructors
+and assignments. Moved the error message for calling a broken instance
+of these into utilities. 
+
+
+------------------------------------------------------------------------
+r75 | mheil | 2006-06-24 08:09:57 +0100 (Sat, 24 Jun 2006) | 20 lines
+
+Fixed  WallMeshGeometry so that the geometric Data of the
+constituent GeomObjects are copied across into the geometric Data
+of the combined GeomObject (otherwise MacroElementNodeUpdate won't work!).
+
+Removed tecplot_zone_string etc. from compute_error(...) functions as
+the plotpoints are located at integration points rather than
+regularly spaced plotpoints. Error plots for each element are now just
+contained in unstructured tecplot zones. 
+
+Fixed rate-of-strain tensor for axisymmetric Navier-Stokes.
+
+Changed/corrected implementation/description of viscosity and density
+ratios for cartesian and axisymmetric Navier-Stokes. Only the 
+constant part of the body force (ultimately multiplied by Re/Fr)
+is multiplied by rho. The variable body-force is just that. It's not
+multiplied by a density. 
+
+Added Claire's user_driver directory with two collapsible channel codes.
+ 
+
+------------------------------------------------------------------------
+r74 | ahazel | 2006-06-20 19:21:20 +0100 (Tue, 20 Jun 2006) | 10 lines
+
+Modified DenseMatrix<T> and RankThreeTensor<T> so that only the
+data is stored and not pointers to rows/columns.
+
+Added StorableShape class that is used to avoid excessive memory allocation
+when using pre-computed shape functions and shape-function derivatives.
+
+Added and extended checks in poisson/optimisation to examine memory
+allocation issues.
+
+
+------------------------------------------------------------------------
+r73 | mheil | 2006-06-17 12:21:25 +0100 (Sat, 17 Jun 2006) | 4 lines
+
+Matthias is half way through(?) fixing the stored shape function elements.
+Over to Andrew....
+
+
+------------------------------------------------------------------------
+r72 | mheil | 2006-06-16 19:07:02 +0100 (Fri, 16 Jun 2006) | 9 lines
+
+merged with Andrew's latest check-in after he moved the stored shape functions
+into a separate class. I've finalised the beam tutorials and moved 
+Daniels' Spin-up problem across to my user_driver directory. Fixed the
+horribly mangled computation of the rate of strain tensor in the
+axisymmetric NSt equations -- now the adaptive spin-up computation
+unrefines the mesh as the velocity field approaches rigid body motion.
+Will check this properly and add it to the demo codes soon.
+
+
+------------------------------------------------------------------------
+r71 | ahazel | 2006-06-15 17:13:45 +0100 (Thu, 15 Jun 2006) | 9 lines
+
+Removed all stored shape function from vanilla FiniteElements and
+SolidFiniteElements. The functionality has been implemented in two
+templated classes StoredShapeElement<ELEMENT> and 
+StoredShapeSolidElement<ELEMENT>. Simply replacing your element by these
+templates should have the effect of turning on storage. Note that I have not
+provided interfaces for refineable elements yet, but that should be easy to
+fix.
+
+
+------------------------------------------------------------------------
+r70 | ahazel | 2006-06-14 16:42:09 +0100 (Wed, 14 Jun 2006) | 18 lines
+
+Quite a lot of changes to do with local equation numbering:
+
+ Local equation numbering is performed automatically by the base-most
+class and stored in private data. It must, therefore be accessed via
+access functions in the derived classes. The function 
+assign_all_generic_local_eqn_numbers() {} is overloaded by derived classes 
+to add more numbers as necessary; 
+i.e. FiniteElements include numbering of nodal data, etc.
+
+ Local storage, such as U_local_eqn and P_local_eqn has now been removed in
+favour of inline access functions. Hopefully, this will save memory.
+assign_additional_local_eqn_numbers() is, therefore, not really required, but 
+I've kept it so that we can use local storage if it seems as though it's a 
+good idea.
+
+ Renaming and tidying of free surface, now called FluidInterface elements
+  
+
+------------------------------------------------------------------------
+r69 | mheil | 2006-06-09 16:39:11 +0100 (Fri, 09 Jun 2006) | 35 lines
+
+- elements.* has been memory-audited:
+  - all containers that are not always used are accessed via
+    pointers (and therefore need to be created when they
+    are first used). In many places this leads to rather ugly
+    code and Andrew has volunteered to hide these ugly 
+    constructs behind access functions (the pointers to the
+    containers will be hidden in private member data).
+  - broken copy constructors and assignment operators are    
+    provided for all functions.
+
+- Pointer to GeomObject in one_d_lagrangian mesh is now passed by copy
+  as the (unconventional!) pass by reference caused some problems.
+
+- Element::add_external_data(...) now ignores duplicates and issues
+  a warning if a data object is added again.
+
+- Added a few this in Vector.h
+
+- The prescribed-traction function in the Navier Stokes traction elements
+  used to take time by copy rather than by constant reference. Fixed.
+
+- Local_eqn in Poisson elements has been replaced by an access function
+  to the generic nodal local equation numbers to avoid the duplicate
+  storage.
+
+- added two additional demo drivers in the new directory 
+  demo_drivers/poisson/optimisation to document the use (and benefits)
+  of setting Problem::Problem_is_nonlinear=false (for linear problems!),
+  the relative speed of C and C++ output, and stupid and non-stupid
+  ways of creating refineable meshes.  
+  
+    
+        
+
+
+------------------------------------------------------------------------
+r68 | ahazel | 2006-06-08 15:19:40 +0100 (Thu, 08 Jun 2006) | 3 lines
+
+Simple update so that all my drivers now compile. NOTE TO SELF:
+Think about hijacking and the elastic_bretherton style problems
+
+------------------------------------------------------------------------
+r67 | ahazel | 2006-06-08 08:42:25 +0100 (Thu, 08 Jun 2006) | 7 lines
+
+Completed the move of fluid interface elements to a new src directory
+and modified the demo codes accordingly. There remains some tidying of
+names and reorganisation of the axisymmetric code to be done. However,
+all the tests pass! Those codes using fluid interfaces must now link
+-lfluid_interface.
+
+
+------------------------------------------------------------------------
+r66 | ahazel | 2006-06-07 18:18:52 +0100 (Wed, 07 Jun 2006) | 2 lines
+
+Dummy commit so that I can move stuff
+
+------------------------------------------------------------------------
+r65 | mheil | 2006-06-02 16:08:59 +0100 (Fri, 02 Jun 2006) | 7 lines
+
+Renamed Gemma's geometric objects and merged with Andrew's update.
+Also made the various Problem::get_jacobian(...) virtual so they
+can be overloaded in specific problems to bypass the default
+assembly loop. This is useful, e.g. for the testing of iterative
+linear solvers. The overloaded get_jacobian function can then simply
+read in a matrix and rhs from disk, say. 
+
+------------------------------------------------------------------------
+r64 | ahazel | 2006-06-02 11:50:18 +0100 (Fri, 02 Jun 2006) | 7 lines
+
+Split out volume constraint conditions from interface elements. These
+constraints are now implemented in the driver codes in demo drivers. 
+Certain codes in user_drivers/andrew may well be broken as a consequence,
+but I'll fix them later. Also added Alberto's stuff to user_driver/andrew.
+Have a look in here for a 3dMesh. It will ultimately be moved into
+generic once I'm happy with it.
+
+------------------------------------------------------------------------
+r63 | mheil | 2006-06-01 17:16:50 +0100 (Thu, 01 Jun 2006) | 8 lines
+
+First round of memory audit complete. Everything nodes.* has been
+deemed to be necessary and has been moved from container to 
+pointer-to-container to minimise memory requirements. 
+
+Also renamed Internal_pt and External_pt to   Internal_data_pt and 
+External_data_pt respectively.
+
+
+------------------------------------------------------------------------
+r62 | ahazel | 2006-06-01 11:50:22 +0100 (Thu, 01 Jun 2006) | 2 lines
+
+Fixed Delaunay mess in metis and corrected a few this's
+
+------------------------------------------------------------------------
+r61 | ahazel | 2006-06-01 11:41:26 +0100 (Thu, 01 Jun 2006) | 2 lines
+
+Small bug-fixes, and I hope fixes to the metis Delaunay error.
+
+------------------------------------------------------------------------
+r60 | mheil | 2006-05-31 10:14:42 +0100 (Wed, 31 May 2006) | 6 lines
+
+Moved all the triangular stuff into user_src/trimesh and created a 
+corresponding directory (with self tests for the simple triangular
+mesh and the delaunay mesh) in user drivers. This will all be moved
+back into generic and meshes when Nick is done...
+
+
+------------------------------------------------------------------------
+r59 | mheil | 2006-05-30 10:50:24 +0100 (Tue, 30 May 2006) | 6 lines
+
+Check in before moving gemma's stuff into user_src/trimesh.
+xfig-based tri-mesh generation now works without having to 
+remove trailing newline from *fig file. Don't touch the
+fig file manually before reading it in...
+
+
+------------------------------------------------------------------------
+r58 | mheil | 2006-05-25 18:49:50 +0100 (Thu, 25 May 2006) | 22 lines
+
+Cleaned up Gemma's triangle stuff and renamed various classes. 
+Basically, all her objects were specific for 2D three-noded triangles,
+so I've put "Delaunay" in front of most objects that she had created.
+TElements are no longer the same as DelaunayTriangles. The Delaunay
+mesh generator now works with DelaunayTriangles and creates a scaffold
+mesh that can then be used to construct the real mesh with the
+actual elements. The triangular meshing routines currently live in
+user_src/trimesh and TElement.* and gemma_geom_objects.* will 
+be moved there in the next revision so that Nick can work on them
+offline. Have also removed all references to TElements from 
+other equations as they were never tested anyway. Time permitting,
+will get Nick to re-implement/test them.
+
+Also re-did the QPlotPoints which are now deleted. Instead the
+relevant functions (defining plot points for output with tecplot)
+are defined as broken virtual functions in FiniteElement and
+are implemented for specific geometric FiniteElements. 
+
+s_min() and s_max() are no longer regarded as obsolete as the
+Telements do indeed have a non-standard range of local coordinates.
+
+
+------------------------------------------------------------------------
+r57 | ahazel | 2006-05-23 16:40:53 +0100 (Tue, 23 May 2006) | 6 lines
+
+A large number of changes, the most important of which has been to
+add the sources for ARPACK and appropriate interfaces to allow the
+solution of eigenvalue problems. Two new test problems have been added
+that use this feature and I have added a number of additional drivers
+to user_drivers/andrew
+
+------------------------------------------------------------------------
+r56 | mheil | 2006-05-12 16:33:08 +0100 (Fri, 12 May 2006) | 4 lines
+
+Removed all kind of gunk from the nondist_figures directories -- this
+also removed the superfluous .svn/.svn/... directories. 
+
+
+------------------------------------------------------------------------
+r55 | mheil | 2006-05-12 13:22:32 +0100 (Fri, 12 May 2006) | 28 lines
+
+WARNING: Some strange error messages appear during make dist,
+         related to some (suspiciously deeply nested) .svn directories.
+         Will try to remove these immediately after this check
+         in when I will try to remove most of the stuff in the
+         nondist directories in the two Rayleigh channel examples.
+
+- Added a few more completed example codes with documentation
+  - linear wave (incl Newmark timestepping)
+  - displacement control for buckling ring
+  - oscillating ellipse
+  - spine channel (work in progress...)
+  
+- There's a driver code for the adaptive solution of the linear
+  wave equation but no documentation yet -- main point of the
+  tutorial would/will be to show that it's not sensible to use
+  automatic adaptation for this problem...
+
+- Renamed Wave* to LinearWave* throughout (incl. sub-library name)
+
+- Rewrote beam elements and moved displacement control into 
+  a separate DisplacementControlElement (defined in elements.h)
+
+- Tidied up lots of doxygen problems in generic -- they had caused
+  the Nodes to disappear from the documentation!
+
+
+
+
+------------------------------------------------------------------------
+r54 | mheil | 2006-04-23 13:37:02 +0100 (Sun, 23 Apr 2006) | 3 lines
+
+Little tidy after the last  check-in... Removed two dead symbolic
+links and some gunk that got checked in accidentally.
+
+------------------------------------------------------------------------
+r53 | mheil | 2006-04-21 16:01:28 +0100 (Fri, 21 Apr 2006) | 13 lines
+
+Check-in after adding fprintf-style output to all elements.
+It's not being used in anger anywhere at the moment. I have a
+user driver code that tests all these things (i.e. compares that
+the output is the same as in the C++-stream-based version)
+and will add this to the demo/self-test codes at some point.
+Also two new N.-St. demo problems with documentation and
+the first iterative LinearSolvers (currently in glyn's user_src
+and user_driver directories -- Careful: They are the versions
+that MH hacked around, not the ones orginally written by 
+Glyn.)
+
+
+
+------------------------------------------------------------------------
+r52 | mheil | 2006-03-24 16:11:02 +0000 (Fri, 24 Mar 2006) | 4 lines
+
+Minor update from Matthias to check in changes made to version49 after
+version49 had become gcc4.0-ified.
+
+
+------------------------------------------------------------------------
+r51 | ahazel | 2006-03-24 08:10:57 +0000 (Fri, 24 Mar 2006) | 9 lines
+
+Here dies revision 50. It was short, but sweet. 
+Changes for 51:
+ - Generalised Hijacked Elements to allow the hijacked residual to be
+   multiplied by any value, not just zero
+ - Updated documentation to remove all (hopefully) references to 
+   tell_nodes_about_mesh_boundaries(). The function add_boundary_node() 
+   should always be used
+ - Added two new user_drivers: xfem_1d_poisson.cc and two_d_poisson_robin_bc.cc
+
+------------------------------------------------------------------------
+r50 | mheil | 2006-03-23 18:34:47 +0000 (Thu, 23 Mar 2006) | 3 lines
+
+Here comes version 50... fully gcc 4.0 compliant!
+
+
+------------------------------------------------------------------------
+r49 | mheil | 2006-03-21 08:02:32 +0000 (Tue, 21 Mar 2006) | 21 lines
+
+Changed the way in which the user src and driver directories are handled.
+They now only need to be declared in the 
+
+  *user*.dir_list 
+
+files in the config directory. configure.ac automatically includes them
+into a variable that is used in the appropriate Makefile.ams. Furthermore,
+if user directories are excluded during make dist, the  *user*.dir_list 
+are automatically over-written with the defaults,
+
+  *user*.dir_list.default
+
+which only contain the demo ones (jack_cool and joe_cool), so all 
+traces of any additional user directories disappear.
+
+Also fixed a problem with elastic_problems.cc where a variable that's only
+used in a PARANOID block had been commented out.
+ 
+
+  
+
+------------------------------------------------------------------------
+r48 | mheil | 2006-03-16 18:00:40 +0000 (Thu, 16 Mar 2006) | 3 lines
+
+Added two extra shell scripts to be included in the distribution.
+
+
+------------------------------------------------------------------------
+r47 | mheil | 2006-03-16 12:00:29 +0000 (Thu, 16 Mar 2006) | 7 lines
+
+* Tidied up function pointer names fct_pt, rather than func_pt and
+  FctPt rather than FuncPt
+* added navigation bar to documentation
+* checked in script for optional distribution of nondist_figures
+  directories (forgotten last time -- sorry!)
+
+
+------------------------------------------------------------------------
+r46 | mheil | 2006-03-13 17:14:30 +0000 (Mon, 13 Mar 2006) | 5 lines
+
+- Four new demos complete (various driven cavity ones)
+- Frontal solver can now use direct access files.
+- Quarter circle sector and quarter tube meshes/domains have 
+  ability to get squashed into the boundary layer region near the wall
+
+------------------------------------------------------------------------
+r45 | ahazel | 2006-03-09 18:16:04 +0000 (Thu, 09 Mar 2006) | 6 lines
+
+Changed the way that boundary coordinates are stored to use less memory 
+(hopefully) and use more sensible standard containers (maps and sets).
+Also tidied up the fsi_osc_ring.cc driver so that excessive documentation
+of results is kept to a minimum. 
+
+
+------------------------------------------------------------------------
+r44 | ahazel | 2006-02-21 19:06:40 +0000 (Tue, 21 Feb 2006) | 6 lines
+
+Corrected a few this-> errors,
+Removed FSIProblem and moved the only function in it into a 
+helper namespace instead.
+Significantly rewrote bretherton_spine_mesh to handle modification in
+the gravity bubble problem
+
+------------------------------------------------------------------------
+r43 | mheil | 2006-01-28 10:12:47 +0000 (Sat, 28 Jan 2006) | 2 lines
+
+fixed a little problem in an mpi driver code
+
+------------------------------------------------------------------------
+r42 | mheil | 2006-01-28 09:38:35 +0000 (Sat, 28 Jan 2006) | 15 lines
+
+As promised, the print statements in matrices.h are gone. Forgot to
+mention that in the last revision, I'd also re-organised the 
+SuperLU_dist external library. It's now consistent with the others
+and no longer provides its own blas. The "external mpi" librar[y][ies]
+are now listed in the automake/autoconf variable EXTERNAL_MPI_LIBS
+and they should be listed before the EXTERNAL_LIBS as they might
+link against blas etc. [The logic is: MPI stuff might depend on serial
+stuff but not the other way around so mpi libraries must be listed first].
+
+  The parallel assembly of the jacobian and residual scales very well
+but it dies with a seg fault for large enough problem sizes. The seg
+fault occurs while clearing a map in the distributed memory version 
+of SuperLU_dist. I'll investigate further...
+
+
+------------------------------------------------------------------------
+r41 | mheil | 2006-01-27 18:10:03 +0000 (Fri, 27 Jan 2006) | 11 lines
+
+Lots of tidies in various libraries: Most FaceElement definitions 
+now moved into the bulk element file where they should live. 
+Added SUPG example with SUPG elements in driver code (for now).
+Andrew: Had to comment out the storage of precomputed shape fcts
+in the shell code as it complained in PARANOID mode.
+Also tidied up lots of mpi-ing. WARNING: It's Friday evening
+and I'm dead tired  - I've just realised that I left a few print
+statements in matrices.h. I'm just going to check it in as is
+and fix that in the next revision....Sorry.
+
+
+------------------------------------------------------------------------
+r40 | mheil | 2006-01-20 20:05:16 +0000 (Fri, 20 Jan 2006) | 9 lines
+
+Added user_src and user_drivers directory for Jonathan
+Reorganised the external libraries yet again.
+SuperLU contains two lapack sources (lsame.c
+and xer*.c) if we compile them into the oomph_superlu
+library we get clashes with other libraries that 
+(foolishly!) include these too. (BoomerAMG seems
+to be an example).
+
+
+------------------------------------------------------------------------
+r39 | mheil | 2006-01-17 18:30:35 +0000 (Tue, 17 Jan 2006) | 14 lines
+
+hsl frontal solver is now detected again, after correcting the
+automagic that looks for it...
+
+Have also added FiniteElement::Store_shape_functions, a static
+bool that defaults to false, so shape functions are computed
+on the fly until this is over-written in the user driver.
+
+Also, there's a new protected bool in Problem, Problem::Problem_is_nonlinear
+which defaults to true. If set to false in a derived Problem class,
+we skip the additonal computations of the residual vector in the
+Newton solver. Then 99.9999% of the cpu time in the newton solver
+is spent in the linear solver, as it should be.
+
+
+------------------------------------------------------------------------
+r38 | mheil | 2006-01-16 17:09:21 +0000 (Mon, 16 Jan 2006) | 7 lines
+
+New external libraries -- they're now called oomph_* (to distinguish
+them from any already existing ones on the target machine)
+and are defined in config/configure.ac_scripts/start in the
+automake variable EXTERNAL_LIBS. This variable can/should
+be overwritten to link against any locally installed versions of
+the libraries. 
+
+------------------------------------------------------------------------
+r37 | mheil | 2006-01-13 18:50:02 +0000 (Fri, 13 Jan 2006) | 4 lines
+
+Unsteady heat doc and demo is back in...
+dump/restart works correctly for adapted meshes.
+
+
+------------------------------------------------------------------------
+r36 | mheil | 2006-01-13 17:58:29 +0000 (Fri, 13 Jan 2006) | 3 lines
+
+Attempt to take out all unsteady heat things...
+
+
+------------------------------------------------------------------------
+r35 | ahazel | 2006-01-05 18:37:34 +0000 (Thu, 05 Jan 2006) | 2 lines
+
+Correction to add missing files in the config list
+
+------------------------------------------------------------------------
+r34 | ahazel | 2006-01-05 17:59:01 +0000 (Thu, 05 Jan 2006) | 4 lines
+
+Changed the setting of boundary information in meshes.
+The add_boundary_node() function MUST now be used.
+A few other small changes.
+
+------------------------------------------------------------------------
+r33 | ahazel | 2006-01-03 15:43:35 +0000 (Tue, 03 Jan 2006) | 5 lines
+
+Generalised the interfaces used to set up the associatation of 
+bulk elements with wal elements in FSI problems.
+Added boundary coordinates to meshes and incorporated
+their interpolation in refineable_quad_elements
+
+------------------------------------------------------------------------
+r32 | ahazel | 2005-12-16 13:46:26 +0000 (Fri, 16 Dec 2005) | 5 lines
+
+Corrected bug in formulation get_load_data(). It now adds data
+to a set so that data shared by adjoining bulk elements will not
+be counted twice.
+Added mesh_as_geometric_object to generic
+
+------------------------------------------------------------------------
+r31 | mheil | 2005-12-15 09:41:32 +0000 (Thu, 15 Dec 2005) | 3 lines
+
+Added the two doc directories in unsteady heat.
+
+
+------------------------------------------------------------------------
+r30 | mheil | 2005-12-15 09:17:23 +0000 (Thu, 15 Dec 2005) | 5 lines
+
+Commit after merge with Daniel. Two doc directories were taken
+out and temporarily parked in ~/Birch/tmp_back as svn seemed
+confused about them. Will add them in next time around...
+
+
+------------------------------------------------------------------------
+r29 | ahazel | 2005-12-14 10:13:22 +0000 (Wed, 14 Dec 2005) | 5 lines
+
+Tidied up some of the validation scripts in demo_drivers
+Changed the interface for FSI problems to be more general
+user_driver/andrew/elastic_bretherton.cc is now full FSI
+Changed bertherton_spine_mesh to include an arbitrary spine origin
+
+------------------------------------------------------------------------
+r28 | mheil | 2005-12-07 17:16:38 +0000 (Wed, 07 Dec 2005) | 5 lines
+
+Matthias cleaned up octree and refineable brick stuff
+and added destructor for RankThreeTensor (this time
+really...).
+
+
+------------------------------------------------------------------------
+r27 | ahazel | 2005-12-01 17:31:03 +0000 (Thu, 01 Dec 2005) | 8 lines
+
+Corrected small error in bretherton mesh, added elastic_bretherton.cc
+which solves a noddy bretherton interaction problem
+Also added interfaces so that FaceElements can be made into Spine,
+Algebraic of MacroElementUpdateNodeUpdate elements
+bretherton.cc in user_drivers/andrew now correctly solves the
+bretherton problem in a rigid tube under gravity at any angle
+
+
+------------------------------------------------------------------------
+r26 | mheil | 2005-12-01 13:28:09 +0000 (Thu, 01 Dec 2005) | 7 lines
+
+Revmoed some leftover debugging couts in octree and completed the
+change to the build process so that all libraries get built/installed
+by top level configure/make/make install. User drivers are excluded
+from build (since they require the libraries to be installed) but
+they do get included into the distribution. 
+
+
+------------------------------------------------------------------------
+r25 | ahazel | 2005-11-29 12:13:38 +0000 (Tue, 29 Nov 2005) | 5 lines
+
+Addded additional interface to hijacked.h so that FaceElements can be
+hijacked. FaceElements MUST now have this standard interface in their
+constructors. Corrected sign error in HermiteElement::build_face()
+Added bretherton.cc driver in user_drivers/andrew
+
+------------------------------------------------------------------------
+r24 | mheil | 2005-11-23 13:30:06 +0000 (Wed, 23 Nov 2005) | 5 lines
+
+Following Andrew's suggestion, the hsl Makefile.am now creates an
+empty dummy fortran.f when it's needed during make dist. 
+It gets wiped (once it's recognised as empty) by customise_dist.sh
+
+
+------------------------------------------------------------------------
+r23 | mheil | 2005-11-22 16:14:00 +0000 (Tue, 22 Nov 2005) | 4 lines
+
+Oops -- another two driver codes  had explicit
+references to the frontal solver. No more! 
+
+
+------------------------------------------------------------------------
+r22 | mheil | 2005-11-22 14:08:38 +0000 (Tue, 22 Nov 2005) | 3 lines
+
+Added missing figures directory
+
+
+------------------------------------------------------------------------
+r21 | mheil | 2005-11-22 14:00:12 +0000 (Tue, 22 Nov 2005) | 6 lines
+
+Renamed GeneralMacroElement to MacroElement, changed 
+BOUNDS_CHECKING to RANGE_CHECKING and checked that code compiles
+with LEAK_CHECKING on (it does now...). Also commented out 
+all explicit requests for the HSL solvers in the demo codes.
+
+
+------------------------------------------------------------------------
+r20 | ahazel | 2005-11-22 13:32:54 +0000 (Tue, 22 Nov 2005) | 2 lines
+
+Whoops, added doc directory
+
+------------------------------------------------------------------------
+r19 | mheil | 2005-11-22 08:05:04 +0000 (Tue, 22 Nov 2005) | 7 lines
+
+MH's commit after adding support for dummy frontal solver (autoconf
+checks if frontal.f exists -- if not, it builds the broken dummy routines
+in dummy_frontal.f). Also added destructor to RankThreeTensor (oops!)
+and fixed a wrong index in a paranoid check in refineable axisymmetric 
+Navier Stokes.
+
+
+------------------------------------------------------------------------
+r18 | ahazel | 2005-11-21 14:04:32 +0000 (Mon, 21 Nov 2005) | 4 lines
+
+Updated documentation in-line with new strategy for initialising residuals
+and jacobian and included dummy links for the adaptive_interface problem
+introduced in the last revision.
+
+------------------------------------------------------------------------
+r17 | ahazel | 2005-11-18 14:09:47 +0000 (Fri, 18 Nov 2005) | 7 lines
+
+Changed internal calculation of elemental jacobian matrices.
+These are now handled by finite differences by default.
+Authors of new elements should now use the add_contribution_to_residuals()
+function if they wish the elements to be "multi-physics".
+Also added interface to SuperLU solver so that it can be used in
+arc-length continuation and bifurcation detection problems.
+
+------------------------------------------------------------------------
+r16 | mheil | 2005-11-16 11:27:51 +0000 (Wed, 16 Nov 2005) | 3 lines
+
+fixed typos in intro document
+
+
+------------------------------------------------------------------------
+r15 | ahazel | 2005-11-12 16:06:01 +0000 (Sat, 12 Nov 2005) | 6 lines
+
+Fixed face-type elements so that we can use non-initialised matrices for
+the jacobians. Changed calculation of residuals and jacobians so that 
+initialisation to zero must be done OUTSIDE the function call. This 
+should all work, but I may have missed a few.
+
+
+------------------------------------------------------------------------
+r14 | mheil | 2005-11-09 14:30:29 +0000 (Wed, 09 Nov 2005) | 12 lines
+
+MH completely removed [][] access to DenseMatrix objects and
+changed things to a pointer-based representation. A macro
+in matrices.h controls if the DenseMatrix entries are initialised
+to T(0). At the moment they are, because the axisymmetric spine interface
+elements and the Taylor-Hood-like PVDpressure elements die if this is not
+done. Andrew knows how to fix the axisymmetric spine elements;
+MH suspects that the problems in the solid elements are due to 
+the possibility of hanging pressure dofs -- BTW: We don't
+currently have a validation case for nonrefineable elasticity!
+
+
+
+------------------------------------------------------------------------
+r13 | mheil | 2005-11-03 08:33:44 +0000 (Thu, 03 Nov 2005) | 8 lines
+
+Tidied up the makefiles so that combined header files in src
+get deleted during clean and distclean. Also made SuperLU the
+default solver. As  result, clamped_shell now needs to specify
+HSL_MA42 explicitly as its solver because SuperLU doesn't
+do continuation yet.  Also killed some unused Dshapes that
+hadn't been noticed before...
+
+
+------------------------------------------------------------------------
+r12 | mheil | 2005-11-02 10:19:37 +0000 (Wed, 02 Nov 2005) | 3 lines
+
+MH removed [] access to DenseMatrix and RankThreeTensors.
+
+
+------------------------------------------------------------------------
+r11 | mheil | 2005-11-01 08:05:12 +0000 (Tue, 01 Nov 2005) | 4 lines
+
+Added lots of additional doc directories and nearly finished
+instructions for installing the distribution
+
+
+------------------------------------------------------------------------
+r10 | ahazel | 2005-10-30 15:35:38 +0000 (Sun, 30 Oct 2005) | 5 lines
+
+Major tidy of sources. Most of the square bracket [][] access has been
+replaced by round bracket (,) access. Refineable element get_residuals
+have been reorganised so that there is only one loop over master nodes,
+and if statements are used to distinguish between hanging and non-hanging nodes. Other small fixes have also been implemented
+
+------------------------------------------------------------------------
+r9 | mheil | 2005-10-25 12:16:31 +0100 (Tue, 25 Oct 2005) | 7 lines
+
+Added pointer based representation for RankThreeTensor
+DenseMatrix is still based on vector representation as 
+Renaud's code dies when it's run with the pointer based version.
+Added lots of doc directories and updated QuickGuide and
+the example code list.
+
+
+------------------------------------------------------------------------
+r8 | mheil | 2005-10-21 18:21:18 +0100 (Fri, 21 Oct 2005) | 3 lines
+
+added shell script -- this time with execute permissions
+
+
+------------------------------------------------------------------------
+r7 | mheil | 2005-10-21 18:19:44 +0100 (Fri, 21 Oct 2005) | 3 lines
+
+removed non-executable shell script -- will be checked again next
+time around...
+
+------------------------------------------------------------------------
+r6 | mheil | 2005-10-21 18:17:33 +0100 (Fri, 21 Oct 2005) | 6 lines
+
+New matrices are in. The DenseMatrix class currently has
+a macro that allows switching between Vector<Vector<T>> and T**
+represenation -- only the former works :(. Still have [][]
+access, too. Will get rid of this next.
+
+
+------------------------------------------------------------------------
+r5 | mheil | 2005-10-21 10:54:12 +0100 (Fri, 21 Oct 2005) | 6 lines
+
+Included option to include subversion subdirectories into 
+distribution. Now that we can make backups with "make dist",
+let's move on to the new matrices....
+
+
+
+------------------------------------------------------------------------
+r4 | mheil | 2005-10-21 07:57:11 +0100 (Fri, 21 Oct 2005) | 13 lines
+
+First half of MH's major cleanup operation, involving lots of renames:
+
+  -- Static --> Steady for timestepper
+  -- remesh -> node_update (also changed the node_remesh functions in 
+               in Algebraic, MacroElementRemesh[NodeUpdate] and SpineElements.
+  -- vector range checking no longer employs at()
+  -- shortened overly long filenames so they all fit into 
+     the 100 char limit imposed by the new tar.
+
+About to add the new matrix classes...
+
+
+
+------------------------------------------------------------------------
+r3 | mheil | 2005-10-11 17:34:16 +0100 (Tue, 11 Oct 2005) | 4 lines
+
+Matthias' check-in of the unsteady heat stuff after starting a new
+repository...
+
+
+------------------------------------------------------------------------
+r2 | ahazel | 2005-10-10 17:42:24 +0100 (Mon, 10 Oct 2005) | 2 lines
+
+Initial import of new set of sources
+
+------------------------------------------------------------------------
+r1 | ahazel | 2005-10-10 17:01:11 +0100 (Mon, 10 Oct 2005) | 1 line
+
+Initial repository layout
+------------------------------------------------------------------------

@@ -1,0 +1,85 @@
+#!/bin/sh
+#
+# Copyright (C) 2007- Angelo Simone (TU Delft)
+# Licensed under the GNU LGPL Version 2.1
+#
+# Wrapper for oomph-converter.py
+#
+#
+# Created on 20070905
+# Last revision by AS on 20080514
+#
+# Report bugs to a.simone@tudelft.nl
+#
+#############################################
+#
+
+# -- usage string and function
+usagestr="\n
+NAME\n
+\toomph-convert - wrapper to oomph-converter.py for converting from oomph-lib tecplot format to VTK XML\n
+\n
+\n
+SYNOPSIS\n
+\toomph-convert [OPTION] [input_file.dat] \n
+\n
+\n
+OPTIONS\n
+\t-h  \t display this help text and exit\n
+\t-z  \t add trailing zeros to the output filename \n
+\n
+\n
+TYPICAL USAGE EXAMPLES\n
+\toomph-convert -h                    \t\t\t\t  -> display help text  \n
+\toomph-convert soln12.dat              \t\t\t  -> generate soln12.vtu \n
+\toomph-convert -z soln12.dat           \t\t\t  -> generate soln00012.vtu \n
+\toomph-convert soln.dat              \t\t\t\t  -> generate soln.vtu \n
+\toomph-convert -z soln.dat             \t\t\t  -> generate soln00000.vtu \n
+\toomph-convert soln\*.dat              \t\t\t  -> generate soln\*.vtu \n
+\toomph-convert -z soln\*.dat           \t\t\t  -> generate soln0000\*.vtu \n
+\toomph-convert soln.dat soln12.dat       \t\t  -> generate soln.vtu and soln12.vtu \n
+\toomph-convert -z soln.dat soln12.dat    \t\t  -> generate soln00000.vtu and soln00012.vtu \n
+  "
+
+usage() {
+  echo -e $usagestr
+  exit 1
+}
+
+# -- we want at least one parameter (it may be a flag or an argument)
+if [ -z "$1" ]; then
+        usage
+fi
+
+# -- parse command line arguments
+zeroflag=
+while getopts "hz" OPTIONS; do
+    case ${OPTIONS} in
+        h)      echo -e $USAGE
+                exit 0
+                ;;
+        z)      zeroflag=-z
+                ;;
+        \?)     # getopts issues an error message
+                usage
+                ;;
+    esac
+done
+shift `expr $OPTIND - 1`
+
+# -- we want at least one file name
+if [ $# -eq 0 ]; then
+        usage
+fi
+
+# -- convert the files
+while [ $# -ne 0 ] ; do
+    filename=$1
+    echo  
+    echo  
+    echo -- Processing $filename
+    # Remove everything after first "." in filename, "." included
+    filenametrunc=${filename%\.*} 
+    oomph-convert.py $zeroflag $filename $filenametrunc.vtu
+    shift
+done

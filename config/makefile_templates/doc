@@ -1,0 +1,34 @@
+#To create the documentation, we need to create the html directory with its
+# index file
+noinst_SCRIPTS = html/index.html
+
+# html directory depends on the doxygenified version of doc.txt
+# which needs to be doxygen-ed, using the local Doxyfile
+# If we have latex and dvipdf then create pdf-based documentation
+html/index.html: $(docfile).txt_doxygenified.h oomph-lib_header.html
+	cp $(docfile).txt_doxygenified.h $(docfile).txt_doxygenified.h.junk
+	sed "s/\*\*\//\n<hr>\n<hr>\n\\\section pdf PDF file\nA <a href=\"..\/latex\/refman.pdf\">pdf version<\/a> of this document is available.\n\*\*\//g" $(docfile).txt_doxygenified.h.junk > $(docfile).txt_doxygenified.h
+	rm $(docfile).txt_doxygenified.h.junk
+#endif
+	doxygen
+#if HAVE_PDF_LATEX
+	(cd latex; rm -f refman.pdf; mv refman.tex refman.tex.back; $(top_builddir)/../bin/customise_latex.bash refman.tex.back > refman.tex; make; mv refman.pdf ../$(docfile).pdf; ln -s ../$(docfile).pdf refman.pdf)
+#endif
+
+EXTRA_DIST = Doxyfile $(docfile).txt figures 
+
+
+# Doxygenified version of .txt file is created by
+# bin/txt2h.bash
+SUFFIXES= .txt_doxygenified.h .txt 
+.txt.txt_doxygenified.h:
+	$(top_builddir)/bin/txt2h.sh $<
+
+oomph-lib_header.html:
+	$(top_builddir)/bin/build_oomph_html_header.sh $(top_builddir)
+
+#Cleanup
+clean-local:
+	rm -rf latex html $(docfile).txt_doxygenified.h $(docfile).pdf *~ .tmp 
+	rm -f oomph-lib_header.html
+

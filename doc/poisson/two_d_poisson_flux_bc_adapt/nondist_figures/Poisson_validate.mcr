@@ -1,0 +1,165 @@
+#!MC 900
+
+
+#$!GETUSERINPUT |lostep| INSTRUCTIONS = "Loop. First Step??"
+$!VARSET  |lostep|=0
+#$!GETUSERINPUT |dlstep| INSTRUCTIONS = "Loop. Step Increment?"
+$!VARSET  |dlstep|=1
+$!GETUSERINPUT |nstep| INSTRUCTIONS = "Loop. Number of Steps??"
+
+$!LOOP |nstep|
+$!VarSet |nnstep| = |LOOP|
+$!VarSet |nnstep| -= 1
+$!VarSet |iistep| = |dlstep|
+$!VarSet |iistep| *= |nnstep|
+$!VarSet |iistep| += |lostep|
+$!NEWLAYOUT
+$!DRAWGRAPHICS FALSE
+#    $!IF |iistep| < 10 
+#      $!VARSET |istep|='00|iistep|'
+#    $!ENDIF
+#    $!IF |iistep| > 9 
+#      $!VARSET |istep|='0|iistep|'
+#    $!ENDIF
+#    $!IF |iistep| > 99 
+#      $!VARSET |istep|=|iistep|
+#    $!ENDIF
+$!VARSET |istep|=|iistep|
+$!READDATASET '"exact_soln|istep|.dat " "soln|istep|.dat " '
+  READDATAOPTION = NEW
+  RESETSTYLE = YES
+
+$!PLOTTYPE = CARTESIAN3D
+$!FIELDLAYERS SHOWSHADE = YES
+$!FIELDLAYERS SHOWMESH = NO
+$!FIELDLAYERS USETRANSLUCENCY = YES
+
+$!VARSET |numdatasets|=2
+$!VarSet |nzonesperdataset| = |NUMZONES|
+$!VarSet |nzonesperdataset| /= |numdatasets|
+
+$!VarSet |zonelo| =1
+$!VarSet |zonehi| = |nzonesperdataset|
+
+$!LOOP |numdatasets|
+
+  $!FIELD [|zonelo|-|zonehi|]  BOUNDARY{LINETHICKNESS = 0.02}
+  $!FIELD [|zonelo|-|zonehi|]  SURFACEEFFECTS{SURFACETRANSLUCENCY = 30}
+
+  $!IF |LOOP|==1
+    $!FIELD [|zonelo|-|zonehi|]  BOUNDARY{COLOR = BLACK}
+    $!FIELD [|zonelo|-|zonehi|]  GROUP = 1
+  $!ENDIF
+  $!IF |LOOP|==2
+    $!FIELD [|zonelo|-|zonehi|]  SHADE{SHOW = NO}
+    $!FIELD [|zonelo|-|zonehi|]  BOUNDARY{SHOW = NO}
+    $!FIELD [|zonelo|-|zonehi|]  GROUP = 2
+  $!ENDIF
+
+  $!VarSet |zonelo| += |nzonesperdataset|
+  $!VarSet |zonehi| += |nzonesperdataset|
+
+$!EndLoop
+
+$!THREEDAXIS GRIDAREA{ISFILLED = NO}
+
+
+
+$!THREEDAXIS XDETAIL{TICKLABEL{TEXTSHAPE{HEIGHT = 9}}}
+$!THREEDAXIS YDETAIL{TICKLABEL{TEXTSHAPE{HEIGHT = 9}}}
+$!THREEDAXIS ZDETAIL{TICKLABEL{TEXTSHAPE{HEIGHT = 9}}}
+$!THREEDAXIS ZDETAIL{TITLE{TITLEMODE = USETEXT}}
+$!THREEDAXIS ZDETAIL{TITLE{TEXT = 'u(x_1,x_2)'}}
+$!THREEDAXIS YDETAIL{TITLE{TITLEMODE = USETEXT}}
+$!THREEDAXIS YDETAIL{TITLE{TEXT = 'x_2'}}
+$!THREEDAXIS XDETAIL{TITLE{TITLEMODE = USETEXT}}
+$!THREEDAXIS XDETAIL{TITLE{TEXT = 'x_1'}}
+
+$!THREEDAXIS XDETAIL{TITLE{OFFSET = 18}}
+$!THREEDAXIS YDETAIL{TITLE{OFFSET = 18}}
+$!THREEDAXIS ZDETAIL{TITLE{OFFSET = 18}}
+
+$!THREEDAXIS XDETAIL{TITLE{TEXTSHAPE{HEIGHT = 8.6}}}
+$!THREEDAXIS YDETAIL{TITLE{TEXTSHAPE{HEIGHT = 8.6}}}
+$!THREEDAXIS ZDETAIL{TITLE{TEXTSHAPE{HEIGHT = 8.6}}}
+
+
+
+
+
+
+$!FIELD [1-|NUMZONES|]  SHADE{COLOR = GREEN}
+$!FIELD [1-|NUMZONES|]  BOUNDARY{COLOR = RED}
+$!FIELD [1-|NUMZONES|]  BOUNDARY{LINETHICKNESS = 0.1}
+$!FIELD [1-|NUMZONES|]  BOUNDARY{LINETHICKNESS = 0.4}
+$!FIELD [1-|nzonesperdataset|]  BOUNDARY{COLOR = GREEN}
+$!FIELD [1-|nzonesperdataset|]  BOUNDARY{LINETHICKNESS = 0.1}
+$!FIELD [1-|NUMZONES|]  BOUNDARY{SHOW = YES}
+$!FIELD [1-|NUMZONES|]  SHADE{COLOR = CUSTOM4}
+$!FIELD [1-|NUMZONES|]  SURFACEEFFECTS{SURFACETRANSLUCENCY = 80}
+$!FIELD [1-|NUMZONES|]  SURFACEEFFECTS{SURFACETRANSLUCENCY = 60}
+$!ATTACHTEXT 
+  ANCHORPOS
+    {
+    X = 4.84701748718
+    Y = 90.1615269257
+    }
+  COLOR = GREEN
+  TEXTSHAPE
+    {
+    FONT = HELV
+    HEIGHT = 18
+    }
+  TEXT = 'Shade and green mesh: exact solution\n' 
+
+$!ATTACHTEXT 
+  ANCHORPOS
+    {
+    X = 4.59667707496
+    Y = 85.9639333397
+    }
+  COLOR = RED
+  TEXTSHAPE
+    {
+    FONT = HELV
+    HEIGHT = 18
+    }
+  TEXT = 'Red mesh: FE solution\n' 
+
+$!THREEDVIEW
+  PSIANGLE = 51.4384
+  THETAANGLE = 306.11
+  ALPHAANGLE = 0
+  VIEWERPOSITION
+    {
+    X = 12.9537011486
+    Y = -8.08482264538
+    Z = 12.4056427077
+    }
+
+$!DRAWGRAPHICS TRUE
+$!VIEW FIT
+$!VIEW SETMAGNIFICATION
+  MAGNIFICATION = 0.826446280992
+
+$!FRAMELAYOUT SHOWBORDER = NO
+
+$!REDRAW 
+
+
+$!IF |LOOP|<2 
+  $!EXPORTSETUP EXPORTFORMAT = AVI
+  $!EXPORTSETUP IMAGEWIDTH = 829
+  $!EXPORTSETUP EXPORTFNAME = 'compare.avi'
+  $!EXPORTSTART 
+$!ENDIF
+$!IF |LOOP|>1 
+  $!EXPORTNEXTFRAME
+$!ENDIF
+
+$!EndLoop
+
+$!EXPORTFINISH 
+
+
+

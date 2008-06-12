@@ -1,0 +1,253 @@
+\mainpage Change log
+
+
+This document provides an overview of the major changes
+between different "official" releases of \c oomph-lib. 
+We provide access to the <a href="../final_svn_log.txt">complete log 
+from our previous (non-public) svn repository</a>. This covers
+all changes from the intial release of the library (svn revision
+132) up to the move to the new public repository, see
+<a href="../../subversion/html/index.html"> here </a> for 
+details on how to access this repository, which contains a detailed
+log of subsequent changes.
+
+You may also want to consult the entries in our bugzilla-based
+bug-and-feature-tracking system, accessible online at
+
+<CENTER> 
+<a href="http://oomph-lib.maths.man.ac.uk/bugzilla">
+http://oomph-lib.maths.man.ac.uk/bugzilla</a>
+</CENTER> 
+
+
+for known bugs and their resolution.
+
+
+
+The remainder of this document covers the following issues:
+
+- \ref interface_changes
+- \ref zero_point_eight_to_zero_point_five
+  - \ref major_interface_changes_zero_point_five 
+  - \ref new_functionality_zero_point_five
+  .
+.
+
+<hr>
+<hr>
+
+
+\section interface_changes Policy on interface changes
+
+We obviously try to avoid interface changes as much
+as possible as they may force users to adjust their code
+when upgrading to a new version. We will only change interfaces
+(names of objects and/or member functions, or the number or
+order of their arguments) if
+-# The previously chosen name turned out to be too ambiguous. 
+   For instance, the change from 
+   \code 
+   Problem::actions_before_solve() 
+  \endcode
+   to 
+   \code 
+   Problem::actions_before_newton_solve()
+   \endcode
+   became necessary
+   because of the addition of further nonlinear (but non-Newton) solvers 
+   (e.g. the segregated FSI solver). Since such solvers may call the Newton
+   solver themselves, a more fine-grained control over what we 
+   mean by "solving" was required. \n\n
+-# The previously chosen name violated our own 
+   <a href="../../coding_conventions/html/index.html">
+   coding conventions.</a> For instance, 
+   \code 
+   FiniteElement::n_nodal_position_type()
+   \endcode
+   had to be
+   changed to  
+   \code 
+   FiniteElement::nnodal_position_type()
+   \endcode 
+   because we do not want underscores after the leading "n" in an access
+   function that returns the number of certain objects. \n\n
+-# The order of the function arguments violated our own coding
+   conventions. For instance, 
+   \code 
+   FiniteElement::get_x(Vector<double>& s, const unsigned& t,...) 
+   \endcode
+   had to be changed to 
+   \code 
+   FiniteElement::get_x(const unsigned& t, Vector<double>& s,...) 
+   \endcode
+   because the discrete "time" argument always comes first.
+   \n\n
+.
+Changes to function or object names are easy to detect because
+the compiler will not find the old version when linking
+against a new version of the library, encouraging the user 
+to consult this list to (hopefully) find the appropriate
+replacement.
+
+ Changes to the order of function arguments can be very dangerous: if the order
+of two arguments of the same type is exchanged the compiler cannot
+detect the change to the interface but the code is likely to compute 
+different results. To facilitate the detection of such changes, the
+new version of such functions contains an explicit warnings that can
+be enabled by compiling the library with the macro \c 
+WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES. (For a gcc compiler this
+is done with the compiler flag 
+\c -DWARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES).
+
+Here is an example of a function in which the order of the two
+unsigned arguments was changed. If compiled with \c 
+WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES, the code will issue
+an appropriate warning every time this function is called.
+
+\code
+
+// Function of two unsigned arguments whose order has changed
+// since the previous release
+void SomeClass::some_function(const unsigned& t, const unsigned& i)
+{
+
+  [...]
+
+#ifdef WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES
+
+   // Throw an oomph-lib warning to alert the user to the change
+   // in the oder of the arguments
+   OomphLibWarning("Warning: Order of interfaces has changed",
+                   "SomeClass::some_function(...)",
+                   OOMPH_EXCEPTION_LOCATION);
+
+#endif
+
+  [...]
+
+}
+
+\endcode
+
+Obviously, you should only compile the library with 
+\c WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES if you encounter
+problems after upgrading to a new version. 
+
+<HR>
+
+\subsection zero_point_eight_to_zero_point_five Changes between version 0.8 and 0.85
+
+\subsubsection major_interface_changes_zero_point_five Major interface changes
+
+- \c Problem::actions_before_solve() becomes 
+  \c Problem::actions_before_newton_solve()
+  \n\n
+- \c Problem::actions_after_solve() 
+  becomes \c Problem::actions_after_newton_solve()
+  \n\n
+- \c TCrouzeixRaviartElement<DIM>
+  becomes \c TCrouzeixRaviartElement<DIM>
+  \n\n
+- \c QCrouzeixRaviartElement<DIM>
+  becomes \c QCrouzeixRaviartElement<DIM>
+  \n\n
+- \c RefineableQCrouzeixRaviartElement<DIM>
+  becomes \c RefineableQCrouzeixRaviartElement<DIM>
+  \n\n
+- Fixed various violations of our naming conventions; see 
+  \ref interface_changes.
+  \n\n
+- Changed the interface of to the \c FaceElements so that the faces 
+  are represented by an integer \c face_index, rather than the
+  combination \c s_fixed_index and \c s_limit which was not 
+  sufficiently general. 
+.
+
+
+\subsubsection new_functionality_zero_point_five Major new functionality
+
+- Added a variety of iterative linear solvers and general-purpose
+  preconditioners.
+  \n\n
+- Added wrappers to the powerful serial and parallel iterative
+  solvers/preconditioners from the  Hyre and Trilinos libraries.
+  \n\n
+- Developed a general block preconditioning framework and used it
+  implement problem-specific preconditioners for Navier-Stokes
+  and fluid-structure-interaction problems. 
+  \n\n
+  - <a href="../../preconditioners/lsc_navier_stokes/html/index.html">
+    Using \c oomph-lib's Least-Squares-Commutator Navier-Stokes 
+    preconditioner.</a>
+    \n\n
+  - <a href="../../preconditioners/fsi/html/index.html">
+    Using \c oomph-lib's FSI preconditioner.</a>
+  .
+  \n\n
+- Provided segregated solver capabilities for fluid-structure 
+  interaction.
+  \n\n
+- Added a number of additional tutorials/demo codes illustrating
+  \c oomph-lib's fluid-structure interaction capabilities:
+  \n\n
+  - <a href="../../interaction/turek_flag/html/index.html">
+    Turek & Hron's FSI benchmark problem of flow past a "flag".</a>
+    \n\n
+  - <a href="../../interaction/fsi_channel_with_leaflet/html/index.html">
+    Flow in a channel with an elastic leaflet.</a>
+    \n\n
+  - <a href="../../interaction/fsi_channel_segregated_solver/html/index.html">
+    Using \c oomph-lib's segregated solvers for
+    fluid-structure-interaction  problems.</a>
+    \n\n
+  - <a href="../../preconditioners/fsi/html/index.html">
+    Using \c oomph-lib's FSI preconditioner.</a>
+  .
+  \n\n
+- MPI capability is now fully integrated into the library (rather
+  than being kept in a separate mpi directory/sub-library) but not yet
+  complete (or documented). Segments of code that involve
+  MPI calls are surrounded by \c \#ifdef \c OOMPH_HAS_MPI \c [...] \c \#endif.
+  They are only compiled if the \c --enable-MPI flag is specified
+  at the configure stage.  
+  \n\n
+- Assuming you have \c pdflatex installed on your machine, 
+  the documentation is now not only built in html format
+  (pretty but hard to print) but we also create associated
+  pdf files. These are accessible via the link at the 
+  bottom of relevant html page.
+  \n\n
+- \c oomph-lib's build script, \c autogen.\c sh now allows for
+  parallel compilation. This can lead to considerable speedups
+  on multicore processors that are now widely available. To 
+  build \c oomph-lib in parallel, using up four threads
+  run  \c autogen.\c sh as follows
+  \code
+  ./autogen.sh --jobs=4 
+  \endcode
+  or (if you are re-building) 
+  \code
+  ./autogen.sh --jobs=4 --rebuild
+  \endcode
+  \n\n
+- <a href="http://www.mechanics.citg.tudelft.nl/~simone/">Angelo 
+  Simone</a> has written a python script that converts \c oomph-lib's
+  output to the vtu format that can be read by 
+  <a href="http://www.paraview.org/New/index.html">paraview</a>,
+  an open-source 3D plotting package. This is discussed in 
+  <a href="../../paraview/html/index.html"> separate tutorial.</a>
+  \n\n
+- ...and much more (eigenproblems, bifurcation tracking, 
+  advection-diffusion-reaction equations, displacement-based linear
+  elasticity, impedance-type outflow boundary
+  conditions for Navier-Stokes problems, Lagrange-multiplier-based
+  \c FaceElements to apply non-trivial boundaries to beams and shells, ...).
+  Feel free to have a look around the distribution.
+  You're welcome to use it all, but please remember
+  that you use any functionality for which no documentation
+  is available at your own risk; while we reserve the
+  right to change interfaces for all objects in the library, 
+  such changes are almost certain to happen for objects that are not
+  yet docmented (in the form of tutorials). 
+  \n\n
+.  

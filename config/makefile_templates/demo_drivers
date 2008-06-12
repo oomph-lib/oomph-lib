@@ -1,0 +1,19 @@
+# Include path for library headers: All library headers live in 
+# the include directory which we specify with -I
+AM_CPPFLAGS += -I@includedir@
+
+# Choose self tests
+if HAVE_PYTHON
+  # Test script
+  TESTS =  validate.sh
+else
+  # Just run the executables
+  TESTS = $(top_builddir)/bin/validate_no_python.sh
+endif
+
+# Distribute validation script and validation data
+EXTRA_DIST = validate.sh validata
+
+#Additional cleanup commands
+clean-local: 
+	rm -rf Validation *~

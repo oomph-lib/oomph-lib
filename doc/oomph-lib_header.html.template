@@ -1,0 +1,218 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>oomph-lib</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="doxygen.css">
+<link rel="stylesheet" type="text/css" href="############/oomph_header.css">
+
+
+<!-- The  following script does the hide/show trick-->
+<script language="JavaScript" type="text/javascript" 
+        src="############/navbar_toggle.js" >
+</script>
+
+<!-- The  following script
+ ensures that the required field on the download form get filled in-->
+<script language="JavaScript">
+<!--
+function formCheck(formobj){
+    // mandatory fields
+    var fieldRequired = Array("name", "affiliation", "email", "why");
+    // description to appear in the dialog box
+    var fieldDescription = Array("name", "affiliation", "email", 
+                                 "Why are you interested in oomph-lib?");
+    // dialog message
+    var alertMsg = "Please complete the following fields:\n";
+    var l_Msg = alertMsg.length;
+    for (var i = 0; i < fieldRequired.length; i++){
+        var obj = formobj.elements[fieldRequired[i]];
+        if (obj){
+            switch(obj.type){
+            case "select-one":
+                if (obj.selectedIndex == -1 || 
+                    obj.options[obj.selectedIndex].text == ""){
+                    alertMsg += " - " + fieldDescription[i] + "\n";
+                }
+                break;
+            case "select-multiple":
+                if (obj.selectedIndex == -1){
+                    alertMsg += " - " + fieldDescription[i] + "\n";
+                }
+                break;
+            case "text":
+            case "textarea":
+                if (obj.value == "" || obj.value == null){
+                    alertMsg += " - " + fieldDescription[i] + "\n";
+                }
+                break;
+            default:
+            }
+            if (obj.type == undefined){
+                var blnchecked = false;
+                for (var j = 0; j < obj.length; j++){
+                    if (obj[j].checked){
+                        blnchecked = true;
+                    }
+                }
+                if (!blnchecked){
+                    alertMsg += " - " + fieldDescription[i] + "\n";
+                }
+            }
+        }
+    }
+    if (alertMsg.length == l_Msg){
+        return true;
+    }else{
+        alert(alertMsg);
+        return false;
+    }
+}
+// -->
+</script>
+
+
+<body onLoad="visibilitytoggle()"> <!-- This is required for the "Click'n'view" fct to work! -->
+
+<div class="header">
+<p class="logo"><a href="############/../doc/html/index.html"><img src="############/../doc/figures/oomph.png" alt="oomph-lib logo: Link to oomph-lib homepage" border=0></a></p>
+<div class="head-section">
+<div id="hotspot" name="hotspot" class="hotspot" 
+     title="click to expand the navigation menu">Example codes <br> 
+     and tutorials</div> 
+<dl style="" id="toggle" name="toggle" class="toggle">  
+<dt><a href="############/../doc/quick_guide/html/index.html">The (Not-so) Quick Guide</a></dt>
+<dt><a href="############/../doc/example_code_list/html/index.html#poisson">Single-Physics Problems</a>
+     <dd><a href="############/../doc/example_code_list/html/index.html#poisson">Poisson</a></dd>
+     <dd><a href="############/../doc/example_code_list/html/index.html#poisson_adapt">Adaptivity illustrated for Poisson</a></dd>
+     <dd><a href="############/../doc/example_code_list/html/index.html#adv_diff">Advection-Diffusion</a></dd>
+     <dd><a href="############/../doc/example_code_list/html/index.html#unsteady_heat">Unsteady heat equation</a></dd>
+     <dd><a href="############/../doc/example_code_list/html/index.html#wave">Linear wave equation</a></dd>
+     <dd><a href="############/../doc/example_code_list/html/index.html#nst">Navier-Stokes</a></dd>
+     <dd><a href="############/../doc/example_code_list/html/index.html#free_surface_nst">Free-surface Navier-Stokes</a></dd>
+     <dd><a href="############/../doc/example_code_list/html/index.html#axisym_nst">Axisymmetric Navier-Stokes</a></dd>
+     <dd><a href="############/../doc/example_code_list/html/index.html#solid">Solid mechanics</a></dd>
+     <dd><a href="############/../doc/example_code_list/html/index.html#beam">Beam structures</a></dd>
+     <dd><a href="############/../doc/example_code_list/html/index.html#shell">Shell structures</a></dd>
+</dt>
+<dt><a href="############/../doc/example_code_list/html/index.html#fsi">Multi-physics Problems</a>
+     <dd><a href="############/../doc/example_code_list/html/index.html#fsi">Fluid-structure interaction</a></dd>
+     <dd><a href="############/../doc/example_code_list/html/index.html#bous">Boussinesq convection</a></dd>
+     <dd><a href="############/../doc/example_code_list/html/index.html#thermo">Steady thermoelasticity</a></dd>
+</dt>
+<dt><a href="############/../doc/to_be_written/html/index.html"> Methods-based example codes and tutorials</a></dt>
+     <dd><a href="############/../doc/example_code_list/html/index.html#meshes"> Mesh generation </a></dd>
+     <dd><a href="############/../doc/example_code_list/html/index.html#linear_solvers"> Linear solvers and preconditioners </a></dd>
+     <dd><a href="############/../doc/paraview/html/index.html"> Visualisation of the results </a></dd>
+     <dd><a href="############/../doc/to_be_written/html/index.html"> How to write a new element </a></dd>
+     <dd><a href="############/../doc/to_be_written/html/index.html"> How to write a new refineable element </a></dd>
+     <dd><a href="############/../doc/order_of_action_functions/html/index.html"> Default nonlinear solvers -- the sequence of
+         <CODE>action</CODE> functions</a></dd>
+     <dd><a href="############/../doc/to_be_written/html/index.html">...</a></dd>
+</dl>
+</div><!-- end section-->
+
+
+	
+<div class="head-section">
+<div id="hotspot" name="hotspot" class="hotspot" 
+     title="click to expand the navigation menu"> Documentation</div> 
+<dl style="" id="toggle" name="toggle" class="toggle">  
+      <dt><a href="############/../doc/intro/html/index.html">FE theory and top-down discussion of the data structure</a></dt>
+      <dt><a href="############/../doc/quick_guide/html/index.html">The (Not-so) Quick Guide</a></dt>
+
+      <dt><a href="############/../doc/the_data_structure/html/index.html">Comprehensive bottom-up discussion of the data
+      structure</a></dt>
+      <dt><a href="############/../doc/example_code_list/html/index.html#meshes">List of available structured and unstructured meshes</a></dt>
+      <dt><a href="############/../doc/example_code_list/html/index.html#linear_solvers"> Linear solvers and preconditioners </a></dt>
+      <dt><a href="############/../doc/paraview/html/index.html"> Visualisation of the results </a></dt>
+      <dt><a href="############/../doc/coding_conventions/html/index.html">Coding conventions and C++ style</a></dt>
+      <dt><a href="############/../doc/optimisation/html/index.html">Optimisation - robustness vs. "raw speed"</a>
+         <dd><a href="############/../doc/optimisation/html/index.html#linear_vs_nonlinear">Linear vs. nonlinear problems</a></dd>
+         <dd><a href="############/../doc/optimisation/html/index.html#store_shape">Storing shape functions </a></dd>
+         <dd><a href="############/../doc/optimisation/html/index.html#full_integration">Changing the default "full" integration scheme</a></dd>
+         <dd><a href="############/../doc/optimisation/html/index.html#ale"> Disabling the ALE formulation of unsteady equations</a></dd>
+         <dd><a href="############/../doc/optimisation/html/index.html#C_style_output"> C vs. C++ output</a></dd>
+         <dd><a href="############/../doc/optimisation/html/index.html#assembly">Different sparse assembly techniques and the STL memory pool</a></dd>
+      </dt> 
+</dl>
+</div><!-- end section-->
+
+
+	
+<div class="head-section">
+<div id="hotspot" name="hotspot" class="hotspot" 
+     title="click to expand the navigation menu"> Publications</div> 
+<dl style="" id="toggle" name="toggle" class="toggle">  
+    <dt><a href="############/../doc/publications/html/index.html">Publications</a>
+      <dd><a href="############/../doc/publications/html/index.html#talks">Talks</a></dd>
+      <dd><a href="############/../doc/publications/html/index.html#papers">Journal publications</a></dd>
+      <dd><a href="############/../doc/publications/html/index.html#theses">Theses</a></dd>
+    </dt>
+    <dt><a href="############/../doc/picture_show/index.html">Picture show </a></dt>
+</dl>
+</div><!-- end section-->
+
+
+
+
+<div class="head-section">
+<div id="hotspot" name="hotspot" class="hotspot" 
+     title="click to expand the navigation menu"> Download</div> 
+<dl style="" id="toggle" name="toggle" class="toggle">  
+    <dt><a href="############/../doc/copyright/html/index.html">Copyright</a></dt>
+    <dt><a href="############/../doc/the_distribution/html/index.html">Download/installation instructions</a></dt>
+    <dt><a href="############/../doc/download/html/index.html">Download page</a></dt>
+</dl>
+</div><!-- end section-->
+
+
+
+<div class="head-section">
+<div id="hotspot" name="hotspot" class="hotspot" 
+     title="click to expand the navigation menu">FAQ & Contact</div> 
+<dl style="" id="toggle" name="toggle" class="toggle">  
+    <dt><a href="############/../doc/FAQ/html/index.html">FAQ</a></dt>
+    <dt><a href="############/../doc/change_log/html/index.html">Change log</a></dt>
+    <dt><a href="############/../doc/bugs/html/index.html">Bugs and other known problems</a></dt>
+    <dt><a href="############/../doc/ToDo/html/index.html">Completeness of the library & our "To-Do List" </a></dt>
+    <dt><a href="############/../doc/contact/html/index.html">Contact the developers</a></dt>
+    <dt><a href="############/../doc/get_involved/html/index.html">Get involved </a></dt>
+</dl>
+</div><!-- end section-->
+
+
+<p class="clear">&nbsp;</p>
+</div><!-- end header -->
+
+
+
+<P>
+<HR>
+
+
+
+<TABLE BORDER=1, WIDTH=700px>
+<TR>
+<TD bgcolor="cornsilk">
+<CENTER><B>Beta release!</b></CENTER><br>
+Please note that the library has not been "officially" released.
+While we continue to work on the documentation, these web pages
+are likely to contain broken links and documents in draft form. 
+Please send an email to 
+<BR><BR>
+<CENTER>
+<TT>oomph-lib AT maths DOT man DOT ac DOT uk</TT>
+</CENTER>
+<BR> 
+if you wish to be informed of the library's "official" release.
+</TD>
+</TR>
+</TABLE>
+
+</CENTER>
+<HR>
+
+
+
+</head>

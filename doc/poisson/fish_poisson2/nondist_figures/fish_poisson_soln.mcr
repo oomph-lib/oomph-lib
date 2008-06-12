@@ -1,0 +1,97 @@
+#!MC 900
+
+
+#$!GETUSERINPUT |lostep| INSTRUCTIONS = "Loop. First Step??"
+$!VARSET  |lostep|=0
+#$!GETUSERINPUT |dlstep| INSTRUCTIONS = "Loop. Step Increment?"
+$!VARSET  |dlstep|=1
+$!GETUSERINPUT |nstep| INSTRUCTIONS = "Loop. Number of Steps??"
+
+$!LOOP |nstep|
+$!VarSet |nnstep| = |LOOP|
+$!VarSet |nnstep| -= 1
+$!VarSet |iistep| = |dlstep|
+$!VarSet |iistep| *= |nnstep|
+$!VarSet |iistep| += |lostep|
+$!NEWLAYOUT
+$!DRAWGRAPHICS FALSE
+#    $!IF |iistep| < 10 
+#      $!VARSET |istep|='00|iistep|'
+#    $!ENDIF
+#    $!IF |iistep| > 9 
+#      $!VARSET |istep|='0|iistep|'
+#    $!ENDIF
+#    $!IF |iistep| > 99 
+#      $!VARSET |istep|=|iistep|
+#    $!ENDIF
+$!VARSET |istep|=|iistep|
+#$!VARSET |istep|*=3
+$!READDATASET "soln|istep|.dat " 
+  READDATAOPTION = NEW
+  RESETSTYLE = YES
+
+
+$!FRAMEMODE = THREED
+$!FIELDLAYERS SHOWMESH = NO
+$!FIELDLAYERS SHOWSHADE= YES
+$!FIELD [1-|NUMZONES|]  BOUNDARY{COLOR = BLACK}
+$!FIELD [1-|NUMZONES|]  BOUNDARY{LINETHICKNESS = 0.02}
+
+$!THREEDVIEW 
+  PSIANGLE = 41.6842
+  THETAANGLE = 341.835
+  ALPHAANGLE = 0
+  VIEWERPOSITION
+    {
+    X = 4.9132659192
+    Y = -12.189088911
+    Z = 15.0121092049
+    }
+$!VIEW PUSH
+
+
+
+$!VIEW FIT
+$!REDRAW 
+
+
+$!THREEDAXIS YDETAIL{TITLE{TITLEMODE = USETEXT}}
+$!THREEDAXIS YDETAIL{TITLE{TEXT = 'x_2'}}
+$!THREEDAXIS XDETAIL{TITLE{TITLEMODE = USETEXT}}
+$!THREEDAXIS XDETAIL{TITLE{TEXT = 'x_1'}}
+$!THREEDAXIS ZDETAIL{TITLE{SHOWONAXISLINE = NO}}
+$!THREEDAXIS AXISMODE = XYDEPENDENT
+$!GLOBALTHREED AXISSCALEFACT{Z = 2.03513577767}
+$!THREEDVIEW
+  PSIANGLE = 47.0266
+  THETAANGLE = 25.1503
+  ALPHAANGLE = 0
+  VIEWERPOSITION
+    {
+    X = -4.58552359496
+    Y = -11.1970530788
+    Z = 5.77108303458
+    }
+
+$!DRAWGRAPHICS TRUE
+$!REDRAW 
+
+
+
+$!IF |LOOP|<2 
+  $!EXPORTSETUP EXPORTFORMAT = AVI
+  $!EXPORTSETUP IMAGEWIDTH = 829
+  $!EXPORTSETUP EXPORTFNAME = 'solns.avi'
+  $!EXPORTSTART 
+$!ENDIF
+$!IF |LOOP|>1 
+  $!EXPORTNEXTFRAME
+$!ENDIF
+
+
+$!EndLoop
+
+$!EXPORTFINISH 
+
+
+

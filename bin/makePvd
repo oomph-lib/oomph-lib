@@ -1,0 +1,67 @@
+#!/bin/sh
+#
+# Copyright (C) 2007- Angelo Simone (TU Delft)
+# Licensed under the GNU LGPL Version 2.1
+#
+# Script for generating an XML file with a collection of vtu files.
+# This XML file can be used by Paraview to generate an animation.
+#
+#
+# Created on 20070905
+# Last revision by AS on 20080514
+# 
+# Report bugs to a.simone@tudelft.nl
+#
+#############################################
+#
+
+# -- usage string and function
+usagestr="\n
+NAME\n
+\tmakePvd - generate a PVD XML file with a collection of VTU files\n
+\n
+\n
+SYNOPSIS\n
+\tmakePvd  basename output.pvd \n
+\n
+\n
+TYPICAL USAGE EXAMPLES\n
+\t1) for filenames like plot.out001.vtu, plot.out002.vtu... type\n
+\tmakePvd plot.out myplot.pvd  \t -> generate myplot.pvd\n \v
+\t2) for filenames like soln0.vtu soln1.dat soln2.vtu... type\n
+\tmakePvd  soln mysoln.pvd \t  -> generate mysoln.pvd\n
+\n
+\n
+NOTE\n
+\t The PVD XML file can be used by Paraview to generate an animation"
+
+usage() {
+  echo -e $usagestr
+  exit 1
+}
+
+# -- check for correct usage and assign variables
+if [ $# -ne 2 ]; then
+        usage
+fi
+basefile=$1
+pvdfile=$2
+
+# -- create the PVD XML file
+echo "<?xml version="'"1.0"'"?>"> $pvdfile
+echo "<VTKFile type="'"Collection"'" version="'"0.1"'">">> $pvdfile
+echo "<Collection>">> $pvdfile
+
+ii=1
+for file in $basefile*.vtu
+do echo "<DataSet timestep= "'" '$ii' "'" part="'"0"'" file="'"'$file'"'"/>" >> $pvdfile
+   ii=$(($ii+1))
+done
+
+echo "</Collection>">> $pvdfile
+echo "</VTKFile>">>    $pvdfile
+
+echo " "
+echo " --> File $pvdfile created"
+echo " "
+

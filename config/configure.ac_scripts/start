@@ -1,0 +1,990 @@
+####################################################################
+# START OF configure.ac.start
+####################################################################
+
+
+
+
+#Process this file with autoconf to produce a configure script.
+
+# Initialise autoconfigure: Pass package name, version number and contact email
+AC_INIT(oomph-lib,0.85,oomph-lib@maths.man.ac.uk)
+
+# config header file
+AM_CONFIG_HEADER(config.h)
+
+#Intialise automake
+AM_INIT_AUTOMAKE(oomph-lib,0.85,oomph-lib@maths.man.ac.uk)
+
+# Checks for programs:
+#---------------------
+# C++ compiler
+AC_PROG_CXX
+
+# C compiler
+AC_PROG_CC
+
+# C preprocessor
+AC_PROG_CPP
+
+# F77 compiler
+AC_PROG_F77
+
+# Install
+AC_PROG_INSTALL
+
+# Create symbolic links
+AC_PROG_LN_S
+
+# awk
+AC_PROG_AWK
+
+# Sets make macro
+AC_PROG_MAKE_SET
+
+# LIBTOOL
+AC_PROG_LIBTOOL
+
+# Determine linker flags for fortran
+AC_F77_LIBRARY_LDFLAGS
+
+
+# Set additional flags for C++ compilation: 
+#------------------------------------------
+# cfortran stuff:
+case "$F77" in
+ *gfortran*)
+  AM_CXXFLAGS='-DgFortran'
+  AM_FFLAGS=' '
+  ;;
+ *ifort*)
+  AM_CXXFLAGS='-DINTEL_COMPILER'
+  AM_FFLAGS=' '
+  ;;
+ *[[A-Za-z0-9]]*)
+  AM_CXXFLAGS='-Df2cFortran'
+  AM_FFLAGS=' '
+  ;;
+ *)
+  echo "==================================================";
+  echo "Fortran compiler not found. ";
+  echo "If your Fortran compiler is in a non-standard location"
+  echo "please specify by setting the variable F77=/path/to/fortran_compiler"
+  echo "in your configuration file or as an environment variable." 
+  echo "==================================================";
+  exit
+  ;;
+esac
+
+
+AC_SUBST(AM_CXXFLAGS)
+AC_SUBST(AM_FFLAGS)
+
+
+# Prepare variable that can be used to drag along C++ compilation
+# flags
+accumulated_cpp_flags=''
+
+
+
+#...........................................................................
+# Start of commands suggested by autoscan. 
+#
+# Andrew: Will need to re-run autoscan on the
+# full set of sources *and* decide on what to do if headers are not found.
+# This is where the real work starts on making the code portable, I suppose.
+# At the moment we simply bail out... 
+
+
+# Checks for header files.
+# 
+# Note: old version was
+#
+#   AC_CHECK_HEADERS([limits.h stdlib.h string.h sys/time.h malloc.h],
+#
+# but malloc.h doesn't exist on BSD Linux. Since malloc.h was only suggested
+# by autoscan, I've experimentally taken it out to see if this breaks
+# anything under GNU Linux (MH 12/01/2007)
+#
+AC_HEADER_STDC
+AC_CHECK_HEADERS([limits.h stdlib.h string.h sys/time.h],
+                  [echo "Congratulations -- required headers were found";],
+                  [echo "==================================================";
+                   echo "Trouble -- missing header[s]! ";
+                   echo "==================================================";
+                   exit])
+
+
+# Does C compiler support const?
+AC_C_CONST
+
+# Something to do with a stdbool.h header file. Don't quite understand
+# the significance; see
+# http://web.umr.edu/~gnudoc/single/autoconf-2.5.7/autoconf.html
+# for full(er) description and suggested action.
+AC_HEADER_STDBOOL
+
+# Does the C compiler support inlining?
+AC_C_INLINE
+
+# If size_t is not defined, define size_t to be unsigned
+AC_TYPE_SIZE_T
+
+#If pid_t is not defined, define pid_t to be int. 
+AC_TYPE_PID_T
+
+# Hmm, including this produces warnings during ./configure because 
+# RANLIB is made obsolete by LIBTOOL. You can either keep in here (in which
+# case autoscan doesn't complain) or comment it out (in which case 
+# you should ignore the warnings in autoscan). 
+#AC_PROG_RANLIB
+
+# Only needed by matlab part of superlu -- ignore when
+# autoscan flags this up...
+#AC_FUNC_ERROR_AT_LINE
+
+# Something to do with the way Gnu C handles malloc -- see
+# http://web.umr.edu/~gnudoc/single/autoconf-2.5.7/autoconf.html
+# Only an issue in external C code (Superlu)
+AC_FUNC_MALLOC
+
+# autoscan suggests I should check for these functions. autoconf doesn't
+# seem to be able to find them but this causes no problem --> ?
+#AC_CHECK_FUNCS([floor pow gethrtime sqrt memchr memset],
+#               [echo "Congratulations -- required function was found";],
+#               [echo "==================================================";
+#                echo "Trouble -- missing function! ";
+#                echo "==================================================";
+#                exit])
+
+
+
+# END OF COMMANDS SUGGESTED BY autoscan
+#...........................................................................
+
+
+
+
+
+
+# Do we have (a sufficiently recent version of) doxygen installed?
+#-----------------------------------------------------------------
+AC_CHECK_PROG(have_doxygen,doxygen,true,false)
+if test x$have_doxygen = xfalse; then \
+  echo " "; \
+  echo "===================================================="; \
+  echo "Cannot find doxygen on your system"; \
+  echo "---> documentation cannot be generated. "; \
+  echo " "; \
+  echo "You can either obtain the (built) oomph-lib "; \
+  echo "documentation online at "; \
+  echo " "; \
+  echo "          http://www.oomph-lib.org/    "; \
+  echo " "; \
+  echo "or download doxygen from  "; \
+  echo " "; \
+  echo "          http://www.doxygen.org/ "; \
+  echo " "; \
+  echo "===================================================="; \
+  echo " "; \
+else \
+  # Convert doxygen version number into single int -- strip dots and
+  # accomodate up to three digits for each part version id
+  doxygen_version=`doxygen --version | \
+    $AWK 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
+  # Need at least version 1.3.4 --> 1003004
+  if test "$doxygen_version" -ge 1003004; then
+    echo "Congratulations!"
+    echo "I have located a (sufficiently) up-to-date version of doxygen:" \
+         `doxygen --version`
+    echo "and can build the documentation."
+  else
+    echo " "; \
+    echo "==============================================================="; \
+    echo "Trouble: Your version of doxygen is: " `doxygen --version`
+    echo "Please upgrade to version 1.3.4 or higher."
+    echo " "; \
+    echo "          http://www.doxygen.org/ "; \
+    echo " "; \
+    echo "I cannot build the documentation..."
+    echo " "; \
+    echo "Meanwhile you can obtain the built oomph-lib documentation from"; \
+    echo " "; \
+    echo "          http://www.oomph-lib.org/    "; \
+    echo " "; \
+    echo "==============================================================="; \
+    echo " "; \
+    have_doxygen=false    
+  fi
+fi
+AM_CONDITIONAL(HAVE_DOXYGEN, test x$have_doxygen = xtrue)
+
+
+
+
+# Do we have triangle installed?
+#-------------------------------
+AC_CHECK_PROG(have_triangle,triangle,true,false)
+if test x$have_triangle = xfalse; then \
+  echo " "; \
+  echo "===================================================="; \
+  echo "Cannot find triangle on your system"; \
+  echo "---> cannot run fig2poly test. "; \
+  echo " "; \
+  echo "The source code for triangle may be obtained from "; \
+  echo " "; \
+  echo "     http://www.cs.cmu.edu/~quake/triangle.html    "; \
+  echo " "; \
+  echo "Please ask your systems administrator to install it "; \
+  echo "on your machine. "; \
+  echo " "; \
+  echo "NOTE: Maybe you do have triangle installed in an  "; \
+  echo "unusual place -- installing a symbolic link from"; \
+  echo "a directory in the normal search path to your actual "; \
+  echo "installation should then all that's required. "; \
+  echo "===================================================="; \
+  echo " "; \
+else \
+  echo "Congratulations! I have located triangle and can test the "; \
+  echo "triangle-based mesh generation procedures."; \
+fi
+AM_CONDITIONAL(HAVE_TRIANGLE, test x$have_triangle = xtrue)
+
+
+# Do we have tetgen installed?
+#-------------------------------
+AC_CHECK_PROG(have_tetgen,tetgen,true,false)
+if test x$have_tetgen = xfalse; then \
+  echo " "; \
+  echo "===================================================="; \
+  echo "Cannot find tetgen on your system"; \
+  echo " "; \
+  echo "The source code for tetgen may be obtained from "; \
+  echo " "; \
+  echo "     http://tetgen.berlios.de/    "; \
+  echo " "; \
+  echo "Please ask your systems administrator to install it "; \
+  echo "on your machine. "; \
+  echo " "; \
+  echo "NOTE: Maybe you do have tetgen installed in an  "; \
+  echo "unusual place -- installing a symbolic link from"; \
+  echo "a directory in the normal search path to your actual "; \
+  echo "installation should then all that's required. "; \
+  echo "===================================================="; \
+  echo " "; \
+else \
+  echo "Congratulations! I have located tetgen and can test the "; \
+  echo "tetgen-based mesh generation procedures."; \
+fi
+AM_CONDITIONAL(HAVE_TETGEN, test x$have_tetgen = xtrue)
+
+
+
+# Do we have pdflatex installed?
+#----------------------------
+AC_CHECK_PROG(have_pdflatex,pdflatex,true,false)
+if test x$have_pdflatex = xfalse; then \
+  echo " "; \
+  echo "===================================================="; \
+  echo "Cannot find pdflatex on your system"; \
+  echo "---> latex documentation cannot be generated. "; \
+  echo " "; \
+  echo "You can either lookup the documentation online at "; \
+  echo " "; \
+  echo "          http://www.oomph-lib.org/    "; \
+  echo " "; \
+  echo "or ask your systems administrator to install pdflatex "; \
+  echo "on your machine. "; \
+  echo " "; \
+  echo "NOTE: Maybe you do have pdflatex installed in an  "; \
+  echo "unusual place -- installing a symbolic link from"; \
+  echo "a directory in the normal search path to your actual "; \
+  echo "installation should then all that's required. "; \
+  echo "===================================================="; \
+  echo " "; \
+else \
+  echo "Congratulations! I have located pdflatex and can build the "; \
+  echo "latex documentation in the doc directory."; \
+fi
+AM_CONDITIONAL(HAVE_PDF_LATEX, test x$have_pdf_latex = xtrue)
+
+
+# Do we have python installed?
+#-----------------------------
+AC_CHECK_PROG(have_python,python,true,false)
+if test x$have_python = xfalse; then \
+  echo " "; \
+  echo "================================================================="; \
+  echo "Cannot find python on your system"; \
+  echo "---> Will not be able to check the accuracy of "; \
+  echo "     the self tests with bin/fpdiff.py :( "; \
+  echo " "; \
+  echo "Please get your system administrator to install python for you. "; \
+  echo " "; \
+  echo "=================================================================="; \
+  echo " "; \
+else \
+  echo "Congratulations! I have located python."; \
+fi
+AM_CONDITIONAL(HAVE_PYTHON, test x$have_python = xtrue)
+
+
+
+# Do we have the sources for the HSL frontal solver in external_src?
+#-------------------------------------------------------------------
+AC_CHECK_FILES(external_src/oomph_hsl/frontal.f,
+               echo "Found external_src/oomph_hsl/frontal.f"; have_hsl_sources=true, 
+               echo "Not found external_src/oomph_hsl/frontal.f"; have_hsl_sources=false)
+
+
+#If we don't have them check if they are private/external_src and make sym link
+#------------------------------------------------------------------------------
+if test x$have_hsl_sources = xfalse; then \
+
+  AC_CHECK_FILES(private/external_src/hsl/frontal.f,
+                 echo "Found private/external_src/hsl/frontal.f"; have_hsl_sources_in_private_external_src=true, 
+                 echo "Not found private/external_src/hsl/frontal.f"; have_hsl_sources_in_private_external_src=false)
+
+  if test x$have_hsl_sources_in_private_external_src = xtrue; then \
+    echo "Making symlink"; \
+    ln -s ../../private/external_src/hsl/frontal.f external_src/oomph_hsl/frontal.f;\
+    have_hsl_sources=true;\
+  else \
+    echo "Not making symlink";\
+  fi; \
+
+fi;
+
+# Now do the final check if we have the sources for the HSL frontal solver
+#-------------------------------------------------------------------------
+AM_CONDITIONAL(HAVE_HSL_SOURCES, test x$have_hsl_sources = xtrue)
+
+
+# Do we have the sources for the ARPACK Arnoldi solver?
+#---------------------------------------------------
+AC_CHECK_FILES(external_src/oomph_arpack/all_arpack_sources.f,
+               echo "Found external_src/oomph_arpack/all_arpack_sources.f"; have_arpack_sources=true, 
+               echo "Not found external_src/oomph_arpack/all_arpack_sources.f"; have_arpack_sources=false)
+
+#If we don't have them check if they are private/external_src and make sym link
+#------------------------------------------------------------------------------
+if test x$have_arpack_sources = xfalse; then \
+
+  AC_CHECK_FILES(private/external_src/arpack/all_arpack_sources.f,
+                 echo "Found private/external_src/arpack/all_arpack_sources.f"; have_arpack_sources_in_private_external_src=true, 
+                 echo "Not found private/external_src/arpack/all_arpack_sources.f"; have_arpack_sources_in_private_external_src=false)
+
+  if test x$have_arpack_sources_in_private_external_src = xtrue; then \
+    echo "Making symlink"; \
+    ln -s ../../private/external_src/arpack/all_arpack_sources.f external_src/oomph_arpack/all_arpack_sources.f;\
+    have_arpack_sources=true;\
+  else \
+    echo "Not making symlink";\
+  fi; \
+
+fi;
+
+AM_CONDITIONAL(HAVE_ARPACK_SOURCES, test x$have_arpack_sources = xtrue)
+AM_CONDITIONAL(WANT_EIGENPROBLEM_TESTS, test x$have_arpack_sources = xtrue)
+
+
+# Build flags that can be set during configure stage
+#---------------------------------------------------
+
+# Dummies to produce better output for ./configure --help
+AC_ARG_ENABLE(dummy1,[  ])
+AC_ARG_ENABLE(dummy2,[Oomph-lib options:  ])
+
+
+
+# Is MPI build required? 
+# If yes, run configure as './configure --enable-MPI'
+AC_ARG_ENABLE(MPI,
+              [  --enable-MPI Build oomph-lib MPI routines],
+              [want_mpi=true],
+              [want_mpi=false])
+# Pass result of test to automake (makefiles can now check for 
+# status of WANT_MPI in any Makefile.am, like this:
+#
+#   # WANT_MPI flag is set by autoconf
+#   #---------------------------------
+#   if WANT_MPI
+#     SUBDIRS = $(non_mpi_sub_dirs) $(mpi_sub_dirs) 
+#   else
+#     SUBDIRS = $(non_mpi_sub_dirs)
+#   endif
+#
+AM_CONDITIONAL(WANT_MPI, test x$want_mpi = xtrue)
+
+
+# Add flag (don't use the obvious HAVE_MPI as this is used by
+# other packages too and leads to clashes!)
+if test x$want_mpi = xtrue; then \
+    accumulated_cpp_flags=`echo $accumulated_cpp_flags " -DOOMPH_HAS_MPI"`; \
+fi;
+
+# Suppress build of extensive documentation?
+# If yes, run configure as './configure --enable-suppress-doc'
+AC_ARG_ENABLE(suppress-doc,
+              [  --enable-suppress-doc Suppress building of oomph-lib's doxygen-based documentation],
+              [want_doc=false],
+              [want_doc=true])
+
+#If the doc directory does not exist, then you can't have it
+AC_CHECK_FILE(doc,[],[want_doc=false])
+
+# Pass result of test to automake (makefiles can now check for 
+# status of WANT_DOC in any Makefile.am
+AM_CONDITIONAL(WANT_DOC, test x$want_doc = xtrue)
+
+
+# Suppress extended self-tests?
+# If yes, run configure as './configure --enable-suppress-extended-self-tests'
+AC_ARG_ENABLE(suppress-extended-self_tests,
+              [  --enable-suppress-extended-self-tests Suppress build/running of oomph-lib's extended self tests for all libraries],
+              [want_extended_self_tests=false],
+              [want_extended_self_tests=true])
+# Pass result of test to automake (makefiles can now check for 
+# status of WANT_DOC in any Makefile.am
+AM_CONDITIONAL(WANT_EXTENDED_SELF_TESTS, test x$want_extended_self_tests = xtrue)
+
+
+
+
+# Suppress build of extensive demo codes?
+# If yes, run configure as './configure --enable-suppress-demo'
+AC_ARG_ENABLE(suppress-demo,
+              [  --enable-suppress-demo Suppress build/check of oomph-lib's demo codes],
+              [want_demo=false],
+              [want_demo=true])
+# Pass result of test to automake (makefiles can now check for 
+# status of WANT_DEMO in any Makefile.am
+AM_CONDITIONAL(WANT_DEMO, test x$want_demo = xtrue)
+
+
+
+# Suppress build of user sources/libraries?
+# If yes, run configure as './configure --enable-suppress-user-src'
+AC_ARG_ENABLE(suppress-user-src,
+              [  --enable-suppress-user-src Suppress build/check of user sources/libraries],
+              [want_user_src=false],
+              [want_user_src=true])
+# Pass result of test to automake (makefiles can now check for 
+# status of WANT_USER_SRC in any Makefile.am
+AM_CONDITIONAL(WANT_USER_SRC, test x$want_user_src = xtrue)
+
+
+
+# Replace include files by links?
+# If yes, run configure as './configure --enable-symbolic_links_for_headers'
+AC_ARG_ENABLE(symbolic-links-for-headers,
+              [  --enable-symbolic-links-for-headers Use symbolic links for header files; useful during development],
+              [want_sym_link=true],
+              [want_sym_link=false])
+# Pass result of test to automake (makefiles can now check for 
+# status of SYMBOLIC_LINKS_FOR_HEADERS in any Makefile.am
+AM_CONDITIONAL(SYMBOLIC_LINKS_FOR_HEADERS, test x$want_sym_link = xtrue)
+
+
+
+
+
+
+
+# Define subdirectories in user drivers directory
+USER_DRIVER_SUBDIRECTORIES=`sed "s/user_drivers\///g" config/configure.ac_scripts/user_drivers.dir_list | awk '{printf "%s ", $1} END{print " "}' `
+AC_SUBST(USER_DRIVER_SUBDIRECTORIES)
+
+# Define subdirectories in user src directory
+USER_SRC_SUBDIRECTORIES=`sed "s/user_src\///g" config/configure.ac_scripts/user_src.dir_list | awk '{printf "%s ", $1} END{print " "}' `
+AC_SUBST(USER_SRC_SUBDIRECTORIES)
+
+
+# Do we have private directory?
+#---------------------------------
+AC_CHECK_FILES(private,
+               echo "Found private"; have_private_directory=true, 
+               have_private_directory=false)
+AM_CONDITIONAL(HAVE_PRIVATE_DIRECTORY, test x$have_private_directory = xtrue)
+
+
+# Define subdirectories in private directory
+if test x$have_private_directory = xtrue; then  \
+
+  touch config/configure.ac_scripts/private.dir_list
+  PRIVATE_SUBDIRECTORIES=`sed "s/private\///g" config/configure.ac_scripts/private.dir_list | awk '{if($1!="private") printf "%s ", $1} END{print " "}' `; \
+
+  echo "Do have private subdirectories" $PRIVATE_SUBDIRECTORIES; \
+else \
+
+  PRIVATE_SUBDIRECTORIES=""; \
+  echo "Don't have private subdirectories: " $PRIVATE_SUBDIRECTORIES; \
+fi;
+
+AC_SUBST(PRIVATE_SUBDIRECTORIES)
+
+# Do we have private user sources?
+#---------------------------------
+AC_CHECK_FILES(private/user_src,
+               echo "Found private/user_src"; have_private_user_sources=true, 
+               have_private_user_sources=false)
+AM_CONDITIONAL(HAVE_PRIVATE_USER_SRC, test x$have_private_user_sources = xtrue)
+
+
+# Define subdirectories in private user src directory
+if test x$have_private_user_sources = xtrue; then  \
+
+  touch config/configure.ac_scripts/private_user_src.dir_list
+  PRIVATE_USER_SRC_SUBDIRECTORIES=`sed "s/private\/user_src\///g" config/configure.ac_scripts/private_user_src.dir_list | awk '{if($1!="private/user_src") printf "%s ", $1} END{print " "}' `; \
+
+  echo "Do have private/user_src: " $PRIVATE_USER_SRC_SUBDIRECTORIES; \
+  ROOT_PRIVATE_USER_SRC=private/user_src; \
+else \
+
+  PRIVATE_USER_SRC_SUBDIRECTORIES=""; \
+  echo "Don't have private/user_src: " $PRIVATE_USER_SRC_SUBDIRECTORIES; \
+  ROOT_PRIVATE_USER_SRC= ;\
+fi;
+
+AC_SUBST(PRIVATE_USER_SRC_SUBDIRECTORIES)
+
+
+
+# Do we have private user drivers?
+#---------------------------------
+AC_CHECK_FILES(private/user_drivers,
+               echo "Found private/user_drivers"; have_private_user_drivers=true, 
+               have_private_user_drivers=false)
+AM_CONDITIONAL(HAVE_PRIVATE_USER_DRIVERS, test x$have_private_user_drivers = xtrue)
+
+
+# Define subdirectories in private user drivers directory
+if test x$have_private_user_drivers = xtrue; then  \
+
+  touch config/configure.ac_scripts/private_user_drivers.dir_list
+  PRIVATE_USER_DRIVER_SUBDIRECTORIES=`sed "s/private\/user_drivers\///g" config/configure.ac_scripts/private_user_drivers.dir_list | awk '{if($1!="private/user_drivers") printf "%s ", $1} END{print " "}' `; \
+
+  echo "Do have private/user_drivers: " $PRIVATE_USER_DRIVER_SUBDIRECTORIES; \
+  ROOT_PRIVATE_USER_DRIVERS=private/user_drivers; \
+else \
+
+  PRIVATE_USER_DRIVER_SUBDIRECTORIES=""; \
+  echo "Don't have private/user_drivers: " $PRIVATE_USER_DRIVER_SUBDIRECTORIES; \ 
+  ROOT_PRIVATE_USER_DRIVERS= ;\
+fi;
+
+AC_SUBST(PRIVATE_USER_DRIVER_SUBDIRECTORIES)
+
+
+
+
+
+# Initialiase flags that contains all external libraries that come with
+#----------------------------------------------------------------------
+# their own distribution and may be installed anywhere.
+#------------------------------------------------------
+# These are distributed to all Makefile.am-s via the AM_CPPFLAGS
+#---------------------------------------------------------------
+# and AM_LDFLAGS variables so *everything* links against them
+#------------------------------------------------------------
+external_dist_libraries=''
+external_dist_libraries_lib=''
+external_dist_libraries_include=''
+
+
+
+
+#................................................................
+#................................................................
+
+
+
+#---------------------------------------------------
+# Potential location for the blas libraries.
+#
+# If the complete blas library is available on
+# your machine, specify the absolute path to the
+# library with --with-blas
+#----------------------------------------------------
+BLAS_LIB=
+check_for_blas=false
+
+AC_ARG_WITH(blas,
+[  --with-blas[=ABSOLUTE_PATH] use blas library specified via ABSOLUTE PATH
+                               e.g. /usr/local/lib/blas.a],[
+  if test "$withval" != "no" -a "$withval" != "yes"; then
+    check_for_blas=true
+    BLAS_LIB=$withval
+  fi
+])
+
+
+
+# Do they exist?
+have_blas=false
+if test x$check_for_blas = xtrue; then \
+if test -e $BLAS_LIB; then \
+    have_blas=true; \
+    echo "Found the blas library "; \
+    echo " "; \
+    echo "   "  $BLAS_LIB ; \
+    echo " "; \
+    # Make the variable available to all Makefile.am-s
+    AC_SUBST(BLAS_LIB)
+else \
+    have_blas=false; \
+    echo "Did NOT find the blas library"; \
+    echo " "; \
+    echo "   "  $BLAS_LIB ; \
+    echo " "; \
+fi; \
+else \
+    echo "No blas library specified"; \ 
+fi
+
+
+#Tell everybody about it...
+AM_CONDITIONAL(ALREADY_HAVE_BLAS, test x$have_blas = xtrue)
+
+
+
+
+#................................................................
+#................................................................
+
+
+
+#---------------------------------------------------
+# Potential location for the lapack libraries.
+#
+# If the complete lapack library is available on
+# your machine, specify the absolute path to the
+# library with --with-lapack
+#----------------------------------------------------
+LAPACK_LIB=
+check_for_lapack=false
+
+AC_ARG_WITH(lapack,
+[  --with-lapack[=ABSOLUTE_PATH] use lapack library specified via ABSOLUTE PATH
+                               e.g. /usr/local/lib/lapack.a],[
+  if test "$withval" != "no" -a "$withval" != "yes"; then
+    check_for_lapack=true
+    LAPACK_LIB=$withval
+  fi
+])
+
+
+
+# Do they exist?
+have_lapack=false
+if test x$check_for_lapack = xtrue; then \
+if test -e $LAPACK_LIB; then \
+    have_lapack=true; \
+    echo "Found the lapack library "; \
+    echo " "; \
+    echo "   "  $LAPACK_LIB ; \
+    echo " "; \
+    # Make the variable available to all Makefile.am-s
+    AC_SUBST(LAPACK_LIB)
+else \
+    have_lapack=false; \
+    echo "Did NOT find the lapack library"; \
+    echo " "; \
+    echo "   "  $LAPACK_LIB ; \
+    echo " "; \
+fi; \
+else \
+    echo "No lapack library specified"; \ 
+fi
+
+
+#Tell everybody about it...
+AM_CONDITIONAL(ALREADY_HAVE_LAPACK, test x$have_lapack = xtrue)
+
+
+
+
+
+#................................................................
+#................................................................
+
+
+
+#---------------------------------------------------
+# Potential location of HYPRE libraries.
+#
+# If the HYPRE is available on 
+# your machine, specify the library directory
+# i.e. the one above the lib and include directories
+# with --with-hypre
+#----------------------------------------------------
+HYPRE_DIR=
+HYPRE_LIB=
+HYPRE_INCLUDE=
+check_for_hypre=false
+
+AC_ARG_WITH(hypre,
+[  --with-hypre[=DIR] use hypre library in directory DIR
+                          i.e. library is in DIR/lib
+                          and include files are in DIR/include],[
+  if test "$withval" != "no" -a "$withval" != "yes"; then
+    check_for_hypre=true
+    HYPRE_DIR=$withval
+    HYPRE_LIB="$withval/lib"
+    HYPRE_INCLUDE="$withval/include"
+  fi
+])
+
+
+
+# Do they exist?
+have_hypre=false
+if test x$check_for_hypre = xtrue; then \
+if test -d $HYPRE_LIB; then \
+    have_hypre=true; \
+    echo "Found the hypre libraries in"; \
+    echo " "; \
+    echo "   "  $HYPRE_LIB ; \
+    echo " "; \
+else \
+    have_hypre=false; \
+    echo "Did NOT find the hypre libraries in"; \
+    echo " "; \
+    echo "   "  $HYPRE_LIB ; \
+    echo " "; \
+fi; \
+if test -d $HYPRE_INCLUDE; then \
+    have_hypre=true; \
+    echo "Found the hypre include files in"; \
+    echo " "; \
+    echo "   "  $HYPRE_INCLUDE ; \
+    echo " "; \
+else \
+    have_hypre=false; \
+    echo "Did NOT find the hypre include files in"; \
+    echo " "; \
+    echo "   "  $HYPRE_INCLUDE ; \
+    echo " "; \
+fi; \
+else \
+    echo "No hypre library directory specified"; \ 
+
+    # Will hypre library be built?
+    #-----------------------------
+    AC_CHECK_FILES(external_distributions/hypre/hypre-2.0.0.tar.gz,
+                   echo "Found hypre-2.0.0.tar.gz --> will build hypre library"; will_have_hypre=true, 
+                   echo "Not found hypre-2.0.0.tar.gz --> will not build hypre library"; will_have_hypre=false)
+
+   if test x$will_have_hypre = xtrue; then \
+    have_hypre=true; \
+    HYPRE_DIR="`pwd`/external_distributions/hypre/hypre_default_installation"
+    HYPRE_LIB="`pwd`/external_distributions/hypre/hypre_default_installation/lib"
+    HYPRE_INCLUDE="`pwd`/external_distributions/hypre/hypre_default_installation/include"
+   fi;
+fi
+
+
+
+# Do we have the hypre libraries? If so add them to the 
+#------------------------------------------------------
+# external distributions; if not wipe the variables
+#--------------------------------------------------
+if test x$have_hypre = xfalse; then 
+  HYPRE_LIB='' ; \
+  HYPRE_INCLUDE='' ;\
+else \
+  external_dist_libraries=`echo $external_dist_libraries " -lHYPRE"` ; \
+  external_dist_libraries_lib=`echo $external_dist_libraries_lib "-L"$HYPRE_LIB` ; \
+  external_dist_libraries_include=`echo $external_dist_libraries_include "-I"$HYPRE_INCLUDE -DHAVE_HYPRE` ; \
+fi
+
+
+
+#Tell everybody about it...
+AM_CONDITIONAL(HAVE_HYPRE, test x$have_hypre = xtrue)
+
+# Make thes variables available to all Makefile.am-s
+AC_SUBST(HYPRE_LIB)
+AC_SUBST(HYPRE_INCLUDE)
+
+
+#................................................................
+
+
+
+#---------------------------------------------------
+# Potential location of the TRILINOS libraries.
+#
+# If the TRILINOS is available on 
+# your machine, specify the library directory
+# i.e. the one above the lib and include directories
+# with --with-trilinos
+#----------------------------------------------------
+TRILINOS_DIR=
+TRILINOS_LIB=
+TRILINOS_INCLUDE=
+check_for_trilinos=false
+
+AC_ARG_WITH(trilinos,
+[  --with-trilinos[=DIR] use trilinos library in directory DIR
+                          i.e. library is in DIR/lib
+                          and include files are in DIR/include],[
+  if test "$withval" != "no" -a "$withval" != "yes"; then
+    check_for_trilinos=true
+    TRILINOS_DIR=$withval
+    TRILINOS_LIB="$withval/lib"
+    TRILINOS_INCLUDE="$withval/include"
+  fi
+])
+
+
+# Do they exist?
+have_trilinos=false
+if test x$check_for_trilinos = xtrue; then \
+if test -d $TRILINOS_LIB; then \
+    have_trilinos=true; \
+    echo "Found the trilinos libraries in"; \
+    echo " "; \
+    echo "   "  $TRILINOS_LIB ; \
+    echo " "; \
+else \
+    have_trilinos=false; \
+    echo "Did NOT find the trilinos libraries in"; \
+    echo " "; \
+    echo "   "  $TRILINOS_LIB ; \
+    echo " "; \
+fi; \
+if test -d $TRILINOS_INCLUDE; then \
+    have_trilinos=true; \
+    echo "Found the trilinos include files in"; \
+    echo " "; \
+    echo "   "  $TRILINOS_INCLUDE ; \
+    echo " "; \
+else \
+    have_trilinos=false; \
+    echo "Did NOT find the trilinos include files in"; \
+    echo " "; \
+    echo "   "  $TRILINOS_INCLUDE ; \
+    echo " "; \
+fi; \
+else \
+    echo "No trilinos library directory specified"; \ 
+
+    # Will trilinos library be built?
+    #--------------------------------
+    AC_CHECK_FILES(external_distributions/trilinos/trilinos-7.0.8.tar.gz,
+                   echo "Found trilinos-7.0.8.tar.gz --> will build trilinos library"; will_have_trilinos=true, 
+                  echo "Not found trilinos-7.0.8.tar.gz --> will not build trilinos library"; will_have_trilinos=false)
+    
+   if test x$will_have_trilinos = xtrue; then \
+    have_trilinos=true; \
+    TRILINOS_DIR="`pwd`/external_distributions/trilinos/trilinos_default_installation"
+    TRILINOS_LIB="`pwd`/external_distributions/trilinos/trilinos_default_installation/lib"
+    TRILINOS_INCLUDE="`pwd`/external_distributions/trilinos/trilinos_default_installation/include"
+   fi;
+
+fi
+
+
+
+# Do we have the trilinos libraries? If so add them to the
+#---------------------------------------------------------
+# external distributions; if not wipe the variables
+#--------------------------------------------------
+if test x$have_trilinos = xfalse; then 
+  TRILINOS_LIB='' ; \
+  TRILINOS_INCLUDE='' ;\
+else \
+  external_dist_libraries=`echo $external_dist_libraries " -lml -lifpack -lamesos -lanasazi -laztecoo -lepetraext -ltriutils -lepetra -lteuchos"` ; \
+  external_dist_libraries_lib=`echo $external_dist_libraries_lib "-L"$TRILINOS_LIB` ; \
+  external_dist_libraries_include=`echo $external_dist_libraries_include "-I"$TRILINOS_INCLUDE -DHAVE_TRILINOS` ; \
+fi
+
+
+#Tell everybody about it...
+AM_CONDITIONAL(HAVE_TRILINOS, test x$have_trilinos = xtrue)
+
+# Make thes variables available to all Makefile.am-s
+AC_SUBST(TRILINOS_LIB)
+AC_SUBST(TRILINOS_INCLUDE)
+
+
+
+#................................................................
+
+
+
+# Make external libraries with their own distributions available to 
+#------------------------------------------------------------------
+# all Makfile.am-s. Note that by adding to AM_LDFLAGS and AM_CPPFLAGS
+#--------------------------------------------------------------------
+# everything automatically links against these libraries.
+#--------------------------------------------------------
+# Also add any other accumulated flags for these variables.
+#----------------------------------------------------------
+AM_LDFLAGS=`echo $external_dist_libraries_lib`
+AC_SUBST(AM_LDFLAGS)
+
+AM_CPPFLAGS=`echo $external_dist_libraries_include  $accumulated_cpp_flags`
+AC_SUBST(AM_CPPFLAGS)
+
+
+# Define "external" libraries 
+#---------------------------- 
+# These are the third-party libraries distributed with oomph-lib.
+# They are only used if the user hasn't specified his/her own
+# local version of these.
+
+external_libs='-loomph_hsl -loomph_superlu_3.0 -loomph_metis_4.0 -loomph_arpack '
+
+# Include superlu_dist if compiled in parallel
+if test x$want_mpi = xtrue; then
+  external_libs=`echo $external_libs "-loomph_superlu_dist_2.0"`
+  echo "EXTERNAL LIBS (I-3): " $external_libs
+fi
+
+# Lapack?
+echo "ALREADY_HAVE LAPACK: " $have_lapack 
+if test x$have_lapack = xfalse; then  
+  external_libs=`echo $external_libs " -loomph_lapack -loomph_flapack"`
+  echo "EXTERNAL LIBS (I-2): " $external_libs
+else 
+  external_libs=`echo $external_libs " $LAPACK_LIB"`
+  echo "EXTERNAL LIBS (II-2): " $external_libs
+fi
+
+
+# Blas?
+echo "ALREADY_HAVE BLAS: " $have_blas 
+if test x$have_blas = xfalse; then  
+  external_libs=`echo $external_libs " -loomph_blas"`
+  echo "EXTERNAL LIBS (I): " $external_libs
+else 
+  external_libs=`echo $external_libs " $BLAS_LIB"`
+  echo "EXTERNAL LIBS (II): " $external_libs
+fi
+
+
+
+
+
+# Define "external" MPI libraries
+#--------------------------------
+EXTERNAL_MPI_LIBS='-loomph_superlu_dist_2.0'
+AC_SUBST(EXTERNAL_MPI_LIBS)
+
+
+
+# Now add the third-party external libraries that are shared by all 
+#------------------------------------------------------------------
+# Makefile.am-s
+#--------------
+external_libs=`echo $external_dist_libraries " "  $external_libs`
+EXTERNAL_LIBS=`echo $external_libs`
+AC_SUBST(EXTERNAL_LIBS)
+
+####################################################################
+# END OF configure.ac.start
+####################################################################
+
+

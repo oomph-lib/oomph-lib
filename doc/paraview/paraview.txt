@@ -1,0 +1,282 @@
+\mainpage Visualising oomph-lib's output files with Paraview
+
+All of \c oomph-lib's existing elements implement the
+\c GeneralisedElement::output(...) functions, allowing
+the computed solution to be documented via a simple
+call to the \c Mesh::output(...) function, e.g.
+
+\code
+// Open output file
+ofstream output_file("output.dat")
+
+// Call the mesh's output function which loops over the 
+// element and calls theirs...
+Problem::mesh_pt()->output(output_file);
+\endcode
+
+By default, the output is written in a format that is suitable
+for displaying the data with <A HREF="http://www.tecplot.com">
+tecplot,</A> a powerful and easy-to-use commercial plotting package
+-- possibly a somewhat odd choice for a an open-source library. 
+
+The <a href="../../FAQ/html/index.html">FAQ</a> contain
+an entry that discusses how to display \c oomph-lib's output
+with <A HREF="http://www.gnuplot.info">gnuplot</A> and 
+<a href="../../FAQ/html/index.html#tecplot">
+how to adjust \c oomph-lib's output functions to different 
+formats.</a>
+  
+ <a href="http://www.mechanics.citg.tudelft.nl/~simone/">Angelo 
+Simone</a> has written a python script that converts \c oomph-lib's
+output to the vtu format that can be read by 
+<a href="http://www.paraview.org/New/index.html">paraview</a>,
+an open-source 3D plotting package. The conversion script
+can currently deal with output from meshes that are composed
+of 2D quad elements -- the extension to 3D is work in progress. 
+
+The \c oomph-lib distribution contains three scripts:
+
+- <a href="../../../bin/oomph-convert.py"><code>bin/oomph-convert.py
+  </code>:</a> The python conversion script itself.
+  \n\n
+- <a href="../../../bin/oomph-convert"><code>bin/oomph-convert
+  </code>:</a> A shell script wrapper that allows the processing of
+  multiple files.
+  \n\n
+- <a href="../../../bin/makePvd"><code>bin/makePvd</code>:</a>
+  A shell script the creates the \c * \c .pvd files required by
+  paraview to produce animations.
+. 
+
+
+<hr>
+<hr>
+
+
+
+\section py The oomph-convert.py script for single files
+
+\subsection py_sample An example session
+
+
+-# Add \c oomph-lib's bin directory to your path (in the example
+   shown here, \c oomph-lib
+   is installed in the directory \c /home/mheil/version185/oomph): 
+   \n\n
+   \code
+   biowulf: 10:31:50$ PATH=$PATH:/home/mheil/version185/oomph/bin
+   \endcode
+   \n
+-# Here is what's in the current directory at the moment: \c soln0.dat is
+   the \c oomph-lib output produced by
+   <a href="../../poisson/fish_poisson/html/index.html">the adaptive 
+   solution of a Poisson equation in a fish-shaped domain.</a>
+   \n\n
+   \code
+   biowulf: 11:05:10$ ll
+   total 824
+   -rw-r--r--    1 mheil    users        2292 May 21 09:19 soln0.dat
+   \endcode
+   \n
+-# Run \c oomph-convert.py 
+   \n\n
+   \code
+    biowulf: 11:16:18$  oomph-convert soln0.dat
+
+    -- Processing soln0.dat
+    * oomph-convert.py, ver. 20080514
+    Convert from oomph-lib Tecplot format to VTK XML format.
+    Dimension of the problem: 2
+    Plot cells defined
+    Field variables =  1
+    Conversion started
+    Coordinate defined
+    Connectivities defined
+    Offset defined
+    Element types defined
+    Field data defined
+    Conversion done
+    * Output file name: soln0.vtu
+    \endcode
+   \n
+-# We now have the corresponding \c * \c .vtu file
+   \n\n
+   \code
+   biowulf: 11:32:08$ ll
+   total 1024
+   -rw-r--r--    1 mheil    users      329874 May 21 09:19 soln0.dat
+   -rw-r--r--    1 mheil    users      705294 May 21 11:16 soln0.vtu
+   \endcode
+   \n
+-# ...which we can visualise with paraview:
+   \n\n
+   \code
+   biowulf: 11:34:08$ paraview --data=soln0.vtu
+   \endcode
+
+
+<hr>
+<hr>
+
+\subsection screenshots Screenshots from the paraview session
+
+Here are a few screenshots from a paraview session, to get you
+started. When paraview starts up you see the following screen:
+ 
+@I w 0.75\textwidth paraview1 " "
+
+Select the "Display" tab...
+
+@I w 0.75\textwidth paraview1_select " "
+
+...and make the data visible:
+
+@I w 0.75\textwidth paraview2_select " "
+
+
+Now choose to colour the plot by the first (and, in the present example,
+only) variable to obtain a contour plot of the solution.
+
+@I w 0.75\textwidth paraview3_select " "
+
+
+Switching to a wireframe representation shows the underlying mesh
+(each element is represented as a 5x5 sub-grid).
+
+@I w 0.75\textwidth paraview4_select " "
+
+<hr>
+<hr>
+
+\section py_mult The oomph-convert and makePvd scripts for multiple files and animations
+
+
+\subsection py_sample_mult An example session
+
+Here is a quick demonstration of \c oomph-convert and \c makePvd
+scripts in action
+
+-# Add \c oomph-lib's bin directory to your path (in the example shown
+   here, \c oomph-lib
+   is installed in the directory \c /home/mheil/version185/oomph): 
+   \n\n
+   \code
+   biowulf: 10:31:50$ PATH=$PATH:/home/mheil/version185/oomph/bin
+   \endcode
+   \n
+-# Here is what's in the current directory at the moment: \c soln?. \c dat are
+   the \c oomph-lib output files that illustrate the progress
+   of the mesh adaptation during
+   <a href="../../poisson/fish_poisson/html/index.html">the adaptive 
+   solution of a Poisson equation in a fish-shaped domain.</a>
+   \n\n
+   \code
+   biowulf: 11:05:10$ ll
+   total 824
+   -rw-r--r--    1 mheil    users        2292 May 21 09:19 soln0.dat
+   -rw-r--r--    1 mheil    users      176776 May 21 09:19 soln1.dat
+   -rw-r--r--    1 mheil    users      278117 May 21 09:19 soln2.dat
+   -rw-r--r--    1 mheil    users      367408 May 21 09:19 soln3.dat
+   \endcode
+   \n
+-# Run \c oomph-convert on all files (the -z option adds zeroes to the
+   numbers -- this is only required if the files are to combined
+   into an animation by paraview)
+   \n\n
+   \code
+   biowulf: 11:16:13$ oomph-convert -z soln*.dat
+
+
+   -- Processing soln0.dat
+   * oomph-convert.py, ver. 20080514
+   Convert from oomph-lib Tecplot format to VTK XML format.
+   Dimension of the problem: 2
+   Plot cells defined
+   Field variables =  1
+   Conversion started
+   Coordinate defined
+   Connectivities defined
+   Offset defined
+   Element types defined
+   Field data defined
+   Conversion done
+   * Output file name: soln00000.vtu
+
+   -- Processing soln1.dat
+   * oomph-convert.py, ver. 20080514
+   Convert from oomph-lib Tecplot format to VTK XML format.
+   Dimension of the problem: 2
+   Plot cells defined
+   Field variables =  1
+   Conversion started
+   Coordinate defined
+   Connectivities defined
+   Offset defined
+   Element types defined
+   Field data defined
+   Conversion done
+   * Output file name: soln00001.vtu
+
+
+
+   [further output suppressed]
+  
+
+
+   \endcode
+   \n
+-# We now have the corresponding \c * \c .vtu files
+   \n\n
+   \code
+   biowulf: 12:37:05$ ll
+   total 2568
+   -rw-r--r--    1 mheil    users        5979 May 21 12:37 soln00000.vtu
+   -rw-r--r--    1 mheil    users      377490 May 21 12:37 soln00001.vtu
+   -rw-r--r--    1 mheil    users      592990 May 21 12:37 soln00002.vtu
+   -rw-r--r--    1 mheil    users      789325 May 21 12:37 soln00003.vtu
+   -rw-r--r--    1 mheil    users        2292 May 21 09:19 soln0.dat
+   -rw-r--r--    1 mheil    users      176776 May 21 09:19 soln1.dat
+   -rw-r--r--    1 mheil    users      278117 May 21 09:19 soln2.dat
+   -rw-r--r--    1 mheil    users      367408 May 21 09:19 soln3.dat
+   \endcode
+   \n
+   These \c * \c .vtu files can be displayed individually
+   as discussed above.
+   \n\n
+-# To produce an animation of the results with paraview, create a \c * \c .pvd 
+   file using \c makePvd
+   \n\n   
+   \code
+   biowulf: 12:40:56$ makePvd soln mysoln.pvd
+   --> File mysoln.pvd created
+   \endcode
+   \n\n
+-# ...and visualise it:
+   \n\n
+   \code
+   biowulf: 12:42:08$ paraview --data=mysoln.pvd  
+   \endcode
+.
+
+<hr>
+<hr>
+
+\subsection screenshots_mult Screenshots from the paraview session
+
+Here's a screenshot from the paraview session: Once the \c * \c .pvd
+file is loaded you can customise the plot style as discussed
+in the previous example, and then use the "play/stop/..." buttons to 
+animate the progress of the mesh adaptation. 
+
+
+@I w 0.75\textwidth paraview_animation_select " "
+
+Paraview allows you to save the animation in an avi file. However, note that
+the file cannot be displayed with 
+<a href="http://xanim.polter.net/">xanim</a>. 
+<a href="http://www.mplayerhq.hu/design7/news.html">mplayer</a>
+seems to do the trick, though. Try it by downloading 
+<a href="../figures/adapt.avi">this animation</a>.
+
+
+ 

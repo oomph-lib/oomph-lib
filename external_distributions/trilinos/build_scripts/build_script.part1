@@ -1,0 +1,56 @@
+#! /bin/bash
+
+#=====================================================
+# Script to install trilinos from tar file.
+# - check if tar file exists. If not do nothing
+# - If it it does, check if the library has already been
+#   installed, else build and install it.
+#=====================================================
+
+
+# Default for install directory
+INSTALL_DIRECTORY=`pwd`/trilinos_default_installation
+
+
+echo -e "\n\n "
+echo "CHECKING IF TRILINOS HAS TO BE INSTALLED"
+echo "========================================="
+echo " " 
+
+# Check if tar file exists
+if [ -e  trilinos-7.0.8.tar.gz ]; then
+
+   echo -e "File trilinos-7.0.8.tar.gz exists in directory \n \n   `pwd`"
+
+else
+
+   echo -e "File trilinos-7.0.8.tar.gz does not exist in directory \n \n    `pwd`"
+   echo -e "\n \n --> I am not building trilinos. \n \n "
+   exit
+
+fi
+
+
+# Check if installed version of trilinos already exists
+if [ -e $INSTALL_DIRECTORY/include ]; then
+
+   echo -e "\n...but trilinos already appears to have been installed "
+   echo -e "because the directory  \n"
+   echo -e "      " $INSTALL_DIRECTORY"/include \n"
+   echo -e "already exists. I'm not installing trilinos again.\n\n"
+   exit
+
+else
+
+  echo -e "\n\n ---> Installing trilinos in \n\n     " $INSTALL_DIRECTORY " \n\n"
+
+fi
+
+
+# Unpack trilinos
+tar xvfz trilinos-7.0.8.tar.gz
+
+cd trilinos-7.0.8
+
+
+# Configure it

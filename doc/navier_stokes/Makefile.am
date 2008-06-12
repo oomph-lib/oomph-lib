@@ -1,0 +1,24 @@
+SUBDIRS = \
+driven_cavity \
+adaptive_driven_cavity \
+circular_driven_cavity \
+three_d_entry_flow \
+osc_ellipse \
+bretherton \
+single_layer \
+two_layer_interface \
+adaptive_interface \
+static_single_layer \
+static_two_layer \
+rayleigh_channel \
+rayleigh_traction_channel \
+spine_channel \
+collapsible_channel \
+algebraic_collapsible_channel \
+channel_with_leaflet \
+turek_flag_non_fsi
+
+
+
+
+
