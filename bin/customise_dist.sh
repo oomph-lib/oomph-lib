@@ -549,6 +549,20 @@ else
 fi
 
 
+#Remove the temporary empty frontal.f and all_arpack_sources.f files
+#that might have been created in the original tree
+#If this is not done the configure scripts thinks that we do have
+#the arpack and hsl sources and builds the wrong thing
+#This is only a problem is one does a make dist and then reruns the autogen
+#stuff, but that could happen
+frontal_file=$orig_dir/external_src/oomph_hsl/frontal.f
+if ( [ -e $frontal_file ] && [ ! -s $frontal_file ] ); then
+   rm $frontal_file; 
+fi; 
+arpack_file=$orig_dir/external_src/oomph_arpack/all_arpack_sources.f
+if ( [ -e $arpack_file ] && [ ! -s $arpack_file ] ); then
+   rm $arpack_file; 
+fi; 
 
 #End the customisation procedure by regenerating the config files
 `pwd`/bin/regenerate_config_files.sh `pwd` 

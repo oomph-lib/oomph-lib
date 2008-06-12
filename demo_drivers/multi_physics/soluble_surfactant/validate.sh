@@ -33,7 +33,7 @@ if test "$1" = "no_python"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/sol_surf.dat.gz \
-    sol_surf.dat  0.2 1.0e-14 >> validation.log
+    sol_surf.dat  0.3 1.0e-14 >> validation.log
 fi
 
 
