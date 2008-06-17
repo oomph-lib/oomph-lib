@@ -89,7 +89,7 @@ functions.
      - <a href="../../the_data_structure/html/classoomph_1_1FD__LU.html"><CODE>FD_LU</CODE></a>: Almost certainly the world's most inefficient solver. 
        It computes the Jacobian matrix by finite differencing the global
        residual vector, without taking any sparsity into account. 
-       Mainly (if ever) used by developers as a last-resort sanity check.  \n\n
+       Mainly used by developers as a last-resort sanity check.  \n\n
      .
   - <b>Iterative solvers:</b> \n\n
      - \c oomph-lib provides its own implementations of various 
@@ -100,7 +100,7 @@ functions.
        to \c CRDoubleMatrix: \n\n
        - <a  href="../../the_data_structure/html/classoomph_1_1GMRES.html"><CODE>GMRES</CODE></a>:
           A Krylov subspace solver for symmetric and non-symmetric
-          linear systems. The memory usage increases during the
+          linear systems. The memory usage increases with each 
           iteration but the iteration can be restarted. \n\n
        - <a href="../../the_data_structure/html/classoomph_1_1BiCGStab.html"><CODE>BiCGStab</CODE></a>:
          A Krylov subspace method for symmetric and non-symmetric
@@ -108,7 +108,8 @@ functions.
          throughout the iteration.\n\n
        - <a  href="../../the_data_structure/html/classoomph_1_1CG.html"><CODE>CG</CODE></a>:
          The classical conjugate gradient method for symmetric
-         positive definite matrices. \n
+         positive definite matrices. The memory requirement remains constant
+         throughout the iteration. \n
        - <a href="../../the_data_structure/html/classoomph_1_1GS.html"><CODE>GS</CODE></a>:
          Gauss-Seidel -- a stationary iterative solver. \n\n
        .
@@ -118,7 +119,7 @@ functions.
        derived from \c oomph-lib's own 
        <a href="../../the_data_structure/html/classoomph_1_1IterativeLinearSolver.html"><CODE>IterativeLinearSolver</CODE></a> base class. \n\n
        - <a href="../../the_data_structure/html/classoomph_1_1HypreSolver.html"><CODE>HypreSolver</CODE></a>: A wrapper to the high-performance linear solvers/preconditioners from the <a href="https://computation.llnl.gov/casc/linear_solvers/sls_hypre.html">Scalable Linear Solvers Project.</A> \n\n
-       - <a href="../../the_data_structure/html/classoomph_1_1TrilinosAztecOOSolver.html"><CODE>TrilinosAztecOOSolver</CODE></a>: A wrapper to the linear solvers/preconditioners from the <a href="http://trilinos.sandia.gov/">Trilinos Project.</a>\n\n
+       - <a href="../../the_data_structure/html/classoomph_1_1TrilinosAztecOOSolver.html"><CODE>TrilinosAztecOOSolver</CODE></a>: A wrapper to the linear solvers from the <a href="http://trilinos.sandia.gov/">Trilinos Project.</a>\n\n
        .
      .
   .
@@ -130,11 +131,11 @@ functions.
   scheduled for "official" inclusion into the library (with
   accompanying tutorials etc) for the next release. \n\n
   - <B>Direct solvers:</B> \n\n
-     - <a href="../../the_data_structure/html/classoomph_1_1SuperLU__dist.html"><CODE>SuperLU_dist</CODE></a>: \c oomph-lib's default parallel linear solver. \n\n
+     - <a href="../../the_data_structure/html/classoomph_1_1SuperLU__dist.html"><CODE>SuperLU_dist</CODE></a>: \c oomph-lib's default parallel linear solver, a wrapper to Demmel, Eistenstat, Gilbert, Li & Liu's sparse direct solver <A HREF="http://crd.lbl.gov/~xiaoye/SuperLU">SuperLU.</A>  \n\n
      .
   - <B>Iterative solvers:</B> \n\n
      - <a href="../../the_data_structure/html/classoomph_1_1HypreSolver.html"><CODE>HypreSolver</CODE></a>: A wrapper to the high-performance linear solvers/preconditioners from the <a href="https://computation.llnl.gov/casc/linear_solvers/sls_hypre.html">Scalable Linear Solvers Project.</A> \n\n
-     - <a href="../../the_data_structure/html/classoomph_1_1TrilinosAztecOOSolver.html"><CODE>TrilinosAztecOOSolver</CODE></a>: A wrapper to the linear solvers/preconditioners from the <a href="http://trilinos.sandia.gov/">Trilinos Project.</a>\n\n
+     - <a href="../../the_data_structure/html/classoomph_1_1TrilinosAztecOOSolver.html"><CODE>TrilinosAztecOOSolver</CODE></a>: A wrapper to the linear solvers from the <a href="http://trilinos.sandia.gov/">Trilinos Project.</a>\n\n
      .
 .
 
@@ -180,8 +181,11 @@ to the problem constructor.
 We note that, by default, \c oomph-lib's \c
 IterativeLinearSolvers perform the preconditioning using 
 the trivial "identity preconditioner". Most Krylov subspace solvers perform
-very poorly without some sort of preconditioning. Problem-specific
-preconditioners may be implemented by deriving them from the
+very poorly without some sort of preconditioning. 
+
+
+
+Specific preconditioners may be implemented by deriving from the
 \c Preconditioner base class, by implementing its two pure virtual functions
 
 \code
@@ -198,6 +202,9 @@ and
 virtual void Preconditioner::setup(Problem *problem_pt, 
                                    DoubleMatrixBase *matrix_pt)=0;
 \endcode
+
+Note that, by default, \c oomph-lib's \c IterativeLinearSolvers 
+employ left preconditioning.
 
 \c oomph-lib provides fully-functional implementations of 
 several general-purpose preconditioners. For instance, the zero-fill-in
@@ -308,7 +315,7 @@ of solvers/preconditioners. Here is a brief overview:
 <b>Hypre solvers</b>
 
 
-The wrappers to Hypre's Krylov subspace solvers are implemented
+The wrappers to Hypre's Krylov subspace and AMG solvers are implemented
 as \c oomph-lib \c LinearSolvers (not \c IterativeLinearSolvers!)  
 so the interfaces for the specification of preconditioners etc.
 differ from those for \c oomph-lib's own \c IterativeLinearSolvers.
@@ -321,7 +328,7 @@ The \c HypreSolver is set like any other \c LinearSolver:
 \until  problem.linear_solver_pt() = hypre_linear_solver_pt;
 
 
-The actual Krylov subspace solver used by the \c HypreSolver is 
+The actual solver used by the \c HypreSolver is 
 specified by passing an enumerated flag (defined as static member 
 data in the \c HypreSolver class) to the solver. For
 instance, \c Hypre's AMG, CG, GMRES and BiCGStab solvers are selected with
@@ -346,7 +353,9 @@ respectively.
 These Krylov subspace methods may then be preconditioned by
 \c Hypre's own (internal) preconditioners, again by specifying the
 method via an enumerated flag. So, to use no preconditioning,
-or to precondition with \c BoomerAMG, \c Euclid or \c ParaSails, set:
+or to precondition with \c BoomerAMG (and AMG-based preconditioner), 
+\c Euclid (an ILU preconditioner) or \c ParaSails (a sparse approximate
+inverse preconditioner), set:
 
 \skipline hypre_linear_solver_pt->internal_preconditioner()=HypreSolver::None;
 
@@ -373,7 +382,7 @@ to build an instance of \c oomph-lib's \c BiCGStab and to use
 the \c HyprePreconditioner as the preconditioner:
 
 \dontinclude HypreSolver_test.cc
-\skipline  Build and insttance of BiCGStab and pass it to the problem
+\skipline  Build and instance of BiCGStab and pass it to the problem
 \until  problem.linear_solver_pt() = oomph_linear_solver_pt;
 
 Now we build an instance of a \c HyprePreconditioner

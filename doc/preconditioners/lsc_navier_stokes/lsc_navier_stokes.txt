@@ -12,7 +12,7 @@ preconditioner.
 \section theory Theory
 
 \c oomph-lib currently provides two types of (LBB-stable)
-Navier-Stokes elements: Taylor-Hood (Q2Q1) and Crouziex-Raviart
+Navier-Stokes elements: Taylor-Hood (Q2Q1) and Crouzeix-Raviart
 (Q2Q-1) elements. These contain two distinct types of degrees of freedom,
 namely the velocities and pressures. 
 
@@ -148,12 +148,12 @@ a few straightforward steps:
    In our problem, we choose \c GMRES as the linear solver: \n\n
    \dontinclude driven_cavity.cc
    \skipline Create oomph-lib
-   \until solver_pt;
+   \until Solver_pt;
    \n\n
 -# <b>Create an instance of the Preconditioner and pass it to the
    IterativeLinearSolver</b> \n\n
    \skipline Set preconditioner
-   \until solver_pt->preconditioner_pt()=prec_pt;
+   \until Solver_pt->preconditioner_pt()=Prec_pt;
    \n\n
 -# <b>Customise the Preconditioner (if required)</b> \n\n
    The behaviour of many preconditioners can be fine-tuned
@@ -177,16 +177,16 @@ a few straightforward steps:
    AMG solver to solve the linear systems involving the  \f$ {\bf P}
    \f$ matrix. 
    \n\n
-   \skipline #ifdef
-   \until static_cast
+   \dontinclude driven_cavity.cc
+   \skipline HAVE_HYPRE
+   \until new HyprePreconditioner;
    \n 
    We set the various solver flags to values that are appropriate
-   for Poisson problems and reduce the number of multigrid cycles to
-   one. This is most easily done by calling a helper
+   for 2D Poisson problems. This is most easily done by calling a helper
    function, defined in the namespace \c Hypre_default_settings:
    \n\n
    \skipline Set parameters
-   \until P_hypre_solver_pt
+   \until  static_cast<HyprePreconditioner*>(P_matrix_preconditioner_pt));
    \n
    Next we specify the \c Preconditioner as the inexact solver
    for the  \f$ {\bf P}
@@ -198,7 +198,7 @@ a few straightforward steps:
    \n\n
    \until }
    \n
-   For modest Reynolds numbers, performing a few multigrid cycles also
+   For modest Reynolds numbers, performing a single multigrid cycle also
    provides a good approximate solver for linear systems involving
    the momentum block, \f$ {\bf F}, \f$ so we repeat the steps
    just listed, using the solver flags assigned in another
@@ -223,7 +223,7 @@ solver/preconditioner combinations.
    performs extremely well, i.e. the solve time increases
    approximately linearly with the number of degrees of freedom.
    \n\n
--# Show that for Croziex-Raviart (Q2Q-1) elements, the use
+-# Show that for Crouzeix-Raviart (Q2Q-1) elements, the use
    of the AMG solver for the pressure Schur complement block
    leads to a very poor performance. 
    \n\n

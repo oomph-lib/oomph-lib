@@ -337,22 +337,20 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
       // solves of these blocks.
 
       // Create internal preconditioners used on Schur block
-      Preconditioner* P_matrix_preconditioner_pt = new HyprePreconditioner;
-
-      HyprePreconditioner* P_hypre_solver_pt =
-       static_cast<HyprePreconditioner*>(P_matrix_preconditioner_pt);
+      HyprePreconditioner* P_matrix_preconditioner_pt = 
+       new HyprePreconditioner;
 
       // Set defaults parameters for use as preconditioner on Poisson-type 
       // problem
       Hypre_default_settings::set_defaults_for_2D_poisson_problem(
-       P_hypre_solver_pt);
+       P_matrix_preconditioner_pt);
 
       // Use Hypre for the Schur complement block
       prec_pt->navier_stokes_preconditioner_pt()->
        set_p_preconditioner(*P_matrix_preconditioner_pt);
 
       // Shut up
-      P_hypre_solver_pt->doc_time()=false;
+      P_matrix_preconditioner_pt->doc_time()=false;
 
 #endif
 

@@ -511,7 +511,7 @@ int main(int argc, char **argv)
  cout << "BiCGStab iterative solver" << endl;
  cout << "-------------------------" << endl;
 
- // Build and insttance of BiCGStab and pass it to the problem
+ // Build and instance of BiCGStab and pass it to the problem
  oomph_linear_solver_pt = new BiCGStab<CRDoubleMatrix>;
 
  problem.linear_solver_pt() = oomph_linear_solver_pt;

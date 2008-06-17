@@ -92,77 +92,24 @@ namespace oomph
 //================================================================
 Problem::~Problem()
 {
-//  // Delete the (global) mesh pointer: This also kills the associated 
-//  // nodes and elements. 
-//  delete Mesh_pt; 
-//  Mesh_pt=0;
 
-//  // Now wipe the submeshes -- careful: their element and node pointers
-//  // still point to nodes and elements that have just been deleted.
-//  // Need to reset their pointers to NULL so the submeshes themselves 
-//  // can be deleted again without any side effects.
+ // Delete the memory assigned for the global time
+ // (it's created on the fly in Problem::add_time_stepper_pt()
+ // so we are entitled to delete it.
+ if (Time_pt!=0)
+  {
+   delete Time_pt; 
+   Time_pt = 0;
+  }
 
-//  // Number of submeshes
-//  unsigned nsub_mesh=Sub_mesh_pt.size();
- 
-//  // Loop over submeshes
-//  for (unsigned imesh=0;imesh<nsub_mesh;imesh++)
-//   {
-   
-//    // NULL the element pointers
-//    unsigned long n_element=Sub_mesh_pt[imesh]->nelement();
-//    for (unsigned long e=0;e<n_element;e++)
-//     {
-//      Sub_mesh_pt[imesh]->element_pt(e)=0;
-//     }
-   
-//    // NULL the node pointers
-//    unsigned long n_node=Sub_mesh_pt[imesh]->nnode();
-//    for (unsigned long n=0;n<n_node;n++)
-//     {
-//      Sub_mesh_pt[imesh]->node_pt(n)=0;
-//     }
-   
-//    // Now the submesh itself can safely be deleted
-//    delete Sub_mesh_pt[imesh];
-//    Sub_mesh_pt[imesh]=0;
-//   }
-
-//  //Find number of time steppers
-//  unsigned n_time_steppers = Time_stepper_pt.size();
-
-//  //Loop over and delete the memory assigned
-//  for(unsigned i=n_time_steppers;i>0;i--)
-//   {
-//    delete Time_stepper_pt[i-1]; Time_stepper_pt[i-1] = 0;
-//   }
-
-//  //Delete the memory assigned for the global time
-//  delete Time_pt; Time_pt = 0;
-
-//  //Find the number of global data values
-//  unsigned Nglobal_data = Global_data_pt.size();
-//  //Loop over and delete the memory assigned
-//  for(unsigned i=Nglobal_data;i>0;i--)
-//   {
-//    delete Global_data_pt[i-1]; Global_data_pt[i-1] = 0;
-//   }
-
-
- // Hang on: If we're not using the default linear solver,
+ // We're not using the default linear solver,
  // somebody else must have built it, so that person 
  // must be in charge of killing it. 
-
  // We can safely delete the defaults, however
  delete Default_linear_solver_pt;
  delete Default_eigen_solver_pt;
  delete Default_assembly_handler_pt;
 
- //Clean up the memory allocated for the linear solver,
- //if it is not the default
- //if(Linear_solver_pt != &Default_LinearSolver){delete Linear_solver_pt;} 
- //Set the pointer to the linear solver to zero
- //Linear_solver_pt = 0;
 }
 
 

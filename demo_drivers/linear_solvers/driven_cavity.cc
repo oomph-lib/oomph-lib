@@ -266,7 +266,6 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem(
    Prec_pt=new NavierStokesLSCPreconditioner;
    Solver_pt->preconditioner_pt()=Prec_pt;
    
-   
 #ifdef HAVE_HYPRE
    
    // By default, the LSC Preconditioner uses SuperLU as
@@ -282,12 +281,9 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem(
     {
      P_matrix_preconditioner_pt = new HyprePreconditioner;
      
-     HyprePreconditioner* P_hypre_solver_pt =
-      static_cast<HyprePreconditioner*>(P_matrix_preconditioner_pt);
-     
      // Set parameters for use as preconditioner on Poisson-type problem
      Hypre_default_settings::set_defaults_for_2D_poisson_problem(
-      P_hypre_solver_pt);
+      static_cast<HyprePreconditioner*>(P_matrix_preconditioner_pt));
 
      // Use Hypre for the Schur complement block
      Prec_pt->set_p_preconditioner(*P_matrix_preconditioner_pt);
