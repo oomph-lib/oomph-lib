@@ -513,23 +513,38 @@ class SuperLU : public LinearSolver
 /// global matrix (i.e. the entire matrix is stored on each processor)
 /// or on blocks of matrix rows that are held on the various processors.
 /// See http://crd.lbl.gov/~xiaoye/SuperLU/
+///
+/// The matrix based interfaces work with CCDoubleMatrix (SuperLU_dist
+/// in global mode) or CRDoubleMatrix and DistributedCRDoubleMatrix
+/// (SuperLU_dist in distributed mode).
 //====================================================================
 class SuperLU_dist : public LinearSolver
 {
+ 
   public:
 
- /// Constructor: By default we use the distributed memory version
- /// in which each processor only certain blocks of rows. 
- /// No doc by default
- SuperLU_dist()
+ /// \short Constructor: By default we use the distributed memory version
+ /// in which each processor holds only certain blocks of rows and 
+ /// set Doc_stat to false.
+ SuperLU_dist() 
   {
-   Store_global_matrix=false;
+   // Set default values and nullify pointers
+   Use_global_solver=false;
+   Distributed_rhs=false;
    Doc_stats=false;
    Suppress_solve=false;
-   Delete_matrix=false;
+   Delete_matrix_data=false;
    Solver_data_pt=0;
-   
-   //First attempt at number of rows for the process grid
+   Global_solve_data_allocated = false;
+   Distributed_solve_data_allocated = false;
+   Ndof_local=0;
+   First_local_dof=0;
+   Value_pt=0;
+   Index_pt=0;
+   Start_pt=0;
+
+   // Find number of rows and columns for the process grid
+   // First guess at number of rows:
    int nprow=int(sqrt(double(MPI_Helpers::Nproc)));
    
    // Does this evenly divide the processor grid?
@@ -539,36 +554,157 @@ class SuperLU_dist : public LinearSolver
      nprow-=1;
     }
    
-   /// Number of rows/columns for process grid
+   /// Store Number of rows/columns for process grid
    Nprow=nprow;
    Npcol=MPI_Helpers::Nproc/Nprow;
   }
 
+ /// Broken copy constructor
+ SuperLU_dist(const SuperLU_dist& dummy) 
+  { 
+   BrokenCopy::broken_copy("SuperLU_dist");
+  } 
+ 
+ /// Broken assignment operator
+ void operator=(const SuperLU_dist&) 
+  {
+   BrokenCopy::broken_assign("SuperLU_dist");
+  }
+
+ ///Destructor, clean up the stored matrices
+ ~SuperLU_dist()
+  {
+   clean_up_memory();
+  }
+ 
+ /// Overload disable resolve so that it cleans up memory too
+ void disable_resolve()
+  {
+   LinearSolver::disable_resolve();
+   clean_up_memory();
+  }
+ 
  /// \short Solver: Takes pointer to problem and returns the results Vector
  /// which contains the solution of the linear system defined by
  /// the problem's fully assembled Jacobian and residual Vector.
  void solve(Problem* const &problem_pt, Vector<double> &result);
 
+
  /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs 
- /// vector and returns the solution of the linear system. 
+ /// vector and returns the solution of the linear system. Problem pointer 
+ /// defaults to NULL and can be omitted. The function returns the global 
+ /// result Vector.
+ /// Note: if Delete_matrix_data is true the function 
+ /// matrix_pt->clean_up_memory() will be used to wipe the matrix data.
  void solve(DoubleMatrixBase* const &matrix_pt,
-            Vector<double> const &rhs,
+            const Vector<double> &rhs,
             Vector<double> &result);
+ 
+ /// \short Resolve the system defined by the last assembled jacobian
+ /// and the specified rhs vector if resolve has been enabled.
+ /// Note: returns the global result Vector.
+ void resolve(const Vector<double> &rhs, Vector<double> &result);
 
+ /// Return the Doc_stats flag
+ bool& doc_stats()
+  {
+   return Doc_stats;
+  }
 
- /// Return the doc_stats flag
- bool& doc_stats() {return Doc_stats;}
+ /// \short returns the time taken to assemble the jacobian matrix and 
+ /// residual vector
+ double jacobian_setup_time()
+  {
+   return Jacobian_setup_time;
+  }
 
- /// \short Return the flag that decides if each processor stores the global
- ///  matrix or only a subset of its rows
- bool& store_global_matrix() {return Store_global_matrix;}
+ /// \short return the time taken to solve the linear system (needs to be 
+ /// overloaded for each linear solver)
+ virtual double linear_solver_solution_time()
+  {
+   return Solution_time;
+  }
+
+  /// \short Sets the MPIProblem based solve function to use the global
+  /// version of SuperLU_DIST (default is to not use the global solver).
+  /// Note: calling this function will delete any distributed solve data.
+  void enable_global_solve() 
+  {
+   if (!Use_global_solver)
+    {
+     clean_up_memory();
+     Use_global_solver=true;
+    }
+  }
+
+  /// \short Sets the MPIProblem based solve function to use the distributed
+  /// version of SuperLU_DIST (default is to use the distributed solver).
+  /// Note: calling this function will delete any global solve data.
+  void enable_distributed_solve() 
+  {
+   if (Use_global_solver)
+    {
+     clean_up_memory();
+     Use_global_solver=false;
+    }
+  }
 
  /// \short Return the flag that decides if we're actually solving the
  /// system or just assembling the Jacobian and the rhs.
  /// (Used only for timing runs, obviously)
- bool& suppress_solve() {return Suppress_solve;}
+ bool &suppress_solve() 
+  {
+   return Suppress_solve;
+  }
+ 
+ /// \short Returns Delete_matrix_data flag. SuperLU_dist needs its own copy 
+ /// of the input matrix, therefore a copy must be made if any matrix 
+ /// used with this solver is to be preserved. If the input matrix can be 
+ /// deleted the flag can be set to true to reduce the amount of memory 
+ /// required, and the matrix data will be wiped using its clean_up_memory()
+ /// function.  Default value is false.
+ bool &delete_matrix_data()
+  {
+   return Delete_matrix_data;
+  }
+ 
+ /// Returns the local number of unknowns in the distributed linear system
+ int ndof_local() {return Ndof_local;}
+
+ /// Returns the total number of unknowns in the linear system
+ int ndof() {return Ndof;}
+
+ /// \short Returns the first local dof number (i.e. matrix row or column
+ /// for this processor
+ int first_local_dof() {return First_local_dof;}
+ 
+  protected:
+
+ /// \short Do the factorisation stage
+ /// Note: if Delete_matrix_data is true the function 
+ /// matrix_pt->clean_up_memory() will be used to wipe the matrix data.
+ void factorise(DoubleMatrixBase* const &matrix_pt);
+  
+ /// \short Do the backsubstitution for SuperLU solver
+ /// Note: returns the global result Vector.
+ void backsub(const Vector<double> &rhs,
+              Vector<double> &result);
+ 
+ /// Clean up the memory allocated by the SuperLU solver
+ void clean_up_memory();
 
   private:
+
+ /// \short Flag that determines whether the MPIProblem based solve function 
+ /// uses the global or distributed version of SuperLU_DIST 
+ /// (default value is false).
+ bool Use_global_solver;
+ 
+ ///  Flag is true if solve data has been generated for a global matrix
+ bool Global_solve_data_allocated;
+
+ ///  Flag is true if solve data has been generated for distributed matrix
+ bool Distributed_solve_data_allocated;
 
  /// Storage for the LU factors and other data required by SuperLU
  void *Solver_data_pt;
@@ -579,22 +715,146 @@ class SuperLU_dist : public LinearSolver
  /// Number of columns for the process grid
  int Npcol;
 
- /// Doc stats?
- bool Doc_stats;
+ /// Info flag for the SuperLU solver
+ int Info;
 
- /// Store global matrix or distributed blocks?
- bool Store_global_matrix;
+ /// The local number of unknowns in the distributed linear system
+ int Ndof_local;
 
+ /// The total number of unknowns in the linear system
+ int Ndof;
+
+ /// The first local index of the matrix for this processor
+ int First_local_dof;
+
+ /// \short The local number of unknowns in the distributed linear system
+ /// held on other processors
+ Vector<int> Ndof_remote;
+ 
+ /// Jacobian setup time
+ double Jacobian_setup_time;
+
+ /// Solution time
+ double Solution_time;
+
+ /// Flag is true if rhs vector is distributed
+ bool Distributed_rhs;
+ 
  /// Suppress solve?
  bool Suppress_solve;
 
- /// \short SuperLU_dist needs its own copy of the input matrix, 
- /// therefore a copy must be made if any matrix passed to this
- /// solver is to be preserved. If the input matrix can be deleted
- /// this flag can be set to true to reduce the amount of memory used.
- bool Delete_matrix;
+ /// Set to true for SuperLU_dist to output statistics (false by default).
+ bool Doc_stats;
+ 
+ /// \short Delete_matrix_data flag. SuperLU_dist needs its own copy 
+ /// of the input matrix, therefore a copy must be made if any matrix 
+ /// used with this solver is to be preserved. If the input matrix can be 
+ /// deleted the flag can be set to true to reduce the amount of memory 
+ /// required, and the matrix data will be wiped using its clean_up_memory()
+ /// function. Default value is false.
+ bool Delete_matrix_data;
 
+ /// Pointer for storage of the matrix values required by SuperLU_DIST
+ double *Value_pt;
+
+ /// \short Pointer for storage of matrix rows or column indices required 
+ /// by SuperLU_DIST
+ int *Index_pt;
+
+ /// \short Pointers for storage of matrix column or row starts 
+ // required by SuperLU_DIST
+ int *Start_pt;
 };
+
+/* //==================================================================== */
+/* /// \short SuperLU_dist_global_matrix solver:  */
+/* /// Wrapper to Demmel, Eistenstat, Gilbert, */
+/* /// Li & Liu's distributed SuperLU solver, either operating on the */
+/* /// global matrix (i.e. the entire matrix is stored on each processor) */
+/* /// or on blocks of matrix rows that are held on the various processors. */
+/* /// See http://crd.lbl.gov/~xiaoye/SuperLU/ */
+/* //==================================================================== */
+/* class SuperLU_dist : public LinearSolver */
+/* { */
+/*   public: */
+
+/*  /// Constructor: By default we use the distributed memory version */
+/*  /// in which each processor only certain blocks of rows.  */
+/*  /// No doc by default */
+/*  SuperLU_dist() */
+/*   { */
+/*    Store_global_matrix=false; */
+/*    Doc_stats=false; */
+/*    Suppress_solve=false; */
+/*    Delete_matrix=false; */
+/*    Solver_data_pt=0; */
+   
+/*    //First attempt at number of rows for the process grid */
+/*    int nprow=int(sqrt(double(MPI_Helpers::Nproc))); */
+   
+/*    // Does this evenly divide the processor grid? */
+/*    while (nprow>1) */
+/*     { */
+/*      if (MPI_Helpers::Nproc%nprow==0) break; */
+/*      nprow-=1; */
+/*     } */
+   
+/*    /// Number of rows/columns for process grid */
+/*    Nprow=nprow; */
+/*    Npcol=MPI_Helpers::Nproc/Nprow; */
+/*   } */
+
+/*  /// \short Solver: Takes pointer to problem and returns the results Vector */
+/*  /// which contains the solution of the linear system defined by */
+/*  /// the problem's fully assembled Jacobian and residual Vector. */
+/*  void solve(Problem* const &problem_pt, Vector<double> &result); */
+
+/*  /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs  */
+/*  /// vector and returns the solution of the linear system.  */
+/*  void solve(DoubleMatrixBase* const &matrix_pt, */
+/*             Vector<double> const &rhs, */
+/*             Vector<double> &result); */
+
+
+/*  /// Return the doc_stats flag */
+/*  bool& doc_stats() {return Doc_stats;} */
+
+/*  /// \short Return the flag that decides if each processor stores the global */
+/*  ///  matrix or only a subset of its rows */
+/*  bool& store_global_matrix() {return Store_global_matrix;} */
+
+/*  /// \short Return the flag that decides if we're actually solving the */
+/*  /// system or just assembling the Jacobian and the rhs. */
+/*  /// (Used only for timing runs, obviously) */
+/*  bool& suppress_solve() {return Suppress_solve;} */
+
+/*   private: */
+
+/*  /// Storage for the LU factors and other data required by SuperLU */
+/*  void *Solver_data_pt; */
+
+/*  /// Number of rows for the process grid  */
+/*  int Nprow; */
+
+/*  /// Number of columns for the process grid */
+/*  int Npcol; */
+
+/*  /// Doc stats? */
+/*  bool Doc_stats; */
+
+/*  /// Store global matrix or distributed blocks? */
+/*  bool Store_global_matrix; */
+
+/*  /// Suppress solve? */
+/*  bool Suppress_solve; */
+
+/*  /// \short SuperLU_dist needs its own copy of the input matrix,  */
+/*  /// therefore a copy must be made if any matrix passed to this */
+/*  /// solver is to be preserved. If the input matrix can be deleted */
+/*  /// this flag can be set to true to reduce the amount of memory used. */
+/*  bool Delete_matrix; */
+
+/* }; */
 
 #endif
 

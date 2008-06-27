@@ -505,12 +505,6 @@ namespace oomph
      
      // Do we want to output results of timings?
      Doc_time = true;
-     
-     // General control paramaters
-     Tolerance = 1e-10;
-     Max_iter = 100;
-     Hypre_method = GMRES;
-     Internal_preconditioner = None;
     }
    
    /// Empty destructor.
@@ -536,7 +530,7 @@ namespace oomph
      clean_up_memory();
     }
    
-   /// Access function to Max_iter
+     /// Access function to Max_iter
    unsigned& max_iter() {return Max_iter;}
    
    /// Access function to Tolerance
@@ -758,6 +752,12 @@ namespace oomph
 
    /// Function to select BoomerAMG as the preconditioner
    void use_BoomerAMG() {Hypre_method=BoomerAMG;}
+   
+   /// Function to set the number of times to apply BoomerAMG
+   void set_amg_iterations(const unsigned& amg_iterations)
+    {
+     Max_iter = amg_iterations;
+    }
    
    /// \short Function to select use of 'simple' AMG smoothers as controlled
    /// by the flag AMG_simple_smoother 

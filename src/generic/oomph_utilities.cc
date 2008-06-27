@@ -313,6 +313,19 @@ namespace MPI_Helpers
  /// Setup the namespace
  void setup()
  {
+  // Check that MPI_Init has been called and throw an error if it's not
+  int flag = 0;
+  MPI_Initialized(&flag);
+  if (!flag)
+   {
+    std::ostringstream error_message_stream;
+    error_message_stream << "MPI_Init must be called before using "
+                         << "MPI_Helpers::setup!!!\n";
+    throw OomphLibError(error_message_stream.str(),
+                        "MPI_Helpers::setup()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }  
+
   // Set the bool to say MPI has been initialised
   // NB: make sure MPI_Init is called BEFORE MPI_Helpers::setup()
   MPI_has_been_initialised=true;
@@ -326,12 +339,6 @@ namespace MPI_Helpers
   // Use MPI output modifier: Each processor preceeds its output
   // by its rank
   oomph_info.output_modifier_pt() = &oomph_mpi_output;
-
-  // Change MPI error handler so that error will return
-  // rather than aborting
-//#ifdef PARANOID
-   MPI_Errhandler_set(MPI_COMM_WORLD, MPI_ERRORS_RETURN);
-//#endif
   
  }
 
@@ -503,10 +510,8 @@ namespace MPI_Helpers
 
      MPI_Barrier(MPI_COMM_WORLD);
 
-
     }
   }
-     
 
   
   // Sending/receiving int vectors from all processors
@@ -746,25 +751,6 @@ namespace MPI_Helpers
 
 
 #ifdef OOMPH_HAS_MPI
-//======================================================================
-/// Output MPI error message and abort.
-//======================================================================
-void MPI_Helpers::deal_with_communicator_error(int& mpi_error)
-{
- // switch on output for all processors
- oomph_info.stream_pt() = &std::cout;
- oomph_info.output_modifier_pt() = &oomph_mpi_output;
-
- // print out messages
- char error_message[MPI_MAX_ERROR_STRING];
- int length;
-
- MPI_Error_string(mpi_error, error_message, &length);
- oomph_info << error_message << "\n";
-
- MPI_Abort(MPI_COMM_WORLD, mpi_error);
-}
-
 
 //======================================================================
 /// Broadcast a double Vector from processor "source"  to all
@@ -785,24 +771,17 @@ void MPI_Helpers::broadcast_vector<double>(Vector<double>& x,
   {
    n_long=x.size();
 
-//#ifdef PARANOID
+#ifdef PARANOID
    check_length(n_long);
-//#endif
+#endif
    
    // Convert to int
    n=int(n_long);
   }
  
  // Broadcast to everybody how many entries to expect
- int mpi_error = MPI_Bcast(&n,1,MPI_INT,source,comm);
+ MPI_Bcast(&n,1,MPI_INT,source,comm);
 
-//#ifdef PARANOID
- if (mpi_error != MPI_SUCCESS)
-  {
-   deal_with_communicator_error(mpi_error);
-  }
-//#endif
- 
  // Convert local vector into C-style array
  double* x_bcast=new double[n];
  if (MPI_Helpers::My_rank==source)
@@ -814,15 +793,8 @@ void MPI_Helpers::broadcast_vector<double>(Vector<double>& x,
   }
  
  // Broadcast the array
- mpi_error = MPI_Bcast(x_bcast,n,MPI_DOUBLE,source,comm);
+ MPI_Bcast(x_bcast,n,MPI_DOUBLE,source,comm);
 
-//#ifdef PARANOID
- if (mpi_error != MPI_SUCCESS)
-  {
-   deal_with_communicator_error(mpi_error);
-  }
-//#endif
- 
  // Now convert back into vector (everywhere apart from source)
  if (MPI_Helpers::My_rank!=source)
   {
@@ -858,9 +830,9 @@ void MPI_Helpers::broadcast_vector<int>(Vector<int>& x,
   {
    n_long=x.size();
 
-//#ifdef PARANOID
+#ifdef PARANOID
    check_length(n_long);
-//#endif
+#endif
    
    // Convert to int
    n=int(n_long);
@@ -868,14 +840,7 @@ void MPI_Helpers::broadcast_vector<int>(Vector<int>& x,
 
 
  // Broadcast to everybody how many entries to expect
- int mpi_error = MPI_Bcast(&n,1,MPI_INT,source,comm);
-
-//#ifdef PARANOID
- if (mpi_error != MPI_SUCCESS)
-  {
-   deal_with_communicator_error(mpi_error);
-  }
-//#endif
+ MPI_Bcast(&n,1,MPI_INT,source,comm);
 
  // Convert local vector into C-style array
  int* x_bcast=new int[n];
@@ -888,14 +853,7 @@ void MPI_Helpers::broadcast_vector<int>(Vector<int>& x,
   }
 
  // Broadcast the array
- mpi_error = MPI_Bcast(x_bcast,n,MPI_INT,source,comm);
-
-//#ifdef PARANOID
- if (mpi_error != MPI_SUCCESS)
-  {
-   deal_with_communicator_error(mpi_error);
-  }
-//#endif
+ MPI_Bcast(x_bcast,n,MPI_INT,source,comm);
 
  // Now convert back into vector (everywhere apart from source)
  if (MPI_Helpers::My_rank!=source)
@@ -943,26 +901,12 @@ void  MPI_Helpers::send_vector<double>(const Vector<double>& x,
   }
 
  // Tell the other end how many entries to expect
- int mpi_error = MPI_Send(&n,1,MPI_INT,destination,tag,comm);
+ MPI_Send(&n,1,MPI_INT,destination,tag,comm);
 
- //#ifdef PARANOID
- if (mpi_error != MPI_SUCCESS)
-  {
-   deal_with_communicator_error(mpi_error);
-  }
-//#endif
- 
  // Send the data itself
- mpi_error = MPI_Send(x_send,n,MPI_DOUBLE,destination,tag,comm);
+ MPI_Send(x_send,n,MPI_DOUBLE,destination,tag,comm);
 
- //#ifdef PARANOID
- if (mpi_error != MPI_SUCCESS)
-  {
-   deal_with_communicator_error(mpi_error);
-  }
-//#endif
-
- // delete work array
+  // delete work array
  delete[] x_send;
 }
 
@@ -998,24 +942,10 @@ void MPI_Helpers::send_vector<int>(const Vector<int>& x,
   }
 
  // Tell the other end how many entries to expect
- int mpi_error = MPI_Send(&n,1,MPI_INT,destination,tag,comm);
-
-//#ifdef PARANOID
- if (mpi_error != MPI_SUCCESS)
-  {
-   deal_with_communicator_error(mpi_error);
-  }
-//#endif
+ MPI_Send(&n,1,MPI_INT,destination,tag,comm);
 
  // Send the data itself
- mpi_error = MPI_Send(x_send,n,MPI_INT,destination,tag,comm);
-
-//#ifdef PARANOID
- if (mpi_error != MPI_SUCCESS)
-  {
-   deal_with_communicator_error(mpi_error);
-  }
-//#endif
+ MPI_Send(x_send,n,MPI_INT,destination,tag,comm);
 
  // delete work array
  delete[] x_send;
@@ -1035,27 +965,13 @@ void MPI_Helpers::receive_vector<double>(Vector<double>& x,
  // Find out how many entries to expect
  int n;
  MPI_Status status;
- int mpi_error = MPI_Recv(&n,1,MPI_INT,source,tag,comm,&status);
-
-//#ifdef PARANOID
- if (mpi_error != MPI_SUCCESS)
-  {
-   deal_with_communicator_error(mpi_error);
-  }
-//#endif
+ MPI_Recv(&n,1,MPI_INT,source,tag,comm,&status);
 
  // Prepare C-style array for receiped
  double* x_recv=new double[n];
 
  // Receive the data itself
- mpi_error = MPI_Recv(x_recv,n,MPI_DOUBLE,source,tag,comm,&status);
-
-//#ifdef PARANOID
- if (mpi_error != MPI_SUCCESS)
-  {
-   deal_with_communicator_error(mpi_error);
-  }
-//#endif
+ MPI_Recv(x_recv,n,MPI_DOUBLE,source,tag,comm,&status);
 
  // Copy across
  x.resize(n);
@@ -1083,27 +999,13 @@ void MPI_Helpers::receive_vector<int>(Vector<int>& x,
  // Find out how many entries to expect
  int n;
  MPI_Status status;
- int mpi_error = MPI_Recv(&n,1,MPI_INT,source,tag,comm,&status);
-
-//#ifdef PARANOID
- if (mpi_error != MPI_SUCCESS)
-  {
-   deal_with_communicator_error(mpi_error);
-  }
-//#endif
+ MPI_Recv(&n,1,MPI_INT,source,tag,comm,&status);
 
  // Prepare C-style array for received
  int* x_recv=new int[n];
 
  // Receive the data itself
- mpi_error = MPI_Recv(x_recv,n,MPI_INT,source,tag,comm,&status);
-
-//#ifdef PARANOID
- if (mpi_error != MPI_SUCCESS)
-  {
-   deal_with_communicator_error(mpi_error);
-  }
-//#endif
+ MPI_Recv(x_recv,n,MPI_INT,source,tag,comm,&status);
 
  // Copy across
  x.resize(n);
@@ -1132,24 +1034,10 @@ void  MPI_Helpers::send_matrix<double>(const DenseMatrix<double>& x,
  unsigned long nrow=x.nrow();
 
  // Tell the other end how many rows to expect
- int mpi_error = MPI_Send(&nrow,1,MPI_UNSIGNED_LONG,destination,tag,comm);
-
-//#ifdef PARANOID
- if (mpi_error != MPI_SUCCESS)
-  {
-   deal_with_communicator_error(mpi_error);
-  }
-//#endif
+ MPI_Send(&nrow,1,MPI_UNSIGNED_LONG,destination,tag,comm);
 
  // Tell the other end how many columns to expect
- mpi_error = MPI_Send(&ncol,1,MPI_UNSIGNED_LONG,destination,tag,comm);
-
-//#ifdef PARANOID
- if (mpi_error != MPI_SUCCESS)
-  {
-   deal_with_communicator_error(mpi_error);
-  }
-//#endif
+ MPI_Send(&ncol,1,MPI_UNSIGNED_LONG,destination,tag,comm);
 
  double* x_send=new double[nrow*ncol];
  for (unsigned long i=0;i<nrow;i++)
@@ -1159,15 +1047,9 @@ void  MPI_Helpers::send_matrix<double>(const DenseMatrix<double>& x,
      x_send[i*ncol+j]=x(i,j);
     }
   }
+ 
  // Send the data itself
- mpi_error = MPI_Send(x_send,ncol*nrow,MPI_DOUBLE,destination,tag,comm);
-
-//#ifdef PARANOID
- if (mpi_error != MPI_SUCCESS)
-  {
-   deal_with_communicator_error(mpi_error);
-  }
-//#endif
+ MPI_Send(x_send,ncol*nrow,MPI_DOUBLE,destination,tag,comm);
 
  // delete x_send
  delete[] x_send;
@@ -1189,35 +1071,14 @@ void MPI_Helpers::receive_matrix<double>(DenseMatrix<double>& x,
  unsigned long nrow;
  unsigned long ncol;
  MPI_Status status;
- int mpi_error = MPI_Recv(&nrow,1,MPI_UNSIGNED_LONG,source,tag,comm,&status);
-
-//#ifdef PARANOID
- if (mpi_error != MPI_SUCCESS)
-  {
-   deal_with_communicator_error(mpi_error);
-  }
-//#endif
-
- mpi_error = MPI_Recv(&ncol,1,MPI_UNSIGNED_LONG,source,tag,comm,&status);
-//#ifdef PARANOID
- if (mpi_error != MPI_SUCCESS)
-  {
-   deal_with_communicator_error(mpi_error);
-  }
-//#endif
+ MPI_Recv(&nrow,1,MPI_UNSIGNED_LONG,source,tag,comm,&status);
+ MPI_Recv(&ncol,1,MPI_UNSIGNED_LONG,source,tag,comm,&status);
 
  // Prepare C-style array for receiped
  double* x_recv=new double[nrow*ncol];
 
  // Receive the data itself
- mpi_error = MPI_Recv(x_recv,nrow*ncol,MPI_DOUBLE,source,tag,comm,&status);
-
-//#ifdef PARANOID
- if (mpi_error != MPI_SUCCESS)
-  {
-   deal_with_communicator_error(mpi_error);
-  }
-//#endif 
+ MPI_Recv(x_recv,nrow*ncol,MPI_DOUBLE,source,tag,comm,&status);
 
  // Copy across
  x.resize(nrow,ncol);
@@ -1253,23 +1114,8 @@ void MPI_Helpers::broadcast_matrix<double>(DenseMatrix<double>& x,
   }
 
  // Broadcast to everybody how many entries to expect
- int mpi_error = MPI_Bcast(&nrow,1,MPI_UNSIGNED_LONG,source,comm);
-
-//#ifdef PARANOID
- if (mpi_error != MPI_SUCCESS)
-  {
-   deal_with_communicator_error(mpi_error);
-  }
-//#endif
-
- mpi_error = MPI_Bcast(&ncol,1,MPI_UNSIGNED_LONG,source,comm);
-
-//#ifdef PARANOID
- if (mpi_error != MPI_SUCCESS)
-  {
-   deal_with_communicator_error(mpi_error);
-  }
-//#endif
+ MPI_Bcast(&nrow,1,MPI_UNSIGNED_LONG,source,comm);
+ MPI_Bcast(&ncol,1,MPI_UNSIGNED_LONG,source,comm);
 
  if(ncol!=0 && nrow!=0)
   { 
@@ -1277,24 +1123,17 @@ void MPI_Helpers::broadcast_matrix<double>(DenseMatrix<double>& x,
    double* x_bcast=new double[nrow*ncol];
 
    if(MPI_Helpers::My_rank==source)
-   for (unsigned long i=0;i<nrow;i++)
-    {
-     for (unsigned long j=0;j<ncol;j++)
-      {
-       x_bcast[i*ncol+j]=x(i,j);
-      }
-    }
+    for (unsigned long i=0;i<nrow;i++)
+     {
+      for (unsigned long j=0;j<ncol;j++)
+       {
+        x_bcast[i*ncol+j]=x(i,j);
+       }
+     }
    
    // broadcast the array
-   mpi_error = MPI_Bcast(x_bcast,ncol*nrow,MPI_DOUBLE,source,comm);
+   MPI_Bcast(x_bcast,ncol*nrow,MPI_DOUBLE,source,comm);
 
-//#ifdef PARANOID
-   if (mpi_error != MPI_SUCCESS)
-    {
-     deal_with_communicator_error(mpi_error);
-    }
-//#endif
-   
    // Now convert back into vector (everywhere apart from source)
    if (MPI_Helpers::My_rank!=source)
     {

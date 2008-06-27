@@ -109,7 +109,6 @@ namespace oomph
 
   // Get the blocks and store pointers to them in Block_matrix_pt
   this->get_blocks(cr_matrix_pt, required_blocks, Block_matrix_pt);
-  
 
   // Generate pressure Poisson matrix
   // --------------------------------

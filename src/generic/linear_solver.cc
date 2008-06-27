@@ -742,390 +742,991 @@ void SuperLU::clean_up_memory()
 
 #ifdef OOMPH_HAS_MPI
 
-// The following came from mpi_linear_solvers.cc
-
+//===================================================================
+// Interface to SuperLU_DIST wrapper
+//===================================================================
 extern "C"
 {
-// Interface to distributed SuperLU solver where each processor 
-// holds the entire matrix
-void superlu_dist_global_matrix_bridge(int n, int nnz, 
-                                       double *values, int *rowind, 
-                                       int *column_start,
-                                       double *b, int nprow, 
-                                       int npcol, int doc);
-
-// Interface to distributed SuperLU solver where each processor 
-// holds part of the matrix
-int superlu_dist_distributed_matrix_bridge(int n, int nnz, int nrow,
-                                           int first_row, double *values, 
-                                           int *col_index, int *row_start, 
-                                           double *b, int nprow, int npcol, 
-                                           int doc);
-
-
-}
+ // Interface to distributed SuperLU solver where each processor 
+ // holds the entire matrix
+ void superlu_dist_global_matrix(int opt_flag, int n, int nnz, 
+                                 double *values, int *row_index, 
+                                 int *col_start, double *b, int nprow, 
+                                 int npcol, int doc, void **data, int *info);
  
- //==================================================================
- /// Linear-algebra-type solver: Takes pointer to a matrix and rhs 
- /// vector and returns the solution of the linear system. 
- //==================================================================
- void SuperLU_dist::solve(DoubleMatrixBase* const &matrix_pt,
-                          Vector<double> const &rhs,
-                          Vector<double> &result)
- {
-  // Initialise timer on master
-  double t_start=0;
-  if (MPI_Helpers::My_rank==0)
-   {
-    t_start = MPI_Wtime();
-   }
+ // Interface to distributed SuperLU solver where each processor 
+ // holds part of the matrix
+ void superlu_dist_distributed_matrix(int opt_flag, int n, int nnz_local,
+                                      int nrow_local, int first_row, 
+                                      double *values, int *col_index, 
+                                      int *row_start, double *b,
+                                      int nprow, int npcol, 
+                                      int doc, void **data, int *info);
+}
 
-  //Find the total number of degrees of freedom in the linear system
-  //which is the total number of rows in the matrix 
-  int n = matrix_pt->nrow();
-  
+
+//===================================================================
+/// LU decompose the matrix addressed by matrix_pt using
+/// the SuperLU_DIST solver. The resulting matrix factors are stored 
+/// internally.
+/// Note: if Delete_matrix_data is true the function 
+/// matrix_pt->clean_up_memory() will be used to wipe the matrix data.
+//===================================================================
+void SuperLU_dist::factorise(DoubleMatrixBase* const &matrix_pt)
+{
+ 
+ //Check that we have a square matrix
 #ifdef PARANOID
  int m = matrix_pt->ncol();
- // Check Matrix is square
- if (n!=m)
+ int n = matrix_pt->nrow();
+ if(n != m)
+  {
+   std::ostringstream error_message_stream;
+   error_message_stream << "Can only solve for square matrices\n" 
+                        << "N, M " << n << " " << m << std::endl;
+   
+   throw OomphLibError(error_message_stream.str(),
+                       "SuperLU_dist::factorise()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+ // Make sure any existing factors are deleted
+ clean_up_memory();
+  
+ // Doc (0/1) = (true/false)
+ int doc = !Doc_stats;
+ 
+ // Rset Info
+ Info=0;
+
+ // Is it a DistributedCRDoubleMatrix?
+ if(dynamic_cast<DistributedCRDoubleMatrix*>(matrix_pt))
+  {
+   // Set flag so we know the rhs vector will be distributed
+   Distributed_rhs = true;
+   
+   // Get a cast pointer to the matrix
+   DistributedCRDoubleMatrix* dist_CR_matrix_pt
+    = dynamic_cast<DistributedCRDoubleMatrix*>(matrix_pt);
+   
+   // Find the number of non-zero entries in the matrix
+   const int nnz_local = int(dist_CR_matrix_pt->nnz());
+
+   // Find # of degrees of freedom (variables)
+   Ndof = int(dist_CR_matrix_pt->nrow());
+   
+   // Set the number of local degrees of freedom in the linear system
+   Ndof_local = int(dist_CR_matrix_pt->nrow_local());
+   
+   // Store the local first row index 
+   First_local_dof = int(dist_CR_matrix_pt->first_row());
+   
+   // Set up the pointers to the matrix.
+   // NOTE: these arrays (accessed via value_pt, index_pt and
+   // start_pt) may be modified by the SuperLU_DIST routines, and so 
+   // a copy must be taken if the matrix is to be preserved.
+   
+   // Copy values
+   Value_pt = new double[nnz_local];
+   double* matrix_value_pt = dist_CR_matrix_pt->value();
+   for(int i=0;i<nnz_local;i++) 
+    {
+     Value_pt[i] = matrix_value_pt[i];
+    }
+   
+   // Copy column indices
+   Index_pt = new int[nnz_local];
+   int* matrix_index_pt = dist_CR_matrix_pt->column_index();
+   for (int i=0; i<nnz_local; i++)
+    {
+     Index_pt[i] = matrix_index_pt[i];
+    }
+   
+   // Copy row starts
+   Start_pt = new int[Ndof_local+1];
+   int* matrix_start_pt = dist_CR_matrix_pt->row_start();
+   for (int i=0; i<=Ndof_local; i++)
+    {
+     Start_pt[i] = matrix_start_pt[i];
+    }
+
+   // Now delete the matrix if we are allowed
+   if (Delete_matrix_data==true)
+    {
+     dist_CR_matrix_pt->clean_up_memory();
+    }
+   
+   // Factorize
+   superlu_dist_distributed_matrix(1, Ndof, nnz_local, Ndof_local, 
+                                   First_local_dof, Value_pt, Index_pt, 
+                                   Start_pt, 0, Nprow, Npcol, doc,
+                                   &Solver_data_pt, &Info);
+   
+   // Set up Ndof_remote
+   Ndof_remote.resize(MPI_Helpers::Nproc);
+   MPI_Allgather(&Ndof_local, 1, MPI_INT, 
+                 &Ndof_remote[0], 1, MPI_INT,
+                 MPI_COMM_WORLD);
+   
+   // Record that data is stored
+   Distributed_solve_data_allocated=true;
+  }
+
+ // Or is it a CRDoubleMatrix?
+ else if(dynamic_cast<CRDoubleMatrix*>(matrix_pt))
+  {
+   // Set flag so we know the rhs vector won't be distributed
+   Distributed_rhs = false;
+   
+   // Get a cast pointer to the matrix
+   CRDoubleMatrix* serial_CR_matrix_pt = 
+    dynamic_cast<CRDoubleMatrix*>(matrix_pt);
+
+   // Store # of degrees of freedom (variables)
+   Ndof = int(serial_CR_matrix_pt->nrow());
+   
+   // Construct a DistributionInfo with uniform distribution
+   DistributionInfo distribution(MPI_COMM_WORLD, Ndof); 
+   
+   // Store the number of local degrees of freedom in the linear system
+   Ndof_local = int(distribution.nrow_local());
+   
+   // Store the local first row
+   First_local_dof = int(distribution.first_row());
+
+   // Set up the pointers to the matrix.
+   // NOTE: these arrays (accessed via value_pt, index_pt and
+   // start_pt) may be modified by the SuperLU_DIST routines, and so 
+   // a copy must be taken if the matrix is to be preserved.
+   double* matrix_value_pt = serial_CR_matrix_pt->value();
+   int* matrix_index_pt = serial_CR_matrix_pt->column_index();
+   int* matrix_start_pt = serial_CR_matrix_pt->row_start();
+
+   // Find the local number of non-zero entries in the matrix
+   const int nnz_local = matrix_start_pt[First_local_dof + Ndof_local]
+    - matrix_start_pt[First_local_dof];
+
+   // Find the index of the first entry in the matrix corresponding to
+   // row number First_local_dof
+   const int first_local_index = matrix_start_pt[First_local_dof];
+
+   // Copy values
+   Value_pt = new double[nnz_local]; 
+   Vector<double> value_vec(nnz_local);
+   for(int i=0;i<nnz_local;i++) 
+    {
+     Value_pt[i] = matrix_value_pt[first_local_index+i];
+    }
+   
+   // Copy column indices
+   Index_pt = new int[nnz_local];
+   for (int i=0; i<nnz_local; i++)
+    {
+     Index_pt[i] = matrix_index_pt[first_local_index+i];
+     }
+   
+   // Copy row starts
+   Start_pt = new int[Ndof_local+1];
+   for (int i=0; i<=Ndof_local; i++)
+    {
+     Start_pt[i] = matrix_start_pt[First_local_dof+i]-first_local_index;
+    }
+
+   // Now delete the matrix if we are allowed
+   if (Delete_matrix_data==true)
+    {
+     serial_CR_matrix_pt->clean_up_memory();
+    }
+   
+   // Factorize
+   superlu_dist_distributed_matrix(1, Ndof, nnz_local, Ndof_local, 
+                                   First_local_dof, Value_pt, Index_pt, 
+                                   Start_pt, 0, Nprow, Npcol, doc, 
+                                   &Solver_data_pt, &Info);
+   
+   // Set up Ndof_remote
+   Ndof_remote.resize(MPI_Helpers::Nproc);
+   for (int p=0; p<MPI_Helpers::Nproc; p++)
+    {
+     Ndof_remote[p] = distribution.nrow_local(p);
+    }
+   
+   // Record that data is stored
+   Distributed_solve_data_allocated=true;
+  } 
+
+ // Or is it a CCDoubleMatrix?
+else if(dynamic_cast<CCDoubleMatrix*>(matrix_pt))
+  {
+   // Set flag so we know the rhs vector won't be distributed
+   Distributed_rhs = false;
+   
+   // Get a cast pointer to the matrix
+   CCDoubleMatrix* serial_matrix_pt = dynamic_cast<CCDoubleMatrix*>(matrix_pt);
+   
+   // Find the number of non-zero entries in the matrix
+   const int nnz = int(serial_matrix_pt->nnz());  
+
+   // Find # of degrees of freedom (variables)
+   Ndof = int(serial_matrix_pt->nrow());
+
+   // Find the local number of degrees of freedom in the linear system
+   Ndof_local = Ndof;
+
+   // Set first local index
+   First_local_dof = 0;
+
+   // Set up the pointers to the matrix.
+   // NOTE: these arrays (accessed via value_pt, index_pt and
+   // start_pt) may be modified by the SuperLU_DIST routines, and so 
+   // a copy must be taken if the matrix is to be preserved.
+
+   // Copy values
+   Value_pt = new double[nnz];
+   double* matrix_value_pt = serial_matrix_pt->value();
+   for(int i=0;i<nnz;i++) 
+    {
+     Value_pt[i] = matrix_value_pt[i];
+    }
+   
+   // copy row indices
+   Index_pt = new int[nnz];
+   int* matrix_index_pt = serial_matrix_pt->row_index();
+   for (int i=0; i<nnz; i++)
+    {
+     Index_pt[i] = matrix_index_pt[i];
+    }
+   
+   // copy column starts
+   Start_pt = new int[Ndof_local+1];
+   int* matrix_start_pt = serial_matrix_pt->column_start();
+   for (int i=0; i<=Ndof_local; i++)
+    {
+     Start_pt[i] = matrix_start_pt[i];
+    }
+
+   // Delete the matrix if we are allowed
+   if (Delete_matrix_data==true)
+    {
+     serial_matrix_pt->clean_up_memory();
+    }
+   
+   // do the factorization
+   superlu_dist_global_matrix(1, Ndof, nnz, Value_pt, Index_pt, Start_pt, 
+                              0, Nprow, Npcol, doc, &Solver_data_pt, &Info);
+   
+   // Record that data is stored
+   Global_solve_data_allocated=true;
+  }
+ // Otherwise throw an error
+ else
+  {
+   std::ostringstream error_message_stream;
+   error_message_stream << "SuperLU_dist implemented only for "
+                        << " CCDoubleMatrix, CRDoubleMatrix\n"
+                        << "and DistributedCRDoubleMatrix matrices\n";
+   throw OomphLibError(error_message_stream.str(),
+                       "SuperLU_dist::factorise()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+}
+
+//================================================================
+/// Do the backsubstitution for SuperLU solver
+/// Note: returns the global result Vector.
+//================================================================
+void SuperLU_dist::backsub(const Vector<double> &rhs,
+                           Vector<double> &result)
+{
+#ifdef PARANOID
+ if(Ndof_local != rhs.size())
   {
    throw OomphLibError(
-    "Cannot solve for a non-square matrix",
-    "SuperLU_dist::solve()",
+    "RHS does not have the same distribution as the linear system",
+    "SuperLU_dist::backsub()",
     OOMPH_EXCEPTION_LOCATION);
-   }
-#endif 
+  }
+#endif
+ 
+ // Doc (0/1) = (true/false)
+ int doc = !Doc_stats;
+ 
+ // Reset Info
+ Info=0;
 
-  //What type of matrix are we dealing with
-  if(dynamic_cast<CCDoubleMatrix*>(matrix_pt))
-   {
-    //Set the internal flag
-    Store_global_matrix = true;
-    //Cast to the matrix
-    CCDoubleMatrix* CC_matrix_pt = 
-     dynamic_cast<CCDoubleMatrix*>(matrix_pt);
+ // Do the backsubsitition phase
+ if (Distributed_solve_data_allocated)
+  {
+   // Vector to hold local result vector
+   Vector<double> result_local(Ndof_local);
 
-    //Find the number of non-zero entries in the matrix
-    //and get pointers to the values, indices and start entries
-    int nnz = CC_matrix_pt->nnz();        
-
-    //Now copy the pointers to the values and indicies into
-    //local storage. 
-    //ALH: Note that this requires that the interface to SuperLU
-    //does NOT delete this memory
-    double *value = CC_matrix_pt->value();
-    int *row_index = CC_matrix_pt->row_index();                           
-    int* column_start = CC_matrix_pt->column_start();
-
-    /// RHS vector
-    double* b=new double[n];
-    
-    // Copy across the values
-    for(int i=0;i<n;i++) {b[i]=rhs[i];}
-     
-    // Doc (0/1) = (true/false)
-    int doc = !Doc_stats;
-    
-    // Distributed SuperLU 
-    superlu_dist_global_matrix_bridge(n, nnz, 
-                                      value, row_index, column_start,
-                                      b, Nprow, Npcol, doc);
-  
-    // Copy b into solution vector
-    for (int i=0;i<n;i++) {result[i]=b[i];}
-
-    //We can now delete b
-    delete[] b; b=0;
-    
-    // Doc time for solve on master
-    if (MPI_Helpers::My_rank==0)
-     {
-      double t_end = MPI_Wtime();
-
-      if(Doc_time)
-       {
-        oomph_info << "Solve time for global SuperLU_dist [sec]: "
-                   << t_end-t_start << std::endl;
-       }
-     }
-   }
-  else if(dynamic_cast<DistributedCRDoubleMatrix*>(matrix_pt))
-   {
-    //Set the internal flag
-    Store_global_matrix = false;
-   
-    //Cast to the matrix
-    DistributedCRDoubleMatrix* dist_CR_matrix_pt
-     = dynamic_cast<DistributedCRDoubleMatrix*>(matrix_pt);
-    
-    //Find the number of non-zero entries in the matrix
-    //and get pointers to the values, indices and start entries
-    int nnz = dist_CR_matrix_pt->nnz();
-
-    // Pointers to pass the matrix values to SuperLU_DIST
-    double* value_pt = 0;
-    int* column_index_pt = 0;
-    int* row_start_pt = 0;
-
-    /// RHS vector
-    double *b = new double[n];
-
-    // Copy across the rhs values
-    for(int i=0;i<n;i++) {b[i]=rhs[i];}
-     
-    // Doc (0/1) = (true/false)
-    int doc = !Doc_stats;
-   
-    // Find the number of rows and the index of the first row
-    // stored in this part of the distributed matrix
-    int n_row_local = dist_CR_matrix_pt->nrow_local();
-    int first_row = dist_CR_matrix_pt->first_row();
-
-    // Distributed SuperLU
-    // Note that the arrays accessed via value_pt, column index_pt and
-    // row_start_pt can be modified by the routine
-      
-    // If we can delete the input matrix then simply
-    // pass pointers to the matrix
-    if (Delete_matrix==true)
-     {
-      // Get pointers to the matrix and pass these to 
-      // the SuperLU_DIST interface
-      value_pt = dist_CR_matrix_pt->value();
-      column_index_pt = dist_CR_matrix_pt->column_index();
-      row_start_pt = dist_CR_matrix_pt->row_start();
-     }
-    // Otherwise we must copy the matrix values
-    else
-     {
-      // copy values
-      value_pt = new double[nnz];
-      double* matrix_value_pt = dist_CR_matrix_pt->value();
-      for(int i=0;i<nnz;i++) 
-       {
-        value_pt[i] = matrix_value_pt[i];
-       }
-      
-      // copy column indices
-      column_index_pt = new int[nnz];
-      int* matrix_column_index_pt = dist_CR_matrix_pt->column_index();
-      for (int i=0; i<nnz; i++)
-       {
-        column_index_pt[i] = matrix_column_index_pt[i];
-       }
-
-      // copy row starts
-      row_start_pt = new int[n+1];
-      int* matrix_row_start_pt = dist_CR_matrix_pt->row_start();
-      for (int i=0; i<=n; i++)
-       {
-        row_start_pt[i] = matrix_row_start_pt[i];
-       }
-     } // end of setting up pointers to the matrix
-      
-    // Distributed SuperLU
-    //Note that the allocated pointers value, column index and row
-    //start are killed by the routine
-    superlu_dist_distributed_matrix_bridge(n, nnz, n_row_local, first_row,
-                                           value_pt, column_index_pt,
-                                           row_start_pt, b, Nprow, Npcol, doc);
-
-    // Distributed SuperLU - new routine which will be operational once
-    //                       Jonathan has ironed out the bugs
-    //                       (in superlu_dist.c)
-//      int opt=1;
-//     superlu_dist_distributed_matrix(opt, n, nnz, n_row_local, first_row,
-//                                     value_pt, column_index_pt, row_start_pt,
-//                                     b, Nprow, Npcol, doc, &Solver_data_pt);
-//     opt=2;
-//     superlu_dist_distributed_matrix(opt, n, nnz, n_row_local, first_row,
-//                                     value_pt, column_index_pt, row_start_pt,
-//                                     b, Nprow, Npcol, doc, &Solver_data_pt);
-    
-//     opt=3;
-//     superlu_dist_distributed_matrix(opt, n, nnz, n_row_local, first_row,
-//                                     value_pt, column_index_pt, row_start_pt,
-//                                     b, Nprow, Npcol, doc, &Solver_data_pt);
-
-    // Delete matrix storage
-    if (Delete_matrix==true)
-     {
-      dist_CR_matrix_pt->clean_up_memory();
-     }
-    else
-     {
-      delete[] column_index_pt;
-      delete[] value_pt;
-      delete[] row_start_pt;
-     }
-
-    // Assemble the solutions from all the partial solutions
-    Vector<double> sol_loc(n_row_local);
-    // Copy b into local solution vector
-    for(int i=0;i<n_row_local;i++) {sol_loc[i]=b[i];}
-
-    //We can now delete b
-    delete[] b; b=0;
-     
-    Vector<double> sol_recv;
-    int sol_ind=0;
-    for(int source=0;source<MPI_Helpers::Nproc;source++)
-     {
-      if(source==MPI_Helpers::My_rank) sol_recv=sol_loc;
-      MPI_Helpers::broadcast_vector(sol_recv,source,MPI_COMM_WORLD);
-      {
-       unsigned long nsol=sol_recv.size();
-       for(unsigned long i=0;i<nsol;i++)
-        {
-         result[sol_ind]=sol_recv[i];
-         sol_ind++;
-        }
-      }
-     }
-
-
-   // Doc time for solve on master
-   if (MPI_Helpers::My_rank==0)
+   // Copy rhs values to result_local
+   if (Distributed_rhs)
     {
-     double t_end = MPI_Wtime();
-
-     if(Doc_time)
+     result_local = rhs;
+    }
+   else
+    {
+     for (int i=0; i<Ndof_local; i++)
       {
-       oomph_info << "Time for distributed SuperLU_dist solve [sec]: "
-                  << t_end-t_start << std::endl;
+       result_local[i] = rhs[i+First_local_dof];
       }
     }
-   }
-  else
-   {
-    //Throw the error only on the master
-    if(MPI_Helpers::My_rank==0)
-     {
-      throw OomphLibError("Matrix must be an MPI matrix",
-                          "SuperLU_dist::solve()",
-                          OOMPH_EXCEPTION_LOCATION);
-     }
-   }
- }
 
+   // Call solver
+   superlu_dist_distributed_matrix(2, Ndof, 0, 0, 0, 0, 0, 0, 
+                                   &result_local[0], Nprow, Npcol, doc, 
+                                   &Solver_data_pt, &Info);
+
+   // generate global results Vector - first set up displacements Vector
+   Vector<int> displacements(MPI_Helpers::Nproc);
+   displacements[0]=0;
+   for (int p=0; p<MPI_Helpers::Nproc-1; p++)
+    {
+     displacements[p+1]=displacements[p]+Ndof_remote[p];
+    }
+   
+   // resize global_vector
+   result.resize(Ndof); 
+
+   // gather the local solution values
+   MPI_Allgatherv(&result_local[0],
+                  Ndof_local,
+                  MPI_DOUBLE,
+                  &result[0],
+                  &Ndof_remote[0],
+                  &displacements[0],
+                  MPI_DOUBLE,
+                  MPI_COMM_WORLD);
+  }
+ else if (Global_solve_data_allocated)
+  {
+   // Allocate storage for the result vector 
+   result.resize(Ndof);
+   
+   // Copy the rhs values to result
+   result = rhs;
+   
+   // Call solver
+   superlu_dist_global_matrix(2, Ndof, 0, 0, 0, 0, &result[0],
+                              Nprow, Npcol, doc, &Solver_data_pt, &Info);
+  }
+ else
+  {
+   throw OomphLibError("The matrix factors have not been stored",
+                       "SuperLU_dist::backsub()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ 
+}
+
+
+//===============================================================
+/// Clean up the memory allocated by the SuperLU_dist solver
+//===============================================================
+void SuperLU_dist::clean_up_memory()
+{
+ //If we have non-zero LU factors stored
+ if(Solver_data_pt!=0)
+  {
+   //Clean up any stored solver data
+
+   // Doc (0/1) = (true/false)
+   int doc = !Doc_stats;
+   
+   // Reset Info flag
+   Info=0;
+   
+   if (Distributed_solve_data_allocated)
+    {
+     superlu_dist_distributed_matrix(3, Ndof, 0, 0, 0, 0, 0, 0, 0, 
+                                     Nprow, Npcol, doc, &Solver_data_pt, 
+                                     &Info);
+     Distributed_solve_data_allocated = false;
+    }
+   if (Global_solve_data_allocated)
+    {
+     superlu_dist_global_matrix(3, Ndof, 0, 0, 0, 0, 0,
+                                Nprow, Npcol, doc, &Solver_data_pt, &Info);
+     Global_solve_data_allocated = false;
+    }
+   
+   Solver_data_pt=0;
+   Ndof_local=0;
+   Ndof=0;
+ 
+   // Delete internal copy of the matrix
+   delete[] Value_pt;
+   delete[] Index_pt;
+   delete[] Start_pt;
+   Value_pt=0;
+   Index_pt=0;
+   Start_pt=0;
+  }
+}
+
+
+//=========================================================================
+/// Linear-algebra-type solver: Takes pointer to a matrix and rhs 
+/// vector and returns the solution of the linear system. Problem pointer 
+/// defaults to NULL and can be omitted. The function returns the global 
+/// result Vector.
+/// Note: if Delete_matrix_data is true the function 
+/// matrix_pt->clean_up_memory() will be used to wipe the matrix data.
+//=========================================================================
+void SuperLU_dist::solve(DoubleMatrixBase* const &matrix_pt,
+                         const Vector<double> &rhs,
+                         Vector<double> &result)
+{
+ // Initialise timer
+ double t_start = MPI_Wtime();
+
+ //Factorise the matrix
+ factorise(matrix_pt);
+ 
+ //Now do the back solve
+ backsub(rhs,result);
+
+ // Doc time for solve
+ double t_end = MPI_Wtime();
+ Solution_time = t_end-t_start;
+ 
+ if ((Doc_time) && (MPI_Helpers::My_rank==0))
+  {
+   if (Global_solve_data_allocated)
+    {
+     oomph_info << "Time for global SuperLU_dist solve [sec]       : "
+                << t_end-t_start << std::endl;
+    }
+   else
+    {
+     oomph_info << "Time for distributed SuperLU_dist solve [sec]  : "
+                << t_end-t_start << std::endl;
+    }
+  }
+ 
+ // If we are not storing the solver data for resolves, delete it
+ if (!Enable_resolve) 
+  {
+   clean_up_memory();
+  }
+}
 
 //==================================================================
 /// Solver: Takes pointer to problem and returns the results Vector
 /// which contains the solution of the linear system defined by
 /// the problem's fully assembled Jacobian and residual Vector.
 //==================================================================
-void SuperLU_dist::solve(Problem* const &problem_pt,
-                         Vector<double> &result)
+void SuperLU_dist::solve(Problem* const &problem_pt, Vector<double> &result)
 {
- // Initialise timer on master
- double t_start=0;
- if (MPI_Helpers::My_rank==0)
-  {
-   t_start = MPI_Wtime();
-  }
-
- // Upcast problem pointer to MPIProblem
- // No need to do this any more, MPIProblem incorporated into Problem
-// MPIProblem* mpi_problem_pt=dynamic_cast<MPIProblem*>(problem_pt);
+ // Initialise timer
+ double t_start = MPI_Wtime();
+  
+ // Take a copy of Delete_matrix_data
+ bool copy_of_Delete_matrix_data = Delete_matrix_data;
  
-// #ifdef PARANOID
-//  if (mpi_problem_pt==0)
-//   {
-//    std::ostringstream error_message;
-//    error_message 
-//     << "Can only use SuperLU_dist_global_matrix solver\n" 
-//     << "for problems that are derived from MPIProblem class" 
-//     << std::endl;
-//    throw OomphLibError(error_message.str(),
-//                        "SuperLU_dist::solve",
-//                        OOMPH_EXCEPTION_LOCATION);   
-//   }
-// #endif
+ // Set Delete_matrix to true
+ Delete_matrix_data = true;
+ 
+ // Use the global version of SuperLU_DIST?
+ if (Use_global_solver)
+  {
+   // Initialise timer
+   double t_start = MPI_Wtime();
 
- //Find # of degrees of freedom (variables)
-// unsigned long n_dof = mpi_problem_pt->ndof();
- unsigned long n_dof = problem_pt->ndof();
-
- // Assembly and solve with the global matrix
- //------------------------------------------
- if (Store_global_matrix)
-  {   
-   //Allocate storage for the residuals vector
-   Vector<double> residuals(n_dof);
-
-   // Initialise timer on master
-   double t_start = 0;
-   if ((Doc_time) && (MPI_Helpers::My_rank==0))
-    {
-     t_start = MPI_Wtime();
-    }
+   // Storage for the residuals vector
+   Vector<double> residuals;
    
-   // Assemble Jacobian
+   // Get the sparse jacobian and residuals of the problem
    CCDoubleMatrix jacobian;
-//   mpi_problem_pt->get_jacobian(residuals, jacobian);
    problem_pt->get_jacobian(residuals, jacobian);
    
-   // Doc time for setup on master
+   // Doc time for setup
+   double t_end = MPI_Wtime();
+   Jacobian_setup_time = t_end-t_start;
    if ((Doc_time) && (MPI_Helpers::My_rank==0))
     {
-     double t_end = MPI_Wtime();
-
-     oomph_info << "Time to set up global CC Jacobian [sec] : "
-                << t_end-t_start << std::endl;
+     oomph_info << "Time to set up global CC Jacobian [sec]        : "
+                << Jacobian_setup_time << std::endl;
     }
-    
-   //Solve by SuperLU_dist the system Jx = residuals
-   if(!Suppress_solve) {solve(&jacobian,residuals,result);}
+   
+   //Now call the linear algebra solve, if desired
+   if(!Suppress_solve) 
+    {
+     solve(&jacobian,residuals,result);
+    }
   }
- // Assemble and solve with distributed matrix (blocks of rows
- //-----------------------------------------------------------
- // are held on different processors
- //---------------------------------
+ //Otherwise its the distributed solve version
  else
   {
-   //Distributed residuals vector
+   // Initialise timer
+   double t_start = MPI_Wtime();
+
+   // Storage for the residuals vector
    DistributedVector<double> residuals;
-
-   // Initialise timer on master
-   double t_start=0;
-   if ((Doc_time) && (MPI_Helpers::My_rank==0))
-    {
-     t_start = MPI_Wtime();
-     }
-
-   // Setup the distributed, row compressed matrix
+   
+   //Get the sparse jacobian and residuals of the problem
    DistributedCRDoubleMatrix jacobian;
-//   mpi_problem_pt->get_jacobian(residuals, jacobian);
    problem_pt->get_jacobian(residuals, jacobian);
 
-   // Doc time for setup on master
+   // Doc time for setup
+   double t_end = MPI_Wtime();
+   Jacobian_setup_time = t_end-t_start;
    if ((Doc_time) && (MPI_Helpers::My_rank==0))
     {
-     double t_end = MPI_Wtime();
- 
-     oomph_info << "Time to set up distributed CR Jacobian [sec] : "
-                << t_end-t_start << std::endl;
+     oomph_info << "Time to set up distributed CR Jacobian [sec]   : "
+                << Jacobian_setup_time << std::endl;
     }
    
-   //Solve with SuperLU_dist
-   if (!Suppress_solve) {solve(&jacobian,residuals.vector(),result);}
+   //Now call the linear algebra solve, if desired
+   if(!Suppress_solve) 
+    {
+     solve(&jacobian,residuals.vector(),result);
+    }
   }
 
+ // Set Delete_matrix back to original value
+ Delete_matrix_data = copy_of_Delete_matrix_data;
+ 
  // Finalise/doc timings
- if (MPI_Helpers::My_rank==0)
+ if ((Doc_time) && (MPI_Helpers::My_rank==0))
   {
    double t_end = MPI_Wtime();
+   oomph_info << "Total time for SuperLU_dist " << "(np=" 
+              << MPI_Helpers::Nproc << ",N=" << problem_pt->ndof()
+              <<") [sec] : " << t_end-t_start << std::endl;
+  }
+}
 
-   if(Doc_time)
+
+//===============================================================
+/// Resolve the system defined by the last assembled jacobian
+/// and the specified rhs vector if resolve has been enabled.
+/// Note: returns the global result Vector.
+//===============================================================
+void SuperLU_dist::resolve(const Vector<double> &rhs, Vector<double> &result)
+{
+#ifdef PARANOID
+ //Check that a matrix has been factorised and stored
+ if(!Global_solve_data_allocated && !Distributed_solve_data_allocated)
+  {
+   throw OomphLibError("The matrix factors have not been stored",
+                       "SuperLU_dist::resolve()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+ 
+ // Store starting time for solve
+ double t_start = MPI_Wtime();
+ 
+ //Now do the back substitution phase
+ backsub(rhs,result);
+
+ // Doc time for solve
+ double t_end = MPI_Wtime();
+ Solution_time = t_end-t_start;
+ 
+ if ((Doc_time) && (MPI_Helpers::My_rank==0))
+  {
+   if (Global_solve_data_allocated)
     {
-     oomph_info << "Total time for SuperLU_dist "
-                << "(np="<< MPI_Helpers::Nproc<<",N="<<n_dof<<") [sec]: "
+     oomph_info << "Time for global SuperLU_dist solve [sec]: "
+                << t_end-t_start << std::endl;
+    }
+   else
+    {
+     oomph_info << "Time for distributed SuperLU_dist solve [sec]: "
                 << t_end-t_start << std::endl;
     }
   }
 
-
 }
+
+// // The following came from mpi_linear_solvers.cc
+
+// extern "C"
+// {
+// // Interface to distributed SuperLU solver where each processor 
+// // holds the entire matrix
+// void superlu_dist_global_matrix_bridge(int n, int nnz, 
+//                                        double *values, int *rowind, 
+//                                        int *column_start,
+//                                        double *b, int nprow, 
+//                                        int npcol, int doc);
+
+// // Interface to distributed SuperLU solver where each processor 
+// // holds part of the matrix
+// int superlu_dist_distributed_matrix_bridge(int n, int nnz, int nrow,
+//                                            int first_row, double *values, 
+//                                            int *col_index, int *row_start, 
+//                                            double *b, int nprow, int npcol, 
+//                                            int doc);
+
+
+// }
+ 
+//  //==================================================================
+//  /// Linear-algebra-type solver: Takes pointer to a matrix and rhs 
+//  /// vector and returns the solution of the linear system. 
+//  //==================================================================
+//  void SuperLU_dist::solve(DoubleMatrixBase* const &matrix_pt,
+//                           Vector<double> const &rhs,
+//                           Vector<double> &result)
+//  {
+//   // Initialise timer on master
+//   double t_start=0;
+//   if (MPI_Helpers::My_rank==0)
+//    {
+//     t_start = MPI_Wtime();
+//    }
+
+//   //Find the total number of degrees of freedom in the linear system
+//   //which is the total number of rows in the matrix 
+//   int n = matrix_pt->nrow();
+  
+// #ifdef PARANOID
+//  int m = matrix_pt->ncol();
+//  // Check Matrix is square
+//  if (n!=m)
+//   {
+//    throw OomphLibError(
+//     "Cannot solve for a non-square matrix",
+//     "SuperLU_dist::solve()",
+//     OOMPH_EXCEPTION_LOCATION);
+//    }
+// #endif 
+
+//   //What type of matrix are we dealing with
+//   if(dynamic_cast<CCDoubleMatrix*>(matrix_pt))
+//    {
+//     //Set the internal flag
+//     Store_global_matrix = true;
+//     //Cast to the matrix
+//     CCDoubleMatrix* CC_matrix_pt = 
+//      dynamic_cast<CCDoubleMatrix*>(matrix_pt);
+
+//     //Find the number of non-zero entries in the matrix
+//     //and get pointers to the values, indices and start entries
+//     int nnz = CC_matrix_pt->nnz();        
+
+//     //Now copy the pointers to the values and indicies into
+//     //local storage. 
+//     //ALH: Note that this requires that the interface to SuperLU
+//     //does NOT delete this memory
+//     double *value = CC_matrix_pt->value();
+//     int *row_index = CC_matrix_pt->row_index();                           
+//     int* column_start = CC_matrix_pt->column_start();
+
+//     /// RHS vector
+//     double* b=new double[n];
+    
+//     // Copy across the values
+//     for(int i=0;i<n;i++) {b[i]=rhs[i];}
+     
+//     // Doc (0/1) = (true/false)
+//     int doc = !Doc_stats;
+    
+//     // Distributed SuperLU 
+//     superlu_dist_global_matrix_bridge(n, nnz, 
+//                                       value, row_index, column_start,
+//                                       b, Nprow, Npcol, doc);
+  
+//     // Copy b into solution vector
+//     for (int i=0;i<n;i++) {result[i]=b[i];}
+
+//     //We can now delete b
+//     delete[] b; b=0;
+    
+//     // Doc time for solve on master
+//     if (MPI_Helpers::My_rank==0)
+//      {
+//       double t_end = MPI_Wtime();
+
+//       if(Doc_time)
+//        {
+//         oomph_info << "Solve time for global SuperLU_dist [sec]: "
+//                    << t_end-t_start << std::endl;
+//        }
+//      }
+//    }
+//   else if(dynamic_cast<DistributedCRDoubleMatrix*>(matrix_pt))
+//    {
+//     //Set the internal flag
+//     Store_global_matrix = false;
+   
+//     //Cast to the matrix
+//     DistributedCRDoubleMatrix* dist_CR_matrix_pt
+//      = dynamic_cast<DistributedCRDoubleMatrix*>(matrix_pt);
+    
+//     //Find the number of non-zero entries in the matrix
+//     //and get pointers to the values, indices and start entries
+//     int nnz = dist_CR_matrix_pt->nnz();
+
+//     // Pointers to pass the matrix values to SuperLU_DIST
+//     double* value_pt = 0;
+//     int* column_index_pt = 0;
+//     int* row_start_pt = 0;
+
+//     /// RHS vector
+//     double *b = new double[n];
+
+//     // Copy across the rhs values
+//     for(int i=0;i<n;i++) {b[i]=rhs[i];}
+     
+//     // Doc (0/1) = (true/false)
+//     int doc = !Doc_stats;
+   
+//     // Find the number of rows and the index of the first row
+//     // stored in this part of the distributed matrix
+//     int n_row_local = dist_CR_matrix_pt->nrow_local();
+//     int first_row = dist_CR_matrix_pt->first_row();
+
+//     // Distributed SuperLU
+//     // Note that the arrays accessed via value_pt, column index_pt and
+//     // row_start_pt can be modified by the routine
+      
+//     // If we can delete the input matrix then simply
+//     // pass pointers to the matrix
+//     if (Delete_matrix==true)
+//      {
+//       // Get pointers to the matrix and pass these to 
+//       // the SuperLU_DIST interface
+//       value_pt = dist_CR_matrix_pt->value();
+//       column_index_pt = dist_CR_matrix_pt->column_index();
+//       row_start_pt = dist_CR_matrix_pt->row_start();
+//      }
+//     // Otherwise we must copy the matrix values
+//     else
+//      {
+//       // copy values
+//       value_pt = new double[nnz];
+//       double* matrix_value_pt = dist_CR_matrix_pt->value();
+//       for(int i=0;i<nnz;i++) 
+//        {
+//         value_pt[i] = matrix_value_pt[i];
+//        }
+      
+//       // copy column indices
+//       column_index_pt = new int[nnz];
+//       int* matrix_column_index_pt = dist_CR_matrix_pt->column_index();
+//       for (int i=0; i<nnz; i++)
+//        {
+//         column_index_pt[i] = matrix_column_index_pt[i];
+//        }
+
+//       // copy row starts
+//       row_start_pt = new int[n+1];
+//       int* matrix_row_start_pt = dist_CR_matrix_pt->row_start();
+//       for (int i=0; i<=n; i++)
+//        {
+//         row_start_pt[i] = matrix_row_start_pt[i];
+//        }
+//      } // end of setting up pointers to the matrix
+      
+//     // Distributed SuperLU
+//     //Note that the allocated pointers value, column index and row
+//     //start are killed by the routine
+//     superlu_dist_distributed_matrix_bridge(n, nnz, n_row_local, first_row,
+//                                            value_pt, column_index_pt,
+//                                            row_start_pt, b, Nprow, Npcol, doc);
+
+//     // Distributed SuperLU - new routine which will be operational once
+//     //                       Jonathan has ironed out the bugs
+//     //                       (in superlu_dist.c)
+// //      int opt=1;
+// //     superlu_dist_distributed_matrix(opt, n, nnz, n_row_local, first_row,
+// //                                     value_pt, column_index_pt, row_start_pt,
+// //                                     b, Nprow, Npcol, doc, &Solver_data_pt);
+// //     opt=2;
+// //     superlu_dist_distributed_matrix(opt, n, nnz, n_row_local, first_row,
+// //                                     value_pt, column_index_pt, row_start_pt,
+// //                                     b, Nprow, Npcol, doc, &Solver_data_pt);
+    
+// //     opt=3;
+// //     superlu_dist_distributed_matrix(opt, n, nnz, n_row_local, first_row,
+// //                                     value_pt, column_index_pt, row_start_pt,
+// //                                     b, Nprow, Npcol, doc, &Solver_data_pt);
+
+//     // Delete matrix storage
+//     if (Delete_matrix==true)
+//      {
+//       dist_CR_matrix_pt->clean_up_memory();
+//      }
+//     else
+//      {
+//       delete[] column_index_pt;
+//       delete[] value_pt;
+//       delete[] row_start_pt;
+//      }
+
+//     // Assemble the solutions from all the partial solutions
+//     Vector<double> sol_loc(n_row_local);
+//     // Copy b into local solution vector
+//     for(int i=0;i<n_row_local;i++) {sol_loc[i]=b[i];}
+
+//     //We can now delete b
+//     delete[] b; b=0;
+     
+//     Vector<double> sol_recv;
+//     int sol_ind=0;
+//     for(int source=0;source<MPI_Helpers::Nproc;source++)
+//      {
+//       if(source==MPI_Helpers::My_rank) sol_recv=sol_loc;
+//       MPI_Helpers::broadcast_vector(sol_recv,source,MPI_COMM_WORLD);
+//       {
+//        unsigned long nsol=sol_recv.size();
+//        for(unsigned long i=0;i<nsol;i++)
+//         {
+//          result[sol_ind]=sol_recv[i];
+//          sol_ind++;
+//         }
+//       }
+//      }
+
+
+//    // Doc time for solve on master
+//    if (MPI_Helpers::My_rank==0)
+//     {
+//      double t_end = MPI_Wtime();
+
+//      if(Doc_time)
+//       {
+//        oomph_info << "Time for distributed SuperLU_dist solve [sec]: "
+//                   << t_end-t_start << std::endl;
+//       }
+//     }
+//    }
+//   else
+//    {
+//     //Throw the error only on the master
+//     if(MPI_Helpers::My_rank==0)
+//      {
+//       throw OomphLibError("Matrix must be an MPI matrix",
+//                           "SuperLU_dist::solve()",
+//                           OOMPH_EXCEPTION_LOCATION);
+//      }
+//    }
+//  }
+
+
+// //==================================================================
+// /// Solver: Takes pointer to problem and returns the results Vector
+// /// which contains the solution of the linear system defined by
+// /// the problem's fully assembled Jacobian and residual Vector.
+// //==================================================================
+// void SuperLU_dist::solve(Problem* const &problem_pt,
+//                          Vector<double> &result)
+// {
+//  // Initialise timer on master
+//  double t_start=0;
+//  if (MPI_Helpers::My_rank==0)
+//   {
+//    t_start = MPI_Wtime();
+//   }
+
+//  // Upcast problem pointer to MPIProblem
+//  // No need to do this any more, MPIProblem incorporated into Problem
+// // MPIProblem* mpi_problem_pt=dynamic_cast<MPIProblem*>(problem_pt);
+ 
+// // #ifdef PARANOID
+// //  if (mpi_problem_pt==0)
+// //   {
+// //    std::ostringstream error_message;
+// //    error_message 
+// //     << "Can only use SuperLU_dist_global_matrix solver\n" 
+// //     << "for problems that are derived from MPIProblem class" 
+// //     << std::endl;
+// //    throw OomphLibError(error_message.str(),
+// //                        "SuperLU_dist::solve",
+// //                        OOMPH_EXCEPTION_LOCATION);   
+// //   }
+// // #endif
+
+//  //Find # of degrees of freedom (variables)
+// // unsigned long n_dof = mpi_problem_pt->ndof();
+//  unsigned long n_dof = problem_pt->ndof();
+
+//  // Assembly and solve with the global matrix
+//  //------------------------------------------
+//  if (Store_global_matrix)
+//   {   
+//    //Allocate storage for the residuals vector
+//    Vector<double> residuals(n_dof);
+
+//    // Initialise timer on master
+//    double t_start = 0;
+//    if ((Doc_time) && (MPI_Helpers::My_rank==0))
+//     {
+//      t_start = MPI_Wtime();
+//     }
+   
+//    // Assemble Jacobian
+//    CCDoubleMatrix jacobian;
+// //   mpi_problem_pt->get_jacobian(residuals, jacobian);
+//    problem_pt->get_jacobian(residuals, jacobian);
+   
+//    // Doc time for setup on master
+//    if ((Doc_time) && (MPI_Helpers::My_rank==0))
+//     {
+//      double t_end = MPI_Wtime();
+
+//      oomph_info << "Time to set up global CC Jacobian [sec] : "
+//                 << t_end-t_start << std::endl;
+//     }
+    
+//    //Solve by SuperLU_dist the system Jx = residuals
+//    if(!Suppress_solve) {solve(&jacobian,residuals,result);}
+//   }
+//  // Assemble and solve with distributed matrix (blocks of rows
+//  //-----------------------------------------------------------
+//  // are held on different processors
+//  //---------------------------------
+//  else
+//   {
+//    //Distributed residuals vector
+//    DistributedVector<double> residuals;
+
+//    // Initialise timer on master
+//    double t_start=0;
+//    if ((Doc_time) && (MPI_Helpers::My_rank==0))
+//     {
+//      t_start = MPI_Wtime();
+//      }
+
+//    // Setup the distributed, row compressed matrix
+//    DistributedCRDoubleMatrix jacobian;
+// //   mpi_problem_pt->get_jacobian(residuals, jacobian);
+//    problem_pt->get_jacobian(residuals, jacobian);
+
+//    // Doc time for setup on master
+//    if ((Doc_time) && (MPI_Helpers::My_rank==0))
+//     {
+//      double t_end = MPI_Wtime();
+ 
+//      oomph_info << "Time to set up distributed CR Jacobian [sec] : "
+//                 << t_end-t_start << std::endl;
+//     }
+   
+//    //Solve with SuperLU_dist
+//    if (!Suppress_solve) {solve(&jacobian,residuals.vector(),result);}
+//   }
+
+//  // Finalise/doc timings
+//  if (MPI_Helpers::My_rank==0)
+//   {
+//    double t_end = MPI_Wtime();
+
+//    if(Doc_time)
+//     {
+//      oomph_info << "Total time for SuperLU_dist "
+//                 << "(np="<< MPI_Helpers::Nproc<<",N="<<n_dof<<") [sec]: "
+//                 << t_end-t_start << std::endl;
+//     }
+//   }
+
+
+// }
 
 #endif
 

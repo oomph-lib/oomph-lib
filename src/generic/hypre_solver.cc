@@ -45,6 +45,9 @@ namespace oomph
   void set_defaults_for_2D_poisson_problem(
    HyprePreconditioner* hypre_preconditioner_pt)
   {
+   // Set iterations to 1
+   hypre_preconditioner_pt->set_amg_iterations(1);
+
    // Use simple smoother
    hypre_preconditioner_pt->amg_using_simple_smoothing();
    

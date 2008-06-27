@@ -582,7 +582,7 @@ void KirchhoffLoveShellEquations::get_energy(double& pot_en, double& kin_en)
 
  // Setup storage for various quantities
  Vector<double> veloc(n_dim);
- Vector<double> interpolated_xi(n_lagrangian,0.0);
+ Vector<double> interpolated_xi(n_lagrangian);
  DenseMatrix<double> interpolated_A(n_lagrangian,n_dim);
  DenseMatrix<double> interpolated_dAdxi(3);
  
@@ -612,6 +612,10 @@ void KirchhoffLoveShellEquations::get_energy(double& pot_en, double& kin_en)
       {
        interpolated_dAdxi(i,j) = 0.0;
       }
+    }
+   for(unsigned j=0;j<n_lagrangian;j++)
+    {
+     interpolated_xi[j] = 0.0;
     }
    
    //Calculate velocity and derivatives
