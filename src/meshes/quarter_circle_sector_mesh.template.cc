@@ -707,7 +707,7 @@ setup_algebraic_node_update()
     ref_value[3]=s_tl[0];
 
     // Setup algebraic update for node: Pass update information
-    static_cast<AlgebraicNode*>(el_pt->node_pt(jnod))->
+    dynamic_cast<AlgebraicNode*>(el_pt->node_pt(jnod))->
      add_node_update_info(
       Central_box,       // enumerated ID
       this,              // mesh
@@ -793,7 +793,7 @@ setup_algebraic_node_update()
       ref_value[4]=s_wall[0];
 
       // Setup algebraic update for node: Pass update information
-      static_cast<AlgebraicNode*>(el_pt->node_pt(jnod))->
+      dynamic_cast<AlgebraicNode*>(el_pt->node_pt(jnod))->
        add_node_update_info(
         Lower_right_box,        // enumerated ID
         this,                   // mesh
@@ -878,7 +878,7 @@ setup_algebraic_node_update()
       ref_value[4]=s_wall[0]; 
       
       // Setup algebraic update for node: Pass update information
-      static_cast<AlgebraicNode*>(el_pt->node_pt(jnod))->
+      dynamic_cast<AlgebraicNode*>(el_pt->node_pt(jnod))->
        add_node_update_info(
         Upper_left_box,         // Enumerated ID
         this,                   // mesh

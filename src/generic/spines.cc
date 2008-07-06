@@ -122,7 +122,7 @@ void SpineMesh::node_update(const bool& update_all_solid_nodes)
 #endif
    
    //Need to cast to spine node to get to update function
-   static_cast<SpineNode*>(Node_pt[l])->node_update();
+   dynamic_cast<SpineNode*>(Node_pt[l])->node_update();
   }
 }
 

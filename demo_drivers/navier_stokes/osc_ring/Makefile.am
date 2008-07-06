@@ -2,7 +2,7 @@
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 # Name of executables
-check_PROGRAMS=osc_ring_alg osc_ring_macro
+check_PROGRAMS=osc_ring_alg  osc_ring_macro
 
 # Sources for first executable
 osc_ring_alg_SOURCES = osc_ring_alg.cc

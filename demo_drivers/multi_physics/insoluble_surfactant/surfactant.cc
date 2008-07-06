@@ -298,9 +298,9 @@ protected:
      }
    }
 
-   //Call the generic finite difference routine to handle the spine variables
+   //Call the generic routine to handle the spine variables
    SpineElement<FaceGeometry<ELEMENT> >::
-    fill_in_jacobian_from_geometric_data_by_fd(jacobian);
+    fill_in_jacobian_from_geometric_data(jacobian);
   }
 
  

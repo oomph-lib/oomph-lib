@@ -187,6 +187,14 @@ public:
  /// Access function to # of Eulerian coordinates
  unsigned ndim() const {return Ndim;}
 
+ /// Set # of Lagrangian and Eulerian coordinates
+ void set_nlagrangian_and_ndim(const unsigned& n_lagrangian,
+                               const unsigned& n_dim) 
+  {
+   NLagrangian=n_lagrangian;
+   Ndim=n_dim;
+  }
+
  /// \short Access function for pointer to time stepper: Null if object is not
  /// time-dependent
  TimeStepper*& time_stepper_pt() {return Geom_object_time_stepper_pt;}

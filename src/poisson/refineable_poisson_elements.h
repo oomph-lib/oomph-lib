@@ -163,7 +163,14 @@ void get_interpolated_values(const Vector<double>&s,  Vector<double>& values)
  void fill_in_generic_residual_contribution_poisson(
   Vector<double> &residuals, DenseMatrix<double> &jacobian, 
   unsigned flag); 
- 
+
+ /// \short Compute derivatives of elemental residual vector with respect
+ /// to nodal coordinates. Overwrites default implementation in 
+ /// FiniteElement base class.
+ /// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
+ virtual void get_dresidual_dnodal_coordinates(RankThreeTensor<double>&
+                                               dresidual_dnodal_coordinates);
+  
 };
 
 

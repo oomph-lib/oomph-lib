@@ -403,8 +403,6 @@ public:
  /// unit normal N (pointing into the fluid!) is actually used
  /// in the computation. 
  void get_load(const Vector<double> &s, 
-//hierher      // const Vector<double> &xi,
-               // const Vector<double> &x, 
                const Vector<double> &N,
                Vector<double> &load)
   {
@@ -529,6 +527,14 @@ public:
    fill_in_generic_residual_contribution_nst(residuals,jacobian,mass_matrix,2);
   }
 
+
+ /// \short Compute derivatives of elemental residual vector with respect
+ /// to nodal coordinates. Overwrites default implementation in 
+ /// FiniteElement base class.
+ /// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
+ virtual void get_dresidual_dnodal_coordinates(RankThreeTensor<double>&
+                                               dresidual_dnodal_coordinates);
+  
  /// Compute vector of FE interpolated velocity u at local coordinate s
  void interpolated_u_nst(const Vector<double> &s, Vector<double>& veloc) const
   {

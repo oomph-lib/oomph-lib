@@ -332,8 +332,8 @@ public PointFluidInterfaceEdgeElement
                                                             jacobian,1);
    //Call generic FD routine for the externals
    this->fill_in_jacobian_from_external_by_fd(jacobian);
-   //Call the generic finite difference routine to handle the spine variables
-   this->fill_in_jacobian_from_geometric_data_by_fd(jacobian);
+   //Call the generic routine to handle the spine variables
+   this->fill_in_jacobian_from_geometric_data(jacobian);
  }
 
  int kinematic_local_eqn(const unsigned &n) 
@@ -379,7 +379,7 @@ public PointFluidInterfaceEdgeElement, public virtual SolidFiniteElement
    fill_in_generic_residual_contribution_contact_edge(residuals,jacobian,1);
    //Call the generic FD routine to get externals
    this->fill_in_jacobian_from_external_by_fd(jacobian);
-   //Call the generic finite difference routine to handle the spine variables
+   //Call the generic finite difference routine to handle the solid variables
    this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
  }
 
@@ -425,8 +425,8 @@ class SpineLineFluidInterfaceEdgeElement : public
                                                             jacobian,1);
    //Call generic FD routine for the externals
    this->fill_in_jacobian_from_external_by_fd(jacobian);
-   //Call the generic finite difference routine to handle the spine variables
-   this->fill_in_jacobian_from_geometric_data_by_fd(jacobian);
+   //Call the generic routine to handle the spine variables
+   this->fill_in_jacobian_from_geometric_data(jacobian);
   }
 
  int kinematic_local_eqn(const unsigned &n) 

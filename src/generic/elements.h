@@ -934,14 +934,12 @@ class FiniteElement : public virtual GeneralisedElement
  /// coordinates have already been constructed.
  virtual void assemble_eulerian_base_vectors(
   const DShape &dpsids, DenseMatrix<double> &interpolated_G) const;
-
+                                   
  /// \short Default return value for required_nvalue(n) which gives the number 
  /// of "data" values required by the element at node n; for example, solving
  /// a Poisson equation would required only one "data" value at each node. The
  /// defaults is set to zero, because a general element is problem-less. 
  static const unsigned Default_Initial_Nvalue;
-
-protected:
 
  /// \short Default value for the tolerance to be used when locating nodes
  /// via local coordinates
@@ -1251,6 +1249,13 @@ protected:
    //Calculate the contributions from the nodal dofs
    fill_in_jacobian_from_nodal_by_fd(full_residuals,jacobian);
   }
+
+ /// \short Compute derivatives of elemental residual vector with respect
+ /// to nodal coordinates. Default implementation by FD can be overwritten
+ /// for specific elements. 
+ /// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
+ virtual void get_dresidual_dnodal_coordinates(RankThreeTensor<double>&
+                                               dresidual_dnodal_coordinates);
 
 public:
 

@@ -304,10 +304,6 @@ class SpineMesh;
 //=====================================================================
 class SpineNode : public Node
 {
-  public:
- 
- /// Function pointer to auxiliary node update function
- typedef void (*AuxNodeUpdateFctPt)(Node*);
 
 
   private:
@@ -326,11 +322,6 @@ class SpineNode : public Node
  /// are multiple node update functions, e.g. in two-layer problems.
  unsigned Node_update_fct_id;
 
- /// \short  Pointer to auxiliary update function -- this 
- /// can be used to update any nodal values following the update
- /// of the nodal position. This is needed e.g. to update the no-slip
- /// condition on moving boundaries. 
- AuxNodeUpdateFctPt Aux_node_update_fct_pt;
  
 public:
 
@@ -339,15 +330,14 @@ public:
  SpineNode(const unsigned &n_dim, const unsigned &n_position_type,
            const unsigned &initial_nvalue) :
   Node(n_dim,n_position_type,initial_nvalue), Spine_pt(0), Fraction(0),
-  Spine_mesh_pt(0), Node_update_fct_id(0), Aux_node_update_fct_pt(0) {}
+  Spine_mesh_pt(0), Node_update_fct_id(0)  {}
 
  ///Unsteady Constructor, initialise pointers to zero
  SpineNode(TimeStepper* const &time_stepper_pt, const unsigned &n_dim,
            const unsigned &n_position_type, 
            const unsigned &initial_nvalue) :
   Node(time_stepper_pt,n_dim,n_position_type,initial_nvalue), Spine_pt(0),
-  Fraction(0), Spine_mesh_pt(0), Node_update_fct_id(0), 
-  Aux_node_update_fct_pt(0)  {}
+  Fraction(0), Spine_mesh_pt(0), Node_update_fct_id(0) {}
 
  /// Access function to spine
  Spine* &spine_pt() {return Spine_pt;}
@@ -357,15 +347,6 @@ public:
 
  /// Access function to ID of node update function (within specific mesh)
  unsigned& node_update_fct_id() {return Node_update_fct_id;}
-
- /// \short Set pointer to auxiliary update function -- this 
- /// can be used to update any nodal values following the update
- /// of the nodal position. This is needed e.g. to update the no-slip
- /// condition on moving boundaries. 
- void set_auxiliary_node_update_fct_pt(AuxNodeUpdateFctPt 
-                                       aux_node_update_fct_pt) 
-  {Aux_node_update_fct_pt=aux_node_update_fct_pt;}
-
 
  /// \short Access function to Pointer to SpineMesh that this node is a part of
  /// and which implements the node update function(s)
@@ -480,7 +461,7 @@ public:
    if(n >= n_node)
     {
      std::ostringstream error_message;
-     error_message << "Range Error:  Node number " << s
+     error_message << "Range Error:  Node number " << n
                    << " is not in the range (0,"
                    << n_node-1 << ")";
      throw OomphLibError(error_message.str(),
@@ -591,8 +572,8 @@ public:
                          OOMPH_EXCEPTION_LOCATION);
     } 
 #endif
-   //Return a static cast to the pointer to the node
-   return (static_cast<SpineNode*>(Node_pt[n]));
+   //Return a cast to the pointer to the node
+   return (dynamic_cast<SpineNode*>(Node_pt[n]));
   }
 
  /// \short Return the n-th local SpineNode in element e.
@@ -623,7 +604,7 @@ public:
     }
 #endif
    //Return a cast to the node pointer
-   return(static_cast<SpineNode*>(
+   return(dynamic_cast<SpineNode*>(
            dynamic_cast<FiniteElement*>(Element_pt[e])->node_pt(n)));
   }
  

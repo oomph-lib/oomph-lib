@@ -53,18 +53,13 @@ class MacroElementNodeUpdateNode : public Node
 
 public:
 
- /// Function pointer to auxiliary update function. Argument is the
- /// pointer to the node whose position gets updated.
- typedef void(*AuxNodeUpdateFctPt)(Node*);
- 
  /// \short Constructor for steady node of spatial 
  /// dimension n_dim, with n_position_type generalised coordinates
  /// and with initial_nvalue dofs.
  MacroElementNodeUpdateNode(const unsigned &n_dim, 
                             const unsigned &n_position_type, 
                             const unsigned &initial_nvalue) :
-  Node(n_dim,n_position_type,initial_nvalue),
-  Aux_node_update_fct_pt(0)
+  Node(n_dim,n_position_type,initial_nvalue)
   {
    // By default, only the nodal position is updated and no auxiliary
    // updates of function values are performed.
@@ -77,8 +72,7 @@ public:
                             const unsigned &n_dim, 
                             const unsigned &n_position_type, 
                             const unsigned &initial_nvalue) :
-  Node(time_stepper_pt,n_dim,n_position_type,initial_nvalue),
-  Aux_node_update_fct_pt(0)
+  Node(time_stepper_pt,n_dim,n_position_type,initial_nvalue)
   {
    // By default, only the nodal position is updated and no auxiliary
    // updates of function values are performed.
@@ -99,18 +93,6 @@ public:
 
  ///\short Destructor (empty)
  virtual ~MacroElementNodeUpdateNode(){}
- 
-
- /// \short Set pointer to auxiliary node update function -- this 
- /// can be used to update any nodal values following the update
- /// of the nodal position. This is needed e.g. to update the no-slip
- /// condition on moving boundaries. 
- void set_auxiliary_node_update_fct_pt(AuxNodeUpdateFctPt 
-                                       aux_node_update_fct_pt) 
-  {
-   // Set pointer (by default it's set to NULL)
-   Aux_node_update_fct_pt=aux_node_update_fct_pt;
-  }
 
  /// \short Update the current nodal position. If 
  /// required, perform the auxiliary update of nodal values.
@@ -201,12 +183,6 @@ private:
  /// in the node update operation
  Vector<GeomObject*> Geom_object_pt;
  
- /// \short Pointer to auxiliary node update function -- this 
- /// can be used to update any nodal values following the update
- /// of the nodal position. This is needed e.g. to update the no-slip
- /// condition on moving boundaries. 
- AuxNodeUpdateFctPt Aux_node_update_fct_pt;
-
 };
 
 

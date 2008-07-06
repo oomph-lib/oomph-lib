@@ -568,6 +568,7 @@ void KirchhoffLoveShellEquations::get_energy(double& pot_en, double& kin_en)
  const double h_cached = h();
  const double lambda_sq_cached = lambda_sq();
 
+#ifdef PARANOID
  //Check for non-zero prestress
  if( (prestress(0,0)!=0) || (prestress(1,0)!=0) || (prestress(1,1)!=0) )
   {
@@ -579,6 +580,7 @@ void KirchhoffLoveShellEquations::get_energy(double& pot_en, double& kin_en)
                        "KirchhoffLoveShellEquations::get_energy()",
                        OOMPH_EXCEPTION_LOCATION);
   }
+#endif
 
  // Setup storage for various quantities
  Vector<double> veloc(n_dim);
@@ -818,6 +820,168 @@ void KirchhoffLoveShellEquations::get_energy(double& pot_en, double& kin_en)
 
 
 
+//===================================================================
+/// Get integral of instantaneous rate of work done on 
+/// the wall due to the load returned by the virtual 
+/// function load_vector_for_rate_of_work_computation(...). 
+/// In the current class
+/// the latter function simply de-references the external
+/// load but this can be overloaded in derived classes
+/// (e.g. in FSI elements) to determine the rate of work done
+/// by individual constituents of this load (e.g. the fluid load
+/// in an FSI problem). hierher spell out nondimensionalisation
+//===================================================================
+double KirchhoffLoveShellEquations::load_rate_of_work()
+{
+ // Initialise
+ double rate_of_work_integral=0.0;
+ 
+ // The number of dimensions
+ const unsigned n_dim = 3;
+ 
+ // The number of lagrangian coordinates
+ const unsigned n_lagrangian = 2;
+ 
+ // The number of nodes
+ const unsigned n_node = nnode();
+ 
+ // Number of integration points 
+ unsigned n_intpt = integral_pt()->nweight();
+ 
+ //Find out how many positional dofs there are
+ unsigned n_position_type = nnodal_position_type(); 
+ 
+ // Vector to hold local coordinate in element
+ Vector<double> s(n_lagrangian);
+ 
+ // Set up storage for shape functions and derivatives of shape functions
+ Shape psi(n_node, n_position_type);
+ DShape dpsidxi(n_node, n_position_type, n_lagrangian); 
+ 
+ // Storage for jacobian of mapping from local to Lagrangian coords
+ DenseMatrix<double> jacobian(n_lagrangian);
+ 
+ // Storage for velocity vector
+ Vector<double> velocity(n_dim);
+ 
+ // Storage for load vector
+ Vector<double> load(n_dim);
+ 
+ // Storage for normal vector
+ Vector<double> normal(n_dim);
+ 
+ // Storage for Lagrangian and Eulerian coordinates
+ Vector<double> xi(n_lagrangian);
+ Vector<double> x(n_dim);
+ 
+ // Storage for covariant vectors
+ DenseMatrix<double> interpolated_A(n_lagrangian,n_dim);
+ 
+ //Loop over the integration points
+ for (unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   //Get the integral weight
+   double w = integral_pt()->weight(ipt);
+   
+   // Get local coords at knot
+   for(unsigned i=0;i<n_lagrangian;i++)
+    {
+     s[i] = integral_pt()->knot(ipt,i);
+    }
+   
+   // Get shape functions, derivatives, determinant of Jacobian of mapping
+   double J = dshape_lagrangian(s,psi,dpsidxi);
+   
+   // Premultiply the weights and the Jacobian
+   double W = w*J;
+   
+   // Initialise velocity, x and interpolated_A to zero
+   for(unsigned i=0;i<n_dim;i++)
+    {
+     velocity[i]=0.0;
+     x[i]=0.0;
+     for(unsigned j=0;j<n_lagrangian;j++)
+      {                               
+       interpolated_A(j,i) = 0.0;
+      }
+    }
+   
+   // Initialise xi to zero
+   for(unsigned i=0;i<n_lagrangian;i++)
+    {
+     xi[i]=0.0;
+    }
+   
+   // Calculate velocity, coordinates and derivatives
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     // Loop over positional dofs
+     for(unsigned k=0;k<n_position_type;k++)
+      {
+       // Loop over lagrangian coordinate directions
+       for(unsigned i=0;i<n_lagrangian;i++)
+        {
+         xi[i] += lagrangian_position_gen(l,k,i)*psi(l,k);
+        }
+       
+       // Loop over displacement components
+       for(unsigned i=0;i<n_dim;i++)
+        {
+         velocity[i] += dnodal_position_gen_dt(1,l,k,i)*psi(l,k);
+         
+         double x_value = nodal_position_gen(l,k,i);
+         x[i] += x_value*psi(l,k);
+         
+         // Loop over derivative directions
+         for(unsigned j=0;j<n_lagrangian;j++)
+          {                               
+           interpolated_A(j,i) += x_value*dpsidxi(l,k,j);
+          }
+        }
+      }
+    }
+   
+   // Get deformed metric tensor
+   double A[2][2];
+   for(unsigned al=0;al<2;al++)
+    {
+     for(unsigned be=0;be<2;be++)
+      {
+       // Initialise A(al,be) to zero
+       A[al][be] = 0.0;
+       // Calculate the dot product
+       for(unsigned k=0;k<n_dim;k++)
+        {
+         A[al][be] += interpolated_A(al,k)*interpolated_A(be,k);
+        }
+      }
+    }
+   
+   // Get determinant of metric tensor
+   double A_det = A[0][0]*A[1][1] - A[0][1]*A[1][0];
+   
+   // Get outer unit normal
+   get_normal(s,normal);
+   
+   // Get load vector
+   load_vector_for_rate_of_work_computation(ipt, xi, x, normal,load);
+
+   // Local rate of work:
+   double rate_of_work=0.0;
+   for (unsigned i=0;i<n_dim;i++)
+    {
+     rate_of_work+=load[i]*velocity[i];
+    }
+   
+   // Add rate of work
+   rate_of_work_integral+=rate_of_work/h()*W*A_det;
+  }
+ 
+ return rate_of_work_integral;
+}
+
+
+
 
 //===================================================================
 /// The output function
@@ -882,6 +1046,239 @@ void HermiteShellElement::output(FILE* file_pt, const unsigned &n_plot)
 }
 
 
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+
+//=======================================================================
+/// Function used to find the local coordinate s that corresponds to the
+/// "global" intrinsic coordinate zeta (in the element's incarnation
+/// as a GeomObject). For this element, zeta is equal to the Lagrangian
+/// coordinate xi. If the required zeta is located within this
+/// element, geom_object_pt points to "this" element. If zeta
+/// is not located within the element it is set to NULL.
+//======================================================================
+void FSIDiagHermiteShellElement::locate_zeta(const Vector<double> &zeta,
+                                             GeomObject* &geom_object_pt,
+                                             Vector<double> &s)
+{
+
+ // Loop over two coordinate directions
+ for (unsigned i=0;i<2;i++)
+  {
+
+   // It's a "diagonal" element, i.e. the local and global coordinates
+   // are aligned. Determination of zeta[0] and zeta[1] can therefore
+   // be based on the zeta coordinates of nodes 0/1 and 0/2, respectively.
+
+   // Local node number of node with the lo/hi local coordinate in question
+   unsigned lo=0;
+   unsigned hi=1;
+   if (i==0)
+    {
+     //Assumed that the first node has a lower xi[0] coordinate than the second
+     lo=0;
+     hi=1;
+
+     //If the first node has a higher xi then swap
+     if(raw_lagrangian_position(0,i) > raw_lagrangian_position(1,i))
+      {lo = 1; hi=0;}
+    }
+   else
+    {
+     //Assumed that the first node has a lower xi[1] coordinate than the third
+     lo=0;
+     hi=2;
+
+     //If the first node has a higher xi then swap
+     if(raw_lagrangian_position(0,i) > raw_lagrangian_position(2,i))
+      {lo = 2; hi=0;}
+    }
+
+   // Tolerance for finding zeta
+   double epsilon = 1.0e-13;
+
+   //If zeta is not in the element, then return a null pointer
+   //Correct for rounding errors here
+   if((zeta[i] - raw_lagrangian_position(lo,i) < -epsilon) ||
+      (zeta[i] - raw_lagrangian_position(hi,i) > epsilon))
+    {geom_object_pt = 0; return;}
+
+   // Otherwise, zeta is located in this element. For now assume
+   // that the relationship between zeta and s is linear as it will
+   // be for uniform node spacing... We'll trap this further down.
+   // In general we'll need a Newton method here and we'll implement
+   // this as soon as we have an example with non-uniformly spaced
+   // FSIDiagHermiteShellElements...
+
+   //The GeomObject that contains the zeta coordinate is "this":
+   geom_object_pt = this;
+
+
+   //Find the fraction along the element
+   double zeta_fraction = (zeta[i] - raw_lagrangian_position(lo,i))/
+    (raw_lagrangian_position(hi,i) - raw_lagrangian_position(lo,i));
+
+   s[i] = -1.0 + zeta_fraction*2.0;
+
+
+   //Check for rounding error
+   if(s[i] > 1.0) {s[i] = 1.0;}
+   if(s[i] < -1.0) {s[i] = -1.0;}
+
+  }
+
+#ifdef PARANOID
+ // Check if we've really ended where we wanted to be...
+ double epsilon=1.0e-10;
+ Vector<double> zeta_test(2);
+ interpolated_zeta(s,zeta_test);
+ if (sqrt(pow(zeta[0]-zeta_test[0],2)+pow(zeta[0]-zeta_test[0],2))>epsilon)
+  {
+   std::ostringstream error_stream;
+   error_stream
+    << "The zeta coordinates " << zeta_test[0] << " " << zeta_test[1]
+    << " \n"<< " \n"
+    << "computed by interpolated_zeta() for \n"
+    << "s[0]=" << s[0] << " "  << "s[1]=" << s[1] << " \n"
+    << "differ by more than the tolerance ("<< epsilon << ") from \n "
+    << "the required values \n"
+    << zeta_test[0] << " "  << zeta_test[1] << " \n\n"
+    << "You're probably using a mesh with non-uniformly \n "
+    << "spaced  FSIDiagHermiteShellElements. For such cases the root"
+    << "finding in FSIDiagHermiteShellElement::locate_zeta() must be"
+    << "replaced by a proper Newton method or some such thing...\n";
+   OomphLibError(error_stream.str(),
+                 "FSIDiagHermiteShellElement::locate_zeta()",
+                 OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+
+}
+
+
+//=========================================================================
+/// Define the dposition function. This is used to set no-slip boundary
+/// conditions in some FSI problems.
+//=========================================================================
+void FSIDiagHermiteShellElement::
+dposition_dlagrangian_at_local_coordinate(
+ const Vector<double> &s, DenseMatrix<double> &drdxi) const
+{
+#ifdef PARANOID
+ if(Undeformed_midplane_pt==0)
+  {
+   throw
+    OomphLibError(
+     "Undeformed_midplane_pt has not been set",
+     "FSIDiagHermiteShellElement::dposition_dlagrangian_at_local_coordinate()",
+     OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+ //Find the dimension of the global coordinate
+ unsigned n_dim = Undeformed_midplane_pt->ndim();
+
+ //Find the number of lagrangian coordinates
+ unsigned n_lagrangian =  Undeformed_midplane_pt->nlagrangian();
+
+ //Find out how many nodes there are
+ unsigned n_node = nnode();
+
+ //Find out how many positional dofs there are
+ unsigned n_position_type = this->nnodal_position_type();
+
+ //Set up memory for the shape functions
+ Shape psi(n_node,n_position_type);
+ DShape dpsidxi(n_node,n_position_type,n_lagrangian);
+
+ //Get the derivatives of the shape functions w.r.t local coordinates
+ //at this point
+ dshape_lagrangian(s,psi,dpsidxi);
+
+ //Initialise the derivatives to zero
+ drdxi.initialise(0.0);
+
+ //Loop over the nodes
+ for(unsigned l=0;l<n_node;l++)
+  {
+   //Loop over the positional types
+   for(unsigned k=0;k<n_position_type;k++)
+    {
+     //Loop over the dimensions
+     for(unsigned i=0;i<n_dim;i++)
+      {
+       //Loop over the lagrangian coordinates
+       for(unsigned j=0;j<n_lagrangian;j++)
+        {
+         //Add the contribution to the derivative
+         drdxi(j,i) += nodal_position_gen(l,k,i)*dpsidxi(l,k,j);
+        }
+      }
+    }
+  }
+}
+
+
+//=============================================================================
+/// Create a list of pairs for all unknowns in this element,
+/// so that the first entry in each pair contains the global equation
+/// number of the unknown, while the second one contains the number
+/// of the "block" that this unknown is associated with.
+/// (Function can obviously only be called if the equation numbering
+/// scheme has been set up.)
+/// This element is only in charge of the solid dofs.
+//=============================================================================
+void FSIDiagHermiteShellElement::get_block_numbers_for_unknowns(
+ std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
+{
+
+ // temporary pair (used to store block lookup prior to being added to list)
+ std::pair<unsigned long,unsigned> block_lookup;
+
+ // number of nodes
+ const unsigned n_node = this->nnode();
+
+ //Get the number of position dofs and dimensions at the node
+ const unsigned n_position_type = nnodal_position_type();
+ const unsigned nodal_dim = nodal_dimension();
+
+ //Integer storage for local unknown
+ int local_unknown=0;
+
+ //Loop over the nodes
+ for(unsigned n=0;n<n_node;n++)
+  {
+   //Loop over position dofs
+   for(unsigned k=0;k<n_position_type;k++)
+    {
+     //Loop over dimension
+     for(unsigned i=0;i<nodal_dim;i++)
+      {
+       //If the variable is free
+       local_unknown = position_local_eqn(n,k,i);
+
+       // ignore pinned values
+       if (local_unknown >= 0)
+        {
+         // store block lookup in temporary pair: First entry in pair
+         // is global equation number; second entry is block type
+         block_lookup.first = this->eqn_number(local_unknown);
+         block_lookup.second = 0;
+
+         // add to list
+         block_lookup_list.push_front(block_lookup);
+
+        }
+      }
+    }
+  }
+}
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -1235,6 +1632,85 @@ void ClampedHermiteShellBoundaryConditionElement::
     {
      std::cout << "Warning: Max. error between J_via_s J_via_ipt " 
                << max_error << std::endl;
+    }
+  }
+}
+
+//=============================================================================
+/// Create a list of pairs for all unknowns in this element,
+/// so that the first entry in each pair contains the global equation
+/// number of the unknown, while the second one contains the number
+/// of the "block" that this unknown is associated with.
+/// (Function can obviously only be called if the equation numbering
+/// scheme has been set up.)
+/// This element is only in charge of the solid dofs.
+//=============================================================================
+void ClampedHermiteShellBoundaryConditionElement::get_block_numbers_for_unknowns(
+ std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
+{
+
+ // temporary pair (used to store block lookup prior to being added to list)
+ std::pair<unsigned long,unsigned> block_lookup;
+
+ // number of nodes
+ const unsigned n_node = this->nnode();
+
+ //Get the number of position dofs and dimensions at the node
+ const unsigned n_position_type = nnodal_position_type();
+ const unsigned nodal_dim = nodal_dimension();
+
+ //Integer storage for local unknown
+ int local_unknown=0;
+ 
+ //Loop over the nodes
+ for(unsigned n=0;n<n_node;n++)
+  {
+   
+   Node* nod_pt = this->node_pt(n);
+
+   //Loop over position dofs
+   for(unsigned k=0;k<n_position_type;k++)
+    {
+     //Loop over dimension
+     for(unsigned i=0;i<nodal_dim;i++)
+      {
+       //If the variable is free
+       local_unknown = position_local_eqn(n,k,i);
+
+       // ignore pinned values
+       if (local_unknown >= 0)
+        {
+         // store block lookup in temporary pair: First entry in pair
+         // is global equation number; second entry is block type
+         block_lookup.first = this->eqn_number(local_unknown);
+         block_lookup.second = 0;
+
+         // add to list
+         block_lookup_list.push_front(block_lookup);
+
+        }
+      }
+    }
+
+   //Loop over values
+   unsigned n_val=nod_pt->nvalue();
+   for(unsigned j=0;j<n_val;j++)
+    {
+     //If the variable is free
+     local_unknown = nodal_local_eqn(n,j);
+     
+     // ignore pinned values
+     if (local_unknown >= 0)
+      {
+       // store block lookup in temporary pair: First entry in pair
+       // is global equation number; second entry is block type
+       block_lookup.first = this->eqn_number(local_unknown);
+       block_lookup.second = 0;
+       
+       // add to list
+       block_lookup_list.push_front(block_lookup);
+       
+      }
     }
   }
 }

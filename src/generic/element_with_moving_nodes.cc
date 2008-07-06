@@ -28,6 +28,7 @@
 //Functions for the ElementWithMovingNode class
 #include "element_with_moving_nodes.h"
 #include "geom_objects.h"
+#include "algebraic_elements.h"
 
 namespace oomph
 {
@@ -168,12 +169,16 @@ namespace oomph
   //Set the number of data
   const unsigned n_geom_data = ngeom_data();
   
+  // Reset number of geometric dofs
+  Ngeom_dof=0;
+
   //If we have any geometric data
   if(n_geom_data > 0)
    {
     // Work out total number of values involved
     // Initialise from the first object
     unsigned n_total_values = Geom_data_pt[0]->nvalue();
+
     //Add the values from the other data
     for(unsigned i=1;i<n_geom_data;i++)
      {n_total_values += Geom_data_pt[i]->nvalue();}
@@ -189,11 +194,13 @@ namespace oomph
     //return
     if(n_total_values==0) {Geometric_data_local_eqn=0; return;}
     
-    //Resize the storage for the spine local equation numbers
+    //Resize the storage for the geometric data local equation numbers
     //Firstly allocate the row pointers
     Geometric_data_local_eqn = new int*[n_geom_data];
+
     //Now allocate storage for all the equation numbers
     Geometric_data_local_eqn[0] = new int[n_total_values];
+
     //Initially all local equations are unclassified
     for(unsigned i=0;i<n_total_values;i++)
      {Geometric_data_local_eqn[0][i] = Data::Is_unclassified;}
@@ -204,19 +211,19 @@ namespace oomph
       //Initially set the pointer to the i-th row to the pointer
       //to the i-1th row
       Geometric_data_local_eqn[i] = Geometric_data_local_eqn[i-1];
+
       //Now increase the row pointer by the number of values 
       //stored at the i-1th geometric data
       Geometric_data_local_eqn[i] += Geom_data_pt[i-1]->nvalue();
      }
-    
-    
+        
     //A local queue to store the global equation numbers
     std::deque<unsigned long> global_eqn_number_queue;
     
     //Loop over the node update data
     for(unsigned i=0;i<n_geom_data;i++)
      {
-      // Pointer to spine height data
+      // Pointer to geometric Data
       Data* data_pt=Geom_data_pt[i];
       
       // Loop over values at this Data item
@@ -225,14 +232,20 @@ namespace oomph
        {
         // Get global equation number
         long eqn_number=data_pt->eqn_number(j);
+
         //If equation number positive 
         if (eqn_number>=0)
          {
           //Add the global equation number to our queue
           global_eqn_number_queue.push_back(eqn_number);
+
           //Add to local value
           Geometric_data_local_eqn[i][j] = local_eqn_number;
           local_eqn_number++;
+
+          // Bump up number of geometric dofs
+          Ngeom_dof++;
+
          }
         else
          {
@@ -251,30 +264,258 @@ namespace oomph
 
  //==================================================================
  /// Calculate the node-update--related entries in the
- /// Jacobian, using finite differencing. The vector passed
+ /// Jacobian. The vector passed
  /// in residuals has to contain the nonlinear reasiduals
- /// evaluated for the current values of the unknowns.
+ /// evaluated for the current values of the unknowns, in
+ /// case FDing is used to computed the derivatives.
  //==================================================================
- void ElementWithMovingNodes::fill_in_jacobian_from_geometric_data_by_fd(
+ void ElementWithMovingNodes::fill_in_jacobian_from_geometric_data(
   Vector<double> &residuals, DenseMatrix<double> &jacobian)
  {
+
   //Get number of Data items involved in node update operations
   const unsigned n_geometric_data = ngeom_data();
+  
+  //If there is nothing to be done, then leave
+  if(n_geometric_data == 0) return;
+  
+  // Number of dofs
+  const unsigned n_dof = this->ndof();
+    
+  // Number of nodes
+  unsigned n_nod=this->nnode();
+  
+  // If there are no dofs, return
+  if (n_nod==0) return;
+
+  // Get nodal dimension from first node
+  const unsigned dim_nod=node_pt(0)->ndim();
+
+//   std::cout << "[CR residuals] Method_for_shape_derivs " 
+//             << Method_for_shape_derivs << std::endl;
+
+  // How are we going to evaluate the shape derivs?
+  unsigned method=0;
+  if (Method_for_shape_derivs==Shape_derivs_by_direct_fd)
+   {
+    method=0;
+   }
+  else if (Method_for_shape_derivs==Shape_derivs_by_chain_rule)
+   {
+    method=1;
+   }
+  else if (Method_for_shape_derivs==Shape_derivs_by_fastest_method)
+   {
+    // Direct FD-ing of residuals w.r.t. geometric dofs is likely to be faster
+    // if there are fewer geometric dofs than total nodal coordinates
+    // (nodes x dim) in element:
+    if (Ngeom_dof<(n_nod*dim_nod))
+     {
+      method=0;
+     }
+    else
+     {
+      method=1;
+     }
+   }
+
+    
+
+  // Choose method
+  //===============
+  switch(method)
+   {
+
+    // Direct FD:
+    //-----------
+   case 0:
+    
+   {
+    //Create newres vector
+    Vector<double> newres(n_dof);
+    
+    //Use the default finite difference step
+    const double fd_step = GeneralisedElement::Default_fd_jacobian_step;
+        
+    //Integer storage for the local unknown
+    int local_unknown=0;
+    
+    //Loop over the Data items that affect the node update operations
+    for(unsigned i=0;i<n_geometric_data;i++)
+     {
+      //Loop over values
+      unsigned n_value = Geom_data_pt[i]->nvalue();
+      for(unsigned j=0;j<n_value;j++)
+       {
+        local_unknown = geometric_data_local_eqn(i,j);
+        
+        //If the value is free
+        if(local_unknown >= 0)
+         {
+          //Get a pointer to the geometric data value
+          double *value_pt = Geom_data_pt[i]->value_pt(j);
+          
+          //Save the old value
+          double old_var = *value_pt;
+          
+          //Increment the variable
+          *value_pt += fd_step;
+          
+          //Update the whole element (Bit inefficient)
+          this->node_update();
+          
+          //Calculate the new residuals
+          this->get_residuals(newres);
+          
+          //Now do finite differences
+          for(unsigned m=0;m<n_dof;m++)
+           {
+            //Stick the entry into the Jacobian matrix
+            jacobian(m,local_unknown) = (newres[m] - residuals[m])/fd_step;
+           }
+          
+          //Reset the variable
+          *value_pt = old_var;
+          
+          //We're relying on the total node update in the next loop
+         }
+       }
+     }
+    
+    // Node update the element one final time to get things back to
+    // the original state
+    this->node_update();
+   }
+   
+   break;
+   
+   // Chain rule
+   //-----------
+   case 1:
+    
+   {
+    // Get derivatives of residuals w.r.t. all nodal coordinates
+    RankThreeTensor<double> dresidual_dnodal_coordinates(n_dof,
+                                                         dim_nod,
+                                                         n_nod,
+                                                         0.0);
+    
+    // Use FD-version in base class?
+    if (Evaluate_dresidual_dnodal_coordinates_by_fd)
+     {
+      //std::cout << "[CR residuals] use FD" << std::endl; 
+      FiniteElement::get_dresidual_dnodal_coordinates(
+       dresidual_dnodal_coordinates);
+     }
+    // Otherwise use the overloaded analytical version in derived
+    // class (if it exists -- if it doesn't this just drops through
+    // to the default implementation in FiniteElement).
+    else
+     {
+      //std::cout << "[CR residuals] use anal" << std::endl; 
+      this->get_dresidual_dnodal_coordinates(dresidual_dnodal_coordinates);
+     }
+
+    // Get derivatives of nodal coordinates w.r.t. geometric dofs
+    RankThreeTensor<double> dnodal_coordinates_dgeom_dofs(n_dof,
+                                                          dim_nod,
+                                                          n_nod,
+                                                          0.0);
+    get_dnodal_coordinates_dgeom_dofs(dnodal_coordinates_dgeom_dofs);
+
+    // Assemble Jacobian via chain rule
+    for (unsigned l=0;l<n_dof;l++)
+     {
+      //Loop over the Data items that affect the node update operations
+      for(unsigned i_data=0;i_data<n_geometric_data;i_data++)
+       {
+        //Loop over values
+        unsigned n_value = Geom_data_pt[i_data]->nvalue();
+        for(unsigned j_val=0;j_val<n_value;j_val++)
+         {
+          int k = geometric_data_local_eqn(i_data,j_val);
+          
+          //If the value is free
+          if(k >= 0)
+           {
+            jacobian(l,k)=0.0;
+            for (unsigned i=0;i<dim_nod;i++)
+             {
+              for (unsigned j=0;j<n_nod;j++)
+               {
+                jacobian(l,k)+=
+                 dresidual_dnodal_coordinates(l,i,j)*
+                 dnodal_coordinates_dgeom_dofs(k,i,j);
+               }
+             }
+           }
+         }
+       }
+     }
+   }
+   
+   break;
+   
+   default:
+    
+    std::ostringstream error_message;
+    error_message << "Never get here: method " << method;
+    throw OomphLibError(
+     error_message.str(),
+     "ElementWithMovingNodes::fill_in_jacobian_from_geometric_data()",
+     OOMPH_EXCEPTION_LOCATION);
+    
+   }
+
+ }
+
+
+
+//======================================================================
+/// \short Compute derivatives of the nodal coordinates w.r.t. 
+/// to the geometric dofs. Default implementation by FD can be overwritten
+/// for specific elements.
+/// dnodal_coordinates_dgeom_dofs(l,i,j) = dX_{ij} / d s_l
+//======================================================================
+ void ElementWithMovingNodes::get_dnodal_coordinates_dgeom_dofs(
+  RankThreeTensor<double>& dnodal_coordinates_dgeom_dofs)
+ {
+
+  //Get number of Data items involved in node update operations
+  const unsigned n_geometric_data = ngeom_data();
+  
   //If there is nothing to be done, then leave
   if(n_geometric_data == 0) {return;}
   
-  //Create a new residuals Vector
-  const unsigned n_dof = this->ndof();
-  
-  //Create newres vector
-  Vector<double> newres(n_dof);
+  // Number of nodes
+  const unsigned n_nod=nnode();
+
+  // If the element has no nodes (why??!!) return straightaway
+  if (n_nod==0) return;
+
+  // Get dimension from first node
+  unsigned dim_nod=node_pt(0)->ndim();
+
+  // Current and advanced nodal positions
+  DenseMatrix<double> pos(dim_nod,n_nod);
+
+  // Loop over all nodes
+  for (unsigned j=0;j<n_nod;j++)
+   {
+    // Get current position
+    Node* nod_pt=node_pt(j);
+    for (unsigned i=0;i<dim_nod;i++)
+     {
+      pos(i,j)=nod_pt->position(i);
+     }
+   }
   
   //Integer storage for the local unknown
   int local_unknown=0;
   
   //Use the default finite difference step
   const double fd_step = GeneralisedElement::Default_fd_jacobian_step;
-  
+
   //Loop over the Data items that affect the node update operations
   for(unsigned i=0;i<n_geometric_data;i++)
    {
@@ -283,29 +524,33 @@ namespace oomph
     for(unsigned j=0;j<n_value;j++)
      {
       local_unknown = geometric_data_local_eqn(i,j);
+
       //If the value is free
       if(local_unknown >= 0)
        {
-        //Get a pointer to the spine value
+        //Get a pointer to the geometric data value
         double *value_pt = Geom_data_pt[i]->value_pt(j);
+
         //Save the old value
         double old_var = *value_pt;
         
         //Increment the variable
         *value_pt += fd_step;
         
-        //Update the whole element (Bit inefficient)
+        //Update the whole element
         this->node_update();
         
-        //Calculate the new residuals
-        this->get_residuals(newres);
-        
-        //Now do finite differences
-        for(unsigned m=0;m<n_dof;m++)
+        // Do FD: Loop over all nodes
+        for (unsigned jj=0;jj<n_nod;jj++)
          {
-          double sum = (newres[m] - residuals[m])/fd_step;
-          //Stick the entry into the Jacobian matrix
-          jacobian(m,local_unknown) = sum;
+          Node* nod_pt=node_pt(jj);
+
+          // Get advanced position and FD
+          for (unsigned ii=0;ii<dim_nod;ii++)
+           {
+             dnodal_coordinates_dgeom_dofs(local_unknown,ii,jj)=
+              (nod_pt->position(ii)-pos(ii,jj))/fd_step;
+           }
          }
         
         //Reset the variable
@@ -319,7 +564,7 @@ namespace oomph
   // Node update the element one final time to get things back to
   // the original state
   this->node_update();
-  
+
  }
  
 }

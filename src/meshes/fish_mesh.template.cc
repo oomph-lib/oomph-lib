@@ -777,7 +777,7 @@ void AlgebraicFishMesh<ELEMENT>::setup_algebraic_node_update()
       ref_value[2]=-1.0;
       
       // Setup algebraic update for node: Pass update information
-      static_cast<AlgebraicNode*>(el_pt->node_pt(jnod))->
+      dynamic_cast<AlgebraicNode*>(el_pt->node_pt(jnod))->
        add_node_update_info(
         this->Lower_body,      // enumerated ID
         this,                  // mesh
@@ -826,7 +826,7 @@ void AlgebraicFishMesh<ELEMENT>::setup_algebraic_node_update()
       ref_value[2]=-1.0;
       
       // Setup algebraic update for node: Pass update information
-      static_cast<AlgebraicNode*>(el_pt->node_pt(jnod))->
+      dynamic_cast<AlgebraicNode*>(el_pt->node_pt(jnod))->
        add_node_update_info(
         this->Lower_fin,     // enumerated ID
         this,                // mesh
@@ -872,7 +872,7 @@ void AlgebraicFishMesh<ELEMENT>::setup_algebraic_node_update()
       ref_value[2]=1.0;
 
       // Setup algebraic update for node: Pass update information
-      static_cast<AlgebraicNode*>(el_pt->node_pt(jnod))->
+      dynamic_cast<AlgebraicNode*>(el_pt->node_pt(jnod))->
        add_node_update_info(
         this->Upper_body,     // enumerated ID
         this,                // mesh
@@ -918,7 +918,7 @@ void AlgebraicFishMesh<ELEMENT>::setup_algebraic_node_update()
       ref_value[2]=1.0;      
 
       // Setup algebraic update for node: Pass update information
-      static_cast<AlgebraicNode*>(el_pt->node_pt(jnod))->
+      dynamic_cast<AlgebraicNode*>(el_pt->node_pt(jnod))->
        add_node_update_info(
         this->Upper_fin,           // enumerated ID
         this,                // mesh

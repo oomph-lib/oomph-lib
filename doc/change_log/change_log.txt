@@ -113,7 +113,7 @@ void SomeClass::some_function(const unsigned& t, const unsigned& i)
 
   [...]
 
-#ifdef WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES
+ #ifdef WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES
 
    // Throw an oomph-lib warning to alert the user to the change
    // in the oder of the arguments
@@ -121,7 +121,7 @@ void SomeClass::some_function(const unsigned& t, const unsigned& i)
                    "SomeClass::some_function(...)",
                    OOMPH_EXCEPTION_LOCATION);
 
-#endif
+ #endif
 
   [...]
 

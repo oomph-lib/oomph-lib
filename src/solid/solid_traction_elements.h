@@ -436,10 +436,11 @@ fill_in_contribution_to_residuals_solid_traction(Vector<double> &residuals)
  FSISolidTractionElement(FiniteElement* const &element_pt, 
                          const int &face_index) : 
   SolidTractionElement<ELEMENT>(element_pt,face_index), 
-  GeomObject(DIM-1,DIM), FSIWallElement(DIM-1,DIM), 
   Normal_points_into_fluid(true)
   {
-
+   unsigned n_lagr=DIM-1;
+   unsigned n_dim=DIM;
+   setup_fsi_wall_element(n_lagr,n_dim);
 #ifdef PARANOID
    Boundary_number_in_bulk_mesh_has_been_set = false;
 #endif

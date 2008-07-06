@@ -80,7 +80,7 @@ void MacroElementNodeUpdateNode::node_update(bool update_all_time_levels_for_new
    unsigned nmaster=hanging_pt()->nmaster();
    for (unsigned imaster=0;imaster<nmaster;imaster++)
     {
-     static_cast<MacroElementNodeUpdateNode*>(hanging_pt()->
+     dynamic_cast<MacroElementNodeUpdateNode*>(hanging_pt()->
                                           master_node_pt(imaster))
       ->node_update(update_all_time_levels_for_new_node);
     }

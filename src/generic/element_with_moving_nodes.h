@@ -38,6 +38,17 @@
 
 namespace oomph
 {
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+
  
  //=======================================================================
  /// \short A policy class that serves to establish the 
@@ -63,8 +74,18 @@ namespace oomph
 {
   public:
 
- ///Empty constructor 
- ElementWithMovingNodes() : Geometric_data_local_eqn(0) {}
+ /// Public enumeration to choose method for computing shape derivatives
+ enum{Shape_derivs_by_chain_rule,
+       Shape_derivs_by_direct_fd,
+       Shape_derivs_by_fastest_method};
+       
+ ///Constructor 
+ ElementWithMovingNodes() : Geometric_data_local_eqn(0) , 
+  Evaluate_dresidual_dnodal_coordinates_by_fd(false),
+  Method_for_shape_derivs(Shape_derivs_by_direct_fd) // hierher: temp fix
+  // until Navier-Stokes works. Should really use this:
+  // Method_for_shape_derivs(Shape_derivs_by_fastest_method) 
+  {}
  
  /// Broken copy constructor
  ElementWithMovingNodes(const ElementWithMovingNodes&) 
@@ -88,10 +109,8 @@ namespace oomph
     }
   }
 
- /// \short Return pointer to the i-th Data item that the element's 
- /// shape depends on 
- //Data* geom_data_pt(const unsigned& i) {return Geom_data_pt[i];}
-
+ /// Number of geometric dofs 
+ unsigned ngeom_dof() const {return Ngeom_dof;}
 
  /// \short Return the local equation number corresponding to the i-th
  /// value at the n-th geometric data object.
@@ -102,11 +121,11 @@ namespace oomph
    if(n >= n_data)
     {
      std::ostringstream error_message;
-     error_message << "Range Error:  Data number " << s
+     error_message << "Range Error:  Data number " << n
                    << " is not in the range (0,"
                    << n_data-1 << ")";
      throw OomphLibError(error_message.str(),
-                         "SpineElement::geometric_data_local_eqn()",
+                         "ElementWithMovingNodes::geometric_data_local_eqn()",
                          OOMPH_EXCEPTION_LOCATION);
     }
    else
@@ -115,11 +134,11 @@ namespace oomph
      if(i >= n_value)
       {
        std::ostringstream error_message;
-       error_message << "Range Error: value " << i << " at data " << s 
+       error_message << "Range Error: value " << i << " at data " << n
                      << " is not in the range (0,"
                      << n_value -1 << ")";
        throw OomphLibError(error_message.str(),
-                           "SpineElement::geometric_data_local_eqn()",
+                           "ElementWithMovingNodes::geometric_data_local_eqn()",
                            OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -129,8 +148,8 @@ namespace oomph
    if(Geometric_data_local_eqn==0)
     {
      throw OomphLibError(
-      "Spine local equation numbers have not been allocated",
-      "SpineElement::geometric_data_local_eqn()",
+      "Geometric data local equation numbers have not been allocated",
+      "ElementWithMovingNodes::geometric_data_local_eqn()",
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -141,9 +160,10 @@ namespace oomph
  ///Return a set of all geometric data associated with the element
  void assemble_set_of_all_geometric_data(std::set<Data*> &unique_geom_data_pt);
  
-/// \short Specify Data that affects the geometry of the element 
-/// by filling in the entris of the set  to the set.
-/// (This functionality is required in FSI problems). 
+ /// \short Specify Data that affects the geometry of the element 
+ /// by adding the element's geometric Data to the set that's passed in.
+ /// (This functionality is required in FSI problems; set is used to
+ /// avoid double counting). 
  void identify_geometric_data(std::set<Data*> &geometric_data_pt) 
   {
    //Loop over the node update data and add to the set
@@ -154,36 +174,76 @@ namespace oomph
     }
   }
 
+ /// \short Access to boolean which decides if shape derivatives are to be 
+ /// evaluated by fd (using FiniteElement::get_dresidual_dnodal_coordinates())
+ /// or analytically, using the overloaded version of this function
+ /// that may have been implemented in a derived class. 
+ bool& evaluate_dresidual_dnodal_coordinates_by_fd() 
+  {return Evaluate_dresidual_dnodal_coordinates_by_fd;}
 
+
+ /// Evaluate shape derivatives by direct finite differencing
+ void evaluate_shape_derivs_by_direct_fd()
+  {
+   Method_for_shape_derivs=Shape_derivs_by_direct_fd;
+  }
+
+ /// Evaluate shape derivatives by chain rule
+ void evaluate_shape_derivs_by_chain_rule()
+  {
+   Method_for_shape_derivs=Shape_derivs_by_chain_rule;
+  }
+
+ /// Evaluate shape derivatives by (anticipated) fastest method
+ void evaluate_shape_derivs_by_fastest_method()
+  {
+   Method_for_shape_derivs=Shape_derivs_by_fastest_method;
+  }
+
+
+ /// Access to method (enumerated flag) for determination of shape derivs
+ int& method_for_shape_derivs() {return Method_for_shape_derivs;}
+ 
   protected:
+
+ /// \short Compute derivatives of the nodal coordinates w.r.t. 
+ /// to the geometric dofs. Default implementation by FD can be overwritten
+ /// for specific elements. 
+ /// dnodal_coordinates_dgeom_dofs(l,i,j) = dX_{ij} / d s_l
+ virtual void get_dnodal_coordinates_dgeom_dofs(RankThreeTensor<double>& 
+                                                dnodal_coordinates_dgeom_dofs);
 
  /// Construct the vector of (unique) geometric data
  void complete_setup_of_dependencies();
 
-/// Assign local equation numbers for the spines in the element
+/// Assign local equation numbers for the geometric Data in the element
  virtual void assign_all_generic_local_eqn_numbers();
 
- ///Calculate the contributions to the jacobian matrix from the
- ///geometric data using finite differences. This version
- ///assumes that the (full) residuals vector has already been calculated
- void fill_in_jacobian_from_geometric_data_by_fd(
+ /// \short Calculate the contributions to the Jacobian matrix from the
+ /// geometric data. This version
+ /// assumes that the (full) residuals vector has already been calculated
+ /// and is passed in as the first argument -- needed in case
+ /// the derivatives are computed by FD. 
+ void fill_in_jacobian_from_geometric_data(
   Vector<double> &residuals, DenseMatrix<double> &jacobian);
 
- ///Calculate the contributions to the jacobian matrix from the
- ///geometric data using finite differences. This version computes
- ///the residuals vector before calculating the jacobian terms
- void fill_in_jacobian_from_geometric_data_by_fd(DenseMatrix<double> &jacobian)
+ ///Calculate the contributions to the Jacobian matrix from the
+ ///geometric data. This version computes
+ ///the residuals vector before calculating the Jacobian terms
+ void fill_in_jacobian_from_geometric_data(DenseMatrix<double> &jacobian)
   {
    //Allocate storage for the residuals
    const unsigned n_dof = ndof();
    Vector<double> residuals(n_dof);
+
    //Get the residuals for the entire element
    get_residuals(residuals);
+
    //Call the jacobian calculation
-   fill_in_jacobian_from_geometric_data_by_fd(residuals,jacobian);
+   fill_in_jacobian_from_geometric_data(residuals,jacobian);
   }
 
- 
+
  /// \short Vector that stores pointers to all Data that affect the 
  /// node update operations, i.e. the variables that can affect
  /// the position of the node. 
@@ -197,16 +257,29 @@ private:
 
 
  /// \short Array to hold local eqn number information for the
- /// Spine variables
+ /// geometric Data variables
  int **Geometric_data_local_eqn;
 
+ /// \short Number of geometric dofs (computed on the fly when
+ /// equation numbers are set up)
+ unsigned Ngeom_dof;
 
+ /// \short Boolean to decide if shape derivatives are to be evaluated
+ /// by fd (using FiniteElement::get_dresidual_dnodal_coordinates())
+ /// or analytically, using the overloaded version of this function
+ /// in this class.
+ bool Evaluate_dresidual_dnodal_coordinates_by_fd;
+
+ /// Choose method for evaluation of shape derivatives
+ /// (this takes one of the values in the enumeration)
+ int Method_for_shape_derivs;
 
 };
 
 
 //===============================================================
-/// Specific implementation of the class
+/// Specific implementation of the class for specified element
+/// and node type.
 //==============================================================
 template<class ELEMENT,class NODE_TYPE>
  class ElementWithSpecificMovingNodes : public ELEMENT,
@@ -217,7 +290,7 @@ template<class ELEMENT,class NODE_TYPE>
  /// Constructor, call the constructor of the base element
  ElementWithSpecificMovingNodes() : ELEMENT(), ElementWithMovingNodes() {}
  
- /// Constructor used for spine face elements
+ /// Constructor used for face elements
  ElementWithSpecificMovingNodes(FiniteElement* const &element_pt, 
                                 const int &face_index) : 
   ELEMENT(element_pt, face_index), ElementWithMovingNodes() {}
@@ -226,10 +299,11 @@ template<class ELEMENT,class NODE_TYPE>
  ~ElementWithSpecificMovingNodes() {} 
 
 
- /// Overload the node assignment routine to assign spine nodes
+ /// \short Overload the node assignment routine to assign nodes of the
+ /// appropriate type.
  Node* construct_node(const unsigned &n)
   {
-   //Assign a spine node to the local node pointer
+   //Assign a node to the local node pointer
    //The dimension and number of values are taken from internal element data
    //The number of timesteps to be stored comes from the problem!
    this->node_pt(n) = 
@@ -254,10 +328,10 @@ template<class ELEMENT,class NODE_TYPE>
    return this->node_pt(n);
   }
 
- /// Overload the node assignment routine to assign spine boundary nodes
+ /// Overload the node assignment routine to assign boundary nodes
  Node* construct_boundary_node(const unsigned &n)
   {
-   //Assign a spine node to the local node pointer
+   //Assign a node to the local node pointer
    //The dimension and number of values are taken from internal element data
    //The number of timesteps to be stored comes from the problem!
    this->node_pt(n) = 
@@ -295,12 +369,14 @@ template<class ELEMENT,class NODE_TYPE>
 
    // Call function of underlying element
    ELEMENT::complete_setup_of_dependencies();
+
    //Call function of the element with moving nodes
    ElementWithMovingNodes::complete_setup_of_dependencies();
   }
 
 
- /// Assign local equation numbers for the spines in the element
+ /// \short Assign local equation numbers for the underlying element, then
+ /// deal with the additional geometric dofs
  void assign_all_generic_local_eqn_numbers()
  {
   // Call the generic local equation numbering scheme of the ELEMENT
@@ -314,8 +390,9 @@ template<class ELEMENT,class NODE_TYPE>
   {
    ///Call the element's get jacobian function
    ELEMENT::get_jacobian(residuals,jacobian);
-   //Now call the additional spine jacobian terms (finite differences)
-   this->fill_in_jacobian_from_geometric_data_by_fd(jacobian);
+
+   //Now call the additional geometric Jacobian terms 
+   this->fill_in_jacobian_from_geometric_data(jacobian);
   }
 
  /// Add the contribution to the jacobian and residuals vector
@@ -324,8 +401,9 @@ template<class ELEMENT,class NODE_TYPE>
   {
    //Call the element's add to Jacobian function 
    ELEMENT::fill_in_contribution_to_jacobian(residuals,jacobian);
-   //Now call the additional spine jacobian terms (finite differences)
-   this->fill_in_jacobian_from_geometric_data_by_fd(jacobian);
+
+   //Now call the additional geometric Jacobian terms (finite differences)
+   this->fill_in_jacobian_from_geometric_data(jacobian);
   }
 
 };

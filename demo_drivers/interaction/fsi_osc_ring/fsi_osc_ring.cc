@@ -51,7 +51,7 @@ namespace Global_Physical_Variables
  //------------------------
 
  /// Square of Womersly number (a frequency parameter)
- double Alpha_sq=50;
+ double Alpha_sq=50.0;
 
  /// Density ratio of the solid and the fluid
  double Density_ratio=1.0; 
@@ -591,6 +591,24 @@ FSIRingProblem::FSIRingProblem(const unsigned& N,
    //Set the Reynolds number, etc
    el_pt->re_pt() = &Global_Physical_Variables::Re;
    el_pt->re_st_pt() = &Global_Physical_Variables::ReSt;
+
+   // hierher
+   el_pt->evaluate_shape_derivs_by_direct_fd();       
+
+//   el_pt->evaluate_shape_derivs_by_chain_rule();
+//   el_pt->evaluate_dresidual_dnodal_coordinates_by_fd()=true;
+
+//    if (e==0)
+//     {
+//      el_pt->evaluate_dresidual_dnodal_coordinates_by_fd()=false;
+//     }
+//    else
+//     {
+//      el_pt->evaluate_dresidual_dnodal_coordinates_by_fd()=true;
+//     }
+
+   //el_pt->evaluate_shape_derivs_by_direct_fd();       
+
   }
  
  
@@ -758,6 +776,21 @@ void FSIRingProblem::dynamic_run()
 
  //Output initial data
  doc_solution(0,doc_info,trace_file);
+
+
+//  {
+//   unsigned nel=Fluid_mesh_pt->nelement();
+//   for (unsigned e=0;e<nel;e++)
+//    {
+//     std::cout << "\n\nEl: " << e << std::endl << std::endl; 
+//     FiniteElement* el_pt=Fluid_mesh_pt->finite_element_pt(e);
+//     unsigned n_dof=el_pt->ndof();
+//     Vector<double> residuals(n_dof);
+//     DenseDoubleMatrix jacobian(n_dof,n_dof);
+//     el_pt->get_jacobian(residuals,jacobian);
+//    }
+//   exit(0);
+//  }
 
  // Time integration loop
  for(unsigned i=1;i<=nstep;i++)

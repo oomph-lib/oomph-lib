@@ -307,9 +307,12 @@ if test "$reply" = "n" -o "$reply" = "N"; then
   fi
   cd $return_dir_before_link_in_private
 
-  # Get the list of configuration files: all files in config/configure_options
-  # ignore the directory of private ones
-  configure_option_files=`ls --ignore=private_configure_options config/configure_options`
+  # Ooops: Non-portable gnu extension to ls
+  #configure_option_files=`ls --ignore=private_configure_options config/configure_options`
+
+  # Thanks for this fix, Andy!
+  configure_option_files=`ls config/configure_options | grep -v  private_configure_options` 
+
   echo " "
   echo "======================================================================"
   echo 

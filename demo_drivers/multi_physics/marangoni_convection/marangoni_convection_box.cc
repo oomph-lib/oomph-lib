@@ -307,8 +307,8 @@ protected:
    //Fill in the external data by finite differences
    this->fill_in_jacobian_from_external_by_fd(jacobian);
    
-   //Call the generic finite difference routine to handle the spine variables
-   this->fill_in_jacobian_from_geometric_data_by_fd(jacobian);
+   //Call the generic routine to handle the spine variables
+   this->fill_in_jacobian_from_geometric_data(jacobian);
   }
 
  

@@ -37,6 +37,8 @@
 //OOMPH-LIB header
 #include "../generic/hermite_elements.h"
 #include "../generic/geom_objects.h"
+#include "../generic/fsi.h"
+#include "../generic/stored_shape_function_elements.h"
 
 namespace oomph
 {
@@ -110,6 +112,26 @@ protected:
  /// used as part of a multi-physics element.
  void fill_in_contribution_to_residuals_shell(Vector<double> &residuals);
 
+ /// \short Get the load vector for the computation of the rate of work
+ /// done by the load. Here we simply forward this to
+ /// load_vector(...) but allow it to be overloaded in derived classes
+ /// to allow the computation of the rate of work due to constituent
+ /// parts of the load vector (e.g. the fluid traction in an FSI 
+ /// problem). Pass number of integration point (dummy), 
+ /// Lagr. coordinate and normal vector and return the load vector
+ /// (not all of the input arguments will be
+ /// required for all specific load functions but the list should
+ /// cover all cases). 
+ virtual void load_vector_for_rate_of_work_computation(
+  const unsigned &intpt,
+  const Vector<double>& xi,
+  const Vector<double>& x,
+  const Vector<double>& N,
+  Vector<double>& load)
+  {
+   load_vector(intpt, xi, x, N ,load);
+  }
+ 
 
 public:
 
@@ -212,6 +234,17 @@ public:
 
  /// \short Get potential (strain) and kinetic energy of the element
  void get_energy(double& pot_en, double& kin_en);
+
+ /// \short Get integral of instantaneous rate of work done on 
+ /// the wall due to the load returned by the virtual 
+ /// function load_vector_for_rate_of_work_computation(...). 
+ /// In the current class
+ /// the latter function simply de-references the external
+ /// load but this can be overloaded in derived classes
+ /// (e.g. in FSI elements) to determine the rate of work done
+ /// by individual constituents of this load (e.g. the fluid load
+ /// in an FSI problem). hierher spell out nondimensionalisation
+ double load_rate_of_work();
 
  /// Generic FiniteElement output function
  void output(std::ostream &outfile) {FiniteElement::output(outfile);}
@@ -326,6 +359,284 @@ template<>
 class FaceGeometry<HermiteShellElement> : 
   public virtual SolidQHermiteElement<1>
 {
+};
+
+
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+//=========================================================================
+/// Diag Hermite Kirchhoff Love shell "upgraded" to a FSIWallElement
+/// (and thus, by inheritance, a GeomObject), so it can be used in FSI.
+/// hierher: change in FSI Beam ?
+//=========================================================================
+class FSIDiagHermiteShellElement : public virtual DiagHermiteShellElement,
+             public virtual FSIWallElement
+{
+  private:
+ 
+ /// \short Get the load vector for the computation of the rate of work
+ /// done by the load. Can switch between full load and fluid load only.
+ /// Overloads the version in the shell element base class.
+ /// Pass number of integration point (dummy)
+ /// Lagr. coordinate and normal vector and return the load vector
+ /// (not all of the input arguments will be
+ /// required for all specific load functions but the list should
+ /// cover all cases). 
+ virtual void load_vector_for_rate_of_work_computation(
+  const unsigned &intpt,
+  const Vector<double>& xi,
+  const Vector<double>& x,
+  const Vector<double>& N,
+  Vector<double>& load)
+  {
+   /// Get fluid-only load vector
+   if (Compute_rate_of_work_by_load_with_fluid_load_only)
+    {
+     fluid_load_vector(intpt,N,load);
+    }
+   // Get full load vector as per default
+   else
+    {
+     load_vector(intpt,xi,x,N,load);
+    }
+  }
+
+ ///Boolean flag to indicate whether the normal is directed into the fluid
+ bool Normal_points_into_fluid;
+ 
+ /// \short Boolean flag to indicate if rate-of-work by load is to be
+ ///based on the fluid traction only
+ bool Compute_rate_of_work_by_load_with_fluid_load_only;
+
+  public:
+ 
+ /// \short Constructor: Create shell element as FSIWallElement (and thus,
+ /// by inheritance, a GeomObject) with two Lagrangian coordinates
+ /// and 3 Eulerian coordinates. By default, we assume that the
+ /// normal vector computed by KirchhoffLoveShellEquations::get_normal(...)
+ /// points into the fluid. 
+ /// If this is not the case, overwrite this with the access function
+ /// FSIDiagHermiteShellElement::normal_points_into_fluid().
+ FSIDiagHermiteShellElement() : DiagHermiteShellElement(),
+  Normal_points_into_fluid(true),
+  Compute_rate_of_work_by_load_with_fluid_load_only(false)
+  { 
+   unsigned n_lagr=2;
+   unsigned n_dim=3;
+   setup_fsi_wall_element(n_lagr,n_dim);
+  }
+ 
+ /// \short Destructor: empty
+ ~FSIDiagHermiteShellElement(){}
+ 
+ /// \short Does the normal computed by
+ /// KirchhoffLoveShellEquations::get_normal(...) point into the fluid?
+ bool &normal_points_into_fluid() {return Normal_points_into_fluid;}
+ 
+ /// \short How many items of Data does the shape of the object depend on?
+ /// Same as # of nodes.
+ unsigned ngeom_data() const
+  {
+   // Geom data = variable position data with one per node
+   return nnode();
+  }
+ 
+ /// \short Return pointer to the j-th Data item that the object's
+ /// shape depends on. (Redirects to the nodes' positional Data).
+ Data* geom_data_pt(const unsigned& j)
+  {
+   return static_cast<SolidNode*>(node_pt(j))->variable_position_pt();
+  }
+ 
+ /// \short Position vector at local coordinate s
+ void position(const Vector<double>& s, Vector<double>& r) const
+  {
+   // Get position Vector
+   interpolated_x(s,r);
+  }
+ 
+ /// \short Position vector at local coordinate s at discrete
+ /// previous time (t=0: present time; t>0: previous time)
+ void position(const unsigned& t, const Vector<double>& s,
+               Vector<double>& r) const
+  {
+   // Get position vector at previous time level t
+   interpolated_x(t,s,r);
+  }
+
+
+ /// \short Derivative of position vector w.r.t. the SolidFiniteElement's
+ /// Lagrangian coordinates; evaluated at current time.
+ void dposition_dlagrangian_at_local_coordinate(
+  const Vector<double>& s, DenseMatrix<double> &drdxi) const;
+
+
+ /// \short Derivative of position vector w.r.t. to the GeomObject's
+ /// intrinsic coordinates which are identical to the SolidFiniteElement's
+ /// local coordinates, so dR_i/dzeta_alpha = dR_i/ds_alpha= drds(alpha,i).
+ /// Evaluated at current time.
+ void dposition(const Vector<double>& s,
+                DenseMatrix<double> &drds) const
+  {
+   throw OomphLibError(
+    "Broken -- who calls this? \n",
+    "FSIDiagHermiteShellElement::dposition()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+
+ /// \short 2nd derivative of position vector w.r.t. to coordinates:
+ /// d^2R_i/dxi_alpha dxi_beta = ddrdxi(alpha,beta,i).
+ /// Evaluated at current time. (broken)
+ void d2position(const Vector<double> &xi,
+                 RankThreeTensor<double> &ddrdxi) const
+  {
+   throw OomphLibError(
+    "This version of d2position() hasn't been coded up (yet) \n",
+    "FSIDiagHermiteShellElement::d2position()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+
+ /// \short Posn vector and its  1st & 2nd derivatives
+ /// w.r.t. to coordinates:  dR_i/dxi_alpha = drdxi(alpha,i)
+ /// d^2R_i/dxi_alpha dxi_beta = ddrdxi(alpha,beta,i).
+ /// Evaluated at current time. (broken)
+ void d2position(const Vector<double>& xi, Vector<double>& r,
+                 DenseMatrix<double> &drdxi,
+                 RankThreeTensor<double> &ddrdxi) const
+  {
+   throw OomphLibError(
+    "This version of d2position() hasn't been coded up (yet) \n",
+    "FSIDiagHermiteShellElement::d2position()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+
+ /// \short Velocity vector at local coordinate s
+ void veloc(const Vector<double>& s, Vector<double>& veloc)
+  {
+   // Get first time deriv of position vector
+   interpolated_dxdt(s,1,veloc);
+  }
+
+
+ /// \short Acceleration vector at local coordinate s
+ void accel(const Vector<double>& s, Vector<double>& accel)
+  {
+   // Get second time deriv of position Vector
+   interpolated_dxdt(s,2,accel);
+  }
+
+
+ /// \short Get integral of instantaneous rate of work done on 
+ /// the wall due to the fluid load returned by the function 
+ /// fluid_load_vector(...).
+ double fluid_load_rate_of_work()
+  {
+   Compute_rate_of_work_by_load_with_fluid_load_only=true;
+   double tmp=load_rate_of_work();
+   Compute_rate_of_work_by_load_with_fluid_load_only=false;
+   return tmp;
+  }   
+
+
+ /// \short Get the load vector: Pass number of the integration point,
+ /// Lagr. coordinate, Eulerian coordinate and normal vector
+ /// and return the load vector. (Not all of the input arguments will be
+ /// required for all specific load functions but the list should
+ /// cover all cases). We first evaluate the load function defined via
+ /// KirchhoffLoveShellEquations::load_vector_fct_pt() -- this
+ /// represents the non-FSI load on the shell, e.g. an external
+ /// pressure load. Then we add to this the FSI load due to
+ /// the traction exerted by the adjacent FSIFluidElements, taking
+ /// the sign of the normal into account.
+ void load_vector(const unsigned& intpt,
+                  const Vector<double>& xi,
+                  const Vector<double>& x,
+                  const Vector<double>& N,
+                  Vector<double>& load)
+  {
+   //Initially call the standard Load_vector_fct_pt
+   Load_vector_fct_pt(xi,x,N,load);
+
+   //Memory for the FSI load
+   Vector<double> fsi_load(3);
+
+   //Get the fluid load on the wall stress scale
+   fluid_load_vector(intpt,N,fsi_load);
+
+   //If the normal is outer to the fluid switch the direction
+   double sign = 1.0;
+   if (!Normal_points_into_fluid) {sign = -1.0;}
+
+   //Add the FSI load to the load vector
+   for(unsigned i=0;i<3;i++)
+    {
+     load[i] += sign*fsi_load[i];
+    }
+  }
+
+ /// \short Get the Jacobian and residuals. Wrapper to generic FSI version;
+ /// that catches the case when we replace the Jacobian by the
+ /// mass matrix (for the consistent assignment of initial conditions).
+ virtual void fill_in_contribution_to_jacobian(Vector<double> &residuals,
+                                               DenseMatrix<double> &jacobian)
+  {
+   //Call the element's residuals vector
+   fill_in_contribution_to_residuals(residuals);
+
+   //Solve for the consistent acceleration in Newmark scheme?
+   if(Solve_for_consistent_newmark_accel_flag)
+    {
+     add_jacobian_for_newmark_accel(jacobian);
+     return;
+    }
+
+   FSIWallElement::
+    fill_in_jacobian_from_solid_position_and_external_by_fd(jacobian);
+  }
+
+ /// \short In the GeomObject incarnation of the FSIWallElement
+ /// the Lagrangian coordinate \f$ \xi \f$ used in the solid mechanics
+ /// is equal to the "global" intrinsic coordinate \f$ \zeta \f$ in
+ /// the compound GeomObject (the wall mesh) this element is a
+ /// member of. This function computes zeta as a function of s,
+ /// the local coordinate in the element which acts as the
+ /// intrinsic coordinate for the element itself. (Are you still
+ /// with me?)
+ void interpolated_zeta(const Vector<double> &s, Vector<double> &zeta)
+  const {interpolated_xi(s,zeta);}
+
+ /// \short Find the local coordinate s in this element
+ /// that corresponds to the global "intrinsic" coordinate \f$ \zeta \f$
+ /// (here identical to the Lagrangian coordinate \f$ \xi \f$).
+ /// If the coordinate is contained within this element, the
+ /// geom_object_pt points to "this" element; if the zeta coordinate
+ /// is not contained in this element geom_object_pt=NULL.
+ void locate_zeta(const Vector<double> &zeta,
+                  GeomObject* &geom_object_pt, Vector<double> &s);
+
+
+
+ /// \short The number of "blocks" that degrees of freedom in this element
+ /// are sub-divided into: Just the solid degrees of freedom themselves.
+ unsigned nblock_types()
+  {
+   return 1;
+  }
+
+ /// \short Create a list of pairs for all unknowns in this element,
+ /// so that the first entry in each pair contains the global equation
+ /// number of the unknown, while the second one contains the number
+ /// of the "block" that this unknown is associated with.
+ /// (Function can obviously only be called if the equation numbering
+ /// scheme has been set up.)
+ void get_block_numbers_for_unknowns(
+  std::list<std::pair<unsigned long,unsigned> >& block_lookup_list);
+
 };
 
 
@@ -489,6 +800,23 @@ public:
  /// here...
  void output(FILE* file_pt, const unsigned &n_plot)
   {FiniteElement::output(file_pt,n_plot);}
+
+ /// \short The number of "blocks" that degrees of freedom in this element
+ /// are sub-divided into: Just the solid degrees of freedom themselves.
+ unsigned nblock_types()
+  {
+   return 1;
+  }
+
+ /// \short Create a list of pairs for all unknowns in this element,
+ /// so that the first entry in each pair contains the global equation
+ /// number of the unknown, while the second one contains the number
+ /// of the "block" that this unknown is associated with.
+ /// (Function can obviously only be called if the equation numbering
+ /// scheme has been set up.)
+ void get_block_numbers_for_unknowns(
+  std::list<std::pair<unsigned long,unsigned> >& block_lookup_list);
+
 
 private:
 

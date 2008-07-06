@@ -60,9 +60,6 @@ class AlgebraicNode : public Node
 
 public:
 
- /// Function pointer to auxiliary node update function
- typedef void(*AuxNodeUpdateFctPt)(Node*);
-
  /// \short Default Constructor
  AlgebraicNode() : Node() {}
 
@@ -77,10 +74,6 @@ public:
 #ifdef LEAK_CHECK
     LeakCheckNames::AlgebraicNode_build+=1;
 #endif
-
-   // By default, only the nodal position is updated and no auxiliary
-   // updates of function values are performed.
-    Aux_node_update_fct_pt=0;
     
     // Add default node update info
     add_node_update_info(Dummy_node_update_fct_id, // dummy remesh fct ID
@@ -104,9 +97,6 @@ public:
 #ifdef LEAK_CHECK
     LeakCheckNames::AlgebraicNode_build+=1;
 #endif
-   // By default, only the nodal position is updated and no auxiliary
-   // updates of function values are performed.
-   Aux_node_update_fct_pt=0;
 
    // Add default node update info
    add_node_update_info(Dummy_node_update_fct_id, // dummy remesh fct ID
@@ -137,17 +127,6 @@ public:
    BrokenCopy::broken_assign("AlgebraicNode");
   }
 
-
- /// \short Set pointer to auxiliary update function -- this 
- /// can be used to update any nodal values following the update
- /// of the nodal position. This is needed e.g. to update the no-slip
- /// condition on moving boundaries. 
- void set_auxiliary_node_update_fct_pt(AuxNodeUpdateFctPt 
-                                       aux_node_update_fct_pt) 
-  {
-   // Set pointer (by default it's set to NULL)
-   Aux_node_update_fct_pt=aux_node_update_fct_pt;
-  }
 
  /// \short Update the current nodal position, using the first 
  /// (default) update function if there are multiple ones. If 
@@ -490,12 +469,6 @@ private:
  std::map<int,Vector<double> >::iterator 
   Default_it_ref_value;
 
- /// \short Pointer to auxiliary update function -- this 
- /// can be used to update any nodal values following the update
- /// of the nodal position. This is needed e.g. to update the no-slip
- /// condition on moving boundaries. 
- AuxNodeUpdateFctPt Aux_node_update_fct_pt;
-
  /// Default node update function ID.
  int Default_node_update_fct_id;
 
@@ -685,8 +658,8 @@ class AlgebraicMesh : public virtual Mesh
                          OOMPH_EXCEPTION_LOCATION);
     } 
 #endif
-   //Return a static cast to the Node_pt
-   return (static_cast<AlgebraicNode*>(Node_pt[n]));
+   //Return a cast to the Node_pt
+   return (dynamic_cast<AlgebraicNode*>(Node_pt[n]));
   }
 
 

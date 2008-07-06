@@ -10,6 +10,13 @@ of the <A HREF="http://www.maths.manchester.ac.uk/">School of
 Mathematics</A> at <A HREF="http://www.manchester.ac.uk/">The
 University of Manchester</A>.
 
+<P>
+
+The latest version of the library is revision 0.85 which was released
+on June 19, 2008. See the <a href="../change_log/html/index.html">
+change log page</a> for an overview of the changes made
+since the previous release.
+
 #<HR>
 <HR>
 
@@ -198,6 +205,27 @@ We provide
 </A>of the entire library (big!), and (much smaller) partial distributions
 in which, e.g. the online documentation and/or the demo/self-test codes
 and the associated validation data are excluded.
+
+<P>
+We also provide read-only access to the
+<a href="http://subversion.tigris.org/"> subversion</a> 
+repository of the oomph-lib project which is hosted
+at <A HREF="http://oomph-lib.maths.man.ac.uk">
+oomph-lib.maths.man.ac.uk</A>. 
+If <a href="http://subversion.tigris.org/"> subversion</a> is
+installed on your computer you can obtain the latest 
+snapshot of the project by issuing the command
+
+\code
+svn checkout svn://oomph-lib.maths.man.ac.uk/trunk
+\endcode
+
+See <a href="../subversion/html/index.html">our subversion
+webpage</a> for further details.
+
+
+
+
 \subsection need What do I need?
  \c oomph-lib has been/is being developed in a linux environment, 
  using standard ANSI C++. In order to minimise the dependence 
@@ -269,14 +297,14 @@ Having said that, we have successfully installed and tested
 our installation on the following platforms:
 - Redhat Linux, using the gcc compiler suite (version 3.2.3).
   The test included the MPI part of the library, which we compiled with
-  <A HREF="http://www-unix.mcs.anl.gov/mpi/mpich/">mpich</A>.
+  <A HREF="http://www.lam-mpi.org/">lam</A>.
 - Gentoo Linux, using the gcc compiler suite
-  (version 3.3.4) and the intel compilers (icpc version 7.1, icc 
-  version 7.1; ifc version 7.0).
-- Silicon Graphics Origin 2000, using the gcc compiler suite (version 3.3).
-  The test included the MPI part of the library.
-- cygwin (version 1.5.17-1), running under Windows XP (version 5.1),
-  using the gcc compiler suite (version 3.3.3).
+  (versions 3.3.4 and 4.1.2 ) and the intel compilers 
+  (icpc, ifc and icc all at version 9.1).
+- cygwin (version 1.5.25-14), running under Windows XP (version 5.1),
+  using the gcc compiler suite (version 3.4.4).
+- Ubuntu (version 8.04) with gcc compilers (version 4.2.4)
+- Apple Mac, OSX 10.4.11 (Tiger) with gcc compilers (version 4.0.1)
 .
 We welcome feedback on any problems that you encounter
 during your attempts to install \c oomph-lib on your machine.

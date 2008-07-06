@@ -2060,7 +2060,7 @@ void Mesh::distribute(DocInfo& doc_info,
  // to be added into the various halo/haloed lookup schemes in the
  // same order and we base this on the order in which
  // they were in the original mesh.
- Vector<Vector<bool> > tmp_element_retained;
+ Vector<vector<bool> > tmp_element_retained;
  tmp_element_retained.resize(MPI_Helpers::Nproc);
  nelem=backed_up_el_pt.size();
  for (int i=0;i<MPI_Helpers::Nproc;i++)

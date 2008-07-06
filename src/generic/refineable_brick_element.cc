@@ -1634,6 +1634,39 @@ void RefineableQElement<3>::build(Mesh*& mesh_pt,
       }
 #endif
 
+     // Is it an ElementWithMovingNodes? 
+     ElementWithMovingNodes* aux_el_pt=
+      dynamic_cast<ElementWithMovingNodes*>(this);
+     
+     // Pass down the information re the method for the evaluation
+     // of the shape derivatives
+     if (aux_el_pt!=0)
+      {
+       ElementWithMovingNodes* aux_father_el_pt=
+        dynamic_cast<ElementWithMovingNodes*>(father_el_pt);
+
+#ifdef PARANOID
+       if (aux_father_el_pt==0)
+        {
+         std::string error_message =
+          "Failed to cast to ElementWithMovingNodes*\n";
+         error_message += 
+          "Strange -- if the son is a ElementWithMovingNodes\n";
+          error_message += "the father should be too....\n";
+
+         throw OomphLibError(error_message,
+                             "RefineableQElement<3>::build()",
+                             OOMPH_EXCEPTION_LOCATION);
+        }
+#endif
+
+       aux_el_pt->evaluate_dresidual_dnodal_coordinates_by_fd()=
+        aux_father_el_pt->evaluate_dresidual_dnodal_coordinates_by_fd();
+       
+       aux_el_pt->method_for_shape_derivs()=
+        aux_father_el_pt->method_for_shape_derivs();
+      }
+
      // Now do further build (if any)
      further_build();
      

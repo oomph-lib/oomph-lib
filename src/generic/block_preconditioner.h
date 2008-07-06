@@ -840,7 +840,7 @@ class ExactBlockPreconditioner : public BlockPreconditioner<MATRIX>
     Block_number.resize(Nrow);
     
     // vector to indicate when we have block data for that degree of freedom
-    Vector<bool> got_data(Nrow,false);
+    std::vector<bool> got_data(Nrow,false);
     
     // Counter for how many entries we've filled (must be equal to Nrow
     // when we're done!)

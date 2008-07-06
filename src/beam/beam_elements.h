@@ -314,16 +314,17 @@ class FSIHermiteBeamElement : public virtual HermiteBeamElement,
   public:
  
  /// \short Constructor: Create beam element as FSIWallElement (and thus,
- /// by inheritance, a GeomObject) with one Lagrangian coordinate 
- /// and 2 Eulerian coordinates. By default, we assume that the
+ /// by inheritance, a GeomObject). By default, we assume that the
  /// normal vector computed by KirchhoffLoveBeamEquations::get_normal(...)
  /// points into the fluid. If this is not the case, overwrite this
  /// with the access function FSIHermiteBeamElement::normal_points_into_fluid()
- /// Constructor for GeomObject is called explicitly because
- /// of virtual inheritance!
  FSIHermiteBeamElement() : HermiteBeamElement(), 
-  GeomObject(1,2), FSIWallElement(1,2), 
-  Normal_points_into_fluid(true) {} 
+  Normal_points_into_fluid(true) 
+  {
+   unsigned n_lagr=1;
+   unsigned n_dim=2;
+   setup_fsi_wall_element(n_lagr,n_dim);
+  } 
  
  /// \short Destructor: empty
  ~FSIHermiteBeamElement(){}

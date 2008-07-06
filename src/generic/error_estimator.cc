@@ -238,7 +238,7 @@ void Z2ErrorEstimator::setup_patches(Mesh*& mesh_pt,
   // the boundary of a process if it is a member of at least one halo element
   // and one non-halo element for that process.  Create a vector of bools which
   // is the size of the number of processes and make the entry true if the node
-  // (through a map(nod_pt,Vector<bools> node_bnd)) is on the boundary for a
+  // (through a map(nod_pt,vector<bools> node_bnd)) is on the boundary for a
   // process and false otherwise.  This should be done here in setup_patches.
   //
   // When it comes to the error calculation in get_element_errors (see later)

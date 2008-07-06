@@ -81,7 +81,7 @@
 #=====================================================================
 #
 # Compilation with lam mpi compilers (wrappers to gcc) with 
-# full optimisation.
+# debugging (-g) and full warnings. 
 # Library headers in the build directory are replaced by symbolic
 # links to the src directory -- this ensures that you don't
 # accidentally edit a file in the include directory only to have
@@ -91,6 +91,7 @@
 # to have been compiled with mpi support. Linking is done
 # with the lam mpi fortran compiler.
 #
+--enable-suppress-doc
 --enable-MPI
 --enable-symbolic-links-for-headers
 --with-blas=/home/mheil/local/lib/blas/blas.a

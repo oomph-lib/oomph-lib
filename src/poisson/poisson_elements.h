@@ -65,8 +65,15 @@ public:
  typedef void (*PoissonSourceFctPt)(const Vector<double>& x, double& f);
 
 
+ /// \short Function pointer to gradient of source function  fct(x,g(x)) -- 
+ /// x is a Vector! 
+ typedef void (*PoissonSourceFctGradientPt)(const Vector<double>& x, 
+                                            Vector<double>& gradient);
+
+
  /// Constructor (must initialise the Source_fct_pt to null)
- PoissonEquations() : Source_fct_pt(0) {}
+ PoissonEquations() : Source_fct_pt(0), Source_fct_gradient_pt(0)
+  {}
  
  /// Broken copy constructor
  PoissonEquations(const PoissonEquations& dummy) 
@@ -153,6 +160,14 @@ public:
  /// Access function: Pointer to source function. Const version
  PoissonSourceFctPt source_fct_pt() const {return Source_fct_pt;}
 
+ /// Access function: Pointer to gradient of source function
+ PoissonSourceFctGradientPt& source_fct_gradient_pt() 
+  {return Source_fct_gradient_pt;}
+
+ /// Access function: Pointer to gradient source function. Const version
+ PoissonSourceFctGradientPt source_fct_gradient_pt() const 
+  {return Source_fct_gradient_pt;}
+
 
  /// Get source term at (Eulerian) position x. This function is
  /// virtual to allow overloading in multi-physics problems where
@@ -169,6 +184,43 @@ public:
      (*Source_fct_pt)(x,source);
     }
   }
+
+
+ /// Get source term at (Eulerian) position x. This function is
+ /// virtual to allow overloading in multi-physics problems where
+ /// the strength of the source function might be determined by
+ /// another system of equations. Computed via function pointer 
+ /// (if set) or by finite differencing (default)
+ inline virtual void get_source_gradient_poisson(
+  const Vector<double>& x, 
+  Vector<double>& gradient) const
+  {
+   //If no source function has been set, return zero
+   if(Source_fct_gradient_pt==0)
+    {
+     // Reference value
+     double source=0.0;
+     get_source_poisson(x,source);
+
+     // FD it
+     double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
+     double source_pls=0.0;
+     Vector<double> x_pls(x);
+     for (unsigned i=0;i<DIM;i++)
+      {
+       x_pls[i]+=eps_fd;
+       get_source_poisson(x_pls,source_pls);
+       gradient[i]=(source_pls-source)/eps_fd;
+       x_pls[i]=x[i];
+      }
+    }
+   else
+    {
+     // Get gradient
+     (*Source_fct_gradient_pt)(x,gradient);
+    }
+  }
+
 
 
 
@@ -226,6 +278,7 @@ public:
   }
  
 
+
  /// \short Return FE representation of function value u_poisson(s) 
  /// at local coordinate s
  inline double interpolated_u_poisson(const Vector<double> &s) const
@@ -255,6 +308,13 @@ public:
   }
 
 
+ /// \short Compute derivatives of elemental residual vector with respect
+ /// to nodal coordinates. Overwrites default implementation in 
+ /// FiniteElement base class.
+ /// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
+ virtual void get_dresidual_dnodal_coordinates(RankThreeTensor<double>&
+                                               dresidual_dnodal_coordinates);
+ 
  /// \short Self-test: Return 0 for OK
  unsigned self_test();
 
@@ -286,7 +346,10 @@ protected:
  
  /// Pointer to source function:
  PoissonSourceFctPt Source_fct_pt;
- 
+
+ /// Pointer to gradient of source function
+ PoissonSourceFctGradientPt Source_fct_gradient_pt;
+
 };
 
 

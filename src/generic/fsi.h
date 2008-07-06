@@ -200,15 +200,10 @@ class FSIWallElement : public virtual SolidFiniteElement,
 
   public:
 
- /// \short Constructor: Assign storage -- pass the Eulerian 
- /// dimension of the "adjacent" fluid elements and the
- /// number of local coordinates required to parametrise
- /// the wall element. E.g. for a FSIKirchhoffLoveBeam,
- /// bounding a 2D fluid domain ndim_fluid=2 and nlagr_solid=1
- /// NOTE: GeomObject constructor must be called explicitly
- /// as GeomObject(nlagr_solid, ndim_fluid) from the constructor of the
- /// derived class because of virtual inheritance!
- FSIWallElement(const unsigned& nlagr_solid, const unsigned& ndim_fluid);
+ /// \short Constructor. Note that element is not fully-functional
+ /// until its setup_fsi_wall_element() function has been called!
+ FSIWallElement() : Only_front_is_loaded_by_fluid(true),
+  Q_pt(&Default_Q_Value),  Add_external_load_data(true) {}
 
  /// Broken copy constructor
  FSIWallElement(const FSIWallElement&) 
@@ -222,9 +217,16 @@ class FSIWallElement : public virtual SolidFiniteElement,
    BrokenCopy::broken_assign("FSIWallElement");
   }
 
-
  /// Empty virtual destructor for safety
  virtual ~FSIWallElement() {}
+
+ /// \short Setup: Assign storage -- pass the Eulerian 
+ /// dimension of the "adjacent" fluid elements and the
+ /// number of local coordinates required to parametrise
+ /// the wall element. E.g. for a FSIKirchhoffLoveBeam,
+ /// bounding a 2D fluid domain ndim_fluid=2 and nlagr_solid=1
+ void setup_fsi_wall_element(const unsigned& nlagr_solid, 
+                             const unsigned& ndim_fluid);
  
  /// \short Return the ratio of the stress scales used to non-dimensionalise
  /// the fluid and solid equations. E.g. \f$ Q = \mu U/(LE) \f$
@@ -236,7 +238,6 @@ class FSIWallElement : public virtual SolidFiniteElement,
  /// \short Return a pointer the ratio of stress scales used to 
  /// non-dimensionalise the fluid and solid equations.
  double* &q_pt() {return Q_pt;}
-
 
  /// \short Pointer to FSI fluid element that is adjacent to
  /// i-th Gauss point in wall element. face=0 refers to the 

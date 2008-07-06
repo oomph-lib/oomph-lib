@@ -126,9 +126,9 @@ public virtual SurfaceFluidInterfaceElement
   {
    //Call the generic routine with the flag set to 1
    fill_in_generic_residual_contribution_interface(residuals,jacobian,1);
-   //Call the generic finite difference routine to handle the spine variables
+   //Call the generic routine to handle the spine variables
    //SpineElement<FaceGeometry<ELEMENT> >::
-    this->fill_in_jacobian_from_geometric_data_by_fd(jacobian);
+    this->fill_in_jacobian_from_geometric_data(jacobian);
   }
 
  /// Overload the output function

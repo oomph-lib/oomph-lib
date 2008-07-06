@@ -77,10 +77,7 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
  //Premultiply the weights and the Jacobian
  double W = w*J;
  
- //Calculate local values of the function
- double interpolated_u=0.0;
- 
- //This needs to be a Vector to be ANSI C++ (Initialise to zero) 
+ // Position and gradient
  Vector<double> interpolated_x(DIM,0.0);
  Vector<double> interpolated_dudx(DIM,0.0);
  
@@ -93,8 +90,7 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
    //Get the poisson value from the node 
    //(hanging-ness will be taken into account
    double u_value = this->nodal_value(l,u_nodal_index);
-   //The poisson value is stored at the nodes
-   interpolated_u += u_value*psi(l);
+
    // Loop over directions
    for(unsigned j=0;j<DIM;j++)
     {
@@ -116,6 +112,7 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
    //Local variables used to store the number of master nodes and the
    //weight associated with the shape function if the node is hanging
    unsigned n_master=1; double hang_weight=1.0;
+
    //Local bool (is the node hanging)
    bool is_node_hanging = this->node_pt(l)->is_hanging();
 
@@ -141,6 +138,7 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
        //Read out the local equation number from the m-th master node
        local_eqn =  this->local_hang_eqn(hang_info_pt->master_node_pt(m),
                                    u_nodal_index);
+
        //Read out the weight from the master node
        hang_weight = hang_info_pt->master_weight(m);
       }
@@ -149,6 +147,7 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
       {
        //The local equation number comes from the node itself
        local_eqn = this->nodal_local_eqn(l,u_nodal_index);
+
        //The hang weight is one
        hang_weight = 1.0;
       }
@@ -172,11 +171,13 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
          //Local variables to store the number of master nodes
          //and the weights associated with each hanging node
          unsigned n_master2=1; double hang_weight2=1.0;
+
          //Loop over the nodes for the variables
          for(unsigned l2=0;l2<n_node;l2++)
           { 
            //Local bool (is the node hanging)
            bool is_node2_hanging = this->node_pt(l2)->is_hanging();
+
            //If the node is hanging, get the number of master nodes
            if(is_node2_hanging)
             {
@@ -200,6 +201,7 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
                local_unknown = 
                 this->local_hang_eqn(hang_info2_pt->master_node_pt(m2),
                                      u_nodal_index);
+
                //Read out the hanging weight from the master node
                hang_weight2 = hang_info2_pt->master_weight(m2);
               }
@@ -208,6 +210,7 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
               {
                //The local unknown number comes from the node
                local_unknown = this->nodal_local_eqn(l2,u_nodal_index);
+
                //The hang weight is one
                hang_weight2 = 1.0;
               }
@@ -232,6 +235,253 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
  
 } // End of loop over integration points
 }
+
+
+//======================================================================
+/// Compute derivatives of elemental residual vector with respect
+/// to nodal coordinates. 
+/// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
+/// Overloads the FD-based version in the FE base class.
+//======================================================================
+template <unsigned DIM>
+void RefineablePoissonEquations<DIM>::get_dresidual_dnodal_coordinates(
+ RankThreeTensor<double>&
+ dresidual_dnodal_coordinates)
+{
+
+ //Find out how many nodes there are
+ const unsigned n_node = nnode();
+
+ //Set up memory for the shape and test functions
+ Shape psi(n_node), test(n_node);
+ DShape dpsidx(n_node,DIM), dtestdx(n_node,DIM);
+ DShape dpsidx_pls(n_node,DIM), dtestdx_pls(n_node,DIM);
+
+ // Deriatives of shape fct derivatives w.r.t. nodal coords
+ RankFourTensor<double> d_dpsidx_dX(DIM,n_node,n_node,DIM);
+ RankFourTensor<double> d_dtestdx_dX(DIM,n_node,n_node,DIM);
+
+ // Derivative of Jacobian of mapping w.r.t. to nodal coords
+ DenseMatrix<double> dJ_dX(DIM,n_node);
+
+ // Derivatives of derivative of u w.r.t. nodal coords
+ RankThreeTensor<double> d_dudx_dX(DIM,n_node,DIM);
+
+ // Gradient of source fct
+ Vector<double> d_source_dx(DIM);
+
+ //Index at which the poisson unknown is stored
+ const unsigned u_nodal_index = u_index_poisson();
+ 
+ //Set the value of n_intpt
+ const unsigned n_intpt = integral_pt()->nweight();
+
+ //Integers to store the local equation number
+ int local_eqn=0;
+
+ // Local storage for pointers to hang_info object
+ HangInfo *hang_info_pt=0;
+
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   //Get the integral weight
+   double w = integral_pt()->weight(ipt);
+
+   //Call the derivatives of the shape and test functions
+   double J = dshape_and_dtest_eulerian_at_knot_poisson(ipt,psi,dpsidx,
+                                                        test,dtestdx);
+       
+   //Calculate local values 
+   //Allocate and initialise to zero
+   Vector<double> interpolated_x(DIM,0.0);
+   Vector<double> interpolated_dudx(DIM,0.0);
+   
+   //Calculate function value and derivatives:
+   //-----------------------------------------
+   // Loop over nodes
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     //Get the nodal value of the Poisson unknown
+     double u_value = nodal_value(l,u_nodal_index);
+     // Loop over directions
+     for(unsigned j=0;j<DIM;j++)
+      {
+       interpolated_x[j] += nodal_position(l,j)*psi(l);
+       interpolated_dudx[j] += u_value*dpsidx(l,j);
+      }
+    }
+
+   //Get source function
+   //-------------------
+   double source;
+   get_source_poisson(interpolated_x,source);
+
+   
+   // Use "raw" nodal positions so the FD loop below actually picks up 
+   // the FD-ed changes in the raw nodal position rather than bypassing
+   // them via the hanging node constraints.
+   for (unsigned j=0;j<n_node;j++)
+    {
+     Node* nod_pt=node_pt(j);
+     for (unsigned i=0;i<DIM;i++)
+      {
+       nod_pt->x(i)=nod_pt->position(i);
+      }
+     nod_pt->use_raw_nodal_position()=true;
+    }
+   
+   // FD step 
+   double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
+   
+   // Do FD loop
+   for (unsigned jj=0;jj<n_node;jj++)
+    {
+     // Get node
+     Node* nod_pt=node_pt(jj);
+     
+     // Loop over coordinate directions
+     for (unsigned ii=0;ii<DIM;ii++)
+      {
+       // Make backup
+       double backup=nod_pt->x(ii);
+       
+       // Do FD step. No node update required as we're
+       // attacking the coordinate directly...
+       nod_pt->x(ii)+=eps_fd;
+       
+       //Call the derivatives of the shape and test functions
+       //at advanced level
+       double J_pls = 
+        dshape_and_dtest_eulerian_at_knot_poisson(ipt,psi,dpsidx_pls,
+                                                  test,dtestdx_pls);
+       
+       // Assign
+       dJ_dX(ii,jj)=(J_pls-J)/eps_fd;
+       for (unsigned i=0;i<DIM;i++)
+        {
+         for (unsigned j=0;j<n_node;j++)
+          {
+           d_dpsidx_dX(ii,jj,j,i)=(dpsidx_pls(j,i)-dpsidx(j,i))/eps_fd;
+           d_dtestdx_dX(ii,jj,j,i)=(dtestdx_pls(j,i)-dtestdx(j,i))/eps_fd;
+          }
+        }
+
+       // Shape deriv of du/dx_i
+       for (unsigned i=0;i<DIM;i++)
+        {
+         double aux=0.0;
+         for (unsigned j_nod=0;j_nod<n_node;j_nod++)
+          {
+           aux+=nodal_value(j_nod,u_nodal_index)*
+            d_dpsidx_dX(ii,jj,j_nod,i);
+          }
+         d_dudx_dX(ii,jj,i)=aux;
+        }
+  
+       // Reset coordinate. No node update required as we're
+       // attacking the coordinate directly...
+       nod_pt->x(ii)=backup;
+      }
+    }
+
+
+   //Reset 
+   for (unsigned j=0;j<n_node;j++)
+    {
+     node_pt(j)->use_raw_nodal_position()=false;
+    }
+   
+   // Get gradient of source function
+   get_source_gradient_poisson(interpolated_x, d_source_dx);
+
+   
+   // Assemble shape derivatives
+   //---------------------------
+       
+   // Loop over the nodes for the test functions 
+   for(unsigned l=0;l<n_node;l++)
+    {
+     //Local variables used to store the number of master nodes and the
+     //weight associated with the shape function if the node is hanging
+     unsigned n_master=1; 
+     double hang_weight=1.0;
+     
+     //Local bool (is the node hanging)
+     bool is_node_hanging = this->node_pt(l)->is_hanging();
+     
+     //If the node is hanging, get the number of master nodes
+     if(is_node_hanging)
+      {
+       hang_info_pt = this->node_pt(l)->hanging_pt();
+       n_master = hang_info_pt->nmaster();
+      }
+     //Otherwise there is just one master node, the node itself
+     else
+      {
+       n_master = 1;
+      }
+     
+     //Loop over the master nodes
+     for(unsigned m=0;m<n_master;m++)
+      {
+       //Get the local equation number and hang_weight
+       //If the node is hanging
+       if(is_node_hanging)
+        {
+         //Read out the local equation number from the m-th master node
+         local_eqn =  this->local_hang_eqn(hang_info_pt->master_node_pt(m),
+                                           u_nodal_index);
+         
+         //Read out the weight from the master node
+         hang_weight = hang_info_pt->master_weight(m);
+        }
+       //If the node is not hanging
+       else
+        {
+         //The local equation number comes from the node itself
+         local_eqn = this->nodal_local_eqn(l,u_nodal_index);
+         //The hang weight is one
+         hang_weight = 1.0;
+        }
+       
+       //If the nodal equation is not a boundary condition
+       if(local_eqn >= 0)
+        {
+         
+         
+         
+         // Loop over coordinate directions
+         for (unsigned ii=0;ii<DIM;ii++)
+          {              
+           // Loop over nodes
+           for (unsigned jj=0;jj<n_node;jj++)
+            {       
+             double sum=source*psi(l)*dJ_dX(ii,jj)+
+              d_source_dx[ii]*psi(l)*psi(jj)*J;
+             
+             for (unsigned k=0;k<DIM;k++)
+              {
+               sum+=interpolated_dudx[k]*(dtestdx(l,k)*dJ_dX(ii,jj)+
+                                          d_dtestdx_dX(ii,jj,l,k)*J)
+                + d_dudx_dX(ii,jj,k)*dtestdx(l,k)*J;
+              }
+             
+             // Multiply through by integration weight
+             dresidual_dnodal_coordinates(local_eqn,ii,jj)+=sum*w*hang_weight;
+            }
+          }
+        }
+      }
+    }
+   
+  } // End of loop over integration points
+ 
+
+
+}   
+
+
 
 //====================================================================
 // Force build of templates

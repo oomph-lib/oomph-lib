@@ -84,7 +84,7 @@ fill_in_generic_residual_contribution_poisson(Vector<double> &residuals,
    //Premultiply the weights and the Jacobian
    double W = w*J;
 
-   //Calculate local values of the pressure and velocity components
+   //Calculate local values of unknown
    //Allocate and initialise to zero
    double interpolated_u=0.0;
    Vector<double> interpolated_x(DIM,0.0);
@@ -159,6 +159,178 @@ fill_in_generic_residual_contribution_poisson(Vector<double> &residuals,
 }   
 
 
+//======================================================================
+/// Compute derivatives of elemental residual vector with respect
+/// to nodal coordinates. 
+/// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
+/// Overloads the FD-based version in the FE base class.
+//======================================================================
+template <unsigned DIM>
+void  PoissonEquations<DIM>::get_dresidual_dnodal_coordinates(
+ RankThreeTensor<double>&
+ dresidual_dnodal_coordinates)
+{
+
+ //Find out how many nodes there are
+ const unsigned n_node = nnode();
+
+ //Set up memory for the shape and test functions
+ Shape psi(n_node), test(n_node);
+ DShape dpsidx(n_node,DIM), dtestdx(n_node,DIM);
+ DShape dpsidx_pls(n_node,DIM), dtestdx_pls(n_node,DIM);
+
+ // Deriatives of shape fct derivatives w.r.t. nodal coords
+ RankFourTensor<double> d_dpsidx_dX(DIM,n_node,n_node,DIM);
+ RankFourTensor<double> d_dtestdx_dX(DIM,n_node,n_node,DIM);
+
+ // Derivative of Jacobian of mapping w.r.t. to nodal coords
+ DenseMatrix<double> dJ_dX(DIM,n_node);
+
+ // Derivatives of derivative of u w.r.t. nodal coords
+ RankThreeTensor<double> d_dudx_dX(DIM,n_node,DIM);
+
+ // Gradient of source fct
+ Vector<double> d_source_dx(DIM);
+
+ //Index at which the poisson unknown is stored
+ const unsigned u_nodal_index = u_index_poisson();
+ 
+ //Set the value of n_intpt
+ const unsigned n_intpt = integral_pt()->nweight();
+
+ //Integers to store the local equation number
+ int local_eqn=0;
+
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   //Get the integral weight
+   double w = integral_pt()->weight(ipt);
+
+   //Call the derivatives of the shape and test functions
+   double J = dshape_and_dtest_eulerian_at_knot_poisson(ipt,psi,dpsidx,
+                                                        test,dtestdx);
+       
+   //Calculate local values 
+   //Allocate and initialise to zero
+   Vector<double> interpolated_x(DIM,0.0);
+   Vector<double> interpolated_dudx(DIM,0.0);
+   
+   //Calculate function value and derivatives:
+   //-----------------------------------------
+   // Loop over nodes
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     //Get the nodal value of the Poisson unknown
+     double u_value = raw_nodal_value(l,u_nodal_index);
+     // Loop over directions
+     for(unsigned j=0;j<DIM;j++)
+      {
+       interpolated_x[j] += raw_nodal_position(l,j)*psi(l);
+       interpolated_dudx[j] += u_value*dpsidx(l,j);
+      }
+    }
+
+   //Get source function
+   //-------------------
+   double source;
+   get_source_poisson(interpolated_x,source);
+
+   // FD step 
+   double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
+   
+   // Do FD loop
+   for (unsigned jj=0;jj<n_node;jj++)
+    {
+     // Get node
+     Node* nod_pt=node_pt(jj);
+     
+     // Loop over coordinate directions
+     for (unsigned ii=0;ii<DIM;ii++)
+      {
+       // Make backup
+       double backup=nod_pt->x(ii);
+       
+       // Do FD step. No node update required as we're
+       // attacking the coordinate directly...
+       nod_pt->x(ii)+=eps_fd;
+       
+       //Call the derivatives of the shape and test functions
+       //at advanced level
+       double J_pls = 
+        dshape_and_dtest_eulerian_at_knot_poisson(ipt,psi,dpsidx_pls,
+                                                  test,dtestdx_pls);
+       
+       // Assign
+       dJ_dX(ii,jj)=(J_pls-J)/eps_fd;
+       for (unsigned i=0;i<DIM;i++)
+        {
+         for (unsigned j=0;j<n_node;j++)
+          {
+           d_dpsidx_dX(ii,jj,j,i)=(dpsidx_pls(j,i)-dpsidx(j,i))/eps_fd;
+           d_dtestdx_dX(ii,jj,j,i)=(dtestdx_pls(j,i)-dtestdx(j,i))/eps_fd;
+          }
+        }
+
+       // Shape deriv of du/dx_i
+       for (unsigned i=0;i<DIM;i++)
+        {
+         double aux=0.0;
+         for (unsigned j_nod=0;j_nod<n_node;j_nod++)
+          {
+           aux+=raw_nodal_value(j_nod,u_nodal_index)*
+            d_dpsidx_dX(ii,jj,j_nod,i);
+          }
+         d_dudx_dX(ii,jj,i)=aux;
+        }
+  
+       // Reset coordinate. No node update required as we're
+       // attacking the coordinate directly...
+       nod_pt->x(ii)=backup;
+      }
+    }
+
+   // Get gradient of source function
+   get_source_gradient_poisson(interpolated_x, d_source_dx);
+
+
+   // Assemble shape derivatives
+   //---------------------------
+       
+   // Loop over the test functions
+   for(unsigned l=0;l<n_node;l++)
+    {
+     //Get the local equation
+     local_eqn = nodal_local_eqn(l,u_nodal_index);
+
+     /*IF it's not a boundary condition*/
+     if(local_eqn >= 0)
+      {
+       // Loop over coordinate directions
+       for (unsigned ii=0;ii<DIM;ii++)
+        {              
+         // Loop over nodes
+         for (unsigned jj=0;jj<n_node;jj++)
+          {       
+           double sum=source*psi(l)*dJ_dX(ii,jj)+
+            d_source_dx[ii]*psi(l)*psi(jj)*J;
+
+           for (unsigned k=0;k<DIM;k++)
+            {
+             sum+=interpolated_dudx[k]*(dtestdx(l,k)*dJ_dX(ii,jj)+
+                                        d_dtestdx_dX(ii,jj,l,k)*J)
+              + d_dudx_dX(ii,jj,k)*dtestdx(l,k)*J;
+            }
+
+           // Multiply through by integration weight
+           dresidual_dnodal_coordinates(local_eqn,ii,jj)+=sum*w;
+          }
+        }
+      }
+    }
+
+  } // End of loop over integration points
+}   
 
 
 //======================================================================

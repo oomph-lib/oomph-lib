@@ -62,7 +62,7 @@ namespace ConstSourceForPoisson
 /// Const source function
  void get_source(const Vector<double>& x, double& source)
  {
-  source = -Strength;
+  source = -Strength*(1.0+x[0]*x[1]);
  }
  
 }
@@ -86,9 +86,11 @@ public:
 
  /// \short  Constructor: Bool flag specifies if position of fish back is
  /// prescribed or computed from the coupled problem. String specifies
- /// output directory
- RefineableFishPoissonProblem(bool fix_position, string directory_name);
-
+ /// output directory.
+ RefineableFishPoissonProblem(
+  const bool& fix_position, const string& directory_name,
+  const unsigned& i_case);
+  
  /// Destructor
  virtual ~RefineableFishPoissonProblem();
 
@@ -136,7 +138,62 @@ public:
  DocInfo& doc_info() {return Doc_info;}
 
 private:
+ 
+ /// Helper fct to set method for evaluation of shape derivs
+ void set_shape_deriv_method()
+  {
+   
+   bool done=false;
 
+   //Loop over elements and set pointers to source function
+   unsigned n_element = fish_mesh_pt()->nelement();
+   for(unsigned i=0;i<n_element;i++)
+    {
+     // Upcast from FiniteElement to the present element
+     ELEMENT *el_pt = dynamic_cast<ELEMENT*>(fish_mesh_pt()->element_pt(i));
+     
+     // Direct FD
+     if (Case_id==0)
+      {
+       el_pt->evaluate_shape_derivs_by_direct_fd();       
+       if (!done) std::cout << "\n\n [CR residuals] Direct FD" << std::endl;
+      }
+     // Chain rule with/without FD
+     else if ( (Case_id==1) ||  (Case_id==2) )
+      {
+       el_pt->evaluate_shape_derivs_by_chain_rule();
+       if (Case_id==1)
+        {
+         el_pt->evaluate_dresidual_dnodal_coordinates_by_fd()=true;
+         if (!done) std::cout << "\n\n [CR residuals] Chain rule and FD" << std::endl;
+        }
+       else
+        {
+         el_pt->evaluate_dresidual_dnodal_coordinates_by_fd()=false;
+         if (!done) std::cout << "\n\n [CR residuals] Chain rule and analytic" << std::endl;
+        }
+      }
+     // Fastest with/without FD
+     else if ( (Case_id==3) ||  (Case_id==4) )
+      {
+       el_pt->evaluate_shape_derivs_by_fastest_method();
+       if (Case_id==3)
+        {
+         el_pt->evaluate_dresidual_dnodal_coordinates_by_fd()=true;
+         if (!done) std::cout << "\n\n [CR residuals] Fastest and FD" << std::endl;
+        }
+       else
+        {
+         el_pt->evaluate_dresidual_dnodal_coordinates_by_fd()=false;
+         if (!done) std::cout << "\n\n [CR residuals] Fastest and analytic" << std::endl;
+         
+        }
+      }
+     done=true;
+    }
+   
+  }
+ 
  /// Node at which the solution of the Poisson equation is documented
  Node* Doc_node_pt;
 
@@ -159,6 +216,9 @@ private:
  /// Doc info object
  DocInfo Doc_info;
 
+ /// Case id
+ unsigned Case_id;
+
 };
 
 
@@ -172,8 +232,10 @@ private:
 //========================================================================
 template<class ELEMENT>
 RefineableFishPoissonProblem<ELEMENT>::RefineableFishPoissonProblem(
- bool fix_position, string directory_name) : Fix_position(fix_position)
+ const bool& fix_position, const string& directory_name,
+ const unsigned& i_case) : Fix_position(fix_position), Case_id(i_case)
 { 
+
 
  // Set output directory
  Doc_info.set_directory(directory_name); 
@@ -235,7 +297,8 @@ RefineableFishPoissonProblem<ELEMENT>::RefineableFishPoissonProblem(
 
  // Doc
  cout << std::endl <<  "Control node is located at: " 
-      << Doc_node_pt->x(0) << " " << Doc_node_pt->x(1) << std::endl << std::endl;
+      << Doc_node_pt->x(0) << " " << Doc_node_pt->x(1) 
+      << std::endl << std::endl;
 
  // Position of fish back is prescribed
  if (Fix_position)
@@ -304,6 +367,9 @@ RefineableFishPoissonProblem<ELEMENT>::RefineableFishPoissonProblem(
    el_pt->source_fct_pt() = &ConstSourceForPoisson::get_source;
   }
 
+ // Set shape derivative method
+ set_shape_deriv_method();
+
  // Do equation numbering
  cout <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
 
@@ -341,8 +407,16 @@ void RefineableFishPoissonProblem<ELEMENT>::doc_solution()
 
 
  // Output solution 
- sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
-         Doc_info.number());
+ if (Case_id!=0)
+  {
+   sprintf(filename,"%s/soln_%i_%i.dat",Doc_info.directory().c_str(),
+           Case_id,Doc_info.number());
+  }
+ else
+  {
+   sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
+           Doc_info.number());
+  }
  some_file.open(filename);
  fish_mesh_pt()->output(some_file,npts);
  some_file.close();
@@ -382,7 +456,7 @@ void demo_fish_poisson(const string& directory_name)
 
  // Set up the problem with prescribed displacement of fish back
  bool fix_position=true;
- RefineableFishPoissonProblem<ELEMENT> problem(fix_position,directory_name);  
+ RefineableFishPoissonProblem<ELEMENT> problem(fix_position,directory_name,0);
 
  // Doc refinement targets
  problem.fish_mesh_pt()->doc_adaptivity_targets(cout);
@@ -400,11 +474,13 @@ void demo_fish_poisson(const string& directory_name)
 
  // Number of steps
  unsigned nstep=5;
- if (CommandLineArgs::Argc>1) nstep=1;
- 
+
  // Increment in displacement
  double dyc=0.6/double(nstep-1);
 
+ // Valiation: Just do one step
+ if (CommandLineArgs::Argc>1) nstep=1;
+ 
  for (unsigned istep=0;istep<nstep;istep++)
   {    
    // Solve/doc
@@ -429,26 +505,38 @@ template<class ELEMENT>
 void demo_elastic_fish_poisson(const string& directory_name)
 {
 
-  //Set up the problem with "elastic" fish back
- bool fix_position=false;
- RefineableFishPoissonProblem<ELEMENT> problem(fix_position,directory_name);
-  
- // Doc refinement targets
- problem.fish_mesh_pt()->doc_adaptivity_targets(cout);
-  
- // Do some uniform mesh refinement first
- //--------------------------------------
- problem.refine_uniformly();
- problem.refine_uniformly();
- 
+ // Loop over all cases
+ for (unsigned i_case=0;i_case<5;i_case++)
+  //unsigned i_case=1;
+  {
+   std::cout << "[CR residuals] " << std::endl;
+   std::cout << "[CR residuals]==================================================" 
+             << std::endl;
+   std::cout << "[CR residuals] " << std::endl;
+   //Set up the problem with "elastic" fish back
+   bool fix_position=false;
+   RefineableFishPoissonProblem<ELEMENT> problem(fix_position,
+                                                 directory_name,
+                                                 i_case);
+   
+   // Doc refinement targets
+   problem.fish_mesh_pt()->doc_adaptivity_targets(cout);
+   
+   // Do some uniform mesh refinement first
+   //--------------------------------------
+   problem.refine_uniformly();
+   problem.refine_uniformly();
+   
+   
+   // Initial value for load on fish back
+   problem.load()=0.0;
+   
+   // Solve/doc
+   unsigned max_solve=2; 
+   problem.newton_solve(max_solve);
+   problem.doc_solution();
+  }
 
- // Initial value for load on fish back
- problem.load()=0.0;
-
- // Solve/doc
- unsigned max_solve=2; 
- problem.newton_solve(max_solve);
- problem.doc_solution();
 
 }
 
@@ -474,6 +562,7 @@ int main(int argc, char* argv[])
 
   // Compute "elastic" coupled solution directly
   demo_elastic_fish_poisson<ELEMENT>("RESLT_coupled"); 
+
 }
 
 

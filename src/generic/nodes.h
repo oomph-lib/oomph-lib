@@ -676,7 +676,7 @@ class HangInfo
    if (Nmaster==0)
     {
      throw OomphLibError("Hanging node data hasn't been setup yet \n",
-                         "Node::master_node_pt()",
+                         "HangInfo::master_node_pt()",
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -693,7 +693,7 @@ class HangInfo
    if (Nmaster==0)
     {
      throw OomphLibError("Hanging node data hasn't been setup yet \n",
-                         "Node::master_weight()",
+                         "HangInfo::master_weight()",
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
@@ -789,6 +789,12 @@ class GeomObject;
 class Node : public Data
 {
 
+
+public:
+
+  /// Function pointer to auxiliary node update function
+  typedef void(*AuxNodeUpdateFctPt)(Node*);  
+
  //The BoundaryNodeBase class must use knowledge of the internal data storage
  ///to construct periodic Nodes
  friend class BoundaryNodeBase;
@@ -837,7 +843,20 @@ class Node : public Data
  /// \short Direct access to the pointer to the i-th stored coordinate data
  double* x_position_pt(const unsigned &i) {return X_position[i];}
 
+ /// \short Pointer to auxiliary update function -- this 
+ /// can be used to update any nodal values following the update
+ /// of the nodal position. This is needed e.g. to update the no-slip
+ /// condition on moving boundaries. 
+ AuxNodeUpdateFctPt Aux_node_update_fct_pt;
+
+ /// \short Boolean to decide if
+ /// hanging positional constraints for the nodal positon
+ /// in Node::position() should be ignored. Used in chain-rule based
+ /// evaluation of shape derivatives. Defaults to false, obviously;
+ bool Use_raw_nodal_position;
+
 public:
+
 
  /// \short Static "Magic number" used to indicate that there is no 
  /// independent position in a periodic node. 
@@ -1054,6 +1073,16 @@ public:
    return Hanging_pt[i+1]; 
   }
 
+ /// \short Access to boolean to decide if
+ /// hanging positional constraints for the nodal positon
+ /// in Node::position() should be ignored. Used in chain-rule based
+ /// evaluation of shape derivatives. Defaults to false, obviously.
+ bool& use_raw_nodal_position()
+  {
+   return Use_raw_nodal_position;
+  }
+
+
  /// Test whether the node is geometrically hanging
  bool is_hanging() const
   {
@@ -1265,6 +1294,31 @@ public:
  /// i.e. it is fixed in space.
  virtual void node_update(bool update_all_time_levels_for_new_node=false) { }
 
+ /// \short Set pointer to auxiliary update function -- this 
+ /// can be used to update any nodal values following the update
+ /// of the nodal position. This is needed e.g. to update the no-slip
+ /// condition on moving boundaries. 
+ void set_auxiliary_node_update_fct_pt(AuxNodeUpdateFctPt 
+                                       aux_node_update_fct_pt) 
+  {
+   // Set pointer (by default it's set to NULL)
+   Aux_node_update_fct_pt=aux_node_update_fct_pt;
+  }
+
+
+
+ /// \short Execute auxiliary update function (if any) -- this 
+ /// can be used to update any nodal values following the update
+ /// of the nodal position. This is needed e.g. to update the no-slip
+ /// condition on moving boundaries. hierher move into base class
+ void perform_auxiliary_node_update_fct() 
+  {
+   if (Aux_node_update_fct_pt!=0)
+    {
+     Aux_node_update_fct_pt(this);
+    }
+  }
+  
  /// \short Return the number of geometric data that affect the nodal
  /// position. The default value is zero (node is stationary)
  virtual inline unsigned ngeom_data() const {return 0;}
