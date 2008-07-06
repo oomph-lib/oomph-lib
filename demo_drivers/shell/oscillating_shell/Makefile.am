@@ -17,5 +17,4 @@ oscillating_shell_LDADD = -L@libdir@ -lshell -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 #-------------------------------------------------------------------
 
 
-
-EXTRA_DIST = shell.mcr
+EXTRA_DIST += shell.mcr
