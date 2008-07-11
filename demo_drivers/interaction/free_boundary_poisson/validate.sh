@@ -110,7 +110,7 @@ echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat RESLT/soln0.dat RESLT_coupled/soln0.dat > alg.dat
+cat RESLT/soln0.dat RESLT_coupled/soln0.dat RESLT_coupled/soln_1_0.dat  RESLT_coupled/soln_2_0.dat   RESLT_coupled/soln_3_0.dat   RESLT_coupled/soln_4_0.dat  > alg.dat
 mv RESLT RESLT_algebraic
 mv RESLT_coupled RESLT_coupled_algebraic
 

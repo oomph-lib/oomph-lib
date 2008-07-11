@@ -186,7 +186,7 @@ public:
   }
 
 
- /// Get source term at (Eulerian) position x. This function is
+ /// Get gradient of source term at (Eulerian) position x. This function is
  /// virtual to allow overloading in multi-physics problems where
  /// the strength of the source function might be determined by
  /// another system of equations. Computed via function pointer 
@@ -195,7 +195,7 @@ public:
   const Vector<double>& x, 
   Vector<double>& gradient) const
   {
-   //If no source function has been set, return zero
+   //If no gradient function has been set, FD it
    if(Source_fct_gradient_pt==0)
     {
      // Reference value

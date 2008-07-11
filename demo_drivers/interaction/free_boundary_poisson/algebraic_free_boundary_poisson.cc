@@ -165,12 +165,14 @@ private:
        if (Case_id==1)
         {
          el_pt->evaluate_dresidual_dnodal_coordinates_by_fd()=true;
-         if (!done) std::cout << "\n\n [CR residuals] Chain rule and FD" << std::endl;
+         if (!done) std::cout << "\n\n [CR residuals] Chain rule and FD" 
+                              << std::endl;
         }
        else
         {
          el_pt->evaluate_dresidual_dnodal_coordinates_by_fd()=false;
-         if (!done) std::cout << "\n\n [CR residuals] Chain rule and analytic" << std::endl;
+         if (!done) std::cout << "\n\n [CR residuals] Chain rule and analytic" 
+                              << std::endl;
         }
       }
      // Fastest with/without FD
@@ -180,12 +182,14 @@ private:
        if (Case_id==3)
         {
          el_pt->evaluate_dresidual_dnodal_coordinates_by_fd()=true;
-         if (!done) std::cout << "\n\n [CR residuals] Fastest and FD" << std::endl;
+         if (!done) std::cout << "\n\n [CR residuals] Fastest and FD" 
+                              << std::endl;
         }
        else
         {
          el_pt->evaluate_dresidual_dnodal_coordinates_by_fd()=false;
-         if (!done) std::cout << "\n\n [CR residuals] Fastest and analytic" << std::endl;
+         if (!done) std::cout << "\n\n [CR residuals] Fastest and analytic" 
+                              << std::endl;
          
         }
       }

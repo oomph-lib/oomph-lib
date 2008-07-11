@@ -237,7 +237,7 @@ class GeneralisedElement
  /// degrees of freedom. The additional memory cost of such storage may
  /// or may not be offset by fast local access.
  virtual void assign_additional_local_eqn_numbers() {}
- 
+
  /// \short Return the local equation number corresponding to the j-th
  /// value stored at the i-th internal data
  inline int internal_local_eqn(const unsigned &i, const unsigned &j) 
@@ -1250,14 +1250,8 @@ class FiniteElement : public virtual GeneralisedElement
    fill_in_jacobian_from_nodal_by_fd(full_residuals,jacobian);
   }
 
- /// \short Compute derivatives of elemental residual vector with respect
- /// to nodal coordinates. Default implementation by FD can be overwritten
- /// for specific elements. 
- /// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
- virtual void get_dresidual_dnodal_coordinates(RankThreeTensor<double>&
-                                               dresidual_dnodal_coordinates);
-
 public:
+
 
  /// \short Function pointer for function that computes vector-valued
  /// steady "exact solution" \f$ {\bf f}({\bf x}) \f$
@@ -1673,6 +1667,14 @@ public:
                   const unsigned &k, 
                   const unsigned &i) const
   {return node_pt(n)->dposition_gen_dt(j,k,i);}
+
+
+ /// \short Compute derivatives of elemental residual vector with respect
+ /// to nodal coordinates. Default implementation by FD can be overwritten
+ /// for specific elements. 
+ /// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
+ virtual void get_dresidual_dnodal_coordinates(RankThreeTensor<double>&
+                                               dresidual_dnodal_coordinates);
 
  /// \short This is an empty function that establishes a uniform
  /// interface for all (derived) elements that involve time-derivatives.

@@ -2,7 +2,15 @@
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 # Name of executables
-check_PROGRAMS=osc_ring_alg osc_ring_macro fsi_osc_ring
+check_PROGRAMS=osc_ring_alg osc_ring_macro fsi_osc_ring fsi_osc_ring_compare_jacs
+
+# Sources for zeroth executable
+fsi_osc_ring_compare_jacs_SOURCES = fsi_osc_ring_compare_jacs.cc
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+fsi_osc_ring_compare_jacs_LDADD = -L@libdir@ -lbeam -lnavier_stokes -lgeneric \
+                     $(EXTERNAL_LIBS) $(FLIBS)
 
 # Sources for first executable
 fsi_osc_ring_SOURCES = fsi_osc_ring.cc

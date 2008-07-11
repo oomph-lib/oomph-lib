@@ -231,7 +231,8 @@ public:
  /// \short Fit the parameters to the pairs of (x,y) data specified, 
  /// using max_iter Levenberg Marquardt iterations
  void fit_it(const Vector<std::pair<double,double> >& fitting_data,
-             const unsigned& max_iter);
+             const unsigned& max_iter,
+             const bool& quiet=true);
 
 private:
 

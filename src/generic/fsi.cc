@@ -62,60 +62,6 @@ namespace FSI_functions
 
 }
 
-//  //================================================================
-//  /// hierher obsolete Constructor: Assign storage -- pass the Eulerian 
-//  /// dimension of the "adjacent" fluid elements and the
-//  /// number of local coordinates required to parametrise
-//  /// the wall element. E.g. for a FSIKirchhoffLoveBeam,
-//  /// bounding a 2D fluid domain ndim_fluid=2 and nlagr_solid=1
-//  /// NOTE: GeomObject constructor must be called explicitly
-//  /// as GeomObject(nlagr_solid, ndim_fluid) from the constructor of the
-//  /// derived class because of virtual inheritance!
-//  /// Note that, by default, we're only providing storage for fluid
-//  /// loading on the "front" of the element. Call 
-//  /// FSIWallElement::enable_fluid_loading_on_both_sides()
-//  /// to to enable fluid loading on the back, too.
-//  //====================================================================
-//  FSIWallElement::FSIWallElement(const unsigned& nlagr_solid, 
-//                                 const unsigned& ndim_fluid) : 
-//   GeomObject(nlagr_solid, ndim_fluid) 
-//  {
-//   // Number of Gauss integration points
-//    unsigned n_intpt=integral_pt()->nweight();
-
-//    // By default only the "front" face is loaded
-//    Only_front_is_loaded_by_fluid=true;
-
-//    // Only need lookup schemes for fluid elements that are 
-//    // adjacent to the element's "front"
-//    Adjacent_fluid_element_pt.resize(1);
-//    Adjacent_fluid_local_coord.resize(1);
-   
-//    // Storage for FSI fluid elements that are adjacent to Gauss point
-//    Adjacent_fluid_element_pt[0].resize(n_intpt);
-   
-//    // Storage for local coordinates in FSI fluid elements that are 
-//    // adjacent to wall Gauss point
-//    Adjacent_fluid_local_coord[0].resize(n_intpt);
-
-//    // Resize of vectors of local coordinates & initialise element pointers
-//    for (unsigned i=0;i<n_intpt;i++)
-//     {
-//      Adjacent_fluid_element_pt[0][i]=0;
-//      Adjacent_fluid_local_coord[0][i].resize(ndim_fluid);
-//     }
-   
-//    // Set pointer to default stress ratio
-//    Q_pt = &Default_Q_Value;
-   
-//    // By default we do include the influence of the external load
-//    // data on the jacobian and residuals. This may have to be switched
-//    // off, either because the "user" deems the coupling to be
-//    // irrelevant or because we're solving an auxiliary solids-only
-//    // problem, e.g. during the assignment of initial conditions
-//    // for a time-dependent FSI problem.
-//    Add_external_load_data = true;
-//  }
  
  
  //================================================================

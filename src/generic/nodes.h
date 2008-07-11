@@ -849,14 +849,7 @@ public:
  /// condition on moving boundaries. 
  AuxNodeUpdateFctPt Aux_node_update_fct_pt;
 
- /// \short Boolean to decide if
- /// hanging positional constraints for the nodal positon
- /// in Node::position() should be ignored. Used in chain-rule based
- /// evaluation of shape derivatives. Defaults to false, obviously;
- bool Use_raw_nodal_position;
-
 public:
-
 
  /// \short Static "Magic number" used to indicate that there is no 
  /// independent position in a periodic node. 
@@ -1073,16 +1066,6 @@ public:
    return Hanging_pt[i+1]; 
   }
 
- /// \short Access to boolean to decide if
- /// hanging positional constraints for the nodal positon
- /// in Node::position() should be ignored. Used in chain-rule based
- /// evaluation of shape derivatives. Defaults to false, obviously.
- bool& use_raw_nodal_position()
-  {
-   return Use_raw_nodal_position;
-  }
-
-
  /// Test whether the node is geometrically hanging
  bool is_hanging() const
   {
@@ -1294,6 +1277,7 @@ public:
  /// i.e. it is fixed in space.
  virtual void node_update(bool update_all_time_levels_for_new_node=false) { }
 
+
  /// \short Set pointer to auxiliary update function -- this 
  /// can be used to update any nodal values following the update
  /// of the nodal position. This is needed e.g. to update the no-slip
@@ -1307,10 +1291,17 @@ public:
 
 
 
+ /// \short Boolean to indicate if node has a pointer to 
+ /// and auxiliary update function. 
+ bool has_auxiliary_node_update_fct_pt()
+  {
+   return (Aux_node_update_fct_pt!=0);
+  }
+
  /// \short Execute auxiliary update function (if any) -- this 
  /// can be used to update any nodal values following the update
  /// of the nodal position. This is needed e.g. to update the no-slip
- /// condition on moving boundaries. hierher move into base class
+ /// condition on moving boundaries.
  void perform_auxiliary_node_update_fct() 
   {
    if (Aux_node_update_fct_pt!=0)

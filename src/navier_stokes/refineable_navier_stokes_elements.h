@@ -209,6 +209,13 @@ public virtual ElementWithZ2ErrorEstimator
   DenseMatrix<double> &mass_matrix,
   unsigned flag); 
 
+ /// \short Compute derivatives of elemental residual vector with respect
+ /// to nodal coordinates. Overwrites default implementation in 
+ /// FiniteElement base class.
+ /// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
+ virtual void get_dresidual_dnodal_coordinates(RankThreeTensor<double>&
+                                               dresidual_dnodal_coordinates);
+  
 };
 
 

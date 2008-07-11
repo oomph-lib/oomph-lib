@@ -257,15 +257,18 @@ void RefineablePoissonEquations<DIM>::get_dresidual_dnodal_coordinates(
  DShape dpsidx(n_node,DIM), dtestdx(n_node,DIM);
  DShape dpsidx_pls(n_node,DIM), dtestdx_pls(n_node,DIM);
 
+ // Get number of shape controlling nodes 
+ unsigned n_shape_controlling_node=nshape_controlling_nodes();
+
  // Deriatives of shape fct derivatives w.r.t. nodal coords
- RankFourTensor<double> d_dpsidx_dX(DIM,n_node,n_node,DIM);
- RankFourTensor<double> d_dtestdx_dX(DIM,n_node,n_node,DIM);
+ RankFourTensor<double> d_dpsidx_dX(DIM,n_shape_controlling_node,n_node,DIM);
+ RankFourTensor<double> d_dtestdx_dX(DIM,n_shape_controlling_node,n_node,DIM);
 
  // Derivative of Jacobian of mapping w.r.t. to nodal coords
- DenseMatrix<double> dJ_dX(DIM,n_node);
+ DenseMatrix<double> dJ_dX(DIM,n_shape_controlling_node);
 
  // Derivatives of derivative of u w.r.t. nodal coords
- RankThreeTensor<double> d_dudx_dX(DIM,n_node,DIM);
+ RankThreeTensor<double> d_dudx_dX(DIM,n_shape_controlling_node,DIM);
 
  // Gradient of source fct
  Vector<double> d_source_dx(DIM);
@@ -317,29 +320,24 @@ void RefineablePoissonEquations<DIM>::get_dresidual_dnodal_coordinates(
    double source;
    get_source_poisson(interpolated_x,source);
 
-   
-   // Use "raw" nodal positions so the FD loop below actually picks up 
-   // the FD-ed changes in the raw nodal position rather than bypassing
-   // them via the hanging node constraints.
-   for (unsigned j=0;j<n_node;j++)
-    {
-     Node* nod_pt=node_pt(j);
-     for (unsigned i=0;i<DIM;i++)
-      {
-       nod_pt->x(i)=nod_pt->position(i);
-      }
-     nod_pt->use_raw_nodal_position()=true;
-    }
-   
    // FD step 
    double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
    
-   // Do FD loop
-   for (unsigned jj=0;jj<n_node;jj++)
-    {
+   std::map<Node*,unsigned> local_shape_controlling_node_lookup= 
+    shape_controlling_node_lookup();
+
+   // FD loop over shape-controlling nodes
+   for (std::map<Node*,unsigned>::iterator it=
+         local_shape_controlling_node_lookup.begin();
+        it!=local_shape_controlling_node_lookup.end();
+        it++)
+    {  
      // Get node
-     Node* nod_pt=node_pt(jj);
+     Node* nod_pt=it->first;
      
+     // Get its number
+     unsigned jj=it->second;
+          
      // Loop over coordinate directions
      for (unsigned ii=0;ii<DIM;ii++)
       {
@@ -383,13 +381,6 @@ void RefineablePoissonEquations<DIM>::get_dresidual_dnodal_coordinates(
        // attacking the coordinate directly...
        nod_pt->x(ii)=backup;
       }
-    }
-
-
-   //Reset 
-   for (unsigned j=0;j<n_node;j++)
-    {
-     node_pt(j)->use_raw_nodal_position()=false;
     }
    
    // Get gradient of source function
@@ -448,14 +439,11 @@ void RefineablePoissonEquations<DIM>::get_dresidual_dnodal_coordinates(
        //If the nodal equation is not a boundary condition
        if(local_eqn >= 0)
         {
-         
-         
-         
          // Loop over coordinate directions
          for (unsigned ii=0;ii<DIM;ii++)
           {              
-           // Loop over nodes
-           for (unsigned jj=0;jj<n_node;jj++)
+           // Loop over shape controlling nodes
+           for (unsigned jj=0;jj<n_shape_controlling_node;jj++)
             {       
              double sum=source*psi(l)*dJ_dX(ii,jj)+
               d_source_dx[ii]*psi(l)*psi(jj)*J;

@@ -1023,8 +1023,7 @@ unsigned Node::No_independent_position=10;
 Node::Node() : Data(), 
                Position_time_stepper_pt(Data::Default_static_time_stepper_pt),
                Hanging_pt(0),
-               Ndim(0), Nposition_type(0), Aux_node_update_fct_pt(0),
-               Use_raw_nodal_position(false)
+               Ndim(0), Nposition_type(0), Aux_node_update_fct_pt(0)
 {
 #ifdef LEAK_CHECK
  LeakCheckNames::Node_build+=1;
@@ -1047,8 +1046,7 @@ Node::Node(const unsigned &n_dim,
  Position_time_stepper_pt(Data::Default_static_time_stepper_pt),
  Hanging_pt(0),
  Ndim(n_dim), 
- Nposition_type(n_position_type), Aux_node_update_fct_pt(0),
- Use_raw_nodal_position(false)
+ Nposition_type(n_position_type), Aux_node_update_fct_pt(0)
 {
 #ifdef LEAK_CHECK
  LeakCheckNames::Node_build+=1;
@@ -1096,8 +1094,7 @@ Node::Node(TimeStepper* const &time_stepper_pt,
    X_position(0),
    Position_time_stepper_pt(time_stepper_pt), 
    Hanging_pt(0),
-   Ndim(n_dim), Nposition_type(n_position_type), Aux_node_update_fct_pt(0),
-   Use_raw_nodal_position(false)
+   Ndim(n_dim), Nposition_type(n_position_type), Aux_node_update_fct_pt(0)
 {
 #ifdef LEAK_CHECK
  LeakCheckNames::Node_build+=1;
@@ -1742,7 +1739,7 @@ double Node::position(const unsigned &i) const
  double posn=0.0;
 
  // Non-hanging node: just return value
- if ((!is_hanging())||Use_raw_nodal_position) {posn = x(i);}
+ if (!is_hanging()) {posn = x(i);}
  // Hanging node: Use hanging node representation
  else
   {
@@ -1771,7 +1768,7 @@ double Node::position(const unsigned &t, const unsigned &i) const
  double posn=0.0;
  
  // Non-hanging node: just return value
- if((!is_hanging())||Use_raw_nodal_position) {posn = x(t,i);}
+ if(!is_hanging()) {posn = x(t,i);}
  // Hanging node: Use hanging node representation
  else
   {
@@ -1801,7 +1798,7 @@ double Node::position_gen(const unsigned &k, const unsigned &i) const
  double posn=0.0;
 
  // Non-hanging node: just return value
- if((!is_hanging())||Use_raw_nodal_position) {posn=x_gen(k,i);}
+ if(!is_hanging()) {posn=x_gen(k,i);}
  // Hanging node: Use hanging node representation
  else
   {
@@ -1832,7 +1829,7 @@ double Node::position_gen(const unsigned &t, const unsigned &k,
  double posn=0.0;
  
  // Non-hanging node: just return value
- if((!is_hanging())||Use_raw_nodal_position) {posn=x_gen(t,k,i);}
+ if(!is_hanging()) {posn=x_gen(t,k,i);}
  // Hanging node: Use hanging node representation
  else
   {

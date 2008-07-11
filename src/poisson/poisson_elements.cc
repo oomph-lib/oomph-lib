@@ -312,8 +312,8 @@ void  PoissonEquations<DIM>::get_dresidual_dnodal_coordinates(
          // Loop over nodes
          for (unsigned jj=0;jj<n_node;jj++)
           {       
-           double sum=source*psi(l)*dJ_dX(ii,jj)+
-            d_source_dx[ii]*psi(l)*psi(jj)*J;
+           double sum=source*test(l)*dJ_dX(ii,jj)+
+            d_source_dx[ii]*test(l)*psi(jj)*J;
 
            for (unsigned k=0;k<DIM;k++)
             {

@@ -136,7 +136,7 @@ double LevenbergMarquardtFittingFunctionObject::fitting_function(
 //=====================================================================
 void LevenbergMarquardtFitter::fit_it(
  const Vector<std::pair<double,double> >& fitting_data,
- const unsigned& max_iter)
+ const unsigned& max_iter, const bool& quiet)
 {
  if (Fitting_function_object_pt==0)
   {
@@ -175,13 +175,15 @@ void LevenbergMarquardtFitter::fit_it(
  DenseDoubleMatrix alpha(ma,ma);
 
 
- std::cout << "Chi_squared" << " ";
- for (unsigned i=0;i<unsigned(ma);i++)
-  { 
-   std::cout << " parameter " << i << " ";
-  }       
- std::cout << std::endl;
-
+ if (!quiet)
+  {
+   std::cout << "Chi_squared" << " ";
+   for (unsigned i=0;i<unsigned(ma);i++)
+    { 
+     std::cout << " parameter " << i << " ";
+    }       
+   std::cout << std::endl;
+  }
 
  // Start iteration with almda negative for setup
  double alamda=-0.1;
@@ -264,19 +266,27 @@ void LevenbergMarquardtFitter::fit_it(
         }
        beta[j]=da[j];
       }
-     // Output with fixed width
-     std::cout.setf(ios_base::scientific,ios_base::floatfield);
-     std::cout.width(15);
-     std::cout << chisq << " ";
+     
      for (l=0;l<ma;l++)
       { 
        Fitting_function_object_pt->parameter(l)=atry[l];
-       oomph_info << atry[l] << " ";
-      }       
-     oomph_info << std::endl;
-     // Reset
-     std::cout.setf(std::_Ios_Fmtflags(0), ios_base::floatfield);
-     std::cout.width(0);
+      }
+       
+     if (!quiet)
+      {
+       // Output with fixed width
+       std::cout.setf(ios_base::scientific,ios_base::floatfield);
+       std::cout.width(15);
+       std::cout << chisq << " ";
+       for (l=0;l<ma;l++)
+        { 
+         std::cout << atry[l] << " ";
+        }       
+       std::cout << std::endl;
+       // Reset
+       std::cout.setf(std::_Ios_Fmtflags(0), ios_base::floatfield);
+       std::cout.width(0);
+      }
     }
    else
     {

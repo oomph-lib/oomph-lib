@@ -173,7 +173,8 @@ class NavierStokesEquations : public virtual FSIFluidElement
  /// Eulerian position. This function is virtual so that it can be 
  /// overloaded in multi-physics elements where the body force might
  /// depend on another variable.
- virtual void get_body_force_nst(double time, const Vector<double> &s,
+ virtual void get_body_force_nst(const double& time, 
+                                 const Vector<double> &s,
                                  const Vector<double> &x, 
                                  Vector<double> &result)
   {
@@ -190,9 +191,52 @@ class NavierStokesEquations : public virtual FSIFluidElement
     }
   }
 
+ /// Get gradient of body force term at (Eulerian) position x. This function is
+ /// virtual to allow overloading in multi-physics problems where
+ /// the strength of the source function might be determined by
+ /// another system of equations. Computed via function pointer 
+ /// (if set) or by finite differencing (default)
+ inline virtual void get_body_force_gradient_nst(
+  const double& time,
+  const Vector<double>& s,
+  const Vector<double>& x, 
+  DenseMatrix<double>& d_body_force_dx)
+  {
+// hierher: Implement function pointer version
+/*    //If no gradient function has been set, FD it */
+/*    if(Body_force_fct_gradient_pt==0) */
+    {
+     // Reference value
+     Vector<double> body_force(DIM,0.0);
+     get_body_force_nst(time,s,x,body_force);
+
+     // FD it
+     double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
+     Vector<double> body_force_pls(DIM,0.0);
+     Vector<double> x_pls(x);
+     for (unsigned i=0;i<DIM;i++)
+      {
+       x_pls[i]+=eps_fd;
+       get_body_force_nst(time,s,x_pls,body_force_pls);
+       for (unsigned j=0;j<DIM;j++)
+        {
+         d_body_force_dx(j,i)=(body_force_pls[j]-body_force[j])/eps_fd;
+        }
+       x_pls[i]=x[i];
+      }
+    }
+/*    else */
+/*     { */
+/*      // Get gradient */
+/*      (*Source_fct_gradient_pt)(time,x,gradient); */
+/*     } */
+  }
+
+
+
  /// \short Calculate the source fct at given time and
  /// Eulerian position 
- virtual double get_source_nst(double time, const Vector<double> &x)
+ virtual double get_source_nst(const double& time, const Vector<double> &x)
   {
    //If the function pointer is zero return zero
    if (Source_fct_pt == 0) {return 0;}
@@ -200,6 +244,50 @@ class NavierStokesEquations : public virtual FSIFluidElement
    else {return (*Source_fct_pt)(time,x);}
   }
  
+
+ /// Get gradient of source term at (Eulerian) position x. This function is
+ /// virtual to allow overloading in multi-physics problems where
+ /// the strength of the source function might be determined by
+ /// another system of equations. Computed via function pointer 
+ /// (if set) or by finite differencing (default)
+ inline virtual void get_source_gradient_nst(
+  const double& time,
+  const Vector<double>& x, 
+  Vector<double>& gradient)
+  {
+// hierher: Implement function pointer version
+/*    //If no gradient function has been set, FD it */
+/*    if(Source_fct_gradient_pt==0) */
+    {
+     // Reference value
+     double source=get_source_nst(time,x);
+
+     // FD it
+     double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
+     double source_pls=0.0;
+     Vector<double> x_pls(x);
+     for (unsigned i=0;i<DIM;i++)
+      {
+       x_pls[i]+=eps_fd;
+       source_pls=get_source_nst(time,x_pls);
+       gradient[i]=(source_pls-source)/eps_fd;
+       x_pls[i]=x[i];
+      }
+    }
+/*    else */
+/*     { */
+/*      // Get gradient */
+/*      (*Source_fct_gradient_pt)(time,x,gradient); */
+/*     } */
+  }
+
+
+
+
+
+
+
+
  ///\short Compute the residuals for the Navier--Stokes equations; 
  /// flag=1(or 0): do (or don't) compute the Jacobian as well. 
  virtual void fill_in_generic_residual_contribution_nst(

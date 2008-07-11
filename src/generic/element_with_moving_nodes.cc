@@ -291,9 +291,17 @@ namespace oomph
   // Get nodal dimension from first node
   const unsigned dim_nod=node_pt(0)->ndim();
 
-//   std::cout << "[CR residuals] Method_for_shape_derivs " 
-//             << Method_for_shape_derivs << std::endl;
-
+  // Number of shape controlling nodes for nonrefineable elements
+  unsigned n_shape_controlling_node=nnode();
+  
+  // Are we dealing with a refineable element?
+  RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(this);
+  if (ref_el_pt!=0)
+   {      
+    // Adjust number of shape controlling nodes 
+    n_shape_controlling_node=ref_el_pt->nshape_controlling_nodes();
+   }
+  
   // How are we going to evaluate the shape derivs?
   unsigned method=0;
   if (Method_for_shape_derivs==Shape_derivs_by_direct_fd)
@@ -309,7 +317,7 @@ namespace oomph
     // Direct FD-ing of residuals w.r.t. geometric dofs is likely to be faster
     // if there are fewer geometric dofs than total nodal coordinates
     // (nodes x dim) in element:
-    if (Ngeom_dof<(n_nod*dim_nod))
+    if (Ngeom_dof<(n_shape_controlling_node*dim_nod)) 
      {
       method=0;
      }
@@ -317,9 +325,8 @@ namespace oomph
      {
       method=1;
      }
-   }
 
-    
+   }
 
   // Choose method
   //===============
@@ -395,34 +402,43 @@ namespace oomph
     
    {
     // Get derivatives of residuals w.r.t. all nodal coordinates
-    RankThreeTensor<double> dresidual_dnodal_coordinates(n_dof,
-                                                         dim_nod,
-                                                         n_nod,
-                                                         0.0);
+    RankThreeTensor<double> dresidual_dnodal_coordinates(
+     n_dof,
+     dim_nod,
+     n_shape_controlling_node,
+     0.0);
     
     // Use FD-version in base class?
     if (Evaluate_dresidual_dnodal_coordinates_by_fd)
      {
-      //std::cout << "[CR residuals] use FD" << std::endl; 
-      FiniteElement::get_dresidual_dnodal_coordinates(
-       dresidual_dnodal_coordinates);
+      if (ref_el_pt!=0)
+       {
+        ref_el_pt->RefineableElement::get_dresidual_dnodal_coordinates(
+         dresidual_dnodal_coordinates);
+       }
+      else
+       {
+        FiniteElement::get_dresidual_dnodal_coordinates(
+         dresidual_dnodal_coordinates);
+       }
      }
     // Otherwise use the overloaded analytical version in derived
     // class (if it exists -- if it doesn't this just drops through
     // to the default implementation in FiniteElement).
     else
      {
-      //std::cout << "[CR residuals] use anal" << std::endl; 
       this->get_dresidual_dnodal_coordinates(dresidual_dnodal_coordinates);
      }
-
+    
     // Get derivatives of nodal coordinates w.r.t. geometric dofs
-    RankThreeTensor<double> dnodal_coordinates_dgeom_dofs(n_dof,
-                                                          dim_nod,
-                                                          n_nod,
-                                                          0.0);
+    RankThreeTensor<double> dnodal_coordinates_dgeom_dofs(
+     n_dof,
+     dim_nod,
+     n_shape_controlling_node,
+     0.0);
+    
     get_dnodal_coordinates_dgeom_dofs(dnodal_coordinates_dgeom_dofs);
-
+    
     // Assemble Jacobian via chain rule
     for (unsigned l=0;l<n_dof;l++)
      {
@@ -441,7 +457,7 @@ namespace oomph
             jacobian(l,k)=0.0;
             for (unsigned i=0;i<dim_nod;i++)
              {
-              for (unsigned j=0;j<n_nod;j++)
+              for (unsigned j=0;j<n_shape_controlling_node;j++)
                {
                 jacobian(l,k)+=
                  dresidual_dnodal_coordinates(l,i,j)*
@@ -466,8 +482,9 @@ namespace oomph
      OOMPH_EXCEPTION_LOCATION);
     
    }
-
+  
  }
+
 
 
 
@@ -480,7 +497,6 @@ namespace oomph
  void ElementWithMovingNodes::get_dnodal_coordinates_dgeom_dofs(
   RankThreeTensor<double>& dnodal_coordinates_dgeom_dofs)
  {
-
   //Get number of Data items involved in node update operations
   const unsigned n_geometric_data = ngeom_data();
   
@@ -489,33 +505,73 @@ namespace oomph
   
   // Number of nodes
   const unsigned n_nod=nnode();
-
+  
   // If the element has no nodes (why??!!) return straightaway
   if (n_nod==0) return;
-
+  
   // Get dimension from first node
   unsigned dim_nod=node_pt(0)->ndim();
-
+  
+  // Number of shape controlling nodes for nonrefineable elements
+  unsigned n_shape_controlling_node=n_nod;
+  
+  // Are we dealing with a refineable element?
+  RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(this);
+  if (ref_el_pt!=0)
+   {      
+    // Adjust number of shape controlling nodes 
+    n_shape_controlling_node=ref_el_pt->nshape_controlling_nodes();
+   }
+  
   // Current and advanced nodal positions
-  DenseMatrix<double> pos(dim_nod,n_nod);
-
-  // Loop over all nodes
-  for (unsigned j=0;j<n_nod;j++)
+  DenseMatrix<double> pos(dim_nod,n_shape_controlling_node);
+  
+  // Shape controlling nodes
+  std::map<Node*,unsigned> local_shape_controlling_node_lookup;
+  
+  // Refineable element:
+  if (ref_el_pt!=0)
    {
-    // Get current position
-    Node* nod_pt=node_pt(j);
-    for (unsigned i=0;i<dim_nod;i++)
+    local_shape_controlling_node_lookup=
+     ref_el_pt->shape_controlling_node_lookup();
+   }
+  // Non-refineable element: the nodes themselves
+  else
+   {
+    unsigned count=0;
+    for (unsigned j=0;j<n_nod;j++)
      {
-      pos(i,j)=nod_pt->position(i);
+      local_shape_controlling_node_lookup[node_pt(j)]=count;
+      count++;
      }
    }
+  
+  // Loop over all shape-controlling nodes to backup their original position
+  for (std::map<Node*,unsigned>::iterator it=
+        local_shape_controlling_node_lookup.begin();
+       it!=local_shape_controlling_node_lookup.end();
+       it++)
+   {    
+    // Get node
+    Node* nod_pt=it->first;
+    
+    // Get its number
+    unsigned node_number=it->second;
+    
+    // Backup
+    for (unsigned i=0;i<dim_nod;i++)
+     {
+      pos(i,node_number)=nod_pt->position(i);
+     }
+   }
+  
   
   //Integer storage for the local unknown
   int local_unknown=0;
   
   //Use the default finite difference step
   const double fd_step = GeneralisedElement::Default_fd_jacobian_step;
-
+  
   //Loop over the Data items that affect the node update operations
   for(unsigned i=0;i<n_geometric_data;i++)
    {
@@ -524,13 +580,13 @@ namespace oomph
     for(unsigned j=0;j<n_value;j++)
      {
       local_unknown = geometric_data_local_eqn(i,j);
-
+      
       //If the value is free
       if(local_unknown >= 0)
        {
         //Get a pointer to the geometric data value
         double *value_pt = Geom_data_pt[i]->value_pt(j);
-
+        
         //Save the old value
         double old_var = *value_pt;
         
@@ -540,31 +596,37 @@ namespace oomph
         //Update the whole element
         this->node_update();
         
-        // Do FD: Loop over all nodes
-        for (unsigned jj=0;jj<n_nod;jj++)
-         {
-          Node* nod_pt=node_pt(jj);
-
+        // Loop over all shape-controlling nodes
+        for (std::map<Node*,unsigned>::iterator it=
+              local_shape_controlling_node_lookup.begin();
+             it!=local_shape_controlling_node_lookup.end();
+             it++)
+         {    
+          // Get node
+          Node* nod_pt=it->first;
+          
+          // Get its number
+          unsigned node_number=it->second;
+          
           // Get advanced position and FD
           for (unsigned ii=0;ii<dim_nod;ii++)
            {
-             dnodal_coordinates_dgeom_dofs(local_unknown,ii,jj)=
-              (nod_pt->position(ii)-pos(ii,jj))/fd_step;
+            dnodal_coordinates_dgeom_dofs(local_unknown,ii,node_number)=
+             (nod_pt->position(ii)-pos(ii,node_number))/fd_step;
            }
-         }
+         }          
         
         //Reset the variable
         *value_pt = old_var;
         
-        //We're relying on the total node update in the next loop
+        //We're relying on the total node update in the next loop       
        }
      }
    }
-  
   // Node update the element one final time to get things back to
   // the original state
   this->node_update();
-
+  
  }
  
 }

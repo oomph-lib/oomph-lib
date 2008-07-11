@@ -83,7 +83,7 @@ namespace oomph
  ElementWithMovingNodes() : Geometric_data_local_eqn(0) , 
   Evaluate_dresidual_dnodal_coordinates_by_fd(false),
   Method_for_shape_derivs(Shape_derivs_by_direct_fd) // hierher: temp fix
-  // until Navier-Stokes works. Should really use this:
+  // until more systematic timings have been performed. Should really use this:
   // Method_for_shape_derivs(Shape_derivs_by_fastest_method) 
   {}
  
@@ -270,7 +270,7 @@ private:
  /// in this class.
  bool Evaluate_dresidual_dnodal_coordinates_by_fd;
 
- /// Choose method for evaluation of shape derivatives
+ /// \short Choose method for evaluation of shape derivatives
  /// (this takes one of the values in the enumeration)
  int Method_for_shape_derivs;
 
@@ -391,18 +391,7 @@ template<class ELEMENT,class NODE_TYPE>
    ///Call the element's get jacobian function
    ELEMENT::get_jacobian(residuals,jacobian);
 
-   //Now call the additional geometric Jacobian terms 
-   this->fill_in_jacobian_from_geometric_data(jacobian);
-  }
-
- /// Add the contribution to the jacobian and residuals vector
- void fill_in_contribution_to_jacobian(Vector<double> &residuals, 
-                                   DenseMatrix<double> &jacobian)
-  {
-   //Call the element's add to Jacobian function 
-   ELEMENT::fill_in_contribution_to_jacobian(residuals,jacobian);
-
-   //Now call the additional geometric Jacobian terms (finite differences)
+   //Now call the additional geometric Jacobian terms
    this->fill_in_jacobian_from_geometric_data(jacobian);
   }
 

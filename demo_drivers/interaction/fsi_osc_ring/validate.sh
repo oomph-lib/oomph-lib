@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=2
+NUM_TESTS=3
 
 # Setup validation directory
 #---------------------------
@@ -13,7 +13,40 @@ mkdir Validation
 cd Validation
 
 
+# Validation for FSI oscillating ring Navier Stokes -- compare shape derivs
+#--------------------------------------------------------------------------
 
+echo "Running FSI oscillating ring Navier Stokes -- compare shape derivs"
+mkdir RESLT
+
+# Run with two command line arguments so we only run a few steps
+../fsi_osc_ring_compare_jacs lala lala > OUTPUT_fsi_osc_ring_compare_jacs
+echo "done"
+echo " " >> validation.log
+echo "FSI oscillating ring Navier Stokes validation -- compare shape derivs" >> validation.log
+echo "---------------------------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+
+cat RESLT/soln0_1.dat \
+    RESLT/soln1_1.dat \
+    RESLT/soln2_1.dat \
+    RESLT/soln3_1.dat \
+    RESLT/soln4_1.dat \
+    > fsi_ring_compare_jacs_results.dat
+
+
+if test "$1" = "no_python"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/fsi_ring_compare_jacs_results.dat.gz   \
+         fsi_ring_compare_jacs_results.dat 0.1 1.0e-8 >> validation.log
+fi
+
+mv RESLT RESLT_fsi_osc_ring_compare_jacs
 
 # Validation for FSI oscillating ring Navier Stokes
 #--------------------------------------------------

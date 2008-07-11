@@ -165,8 +165,12 @@ class RefineableElement : public virtual FiniteElement
  /// essential that these are indexed by a Node pointer because the Node 
  /// may be internal or external to the element.
  /// local equation number = Local_hang_eqn(master_node_pt,ival)
- //MapMatrixMixed<Node*,int,int> Local_hang_eqn;
- std::map<Node*,int> *Local_hang_eqn;
+  std::map<Node*,int> *Local_hang_eqn;
+
+ /// \short Lookup scheme for unique number associated with any of the nodes
+ /// that actively control the shape of the element (i.e. they are either
+ /// non-hanging nodes of this element or master nodes of hanging nodes.
+ std::map<Node*,unsigned> Shape_controlling_node_lookup;
 
   protected:
  
@@ -466,6 +470,38 @@ class RefineableElement : public virtual FiniteElement
  /// that are not interpolated by all nodes (e.g. lower order interpolations
  /// for the pressure in Taylor Hood). 
  virtual void further_setup_hanging_nodes() { }
+
+ /// \short Compute derivatives of elemental residual vector with respect
+ /// to nodal coordinates. Default implementation by FD can be overwritten
+ /// for specific elements. 
+ /// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
+ /// This version is overloaded from the version in FiniteElement
+ /// and takes hanging nodes into account -- j in the above loop 
+ /// loops over all the nodes that actively control the
+ /// shape of the element (i.e. they are non-hanging or master nodes of 
+ /// hanging nodes in this element).
+ void get_dresidual_dnodal_coordinates(RankThreeTensor<double>&
+                                       dresidual_dnodal_coordinates);
+ 
+
+ /// \short Number of shape-controlling nodes = the number
+ /// of non-hanging nodes plus the number of master nodes associated
+ /// with hanging nodes.
+ unsigned nshape_controlling_nodes()
+  {
+   return Shape_controlling_node_lookup.size();
+  }
+
+ /// \short Return lookup scheme for unique number associated
+ /// with any of the nodes that actively control the shape of the
+ /// element (i.e. they are either non-hanging nodes of this element
+ /// or master nodes of hanging nodes.
+ std::map<Node*,unsigned> shape_controlling_node_lookup()
+  {
+   return Shape_controlling_node_lookup;
+  }
+
+
 };
  
 

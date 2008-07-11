@@ -245,7 +245,7 @@ public:
  /// to the Navier--Stokes equations, the body force is the
  /// temperature multiplied by the Rayleigh number acting in the
  /// direction opposite to gravity. 
- void get_body_force_nst(double time, const Vector<double> &s,
+ void get_body_force_nst(const double& time, const Vector<double> &s,
                          const Vector<double> &x, 
                          Vector<double> &result)
   {

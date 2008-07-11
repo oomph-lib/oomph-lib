@@ -2191,45 +2191,32 @@ assemble_local_to_eulerian_jacobian(const DShape &dpsids,
 
 
 
-//======================================================================
+
+//=======================================================================
 /// Compute derivatives of elemental residual vector with respect
 /// to nodal coordinates. Default implementation by FD can be overwritten
 /// for specific elements. 
 /// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
-//======================================================================
- void FiniteElement::get_dresidual_dnodal_coordinates(
-  RankThreeTensor<double>& dresidual_dnodal_coordinates)
- {
-  // Number of nodes
-  unsigned n_nod=nnode();
-
-  // If the element has no nodes (why??!!) return straightaway
-  if (n_nod==0) return;
-    
-  // Get dimension from first node
-  unsigned dim_nod=node_pt(0)->ndim();
-
-  // Number of dofs
-  unsigned n_dof=ndof();
-
-  // Get reference residual
-  Vector<double> res(n_dof);
-  Vector<double> res_pls(n_dof);
-  get_residuals(res);
-
-
-  // Use "raw" nodal positions so the FD loop below actually picks up 
-  // the FD-ed changes in the raw nodal position rather than bypassing
-  // them via the hanging node constraints.
-  for (unsigned j=0;j<n_nod;j++)
-   {
-    Node* nod_pt=node_pt(j);
-    for (unsigned i=0;i<dim_nod;i++)
-     {
-      nod_pt->x(i)=nod_pt->position(i);
-     }
-    nod_pt->use_raw_nodal_position()=true;
-   }
+////=======================================================================
+void FiniteElement::get_dresidual_dnodal_coordinates(
+ RankThreeTensor<double>& dresidual_dnodal_coordinates)
+{
+ // Number of nodes
+ unsigned n_nod=nnode();
+ 
+ // If the element has no nodes (why??!!) return straightaway
+ if (n_nod==0) return;
+ 
+ // Get dimension from first node
+ unsigned dim_nod=node_pt(0)->ndim();
+ 
+ // Number of dofs
+ unsigned n_dof=ndof();
+ 
+ // Get reference residual
+ Vector<double> res(n_dof);
+ Vector<double> res_pls(n_dof);
+ get_residuals(res);
   
   // FD step 
   double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
@@ -2244,7 +2231,7 @@ assemble_local_to_eulerian_jacobian(const DShape &dpsids,
     for (unsigned i=0;i<dim_nod;i++)
      {
       // Make backup
-      double backup=nod_pt->position(i);
+      double backup=nod_pt->x(i);
 
       // Do FD step. No node update required as we're
       // attacking the coordinate directly...
@@ -2252,7 +2239,7 @@ assemble_local_to_eulerian_jacobian(const DShape &dpsids,
 
       // Perform auxiliary node update function
       nod_pt->perform_auxiliary_node_update_fct();
-      
+  
       // Get advanced residual
       get_residuals(res_pls);
       
@@ -2275,18 +2262,7 @@ assemble_local_to_eulerian_jacobian(const DShape &dpsids,
      }
    }
   
-
-  //Reset 
-  for (unsigned j=0;j<n_nod;j++)
-   {
-    node_pt(j)->use_raw_nodal_position()=false;
-   }
-
-
-  
  }
-
-
 
 
 //===============================================================

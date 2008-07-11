@@ -309,6 +309,7 @@ namespace oomph
  {
   //Find the number of nodes
   const unsigned n_node = nnode();
+
   //Check there are nodes!
   if(n_node > 0)
    {
@@ -446,7 +447,140 @@ namespace oomph
       Local_hang_eqn=0;
      }
     
+
+    // Setup map that associates a unique number with any of the nodes 
+    // that actively control the shape of the element (i.e. they are 
+    // either non-hanging nodes of this element or master nodes 
+    // of hanging nodes.
+    unsigned count=0;
+    std::set<Node*> all_nodes;
+    Shape_controlling_node_lookup.clear();
+    for (unsigned j=0;j<n_node;j++)
+     {
+      // Get node
+      Node* nod_pt=node_pt(j);
+      
+      //If the node is hanging, consider master nodes
+      if(nod_pt->is_hanging())
+       {
+        HangInfo* hang_info_pt = node_pt(j)->hanging_pt();
+        unsigned n_master = hang_info_pt->nmaster();
+        
+        //Loop over the master nodes
+        for(unsigned m=0;m<n_master;m++)
+         {
+          Node* master_node_pt=hang_info_pt->master_node_pt(m);
+          // Do we have this one already?
+          unsigned old_size=all_nodes.size();
+          all_nodes.insert(master_node_pt);
+          if (all_nodes.size()>old_size)
+           {
+            Shape_controlling_node_lookup[master_node_pt]=count;
+            count++;
+           }
+         }
+       }
+      // Not hanging: Consider the node itself
+      else
+       {
+        // Do we have this one already?
+        unsigned old_size=all_nodes.size();
+        all_nodes.insert(nod_pt);
+        if (all_nodes.size()>old_size)
+         {
+          Shape_controlling_node_lookup[nod_pt]=count;
+          count++;
+         }
+       }
+     }
+
    } //End of if nodes
+ }
+
+
+
+//==========================================================================
+/// Compute derivatives of elemental residual vector with respect
+/// to nodal coordinates. Default implementation by FD can be overwritten
+/// for specific elements. 
+/// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
+/// This version is overloaded from the version in FiniteElement
+/// and takes hanging nodes into account -- j in the above loop 
+/// loops over all the nodes that actively control the
+/// shape of the element (i.e. they are non-hanging or master nodes of 
+/// hanging nodes in this element).
+//==========================================================================
+ void RefineableElement::get_dresidual_dnodal_coordinates(
+  RankThreeTensor<double>& dresidual_dnodal_coordinates)
+ {
+  // Number of nodes
+  unsigned n_nod=nnode();
+  
+  // If the element has no nodes (why??!!) return straightaway
+  if (n_nod==0) return;
+  
+  // Get dimension from first node
+  unsigned dim_nod=node_pt(0)->ndim();
+
+  // Number of dofs
+  unsigned n_dof=ndof();
+
+  // Get reference residual
+  Vector<double> res(n_dof);
+  Vector<double> res_pls(n_dof);
+  get_residuals(res);
+  
+  // FD step 
+  double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
+
+  // Do FD loop over all active nodes
+  for (std::map<Node*,unsigned>::iterator it=
+        Shape_controlling_node_lookup.begin();
+       it!=Shape_controlling_node_lookup.end();
+       it++)
+   {
+    // Get node
+    Node* nod_pt=it->first;
+
+    // Get its number
+    unsigned node_number=it->second;
+    
+    // Loop over coordinate directions
+    for (unsigned i=0;i<dim_nod;i++)
+     {
+      // Make backup
+      double backup=nod_pt->x(i);
+      
+      // Do FD step. No node update required as we're
+      // attacking the coordinate directly...
+      nod_pt->x(i)+=eps_fd;
+      
+      // Perform auxiliary node update function
+      nod_pt->perform_auxiliary_node_update_fct();
+      
+      // Get advanced residual
+      get_residuals(res_pls);
+      
+      // Fill in FD entries [Loop order is "wrong" here as l is the
+      // slow index but this is in a function that's costly anyway
+      // and gives us the fastest loop outside where these tensor
+      // is actually used.]
+      for (unsigned l=0;l<n_dof;l++)
+       {
+        dresidual_dnodal_coordinates(l,i,node_number)=
+         (res_pls[l]-res[l])/eps_fd;
+       }
+
+      // Reset coordinate. No node update required as we're
+      // attacking the coordinate directly...
+      nod_pt->x(i)=backup;
+
+      // Perform auxiliary node update function
+      nod_pt->perform_auxiliary_node_update_fct();
+      
+     }
+   }
+    
  }
 
 
