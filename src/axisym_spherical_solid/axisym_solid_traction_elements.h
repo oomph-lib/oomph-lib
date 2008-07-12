@@ -57,14 +57,14 @@ public virtual FaceGeometry<ELEMENT>, public virtual FaceElement
 private:
 
  /// Pointer to an imposed traction function
- void (*Traction_fct_pt)(double time, const Vector<double> &x, 
-                          const Vector<double> &n,
-                          Vector<double> &result);
+ void (*Traction_fct_pt)(const double& time, const Vector<double> &x, 
+                         const Vector<double> &n,
+                         Vector<double> &result);
 
 protected:
 
  /// Return the surface traction force
- void get_traction(double time, const Vector<double> &x,
+ void get_traction(const double& time, const Vector<double> &x,
                    const Vector<double> &n,Vector<double> &result) const
   {
    //If the function pointer is zero return zero
@@ -98,8 +98,8 @@ public:
   }
  
  /// Return the imposed traction pointer
- void (* &traction_fct_pt())(double, const Vector<double> &, 
-                              const Vector<double> &, Vector<double> &) 
+ void (* &traction_fct_pt())(const double&, const Vector<double> &, 
+                             const Vector<double> &, Vector<double> &) 
   {return Traction_fct_pt;}
  
  /// Return the residuals

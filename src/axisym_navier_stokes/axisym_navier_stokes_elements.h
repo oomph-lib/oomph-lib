@@ -260,11 +260,11 @@ protected:
  Vector<double> *G_pt;
  
  /// Pointer to body force function
- void (*Body_force_fct_pt)(double time, const Vector<double> &x, 
-                            Vector<double> &result);
+ void (*Body_force_fct_pt)(const double& time, const Vector<double> &x, 
+                           Vector<double> &result);
  
  /// Pointer to volumetric source function
- double (*Source_fct_pt)(double time, const Vector<double> &x);
+ double (*Source_fct_pt)(const double& time, const Vector<double> &x);
 
  /// \short Access function for the local equation number information for
  /// the pressure.
@@ -298,7 +298,7 @@ protected:
                              Shape &test) const=0;
 
  /// Calculate the body force at a given time and Eulerian position
- void get_body_force(double time, const Vector<double> &x, 
+ void get_body_force(const double& time, const Vector<double> &x, 
                      Vector<double> &result)
   {
    //If the function pointer is zero return zero
@@ -316,7 +316,7 @@ protected:
 
  /// \short Calculate the source fct at given time and
  /// Eulerian position 
- double get_source_fct(double time, const Vector<double> &x)
+ double get_source_fct(const double& time, const Vector<double> &x)
   {
    //If the function pointer is zero return zero
    if (Source_fct_pt == 0)
@@ -398,12 +398,12 @@ public:
  Vector<double>* &g_pt() {return G_pt;}
 
  /// Access function for the body-force pointer
- void (* &body_force_fct_pt())(double time, const Vector<double>& x, 
-                                Vector<double> & f) 
+ void (* &body_force_fct_pt())(const double& time, const Vector<double>& x, 
+                               Vector<double> & f) 
   {return Body_force_fct_pt;}
  
  ///Access function for the source-function pointer
- double (* &source_fct_pt())(double time, const Vector<double>& x)
+ double (* &source_fct_pt())(const double& time, const Vector<double>& x)
   {return Source_fct_pt;}
  
  ///Function to return number of pressure degrees of freedom

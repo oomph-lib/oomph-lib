@@ -274,7 +274,7 @@ void RefineablePoissonEquations<DIM>::get_dresidual_dnodal_coordinates(
  Vector<double> d_source_dx(DIM);
 
  //Index at which the poisson unknown is stored
- const unsigned u_nodal_index = u_index_poisson();
+ const unsigned u_nodal_index = this->u_index_poisson();
  
  //Set the value of n_intpt
  const unsigned n_intpt = integral_pt()->nweight();
@@ -292,8 +292,8 @@ void RefineablePoissonEquations<DIM>::get_dresidual_dnodal_coordinates(
    double w = integral_pt()->weight(ipt);
 
    //Call the derivatives of the shape and test functions
-   double J = dshape_and_dtest_eulerian_at_knot_poisson(ipt,psi,dpsidx,
-                                                        test,dtestdx);
+   double J = this->dshape_and_dtest_eulerian_at_knot_poisson(ipt,psi,dpsidx,
+                                                              test,dtestdx);
        
    //Calculate local values 
    //Allocate and initialise to zero
@@ -318,7 +318,7 @@ void RefineablePoissonEquations<DIM>::get_dresidual_dnodal_coordinates(
    //Get source function
    //-------------------
    double source;
-   get_source_poisson(interpolated_x,source);
+   this->get_source_poisson(interpolated_x,source);
 
    // FD step 
    double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
@@ -351,8 +351,8 @@ void RefineablePoissonEquations<DIM>::get_dresidual_dnodal_coordinates(
        //Call the derivatives of the shape and test functions
        //at advanced level
        double J_pls = 
-        dshape_and_dtest_eulerian_at_knot_poisson(ipt,psi,dpsidx_pls,
-                                                  test,dtestdx_pls);
+        this->dshape_and_dtest_eulerian_at_knot_poisson(ipt,psi,dpsidx_pls,
+                                                        test,dtestdx_pls);
        
        // Assign
        dJ_dX(ii,jj)=(J_pls-J)/eps_fd;
@@ -384,7 +384,7 @@ void RefineablePoissonEquations<DIM>::get_dresidual_dnodal_coordinates(
     }
    
    // Get gradient of source function
-   get_source_gradient_poisson(interpolated_x, d_source_dx);
+   this->get_source_gradient_poisson(interpolated_x, d_source_dx);
 
    
    // Assemble shape derivatives

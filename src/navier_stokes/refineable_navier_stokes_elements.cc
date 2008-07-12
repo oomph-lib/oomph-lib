@@ -582,11 +582,11 @@ void RefineableNavierStokesEquations<DIM>::get_dresidual_dnodal_coordinates(
  unsigned n_node = nnode();
  
  //Find out how many pressure dofs there are
- unsigned n_pres = npres_nst();
+ unsigned n_pres = this->npres_nst();
 
  //Find the indices at which the local velocities are stored
  unsigned u_nodal_index[DIM];
- for(unsigned i=0;i<DIM;i++) {u_nodal_index[i] = u_index_nst(i);}
+ for(unsigned i=0;i<DIM;i++) {u_nodal_index[i] = this->u_index_nst(i);}
  
  // Which nodal value represents the pressure? (Negative if pressure
  // is not based on nodal interpolation).
@@ -647,11 +647,11 @@ void RefineableNavierStokesEquations<DIM>::get_dresidual_dnodal_coordinates(
 
  //Get Physical Variables from Element
  //Reynolds number must be multiplied by the density ratio
- double scaled_re = re()*density_ratio();
- double scaled_re_st = re_st()*density_ratio();
- double scaled_re_inv_fr = re_invfr()*density_ratio();
- double visc_ratio = viscosity_ratio();
- Vector<double> G = g();
+ double scaled_re = this->re()*this->density_ratio();
+ double scaled_re_st = this->re_st()*this->density_ratio();
+ double scaled_re_inv_fr = this->re_invfr()*this->density_ratio();
+ double visc_ratio = this->viscosity_ratio();
+ Vector<double> G = this->g();
  
  // FD step 
  double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
@@ -731,10 +731,11 @@ void RefineableNavierStokesEquations<DIM>::get_dresidual_dnodal_coordinates(
    
    //Call the derivatives of the shape and test functions
    double J = 
-    dshape_and_dtest_eulerian_at_knot_nst(ipt,psif,dpsifdx,testf,dtestfdx);
+    this->dshape_and_dtest_eulerian_at_knot_nst(ipt,psif,dpsifdx,
+                                                testf,dtestfdx);
    
    //Call the pressure shape and test functions
-   pshape_nst(s,psip,testp);
+   this->pshape_nst(s,psip,testp);
    
    //Calculate local values of the pressure and velocity components
    //Allocate
@@ -746,7 +747,7 @@ void RefineableNavierStokesEquations<DIM>::get_dresidual_dnodal_coordinates(
    DenseMatrix<double> interpolated_dudx(DIM,DIM,0.0);    
 
    //Calculate pressure
-   for(unsigned l=0;l<n_pres;l++) interpolated_p += p_nst(l)*psip[l];
+   for(unsigned l=0;l<n_pres;l++) interpolated_p += this->p_nst(l)*psip[l];
    
    //Calculate velocities and derivatives:
 
@@ -760,7 +761,7 @@ void RefineableNavierStokesEquations<DIM>::get_dresidual_dnodal_coordinates(
        double u_value = nodal_value(l,u_nodal_index[i]);
        interpolated_u[i] += u_value*psif[l];
        interpolated_x[i] += nodal_position(l,i)*psif[l];
-       dudt[i] += du_dt_nst(l,i)*psif[l];
+       dudt[i] += this->du_dt_nst(l,i)*psif[l];
        
        //Loop over derivative directions
        for(unsigned j=0;j<DIM;j++)
@@ -770,7 +771,7 @@ void RefineableNavierStokesEquations<DIM>::get_dresidual_dnodal_coordinates(
       }
     }
 
-   if (!ALE_is_disabled)
+   if (!this->ALE_is_disabled)
     {
      // Loop over nodes
      for(unsigned l=0;l<n_node;l++) 
@@ -821,8 +822,8 @@ void RefineableNavierStokesEquations<DIM>::get_dresidual_dnodal_coordinates(
        //Call the derivatives of the shape and test functions
        //at advanced level
        double J_pls = 
-        dshape_and_dtest_eulerian_at_knot_nst(ipt,psif,dpsifdx_pls,
-                                              testf,dtestfdx_pls);
+        this->dshape_and_dtest_eulerian_at_knot_nst(ipt,psif,dpsifdx_pls,
+                                                    testf,dtestfdx_pls);
        
        // Assign
        dJ_dX(ii,jj)=(J_pls-J)/eps_fd;
@@ -951,8 +952,8 @@ void RefineableNavierStokesEquations<DIM>::get_dresidual_dnodal_coordinates(
                for(unsigned k=0;k<DIM;k++)
                 {
                  sum -= visc_ratio*
-                  (interpolated_dudx(i,k) + Gamma[i]*interpolated_dudx(k,i))
-                  *dtestfdx(l,k);
+                  (interpolated_dudx(i,k) + 
+                   this->Gamma[i]*interpolated_dudx(k,i))*dtestfdx(l,k);
                 }
                
                //Add in the inertial terms
@@ -964,7 +965,10 @@ void RefineableNavierStokesEquations<DIM>::get_dresidual_dnodal_coordinates(
                for(unsigned k=0;k<DIM;k++)
                 {
                  double tmp=scaled_re*interpolated_u[k];
-                 if (!ALE_is_disabled) tmp-=scaled_re_st*mesh_velocity[k];
+                 if (!this->ALE_is_disabled)
+                  {
+                   tmp-=scaled_re_st*mesh_velocity[k];
+                  }
                  sum -= tmp*interpolated_dudx(i,k)*testf[l];
                 }
                
@@ -985,9 +989,11 @@ void RefineableNavierStokesEquations<DIM>::get_dresidual_dnodal_coordinates(
                for (unsigned k=0;k<DIM;k++)
                 {
                  sum -= visc_ratio*(
-                  (interpolated_dudx(i,k) + Gamma[i]*interpolated_dudx(k,i))
+                  (interpolated_dudx(i,k)+
+                   this->Gamma[i]*interpolated_dudx(k,i))
                   *d_dtestfdx_dX(ii,jj,l,k)+                
-                  (d_dudx_dX(ii,jj,i,k) + Gamma[i]*d_dudx_dX(ii,jj,k,i))
+                  (d_dudx_dX(ii,jj,i,k) + 
+                   this->Gamma[i]*d_dudx_dX(ii,jj,k,i))
                   *dtestfdx(l,k));
                 }
                
@@ -995,7 +1001,10 @@ void RefineableNavierStokesEquations<DIM>::get_dresidual_dnodal_coordinates(
                for(unsigned k=0;k<DIM;k++)
                 {
                  double tmp=scaled_re*interpolated_u[k];
-                 if (!ALE_is_disabled) tmp-=scaled_re_st*mesh_velocity[k];
+                 if (!this->ALE_is_disabled)
+                  {
+                   tmp-=scaled_re_st*mesh_velocity[k];
+                  }
                  sum -= tmp*d_dudx_dX(ii,jj,i,k)*testf(l);
                 }
                sum+=scaled_re_st*pos_time_weight*
@@ -1061,7 +1070,8 @@ void RefineableNavierStokesEquations<DIM>::get_dresidual_dnodal_coordinates(
                  for(unsigned ii=0;ii<DIM;ii++)
                   {
                    double sum=
-                    -visc_ratio*Gamma[i]*dpsifdx(jj_local,i)*dtestfdx(l,ii)
+                    -visc_ratio*this->Gamma[i]*dpsifdx(jj_local,i)*
+                    dtestfdx(l,ii)
                     -scaled_re*psif(jj_local)*interpolated_dudx(i,ii)*testf(l);
                    if (i==ii)
                     {
@@ -1070,7 +1080,7 @@ void RefineableNavierStokesEquations<DIM>::get_dresidual_dnodal_coordinates(
                       {
                        sum-=visc_ratio*dpsifdx(jj_local,k)*dtestfdx(l,k);
                        double tmp=scaled_re*interpolated_u[k];
-                       if (!ALE_is_disabled)
+                       if (!this->ALE_is_disabled)
                         {
                          tmp-=scaled_re_st*mesh_velocity[k];
                         }

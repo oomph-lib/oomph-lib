@@ -150,7 +150,7 @@ void LevenbergMarquardtFitter::fit_it(
 
  // By default regard all parameters as fittable -- can generalise
  // this at some point.
- vector<bool> ia(nparam,true);
+ std::vector<bool> ia(nparam,true);
    
  // Chi squared
  double chisq=0.0;
@@ -275,7 +275,7 @@ void LevenbergMarquardtFitter::fit_it(
      if (!quiet)
       {
        // Output with fixed width
-       std::cout.setf(ios_base::scientific,ios_base::floatfield);
+       std::cout.setf(std::ios_base::scientific,std::ios_base::floatfield);
        std::cout.width(15);
        std::cout << chisq << " ";
        for (l=0;l<ma;l++)
@@ -284,7 +284,7 @@ void LevenbergMarquardtFitter::fit_it(
         }       
        std::cout << std::endl;
        // Reset
-       std::cout.setf(std::_Ios_Fmtflags(0), ios_base::floatfield);
+       std::cout.setf(std::_Ios_Fmtflags(0), std::ios_base::floatfield);
        std::cout.width(0);
       }
     }
@@ -305,7 +305,7 @@ void LevenbergMarquardtFitter::mrqcof(Vector<double>& x,
                                       Vector<double>& y, 
                                       Vector<double>& sig, 
                                       Vector<double>& a,
-                                      vector<bool>& ia, 
+                                      std::vector<bool>& ia, 
                                       DenseDoubleMatrix& alpha, 
                                       Vector<double>& beta, 
                                       double& chisq)

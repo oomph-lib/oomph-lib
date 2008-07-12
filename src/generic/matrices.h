@@ -1713,7 +1713,7 @@ class RankFourTensor
    initialise(T(0));
 #endif
    // Transfer values
-   unsigned long n_copy, m_copy, p_copy;
+   unsigned long n_copy, m_copy, p_copy, q_copy;
    n_copy = std::min(n_old,n_index1);
    m_copy = std::min(m_old,n_index2);
    p_copy = std::min(p_old,n_index3);
@@ -1762,7 +1762,7 @@ class RankFourTensor
    initialise(initial_value);
 
    // Transfer values
-   unsigned long n_copy, m_copy, p_copy;
+   unsigned long n_copy, m_copy, p_copy, q_copy;
    n_copy = std::min(n_old,n_index1);
    m_copy = std::min(m_old,n_index2);
    p_copy = std::min(p_old,n_index3);

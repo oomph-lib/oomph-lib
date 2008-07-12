@@ -94,8 +94,8 @@ protected:
 
 
  ///Function to calculate the traction applied to the fluid
- void get_traction(double time, const Vector<double> &x, 
-                     Vector<double> &result)
+ void get_traction(const double& time, const Vector<double> &x, 
+                   Vector<double> &result)
   {
    //If the function pointer is zero return zero
    if(Traction_fct_pt == 0)
