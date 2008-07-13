@@ -81,6 +81,74 @@ namespace oomph
   get_jacobian(elem_pt,vec[0],matrix[0]);
  }
 
+
+
+
+ ///////////////////////////////////////////////////////////////////////
+ // Non-inline functions for the ExplicitTimeStepHandler class
+ //////////////////////////////////////////////////////////////////////
+
+
+ //===================================================================
+ ///Get the number of elemental degrees of freedom. Direct call
+ ///to the function in the element.
+ //===================================================================
+ unsigned ExplicitTimeStepHandler::ndof(GeneralisedElement* const &elem_pt)
+ {return elem_pt->ndof();}
+
+ //==================================================================
+ ///Get the global equation number of the local unknown. Direct call
+ ///to the function in the element.
+ //==================================================================
+ unsigned long ExplicitTimeStepHandler::
+ eqn_number(GeneralisedElement* const &elem_pt,const unsigned &ieqn_local)
+ {return elem_pt->eqn_number(ieqn_local);}
+ 
+ //==================================================================
+ ///Call the element's residuals
+ //=================================================================
+ void ExplicitTimeStepHandler::get_residuals(
+  GeneralisedElement* const &elem_pt,
+  Vector<double> &residuals)
+ {
+  elem_pt->get_residuals(residuals);
+ }
+ 
+ //=======================================================================
+ ///Replace get jacobian with the call to get the mass matrix
+ //======================================================================
+ void ExplicitTimeStepHandler::get_jacobian(GeneralisedElement* const &elem_pt,
+                                        Vector<double> &residuals, 
+                                        DenseMatrix<double> &jacobian)
+ {
+  elem_pt->get_mass_matrix(residuals,jacobian);
+ }
+
+ 
+ //=======================================================================
+ /// Calculate all desired vectors and matrices that are required by
+ /// the problem  by calling those of the underlying element.
+ //=======================================================================
+ void ExplicitTimeStepHandler::get_all_vectors_and_matrices(
+  GeneralisedElement* const &elem_pt,
+  Vector<Vector<double> >&vec, Vector<DenseMatrix<double> > &matrix)
+ {
+#ifdef PARANOID
+  //Check dimension
+  if(matrix.size() != 1) 
+   {
+    throw OomphLibError(
+     "ExplicitTimeSteps should return one matrix",
+     "ExplicitTimeStepHandler::get_all_vectors_and_matrices()",
+     OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  //Get the residuals and <mass matrix
+  elem_pt->get_mass_matrix(vec[0],matrix[0]);
+ }
+
+
+
  ///////////////////////////////////////////////////////////////////////
  // Non-inline functions for the EigenProblemHandler class
  //////////////////////////////////////////////////////////////////////

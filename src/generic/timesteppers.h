@@ -149,6 +149,8 @@ class Time
   void shift_dt()
   {
    unsigned ndt=Dt.size();
+   //Return straight away if there are no stored timesteps
+   if(ndt == 0) {return;}
    //Start from the end of the array and shift every entry back by one
    for (unsigned i=(ndt-1);i>0;i--) {Dt[i]=Dt[i-1];}
   }

@@ -15,10 +15,10 @@
 #cd linear_wave; make check; cd ..
 #cd eigenproblems; make check; cd ..
 #cd interaction; make check; cd ..
-cd meshing; make check; cd ..
-cd multi_physics ; pwd; make check; cd ..
-cd linking ; pwd; make check; cd ..
-cd optimisation ; pwd; make check; cd ..
+#cd meshing; make check; cd ..
+#cd multi_physics ; pwd; make check; cd ..
+#cd linking ; pwd; make check; cd ..
+#cd optimisation ; pwd; make check; cd ..
 cd bifurcation_tracking ; pwd; make check; cd ..
 cd FAQ ; pwd; make check; cd ..
 cd linear_solvers ; pwd; make check; cd ..

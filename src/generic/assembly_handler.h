@@ -96,6 +96,51 @@ class AssemblyHandler
 };
 
 
+//=============================================================
+/// A class that is used to define the functions used to
+/// assemble and invert the mass matrix when taking an explicit
+/// timestep. The idea is simply to replace the jacobian matrix
+/// with the mass matrix and then our standard linear solvers
+/// will solve the required system
+//===============================================================
+class ExplicitTimeStepHandler : public AssemblyHandler
+{
+  public:
+
+ ///Empty Constructor
+ ExplicitTimeStepHandler() {} 
+
+ ///Return the number of degrees of freedom in the element elem_pt
+ unsigned ndof(GeneralisedElement* const &elem_pt);
+ 
+ ///\short Return the global equation number of the local unknown ieqn_local
+ ///in elem_pt.
+ unsigned long eqn_number(GeneralisedElement* const &elem_pt,
+                                  const unsigned &ieqn_local);
+ 
+ ///\short Return the contribution to the residuals of the element elem_pt
+ ///This is deliberately broken in our eigenproblem
+ void get_residuals(GeneralisedElement* const &elem_pt,
+                    Vector<double> &residuals);
+ 
+ /// \short Calculate the elemental Jacobian matrix "d equation 
+ /// / d variable" for elem_pt. Again deliberately broken in the eigenproblem
+ void get_jacobian(GeneralisedElement* const &elem_pt,
+                   Vector<double> &residuals, 
+                   DenseMatrix<double> &jacobian);
+ 
+ /// \short Calculate all desired vectors and matrices 
+ /// provided by the element elem_pt.
+ void get_all_vectors_and_matrices(
+  GeneralisedElement* const &elem_pt,
+  Vector<Vector<double> >&vec, Vector<DenseMatrix<double> > &matrix);
+ 
+ /// \short Empty virtual destructor
+ ~ExplicitTimeStepHandler() {}
+
+};
+
+
  
 //=============================================================
 /// A class that is used to define the functions used to

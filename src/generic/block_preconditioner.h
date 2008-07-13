@@ -740,7 +740,7 @@ class ExactBlockPreconditioner : public BlockPreconditioner<MATRIX>
   unsigned nblock_types()
    {
 #ifdef PARANOID
-    if (Nblock_types==0)
+    if (this->Nblock_types==0)
      {
       std::ostringstream error_message;
       error_message << "nblock_types() called while Nblock_types=0. \n"

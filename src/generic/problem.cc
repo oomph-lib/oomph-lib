@@ -35,10 +35,12 @@
 #include "oomph_utilities.h"
 #include "problem.h"
 #include "timesteppers.h"
+#include "explicit_timesteppers.h"
 #include "refineable_mesh.h"
 #include "linear_solver.h"
 #include "eigen_solver.h"
 #include "assembly_handler.h"
+#include "dg_elements.h"
 
 namespace oomph
 {
@@ -53,14 +55,16 @@ namespace oomph
 /// parameters.
 //===============================================================
  Problem::Problem() : 
-  Mesh_pt(0), Time_pt(0), Saved_dof_pt(0), 
-  Jacobian_reuse_is_enabled(false), Jacobian_has_been_computed(false),
+  Mesh_pt(0), Time_pt(0), Explicit_time_stepper_pt(0), Saved_dof_pt(0), 
   Newton_solver_tolerance(1.0e-8),
   Max_newton_iterations(10), Max_residuals(10.0),
+  Jacobian_reuse_is_enabled(false), Jacobian_has_been_computed(false),
   Problem_is_nonlinear(true),
   Sparse_assembly_method(Perform_assembly_using_vectors_of_pairs), 
   Pause_at_end_of_sparse_assembly(false),
   Numerical_zero_for_sparse_assembly(0.0),
+  Mass_matrix_reuse_is_enabled(false), Mass_matrix_has_been_computed(false),
+  Discontinuous_element_formulation(false),
   Minimum_dt(1.0e-12), Maximum_dt(1.0e12), DTSF_max_increase(4.0),
   Scale_arc_length(true), Desired_proportion_of_arc_length(0.5),
   Theta_squared(1.0), Sign_of_jacobian(0), Continuation_direction(1.0), 
@@ -397,7 +401,30 @@ void Problem::add_time_stepper_pt(TimeStepper* const &time_stepper_pt)
  time_stepper_pt->time_pt() = Time_pt;
 }
 
+//================================================================
+/// Set the explicit time stepper for the problem and also
+/// ensure that a time object has been created.
+//================================================================
+void Problem::set_explicit_time_stepper_pt(ExplicitTimeStepper* const 
+                                           &explicit_time_stepper_pt) 
+{
+ //Set the explicit time stepper
+ Explicit_time_stepper_pt = explicit_time_stepper_pt;
 
+ //If time has not been allocated, create time object with the 
+ //required number of time steps
+ if(Time_pt==0) 
+  {
+   Time_pt = new Time(0);
+   oomph_info << "Created Time with storage for no previous timestep" 
+              << std::endl;
+  }
+ else
+  {
+   oomph_info << "Time object already exists " << std::endl;
+  }
+
+}
 
 
 //================================================================
@@ -524,12 +551,135 @@ unsigned long Problem::assign_eqn_numbers()
 void Problem::get_dofs(Vector<double>& dofs)
 {
  //Find number of dofs
- unsigned long n_dof = ndof();
+ const unsigned long n_dof = ndof();
+ dofs.resize(n_dof);
 
  //Copy dofs into vector
  for(unsigned long l=0;l<n_dof;l++)
   {
    dofs[l] = *Dof_pt[l];
+  }
+}
+
+//=======================================================================
+/// Function that sets the values of the dofs in the object
+//======================================================================
+void Problem::set_dofs(const Vector<double> &dofs)
+{
+ const unsigned long n_dof = this->ndof();
+#ifdef PARANOID
+ if(n_dof != dofs.size())
+  {
+   std::ostringstream error_stream;
+   error_stream << "Number of degrees of freedom in vector argument "
+                << dofs.size() << "\n"
+                << "does not equal number of degrees of freedom in problem "
+                << n_dof;
+   throw OomphLibError(error_stream.str(),
+                       "Problem::set_dofs()",
+                       OOMPH_EXCEPTION_LOCATION);  
+  } 
+#endif 
+ for(unsigned long l=0;l<n_dof;l++)
+  {
+   *Dof_pt[l] = dofs[l];
+  }
+}
+
+//===================================================================
+///Function that adds the values to the dofs
+//==================================================================
+void Problem::add_to_dofs(const double &lambda,
+                          const Vector<double> &increment_dofs)
+{
+ const unsigned long n_dof = this->ndof();
+   for(unsigned long l=0;l<n_dof;l++)
+    {
+     *Dof_pt[l] += lambda*increment_dofs[l];
+    }
+}
+
+
+
+//=========================================================================
+///Return the residual vector multiplied by the inverse mass matrix
+///Virtual so that it can be overloaded for mpi problems
+//=========================================================================
+void Problem::get_inverse_mass_matrix_times_residuals(Vector<double> &Mres)
+{
+ //Find the number of degrees of freedom in the problem
+ const unsigned n_dof = this->ndof();
+ //Resize the vector
+ Mres.resize(n_dof);
+ 
+ //If we have discontinuous formulation
+ if(Discontinuous_element_formulation)
+  {
+   //Loop over the elements and get their residuals
+   const unsigned n_element = Problem::mesh_pt()->nelement();
+   Vector<double> element_Mres;
+   for(unsigned e=0;e<n_element;e++)
+    {
+     //Cache the element
+     DGElement* const elem_pt =
+      dynamic_cast<DGElement*>(Problem::mesh_pt()->element_pt(e));
+     
+     const unsigned n_el_dofs = elem_pt->ndof();
+     elem_pt->get_inverse_mass_matrix_times_residuals(element_Mres);
+     
+     for(unsigned i=0;i<n_el_dofs;i++)
+      {
+       Mres[elem_pt->eqn_number(i)] = element_Mres[i];
+      }
+    }
+  }
+ //Otherwise it's continous
+ else
+  {
+   //Now do the linear solve -- recycling Mass matrix if requested
+   //If we already have the factorised mass matrix, then resolve
+   if(Mass_matrix_reuse_is_enabled && Mass_matrix_has_been_computed)
+    {     
+     if(!Shut_up_in_newton_solve) 
+      {
+       oomph_info << "Not recomputing Mass Matrix " << std::endl;
+      }
+     
+     //Get the residuals
+     Vector<double> residuals(n_dof);
+     this->get_residuals(residuals);
+     
+     // Resolve the linear system
+     this->linear_solver_pt()->resolve(residuals,Mres);
+    }
+   //Otherwise solve for the first time
+   else
+    {
+     //If we wish to reuse the mass matrix, then enable resolve
+     if(Mass_matrix_reuse_is_enabled)
+      {
+       if(!Shut_up_in_newton_solve) 
+        {
+         oomph_info << "Enabling resolve in explicit timestep" << std::endl;
+        }
+       this->linear_solver_pt()->enable_resolve();
+      }
+     
+     //Store the old assembly handler
+     AssemblyHandler* old_assembly_handler_pt = this->assembly_handler_pt();
+     //Set the assembly handler to the explicit timestep handler
+     this->assembly_handler_pt() = new ExplicitTimeStepHandler;
+     
+     //Solve the linear system
+     this->linear_solver_pt()->solve(this,Mres);
+     //The mass matrix has now been computed
+     Mass_matrix_has_been_computed=true;
+     
+     //Delete the Explicit Timestep handler
+     delete this->assembly_handler_pt();
+     //Reset the assembly handler to the original handler
+     this->assembly_handler_pt() = old_assembly_handler_pt;
+    }
   }
 }
 
@@ -4272,6 +4422,48 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
  return Ds_current;
 }
 
+
+//=======================================================================
+/// Take an explicit timestep of size dt
+//======================================================================
+void Problem::explicit_timestep(const double &dt, const bool &shift_values)
+{
+ //Firstly we shift the time values
+ if(shift_values) {shift_time_values();}
+ //Set the current value of dt, if we can
+ if(time_pt()->ndt() > 0) {time_pt()->dt() = dt;}
+ 
+ //Make all the implicit timestepper steady
+ //Find out how many timesteppers there are
+ unsigned n_time_steppers = ntime_stepper();
+ 
+ // Vector of bools to store the is_steady status of the various
+ // timesteppers when we came in here
+ std::vector<bool> was_steady(n_time_steppers);
+ 
+ //Loop over them all and make them (temporarily) static
+ for(unsigned i=0;i<n_time_steppers;i++)
+  {
+   was_steady[i]=time_stepper_pt(i)->is_steady();
+   time_stepper_pt(i)->make_steady();
+  }
+ 
+ //Take the explicit step
+ this->explicit_time_stepper_pt()->timestep(this,dt);
+ 
+ // Reset the is_steady status of all timesteppers that
+ // weren't already steady when we came in here and reset their
+ // weights
+ for(unsigned i=0;i<n_time_steppers;i++)
+  {
+   if (!was_steady[i])
+    {
+     time_stepper_pt(i)->undo_make_steady();
+    }
+  }
+}
+
+
 //========================================================================
 /// Do one timestep of size dt using Newton's method with the specified 
 /// tolerance and linear solver defined as member data of the Problem class.
@@ -4714,6 +4906,20 @@ void Problem::assign_initial_values_impulsive(const double &dt)
  assign_initial_values_impulsive();
 }
 
+//=======================================================================
+/// Return the current value of continuous time. If not Time object
+/// has been assigned, then throw an error
+//======================================================================
+double& Problem::time()
+{
+ if(Time_pt==0) 
+  {
+   throw OomphLibError("Time object has not been set",
+                       "Problem::time()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ else {return Time_pt->time();}
+}
 
 //========================================================================
 /// Shift all time-dependent data along for next timestep.
@@ -4758,6 +4964,56 @@ void Problem::calculate_predictions()
 
 
 
+//======================================================================
+///\short Enable recycling of the mass matrix in explicit timestepping
+///schemes. Useful for timestepping on fixed meshes when you want
+///to avoid the linear solve phase.
+//=====================================================================
+void Problem::enable_mass_matrix_reuse()
+{
+ Mass_matrix_reuse_is_enabled=true;
+ Mass_matrix_has_been_computed=false;
+ 
+ //If we have a discontinuous formulation set the elements to reuse
+ //their own mass matrices
+ if(Discontinuous_element_formulation)
+  {
+   const unsigned n_element = Problem::mesh_pt()->nelement();
+   //Loop over the other elements
+   for(unsigned e=0;e<n_element;e++)
+    {
+     //Cache the element
+     DGElement* const elem_pt =
+      dynamic_cast<DGElement*>(Problem::mesh_pt()->element_pt(e));
+     elem_pt->enable_mass_matrix_reuse();
+    }
+  }
+}
+ 
+//======================================================================
+/// \short Turn off the recyling of the mass matrix in explicit 
+/// time-stepping schemes
+//======================================================================
+void Problem::disable_mass_matrix_reuse()
+{
+ Mass_matrix_reuse_is_enabled=false;
+ Mass_matrix_has_been_computed=false;
+ 
+ //If we have a discontinuous formulation set the element-level
+ //function
+ if(Discontinuous_element_formulation)
+  {
+   const unsigned n_element = Problem::mesh_pt()->nelement();
+   //Loop over the other elements
+   for(unsigned e=0;e<n_element;e++)
+    {
+     //Cache the element
+     DGElement* const elem_pt =
+      dynamic_cast<DGElement*>(Problem::mesh_pt()->element_pt(e));
+     elem_pt->disable_mass_matrix_reuse();
+    }
+  }
+}
 
 
 //=========================================================================

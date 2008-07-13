@@ -26,7 +26,8 @@ linear_solvers \
 biharmonic \
 linear_elasticity \
 womersley \
-reaction_diffusion 
+reaction_diffusion \
+flux_transport
 
 
 

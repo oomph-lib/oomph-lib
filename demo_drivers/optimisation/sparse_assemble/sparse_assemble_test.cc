@@ -278,7 +278,7 @@ void RectangularDrivenCavityProblem<ELEMENT>::compare_assembly_strategies(
  bool compressed_row = true;
  
  clock_t clock1 = clock();
- time_t time1 = time(0);
+ time_t time1 = std::time(0);
  
  switch(method)
   {
@@ -339,7 +339,7 @@ void RectangularDrivenCavityProblem<ELEMENT>::compare_assembly_strategies(
                                           compressed_row);
   
  clock_t clock2 = clock();
- time_t time2 = time(0);
+ time_t time2 = std::time(0);
  
  cout <<"CPU time for " 
       << Global_Variables::Nx << " x " 

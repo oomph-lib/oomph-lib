@@ -1,41 +1,35 @@
+
 # A few file definitions
 #-----------------------
 
 # Define the sources
 sources =  \
-advection_diffusion_elements.cc \
-refineable_advection_diffusion_elements.cc \
-supg_advection_diffusion_elements.cc \
-gen_advection_diffusion_elements.cc \
-refineable_gen_advection_diffusion_elements.cc
-
-#advection_diffusion_flux_elements.cc 
+flux_transport_elements.cc scalar_advection_elements.cc euler_elements.cc
 
 # Include files which shouldn't be compiled
-incl_cc_files = 
+incl_cc_files =
 
 # Define the headers
 headers =  \
-advection_diffusion_elements.h \
-advection_diffusion_flux_elements.h \
-refineable_advection_diffusion_elements.h \
-supg_advection_diffusion_elements.h \
-gen_advection_diffusion_elements.h \
-refineable_gen_advection_diffusion_elements.h
+flux_transport_elements.h scalar_advection_elements.h euler_elements.h
+
+# Template only files. These should be included in include directory
+# but should not be listed in combined header file
+templates = 
 
 # Define name of library
-libname = advection_diffusion
+libname = flux_transport
 
 # Combine headers and sources
 headers_and_sources = $(headers) $(sources)
 
 # Define the library that gets placed in lib directory
 #-----------------------------------------------------
-lib_LTLIBRARIES = libadvection_diffusion.la
+lib_LTLIBRARIES = libflux_transport.la
 
 # Sources that the library depends on: 
 #-------------------------------------
-libadvection_diffusion_la_SOURCES = $(headers_and_sources)
+libflux_transport_la_SOURCES = $(headers_and_sources)
 
 # The library's include headers:
 #-------------------------------
@@ -45,10 +39,17 @@ libadvection_diffusion_la_SOURCES = $(headers_and_sources)
 include_HEADERS = $(libname).h 
 
 #Here's the subdirectory where the actual header files are placed
-library_includedir=$(includedir)/advection_diffusion
+library_includedir=$(includedir)/flux_transport
 
 #These are the header files that are to be placed in subdirectory
-library_include_HEADERS=$(headers) $(incl_cc_files)
+library_include_HEADERS=$(headers) $(incl_cc_files) $(templates)
+
+
+# Required libraries 
+#-------------------
+# Include path for library headers -- need to refer to include files
+# in src as they will not have been installed yet! 
+INCLUDES = -I$(top_srcdir)/src/generic 
 
 # Combined header file
 #---------------------
@@ -62,13 +63,12 @@ dummy_$(libname).h:  $(headers)
 	       all_$(libname).aux > $(libname).h
 	rm all_$(libname).aux
 
-
 # Extra hook for install: Optionally replace headers by symbolic links
 #---------------------------------------------------------------------
 if SYMBOLIC_LINKS_FOR_HEADERS
 install-data-hook: 
-	(cd $(library_includedir) && rm -f $(headers) $(incl_cc_files) )
-	(echo "$(headers) $(incl_cc_files)" > include_files.list )
+	(cd $(library_includedir) && rm -f $(headers) $(incl_cc_files) $(templates) )
+	(echo "$(headers) $(incl_cc_files) $(templates)" > include_files.list )
 	($(top_srcdir)/bin/change_headers_to_links.sh `pwd`)
 	($(LN_S) `cat include_files.list.aux` $(library_includedir) )
 	(rm -r include_files.list.aux include_files.list ) 
@@ -79,7 +79,8 @@ endif
 
 # Cleanup: Kill automatically generated combined header file
 clean-local: 
-	rm -f $(libname).h *~
+	rm -f $(libname).h  *~
 distclean-local:
-	rm -f $(libname).h *~
+	rm -f $(libname).h  *~
+
 

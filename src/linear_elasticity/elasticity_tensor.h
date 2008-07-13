@@ -109,6 +109,8 @@ class ElasticityTensor
   ///Empty Constructor
   ElasticityTensor() {}
 
+ public:
+
   ///Empty virtual Destructor 
   virtual ~ElasticityTensor() {}
 

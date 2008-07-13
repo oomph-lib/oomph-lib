@@ -179,6 +179,61 @@ public:
 #endif
 
 };
+
+//==================================================================
+///\short A Vector of bools cannot be created because the is no
+///compiler-independent  implementation of the bit manipulators.
+///Making all the constructors private should lead to compile-time
+///errors. 
+//=================================================================
+template<>
+class Vector<bool>: private std::vector<bool>
+{
+
+public:
+ 
+ /// Typedef to make the constructors look a bit cleaner
+ typedef bool 						value_type;
+
+ /// Typedef to make the constructors look a bit cleaner
+ typedef value_type& 					reference;
+
+ /// Typedef to make the constructors look a bit cleaner
+ typedef const value_type& 				const_reference;
+
+ /// Typedef to make the constructors look a bit cleaner
+ typedef size_t 					size_type;
+
+ private:
+ 
+ //Standard Constuctors (some have been omitted from the stl classes)
+
+ /// Construct an empty vector 
+ Vector() : std::vector<bool>() {}
+ 
+ /// \short A constructor that creates a vector of size __n.
+ /// Note the use of explicit for "strong" type checking
+ explicit Vector(size_type __n) : std::vector<bool>(__n) { }
+
+ /// \short A constructor that creates a vector of size __n and 
+ /// initialises every entry to __value
+ Vector(size_type __n, const bool& __value) : std::vector<bool>(__n,__value) {}
+
+ /// Copy constructor
+ Vector(const Vector<bool>& __x) : std::vector<bool>(__x) {}
+
+ /// Iterate over all values and set to the desired value
+ void initialise(const bool& __value)
+  {
+   for(std::vector<bool>::iterator it = std::vector<bool>::begin();
+       it != std::vector<bool>::end(); it++)
+    {
+     *it = __value;
+    }
+  }
+
+};
+
 }
 
 #endif

@@ -6,7 +6,7 @@
 sources =  \
 oomph_definitions.cc oomph_utilities.cc \
 complex_matrices.cc \
-matrices.cc       timesteppers.cc \
+matrices.cc       timesteppers.cc explicit_timesteppers.cc \
 integral.cc   nodes.cc  \
 elements.cc mesh.cc assembly_handler.cc problem.cc \
 Qelements.cc Qspectral_elements.cc frontal_solver.cc      linear_solver.cc \
@@ -18,6 +18,7 @@ macro_element.cc \
 stored_shape_function_elements.cc \
 quad_mesh.cc \
 domain.cc   quadtree.cc \
+dg_elements.cc \
 error_estimator.cc   \
 refineable_elements.cc \
 refineable_quad_element.cc  refineable_mesh.cc \
@@ -51,7 +52,7 @@ Vector.h            frontal_solver.h      matrices.h       spines.h \
 element_with_moving_nodes.h \
 complex_matrices.h \
 displacement_control_element.h \
-mesh.h           timesteppers.h \
+mesh.h           timesteppers.h  explicit_timesteppers.h \
 hermite_elements.h  nodes.h      oomph_utilities.h \
 elastic_problems.h  hijacked_elements.h      geom_objects.h \
 algebraic_elements.h            macro_element.h \
@@ -59,6 +60,7 @@ stored_shape_function_elements.h \
 map_matrix.h \
 domain.h                        quad_mesh.h \
 quadtree.h \
+dg_elements.h \
 error_estimator.h \
 refineable_mesh.h \
 fsi.h octree.h  tree.h  \

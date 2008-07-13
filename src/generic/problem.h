@@ -40,6 +40,7 @@
 //OOMPH-LIB headers
 #include "Vector.h"
 #include "matrices.h"
+#include "explicit_timesteppers.h"
 #include <complex>
 
 // mpi includes
@@ -131,7 +132,7 @@ namespace oomph
 /// \code unsteady_newton_solve(...) \endcode
 ///
 //=======================================================================
-class Problem
+ class Problem : public ExplicitTimeSteppableObject
 {
  //The handler classes need to be friend
  friend class FoldHandler;
@@ -173,6 +174,9 @@ class Problem
  /// \short The Vector of time steppers (there could be many 
  /// different ones in multiphysics problems)
  Vector<TimeStepper*> Time_stepper_pt;
+
+ /// \short Pointer to a single explicit timestepper
+ ExplicitTimeStepper *Explicit_time_stepper_pt;
 
  /// Pointer to vector for backup of dofs
  Vector<double>* Saved_dof_pt;
@@ -298,13 +302,6 @@ protected:
 
  //--------------------- Newton solver parameters
 
- /// Is re-use of Jacobian in Newton iteration enabled? Default: false
- bool Jacobian_reuse_is_enabled;
-
- /// \short Has a Jacobian been computed (and can therefore be re-used 
- /// if required)? Default: false
- bool Jacobian_has_been_computed;
-
  /// \short The Tolerance below which the Newton Method is deemed to have 
  /// converged
  double Newton_solver_tolerance;
@@ -315,6 +312,14 @@ protected:
  /// \short Maximum desired residual:
  /// if the maximum residual exceeds this value, the program will exit
  double Max_residuals;
+ 
+ /// Is re-use of Jacobian in Newton iteration enabled? Default: false
+ bool Jacobian_reuse_is_enabled;
+
+ /// \short Has a Jacobian been computed (and can therefore be re-used 
+ /// if required)? Default: false
+ bool Jacobian_has_been_computed;
+
 
  /// \short Boolean flag indicating if we're dealing with a linear or nonlinear
  /// Problem -- if set to false the Newton solver will not check
@@ -342,7 +347,7 @@ protected:
  double Numerical_zero_for_sparse_assembly;
 
 
- /// \short Proteced helper function that is used to assemble the Jacobian 
+ /// \short Protected helper function that is used to assemble the Jacobian 
  /// matrix in the case when the storage is row or column compressed.
  /// The boolean Flag indicates
  /// if we want compressed row format (true) or compressed column.
@@ -352,6 +357,20 @@ protected:
   Vector<Vector<double> > &value, 
   Vector<Vector<double>*> &residual,
   bool compressed_row_flag);
+
+ //---------------------Explicit time-stepping parameters
+
+ ///Is re-use of the mass matrix in explicit timestepping enabled Default:false
+ bool Mass_matrix_reuse_is_enabled;
+ 
+ ///\short Has the mass matrix been computed (and can therefore be reused) 
+ ///Default: false
+ bool Mass_matrix_has_been_computed;
+ 
+ //---------------------Discontinuous control flags
+ ///\short Is the problem a discontinuous one, i.e. can the
+ ///elemental contributions be treated independently. Default: false
+ bool Discontinuous_element_formulation;
 
 
  //--------------------- Adaptive time-stepping parameters
@@ -428,13 +447,13 @@ protected:
  /// Newton solve (e.g. adjust boundary conditions). CAREFUL: This
  /// step should (and if the FD-based LinearSolver FD_LU is used, must) 
  /// only update values that are pinned!
- virtual void actions_before_newton_solve()=0;
+ virtual void actions_before_newton_solve() { }
 
  /// \short Any actions that are to be performed after a complete Newton solve,
  /// e.g. post processing.  CAREFUL: This
  /// step should (and if the FD-based LinearSolver FD_LU is used, must) 
  /// only update values that are pinned!
- virtual void actions_after_newton_solve()=0;
+ virtual void actions_after_newton_solve() { }
 
  /// \short Any actions that are to be performed before 
  /// the residual is checked in the Newton method, e.g. update 
@@ -657,6 +676,9 @@ public:
  /// Return a pointer to the global time object
  Time* &time_pt() {return Time_pt;}
 
+ /// Return the current value of continuous time
+ double& time(); 
+
  /// \short Access function for the pointer to the first (presumably only) 
  /// timestepper
  TimeStepper* &time_stepper_pt()
@@ -673,6 +695,10 @@ public:
  /// Return a pointer to the i-th timestepper
  TimeStepper* &time_stepper_pt(const unsigned &i)
   {return Time_stepper_pt[i];}
+
+ /// Return a pointer to the explicit timestepper
+ ExplicitTimeStepper* &explicit_time_stepper_pt()
+  {return Explicit_time_stepper_pt;}
 
  /// \short Shift all values along to prepare for next timestep
  void shift_time_values();
@@ -694,6 +720,13 @@ public:
  /// create or resize the Time object so that it contains the appropriate
  /// number of levels of storage.
  void add_time_stepper_pt(TimeStepper* const &time_stepper_pt);
+
+ /// \short Set the explicit timestepper for the problem. The function
+ /// will automatically create or resize the Time object so that it contains
+ /// the appropriate number of levels of storage
+ void set_explicit_time_stepper_pt(ExplicitTimeStepper* 
+                                   const &explicit_time_stepper_pt);
+
 
  /// \short Set all timesteps to the same value, dt, and assign 
  /// weights for all timesteppers in the problem
@@ -736,9 +769,30 @@ public:
  /// can be overloaded in MPI problems.
  virtual unsigned long assign_eqn_numbers();
 
+ /// \short Indicate that the problem involves discontinuous elements
+ /// This allows for a more efficiently assembly and inversion of the
+ /// mass matrix
+ void enable_discontinuous_formulation() 
+  {Discontinuous_element_formulation = true;}
+
+ /// \short Disable the use of a discontinuous-element formulation.
+ /// Note that the methods will all still work even if the elements are
+ /// discontinuous, we will just be assembling a larger system matrix than
+ /// necessary.
+ void disable_discontinuous_formulation()
+  {Discontinuous_element_formulation = false;}
+
+
+
  /// \short Return the vector of dofs, i.e. a vector containing the current
  /// values of all unknowns.
  void get_dofs(Vector<double>& dofs);
+
+ /// \short Set the values of the dofs
+ void set_dofs(const Vector<double> &dofs);
+
+ /// \short Add lambda x incremenet_dofs[l] to the l-th dof
+ void add_to_dofs(const double &lambda, const Vector<double> &increment_dofs);
 
  /// \short i-th dof in the problem
  double& dof(const unsigned& i)
@@ -751,6 +805,10 @@ public:
   {
    return *(Dof_pt[i]);
   }
+
+ ///\shor Return the residual vector multiplied by the inverse mass matrix
+ ///Virtual so that it can be overloaded for mpi problems
+ virtual void get_inverse_mass_matrix_times_residuals(Vector<double> &Mres);
 
  /// \short Return the fully-assembled residuals Vector for the problem: 
  /// Virtual so it can be overloaded in for mpi problems
@@ -1116,6 +1174,10 @@ public:
  /// (solving the associated eigenproblem).
  int &sign_of_jacobian() {return Sign_of_jacobian;}
 
+ /// \short Take an explicit timestep of size dt and optionally shift
+ /// any stored values of the time history
+ void explicit_timestep(const double &dt, const bool &shift_values=true);
+
  /// \short Advance time by dt and solve by Newton's method.
  /// This version always shifts time values
  void unsteady_newton_solve(const double &dt);
@@ -1197,6 +1259,18 @@ public:
 
  /// \short Calculate predictions
  void calculate_predictions();
+
+ ///\short Enable recycling of the mass matrix in explicit timestepping
+ ///schemes. Useful for timestepping on fixed meshes when you want
+ ///to avoid the linear solve phase.
+ void enable_mass_matrix_reuse();
+
+ ///\short Turn off recyling of the mass matrix in explicit timestepping 
+ ///schemes
+ void disable_mass_matrix_reuse();
+
+ ///\short Return whether the mass matrix is being reused
+ bool mass_matrix_reuse_is_enabled() {return Mass_matrix_reuse_is_enabled;}
 
  /// \short  Refine (all) refineable (sub)mesh(es) uniformly and 
  /// rebuild problem; doc refinement process.

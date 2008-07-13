@@ -25,7 +25,7 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-#//Header functions for classes that define Qelements
+//Header functions for classes that define Qelements
 
 //Include guards to prevent multiple inclusion of the header
 #ifndef OOMPH_QSPECTRAL_ELEMENT_HEADER
@@ -325,7 +325,7 @@ public:
    this->set_integration_scheme(&integral);
    //Calculate the nodal positions for the shape functions
    OneDimensionalLegendreShape<NNODE_1D>::calculate_nodal_positions();
-   OneDLegendreShapeParam::calculate_nodal_positions(NNODE_1D);
+   //OneDLegendreShapeParam::calculate_nodal_positions(NNODE_1D);
   }
 
  /// Min. value of local coordinate
@@ -433,8 +433,8 @@ void QSpectralElement<1,NNODE_1D>::shape(const Vector<double> &s, Shape &psi)
  const
 {
  //Call the OneDimensional Shape functions
- //OneDimensionalLegendreShape<NNODE_1D> psi1(s[0]);
- OneDLegendreShapeParam psi1(NNODE_1D,s[0]);
+ OneDimensionalLegendreShape<NNODE_1D> psi1(s[0]);
+ //OneDLegendreShapeParam psi1(NNODE_1D,s[0]);
 
  //Now let's loop over the nodal points in the element
  //and copy the values back in  
@@ -450,11 +450,11 @@ void QSpectralElement<1,NNODE_1D>::dshape_local(const Vector<double> &s,
 						DShape &dpsids) const
 {
  //Call the shape functions and derivatives
- //OneDimensionalLegendreShape<NNODE_1D> psi1(s[0]);
- //OneDimensionalLegendreDShape<NNODE_1D> dpsi1ds(s[0]);
+ OneDimensionalLegendreShape<NNODE_1D> psi1(s[0]);
+ OneDimensionalLegendreDShape<NNODE_1D> dpsi1ds(s[0]);
 
- OneDLegendreShapeParam psi1(NNODE_1D,s[0]);
- OneDLegendreDShapeParam dpsi1ds(NNODE_1D,s[0]);
+ //OneDLegendreShapeParam psi1(NNODE_1D,s[0]);
+ //OneDLegendreDShapeParam dpsi1ds(NNODE_1D,s[0]);
 
  //Loop over shape functions in element and assign to psi
  for(unsigned l=0;l<NNODE_1D;l++) 
@@ -532,7 +532,7 @@ public:
    this->set_integration_scheme(&integral);
    //Calculate the nodal positions for the shape functions
    OneDimensionalLegendreShape<NNODE_1D>::calculate_nodal_positions();
-   OneDLegendreShapeParam::calculate_nodal_positions(NNODE_1D);
+   //OneDLegendreShapeParam::calculate_nodal_positions(NNODE_1D);
   }
 
  /// Min. value of local coordinate
@@ -688,8 +688,8 @@ void QSpectralElement<2,NNODE_1D>::shape(const Vector<double> &s, Shape &psi)
  const
 {
  //Call the OneDimensional Shape functions
- //OneDimensionalLegendreShape<NNODE_1D> psi1(s[0]);
- OneDLegendreShapeParam psi1(NNODE_1D,s[0]), psi2(NNODE_1D,s[1]);
+ OneDimensionalLegendreShape<NNODE_1D> psi1(s[0]), psi2(s[1]);
+ //OneDLegendreShapeParam psi1(NNODE_1D,s[0]), psi2(NNODE_1D,s[1]);
 
  //Now let's loop over the nodal points in the element
  //and copy the values back in  
@@ -711,11 +711,11 @@ void QSpectralElement<2,NNODE_1D>::dshape_local(const Vector<double> &s,
 						DShape &dpsids) const
 {
  //Call the shape functions and derivatives
- //OneDimensionalLegendreShape<NNODE_1D> psi1(s[0]);
- //OneDimensionalLegendreDShape<NNODE_1D> dpsi1ds(s[0]);
+ OneDimensionalLegendreShape<NNODE_1D> psi1(s[0]), psi2(s[1]);
+ OneDimensionalLegendreDShape<NNODE_1D> dpsi1ds(s[0]), dpsi2ds(s[1]);
 
- OneDLegendreShapeParam psi1(NNODE_1D,s[0]), psi2(NNODE_1D,s[1]);
- OneDLegendreDShapeParam dpsi1ds(NNODE_1D,s[0]), dpsi2ds(NNODE_1D,s[1]);
+ //OneDLegendreShapeParam psi1(NNODE_1D,s[0]), psi2(NNODE_1D,s[1]);
+ //OneDLegendreDShapeParam dpsi1ds(NNODE_1D,s[0]), dpsi2ds(NNODE_1D,s[1]);
 
  //Index for the shape functions
  unsigned index=0;
@@ -805,7 +805,7 @@ public:
    this->set_integration_scheme(&integral);
    //Calculate the nodal positions for the shape functions
    OneDimensionalLegendreShape<NNODE_1D>::calculate_nodal_positions();
-   OneDLegendreShapeParam::calculate_nodal_positions(NNODE_1D);
+   //OneDLegendreShapeParam::calculate_nodal_positions(NNODE_1D);
   }
 
  /// Min. value of local coordinate
@@ -984,9 +984,9 @@ void QSpectralElement<3,NNODE_1D>::shape(const Vector<double> &s, Shape &psi)
  const
 {
  //Call the OneDimensional Shape functions
- //OneDimensionalLegendreShape<NNODE_1D> psi1(s[0]);
- OneDLegendreShapeParam psi1(NNODE_1D,s[0]), psi2(NNODE_1D,s[1]), 
-  psi3(NNODE_1D,s[2]);
+ OneDimensionalLegendreShape<NNODE_1D> psi1(s[0]), psi2(s[1]), psi3(s[2]);
+ //OneDLegendreShapeParam psi1(NNODE_1D,s[0]), psi2(NNODE_1D,s[1]), 
+ // psi3(NNODE_1D,s[2]);
 
  //Now let's loop over the nodal points in the element
  //and copy the values back in  
@@ -1011,10 +1011,15 @@ void QSpectralElement<3,NNODE_1D>::dshape_local(const Vector<double> &s,
 						DShape &dpsids) const
 {
  //Call the shape functions and derivatives
- OneDLegendreShapeParam psi1(NNODE_1D,s[0]), psi2(NNODE_1D,s[1]),
-  psi3(NNODE_1D,s[2]);
- OneDLegendreDShapeParam dpsi1ds(NNODE_1D,s[0]), dpsi2ds(NNODE_1D,s[1]),
-  dpsi3ds(NNODE_1D,s[2]);
+ //OneDLegendreShapeParam psi1(NNODE_1D,s[0]), psi2(NNODE_1D,s[1]),
+ // psi3(NNODE_1D,s[2]);
+ //OneDLegendreDShapeParam dpsi1ds(NNODE_1D,s[0]), dpsi2ds(NNODE_1D,s[1]),
+ // dpsi3ds(NNODE_1D,s[2]);
+ OneDimensionalLegendreShape<NNODE_1D> psi1(s[0]), psi2(s[1]), psi3(s[2]);
+ OneDimensionalLegendreDShape<NNODE_1D> dpsi1ds(s[0]), dpsi2ds(s[1]),
+  dpsi3ds(s[2]);
+
+
  //Index for the shape functions
  unsigned index=0;
  

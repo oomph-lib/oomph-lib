@@ -135,9 +135,9 @@ void QSpectralElement<1,NNODE_1D>::
 build_face_element(const int &face_index,
                    FaceElement *face_element_pt)
 {
- throw OomphLibError("Untested",
+ /*throw OomphLibError("Untested",
                      "QSpectralElement::build_face_element()",
-                     OOMPH_EXCEPTION_LOCATION);
+                     OOMPH_EXCEPTION_LOCATION);*/
 
  // Overload the nodal dimension by reading out the value from the node
  face_element_pt->set_nodal_dimension(this->node_pt(0)->ndim());
