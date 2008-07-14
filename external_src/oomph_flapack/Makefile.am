@@ -249,6 +249,8 @@ lib_LTLIBRARIES = liboomph_flapack.la
 # Sources that the library depends on:
 #-------------------------------------
 liboomph_flapack_la_SOURCES = $(headers_and_sources)
+#Definitely no optimisation, but still warnings
+liboomph_flapack_non_opt_la_FFLAGS="-O0"
 
 # Automake doesn't have a way to build with no optimization
 # See http://sources.redhat.com/ml/automake/2002-08/msg00082.html

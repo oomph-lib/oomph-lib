@@ -37,7 +37,7 @@ if test "$1" = "no_python"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/1d_sod.dat.gz \
-    1d_sod.dat  0.1 1.0e-14 >> validation.log
+    1d_sod.dat  0.1 3.0e-12 >> validation.log
 fi
 
 echo "Lax problem " >> validation.log
@@ -45,7 +45,7 @@ if test "$1" = "no_python"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/1d_lax.dat.gz \
-    1d_lax.dat  0.1 1.0e-14 >> validation.log
+    1d_lax.dat  0.1 3.0e-12 >> validation.log
 fi
 
 echo "Running 2D Euler validation "

@@ -121,7 +121,7 @@ else
 #accelerated case. Going back down to 1% or less doesn't make a significant
 #difference in most places
 ../../../../bin/fpdiff.py ../validata/unsteady.dat.gz \
-    unsteady.dat 3.5 1.0e-12 >> validation.log
+    unsteady.dat 5.0 1.0e-12 >> validation.log
 fi
 
 #Append log to the main validation log
