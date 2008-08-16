@@ -1263,7 +1263,7 @@ should compute the residuals of the "normal" governing equations.
 \c SolidFiniteElements whose initial conditions are to be set with 
 the above function, must re-direct the computation of the residual to
 \code 
-SolidFiniteElement::get_residuals_for_ic(...)
+SolidFiniteElement:get_residuals_for_solid_ic(...)
 \endcode
 \n
 whenever the pointer to the \c SolidInitialCondition is non-NULL, as 
@@ -1280,7 +1280,7 @@ template <unsigned DIM>
   // Simply set up initial condition?
   if (Solid_ic_pt!=0)
    {
-    get_residuals_for_ic(residuals);
+    get_residuals_for_solid_ic(residuals);
     return;
    }
 
@@ -1296,7 +1296,7 @@ The \c SolidInitialCondition object stores a (pointer to a) \c GeomObject
 and a flag that indicates which time-derivative (0th, 1st
 or 2nd) of the \c GeomObject's position vector is to be assigned to
 the nodal coordinates. Based on the value of this flag,
-the function \c SolidFiniteElement::get_residuals_for_ic(...),
+the function \c SolidFiniteElement::get_residuals_for_solid_ic(...),
 is able to compute the residuals corresponding to equations
 (@R[weak_initial_displ]@), (@R[weak_initial_veloc]@) or 
 (@R[weak_initial_accel]@). 

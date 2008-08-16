@@ -515,15 +515,43 @@ class RefineableElement : public virtual FiniteElement
 class RefineableSolidElement : public virtual RefineableElement,
                                public virtual SolidFiniteElement
 {
+
+  private:
+
+ /// \short Storage for local equation numbers of 
+ /// hanging node variables associated with nodal positions.
+ /// local position equation number = 
+ /// Local_position_hang_eqn(master_node_pt,ival)
+ std::map<Node*,DenseMatrix<int> > Local_position_hang_eqn; 
+
+
+ /// \short Assign local equation numbers to the hanging values associated
+ /// with positions or additional solid values.
+ void assign_solid_hanging_local_eqn_numbers();
+
+
  protected:
 
+ /// \short Flag deciding if the Lagrangian coordinates of newly-created interior 
+ /// SolidNodes are to be determined by the father element's undeformed 
+ /// MacroElement representation (if it has one). Default: False as it means that, 
+ /// following a refinement an element is no longer in equilbrium (as the Lagrangian
+ /// coordinate is determined differently from the Eulerian one). However, basing
+ /// the Lagrangian coordinates on the undeformed MacroElement can be
+ /// more stable numerically and for steady problems it's not a big deal
+ /// either way as the difference between the two formulations only matters
+ /// at finite resolution so we have no right to say that one is "more correct"
+ /// than the other...
+ bool Use_undeformed_macro_element_for_new_lagrangian_coords;
+ 
  /// \short Access the local equation number of of hanging node variables
  /// associated with nodal positions. The function returns a dense
  /// matrix that contains all the local equation numbers corresponding to
  /// the positional degrees of freedom.
  DenseMatrix<int> &local_position_hang_eqn(Node* const &node_pt)
   {return Local_position_hang_eqn[node_pt];}
- 
+
+
  /// \short Assemble the jacobian matrix for the mapping from local
  /// to lagrangian coordinates, given the derivatives of the shape function
  /// Overload the standard version to use the hanging information for
@@ -548,21 +576,11 @@ void assemble_local_to_lagrangian_jacobian(
   const DShape &dpsids,DenseMatrix<double> &jacobian,
   DenseMatrix<double> &inverse_jacobian) const;
 
-  private:
- /// \short Storage for local equation numbers of 
- /// hanging node variables associated with nodal positions.
- /// local position equation number = 
- /// Local_position_hang_eqn(master_node_pt,ival)
- std::map<Node*,DenseMatrix<int> > Local_position_hang_eqn; 
-
-  protected:
- /// \short Assign local equation numbers to the hanging values associated
- /// with positions or additional solid values.
- void assign_solid_hanging_local_eqn_numbers();
-  
   public:
+
  /// Constructor
- RefineableSolidElement() : RefineableElement(), SolidFiniteElement() {}
+ RefineableSolidElement() : RefineableElement(), SolidFiniteElement(),
+  Use_undeformed_macro_element_for_new_lagrangian_coords(false){}
 
  /// Virtual Destructor, delete any allocated storage
  virtual ~RefineableSolidElement() { }
@@ -587,6 +605,34 @@ void assemble_local_to_lagrangian_jacobian(
  void fill_in_jacobian_from_solid_position_by_fd(Vector<double> & residuals,
                                              DenseMatrix<double> &jacobian);
 
+
+ /// \short Access fct to flag deciding if the Lagrangian coordinates of newly-created interior 
+ /// SolidNodes are to be determined by the father element's undeformed 
+ /// MacroElement representation (if it has one). Default: False as it means that, 
+ /// following a refinement an element is no longer in equilbrium (as the Lagrangian
+ /// coordinate is determined differently from the Eulerian one). However, basing
+ /// the Lagrangian coordinates on the undeformed MacroElement can be
+ /// more stable numerically and for steady problems it's not a big deal
+ /// either way as the difference between the two formulations only matters
+ /// at finite resolution so we have no right to say that one is "more correct"
+ /// than the other...
+ bool& use_undeformed_macro_element_for_new_lagrangian_coords()
+  {return Use_undeformed_macro_element_for_new_lagrangian_coords;}
+
+
+ /// \short Further build: Pass the father's 
+ /// Use_undeformed_macro_element_for_new_lagrangian_coords
+ /// flag down, then call the underlying RefineableElement's
+ /// version.
+ virtual void further_build()
+  {
+   Use_undeformed_macro_element_for_new_lagrangian_coords=
+    dynamic_cast<RefineableSolidElement*>(father_element_pt())
+    ->use_undeformed_macro_element_for_new_lagrangian_coords();
+   
+   RefineableElement::further_build();
+  }
+ 
 };
 
 }

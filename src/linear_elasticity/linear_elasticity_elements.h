@@ -117,9 +117,10 @@ namespace oomph
 
 
    /// \short Function pointer to function that specifies the body force
-   /// as a function of the Cartesian coordinates and time FCT(x,t,b) -- 
+   /// as a function of the Cartesian coordinates and time FCT(t,x,b) -- 
    /// x and b are  Vectors! 
-   typedef void (*BodyForceFctPt)(const Vector<double>& x, const double& t,
+   typedef void (*BodyForceFctPt)(const double& t,
+                                  const Vector<double>& x,
                                   Vector<double>& b);
    
    /// \short Constructor: Set null pointers for constitutive law and for
@@ -223,11 +224,11 @@ namespace oomph
        // Get body force
        if (time_pt()!=0)
         {
-         (*Body_force_fct_pt)(xi,time_pt()->time(),b);
+         (*Body_force_fct_pt)(time_pt()->time(),xi,b);
         }
        else
         {
-         (*Body_force_fct_pt)(xi,0.0,b);
+         (*Body_force_fct_pt)(0.0,xi,b);
         }
       }
     }
@@ -606,7 +607,7 @@ namespace oomph
      //Note that this replaces solid entries only
      if(this->Solve_for_consistent_newmark_accel_flag)
       {
-       this->add_jacobian_for_newmark_accel(jacobian);
+       this->fill_in_jacobian_for_newmark_accel(jacobian);
        return;
       }
      
@@ -719,8 +720,7 @@ namespace oomph
    /// virtual displacements,
    /// formulated in the incompressible/near-incompressible case.
    /// If flag==1, also compute the pressure-related entries
-   /// in the Jacobian (all others need to be done by finite differencing
-   /// in SolidFiniteElement::add_jacobian_solid_position_fd(...).
+   /// in the Jacobian (all others need to be done by finite differencing.
    virtual void fill_in_generic_residual_contribution_pvd_with_pressure(
     Vector<double> &residuals, DenseMatrix<double> &jacobian,
     unsigned flag);

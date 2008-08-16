@@ -306,7 +306,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
   // Simply set up initial condition?
  if (Solid_ic_pt!=0)
   {
-   get_residuals_for_ic(residuals);
+   get_residuals_for_solid_ic(residuals);
    return;
   }
 

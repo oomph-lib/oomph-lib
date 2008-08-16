@@ -1600,9 +1600,9 @@ public:
  /// generalised position, dx(k,i)/dt at local node n.
  /// `Type': k; Coordinate direction: i. Do not use the hanging node
  /// representation.
- double raw_dnodal_position__gen_dt(const unsigned &n, 
-                                    const unsigned &k, 
-                                    const unsigned &i) const
+ double raw_dnodal_position_gen_dt(const unsigned &n, 
+                                   const unsigned &k, 
+                                   const unsigned &i) const
   {return node_pt(n)->dx_gen_dt(k,i);}
  
  /// \short i-th component of j-th time derivative  of the 
@@ -2325,16 +2325,16 @@ public:
  /// local coordinates: The Eulerian position is returned in 
  /// FE-interpolated form (\c x_fe) and then in the form obtained
  /// from the "current" MacroElement representation (if it exists -- if not,
- /// \c x is the same as \c x_fe). This This allows the Domain/MacroElement-
+ /// \c x is the same as \c x_fe). This allows the Domain/MacroElement-
  /// based representation to be used to apply displacement boundary
- /// conditions exactly. The Lagrangian coordinate is always based
- /// on the (undeformed!) MacroElement representation, if it exists;
- /// if not, \c xi is obtained via the FE interpolation. 
+ /// conditions exactly. Ditto for the Lagrangian coordinates returned
+ /// in xi_fe and xi.
  /// (Broken virtual -- overload in specific geometric element class
  /// if you want to use this functionality.)
  virtual void get_x_and_xi(const Vector<double>& s, 
                            Vector<double>& x_fe,
                            Vector<double>& x,
+                           Vector<double>& xi_fe,
                            Vector<double>& xi) const
   {
    throw OomphLibError(
@@ -2638,24 +2638,83 @@ public:
  /// are specified via the \c GeomObject that is stored in the 
  /// \c SolidFiniteElement::SolidInitialCondition object. The latter also
  /// stores the order of the time-derivative \f$ D \f$ to be assigned.
- virtual void get_residuals_for_ic(Vector<double>& residuals)
+ virtual void get_residuals_for_solid_ic(Vector<double>& residuals)
   {
    residuals.initialise(0.0);
-   add_residuals_for_ic(residuals);
+   fill_in_residuals_for_solid_ic(residuals);
   }
 
+ /// \short Fill in the residuals for the setup of an initial condition.
+ /// The global equations are:
+ /// \f[
+ /// 0 = \int \left( \sum_{j=1}^N \sum_{k=1}^K X_{ijk} \psi_{jk}(\xi_n) 
+ /// - \frac{\partial^D R^{(IC)}_i(\xi_n)}{\partial t^D}
+ /// \right) \psi_{lm}(\xi_n) \ dv
+ /// \mbox{ \ \ \ \ for \ \ \ $l=1,...,N, \ \ m=1,...,K$}
+ /// \f]
+ /// where \f$ N \f$ is the number of nodes in the mesh and \f$ K \f$
+ /// the number of generalised nodal coordinates. The initial shape
+ /// of the solid body, \f$ {\bf R}^{(IC)},\f$ and its time-derivatives
+ /// are specified via the \c GeomObject that is stored in the 
+ /// \c SolidFiniteElement::SolidInitialCondition object. The latter also
+ /// stores the order of the time-derivative \f$ D \f$ to be assigned.
+ void fill_in_residuals_for_solid_ic(Vector<double> &residuals)
+  {
+   //Call the generic residuals function with flag set to 0
+   //using a dummy matrix argument
+   fill_in_generic_jacobian_for_solid_ic(
+    residuals,GeneralisedElement::Dummy_matrix,0);
+  }
+
+ /// \short Fill in the residuals and Jacobian for the setup of an 
+ /// initial condition. The global equations are:
+ /// \f[
+ /// 0 = \int \left( \sum_{j=1}^N \sum_{k=1}^K X_{ijk} \psi_{jk}(\xi_n) 
+ /// - \frac{\partial^D R^{(IC)}_i(\xi_n)}{\partial t^D}
+ /// \right) \psi_{lm}(\xi_n) \ dv
+ /// \mbox{ \ \ \ \ for \ \ \ $l=1,...,N, \ \ m=1,...,K$}
+ /// \f]
+ /// where \f$ N \f$ is the number of nodes in the mesh and \f$ K \f$
+ /// the number of generalised nodal coordinates. The initial shape
+ /// of the solid body, \f$ {\bf R}^{(IC)},\f$ and its time-derivatives
+ /// are specified via the \c GeomObject that is stored in the 
+ /// \c SolidFiniteElement::SolidInitialCondition object. The latter also
+ /// stores the order of the time-derivative \f$ D \f$ to be assigned.
+ void fill_in_jacobian_for_solid_ic(Vector<double> &residuals,
+                                    DenseMatrix<double> &jacobian)
+  {
+   //Call the generic routine with the flag set to 1
+   fill_in_generic_jacobian_for_solid_ic(residuals,jacobian,1);
+  }
+
+
+ /// \short Fill in the contributions of the Jacobian matrix 
+ /// for the consistent assignment of the initial "accelerations" in 
+ /// Newmark scheme. In this case the Jacobian is the mass matrix.
+  void fill_in_jacobian_for_newmark_accel(DenseMatrix<double> &jacobian);
  
- /// \short Add the contribution for the initial condition
- virtual void add_residuals_for_ic(Vector<double> &residuals);
- 
- 
- /// \short Add the contributions of the Jacobian matrix 
- /// for the consistent assignment of 
- /// the initial "accelerations" in Newmark scheme. The Jacobian is the 
- /// mass matrix.
- void add_jacobian_for_newmark_accel(DenseMatrix<double> &jacobian);
 
   protected:
+
+
+
+ /// \short Helper function to fill in the residuals and (if flag==1) the 
+ /// Jacobian for the setup of an initial condition. The global equations are:
+ /// \f[
+ /// 0 = \int \left( \sum_{j=1}^N \sum_{k=1}^K X_{ijk} \psi_{jk}(\xi_n) 
+ /// - \frac{\partial^D R^{(IC)}_i(\xi_n)}{\partial t^D}
+ /// \right) \psi_{lm}(\xi_n) \ dv
+ /// \mbox{ \ \ \ \ for \ \ \ $l=1,...,N, \ \ m=1,...,K$}
+ /// \f]
+ /// where \f$ N \f$ is the number of nodes in the mesh and \f$ K \f$
+ /// the number of generalised nodal coordinates. The initial shape
+ /// of the solid body, \f$ {\bf R}^{(IC)},\f$ and its time-derivatives
+ /// are specified via the \c GeomObject that is stored in the 
+ /// \c SolidFiniteElement::SolidInitialCondition object. The latter also
+ /// stores the order of the time-derivative \f$ D \f$ to be assigned.
+ void fill_in_generic_jacobian_for_solid_ic(Vector<double> &residuals,
+                                            DenseMatrix<double> &jacobian,
+                                            const unsigned& flag); 
 
  /// \short Set the number of types required to interpolate the 
  /// Lagrangian coordinates
@@ -2772,7 +2831,7 @@ public:
    //Solve for the consistent acceleration in Newmark scheme?
    if(Solve_for_consistent_newmark_accel_flag)
     {
-     add_jacobian_for_newmark_accel(jacobian);
+     fill_in_jacobian_for_newmark_accel(jacobian);
      return;
     }
    

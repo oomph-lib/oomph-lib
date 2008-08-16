@@ -234,105 +234,159 @@ calculate_second_piola_kirchhoff_stress(const DenseMatrix<double> &g,
  DenseMatrix<double> Gup(dim);
  //We don't need the Jacobian so cast the function to void
  (void)calculate_contravariant(G,Gup);
-      
- // Calculate the stiffness tensor; hard-coded as
- // array because we don't want/have rank four tensor.
- // Extra dimensions are not used if DIM<3; 2D elasticity
- // is therefore plain strain version.
- double Et[3][3][3][3];
- 
+  
  //Premultiply some constants
  double C1 = E/(2.0*(1.0+Nu)), C2 = 2.0*Nu/(1.0-2.0*Nu);
-     
- //Loop over dimensions to calculate Et
+       
+//  // Calculate the stiffness tensor; hard-coded as
+//  // array because we don't want/have rank four tensor.
+//  // Extra dimensions are not used if DIM<3; 2D elasticity
+//  // is therefore plain strain version.
+//  double Et[3][3][3][3];
+   
+//  //Loop over dimensions to calculate Et
+//  for(unsigned i=0;i<dim;i++)
+//   {
+//    //Loop backwards over second index, so that we can use symmetry
+//    //of first two indicies later
+//    for(int j=(dim-1);j>=static_cast<int>(i);j--)
+//     {
+//      //If k is lower than i, then we can use symmetry of the first and 
+//      //second pairs of indicies
+//      for(unsigned k=0;k<i;k++)
+//       {
+//        for(unsigned l=0;l<dim;l++)
+//         {
+//          Et[i][j][k][l] = Et[k][l][i][j];
+//         }
+//       }
+//      //Loop over cases when k is greater than or equal to i
+//      //If k is less than or equal to j then we can again use symmetry
+//      //of the first and seocnd indicies
+//      for(int k=i;k<=j;k++)   
+//       {
+//        //If l is greater than j we have this symmetry
+//        for(int l=(dim-1);l>j;l--)
+//         {
+//          Et[i][j][k][l] = Et[k][l][i][j];
+//         }
+//        //For l less then or equal to j and bigger than k,
+//        //we actually have to do some work!
+//        //Note that k is less than or equal to j from the above loop
+//        for(int l=j;l>=k;l--)
+//         {
+//          Et[i][j][k][l] = C1*(Gup(i,k)*Gup(j,l) + Gup(i,l)*Gup(j,k) 
+//                               + C2*Gup(i,j)*Gup(k,l));
+//         }
+//        //For l less than k can use symmetry
+//        for(int l=(k-1);l>=0;l--)
+//         {
+//          Et[i][j][k][l] = Et[i][j][l][k];
+//         }
+//       }
+//      //For cases when k is bigger than j can't use inner symmetry
+//      for(unsigned k=(j+1);k<dim;k++)
+//       {
+//        //If l is bigger than k
+//        for(int l=(dim-1);l>=static_cast<int>(k);l--)
+//         {
+//          Et[i][j][k][l] = C1*(Gup(i,k)*Gup(j,l) + Gup(i,l)*Gup(j,k) 
+//                               + C2*Gup(i,j)*Gup(k,l));
+//         }
+//        //For l less than k can use symmetry of last two indicies
+//        for(int l=(k-1);l>=0;l--)
+//         {
+//          Et[i][j][k][l] = Et[i][j][l][k];
+//         }
+//       }
+//     }
+   
+//    //For j less than i, can use symmetry of the first two indicies
+//    for(int j=static_cast<int>(i-1);j>=0;j--)
+//     {
+//      //Loop over all k and l
+//      for(unsigned k=0;k<dim;k++)   
+//       {
+//        //Only do upper half here
+//        for(unsigned l=0;l<dim;l++)
+//         {
+//          Et[i][j][k][l] = Et[j][i][k][l];
+//         }
+//       }
+//     }
+//   }
+
+//  //Now merely calculate the components of the stress sigma
+//  for(unsigned i=0;i<dim;i++)
+//   {
+//    for(unsigned j=0;j<dim;j++)
+//     {
+//      //Initialise this component of sigma
+//      sigma(i,j) = 0.0;
+//      //Linear approximation
+//      for(unsigned k=0;k<dim;k++)
+//       {
+//        for(unsigned l=0;l<dim;l++)
+//         {
+//          sigma(i,j) += Et[i][j][k][l]*0.5*(G(k,l) - g(k,l));
+//         }
+//       }
+//     }
+//   }
+
+//---------------------------------------
+
+ // Strain tensor 
+ DenseMatrix<double> strain(dim,dim);
+
+ // Upper triangle
+ for (unsigned i=0;i<dim;i++)
+  {
+   for (unsigned j=i;j<dim;j++)
+    {
+     strain(i,j)=0.5*(G(i,j) - g(i,j));
+    }
+  }
+
+ // Copy across
+ for (unsigned i=0;i<dim;i++)
+  {
+   for (unsigned j=0;j<i;j++)
+    {
+     strain(i,j)=strain(j,i);
+    }
+  }
+ 
+
+ // hierher further symmetries?
+
+ // Compute upper triangle of stress
  for(unsigned i=0;i<dim;i++)
   {
-   //Loop backwards over second index, so that we can use symmetry
-   //of first two indicies later
-   for(int j=(dim-1);j>=static_cast<int>(i);j--)
+   for(unsigned j=i;j<dim;j++)
     {
-     //If k is lower than i, then we can use symmetry of the first and 
-     //second pairs of indicies
-     for(unsigned k=0;k<i;k++)
+     //Initialise this component of sigma
+     sigma(i,j) = 0.0;
+     for(unsigned k=0;k<dim;k++)
       {
        for(unsigned l=0;l<dim;l++)
         {
-         Et[i][j][k][l] = Et[k][l][i][j];
-        }
-      }
-     //Loop over cases when k is greater than or equal to i
-     //If k is less than or equal to j then we can again use symmetry
-     //of the first and seocnd indicies
-     for(int k=i;k<=j;k++)   
-      {
-       //If l is greater than j we have this symmetry
-       for(int l=(dim-1);l>j;l--)
-        {
-         Et[i][j][k][l] = Et[k][l][i][j];
-        }
-       //For l less then or equal to j and bigger than k,
-       //we actually have to do some work!
-       //Note that k is less than or equal to j from the above loop
-       for(int l=j;l>=k;l--)
-        {
-         Et[i][j][k][l] = C1*(Gup(i,k)*Gup(j,l) + Gup(i,l)*Gup(j,k) 
-                              + C2*Gup(i,j)*Gup(k,l));
-        }
-       //For l less than k can use symmetry
-       for(int l=(k-1);l>=0;l--)
-        {
-         Et[i][j][k][l] = Et[i][j][l][k];
-        }
-      }
-     //For cases when k is bigger than j can't use inner symmetry
-     for(unsigned k=(j+1);k<dim;k++)
-      {
-       //If l is bigger than k
-       for(int l=(dim-1);l>=static_cast<int>(k);l--)
-        {
-         Et[i][j][k][l] = C1*(Gup(i,k)*Gup(j,l) + Gup(i,l)*Gup(j,k) 
-                              + C2*Gup(i,j)*Gup(k,l));
-        }
-       //For l less than k can use symmetry of last two indicies
-       for(int l=(k-1);l>=0;l--)
-        {
-         Et[i][j][k][l] = Et[i][j][l][k];
-        }
-      }
-    }
-   
-   //For j less than i, can use symmetry of the first two indicies
-   for(int j=static_cast<int>(i-1);j>=0;j--)
-    {
-     //Loop over all k and l
-     for(unsigned k=0;k<dim;k++)   
-      {
-       //Only do upper half here
-       for(unsigned l=0;l<dim;l++)
-        {
-         Et[i][j][k][l] = Et[j][i][k][l];
+         sigma(i,j) += C1*(Gup(i,k)*Gup(j,l)+Gup(i,l)*Gup(j,k)+
+                           C2*Gup(i,j)*Gup(k,l))*strain(k,l);
         }
       }
     }
   }
 
- //Now merely calculate the components of the stress sigma
- for(unsigned i=0;i<dim;i++)
+ // Copy across
+ for (unsigned i=0;i<dim;i++)
   {
-   for(unsigned j=0;j<dim;j++)
+   for (unsigned j=0;j<i;j++)
     {
-     //Initialise this component of sigma
-     sigma(i,j) = 0.0;
-     //Linear approximation
-     for(unsigned k=0;k<dim;k++)
-      {
-       for(unsigned l=0;l<dim;l++)
-        {
-         sigma(i,j) += Et[i][j][k][l]*0.5*(G(k,l) - g(k,l));
-        }
-      }
+     sigma(i,j)=sigma(j,i);
     }
   }
+
 }
 
 //===========================================================================
@@ -415,95 +469,165 @@ calculate_second_piola_kirchhoff_stress(const DenseMatrix<double> &g,
  //Premultiply the appropriate physical constant
  double C1 = E/(2.0*(1.0+Nu));
      
- //Loop over dimensions to calculate Et_NonSingular
+//  //Loop over dimensions to calculate Et_NonSingular
+//  /*for(unsigned i=0;i<dim;i++)
+//   {
+//    //Loop backwards over second index, so that we can use symmetry
+//    //of first two indicies later
+//    for(int j=(dim-1);j>=static_cast<int>(i);j--)
+//     {
+//      //If k is lower than i, then we can use symmetry of the first and 
+//      //second pairs of indicies
+//      for(unsigned k=0;k<i;k++)
+//       {
+//        for(unsigned l=0;l<dim;l++)
+//         {
+//          Et_NonSingular[i][j][k][l] = Et_NonSingular[k][l][i][j];
+//         }
+//       }
+//      //Loop over cases when k is greater than or equal to i
+//      //If k is less than or equal to j then we can again use symmetry
+//      //of the first and seocnd indicies
+//      for(int k=i;k<=j;k++)   
+//       {
+//        //If l is greater than j we have this symmetry
+//        for(int l=(dim-1);l>j;l--)
+//         {
+//          Et_NonSingular[i][j][k][l] = Et_NonSingular[k][l][i][j];
+//         }
+//        //For l less then or equal to j and bigger than k,
+//        //we actually have to do some work!
+//        //Note that k is less than or equal to j from the above loop
+//        for(int l=j;l>=k;l--)
+//         {
+//          Et_NonSingular[i][j][k][l] = 
+//           C1*(Gup(i,k)*Gup(j,l) + Gup(i,l)*Gup(j,k));
+//         }
+//        //For l less than k can use symmetry
+//        for(int l=(k-1);l>=0;l--)
+//         {
+//          Et_NonSingular[i][j][k][l] = Et_NonSingular[i][j][l][k];
+//         }
+//       }
+//      //For cases when k is bigger than j can't use inner symmetry
+//      for(unsigned k=(j+1);k<dim;k++)
+//       {
+//        //If l is bigger than k
+//        for(int l=(dim-1);l>=static_cast<int>(k);l--)
+//         {
+//          Et_NonSingular[i][j][k][l] = 
+//           C1*(Gup(i,k)*Gup(j,l) + Gup(i,l)*Gup(j,k));
+//         }
+//        //For l less than k can use symmetry of last two indicies
+//        for(int l=(k-1);l>=0;l--)
+//         {
+//          Et_NonSingular[i][j][k][l] = Et_NonSingular[i][j][l][k];
+//         }
+//       }
+//     }
+   
+//    //For j less than i, can use symmetry of the first two indicies
+//    for(int j=static_cast<int>(i-1);j>=0;j--)
+//     {
+//      //Loop over all k and l
+//      for(unsigned k=0;k<dim;k++)   
+//       {
+//        //Only do upper half here
+//        for(unsigned l=0;l<dim;l++)
+//         {
+//          Et_NonSingular[i][j][k][l] = Et_NonSingular[j][i][k][l];
+//         }
+//       }
+//     }
+//     }*/
+
+//  for(unsigned i=0;i<dim;i++)
+//   {
+//    for(unsigned j=0;j<dim;j++)
+//     {
+//      for(unsigned k=0;k<dim;k++)
+//       {
+//        for(unsigned l=0;l<dim;l++)
+//         {
+//          Et_NonSingular[i][j][k][l] = 
+//           C1*(Gup(i,k)*Gup(j,l) + Gup(i,l)*Gup(j,k));
+//         }
+//       }
+//     }
+//   }
+
+//  //Now merely calculate the components of the stress sigma
+//  for(unsigned i=0;i<dim;i++)
+//   {
+//    for(unsigned j=0;j<dim;j++)
+//     {
+//      //Initialise this component of sigma
+//      sigma_dev(i,j) = 0.0;
+//      //Linear approximation
+//      for(unsigned k=0;k<dim;k++)
+//       {
+//        for(unsigned l=0;l<dim;l++)
+//         {
+//          sigma_dev(i,j) += Et_NonSingular[i][j][k][l]*0.5*(G(k,l) - g(k,l));
+//         }
+//       }
+//     }
+//   }
+
+ // Strain tensor 
+ DenseMatrix<double> strain(dim,dim);
+
+ // Upper triangle
+ for (unsigned i=0;i<dim;i++)
+  {
+   for (unsigned j=i;j<dim;j++)
+    {
+     strain(i,j)=0.5*(G(i,j) - g(i,j));
+    }
+  }
+
+ // Copy across
+ for (unsigned i=0;i<dim;i++)
+  {
+   for (unsigned j=0;j<i;j++)
+    {
+     strain(i,j)=strain(j,i);
+    }
+  }
+ 
+
+ // hierher further symmetries?
+
+ // Compute upper triangle of stress
  for(unsigned i=0;i<dim;i++)
   {
-   //Loop backwards over second index, so that we can use symmetry
-   //of first two indicies later
-   for(int j=(dim-1);j>=static_cast<int>(i);j--)
+   for(unsigned j=i;j<dim;j++)
     {
-     //If k is lower than i, then we can use symmetry of the first and 
-     //second pairs of indicies
-     for(unsigned k=0;k<i;k++)
+     //Initialise this component of sigma
+     sigma_dev(i,j) = 0.0;
+     for(unsigned k=0;k<dim;k++)
       {
        for(unsigned l=0;l<dim;l++)
         {
-         Et_NonSingular[i][j][k][l] = Et_NonSingular[k][l][i][j];
-        }
-      }
-     //Loop over cases when k is greater than or equal to i
-     //If k is less than or equal to j then we can again use symmetry
-     //of the first and seocnd indicies
-     for(int k=i;k<=j;k++)   
-      {
-       //If l is greater than j we have this symmetry
-       for(int l=(dim-1);l>j;l--)
-        {
-         Et_NonSingular[i][j][k][l] = Et_NonSingular[k][l][i][j];
-        }
-       //For l less then or equal to j and bigger than k,
-       //we actually have to do some work!
-       //Note that k is less than or equal to j from the above loop
-       for(int l=j;l>=k;l--)
-        {
-         Et_NonSingular[i][j][k][l] = 
-          C1*(Gup(i,k)*Gup(j,l) + Gup(i,l)*Gup(j,k));
-        }
-       //For l less than k can use symmetry
-       for(int l=(k-1);l>=0;l--)
-        {
-         Et_NonSingular[i][j][k][l] = Et_NonSingular[i][j][l][k];
-        }
-      }
-     //For cases when k is bigger than j can't use inner symmetry
-     for(unsigned k=(j+1);k<dim;k++)
-      {
-       //If l is bigger than k
-       for(int l=(dim-1);l>=static_cast<int>(k);l--)
-        {
-         Et_NonSingular[i][j][k][l] = 
-          C1*(Gup(i,k)*Gup(j,l) + Gup(i,l)*Gup(j,k));
-        }
-       //For l less than k can use symmetry of last two indicies
-       for(int l=(k-1);l>=0;l--)
-        {
-         Et_NonSingular[i][j][k][l] = Et_NonSingular[i][j][l][k];
-        }
-      }
-    }
-   
-   //For j less than i, can use symmetry of the first two indicies
-   for(int j=static_cast<int>(i-1);j>=0;j--)
-    {
-     //Loop over all k and l
-     for(unsigned k=0;k<dim;k++)   
-      {
-       //Only do upper half here
-       for(unsigned l=0;l<dim;l++)
-        {
-         Et_NonSingular[i][j][k][l] = Et_NonSingular[j][i][k][l];
+         sigma_dev(i,j) += 
+          C1*(Gup(i,k)*Gup(j,l)+Gup(i,l)*Gup(j,k))*strain(k,l);
         }
       }
     }
   }
 
- //Now merely calculate the components of the stress sigma
- for(unsigned i=0;i<dim;i++)
+ // Copy across
+ for (unsigned i=0;i<dim;i++)
   {
-   for(unsigned j=0;j<dim;j++)
+   for (unsigned j=0;j<i;j++)
     {
-     //Initialise this component of sigma
-     sigma_dev(i,j) = 0.0;
-     //Linear approximation
-     for(unsigned k=0;k<dim;k++)
-      {
-       for(unsigned l=0;l<dim;l++)
-        {
-         sigma_dev(i,j) += Et_NonSingular[i][j][k][l]*0.5*(G(k,l) - g(k,l));
-        }
-      }
+     sigma_dev(i,j)=sigma_dev(j,i);
     }
   }
+
+
+
+
 }
 
 
@@ -591,7 +715,7 @@ calculate_second_piola_kirchhoff_stress(
  // \todo hierher Andrew this is dangerous! If this is to stay, we should
  // at least make the cutoff explicit and allow the user to change it.
  DenseMatrix<double> Bup(dim,dim,0.0);
- if(std::abs(dWdI[1]) > 1.0e-10)
+ if(std::abs(dWdI[1]) > 0.0); //1.0e-10)
   {
    for(unsigned i=0;i<dim;i++)
     {
@@ -702,7 +826,7 @@ calculate_second_piola_kirchhoff_stress(
  // \todo hierher Andrew this is dangerous! If this is to stay, we should
  // at least make the cutoff explicit and allow the user to change it.
  DenseMatrix<double> Bup(dim,dim,0.0);
- if(std::abs(dWdI[1]) > 1.0e-10)
+ if(std::abs(dWdI[1]) > 0.0) //1.0e-10)
   {
    for(unsigned i=0;i<dim;i++)
     {
@@ -814,7 +938,7 @@ calculate_second_piola_kirchhoff_stress(const DenseMatrix<double> &g,
  // \todo hierher Andrew this is dangerous! If this is to stay, we should
  // at least make the cutoff explicit and allow the user to change it.
  DenseMatrix<double> Bup(dim,dim,0.0);
- if(std::abs(dWdI[1]) > 1.0e-10)
+ if(std::abs(dWdI[1]) > 0.0) //1.0e-10)
   {
    for(unsigned i=0;i<dim;i++)
     {

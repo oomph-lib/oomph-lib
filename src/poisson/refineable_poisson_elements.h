@@ -162,7 +162,7 @@ void get_interpolated_values(const Vector<double>&s,  Vector<double>& values)
 /// flag=0: compute only residual vector
  void fill_in_generic_residual_contribution_poisson(
   Vector<double> &residuals, DenseMatrix<double> &jacobian, 
-  unsigned flag); 
+  const unsigned& flag); 
 
  /// \short Compute derivatives of elemental residual vector with respect
  /// to nodal coordinates. Overwrites default implementation in 

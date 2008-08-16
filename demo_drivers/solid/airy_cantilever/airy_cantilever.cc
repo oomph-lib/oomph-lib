@@ -30,6 +30,7 @@
 //Oomph-lib includes
 #include "generic.h"
 #include "solid.h"
+#include "constitutive.h"
 
 //The mesh
 #include "meshes/rectangular_quadmesh.h"
@@ -180,7 +181,8 @@ namespace Global_Physical_Variables
  double Gravity=0.0;
 
  /// Non-dimensional gravity as body force
- void gravity(const Vector<double> &xi, const double& time, 
+ void gravity(const double& time, 
+              const Vector<double> &xi, 
               Vector<double> &b)
  {
   b[0]=0.0;
@@ -276,9 +278,14 @@ CantileverProblem<ELEMENT>::CantileverProblem()
  // Domain length in y-direction
  double l_y=2.0*Global_Physical_Variables::H;
 
+ // Shift mesh downwards so that centreline is at y=0:
+ Vector<double> origin(2);
+ origin[0]=0.0;
+ origin[1]=-0.5*l_y;
+
  //Now create the mesh 
  solid_mesh_pt() = new ElasticRefineableRectangularQuadMesh<ELEMENT>(
-  n_x,n_y,l_x,l_y);
+  n_x,n_y,l_x,l_y,origin);
 
  // Set error estimator
  solid_mesh_pt()->spatial_error_estimator_pt()=new Z2ErrorEstimator;

@@ -31,4 +31,6 @@ flux_transport
 
 
 
+EXTRA_DIST=run_tests.bash
+
 

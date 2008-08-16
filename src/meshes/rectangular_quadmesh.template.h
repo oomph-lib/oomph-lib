@@ -271,6 +271,7 @@ public:
 
 };
 
+
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
@@ -278,101 +279,86 @@ public:
 
 
 //================================================================
-/// Elastic refineable quad mesh with functionality to
+/// Elastic quad mesh with functionality to
 /// attach traction elements to the specified boundaries. We "upgrade"
-/// the RefineableRectangularQuadMesh to become an
+/// the RectangularQuadMesh to become an
 /// SolidMesh and equate the Eulerian and Lagrangian coordinates,
 /// thus making the domain represented by the mesh the stress-free 
-/// configuration. We also move the mesh "down" by half the
-/// the "height" so x=0 is located on the centreline -- appropriate
-/// for the beam-type problems for which this mesh was developed.
+/// configuration. 
 //================================================================
 template <class ELEMENT>
-class ElasticRefineableRectangularQuadMesh :
- public virtual RefineableRectangularQuadMesh<ELEMENT>,
+class ElasticRectangularQuadMesh :
+ public virtual RectangularQuadMesh<ELEMENT>,
  public virtual SolidMesh
 {
-
-
-public:
-
+ 
+ 
+  public:
+ 
  /// \short Constructor: Build mesh and copy Eulerian coords to Lagrangian
  /// ones so that the initial configuration is the stress-free one and
- /// assign boundary coordinates (variable Lagrangian coordinates along
- /// the relevant boundaries). Origin specifies an additional rigid-body
- /// displacement. 
- ElasticRefineableRectangularQuadMesh<ELEMENT>(const unsigned& nx,
-                                               const unsigned& ny,
-                                               const double& lx,
-                                               const double& ly,
-                                               const Vector<double>& origin,
-                                               TimeStepper* time_stepper_pt=
-                                               &Mesh::Default_TimeStepper) :
-  RectangularQuadMesh<ELEMENT>(nx,ny,lx,ly,time_stepper_pt),
-  RefineableRectangularQuadMesh<ELEMENT>(nx,ny,lx,ly,time_stepper_pt)
-  {
+ /// assign boundary coordinates. Origin specifies 
+ /// an additional rigid-body displacement. 
+ ElasticRectangularQuadMesh<ELEMENT>(const unsigned& nx,
+                                     const unsigned& ny,
+                                     const double& lx,
+                                     const double& ly,
+                                     const Vector<double>& origin,
+                                     TimeStepper* time_stepper_pt=
+                                     &Mesh::Default_TimeStepper) :
+  RectangularQuadMesh<ELEMENT>(nx,ny,lx,ly,time_stepper_pt)
+  {   
 
-   /// Move all nodes down by half the beam height
+   //Translate the nodes
    unsigned nnod=nnode();
-   for (unsigned j=0;j<nnod;j++)
-    {
-    node_pt(j)->x(1)-=0.5*ly;
-    }
-
-   /// Make the current configuration the undeformed one by
-   /// setting the nodal Lagrangian coordinates to their current
-   /// Eulerian ones
-   set_lagrangian_nodal_coordinates();
-
-
-   //Now translate the nodes
    for (unsigned j=0;j<nnod;j++)
     {
      node_pt(j)->x(0)+=origin[0];
      node_pt(j)->x(1)+=origin[1];
     }
-
-   // Setup boundary coordinates
-   set_boundary_coordinates();
-  }
-
-
-
-
- /// \short Constructor: Build mesh and copy Eulerian coords to Lagrangian
- /// ones so that the initial configuration is the stress-free one and
- /// assign boundary coordinates (variable Lagrangian coordinates along
- /// the relevant boundaries). 
- ElasticRefineableRectangularQuadMesh<ELEMENT>(const unsigned& nx,
-                                               const unsigned& ny,
-                                               const double& lx,
-                                               const double& ly,
-                                               TimeStepper* time_stepper_pt=
-                                               &Mesh::Default_TimeStepper) :
-  RectangularQuadMesh<ELEMENT>(nx,ny,lx,ly,time_stepper_pt),
-  RefineableRectangularQuadMesh<ELEMENT>(nx,ny,lx,ly,time_stepper_pt)
-  {
-
-   /// Move all nodes down by half the beam height
-   unsigned nnod=nnode();
-   for (unsigned j=0;j<nnod;j++)
-    {
-    node_pt(j)->x(1)-=0.5*ly;
-    }
-
+    
    /// Make the current configuration the undeformed one by
    /// setting the nodal Lagrangian coordinates to their current
    /// Eulerian ones
    set_lagrangian_nodal_coordinates();
-
+   
    // Setup boundary coordinates
-   set_boundary_coordinates();
+   set_boundary_coordinates(origin);
   }
-
+ 
+ 
+ 
+ 
+ /// \short Constructor: Build mesh and copy Eulerian coords to Lagrangian
+ /// ones so that the initial configuration is the stress-free one and
+ /// assign boundary coordinates
+ ElasticRectangularQuadMesh<ELEMENT>(const unsigned& nx,
+                                     const unsigned& ny,
+                                     const double& lx,
+                                     const double& ly,
+                                     TimeStepper* time_stepper_pt=
+                                     &Mesh::Default_TimeStepper) :
+  RectangularQuadMesh<ELEMENT>(nx,ny,lx,ly,time_stepper_pt)
+  {   
+   
+   // No shift 
+   Vector<double> origin(2,0.0);
+   
+   /// Make the current configuration the undeformed one by
+   /// setting the nodal Lagrangian coordinates to their current
+   /// Eulerian ones
+   set_lagrangian_nodal_coordinates();
+   
+   // Setup boundary coordinates
+   set_boundary_coordinates(origin);
+  }
+ 
   private:
  
- /// Setup the boundary coordinates
- void set_boundary_coordinates()
+ /// \short Setup the boundary coordinates. Vector
+ /// origin specifies the coordinates of the lower left corner of
+ /// the mesh.
+ void set_boundary_coordinates(const Vector<double>& origin)
   {
    
    // 1D vector fo boundary coordinate
@@ -388,11 +374,9 @@ public:
      //Loop over the nodes
      for(unsigned i=0;i<n_nod;i++)
       {
-       zeta[0]=boundary_node_pt(b,i)->xi(0);
+       // Boundary coordinate varies between 0 and L
+       zeta[0]=boundary_node_pt(b,i)->xi(0)-origin[0];
        boundary_node_pt(b,i)->set_coordinates_on_boundary(b,zeta);
-       
-       Vector<double> boundary_zeta(1);
-       boundary_node_pt(b,i)->get_coordinates_on_boundary(b,boundary_zeta);
       } 
      Boundary_coordinate_exists[b]=true; 
     }
@@ -408,21 +392,87 @@ public:
      //Loop over the nodes
      for(unsigned i=0;i<n_nod;i++)
       {
-       zeta[0]=boundary_node_pt(b,i)->xi(1);
-       boundary_node_pt(b,i)->set_coordinates_on_boundary(b,zeta);
-       
-       
-       Vector<double> boundary_zeta(1);
-       boundary_node_pt(b,i)->get_coordinates_on_boundary(b,boundary_zeta);
+       // Boundary coordinate varies between +/- H/2
+       zeta[0]=boundary_node_pt(b,i)->xi(1)-origin[1]-0.5*(Ymax-Ymin); 
+       boundary_node_pt(b,i)->set_coordinates_on_boundary(b,zeta);       
       }
      Boundary_coordinate_exists[b]=true;
     }
    
   }
  
+};
+
+
+
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+
+
+//================================================================
+/// Elastic refineable quad mesh with functionality to
+/// attach traction elements to the specified boundaries. We "upgrade"
+/// the RefineableRectangularQuadMesh to become an
+/// SolidMesh and equate the Eulerian and Lagrangian coordinates,
+/// thus making the domain represented by the mesh the stress-free
+/// configuration. We also move the mesh "down" by half the
+/// the "height" so x=0 is located on the centreline -- appropriate
+/// for the beam-type problems for which this mesh was developed.
+//================================================================
+template <class ELEMENT>
+class ElasticRefineableRectangularQuadMesh :
+public virtual ElasticRectangularQuadMesh<ELEMENT>,
+public RefineableQuadMesh<ELEMENT>
+{
+ 
+  public:
+ 
+ /// \short Constructor: Build mesh and copy Eulerian coords to Lagrangian
+ /// ones so that the initial configuration is the stress-free one and
+ /// assign boundary coordinates (variable Lagrangian coordinates along
+ /// the relevant boundaries). 
+ ElasticRefineableRectangularQuadMesh<ELEMENT>(const unsigned& nx,
+                                               const unsigned& ny,
+                                               const double& lx,
+                                               const double& ly,
+                                               TimeStepper* time_stepper_pt=
+                                               &Mesh::Default_TimeStepper) :
+  RectangularQuadMesh<ELEMENT>(nx,ny,lx,ly,time_stepper_pt),
+  ElasticRectangularQuadMesh<ELEMENT>(nx,ny,lx,ly,time_stepper_pt)
   
+  {
+   // Nodal positions etc. were created in base class.
+   // Only need to setup quadtree forest
+   this->setup_quadtree_forest();
+  }
+
+
+ /// \short Constructor: Build mesh and copy Eulerian coords to Lagrangian
+ /// ones so that the initial configuration is the stress-free one and
+ /// assign boundary coordinates (variable Lagrangian coordinates along
+ /// the relevant boundaries). Origin specifies an additional rigid-body
+ /// displacement.
+ ElasticRefineableRectangularQuadMesh<ELEMENT>(const unsigned& nx,
+                                               const unsigned& ny,
+                                               const double& lx,
+                                               const double& ly,
+                                               const Vector<double>& origin,
+                                               TimeStepper* time_stepper_pt=
+                                               &Mesh::Default_TimeStepper) :
+  RectangularQuadMesh<ELEMENT>(nx,ny,lx,ly,time_stepper_pt),
+  ElasticRectangularQuadMesh<ELEMENT>(nx,ny,lx,ly,origin,time_stepper_pt)
+  
+  {
+   // Nodal positions etc. were created in base class.
+   // Only need to setup quadtree forest
+   this->setup_quadtree_forest();
+  }
 
 };
+
 
 
 

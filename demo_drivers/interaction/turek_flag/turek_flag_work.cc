@@ -108,7 +108,8 @@ namespace Global_Parameters
  double Gravity=0.0; 
 
  /// Non-dimensional gravity as body force
- void gravity(const Vector<double> &xi, const double& time, 
+ void gravity(const double& time, 
+              const Vector<double> &xi, 
               Vector<double> &b)
  {
   b[0]=0.0;

@@ -1103,6 +1103,13 @@ void RefineableRotatingCylinderProblem<ELEMENT>::finish_problem_setup()
 
    //Assign the mesh deformation constitutive law
    temp_pt->constitutive_law_pt() = Constitutive_law_pt;
+
+   // Get Jacobian by FD -- yes for now
+   // hierher -- change this when Pseudo-solid elements have 
+   // been updated to take availability of analytical solid 
+   // Jacobian into account
+   temp_pt->evaluate_jacobian_by_fd()=true;
+  
   }
 
 

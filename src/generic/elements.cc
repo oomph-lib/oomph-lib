@@ -4226,260 +4226,325 @@ void FaceElement::get_local_coordinate_in_bulk(
 /// Add jacobian and residuals for consistent assignment of 
 /// initial "accelerations" in Newmark scheme. Jacobian is the mass matrix.
 //=======================================================================
- void SolidFiniteElement::
- add_jacobian_for_newmark_accel(DenseMatrix<double> &jacobian)
- {
+void SolidFiniteElement::
+fill_in_jacobian_for_newmark_accel(DenseMatrix<double> &jacobian)
+{
  
 #ifdef PARANOID
-  // Check that we're computing the real residuals, not the
-  // ones corresponding to the assignement of a prescribed displacement
-  if ((Solid_ic_pt!=0)||(!Solve_for_consistent_newmark_accel_flag))
-   {
-    std::ostringstream error_stream;
-    error_stream << "Can only call add_jacobian_for_newmark_accel()\n" 
-                 << "With Solve_for_consistent_newmark_accel_flag:" 
-                 << Solve_for_consistent_newmark_accel_flag << std::endl;
-    error_stream << "Solid_ic_pt: " << Solid_ic_pt << std::endl;
+ // Check that we're computing the real residuals, not the
+ // ones corresponding to the assignement of a prescribed displacement
+ if ((Solid_ic_pt!=0)||(!Solve_for_consistent_newmark_accel_flag))
+  {
+   std::ostringstream error_stream;
+   error_stream << "Can only call fill_in_jacobian_for_newmark_accel()\n" 
+                << "With Solve_for_consistent_newmark_accel_flag:" 
+                << Solve_for_consistent_newmark_accel_flag << std::endl;
+   error_stream << "Solid_ic_pt: " << Solid_ic_pt << std::endl;
 
-    throw OomphLibError(error_stream.str(),
-                        "SolidFinitElement::add_jacobian_for_newmark_accel()",
-                        OOMPH_EXCEPTION_LOCATION);
-   }
+   throw OomphLibError(error_stream.str(),
+                       "SolidFinitElement::fill_in_jacobian_for_newmark_accel()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
 #endif
 
-  //Find the number of nodes
-  const unsigned n_node = nnode();
-  const unsigned n_position_type = nnodal_position_type();
-  const unsigned nodal_dim = nodal_dimension();
+ //Find the number of nodes
+ const unsigned n_node = nnode();
+ const unsigned n_position_type = nnodal_position_type();
+ const unsigned nodal_dim = nodal_dimension();
 
-  //Set the number of Lagrangian coordinates
-  const unsigned n_lagrangian = dim();
+ //Set the number of Lagrangian coordinates
+ const unsigned n_lagrangian = dim();
   
-  //Integer storage for local equation and unknown
-  int local_eqn=0, local_unknown=0;
+ //Integer storage for local equation and unknown
+ int local_eqn=0, local_unknown=0;
 
-  // Set up memory for the shape functions:
-  // # of nodes, # of positional dofs
-  Shape psi(n_node,n_position_type);
+ // Set up memory for the shape functions:
+ // # of nodes, # of positional dofs
+ Shape psi(n_node,n_position_type);
 
-  // # of nodes, # of positional dofs, # of lagrangian coords (for deriv)
-  // Not needed but they come for free when compute the Jacobian.
-  DShape dpsidxi(n_node,n_position_type,n_lagrangian);
+ // # of nodes, # of positional dofs, # of lagrangian coords (for deriv)
+ // Not needed but they come for free when compute the Jacobian.
+ DShape dpsidxi(n_node,n_position_type,n_lagrangian);
 
-  //Set # of integration points
-  const unsigned n_intpt = integral_pt()->nweight();
+ //Set # of integration points
+ const unsigned n_intpt = integral_pt()->nweight();
 
-  //Set the Vector to hold local coordinates
-  Vector<double> s(n_lagrangian);
+ //Set the Vector to hold local coordinates
+ Vector<double> s(n_lagrangian);
 
-  // Get positional timestepper from first nodal point
-  TimeStepper* timestepper_pt= node_pt(0)->position_time_stepper_pt();
+ // Get positional timestepper from first nodal point
+ TimeStepper* timestepper_pt= node_pt(0)->position_time_stepper_pt();
 
 #ifdef PARANOID
-  // Of course all this only works if we're actually using a
-  // Newmark timestepper!
-  if (timestepper_pt->type()!="Newmark")
-   {
-    std::ostringstream error_stream;
-    error_stream
-     << "Assignment of Newmark accelerations obviously only works\n"
-     << "for Newmark timesteppers. You've called me with " 
-     << timestepper_pt->type() << std::endl;
+ // Of course all this only works if we're actually using a
+ // Newmark timestepper!
+ if (timestepper_pt->type()!="Newmark")
+  {
+   std::ostringstream error_stream;
+   error_stream
+    << "Assignment of Newmark accelerations obviously only works\n"
+    << "for Newmark timesteppers. You've called me with " 
+    << timestepper_pt->type() << std::endl;
 
-    throw OomphLibError(error_stream.str(),
-                        "SolidFinitElement::add_jacobian_for_newmark_accel()",
-                        OOMPH_EXCEPTION_LOCATION);
-   }
+   throw OomphLibError(error_stream.str(),
+                       "SolidFinitElement::fill_in_jacobian_for_newmark_accel()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
 #endif
 
-  // "Acceleration" is the last history value:
-  const unsigned ntstorage=timestepper_pt->ntstorage();
-  const double accel_weight=timestepper_pt->weight(2,ntstorage-1);
+ // "Acceleration" is the last history value:
+ const unsigned ntstorage=timestepper_pt->ntstorage();
+ const double accel_weight=timestepper_pt->weight(2,ntstorage-1);
 
-  //Loop over the integration points
-  for(unsigned ipt=0;ipt<n_intpt;ipt++)
-   {
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
      
-    //Assign values of s
-    for(unsigned i=0;i<n_lagrangian;i++) {s[i] = integral_pt()->knot(ipt,i);}
+   //Assign values of s
+   for(unsigned i=0;i<n_lagrangian;i++) {s[i] = integral_pt()->knot(ipt,i);}
    
-    //Get the integral weight
-    double w = integral_pt()->weight(ipt);
+   //Get the integral weight
+   double w = integral_pt()->weight(ipt);
 
-    // Jacobian of mapping between local and Lagrangian coords and shape
-    // functions
-    double J = dshape_lagrangian(s,psi,dpsidxi);
+   // Jacobian of mapping between local and Lagrangian coords and shape
+   // functions
+   double J = dshape_lagrangian(s,psi,dpsidxi);
 
-    // Get Lagrangian coordinate
-    Vector<double> xi(n_lagrangian);
-    interpolated_xi(s,xi);
+   // Get Lagrangian coordinate
+   Vector<double> xi(n_lagrangian);
+   interpolated_xi(s,xi);
 
-    // Get multiplier for inertia terms
-    double factor=multiplier(xi);
-    oomph_info << "Multiplier: " << factor << std::endl;
+   // Get multiplier for inertia terms
+   double factor=multiplier(xi);
+   oomph_info << "Multiplier: " << factor << std::endl;
 
-    //Premultiply the weights and the Jacobian
-    double W = w*J;
+   //Premultiply the weights and the Jacobian
+   double W = w*J;
 
-    //Loop over the nodes
-    for(unsigned l0=0;l0<n_node;l0++)
-     {
-      //Loop over the positional dofs: 'Type': 0: displacement; 1: deriv
-      for(unsigned k0=0;k0<n_position_type;k0++)
-       {
-        // Loop over Eulerian directions
-        for(unsigned i0=0;i0<nodal_dim;i0++)
-         {
-          local_eqn = position_local_eqn(l0,k0,i0);
-          //If it's a degree of freedom, add contribution
-          if(local_eqn >= 0)
-           {
-            //Loop over the nodes
-            for(unsigned l1=0;l1<n_node;l1++)
-             {
-              //Loop over the positional dofs: 'Type': 0: displacement; 
-              //1: deriv
-              for(unsigned k1=0;k1<n_position_type;k1++)
+   //Loop over the nodes
+   for(unsigned l0=0;l0<n_node;l0++)
+    {
+     //Loop over the positional dofs: 'Type': 0: displacement; 1: deriv
+     for(unsigned k0=0;k0<n_position_type;k0++)
+      {
+       // Loop over Eulerian directions
+       for(unsigned i0=0;i0<nodal_dim;i0++)
+        {
+         local_eqn = position_local_eqn(l0,k0,i0);
+         //If it's a degree of freedom, add contribution
+         if(local_eqn >= 0)
+          {
+           //Loop over the nodes
+           for(unsigned l1=0;l1<n_node;l1++)
+            {
+             //Loop over the positional dofs: 'Type': 0: displacement; 
+             //1: deriv
+             for(unsigned k1=0;k1<n_position_type;k1++)
+              {
+               // Loop over Eulerian directions
+               unsigned i1=i0;
                {
-                // Loop over Eulerian directions
-                unsigned i1=i0;
-                {
-                 local_unknown = position_local_eqn(l1,k1,i1);
-                 //If it's a degree of freedom, add contribution
+                local_unknown = position_local_eqn(l1,k1,i1);
+                //If it's a degree of freedom, add contribution
+                if(local_unknown >= 0)
+                 {
+                  // Add contribution: Mass matrix, multiplied by
+                  // weight for "acceleration" in Newmark scheme
+                  // and general multiplier 
+                  jacobian(local_eqn,local_unknown) +=
+                   factor*accel_weight*psi(l0,k0)*psi(l1,k1)*W;
+                 }
+               }
+              }
+            }
+          }
+        }
+      }
+    }
+   
+  } //End of loop over the integration points
+
+}
+
+
+
+
+
+//=======================================================================
+/// Helper function to fill in the residuals and (if flag==1) the Jacobian 
+/// for the setup of an initial condition. The global equations are:
+/// \f[
+/// 0 = \int \left( \sum_{j=1}^N \sum_{k=1}^K X_{ijk} \psi_{jk}(\xi_n) 
+/// - \frac{\partial^D R^{(IC)}_i(\xi_n)}{\partial t^D}
+/// \right) \psi_{lm}(\xi_n) \ dv
+/// \mbox{ \ \ \ \ for \ \ \ $l=1,...,N, \ \ m=1,...,K$}
+/// \f]
+/// where \f$ N \f$ is the number of nodes in the mesh and \f$ K \f$
+/// the number of generalised nodal coordinates. The initial shape
+/// of the solid body, \f$ {\bf R}^{(IC)},\f$ and its time-derivatives
+/// are specified via the \c GeomObject that is stored in the 
+/// \c SolidFiniteElement::SolidInitialCondition object. The latter also
+/// stores the order of the time-derivative \f$ D \f$ to be assigned.
+//=======================================================================
+void SolidFiniteElement::fill_in_generic_jacobian_for_solid_ic(
+ Vector<double> &residuals,
+ DenseMatrix<double> &jacobian,
+ const unsigned& flag)
+{
+ //Find the number of nodes and position types
+ const unsigned n_node = nnode();
+ const unsigned n_position_type = nnodal_position_type();
+
+ //Set the dimension of the global coordinates
+ const unsigned nodal_dim = nodal_dimension();
+ 
+ //Find the number of lagragian types from the first node
+ const unsigned n_lagrangian_type = nnodal_lagrangian_type();
+
+ //Set the number of lagrangian coordinates
+ const unsigned n_lagrangian = dim();
+  
+ //Integer storage for local equation number
+ int local_eqn=0;
+ int local_unknown=0;
+
+ // # of nodes, # of positional dofs
+ Shape psi(n_node,n_position_type);
+ 
+ // # of nodes, # of positional dofs, # of lagrangian coords (for deriv)
+ // not needed but they come for free when we compute the Jacobian
+ //DShape dpsidxi(n_node,n_position_type,n_lagrangian);
+ 
+ //Set # of integration points
+ const unsigned n_intpt = integral_pt()->nweight();
+ 
+ //Set the Vector to hold local coordinates
+ Vector<double> s(n_lagrangian);
+ 
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+
+   //Assign values of s
+   for(unsigned i=0;i<n_lagrangian;i++) 
+    {s[i] = integral_pt()->knot(ipt,i);}
+
+   //Get the integral weight
+   double w = integral_pt()->weight(ipt);
+
+   // Shape fcts
+   shape(s,psi);
+
+   // Get Lagrangian coordinate
+   Vector<double> xi(n_lagrangian);
+
+   //Loop over the number of lagrangian coordinates
+   for(unsigned i=0;i<n_lagrangian;i++)
+    {
+     //Initialise component to zero
+     xi[i] = 0.0;
+     //Loop over the local nodes
+     for(unsigned l=0;l<n_node;l++) 
+      {
+       //Loop over the number of dofs
+       for(unsigned k=0;k<n_lagrangian_type;k++)
+        {
+         xi[i] += lagrangian_position_gen(l,k,i)*psi(l,k);
+        }
+      }
+    }
+
+   // Get initial condition
+   Vector<double> drdt_ic(nodal_dim);
+   Solid_ic_pt->geom_object_pt()->
+    drdt(xi,Solid_ic_pt->ic_time_deriv(),drdt_ic);
+   
+   // Weak form of assignment of initial guess
+   
+   //Loop over the number of node
+   for (unsigned l=0;l<n_node;l++)
+    {
+     //Loop over the type of degree of freedom
+     for (unsigned k=0;k<n_position_type;k++)
+      {
+       //Loop over the coordinate directions
+       for (unsigned i=0;i<nodal_dim;i++)
+        {
+         local_eqn = position_local_eqn(l,k,i);
+
+         //If it's not a boundary condition
+         if(local_eqn >= 0)
+          {
+           // Note we're ignoring the mapping between local and
+           // global Lagrangian coords -- doesn't matter here;
+           // we're just enforcing a slightly different
+           // weak form.
+           residuals[local_eqn] += (interpolated_x(s,i)-drdt_ic[i])*
+            psi(l,k)*w;
+
+
+           // Do Jacobian too?
+           if (flag==1)
+            {     
+
+             //Loop over the number of node
+             for (unsigned ll=0;ll<n_node;ll++)
+              {                
+               //Loop over the type of degree of freedom
+               for (unsigned kk=0;kk<n_position_type;kk++)
+                {    
+
+                 // Only diagonal term
+                 unsigned ii=i;
+                 
+                 
+                 local_unknown = position_local_eqn(ll,kk,ii);
+                 
+                 
+                 std::cout << "ll kk ii local_unknown " 
+                           << ll << " " << kk<< " " 
+                           << ii<< " " << local_unknown << " " 
+                           << std::endl;
+                 
+                 //If it's not a boundary condition
                  if(local_unknown >= 0)
                   {
-                   // Add contribution: Mass matrix, multiplied by
-                   // weight for "acceleration" in Newmark scheme
-                   // and general multiplier 
+                   // Note we're ignoring the mapping between local and
+                   // global Lagrangian coords -- doesn't matter here;
+                   // we're just enforcing a slightly different
+                   // weak form.
                    jacobian(local_eqn,local_unknown) +=
-                    factor*accel_weight*psi(l0,k0)*psi(l1,k1)*W;
+                    psi(ll,kk)*psi(l,k)*w;
+                  }
+                 else
+                  {
+                   oomph_info 
+                    << "WARNING: You should really free all Data" 
+                    << std::endl
+                    << "         before setup of initial guess" 
+                    << std::endl
+                    << "ll, kk, ii " << ll << " " << kk << " " << ii 
+                    << std::endl;
                   }
                 }
-               }
-             }
-           }
-         }
-       }
-     }
-   
-   } //End of loop over the integration points
-
- }
-
-
-
-
-//=======================================================================
-/// Return the residuals for setup of initial condition
-//=======================================================================
- void SolidFiniteElement::add_residuals_for_ic(Vector<double>& residuals)
- {
-  //Find the number of nodes and position types
-  const unsigned n_node = nnode();
-  const unsigned n_position_type = nnodal_position_type();
-
-  //Set the dimension of the global coordinates
-  const unsigned nodal_dim = nodal_dimension();
- 
-  //Find the number of lagragian types from the first node
-  const unsigned n_lagrangian_type = nnodal_lagrangian_type();
-
-  //Set the number of lagrangian coordinates
-  const unsigned n_lagrangian = dim();
+              }
+             
+            }
+          }
+         else
+          {
+           oomph_info 
+            << "WARNING: You should really free all Data" << std::endl
+            << "         before setup of initial guess" << std::endl
+            << "l, k, i " << l << " " << k << " " << i << std::endl;
+          }
+        }
+      }
+    }
   
-  //Integer storage for local equation number
-  int local_eqn=0;
- 
-  // # of nodes, # of positional dofs
-  Shape psi(n_node,n_position_type);
- 
-  // # of nodes, # of positional dofs, # of lagrangian coords (for deriv)
-  // not needed but they come for free when we compute the Jacobian
-  //DShape dpsidxi(n_node,n_position_type,n_lagrangian);
- 
-  //Set # of integration points
-  const unsigned n_intpt = integral_pt()->nweight();
- 
-  //Set the Vector to hold local coordinates
-  Vector<double> s(n_lagrangian);
- 
-  //Loop over the integration points
-  for(unsigned ipt=0;ipt<n_intpt;ipt++)
-   {
+  } //End of loop over the integration points
+}
 
-    //Assign values of s
-    for(unsigned i=0;i<n_lagrangian;i++) 
-     {s[i] = integral_pt()->knot(ipt,i);}
-
-    //Get the integral weight
-    double w = integral_pt()->weight(ipt);
-
-    // Shape fcts
-    shape(s,psi);
-
-    // Get Lagrangian coordinate
-    Vector<double> xi(n_lagrangian);
-
-    //Loop over the number of lagrangian coordinates
-    for(unsigned i=0;i<n_lagrangian;i++)
-     {
-      //Initialise component to zero
-      xi[i] = 0.0;
-      //Loop over the local nodes
-      for(unsigned l=0;l<n_node;l++) 
-       {
-        //Loop over the number of dofs
-        for(unsigned k=0;k<n_lagrangian_type;k++)
-         {
-          xi[i] += lagrangian_position_gen(l,k,i)*psi(l,k);
-         }
-       }
-     }
-
-    // Get initial condition
-    Vector<double> drdt_ic(nodal_dim);
-    Solid_ic_pt->geom_object_pt()->
-     drdt(xi,Solid_ic_pt->ic_time_deriv(),drdt_ic);
-   
-    // Weak form of assignment of initial guess
-   
-    //Loop over the number of node
-    for (unsigned l=0;l<n_node;l++)
-     {
-
-      //Loop over the type of degree of freedom
-      for (unsigned k=0;k<n_position_type;k++)
-       {
-
-        //Loop over the coordinate directions
-        for (unsigned i=0;i<nodal_dim;i++)
-         {
-          local_eqn = position_local_eqn(l,k,i);
-
-          //If it's not a boundary condition
-          if(local_eqn >= 0)
-           {
-            // Note we're ignoring the mapping between local and
-            // global Lagrangian coords -- doesn't matter here;
-            // we're just enforcing a slightly different
-            // weak form.
-            residuals[local_eqn] += (interpolated_x(s,i)-drdt_ic[i])*
-             psi(l,k)*w;
-           }    
-          else
-           {
-            oomph_info 
-             << "WARNING: You should really free all Data" << std::endl
-             << "         before setup of initial guess" << std::endl
-             << "l, k, i " << l << " " << k << " " << i << std::endl;
-           }
-         }
-       }
-     }
-    
-   } //End of loop over the integration points
-
- }
 
 //===============================================================
 /// Return the geometric shape function at the local coordinate s

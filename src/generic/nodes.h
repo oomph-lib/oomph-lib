@@ -1148,15 +1148,38 @@ public:
  virtual void remove_from_boundary(const unsigned &b);
 
 
+ /// \short Return the vector of the k-th generalised boundary coordinates 
+ /// on mesh boundary b. Broken virtual interface provides run-time 
+ /// error checking
+ virtual void get_coordinates_on_boundary(const unsigned &b, const unsigned& k,
+                                          Vector<double> &boundary_zeta);
+
+ /// \short Set the vector of the k-th generalised boundary coordinates 
+ /// on mesh boundary b. Broken virtual interface provides run-time error 
+ /// checking
+ virtual void set_coordinates_on_boundary(const unsigned &b, const unsigned& k,
+                                          const Vector<double> &boundary_zeta);
+
  /// \short Return the vector of coordinates on mesh boundary b
  /// Broken virtual interface provides run-time error checking
  virtual void get_coordinates_on_boundary(const unsigned &b, 
-                                          Vector<double> &boundary_zeta);
+                                          Vector<double> &boundary_zeta)
+  {
+   get_coordinates_on_boundary(b,0,boundary_zeta);
+  }
 
  /// \short Set the vector of coordinates on mesh boundary b
  /// Broken virtual interface provides run-time error checking
  virtual void set_coordinates_on_boundary(const unsigned &b,
-                                          const Vector<double> &boundary_zeta);
+                                          const Vector<double> &boundary_zeta)
+  {
+   set_coordinates_on_boundary(b,0,boundary_zeta);
+  }
+
+
+
+
+
 
  /// Mark node as obsolete
  void set_obsolete() {Obsolete=true;}
@@ -1575,7 +1598,7 @@ class BoundaryNodeBase
  /// on a boundary this map should never be queried because
  /// unnecessary storage will then be allocated. Hence, it
  /// can only be accessed via the appropriate set and get functions.
- std::map<unsigned, Vector<double>*>* Boundary_coordinates_pt;
+ std::map<unsigned, DenseMatrix<double>*>* Boundary_coordinates_pt;
   
  /// \short Pointer to set of mesh boundaries occupied by the Node; 
  /// NULL if the Node is not on any boundaries 
@@ -1634,12 +1657,31 @@ class BoundaryNodeBase
  /// \short Test whether the node lies on mesh boundary b
  bool is_on_boundary(const unsigned &b);
 
- /// \short Return the vector of coordinates on mesh boundary b
+ /// \short Return the vector of boundary coordinates on mesh boundary b
  void get_coordinates_on_boundary(const unsigned &b, 
+                                  Vector<double> &boundary_zeta)
+  {
+   // Just return the zero-th one
+   get_coordinates_on_boundary(b,0,boundary_zeta);
+  }
+  
+
+ /// \short Set the vector of boundary coordinates on mesh boundary b
+ void set_coordinates_on_boundary(const unsigned &b,
+                                  const Vector<double> &boundary_zeta)
+  {
+   // Just do the zero-th one
+   set_coordinates_on_boundary(b,0,boundary_zeta);
+  }
+
+ /// \short Return the vector of the k-th generalised boundary coordinates 
+ /// on mesh boundary b.
+ void get_coordinates_on_boundary(const unsigned &b, const unsigned& k,
                                   Vector<double> &boundary_zeta);
 
- /// \short Set the vector of coordinates on mesh boundary b
- void set_coordinates_on_boundary(const unsigned &b,
+ /// \short Set the vector of the k-th generalised boundary coordinates on 
+ /// mesh boundary b.
+ void set_coordinates_on_boundary(const unsigned &b, const unsigned& k,
                                   const Vector<double> &boundary_zeta);
 
 };
@@ -1818,6 +1860,21 @@ class BoundaryNode: public NODE_TYPE, public BoundaryNodeBase
  void set_coordinates_on_boundary(const unsigned &b,
                                   const Vector<double> &boundary_zeta)
   {BoundaryNodeBase::set_coordinates_on_boundary(b,boundary_zeta);}
+
+
+ /// \short Return the vector of k-th generalised boundary coordinates 
+ /// on mesh boundary b Final overload
+ void get_coordinates_on_boundary(const unsigned &b, const unsigned& k,
+                                  Vector<double> &boundary_zeta)
+  {BoundaryNodeBase::get_coordinates_on_boundary(b,k,boundary_zeta);}
+
+ /// \short Set the vector of k-th generalised boundary coordinates 
+ /// on mesh boundary b. Final overload
+ void set_coordinates_on_boundary(const unsigned &b, const unsigned& k,
+                                  const Vector<double> &boundary_zeta)
+  {BoundaryNodeBase::set_coordinates_on_boundary(b,k,boundary_zeta);}
+
+
 
  /// \short Make the node periodic
  void make_periodic(Node* const &node_pt)

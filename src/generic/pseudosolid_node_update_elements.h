@@ -197,7 +197,10 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
   //Need to sort this one out (at the moment both element must be quads)
   RefineableElement(),
   //RefineableQElement<2>(), 
-  BASIC(), SOLID() {} 
+  BASIC(), SOLID()
+  {
+   Use_undeformed_macro_element_for_new_lagrangian_coords=true;
+  } 
 
  /// \short The required number of values is the sum of the two
  unsigned required_nvalue(const unsigned &n) const

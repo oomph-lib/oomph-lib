@@ -7,6 +7,9 @@
 # procedure
 #-----------------------------------------------
 
+#cd poisson; make check; cd ..
+#cd unsteady_heat; make check; cd ..
+#cd advection_diffusion; make check; cd ..
 #cd navier_stokes; make check; cd ..
 #cd axisym_navier_stokes; make check; cd ..
 #cd solid; make check; cd ..
@@ -16,13 +19,14 @@
 #cd eigenproblems; make check; cd ..
 #cd interaction; make check; cd ..
 #cd meshing; make check; cd ..
-#cd multi_physics ; pwd; make check; cd ..
-#cd linking ; pwd; make check; cd ..
-#cd optimisation ; pwd; make check; cd ..
-cd bifurcation_tracking ; pwd; make check; cd ..
-cd FAQ ; pwd; make check; cd ..
-cd linear_solvers ; pwd; make check; cd ..
-cd biharmonic ; pwd; make check; cd ..
-cd linear_elasticity ; pwd; make check; cd ..
-cd womersley ; pwd; make check; cd .. 
-cd reaction_diffusion ; pwd; make check; cd .. 
+#cd multi_physics; make check; cd ..
+cd linking; make check; cd ..
+cd optimisation; make check; cd ..
+cd bifurcation_tracking; make check; cd ..
+cd FAQ; make check; cd ..
+cd linear_solvers; make check; cd ..
+cd biharmonic; make check; cd ..
+cd linear_elasticity; make check; cd ..
+cd womersley; make check; cd ..
+cd reaction_diffusion; make check; cd ..
+cd flux_transport; make check; cd ..

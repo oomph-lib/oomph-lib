@@ -392,10 +392,15 @@ void StaticDiskCompressionProblem<ELEMENT>::run(const unsigned& case_number)
  
  // Initial parameter values
  Global_Physical_Variables::Uniform_gamma=1.1; 
- Global_Physical_Variables::P =0.0; 
  
  //Parameter incrementation
- unsigned nstep=5; 
+ double delta_p=0.025;
+ unsigned nstep=21; 
+ if (CommandLineArgs::Argc!=1)
+  {
+   nstep=3;
+  }
+ Global_Physical_Variables::P =-delta_p*double(nstep-1)*0.5; 
  for(unsigned i=0;i<nstep;i++)
   {
    //Solve the problem with Newton's method
@@ -406,7 +411,7 @@ void StaticDiskCompressionProblem<ELEMENT>::run(const unsigned& case_number)
    doc_info.number()++;
 
    // Increment pressure load
-   Global_Physical_Variables::P += 0.0025;   
+   Global_Physical_Variables::P += delta_p;   
   }
 
 }
@@ -414,12 +419,17 @@ void StaticDiskCompressionProblem<ELEMENT>::run(const unsigned& case_number)
 //======================================================================
 /// Driver for simple elastic problem
 //======================================================================
-int main()
+int main(int argc, char* argv[])
 {
+
+ // Store command line arguments
+ CommandLineArgs::setup(argc,argv);
+
  //Initialise physical parameters
  Global_Physical_Variables::E = 2.1;  // ADJUST
  Global_Physical_Variables::Nu = 0.3; // ADJUST
  Global_Physical_Variables::C1 = 1.3; // ADJUST
+ 
  
  
  // Define a strain energy function: Generalised Mooney Rivlin
@@ -427,69 +437,77 @@ int main()
   new GeneralisedMooneyRivlin(Global_Physical_Variables::Nu,
                               Global_Physical_Variables::C1,
                               Global_Physical_Variables::E);
-
+ 
  // Define a constitutive law (based on strain energy function)
-  Global_Physical_Variables::Constitutive_law_pt = 
-   new IsotropicStrainEnergyFunctionConstitutiveLaw(
-    Global_Physical_Variables::Strain_energy_function_pt);
-  
+ Global_Physical_Variables::Constitutive_law_pt = 
+  new IsotropicStrainEnergyFunctionConstitutiveLaw(
+   Global_Physical_Variables::Strain_energy_function_pt);
+ 
  // Case 0: No pressure, generalised Mooney Rivlin
  //-----------------------------------------------
  {
-  //Set up the problem
+    //Set up the problem
   StaticDiskCompressionProblem<RefineableQPVDElement<2,3> > problem;
-
-  cout << "RefineableQPVDElement<2,3>" << std::endl;
-
+  
+  cout << "gen. M.R.: RefineableQPVDElement<2,3>" << std::endl;
+  
   //Run the simulation
   problem.run(0);
+  
  }
-
-
+ 
+ 
  // Case 1: Continuous pressure formulation with generalised Mooney Rivlin
  //------------------------------------------------------------------------
  {
   //Set up the problem
   StaticDiskCompressionProblem<
    RefineableQPVDElementWithContinuousPressure<2> > problem;
-
-  cout << "RefineableQPVDElementWithContinuousPressure<2> > " << std::endl;
-
+  
+  cout << "gen. M.R.: RefineableQPVDElementWithContinuousPressure<2> " 
+       << std::endl;
+  
   //Run the simulation
   problem.run(1);
  }
-
-
-
+ 
+ 
+ 
  // Case 2: Discontinuous pressure formulation with generalised Mooney Rivlin
  //--------------------------------------------------------------------------
  {
   //Set up the problem
-  StaticDiskCompressionProblem<RefineableQPVDElementWithPressure<2> > problem;
-
+  StaticDiskCompressionProblem<RefineableQPVDElementWithPressure<2> > 
+   problem;
+  
+  cout << "gen. M.R.: RefineableQPVDElementWithPressure<2>" << std::endl;
+  
   //Run the simulation
   problem.run(2);
   
  }
-
-
-  // Change the consitutive law
-  delete Global_Physical_Variables::Constitutive_law_pt;
-  // "Big G" Linear constitutive equations:
-  Global_Physical_Variables::Constitutive_law_pt = 
-   new GeneralisedHookean(Global_Physical_Variables::Nu,
-                          Global_Physical_Variables::E);
-
+ 
+ 
+ // Change the consitutive law
+ delete Global_Physical_Variables::Constitutive_law_pt;
+ 
+ // "Big G" Linear constitutive equations:
+ Global_Physical_Variables::Constitutive_law_pt = 
+  new GeneralisedHookean(Global_Physical_Variables::Nu,
+                         Global_Physical_Variables::E);
+ 
  // Case 3: No pressure, generalised Hooke's law
  //----------------------------------------------
  {
   //Set up the problem
   StaticDiskCompressionProblem<RefineableQPVDElement<2,3> > problem;
   
+  cout << "gen. Hooke: RefineableQPVDElement<2,3> " << std::endl;
+  
   //Run the simulation
-  problem.run(3);
+  problem.run(3);  
  }
-
+ 
  // Case 4: Continuous pressure formulation with generalised Hooke's law
  //---------------------------------------------------------------------
  {
@@ -497,28 +515,35 @@ int main()
   //Set up the problem
   StaticDiskCompressionProblem<
    RefineableQPVDElementWithContinuousPressure<2> > problem;
-
+  
+  cout << "gen. Hooke: RefineableQPVDElementWithContinuousPressure<2> " 
+       << std::endl;
+  
   //Run the simulation
   problem.run(4);
-
+  
  }
-
-
+ 
+ 
  // Case 5:  Discontinous pressure formulation with generalised Hooke's law
  //------------------------------------------------------------------------
  {
   
   //Set up the problem
   StaticDiskCompressionProblem<RefineableQPVDElementWithPressure<2> > problem;
-
+  
+  cout << "gen. Hooke: RefineableQPVDElementWithPressure<2> " << std::endl;
+  
   //Run the simulation
   problem.run(5);
-
- }
   
-  // Clean up 
-  delete Global_Physical_Variables::Constitutive_law_pt;
-  Global_Physical_Variables::Constitutive_law_pt=0;
+  
+ }
+ 
+ // Clean up 
+ delete Global_Physical_Variables::Constitutive_law_pt;
+ Global_Physical_Variables::Constitutive_law_pt=0;
+ 
 }
 
 

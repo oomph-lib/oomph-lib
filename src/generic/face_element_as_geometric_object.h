@@ -166,8 +166,9 @@ public:
    //Vector in which to hold the intrinsic coordinate
    Vector<double> zeta(dim());
 
-   //Get the boundary coordinate at node n
-   node_pt(n)->get_coordinates_on_boundary(Boundary_number_in_bulk_mesh,zeta);
+   //Get the k-th generalised boundary coordinate at node n
+   node_pt(n)->get_coordinates_on_boundary(
+    Boundary_number_in_bulk_mesh,k,zeta);
 
    //Return the individual coordinate
    return zeta[i];

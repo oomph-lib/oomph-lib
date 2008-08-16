@@ -748,27 +748,9 @@ DiskOscillationProblem<ELEMENT,TIMESTEPPER>::DiskOscillationProblem()
    Trace_node_pt[j+nnod0]=solid_mesh_pt()->boundary_node_pt(1,j);
   }
 
- // Refine uniformly
- solid_mesh_pt()->refine_uniformly();
-
- // Mesh has been adapted: Need to setup boundary info again --
- // hierher: shouldn't this be automatic
- solid_mesh_pt()->setup_boundary_element_info();
-
- // Build traction element mesh
- solid_mesh_pt()->make_traction_element_mesh(traction_mesh_pt());
- 
- // Solid mesh is first sub-mesh
- add_sub_mesh(solid_mesh_pt());
-
- // Traction mesh is first sub-mesh
- add_sub_mesh(traction_mesh_pt());
-
- // Build combined "global" mesh
- build_global_mesh();
-
  // Pin the bottom in the vertical direction
  unsigned n_bottom = solid_mesh_pt()->nboundary_node(0);
+
  //Loop over the node
  for(unsigned i=0;i<n_bottom;i++)
   {
@@ -777,6 +759,7 @@ DiskOscillationProblem<ELEMENT,TIMESTEPPER>::DiskOscillationProblem()
 
  // Pin the left edge in the horizontal direction
  unsigned n_side = solid_mesh_pt()->nboundary_node(2);
+
  //Loop over the node
  for(unsigned i=0;i<n_side;i++)
   {
@@ -790,8 +773,11 @@ DiskOscillationProblem<ELEMENT,TIMESTEPPER>::DiskOscillationProblem()
  for(unsigned i=0;i<n_element;i++)
   {
    //Cast to a solid element
-   ELEMENT *el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
+   ELEMENT *el_pt = dynamic_cast<ELEMENT*>(solid_mesh_pt()->element_pt(i));
 
+   // Get Jacobian by FD?
+   //el_pt->evaluate_jacobian_by_fd()=true;
+  
    //Set the constitutive law
    el_pt->constitutive_law_pt() =
     Global_Physical_Variables::Constitutive_law_pt;
@@ -805,7 +791,28 @@ DiskOscillationProblem<ELEMENT,TIMESTEPPER>::DiskOscillationProblem()
 
    // Set the isotropic growth function pointer
    el_pt->isotropic_growth_fct_pt()=Global_Physical_Variables::growth_function;
+
+   // Use MacroElement representation for 
+   // Lagrangian coordinates of newly created 
+   // nodes
+   el_pt->use_undeformed_macro_element_for_new_lagrangian_coords()
+    =true;
   }
+
+ // Refine uniformly
+ solid_mesh_pt()->refine_uniformly();
+
+ // Build traction element mesh
+ solid_mesh_pt()->make_traction_element_mesh(traction_mesh_pt());
+ 
+ // Solid mesh is first sub-mesh
+ add_sub_mesh(solid_mesh_pt());
+
+ // Traction mesh is first sub-mesh
+ add_sub_mesh(traction_mesh_pt());
+
+ // Build combined "global" mesh
+ build_global_mesh();
 
 
  //Find number of elements in traction mesh

@@ -108,7 +108,8 @@ namespace Global_Parameters
  double Gravity=0.0; 
 
  /// Non-dimensional gravity as body force
- void gravity(const Vector<double> &xi, const double& time, 
+ void gravity(const double& time, 
+              const Vector<double> &xi,
               Vector<double> &b)
  {
   b[0]=0.0;
@@ -478,7 +479,7 @@ TurekProblem(const double &length,
   Global_Parameters::Radius*
   sqrt(1.0-Global_Parameters::H*Global_Parameters::H/
        (4.0*Global_Parameters::Radius*Global_Parameters::Radius));
- origin[1]= Global_Parameters::Centre_y;
+ origin[1]=Global_Parameters::Centre_y-0.5*l_y;
 
  // Set length of flag so that endpoint actually stretches all the
  // way to x=6:

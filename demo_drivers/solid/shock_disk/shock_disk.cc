@@ -381,6 +381,13 @@ DiskShockWaveProblem<ELEMENT,TIMESTEPPER>::DiskShockWaveProblem()
    
    // Switch on inertia
    el_pt->unsteady()=true;
+
+   // Use MacroElement representation for 
+   // Lagrangian coordinates of newly created 
+   // nodes hierher simply retained to let self tests pass during
+   // re-development of code
+   el_pt->use_undeformed_macro_element_for_new_lagrangian_coords()
+    =true;
   }
 
  // Pin the redundant solid pressures

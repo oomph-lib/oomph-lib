@@ -100,8 +100,15 @@ public:
      // mesh refinement
      el_pt->set_undeformed_macro_elem_pt(
       Undeformed_domain_pt->macro_element_pt(e));
-    }   
+
+     // Use MacroElement representation for 
+     // Lagrangian coordinates of newly created 
+     // nodes
+     el_pt->use_undeformed_macro_element_for_new_lagrangian_coords()
+      =true;
+    }      
   }
+
 
  /// Destructor: Kill "undeformed" Domain
  virtual ~ElasticFishMesh()
@@ -153,8 +160,8 @@ namespace Global_Physical_Variables
  double Gravity=0.0;
 
  /// Body force vector: Vertically downwards with magnitude Gravity
- void body_force(const Vector<double>& xi,
-                 const double& t,
+ void body_force(const double& t,
+                 const Vector<double>& xi,
                  Vector<double>& b)
  {
   b[0]=0.0;

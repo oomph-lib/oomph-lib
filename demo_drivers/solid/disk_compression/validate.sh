@@ -34,7 +34,7 @@ ln -s RESLT_static_disk_compression5 RESLT5
 
 
 echo "Running static disk compression validation "
-../disk_compression > OUTPUT_static_disk_compression
+../disk_compression la > OUTPUT_static_disk_compression
 
 
 echo "done"
@@ -46,27 +46,27 @@ echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat RESLT_static_disk_compression0/soln4.dat \
+cat RESLT_static_disk_compression0/soln2.dat \
     RESLT_static_disk_compression0/trace.dat \
     > static_disk_compression_results0.dat
 
-cat RESLT_static_disk_compression1/soln4.dat \
+cat RESLT_static_disk_compression1/soln2.dat \
     RESLT_static_disk_compression1/trace.dat \
     > static_disk_compression_results1.dat
 
-cat RESLT_static_disk_compression2/soln4.dat \
+cat RESLT_static_disk_compression2/soln2.dat \
     RESLT_static_disk_compression2/trace.dat \
     > static_disk_compression_results2.dat
 
-cat RESLT_static_disk_compression3/soln4.dat \
+cat RESLT_static_disk_compression3/soln2.dat \
     RESLT_static_disk_compression3/trace.dat \
     > static_disk_compression_results3.dat
 
-cat RESLT_static_disk_compression4/soln4.dat \
+cat RESLT_static_disk_compression4/soln2.dat \
     RESLT_static_disk_compression4/trace.dat \
     > static_disk_compression_results4.dat
 
-cat RESLT_static_disk_compression5/soln4.dat \
+cat RESLT_static_disk_compression5/soln2.dat \
     RESLT_static_disk_compression5/trace.dat \
     > static_disk_compression_results5.dat
 

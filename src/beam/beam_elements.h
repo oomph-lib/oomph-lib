@@ -473,7 +473,7 @@ class FSIHermiteBeamElement : public virtual HermiteBeamElement,
    //Solve for the consistent acceleration in Newmark scheme?
    if(Solve_for_consistent_newmark_accel_flag)
     {
-     add_jacobian_for_newmark_accel(jacobian);
+     fill_in_jacobian_for_newmark_accel(jacobian);
      return;
     }
    

@@ -591,7 +591,7 @@ class FSIDiagHermiteShellElement : public virtual DiagHermiteShellElement,
    //Solve for the consistent acceleration in Newmark scheme?
    if(Solve_for_consistent_newmark_accel_flag)
     {
-     add_jacobian_for_newmark_accel(jacobian);
+     fill_in_jacobian_for_newmark_accel(jacobian);
      return;
     }
 
@@ -728,7 +728,6 @@ public:
  /// Fill in the element's contribution to its residual vector
  void fill_in_contribution_to_residuals(Vector<double> &residuals);
  
-
 
  //////////////////////////////////////////////////////////////////
  // Note: We should also overload all other versions of shape(...)

@@ -42,47 +42,6 @@
 using namespace oomph;
 using namespace std;
 
-//======================================================================
-///\short We need to upgrade our standard mesh into an Elastic mesh so 
-///that it can be used by SolidElements
-//======================================================================
-template <class ELEMENT>
-class ElasticRectangularQuadMesh :
- public virtual RectangularQuadMesh<ELEMENT>,
- public virtual SolidMesh
-{
- 
-public:
-
- /// \short Constructor: Build mesh and copy Eulerian coords to Lagrangian
- /// ones so that the initial configuration is the stress-free one.
- ElasticRectangularQuadMesh<ELEMENT>(const unsigned &nx, const unsigned &ny, 
-                                     const double &lx, const double &ly, 
-                                     TimeStepper* time_stepper_pt=
-                                     &Mesh::Default_TimeStepper) :
-  RectangularQuadMesh<ELEMENT>(nx,ny,lx,ly,time_stepper_pt)
-  {
-#ifdef PARANOID
-   /// Check that the element type is derived from the SolidFiniteElement
-   SolidFiniteElement* el_pt=dynamic_cast<SolidFiniteElement*>
-    (finite_element_pt(0));
-   if (el_pt==0)
-    {
-     throw OomphLibError(
-      "Element needs to be derived from SolidFiniteElement\n",
-      "ElasticRefineableQuarterCircleSectorMesh::constructor()",
-      OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-   // Make the current configuration the undeformed one by
-   // setting the nodal Lagrangian coordinates to the current
-   // Eulerian values
-   set_lagrangian_nodal_coordinates();
-  }
-
-};
-
 
 
 //=====================================================================

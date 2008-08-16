@@ -1829,7 +1829,428 @@ class RankFourTensor
    return Tensordata[Q*(P*(M*i + j) + k)+l];
   }
  
+ /// \short Direct access to internal storage of data in flat-packed C-style 
+ /// column-major format. WARNING: Only for experienced users. Only
+ /// use this if raw speed is of the essence, as in the solid mechanics 
+ /// problems.
+ inline T& raw_direct_access(const unsigned long &i)
+  {return Tensordata[i];}
+
+ /// \short Direct access to internal storage of data in flat-packed C-style 
+ /// column-major format. WARNING: Only for experienced users. Only
+ /// use this if raw speed is of the essence, as in the solid mechanics 
+ /// problems.
+ inline const T &raw_direct_access(const unsigned long &i) const
+  {return Tensordata[i];}
+
+ /// \short Caculate the offset in flat-packed C-style, column-major format,
+ /// required for a given i,j. WARNING: Only for experienced users. Only
+ /// use this if raw speed is of the essence, as in the solid mechanics 
+ /// problems.
+ unsigned offset(const unsigned long &i,
+                 const unsigned long &j) const
+  {return (Q*(P*(M*i + j) + 0) + 0);}
+
 };  
+
+
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+
+
+//=================================================================
+///A Rank 5 Tensor class 
+//=================================================================
+template <class T>
+class RankFiveTensor
+{
+
+  private:
+
+ /// Private internal representation  as pointer to data
+ T* Tensordata;
+ 
+ /// 1st Tensor dimension
+ unsigned N;
+ 
+ /// 2nd Tensor dimension
+ unsigned M;
+ 
+ /// 3rd Tensor dimension
+ unsigned P;
+ 
+ /// 4th Tensor dimension
+ unsigned Q;
+ 
+ /// 5th Tensor dimension
+ unsigned R;
+ 
+ /// \short Range check to catch when an index is out of bounds, if so, it
+ /// issues a warning message and dies by throwing an \c OomphLibError
+ void range_check(const unsigned long& i, 
+                  const unsigned long& j,
+                  const unsigned long& k,
+                  const unsigned long& l,
+                  const unsigned long& m) const
+  {
+   if (i>=N)
+    {
+     std::ostringstream error_message;
+     error_message << "Range Error: i=" << i << " is not in the range (0," 
+                   << N-1 << ")." << std::endl;
+     
+     throw OomphLibError(error_message.str(),
+                         "RankFiveTensor::range_check()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   else if (j>=M)
+    {
+     std::ostringstream error_message;
+     error_message << "Range Error: j=" << j << " is not in the range (0," 
+                   << M-1 << ")." << std::endl;
+
+      throw OomphLibError(error_message.str(),
+                         "RankFiveTensor::range_check()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   else if (k>=P)
+    {
+     std::ostringstream error_message;
+     error_message << "Range Error: k=" << k << " is not in the range (0," 
+                   << P-1 << ")." << std::endl;
+
+      throw OomphLibError(error_message.str(),
+                         "RankFiveTensor::range_check()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   else if (l>=Q)
+    {
+     std::ostringstream error_message;
+     error_message << "Range Error: l=" << l << " is not in the range (0," 
+                   << Q-1 << ")." << std::endl;
+     
+     throw OomphLibError(error_message.str(),
+                         "RankFiveTensor::range_check()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   else if (m>=R)
+    {
+     std::ostringstream error_message;
+     error_message << "Range Error: m=" << m << " is not in the range (0," 
+                   << R-1 << ")." << std::endl;
+     
+     throw OomphLibError(error_message.str(),
+                         "RankFiveTensor::range_check()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+
+  public:
+
+ /// Empty constructor
+ RankFiveTensor(): Tensordata(0), N(0), M(0), P(0), Q(0), R(0) {}
+ 
+ /// Copy constructor: Deep copy
+ RankFiveTensor(const RankFiveTensor& source_tensor)
+  {
+   // Set row and column lengths
+   N=source_tensor.nindex1();
+   M=source_tensor.nindex2();
+   P=source_tensor.nindex3();
+   Q=source_tensor.nindex4();
+   R=source_tensor.nindex5();
+   
+   // Assign space for the data
+   Tensordata = new T[N*M*P*Q*R];
+   
+   // Copy the data across from the other matrix
+   for(unsigned i=0;i<N;i++)
+    {
+     for(unsigned j=0;j<M;j++)
+      {
+       for(unsigned k=0;k<P;k++)
+        {
+         for(unsigned l=0;l<Q;l++)
+          {
+           for(unsigned m=0;m<R;m++)
+            {
+             Tensordata[R*(Q*(P*(M*i + j) +k)+l)+m] = source_tensor(i,j,k,l,m);
+            }
+          }
+        }
+      }
+    }
+  }
+ 
+ /// Copy assignement 
+ RankFiveTensor& operator=(const RankFiveTensor& source_tensor) 
+  {
+   // Don't create a new matrix if the assignement is the identity
+   if (this != & source_tensor)
+    {
+     // Check row and column length
+     unsigned long n=source_tensor.nindex1();
+     unsigned long m=source_tensor.nindex2();
+     unsigned long p=source_tensor.nindex3();
+     unsigned long q=source_tensor.nindex4();
+     unsigned long r=source_tensor.nindex5();
+     //Resize the tensor to be the same size as the old tensor
+     if ( (N!=n) || (M!=m) || (P!=p) || (Q!=q)|| (R!=r) ) {resize(n,m,p,q,r);}
+     
+     // Copy entries across from the other matrix
+     for (unsigned long i=0;i<N;i++)
+      {
+       for (unsigned long j=0;j<M;j++)
+        {
+         for(unsigned long k=0;k<P;k++)
+          {
+           for(unsigned long l=0;l<Q;l++)
+            {
+             for(unsigned long m=0;m<R;m++)
+              {
+               (*this)(i,j,k,l,m) = source_tensor(i,j,k,l,m);
+              }
+            }
+          }
+        }
+      }
+    }
+   // Return reference to object itself (i.e. de-reference this pointer)
+   return *this;
+  }
+ 
+ 
+ /// One parameter constructor produces a  nxnxnxnxn tensor
+ RankFiveTensor(const unsigned long &n) 
+  {
+   // Set row and column lengths
+   N=n; M=n; P=n; Q=n; R=n;
+   // Assign space for the n rows
+   Tensordata = new T[N*M*P*Q*R];
+   //Initialise to zero if required
+#ifdef OOMPH_INITIALISE_DENSE_MATRICES
+   initialise(T(0));
+#endif
+  }
+ 
+ /// Four parameter constructor, general non-square tensor
+ RankFiveTensor(const unsigned long &n_index1, const unsigned long &n_index2,
+                const unsigned long &n_index3, const unsigned long &n_index4,
+                const unsigned long &n_index5)
+  {
+   // Set row and column lengths
+   N=n_index1; M=n_index2; P=n_index3; Q=n_index4; R=n_index5;
+   // Assign space for the n rows
+   Tensordata = new T[N*M*P*Q*R];
+   //Initialise to zero if required
+#ifdef OOMPH_INITIALISE_DENSE_MATRICES
+   initialise(T(0));
+#endif
+  }
+ 
+
+ /// Four parameter constructor, general non-square tensor
+ RankFiveTensor(const unsigned long &n_index1, const unsigned long &n_index2,
+                const unsigned long &n_index3, const unsigned long &n_index4, 
+                const unsigned long &n_index5, const T &initial_val)
+  {
+   // Set row and column lengths
+   N=n_index1; M=n_index2; P=n_index3; Q=n_index4; R=n_index5;
+   // Assign space for the n rows
+   Tensordata = new T[N*M*P*Q*R];
+   //Initialise to the initial value
+   initialise(initial_val);
+  }
+ 
+ /// Destructor: delete the pointers
+ virtual ~RankFiveTensor() {delete[] Tensordata; Tensordata = 0;}
+ 
+ /// Resize to a square nxnxnxn tensor
+ void resize(const unsigned long &n) {resize(n,n,n,n,n);}
+ 
+ /// Resize to a general tensor
+ void resize(const unsigned long &n_index1, const unsigned long &n_index2,
+             const unsigned long &n_index3, const unsigned long &n_index4,
+             const unsigned long &n_index5)
+  {
+   //If the sizes have not changed do nothing
+   if((n_index1==N) && (n_index2==M) && (n_index3==P) && (n_index4==Q) && 
+      (n_index5==R)) 
+    {return;}
+   // Store old sizes
+   unsigned long n_old=N, m_old=M, p_old=P, q_old=Q, r_old=R;
+   // Reassign the sizes
+   N=n_index1; M=n_index2; P=n_index3; Q=n_index4; R=n_index5;
+   // Store pointer to old matrix data
+   T* temp_tensor = Tensordata;
+   // Re-create Tensordata in new size
+   Tensordata = new T[N*M*P*Q*R];
+#ifdef OOMPH_INITIALISE_DENSE_MATRICES
+   initialise(T(0));
+#endif
+   // Transfer values
+   unsigned long n_copy, m_copy, p_copy, q_copy, r_copy;
+   n_copy = std::min(n_old,n_index1);
+   m_copy = std::min(m_old,n_index2);
+   p_copy = std::min(p_old,n_index3);
+   q_copy = std::min(q_old,n_index4);
+   r_copy = std::min(r_old,n_index5);
+   // If matrix has values, transfer them to new matrix
+   // Loop over rows
+   for (unsigned long i=0;i<n_copy;i++)
+    {
+     // Loop over columns
+     for (unsigned long j=0;j<m_copy;j++)
+      {
+       // Loop over columns
+       for (unsigned long k=0;k<p_copy;k++)
+        {
+         // Loop over columns
+         for (unsigned long l=0;l<q_copy;l++)
+          {
+           // Loop over columns
+           for (unsigned long m=0;m<r_copy;m++)
+            {
+             // Transfer values from temp_tensor
+             Tensordata[R*(Q*(M*P*i + P*j + k) +l) +m] = 
+              temp_tensor[r_old*(q_old*(m_old*p_old*i + p_old*j + k)+ l)+ m];
+            }
+          }
+        }
+      }
+    }
+   // Now kill storage for old tensor
+   delete[] temp_tensor;
+  }
+
+ /// Resize to a general tensor
+ void resize(const unsigned long &n_index1, const unsigned long &n_index2,
+             const unsigned long &n_index3, const unsigned long &n_index4,
+             const unsigned long &n_index5, const T &initial_value)
+  {
+   //If the sizes have not changed do nothing
+   if((n_index1==N) && (n_index2==M) && (n_index3==P) && (n_index4==Q) &&
+      (n_index5==R))
+    {return;}
+   // Store old sizes
+   unsigned long n_old=N, m_old=M, p_old=P, q_old=Q, r_old=R;
+   // Reassign the sizes
+   N=n_index1; M=n_index2; P=n_index3; Q=n_index4; R=n_index5;
+   // Store triple pointer to old matrix data
+   T* temp_tensor = Tensordata;
+   // Re-create Tensordata in new size
+   Tensordata = new T[N*M*P*Q*R];
+   //Initialise the newly allocated storage
+   initialise(initial_value);
+
+   // Transfer values
+   unsigned long n_copy, m_copy, p_copy, q_copy, r_copy;
+   n_copy = std::min(n_old,n_index1);
+   m_copy = std::min(m_old,n_index2);
+   p_copy = std::min(p_old,n_index3);
+   q_copy = std::min(q_old,n_index4);
+   r_copy = std::min(r_old,n_index5);
+   // If matrix has values, transfer them to new matrix
+   // Loop over rows
+   for (unsigned long i=0;i<n_copy;i++)
+    {
+     // Loop over columns
+     for (unsigned long j=0;j<m_copy;j++)
+      {
+       // Loop over columns
+       for (unsigned long k=0;k<p_copy;k++)
+        {
+         // Loop over columns
+         for (unsigned long l=0;l<q_copy;l++)
+          {
+           // Loop over columns
+           for (unsigned long m=0;m<r_copy;m++)
+            {
+             // Transfer values from temp_tensor
+             Tensordata[R*(Q*(M*P*i + P*j + k) +l) + m] = 
+            temp_tensor[r_old*(q_old*(m_old*p_old*i + p_old*j + k)+ l) +m];
+            }
+          }
+        }
+      }
+    }
+   // Now kill storage for old tensor
+   delete[] temp_tensor;
+  }
+ 
+ /// \short Initialise all values in the tensor to val
+ void initialise(const T &val)
+  {for(unsigned long i=0;i<(N*M*P*Q*R);++i) {Tensordata[i] = val;}}
+ 
+ /// Return the range of index 1 of the tensor
+ unsigned long nindex1() const {return N;}
+
+ /// Return the range of index 2 of the tensor
+ unsigned long nindex2() const {return M;}
+
+ /// Return the range of index 3 of the tensor
+ unsigned long nindex3() const {return P;}
+
+ /// Return the range of index 4 of the tensor
+ unsigned long nindex4() const {return Q;}
+ 
+ /// Return the range of index 5 of the tensor
+ unsigned long nindex5() const {return R;}
+
+ /// Overload the round brackets to give access as a(i,j,k,l,m)
+ inline T &operator()(const unsigned long &i, const unsigned long &j,
+                      const unsigned long &k, const unsigned long &l,
+                      const unsigned long &m) 
+  {
+#ifdef RANGE_CHECKING
+   this->range_check(i,j,k,l,m);
+#endif  
+   return Tensordata[R*(Q*(P*(M*i + j) + k) +l) +m];
+  }
+ 
+ /// Overload a const version for read-only access as a(i,j,k,l,m)
+ inline const T &operator()(const unsigned long &i, 
+                            const unsigned long &j,
+                            const unsigned long &k, 
+                            const unsigned long &l,
+                            const unsigned long &m) const
+  {
+#ifdef RANGE_CHECKING
+   this->range_check(i,j,k,l,m);
+#endif
+   return Tensordata[R*(Q*(P*(M*i + j) + k) +l) +m];
+  }
+ 
+ /// \short Direct access to internal storage of data in flat-packed C-style 
+ /// column-major format. WARNING: Only for experienced users. Only
+ /// use this if raw speed is of the essence, as in the solid mechanics 
+ /// problems.
+ inline T &raw_direct_access(const unsigned long &i)
+  {return Tensordata[i];}
+
+
+ /// \short Direct access to internal storage of data in flat-packed C-style 
+ /// column-major format. WARNING: Only for experienced users. Only
+ /// use this if raw speed is of the essence, as in the solid mechanics 
+ /// problems.
+ inline const T &raw_direct_access(const unsigned long &i) const
+  {return Tensordata[i];}
+
+ /// \short Caculate the offset in flat-packed Cy-style, column-major format,
+ /// required for a given i,j,k. WARNING: Only for experienced users. Only
+ /// use this if raw speed is of the essence, as in the solid mechanics 
+ /// problems.
+ unsigned offset(const unsigned long &i,
+                 const unsigned long &j,
+                 const unsigned long &k) const
+  {return (R*(Q*(P*(M*i + j) + k) + 0 ) + 0);}
+
+
+};  
+
+
+
 
 //////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////

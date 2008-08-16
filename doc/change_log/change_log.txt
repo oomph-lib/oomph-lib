@@ -251,3 +251,28 @@ problems after upgrading to a new version.
   yet docmented (in the form of tutorials). 
   \n\n
 .  
+
+
+
+\subsection zero_point_five_to_zero_point_five_plus Changes between version 0.85 and 0.85+ hierher
+
+\subsubsection major_interface_changes_zero_point_five_plus Major interface changes
+
+- \c SolidFiniteElement::add_jacobian_for_solid_ic() becomes 
+  \c SolidFiniteElement::fill_in_jacobian_for_solid_ic()
+  \n\n
+- \c SolidFiniteElement::add_residuals_for_ic() becomes 
+  \c SolidFiniteElement::fill_in_residuals_for_solid_ic()
+  \n\n
+- \c SolidFiniteElement::get_residuals_for_ic() becomes 
+  \c SolidFiniteElement::fill_in_residuals_for_solid_ic()
+  \n\n
+- Changed order of arguments in \c PVDEquationsBase::BodyForceFctPt 
+  so that time goes first (as it should!).
+  \n\n
+.
+
+
+\subsubsection new_functionality_zero_point_five_plus Major new functionality
+- Lots!
+.

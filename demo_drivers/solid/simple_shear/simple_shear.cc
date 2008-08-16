@@ -35,7 +35,7 @@
 // Solid mechanics
 #include "solid.h"
 
-// The fish mesh 
+// The mesh 
 #include "meshes/simple_cubic_mesh.template.h"
 
 using namespace std;
@@ -194,8 +194,7 @@ SimpleShearProblem<ELEMENT>::SimpleShearProblem(const bool &incompressible)
  double a = 1.0, b = 1.0, c = 1.0;
  unsigned nx = 5, ny = 5, nz = 5;
 
- // Build fish mesh with geometric objects that specify the deformable
- // and undeformed fish back 
+ // Build mesh
  Problem::mesh_pt()=new ElasticCubicMesh<ELEMENT>(nx,ny,nz,a,b,c);
  
  //Loop over all boundaries
@@ -365,13 +364,14 @@ set_incompressible_flag(
 //======================================================================
 int main()
 {
-
  //Initialise physical parameters
  Global_Physical_Variables::E  = 2.1; 
  Global_Physical_Variables::Nu = 0.4; 
  Global_Physical_Variables::C1 = 1.3; 
  
- 
+  for (unsigned i=0;i<2;i++)
+  {
+
  // Define a strain energy function: Generalised Mooney Rivlin
  Global_Physical_Variables::Strain_energy_function_pt = 
   new GeneralisedMooneyRivlin(Global_Physical_Variables::Nu,
@@ -415,7 +415,10 @@ int main()
   problem.run("RESLT_cont_pres_incomp");
   }*/
 
-  
+ 
+  }
+
+ 
 }
 
 

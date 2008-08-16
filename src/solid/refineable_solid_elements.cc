@@ -38,12 +38,31 @@ namespace oomph
 //====================================================================
 template<unsigned DIM>
 void RefineablePVDEquations<DIM>::
-fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals)
+fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals, 
+                                              DenseMatrix<double> &jacobian, 
+                                              const unsigned& flag)
 {
+ 
+#ifdef TIME_SOLID_JAC
+ if (flag>0) this->Solid_timer.start(0);
+#endif
+
+#ifdef PARANOID
+ // Check if the constitutive equation requires the explicit imposition of an
+ // incompressibility constraint
+ if (Constitutive_law_pt->requires_incompressibility_constraint())
+  {
+   throw OomphLibError(
+    "RefineablePVDEquations cannot be used with incompressible constitutive laws.",
+    "RefineablePVDEquations<DIM>::fill_in_generic_contribution_to_residuals_pvd()",
+    OOMPH_EXCEPTION_LOCATION);   
+  }
+#endif
+
  // Simply set up initial condition?
  if (Solid_ic_pt!=0)
   {
-   get_residuals_for_ic(residuals);
+   get_residuals_for_solid_ic(residuals);
    return;
   }
  
@@ -59,6 +78,9 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals)
  // Timescale ratio (non-dim density)
  double Lambda_sq = this->lambda_sq();
   
+ // Time factor
+ const double time_factor=node_pt(0)->time_stepper_pt()->weight(2,0);
+
  //Set up memory for the shape functions
  Shape psi(n_node,n_position_type);
  DShape dpsidxi(n_node,n_position_type,DIM);
@@ -177,30 +199,179 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals)
    this->get_stress(g,G,sigma);
 
 
+
+   // Get stress derivative by FD only needed for Jacobian
+   //-----------------------------------------------------
+   
+   // Stress derivative
+   RankFourTensor<double> d_stress_dG(DIM,DIM,DIM,DIM,0.0);
+   
+   // Derivative of metric tensor w.r.t. to nodal coords
+   RankFiveTensor<double> d_G_dX(n_node,n_position_type,DIM,DIM,DIM,0.0);
+   
+   // Get Jacobian too?
+   if (flag==1)
+    {
+
+#ifdef TIME_SOLID_JAC
+     this->Solid_timer.start(1);
+#endif
+     
+
+     // Derivative of metric tensor w.r.t. to discrete positional dofs
+     // NOTE: Since G is symmetric we only compute the upper triangle
+     //       and DO NOT copy the entries across. Subsequent computations
+     //       must (and, in fact, do) therefore only operate with upper
+     //       triangular entries
+     for (unsigned ll=0;ll<n_node;ll++)
+      {
+       for (unsigned kk=0;kk<n_position_type;kk++)
+        {         
+         for (unsigned ii=0;ii<DIM;ii++)
+          {
+           for (unsigned aa=0;aa<DIM;aa++)
+            {
+             for (unsigned bb=aa;bb<DIM;bb++) 
+              {
+               d_G_dX(ll,kk,ii,aa,bb)=
+                interpolated_G(aa,ii)*dpsidxi(ll,kk,bb)+
+                interpolated_G(bb,ii)*dpsidxi(ll,kk,aa);
+              }
+            }
+          }
+        }
+      }
+
+     // FD step 
+     double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
+     
+     //Advanced metric tensor
+     DenseMatrix<double> G_pls(DIM,DIM);
+     DenseMatrix<double> sigma_pls(DIM,DIM);
+     
+     // Copy across
+     for (unsigned i=0;i<DIM;i++)
+      {
+       for (unsigned j=0;j<DIM;j++)
+        {
+         G_pls(i,j)=G(i,j);
+        }
+      }
+     
+     // Do FD -- only w.r.t. to upper indices, exploiting symmetry.
+     // NOTE: We exploit the symmetry of the stress and metric tensors
+     //       by incrementing G(i,j) and G(j,i) simultaenously and
+     //       only fill in the "upper" triangles without copying things
+     //       across the lower triangle. This is taken into account
+     //       in the remaining code further below.
+     for(unsigned i=0;i<DIM;i++)
+      {
+       for(unsigned j=i;j<DIM;j++) 
+        {
+         G_pls(i,j) += eps_fd;
+         G_pls(j,i) = G_pls(i,j);
+         
+         // Get advanced stress
+         this->get_stress(g,G_pls,sigma_pls);
+         
+         for (unsigned ii=0;ii<DIM;ii++)
+          {
+           for (unsigned jj=ii;jj<DIM;jj++) 
+            {
+             d_stress_dG(ii,jj,i,j)=(sigma_pls(ii,jj)-sigma(ii,jj))/eps_fd;
+            }   
+          }
+         
+         // Reset 
+         G_pls(i,j) = G(i,j);
+         G_pls(j,i) = G(j,i);
+
+        }
+      }
+
+#ifdef TIME_SOLID_JAC
+    this->Solid_timer.halt(1);
+#endif
+
+    }
+   
+
 //=====EQUATIONS OF ELASTICITY FROM PRINCIPLE OF VIRTUAL DISPLACEMENTS========
        
+
+   // Default setting for non-hanging node
+   unsigned n_master=1;
+   double hang_weight=1.0;
+
    //Loop over the test functions, nodes of the element
    for(unsigned l=0;l<n_node;l++)
     {
+     
      //Get pointer to local node l
      Node* local_node_pt = node_pt(l);
-
-     //If the node is NOT a hanging node
-     if(local_node_pt->is_hanging()==false)
+     
+     // Cache hang status
+     bool is_hanging=local_node_pt->is_hanging();
+     
+     //If the node is a hanging node
+     if(is_hanging)
+      {      
+       n_master = local_node_pt->hanging_pt()->nmaster();
+      }
+     // Otherwise the node is its own master
+     else
       {
+       n_master=1;
+      }
+     
+
+     // Storage for local equation numbers at node indexed by
+     // type and direction
+     DenseMatrix<int> position_local_eqn_at_node(n_position_type,DIM);
+
+     // Loop over the master nodes
+     for(unsigned m=0;m<n_master;m++)
+      {
+
+       if (is_hanging)
+        {
+         //Find the equation numbers
+         position_local_eqn_at_node = 
+          local_position_hang_eqn(local_node_pt->
+                                  hanging_pt()->master_node_pt(m));
+         
+         //Find the hanging node weight
+         hang_weight = local_node_pt->hanging_pt()->master_weight(m);         
+        }
+       else
+        {
+         //Loop of types of dofs
+         for(unsigned k=0;k<n_position_type;k++)
+          {
+           //Loop over the displacement components
+           for(unsigned i=0;i<DIM;i++)
+            {
+             position_local_eqn_at_node(k,i) = position_local_eqn(l,k,i);
+            }
+          }
+         
+         // Hang weight is one
+         hang_weight=1.0;
+        }
+
        //Loop of types of dofs
        for(unsigned k=0;k<n_position_type;k++)
         {
          //Loop over the displacement components
          for(unsigned i=0;i<DIM;i++)
           {
-           local_eqn = position_local_eqn(l,k,i);
+           local_eqn = position_local_eqn_at_node(k,i);
            /*IF it's not a boundary condition*/
            if(local_eqn >= 0)
             {
              // Acceleration and body force
              residuals[local_eqn] += 
-              (Lambda_sq*accel[i]-b[i])*psi(l,k)*W;
+              (Lambda_sq*accel[i]-b[i])*psi(l,k)*W*hang_weight;
              
              // Stress term
              for(unsigned a=0;a<DIM;a++)
@@ -209,82 +380,207 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals)
                 {
                  //Add the stress terms to the residuals
                  residuals[local_eqn] +=
-                  sigma(a,b)*interpolated_G(a,i)*dpsidxi(l,k,b)*W;
+                  sigma(a,b)*interpolated_G(a,i)*dpsidxi(l,k,b)*
+                  W*hang_weight;
                 }
               }
+            
+
+               // Get Jacobian too?
+               if (flag==1)
+                {
+
+#ifdef TIME_SOLID_JAC
+                 this->Solid_timer.start(2);
+#endif
+                 
+                 // Default setting for non-hanging node
+                 unsigned nn_master=1;
+                 double hhang_weight=1.0;
+                 
+                 //Loop over the nodes of the element again
+                 for(unsigned ll=0;ll<n_node;ll++)
+                  {
+                   //Get pointer to local node ll
+                   Node* llocal_node_pt = node_pt(ll);
+                   
+                   // Cache hang status
+                   bool iis_hanging=llocal_node_pt->is_hanging();
+                   
+                   //If the node is a hanging node
+                   if(iis_hanging)
+                    {      
+                     nn_master = llocal_node_pt->hanging_pt()->nmaster();
+                    }
+                   // Otherwise the node is its own master
+                   else
+                    {
+                     nn_master=1;
+                    }
+                   
+                   
+                   // Storage for local unknown numbers at node indexed by
+                   // type and direction
+                   DenseMatrix<int> position_local_unk_at_node(n_position_type,
+                                                               DIM);
+                   
+                   // Loop over the master nodes
+                   for(unsigned mm=0;mm<nn_master;mm++)
+                    {
+                     
+                     if (iis_hanging)
+                      {
+                       //Find the unknown numbers
+                       position_local_unk_at_node = 
+                        local_position_hang_eqn(llocal_node_pt->
+                                  hanging_pt()->master_node_pt(mm));
+                       
+                       //Find the hanging node weight
+                       hhang_weight = llocal_node_pt->hanging_pt()->
+                        master_weight(mm);         
+                      }
+                     else
+                      {
+                       //Loop of types of dofs
+                       for(unsigned kk=0;kk<n_position_type;kk++)
+                        {
+                         //Loop over the displacement components
+                         for(unsigned ii=0;ii<DIM;ii++)
+                          {
+                           position_local_unk_at_node(kk,ii) = 
+                            position_local_eqn(ll,kk,ii);
+                          }
+                        }
+                       
+                       // Hang weight is one
+                       hhang_weight=1.0;
+                      }
+                     
+                     
+                     //Loop of types of dofs again
+                     for(unsigned kk=0;kk<n_position_type;kk++)
+                      {
+                       //Loop over the displacement components again
+                       for(unsigned ii=0;ii<DIM;ii++)
+                        {
+                         //Get the number of the unknown
+                         int local_unknown = position_local_unk_at_node(kk,ii);
+
+                         
+                         /*IF it's not a boundary condition*/
+                         if(local_unknown >= 0)
+                          {
+                           
+                           // General stress term
+                           double sum=0.0;
+                           for(unsigned a=0;a<DIM;a++)
+                            {
+                             for(unsigned b=a;b<DIM;b++)
+                              {
+                               double factor=1.0;
+                               if (a!=b) factor=2.0;
+                               for(unsigned aa=0;aa<DIM;aa++)
+                                {
+                                 // Only upper half of derivatives w.r.t. 
+                                 // symm tensor
+                                 for(unsigned bb=aa;bb<DIM;bb++)
+                                  {                             
+                                   sum+=factor*0.5*d_stress_dG(a,b,aa,bb)* 
+                                    d_G_dX(ll,kk,ii,aa,bb)*
+                                    d_G_dX( l, k, i, a, b);
+                                  }
+                                }
+                              }
+                            }
+                           
+                           // Add diagonal terms
+                           if (i==ii)
+                            {
+                             // Inertia term
+                             sum+=Lambda_sq*time_factor*psi(ll,kk)*psi(l,k);
+                             
+                             // Stress term
+                             for(unsigned a=0;a<DIM;a++)
+                              {
+                               for(unsigned b=0;b<DIM;b++) 
+                                {
+                                 sum+=sigma(a,b)*
+                                  dpsidxi(ll,kk,a)*
+                                  dpsidxi(l,k,b);
+                                }
+                              }
+                            }
+                           
+                           // Multiply by weight and add contribution
+                           jacobian(local_eqn,local_unknown)+=
+                            sum*W*hang_weight*hhang_weight;
+                           
+                          } //End of if not boundary condition
+                        }
+                      }
+                    }
+                  }
+
+#ifdef TIME_SOLID_JAC
+                this->Solid_timer.halt(2);
+#endif
+                 
+                }
+               
             } //End of if not boundary condition
            
           } //End of loop over coordinate directions
         } //End of loop over type of dof
-      } //End of non-hanging case
-     //Otherwise it's a hanging node
-     else
-      {
-       //Loop over the master nodes
-       unsigned n_master = local_node_pt->hanging_pt()->nmaster();
-       for(unsigned m=0;m<n_master;m++)
-        {
-         //Find the equation numbers
-         DenseMatrix<int> Position_local_eqn_at_node;
-         Position_local_eqn_at_node = 
-          local_position_hang_eqn(local_node_pt->
-                                  hanging_pt()->master_node_pt(m));
-         //Find the hanging node weight
-         double hang_weight = local_node_pt->hanging_pt()->master_weight(m);
-
-
-         //Loop of types of dofs
-         for(unsigned k=0;k<n_position_type;k++)
-          {
-           //Loop over the displacement components
-           for(unsigned i=0;i<DIM;i++)
-            {
-             local_eqn = Position_local_eqn_at_node(k,i);
-             /*IF it's not a boundary condition*/
-             if(local_eqn >= 0)
-              {
-               // Acceleration and body force
-               residuals[local_eqn] += 
-                (Lambda_sq*accel[i]-b[i])*psi(l,k)*W*hang_weight;
-               
-               // Stress term
-               for(unsigned a=0;a<DIM;a++)
-                {
-                 for(unsigned b=0;b<DIM;b++)
-                  {
-                   //Add the stress terms to the residuals
-                   residuals[local_eqn] +=
-                    sigma(a,b)*interpolated_G(a,i)*dpsidxi(l,k,b)*
-                    W*hang_weight;
-                  }
-                }
-              } //End of if not boundary condition
-             
-            } //End of loop over coordinate directions
-          } //End of loop over type of dof
-        } //End of loop over master nodes
-      } //End of hanging-node case
-    } //End of loop over shape functions
+      } //End of loop over master nodes
+    } //End of loop over nodes
   } //End of loop over integration points
-}
 
+#ifdef TIME_SOLID_JAC
+ if (flag>0) this->Solid_timer.halt(0);
+#endif
+
+}
+ 
 
 //===========================================================================
-/// Add element's contribution to the elemental 
+/// Fill in element's contribution to the elemental 
 /// residual vector and/or Jacobian matrix.
-/// flag=1: compute both
 /// flag=0: compute only residual vector
+/// flag=1: compute both, fully analytically
+/// flag=2: compute both, using FD for the derivatives w.r.t. to the
+///         discrete displacment dofs.
 //==========================================================================
 template<unsigned DIM>
 void RefineablePVDEquationsWithPressure<DIM>::
 fill_in_generic_residual_contribution_pvd_with_pressure(
  Vector<double> &residuals, DenseMatrix<double> &jacobian, 
- unsigned flag)
+ const unsigned& flag)
 {
+
+#ifdef TIME_SOLID_JAC
+ if (flag>0) this->Solid_timer.start(0);
+#endif
+
+
+
+#ifdef PARANOID
+ // Check if the constitutive equation requires the explicit imposition of an
+ // incompressibility constraint
+ if (Constitutive_law_pt->requires_incompressibility_constraint()&&
+     (!Incompressible))
+  {
+   throw OomphLibError(
+    "The constitutive law requires the use of the incompressible formulation by setting the element's member function incompressible()",
+    "RefineablePVDEquationsWithPressure<DIM>::fill_in_generic_contribution_to_residuals_pvd_with_pressure()",
+    OOMPH_EXCEPTION_LOCATION);   
+  }
+#endif
+
+
   // Simply set up initial condition?
  if (Solid_ic_pt!=0)
   {
-   get_residuals_for_ic(residuals);
+   get_residuals_for_solid_ic(residuals);
    return;
   }
 
@@ -299,9 +595,11 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
 
  //Find out the index of the solid dof
  int solid_p_index = this->solid_p_nodal_index();
+
  //Local array of booleans that is true if the l-th pressure value is hanging
  //This is an optimization because it avoids repeated virtual function calls 
  bool solid_pressure_dof_is_hanging[n_solid_pres];
+
  //If the solid pressure is stored at a node 
  if(solid_p_index >= 0)
   {
@@ -325,6 +623,9 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
 
  // Timescale ratio (non-dim density)
  double Lambda_sq = this->lambda_sq();
+
+ // Time factor
+ const double time_factor=node_pt(0)->time_stepper_pt()->weight(2,0);
 
  //Set up memory for the shape functions
  Shape psi(n_node,n_position_type);
@@ -438,6 +739,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
       {
        //Initialise G(i,j) to zero
        G(i,j) = 0.0;
+
        //Now calculate the dot product
        for(unsigned k=0;k<DIM;k++)
         {
@@ -453,10 +755,59 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
 
    //Now calculate the deviatoric stress and all pressure-related
    //quantitites
-   DenseMatrix<double> sigma_dev(DIM), Gup(DIM);
+   DenseMatrix<double> sigma_dev(DIM,DIM), Gup(DIM,DIM);
    double detG = 0.0;
    double gen_dil=0.0;
    double inv_kappa=0.0;
+
+   // Get stress derivative by FD only needed for Jacobian
+      
+   // Stress etc derivatives
+   RankFourTensor<double> d_stress_dG(DIM,DIM,DIM,DIM,0.0);
+   RankFourTensor<double> d_Gup_dG(DIM,DIM,DIM,DIM,0.0);
+   DenseMatrix<double> d_detG_dG(DIM,DIM,0.0);
+   DenseMatrix<double> d_gen_dil_dG(DIM,DIM,0.0);
+
+   // Derivative of metric tensor w.r.t. to nodal coords
+   RankFiveTensor<double> d_G_dX(n_node,n_position_type,DIM,DIM,DIM,0.0);
+    
+   // Get Jacobian too?
+   if (flag==1) 
+    {
+     
+#ifdef TIME_SOLID_JAC
+     this->Solid_timer.start(1);   
+#endif
+     
+     // Derivative of metric tensor w.r.t. to discrete positional dofs
+     // NOTE: Since G is symmetric we only compute the upper triangle
+     //       and DO NOT copy the entries across. Subsequent computations
+     //       must (and, in fact, do) therefore only operate with upper
+     //       triangular entries
+     for (unsigned ll=0;ll<n_node;ll++)
+      {
+       for (unsigned kk=0;kk<n_position_type;kk++)
+        {
+         for (unsigned ii=0;ii<DIM;ii++)
+          {
+           for (unsigned aa=0;aa<DIM;aa++)
+            {
+             for (unsigned bb=aa;bb<DIM;bb++) 
+              {
+               d_G_dX(ll,kk,ii,aa,bb)=
+                interpolated_G(aa,ii)*dpsidxi(ll,kk,bb)+
+                interpolated_G(bb,ii)*dpsidxi(ll,kk,aa);
+              }
+            }
+          }
+        }
+      }
+
+#ifdef TIME_SOLID_JAC
+      this->Solid_timer.halt(1);     
+#endif
+
+    }
 
    // Incompressible: Compute the deviatoric part of the stress tensor, the
    // contravariant deformed metric tensor and the determinant
@@ -464,6 +815,79 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
    if(this->Incompressible)
     {
      this->get_stress(g,G,sigma_dev,Gup,detG);
+     
+     // Get Jacobian too?
+     if (flag==1)
+      {
+
+#ifdef TIME_SOLID_JAC
+       this->Solid_timer.start(1);
+#endif
+
+       // FD step
+       double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
+       
+       //Advanced metric tensor etc.
+       DenseMatrix<double> G_pls(DIM,DIM);
+       DenseMatrix<double> sigma_dev_pls(DIM,DIM);
+       DenseMatrix<double> Gup_pls(DIM,DIM);
+       double detG_pls;
+
+       // Copy across
+       for (unsigned i=0;i<DIM;i++)
+        {
+         for (unsigned j=0;j<DIM;j++)
+          {
+           G_pls(i,j)=G(i,j);
+          }
+        }
+       
+       // Do FD -- only w.r.t. to upper indices, exploiting symmetry.
+       // NOTE: We exploit the symmetry of the stress and metric tensors
+       //       by incrementing G(i,j) and G(j,i) simultaenously and
+       //       only fill in the "upper" triangles without copying things
+       //       across the lower triangle. This is taken into account
+       //       in the remaining code further below.
+       for(unsigned i=0;i<DIM;i++)
+        {
+         for (unsigned j=i;j<DIM;j++)
+          {
+           G_pls(i,j) += eps_fd;
+           G_pls(j,i) = G_pls(i,j);
+
+           // Get advanced stress
+           this->get_stress(g,G_pls,sigma_dev_pls,Gup_pls,detG_pls);
+           
+           // Derivative of determinant of deformed metric tensor
+           d_detG_dG(i,j)=(detG_pls-detG)/eps_fd;
+
+           // Derivatives of deviatoric stress and "upper" deformed metric
+           // tensor
+           for (unsigned ii=0;ii<DIM;ii++)
+            {
+             for (unsigned jj=ii;jj<DIM;jj++)
+              {
+               d_stress_dG(ii,jj,i,j)=(sigma_dev_pls(ii,jj)-
+                                       sigma_dev(ii,jj))/eps_fd;
+               d_Gup_dG(ii,jj,i,j)=(Gup_pls(ii,jj)-Gup(ii,jj))/eps_fd;
+              }        
+            }
+           
+           // Reset 
+           G_pls(i,j) = G(i,j);
+           G_pls(j,i) = G(j,i);
+
+          }
+         
+        }
+
+#ifdef TIME_SOLID_JAC
+      this->Solid_timer.halt(1);
+#endif
+     
+      }
+     
+
     }
    // Nearly incompressible: Compute the deviatoric part of the 
    // stress tensor, the contravariant deformed metric tensor,
@@ -471,57 +895,355 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
    else
     {
      this->get_stress(g,G,sigma_dev,Gup,gen_dil,inv_kappa);
-    }
 
+     // Get Jacobian too?
+     if (flag==1) 
+      {
+
+#ifdef TIME_SOLID_JAC
+       this->Solid_timer.start(1);
+#endif
+       
+       // FD step 
+       double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
+       
+       //Advanced metric tensor etc
+       DenseMatrix<double> G_pls(DIM,DIM);
+       DenseMatrix<double> sigma_dev_pls(DIM,DIM);
+       DenseMatrix<double> Gup_pls(DIM,DIM);
+       double gen_dil_pls;
+
+       // Copy across
+       for (unsigned i=0;i<DIM;i++)
+        {
+         for (unsigned j=0;j<DIM;j++)
+          {
+           G_pls(i,j)=G(i,j);
+          }
+        }
+       
+       
+       // Do FD -- only w.r.t. to upper indices, exploiting symmetry.
+       // NOTE: We exploit the symmetry of the stress and metric tensors
+       //       by incrementing G(i,j) and G(j,i) simultaenously and
+       //       only fill in the "upper" triangles without copying things
+       //       across the lower triangle. This is taken into account
+       //       in the remaining code further below.
+       for(unsigned i=0;i<DIM;i++)
+        {
+         for (unsigned j=i;j<DIM;j++)
+          {
+           G_pls(i,j) += eps_fd;
+           G_pls(j,i) = G_pls(i,j);
+
+           // Get advanced stress
+           this->get_stress(g,G_pls,sigma_dev_pls,Gup_pls,gen_dil_pls,inv_kappa);
+
+           // Derivative of generalised dilatation
+           d_gen_dil_dG(i,j)=(gen_dil_pls-gen_dil)/eps_fd;
+
+           // Derivatives of deviatoric stress and "upper" deformed metric
+           // tensor
+           for (unsigned ii=0;ii<DIM;ii++)
+            {
+             for (unsigned jj=ii;jj<DIM;jj++)
+              {
+               d_stress_dG(ii,jj,i,j)=(sigma_dev_pls(ii,jj)-
+                                       sigma_dev(ii,jj))/eps_fd;
+               d_Gup_dG(ii,jj,i,j)=(Gup_pls(ii,jj)-Gup(ii,jj))/eps_fd;
+              }        
+            }
+           
+           // Reset 
+           G_pls(i,j) = G(i,j); 
+           G_pls(j,i) = G(j,i); 
+          }
+        }
+
+#ifdef TIME_SOLID_JAC
+      this->Solid_timer.halt(1);
+#endif
+
+      }
+    }
 
 //=====EQUATIONS OF ELASTICITY FROM PRINCIPLE OF VIRTUAL DISPLACEMENTS========
        
+   unsigned n_master=1;
+   double hang_weight=1.0;
+
    //Loop over the test functions, nodes of the element
    for(unsigned l=0;l<n_node;l++)
     {
      //Get pointer to local node l
      Node* local_node_pt = node_pt(l);
-
-     //If the node is NOT a hanging node
-     if(local_node_pt->is_hanging()==false)
+     
+     // Cache hang status
+     bool is_hanging=local_node_pt->is_hanging();
+     
+     //If the node is a hanging node
+     if(is_hanging)
+      {      
+       n_master = local_node_pt->hanging_pt()->nmaster();
+      }
+     // Otherwise the node is its own master
+     else
       {
-       //Loop over the types of dof
+       n_master=1;
+      }
+     
+     
+     // Storage for local equation numbers at node indexed by
+     // type and direction
+     DenseMatrix<int> position_local_eqn_at_node(n_position_type,DIM);
+     
+     // Loop over the master nodes
+     for(unsigned m=0;m<n_master;m++)
+      {
+       
+       if (is_hanging)
+        {
+         //Find the equation numbers
+         position_local_eqn_at_node = 
+          local_position_hang_eqn(local_node_pt->
+                                  hanging_pt()->master_node_pt(m));
+         
+         //Find the hanging node weight
+         hang_weight = local_node_pt->hanging_pt()->master_weight(m);         
+        }
+       else
+        {
+         //Loop of types of dofs
+         for(unsigned k=0;k<n_position_type;k++)
+          {
+           //Loop over the displacement components
+           for(unsigned i=0;i<DIM;i++)
+            {
+             position_local_eqn_at_node(k,i) = position_local_eqn(l,k,i);
+            }
+          }
+         
+         // Hang weight is one
+         hang_weight=1.0;
+        }
+       
+       
+       //Loop of types of dofs
        for(unsigned k=0;k<n_position_type;k++)
         {
          //Loop over the displacement components
          for(unsigned i=0;i<DIM;i++)
           {
-           local_eqn = position_local_eqn(l,k,i);
+           local_eqn = position_local_eqn_at_node(k,i);
+
            /*IF it's not a boundary condition*/
            if(local_eqn >= 0)
             {
              // Acceleration and body force
              residuals[local_eqn] += 
-              (Lambda_sq*accel[i]-b[i])*psi(l,k)*W;
+              (Lambda_sq*accel[i]-b[i])*psi(l,k)*W*hang_weight;
              
              // Stress term
              for(unsigned a=0;a<DIM;a++)
               {
                for(unsigned b=0;b<DIM;b++)
                 {
-                 //Add the "stress" terms to the residuals
-                 residuals[local_eqn] += 
+                 //Add the stress terms to the residuals
+                 residuals[local_eqn] +=
                   (sigma_dev(a,b) - interpolated_solid_p*Gup(a,b))
-                  *interpolated_G(a,i)*dpsidxi(l,k,b)*W;
+                  *interpolated_G(a,i)*dpsidxi(l,k,b)*W*hang_weight;
                 }
               }
              
+             
+             
+             // Get Jacobian too?
+             if (flag==1)
+              {
+               
+#ifdef TIME_SOLID_JAC
+               this->Solid_timer.start(2);
+#endif
+               
+               // Default setting for non-hanging node
+               unsigned nn_master=1;
+               double hhang_weight=1.0;
+               
+               //Loop over the nodes of the element again
+               for(unsigned ll=0;ll<n_node;ll++)
+                {
+                 //Get pointer to local node ll
+                 Node* llocal_node_pt = node_pt(ll);
+                 
+                 // Cache hang status
+                 bool iis_hanging=llocal_node_pt->is_hanging();
+                 
+                 //If the node is a hanging node
+                 if(iis_hanging)
+                  {      
+                   nn_master = llocal_node_pt->hanging_pt()->nmaster();
+                  }
+                 // Otherwise the node is its own master
+                 else
+                  {
+                   nn_master=1;
+                  }
+                 
+                 
+                 // Storage for local unknown numbers at node indexed by
+                 // type and direction
+                 DenseMatrix<int> position_local_unk_at_node(n_position_type,
+                                                             DIM);
+                 
+                 // Loop over the master nodes
+                 for(unsigned mm=0;mm<nn_master;mm++)
+                  {
+                   
+                   if (iis_hanging)
+                    {
+                     //Find the unknown numbers
+                     position_local_unk_at_node = 
+                      local_position_hang_eqn(
+                       llocal_node_pt->
+                       hanging_pt()->master_node_pt(mm));
+                     
+                     //Find the hanging node weight
+                     hhang_weight = llocal_node_pt->hanging_pt()->
+                      master_weight(mm);         
+                    }
+                   else
+                    {
+                     //Loop of types of dofs
+                     for(unsigned kk=0;kk<n_position_type;kk++)
+                      {
+                       //Loop over the displacement components
+                       for(unsigned ii=0;ii<DIM;ii++)
+                        {
+                         position_local_unk_at_node(kk,ii) = 
+                          position_local_eqn(ll,kk,ii);
+                        }
+                      }
+                     
+                     // Hang weight is one
+                     hhang_weight=1.0;
+                    }
+                   
+                   
+                   //Loop of types of dofs again
+                   for(unsigned kk=0;kk<n_position_type;kk++)
+                    {
+                     //Loop over the displacement components again
+                     for(unsigned ii=0;ii<DIM;ii++)
+                      {
+                       //Get the number of the unknown
+                       int local_unknown = position_local_unk_at_node(kk,ii);
+                       
+                       /*IF it's not a boundary condition*/
+                       if(local_unknown >= 0)
+                        {
+                         
+                         // General stress term
+                         double sum=0.0;
+                         for(unsigned a=0;a<DIM;a++)
+                          {
+                           for(unsigned b=a;b<DIM;b++)
+                            {
+                             double factor=1.0;
+                             if (a!=b) factor=2.0;
+                             for(unsigned aa=0;aa<DIM;aa++)
+                              {
+                               // Only upper half of derivatives w.r.t. 
+                               // symm tensor
+                               for(unsigned bb=aa;bb<DIM;bb++)
+                                {                             
+                                 sum+=factor*0.5*
+                                  (d_stress_dG(a,b,aa,bb)-
+                                   interpolated_solid_p*d_Gup_dG(a,b,aa,bb))*
+                                  d_G_dX(ll,kk,ii,aa,bb)*
+                                  d_G_dX( l, k, i, a, b);
+                                }
+                              }
+                            }
+                          }
+                         
+                         // Add diagonal terms
+                         if (i==ii)
+                          {
+                           // Inertia term
+                           sum+=Lambda_sq*time_factor*psi(ll,kk)*psi(l,k);
+                           
+                           // Stress term
+                           for(unsigned a=0;a<DIM;a++)
+                            {
+                             for(unsigned b=0;b<DIM;b++) 
+                              {
+                               sum+=
+                                (sigma_dev(a,b)-interpolated_solid_p*Gup(a,b))*
+                                dpsidxi(ll,kk,a)*
+                                dpsidxi(l,k,b);
+                              }
+                            }
+                          }
+                         
+                         // Multiply by weight and add contribution
+                         jacobian(local_eqn,local_unknown)+=
+                          sum*W*hang_weight*hhang_weight;
+                         
+                        } //End of if not boundary condition
+                      }
+                    }
+                  }
+                }
+#ifdef TIME_SOLID_JAC
+              this->Solid_timer.halt(2);
+#endif
+              }
+             
              //Can add in the pressure jacobian terms
-             if(flag)
+             if (flag>0)
               {
                //Loop over the pressure nodes
                for(unsigned l2=0;l2<n_solid_pres;l2++)
                 {
-                 //If the pressure dof is not hanging
-                 if(solid_pressure_dof_is_hanging[l2]==false)
+                 unsigned n_master2=1;
+                 double hang_weight2=1.0;
+                 HangInfo* hang_info2_pt =0;
+                 
+                 bool is_hanging2=solid_pressure_dof_is_hanging[l2];  
+                 if (is_hanging2)
                   {
+                   //Get the HangInfo object associated with the
+                   //hanging solid pressure
+                   hang_info2_pt =
+                    solid_pressure_node_pt(l2)->hanging_pt(solid_p_index);
+                   
+                    n_master2 = hang_info2_pt->nmaster();
+                  }
+                 else
+                  {
+                   n_master2 = 1;
+                  }
+
+                 //Loop over all the master nodes                   
+                 for(unsigned m2=0;m2<n_master2;m2++)
+                  {                   
+                   if (is_hanging2)
+                    {
+                     //Get the equation numbers at the master node
+                     local_unknown = 
+                      local_hang_eqn(hang_info2_pt->master_node_pt(m2),
+                                     solid_p_index);
+                     
+                     //Find the hanging node weight at the node
+                     hang_weight2=hang_info2_pt->master_weight(m2);
+                    }
+                   else
+                    {
+                     local_unknown=this->solid_p_local_eqn(l2);
+                     hang_weight2=1.0;
+                    }
+                   
                    //If it's not a boundary condition
-                   local_unknown = this->solid_p_local_eqn(l2);
                    if(local_unknown >= 0)
                     {
                      //Add the pressure terms to the jacobian
@@ -531,182 +1253,70 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
                         {
                          jacobian(local_eqn,local_unknown) -=
                           psisp[l2]*Gup(a,b)*
-                          interpolated_G(a,i)*dpsidxi(l,k,b)*W;
+                          interpolated_G(a,i)*dpsidxi(l,k,b)*W
+                          *hang_weight*hang_weight2;
                         }
                       }
                     }
-                  }
-                 //Otherwise the pressure dof is hanging
-                 else
-                  {
-                   //Get the HangInfo object associated with
-                   //the hanging solid pressure
-                   HangInfo* hang_info2_pt = 
-                    solid_pressure_node_pt(l2)->hanging_pt(solid_p_index);
-                   
-                   //Loop over all the master nodes
-                   unsigned n_master2 = hang_info2_pt->nmaster();
-                   for(unsigned m2=0;m2<n_master2;m2++)
-                    {
-                     //Get the equation numbers at the master node
-                     local_unknown = 
-                      local_hang_eqn(hang_info2_pt->master_node_pt(m2),
-                                     solid_p_index);
-                     
-                     //Find the hanging node weight at the node
-                     double hang_weight2
-                      = hang_info2_pt->master_weight(m2);
-                     
-                     //If it's not a boundary condition
-                     if(local_unknown >= 0)
-                      {
-                       for(unsigned a=0;a<DIM;a++)
-                        {
-                         for(unsigned b=0;b<DIM;b++)
-                          {
-                           jacobian(local_eqn,local_unknown) -=
-                            psisp[l2]*Gup(a,b)*
-                            interpolated_G(a,i)*dpsidxi(l,k,b)*W*
-                            hang_weight2;
-                          }
-                        }
-                      }
-                    } //End of loop over master weights
-                  }
+                  } //End of loop over master nodes                
                 } //End of loop over pressure dofs
               } //End of Jacobian terms
-
+             
             } //End of if not boundary condition
-          } //End of loop over coordinate directions
-        } //End of loop over types of dof
-       
-      } //End of if not hanging
-     //Hanging case
-     else
-      {
-       //Load the local hang info object
-       HangInfo* hang_info_pt = local_node_pt->hanging_pt();
-       //Loop over the master nodes
-       unsigned n_master = hang_info_pt->nmaster();
-       for(unsigned m=0;m<n_master;m++)
-        {
-         //Find the equation numbers
-         DenseMatrix<int> Position_local_eqn_at_node;
-         Position_local_eqn_at_node = 
-          local_position_hang_eqn(hang_info_pt->master_node_pt(m));
-         //Find the hanging node weight
-         double hang_weight = hang_info_pt->master_weight(m);
-         
-         //Loop of types of dofs
-         for(unsigned k=0;k<n_position_type;k++)
-          {
-           //Loop over the displacement components
-           for(unsigned i=0;i<DIM;i++)
-            {
-             local_eqn = Position_local_eqn_at_node(k,i);
-             /*IF it's not a boundary condition*/
-             if(local_eqn >= 0)
-              {
-               // Acceleration and body force
-               residuals[local_eqn] += 
-                (Lambda_sq*accel[i]-b[i])*psi(l,k)*W*hang_weight;
-               
-               // Stress term
-               for(unsigned a=0;a<DIM;a++)
-                {
-                 for(unsigned b=0;b<DIM;b++)
-                  {
-                   //Add the stress terms to the residuals
-                   residuals[local_eqn] +=
-                    (sigma_dev(a,b) - interpolated_solid_p*Gup(a,b))
-                    *interpolated_G(a,i)*dpsidxi(l,k,b)*W*hang_weight;
-                  }
-                }
-               
-               //Can add in the pressure jacobian terms
-               if(flag)
-                {
-                 //Loop over the pressure nodes
-                 for(unsigned l2=0;l2<n_solid_pres;l2++)
-                  {
-                   //If the pressure dof is not hanging
-                   if(solid_pressure_dof_is_hanging[l2]==false)
-                    {
-                     local_unknown = this->solid_p_local_eqn(l2);
-                     //If it's not a boundary condition
-                     if(local_unknown >= 0)
-                      {
-                       //Add the pressure terms to the jacobian
-                       for(unsigned a=0;a<DIM;a++)
-                        {
-                         for(unsigned b=0;b<DIM;b++)
-                          {
-                           jacobian(local_eqn,local_unknown) -=
-                            psisp[l2]*Gup(a,b)*
-                            interpolated_G(a,i)*dpsidxi(l,k,b)*W
-                            *hang_weight;
-                          }
-                        }
-                      }
-                    }
-                   //Otherwise the pressure dof is hanging
-                   else
-                    {
-                     //Get the HangInfo object associated with the
-                     //hanging solid pressure
-                     HangInfo* hang_info2_pt =
-                      solid_pressure_node_pt(l2)->hanging_pt(solid_p_index);
-
-                     //Loop over all the master nodes
-                     unsigned n_master2 = hang_info2_pt->nmaster();
-                     for(unsigned m2=0;m2<n_master2;m2++)
-                      {
-                       //Get the equation numbers at the master node
-                       local_unknown = 
-                        local_hang_eqn(hang_info2_pt->master_node_pt(m2),
-                                       solid_p_index);
-                       
-                       //Find the hanging node weight at the node
-                       double hang_weight2
-                        = hang_info2_pt->master_weight(m2);
-                       
-                       //If it's not a boundary condition
-                       if(local_unknown >= 0)
-                        {
-                         //Add the pressure terms to the jacobian
-                         for(unsigned a=0;a<DIM;a++)
-                          {
-                           for(unsigned b=0;b<DIM;b++)
-                            {
-                             jacobian(local_eqn,local_unknown) -=
-                              psisp[l2]*Gup(a,b)*
-                              interpolated_G(a,i)*dpsidxi(l,k,b)*W
-                              *hang_weight*hang_weight2;
-                            }
-                          }
-                        }
-                      } //End of loop over master weights
-                    }
-                  } //End of loop over pressure dofs
-                } //End of Jacobian terms
-               
-              } //End of if not boundary condition
-            }
           }
         }
-      } //End of hanging node case
+      } // End of loop of over master nodes
      
-    } //End of loop over shape functions
-     
+    } //End of loop over nodes
+   
    //==============CONSTRAINT EQUATIONS FOR PRESSURE=====================
-       
+   
    //Now loop over the pressure degrees of freedom
    for(unsigned l=0;l<n_solid_pres;l++)
     {
-     //If the pressure dof is NOT hanging
-     if(solid_pressure_dof_is_hanging[l]==false)
+     
+     bool is_hanging=solid_pressure_dof_is_hanging[l];
+     
+     unsigned n_master=1;
+     double hang_weight=1.0;
+     HangInfo* hang_info_pt = 0;
+     
+     //If the node is a hanging node
+     if(is_hanging)
+      {      
+       //Get a pointer to the HangInfo object associated with the
+       //solid pressure (stored at solid_p_index)
+       hang_info_pt = 
+        solid_pressure_node_pt(l)->hanging_pt(solid_p_index);
+       
+       // Number of master nodes
+       n_master = hang_info_pt->nmaster();       
+      }
+     // Otherwise the node is its own master
+     else
       {
-       local_eqn = this->solid_p_local_eqn(l);
+       n_master=1;
+      }
+     
+     //Loop over all the master nodes
+     //Note that the pressure is stored at the inded solid_p_index 
+     for(unsigned m=0;m<n_master;m++)
+      {
+       if (is_hanging)
+        {
+         //Get the equation numbers at the master node
+         local_eqn = local_hang_eqn(hang_info_pt->master_node_pt(m),
+                                    solid_p_index);
+         
+         //Find the hanging node weight at the node
+         hang_weight = hang_info_pt->master_weight(m);
+         
+        }
+       else
+        {
+         local_eqn=this->solid_p_local_eqn(l);
+        }
+       
        // Pinned (unlikely, actually) or real dof?
        if(local_eqn >= 0)
         {
@@ -716,174 +1326,311 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
          //is equal to the volumetric growth factor
          if(this->Incompressible)
           {
-           residuals[local_eqn] += (detG - gamma)*psisp[l]*W;
+           residuals[local_eqn] += 
+            (detG - gamma)*psisp[l]*W*hang_weight;
            
-           //No Jacobian terms since the pressure does not feature
-           //in the incompressibility constraint
+           // Get Jacobian too?
+           if (flag==1) 
+            {
+
+#ifdef TIME_SOLID_JAC
+             this->Solid_timer.start(2);
+#endif
+             
+             // Default setting for non-hanging node
+             unsigned nn_master=1;
+             double hhang_weight=1.0;
+             
+             //Loop over the nodes of the element again
+             for(unsigned ll=0;ll<n_node;ll++)
+              {
+               //Get pointer to local node ll
+               Node* llocal_node_pt = node_pt(ll);
+               
+               // Cache hang status
+               bool iis_hanging=llocal_node_pt->is_hanging();
+               
+               //If the node is a hanging node
+               if(iis_hanging)
+                {      
+                 nn_master = llocal_node_pt->hanging_pt()->nmaster();
+                }
+               // Otherwise the node is its own master
+               else
+                {
+                 nn_master=1;
+                }
+               
+               // Storage for local unknown numbers at node indexed by
+               // type and direction
+               DenseMatrix<int> position_local_unk_at_node(n_position_type,
+                                                           DIM);
+               
+               // Loop over the master nodes
+               for(unsigned mm=0;mm<nn_master;mm++)
+                {
+                 
+                 if (iis_hanging)
+                  {
+                   //Find the unknown numbers
+                   position_local_unk_at_node = 
+                    local_position_hang_eqn(
+                     llocal_node_pt->
+                     hanging_pt()->master_node_pt(mm));
+                   
+                   //Find the hanging node weight
+                   hhang_weight = llocal_node_pt->hanging_pt()->
+                    master_weight(mm);         
+                  }
+                 else
+                  {
+                   //Loop of types of dofs
+                   for(unsigned kk=0;kk<n_position_type;kk++)
+                    {
+                     //Loop over the displacement components
+                     for(unsigned ii=0;ii<DIM;ii++)
+                      {
+                       position_local_unk_at_node(kk,ii) = 
+                        position_local_eqn(ll,kk,ii);
+                      }
+                    }
+                   
+                   // Hang weight is one
+                   hhang_weight=1.0;
+                  }
+                 
+                 
+                 //Loop of types of dofs again
+                 for(unsigned kk=0;kk<n_position_type;kk++)
+                  {
+                   //Loop over the displacement components again
+                   for(unsigned ii=0;ii<DIM;ii++)
+                    {
+                     //Get the number of the unknown
+                     int local_unknown = position_local_unk_at_node(kk,ii);
+                     
+                     /*IF it's not a boundary condition*/
+                     if(local_unknown >= 0)
+                      {
+                       // General stress term
+                       double sum=0.0;
+                       for(unsigned aa=0;aa<DIM;aa++)
+                        {
+                         // Only upper half
+                         for(unsigned bb=aa;bb<DIM;bb++)
+                          {          
+                           sum+=d_detG_dG(aa,bb)*d_G_dX(ll,kk,ii,aa,bb)*
+                            psisp(l);
+                          }
+                        }
+                       jacobian(local_eqn,local_unknown)+=
+                        sum*W*hang_weight*hhang_weight;
+                      }
+                    }
+                  }
+                }
+               
+              } 
+          
+             //No Jacobian terms due to pressure since it does not feature
+             //in the incompressibility constraint
+
+#ifdef TIME_SOLID_JAC
+            this->Solid_timer.halt(2);              
+#endif
+
+            }
+           
           }
          //Nearly incompressible: (Neg.) pressure given by product of
          //bulk modulus and generalised dilatation
          else
           {
            residuals[local_eqn] += 
-            (inv_kappa*interpolated_solid_p + gen_dil)*psisp[l]*W;
+            (inv_kappa*interpolated_solid_p + gen_dil)
+            *psisp[l]*W*hang_weight;
            
            //Add in the jacobian terms
-           if(flag)
+           if (flag==1) 
+            {
+
+#ifdef TIME_SOLID_JAC
+             this->Solid_timer.start(2);
+#endif
+             
+             // Default setting for non-hanging node
+             unsigned nn_master=1;
+             double hhang_weight=1.0;
+             
+             //Loop over the nodes of the element again
+             for(unsigned ll=0;ll<n_node;ll++)
+              {
+               //Get pointer to local node ll
+               Node* llocal_node_pt = node_pt(ll);
+               
+               // Cache hang status
+               bool iis_hanging=llocal_node_pt->is_hanging();
+               
+               //If the node is a hanging node
+               if(iis_hanging)
+                {      
+                 nn_master = llocal_node_pt->hanging_pt()->nmaster();
+                }
+               // Otherwise the node is its own master
+               else
+                {
+                 nn_master=1;
+                }
+               
+               
+               // Storage for local unknown numbers at node indexed by
+               // type and direction
+               DenseMatrix<int> position_local_unk_at_node(n_position_type,
+                                                           DIM);
+               
+               // Loop over the master nodes
+               for(unsigned mm=0;mm<nn_master;mm++)
+                {
+                 
+                 if (iis_hanging)
+                  {
+                   //Find the unknown numbers
+                   position_local_unk_at_node = 
+                    local_position_hang_eqn(llocal_node_pt->
+                                            hanging_pt()->master_node_pt(mm));
+                   
+                   //Find the hanging node weight
+                   hhang_weight = llocal_node_pt->hanging_pt()->
+                    master_weight(mm);         
+                  }
+                 else
+                  {
+                   //Loop of types of dofs
+                   for(unsigned kk=0;kk<n_position_type;kk++)
+                    {
+                     //Loop over the displacement components
+                     for(unsigned ii=0;ii<DIM;ii++)
+                      {
+                       position_local_unk_at_node(kk,ii) = 
+                        position_local_eqn(ll,kk,ii);
+                      }
+                    }
+                   
+                   // Hang weight is one
+                   hhang_weight=1.0;
+                  }
+                 
+                 
+                 //Loop of types of dofs again
+                 for(unsigned kk=0;kk<n_position_type;kk++)
+                  {
+                   //Loop over the displacement components again
+                   for(unsigned ii=0;ii<DIM;ii++)
+                    {
+                     //Get the number of the unknown
+                     int local_unknown = position_local_unk_at_node(kk,ii);
+                     
+                     /*IF it's not a boundary condition*/
+                     if(local_unknown >= 0)
+                      {
+                       // General stress term
+                       double sum=0.0;
+                       for(unsigned aa=0;aa<DIM;aa++)
+                        {
+                         // Only upper half
+                         for(unsigned bb=aa;bb<DIM;bb++)
+                          {
+                           sum+=d_gen_dil_dG(aa,bb)*d_G_dX(ll,kk,ii,aa,bb)*
+                            psisp(l);                
+                          }
+                        }
+                       jacobian(local_eqn,local_unknown)+=sum*W*
+                        hang_weight*hhang_weight;
+                      }
+                    }
+                  }
+                }
+              }
+
+#ifdef TIME_SOLID_JAC
+            this->Solid_timer.halt(2);
+#endif
+
+            }
+
+
+           //Add in the pressure jacobian terms
+           if (flag>0)
             {
              //Loop over the pressure nodes again
              for(unsigned l2=0;l2<n_solid_pres;l2++)
               {
-               //If the pressure is NOT hanging
-               if(solid_pressure_dof_is_hanging[l2]==false)
+               
+               bool is_hanging2=solid_pressure_dof_is_hanging[l2];
+               
+               unsigned n_master2=1;
+               double hang_weight2=1.0;
+               HangInfo* hang_info2_pt=0;
+               
+               if (is_hanging2)
                 {
-                 local_unknown = this->solid_p_local_eqn(l2);
-                 //If not pinnned 
-                 if(local_unknown >= 0)
-                  {
-                   jacobian(local_eqn,local_unknown)
-                    += inv_kappa*psisp[l2]*psisp[l]*W;
-                  }
+                 //Get pointer to hang info object
+                 //Note that the pressure is stored at
+                 //the index solid_p_index
+                 hang_info2_pt = 
+                  solid_pressure_node_pt(l2)->hanging_pt(solid_p_index);
+                 
+                 n_master2 = hang_info2_pt->nmaster();
                 }
-               //Otherwise, if it's hanging
                else
                 {
-                 //Get the HangInfo object associated with the
-                 //hanging solid pressure
-                 //Note that the pressure is stored at
-                 //the index solid_p_index at the node
-                 HangInfo* hang_info2_pt = 
-                  solid_pressure_node_pt(l2)->hanging_pt(solid_p_index);
- 
-                 //Loop over all the master nodes
-                 unsigned n_master2 = hang_info2_pt->nmaster();
-                 for(unsigned m2=0;m2<n_master2;m2++)
+                 n_master2=1;
+                }
+
+               //Loop over all the master nodes
+               for(unsigned m2=0;m2<n_master2;m2++)
+                {
+                 
+                 if (is_hanging2)
                   {
                    //Get the equation numbers at the master node
                    local_unknown = 
                     local_hang_eqn(hang_info2_pt->master_node_pt(m2),
                                    solid_p_index);
-                                      
+                   
                    //Find the hanging node weight at the node
-                   double hang_weight2
-                    = hang_info2_pt->master_weight(m2);
- 
-                   //If it's not a boundary condition
-                   if(local_unknown >= 0)
-                    {
-                     jacobian(local_eqn,local_unknown)
-                      += inv_kappa*psisp[l2]*psisp[l]*W*hang_weight2;
-                    }
+                   hang_weight2=hang_info2_pt->master_weight(m2);
                   }
-                } //End of hanging case
-              } //End of loop over pressure dofs
-            } //End of Jacobian
-          } //End of nearly incompressible case
-        } //End of if not boundary condition
-      }
-     //Otherwise the pressure is hanging
-     else
-      {
-       //Get a pointer to the HangInfo object associated with the
-       //solid pressure (stored at solid_p_index)
-       HangInfo* hang_info_pt = 
-        solid_pressure_node_pt(l)->hanging_pt(solid_p_index);
-
-       //Loop over all the master nodes
-       //Note that the pressure is stored at the inded solid_p_index 
-       unsigned n_master = hang_info_pt->nmaster();
-       for(unsigned m=0;m<n_master;m++)
-        {
-         //Get the equation numbers at the master node
-         local_eqn = local_hang_eqn(hang_info_pt->master_node_pt(m),
-                                    solid_p_index);
-         
-         
-         //Find the hanging node weight at the node
-         double hang_weight = hang_info_pt->master_weight(m);
-         
-         // Pinned (unlikely, actually) or real dof?
-         if(local_eqn >= 0)
-          {
-           //For true incompressibility we need to conserve volume
-           //so the determinant of the deformed metric tensor
-           //needs to be equal to that of the undeformed one, which
-           //is equal to the volumetric growth factor
-           if(this->Incompressible)
-            {
-             residuals[local_eqn] += 
-              (detG - gamma)*psisp[l]*W*hang_weight;
-             
-             //No Jacobian terms since the pressure does not feature
-             //in the incompressibility constraint
-            }
-           //Nearly incompressible: (Neg.) pressure given by product of
-           //bulk modulus and generalised dilatation
-           else
-            {
-             residuals[local_eqn] += 
-              (inv_kappa*interpolated_solid_p + gen_dil)
-              *psisp[l]*W*hang_weight;
-             
-             //Add in the jacobian terms
-             if(flag)
-              {
-               //Loop over the pressure nodes again
-               for(unsigned l2=0;l2<n_solid_pres;l2++)
-                {
-                 //If the pressure is NOT hanging
-                 if(solid_pressure_dof_is_hanging[l2]==false)
-                  {
-                   //If not pinnned
-                   local_unknown = this->solid_p_local_eqn(l2);
-                   if(local_unknown >= 0)
-                    {
-                     jacobian(local_eqn,local_unknown)
-                      += inv_kappa*psisp[l2]*psisp[l]*W*hang_weight;
-                    }
-                  }
-                 //Otherwise, if it's hanging
                  else
                   {
-                   //Get pointer to hang info object
-                   //Note that the pressure is stored at
-                   //the index solid_p_index
-                   HangInfo* hang_info2_pt = 
-                    solid_pressure_node_pt(l2)->hanging_pt(solid_p_index);
-                   
-                   //Loop over all the master nodes
-                   unsigned n_master2 = hang_info2_pt->nmaster();
-                   for(unsigned m2=0;m2<n_master2;m2++)
-                    {
-                     //Get the equation numbers at the master node
-                     local_unknown = 
-                      local_hang_eqn(hang_info2_pt->master_node_pt(m2),
-                                     solid_p_index);
-                     
-                     //Find the hanging node weight at the node
-                     double hang_weight2
-                      = hang_info2_pt->master_weight(m2);
-                    
-                     //If it's not a boundary condition
-                     if(local_unknown >= 0)
-                      {
-                       jacobian(local_eqn,local_unknown)
-                        += inv_kappa*psisp[l2]*psisp[l]*W*
-                        hang_weight*hang_weight2;
-                      }
-                    }
-                  } //End of hanging case
-                } //End of loop over pressure dofs
-              }//End of Jacobian
-            } //End of nearly incompressible case
-          } //End of if not boundary condition
-        } //End of loop over master nodes
-      } //End of hanging case
+                   local_unknown=this->solid_p_local_eqn(l2);
+                   hang_weight2=1.0;
+                  }
+                 
+                 //If it's not a boundary condition
+                 if(local_unknown >= 0)
+                  {
+                   jacobian(local_eqn,local_unknown)
+                    += inv_kappa*psisp[l2]*psisp[l]*W*
+                    hang_weight*hang_weight2;
+                  }
 
+                } // End of loop over master nodes
+              } //End of loop over pressure dofs
+            }//End of pressure Jacobian
+
+
+
+          } //End of nearly incompressible case
+        } //End of if not boundary condition
+      } //End of loop over master nodes
     } //End of loop over pressure dofs
-
   } //End of loop over integration points
-   
+
+#ifdef TIME_SOLID_JAC
+ if (flag>0) this->Solid_timer.halt(0);
+#endif
+
 }
 
 

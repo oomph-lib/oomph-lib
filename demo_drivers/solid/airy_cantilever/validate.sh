@@ -1,7 +1,7 @@
 #! /bin/sh
 
 #Set the number of tests to be checked
-NUM_TESTS=1
+NUM_TESTS=3
 
 # Setup validation directory
 #---------------------------
@@ -10,8 +10,8 @@ mkdir Validation
 
 #######################################################################
 
-# Validation for static disk compression
-#---------------------------------------
+# Validation for Airy cantilever
+#-------------------------------
 
 cd Validation
 mkdir RESLT
@@ -43,6 +43,112 @@ else
 ../../../../bin/fpdiff.py ../validata/result.dat.gz \
     result.dat  >> validation.log
 fi
+
+
+# Validation for Airy cantilever with different constitutive equations 
+#---------------------------------------------------------------------
+# and analytical/FD Jacobian without adaptation
+#----------------------------------------------
+
+mkdir RESLT_norefine0
+mkdir RESLT_norefine1
+mkdir RESLT_norefine2
+mkdir RESLT_norefine3
+mkdir RESLT_norefine4
+mkdir RESLT_norefine5
+mkdir RESLT_norefine6
+mkdir RESLT_norefine7
+mkdir RESLT_norefine8
+mkdir RESLT_norefine9
+
+
+
+echo "Running Airy cantilever validation (2): const. eqns & analyt/FD Jacobian & no adapt "
+../airy_cantilever2_noadapt > OUTPUT_constitutive_eqns_norefine
+
+
+echo "done"
+echo " " >> validation.log
+echo "Airy cantilever validation (2): const. eqns & analyt/FD Jacobian & no adapt" >> validation.log
+echo "---------------------------------------=------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat \
+RESLT_norefine0/soln1.dat \
+RESLT_norefine1/soln1.dat \
+RESLT_norefine2/soln1.dat \
+RESLT_norefine3/soln1.dat \
+RESLT_norefine4/soln1.dat \
+RESLT_norefine5/soln1.dat \
+RESLT_norefine6/soln1.dat \
+RESLT_norefine7/soln1.dat \
+RESLT_norefine8/soln1.dat \
+RESLT_norefine9/soln1.dat \
+    > result_norefine.dat
+
+if test "$1" = "no_python"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/result_norefine.dat.gz \
+    result_norefine.dat  >> validation.log
+fi
+
+
+
+# Validation for Airy cantilever with different constitutive equations 
+#---------------------------------------------------------------------
+# and analytical/FD Jacobian with adaptation
+#----------------------------------------------
+
+mkdir RESLT_refine0
+mkdir RESLT_refine1
+mkdir RESLT_refine2
+mkdir RESLT_refine3
+mkdir RESLT_refine4
+mkdir RESLT_refine5
+mkdir RESLT_refine6
+mkdir RESLT_refine7
+mkdir RESLT_refine8
+mkdir RESLT_refine9
+
+
+echo "Running Airy cantilever validation (3): const. eqns & analyt/FD Jacobian & adapt "
+../airy_cantilever2_adapt > OUTPUT_constitutive_eqns_refine
+
+
+echo "done"
+echo " " >> validation.log
+echo "Airy cantilever validation (3): const. eqns & analyt/FD Jacobian & adapt" >> validation.log
+echo "---------------------------------------=------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat \
+RESLT_refine0/soln1.dat \
+RESLT_refine1/soln1.dat \
+RESLT_refine2/soln1.dat \
+RESLT_refine3/soln1.dat \
+RESLT_refine4/soln1.dat \
+RESLT_refine5/soln1.dat \
+RESLT_refine6/soln1.dat \
+RESLT_refine7/soln1.dat \
+RESLT_refine8/soln1.dat \
+RESLT_refine9/soln1.dat \
+    > result_refine.dat
+
+if test "$1" = "no_python"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/result_refine.dat.gz \
+    result_refine.dat  >> validation.log
+fi
+
+
 
 
 # Append output to global validation log file

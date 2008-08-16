@@ -276,7 +276,7 @@ fill_in_contribution_to_residuals_beam(Vector<double> &residuals)
  // Set up the initial conditions, if an IC pointer has been set
  if(Solid_ic_pt!=0)
   {
-   add_residuals_for_ic(residuals);
+   fill_in_residuals_for_solid_ic(residuals);
    return;
   }
  
@@ -508,7 +508,7 @@ fill_in_contribution_to_residuals_beam(Vector<double> &residuals)
 //=======================================================================
 void KirchhoffLoveBeamEquations::
 fill_in_contribution_to_jacobian(Vector<double>& residuals,
-                             DenseMatrix<double>& jacobian)
+                                 DenseMatrix<double>& jacobian)
 {
  //Call the element's residuals vector
  fill_in_contribution_to_residuals_beam(residuals);
@@ -516,19 +516,21 @@ fill_in_contribution_to_jacobian(Vector<double>& residuals,
  //Solve for the consistent acceleration in Newmark scheme?
  if(Solve_for_consistent_newmark_accel_flag)
   {
-   SolidFiniteElement::add_jacobian_for_newmark_accel(jacobian);
+   SolidFiniteElement::fill_in_jacobian_for_newmark_accel(jacobian);
    return;
   }
 
  //Allocate storage for the full residuals of the element
  unsigned n_dof = ndof();
  Vector<double> full_residuals(n_dof); 
+
  //Call the full residuals
  get_residuals(full_residuals);
 
  //Get the solid entries in the jacobian using finite differences
  SolidFiniteElement::
   fill_in_jacobian_from_solid_position_by_fd(full_residuals,jacobian);
+
  //Get the entries from the external data, usually load terms
  SolidFiniteElement::
   fill_in_jacobian_from_external_by_fd(full_residuals,jacobian);

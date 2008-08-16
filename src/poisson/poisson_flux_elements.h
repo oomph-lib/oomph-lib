@@ -203,7 +203,7 @@ private:
  /// Jacobian as well. 
  void fill_in_generic_residual_contribution_poisson_flux(
   Vector<double> &residuals, DenseMatrix<double> &jacobian, 
-  unsigned flag);
+  const unsigned& flag);
  
  
  /// Function pointer to the (global) prescribed-flux function
@@ -387,7 +387,7 @@ template<class ELEMENT>
 void PoissonFluxElement<ELEMENT>::
 fill_in_generic_residual_contribution_poisson_flux(
  Vector<double> &residuals, DenseMatrix<double> &jacobian, 
- unsigned flag)
+ const unsigned& flag)
 {
  //Find out how many nodes there are
  const unsigned n_node = nnode();

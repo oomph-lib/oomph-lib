@@ -1157,6 +1157,12 @@ ElasticFreeSurfaceRotationProblem(DocInfo& doc_info,
 
    el_pt->constitutive_law_pt() = Constitutive_law_pt;
 
+   // Get Jacobian by FD -- yes for now
+   // hierher -- change this when Pseudo-solid elements have 
+   // been updated to take availability of analytical solid 
+   // Jacobian into account
+   //el_pt->evaluate_jacobian_by_fd()=true;
+  
    //Set the Reynolds number, etc
    el_pt->re_pt() = &Global_Physical_Variables::Re;
 

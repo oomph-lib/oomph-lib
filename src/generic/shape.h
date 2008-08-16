@@ -416,6 +416,30 @@ class DShape
    return DPsi[(i*Index2 + j)*Index3 + k];
   }
 
+ /// \short Direct access to internal storage of data in flat-packed C-style 
+ /// column-major format. WARNING: Only for experienced users. Only
+ /// use this if raw speed is of the essence, as in the solid mechanics 
+ /// problems.
+ inline double& raw_direct_access(const unsigned long &i)
+  {return DPsi[i];}
+
+ /// \short Direct access to internal storage of data in flat-packed C-style 
+ /// column-major format. WARNING: Only for experienced users. Only
+ /// use this if raw speed is of the essence, as in the solid mechanics 
+ /// problems.
+ inline const double& raw_direct_access(const unsigned long &i) const
+  {return DPsi[i];}
+
+ /// \short Caculate the offset in flat-packed C-style, column-major format,
+ /// required for a given i,j. WARNING: Only for experienced users. Only
+ /// use this if raw speed is of the essence, as in the solid mechanics 
+ /// problems.
+ unsigned offset(const unsigned long &i,
+                 const unsigned long &j) const
+  {return (i*Index2 + j)*Index3 + 0;}
+
+
+
  /// Return the range of index 1 of the derivatives of the shape functions
  inline unsigned long nindex1() const {return Index1;}
 

@@ -1594,12 +1594,12 @@ void Node::remove_from_boundary(const unsigned &b)
 }
 
 //=========================================================================
-/// Inteface for function to get the position of the node on boundary b
-/// in the intrinsic (boundary) coordinates. Broken here in order to 
+/// Interface for function to get the k-th generalised boundary coordinate
+/// of the node on boundary b. Broken here in order to 
 /// provide run-time error reporting. Must be overloaded by all boundary
 /// nodes.
 //=========================================================================
-void Node::get_coordinates_on_boundary(const unsigned &b, 
+void Node::get_coordinates_on_boundary(const unsigned &b, const unsigned& k,
                                        Vector<double> &boundary_zeta)
 {
  throw OomphLibError("Non-boundary Node cannot have boundary coordinates",
@@ -1609,11 +1609,11 @@ void Node::get_coordinates_on_boundary(const unsigned &b,
 
 
 //=========================================================================
-/// Interface for function to set the position of the node on boundary b
-/// in the intrinsic (boundary) coordinates. Broken here to provide 
+/// Interface for function to set the k-th generalised boundary coordinate
+///  of the node on boundary b. Broken here to provide 
 /// run-time error reports. Must be overloaded by all boundary nodes.
 //=========================================================================
-void Node::set_coordinates_on_boundary(const unsigned &b, 
+void Node::set_coordinates_on_boundary(const unsigned &b, const unsigned& k,
                                        const Vector<double> &boundary_zeta)
 {
  throw OomphLibError("Non-boundary Node cannot have boundary coordinates",
@@ -2083,7 +2083,7 @@ BoundaryNodeBase::~BoundaryNodeBase()
  if(Boundary_coordinates_pt != 0)
   {
    //Loop over the boundary coordinate entries and delete them
-   for(std::map<unsigned,Vector<double> *>::iterator it 
+   for(std::map<unsigned,DenseMatrix<double> *>::iterator it 
         = Boundary_coordinates_pt->begin();
        it!=Boundary_coordinates_pt->end();++it)
     {
@@ -2184,11 +2184,11 @@ bool BoundaryNodeBase::is_on_boundary(const unsigned &b)
 }
 
 //=========================================================================
-/// Given the mesh boundary b, return the boundary coordinates of the node
-/// in the vector boundary_zeta
+/// Given the mesh boundary b, return the k-th generalised boundary 
+/// coordinates of the node in the vector boundary_zeta
 //=========================================================================
 void BoundaryNodeBase::
-get_coordinates_on_boundary(const unsigned &b, 
+get_coordinates_on_boundary(const unsigned &b, const unsigned& k,
                             Vector<double> &boundary_zeta)
 {
  //Check that the node lies on a boundary
@@ -2231,7 +2231,7 @@ get_coordinates_on_boundary(const unsigned &b,
  
  
  //Find out how may coordinates there are from the map
- const unsigned nboundary_coord = (*Boundary_coordinates_pt)[b]->size();
+ const unsigned nboundary_coord = (*Boundary_coordinates_pt)[b]->nrow();
 #ifdef PARANOID
  if(nboundary_coord != boundary_zeta.size())
   {
@@ -2251,16 +2251,16 @@ get_coordinates_on_boundary(const unsigned &b,
 
  //Loop over and assign the coordinates
  for(unsigned i=0;i<nboundary_coord;i++)
-  {boundary_zeta[i] = (*(*Boundary_coordinates_pt)[b])[i];}
+  {boundary_zeta[i] = (*(*Boundary_coordinates_pt)[b])(i,k);}
 }
 
 
 //=========================================================================
-/// Given the mesh boundary b, set the boundary coordinates of the node
-/// from the vector boundary_zeta
+/// Given the mesh boundary b, set the k-th generalised boundary 
+/// coordinates of the node from the vector boundary_zeta
 //=========================================================================
 void BoundaryNodeBase::
-set_coordinates_on_boundary(const unsigned &b, 
+set_coordinates_on_boundary(const unsigned &b,  const unsigned& k,
                             const Vector<double> &boundary_zeta)
 {
  //Check that the node lies on a boundary
@@ -2287,7 +2287,7 @@ set_coordinates_on_boundary(const unsigned &b,
  //If the storage has not been assigned, then assign it
  if(Boundary_coordinates_pt == 0)
   {
-   Boundary_coordinates_pt = new std::map<unsigned,Vector<double> *>;
+   Boundary_coordinates_pt = new std::map<unsigned,DenseMatrix<double> *>;
   }
 
   
@@ -2297,17 +2297,30 @@ set_coordinates_on_boundary(const unsigned &b,
  //Allocate the vector for the boundary coordinates, if we haven't already
  if((*Boundary_coordinates_pt)[b] == 0)
   {
-   (*Boundary_coordinates_pt)[b] = new Vector<double>(nboundary_coord);
+   // Need k+1 columns initially
+   (*Boundary_coordinates_pt)[b] = 
+    new DenseMatrix<double>(nboundary_coord,k+1);
   }
- //Otherwise resize it, in case the number of boundary coordinates has changed
+ //Otherwise resize it, in case the number of boundary coordinates 
+ //or the number of types has changed
  else
   {
-   (*Boundary_coordinates_pt)[b]->resize(nboundary_coord);
+   // Adjust number of boundary coordinates -- retain number of types
+   unsigned ncol=(*Boundary_coordinates_pt)[b]->ncol();
+   {
+    (*Boundary_coordinates_pt)[b]->resize(nboundary_coord,ncol);
+   }
+   
+   // Resize number of types if required
+   if ((k+1)>(*Boundary_coordinates_pt)[b]->ncol())
+    {
+     (*Boundary_coordinates_pt)[b]->resize(nboundary_coord,k+1);
+    }
   }
-
+ 
  //Loop over and assign the coordinates
  for(unsigned i=0;i<nboundary_coord;i++)
-  {(*(*Boundary_coordinates_pt)[b])[i] = boundary_zeta[i];}
+  {(*(*Boundary_coordinates_pt)[b])(i,k) = boundary_zeta[i];}
 }
 
 

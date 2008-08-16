@@ -128,12 +128,10 @@ public:
 #ifdef PARANOID
    {
   //Check that the element is not a refineable 3d element
-  ELEMENT* elem_pt = new ELEMENT;
-  //If it's three-d
-  if(elem_pt->dim()==3)
+  if(element_pt->dim()==3)
    {
     //Is it refineable
-    if(dynamic_cast<RefineableElement*>(elem_pt))
+    if(dynamic_cast<RefineableElement*>(element_pt))
      {
       //Issue a warning
       OomphLibWarning(
@@ -491,8 +489,9 @@ fill_in_contribution_to_residuals_solid_traction(Vector<double> &residuals)
    //Vector in which to hold the intrinsic coordinate
    Vector<double> zeta(dim());
  
-   //Get the boundary coordinate at node n
-   node_pt(n)->get_coordinates_on_boundary(Boundary_number_in_bulk_mesh,zeta);
+   //Get the k-th boundary coordinate at node n
+   node_pt(n)->get_coordinates_on_boundary(
+    Boundary_number_in_bulk_mesh,k,zeta);
 
    //Return the individual coordinate
    return zeta[i];

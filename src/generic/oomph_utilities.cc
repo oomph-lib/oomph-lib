@@ -99,6 +99,67 @@ namespace MathematicalConstants
 
 
 
+//====================================================================
+/// Namespace for global (cumulative) timings
+//====================================================================
+namespace CumulativeTimings
+{
+
+ /// (Re-)start i-th timer
+ void start(const unsigned& i)
+ {
+  Start_time[i]=clock();
+ }
+
+ /// Halt i-th timer
+ void halt(const unsigned& i)
+ {
+  Timing[i]+=clock()-Start_time[i];
+ }
+
+ /// Report time accumulated by i-th timer
+ double cumulative_time(const unsigned& i)
+ {
+  return double(Timing[i])/CLOCKS_PER_SEC;
+ }
+
+ /// Reset i-th timer
+ void reset(const unsigned& i)
+ {
+  Timing[i]=clock_t(0.0);
+ }
+
+ /// Reset all timers
+ void reset()
+ {
+  unsigned n=Timing.size();
+  for (unsigned i=0;i<n;i++)
+   {
+    Timing[i]=clock_t(0.0);
+   }
+ }
+
+ /// Set number of timings that can be recorded in parallel
+ void set_ntimers(const unsigned& ntimers)
+ {
+  Timing.resize(ntimers,clock_t(0.0));
+  Start_time.resize(ntimers,clock_t(0.0));
+ }
+
+ /// Cumulative timings
+ Vector<clock_t> Timing;
+
+ /// Start times of active timers
+ Vector<clock_t> Start_time;
+
+}
+
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+
+
+
 //=================================================================
 /// Evaluate the fitting function and its derivatives
 /// w.r.t. fitting parameters (done by FD by default; can be

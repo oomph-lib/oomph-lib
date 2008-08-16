@@ -43,10 +43,12 @@
 #include "../generic/hermite_elements.h"
 #include "../constitutive/constitutive_laws.h"
 
+//#define TIME_SOLID_JAC
 
 namespace oomph
 {
  
+
 //=======================================================================
 /// A base class for elements that solve the equations of solid mechanics, 
 /// based on the principle of virtual displacements in Cartesian coordinates.
@@ -65,17 +67,19 @@ namespace oomph
     (const Vector<double>& xi, double& gamma);
    
    /// \short Function pointer to function that specifies the body force
-   /// as a function of the Lagrangian coordinates and time FCT(xi,t,b) -- 
+   /// as a function of the Lagrangian coordinates and time FCT(t,xi,b) -- 
    /// xi and b are  Vectors! 
-   typedef void (*BodyForceFctPt)(const Vector<double>& xi, const double& t,
+   typedef void (*BodyForceFctPt)(const double& t,
+                                  const Vector<double>& xi, 
                                   Vector<double>& b);
    
    /// \short Constructor: Set null pointers for constitutive law and for
    /// isotropic growth function. Set physical parameter values to 
    /// default values, enable inertia and set body force to zero.
+   /// Default evaluation of Jacobian: analytically rather than by FD.
    PVDEquationsBase() :  Isotropic_growth_fct_pt(0), Constitutive_law_pt(0),
     Lambda_sq_pt(&Default_lambda_sq_value), Unsteady(true), 
-    Body_force_fct_pt(0) {}
+    Body_force_fct_pt(0), Evaluate_jacobian_by_fd(false) {}
    
    
    /// Return the constitutive law pointer
@@ -218,11 +222,11 @@ namespace oomph
        // Get body force
        if (time_pt()!=0)
         {
-         (*Body_force_fct_pt)(xi,time_pt()->time(),b);
+         (*Body_force_fct_pt)(time_pt()->time(),xi,b);
         }
        else
         {
-         (*Body_force_fct_pt)(xi,0.0,b);
+         (*Body_force_fct_pt)(0.0,xi,b);
         }
       }
     }
@@ -290,7 +294,47 @@ namespace oomph
       }
     }
       
+   /// Is Jacobian evaluated by FD? Else: Analytically.
+   bool& evaluate_jacobian_by_fd() {return Evaluate_jacobian_by_fd;}
    
+#ifdef TIME_SOLID_JAC
+   /// Timer
+   static Timer Solid_timer;
+
+   /// Doc timing results
+   static void doc_timings()
+    {
+     oomph_info << "\n==================================================\n";
+     oomph_info << "Total solid CPU time for fill_in... : " 
+                << Solid_timer.cumulative_time(0) 
+                << std::endl;
+     
+     oomph_info << "Total solid CPU time for d_stress_dG: " 
+                << Solid_timer.cumulative_time(1) 
+                << std::endl;
+     
+     oomph_info << "Total solid CPU time for Jacobian        : " 
+                <<  Solid_timer.cumulative_time(2) 
+                << std::endl;
+
+     oomph_info << "Total solid CPU time for general stress term in Jacobian        : " 
+                <<  Solid_timer.cumulative_time(3) 
+                << std::endl;
+
+
+     oomph_info << "Total solid CPU time for alternative general stress term in Jacobian        : " 
+                <<  Solid_timer.cumulative_time(5) 
+                << std::endl;
+
+     oomph_info << "Total solid CPU time for diagonal term in Jacobian        : " 
+                <<  Solid_timer.cumulative_time(4) 
+                << std::endl;
+     oomph_info << "==================================================\n\n";
+
+
+    }
+#endif
+
   protected:
    
    /// Pointer to isotropic growth function
@@ -311,6 +355,9 @@ namespace oomph
    /// Static default value for timescale ratio (1.0 -- for natural scaling) 
    static double Default_lambda_sq_value;
    
+   /// Use FD to evaluate Jacobian
+   bool Evaluate_jacobian_by_fd;
+
   };
  
  
@@ -318,9 +365,9 @@ namespace oomph
 /// A class for elements that solve the equations of solid mechanics, based
 /// on the principle of virtual displacements in cartesian coordinates.
 //=======================================================================
- template <unsigned DIM>
-  class PVDEquations : public PVDEquationsBase<DIM>
-  {
+template <unsigned DIM>
+class PVDEquations : public PVDEquationsBase<DIM>
+{
 
     public:
    
@@ -331,38 +378,62 @@ namespace oomph
    /// from the constitutive law at specified local coordinate
    void get_stress(const Vector<double> &s, DenseMatrix<double> &sigma);
    
-   /// \short Return the residuals for the solid equations (the discretised
+   /// \short Fill in the residuals for the solid equations (the discretised
    /// principle of virtual displacements)
    void fill_in_contribution_to_residuals(Vector<double> &residuals)
     {
-     fill_in_generic_contribution_to_residuals_pvd(residuals);
+     fill_in_generic_contribution_to_residuals_pvd(
+      residuals,GeneralisedElement::Dummy_matrix,0);
     }
-
- 
-   virtual void fill_in_generic_contribution_to_residuals_pvd(
-    Vector<double> &residuals);
    
-   /// The jacobian is calculated by finite differences by default,
-   /// We need only to take finite differences w.r.t. positional variables
-   /// For this element
+   /// \short Fill in contribution to Jacobian (either by FD or analytically,
+   /// control this via evaluate_jacobian_by_fd()
    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                          DenseMatrix<double> &jacobian)
     {
-     //Add the contribution to the residuals
-     fill_in_generic_contribution_to_residuals_pvd(residuals);
      
-     //Solve for the consistent acceleration in Newmark scheme?
-     if(this->Solve_for_consistent_newmark_accel_flag)
+     //Solve for the consistent acceleration in Newmark scheme? 
+     if (this->Solve_for_consistent_newmark_accel_flag) 
+      {        
+       // Add the contribution to the residuals -- these are the
+       // full residuals of whatever solid equations we're solving
+       this->fill_in_contribution_to_residuals(residuals); 
+
+       // Jacobian is not the Jacobian associated with these
+       // residuals (treating the postions as unknowns)
+       // but the derivatives w.r.t. to the discrete generalised
+       // accelerations in the Newmark scheme -- the Jacobian
+       // is therefore the associated mass matrix, multiplier
+       // by suitable scaling factors
+       this->fill_in_jacobian_for_newmark_accel(jacobian);
+       return;
+      } 
+     
+     // Are we assigning a solid initial condition?
+     if (this->Solid_ic_pt!=0)
       {
-       this->add_jacobian_for_newmark_accel(jacobian);
+       fill_in_jacobian_for_solid_ic(residuals,jacobian);
        return;
       }
      
-     //Get the solid entries in the jacobian using finite differences
-     this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
+     
+     // Use FD 
+     if ((this->Evaluate_jacobian_by_fd)) 
+      {
+       //Add the contribution to the residuals
+       fill_in_contribution_to_residuals(residuals);
+       
+       //Get the solid entries in the jacobian using finite differences
+       this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
+      }
+     // Do it analytically
+     else
+      {
+       fill_in_generic_contribution_to_residuals_pvd(residuals,jacobian,1);
+      }
     }
    
-   
+
    /// Output: x,y,[z],xi0,xi1,[xi2],gamma
    void output(std::ostream &outfile) 
     {
@@ -387,7 +458,12 @@ namespace oomph
    
     protected:
    
-   
+   /// \short Compute element residual Vector only (if flag=and/or element 
+   /// Jacobian matrix 
+   virtual void fill_in_generic_contribution_to_residuals_pvd(
+    Vector<double> &residuals, DenseMatrix<double> &jacobian, 
+    const unsigned& flag);
+      
    /// \short Return the 2nd Piola Kirchhoff stress tensor, as 
    /// calculated from the constitutive law: Pass metric tensors in the 
    /// stress free and current configurations.
@@ -591,7 +667,7 @@ template<unsigned NNODE_1D>
    virtual int solid_p_nodal_index() const 
     {return Solid_pressure_not_stored_at_node;}
 
-   /// Return the residuals
+   /// Fill in the residuals
    void fill_in_contribution_to_residuals(Vector<double> &residuals)
     {
      //Call the generic residuals function with flag set to 0
@@ -600,30 +676,50 @@ template<unsigned NNODE_1D>
       residuals,GeneralisedElement::Dummy_matrix,0);
     }
    
-   /// \short Compute the residuals and the Jacobian. 
-   /// Note: Jacobian is computed
-   /// in two steps: The derivatives of the residuals w.r.t. to the solid
-   /// pressure dofs are done analytically; the derivatives w.r.t. to
-   /// the nodes' positional variables are done by finite differencing,
-   /// using SolidFiniteElement::get_jacobian(...).
+   /// \short Fill in contribution to Jacobian (either by FD or analytically,
+   /// for the positional variables; control this via 
+   /// evaluate_jacobian_by_fd(). Note: Jacobian entries arising from
+   /// derivatives w.r.t. pressure terms are always computed analytically.
    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                          DenseMatrix<double> &jacobian)
     {
-     //Call the generic routine with the flag set to 1
-     fill_in_generic_residual_contribution_pvd_with_pressure(
-      residuals,jacobian,1);
-     
+
      //Solve for the consistent acceleration in the Newmark scheme
      //Note that this replaces solid entries only
-     if(this->Solve_for_consistent_newmark_accel_flag)
+     if ((this->Solve_for_consistent_newmark_accel_flag)||
+         (this->Solid_ic_pt!=0))
       {
-       this->add_jacobian_for_newmark_accel(jacobian);
-       return;
+       std::string error_message ="Can't assign consistent Newmark history\n";
+       error_message += " values for solid element with pressure dofs\n";
+        
+       throw OomphLibError(
+        error_message,
+        "PVDEquationsWithPressure<DIM>::fill_in_contribution_to_jacobian()",
+        OOMPH_EXCEPTION_LOCATION);
       }
      
-     //Call the finite difference routine for the deriatives w.r.t.
-     // the positional variables
-     this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
+     // FD
+     if (this->Evaluate_jacobian_by_fd)
+      {
+       // Call the generic routine with the flag set to 2: Computes residuals
+       // and derivatives w.r.t. to pressure variables
+       fill_in_generic_residual_contribution_pvd_with_pressure(
+        residuals,jacobian,2);
+       
+       // Call the finite difference routine for the deriatives w.r.t.
+       // the positional variables
+       this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
+       
+      }
+     // Do it fully analytically
+     else
+      {
+       //Call the generic routine with the flag set to 1: Get residual
+       // and fully analytical Jacobian
+       fill_in_generic_residual_contribution_pvd_with_pressure(
+        residuals,jacobian,1);
+      }
+
     }
    
    
@@ -646,6 +742,7 @@ template<unsigned NNODE_1D>
      return(interpolated_solid_p);
     }
    
+
    /// Output: x,y,[z],xi0,xi1,[xi2],p,gamma
    void output(std::ostream &outfile) 
     {
@@ -727,14 +824,15 @@ template<unsigned NNODE_1D>
    bool Incompressible;
    
    /// \short Returns the residuals for the discretised principle of
-   /// virtual displacements,
-   /// formulated in the incompressible/near-incompressible case.
-   /// If flag==1, also compute the pressure-related entries
-   /// in the Jacobian (all others need to be done by finite differencing
-   /// in SolidFiniteElement::add_jacobian_solid_position_fd(...).
+   /// virtual displacements, formulated in the incompressible/
+   /// near-incompressible case.
+   /// - If flag==0, compute only the residual vector.
+   /// - If flag==1, compute residual vector and fully analytical Jacobian
+   /// - If flag==2, also compute the pressure-related entries
+   ///   in the Jacobian (all others need to be done by finite differencing.
    virtual void fill_in_generic_residual_contribution_pvd_with_pressure(
     Vector<double> &residuals, DenseMatrix<double> &jacobian,
-    unsigned flag);
+    const unsigned& flag);
    
    /// \short  Return the deviatoric part of the 2nd Piola Kirchhoff stress 
    /// tensor, as calculated from the constitutive law in the 

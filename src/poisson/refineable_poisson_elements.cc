@@ -42,7 +42,7 @@ template<unsigned DIM>
 void RefineablePoissonEquations<DIM>::
 fill_in_generic_residual_contribution_poisson(Vector<double> &residuals, 
                                               DenseMatrix<double> &jacobian, 
-                                              unsigned flag)
+                                              const unsigned& flag)
 {
 
 //Find out how many nodes there are in the element

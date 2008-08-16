@@ -27,7 +27,9 @@ EXTRA_DIST=build_mesh_makefile.sh change_headers_to_links.sh fpdiff.py\
            cc_and_h_licence_block.txt \
 	   build_oomph_html_header.sh count_lines.sh \
            compare_file_length_with_tolerance.bash customise_latex.bash \
-           oomph-convert  oomph-convert.py makePvd
+           oomph-convert  oomph-convert.py makePvd \
+           find_missing_doxygen_hooks.sh
+
 
 #Cleanup
 clean-local:

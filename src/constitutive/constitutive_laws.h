@@ -130,6 +130,13 @@ class StrainEnergyFunction
     }
   }
  
+ /// \short Pure virtual function in which the user must declare if the
+ /// constitutive equation requires an incompressible formulation
+ /// in which the volume constraint is enforced explicitly.
+ /// Used as a sanity check in PARANOID mode.
+ virtual bool requires_incompressibility_constraint()=0;
+ 
+
 };
 
 
@@ -185,6 +192,12 @@ class MooneyRivlin : public StrainEnergyFunction
    dWdI[2] = 0.0;
   }
 
+ /// \short Pure virtual function in which the user must declare if the
+ /// constitutive equation requires an incompressible formulation
+ /// in which the volume constraint is enforced explicitly.
+ /// Used as a sanity check in PARANOID mode. True
+ bool requires_incompressibility_constraint(){return true;}
+ 
 
   private:
  
@@ -259,6 +272,14 @@ class TongOne : public StrainEnergyFunction
    dWdI[1] = 0.5*(G - C1);
    dWdI[2] = 0.5*(C1 - 2*G + 2*(1-Nu)*G*(I[2]-1.0)/(2.0*(1-2.0*Nu)));
   }
+
+
+ /// \short Pure virtual function in which the user must declare if the
+ /// constitutive equation requires an incompressible formulation
+ /// in which the volume constraint is enforced explicitly.
+ /// Used as a sanity check in PARANOID mode. False.
+ bool requires_incompressibility_constraint(){return false;}
+ 
 };
 
 
@@ -335,6 +356,13 @@ class GeneralisedMooneyRivlin : public StrainEnergyFunction
    dWdI[2] = 0.5*(C1 - 2.0*G + 2.0*(1.0-Nu)*G*(I[2]-1.0)/(2.0*(1.0-2.0*Nu)));
   }
 
+
+ /// \short Pure virtual function in which the user must declare if the
+ /// constitutive equation requires an incompressible formulation
+ /// in which the volume constraint is enforced explicitly.
+ /// Used as a sanity check in PARANOID mode. False.
+ bool requires_incompressibility_constraint(){return false;}
+ 
 
   private:
  
@@ -623,6 +651,11 @@ class ConstitutiveLaw
      OOMPH_EXCEPTION_LOCATION);
    }
 
+  /// \short Pure virtual function in which the user must declare if the
+  /// constitutive equation requires an incompressible formulation
+  /// in which the volume constraint is enforced explicitly.
+  /// Used as a sanity check in PARANOID mode.
+  virtual bool requires_incompressibility_constraint()=0;
 
  };
 
@@ -747,6 +780,12 @@ class GeneralisedHookean : public ConstitutiveLaw
    double& gen_dil, double& inv_kappa);
 
 
+  /// \short Pure virtual function in which the writer must declare if the
+  /// constitutive equation requires an incompressible formulation
+  /// in which the volume constraint is enforced explicitly.
+  /// Used as a sanity check in PARANOID mode. False.
+  bool requires_incompressibility_constraint(){return false;}
+
   private:
  
  /// Poisson ratio
@@ -781,6 +820,13 @@ class DeformedMetricTensorLinearElasticConstitutiveLaw : public GeneralisedHooke
    ObsoleteCode::obsolete();
   }
  
+  /// \short Pure virtual function in which the writer must declare if the
+  /// constitutive equation requires an incompressible formulation
+  /// in which the volume constraint is enforced explicitly.
+  /// Used as a sanity check in PARANOID mode. False.
+  bool requires_incompressibility_constraint(){return false;}
+
+
 };
 
 
@@ -807,9 +853,6 @@ class IsotropicStrainEnergyFunctionConstitutiveLaw : public ConstitutiveLaw
  IsotropicStrainEnergyFunctionConstitutiveLaw(
   StrainEnergyFunction* const &strain_energy_function_pt) :
   ConstitutiveLaw(), Strain_energy_function_pt(strain_energy_function_pt) {}
-
-
-
 
   /// \short Calculate the contravariant 2nd Piola Kirchhoff 
   /// stress tensor. Arguments are the 
@@ -849,6 +892,16 @@ class IsotropicStrainEnergyFunctionConstitutiveLaw : public ConstitutiveLaw
    const DenseMatrix<double> &g, const DenseMatrix<double> &G, 
    DenseMatrix<double> &sigma_dev, DenseMatrix<double> &Gcontra, 
    double& gen_dil, double& inv_kappa);
+
+
+  /// \short State if the constitutive equation requires an incompressible 
+  /// formulation in which the volume constraint is enforced explicitly.
+  /// Used as a sanity check in PARANOID mode. This is determined
+  /// by interrogating the associated strain energy function.
+  bool requires_incompressibility_constraint()
+   {
+    return Strain_energy_function_pt->requires_incompressibility_constraint();
+   }
 
 
 };

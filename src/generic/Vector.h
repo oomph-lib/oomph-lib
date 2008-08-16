@@ -204,6 +204,17 @@ public:
  /// Typedef to make the constructors look a bit cleaner
  typedef size_t 					size_type;
 
+
+ /// \short Dummy constructor to avoid compiler from warning about
+ /// only-private constructors
+ Vector(const double& dont_call_this_constructor) 
+  {
+   //Throw an Oomph-lib error
+   throw OomphLibError("Please use vector<bool> instead of Vector<bool>",
+                       "Vector:: dummy constructor",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ 
  private:
  
  //Standard Constuctors (some have been omitted from the stl classes)

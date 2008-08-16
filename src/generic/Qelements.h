@@ -319,22 +319,26 @@ class QSolidElementBase : public virtual QElementBase,
  /// local coordinates: The Eulerian position is returned in 
  /// FE-interpolated form (\c x_fe) and then in the form obtained
  /// from the "current" MacroElement representation (if it exists -- if not,
- /// \c x is the same as \c x_fe). This This allows the Domain/MacroElement-
+ /// \c x is the same as \c x_fe). This allows the Domain/MacroElement-
  /// based representation to be used to apply displacement boundary
- /// conditions exactly. The Lagrangian coordinate is always based
- /// on the (undeformed!) MacroElement representation, if it exists;
- /// if not, \c xi is obtained via the FE interpolation. 
+ /// conditions exactly. Ditto for the Lagrangian coordinates returned
+ /// in xi_fe and xi.
 void get_x_and_xi(const Vector<double>& s, 
                   Vector<double>& x_fe,
                   Vector<double>& x,
+                  Vector<double>& xi_fe,
                   Vector<double>& xi) const
  {
   // Lagrangian coordinate: Directly from 
   // underlying FE representation
+  unsigned n_xi = xi_fe.size();
+  for(unsigned i=0;i<n_xi;i++) {xi_fe[i] = interpolated_xi(s,i);}
+
+  // Lagrangian coordinate from FE representation again
   if(Undeformed_macro_elem_pt==0)
    {
     unsigned n_xi = xi.size();
-    for(unsigned i=0;i<n_xi;i++) {xi[i] = interpolated_xi(s,i);}
+    for(unsigned i=0;i<n_xi;i++) {xi[i] = xi_fe[i];}
    }
   // ...or refer to the "undeformed" MacroElement if it exists.
   else 

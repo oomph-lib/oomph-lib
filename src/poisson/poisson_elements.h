@@ -342,7 +342,7 @@ protected:
  /// Jacobian matrix 
  virtual void fill_in_generic_residual_contribution_poisson(
   Vector<double> &residuals, DenseMatrix<double> &jacobian, 
-  unsigned flag); 
+  const unsigned& flag); 
  
  /// Pointer to source function:
  PoissonSourceFctPt Source_fct_pt;

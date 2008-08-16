@@ -852,7 +852,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
  // Simply set up initial condition?
  if (this->Solid_ic_pt!=0)
   {
-   this->get_residuals_for_ic(residuals);
+   this->get_residuals_for_solid_ic(residuals);
    return;
   }
 

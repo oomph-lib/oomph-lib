@@ -323,6 +323,7 @@ class RefineableSolidQElement<3> : public virtual RefineableQElement<3>,
    Vector<int> s_hi(3);
    Vector<double> s(3);
    Vector<double> xi(3);
+   Vector<double> xi_fe(3);
    Vector<double> x(3);
    Vector<double> x_fe(3);
  
@@ -411,17 +412,18 @@ class RefineableSolidQElement<3> : public virtual RefineableQElement<3>,
          // turns out to be a hanging node later on, then
          // its position gets adjusted in line with its
          // hanging node interpolation.
-         father_el_pt->get_x_and_xi(s,x_fe,x,xi);
+         father_el_pt->get_x_and_xi(s,x_fe,x,xi_fe,xi);
 
          //Cast the node to an Solid node
          SolidNode* elastic_node_pt = 
           static_cast<SolidNode*>(node_pt(jnod));
 
-         // Lagrangian coordinate: Always based on "undeformed"
-         // MacroElement representation (if available)
-         elastic_node_pt->xi(0) = xi[0];
-         elastic_node_pt->xi(1) = xi[1];
-         elastic_node_pt->xi(2) = xi[2];
+         // hierher
+/*          // Lagrangian coordinate: Always based on "undeformed" */
+/*          // MacroElement representation (if available) */
+/*          elastic_node_pt->xi(0) = xi[0]; */
+/*          elastic_node_pt->xi(1) = xi[1]; */
+/*          elastic_node_pt->xi(2) = xi[2]; */
 
          // Eulerian coordinate: Based on "current" MacroElement representation
          // if the nodal position is constrained by displacement boundary 
@@ -436,11 +438,20 @@ class RefineableSolidQElement<3> : public virtual RefineableQElement<3>,
            // x is based on the "current" MacroElement representation 
            // (if the element has one...)
            elastic_node_pt->x(i) = x[i];
+           elastic_node_pt->xi(i) = xi[i];
           }
          else
           {
            // x_fe is the FE representation
            elastic_node_pt->x(i) = x_fe[i];
+           if (Use_undeformed_macro_element_for_new_lagrangian_coords)
+            {
+             elastic_node_pt->xi(i) = xi[i];
+            }
+           else
+            {
+             elastic_node_pt->xi(i) = xi_fe[i];
+            }
           }
         }
        

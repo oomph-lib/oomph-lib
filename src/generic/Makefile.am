@@ -34,7 +34,7 @@ iterative_linear_solver.cc preconditioner.cc block_preconditioner.cc \
 partitioning.cc
 
 if WANT_MPI
-sources += superlu_dist_bridge.c
+sources += superlu_dist.c
 endif
 
 #mpi sources

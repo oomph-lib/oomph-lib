@@ -59,8 +59,11 @@ public:
   {}
  
  /// Call the residuals including hanging node cases
- void fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals);
-
+ void fill_in_generic_contribution_to_residuals_pvd(
+  Vector<double> &residuals, 
+  DenseMatrix<double> &jacobian, 
+  const unsigned& flag);
+  
  /// No values are interpolated in this element (pure solid)
  void get_interpolated_values(const unsigned& t, const Vector<double>&s, 
                               Vector<double>& values) {values.clear();}
@@ -128,6 +131,9 @@ public:
    RefineablePVDEquations<DIM>* cast_father_element_pt
     = dynamic_cast<RefineablePVDEquations<DIM>*>
     (this->father_element_pt());
+
+   // Do whatever needs to be done in the base class
+   RefineableSolidElement::further_build();
    
    //Set pointer to isotropic growth function
    this->Isotropic_growth_fct_pt = 
@@ -142,9 +148,13 @@ public:
    // Set the timescale ratio (non-dim. density)
    this->Lambda_sq_pt = cast_father_element_pt->lambda_sq_pt();
 
-   /// Set the flag that switches inertia on/off
+   // Set the flag that switches inertia on/off
    this->Unsteady = cast_father_element_pt->unsteady();
-   }
+
+   // Evaluation of Jacobian by same method as father
+   this->Evaluate_jacobian_by_fd=
+    cast_father_element_pt->evaluate_jacobian_by_fd();
+  }
 
 };
 
@@ -269,7 +279,7 @@ public virtual PVDEquationsWithPressure<DIM>,
 /// flag=0: compute only residual vector
  void fill_in_generic_residual_contribution_pvd_with_pressure(
   Vector<double> &residuals, DenseMatrix<double> &jacobian, 
-  unsigned flag);
+  const unsigned& flag);
 
  /// No values are interpolated in this element (pure solid)
  void get_interpolated_values(const unsigned& t, const Vector<double>&s, 
@@ -345,6 +355,9 @@ void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
     = dynamic_cast<RefineablePVDEquationsWithPressure<DIM>*>
     (this->father_element_pt());
    
+   // Do whatever needs to be done in the base class
+   RefineableSolidElement::further_build();
+
    //Set pointer to isotropic growth function
    this->Isotropic_growth_fct_pt = 
     cast_father_element_pt->isotropic_growth_fct_pt();
@@ -358,11 +371,15 @@ void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
    // Set the timescale ratio (non-dim. density)
    this->Lambda_sq_pt = cast_father_element_pt->lambda_sq_pt();
 
-   /// Set the flag that switches inertia on/off
+   // Set the flag that switches inertia on/off
    this->Unsteady = cast_father_element_pt->unsteady();
 
-   /// Set the incompressibility flag
+   // Set the incompressibility flag
    this->Incompressible = cast_father_element_pt->incompressible();
+
+   // Evaluation of Jacobian by same method as father
+   this->Evaluate_jacobian_by_fd=
+    cast_father_element_pt->evaluate_jacobian_by_fd();
   }
 
 };
@@ -463,7 +480,7 @@ public virtual PointElement
 /// 2D rebuild from sons: reconstruct the solid pressure
 //===================================================================
 template<>
- inline void RefineableQPVDElementWithPressure<2>::
+inline void RefineableQPVDElementWithPressure<2>::
 rebuild_from_sons(Mesh* &mesh_pt)
 {
  using namespace QuadTreeNames;
