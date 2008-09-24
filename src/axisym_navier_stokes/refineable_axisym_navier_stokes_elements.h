@@ -124,7 +124,10 @@ public virtual ElementWithZ2ErrorEstimator
     }
   }
  
- 
+ /// Fill in the geometric Jacobian, which in this case is r
+ double geometric_jacobian(const Vector<double> &x) {return x[0];}
+
+
  ///  Further build: pass the pointers down to the sons
  void further_build()
   {
@@ -271,7 +274,7 @@ public virtual RefineableQElement<2>
  /// \short Order of recovery shape functions for Z2 error estimation:
  /// Same order as shape functions.
  unsigned nrecovery_order() {return 2;}
-  
+
  /// \short Number of vertex nodes in the element
  unsigned nvertex_node() const
   {return AxisymmetricQTaylorHoodElement::nvertex_node();}

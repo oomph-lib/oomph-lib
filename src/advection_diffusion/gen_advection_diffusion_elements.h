@@ -213,6 +213,9 @@ public:
     OOMPH_EXCEPTION_LOCATION);
   }
 
+ /// \short Integrate the concentration over the element
+ double integrate_u();
+
 
  /// Access function: Pointer to source function
  GeneralisedAdvectionDiffusionSourceFctPt& source_fct_pt() 

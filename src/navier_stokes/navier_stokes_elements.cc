@@ -219,9 +219,10 @@ compute_error(std::ostream &outfile,
 /// and L2 norm of velocity solution over element.
 //=======================================================================
 template<unsigned DIM>
-void NavierStokesEquations<DIM>::compute_error(std::ostream &outfile,
-                                               FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                                               double& error, double& norm)
+void NavierStokesEquations<DIM>::compute_error(
+ std::ostream &outfile,
+ FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
+ double& error, double& norm)
 {
  
  error=0.0;

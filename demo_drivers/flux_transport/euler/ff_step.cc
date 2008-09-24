@@ -39,6 +39,104 @@
 using namespace oomph;
 using namespace std;
 
+///===========================================================
+///Strong Stability preserving Runge Kutta Timestepping
+//============================================================
+template<unsigned ORDER>
+class SSP_RungeKutta : public ExplicitTimeStepper
+{
+public:
+ 
+ ///Constructor, set the type
+ SSP_RungeKutta()
+  {
+   Type="SSP_RungeKutta";
+  }
+
+ /// Broken copy constructor
+ SSP_RungeKutta(const SSP_RungeKutta&) 
+  { 
+   BrokenCopy::broken_copy("SS_PRungeKutta");
+  } 
+ 
+ /// Broken assignment operator
+ void operator=(const SSP_RungeKutta&) 
+  {
+   BrokenCopy::broken_assign("SSP_RungeKutta");
+  } 
+
+ /// Function that is used to advance time in the object
+ // reference by object_pt by an amount dt
+ void timestep(ExplicitTimeSteppableObject* const &object_pt,
+               const double &dt);
+};
+
+
+//====================================================================
+//Broken default timestep function for RungeKutta schemes
+//====================================================================
+template<unsigned ORDER>
+void SSP_RungeKutta<ORDER>::timestep(
+ ExplicitTimeSteppableObject* const &object_pt,
+ const double &dt)
+{
+ std::ostringstream error_stream;
+ error_stream << "Timestep not implemented for order " << ORDER << "\n";
+ throw OomphLibError(error_stream.str(),
+                     "SSP_RungeKutta::timestep()",
+                     OOMPH_EXCEPTION_LOCATION);
+}
+
+//===================================================================
+///Explicit specialisation for fourth-order RK scheme
+//==================================================================
+template<>
+void SSP_RungeKutta<2>::timestep(ExplicitTimeSteppableObject* const &object_pt,
+                                 const double &dt)
+{
+ //Store the initial values and initial time
+ Vector<double> u;
+ object_pt->get_dofs(u);
+
+ //Now get the first unknowns
+ Vector<double> k1;
+ object_pt->get_inverse_mass_matrix_times_residuals(k1);
+ 
+ //Add to the residuals
+ object_pt->add_to_dofs(dt,k1);
+ //Increment the time
+ object_pt->time() += dt;
+ object_pt->actions_after_explicit_timestep();
+ 
+ //Get the next unknowns
+ Vector<double> k2;
+ object_pt->get_inverse_mass_matrix_times_residuals(k2);
+ 
+ //Add to the residuals so that the current value of the unknowns
+ //is the result of two forward Euler steps of time dt
+ object_pt->add_to_dofs(dt,k2);
+ 
+ //Set the final values of the unknowns by taking the average of the
+ //initial value and the result of the two forward Euler steps
+
+ //Get the current value 
+ Vector<double> u_final;
+ object_pt->get_dofs(u_final);
+
+ //Now take the average
+ unsigned n_dof = u_final.size();
+ for(unsigned n=0;n<n_dof;n++)
+  {
+   u_final[n] += u[n];
+   u_final[n] *= 0.5;
+  }
+
+ //Set the dofs to the new final value
+ object_pt->set_dofs(u_final);
+
+ //Time remains the same
+ object_pt->actions_after_explicit_timestep();
+}
 
 namespace Global
 {
@@ -56,8 +154,8 @@ class TwoDDGMesh : public DGMesh
  //Map that will store the neighbours
  std::map<std::pair<FiniteElement*,int>,FiniteElement*> Neighbour_map;
 
- //Vector of face_reflection elements
- Vector<FaceElement*> Face_element_pt;
+ //map of face_reflection elements
+ std::map<std::pair<FiniteElement*,int>,FaceElement*> Face_element_pt;
 
 public:
  //Constructor
@@ -383,6 +481,10 @@ public:
       {
        this->add_boundary_node(2,elem_pt->node_pt((n_p-1)*n_p + n));
       }
+
+     //Now add the reflecting element for the north face
+     Face_element_pt[std::make_pair(elem_pt,0)] = 
+      new DGEulerFaceReflectionElement<ELEMENT>(elem_pt,2);
     }
    
    //Second bit
@@ -395,6 +497,10 @@ public:
       {
        this->add_boundary_node(2,elem_pt->node_pt((n_p-1)*n_p + n));
       }
+
+     //Now add the reflecting element for the north face
+     Face_element_pt[std::make_pair(elem_pt,0)] = 
+      new DGEulerFaceReflectionElement<ELEMENT>(elem_pt,2);
     }
   }
  
@@ -410,6 +516,10 @@ public:
       {
        this->add_boundary_node(0,elem_pt->node_pt(n));
       }
+
+      //Now add the reflecting element for the south face
+     Face_element_pt[std::make_pair(elem_pt,2)] = 
+      new DGEulerFaceReflectionElement<ELEMENT>(elem_pt,-2);
     }
    
    //Add the right-hand of the lower elements
@@ -421,6 +531,10 @@ public:
       {
        this->add_boundary_node(0,elem_pt->node_pt(n_p-1 + n_p*n));
       }
+       //Now add the reflecting element for the east face
+     Face_element_pt[std::make_pair(elem_pt,1)] = 
+      new DGEulerFaceReflectionElement<ELEMENT>(elem_pt,1);
+
     }
    
    //Second bit
@@ -434,6 +548,9 @@ public:
       {
        this->add_boundary_node(0,elem_pt->node_pt(n));
       }
+      //Now add the reflecting element for the south face
+     Face_element_pt[std::make_pair(elem_pt,2)] = 
+      new DGEulerFaceReflectionElement<ELEMENT>(elem_pt,-2);
     }
   }
 
@@ -447,6 +564,10 @@ public:
                  << this->boundary_node_pt(b,n)->x(1) << ")\n";
       }
       }*/
+
+  //How many faces have we constructed
+  std::cout << Face_element_pt.size() << "\n";
+
 
    //Now loop over all the elements and set up the neighbour map
   for(unsigned ex=0;ex<Nx;ex++)
@@ -475,8 +596,8 @@ public:
        else {index[2] = -1;}
 
        //West neighbour
-       if(ex > 0) {index[3] = element_index - Ny;}
-       else {index[3] = -1;}
+       /*if(ex > 0)*/ {index[3] = element_index - Ny;}
+       //else {index[3] = -1;}
 
        //Now store the details in the mape
        for(unsigned i=0;i<4;i++)
@@ -538,11 +659,12 @@ public:
   
 
  //Now set up the neighbour information
- const unsigned n_element = this->nelement();
+ /*const unsigned n_element = this->nelement();
  for(unsigned e=0;e<n_element;e++)
   {
    dynamic_cast<ELEMENT*>(this->element_pt(e))->setup_face_neighbour_info();
-  }
+   }*/
+  this->setup_face_neighbour_info();
 }
 
  //We can just use the map here
@@ -574,11 +696,18 @@ public:
      //Otherwise we build in the face reflection element
      else
       {
-       face_element_pt = new DGEulerFaceReflectionElement<ELEMENT>(
+       /*face_element_pt = new DGEulerFaceReflectionElement<ELEMENT>(
         bulk_element_pt,2);
-       Face_element_pt.push_back(face_element_pt);
+        Face_element_pt.push_back(face_element_pt);*/
 
        //dynamic_cast<ELEMENT*>(bulk_element_pt)->face_element_pt(0);
+       face_element_pt = Face_element_pt[std::make_pair(bulk_element_pt,0)];
+       if(face_element_pt==0) 
+        {
+         throw OomphLibError("Something wrong",
+                             "neighbour_finder()",
+                             OOMPH_EXCEPTION_LOCATION);
+        }
       }
      
      //Then set the face coordinate
@@ -603,15 +732,26 @@ public:
        if(cast_bulk_element_pt->face_element_pt(1)->node_pt(0)->
           is_on_boundary(1))
         {
+         //std::cout << cast_bulk_element_pt->face_element_pt(1)->node_pt(0)->x(0) << " " 
+         //          << cast_bulk_element_pt->face_element_pt(1)->node_pt(0)->x(1) << "\n ";
+ 
          face_element_pt = 
           dynamic_cast<ELEMENT*>(bulk_element_pt)->face_element_pt(1);
         }
        //Otherwise we must be on the corner
        else
         {
-         face_element_pt = new DGEulerFaceReflectionElement<ELEMENT>(
-          bulk_element_pt,1);
-         Face_element_pt.push_back(face_element_pt);
+         //face_element_pt = new DGEulerFaceReflectionElement<ELEMENT>(
+         // bulk_element_pt,1);
+         //Face_element_pt.push_back(face_element_pt);
+         face_element_pt = Face_element_pt[std::make_pair(bulk_element_pt,1)];
+         if(face_element_pt==0) 
+          {
+           throw OomphLibError("Something wrong",
+                               "neighbour_finder()",
+                               OOMPH_EXCEPTION_LOCATION);
+          }
+                
         }
       }
      
@@ -633,11 +773,22 @@ public:
      else
       {
        //Build in the face reflection element
-       face_element_pt = new DGEulerFaceReflectionElement<ELEMENT>(
-        bulk_element_pt,-2);
-       Face_element_pt.push_back(face_element_pt);
+       //face_element_pt = new DGEulerFaceReflectionElement<ELEMENT>(
+       // bulk_element_pt,-2);
+       //Face_element_pt.push_back(face_element_pt);
        //face_element_pt = 
        // dynamic_cast<ELEMENT*>(bulk_element_pt)->face_element_pt(2);
+
+
+       face_element_pt = Face_element_pt[std::make_pair(bulk_element_pt,2)];
+
+        if(face_element_pt==0) 
+        {
+         throw OomphLibError("Something wrong",
+                             "neighbour_finder()",
+                             OOMPH_EXCEPTION_LOCATION);
+        }
+
       }
      
      //Then set the face coordiante
@@ -692,7 +843,7 @@ public:
 
  TwoDDGProblem(const unsigned &Nx, const unsigned &Ny)
   {
-   this->set_explicit_time_stepper_pt(new RungeKutta<4>);
+   this->set_explicit_time_stepper_pt(new SSP_RungeKutta<2>);
    this->shut_up_in_newton_solve() = true;
 
    this->enable_discontinuous_formulation();
@@ -744,6 +895,604 @@ public:
     }
   }
 
+ void limit()
+  {
+   const double eps = 1.0e-14;
+   //First stage is to calculate the averages of all elements
+   const unsigned n_element = this->mesh_pt()->nelement();
+   for(unsigned e=0;e<n_element;e++)
+    {
+     //Calculate the averages
+     dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))
+      ->allocate_memory_for_averages();
+     dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))->calculate_averages();
+    }
+
+   Vector<double> s(2,0.0), x(2);
+
+   const unsigned n_flux = 4;
+
+   const unsigned n_dim = 2;
+
+
+   //Store pointers to neighbours
+   DenseMatrix<ELEMENT*> bulk_neighbour(n_element,4);
+   //Storage for the unknowns
+   Vector<double> interpolated_u(n_flux);
+   
+   //Now we need to actually do the limiting, but let's check things first
+   for(unsigned e=0;e<n_element;e++)
+    {
+     //Store the element
+     ELEMENT* cast_element_pt = 
+      dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
+     //Find the centre of the element
+     cast_element_pt->interpolated_x(s,x);
+
+     
+     //Storage for the approximation to the central gradient from all four
+     //faces
+     RankThreeTensor<double> grad(4,n_flux,2);
+     //Storage for the neighbours size
+     Vector<double> size(4);
+
+     //Get the local coordinate of the nodes
+     Vector<double> s_face(1), s_bulk(2);
+     //Get the central value
+     DenseMatrix<double> prim_centre(2,n_flux);
+     //My Centre
+     for(unsigned i=0;i<n_flux;i++) 
+      {interpolated_u[i] = cast_element_pt->average_value(i);}
+     prim_centre(0,0) = interpolated_u[0];
+     prim_centre(0,1) = cast_element_pt->pressure(interpolated_u);
+     prim_centre(0,2) = interpolated_u[2]/interpolated_u[0];
+     prim_centre(0,3) = interpolated_u[3]/interpolated_u[0];
+
+     //Now store the average primitivee values 
+     for(unsigned i=0;i<n_flux;i++)
+      {cast_element_pt->average_prim_value(i) = prim_centre(0,i);}
+
+     //Loop over all the faces
+     for(unsigned f=0;f<4;f++)
+      {
+       DGFaceElement* face_element_pt = 
+        dynamic_cast<DGFaceElement*>(cast_element_pt->face_element_pt(f));
+       
+       //Get the average of the nodal points on the face 
+       //(***NOT GENERAL**)
+       const unsigned n_face_node = face_element_pt->nnode();
+
+       //Storage for the average nodal values
+       DenseMatrix<double> face_average(n_face_node,n_flux);
+       
+       //Storage for the neighbouring cell's centre average
+       DenseMatrix<double> cell_average(n_face_node,n_flux);
+
+       //Storage for the sizes of the neighbouring bulk elements
+       Vector<double> neighbour_size(n_face_node);
+   
+       //Now the storage for the nodal values and centre values
+       DenseMatrix<double> nodal_x(n_face_node,n_dim);
+       //Now the storage for the centre values
+       DenseMatrix<double> centre_x(n_face_node,n_dim);
+                                           
+       //Neighbours face
+       FaceElement* neighbour_face_pt=0;
+
+       //Now calculate those average values
+       for(unsigned n=0;n<n_face_node;n++)
+        {
+         //Get the local coordinates of the node
+         face_element_pt->local_coordinate_of_node(n,s_face);
+         //Get the global coordinate of the node
+         for(unsigned i=0;i<n_dim;i++)
+          {
+           nodal_x(n,i) = face_element_pt->interpolated_x(s_face,i);
+          }
+
+         //Get the flux at the node in this face
+         face_element_pt->interpolated_u(s_face,interpolated_u);
+
+         /*std::cout << "Values at face :";
+          for(unsigned i=0;i<n_flux;i++)
+           {
+            std::cout << interpolated_u[i] << " ";
+           }
+           std::cout << std::endl;*/
+
+         for(unsigned i=0;i<n_flux;i++)
+          {
+           face_average(n,i) = interpolated_u[i];
+          }
+
+         //Now get the bulk coordinate
+         face_element_pt->get_local_coordinate_in_bulk(s_face,s_bulk);
+         //Now get the neighbour
+         cast_element_pt->
+          get_neighbouring_face_and_local_coordinate(
+           face_element_pt->face_index(),s_bulk,neighbour_face_pt,s_face);
+         
+         //Get the fluxes of the neighbour
+         dynamic_cast<DGFaceElement*>(neighbour_face_pt)
+          ->interpolated_u(s_face,interpolated_u);
+         //Add the flux from the neighbour
+         ELEMENT* neighbour_bulk_element_pt = dynamic_cast<ELEMENT*>(
+          neighbour_face_pt->bulk_element_pt());
+
+         /*std::cout << "Values at face neighbour :";
+         for(unsigned i=0;i<n_flux;i++)
+          {
+           std::cout << interpolated_u[i] << " ";
+          }
+         std::cout << std::endl;
+          
+         std::cout << "SANITY CHECK " << face_element_pt << " " 
+                   << neighbour_face_pt << " "
+                   << cast_element_pt << " " 
+                   << neighbour_bulk_element_pt << "\n";*/
+         
+
+         //Get the centre of the neighbouring bulk element
+         for(unsigned i=0;i<n_dim;i++) {s_bulk[i] = 0.0;}
+         //Do it
+         for(unsigned i=0;i<n_dim;i++)
+          {
+           centre_x(n,i) = neighbour_bulk_element_pt
+            ->interpolated_x(s_bulk,i);
+          }
+           
+         for(unsigned i=0;i<n_flux;i++)
+          {
+           face_average(n,i) += interpolated_u[i];
+           face_average(n,i) *= 0.5;
+           //Get the neighbour
+           cell_average(n,i) = neighbour_bulk_element_pt->average_value(i);
+          }
+         
+         //Get the size of the neighbour
+         neighbour_size[n] = neighbour_bulk_element_pt->average_value(n_flux);
+
+         //Only bother to store the first one
+         if(n==0)
+          {
+           bulk_neighbour(e,f) = neighbour_bulk_element_pt;
+          }
+        }
+       
+       //Now we have the face averages and the cell averages
+       //Check that we have a conforming mesh
+       for(unsigned n=1;n<n_face_node;n++)
+        {
+         if((std::abs(centre_x(0,0) - centre_x(n,0)) > eps) || 
+            (std::abs(centre_x(0,1) - centre_x(n,1)) > eps))
+         {
+          throw OomphLibError("Mesh is not conforming in limiter",
+                              "Problem::limit()",
+                              OOMPH_EXCEPTION_LOCATION);
+         }
+        }
+       
+
+       //Set centre_x(0,0) to be the current element
+       for(unsigned i=0;i<n_dim;i++)
+        {
+         centre_x(0,i) = x[i];
+        }
+
+       //Set the size of the neighbour
+       size[f] = neighbour_size[0];
+
+       //Convert our values to primitive variables
+       DenseMatrix<double> prim_nodal(2,n_flux);
+
+       //Face averages (corner nodes)
+       //std::cout << "Nodal values \n";
+       for(unsigned n=0;n<2;n++)
+        {
+         //Load the fluxes
+         for(unsigned i=0;i<n_flux;i++) 
+          {interpolated_u[i] = face_average(n,i);}
+         
+         //Output the fluxes
+         /*std::cout << n << " : ";
+         for(unsigned i=0;i<n_flux;i++)
+          {std::cout << interpolated_u[i] << " ";}
+          std::cout << std::endl;*/
+
+         prim_nodal(n,0) = interpolated_u[0];
+         prim_nodal(n,1) = cast_element_pt->pressure(interpolated_u);
+         prim_nodal(n,2) = interpolated_u[2]/interpolated_u[0];
+         prim_nodal(n,3) = interpolated_u[3]/interpolated_u[0];
+        }
+
+       //Neighbours centre (use value from first node
+       for(unsigned i=0;i<n_flux;i++) 
+        {interpolated_u[i] = cell_average(0,i);}
+
+       /*std::cout << "Neighbour centre : ";
+       for(unsigned i=0;i<n_flux;i++)
+        {std::cout << interpolated_u[i] << " ";}
+        std::cout << std::endl;*/
+
+       prim_centre(1,0) = interpolated_u[0];
+       //Should really use neighbour here
+       prim_centre(1,1) = cast_element_pt->pressure(interpolated_u);
+       prim_centre(1,2) = interpolated_u[2]/interpolated_u[0];
+       prim_centre(1,3) = interpolated_u[3]/interpolated_u[0];
+
+
+       //We can now estimate the gradients
+
+      
+       //Output first
+       /*std::cout << "Centre " << x[0] << " " << x[1] << " : ";
+       for(unsigned i=0;i<n_flux;i++)
+        {std::cout << prim_centre(0,i) << " ";}
+       
+       std::cout << "\n Neighbour " << centre_x(0,0) << " " 
+                 << centre_x(0,1) << " : ";
+       for(unsigned i=0;i<n_flux;i++)
+        {std::cout << prim_centre(1,i) << " ";}
+
+       for(unsigned n=0;n<2;n++)
+        {
+         std::cout << "\n Node " << nodal_x(n,0) << " " 
+                   << nodal_x(n,1) << " : ";
+         for(unsigned i=0;i<n_flux;i++)
+          {std::cout << prim_nodal(n,i) << " ";}
+        }
+        std::cout << std::endl;*/
+
+
+       double x_len = centre_x(1,0) - centre_x(0,0);
+       double y_len = centre_x(1,1) - centre_x(0,1);
+
+       double X_len = nodal_x(1,0) - nodal_x(0,0);
+       double Y_len = nodal_x(1,1) - nodal_x(0,1);
+
+       //If we have ghost cell's handle it!
+       if((std::abs(x_len) < eps) && (std::abs(y_len) < eps))
+        {
+         //The distance is twice the distance from the centre to
+         //the midpoint of the edges
+         double X_mid = nodal_x(0,0) + 0.5*X_len;
+         double Y_mid = nodal_x(0,1) + 0.5*Y_len;
+
+         x_len = 2.0*(X_mid - centre_x(0,0));
+         y_len = 2.0*(Y_mid - centre_x(0,1));
+        }
+
+       double A = X_len*y_len + x_len*Y_len;
+
+       for(unsigned i=0;i<n_flux;i++)
+        {
+         grad(f,i,0) = 
+          ((prim_centre(1,i) - prim_centre(0,i))*Y_len
+           - (prim_nodal(1,i) - prim_nodal(0,i))*y_len)/A;
+         grad(f,i,1) =
+          ((prim_centre(1,i) - prim_centre(0,i))*X_len
+           - (prim_nodal(1,i) - prim_nodal(0,i))*x_len)/A;
+        }
+      }
+
+     //Let's output the face gradients
+     /*for(unsigned f=0;f<4;f++)
+      {
+       std::cout << "Neighbour " << size[f] << " : ";
+       for(unsigned i=0;i<n_flux;i++)
+        {
+         std::cout << grad(f,i,0) << " " << grad(f,i,1) << " ";
+        }
+       std::cout << std::endl;
+       }*/
+
+     //Zero out the gradients
+     for(unsigned i=0;i<n_flux;i++)
+      {
+       for(unsigned j=0;j<2;j++)
+        {
+         cast_element_pt->average_gradient(i,j) = 0.0;
+        }
+      }
+
+     double sum = 0.0;
+     for(unsigned f=0;f<4;f++)
+      {
+       const double A = size[f];
+       sum += A;
+       for(unsigned i=0;i<n_flux;i++)
+        {
+         for(unsigned j=0;j<2;j++)
+          {
+           cast_element_pt->average_gradient(i,j) += A*grad(f,i,j);
+          }
+        }
+      }
+
+     //Divide by the combined sum
+     for(unsigned i=0;i<n_flux;i++)
+      {
+       for(unsigned j=0;j<2;j++)
+        {
+         cast_element_pt->average_gradient(i,j) /= sum;
+        }
+      }
+    }
+
+   //Let's have a look at it
+   /*for(unsigned e=0;e<n_element;e++)
+    {
+     std::cout << "Approximate gradient in element " << e << " : ";
+     for(unsigned i=0;i<n_flux;i++)
+      {
+       for(unsigned j=0;j<2;j++)
+        {
+         std::cout << dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))->
+          average_gradient(i,j) << " " ;
+        }
+      }
+     std::cout << "\n";
+     }*/
+
+   //OK now we use the weighted gradients to construct our limited gradient
+   const double eps2 = 1.0e-10;
+
+   for(unsigned e=0;e<n_element;e++)
+    {
+     ELEMENT* cast_element_pt = 
+      dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
+     
+     /*std::cout << "Base element \n";
+       cast_element_pt->output(std::cout);*/
+
+     DenseMatrix<double> g(n_flux,4,0.0);
+
+     //Get the neighbours
+     for(unsigned f=0;f<4;f++)
+      {
+       ELEMENT* neighbour_bulk_element_pt = bulk_neighbour(e,f);
+
+       /*std::cout << "Neighbour face" << f << "\n";
+         neighbour_bulk_element_pt->output(std::cout);*/
+
+
+       //Now sort it out
+       for(unsigned i=0;i<n_flux;i++)
+        {
+         for(unsigned j=0;j<2;j++)
+          {
+           g(i,f) += 
+            std::pow(neighbour_bulk_element_pt->average_gradient(i,j),2.0);
+          }
+        }
+      }
+
+     DenseMatrix<double> limited_gradient(n_flux,2,0.0);
+     
+     //Let's now see it
+     for(unsigned i=0;i<n_flux;i++)
+      {
+
+       //Calcaulte the denominators
+       double denom = 4.0*eps2;
+       for(unsigned f=0;f<4;f++) {denom += g(i,f)*g(i,f)*g(i,f);}
+
+       //Calculate the weights
+       Vector<double> w(4,0.0);
+       w[0] = (g(i,1)*g(i,2)*g(i,3) + eps2)/denom;
+       w[1] = (g(i,0)*g(i,2)*g(i,3) + eps2)/denom;
+       w[2] = (g(i,0)*g(i,1)*g(i,3) + eps2)/denom;
+       w[3] = (g(i,0)*g(i,1)*g(i,2) + eps2)/denom;
+            
+       //Now reconstruct the limited gradient
+       for(unsigned f=0;f<4;f++)
+        {
+         for(unsigned j=0;j<2;j++)
+          {
+           limited_gradient(i,j) += 
+            w[f]*bulk_neighbour(e,f)->average_gradient(i,j);
+          }
+        }
+      }
+
+     //std::cout << "In element " << e << " :\n ";
+     //We should now have the limited gradients for all fluxe
+     /*for(unsigned i=0;i<n_flux;i++)
+      {
+       std::cout << cast_element_pt->average_gradient(i,0) << " "
+                 << cast_element_pt->average_gradient(i,1) << " : ";
+       std::cout << limited_gradient(i,0) << " "
+                 << limited_gradient(i,1) << "\n";
+      }
+      std::cout << "\n";*/
+
+     //Now we have limited the primitive variables we have to evaluate the 
+     //values at each node
+     const unsigned n_node = cast_element_pt->nnode();
+     //Find the centre of the element
+     cast_element_pt->interpolated_x(s,x);
+     
+
+     //Work out distances to the nodes
+     DenseMatrix<double> dx(n_node,2);
+     for(unsigned n=0;n<n_node;n++)
+      {
+       Node* nod_pt = cast_element_pt->node_pt(n);
+       for(unsigned i=0;i<n_dim;i++) {dx(n,i) = nod_pt->x(i) - x[i];}
+      }
+     
+     //New gradients of primitive values
+     DenseMatrix<double> dprim(n_node,n_flux);
+     
+
+     //Reconstruct limited primitive value gradients
+     for(unsigned n=0;n<n_node;n++)
+      {
+       for(unsigned i=0;i<n_flux;i++)
+        {
+         dprim(n,i) = dx(n,0)*limited_gradient(i,0) 
+          + dx(n,1)*limited_gradient(i,1);
+        }
+      }
+
+     //Limited values
+     DenseMatrix<double> limited_value(n_node,n_flux);
+     //Density
+     for(unsigned n=0;n<n_node;n++)
+      {
+       limited_value(n,0) = 
+        cast_element_pt->average_prim_value(0) + dprim(n,0);
+      }
+     
+     //If any are too small correct
+     double min = 1.0e-2;
+     bool loop_flag=false;
+     do
+      {
+       bool limit_more=false;
+       for(unsigned n=0;n<n_node;n++)
+        {
+         //If we're too small, reduce the gradient
+         if(limited_value(n,0) < min)
+          {
+           limit_more=true;
+           break;
+          }
+        }
+
+       //Now do we limit more
+       if(limit_more)
+        {
+         std::cout << "Limiting density gradient further \n";
+         limited_gradient(0,0) *= 0.5;
+         limited_gradient(0,1) *= 0.5;
+         //Calculated the densities again
+         for(unsigned n=0;n<n_node;n++)
+          {
+           limited_value(n,0) = cast_element_pt->average_prim_value(0)
+            + dx(n,0)*limited_gradient(0,0) 
+            + dx(n,1)*limited_gradient(0,1);
+          }
+         //Loop again
+         loop_flag = true;
+        }
+      } while(loop_flag);
+
+     //Reconstruct the momentum
+     for(unsigned n=0;n<n_node;n++)
+      {
+       for(unsigned i=0;i<2;i++)
+        {
+         limited_value(n,2+i) = 
+          cast_element_pt->average_value(2+i)
+          + cast_element_pt->average_prim_value(0)*dprim(n,2+i)
+          + cast_element_pt->average_prim_value(2+i)*dprim(n,0);
+        }
+      }
+           
+     //Now reconstruct the energy
+     const double gamma = cast_element_pt->gamma();
+     
+     for(unsigned n=0;n<n_node;n++)
+      {
+       limited_value(n,1) = cast_element_pt->average_value(1)
+        + (1.0/(gamma-1.0))*dprim(n,1)
+        + 0.5*dprim(n,0)*(cast_element_pt->average_prim_value(2)*
+                          cast_element_pt->average_prim_value(2) +
+                          cast_element_pt->average_prim_value(3)*
+                          cast_element_pt->average_prim_value(3))
+        + cast_element_pt->average_prim_value(0)*(
+         cast_element_pt->average_prim_value(2)*dprim(2,n) +
+         cast_element_pt->average_prim_value(3)*dprim(3,n));
+      }
+
+     //Check for negative pressures
+     bool negative_pressure = false;
+     for(unsigned n=0;n<n_node;n++)
+      {
+       for(unsigned i=0;i<n_flux;i++) 
+        {interpolated_u[i] = limited_value(n,i);}
+
+       //Get the pressure 
+       double p = cast_element_pt->pressure(interpolated_u);
+       if(p < eps2) {negative_pressure = true; break;}
+      }
+     
+     //Correct negative pressure by limiting energy gradient to zero
+     if(negative_pressure)
+      {
+       std::cout << "Correcting negative pressure\n";
+       //If the average value is zero, then set the average value from
+       //the average velocities
+       double average_E = cast_element_pt->average_value(1);
+       double rho_u = cast_element_pt->average_value(2);
+       double rho_v = cast_element_pt->average_value(3);
+       double rho = cast_element_pt->average_value(0);
+
+       //Find the average kinetic energy
+       double kin = 0.5*(rho_u*rho_u + rho_v*rho_v)/rho;
+
+       //If the average energy is less than the average kinetic energy
+       //we will have negative pressures (we don't want this!)
+       if(average_E < kin)
+        {
+         if(average_E < 0) 
+          {
+           throw OomphLibError("Real problem energy negative\n",
+                               "limit()",
+                               OOMPH_EXCEPTION_LOCATION);
+          }
+         
+         //Keep the ratio of the momentum transport the same
+         double ratio = rho_u/rho_v;
+         
+         //Find the sign of rho_v
+         int sign = 1;
+         if(rho_v < 0.0) {sign *= -1;} 
+
+         double sum_square_momenta = 2.0*average_E*rho;
+
+         //Reset the values preserving the sign of v
+         rho_v = sign*sqrt(sum_square_momenta/(1.0 + ratio*ratio));
+         rho_u = ratio*rho_v; 
+        }
+       
+       for(unsigned n=0;n<n_node;n++)
+        {
+         //Set consistent averages
+         limited_value(n,0) = rho;
+         limited_value(n,1) = average_E;
+         limited_value(n,2) = rho_u;
+         limited_value(n,3) = rho_v;
+        }
+      }
+
+     //Will have to think about boundary conditions
+
+     //Finally set the limited values
+     for(unsigned n=0;n<n_node;n++)
+      {
+       //Cache the node
+       Node* nod_pt = cast_element_pt->node_pt(n);
+       for(unsigned i=0;i<n_flux;i++)
+        {
+         //Only limit if it's not pinned!
+         if(!nod_pt->is_pinned(i))
+          {
+           /*std::cout << "Limiting " <<
+            nod_pt->value(i) << "  to "  <<
+            limited_value(n,i) << "\n";*/
+           //Do it
+           nod_pt->set_value(i,limited_value(n,i));
+          }
+        }
+      }
+    }
+
+  }
+
+
+
  void parameter_study(std::ostream &trace, const bool &disc)
   {
    this->enable_mass_matrix_reuse();
@@ -754,10 +1503,13 @@ public:
    char filename[100];
    
    unsigned count=1;
-   for(unsigned t=0;t<500;t++)
+   for(unsigned t=0;t<5000;t++)
     {
+     std::cout << "Taking timestep " << t << "\n";
      explicit_timestep(dt);
-     if(count==1)
+     //Now limit
+     limit();
+     if(count==50)
       {
        if(disc)
         {
@@ -787,7 +1539,7 @@ int main()
   
  unsigned n_element = 4;
  
- for(unsigned i=0;i<3;i++)
+ //for(unsigned i=0;i<3;i++)
   {
    TwoDDGProblem<DGSpectralEulerElement<2,2> > 
     problem(n_element,n_element);

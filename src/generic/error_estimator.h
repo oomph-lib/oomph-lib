@@ -126,6 +126,11 @@ class ElementWithZ2ErrorEstimator : public virtual FiniteElement
  /// \short Order of recovery shape functions
  virtual unsigned nrecovery_order()=0;
 
+ /// \short Return the geometric jacobian (should be overloaded in
+ /// cylindrical and spherical geometries). 
+ /// Default value one is suitable for Cartesian coordinates
+ virtual double geometric_jacobian(const Vector<double> &x) {return 1.0;}
+
 };
 
 

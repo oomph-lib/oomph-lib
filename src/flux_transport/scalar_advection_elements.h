@@ -36,6 +36,7 @@
 #endif
 
 #include "flux_transport_elements.h"
+#include "../generic/Qelements.h"
 #include "../generic/Qspectral_elements.h"
 #include "../generic/dg_elements.h"
 
@@ -364,7 +365,7 @@ public virtual QSpectralElement<DIM-1,NNODE_1D>
  
  /// \short Constructor: Call the constructor for the
  /// appropriate lower-dimensional QElement
- FaceGeometry() : QElement<DIM-1,NNODE_1D>() {}
+ FaceGeometry() : QSpectralElement<DIM-1,NNODE_1D>() {}
 
 };
 
@@ -453,9 +454,17 @@ class DGSpectralScalarAdvectionElement<1,NNODE_1D> :
  
 public:
 
+ //There is a single required n_flux
+  unsigned required_nflux() {return 1;}
+  
+  //Calculate averages 
+  void calculate_element_averages(double* &average_value)
+   {FluxTransportEquations<1>::calculate_element_averages(average_value);}
+
  //Constructor
- DGSpectralScalarAdvectionElement() : QSpectralScalarAdvectionElement<1,NNODE_1D>(), 
-                              DGElement() {}
+ DGSpectralScalarAdvectionElement() : 
+  QSpectralScalarAdvectionElement<1,NNODE_1D>(), 
+  DGElement() {}
  
  ~DGSpectralScalarAdvectionElement() { }
  
@@ -488,7 +497,7 @@ public:
                                                           mass_matrix,
                                                           flag);
 
-   this->add_flux_contributions_to_residuals(residuals);
+   this->add_flux_contributions_to_residuals(residuals,jacobian,flag);
   }
 
 
@@ -499,6 +508,22 @@ public:
 //============================================================================
 void get_inverse_mass_matrix_times_residuals(Vector<double> &minv_res)
 {
+ //If there are external data this is not going to work
+ if(nexternal_data() > 0)
+  {
+   std::ostringstream error_stream;
+   error_stream <<
+    "Cannot use a discontinuous formulation for the mass matrix when\n"
+                <<
+    "there are external data.\n " <<
+    "Do not call Problem::enable_discontinuous_formulation()\n";
+
+   throw OomphLibError(error_stream.str(),
+                       "DGElement::get_inverse_mass_matrix_times_residuals()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+
+
  //Now let's assemble stuff
  const unsigned n_dof = this->ndof();
 
@@ -564,6 +589,13 @@ class DGSpectralScalarAdvectionElement<2,NNODE_1D> :
  
 public:
 
+   //Calculate averages 
+  void calculate_element_averages(double* &average_value)
+   {FluxTransportEquations<2>::calculate_element_averages(average_value);}
+
+  //There is a single required n_flux
+  unsigned required_nflux() {return 1;}
+
  //Constructor
  DGSpectralScalarAdvectionElement() : 
   QSpectralScalarAdvectionElement<2,NNODE_1D>(), 
@@ -605,7 +637,7 @@ public:
                                                           mass_matrix,
                                                           flag);
 
-   this->add_flux_contributions_to_residuals(residuals);
+   this->add_flux_contributions_to_residuals(residuals,jacobian,flag);
   }
 
 
@@ -622,6 +654,370 @@ class FaceGeometry<DGSpectralScalarAdvectionElement<2,NNODE_1D> >:
   public:
  FaceGeometry() : QSpectralElement<1,NNODE_1D>() {}
 };
+
+
+
+//=============================================================
+///Non-spectral version of the classes
+//============================================================
+template <unsigned DIM, unsigned NNODE_1D>
+ class QScalarAdvectionElement : 
+ public virtual QElement<DIM,NNODE_1D>,
+ public virtual ScalarAdvectionEquations<DIM>
+ {
+  public:
+
+
+ ///\short  Constructor: Call constructors for QElement and 
+ /// Advection Diffusion equations
+  QScalarAdvectionElement() : QElement<DIM,NNODE_1D>(), 
+  ScalarAdvectionEquations<DIM>()
+  { }
+
+ /// Broken copy constructor
+ QScalarAdvectionElement(
+  const QScalarAdvectionElement<DIM,NNODE_1D> &dummy) 
+  { 
+   BrokenCopy::broken_copy("QScalarAdvectionElement");
+  } 
+ 
+ /// Broken assignment operator
+ void operator=(
+  const QScalarAdvectionElement<DIM,NNODE_1D>&) 
+  {
+   BrokenCopy::broken_assign("QScalarAdvectionElement");
+  }
+ 
+ /// \short  Required  # of `values' (pinned or dofs) 
+ /// at node n
+ inline unsigned required_nvalue(const unsigned &n) const {return 1;}
+ 
+ /// \short Output function:  
+ ///  x,y,u   or    x,y,z,u
+ void output(std::ostream &outfile)
+  {ScalarAdvectionEquations<DIM>::output(outfile);}
+ 
+ /// \short Output function:  
+ ///  x,y,u   or    x,y,z,u at n_plot^DIM plot points
+ void output(std::ostream &outfile, const unsigned &n_plot)
+  {ScalarAdvectionEquations<DIM>::output(outfile,n_plot);}
+
+
+  /*/// \short C-style output function:  
+ ///  x,y,u   or    x,y,z,u
+ void output(FILE* file_pt)
+  {
+   ScalarAdvectionEquations<NFLUX,DIM>::output(file_pt);
+  }
+
+ ///  \short C-style output function:  
+ ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
+ void output(FILE* file_pt, const unsigned &n_plot)
+  {
+   ScalarAdvectionEquations<NFLUX,DIM>::output(file_pt,n_plot);
+  }
+
+ /// \short Output function for an exact solution:
+ ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
+ void output_fct(std::ostream &outfile, const unsigned &n_plot,
+                 FiniteElement::SteadyExactSolutionFctPt 
+                 exact_soln_pt)
+  {
+   ScalarAdvectionEquations<NFLUX,DIM>::
+    output_fct(outfile,n_plot,exact_soln_pt);}
+
+
+ /// \short Output function for a time-dependent exact solution.
+ ///  x,y,u_exact   or    x,y,z,u_exact at n_plot^DIM plot points
+ /// (Calls the steady version)
+ void output_fct(std::ostream &outfile, const unsigned &n_plot,
+                 const double& time,
+                 FiniteElement::UnsteadyExactSolutionFctPt 
+                 exact_soln_pt)
+  {
+   ScalarAdvectionEquations<NFLUX,DIM>::
+    output_fct(outfile,n_plot,time,exact_soln_pt);
+    }*/
+
+
+protected:
+
+ /// Shape, test functions & derivs. w.r.t. to global coords. Return Jacobian.
+ inline double dshape_and_dtest_eulerian_flux_transport(
+  const Vector<double> &s, 
+  Shape &psi, 
+  DShape &dpsidx, 
+  Shape &test, 
+  DShape &dtestdx) const;
+ 
+ /// \short Shape, test functions & derivs. w.r.t. to global coords. at
+ /// integration point ipt. Return Jacobian.
+ inline double dshape_and_dtest_eulerian_at_knot_flux_transport(
+  const unsigned& ipt,
+  Shape &psi, 
+  DShape &dpsidx, 
+  Shape &test,
+  DShape &dtestdx) 
+  const;
+
+};
+
+//Inline functions:
+
+
+//======================================================================
+/// \short Define the shape functions and test functions and derivatives
+/// w.r.t. global coordinates and return Jacobian of mapping.
+///
+/// Galerkin: Test functions = shape functions
+//======================================================================
+template<unsigned DIM, unsigned NNODE_1D>
+double QScalarAdvectionElement<DIM,NNODE_1D>::
+dshape_and_dtest_eulerian_flux_transport(const Vector<double> &s,
+                                         Shape &psi, 
+                                         DShape &dpsidx,
+                                         Shape &test, 
+                                         DShape &dtestdx) const
+{
+ //Call the geometrical shape functions and derivatives  
+ double J = this->dshape_eulerian(s,psi,dpsidx);
+
+ //Loop over the test functions and derivatives and set them equal to the
+ //shape functions
+ for(unsigned i=0;i<NNODE_1D;i++)
+  {
+   test[i] = psi[i]; 
+   for(unsigned j=0;j<DIM;j++)
+    {
+     dtestdx(i,j) = dpsidx(i,j);
+    }
+  }
+
+ //Return the jacobian
+ return J;
+}
+
+
+
+//======================================================================
+/// Define the shape functions and test functions and derivatives
+/// w.r.t. global coordinates and return Jacobian of mapping.
+///
+/// Galerkin: Test functions = shape functions
+//======================================================================
+template<unsigned DIM, unsigned NNODE_1D>
+double QScalarAdvectionElement<DIM,NNODE_1D>::
+ dshape_and_dtest_eulerian_at_knot_flux_transport(
+  const unsigned &ipt,
+ Shape &psi, 
+ DShape &dpsidx,
+ Shape &test, 
+ DShape &dtestdx) const
+{
+ //Call the geometrical shape functions and derivatives  
+ double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx);
+
+ //Set the test functions equal to the shape functions (pointer copy)
+ test = psi;
+ dtestdx = dpsidx;
+
+ //Return the jacobian
+ return J;
+}
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+
+//=======================================================================
+/// \short Face geometry for the QScalarAdvectionElement elements: 
+/// The spatial dimension of the face elements is one lower than that 
+/// of the bulk element but they have the same number of points along 
+/// their 1D edges.
+//=======================================================================
+template<unsigned DIM, unsigned NNODE_1D>
+class FaceGeometry<
+ QScalarAdvectionElement<DIM,NNODE_1D> >: 
+public virtual QElement<DIM-1,NNODE_1D>
+{
+ 
+  public:
+ 
+ /// \short Constructor: Call the constructor for the
+ /// appropriate lower-dimensional QElement
+ FaceGeometry() : QElement<DIM-1,NNODE_1D>() {}
+
+};
+
+
+
+//=================================================================
+///General DGScalarAdvectionClass. Establish the template parameters
+//===================================================================
+template<unsigned DIM, unsigned NNODE_1D>
+class DGScalarAdvectionElement
+{
+
+};
+
+
+//==================================================================
+//Specialization for 1D DG Advection element
+//==================================================================
+template<unsigned NNODE_1D>
+class DGScalarAdvectionElement<1,NNODE_1D> :
+ public QScalarAdvectionElement<1,NNODE_1D>,
+ public DGElement
+{
+ friend class 
+ DGScalarAdvectionFaceElement<DGScalarAdvectionElement<1,NNODE_1D> >;
+  
+public:
+
+  //There is a single required n_flux
+  unsigned required_nflux() {return 1;}
+
+  //Calculate averages 
+  void calculate_element_averages(double* &average_value)
+   {FluxTransportEquations<1>::calculate_element_averages(average_value);}
+
+ //Constructor
+ DGScalarAdvectionElement() : QScalarAdvectionElement<1,NNODE_1D>(), 
+                              DGElement() {}
+ 
+ ~DGScalarAdvectionElement() { }
+ 
+ void build_all_faces()
+  {
+   //Make the two faces
+   Face_element_pt.resize(2);
+   //Make the face on the left
+   Face_element_pt[0] = 
+    new DGScalarAdvectionFaceElement<
+    DGScalarAdvectionElement<1,NNODE_1D> >
+    (this,-1);
+   //Make the face on the right
+   Face_element_pt[1] = 
+    new DGScalarAdvectionFaceElement<
+    DGScalarAdvectionElement<1,NNODE_1D> >
+    (this,+1);
+  }
+
+ 
+ ///\short Compute the residuals for the Navier--Stokes equations; 
+ /// flag=1(or 0): do (or don't) compute the Jacobian as well. 
+ void fill_in_generic_residual_contribution_flux_transport(
+  Vector<double> &residuals, DenseMatrix<double> &jacobian, 
+  DenseMatrix<double> &mass_matrix, unsigned flag)
+  {
+   QScalarAdvectionElement<1,NNODE_1D>::
+    fill_in_generic_residual_contribution_flux_transport(residuals,
+                                                          jacobian,
+                                                          mass_matrix,
+                                                          flag);
+
+   this->add_flux_contributions_to_residuals(residuals,jacobian,flag);
+  }
+
+
+};
+
+
+//=======================================================================
+/// Face geometry of the 1D  DG elements
+//=======================================================================
+template<unsigned NNODE_1D>
+class FaceGeometry<DGScalarAdvectionElement<1,NNODE_1D> >: 
+public virtual PointElement
+{
+  public:
+ FaceGeometry() : PointElement() {}
+};
+
+
+
+//==================================================================
+///Specialisation for 2D DG Elements
+//==================================================================
+template<unsigned NNODE_1D>
+class DGScalarAdvectionElement<2,NNODE_1D> :
+ public QScalarAdvectionElement<2,NNODE_1D>,
+ public DGElement
+{
+ friend class 
+ DGScalarAdvectionFaceElement<DGScalarAdvectionElement<2,NNODE_1D> >;
+ 
+public:
+
+  //There is a single required n_flux
+  unsigned required_nflux() {return 1;}
+
+   //Calculate averages 
+  void calculate_element_averages(double* &average_value)
+   {FluxTransportEquations<2>::calculate_element_averages(average_value);}
+
+ //Constructor
+ DGScalarAdvectionElement() : 
+  QScalarAdvectionElement<2,NNODE_1D>(), 
+  DGElement() {}
+ 
+ ~DGScalarAdvectionElement() { }
+ 
+ void build_all_faces()
+  {
+   Face_element_pt.resize(4);
+   Face_element_pt[0] = 
+    new DGScalarAdvectionFaceElement<
+    DGScalarAdvectionElement<2,NNODE_1D> >
+    (this,2);
+   Face_element_pt[1] = 
+    new DGScalarAdvectionFaceElement<
+    DGScalarAdvectionElement<2,NNODE_1D> >
+    (this,1);
+   Face_element_pt[2] = 
+    new DGScalarAdvectionFaceElement<
+    DGScalarAdvectionElement<2,NNODE_1D> >
+    (this,-2);
+   Face_element_pt[3] = 
+    new DGScalarAdvectionFaceElement<
+    DGScalarAdvectionElement<2,NNODE_1D> >
+    (this,-1);
+  }
+
+ 
+ ///\short Compute the residuals for the Navier--Stokes equations; 
+ /// flag=1(or 0): do (or don't) compute the Jacobian as well. 
+ void fill_in_generic_residual_contribution_flux_transport(
+  Vector<double> &residuals, DenseMatrix<double> &jacobian, 
+  DenseMatrix<double> &mass_matrix, unsigned flag)
+  {
+   QScalarAdvectionElement<2,NNODE_1D>::
+    fill_in_generic_residual_contribution_flux_transport(residuals,
+                                                          jacobian,
+                                                          mass_matrix,
+                                                          flag);
+
+   this->add_flux_contributions_to_residuals(residuals,jacobian,flag);
+  }
+
+
+};
+
+
+//=======================================================================
+/// Face geometry of the DG elements
+//=======================================================================
+template<unsigned NNODE_1D>
+class FaceGeometry<DGScalarAdvectionElement<2,NNODE_1D> >: 
+ public virtual QElement<1,NNODE_1D>
+{
+  public:
+ FaceGeometry() : QElement<1,NNODE_1D>() {}
+};
+
 
 
 }

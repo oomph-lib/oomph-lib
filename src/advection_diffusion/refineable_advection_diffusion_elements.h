@@ -161,6 +161,7 @@ class RefineableAdvectionDiffusionEquations :
    this->Source_fct_pt = cast_father_element_pt->source_fct_pt();
    this->Wind_fct_pt = cast_father_element_pt->wind_fct_pt();
    this->Pe_pt = cast_father_element_pt->pe_pt();
+   this->PeSt_pt = cast_father_element_pt->pe_st_pt();
 
    //Set the ALE status
    this->ALE_is_disabled = cast_father_element_pt->ALE_is_disabled;

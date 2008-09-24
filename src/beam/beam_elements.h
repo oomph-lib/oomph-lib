@@ -257,6 +257,10 @@ public:
   /// \short Get potential (strain) and kinetic energy of the element
   void get_energy(double& pot_en, double& kin_en);
 
+  /// \short Get the energy due to stretching and bending and the
+  /// kinetic energy of the element
+  void get_energy(double &stretch, double &bend, double &kin_en);
+
 }; 
 
 

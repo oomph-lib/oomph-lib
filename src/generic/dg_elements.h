@@ -56,6 +56,14 @@ class DGFaceElement : public virtual FaceElement
   /// Vector of neighbouring local coordinates at the integration points
   Vector<Vector<double> > Neighbour_local_coordinate;
 
+  /// Vector of the vectors that will store the number of the 
+  /// bulk external data that correspond to the dofs in the neighbouring face
+  /// This is only used if we are using implict timestepping and wish
+  /// to assemble the jacobian matrix. In order that the data be correctly
+  /// set up DGMesh::setup_face_neighbour_info() must be called with the
+  /// boolean flag set to true.
+  Vector<Vector<unsigned> > Neighbour_external_data;
+
  protected:
 
   /// \short Return the index at which the i-th unknown flux is stored. 
@@ -67,26 +75,42 @@ class DGFaceElement : public virtual FaceElement
 
  public:
 
-  /// Empty Constructor, initialise the pointer to zero
-  DGFaceElement() : FaceElement() { }
+  /// Empty Constructor
+  DGFaceElement() : FaceElement()  { }
  
   /// Empty Destructor 
   virtual ~DGFaceElement() {}
 
-  /// Setup information from the neighbouring face
-  void setup_neighbour_info();
+  /// Access function for neighbouring face information
+  FaceElement* neighbour_face_pt(const unsigned &i)
+   {return Neighbour_face_pt[i];}
+  
+  /// Setup information from the neighbouring face, return a set
+  /// of nodes (as data) in the neighour. The boolean flag
+  /// is used to determine whether the data in the neighbour are
+  /// added as external data to the bulk element --- required when
+  /// computing the jacobian of the system
+  void setup_neighbour_info(const bool &add_neighbour_data_to_bulk);
 
   ///Output information about the present element and its neighbour
   void report_info();
 
   //Get the value of the unknowns
   virtual void interpolated_u(const Vector<double> &s, Vector<double> &f);
+ 
+  ///\short Get the data that are used to interpolate the unkowns
+  ///in the element. These must be returned in order.
+  virtual void get_interpolation_data(Vector<Data*> &interpolation_data);
+
   
   ///\short Calculate the normal numerical flux at the integration point.
   ///This is the most general interface that can be overloaded if desired
   virtual void numerical_flux_at_knot(const unsigned &ipt,
                                       const Shape &psi,
-                                      Vector<double> &flux);
+                                      Vector<double> &flux,
+                                      DenseMatrix<double> &dflux_du_int,
+                                      DenseMatrix<double> &dflux_du_ext,
+                                      unsigned flag);
 
   ///\short Calculate the normal flux, which is the dot product of our
   ///approximation to the flux with the outer unit normal
@@ -105,13 +129,28 @@ class DGFaceElement : public virtual FaceElement
                         OOMPH_EXCEPTION_LOCATION);
    }
 
-  //\short Add the contribution from integrating the numerical flux
+  ///\short Calculate the derivative of the 
+  ///normal flux, which is the dot product of our
+  ///approximation to the flux with the outer unit normal,
+  ///with respect to the interior and exterior variables
+  ///Default is to use finite differences
+  virtual void dnumerical_flux_du(const Vector<double> &n_out,
+                                  const Vector<double> &u_int,
+                                  const Vector<double> &u_ext,
+                                  DenseMatrix<double> &dflux_du_int,
+                                  DenseMatrix<double> &dflux_du_ext);
+
+  
+  ///\short Add the contribution from integrating the numerical flux
   //over the face to the residuals
-  void add_flux_contributions(Vector<double> &residuals);
+  void add_flux_contributions(Vector<double> &residuals,
+                              DenseMatrix<double> &jacobian,
+                              unsigned flag);
 
  };
 
 class DGMesh;
+class SlopeLimiter;
 
 //==================================================================
 /// A Base class for DGElements
@@ -134,6 +173,10 @@ protected:
  ///desired
  DenseDoubleMatrix *M_pt;
 
+ /// \short Pointer to storage for the average values of the of the 
+ /// variables over the element
+ double *Average_value;
+
  ///\short Boolean flag to indicate whether to reuse the mass matrix
  bool Mass_matrix_reuse_is_enabled;
 
@@ -145,17 +188,23 @@ protected:
  ///deleted (i.e. was it created by this element)
  bool Can_delete_mass_matrix;
 
+ /// Set the number of flux components
+ virtual unsigned required_nflux() {return 0;}
+
   public:
 
  ///Constructor, initialise the pointers to zero
- DGElement() : DG_mesh_pt(0), M_pt(0), Mass_matrix_reuse_is_enabled(false),
+ DGElement() : DG_mesh_pt(0), M_pt(0), Average_value(0),
+  Mass_matrix_reuse_is_enabled(false),
   Mass_matrix_has_been_computed(false),
   Can_delete_mass_matrix(true) { }
 
- ///Virtual destructor, destroy the mass matrix, if we created it
+ ///\short Virtual destructor, destroy the mass matrix, if we created it
+ ///Clean-up storage associated with average values
  virtual ~DGElement()
   {
    if((M_pt!=0) && Can_delete_mass_matrix) {delete M_pt;}
+   if(this->Average_value!=0) {delete[] Average_value; Average_value=0;}
   }
  
  ///\short Access function for the boolean to indicate whether the
@@ -310,12 +359,15 @@ protected:
                                                  Vector<double> &s_face);
 
  //Setup the face information
- void setup_face_neighbour_info()
+ ///The boolean flag determines whether the data from the neighbouring
+ ///elements is added as external data to the element (required for
+ ///correct computation of the jacobian)
+ void setup_face_neighbour_info(const bool &add_face_data_as_external)
   {
    unsigned n_face = this->nface();
    for(unsigned f=0;f<n_face;f++)
     {
-     face_element_pt(f)->setup_neighbour_info();
+     face_element_pt(f)->setup_neighbour_info(add_face_data_as_external);
      face_element_pt(f)->report_info();
     }
   }
@@ -323,18 +375,59 @@ protected:
 
 ///Loop over all faces and add their integrated numerical fluxes
 ///to the residuals
-void add_flux_contributions_to_residuals(Vector<double> &residuals)
+void add_flux_contributions_to_residuals(Vector<double> &residuals,
+                                         DenseMatrix<double> &jacobian,
+                                         unsigned flag)
 {
  //Add up the contributions from each face
  unsigned n_face = this->nface();
  for(unsigned f=0;f<n_face;f++)
   {
-   face_element_pt(f)->add_flux_contributions(residuals);
+   face_element_pt(f)->add_flux_contributions(residuals,jacobian,flag);
   }
 }
- 
-};
 
+///Limit the slope within the element
+ void slope_limit(SlopeLimiter* const &slope_limiter_pt); 
+ 
+ ///Calculate the averages in the element
+ virtual void calculate_element_averages(double* &average_values) 
+  {
+   throw OomphLibError("Default (empty) version called",
+                       "DGElement::calculate_element_averages()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ 
+ ///Calculate the elemental averages
+ void calculate_averages()
+  {this->calculate_element_averages(this->Average_value);}
+
+  /// \short Return the average values
+ double &average_value(const unsigned &i)
+  {
+   if(Average_value==0)
+    {
+     throw OomphLibError("Averages not calculated yet",
+                         "DGElements::average_value",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   return Average_value[i];
+  }
+
+
+ /// \short Return the average values
+ const double &average_value(const unsigned &i) const
+  {
+   if(Average_value==0)
+    {
+     throw OomphLibError("Averages not calculated yet",
+                         "DGElements::average_value",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   return Average_value[i];
+  }
+
+};
 
 class DGMesh : public Mesh
 {
@@ -365,7 +458,100 @@ public:
                        "DGMesh::neighbour_finder()",
                        OOMPH_EXCEPTION_LOCATION);
   } 
+
+
+ //Setup the face information for all the elements
+ ///If the boolean flag is set to true then the data from neighbouring
+ ///faces will be added as external data to the bulk element. 
+ void setup_face_neighbour_info(const bool &add_face_data_as_external=false)
+  {
+   //Loop over all the elements and setup their face neighbour information
+   const unsigned n_element = this->nelement();
+   for(unsigned e=0;e<n_element;e++)
+    {
+     dynamic_cast<DGElement*>(this->element_pt(e))
+      ->setup_face_neighbour_info(add_face_data_as_external);
+    }
+  }
+
+ //Limit the slopes on the entire mesh
+ void limit_slopes(SlopeLimiter* const &slope_limiter_pt)
+  {
+   //Loop over all the elements and calculate the averages
+   const unsigned n_element = this->nelement();
+   for(unsigned e=0;e<n_element;e++)
+    {
+     dynamic_cast<DGElement*>(this->element_pt(e))
+      ->calculate_averages();
+    }
+
+   //Now loop over again and limit the values
+   for(unsigned e=0;e<n_element;e++)
+    {
+     dynamic_cast<DGElement*>(this->element_pt(e))
+      ->slope_limit(slope_limiter_pt);
+    }
+  }
+
 };
+
+
+//======================================================
+/// \short Base class for slope limiters
+//=====================================================
+class SlopeLimiter
+{
+  public:
+   
+ ///Empty constructor
+ SlopeLimiter() {}
+
+ ///virtual destructor
+ virtual ~SlopeLimiter() {}
+
+ ///Basic function
+ virtual void limit(const unsigned &i,
+                    const Vector<DGElement*> &required_element_pt)
+  {
+   throw OomphLibError("Calling default empty limiter\n",
+                       "SlopeLimiter::limit()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+};
+
+class MinModLimiter : public SlopeLimiter
+{
+ ///\short Constant that is used in the modified min-mod function to
+ ///provide better properties at extrema
+ double M;
+
+ ///Boolean flag to indicate a MUSCL or straight min-mod limiter
+ bool MUSCL;
+
+  public:
+ 
+ ///\short Constructor takes a value for the modification parameter M 
+ ///(default to zero --- classic min mod) and a flag to indicate whether
+ ///we use MUSCL limiting or not --- default false
+ MinModLimiter(const double &m=0.0, const bool &muscl=false) : 
+  SlopeLimiter(), M(m), MUSCL(muscl) {}
+
+ ///Empty destructor
+ virtual ~MinModLimiter() {}
+
+ ///The basic minmod function
+ double minmod(Vector<double> &args);
+
+
+ ///The modified  minmod function
+ double minmodB(Vector<double> &args, const double &h);
+
+ ///The limit function
+ void limit(const unsigned &i, 
+            const Vector<DGElement*> &required_element_pt);
+};
+
+
 
 }
 #endif

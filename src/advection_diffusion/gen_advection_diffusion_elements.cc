@@ -55,26 +55,26 @@ fill_in_generic_residual_contribution_cons_adv_diff(Vector<double> &residuals,
                                                unsigned flag) 
 {
  //Find out how many nodes there are
- unsigned n_node = nnode();
+ const unsigned n_node = nnode();
 
  //Get the nodal index at which the unknown is stored
- unsigned u_nodal_index = u_index_cons_adv_diff();
+ const unsigned u_nodal_index = u_index_cons_adv_diff();
    
  //Set up memory for the shape and test functions
  Shape psi(n_node), test(n_node);
  DShape dpsidx(n_node,DIM), dtestdx(n_node,DIM);
  
  //Set the value of n_intpt
- unsigned n_intpt = integral_pt()->nweight();
+ const unsigned n_intpt = integral_pt()->nweight();
    
  //Set the Vector to hold local coordinates
  Vector<double> s(DIM);
 
  //Get Peclet number
- double peclet = pe();
+ const double peclet = pe();
 
  //Get the Peclet*Strouhal number
- double peclet_st = pe_st();
+ const double peclet_st = pe_st();
 
  //Integers used to store the local equation number and local unknown
  //indices for the residuals and jacobians
@@ -528,6 +528,57 @@ void GeneralisedAdvectionDiffusionEquations<DIM>::compute_error(std::ostream &ou
 
 }
 
+//======================================================================
+/// \short Calculate the integrated value of the unknown over the element
+///
+//======================================================================
+template <unsigned DIM>
+double GeneralisedAdvectionDiffusionEquations<DIM>::integrate_u()
+{ 
+
+ // Initialise
+ double sum = 0.0;
+
+ //Vector of local coordinates
+ Vector<double> s(DIM);
+
+ //Find out how many nodes there are in the element
+ const unsigned n_node = nnode();
+
+ //Find the index at which the concentration is stored
+ const unsigned u_nodal_index = this->u_index_cons_adv_diff();
+
+ //Allocate memory for the shape functions
+ Shape psi(n_node);
+
+ //Set the value of n_intpt
+ const unsigned n_intpt = integral_pt()->nweight();
+
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   //Get the integral weight
+   const double w = integral_pt()->weight(ipt);
+   
+   //Get the shape functions
+   this->shape_at_knot(ipt,psi);
+
+   //Calculate the concentration
+   double interpolated_u = 0.0;
+   for(unsigned l=0;l<n_node;l++) 
+    {interpolated_u += this->nodal_value(l,u_nodal_index)*psi(l);}
+
+   // Get jacobian of mapping
+   const double J=J_eulerian_at_knot(ipt);
+
+   //Add the values to the sum
+   sum += interpolated_u*w*J;
+  }
+
+ //return the sum
+ return sum;
+}
+
 
 //======================================================================
 // Set the data for the number of Variables at each node
@@ -538,6 +589,10 @@ const unsigned QGeneralisedAdvectionDiffusionElement<DIM,NNODE_1D>::Initial_Nval
 //====================================================================
 // Force build of templates
 //====================================================================
+template class GeneralisedAdvectionDiffusionEquations<1>;
+template class GeneralisedAdvectionDiffusionEquations<2>;
+template class GeneralisedAdvectionDiffusionEquations<3>;
+
 template class QGeneralisedAdvectionDiffusionElement<1,2>;
 template class QGeneralisedAdvectionDiffusionElement<1,3>;
 template class QGeneralisedAdvectionDiffusionElement<1,4>;

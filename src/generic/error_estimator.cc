@@ -427,13 +427,16 @@ void Z2ErrorEstimator::get_recovered_flux_in_patch(
      //Jaocbian of mapping
      double J = el_pt->J_eulerian(s);
      
-     //Premultiply the weights and the Jacobian
-     double W = w*J;
-     
      // Global (Eulerian) coordinate
      Vector<double> x(dim);
      el_pt->interpolated_x(s,x);
-     
+
+
+     // Premultiply the weights and the Jacobian
+     // and the geometric jacobian weight (used in axisymmetric
+     // and spherical coordinate systems)
+     double W = w*J*(el_pt->geometric_jacobian(x));
+
      // Recovery shape functions at global (Eulerian) coordinate
      shape_rec(x,dim,psi_r);
      
@@ -1086,9 +1089,15 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
 
       //Jacobian of mapping
       double J = el_pt->J_eulerian(s);
-       
+
+      //Get the Eulerian position
+      Vector<double> x(dim);
+      el_pt->interpolated_x(s,x);
+
       //Premultiply the weights and the Jacobian
-      double W = w*J; 
+      //and the geometric jacobian weight (used in axisymmetric
+      // and spherical coordinate systems)
+      double W = w*J*(el_pt->geometric_jacobian(x));
 
       // Number of FE nodes
       unsigned n_node=el_pt->nnode();

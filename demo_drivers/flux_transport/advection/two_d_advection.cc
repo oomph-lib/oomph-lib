@@ -160,13 +160,10 @@ public:
         }
       }
     }
-   
-   //Now set up the neighbour information
-   const unsigned n_element = this->nelement();
-   for(unsigned e=0;e<n_element;e++)
-    {
-     dynamic_cast<ELEMENT*>(this->element_pt(e))->setup_face_neighbour_info();
-    }
+
+   //Setup the connections between the neighbouring faces
+   this->setup_face_neighbour_info();
+
   }
 
  //We can just use the map here

@@ -412,7 +412,7 @@ class PVDEquations : public PVDEquationsBase<DIM>
      // Are we assigning a solid initial condition?
      if (this->Solid_ic_pt!=0)
       {
-       fill_in_jacobian_for_solid_ic(residuals,jacobian);
+       this->fill_in_jacobian_for_solid_ic(residuals,jacobian);
        return;
       }
      
@@ -421,7 +421,7 @@ class PVDEquations : public PVDEquationsBase<DIM>
      if ((this->Evaluate_jacobian_by_fd)) 
       {
        //Add the contribution to the residuals
-       fill_in_contribution_to_residuals(residuals);
+       this->fill_in_contribution_to_residuals(residuals);
        
        //Get the solid entries in the jacobian using finite differences
        this->fill_in_jacobian_from_solid_position_by_fd(jacobian);

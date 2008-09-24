@@ -161,13 +161,6 @@ public:
   std::cout << "Constructed mesh with " << this->nelement() 
             << " Elements and " << this->nnode() << " Nodes" << std::endl;
 
-  //Now set up the neighbour information
-  for(unsigned e=0;e<n_element;e++)
-   {
-    dynamic_cast<ELEMENT*>(this->element_pt(e))->setup_face_neighbour_info();
-   }
-
-    
 
  } // End of constructor
 
@@ -267,6 +260,8 @@ class AdvectionProblem : public Problem
    this->set_explicit_time_stepper_pt(new RungeKutta<4>);
    this->add_time_stepper_pt(new BDF<4>);
    this->shut_up_in_newton_solve() = true;
+   //the problem is linear
+   Problem_is_nonlinear = false;
   }
  
  /// Destructor: clean up memory
@@ -336,22 +331,36 @@ class AdvectionProblem : public Problem
        }
      }
    }
- 
+
+ /// Assign the equations number associated with the problem
+ /// This virtual so that it can be overloaded in the discontinuous problem
+ /// to setup the coupling degrees of freedom for implicit timestepping
+ /// when required.
+ virtual void assign_equation_numbers(const bool &explicit_timestepper)
+  {
+   //The default is simply to assign the equation numbers
+   std::cout << assign_eqn_numbers() << " Equation numbers assigned "
+             << std::endl;
+  }
+
  void parameter_study(std::ostream &trace, const bool &explicit_timestepper,
                       const bool &disc)
   {
-   
+   //Defer assignment of the equation numbers until the parameter study
+   //so that the inclusion of coupling terms between faces can be
+   //determined from the type of timestep required.
+   this->assign_equation_numbers(explicit_timestepper);
    this->enable_mass_matrix_reuse();
-    this->enable_jacobian_reuse();
-    double dt = 0.001;
-    this->set_initial_conditions(dt);
-
-    Vector<double> error(1,0.0);
+   this->enable_jacobian_reuse();
+   double dt = 0.001;
+   this->set_initial_conditions(dt);
+   
+   Vector<double> error(1,0.0);
     
-    char filename[100];
-    ofstream outfile;
-    unsigned count=1;
-    for(unsigned i=0;i<1000;i++)
+   char filename[100];
+   ofstream outfile;
+   unsigned count=1;
+   for(unsigned i=0;i<1000;i++)
      {
       if(explicit_timestepper)
        {
@@ -399,29 +408,40 @@ class DGProblem : public AdvectionProblem
  {
   public:
 
+  /// Assign the equations number associated with the problem
+  /// AFTER setting up any potential coupling between the faces.
+  virtual void assign_equation_numbers(const bool &explicit_timestepper)
+   {
+    //Make the formulation discontinuous if we have an explicit timestepper
+    if(explicit_timestepper)
+     {this->enable_discontinuous_formulation();}
+
+    //Setup the coupling between the faces
+    dynamic_cast<OneDimMesh<ELEMENT>*>(this->mesh_pt())
+     ->setup_face_neighbour_info(!explicit_timestepper);
+
+    //The default is simply to assign the equation numbers
+    std::cout << assign_eqn_numbers() << " Equation numbers assigned "
+              << std::endl;
+   }
+
+
   /// Problem constructor: 
   DGProblem(const unsigned &n_element) 
    {
-    //Make the formulation discontinuous
-    this->enable_discontinuous_formulation();
-
     //Create a OneDimMesh Mesh object and set it to be the problem's mesh.
     //The element type, TwoNodePoissonElement, is passed  as a template 
     //parameter to the mesh. The argument to the constructor indicates
     //the number of elements in the mesh.
     Problem::mesh_pt() = new OneDimMesh<ELEMENT>(n_element,
                                                  this->time_stepper_pt());
-
+    
     //Set the wind function
     for(unsigned e=0;e<n_element;e++)
      {
       dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))->
        wind_fct_pt() = &Global::constant_wind;
      }
-
-    //Assign the local equation numbers
-    std::cout << assign_eqn_numbers() << " Equation numbers assigned "
-              << std::endl;
    }
 
 }; //End of problem definition
@@ -458,11 +478,6 @@ class ContProblem : public AdvectionProblem
       dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e))->
        wind_fct_pt() = &Global::constant_wind;
      }
-
-    //Assign the local equation numbers
-    std::cout << assign_eqn_numbers() << " Equation numbers assigned "
-              << std::endl;
-
    }
 
 }; //End of problem definition

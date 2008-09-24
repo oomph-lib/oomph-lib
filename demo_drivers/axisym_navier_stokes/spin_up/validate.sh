@@ -29,10 +29,10 @@ echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat  RESLT_CR/soln0.dat RESLT_CR/soln1.dat \
-     RESLT_CR/soln1.dat RESLT_CR/soln2.dat \
+     RESLT_CR/soln2.dat \
  > results_CR.dat
 cat  RESLT_TH/soln0.dat RESLT_TH/soln1.dat \
-     RESLT_TH/soln1.dat RESLT_TH/soln2.dat \
+     RESLT_TH/soln2.dat \
  > results_TH.dat
 
 if test "$1" = "no_python"; then

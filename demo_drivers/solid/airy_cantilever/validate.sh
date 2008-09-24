@@ -144,8 +144,8 @@ RESLT_refine9/soln1.dat \
 if test "$1" = "no_python"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/result_refine.dat.gz \
-    result_refine.dat  >> validation.log
+../../../../bin/fpdiff.py  ../validata/result_refine.dat.gz \
+    result_refine.dat  0.1 1.0e-11 >> validation.log
 fi
 
 

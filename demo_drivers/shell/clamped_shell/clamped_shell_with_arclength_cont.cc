@@ -71,25 +71,7 @@ namespace Global_Physical_Variables
                  const Vector<double> &N,
                  Vector<double>& load)
  {
-  //###################################################
-  // NOTE/WARNING: THIS SHOULD REALLY BE
-  // 
-  //     for(unsigned i=0;i<3;i++) 
-  // 
-  // BUT THE "2" IS RETAINED FOR HISTORICAL REASONS.
-  // THE MAIN PURPOSE OF THIS DRIVER CODE IS TO 
-  // TEST THE ARCLENGTH CONTINUATION AND THIS
-  // CASE REQUIRES A BIT MORE WORK (THAT WE DON'T HAVE
-  // TIME FOR AT THE MOMENT) WHEN THE CORRECT UPPER
-  // LIMIT IS USED, AS IT CHANGES THE BEHAVIOUR OF
-  // THE SYSTEM VERY SLIGHTLY -- ENOUGH TO UPSET
-  // THE CAREFULLY CHOSEN CONTROL PARAMETERS
-  // THAT ILLUSTRATE THE MAIN POINT OF THE EXAMPLE...
-  //
-  // PLEASE CONSULT THE CODE clamped_shell.cc
-  // FOR THE ACTUAL SHELL EXAMPLE
-  //##################################################
-  for(unsigned i=0;i<2;i++) 
+  for(unsigned i=0;i<3;i++) 
    {
     load[i] = external_pressure()*N[i];
    }
@@ -341,6 +323,14 @@ public:
  ShellProblem(const unsigned &nx, const unsigned &ny, 
               const double &lx, const double &ly);
 
+ /// Destructor: delete mesh, geometric object
+ ~ShellProblem()
+  {
+   delete Problem::mesh_pt();
+   delete Undeformed_midplane_pt;
+  }
+
+
  /// Overload Access function for the mesh
  ShellMesh<ELEMENT>* mesh_pt() 
   {return dynamic_cast<ShellMesh<ELEMENT>*>(Problem::mesh_pt());}
@@ -589,13 +579,17 @@ void ShellProblem<ELEMENT>::solve()
  //Open an output trace file
  ofstream trace("trace.dat");
 
+ //Change in displacemenet
+ double disp_incr = 0.05;
 
  //Gradually compress the tube by decreasing the value of the prescribed
- //position from 1 to zero in steps of 0.1
- for(unsigned i=1;i<11;i++)
+ //position from 1 to zero in steps of 0.05 initially and then 0.1
+ for(unsigned i=1;i<13;i++)
   {
-
-   Global_Physical_Variables::Prescribed_y -= 0.1;
+   //By the time we reach the second time round increase the incremenet
+   if(i==3) {disp_incr = 0.1;}
+   //Reduce prescribed y by our chosen increment
+   Global_Physical_Variables::Prescribed_y -= disp_incr;
 
    cout << std::endl << "Increasing displacement: Prescribed_y is " 
         << Global_Physical_Variables::Prescribed_y << std::endl;
@@ -640,7 +634,7 @@ void ShellProblem<ELEMENT>::solve()
  Max_newton_iterations=6;
 
  //Set the desired number of Newton iterations per arc-length step
- Desired_newton_iterations_ds=4;
+ Desired_newton_iterations_ds=3;
 
  //Set the proportion of the arc length
  Desired_proportion_of_arc_length = 0.2;

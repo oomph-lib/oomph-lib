@@ -199,7 +199,7 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
   //RefineableQElement<2>(), 
   BASIC(), SOLID()
   {
-   Use_undeformed_macro_element_for_new_lagrangian_coords=true;
+   this->Use_undeformed_macro_element_for_new_lagrangian_coords=true;
   } 
 
  /// \short The required number of values is the sum of the two

@@ -294,6 +294,76 @@ template<unsigned DIM>
    return dudt;
   }
 
+ //==================================================================
+ ///Calculate the averages of the flux variables 
+ //=================================================================
+ template<unsigned DIM>
+ void FluxTransportEquations<DIM>::calculate_element_averages(
+  double* &average_value)
+ {
+  //Find the number of fluxes
+  const unsigned n_flux = this->nflux();
+  //Resize the memory if necessary
+  if(average_value==0) {average_value = new double[n_flux+1];}
+
+  //Initialise the averages to zero
+  for(unsigned i=0;i<n_flux+1;i++) {average_value[i] = 0.0;}
+  
+  //Find the number of nodes
+  const unsigned n_node = this->nnode();
+  //Storage for the shape functions
+  Shape psi(n_node);
+  DShape dpsidx(n_node,DIM);
+  
+  //Cache the nodal indices at which the unknowns are stored
+   unsigned u_nodal_index[n_flux];
+   for(unsigned i=0;i<n_flux;i++) 
+    {u_nodal_index[i] = this->u_index_flux_transport(i);}
+
+   //Find the number of integration points
+   unsigned n_intpt = this->integral_pt()->nweight();
+      
+   //Loop over the integration points
+   for(unsigned ipt=0;ipt<n_intpt;ipt++)
+    {
+     //Get the shape functions and derivatives at the knot
+     double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx);
+
+     //Get the integral weight
+     double W = this->integral_pt()->weight(ipt)*J;
+
+     //Storage for the local unknowns
+     Vector<double> interpolated_u(n_flux,0.0);
+
+     //Loop over the shape functions
+     for(unsigned l=0;l<n_node;l++)
+      {
+       //Locally cache the shape function
+       const double psi_ = psi(l);
+       for(unsigned i=0;i<n_flux;i++)
+        {
+         //Calculate the velocity and tangent vector
+         interpolated_u[i] += this->nodal_value(l,u_nodal_index[i])*psi_;
+        }
+      }
+     
+     average_value[n_flux] += W;
+     //Loop over the values
+     for(unsigned i=0;i<n_flux;i++)
+      {
+       average_value[i] += interpolated_u[i]*W;
+      }
+    }
+
+   //Divide the results by the size of the element
+   for(unsigned i=0;i<n_flux;i++)
+    {
+     average_value[i] /= average_value[n_flux];
+    }
+ }
+ 
+
+
 
  //====================================================================
  ///Output function, print the values of all unknowns

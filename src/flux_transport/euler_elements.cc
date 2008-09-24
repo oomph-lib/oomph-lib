@@ -162,4 +162,12 @@ namespace oomph
  template class EulerEquations<2>;
  template class EulerEquations<3>;
 
+template<unsigned NNODE_1D>
+Gauss<1,NNODE_1D> 
+DGSpectralEulerElement<2,NNODE_1D>::Default_face_integration_scheme;
+ 
+ template class DGSpectralEulerElement<2,2>;
+ template class DGSpectralEulerElement<2,3>;
+ template class DGSpectralEulerElement<2,4>;
+
 }

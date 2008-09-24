@@ -103,10 +103,10 @@ class RefineableGeneralisedAdvectionDiffusionEquations :
    values.resize(1);
    
    //Find number of nodes
-   unsigned n_node = nnode();
+   const unsigned n_node = nnode();
 
    //Find the index at which the unknown is stored
-   unsigned u_nodal_index = this->u_index_cons_adv_diff();
+   const unsigned u_nodal_index = this->u_index_cons_adv_diff();
    
    //Local shape function
    Shape psi(n_node);
@@ -131,26 +131,31 @@ class RefineableGeneralisedAdvectionDiffusionEquations :
  void get_interpolated_values(const unsigned& t, const Vector<double>&s,
                               Vector<double>& values)
   {
-   if (t!=0)
+   // Set size of Vector:
+   values.resize(1);
+   
+   //Find out how many nodes there are
+   const unsigned n_node = nnode();
+
+   //Find the nodal index at which the unknown is stored
+   const unsigned u_nodal_index = this->u_index_cons_adv_diff();
+   
+   // Shape functions
+   Shape psi(n_node);
+   
+   //Find values of shape function
+   shape(s,psi);
+ 
+   //Initialise the value of u
+   values[0] = 0.0;
+  
+   //Calculate value
+   for(unsigned l=0;l<n_node;l++) 
     {
-     std::string error_message =
-      "Time-dependent version of get_interpolated_values() ";
-     error_message += "not implemented for this element \n";
-     throw 
-      OomphLibError(
-       error_message,
-       "RefineableGeneralisedAdvectionDiffusionEquations::get_interpolated_values()",
-       OOMPH_EXCEPTION_LOCATION);
-    }
-   else
-    {
-     //Make sure that we call the appropriate steady version 
-     //(the entire function might be overloaded lower down)
-     RefineableGeneralisedAdvectionDiffusionEquations<DIM>::
-      get_interpolated_values(s,values);
+     values[0] += this->nodal_value(t,l,u_nodal_index)*psi[l]; 
     }
   }
-
+ 
  
  ///  Further build: Copy source function pointer from father element
  void further_build()
@@ -167,6 +172,7 @@ class RefineableGeneralisedAdvectionDiffusionEquations :
     conserved_wind_fct_pt();
    this->Diff_fct_pt = cast_father_element_pt->diff_fct_pt();
    this->Pe_pt = cast_father_element_pt->pe_pt();
+   this->PeSt_pt = cast_father_element_pt->pe_st_pt();
 
    //Set the ALE status
    this->ALE_is_disabled = cast_father_element_pt->ALE_is_disabled;

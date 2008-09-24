@@ -714,6 +714,185 @@ void KirchhoffLoveBeamEquations::get_energy(double& pot_en, double& kin_en)
   } //End of loop over the integration points
 }
 
+
+//=======================================================================
+/// Compute the potential (strain) and kinetic energy of the 
+/// element. 
+//=======================================================================
+void KirchhoffLoveBeamEquations::get_energy(double &stretch, 
+                                            double &bend, double& kin_en)
+{
+ // Initialise
+ stretch=0.0;
+ bend = 0.0;
+ kin_en=0.0;
+
+ //Set the dimension of the global coordinates
+ unsigned n_dim = Undeformed_beam_pt->ndim();
+ 
+ //Set the number of lagrangian coordinates
+ unsigned n_lagrangian =  Undeformed_beam_pt->nlagrangian();
+ 
+ //Find out how many nodes there are
+ unsigned n_node = nnode();
+ 
+ //Find out how many positional dofs there are
+ unsigned n_position_dofs = nnodal_position_type();
+    
+ // Setup memory for veloc
+ Vector<double> veloc(2);
+
+ //Set up memory for the shape functions:
+ 
+ // # of nodes, # of positional dofs
+ Shape psi(n_node,n_position_dofs);
+ 
+ // # of nodes, # of positional dofs, # of lagrangian coords (for deriv)
+ DShape dpsidxi(n_node,n_position_dofs,n_lagrangian);
+ 
+ // # of nodes, # of positional dofs, # of derivs)
+ DShape d2psidxi(n_node,n_position_dofs,n_lagrangian);
+ 
+ //Set # of integration points
+ unsigned n_intpt = integral_pt()->nweight();
+ 
+ //Get Physical Variables from Element
+ 
+ // Thickness h/R, axial prestress, timescale ratio (density) 
+ double HoR = h();
+ double sigma_0=sigma0();
+
+ if(sigma_0!=0)
+  {
+   std::string error_message = 
+    "Warning: Not sure if the energy is computed correctly\n";
+   error_message += "         for nonzero sigma_0\n";
+
+   throw OomphLibError(error_message,
+                       "KirchhoffLoveBeamEquations::get_energy()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+
+ double Lambda_sq=lambda_sq();
+ 
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   //Get the integral weight
+   double w = integral_pt()->weight(ipt);
+   
+   //Call the derivatives of the shape functions w.r.t. Lagrangian coords
+   double J = d2shape_lagrangian_at_knot(ipt,psi,dpsidxi,d2psidxi);
+   
+   //Premultiply the weights and the Jacobian
+   double W = w*J;
+   
+   //Calculate local values of lagrangian position and 
+   //the derivative of global position wrt lagrangian coordinates
+   Vector<double> interpolated_xi(n_lagrangian,0.0);
+
+   DenseMatrix<double> interpolated_A(n_lagrangian,n_dim);
+   DenseMatrix<double> interpolated_dAdxi(n_lagrangian,n_dim);
+   
+   //Initialise to zero
+   
+   // Loop over coordinate directions/components of Vector
+   for(unsigned i=0;i<n_dim;i++)
+    {
+     // Initialise veloc
+     veloc[i]=0.0;
+     
+     // Loop over derivatives/base Vectors (just one here)
+     for(unsigned j=0;j<n_lagrangian;j++) {interpolated_A(j,i) = 0.0;}
+     // Loop over derivatives of base Vector (just one here)
+     for(unsigned j=0;j<n_lagrangian;j++) {interpolated_dAdxi(j,i) = 0.0;}
+    }
+   
+   //Calculate displacements, accelerations and spatial derivatives
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     //Loop over positional dofs
+     for(unsigned k=0;k<n_position_dofs;k++)
+      {
+       
+       //Loop over Lagrangian coordinate directions [xi_gen[] are the
+       // the *gen*eralised Lagrangian coordinates: node, type, direction]
+       for(unsigned i=0;i<n_lagrangian;i++)
+        {interpolated_xi[i] += raw_lagrangian_position_gen(l,k,i)*psi(l,k);}
+       
+       //Loop over components of the deformed position Vector
+       for(unsigned i=0;i<n_dim;i++)
+        {           
+         veloc[i] += raw_dnodal_position_gen_dt(1,l,k,i)*psi(l,k);
+         
+         //Loop over derivative directions (just one here)
+         for(unsigned j=0;j<n_lagrangian;j++)
+          {interpolated_A(j,i) += 
+            raw_nodal_position_gen(l,k,i)*dpsidxi(l,k,j);}
+         
+         //Loop over the second derivative directions (just one here)
+         for(unsigned j=0;j<n_lagrangian;j++)
+          {interpolated_dAdxi(j,i) += 
+            raw_nodal_position_gen(l,k,i)*d2psidxi(l,k,j);}
+        }
+       
+      }
+    }
+   
+   // Get square of veloc
+   double veloc_sq=0;
+   for(unsigned i=0;i<n_dim;i++) {veloc_sq += veloc[i]*veloc[i];}
+
+   // Setup position Vector and derivatives of undeformed config
+   Vector<double> R(n_dim);
+   DenseMatrix<double> a(n_lagrangian,n_dim);
+   RankThreeTensor<double> dadxi(n_lagrangian,n_lagrangian,n_dim);
+   
+   //Get the undeformed geometry
+   Undeformed_beam_pt->d2position(interpolated_xi,R,a,dadxi);
+   
+   //Declare and calculate the undeformed and deformed metric tensor
+   //and the strain tensor (these are 1d tensors, i.e. scalars)
+   double amet=0.0, Amet=0.0;
+   
+   // Work out metric and strain tensors
+   //Now calculate the dot product
+   for(unsigned k=0;k<n_dim;k++)
+    {
+     amet += a(0,k)*a(0,k);
+     Amet += interpolated_A(0,k)*interpolated_A(0,k);
+    }
+   
+   //Calculate strain tensor
+   double gamma = 0.5*(Amet - amet);
+   
+   //Calculate the contravariant metric tensors
+   double adet = amet; //aup = 1.0/amet;
+   double Adet = Amet; //Aup = 1.0/Amet;
+   
+   //Calculate the unit normal Vectors
+   Vector<double> n(2);
+   Vector<double> N(2);
+   n[0] = -a(0,1)/sqrt(adet);
+   n[1] =  a(0,0)/sqrt(adet);
+   
+   N[0] = -interpolated_A(0,1)/sqrt(Adet);
+   N[1] =  interpolated_A(0,0)/sqrt(Adet);
+   
+   //Calculate the curvature tensors
+   double b = n[0]*dadxi(0,0,0) + n[1]*dadxi(0,0,1);
+   double B = N[0]*interpolated_dAdxi(0,0) + N[1]*interpolated_dAdxi(0,1);
+   
+   //Set up the change of curvature tensor
+   double kappa = b - B;
+      
+   // Add contributions
+   stretch += 0.5*gamma*gamma*W*sqrt(adet); 
+   bend    += 0.5*(1.0/12.0)*HoR*HoR*kappa*kappa*W*sqrt(adet);
+   kin_en  += 0.5*Lambda_sq*veloc_sq*W*sqrt(adet);
+  } //End of loop over the integration points
+}
+
 //=======================================================================
 /// Output position at previous time (t=0: present; t>0: previous) 
 /// with specified number of plot points.

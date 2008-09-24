@@ -109,6 +109,9 @@ public:
  ///Constructor
  FluxTransportEquations() : FiniteElement() { }
 
+ ///Empty destructor
+ virtual ~FluxTransportEquations() {}
+
  /// Compute the element's residual Vector
  void fill_in_contribution_to_residuals(Vector<double> &residuals)
   {
@@ -162,6 +165,9 @@ public:
  /// \short i-th component of du/dt at local node n. 
  /// Uses suitably interpolated value for hanging nodes.
  double du_dt_flux_transport(const unsigned &n, const unsigned &i) const;
+
+ /// \short Compute the average values of the fluxes
+ void calculate_element_averages(double* &average_values);
 
  //Default output function
  void output(std::ostream &outfile)

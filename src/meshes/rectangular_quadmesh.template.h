@@ -393,7 +393,8 @@ class ElasticRectangularQuadMesh :
      for(unsigned i=0;i<n_nod;i++)
       {
        // Boundary coordinate varies between +/- H/2
-       zeta[0]=boundary_node_pt(b,i)->xi(1)-origin[1]-0.5*(Ymax-Ymin); 
+       zeta[0]=boundary_node_pt(b,i)->xi(1) - origin[1]
+                -0.5*(this->Ymax-this->Ymin); 
        boundary_node_pt(b,i)->set_coordinates_on_boundary(b,zeta);       
       }
      Boundary_coordinate_exists[b]=true;

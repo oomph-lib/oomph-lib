@@ -54,6 +54,12 @@ class EulerEquations : public FluxTransportEquations<DIM>
  //Pointer to the specific gas constant
  double *Gamma_pt;
  
+ /// \short Storage for the average primitive values
+ double *Average_prim_value;
+
+ /// \short Storage for the approximated gradients
+ double *Average_gradient;
+
 protected:
  
  /// \short DIM momentum-components, a density and an energy are transported
@@ -68,10 +74,20 @@ protected:
 public:
 
  ///Constructor
- EulerEquations() : FluxTransportEquations<DIM>()
+ EulerEquations() : FluxTransportEquations<DIM>(), Average_prim_value(0),
+  Average_gradient(0)
   {
    //Set the default value of gamma
    Gamma_pt = &Default_Gamma_Value;
+  }
+
+ ///Destructor
+ virtual ~EulerEquations()
+  {
+   if(this->Average_prim_value!=0) 
+    {delete[] Average_prim_value; Average_prim_value=0;}
+   if(this->Average_gradient!=0) 
+    {delete[] Average_gradient; Average_gradient=0;}
   }
 
  ///Calculate the pressure from the unknowns
@@ -165,6 +181,42 @@ public:
  /// \short Output function:  
  ///  x,y,u   or    x,y,z,u at n_plot^DIM plot points
  void output(std::ostream &outfile, const unsigned &n_plot);
+
+ void allocate_memory_for_averages()
+  {
+   //Find the number of fluxes
+   const unsigned n_flux = this->nflux();
+   //Resize the memory if necessary
+   if(this->Average_prim_value==0) 
+    {this->Average_prim_value = new double[n_flux];}
+   //Will move this one day
+   if(this->Average_gradient==0) 
+    {this->Average_gradient = new double[n_flux*DIM];}
+  }
+
+ /// \short Return access to the average gradient
+ double &average_gradient(const unsigned &i, const unsigned &j)
+  {
+   if(Average_gradient==0)
+    {
+     throw OomphLibError("Averages not calculated yet",
+                         "FluxTransportEquations<DIM>::average_gradient",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   return Average_gradient[DIM*i+j];
+  }
+
+ /// \short Return the average values
+ double &average_prim_value(const unsigned &i)
+  {
+   if(Average_prim_value==0)
+    {
+     throw OomphLibError("Averages not calculated yet",
+                         "FluxTransportEquations<DIM>::average_value",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   return Average_prim_value[i];
+  }
 
 };
 
@@ -370,6 +422,8 @@ public virtual QSpectralElement<DIM-1,NNODE_1D>
  {
   unsigned Nflux;
 
+  bool Reflecting;
+
  public:
   
   /// Constructor
@@ -383,6 +437,12 @@ public virtual QSpectralElement<DIM-1,NNODE_1D>
     element_pt->build_face_element(face_index,this);
     //Set the value of the flux
     Nflux = 2 + element_pt->dim();
+    //Use the Face integration scheme of the element for 2D elements
+    if(Nflux > 3)
+     {
+      this->set_integration_scheme(
+       dynamic_cast<ELEMENT*>(element_pt)->face_integration_pt());
+     }
    }
 
 
@@ -397,6 +457,8 @@ public virtual QSpectralElement<DIM-1,NNODE_1D>
                       Vector<double> &flux)
    {
     //Let's follow the yellow book and use local Lax-Friedrichs
+    //This is almost certainly not the best flux to use --- 
+    //further investigation is required here.
     //Cache the bulk element
     ELEMENT* cast_bulk_element_pt = 
      dynamic_cast<ELEMENT*>(this->bulk_element_pt());
@@ -458,7 +520,7 @@ public virtual QSpectralElement<DIM-1,NNODE_1D>
 
     
     //Let's find the Roe average
-    Vector<double> u_average(n_flux);
+    /*   Vector<double> u_average(n_flux);
     double sum = sqrt(u_int[0]) + sqrt(u_ext[0]);
     for(unsigned i=0;i<n_flux;i++)
      {
@@ -468,16 +530,68 @@ public virtual QSpectralElement<DIM-1,NNODE_1D>
     //Find the average pressure
     double p = cast_bulk_element_pt->pressure(u_average);
 
-    //Now do the normal
+    //Now do the normal velocity
     double vel = 0.0;
     for(unsigned j=0;j<dim;j++)
      {
-      vel += u_average[2+j]*u_average[2+j];
+      //vel += u_average[2+j]*u_average[2+j];
+      vel += u_average[2+j]*n_out[j];
      }
-    vel = sqrt(vel)/u_average[0];
+    //vel = sqrt(vel)/u_average[0];
+    vel /= u_average[0];
 
-    double arg = std::abs(gamma*p/u_average[0]);
+    double arg = std::abs(gamma*p/u_average[0]);*/
+
+    //Let's calculate the internal and external pressures and then enthalpies
+    double p_int = cast_bulk_element_pt->pressure(u_int);
+    double p_ext = cast_bulk_element_pt->pressure(u_ext);
+
+    //Limit the pressures to zero if necessary, but keep the energy the
+    //same
+    if(p_int < 0) 
+     {std::cout << "Negative int pressure" << p_int << "\n"; p_int=0.0;}
+    if(p_ext < 0) 
+     {std::cout << "Negative ext pressure " << p_ext << "\n"; p_ext=0.0;}
+
+    double H_int = (u_int[1] + p_int)/u_int[0];
+    double H_ext = (u_ext[1] + p_ext)/u_ext[0];
+
+    //Also calculate the velocities
+    Vector<double> vel_int(2), vel_ext(2);
+    for(unsigned j=0;j<dim;j++) 
+     {
+      vel_int[j] = u_int[2+j]/u_int[0];
+      vel_ext[j] = u_ext[2+j]/u_ext[0];
+     }
+
+    //Now we calculate the Roe averaged values
+    Vector<double> vel_average(dim);
+    double s_int = sqrt(u_int[0]);
+    double s_ext = sqrt(u_ext[0]);
+    double sum = s_int + s_ext;
+
+    //Velocities
+    for(unsigned j=0;j<dim;j++)
+     {
+      vel_average[j] = (s_int*vel_int[j] + s_ext*vel_ext[j])/sum;
+     }
+
+    //The enthalpy
+    double H_average = (s_int*H_int + s_ext*H_ext)/sum;
+
+    //Now calculate the square of the sound speed
+    double arg = H_average;
+    for(unsigned j=0;j<dim;j++) {arg -= 0.5*vel_average[j];}
+    arg *= (gamma - 1.0);
+    //Get the local sound speed
+    if(arg < 0.0) 
+     {std::cout << "Square of sound speed is negative!\n"; arg = 0.0;}
     double a = sqrt(arg);
+
+    //Calculate the normal average velocity
+    //Now do the normal velocity
+    double vel = 0.0;
+    for(unsigned j=0;j<dim;j++) {vel += vel_average[j]*n_out[j];}
 
     Vector<double> eigA(3,0.0);
     
@@ -562,7 +676,7 @@ public virtual QSpectralElement<DIM-1,NNODE_1D>
     const unsigned nodal_dim = this->nodal_dimension();
     Vector<double> n(nodal_dim);
     this->outer_unit_normal(s,n);
-
+     
     double dot = 0.0;
     for(unsigned j=0;j<nodal_dim;j++)
      {
@@ -604,6 +718,14 @@ class DGSpectralEulerElement<1,NNODE_1D> :
  
 public:
 
+ ///Overload the required number of fluxes for the DGElement
+ unsigned required_nflux() {return this->nflux();}
+ 
+ //Calculate averages 
+ void calculate_element_averages(double* &average_value)
+  {FluxTransportEquations<1>::calculate_element_averages(average_value);}
+
+
  //Constructor
  DGSpectralEulerElement() : QSpectralEulerElement<1,NNODE_1D>(), 
                               DGElement() 
@@ -612,6 +734,10 @@ public:
    //of the quadratic non-linearities
    this->set_integration_scheme(new Gauss<1,NNODE_1D>);
   }
+
+ //Dummy
+ Integral* face_integration_pt() const {return 0;}
+ 
  
  ~DGSpectralEulerElement() 
   { 
@@ -646,7 +772,7 @@ public:
                                                           mass_matrix,
                                                           flag);
 
-   this->add_flux_contributions_to_residuals(residuals);
+   this->add_flux_contributions_to_residuals(residuals,jacobian,flag);
   }
 
 
@@ -720,7 +846,16 @@ class DGSpectralEulerElement<2,NNODE_1D> :
  friend class 
  DGEulerFaceElement<DGSpectralEulerElement<2,NNODE_1D> >;
  
+ static Gauss<1,NNODE_1D> Default_face_integration_scheme;
+ 
 public:
+  
+ ///Overload the required number of fluxes for the DGElement
+ unsigned required_nflux() {return this->nflux();}
+
+  //Calculate averages 
+ void calculate_element_averages(double* &average_value)
+  {FluxTransportEquations<2>::calculate_element_averages(average_value);}
 
  //Constructor
  DGSpectralEulerElement() : 
@@ -733,6 +868,9 @@ public:
   }
  
  ~DGSpectralEulerElement() { }
+
+ Integral* face_integration_pt() const 
+  {return &Default_face_integration_scheme;}
  
  void build_all_faces()
   {
@@ -768,7 +906,7 @@ public:
                                                           mass_matrix,
                                                           flag);
 
-   this->add_flux_contributions_to_residuals(residuals);
+   this->add_flux_contributions_to_residuals(residuals,jacobian,flag);
   }
 
 

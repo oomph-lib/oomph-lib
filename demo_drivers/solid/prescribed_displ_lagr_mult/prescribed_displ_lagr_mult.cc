@@ -398,7 +398,7 @@ public:
    using namespace Locate_zeta_helpers;
 
    //Find the number of coordinates
-   unsigned ncoord = DIM-1; 
+   unsigned ncoord = this->dim();//DIM-1; 
 
    //Assign storage for the vector and matrix used in Newton's method
    Vector<double> dx(ncoord,0.0);

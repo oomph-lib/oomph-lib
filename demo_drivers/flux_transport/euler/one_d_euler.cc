@@ -140,7 +140,7 @@ public:
       construct_nodes_and_faces(this,time_stepper_pt);
     }
    
-   //Final element
+   //Final element   
    unsigned n_node = finite_element_pt(n_element-1)->nnode();
    boundary_info.resize(n_node,false);
    boundary_info[0] = false;
@@ -204,12 +204,7 @@ public:
             << " Elements and " << this->nnode() << " Nodes" << std::endl;
 
   //Now set up the neighbour information
-  for(unsigned e=0;e<n_element;e++)
-   {
-    dynamic_cast<ELEMENT*>(this->element_pt(e))->setup_face_neighbour_info();
-   }
-
-    
+  this->setup_face_neighbour_info();
 
  } // End of constructor
 
@@ -344,9 +339,19 @@ class EulerProblem : public Problem
         else {Global::initial_right(initial_u,sod);}
         
 
-        for(unsigned i=0;i<3;i++)
+        //for(unsigned i=0;i<3;i++)
+        // {
+        //  nod_pt->set_value(i,initial_u[i]);
+        // }
+
+        //Initialise any previous values (impulsive start)
+        const unsigned n_prev = nod_pt->time_stepper_pt()->nprev_values();
+        for(unsigned t=0;t<=n_prev;t++)
          {
-          nod_pt->set_value(i,initial_u[i]);
+          for(unsigned i=0;i<3;i++)
+           {
+            nod_pt->set_value(t,i,initial_u[i]);
+           }
          }
        }
      }
@@ -357,7 +362,6 @@ class EulerProblem : public Problem
  void parameter_study(const bool &sod)
   {
    this->enable_mass_matrix_reuse();
-   this->enable_jacobian_reuse();
    this->time() = 0.0;
    double dt = 0.0001;
    this->set_initial_conditions(dt,sod);
@@ -386,6 +390,9 @@ class EulerProblem : public Problem
      {
       //Take an explicit timestep
       explicit_timestep(dt);
+
+      //Take an implicit timestep
+      //unsteady_newton_solve(dt);
 
       if(count==500)
        {
@@ -419,6 +426,10 @@ class EulerProblem : public Problem
 template<class ELEMENT>
 class DGProblem : public EulerProblem
  {
+  ///Pointer to a slope limiter
+  SlopeLimiter* Slope_limiter_pt;
+  
+
   public:
 
   /// Problem constructor: 
@@ -434,7 +445,10 @@ class DGProblem : public EulerProblem
     Problem::mesh_pt() = new OneDimMesh<ELEMENT>(n_element,
                                                  this->time_stepper_pt());
 
-
+    //Set the slope limiter
+    Slope_limiter_pt = new MinModLimiter(5.0,true);
+    
+    
     for(unsigned i=0;i<3;i++)
      {
       mesh_pt()->boundary_node_pt(0,0)->pin(i);
@@ -446,6 +460,17 @@ class DGProblem : public EulerProblem
               << std::endl;
    }
 
+  ///Clean-up memory
+  ~DGProblem()
+   {
+    delete Slope_limiter_pt;
+   }
+
+
+ ///Slope limit the solution, if required
+ //void actions_after_explicit_timestep()
+ // {dynamic_cast<DGMesh*>(this->mesh_pt())->limit_slopes(Slope_limiter_pt);}
+
 }; //End of problem definition
 
 
@@ -456,11 +481,12 @@ int main()
   //One hunder elements
   unsigned n_element = 100;
 
-
-  DGProblem<DGSpectralEulerElement<1,3> > problem(n_element);
+  DGProblem<DGSpectralEulerElement<1,2> > problem(n_element);
+  std::cout << "Sod problem\n";
   //Solve the sod problem
   problem.parameter_study(true);
 
+  std::cout << "Lax problem\n";
   //Solve the lax problem
   problem.parameter_study(false);
 

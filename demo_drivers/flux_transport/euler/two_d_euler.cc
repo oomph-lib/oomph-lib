@@ -329,11 +329,7 @@ public:
     }
    
    //Now set up the neighbour information
-   const unsigned n_element = this->nelement();
-   for(unsigned e=0;e<n_element;e++)
-    {
-     dynamic_cast<ELEMENT*>(this->element_pt(e))->setup_face_neighbour_info();
-    }
+   this->setup_face_neighbour_info();
   }
 
  //We can just use the map here
@@ -580,7 +576,7 @@ int main()
   
  unsigned n_element = 8;
  
- for(unsigned i=0;i<2;i++)
+ for(unsigned i=0;i<3;i++)
   {
    TwoDDGProblem<DGSpectralEulerElement<2,2> > 
     problem(n_element,n_element);
