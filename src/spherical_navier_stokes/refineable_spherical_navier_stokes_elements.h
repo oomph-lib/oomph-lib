@@ -155,6 +155,9 @@ public virtual ElementWithZ2ErrorEstimator
  
    //Set pointer to volumetric source function
    this->Source_fct_pt = cast_father_element_pt->source_fct_pt();
+
+   //Set the ALE flag
+   this->ALE_is_disabled = cast_father_element_pt->ALE_is_disabled;
   }
  
  /// \short  Loop over all elements in Vector (which typically contains

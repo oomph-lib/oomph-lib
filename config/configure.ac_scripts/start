@@ -47,34 +47,81 @@ AC_PROG_LIBTOOL
 
 # Determine linker flags for fortran
 AC_F77_LIBRARY_LDFLAGS
+if test -z $ac_cv_prog_f77_v; then
+ echo "==================================================================="
+ echo "Empty verbose linking string."
+ echo "It is likely that the compilation has failed."
+ echo "Either the Fortran compiler has not been found or it doesn't work"
+ echo "If your Fortran compiler is in a non-standard location"
+ echo "please specify by setting the variable F77=/path/to/fortran_compiler"
+ echo "in your configuration file or as an environment variable." 
+ echo "The value of F77 found used here was $F77"
+ echo "===================================================================="
+ exit
+fi 
 
 
 # Set additional flags for C++ compilation: 
 #------------------------------------------
 # cfortran stuff:
-case "$F77" in
- *gfortran*)
-  AM_CXXFLAGS='-DgFortran'
-  AM_FFLAGS=' '
+case "$G77" in
+  yes)
+  #Test the version number by writing compiling and running
+  #a small test C++ program
+  #If the version number is different for the c-compiler and the
+  #fortran compiler then we're in real trouble!
+
+  cat > version_test.cc << EOF
+#include<iostream>
+int main() {if(__GNUC__ > 3) {std::cout << "yes";}else{std::cout << "no";}}
+EOF
+
+  $CXX version_test.cc  
+  gcc_version4=`./a.out`
+  rm ./a.out version_test.cc
+  if test "$gcc_version4" = yes; then
+   echo "GNU Compilers > v 4.0, linking with -DgFortran"
+   AM_CXXFLAGS='-DgFortran'
+  else
+   echo "GNU Compilers < v 4.0, linking with -Df2cFortran"
+   AM_CXXFLAGS='-Df2cFortran'
+  fi
   ;;
- *ifort*)
-  AM_CXXFLAGS='-DINTEL_COMPILER'
-  AM_FFLAGS=' '
-  ;;
- *[[A-Za-z0-9]]*)
-  AM_CXXFLAGS='-Df2cFortran'
-  AM_FFLAGS=' '
-  ;;
- *)
-  echo "==================================================";
-  echo "Fortran compiler not found. ";
-  echo "If your Fortran compiler is in a non-standard location"
-  echo "please specify by setting the variable F77=/path/to/fortran_compiler"
-  echo "in your configuration file or as an environment variable." 
-  echo "==================================================";
-  exit
-  ;;
+
+ no)
+ echo "========================================================"
+ echo "Not using GNU compiler suite"
+ echo "You must specify a flag for cfortran.h"
+ echo "in the CXXFLAGS of your config file."
+ echo "e.g. -DINTEL_COMPILER for the Intel suite of compilers"
+ echo "See cfortran.h documentation for further details"
+ echo "========================================================"
+ ;;
 esac
+
+#case "$F77 " in
+# *gfortran*)
+#  AM_CXXFLAGS='-DgFortran'
+#  AM_FFLAGS=' '
+#  ;;
+# *ifort*)
+#  AM_CXXFLAGS='-DINTEL_COMPILER'
+#  AM_FFLAGS=' '
+#  ;;
+# *[[A-Za-z0-9]]*)
+#  AM_CXXFLAGS='-Df2cFortran'
+#  AM_FFLAGS=' '
+#  ;;
+# *)
+#  echo "==================================================";
+#  echo "Fortran compiler not found. ";
+#  echo "If your Fortran compiler is in a non-standard location"
+#  echo "please specify by setting the variable F77=/path/to/fortran_compiler"
+#  echo "in your configuration file or as an environment variable." 
+#  echo "==================================================";
+#  exit
+#  ;;
+#esac
 
 
 AC_SUBST(AM_CXXFLAGS)
@@ -104,7 +151,7 @@ accumulated_cpp_flags=''
 #
 # but malloc.h doesn't exist on BSD Linux. Since malloc.h was only suggested
 # by autoscan, I've experimentally taken it out to see if this breaks
-# anything under GNU Linux (MH 12/01/2007)
+# anything under GNU< Linux (MH 12/01/2007)
 #
 AC_HEADER_STDC
 AC_CHECK_HEADERS([limits.h stdlib.h string.h sys/time.h],

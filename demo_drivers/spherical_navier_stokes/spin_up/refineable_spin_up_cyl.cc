@@ -239,6 +239,9 @@ RefineableSphericalSpinUpProblem<ELEMENT>::RefineableSphericalSpinUpProblem()
    //Set the Womersley number
    el_pt->re_st_pt() = &Global_Physical_Variables::ReSt;
    
+   //Disable ALE
+   el_pt->disable_ALE();
+
    // Set pointer to continuous time
    el_pt->time_pt()=time_pt();
   } // end loop over elements

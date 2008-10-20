@@ -16,4 +16,4 @@ prescribed_displ_lagr_mult_LDADD = -L@libdir@ -lsolid -lconstitutive -lgeneric \
 
 #-------------------------------------------------------------------
 
-EXTRA_DIST=lagr_distort.mcr
+EXTRA_DIST+=lagr_distort.mcr

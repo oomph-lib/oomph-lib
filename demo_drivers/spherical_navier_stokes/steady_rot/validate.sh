@@ -18,7 +18,7 @@ cd Validation
 echo "Running Steady Spherical Rigid-Body Rotation validation "
 mkdir RESLT
 cd RESLT
-../../steady_rot > OUTPUT_steady_rot
+../../steady_rot > ../OUTPUT_steady_rot
 cd ..
 echo "done"
 echo " " >> validation.log

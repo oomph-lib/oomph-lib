@@ -74,7 +74,7 @@ public:
    Vector<double> s_bulk(dim+1);
 
    //Get the outer unit normal
-   Vector<double> N(3,0.0);
+   Vector<double> N(2,0.0);
 
    //Need to find position 
    Vector<double> x(dim+1);
@@ -282,6 +282,9 @@ RefineableSphericalCouetteProblem<ELEMENT>::RefineableSphericalCouetteProblem()
 
    //Set the Reynolds number
    el_pt->re_pt() = &Global_Physical_Variables::Re;
+
+   //Disable ALE
+   el_pt->disable_ALE();
    
    // Set pointer to continuous time
    el_pt->time_pt()=time_pt();

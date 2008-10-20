@@ -783,6 +783,11 @@ public:
  void position(const unsigned& t, const Vector<double>& zeta, 
                        Vector<double>& r) const
   {
+   //If we have done the construction, it's a Steady Ellipse,
+   //so all time-history values of the position are equal to the position
+   if(Must_clean_up) {position(zeta,r); return;}
+   
+   //Otherwise check that the value of t is within range
 #ifdef PARANOID
    if (t>Geom_data_pt[0]->time_stepper_pt()->nprev_values())
     {

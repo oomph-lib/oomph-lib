@@ -266,6 +266,11 @@ protected:
  /// Pointer to volumetric source function
  double (*Source_fct_pt)(const double& time, const Vector<double> &x);
 
+ /// \short Boolean flag to indicate if ALE formulation is disabled when
+ /// the time-derivatives are computed. Only set to true if you're sure
+ /// that the mesh is stationary
+ bool ALE_is_disabled;
+
  /// \short Access function for the local equation number information for
  /// the pressure.
  /// p_local_eqn[n] = local equation number or < 0 if pinned
@@ -339,7 +344,8 @@ protected:
 public:
 
  /// \short Constructor: NULL the body force and source function
- AxisymmetricNavierStokesEquations() : Body_force_fct_pt(0), Source_fct_pt(0)
+ AxisymmetricNavierStokesEquations() : Body_force_fct_pt(0), Source_fct_pt(0),
+  ALE_is_disabled(false)
   {
    //Set all the Physical parameter pointers to the default value zero
    Re_pt = &Default_Physical_Constant_Value;
@@ -443,6 +449,22 @@ public:
     }
    
    return dudt;
+  }
+ 
+ /// \short Disable ALE, i.e. assert the mesh is not moving -- you do this
+ /// at your own risk!
+ void disable_ALE()
+  {
+   ALE_is_disabled=true;
+  }
+
+ /// \short (Re-)enable ALE, i.e. take possible mesh motion into account
+ /// when evaluating the time-derivative. Note: By default, ALE is
+ /// enabled, at the expense of possibly creating unnecessary work
+ /// in problems where the mesh is, in fact, stationary.
+ void enable_ALE()
+  {
+   ALE_is_disabled=false;
   }
 
  /// \short Pressure at local pressure "node" n_p

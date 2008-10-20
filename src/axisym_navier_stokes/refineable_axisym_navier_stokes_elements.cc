@@ -138,17 +138,8 @@ for(unsigned ipt=0;ipt<Nintpt;ipt++)
  Vector<double> interpolated_x(DIM,0.0);
  Vector<double> mesh_veloc(DIM,0.0);
  Vector<double> dudt(DIM+1,0.0);
- DenseMatrix<double> interpolated_dudx(DIM+1,DIM);
-      
- //Initialise everything to zero
- for(unsigned i=0;i<DIM+1;i++)
-  {
-   for(unsigned j=0;j<DIM;j++)
-    {
-     interpolated_dudx(i,j) = 0.0;
-    }
-  }
-      
+ DenseMatrix<double> interpolated_dudx(DIM+1,DIM,0.0);
+
  //Calculate pressure
  for(unsigned l=0;l<n_pres;l++) {interpolated_p += p_axi_nst(l)*psip[l];}
       
@@ -158,18 +149,20 @@ for(unsigned ipt=0;ipt<Nintpt;ipt++)
  // Loop over nodes
  for(unsigned l=0;l<n_node;l++) 
   {
-        
+   //Cache the shape function
+   const double psif_ = psif(l);
    //Loop over directions
    for(unsigned i=0;i<DIM;i++)
     {
-     interpolated_x[i] += nodal_position(l,i)*psif[l];
-     mesh_veloc[i] +=dnodal_position_dt(l,i)*psif[l];
+     interpolated_x[i] += nodal_position(l,i)*psif_;
+     //mesh_veloc[i] +=dnodal_position_dt(l,i)*psif(l);
     }
+
    for(unsigned i=0;i<DIM+1;i++)
     {
-     double u_value = nodal_value(l,u_nodal_index[i]);
-     interpolated_u[i] += u_value*psif[l];
-     dudt[i]+=du_dt_axi_nst(l,i)*psif[l];
+     const double u_value = nodal_value(l,u_nodal_index[i]);
+     interpolated_u[i] += u_value*psif_;
+     dudt[i]+=du_dt_axi_nst(l,i)*psif_;
      //Loop over derivative directions for gradients
      for(unsigned j=0;j<DIM;j++)
       {                               
@@ -178,6 +171,21 @@ for(unsigned ipt=0;ipt<Nintpt;ipt++)
     }
   }  
    
+ //Get the mesh velocity if ALE is enabled
+ if(!ALE_is_disabled)
+  {
+   // Loop over nodes
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     //Loop over the two coordinate directions
+     for(unsigned i=0;i<2;i++)
+      {
+       mesh_veloc[i]  += this->dnodal_position_dt(l,i)*psif(l);
+      }
+    }
+  }
+       
+
  //Get the user-defined body force terms
  Vector<double> body_force(DIM+1);
  get_body_force(time(),interpolated_x,body_force);
@@ -288,11 +296,14 @@ for(unsigned ipt=0;ipt<Nintpt;ipt++)
             hang_weight;
                
            //Mesh velocity terms
-           for(unsigned k=0;k<2;k++)
+           if(!ALE_is_disabled)
             {
-             sum += 
-              scaled_re_st*r*mesh_veloc[k]*interpolated_dudx(0,k)*testf[l]*W*
-              hang_weight;
+             for(unsigned k=0;k<2;k++)
+              {
+               sum += 
+                scaled_re_st*r*mesh_veloc[k]*interpolated_dudx(0,k)*testf[l]*W*
+                hang_weight;
+              }
             }
            break;
                 
@@ -333,11 +344,14 @@ for(unsigned ipt=0;ipt<Nintpt;ipt++)
             testf[l]*W*hang_weight;
                 
            //Mesh velocity terms
-           for(unsigned k=0;k<2;k++)
+           if(!ALE_is_disabled)
             {
-             sum += 
-              scaled_re_st*r*mesh_veloc[k]*interpolated_dudx(1,k)*testf[l]*W
-              *hang_weight;
+             for(unsigned k=0;k<2;k++)
+              {
+               sum += 
+                scaled_re_st*r*mesh_veloc[k]*interpolated_dudx(1,k)*testf[l]*W
+                *hang_weight;
+              }
             }
            break;
                 
@@ -380,10 +394,13 @@ for(unsigned ipt=0;ipt<Nintpt;ipt++)
             *hang_weight;
                 
            //Mesh velocity terms
-           for(unsigned k=0;k<2;k++)
+           if(!ALE_is_disabled)
             {
-             sum += scaled_re_st*r*mesh_veloc[k]*
-              interpolated_dudx(2,k)*testf[l]*W*hang_weight;
+             for(unsigned k=0;k<2;k++)
+              {
+               sum += scaled_re_st*r*mesh_veloc[k]*
+                interpolated_dudx(2,k)*testf[l]*W*hang_weight;
+              }
             }
            break;
           }
@@ -487,11 +504,14 @@ for(unsigned ipt=0;ipt<Nintpt;ipt++)
                         *testf[l]*W*hang_weight*hang_weight2;
                            
                        //Mesh velocity terms
-                       for(unsigned k=0;k<2;k++)
+                       if(!ALE_is_disabled)
                         {
-                         jacobian(local_eqn,local_unknown)
-                          += scaled_re_st*r*mesh_veloc[k]*dpsifdx(l2,k)
-                          *testf[l]*W*hang_weight*hang_weight2;
+                         for(unsigned k=0;k<2;k++)
+                          {
+                           jacobian(local_eqn,local_unknown)
+                            += scaled_re_st*r*mesh_veloc[k]*dpsifdx(l2,k)
+                            *testf[l]*W*hang_weight*hang_weight2;
+                          }
                         }
                        break;
                             
@@ -575,11 +595,14 @@ for(unsigned ipt=0;ipt<Nintpt;ipt++)
                         *testf[l]*W*hang_weight*hang_weight2;
                            
                        //Mesh velocity terms
-                       for(unsigned k=0;k<2;k++)
+                       if(!ALE_is_disabled)
                         {
-                         jacobian(local_eqn,local_unknown) 
-                          += scaled_re_st*r*mesh_veloc[k]*dpsifdx(l2,k)
-                          *testf[l]*W*hang_weight*hang_weight2;
+                         for(unsigned k=0;k<2;k++)
+                          {
+                           jacobian(local_eqn,local_unknown) 
+                            += scaled_re_st*r*mesh_veloc[k]*dpsifdx(l2,k)
+                            *testf[l]*W*hang_weight*hang_weight2;
+                          }
                         }
                        break;
                             
@@ -656,11 +679,14 @@ for(unsigned ipt=0;ipt<Nintpt;ipt++)
                         *testf[l]*W*hang_weight*hang_weight2;
                             
                        //Mesh velocity terms
-                       for(unsigned k=0;k<2;k++)
+                       if(!ALE_is_disabled)
                         {
-                         jacobian(local_eqn,local_unknown) 
-                          += scaled_re_st*r*mesh_veloc[k]*dpsifdx(l2,k)
-                          *testf[l]*W*hang_weight*hang_weight2;
+                         for(unsigned k=0;k<2;k++)
+                          {
+                           jacobian(local_eqn,local_unknown) 
+                            += scaled_re_st*r*mesh_veloc[k]*dpsifdx(l2,k)
+                            *testf[l]*W*hang_weight*hang_weight2;
+                          }
                         }
                        break;
                       }

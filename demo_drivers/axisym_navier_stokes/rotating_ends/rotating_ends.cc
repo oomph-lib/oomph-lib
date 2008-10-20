@@ -228,6 +228,9 @@ RotatingProblem<ELEMENT>::RotatingProblem
    //to call!
    ELEMENT *el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
 
+   //There is no need for ALE
+   el_pt->disable_ALE();
+
    //Set the Reynolds number for each element 
    //(yes we could have different Reynolds number in each element!!)
    el_pt->re_pt() = &Re;

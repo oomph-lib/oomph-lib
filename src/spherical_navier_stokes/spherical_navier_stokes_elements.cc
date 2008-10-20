@@ -1255,6 +1255,11 @@ void SphericalNavierStokesEquations::
 get_vorticity(const Vector<double>& s, Vector<double>& vorticity) const
 {
 
+ throw OomphLibError(
+  "Not tested for spherical Navier-Stokes elements",
+  "SphericalNavierStokesEquations::get_vorticity()",
+  OOMPH_EXCEPTION_LOCATION);
+
 #ifdef PARANOID
    if (vorticity.size()!=1)
     {
@@ -1322,7 +1327,6 @@ get_vorticity(const Vector<double>& s, Vector<double>& vorticity) const
 //==============================================================
 double SphericalNavierStokesEquations::kin_energy() const
 {  
-
  // Initialise
  double kin_en=0.0;
 
@@ -1366,7 +1370,13 @@ double SphericalNavierStokesEquations::kin_energy() const
 ///  \short Get integral of time derivative of kinetic energy over element:
 //==========================================================================
 double SphericalNavierStokesEquations::d_kin_energy_dt() const
-{  
+{
+ throw OomphLibError(
+  "Not tested for spherical Navier-Stokes elements",
+  "SphericalNavierStokesEquations::d_kin_energy_dt()",
+  OOMPH_EXCEPTION_LOCATION);
+ 
+  
  // Initialise
  double d_kin_en_dt=0.0;
 
@@ -1620,6 +1630,9 @@ fill_in_generic_residual_contribution_spherical_nst(
    
    if (!ALE_is_disabled)
     {
+     OomphLibWarning("ALE is not tested for spherical Navier Stokes",
+                     "SphericalNS::fill_in...",
+                     OOMPH_EXCEPTION_LOCATION);
      // Loop over nodes
      for(unsigned l=0;l<n_node;l++) 
       {
@@ -1680,6 +1693,15 @@ fill_in_generic_residual_contribution_spherical_nst(
        double sum = 
         (scaled_re_st*r2*dudt[0] + r*scaled_re*conv)*sin_theta*testf[l];
 
+       //Subtract the mesh velocity terms
+       if(!ALE_is_disabled)
+        {
+         sum -= scaled_re_st*
+          (mesh_velocity[0]*interpolated_dudx(0,0)*r
+           + mesh_velocity[1]*(interpolated_dudx(0,1) - u_theta))
+          *r*sin_theta*testf[l];
+        }
+
        // r-derivative test function component of stress tensor
        sum += 
         (-interpolated_p + 2.0*interpolated_dudx(0,0))*
@@ -1693,7 +1715,9 @@ fill_in_generic_residual_contribution_spherical_nst(
        sum += 2.0*(( -r*interpolated_p + interpolated_dudx(1,1) + 
                       2.0*u_r)*sin_theta + u_theta*cos_theta)*testf(l);
        
-       residuals[local_eqn] += sum*W;
+       //Make the residuals negative for consistency with the
+       //other Navier-Stokes equations
+       residuals[local_eqn] -= sum*W;
        
        //CALCULATE THE JACOBIAN
        if(flag)
@@ -1723,6 +1747,14 @@ fill_in_generic_residual_contribution_spherical_nst(
               (scaled_re_st*node_pt(l2)->time_stepper_pt()->weight(1,0)*
                psif(l2)*r2 + scaled_re*jac_conv*r)*testf(l);
              
+             //Subtract the mesh-velocity terms
+             if(!ALE_is_disabled)
+              {
+               jac_sum -= scaled_re_st*
+                (mesh_velocity[0]*dpsifdx(l2,0)*r
+                 + mesh_velocity[1]*dpsifdx(l2,1))*r*sin_theta*testf(l);
+              }
+
              
              // Contribution from the r-derivative test function part 
              //of stress tensor
@@ -1739,7 +1771,14 @@ fill_in_generic_residual_contribution_spherical_nst(
              
              //Add the total contribution to the jacobian multiplied 
              //by the jacobian weight
-             jacobian(local_eqn,local_unknown) += jac_sum*sin_theta*W;
+             jacobian(local_eqn,local_unknown) -= jac_sum*sin_theta*W;
+
+             //Mass matrix term
+             if(flag==2)
+              {
+               mass_matrix(local_eqn,local_unknown) += 
+                scaled_re_st*psif[l2]*testf[l]*r2*sin_theta*W;
+              }
             } 
            // End of i2=0 section
            
@@ -1757,6 +1796,13 @@ fill_in_generic_residual_contribution_spherical_nst(
               scaled_re*(interpolated_dudx(0,1) - 2.0*u_theta)*
               psif(l2)*r*sin_theta*testf(l); 
              
+             //Mesh velocity terms
+             if(!ALE_is_disabled)
+              {
+               jac_sum += scaled_re_st*
+                mesh_velocity[1]*psif(l2)*r*sin_theta*testf(l);
+              }
+
              //Contribution from the theta-derivative test function 
              //part of stress tensor
              jac_sum += (r*dpsifdx(l2,0) - psif(l2))*dtestfdx(l,1)*sin_theta;
@@ -1767,7 +1813,7 @@ fill_in_generic_residual_contribution_spherical_nst(
               2.0*(dpsifdx(l2,1)*sin_theta + psif(l2)*cos_theta)*testf(l);
 
              //Add the full contribution to the jacobian matrix
-             jacobian(local_eqn,local_unknown) += jac_sum*W;
+             jacobian(local_eqn,local_unknown) -= jac_sum*W;
 
             } // End of i2=1 section
            
@@ -1779,7 +1825,7 @@ fill_in_generic_residual_contribution_spherical_nst(
            if(local_unknown >= 0)
             {
              // Single convective-term contribution
-             jacobian(local_eqn,local_unknown) -= 
+             jacobian(local_eqn,local_unknown) += 
               2.0*scaled_re*u_phi*psif[l2]*r*sin_theta*testf[l]*W;
             } 
            // End of i2=2 section
@@ -1795,7 +1841,7 @@ fill_in_generic_residual_contribution_spherical_nst(
            local_unknown = p_local_eqn(l2);
            if(local_unknown >= 0)
             {
-             jacobian(local_eqn,local_unknown) -= 
+             jacobian(local_eqn,local_unknown) += 
               psip(l2)*(r2*dtestfdx(l,0) + 2.0*r*testf(l))*sin_theta*W;
             }
           }
@@ -1824,6 +1870,15 @@ fill_in_generic_residual_contribution_spherical_nst(
        double sum = 
         (scaled_re_st*dudt[1]*r2*sin_theta + scaled_re*r*conv)*testf(l);
        
+       //Subtract the mesh velocity terms
+       if(!ALE_is_disabled)
+        {
+         sum -= scaled_re_st*
+          (mesh_velocity[0]*interpolated_dudx(1,0)*r
+           + mesh_velocity[1]*(interpolated_dudx(1,1) + u_r))
+           *r*sin_theta*testf(l);
+        }
+
        // r-derivative test function component of stress tensor
        sum += (r*interpolated_dudx(1,0) - u_theta + interpolated_dudx(0,1))
         *r*sin_theta*dtestfdx(l,0);
@@ -1838,8 +1893,9 @@ fill_in_generic_residual_contribution_spherical_nst(
                 -(-r*interpolated_p + 2.0*u_r + 2.0*u_theta*cot_theta)*
                cos_theta)*testf(l);
        
-       //Add the sum to the residuals
-       residuals[local_eqn] += sum*W;
+       //Add the sum to the residuals, 
+       //(Negative for consistency)
+       residuals[local_eqn] -= sum*W;
        
        //CALCULATE THE JACOBIAN
        if(flag)
@@ -1863,6 +1919,13 @@ fill_in_generic_residual_contribution_spherical_nst(
               r2*interpolated_dudx(1,0) + r*u_theta)*psif(l2)*
               sin_theta*testf(l);
              
+             //Mesh velocity terms
+             if(!ALE_is_disabled)
+              {
+               jac_sum -= scaled_re_st*
+                mesh_velocity[1]*psif(l2)*r*sin_theta*testf(l);
+              }
+
              // Contribution from the r-derivative 
              //test function part of stress tensor
              jac_sum += dpsifdx(l2,1)*dtestfdx(l,0)*sin_theta*r;
@@ -1877,7 +1940,7 @@ fill_in_generic_residual_contribution_spherical_nst(
                          - 2.0*psif(l2)*cos_theta)*testf(l);
 
              //Add the sum to the jacobian
-             jacobian(local_eqn,local_unknown) += jac_sum*W;
+             jacobian(local_eqn,local_unknown) -= jac_sum*W;
              
             }
            // End of i2=0 section
@@ -1899,6 +1962,14 @@ fill_in_generic_residual_contribution_spherical_nst(
               (scaled_re_st*node_pt(l2)->time_stepper_pt()->weight(1,0)*
                psif(l2)*r2 + scaled_re*r*jac_conv)*testf(l)*sin_theta;
 
+                          
+             //Mesh velocity terms
+             if(!ALE_is_disabled)
+              {
+               jac_sum -= scaled_re_st*
+                (mesh_velocity[0]*dpsifdx(l2,0)*r
+                 + mesh_velocity[1]*dpsifdx(l2,1))*r*sin_theta*testf(l);
+              }
 
              // Contribution from the r-derivative test function 
              //part of stress tensor
@@ -1914,8 +1985,14 @@ fill_in_generic_residual_contribution_spherical_nst(
                          - 2.0*psif(l2)*cot_theta*cos_theta)*testf(l);
 
              //Add the contribution to the jacobian
-             jacobian(local_eqn,local_unknown) += jac_sum*W;
-
+             jacobian(local_eqn,local_unknown) -= jac_sum*W;
+             
+             //Mass matrix term
+             if(flag==2)
+              {
+               mass_matrix(local_eqn,local_unknown) += 
+                scaled_re_st*psif[l2]*testf[l]*r2*sin_theta*W;
+              }
             } 
            // End of i2=1 section
            
@@ -1927,7 +2004,7 @@ fill_in_generic_residual_contribution_spherical_nst(
            if(local_unknown >= 0)
             {
              // Only a convective term contribution
-             jacobian(local_eqn,local_unknown) -= 
+             jacobian(local_eqn,local_unknown) += 
               scaled_re*2.0*r*psif(l2)*u_phi*cos_theta*testf(l)*W;
             } 
            // End of i2=2 section
@@ -1943,7 +2020,7 @@ fill_in_generic_residual_contribution_spherical_nst(
            local_unknown = p_local_eqn(l2);
            if(local_unknown >= 0)
             {
-             jacobian(local_eqn,local_unknown) -= 
+             jacobian(local_eqn,local_unknown) += 
               psip(l2)*r*(dtestfdx(l,1)*sin_theta + 
                           cos_theta*testf[l])*W;
             }
@@ -1974,6 +2051,14 @@ fill_in_generic_residual_contribution_spherical_nst(
        //Add the time-derivative term and the convective terms to the sum
        double sum = (scaled_re_st*r2*dudt[2]*sin_theta
                      + scaled_re*conv*r)*testf(l);
+
+       //Mesh velocity terms
+       if(!ALE_is_disabled)
+        {
+         sum -= scaled_re_st*
+          (mesh_velocity[0]*interpolated_dudx(2,0)*r
+           + mesh_velocity[1]*interpolated_dudx(2,1))*r*sin_theta*testf(l);
+        }
        
        // r-derivative test function component of stress tensor
        sum += (r2*interpolated_dudx(2,0) - r*u_phi)*dtestfdx(l,0)*sin_theta;
@@ -1988,7 +2073,7 @@ fill_in_generic_residual_contribution_spherical_nst(
          + (interpolated_dudx(2,1) - u_phi*cot_theta)*cos_theta)*testf(l);
        
        //Add the sum to the residuals
-       residuals[local_eqn] += sum*W;
+       residuals[local_eqn] -= sum*W;
 
          
        //CALCULATE THE JACOBIAN
@@ -2007,7 +2092,7 @@ fill_in_generic_residual_contribution_spherical_nst(
            if(local_unknown >= 0)
             {
              // Contribution from convective terms
-             jacobian(local_eqn,local_unknown) += 
+             jacobian(local_eqn,local_unknown) -= 
               scaled_re*(r*interpolated_dudx(2,0) + u_phi)
               *psif(l2)*testf(l)*r*sin_theta*W;
             } 
@@ -2020,7 +2105,7 @@ fill_in_generic_residual_contribution_spherical_nst(
            if(local_unknown >= 0)
             {
              //Contribution from convective terms
-             jacobian(local_eqn,local_unknown) +=
+             jacobian(local_eqn,local_unknown) -=
               scaled_re*(interpolated_dudx(2,1)*sin_theta
                          + u_phi*cos_theta)*r*psif(l2)*testf(l)*W;
              
@@ -2049,6 +2134,14 @@ fill_in_generic_residual_contribution_spherical_nst(
                psif(l2)*r2*sin_theta +
                scaled_re*r*jac_conv)*testf(l);
 
+
+             //Mesh velocity terms
+             if(!ALE_is_disabled)
+              {
+               jac_sum -= scaled_re_st*
+                (mesh_velocity[0]*dpsifdx(l2,0)*r
+                 + mesh_velocity[1]*dpsifdx(l2,1))*r*sin_theta*testf(l);
+              }
              
              // Contribution from the r-derivative test function 
              //part of stress tensor
@@ -2066,8 +2159,15 @@ fill_in_generic_residual_contribution_spherical_nst(
               testf(l);
 
              //Add to the jacobian
-             jacobian(local_eqn,local_unknown) += jac_sum*W;
+             jacobian(local_eqn,local_unknown) -= jac_sum*W;
              
+             //Mass matrix term
+             if(flag==2)
+              {
+               mass_matrix(local_eqn,local_unknown) += 
+                scaled_re_st*psif[l2]*testf[l]*r2*sin_theta*W;
+              }
+
             } 
            // End of i2=2 section
            

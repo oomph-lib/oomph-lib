@@ -134,7 +134,7 @@ class NavierStokesEquations : public virtual FSIFluidElement
  NavierStokesSourceFctPt Source_fct_pt;
 
  /// \short Boolean flag to indicate if ALE formulation is disabled when
- /// time-derivatives are computed. Only set to false if you're sure
+ /// time-derivatives are computed. Only set to true if you're sure
  /// that the mesh is stationary.
  bool ALE_is_disabled;
  

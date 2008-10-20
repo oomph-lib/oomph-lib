@@ -851,57 +851,59 @@ fill_in_generic_residual_contribution_axi_nst(Vector<double> &residuals,
 
    //Allocate storage for the position and the derivative of the 
    //mesh positions wrt time
-   Vector<double> interpolated_x(2);
-   Vector<double> mesh_velocity(2);
+   Vector<double> interpolated_x(2,0.0);
+   Vector<double> mesh_velocity(2,0.0);
    //Allocate storage for the pressure, velocity components and their
    //time and spatial derivatives
    double interpolated_p=0.0;
-   Vector<double> interpolated_u(3);
-   Vector<double> dudt(3);
-   DenseMatrix<double> interpolated_dudx(3,2);
-
-   //Initialise position and its time derivatives to zero
-   for(unsigned i=0;i<2;i++) 
-    {
-     interpolated_x[i] = 0.0;
-     mesh_velocity[i] = 0.0;
-    }
-
-   //Initialise the rest to zero of the memory just allocated to zero
-   for(unsigned i=0;i<3;i++)
-    {
-     dudt[i] = 0.0;
-     interpolated_u[i] = 0.0;
-     for(unsigned j=0;j<2;j++) {interpolated_dudx(i,j) = 0.0;}
-    }
+   Vector<double> interpolated_u(3,0.0);
+   Vector<double> dudt(3,0.0);
+   DenseMatrix<double> interpolated_dudx(3,2,0.0);
    
    //Calculate pressure at integration point
-   for(unsigned l=0;l<n_pres;l++) interpolated_p += p_axi_nst(l)*psip[l];
+   for(unsigned l=0;l<n_pres;l++) {interpolated_p += p_axi_nst(l)*psip[l];}
    
    //Calculate velocities and derivatives at integration point
 
    // Loop over nodes
    for(unsigned l=0;l<n_node;l++) 
     {
+     //Cache the shape function
+     const double psif_ = psif(l);
      //Loop over the two coordinate directions
      for(unsigned i=0;i<2;i++)
       {
-       interpolated_x[i] += nodal_position(l,i)*psif[l];
-       mesh_velocity[i]  += dnodal_position_dt(l,i)*psif[l];
+       interpolated_x[i] += this->raw_nodal_position(l,i)*psif_;
       }
+       //mesh_velocity[i]  += dnodal_position_dt(l,i)*psif[l];
 
      //Loop over the three velocity directions
      for(unsigned i=0;i<3;i++)
       {
        //Get the u_value
-       double u_value = nodal_value(l,u_nodal_index[i]);
-       interpolated_u[i] += u_value*psif[l];
-       dudt[i]+= du_dt_axi_nst(l,i)*psif[l];
+       const double u_value = this->raw_nodal_value(l,u_nodal_index[i]);
+       interpolated_u[i] += u_value*psif_;
+       dudt[i]+= du_dt_axi_nst(l,i)*psif_;
        //Loop over derivative directions
        for(unsigned j=0;j<2;j++)
         {interpolated_dudx(i,j) += u_value*dpsifdx(l,j);}
       }
     }
+
+   //Get the mesh velocity if ALE is enabled
+   if(!ALE_is_disabled)
+    {
+     // Loop over nodes
+     for(unsigned l=0;l<n_node;l++) 
+      {
+       //Loop over the two coordinate directions
+       for(unsigned i=0;i<2;i++)
+        {
+         mesh_velocity[i]  += this->raw_dnodal_position_dt(l,i)*psif(l);
+        }
+      }
+    }
+       
    
    //Get the user-defined body force terms
    Vector<double> body_force(3);
@@ -962,12 +964,15 @@ fill_in_generic_residual_contribution_axi_nst(Vector<double> &residuals,
             + r*interpolated_u[1]*interpolated_dudx(0,1))*testf[l]*W;
 
        //Mesh velocity terms
-       for(unsigned k=0;k<2;k++)
+       if(!ALE_is_disabled)
         {
-         residuals[local_eqn] += 
-          scaled_re_st*r*mesh_velocity[k]*interpolated_dudx(0,k)*testf[l]*W;
+         for(unsigned k=0;k<2;k++)
+          {
+           residuals[local_eqn] += 
+            scaled_re_st*r*mesh_velocity[k]*interpolated_dudx(0,k)*testf[l]*W;
+          }
         }
-       
+
        //CALCULATE THE JACOBIAN
        if(flag)
         {
@@ -1009,10 +1014,13 @@ fill_in_generic_residual_contribution_axi_nst(Vector<double> &residuals,
                   + r*interpolated_u[1]*dpsifdx(l2,1))*testf[l]*W;
 
              //Mesh velocity terms
-             for(unsigned k=0;k<2;k++)
+             if(!ALE_is_disabled)
               {
-               jacobian(local_eqn,local_unknown) += 
-                scaled_re_st*r*mesh_velocity[k]*dpsifdx(l2,k)*testf[l]*W;
+               for(unsigned k=0;k<2;k++)
+                {
+                 jacobian(local_eqn,local_unknown) += 
+                  scaled_re_st*r*mesh_velocity[k]*dpsifdx(l2,k)*testf[l]*W;
+                }
               }
             }
 
@@ -1090,14 +1098,16 @@ fill_in_generic_residual_contribution_axi_nst(Vector<double> &residuals,
        residuals[local_eqn] -= 
         scaled_re*(r*interpolated_u[0]*interpolated_dudx(1,0) 
             + r*interpolated_u[1]*interpolated_dudx(1,1))*testf[l]*W;
-       
+
        //Mesh velocity terms
-       for(unsigned k=0;k<2;k++)
+       if(!ALE_is_disabled)
         {
-         residuals[local_eqn] += 
-          scaled_re_st*r*mesh_velocity[k]*interpolated_dudx(1,k)*testf[l]*W;
+         for(unsigned k=0;k<2;k++)
+          {
+           residuals[local_eqn] += 
+            scaled_re_st*r*mesh_velocity[k]*interpolated_dudx(1,k)*testf[l]*W;
+          }
         }
-       
        
        //CALCULATE THE JACOBIAN
        if(flag)
@@ -1156,11 +1166,15 @@ fill_in_generic_residual_contribution_axi_nst(Vector<double> &residuals,
                   + r*psif[l2]*interpolated_dudx(1,1)
                   + r*interpolated_u[1]*dpsifdx(l2,1))*testf[l]*W;
        
+             
              //Mesh velocity terms
-             for(unsigned k=0;k<2;k++)
+             if(!ALE_is_disabled)
               {
-               jacobian(local_eqn,local_unknown) += 
-                scaled_re_st*r*mesh_velocity[k]*dpsifdx(l2,k)*testf[l]*W;
+               for(unsigned k=0;k<2;k++)
+                {
+                 jacobian(local_eqn,local_unknown) += 
+                  scaled_re_st*r*mesh_velocity[k]*dpsifdx(l2,k)*testf[l]*W;
+                }
               }
             }
            
@@ -1223,10 +1237,13 @@ fill_in_generic_residual_contribution_axi_nst(Vector<double> &residuals,
             + r*interpolated_u[1]*interpolated_dudx(2,1))*testf[l]*W;
        
        //Mesh velocity terms
-       for(unsigned k=0;k<2;k++)
+       if(!ALE_is_disabled)
         {
-         residuals[local_eqn] += 
-          scaled_re_st*r*mesh_velocity[k]*interpolated_dudx(2,k)*testf[l]*W;
+         for(unsigned k=0;k<2;k++)
+          {
+           residuals[local_eqn] += 
+            scaled_re_st*r*mesh_velocity[k]*interpolated_dudx(2,k)*testf[l]*W;
+          }
         }
        
        //CALCULATE THE JACOBIAN
@@ -1293,10 +1310,13 @@ fill_in_generic_residual_contribution_axi_nst(Vector<double> &residuals,
                   + r*interpolated_u[1]*dpsifdx(l2,1))*testf[l]*W;
              
              //Mesh velocity terms
-             for(unsigned k=0;k<2;k++)
+             if(!ALE_is_disabled)
               {
-               jacobian(local_eqn,local_unknown) += 
-                scaled_re_st*r*mesh_velocity[k]*dpsifdx(l2,k)*testf[l]*W;
+               for(unsigned k=0;k<2;k++)
+                {
+                 jacobian(local_eqn,local_unknown) += 
+                  scaled_re_st*r*mesh_velocity[k]*dpsifdx(l2,k)*testf[l]*W;
+                }
               }
             }
           }

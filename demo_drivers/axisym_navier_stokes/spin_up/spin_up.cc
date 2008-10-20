@@ -342,6 +342,8 @@ RefineableRotatingCylinderProblem(
    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
    //Assign time 
    el_pt->time_pt() = time_pt();
+   //The mesh remains fixed
+   el_pt->disable_ALE();
    //Set the Reynolds number, etc
    el_pt->re_pt() = &Global_Physical_Variables::Re;
    el_pt->re_st_pt() = &Global_Physical_Variables::ReSt;

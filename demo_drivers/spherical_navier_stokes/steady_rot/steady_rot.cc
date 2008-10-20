@@ -222,6 +222,9 @@ SphericalSteadyRotationProblem<ELEMENT>::SphericalSteadyRotationProblem(
    //Set the Reynolds number
    el_pt->re_pt() = &Global_Physical_Variables::Re;
    
+   //Disable ALE
+   el_pt->disable_ALE();
+
    // Set pointer to continuous time
    el_pt->time_pt()=time_pt();
   } // end loop over elements

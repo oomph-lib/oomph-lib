@@ -50,7 +50,7 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
 #ifdef PARANOID
  // Check if the constitutive equation requires the explicit imposition of an
  // incompressibility constraint
- if (Constitutive_law_pt->requires_incompressibility_constraint())
+ if (this->Constitutive_law_pt->requires_incompressibility_constraint())
   {
    throw OomphLibError(
     "RefineablePVDEquations cannot be used with incompressible constitutive laws.",
@@ -566,8 +566,8 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
 #ifdef PARANOID
  // Check if the constitutive equation requires the explicit imposition of an
  // incompressibility constraint
- if (Constitutive_law_pt->requires_incompressibility_constraint()&&
-     (!Incompressible))
+ if (this->Constitutive_law_pt->requires_incompressibility_constraint()&&
+     (!this->Incompressible))
   {
    throw OomphLibError(
     "The constitutive law requires the use of the incompressible formulation by setting the element's member function incompressible()",

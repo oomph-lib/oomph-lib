@@ -171,6 +171,11 @@ int local_eqn=0, local_unknown=0;
      //method
      if (!ALE_is_disabled)
       {
+       throw OomphLibError(
+        "ALE is not properly implemented for Refineable Spherical NS yet",
+        "RefineableNS::fill_in_contribution",
+        OOMPH_EXCEPTION_LOCATION);
+
        //Loop over directions (only DIM (2) of these)
        for(unsigned i=0;i<2;i++)
         {
@@ -362,7 +367,8 @@ int local_eqn=0, local_unknown=0;
             }
            
            // Add contribution
-           residuals[local_eqn] += sum*W*hang_weight;
+           //Sign changed to be consistent with other NS implementations
+           residuals[local_eqn] -= sum*W*hang_weight;
            
            //CALCULATE THE JACOBIAN
            if (flag)
@@ -467,7 +473,7 @@ int local_eqn=0, local_unknown=0;
                           //Add the total contribution to the 
                           //jacobian multiplied 
                           //by the jacobian weight
-                          jacobian(local_eqn,local_unknown) += 
+                          jacobian(local_eqn,local_unknown) -= 
                            jac_sum*sin_theta*W*hang_weight*hang_weight2;
                          }
                          
@@ -497,7 +503,7 @@ int local_eqn=0, local_unknown=0;
                                psif(l2)*cos_theta)*testf(l);
                          
                          //Add the full contribution to the jacobian matrix
-                         jacobian(local_eqn,local_unknown) += 
+                         jacobian(local_eqn,local_unknown) -= 
                           jac_sum*W*hang_weight*hang_weight2;
                          
                         } // End of i2 = 1 section
@@ -508,7 +514,7 @@ int local_eqn=0, local_unknown=0;
                         case 2:
                         {
                          // Single convective-term contribution
-                         jacobian(local_eqn,local_unknown) -= 
+                         jacobian(local_eqn,local_unknown) += 
                           2.0*scaled_re*u_phi*psif[l2]*r*sin_theta*testf[l]*
                           W*hang_weight*hang_weight2;
                         }
@@ -545,7 +551,7 @@ int local_eqn=0, local_unknown=0;
                                      - 2.0*psif(l2)*cos_theta)*testf(l);
                          
                          //Add the sum to the jacobian
-                         jacobian(local_eqn,local_unknown) += 
+                         jacobian(local_eqn,local_unknown) -= 
                           jac_sum*W*hang_weight*hang_weight2;
                         }
                         
@@ -597,7 +603,7 @@ int local_eqn=0, local_unknown=0;
                             - 2.0*psif(l2)*cot_theta*cos_theta)*testf(l);
                           
                           //Add the contribution to the jacobian
-                          jacobian(local_eqn,local_unknown) += 
+                          jacobian(local_eqn,local_unknown) -= 
                            jac_sum*W*hang_weight*hang_weight2;
                          }
                          
@@ -607,7 +613,7 @@ int local_eqn=0, local_unknown=0;
                         case 2:
                         {
                          // Only a convective term contribution
-                         jacobian(local_eqn,local_unknown) -= 
+                         jacobian(local_eqn,local_unknown) += 
                           scaled_re*2.0*r*psif(l2)*u_phi*cos_theta*testf(l)*
                           W*hang_weight*hang_weight2;
                         }
@@ -624,7 +630,7 @@ int local_eqn=0, local_unknown=0;
                       case 0:
                       {
                        // Contribution from convective terms
-                       jacobian(local_eqn,local_unknown) += 
+                       jacobian(local_eqn,local_unknown) -= 
                         scaled_re*(r*interpolated_dudx(2,0) + u_phi)
                         *psif(l2)*testf(l)*r*sin_theta*W*
                         hang_weight*hang_weight2;
@@ -638,7 +644,7 @@ int local_eqn=0, local_unknown=0;
                       {
                        
                        //Contribution from convective terms
-                       jacobian(local_eqn,local_unknown) +=
+                       jacobian(local_eqn,local_unknown) -=
                         scaled_re*(interpolated_dudx(2,1)*sin_theta
                                    + u_phi*cos_theta)*r*psif(l2)*testf(l)*
                         W*hang_weight*hang_weight2;
@@ -698,7 +704,7 @@ int local_eqn=0, local_unknown=0;
                                     cos_theta)*testf(l);
                         
                         //Add to the jacobian
-                        jacobian(local_eqn,local_unknown) += 
+                        jacobian(local_eqn,local_unknown) -= 
                          jac_sum*W*hang_weight*hang_weight2;
                        }
                        
@@ -759,7 +765,7 @@ int local_eqn=0, local_unknown=0;
                   {
                    // RADIAL MOMENTUM EQUATION
                   case 0:
-                   jacobian(local_eqn,local_unknown) -= 
+                   jacobian(local_eqn,local_unknown) += 
                     psip(l2)*(r2*dtestfdx(l,0) + 2.0*r*testf[l])*
                     W*sin_theta*hang_weight*hang_weight2;
                    
@@ -768,7 +774,7 @@ int local_eqn=0, local_unknown=0;
                        
                    // AXIAL MOMENTUM EQUATION
                   case 1:
-                   jacobian(local_eqn,local_unknown) -= 
+                   jacobian(local_eqn,local_unknown) += 
                     psip(l2)*r*(dtestfdx(l,1)*sin_theta + cos_theta*testf(l))*
                     W*hang_weight*hang_weight2;
                    
