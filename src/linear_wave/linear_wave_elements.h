@@ -99,8 +99,8 @@ class LinearWaveEquations : public virtual FiniteElement
 
    //Initialise d^2u/dt^2
    double ddudt=0.0;
-   //Loop over the timesteps, if there is a non Static timestepper
-   if (time_stepper_pt->type()!="Steady")
+   //Loop over the timesteps, if there is a non steady timestepper
+   if (!time_stepper_pt->is_steady())
     {
      // Find the index at which the linear wave unknown is stored
      const unsigned u_nodal_index = u_index_lin_wave();     

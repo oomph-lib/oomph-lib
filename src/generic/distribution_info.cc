@@ -65,7 +65,7 @@ namespace oomph
 
   // gather the Nrow_local vector
   MPI_Allgather(&First_row[my_rank],1,
-                MPI::UNSIGNED_LONG,
+                MPI_UNSIGNED_LONG,
                 &First_row[0],1,MPI::UNSIGNED_LONG,
                 Communicator);    
 

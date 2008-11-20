@@ -307,6 +307,8 @@ public:
     {
      for(unsigned j=0;j<n_tstorage;j++) {Weight(i,j) = 0.0;}
     }
+   // Update flag
+   Is_steady=true;
   }
 
  /// \short Flag to indicate if a timestepper has been made steady (possibly

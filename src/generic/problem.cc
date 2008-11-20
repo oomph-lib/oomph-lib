@@ -2646,14 +2646,12 @@ void Problem::distributed_matrix_sparse_assemble(
    Vector<Vector<double>*> my_residuals_vector(1);
    my_residuals_vector[0] = &my_residuals;
 
-   
    // Call sparse assembly in compressed row [or column] mode
    sparse_assemble_row_or_column_compressed(my_col_or_row_index,
                                             my_row_or_col_start,
                                             my_value,
                                             my_residuals_vector,
                                             compressed_row_flag);
-   
    
    // Vectors of maps that stores values and column indices
    // for each row
@@ -2774,14 +2772,14 @@ void Problem::distributed_matrix_sparse_assemble(
 
      // Send n_value_to_send and receive corresponding value from recv_proc
      unsigned long n_value_recvd=0;
-     
+
      // non-blocking send
      MPI_Isend(&n_value_to_send, 1,
                MPI_UNSIGNED_LONG,
                send_proc, 0,
                MPI_COMM_WORLD,
                &send_request[0]);
-         
+
      // blocking receive
      MPI_Recv(&n_value_recvd, 1,
               MPI_UNSIGNED_LONG,
@@ -2818,7 +2816,7 @@ void Problem::distributed_matrix_sparse_assemble(
               MPI_ANY_TAG,
               MPI_COMM_WORLD,
               &status);
-     
+
      // non-blocking sends of Jacobian matrix
      if (n_value_to_send>0)
       {
@@ -2908,7 +2906,6 @@ void Problem::distributed_matrix_sparse_assemble(
       {
        MPI_Waitall(2, send_request, MPI_STATUS_IGNORE);
       }
-
     } // end of loop over communications with other processors
   
   
@@ -3366,6 +3363,7 @@ void Problem::newton_solve()
 #endif
        actions_before_newton_convergence_check();
        get_residuals(dx);
+
        //Get maximum residuals, using our own abscmp function
        double maxres = std::abs(*std::max_element(dx.begin(),dx.end(),
                                                   AbsCmp<double>()));
@@ -3421,7 +3419,7 @@ void Problem::newton_solve()
          oomph_info << "Enabling resolve" << std::endl;
         }
        Linear_solver_pt->enable_resolve();
-      }
+      }  
      Linear_solver_pt->solve(this,dx);
      Jacobian_has_been_computed=true;
     }
@@ -3437,7 +3435,8 @@ void Problem::newton_solve()
 #endif
    if (!Shut_up_in_newton_solve) 
     {
-     oomph_info << std::endl << "Time for linear solver (ndof="
+     oomph_info << std::endl;
+     oomph_info << "Time for linear solver (ndof="
                 << n_dofs << ") [sec]: " 
 #ifdef OOMPH_HAS_MPI 
                 << t_solver_end-t_solver_start 

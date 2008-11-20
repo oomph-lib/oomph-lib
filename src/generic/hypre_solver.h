@@ -151,8 +151,8 @@ namespace oomph
      Existing_solver = None;
      Existing_preconditioner = None;
      
-     // Do we want to output results of timings?
-     Output_time = true;
+     // Do we want to output info and results of timings?
+     Output_info = true;
      
      // General control paramaters
      Tolerance = 1e-10;
@@ -261,8 +261,8 @@ namespace oomph
    /// exists.
    void hypre_solve(const Vector<double> &rhs, Vector<double> &solution);
 
-   /// Flag is true to output results of timings
-   bool Output_time;
+   /// Flag is true to output info and results of timings
+   bool Output_info;
    
    /// Maximum number of iterations used in solver.
    unsigned Max_iter;

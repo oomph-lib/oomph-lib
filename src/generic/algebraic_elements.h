@@ -679,7 +679,7 @@ class AlgebraicMesh : public virtual Mesh
  /// so we buffer the case if update_all_solid_nodes is set to 
  /// true.]
  void node_update(const bool& update_all_solid_nodes=false)
-  {   
+  {  
 #ifdef PARANOID
    if (update_all_solid_nodes)
     {

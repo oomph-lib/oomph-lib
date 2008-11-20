@@ -106,8 +106,8 @@ public:
    double dudt=0.0;
    
    //Loop over the timesteps, if there is a non Steady timestepper
-   if (time_stepper_pt->type()!="Steady")
-    {
+   if (!time_stepper_pt->is_steady())
+     {
      //Find the index at which the variable is stored
      const unsigned u_nodal_index = u_index_ust_heat();
      

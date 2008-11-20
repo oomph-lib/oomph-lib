@@ -102,6 +102,7 @@ public:
 
  ///Empty vitual destructor
  virtual ~NavierStokesImpedanceTractionElementBase() {}
+
  /// \short Pure virtual function that must be implemented to compute
  /// the volume flux that passes through this element
  virtual double volume_flux()=0;
@@ -113,7 +114,6 @@ public:
  /// to the discrete (global) (velocity) degrees of freedom.
  virtual void add_element_contribution_to_aux_integral(
   std::map<unsigned,double>* aux_integral_pt)=0;
- 
 
  /// \short Pass the pointer to the pre-computed auxiliary integral
  /// to the element so it can be accessed when computing the
@@ -271,7 +271,7 @@ public:
    double dudt=0.0;
    
    //Loop over the timesteps, if there is a non Steady timestepper
-   if (time_stepper_pt->type()!="Steady")
+   if (!time_stepper_pt->is_steady())
     {
      //Find the index at which the variable is stored
      const unsigned u_nodal_index = u_index_womersley();
@@ -756,7 +756,7 @@ protected:
 //=====start_of_problem_class=========================================
 /// Womersley problem 
 //====================================================================
-template<class ELEMENT>
+template<class ELEMENT, unsigned DIM>
 class WomersleyProblem : public Problem
 {
 
@@ -835,7 +835,7 @@ private:
 
  /// \short Pointer to element that imposes the flux through the collection
  /// of Womersley elements
- ImposeFluxForWomersleyElement<2>* Flux_el_pt;
+ ImposeFluxForWomersleyElement<DIM>* Flux_el_pt;
 
  /// Fct pointer to fct that prescribes pressure gradient
  PrescribedPressureGradientFctPt Prescribed_pressure_gradient_fct_pt;
@@ -859,8 +859,8 @@ private:
 /// This is to facilitate the re-use of this class
 /// for different geometries.)
 //========================================================================
-template<class ELEMENT>
-WomersleyProblem<ELEMENT>::WomersleyProblem(
+template<class ELEMENT, unsigned DIM>
+WomersleyProblem<ELEMENT,DIM>::WomersleyProblem(
  double* re_st_pt, 
  PrescribedPressureGradientFctPt pressure_gradient_fct_pt,
  TimeStepper* time_stepper_pt,
@@ -933,8 +933,8 @@ WomersleyProblem<ELEMENT>::WomersleyProblem(
 /// This is to facilitate the re-use of this class
 /// for different geometries.)
 //========================================================================
-template<class ELEMENT>
-WomersleyProblem<ELEMENT>::WomersleyProblem(
+template<class ELEMENT, unsigned DIM>
+WomersleyProblem<ELEMENT,DIM>::WomersleyProblem(
  double* re_st_pt,
  double* prescribed_volume_flux_pt,
  TimeStepper* time_stepper_pt,
@@ -943,7 +943,6 @@ WomersleyProblem<ELEMENT>::WomersleyProblem(
  Flux_el_pt(0),
  Prescribed_pressure_gradient_fct_pt(0)
 {
-
  // Problem is linear: Skip convergence check in Newton solver
  Problem_is_nonlinear=false;
 
@@ -979,7 +978,7 @@ WomersleyProblem<ELEMENT>::WomersleyProblem(
  // pressure gradient internally. It also passes the pointer to 
  // this Data object to the Womersley elements contained in the
  // mesh. The Womersley elements treat this Data as external Data.
- Flux_el_pt=new ImposeFluxForWomersleyElement<2>(
+ Flux_el_pt=new ImposeFluxForWomersleyElement<DIM>(
   mesh_pt(),Prescribed_volume_flux_pt);
 
  // Add the ImposeFluxForWomersleyElement to the mesh
@@ -999,8 +998,8 @@ WomersleyProblem<ELEMENT>::WomersleyProblem(
 //======start_of_destructor===============================================
 /// Destructor for Womersley problem
 //========================================================================
-template<class ELEMENT>
-WomersleyProblem<ELEMENT>::~WomersleyProblem()
+template<class ELEMENT, unsigned DIM>
+WomersleyProblem<ELEMENT,DIM>::~WomersleyProblem()
 { 
  // Timestepper gets killed in general problem destructor
 
@@ -1013,8 +1012,8 @@ WomersleyProblem<ELEMENT>::~WomersleyProblem()
 //=======start_of_doc_solution============================================
 /// Doc the solution
 //========================================================================
-template<class ELEMENT>
-void WomersleyProblem<ELEMENT>::
+template<class ELEMENT, unsigned DIM>
+void WomersleyProblem<ELEMENT,DIM>::
 doc_solution(DocInfo& doc_info,
              std::ofstream& trace_file,
              const double& z_out)
@@ -1097,7 +1096,7 @@ doc_solution(DocInfo& doc_info,
 /// dp_in/dq required when this is used to determine impedance-type
 /// outlet boundary conditions in a Navier-Stokes computation. 
 //====================================================================
-template<class ELEMENT>
+template<class ELEMENT, unsigned DIM>
 class WomersleyImpedanceTubeBase : 
 public virtual TemplateFreeWomersleyImpedanceTubeBase
 {
@@ -1159,7 +1158,7 @@ public:
      NavierStokesImpedanceTractionElementBase* el_pt=
      dynamic_cast<NavierStokesImpedanceTractionElementBase*>(
       navier_stokes_outflow_mesh_pt->element_pt(e));
-     
+
      // Pass the mesh of all NavierStokesImpedanceTractionElements to 
      // each NavierStokesImpedanceTractionElements in that mesh
      // and treat nodes in that mesh that are not part of the element
@@ -1207,8 +1206,8 @@ public:
 
    // Build problem
    Womersley_problem_pt=
-    new WomersleyProblem<ELEMENT>(re_st_pt,Current_volume_flux_pt,
-                                  time_stepper_pt,my_mesh_pt);
+    new WomersleyProblem<ELEMENT,DIM>(re_st_pt,Current_volume_flux_pt,
+                                      time_stepper_pt,my_mesh_pt);
 
    /// By default, we do want to suppress the output from the
    /// Newton solver
@@ -1282,7 +1281,7 @@ public:
 
 
  /// Access to underlying Womersley problem
- WomersleyProblem<ELEMENT>* womersley_problem_pt()
+ WomersleyProblem<ELEMENT,DIM>* womersley_problem_pt()
   {
    return Womersley_problem_pt;
   }
@@ -1420,7 +1419,7 @@ protected:
 
  /// \short Pointer to Womersley problem that determines the
  /// pressure gradient along the tube
- WomersleyProblem<ELEMENT>* Womersley_problem_pt;
+ WomersleyProblem<ELEMENT,DIM>* Womersley_problem_pt;
 
  /// Outlet pressure
  double P_out;
@@ -1631,7 +1630,7 @@ public:
          n_st_outflow_mesh_pt->finite_element_pt(e)->nnode())
       {
        throw OomphLibError(
-        "Number of nodes in existing a new elements don't match",
+        "Number of nodes in existing and new elements don't match",
         "WomersleyMesh",
         OOMPH_EXCEPTION_LOCATION);       
       }
@@ -1731,9 +1730,9 @@ public:
 /// WomersleyImpedanceTube that attaches itself to the outflow
 /// of a Navier-Stokes mesh.
 //====================================================================
-template<class ELEMENT>
+template<class ELEMENT, unsigned DIM>
 class WomersleyOutflowImpedanceTube : 
-public WomersleyImpedanceTubeBase<ELEMENT>
+public WomersleyImpedanceTubeBase<ELEMENT,DIM>
 {
 
 public:
@@ -1752,7 +1751,8 @@ public:
   Mesh* navier_stokes_outflow_mesh_pt,
   const unsigned& fixed_coordinate,
   const unsigned& w_index) : 
-  WomersleyImpedanceTubeBase<ELEMENT>(length, navier_stokes_outflow_mesh_pt),
+  WomersleyImpedanceTubeBase<ELEMENT,DIM>(length,
+                                          navier_stokes_outflow_mesh_pt),
   Fixed_coordinate(fixed_coordinate), W_index(w_index)
   {}
 
@@ -1762,12 +1762,11 @@ public:
  /// specified timestepper. Also applies the boundary condition.
  Mesh* build_mesh_and_apply_boundary_conditions(TimeStepper* time_stepper_pt)
   {
-
    // Build mesh and automatically apply the same boundary
    // conditions as those that are applied to the W_index-th
    // value of the nodes in the Navier-Stokes mesh.
-   WomersleyMesh<QWomersleyElement<2,3> >* womersley_mesh_pt=
-    new WomersleyMesh<QWomersleyElement<2,3> >(
+   WomersleyMesh<ELEMENT>* womersley_mesh_pt=       // CHANGED TO USE ELEMENT
+    new WomersleyMesh<ELEMENT>(
      this->Navier_stokes_outflow_mesh_pt,
      time_stepper_pt,
      Fixed_coordinate,
@@ -1810,7 +1809,9 @@ public:
 /// attached to, and the type of the Womersley element used
 /// to compute the flow resistance in the downstream "impedance tube".
 //======================================================================
-template <class BULK_NAVIER_STOKES_ELEMENT, class WOMERSLEY_ELEMENT>
+template <class BULK_NAVIER_STOKES_ELEMENT, 
+          class WOMERSLEY_ELEMENT,
+          unsigned DIM>
 class NavierStokesImpedanceTractionElement : 
   public virtual FaceGeometry<BULK_NAVIER_STOKES_ELEMENT>, 
   public virtual FaceElement,
@@ -1822,9 +1823,6 @@ class NavierStokesImpedanceTractionElement :
 
   private:
  
- /// The highest dimension of the problem 
- unsigned Dim; 
- 
  /// \short Pointer to auxiliary integral, containing
  /// the derivative of the total volume flux through the
  /// outflow boundary of the (higher-dimensional) Navier-Stokes mesh w.r.t. 
@@ -1832,7 +1830,7 @@ class NavierStokesImpedanceTractionElement :
  std::map<unsigned,double>* Aux_integral_pt;
  
  /// Pointer to ImpedanceTubeProblem that computes the flow resistance
- WomersleyImpedanceTubeBase<WOMERSLEY_ELEMENT>* Impedance_tube_pt;
+ WomersleyImpedanceTubeBase<WOMERSLEY_ELEMENT,DIM>* Impedance_tube_pt;
  
 
   protected:
@@ -1919,7 +1917,7 @@ class NavierStokesImpedanceTractionElement :
    Aux_integral_pt=0;
 
    //Set the dimension from the dimension of the first node
-   Dim = this->node_pt(0)->ndim();
+   //Dim = this->node_pt(0)->ndim();
  }
 
 
@@ -1941,16 +1939,16 @@ class NavierStokesImpedanceTractionElement :
    double volume_flux_integral=0.0;
 
    // Spatial dimension of element
-   unsigned ndim=dim();
+//   unsigned ndim=dim();
 
    //Vector of local coordinates in face element
-   Vector<double> s(ndim);
+   Vector<double> s(DIM);
 
    // Vector for global Eulerian coordinates
-   Vector<double> x(ndim+1);
+   Vector<double> x(DIM+1);
 
    // Vector for local coordinates in bulk element
-   Vector<double> s_bulk(ndim+1);
+   Vector<double> s_bulk(DIM+1);
 
    //Set the value of n_intpt
    unsigned n_intpt = integral_pt()->nweight();
@@ -1964,7 +1962,7 @@ class NavierStokesImpedanceTractionElement :
     {
 
      //Assign values of s in FaceElement and local coordinates in bulk element
-     for(unsigned i=0;i<ndim;i++)
+     for(unsigned i=0;i<DIM;i++)
       {
        s[i] = integral_pt()->knot(ipt,i);
       }
@@ -1988,12 +1986,12 @@ class NavierStokesImpedanceTractionElement :
      interpolated_x(s,x);
 
      // Get x position as Vector from bulk element
-     Vector<double> x_bulk(ndim+1);
+     Vector<double> x_bulk(DIM+1);
      bulk_el_pt->interpolated_x(s_bulk,x_bulk);
 
      double max_legal_error=1.0e-12;
      double error=0.0;
-     for(unsigned i=0;i<ndim+1;i++)
+     for(unsigned i=0;i<DIM+1;i++)
       {
        error+=abs(x[i]- x_bulk[i]);
       }
@@ -2011,16 +2009,16 @@ class NavierStokesImpedanceTractionElement :
 #endif
 
      // Outer unit normal
-     Vector<double> normal(ndim+1);
+     Vector<double> normal(DIM+1);
      outer_unit_normal(s,normal);
 
      // Get velocity from bulk element
-     Vector<double> veloc(ndim+1);
+     Vector<double> veloc(DIM+1);
      bulk_el_pt->interpolated_u_nst(s_bulk,veloc);
 
      // Volume flux
      double volume_flux=0.0;
-     for (unsigned i=0;i<ndim+1;i++)
+     for (unsigned i=0;i<DIM+1;i++)
       {
        volume_flux+=normal[i]*veloc[i];
       }
@@ -2109,10 +2107,10 @@ class NavierStokesImpedanceTractionElement :
    for (unsigned e=0;e<nelem;e++)
     {
      NavierStokesImpedanceTractionElement<BULK_NAVIER_STOKES_ELEMENT, 
-      WOMERSLEY_ELEMENT>* el_pt=
+      WOMERSLEY_ELEMENT,DIM>* el_pt=
       dynamic_cast<
       NavierStokesImpedanceTractionElement<BULK_NAVIER_STOKES_ELEMENT, 
-      WOMERSLEY_ELEMENT>*>(
+      WOMERSLEY_ELEMENT,DIM>*>(
        Navier_stokes_outflow_mesh_pt->element_pt(e));
      total_flux+=el_pt->volume_flux(); 
     }
@@ -2126,7 +2124,7 @@ class NavierStokesImpedanceTractionElement :
                             impedance_tube_pt)
   {
    Impedance_tube_pt=dynamic_cast<
-    WomersleyImpedanceTubeBase<WOMERSLEY_ELEMENT>*>(impedance_tube_pt);
+    WomersleyImpedanceTubeBase<WOMERSLEY_ELEMENT,DIM>*>(impedance_tube_pt);
   }
  
 
@@ -2138,10 +2136,10 @@ class NavierStokesImpedanceTractionElement :
                                                aux_integral_pt)
   {
    // Spatial dimension of element
-   unsigned ndim=dim();
+   // unsigned ndim=dim();
    
    //Vector of local coordinates in face element
-   Vector<double> s(ndim);
+   Vector<double> s(DIM);
 
    // Create storage for shape functions
    unsigned nnod=nnode();
@@ -2155,7 +2153,7 @@ class NavierStokesImpedanceTractionElement :
     {
 
      //Assign values of s in FaceElement and local coordinates in bulk element
-     for(unsigned i=0;i<ndim;i++)
+     for(unsigned i=0;i<DIM;i++)
       {
        s[i] = integral_pt()->knot(ipt,i);
       }
@@ -2173,7 +2171,7 @@ class NavierStokesImpedanceTractionElement :
      double W = w*J;
 
      // Outer unit normal
-     Vector<double> normal(ndim+1);
+     Vector<double> normal(DIM+1);
      outer_unit_normal(s,normal);
 
      // Loop over nodes
@@ -2183,7 +2181,7 @@ class NavierStokesImpedanceTractionElement :
        Node* nod_pt=node_pt(j);
 
        // Loop over directions
-       for (unsigned i=0;i<(ndim+1);i++)
+       for (unsigned i=0;i<(DIM+1);i++)
         {
          // Get global equation number
          int i_global=nod_pt->eqn_number(i);
@@ -2241,9 +2239,12 @@ class NavierStokesImpedanceTractionElement :
 /// Function that returns the residuals for the imposed traction Navier_Stokes
 /// equations
 //============================================================================
-template <class BULK_NAVIER_STOKES_ELEMENT, class WOMERSLEY_ELEMENT>
+template <class BULK_NAVIER_STOKES_ELEMENT, 
+          class WOMERSLEY_ELEMENT,
+          unsigned DIM>
 void NavierStokesImpedanceTractionElement<BULK_NAVIER_STOKES_ELEMENT,
-                                          WOMERSLEY_ELEMENT>::
+                                          WOMERSLEY_ELEMENT,
+                                          DIM>::
 fill_in_generic_residual_contribution_fluid_traction(
  Vector<double> &residuals, 
  DenseMatrix<double> &jacobian, 
@@ -2276,28 +2277,27 @@ fill_in_generic_residual_contribution_fluid_traction(
    double W = w*J;
    
    // Traction vector
-   Vector<double> traction(Dim);
+   Vector<double> traction(DIM+1);
 
    // Initialise response
    double p_in=0.0;
    double dp_in_dq=0.0;
 
    // Traction= outer unit normal x pressure at upstream end of 
-   // impedance tube
+   // impedance tube 
    if (Navier_stokes_outflow_mesh_pt!=0)
     {
      // Get response of the impedance tube:
      Impedance_tube_pt->get_response(p_in, dp_in_dq);
     }
 
-
    // Get outer unit normal at current integration point
-   Vector<double> unit_normal(Dim);
+   Vector<double> unit_normal(DIM+1);
    outer_unit_normal(ipt, unit_normal); 
 
    //Loop over the directions
-   for(unsigned i=0;i<Dim;i++)
-    {     
+   for(unsigned i=0;i<DIM+1;i++)
+    {    
      traction[i]=-unit_normal[i]*p_in;
     }
    
@@ -2305,9 +2305,9 @@ fill_in_generic_residual_contribution_fluid_traction(
    //Loop over the test functions
    for(unsigned l=0;l<n_node;l++)
     {
-     
+    
      //Loop over the velocity components
-     for(unsigned i=0;i<Dim;i++)
+     for(unsigned i=0;i<DIM+1;i++)
       {
        local_eqn = u_local_eqn(l,i);
        /*IF it's not a boundary condition*/
@@ -2328,7 +2328,7 @@ fill_in_generic_residual_contribution_fluid_traction(
              Node* nod_pt=node_pt(j);
              
              //Loop over the velocity components
-             for(unsigned ii=0;ii<Dim;ii++)
+             for(unsigned ii=0;ii<DIM+1;ii++)
               {
                local_unknown = u_local_eqn(j,ii);
 
@@ -2355,7 +2355,7 @@ fill_in_generic_residual_contribution_fluid_traction(
              Data* ext_data_pt=external_data_pt(j);
              
              // Loop over directions for equation
-             for (unsigned ii=0;ii<Dim;ii++)
+             for (unsigned ii=0;ii<DIM+1;ii++)
               {
                // Get local unknown number
                int local_unknown=external_local_eqn(j,ii); 
@@ -2373,9 +2373,7 @@ fill_in_generic_residual_contribution_fluid_traction(
                 }
               }
             }
-
           } // end of computation of Jacobian terms
-
         }
       } //End of loop over dimension
     } //End of loop over shape functions

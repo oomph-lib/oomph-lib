@@ -314,7 +314,7 @@ void  PoissonEquations<DIM>::get_dresidual_dnodal_coordinates(
           {       
            double sum=source*test(l)*dJ_dX(ii,jj)+
             d_source_dx[ii]*test(l)*psi(jj)*J;
-
+         
            for (unsigned k=0;k<DIM;k++)
             {
              sum+=interpolated_dudx[k]*(dtestdx(l,k)*dJ_dX(ii,jj)+

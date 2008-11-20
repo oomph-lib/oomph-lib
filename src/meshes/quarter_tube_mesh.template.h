@@ -95,7 +95,7 @@ public:
 
 
  /// \short Function pointer for function that hierher
- QuarterTubeDomain::AxialSpacingFctPt& axial_spacing_fct_pt()
+ virtual QuarterTubeDomain::AxialSpacingFctPt& axial_spacing_fct_pt()
   {
    return Domain_pt->axial_spacing_fct_pt();
   }

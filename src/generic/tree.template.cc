@@ -33,6 +33,8 @@
 //oomph-lib headers
 #include "tree.h"
 
+#include <stdio.h>
+
 
 #ifndef OOMPH_TREE_TEMPLATE_CC
 #define OOMPH_TREE_TEMPLATE_CC

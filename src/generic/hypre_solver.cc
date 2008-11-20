@@ -492,7 +492,6 @@ namespace oomph
   
 #ifdef OOMPH_HAS_MPI
   // MPI version
-  double t_start = MPI_Wtime();
   
   // Nrows_local stores number of rows on each processor -
   // needed later to gather the distributed solution using MPI
@@ -547,7 +546,6 @@ namespace oomph
                                     Matrix_par);
 #else
   // Non-MPI version
-  clock_t t_start = clock();
   
   // find number of rows in matrix
   Nrow = matrix_pt->nrow();
@@ -578,19 +576,6 @@ namespace oomph
     matrix_pt->clean_up_memory();
    }
 
-  // Output times
-  if (Output_time)
-   {
-    oomph_info << "Time to generate HYPRE matrix [s]          : ";
-#ifdef OOMPH_HAS_MPI   
-    double t_end = MPI_Wtime();
-    oomph_info << t_end-t_start << std::endl; 
-#else
-    clock_t t_end = clock();
-    oomph_info << double(t_end-t_start)/CLOCKS_PER_SEC << std::endl;
-#endif
-   }
-
  }
 
 
@@ -602,8 +587,6 @@ namespace oomph
 //=============================================================================
  void HypreInterface::hypre_matrix_setup(DistributedCRDoubleMatrix* matrix_pt)
  {
-  double t_start = MPI_Wtime();
-
   // reset Hypre's global error flag
   hypre__global_error=0;
   
@@ -648,14 +631,6 @@ namespace oomph
     matrix_pt->clean_up_memory();
    }
 
-  // output times
-  if (Output_time)
-   {
-    double t_end = MPI_Wtime();
-    oomph_info << "Time to generate HYPRE matrix [s]          : "
-               << t_end - t_start << std::endl;
-   }
-
  }
 #endif
 
@@ -670,10 +645,8 @@ namespace oomph
   // Store time
 #ifdef OOMPH_HAS_MPI   
     double t_start = MPI_Wtime();
-    double t_end = 0;
 #else
     clock_t t_start = clock();
-    clock_t t_end = 0; 
 #endif
 
   // reset Hypre's global error flag
@@ -858,29 +831,15 @@ namespace oomph
      }
    } // end of setting up internal preconditioner
 
-  // Record preconditioner set up time
-  double preconditioner_setup_time=0;
-  if (Output_time)
-   {
-#ifdef OOMPH_HAS_MPI   
-    t_end = MPI_Wtime();
-    preconditioner_setup_time = t_end-t_start; 
-#else
-    t_end = clock();
-    preconditioner_setup_time = double(t_end-t_start)/CLOCKS_PER_SEC;
-#endif
-   }
-
   // set up solver
   // -------------
-  t_start = t_end;
-
+ 
   // AMG solver
   if (Hypre_method==BoomerAMG)
    {
-    if (Output_time)
+    if (Output_info)
      {
-      oomph_info << "Setting up BoomerAMG" << std::endl;
+      oomph_info << "Setting up BoomerAMG, ";
      }
 
     // set up BoomerAMG
@@ -929,9 +888,9 @@ namespace oomph
   // Euclid solver
   else if (Hypre_method==Euclid)
    {
-    if (Output_time)
+    if (Output_info)
      {
-      oomph_info << "Setting up Euclid" << std::endl;
+      oomph_info << "Setting up Euclid, ";
      }
     HYPRE_EuclidCreate(MPI_COMM_WORLD, &Solver);
 
@@ -1022,9 +981,9 @@ namespace oomph
   // ParaSails preconditioner
   else if (Hypre_method==ParaSails)
    {
-    if (Output_time) 
+    if (Output_info) 
      {
-      oomph_info << "Setting up ParaSails" << std::endl;
+      oomph_info << "Setting up ParaSails, ";
      }
 
     HYPRE_ParaSailsCreate(MPI_COMM_WORLD, &Solver);
@@ -1044,9 +1003,9 @@ namespace oomph
   // CG solver
   else if (Hypre_method==CG)
    {
-    if (Output_time)
+    if (Output_info)
      {
-      oomph_info << "Setting up CG";
+      oomph_info << "Setting up CG ";
      }
 
     HYPRE_ParCSRPCGCreate(MPI_COMM_WORLD, &Solver);
@@ -1058,9 +1017,9 @@ namespace oomph
     // set preconditioner
     if (Internal_preconditioner==BoomerAMG)  // AMG
      {
-      if (Output_time)
+      if (Output_info)
        {
-        oomph_info << " with BoomerAMG preconditioner";
+        oomph_info << "with BoomerAMG preconditioner, ";
        }
 
       HYPRE_PCGSetPrecond(Solver,
@@ -1070,9 +1029,9 @@ namespace oomph
      }
     else if (Internal_preconditioner==Euclid)  // Euclid
      {
-      if (Output_time) 
+      if (Output_info) 
        {
-        oomph_info << " with Euclid ILU preconditioner";
+        oomph_info << "with Euclid ILU preconditioner, ";
        }
       
       HYPRE_PCGSetPrecond(Solver,
@@ -1082,9 +1041,9 @@ namespace oomph
      }
     else if (Internal_preconditioner==ParaSails)  // ParaSails
      {
-      if (Output_time)
+      if (Output_info)
        {
-        oomph_info << " with ParaSails approximate inverse preconditioner";
+        oomph_info << "with ParaSails approximate inverse preconditioner, ";
        }
 
       HYPRE_PCGSetPrecond(Solver,
@@ -1094,16 +1053,12 @@ namespace oomph
      }
     else
      {
-      if (Output_time) 
+      if (Output_info) 
        {
-        oomph_info << " with no preconditioner";
+        oomph_info << "with no preconditioner, ";
        }
      }
-    if (Output_time) 
-     {
-      oomph_info << std::endl;
-     }
-    
+     
     HYPRE_PCGSetup(Solver,
                    (HYPRE_Matrix) Matrix_par,
                    (HYPRE_Vector) dummy_rhs_par,
@@ -1116,9 +1071,9 @@ namespace oomph
   // GMRES solver
   else if (Hypre_method==GMRES)
    {
-    if (Output_time) 
+    if (Output_info) 
      {
-      oomph_info << "Setting up GMRES";
+      oomph_info << "Setting up GMRES ";
      }
     
     HYPRE_ParCSRGMRESCreate(MPI_COMM_WORLD, &Solver);
@@ -1131,9 +1086,9 @@ namespace oomph
     // set preconditioner
     if (Internal_preconditioner==BoomerAMG)  // AMG
      {
-      if (Output_time) 
+      if (Output_info) 
        {
-        oomph_info << " with BoomerAMG preconditioner";
+        oomph_info << "with BoomerAMG preconditioner, ";
        }
 
       HYPRE_GMRESSetPrecond(Solver,
@@ -1143,9 +1098,9 @@ namespace oomph
      }
     else if (Internal_preconditioner==Euclid) // Euclid
      {
-      if (Output_time)
+      if (Output_info)
        {
-        oomph_info << " with Euclid ILU preconditioner";
+        oomph_info << "with Euclid ILU preconditioner, ";
        }
 
       HYPRE_GMRESSetPrecond(Solver,
@@ -1155,9 +1110,9 @@ namespace oomph
      }
     else if (Internal_preconditioner==ParaSails)  // ParaSails
      {
-      if (Output_time) 
+      if (Output_info) 
        {
-        oomph_info << " with ParaSails approximate inverse preconditioner";
+        oomph_info << "with ParaSails approximate inverse preconditioner, ";
        }
       
       HYPRE_GMRESSetPrecond(Solver,
@@ -1167,14 +1122,10 @@ namespace oomph
      }
     else
      {
-      if (Output_time) 
+      if (Output_info) 
        {
-        oomph_info << " with no preconditioner";
+        oomph_info << "with no preconditioner, ";
        }
-     }
-    if (Output_time) 
-     {
-      oomph_info << std::endl;
      }
     
     HYPRE_GMRESSetup(Solver,
@@ -1188,9 +1139,9 @@ namespace oomph
   // BiCGStab solver
   else if (Hypre_method==BiCGStab)
    {
-    if (Output_time) 
+    if (Output_info) 
      {
-      oomph_info << "Setting up BiCGStab";
+      oomph_info << "Setting up BiCGStab ";
      }
     
     HYPRE_ParCSRBiCGSTABCreate(MPI_COMM_WORLD, &Solver);
@@ -1202,9 +1153,9 @@ namespace oomph
     // set preconditioner
     if (Internal_preconditioner==BoomerAMG)  // AMG
      {
-      if (Output_time)
+      if (Output_info)
        {
-        oomph_info << " with BoomerAMG preconditioner";
+        oomph_info << "with BoomerAMG preconditioner, ";
        }
       
       HYPRE_BiCGSTABSetPrecond(Solver,
@@ -1214,9 +1165,9 @@ namespace oomph
      }
     else if (Internal_preconditioner==Euclid)  // Euclid
      {
-      if (Output_time)
+      if (Output_info)
        {
-        oomph_info << " with Euclid ILU preconditioner";
+        oomph_info << "with Euclid ILU preconditioner, ";
        }
       
       HYPRE_BiCGSTABSetPrecond(Solver,
@@ -1226,9 +1177,9 @@ namespace oomph
      }
     else if (Internal_preconditioner==ParaSails)  // ParaSails
      {
-      if (Output_time) 
+      if (Output_info) 
        {
-        oomph_info << " with ParaSails approximate inverse preconditioner";
+        oomph_info << "with ParaSails approximate inverse preconditioner, ";
        }
       
       HYPRE_BiCGSTABSetPrecond(Solver,
@@ -1238,14 +1189,10 @@ namespace oomph
      }
     else
      {
-      if (Output_time)
+      if (Output_info)
        {
-        oomph_info << " with no preconditioner";
+        oomph_info << "with no preconditioner, ";
        }
-     }
-    if (Output_time) 
-     {
-      oomph_info << std::endl;
      }
     
     HYPRE_BiCGSTABSetup(Solver,
@@ -1269,10 +1216,10 @@ namespace oomph
    }
 
 #ifdef OOMPH_HAS_MPI   
-  t_end = MPI_Wtime();
+  double t_end = MPI_Wtime();
   double solver_setup_time = t_end-t_start; 
 #else
-  t_end = clock();
+  double t_end = clock();
   double solver_setup_time = double(t_end-t_start)/CLOCKS_PER_SEC;
 #endif
   
@@ -1294,20 +1241,10 @@ namespace oomph
    }
 
   // output times
-  if (Output_time)
+  if (Output_info)
    {
-    if ( (Hypre_method>=CG) && (Hypre_method<=BiCGStab) )
-     {
-      if ((Internal_preconditioner >= BoomerAMG)
-          && (Internal_preconditioner <= ParaSails))
-       {
-        oomph_info << "Time for internal preconditioner setup [s] : "
-                   << preconditioner_setup_time << std::endl;
-       }
-     }
-    oomph_info << "Time for HYPRE solver setup [s]            : "
-               << solver_setup_time
-               << "s" << std::endl;
+    oomph_info << "time for setup [s] : "
+               << solver_setup_time << std::endl;
    }
 
  }
@@ -1324,10 +1261,8 @@ namespace oomph
   // Record time
 #ifdef OOMPH_HAS_MPI   
   double t_start = MPI_Wtime();
-  double t_end = 0;
 #else
   clock_t t_start = clock();
-  clock_t t_end = 0;;
 #endif
 
   // Set up hypre vectors
@@ -1397,19 +1332,6 @@ namespace oomph
                                     solution_par);
 #endif
   
-  // Record time
-  double vector_setup_time=0;
-  if (Output_time)
-   {
-#ifdef OOMPH_HAS_MPI   
-    t_end = MPI_Wtime();
-    vector_setup_time = t_end-t_start; 
-#else
-    t_end = clock();
-    vector_setup_time = double(t_end-t_start)/CLOCKS_PER_SEC;
-#endif
-   }
-  
   // check error flag
   if (Hypre_error_messages)
    {
@@ -1425,7 +1347,6 @@ namespace oomph
   
   // solve
   // -----
-  t_start = t_end;
   
   // for solver stats
   int iterations=0;
@@ -1557,7 +1478,7 @@ namespace oomph
   
   // Record time
   double solve_time=0;
-  if (Output_time)
+  if (Output_info)
    {
 #ifdef OOMPH_HAS_MPI   
     double t_end = MPI_Wtime();
@@ -1569,11 +1490,9 @@ namespace oomph
    }
   
   // output timings and info
-  if (Output_time)
+  if (Output_info)
    {
-    oomph_info << "Time to generate HYPRE vectors [s]         : "
-               << vector_setup_time << std::endl;
-    oomph_info << "Time for HYPRE solve [s]                   : "
+    oomph_info << "Time for HYPRE solve [s] : "
                << solve_time << std::endl;
    }
   
@@ -1582,9 +1501,9 @@ namespace oomph
    {
     if (iterations>1)
      {
-      if (Output_time) oomph_info << "Number of iterations         : "
+      if (Output_info) oomph_info << "Number of iterations         : "
                                << iterations << std::endl;
-      if (Output_time) oomph_info << "Final Relative Residual Norm : " 
+      if (Output_info) oomph_info << "Final Relative Residual Norm : " 
                                << norm << std::endl;
      }
    }
@@ -1600,13 +1519,6 @@ namespace oomph
   // is there an existing solver
   if (Existing_solver != None)
    {
-#ifdef OOMPH_HAS_MPI   
-    double t_start = MPI_Wtime();
-    Nrows_local.resize(0);
-#else
-    clock_t t_start = clock();
-#endif
-
     // delete matrix
     HYPRE_IJMatrixDestroy(Matrix_ij);
 
@@ -1652,12 +1564,6 @@ namespace oomph
      }
     Existing_preconditioner = None;
 
-#ifdef OOMPH_HAS_MPI   
-    double t_end = MPI_Wtime();
-#else
-    clock_t t_end = clock();
-#endif
-
     // check error flag
     if (Hypre_error_messages)
      {
@@ -1669,17 +1575,6 @@ namespace oomph
                         "HypreSolver::clean_up_memory()",
                         OOMPH_EXCEPTION_LOCATION);
        }
-     }
-
-    if (Output_time)
-     {
-      oomph_info << "Time to deallocate HYPRE solver data [s]   : "
-#ifdef OOMPH_HAS_MPI   
-                 << t_end-t_start
-#else
-                 << double(t_end-t_start)/CLOCKS_PER_SEC
-#endif
-                 << "\n";
      }
    }
  }
@@ -1704,8 +1599,8 @@ namespace oomph
  void HypreSolver::solve(Problem* const &problem_pt,
                          Vector<double> &solution)
  {
-  // Set Output_time flag for HypreInterface
-  Output_time = Doc_time;
+  // Set Output_info flag for HypreInterface
+  Output_info = Doc_time;
 
   // Delete any existing solver data
   clean_up_memory();
@@ -1806,8 +1701,8 @@ namespace oomph
    }
 #endif
 
-  // Set Output_time flag for HypreInterface
-  Output_time = Doc_time;
+  // Set Output_info flag for HypreInterface
+  Output_info = Doc_time;
 
   // Clean up existing solver data
   clean_up_memory();
@@ -1940,8 +1835,8 @@ namespace oomph
    }
 #endif
 
-  // Set Output_time flag for HypreInterface
-  Output_time = Doc_time;
+  // Set Output_info flag for HypreInterface
+  Output_info = Doc_time;
 
   // solve
   hypre_solve(rhs, solution);
@@ -1976,8 +1871,8 @@ namespace oomph
  void HyprePreconditioner::setup(Problem* problem_pt, 
                                  DoubleMatrixBase* matrix_pt)
  {
-  // Set Output_time flag for HypreInterface
-  Output_time = Doc_time;
+  // Set Output_info flag for HypreInterface
+  Output_info = Doc_time;
   
 #ifdef PARANOID
   // check the matrix is square
@@ -2081,7 +1976,7 @@ namespace oomph
 #endif
 
   // Switch off any timings for the solve
-  Output_time = false;
+  Output_info = false;
   
   // perform hypre_solve
   hypre_solve(r,z);

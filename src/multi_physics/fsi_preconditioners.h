@@ -73,8 +73,12 @@ public :
    Navier_stokes_preconditioner_pt = new NavierStokesLSCPreconditioner;
 
    // Create the Solid preconditioner
+#ifdef OOMPH_HAS_MPI
+   Solid_preconditioner_pt = new SuperLU_dist_Preconditioner;
+#else
    Solid_preconditioner_pt = new SuperLU_Preconditioner;
-
+#endif
+   
    // Preconditioner hasn't been set up yet.
    Preconditioner_has_been_setup=false;
 
@@ -85,6 +89,9 @@ public :
    Block_matrix_2_2_pt=0;
    Block_matrix_2_0_pt=0;
    Block_matrix_2_1_pt=0;
+
+   // set Doc_time to false
+   Doc_time = false;
   }
  
  
@@ -167,6 +174,9 @@ public :
   {
    return Navier_stokes_preconditioner_pt;
   }
+
+ /// Access function for Doc_time
+ bool& doc_time() {return Doc_time;}
  
 private:
 
@@ -223,6 +233,9 @@ private:
  /// \short Boolean flag used to indicate that the fluid onto solid
  /// interaction terms are to be retained
  bool Retain_fluid_onto_solid_terms;
+
+ /// Set Doc_time to true for outputting results of timings
+ bool Doc_time;
 
  };
 
@@ -333,40 +346,64 @@ void FSIPreconditioner::setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
   
 
   // Setup the solid preconditioner (inexact solver)
+
+#ifdef OOMPH_HAS_MPI   
+  double t_start = MPI_Wtime();
+#else
+  clock_t t_start = clock();
+#endif
+
   Solid_preconditioner_pt->setup(problem_pt,Block_matrix_2_2_pt);
+ 
+#ifdef OOMPH_HAS_MPI   
+  double t_end = MPI_Wtime();
+  double setup_time= t_end-t_start;
+#else
+ clock_t t_end = clock();
+ double setup_time=double(t_end-t_start)/CLOCKS_PER_SEC;
+#endif
 
-  
-  // Doc density of retained interaction block
-  if (Retain_solid_onto_fluid_terms)
-   {
-    oomph_info << "Fill level of solid on fluid blocks (C_us and C_ps): " <<
-     double(Block_matrix_0_2_pt->nnz())/
-     double(Block_matrix_0_2_pt->nrow()*
-            Block_matrix_0_2_pt->ncol())*100.0
-               << "%  " <<
-     double(Block_matrix_1_2_pt->nnz())/
-     double(Block_matrix_1_2_pt->nrow()*
-            Block_matrix_1_2_pt->ncol())*100.0
-               << "%  " << std::endl;
-   }
-  
-  // Doc density of retained interaction block
-  if (Retain_fluid_onto_solid_terms)
-   {
-    oomph_info << "Fill level of fluid on solid blocks (C_su and C_sp): " <<
-     double(Block_matrix_2_0_pt->nnz())/
-     double(Block_matrix_2_0_pt->nrow()*
-            Block_matrix_2_0_pt->ncol())*100.0
-               << "%  " <<
-     double(Block_matrix_2_1_pt->nnz())/
-     double(Block_matrix_2_1_pt->nrow()*
-            Block_matrix_2_1_pt->ncol())*100.0
-               << "%  " << std::endl;
-   }
+ // Delete the solid matrix
+ delete Block_matrix_2_2_pt;
+ Block_matrix_2_2_pt = 0;
 
+ // Output times
+ if(Doc_time)
+  {
+   oomph_info << "Solid sub-preconditioner setup time [sec]: "
+              << setup_time << "\n";
+   
+   // Doc density of retained interaction block
+   if (Retain_solid_onto_fluid_terms)
+    {
+     oomph_info << "Fill level of solid on fluid blocks (C_us and C_ps): " <<
+      double(Block_matrix_0_2_pt->nnz())/
+      double(Block_matrix_0_2_pt->nrow()*
+             Block_matrix_0_2_pt->ncol())*100.0
+                << "%  " <<
+      double(Block_matrix_1_2_pt->nnz())/
+      double(Block_matrix_1_2_pt->nrow()*
+             Block_matrix_1_2_pt->ncol())*100.0
+                << "%  " << std::endl;
+    }
+   
+   // Doc density of retained interaction block
+   if (Retain_fluid_onto_solid_terms)
+    {
+     oomph_info << "Fill level of fluid on solid blocks (C_su and C_sp): " <<
+      double(Block_matrix_2_0_pt->nnz())/
+      double(Block_matrix_2_0_pt->nrow()*
+             Block_matrix_2_0_pt->ncol())*100.0
+                << "%  " <<
+      double(Block_matrix_2_1_pt->nnz())/
+      double(Block_matrix_2_1_pt->nrow()*
+             Block_matrix_2_1_pt->ncol())*100.0
+                << "%  " << std::endl;
+    }
+  }
+ 
   // We're done (and we stored some data)
   Preconditioner_has_been_setup=true;
-
   
  }
 
@@ -377,7 +414,6 @@ void FSIPreconditioner::setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
 void FSIPreconditioner::preconditioner_solve(const Vector<double>&r, 
                                              Vector<double> &z)
 {
- 
  // Block sizes
  unsigned n_veloc_dof= this->block_dimension(0);
  unsigned n_press_dof= this->block_dimension(1);

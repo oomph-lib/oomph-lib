@@ -213,6 +213,23 @@ identify_load_data(std::set<std::pair<Data*,unsigned> > &paired_load_data)
     }
   }
 
+ //Add the pressure data
+ identify_pressure_data(paired_load_data);
+}
+
+//=========================================================================
+///  Add to the set \c paired_load_data pairs containing
+/// - the pointer to a Data object
+/// and
+/// - the index of the value in that Data object
+/// .
+/// for all values (pressures, velocities) that affect the
+/// load computed in the \c get_load(...) function.
+//=========================================================================
+template<unsigned DIM>
+void TTaylorHoodElement<DIM>::
+identify_pressure_data(std::set<std::pair<Data*,unsigned> > &paired_load_data)
+{
  //Loop over the pressure data
  unsigned n_pres= npres_nst();
  for(unsigned l=0;l<n_pres;l++)
@@ -222,7 +239,6 @@ identify_load_data(std::set<std::pair<Data*,unsigned> > &paired_load_data)
    paired_load_data.insert(std::make_pair(this->node_pt(Pconv[l]),DIM));
   }
 }
-
 
 //====================================================================
 //// Force build of templates

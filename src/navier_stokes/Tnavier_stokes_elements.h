@@ -518,6 +518,17 @@ public:
  void identify_load_data(
   std::set<std::pair<Data*,unsigned> > &paired_load_data);
 
+ /// \short  Add to the set \c paired_pressure_data pairs 
+ /// containing
+ /// - the pointer to a Data object
+ /// and
+ /// - the index of the value in that Data object
+ /// .
+ /// for all pressure values that affect the
+ /// load computed in the \c get_load(...) function.
+ void identify_pressure_data(
+  std::set<std::pair<Data*,unsigned> > &paired_pressure_data);
+
  /// Redirect output to NavierStokesEquations output
  void output(std::ostream &outfile) 
   {NavierStokesEquations<DIM>::output(outfile);}

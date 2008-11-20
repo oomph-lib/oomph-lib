@@ -46,7 +46,7 @@ namespace oomph
 //=============================================================================
  void TrilinosAztecOOSolver::solve(Problem* const &problem_pt,
                                    Vector<double> &solution)
- {  /// An Epetra Comm object 
+ { 
   // clean up from previous solve
   clean_up_memory();
 
@@ -110,7 +110,7 @@ namespace oomph
   
   if (this->doc_time())
    {
-    oomph_info << "\nTime to generate Jacobian [sec]    : "
+    oomph_info << "Time to generate Jacobian [sec]           : "
                << Jacobian_setup_time << std::endl;
    }
   
@@ -204,7 +204,7 @@ void TrilinosAztecOOSolver::solve(DoubleMatrixBase* const& matrix_pt,
  // output timings and info
  if (this->doc_time())
  {
-  oomph_info << "CPU time for solve                        : "
+  oomph_info << "Time spent in solver                      : "
              << Linear_solver_solution_time
              << "s" << std::endl;
  } 
@@ -274,7 +274,7 @@ void TrilinosAztecOOSolver::solve(DoubleMatrixBase* const& matrix_pt,
  // output timings and info
  if (this->doc_time())
   {
-   oomph_info << "CPU time for solve                        : "
+   oomph_info << "Time for solve                            : "
               << Linear_solver_solution_time
               << "s" << std::endl;
   } 
@@ -345,7 +345,7 @@ void TrilinosAztecOOSolver::solve(DoubleMatrixBase* const& matrix_pt,
  // output timings and info
  if (this->doc_time())
   {
-   oomph_info << "CPU time for solve                        : "
+   oomph_info << "Time spent in linear solver               : "
               << Linear_solver_solution_time
               << "s" << std::endl;
   } 
@@ -511,7 +511,7 @@ void TrilinosAztecOOSolver::solver_setup(DoubleMatrixBase* const& matrix_pt)
  // output times
  if (Doc_time)
  {
-  oomph_info << "CPU time to generate Trilinos matrix      : "
+  oomph_info << "Time to generate Trilinos matrix          : "
 #ifdef OOMPH_HAS_MPI
              << double(end_t_setup-start_t_setup)
 #else
@@ -702,7 +702,7 @@ void TrilinosAztecOOSolver::resolve(const Vector<double> &rhs,
  // output timings and info
  if (this->doc_time())
  {
-  oomph_info << "CPU time for resolve                        : "
+  oomph_info << "Time for resolve                            : "
              << Linear_solver_solution_time
              << "s" << std::endl;
  } 
@@ -760,7 +760,7 @@ void TrilinosAztecOOSolver::resolve(const DistributedVector<double> &rhs,
  // output timings and info
  if (this->doc_time())
   {
-   oomph_info << "CPU time for resolve                        : "
+   oomph_info << "Time for resolve                            : "
               << Linear_solver_solution_time
               << "s" << std::endl;
   } 
@@ -818,7 +818,7 @@ void TrilinosAztecOOSolver::resolve(const DistributedVector<double> &rhs,
  // output timings and info
  if (this->doc_time())
   {
-   oomph_info << "CPU time for resolve                        : "
+   oomph_info << "Time for resolve                            : "
               << Linear_solver_solution_time
               << "s" << std::endl;
   } 

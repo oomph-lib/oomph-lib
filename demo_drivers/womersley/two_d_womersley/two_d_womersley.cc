@@ -89,7 +89,7 @@ namespace GlobalPhysicalParameters
 //====================================================================
 template<class ELEMENT>
 class RectangularWomersleyImpedanceTube  : 
- public WomersleyImpedanceTubeBase<ELEMENT>
+ public WomersleyImpedanceTubeBase<ELEMENT,2>
 {
 
 public:
@@ -98,9 +98,9 @@ public:
  /// flux to constructor of underlying base class
  RectangularWomersleyImpedanceTube(
   const double& length,  
-  typename WomersleyImpedanceTubeBase<ELEMENT>::PrescribedVolumeFluxFctPt 
+  typename WomersleyImpedanceTubeBase<ELEMENT,2>::PrescribedVolumeFluxFctPt 
   prescribed_volume_flux_fct_pt) : 
-  WomersleyImpedanceTubeBase<ELEMENT>(length, prescribed_volume_flux_fct_pt)
+  WomersleyImpedanceTubeBase<ELEMENT,2>(length, prescribed_volume_flux_fct_pt)
   {}
 
 
@@ -235,11 +235,11 @@ public:
           
      // Build the corresponding prescribed traction element
      NavierStokesImpedanceTractionElement<RefineableQTaylorHoodElement<3>,
-      QWomersleyElement<2,3> >* 
+      QWomersleyElement<2,3>,2>* 
       traction_element_pt 
       = new NavierStokesImpedanceTractionElement<
       RefineableQTaylorHoodElement<3>,
-      QWomersleyElement<2,3>  >(bulk_elem_pt,face_index);
+      QWomersleyElement<2,3>,2>(bulk_elem_pt,face_index);
      
      //Add the prescribed traction element to the mesh
      Outflow_traction_mesh_pt->add_element_pt(traction_element_pt);
@@ -255,9 +255,9 @@ public:
   // Build Womersley impedance tube
   unsigned fixed_coordinate=2;
   unsigned w_index=2;
-  WomersleyOutflowImpedanceTube<QWomersleyElement<2,3> >* 
+  WomersleyOutflowImpedanceTube<QWomersleyElement<2,3>,2>* 
    womersley_impedance_tube_pt=
-   new WomersleyOutflowImpedanceTube<QWomersleyElement<2,3> >
+   new WomersleyOutflowImpedanceTube<QWomersleyElement<2,3>,2>
    (GlobalPhysicalParameters::L_impedance,
     Outflow_traction_mesh_pt,
     fixed_coordinate,
@@ -489,7 +489,7 @@ void run_prescribed_flux()
 
  // Build problem with specifically created mesh (BCs applied and
  // timestepper)
- WomersleyProblem<QWomersleyElement<2,4> > 
+ WomersleyProblem<QWomersleyElement<2,4>,2> 
   problem(&GlobalPhysicalParameters::Alpha_sq,
           &GlobalPhysicalParameters::Prescribed_volume_flux,
           time_stepper_pt,my_mesh_pt);
@@ -611,7 +611,7 @@ void run_prescribed_pressure_gradient()
 
  // Build problem with specifically created mesh (BCs applied and
  // timestepper)
- WomersleyProblem<QWomersleyElement<2,4> > 
+ WomersleyProblem<QWomersleyElement<2,4>,2> 
   problem(&GlobalPhysicalParameters::Alpha_sq,
           &GlobalPhysicalParameters::prescribed_pressure_gradient,
           time_stepper_pt,my_mesh_pt);

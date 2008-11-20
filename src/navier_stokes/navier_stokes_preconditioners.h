@@ -187,6 +187,9 @@ namespace oomph
 
      // set P_matrix_pt to null
      P_matrix_pt = 0;
+
+     // set Doc_time to false
+     Doc_time = false;
     }
 
 
@@ -267,6 +270,8 @@ namespace oomph
     F_preconditioner_pt = &F_superlu_preconditioner;
    }
 
+   /// Access function for Doc_time
+   bool& doc_time() {return Doc_time;}
 
    protected:
 
@@ -336,6 +341,9 @@ namespace oomph
    
    /// Default preconditioner (inexact solver) for F matrix
    SuperLU_Preconditioner F_superlu_preconditioner;
+
+   /// Set Doc_time to true for outputting results of timings
+   bool Doc_time;
 
   };
 

@@ -198,12 +198,7 @@ namespace oomph
    TrilinosMLPreconditioner()
     {  
      // set default values
-     Max_levels = 10;
-     N_cycles = 1;
-     Smoother_damping = 0.67;
-     Smoother_sweeps = 2;
-     Smoother_type = "symmetric Gauss-Seidel";
-     Output=0;
+     ML_Epetra::SetDefaults("SA", ML_parameters);
     }
 
    /// Destructor empty -- clean up is done in base class
@@ -221,26 +216,61 @@ namespace oomph
      BrokenCopy::broken_assign("TrilinosMLPreconditioner");
     }
 
-   /// Access function to Max_levels
-   int& max_levels() {return Max_levels;}
+   /// \short Set control flags to values for Petrov-Galerkin
+   /// preconditioning - for non symmetric systems
+   void set_NSSA_default_values()
+    {
+     ML_Epetra::SetDefaults("NSSA", ML_parameters);
+    }
 
-   /// Access function to N_cycles
-   int& n_cycles() {return N_cycles;}
+   /// \short Set control flags to values for classical smoothed 
+   /// aggregation preconditioning
+   void set_SA_default_values()
+    {
+     ML_Epetra::SetDefaults("SA", ML_parameters);
+    }
 
-   /// Access function to Smoother_damping
-   double& smoother_damping() {return Smoother_damping;}
+   /// Function to set maximum number of levels
+   void set_max_levels(int max_levels)
+    {
+     ML_parameters.set("max levels", max_levels);
+    }
 
-   /// Access function to Smoother_sweeps
-   int& smoother_sweeps() {return Smoother_sweeps;}
+   /// Function to set the number of cycles used
+   void set_n_cycles(int n_cycles)
+    {
+     ML_parameters.set("cycle applications", n_cycles);
+    }
 
-   /// Function to set Smoother_type to "Jacobi"
-   void set_smoother_jacobi() {Smoother_type="Jacobi";}
+   /// Function to set Smoother_damping
+   void set_smoother_damping(int smoother_damping) 
+    {
+     ML_parameters.set("smoother: damping factor", smoother_damping);
+    }
 
-   /// Function to set Smoother_type to "symmetric Gauss-Seidel"
-   void set_smoother_gauss_seidel() {Smoother_type="symmetric Gauss-Seidel";}
+   /// Function to set Smoother_sweeps
+   void set_smoother_sweeps(int smoother_sweeps)
+    {
+     ML_parameters.set("smoother: sweeps", smoother_sweeps);
+    }
 
-   /// Access function to Output
-   int& output() {return Output;}
+   /// Function to set smoother type to "Jacobi"
+   void set_smoother_jacobi() 
+    {
+     ML_parameters.set("smoother: type", "Jacobi");
+    }
+   
+   /// Function to set smoother type to "symmetric Gauss-Seidel"
+   void set_smoother_gauss_seidel() 
+    {
+     ML_parameters.set("smoother: type", "symmetric Gauss-Seidel");
+    }
+
+   /// Function to set output - controls level of information output by ML
+   void set_output(int output)
+    {
+     ML_parameters.set("output", output); 
+    }
 
     protected:
 
@@ -250,23 +280,8 @@ namespace oomph
     (Problem* problem_pt, DoubleMatrixBase* oomph_matrix_pt, 
      Epetra_CrsMatrix* epetra_matrix_pt);
 
-   /// Maximum number of levels used
-   int Max_levels;
-
-   /// Number of cycles used
-   int N_cycles;
-
-   /// Smoother damping paramater
-   double Smoother_damping;
-
-   /// Type of smoothing
-   string Smoother_type;
-
-   /// Number of smoother sweeps
-   int Smoother_sweeps;
-
-   /// Flag controls level of information output by ML
-   int Output;
+   // Parameter list of control flags for the preconditioner
+   Teuchos::ParameterList ML_parameters;
   };
 
 

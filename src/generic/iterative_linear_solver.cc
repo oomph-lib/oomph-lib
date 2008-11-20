@@ -1362,10 +1362,25 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
                 << std::endl;
     }
   } 
- 
+
  // solve b-Jx = Mr for r (assumes x = 0);
  Vector<double> r(n_dof);
- preconditioner_pt()->preconditioner_solve(rhs,r); 
+ // Original version commented out
+// preconditioner_pt()->preconditioner_solve(rhs,r); 
+ //////////// New version with RH preconditioning from Glyn
+ if(Preconditioner_LHS)
+  {
+   preconditioner_pt()->preconditioner_solve(rhs,r); 
+  }
+ else
+  {
+   //b-Jx0=r for r(assumes x=0) by saad p270
+   for(unsigned i=0;i<n_dof;i++)
+    {
+     r[i]=rhs[i];
+    }
+  }
+ //////////////// End of new version with RH preconditioning from Glyn
  double normb = 0;
  
  // compute norm(r)
@@ -1454,12 +1469,31 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
      // resize next column of upper hessenberg matrix
      H[iter_restart].resize(iter_restart+2);
 
-     // solve Jv[i] = Mw for w
+     // Original code commented out
+   //   // solve Jv[i] = Mw for w
+//      {
+//       Vector<double> temp(n_dof);
+//       matrix_pt->multiply(v[iter_restart],temp);
+//       preconditioner_pt()->preconditioner_solve(temp,w);
+//      }
+
+     ////////////// New version from Glyn
      {
-      Vector<double> temp(n_dof);
-      matrix_pt->multiply(v[iter_restart],temp);
-      preconditioner_pt()->preconditioner_solve(temp,w);
+      Vector<double> temp(n_dof,0.0);
+      if(Preconditioner_LHS)
+       {
+        // solve Jv[i] = Mw for w
+        matrix_pt->multiply(v[iter_restart],temp);
+        preconditioner_pt()->preconditioner_solve(temp,w);
+       }
+      else 
+       {
+        //w=JM^{-1}v by saad p270
+        preconditioner_pt()->preconditioner_solve(v[iter_restart],temp);
+        matrix_pt->multiply(temp,w);
+       }
      }
+     ////////////// End of new version from Glyn
 
      //
      for (unsigned k = 0; k <= iter_restart; k++)
@@ -1570,8 +1604,19 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
    
    // update
    if (iter_restart>0) update((iter_restart - 1), H, s, v, solution);
-   
+
    // solve Mr = (b-Jx) for r
+   // Commented out original version
+  //  {
+//     Vector<double> temp(n_dof);
+//     matrix_pt->multiply(solution,temp);
+//     for (unsigned i = 0; i < n_dof; i++)
+//      {
+//       temp[i] = rhs[i] - temp[i];
+//      }
+//     preconditioner_pt()->preconditioner_solve(temp,r); 
+//    } 
+   ////////// New version from Glyn
    {
     Vector<double> temp(n_dof);
     matrix_pt->multiply(solution,temp);
@@ -1579,8 +1624,13 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
      {
       temp[i] = rhs[i] - temp[i];
      }
-    preconditioner_pt()->preconditioner_solve(temp,r); 
+    
+    if(Preconditioner_LHS)
+     {
+      preconditioner_pt()->preconditioner_solve(temp,r); 
+     }
    } 
+   /////// End of new version from Glyn
    
    // compute current residual
    beta = 0.0;

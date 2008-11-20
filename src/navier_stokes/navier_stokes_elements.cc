@@ -2111,6 +2111,25 @@ identify_load_data(std::set<std::pair<Data*,unsigned> > &paired_load_data)
     }
   }
 
+ // Identify the pressure data
+ identify_pressure_data(paired_load_data);
+
+}
+
+
+//=========================================================================
+///  Add to the set \c paired_pressue_data pairs containing
+/// - the pointer to a Data object
+/// and
+/// - the index of the value in that Data object
+/// .
+/// for all pressures values that affect the
+/// load computed in the \c get_load(...) function.
+//=========================================================================
+template<unsigned DIM>
+void QCrouzeixRaviartElement<DIM>::
+identify_pressure_data(std::set<std::pair<Data*,unsigned> > &paired_pressure_data)
+{
  //Loop over the internal data
  unsigned n_internal = this->ninternal_data();
  for(unsigned l=0;l<n_internal;l++)
@@ -2119,12 +2138,10 @@ identify_load_data(std::set<std::pair<Data*,unsigned> > &paired_load_data)
    //Add internal data
    for (unsigned j=0;j<nval;j++)
     {
-     paired_load_data.insert(std::make_pair(this->internal_data_pt(l),j));
+     paired_pressure_data.insert(std::make_pair(this->internal_data_pt(l),j));
     }
   }
-}
-
-      
+}      
 
 
 //=============================================================================
@@ -2253,6 +2270,24 @@ identify_load_data(std::set<std::pair<Data*,unsigned> > &paired_load_data)
     }
   }
 
+ //Identify the pressure data
+ this->identify_pressure_data(paired_load_data);
+
+}
+
+//=========================================================================
+///  Add to the set \c paired_pressure_data pairs containing
+/// - the pointer to a Data object
+/// and
+/// - the index of the value in that Data object
+/// .
+/// for pressure values that affect the
+/// load computed in the \c get_load(...) function., 
+//=========================================================================
+template<unsigned DIM>
+void QTaylorHoodElement<DIM>::
+identify_pressure_data(std::set<std::pair<Data*,unsigned> > &paired_pressure_data)
+{
  //Find the index at which the pressure is stored
  unsigned p_index = static_cast<unsigned>(this->p_nodal_index_nst());
 
@@ -2262,7 +2297,7 @@ identify_load_data(std::set<std::pair<Data*,unsigned> > &paired_load_data)
   {
    //The DIMth entry in each nodal data is the pressure, which
    //affects the traction
-   paired_load_data.insert(std::make_pair(this->node_pt(Pconv[l]),p_index));
+   paired_pressure_data.insert(std::make_pair(this->node_pt(Pconv[l]),p_index));
   }
 }
 

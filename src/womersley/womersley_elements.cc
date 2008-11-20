@@ -548,9 +548,10 @@ void WomersleyEquations<DIM>::output_fct(std::ostream &outfile,
  ///
 //======================================================================
 template <unsigned DIM>
-void WomersleyEquations<DIM>::compute_error(std::ostream &outfile, 
-                                           FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                                               double& error, double& norm)
+void WomersleyEquations<DIM>::
+compute_error(std::ostream &outfile, 
+              FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
+              double& error, double& norm)
 { 
  
  // Initialise
@@ -708,9 +709,12 @@ void WomersleyEquations<DIM>::compute_error(std::ostream &outfile,
 //====================================================================
 // Force build of templates
 //====================================================================
-//template class QWomersleyElement<1,2>;
-//template class QWomersleyElement<1,3>;
-//template class QWomersleyElement<1,4>;
+
+template class WomersleyEquations<1>;
+
+template class QWomersleyElement<1,2>;
+template class QWomersleyElement<1,3>;
+template class QWomersleyElement<1,4>;
 
 template class WomersleyEquations<2>;
 

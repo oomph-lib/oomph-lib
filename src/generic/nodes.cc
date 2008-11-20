@@ -1186,8 +1186,8 @@ double Node::dx_dt(const unsigned &i) const
 
  double dxdt=0.0;
  
- //If the timestepper is not static
- if (Position_time_stepper_pt->type()!="Static")
+ //If the timestepper is not steady
+ if (!Position_time_stepper_pt->is_steady())
   {
    //Loop over the additional storage and add the appropriate contributions
    for(unsigned t=0;t<n_time;t++)
@@ -1210,8 +1210,8 @@ double Node::dx_dt(const unsigned &j, const unsigned &i) const
  
  double dxdt=0.0;
  
- //If the timestepper is not static
- if (Position_time_stepper_pt->type()!="Static")
+ //If the timestepper is not steady
+ if ((!Position_time_stepper_pt->is_steady()) || (j==0))
   {
    //Loop over the additional storage and add the appropriate contributions 
    for(unsigned t=0;t<n_time;t++)
@@ -1234,8 +1234,8 @@ double Node::dx_gen_dt(const unsigned &k, const unsigned &i) const
  
  double dxdt=0.0;
  
- //If the timestepper is not static
- if (Position_time_stepper_pt->type()!="Static")
+ //If the timestepper is not steady
+ if (!Position_time_stepper_pt->is_steady())
   {
    //Loop over the additional time storage and add the appropriate 
    //contributions
@@ -1260,8 +1260,8 @@ double Node::dx_gen_dt(const unsigned &j, const unsigned &k,
  
  double dxdt=0.0;
  
- //If the timestepper is not static
- if (Position_time_stepper_pt->type()!="Static")
+ //If the timestepper is not steady
+ if ((!Position_time_stepper_pt->is_steady()) || (j==0))
   {
    //Loop over the additional storage and add the appropriate contributions
    for(unsigned t=0;t<n_time;t++)
@@ -1861,8 +1861,8 @@ double Node::dposition_dt(const unsigned &i) const
 
  double dxdt=0.0;
  
- //If the timestepper is not static
- if (Position_time_stepper_pt->type()!="Static")
+ //If the timestepper is not steady
+ if (!Position_time_stepper_pt->is_steady())
   {
    //Loop over the additional storage and add the appropriate contributions
    for(unsigned t=0;t<n_time;t++)
@@ -1885,8 +1885,8 @@ double Node::dposition_dt(const unsigned &j, const unsigned &i) const
  
  double dxdt=0.0;
  
- //If the timestepper is not static
- if (Position_time_stepper_pt->type()!="Static")
+ //If the timestepper is not steady
+ if ((!Position_time_stepper_pt->is_steady()) || (j==0))
   {
    //Loop over the additional storage and add the appropriate contributions 
    for(unsigned t=0;t<n_time;t++)
@@ -1909,9 +1909,9 @@ double Node::dposition_gen_dt(const unsigned &k, const unsigned &i) const
  const unsigned n_time = Position_time_stepper_pt->ntstorage();
  
  double dxdt=0.0;
- 
- //If the timestepper is not static
- if (Position_time_stepper_pt->type()!="Static")
+
+ //If the timestepper is not steady
+ if (!Position_time_stepper_pt->is_steady())
   {
    //Loop over the additional time storage and add the appropriate 
    //contributions
@@ -1937,8 +1937,8 @@ double  Node::dposition_gen_dt(const unsigned &j, const unsigned &k,
  
  double dxdt=0.0;
  
- //If the timestepper is not static
- if (Position_time_stepper_pt->type()!="Static")
+ //If the timestepper is not steady
+ if ((!Position_time_stepper_pt->is_steady()) || (j==0))
   {
    //Loop over the additional storage and add the appropriate contributions
    for(unsigned t=0;t<n_time;t++)

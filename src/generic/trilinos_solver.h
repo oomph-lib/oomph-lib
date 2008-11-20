@@ -368,7 +368,6 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
   Solver_type = GMRES;
   Tolerance = 1e-10;
   Max_iter = 1000;
-  Preconditioner_pt = 0;
  }
 
  /// Destructor - delete the solver and the matrices

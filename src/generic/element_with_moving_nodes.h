@@ -288,12 +288,18 @@ template<class ELEMENT,class NODE_TYPE>
   public:
 
  /// Constructor, call the constructor of the base element
- ElementWithSpecificMovingNodes() : ELEMENT(), ElementWithMovingNodes() {}
+ ElementWithSpecificMovingNodes() : ELEMENT(), ElementWithMovingNodes()
+  {
+   Bypass_fill_in_jacobian_from_geometric_data=false;
+  }
  
  /// Constructor used for face elements
  ElementWithSpecificMovingNodes(FiniteElement* const &element_pt, 
                                 const int &face_index) : 
-  ELEMENT(element_pt, face_index), ElementWithMovingNodes() {}
+  ELEMENT(element_pt, face_index), ElementWithMovingNodes()
+  {
+   Bypass_fill_in_jacobian_from_geometric_data=false;
+  }
 
  /// Empty Destructor, 
  ~ElementWithSpecificMovingNodes() {} 
@@ -392,8 +398,24 @@ template<class ELEMENT,class NODE_TYPE>
    ELEMENT::get_jacobian(residuals,jacobian);
 
    //Now call the additional geometric Jacobian terms
-   this->fill_in_jacobian_from_geometric_data(jacobian);
+   if(!Bypass_fill_in_jacobian_from_geometric_data)
+    {
+     this->fill_in_jacobian_from_geometric_data(jacobian);
+    }
   }
+
+ /// Access function for Bypass_fill_in_jacobian_from_geometric_data
+ bool &bypass_fill_in_jacobian_from_geometric_data()
+  {
+   return Bypass_fill_in_jacobian_from_geometric_data;
+  }
+
+  private:
+
+ /// \short Set flag to true to bypass calculation of Jacobain entries
+ /// resulting from geometric data.
+ bool Bypass_fill_in_jacobian_from_geometric_data;
+
 
 };
 

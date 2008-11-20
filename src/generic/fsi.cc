@@ -320,9 +320,17 @@ void FSIWallElement::assign_load_data_local_eqn_numbers()
    for(std::set<FSIFluidElement*>::iterator it=all_load_elements_pt.begin();
        it != all_load_elements_pt.end(); it++)
     {
-     // Add the "direct" load data (usually velocities and pressures)
-     // to the set
-     (*it)->identify_load_data(paired_load_data);
+     if (Include_external_shear_stress_load_data)
+      {
+       // Add the "direct" load data (usually velocities and pressures)
+       // to the set
+       (*it)->identify_load_data(paired_load_data);
+      }
+     else
+      {
+       // Add the "pressure" load data
+       (*it)->identify_pressure_data(paired_load_data);
+      }
      
      // Add the "indirect" load data to the set: All geometric Data that 
      // affects the nodal positions in the FSIFluidElement and thus indirectly
@@ -488,7 +496,10 @@ void  FSIWallElement::fill_in_jacobian_from_solid_position_and_external_by_fd(
          node_pt(l)->x_gen(k,i) += fd_step;
          
          //I am FSI element: Need to update adjacent fluid nodes/elements
-         node_update_adjacent_fluid_elements();
+         if (Include_external_shear_stress_load_data)
+          {
+           node_update_adjacent_fluid_elements();
+          }
          
          //Calculate the new residuals
          get_residuals(newres);
@@ -560,7 +571,10 @@ void  FSIWallElement::fill_in_jacobian_from_solid_position_and_external_by_fd(
      // I am FSI element: need to update affected fluid nodes/elements
      // because the load Data may include values that affect the nodal
      // position in adjacent fluid elements (via shear stresses!)
-     node_update_adjacent_fluid_elements();
+     if (Include_external_shear_stress_load_data)
+      {
+       node_update_adjacent_fluid_elements();
+      }
      
      //Calculate the new residuals
      get_residuals(newres);
@@ -630,7 +644,10 @@ void  FSIWallElement::fill_in_jacobian_from_solid_position_and_external_by_fd(
        *value_pt += fd_step;
        
        // I am FSI element: need to update affected fluid nodes/elements
-       node_update_adjacent_fluid_elements();
+       if (Include_external_shear_stress_load_data)
+        {
+         node_update_adjacent_fluid_elements();
+        }
        
        //Calculate the new residuals
        get_residuals(newres);
@@ -701,7 +718,10 @@ void  FSIWallElement::fill_in_jacobian_from_solid_position_and_external_by_fd(
        *value_pt += fd_step;
        
        // I am FSI element: need to update affected fluid nodes/elements
-       node_update_adjacent_fluid_elements();
+       if (Include_external_shear_stress_load_data)
+        {
+         node_update_adjacent_fluid_elements();
+        }
        
        //Calculate the new residuals
        get_residuals(newres);

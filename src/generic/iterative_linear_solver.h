@@ -614,6 +614,7 @@ class GMRES : public IterativeLinearSolver
  GMRES() : Iterations(0), Matrix_pt(0), Resolving(false), 
   Matrix_can_be_deleted(true)
    {
+    Preconditioner_LHS = true;
     Iteration_restart = false;
    }
   
@@ -703,6 +704,10 @@ class GMRES : public IterativeLinearSolver
    Iteration_restart = false;
   }
 
+ /// \short Access function to Preconditioner_LHS, the flag which determines
+ /// if left hand or right hand preconditioning is used
+ bool& preconditioner_LHS() {return Preconditioner_LHS;}
+ 
  
   private:
 
@@ -723,12 +728,15 @@ class GMRES : public IterativeLinearSolver
     }
   }
 
+
+// NEW UPDATE FUNCTION FROM GLYN......
+// original function commented out below
+
  /// Helper function to update the result vector
  void update(const unsigned& k, const Vector<Vector<double> >& H, 
              const Vector<double>& s, const Vector<Vector<double> >& v,
              Vector<double> &x)
   {
-
    // Make a local copy of s
    Vector<double> y(s);
    
@@ -742,17 +750,76 @@ class GMRES : public IterativeLinearSolver
       }
     }
    
-
+   unsigned n_x=x.size();
+   Vector<double> temp(n_x,0.0);
+   Vector<double> z(n_x,0.0);
+//changes
    // x = Vy
-   unsigned n_x=x.size();   
+   /*  unsigned n_x=x.size();    */
+/*    for (unsigned j = 0; j <= k; j++) */
+/*     { */
+/*      for (unsigned i = 0; i < n_x; i++) */
+/*       { */
+/*        x[i] += v[j][i] * y[j]; */
+/*       } */
+/*     } */
+/*   } */
+   // x = Vy
    for (unsigned j = 0; j <= k; j++)
     {
      for (unsigned i = 0; i < n_x; i++)
       {
-       x[i] += v[j][i] * y[j];
+       temp[i] += v[j][i] * y[j];
+      }
+    }
+   
+   if(Preconditioner_LHS)
+    { 
+     for (unsigned i = 0; i < n_x; i++)
+      {
+       x[i]+=temp[i];
+      }
+    }
+   else
+    {
+     //x=x0+M^{-1}Vy by saad p270
+     preconditioner_pt()->preconditioner_solve(temp,z);
+     for (unsigned i = 0; i < n_x; i++)
+      {
+       x[i] +=z[i];
       }
     }
   }
+ 
+
+/*  /// Helper function to update the result vector */
+/*  void update(const unsigned& k, const Vector<Vector<double> >& H,  */
+/*              const Vector<double>& s, const Vector<Vector<double> >& v, */
+/*              Vector<double> &x) */
+/*   { */
+/*    // Make a local copy of s */
+/*    Vector<double> y(s); */
+   
+/*    // Backsolve:   */
+/*    for (int i = int(k); i >= 0; i--)  */
+/*     { */
+/*      y[i] /= H[i][i]; */
+/*      for (int j = i - 1; j >= 0; j--) */
+/*       { */
+/*        y[j] -= H[i][j] * y[i]; */
+/*       } */
+/*     } */
+
+/*    // x = Vy */
+/*    unsigned n_x=x.size();    */
+/*    for (unsigned j = 0; j <= k; j++) */
+/*     { */
+/*      for (unsigned i = 0; i < n_x; i++) */
+/*       { */
+/*        x[i] += v[j][i] * y[j]; */
+/*       } */
+/*     } */
+/*   } */
 
 
  /// \short Helper function: Generate plane rotation
@@ -808,6 +875,10 @@ class GMRES : public IterativeLinearSolver
  /// \short Boolean flag to indicate if the matrix pointed to be Matrix_pt
  /// can be deleted.
  bool Matrix_can_be_deleted;
+
+ /// \short boolean indicating use of left hand preconditioning (if true)
+ /// or right hand preconditioning (if false)
+ bool Preconditioner_LHS;
 
 };
 

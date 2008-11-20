@@ -730,7 +730,7 @@ void copy_to_oomphlib_vector(const Epetra_Vector* epetra_v_pt,
                   my_mpi_comm);
    
    // clean up memory
-   MPI_Comm_free(&my_mpi_comm);
+   //MPI_Comm_free(&my_mpi_comm);
   }
 #else
   epetra_v_pt->ExtractView(&values);

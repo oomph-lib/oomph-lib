@@ -876,15 +876,15 @@ void SuperLU_dist::factorise(DoubleMatrixBase* const &matrix_pt)
  // Or is it a CRDoubleMatrix?
  else if(dynamic_cast<CRDoubleMatrix*>(matrix_pt))
   {
+   // Get a cast pointer to the matrix
+   CRDoubleMatrix* serial_matrix_pt = 
+    dynamic_cast<CRDoubleMatrix*>(matrix_pt);
+   
    // Set flag so we know the rhs vector won't be distributed
    Distributed_rhs = false;
    
-   // Get a cast pointer to the matrix
-   CRDoubleMatrix* serial_CR_matrix_pt = 
-    dynamic_cast<CRDoubleMatrix*>(matrix_pt);
-
    // Store # of degrees of freedom (variables)
-   Ndof = int(serial_CR_matrix_pt->nrow());
+   Ndof = int(serial_matrix_pt->nrow());
    
    // Construct a DistributionInfo with uniform distribution
    DistributionInfo distribution(MPI_COMM_WORLD, Ndof); 
@@ -894,23 +894,23 @@ void SuperLU_dist::factorise(DoubleMatrixBase* const &matrix_pt)
    
    // Store the local first row
    First_local_dof = int(distribution.first_row());
-
+   
    // Set up the pointers to the matrix.
    // NOTE: these arrays (accessed via value_pt, index_pt and
    // start_pt) may be modified by the SuperLU_DIST routines, and so 
    // a copy must be taken if the matrix is to be preserved.
-   double* matrix_value_pt = serial_CR_matrix_pt->value();
-   int* matrix_index_pt = serial_CR_matrix_pt->column_index();
-   int* matrix_start_pt = serial_CR_matrix_pt->row_start();
-
+   double* matrix_value_pt = serial_matrix_pt->value();
+   int* matrix_index_pt = serial_matrix_pt->column_index();
+   int* matrix_start_pt = serial_matrix_pt->row_start();
+   
    // Find the local number of non-zero entries in the matrix
    const int nnz_local = matrix_start_pt[First_local_dof + Ndof_local]
     - matrix_start_pt[First_local_dof];
-
+   
    // Find the index of the first entry in the matrix corresponding to
    // row number First_local_dof
    const int first_local_index = matrix_start_pt[First_local_dof];
-
+   
    // Copy values
    Value_pt = new double[nnz_local]; 
    Vector<double> value_vec(nnz_local);
@@ -924,7 +924,7 @@ void SuperLU_dist::factorise(DoubleMatrixBase* const &matrix_pt)
    for (int i=0; i<nnz_local; i++)
     {
      Index_pt[i] = matrix_index_pt[first_local_index+i];
-     }
+    }
    
    // Copy row starts
    Start_pt = new int[Ndof_local+1];
@@ -932,11 +932,11 @@ void SuperLU_dist::factorise(DoubleMatrixBase* const &matrix_pt)
     {
      Start_pt[i] = matrix_start_pt[First_local_dof+i]-first_local_index;
     }
-
-   // Now delete the matrix if we are allowed
+   
+   // Now delete the matrix data if we are allowed
    if (Delete_matrix_data==true)
     {
-     serial_CR_matrix_pt->clean_up_memory();
+     serial_matrix_pt->clean_up_memory();
     }
    
    // Factorize
@@ -955,70 +955,71 @@ void SuperLU_dist::factorise(DoubleMatrixBase* const &matrix_pt)
    // Record that data is stored
    Distributed_solve_data_allocated=true;
   } 
-
+ 
  // Or is it a CCDoubleMatrix?
-else if(dynamic_cast<CCDoubleMatrix*>(matrix_pt))
-  {
-   // Set flag so we know the rhs vector won't be distributed
-   Distributed_rhs = false;
-   
-   // Get a cast pointer to the matrix
-   CCDoubleMatrix* serial_matrix_pt = dynamic_cast<CCDoubleMatrix*>(matrix_pt);
-   
-   // Find the number of non-zero entries in the matrix
-   const int nnz = int(serial_matrix_pt->nnz());  
-
-   // Find # of degrees of freedom (variables)
-   Ndof = int(serial_matrix_pt->nrow());
-
-   // Find the local number of degrees of freedom in the linear system
-   Ndof_local = Ndof;
-
-   // Set first local index
-   First_local_dof = 0;
-
-   // Set up the pointers to the matrix.
-   // NOTE: these arrays (accessed via value_pt, index_pt and
-   // start_pt) may be modified by the SuperLU_DIST routines, and so 
-   // a copy must be taken if the matrix is to be preserved.
-
-   // Copy values
-   Value_pt = new double[nnz];
-   double* matrix_value_pt = serial_matrix_pt->value();
-   for(int i=0;i<nnz;i++) 
-    {
-     Value_pt[i] = matrix_value_pt[i];
-    }
-   
-   // copy row indices
-   Index_pt = new int[nnz];
-   int* matrix_index_pt = serial_matrix_pt->row_index();
-   for (int i=0; i<nnz; i++)
-    {
-     Index_pt[i] = matrix_index_pt[i];
-    }
-   
-   // copy column starts
-   Start_pt = new int[Ndof_local+1];
-   int* matrix_start_pt = serial_matrix_pt->column_start();
-   for (int i=0; i<=Ndof_local; i++)
-    {
-     Start_pt[i] = matrix_start_pt[i];
-    }
-
-   // Delete the matrix if we are allowed
-   if (Delete_matrix_data==true)
-    {
-     serial_matrix_pt->clean_up_memory();
-    }
-   
-   // do the factorization
-   superlu_dist_global_matrix(1, Ndof, nnz, Value_pt, Index_pt, Start_pt, 
-                              0, Nprow, Npcol, doc, &Solver_data_pt, &Info);
-   
-   // Record that data is stored
-   Global_solve_data_allocated=true;
-  }
+ else if (dynamic_cast<CCDoubleMatrix*>(matrix_pt))
+ {
+  // Set flag so we know the rhs vector won't be distributed
+  Distributed_rhs = false;
+  
+  // Get a cast pointer to the matrix
+  CCDoubleMatrix* serial_matrix_pt = dynamic_cast<CCDoubleMatrix*>(matrix_pt);
+  
+  // Find the number of non-zero entries in the matrix
+  const int nnz = int(serial_matrix_pt->nnz());  
+  
+  // Find # of degrees of freedom (variables)
+  Ndof = int(serial_matrix_pt->nrow());
+  
+  // Find the local number of degrees of freedom in the linear system
+  Ndof_local = Ndof;
+  
+  // Set first local index
+  First_local_dof = 0;
+  
+  // Set up the pointers to the matrix.
+  // NOTE: these arrays (accessed via value_pt, index_pt and
+  // start_pt) may be modified by the SuperLU_DIST routines, and so 
+  // a copy must be taken if the matrix is to be preserved.
+  
+  // Copy values
+  Value_pt = new double[nnz];
+  double* matrix_value_pt = serial_matrix_pt->value();
+  for(int i=0;i<nnz;i++) 
+   {
+    Value_pt[i] = matrix_value_pt[i];
+   }
+  
+  // copy row indices
+  Index_pt = new int[nnz];
+  int* matrix_index_pt = serial_matrix_pt->row_index();
+  for (int i=0; i<nnz; i++)
+   {
+    Index_pt[i] = matrix_index_pt[i];
+   }
+  
+  // copy column starts
+  Start_pt = new int[Ndof_local+1];
+  int* matrix_start_pt = serial_matrix_pt->column_start();
+  for (int i=0; i<=Ndof_local; i++)
+   {
+    Start_pt[i] = matrix_start_pt[i];
+   }
+  
+  // Delete the matrix if we are allowed
+  if (Delete_matrix_data==true)
+   {
+    serial_matrix_pt->clean_up_memory();
+   }
+  
+  // do the factorization
+  superlu_dist_global_matrix(1, Ndof, nnz, Value_pt, Index_pt, Start_pt, 
+                             0, Nprow, Npcol, doc, &Solver_data_pt, &Info);
+  
+  // Record that data is stored
+  Global_solve_data_allocated=true;
+ }
+          
  // Otherwise throw an error
  else
   {
@@ -1234,7 +1235,7 @@ void SuperLU_dist::solve(Problem* const &problem_pt, Vector<double> &result)
   {
    // Initialise timer
    double t_start = MPI_Wtime();
-
+   
    // Storage for the residuals vector
    Vector<double> residuals;
    

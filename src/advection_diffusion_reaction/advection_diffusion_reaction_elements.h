@@ -128,7 +128,7 @@ public:
    //Initialise dudt
    double dudt=0.0;
    //Loop over the timesteps, if there is a non Steady timestepper
-   if (time_stepper_pt->type()!="Steady")
+   if (!time_stepper_pt->is_steady())
     {
      //Find the index at which the variable is stored
      const unsigned c_nodal_index = c_index_adv_diff_react(r);
@@ -156,7 +156,7 @@ public:
    for(unsigned r=0;r<NREAGENT;r++) {dc_dt[r] = 0.0;}
    
    //Loop over the timesteps, if there is a non Steady timestepper
-   if (time_stepper_pt->type()!="Steady")
+   if (!time_stepper_pt->is_steady())
     {
      // Number of timsteps (past & present)
      const unsigned n_time = time_stepper_pt->ntstorage();

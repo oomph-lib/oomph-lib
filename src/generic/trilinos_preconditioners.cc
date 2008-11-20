@@ -355,20 +355,10 @@ setup_trilinos_preconditioner(Problem* problem_pt,
                               DoubleMatrixBase* oomph_matrix_pt, 
                               Epetra_CrsMatrix* epetra_matrix_pt)
 {
- // set up a parameter list
- Teuchos::ParameterList ml_parameters;
- ML_Epetra::SetDefaults("SA", ml_parameters);
- ml_parameters.set("cycle applications", N_cycles);
- ml_parameters.set("output", Output); 
- ml_parameters.set("max levels", Max_levels);
- ml_parameters.set("smoother: type", Smoother_type);
- ml_parameters.set("smoother: sweeps", Smoother_sweeps);
- ml_parameters.set("smoother: damping factor", Smoother_damping);
- 
  // create the preconditioner
  Epetra_preconditioner_pt =
   new ML_Epetra::MultiLevelPreconditioner(*epetra_matrix_pt,
-                                          ml_parameters,
+                                          ML_parameters,
                                           true);
 }
 

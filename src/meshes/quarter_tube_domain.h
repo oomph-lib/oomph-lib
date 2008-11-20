@@ -102,7 +102,7 @@ public:
  /// the wall by mapping the input value of the "radial" macro element
  /// coordinate to the return value
  typedef double (*BLSquashFctPt)(const double& s);
-
+ 
  
  /// \short Function pointer for function that squashes
  /// the outer two macro elements towards 
@@ -529,6 +529,8 @@ void  QuarterTubeDomain::r_centr_L(const unsigned& t,
                                     const unsigned& i_layer,
                                     Vector<double>& f)
 {
+ // hierher Note the repetition in the calculation, there is some scope
+ // for optimisation
                             
   // Wall coordinates along top edge of wall
   Vector<double> x(2);
@@ -542,7 +544,7 @@ void  QuarterTubeDomain::r_centr_L(const unsigned& t,
 
   // Wall coordinates along bottom edge of wall
   x[0]=Xi_lo[0]+(Xi_hi[0]-Xi_lo[0])*
-   axial_spacing_fct((0.5*(1.0+zeta[1])+double(i_layer))/double(Nlayer));
+   axial_spacing_fct((0.5*(1.0+zeta[1])+double(i_layer))/double(Nlayer)); 
   x[1]=Xi_lo[1];
 
   // Get position vector to bottom edge of wall

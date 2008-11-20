@@ -14,7 +14,7 @@ mkdir Validation
 #----------------------------------
 cd Validation
 
-echo "Running Womersley validation "
+echo "Running 2D Womersley validation "
 mkdir RESLT_prescribed_pressure_gradient
 mkdir RESLT_prescribed_volume_flux
 mkdir RESLT_impedance_tube
@@ -22,8 +22,8 @@ mkdir RESLT_navier_stokes
 ../two_d_womersley > OUTPUT
 echo "done"
 echo " " >> validation.log
-echo "Womersley validation" >> validation.log
-echo "--------------------" >> validation.log
+echo "2D Womersley validation" >> validation.log
+echo "-----------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log
 echo " " >> validation.log
