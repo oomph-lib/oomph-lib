@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=8
+NUM_TESTS=12
 
 # Setup validation directory
 #---------------------------
@@ -11,9 +11,146 @@ rm -r -f Validation
 mkdir Validation
 
 
-# Validation for FSI collapsible channel (macro elements)
-#--------------------------------------------------------
+# Validation for FSI collapsible channel (non-adapt, pseudo-elastic node update)
+#--------------------------------------------------------------------
 cd Validation
+
+
+echo "Running validation for FSI collapsible channel (pseudo elastic, non-adapt TH)"
+mkdir RESLT
+
+# Do validation run
+../fsi_pseudo_solid_collapsible_channel_TH blabla > OUTPUT_pseudo_elastic_TH
+echo "done"
+echo " " >> validation.log
+echo "FSI collapsible channel validation (pseudo elastic, non-adapt TH)" \
+>> validation.log
+echo "-----------------------------------------------------------------" \
+>> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+
+cat RESLT/soln0.dat RESLT/soln1.dat  \
+    RESLT/soln2.dat RESLT/soln3.dat  \
+    > result_pseudo_elastic_non_adapt_TH.dat
+
+if test "$1" = "no_python"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/pseudo_elastic_non_adapt_TH.dat.gz \
+    result_pseudo_elastic_non_adapt_TH.dat 0.1 1.0e-8 >> validation.log
+fi
+
+
+mv RESLT RESLT_pseudo_elastic_non_adapt_TH
+
+
+echo "Running validation for FSI collapsible channel (pseudo elastic, non-adapt CR)"
+mkdir RESLT
+
+# Do validation run
+../fsi_pseudo_solid_collapsible_channel_CR blabla > OUTPUT_pseudo_elastic_CR
+
+echo "done"
+echo " " >> validation.log
+echo "FSI collapsible channel validation (pseudo elastic, non-adapt CR)" \
+>> validation.log
+echo "-----------------------------------------------------------------" \
+>> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+
+cat RESLT/soln0.dat RESLT/soln1.dat  \
+    RESLT/soln2.dat RESLT/soln3.dat  \
+    > result_pseudo_elastic_non_adapt_CR.dat
+
+if test "$1" = "no_python"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/pseudo_elastic_non_adapt_CR.dat.gz \
+    result_pseudo_elastic_non_adapt_CR.dat 0.1 1.0e-8 >> validation.log
+fi
+
+mv RESLT RESLT_pseudo_elastic_non_adapt_CR
+
+
+
+# Validation for FSI collapsible channel (pseudo-elastic node update)
+#--------------------------------------------------------------------
+
+echo "Running validation for FSI collapsible channel (pseudo elastic, TH)"
+mkdir RESLT
+
+# Do validation run
+../fsi_pseudo_solid_collapsible_channel_adapt_TH blabla > OUTPUT_pseudo_elastic_adapt_TH
+echo "done"
+echo " " >> validation.log
+echo "FSI collapsible channel validation (pseudo elastic, TH)" \
+>> validation.log
+echo "-------------------------------------------------------" \
+>> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+
+cat RESLT/soln0.dat RESLT/soln1.dat  \
+    RESLT/soln2.dat RESLT/soln3.dat  \
+    > result_pseudo_elastic_TH.dat
+
+if test "$1" = "no_python"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/pseudo_elastic_TH.dat.gz \
+    result_pseudo_elastic_TH.dat 0.1 1.0e-8 >> validation.log
+fi
+
+
+mv RESLT RESLT_pseudo_elastic_TH
+
+
+echo "Running validation for FSI collapsible channel (pseudo elastic, CR)"
+mkdir RESLT
+
+# Do validation run
+../fsi_pseudo_solid_collapsible_channel_adapt_CR blabla > OUTPUT_pseudo_elastic_adapt_CR
+
+echo "done"
+echo " " >> validation.log
+echo "FSI collapsible channel validation (pseudo elastic, CR)" \
+>> validation.log
+echo "-------------------------------------------------------" \
+>> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+
+cat RESLT/soln0.dat RESLT/soln1.dat  \
+    RESLT/soln2.dat RESLT/soln3.dat  \
+    > result_pseudo_elastic_CR.dat
+
+if test "$1" = "no_python"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/pseudo_elastic_CR.dat.gz \
+    result_pseudo_elastic_CR.dat 0.1 1.0e-8 >> validation.log
+fi
+
+mv RESLT RESLT_pseudo_elastic_CR
+
+
+# Validation for FSI collapsible channel (macro-element update)
+#--------------------------------------------------------------------
+
 
 echo "Running validation for FSI collapsible channel (macro elements, TH)"
 mkdir RESLT

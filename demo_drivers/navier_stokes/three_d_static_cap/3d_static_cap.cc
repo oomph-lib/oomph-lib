@@ -504,7 +504,6 @@ FreeSurfaceRotationProblem<ELEMENT>::FreeSurfaceRotationProblem(DocInfo& doc_inf
   new AxialSpineQuarterTubeMesh<ELEMENT,FixedVolumeSpineSurfaceFluidInterfaceElement<ELEMENT> >
   (Wall_pt,xi_lo,frac_mid,xi_hi,nlayer);
  
-
  // Set error estimator 
  Z2ErrorEstimator* error_estimator_pt=new Z2ErrorEstimator;
  mesh_pt()->spatial_error_estimator_pt()=error_estimator_pt;
@@ -804,10 +803,28 @@ public:
   {
    //Make the current configuration the undeformed one
    set_lagrangian_nodal_coordinates();
-   //Perform a singleuniform refinement
-   this->refine_uniformly();
-   //this->refine_uniformly();
 
+   
+   // hierher: Temporary fix to retain validata 
+   {
+    unsigned n_element = nelement();
+    for(unsigned i=0;i<n_element;i++)
+     {
+      // Upcast from GeneralisedElement to the present element
+      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(element_pt(i));
+      
+      el_pt->use_undeformed_macro_element_for_new_lagrangian_coords()=true;
+     }
+    
+    // Refine uniformly
+    this->refine_uniformly();
+   }
+   
+
+
+   //Perform a single uniform refinement
+   //this->refine_uniformly();
+   
    //Now worry about the spines the trick is to loop over each
    //layer in turn. We determine the layer based on the z coordinate
    //of the first node in each element.
@@ -1157,12 +1174,6 @@ ElasticFreeSurfaceRotationProblem(DocInfo& doc_info,
 
    el_pt->constitutive_law_pt() = Constitutive_law_pt;
 
-   // Get Jacobian by FD -- yes for now
-   // hierher -- change this when Pseudo-solid elements have 
-   // been updated to take availability of analytical solid 
-   // Jacobian into account
-   //el_pt->evaluate_jacobian_by_fd()=true;
-  
    //Set the Reynolds number, etc
    el_pt->re_pt() = &Global_Physical_Variables::Re;
 

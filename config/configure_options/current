@@ -81,7 +81,7 @@
 #=====================================================================
 #
 # Compilation with lam mpi compilers (wrappers to gcc) with 
-# debugging (-g) and full warnings. 
+# full optimisation.
 # Library headers in the build directory are replaced by symbolic
 # links to the src directory -- this ensures that you don't
 # accidentally edit a file in the include directory only to have
@@ -95,13 +95,13 @@
 --enable-symbolic-links-for-headers
 --with-blas=/home/mheil/local/lib/blas/blas.a
 --with-lapack=/home/mheil/local/lib/lapack/lapack.a
+--with-trilinos=/home/mheil/test_external_local/trilinos_default_installation_mpi
 --with-hypre=/home/mheil/test_external_local/hypre_default_installation_mpi
---with-trilinos=/home/jboyle/trilinos-mpi-libs
-CXXFLAGS="-O6 -Wall -DPARANOID"
+CXXFLAGS="-O6 -Wall"
 CFLAGS="-O6"
 FFLAGS="-O6"
-LD=mpif77
 CXX=mpic++
 CC=mpicc
 F77=mpif77
+LD=mpif77
 

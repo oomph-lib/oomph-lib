@@ -210,6 +210,9 @@ class FSIWallElement : public virtual SolidFiniteElement,
 
   public:
 
+ /// Static flag that allows the suppression of warning messages
+ static bool Dont_warn_about_missing_adjacent_fluid_elements;
+
  /// \short Constructor. Note that element is not fully-functional
  /// until its setup_fsi_wall_element() function has been called!
  FSIWallElement() : Only_front_is_loaded_by_fluid(true),

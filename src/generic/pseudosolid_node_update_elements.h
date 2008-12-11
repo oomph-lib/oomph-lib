@@ -87,13 +87,143 @@ template<class BASIC, class SOLID>
  /// \short Final override for jacobian function: Contributions are
  /// included from both the underlying element types
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                   DenseMatrix<double> &jacobian)
+                                       DenseMatrix<double> &jacobian)
   {
    //Call the basic equations first
    BASIC::fill_in_contribution_to_jacobian(residuals,jacobian);
    //Call the solid equations
    SOLID::fill_in_contribution_to_jacobian(residuals,jacobian);
+   
+   // Now fill in the off-diagonal entries (the shape derivatives),
+   fill_in_shape_derivatives_by_fd(jacobian); 
   }
+
+ /// \short Fill in the derivatives of the BASIC equations
+ /// w.r.t. to the solid position dofs
+ void fill_in_shape_derivatives_by_fd(DenseMatrix<double> &jacobian)
+  {
+  
+   // Flag to indicate if we use first or second order FD
+   // bool use_first_order_fd=false;
+
+  //Find the number of nodes
+  const unsigned n_node = nnode();
+
+  //If there aren't any nodes, then return straight away
+  if(n_node == 0) {return;}
+
+  //Call the update function to ensure that the element is in
+  //a consistent state before finite differencing starts
+  update_before_solid_position_fd();
+
+  //Get the number of position dofs and dimensions at the node
+  const unsigned n_position_type = nnodal_position_type();
+  const unsigned nodal_dim = nodal_dimension();
+
+  //Find the number of dofs in the element
+  const unsigned n_dof = this->ndof();
+  
+  //Create residual newres vectors
+  Vector<double> residuals(n_dof);
+  Vector<double> newres(n_dof);
+  // Vector<double> newres_minus(n_dof);
+  
+  //Calculate the residuals (for the BASIC) equations 
+  BASIC::get_residuals(residuals);
+  
+  //Integer storage for local unknown
+  int local_unknown=0;
+ 
+  //Should probably give this a more global scope
+  const double fd_step = Default_fd_jacobian_step;
+ 
+  //Loop over the nodes
+  for(unsigned n=0;n<n_node;n++)
+   {
+    //Loop over position dofs
+    for(unsigned k=0;k<n_position_type;k++)
+     {
+      //Loop over dimension
+      for(unsigned i=0;i<nodal_dim;i++)
+       {
+        //If the variable is free
+        local_unknown = position_local_eqn(n,k,i);
+        if(local_unknown >= 0)
+         {
+          //Store a pointer to the (generalised) Eulerian nodal position
+          double* const value_pt = &(node_pt(n)->x_gen(k,i));
+
+          //Save the old value of the (generalised) Eulerian nodal position
+          const double old_var = *value_pt;
+           
+          //Increment the (generalised) Eulerian nodal position
+          *value_pt += fd_step;
+          
+          // Perform any auxialiary node updates
+          node_pt(n)->perform_auxiliary_node_update_fct();
+          
+          //Calculate the new residuals
+          BASIC::get_residuals(newres);
+         
+//          if (use_first_order_fd)
+           {
+            //Do forward finite differences
+            for(unsigned m=0;m<n_dof;m++)
+             {
+              //Stick the entry into the Jacobian matrix
+              jacobian(m,local_unknown) = (newres[m] - residuals[m])/fd_step;
+             }
+           }
+//           else
+//            {
+//             //Take backwards step for the  (generalised) Eulerian nodal 
+//             // position
+//             node_pt(n)->x_gen(k,i) = old_var-fd_step;
+           
+//             //Calculate the new residuals at backward position
+//             //BASIC::get_residuals(newres_minus);
+
+//             //Do central finite differences
+//             for(unsigned m=0;m<n_dof;m++)
+//              {
+//               //Stick the entry into the Jacobian matrix
+//               jacobian(m,local_unknown) = 
+//                (newres[m] - newres_minus[m])/(2.0*fd_step);
+//              }
+//            }
+           
+           //Reset the (generalised) Eulerian nodal position
+           *value_pt = old_var;
+           
+           // Perform any auxialiary node updates
+           node_pt(n)->perform_auxiliary_node_update_fct();
+         }
+       }
+     }
+   }
+
+  //End of finite difference loop
+  //Final reset of any slaved data
+  reset_after_solid_position_fd();
+ }
+
+
+ /// \short Specify Data that affects the geometry of the element 
+ /// by adding the position Data to the set that's passed in.
+ /// (This functionality is required in FSI problems; set is used to
+ /// avoid double counting). 
+ void identify_geometric_data(std::set<Data*> &geometric_data_pt) 
+  {
+   //Loop over the node update data and add to the set
+   const unsigned n_node=this->nnode();
+   for(unsigned j=0;j<n_node;j++)
+    {
+     geometric_data_pt.insert(dynamic_cast<SolidNode*>(this->node_pt(j))
+                              ->variable_position_pt());
+    }
+  }
+
+
  
  ///Overload the output function: Call that of the basic element
  void output(std::ostream &outfile) {BASIC::output(outfile);}
@@ -183,6 +313,7 @@ public virtual FaceGeometry<FaceGeometry<SOLID> >
 };
 
 
+
 //===================================================================
 /// Refineable version of the PseudoSolidNodeUpdateELement
 //===================================================================
@@ -192,15 +323,11 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
 {
 
   public: 
+ 
  ///Constructor, call the BASIC and SOLID elements' constructors
  RefineablePseudoSolidNodeUpdateElement() : 
-  //Need to sort this one out (at the moment both element must be quads)
   RefineableElement(),
-  //RefineableQElement<2>(), 
-  BASIC(), SOLID()
-  {
-   this->Use_undeformed_macro_element_for_new_lagrangian_coords=true;
-  } 
+  BASIC(), SOLID(){} 
 
  /// \short The required number of values is the sum of the two
  unsigned required_nvalue(const unsigned &n) const
@@ -244,9 +371,230 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
   {
    //Call the basic equations first
    BASIC::fill_in_contribution_to_jacobian(residuals,jacobian);
+   
    //Call the solid equations
    SOLID::fill_in_contribution_to_jacobian(residuals,jacobian);
+   
+   // Now fill in the off-diagonal entries (the shape derivatives),
+   fill_in_shape_derivatives_by_fd(jacobian);   
   }
+
+
+ /// \short Fill in the derivatives of the BASIC equations
+ /// w.r.t. to the solid position dofs, taking hanging nodes
+ /// into account
+ void fill_in_shape_derivatives_by_fd(DenseMatrix<double> &jacobian)
+  {
+   //Find the number of nodes
+   const unsigned n_node = nnode();
+   
+   //If there are no nodes, return straight away
+   if(n_node == 0) {return;}
+   
+   //Call the update function to ensure that the element is in
+   //a consistent state before finite differencing starts
+   update_before_solid_position_fd();
+   
+//  bool use_first_order_fd=false;
+   
+   //Find the number of positional dofs and nodal dimension
+   const unsigned n_position_type = nnodal_position_type();
+   const unsigned nodal_dim = nodal_dimension();
+   
+   //Find the number of dofs in the element
+   const unsigned n_dof = ndof();
+   
+   //Create residual newres vectors
+   Vector<double> residuals(n_dof);
+   Vector<double> newres(n_dof);
+   // Vector<double> newres_minus(n_dof);
+   
+   //Calculate the residuals (for the BASIC) equations 
+   BASIC::get_residuals(residuals);
+   
+   //Used default value defined in GeneralisedElement
+   const double fd_step = Default_fd_jacobian_step;
+   
+   //Integer storage for local unknowns
+   int local_unknown=0;
+   
+   //Loop over the nodes
+   for(unsigned l=0;l<n_node;l++)
+    {
+     //Get the pointer to the node
+     Node* const local_node_pt = node_pt(l);
+     
+     //If the node is not a hanging node
+     if(local_node_pt->is_hanging()==false)
+      {
+       //Loop over position dofs
+       for(unsigned k=0;k<n_position_type;k++)
+        {
+         //Loop over dimension
+         for(unsigned i=0;i<nodal_dim;i++)
+          {
+           local_unknown = position_local_eqn(l,k,i);
+           //If the variable is free
+           if(local_unknown >= 0)
+            {
+             //Store a pointer to the (generalised) Eulerian nodal position
+             double* const value_pt = &(local_node_pt->x_gen(k,i));
+             
+             //Save the old value of the (generalised) Eulerian nodal position
+             const double old_var = *value_pt;
+             
+             //Increment the  (generalised) Eulerian nodal position
+             *value_pt += fd_step;
+            
+             // Perform any auxialiary node updates
+             local_node_pt->perform_auxiliary_node_update_fct();
+          
+             //Calculate the new residuals
+             BASIC::get_residuals(newres);
+             
+//           if (use_first_order_fd)
+             {
+              //Do forward finite differences
+              for(unsigned m=0;m<n_dof;m++)
+               {
+                //Stick the entry into the Jacobian matrix
+                jacobian(m,local_unknown) = (newres[m] - residuals[m])/fd_step;
+               }
+             }
+//             else
+//              {
+//               //Take backwards step for the  (generalised) Eulerian nodal
+//               // position
+//               node_pt(l)->x_gen(k,i) = old_var-fd_step;
+             
+//               //Calculate the new residuals at backward position
+//               BASIC::get_residuals(newres_minus);
+             
+//               //Do central finite differences
+//               for(unsigned m=0;m<n_dof;m++)
+//                {
+//                 //Stick the entry into the Jacobian matrix
+//                 jacobian(m,local_unknown) =
+//                  (newres[m] - newres_minus[m])/(2.0*fd_step);
+//                }
+//              }
+             
+             //Reset the (generalised) Eulerian nodal position
+             *value_pt = old_var;
+             
+             // Perform any auxialiary node updates
+             local_node_pt->perform_auxiliary_node_update_fct();
+             
+            }
+          }
+        }
+      }
+     //Otherwise it's a hanging node
+     else
+      {
+       //Find the local hanging object
+       HangInfo* hang_info_pt = local_node_pt->hanging_pt();
+       //Loop over the master nodes
+       const unsigned n_master = hang_info_pt->nmaster();
+       for(unsigned m=0;m<n_master;m++)
+        {
+         //Get the pointer to the master node
+         Node* const master_node_pt = hang_info_pt->master_node_pt(m);
+         
+         //Get the local equation numbers for the master node
+         DenseMatrix<int> Position_local_eqn_at_node
+          = local_position_hang_eqn(master_node_pt);
+         
+         //Loop over position dofs
+         for(unsigned k=0;k<n_position_type;k++)
+          {
+           //Loop over dimension
+           for(unsigned i=0;i<nodal_dim;i++)
+            {
+             local_unknown = Position_local_eqn_at_node(k,i);
+             //If the variable is free
+             if(local_unknown >= 0)
+              {
+               //Store a pointer to the (generalised) Eulerian nodal position
+               double* const value_pt = &(master_node_pt->x_gen(k,i));
+               
+               //Save the old value of the (generalised) Eulerian nodal 
+               //position
+               const double old_var = *value_pt;
+               
+               //Increment the  (generalised) Eulerian nodal position
+               *value_pt += fd_step;               
+
+               // Perform any auxialiary node updates
+               master_node_pt->perform_auxiliary_node_update_fct();
+          
+               //Calculate the new residuals
+               BASIC::get_residuals(newres);
+               
+//            if (use_first_order_fd)
+               {
+                //Do forward finite differences
+                for(unsigned m=0;m<n_dof;m++)
+                 {
+                  //Stick the entry into the Jacobian matrix
+                  jacobian(m,local_unknown) = 
+                   (newres[m] - residuals[m])/fd_step;
+                 }
+               }
+//               else
+//                {
+//                 //Take backwards step for the  (generalised) Eulerian nodal
+//                 // position
+//                 master_node_pt->x_gen(k,i) = old_var-fd_step;
+               
+//                 //Calculate the new residuals at backward position
+//                 BASIC::get_residuals(newres_minus);
+               
+//                 //Do central finite differences
+//                 for(unsigned m=0;m<n_dof;m++)
+//                  {
+//                   //Stick the entry into the Jacobian matrix
+//                   jacobian(m,local_unknown) =
+//                    (newres[m] - newres_minus[m])/(2.0*fd_step);
+//                  }
+//                }
+               
+               //Reset the (generalised) Eulerian nodal position
+               *value_pt = old_var;
+               
+               // Perform any auxialiary node updates
+               master_node_pt->perform_auxiliary_node_update_fct();
+              }
+            }
+          }
+        }
+      } //End of hanging node case
+     
+    } //End of loop over nodes
+   
+   //End of finite difference loop
+
+   //Final reset of any slaved data
+   reset_after_solid_position_fd();
+  }
+
+
+ /// \short Specify Data that affects the geometry of the element
+ /// by adding the position Data to the set that's passed in.
+ /// (This functionality is required in FSI problems; set is used to
+ /// avoid double counting).
+ void identify_geometric_data(std::set<Data*> &geometric_data_pt)
+  {
+   //Loop over the node update data and add to the set
+   const unsigned n_node=this->nnode();
+   for(unsigned j=0;j<n_node;j++)
+    {
+     geometric_data_pt.insert(dynamic_cast<SolidNode*>(this->node_pt(j))
+                              ->variable_position_pt());
+    }
+  }
+
+
  
  /// \short Final override for the assign__additional_local_eqn_numbers():
  ///  Call the version for the BASIC element

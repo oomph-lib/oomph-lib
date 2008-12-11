@@ -136,7 +136,7 @@ public:
  /// of this flag, this should only be done for newly
  /// created nodes, when this function is called from
  /// AlgebraicElementBase::setup_algebraic_node_update(...)
- void node_update(bool update_all_time_levels_for_new_node=false);
+ void node_update(const bool& update_all_time_levels_for_new_node=false);
 
 
  /// Number of node update fcts
@@ -740,8 +740,12 @@ class AlgebraicMesh : public virtual Mesh
         {
          nod_pt->x(i)=x[i];
         }
+
+       // hierher execute auxiliary node update
+       // function
       }
     }
+
   }
 
 

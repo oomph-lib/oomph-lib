@@ -236,7 +236,8 @@ Vector<GeomObject*> AlgebraicNode::Dummy_geom_object_pt;
 /// version of the specific AlgebraicMesh's algebraic_node_update(...) 
 /// function.
 //========================================================================
- void AlgebraicNode::node_update(bool update_all_time_levels_for_new_node)
+ void AlgebraicNode::node_update(const bool&
+                                 update_all_time_levels_for_new_node)
   {
    // Number of time levels that need to be updated
    unsigned ntime;

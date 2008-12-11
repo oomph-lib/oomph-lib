@@ -190,10 +190,8 @@ public:
    unsigned n_node = Fluid_mesh_pt->nboundary_node(1);
    for (unsigned n=0;n<n_node;n++)
     {
-     //Must cast to an AlgebraicNode in order to set the function pointer
-     static_cast<AlgebraicNode*>(Fluid_mesh_pt->boundary_node_pt(1,n))
-      ->set_auxiliary_node_update_fct_pt(
-       FSI_functions::apply_no_slip_on_moving_wall); 
+     Fluid_mesh_pt->boundary_node_pt(1,n)->set_auxiliary_node_update_fct_pt(
+      FSI_functions::apply_no_slip_on_moving_wall); 
     }
 
    // (Re-)setup fsi: Work out which fluid dofs affect wall elements
@@ -533,8 +531,7 @@ FSIRingProblem::FSIRingProblem(const unsigned& N,
   for (unsigned n=0;n<n_node;n++)
    {
     // Which node are we dealing with?
-    AlgebraicNode* node_pt=static_cast<AlgebraicNode*>(
-     Fluid_mesh_pt->boundary_node_pt(1,n));
+    Node* node_pt=Fluid_mesh_pt->boundary_node_pt(1,n);
 
      // Set auxiliary update function pointer
     node_pt->set_auxiliary_node_update_fct_pt(

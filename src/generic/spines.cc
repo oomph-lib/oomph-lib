@@ -45,7 +45,7 @@ namespace oomph
 //===================================================================
 /// Update function, call the update function in the Node's SpineMesh.
 //===================================================================
-void SpineNode::node_update(bool update_all_time_levels_for_new_node)
+void SpineNode::node_update(const bool& update_all_time_levels_for_new_node)
 {
  Spine_mesh_pt->spine_node_update(this);
 

@@ -101,7 +101,7 @@ public:
  /// of this flag, this should only be done for newly
  /// created nodes, when this function is called from
  /// MacroElementNodeUpdateElementBase::build_macro_element_node_update_node(...)
- void node_update(bool update_all_time_levels_for_new_node=false);
+ void node_update(const bool& update_all_time_levels_for_new_node=false);
  
  /// \short  Pointer to finite element that performs the update by referring
  /// to its macro-element representation.
@@ -364,7 +364,7 @@ public MacroElementNodeUpdateElementBase
 /// MacroElementNodeUpdateMeshes contain MacroElementNodeUpdateNodes
 /// which have their own node update functions. When the node's
 /// node_update() function is called, they also perform 
-/// any auxialiary update functions, e.g. to update no-slip boundary
+/// any auxiliary update functions, e.g. to update no-slip boundary
 /// conditions on moving domain boundaries. 
 //========================================================================
 class MacroElementNodeUpdateMesh : public virtual Mesh

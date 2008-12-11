@@ -480,6 +480,17 @@ public:
      //Create the FiniteElement and add to the Element_pt Vector
      Element_pt.push_back(new ELEMENT);
 
+
+     // hierher: Sorry Andrew -- this was the only quick
+     // way to fix this. The problem arises because when
+     // constructing the problem, you're refining
+     // the mesh rather than the problem; the mesh 
+     // contains elements of multiple types; etc.
+     // This only needs to be set once and is then passed
+     // on automatically:
+     dynamic_cast<ELEMENT*>(finite_element_pt(e))->
+      use_undeformed_macro_element_for_new_lagrangian_coords()=true;
+
      //Read out the number of linear points in the element
      unsigned Np = 
       dynamic_cast<ELEMENT*>(finite_element_pt(e))->nnode_1d();
@@ -1103,12 +1114,6 @@ void RefineableRotatingCylinderProblem<ELEMENT>::finish_problem_setup()
 
    //Assign the mesh deformation constitutive law
    temp_pt->constitutive_law_pt() = Constitutive_law_pt;
-
-   // Get Jacobian by FD -- yes for now
-   // hierher -- change this when Pseudo-solid elements have 
-   // been updated to take availability of analytical solid 
-   // Jacobian into account
-   temp_pt->evaluate_jacobian_by_fd()=true;
   
   }
 

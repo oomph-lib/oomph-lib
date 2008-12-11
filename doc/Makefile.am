@@ -35,8 +35,8 @@ linear_solvers \
 subversion \
 paraview \
 preconditioners \
-to_be_written
-
+to_be_written \
+young_laplace
 
 include $(top_srcdir)/config/makefile_templates/doc
 

@@ -10,7 +10,7 @@ $!VARSET |PNG|=0
 ##################################################
 # 1 IS TRUE 0 IS FALSE
 ##################################################
-$!VARSET |HAVE_EXTREMA_DAT|=1
+$!VARSET |HAVE_EXTREMA_DAT|=0
 
 ##################################################
 # PLOT ELEMENT BOUNDARIES IN CARPET PLOTS?
@@ -27,14 +27,14 @@ $!VARSET |SHOW_BOUNDARY_IN_CARPET_PLOTS|=0
 
 
 #$!GETUSERINPUT |lostep| INSTRUCTIONS = "Loop. First Step??"
-$!VARSET |lostep|=5
+$!VARSET |lostep|=0
 #$!GETUSERINPUT |dlstep| INSTRUCTIONS = "Loop. Step Increment?"
-$!VARSET |dlstep|=5
+$!VARSET |dlstep|=1
 
 $!IF |BATCH|==0
         $!GETUSERINPUT |nstep| INSTRUCTIONS = "Loop. Number of Steps??"
 $!ELSE
-        $!VARSET |nstep|=9
+        $!VARSET |nstep|=4
 $!ENDIF
 
 
@@ -577,8 +577,4 @@ $!IF |PNG|==0
         $!EXPORTFINISH
 $!ENDIF
 
-
-$!IF |BATCH|==1
-        $!QUIT
-$!ENDIF
 

@@ -37,6 +37,18 @@
 namespace oomph
 {
 
+
+
+/// Static boolean to suppress warnings about repeated internal
+/// data. Defaults to false
+bool GeneralisedElement::Suppress_warning_about_repeated_internal_data=false;
+
+
+/// Static boolean to suppress warnings about repeated external
+/// data. Defaults to false
+bool GeneralisedElement::Suppress_warning_about_repeated_external_data=false;
+
+
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 //  Functions for generalised elements
@@ -64,16 +76,24 @@ namespace oomph
     if(internal_data_pt(i) == data_pt)
      {
 #ifdef PARANOID
-      oomph_info << std::endl << std::endl;
-      oomph_info 
-       << "-----------------------------------------------------------------"
-       << std::endl
-       << "Info: Data is already included in this element's internal storage." 
-       << std::endl
-       << "It's stored as entry " << i <<  " and I'm not adding it again" 
-       << std::endl
-       << "-----------------------------------------------------------------"
-       << std::endl << std::endl;
+      if (!Suppress_warning_about_repeated_internal_data)
+       {
+        oomph_info << std::endl << std::endl;
+        oomph_info 
+         << "-----------------------------------------------------------------"
+         << std::endl
+         << "Info: Data is already included in this element's internal storage." 
+         << std::endl
+         << "It's stored as entry " << i <<  " and I'm not adding it again." 
+         << std::endl<< std::endl
+         << "Note: You can suppress this message by recompiling without"
+         << "\n      PARANOID or setting the boolean \n"
+         << "\n      GeneralisedElement::Suppress_warning_about_repeated_internal_data"
+         << "\n\n      to true."
+         << std::endl
+         << "-----------------------------------------------------------------"
+         << std::endl << std::endl;
+       }
 #endif
       //Return the index to the data object
       return i;
@@ -235,16 +255,24 @@ DenseMatrix<double> GeneralisedElement::Dummy_matrix;
     if(external_data_pt(i) == data_pt)
      {
 #ifdef PARANOID
-      oomph_info << std::endl << std::endl;
-      oomph_info 
-       << "-----------------------------------------------------------------"
-       << std::endl
-       << "Info: Data is already included in this element's internal storage." 
-       << std::endl
-       << "It's stored as entry " << i <<  " and I'm not adding it again" 
-       << std::endl
-       << "-----------------------------------------------------------------"
-       << std::endl << std::endl;
+      if (!Suppress_warning_about_repeated_external_data)
+       {
+        oomph_info << std::endl << std::endl;
+        oomph_info 
+         << "-----------------------------------------------------------------"
+         << std::endl
+         << "Info: Data is already included in this element's external storage." 
+         << std::endl
+         << "It's stored as entry " << i <<  " and I'm not adding it again" 
+         << std::endl << std::endl
+         << "Note: You can suppress this message by recompiling without"
+         << "\n      PARANOID or setting the boolean \n"
+         << "\n      GeneralisedElement::Suppress_warning_about_repeated_external_data"
+         << "\n\n      to true."
+         << std::endl
+         << "-----------------------------------------------------------------"
+         << std::endl << std::endl;
+       }
 #endif
       //Return the index to the data object
       return i;
@@ -4098,8 +4126,8 @@ void FaceElement::get_local_coordinate_in_bulk(
           //Increment the (generalised) Eulerian nodal position
           *value_pt += fd_step;
           
-          //Now update any slaved variables
-          update_in_solid_position_fd(k,i);
+          // Perform any auxialiary node updates
+          node_pt(n)->perform_auxiliary_node_update_fct();
 
           //Calculate the new residuals
           get_residuals(newres);
@@ -4134,8 +4162,8 @@ void FaceElement::get_local_coordinate_in_bulk(
           //Reset the (generalised) Eulerian nodal position
           *value_pt = old_var;
 
-          //Reset any slaved variables
-          reset_in_solid_position_fd(k,i);
+          // Perform any auxialiary node updates
+          node_pt(n)->perform_auxiliary_node_update_fct();
          }
        }
      }

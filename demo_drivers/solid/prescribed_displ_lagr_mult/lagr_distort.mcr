@@ -1,5 +1,8 @@
 #!MC 1100
 
+
+$!VARSET |PNG|=1
+
 $!LOOP 5
 
 
@@ -74,24 +77,36 @@ $!DRAWGRAPHICS TRUE
 $!REDRAWALL
 
 
-$!IF |LOOP|>1
-        $!EXPORTNEXTFRAME
+$!IF |PNG|==1
+
+        $!EXPORTSETUP EXPORTFORMAT = PNG
+        $!EXPORTSETUP IMAGEWIDTH = 500
+        $!EXPORTSETUP EXPORTFNAME = 'lagr_distort|STEP|.png'
+        $!EXPORT 
+          EXPORTREGION = ALLFRAMES
+
 $!ELSE
 
-        $!EXPORTSETUP
-          EXPORTREGION = ALLFRAMES
-          EXPORTFORMAT = AVI
-          EXPORTFNAME = "lagr_distort.avi"
-        $!EXPORTSETUP IMAGEWIDTH = 750
-        $!EXPORTSTART
-$!ENDIF
 
+        $!IF |LOOP|>1
+                $!EXPORTNEXTFRAME
+        $!ELSE
+
+                $!EXPORTSETUP
+                  EXPORTREGION = ALLFRAMES
+                  EXPORTFORMAT = AVI
+                  EXPORTFNAME = "lagr_distort.avi"
+                $!EXPORTSETUP IMAGEWIDTH = 750
+                $!EXPORTSTART
+        $!ENDIF
+$!ENDIF
 
 
 $!ENDLOOP
 
-
-$!EXPORTFINISH
+$!IF |PNG|==0
+        $!EXPORTFINISH
+$!ENDIF
 
 
 

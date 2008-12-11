@@ -199,6 +199,8 @@ private:
        delete Block_matrix_2_1_pt;
        Block_matrix_2_1_pt=0;
       }
+     delete Block_matrix_2_2_pt;
+     Block_matrix_2_2_pt=0;
     }
   }
 

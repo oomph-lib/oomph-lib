@@ -49,7 +49,8 @@ namespace oomph
 /// If a node is hanging, its position is determined via its hanging
 /// node constraints after updating the position of its master nodes.
 //========================================================================
-void MacroElementNodeUpdateNode::node_update(bool update_all_time_levels_for_new_node)
+void MacroElementNodeUpdateNode::node_update(const bool& 
+                                             update_all_time_levels_for_new_node)
 {
 
  // Number of time levels that need to be updated

@@ -2332,6 +2332,7 @@ set_coordinates_on_boundary(const unsigned &b,  const unsigned& k,
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 
+
 //=================================================================
 /// Private function to check that the argument is within the
 /// range of stored Lagrangain coordinates and position types.

@@ -28,7 +28,8 @@ biharmonic \
 linear_elasticity \
 womersley \
 reaction_diffusion \
-flux_transport
+flux_transport \
+young_laplace
 
 
 

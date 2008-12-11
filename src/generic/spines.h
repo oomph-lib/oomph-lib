@@ -360,7 +360,7 @@ public:
 
  /// Overload thet node update function, call 
  /// the update function in the Node's SpineMesh
- void node_update(bool update_all_time_levels_for_new_node=false);
+ void node_update(const bool& update_all_time_levels_for_new_node=false);
 
  /// Return the number of geometric data
  unsigned ngeom_data() const {return Spine_pt->ngeom_data();}

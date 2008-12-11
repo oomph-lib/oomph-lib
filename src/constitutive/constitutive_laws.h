@@ -297,7 +297,7 @@ class TongOne : public StrainEnergyFunction
 /// media as suggested on p. 553 of Fung, Y.C. & Tong, P. "Classical and 
 /// Computational Solid Mechanics" World Scientific (2001).
 /// Input parameters are Young's modulus E, Poisson ratio nu and
-/// the Mooney-Rivling constant C1. In the small-deformation-limit
+/// the Mooney-Rivlin constant C1. In the small-deformation-limit
 /// the behaviour becomes equivalent to that of linear elasticity
 /// with the same E and nu.
 ///

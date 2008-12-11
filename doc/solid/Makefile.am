@@ -4,6 +4,6 @@ disk_compression \
 disk_oscillation \
 shock_disk \
 airy_cantilever \
-solid_theory
-
+solid_theory \
+prescribed_displ_lagr_mult
 

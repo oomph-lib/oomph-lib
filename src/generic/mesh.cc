@@ -394,6 +394,9 @@ void Mesh::node_update(const bool& update_all_solid_nodes)
     }
   }
  
+
+ // hierher loop over all nodes again and execute auxiliary node update
+ // function
 }
 
 

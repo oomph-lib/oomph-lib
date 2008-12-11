@@ -63,7 +63,14 @@ namespace FSI_functions
 }
 
  
- 
+//===================================================================
+/// Flag that allows the suppression of warning messages
+//====================================================================
+bool FSIWallElement::Dont_warn_about_missing_adjacent_fluid_elements=false;
+
+
+
+
  //================================================================
  /// Compete build of element: Assign storage -- pass the Eulerian 
  /// dimension of the "adjacent" fluid elements and the
@@ -195,9 +202,18 @@ namespace FSI_functions
      else
       {
 #ifdef PARANOID
-       OomphLibWarning("Info: No adjacent element set in FSIWallElement.\n",
-                       "FSIWallElement::fluid_load_vector()",
-                       OOMPH_EXCEPTION_LOCATION);
+       if (!Dont_warn_about_missing_adjacent_fluid_elements)
+        {
+         std::ostringstream warning_stream;
+         warning_stream 
+          << "Info: No adjacent element set in FSIWallElement.\n\n"
+          << "Note: you can disable this message by setting \n      "
+          << "FSIWallElement::Dont_warn_about_missing_adjacent_fluid_elements"
+          << "\n      to true or recompiling without PARANOID.\n";
+         OomphLibWarning(warning_stream.str(),
+                         "FSIWallElement::fluid_load_vector()",
+                         OOMPH_EXCEPTION_LOCATION);
+        }
 #endif
       }
 

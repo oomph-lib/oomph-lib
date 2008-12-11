@@ -853,8 +853,7 @@ OscRingNStProblem<ELEMENT, TIMESTEPPER>::OscRingNStProblem(
    for (unsigned inod=0;inod<num_nod;inod++)
     {
      // Which node are we dealing with?
-     AlgebraicNode* node_pt=static_cast<AlgebraicNode*>(
-      fluid_mesh_pt()->boundary_node_pt(ibound,inod));
+     Node* node_pt=fluid_mesh_pt()->boundary_node_pt(ibound,inod);
      
      // Set auxiliary update function pointer to apply no-slip condition
      // to velocities whenever nodal position is updated
@@ -959,11 +958,9 @@ void OscRingNStProblem<ELEMENT, TIMESTEPPER>::finish_problem_setup()
    unsigned num_nod= fluid_mesh_pt()->nboundary_node(ibound);
    for (unsigned inod=0;inod<num_nod;inod++)
     {
-     AlgebraicNode* node_pt=static_cast<AlgebraicNode*>(
-        fluid_mesh_pt()->boundary_node_pt(ibound,inod));
-
-     node_pt->set_auxiliary_node_update_fct_pt(
-        FSI_functions::apply_no_slip_on_moving_wall); 
+     fluid_mesh_pt()->boundary_node_pt(ibound,inod)->
+      set_auxiliary_node_update_fct_pt(
+       FSI_functions::apply_no_slip_on_moving_wall); 
     }
   }
 

@@ -459,6 +459,10 @@ EntryFlowProblem<ELEMENT>::EntryFlowProblem(DocInfo& doc_info,
    el_pt->re_pt() = &Global_Physical_Variables::Re;
    el_pt->re_invfr_pt() = &Global_Physical_Variables::St;
    el_pt->g_pt() = &Global_Physical_Variables::G;
+
+   // hierher: Temporary fix to retain validata
+   el_pt->use_undeformed_macro_element_for_new_lagrangian_coords()=true;
+
   }
 
  //Loop over the interface elements and set the capillary number

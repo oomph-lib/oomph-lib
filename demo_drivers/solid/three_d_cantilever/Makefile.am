@@ -2,7 +2,8 @@
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 # Name of executable
-check_PROGRAMS=three_d_cantilever three_d_cantilever_adapt
+check_PROGRAMS=three_d_cantilever three_d_cantilever_adapt 
+
 
 #-----------------------------------------------------------------------
 

@@ -459,8 +459,7 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
    unsigned num_nod= Fluid_mesh_pt->nboundary_node(ibound);
    for (unsigned inod=0;inod<num_nod;inod++)
     {   
-     static_cast<AlgebraicNode*>(
-      Fluid_mesh_pt->boundary_node_pt(ibound, inod))->
+     Fluid_mesh_pt->boundary_node_pt(ibound, inod)->
       set_auxiliary_node_update_fct_pt(
        FSI_functions::apply_no_slip_on_moving_wall);
     }
@@ -602,8 +601,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::actions_after_adapt()
    unsigned num_nod= Fluid_mesh_pt->nboundary_node(ibound);
    for (unsigned inod=0;inod<num_nod;inod++)
     {   
-     static_cast<AlgebraicNode*>(
-      Fluid_mesh_pt->boundary_node_pt(ibound, inod))->
+     Fluid_mesh_pt->boundary_node_pt(ibound, inod)->
       set_auxiliary_node_update_fct_pt(
        FSI_functions::apply_no_slip_on_moving_wall);
     }

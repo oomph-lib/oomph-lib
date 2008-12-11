@@ -640,25 +640,9 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
  num_nod= bulk_mesh_pt()->nboundary_node(ibound);
  for (unsigned inod=0;inod<num_nod;inod++)
   {
-
-#ifdef MACRO_ELEMENT_NODE_UPDATE
-
-   static_cast<MacroElementNodeUpdateNode*>(
-    bulk_mesh_pt()->boundary_node_pt(ibound, inod))->
+   bulk_mesh_pt()->boundary_node_pt(ibound, inod)->
     set_auxiliary_node_update_fct_pt(
      FSI_functions::apply_no_slip_on_moving_wall);
-
-#else
-
-   static_cast<AlgebraicNode*>(
-    bulk_mesh_pt()->boundary_node_pt(ibound, inod))->
-    set_auxiliary_node_update_fct_pt(
-     FSI_functions::apply_no_slip_on_moving_wall);
-
-
-#endif
-
-
   }
   
   

@@ -796,9 +796,8 @@ fill_in_contribution_to_residuals_solid_traction(Vector<double> &residuals)
   {
    //Call the element's residuals vector
    this->fill_in_contribution_to_residuals_solid_traction(residuals);
-   // hierher why?? fill_in_contribution_to_residuals(residuals);
   
-   // Use the FSIWallElement's Jacobian
+   // Add the FSIWallElement's Jacobian
    FSIWallElement::
     fill_in_jacobian_from_solid_position_and_external_by_fd(jacobian);
   }
@@ -830,7 +829,6 @@ fill_in_contribution_to_residuals_solid_traction(Vector<double> &residuals)
     }
    
   }//end of get_traction
-
 
 
 
@@ -977,6 +975,862 @@ void FSISolidTractionElement<ELEMENT,DIM>::get_block_numbers_for_unknowns(
 }
 
 
+
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
+
+
+
+//======================================================================
+/// A class for elements that allow the imposition of a displacement
+/// constraint for "bulk" solid elements via a Lagrange multiplier.
+/// The geometrical information can be read from the FaceGeometry<ELEMENT> 
+/// class and and thus, we can be generic enough without the need to have
+/// a separate equations class.
+/// \b NOTE: Currently (and for the foreseeable future) this 
+/// element only works with bulk elements that do not have
+/// generalised degrees of freedom (so it won't work with
+/// Hermite-type elements, say). The additional functionality 
+/// to deal with such elements could easily be added (once a 
+/// a suitable test case is written). For now we simply throw
+/// errors if an attempt is made to use the element with an unsuitable
+/// bulk element.
+//======================================================================
+template <class ELEMENT>
+class ImposeDisplacementByLagrangeMultiplierElement : 
+  public virtual FaceGeometry<ELEMENT>, 
+  public virtual SolidFaceElement
+{
+ 
+public:
+
+ /// \short Constructor takes a "bulk" element and the 
+ /// index that identifies which face the FaceElement is supposed
+ /// to be attached to.
+ ImposeDisplacementByLagrangeMultiplierElement(FiniteElement* const &element_pt, 
+                      const int &face_index) : 
+  FaceGeometry<ELEMENT>(), FaceElement(), Boundary_shape_geom_object_pt(0)
+  { 
+   // By default don't sparsify -- this is a sensible default
+   // because sparsification requires GeomObject to specify the
+   // hierher
+   Sparsify=true;
+   
+#ifdef PARANOID
+   { 
+    // Initialise number of assigned geom Data.
+    N_assigned_geom_data=0;
+
+    //Check that the bulk element is not a refineable 3d element
+    //If it's three-d
+    if(element_pt->dim()==3)
+     {
+      //Is it refineable
+      if(dynamic_cast<RefineableElement*>(element_pt))
+       {
+        //Issue a warning
+        OomphLibWarning(
+         "This flux element will not work correctly if nodes are hanging\n",
+         "ImposeDisplacementByLagrangeMultiplierElement::Constructor",
+         OOMPH_EXCEPTION_LOCATION);
+       }
+     }
+   }
+   {
+    // Check that the bulk element does not require generalised positional
+    // degrees of freedom
+    if(element_pt->nnodal_position_type()!=1)
+     {      
+      throw OomphLibError(
+       "ImposeDisplacementByLagrangeMultiplierElement cannot (currently) be used with elements that have generalised positional dofs",
+       "ImposeDisplacementByLagrangeMultiplierElement::ImposeDisplacementByLagrangeMultiplierElement()",
+       OOMPH_EXCEPTION_LOCATION);
+     }
+   }
+#endif
+ 
+   //Build the face element
+   element_pt->build_face_element(face_index,this);
+
+   // We need dim additional values (for the components of the
+   // Lagrange multiplier vector) at each of the element's nodes
+   unsigned n_node=this->nnode();
+   Vector<unsigned> nadditional_data_values(n_node);
+   for (unsigned j=0;j<n_node;j++)
+    {
+     nadditional_data_values[j]=element_pt->dim();
+    }
+   resize_nodes(nadditional_data_values); 
+   
+  }
+ 
+
+ /// \short Access to GeomObject that specifies the prescribed 
+ /// boundary displacement; GeomObject is assumed to be
+ /// parametrised by the same coordinate that is used as
+ /// the boundary coordinate in the bulk solid mesh to which
+ /// this element is attached.
+ GeomObject* boundary_shape_geom_object_pt() const
+  {
+   return Boundary_shape_geom_object_pt;
+  }
+
+
+ /// \short Set GeomObject that specifies the prescribed 
+ /// boundary displacement; GeomObject is assumed to be
+ /// parametrised by the same coordinate that is used as
+ /// the boundary coordinate in the bulk solid mesh to which
+ /// this element is attached. GeomData of GeomObject
+ /// is added to this element's external Data. Also specify
+ /// the boundary number in the bulk mesh to which this element is 
+ /// attached.
+ void set_boundary_shape_geom_object_pt(
+  GeomObject* boundary_shape_geom_object_pt,
+  const unsigned& boundary_number_in_bulk_mesh)
+  {
+
+   // Record boundary number
+#ifdef PARANOID
+   Boundary_number_in_bulk_mesh_has_been_set=true;
+#endif
+   Boundary_number_in_bulk_mesh=boundary_number_in_bulk_mesh;
+
+
+   // Store (possibly compound) GeomObject that specifies the
+   // the desired  boundary shape.
+   Boundary_shape_geom_object_pt=boundary_shape_geom_object_pt;
+
+   // hierher (1) remove old ones
+   //         (2) do locate_zeta to sparsify
+
+   if (!Sparsify)
+    {
+     unsigned n_geom_data=boundary_shape_geom_object_pt->ngeom_data();
+
+#ifdef PARANOID
+     if ((this->nexternal_data()>0)&&
+         (N_assigned_geom_data!=this->nexternal_data()))
+      {
+       std::ostringstream error_message;
+       error_message << "About to wipe external data for "
+                     << "ImposeDisplacementByLagrangeMultiplierElement.\n" 
+                     << "I noted that N_assigned_geom_data = "
+                     << N_assigned_geom_data << " != nexternal_data() = "
+                     << this->nexternal_data() << " \n"
+                     << "so we're going to wipe some external data that\n"
+                     << "is not geometric Data of the GeomObject that\n"
+                     << "specifies the desired boundary shape.\n"
+                     << std::endl;
+       throw OomphLibError(
+        error_message.str(),
+        "ImposeDisplacementByLagrangeMultiplierElement::set_boundary_shape_geom_object_pt()",
+        OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+     this->flush_external_data();
+     for (unsigned i=0;i<n_geom_data;i++)
+      {
+       add_external_data(boundary_shape_geom_object_pt->geom_data_pt(i));
+      }
+#ifdef PARANOID     
+     N_assigned_geom_data=n_geom_data;
+#endif
+    }
+   else
+    {
+     //Find out how many nodes there are
+     unsigned n_node = nnode();
+    
+     //Get the number of position dofs and dimensions at the node
+     const unsigned n_position_type = nnodal_position_type();
+ 
+     // Dimension of element
+     unsigned dim_el=dim();
+     
+     //Set up memory for the shape functions
+     Shape psi(n_node);
+
+     
+#ifdef PARANOID
+     if ((this->nexternal_data()>0)&&
+         (N_assigned_geom_data!=this->nexternal_data()))
+      {
+       std::ostringstream error_message;
+       error_message << "About to wipe external data for "
+                     << "ImposeDisplacementByLagrangeMultiplierElement.\n"
+                     << "I noted that N_assigned_geom_data = "
+                     << N_assigned_geom_data << " != nexternal_data() = "
+                     << this->nexternal_data() << " \n"
+                     << "so we're going to wipe some external data that\n"
+                     << "is not geometric Data of the GeomObject that\n"
+                     << "specifies the desired boundary shape.\n"
+                     << std::endl;
+       throw OomphLibError(
+        error_message.str(),
+        "ImposeDisplacementByLagrangeMultiplierElement::set_boundary_shape_geom_object_pt()",
+        OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+     
+     // Flush the data
+     this->flush_external_data();
+
+#ifdef PARANOID
+     N_assigned_geom_data=0;
+#endif     
+
+     //Prepare local storage
+     unsigned n_intpt = integral_pt()->nweight();
+     Sub_geom_object_pt.resize(n_intpt); 
+     Zeta_sub_geom_object.resize(n_intpt); 
+
+     //Loop over the integration points
+     for(unsigned ipt=0;ipt<n_intpt;ipt++)
+      {
+       
+       //Get shape function
+       shape_at_knot(ipt,psi);
+       
+       //Calculate the intrinsic coordinates
+       Vector<double> zeta(dim_el,0.0);
+       Vector<double> s(dim_el);
+       
+       // Loop over nodes
+       for(unsigned j=0;j<n_node;j++) 
+        {
+         for(unsigned k=0;k<n_position_type;k++)
+          {   
+           //Assemble the intrinsic coordinate
+           for(unsigned i=0;i<dim_el;i++)
+            {
+             zeta[i]+=zeta_nodal(j,k,i)*psi(j,k);
+            }
+          }
+        }
+       
+       // Find sub-GeomObject and local coordinate within it
+       // at integration point
+       Zeta_sub_geom_object[ipt].resize(dim_el);
+       Boundary_shape_geom_object_pt->locate_zeta(zeta, 
+                                                  Sub_geom_object_pt[ipt], 
+                                                  Zeta_sub_geom_object[ipt]);
+       
+       unsigned n_geom_data=Sub_geom_object_pt[ipt]->ngeom_data();
+       for (unsigned i=0;i<n_geom_data;i++)
+        {
+         add_external_data(Sub_geom_object_pt[ipt]->geom_data_pt(i));
+        }
+#ifdef PARANOID
+       N_assigned_geom_data+=n_geom_data;
+#endif
+      }
+    }
+   
+  }
+ 
+ /// Fill in the residuals
+ void fill_in_contribution_to_residuals(Vector<double> &residuals)
+  {
+   //Call the generic routine with the flag set to 0
+   fill_in_generic_contribution_to_residuals_displ_lagr_multiplier(
+    residuals,GeneralisedElement::Dummy_matrix,0);
+  }
+
+ 
+ /// Fill in contribution from Jacobian
+ void fill_in_contribution_to_jacobian(Vector<double> &residuals,
+                                   DenseMatrix<double> &jacobian)
+  {
+   //Call the generic routine with the flag set to 1
+   fill_in_generic_contribution_to_residuals_displ_lagr_multiplier(
+    residuals,jacobian,1);
+
+   // Fill in the derivatives w.r.t. external data by FD, re-using
+   // the pre-computed residual vector
+   fill_in_jacobian_from_external_by_fd(residuals,jacobian);
+  }
+
+ 
+ /// \short Output function
+ void output(std::ostream &outfile, const unsigned &n_plot)
+  {
+   // Elemental dimension
+   unsigned dim_el=dim();
+
+   //Find the number of positional types
+   unsigned n_position_type = this->nnodal_position_type();
+   
+#ifdef PARANOID
+   if(n_position_type!=1)
+    {      
+     throw OomphLibError(
+      "ImposeDisplacementByLagrangeMultiplierElement cannot (currently) be used with elements that have generalised positional dofs",
+      "ImposeDisplacementByLagrangeMultiplierElement::output()",
+      OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+
+   //Local coord
+   Vector<double> s(dim_el);
+      
+   // # of nodes, 
+   unsigned n_node=nnode();
+   Shape psi(n_node,n_position_type);
+
+   //Tecplot header info 
+   outfile << "ZONE I=" << n_plot << std::endl;
+   
+   //Loop over plot points
+   for(unsigned l=0;l<n_plot;l++)
+    {
+     s[0] = -1.0 + l*2.0/(n_plot-1);
+     
+     // Get shape function
+     shape(s,psi);
+     
+     //Calculate the Eulerian coordinates and Lagrange multiplier
+     Vector<double> x(dim_el+1,0.0);
+     Vector<double> lambda(dim_el+1,0.0);
+     Vector<double> zeta(dim_el,0.0);
+     for(unsigned j=0;j<n_node;j++) 
+      {
+       // higher dimensional quantities
+       for(unsigned i=0;i<dim_el+1;i++)
+        {
+         x[i]+=nodal_position(j,i)*psi(j,0); // hierher need to sort
+                                             // this out properly
+         lambda[i]+=node_pt(j)->value(Nbulk_value[j]+i)*psi(j,0);
+        }
+       //In-element quantities
+       for(unsigned i=0;i<dim_el;i++)
+        {
+         //Loop over positional types
+         for (unsigned k=0;k<n_position_type;k++)
+          {
+           zeta[i]+=zeta_nodal(j,k,i)*psi(j,k);
+          }
+        }
+      }
+
+     // Get prescribed wall shape
+     Vector<double> r_prescribed(dim_el+1);
+     Boundary_shape_geom_object_pt->position(zeta,r_prescribed);
+
+     //Output stuff
+     outfile << x[0] << " "
+             << x[1] << " "
+             << -lambda[0] << " "
+             << -lambda[1] << " "
+             << r_prescribed[0] << " "
+             << r_prescribed[1] << " "
+             <<  std::endl;
+    }
+  }
+
+
+ /// \short Output function
+ void output(std::ostream &outfile)
+  {
+   unsigned n_plot=5;
+   output(outfile,n_plot);
+  }
+
+ /// \short Set function for the boundary number in bulk mesh -- needed
+ /// to get access to the appropriate boundary coordinate
+ void set_boundary_number_in_bulk_mesh(const unsigned& b) 
+  { 
+   Boundary_number_in_bulk_mesh=b;
+#ifdef PARANOID
+   Boundary_number_in_bulk_mesh_has_been_set=true;
+#endif
+  }
+
+
+ /// \short Specify the values of the boundary coordinate, zeta,
+ /// at local node n in this element. k is the type of the
+ /// coordinate, i identifies the coordinate direction). 
+ /// Note: Boundary coordinates will have been set up when
+ /// creating the underlying mesh, and their values will have 
+ /// been stored at the nodes.
+ double zeta_nodal(const unsigned &n, const unsigned &k, const unsigned &i)
+  const
+  {
+   //Vector in which to hold the intrinsic coordinate
+   Vector<double> zeta(dim());
+ 
+   //Get the boundary coordinate at node n
+   node_pt(n)->get_coordinates_on_boundary(
+    Boundary_number_in_bulk_mesh,k,zeta);
+
+   //Return the individual coordinate
+   return zeta[i];
+  }
+
+
+ /// \short Calculate the interpolated value of zeta, the boundary coordinate,
+ /// on the mesh boundary to which this element is attached, 
+ /// at the local coordinate s of the element
+ void interpolated_zeta(const Vector<double> &s, Vector<double> &zeta) const
+  {
+   //Find the number of nodes
+   unsigned n_node = nnode();
+
+   //Find the number of positional types
+   unsigned n_position_type = this->nnodal_position_type();
+  
+
+#ifdef PARANOID
+   if(n_position_type!=1)
+    {      
+     throw OomphLibError(
+      "ImposeDisplacementByLagrangeMultiplierElement cannot (currently) be used with elements that have generalised positional dofs",
+      "ImposeDisplacementByLagrangeMultiplierElement::interpolated_zeta()",
+      OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   //Storage for the shape functions
+   Shape psi(n_node,n_position_type);
+
+   //Get the values of the shape functions at the local coordinate s
+   shape(s,psi);
+   
+   //Find the number of coordinates
+   unsigned ncoord = dim();
+   
+   //Initialise the value of zeta to zero
+   for(unsigned i=0;i<ncoord;i++) {zeta[i] = 0.0;}
+
+   //Add the contributions from each nodal dof to the interpolated value
+   //of zeta.
+   for(unsigned l=0;l<n_node;l++)
+    {
+     for(unsigned k=0;k<n_position_type;k++)
+      {
+       for(unsigned i=0;i<ncoord;i++)
+        {
+         zeta[i] += this->zeta_nodal(l,k,i)*psi(l,k);
+        }
+      }  
+    }
+  }
+
+ /// \short For a given value of zeta, the boundary coordinate
+ /// (assigned in the mesh and stored at the nodes), find the local 
+ /// coordinate in this element that corresponds to zeta. This is achieved
+ /// in generality by using Newton's method to find the value s such that
+ /// interpolated_zeta(s) is equal to the desired value of zeta.
+ /// If zeta cannot be located in this element, geom_object_pt is set
+ /// to NULL. If zeta is located in this element, we return its "this"
+ /// pointer.
+ void locate_zeta(const Vector<double> &zeta, GeomObject*& geom_object_pt,
+                  Vector<double> &s)
+  {
+   using namespace Locate_zeta_helpers;
+
+   //Find the number of coordinates
+   unsigned ncoord = DIM-1; 
+
+   //Assign storage for the vector and matrix used in Newton's method
+   Vector<double> dx(ncoord,0.0);
+   DenseDoubleMatrix jacobian(ncoord,ncoord,0.0);
+
+   //Initialise s to the middle of the element
+   for(unsigned i=0;i<ncoord;i++) 
+    {
+     s[i] = 0.5*(s_max()+s_min());
+    }
+   
+   //Counter for the number of Newton steps
+   unsigned count=0;
+
+   //Control flag for the Newton loop
+   bool keep_going=true;
+   
+   //Storage for the interpolated value of zeta
+   Vector<double> inter_zeta(ncoord);
+   
+   //Get the value of zeta at the initial guess
+   interpolated_zeta(s,inter_zeta);
+   
+   //Set up the residuals
+   for(unsigned i=0;i<ncoord;i++) {dx[i] = zeta[i] - inter_zeta[i];}
+   
+   //Main Newton Loop
+   do    // start of do while loop
+    {
+     //Increase loop counter
+     count++;
+
+     //Bail out if necessary
+     if(count > Max_newton_iterations)
+      {
+       std::ostringstream error_message;
+       error_message << "Newton solver not converged in " 
+                     << count << " steps\n"
+                     << "Try adjusting the Tolerances, or refining the mesh."
+                     << std::endl;
+       throw OomphLibError(error_message.str(),
+                           "FaceAsGeomObject::locate_zeta()",
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+	     
+     //If it's the first time round the loop, check the initial residuals
+     if(count==1)
+      {
+       double maxres = 
+        std::abs(*std::max_element(dx.begin(),dx.end(),AbsCmp<double>()));
+
+       //If it's small enough exit
+       if(maxres < Newton_tolerance) 
+        {
+         keep_going=false;
+         continue;
+        }
+      }
+     
+     //Compute the entries of the Jacobian matrix
+     unsigned n_node = this->nnode();
+     unsigned n_position_type = this->nnodal_position_type();
+
+
+#ifdef PARANOID
+   if(n_position_type!=1)
+    {      
+     throw OomphLibError(
+      "ImposeDisplacementByLagrangeMultiplierElement cannot (currently) be used with elements that have generalised positional dofs",
+      "ImposeDisplacementByLagrangeMultiplierElement::locate_zeta()",
+      OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+     Shape psi(n_node,n_position_type);
+     DShape dpsids(n_node,n_position_type,ncoord);
+
+     //Get the local shape functions and their derivatives
+     dshape_local(s,psi,dpsids);
+     
+     //Calculate the values of dzetads
+     DenseMatrix<double> interpolated_dzetads(ncoord,ncoord,0.0);
+     for(unsigned l=0;l<n_node;l++)
+      {
+       for(unsigned k=0;k<n_position_type;k++)
+        {
+         for(unsigned i=0;i<ncoord;i++)
+          {
+           for(unsigned j=0;j<ncoord;j++)
+            {
+             interpolated_dzetads(i,j) += 
+              this->zeta_nodal(l,k,i)*dpsids(l,k,j);
+            }
+          }
+        }
+      }
+     
+     //The entries of the Jacobian matrix are merely dresiduals/ds
+     //i.e. - dzeta/ds
+     for(unsigned i=0;i<ncoord;i++)
+      {
+       for(unsigned j=0;j<ncoord;j++)
+        {
+         jacobian(i,j) = - interpolated_dzetads(i,j);
+        }
+      }
+     
+     //Now solve the damn thing
+     jacobian.solve(dx);
+     
+     //Add the correction to the local coordinates
+     for(unsigned i=0;i<ncoord;i++) {s[i] -= dx[i];}
+     
+     //Get the new residuals
+     interpolated_zeta(s,inter_zeta);
+     for(unsigned i=0;i<ncoord;i++) {dx[i] = zeta[i] - inter_zeta[i];}
+     
+     //Get the maximum residuals
+     double maxres = 
+      std::abs(*std::max_element(dx.begin(),dx.end(),AbsCmp<double>()));
+     //If we have converged jump straight to the test at the end of the loop
+     if(maxres < Newton_tolerance) 
+      {
+       keep_going=false; 
+       continue;
+      } 
+    }
+   while(keep_going);
+
+
+ 
+   //Test that the solution is within the element
+   for(unsigned i=0;i<ncoord;i++)
+    {
+     // We're outside -- return the null pointer for the geom object
+     if((s[i] - s_max() >  Rounding_tolerance) || 
+        (s_min() - s[i] >  Rounding_tolerance)) 
+      {
+       geom_object_pt=0; 
+       return;
+      }
+    }
+   
+   //Otherwise the required point is located in "this" element:
+   geom_object_pt = this;
+   
+   //If we're over the limit by less than the rounding error, adjust
+   for(unsigned i=0;i<ncoord;i++)
+    {
+     if(s[i] > s_max()) {s[i] = s_max();}
+     if(s[i] < s_min()) {s[i] = s_min();}
+    }
+  }
+ 
+
+
+protected:
+
+ /// \short Helper function to compute the residuals and, if flag==1, the
+ /// Jacobian 
+ void fill_in_generic_contribution_to_residuals_displ_lagr_multiplier(
+  Vector<double> &residuals, 
+  DenseMatrix<double> &jacobian, 
+  const unsigned& flag)
+  {
+   //Find out how many positional dofs there are
+   unsigned n_position_type = this->nnodal_position_type();
+   
+#ifdef PARANOID
+   if(n_position_type!=1)
+    {      
+     throw OomphLibError(
+      "ImposeDisplacementByLagrangeMultiplierElement cannot (currently) be used with elements that have generalised positional dofs",
+      "ImposeDisplacementByLagrangeMultiplierElement::fill_in_generic_contribution_to_residuals_displ_lagr_multiplier()",
+      OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   //Find out how many nodes there are
+   unsigned n_node = nnode();
+   
+   // Dimension of element
+   unsigned dim_el=dim();
+
+   //Set up memory for the shape functions
+   Shape psi(n_node);
+   DShape dpsids(n_node,dim_el); 
+
+   //Set the value of n_intpt
+   unsigned n_intpt = integral_pt()->nweight();
+ 
+   //Loop over the integration points
+   for(unsigned ipt=0;ipt<n_intpt;ipt++)
+    {
+     //Get the integral weight
+     double w = integral_pt()->weight(ipt);
+     
+     //Only need to call the local derivatives
+     dshape_local_at_knot(ipt,psi,dpsids);
+
+     //Calculate the Eulerian coordinates and Lagrange multiplier
+     Vector<double> x(dim_el+1,0.0);
+     Vector<double> lambda(dim_el+1,0.0);
+     Vector<double> zeta(dim_el,0.0);
+     DenseMatrix<double> interpolated_a(dim_el,dim_el+1,0.0);   
+
+     // Loop over nodes
+     for(unsigned j=0;j<n_node;j++) 
+      {
+       Node* nod_pt=node_pt(j);
+
+       //Assemble higher-dimensional quantities
+       for(unsigned i=0;i<dim_el+1;i++)
+        {
+         x[i]+=nodal_position(j,i)*psi(j);
+         lambda[i]+=nod_pt->value(Nbulk_value[j]+i)*psi(j);
+         for(unsigned ii=0;ii<dim_el;ii++)
+          {
+           interpolated_a(ii,i) += 
+            lagrangian_position(j,i)*dpsids(j,ii);
+          }
+        }  
+       if (!Sparsify)
+        {
+         for(unsigned k=0;k<n_position_type;k++)
+          {   
+           //Assemble in-element quantities: boundary coordinate
+           for(unsigned i=0;i<dim_el;i++)
+            {
+             zeta[i]+=zeta_nodal(j,k,i)*psi(j,k);
+            }
+          }
+        }
+      }
+     
+     if (Sparsify) zeta=Zeta_sub_geom_object[ipt];
+      
+     
+     //Now find the local undeformed metric tensor from the tangent Vectors
+     DenseMatrix<double> a(dim_el);
+     for(unsigned i=0;i<dim_el;i++)
+      {
+       for(unsigned j=0;j<dim_el;j++)
+        {
+         //Initialise surface metric tensor to zero
+         a(i,j) = 0.0;
+         //Take the dot product
+         for(unsigned k=0;k<dim_el+1;k++)
+          { 
+           a(i,j) += interpolated_a(i,k)*interpolated_a(j,k);
+          }
+        }
+      }
+
+     
+     //Find the determinant of the metric tensor
+     double adet =0.0;
+     switch(dim_el+1)
+      {
+
+      case 2:
+       adet = a(0,0);
+       break;
+
+      case 3:
+       adet = a(0,0)*a(1,1) - a(0,1)*a(1,0);
+       break;
+
+      default:
+       throw 
+        OomphLibError(
+         "Wrong dimension fill_in_generic_contribution_to_residuals_displ_lagr_multiplier",
+         "ImposeDisplacementByLagrangeMultiplierElement::fill_in_generic_contribution_to_residuals_displ_lagr_multiplier()",
+         OOMPH_EXCEPTION_LOCATION);
+      }
+     
+     // Get prescribed wall shape
+     Vector<double> r_prescribed(dim_el+1);
+     if (!Sparsify)
+      {
+       Boundary_shape_geom_object_pt->position(zeta,r_prescribed);
+      }
+     else
+      {
+       Sub_geom_object_pt[ipt]->position(zeta,r_prescribed);       
+      }
+
+     //Premultiply the weights and the square-root of the determinant of 
+     //the metric tensor
+     double W = w*sqrt(adet);
+
+     // Assemble residuals and jacobian
+     
+     //Loop over directions
+     for(unsigned i=0;i<dim_el+1;i++)
+      {     
+       //Loop over the nodes
+       for(unsigned j=0;j<n_node;j++)
+        {          
+         
+         // Assemble residual for Lagrange multiplier:
+        
+         // Local eqn number. Recall that the
+         // (additional) Lagrange multiplier values are stored
+         // after those that were created by the bulk elements:
+         int local_eqn=nodal_local_eqn(j,Nbulk_value[j]+i);
+         if (local_eqn>=0)
+          {
+           residuals[local_eqn]+=(x[i]-r_prescribed[i])*psi(j)*W;
+
+           // Do Jacobian too?
+           if (flag==1)
+            {
+             // Loop over the nodes again for unknowns (only diagonal
+             // contribution to direction!).
+             for(unsigned jj=0;jj<n_node;jj++)
+              {     
+               int local_unknown=position_local_eqn(jj,0,i);
+               if (local_unknown>=0)
+                {
+                 jacobian(local_eqn,local_unknown)+=psi(jj)*psi(j)*W;
+                }
+              }
+            }
+          }
+
+         
+         // Add Lagrange multiplier contribution to bulk equations
+
+         // Local eqn number: Node, type, direction
+         local_eqn=position_local_eqn(j,0,i);
+         if (local_eqn>=0)
+          {
+           // Add to residual
+           residuals[local_eqn]+=lambda[i]*psi(j)*W;
+
+           // Do Jacobian too?
+           if (flag==1)
+            {
+             // Loop over the nodes again for unknowns (only diagonal
+             // contribution to direction!).
+             for(unsigned jj=0;jj<n_node;jj++)
+              {     
+               int local_unknown=nodal_local_eqn(jj,Nbulk_value[jj]+i);
+               if (local_unknown>=0)
+                {
+                 jacobian(local_eqn,local_unknown)+=psi(jj)*psi(j)*W;
+                }
+              }
+            }
+          }
+
+        }
+      }
+   
+  
+  } //End of loop over the integration points
+
+  }
+
+
+private:
+ 
+ /// The boundary number in the bulk mesh to which this element is attached
+ unsigned Boundary_number_in_bulk_mesh;
+
+#ifdef PARANOID
+
+ /// \short Has the Boundary_number_in_bulk_mesh been set? Only included if
+ /// compiled with PARANOID switched on.
+ bool Boundary_number_in_bulk_mesh_has_been_set;
+
+
+ /// \short Bool to record the number of geom Data that has been
+ /// assigned to external data (we're keeping a record to make
+ /// sure we're not accidentally wiping more than we assigned). Only 
+ /// included if compiled with PARANOID switched on.
+ unsigned N_assigned_geom_data;
+
+#endif
+
+ /// \short GeomObject that specifies the prescribed 
+ /// boundary displacement; GeomObject is assumed to be
+ /// parametrised by the same coordinate the is used as
+ /// the boundary coordinate in the bulk solid mesh to which
+ /// this element is attached.
+ GeomObject* Boundary_shape_geom_object_pt;
+  
+ /// \short Storage for sub-GeomObject at the integration points
+ Vector<GeomObject*> Sub_geom_object_pt;
+
+ /// \short Storage for local coordinates in sub-GeomObjects at integration 
+ /// points
+ Vector<Vector<double> > Zeta_sub_geom_object;
+
+ /// hierher
+ bool Sparsify;
+
+}; 
 
 
 }

@@ -336,9 +336,8 @@ OscEllipseProblem<ELEMENT,TIMESTEPPER>::OscEllipseProblem()
 //     for (unsigned i=0;i<2;i++)
 //      {
 //      // Which node are we dealing with?
-//      AlgebraicNode* node_pt=static_cast<AlgebraicNode*>(
-//       mesh_pt()->boundary_node_pt(ibound,inod));
-    
+//      Node* node_pt=mesh_pt()->boundary_node_pt(ibound,inod);
+ 
 //      // Set auxiliary update function pointer
 //      node_pt->set_auxiliary_node_update_fct_pt(
 //       FSI_functions::apply_no_slip_on_moving_wall);

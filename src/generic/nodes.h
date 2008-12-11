@@ -1297,8 +1297,11 @@ public:
  /// interface is common to SpineNodes, AlgebraicNodes and
  /// MacroElementNodeUpdateNodes.
  /// The default is that the node does not "update itself"
- /// i.e. it is fixed in space.
- virtual void node_update(bool update_all_time_levels_for_new_node=false) { }
+ /// i.e. it is fixed in space. When implemented, this
+ /// function should also execute the Node's auxiliary
+ /// node update function (if any).
+ virtual void node_update(const bool&
+                          update_all_time_levels_for_new_node=false) { }
 
 
  /// \short Set pointer to auxiliary update function -- this 
@@ -1577,6 +1580,16 @@ public:
  ///Overload the assign equation numbers routine
  void assign_eqn_numbers(unsigned long &global_number, 
                                  Vector<double *> &dof_pt);
+
+ /// \short Overload node update function: Since the position 
+ /// of SolidNodes is determined by unknowns, there's nothing
+ /// to be done apart from performing the auxiliary node
+ /// update function (if any)
+ void node_update(const bool& update_all_time_levels_for_new_node=false)
+  {
+   perform_auxiliary_node_update_fct();
+  }
+
 };
 
 

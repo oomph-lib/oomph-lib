@@ -1109,8 +1109,8 @@ namespace oomph
             //Increment the  (generalised) Eulerian nodal position
             *value_pt += fd_step;
 
-            //Now update any slaved variables
-            update_in_solid_position_fd(k,i);
+            // Perform any auxialiary node updates
+            local_node_pt->perform_auxiliary_node_update_fct();
             
             //Calculate the new residuals
             get_residuals(newres);
@@ -1145,8 +1145,8 @@ namespace oomph
             //Reset the (generalised) Eulerian nodal position
             *value_pt = old_var;
 
-            //Reset any slaved variables
-            reset_in_solid_position_fd(k,i);
+            // Perform any auxialiary node updates
+            local_node_pt->perform_auxiliary_node_update_fct();
             
            }
          }
@@ -1187,8 +1187,8 @@ namespace oomph
               //Increment the  (generalised) Eulerian nodal position
               *value_pt += fd_step;
 
-              //Now update any slaved variables
-              update_in_solid_position_fd(k,i);
+              // Perform any auxialiary node updates
+              master_node_pt->perform_auxiliary_node_update_fct();
              
               //Calculate the new residuals
               get_residuals(newres);
@@ -1224,8 +1224,9 @@ namespace oomph
               //Reset the (generalised) Eulerian nodal position
               *value_pt = old_var;
 
-              //Reset any slaved variables
-              reset_in_solid_position_fd(k,i);
+              // Perform any auxialiary node updates
+              master_node_pt->perform_auxiliary_node_update_fct();
+
              }
            }
          }

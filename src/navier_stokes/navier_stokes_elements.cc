@@ -694,6 +694,12 @@ void NavierStokesEquations<DIM>::full_output(std::ostream &outfile,
      outfile << dudt_ALE[i] << " ";
     }
    
+//    // Mesh velocity
+//    for(unsigned i=0;i<DIM;i++) 
+//     {
+//      outfile << mesh_veloc[i] << " ";
+//     }
+   
    // Dissipation 
    outfile << dissipation(s) << " ";
 

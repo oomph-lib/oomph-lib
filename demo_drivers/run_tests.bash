@@ -12,8 +12,7 @@
 #cd advection_diffusion; make check; cd ..
 #cd navier_stokes; make check; cd ..
 #cd axisym_navier_stokes; make check; cd ..
-#cd spherical_navier_stokes; make check; cd ..
-#cd solid; make check; cd ..
+cd solid; make check; cd ..
 cd beam; make check; cd ..
 cd shell; make check; cd ..
 cd linear_wave; make check; cd ..

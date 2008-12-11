@@ -620,6 +620,13 @@ public:
    return Data_pt[Ninternal_data + i];
   }
 
+ /// \short Static boolean to suppress warnings about repeated internal
+ /// data. Defaults to false.
+ static bool Suppress_warning_about_repeated_internal_data;
+
+ /// \short Static boolean to suppress warnings about repeated external
+ /// data. Defaults to false.
+ static bool Suppress_warning_about_repeated_external_data;
 
  /// \short Return the global equation number corresponding to the 
  /// ieqn_local-th local equation number
@@ -2818,7 +2825,7 @@ public:
   }
 
   protected:
- 
+
  /// \short Overload the fill_in_contribution_to_jacobian() function to
  /// use finite
  /// differences to calculate the solid residuals by default
@@ -2882,21 +2889,6 @@ virtual void
  /// the solid position data. This may be overloaded to reset any slaved
  /// variables that may have changed during the finite differencing.
  virtual inline void reset_after_solid_position_fd() { }
-
- /// \short Function called within the finite difference loop for 
- /// solid position data after a change in the k-th position type
- /// and i-th coordinate.
- virtual inline void update_in_solid_position_fd(const unsigned &k,
-                                                 const unsigned &i) { }
-
- /// \short Function called within the finite difference loop for
- /// solid position data after the k-th position type and i-th coordinate
- /// is reset.
- /// The default behaviour is to call the update function.
- virtual inline void reset_in_solid_position_fd(const unsigned &k,
-                                                const unsigned &i)
-  {update_in_solid_position_fd(k,i);}
-
  
 private:
  
