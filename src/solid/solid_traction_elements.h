@@ -1014,7 +1014,7 @@ public:
   { 
    // By default don't sparsify -- this is a sensible default
    // because sparsification requires GeomObject to specify the
-   // hierher
+   // hierher complete documentation
    Sparsify=true;
    
 #ifdef PARANOID
@@ -1101,8 +1101,8 @@ public:
    // the desired  boundary shape.
    Boundary_shape_geom_object_pt=boundary_shape_geom_object_pt;
 
-   // hierher (1) remove old ones
-   //         (2) do locate_zeta to sparsify
+   // hierher check (1) remove old ones
+   //               (2) do locate_zeta to sparsify
 
    if (!Sparsify)
     {
@@ -1827,7 +1827,7 @@ private:
  /// points
  Vector<Vector<double> > Zeta_sub_geom_object;
 
- /// hierher
+ /// hierher doc
  bool Sparsify;
 
 }; 

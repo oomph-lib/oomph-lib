@@ -35,8 +35,8 @@ echo " " >> validation.log
 cat RESLT_T2d/linear_errors_0.dat  RESLT_T2d/linear_errors_1.dat RESLT_T2d/quadratic_errors_0.dat RESLT_T2d/quadratic_errors_1.dat RESLT_T2d/cubic_errors_0.dat RESLT_T2d/cubic_errors_1.dat > ./T2d.dat
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/T2d.dat.gz  \
         T2d.dat >> validation.log
@@ -63,8 +63,8 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT_Q2d/linear_errors.dat  RESLT_Q2d/quadratic_errors.dat RESLT_Q2d/cubic_errors.dat > ./Q2d.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/Q2d.dat.gz  \
          Q2d.dat >> validation.log
@@ -90,8 +90,8 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT_Q3d/linear_errors.dat  RESLT_Q3d/quadratic_errors.dat RESLT_Q3d/cubic_errors.dat > ./Q3d.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/Q3d.dat.gz  \
          Q3d.dat >> validation.log
@@ -119,8 +119,8 @@ echo " " >> validation.log
 cat RESLT_T3d/quadratic_normals3_0.dat RESLT_T3d/quadratic_normals0_1.dat RESLT_T3d/quadratic_normals1_2.dat RESLT_T3d/quadratic_normals2_3.dat > ./T3d.dat
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/T3d.dat.gz  \
          T3d.dat >> validation.log

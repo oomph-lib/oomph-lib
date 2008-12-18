@@ -33,8 +33,8 @@ cat RESLT/eigenvalues1.dat RESLT/soln1.dat > res_arpack.dat
 cat RESLT/eigenvalues2.dat RESLT/soln2.dat > res_qz.dat
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 echo "ARPACK Test: " >> validation.log
 ../../../../bin/fpdiff.py  ../validata/harmonic_results.dat.gz   \

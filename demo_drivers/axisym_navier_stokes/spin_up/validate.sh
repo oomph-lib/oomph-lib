@@ -35,8 +35,8 @@ cat  RESLT_TH/soln0.dat RESLT_TH/soln1.dat \
      RESLT_TH/soln2.dat \
  > results_TH.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/results_CR.dat.gz  \
          results_CR.dat 0.1 1.0e-10 >> validation.log

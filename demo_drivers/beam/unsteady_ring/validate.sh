@@ -36,8 +36,8 @@ cat RESLT/ring1.dat \
     > lin_unsteady_results.dat
 mv RESLT RESLT_lin_unsteady_ring
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
   ../../../../bin/fpdiff.py ../validata/lin_unsteady_results.dat.gz \
    lin_unsteady_results.dat >> validation.log
@@ -96,8 +96,8 @@ mv RESLT RESLT_restarted_unsteady_ring
 
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
   ../../../../bin/fpdiff.py ../validata/unsteady_results.dat.gz \
    unsteady_results.dat >> validation.log

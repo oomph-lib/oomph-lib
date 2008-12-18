@@ -29,8 +29,8 @@ echo " " >> validation.log
 cat  RESLT/soln5.dat RESLT/trace.dat > static_two_layer.dat
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py  ../validata/static_two_layer.dat.gz  \
    static_two_layer.dat 0.1 1.0e-8 >> validation.log
@@ -66,8 +66,8 @@ cat  RESLT_hijacked_external/soln5.dat RESLT_hijacked_external/trace.dat \
      RESLT_elastic_hijacked_internal/trace.dat \
      > static_single_layer.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py  ../validata/static_single_layer.dat.gz  \
    static_single_layer.dat 0.1 1.0e-8 >> validation.log

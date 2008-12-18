@@ -31,8 +31,8 @@ cat RESLT/soln0.dat RESLT/soln1.dat RESLT/soln2.dat \
     > result.dat
 mv RESLT RESLT_norestart
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/result.dat.gz \
     result.dat  >> validation.log
@@ -68,8 +68,8 @@ mv RESLT RESLT_restarted
 
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/result2.dat.gz \
    result2.dat  >> validation.log

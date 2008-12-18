@@ -41,8 +41,8 @@ cat  RESLT_CR_external_elastic/soln0.dat RESLT_CR_external_elastic/soln1.dat \
     > CR_ext_elastic.dat 
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 echo "Spine Tests" >> validation.log
 echo >> validation.log

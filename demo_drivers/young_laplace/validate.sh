@@ -43,8 +43,8 @@ cat RESLT_barrel_shape/soln2.dat RESLT_barrel_shape/trace.dat > result2.dat
 cat RESLT_T_junction/soln2.dat RESLT_T_junction/trace.dat > result3.dat
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../bin/fpdiff.py ../validata/result1.dat.gz  \
          result1.dat >> validation.log
@@ -85,8 +85,8 @@ cat RESLT_adapt_T_junction/soln2.dat RESLT_adapt_T_junction/trace.dat > adapt_re
 
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../bin/fpdiff.py ../validata/adapt_result1.dat.gz  \
          adapt_result1.dat >> validation.log
@@ -119,8 +119,8 @@ echo " " >> validation.log
 cat RESLT_adapt_pinned_spherical_cap_in_cylinder/soln2.dat RESLT_adapt_pinned_spherical_cap_in_cylinder/trace.dat > cyl_result.dat
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../bin/fpdiff.py ../validata/cyl_result.dat.gz  \
          cyl_result.dat >> validation.log
@@ -146,8 +146,8 @@ echo " " >> validation.log
 cat RESLT/soln2.dat RESLT/trace.dat > barrel_result.dat
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../bin/fpdiff.py ../validata/barrel_result.dat.gz  \
          barrel_result.dat >> validation.log
@@ -176,8 +176,8 @@ echo " " >> validation.log
 cat RESLT/soln2.dat RESLT/trace.dat > t_junction_result.dat
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../bin/fpdiff.py ../validata/t_junction_result.dat.gz  \
         t_junction_result.dat >> validation.log

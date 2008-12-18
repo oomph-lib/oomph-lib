@@ -39,8 +39,8 @@ cat RESLT/soln0_1.dat \
     > fsi_ring_compare_jacs_results.dat
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/fsi_ring_compare_jacs_results.dat.gz   \
          fsi_ring_compare_jacs_results.dat 0.1 1.0e-8 >> validation.log
@@ -71,8 +71,8 @@ cat RESLT/soln0.dat \
     > fsi_ring_results.dat
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/fsi_ring_results.dat.gz   \
          fsi_ring_results.dat 0.1 1.0e-8 >> validation.log
@@ -103,8 +103,8 @@ cat RESLT/soln0.dat \
     RESLT/soln3.dat \
     > osc_ring_alg_results.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/osc_ring_alg_results.dat.gz  \
          osc_ring_alg_results.dat >> validation.log

@@ -43,7 +43,6 @@
 #include "../generic/hermite_elements.h"
 #include "../constitutive/constitutive_laws.h"
 
-//#define TIME_SOLID_JAC
 
 namespace oomph
 {
@@ -297,44 +296,6 @@ namespace oomph
    /// Is Jacobian evaluated by FD? Else: Analytically.
    bool& evaluate_jacobian_by_fd() {return Evaluate_jacobian_by_fd;}
    
-#ifdef TIME_SOLID_JAC
-   /// Timer
-   static Timer Solid_timer;
-
-   /// Doc timing results
-   static void doc_timings()
-    {
-     oomph_info << "\n==================================================\n";
-     oomph_info << "Total solid CPU time for fill_in... : " 
-                << Solid_timer.cumulative_time(0) 
-                << std::endl;
-     
-     oomph_info << "Total solid CPU time for d_stress_dG: " 
-                << Solid_timer.cumulative_time(1) 
-                << std::endl;
-     
-     oomph_info << "Total solid CPU time for Jacobian        : " 
-                <<  Solid_timer.cumulative_time(2) 
-                << std::endl;
-
-     oomph_info << "Total solid CPU time for general stress term in Jacobian        : " 
-                <<  Solid_timer.cumulative_time(3) 
-                << std::endl;
-
-
-     oomph_info << "Total solid CPU time for alternative general stress term in Jacobian        : " 
-                <<  Solid_timer.cumulative_time(5) 
-                << std::endl;
-
-     oomph_info << "Total solid CPU time for diagonal term in Jacobian        : " 
-                <<  Solid_timer.cumulative_time(4) 
-                << std::endl;
-     oomph_info << "==================================================\n\n";
-
-
-    }
-#endif
-
   protected:
    
    /// Pointer to isotropic growth function

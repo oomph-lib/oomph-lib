@@ -75,15 +75,17 @@ echo "The options are:"
 echo " " 
 echo " 0: Manual customisation [default]"
 echo " 1: Include the lot... mainly useful for developers"
-echo " 2: Distribution including doc" 
-echo " 3: Distribution without doc" 
+echo " 2: Distribution including doc, including validata" 
+echo " 3: Distribution without   doc, including validata" 
+echo " 4: Distribution including doc, without   validata" 
+echo " 5: Distribution without   doc, without   validata" 
 echo " "
 echo "====================================================================="
 echo " " 
-echo "Choose customisation flag [0,1,2,3 -- default: 0] "
+echo "Choose customisation flag [0,1,2,3,4,5 -- default: 0] "
 reply=`OptionRead`
 
-if (test \( $reply -eq 1 \) -o \( $reply -eq 2 \) -o \( $reply -eq 3 \) ) ; then 
+if (test \( $reply -eq 1 \) -o \( $reply -eq 2 \) -o \( $reply -eq 3 \) -o \( $reply -eq 4 \) -o \( $reply -eq 5 \) ) ; then 
     customisation_flag=$reply
 else
     customisation_flag=0
@@ -104,9 +106,19 @@ if !(test $customisation_flag -eq 0 ) ; then
     include_private_directories="n"
     if (test $customisation_flag -eq 2 ) ; then 
         wipe_doc="n"
+        wipe_validata="n"
     fi
     if (test $customisation_flag -eq 3 ) ; then 
         wipe_doc="y"
+        wipe_validata="n"
+    fi
+    if (test $customisation_flag -eq 4 ) ; then 
+        wipe_doc="n"
+        wipe_validata="y"
+    fi
+    if (test $customisation_flag -eq 5 ) ; then 
+        wipe_doc="y"
+        wipe_validata="y"
     fi
 fi
      
@@ -125,8 +137,13 @@ if (test $customisation_flag -eq 1 ) ; then
     wipe_user_drivers="t"
     wipe_user_src="t"
     wipe_doc="n"
+    wipe_validata="n"
     include_private_directories="t"
 fi
+
+#///////////////////////////////////////////////////////////////////////////
+#///////////////////////////////////////////////////////////////////////////
+#///////////////////////////////////////////////////////////////////////////
 
 
 if (test $customisation_flag -eq 0) ; then 
@@ -163,6 +180,44 @@ else
    echo "Not including nondist_figures directories."
 fi
 
+#///////////////////////////////////////////////////////////////////////////
+#///////////////////////////////////////////////////////////////////////////
+#///////////////////////////////////////////////////////////////////////////
+
+
+if (test $customisation_flag -eq 0) ; then 
+
+
+echo " "
+echo "====================================================================="
+echo " "
+echo "All demo driver directories contain subdirectories called validata"
+echo "that contain reference data that is used to check the correctness"
+echo "of the computed results during oomph-lib's self-test procedures." 
+echo " "
+echo "To reduce the size of the distribution you may wish to exclude this "
+echo "data (though you won't be able to run sensible self-tests)."
+echo " "
+echo "====================================================================="
+
+
+# Wipe contents of validata directories?
+#---------------------------------------
+echo " "
+echo " "
+echo "Do you wish to wipe the contents of the validata "
+echo "directories? [y/n - default: n]"
+echo " "
+wipe_validata=`OptionRead`
+
+fi
+
+if test "$wipe_validata" = "y" -o "$wipe_validata" = "Y" ; then 
+   echo "Wiping the contents of the validata directories."
+   (cd $dist_dir; for dir in `find . -name validata`; do cd $dir; rm -rf * ; cd $dist_dir; done)                             
+else
+   echo "Not wiping contents of the validata directory."
+fi
 
 
 #///////////////////////////////////////////////////////////////////////////
@@ -378,7 +433,6 @@ fi
 #///////////////////////////////////////////////////////////////////////////
 #///////////////////////////////////////////////////////////////////////////
 
-
 # Wipe private directories?
 #--------------------------
 if (test -d $orig_dir/private); then
@@ -402,7 +456,6 @@ if test "$include_private_directories" = "t"; then
   echo " "
   echo "=================================================================" 
   echo " " 
-  (cd $orig_dir && pwd && cp -r private $dist_dir)
   if test "$keep_svn" = "n"; then
    rm -rf `find $dist_dir/private -name .svn`
   fi
@@ -410,17 +463,19 @@ if test "$include_private_directories" = "t"; then
 fi
 if test "$include_private_directories" = "y"; then
    echo " "
-   (cd $orig_dir && pwd && cp -r private $dist_dir)
    if test "$keep_svn" = "n"; then
     rm -rf `find $dist_dir/private -name .svn`
    fi
    echo "done"
 else
    echo "Not including " `pwd`/private
+   rm -rf $dist_dir/private
    rm -f `pwd`/config/configure.ac_scripts/private_user_drivers.dir_list
    rm -f `pwd`/config/configure.ac_scripts/private_user_src.dir_list
    rm -f `pwd`/config/configure.ac_scripts/private.dir_list
 fi
+
+
 
 #///////////////////////////////////////////////////////////////////////////
 #///////////////////////////////////////////////////////////////////////////

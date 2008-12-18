@@ -29,8 +29,8 @@ linear_elasticity \
 womersley \
 reaction_diffusion \
 flux_transport \
-young_laplace
-
+young_laplace \
+mpi
 
 
 EXTRA_DIST=run_tests.bash

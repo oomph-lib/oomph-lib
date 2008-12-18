@@ -32,8 +32,8 @@ echo " " >> validation.log
 cat RESLT/neutral.dat > orr_sommerfeld_results.dat
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/orr_sommerfeld_results.dat.gz   \
     orr_sommerfeld_results.dat  0.3  1.0e-14 >> validation.log

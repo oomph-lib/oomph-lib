@@ -36,8 +36,8 @@ echo "Prescribed pressure gradient test: " >> validation.log
 cat  RESLT_prescribed_pressure_gradient/womersley_soln0.dat RESLT_prescribed_pressure_gradient/womersley_soln1.dat RESLT_prescribed_pressure_gradient/womersley_soln2.dat RESLT_prescribed_pressure_gradient/womersley_soln10.dat RESLT_prescribed_pressure_gradient/trace.dat \
      > presc_pres_grad.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py \
 ../validata/presc_pres_grad.dat.gz  \
@@ -50,8 +50,8 @@ echo "Prescribed volume flux test: " >> validation.log
 cat  RESLT_prescribed_volume_flux/womersley_soln0.dat RESLT_prescribed_volume_flux/womersley_soln1.dat RESLT_prescribed_volume_flux/womersley_soln2.dat RESLT_prescribed_volume_flux/womersley_soln10.dat   RESLT_prescribed_volume_flux/trace.dat \
  > prescribed_volume_flux_results.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py \
 ../validata/prescribed_volume_flux_results.dat.gz  \
@@ -64,8 +64,8 @@ echo "Impedance tube test: " >> validation.log
 cat  RESLT_impedance_tube/womersley_soln0.dat RESLT_impedance_tube/womersley_soln1.dat RESLT_impedance_tube/womersley_soln2.dat  RESLT_impedance_tube/womersley_soln10.dat RESLT_impedance_tube/trace.dat \
  > impedance_tube_results.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py \
 ../validata/impedance_tube_results.dat.gz  \
@@ -77,8 +77,8 @@ echo "Navier Stokes outflow test: " >> validation.log
 cat  RESLT_navier_stokes/womersley_soln0.dat RESLT_navier_stokes/womersley_soln1.dat RESLT_navier_stokes/womersley_soln2.dat  RESLT_navier_stokes/womersley_soln10.dat RESLT_navier_stokes/trace.dat \
  > navier_stokes_results.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py \
 ../validata/navier_stokes_results.dat.gz  \

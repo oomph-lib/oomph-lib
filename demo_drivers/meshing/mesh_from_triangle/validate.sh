@@ -34,8 +34,8 @@ echo " " >> validation.log
 cat RESLT/soln0.dat RESLT/soln1.dat  \
     > box_poisson_results.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/box_poisson_results.dat.gz   \
     box_poisson_results.dat  >> validation.log
@@ -67,8 +67,8 @@ echo " " >> validation.log
 cat RESLT/soln0.dat RESLT/soln1.dat \
     > box_navier_stokes_results.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/box_navier_stokes_results.dat.gz   \
     box_navier_stokes_results.dat  >> validation.log

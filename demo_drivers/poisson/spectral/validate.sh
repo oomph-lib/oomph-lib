@@ -32,8 +32,8 @@ echo " " >> validation.log
 cat RESLT_1d/soln0.dat RESLT_1d/soln1.dat > 1d_spectral.dat
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/1d_spectral.dat.gz   \
     1d_spectral.dat  >> validation.log
@@ -53,8 +53,8 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT_2d/soln0.dat > 2d_spectral.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/2d_spectral.dat.gz   \
     2d_spectral.dat  >> validation.log
@@ -75,8 +75,8 @@ echo " " >> validation.log
 cat RESLT_3d/soln0.dat RESLT_3d/soln1.dat > 3d_spectral.dat
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/3d_spectral.dat.gz   \
     3d_spectral.dat  0.1 1.0e-8 >> validation.log

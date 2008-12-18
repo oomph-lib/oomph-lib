@@ -29,8 +29,8 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/trace.dat RESLT/int5.dat RESLT/soln5.dat > sol_surf.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/sol_surf.dat.gz \
     sol_surf.dat  0.3 1.0e-14 >> validation.log

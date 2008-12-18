@@ -21,7 +21,7 @@ txt2h.sh: txt2h.sh.in
 	rm -f update_awk.sed
 
 EXTRA_DIST=build_mesh_makefile.sh change_headers_to_links.sh fpdiff.py\
-           regenerate_config_files.sh validate_no_python.sh headers.awk\
+           regenerate_config_files.sh dummy_validate.sh headers.awk\
            customise_dist.sh txt2h.sh.in apply_licence.sh\
 	   remove_licence.sh remove_licence.awk \
            cc_and_h_licence_block.txt \

@@ -2,13 +2,15 @@
 # the include directory which we specify with -I
 AM_CPPFLAGS += -I@includedir@
 
+TESTS_ENVIRONMENT = MPI_RUN_COMMAND='@MPI_RUN_COMMAND@'
+
 # Choose self tests
-if HAVE_PYTHON
+if COMPARE_AGAINST_VALIDATA
   # Test script
-  TESTS =  validate.sh
+  TESTS = validate.sh
 else
   # Just run the executables
-  TESTS = $(top_builddir)/bin/validate_no_python.sh
+  TESTS = $(top_builddir)/bin/dummy_validate.sh
 endif
 
 # Distribute validation script and validation data

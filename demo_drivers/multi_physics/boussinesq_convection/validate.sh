@@ -30,8 +30,8 @@ echo " " >> validation.log
 cat RESLT/soln0.dat RESLT/soln5.dat > bous_convection_results.dat
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/results.dat.gz   \
     bous_convection_results.dat 0.1 1.0e-8  >> validation.log
@@ -56,8 +56,8 @@ echo " " >> validation.log
 cat RESLT/soln0.dat RESLT/soln5.dat > bous_convection_fd_results.dat
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/results.dat.gz   \
     bous_convection_fd_results.dat 0.1 2.0e-7  >> validation.log
@@ -81,8 +81,8 @@ echo " " >> validation.log
 cat RESLT/soln0.dat RESLT/soln5.dat > bous_convection_anal_results.dat
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/results.dat.gz   \
     bous_convection_anal_results.dat 0.1 5.0e-7  >> validation.log
@@ -106,8 +106,8 @@ echo " " >> validation.log
 cat RESLT/soln0.dat RESLT/soln1.dat > ref_bous_convection_results.dat
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/ref_results.dat.gz   \
    ref_bous_convection_results.dat  0.1 1.0e-7 >> validation.log

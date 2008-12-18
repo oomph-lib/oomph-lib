@@ -30,8 +30,8 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 NEW_FILES=`ls  RESLT_C_style`
 for file in $NEW_FILES; do

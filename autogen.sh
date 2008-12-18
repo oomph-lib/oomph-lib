@@ -189,7 +189,7 @@ echo " "
 OptionPrompt " Is this OK? [y/n -- default: n]"
 reply=`OptionRead`
 if test "$reply" != "y" -a "$reply" != "Y" ; then 
-   OptionPrompt "Specify build directory [e.g. /home/joe_user] :"
+   OptionPrompt "Specify build directory [e.g. /home/joe_user/build] :"
    build_dir=`OptionRead`
 else
     echo "It's ok"
@@ -223,13 +223,28 @@ echo " "
 #---------------------
 if (test -d  $build_dir); then 
     echo " "
-    echo "Build directory exists"
-    OptionPrompt " Do you want to wipe it [y/n -- default: n]"
+    echo "Note: Build directory " $build_dir " exists."
+    echo " "
+    OptionPrompt "Do you want to wipe it [y/n -- default: n]"
     reply=`OptionRead`
     if test "$reply" = "y" -o "$reply" = "Y" ; then 
-       echo "Wiping it..."
-       rm -f -r $build_dir
-       echo "Done"
+
+       echo " "
+       echo "Sorry to be over-cautious here, but we'd better double-check"
+       echo "before we delete some of your precious files..."
+       echo " "
+       echo "The contents of " $build_dir " are:"
+       echo " "
+       ls -l  $build_dir
+       echo " "
+       OptionPrompt "Are you still sure you want to wipe it [y/n -- default: n]"
+       reply2=`OptionRead`
+       if test "$reply2" = "y" -o "$reply2" = "Y" ; then 
+          echo " "
+          echo "Wiping it..."
+          rm -f -r $build_dir
+          echo "Done"
+       fi
     fi
 fi
 

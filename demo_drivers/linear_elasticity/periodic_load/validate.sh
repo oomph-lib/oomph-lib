@@ -34,8 +34,8 @@ cat  RESLT_fixed/soln1.dat > ./period.dat
 cat  RESLT_adaptive/soln1.dat > ./adapt.dat
 cat  RESLT_adaptive_periodic_hanging/soln1.dat > ./adapt_hang.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 echo "Fixed mesh" >> validation.log
 ../../../../bin/fpdiff.py ../validata/period.dat.gz  \

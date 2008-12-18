@@ -32,8 +32,8 @@ echo " " >> validation.log
 cat  RESLT/soln0.dat RESLT/soln1.dat \
  > driven_cavity_results.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../bin/fpdiff.py ../validata/driven_cavity_results.dat.gz  \
          driven_cavity_results.dat >> validation.log
@@ -60,8 +60,8 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/soln0.dat  RESLT/soln3.dat > DenseLU_results.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../bin/fpdiff.py ../validata/DenseLU_results.dat.gz  \
          DenseLU_results.dat >> validation.log
@@ -87,15 +87,15 @@ echo " " >> validation.log
 cat RESLT/soln0.dat > SuperLU_results.dat
 cat RESLT/resolve_error.dat RESLT/la_solve_error.dat > SuperLU_solve_error.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../bin/fpdiff.py ../validata/results_Pe200.dat.gz  \
          SuperLU_results.dat >> validation.log
 fi
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../bin/fpdiff.py ../validata/SuperLU_solve_error.dat.gz  \
           SuperLU_solve_error.dat >> validation.log
@@ -139,15 +139,15 @@ cat RESLT/resolve_error.dat RESLT/la_solve_error.dat > GMRES_solve_error.dat
  >>  validation.log
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../bin/fpdiff.py ../validata/results_Pe200.dat.gz  \
          GMRES_results.dat >> validation.log
 fi
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../bin/fpdiff.py ../validata/GMRES_solve_error.dat.gz  \
           GMRES_solve_error.dat 0.1 1.0e-12 >> validation.log
@@ -186,16 +186,16 @@ cat RESLT/resolve_error.dat RESLT/la_solve_error.dat > BiCGStab_solve_error.dat
  ../validata/BiCGStab_la_solve_convergence.dat $threshold_for_number_of_iterations \
  >>  validation.log
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../bin/fpdiff.py ../validata/results_Pe200.dat.gz  \
          BiCGStab_results.dat >> validation.log
 fi
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../bin/fpdiff.py ../validata/BiCGStab_solve_error.dat.gz  \
           BiCGStab_solve_error.dat 0.1 5.0e-12 >> validation.log
@@ -238,16 +238,16 @@ cat RESLT/resolve_error.dat RESLT/la_solve_error.dat > CG_solve_error.dat
  >>  validation.log
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../bin/fpdiff.py ../validata/results_Pe0.dat.gz  \
          CG_results.dat >> validation.log
 fi
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../bin/fpdiff.py ../validata/CG_solve_error.dat.gz  \
          CG_solve_error.dat >> validation.log
@@ -292,16 +292,16 @@ cat RESLT/resolve_error.dat RESLT/la_solve_error.dat > GS_solve_error.dat
 
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../bin/fpdiff.py ../validata/results_Pe0.dat.gz  \
          GS_results.dat >> validation.log
 fi
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../bin/fpdiff.py ../validata/GS_solve_error.dat.gz  \
           GS_solve_error.dat >> validation.log
@@ -334,8 +334,8 @@ echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 echo "Solver/preconditioner combination 0" >> validation.log
 ../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
@@ -436,8 +436,8 @@ echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 echo "Solver/preconditioner combination 0" >> validation.log
 ../../../bin/fpdiff.py ../validata/Hypre_result.dat.gz  \

@@ -31,8 +31,8 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/input.dat RESLT/step2.dat > 2d_act_in.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/2d_act_in.dat.gz \
     2d_act_in.dat  >> validation.log

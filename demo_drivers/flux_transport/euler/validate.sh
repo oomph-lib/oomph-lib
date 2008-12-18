@@ -33,16 +33,16 @@ cat RESLT_1D/sod_100_time0.2.dat > 1d_sod.dat
 cat RESLT_1D/lax_100_time0.2.dat > 1d_lax.dat
 
 echo "Sod problem " >> validation.log
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/1d_sod.dat.gz \
     1d_sod.dat  0.1 3.0e-12 >> validation.log
 fi
 
 echo "Lax problem " >> validation.log
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/1d_lax.dat.gz \
     1d_lax.dat  0.1 3.0e-12 >> validation.log
@@ -64,8 +64,8 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT_2D/trace_disc.dat RESLT_2D/disc_256_time0.05.dat > 2d_euler.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/2d_euler.dat.gz \
     2d_euler.dat  0.1 1.0e-14 >> validation.log
@@ -88,8 +88,8 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT_couette/trace_disc.dat RESLT_couette/disc_64_time0.2.dat > couette.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/couette.dat.gz \
     couette.dat  0.1 1.0e-14 >> validation.log

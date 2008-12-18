@@ -36,8 +36,8 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/final_shape.dat RESLT/trace.dat RESLT/trace_disp.dat > shell_with_arclength_cont_results.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/shell_with_arclength_cont_results.dat.gz \
  shell_with_arclength_cont_results.dat 0.1 1.0e-9 >> validation.log
@@ -71,8 +71,8 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/final_shape.dat RESLT/trace.dat > shell.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/shell.dat.gz \
  shell.dat  0.1 1.0e-9 >> validation.log

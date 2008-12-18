@@ -2,7 +2,8 @@
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 # Name of executable
-check_PROGRAMS=airy_cantilever airy_cantilever2_adapt airy_cantilever2_noadapt
+check_PROGRAMS=airy_cantilever airy_cantilever2_adapt \
+airy_cantilever2_noadapt
 
 #-----------------------------------------------------------------------
 

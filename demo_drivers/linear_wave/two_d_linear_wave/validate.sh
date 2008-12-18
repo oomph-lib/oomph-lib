@@ -33,8 +33,8 @@ cat RESLT_smooth/soln0.dat RESLT_smooth/soln1.dat RESLT_smooth/soln2.dat \
 RESLT_impulsive/soln0.dat RESLT_impulsive/soln1.dat RESLT_impulsive/soln2.dat \
  > results.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/results.dat.gz   \
     results.dat  >> validation.log
@@ -58,8 +58,8 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/soln0.dat RESLT/soln1.dat RESLT/soln2.dat > results_flux.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/results_flux.dat.gz   \
     results_flux.dat  >> validation.log

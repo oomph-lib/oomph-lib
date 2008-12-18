@@ -39,8 +39,8 @@ cat RESLT_no_bl_squash/soln0.dat RESLT_no_bl_squash/soln1.dat  \
     RESLT_no_bl_squash/soln2.dat RESLT_no_bl_squash/soln3.dat  \
     > result_no_bl_squash.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/no_bl_squash.dat.gz \
     result_no_bl_squash.dat 0.1 1.0e-8 >> validation.log
@@ -76,8 +76,8 @@ cat RESLT_bl_squash/soln0.dat RESLT_bl_squash/soln1.dat  \
     RESLT_bl_squash/soln2.dat RESLT_bl_squash/soln3.dat  \
     > result_bl_squash.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/bl_squash.dat.gz \
     result_bl_squash.dat 0.1 1.0e-8 >> validation.log
@@ -114,8 +114,8 @@ cat RESLT_alg_no_bl_squash/soln0.dat RESLT_alg_no_bl_squash/soln1.dat  \
     RESLT_alg_no_bl_squash/soln2.dat RESLT_alg_no_bl_squash/soln3.dat  \
     > result_alg_no_bl_squash.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/alg_no_bl_squash.dat.gz \
     result_alg_no_bl_squash.dat 0.1 1.0e-8 >> validation.log
@@ -151,8 +151,8 @@ cat RESLT_alg_bl_squash/soln0.dat RESLT_alg_bl_squash/soln1.dat  \
     RESLT_alg_bl_squash/soln2.dat RESLT_alg_bl_squash/soln3.dat  \
     > result_alg_bl_squash.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/alg_bl_squash.dat.gz \
     result_alg_bl_squash.dat 0.1 1.0e-8 >> validation.log
@@ -189,8 +189,8 @@ cat RESLT_adapt_alg_no_bl_squash/soln0.dat RESLT_adapt_alg_no_bl_squash/soln1.da
     RESLT_adapt_alg_no_bl_squash/soln2.dat RESLT_adapt_alg_no_bl_squash/soln3.dat  \
     > result_adapt_alg_no_bl_squash.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/adapt_alg_no_bl_squash.dat.gz \
     result_adapt_alg_no_bl_squash.dat 0.1 1.0e-8 >> validation.log
@@ -226,8 +226,8 @@ cat RESLT_adapt_alg_bl_squash/soln0.dat RESLT_adapt_alg_bl_squash/soln1.dat  \
     RESLT_adapt_alg_bl_squash/soln2.dat RESLT_adapt_alg_bl_squash/soln3.dat  \
     > result_adapt_alg_bl_squash.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/adapt_alg_bl_squash.dat.gz \
     result_adapt_alg_bl_squash.dat 0.1 1.0e-8 >> validation.log

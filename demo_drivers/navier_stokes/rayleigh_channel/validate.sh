@@ -56,8 +56,8 @@ cat ./results1_CR.dat ./results1_TH.dat \
     > results.dat
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/results.dat.gz  \
          ./results.dat 0.1 1.0e-8 >> validation.log

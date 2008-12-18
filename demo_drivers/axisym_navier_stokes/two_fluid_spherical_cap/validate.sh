@@ -33,8 +33,8 @@ cat  RESLT/step0_spine.dat  RESLT/step1_spine.dat  RESLT/step2_spine.dat \
      > two_fluid_cap.dat
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py  ../validata/cap.dat.gz  \
    two_fluid_cap.dat 0.1 2.5e-8 >> validation.log

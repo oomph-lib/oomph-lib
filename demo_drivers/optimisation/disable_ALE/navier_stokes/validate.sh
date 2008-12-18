@@ -39,8 +39,8 @@ cd ..
 cat ./results_CR.dat ./results_TH.dat \
     ./results_CR_ALE.dat ./results_TH_ALE.dat > results.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../../bin/fpdiff.py ../validata/results.dat.gz  results.dat 0.1 1.0e-8 >> validation.log
 fi
@@ -74,8 +74,8 @@ cd ..
 cat ./results2_CR.dat ./results2_TH.dat \
     ./results2_CR_ALE.dat ./results2_TH_ALE.dat > results2.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../../bin/fpdiff.py ../validata/results2.dat.gz  results2.dat 0.1 1.0e-8 >> validation.log
 fi

@@ -32,8 +32,8 @@ echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/oomph_mesh.fig.poly.gz   \
     oomph_mesh.fig.poly  >> validation.log
@@ -64,8 +64,8 @@ cat RESLT/soln0.dat RESLT/soln1.dat RESLT/soln2.dat \
     RESLT/soln3.dat RESLT/soln4.dat RESLT/soln5.dat \
     > oomph_poisson_results.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/oomph_poisson_results.dat.gz   \
     oomph_poisson_results.dat  >> validation.log
@@ -97,8 +97,8 @@ cat RESLT/soln0.dat RESLT/soln1.dat RESLT/soln2.dat \
     RESLT/soln3.dat RESLT/soln4.dat RESLT/soln5.dat \
     > hole_poisson_results.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/hole_poisson_results.dat.gz   \
     hole_poisson_results.dat  >> validation.log
@@ -125,8 +125,8 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/soln1.dat > oomph_xfig_navier_stokes_results.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/ns_results.dat.gz   \
     oomph_xfig_navier_stokes_results.dat  >> validation.log

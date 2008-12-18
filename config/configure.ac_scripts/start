@@ -377,6 +377,48 @@ AM_CONDITIONAL(HAVE_PYTHON, test x$have_python = xtrue)
 
 
 
+# Do we have validata?
+#---------------------
+AC_CHECK_FILES(demo_drivers/poisson/one_d_poisson/validata/one_d_poisson_results.dat.gz,
+               echo "Found validata"; have_validata=true, 
+               echo "Not found validata"; have_validata=false)
+
+if test x$have_validata = xfalse; then \
+  echo " "; \
+  echo "================================================================="; \
+  echo "This distribution does not seem to have validata"; \
+  echo "(based on existence of demo_drivers/poisson/one_d_poisson/validata/one_d_poisson_results.dat.gz)"; \
+  echo "---> Will not be able to check the accuracy of "; \
+  echo "     the self tests with bin/fpdiff.py :( "; \
+  echo " "; \
+  echo "=================================================================="; \
+  echo " "; \
+else \
+  echo "This distribution does seem to have validata."; \
+  echo "(based on existence of demo_drivers/poisson/one_d_poisson/validata)"; \
+fi
+AM_CONDITIONAL(HAVE_VALIDATA, test x$have_validata = xtrue)
+
+
+
+# Can we compare against validata?
+#---------------------------------
+compare_against_validata=false;
+if test x$have_python = xtrue; then \
+if test x$have_validata = xtrue; then \
+  compare_against_validata=true; \
+fi \
+fi
+
+if test x$compare_against_validata = xtrue; then \
+  echo "Will compare against validata "; \
+else \
+  echo "Will not compare against validata "; \
+fi
+
+AM_CONDITIONAL(COMPARE_AGAINST_VALIDATA, test x$compare_against_validata = xtrue)
+
+
 # Do we have the sources for the HSL frontal solver in external_src?
 #-------------------------------------------------------------------
 AC_CHECK_FILES(external_src/oomph_hsl/frontal.f,
@@ -444,6 +486,10 @@ AC_ARG_ENABLE(dummy2,[Oomph-lib options:  ])
 
 
 
+
+
+
+
 # Is MPI build required? 
 # If yes, run configure as './configure --enable-MPI'
 AC_ARG_ENABLE(MPI,
@@ -469,6 +515,32 @@ AM_CONDITIONAL(WANT_MPI, test x$want_mpi = xtrue)
 if test x$want_mpi = xtrue; then \
     accumulated_cpp_flags=`echo $accumulated_cpp_flags " -DOOMPH_HAS_MPI"`; \
 fi;
+
+
+
+
+
+
+# Do we want to run the mpi tests?
+AC_ARG_WITH(mpi-self-tests,
+[  --with-mpi-self-tests[=MPI_RUN_COMMAND] run mpi self-tests on two processors
+                          using MPI_RUN_COMMAND. E.g. if a parallel executable
+                          on your machine needs to be run with 
+
+                             mpirun -np 2 a.out
+
+                          then set MPI_RUN_COMMAND to "mpirun -np 2"],[
+  if test "$withval" != "no" -a "$withval" != "yes"; then
+    run_mpi_self_tests=true
+    MPI_RUN_COMMAND=$withval
+  fi
+])
+AC_SUBST(MPI_RUN_COMMAND)
+
+
+
+
+
 
 # Suppress build of extensive documentation?
 # If yes, run configure as './configure --enable-suppress-doc'

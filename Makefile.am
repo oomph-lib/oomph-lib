@@ -69,10 +69,13 @@ SUBDIRS = $(sub_dirs) $(doc_dirs) self_test
 
 # The ultimate list of sub-directories that are to be distributed
 #----------------------------------------------------------------
-# includes the user drivers
-#--------------------------
-DIST_SUBDIRS = user_drivers $(sub_dirs) $(doc_dirs) self_test
-
+# includes the private stuff and the user drivers
+#------------------------------------------------
+if HAVE_PRIVATE_DIRECTORY
+DIST_SUBDIRS = user_drivers $(sub_dirs) $(doc_dirs) self_test private
+else
+DIST_SUBDIRS = user_drivers $(sub_dirs) $(doc_dirs) self_test	
+endif	
 
 # A few extract scripts to be included into the distribution
 #-----------------------------------------------------------

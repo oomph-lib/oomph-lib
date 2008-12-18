@@ -54,8 +54,8 @@ RESLT_norefine8/soln1.dat \
 RESLT_norefine9/soln1.dat \
     > result_norefine.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/result_norefine.dat.gz \
     result_norefine.dat  >> validation.log
@@ -106,8 +106,8 @@ RESLT_refine8/soln1.dat \
 RESLT_refine9/soln1.dat \
     > result_refine.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/result_refine.dat.gz \
     result_refine.dat  >> validation.log

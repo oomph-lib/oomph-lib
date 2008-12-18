@@ -32,8 +32,8 @@ echo " " >> validation.log
 cat  RESLT/soln_CR_8x8_10.dat RESLT/trace_CR.dat > sph_rot_CR.dat
 cat  RESLT/soln_TH_8x8_10.dat RESLT/trace_TH.dat > sph_rot_TH.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 echo "Crouzeix-Raviart elements" >> validation.log
 echo " " >> validation.log

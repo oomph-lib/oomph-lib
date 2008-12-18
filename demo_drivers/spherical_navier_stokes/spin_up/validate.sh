@@ -36,8 +36,8 @@ cat  RESLT_TH/soln3.dat RESLT_TH/time_trace.dat \
 mkdir RESLT_sphere
 mv RESLT_CR RESLT_TH RESLT_sphere
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 echo "Crouzeix-Raviart elements" >> validation.log
 echo " " >> validation.log
@@ -71,8 +71,8 @@ cat  RESLT_TH/soln3.dat RESLT_TH/time_trace.dat \
 mkdir RESLT_cyl
 mv RESLT_CR RESLT_TH RESLT_cyl
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 echo "Crouzeix-Raviart elements" >> validation.log
 echo " " >> validation.log
@@ -103,8 +103,8 @@ cat  RESLT/soln1.dat > ref_sphere_CR.dat
 mkdir RESLT_ref_sphere
 mv RESLT RESLT_ref_sphere
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 echo "Crouzeix-Raviart elements" >> validation.log
 echo " " >> validation.log
@@ -135,8 +135,8 @@ cat  RESLT/soln1.dat > ref_cyl_CR.dat
 mkdir RESLT_ref_cyl
 mv RESLT RESLT_ref_cyl
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 echo "Crouzeix-Raviart elements" >> validation.log
 echo " " >> validation.log

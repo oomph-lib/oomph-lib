@@ -33,8 +33,8 @@ echo " " >> validation.log
 cat RESLT_fold/trace_mu.dat > fold.dat
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../bin/fpdiff.py ../validata/fold.dat.gz \
     fold.dat  >> validation.log
@@ -57,8 +57,8 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT_pitch/trace.dat > pitch.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../bin/fpdiff.py ../validata/pitch.dat.gz pitch.dat  >> validation.log
 fi
@@ -79,8 +79,8 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT_hopf/trace_hopf.dat > hopf.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../bin/fpdiff.py ../validata/hopf.dat.gz \
     hopf.dat  0.3 1.0e-14  >> validation.log

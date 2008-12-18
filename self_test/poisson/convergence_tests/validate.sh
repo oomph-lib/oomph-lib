@@ -33,8 +33,8 @@ echo " " >> validation.log
 cat RESLT/soln0.dat RESLT/soln1.dat RESLT/soln2.dat RESLT/convergence.dat > t_convergence_2d_results.dat
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/t_convergence_2d_results.dat.gz  \
          t_convergence_2d_results.dat >> validation.log
@@ -62,8 +62,8 @@ echo " " >> validation.log
 cat RESLT/soln0.dat RESLT/soln1.dat RESLT/soln2.dat RESLT/convergence.dat > q_convergence_2d_results.dat
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/q_convergence_2d_results.dat.gz  \
          q_convergence_2d_results.dat >> validation.log
@@ -90,8 +90,8 @@ echo " " >> validation.log
 cat RESLT/soln0.dat RESLT/soln1.dat RESLT/soln2.dat RESLT/convergence.dat > q_convergence_3d_results.dat
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/q_convergence_3d_results.dat.gz  \
          q_convergence_3d_results.dat >> validation.log
@@ -118,8 +118,8 @@ echo " " >> validation.log
 cat RESLT/soln0.dat RESLT/soln1.dat RESLT/soln2.dat RESLT/soln3.dat RESLT/convergence.dat > t_convergence_3d_results.dat
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/t_convergence_3d_results.dat.gz  \
          t_convergence_3d_results.dat >> validation.log

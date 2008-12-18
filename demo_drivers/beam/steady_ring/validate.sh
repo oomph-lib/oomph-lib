@@ -42,8 +42,8 @@ cat RESLT_no_global/ring0.dat \
     RESLT_no_global/ring20.dat \
     RESLT_no_global/trace.dat\
     > ring_results2.dat
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
   ../../../../bin/fpdiff.py ../validata/ring_results.dat.gz \
    ring_results.dat >> validation.log

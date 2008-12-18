@@ -34,8 +34,8 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT_clamped/shell0.dat RESLT_clamped/shell4.dat RESLT_clamped/shell9.dat RESLT_clamped/trace.dat > clamped_shell.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/clamped_shell.dat.gz \
  clamped_shell.dat>> validation.log
@@ -64,8 +64,8 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT_pinned/shell0.dat RESLT_pinned/shell4.dat RESLT_pinned/shell9.dat RESLT_pinned/trace.dat > pinned_shell.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/pinned_shell.dat.gz \
  pinned_shell.dat>> validation.log
@@ -93,8 +93,8 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT_pinned_periodic/shell0.dat RESLT_pinned_periodic/shell4.dat RESLT_pinned_periodic/shell9.dat RESLT_pinned_periodic/trace.dat > pinned_periodic.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/pinned_periodic.dat.gz \
  pinned_periodic.dat>> validation.log

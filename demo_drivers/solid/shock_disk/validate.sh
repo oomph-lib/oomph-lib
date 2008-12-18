@@ -38,8 +38,8 @@ cat RESLT1/soln3.dat \
 cat RESLT2/soln3.dat \
     > shock_disk_results2.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/shock_disk_results0.dat.gz \
     shock_disk_results0.dat  >> validation.log

@@ -34,8 +34,8 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/shell0.dat RESLT/shell4.dat RESLT/trace.dat > oscillating_shell.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/oscillating_shell.dat.gz \
  oscillating_shell.dat>> validation.log

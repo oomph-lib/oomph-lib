@@ -36,8 +36,8 @@ cat RESLT_pres/soln1.dat RESLT_pres/stress1.dat > res_pres.dat
 cat RESLT_cont_pres/soln1.dat RESLT_cont_pres/stress1.dat > res_cont_pres.dat
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/res.dat.gz \
     res.dat 0.1 2.0e-10 >> validation.log
@@ -68,8 +68,8 @@ cat RESLT_cont_pres_ref/soln1.dat RESLT_cont_pres_ref/stress1.dat \
  > res_cont_pres_ref.dat
 
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/res_ref.dat.gz \
     res_ref.dat 0.1 4.0e-10 >> validation.log

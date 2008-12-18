@@ -30,8 +30,8 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat  RESLT_TH/soln1.dat  RESLT_CR/soln1.dat > entry_flow_results.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/entry_flow_results.dat.gz  \
          entry_flow_results.dat >> validation.log
