@@ -101,6 +101,7 @@ Vector<double> s(DIM);
 double scaled_re  = re()*density_ratio();
 double scaled_re_st = re_st()*density_ratio();
 double scaled_re_inv_fr = re_invfr()*density_ratio();
+double scaled_re_inv_ro = re_invro()*density_ratio();
 double visc_ratio = viscosity_ratio();
 double dens_ratio = density_ratio();
 Vector<double> G = g();
@@ -305,6 +306,11 @@ for(unsigned ipt=0;ipt<Nintpt;ipt++)
                 hang_weight;
               }
             }
+
+           //Coriolis term
+           sum +=  
+            2.0*r*scaled_re_inv_ro*interpolated_u[2]*testf[l]*W*hang_weight;
+
            break;
                 
            // AXIAL MOMENTUM EQUATION
@@ -402,6 +408,11 @@ for(unsigned ipt=0;ipt<Nintpt;ipt++)
                 interpolated_dudx(2,k)*testf[l]*W*hang_weight;
               }
             }
+
+           //Coriolis term
+           sum -= 
+            2.0*r*scaled_re_inv_ro*interpolated_u[0]*testf[l]*W*hang_weight;
+
            break;
           }
 
@@ -533,6 +544,12 @@ for(unsigned ipt=0;ipt<Nintpt;ipt++)
                        jacobian(local_eqn,local_unknown) -= 
                         - scaled_re*2.0*interpolated_u[2]*psif[l2]
                         *testf[l]*W*hang_weight*hang_weight2;
+
+                       //Coriolis terms
+                       jacobian(local_eqn,local_unknown) +=
+                        2.0*r*scaled_re_inv_ro*psif[l2]*testf[l]*W
+                        *hang_weight*hang_weight2;
+
                        break;
                       } /*End of contribution radial momentum eqn*/
                      break;
@@ -625,6 +642,12 @@ for(unsigned ipt=0;ipt<Nintpt;ipt++)
                         scaled_re*(r*psif[l2]*interpolated_dudx(2,0)
                             + psif[l2]*interpolated_u[2])*testf[l]
                         *W*hang_weight*hang_weight2;
+
+                       //Coriolis term
+                       jacobian(local_eqn,local_unknown) -=
+                        2.0*r*scaled_re_inv_ro*psif[l2]*testf[l]*W
+                        *hang_weight*hang_weight2;
+
                        break;
                             
                        // axial component

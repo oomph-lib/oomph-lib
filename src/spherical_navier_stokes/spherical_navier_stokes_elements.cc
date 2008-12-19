@@ -932,8 +932,8 @@ void SphericalNavierStokesEquations::full_output(std::ostream &outfile,
      // Loop over nodes
      for(unsigned l=0;l<n_node;l++) 
       {
-       dudt[i]+=du_dt_spherical_nst(l,u_nodal_index)*psif[l];
-       mesh_veloc[i]+=dnodal_position_dt(l,i)*psif[l];
+       dudt[i]+=du_dt_spherical_nst(l,u_nodal_index)*psif(l);
+       mesh_veloc[i]+=dnodal_position_dt(l,i)*psif(l);
 
        //Loop over derivative directions for velocity gradients
        for(unsigned j=0;j<2;j++)
@@ -1559,6 +1559,7 @@ fill_in_generic_residual_contribution_spherical_nst(
  //Reynolds number must be multiplied by the density ratio
  const double scaled_re = re()*density_ratio();
  const double scaled_re_st = re_st()*density_ratio();
+ const double scaled_re_inv_ro = re_invro()*density_ratio();
  //double scaled_re_inv_fr = re_invfr()*density_ratio();
  //double visc_ratio = viscosity_ratio();
  Vector<double> G = g();
@@ -1639,7 +1640,7 @@ fill_in_generic_residual_contribution_spherical_nst(
        //Loop over directions (only DIM (2) of these)
        for(unsigned i=0;i<2;i++)
         {
-         mesh_velocity[i] += this->raw_dnodal_position_dt(l,i)*psif[l];
+         mesh_velocity[i] += this->raw_dnodal_position_dt(l,i)*psif(l);
         }
       }
     }
@@ -1701,6 +1702,9 @@ fill_in_generic_residual_contribution_spherical_nst(
            + mesh_velocity[1]*(interpolated_dudx(0,1) - u_theta))
           *r*sin_theta*testf[l];
         }
+
+       // Add the Coriolis term
+       sum -= 2.0*scaled_re_inv_ro*sin_theta*u_phi*r2*sin_theta*testf[l];
 
        // r-derivative test function component of stress tensor
        sum += 
@@ -1826,7 +1830,11 @@ fill_in_generic_residual_contribution_spherical_nst(
             {
              // Single convective-term contribution
              jacobian(local_eqn,local_unknown) += 
-              2.0*scaled_re*u_phi*psif[l2]*r*sin_theta*testf[l]*W;
+              2.0*scaled_re*u_phi*psif(l2)*r*sin_theta*testf[l]*W;
+
+             //Coriolis term
+             jacobian(local_eqn,local_unknown) +=
+              2.0*scaled_re_inv_ro*sin_theta*psif(l2)*r2*sin_theta*testf[l]*W;
             } 
            // End of i2=2 section
            
@@ -1878,6 +1886,9 @@ fill_in_generic_residual_contribution_spherical_nst(
            + mesh_velocity[1]*(interpolated_dudx(1,1) + u_r))
            *r*sin_theta*testf(l);
         }
+
+       // Add the Coriolis term
+       sum -= 2.0*scaled_re_inv_ro*cos_theta*u_phi*r2*sin_theta*testf[l];
 
        // r-derivative test function component of stress tensor
        sum += (r*interpolated_dudx(1,0) - u_theta + interpolated_dudx(0,1))
@@ -2006,6 +2017,10 @@ fill_in_generic_residual_contribution_spherical_nst(
              // Only a convective term contribution
              jacobian(local_eqn,local_unknown) += 
               scaled_re*2.0*r*psif(l2)*u_phi*cos_theta*testf(l)*W;
+
+             //Coriolis term
+             jacobian(local_eqn,local_unknown) +=
+              2.0*scaled_re_inv_ro*cos_theta*psif(l2)*r2*sin_theta*testf[l]*W;
             } 
            // End of i2=2 section
            
@@ -2060,6 +2075,10 @@ fill_in_generic_residual_contribution_spherical_nst(
            + mesh_velocity[1]*interpolated_dudx(2,1))*r*sin_theta*testf(l);
         }
        
+       //Add the Coriolis term
+       sum += 2.0*scaled_re_inv_ro*
+        (cos_theta*u_theta + sin_theta*u_r)*r2*sin_theta*testf[l];
+
        // r-derivative test function component of stress tensor
        sum += (r2*interpolated_dudx(2,0) - r*u_phi)*dtestfdx(l,0)*sin_theta;
 
@@ -2095,6 +2114,10 @@ fill_in_generic_residual_contribution_spherical_nst(
              jacobian(local_eqn,local_unknown) -= 
               scaled_re*(r*interpolated_dudx(2,0) + u_phi)
               *psif(l2)*testf(l)*r*sin_theta*W;
+
+             //Coriolis term
+             jacobian(local_eqn,local_unknown) -=
+              2.0*scaled_re_inv_ro*sin_theta*psif(l2)*r2*sin_theta*testf[l]*W;
             } 
            // End of i2=0 section
            
@@ -2108,6 +2131,11 @@ fill_in_generic_residual_contribution_spherical_nst(
              jacobian(local_eqn,local_unknown) -=
               scaled_re*(interpolated_dudx(2,1)*sin_theta
                          + u_phi*cos_theta)*r*psif(l2)*testf(l)*W;
+             
+
+             //Coriolis term
+             jacobian(local_eqn,local_unknown) -=
+              2.0*scaled_re_inv_ro*cos_theta*psif(l2)*r2*sin_theta*testf[l]*W;
              
             } 
            // End of i2=1 section
@@ -2165,7 +2193,7 @@ fill_in_generic_residual_contribution_spherical_nst(
              if(flag==2)
               {
                mass_matrix(local_eqn,local_unknown) += 
-                scaled_re_st*psif[l2]*testf[l]*r2*sin_theta*W;
+                scaled_re_st*psif(l2)*testf[l]*r2*sin_theta*W;
               }
 
             } 

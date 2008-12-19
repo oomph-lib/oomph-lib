@@ -873,9 +873,9 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
    // Incompressible: Compute the deviatoric part of the stress tensor, the
    // contravariant deformed metric tensor and the determinant
    // of the deformed covariant metric tensor.
-   if(Incompressible)
+   if(this->Incompressible)
     {
-     get_stress(g,G,sigma_dev,Gup,detG);
+     this->get_stress(g,G,sigma_dev,Gup,detG);
      
      // Get full stress
      for (unsigned a=0;a<DIM;a++)
@@ -923,7 +923,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
            G_pls(j,i) = G_pls(i,j);
 
            // Get advanced stress
-           get_stress(g,G_pls,sigma_dev_pls,Gup_pls,detG_pls);
+           this->get_stress(g,G_pls,sigma_dev_pls,Gup_pls,detG_pls);
            
            // Derivative of determinant of deformed metric tensor
            d_detG_dG(i,j)=(detG_pls-detG)/eps_fd;
@@ -957,7 +957,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
    // the generalised dilatation and the inverse bulk modulus.
    else
     {
-     get_stress(g,G,sigma_dev,Gup,gen_dil,inv_kappa);
+     this->get_stress(g,G,sigma_dev,Gup,gen_dil,inv_kappa);
 
      // Get full stress
      for (unsigned a=0;a<DIM;a++)
@@ -1003,7 +1003,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
            G_pls(j,i) = G_pls(i,j);
 
            // Get advanced stress
-           get_stress(g,G_pls,sigma_dev_pls,Gup_pls,gen_dil_pls,inv_kappa);
+           this->get_stress(g,G_pls,sigma_dev_pls,Gup_pls,gen_dil_pls,inv_kappa);
 
            // Derivative of generalised dilatation
            d_gen_dil_dG(i,j)=(gen_dil_pls-gen_dil)/eps_fd;

@@ -464,7 +464,7 @@ calculate_second_piola_kirchhoff_stress(const DenseMatrix<double> &g,
  detG = calculate_contravariant(G,Gup);
       
  //Calculate the stiffness tensor, without the pressure bits
- double Et_NonSingular[3][3][3][3];
+ //double Et_NonSingular[3][3][3][3];
  
  //Premultiply the appropriate physical constant
  double C1 = E/(2.0*(1.0+Nu));

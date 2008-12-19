@@ -3469,6 +3469,11 @@ void Problem::newton_solve()
    // we ignore the convergence check
    if (Problem_is_nonlinear)
     {
+     //Get the maximum residuals
+     //maxres = std::abs(*std::max_element(dx.begin(),dx.end(),
+     //                                    AbsCmp<double>()));
+     //std::cout << "Maxres correction " << maxres << "\n";
+
      //Calculate the new residuals
      get_residuals(dx);
 

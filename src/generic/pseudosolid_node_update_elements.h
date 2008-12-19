@@ -107,18 +107,18 @@ template<class BASIC, class SOLID>
    // bool use_first_order_fd=false;
 
   //Find the number of nodes
-  const unsigned n_node = nnode();
+  const unsigned n_node = this->nnode();
 
   //If there aren't any nodes, then return straight away
   if(n_node == 0) {return;}
 
   //Call the update function to ensure that the element is in
   //a consistent state before finite differencing starts
-  update_before_solid_position_fd();
+  this->update_before_solid_position_fd();
 
   //Get the number of position dofs and dimensions at the node
-  const unsigned n_position_type = nnodal_position_type();
-  const unsigned nodal_dim = nodal_dimension();
+  const unsigned n_position_type = this->nnodal_position_type();
+  const unsigned nodal_dim = this->nodal_dimension();
 
   //Find the number of dofs in the element
   const unsigned n_dof = this->ndof();
@@ -135,7 +135,7 @@ template<class BASIC, class SOLID>
   int local_unknown=0;
  
   //Should probably give this a more global scope
-  const double fd_step = Default_fd_jacobian_step;
+  const double fd_step = this->Default_fd_jacobian_step;
  
   //Loop over the nodes
   for(unsigned n=0;n<n_node;n++)
@@ -147,11 +147,11 @@ template<class BASIC, class SOLID>
       for(unsigned i=0;i<nodal_dim;i++)
        {
         //If the variable is free
-        local_unknown = position_local_eqn(n,k,i);
+        local_unknown = this->position_local_eqn(n,k,i);
         if(local_unknown >= 0)
          {
           //Store a pointer to the (generalised) Eulerian nodal position
-          double* const value_pt = &(node_pt(n)->x_gen(k,i));
+          double* const value_pt = &(this->node_pt(n)->x_gen(k,i));
 
           //Save the old value of the (generalised) Eulerian nodal position
           const double old_var = *value_pt;
@@ -160,7 +160,7 @@ template<class BASIC, class SOLID>
           *value_pt += fd_step;
           
           // Perform any auxialiary node updates
-          node_pt(n)->perform_auxiliary_node_update_fct();
+          this->node_pt(n)->perform_auxiliary_node_update_fct();
           
           //Calculate the new residuals
           BASIC::get_residuals(newres);
@@ -196,7 +196,7 @@ template<class BASIC, class SOLID>
            *value_pt = old_var;
            
            // Perform any auxialiary node updates
-           node_pt(n)->perform_auxiliary_node_update_fct();
+           this->node_pt(n)->perform_auxiliary_node_update_fct();
          }
        }
      }
@@ -204,7 +204,7 @@ template<class BASIC, class SOLID>
 
   //End of finite difference loop
   //Final reset of any slaved data
-  reset_after_solid_position_fd();
+  this->reset_after_solid_position_fd();
  }
 
 
@@ -386,23 +386,23 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
  void fill_in_shape_derivatives_by_fd(DenseMatrix<double> &jacobian)
   {
    //Find the number of nodes
-   const unsigned n_node = nnode();
+   const unsigned n_node = this->nnode();
    
    //If there are no nodes, return straight away
    if(n_node == 0) {return;}
    
    //Call the update function to ensure that the element is in
    //a consistent state before finite differencing starts
-   update_before_solid_position_fd();
+   this->update_before_solid_position_fd();
    
 //  bool use_first_order_fd=false;
    
    //Find the number of positional dofs and nodal dimension
-   const unsigned n_position_type = nnodal_position_type();
-   const unsigned nodal_dim = nodal_dimension();
+   const unsigned n_position_type = this->nnodal_position_type();
+   const unsigned nodal_dim = this->nodal_dimension();
    
    //Find the number of dofs in the element
-   const unsigned n_dof = ndof();
+   const unsigned n_dof = this->ndof();
    
    //Create residual newres vectors
    Vector<double> residuals(n_dof);
@@ -413,7 +413,7 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
    BASIC::get_residuals(residuals);
    
    //Used default value defined in GeneralisedElement
-   const double fd_step = Default_fd_jacobian_step;
+   const double fd_step = this->Default_fd_jacobian_step;
    
    //Integer storage for local unknowns
    int local_unknown=0;
@@ -422,7 +422,7 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
    for(unsigned l=0;l<n_node;l++)
     {
      //Get the pointer to the node
-     Node* const local_node_pt = node_pt(l);
+     Node* const local_node_pt = this->node_pt(l);
      
      //If the node is not a hanging node
      if(local_node_pt->is_hanging()==false)
@@ -433,7 +433,7 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
          //Loop over dimension
          for(unsigned i=0;i<nodal_dim;i++)
           {
-           local_unknown = position_local_eqn(l,k,i);
+           local_unknown = this->position_local_eqn(l,k,i);
            //If the variable is free
            if(local_unknown >= 0)
             {
@@ -503,7 +503,7 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
          
          //Get the local equation numbers for the master node
          DenseMatrix<int> Position_local_eqn_at_node
-          = local_position_hang_eqn(master_node_pt);
+          = this->local_position_hang_eqn(master_node_pt);
          
          //Loop over position dofs
          for(unsigned k=0;k<n_position_type;k++)
@@ -575,7 +575,7 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
    //End of finite difference loop
 
    //Final reset of any slaved data
-   reset_after_solid_position_fd();
+   this->reset_after_solid_position_fd();
   }
 
 

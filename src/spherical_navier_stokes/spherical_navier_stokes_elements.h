@@ -81,7 +81,11 @@ class SphericalNavierStokesEquations : public virtual FSIFluidElement
  /// \short Pointer to global Reynolds number x inverse Froude number
  /// (= Bond number / Capillary number) 
  double *ReInvFr_pt;
- 
+
+ /// \short Pointer to global Reynolds number x inverse Rossby number
+ /// (used when in a rotating frame)
+ double *ReInvRo_pt;
+
  /// Pointer to global gravity Vector
  Vector<double> *G_pt;
  
@@ -185,6 +189,7 @@ public:
    Re_pt = &Default_Physical_Constant_Value;
    ReSt_pt = &Default_Physical_Constant_Value;
    ReInvFr_pt = &Default_Physical_Constant_Value;
+   ReInvRo_pt = &Default_Physical_Constant_Value;
    G_pt = &Default_Gravity_vector;
    //Set the Physical ratios to the default value of 1
    Viscosity_Ratio_pt = &Default_Physical_Ratio_Value;
@@ -231,6 +236,12 @@ public:
  /// Pointer to global inverse Froude number
  double* &re_invfr_pt() {return ReInvFr_pt;}
  
+  /// Global Reynolds number multiplied by inverse Rossby number
+ const double &re_invro() const {return *ReInvRo_pt;}
+
+ /// Pointer to global inverse Froude number
+ double* &re_invro_pt() {return ReInvRo_pt;}
+
  /// Vector of gravitational components
  const Vector<double> &g() const {return *G_pt;}
 

@@ -80,29 +80,18 @@
 #              other libraries.
 #=====================================================================
 #
-# Compilation with lam mpi compilers (wrappers to gcc) with 
-# full optimisation.
+# gcc-based compilation with debugging (-g) and full warnings. 
 # Library headers in the build directory are replaced by symbolic
 # links to the src directory -- this ensures that you don't
 # accidentally edit a file in the include directory only to have
 # it immediately wiped out when you re-install the library after
-# finishing your changes. We specify the location of the blas,
-# lapack, hypre and trilinos libraries, the latter two assumed
-# to have been compiled with mpi support. Linking is done
-# with the lam mpi fortran compiler.
+# finishing your changes. PARANOIA is enabled for oomph-lib's
+# sources (it's only necessary to specify this for the c++ compiler
+# as oomph-lib proper doesn't have any other sources).
+# We also specify the location of externally installed
+# blas and lapack libraries.
 #
---enable-MPI
 --enable-symbolic-links-for-headers
---with-blas=/home/mheil/local/lib/blas/blas.a
---with-lapack=/home/mheil/local/lib/lapack/lapack.a
---with-trilinos=/home/mheil/test_external_local/trilinos_default_installation_mpi
---with-hypre=/home/mheil/test_external_local/hypre_default_installation_mpi
---with-mpi-self-tests="mpirun -np 2"
-CXXFLAGS="-O6 -Wall"
-CFLAGS="-O6"
-FFLAGS="-O6"
-CXX=mpic++
-CC=mpicc
-F77=mpif77
-LD=mpif77
-
+CXXFLAGS="-O6 -Wall" # -DPARANOID"
+CFLAGS="-O6 -Wall" 
+FFLAGS="-O6 -Wall" 

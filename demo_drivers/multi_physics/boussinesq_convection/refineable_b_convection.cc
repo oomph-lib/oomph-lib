@@ -543,7 +543,7 @@ private:
 //========================================================================
 template<class ELEMENT>
 RefineableConvectionProblem<ELEMENT>::
-RefineableConvectionProblem()
+RefineableConvectionProblem() : Imperfect(false)
 { 
  // Set output directory
  Doc_info.set_directory("RESLT");

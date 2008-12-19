@@ -824,6 +824,7 @@ fill_in_generic_residual_contribution_axi_nst(Vector<double> &residuals,
  double scaled_re = re()*density_ratio();
  double scaled_re_st = re_st()*density_ratio();
  double scaled_re_inv_fr = re_invfr()*density_ratio();
+ double scaled_re_inv_ro = re_invro()*density_ratio();
  double visc_ratio = viscosity_ratio();
  double dens_ratio = density_ratio();
  Vector<double> G = g();
@@ -973,6 +974,10 @@ fill_in_generic_residual_contribution_axi_nst(Vector<double> &residuals,
           }
         }
 
+       //Add the Coriolis term
+       residuals[local_eqn] += 
+        2.0*r*scaled_re_inv_ro*interpolated_u[2]*testf[l]*W;
+
        //CALCULATE THE JACOBIAN
        if(flag)
         {
@@ -1044,6 +1049,10 @@ fill_in_generic_residual_contribution_axi_nst(Vector<double> &residuals,
              //Convective terms
              jacobian(local_eqn,local_unknown) -= 
               - scaled_re*2.0*interpolated_u[2]*psif[l2]*testf[l]*W;
+
+             //Coriolis terms
+             jacobian(local_eqn,local_unknown) +=
+              2.0*r*scaled_re_inv_ro*psif[l2]*testf[l]*W;
             }
           }
          
@@ -1245,6 +1254,10 @@ fill_in_generic_residual_contribution_axi_nst(Vector<double> &residuals,
             scaled_re_st*r*mesh_velocity[k]*interpolated_dudx(2,k)*testf[l]*W;
           }
         }
+
+       //Add the Coriolis term
+       residuals[local_eqn] -= 
+        2.0*r*scaled_re_inv_ro*interpolated_u[0]*testf[l]*W;
        
        //CALCULATE THE JACOBIAN
        if(flag)
@@ -1260,6 +1273,10 @@ fill_in_generic_residual_contribution_axi_nst(Vector<double> &residuals,
              jacobian(local_eqn,local_unknown) -= 
               scaled_re*(r*psif[l2]*interpolated_dudx(2,0)
                   + psif[l2]*interpolated_u[2])*testf[l]*W;
+
+             //Coriolis term
+             jacobian(local_eqn,local_unknown) -=
+              2.0*r*scaled_re_inv_ro*psif[l2]*testf[l]*W;
             }
 
            //Axial velocity component

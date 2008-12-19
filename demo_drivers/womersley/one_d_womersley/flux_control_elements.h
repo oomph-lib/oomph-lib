@@ -254,7 +254,7 @@ public:
  /// single value is the pressure applied by the element
  void add_pressure_data(Data* pressure_data_pt)
   {
-   Pressure_data_id = add_external_data(pressure_data_pt);
+   Pressure_data_id = this->add_external_data(pressure_data_pt);
   }
  
 protected:
@@ -266,7 +266,7 @@ protected:
  /// The default is to asssume that n is the local node number
  /// and the i-th velocity component is the i-th unknown stored at the node.
  virtual inline int u_local_eqn(const unsigned &n, const unsigned &i)
-  {return nodal_local_eqn(n,i);}
+  {return this->nodal_local_eqn(n,i);}
  
  ///\short Function to compute the shape and test functions and to return 
  ///the Jacobian of mapping 
@@ -275,13 +275,13 @@ protected:
   const
   {
    //Find number of nodes
-   unsigned n_node = nnode();
+   unsigned n_node = this->nnode();
    //Calculate the shape functions
-   shape_at_knot(ipt,psi);
+   this->shape_at_knot(ipt,psi);
    //Set the test functions to be the same as the shape functions
    for(unsigned i=0;i<n_node;i++) {test[i] = psi[i];}
    //Return the value of the jacobian
-   return J_eulerian_at_knot(ipt);
+   return this->J_eulerian_at_knot(ipt);
   }
  
  
@@ -293,25 +293,25 @@ protected:
   DenseMatrix<double> &jacobian)
   {
    //Find out how many nodes there are
-   unsigned n_node = nnode();
+   unsigned n_node = this->nnode();
    
    //Set up memory for the shape and test functions
    Shape psif(n_node), testf(n_node);
    
    //Set the value of n_intpt
-   unsigned n_intpt = integral_pt()->nweight();
+   unsigned n_intpt = this->integral_pt()->nweight();
    
    //Integers to store local equation numbers
    int local_eqn=0;
    
    // Get the pressure at the outflow
-   double pressure = external_data_pt(Pressure_data_id)->value(0);
+   double pressure = this->external_data_pt(Pressure_data_id)->value(0);
    
    //Loop over the integration points
    for(unsigned ipt=0;ipt<n_intpt;ipt++)
     {
      //Get the integral weight
-     double w = integral_pt()->weight(ipt);
+     double w = this->integral_pt()->weight(ipt);
      
      //Find the shape and test functions and return the Jacobian
      //of the mapping
@@ -331,12 +331,12 @@ protected:
       {
        //Loop over velocity components
        for(unsigned i=0;i<Dim;i++) {interpolated_x[i] += 
-                                     nodal_position(l,i)*psif[l];}
+                                     this->nodal_position(l,i)*psif[l];}
       }
      
      // Get the outer unit normal
      Vector<double> unit_normal(Dim);
-     outer_unit_normal(ipt, unit_normal);
+     this->outer_unit_normal(ipt, unit_normal);
      
      // Calculate the traction
      Vector<double> traction(Dim);

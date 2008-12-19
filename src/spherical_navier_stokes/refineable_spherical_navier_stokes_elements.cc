@@ -97,6 +97,7 @@ Vector<double> s(2);
  const double dens_ratio = density_ratio();
  const double scaled_re  = re()*dens_ratio;
  const double scaled_re_st = re_st()*dens_ratio;
+ const double scaled_re_inv_ro = re_invro()*dens_ratio;
  //const double scaled_re_inv_fr = re_invfr()*dens_ratio;
  //const double visc_ratio = viscosity_ratio();
  Vector<double> G = g();
@@ -282,6 +283,9 @@ int local_eqn=0, local_unknown=0;
              //Add the time-derivative and convective terms
              sum += (scaled_re_st*dudt[0]*r2 + scaled_re*r*conv)*
               sin_theta*testf(l);
+
+             //Add the Coriolis term
+             sum -= 2.0*scaled_re_inv_ro*sin_theta*u_phi*r2*sin_theta*testf(l);
              
              // r-derivative test function component of stress tensor
              sum += (-interpolated_p + 2*interpolated_dudx(0,0))*
@@ -311,7 +315,10 @@ int local_eqn=0, local_unknown=0;
              //Add the time-derivative and convective terms to the residual
              sum += (scaled_re_st*r2*sin_theta*dudt[1] + 
                      scaled_re*r*conv)*testf(l);
-             
+
+              //Add the Coriolis term
+             sum -= 2.0*scaled_re_inv_ro*cos_theta*u_phi*r2*sin_theta*testf(l);
+
              // r-derivative test function component of stress tensor
              sum += 
               (r*interpolated_dudx(1,0) - u_theta + interpolated_dudx(0,1))*
@@ -349,6 +356,11 @@ int local_eqn=0, local_unknown=0;
              sum += (scaled_re_st*r2*dudt[2]*sin_theta 
                      + scaled_re*conv*r)*testf(l);
              
+             //Add the Coriolis term
+             sum += 2.0*scaled_re_inv_ro*
+              (cos_theta*u_theta + sin_theta*u_r)*r2*sin_theta*testf(l);
+
+
              // r-derivative test function component of stress tensor
              sum += 
               (r2*interpolated_dudx(2,0) - r*u_phi)*dtestfdx(l,0)*sin_theta;
@@ -517,6 +529,11 @@ int local_eqn=0, local_unknown=0;
                          jacobian(local_eqn,local_unknown) += 
                           2.0*scaled_re*u_phi*psif[l2]*r*sin_theta*testf[l]*
                           W*hang_weight*hang_weight2;
+
+                         //Add the Coriolis term
+                         jacobian(local_eqn,local_unknown) +=
+                          2.0*scaled_re_inv_ro*sin_theta*psif(l2)*r2*
+                          sin_theta*testf[l]*W*hang_weight*hang_weight2;
                         }
                         
                         break;
@@ -616,6 +633,11 @@ int local_eqn=0, local_unknown=0;
                          jacobian(local_eqn,local_unknown) += 
                           scaled_re*2.0*r*psif(l2)*u_phi*cos_theta*testf(l)*
                           W*hang_weight*hang_weight2;
+                         
+                         //Add the Coriolis term
+                         jacobian(local_eqn,local_unknown) +=
+                          2.0*scaled_re_inv_ro*cos_theta*psif(l2)*r2
+                          *sin_theta*testf[l]*W*hang_weight*hang_weight2;
                         }
                         
                        break;
@@ -634,7 +656,11 @@ int local_eqn=0, local_unknown=0;
                         scaled_re*(r*interpolated_dudx(2,0) + u_phi)
                         *psif(l2)*testf(l)*r*sin_theta*W*
                         hang_weight*hang_weight2;
-                       
+                   
+                       //Coriolis term
+                       jacobian(local_eqn,local_unknown) -=
+                        2.0*scaled_re_inv_ro*sin_theta*psif(l2)*r2
+                        *sin_theta*testf[l]*W*hang_weight*hang_weight2;
                        
                       }
                       break;
@@ -648,6 +674,11 @@ int local_eqn=0, local_unknown=0;
                         scaled_re*(interpolated_dudx(2,1)*sin_theta
                                    + u_phi*cos_theta)*r*psif(l2)*testf(l)*
                         W*hang_weight*hang_weight2;
+
+                       //Coriolis term
+                       jacobian(local_eqn,local_unknown) -=
+                        2.0*scaled_re_inv_ro*cos_theta*psif(l2)*r2*sin_theta
+                        *testf[l]*W*hang_weight*hang_weight2;
                        
                       }
 

@@ -146,6 +146,8 @@ public virtual ElementWithZ2ErrorEstimator
    this->ReSt_pt = cast_father_element_pt->re_st_pt();
    //Set pointer to global Reynolds number x inverse Froude number
    this->ReInvFr_pt = cast_father_element_pt->re_invfr_pt();
+   //Set pointer to the global Reynolds number x inverse Rossby number
+   this->ReInvRo_pt = cast_father_element_pt->re_invro_pt();
    //Set pointer to global gravity Vector
    this->G_pt = cast_father_element_pt->g_pt();
    

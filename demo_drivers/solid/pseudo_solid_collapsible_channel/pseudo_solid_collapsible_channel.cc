@@ -67,14 +67,14 @@ public:
                                                   GeomObject* wall_pt,
                                                   TimeStepper* time_stepper_pt=
                                                   &Mesh::Default_TimeStepper) :
-  RefineableCollapsibleChannelMesh<ELEMENT>(nup, ncollapsible, ndown, ny,
-                                            lup, lcollapsible, ldown, ly,
-                                            wall_pt,
-                                            time_stepper_pt), 
   CollapsibleChannelMesh<ELEMENT>(nup, ncollapsible, ndown, ny,
                                   lup, lcollapsible, ldown, ly,
                                   wall_pt,
-                                  time_stepper_pt)
+                                  time_stepper_pt),
+  RefineableCollapsibleChannelMesh<ELEMENT>(nup, ncollapsible, ndown, ny,
+                                            lup, lcollapsible, ldown, ly,
+                                            wall_pt,
+                                            time_stepper_pt)
   {
    /// Make the current configuration the undeformed one by
    /// setting the nodal Lagrangian coordinates to their current
