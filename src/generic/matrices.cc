@@ -173,6 +173,49 @@ namespace JacobiEigenSolver
 /// Complete LU solve (overwrites RHS with solution). This is the
 /// generic version which should not need to be over-written.
 //============================================================================
+void DoubleMatrixBase::solve(DoubleVector &rhs)
+{
+#ifdef PARANOID
+ if(Linear_solver_pt==0)
+  {
+   throw OomphLibError("Linear_solver_pt not set in matrix",
+                       "DoubleMatrixBase::solve()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+ // Copy rhs vector into local storage so it doesn't get overwritten
+ // if the linear solver decides to initialise the solution vector, say,
+ // which it's quite entitled to do!
+ DoubleVector actual_rhs(rhs);
+
+ //Use the linear algebra interface to the linear solver
+ Linear_solver_pt->solve(this,actual_rhs,rhs);
+}
+
+//============================================================================
+/// Complete LU solve (Nothing gets overwritten!). This generic
+/// version should never need to be overwritten
+//============================================================================
+void DoubleMatrixBase::solve(const DoubleVector &rhs, 
+                             DoubleVector &soln)
+{
+#ifdef PARANOID
+ if(Linear_solver_pt==0)
+  {
+   throw OomphLibError("Linear_solver_pt not set in matrix",
+                       "DoubleMatrixBase::solve()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+ //Use the linear algebra interface to the linear solver
+ Linear_solver_pt->solve(this,rhs,soln);
+}
+
+//============================================================================
+/// Complete LU solve (overwrites RHS with solution). This is the
+/// generic version which should not need to be over-written.
+//============================================================================
 void DoubleMatrixBase::solve(Vector<double> &rhs)
 {
 #ifdef PARANOID
@@ -197,7 +240,7 @@ void DoubleMatrixBase::solve(Vector<double> &rhs)
 /// Complete LU solve (Nothing gets overwritten!). This generic
 /// version should never need to be overwritten
 //============================================================================
-void DoubleMatrixBase::solve(const Vector<double> &rhs, 
+void DoubleMatrixBase::solve(const Vector<double> &rhs,
                              Vector<double> &soln)
 {
 #ifdef PARANOID
@@ -211,6 +254,7 @@ void DoubleMatrixBase::solve(const Vector<double> &rhs,
  //Use the linear algebra interface to the linear solver
  Linear_solver_pt->solve(this,rhs,soln);
 }
+
 
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -279,6 +323,15 @@ void DenseDoubleMatrix::ludecompose()
  static_cast<DenseLU*>(Default_linear_solver_pt)->factorise(this);
 }
 
+
+//============================================================================
+///  Back substitute an LU decomposed matrix.
+//============================================================================
+void DenseDoubleMatrix::lubksub(DoubleVector &rhs)
+{
+ //Use the default (DenseLU) solver to perform the backsubstitution
+ static_cast<DenseLU*>(Default_linear_solver_pt)->backsub(rhs,rhs);
+}
 
 //============================================================================
 ///  Back substitute an LU decomposed matrix.
@@ -357,14 +410,17 @@ void DenseDoubleMatrix::eigenvalues_by_jacobi(Vector<double> & eigen_vals,
   }
 }
 
-
+/*
 //============================================================================
 ///  Find the residual of Ax=b, i.e. r=b-Ax
 //============================================================================
-void DenseDoubleMatrix::residual(const Vector<double> &x, 
-                                 const Vector<double> &rhs, 
-                                 Vector<double> &residual)
+void DenseDoubleMatrix::residual(const DoubleVector &x, 
+                                 const DoubleVector &rhs, 
+                                 DoubleVector &residual)
 {
+ std::cout << "broken" << std::endl;
+ assert(false);
+
 #ifdef PARANOID
  // Check Matrix is square
  if (N!=M)
@@ -414,36 +470,60 @@ void DenseDoubleMatrix::residual(const Vector<double> &x,
      residual[i] -= Matrixdata[M*i+j]*x[j];
     }
   }
- 
 }
-
+*/
 
 
 
 //============================================================================
 ///  Multiply the matrix by the vector x: soln=Ax
 //============================================================================
-void DenseDoubleMatrix::multiply(const Vector<double> &x, Vector<double> &soln)
+void DenseDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
 {
 #ifdef PARANOID
  // Check to see if x.size() = ncol().
- if (x.size()!=M)
+ if (x.nrow()!=M)
   {
    std::ostringstream error_message_stream;
    error_message_stream 
-    << "The x vector is not the right size. It is " << x.size() 
+    << "The x vector is not the right size. It is " << x.nrow() 
     << ", it should be " << M << std::endl;
-   
    throw OomphLibError(error_message_stream.str(),
                        "DenseDoubleMatrix::multiply()",
                        OOMPH_EXCEPTION_LOCATION);
   }
+ // check that x is not distributed
+ if (x.distributed())
+  {
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "The x vector cannot be distributed for DenseDoubleMatrix "
+    << "matrix-vector multiply" << std::endl;
+   throw OomphLibError(error_message_stream.str(),
+                       "DenseDoubleMatrix::multiply()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ // if soln is setup then it should have the same distribution as x
+ if (soln.distribution_setup())
+  {
+   if (!(*soln.distribution_pt() == *x.distribution_pt()))
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The soln vector is setup and therefore must have the same "
+      << "distribution as the vector x";
+     throw OomphLibError(error_message_stream.str(),
+                         "DenseDoubleMatrix::multiply()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
 #endif
 
- if (soln.size()!=N)
+ // if soln is not setup then setup the distribution
+ if (!soln.distribution_setup())
   {
    // Resize and initialize the solution vector
-   soln.resize(N);
+   soln.rebuild(x.distribution_pt());
   }
 
  // Multiply the matrix A, by the vector x 
@@ -458,34 +538,56 @@ void DenseDoubleMatrix::multiply(const Vector<double> &x, Vector<double> &soln)
 }
 
 
-
-
 //=================================================================
 /// Multiply the transposed matrix by the vector x: soln=A^T x
 //=================================================================
-void DenseDoubleMatrix::multiply_transpose(const Vector<double> &x, 
-                                        Vector<double> &soln)
+void DenseDoubleMatrix::multiply_transpose(const DoubleVector &x, 
+                                        DoubleVector &soln)
 {
-
 #ifdef PARANOID
- // Check to see x.size() = nrow()
- if (x.size()!=N)
+ // Check to see if x.size() = ncol().
+ if (x.nrow()!=M)
   {
    std::ostringstream error_message_stream;
    error_message_stream 
-    << "The x vector is not the right size. It is " << x.size() 
-    << ", it should be " << N << std::endl;
-
+    << "The x vector is not the right size. It is " << x.nrow() 
+    << ", it should be " << M << std::endl;
    throw OomphLibError(error_message_stream.str(),
-                       "DenseDoubleMatrix::multiply_transpose()",
+                       "DenseDoubleMatrix::multiply()",
                        OOMPH_EXCEPTION_LOCATION);
+  }
+ // check that x is not distributed
+ if (x.distributed())
+  {
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "The x vector cannot be distributed for DenseDoubleMatrix "
+    << "matrix-vector multiply" << std::endl;
+   throw OomphLibError(error_message_stream.str(),
+                       "DenseDoubleMatrix::multiply()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ // if soln is setup then it should have the same distribution as x
+ if (soln.distribution_setup())
+  {
+   if (!(*soln.distribution_pt() == *x.distribution_pt()))
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The soln vector is setup and therefore must have the same "
+      << "distribution as the vector x";
+     throw OomphLibError(error_message_stream.str(),
+                         "DenseDoubleMatrix::multiply()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
   }
 #endif
  
- if (soln.size() != M)
+ // if soln is not setup then setup the distribution
+ if (!soln.distribution_setup())
   {
    // Resize and initialize the solution vector
-   soln.resize(M);
+   soln.rebuild(x.distribution_pt());
   }
 
  // Initialise the solution
@@ -493,7 +595,6 @@ void DenseDoubleMatrix::multiply_transpose(const Vector<double> &x,
   {  
    soln[i] = 0.0;
   }
-
 
  // Matrix vector product
  for (unsigned long i=0;i<N;i++)
@@ -559,7 +660,6 @@ void DenseDoubleMatrix::matrix_reduction(const double &alpha,
 void DenseDoubleMatrix::multiply(const DenseDoubleMatrix &matrix_in,
                                  DenseDoubleMatrix& result)
 {
-
 #ifdef PARANOID
  // check matrix dimensions are compatable 
  if ( this->ncol() != matrix_in.nrow()  )
@@ -597,75 +697,13 @@ void DenseDoubleMatrix::multiply(const DenseDoubleMatrix &matrix_in,
       }
     }
   }
- 
 }
 
 
 
-
-
-
-//============================================================================
-///  Find the residual of Ax=b, ie r=b-Ax-b, for the
-/// "solution" x and returns is maximum.
-//============================================================================
-double DenseDoubleMatrix::residual(const Vector<double> &x,
-                                   const Vector<double> &rhs)
-{
-#ifdef PARANOID
- // Check Matrix is square
- if (N!=M)
-  {
-   throw OomphLibError(
-    "This matrix is not square, the matrix MUST be square!",
-    "DenseDoubleMatrix::residual()",
-    OOMPH_EXCEPTION_LOCATION);
-  }
- // Check that size of rhs = nrow() 
- if (rhs.size()!=N)
-  {
-   std::ostringstream error_message_stream;
-   error_message_stream 
-    << "The rhs vector is not the right size. It is " << rhs.size() 
-    << ", it should be " << N << std::endl;
-   
-   throw OomphLibError(error_message_stream.str(),
-                       "DenseDoubleMatrix::residual()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
- // Check that the size of x is correct
- if (x.size()!=N)
-  {
-   std::ostringstream error_message_stream;
-   error_message_stream 
-    << "The x vector is not the right size. It is " << x.size() 
-    << ", it should be " << N << std::endl;
-   
-   throw OomphLibError(error_message_stream.str(),
-                       "DenseDoubleMatrix::residual()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
- 
- Vector<double> residual(N,0.0);
- double max_res=0.0;
- // Multiply the matrix by the vector x in residual vector
- for (unsigned long i=0;i<N;i++)
-  {
-   residual[i] = rhs[i];
-   for (unsigned long j=0;j<M;j++)
-    {
-     residual[i] -= Matrixdata[M*i+j]*x[j];
-    }
-   // Find the maximum
-   max_res = std::max(residual[i],max_res);
-  }
- return max_res;
-}
-
-///////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 
 //=======================================================================
@@ -711,174 +749,62 @@ void CCDoubleMatrix::ludecompose()
 //===================================================================
 /// Do the backsubstitution
 //===================================================================
-void CCDoubleMatrix::lubksub(Vector<double> &rhs)
+void CCDoubleMatrix::lubksub(DoubleVector &rhs)
 {
  static_cast<SuperLU*>(Default_linear_solver_pt)->backsub(rhs,rhs);
 }
 
 //===================================================================
-/// Work out residual vector r = b-Ax for candidate solution x
-//===================================================================
-void CCDoubleMatrix::residual(const Vector<double> &x,
-                              const Vector<double>& rhs,
-                              Vector<double>& residual)
-{
-
-#ifdef PARANOID
- // Check Matrix is square
- if (N!=M)
-  {
-   throw OomphLibError(
-    "This matrix is not square, the matrix MUST be square!",
-    "CCDoubleMatrix::residual()",
-    OOMPH_EXCEPTION_LOCATION);
-  }
- // Check that size of rhs = nrow() 
- if (rhs.size()!=N)
-  {
-   std::ostringstream error_message_stream;
-   error_message_stream 
-    << "The rhs vector is not the right size. It is " << rhs.size() 
-    << ", it should be " << N << std::endl;
-
-   throw OomphLibError(error_message_stream.str(),
-                       "CCDoubleMatrix::residual()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
- // Check that the size of x is correct
- if (x.size()!=N)
-  {
-   std::ostringstream error_message_stream;
-   error_message_stream 
-    << "The x vector is not the right size. It is " << x.size() 
-    << ", it should be " << N << std::endl;
-   
-   throw OomphLibError(error_message_stream.str(),
-                       "CCDoubleMatrix::residual()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
-
- unsigned long r_n = residual.size();
- if (r_n!=N)
-  {
-   residual.resize(N);
-  }
-
- // Need to do this in loop over rows
- for (unsigned i=0;i<N;i++)
-  {
-   residual[i] = rhs[i];
-  }
- // Now loop over columns
- for (unsigned long j=0;j<N;j++)
-  {  
-   for (long k=Column_start[j];k<Column_start[j+1];k++)
-    {
-     unsigned long i=Row_index[k];
-     double a_ij=Value[k];
-     residual[i]-=a_ij*x[j];
-    }
-  }
-}
-
-
-//===================================================================
-/// Work out residual vector r = b-Ax for candidate solution x
-/// and return max. entry in residual vector.
-//===================================================================
-double CCDoubleMatrix::residual(const Vector<double> &x,
-                                const Vector<double> &rhs)
-{
-
-#ifdef PARANOID
- // Check Matrix is square
- if (N!=M)
-  {
-   throw OomphLibError(
-    "This matrix is not square, the matrix MUST be square!",
-    "CCDoubleMatrix::residual()",
-    OOMPH_EXCEPTION_LOCATION);
-  }
- // Check that size of rhs = nrow() 
- if (rhs.size()!=N)
-  {
-   std::ostringstream error_message_stream;
-   error_message_stream 
-    << "The rhs vector is not the right size. It is " << rhs.size() 
-    << ", it should be " << N << std::endl;
-
-   throw OomphLibError(error_message_stream.str(),
-                       "CCDoubleMatrix::residual()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
- // Check that the size of x is correct
- if (x.size()!=N)
-  {
-   std::ostringstream error_message_stream;
-   error_message_stream 
-    << "The x vector is not the right size. It is " << x.size() 
-    << ", it should be " << N << std::endl;
-   
-   throw OomphLibError(error_message_stream.str(),
-                       "CCDoubleMatrix::residual()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
-
- // Check error:
- double err_max=0.0;
- Vector<double> error(N);
- for (unsigned long i=0;i<N;i++)
-  {  
-   error[i] = rhs[i];
-  }  
- for (unsigned long j=0;j<N;j++)
-  {  
-   for (long k=Column_start[j];k<Column_start[j+1];k++)
-    {
-     unsigned long i=Row_index[k];
-     double a_ij=Value[k];
-     error[i]-=a_ij*x[j];
-    }
-  }
- for (unsigned long i=0;i<N;i++)
-  {
-   if (std::abs(error[i])>err_max)
-    {
-     err_max=std::abs(error[i]);
-    }
-  }
- return err_max;
-
-}
-
-//===================================================================
 ///  Multiply the matrix by the vector x
 //===================================================================
-void CCDoubleMatrix::multiply(const Vector<double> &x, Vector<double> &soln)
+void CCDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
 {
-
 #ifdef PARANOID
- // Check to see if x.size() = ncol()
- if (x.size()!=M)
+ // Check to see if x.size() = ncol().
+ if (x.nrow()!=M)
   {
    std::ostringstream error_message_stream;
    error_message_stream 
-    << "The x vector is not the right size. It is " << x.size() 
+    << "The x vector is not the right size. It is " << x.nrow() 
     << ", it should be " << M << std::endl;
-   
    throw OomphLibError(error_message_stream.str(),
                        "CCDoubleMatrix::multiply()",
                        OOMPH_EXCEPTION_LOCATION);
   }
+ // check that x is not distributed
+ if (x.distributed())
+  {
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "The x vector cannot be distributed for CCDoubleMatrix "
+    << "matrix-vector multiply" << std::endl;
+   throw OomphLibError(error_message_stream.str(),
+                       "CCDoubleMatrix::multiply()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ // if soln is setup then it should have the same distribution as x
+ if (soln.distribution_setup())
+  {
+   if (!(*soln.distribution_pt() == *x.distribution_pt()))
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The soln vector is setup and therefore must have the same "
+      << "distribution as the vector x";
+     throw OomphLibError(error_message_stream.str(),
+                         "CCDoubleMatrix::multiply()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
 #endif
 
- if (soln.size() != N)
+ // if soln is not setup then setup the distribution
+ if (!soln.distribution_setup())
   {
    // Resize and initialize the solution vector
-   soln.resize(N);
+   soln.rebuild(x.distribution_pt());
   }
+
  for (unsigned i=0;i<N;i++)
   {
    soln[i] = 0.0;
@@ -901,29 +827,53 @@ void CCDoubleMatrix::multiply(const Vector<double> &x, Vector<double> &soln)
 //=================================================================
 /// Multiply the  transposed matrix by the vector x: soln=A^T x
 //=================================================================
-void CCDoubleMatrix::multiply_transpose(const Vector<double> &x, 
-                                        Vector<double> &soln)
+void CCDoubleMatrix::multiply_transpose(const DoubleVector &x, 
+                                        DoubleVector &soln)
 {
-
 #ifdef PARANOID
- // Check to see x.size() = nrow()
- if (x.size()!=N)
+ // Check to see if x.size() = ncol().
+ if (x.nrow()!=M)
   {
    std::ostringstream error_message_stream;
    error_message_stream 
-    << "The x vector is not the right size. It is " << x.size() 
-    << ", it should be " << N << std::endl;
-
+    << "The x vector is not the right size. It is " << x.nrow() 
+    << ", it should be " << M << std::endl;
    throw OomphLibError(error_message_stream.str(),
-                       "CCDoubleMatrix::multiply_transpose()",
+                       "CCDoubleMatrix::multiply()",
                        OOMPH_EXCEPTION_LOCATION);
+  }
+ // check that x is not distributed
+ if (x.distributed())
+  {
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "The x vector cannot be distributed for CCDoubleMatrix "
+    << "matrix-vector multiply" << std::endl;
+   throw OomphLibError(error_message_stream.str(),
+                       "CCDoubleMatrix::multiply()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ // if soln is setup then it should have the same distribution as x
+ if (soln.distribution_setup())
+  {
+   if (!(*soln.distribution_pt() == *x.distribution_pt()))
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The soln vector is setup and therefore must have the same "
+      << "distribution as the vector x";
+     throw OomphLibError(error_message_stream.str(),
+                         "CCDoubleMatrix::multiply()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
   }
 #endif
  
- if (soln.size() != M)
+ // if soln is not setup then setup the distribution
+ if (!soln.distribution_setup())
   {
    // Resize and initialize the solution vector
-   soln.resize(M);
+   soln.rebuild(x.distribution_pt());
   }
 
  // Initialise the solution
@@ -943,7 +893,6 @@ void CCDoubleMatrix::multiply_transpose(const Vector<double> &x,
      soln[j]+=a_ij*x[i];
     }
   }
-
 }
 
 
@@ -1285,7 +1234,6 @@ void CCDoubleMatrix::multiply(const CCDoubleMatrix& matrix_in,
   }
  
  result.build_without_copy(Value, Row_index, Column_start, Nnz, N, M);
- 
 }
 
 
@@ -1353,248 +1301,484 @@ void CCDoubleMatrix::matrix_reduction(const double &alpha,
  // Build the matrix from the compressed format
  dynamic_cast<CCDoubleMatrix&>(reduced_matrix).
   build(B_value,B_column_index,B_row_start,nrow(),ncol());
- 
-
-
  }
 
 
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
-//====================================================================
+//=============================================================================
 /// Default constructor
-//===================================================================
-CRDoubleMatrix::CRDoubleMatrix() : CRMatrix<double>()
+//=============================================================================
+CRDoubleMatrix::CRDoubleMatrix()
   {
-    Linear_solver_pt = Default_linear_solver_pt  = new SuperLU;
-    Matrix_matrix_multiply_method = 2;
+    Linear_solver_pt = Default_linear_solver_pt  = 0;
+    Built = false;
+
+    // set the serial matrix-matrix multiply method
+#ifdef HAVE_TRILINOS
+    Serial_matrix_matrix_multiply_method = 2;
+#else
+    Serial_matrix_matrix_multiply_method = 2;
+#endif
   }
 
- /// \short Constructor: Pass vector of values, vector of column indices,
- /// vector of row starts and number of columns (can be suppressed
- /// for square matrices)
-CRDoubleMatrix::CRDoubleMatrix(const Vector<double>& value, 
+//=============================================================================
+/// Constructor: just stores the distribution but does not build the
+/// matrix
+//=============================================================================
+CRDoubleMatrix::CRDoubleMatrix(const LinearAlgebraDistribution* 
+                               distribution_pt)
+  {
+   Distribution_pt->rebuild(distribution_pt);
+   Built = false;    
+
+// set the serial matrix-matrix multiply method
+#ifdef HAVE_TRILINOS
+    Serial_matrix_matrix_multiply_method = 2;
+#else
+    Serial_matrix_matrix_multiply_method = 2;
+#endif
+
+  }
+
+//=============================================================================
+/// \short Constructor: Takes the distribution and the number of columns, as 
+/// well as the vector of values, vector of column indices,vector of row 
+///starts.
+//=============================================================================
+CRDoubleMatrix::CRDoubleMatrix(const LinearAlgebraDistribution* dist_pt,
+                               const unsigned& ncol,
+                               const Vector<double>& value, 
                                const Vector<int>& column_index,
-                               const Vector<int>& row_start,
-                               const unsigned long &n,
-                               const unsigned long& m) : 
- CRMatrix<double>(value,column_index,row_start,n,m)
+                               const Vector<int>& row_start) 
 {
- Linear_solver_pt = Default_linear_solver_pt = new SuperLU;
- Matrix_matrix_multiply_method = 2;
+ // build the compressed row matrix
+ CR_matrix.build(value,column_index,row_start,dist_pt->nrow_local(),ncol);
+
+ // store the Distribution
+ Distribution_pt->rebuild(dist_pt);
+
+ // set the linear solver
+#ifdef OOMPH_HAS_MPI
+ if (Distribution_pt->communicator_pt()->nproc() > 1 && 
+     Distribution_pt->distributed() == true)
+  {
+   if (Default_linear_solver_pt != 0)
+    {
+     delete Default_linear_solver_pt;
+    }
+   Default_linear_solver_pt = new SuperLU_dist;   
+  }
+ else
+  {
+   if (Default_linear_solver_pt != 0)
+    {
+     delete Default_linear_solver_pt;
+    }
+   Default_linear_solver_pt = new SuperLU;
+  }
+#else
+   if (Default_linear_solver_pt != 0)
+    {
+     delete Default_linear_solver_pt;
+    }
+   Default_linear_solver_pt = new SuperLU;
+#endif
+
+ // set the serial matrix-matrix multiply method
+#ifdef HAVE_TRILINOS
+ Serial_matrix_matrix_multiply_method = 2;
+#else
+ Serial_matrix_matrix_multiply_method = 2;
+#endif
+
+ // matrix has been built
+ Built = true;
 }
 
-/// Destructor: delete the default linear solver 
-CRDoubleMatrix::~CRDoubleMatrix() {delete Default_linear_solver_pt;}
+//=============================================================================
+/// rebuild the matrix - assembles an empty matrix with a defined distribution
+//=============================================================================
+void CRDoubleMatrix::rebuild(const LinearAlgebraDistribution* distribution_pt)
+{
+ Distribution_pt->rebuild(distribution_pt);
+ CR_matrix.clean_up_memory();
+ Built = false;
+ 
+ // set the linear solver
+#ifdef OOMPH_HAS_MPI
+ if (Distribution_pt->communicator_pt()->nproc() > 1 && 
+     Distribution_pt->distributed() == true)
+  {
+   if (Default_linear_solver_pt != 0)
+    {
+     delete Default_linear_solver_pt;
+    }
+   Default_linear_solver_pt = new SuperLU_dist;   
+  }
+ else
+  {
+   if (Default_linear_solver_pt != 0)
+    {
+     delete Default_linear_solver_pt;
+    }
+   Default_linear_solver_pt = new SuperLU;
+  }
+#else
+ if (Default_linear_solver_pt != 0)
+  {
+   delete Default_linear_solver_pt;
+  }
+ Default_linear_solver_pt = new SuperLU;
+#endif
+}
 
-//===================================================================
-/// Do LU decomposition and return sign of determinant
-//===================================================================
+
+//=============================================================================
+/// clean method
+//=============================================================================
+void CRDoubleMatrix::clear() 
+{
+ Distribution_pt->clear();
+ CR_matrix.clean_up_memory();
+ Built = false;
+ delete Default_linear_solver_pt;
+ Default_linear_solver_pt = 0;
+}
+
+//=============================================================================
+/// \short build method: Takes the distribution and the number of columns, as 
+/// well as the vector of values, vector of column indices,vector of row 
+///starts.
+//=============================================================================
+void CRDoubleMatrix::rebuild(const LinearAlgebraDistribution* distribution_pt,
+                             const unsigned& ncol,
+                             const Vector<double>& value, 
+                             const Vector<int>& column_index,
+                             const Vector<int>& row_start)
+{
+ // store the Distribution
+ Distribution_pt->rebuild(distribution_pt);
+
+ // set the linear solver
+#ifdef OOMPH_HAS_MPI
+ if (Distribution_pt->communicator_pt()->nproc() > 1 && 
+     Distribution_pt->distributed() == true)
+  {
+   if (Default_linear_solver_pt != 0)
+    {
+     delete Default_linear_solver_pt;
+    }
+   Default_linear_solver_pt = new SuperLU_dist;   
+  }
+ else
+  {
+   if (Default_linear_solver_pt != 0)
+    {
+     delete Default_linear_solver_pt;
+    }
+   Default_linear_solver_pt = new SuperLU;
+  }
+#else
+   if (Default_linear_solver_pt != 0)
+    {
+     delete Default_linear_solver_pt;
+    }
+   Default_linear_solver_pt = new SuperLU;
+#endif
+
+ // now build the matrix
+ this->rebuild_matrix(ncol,value,column_index,row_start);
+}
+
+//=============================================================================
+/// \short method to rebuild the matrix, but not the distribution
+//=============================================================================
+void CRDoubleMatrix::rebuild_matrix(const unsigned& ncol,
+                                    const Vector<double>& value,
+                                    const Vector<int>& column_index,
+                                    const Vector<int>& row_start)
+{
+ // call the underlying build method
+ CR_matrix.clean_up_memory();
+ CR_matrix.build(value,column_index,row_start,
+                 Distribution_pt->nrow_local(),ncol);
+
+ // matrix has been build
+ Built = true;
+}
+
+//=============================================================================
+/// \short method to rebuild the matrix, but not the distribution
+//=============================================================================
+void CRDoubleMatrix::rebuild_matrix_without_copy(const unsigned& ncol,
+                                                 const unsigned& nnz,
+                                                 double* value,
+                                                 int* column_index,
+                                                 int* row_start)
+{
+ // call the underlying build method
+ CR_matrix.clean_up_memory();
+ CR_matrix.build_without_copy(value,column_index,row_start,nnz,
+                              Distribution_pt->nrow_local(),ncol);
+
+ // matrix has been build
+ Built = true;
+}
+
+//=============================================================================
+/// Do LU decomposition
+//=============================================================================
 void CRDoubleMatrix::ludecompose()
 {
- static_cast<SuperLU*>(Default_linear_solver_pt)->factorise(this);
+#ifdef PARANOID
+ // check that the this matrix is built
+ if (!Built)
+  {
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "This matrix has not been built.";
+   throw OomphLibError(error_message_stream.str(),
+                       "CRDoubleMatrix::ludecompose()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+ // factorise using superlu or superlu dist if we oomph has mpi
+#ifdef OOMPH_HAS_MPI
+ if (static_cast<SuperLU* >(Default_linear_solver_pt))
+  {
+#endif
+   static_cast<SuperLU*>(Default_linear_solver_pt)->factorise(this);
+#ifdef OOMPH_HAS_MPI
+  }
+ else
+  {
+   static_cast<SuperLU_dist*>(Default_linear_solver_pt)->factorise(this);
+  }  
+#endif
 }
 
-//===================================================================
+//=============================================================================
 /// Do back-substitution
-//===================================================================
-void CRDoubleMatrix::lubksub(Vector<double> &rhs)
+//=============================================================================
+void CRDoubleMatrix::lubksub(DoubleVector &rhs)
 {
- static_cast<SuperLU*>(Default_linear_solver_pt)->backsub(rhs,rhs);
-}
-
-//=================================================================
-///  Find the residulal to x of Ax=b, ie r=b-Ax
-//=================================================================
-void CRDoubleMatrix::residual(const Vector<double> &x, 
-                              const Vector<double> &rhs, 
-                              Vector<double> &residual)
-{
-
 #ifdef PARANOID
- // Check that size of rhs = nrow() 
- if (rhs.size()!=N)
+ // check that the rhs vector is setup
+ if (!rhs.distribution_setup())
   {
    std::ostringstream error_message_stream;
    error_message_stream 
-    << "The rhs vector is not the right size. It is " << rhs.size() 
-    << ", it should be " << N << std::endl;
-   
+    << "The vector rhs has not been setup";
    throw OomphLibError(error_message_stream.str(),
-                       "CRDoubleMatrix::residual()",
+                       "CRDoubleMatrix::lubksub()",
                        OOMPH_EXCEPTION_LOCATION);
   }
- // Check that the size of x is correct
- if (x.size()!=M)
+ // check that the rhs vector has the same distribution as this matrix
+ if (!(*Distribution_pt == *rhs.distribution_pt()))
   {
    std::ostringstream error_message_stream;
    error_message_stream 
-    << "The x vector is not the right size. It is " << x.size() 
-    << ", it should be " << M << std::endl;
-   
+    << "The vector rhs must have the same distribution as the matrix";
    throw OomphLibError(error_message_stream.str(),
-                       "CRDoubleMatrix::residual()",
+                       "CRDoubleMatrix::lubksup()",
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
-
- if (residual.size()!=N)
+ if (static_cast<SuperLU* >(Default_linear_solver_pt))
   {
-   residual.resize(N);
+   DoubleVector rhs_copy(rhs);
+   static_cast<SuperLU*>(Default_linear_solver_pt)->backsub(rhs_copy,rhs);
   }
-
- for (unsigned long i=0;i<N;i++)
-  {  
-   residual[i]=rhs[i];
-   for (long k=Row_start[i];k<Row_start[i+1];k++)
-    {
-     unsigned long j=Column_index[k];
-     double a_ij=Value[k];
-     residual[i]-=a_ij*x[j];
-    }
-  }
-
+ else
+  {
+   DoubleVector rhs_copy(rhs);
+   static_cast<SuperLU*>(Default_linear_solver_pt)->backsub(rhs_copy,rhs);
+  }  
 }
 
-//=================================================================
-///  Work out residual vector r = b-Ax for candidate solution x
-/// and return max. entry in residual vector.
-//=================================================================
-double CRDoubleMatrix::residual(const Vector<double>& x,
-                                const Vector<double>& rhs)
-{
- 
-#ifdef PARANIOD
- // Check to see if sizes of x and rhs are correct
- if (rhs.size()!=N)
-  {
-   std::ostringstream error_message_stream;
-   error_message_stream 
-    << "The rhs vector is not the right size. It is " << rhs.size() 
-    << ", it should be " << N << std::endl;
-   
-   throw OomphLibError(error_message_stream.str(),
-                       "CRDoubleMatrix::residual()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
- // Check that the size of x is correct
- if (x.size()!=M)
-  {
-   std::ostringstream error_message_stream;
-   error_message_stream 
-    << "The x vector is not the right size. It is " << x.size() 
-    << ", it should be " << M << std::endl;
-   
-   throw OomphLibError(error_message_stream.str(),
-                       "CRDoubleMatrix::residual()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
-
- Vector<double> residual(N,0.0);
- double max_res=0.0;
- for (unsigned long i=0;i<N;i++)
-  {  
-   residual[i]=rhs[i];
-   for (long k=Row_start[i];k<Row_start[i+1];k++)
-    {
-     unsigned long j=Column_index[k];
-     double a_ij=Value[k];
-     residual[i]-=a_ij*x[j];
-    }
-   max_res = std::max(max_res,std::abs(residual[i]));
-  }
-
- return max_res;
-}
-
-
-//=================================================================
+//=============================================================================
 ///  Multiply the matrix by the vector x
-//=================================================================
-void CRDoubleMatrix::multiply(const Vector<double> &x, Vector<double> &soln)
+//=============================================================================
+void CRDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
 {
 #ifdef PARANOID
- // Check to see x.size() = ncol()
- if (x.size()!=M)
+ // check that this matrix is built
+ if (!Built)
   {
    std::ostringstream error_message_stream;
    error_message_stream 
-    << "The x vector is not the right size. It is " << x.size() 
-    << ", it should be " << M << std::endl;
-   
+    << "This matrix has not been built";
    throw OomphLibError(error_message_stream.str(),
                        "CRDoubleMatrix::multiply()",
                        OOMPH_EXCEPTION_LOCATION);
   }
-#endif
-
- if (soln.size() != N)
+ // check that the distribution of x is setup
+ if (!x.distribution_setup())
   {
-   // Resize and initialize the solution vector
-   soln.resize(N);
+ std::ostringstream error_message_stream;
+   error_message_stream 
+    << "The distribution of the vector x must be setup";
+   throw OomphLibError(error_message_stream.str(),
+                       "CRDoubleMatrix::multiply()",
+                       OOMPH_EXCEPTION_LOCATION);
   }
- for (unsigned long i=0;i<N;i++)
-  {  
-   soln[i] = 0.0;
-   for (long k=Row_start[i];k<Row_start[i+1];k++)
+ // Check to see if x.size() = ncol().
+ if (this->ncol() != x.distribution_pt()->nrow())
+  {
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "The number of rows in the x vector and the number of columns in the "
+    << "matrix must be the same";
+   throw OomphLibError(error_message_stream.str(),
+                       "CRDoubleMatrix::multiply()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ // if soln is setup then it should have the same distribution as x
+ if (soln.distribution_setup())
+  {
+   if (!(*soln.distribution_pt() == *x.distribution_pt()))
     {
-     unsigned long j=Column_index[k];
-     double a_ij=Value[k];
-     soln[i]+=a_ij*x[j];
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The soln vector is setup and therefore must have the same "
+      << "distribution as the vector x";
+     throw OomphLibError(error_message_stream.str(),
+                         "CRDoubleMatrix::multiply()",
+                         OOMPH_EXCEPTION_LOCATION);
     }
   }
+#endif
+
+ // if soln is not setup then setup the distribution
+ if (!soln.distribution_setup())
+  {
+   // Resize and initialize the solution vector
+   soln.rebuild(this->distribution_pt());
+  }
+
+#ifdef HAVE_TRILINOS
+ // This will only work if we have trilinos on board
+ TrilinosHelpers::multiply(*this,x,soln);
+#else
+ if (this->distributed() && 
+     this->distribution_pt()->communicator_pt()->nproc() > 1)
+  {
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "Matrix-vector product on multiple processors with distributed "
+    << "CRDoubleMatrix requires Trilinos.";
+   throw OomphLibError(error_message_stream.str(),
+                       "CRDoubleMatrix::multiply()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ else
+  {   
+   unsigned n = this->nrow();
+   const int* row_start = CR_matrix.row_start();
+   const int* column_index = CR_matrix.column_index();
+   const double* value = CR_matrix.value();
+   for (unsigned long i=0;i<n;i++)
+    {  
+     soln[i] = 0.0;
+     for (long k=row_start[i];k<row_start[i+1];k++)
+      {
+       unsigned long j=column_index[k];
+       double a_ij=value[k];
+       soln[i]+=a_ij*x[j];
+      }
+    }
+  }
+#endif
 }
-
-
 
 
 
 //=================================================================
 /// Multiply the  transposed matrix by the vector x: soln=A^T x
 //=================================================================
-void CRDoubleMatrix::multiply_transpose(const Vector<double> &x, 
-                                        Vector<double> &soln)
+void CRDoubleMatrix::multiply_transpose(const DoubleVector &x, 
+                                        DoubleVector &soln)
 {
-
 #ifdef PARANOID
- // Check to see x.size() = nrow()
- if (x.size()!=N)
+ // check that this matrix is built
+ if (!Built)
   {
    std::ostringstream error_message_stream;
    error_message_stream 
-    << "The x vector is not the right size. It is " << x.size() 
-    << ", it should be " << N << std::endl;
-
+    << "This matrix has not been built";
    throw OomphLibError(error_message_stream.str(),
                        "CRDoubleMatrix::multiply_transpose()",
                        OOMPH_EXCEPTION_LOCATION);
   }
+ // Check to see if x.size() = ncol().
+ if (!(*Distribution_pt == *x.distribution_pt()))
+  {
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "The x vector and this matrix must have the same distribution.";
+   throw OomphLibError(error_message_stream.str(),
+                       "CRDoubleMatrix::multiply_transpose()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ // if soln is setup then it should have the same distribution as x
+ if (soln.distribution_setup())
+  {
+   if (!(*soln.distribution_pt() == *x.distribution_pt()))
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The soln vector is setup and therefore must have the same "
+      << "distribution as the vector x";
+     throw OomphLibError(error_message_stream.str(),
+                         "CRDoubleMatrix::multiply_transpose()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
 #endif
- 
- if (soln.size() != M)
+
+ // if soln is not setup then setup the distribution
+ if (!soln.distribution_setup())
   {
    // Resize and initialize the solution vector
-   soln.resize(M);
+   soln.rebuild(x.distribution_pt());
   }
 
- // Initialise the solution
- for (unsigned long i=0;i<M;i++)
-  {  
-   soln[i] = 0.0;
+ if (this->distributed() && 
+     this->distribution_pt()->communicator_pt()->nproc() > 1)
+  {
+#ifdef HAVE_TRILINOS
+   // This will only work if we have trilinos on board
+   TrilinosHelpers::multiply(*this,x,soln);
+#else
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "Matrix-vector product on multiple processors with distributed "
+      << "CRDoubleMatrix requires Trilinos.";
+     throw OomphLibError(error_message_stream.str(),
+                         "CRDoubleMatrix::multiply_transpose()",
+                         OOMPH_EXCEPTION_LOCATION);
+#endif
   }
-
- // Matrix vector product
- for (unsigned long i=0;i<N;i++)
-  {  
-   for (long k=Row_start[i];k<Row_start[i+1];k++)
-    {
-     unsigned long j=Column_index[k];
-     double a_ij=Value[k];
-     soln[j]+=a_ij*x[i];
+ else
+  {
+   unsigned n = this->nrow();
+   const int* row_start = CR_matrix.row_start();
+   const int* column_index = CR_matrix.column_index();
+   const double* value = CR_matrix.value();
+   // Matrix vector product
+   for (unsigned long i=0;i<n;i++)
+    {  
+     for (long k=row_start[i];k<row_start[i+1];k++)
+      {
+       unsigned long j=column_index[k];
+       double a_ij=value[k];
+       soln[j]+=a_ij*x[i];
+      }
     }
   }
 }
@@ -1614,331 +1798,376 @@ void CRDoubleMatrix::multiply_transpose(const Vector<double> &x,
 /// Method 3: Grows storage for values and column indices of result 'on the
 ///           fly' using a vector of vectors. Not particularly impressive
 ///           on the platforms we tried...
+/// Method 4: Trilinos Epetra Matrix Matrix multiply.\n
+/// Method 5: Trilinox Epetra Matrix Matrix Mulitply (ml based) \m
 //=============================================================================
-void CRDoubleMatrix::multiply(const CRDoubleMatrix& matrix_in,
+void CRDoubleMatrix::multiply(CRDoubleMatrix& matrix_in,
                               CRDoubleMatrix& result)
 {
 #ifdef PARANOID
- // check matrix dimensions are compatable
- if ( this->ncol() != matrix_in.nrow()  )
- {
-  std::ostringstream error_message;
-  error_message 
-   << "Matrix dimensions incompatable for matrix-matrix multiplication"
-   << "ncol() for first matrix:" << this->ncol()
-   << "nrow() for second matrix: " << matrix_in.nrow();
-  throw OomphLibError(error_message.str(),
-                      "CRDoubleMatrix::multiply()",
-                      OOMPH_EXCEPTION_LOCATION);
- }
-#endif 
-
- // NB N is number of rows!
- unsigned long N = this->nrow();
- unsigned long M = matrix_in.ncol();
- unsigned long Nnz = 0;
- 
- // pointers to arrays which store result
- int* Row_start;
- double* Value;
- int* Column_index;
-
- // get pointers to matrix_in
- const int* matrix_in_row_start = matrix_in.row_start();
- const int* matrix_in_column_index = matrix_in.column_index();
- const double* matrix_in_value = matrix_in.value();
-
- // get pointers to this matrix
- const double* this_value = this->value();
- const int* this_row_start = this->row_start();
- const int* this_column_index = this->column_index();
-
- // set method
- unsigned method = Matrix_matrix_multiply_method;
-
- //clock_t clock1 = clock();
-
- // METHOD 1
- // --------
- if (method==1)
- {
-  // allocate storage for row starts
-  Row_start = new int[N+1];
-  Row_start[0]=0;
-
-  // a set to store number of non-zero columns in each row of result
-  std::set<unsigned> columns;
-
-  // run through rows of this matrix and matrix_in to find number of
-  // non-zero entries in each row of result
-  for (unsigned long this_row = 0; this_row<N; this_row++)
+ // check that this matrix is built
+ if (!Built)
   {
-   // run through non-zeros in this_row of this matrix
-   for (int this_ptr = this_row_start[this_row];
-        this_ptr < this_row_start[this_row+1];
-        this_ptr++)
-   {
-    // find column index for non-zero
-    int matrix_in_row = this_column_index[this_ptr];
-
-    // run through corresponding row in matrix_in
-    for (int matrix_in_ptr = matrix_in_row_start[matrix_in_row];
-         matrix_in_ptr < matrix_in_row_start[matrix_in_row+1];
-         matrix_in_ptr++)
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "This matrix has not been built";
+   throw OomphLibError(error_message_stream.str(),
+                       "CRDoubleMatrix::multiply()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ // check that this matrix is built
+ if (!matrix_in.built())
+  {
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "This matrix matrix_in has not been built";
+   throw OomphLibError(error_message_stream.str(),
+                       "CRDoubleMatrix::multiply()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ // if soln is setup then it should have the same distribution as x
+ if (result.distribution_setup())
+  {
+   if (!(*result.distribution_pt() == *Distribution_pt))
     {
-     // find column index for non-zero in matrix_in and store in columns
-     columns.insert(matrix_in_column_index[matrix_in_ptr]);
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The matrix result is setup and therefore must have the same "
+      << "distribution as the vector x";
+     throw OomphLibError(error_message_stream.str(),
+                         "CRDoubleMatrix::multiply()",
+                         OOMPH_EXCEPTION_LOCATION);
     }
-   }
-   // update Row_start
-   Row_start[this_row+1] = Row_start[this_row] + columns.size();
-
-   // wipe values in columns
-   columns.clear();
   }
+#endif
 
-  // set Nnz
-  Nnz = Row_start[N];
-
-  // allocate arrays for result
-  Value = new double[Nnz];
-  Column_index = new int[Nnz];
-
-  // set all values of Column_index to -1
-  for (unsigned long i=0; i<Nnz; i++)
-   {
-    Column_index[i] = -1;
-   }
-
-  // Calculate values for result - first run through rows of this matrix
-  for (unsigned long this_row = 0; this_row<N; this_row++)
+ // if the result has not been setup, then store the distribution
+ if (!result.distribution_setup())
   {
-   // run through non-zeros in this_row
-   for (int this_ptr = this_row_start[this_row];
-        this_ptr < this_row_start[this_row+1];
-        this_ptr++)
-   {
-    // find value of non-zero
-    double this_val = this_value[this_ptr];
-
-    // find column associated with non-zero
-    int matrix_in_row = this_column_index[this_ptr];
-
-    // run through corresponding row in matrix_in
-    for (int matrix_in_ptr = matrix_in_row_start[matrix_in_row];
-         matrix_in_ptr < matrix_in_row_start[matrix_in_row+1];
-         matrix_in_ptr++)
-    {
-     // find column index for non-zero in matrix_in
-     int col = matrix_in_column_index[matrix_in_ptr];
-
-     // find position in result to insert value
-     for(int ptr = Row_start[this_row];
-         ptr <= Row_start[this_row+1];
-         ptr++)
-     {
-      if (ptr == Row_start[this_row+1])
-      {
-      	// error - have passed end of row without finding
-       // correct column
-       std::ostringstream error_message;
-       error_message << "Error inserting value in result";
-       
-       throw OomphLibError(error_message.str(),
-                           "CRDoubleMatrix::multiply()",
-                           OOMPH_EXCEPTION_LOCATION);
-      }
-      else if (	Column_index[ptr] == -1 )
-       {
-      	// first entry for this column index
-        Column_index[ptr] = col;
-        Value[ptr] = this_val * matrix_in_value[matrix_in_ptr];
-        break;
-       }
-      else if ( Column_index[ptr] == col )
-       {
-      	// column index already exists - add value
-        Value[ptr] += this_val * matrix_in_value[matrix_in_ptr];
-        break;
-       }
-     }
-    }
-   }
+   result.rebuild(Distribution_pt);
   }
- }
- 
- // METHOD 2
- // --------
- else if (method==2)
- {
-  // generate array of maps to store values for result
-  std::map<int,double>* result_maps = new std::map<int,double>[N];
-  
-  // run through rows of this matrix
-  for (unsigned long this_row = 0; this_row<N; this_row++)
-  {
-   // run through non-zeros in this_row
-   for (int this_ptr = this_row_start[this_row];
-        this_ptr < this_row_start[this_row+1];
-        this_ptr++)
-   {
-    // find value of non-zero
-    double this_val = this_value[this_ptr];
-
-    // find column index associated with non-zero
-    int matrix_in_row = this_column_index[this_ptr];
-
-    // run through corresponding row in matrix_in
-    for (int matrix_in_ptr = matrix_in_row_start[matrix_in_row];
-         matrix_in_ptr < matrix_in_row_start[matrix_in_row+1];
-         matrix_in_ptr++)
-     {
-      // find column index for non-zero in matrix_in
-      int col = matrix_in_column_index[matrix_in_ptr];
-      
-      // insert value
-      result_maps[this_row][col] += this_val * matrix_in_value[matrix_in_ptr];
-     }
-   }
-  }
-  
-  // allocate Row_start
-  Row_start = new int[N+1];
-  
-  // copy across row starts
-  Row_start[0] = 0;
-  for (unsigned long row=0; row<N; row++)
-   {
-    int size = result_maps[row].size();
-    Row_start[row+1] = Row_start[row] + size;
-   }
-  
-  // set Nnz
-  Nnz = Row_start[N];
-  
-  // allocate other arrays
-  Value = new double[Nnz];
-  Column_index = new int[Nnz];
-  
-  // copy values and column indices
-  for (unsigned long row=0; row<N; row++)
-   {
-    unsigned ptr = Row_start[row];
-    for (std::map<int,double>::iterator i = result_maps[row].begin();
-         i != result_maps[row].end();
-         i ++)
-     {
-      Column_index[ptr]= i->first;
-      Value[ptr] = i->second;
-      ptr++;
-     }
-   }
-  
-  // tidy up memory
-  delete[] result_maps;
- }
- 
- // METHOD 3
- // --------
- else if (method==3)
-  {
-   // vectors of vectors to store results
-   std::vector< std::vector<int> > result_cols(N);
-   std::vector< std::vector<double> > result_vals(N);
    
-   // run through the rows of this matrix
-   for (unsigned long this_row = 0; this_row<N; this_row++)
+ // short name for Serial_matrix_matrix_multiply_method
+ unsigned method = Serial_matrix_matrix_multiply_method;
+
+ // if this matrix is not distributed and matrix in is not distributed
+ if (!this->distributed() && !matrix_in.distributed() && 
+     ((method == 1) || (method == 2) || (method == 3)))
+  {
+   // NB N is number of rows!
+   unsigned long N = this->nrow();
+   unsigned long M = matrix_in.ncol();
+   unsigned long Nnz = 0;
+   
+   // pointers to arrays which store result
+   int* Row_start = 0;
+   double* Value = 0;
+   int* Column_index = 0;
+   
+   // get pointers to matrix_in
+   const int* matrix_in_row_start = matrix_in.row_start();
+   const int* matrix_in_column_index = matrix_in.column_index();
+   const double* matrix_in_value = matrix_in.value();
+   
+   // get pointers to this matrix
+   const double* this_value = this->value();
+   const int* this_row_start = this->row_start();
+   const int* this_column_index = this->column_index();
+   
+   //clock_t clock1 = clock();
+   
+   // METHOD 1
+   // --------
+   if (method==1)
     {
-     // run through non-zeros in this_row
-     for (int this_ptr = this_row_start[this_row];
-          this_ptr < this_row_start[this_row+1];
-          this_ptr++)
+     // allocate storage for row starts
+     Row_start = new int[N+1];
+     Row_start[0]=0;
+     
+     // a set to store number of non-zero columns in each row of result
+     std::set<unsigned> columns;
+     
+     // run through rows of this matrix and matrix_in to find number of
+     // non-zero entries in each row of result
+     for (unsigned long this_row = 0; this_row<N; this_row++)
       {
-    // find value of non-zero
-       double this_val = this_value[this_ptr];
-       
-       // find column index associated with non-zero
-       int matrix_in_row = this_column_index[this_ptr];
-       
-       // run through corresponding row in matrix_in
-       for (int matrix_in_ptr = matrix_in_row_start[matrix_in_row];
-            matrix_in_ptr < matrix_in_row_start[matrix_in_row+1];
-            matrix_in_ptr++)
+       // run through non-zeros in this_row of this matrix
+       for (int this_ptr = this_row_start[this_row];
+            this_ptr < this_row_start[this_row+1];
+            this_ptr++)
         {
-         // find column index for non-zero in matrix_in
-         int col = matrix_in_column_index[matrix_in_ptr];
+         // find column index for non-zero
+         int matrix_in_row = this_column_index[this_ptr];
          
-         // insert value
-         int size = result_cols[this_row].size();
-         for (int i = 0; i<=size; i++)
+         // run through corresponding row in matrix_in
+         for (int matrix_in_ptr = matrix_in_row_start[matrix_in_row];
+              matrix_in_ptr < matrix_in_row_start[matrix_in_row+1];
+              matrix_in_ptr++)
           {
-           if (i==size)
+           // find column index for non-zero in matrix_in and store in columns
+           columns.insert(matrix_in_column_index[matrix_in_ptr]);
+          }
+        }
+       // update Row_start
+       Row_start[this_row+1] = Row_start[this_row] + columns.size();
+       
+       // wipe values in columns
+       columns.clear();
+      }
+     
+     // set Nnz
+     Nnz = Row_start[N];
+     
+     // allocate arrays for result
+     Value = new double[Nnz];
+     Column_index = new int[Nnz];
+     
+     // set all values of Column_index to -1
+     for (unsigned long i=0; i<Nnz; i++)
+      {
+       Column_index[i] = -1;
+      }
+     
+     // Calculate values for result - first run through rows of this matrix
+     for (unsigned long this_row = 0; this_row<N; this_row++)
+      {
+       // run through non-zeros in this_row
+       for (int this_ptr = this_row_start[this_row];
+            this_ptr < this_row_start[this_row+1];
+            this_ptr++)
+        {
+         // find value of non-zero
+         double this_val = this_value[this_ptr];
+         
+         // find column associated with non-zero
+         int matrix_in_row = this_column_index[this_ptr];
+         
+         // run through corresponding row in matrix_in
+         for (int matrix_in_ptr = matrix_in_row_start[matrix_in_row];
+              matrix_in_ptr < matrix_in_row_start[matrix_in_row+1];
+              matrix_in_ptr++)
+          {
+           // find column index for non-zero in matrix_in
+           int col = matrix_in_column_index[matrix_in_ptr];
+           
+           // find position in result to insert value
+           for(int ptr = Row_start[this_row];
+               ptr <= Row_start[this_row+1];
+               ptr++)
             {
-             // first entry for this column
-             result_cols[this_row].push_back(col);
-             result_vals[this_row].push_back(
-              this_val*matrix_in_value[matrix_in_ptr]);
-            }
-           else if (col==result_cols[this_row][i])
-            {
-             // column already exists
-             result_vals[this_row][i] += this_val * 
-              matrix_in_value[matrix_in_ptr];
-             break;
+             if (ptr == Row_start[this_row+1])
+              {
+               // error - have passed end of row without finding
+               // correct column
+               std::ostringstream error_message;
+               error_message << "Error inserting value in result";
+               
+               throw OomphLibError(error_message.str(),
+                           "CRDoubleMatrix::multiply()",
+                                   OOMPH_EXCEPTION_LOCATION);
+              }
+             else if (	Column_index[ptr] == -1 )
+              {
+               // first entry for this column index
+               Column_index[ptr] = col;
+               Value[ptr] = this_val * matrix_in_value[matrix_in_ptr];
+               break;
+              }
+             else if ( Column_index[ptr] == col )
+              {
+               // column index already exists - add value
+               Value[ptr] += this_val * matrix_in_value[matrix_in_ptr];
+               break;
+              }
             }
           }
         }
       }
     }
    
-   // allocate Row_start
-   Row_start = new int[N+1];
-   
-   // copy across row starts
-   Row_start[0] = 0;
-   for (unsigned long row=0; row<N; row++)
+   // METHOD 2
+   // --------
+   else if (method==2)
     {
-     int size = result_cols[row].size();
-     Row_start[row+1] = Row_start[row] + size;
-    }
-   
-   // set Nnz
-   Nnz = Row_start[N];
-   
-   // allocate other arrays
-   Value = new double[Nnz];
-   Column_index = new int[Nnz];
-   
-   // copy across values and column indices
-   for (unsigned long row=0; row<N; row++)
-    {
-     unsigned ptr = Row_start[row];
-     unsigned nnn=result_cols[row].size();
-     for (unsigned i = 0; i < nnn; i++) 
+     // generate array of maps to store values for result
+     std::map<int,double>* result_maps = new std::map<int,double>[N];
+     
+     // run through rows of this matrix
+     for (unsigned long this_row = 0; this_row<N; this_row++)
       {
-       Column_index[ptr] = result_cols[row][i];
-       Value[ptr] = result_vals[row][i];
-       ptr++;
+       // run through non-zeros in this_row
+       for (int this_ptr = this_row_start[this_row];
+            this_ptr < this_row_start[this_row+1];
+            this_ptr++)
+        {
+         // find value of non-zero
+         double this_val = this_value[this_ptr];
+         
+         // find column index associated with non-zero
+         int matrix_in_row = this_column_index[this_ptr];
+         
+         // run through corresponding row in matrix_in
+         for (int matrix_in_ptr = matrix_in_row_start[matrix_in_row];
+              matrix_in_ptr < matrix_in_row_start[matrix_in_row+1];
+              matrix_in_ptr++)
+          {
+           // find column index for non-zero in matrix_in
+           int col = matrix_in_column_index[matrix_in_ptr];
+           
+           // insert value
+           result_maps[this_row][col] += this_val * matrix_in_value[matrix_in_ptr];
+          }
+        }
+      }
+     
+     // allocate Row_start
+     Row_start = new int[N+1];
+     
+     // copy across row starts
+     Row_start[0] = 0;
+     for (unsigned long row=0; row<N; row++)
+      {
+       int size = result_maps[row].size();
+       Row_start[row+1] = Row_start[row] + size;
+      }
+     
+     // set Nnz
+     Nnz = Row_start[N];
+     
+     // allocate other arrays
+     Value = new double[Nnz];
+     Column_index = new int[Nnz];
+     
+     // copy values and column indices
+     for (unsigned long row=0; row<N; row++)
+      {
+       unsigned ptr = Row_start[row];
+       for (std::map<int,double>::iterator i = result_maps[row].begin();
+            i != result_maps[row].end();
+            i ++)
+        {
+         Column_index[ptr]= i->first;
+         Value[ptr] = i->second;
+         ptr++;
+        }
+      }
+     
+     // tidy up memory
+     delete[] result_maps;
+    }
+ 
+   // METHOD 3
+   // --------
+   else if (method==3)
+    {
+     // vectors of vectors to store results
+     std::vector< std::vector<int> > result_cols(N);
+     std::vector< std::vector<double> > result_vals(N);
+     
+     // run through the rows of this matrix
+     for (unsigned long this_row = 0; this_row<N; this_row++)
+      {
+       // run through non-zeros in this_row
+       for (int this_ptr = this_row_start[this_row];
+            this_ptr < this_row_start[this_row+1];
+            this_ptr++)
+        {
+         // find value of non-zero
+         double this_val = this_value[this_ptr];
+         
+         // find column index associated with non-zero
+         int matrix_in_row = this_column_index[this_ptr];
+         
+         // run through corresponding row in matrix_in
+         for (int matrix_in_ptr = matrix_in_row_start[matrix_in_row];
+            matrix_in_ptr < matrix_in_row_start[matrix_in_row+1];
+              matrix_in_ptr++)
+          {
+           // find column index for non-zero in matrix_in
+           int col = matrix_in_column_index[matrix_in_ptr];
+           
+           // insert value
+           int size = result_cols[this_row].size();
+           for (int i = 0; i<=size; i++)
+            {
+             if (i==size)
+              {
+               // first entry for this column
+               result_cols[this_row].push_back(col);
+               result_vals[this_row].push_back(
+                this_val*matrix_in_value[matrix_in_ptr]);
+              }
+             else if (col==result_cols[this_row][i])
+              {
+               // column already exists
+               result_vals[this_row][i] += this_val * 
+                matrix_in_value[matrix_in_ptr];
+               break;
+              }
+            }
+          }
+        }
+      }
+     
+     // allocate Row_start
+     Row_start = new int[N+1];
+     
+     // copy across row starts
+     Row_start[0] = 0;
+     for (unsigned long row=0; row<N; row++)
+      {
+       int size = result_cols[row].size();
+       Row_start[row+1] = Row_start[row] + size;
+      }
+     
+     // set Nnz
+     Nnz = Row_start[N];
+     
+     // allocate other arrays
+     Value = new double[Nnz];
+     Column_index = new int[Nnz];
+     
+     // copy across values and column indices
+     for (unsigned long row=0; row<N; row++)
+      {
+       unsigned ptr = Row_start[row];
+       unsigned nnn=result_cols[row].size();
+       for (unsigned i = 0; i < nnn; i++) 
+        {
+         Column_index[ptr] = result_cols[row][i];
+         Value[ptr] = result_vals[row][i];
+         ptr++;
+        }
       }
     }
-  }
- 
- // INCORRECT VALUE FOR METHOD
- else
-  {
-   std::ostringstream error_message;
-   error_message << "Incorrect method set in matrix-matrix multiply"
-                 << " method=" << method << " not allowed";
    
-   throw OomphLibError(error_message.str(),
-                       "CRDoubleMatrix::multiply()",
-                       OOMPH_EXCEPTION_LOCATION);
+   // build
+   result.rebuild_matrix_without_copy(M, Nnz, Value, Column_index, Row_start);
   }
   
- result.build_without_copy(Value, Column_index, Row_start, Nnz, N, M);
- 
+ // else we have to use trilinos
+ else
+  {
+#ifdef HAVE_TRILINOS
+     bool use_ml = false;
+     if (method == 5)
+      {
+       use_ml = true;
+      }
+     TrilinosHelpers::multiply(*this,matrix_in,result,use_ml);
+#else
+     std::ostringstream error_message;
+     error_message << "Serial_matrix_matrix_multiply_method = "
+                   << Serial_matrix_matrix_multiply_method 
+                   << " requires trilinos.";
+     throw OomphLibError(error_message.str(),
+                         "CRDoubleMatrix::multiply()",
+                         OOMPH_EXCEPTION_LOCATION);
+#endif
+  }
 }
-
+  
+ 
 
 //=================================================================
 /// For every row, find the maximum absolute value of the
@@ -1951,7 +2180,7 @@ void CRDoubleMatrix::matrix_reduction(const double &alpha,
                                        CRDoubleMatrix &reduced_matrix)
 {
  // number of rows in matrix
- long n_row=nrow();     
+ long n_row=nrow_local();     
  double max_row;
  
  // Here's the packed format for the new matrix
@@ -1959,7 +2188,11 @@ void CRDoubleMatrix::matrix_reduction(const double &alpha,
  Vector<int> B_column_index;
  Vector<double> B_value;
  
-
+ // get pointers to the underlying data
+ const int* row_start = CR_matrix.row_start();
+ const int* column_index = CR_matrix.column_index();
+ const double* value = CR_matrix.value();
+ 
  // k is counter for the number of entries in the reduced matrix
  unsigned k=0;
 
@@ -1973,24 +2206,24 @@ void CRDoubleMatrix::matrix_reduction(const double &alpha,
    max_row=0.0;
    
    //Loop over entries in columns
-   for(long j=Row_start[i];j<Row_start[i+1];j++)
+   for(long j=row_start[i];j<row_start[i+1];j++)
     {
      // Find max. value in row
-     if(std::abs(Value[j])>max_row)
+     if(std::abs(value[j])>max_row)
       {
-       max_row=std::abs(Value[j]);
+       max_row=std::abs(value[j]);
       }
     }
 
    // Decide if we need to retain the entries in the row
-   for(long j=Row_start[i];j<Row_start[i+1];j++)
+   for(long j=row_start[i];j<row_start[i+1];j++)
     {
      // If we're on the diagonal or the value is sufficiently large: retain
      // i.e. copy across.
-     if(i==Column_index[j] || std::abs(Value[j])>alpha*max_row )
+     if(i==column_index[j] || std::abs(value[j])>alpha*max_row )
       {
-       B_value.push_back(Value[j]);
-       B_column_index.push_back(Column_index[j]);
+       B_value.push_back(value[j]);
+       B_column_index.push_back(column_index[j]);
        k++;
       }
     }
@@ -2001,13 +2234,127 @@ void CRDoubleMatrix::matrix_reduction(const double &alpha,
  
  // Build the matrix from the compressed format
  dynamic_cast<CRDoubleMatrix&>(reduced_matrix).
-  build(B_value,B_column_index,B_row_start,n_row,ncol());
- 
-
- 
-
+  rebuild_matrix(this->ncol(),B_value,B_column_index,B_row_start);
  }
 
+//=============================================================================
+/// if this matrix is distributed then a the equivalent global matrix is built
+/// using new and returned. The calling method is responsible for the 
+/// destruction of the new matrix.
+//=============================================================================
+CRDoubleMatrix* CRDoubleMatrix::return_global_matrix()
+{
+#ifdef OOMPH_HAS_MPI
+ // if this matrix is not distributed then this method is redundant
+ if (!this->distributed() || 
+     this->distribution_pt()->communicator_pt()->nproc() == 1)
+  {
+   return new CRDoubleMatrix(*this);
+  }
+
+ // nnz 
+ int nnz = this->nnz();
+
+ // my nrow local
+ unsigned nrow_local = this->nrow_local();
+
+ // nrow global
+ unsigned nrow = this->nrow();
+   
+ // cache nproc
+ int nproc = Distribution_pt->communicator_pt()->nproc();
+
+ // get the nnzs on the other processors
+ int* dist_nnz_pt = new int[nproc];
+ MPI_Allgather(&nnz,1,MPI_INT,
+               dist_nnz_pt,1,MPI_INT,
+               Distribution_pt->communicator_pt()->mpi_comm());
+   
+ // create a int vector of first rows and nrow local and compute nnz global
+ int* dist_first_row = new int[nproc];
+ int* dist_nrow_local =  new int[nproc];
+ int nnz_global = 0;
+ for (int p = 0; p < MPI_Helpers::Nproc; p++)
+  {
+   nnz_global += dist_nnz_pt[p];
+   dist_first_row[p] = this->first_row(p);
+   dist_nrow_local[p] = this->nrow_local(p);
+  }
+
+ // conpute the offset for the values and column index data
+ int* nnz_offset = new int[MPI_Helpers::Nproc];
+ nnz_offset[0] = 0;
+ for (int p = 1; p < MPI_Helpers::Nproc; p++)
+  {
+   nnz_offset[p] = nnz_offset[p-1] + dist_nnz_pt[p-1];
+  }
+   
+ // get pointers to the (current) distributed data
+ int* dist_row_start = this->row_start();
+ int* dist_column_index = this->column_index();
+ double* dist_value = this->value();
+   
+ // space for the global matrix
+ int* global_row_start = new int[nrow+1];
+ int* global_column_index = new int[nnz_global];
+ double* global_value = new double[nnz_global];
+
+ // get the row starts
+ MPI_Allgatherv(dist_row_start,nrow_local,MPI_INT,
+                global_row_start,dist_nrow_local,dist_first_row,MPI_INT,
+                Distribution_pt->communicator_pt()->mpi_comm());
+   
+ // get the column indexes
+ MPI_Allgatherv(dist_column_index,nnz,MPI_INT,
+                global_column_index,dist_nnz_pt,nnz_offset,MPI_INT,
+                Distribution_pt->communicator_pt()->mpi_comm());
+ 
+ // get the values
+ MPI_Allgatherv(dist_value,nnz,MPI_DOUBLE,
+                global_value,dist_nnz_pt,nnz_offset,MPI_DOUBLE,
+                Distribution_pt->communicator_pt()->mpi_comm());
+   
+ // finally the last row start
+ global_row_start[nrow] = nnz_global;
+   
+ // update the other row start
+ for (int p = 0; p < nproc; p++)
+  {
+   for (int i = 0; i < dist_nrow_local[p]; i++)
+    {
+     unsigned j = dist_first_row[p] + i;
+     global_row_start[j]+=nnz_offset[p];
+    }
+  }
+
+ // create the global distribution
+ LinearAlgebraDistribution* dist_pt = new 
+  LinearAlgebraDistribution(Distribution_pt->communicator_pt(),nrow,false);
+ 
+ // create the matrix
+ CRDoubleMatrix* matrix_pt = new CRDoubleMatrix(dist_pt);
+ 
+ // copy of distribution taken so delete
+ delete dist_pt;
+
+ // pass data into matrix
+ matrix_pt->rebuild_matrix_without_copy(this->ncol(),nnz_global,global_value,
+                                        global_column_index,global_row_start);
+
+ // clean up
+ delete dist_first_row;
+ delete dist_nrow_local;
+ delete nnz_offset;
+ delete dist_nnz_pt;
+ 
+ // and return
+ return matrix_pt;
+#else
+ return new CRDoubleMatrix(*this);
+#endif
+}
+
+/*
 #ifdef OOMPH_HAS_MPI
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -2099,8 +2446,9 @@ void DistributedCRDoubleMatrix::multiply(
 /// member data to zero and set the default linear
 /// solver to be SuperLU dist
 //============================================================================
-DistributedCRDoubleMatrix::DistributedCRDoubleMatrix() : CRDoubleMatrix(),
-                                                         Matrix_distribution()
+DistributedCRDoubleMatrix::DistributedCRDoubleMatrix() 
+ : CRDoubleMatrix(),
+   Distribution_pt(0)
 { 
  //Delete the exisiting default linear solver pt
  delete Default_linear_solver_pt;
@@ -2131,9 +2479,11 @@ DistributedCRDoubleMatrix(const Vector<double>& value,
                           const DistributionInfo& distribution,
                           const unsigned& n_col)
  : CRDoubleMatrix(value,column_index,row_start,
-                  distribution.nrow_local(),n_col), 
-   Matrix_distribution(distribution)
+                  distribution.nrow_local(),n_col)
 {
+ // store the distribution
+ Distribution_pt = new DistributionInfo(distribution);
+
  //Delete the exisiting default linear solver pt
  delete Default_linear_solver_pt;
 
@@ -2153,7 +2503,8 @@ DistributedCRDoubleMatrix(const Vector<double>& value,
  void DistributedCRDoubleMatrix::clean_up_memory()
  {
   CRDoubleMatrix::clean_up_memory();
-  Matrix_distribution.clear();
+  delete Distribution_pt;
+  Distribution_pt = 0;
  }
 
 
@@ -2179,8 +2530,10 @@ void DistributedCRDoubleMatrix::build(const Vector<double>& value,
                          distribution.nrow_global(),n_col);
  
  // set the distribution
- Matrix_distribution = distribution;
+ delete Distribution_pt;
+ Distribution_pt = new DistributionInfo(distribution);
 }
 
 #endif
+*/
 }

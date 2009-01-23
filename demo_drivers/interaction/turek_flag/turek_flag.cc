@@ -801,21 +801,8 @@ TurekProblem(const double &length,
  // Set Navier Stokes mesh:
  prec_pt->navier_stokes_mesh_pt()=Fluid_mesh_pt;
 
- // Create a vector of pointers to submeshes. Start with the solid
- // mesh itself.
- Vector<Mesh*> s_mesh_pt(4);
- s_mesh_pt[0]=solid_mesh_pt();
-
- // Add traction meshes
- s_mesh_pt[1]=Traction_mesh_pt[0];
- s_mesh_pt[2]=Traction_mesh_pt[1];
- s_mesh_pt[3]=Traction_mesh_pt[2];
-
- // Build "combined" mesh from vector of solid submeshes
- Mesh* combined_solid_mesh_pt = new Mesh(s_mesh_pt);
-
  // Set solid mesh:
- prec_pt->wall_mesh_pt()=combined_solid_mesh_pt;
+ prec_pt->wall_mesh_pt()=solid_mesh_pt();
 
  // Set flags in the underlying Navier-Stokes preconditioner
  prec_pt->navier_stokes_preconditioner_pt()->p_matrix_using_scaling() = true;
@@ -1095,8 +1082,7 @@ int main(int argc, char* argv[])
 {
 
 #ifdef OOMPH_HAS_MPI
-  MPI_Init(&argc,&argv);
-  MPI_Helpers::setup();
+  MPI_Helpers::init(argc,argv);
 #endif
 
  // Store command line arguments
@@ -1190,7 +1176,7 @@ int main(int argc, char* argv[])
  trace_file.close(); 
 
 #ifdef OOMPH_HAS_MPI
- MPI_Finalize();
+ MPI_Helpers::finalize();
 #endif
 
 }//end of main

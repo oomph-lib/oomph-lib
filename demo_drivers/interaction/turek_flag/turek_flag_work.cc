@@ -1101,8 +1101,7 @@ int main(int argc, char* argv[])
 {
 
 #ifdef OOMPH_HAS_MPI
-  MPI_Init(&argc,&argv);
-  MPI_Helpers::setup();
+  MPI_Helpers::init(argc,argv);
 #endif
 
  // Store command line arguments
@@ -1184,7 +1183,7 @@ int main(int argc, char* argv[])
  // timestep
  bool first = false;
  
- // Max number of adaptation for time-stepping
+ // number of adaptation for time-stepping
  unsigned max_adapt=1;
  
  for(unsigned i=0;i<nstep;i++)
@@ -1201,6 +1200,9 @@ int main(int argc, char* argv[])
  
  trace_file.close(); 
 
+#ifdef OOMPH_HAS_MPI
+ MPI_Helpers::finalize();
+#endif
 }//end of main
 
 

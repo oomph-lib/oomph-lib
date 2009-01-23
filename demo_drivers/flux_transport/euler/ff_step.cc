@@ -95,11 +95,11 @@ void SSP_RungeKutta<2>::timestep(ExplicitTimeSteppableObject* const &object_pt,
                                  const double &dt)
 {
  //Store the initial values and initial time
- Vector<double> u;
+ DoubleVector u;
  object_pt->get_dofs(u);
 
  //Now get the first unknowns
- Vector<double> k1;
+ DoubleVector k1;
  object_pt->get_inverse_mass_matrix_times_residuals(k1);
  
  //Add to the residuals
@@ -109,7 +109,7 @@ void SSP_RungeKutta<2>::timestep(ExplicitTimeSteppableObject* const &object_pt,
  object_pt->actions_after_explicit_timestep();
  
  //Get the next unknowns
- Vector<double> k2;
+ DoubleVector k2;
  object_pt->get_inverse_mass_matrix_times_residuals(k2);
  
  //Add to the residuals so that the current value of the unknowns
@@ -120,11 +120,11 @@ void SSP_RungeKutta<2>::timestep(ExplicitTimeSteppableObject* const &object_pt,
  //initial value and the result of the two forward Euler steps
 
  //Get the current value 
- Vector<double> u_final;
+ DoubleVector u_final;
  object_pt->get_dofs(u_final);
 
  //Now take the average
- unsigned n_dof = u_final.size();
+ unsigned n_dof = u_final.nrow();
  for(unsigned n=0;n<n_dof;n++)
   {
    u_final[n] += u[n];

@@ -272,7 +272,7 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output solution 
  //-----------------
- sprintf(filename,"%s/soln%i.dat",doc_info.directory().c_str(),
+ sprintf(filename,"%s/soln_trilinos_%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
@@ -313,8 +313,7 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 int main(int argc, char **argv)
 {
 #ifdef OOMPH_HAS_MPI
- MPI_Init(&argc,&argv);
-  MPI_Helpers::setup();
+ MPI_Helpers::init(argc,argv);
 #endif
 
 
@@ -705,7 +704,7 @@ int main(int argc, char **argv)
   }
 
 #ifdef OOMPH_HAS_MPI
-MPI_Finalize();
+MPI_Helpers::finalize();
 #endif
 
 

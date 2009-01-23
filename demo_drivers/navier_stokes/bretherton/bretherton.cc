@@ -926,13 +926,11 @@ void BrethertonProblem<ELEMENT>::parameter_study(const unsigned& nsteps)
           << Global_Physical_Variables::Ca << ".   Max. residual: ";
 
      // Check the maximum residual
-     Vector<double> residuals(ndof());
+     DoubleVector residuals;
      actions_before_newton_solve();
      actions_before_newton_convergence_check();
      get_residuals(residuals);
-     double max_res=std::abs(*std::max_element(residuals.begin(),
-                                               residuals.end(),
-                                               AbsCmp<double>()));
+     double max_res=residuals.max();
      cout << max_res;
 
      // Check what to do 

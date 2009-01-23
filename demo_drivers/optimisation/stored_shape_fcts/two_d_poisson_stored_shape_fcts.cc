@@ -295,7 +295,7 @@ void PoissonProblem<ELEMENT>::run_it(DocInfo& doc_info)
 
  // Repeated assembly of Jacobian -- stored shape functions only
  // pay of on subsequent solves.
- Vector<double> residuals;
+ DoubleVector residuals;
  CRDoubleMatrix jacobian;
  
  unsigned n_assemble=10;

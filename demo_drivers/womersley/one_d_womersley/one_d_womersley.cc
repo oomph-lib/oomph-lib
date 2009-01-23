@@ -1362,11 +1362,8 @@ int main(int argc, char *argv[])
 
  #ifdef OOMPH_HAS_MPI
  // Initialise MPI
- MPI_Init(&argc,&argv);
- 
- // Set up MPI_Helpers
- MPI_Helpers::setup();
- 
+ MPI_Helpers::init(argc,argv);
+
  // Swtich off output modifier
  oomph_info.output_modifier_pt() = &default_output_modifier;
  
@@ -1738,7 +1735,7 @@ int main(int argc, char *argv[])
 
 #ifdef OOMPH_HAS_MPI 
  // finalize MPI
- MPI_Finalize();
+ MPI_Helpers::finalize();
 #endif
  
 } //end of driver code

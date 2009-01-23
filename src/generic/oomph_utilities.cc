@@ -545,7 +545,6 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
 }
 }
 
-
 //======================================================================
 /// \short Set output directory (we try to open a file in it
 /// to see if the directory exists -- if it doesn't we'll
@@ -652,9 +651,73 @@ namespace MPI_Helpers
 
 #ifdef OOMPH_HAS_MPI
 
+ /// the global communicator
+ OomphCommunicator* Communicator_pt;
+
+ /// initialize mpi
+ void init(int argc, char **argv)
+  {
+    // call mpi int
+    MPI_Init(&argc,&argv);
+    MPI_has_been_initialised=true;
+
+    // create the oomph-lib communicator using MPI_Comm_dup.
+    // the communicator has the same group of processes but a new context
+    MPI_Comm oomph_comm_world;
+    MPI_Comm_dup(MPI_COMM_WORLD,&oomph_comm_world);
+
+    // create the oomph-lib communicator
+    // note: oomph_comm_world is deleted when the destructor of 
+    // Communicator_pt is called
+    Communicator_pt = new OomphCommunicator(oomph_comm_world,true);
+    
+    // Change MPI error handler so that error will return
+    // rather than aborting
+    MPI_Errhandler_set(oomph_comm_world, MPI_ERRORS_RETURN);
+    
+    // just create a communicator with MPI_COMM_WORLD
+    // Use MPI output modifier: Each processor preceeds its output
+    // by its rank
+    oomph_info.output_modifier_pt() = &oomph_mpi_output;
+
+    // LEGACY - until My_rank and Nproc are deleted
+    // store My_rank and Nproc
+    My_rank = Communicator_pt->my_rank();
+    Nproc = Communicator_pt->nproc();
+  }
+
+ /// finalize mpi
+ void finalize()
+  {
+    // delete the communicator
+    delete Communicator_pt;
+
+    // and call MPI_Finalize
+    MPI_Finalize();
+  }
+
+
+
+ /// LEGACY
  /// Setup the namespace
  void setup()
  {
+  std::ostringstream warning_stream;
+  warning_stream  <<"WARNING:\n\n"
+                  <<"The method MPI_Helpers::setup() has been replaced "
+                  <<"with:\n\n       MPI_Helpers::init(...)\n\n"
+                  <<"Notes:\n\n1. It is no longer necessary to call "
+                  <<"MPI_Init(...)\n   at the begining of main(...) "
+                  <<"because it is called\n   by MPI_Helpers::init(...)."
+                  <<"\n\n2. The use of MPI_COMM_WORLD should be replaced "
+                  <<"with:"
+                  <<"\n\n       MPI_Helpers::Communicator_pt->mpi_comm()"
+                  <<"\n\n   or (for example)\n\n"
+                  <<"       problem_pt->communicator_pt()->mpi_comm()\n\n"
+                  <<"3. Calls to MPI_Finalize() should be replaced with:"
+                  <<"\n\n       MPI_Helpers::finalize()\n";
+  ObsoleteCode::obsolete(warning_stream.str());
+
   // Check that MPI_Init has been called and throw an error if it's not
   int flag = 0;
   MPI_Initialized(&flag);
@@ -671,6 +734,8 @@ namespace MPI_Helpers
   // Set the bool to say MPI has been initialised
   // NB: make sure MPI_Init is called BEFORE MPI_Helpers::setup()
   MPI_has_been_initialised=true;
+
+  Communicator_pt = new OomphCommunicator(MPI_COMM_WORLD,true);
 
   // Figure out number of processes
   MPI_Comm_size(MPI_COMM_WORLD,&Nproc);
@@ -1703,10 +1768,28 @@ void pause(std::string message)
 
 
 
+
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 
+//=============================================================================
+/// Helper for recordning execution time.
+//=============================================================================
+namespace TimingHelpers
+{
+
+ /// returns the time in seconds after some point in past
+ double timer()
+  {
+#ifdef OOMPH_HAS_MPI
+   return MPI_Wtime();
+#else
+   time_t t = clock();
+   return  double(t) / double(CLOCKS_PER_SEC);
+#endif
+  }
+}//end of namespace TimingHelpers
 
 
 // //====================================================================

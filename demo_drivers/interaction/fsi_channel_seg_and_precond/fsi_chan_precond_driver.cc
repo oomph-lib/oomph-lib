@@ -327,6 +327,125 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
        }
 
 
+
+      switch (solver_sub_flag)
+       {
+        
+        // Block diagonal
+        //---------------
+       case 0:
+        
+        std::cout << "(diagonal version)" << std::endl;
+        Flags::Run_identifier_string=
+         "LSC FSI preconditioner (diagonal)";
+
+        // Use block-diagonal preconditioner
+        prec_pt->use_block_diagonal_version();
+        break;
+        
+        
+        // Retain fluid onto solid terms
+        //------------------------------
+       case 1:
+        
+        std::cout << "(retaining fluid onto solid terms)" << std::endl;
+        Flags::Run_identifier_string=
+         "LSC FSI preconditioner (retaining fluid onto solid terms)";
+
+        // Choose preconditioner that retains fluid on solid terms
+        prec_pt->use_block_triangular_version_with_fluid_on_solid();
+
+        break;
+        
+        // Retain solid onto fluid terms
+        //------------------------------
+       case 2:
+        
+        std::cout << "(retaining solid onto fluid terms)" << std::endl;
+
+        Flags::Run_identifier_string=
+         "LSC FSI preconditioner (retaining solid onto fluid terms)";
+
+        // Choose preconditioner that retains solid on fluid terms
+        prec_pt->use_block_triangular_version_with_solid_on_fluid();
+        break;
+        
+        // Error
+        //------
+       default:
+
+        std::ostringstream error_stream; 
+        error_stream << "Error: Wrong solver_sub_flag: " 
+                     << solver_sub_flag << std::endl;
+        throw OomphLibError(error_stream.str(),
+                            "PreconditionedFSICollapsibleChannelProblem::Constructor()",
+                            OOMPH_EXCEPTION_LOCATION);
+        break;
+
+       }
+
+      // Pass preconditioner to iterative linear solver
+      iterative_linear_solver_pt->preconditioner_pt()= prec_pt;
+     }
+
+     break;
+       
+     // FSI preconditioner (block triangular Jacobian, solved with 
+     //===========================================================
+     // block decomposition, using least-squares-commutator (BFBt)
+     //===========================================================
+     // Navier-Stokes preconditioner for fluid block, Hypre AMG
+     //========================================================
+     // for P
+     //======
+     
+    case 4:
+
+     std::cout << "Using FSIPreconditioner (block-triangular Jacobian + LSC)" 
+               << std::endl;
+     
+     {
+
+      // Create an instance of the FSI preconditioner
+      FSIPreconditioner* prec_pt=new FSIPreconditioner;
+
+      // Set Navier Stokes mesh:
+      prec_pt->navier_stokes_mesh_pt()=this->bulk_mesh_pt();
+      
+      // Build a compound mesh that contains all solid elements:
+      
+      // Create a vector of pointers to submeshes. Start with the solid
+      // mesh itself.
+      Vector<Mesh*> s_mesh_pt(1);
+      s_mesh_pt[0]=this->wall_mesh_pt();
+      
+      // Add the displacement control mesh if required
+      if (this->Displ_control) 
+       {
+        s_mesh_pt.push_back(this->Displ_control_mesh_pt);
+       }
+
+      // Build compound mesh from vector of solid submeshes
+      Mesh* combined_solid_mesh_pt = new Mesh(s_mesh_pt);
+
+      // Set solid mesh:
+      prec_pt->wall_mesh_pt()=combined_solid_mesh_pt;
+        
+      // Set flags in the underlying Navier-Stokes preconditioner
+      prec_pt->navier_stokes_preconditioner_pt()->p_matrix_using_scaling() = true;
+
+
+      if (!prec_pt->navier_stokes_preconditioner_pt()->p_matrix_using_scaling())
+       {
+        std::cout << "SCALING SWITCHED OFF !!!! " << std::endl;
+        std::cout << "SCALING SWITCHED OFF !!!! " << std::endl;
+        std::cout << "SCALING SWITCHED OFF !!!! " << std::endl;
+        std::cout << "SCALING SWITCHED OFF !!!! " << std::endl;
+        std::cout << "SCALING SWITCHED OFF !!!! " << std::endl;
+        std::cout << "SCALING SWITCHED OFF !!!! " << std::endl;
+       }
+
+
 #ifdef HAVE_HYPRE
 
       // By default, the LSC Preconditioner uses SuperLU as
@@ -415,7 +534,6 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
      }
 
      break;
-       
 
 
      // Error
@@ -522,11 +640,9 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
 /// coarse resolution and small number of steps.
 //=============================================================================
 int main(int argc, char* argv[])
-{
- 
+{ 
 #ifdef OOMPH_HAS_MPI
-  MPI_Init(&argc,&argv);
-  MPI_Helpers::setup();
+  MPI_Helpers::init(argc,argv);
 #endif
 
  // Store command line arguments
@@ -604,7 +720,7 @@ int main(int argc, char* argv[])
   }
  Flags::doc_flags();
 
- 
+
  // Number of elements in the domain
  unsigned nup=4*Flags::Resolution_factor;
  unsigned ncollapsible=20*Flags::Resolution_factor;
@@ -618,7 +734,6 @@ int main(int argc, char* argv[])
  double ldown=10.0;
  double ly=1.0;
  
-
  // Use displacement control?
  bool displ_control=false;
  if (Flags::Use_displ_control==1) displ_control=true;
@@ -644,7 +759,7 @@ int main(int argc, char* argv[])
   }
  
 #ifdef OOMPH_HAS_MPI
- MPI_Finalize();
+ MPI_Helpers::finalize();
 #endif
 
 

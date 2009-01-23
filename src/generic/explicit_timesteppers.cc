@@ -40,7 +40,7 @@ namespace oomph
  ///vector multiplied by the inverse mass matrix
  //=================================================================
  void ExplicitTimeSteppableObject::
- get_inverse_mass_matrix_times_residuals(Vector<double> &minv_res)
+ get_inverse_mass_matrix_times_residuals(DoubleVector &minv_res)
  {
   std::ostringstream error_stream;
   error_stream 
@@ -60,7 +60,7 @@ namespace oomph
  //=======================================================================
  /// Function that should get the values of the dofs in the object
  //=======================================================================
- void ExplicitTimeSteppableObject::get_dofs(Vector<double> &dofs)
+ void ExplicitTimeSteppableObject::get_dofs(DoubleVector &dofs)
  {
   std::ostringstream error_stream;
   error_stream 
@@ -79,7 +79,7 @@ namespace oomph
  //=====================================================================
  /// Function that sets the values of the dofs in the object
  //====================================================================
- void ExplicitTimeSteppableObject::set_dofs(const Vector<double> &dofs)
+ void ExplicitTimeSteppableObject::set_dofs(const DoubleVector &dofs)
  {
   std::ostringstream error_stream;
   error_stream 
@@ -100,7 +100,7 @@ namespace oomph
  //====================================================================
  void ExplicitTimeSteppableObject::add_to_dofs(
   const double &lambda,
-  const Vector<double> &increment_dofs)
+  const DoubleVector &increment_dofs)
  {
   std::ostringstream error_stream;
   error_stream 
@@ -143,7 +143,7 @@ namespace oomph
  {
   //Vector that will hold the inverse mass matrix multiplied by the
   //residuals
-  Vector<double> minv_res;
+  DoubleVector minv_res;
   //Get M^{-1} R
   object_pt->get_inverse_mass_matrix_times_residuals(minv_res);
   
@@ -178,11 +178,11 @@ void RungeKutta<4>::timestep(ExplicitTimeSteppableObject* const &object_pt,
                              const double &dt)
 {
  //Store the initial values and initial tim
- Vector<double> u;
+ DoubleVector u;
  object_pt->get_dofs(u);
 
  //Now get the first unknowns
- Vector<double> k1;
+ DoubleVector k1;
  object_pt->get_inverse_mass_matrix_times_residuals(k1);
  
  //Add to the residuals
@@ -192,7 +192,7 @@ void RungeKutta<4>::timestep(ExplicitTimeSteppableObject* const &object_pt,
  object_pt->actions_after_explicit_timestep();
  
  //Get the next unknowns
- Vector<double> k2;
+ DoubleVector k2;
  object_pt->get_inverse_mass_matrix_times_residuals(k2);
  
  //Now reset the residuals
@@ -202,7 +202,7 @@ void RungeKutta<4>::timestep(ExplicitTimeSteppableObject* const &object_pt,
  object_pt->actions_after_explicit_timestep();
  
  //Get the next unknowns
- Vector<double> k3;
+ DoubleVector k3;
  object_pt->get_inverse_mass_matrix_times_residuals(k3);
  
  //Now reset the residuals
@@ -213,7 +213,7 @@ void RungeKutta<4>::timestep(ExplicitTimeSteppableObject* const &object_pt,
  object_pt->actions_after_explicit_timestep();
 
  //Get the final unknowns
- Vector<double> k4;
+ DoubleVector k4;
  object_pt->get_inverse_mass_matrix_times_residuals(k4);
  
  //Set the final values of the unknowns
@@ -291,10 +291,10 @@ void LowStorageRungeKutta<4>::timestep(
  //Store the initial time
  const double initial_time = object_pt->time();
  //Temporary storage
- Vector<double> k;
+ DoubleVector k;
 
  //Temporary storage for the inverse mass matrix multiplied by the residuals
- Vector<double> minv_res;
+ DoubleVector minv_res;
 
  //Loop over the number of steps in the scheme
  for(unsigned i=0;i<5;i++)
@@ -303,10 +303,10 @@ void LowStorageRungeKutta<4>::timestep(
    //of the residuals
    object_pt->get_inverse_mass_matrix_times_residuals(minv_res);
    //Get the values of k
-   const unsigned n_dof= minv_res.size();
+   const unsigned n_dof= minv_res.nrow();
 
    //First time round resize k and initialise to zero
-   if(i==0) {k.resize(n_dof,0.0);}
+   if(i==0) {k.rebuild(minv_res.distribution_pt());}
    //Now construct the next value of k
    for(unsigned n=0;n<n_dof;n++)
     {

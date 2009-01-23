@@ -826,17 +826,17 @@ public:
  /// jacobian calculations
  static double Default_fd_jacobian_step;
 
- /// \short The number of "blocks" that degrees of freedom in this element
+ /// \short The number of types of degrees of freedom in this element
  /// are sub-divided into
- virtual unsigned nblock_types()
+ virtual unsigned ndof_types()
   {
    // error message stream
    std::ostringstream error_message;
-   error_message << "nblock_types() has not been implemented for this \n"
+   error_message << "ndof_types() has not been implemented for this \n"
                  << "element\n" << std::endl;
    // throw error
    throw OomphLibError(error_message.str(),
-                       "GeneralisedElement::nblock_types())",
+                       "GeneralisedElement::ndof_types())",
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -844,15 +844,15 @@ public:
  /// is "in charge of" -- ignore any unknowns associated with external
  /// \c Data. The first entry in each pair must contain the global equation 
  /// number of the unknown, while the second one contains the number
- /// of the "block" that this unknown is associated with. 
+ /// of the DOF that this unknown is associated with. 
  /// (The function can obviously only be called if the equation numbering
  /// scheme has been set up.)
- virtual void get_block_numbers_for_unknowns(
+ virtual void get_dof_numbers_for_unknowns(
   std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
   {
    // error message stream
    std::ostringstream error_message;
-   error_message << "get_block_numbers_for_unknowns() has not been \n"
+   error_message << "get_dof_numbers_for_unknowns() has not been \n"
                  << " implemented for this element\n" << std::endl;
    // throw error
    throw OomphLibError(error_message.str(),
@@ -1004,6 +1004,8 @@ class FiniteElement : public virtual GeneralisedElement
    for(unsigned i=0;i<n;i++) {Node_pt[i] = 0;}
   }
 
+  public:
+
  /// \short Return the local equation number corresponding to the i-th
  /// value at the n-th local node.
  inline int nodal_local_eqn(const unsigned &n, const unsigned &i)
@@ -1046,6 +1048,8 @@ class FiniteElement : public virtual GeneralisedElement
 #endif
    return Nodal_local_eqn[n][i];
   }
+
+  protected: 
 
  /// \short Static array that holds the number of second derivatives
  /// as a function of the dimension of the element

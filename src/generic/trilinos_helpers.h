@@ -46,8 +46,8 @@
 
 // mpi includes
 #ifdef OOMPH_HAS_MPI
-#include "distributed_vector.h"
-#include "distribution_info.h"
+#include "double_vector.h"
+#include "linear_algebra_distribution.h"
 #endif
 
 namespace oomph
@@ -55,7 +55,6 @@ namespace oomph
 
 //// forward declaration of oomph-lib matrices
 class CRDoubleMatrix;
-class DistributedCRDoubleMatrix;
 class DoubleMatrixBase;
 
 //=============================================================================
@@ -66,129 +65,11 @@ class DoubleMatrixBase;
 namespace TrilinosHelpers
 {
 
-
-
-#ifdef OOMPH_HAS_MPI
- //////////////////////////////////////////////////////////////////////////////
- //////////////////////////////////////////////////////////////////////////////
- // DISTRIBUTED Helpers
- //////////////////////////////////////////////////////////////////////////////
- //////////////////////////////////////////////////////////////////////////////
-
-
-
-
  /// \short creates a distributed Epetra_Vector that has the same contents as
  /// oomph_v with distribution row_map_pt. \n
- /// \b NOTE 1. the Epetra_Map and the DistributionInfo objects must descibe
- /// the same distribution
- /// \b NOTE 2. if the bool copy is true (default) then the values in the 
- /// oomph-lib vector (oomph_v) will be copied into the epetra vector, or if 
- /// it is false then the epetra vector will 'view' (i.e. point to) the 
- /// contents of the oomph-lib vector
- void create_epetra_vector(DistributedVector<double>& oomph_v,
-                           const Epetra_Map* row_map_pt,
-                           Epetra_Vector*& epetra_v_pt,
-                           const bool& copy = true);
-
-
- /// \short creates a distributed Epetra_Vector that has the same contents as
- /// oomph_v with distribution row_map_pt, the contents of the trilinos vector 
- /// are copied from the oomph-lib vector. \n
- /// \b NOTE 1. duplication of helper due to the const oomph-lib vector
- /// \b NOTE 2. the Epetra_Map and the DistributionInfo objects must descibe
- /// the same distribution
- void create_epetra_vector(const DistributedVector<double>& oomph_v,
-                           const Epetra_Map* row_map_pt,
-                           Epetra_Vector*& epetra_v_pt);
-
- /// \short Helper function to copy the contents of a Trilinos vector to an
- /// oomph-lib distributed vector. The my_distribution DistributionInfo should 
- /// be the same as the distribution of epetra_v_pt
- void copy_to_oomphlib_vector(const Epetra_Vector* epetra_v_pt,
-                              const DistributionInfo my_distribution, 
-                              DistributedVector<double>& oomph_lib_v);
-
-
- /// \short  Function to perform a matrix-vector multiplication on a 
- /// distributed matrix and a distributed vector using Trilinos functionality.
- /// \n
- /// \b NOTE 1. the matrix (matrix) and the vectors (x and soln) must have the 
- /// same communicator.
- /// \b NOTE 2. The vector (soln) will be returned with the same distribution
- /// as the matrix, unless a distribution is predefined in the solution
- /// vector in which case the vector will be returned with that distribution
- void multiply(DistributedCRDoubleMatrix &matrix,
-               const DistributedVector<double>& x,
-               DistributedVector<double> &soln);
-
- /// \short Function to perform a matrix-matrix multiplication on distributed 
- /// matrices by using Trilinos functionality.\n
- /// \b NOTE 1. There are two Trilinos matrix-matrix multiplication methods 
- /// available, using either the EpetraExt::MatrixMatrix class (if use_ml == 
- /// false) or using ML (Epetra_MatrixMult method)
- /// \b NOTE 2. the solution matrix (matrix_soln) will be returned with the 
- /// same distribution as matrix1
- /// \b NOTE 3. All matrices must share the same communicator. 
- void multiply(DistributedCRDoubleMatrix &matrix_1,
-               DistributedCRDoubleMatrix &matrix_2,
-               DistributedCRDoubleMatrix &matrix_soln,
-               const bool& use_ml = false);
-
- /// \short takes a oomph-lib distribution (DistributionInfo) and returns
- /// a trilinos map (Epetra_Map)
- void create_epetra_map(const DistributionInfo& my_distribution,
-                        const Epetra_MpiComm* epetra_comm_pt,
-                        Epetra_Map* &epetra_map_pt, int* &my_global_rows);
-                       
- 
- /// \short Function to compare a distribution described by an oomph-lib 
- /// DistributionInfo object to a distribution described by a Trilinos
- /// Epetra_Map object. Returns true if they describe the same distribution.
- /// Used as a PARANOID check in other TrilinosHelpers methods
- bool compare_maps(const DistributionInfo& oomph_distribution, 
-                   const Epetra_Map& epetra_map);
-
-
-#else
-
-
-
-
- //////////////////////////////////////////////////////////////////////////////
- //////////////////////////////////////////////////////////////////////////////
- // SERIAL Helpers
- //////////////////////////////////////////////////////////////////////////////
- //////////////////////////////////////////////////////////////////////////////
-
-
-
-
- /// \short creates a serial epetra_map of size nrow
- void create_epetra_map(const unsigned& nrow, 
-                        const Epetra_SerialComm* epetra_comm_pt,
-                        Epetra_Map* &epetra_map_pt);
-                       
-
-
-
-#endif 
-
-
-
-
- //////////////////////////////////////////////////////////////////////////////
- //////////////////////////////////////////////////////////////////////////////
- // SERIAL and DISTRIBUTED Helpers
- //////////////////////////////////////////////////////////////////////////////
- //////////////////////////////////////////////////////////////////////////////
-
-
-
-
- /// \short creates an Epetra_Vector from a serial oomph-lib vector oomph_v
- /// with map row_map_pt.
- void create_epetra_vector(const Vector<double>& oomph_v,
+ /// NOTE 1. the Epetra_Map and the LinearAlgebraDistribution object in the
+ /// vector must descibe the same distribution \n
+ void create_epetra_vector(const DoubleVector& oomph_v,
                            const Epetra_Map* row_map_pt,
                            Epetra_Vector*& epetra_v_pt);
 
@@ -196,28 +77,75 @@ namespace TrilinosHelpers
  void create_epetra_vector(const Epetra_Map* row_map_pt,
                            Epetra_Vector*& epetra_v_pt);
 
- /// \short Helper function to copy the contents of a epetra vector to an
- /// oomph-lib distributed vector.
+ /// \short Helper function to copy the contents of a Trilinos vector to an
+ /// oomph-lib distributed vector. The distribution of the two vectors must
+ /// be identical \n
  void copy_to_oomphlib_vector(const Epetra_Vector* epetra_v_pt,
-                              Vector<double>& oomph_lib_v);
+                              DoubleVector& oomph_lib_v);
 
  /// \short Helper function to create a distributed Epetra_CrsMatrix from a 
- /// from a DistributedCRDoubleMatrix or a CRDoubleMatrix
- /// \b NOTE 1. This function constructs an Epetra_CrsMatrix using new,
- /// "delete trilinos_matrix_pt;" is NOT called.
+ /// from a CRDoubleMatrix \n
+ /// NOTE 1. This function constructs an Epetra_CrsMatrix using new,
+ /// "delete trilinos_matrix_pt;" is NOT called. \n
  void create_epetra_matrix(DoubleMatrixBase* oomph_matrix,
                            const Epetra_Map* epetra_row_map_pt,
                            const Epetra_Map* epetra_col_map_pt,
                            Epetra_CrsMatrix* &epetra_matrix_pt);
  
  /// \short Helper function to create a distributed Epetra_CrsMatrix from a 
- /// from a DistributedCRDoubleMatrix or a CRDoubleMatrix
- /// \b NOTE 1. This function constructs an Epetra_CrsMatrix using new,
- /// "delete trilinos_matrix_pt;" is NOT called.
- /// \b NOTE 2. Specialisation for SQUARE matrices.
+ /// from a CRDoubleMatrix \n
+ /// NOTE 1. This function constructs an Epetra_CrsMatrix using new,
+ /// "delete trilinos_matrix_pt;" is NOT called. \n
+ /// NOTE 2. Specialisation for SQUARE matrices. \n
  void create_epetra_matrix(DoubleMatrixBase* oomph_matrix,
                            const Epetra_Map* epetra_row_pt,
                            Epetra_CrsMatrix* &epetra_matrix_pt);
-}
-}
+
+ /// \short  Function to perform a matrix-vector multiplication on a 
+ /// oomph-lib matrix and vector using Trilinos functionality.\n
+ /// NOTE 1. the matrix (matrix) and the vectors (x and soln) must have the 
+ /// same communicator.\n
+ /// NOTE 2. The vector (soln) will be returned with the same distribution
+ /// as the matrix, unless a distribution is predefined in the solution
+ /// vector in which case the vector will be returned with that distribution.\n
+ void multiply(CRDoubleMatrix &matrix,
+               const DoubleVector& x,
+               DoubleVector &soln);
+
+ /// \short Function to perform a matrix-matrix multiplication on oomph-lib
+ /// matrices by using Trilinos functionality.\n
+ /// \b NOTE 1. There are two Trilinos matrix-matrix multiplication methods 
+ /// available, using either the EpetraExt::MatrixMatrix class (if use_ml == 
+ /// false) or using ML (Epetra_MatrixMult method)
+ /// \b NOTE 2. the solution matrix (matrix_soln) will be returned with the 
+ /// same distribution as matrix1
+ /// \b NOTE 3. All matrices must share the same communicator. 
+ void multiply(CRDoubleMatrix &matrix_1,
+               CRDoubleMatrix &matrix_2,
+               CRDoubleMatrix &matrix_soln,
+               const bool& use_ml = false);
+
+#ifdef OOMPH_HAS_MPI
+ /// \short takes a oomph-lib distribution and returns a trilinos mpi map 
+ /// (Epetra_Map)
+ void create_epetra_map(const LinearAlgebraDistribution* distribution_pt,
+                        const Epetra_MpiComm* epetra_comm_pt,
+                        Epetra_Map* &epetra_map_pt, int* &my_global_rows);
+#else
+  /// \short creates a serial epetra_map of size nrow
+ void create_epetra_map(const LinearAlgebraDistribution* distribution_pt,
+                        const Epetra_SerialComm* epetra_comm_pt,
+                        Epetra_Map* &epetra_map_pt);
+#endif
+   
+#ifdef PARANOID
+ /// \short Function to compare a distribution described by an oomph-lib 
+ /// DistributionInfo object to a distribution described by a Trilinos
+ /// Epetra_Map object. Returns true if they describe the same distribution.
+ /// Used as a PARANOID check in other TrilinosHelpers methods
+ bool compare_maps(const LinearAlgebraDistribution* oomph_distribution_pt, 
+                   const Epetra_Map& epetra_map);
+#endif
+} // end of trilinos helpers namespace
+} // end of namspace oomph
 #endif

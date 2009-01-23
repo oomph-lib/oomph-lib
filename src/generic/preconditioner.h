@@ -39,9 +39,7 @@
 #include "problem.h"
 #include <algorithm>
 
-#ifdef OOMPH_HAS_MPI
-#include "distributed_vector.h"
-#endif
+
 
 namespace oomph
 {
@@ -51,7 +49,7 @@ namespace oomph
 /// preconditioners and primarily contains the method definitions. All 
 /// preconditioners should be derived from this class.
 //=============================================================================
-class Preconditioner
+ class Preconditioner : public DistributableLinearAlgebraObject
 {
 
  public:
@@ -75,23 +73,9 @@ class Preconditioner
   /// Destructor (empty)
   virtual ~Preconditioner(){}
 
-#ifdef OOMPH_HAS_MPI
-  /// \short Apply the preconditioner. This method should apply the 
-  /// preconditioner operator to the vector r and return the vector z. This
-  /// is a specialisation for distributed vectors 
-  virtual void preconditioner_solve(const DistributedVector<double>&r, 
-                                    DistributedVector<double> &z)
-   {
-    throw OomphLibError
-     ("Preconditioner::preconditioner_solve() is broken virtual",
-      "Preconditioner::preconditioner_solve()",
-      OOMPH_EXCEPTION_LOCATION);
-   }
-#endif
-
   /// \short Apply the preconditioner. This method should apply the 
   /// preconditioner operator to the vector r and return the vector z.
-  virtual void preconditioner_solve(const Vector<double>&r, Vector<double> &z)
+  virtual void preconditioner_solve(const DoubleVector &r, DoubleVector &z)
    {
     throw OomphLibError
      ("Preconditioner::preconditioner_solve() is broken virtual",
@@ -114,22 +98,8 @@ class Preconditioner
   /// associated with a preconditioner to be deleted
   virtual void clean_up_memory(){};
 
-#ifdef OOMPH_HAS_MPI
-  /// \short accesss function to the distribution of this preconditioner
-  DistributionInfo& distribution() { return Preconditioner_distribution; }
-
-  /// \short accesss function to the distribution of this preconditioner
-  /// (const version)
-  DistributionInfo distribution() const { return Preconditioner_distribution; }
-
-  protected:
-
-  /// \short The distribution of this preconditioner
-  DistributionInfo Preconditioner_distribution;
-#endif
-
-
 };//Preconditioner
+
 
 //=============================================================================
 /// The Identity Preconditioner
@@ -157,280 +127,67 @@ class IdentityPreconditioner : public Preconditioner
   /// Destructor (empty)
   virtual ~IdentityPreconditioner(){}
 
-  /// setup method - nothing to setup for this preconditioner
+  /// setup method - just sets the distribution
   virtual void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
-   {}
-
-#ifdef OOMPH_HAS_MPI
-  /// \short Apply the preconditioner. This is a specialisation for 
-  /// distributed vectors 
-  virtual void preconditioner_solve(const DistributedVector<double>&r, 
-                                    DistributedVector<double> &z)
    {
-    z= r;
-   }
-#endif
-
-  /// \short Apply the preconditioner. This method should apply the 
-  /// preconditioner operator to the vector r and return the vector z.
-  virtual void preconditioner_solve(const Vector<double>&r, Vector<double> &z)
-   {
-    unsigned nrow = r.size();
-    z.resize(nrow);
-    for (unsigned i = 0; i < nrow; i++)
+    // first attempt to cast to DistributableLinearAlgebraObject
+    DistributableLinearAlgebraObject* dist_matrix_pt = 
+     dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt);
+    
+    // if it is a distributable matrix
+    if (dist_matrix_pt != 0)
      {
-      z[i] = r[i];
+      // store the distribution
+      Distribution_pt->rebuild(dist_matrix_pt->distribution_pt());
+     }
+    
+    // else it is not a distributable matrix
+    else
+     {
+      // # of rows in the matrix
+      unsigned n_row=matrix_pt->nrow();
+
+      // create the distribution
+      Distribution_pt->rebuild(problem_pt->communicator_pt(),n_row,false);
      }
    }
- };  
-
-//=====================================================================
-/// Matrix-based diagonal preconditioner
-//=====================================================================
-class MatrixBasedDiagPreconditioner : public Preconditioner
-{
- public:
- 
- ///Constructor (empty)
- MatrixBasedDiagPreconditioner(){};
- 
- ///Destructor (empty)
- ~MatrixBasedDiagPreconditioner(){};
- 
- /// Broken copy constructor
- MatrixBasedDiagPreconditioner(const MatrixBasedDiagPreconditioner&) 
-  { 
-   BrokenCopy::broken_copy("MatrixBasedDiagPreconditioner");
-  } 
- 
- /// Broken assignment operator
- void operator=(const MatrixBasedDiagPreconditioner&) 
-  {
-   BrokenCopy::broken_assign("MatrixBasedDiagPreconditioner");
-  }
-
-  /// Apply preconditioner to z, i.e. z=D^-1 
-  void preconditioner_solve(const Vector<double>&r, Vector<double> &z);
-
-#ifdef OOMPH_HAS_MPI
-  /// \short Apply preconditioner: Multiply r by the inverse of the diagonal.
-  /// Specialisation for \c DistributedVector s
-  void preconditioner_solve(const DistributedVector<double> &r,
-                            DistributedVector<double>& z);
+  
+  /// \short Apply the preconditioner. This method should apply the 
+  /// preconditioner operator to the vector r and return the vector z.
+  virtual void preconditioner_solve(const DoubleVector&r, DoubleVector &z)
+   {
+#ifdef PARANOID
+  if (*r.distribution_pt() != *Distribution_pt)
+   {
+    std::ostringstream error_message_stream;
+    error_message_stream 
+     << "The r vector must have teh same distribution as the preconditioner. "
+     << "(this is the same as the matrix passed to setup())";
+    throw OomphLibError
+     (error_message_stream.str(),
+      "IdentityPreconditioner::preconditioner_solve()",
+      OOMPH_EXCEPTION_LOCATION);
+   }
+  if (z.distribution_setup())
+   {
+    if (*z.distribution_pt() != *Distribution_pt)
+     {
+      std::ostringstream error_message_stream;
+      error_message_stream 
+       << "The z vector distribution has been setup; it must have the "
+       << "same distribution as the r vector (and preconditioner).";
+      throw OomphLibError
+       (error_message_stream.str(),
+        "IdentityPreconditioner::preconditioner_solve()",
+        OOMPH_EXCEPTION_LOCATION);
+     }
+   }
 #endif
 
-  /// \short Setup the preconditioner (store diagonal) from the fully
-  /// assembled matrix. Problem pointer is ignored.
-  void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
-
- private:
-
-  /// Vector of inverse diagonal entries
-  Vector<double> Inv_diag;
-};
-
-
-
-
-
-//=============================================================================
-/// \short Class for a compressed-matrix coefficent (for either CC or CR
-/// matrices). Contains the (row or column) index and value of a 
-/// coefficient in a compressed row or column.
-/// Currently only used in ILU(0) for CCDoubleMatrices to allow the 
-/// coefficients in each compressed column [row] to be sorted by 
-/// their row [column] index.
-//=============================================================================
-class CompressedMatrixCoefficient
-{
-
-  public:
-
- /// Constructor (no arguments)
- CompressedMatrixCoefficient(){}
-
- /// Constructor (takes the index and value as arguments)
- CompressedMatrixCoefficient(const unsigned& index, const double& value)
-  {
-   // store the index and value
-   Index = index;
-   Value = value;
-  }
-
- /// Destructor (does nothing)
- ~CompressedMatrixCoefficient(){}
-
-  /// Copy Constructor. Not Broken. Required for STL sort function. 
- CompressedMatrixCoefficient(const CompressedMatrixCoefficient& a) 
-  { 
-   Index = a.index();
-   Value = a.value();   
-  } 
- 
- /// Assignment Operator. Not Broken. Required for STL sort function.
- void operator=(const CompressedMatrixCoefficient& a) 
-  { 
-   Index = a.index();
-   Value = a.value();
-  } 
-
- /// Less Than Operator (for the STL sort function)
- bool operator<(const CompressedMatrixCoefficient& a) const
-  {
-   return Index < a.index();
-  }
-
- /// access function for the coefficient's (row or column) index
- unsigned& index() { return Index; }
-
- /// access function for the coefficient value
- double& value() { return Value; }
-
- /// \short Access function for the coefficient's (row or column_ index 
- /// (const version)
- unsigned index() const { return Index; }
-
- /// access function for the coefficient's value (const version)
- double value() const { return Value; }
-
-  private:
-
- /// the row or column index of the compressed-matrix coefficient
- unsigned Index;
-
- /// the value of the compressed-matrix coefficient
- double Value;
-
-};
-
-
-
-
-
-//=============================================================================
-/// ILU(0) Preconditioner
-//=============================================================================
-template <typename MATRIX> 
-class ILUZeroPreconditioner : public Preconditioner
-{
-};
-
-
-//=============================================================================
-/// ILU(0) Preconditioner for matrices of CCDoubleMatrix Format
-//=============================================================================
-template <> 
-class ILUZeroPreconditioner<CCDoubleMatrix> : public Preconditioner
-{
- 
- public :
-  
-  ///Constructor (empty)
-  ILUZeroPreconditioner(){};
- 
- ///Destructor (empty)
- ~ILUZeroPreconditioner(){};
- 
-
- /// Broken copy constructor
- ILUZeroPreconditioner(const ILUZeroPreconditioner&) 
-  { 
-   BrokenCopy::broken_copy("ILUZeroPreconditioner");
-  } 
- 
- /// Broken assignment operator
- void operator=(const ILUZeroPreconditioner&) 
-  {
-   BrokenCopy::broken_assign("ILUZeroPreconditioner");
-  }
-
- 
- /// Apply preconditioner to r 
- void preconditioner_solve(const Vector<double>&r, Vector<double> &z);
-
- /// \short Setup the preconditioner (store diagonal) from the fully
- /// assembled matrix. Problem pointer is ignored.
- void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
- 
-  private:
-
- /// Column start for upper triangular matrix 
- Vector<unsigned> U_column_start;
-
- /// \short Row entry for the upper triangular matrix (each element of the 
- /// vector contains the row index and coefficient) 
- Vector<CompressedMatrixCoefficient> U_row_entry;
-
- /// Column start for lower triangular matrix 
- Vector<unsigned> L_column_start;
-
- /// \short Row entry for the lower triangular matrix (each element of the 
- /// vector contains the row index and coefficient)
- Vector<CompressedMatrixCoefficient> L_row_entry;
-
-};
-
-
-//=============================================================================
-/// ILU(0) Preconditioner for matrices of CRDoubleMatrix Format
-//=============================================================================
-template <> 
-class ILUZeroPreconditioner<CRDoubleMatrix> : public Preconditioner
-{
- 
- public :
-  
-  ///Constructor (empty)
-  ILUZeroPreconditioner(){};
- 
-
- /// Broken copy constructor
- ILUZeroPreconditioner(const ILUZeroPreconditioner&) 
-  { 
-   BrokenCopy::broken_copy("ILUZeroPreconditioner");
-  } 
- 
- /// Broken assignment operator
- void operator=(const ILUZeroPreconditioner&) 
-  {
-   BrokenCopy::broken_assign("ILUZeroPreconditioner");
-  }
- 
- ///Destructor (empty)
- ~ILUZeroPreconditioner(){};
- 
- /// Apply preconditioner to r
- void preconditioner_solve(const Vector<double>&r, Vector<double> &z);
- 
- /// \short Setup the preconditioner (store diagonal) from the fully
- /// assembled matrix. Problem pointer is ignored.
- void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
- 
- 
-  private:
-
-
- /// Row start for upper triangular matrix 
- Vector<unsigned> U_row_start;
-
- /// Column index for upper triangular matrix 
- Vector<unsigned> U_column_index;
-
- /// Values for upper triangular matrix 
- Vector<double> U_value;
- 
- /// Row start for lower triangular matrix 
- Vector<unsigned> L_row_start;
-
- /// Column index for lower triangular matrix 
- Vector<unsigned> L_column_index;
-
- /// Values for lower triangular matrix 
- Vector<double> L_value;
-  
-};
-
-
+    // apply
+    z=r;
+   }
+ };  
 }
 
 #endif

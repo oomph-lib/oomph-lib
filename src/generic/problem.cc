@@ -20,7 +20,7 @@
 //LIC// You should have received a copy of the GNU Lesser General Public
 //LIC// License along with this library; if not, write to the Free Software
 //LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-//LIC// 02110-1301  USA.
+//LIC// 02110-1301  USA.[
 //LIC// 
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
@@ -89,6 +89,20 @@ namespace oomph
   Eigen_solver_pt = Default_eigen_solver_pt = new ARPACK;
   
   Assembly_handler_pt = Default_assembly_handler_pt = new AssemblyHandler;
+
+  // setup the communicator
+#ifdef OOMPH_HAS_MPI
+  if (MPI_Helpers::MPI_has_been_initialised)
+   {
+    Communicator_pt = new OomphCommunicator(MPI_Helpers::Communicator_pt);
+   }
+  else
+   {
+    Communicator_pt = new OomphCommunicator();
+   }
+#else
+  Communicator_pt = new OomphCommunicator();
+#endif
  }
 
 //================================================================
@@ -113,7 +127,14 @@ Problem::~Problem()
  delete Default_linear_solver_pt;
  delete Default_eigen_solver_pt;
  delete Default_assembly_handler_pt;
+ delete Communicator_pt;
 
+ // if this problem has sub meshes then we must delete the Mesh_pt
+ if (Sub_mesh_pt.size() != 0)
+  {
+   Mesh_pt->flush_element_and_node_storage();
+   delete Mesh_pt;
+  }
 }
 
 
@@ -548,11 +569,14 @@ unsigned long Problem::assign_eqn_numbers()
 /// Get the vector of dofs, i.e. a vector containing the current
 /// values of all unknowns.
 //================================================================
-void Problem::get_dofs(Vector<double>& dofs)
+void Problem::get_dofs(DoubleVector& dofs)
 {
  //Find number of dofs
  const unsigned long n_dof = ndof();
- dofs.resize(n_dof);
+
+ //Resize the vector
+ LinearAlgebraDistribution dist(this->communicator_pt(),n_dof,false);
+ dofs.rebuild(&dist);
 
  //Copy dofs into vector
  for(unsigned long l=0;l<n_dof;l++)
@@ -564,7 +588,7 @@ void Problem::get_dofs(Vector<double>& dofs)
 //=======================================================================
 /// Function that sets the values of the dofs in the object
 //======================================================================
-void Problem::set_dofs(const Vector<double> &dofs)
+void Problem::set_dofs(const DoubleVector &dofs)
 {
  const unsigned long n_dof = this->ndof();
 #ifdef PARANOID
@@ -590,7 +614,7 @@ void Problem::set_dofs(const Vector<double> &dofs)
 ///Function that adds the values to the dofs
 //==================================================================
 void Problem::add_to_dofs(const double &lambda,
-                          const Vector<double> &increment_dofs)
+                          const DoubleVector &increment_dofs)
 {
  const unsigned long n_dof = this->ndof();
    for(unsigned long l=0;l<n_dof;l++)
@@ -605,12 +629,14 @@ void Problem::add_to_dofs(const double &lambda,
 ///Return the residual vector multiplied by the inverse mass matrix
 ///Virtual so that it can be overloaded for mpi problems
 //=========================================================================
-void Problem::get_inverse_mass_matrix_times_residuals(Vector<double> &Mres)
+void Problem::get_inverse_mass_matrix_times_residuals(DoubleVector &Mres)
 {
  //Find the number of degrees of freedom in the problem
  const unsigned n_dof = this->ndof();
+
  //Resize the vector
- Mres.resize(n_dof);
+ LinearAlgebraDistribution dist(this->communicator_pt(),n_dof,false);
+ Mres.rebuild(&dist);
  
  //If we have discontinuous formulation
  if(Discontinuous_element_formulation)
@@ -646,7 +672,7 @@ void Problem::get_inverse_mass_matrix_times_residuals(Vector<double> &Mres)
       }
      
      //Get the residuals
-     Vector<double> residuals(n_dof);
+     DoubleVector residuals(&dist);
      this->get_residuals(residuals);
      
      // Resolve the linear system
@@ -687,8 +713,9 @@ void Problem::get_inverse_mass_matrix_times_residuals(Vector<double> &Mres)
 //================================================================
 /// Get the total residuals Vector for the problem
 //================================================================
-void Problem::get_residuals(Vector<double> &residuals)
+void Problem::get_residuals(DoubleVector &residuals)
 {
+
  // Three different cases; if MPI_Helpers::MPI_has_been_initialised=true 
  // this means MPI_Helpers::setup() has been called.  This could happen on a
  // code compiled with MPI but run serially; in this instance the
@@ -704,26 +731,54 @@ void Problem::get_residuals(Vector<double> &residuals)
  // The only case where an MPI code cannot run serially at present
  // is one where the distribute function is used (i.e. METIS is called)
 
+ 
+ // start by setting the distribution of the residuals vector if it is not 
+ // setup
+ if (!residuals.distribution_setup())
+  {
+   int n_dof=ndof();
+   LinearAlgebraDistribution dist(Communicator_pt,n_dof,false);
+   residuals.rebuild(&dist);
+  }
+ // otherwise just zero the residuals
+ else
+  {
+#ifdef PARANOID
+   // PARANOID check - if the residuals are distributed then this method
+   // cannot be used, a distributed residuals can only be assembled by
+   // get_jacobian(...) for CRDoubleMatrices
+   if (residuals.distributed())
+    {
+     throw OomphLibError
+      ("this method can only assemble a non-distributed residuals vector",
+       "Problem::get_residuals()",OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   // and zero
+   residuals.initialise();
+  }
+
 #ifdef OOMPH_HAS_MPI
  if (MPI_Helpers::MPI_has_been_initialised)
   {
-   // Number of dofs
-   int n_dof=ndof();
  
-   // Vector to hold the partial residuals if Nproc>1
-   Vector<double> partial_residuals;
+   // cache the number of local rows
+   unsigned nrow = residuals.nrow();
 
-   // pointer to the Vector used in the residuals assembly
-   Vector<double>* residuals_pt;
-
-   // set residuals_pt 
+   // get a pointer to the underlying values
+   double* residuals_pt;
    if (MPI_Helpers::Nproc>1)
     {
-     residuals_pt = &partial_residuals;
+     residuals_pt = new double[nrow];
+     for (unsigned i = 0; i < residuals.nrow(); i++)
+      {
+       residuals_pt[i] = 0.0;  
+      }
     }
    else
-    { 
-     residuals_pt = &residuals;
+    {
+     residuals_pt = residuals.values_pt();
     }
 
    // number of elements
@@ -737,17 +792,16 @@ void Problem::get_residuals(Vector<double> &residuals)
    if (!Problem_has_been_distributed)
     {
      // Distribute work evenly
-     unsigned range=unsigned(double(n_el)/double(MPI_Helpers::Nproc));
-     j_lo=MPI_Helpers::My_rank*range;
-     j_hi=(MPI_Helpers::My_rank+1)*range;
+     unsigned range=unsigned(double(n_el)/double(Communicator_pt->nproc()));
+     j_lo=Communicator_pt->my_rank()*range;
+     j_hi=(Communicator_pt->my_rank()+1)*range;
     
      // Last one needs to incorporate any dangling elements
-     if (MPI_Helpers::My_rank==MPI_Helpers::Nproc-1) j_hi=n_el;
+     if (Communicator_pt->my_rank() == Communicator_pt->nproc()-1)
+      {
+       j_hi=n_el;
+      }
     }
- 
-   // Initialise the partial_residuals Vector to zero
-   residuals_pt->clear();
-   residuals_pt->resize(n_dof,0.0);
 
    // Assemble the partial residual vector: Note that this
    // is a full-length vector but only contributions from 
@@ -775,32 +829,25 @@ void Problem::get_residuals(Vector<double> &residuals)
        //Now loop over the dofs and assign values to global Vector
        for(unsigned l=0;l<n_el_dofs;l++)
         {
-         (*residuals_pt)[el_pt->eqn_number(l)]+=element_residuals[l];
+         residuals_pt[el_pt->eqn_number(l)]+=element_residuals[l];
         }
       }
     }
  
    // Receive from the other processors and assemble if required
-   if (MPI_Helpers::Nproc>1)
+   if (Communicator_pt->nproc()>1)
     {
      // clear and resize residuals
-     residuals.clear();
-     residuals.resize(n_dof, 0.0);
-     MPI_Allreduce(&partial_residuals[0], &residuals[0], n_dof,
+     MPI_Allreduce(residuals_pt,residuals.values_pt(),nrow,
                    MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
+     delete[] residuals_pt;
     }
-  
-
+   
+   
   }
  else // !MPI_Helpers::MPI_has_been_initialised
 #endif // OOMPH_HAS_MPI
   {
-   //Find number of dofs
-   unsigned long n_dof = ndof();
-   residuals.resize(n_dof);
-
-   //Initialise the residuals Vector to zero
-   for(unsigned long l=0;l<n_dof;l++) residuals[l] = 0.0;
 
    //Locally cache pointer to assembly handler
    AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
@@ -827,21 +874,75 @@ void Problem::get_residuals(Vector<double> &residuals)
   }
 }
 
-//================================================================
+//=============================================================================
 /// Get the fully assembled residual vector and Jacobian matrix
-/// in dense storage.
-//================================================================
-void Problem::get_jacobian(Vector<double> &residuals, 
+/// in dense storage. The DoubleVector residuals returned will be 
+/// non-distributed. If on calling this method the DoubleVector residuals is
+/// setup then it must be non-distributed and of the correct length. \n
+/// The matrix type DenseDoubleMatrix is not distributable and therefore 
+/// the residual vector is also assumed to be non distributable.
+//=============================================================================
+void Problem::get_jacobian(DoubleVector &residuals, 
                            DenseDoubleMatrix& jacobian)
 {
+ // get the number of degrees of freedom
+ unsigned n_dof=ndof(); 
+
+#ifdef PARANOID
+ // PARANOID checks : if the distribution of residuals is setup then it must
+ // must not be distributed, have the right number of rows, and the same 
+ // communicator as the problem
+ if (residuals.distribution_pt()->setup())
+  {
+   if (residuals.distribution_pt()->distributed())
+    {
+     std::ostringstream error_stream;
+     error_stream << "If the DoubleVector residuals is setup then it must not "
+                  << "be distributed.";
+     throw OomphLibError(error_stream.str(),
+                         "Problem::get_jacobian(...)",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   if (residuals.distribution_pt()->nrow() != n_dof)
+    {
+     std::ostringstream error_stream;
+     error_stream << "If the DoubleVector residuals is setup then it must have"
+                  << " the correct number of rows";
+     throw OomphLibError(error_stream.str(),
+                         "Problem::get_jacobian(...)",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   if (!(*Communicator_pt == *residuals.distribution_pt()->communicator_pt()))
+    {
+     std::ostringstream error_stream;
+     error_stream << "If the DoubleVector residuals is setup then it must have"
+                  << " the same communicator as the problem.";
+     throw OomphLibError(error_stream.str(),
+                         "Problem::get_jacobian(...)",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+#endif
+
+ // set the residuals distribution if it is not setup
+ if (!residuals.distribution_pt()->setup())
+  {
+   LinearAlgebraDistribution dist(Communicator_pt,n_dof,false);
+   residuals.rebuild(&dist,0.0);
+  }
+ // else just zero the residuals
+ else
+  {
+   residuals.initialise(0.0);
+  }
+
  // Resize the matrices -- this cannot always be done externally
  // because get_jacobian exists in many different versions for
  // different storage formats -- resizing a CC or CR matrix doesn't
  // make sense.
- unsigned n_dof=ndof(); 
- residuals.resize(n_dof);
+
+ // resize the jacobian
  jacobian.resize(n_dof,n_dof);
- residuals.initialise(0.0);
  jacobian.initialise(0.0);
  
  //Locally cache pointer to assembly handler
@@ -877,13 +978,21 @@ void Problem::get_jacobian(Vector<double> &residuals,
   }
 }
 
-//======================================================================
+//=============================================================================
 /// Return the fully-assembled Jacobian and residuals for the problem,
 /// in the case where the Jacobian matrix is in a row compressed storage
-/// format.
-//======================================================================
-void Problem::get_jacobian(Vector<double> &residuals, CRDoubleMatrix &jacobian)
+/// format. \n
+/// The jacobian is a CRDoubleMatrix which is distributable. This method will
+/// by default assemble distributed jacobian and residual, if the
+/// distribution of the jacobian and residuals is not setup. \n 
+/// If the distribution of the jacobian and residuals is setup then: \n
+/// 1) the jacobian and residuals must have the same distribution. \n
+/// 2) if the distribution is distributed then it must be the default 
+/// distribution. \n
+//=============================================================================
+void Problem::get_jacobian(DoubleVector &residuals, CRDoubleMatrix &jacobian)
 {
+ 
  // Three different cases; if MPI_Helpers::MPI_has_been_initialised=true 
  // this means MPI_Helpers::setup() has been called.  This could happen on a
  // code compiled with MPI but run serially; in this instance the
@@ -906,17 +1015,110 @@ void Problem::get_jacobian(Vector<double> &residuals, CRDoubleMatrix &jacobian)
  Vector<Vector<int> > column_index(1);
  Vector<Vector<int> > row_start(1);
  Vector<Vector<double> > value(1); 
- //Allocate generalised storage format for passing to sparse_assemble()
- Vector<Vector<double>*> residuals_vector(1);
- //Set the residuals passed to sparse assemble to be those passed
- //into this function
- residuals_vector[0] = &residuals;
  
+#ifdef PARANOID
+ // PARANOID checks that the distribution of the jacobian matches that of the
+ // residuals (if they are setup) and that they have the right number of rows
+ if (residuals.distribution_pt()->setup() && 
+     jacobian.distribution_pt()->setup())
+  {
+   if (!(*residuals.distribution_pt() == *jacobian.distribution_pt()))
+    {                                    
+     std::ostringstream error_stream;
+     error_stream << "If the distribution of the residuals must "
+                  << "be the same as the distribution of the jacobian."; 
+     throw OomphLibError(error_stream.str(),              
+                         "Problem::get_jacobian(...)", 
+                         OOMPH_EXCEPTION_LOCATION); 
+    }                                                 
+   if (jacobian.distribution_pt()->nrow() != this->ndof())
+    {
+     std::ostringstream error_stream;       
+     error_stream << "The distribution of the jacobian and residuals does not"
+                  << "have the correct number of global rows.";
+      throw OomphLibError(error_stream.str(),                      
+                          "Problem::get_jacobian(...)",       
+                          OOMPH_EXCEPTION_LOCATION);              
+    }                 
+  }
+ else if (residuals.distribution_pt()->setup() != 
+          jacobian.distribution_pt()->setup())
+  {
+     std::ostringstream error_stream; 
+     error_stream << "The distribution of the jacobian and residuals must "
+                  << "both be setup or both not setup";
+     throw OomphLibError(error_stream.str(),                           
+                         "Problem::get_jacobian(...)",              
+                         OOMPH_EXCEPTION_LOCATION); 
+  } 
+#endif 
+
+
+ //Allocate generalised storage format for passing to sparse_assemble()
+ Vector<Vector<double>* > residuals_vector(1);
+ residuals_vector[0] = new Vector<double>();
+ 
+ // determine whether the matrix is distributed (yes if multiple processors)
+ bool distributed = true;
+ if (Communicator_pt->nproc() == 1)
+  {
+   distributed = false;
+  }
+
+ // create a temporary distribution
+ LinearAlgebraDistribution* dist_pt;
+ if (jacobian.distribution_pt()->setup())
+  {
+   dist_pt = new LinearAlgebraDistribution(jacobian.distribution_pt());
+  }
+ else
+  {
+   dist_pt = new LinearAlgebraDistribution(Communicator_pt,
+                                           this->ndof(),distributed);
+   jacobian.rebuild(dist_pt);
+  }
+
  //The matrix is in compressed row format
  bool compressed_row_flag=true;
 
 #ifdef OOMPH_HAS_MPI
- if (MPI_Helpers::MPI_has_been_initialised)
+ // assemble distributed matrix and vector
+ if (dist_pt->distributed())
+  {   
+   // temp ints for nrow_local and nrow total and first_row
+   unsigned long n_row_local;
+   unsigned long n_row_total;
+   unsigned long first_row;
+
+   // Get my block of rows                                     
+   distributed_matrix_sparse_assemble(column_index,     
+                                      row_start,                           
+                                      value,                                  
+                                      residuals_vector,          
+                                      first_row,                   
+                                      n_row_local,           
+                                      n_row_total,         
+                                      compressed_row_flag);
+
+#ifdef PARANOID
+   // final paranoid check the first row and nrow_local of the assembled 
+   // matrices and vectors are the same as the requested distribution.
+   // OR: the requested distribution is the default distribution.
+   if (dist_pt->first_row() != first_row || 
+       dist_pt->nrow_local() != n_row_local)
+    {
+     std::ostringstream error_stream;                                       
+     error_stream << "get_jacobian can only assemble the default distribution "
+                  << "the requested (distributed) distribution does not have "
+                  << "the same set of nrow_local and first_row.";
+     throw OomphLibError(error_stream.str(),                        
+                         "Problem::get_jacobian(...)",          
+                         OOMPH_EXCEPTION_LOCATION);    
+    }
+#endif     
+  }
+ // else we assemble the non distributed jacobian and residuals
+ else
   {
    // Get matrix rows and residual in CR format
    global_matrix_sparse_assemble(column_index,
@@ -925,33 +1127,42 @@ void Problem::get_jacobian(Vector<double> &residuals, CRDoubleMatrix &jacobian)
                                  residuals_vector,
                                  compressed_row_flag);
   }
- else
+#else
+ //Call the helper function sparse_assemble
+ sparse_assemble_row_or_column_compressed(column_index,
+                                          row_start,
+                                          value,
+                                          residuals_vector,
+                                          compressed_row_flag);
 #endif
+
+ //Build the jacobian
+
+ //The jacobian is the first (and only) matrix assembled by this function
+ jacobian.rebuild_matrix(dist_pt->nrow(),
+                         value[0],column_index[0],row_start[0]);
+
+ //build the residuals
+ // copy to the residuals DoubleVector
+ residuals.rebuild(dist_pt);
+ unsigned nrow_local = dist_pt->nrow_local();
+ for (unsigned i = 0; i < nrow_local; i++)
   {
-   //Call the helper function sparse_assemble
-   sparse_assemble_row_or_column_compressed(column_index,
-                                            row_start,
-                                            value,
-                                            residuals_vector,
-                                            compressed_row_flag);
+   residuals[i] = (*residuals_vector[0])[i];
   }
 
- //The jacobian is the first (and only) matrix assembled by
- //the helper function
- //Get the number of dofs (the size of the matrix)
- unsigned long n_dof = ndof();
- //Build the jacobian
- jacobian.build(value[0],column_index[0],row_start[0],n_dof,n_dof);
-
+ // clean up dist_pt and residuals_vector pt
+ delete dist_pt;
+ delete residuals_vector[0];
 }
 
 
-//=======================================================================
+//=============================================================================
 /// Return the fully-assembled Jacobian and residuals for the problem,
 /// in the case when the jacobian matrix is in column-compressed storage
 /// format.
-//=======================================================================
-void Problem::get_jacobian(Vector<double> &residuals, CCDoubleMatrix &jacobian)
+//=============================================================================
+void Problem::get_jacobian(DoubleVector &residuals, CCDoubleMatrix &jacobian)
 {
  // Three different cases; if MPI_Helpers::MPI_has_been_initialised=true 
  // this means MPI_Helpers::setup() has been called.  This could happen on a
@@ -963,10 +1174,49 @@ void Problem::get_jacobian(Vector<double> &residuals, CCDoubleMatrix &jacobian)
  // and the code calls...
  //
  // Thirdly, the serial version (compiled by all, but only run when compiled
- // with MPI if MPI_Helpers::MPI_has_been_initialised=false
+ // with MPI if MPI_Helpers::MPI_has_been_5Binitialised=false
  //
  // The only case where an MPI code cannot run serially at present
  // is one where the distribute function is used (i.e. METIS is called)
+
+ // get the number of degrees of freedom  
+ unsigned n_dof=ndof();   
+
+#ifdef PARANOID   
+ // PARANOID checks : if the distribution of residuals is setup then it must
+ // must not be distributed, have the right number of rows, and the same 
+ // communicator as the problem   
+ if (residuals.distribution_pt()->setup())
+  {                                                            
+   if (residuals.distribution_pt()->distributed())  
+    {                  
+     std::ostringstream error_stream;                
+     error_stream << "If the DoubleVector residuals is setup then it must not "
+                  << "be distributed.";         
+     throw OomphLibError(error_stream.str(),      
+                         "Problem::get_jacobian(...)",      
+                         OOMPH_EXCEPTION_LOCATION);       
+    }                                        
+   if (residuals.distribution_pt()->nrow() != n_dof)     
+    {                               
+     std::ostringstream error_stream;                 
+     error_stream << "If the DoubleVector residuals is setup then it must have"
+                  << " the correct number of rows";     
+     throw OomphLibError(error_stream.str(),                          
+                         "Problem::get_jacobian(...)",     
+                         OOMPH_EXCEPTION_LOCATION);        
+    }                                 
+   if (!(*Communicator_pt == *residuals.distribution_pt()->communicator_pt()))
+    {                  
+     std::ostringstream error_stream;      
+     error_stream << "If the DoubleVector residuals is setup then it must have"
+                  << " the same communicator as the problem.";  
+     throw OomphLibError(error_stream.str(),                  
+                         "Problem::get_jacobian(...)",     
+                         OOMPH_EXCEPTION_LOCATION);       
+    }                                                
+  }                                           
+#endif  
 
  //Allocate storage for the matrix entries
  //The generalised Vector<Vector<>> structure is required
@@ -979,7 +1229,7 @@ void Problem::get_jacobian(Vector<double> &residuals, CCDoubleMatrix &jacobian)
  Vector<Vector<double>*> residuals_vector(1);
  //Set the residuals passed to sparse assemble to be those passed
  //into this function
- residuals_vector[0] = &residuals;
+ residuals_vector[0] = new Vector<double>;
  
  //The matrix is in compressed column format
  bool compressed_row_flag=false;
@@ -1005,15 +1255,36 @@ void Problem::get_jacobian(Vector<double> &residuals, CCDoubleMatrix &jacobian)
                                             compressed_row_flag);
   }
  
- //The jacobian is the first (and only) matrix assembled by
- //the helper function
- //Get the number of dofs (size of the matrix)
- unsigned long n_dof = ndof();
- //Build the Jacobian
- jacobian.build(value[0],row_index[0],column_start[0],n_dof,n_dof);
+ // create a temporary distribution             
+ LinearAlgebraDistribution* dist_pt;        
+ if (residuals.distribution_pt()->setup()) 
+  {
+   dist_pt = new LinearAlgebraDistribution(*residuals.distribution_pt());
+  }                                                           
+ else                             
+  {                                                   
+   dist_pt = new LinearAlgebraDistribution(Communicator_pt,this->ndof(),false);
+  }                               
 
+ //Build the jacobian                          
+ //The jacobian is the first (and only) matrix assembled by this function   
+ jacobian.build(value[0],row_index[0],column_start[0],n_dof,n_dof);     
+                                                        
+ //build the residuals                                                
+ // copy to the residuals DoubleVector 
+ residuals.rebuild(dist_pt);                                    
+ unsigned nrow_local = dist_pt->nrow_local();
+ for (unsigned i = 0; i < nrow_local; i++)   
+  {                                           
+   residuals[i] = (*residuals_vector[0])[i];  
+  }                                       
+                                                                 
+ // clean up dist_pt and residuals_vector pt               
+ delete dist_pt;                                                   
+ delete residuals_vector[0];   
 }
 
+/*
 #ifdef OOMPH_HAS_MPI
 
 //=============================================================================
@@ -1067,7 +1338,7 @@ void Problem::get_jacobian(DistributedVector<double> &residuals,
 }
 
 #endif
-
+*/
 
 //=====================================================================
 /// This is a (private) helper function that is used to assemble system
@@ -2951,7 +3222,7 @@ void Problem::distributed_matrix_sparse_assemble(
 //================================================================
 /// \short Get the full Jacobian by finite differencing
 //================================================================
-void Problem::get_fd_jacobian(Vector<double> &residuals, 
+void Problem::get_fd_jacobian(DoubleVector &residuals, 
                               DenseMatrix<double> &jacobian)
 {
 
@@ -2970,7 +3241,7 @@ void Problem::get_fd_jacobian(Vector<double> &residuals,
  const unsigned long n_dof = ndof();
  
 // Advanced residuals
- Vector<double> residuals_pls(n_dof);
+ DoubleVector residuals_pls;
 
  // Get reference residuals
  get_residuals(residuals);
@@ -3011,7 +3282,7 @@ void Problem::get_fd_jacobian(Vector<double> &residuals,
 /// This is required in continuation problems
 //=======================================================================
 void Problem::get_derivative_wrt_global_parameter(double* const &parameter_pt,
-                                                  Vector<double> &result)
+                                                  DoubleVector &result)
 {
 
 #ifdef OOMPH_HAS_MPI
@@ -3024,6 +3295,16 @@ void Problem::get_derivative_wrt_global_parameter(double* const &parameter_pt,
   }
 #endif
 
+ //Find the number of degrees of freedom in the problem
+ const unsigned long n_dof = this->ndof();
+
+ // create the linear algebra distribution for this solver
+ // currently only global (non-distributed) distributions are allowed
+ LinearAlgebraDistribution* dist_pt = new 
+  LinearAlgebraDistribution(Communicator_pt,n_dof,false);
+
+ // rebuild the result
+ result.rebuild(dist_pt);
 
  //Initialise the result vector to zero 
  result.initialise(0.0);
@@ -3031,11 +3312,8 @@ void Problem::get_derivative_wrt_global_parameter(double* const &parameter_pt,
  //Get the residuals and store in the result vector
  get_residuals(result);
 
- //Find the number of degrees of freedom in the problem
- const unsigned long n_dof = this->ndof();
-
  //Storage for the new residuals
- Vector<double> newres(n_dof);
+ DoubleVector newres(dist_pt);
   
  //Increase the global parameter
  const double FD_step = 1.0e-8;
@@ -3129,7 +3407,7 @@ void Problem::get_derivative_wrt_global_parameter(
 //==================================================================
 void Problem::solve_eigenproblem(const unsigned &n_eval,
                                  Vector<std::complex<double> > &eigenvalue,
-                                 Vector<Vector<double> > &eigenvector)
+                                 Vector<DoubleVector> &eigenvector)
 {
  //Call the Eigenproblem for the eigensolver
  Eigen_solver_pt->solve_eigenproblem(this,n_eval,eigenvalue,eigenvector);
@@ -3137,11 +3415,74 @@ void Problem::solve_eigenproblem(const unsigned &n_eval,
 
 //===================================================================
 /// Get the matrices required to solve an eigenproblem
+/// WARNING: temporarily this method only works with non-distributed 
+/// matrices
 //===================================================================
 void Problem::get_eigenproblem_matrices(CRDoubleMatrix &mass_matrix,
                                         CRDoubleMatrix &main_matrix,
                                         const double &shift)
 {
+#ifdef PARANOID
+ if (mass_matrix.distribution_setup())
+  {
+   if (mass_matrix.nrow() != this->ndof())
+    {   
+     std::ostringstream error_stream;
+     error_stream
+      << "mass_matrix has a distribution, but the number of rows is not "
+      << "equal to the number of degrees of freedom in the problem.";
+     throw OomphLibError(error_stream.str(),
+                         "Problem::get_eigen_problem_matrices(...)",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   if (mass_matrix.distribution_pt()->distributed())
+    {
+     std::ostringstream error_stream;
+     error_stream
+      << "mass_matrix cannot be distributed";
+     throw OomphLibError(error_stream.str(),
+                         "Problem::get_eigen_problem_matrices(...)",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+ if (main_matrix.distribution_setup())
+  {
+   if (main_matrix.nrow() != this->ndof())
+    {
+     std::ostringstream error_stream;
+     error_stream
+      << "main_matrix has a distribution, but the number of rows is not "
+      << "equal to the number of degrees of freedom in the problem.";
+     throw OomphLibError(error_stream.str(),
+                         "Problem::get_eigen_problem_matrices(...)",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   if (main_matrix.distribution_pt()->distributed())
+    {
+     std::ostringstream error_stream;
+     error_stream
+      << "main_matrix cannot be distributed";
+     throw OomphLibError(error_stream.str(),
+                         "Problem::get_eigen_problem_matrices(...)",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+#endif 
+
+ // if the matrices are not setup then build them
+ if (!main_matrix.distribution_setup() || !main_matrix.distribution_setup())
+  {
+   LinearAlgebraDistribution dist(this->communicator_pt(),this->ndof(),false);
+   if (!main_matrix.distribution_setup())
+    {
+     main_matrix.rebuild(&dist);
+    }
+   if (!mass_matrix.distribution_setup())
+    {
+     mass_matrix.rebuild(&dist);
+    }
+  }
+
  //Store the old assembly handler
  AssemblyHandler* old_assembly_handler_pt = Assembly_handler_pt;
  //Now setup the eigenproblem handler, pass in the value of the shift
@@ -3166,11 +3507,11 @@ void Problem::get_eigenproblem_matrices(CRDoubleMatrix &mass_matrix,
  unsigned long n_dof = ndof();
 
  //The main matrix is the first entry
- main_matrix.build(value[0],column_or_row_index[0],row_or_column_start[0],
-                   n_dof,n_dof);
+ main_matrix.rebuild_matrix(n_dof,value[0],column_or_row_index[0],
+                            row_or_column_start[0]);
  //The mass matrix is the second entry
- mass_matrix.build(value[1],column_or_row_index[1],row_or_column_start[1],
-                   n_dof,n_dof);   
+ mass_matrix.rebuild_matrix(n_dof,value[1],column_or_row_index[1],
+                            row_or_column_start[1]);   
 
  //Delete the eigenproblem handler
  delete Assembly_handler_pt;
@@ -3230,14 +3571,14 @@ void Problem::restore_dof_values()
 //======================================================================
 /// Assign the eigenvector passed to the function to the dofs
 //======================================================================
-void Problem::assign_eigenvector_to_dofs(Vector<double> &eigenvector) 
+void Problem::assign_eigenvector_to_dofs(DoubleVector &eigenvector) 
 {
  unsigned long n_dof = ndof();
  //Check that the eigenvector has the correct size
- if(eigenvector.size() != n_dof)
+ if(eigenvector.nrow() != n_dof)
   {
    std::ostringstream error_message;
-   error_message << "Eigenvector has size " << eigenvector.size() 
+   error_message << "Eigenvector has size " << eigenvector.nrow() 
                  << ", not equal to the number of dofs in the problem," 
                  << n_dof << std::endl;
 
@@ -3260,14 +3601,14 @@ void Problem::assign_eigenvector_to_dofs(Vector<double> &eigenvector)
 /// magnitude epsilon
 //======================================================================
 void Problem::add_eigenvector_to_dofs(const double &epsilon,
-                                      Vector<double> &eigenvector) 
+                                      DoubleVector &eigenvector) 
 {
  unsigned long n_dof = ndof();
  //Check that the eigenvector has the correct size
- if(eigenvector.size() != n_dof)
+ if(eigenvector.nrow() != n_dof)
   {
    std::ostringstream error_message;
-   error_message << "Eigenvector has size " << eigenvector.size() 
+   error_message << "Eigenvector has size " << eigenvector.nrow() 
                  << ", not equal to the number of dofs in the problem," 
                  << n_dof << std::endl;
 
@@ -3294,19 +3635,17 @@ void Problem::add_eigenvector_to_dofs(const double &epsilon,
 //================================================================
 void Problem::newton_solve()
 {
+
  // Initialise timers
  double total_linear_solver_time=0.0;
-#ifdef OOMPH_HAS_MPI   
- double t_start = MPI_Wtime();
-#else
- clock_t t_start = clock();
-#endif
+ double t_start = TimingHelpers::timer();
 
  //Find total number of dofs
  unsigned long n_dofs = ndof();
 
  //Set up the Vector to hold the solution
- Vector<double> dx(n_dofs,0.0);
+ LinearAlgebraDistribution global_dist(Communicator_pt,n_dofs,false);
+ DoubleVector dx;
 
  //Set the counter
  unsigned count=0;
@@ -3362,11 +3701,12 @@ void Problem::newton_solve()
        synchronise_dofs();
 #endif
        actions_before_newton_convergence_check();
+       dx.clear();
        get_residuals(dx);
+       
+       //Get maximum residuals
+       double maxres = dx.max();
 
-       //Get maximum residuals, using our own abscmp function
-       double maxres = std::abs(*std::max_element(dx.begin(),dx.end(),
-                                                  AbsCmp<double>()));
        if (!Shut_up_in_newton_solve) 
         {
          oomph_info << "Initial Maximum residuals " << maxres << std::endl;
@@ -3405,7 +3745,7 @@ void Problem::newton_solve()
      if ((count!=1)||(!Problem_is_nonlinear)) get_residuals(dx);
 
      // Backup residuals
-     Vector<double> resid(dx);
+     DoubleVector resid(dx);
      
      // Resolve
      Linear_solver_pt->resolve(resid,dx);
@@ -3445,13 +3785,17 @@ void Problem::newton_solve()
 #endif
                 << std::endl << std::endl;
     }
+
    //Subtract the new values from the true dofs
+   dx.redistribute(global_dist);
+   double* dx_pt = dx.values_pt();
    for(unsigned l=0;l<n_dofs;l++)
     { 
      // This is needed during parallel runs when dofs that are not
      // held on the current processor are nulled out. Can change
      // this once/if the Dof_pt vector is distributed too. 
-     if (Dof_pt[l]!=0) *Dof_pt[l] -= dx[l];
+     if (Dof_pt[l]!=0)
+      *Dof_pt[l] -= dx_pt[l];
     }
 
 #ifdef OOMPH_HAS_MPI
@@ -3475,11 +3819,12 @@ void Problem::newton_solve()
      //std::cout << "Maxres correction " << maxres << "\n";
 
      //Calculate the new residuals
+     dx.clear();
      get_residuals(dx);
 
      //Get the maximum residuals
-     maxres = std::abs(*std::max_element(dx.begin(),dx.end(),
-                                         AbsCmp<double>()));
+     maxres = dx.max();
+
      if (!Shut_up_in_newton_solve) 
       {
        oomph_info << "Newton Step " << count << ": Maximum residuals "
@@ -3662,7 +4007,8 @@ newton_solve_continuation(double* const &parameter_pt)
 {
  //Set up memory for z 
  unsigned long n_dofs = ndof();
- Vector<double> z(n_dofs);
+ LinearAlgebraDistribution dist(Communicator_pt,n_dofs,false);
+ DoubleVector z(&dist);
  //Call the solver
  return newton_solve_continuation(parameter_pt,z);
 }
@@ -3678,12 +4024,18 @@ newton_solve_continuation(double* const &parameter_pt)
 //==================================================================
 unsigned Problem::
 newton_solve_continuation(double* const &parameter_pt,
-                          Vector<double> &z)
+                          DoubleVector &z)
 {
+
  //Find the total number of dofs
  unsigned long n_dofs = ndof();
+
+ // create the distribution (not distributed)
+ LinearAlgebraDistribution dist(this->communicator_pt(),n_dofs,false);
+
  //Assign memory for solutions of the equations
- Vector<double> y(n_dofs);
+ DoubleVector y(&dist);
+
  //Assign memory for the dot products of the uderivatives and y and z
  double uderiv_dot_y = 0.0, uderiv_dot_z = 0.0;
  //Set and initialise the counter
@@ -3721,8 +4073,7 @@ newton_solve_continuation(double* const &parameter_pt,
      actions_before_newton_convergence_check();
      get_residuals(y);
      //Get maximum residuals, using our own abscmp function
-     double maxres = std::abs(*std::max_element(y.begin(),y.end(),
-                                                AbsCmp<double>()));
+     double maxres = y.max();
 
      //Assemble the residuals for the arc-length step
      arc_length_constraint_residual = 0.0; 
@@ -3743,7 +4094,7 @@ newton_solve_continuation(double* const &parameter_pt,
       }
 
      //Find the max
-     oomph_info << "Initial Maximum residuals " << maxres << std::endl;
+
      //If we are below the Tolerance, then return immediately
      if(maxres < Newton_solver_tolerance) {LOOP_FLAG=0; count=0; continue;}
     }
@@ -3760,7 +4111,7 @@ newton_solve_continuation(double* const &parameter_pt,
      // Copy rhs vector into local storage so it doesn't get overwritten
      // if the linear solver decides to initialise the solution vector, say,
      // which it's quite entitled to do!
-     Vector<double> input_z(z);
+     DoubleVector input_z(z);
 
      //Solve the system for the two right-hand sides.
      dynamic_cast<BlockHopfLinearSolver*>(Linear_solver_pt)->
@@ -3778,7 +4129,7 @@ newton_solve_continuation(double* const &parameter_pt,
      // Copy rhs vector into local storage so it doesn't get overwritten
      // if the linear solver decides to initialise the solution vector, say,
      // which it's quite entitled to do!
-     Vector<double> input_z(z);
+     DoubleVector input_z(z);
      
      //Now resolve the system with the new RHS
      Linear_solver_pt->resolve(input_z,z);
@@ -3813,7 +4164,10 @@ newton_solve_continuation(double* const &parameter_pt,
    *parameter_pt -= dparam;
        
    //Update the values of the other degrees of freedom
-   for(unsigned long l=0;l<n_dofs;l++) {*Dof_pt[l] -= y[l] - dparam*z[l];}
+   for(unsigned long l=0;l<n_dofs;l++) 
+    {
+     *Dof_pt[l] -= y[l] - dparam*z[l];
+    }
 
    // Do any updates that are required 
    actions_after_newton_step();
@@ -3827,9 +4181,8 @@ newton_solve_continuation(double* const &parameter_pt,
    get_residuals(y);
    
    //Get the maximum residuals
-   double maxres = std::abs(*std::max_element(y.begin(),y.end(),
-                                              AbsCmp<double>()));
-
+   double maxres = y.max();
+                           
    //Assemble the residuals for the arc-length step
    arc_length_constraint_residual = 0.0; 
    //Add the variables
@@ -3849,9 +4202,6 @@ newton_solve_continuation(double* const &parameter_pt,
      maxres = std::abs(arc_length_constraint_residual);
     }
 
-   oomph_info << "Newton Step " << count 
-              << ": Maximum residuals " << maxres << std::endl;
-   
    //If we have converged jump straight to the test at the end of the loop
    if(maxres < Newton_solver_tolerance) {LOOP_FLAG=0; continue;} 
    
@@ -3879,7 +4229,7 @@ newton_solve_continuation(double* const &parameter_pt,
   {
    Linear_solver_pt->disable_resolve();
   }
- 
+
  //Return the number of Newton Steps taken
  return count;
 }
@@ -3898,8 +4248,11 @@ calculate_continuation_derivatives(double* const &parameter_pt)
  //Find the number of degrees of freedom in the problem
  const unsigned long n_dofs = ndof();
 
+ // create the distribution
+ LinearAlgebraDistribution dist(Communicator_pt,n_dofs,false);
+
  //Assign memory for solutions of the equations
- Vector<double> z(n_dofs);
+ DoubleVector z(&dist);
 
  //If it's the block hopf solver need to solve for both RHS
  //at once, but this would all be alleviated if we have the solve
@@ -3913,7 +4266,7 @@ calculate_continuation_derivatives(double* const &parameter_pt)
    // Copy rhs vector into local storage so it doesn't get overwritten
    // if the linear solver decides to initialise the solution vector, say,
    // which it's quite entitled to do!
-   Vector<double> dummy(n_dofs), input_z(z);
+   DoubleVector dummy(&dist), input_z(z);
 
    //Solve for the two RHSs
    dynamic_cast<BlockHopfLinearSolver*>(Linear_solver_pt)->
@@ -3940,7 +4293,7 @@ calculate_continuation_derivatives(double* const &parameter_pt)
    // Copy rhs vector into local storage so it doesn't get overwritten
    // if the linear solver decides to initialise the solution vector, say,
    // which it's quite entitled to do!
-   Vector<double> input_z(z);
+   DoubleVector input_z(z);
    
    //Now resolve the system with the new RHS and overwrite the solution
    Linear_solver_pt->resolve(input_z,z);
@@ -3968,8 +4321,9 @@ calculate_continuation_derivatives(double* const &parameter_pt)
 /// output from the newton_solve_continuation function. The derivatives
 /// are stored in the ContinuationParameters namespace.
 //===================================================================
-void Problem::calculate_continuation_derivatives(const Vector<double> &z)
+void Problem::calculate_continuation_derivatives(const DoubleVector &z)
 {
+
  //Calculate the continuation derivatives
  calculate_continuation_derivatives_helper(z);
 
@@ -3980,7 +4334,7 @@ void Problem::calculate_continuation_derivatives(const Vector<double> &z)
                      Desired_proportion_of_arc_length)*
     ((1.0 - Desired_proportion_of_arc_length)/
      (1.0 - Parameter_derivative*Parameter_derivative));
- 
+
    //Recalculate the continuation derivatives with the new scaled values
    calculate_continuation_derivatives_helper(z);
   }
@@ -3996,17 +4350,18 @@ void Problem::calculate_continuation_derivatives(const Vector<double> &z)
 /// are stored in the ContinuationParameters namespace.
 //===================================================================
 void Problem::calculate_continuation_derivatives_helper(
- const Vector<double> &z)
+ const DoubleVector &z)
 {
  //Find the number of degrees of freedom in the problem
  unsigned long n_dofs = ndof();
- 
+
  //Work out the continuation direction
  Continuation_direction = Parameter_derivative;
  for(unsigned long l=0;l<n_dofs;l++) 
   {Continuation_direction -= Dof_derivatives[l]*z[l];}
 
  //Calculate the magnitude of the du/ds Vector
+
  //Note that actually, we are usually approximating by using the value at 
  //newton step just before convergence, which saves one additional 
  //Newton solve.
@@ -4017,7 +4372,7 @@ void Problem::calculate_continuation_derivatives_helper(
                                                    
  //Calculate the current derivative of the parameter wrt the arc-length
  Parameter_derivative = 1.0/sqrt(1.0 + Theta_squared*chi);
- 
+
  //If the dot product of the current derivative wrt the Direction
  //is less than zero, switch the sign of the derivative to ensure 
  //smooth continuation
@@ -4070,8 +4425,9 @@ void Problem::activate_fold_tracking(double* const &parameter_pt,
 //===================================================================
 void Problem::activate_pitchfork_tracking(
  double* const &parameter_pt,
- const Vector<double> &symmetry_vector,const bool &block_solve)
+ const DoubleVector &symmetry_vector,const bool &block_solve)
 {
+
  //Reset the assembly handler to default
  reset_assembly_handler_to_default();
  //Set the new assembly handler. Note that the constructor actually
@@ -4128,7 +4484,7 @@ void Problem::activate_hopf_tracking(
 //============================================================
 void Problem::activate_hopf_tracking(
  double* const &parameter_pt, const double &omega,
- const Vector<double> &null_real, const Vector<double> &null_imag,
+ const DoubleVector &null_real, const DoubleVector &null_imag,
  const bool &block_solve)
 {
  //Reset the assembly handler to default
@@ -4176,6 +4532,7 @@ void Problem::reset_assembly_handler_to_default()
 double Problem::arc_length_step_solve(double* const &parameter_pt,
                                       const double &ds)
 {
+
  //----------------------MAKE THE PROBLEM STEADY-----------------------
  //Loop over the timesteppers and make them (temporarily) steady.
  //We can only do continuation for steady problems!
@@ -4205,7 +4562,9 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
  //Assign memory for solutions of the equations Jz = du/dparameter
  //This is needed here (outside the loop), so that we can save on 
  //one linear solve when calculating the derivatives wrt the arc-length
- Vector<double> z(n_dofs);
+ LinearAlgebraDistribution dist(Communicator_pt,n_dofs,false);
+ DoubleVector z(&dist);
+
  //Store sign of the Jacobian, used for bifurcation detection
  //If this is the first time that we are calling the arc-length solver,
  //this should not be used.
@@ -4241,7 +4600,9 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
    *parameter_pt += Parameter_derivative*Ds_current;
    //Loop over the variables and set their initial values
    for(unsigned long l=0;l<n_dofs;l++) 
-    {*Dof_pt[l] += Dof_derivatives[l]*Ds_current;}
+    {
+     *Dof_pt[l] += Dof_derivatives[l]*Ds_current;
+    }
    
    //Actually do the newton solve stage for the continuation problem
    try
@@ -4276,11 +4637,12 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
     }
   }
  while(STEP_REJECTED); //continue until a step is accepted
- 
+
  //Only recalculate the derivatives if there has been a Newton solve
  //If not, the previous values should be close enough 
  if(count>0)
   {
+
    //--------------------CHECK FOR POTENTIAL BIFURCATIONS-------------
    //If the sign of the jacobian is zero issue a warning
    if(Sign_of_jacobian == 0) 
@@ -4305,6 +4667,7 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
    //it must be a turning point or bifurcation
    if(Sign_of_jacobian != previous_sign)
     {
+
      //There has been, at least, one sign change
      First_jacobian_sign_change = true;
 
@@ -4316,7 +4679,7 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
      //and the vectors of derivatives of the residuals wrt the global parameter
      //If this is small it is a bifurcation rather than a turning point.
      //Get the derivative wrt global parameter
-     Vector<double> dparam(n_dofs);
+     DoubleVector dparam;
      get_derivative_wrt_global_parameter(parameter_pt,dparam);
      //Calculate the dot product
      double dot=0.0;
@@ -4347,7 +4710,7 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
    
    //Calculate the derivatives required for the next stage of continuation
    //In this we pass the last value of z (i.e. approximation)
-   calculate_continuation_derivatives(z); 
+    calculate_continuation_derivatives(z); 
 
    //If it's the first step then the value of the next step should
    //be the change in parameter divided by the parameter derivative
@@ -4366,11 +4729,13 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
  //solving an eigenproblem, but seems OK so far!
  else
   {
+
    //Save the current sign of the jacobian
    int temp_sign=Sign_of_jacobian;
    //Calculate the continuation derivatives, which includes a solve
    //of the linear system
    calculate_continuation_derivatives(parameter_pt);
+
    //Reset the sign of the jacobian, just in case the sign has changed when
    //solving the continuation derivatives. The sign change will be picked
    //up on the next continuation step.

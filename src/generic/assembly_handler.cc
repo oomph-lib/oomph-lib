@@ -248,8 +248,22 @@ namespace oomph
  /// associated with a PitchFork bifurcation.
  //===================================================================
  void BlockFoldLinearSolver:: solve(Problem* const &problem_pt, 
-                                    Vector<double> &result)
+                                    DoubleVector &result)
  {
+
+  // if the result is setup then it should not be distributed
+#ifdef PARANOID
+  if (result.distribution_setup())
+   {
+    if (result.distributed())
+     {
+      throw OomphLibError("The result vector must not be distributed",
+                          "BlockFoldLinearSolver::solve()",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+   }
+#endif
+
   //Locally cache the pointer to the handler.
   FoldHandler* handler_pt =
    static_cast<FoldHandler*>(problem_pt->assembly_handler_pt());
@@ -259,13 +273,23 @@ namespace oomph
 
   //We need to find out the number of dofs in the problem
   unsigned n_dof = problem_pt->ndof();
-  
+
+  // create the linear algebra distribution for this solver
+  // currently only global (non-distributed) distributions are allowed
+  Distribution_pt->rebuild(problem_pt->communicator_pt(),n_dof,false);
+
+  // if the result vector is not setup then rebuild with distribution = global
+  if (!result.distribution_setup())
+   {
+    result.rebuild(Distribution_pt);
+   }
+
   //Setup storage for temporary vectors
-  Vector<double> a(n_dof), b(n_dof);
+  DoubleVector a(Distribution_pt), b(Distribution_pt);
 
   //Allocate storage for Alpha which can be used in the resolve
   if(Alpha_pt!=0) {delete Alpha_pt;}
-  Alpha_pt = new Vector<double>(n_dof);
+  Alpha_pt = new DoubleVector(Distribution_pt);
 
   //We are going to do resolves using the underlying linear solver
   Linear_solver_pt->enable_resolve();
@@ -277,14 +301,15 @@ namespace oomph
   //by the null vector
   
   //Get the present null vector from the handler
-  Vector<double> y(n_dof);
+  DoubleVector y(Distribution_pt);
   for(unsigned n=0;n<(n_dof-1);++n)  {y[n] = handler_pt->Y[n];}
   //For simplicity later, add a zero at the end
   y[n_dof-1] = 0.0;
 
   //Loop over the elements and assemble the product
   //Local storage for the product terms
-  Vector<double> Jy(n_dof,0.0);
+  DoubleVector Jy(Distribution_pt);
+  Jy.initialise();
 
   //Calculate the product of the jacobian matrices, etc
   unsigned long n_element = problem_pt->mesh_pt()->nelement();
@@ -295,8 +320,10 @@ namespace oomph
     unsigned n_var = elem_pt->ndof();
     //Get the jacobian matrix
     DenseMatrix<double> jac(n_var);
+    // storage for the residual
+    Vector<double> res(n_var);
     //Get unperturbed raw jacobian
-    elem_pt->get_jacobian(b,jac);
+    elem_pt->get_jacobian(res,jac);
         
     //Multiply the dofs
     for(unsigned n=0;n<n_var;n++)
@@ -315,7 +342,7 @@ namespace oomph
   Linear_solver_pt->resolve(Jy,*Alpha_pt);
 
   //The vector that multiplie the product matrix is actually y - alpha
-  Vector<double> y_minus_alpha(n_dof);
+  DoubleVector y_minus_alpha(Distribution_pt);
   for(unsigned n=0;n<n_dof;n++)
    {
     y_minus_alpha[n] = y[n] - (*Alpha_pt)[n];
@@ -340,7 +367,9 @@ namespace oomph
   a_mult *= FD_step; alpha_mult *= FD_step;
 
   //Local storage for the product terms
-  Vector<double> Jprod_a(n_dof,0.0), Jprod_alpha(n_dof,0.0);
+  DoubleVector Jprod_a(Distribution_pt), Jprod_alpha(Distribution_pt);
+  Jprod_a.initialise(0.0);
+  Jprod_alpha.initialise(0.0);
 
   //Calculate the product of the jacobian matrices, etc
   for(unsigned long e = 0;e<n_element;e++)
@@ -350,8 +379,10 @@ namespace oomph
     unsigned n_var = handler_pt->ndof(elem_pt);
     //Get the jacobian matrices
     DenseMatrix<double> jac(n_var), jac_a(n_var), jac_alpha(n_var);
+    // elemental residual storage
+    Vector<double> res_elemental(n_var);
     //Get unperturbed jacobian
-    handler_pt->get_jacobian(elem_pt,b,jac);
+    handler_pt->get_jacobian(elem_pt,res_elemental,jac);
     
     //Backup the dofs
     Vector<double> dof_bac(n_var);
@@ -367,7 +398,7 @@ namespace oomph
     problem_pt->actions_after_change_in_bifurcation_parameter();
     
     //Now get the new jacobian
-    handler_pt->get_jacobian(elem_pt,b,jac_a);
+    handler_pt->get_jacobian(elem_pt,res_elemental,jac_a);
     
     //Perturb the dofs
     for(unsigned n=0;n<n_var;n++)
@@ -381,7 +412,7 @@ namespace oomph
     problem_pt->actions_after_change_in_bifurcation_parameter();
     
     //Now get the new jacobian
-    handler_pt->get_jacobian(elem_pt,b,jac_alpha);
+    handler_pt->get_jacobian(elem_pt,res_elemental,jac_alpha);
     
     //Reset the dofs
     for(unsigned n=0;n<n_var;n++)
@@ -425,9 +456,9 @@ namespace oomph
    
    //Allocate storage for E which can be used in the resolve
    if(E_pt!=0) {delete E_pt;}
-   E_pt = new Vector<double>(n_dof);
+   E_pt = new DoubleVector(Distribution_pt);
 
-   Vector<double> f(n_dof);
+   DoubleVector f(Distribution_pt);
 
    Linear_solver_pt->resolve(b,f);
    Linear_solver_pt->resolve(Jprod_alpha,*E_pt);
@@ -471,8 +502,8 @@ namespace oomph
  //======================================================================
  //Hack the re-solve to use the block factorisation
  //======================================================================
- void BlockFoldLinearSolver::resolve(const Vector<double> & rhs,
-                                     Vector<double> &result)
+ void BlockFoldLinearSolver::resolve(const DoubleVector & rhs,
+                                     DoubleVector &result)
  {
   //Check that the factors have been stored
   if(Alpha_pt==0)
@@ -490,11 +521,38 @@ namespace oomph
   
   //Switch things to our block solver
   handler_pt->solve_block_system();
-  //We need to find out the number of dofs
+
+  //We need to find out the number of dofs in the problem
   unsigned n_dof = problem_pt->ndof();
-  
+
+#ifdef PARANOID
+  // if the result is setup then it should not be distributed
+  if (result.distribution_setup())
+   {
+    if (result.distributed())
+     {
+      throw OomphLibError("The result vector must not be distributed",
+                          "BlockFoldLinearSolver::resolve()",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+   }
+  // the rhs must be setup
+  if (!rhs.distribution_setup())
+   {
+      throw OomphLibError("The rhs vector must be setup",
+                          "BlockFoldLinearSolver::resolve()",
+                          OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+
+  // if the result vector is not setup then rebuild with distribution = global
+  if (!result.distribution_setup())
+   {
+    result.rebuild(rhs.distribution_pt());
+   }
+
   //Setup storage
-  Vector<double> a(n_dof), b(n_dof);
+  DoubleVector a(Distribution_pt), b(Distribution_pt);
   
   //Set the values of the a vector
   for(unsigned n=0;n<(n_dof-1);n++) {a[n] = rhs[n];}
@@ -506,7 +564,7 @@ namespace oomph
   // Copy rhs vector into local storage so it doesn't get overwritten
   // if the linear solver decides to initialise the solution vector, say,
   // which it's quite entitled to do!
-  Vector<double> input_a(a);
+  DoubleVector input_a(a);
   
   Linear_solver_pt->resolve(input_a,a);
   
@@ -525,7 +583,8 @@ namespace oomph
   a_mult += FD_step; 
   a_mult *= FD_step;
   
-  Vector<double> Jprod_a(n_dof,0.0);
+  DoubleVector Jprod_a(Distribution_pt);
+  Jprod_a.initialise(0.0);
   
   unsigned long n_element = problem_pt->mesh_pt()->nelement();
    for(unsigned long e = 0;e<n_element;e++)
@@ -535,9 +594,11 @@ namespace oomph
      unsigned n_var = handler_pt->ndof(elem_pt);
      //Get some jacobian matrices
      DenseMatrix<double> jac(n_var), jac_a(n_var);
+     // the elemental residual
+     Vector<double> res_elemental(n_var);
      //Get unperturbed jacobian
-     handler_pt->get_jacobian(elem_pt,b,jac);
-   
+     handler_pt->get_jacobian(elem_pt,res_elemental,jac);
+     
      //Backup the dofs
      Vector<double> dof_bac(n_var);
      //Perturb the dofs
@@ -552,7 +613,7 @@ namespace oomph
      problem_pt->actions_after_change_in_bifurcation_parameter();
 
      //Now get the new jacobian
-     handler_pt->get_jacobian(elem_pt,b,jac_a);
+     handler_pt->get_jacobian(elem_pt,res_elemental,jac_a);
      
      //Reset the dofs
      for(unsigned n=0;n<n_var;n++)
@@ -588,7 +649,7 @@ namespace oomph
    //with the parameter
    b[n_dof-1] = rhs[n_dof-1];
 
-   Vector<double> f(n_dof);
+   DoubleVector f(Distribution_pt);
 
    Linear_solver_pt->resolve(b,f);
 
@@ -629,6 +690,11 @@ namespace oomph
   //Set the number of degrees of freedom
   Ndof = problem_pt->ndof();
 
+  // create the linear algebra distribution for this solver
+  // currently only global (non-distributed) distributions are allowed
+  LinearAlgebraDistribution* dist_pt = new 
+   LinearAlgebraDistribution(problem_pt->communicator_pt(),Ndof,false);
+
   //Resize the vectors of additional dofs and constants
   Phi.resize(Ndof);
   Y.resize(Ndof);
@@ -661,7 +727,7 @@ namespace oomph
   linear_solver_pt->enable_resolve();
 
   //Storage for the solution
-  Vector<double> x(Ndof);
+  DoubleVector x(dist_pt);
 
   //Solve the standard problem, we only want to make sure that
   //we factorise the matrix, if it has not been factorised. We shall
@@ -671,11 +737,10 @@ namespace oomph
   //Get the vector dresiduals/dparameter
   problem_pt->get_derivative_wrt_global_parameter(parameter_pt,x);
 
-
   // Copy rhs vector into local storage so it doesn't get overwritten
   // if the linear solver decides to initialise the solution vector, say,
   // which it's quite entitled to do!
-  Vector<double> input_x(x);
+  DoubleVector input_x(x);
 
   //Now resolve the system with the new RHS and overwrite the solution
   linear_solver_pt->resolve(input_x,x);
@@ -705,6 +770,9 @@ namespace oomph
     problem_pt->Dof_pt.push_back(&Y[n]);
     Y[n] = Phi[n] = -x[n]/length;
    }
+
+  // delete the dist_pt
+  delete dist_pt;
  }
 
 
@@ -1039,8 +1107,21 @@ namespace oomph
  /// associated with a PitchFork bifurcation.
  //===================================================================
  void BlockPitchForkLinearSolver:: solve(Problem* const &problem_pt, 
-                                         Vector<double> &result)
+                                         DoubleVector &result)
  {
+  // if the result is setup then it should not be distributed
+#ifdef PARANOID
+  if (result.distribution_setup())
+   {
+    if (result.distributed())
+     {
+      throw OomphLibError("The result vector must not be distributed",
+                          "BlockFoldLinearSolver::solve()",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+   }
+#endif
+
   //Locally cache the pointer to the handler.
   PitchForkHandler* handler_pt =
    static_cast<PitchForkHandler*>(problem_pt->assembly_handler_pt());
@@ -1050,13 +1131,23 @@ namespace oomph
 
   //We need to find out the number of dofs in the problem
   unsigned n_dof = problem_pt->ndof();
+
+  // create the linear algebra distribution for this solver
+  // currently only global (non-distributed) distributions are allowed
+  Distribution_pt->rebuild(problem_pt->communicator_pt(),n_dof,false);
+
+  // if the result vector is not setup then rebuild with distribution = global
+  if (!result.distribution_setup())
+   {
+    result.rebuild(Distribution_pt);
+   }
   
   //Setup storage for temporary vectors
-  Vector<double> a(n_dof), b(n_dof);
+  DoubleVector a(Distribution_pt), b(Distribution_pt);
 
   //Allocate storage for Alpha which can be used in the resolve
   if(Alpha_pt!=0) {delete Alpha_pt;}
-  Alpha_pt = new Vector<double>(n_dof);
+  Alpha_pt = new DoubleVector(Distribution_pt);
 
   //We are going to do resolves using the underlying linear solver
   Linear_solver_pt->enable_resolve();
@@ -1064,7 +1155,7 @@ namespace oomph
   Linear_solver_pt->solve(problem_pt,a);
 
   //Get the symmetry vector from the handler
-  Vector<double> psi(n_dof);
+  DoubleVector psi(Distribution_pt);
   for(unsigned n=0;n<(n_dof-1);++n)  {psi[n] = handler_pt->Psi[n];}
   //Set the final entry to zero
   psi[n_dof-1] = 0.0;
@@ -1091,7 +1182,7 @@ namespace oomph
   a_mult *= FD_step; alpha_mult *= FD_step;
 
   //Local storage for the product terms
-  Vector<double> Jprod_a(n_dof,0.0), Jprod_alpha(n_dof,0.0);
+  DoubleVector Jprod_a(Distribution_pt), Jprod_alpha(Distribution_pt);
 
   //Calculate the product of the jacobian matrices, etc
   unsigned long n_element = problem_pt->mesh_pt()->nelement();
@@ -1102,8 +1193,10 @@ namespace oomph
     unsigned n_var = handler_pt->ndof(elem_pt);
     //Get the jacobian matrices
     DenseMatrix<double> jac(n_var), jac_a(n_var), jac_alpha(n_var);
+     // the elemental residual
+     Vector<double> res_elemental(n_var);
     //Get unperturbed jacobian
-    handler_pt->get_jacobian(elem_pt,b,jac);
+    handler_pt->get_jacobian(elem_pt,res_elemental,jac);
     
     //Backup the dofs
     Vector<double> dof_bac(n_var);
@@ -1119,7 +1212,7 @@ namespace oomph
     problem_pt->actions_after_change_in_bifurcation_parameter();
     
     //Now get the new jacobian
-    handler_pt->get_jacobian(elem_pt,b,jac_a);
+    handler_pt->get_jacobian(elem_pt,res_elemental,jac_a);
     
     //Perturb the dofs
     for(unsigned n=0;n<n_var;n++)
@@ -1133,7 +1226,7 @@ namespace oomph
     problem_pt->actions_after_change_in_bifurcation_parameter();
     
     //Now get the new jacobian
-    handler_pt->get_jacobian(elem_pt,b,jac_alpha);
+    handler_pt->get_jacobian(elem_pt,res_elemental,jac_alpha);
     
     //Reset the dofs
     for(unsigned n=0;n<n_var;n++)
@@ -1177,9 +1270,9 @@ namespace oomph
    
    //Allocate storage for E which can be used in the resolve
    if(E_pt!=0) {delete E_pt;}
-   E_pt = new Vector<double>(n_dof);
+   E_pt = new DoubleVector(Distribution_pt);
 
-   Vector<double> f(n_dof);
+   DoubleVector f(Distribution_pt);
 
    Linear_solver_pt->resolve(b,f);
    Linear_solver_pt->resolve(Jprod_alpha,*E_pt);
@@ -1225,8 +1318,8 @@ namespace oomph
  //==============================================================
  //Hack the re-solve to use the block factorisation
  //==============================================================
- void BlockPitchForkLinearSolver::resolve(const Vector<double> & rhs,
-                                          Vector<double> &result)
+ void BlockPitchForkLinearSolver::resolve(const DoubleVector & rhs,
+                                          DoubleVector &result)
  {
   //Check that the factors have been stored
   if(Alpha_pt==0)
@@ -1248,7 +1341,7 @@ namespace oomph
   unsigned n_dof = problem_pt->ndof();
   
   //Setup storage
-  Vector<double> a(n_dof), b(n_dof);
+  DoubleVector a(Distribution_pt), b(Distribution_pt);
   
   //Set the values of the a vector
   for(unsigned n=0;n<n_dof;n++) {a[n] = rhs[n];}
@@ -1258,7 +1351,7 @@ namespace oomph
   // Copy rhs vector into local storage so it doesn't get overwritten
   // if the linear solver decides to initialise the solution vector, say,
   // which it's quite entitled to do!
-  Vector<double> input_a(a);
+  DoubleVector input_a(a);
 
   Linear_solver_pt->resolve(input_a,a);
   
@@ -1277,7 +1370,7 @@ namespace oomph
   a_mult += FD_step; 
   a_mult *= FD_step;
   
-  Vector<double> Jprod_a(n_dof,0.0);
+  DoubleVector Jprod_a(Distribution_pt);
   
   unsigned long n_element = problem_pt->mesh_pt()->nelement();
    for(unsigned long e = 0;e<n_element;e++)
@@ -1287,11 +1380,13 @@ namespace oomph
      unsigned n_var = handler_pt->ndof(elem_pt);
      //Get some jacobian matrices
      DenseMatrix<double> jac(n_var), jac_a(n_var);
+     // the elemental residual
+     Vector<double> res_elemental(n_var);
      //Get unperturbed jacobian
-     handler_pt->get_jacobian(elem_pt,b,jac);
+     handler_pt->get_jacobian(elem_pt,res_elemental,jac);
    
      //Backup the dofs
-     Vector<double> dof_bac(n_var);
+     DoubleVector dof_bac(Distribution_pt);
      //Perturb the dofs
      for(unsigned n=0;n<n_var;n++)
       {
@@ -1304,7 +1399,7 @@ namespace oomph
      problem_pt->actions_after_change_in_bifurcation_parameter();
 
      //Now get the new jacobian
-     handler_pt->get_jacobian(elem_pt,b,jac_a);
+     handler_pt->get_jacobian(elem_pt,res_elemental,jac_a);
      
      //Reset the dofs
      for(unsigned n=0;n<n_var;n++)
@@ -1339,7 +1434,7 @@ namespace oomph
     }
    b[n_dof-1] = rhs[2*n_dof-1];
 
-   Vector<double> f(n_dof);
+   DoubleVector f(Distribution_pt);
 
    Linear_solver_pt->resolve(b,f);
 
@@ -1371,7 +1466,7 @@ namespace oomph
  //==================================================================
  PitchForkHandler::PitchForkHandler(
   Problem* const &problem_pt, double* const &parameter_pt,
-  const Vector<double> &symmetry_vector) : Solve_block_system(false), 
+  const DoubleVector &symmetry_vector) : Solve_block_system(false), 
                                            Sigma(0.0)
  {
   //Set the problem pointer
@@ -1738,8 +1833,22 @@ namespace oomph
  /// associated with a Hopf bifurcation.
  //===================================================================
  void BlockHopfLinearSolver::solve(Problem* const &problem_pt, 
-                                    Vector<double> &result)
+                                   DoubleVector &result)
  {
+
+  // if the result is setup then it should not be distributed
+#ifdef PARANOID
+  if (result.distribution_setup())
+   {
+    if (result.distributed())
+     {
+      throw OomphLibError("The result vector must not be distributed",
+                          "BlockHopfLinearSolver::solve()",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+   }
+#endif
+
   //Locally cache the pointer to the handler.
   HopfHandler* handler_pt =
    static_cast<HopfHandler*>(problem_pt->assembly_handler_pt());
@@ -1747,9 +1856,13 @@ namespace oomph
   //Find the number of dofs in the augmented problem
   unsigned n_dof = problem_pt->ndof();
 
+  // create the linear algebra distribution for this solver
+  // currently only global (non-distributed) distributions are allowed
+  Distribution_pt->rebuild(problem_pt->communicator_pt(),n_dof,false);
+
   //Firstly, let's calculate the derivative of the residuals wrt
   //the parameter
-  Vector<double> dRdparam(n_dof);
+  DoubleVector dRdparam(Distribution_pt);
   
   const double FD_step = 1.0e-8;
   {
@@ -1780,13 +1893,16 @@ namespace oomph
 
   //Find out the number of dofs in the non-standard problem
   n_dof = problem_pt->ndof();
+
+  // update the distribution pt
+  Distribution_pt->rebuild(problem_pt->communicator_pt(),n_dof,false);
   
   //Setup storage for temporary vector
-  Vector<double> y1(n_dof), alpha(n_dof);
+  DoubleVector y1(Distribution_pt), alpha(Distribution_pt);
 
   //Allocate storage for A which can be used in the resolve
   if(A_pt!=0) {delete A_pt;}
-  A_pt = new Vector<double>(n_dof);
+  A_pt = new DoubleVector(Distribution_pt);
 
   //We are going to do resolves using the underlying linear solver
   Linear_solver_pt->enable_resolve();
@@ -1799,18 +1915,23 @@ namespace oomph
 
   //Now let's get the appropriate bit of alpha
   for(unsigned n=0;n<n_dof;n++) {alpha[n] = dRdparam[n];}
+
   //Resolve to find A
   Linear_solver_pt->resolve(alpha,*A_pt);
 
   //Now set to the complex system
   handler_pt->solve_complex_system();
 
+  // update the distribution
+  Distribution_pt->rebuild(problem_pt->communicator_pt(),n_dof*2,false);
+
   //Resize the stored vector G
   if(G_pt!=0) {delete G_pt;}
-  G_pt = new Vector<double>(2*n_dof);
+  G_pt = new DoubleVector(Distribution_pt);
 
   //Solve the first Zg = (Mz -My)
   Linear_solver_pt->solve(problem_pt,*G_pt);
+
   //This should have set the sign of the complex matrix's determinant, multiply
   sign_of_jacobian *= problem_pt->sign_of_jacobian();
 
@@ -1924,9 +2045,17 @@ namespace oomph
     }
 
    //Temporary storage
-   Vector<double> y2(2*n_dof);
+   DoubleVector y2(Distribution_pt);
+
+   // DoubleVector for rhs
+   DoubleVector rhs2(Distribution_pt);
+   for (unsigned i = 0; i < 2*n_dof; i++)
+    {
+     rhs2[i] = rhs[i];
+    }
+   
    //Solve it
-   Linear_solver_pt->resolve(rhs,y2);
+   Linear_solver_pt->resolve(rhs2,y2);
 
    //Assemble the next RHS
    for(unsigned n=0;n<2*n_dof;n++)
@@ -1936,9 +2065,14 @@ namespace oomph
 
    //Resive the storage
    if(E_pt!=0) {delete E_pt;}
-   E_pt = new Vector<double> (2*n_dof);
+   E_pt = new DoubleVector(Distribution_pt);
+
    //Solve for the next RHS
-   Linear_solver_pt->resolve(rhs,*E_pt);
+   for (unsigned i = 0; i < 2*n_dof; i++)
+    {
+     rhs2[i] = rhs[i];
+    }
+   Linear_solver_pt->resolve(rhs2,*E_pt);
 
    //We can now calculate the final corrections
    //We need to work out a large number of dot products
@@ -2014,10 +2148,33 @@ namespace oomph
  /// and the complex equivalent ... nasty.
  //=====================================================================
  void BlockHopfLinearSolver::solve_for_two_rhs(Problem* const &problem_pt,
-                                               Vector<double> &result,
-                                               const Vector<double> &rhs2,
-                                               Vector<double> &result2)
+                                               DoubleVector &result,
+                                               const DoubleVector &rhs2,
+                                               DoubleVector &result2)
  {
+
+  // if the result is setup then it should not be distributed
+#ifdef PARANOID
+  if (result.distribution_setup())
+   {
+    if (result.distributed())
+     {
+      throw OomphLibError("The result vector must not be distributed",
+                          "BlockHopfLinearSolver::solve()",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+   }
+  if (result2.distribution_setup())
+   {
+    if (result2.distributed())
+     {
+      throw OomphLibError("The result2 vector must not be distributed",
+                          "BlockHopfLinearSolver::solve()",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+   }
+#endif
+
   //Locally cache the pointer to the handler.
   HopfHandler* handler_pt =
    static_cast<HopfHandler*>(problem_pt->assembly_handler_pt());
@@ -2025,9 +2182,23 @@ namespace oomph
   //Find the number of dofs in the augmented problem
   unsigned n_dof = problem_pt->ndof();
 
+  // create the linear algebra distribution for this solver
+  // currently only global (non-distributed) distributions are allowed
+  Distribution_pt->rebuild(problem_pt->communicator_pt(),n_dof,false);
+
+  // if the result vector is not setup then rebuild with distribution = global
+  if (!result.distribution_setup())
+   {
+    result.rebuild(Distribution_pt);
+   }
+  if (!result2.distribution_setup())
+   {
+    result2.rebuild(Distribution_pt);
+   }
+
   //Firstly, let's calculate the derivative of the residuals wrt
   //the parameter
-  Vector<double> dRdparam(n_dof);
+  DoubleVector dRdparam(Distribution_pt);
   
   const double FD_step = 1.0e-8;
   {
@@ -2058,18 +2229,22 @@ namespace oomph
 
   //Find out the number of dofs in the non-standard problem
   n_dof = problem_pt->ndof();
+
+  // 
+  Distribution_pt->rebuild(problem_pt->communicator_pt(),n_dof,false);
   
   //Setup storage for temporary vector
-  Vector<double> y1(n_dof), y1_resolve(n_dof), alpha(n_dof);
+  DoubleVector y1(Distribution_pt), alpha(Distribution_pt), 
+   y1_resolve(Distribution_pt);
 
   //Allocate storage for A which can be used in the resolve
   if(A_pt!=0) {delete A_pt;}
-  A_pt = new Vector<double>(n_dof);
+  A_pt = new DoubleVector(Distribution_pt);
 
   //We are going to do resolves using the underlying linear solver
   Linear_solver_pt->enable_resolve();
 
-  //Solve the first system Jy1 = R
+  //Solve the first system Jy1 = 
   Linear_solver_pt->solve(problem_pt,y1);
 
   //This should have set the sign of the jacobian, store it
@@ -2077,23 +2252,29 @@ namespace oomph
 
   //Now let's get the appropriate bit of alpha
   for(unsigned n=0;n<n_dof;n++) {alpha[n] = dRdparam[n];}
+
   //Resolve to find A
   Linear_solver_pt->resolve(alpha,*A_pt);
 
   //Get the solution for the second rhs
   for(unsigned n=0;n<n_dof;n++) {alpha[n] = rhs2[n];}
+
   //Resolve to find y1_resolve
   Linear_solver_pt->resolve(alpha,y1_resolve);
 
   //Now set to the complex system
   handler_pt->solve_complex_system();
 
+  // rebuild the Distribution
+  Distribution_pt->rebuild(problem_pt->communicator_pt(),n_dof*2,false);
+
   //Resize the stored vector G
   if(G_pt!=0) {delete G_pt;}
-  G_pt = new Vector<double>(2*n_dof);
+  G_pt = new DoubleVector(Distribution_pt);
 
   //Solve the first Zg = (Mz -My)
   Linear_solver_pt->solve(problem_pt,*G_pt);
+
   //This should have set the sign of the complex matrix's determinant, multiply
   sign_of_jacobian *= problem_pt->sign_of_jacobian();
 
@@ -2231,9 +2412,15 @@ namespace oomph
     }
 
    //Temporary storage
-   Vector<double> y2(2*n_dof);
+   DoubleVector y2(Distribution_pt);
+
    //Solve it
-   Linear_solver_pt->resolve(rhs,y2);
+   DoubleVector temp_rhs(Distribution_pt);
+   for (unsigned i = 0; i < 2*n_dof; i++)
+    {
+     temp_rhs[i] = rhs[i];
+    }
+   Linear_solver_pt->resolve(temp_rhs,y2);
 
    //Assemble the next RHS
    for(unsigned n=0;n<2*n_dof;n++)
@@ -2243,9 +2430,14 @@ namespace oomph
 
    //Resive the storage
    if(E_pt!=0) {delete E_pt;}
-   E_pt = new Vector<double> (2*n_dof);
+   E_pt = new DoubleVector(Distribution_pt);
+
    //Solve for the next RHS
-   Linear_solver_pt->resolve(rhs,*E_pt);
+   for (unsigned i = 0; i < 2* n_dof; i++)
+    {
+     temp_rhs[i] = rhs[i];
+    }
+   Linear_solver_pt->resolve(temp_rhs,*E_pt);
 
    //Assemble the next RHS
    for(unsigned n=0;n<2*n_dof;n++)
@@ -2253,8 +2445,12 @@ namespace oomph
      rhs[n] = rhs2[n_dof+n] - Jprod_y1_resolve[n];
     }
 
-   Vector<double> y2_resolve(2*n_dof);
-   Linear_solver_pt->resolve(rhs,y2_resolve);
+   DoubleVector y2_resolve(Distribution_pt);
+   for (unsigned i = 0; i < 2* n_dof; i++)
+    {
+     temp_rhs[i] = rhs[i];
+    }
+   Linear_solver_pt->resolve(temp_rhs,y2_resolve);
 
 
    //We can now calculate the final corrections
@@ -2356,14 +2552,15 @@ namespace oomph
     {
      Problem_pt = problem_pt;
     }
+
  }
 
 
  //======================================================================
  //Hack the re-solve to use the block factorisation
  //======================================================================
- void BlockHopfLinearSolver::resolve(const Vector<double> & rhs,
-                                     Vector<double> &result)
+ void BlockHopfLinearSolver::resolve(const DoubleVector & rhs,
+                                     DoubleVector &result)
  {
   throw OomphLibError("resolve() is not implemented for this solver",
                       "BlockHopfLinearSolver::resolve()",
@@ -2390,6 +2587,11 @@ namespace oomph
   //Set the number of non-augmented degrees of freedom
   Ndof = problem_pt->ndof();
 
+  // create the linear algebra distribution for this solver
+  // currently only global (non-distributed) distributions are allowed
+  LinearAlgebraDistribution* dist_pt = new 
+   LinearAlgebraDistribution(problem_pt->communicator_pt(),Ndof,false);
+
   //Resize the vectors of additional dofs
   Phi.resize(Ndof);
   Psi.resize(Ndof);
@@ -2410,7 +2612,6 @@ namespace oomph
      }
    }
   
-
   //Calculate the value Phi by
   //solving the system JPhi = dF/dlambda
   
@@ -2424,7 +2625,7 @@ namespace oomph
   linear_solver_pt->enable_resolve();
 
   //Storage for the solution
-  Vector<double> x(Ndof);
+  DoubleVector x(dist_pt);
 
   //Solve the standard problem, we only want to make sure that
   //we factorise the matrix, if it has not been factorised. We shall
@@ -2437,7 +2638,7 @@ namespace oomph
   // Copy rhs vector into local storage so it doesn't get overwritten
   // if the linear solver decides to initialise the solution vector, say,
   // which it's quite entitled to do!
-  Vector<double> input_x(x);
+  DoubleVector input_x(x);
 
   //Now resolve the system with the new RHS and overwrite the solution
   linear_solver_pt->resolve(input_x,x);
@@ -2492,6 +2693,9 @@ namespace oomph
   problem_pt->Dof_pt.push_back(parameter_pt);
   //Finally add the frequency
   problem_pt->Dof_pt.push_back(&Omega);
+
+  // delete the dist_pt
+  delete dist_pt;
  }
 
  //====================================================================
@@ -2502,8 +2706,8 @@ namespace oomph
  HopfHandler::HopfHandler(Problem* const &problem_pt, 
                           double* const &parameter_pt,
                           const double &omega,
-                          const Vector<double> &phi,
-                          const Vector<double> &psi) : 
+                          const DoubleVector &phi,
+                          const DoubleVector &psi) : 
   Solve_which_system(0), Parameter_pt(parameter_pt), Omega(omega)
  {
   //Set the problem pointer
@@ -2911,5 +3115,4 @@ namespace oomph
     Problem_pt->Dof_pt.push_back(&Omega);
    }
  }
- 
 }

@@ -2154,12 +2154,12 @@ identify_pressure_data(std::set<std::pair<Data*,unsigned> > &paired_pressure_dat
 /// Create a list of pairs for all unknowns in this element,
 /// so that the first entry in each pair contains the global equation
 /// number of the unknown, while the second one contains the number
-/// of the "block" that this unknown is associated with.
+/// of the DOF that this unknown is associated with.
 /// (Function can obviously only be called if the equation numbering
 /// scheme has been set up.)
 //=============================================================================
 template<unsigned DIM>
-void QCrouzeixRaviartElement<DIM>::get_block_numbers_for_unknowns(
+void QCrouzeixRaviartElement<DIM>::get_dof_numbers_for_unknowns(
  std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
 {
  // number of nodes
@@ -2171,6 +2171,9 @@ void QCrouzeixRaviartElement<DIM>::get_block_numbers_for_unknowns(
  // temporary pair (used to store block lookup prior to being added to list)
  std::pair<unsigned,unsigned> block_lookup;
  
+ // pressure dof number
+ unsigned pressure_dof_number = DIM;
+
  // loop over the pressure values
  for (unsigned n = 0; n < n_press; n++)
   {
@@ -2185,7 +2188,7 @@ void QCrouzeixRaviartElement<DIM>::get_block_numbers_for_unknowns(
      // store block lookup in temporary pair: First entry in pair
      // is global equation number; second entry is block type
      block_lookup.first = this->eqn_number(local_eqn_number);
-     block_lookup.second = 1;
+     block_lookup.second = pressure_dof_number;
      
      // add to list
      block_lookup_list.push_front(block_lookup);
@@ -2210,7 +2213,7 @@ void QCrouzeixRaviartElement<DIM>::get_block_numbers_for_unknowns(
        // store block lookup in temporary pair: First entry in pair
        // is global equation number; second entry is block type
        block_lookup.first = this->eqn_number(local_eqn_number);
-       block_lookup.second = 0;
+       block_lookup.second = v;
        
        // add to list
        block_lookup_list.push_front(block_lookup);
@@ -2317,7 +2320,7 @@ identify_pressure_data(std::set<std::pair<Data*,unsigned> > &paired_pressure_dat
 /// scheme has been set up.)
 //============================================================================
 template<unsigned DIM>
-void QTaylorHoodElement<DIM>::get_block_numbers_for_unknowns(
+void QTaylorHoodElement<DIM>::get_dof_numbers_for_unknowns(
  std::list<std::pair<unsigned long,
  unsigned> >& block_lookup_list)
 {
@@ -2325,7 +2328,7 @@ void QTaylorHoodElement<DIM>::get_block_numbers_for_unknowns(
  unsigned n_node = this->nnode();
  
  // local eqn no for pressure unknown
- unsigned p_index = this->p_nodal_index_nst();
+// unsigned p_index = this->p_nodal_index_nst();
  
  // temporary pair (used to store block lookup prior to being added to list)
  std::pair<unsigned,unsigned> block_lookup;
@@ -2352,10 +2355,7 @@ void QTaylorHoodElement<DIM>::get_block_numbers_for_unknowns(
        block_lookup.first = this->eqn_number(local_eqn_number);
        
        // set block numbers: Block number is the second entry in pair
-       if (v==p_index)
-        block_lookup.second = 1;
-       else
-        block_lookup.second = 0;
+        block_lookup.second = v;
        
        // add to list
        block_lookup_list.push_front(block_lookup);

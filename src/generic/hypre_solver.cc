@@ -139,335 +139,225 @@ namespace oomph
  
  
 //========================================================================
-/// Helper function to create a serial HYPRE_IJVector and
-/// HYPRE_ParVector. The length of the vector created is
-/// n_values. An array of values (of length n_values) can be
-/// inserted, or if (values==0) an empty Hypre vector is created.
-/// indices can define the index of the entries in values, or if
-/// (indices==0) values are inserted in the order they occur.
+/// Helper function to create a HYPRE_IJVector and HYPRE_ParVector.
+/// + If no MPI then serial vectors are created
+/// + If MPI and serial input vector then distributed hypre vectors are created
+/// + If MPI and distributed input vector the distributed output vectors
+///   are created.
 //========================================================================
-  void create_HYPRE_Vector(const int& n_values,
-                           HYPRE_IJVector& hypre_ij_vector,
-                           HYPRE_ParVector& hypre_par_vector,
-                           const double* values,
-                           int* indices)
+  void HypreHelpers::create_HYPRE_Vector(const DoubleVector &oomph_vec, const 
+                                         LinearAlgebraDistribution* dist_pt,
+                                         HYPRE_IJVector& hypre_ij_vector,
+                                         HYPRE_ParVector& hypre_par_vector)
   {
+   // the lower and upper row of the vector on this processor
+   unsigned lower = dist_pt->first_row();
+   unsigned upper = dist_pt->first_row() + 
+    dist_pt->nrow_local() - 1;
+
+   // number of local rows
+   unsigned nrow_local = dist_pt->nrow_local();
+
    // initialize Hypre vector
-   HYPRE_IJVectorCreate(MPI_COMM_WORLD, 0, n_values-1, &hypre_ij_vector);
+#ifdef OOMPH_HAS_MPI
+   HYPRE_IJVectorCreate(oomph_vec.distribution_pt()->
+                        communicator_pt()->mpi_comm(), 
+                        lower,upper, &hypre_ij_vector);
+#else
+   HYPRE_IJVectorCreate(MPI_COMM_WORLD,lower,upper, &hypre_ij_vector);
+#endif
    HYPRE_IJVectorSetObjectType(hypre_ij_vector, HYPRE_PARCSR);
    HYPRE_IJVectorInitialize(hypre_ij_vector);
 
-   // keep track of whether we need to delete any arrays
-   bool delete_indices = false;
-
-   // insert values if required
-   if (values != 0)
+   // set up array containing indices
+   int* indices = new int[nrow_local];
+   double* values = new double[nrow_local];
+   const unsigned hypre_first_row = dist_pt->first_row();
+   unsigned j = 0;
+   if (!oomph_vec.distributed() && dist_pt->distributed())
     {
-     // generate an array of indices if non exists
-     if (indices == 0)
-      {
-       delete_indices = true;
-       // set up array containing indices
-       indices = new int[n_values];
-       for (int i=0; i<n_values; i++)
-        {
-         indices[i] = i;
-        }
-      }
-
-     // insert values
-     HYPRE_IJVectorSetValues(hypre_ij_vector, n_values, indices, values);
-
-     // tidy up memory if required
-     if (delete_indices)
-      {
-       delete[] indices;
-       indices = 0;
-      }
+     j = hypre_first_row;
     }
+   for (unsigned i=0; i<nrow_local; i++)
+    {
+     indices[i] = hypre_first_row + i;
+     values[i] = oomph_vec[j+i];
+    }
+   
+   // insert values
+   HYPRE_IJVectorSetValues(hypre_ij_vector,nrow_local,indices,values);
+
+   // assemble vectors
+   HYPRE_IJVectorAssemble(hypre_ij_vector);
+   HYPRE_IJVectorGetObject(hypre_ij_vector, (void **) &hypre_par_vector);
+   
+   // clean up
+   delete[] indices;
+   delete[] values;
+  }
+  
+
+//========================================================================
+/// Helper function to create a HYPRE_IJVector and HYPRE_ParVector.
+/// + If no MPI then serial vectors are created
+/// + If MPI and serial input vector then distributed hypre vectors are created
+/// + If MPI and distributed input vector the distributed output vectors
+///   are created.
+//========================================================================
+  void HypreHelpers::create_HYPRE_Vector
+  (const LinearAlgebraDistribution* dist_pt,
+   HYPRE_IJVector& hypre_ij_vector,
+   HYPRE_ParVector& hypre_par_vector)
+  {
+   // the lower and upper row of the vector on this processor
+   unsigned lower = dist_pt->first_row();
+   unsigned upper = dist_pt->first_row() + 
+    dist_pt->nrow_local() - 1;
+
+   // initialize Hypre vector
+#ifdef OOMPH_HAS_MPI
+   HYPRE_IJVectorCreate(dist_pt->communicator_pt()->mpi_comm(), 
+                        lower,upper, &hypre_ij_vector);
+#else
+   HYPRE_IJVectorCreate(MPI_COMM_WORLD,lower,upper, &hypre_ij_vector);
+#endif
+   HYPRE_IJVectorSetObjectType(hypre_ij_vector, HYPRE_PARCSR);
+   HYPRE_IJVectorInitialize(hypre_ij_vector);
 
    // assemble vectors
    HYPRE_IJVectorAssemble(hypre_ij_vector);
    HYPRE_IJVectorGetObject(hypre_ij_vector, (void **) &hypre_par_vector);
   }
-  
+
 
 //========================================================================
 /// Helper function to create a serial HYPRE_IJMatrix and
-/// HYPRE_ParCSRMatrix from a CRDoubleMatrix
+/// HYPRE_ParCSRMatrix from a CRDoubleMatrix\n
+/// NOTE: dist_pt is rebuilt to match the distribution of the hypre solver
+/// which is not necassarily the same as the oomph lib matrix
 //========================================================================
-  void create_HYPRE_Matrix(const CRDoubleMatrix& oomph_matrix,
+  void create_HYPRE_Matrix(CRDoubleMatrix* oomph_matrix,
                            HYPRE_IJMatrix& hypre_ij_matrix,
-                           HYPRE_ParCSRMatrix& hypre_par_matrix)
+                           HYPRE_ParCSRMatrix& hypre_par_matrix,
+                           LinearAlgebraDistribution* dist_pt)
   {
+#ifdef PARANOID
+   // check that the matrix is built
+   if ( !oomph_matrix->built() )
+    {
+     std::ostringstream error_message;
+     error_message << "The matrix has not been built";
+     throw OomphLibError(error_message.str(),
+                         "HypreHelpers::create_HYPRE_Matrix()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   // check the matrix is square
+   if ( oomph_matrix->nrow() != oomph_matrix->ncol() )
+    {
+     std::ostringstream error_message;
+     error_message << "create_HYPRE_Matrix require a square matrix. "
+                   << "Matrix is " << oomph_matrix->nrow()
+                   << " by " << oomph_matrix->ncol() << std::endl;
+     throw OomphLibError(error_message.str(),
+                         "HypreHelpers::create_HYPRE_Matrix()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
    // find number of rows/columns
-   const int n_rows = int(oomph_matrix.nrow());
-   const int n_cols = int(oomph_matrix.ncol());
+   const unsigned nrow = int(oomph_matrix->nrow());
 
    // get pointers to the matrix
 
    // column indicies of matrix
-   const int* matrix_cols = oomph_matrix.column_index();
+   const int* matrix_cols = oomph_matrix->column_index();
 
    // entries of matrix
-   const double* matrix_vals = oomph_matrix.value();
+   const double* matrix_vals = oomph_matrix->value();
 
    // row starts
-   const int* matrix_row_start = oomph_matrix.row_start();
+   const int* matrix_row_start = oomph_matrix->row_start();
 
-   // initialize hypre matrix
-   HYPRE_IJMatrixCreate(MPI_COMM_WORLD,
-                        0, n_rows-1, 0, n_cols-1,
+   // build the distribution
+   if (oomph_matrix->distribution_pt()->distributed())
+    {
+     dist_pt->rebuild(oomph_matrix->distribution_pt());
+    }
+   else
+    {
+     bool distributed = true;
+     if (oomph_matrix->distribution_pt()->communicator_pt()->nproc() == 1)
+      {
+       distributed = false;
+      }
+     dist_pt->rebuild
+      (oomph_matrix->distribution_pt()->communicator_pt(),nrow,distributed);
+    }
+
+  // initialize hypre matrix
+   unsigned lower = dist_pt->first_row();
+   unsigned upper = lower + dist_pt->nrow_local() - 1;
+
+#ifdef OOMPH_HAS_MPI
+   HYPRE_IJMatrixCreate(dist_pt->communicator_pt()->mpi_comm(),
+                        lower,
+                        upper,
+                        lower,
+                        upper,
                         &hypre_ij_matrix);
+#else
+   HYPRE_IJMatrixCreate(MPI_COMM_WORLD,
+                        lower,
+                        upper,
+                        lower,
+                        upper,
+                        &hypre_ij_matrix);
+#endif
    HYPRE_IJMatrixSetObjectType(hypre_ij_matrix, HYPRE_PARCSR);
    HYPRE_IJMatrixInitialize(hypre_ij_matrix);
 
-   // set up simple row_map for serial case
-   int* ncols_per_row = new int[n_rows];  // Number of columns in each row
-   int* row_map = new int[n_rows];        // Map of local to global rows
-   for (int i=0; i<n_rows; i++)
+   // set up a row map
+   // and first row / nrow_local
+   const unsigned oomph_first_row = 
+    oomph_matrix->distribution_pt()->first_row();
+   const unsigned hypre_nrow_local = dist_pt->nrow_local();
+   const unsigned hypre_first_row = dist_pt->first_row();
+   int* ncols_per_row = new int[hypre_nrow_local];
+   int* row_map = new int[hypre_nrow_local];
+   for (unsigned i = 0; i < hypre_nrow_local; i++)
     {
-     ncols_per_row[i] = matrix_row_start[i+1] - matrix_row_start[i];
-     // simple row map for serial matrix
-     row_map[i] = i;
+     unsigned j = i;
+     if (!oomph_matrix->distributed() && dist_pt->distributed())
+      {
+       j += hypre_first_row;
+      }
+     ncols_per_row[i] = matrix_row_start[j+1] - matrix_row_start[j];
+     row_map[i] = hypre_first_row + i;
     }
 
-   // put values in HYPRE matrix
+   // put values in HYPRE matrix   
+   int local_start = 0;
+   if (!oomph_matrix->distributed() && dist_pt->distributed())
+    {
+     local_start += matrix_row_start[hypre_first_row];
+    }
+
+
    HYPRE_IJMatrixSetValues(hypre_ij_matrix,
-                           n_rows,
+                           hypre_nrow_local,
                            ncols_per_row,
                            row_map,
-                           matrix_cols,
-                           matrix_vals);
+                           matrix_cols+local_start,
+                           matrix_vals+local_start);
+
+   // assemble matrix
+   HYPRE_IJMatrixAssemble(hypre_ij_matrix);
+   HYPRE_IJMatrixGetObject(hypre_ij_matrix, (void **) &hypre_par_matrix);
 
    // tidy up memory
    delete[] ncols_per_row;
    delete[] row_map;
-
-   // assemble matrix
-   HYPRE_IJMatrixAssemble(hypre_ij_matrix);
-   HYPRE_IJMatrixGetObject(hypre_ij_matrix, (void **) &hypre_par_matrix);
   }
-
-
-#ifdef OOMPH_HAS_MPI
-//========================================================================
-/// Helper function to create a distributed HYPRE_IJVector and
-/// HYPRE_ParVector. lower and upper define the ranges of the contiguous
-/// partitioning of the vector. An array of local values
-/// (of length 1+upper-lower) can be inserted, or if (values==0) an empty
-/// vector is created. indices can be used to define the global index
-/// of the entries in values, or if (indices==0) values are inserted in
-/// the order they occur.
-//========================================================================
-  void create_HYPRE_Vector(const int& lower,
-                           const int& upper,
-                           HYPRE_IJVector& hypre_ij_vector,
-                           HYPRE_ParVector& hypre_par_vector,
-                           const double* values,
-                           int* indices)
-  {
-   // initialize Hypre vector
-   HYPRE_IJVectorCreate(MPI_COMM_WORLD, lower, upper, &hypre_ij_vector);
-   HYPRE_IJVectorSetObjectType(hypre_ij_vector, HYPRE_PARCSR);
-   HYPRE_IJVectorInitialize(hypre_ij_vector);
-   
-   // insert values if required
-   if (values != 0)
-    {
-     // keep track of whether we need to point indices to zero at end
-     bool nullify_indices = false;
-     
-     // find out how many values there are
-     const int n_values = 1+upper-lower;
-     
-     // generate Vector of indices if non exists
-     if (indices == 0)
-      {
-       Vector<int> vec_indices(n_values);
-              
-       // set up array containing indices
-       indices = &vec_indices[0];
-       nullify_indices = true;
-       for (int i=0; i<n_values; i++)
-        {
-         indices[i] = lower+i;
-        }
-      }
-     
-     // insert values
-     HYPRE_IJVectorSetValues(hypre_ij_vector, n_values, indices, values);
-     
-     // point indecies to null if required
-     if (nullify_indices)
-      {
-        indices = 0;
-      }
-    }
-   
-   // assemble vectors
-   HYPRE_IJVectorAssemble(hypre_ij_vector);
-   HYPRE_IJVectorGetObject(hypre_ij_vector, (void **) &hypre_par_vector);
-  }
-    
-  
-//========================================================================
-/// Helper function to create a distributed HYPRE_IJMatrix and
-/// HYPRE_ParCSRMatrix from a square CRDoubleMatrix. lower and upper define
-/// the range of the contiguous row partitioning of the Hypre matrix created.
-//========================================================================
-  void create_HYPRE_Matrix(const CRDoubleMatrix& oomph_matrix,
-                           const int& lower,
-                           const int& upper,
-                           HYPRE_IJMatrix& hypre_ij_matrix,
-                           HYPRE_ParCSRMatrix& hypre_par_matrix)
-  {
-#ifdef PARANOID
-   // check the matrix is square
-   if ( oomph_matrix.nrow() != oomph_matrix.ncol() )
-    {
-     std::ostringstream error_message;
-     error_message << "create_HYPRE_Matrix require a square matrix. "
-                   << "Matrix is " << oomph_matrix.nrow()
-                   << " by " << oomph_matrix.ncol() << std::endl;
-     throw OomphLibError(error_message.str(),
-                         "HypreHelpers::create_HYPRE_Matrix()",
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-   
-   // get pointers to the matrix
-   
-   // column indicies of matrix
-   const int* matrix_cols = oomph_matrix.column_index();
-   
-   // entries of matrix
-   const double* matrix_vals = oomph_matrix.value();
-   
-   // row starts
-   const int* matrix_row_starts = oomph_matrix.row_start();
-   
-   // initialize hypre matrix
-   HYPRE_IJMatrixCreate(MPI_COMM_WORLD,
-                        lower,
-                        upper,
-                        lower,
-                        upper,
-                        &hypre_ij_matrix);
-   HYPRE_IJMatrixSetObjectType(hypre_ij_matrix, HYPRE_PARCSR);
-   HYPRE_IJMatrixInitialize(hypre_ij_matrix);
-   
-   // find number of local rows
-   const int n_local_rows = 1+upper-lower;
-   
-   // Vector to store number of columns in each row
-   Vector<int> ncols_per_row(n_local_rows);
-   
-   // Vector to store map of local to global rows
-   Vector<int> row_map(n_local_rows);
-   
-   // find the number of entries per row and set up the row map
-   for (int i=0; i<n_local_rows; i++)
-    {
-     int global_row = lower+i;
-     ncols_per_row[i] = matrix_row_starts[global_row+1] - 
-      matrix_row_starts[global_row];
-     row_map[i] = global_row;
-    }
-   
-   // find where this row block starts in matrix_cols and matrix_vals
-   int local_start = matrix_row_starts[lower];
-   
-   // put values in HYPRE matrix
-   HYPRE_IJMatrixSetValues(hypre_ij_matrix,
-                           n_local_rows,
-                           &ncols_per_row[0],
-                           &row_map[0],
-                           matrix_cols+local_start,
-                           matrix_vals+local_start);
-   
-   // assemble matrix
-   HYPRE_IJMatrixAssemble(hypre_ij_matrix);
-   HYPRE_IJMatrixGetObject(hypre_ij_matrix, (void **) &hypre_par_matrix);
-  }
-  
-  
-//========================================================================
-/// Helper function to create a distributed HYPRE_IJMatrix and
-/// HYPRE_ParCSRMatrix from a DistributedCRDoubleMatrix.
-//========================================================================
-  void create_HYPRE_Matrix(DistributedCRDoubleMatrix& oomph_matrix,
-                           HYPRE_IJMatrix& hypre_ij_matrix,
-                           HYPRE_ParCSRMatrix& hypre_par_matrix)
-  {
-#ifdef PARANOID
-   // check the matrix is square
-   if ( oomph_matrix.nrow() != oomph_matrix.ncol() )
-    {
-     std::ostringstream error_message;
-     error_message << "create_HYPRE_Matrix require a square matrix. "
-                   << "Matrix is " << oomph_matrix.nrow()
-                   << " by " << oomph_matrix.ncol() << std::endl;
-     throw OomphLibError(error_message.str(),
-                         "HypreHelpers::create_HYPRE_Matrix()",
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-   
-   // get pointers to the matrix
-   
-   // column indicies of matrix
-   const int* matrix_cols = oomph_matrix.column_index();
-   
-   // entries of matrix
-   const double* matrix_vals = oomph_matrix.value();
-   
-   // row starts
-   const int* matrix_row_starts = oomph_matrix.row_start();
-   
-   // find number of local rows
-   const int n_local_rows = oomph_matrix.nrow_local();
-   
-   // find the first row on this processor
-   int first_row = oomph_matrix.first_row();
-   
-   // initialize hypre matrix
-   HYPRE_IJMatrixCreate(MPI_COMM_WORLD,
-                        first_row,
-                        first_row + n_local_rows - 1,
-                        first_row,
-                        first_row + n_local_rows - 1,
-                        &hypre_ij_matrix);
-   HYPRE_IJMatrixSetObjectType(hypre_ij_matrix, HYPRE_PARCSR);
-   HYPRE_IJMatrixInitialize(hypre_ij_matrix);
-   
-   // Vector to store number of columns in each row
-   Vector<int> ncols_per_row(n_local_rows);
-   
-   // Vector to store map of local to global rows
-   Vector<int> row_map(n_local_rows);
-   
-   // find the number of entries per row and set up the row map
-   for (int i=0; i<n_local_rows; i++)
-    {
-     ncols_per_row[i] = matrix_row_starts[i+1] - matrix_row_starts[i];
-     row_map[i] = first_row+i;
-    }
-   
-   // put values in HYPRE matrix
-   HYPRE_IJMatrixSetValues(hypre_ij_matrix,
-                           n_local_rows,
-                           &ncols_per_row[0],
-                           &row_map[0],
-                           matrix_cols,
-                           matrix_vals);
-   
-   // assemble matrix
-   HYPRE_IJMatrixAssemble(hypre_ij_matrix);
-   HYPRE_IJMatrixGetObject(hypre_ij_matrix, (void **) &hypre_par_matrix);
-  }
-
-#endif  
  }
 
 
@@ -487,75 +377,25 @@ namespace oomph
 //=============================================================================
  void HypreInterface::hypre_matrix_setup(CRDoubleMatrix* matrix_pt)
  {
+
   // reset Hypre's global error flag
   hypre__global_error=0;
   
-#ifdef OOMPH_HAS_MPI
-  // MPI version
-  
-  // Nrows_local stores number of rows on each processor -
-  // needed later to gather the distributed solution using MPI
-  Nrows_local.resize(MPI_Helpers::Nproc);
-  
-  // Find the number of rows
-  Nrow = matrix_pt->nrow();
-  
   // issue warning if the matrix is small compared to the number of processors
-  if ( 2*MPI_Helpers::Nproc>int(Nrow) )
+  if ( unsigned(2*matrix_pt->distribution_pt()->communicator_pt()->nproc()) > 
+       matrix_pt->nrow() )
    {
     oomph_info
      << "Warning: HYPRE based solvers may fail if 2*number of processors "
      << "is greater than the number of unknowns!" << std::endl;
    }
-  
-  // Set the row partitioning for the processors and store
-  double size = double(Nrow)/MPI_Helpers::Nproc;
-  int first_row = 0;
-  int next_first_row = 0;
-  for (int p=0;p<MPI_Helpers::Nproc; p++)
-   {
-    // find the first_row on the next processor unless there
-    // are no more processors, in which case set it to be
-    // the number of global rows
-    if (p==MPI_Helpers::Nproc)
-     {
-      next_first_row = int(Nrow);
-     }
-    else
-     {
-      next_first_row = int((p+1)*size);
-     }
-    
-    if(p==MPI_Helpers::My_rank)
-     {
-      First_row = first_row;
-      Last_row = next_first_row-1;
-     }
-    // set Nrow_local
-    Nrows_local[p] = next_first_row-first_row;
-    
-    // set first row for next processor
-    first_row = next_first_row;
-   }
-  
+
+  // store the distribution
   // generate the Hypre matrix
-  HypreHelpers::create_HYPRE_Matrix(*matrix_pt,
-                                    First_row,
-                                    Last_row,
+  HypreHelpers::create_HYPRE_Matrix(matrix_pt,
                                     Matrix_ij,
-                                    Matrix_par);
-#else
-  // Non-MPI version
-  
-  // find number of rows in matrix
-  Nrow = matrix_pt->nrow();
-  
-  // set up hypre matrix
-  // -------------------
-  HypreHelpers::create_HYPRE_Matrix(*matrix_pt,
-                                    Matrix_ij,
-                                    Matrix_par);
-#endif
+                                    Matrix_par,
+                                    Hypre_distribution_pt);
   
   // Output error messages if required  
   if (Hypre_error_messages)
@@ -573,66 +413,9 @@ namespace oomph
   // delete CRDoubleMatrix if required
   if (Delete_input_data)
    {
-    matrix_pt->clean_up_memory();
+    matrix_pt->clear();
    }
-
  }
-
-
-
-#ifdef OOMPH_HAS_MPI   
-//=============================================================================
-/// Helper function which creates a distributed Hypre matrix from an 
-/// OOMPH-LIB DistributedCRDoubleMatrix
-//=============================================================================
- void HypreInterface::hypre_matrix_setup(DistributedCRDoubleMatrix* matrix_pt)
- {
-  // reset Hypre's global error flag
-  hypre__global_error=0;
-  
-  // find the matrix partitioning and store
-  First_row = matrix_pt->first_row();
-  int nrow_loc = matrix_pt->nrow_local();
-  Last_row = First_row + nrow_loc - 1;
-  
-  Nrow = matrix_pt->nrow();
-  
-  // set up Nrow_local - use MPI_Allgather to get the values
-  Nrows_local.resize(MPI_Helpers::Nproc);
-  MPI_Allgather(&nrow_loc,
-                1,
-                MPI_INT,
-                &Nrows_local[0],
-                1,
-                MPI_INT,
-                MPI_COMM_WORLD);
-  
-  // create the Hypre Matrix
-  HypreHelpers::create_HYPRE_Matrix(*matrix_pt,
-                                    Matrix_ij,
-                                    Matrix_par);
-
-  // check error flag
-  if (Hypre_error_messages)
-   {
-    std::ostringstream message;
-    int err = HypreHelpers::check_HYPRE_error_flag(message);
-    if (err)
-     {
-      OomphLibWarning(message.str(),
-                      "HypreSolver::hypre_matrix_setup()",
-                      OOMPH_EXCEPTION_LOCATION);
-     }
-   }
- 
-  // delete DistributedCRDoubleMatrix matrix if required
-  if (Delete_input_data)
-   {
-    matrix_pt->clean_up_memory();
-   }
-
- }
-#endif
 
 
 //=============================================================================
@@ -644,11 +427,13 @@ namespace oomph
  {
   // Store time
 #ifdef OOMPH_HAS_MPI   
-    double t_start = MPI_Wtime();
+  double t_start = MPI_Wtime();
+  double t_end = 0;
 #else
-    clock_t t_start = clock();
+  clock_t t_start = clock();
+  clock_t t_end = 0; 
 #endif
-
+  
   // reset Hypre's global error flag
   hypre__global_error=0;
 
@@ -657,23 +442,12 @@ namespace oomph
   HYPRE_ParVector dummy_sol_par;
   HYPRE_IJVector dummy_rhs_ij;
   HYPRE_ParVector dummy_rhs_par;
-#ifdef OOMPH_HAS_MPI 
-  HypreHelpers::create_HYPRE_Vector(First_row,
-                                    Last_row,
+  HypreHelpers::create_HYPRE_Vector(Hypre_distribution_pt,
                                     dummy_sol_ij,
                                     dummy_sol_par);
-  HypreHelpers::create_HYPRE_Vector(First_row,
-                                    Last_row,
+  HypreHelpers::create_HYPRE_Vector(Hypre_distribution_pt,
                                     dummy_rhs_ij,
                                     dummy_rhs_par);
-#else
-  HypreHelpers::create_HYPRE_Vector(int(Nrow),
-                                    dummy_sol_ij,
-                                    dummy_sol_par);
-  HypreHelpers::create_HYPRE_Vector(int(Nrow),
-                                    dummy_rhs_ij,
-                                    dummy_rhs_par);
-#endif
 
   // Set up internal preconditioner for CG, GMRES or BiCGSTAB
   // --------------------------------------------------------
@@ -831,9 +605,18 @@ namespace oomph
      }
    } // end of setting up internal preconditioner
 
+  // Record preconditioner set up time
+  double preconditioner_setup_time=0;
+  if (Output_info)
+   {
+    t_end = TimingHelpers::timer();
+    preconditioner_setup_time = t_end-t_start; 
+   }
+
   // set up solver
   // -------------
- 
+  t_start = t_end;
+
   // AMG solver
   if (Hypre_method==BoomerAMG)
    {
@@ -1005,7 +788,7 @@ namespace oomph
    {
     if (Output_info)
      {
-      oomph_info << "Setting up CG ";
+      oomph_info << "Setting up CG, ";
      }
 
     HYPRE_ParCSRPCGCreate(MPI_COMM_WORLD, &Solver);
@@ -1019,7 +802,7 @@ namespace oomph
      {
       if (Output_info)
        {
-        oomph_info << "with BoomerAMG preconditioner, ";
+        oomph_info << " with BoomerAMG preconditioner, ";
        }
 
       HYPRE_PCGSetPrecond(Solver,
@@ -1031,7 +814,7 @@ namespace oomph
      {
       if (Output_info) 
        {
-        oomph_info << "with Euclid ILU preconditioner, ";
+        oomph_info << " with Euclid ILU preconditioner, ";
        }
       
       HYPRE_PCGSetPrecond(Solver,
@@ -1043,7 +826,7 @@ namespace oomph
      {
       if (Output_info)
        {
-        oomph_info << "with ParaSails approximate inverse preconditioner, ";
+        oomph_info << " with ParaSails approximate inverse preconditioner, ";
        }
 
       HYPRE_PCGSetPrecond(Solver,
@@ -1055,10 +838,11 @@ namespace oomph
      {
       if (Output_info) 
        {
-        oomph_info << "with no preconditioner, ";
+        oomph_info << " with no preconditioner";
        }
      }
-     
+
+    
     HYPRE_PCGSetup(Solver,
                    (HYPRE_Matrix) Matrix_par,
                    (HYPRE_Vector) dummy_rhs_par,
@@ -1073,7 +857,7 @@ namespace oomph
    {
     if (Output_info) 
      {
-      oomph_info << "Setting up GMRES ";
+      oomph_info << "Setting up GMRES";
      }
     
     HYPRE_ParCSRGMRESCreate(MPI_COMM_WORLD, &Solver);
@@ -1088,7 +872,7 @@ namespace oomph
      {
       if (Output_info) 
        {
-        oomph_info << "with BoomerAMG preconditioner, ";
+        oomph_info << " with BoomerAMG preconditioner, ";
        }
 
       HYPRE_GMRESSetPrecond(Solver,
@@ -1100,7 +884,7 @@ namespace oomph
      {
       if (Output_info)
        {
-        oomph_info << "with Euclid ILU preconditioner, ";
+        oomph_info << " with Euclid ILU preconditioner, ";
        }
 
       HYPRE_GMRESSetPrecond(Solver,
@@ -1112,7 +896,7 @@ namespace oomph
      {
       if (Output_info) 
        {
-        oomph_info << "with ParaSails approximate inverse preconditioner, ";
+        oomph_info << " with ParaSails approximate inverse preconditioner, ";
        }
       
       HYPRE_GMRESSetPrecond(Solver,
@@ -1124,7 +908,7 @@ namespace oomph
      {
       if (Output_info) 
        {
-        oomph_info << "with no preconditioner, ";
+        oomph_info << " with no preconditioner";
        }
      }
     
@@ -1141,7 +925,7 @@ namespace oomph
    {
     if (Output_info) 
      {
-      oomph_info << "Setting up BiCGStab ";
+      oomph_info << "Setting up BiCGStab";
      }
     
     HYPRE_ParCSRBiCGSTABCreate(MPI_COMM_WORLD, &Solver);
@@ -1155,7 +939,7 @@ namespace oomph
      {
       if (Output_info)
        {
-        oomph_info << "with BoomerAMG preconditioner, ";
+        oomph_info << " with BoomerAMG preconditioner, ";
        }
       
       HYPRE_BiCGSTABSetPrecond(Solver,
@@ -1167,7 +951,7 @@ namespace oomph
      {
       if (Output_info)
        {
-        oomph_info << "with Euclid ILU preconditioner, ";
+        oomph_info << " with Euclid ILU preconditioner, ";
        }
       
       HYPRE_BiCGSTABSetPrecond(Solver,
@@ -1179,7 +963,7 @@ namespace oomph
      {
       if (Output_info) 
        {
-        oomph_info << "with ParaSails approximate inverse preconditioner, ";
+        oomph_info << " with ParaSails approximate inverse preconditioner, ";
        }
       
       HYPRE_BiCGSTABSetPrecond(Solver,
@@ -1191,7 +975,7 @@ namespace oomph
      {
       if (Output_info)
        {
-        oomph_info << "with no preconditioner, ";
+        oomph_info << " with no preconditioner, ";
        }
      }
     
@@ -1216,10 +1000,10 @@ namespace oomph
    }
 
 #ifdef OOMPH_HAS_MPI   
-  double t_end = MPI_Wtime();
+  t_end = MPI_Wtime();
   double solver_setup_time = t_end-t_start; 
 #else
-  double t_end = clock();
+  t_end = clock();
   double solver_setup_time = double(t_end-t_start)/CLOCKS_PER_SEC;
 #endif
   
@@ -1246,7 +1030,6 @@ namespace oomph
     oomph_info << "time for setup [s] : "
                << solver_setup_time << std::endl;
    }
-
  }
 
 
@@ -1255,15 +1038,11 @@ namespace oomph
 /// Helper function performs a solve if solver data has been set
 /// up using hypre_solver_setup(...).
 //====================================================================
- void HypreInterface::hypre_solve(const Vector<double> &rhs,
-                               Vector<double> &solution)
+ void HypreInterface::hypre_solve(const DoubleVector &rhs,
+                                  DoubleVector &solution)
  {
   // Record time
-#ifdef OOMPH_HAS_MPI   
-  double t_start = MPI_Wtime();
-#else
-  clock_t t_start = clock();
-#endif
+  double t_start = TimingHelpers::timer();
 
   // Set up hypre vectors
   // --------------------
@@ -1275,62 +1054,21 @@ namespace oomph
   // Hypre vector for solution
   HYPRE_IJVector solution_ij;
   HYPRE_ParVector solution_par;
-  
-  // find length of rhs vectors
-#ifdef OOMPH_HAS_MPI   
-  const int vec_length = Last_row-First_row+1;
-#else
-  const int vec_length = int(Nrow);
-#endif
 
-  // storage for vector indices required to make Hypre vector
-  Vector<int> vec_indices(vec_length);
-
-  // pointer to the array of rhs values
-  const double* rhs_values=0; 
+  // temporarily rebuild the solution vector so that is has the same
+  // distribution as this Hypre solver
+  solution.rebuild(Hypre_distribution_pt);
 
   // set up rhs_values and vec_indices
-#ifdef OOMPH_HAS_MPI 
-  for (int i=0; i<vec_length;i++)
-   {
-    vec_indices[i] = First_row+i;
-   }
-  if (Using_distributed_rhs)
-   {
-    rhs_values = &rhs[0];
-   }
-  else
-   {
-    rhs_values = &rhs[First_row];
-   }
-
-  HypreHelpers::create_HYPRE_Vector(First_row,
-                                    Last_row,
+  HypreHelpers::create_HYPRE_Vector(rhs,
+                                    Hypre_distribution_pt,
                                     rhs_ij,
-                                    rhs_par,
-                                    rhs_values,
-                                    &vec_indices[0]);
+                                    rhs_par);
   
-  HypreHelpers::create_HYPRE_Vector(First_row,
-                                    Last_row,
+  HypreHelpers::create_HYPRE_Vector(solution,
+                                    Hypre_distribution_pt,
                                     solution_ij,
                                     solution_par);
-#else
-  rhs_values = &rhs[0];
-  for (int i=0; i<vec_length;i++)
-   {
-    vec_indices[i] = i;
-   }
-  HypreHelpers::create_HYPRE_Vector(vec_length,
-                                    rhs_ij,
-                                    rhs_par,
-                                    rhs_values,
-                                    &vec_indices[0]);
-  
-  HypreHelpers::create_HYPRE_Vector(vec_length,
-                                    solution_ij,
-                                    solution_par);
-#endif
   
   // check error flag
   if (Hypre_error_messages)
@@ -1408,56 +1146,28 @@ namespace oomph
    }
 
   // Copy result to solution
-#ifdef OOMPH_HAS_MPI   
-  // If we're returning the distributed vector or there is only one
-  // processor simply get the solution vector
-  if ((Returning_distributed_solution) || (MPI_Helpers::Nproc==1))
+  unsigned nrow_local = Hypre_distribution_pt->nrow_local();
+  unsigned first_row = Hypre_distribution_pt->first_row();
+  int* indices = new int[nrow_local];
+  for (unsigned i = 0; i < nrow_local; i++)
    {
-    solution.resize(vec_length);
-    HYPRE_IJVectorGetValues(solution_ij,
-                            vec_length,
-                            &vec_indices[0],
-                            &solution[0]);
+    indices[i] = first_row + i;
    }
-  else
-   {
-    // Vector to hold local solution values
-    Vector<double> sol_vals_local(vec_length);
-    
-    // Get the solution
-    HYPRE_IJVectorGetValues(solution_ij,
-                            vec_length,
-                            &vec_indices[0],
-                            &sol_vals_local[0]);
-  
- 
-    // Gather the results - first set up displacements for received 
-    //local solution values
-    Vector<int> displacements(MPI_Helpers::Nproc);
-    displacements[0]=0;
-    for (int p = 0; p<MPI_Helpers::Nproc-1; p++)
-     {
-      displacements[p+1]=displacements[p]+Nrows_local[p];
-     }
-    
-    // gather the solution values
-    solution.resize(Nrow);
-    MPI_Allgatherv(&sol_vals_local[0],
-                   vec_length,
-                   MPI_DOUBLE,
-                   &solution[0],
-                   &Nrows_local[0],
-                   &displacements[0],
-                   MPI_DOUBLE,
-                   MPI_COMM_WORLD);
-   }
-#else
-  solution.resize(Nrow);
+  solution.initialise(0.0);
   HYPRE_IJVectorGetValues(solution_ij, 
-                          vec_length, 
-                          &vec_indices[0], 
-                          &solution[0]);
-#endif
+                          nrow_local, 
+                          indices, 
+                          solution.values_pt());
+  solution.redistribute(*rhs.distribution_pt());
+
+  for (unsigned i = 0; i < solution.nrow_local(); i++)
+   {
+    //   oomph_info << "s[" << i + solution.first_row() << "]="
+//               << solution[i] << std::endl;
+   }
+  // assert(false);
+
+  delete[] indices;
   
   // output any error message
   if (Hypre_error_messages)
@@ -1519,6 +1229,7 @@ namespace oomph
   // is there an existing solver
   if (Existing_solver != None)
    {
+
     // delete matrix
     HYPRE_IJMatrixDestroy(Matrix_ij);
 
@@ -1597,9 +1308,15 @@ namespace oomph
 /// requires.
 //====================================================================
  void HypreSolver::solve(Problem* const &problem_pt,
-                         Vector<double> &solution)
+                         DoubleVector &solution)
  {
-  // Set Output_info flag for HypreInterface
+#ifdef OOMPH_HAS_MPI   
+    double t_start = MPI_Wtime();
+#else
+    clock_t t_start = clock();
+#endif
+
+  // Set Output_time flag for HypreInterface
   Output_info = Doc_time;
 
   // Delete any existing solver data
@@ -1609,35 +1326,10 @@ namespace oomph
   // (we're in control)
   Delete_input_data = true;
 
-  //  Get Jacobian and rhs
-#ifdef OOMPH_HAS_MPI    
-  // Record start time
-  double t_start = MPI_Wtime();
-  
-  // Storage for Jacobian
-  DistributedCRDoubleMatrix matrix;  
-  
-  // set flag so solver expects distributed rhs
-  Using_distributed_rhs = true;
-  
-  // Set flat to return global solution vector 
-  Returning_distributed_solution = false;
-
-  // Storage for the Residual
-  DistributedVector<double> residual;
-#else
-  // Record start time
-  clock_t t_start = clock();
-  
-  // Storage for Jacobian
-  CRDoubleMatrix matrix;
-
-  // Storage for the Residual
-  Vector<double> residual;
-#endif
-  
   //Get oomph-lib Jacobian matrix and residual vector
-  problem_pt->get_jacobian(residual,matrix);
+  DoubleVector residual;
+  CRDoubleMatrix* matrix = new CRDoubleMatrix;
+  problem_pt->get_jacobian(residual,*matrix);
   
   // Output times
   if(Doc_time)
@@ -1653,17 +1345,13 @@ namespace oomph
    }
   
   // generate hypre matrix
-  hypre_matrix_setup(&matrix);
+  hypre_matrix_setup(matrix);
   
   // call hypre_solver_setup to generate linear solver data
   hypre_solver_setup();
   
   // perform hypre_solve
-#ifdef OOMPH_HAS_MPI
-  hypre_solve(residual.vector(), solution);
-#else
   hypre_solve(residual, solution);
-#endif  
 
   // delete solver data if required
   if (!Enable_resolve)
@@ -1684,8 +1372,8 @@ namespace oomph
 /// processors hold all values
 //====================================================================
  void HypreSolver::solve(DoubleMatrixBase* const &matrix_pt,
-                         const Vector<double> &rhs,
-                         Vector<double> &solution)
+                         const DoubleVector &rhs,
+                         DoubleVector &solution)
  {
 #ifdef PARANOID
   // check the matrix is square
@@ -1701,7 +1389,7 @@ namespace oomph
    }
 #endif
 
-  // Set Output_info flag for HypreInterface
+  // Set Output_time flag for HypreInterface
   Output_info = Doc_time;
 
   // Clean up existing solver data
@@ -1711,94 +1399,58 @@ namespace oomph
   // (Recall that Delete_matrix defaults to false).
   Delete_input_data = Delete_matrix;
 
-  // Flag to record if matrix cast was successful
-  bool successful_matrix_cast = false;
-
   // Try cast to a CRDoubleMatrix
   CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
   
   // If cast successful set things up for a serial solve
   if (cr_matrix_pt)
    {
-#ifdef PARANOID
-    // check the matrix and rhs are of consistent sizes
-    if ( matrix_pt->nrow() != rhs.size() )
-     {
-      std::ostringstream error_message;
-      error_message << "HypreSolver require rhs vector length equals number of"
-                    << " rows/columns in a CRDoubleMatrix. "
-                    << "Vector length is " << rhs.size()
-                    << " and number of rows/columns in matrix is "
-                    << matrix_pt->ncol() << std::endl;
-      throw OomphLibError(error_message.str(),
-                          "HypreSolver::solve()",
-                          OOMPH_EXCEPTION_LOCATION);
-     }
-#endif
-    successful_matrix_cast = true;
-    hypre_matrix_setup(cr_matrix_pt);
-    
-#ifdef OOMPH_HAS_MPI
-    // Set flag for non-distributed rhs in the solver
-    Using_distributed_rhs = false;
-#endif
-   }
-  
-#ifdef OOMPH_HAS_MPI
-  // Set flat to return global solution vector 
-  Returning_distributed_solution = false;
+    // rebuild the distribution
+    Distribution_pt->rebuild(cr_matrix_pt->distribution_pt());
 
-  // If required try casting to DistributedCRDoubleMatrix
-  DistributedCRDoubleMatrix* dist_cr_matrix_pt=0; 
-  if (!successful_matrix_cast)
-   {
-    dist_cr_matrix_pt = dynamic_cast<DistributedCRDoubleMatrix*>(matrix_pt);
-    
-    // If cast successful set things up for a parallel solve
-    if (dist_cr_matrix_pt)
-     {
 #ifdef PARANOID
-      // check the matrix and rhs are of consistent sizes
-      if ( unsigned(dist_cr_matrix_pt->nrow_local()) != rhs.size() )
-       {
-        std::ostringstream error_message;
-        error_message
-         << "HypreSolver require rhs vector length equals number of"
-         << " local rows in a DistributedCRDoubleMatrix. "
-         << "Vector length is " << rhs.size()
-         << " and number of local rows in matrix is "
-         << dist_cr_matrix_pt->nrow_local() << std::endl;
-        throw OomphLibError(error_message.str(),
-                            "HypreSolver::solve()",
-                            OOMPH_EXCEPTION_LOCATION);
-       }
-#endif
-      successful_matrix_cast = true;
-      hypre_matrix_setup(dist_cr_matrix_pt);
-      
-      // Set flag for non-distributed rhs in the solver
-      Using_distributed_rhs = true;
-     }
-   }
-#endif
-  
-#ifdef PARANOID
-  // Check casts were successful
-  if (!successful_matrix_cast)
+  // check that rhs has the same distribution as the matrix (now stored
+  // in Distribution_pt)
+  if (*Distribution_pt != *rhs.distribution_pt())
    {
     std::ostringstream error_message;
-    error_message << "HypreSolver only work with "
-#ifdef OOMPH_HAS_MPI
-                  << "CRDoubleMatrix and DistributedCRDoubleMatrix matrices" 
-#else
-                  << "CRDoubleMatrix matrices"
+    error_message << "The distribution of the rhs vector and the matrix "
+                  << " must be the same" << std::endl;
+    throw OomphLibError(error_message.str(),
+                        "HypreInterface::hypre_solve()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  // if the solution is setup make sure it has the same distribution as
+  // the matrix as well
+  if (solution.distribution_pt()->setup())
+   {
+    if (*Distribution_pt != *solution.distribution_pt())
+     {
+      std::ostringstream error_message;
+      error_message << "The distribution of the solution vector is setup "
+                    << "there it must be the same as the matrix."
+                    << std::endl;
+      throw OomphLibError(error_message.str(),
+                          "HypreInterface::hypre_solve()",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+   }
 #endif
+
+    hypre_matrix_setup(cr_matrix_pt);
+   }
+  else
+   {
+#ifdef PARANOID
+    std::ostringstream error_message;
+    error_message << "HypreSolver only work with "
+                  << "CRDoubleMatrix matrices"
                   << std::endl;
     throw OomphLibError(error_message.str(),
                      	"HypreSolver::solve()",
                         OOMPH_EXCEPTION_LOCATION);
-   }
 #endif
+   }
   
   // call hypre_setup to generate Hypre matrix and linear solver data
   hypre_solver_setup();
@@ -1818,8 +1470,8 @@ namespace oomph
 /// Resolve performs a linear solve using current solver data (if
 /// such data exists).
 //====================================================================
- void HypreSolver::resolve(const Vector<double> &rhs,
-                           Vector<double> &solution)
+ void HypreSolver::resolve(const DoubleVector &rhs,
+                           DoubleVector &solution)
  {
 #ifdef PARANOID
   // check solver data exists
@@ -1832,6 +1484,32 @@ namespace oomph
     throw OomphLibError(error_message.str(),
                      	  "HypreSolver::resolve()",
                         OOMPH_EXCEPTION_LOCATION);
+   }
+  // check that rhs has the same distribution as the matrix (now stored
+  // in Distribution_pt)
+  if (*Distribution_pt != *rhs.distribution_pt())
+   {
+    std::ostringstream error_message;
+    error_message << "The distribution of the rhs vector and the matrix "
+                  << " must be the same" << std::endl;
+    throw OomphLibError(error_message.str(),
+                        "HypreInterface::hypre_solve()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  // if the solution is setup make sure it has the same distribution as
+  // the matrix as well
+  if (solution.distribution_pt()->setup())
+   {
+    if (*Distribution_pt != *solution.distribution_pt())
+     {
+      std::ostringstream error_message;
+      error_message << "The distribution of the solution vector is setup "
+                    << "there it must be the same as the matrix."
+                    << std::endl;
+      throw OomphLibError(error_message.str(),
+                          "HypreInterface::hypre_solve()",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
    }
 #endif
 
@@ -1896,71 +1574,37 @@ namespace oomph
   Delete_input_data = Delete_matrix;
   
   // Try casting to a CRDoubleMatrix
-  bool successful_matrix_cast = false;
   CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
   
   // If cast successful set things up for a serial solve
   if (cr_matrix_pt)
    {
-    successful_matrix_cast = true;
+    Distribution_pt->rebuild(cr_matrix_pt->distribution_pt());
     hypre_matrix_setup(cr_matrix_pt);
-    
-#ifdef OOMPH_HAS_MPI
-    // Set flag for non-distributed rhs and solution in the solver
-    Using_distributed_rhs = false;
-    Returning_distributed_solution = false;
-#endif
    }
-  
-#ifdef OOMPH_HAS_MPI
-  // If required try casting to DistributedCRDoubleMatrix
-  DistributedCRDoubleMatrix* dist_cr_matrix_pt=0; 
-  if (!successful_matrix_cast)
+  else 
    {
-    dist_cr_matrix_pt = dynamic_cast<DistributedCRDoubleMatrix*>(matrix_pt);
-    
-    // If cast successful set things up for a parallel solve
-    if (dist_cr_matrix_pt)
-     {
-      successful_matrix_cast = true;
-      hypre_matrix_setup(dist_cr_matrix_pt);
-      
-      // Set flag for non-distributed rhs and soltion in the solver
-      Using_distributed_rhs = true;
-      Returning_distributed_solution = true;
-     }
-   }
-#endif
-  
 #ifdef PARANOID
-  // Check casts were successful
-  if (!successful_matrix_cast)
-   {
     std::ostringstream error_message;
     error_message << "HyprePreconditioner only work with "
-#ifdef OOMPH_HAS_MPI
-                  << "CRDoubleMatrix and DistributedCRDoubleMatrix matrices" 
-#else
                   << "CRDoubleMatrix matrices"
-#endif
                   << std::endl;
     throw OomphLibError(error_message.str(),
                      	"HyprePreconditioner::setup()",
                         OOMPH_EXCEPTION_LOCATION);
-   }
 #endif
- 
+   }
+
   // call hypre_solver_setup
   hypre_solver_setup();
-
  }
 
  
 //===================================================================
 /// Preconditioner_solve uses a hypre solver to precondition vector r
 //====================================================================
- void HyprePreconditioner::preconditioner_solve(const Vector<double> &r,
-                                        Vector<double> &z)
+ void HyprePreconditioner::preconditioner_solve(const DoubleVector &r,
+                                                DoubleVector &z)
  {
 #ifdef PARANOID
   // check solver data exists
@@ -1973,6 +1617,32 @@ namespace oomph
                      	"HyprePreconditioner::preconditioner_solve()",
                         OOMPH_EXCEPTION_LOCATION);
    }
+  // check that rhs has the same distribution as the matrix (now stored
+  // in Distribution_pt)
+  if (*Distribution_pt != *r.distribution_pt())
+   {
+    std::ostringstream error_message;
+    error_message << "The distribution of the rhs vector and the matrix "
+                  << " must be the same" << std::endl;
+    throw OomphLibError(error_message.str(),
+                        "HypreInterface::hypre_solve()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  // if the solution is setup make sure it has the same distribution as
+  // the matrix as well
+  if (z.distribution_pt()->setup())
+   {
+    if (*Distribution_pt != *z.distribution_pt())
+     {
+      std::ostringstream error_message;
+      error_message << "The distribution of the solution vector is setup "
+                    << "there it must be the same as the matrix."
+                    << std::endl;
+      throw OomphLibError(error_message.str(),
+                          "HypreInterface::hypre_solve()",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+   }
 #endif
 
   // Switch off any timings for the solve
@@ -1980,7 +1650,6 @@ namespace oomph
   
   // perform hypre_solve
   hypre_solve(r,z);
-
  }
 
  

@@ -46,49 +46,16 @@ namespace oomph
  {
   public:
 
-#ifdef OOMPH_HAS_MPI
   /// \short Constructor - takes the pointer to the oomph-lib 
   /// preconditioner and the distribution of the preconditioner\n
   /// \b Note: the oomph-lib preconditioner must be setup
   OomphLibPreconditionerEpetraOperator(Preconditioner* preconditioner_pt)
-   : Operator_comm(preconditioner_pt->distribution().communicator())
-   {
-    // set the ooomph-lib preconditioner
-    Oomph_lib_preconditioner_pt = preconditioner_pt;
-    
-    // set the preconditioner label
-    //Preconditioner_label = new char[26];
-    Preconditioner_label = "oomph-lib Preconditioner";
-
-    
-    // setup the Epetra_map
-
-    // number of local rows
-    unsigned nrow_local = preconditioner_pt->distribution().nrow_local();
-
-    // first row
-    unsigned first_row = preconditioner_pt->distribution().first_row();
-    
-    // create the map
-    My_global_rows = new int[nrow_local];
-    for (unsigned i = 0; i < nrow_local; i++)
-     {
-      My_global_rows[i] = first_row + i;
-     }
-    
-    // the number of global rows
-    unsigned nrow_global = preconditioner_pt->distribution().nrow_global();
-    
-    // create the operator
-    Operator_map_pt = new Epetra_Map(nrow_global,nrow_local,
-                                     My_global_rows,0,Operator_comm);
-   }
+#ifdef OOMPH_HAS_MPI
+   : Operator_comm
+   (preconditioner_pt->distribution_pt()->communicator_pt()->mpi_comm())
 #else
-  /// \short Constructor - takes the pointer to the oomph-lib 
-  /// preconditioner and the number of rows\n
-  /// \b Note: the oomph-lib preconditioner must be setup 
-  OomphLibPreconditionerEpetraOperator(Preconditioner* preconditioner_pt,
-                                       const unsigned n_rows)
+   : Operator_comm()
+#endif
    {
     // set the ooomph-lib preconditioner
     Oomph_lib_preconditioner_pt = preconditioner_pt;
@@ -97,12 +64,15 @@ namespace oomph
     Preconditioner_label = "oomph-lib Preconditioner";
 
     // setup the Epetra_map
-    Operator_map_pt = new Epetra_Map(n_rows,0,Operator_comm);
-
-    // store the number of rows
-    Nrow = n_rows;
-  }
+#ifdef OOMPH_HAS_MPI
+    TrilinosHelpers::create_epetra_map(preconditioner_pt->distribution_pt(),
+                                       &Operator_comm,Operator_map_pt,
+                                       My_global_rows);
+#else
+    TrilinosHelpers::create_epetra_map(preconditioner_pt->distribution_pt(),
+                                       &Operator_comm,Operator_map_pt);
 #endif
+   }
 
   /// \short Destructor - deletes the Epetra_map and My_global_rows vector
   /// (if MPI)
@@ -120,7 +90,8 @@ namespace oomph
   OomphLibPreconditionerEpetraOperator
    (const OomphLibPreconditionerEpetraOperator&)
 #ifdef OOMPH_HAS_MPI
-   // (NOTE: MPI_COMM_WORLD used just to construct Operator_comm)
+   // NOTE: MPI_COMM_WORLD used just to construct Operator_comm - it ok because
+   // this method is broken
    : Operator_comm(MPI_COMM_WORLD) 
 #else
    : Operator_comm()
@@ -148,7 +119,6 @@ namespace oomph
      OOMPH_EXCEPTION_LOCATION);
    }
 
-
   /// Broken Epetra_Operator member - Apply
   int Apply(const Epetra_MultiVector &X, Epetra_MultiVector &Y) const
    {
@@ -170,24 +140,21 @@ namespace oomph
   int ApplyInverse(const Epetra_MultiVector &epetra_r, 
                    Epetra_MultiVector &epetra_z) const
    {
-#ifdef OOMPH_HAS_MPI
-    // oomph-lib vector for r
-    DistributedVector<double> 
-     oomph_r(Oomph_lib_preconditioner_pt->distribution());
-    
+    // the oomph-lib vector for r
+    DoubleVector oomph_r(Oomph_lib_preconditioner_pt->distribution_pt());
+
     // copy the Epetra_MultiVector r into an oomph-lib vector
     double** r_pt;
     epetra_r.ExtractView(&r_pt);
-    unsigned nrow_local =
-     Oomph_lib_preconditioner_pt->distribution().nrow_local();
+    unsigned nrow_local = 
+     Oomph_lib_preconditioner_pt->distribution_pt()->nrow_local();
     for (unsigned i = 0; i < nrow_local; i++)
      {
       oomph_r[i] = r_pt[0][i];
      }
-    
+
     // oomph-lib vector for Y
-    DistributedVector<double> 
-     oomph_z(Oomph_lib_preconditioner_pt->distribution());
+    DoubleVector oomph_z(Oomph_lib_preconditioner_pt->distribution_pt());
       
     // apply the preconditioner
     Oomph_lib_preconditioner_pt->preconditioner_solve(oomph_r,oomph_z);
@@ -200,33 +167,6 @@ namespace oomph
   
     // return 0 to indicate success
     return 0;
-#else 
-    // oomph-lib vector for r
-    Vector<double> oomph_r(Nrow);
-    
-    // copy the Epetra_MultiVector r into an oomph-lib vector
-    double** r_pt;
-    epetra_r.ExtractView(&r_pt);
-    for (unsigned i = 0; i < Nrow; i++)
-     {
-      oomph_r[i] = r_pt[0][i];
-     }
-    
-    // oomph-lib vector for Y
-    Vector<double> oomph_z(Nrow);
-      
-    // apply the preconditioner
-    Oomph_lib_preconditioner_pt->preconditioner_solve(oomph_r,oomph_z);
-
-    // copy the oomph-lib vector oomph_Y back to Y
-    for (unsigned i = 0; i < Nrow; i++)
-     {
-      epetra_z.ReplaceMyValue(i,0,oomph_z[i]);
-     }
-  
-    // return 0 to indicate success
-    return 0;
-#endif
    }
 
 
@@ -315,7 +255,7 @@ namespace oomph
   int* My_global_rows;
 #else
   /// number of row
-  unsigned Nrow;
+//  unsigned Nrow;
 #endif
 
   /// a label for the preconditioner ( for Epetra_Operator::Label() )
@@ -347,11 +287,9 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
   // initially assume not problem based solve
   Using_problem_based_solve = false;
 
-#ifdef OOMPH_HAS_MPI
   // if a problem based solve is performed then it should generate a 
   // serial matrix
   Assemble_serial_jacobian = false;
-#endif
 
   // null the pts
   Problem_pt = 0;
@@ -438,7 +376,7 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
  /// \short Function which uses problem_pt's get_jacobian(...) function to
  /// generate a linear system which is then solved. This function deletes
  /// any existing internal data and then generates a new AztecOO solver.
- void solve(Problem* const &problem_pt,Vector<double> &solution);
+ void solve(Problem* const &problem_pt,DoubleVector &solution);
 
  /// \short Function to solve the linear system defined by matrix_pt and rhs.
  /// \b NOTE 1. The matrix has to be of type CRDoubleMatrix or 
@@ -446,54 +384,15 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
  /// \b NOTE 2. This function will delete any existing internal data and 
  /// generate a new AztecOO solver.
  void solve(DoubleMatrixBase* const &matrix_pt,
-            const Vector<double> &rhs,
-            Vector<double> &solution);
-
-#ifdef OOMPH_HAS_MPI
- /// \short Function to solve the linear system defined by matrix_pt and rhs\n.
- /// \b NOTE 1. The matrix has to be of type CRDoubleMatrix or 
- /// DistributedCRDoubleMatrix.
- /// \b NOTE 2. This function will delete any existing internal data and 
- /// generate a new AztecOO solver.
- /// \b NOTE 3. The vector rhs must have the same distribution as the matrix
- void solve(DoubleMatrixBase* const &matrix_pt,
-            const DistributedVector<double> &rhs,
-            Vector<double> &solution);
-
- /// \short Function to solve the linear system defined by matrix_pt and rhs\n.
- /// \b NOTE 1. The matrix has to be of type CRDoubleMatrix or 
- /// DistributedCRDoubleMatrix.
- /// \b NOTE 2. This function will delete any existing internal data and 
- /// generate a new AztecOO solver. 
- /// \b NOTE 3. The vectors rhs and solution must have the same distribution 
- /// as the matrix
- void solve(DoubleMatrixBase* const &matrix_pt,
-            const DistributedVector<double> &rhs,
-            DistributedVector<double> &solution);
-#endif
+            const DoubleVector &rhs,
+            DoubleVector &solution);
 
  /// \short Function to resolve a linear system using the existing solver
  /// data, allowing a solve with a new right hand side vector. This
  /// function must be used after a call to solve(...) with
  /// enable_resolve set to true.
- void resolve(const Vector<double> &rhs,
-              Vector<double> &solution);
-
-#ifdef OOMPH_HAS_MPI
- /// \short Function to resolve a linear system using the existing solver
- /// data, allowing a solve with a new right hand side vector. This
- /// function must be used after a call to solve(...) with
- /// enable_resolve set to true.
- void resolve(const DistributedVector<double> &rhs,
-              Vector<double> &solution);
-
- /// \short Function to resolve a linear system using the existing solver
- /// data, allowing a solve with a new right hand side vector. This
- /// function must be used after a call to solve(...) with
- /// enable_resolve set to true.
- void resolve(const DistributedVector<double> &rhs,
-              DistributedVector<double> &solution);
-#endif
+ void resolve(const DoubleVector &rhs,
+              DoubleVector &solution);
 
  /// \short Disable resolve function (overloads the LinearSolver
  /// disable_resolve function).
@@ -524,13 +423,11 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
  /// Function to return Linear_solver_solution_time
  double linear_solver_solution_time() {return Linear_solver_solution_time;}
 
-#ifdef OOMPH_HAS_MPI
  /// Access function to Assemble serial jacobian
  bool& assemble_serial_jacobian() { return Assemble_serial_jacobian; }
 
  /// Access function to Assemble serial jacobian (const version)
  bool assemble_serial_jacobian() const { return Assemble_serial_jacobian; }
-#endif
 
  /// \short Enumerated list to define which AztecOO solver is used
  enum AztecOO_solver_types{CG,
@@ -575,11 +472,9 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
  /// \b NOTE: The matrix is deleted after the preconditioner is setup.
  bool Delete_matrix;
 
-#ifdef OOMPH_HAS_MPI
  /// \short If true, when performing a problem based solve a serial matrix
  /// will be requested from Problem::get_jacobian(...). Defaults to true
  bool Assemble_serial_jacobian;
-#endif
 
  /// \short Defines which solver is set up - available types are
  /// defined in AztecOO_solver_types
@@ -615,14 +510,11 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
  Problem* Problem_pt;
 
 #ifdef OOMPH_HAS_MPI
- /// \short the Distribution of the solver
- DistributionInfo Solver_distribution;
-
-   /// \short Epetra communicator object (MPI version)
-   Epetra_MpiComm* Epetra_comm_pt;
+ /// \short Epetra communicator object (MPI version)
+ Epetra_MpiComm* Epetra_comm_pt;
 #else
-   /// \short Epetra communicator object (serial version)
-   Epetra_SerialComm* Epetra_comm_pt;
+ /// \short Epetra communicator object (serial version)
+ Epetra_SerialComm* Epetra_comm_pt;
 #endif
 };
 

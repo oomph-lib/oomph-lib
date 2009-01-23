@@ -1371,7 +1371,7 @@ dposition_dlagrangian_at_local_coordinate(
 /// scheme has been set up.)
 /// This element is only in charge of the solid dofs.
 //=============================================================================
-void FSIHermiteBeamElement::get_block_numbers_for_unknowns(
+void FSIHermiteBeamElement::get_dof_numbers_for_unknowns(
  std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
 {
 

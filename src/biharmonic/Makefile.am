@@ -6,13 +6,15 @@
 sources =  \
 biharmonic_elements.cc \
 biharmonic_flux_elements.cc \
-biharmonic_problem.cc 
+biharmonic_problem.cc \
+biharmonic_preconditioner.cc
 
 # Define the headers
 headers =  \
 biharmonic_elements.h \
 biharmonic_flux_elements.h \
-biharmonic_problem.h
+biharmonic_problem.h \
+biharmonic_preconditioner.h
 
 # Define name of library
 libname = biharmonic

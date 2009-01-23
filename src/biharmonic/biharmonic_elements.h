@@ -39,10 +39,8 @@
 
 // oomph-lib headers
 #include "../generic/matrices.h"
-#include "../generic/problem.h"
 #include "../generic/elements.h"
 #include "../generic/hermite_elements.h"
-#include "../generic/block_preconditioner.h"
 
 
 namespace oomph
@@ -390,7 +388,7 @@ public:
 
  /// \short The number of "blocks" that degrees of freedom in this element
  /// are sub-divided into (for block preconditioning)
- unsigned nblock_types()
+ unsigned ndof_types()
   {
    return this->required_nvalue(1);
   }
@@ -402,9 +400,9 @@ public:
  /// of the "block" that this unknown is associated with. 
  /// (Function can obviously only be called if the equation numbering
  /// scheme has been set up.) (for block preconditioning)
- void get_block_numbers_for_unknowns(std::list<std::pair<unsigned long,
-                                     unsigned> > 
-                                     &block_lookup_list)
+ void get_dof_numbers_for_unknowns(std::list<std::pair<unsigned long,
+                                   unsigned> > 
+                                   &block_lookup_list)
   {
    
    // number of nodes

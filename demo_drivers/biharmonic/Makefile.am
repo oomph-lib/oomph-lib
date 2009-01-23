@@ -1,4 +1,4 @@
 SUBDIRS = \
-simple_biharmonic
+two_d_biharmonic
 
 

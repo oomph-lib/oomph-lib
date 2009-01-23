@@ -65,8 +65,8 @@ IdentityPreconditioner IterativeLinearSolver::Default_preconditioner;
 /// the vector result.
 //==================================================================
 template<typename MATRIX>
-void BiCGStab<MATRIX>::resolve(const Vector<double> &rhs,
-                               Vector<double> &result)
+void BiCGStab<MATRIX>::resolve(const DoubleVector &rhs,
+                               DoubleVector &result)
 {
  
  // We are re-solving
@@ -99,12 +99,8 @@ void BiCGStab<MATRIX>::resolve(const Vector<double> &rhs,
 //==================================================================
 template<typename MATRIX>
 void BiCGStab<MATRIX>::solve(Problem* const &problem_pt, 
-                             Vector<double> &result)
+                             DoubleVector &result)
 { 
- 
- //Find # of degrees of freedom (variables)
- unsigned n_dof = problem_pt->ndof();
- 
  // Initialise timer
 #ifdef OOMPH_HAS_MPI   
  double t_start = MPI_Wtime();
@@ -121,8 +117,9 @@ void BiCGStab<MATRIX>::solve(Problem* const &problem_pt,
  // Get Jacobian matrix in format specified by template parameter
  // and nonlinear residual vector
  Matrix_pt=new MATRIX;
- Vector<double> f(n_dof); 
+ DoubleVector f; 
  problem_pt->get_jacobian(f,*Matrix_pt);  
+ 
  
  // We've made the matrix, we can delete it...
  Matrix_can_be_deleted=true;
@@ -142,8 +139,32 @@ void BiCGStab<MATRIX>::solve(Problem* const &problem_pt,
               << Jacobian_setup_time << std::endl;
   }
 
+ // set the distribution
+ if (dynamic_cast<DistributableLinearAlgebraObject*>(Matrix_pt))
+  {
+   // the solver has the same distribution as the matrix if possible
+   Distribution_pt->rebuild(dynamic_cast<DistributableLinearAlgebraObject*>
+                            (Matrix_pt)->distribution_pt());
+  }
+ else
+  {
+   // the solver has the same distribution as the RHS
+   Distribution_pt->rebuild(f.distribution_pt());
+  }
+
  // Call linear algebra-style solver
- this->solve_helper(Matrix_pt,f,result,problem_pt);
+ if (!(*result.distribution_pt() == *Distribution_pt))
+  {
+   LinearAlgebraDistribution 
+    temp_global_dist(result.distribution_pt());       
+   result.rebuild(Distribution_pt);
+   this->solve_helper(Matrix_pt,f,result,problem_pt);
+   result.redistribute(temp_global_dist);
+  }
+ else
+  {
+   this->solve_helper(Matrix_pt,f,result,problem_pt);
+  }
   
  // Kill matrix unless it's still required for resolve
  if (!Enable_resolve) clean_up_memory();
@@ -165,12 +186,107 @@ void BiCGStab<MATRIX>::solve(Problem* const &problem_pt,
 //==================================================================
 template<typename MATRIX>
 void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
-                                    const Vector<double> &rhs,
-                                    Vector<double> &solution,
+                                    const DoubleVector &rhs,
+                                    DoubleVector &solution,
                                     Problem* problem_pt)
 {
+#ifdef PARANOID
+ // check that the rhs vector is setup
+ if (!rhs.distribution_pt()->setup())
+  {
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "The vectors rhs must be setup";
+   throw OomphLibError(error_message_stream.str(),
+                       "BiCGStab::solve_helper()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+
+ // check that the matrix is square
+ if (matrix_pt->nrow() != matrix_pt->ncol())
+  {
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "The matrix at matrix_pt must be square.";
+   throw OomphLibError(error_message_stream.str(),
+                       "BiCGStab::solve_helper()",
+                       OOMPH_EXCEPTION_LOCATION);    
+  }
+
+ // check that the matrix and the rhs vector have the same nrow()
+ if (matrix_pt->nrow() != rhs.nrow())
+  {
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "The matrix and the rhs vector must have the same number of rows.";
+   throw OomphLibError(error_message_stream.str(),
+                       "BiCGStab::solve_helper()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ 
+ // if the matrix is distributable then it too should have the same 
+ // communicator as the rhs vector
+ DistributableLinearAlgebraObject* dist_matrix_pt = 
+  dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt);
+ if (dist_matrix_pt != 0)
+  {
+   if (!(*dist_matrix_pt->distribution_pt() == *rhs.distribution_pt()))
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The matrix matrix_pt must have the same communicator as the vectors"
+      << " rhs and result must have the same communicator";
+     throw OomphLibError(error_message_stream.str(),
+                         "BiCGStab::solve_helper()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+ // if the matrix is not distributable then it the rhs vector should not be
+ // distributed
+ else
+  {
+   if (rhs.distribution_pt()->distributed())
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The matrix (matrix_pt) is not distributable and therefore the rhs"
+      << " vector must not be distributed";
+     throw OomphLibError(error_message_stream.str(),
+                         "BiCGStab::solve_helper()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+ // if the result vector is setup then check it has the same distribution
+ // as the rhs
+ if (solution.distribution_setup())
+  {
+   if (!(*solution.distribution_pt() == *rhs.distribution_pt()))
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The solution vector distribution has been setup; it must have the "
+      << "same distribution as the rhs vector.";
+     throw OomphLibError(error_message_stream.str(),
+                         "BiCGStab::solve_helper()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }   
+#endif
+
+ // setup the solution if it is not
+ if (!solution.distribution_pt()->setup())
+  {
+   solution.rebuild(Distribution_pt);
+  }
+ // zero
+ else
+  {
+   solution.initialise();
+  }
+
  // Get number of dofs
- unsigned n_dof=rhs.size();
+// unsigned n_dof=rhs.size();
+ unsigned nrow_local = this->nrow_local();
  
  // Time solver
 #ifdef OOMPH_HAS_MPI   
@@ -181,21 +297,14 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
 
  // Initialise: Zero initial guess so the initial residual is 
  // equal to the RHS, i.e. the nonlinear residual
- Vector<double> x(n_dof,0.0);
- Vector<double> residual(n_dof);
- double residual_norm=0.0;
- for(unsigned i=0;i<n_dof;i++)
-  {      
-   residual[i]=rhs[i];
-   residual_norm+=residual[i]*residual[i];      
-  } 
-
- residual_norm=sqrt(residual_norm);
- double rhs_norm=residual_norm;
- if (rhs_norm==0.0) rhs_norm=1.0;
-
+ DoubleVector residual(rhs);
+ double residual_norm = residual.norm();
+ double rhs_norm = residual_norm;
+ if (rhs_norm==0.0) rhs_norm=1.0; 
+ DoubleVector x(rhs.distribution_pt());
+ 
  // Hat residual by copy operation
- Vector<double> r_hat(residual);
+ DoubleVector r_hat(residual);
  
  // Normalised residual
  double normalised_residual_norm=residual_norm/rhs_norm;
@@ -286,17 +395,14 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
  double s_norm,r_norm;
  
  // Some vectors
- Vector<double> p(n_dof),p_hat(n_dof),v(n_dof),z(n_dof),t(n_dof),s(n_dof);
- 
+ DoubleVector p(Distribution_pt),p_hat(Distribution_pt),v(Distribution_pt),
+  z(Distribution_pt),t(Distribution_pt),s(Distribution_pt);
+
  // Loop over max. number of iterations
  for (unsigned iter=1;iter<=Max_iter;iter++)
   {
-   // Dot product for rho    
-   rho=0.0;
-   for (unsigned i=0;i<n_dof;i++)
-    {
-     rho+=r_hat[i]*residual[i];
-    }
+   // Dot product for rho
+   rho = r_hat.dot(residual);
    
    // Breakdown?
    if (rho==0.0)
@@ -310,15 +416,12 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
    // First step is different
    if (iter==1)
     {
-     for (unsigned i=0;i<n_dof;i++)
-      {
-       p[i]=residual[i];
-      }
+     p=residual;
     }
    else
     {
      beta=(rho/rho_prev)*(alpha/omega);
-     for (unsigned i=0;i<n_dof;i++)
+     for (unsigned i=0;i<nrow_local;i++)
       {
        p[i] = residual[i] + beta*(p[i]-omega*v[i]);
       }
@@ -329,28 +432,16 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
    
    // Matrix vector product: v=A*p_hat
    matrix_pt->multiply(p_hat,v);
-   
-   dot_prod=0.0;
-   for (unsigned i=0;i<n_dof;i++)
-    {
-     dot_prod+=r_hat[i]*v[i];
-    }     
-   alpha=rho/dot_prod;
-   
-   
-   s_norm=0.0;
-   for (unsigned i=0;i<n_dof;i++)
+   dot_prod = r_hat.dot(v);
+   alpha=rho/dot_prod;   
+    for (unsigned i=0;i<nrow_local;i++)
     {
      s[i]=residual[i]-alpha*v[i];
-     s_norm+=s[i]*s[i];
     }  
+    s_norm = s.norm();
    
    // Normalised residual
-   normalised_residual_norm=sqrt(s_norm)/rhs_norm;
-   
-
-   // Richard: Do we want this half-step convergence history?
-   // What does matlab do?
+    normalised_residual_norm=s_norm/rhs_norm;
 
    // if required will document convergence history to screen or file (if
    // stream open)
@@ -371,7 +462,7 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
    // Converged?
    if (normalised_residual_norm<Tolerance)
     {
-     for (unsigned i=0;i<n_dof;i++)
+     for (unsigned i=0;i<nrow_local;i++)
       {  
        solution[i]=x[i]+alpha*p_hat[i];
       }
@@ -412,30 +503,20 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
    
    // Matrix vector product: t=A*z
    matrix_pt->multiply(z,t);
-   
-   dot_prod_ts=0.0;
-   dot_prod_tt=0.0;
-   for (unsigned i=0;i<n_dof;i++)
-    {  
-     dot_prod_tt+=t[i]*t[i];
-     dot_prod_ts+=t[i]*s[i];
-    }
+   dot_prod_ts=t.dot(s);
+   dot_prod_tt=t.dot(t);
    omega=dot_prod_ts/dot_prod_tt;
-   
-   r_norm=0.0;
-   for (unsigned i=0;i<n_dof;i++)
+   for (unsigned i=0;i<nrow_local;i++)
     {  
      x[i]+=alpha*p_hat[i]+omega*z[i];
      residual[i]=s[i]-omega*t[i];
-     r_norm+=residual[i]*residual[i];
     }
+   r_norm = residual.norm();
    rho_prev=rho;
    
-   
-   
    // Check convergence again
-   normalised_residual_norm=sqrt(r_norm)/rhs_norm;
-   
+   normalised_residual_norm=r_norm/rhs_norm; 
+  
    // if required will document convergence history to screen or file (if
    // stream open)
    if (Doc_convergence_history)
@@ -570,15 +651,110 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
 //==================================================================
 template<typename MATRIX>
 void CG<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
-                              const Vector<double> &rhs,
-                              Vector<double> &solution,
+                              const DoubleVector &rhs,
+                              DoubleVector &solution,
                               Problem* problem_pt)
 {
+#ifdef PARANOID
+ // check that the rhs vector is setup
+ if (!rhs.distribution_pt()->setup())
+  {
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "The vectors rhs must be setup";
+   throw OomphLibError(error_message_stream.str(),
+                       "CG::solve_helper()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+
+ // check that the matrix is square
+ if (matrix_pt->nrow() != matrix_pt->ncol())
+  {
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "The matrix at matrix_pt must be square.";
+   throw OomphLibError(error_message_stream.str(),
+                       "CG::solve_helper()",
+                       OOMPH_EXCEPTION_LOCATION);    
+  }
+
+ // check that the matrix and the rhs vector have the same nrow()
+ if (matrix_pt->nrow() != rhs.nrow())
+  {
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "The matrix and the rhs vector must have the same number of rows.";
+   throw OomphLibError(error_message_stream.str(),
+                       "CG::solve_helper()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ 
+ // if the matrix is distributable then it too should have the same 
+ // communicator as the rhs vector
+ DistributableLinearAlgebraObject* dist_matrix_pt = 
+  dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt);
+ if (dist_matrix_pt != 0)
+  {
+   if (!(*dist_matrix_pt->distribution_pt() == *rhs.distribution_pt()))
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The matrix matrix_pt must have the same communicator as the vectors"
+      << " rhs and result must have the same communicator";
+     throw OomphLibError(error_message_stream.str(),
+                         "CG::solve_helper()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+ // if the matrix is not distributable then it the rhs vector should not be
+ // distributed
+ else
+  {
+   if (rhs.distribution_pt()->distributed())
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The matrix (matrix_pt) is not distributable and therefore the rhs"
+      << " vector must not be distributed";
+     throw OomphLibError(error_message_stream.str(),
+                         "CG::solve_helper()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+ // if the result vector is setup then check it has the same distribution
+ // as the rhs
+ if (solution.distribution_setup())
+  {
+   if (!(*solution.distribution_pt() == *rhs.distribution_pt()))
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The solution vector distribution has been setup; it must have the "
+      << "same distribution as the rhs vector.";
+     throw OomphLibError(error_message_stream.str(),
+                         "CG::solve_helper()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }   
+#endif
+
+ // setup the solution if it is not
+ if (!solution.distribution_pt()->setup())
+  {
+   solution.rebuild(Distribution_pt);
+  }
+ // zero
+ else
+  {
+   solution.initialise();
+  }
+
  // Get number of dofs
- unsigned n_dof=rhs.size();
+// unsigned n_dof=rhs.size();
+ unsigned nrow_local = this->nrow_local();
  
  // Initialise counter
- unsigned counter = 1; 
+ unsigned counter = 0; 
 
  // Time solver
 #ifdef OOMPH_HAS_MPI   
@@ -589,18 +765,12 @@ void CG<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
  
  // Initialise: Zero initial guess so the initial residual is 
  // equal to the RHS
- Vector<double> x(n_dof,0.0);
- Vector<double> residual(n_dof);
- double residual_norm=0.0;
- for(unsigned i=0;i<n_dof;i++)
-  {      
-   residual[i]=rhs[i];
-   residual_norm+=residual[i]*residual[i];      
-  } 
- residual_norm=sqrt(residual_norm);
+ DoubleVector x(Distribution_pt);
+ DoubleVector residual(rhs);
+ double residual_norm = residual.norm();
  double rhs_norm=residual_norm;
- if (rhs_norm==0.0) rhs_norm=1.0;
- 
+ if (rhs_norm==0.0) rhs_norm=1.0; 
+
  // Normalised residual
  double normalised_residual_norm=residual_norm/rhs_norm;
  
@@ -685,7 +855,9 @@ void CG<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
 
 
  // Auxiliary vectors
- Vector<double> z(n_dof),p(n_dof),jacobian_times_p(n_dof,0.0);
+// Vector<double> z(n_dof),p(n_dof),jacobian_times_p(n_dof,0.0);
+ DoubleVector z(Distribution_pt), p(Distribution_pt), 
+  jacobian_times_p(Distribution_pt);
  
  // Auxiliary values
  double alpha,beta,rz;
@@ -699,59 +871,43 @@ void CG<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
    preconditioner_pt()->preconditioner_solve(residual,z);
    
    // P vector is computed differently for first and subsequent steps
-   if(counter==1)
+   if(counter==0)
     {
-     // r \cdot z is needed for next step
-     rz=0.0;
-     for (unsigned i=0;i<n_dof;i++)
-      {
-       p[i]=z[i];
-       rz+=residual[i]*z[i]; 
-      }
+     p=z;
+     rz=residual.dot(z);
     }
    // Subsequent steps
    else
     {
-     rz=0.0;
-     for (unsigned i=0;i<n_dof;i++)
-      {
-       rz+=residual[i]*z[i];
-      }       
+     rz=residual.dot(z);
      beta=rz/prev_rz;
-     for (unsigned i=0;i<n_dof;i++)
+     for (unsigned i=0;i<nrow_local;i++)
       {	  
        p[i]=z[i]+beta*p[i];
-      }	
+      }  
     }
    
    
    // Matrix vector product
-   matrix_pt->multiply(p,jacobian_times_p);     
-   double pq=0.0;
-   for(unsigned i=0;i<n_dof;i++)
-    {
-     pq+=p[i]*jacobian_times_p[i];
-    }     
+   matrix_pt->multiply(p,jacobian_times_p);   
+   double pq = p.dot(jacobian_times_p);
    alpha=rz/pq;
    
    // Update
    prev_rz=rz;
-   for(unsigned i=0;i<n_dof;i++)
+   for(unsigned i=0;i<nrow_local;i++)
     {
      x[i]+=alpha*p[i];
      residual[i]-=alpha*jacobian_times_p[i];
     }
-   
-   
+
+
    //Calculate the 2norm
-   residual_norm=0.0;
-   for(unsigned i=0;i<n_dof;i++)
-    {
-     residual_norm+=residual[i]*residual[i];
-    }
+   residual_norm = residual.norm();
    
    //Difference between the initial and current 2norm residual
-   normalised_residual_norm=sqrt(residual_norm)/rhs_norm;
+    normalised_residual_norm=residual_norm/rhs_norm;
+
    
    // if required will document convergence history to screen or file (if
    // stream open)
@@ -827,8 +983,8 @@ void CG<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
 /// the vector result.
 //==================================================================
 template<typename MATRIX>
-void CG<MATRIX>::resolve(const Vector<double> &rhs,
-                         Vector<double> &result)
+void CG<MATRIX>::resolve(const DoubleVector &rhs,
+                         DoubleVector &result)
 {
  
  // We are re-solving
@@ -860,12 +1016,8 @@ void CG<MATRIX>::resolve(const Vector<double> &rhs,
 /// the problem's fully assembled Jacobian and residual vector.
 //==================================================================
 template<typename MATRIX>
-void CG<MATRIX>::solve(Problem* const &problem_pt, Vector<double> &result)
-{ 
- 
- //Find # of degrees of freedom (variables)
- unsigned n_dof = problem_pt->ndof();
- 
+void CG<MATRIX>::solve(Problem* const &problem_pt, DoubleVector &result)
+{  
  // Initialise timer
 #ifdef OOMPH_HAS_MPI   
  double t_start = MPI_Wtime();
@@ -882,7 +1034,7 @@ void CG<MATRIX>::solve(Problem* const &problem_pt, Vector<double> &result)
  // Get Jacobian matrix in format specified by template parameter
  // and nonlinear residual vector
  Matrix_pt=new MATRIX;
- Vector<double> f(n_dof); 
+ DoubleVector f; 
  problem_pt->get_jacobian(f,*Matrix_pt);  
  
  // We've made the matrix, we can delete it...
@@ -903,8 +1055,38 @@ void CG<MATRIX>::solve(Problem* const &problem_pt, Vector<double> &result)
               << Jacobian_setup_time << std::endl;
   }
 
+ // set the distribution
+ if (dynamic_cast<DistributableLinearAlgebraObject*>(Matrix_pt))
+  {
+   // the solver has the same distribution as the matrix if possible
+   Distribution_pt->rebuild(dynamic_cast<DistributableLinearAlgebraObject*>
+                            (Matrix_pt)->distribution_pt());
+  }
+ else
+  {
+   // the solver has the same distribution as the RHS
+   Distribution_pt->rebuild(f.distribution_pt());
+  }
+
+ // if the result vector is not setup
+ if (!result.distribution_pt()->setup())
+   {
+     result.rebuild(Distribution_pt);
+   }
+
  // Call linear algebra-style solver
- this->solve_helper(Matrix_pt,f,result,problem_pt);
+ if (!(*result.distribution_pt() == *Distribution_pt))
+  {
+   LinearAlgebraDistribution 
+    temp_global_dist(result.distribution_pt());       
+   result.rebuild(Distribution_pt);
+   this->solve_helper(Matrix_pt,f,result,problem_pt);
+       result.redistribute(temp_global_dist);
+  }
+ else
+  {
+   this->solve_helper(Matrix_pt,f,result,problem_pt);
+  }
   
  // Kill matrix unless it's still required for resolve
  if (!Enable_resolve) clean_up_memory();
@@ -920,14 +1102,15 @@ void CG<MATRIX>::solve(Problem* const &problem_pt, Vector<double> &result)
 
 
 
+
 //==================================================================
 /// \short Re-solve the system defined by the last assembled Jacobian
 /// and the rhs vector specified here. Solution is returned in 
 /// the vector result.
 //==================================================================
 template<typename MATRIX>
-void GS<MATRIX>::resolve(const Vector<double> &rhs,
-                         Vector<double> &result)
+void GS<MATRIX>::resolve(const DoubleVector &rhs,
+                         DoubleVector &result)
 {
  
  // We are re-solving
@@ -959,7 +1142,7 @@ void GS<MATRIX>::resolve(const Vector<double> &rhs,
 /// the problem's fully assembled Jacobian and residual vector.
 //==================================================================
 template<typename MATRIX>
-void GS<MATRIX>::solve(Problem* const &problem_pt, Vector<double> &result)
+void GS<MATRIX>::solve(Problem* const &problem_pt, DoubleVector &result)
 { 
  
  //Find # of degrees of freedom (variables)
@@ -978,10 +1161,22 @@ void GS<MATRIX>::solve(Problem* const &problem_pt, Vector<double> &result)
  // Get rid of any previously stored data
  clean_up_memory();
 
+ // setup the distribution
+ Distribution_pt->rebuild(problem_pt->communicator_pt(),
+                          n_dof,false);
+
  // Get Jacobian matrix in format specified by template parameter
  // and nonlinear residual vector
  Matrix_pt=new MATRIX;
- Vector<double> f(n_dof); 
+ DoubleVector f; 
+ if (dynamic_cast<DistributableLinearAlgebraObject*>(Matrix_pt) != 0)
+  {
+   if (dynamic_cast<CRDoubleMatrix*>(Matrix_pt) != 0)
+    {
+     dynamic_cast<CRDoubleMatrix* >(Matrix_pt)->rebuild(Distribution_pt);
+     f.rebuild(Distribution_pt);
+    }
+  }
  problem_pt->get_jacobian(f,*Matrix_pt);  
  
  // We've made the matrix, we can delete it...
@@ -1007,7 +1202,6 @@ void GS<MATRIX>::solve(Problem* const &problem_pt, Vector<double> &result)
   
  // Kill matrix unless it's still required for resolve
  if (!Enable_resolve) clean_up_memory();
-
 };
 
 
@@ -1020,13 +1214,85 @@ void GS<MATRIX>::solve(Problem* const &problem_pt, Vector<double> &result)
 //==================================================================
 template<typename MATRIX>
 void GS<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
-                              const Vector<double> &rhs,
-                              Vector<double> &solution,
+                              const DoubleVector &rhs,
+                              DoubleVector &solution,
                               Problem* problem_pt)
 {
-
  // Get number of dofs
- unsigned n_dof=rhs.size();
+ unsigned n_dof=rhs.nrow();
+
+#ifdef PARANOID
+ // PARANOID check that if the matrix is distributable then it should not be 
+ // then it should not be distributed
+ if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt) != 0)
+  {
+   if (dynamic_cast<DistributableLinearAlgebraObject*>
+       (matrix_pt)->distributed())
+    {
+     std::ostringstream error_message_stream;                         
+     error_message_stream                                        
+      << "The matrix must not be distributed.";  
+     throw OomphLibError(error_message_stream.str(),     
+                         "GS::solve_helper()",             
+                         OOMPH_EXCEPTION_LOCATION);        
+    }
+  }
+ // PARANOID check that this rhs distribution is setup
+ if (!rhs.distribution_pt()->setup())
+  {
+   std::ostringstream error_message_stream;                           
+   error_message_stream                                        
+    << "The rhs vector distribution must be setup.";               
+   throw OomphLibError(error_message_stream.str(),                  
+                       "GS::solve_helper()",                            
+                       OOMPH_EXCEPTION_LOCATION);         
+  }
+ // PARANOID check that the rhs has the right number of global rows
+ if(rhs.nrow() != n_dof)
+  {
+   throw OomphLibError(
+    "RHS does not have the same dimension as the linear system",
+    "SuperLU::backsub()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+ // PARANOID check that the rhs is not distributed
+ if (rhs.distribution_pt()->distributed())
+  {
+   std::ostringstream error_message_stream;                           
+   error_message_stream                                        
+    << "The rhs vector must not be distributed.";               
+   throw OomphLibError(error_message_stream.str(),                  
+                       "GS::solve_helper()",                           
+                       OOMPH_EXCEPTION_LOCATION);         
+  }
+ // PARANOID check that if the result is setup it matches the distribution
+ // of the rhs
+ if (solution.distribution_pt()->setup())
+  {
+   if (!(*rhs.distribution_pt() == *solution.distribution_pt()))
+    {
+     std::ostringstream error_message_stream;                           
+     error_message_stream                                        
+      << "If the result distribution is setup then it must be the same as the "
+      << "rhs distribution";               
+     throw OomphLibError(error_message_stream.str(),                  
+                         "GS::solve_helper()",                            
+                         OOMPH_EXCEPTION_LOCATION);         
+    }
+  }
+#endif
+
+ // setup the solution if it is not
+ if (!solution.distribution_pt()->setup())
+  {
+   solution.rebuild(Distribution_pt);
+  }
+ // zero
+ else
+  {
+   solution.initialise();
+  }
+
 
  // Initialise
  unsigned counter=1;
@@ -1039,8 +1305,8 @@ void GS<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
 #endif
 
  // Initial guess is zero so the residual is equal to the RHS
- Vector<double> x(n_dof,0.0);
- Vector<double> local_residual(n_dof);
+ DoubleVector x(Distribution_pt);
+ DoubleVector local_residual(Distribution_pt);
  for(unsigned i=0;i<n_dof;i++)
   {   
    local_residual[i]=rhs[i];
@@ -1069,7 +1335,7 @@ void GS<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
     }
   }
  
- Vector<double> current_residual(n_dof);
+ DoubleVector current_residual(Distribution_pt);
  // Start of the main GS loop
  while((norm_res>Tolerance)&&(counter!=Max_iter))
   {
@@ -1156,7 +1422,6 @@ void GS<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
 
 
 
-
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
@@ -1169,10 +1434,9 @@ void GS<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
 /// the vector result.
 //==================================================================
 template<typename MATRIX>
-void GMRES<MATRIX>::resolve(const Vector<double> &rhs,
-                            Vector<double> &result)
+void GMRES<MATRIX>::resolve(const DoubleVector &rhs,
+                            DoubleVector &result)
 {
- 
  // We are re-solving
  Resolving=true;
 
@@ -1202,9 +1466,10 @@ void GMRES<MATRIX>::resolve(const Vector<double> &rhs,
 /// the problem's fully assembled Jacobian and residual vector.
 //==================================================================
 template<typename MATRIX>
-void GMRES<MATRIX>::solve(Problem* const &problem_pt, Vector<double> &result)
+void GMRES<MATRIX>::solve(Problem* const &problem_pt, DoubleVector &result)
 { 
- 
+
+
  //Find # of degrees of freedom (variables)
  unsigned n_dof = problem_pt->ndof();
  
@@ -1221,10 +1486,22 @@ void GMRES<MATRIX>::solve(Problem* const &problem_pt, Vector<double> &result)
  // Get rid of any previously stored data
  clean_up_memory();
 
+ // setup the distribution
+ Distribution_pt->rebuild(problem_pt->communicator_pt(),
+                          n_dof,false);
+
  // Get Jacobian matrix in format specified by template parameter
  // and nonlinear residual vector
  Matrix_pt=new MATRIX;
- Vector<double> f(n_dof); 
+ DoubleVector f; 
+ if (dynamic_cast<DistributableLinearAlgebraObject*>(Matrix_pt) != 0)
+  {
+   if (dynamic_cast<CRDoubleMatrix*>(Matrix_pt) != 0)
+    {
+     dynamic_cast<CRDoubleMatrix* >(Matrix_pt)->rebuild(Distribution_pt);
+     f.rebuild(Distribution_pt);
+    }
+  }
  problem_pt->get_jacobian(f,*Matrix_pt);  
  
  // We've made the matrix, we can delete it...
@@ -1267,13 +1544,84 @@ void GMRES<MATRIX>::solve(Problem* const &problem_pt, Vector<double> &result)
 //=============================================================================
 template <typename MATRIX>
 void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
-                                 const Vector<double> &rhs,
-                                 Vector<double> &solution,
+                                 const DoubleVector &rhs,
+                                 DoubleVector &solution,
                                  Problem* problem_pt)
 {
-
  // Get number of dofs
- unsigned n_dof=rhs.size();
+ unsigned n_dof=rhs.nrow();
+
+#ifdef PARANOID
+ // PARANOID check that if the matrix is distributable then it should not be 
+ // then it should not be distributed
+ if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt) != 0)
+  {
+   if (dynamic_cast<DistributableLinearAlgebraObject*>
+       (matrix_pt)->distributed())
+    {
+     std::ostringstream error_message_stream;                         
+     error_message_stream                                        
+      << "The matrix must not be distributed.";  
+     throw OomphLibError(error_message_stream.str(),     
+                         "GMRES::solve_helper()",             
+                         OOMPH_EXCEPTION_LOCATION);        
+    }
+  }
+ // PARANOID check that this rhs distribution is setup
+ if (!rhs.distribution_pt()->setup())
+  {
+   std::ostringstream error_message_stream;                           
+   error_message_stream                                        
+    << "The rhs vector distribution must be setup.";               
+   throw OomphLibError(error_message_stream.str(),                  
+                       "GMRES::solve_helper()",                            
+                       OOMPH_EXCEPTION_LOCATION);         
+  }
+ // PARANOID check that the rhs has the right number of global rows
+ if(rhs.nrow() != n_dof)
+  {
+   throw OomphLibError(
+    "RHS does not have the same dimension as the linear system",
+    "SuperLU::backsub()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+ // PARANOID check that the rhs is not distributed
+ if (rhs.distribution_pt()->distributed())
+  {
+   std::ostringstream error_message_stream;                           
+   error_message_stream                                        
+    << "The rhs vector must not be distributed.";               
+   throw OomphLibError(error_message_stream.str(),                  
+                       "GMRES::solve_helper()",                           
+                       OOMPH_EXCEPTION_LOCATION);         
+  }
+ // PARANOID check that if the result is setup it matches the distribution
+ // of the rhs
+ if (solution.distribution_pt()->setup())
+  {
+   if (!(*rhs.distribution_pt() == *solution.distribution_pt()))
+    {
+     std::ostringstream error_message_stream;                           
+     error_message_stream                                        
+      << "If the result distribution is setup then it must be the same as the "
+      << "rhs distribution";               
+     throw OomphLibError(error_message_stream.str(),                  
+                         "GMRES::solve_helper()",                            
+                         OOMPH_EXCEPTION_LOCATION);         
+    }
+  }
+#endif
+
+ // setup the solution if it is not
+ if (!solution.distribution_pt()->setup())
+  {
+   solution.rebuild(Distribution_pt);
+  }
+ // zero
+ else
+  {
+   solution.initialise();
+  }
 
 
 //  {
@@ -1286,9 +1634,6 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
 //  }
 
  
- // Resize and initialise
- solution.resize(n_dof);
- for (unsigned i=0;i<n_dof;i++) {solution[i]=0.0;}
 
 
 //  {
@@ -1324,7 +1669,7 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
  Vector<double> s(Restart + 1,0);
  Vector<double> cs(Restart + 1);
  Vector<double> sn(Restart + 1);
- Vector<double> w(n_dof);
+ DoubleVector w(Distribution_pt);
  
 
  // Setup preconditioner only if we're not re-solving
@@ -1364,7 +1709,7 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
   } 
 
  // solve b-Jx = Mr for r (assumes x = 0);
- Vector<double> r(n_dof);
+ DoubleVector r(Distribution_pt);
  // Original version commented out
 // preconditioner_pt()->preconditioner_solve(rhs,r); 
  //////////// New version with RH preconditioning from Glyn
@@ -1392,7 +1737,7 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
 
  // set beta (the initial residual) 
  double beta = normb;
- 
+
  // compute initial relative residual
  if (normb == 0.0) normb = 1;
  resid = beta / normb;
@@ -1439,9 +1784,10 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
  
  // initialise vector of orthogonal basis vectors (v) and upper hessenberg 
  // matrix H
- // NOTE: for implementation purpose the upper hessenbery matrix indexes are
+ // NOTE: for implementation purpose the upper hessenberg matrix indexes are
  // are swapped so the matrix is effectively transposed
- Vector<Vector<double> > v(Restart + 1);
+ Vector<DoubleVector> v;
+ v.resize(Restart + 1);
  Vector<Vector<double> > H(Restart + 1);
 
  // while...
@@ -1449,7 +1795,7 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
   {
 
    // set zeroth basis vector v[0] to r/beta
-   v[0].resize(n_dof);
+   v[0].rebuild(Distribution_pt);
    for (unsigned i = 0; i < n_dof; i++)
     {
      v[0][i] = r[i] / beta;
@@ -1477,9 +1823,9 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
 //       preconditioner_pt()->preconditioner_solve(temp,w);
 //      }
 
-     ////////////// New version from Glyn
+     ////////////// New version from Glyn (modified for DoubleVectors by RM)
      {
-      Vector<double> temp(n_dof,0.0);
+      DoubleVector temp(Distribution_pt);
       if(Preconditioner_LHS)
        {
         // solve Jv[i] = Mw for w
@@ -1525,7 +1871,7 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
      }
     
      // 
-     v[iter_restart + 1].resize(n_dof);
+     v[iter_restart + 1].rebuild(Distribution_pt);
      for (unsigned i = 0; i < n_dof; i++)
       {
        v[iter_restart + 1][i] = w[i] / H[iter_restart][iter_restart+1];
@@ -1593,6 +1939,8 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
        Solution_time = double(t_end-t_start)/CLOCKS_PER_SEC;
 #endif
 
+       Iterations = iter;
+
        if(Doc_time)
         {
          oomph_info << "Time for solve with GMRES  [sec]: "
@@ -1618,7 +1966,7 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
 //    } 
    ////////// New version from Glyn
    {
-    Vector<double> temp(n_dof);
+    DoubleVector temp(Distribution_pt);
     matrix_pt->multiply(solution,temp);
     for (unsigned i = 0; i < n_dof; i++)
      {
@@ -1663,6 +2011,8 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
      Solution_time = double(t_end-t_start)/CLOCKS_PER_SEC;
 #endif
      
+     Iterations = iter;
+
      if(Doc_time)
       {
        oomph_info << "Time for solve with GMRES  [sec]: "
@@ -1691,9 +2041,6 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
-
-
-
 //Ensure build of required objects
 template class BiCGStab<CCDoubleMatrix>;
 template class BiCGStab<CRDoubleMatrix>;
@@ -1710,6 +2057,5 @@ template class GS<DenseDoubleMatrix>;
 template class GMRES<CCDoubleMatrix>;
 template class GMRES<CRDoubleMatrix>;
 template class GMRES<DenseDoubleMatrix>;
-
 
 }

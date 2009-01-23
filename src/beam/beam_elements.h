@@ -509,7 +509,7 @@ class FSIHermiteBeamElement : public virtual HermiteBeamElement,
 
  /// \short The number of "blocks" that degrees of freedom in this element
  /// are sub-divided into: Just the solid degrees of freedom themselves.
- unsigned nblock_types()
+ unsigned ndof_types()
   {
    return 1;
   }
@@ -520,7 +520,7 @@ class FSIHermiteBeamElement : public virtual HermiteBeamElement,
  /// of the "block" that this unknown is associated with.
  /// (Function can obviously only be called if the equation numbering
  /// scheme has been set up.) 
- void get_block_numbers_for_unknowns(
+ void get_dof_numbers_for_unknowns(
   std::list<std::pair<unsigned long,unsigned> >& block_lookup_list);
 
 };

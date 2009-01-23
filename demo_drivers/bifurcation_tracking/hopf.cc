@@ -252,7 +252,7 @@ void PredPreyProblem<ELEMENT>::solve()
 {
  //Assign memory for the eigenvalues and eigenvectors
  Vector<complex<double> > eigenvalues;
- Vector<Vector<double> > eigenvectors;
+ Vector< DoubleVector > eigenvectors;
 
  Desired_newton_iterations_ds = 2;
  Desired_proportion_of_arc_length = 0.5;
@@ -292,6 +292,8 @@ void PredPreyProblem<ELEMENT>::solve()
  activate_hopf_tracking(Global_Physical_Variables::Lambda_pt,
                         eigenvalues[0].imag(),
                         eigenvectors[0],eigenvectors[1]);
+
+
 
  newton_solve();
 

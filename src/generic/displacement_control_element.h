@@ -41,7 +41,6 @@
 
 //oomph-lib includes
 #include "elements.h"
-#include "block_preconditioner.h"
 
 namespace oomph
 {
@@ -269,7 +268,7 @@ public:
 
  /// \short The number of "blocks" that degrees of freedom in this element
  /// are sub-divided into: Just the control pressure.
- unsigned nblock_types()
+ unsigned ndof_types()
   {
    return 1;
   }
@@ -282,7 +281,7 @@ public:
  /// scheme has been set up.) The only dof this element is in charge
  /// of is the control load, provided it's been created as
  /// internal Data. 
- void get_block_numbers_for_unknowns(
+ void get_dof_numbers_for_unknowns(
   std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
   {
    if (Load_data_created_internally)

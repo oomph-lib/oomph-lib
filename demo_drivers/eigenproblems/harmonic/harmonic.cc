@@ -440,7 +440,7 @@ solve(const unsigned& label)
  //Set external storage for the eigenvalues
  Vector<complex<double> > eigenvalues;
  //Set external storage for the eigenvectors
- Vector<Vector<double> > eigenvectors;
+ Vector<DoubleVector> eigenvectors;
  //Desired number eigenvalues
  unsigned n_eval=4;
 
@@ -469,7 +469,7 @@ solve(const unsigned& label)
  //Normalise the eigenvector 
  {
   //Get the dimension of the eigenvector
-  unsigned dim = eigenvectors[second_smallest_index].size();
+  unsigned dim = eigenvectors[second_smallest_index].nrow();
   double length=0.0;
   //Loop over all the entries
   for(unsigned i=0;i<dim;i++)

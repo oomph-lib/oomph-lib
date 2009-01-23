@@ -6,7 +6,8 @@ check_PROGRAMS= \
 adv_diff_iterative_linear_solver_tester \
 two_d_poisson_dense_lu \
 two_d_poisson_cg \
-driven_cavity
+driven_cavity \
+direct_solver_test
 
 
 
@@ -71,6 +72,19 @@ two_d_poisson_cg_LDADD = \
                 -L@libdir@ -lpoisson  \
                 -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
+
+
+#----------------------------------------------------------------------
+
+
+# Sources for executable
+direct_solver_test_SOURCES = direct_solver_test.cc
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+direct_solver_test_LDADD = \
+                -L@libdir@ -lpoisson  \
+                -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
 
 #----------------------------------------------------------------------

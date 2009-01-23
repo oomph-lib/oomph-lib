@@ -46,6 +46,7 @@
 //oomph-lib headers
 #include "Vector.h"
 #include "oomph_definitions.h"
+#include "communicator.h"
 
 
 #ifdef OOMPH_HAS_MPI
@@ -582,6 +583,11 @@ class DenseMatrix;
 
 #endif
 
+
+
+ // forward declaration of oomph-communicator class
+ class OomphCommunicator;
+
 //======================================================================
 /// Basic namespace for MPI helper data and functions; this
 /// just basic version, containing default assignments for
@@ -602,6 +608,16 @@ namespace MPI_Helpers
 
 #ifdef OOMPH_HAS_MPI
 
+ /// the global communicator
+ extern OomphCommunicator* Communicator_pt;
+
+ /// initialise mpi
+ void init(int argc, char **argv);
+
+ /// finalize mpi
+ void finalize();
+
+ /// LEGACY
  /// Setup MPI helpers
  void setup();
  
@@ -884,6 +900,16 @@ void doc_memory_usage();
 /// Initialise doc memory usage (in % of available memory)
 void init_doc_memory_usage();
 
-}
 
+//=============================================================================
+/// Helper for recordning execution time.
+//=============================================================================
+namespace TimingHelpers
+{
+
+ /// returns the time in seconds after some point in past
+ double timer();
+
+}//end of namespace TimingHelpers
+}
 #endif

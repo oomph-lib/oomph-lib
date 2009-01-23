@@ -32,75 +32,35 @@ namespace oomph
 namespace TrilinosHelpers
 {
 
-#ifdef OOMPH_HAS_MPI
-
-
-
- //////////////////////////////////////////////////////////////////////////////
- //////////////////////////////////////////////////////////////////////////////
- // Distributed Helpers
- //////////////////////////////////////////////////////////////////////////////
- //////////////////////////////////////////////////////////////////////////////
- 
-
-
  //============================================================================
  /// \short creates a distributed Epetra_Vector that has the same contents as
  /// oomph_v with distribution row_map_pt. \n
- /// \b NOTE 1. the Epetra_Map and the DistributionInfo objects must descibe
- /// the same distribution
- /// \b NOTE 2. if the bool copy is true (default) then the values in the 
+ /// NOTE 1. the Epetra_Map and the LinearAlgebraDistribution object in the
+ /// vector must descibe the same distribution
+ /// NOTE 2. if the bool copy is true (default) then the values in the 
  /// oomph-lib vector (oomph_v) will be copied into the epetra vector, or if 
  /// it is false then the epetra vector will 'view' (i.e. point to) the 
- /// contents of the oomph-lib vector. (defult is copy = true)
+ /// contents of the oomph-lib vector
  //============================================================================
- void create_epetra_vector(DistributedVector<double>& oomph_v,
-                           const Epetra_Map* row_map_pt,
-                           Epetra_Vector*& epetra_v_pt,
-                           const bool& copy)
- {
-  // paranoid check that the distribution of the map and the vector are the
-  // same
-#ifdef PARANOID
-  if (!compare_maps(oomph_v.distribution(),*row_map_pt))
-   {
-    std::ostringstream error_message;
-    error_message << "The oomph-lib distributed vector (oomph_v) and the "
-                  << "epetra map must describe the same distribution.";
-    throw OomphLibError(error_message.str(),
-                        "TrilinosHelpers::create_epetra_vector()",
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-#endif
-
-  // create the Epetra_Vector
-  if (copy)
-   {
-    epetra_v_pt = new Epetra_Vector(Copy,*row_map_pt,&oomph_v[0]);
-   }
-  else
-   {
-    epetra_v_pt = new Epetra_Vector(View,*row_map_pt,&oomph_v[0]);
-   }
- }
-
-
- //============================================================================
- /// creates a distributed Epetra_Vector that has the same contents as
- /// oomph_v with distribution row_map_pt, the contents of the trilinos vector 
- /// are copied from the oomph-lib vector. \n
- /// \b NOTE 1. duplication of helper due to the const oomph-lib vector
- /// \b NOTE 2. the Epetra_Map and the DistributionInfo objects must descibe
- /// the same distribution
- //============================================================================
- void create_epetra_vector(const DistributedVector<double>& oomph_v,
+ void create_epetra_vector(const DoubleVector& oomph_v,
                            const Epetra_Map* row_map_pt,
                            Epetra_Vector*& epetra_v_pt)
  {
-  // paranoid check that the distribution of the map and the vector are the
-  // same
 #ifdef PARANOID
-  if (!compare_maps(oomph_v.distribution(),*row_map_pt))
+  // check the the oomph lib vector is setup
+  if (!oomph_v.distribution_pt()->setup())
+   {
+    std::ostringstream error_message;
+    error_message << "The oomph-lib vector (oomph_v) must be setup.";
+    throw OomphLibError(error_message.str(),
+                        "TrilinosHelpers::create_epetra_vector()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#ifdef OOMPH_HAS_MPI
+  // if the oomph-lib vector is distributed, then check it has the same
+  // distribution as the Epetra_Map
+  if (oomph_v.distributed() && 
+      !compare_maps(oomph_v.distribution_pt(),*row_map_pt))
    {
     std::ostringstream error_message;
     error_message << "The oomph-lib distributed vector (oomph_v) and the "
@@ -110,42 +70,449 @@ namespace TrilinosHelpers
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
+  // if the oomph-lib vector is no distribited, the check is has the same 
+  // number of global rows
+  if (static_cast<int>(oomph_v.nrow()) != row_map_pt->NumGlobalElements())
+   {
+    std::ostringstream error_message;
+    error_message
+     << "The epetra map and the oomph-lib matrix have different numbers "
+     << "of global rows.\n"
+     << "NumGlobalElements() for the Epetra_Map: " 
+     << row_map_pt->NumGlobalElements() << "\n" 
+     << "nrow() for DoubleVector: " << oomph_v.nrow();
+    throw OomphLibError(error_message.str(),
+                        "TrilinosHelpers::create_epetra_vector()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+
+  // if oomph has mpi and oomph_v is distributed
+#ifdef OOMPH_HAS_MPI
+  if (oomph_v.distributed())
+   {
+    // create the Epetra_Vector
+    unsigned nrow_local = oomph_v.nrow();
+    double* v = new double[nrow_local];
+    for (unsigned i = 0; i < nrow_local; i++)
+     {
+      v[i] = oomph_v[i];
+     }
+    epetra_v_pt = new Epetra_Vector(Copy,*row_map_pt,v);
+    delete[] v;
+    return;
+   }
+#endif
+  // otherwise...
+
+  // storage for data to be inserted
+  double* values;
+  int* indices;
+  unsigned nrow = 0;
+
+#ifdef OOMPH_HAS_MPI
+  int nproc = row_map_pt->Comm().NumProc();
+  if (nproc == 1)
+   {
+    // store the data for insertion
+    nrow = oomph_v.nrow();
+    values = new double[nrow];
+    indices = new int[nrow];
+    for (unsigned i = 0; i < nrow; i++)
+     {
+      values[i] = oomph_v[i];
+      indices[i] = i;
+     }
+   }
+  else
+   {
+    // get my nrow_local and first_row
+    unsigned nrow_local = row_map_pt->NumMyElements();
+    int* global_rows = row_map_pt->MyGlobalElements();
+    unsigned first_row = static_cast<unsigned>(global_rows[0]);
+
+    // store the data for insertion
+    nrow = nrow_local;
+    values = new double[nrow];
+    indices = new int[nrow];
+    for (unsigned i = 0; i < nrow; i++)
+     {
+      values[i] = oomph_v[i + first_row];
+      indices[i] = i + first_row;
+     }
+   }
+#else
+  // store the data for insertion
+  nrow = oomph_v.nrow();
+  values = new double[nrow];
+  indices = new int[nrow];
+  for (unsigned i = 0; i < nrow; i++)
+   {
+    values[i] = oomph_v[i];
+    indices[i] = i;
+   }
+#endif
+
+  // insert
+  epetra_v_pt = new Epetra_Vector(*row_map_pt);
+  epetra_v_pt->ReplaceGlobalValues(nrow,values,indices);
+
+  // clean up memory
+  delete[] values;
+  delete[] indices;
+ }
+
+ //============================================================================
+ /// creates an empty trilinos vector with Epetra_Map row_map_pt
+ //============================================================================
+ void create_epetra_vector(const Epetra_Map* row_map_pt,
+                           Epetra_Vector*& epetra_v_pt)
+ {
 
   // create the Epetra_Vector
-  unsigned nrow_local = oomph_v.distribution().nrow_local();
-  double* v = new double[nrow_local];
-  for (unsigned i = 0; i < nrow_local; i++)
-   {
-    v[i] = oomph_v[i];
-   }
-  epetra_v_pt = new Epetra_Vector(Copy,*row_map_pt,v);
-  delete[] v;
+  epetra_v_pt = new Epetra_Vector(*row_map_pt);
  }
 
  //============================================================================
- /// Helper function to copy the contents of a Trilinos vector to an
- /// oomph-lib distributed vector. The my_distribution DistributionInfo should 
- /// be the same as the distribution of epetra_v_pt
+ /// \short Helper function to copy the contents of a Trilinos vector to an
+ /// oomph-lib distributed vector. The distribution of the two vectors must
+ /// be identical
  //============================================================================
  void copy_to_oomphlib_vector(const Epetra_Vector* epetra_v_pt,
-                              const DistributionInfo my_distribution,
-                              DistributedVector<double>& oomph_v)
+                              DoubleVector& oomph_v)
  {
-  // extract values from epetra_v_pt
-  double* v_values;
-  epetra_v_pt->ExtractView(&v_values);
-
-  // distribute the oomph-lib vector
-  oomph_v.distribute(my_distribution);
-
-  // copy the values
-  unsigned nrow_local = my_distribution.nrow_local();
-  for (unsigned i = 0; i < nrow_local; i++)
+#ifdef PARANOID
+  // check the the oomph lib vector is setup
+  if (!oomph_v.distribution_pt()->setup())
    {
-    oomph_v[i] = v_values[i];
+    std::ostringstream error_message;
+    error_message << "The oomph-lib vector (oomph_v) must be setup.";
+    throw OomphLibError(error_message.str(),
+                        "TrilinosHelpers::copy_to_oomphlib_vector()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  
+  // if the oomph-lib vector is distributed
+  if (oomph_v.distributed())
+   {
+    // extract values from epetra_v_pt
+    double* v_values;
+    epetra_v_pt->ExtractView(&v_values);
+    
+    // copy the values
+    unsigned nrow_local = oomph_v.nrow_local();
+    for (unsigned i = 0; i < nrow_local; i++)
+     {
+      oomph_v[i] = v_values[i];
+     }
+   }
+
+  // else teh oomph-lib vector is not distributed
+  else
+   {
+
+    // number of global rows
+    unsigned nrow = epetra_v_pt->GlobalLength();
+
+    // values to be copied into the oomph-lib vector
+    double* values = oomph_v.values_pt();
+    
+    // get the values vector
+#ifdef OOMPH_HAS_MPI
+    int nproc = epetra_v_pt->Map().Comm().NumProc();
+    if (nproc == 1)
+     {
+      epetra_v_pt->ExtractView(&values);
+     }
+    else
+     {
+      // get the local values
+      double* local_values;
+      epetra_v_pt->ExtractView(&local_values);
+
+      // my rank
+      int my_rank =epetra_v_pt->Map().Comm().MyPID();
+      
+      // number of local rows
+      Vector<int> nrow_local(nproc);
+      nrow_local[my_rank] = epetra_v_pt->MyLength();
+      
+
+      // gather the First_row vector
+      MPI_Allgather(&nrow_local[my_rank],1,MPI_INT,&nrow_local[0],1,MPI_INT,
+                    oomph_v.distribution_pt()->communicator_pt()->mpi_comm());
+      
+      // number of local rows
+      Vector<int> first_row(nproc);
+      int* global_rows = epetra_v_pt->Map().MyGlobalElements();
+      first_row[my_rank] = global_rows[0];
+      
+      // gather the First_row vector
+      MPI_Allgather(&first_row[my_rank],1,MPI_INT,&first_row[0],1,MPI_INT,
+                    oomph_v.distribution_pt()->communicator_pt()->mpi_comm());
+
+      // gather the local solution values
+      values = new double[nrow];
+      MPI_Allgatherv(local_values,nrow_local[my_rank],MPI_DOUBLE,values,
+                     &nrow_local[0],&first_row[0],MPI_DOUBLE,
+                     oomph_v.distribution_pt()->communicator_pt()->mpi_comm());
+    }
+#else
+    epetra_v_pt->ExtractView(&values);
+#endif
+    double* oomph_v_pt = oomph_v.values_pt();
+    for (unsigned i=0; i<nrow; i++)
+     {
+      oomph_v_pt[i] = values[i];
+     }
    }
  }
 
+//=============================================================================
+/// \short Helper function to create a distributed Epetra_CrsMatrix from a 
+/// from a CRDoubleMatrix
+/// \b NOTE 1. This function constructs an Epetra_CrsMatrix using new,
+/// "delete trilinos_matrix_pt;" is NOT called.
+//=============================================================================
+void create_epetra_matrix(DoubleMatrixBase* matrix_pt,
+                          const Epetra_Map* epetra_row_map_pt,
+                          const Epetra_Map* epetra_col_map_pt,
+                          Epetra_CrsMatrix* &epetra_matrix_pt)
+{
+
+ // first try DistributedCRDoubleMatrix
+ CRDoubleMatrix* cast_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
+
+#ifdef PARANOID
+ // if the cast failed then throw error
+ if (cast_matrix_pt == 0)
+  {
+   std::ostringstream error_message;
+   error_message << "An create_epetra_matrix(...) is only compatiible with "
+                 << "CRDoubleMatrix" << std::endl;
+   throw OomphLibError(error_message.str(),
+                       "TrilinosHelpers::create_epetra_matrix()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ // check the matrix is setup
+ if (!cast_matrix_pt->built())
+  {
+    std::ostringstream error_message;
+    error_message << "The oomph-lib matrix must be built.";
+    throw OomphLibError(error_message.str(),
+                        "TrilinosHelpers::create_epetra_matrix()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+
+ // if this is a MPI build then attempt to build Trilinos Matrix from
+ // a CRDoubleMatrix
+#ifdef OOMPH_HAS_MPI
+ if (cast_matrix_pt->distributed())
+  {
+
+   // paranoid check that the distribution of the epetra row map and the 
+   // oomph-lib matrix are the same
+#ifdef PARANOID
+   compare_maps(cast_matrix_pt->distribution_pt(),
+                *epetra_row_map_pt);
+#endif
+   // paranoid check that the distribution of the map and the vector are the
+  // same
+#ifdef PARANOID
+  if (!compare_maps(cast_matrix_pt->distribution_pt(),
+                    *epetra_row_map_pt))
+  {
+    std::ostringstream error_message;
+    error_message << "The oomph-lib distributed vector (oomph_v) and the "
+                  << "epetra map must describe the same distribution.";
+    throw OomphLibError(error_message.str(),
+                        "TrilinosHelpers::create_epetra_matrix()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+
+   // get pointers to the matrix values, column indices etc
+   int* column = cast_matrix_pt->column_index();
+   double* value = cast_matrix_pt->value();
+   int* row_start = cast_matrix_pt->row_start();
+   
+   // get my nrow_local and first_row
+   unsigned nrow_local = cast_matrix_pt->nrow_local();
+   unsigned first_row = cast_matrix_pt->first_row();
+   
+   // store the number of non zero entries per row
+   int* nnz_per_row = new int[nrow_local];
+   for (unsigned row=0;row<nrow_local;row++)
+    {
+     nnz_per_row[row] = row_start[row+1] - row_start[row];
+    }
+   
+   // construct the new Epetra matrix
+   epetra_matrix_pt = new Epetra_CrsMatrix(Copy,*epetra_row_map_pt,
+                                           nnz_per_row);
+   
+   // insert the values
+   for (unsigned row=0; row<nrow_local; row++)
+    {
+     // get pointer to this row in values/columns
+     int ptr = row_start[row];
+     epetra_matrix_pt->InsertGlobalValues(first_row+row,
+                                          nnz_per_row[row],
+                                          value+ptr,
+                                          column+ptr);
+    }
+   
+   // tidy up memory
+   delete[] nnz_per_row;
+   
+   // complete the build of the trilinos matrix
+#ifdef PARANOID
+   int err=0;
+   err = epetra_matrix_pt->FillComplete(*epetra_col_map_pt,*epetra_row_map_pt);
+   if (err != 0)
+    {
+     std::ostringstream error_message;
+     error_message 
+      << "Epetra Matrix Fill Complete Error : epetra_error_flag = " 
+      << err;
+     throw OomphLibError(error_message.str(),
+                         "TrilinosHelpers::create_epetra_matrix(...)",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#else
+   epetra_matrix_pt->FillComplete(*epetra_col_map_pt,*epetra_row_map_pt);
+#endif
+  }
+
+ // if the matrix is not distributed 
+ else if (!cast_matrix_pt->distributed())
+  {
+
+   // get pointers to the matrix values, column indices etc
+   int* column = cast_matrix_pt->column_index();
+   double* value = cast_matrix_pt->value();
+   int* row_start = cast_matrix_pt->row_start();
+   
+   // get my nrow_local and first_row
+   unsigned nrow_local = epetra_row_map_pt->NumMyElements();
+   int* global_rows = epetra_row_map_pt->MyGlobalElements();
+   unsigned first_row = static_cast<unsigned>(global_rows[0]);
+
+   // store the number of non zero entries per row
+   int* nnz_per_row = new int[nrow_local];
+   for (unsigned row=0;row<nrow_local;row++)
+    {
+     nnz_per_row[row] = row_start[first_row + row+1] 
+      - row_start[first_row + row];
+    }
+   
+   // construct the new Epetra matrix
+   epetra_matrix_pt = new Epetra_CrsMatrix(Copy,*epetra_row_map_pt,
+                                           nnz_per_row);
+
+   // insert the values
+   for (unsigned row=0; row< nrow_local; row++)
+    {
+
+     // get pointer to this row in values/columns
+     int ptr = row_start[row+first_row];
+     epetra_matrix_pt->InsertGlobalValues(first_row + row,
+                                          nnz_per_row[row],
+                                          value+ptr,
+                                          column+ptr);
+    }
+   
+   // tidy up memory
+   delete[] nnz_per_row;
+   
+   // complete the build of the trilinos matrix
+#ifdef PARANOID
+   int err=0;
+   err = epetra_matrix_pt->FillComplete(*epetra_col_map_pt,*epetra_row_map_pt);
+   if (err != 0)
+    {
+     std::ostringstream error_message;
+     error_message 
+      << "Epetra Matrix Fill Complete Error : epetra_error_flag = " 
+      << err;
+     throw OomphLibError(error_message.str(),
+                         "TrilinosHelpers::create_epetra_matrix(...)",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#else
+   epetra_matrix_pt->FillComplete(*epetra_col_map_pt,*epetra_row_map_pt);
+#endif
+
+ }
+#else
+
+ // find number of rows and columns
+ unsigned n_rows = cast_matrix_pt->nrow();
+
+ // get pointers to the matrix values, column indices etc
+ int* columns = cast_matrix_pt->column_index();
+ double* values = cast_matrix_pt->value();
+ int* row_starts = cast_matrix_pt->row_start();
+
+ // store the number of non zero entries per row
+ int* nnz_per_row = new int[n_rows];
+ for (unsigned row=0;row<n_rows;row++)
+  {
+   nnz_per_row[row] = row_starts[row+1] - row_starts[row];
+  }
+
+ // construct the new Epetra matrix
+ epetra_matrix_pt = new Epetra_CrsMatrix(Copy,*epetra_row_map_pt,
+                                         nnz_per_row);
+
+ // insert the values
+ for (unsigned row=0;row<n_rows;row++)
+  {
+   // get pointer to this row in values/columns
+   int ptr = row_starts[row];
+   epetra_matrix_pt->InsertGlobalValues(row,
+                                        nnz_per_row[row],
+                                        values+ptr,
+                                        columns+ptr);
+  }
+ delete[] nnz_per_row;
+
+ // complete the build of the trilinos matrix
+#ifdef PARANOID
+ int err=0;
+ err = epetra_matrix_pt->FillComplete(*epetra_col_map_pt,*epetra_row_map_pt);
+ if (err != 0)
+  {
+   std::ostringstream error_message;
+     error_message
+      << "Epetra Matrix Fill Complete Error : epetra_error_flag = "
+      << err;
+     throw OomphLibError(error_message.str(),
+                         "TrilinosHelpers::create_epetra_matrix(...)",
+                         OOMPH_EXCEPTION_LOCATION);
+  }
+#else
+ epetra_matrix_pt->FillComplete(*epetra_col_map_pt,*epetra_row_map_pt);
+#endif
+#endif
+}
+
+//=============================================================================
+/// Helper function to create a distributed Epetra_CrsMatrix from a 
+/// from a DistributedCRDoubleMatrix or a CRDoubleMatrix
+/// \b NOTE 1. This function constructs an Epetra_CrsMatrix using new,
+/// "delete trilinos_matrix_pt;" is NOT called.
+/// \b NOTE 2. Specialisation for SQUARE matrices.
+//=============================================================================
+void create_epetra_matrix(DoubleMatrixBase* oomph_matrix,
+                          const Epetra_Map* epetra_row_map_pt,
+                          Epetra_CrsMatrix* &epetra_matrix_pt)
+{
+ create_epetra_matrix(oomph_matrix,epetra_row_map_pt,epetra_row_map_pt,
+                      epetra_matrix_pt);
+}
 
 //=============================================================================
 /// Function to perform a matrix-vector multiplication on a 
@@ -157,52 +524,85 @@ namespace TrilinosHelpers
 /// as the matrix, unless a distribution is predefined in the solution
 /// vector in which case the vector will be returned with that distribution
 //=============================================================================
-void multiply(DistributedCRDoubleMatrix &oomph_matrix,
-              const DistributedVector< double > &oomph_x,
-              DistributedVector< double > &oomph_soln)
+void multiply(CRDoubleMatrix &oomph_matrix,
+              const DoubleVector &oomph_x,
+              DoubleVector &oomph_soln)
 {
 #ifdef PARANOID
- // check matrix and vector are compatible
- if ( oomph_matrix.ncol() != oomph_x.nrow_global()  )
- {
-  std::ostringstream error_message;
-  error_message
-   << "Matrix dimensions incompatible for matrix-matrix multiplication"
-   << "ncol() for the matrix: " << oomph_matrix.ncol()
-   << "nrow() for the vector: " << oomph_x.nrow_global();
-  throw OomphLibError(error_message.str(),
-                      "TrilinosHelpers::multiply(...)",
-                      OOMPH_EXCEPTION_LOCATION);
- }
- 
- // check that matrix and x vector have the same communicator
- int comm_compare_result;
- MPI_Comm_compare(oomph_matrix.distribution().communicator(), 
-                 oomph_x.distribution().communicator(),&comm_compare_result);
- if (comm_compare_result != MPI_IDENT)
+ // check that this matrix is built
+ if (!oomph_matrix.built())
   {
-   std::ostringstream error_message;
-   error_message
-    << "Matrix (oomph_matrix) and rhs vector (oomph_x) must have the same " 
-    << "communicator.\n";
-   throw OomphLibError(error_message.str(),
-                      "TrilinosHelpers::multiply(...)",
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "This matrix has not been built";
+   throw OomphLibError(error_message_stream.str(),
+                       "TrilinosHelpers::multiply()",
                        OOMPH_EXCEPTION_LOCATION);
   }
+
+ // check that the distribution of the matrix and the soln are the same
+ if (oomph_soln.distribution_setup())
+  {
+   if (!(*oomph_matrix.distribution_pt() == *oomph_soln.distribution_pt()))
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The soln vector and this matrix must have the same distribution.";
+     throw OomphLibError(error_message_stream.str(),
+                       "TrilinosHelpers::multiply()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+ 
+ // check that the distribution of the oomph-lib vector x is setup
+ if (!oomph_x.distribution_pt()->setup())
+  {
+   std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The x vector must be setup";
+     throw OomphLibError(error_message_stream.str(),
+                       "TrilinosHelpers::multiply()",
+                         OOMPH_EXCEPTION_LOCATION);
+  }
 #endif
+
+ // setup the distribution
+ if (!oomph_soln.distribution_pt()->setup())
+  {
+   oomph_soln.rebuild(oomph_matrix.distribution_pt());
+  }
+
  // create the communicator
- // note use of MPI_COMM_WORLD
- Epetra_MpiComm* comm_pt = new Epetra_MpiComm(MPI_COMM_WORLD);
+#ifdef OOMPH_HAS_MPI
+ Epetra_MpiComm* comm_pt = new Epetra_MpiComm(
+  oomph_matrix.distribution_pt()->communicator_pt()->mpi_comm());
+#else
+ Epetra_SerialComm* comm_pt = new Epetra_SerialComm();
+#endif
 
  // create the maps corresponding the distribution of matrix1 and matrix2
+
+ // matrix row map
  Epetra_Map* matrix_row_map_pt;
+
+#ifdef OOMPH_HAS_MPI
  int* global_rows;
- create_epetra_map(oomph_matrix.distribution(),comm_pt,matrix_row_map_pt,
+ create_epetra_map(oomph_matrix.distribution_pt(),comm_pt,matrix_row_map_pt,
                    global_rows);
+#else
+ create_epetra_map(oomph_matrix.distribution_pt(),comm_pt,matrix_row_map_pt);
+#endif
+
+ // matrix col map
  Epetra_Map* matrix_col_map_pt;
+
+#ifdef OOMPH_HAS_MPI
  int* global_cols;
- create_epetra_map(oomph_x.distribution(),comm_pt,matrix_col_map_pt,
+ create_epetra_map(oomph_x.distribution_pt(),comm_pt,matrix_col_map_pt,
                    global_cols); 
+#else
+ create_epetra_map(oomph_x.distribution_pt(),comm_pt,matrix_col_map_pt); 
+#endif
 
  // convert matrix1 to epetra matrix
  Epetra_CrsMatrix* epetra_matrix_pt;
@@ -213,17 +613,17 @@ void multiply(DistributedCRDoubleMatrix &oomph_matrix,
  Epetra_Vector* epetra_x_pt;
  create_epetra_vector(oomph_x,matrix_col_map_pt,epetra_x_pt);
 
- // distribute the vector
- oomph_soln.distribute(oomph_matrix.distribution());
-
  // create Trilinos vector for soln ( 'viewing' the contents of the oomph-lib
- // matrix )
+ // matrix)
  Epetra_Vector* epetra_soln_pt;
- create_epetra_vector(oomph_soln,matrix_row_map_pt,epetra_soln_pt,false);
+ create_epetra_vector(oomph_soln,matrix_row_map_pt,epetra_soln_pt);
 
  // do the multiply
  int epetra_error_flag = epetra_matrix_pt->Multiply(false,*epetra_x_pt,
                                                     *epetra_soln_pt);
+
+ // return the solution
+ copy_to_oomphlib_vector(epetra_soln_pt,oomph_soln);
 
  // throw error if there is an epetra error
 #if PARANOID
@@ -245,15 +645,16 @@ void multiply(DistributedCRDoubleMatrix &oomph_matrix,
 
  // clean up
  delete matrix_row_map_pt;
- delete[] global_rows;
  delete matrix_col_map_pt;
- delete[] global_cols;
  delete epetra_matrix_pt;
  delete epetra_x_pt;
  delete epetra_soln_pt;
  delete comm_pt;
+#ifdef OOMPH_HAS_MPI
+ delete[] global_rows;
+ delete[] global_cols;
+#endif
 }
-
 
 //=============================================================================
 /// \short Function to perform a matrix-matrix multiplication on distributed 
@@ -265,13 +666,34 @@ void multiply(DistributedCRDoubleMatrix &oomph_matrix,
 /// same distribution as matrix1
 /// \b NOTE 3. All matrices must share the same communicator. 
 //=============================================================================
-void multiply(DistributedCRDoubleMatrix &matrix1,
-              DistributedCRDoubleMatrix &matrix2,
-              DistributedCRDoubleMatrix &matrix_soln,
+void multiply(CRDoubleMatrix &matrix1,
+              CRDoubleMatrix &matrix2,
+              CRDoubleMatrix &matrix_soln,
               const bool& use_ml)
 {
 
+
 #ifdef PARANOID
+ // check that matrix 1 is built
+ if (!matrix1.built())
+  {
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "This matrix matrix1 has not been built";
+   throw OomphLibError(error_message_stream.str(),
+                       "TrilinosHelpers::multiply()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ // check that matrix 2 is built
+ if (!matrix2.built())
+  {
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "This matrix matrix2 has not been built";
+   throw OomphLibError(error_message_stream.str(),
+                       "TrilinosHelpers::multiply()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
  // check matrix dimensions are compatable
  if ( matrix1.ncol() != matrix2.nrow()  )
  {
@@ -284,39 +706,95 @@ void multiply(DistributedCRDoubleMatrix &matrix1,
                       "TrilinosHelpers::multiply(...)",
                       OOMPH_EXCEPTION_LOCATION);
  }
- 
- // check that matrices have the same communicator
-  int comm_compare_result;
- MPI_Comm_compare(matrix1.distribution().communicator(), 
-                 matrix2.distribution().communicator(),&comm_compare_result);
- if (comm_compare_result != MPI_IDENT)
+ // check that the have the same communicator
+ OomphCommunicator temp_comm(matrix1.distribution_pt()->communicator_pt());
+ if (temp_comm != *matrix2.distribution_pt()->communicator_pt())
   {
    std::ostringstream error_message;
    error_message
-    << "Input matrices must have the same communicator.\n";
+    << "Matrix dimensions incompatible for matrix-matrix multiplication"
+    << "ncol() for first matrix: " << matrix1.ncol()
+    << "nrow() for second matrix: " << matrix2.nrow();
    throw OomphLibError(error_message.str(),
-                      "TrilinosHelpers::multiply(...)",
+                       "TrilinosHelpers::multiply(...)",
                        OOMPH_EXCEPTION_LOCATION);
   }
+ // check that the distribution of the matrix and the soln are the same
+ if (matrix_soln.distribution_pt()->setup())
+  {
+   if (!(*matrix_soln.distribution_pt() == *matrix1.distribution_pt()))
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The solution matrix and matrix1 must have the same distribution.";
+     throw OomphLibError(error_message_stream.str(),
+                       "TrilinosHelpers::multiply()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
 #endif
- // create the communicator pt
- Epetra_MpiComm* comm_pt = new Epetra_MpiComm(MPI_COMM_WORLD);
 
+ // setup the distribution
+ if (!matrix_soln.distribution_pt()->setup())
+  {
+   matrix_soln.rebuild(matrix1.distribution_pt());
+  }
+
+ // temporary fix
+ // ML MM method only appears to work for square matrices
+ // Should be investigated further.
+ bool temp_use_ml = false;
+ if ((*matrix1.distribution_pt() == *matrix2.distribution_pt()) &&
+     (matrix1.ncol() == matrix2.ncol()))
+  {
+   temp_use_ml = use_ml;
+  }
+
+ // create the communicator
+#ifdef OOMPH_HAS_MPI
+ Epetra_MpiComm* comm_pt = new Epetra_MpiComm(
+  matrix1.distribution_pt()->communicator_pt()->mpi_comm());
+#else
+ Epetra_SerialComm* comm_pt = new Epetra_SerialComm();
+#endif
+ 
  // create the maps corresponding the distribution of matrix1 and matrix2
+
+ // matrix 1
  Epetra_Map* matrix1_map_pt;
+
+#ifdef OOMPH_HAS_MPI
  int* matrix1_global_rows;
- create_epetra_map(matrix1.distribution(),comm_pt,
-                   matrix1_map_pt,matrix1_global_rows);
+ create_epetra_map(matrix1.distribution_pt(),comm_pt,matrix1_map_pt,
+                   matrix1_global_rows);
+#else
+ create_epetra_map(matrix1.distribution_pt(),comm_pt,matrix1_map_pt);
+#endif
+
+ // matrix 2
  Epetra_Map* matrix2_map_pt;
+
+#ifdef OOMPH_HAS_MPI
  int* matrix2_global_rows;
- create_epetra_map(matrix2.distribution(),comm_pt,
-                   matrix2_map_pt,matrix2_global_rows); 
+ create_epetra_map(matrix2.distribution_pt(),comm_pt,matrix2_map_pt,
+                   matrix2_global_rows);
+#else
+ create_epetra_map(matrix2.distribution_pt(),comm_pt,matrix2_map_pt);
+#endif
+
+ // matrix 2 column distribution
  Epetra_Map* matrix2_col_map_pt;
+ LinearAlgebraDistribution 
+  matrix2_col_distribution(matrix2.distribution_pt()->communicator_pt(),
+                           matrix2.ncol(),true); 
+
+#ifdef OOMPH_HAS_MPI
  int* matrix2_global_cols;
- DistributionInfo matrix2_col_distribution
-  (matrix2.distribution().communicator(),matrix2.ncol()); 
- create_epetra_map(matrix2_col_distribution,comm_pt,matrix2_col_map_pt,
-                   matrix2_global_cols);  
+ create_epetra_map(&matrix2_col_distribution,comm_pt,matrix2_col_map_pt,
+                   matrix2_global_cols);
+#else
+ create_epetra_map(&matrix2_col_distribution,comm_pt,matrix2_col_map_pt);
+#endif
 
  // convert matrix1 to epetra matrix
  Epetra_CrsMatrix* epetra_matrix1_pt;
@@ -333,7 +811,7 @@ void multiply(DistributedCRDoubleMatrix &matrix1,
 
  // do the multiplication
  // ---------------------
- if (use_ml)
+ if (temp_use_ml)
  {
   // there is a problem using this function, many pages of
   // warning messages are issued....
@@ -350,8 +828,7 @@ void multiply(DistributedCRDoubleMatrix &matrix1,
  else
  {
   // this method requires us to pass in the solution matrix
-  solution_pt = new Epetra_CrsMatrix(Copy,*matrix1_map_pt,
-                                     *matrix2_col_map_pt,1);
+  solution_pt = new Epetra_CrsMatrix(Copy,*matrix1_map_pt,1);
   int epetra_error_flag = 
    EpetraExt::MatrixMatrix::Multiply(*epetra_matrix1_pt,
                                      false,
@@ -455,7 +932,6 @@ void multiply(DistributedCRDoubleMatrix &matrix1,
  {
   row_start[row] = ptr;
   solution_pt->ExtractMyRowView(row, num_entries, values, local_column);
-
   for (int i=0; i<num_entries; i++)
   {
    value[ptr] = *(values+i);
@@ -468,55 +944,34 @@ void multiply(DistributedCRDoubleMatrix &matrix1,
 
  // delete Trilinos objects
  delete matrix1_map_pt;
- delete[] matrix1_global_rows;
  delete matrix2_map_pt;
- delete[] matrix2_global_rows; 
  delete matrix2_col_map_pt;
- delete[] matrix2_global_cols;
  delete epetra_matrix1_pt;
  delete epetra_matrix2_pt;
  delete solution_pt;
  delete comm_pt;
+#ifdef OOMPH_HAS_MPI
+ delete[] matrix1_global_rows;
+ delete[] matrix2_global_rows; 
+ delete[] matrix2_global_cols;
+#endif
 
  // Build the Oomph-lib solution matrix using build function
- matrix_soln.build(value,
-                   column_index,
-                   row_start,
-                   matrix1.distribution(),
-                   matrix2.ncol());
+ matrix_soln.rebuild(matrix1.distribution_pt(),
+                     matrix2.ncol(),
+                     value,
+                     column_index,
+                     row_start);
 }
 
-
-//=============================================================================
-/// \short takes a oomph-lib distribution (DistributionInfo) and returns
-/// a trilinos map (Epetra_Map)
-//=============================================================================
-void create_epetra_map(const DistributionInfo& my_distribution,
-                       const Epetra_MpiComm* epetra_comm_pt,
-                       Epetra_Map* &epetra_map_pt, int* &my_global_rows)
-
-{ 
- // get my first_row and local nrow                                
- unsigned long first_row = my_distribution.first_row();                     
- unsigned long nrow_local = my_distribution.nrow_local(); 
- 
- // create a distributed trilinos map 
- my_global_rows = new int[nrow_local];
- for (unsigned i=0; i < nrow_local; i++)
-  {
-   my_global_rows[i] = first_row + i;
-  }  
- epetra_map_pt = new Epetra_Map(my_distribution.nrow_global(),nrow_local,
-                                my_global_rows,0,*epetra_comm_pt); 
-}
-
+#ifdef OOMPH_HAS_MPI
 //=============================================================================
 /// \short Function to compare a distribution described by an oomph-lib 
 /// DistributionInfo object to a distribution described by a Trilinos
 /// Epetra_Map object. Returns true if they describe the same distribution.
 /// Used as a PARANOID check in other TrilinosHelpers methods
 //=============================================================================
-bool compare_maps(const DistributionInfo& oomph_distribution, 
+bool compare_maps(const LinearAlgebraDistribution* oomph_distribution, 
                    const Epetra_Map& epetra_map)
 {
  // create the epetra_map for oomph distribution
@@ -536,479 +991,84 @@ bool compare_maps(const DistributionInfo& oomph_distribution,
  // return
  return same;
 }
+#endif
+
+#ifdef OOMPH_HAS_MPI
+
+ //============================================================================
+ /// \short takes a oomph-lib distribution and returns a trilinos mpi map 
+ /// (Epetra_Map)
+ //============================================================================
+ void create_epetra_map(const LinearAlgebraDistribution* distribution_pt,
+                        const Epetra_MpiComm* epetra_comm_pt,
+                        Epetra_Map* &epetra_map_pt, int* &my_global_rows)
+{ 
+  // get my first_row and local nrow                                
+  unsigned long first_row;
+  unsigned long nrow_local;
+ 
+  // this method always creates a distributed epetra map if using
+  // multiple procs
+  if (distribution_pt->communicator_pt()->nproc() > 1 && 
+      distribution_pt->distributed() == false)
+    {
+      // number of processors
+      unsigned nproc = distribution_pt->communicator_pt()->nproc();
+      
+      // number of global rows
+      unsigned global_nrow = distribution_pt->nrow();
+      
+      // temporay storage for the first rows and nrow locals
+      Vector<int> first_row_v(nproc);
+      Vector<int> nrow_local_v(nproc);
+      
+      // compute first row
+      for (unsigned p=0;p<nproc;p++)
+	{                                          
+	  first_row_v[p] = unsigned(double(p*global_nrow)/ 
+				    double(nproc));                  
+	}             
+      
+      // compute local nrow
+      for (unsigned p=0; p<nproc-1; p++) 
+	{                                                  
+	  nrow_local_v[p] = first_row_v[p+1] - first_row_v[p];
+	}  
+      nrow_local_v[nproc-1] = global_nrow - first_row_v[nproc-1];
+      
+      // store my first row
+      unsigned my_rank = distribution_pt->communicator_pt()->my_rank();
+      first_row = first_row_v[my_rank];
+      nrow_local = nrow_local_v[my_rank];
+    }
+  else
+    {
+      first_row = distribution_pt->first_row();                     
+      nrow_local = distribution_pt->nrow_local();
+    }
+  
+ // create a distributed trilinos map 
+ my_global_rows = new int[nrow_local];
+ for (unsigned i=0; i < nrow_local; i++)
+  {
+   my_global_rows[i] = first_row + i;
+  }  
+ epetra_map_pt = new Epetra_Map(distribution_pt->nrow(),nrow_local,
+                                my_global_rows,0,*epetra_comm_pt); 
+}
+
 #else
-
-
-
-
- //////////////////////////////////////////////////////////////////////////////
- //////////////////////////////////////////////////////////////////////////////
- // SERIAL Helpers
- //////////////////////////////////////////////////////////////////////////////
- //////////////////////////////////////////////////////////////////////////////
-
-
-
+//=============================================================================
 /// \short creates a serial epetra_map of size nrow
-void create_epetra_map(const unsigned& nrow,
+//=============================================================================
+void create_epetra_map(const LinearAlgebraDistribution* dist_pt,
                        const Epetra_SerialComm* epetra_comm_pt,
                        Epetra_Map* &epetra_map_pt)
 {
  // create a simple Trilinos map (contiguous)
- epetra_map_pt = new Epetra_Map(nrow,0,*epetra_comm_pt);
+ epetra_map_pt = new Epetra_Map(dist_pt->nrow(),0,*epetra_comm_pt);
 }
-
 #endif
 
-
-
- //////////////////////////////////////////////////////////////////////////////
- //////////////////////////////////////////////////////////////////////////////
- // SERIAL and DISTRIBUTED Helpers
- //////////////////////////////////////////////////////////////////////////////
- //////////////////////////////////////////////////////////////////////////////
-
-
-
- //============================================================================
- /// \short creates an Epetra_Vector from a serial oomph-lib vector oomph_v
- /// with map row_map_pt.
- //============================================================================
- void create_epetra_vector(const Vector<double>& oomph_v,
-                           const Epetra_Map* row_map_pt,
-                           Epetra_Vector*& epetra_v_pt)
- {
-  // paranoid check that the oomphlib vector and epetra map have the same 
-  // number of global rows
-#ifdef PARANOID
-  if (static_cast<int>(oomph_v.size()) != row_map_pt->NumGlobalElements())
-   {
-    std::ostringstream error_message;
-    error_message
-     << "The epetra map and the oomph-lib matrix have different numbers "
-     << "of global rows.\n"
-     << "NumGlobalElements() for the Epetra_Map: " 
-     << row_map_pt->NumGlobalElements() << "\n" 
-     << "size() for Vector<double>: " << oomph_v.size();
-    throw OomphLibError(error_message.str(),
-                        "TrilinosHelpers::create_epetra_vector()",
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-#endif
-
-  // storage for data to be inserted
-  double* values;
-  int* indices;
-  unsigned nrow = 0;
-
-#ifdef OOMPH_HAS_MPI
-  int nproc = row_map_pt->Comm().NumProc();
-  if (nproc == 1)
-   {
-    // store the data for insertion
-    nrow = oomph_v.size();
-    values = new double[nrow];
-    indices = new int[nrow];
-    for (unsigned i = 0; i < nrow; i++)
-     {
-      values[i] = oomph_v[i];
-      indices[i] = i;
-     }
-   }
-  else
-   {
-    // get my nrow_local and first_row
-    unsigned nrow_local = row_map_pt->NumMyElements();
-    int* global_rows = row_map_pt->MyGlobalElements();
-    unsigned first_row = static_cast<unsigned>(global_rows[0]);
-
-    // store the data for insertion
-    nrow = nrow_local;
-    values = new double[nrow];
-    indices = new int[nrow];
-    for (unsigned i = 0; i < nrow; i++)
-     {
-      values[i] = oomph_v[i + first_row];
-      indices[i] = i + first_row;
-     }
-   }
-#else
-  // store the data for insertion
-  nrow = oomph_v.size();
-  values = new double[nrow];
-  indices = new int[nrow];
-  for (unsigned i = 0; i < nrow; i++)
-   {
-    values[i] = oomph_v[i];
-    indices[i] = i;
-   }
-#endif
-
-  // insert
-  epetra_v_pt = new Epetra_Vector(*row_map_pt);
-  epetra_v_pt->ReplaceGlobalValues(nrow,values,indices);
-
-  // clean up memory
-  delete[] values;
-  delete[] indices;
- }
-
- //============================================================================
- /// creates an empty trilinos vector with Epetra_Map row_map_pt
- //============================================================================
- void create_epetra_vector(const Epetra_Map* row_map_pt,
-                           Epetra_Vector*& epetra_v_pt)
- {
-
-  // create the Epetra_Vector
-  epetra_v_pt = new Epetra_Vector(*row_map_pt);
- }
-
-
-//=============================================================================
-/// \short Helper function to copy the contents of a epetra vector to an
-/// oomph-lib distributed vector.
-//=============================================================================
-void copy_to_oomphlib_vector(const Epetra_Vector* epetra_v_pt,
-                             Vector<double>& oomph_lib_v)
-{
- // number of global rows
- unsigned nrow = epetra_v_pt->GlobalLength();
-
- // values to be copied into the oomph-lib vector
- double* values;
-
- // get the values vector
-#ifdef OOMPH_HAS_MPI
- int nproc = epetra_v_pt->Map().Comm().NumProc();
- if (nproc == 1)
-  {
-   epetra_v_pt->ExtractView(&values);
-  }
- else
-  {
-   // get the local values
-   double* local_values;
-   epetra_v_pt->ExtractView(&local_values);
-
-   // my rank
-   int my_rank =epetra_v_pt->Map().Comm().MyPID();
-
-   // number of local rows
-   Vector<int> nrow_local(nproc);
-   nrow_local[my_rank] = epetra_v_pt->MyLength();
-  
-   // get the communicator
-   MPI_Comm my_mpi_comm = 
-    dynamic_cast<const Epetra_MpiComm&>(epetra_v_pt->Map().Comm()).Comm();
-
-   // gather the First_row vector
-   MPI_Allgather(&nrow_local[my_rank],1,
-                 MPI_INT,
-                 &nrow_local[0],1,MPI_INT,my_mpi_comm);
-
-   // number of local rows
-   Vector<int> first_row(nproc);
-   int* global_rows = epetra_v_pt->Map().MyGlobalElements();
-   first_row[my_rank] = global_rows[0];
-
-   // gather the First_row vector
-   MPI_Allgather(&first_row[my_rank],1,
-                 MPI_INT,
-                 &first_row[0],1,MPI_INT,
-                 my_mpi_comm);
-
-   // gather the local solution values
-   values = new double[nrow];
-   MPI_Allgatherv(local_values,
-                  nrow_local[my_rank],
-                  MPI_DOUBLE,
-                  values,
-                  &nrow_local[0],
-                  &first_row[0],
-                  MPI_DOUBLE,
-                  my_mpi_comm);
-   
-   // clean up memory
-   //MPI_Comm_free(&my_mpi_comm);
-  }
-#else
-  epetra_v_pt->ExtractView(&values);
-#endif
-
-  // copy the vector to the oomphlib vector
-  oomph_lib_v.resize(nrow);
-  for (unsigned i=0; i<nrow; i++)
-   {
-    oomph_lib_v[i] = values[i];
-   }
-
-  // clean up memory
-#ifdef OOMPH_HAS_MPI
-  if (nproc > 1)
-   {
-    delete[] values;
-   }
-#endif
-}
-
-//=============================================================================
-/// \short Helper function to create a distributed Epetra_CrsMatrix from a 
-/// from a DistributedCRDoubleMatrix or a CRDoubleMatrix
-/// \b NOTE 1. This function constructs an Epetra_CrsMatrix using new,
-/// "delete trilinos_matrix_pt;" is NOT called.
-//=============================================================================
-void create_epetra_matrix(DoubleMatrixBase* matrix_pt,
-                          const Epetra_Map* epetra_row_map_pt,
-                          const Epetra_Map* epetra_col_map_pt,
-                          Epetra_CrsMatrix* &epetra_matrix_pt)
-{
- // if this is a MPI build then attempt to build Trilinos Matrix from
- // a CRDoubleMatrix or a DistributedCRDoubleMatrix
-#ifdef OOMPH_HAS_MPI
- bool cast_failed = true;
-
- // first try DistributedCRDoubleMatrix
- DistributedCRDoubleMatrix* cast_dist_matrix_pt = 
-  dynamic_cast<DistributedCRDoubleMatrix*>(matrix_pt);
- if (cast_dist_matrix_pt!=0)
-  {
-
-   // paranoid check that the distribution of the epetra row map and the 
-   // oomph-lib matrix are the same
-#ifdef PARANOID
-   compare_maps(cast_dist_matrix_pt->distribution(),
-                *epetra_row_map_pt);
-#endif
-     // paranoid check that the distribution of the map and the vector are the
-  // same
-#ifdef PARANOID
-  if (!compare_maps(cast_dist_matrix_pt->distribution(),
-                    *epetra_row_map_pt))
-  {
-    std::ostringstream error_message;
-    error_message << "The oomph-lib distributed vector (oomph_v) and the "
-                  << "epetra map must describe the same distribution.";
-    throw OomphLibError(error_message.str(),
-                        "TrilinosHelpers::create_epetra_matrix()",
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-#endif
-
-   // get pointers to the matrix values, column indices etc
-   int* column = cast_dist_matrix_pt->column_index();
-   double* value = cast_dist_matrix_pt->value();
-   int* row_start = cast_dist_matrix_pt->row_start();
-   
-   // get my nrow_local and first_row
-   unsigned nrow_local = cast_dist_matrix_pt->nrow_local();
-   unsigned first_row = cast_dist_matrix_pt->first_row();
-   
-   // store the number of non zero entries per row
-   int* nnz_per_row = new int[nrow_local];
-   for (unsigned row=0;row<nrow_local;row++)
-    {
-     nnz_per_row[row] = row_start[row+1] - row_start[row];
-    }
-   
-   // construct the new Epetra matrix
-   epetra_matrix_pt = new Epetra_CrsMatrix(Copy,*epetra_row_map_pt,
-                                           nnz_per_row);
-   
-   // insert the values
-   for (unsigned row=0; row<nrow_local; row++)
-    {
-     // get pointer to this row in values/columns
-     int ptr = row_start[row];
-     epetra_matrix_pt->InsertGlobalValues(first_row+row,
-                                          nnz_per_row[row],
-                                          value+ptr,
-                                          column+ptr);
-    }
-   
-   // tidy up memory
-   delete[] nnz_per_row;
-   
-   // complete the build of the trilinos matrix
-#ifdef PARANOID
-   int err=0;
-   err = epetra_matrix_pt->FillComplete(*epetra_col_map_pt,*epetra_row_map_pt);
-   if (err != 0)
-    {
-     std::ostringstream error_message;
-     error_message 
-      << "Epetra Matrix Fill Complete Error : epetra_error_flag = " 
-      << err;
-     throw OomphLibError(error_message.str(),
-                         "TrilinosHelpers::create_epetra_matrix(...)",
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-#else
-   epetra_matrix_pt->FillComplete(*epetra_col_map_pt,*epetra_row_map_pt);
-#endif
-   
-   // cast succeeded
-   cast_failed = false;
-  }
-
- // if the cast failed try cast to CRDoubleMatrix
- if (cast_failed)
- {
-  CRDoubleMatrix* cast_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
-  if (cast_matrix_pt != 0)
-  {
-
-   // get pointers to the matrix values, column indices etc
-   int* column = cast_matrix_pt->column_index();
-   double* value = cast_matrix_pt->value();
-   int* row_start = cast_matrix_pt->row_start();
-   
-   // get my nrow_local and first_row
-   unsigned nrow_local = epetra_row_map_pt->NumMyElements();
-   int* global_rows = epetra_row_map_pt->MyGlobalElements();
-   unsigned first_row = static_cast<unsigned>(global_rows[0]);
-
-   // store the number of non zero entries per row
-   int* nnz_per_row = new int[nrow_local];
-   for (unsigned row=0;row<nrow_local;row++)
-    {
-     nnz_per_row[row] = row_start[first_row + row+1] 
-      - row_start[first_row + row];
-    }
-   
-   // construct the new Epetra matrix
-   epetra_matrix_pt = new Epetra_CrsMatrix(Copy,*epetra_row_map_pt,
-                                           nnz_per_row);
-
-   // insert the values
-   for (unsigned row=0; row< nrow_local; row++)
-    {
-
-     // get pointer to this row in values/columns
-     int ptr = row_start[row+first_row];
-     epetra_matrix_pt->InsertGlobalValues(first_row + row,
-                                          nnz_per_row[row],
-                                          value+ptr,
-                                          column+ptr);
-    }
-   
-   // tidy up memory
-   delete[] nnz_per_row;
-   
-   // complete the build of the trilinos matrix
-#ifdef PARANOID
-   int err=0;
-   err = epetra_matrix_pt->FillComplete(*epetra_col_map_pt,*epetra_row_map_pt);
-   if (err != 0)
-    {
-     std::ostringstream error_message;
-     error_message 
-      << "Epetra Matrix Fill Complete Error : epetra_error_flag = " 
-      << err;
-     throw OomphLibError(error_message.str(),
-                         "TrilinosHelpers::create_epetra_matrix(...)",
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-#else
-   epetra_matrix_pt->FillComplete(*epetra_col_map_pt,*epetra_row_map_pt);
-#endif
-   
-   // cast succeeded
-   cast_failed = false;
-  }
- }
- 
-#ifdef PARANOID
- // check the matrix is a DistributedCRDoubleMatrix
- if (cast_failed)
-  {
-   std::ostringstream error_message;
-   error_message << "An create_epetra_matrix(...) is only compatiible with "
-                 << "DistributedCRDoubleMatrix or CRDoubleMatrix" << std::endl;
-   throw OomphLibError(error_message.str(),
-                       "TrilinosHelpers::create_epetra_matrix()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
-#else
-
- CRDoubleMatrix* cast_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
-#ifdef PARANOID
- if (cast_matrix_pt == 0)
-  {
-   std::ostringstream error_message;
-   error_message << "An create_epetra_matrix(...) is only compatiible with "
-                 << "CRDoubleMatrix" << std::endl;
-   throw OomphLibError(error_message.str(),
-                       "TrilinosHelpers::create_epetra_matrix()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
-
- // find number of rows and columns
- unsigned n_rows = cast_matrix_pt->nrow();
-
- // get pointers to the matrix values, column indices etc
- int* columns = cast_matrix_pt->column_index();
- double* values = cast_matrix_pt->value();
- int* row_starts = cast_matrix_pt->row_start();
-
- // store the number of non zero entries per row
- int* nnz_per_row = new int[n_rows];
- for (unsigned row=0;row<n_rows;row++)
-  {
-   nnz_per_row[row] = row_starts[row+1] - row_starts[row];
-  }
-
- // construct the new Epetra matrix
- epetra_matrix_pt = new Epetra_CrsMatrix(Copy,*epetra_row_map_pt,
-                                         nnz_per_row);
-
- // insert the values
- for (unsigned row=0;row<n_rows;row++)
-  {
-   // get pointer to this row in values/columns
-   int ptr = row_starts[row];
-   epetra_matrix_pt->InsertGlobalValues(row,
-                                        nnz_per_row[row],
-                                        values+ptr,
-                                        columns+ptr);
-  }
- delete[] nnz_per_row;
-
- // complete the build of the trilinos matrix
-#ifdef PARANOID
- int err=0;
- err = epetra_matrix_pt->FillComplete(*epetra_col_map_pt,*epetra_row_map_pt);
- if (err != 0)
-  {
-   std::ostringstream error_message;
-     error_message
-      << "Epetra Matrix Fill Complete Error : epetra_error_flag = "
-      << err;
-     throw OomphLibError(error_message.str(),
-                         "TrilinosHelpers::create_epetra_matrix(...)",
-                         OOMPH_EXCEPTION_LOCATION);
-  }
-#else
- epetra_matrix_pt->FillComplete(*epetra_col_map_pt,*epetra_row_map_pt);
-#endif
-#endif
-}
-
-//=============================================================================
-/// Helper function to create a distributed Epetra_CrsMatrix from a 
-/// from a DistributedCRDoubleMatrix or a CRDoubleMatrix
-/// \b NOTE 1. This function constructs an Epetra_CrsMatrix using new,
-/// "delete trilinos_matrix_pt;" is NOT called.
-/// \b NOTE 2. Specialisation for SQUARE matrices.
-//=============================================================================
-void create_epetra_matrix(DoubleMatrixBase* oomph_matrix,
-                          const Epetra_Map* epetra_row_map_pt,
-                          Epetra_CrsMatrix* &epetra_matrix_pt)
-{
- create_epetra_matrix(oomph_matrix,epetra_row_map_pt,epetra_row_map_pt,
-                      epetra_matrix_pt);
-}
 }
 }

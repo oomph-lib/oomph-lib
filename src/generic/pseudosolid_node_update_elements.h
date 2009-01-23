@@ -248,7 +248,7 @@ template<class BASIC, class SOLID>
  /// it here because it isn't obvious which classification we
  /// should use. This forces the user to re-implement this function
  /// if it's used
- unsigned nblock_types()
+ unsigned ndof_types()
   {
    throw OomphLibError(
     "nblock_types() is deliberately broken. Provide your own final overload!",
@@ -270,12 +270,12 @@ template<class BASIC, class SOLID>
  /// it here because it isn't obvious which classification we
  /// should use. This forces the user to re-implement this function
  /// if it's used
- void get_block_numbers_for_unknowns(
+ void get_dof_numbers_for_unknowns(
   std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
   {
    throw OomphLibError(
-    "get_block_numbers_for_unknowns() is deliberately broken. Provide your own final overload!",
-    "PseudoSolidNodeUpdateElement::get_block_numbers_for_unknowns()",
+    "get_dof_numbers_for_unknowns() is deliberately broken. Provide your own final overload!",
+    "PseudoSolidNodeUpdateElement::get_dof_numbers_for_unknowns()",
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -866,7 +866,7 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
  /// it here because it isn't obvious which classification we
  /// should use. This forces the user to re-implement this function
  /// if it's used
- unsigned nblock_types()
+ unsigned ndof_types()
   {
    throw OomphLibError(
     "nblock_types() is deliberately broken. Provide your own final overload!",
@@ -888,12 +888,12 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
  /// it here because it isn't obvious which classification we
  /// should use. This forces the user to re-implement this function
  /// if it's used
- void get_block_numbers_for_unknowns(
+ void get_dof_numbers_for_unknowns(
   std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
   {
    throw OomphLibError(
-    "get_block_numbers_for_unknowns() is deliberately broken. Provide your own final overload!",
-    "RefineablePseudoSolidNodeUpdateElement::get_block_numbers_for_unknowns()",
+    "get_dof_numbers_for_unknowns() is deliberately broken. Provide your own final overload!",
+    "RefineablePseudoSolidNodeUpdateElement::get_dof_numbers_for_unknowns()",
     OOMPH_EXCEPTION_LOCATION);
   }
 

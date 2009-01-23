@@ -624,12 +624,10 @@ namespace oomph
         assign_eqn_numbers();
         //This is now a full problem
         Solve_type = Full_solve;
-        Vector<double> residual(ndof());
+        DoubleVector residual;
         get_residuals(residual);
         //Get maximum residuals using our own abscmp function
-        max_res = std::abs(*std::max_element(residual.begin(),
-                                             residual.end(),          
-                                             AbsCmp<double>()));    
+        max_res = residual.max();
         clock_t t_end = clock();
         cpu_for_global_residual+=double(t_end-t_start)/CLOCKS_PER_SEC;
        }
@@ -753,13 +751,11 @@ namespace oomph
         Solve_type = Full_solve;
 
         //Get the residuals
-        Vector<double> residual(ndof());
+        DoubleVector residual;
         get_residuals(residual);
          
         //Get maximum residuals, using our own abscmp function
-        max_res =  std::abs(*std::max_element(residual.begin(),
-                                              residual.end(),          
-                                              AbsCmp<double>()));    
+        max_res =  residual.max();
          
         clock_t t_end = clock();
         cpu_for_global_residual+=double(t_end-t_start)/CLOCKS_PER_SEC;

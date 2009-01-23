@@ -89,9 +89,6 @@ namespace oomph
      // delete the vector of global rows
      delete[] Epetra_global_rows;
      Epetra_global_rows = 0;
-   
-     // preconditioner distribution is not setup
-     Preconditioner_distribution.clear();
 #endif
     }
    
@@ -121,22 +118,10 @@ namespace oomph
    /// This method is called by Trilinos solvers.
    void setup(Problem* problem_pt, DoubleMatrixBase* oomph_matrix_pt, 
               Epetra_CrsMatrix* epetra_matrix_pt);
-
-#ifdef OOMPH_HAS_MPI
-   /// \short Function applies preconditioner to DistributedVector r, this 
-   /// requires a call to setup(...) first.
-   void preconditioner_solve(const DistributedVector<double>&r,
-                             DistributedVector<double> &z);
-#endif
    
-   /// \short preconditioner_solve preconditions vector r taking serial 
-   /// oomph-lib vectors (Vector<double>) as arguments. \n
-   /// \b if MPI then the serial oomph-lib vectors are converted to
-   /// distributed Epetra vector, then the preconditioner is applied in 
-   /// parallel before the results are copied back to a serial oomph-lib 
-   /// vectors  
-   void preconditioner_solve(const Vector<double>&r,
-                             Vector<double> &z);
+   /// \short applies the preconditioner
+   void preconditioner_solve(const DoubleVector& r,
+                             DoubleVector &z);
 
    /// Access function to Epetra_preconditioner_pt.\n
    /// For use with \c TrilinosAztecOOSolver

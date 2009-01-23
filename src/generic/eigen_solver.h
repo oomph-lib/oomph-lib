@@ -56,7 +56,7 @@ class LinearSolver;
 /// Base class for all EigenProblem solves. This simply defines standard 
 /// interfaces so that different solvers can be used easily.
 //=======================================================================
-class EigenSolver
+ class EigenSolver : public DistributableLinearAlgebraObject
 {
   protected:
 
@@ -80,7 +80,7 @@ public:
  virtual void solve_eigenproblem(Problem* const &problem_pt,
                                  const int &n_eval,
                                  Vector<std::complex<double> > &eigenvalue,
-                                 Vector<Vector<double> > &eigenvector)=0;
+                                 Vector<DoubleVector> &eigenvector)=0;
 
  
  /// Set the value of the shift
@@ -150,7 +150,7 @@ class ARPACK : public EigenSolver
  void solve_eigenproblem(Problem* const &problem_pt,
                          const int &n_eval,
                          Vector<std::complex<double> > &eigenvalue,
-                         Vector<Vector<double> > &eigenvector);
+                         Vector<DoubleVector> &eigenvector);
  
 /// Use the eigensolver to find the eigenvalues of a given matrix
  //void find_eigenvalues(const DoubleMatrixBase &A, const int &n_eval,
@@ -203,7 +203,7 @@ class LAPACK_QZ : public EigenSolver
  void solve_eigenproblem(Problem* const &problem_pt,
                          const int &n_eval,
                          Vector<std::complex<double> > &eigenvalue,
-                         Vector<Vector<double> > &eigenvector);
+                         Vector<DoubleVector> &eigenvector);
 
  /// Find the eigenvalues of a generalised eigenvalue problem
  /// specified by \f$ Ax = \lambda  Mx \f$

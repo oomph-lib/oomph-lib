@@ -273,8 +273,11 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 //===== start_of_main=====================================================
 /// Driver code for 2D Poisson problem
 //========================================================================
-int main()
+int main(int argc, char **argv)
 {
+#ifdef OOMPH_HAS_MPI
+ MPI_Helpers::init(argc,argv);
+#endif
 
  //Set up the problem
  //------------------
@@ -338,7 +341,9 @@ int main()
    doc_info.number()++;
  
   }
-
+#ifdef OOMPH_HAS_MPI
+ MPI_Helpers::finalize();
+#endif
 
 } //end of main
 

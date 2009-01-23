@@ -30,24 +30,6 @@
 
 namespace oomph
 {
- 
- 
-//===========================================================================
-/// Identify the required blocks: Here we only need
-/// the momentum, gradient and divergence blocks of the
-/// 2x2 block-structured matrix -- this function can be overloaded in
-/// derived preconditioners.
-//===========================================================================
-void NavierStokesLSCPreconditioner::identify_required_blocks(
- DenseMatrix<bool>& required_blocks)
-{
- // Only need momentum, gradient and divergence blocks
- required_blocks(0,0) = true;
- required_blocks(1,0) = true;
- required_blocks(0,1) = true;
- required_blocks(1,1) = false;
-}
-
 
 
 
@@ -58,148 +40,132 @@ void NavierStokesLSCPreconditioner::identify_required_blocks(
 /// preconditioner and deletes what can be deleted... Note that
 /// this preconditioner needs a CRDoubleMatrix.
 //============================================================================
-void NavierStokesLSCPreconditioner::
-setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
-{
+ void NavierStokesLSCPreconditioner::
+ setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
+ {
 
+  //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  // NOTE: In the interest of minimising memory usage, several containers
+  //       are recycled, therefore their content/meaning changes
+  //       throughout this function. The code is carefully annotated
+  //       but you'll have to read it line by line!
+  //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
- //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- // NOTE: In the interest of minimising memory usage, several containers
- //       are recycled, therefore their content/meaning changes
- //       throughout this function. The code is carefully annotated
- //       but you'll have to read it line by line!
- //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- 
- // make sure any old data is deleted
- clean_up_memory();
- 
- // Get blocks
- // ----------
- 
- // In comes the current Jacobian. Recast it to a CR double matrix;
+  // make sure any old data is deleted
+  clean_up_memory();
+
+  // Get blocks
+  // ----------
+
+  // In comes the current Jacobian. Recast it to a CR double matrix;
   // shout if that can't be done.
- CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
- 
+  CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
+
 #ifdef PARANOID
- if (cr_matrix_pt==0)
-  {
-   std::ostringstream error_message;
-   error_message << "NavierStokesLSCPreconditioner only works with "
-                 << "CRDoubleMatrix matrices" << std::endl;
-   throw OomphLibError(error_message.str(),
-                       "NavierStokesLSCPreconditioner::setup()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
+  if (cr_matrix_pt==0)
+   {
+    std::ostringstream error_message;
+    error_message << "NavierStokesLSCPreconditioner only works with "
+                  << "CRDoubleMatrix matrices" << std::endl;
+    throw OomphLibError(error_message.str(),
+                     	"NavierStokesLSCPreconditioner::setup()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
 #endif
- 
- 
- // Set up block look up schemes (done automatically in the
- // BlockPreconditioner base class, based on the information 
- // provided in the block-preconditionable elements in the problem)
- this->block_setup(problem_pt);
- 
- // find number of block types
- unsigned n_block = this->nblock_types();
 
- // Matrix to indicate which blocks are required 
- DenseMatrix<bool> required_blocks(n_block,n_block);
- 
- // Identify required blocks
- identify_required_blocks(required_blocks);
- 
- // Get the blocks and store pointers to them in Block_matrix_pt
- this->get_blocks(cr_matrix_pt, required_blocks, Block_matrix_pt);
- 
- // Initialise timers
-#ifdef OOMPH_HAS_MPI   
- double t_start = MPI_Wtime();
-#else
- clock_t t_start = clock();
-#endif
- 
- // Generate pressure Poisson matrix
- // --------------------------------
- P_matrix_pt = new CRDoubleMatrix;
- 
- // Vector to hold inverse of velocity mass matrix diagonal
- Vector<double> ivmm_diagonal;
- 
- // If required,  multiply Block_matrix_pt(1,0) which currently
- // points to the divergence matrix, D, by the inverse diagonal mass matrix:
- if (P_matrix_using_scaling)
-  {
-   // Get the diagonal of the velocity mass matrix from helper
-   // function that assembles it from the Navier-Stokes elements
-   // in the mesh.
-   assemble_velocity_mass_matrix_diagonal(ivmm_diagonal);
-   
-   // Invert diagonal mass matrix
-   unsigned n_entry=ivmm_diagonal.size();
-   for (unsigned i=0; i<n_entry; i++)
-    {
-     ivmm_diagonal[i] = 1.0/ivmm_diagonal[i];
-    }
-   
-   // Now multiply the divergence matrix D (from the right) by the inverse
-   // diagonal mass matrix: Block_matrix_pt(1,0) now contains
-   // D Q^{-1}.
-   mat_diag_multiply(ivmm_diagonal, *Block_matrix_pt(1,0));
-  }
- 
- // Set Block_matrix_pt(1,0) matrix-matrix multiplication method
- Block_matrix_pt(1,0)->matrix_matrix_multiply_method() = Mult_method;
- 
- // Now multiply whatever's currently stored in  Block_matrix_pt(1,0)
- // (i.e. D or D Q^{-1}) from the right by G, which is stored
- // in Block_matrix_pt(0,1). Store the result in P_matrix_pt
- // which now contains DG or D Q^{-1} G as required.
- Block_matrix_pt(1,0)->multiply(*Block_matrix_pt(0,1), *P_matrix_pt);
- 
- 
- // Generate matrix E for multiplication in Schur complement approximation
- // ----------------------------------------------------------------------
- 
- // Auxiliary matrix for intermediate results
- CRDoubleMatrix* aux_matrix_pt = new CRDoubleMatrix;
- 
- // Multiply the momentum matrix, stored in Block_matrix_pt(0,0)
- // by the content of Block_matrix_pt(1,0) (either D or
- // D Q^{-1}) and store the result, namely B Q^{-1} F in aux_matrix_pt.
- Block_matrix_pt(1,0)->multiply(*Block_matrix_pt(0,0), *aux_matrix_pt);
- 
- 
- // We no longer need the divergence matrix -- kill it.
- delete Block_matrix_pt(1,0);
- Block_matrix_pt(1,0) = 0;
+  // Set up block look up schemes (done automatically in the
+  // BlockPreconditioner base class, based on the information 
+  // provided in the block-preconditionable elements in the problem)
 
- 
- // Multiply auxiliary matrix by diagonal of velocity mass matrix if required
- if (P_matrix_using_scaling)
-  {
-   // The auxiliary matrix now contains B Q^{-1} F Q^{-1}
-   mat_diag_multiply(ivmm_diagonal, *aux_matrix_pt);
-  }
+  // this preconditioner has two types of block:
+  // type 0: velocity - corresponding to DOFs 0 to n-2
+  // type 1: pressure - corresponding to DOF n-1
+  unsigned ndof_types = Mesh_pt[0]->element_pt(0)->ndof_types();
+  Vector<unsigned> dof_to_block_map(ndof_types);
+  dof_to_block_map[ndof_types-1]=1;
+  this->block_setup(problem_pt,matrix_pt,dof_to_block_map);
 
- // Set aux_matrix_pt matrix-matrix multiplication method
- aux_matrix_pt->matrix_matrix_multiply_method() = Mult_method;
- 
- // Now multiply the auxiliary matrix by the gradient matrix,
- // stored in Block_matrix_pt(0,1), to obtain either
- // E = B Q^{-1} F Q^{-1} G or  E = B  F  G, as required.
- aux_matrix_pt->multiply(*Block_matrix_pt(0,1),E_matrix);
- 
- // Clean up memory
- delete aux_matrix_pt;
- ivmm_diagonal.clear();
- 
-#ifdef OOMPH_HAS_MPI   
- double t_end = MPI_Wtime();
- double setup_time= t_end-t_start;
-#else
- clock_t t_end = clock();
- double setup_time=double(t_end-t_start)/CLOCKS_PER_SEC;
-#endif
- t_start = t_end;
+  // determine whether the F preconditioner is a block preconditioner (and
+  // therefore a subsidiary preconditioner)
+  BlockPreconditioner<CRDoubleMatrix>* F_block_preconditioner_pt = 
+   dynamic_cast<BlockPreconditioner<CRDoubleMatrix>* >(F_preconditioner_pt);
+  F_preconditioner_is_block_preconditioner = true;
+  if (F_block_preconditioner_pt == 0)
+   {
+    F_preconditioner_is_block_preconditioner = false;
+   }
+  
+  // Get the blocks
+  this->get_block(0,1,cr_matrix_pt,Block_matrix_0_1_pt);
+  CRDoubleMatrix* block_matrix_1_0_pt = 0;
+  this->get_block(1,0,cr_matrix_pt,block_matrix_1_0_pt);
+  CRDoubleMatrix* block_matrix_0_0_pt = 0;
+  this->get_block(0,0,cr_matrix_pt,block_matrix_0_0_pt);
+
+  // Initialise timers 
+  double t_start = TimingHelpers::timer();
+
+  // Generate pressure Poisson matrix
+  // --------------------------------
+  P_matrix_pt = new CRDoubleMatrix;
+
+  // Vector to hold inverse of velocity mass matrix diagonal
+  Vector<double> ivmm_diagonal;
+
+  // If required,  multiply Block_matrix_pt(1,0) which currently
+  // points to the divergence matrix, D, by the inverse diagonal mass matrix:
+  CRDoubleMatrix* ivmm_pt = 0;
+  if (P_matrix_using_scaling)
+   {
+     ivmm_pt = assemble_velocity_mass_matrix_diagonal();
+    CRDoubleMatrix* temp_matrix_pt = new CRDoubleMatrix;
+    block_matrix_1_0_pt->multiply(*ivmm_pt,*temp_matrix_pt);
+    delete block_matrix_1_0_pt;
+    block_matrix_1_0_pt = temp_matrix_pt;
+   }
+
+  // Now multiply whatever's currently stored in  Block_matrix_pt(1,0)
+  // (i.e. D or D Q^{-1}) from the right by G, which is stored
+  // in Block_matrix_pt(0,1). Store the result in P_matrix_pt
+  // which now contains DG or D Q^{-1} G as required.
+  block_matrix_1_0_pt->multiply(*Block_matrix_0_1_pt, *P_matrix_pt);
+
+  // Generate matrix E for multiplication in Schur complement approximation
+  // ----------------------------------------------------------------------
+
+  // Auxiliary matrix for intermediate results
+  CRDoubleMatrix* aux_matrix_pt = new CRDoubleMatrix;
+
+  // Multiply the momentum matrix, stored in Block_matrix_pt(0,0)
+  // by the content of Block_matrix_pt(1,0) (either D or
+  // D Q^{-1}) and store the result, namely B Q^{-1} F in aux_matrix_pt.
+  block_matrix_1_0_pt->multiply(*block_matrix_0_0_pt, *aux_matrix_pt);
+
+  // We no longer need the divergence matrix -- kill it.
+  delete block_matrix_1_0_pt;
+
+  // Multiply auxiliary matrix by diagonal of velocity mass matrix if required
+  if (P_matrix_using_scaling)
+   {
+    CRDoubleMatrix* temp_matrix_pt = new CRDoubleMatrix;
+    aux_matrix_pt->multiply(*ivmm_pt,*temp_matrix_pt);
+    delete aux_matrix_pt;
+    aux_matrix_pt = temp_matrix_pt;
+   }
+
+  // Now multiply the auxiliary matrix by the gradient matrix,
+  // stored in Block_matrix_pt(0,1), to obtain either
+  // E = B Q^{-1} F Q^{-1} G or  E = B  F  G, as required.
+  E_matrix.clear();
+  aux_matrix_pt->multiply(*Block_matrix_0_1_pt,E_matrix);
+
+  // Clean up memory
+  delete aux_matrix_pt;
+  delete ivmm_pt;
+
+  double t_end = TimingHelpers::timer();
+  double setup_time= t_end-t_start;
+  t_start = t_end;
  
  // Output times
  if(Doc_time)
@@ -208,199 +174,214 @@ setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
               << setup_time << "\n";
   }
  
- 
- // Set up solver for the system involving the pressure Poisson matrix
- // ------------------------------------------------------------------
-#ifdef PARANOID
- // check a solver has been set
- if (P_preconditioner_pt==0)
-  {
-   std::ostringstream error_message;
-   error_message << "P_preconditioner_pt has not been set.";
-   
-   throw OomphLibError(error_message.str(),
-                       "NavierStokesLSCPreconditioner::setup()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
+  // if the P preconditioner has not been setup
+  if (P_preconditioner_pt == 0)
+   {
+#ifdef OOMPH_HAS_MPI
+    if (Distribution_pt->communicator_pt()->nproc() > 1)
+     {
+      P_preconditioner_pt = new SuperLUDistPreconditioner;
+     }
+    else
+     {
+      P_preconditioner_pt = new SuperLUPreconditioner;
+     }
+#else
+    P_preconditioner_pt = new SuperLUPreconditioner;
 #endif
+    Using_default_p_preconditioner = true;
+   }
 
- // Setup the preconditioner for the Pressure matrix
- P_preconditioner_pt->setup(problem_pt, P_matrix_pt);
+  // Setup the preconditioner for the Pressure matrix
+  P_preconditioner_pt->setup(problem_pt, P_matrix_pt);
+
+  // Delete oomph-lib pressure Poisson matrix
+  delete P_matrix_pt;
+  P_matrix_pt=0;
+  t_end = TimingHelpers::timer();
+  setup_time=double(t_end-t_start)/CLOCKS_PER_SEC;
+  t_start = t_end;
  
-#ifdef OOMPH_HAS_MPI   
- t_end = MPI_Wtime();
- setup_time= t_end-t_start;
+  // Output times
+  if(Doc_time)
+   {
+    oomph_info << "P matrix sub-preconditioner setup time [sec]: "
+               << setup_time << "\n";
+   }
+  
+  // Set up solver for solution of system with momentum matrix
+  // ----------------------------------------------------------
+
+  // if the F preconditioner has not been setup
+  if (F_preconditioner_pt == 0)
+   {
+#ifdef OOMPH_HAS_MPI
+    if (Distribution_pt->communicator_pt()->nproc() > 1)
+     {
+      F_preconditioner_pt = new SuperLUDistPreconditioner;
+     }
+    else
+     {
+      F_preconditioner_pt = new SuperLUPreconditioner;
+     }
 #else
- t_end = clock();
- setup_time=double(t_end-t_start)/CLOCKS_PER_SEC;
+    F_preconditioner_pt = new SuperLUPreconditioner;
 #endif
- t_start = t_end;
+    Using_default_f_preconditioner = true;
+   }
+
+  // if F is a block preconditioner
+  if (F_preconditioner_is_block_preconditioner)
+   {
+    unsigned ndof_types = this->ndof_types();
+    ndof_types--;
+    Vector<unsigned> dof_map(ndof_types);
+    for (unsigned i = 0; i < ndof_types; i++)
+     {
+      dof_map[i] = i;
+     }
+    F_block_preconditioner_pt->
+     turn_into_subsidiary_block_preconditioner(this,dof_map);
+    F_block_preconditioner_pt->setup(problem_pt,matrix_pt);
+   }
+  // otherwise F is not a block preconditioner
+  else
+   {
+    F_preconditioner_pt->setup(problem_pt,block_matrix_0_0_pt);
+   }
+
+  // can now delete block 0 0
+  delete block_matrix_0_0_pt;
+
+  // compute the setup time
+  t_end = TimingHelpers::timer();
+  setup_time=double(t_end-t_start)/CLOCKS_PER_SEC;
  
- // Output times
- if(Doc_time)
-  {
-   oomph_info << "P matrix sub-preconditioner setup time [sec]: "
-              << setup_time << "\n";
-  }
- 
- // Delete oomph-lib pressure Poisson matrix
- delete P_matrix_pt;
- P_matrix_pt=0;
- 
- // Set up solver for solution of system with momentum matrix
- // ----------------------------------------------------------
-#ifdef PARANOID
- // check a solver has been set
- if (F_preconditioner_pt==0)
-  {
-   std::ostringstream error_message;
-   error_message << "F_preconditioner_pt has not been set.";
-   
-   throw OomphLibError(error_message.str(),
-                       "NavierStokesLSCPreconditioner::setup()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
- 
- // Setup the preconditioner the F matrix
- F_preconditioner_pt->setup(problem_pt, Block_matrix_pt(0,0));
- 
-#ifdef OOMPH_HAS_MPI   
- t_end = MPI_Wtime();
- setup_time= t_end-t_start;
-#else
- t_end = clock();
- setup_time=double(t_end-t_start)/CLOCKS_PER_SEC;
-#endif
- 
- // Output times
- if(Doc_time)
-  {
-   oomph_info << "F matrix sub-preconditioner setup time [sec]: "
-              << setup_time << "\n";
-  }
- 
- // Now we don't need the original momentum matrix any more. Kill it.
- delete Block_matrix_pt(0,0);
- Block_matrix_pt(0,0) = 0;
- 
- // Remember that the preconditioner has been setup so
- // the stored information can be wiped when we
- // come here next...
- Preconditioner_has_been_setup = true;
-}
+  // Output times
+  if(Doc_time)
+   {
+    oomph_info << "F matrix sub-preconditioner setup time [sec]: "
+               << setup_time << "\n";
+   }
+  
+  // Remember that the preconditioner has been setup so
+  // the stored information can be wiped when we
+  // come here next...
+  Preconditioner_has_been_setup = true;
+ }
 
 
 
 //=======================================================================
-/// Apply preconditioner to r.
+ /// Apply preconditioner to r.
 //=======================================================================
-void NavierStokesLSCPreconditioner::
-preconditioner_solve(const Vector<double>&r, Vector<double> &z)
-{
- 
+ void NavierStokesLSCPreconditioner::
+ preconditioner_solve(const DoubleVector &r, DoubleVector &z)
+ {
+
 #ifdef PARANOID
- if (Preconditioner_has_been_setup==false)
-  {
-   std::ostringstream error_message;
-   error_message << "setup must be called before using preconditioner_solve";
-   throw OomphLibError(
-    error_message.str(),
-    "NavierStokesLSCPreconditioner::preconditioner_solve()",
-    OOMPH_EXCEPTION_LOCATION);
-  }
+  if (Preconditioner_has_been_setup==false)
+   {
+    std::ostringstream error_message;
+    error_message << "setup must be called before using preconditioner_solve";
+    throw OomphLibError(
+     error_message.str(),
+     "NavierStokesLSCPreconditioner::preconditioner_solve()",
+     OOMPH_EXCEPTION_LOCATION);
+   }
+  if (z.distribution_setup())
+   {
+    if (z.nrow() != r.nrow())
+     {
+      std::ostringstream error_message;
+      error_message << "The vectors z and r must have the same number of "
+                    << "of global rows";
+      throw OomphLibError(
+       error_message.str(),
+       "NavierStokesLSCPreconditioner::preconditioner_solve()",
+       OOMPH_EXCEPTION_LOCATION);      
+     }
+   }
 #endif
- 
- // Number of velocity and pressure degrees of freedom
- unsigned n_veloc_dof = this->block_dimension(0);
- unsigned n_press_dof = this->block_dimension(1);
- 
- // Cache the number of rows into a local variable
- //const unsigned n_row = this->Nrow;
- 
- 
- // Step 1 - apply approximate Schur inverse to pressure unknowns (block 1)
- // -----------------------------------------------------------------------
- 
- // Working vectors, big enough to hold all pressure dofs.
- Vector<double> temp_vec(n_press_dof);
- Vector<double> another_temp_vec(n_press_dof);
- 
- // Copy pressure values from residual vector to temp_vec:
- // Loop over all entries in the global vector (this one
- // includes velocity and pressure dofs in some random fashion)
- this->get_block_vector(1,r,temp_vec);
- 
- // NOTE: The vector temp_vec now contains the vector r_p.
- 
- 
- // Solve first pressure Poisson system
+
+  // if z is not setup then give it the same distribution
+  if (!z.distribution_pt()->setup())
+   {
+    z.rebuild(r.distribution_pt());
+   }
+
+  // Step 1 - apply approximate Schur inverse to pressure unknowns (block 1)
+  // -----------------------------------------------------------------------
+
+  // Working vectors
+  DoubleVector temp_vec;
+  DoubleVector another_temp_vec;
+
+  // Copy pressure values from residual vector to temp_vec:
+  // Loop over all entries in the global vector (this one
+  // includes velocity and pressure dofs in some random fashion)
+  this->get_block_vector(1,r,temp_vec);
+
+  // NOTE: The vector temp_vec now contains the vector r_p.
+
+  // Solve first pressure Poisson system
 #ifdef PARANOID
- // check a solver has been set
- if (P_preconditioner_pt==0)
-  {
-   std::ostringstream error_message;
-   error_message << "P_preconditioner_pt has not been set.";
-   
-   throw OomphLibError(error_message.str(),
-                       "NavierStokesLSCPreconditioner::preconditioner_solve()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
+  // check a solver has been set
+  if (P_preconditioner_pt==0)
+   {
+    std::ostringstream error_message;
+    error_message << "P_preconditioner_pt has not been set.";
+    throw OomphLibError(
+     error_message.str(),
+     "NavierStokesLSCPreconditioner::preconditioner_solve()",
+     OOMPH_EXCEPTION_LOCATION);
+   }
 #endif
- 
- // use some Preconditioner's preconditioner_solve function
- P_preconditioner_pt->preconditioner_solve(temp_vec, another_temp_vec);
- 
- 
- // NOTE: The vector another_temp_vec now contains the vector P^{-1} r_p
- 
- // Multiply another_temp_vec by matrix E and stick the result into temp_vec
- temp_vec.clear();
- E_matrix.multiply(another_temp_vec, temp_vec);
- 
- // NOTE: The vector temp_vec now contains E P^{-1} r_p
- 
- // Solve second pressure Poisson system using preconditioner_solve
- P_preconditioner_pt->preconditioner_solve(temp_vec, another_temp_vec);
- 
- 
- // NOTE: The vector another_temp_vec now contains  z_p = P^{-1} E P^{-1} r_p
- //       as required (apart from the sign which we'll fix in the
- //       next step.
- 
- // Now copy another_temp_vec (i.e. z_p) back into the global vector z.
- // Loop over all entries in the global results vector z:
- temp_vec.resize(n_press_dof);
- for (unsigned i=0; i< n_press_dof; i++)
-  {
-   // copy the result across
-   temp_vec[i] = -another_temp_vec[i];
-  }
- return_block_vector(1,temp_vec,z);
- 
- // Step 2 - apply preconditioner to velocity unknowns (block 0)
- // ------------------------------------------------------------
- 
- // Recall that another_temp_vec (computed above) contains the
- // negative of the solution of the Schur complement systen, -z_p.
- // Multiply by G (stored in Block_matrix_pt(0,1) and store
- // result in temp_vec (vector resizes itself).
- temp_vec.clear();
- Block_matrix_pt(0,1)->multiply(another_temp_vec, temp_vec);
- 
+
+  // use some Preconditioner's preconditioner_solve function
+  P_preconditioner_pt->preconditioner_solve(temp_vec, another_temp_vec);
+
+  // NOTE: The vector another_temp_vec now contains the vector P^{-1} r_p
+
+  // Multiply another_temp_vec by matrix E and stick the result into temp_vec
+  temp_vec.clear();  
+  E_matrix.multiply(another_temp_vec, temp_vec);
+
+  // NOTE: The vector temp_vec now contains E P^{-1} r_p
+
+  // Solve second pressure Poisson system using preconditioner_solve
+  P_preconditioner_pt->preconditioner_solve(temp_vec, another_temp_vec);
+
+  // NOTE: The vector another_temp_vec now contains  z_p = P^{-1} E P^{-1} r_p
+  //       as required (apart from the sign which we'll fix in the
+  //       next step.
+
+  // Now copy another_temp_vec (i.e. z_p) back into the global vector z.
+  // Loop over all entries in the global results vector z:
+  temp_vec.rebuild(another_temp_vec.distribution_pt());
+  temp_vec -= another_temp_vec;
+  return_block_vector(1,temp_vec,z);
+
+  // Step 2 - apply preconditioner to velocity unknowns (block 0)
+  // ------------------------------------------------------------
+  
+  // Recall that another_temp_vec (computed above) contains the
+  // negative of the solution of the Schur complement systen, -z_p.
+  // Multiply by G (stored in Block_matrix_pt(0,1) and store
+  // result in temp_vec (vector resizes itself).
+  temp_vec.clear();
+  Block_matrix_0_1_pt->multiply(another_temp_vec, temp_vec);
+
  // NOTE: temp_vec now contains -G z_p
- 
+
  // The vector another_temp_vec is no longer needed -- re-use it to store
  // velocity quantities:
- another_temp_vec.resize(n_veloc_dof);
+  another_temp_vec.clear();
 
  // Loop over all enries in the global vector and find the
  // entries associated with the velocities:
  get_block_vector(0,r,another_temp_vec);
- for (unsigned i = 0; i < n_veloc_dof; i++)
-  {
-   another_temp_vec[i] += temp_vec[i];
-  }
+ another_temp_vec += temp_vec;
  
  // NOTE:  The vector another_temp_vec now contains r_u - G z_p
 
@@ -419,68 +400,17 @@ preconditioner_solve(const Vector<double>&r, Vector<double> &z)
 #endif
 
  // use some Preconditioner's preconditioner solve
- F_preconditioner_pt->preconditioner_solve(another_temp_vec, temp_vec);
-
-
- // NOTE: The vector temp_vec now contains F^{-1}  ( r_u - G z_p ) = z_u,
- //       i.e. the required result.
-
- // Now copy back into the global vector
- return_block_vector(0,temp_vec,z);
-}
-
-
-
-//===================================================================
-/// Helper function to multiply a CRDoubleMatrix by a
-/// diagonal matrix held in diag_matrix. The input and output
-/// matrices are held in matrix.
-//===================================================================
- void NavierStokesLSCPreconditioner::
- mat_diag_multiply(const Vector<double>& diag_matrix,
-                   CRDoubleMatrix& matrix)
- {
-
-#ifdef PARANOID
-  // check for compatible dimensions
-  if (matrix.ncol() != diag_matrix.size() )
-   {
-    std::ostringstream error_message;
-    error_message << "Incompatible matrix dimensions. "
-                  << "CRDoubleMatrix has dimensions " << matrix.nrow()
-                  << "x" << matrix.ncol()
-                  << ". Diagonal matrix is " << diag_matrix.size()
-                  << "x" << diag_matrix.size();
-
-    throw OomphLibError(error_message.str(),
-                     	"NavierStokesLSCPreconditioner::mat_diag_multiply()",
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-#endif
-
-
-  // get pointers to values etc in matrix
-  const int* row_start = matrix.row_start();
-  const int* column_index = matrix.column_index();
-  double* value = matrix.value();
-
-  // run through rows of matrix
-  unsigned n_row=matrix.nrow();
-  for (unsigned row=0; row<n_row; row++)
-   {
-    // run through entries in the row
-    unsigned next_row_start=row_start[row+1];
-    for (unsigned ptr=row_start[row];
-    				 ptr<next_row_start;
-         ptr++)
-     {
-      // find column index
-      int col = column_index[ptr];
-
-      // multiply value
-      value[ptr] *= diag_matrix[col];
-     }
-   }
+ // and return
+ if (F_preconditioner_is_block_preconditioner)
+  {
+   return_block_vector(0,another_temp_vec,z);
+   F_preconditioner_pt->preconditioner_solve(z,z);
+  }
+ else
+  {
+   F_preconditioner_pt->preconditioner_solve(another_temp_vec, temp_vec);
+   return_block_vector(0,temp_vec,z);
+  }
  }
 
 
@@ -489,113 +419,677 @@ preconditioner_solve(const Vector<double>&r, Vector<double> &z)
 /// mass matrix from the elemental contributions defined in
 /// NavierStokesEquations<DIM>::get_velocity_mass_matrix_diagonal(...).
 //========================================================================
- void NavierStokesLSCPreconditioner::
- assemble_velocity_mass_matrix_diagonal(Vector<double> &vmm_diagonal)
+ CRDoubleMatrix* 
+ NavierStokesLSCPreconditioner::assemble_velocity_mass_matrix_diagonal()
  {
-  // find number of velocity degrees of freedom
-  int n_dof = this->block_dimension(0);
-
-  // find number of elements
-  unsigned n_el = Mesh_pt[0]->nelement();
 
   // find the number of dimensions from the first element
-  unsigned dim = dynamic_cast<FiniteElement*>(Mesh_pt[0]->element_pt(0) )->dim();
-
-  // pointers to the only two allowed element types
-  // (required for accessing the function get_velocity_mass_matrix_diagonal)
-  NavierStokesEquations<2>* el2d_pt=0;
-  NavierStokesEquations<3>* el3d_pt=0;
-
-  // Resize and initialise
-  vmm_diagonal.assign(n_dof, 0.0);
-
-  // loop over the elements
-  for(unsigned e=0; e<n_el; e++)
+  unsigned dim = 
+   dynamic_cast<FiniteElement*>(Mesh_pt[0]->element_pt(0) )->dim();
+  
+  // determine the rows required by this processor
+  unsigned first_row = this->block_distribution_pt(0)->first_row();
+  unsigned nrow_local = this->block_distribution_pt(0)->nrow_local();
+  unsigned nrow = this->block_distribution_pt(0)->nrow();
+  
+  // create storage for the diagonals
+  double* m_values = new double[nrow_local];
+  for (unsigned i = 0; i < nrow_local; i++)
    {
-    // find number of degrees of freedom in the element
-    // (this is slightly too big because it includes the
-    // pressure dofs but this doesn't matter)
-    unsigned el_dof = Mesh_pt[0]->element_pt(e)->ndof();
-
-    // allocate local storage for the element's contribution to the
-    // velocity mass matrix diagonal
-    Vector<double> el_vmm_diagonal(el_dof);
-
-    // get the element contribution
-    if (dim==2)
-    {
-     el2d_pt = dynamic_cast< NavierStokesEquations<2>* >( Mesh_pt[0]->element_pt(e) );
-     if (el2d_pt!=0)
-      {
-       el2d_pt->get_velocity_mass_matrix_diagonal(el_vmm_diagonal);
-      }
-    }
-    else
-    {
-     el3d_pt = dynamic_cast< NavierStokesEquations<3>* >( Mesh_pt[0]->element_pt(e) );
-     if (el3d_pt!=0)
-      {
-       el3d_pt->get_velocity_mass_matrix_diagonal(el_vmm_diagonal);
-      }
-    }
-
-    // insert values into vmm_diagonal
-    // - loop over local variables
-    for(unsigned i=0; i<el_dof; i++)
-     {
-      //Get the equation number
-      unsigned eqn_number = Mesh_pt[0]->element_pt(e)->eqn_number(i);
-
-      // bypass pressure dof
-      if ( this->block_number(eqn_number)==0 )
-       {
-        // add the contribution to the correct position based on block ordering
-        vmm_diagonal[ this->index_in_block(eqn_number) ] += el_vmm_diagonal[i];
-       }
-     }
+    m_values[i] = 0;
    }
 
+#ifdef OOMPH_HAS_MPI
+  // store the problem pt
+  const Problem* problem_pt = this->problem_pt();
+#endif  
+
+  // if the problem is distributed
+  bool distributed = false;
+#ifdef OOMPH_HAS_MPI
+  if (problem_pt->distributed() || 
+      this->master_distribution_pt()->distributed())
+   {
+     distributed = true;
+   }
+#endif
+
+  // next we get the diagonal velocity mass matrix data
+  if (distributed)
+   {
+#ifdef OOMPH_HAS_MPI
+    // the number of processors
+    unsigned nproc = this->problem_pt()->communicator_pt()->nproc();
+
+    // and my rank
+    unsigned my_rank = this->problem_pt()->communicator_pt()->my_rank();
+
+    // determine the rows for which we have lookup rows
+
+    // if the problem is NOT distributed then we only classify global equation
+    // on this processor to avoid duplication (as every processor holds 
+    // elvery element)
+    unsigned first_lookup_row = 0; 
+    unsigned last_lookup_row = 0;
+    if (!problem_pt->distributed())
+     {
+      first_lookup_row = this->master_distribution_pt()->first_row();
+      last_lookup_row = first_lookup_row + 
+       this->master_distribution_pt()->nrow_local() - 1;
+     }
+    // attempt to classify every degree of freedom
+    else
+     {
+      first_lookup_row = this->first_lookup_row();
+      last_lookup_row = first_lookup_row + this->nlookup_rows() - 1;
+     }
+
+    // find number of local elements
+    unsigned n_el = Mesh_pt[0]->nelement();
+    
+    // the diagonal velocity mass matrix contributions that have been
+    // classified and should be sent to another processor
+    Vector<double>* classified_contributions_send 
+     = new Vector<double>[nproc];
+
+    // the corresponding block indices
+    Vector<unsigned>* classified_indices_send
+     = new Vector<unsigned>[nproc];
+
+    // the maitrix contributions that cannot be classified by this processor
+    // and therefore must be sent to another for classification
+    Vector<double>* unclassified_contributions_send
+     = new Vector<double>[nproc];
+
+    // the corresponding global indices that require classification
+    Vector<unsigned>* unclassified_indices_send
+     = new Vector<unsigned>[nproc];
+
+    // get the master distribution pt
+    const LinearAlgebraDistribution* master_distribution_pt = 
+     this->master_distribution_pt();
+
+    // get the velocity distribution pt
+    const LinearAlgebraDistribution* velocity_dist_pt 
+     = this->block_distribution_pt(0);
+
+    // get the contribution for each element
+    for (unsigned e = 0; e < n_el; e++)
+     {
+
+      // check that the element is not halo d
+      if (!Mesh_pt[0]->element_pt(e)->is_halo())
+       {
+        
+        // find number of degrees of freedom in the element
+        // (this is slightly too big because it includes the
+        // pressure dofs but this doesn't matter)
+        unsigned el_dof = Mesh_pt[0]->element_pt(e)->ndof();
+        
+        // allocate local storage for the element's contribution to the
+        // velocity mass matrix diagonal
+        Vector<double> el_vmm_diagonal(el_dof);
+        
+        // get the element contribution
+        if (dim == 2)
+         {
+          dynamic_cast< NavierStokesEquations<2>* >
+           ( Mesh_pt[0]->element_pt(e) )
+           ->get_velocity_mass_matrix_diagonal(el_vmm_diagonal);
+         }
+        else
+         {
+          dynamic_cast< NavierStokesEquations<3>* >
+           ( Mesh_pt[0]->element_pt(e) )
+           ->get_velocity_mass_matrix_diagonal(el_vmm_diagonal);
+         }
+
+        // get the contribution for each dof
+        for (unsigned i = 0; i < el_dof; i++)
+         {
+
+          //Get the equation number
+          unsigned eqn_number = Mesh_pt[0]->element_pt(e)->eqn_number(i);
+
+          // if I have lookup information on this processor
+          if (eqn_number >= first_lookup_row && 
+              eqn_number <= last_lookup_row)
+           {
+            
+            // bypass non velocity DOFs
+            if ( this->block_number(eqn_number)==0 )
+             {
+              
+              // get the index in the block
+              unsigned index = this->index_in_block(eqn_number);
+             
+              // determine which processor requires the block index
+              for (unsigned p = 0; p < nproc; p++)
+               {
+                if (index >= velocity_dist_pt->first_row(p) &&
+                    (index < 
+                     (velocity_dist_pt->first_row(p)
+                      +velocity_dist_pt->nrow_local(p))))
+                 {
+                  
+                  // if it is required by this processor then add the 
+                  // contribution
+                  if (p == my_rank)
+                   {
+                    m_values[index-first_row] += el_vmm_diagonal[i];
+                   }
+                  // other wise store it for communication
+                  else
+                   {
+                    classified_contributions_send[p]
+                     .push_back(el_vmm_diagonal[i]);
+                    classified_indices_send[p].push_back(index);
+                   }
+                 }
+               }
+             }
+           }
+        
+        // if we do not have the lookup information on this processor
+        // then we send the mass matrix contribution to a processor
+        // which we know does have the lookup information
+        // the assumption: the processor for which the master block
+        // preconditioner distribution will definitely hold the lookup
+        // data for eqn_number (although others may)
+        else if (problem_pt->distributed())
+         {
+          
+          // determine which processor requires the block index
+          unsigned p = 0;
+          while (!(eqn_number >= master_distribution_pt->first_row(p) &&
+                   (eqn_number < (master_distribution_pt->first_row(p)
+                                  +master_distribution_pt->nrow_local(p)))))
+            {
+             p++;
+            }
+
+            // store the data
+            unclassified_contributions_send[p]
+             .push_back(el_vmm_diagonal[i]);
+            unclassified_indices_send[p].push_back(eqn_number);
+           }
+         }
+       }
+     }
+   
+    // next the unclassified contributions are communicated to 
+    // processors that can classify them
+    
+    // first determine how many unclassified rows are to be sent to
+    // each processor
+    unsigned* n_unclassified_send = new unsigned[nproc];
+    for (unsigned p = 0; p < nproc; p++)
+     {
+      if (p == my_rank)
+       {
+        n_unclassified_send[p] = 0;
+       }
+      else
+       {
+        n_unclassified_send[p] 
+         = unclassified_contributions_send[p].size();
+       }
+     }
+    
+    // then all-to-all com number of unclassified to be sent / recv
+    unsigned* n_unclassified_recv = new unsigned[nproc];
+    MPI_Alltoall(n_unclassified_send,1,MPI_UNSIGNED,
+                 n_unclassified_recv,1,MPI_UNSIGNED,
+                 this->problem_pt()->communicator_pt()->mpi_comm());
+    
+    // the base displacement for the sends
+    MPI_Aint base_displacement;
+    MPI_Address(m_values,&base_displacement);
+    
+    // allocate storage for the data to be recieved
+    // and post the sends and recvs
+      Vector<double*> unclassified_contributions_recv(nproc);
+      Vector<unsigned*> unclassified_indices_recv(nproc);
+      Vector<MPI_Request> unclassified_recv_requests;
+      Vector<MPI_Request> unclassified_send_requests;
+      Vector<unsigned> unclassified_recv_proc;
+      for (unsigned p = 0; p < nproc; p++)
+       {
+        if (p != my_rank)
+         {
+          // recv
+          if (n_unclassified_recv[p] > 0)
+           {
+            unclassified_contributions_recv[p] 
+             = new double[n_unclassified_recv[p]];
+            unclassified_indices_recv[p] = new 
+             unsigned[n_unclassified_recv[p]];
+            
+            // data for the struct data type
+            MPI_Datatype recv_types[2];
+            MPI_Aint recv_displacements[2];
+            int recv_sz[2];
+            
+            // contributions
+            MPI_Type_contiguous(n_unclassified_recv[p],MPI_DOUBLE,
+                                &recv_types[0]);
+            MPI_Type_commit(&recv_types[0]);
+            MPI_Address(unclassified_contributions_recv[p],
+                        &recv_displacements[0]);
+            recv_displacements[0] -= base_displacement;
+            recv_sz[0] = 1;
+            
+            // indices
+            MPI_Type_contiguous(n_unclassified_recv[p],MPI_UNSIGNED,
+                                &recv_types[1]);
+            MPI_Type_commit(&recv_types[1]);
+            MPI_Address(unclassified_indices_recv[p],
+                        &recv_displacements[1]);
+            recv_displacements[1] -= base_displacement;
+            recv_sz[1] = 1;
+            
+            // build the final recv type
+            MPI_Datatype final_recv_type;
+            MPI_Type_struct(2,recv_sz,recv_displacements,recv_types,
+                            &final_recv_type);
+            MPI_Type_commit(&final_recv_type);
+            
+            // and recv
+            MPI_Request req;
+            MPI_Irecv(m_values,1,final_recv_type,p,0,
+                      problem_pt->communicator_pt()->mpi_comm(),&req);
+            unclassified_recv_requests.push_back(req);
+            unclassified_recv_proc.push_back(p); 
+            MPI_Type_free(&recv_types[0]);
+            MPI_Type_free(&recv_types[1]);
+            MPI_Type_free(&final_recv_type);
+           }
+          
+          // send
+          if (n_unclassified_send[p] > 0)
+           {
+            // data for the struct data type
+            MPI_Datatype send_types[2];
+            MPI_Aint send_displacements[2];
+            int send_sz[2];
+            
+            // contributions
+            MPI_Type_contiguous(n_unclassified_send[p],MPI_DOUBLE,
+                                &send_types[0]);
+            MPI_Type_commit(&send_types[0]);
+            MPI_Address(&unclassified_contributions_send[p][0],
+                        &send_displacements[0]);
+            send_displacements[0] -= base_displacement;
+            send_sz[0] = 1;
+            
+            // indices
+            MPI_Type_contiguous(n_unclassified_send[p],MPI_UNSIGNED,
+                                &send_types[1]);
+            MPI_Type_commit(&send_types[1]);
+            MPI_Address(&unclassified_indices_send[p][0],
+                        &send_displacements[1]);
+            send_displacements[1] -= base_displacement;
+            send_sz[1] = 1;
+            
+            // build the final send type
+            MPI_Datatype final_send_type;
+            MPI_Type_struct(2,send_sz,send_displacements,send_types,
+                            &final_send_type);
+            MPI_Type_commit(&final_send_type);
+            
+            // and send
+            MPI_Request req;
+            MPI_Isend(m_values,1,final_send_type,p,0,
+                      problem_pt->communicator_pt()->mpi_comm(),&req);
+            unclassified_send_requests.push_back(req);
+            MPI_Type_free(&send_types[0]);
+            MPI_Type_free(&send_types[1]);
+            MPI_Type_free(&final_send_type);
+           }
+         }
+       }
+   
+      // next classify the data as it is received
+      unsigned n_unclassified_recv_req = unclassified_recv_requests.size();
+     while (n_unclassified_recv_req > 0)
+      {
+       // get the processor number and remove the completed request
+       // for the vector of requests
+       int req_num;
+       MPI_Waitany(n_unclassified_recv_req,&unclassified_recv_requests[0],
+                   &req_num,MPI_STATUS_IGNORE);
+       unsigned p = unclassified_recv_proc[req_num];
+       unclassified_recv_requests.erase(unclassified_recv_requests.begin()
+                                        +req_num);    
+       unclassified_recv_proc.erase(unclassified_recv_proc.begin()+req_num);
+       n_unclassified_recv_req--;
+       
+       // next classify the dofs 
+       // and store them for sending to other processors if required
+       unsigned n_recv = n_unclassified_recv[p];
+       for (unsigned i = 0; i < n_recv; i++)
+        {
+         unsigned eqn_number = unclassified_indices_recv[p][i];
+         // bypass non velocity DOFs
+         if ( this->block_number(eqn_number)==0 )
+          {
+           
+           // get the index in the block
+           unsigned index = this->index_in_block(eqn_number);
+           
+           // determine which processor requires the block index
+           for (unsigned pp = 0; pp < nproc; pp++)
+            {
+             
+             
+             if (index >= velocity_dist_pt->first_row(pp) &&
+                 (index < 
+                  (velocity_dist_pt->first_row(pp)
+                   +velocity_dist_pt->nrow_local(pp))))
+              {
+               
+               // if it is required by this processor then add the 
+               // contribution
+               if (pp == my_rank)
+                {
+                 m_values[index-first_row]
+                  += unclassified_contributions_recv[p][i];
+                }
+               // other wise store it for communication
+               else
+                {
+                 double v = unclassified_contributions_recv[p][i];
+                 classified_contributions_send[pp].push_back(v);
+                 classified_indices_send[pp].push_back(index);
+                }
+              }
+            }
+          }
+        }
+       
+       // clean up
+       delete[] unclassified_contributions_recv[p];
+       delete[] unclassified_indices_recv[p];
+      }
+     
+     // now all indices have been classified
+     
+     // next the classified contributions are communicated to 
+     // processors that require them
+     
+     // first determine how many classified rows are to be sent to
+     // each processor
+     unsigned* n_classified_send = new unsigned[nproc];
+     for (unsigned p = 0; p < nproc; p++)
+      {
+       if (p == my_rank)
+        {
+         n_classified_send[p] = 0;
+        }
+       else
+        {
+         n_classified_send[p] 
+          = classified_contributions_send[p].size();
+        }
+      }
+     
+     // then all-to-all com number of classified to be sent / recv
+     unsigned* n_classified_recv = new unsigned[nproc];
+     MPI_Alltoall(n_classified_send,1,MPI_UNSIGNED,
+                  n_classified_recv,1,MPI_UNSIGNED,
+                  this->problem_pt()->communicator_pt()->mpi_comm());
+     
+     // allocate storage for the data to be recieved
+     // and post the sends and recvs
+     Vector<double*> classified_contributions_recv(nproc);
+     Vector<unsigned*> classified_indices_recv(nproc);
+     Vector<MPI_Request> classified_recv_requests;
+     Vector<MPI_Request> classified_send_requests;
+     Vector<unsigned> classified_recv_proc;
+     for (unsigned p = 0; p < nproc; p++)
+      {
+       if (p != my_rank)
+        {
+         // recv
+         if (n_classified_recv[p] > 0)
+          {
+           classified_contributions_recv[p] 
+            = new double[n_classified_recv[p]];
+           classified_indices_recv[p] = new unsigned[n_classified_recv[p]];
+           
+           // data for the struct data type
+           MPI_Datatype recv_types[2];
+           MPI_Aint recv_displacements[2];
+           int recv_sz[2];
+           
+           // contributions
+           MPI_Type_contiguous(n_classified_recv[p],MPI_DOUBLE,
+                               &recv_types[0]);
+           MPI_Type_commit(&recv_types[0]);
+           MPI_Address(classified_contributions_recv[p],
+                       &recv_displacements[0]);
+           recv_displacements[0] -= base_displacement;
+           recv_sz[0] = 1;
+           
+           // indices
+           MPI_Type_contiguous(n_classified_recv[p],MPI_UNSIGNED,
+                               &recv_types[1]);
+           MPI_Type_commit(&recv_types[1]);
+           MPI_Address(classified_indices_recv[p],
+                       &recv_displacements[1]);
+           recv_displacements[1] -= base_displacement;
+           recv_sz[1] = 1;
+           
+           // build the final recv type
+           MPI_Datatype final_recv_type;
+           MPI_Type_struct(2,recv_sz,recv_displacements,recv_types,
+                           &final_recv_type);
+           MPI_Type_commit(&final_recv_type);
+           
+           // and recv
+           MPI_Request req;
+           MPI_Irecv(m_values,1,final_recv_type,p,0,
+                     problem_pt->communicator_pt()->mpi_comm(),&req);
+           classified_recv_requests.push_back(req);
+           classified_recv_proc.push_back(p);
+           MPI_Type_free(&recv_types[0]);
+           MPI_Type_free(&recv_types[1]);
+           MPI_Type_free(&final_recv_type);
+          }
+         
+         // send
+         if (n_classified_send[p] > 0)
+          {
+           // data for the struct data type
+           MPI_Datatype send_types[2];
+           MPI_Aint send_displacements[2];
+           int send_sz[2];
+           
+           // contributions
+           MPI_Type_contiguous(n_classified_send[p],MPI_DOUBLE,
+                               &send_types[0]);
+           MPI_Type_commit(&send_types[0]);
+           MPI_Address(&classified_contributions_send[p][0],
+                       &send_displacements[0]);
+           send_displacements[0] -= base_displacement;
+           send_sz[0] = 1;
+           
+           // indices
+           MPI_Type_contiguous(n_classified_send[p],MPI_UNSIGNED,
+                               &send_types[1]);
+           MPI_Type_commit(&send_types[1]);
+           MPI_Address(&classified_indices_send[p][0],
+                       &send_displacements[1]);
+           send_displacements[1] -= base_displacement;
+           send_sz[1] = 1;
+           
+           // build the final send type
+           MPI_Datatype final_send_type;
+           MPI_Type_struct(2,send_sz,send_displacements,send_types,
+                           &final_send_type);
+           MPI_Type_commit(&final_send_type);
+           
+           // and send
+           MPI_Request req;
+           MPI_Isend(m_values,1,final_send_type,p,0,
+                     problem_pt->communicator_pt()->mpi_comm(),&req);
+           classified_send_requests.push_back(req);
+           MPI_Type_free(&send_types[0]);
+           MPI_Type_free(&send_types[1]);
+           MPI_Type_free(&final_send_type);
+          }
+        }
+      }
+     
+     // next classify the data as it is received
+     unsigned n_classified_recv_req = classified_recv_requests.size();
+     while (n_classified_recv_req > 0)
+      {
+       // get the processor number and remove the completed request
+       // for the vector of requests
+       int req_num;
+       MPI_Waitany(n_classified_recv_req,&classified_recv_requests[0],
+                   &req_num,MPI_STATUS_IGNORE);
+       unsigned p = classified_recv_proc[req_num];
+       classified_recv_requests.erase(classified_recv_requests.begin()
+                                      +req_num);    
+       classified_recv_proc.erase(classified_recv_proc.begin()+req_num);
+       n_classified_recv_req--;
+       
+       // next classify the dofs 
+       // and store them for sending to other processors if required
+       unsigned n_recv = n_classified_recv[p];
+       for (unsigned i = 0; i < n_recv; i++)
+        {
+         m_values[classified_indices_recv[p][i]-first_row]
+          += classified_contributions_recv[p][i];
+        }
+       
+       // clean up
+       delete[] classified_contributions_recv[p];
+       delete[] classified_indices_recv[p];
+      }
+     
+     // wait for the unclassified sends to complete
+     unsigned n_unclassified_send_req = unclassified_send_requests.size();
+     MPI_Waitall(n_unclassified_send_req,&classified_send_requests[0],
+                 MPI_STATUS_IGNORE);
+     delete[] unclassified_contributions_send;
+     delete[] unclassified_indices_send;
+     
+     // wait for the classified sends to complete
+     unsigned n_classified_send_req = classified_send_requests.size();
+     MPI_Waitall(n_classified_send_req,&classified_send_requests[0],
+                 MPI_STATUS_IGNORE);
+     delete[] classified_indices_send;
+     delete[] classified_contributions_send;
+#endif
+   }
+
+  // or if the problem is not distributed
+  else
+   {
+
+    // find number of elements
+    unsigned n_el = Mesh_pt[0]->nelement();
+    
+    // get the contribution for each element
+    for (unsigned e = 0; e < n_el; e++)
+     {
+      
+      // find number of degrees of freedom in the element
+      // (this is slightly too big because it includes the
+      // pressure dofs but this doesn't matter)
+      unsigned el_dof = Mesh_pt[0]->element_pt(e)->ndof();
+
+      // allocate local storage for the element's contribution to the
+      // velocity mass matrix diagonal
+      Vector<double> el_vmm_diagonal(el_dof);
+      
+      // get the element contribution
+      if (dim==2)
+       {
+      dynamic_cast< NavierStokesEquations<2>* >
+       ( Mesh_pt[0]->element_pt(e) )
+       ->get_velocity_mass_matrix_diagonal(el_vmm_diagonal);
+       }
+      else
+       {
+        dynamic_cast< NavierStokesEquations<3>* >
+         ( Mesh_pt[0]->element_pt(e) )
+         ->get_velocity_mass_matrix_diagonal(el_vmm_diagonal);
+       }
+
+      // get the contribution for each dof
+      for (unsigned i = 0; i < el_dof; i++)
+       {
+        //Get the equation number
+        unsigned eqn_number = Mesh_pt[0]->element_pt(e)->eqn_number(i);
+        
+        // bypass non velocity DOFs
+        if ( this->block_number(eqn_number)==0 )
+         {
+
+          // get the index in the block
+          unsigned index = this->index_in_block(eqn_number);
+          
+          // if it is required on this processor
+          if (index >= first_row &&
+              index < first_row + nrow_local)
+           {
+            m_values[index-first_row] += el_vmm_diagonal[i];
+           }
+         }
+       }
+     } 
+   }
+
+  // create column index and row start
+  int* m_column_index = new int[nrow_local];
+  int* m_row_start = new int[nrow_local+1];
+  for (unsigned i = 0; i < nrow_local; i++)
+   {
+    m_values[i] = 1 / m_values[i];
+    m_column_index[i] = first_row + i;
+    m_row_start[i] = i;
+   }
+  m_row_start[nrow_local] = nrow_local;
+  
+  // build the matrix
+  CRDoubleMatrix* m_pt = new CRDoubleMatrix(this->block_distribution_pt(0));
+  m_pt->rebuild_matrix_without_copy(nrow,nrow_local,m_values,m_column_index,
+                                    m_row_start);
+  
+  // return the matrix;
+  return m_pt;   
  }
-
-
-
 
 //=========================================================================
 /// Helper function to delete preconditioner data.
 //=========================================================================
  void NavierStokesLSCPreconditioner::clean_up_memory()
  {
-
   if (Preconditioner_has_been_setup)
    {
     // delete blocks
-    unsigned nr = Block_matrix_pt.nrow();
-    unsigned nc = Block_matrix_pt.ncol();
-    for (unsigned i = 0 ; i < nr; i++)
-     for (unsigned j = 0 ; j < nc; j++)
-      {
-       delete Block_matrix_pt(i,j);
-       Block_matrix_pt(i,j) = 0;
-      }
+    delete Block_matrix_0_1_pt;
+    Block_matrix_0_1_pt = 0;  
 
     // delete stuff from velocity solve
-    if (F_preconditioner_pt!=0)
+    if (Using_default_f_preconditioner)
      {
-      F_preconditioner_pt->clean_up_memory();
+      delete F_preconditioner_pt;
+      F_preconditioner_pt = 0;
      }
 
     // delete stuff from Schur complement approx
     delete P_matrix_pt;
     P_matrix_pt = 0;
-    if (P_preconditioner_pt!=0)
+    if (Using_default_p_preconditioner)
      {
-      P_preconditioner_pt->clean_up_memory();
+      delete P_preconditioner_pt;
+      P_preconditioner_pt = 0;
      }
    }
-   
-   // clean up memory in default preconditioners
-   F_superlu_preconditioner.clean_up_memory();
-   P_superlu_preconditioner.clean_up_memory();
-
  }
 }

@@ -96,6 +96,7 @@ class AssemblyHandler
 };
 
 
+
 //=============================================================
 /// A class that is used to define the functions used to
 /// assemble and invert the mass matrix when taking an explicit
@@ -141,7 +142,7 @@ class ExplicitTimeStepHandler : public AssemblyHandler
 };
 
 
- 
+
 //=============================================================
 /// A class that is used to define the functions used to
 /// assemble the elemental contributions to the 
@@ -203,10 +204,10 @@ class BlockFoldLinearSolver : public LinearSolver
  Problem* Problem_pt;
  
  ///Pointer to the storage for the vector alpha
- Vector<double> *Alpha_pt;
+ DoubleVector *Alpha_pt;
 
  ///Pointer to the storage for the vector e
- Vector<double> *E_pt;
+ DoubleVector *E_pt;
 
 public:
  
@@ -218,10 +219,10 @@ public:
  ~BlockFoldLinearSolver();
 
  /// The solve function uses the block factorisation
- void solve(Problem* const &problem_pt, Vector<double> &result);
+ void solve(Problem* const &problem_pt, DoubleVector &result);
 
  /// The resolve function also uses the block factorisation
- void resolve(const Vector<double> &rhs, Vector<double> &result);
+ void resolve(const DoubleVector &rhs, DoubleVector &result);
 
  /// Access function to the original linear solver
  LinearSolver* linear_solver_pt() const {return Linear_solver_pt;}
@@ -321,10 +322,10 @@ class BlockPitchForkLinearSolver : public LinearSolver
  Problem* Problem_pt;
 
  ///Pointer to the storage for the vector alpha
- Vector<double> *Alpha_pt;
+ DoubleVector *Alpha_pt;
 
  ///Pointer to the storage for the vector e
- Vector<double> *E_pt;
+ DoubleVector *E_pt;
 
 public:
  
@@ -337,10 +338,10 @@ public:
  ~BlockPitchForkLinearSolver();
 
  /// The solve function uses the block factorisation
- void solve(Problem* const &problem_pt, Vector<double> &result);
+ void solve(Problem* const &problem_pt, DoubleVector &result);
 
  /// The resolve function also uses the block factorisation
- void resolve(const Vector<double> &rhs, Vector<double> &result);
+ void resolve(const DoubleVector &rhs, DoubleVector &result);
 
  /// Access function to the original linear solver
  LinearSolver* linear_solver_pt() const {return Linear_solver_pt;}
@@ -409,7 +410,7 @@ public:
   ///Constructor, initialise the systems
   PitchForkHandler(Problem* const &problem_pt, 
                    double* const &parameter_pt,
-                   const Vector<double> &symmetry_vector);
+                   const DoubleVector &symmetry_vector);
   
   /// Destructor, return the problem to its original state,
   /// before the augmented system was added
@@ -455,13 +456,13 @@ class BlockHopfLinearSolver : public LinearSolver
  Problem* Problem_pt;
 
  ///Pointer to the storage for the vector a
- Vector<double> *A_pt;
+ DoubleVector *A_pt;
 
- ///Pointer to the storage for the vector e
- Vector<double> *E_pt;
+ ///Pointer to the storage for the vector e (0 to n-1)
+ DoubleVector *E_pt;
 
- ///Pointer to the storage for the vector g
- Vector<double> *G_pt;
+ ///Pointer to the storage for the vector g (0 to n-1)
+ DoubleVector *G_pt;
 
 public:
  
@@ -475,15 +476,15 @@ public:
 
  /// Solve for two right hand sides
  void solve_for_two_rhs(Problem* const &problem_pt,
-                        Vector<double> &result,
-                        const Vector<double> &rhs2,
-                        Vector<double> &result2);
+                        DoubleVector &result,
+                        const DoubleVector &rhs2,
+                        DoubleVector &result2);
 
  /// The solve function uses the block factorisation
- void solve(Problem* const &problem_pt, Vector<double> &result);
+ void solve(Problem* const &problem_pt, DoubleVector &result);
 
  /// The resolve function also uses the block factorisation
- void resolve(const Vector<double> &rhs, Vector<double> &result);
+ void resolve(const DoubleVector &rhs, DoubleVector &result);
 
  /// Access function to the original linear solver
  LinearSolver* linear_solver_pt() const {return Linear_solver_pt;}
@@ -557,8 +558,8 @@ class HopfHandler : public AssemblyHandler
   /// Constructor with initial guesses for the frequency and null
   /// vectors, such as might be provided by an eigensolver
   HopfHandler(Problem* const &problem_pt, double* const &paramter_pt,
-              const double &omega, const Vector<double> &phi,
-              const Vector<double> &psi);
+              const double &omega, const DoubleVector &phi,
+              const DoubleVector &psi);
 
   /// Destructor, return the problem to its original state,
   /// before the augmented system was added

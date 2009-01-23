@@ -30,17 +30,14 @@ face_element_as_geometric_object.cc \
 eigen_solver.cc \
 triangle_scaffold_mesh.cc  geompack_scaffold_mesh.cc \
 tetgen_scaffold_mesh.cc simple_cubic_scaffold_tet_mesh.cc \
-iterative_linear_solver.cc preconditioner.cc block_preconditioner.cc \
-partitioning.cc
+partitioning.cc linear_algebra_distribution.cc double_vector.cc \
+iterative_linear_solver.cc \
+general_purpose_preconditioners.cc block_preconditioner.cc 
 
 if WANT_MPI
-sources += superlu_dist.c
+sources += superlu_dist_bridge.c preconditioner_array.cc
 endif
 
-#mpi sources
-if WANT_MPI
-sources += distribution_info.cc
-endif
 
 # Define the headers
 headers =  \
@@ -75,18 +72,19 @@ eigen_solver.h \
 Telements.h \
 triangle_scaffold_mesh.h geompack_scaffold_mesh.h tetgen_scaffold_mesh.h \
 pseudo_buckling_ring.h simple_cubic_scaffold_tet_mesh.h \
-iterative_linear_solver.h preconditioner.h  block_preconditioner.h \
-SuperLU_preconditioner.h  partitioning.h
+partitioning.h communicator.h linear_algebra_distribution.h double_vector.h \
+iterative_linear_solver.h preconditioner.h \
+general_purpose_preconditioners.h block_preconditioner.h \
+general_purpose_block_preconditioners.h SuperLU_preconditioner.h
+
+if WANT_MPI
+headers += preconditioner_array.h
+endif
 
 # Template-only files: Need to be included in include directory
 # but should not be listed in combined header file
 templates = \
 tree.template.cc
-
-#mpi headers
-if WANT_MPI
-headers += distribution_info.h distributed_vector.h
-endif
 
 # Do we have the HYPRE library?
 if HAVE_HYPRE

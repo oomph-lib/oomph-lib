@@ -40,6 +40,8 @@
 //oomph-lib headers
 #include "Vector.h"
 #include "oomph_utilities.h"
+#include "linear_algebra_distribution.h"
+#include "double_vector.h"
 
 #ifdef HAVE_TRILINOS
 #include "trilinos_helpers.h"
@@ -47,8 +49,6 @@
 
 #ifdef OOMPH_HAS_MPI
 #include "mpi.h"
-#include "distribution_info.h"
-#include "distributed_vector.h"
 #endif
 
 namespace oomph
@@ -181,11 +181,11 @@ class Matrix
 //Forward definition of the linear solver class
  class LinearSolver; 
 
-//===================================================================
+//=============================================================================
 /// \short Abstract base class for matrices of doubles -- adds 
 /// abstract interfaces for solving, LU decomposition and 
 /// multiplication by vectors.
-//===================================================================
+//=============================================================================
 class DoubleMatrixBase
 {
   protected:
@@ -238,39 +238,57 @@ class DoubleMatrixBase
  /// \short Complete LU solve (replaces matrix by its LU decomposition
  /// and overwrites RHS with solution). The default should not need
  /// to be over-written
+ void solve(DoubleVector &rhs);
+
+ /// \short Complete LU solve (Nothing gets overwritten!). The default should
+ /// not need to be overwritten
+ void solve(const DoubleVector &rhs, DoubleVector &soln);
+
+ /// \short Complete LU solve (replaces matrix by its LU decomposition
+ /// and overwrites RHS with solution). The default should not need
+ /// to be over-written
  void solve(Vector<double> &rhs);
 
  /// \short Complete LU solve (Nothing gets overwritten!). The default should
  /// not need to be overwritten
  void solve(const Vector<double> &rhs, Vector<double> &soln);
- 
+
  /// \short Find the residual, i.e. r=b-Ax the residual
- virtual void residual(const Vector<double> &x, const Vector<double> &b, 
-                       Vector<double> &residual)=0;
+ virtual void residual(const DoubleVector &x, const DoubleVector &b, 
+                       DoubleVector &residual)
+  {
+   // compute residual = Ax
+   this->multiply(x,residual);
+
+   // set residual to -residual (-Ax)
+   unsigned nrow_local = residual.nrow_local();
+   double* residual_pt = residual.values_pt();
+   for (unsigned i = 0; i < nrow_local; i++)
+    {
+     residual_pt[i] = -residual_pt[i];
+    }
+
+   // set residual = b + residuals
+   residual += b;
+  }
  
  /// \short Find the maximum residual r=b-Ax -- generic version, can be 
  /// overloaded for specific derived classes where the
  /// max. can be determined "on the fly"
- virtual double max_residual(const Vector<double> &x, 
-                             const Vector<double> &rhs)
+ virtual double max_residual(const DoubleVector &x, 
+                             const DoubleVector &rhs)
   {
-   unsigned long n=rhs.size();
-   Vector<double> res(n);
+   DoubleVector res;
    residual(x,rhs,res);
-   double ans=0.0;
-   for (unsigned long i=0;i<n;i++)
-    {
-     ans = std::max(ans,res[i]);
-    }
-   return ans;
+   return res.max();
   }
 
  /// \short Multiply the matrix by the vector x: soln=Ax.
- virtual void multiply(const Vector<double> &x, Vector<double> &soln)=0;
+ virtual void multiply(const DoubleVector &x, DoubleVector &soln)=0;
 
  /// \short Multiply the  transposed matrix by the vector x: soln=A^T x
- virtual void multiply_transpose(const Vector<double> &x,
-                                 Vector<double> &soln)=0;
+ virtual void multiply_transpose(const DoubleVector &x,
+                                 DoubleVector &soln)=0;
   
 
  /// \short For every row, find the maximum absolute value of the
@@ -284,9 +302,11 @@ class DoubleMatrixBase
 };
 
 
-/////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
 
 
 //======================================================================
@@ -710,11 +730,11 @@ class CRMatrix : public SparseMatrix<T, CRMatrix<T> >
  /// Wipe matrix data and set all values to 0.
  void clean_up_memory();
 
- /// \short Build matrix from compressed representation.
- /// Number of nonzero entries is read
- /// off from value, so make sure the vector has been shrunk
- /// to its correct length. The number of rows and columns must
- /// be passed as the final arguments.
+ /// \short Build matrix from compressed representation. Number of nonzero 
+ /// entries is read off from value, so make sure the vector has been shrunk
+ /// to its correct length. This matrix forms the storage for CRDoubleMatrices
+ /// which are distributable. The argument n should be the number of local
+ /// rows. The argument m is the number of columns
  void build(const Vector<T>& value, const Vector<int>& column_index,
             const Vector<int>& row_start, 
             const unsigned long &n,
@@ -749,11 +769,13 @@ class CRMatrix : public SparseMatrix<T, CRMatrix<T> >
 class SuperLU;
 
 
-//=================================================================
-/// \short A class for compressed row matrices
-//=================================================================
-class CRDoubleMatrix : public CRMatrix<double>,
-                       public DoubleMatrixBase
+//=============================================================================
+/// \short A class for compressed row matrices. This is a distributable 
+/// object.
+//=============================================================================
+class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
+                       public DoubleMatrixBase,
+                       public DistributableLinearAlgebraObject
 {
  
   public:
@@ -761,20 +783,23 @@ class CRDoubleMatrix : public CRMatrix<double>,
  /// Default constructor
  CRDoubleMatrix();
 
- /// \short Constructor: Pass vector of values, vector of column indices,
+ /// \short Constructor: vector of values, vector of column indices,
  /// vector of row starts and number of rows and columns.
- CRDoubleMatrix(const Vector<double>& value, 
+ CRDoubleMatrix(const LinearAlgebraDistribution* distribution_pt,
+                const unsigned& ncol,
+                const Vector<double>& value, 
                 const Vector<int>& column_index,
-                const Vector<int>& row_start,
-                const unsigned long &n,
-                const unsigned long &m);
+                const Vector<int>& row_start);
 
+ /// \short Constructor: just stores the distribution but does not build the
+ /// matrix
+ CRDoubleMatrix(const LinearAlgebraDistribution* distribution_pt);
+ 
  /// Broken copy constructor
  CRDoubleMatrix(const CRDoubleMatrix& matrix) 
   {
    BrokenCopy::broken_copy("CRDoubleMatrix");
   } 
-
 
  /// Broken assignment operator
  void operator=(const CRDoubleMatrix&) 
@@ -783,57 +808,131 @@ class CRDoubleMatrix : public CRMatrix<double>,
   }
 
  /// Destructor
- virtual ~CRDoubleMatrix();
+ virtual ~CRDoubleMatrix()
+  {
+   this->clear();
+  }
+ 
+ /// \short build method: vector of values, vector of column indices,
+ /// vector of row starts and number of rows and columns.
+ void rebuild(const LinearAlgebraDistribution* distribution_pt,
+              const unsigned& ncol,
+              const Vector<double>& value, 
+              const Vector<int>& column_index,
+              const Vector<int>& row_start);
+ 
+ /// rebuild the matrix - assembles an empty matrix will a defined distribution
+ void rebuild(const LinearAlgebraDistribution* distribution_pt);
 
-   /// Return the number of rows of the matrix
- inline unsigned long nrow() const {return CRMatrix<double>::nrow();}
+ /// \short keeps the existing distribution and just matrix that is stored
+ void rebuild_matrix(const unsigned& ncol,
+                     const Vector<double>& value,
+                     const Vector<int>& column_index,
+                     const Vector<int>& row_start);
+
+ /// \short keeps the existing distribution and just matrix that is stored
+ /// without copying the matrix data
+ void rebuild_matrix_without_copy(const unsigned& ncol,
+                                  const unsigned& nnz,
+                                  double* value,
+                                  int* column_index,
+                                  int* row_start);
+
+ /// \short clear
+ void clear();
+
+ /// Return the number of rows of the matrix
+ inline unsigned long nrow() const
+  {
+   return Distribution_pt->nrow();
+  }
  
  /// Return the number of columns of the matrix
- inline unsigned long ncol() const {return CRMatrix<double>::ncol();}
+ inline unsigned long ncol() const
+  {
+   return CR_matrix.ncol();
+  }
 
- /// Overload the round-bracket access operator for read-only access
+ /// \short Indexed output function to print a matrix to the 
+ /// stream outfile as i,j,a(i,j) for a(i,j)!=0 only
+ void sparse_indexed_output(std::ostream &outfile)
+  {
+   CR_matrix.sparse_indexed_output(outfile);
+  }
+
+  /// \short Indexed output function to print a matrix to a
+  /// file as i,j,a(i,j) for a(i,j)!=0 only. Specify filename.
+  void sparse_indexed_output(std::string filename)
+   {
+    // Open file
+    std::ofstream some_file;
+    some_file.open(filename.c_str());
+    sparse_indexed_output(some_file);
+    some_file.close();
+   }
+
+ /// Overload the round-bracket access operator for read-only access. In a 
+ /// distributed matrix i refers to the local row index. 
  inline const double& operator()(const unsigned long &i, 
                                  const unsigned long &j) 
-  const {return CRMatrix<double>::get_entry(i,j);}
+  const {return CR_matrix.get_entry(i,j);}
  
- /// \short LU decomposition using SuperLU (default linear solver)
+ /// Access to C-style row_start array
+ int* row_start() {return CR_matrix.row_start();}
+
+ /// Access to C-style row_start array (const version)
+ const int* row_start() const {return CR_matrix.row_start();}
+
+ /// Access to C-style column index array
+ int* column_index() {return CR_matrix.column_index();}
+
+ /// Access to C-style column index array (const version)
+ const int* column_index() const {return CR_matrix.column_index();}
+
+ /// Access to C-style value array
+ double* value() {return CR_matrix.value();}
+ 
+ /// Access to C-style value array (const version)
+ const double* value() const {return CR_matrix.value();}
+
+ /// Return the number of nonzero entries
+ inline unsigned long nnz() const {return CR_matrix.nnz();}
+ 
+ /// \short LU decomposition using SuperLU if matrix is not distributed or
+ /// distributed onto a single processor.
  virtual void ludecompose();
 
  /// \short LU back solve for given RHS
- virtual void lubksub(Vector<double> &rhs);
-
- /// \short Find the residual to x of Ax=b, i.e. r=b-Ax
- void residual(const Vector<double> &x, const Vector<double> &b, 
-               Vector<double> &residual);
-
- /// \short Work out residual vector r = b-Ax for candidate solution x
- /// and return max. entry in residual vector.
- double residual(const Vector<double>& x,
-                 const Vector<double>& b); 
+ virtual void lubksub(DoubleVector &rhs);
 
  /// \short Multiply the matrix by the vector x: soln=Ax
- void multiply(const Vector<double> &x, Vector<double> &soln);  
+ void multiply(const DoubleVector& x, DoubleVector& soln);  
 
 
  /// \short Multiply the  transposed matrix by the vector x: soln=A^T x
- void multiply_transpose(const Vector<double> &x,
-                         Vector<double> &soln);
+ void multiply_transpose(const DoubleVector& x,
+                         DoubleVector& soln);
 
 
- /// \short Function to multiply this matrix by the CRDoubleMatrix matrix_in
- /// The multiplication method used can be selected using the flag
- /// Matrix_matrix_multiply_method. By default Method 2 is used.
+ /// \short Function to multiply this matrix by the CRDoubleMatrix matrix_in.\n
+ /// In a serial matrix, there are 4 methods available: \n
  /// Method 1: First runs through this matrix and matrix_in to find the storage
  ///           requirements for result - arrays of the correct size are 
  ///           then allocated before performing the calculation.
- ///           Minimises memory requirements but more costly.
+ ///           Minimises memory requirements but more costly. \n
  /// Method 2: Grows storage for values and column indices of result 'on the
  ///           fly' using an array of maps. Faster but more memory
- ///           intensive.
+ ///           intensive. \n
  /// Method 3: Grows storage for values and column indices of result 'on the
  ///           fly' using a vector of vectors. Not particularly impressive
- ///           on the platforms we tried...
-void multiply(const CRDoubleMatrix& matrix_in, CRDoubleMatrix& result);
+ ///           on the platforms we tried... \n
+ /// Method 4: Trilinos Epetra Matrix Matrix multiply.\n
+ /// Method 5: Trilinox Epetra Matrix Matrix Mulitply (ml based) \m
+ /// If Trilinos is installed then Method 4 is employed by default, otherwise
+ /// Method 2 is employed by default. \n
+ /// In a distributed matrix, only Trilinos Epetra Matrix Matrix multiply
+ /// is available.
+ void multiply(CRDoubleMatrix& matrix_in, CRDoubleMatrix& result);
  
   
  /// \short For every row, find the maximum absolute value of the
@@ -844,264 +943,63 @@ void multiply(const CRDoubleMatrix& matrix_in, CRDoubleMatrix& result);
  void matrix_reduction(const double &alpha,
                        CRDoubleMatrix& reduced_matrix);
 
- /// \short Access function to Matrix_matrix_multiply_method, the flag
- /// which determines the matrix matrix multiplication method used.
+ /// \short Access function to Serial_matrix_matrix_multiply_method, the flag
+ /// which determines the matrix matrix multiplication method used for serial 
+ /// matrices.
  /// Method 1: First runs through this matrix and matrix_in to find the storage
  ///           requirements for result - arrays of the correct size are 
  ///           then allocated before performing the calculation.
- ///           Minimises memory requirements but more costly.
+ ///           Minimises memory requirements but more costly. \n
  /// Method 2: Grows storage for values and column indices of result 'on the
  ///           fly' using an array of maps. Faster but more memory
- ///           intensive.
+ ///           intensive. \n
  /// Method 3: Grows storage for values and column indices of result 'on the
  ///           fly' using a vector of vectors. Not particularly impressive
- ///           on the platforms we tried...
- unsigned& matrix_matrix_multiply_method() 
+ ///           on the platforms we tried... \n
+ /// Method 4: Trilinos Epetra Matrix Matrix multiply.\n
+ /// Method 5: Trilinos Epetra Matrix Matrix multiply (ML based).\n
+ unsigned& serial_matrix_matrix_multiply_method() 
   { 
-   return Matrix_matrix_multiply_method; 
+   return Serial_matrix_matrix_multiply_method; 
   }
+
+ /// \short Access function to Distributed_matrix_matrix_multiply_method, the 
+ /// flag which determines the matrix matrix multiplication method used for 
+ /// distributed matrices.
+ /// Method 1: Trilinos Epetra Matrix Matrix multiply.\n
+ /// Method 2: Trilinos Epetra Matrix Matrix multiply (ML based).\n
+ unsigned& distributed_matrix_matrix_multiply_method() 
+  { 
+   return Distributed_matrix_matrix_multiply_method; 
+  }
+
+ /// \short access function to the Built flag - indicates whether the matrix
+ /// has been build - i.e. the distribution has been defined and the matrix
+ /// assembled.
+ bool built() const { return Built; } 
+
+/// \short if this matrix is distributed then a the equivalent global matrix 
+/// is built using new and returned. The calling method is responsible for the 
+/// destruction of the new matrix.
+ CRDoubleMatrix* return_global_matrix();
 
  private:
 
- /// Flag to determine which matrix-matrix multiplication method is used.
- unsigned Matrix_matrix_multiply_method;
+ /// \short Flag to determine which matrix-matrix multiplication method is used
+ /// (for serial (or global) matrices)
+ unsigned Serial_matrix_matrix_multiply_method;
 
+ /// \short Flag to determine which matrix-matrix multiplication method is used
+ /// (for distributed matrices) 
+ unsigned Distributed_matrix_matrix_multiply_method;
+
+ /// Storage for the Matrix in CR Format
+ CRMatrix<double> CR_matrix;
+
+ /// \short Flag to indicate whether the matrix has been built - i.e. the 
+ /// distribution has been setup AND the matrix has been assembled. 
+ bool Built;
 };
-
-#ifdef OOMPH_HAS_MPI
-
-//=============================================================================
-/// \short A class for distributed compressed row matrices. Each processor 
-/// only stores a block of rows that make up the complete matrix. 
-//=============================================================================
-class DistributedCRDoubleMatrix : public CRDoubleMatrix
-{
-
-public:
-
- /// Default Constructor - empty matrix and the distribution is not setup
- DistributedCRDoubleMatrix(); 
-
- /// Constructor 
- DistributedCRDoubleMatrix(const DistributionInfo& distribution)
-  : Matrix_distribution(distribution)
-  {};
-
- /// \short Constructor: Pass vector of values, vector of column indices,
- /// and vector of row starts. Since the rows of the matrix are 
- /// distributed over several processors we also need to pass the 
- /// number of the first row and the number of local rows stored here. 
- /// n and m are the total number of rows and columns. 
- /// \b NOTE: Number of nonzero entries is read
- /// off from value, so make sure the vector has been shrunk
- /// to its correct length.
- DistributedCRDoubleMatrix(const Vector<double>& value, 
-                           const Vector<int>& column_index,
-                           const Vector<int>& row_start, 
-                           const DistributionInfo& distribution,
-                           const unsigned& n_col);
-
- /// Destructor (empty all the clean up happens in the base claases)
- virtual ~DistributedCRDoubleMatrix() {}
- 
- /// \short Broken copy constructor
- DistributedCRDoubleMatrix(const DistributedCRDoubleMatrix& source_matrix)
-  {
-   BrokenCopy::broken_copy("DistributedCRDoubleMatrix");
-  }
-
- /// Broken assignment operator
- void operator=(const DistributedCRDoubleMatrix&) 
-  {
-   BrokenCopy::broken_assign("DistributedCRDoubleMatrix");
-  }
-
- /// \short Build matrix from compressed representation:
- /// Pass vector of values, vector of column indices,
- /// and vector of row starts. Since the rows of the matrix are 
- /// distributed over several processors we also need to pass the 
- /// number of the first row and the number of local rows stored here. 
- /// n and m are the total number of rows and columns. 
- /// \b NOTE: Number of nonzero entries is read
- /// off from value, so make sure the vector has been shrunk
- /// to its correct length.
- void build(const Vector<double>& value,
-            const Vector<int>& column_index,
-            const Vector<int>& row_start,
-            const DistributionInfo& distribution,
-            const unsigned& n_col);
-
- /// Delete data and set values to 0.
- void clean_up_memory();
-
- /// access function to first row 
- unsigned long first_row() const
-  { return Matrix_distribution.first_row(); }
- 
- /// access function to local_nrow
- unsigned long nrow_local() const
-  { return Matrix_distribution.nrow_local(); }
- 
- /// access function to global_nrow
- unsigned long nrow_global() const 
-  { return Matrix_distribution.nrow_global(); }
- 
-  /// access function to the distribution
-  DistributionInfo& distribution() { return Matrix_distribution; }
-
-  /// access function to the distribution (const version)
-  DistributionInfo distribution() const { return Matrix_distribution; }
-
- /// access function to setup
- bool setup() const { return Matrix_distribution.setup(); }
- 
- /// Overload round brackets to give access as a(i,j)
- double& operator()(const unsigned long &i, const unsigned long &j) 
-  {
-   std::ostringstream error_message;
-   error_message <<
-    "Broken -- needs to be re-implemented for distributed memory version" 
-                 << std::endl;
-   throw OomphLibError(error_message.str(),
-                       "DistributedCRDoubleMatrix::()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
- 
-
- /// Overload round brackets to give access as a(i,j) (const version)
- const double& operator()
-  (const unsigned long &i, const unsigned long &j) const;
-
- /// \short Indexed output function to print a matrix to the 
- /// stream outfile as i,j,a[i][j] for a[i][j]!=0 only
- void sparse_indexed_output(std::ostream &outfile)
-  {
-   for (unsigned long i=0; i< Matrix_distribution.nrow_local(); i++)
-    {
-     unsigned long row = Matrix_distribution.first_row() + i;
-     for (long j=Row_start[i];j<Row_start[i+1];j++)
-      {
-       outfile << row << " " << Column_index[j] << " " << this->Value[j]
-               << std::endl;
-      }
-    }
-  }
-
-
- /// \short Indexed output function to print a matrix to the 
- /// stream outfile as i,j,a[i][j] for a[i][j]!=0 only
- void sparse_indexed_output(std::ostream &outfile,
-                            const Vector<unsigned>& permute)
-  {
-   for (unsigned long i=0; i< Matrix_distribution.nrow_local(); i++)
-    {
-     unsigned long row = Matrix_distribution.first_row() + i;
-     for (long j=Row_start[i];j<Row_start[i+1];j++)
-      {
-       outfile << permute[row] << " " << permute[Column_index[j]]
-               << " " << this->Value[j]
-               << std::endl;
-      }
-    }
-  }
-
-
-
- /// \short Indexed output function to print a matrix to a 
- /// file as i,j,a[i][j] for a[i][j]!=0 only. Specify filename.
- void sparse_indexed_output(std::string filename)
-  {
-   // Open file
-   std::ofstream some_file;
-   some_file.open(filename.c_str());
-   sparse_indexed_output(some_file);
-   some_file.close();
-  }
-
- /// \short Find the residual, i.e. Ax-b=r the residual
- void residual(const Vector<double> &x, const Vector<double> &b, 
-                       Vector<double> &residual)
-  {
-   std::ostringstream error_message;
-   error_message <<
-    "Broken -- needs to be re-implemented for distributed memory version" 
-                 << std::endl;
-   throw OomphLibError(error_message.str(),
-                       "DistributedCRDoubleMatrix::residual()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
- 
-
- /// \short Find the maximum residual
- double residual(const Vector<double> &x, const Vector<double> &rhs)
-  {
-   std::ostringstream error_message;
-   error_message <<
-    "Broken -- needs to be re-implemented for distributed memory version" 
-                 << std::endl;
-   throw OomphLibError(error_message.str(),
-                       "DistributedCRDoubleMatrix::residual()",
-                       OOMPH_EXCEPTION_LOCATION);
-   return 0.0;
-  }
-
- /// \short Multiply the matrix by the vector x: soln=Ax.
- /// Currently this requires trilinos to be available. Will break
- /// otherwise.
- /// The vectors x and soln are both distributed vectors
- void multiply(const DistributedVector<double> &x, 
-               DistributedVector<double> &soln);
-
- /// \short Multiply the  transposed matrix by the vector x: soln=A^T x BROKEN
- void multiply_transpose(const DistributedVector<double> &x,
-                         DistributedVector<double> &soln)
-  {
-   throw OomphLibError("This function is not implemented yet",
-                       "DistributedCRDoubleMatrix()::multiply_transpose()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
-
- /// \short For every row, find the maximum absolute value of the
- /// entries in this row. Set all values that are less than alpha times
- /// this maximum to zero and return the resulting matrix in
- /// reduced_matrix. Note: Diagonal entries are retained regardless
- /// of their size.  BROKEN
- void matrix_reduction(const double &alpha,
-                       DoubleMatrixBase& reduced_matrix)
-  {
-   throw OomphLibError("This function is not implemented yet",
-                       "DistributedCRDoubleMatrix()::matrix_reduction()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
-
- /// \short Function to multiply this matrix by the DistributedCRDoubleMatrix 
- /// matrix_in. This function requires Trilinos.
- /// If the flag Matrix_matrix_multiply_using_ml is set to true the faster ML
- /// method is used in Trilinos (default value is false).
- void multiply(DistributedCRDoubleMatrix& matrix_in,
-               DistributedCRDoubleMatrix& result);
-
-
- /// \short Access function to Matrix_matrix_multiply_using_ml. If this flag
- /// is true the faster ML multiply function is used, otherwise the 
- /// EpetraExt::MatrixMatrix class function is used.
- bool& matrix_matrix_multiply_using_ml() 
-  { 
-   return Matrix_matrix_multiply_using_ml; 
-  }
-
- private: 
-
- /// the distribution of this matrix
- DistributionInfo Matrix_distribution;
-
- /// When set to true the faster ml matrix-matrix multiplication method is used
- /// by Trilinos. Default value is false.
- bool Matrix_matrix_multiply_using_ml;
-
-
-}; //end of DistributedCRDoubleMatrix
-#endif
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1174,6 +1072,9 @@ class DenseDoubleMatrix : public DoubleMatrixBase,
  virtual void ludecompose();
 
  /// \short LU backsubstitution
+ virtual void lubksub(DoubleVector &rhs);
+
+ /// \short LU backsubstitution
  virtual void lubksub(Vector<double> &rhs);
  
  /// \short Determine eigenvalues and eigenvectors, using
@@ -1183,19 +1084,13 @@ class DenseDoubleMatrix : public DoubleMatrixBase,
  void eigenvalues_by_jacobi(Vector<double> & eigen_val,
                             DenseMatrix<double> &eigen_vect) const;
  
- /// \short Find the residual of Ax=b, ie r=b-Ax for the
- /// "solution" x.
- void residual(const Vector<double>& x, const Vector<double>& rhs, 
-               Vector<double>& residual);
-
  /// \short Multiply the matrix by the vector x: soln=Ax 
- void multiply(const Vector<double> &x, Vector<double> &soln);
+ void multiply(const DoubleVector &x, DoubleVector &soln);
  
  /// \short Multiply the  transposed matrix by the vector x: soln=A^T x
- void multiply_transpose(const Vector<double> &x,
-                         Vector<double> &soln);
+ void multiply_transpose(const DoubleVector &x,
+                         DoubleVector &soln);
 
-  
  /// \short For every row, find the maximum absolute value of the
  /// entries in this row. Set all values that are less than alpha times
  /// this maximum to zero and return the resulting matrix in
@@ -1207,16 +1102,14 @@ class DenseDoubleMatrix : public DoubleMatrixBase,
  /// Function to multiply this matrix by a DenseDoubleMatrix matrix_in
  void multiply(const DenseDoubleMatrix& matrix_in,
                DenseDoubleMatrix& result);
- 
- /// \short Find the maximum residual of Ax=b, ie r=b-Ax
- /// for the "solution" x.
- double residual(const Vector<double> &x, const Vector<double> &b);
-
 };
 
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
+
+
+
 
 
 
@@ -2252,6 +2145,7 @@ class RankFiveTensor
 
 
 
+
 //////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////
@@ -2505,24 +2399,15 @@ class CCDoubleMatrix : public DoubleMatrixBase,
  virtual void ludecompose();
 
  /// \short LU back solve for given RHS
- virtual void lubksub(Vector<double> &rhs);
-
- /// \short Find the residulal to x of Ax=b, ie r=b-Ax
- void residual(const Vector<double> &x, const Vector<double> &b,
-               Vector<double> &residual);
-
- /// \short Work out residual vector r = b-Ax for candidate solution x
- /// and return max. entry in residual vector.
- double residual(const Vector<double> &x,
-                 const Vector<double> &b);
+ virtual void lubksub(DoubleVector &rhs);
 
  /// \short Multiply the matrix by the vector x: soln=Ax
- void multiply(const Vector<double> &x, Vector<double> &soln);
+ void multiply(const DoubleVector &x, DoubleVector &soln);
 
 
  /// \short Multiply the  transposed matrix by the vector x: soln=A^T x
- void multiply_transpose(const Vector<double> &x,
-                         Vector<double> &soln);
+ void multiply_transpose(const DoubleVector &x,
+                         DoubleVector &soln);
 
 
  /// \short Function to multiply this matrix by the CCDoubleMatrix matrix_in
@@ -2974,7 +2859,6 @@ void CCMatrix<T>::build(const Vector<T>& value,
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
-
 
 
 

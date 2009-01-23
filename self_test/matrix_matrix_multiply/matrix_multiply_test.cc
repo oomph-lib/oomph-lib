@@ -240,12 +240,11 @@ int main()
  problem2_pt->actions_before_newton_solve();
  
  // get Jacobians
- Vector<double> residual;
+ DoubleVector residual;
  CRDoubleMatrix* CR_matrix1_pt = new CRDoubleMatrix;
  CRDoubleMatrix* CR_matrix2_pt = new CRDoubleMatrix;
  CCDoubleMatrix* CC_matrix1_pt = new CCDoubleMatrix;
  CCDoubleMatrix* CC_matrix2_pt = new CCDoubleMatrix;
- residual.resize(problem1_pt->ndof());
  problem1_pt->get_jacobian(residual,*CR_matrix1_pt);
  problem1_pt->get_jacobian(residual,*CR_matrix2_pt);
  problem1_pt->get_jacobian(residual,*CC_matrix1_pt);
@@ -253,7 +252,6 @@ int main()
 
  DenseDoubleMatrix* D_matrix1_pt = new DenseDoubleMatrix;
  DenseDoubleMatrix* D_matrix2_pt = new DenseDoubleMatrix;
- residual.resize(problem2_pt->ndof());
  problem2_pt->get_jacobian(residual,*D_matrix1_pt);
  problem2_pt->get_jacobian(residual,*D_matrix2_pt);
 
@@ -276,15 +274,15 @@ int main()
       << " matrix" << endl;
  
  cout << "CRDoubleMatrix method 1 " << endl;
- CR_matrix1_pt->matrix_matrix_multiply_method()=1;
+ CR_matrix1_pt->serial_matrix_matrix_multiply_method()=1;
  CR_matrix1_pt->multiply(*CR_matrix2_pt, *CR_result1_pt);
 
  cout << "CRDoubleMatrix method 2 " << endl;
- CR_matrix1_pt->matrix_matrix_multiply_method()=2;
+ CR_matrix1_pt->serial_matrix_matrix_multiply_method()=2;
  CR_matrix1_pt->multiply(*CR_matrix2_pt, *CR_result2_pt);
 
  cout << "CRDoubleMatrix method 3 " << endl;
- CR_matrix1_pt->matrix_matrix_multiply_method()=3;
+ CR_matrix1_pt->serial_matrix_matrix_multiply_method()=3;
  CR_matrix1_pt->multiply(*CR_matrix2_pt, *CR_result3_pt);
 
  cout << "CCDoubleMatrix method 1 " << endl;

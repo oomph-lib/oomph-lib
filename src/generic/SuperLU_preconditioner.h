@@ -39,29 +39,29 @@ namespace oomph
 //====================================================================
 /// An interface to allow SuperLU to be used as an (exact) Preconditioner
 //====================================================================
-class SuperLU_Preconditioner : public Preconditioner, public SuperLU
+class SuperLUPreconditioner : public Preconditioner
 {
  public:
 
  /// Constructor.
- SuperLU_Preconditioner()
+ SuperLUPreconditioner()
   {}
  
  /// Destructor.
- ~SuperLU_Preconditioner()
+ ~SuperLUPreconditioner()
   {}
  
   /// Broken copy constructor.
-  SuperLU_Preconditioner(const SuperLU_Preconditioner&)
+  SuperLUPreconditioner(const SuperLUPreconditioner&)
   {
-   BrokenCopy::broken_copy("SuperLU_Preconditioner");
+   BrokenCopy::broken_copy("SuperLUPreconditioner");
   }
 
 
   /// Broken assignment operator.
-  void operator=(const SuperLU_Preconditioner&)
+  void operator=(const SuperLUPreconditioner&)
   {
-   BrokenCopy::broken_assign("SuperLU_Preconditioner");
+   BrokenCopy::broken_assign("SuperLUPreconditioner");
   }
 
   /// \short Function to set up a preconditioner for the linear
@@ -73,15 +73,28 @@ class SuperLU_Preconditioner : public Preconditioner, public SuperLU
    {
     oomph_info << "Setting up SuperLU (exact) preconditioner" 
                << std::endl;
-    factorise(matrix_pt);
+    if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt) != 0)
+     {
+      Distribution_pt->
+       rebuild((dynamic_cast<DistributableLinearAlgebraObject*>
+                (matrix_pt))->distribution_pt()->communicator_pt(),
+               matrix_pt->nrow(),false);
+     }
+    else
+     {
+      Distribution_pt->rebuild(problem_pt->communicator_pt(),matrix_pt->nrow(),
+                               false);
+     }
+    solver.factorise(matrix_pt);
+    solver.distribution_pt()->rebuild(Distribution_pt);
    }
   
   /// \short Function applies SuperLU to vector r for (exact) preconditioning,
   /// this requires a call to setup(...) first.
-  void preconditioner_solve(const Vector<double>&r,
-                            Vector<double> &z)
+  void preconditioner_solve(const DoubleVector&r,
+                            DoubleVector &z)
    {
-    resolve(r, z);
+    solver.resolve(r, z);
    }
   
 
@@ -89,127 +102,90 @@ class SuperLU_Preconditioner : public Preconditioner, public SuperLU
   /// SuperLU in its LinearSolver incarnation.
   virtual void clean_up_memory()
    {
-    SuperLU::clean_up_memory();
-   }
-
-};
-
-#ifdef OOMPH_HAS_MPI
-//====================================================================
-/// \short An interface to allow SuperLU_dist to be used as
-/// an (exact) Preconditioner for CRDoubleMatrix and
-/// DistributedCRDoubleMatrix classes.
-//====================================================================
-class SuperLU_dist_Preconditioner : public Preconditioner, public SuperLU_dist
-{
-  public:
- 
- /// Constructor.
- SuperLU_dist_Preconditioner()
-  {
-   Preconditioning_distributed_system = true;
-  }
- 
- /// Destructor.
- ~SuperLU_dist_Preconditioner()
-  {}
- 
- /// Broken copy constructor.
- SuperLU_dist_Preconditioner(const SuperLU_dist_Preconditioner&)
-  {
-   BrokenCopy::broken_copy("SuperLU_dist_Preconditioner");
-  }
- 
- 
- /// Broken assignment operator.
- void operator=(const SuperLU_dist_Preconditioner&)
-  {
-   BrokenCopy::broken_assign("SuperLU_dist_Preconditioner");
-  }
- 
- /// \short Function to set up a preconditioner for the linear
- /// system defined by matrix_pt. This function must be called
- /// before using preconditioner_solve.
- /// Note: matrix_pt must point to an object of class
- /// CRDoubleMatrix or CCDoubleMatrix
- void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
-  {
-   oomph_info << "Setting up SuperLU_dist (exact) preconditioner"
-              << std::endl;
-   
-   // Test the matrix type and record whether we are dealing with a 
-   // distributed system or not
-   if(dynamic_cast<DistributedCRDoubleMatrix*>(matrix_pt))
-    {
-     Preconditioning_distributed_system = true;
-    }
-   else if (dynamic_cast<CRDoubleMatrix*>(matrix_pt))
-    {
-     Preconditioning_distributed_system = false;
-    }
-   else
-    {
-     std::ostringstream error_message_stream;
-     error_message_stream << "SuperLU_dist_Preconditioner implemented only "
-                          << "for CRDoubleMatrix\n"
-                          << "and DistributedCRDoubleMatrix matrices\n";
-     throw OomphLibError(error_message_stream.str(),
-                         "SuperLU_dist_Preconditioner::setup()",
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-   factorise(matrix_pt);
-  }
-  
- /// \short Function applies SuperLU_dist to vector r for (exact)
- /// preconditioning, this requires a call to setup(...) first.
- void preconditioner_solve(const Vector<double>&r, Vector<double> &z)
-  {
-   // Switch off output for preconditioner solve
-   bool copy_of_Doc_time = Doc_time;
-   Doc_time = false;
-   
-   // Solve the system
-   if (Preconditioning_distributed_system)
-    {
-     // SuperLU_dist returns the global solution vector but we must
-     // return only the 'local' values 
-     Vector<double> global_z(ndof());
-     resolve(r, global_z);
-
-     // Copy local values from global_z
-     const unsigned nrow_local = ndof_local();
-     const unsigned first_local_row = first_local_dof();
-     z.resize(nrow_local);
-
-     for (unsigned i=0; i<nrow_local; i++)
-      {
-       z[i] = global_z[i+first_local_row];
-      }
-    }
-   else
-    {
-      // Call resolve, this returns the global Vector
-     resolve(r, z);
-    }
-   
-   // Reset Doc_time
-   Doc_time = copy_of_Doc_time;
-  }
-
-  /// \short Clean up memory -- forward the call to the version in
-  /// SuperLU_dist in its LinearSolver incarnation.
-  virtual void clean_up_memory()
-   {
-    SuperLU_dist::clean_up_memory();
+    solver.clean_up_memory();
    }
 
   private:
 
-  /// Flag to record whether we are dealing with a distributed system
-  bool Preconditioning_distributed_system;
+  /// \short the superLU solver emplyed by this preconditioner
+  SuperLU solver;
+};
 
+
+#ifdef OOMPH_HAS_MPI
+//====================================================================
+/// An interface to allow SuperLU_Dist to be used as an (exact) Preconditioner
+//====================================================================
+class SuperLUDistPreconditioner : public Preconditioner
+{
+ public:
+
+ /// Constructor.
+ SuperLUDistPreconditioner()
+  {}
+ 
+ /// Destructor.
+ ~SuperLUDistPreconditioner()
+  {}
+ 
+  /// Broken copy constructor.
+  SuperLUDistPreconditioner(const SuperLUDistPreconditioner&)
+  {
+   BrokenCopy::broken_copy("SuperLUDistPreconditioner");
+  }
+
+
+  /// Broken assignment operator.
+  void operator=(const SuperLUDistPreconditioner&)
+  {
+   BrokenCopy::broken_assign("SuperLUDistPreconditioner");
+  }
+
+  /// \short Function to set up a preconditioner for the linear
+  /// system defined by matrix_pt. This function must be called
+  /// before using preconditioner_solve.
+  /// Note: matrix_pt must point to an object of class
+  /// CRDoubleMatrix or CCDoubleMatrix
+  void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
+   {
+     oomph_info << "Setting up SuperLU Dist (exact) preconditioner" 
+		<< std::endl;
+     if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt) != 0)
+       {
+	 Distribution_pt
+	   ->rebuild(dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt)
+		     ->distribution_pt());
+       }
+     else
+       {
+	 Distribution_pt->rebuild(problem_pt->communicator_pt(),
+				  matrix_pt->nrow(),false);
+       }
+     solver.doc_time() = false;
+     solver.factorise(matrix_pt);
+     solver.distribution_pt()->rebuild(Distribution_pt);
+   }
+  
+  /// \short Function applies SuperLU_Dist to vector r for (exact) 
+  /// preconditioning, this requires a call to setup(...) first.
+  void preconditioner_solve(const DoubleVector &r, DoubleVector &z)
+   {
+    solver.resolve(r, z);
+   }
+  
+
+  /// \short Clean up memory -- forward the call to the version in
+  /// SuperLU_Dist in its LinearSolver incarnation.
+  virtual void clean_up_memory()
+   {
+    solver.clean_up_memory();
+   }
+
+  private:
+
+  /// \short the superLU solver emplyed by this preconditioner
+  SuperLU_dist solver;
 };
 #endif
-
 }
 #endif

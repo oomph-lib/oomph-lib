@@ -47,33 +47,32 @@ namespace oomph
 {
 
 
-//==================================================================
+//=============================================================================
 /// Solver: Takes pointer to problem and returns the results Vector
 /// which contains the solution of the linear system defined by
 /// the problem's fully assembled Jacobian and residual Vector.
-//==================================================================
-void DenseLU::solve(Problem* const &problem_pt, Vector<double> &result)
-{
- //Initialise timer
- clock_t t_start = clock();
- 
- //Find # of degrees of freedom (variables)
- const unsigned long n_dof = problem_pt->ndof();
-
- //Allocate storage for the residuals vector and the jacobian matrix
- Vector<double> residuals(n_dof);
- DenseDoubleMatrix jacobian(n_dof);
- 
+//=============================================================================
+ void DenseLU::solve(Problem* const &problem_pt, DoubleVector &result)
  {
+  //Initialise timer
+  double t_start = TimingHelpers::timer();
+  
+  //Find # of degrees of freedom (variables)
+  const unsigned n_dof = problem_pt->ndof();
+
+  //Allocate storage for the residuals vector and the jacobian matrix
+  DoubleVector residuals;
+  DenseDoubleMatrix jacobian(n_dof);
+  
   // initialise timer
-  clock_t t_start = clock();
+  double t_start_jacobian = TimingHelpers::timer();
   
   //Get the full jacobian and residuals of the problem
   problem_pt->get_jacobian(residuals,jacobian);
   
   // compute jacobian setup time
-  clock_t t_end = clock();
-  Jacobian_setup_time = double(t_end-t_start)/CLOCKS_PER_SEC;
+  double t_end_jacobian = TimingHelpers::timer();
+  Jacobian_setup_time = t_end_jacobian - t_start_jacobian;
 
   //Report the time
   if(Doc_time)
@@ -81,31 +80,33 @@ void DenseLU::solve(Problem* const &problem_pt, Vector<double> &result)
     oomph_info << std::endl << "CPU for setup of Dense Jacobian [sec]: " 
                << Jacobian_setup_time << std::endl;
    }
+
+  //Solve by dense LU decomposition VERY INEFFICIENT!
+  solve(&jacobian,residuals,result);
+  
+  //Set the sign of the determinant of the jacobian
+  problem_pt->sign_of_jacobian() = Sign_of_determinant_of_matrix;
+  
+  // Finalise/doc timings
+  double t_end = TimingHelpers::timer();
+  double total_time=t_end-t_start;
+  if(Doc_time)
+   {
+    oomph_info << "CPU for DenseLU LinearSolver [sec]: " 
+               << total_time << std::endl << std::endl;
+   }
  }
 
- //Solve by dense LU decomposition VERY INEFFICIENT!
- solve(&jacobian,residuals,result);
- 
- //Set the sign of the determinant of the jacobian
- problem_pt->sign_of_jacobian() = Sign_of_determinant_of_matrix;
- 
- // Finalise/doc timings
- clock_t t_end = clock();
- double total_time=double(t_end-t_start)/CLOCKS_PER_SEC;
- if(Doc_time)
-  {
-   oomph_info << "CPU for DenseLU LinearSolver [sec]: " 
-              << total_time << std::endl << std::endl;
-  }
-}
 
-
-//=======================================================================
+//=============================================================================
 /// Delete the storage that has been allocated for the LU factors, if
 /// the matrix data is not itself being overwritten.
-//======================================================================
+//=============================================================================
 void DenseLU::clean_up_memory()
 {
+ // delete the Distribution_pt
+ Distribution_pt->clear();
+
  //Clean up the LU factor storage, if it has been allocated
  //N.B. we don't need to check the index storage as well.
  if(LU_factors!=0)
@@ -118,32 +119,20 @@ void DenseLU::clean_up_memory()
    delete[] Index;
    //Null out
    Index=0;
-   //Reset the number of unknowns to zero
-   N_dof=0;
   }
 }
 
-//=======================================================================
+//=============================================================================
 /// LU decompose the matrix. The algorithm is adapted from that in
-/// "Numerical recipes in C" by Press et al.
-//======================================================================
+/// "Numerical recipes in C" by Press et al.\n
+/// WARNING: this class does not perform any PARANOID checks on the vectors - 
+/// these are all performed in the solve(...) method.
+//=============================================================================
 void DenseLU::factorise(DoubleMatrixBase* const &matrix_pt)
 {
  //Set the number of unknowns
  const unsigned long n = matrix_pt->nrow();
  
-#ifdef PARANOID
- unsigned long m = matrix_pt->ncol();
- // Check Matrix is square
- if (n!=m)
-  {
-   throw OomphLibError(
-    "Cannot LU decompose a non-square matrix",
-    "DenseLU::factorise()",
-    OOMPH_EXCEPTION_LOCATION);
-   }
-#endif 
-
  //Small constant
  const double TINY=1.0e-20;
 
@@ -182,7 +171,6 @@ void DenseLU::factorise(DoubleMatrixBase* const &matrix_pt)
  //the number of unknowns
  LU_factors = new double[n*n];
  Index = new long[n];
- N_dof = n;
 
  //Now we know that memory has been allocated, copy over
  //the matrix values
@@ -295,27 +283,21 @@ void DenseLU::factorise(DoubleMatrixBase* const &matrix_pt)
  Sign_of_determinant_of_matrix = sign;
  }
 
-//================================================================
+//=============================================================================
 /// Do the backsubstitution for the DenseLU solver. Again the 
 /// algorithm is based on that from "Numerical recipes in C"
-/// by Press et al.
-//================================================================
-void DenseLU::backsub(const Vector<double> &rhs,
-                      Vector<double> &result)
+/// by Press et al. \n
+/// WARNING: this class does not perform any PARANOID checks on the vectors - 
+/// these are all performed in the solve(...) method.
+//=============================================================================
+void DenseLU::backsub(const DoubleVector &rhs,
+                      DoubleVector &result)
 {
- const unsigned long n = rhs.size();
-#ifdef PARANOID
- if(N_dof != n)
-   {
-    throw OomphLibError(
-     "RHS does not have the same dimension as the linear system",
-     "DenseLU::backsub()",
-     OOMPH_EXCEPTION_LOCATION);
-   }
-#endif
+ const unsigned long n = rhs.nrow();
 
-  //Copy the rhs vector into the result vector
- for(unsigned long i=0;i<n;++i) {result[i] = rhs[i];}
+ //Copy the rhs vector into the result vector
+ for(unsigned long i=0;i<n;++i) 
+  {result[i] = rhs[i];}
  
  unsigned long ii=0;
  for(unsigned long i=0;i<n;i++)
@@ -347,50 +329,237 @@ void DenseLU::backsub(const Vector<double> &rhs,
   }
 }
 
+//=============================================================================
+/// Do the backsubstitution for the DenseLU solver. Again the
+/// algorithm is based on that from "Numerical recipes in C"
+/// by Press et al. \n
+/// for Vector<double>
+/// WARNING: this class does not perform any PARANOID checks on the vectors -
+/// these are all performed in the solve(...) method. So, if you call backsub
+/// directly, you have been warned...
+//=============================================================================
+void DenseLU::backsub(const Vector<double> &rhs,
+                      Vector<double> &result)
+{
+ const unsigned long n = rhs.size();
 
+ //Copy the rhs vector into the result vector
+ for(unsigned long i=0;i<n;++i)
+  {result[i] = rhs[i];}
+
+ unsigned long ii=0;
+ for(unsigned long i=0;i<n;i++)
+  {
+   unsigned long ip = Index[i];
+   double sum = result[ip];
+   result[ip] = result[i];
+
+   if(ii != 0)
+    {
+     for(unsigned long j=ii-1;j<i;j++)
+      {
+       sum -= LU_factors[n*i+j]*result[j];
+      }
+    }
+   else if(sum != 0.0)
+    {
+     ii = i+1;
+    }
+   result[i] = sum;
+  }
+
+  //Now do the back substitution
+  for (long i=long(n)-1;i>=0;i--)
+   {
+    double sum = result[i];
+    for(long j=i+1;j<long(n);j++) sum -= LU_factors[n*i+j]*result[j];
+    result[i] = sum/LU_factors[n*i+i];
+   }
+}
+
+
+//=============================================================================
  /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs 
  /// vector and returns the solution of the linear system. 
+//============================================================================
  void DenseLU::solve(DoubleMatrixBase* const &matrix_pt,
-                     const Vector<double> &rhs,
-                     Vector<double> &result)
- {
-  // Time the solver 
-  clock_t t_start = clock();
+                     const DoubleVector &rhs,
+                     DoubleVector &result)
+{
+#ifdef PARANOID
+ // check that the rhs vector is not distributed
+ if (rhs.distribution_pt()->distributed())
+  {
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "The vectors rhs and result must not be distributed";
+   throw OomphLibError(error_message_stream.str(),
+                       "DenseLU::solve()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
 
+ // check that the matrix is square
+ if (matrix_pt->nrow() != matrix_pt->ncol())
+  {
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "The matrix at matrix_pt must be square.";
+   throw OomphLibError(error_message_stream.str(),
+                       "DenseLU::solve()",
+                       OOMPH_EXCEPTION_LOCATION);    
+  }
+ // check that the matrix and the rhs vector have the same nrow()
+ if (matrix_pt->nrow() != rhs.nrow())
+  {
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "The matrix and the rhs vector must have the same number of rows.";
+   throw OomphLibError(error_message_stream.str(),
+                       "DenseLU::solve()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ 
+ // if the matrix is distributable then it too should have the same 
+ // communicator as the rhs vector and should not be distributed
+ DistributableLinearAlgebraObject* dist_matrix_pt = 
+  dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt);
+ if (dist_matrix_pt != 0)
+  {
+   if (dist_matrix_pt->distribution_pt()->communicator_pt()->nproc() > 1 && 
+       dist_matrix_pt->distribution_pt()->distributed() == true)
+    {
+     throw OomphLibError(
+      "Matrix must not be distributed or only one processor",
+      "DenseLU::factorise()",
+      OOMPH_EXCEPTION_LOCATION);   
+    }
+   OomphCommunicator temp_comm(*rhs.distribution_pt()->communicator_pt());
+   if (!(temp_comm == *dist_matrix_pt->distribution_pt()->communicator_pt()))
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The matrix matrix_pt must have the same communicator as the vectors"
+      << " rhs and result must have the same communicator";
+     throw OomphLibError(error_message_stream.str(),
+                         "DenseLU::solve()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+ // if the result vector is setup then check it is not distributed and has 
+ // the same communicator as the rhs vector
+ if (result.distribution_setup())
+  {
+   if (!(*result.distribution_pt() == *rhs.distribution_pt()))
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The result vector distribution has been setup; it must have the "
+      << "same distribution as the rhs vector.";
+     throw OomphLibError(error_message_stream.str(),
+                         "DenseLU::solve()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }   
+#endif
+ 
+ if (!result.distribution_setup())
+  {
+   result.rebuild(rhs.distribution_pt());
+  }
+ 
+ // set the distribution
+ if (Distribution_pt != 0)
+  {
+   Distribution_pt->rebuild(rhs.distribution_pt());
+  }
+ else
+  {
+   Distribution_pt = new LinearAlgebraDistribution(rhs.distribution_pt());
+  }
+ 
+  // Time the solver 
+  double t_start = TimingHelpers::timer();
+
+  // factorise
   factorise(matrix_pt);
+
+  // backsubstitute
   backsub(rhs,result);
 
   //Doc time for solver
-  clock_t t_end = clock();
+  double t_end = TimingHelpers::timer();
   
-  Solution_time = double(t_end-t_start)/CLOCKS_PER_SEC;
+  Solution_time = t_end-t_start;
   if(Doc_time)
    {
-    oomph_info << "CPU for solve with DenseLU   [sec]: " 
-               << Solution_time << std::endl;
+    oomph_info << std::endl << "CPU for solve with DenseLU   [sec]: " 
+               << Solution_time << std::endl << std::endl;
    }
 
   //If we are not resolving then delete storage
   if(!Enable_resolve) {clean_up_memory();}
- }
+}
 
+//=============================================================================
+/// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
+/// vector and returns the solution of the linear system.
+//=============================================================================
+void DenseLU::solve(DoubleMatrixBase* const &matrix_pt,
+                    const Vector<double> &rhs,
+                    Vector<double> &result)
+{
+ // Time the solver
+ clock_t t_start = clock();
+
+ factorise(matrix_pt);
+ backsub(rhs,result);
+
+ //Doc time for solver
+ clock_t t_end = clock();
+
+ Solution_time = double(t_end-t_start)/CLOCKS_PER_SEC;
+ if(Doc_time)
+  {
+   oomph_info << "CPU for solve with DenseLU   [sec]: "
+              << Solution_time << std::endl;
+  }
+
+ //If we are not resolving then delete storage
+ if(!Enable_resolve) {clean_up_memory();}
+}
 
 //==================================================================
 /// Solver: Takes pointer to problem and returns the results Vector
 /// which contains the solution of the linear system defined by
 /// the problem's residual Vector. (Jacobian assembled by FD).
 //==================================================================
-void FD_LU::solve(Problem* const &problem_pt, Vector<double> &result)
+void FD_LU::solve(Problem* const &problem_pt, DoubleVector &result)
 {
  //Initialise timer
  clock_t t_start = clock();
  
+#ifdef PARANOID
+ // if the result vector is setup then check it is not distributed and has 
+ // the same communicator as the rhs vector
+ if (result.distribution_setup())
+  {
+   if (result.distributed())
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The result vector must not be distributed";
+     throw OomphLibError(error_message_stream.str(),
+                         "FD_LU::solve()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }   
+#endif
 
  //Find # of degrees of freedom
  unsigned long n_dof = problem_pt->ndof();
 
  //Allocate storage for the residuals vector and the jacobian matrix
- Vector<double> residuals(n_dof);
+ DoubleVector residuals;
  DenseDoubleMatrix jacobian(n_dof);
 
  {
@@ -408,7 +577,7 @@ void FD_LU::solve(Problem* const &problem_pt, Vector<double> &result)
   if(Doc_time)
    {
     oomph_info << std::endl << "CPU for setup of Dense Jacobian [sec]: " 
-               << Jacobian_setup_time << std::endl;
+               << Jacobian_setup_time << std::endl << std::endl;
    }
  }
 
@@ -447,6 +616,24 @@ extern "C"
 //===================================================================
 void SuperLU::factorise(DoubleMatrixBase* const &matrix_pt)
 {
+#ifdef PARANOID
+ // PARANOID check that if the matrix is distributable then it should not be 
+ // then it should not be distributed
+ if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt) != 0)
+  {
+   if (dynamic_cast<DistributableLinearAlgebraObject*>
+       (matrix_pt)->distributed())
+    {
+     std::ostringstream error_message_stream;                         
+     error_message_stream                                        
+      << "The matrix must not be distributed.";  
+     throw OomphLibError(error_message_stream.str(),     
+                         "SuperLU::factorise()",             
+                         OOMPH_EXCEPTION_LOCATION);        
+    }
+  }
+#endif
+
  //Find # of degrees of freedom (variables)
  int n = matrix_pt->nrow();
  
@@ -540,11 +727,15 @@ void SuperLU::factorise(DoubleMatrixBase* const &matrix_pt)
 /// defaults to NULL and can be omitted.
 //=========================================================================
 void SuperLU::solve(DoubleMatrixBase* const &matrix_pt,
-                    const Vector<double> &rhs,
-                    Vector<double> &result)
+                    const DoubleVector &rhs,
+                    DoubleVector &result)
 {
  // Time solver
- clock_t t_start = clock();
+ double t_start = TimingHelpers::timer();
+
+ // setup the distribution
+ Distribution_pt->rebuild(rhs.distribution_pt()->communicator_pt(),
+                          rhs.nrow(),false);
 
  //Factorise the matrix
  factorise(matrix_pt);
@@ -567,10 +758,9 @@ void SuperLU::solve(DoubleMatrixBase* const &matrix_pt,
 //             << err_max << " " << sqrt(norm/double(n)) 
 //             << std::endl; 
  
-
  // Doc time for solver
- clock_t t_end = clock();
- Solution_time = double(t_end-t_start)/CLOCKS_PER_SEC;
+ double t_end = TimingHelpers::timer();
+ Solution_time = t_end-t_start;
  if(Doc_time)
   {
    oomph_info << "CPU for solve with SuperLU   [sec]: " 
@@ -586,27 +776,33 @@ void SuperLU::solve(DoubleMatrixBase* const &matrix_pt,
 /// which contains the solution of the linear system defined by
 /// the problem's fully assembled Jacobian and residual Vector.
 //==================================================================
-void SuperLU::solve(Problem* const &problem_pt, Vector<double> &result)
+void SuperLU::solve(Problem* const &problem_pt, DoubleVector &result)
 {
+
  // Initialise timer
- clock_t t_start = clock();
+ double t_start = TimingHelpers::timer();
  
+ // set the solver distribution
+ Distribution_pt->rebuild(problem_pt->communicator_pt(),
+                          problem_pt->ndof(),false);
+
  //Allocate storage for the residuals vector
- Vector<double> residuals(problem_pt->ndof());
+ DoubleVector residuals(Distribution_pt);
 
  // Use the compressed row version?
  if(Compressed_row_flag)
   {
+
    // Initialise timer
-   clock_t t_start = clock();
+   double t_start = TimingHelpers::timer();
 
    //Get the sparse jacobian and residuals of the problem
-   CRDoubleMatrix CR_jacobian;
+   CRDoubleMatrix CR_jacobian(Distribution_pt);
    problem_pt->get_jacobian(residuals,CR_jacobian);
 
    // Doc time for setup
-   clock_t t_end = clock();
-   Jacobian_setup_time = double(t_end-t_start)/CLOCKS_PER_SEC;
+   double t_end = TimingHelpers::timer();
+   Jacobian_setup_time = t_end-t_start;
    if(Doc_time)
     {
      oomph_info << std::endl << "CPU for setup of CR Jacobian [sec]: " 
@@ -620,15 +816,15 @@ void SuperLU::solve(Problem* const &problem_pt, Vector<double> &result)
  else
   {
    // Initialise timer
-   clock_t t_start = clock();
+   double t_start = TimingHelpers::timer();
    
    //Get the sparse jacobian and residuals of the problem
    CCDoubleMatrix CC_jacobian;
    problem_pt->get_jacobian(residuals,CC_jacobian);
 
    // Doc time for setup
-   clock_t t_end = clock();
-   Jacobian_setup_time=double(t_end-t_start)/CLOCKS_PER_SEC;
+   double t_end = TimingHelpers::timer();
+   Jacobian_setup_time=t_end-t_start;
    if(Doc_time)
     {
      oomph_info << "\nCPU for setup of CC Jacobian [sec]: " 
@@ -644,8 +840,8 @@ void SuperLU::solve(Problem* const &problem_pt, Vector<double> &result)
  problem_pt->sign_of_jacobian() = Sign_of_determinant_of_matrix;
  
  // Finalise/doc timings
- clock_t t_end = clock();
- double total_time=double(t_end-t_start)/CLOCKS_PER_SEC;
+ double t_end = TimingHelpers::timer();
+ double total_time = t_end-t_start;
  if(Doc_time)
   {
    oomph_info << "CPU for SuperLU LinearSolver [sec]: " 
@@ -657,7 +853,7 @@ void SuperLU::solve(Problem* const &problem_pt, Vector<double> &result)
 //===============================================================
 /// Resolve the system for a given RHS
 //===============================================================
-void SuperLU::resolve(const Vector<double> &rhs, Vector<double> &result)
+void SuperLU::resolve(const DoubleVector &rhs, DoubleVector &result)
 {
  //Check that a matrix has been factorised and stored
  if(F_factors==0)
@@ -675,13 +871,24 @@ void SuperLU::resolve(const Vector<double> &rhs, Vector<double> &result)
 //================================================================
 /// Do the backsubstitution for SuperLU
 //================================================================
-void SuperLU::backsub(const Vector<double> &rhs,
-                      Vector<double> &result)
+void SuperLU::backsub(const DoubleVector &rhs,
+                      DoubleVector &result)
 {
  //Find the number of unknowns
- int n = rhs.size();
+ int n = rhs.nrow();
 
 #ifdef PARANOID
+ // PARANOID check that this rhs distribution is setup
+ if (!rhs.distribution_pt()->setup())
+  {
+   std::ostringstream error_message_stream;                           
+   error_message_stream                                        
+    << "The rhs vector distribution must be setup.";               
+   throw OomphLibError(error_message_stream.str(),                  
+                       "SuperLU::backsub()",                             
+                       OOMPH_EXCEPTION_LOCATION);         
+  }
+ // PARANOID check that the rhs has the right number of global rows
  if(static_cast<int>(N_dof) != n)
   {
    throw OomphLibError(
@@ -689,13 +896,42 @@ void SuperLU::backsub(const Vector<double> &rhs,
     "SuperLU::backsub()",
     OOMPH_EXCEPTION_LOCATION);
   }
+ // PARANOID check that the rhs is not distributed
+ if (rhs.distribution_pt()->distributed())
+  {
+   std::ostringstream error_message_stream;                           
+   error_message_stream                                        
+    << "The rhs vector must not be distributed.";               
+   throw OomphLibError(error_message_stream.str(),                  
+                       "SuperLU::backsub()",                             
+                       OOMPH_EXCEPTION_LOCATION);         
+  }
+ // PARANOID check that if the result is setup it matches the distribution
+ // of the rhs
+ if (result.distribution_pt()->setup())
+  {
+   if (!(*rhs.distribution_pt() == *result.distribution_pt()))
+    {
+     std::ostringstream error_message_stream;                           
+     error_message_stream                                        
+      << "If the result distribution is setup then it must be the same as the "
+      << "rhs distribution";               
+     throw OomphLibError(error_message_stream.str(),                  
+                         "SuperLU::backsub()",                             
+                         OOMPH_EXCEPTION_LOCATION);         
+    }
+  }
 #endif
+
 
  /// RHS vector
  double* b=new double[n];
  
  // Copy the values across
- for(int i=0;i<n;i++) {b[i]=rhs[i];}
+ for(int i=0;i<n;i++) 
+  {
+   b[i]=rhs[i];
+  }
  
  //Number of RHSs
  int nrhs=1;
@@ -712,7 +948,14 @@ void SuperLU::backsub(const Vector<double> &rhs,
          &F_factors, &Info);
  
  // Copy b into rhs vector
- for(int i=0;i<n;i++) {result[i]=b[i];}
+ if (!result.distribution_pt()->setup())
+  {
+   result.rebuild(Distribution_pt);
+  }
+ for(int i=0;i<n;i++) 
+  {
+   result[i]=b[i];
+  }
  
  // Cleanup the storage for the rhs vector
  delete[] b;
@@ -740,6 +983,7 @@ void SuperLU::clean_up_memory()
   }
 }
 
+
 #ifdef OOMPH_HAS_MPI
 
 //===================================================================
@@ -762,19 +1006,25 @@ extern "C"
                                       int *row_start, double *b,
                                       int nprow, int npcol, 
                                       int doc, void **data, int *info);
+
+// helper method - just calls the superlu method dCompRow_to_CompCol to convert
+// the c-style vectors of a cr matrix to a cc matrix
+ void superlu_cr_to_cc(int nrow, int ncol, int nnz, double* cr_values,
+                       int* cr_index, int* cr_start, double** cc_values,
+                       int** cc_index, int** cc_start);
+
 }
 
 
-//===================================================================
+//=============================================================================
 /// LU decompose the matrix addressed by matrix_pt using
 /// the SuperLU_DIST solver. The resulting matrix factors are stored 
 /// internally.
 /// Note: if Delete_matrix_data is true the function 
 /// matrix_pt->clean_up_memory() will be used to wipe the matrix data.
-//===================================================================
+//=============================================================================
 void SuperLU_dist::factorise(DoubleMatrixBase* const &matrix_pt)
 {
- 
  //Check that we have a square matrix
 #ifdef PARANOID
  int m = matrix_pt->ncol();
@@ -801,225 +1051,168 @@ void SuperLU_dist::factorise(DoubleMatrixBase* const &matrix_pt)
  Info=0;
 
  // Is it a DistributedCRDoubleMatrix?
- if(dynamic_cast<DistributedCRDoubleMatrix*>(matrix_pt))
+ if(dynamic_cast<CRDoubleMatrix*>(matrix_pt) != 0)
   {
-   // Set flag so we know the rhs vector will be distributed
-   Distributed_rhs = true;
-   
    // Get a cast pointer to the matrix
-   DistributedCRDoubleMatrix* dist_CR_matrix_pt
-    = dynamic_cast<DistributedCRDoubleMatrix*>(matrix_pt);
+   CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
+
+#ifdef PARANOID
+   // paranoid check that the matrix has been setup
+   if (!cr_matrix_pt->built())
+    {
+     throw OomphLibError
+      ("To apply SuperLU_dist to a CRDoubleMatrix - it must be built",
+       "SuperLU_dist::factorise()",OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+   
+   // if the matrix is distributed then setup setup superlu dist distributed
+   if (cr_matrix_pt->distributed())
+    {
+     // Find the number of non-zero entries in the matrix
+     const int nnz_local = int(cr_matrix_pt->nnz());
+     
+     // Set up the pointers to the matrix.
+     // NOTE: these arrays (accessed via value_pt, index_pt and
+     // start_pt) may be modified by the SuperLU_DIST routines, and so 
+     // a copy must be taken if the matrix is to be preserved.
+     
+     // Copy values
+     Value_pt = new double[nnz_local];
+     double* matrix_value_pt = cr_matrix_pt->value();
+     for(int i=0;i<nnz_local;i++) 
+      {
+       Value_pt[i] = matrix_value_pt[i];
+       }
+     
+     // Copy column indices
+     Index_pt = new int[nnz_local];
+     int* matrix_index_pt = cr_matrix_pt->column_index();
+     for (int i=0; i<nnz_local; i++)
+      {
+       Index_pt[i] = matrix_index_pt[i];
+      }
+     
+     // Copy row starts
+     int nrow_local = cr_matrix_pt->nrow_local();
+     Start_pt = new int[nrow_local+1];
+     int* matrix_start_pt = cr_matrix_pt->row_start();
+     for (int i=0; i<=nrow_local; i++)
+      {
+       Start_pt[i] = matrix_start_pt[i];
+      }
+     
+     // cache
+     int ndof = cr_matrix_pt->distribution_pt()->nrow();
+     int first_row = cr_matrix_pt->first_row();
+
+     // Now delete the matrix if we are allowed
+     if (Delete_matrix_data==true)
+      {
+       cr_matrix_pt->clear();
+      }
+
+     // Factorize
+     superlu_dist_distributed_matrix(1, ndof, nnz_local, nrow_local, 
+                                     first_row, Value_pt, Index_pt, 
+                                     Start_pt, 0, Nprow, Npcol, doc,
+                                     &Solver_data_pt, &Info);
+   
+     // Record that data is stored
+     Distributed_solve_data_allocated=true;
+    }
+   // else the CRDoubleMatrix is not distributed
+   else
+    {
+     // Find the number of non-zero entries in the matrix
+     const int nnz = int(cr_matrix_pt->nnz());  
+
+     // cache the number of rows
+     int nrow = cr_matrix_pt->nrow();
+     
+     // Set up the pointers to the matrix.
+     // NOTE: these arrays (accessed via value_pt, index_pt and
+     // start_pt) may be modified by the SuperLU_DIST routines, and so 
+     // a copy must be taken if the matrix is to be preserved.
+
+     // create the corresponing cc matrix
+     superlu_cr_to_cc(nrow,nrow,nnz,cr_matrix_pt->value(),
+                      cr_matrix_pt->column_index(),
+                      cr_matrix_pt->row_start(),
+                      &Value_pt,&Index_pt,&Start_pt);
+
+     // Delete the matrix if we are allowed
+     if (Delete_matrix_data==true)
+      {
+       cr_matrix_pt->clear();
+      }
+     
+     // do the factorization
+     superlu_dist_global_matrix(1, nrow, nnz, Value_pt, Index_pt, Start_pt, 
+                                0, Nprow, Npcol, doc, &Solver_data_pt, &Info);
+     
+     // Record that data is stored
+     Global_solve_data_allocated=true;
+    }
+  }
+
+ // Or is it a CCDoubleMatrix?
+else if(dynamic_cast<CCDoubleMatrix*>(matrix_pt))
+  {
+   // Get a cast pointer to the matrix
+   CCDoubleMatrix* serial_matrix_pt = dynamic_cast<CCDoubleMatrix*>(matrix_pt);
    
    // Find the number of non-zero entries in the matrix
-   const int nnz_local = int(dist_CR_matrix_pt->nnz());
+   const int nnz = int(serial_matrix_pt->nnz());  
 
    // Find # of degrees of freedom (variables)
-   Ndof = int(dist_CR_matrix_pt->nrow());
-   
-   // Set the number of local degrees of freedom in the linear system
-   Ndof_local = int(dist_CR_matrix_pt->nrow_local());
-   
-   // Store the local first row index 
-   First_local_dof = int(dist_CR_matrix_pt->first_row());
-   
+   int ndof = int(serial_matrix_pt->nrow());
+
+   // Find the local number of degrees of freedom in the linear system
+   int ndof_local = ndof;
+
    // Set up the pointers to the matrix.
    // NOTE: these arrays (accessed via value_pt, index_pt and
    // start_pt) may be modified by the SuperLU_DIST routines, and so 
    // a copy must be taken if the matrix is to be preserved.
-   
+
    // Copy values
-   Value_pt = new double[nnz_local];
-   double* matrix_value_pt = dist_CR_matrix_pt->value();
-   for(int i=0;i<nnz_local;i++) 
+   Value_pt = new double[nnz];
+   double* matrix_value_pt = serial_matrix_pt->value();
+   for(int i=0;i<nnz;i++) 
     {
      Value_pt[i] = matrix_value_pt[i];
     }
    
-   // Copy column indices
-   Index_pt = new int[nnz_local];
-   int* matrix_index_pt = dist_CR_matrix_pt->column_index();
-   for (int i=0; i<nnz_local; i++)
+   // copy row indices
+   Index_pt = new int[nnz];
+   int* matrix_index_pt = serial_matrix_pt->row_index();
+   for (int i=0; i<nnz; i++)
     {
      Index_pt[i] = matrix_index_pt[i];
     }
    
-   // Copy row starts
-   Start_pt = new int[Ndof_local+1];
-   int* matrix_start_pt = dist_CR_matrix_pt->row_start();
-   for (int i=0; i<=Ndof_local; i++)
+   // copy column starts
+   Start_pt = new int[ndof_local+1];
+   int* matrix_start_pt = serial_matrix_pt->column_start();
+   for (int i=0; i<=ndof_local; i++)
     {
      Start_pt[i] = matrix_start_pt[i];
     }
 
-   // Now delete the matrix if we are allowed
-   if (Delete_matrix_data==true)
-    {
-     dist_CR_matrix_pt->clean_up_memory();
-    }
-   
-   // Factorize
-   superlu_dist_distributed_matrix(1, Ndof, nnz_local, Ndof_local, 
-                                   First_local_dof, Value_pt, Index_pt, 
-                                   Start_pt, 0, Nprow, Npcol, doc,
-                                   &Solver_data_pt, &Info);
-   
-   // Set up Ndof_remote
-   Ndof_remote.resize(MPI_Helpers::Nproc);
-   MPI_Allgather(&Ndof_local, 1, MPI_INT, 
-                 &Ndof_remote[0], 1, MPI_INT,
-                 MPI_COMM_WORLD);
-   
-   // Record that data is stored
-   Distributed_solve_data_allocated=true;
-  }
-
- // Or is it a CRDoubleMatrix?
- else if(dynamic_cast<CRDoubleMatrix*>(matrix_pt))
-  {
-   // Get a cast pointer to the matrix
-   CRDoubleMatrix* serial_matrix_pt = 
-    dynamic_cast<CRDoubleMatrix*>(matrix_pt);
-   
-   // Set flag so we know the rhs vector won't be distributed
-   Distributed_rhs = false;
-   
-   // Store # of degrees of freedom (variables)
-   Ndof = int(serial_matrix_pt->nrow());
-   
-   // Construct a DistributionInfo with uniform distribution
-   DistributionInfo distribution(MPI_COMM_WORLD, Ndof); 
-   
-   // Store the number of local degrees of freedom in the linear system
-   Ndof_local = int(distribution.nrow_local());
-   
-   // Store the local first row
-   First_local_dof = int(distribution.first_row());
-   
-   // Set up the pointers to the matrix.
-   // NOTE: these arrays (accessed via value_pt, index_pt and
-   // start_pt) may be modified by the SuperLU_DIST routines, and so 
-   // a copy must be taken if the matrix is to be preserved.
-   double* matrix_value_pt = serial_matrix_pt->value();
-   int* matrix_index_pt = serial_matrix_pt->column_index();
-   int* matrix_start_pt = serial_matrix_pt->row_start();
-   
-   // Find the local number of non-zero entries in the matrix
-   const int nnz_local = matrix_start_pt[First_local_dof + Ndof_local]
-    - matrix_start_pt[First_local_dof];
-   
-   // Find the index of the first entry in the matrix corresponding to
-   // row number First_local_dof
-   const int first_local_index = matrix_start_pt[First_local_dof];
-   
-   // Copy values
-   Value_pt = new double[nnz_local]; 
-   Vector<double> value_vec(nnz_local);
-   for(int i=0;i<nnz_local;i++) 
-    {
-     Value_pt[i] = matrix_value_pt[first_local_index+i];
-    }
-   
-   // Copy column indices
-   Index_pt = new int[nnz_local];
-   for (int i=0; i<nnz_local; i++)
-    {
-     Index_pt[i] = matrix_index_pt[first_local_index+i];
-    }
-   
-   // Copy row starts
-   Start_pt = new int[Ndof_local+1];
-   for (int i=0; i<=Ndof_local; i++)
-    {
-     Start_pt[i] = matrix_start_pt[First_local_dof+i]-first_local_index;
-    }
-   
-   // Now delete the matrix data if we are allowed
+   // Delete the matrix if we are allowed
    if (Delete_matrix_data==true)
     {
      serial_matrix_pt->clean_up_memory();
     }
    
-   // Factorize
-   superlu_dist_distributed_matrix(1, Ndof, nnz_local, Ndof_local, 
-                                   First_local_dof, Value_pt, Index_pt, 
-                                   Start_pt, 0, Nprow, Npcol, doc, 
-                                   &Solver_data_pt, &Info);
-   
-   // Set up Ndof_remote
-   Ndof_remote.resize(MPI_Helpers::Nproc);
-   for (int p=0; p<MPI_Helpers::Nproc; p++)
-    {
-     Ndof_remote[p] = distribution.nrow_local(p);
-    }
+   // do the factorization
+   superlu_dist_global_matrix(1, ndof, nnz, Value_pt, Index_pt, Start_pt, 
+                              0, Nprow, Npcol, doc, &Solver_data_pt, &Info);
    
    // Record that data is stored
-   Distributed_solve_data_allocated=true;
-  } 
- 
- // Or is it a CCDoubleMatrix?
- else if (dynamic_cast<CCDoubleMatrix*>(matrix_pt))
- {
-  // Set flag so we know the rhs vector won't be distributed
-  Distributed_rhs = false;
-  
-  // Get a cast pointer to the matrix
-  CCDoubleMatrix* serial_matrix_pt = dynamic_cast<CCDoubleMatrix*>(matrix_pt);
-  
-  // Find the number of non-zero entries in the matrix
-  const int nnz = int(serial_matrix_pt->nnz());  
-  
-  // Find # of degrees of freedom (variables)
-  Ndof = int(serial_matrix_pt->nrow());
-  
-  // Find the local number of degrees of freedom in the linear system
-  Ndof_local = Ndof;
-  
-  // Set first local index
-  First_local_dof = 0;
-  
-  // Set up the pointers to the matrix.
-  // NOTE: these arrays (accessed via value_pt, index_pt and
-  // start_pt) may be modified by the SuperLU_DIST routines, and so 
-  // a copy must be taken if the matrix is to be preserved.
-  
-  // Copy values
-  Value_pt = new double[nnz];
-  double* matrix_value_pt = serial_matrix_pt->value();
-  for(int i=0;i<nnz;i++) 
-   {
-    Value_pt[i] = matrix_value_pt[i];
-   }
-  
-  // copy row indices
-  Index_pt = new int[nnz];
-  int* matrix_index_pt = serial_matrix_pt->row_index();
-  for (int i=0; i<nnz; i++)
-   {
-    Index_pt[i] = matrix_index_pt[i];
-   }
-  
-  // copy column starts
-  Start_pt = new int[Ndof_local+1];
-  int* matrix_start_pt = serial_matrix_pt->column_start();
-  for (int i=0; i<=Ndof_local; i++)
-   {
-    Start_pt[i] = matrix_start_pt[i];
-   }
-  
-  // Delete the matrix if we are allowed
-  if (Delete_matrix_data==true)
-   {
-    serial_matrix_pt->clean_up_memory();
-   }
-  
-  // do the factorization
-  superlu_dist_global_matrix(1, Ndof, nnz, Value_pt, Index_pt, Start_pt, 
-                             0, Nprow, Npcol, doc, &Solver_data_pt, &Info);
-  
-  // Record that data is stored
-  Global_solve_data_allocated=true;
- }
-          
+   Global_solve_data_allocated=true;
+  }
  // Otherwise throw an error
  else
   {
@@ -1033,84 +1226,38 @@ void SuperLU_dist::factorise(DoubleMatrixBase* const &matrix_pt)
   }
 }
 
-//================================================================
-/// Do the backsubstitution for SuperLU solver
-/// Note: returns the global result Vector.
-//================================================================
-void SuperLU_dist::backsub(const Vector<double> &rhs,
-                           Vector<double> &result)
+//=============================================================================
+/// Do the backsubstitution for SuperLU solver. \n
+/// Note - this method performs no paranoid checks - these are all performed in
+/// solve(...) and resolve(...)
+//=============================================================================
+void SuperLU_dist::backsub(const DoubleVector &rhs,
+                           DoubleVector &result)
 {
-#ifdef PARANOID
- if(Ndof_local != rhs.size())
-  {
-   throw OomphLibError(
-    "RHS does not have the same distribution as the linear system",
-    "SuperLU_dist::backsub()",
-    OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
- 
  // Doc (0/1) = (true/false)
  int doc = !Doc_stats;
  
  // Reset Info
  Info=0;
 
+ // number of DOFs
+ int ndof = Distribution_pt->nrow();
+
+ // Copy the rhs values to result
+ result = rhs;
+ 
  // Do the backsubsitition phase
  if (Distributed_solve_data_allocated)
   {
-   // Vector to hold local result vector
-   Vector<double> result_local(Ndof_local);
-
-   // Copy rhs values to result_local
-   if (Distributed_rhs)
-    {
-     result_local = rhs;
-    }
-   else
-    {
-     for (int i=0; i<Ndof_local; i++)
-      {
-       result_local[i] = rhs[i+First_local_dof];
-      }
-    }
-
-   // Call solver
-   superlu_dist_distributed_matrix(2, Ndof, 0, 0, 0, 0, 0, 0, 
-                                   &result_local[0], Nprow, Npcol, doc, 
+   // Call distributed solver
+   superlu_dist_distributed_matrix(2, ndof, 0, 0, 0, 0, 0, 0, 
+                                   result.values_pt(), Nprow, Npcol, doc, 
                                    &Solver_data_pt, &Info);
-
-   // generate global results Vector - first set up displacements Vector
-   Vector<int> displacements(MPI_Helpers::Nproc);
-   displacements[0]=0;
-   for (int p=0; p<MPI_Helpers::Nproc-1; p++)
-    {
-     displacements[p+1]=displacements[p]+Ndof_remote[p];
-    }
-   
-   // resize global_vector
-   result.resize(Ndof); 
-
-   // gather the local solution values
-   MPI_Allgatherv(&result_local[0],
-                  Ndof_local,
-                  MPI_DOUBLE,
-                  &result[0],
-                  &Ndof_remote[0],
-                  &displacements[0],
-                  MPI_DOUBLE,
-                  MPI_COMM_WORLD);
   }
  else if (Global_solve_data_allocated)
   {
-   // Allocate storage for the result vector 
-   result.resize(Ndof);
-   
-   // Copy the rhs values to result
-   result = rhs;
-   
-   // Call solver
-   superlu_dist_global_matrix(2, Ndof, 0, 0, 0, 0, &result[0],
+   // Call global solver
+   superlu_dist_global_matrix(2, ndof, 0, 0, 0, 0, result.values_pt(),
                               Nprow, Npcol, doc, &Solver_data_pt, &Info);
   }
  else
@@ -1119,7 +1266,6 @@ void SuperLU_dist::backsub(const Vector<double> &rhs,
                        "SuperLU_dist::backsub()",
                        OOMPH_EXCEPTION_LOCATION);
   }
- 
 }
 
 
@@ -1138,24 +1284,25 @@ void SuperLU_dist::clean_up_memory()
    
    // Reset Info flag
    Info=0;
+
+   // number of DOFs
+   int ndof = Distribution_pt->nrow();
    
    if (Distributed_solve_data_allocated)
     {
-     superlu_dist_distributed_matrix(3, Ndof, 0, 0, 0, 0, 0, 0, 0, 
+     superlu_dist_distributed_matrix(3, ndof, 0, 0, 0, 0, 0, 0, 0, 
                                      Nprow, Npcol, doc, &Solver_data_pt, 
                                      &Info);
      Distributed_solve_data_allocated = false;
     }
    if (Global_solve_data_allocated)
     {
-     superlu_dist_global_matrix(3, Ndof, 0, 0, 0, 0, 0,
+     superlu_dist_global_matrix(3, ndof, 0, 0, 0, 0, 0,
                                 Nprow, Npcol, doc, &Solver_data_pt, &Info);
      Global_solve_data_allocated = false;
     }
    
    Solver_data_pt=0;
-   Ndof_local=0;
-   Ndof=0;
  
    // Delete internal copy of the matrix
    delete[] Value_pt;
@@ -1164,6 +1311,9 @@ void SuperLU_dist::clean_up_memory()
    Value_pt=0;
    Index_pt=0;
    Start_pt=0;
+
+   // and the distribution
+   Distribution_pt->clear();
   }
 }
 
@@ -1177,11 +1327,107 @@ void SuperLU_dist::clean_up_memory()
 /// matrix_pt->clean_up_memory() will be used to wipe the matrix data.
 //=========================================================================
 void SuperLU_dist::solve(DoubleMatrixBase* const &matrix_pt,
-                         const Vector<double> &rhs,
-                         Vector<double> &result)
+                         const DoubleVector &rhs,
+                         DoubleVector &result)
 {
  // Initialise timer
  double t_start = MPI_Wtime();
+
+#ifdef PARANOID
+ // check that the rhs vector is setup
+ if (!rhs.distribution_pt()->setup())
+  {
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "The vectors rhs must be setup";
+   throw OomphLibError(error_message_stream.str(),
+                       "SuperLU_dist::solve()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+
+ // check that the matrix is square
+ if (matrix_pt->nrow() != matrix_pt->ncol())
+  {
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "The matrix at matrix_pt must be square.";
+   throw OomphLibError(error_message_stream.str(),
+                       "SuperLU_dist::solve()",
+                       OOMPH_EXCEPTION_LOCATION);    
+  }
+
+ // check that the matrix and the rhs vector have the same nrow()
+ if (matrix_pt->nrow() != rhs.nrow())
+  {
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "The matrix and the rhs vector must have the same number of rows.";
+   throw OomphLibError(error_message_stream.str(),
+                       "SuperLU_dist::solve()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ 
+ // if the matrix is distributable then it too should have the same 
+ // communicator as the rhs vector
+ DistributableLinearAlgebraObject* dist_matrix_pt = 
+  dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt);
+ if (dist_matrix_pt != 0)
+  {
+   if (!(*dist_matrix_pt->distribution_pt() == *rhs.distribution_pt()))
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The matrix matrix_pt must have the same communicator as the vectors"
+      << " rhs and result must have the same communicator";
+     throw OomphLibError(error_message_stream.str(),
+                         "SuperLU_dist::solve()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+ // if the matrix is not distributable then it the rhs vector should not be
+ // distributed
+ else
+  {
+   if (rhs.distribution_pt()->distributed())
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The matrix (matrix_pt) is not distributable and therefore the rhs"
+      << " vector must not be distributed";
+     throw OomphLibError(error_message_stream.str(),
+                         "SuperLU_dist::solve()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+ // if the result vector is setup then check it has the same distribution
+ // as the rhs
+ if (result.distribution_setup())
+  {
+   if (!(*result.distribution_pt() == *rhs.distribution_pt()))
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The result vector distribution has been setup; it must have the "
+      << "same distribution as the rhs vector.";
+     throw OomphLibError(error_message_stream.str(),
+                         "SuperLU_dist::solve()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }   
+#endif
+
+ // set the distribution
+ if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt))
+  {
+   // the solver has the same distribution as the matrix if possible
+   Distribution_pt->rebuild(dynamic_cast<DistributableLinearAlgebraObject*>
+                            (matrix_pt)->distribution_pt());
+  }
+ else
+  {
+   // the solver has the same distribution as the RHS
+   Distribution_pt->rebuild(rhs.distribution_pt());
+  }
 
  //Factorise the matrix
  factorise(matrix_pt);
@@ -1197,13 +1443,15 @@ void SuperLU_dist::solve(DoubleMatrixBase* const &matrix_pt,
   {
    if (Global_solve_data_allocated)
     {
-     oomph_info << "Time for global SuperLU_dist solve [sec]       : "
-                << t_end-t_start << std::endl;
+     oomph_info << std::endl 
+                << "Time for global SuperLU_dist solve [sec]       : "
+                << t_end-t_start << std::endl << std::endl;
     }
    else
     {
-     oomph_info << "Time for distributed SuperLU_dist solve [sec]  : "
-                << t_end-t_start << std::endl;
+     oomph_info << std::endl 
+                << "Time for distributed SuperLU_dist solve [sec]  : "
+                << t_end-t_start << std::endl << std::endl;
     }
   }
  
@@ -1219,43 +1467,64 @@ void SuperLU_dist::solve(DoubleMatrixBase* const &matrix_pt,
 /// which contains the solution of the linear system defined by
 /// the problem's fully assembled Jacobian and residual Vector.
 //==================================================================
-void SuperLU_dist::solve(Problem* const &problem_pt, Vector<double> &result)
+void SuperLU_dist::solve(Problem* const &problem_pt, DoubleVector &result)
 {
  // Initialise timer
  double t_start = MPI_Wtime();
   
+ // number of dofs
+ unsigned n_dof = problem_pt->ndof();
+
+ // set the distribution
+ Distribution_pt->rebuild(problem_pt->communicator_pt(),n_dof,
+                          !Use_global_solver);
+
+ // if the result vector does not have the same distribution as the solver
+ // then redistributed it
+
  // Take a copy of Delete_matrix_data
  bool copy_of_Delete_matrix_data = Delete_matrix_data;
  
  // Set Delete_matrix to true
  Delete_matrix_data = true;
  
- // Use the global version of SuperLU_DIST?
- if (Use_global_solver)
+ // Use the distributed version of SuperLU_DIST?
+ if (!Use_global_solver)
   {
    // Initialise timer
    double t_start = MPI_Wtime();
-   
+
    // Storage for the residuals vector
-   Vector<double> residuals;
+   DoubleVector residuals(Distribution_pt);
    
    // Get the sparse jacobian and residuals of the problem
-   CCDoubleMatrix jacobian;
+   CRDoubleMatrix jacobian(Distribution_pt);
    problem_pt->get_jacobian(residuals, jacobian);
-   
+
    // Doc time for setup
    double t_end = MPI_Wtime();
    Jacobian_setup_time = t_end-t_start;
    if ((Doc_time) && (MPI_Helpers::My_rank==0))
     {
-     oomph_info << "Time to set up global CC Jacobian [sec]        : "
+     oomph_info << "Time to set up CRDoubleMatrix Jacobian [sec]        : "
                 << Jacobian_setup_time << std::endl;
     }
    
    //Now call the linear algebra solve, if desired
    if(!Suppress_solve) 
     {
-     solve(&jacobian,residuals,result);
+     if (!(*result.distribution_pt() == *Distribution_pt))
+      {
+       LinearAlgebraDistribution 
+        temp_global_dist(result.distribution_pt());       
+       result.rebuild(Distribution_pt);
+       solve(&jacobian,residuals,result);
+       result.redistribute(temp_global_dist);
+      }
+     else
+      {
+       solve(&jacobian,residuals,result);
+      }
     }
   }
  //Otherwise its the distributed solve version
@@ -1265,10 +1534,10 @@ void SuperLU_dist::solve(Problem* const &problem_pt, Vector<double> &result)
    double t_start = MPI_Wtime();
 
    // Storage for the residuals vector
-   DistributedVector<double> residuals;
+   DoubleVector residuals;
    
    //Get the sparse jacobian and residuals of the problem
-   DistributedCRDoubleMatrix jacobian;
+   CCDoubleMatrix jacobian;
    problem_pt->get_jacobian(residuals, jacobian);
 
    // Doc time for setup
@@ -1283,9 +1552,10 @@ void SuperLU_dist::solve(Problem* const &problem_pt, Vector<double> &result)
    //Now call the linear algebra solve, if desired
    if(!Suppress_solve) 
     {
-     solve(&jacobian,residuals.vector(),result);
+     solve(&jacobian,residuals,result);
     }
   }
+
 
  // Set Delete_matrix back to original value
  Delete_matrix_data = copy_of_Delete_matrix_data;
@@ -1294,9 +1564,9 @@ void SuperLU_dist::solve(Problem* const &problem_pt, Vector<double> &result)
  if ((Doc_time) && (MPI_Helpers::My_rank==0))
   {
    double t_end = MPI_Wtime();
-   oomph_info << "Total time for SuperLU_dist " << "(np=" 
+   oomph_info << std::endl << "Total time for SuperLU_dist " << "(np=" 
               << MPI_Helpers::Nproc << ",N=" << problem_pt->ndof()
-              <<") [sec] : " << t_end-t_start << std::endl;
+              <<") [sec] : " << t_end-t_start << std::endl << std::endl;
   }
 }
 
@@ -1306,7 +1576,7 @@ void SuperLU_dist::solve(Problem* const &problem_pt, Vector<double> &result)
 /// and the specified rhs vector if resolve has been enabled.
 /// Note: returns the global result Vector.
 //===============================================================
-void SuperLU_dist::resolve(const Vector<double> &rhs, Vector<double> &result)
+void SuperLU_dist::resolve(const DoubleVector &rhs, DoubleVector &result)
 {
 #ifdef PARANOID
  //Check that a matrix has been factorised and stored
@@ -1316,6 +1586,44 @@ void SuperLU_dist::resolve(const Vector<double> &rhs, Vector<double> &result)
                        "SuperLU_dist::resolve()",
                        OOMPH_EXCEPTION_LOCATION);
   }
+
+ // check that the rhs vector is setup
+ if (!rhs.distribution_pt()->setup())
+  {
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "The vectors rhs must be setup";
+   throw OomphLibError(error_message_stream.str(),
+                       "SuperLU_dist::resolve()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ // check that the rhs distribution is the same as the distribution as this 
+ // solver
+ if (!(*rhs.distribution_pt() == *Distribution_pt))
+  {
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "The distribution of rhs vector must match the solver";
+   throw OomphLibError(error_message_stream.str(),
+                       "SuperLU_dist::resolve()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ 
+ // if the result vector is setup then check it has the same distribution
+ // as the rhs
+ if (result.distribution_setup())
+  {
+   if (!(*result.distribution_pt() == *rhs.distribution_pt()))
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The result vector distribution has been setup; it must have the "
+      << "same distribution as the rhs vector.";
+     throw OomphLibError(error_message_stream.str(),
+                         "SuperLU_dist::resolve()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }   
 #endif
  
  // Store starting time for solve
@@ -1343,7 +1651,9 @@ void SuperLU_dist::resolve(const Vector<double> &rhs, Vector<double> &result)
   }
 
 }
-
 #endif
+
+
+
 
 }

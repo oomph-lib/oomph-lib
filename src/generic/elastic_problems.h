@@ -559,12 +559,11 @@ SolidFiniteElement::MultiplierFctPt multiplier_fct_pt)
   }
  
  // Correction vector
- unsigned n_dof=ndof();
- Vector<double> correction(n_dof);
+ DoubleVector correction;
  
  /// Pointer to member type solver 
  typedef void (LinearSolver::*SolverMemPtr)(Problem* const &problem,
-                                            Vector<double> &result);
+                                            DoubleVector &result);
  SolverMemPtr solver_mem_pt=&LinearSolver::solve;
  
  //Now do the linear solve
@@ -611,13 +610,9 @@ SolidFiniteElement::MultiplierFctPt multiplier_fct_pt)
  
 #ifdef PARANOID
  // Check the residual
- double res_max=0.0;
- Vector<double> residuals(n_dof);
+ DoubleVector residuals;
  get_residuals(residuals);
- for (unsigned i=0;i<n_dof;i++)
-  {
-   if (std::abs(residuals[i])>res_max) res_max=std::abs(residuals[i]);
-  }
+ double res_max=residuals.max();
  oomph_info << "Max. residual after assigning consistent initial conditions: "
       << res_max << std::endl;
  if (res_max>Max_residual_after_consistent_newton_ic)

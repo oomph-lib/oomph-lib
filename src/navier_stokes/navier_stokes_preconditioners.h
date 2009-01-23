@@ -178,8 +178,8 @@ namespace oomph
 
      // Set default preconditioners (inexact solvers) -- they are 
      // members of this class!
-     P_preconditioner_pt = &P_superlu_preconditioner;
-     F_preconditioner_pt = &F_superlu_preconditioner;
+     P_preconditioner_pt = 0;
+     F_preconditioner_pt = 0;
 
      // Flag to determine if velocity mass matrix diagonal Q^{-1}
      // is used for scaling.
@@ -190,7 +190,10 @@ namespace oomph
 
      // set Doc_time to false
      Doc_time = false;
-    }
+
+     // null the off diagonal Block matrix pts
+     Block_matrix_0_1_pt = 0;
+     }
 
 
    /// Destructor
@@ -218,11 +221,7 @@ namespace oomph
    void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
 
    /// Apply preconditioner to Vector r
-   void preconditioner_solve(const Vector<double>&r, Vector<double> &z);
-
-   /// \short The number of "blocks" that degrees of freedom
-   /// are sub-divided into: Two -- velocity and pressure
-   unsigned nblock_types(){return 2;}
+   void preconditioner_solve(const DoubleVector&r, DoubleVector &z);
 
    /// \short Access function to mesh containing the block-preconditionable
    /// Navier-Stokes elements.
@@ -243,15 +242,41 @@ namespace oomph
    {
     // If the default preconditioner has been used
     // clean it up now...
-    P_superlu_preconditioner.clean_up_memory();
+    if (Using_default_p_preconditioner)
+     {
+      delete P_preconditioner_pt;
+     }
     P_preconditioner_pt = &new_p_preconditioner;
+    Using_default_p_preconditioner = false;
    }
 
    /// \short Function to (re-)set pressure matrix preconditioner  (inexact 
    /// solver) to SuperLU
    void set_p_superlu_preconditioner()
    {
-    P_preconditioner_pt = &P_superlu_preconditioner;
+    if (!Using_default_p_preconditioner)
+     {
+#ifdef OOMPH_HAS_MPI
+      if (Distribution_pt->setup())
+       {
+        if (Distribution_pt->communicator_pt()->nproc() > 1)
+         {
+          P_preconditioner_pt = new SuperLUDistPreconditioner;
+         }
+        else
+         {
+          P_preconditioner_pt = new SuperLUPreconditioner;
+         }
+       }
+      else
+       {
+        P_preconditioner_pt = new SuperLUPreconditioner;
+       }
+#else
+      P_preconditioner_pt = new SuperLUPreconditioner;
+#endif        
+      Using_default_p_preconditioner = true;
+     }
    }
 
    /// Function to set a new momentum matrix preconditioner (inexact solver)
@@ -259,15 +284,41 @@ namespace oomph
    {
     // If the default preconditioner has been used
     // clean it up now...
-    F_superlu_preconditioner.clean_up_memory();
+    if (Using_default_f_preconditioner)
+     {
+      delete F_preconditioner_pt;
+     }
     F_preconditioner_pt = &new_f_preconditioner;
+    Using_default_f_preconditioner = false;
    }
 
    ///\short Function to (re-)set momentum matrix preconditioner (inexact 
    /// solver) to SuperLU
    void set_f_superlu_preconditioner()
    {
-    F_preconditioner_pt = &F_superlu_preconditioner;
+    if (!Using_default_f_preconditioner)
+     {
+#ifdef OOMPH_HAS_MPI
+      if (Distribution_pt->setup())
+       {
+        if (Distribution_pt->communicator_pt()->nproc() > 1)
+         {
+          F_preconditioner_pt = new SuperLUDistPreconditioner;
+         }
+        else
+         {
+          F_preconditioner_pt = new SuperLUPreconditioner;
+         }
+       }
+      else
+       {
+        F_preconditioner_pt = new SuperLUPreconditioner;
+       }
+#else
+      F_preconditioner_pt = new SuperLUPreconditioner;
+#endif 
+      Using_default_f_preconditioner = true;
+     }
    }
 
    /// Access function for Doc_time
@@ -279,8 +330,8 @@ namespace oomph
    // oomph-lib objects
    // -----------------
 
-   /// Matrix containing pointers to the block matrices
-   DenseMatrix<CRDoubleMatrix*> Block_matrix_pt;
+   /// block matrix 0 1
+   CRDoubleMatrix* Block_matrix_0_1_pt;
 
    /// \short Matrix for multiplication in Schur complement approximation
    /// \c E_matrix \f$ =
@@ -302,6 +353,12 @@ namespace oomph
    /// Pointer to the 'preconditioner' for the F matrix
    Preconditioner* F_preconditioner_pt;
 
+   /// flag indicating whether the default F preconditioner is used
+   bool Using_default_f_preconditioner;
+
+   /// flag indicating whether the default P preconditioner is used
+   bool Using_default_p_preconditioner;
+
     private:
 
    /// \short Control flag is true if the preconditioner has been setup
@@ -316,32 +373,17 @@ namespace oomph
    /// is used in the Schur complement approximation
    bool P_matrix_using_scaling;
 
-   /// \short Helper function to multiply a CRDoubleMatrix by a
-   /// diagonal matrix held in diag_matrix. The input and output
-   /// matrices are held in matrix.
-   static void mat_diag_multiply(const Vector<double>& diag_matrix,
-                                 CRDoubleMatrix& matrix);
-
-   /// \short Helper function to assemble the diagonal of the velocity
+   /// Helper function to assemble the diagonal of the velocity
    /// mass matrix from the elemental contributions defined in
    /// NavierStokesEquations<DIM>::get_velocity_mass_matrix_diagonal(...).
-   void assemble_velocity_mass_matrix_diagonal(Vector<double> &vmm_diagonal);
+   CRDoubleMatrix* assemble_velocity_mass_matrix_diagonal();
 
    /// \short Helper function to delete preconditioner data.
    void clean_up_memory();
 
-   /// \short Identify the required blocks: Here we only need
-   /// the momentum, gradient and divergence blocks of the
-   /// 2x2 block-structured matrix -- this function can be overloaded in
-   /// derived preconditioners.
-   virtual void identify_required_blocks(DenseMatrix<bool>& required_blocks);
-   
-   /// Default preconditioner (inexact solver) for P matrix
-   SuperLU_Preconditioner P_superlu_preconditioner;
-   
-   /// Default preconditioner (inexact solver) for F matrix
-   SuperLU_Preconditioner F_superlu_preconditioner;
-
+   /// Boolean indicating whether the momentum system preconditioner is a 
+   /// block preconditioner
+   bool F_preconditioner_is_block_preconditioner;
    /// Set Doc_time to true for outputting results of timings
    bool Doc_time;
 
@@ -383,7 +425,7 @@ namespace oomph
     }
    
 
-   /// Broken assignment operator
+   /// Broken assignment operator   
    void operator=(const NavierStokesExactPreconditioner&)
     {
      BrokenCopy::broken_assign("NavierStokesExactPreconditioner");

@@ -37,6 +37,7 @@
 #endif
 
 #include "Vector.h"
+#include "double_vector.h"
 #include "oomph_utilities.h"
 
 namespace oomph
@@ -72,18 +73,17 @@ public:
 
  ///\short A single virtual function that returns the residuals
  ///vector multiplied by the inverse mass matrix
- virtual void get_inverse_mass_matrix_times_residuals(
-  Vector<double> &minv_res);
+ virtual void get_inverse_mass_matrix_times_residuals(DoubleVector &minv_res);
   
  /// Function that gets the values of the dofs in the object
- virtual void get_dofs(Vector<double> &dofs);
+ virtual void get_dofs(DoubleVector &dofs);
 
  /// Function that sets the values of the dofs in the object
- virtual void set_dofs(const Vector<double> &dofs);
+ virtual void set_dofs(const DoubleVector &dofs);
 
  ///Function that adds the values to the dofs
  virtual void add_to_dofs(const double &lambda,
-                          const Vector<double> &increment_dofs);
+                          const DoubleVector &increment_dofs);
 
  ///\short Empty virtual function that should be overloaded to 
  /// update and slaved data or boundary conditions that should be

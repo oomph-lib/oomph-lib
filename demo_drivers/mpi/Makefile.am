@@ -2,7 +2,9 @@
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 # Name of executable
-check_PROGRAMS= 
+check_PROGRAMS= \
+driven_cavity \
+direct_solver_test
 
 #=========================================
 # THE WHOLE LOT IS ONLY RUN IF WE HAVE MPI
@@ -14,6 +16,35 @@ if WANT_MPI
 if HAVE_TRILINOS
    check_PROGRAMS += TrilinosSolver_test
 endif
+
+#----------------------------------------------------------------------
+
+
+# Sources for executable
+driven_cavity_SOURCES = driven_cavity.cc
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+driven_cavity_LDADD = \
+                -L@libdir@ -lnavier_stokes  \
+                -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
+
+
+#----------------------------------------------------------------------
+
+
+# Sources for executable
+direct_solver_test_SOURCES = direct_solver_test.cc
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+direct_solver_test_LDADD = \
+                -L@libdir@ -lpoisson  \
+                -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
+
+
+#----------------------------------------------------------------------
+
 
 # Do we have the TRILINOS library?
 #=================================

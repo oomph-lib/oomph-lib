@@ -352,7 +352,8 @@ cout << "Wall time for method " << method << ": "
 
 //Read out the dimension of the matrix 
  unsigned long n = ndof();
- matrix.build(value[0],col_index[0],row_start[0],n,n);
+ LinearAlgebraDistribution dist(this->communicator_pt(),n,false);
+ matrix.rebuild(&dist,n,value[0],col_index[0],row_start[0]);
  
  /// Dump matrix?
  if (Global_Variables::Dump_matrices)

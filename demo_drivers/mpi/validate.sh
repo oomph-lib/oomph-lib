@@ -2,8 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=16
-
+NUM_TESTS=22
 
 # Doc what we're using to run tests on two processors
 echo " " 
@@ -18,6 +17,34 @@ mkdir Validation
 
 cd Validation
 
+# Validation for rectangular driven cavity
+#-----------------------------------------
+
+echo "Running rectangular driven cavity LSC precond validation "
+mkdir RESLT
+$MPI_RUN_COMMAND ../driven_cavity > OUTPUT_driven_cavity
+echo "done"
+echo " " >> validation.log
+echo "Rectangular driven cavity validation" >> validation.log
+echo "------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat  RESLT/soln0.dat RESLT/soln1.dat \
+ > driven_cavity_results.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../bin/fpdiff.py ../validata/driven_cavity_results.dat.gz  \
+         driven_cavity_results.dat >> validation.log
+fi
+
+
+
+
 
 # Trilinos test
 #==============
@@ -27,13 +54,12 @@ cd Validation
 #------------------------
 if [ -f ../TrilinosSolver_test ]; then
 
-echo "Running trilinos tests in parallel on two processors"
-mkdir RESLT
+echo "Running trilinos tests"
 $MPI_RUN_COMMAND ../TrilinosSolver_test > OUTPUT_Trilinos
 echo "done"
 echo " " >> validation.log
-echo "Trilinos tests in parallel on two processors" >> validation.log
-echo "--------------------------------------------" >> validation.log
+echo "Trilinos tests" >> validation.log
+echo "--------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log
 echo " " >> validation.log
@@ -45,56 +71,55 @@ if test "$1" = "no_fpdiff"; then
 else
 echo "Solver/preconditioner combination 0" >> validation.log
 ../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
-         RESLT/soln0.dat >> validation.log
+         RESLT/soln_trilinos_0.dat >> validation.log
 echo "Solver/preconditioner combination 1" >> validation.log
 ../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
-         RESLT/soln1.dat >> validation.log
+         RESLT/soln_trilinos_1.dat >> validation.log
 echo "Solver/preconditioner combination 2" >> validation.log
 ../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
-         RESLT/soln2.dat >> validation.log
+         RESLT/soln_trilinos_2.dat >> validation.log
 echo "Solver/preconditioner combination 3" >> validation.log
 ../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
-         RESLT/soln3.dat >> validation.log
+         RESLT/soln_trilinos_3.dat >> validation.log
 echo "Solver/preconditioner combination 4" >> validation.log
 ../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
-         RESLT/soln4.dat >> validation.log
+         RESLT/soln_trilinos_4.dat >> validation.log
 echo "Solver/preconditioner combination 5" >> validation.log
 ../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
-         RESLT/soln5.dat >> validation.log
+         RESLT/soln_trilinos_5.dat >> validation.log
 echo "Solver/preconditioner combination 6" >> validation.log
 ../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
-         RESLT/soln6.dat >> validation.log
+         RESLT/soln_trilinos_6.dat >> validation.log
 echo "Solver/preconditioner combination 7" >> validation.log
 ../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
-         RESLT/soln7.dat >> validation.log
+         RESLT/soln_trilinos_7.dat >> validation.log
 echo "Solver/preconditioner combination 8" >> validation.log
 ../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
-         RESLT/soln8.dat >> validation.log
+         RESLT/soln_trilinos_8.dat >> validation.log
 echo "Solver/preconditioner combination 9" >> validation.log
 ../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
-         RESLT/soln9.dat >> validation.log
+         RESLT/soln_trilinos_9.dat >> validation.log
 echo "Solver/preconditioner combination 10" >> validation.log
 ../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
-         RESLT/soln10.dat >> validation.log
+         RESLT/soln_trilinos_10.dat >> validation.log
 echo "Solver/preconditioner combination 11" >> validation.log
 ../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
-         RESLT/soln11.dat >> validation.log
+         RESLT/soln_trilinos_11.dat >> validation.log
 echo "Solver/preconditioner combination 12" >> validation.log
 ../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
-         RESLT/soln12.dat >> validation.log
+         RESLT/soln_trilinos_12.dat >> validation.log
 echo "Solver/preconditioner combination 13" >> validation.log
 ../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
-         RESLT/soln13.dat >> validation.log
+         RESLT/soln_trilinos_13.dat >> validation.log
 echo "Solver/preconditioner combination 14" >> validation.log
 ../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
-         RESLT/soln14.dat >> validation.log
+         RESLT/soln_trilinos_14.dat >> validation.log
 echo "Number of Newton iterations for Trilinos solves" >> validation.log
 ../../..//bin/fpdiff.py ../validata/Trilinos_conv.dat.gz  \
          RESLT/conv.dat >> validation.log
 
 fi
 
-mv RESLT RESLT_Trilinos
 
 else
 
@@ -121,6 +146,45 @@ fi
 
 
 
+# Direct Solver Tests
+#====================
+
+
+# Validation for direct solver tests
+#-----------------------------------
+echo "Running direct solver tests"
+$MPI_RUN_COMMAND ../direct_solver_test > OUTPUT_DirectSolver
+echo "done"
+echo " " >> validation.log
+echo "Direct solver tests" >> validation.log
+echo "-------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+
+if test "$1" = "no_python"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+else
+echo "SuperLU_dist matrix based solve w/ global CRDoubleMatrixSolver" >> validation.log
+../../..//bin/fpdiff.py ../validata/direct_solver_matrix_solve_result.dat.gz  \
+         RESLT/SuperLU_dist_CRDoubleMatrix_global.dat >> validation.log
+echo "SuperLU_dist matrix based solve w/ dist CRDoubleMatrixSolver" >> validation.log
+../../..//bin/fpdiff.py ../validata/direct_solver_matrix_solve_result.dat.gz  \
+         RESLT/SuperLU_dist_CRDoubleMatrix_distributed.dat >> validation.log
+echo "SuperLU matrix based solve w/ CCDoubleMatrixSolver" >> validation.log
+../../..//bin/fpdiff.py ../validata/direct_solver_matrix_solve_result.dat.gz  \
+         RESLT/SuperLU_dist_CCDoubleMatrix.dat >> validation.log
+echo "SuperLU_dist global problem based solve" >> validation.log
+../../..//bin/fpdiff.py ../validata/direct_solver_problem_solve_result.dat.gz  \
+         RESLT/soln_direct_solver_1.dat >> validation.log
+echo "SuperLU_dist global problem based solve" >> validation.log
+../../..//bin/fpdiff.py ../validata/direct_solver_problem_solve_result.dat.gz  \
+         RESLT/soln_direct_solver_2.dat >> validation.log
+fi
+
+mv RESLT RESLT_test
 
 # Append log to main validation log
 cat validation.log >> ../../../validation.log

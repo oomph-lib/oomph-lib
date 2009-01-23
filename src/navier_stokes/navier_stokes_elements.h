@@ -832,9 +832,9 @@ public:
 
  /// \short The number of "blocks" that degrees of freedom in this element
  /// are sub-divided into: Velocity and pressure.
- unsigned nblock_types()
+ unsigned ndof_types()
   {
-   return 2;
+   return this->node_pt(0)->nvalue()+1;
   }
  
  /// \short Create a list of pairs for all unknowns in this element,
@@ -843,8 +843,8 @@ public:
  /// of the "block" that this unknown is associated with.
  /// (Function can obviously only be called if the equation numbering
  /// scheme has been set up.) Velocity=0; Pressure=1
- void get_block_numbers_for_unknowns(
-  std::list<std::pair<unsigned long,unsigned> >& block_lookup_list);
+ void get_dof_numbers_for_unknowns(
+  std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list);
 
 };
 
@@ -1188,9 +1188,9 @@ public:
  
  /// \short Returns the number of "blocks" that degrees of freedom
  /// in this element are sub-divided into: Velocity and pressure.
- unsigned nblock_types()
+ unsigned ndof_types()
   {
-   return 2;
+   return this->node_pt(0)->nvalue();
   }
  
  /// \short Create a list of pairs for all unknowns in this element,
@@ -1199,7 +1199,7 @@ public:
  /// of the "block" that this unknown is associated with.
  /// (Function can obviously only be called if the equation numbering
  /// scheme has been set up.) Velocity=0; Pressure=1
- void get_block_numbers_for_unknowns(
+ void get_dof_numbers_for_unknowns(
   std::list<std::pair<unsigned long, unsigned> >& block_lookup_list);
  
  

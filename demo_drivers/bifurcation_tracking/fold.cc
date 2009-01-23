@@ -279,6 +279,7 @@ void BratuProblem<ELEMENT>::solve()
  //Let's have a look at the solution
  for(unsigned i=0;i<5;i++)
   {
+
    ds = arc_length_step_solve(Global_Physical_Variables::Lambda_pt,ds);
    
    //Output the pressure
@@ -293,13 +294,29 @@ void BratuProblem<ELEMENT>::solve()
 
  using namespace Global_Physical_Variables;
  *Mu_pt = 2.0*atan(1.0);
+
+
+
+
+
  activate_fold_tracking(Global_Physical_Variables::Lambda_pt);
 
+
+
+
+
  newton_solve();
+
+
+
+
  std::cout << "Fold at " << *Global_Physical_Variables::Lambda_pt << std::endl;
  trace << *Mu_pt << " " << *Lambda_pt << " "
        << Trace_node_pt->x(0) << " " << Trace_node_pt->value(0) << std::endl;
  
+
+
+
  reset_arc_length_parameters();
   
  Desired_proportion_of_arc_length = 0.9;
@@ -308,6 +325,7 @@ void BratuProblem<ELEMENT>::solve()
  ds = 0.01;
  for(unsigned i=0;i<15;i++)
   {
+
    ds = arc_length_step_solve(Mu_pt,ds);
    trace << *Mu_pt << " " << *Lambda_pt << " "
          << Trace_node_pt->x(0) << " " << Trace_node_pt->value(0) << std::endl;

@@ -2,8 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=59
-
+NUM_TESTS=65
 
 # Setup validation directory
 #---------------------------
@@ -544,6 +543,50 @@ echo "[OK] (Dummy for non-existent Hypre)"  >> validation.log
 fi
 
 
+
+# Direct Solver Tests
+#====================
+
+
+# Validation for direct solver tests
+#-----------------------------------
+echo "Running direct solver tests"
+mkdir RESLT
+../direct_solver_test > OUTPUT_DirectSolver
+echo "done"
+echo " " >> validation.log
+echo "Direct solver tests" >> validation.log
+echo "-------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+
+if test "$1" = "no_python"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+else
+echo "DenseLU matrix based solve w/ DenseDoubleMatrix" >> validation.log
+../../..//bin/fpdiff.py ../validata/direct_solver_matrix_solve_result.dat.gz  \
+         RESLT/DenseLU_DenseDoubleMatrix.dat >> validation.log
+echo "DenseLU problem based solve" >> validation.log
+../../..//bin/fpdiff.py ../validata/direct_solver_problem_solve_result.dat.gz  \
+         RESLT/soln0.dat >> validation.log
+echo "FD_LU problem based solve" >> validation.log
+../../..//bin/fpdiff.py ../validata/direct_solver_problem_solve_result.dat.gz  \
+         RESLT/soln1.dat >> validation.log
+echo "SuperLU matrix based solve w/ global CRDoubleMatrix" >> validation.log
+../../..//bin/fpdiff.py ../validata/direct_solver_matrix_solve_result.dat.gz  \
+         RESLT/SuperLU_CRDoubleMatrix.dat >> validation.log
+echo "SuperLU matrix based solve w/ global CCDoubleMatrix" >> validation.log
+../../..//bin/fpdiff.py ../validata/direct_solver_matrix_solve_result.dat.gz  \
+         RESLT/SuperLU_CCDoubleMatrix.dat >> validation.log
+echo "SuperLU problem based solve" >> validation.log
+../../..//bin/fpdiff.py ../validata/direct_solver_problem_solve_result.dat.gz  \
+         RESLT/soln2.dat >> validation.log
+fi
+
+mv RESLT RESLT_DirectSolverTest
 
 # Append log to main validation log
 cat validation.log >> ../../../validation.log

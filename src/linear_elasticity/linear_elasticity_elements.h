@@ -250,7 +250,7 @@ namespace oomph
    /// of the "block" that this unknown is associated with.
    /// (Function can obviously only be called if the equation numbering
    /// scheme has been set up.) 
-   void get_block_numbers_for_unknowns(
+   void get_dof_numbers_for_unknowns(
     std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
     {
 /*

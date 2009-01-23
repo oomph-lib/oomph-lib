@@ -522,11 +522,14 @@ void run_it(LinearSolver* linear_solver_pt)
  // (solution from re-solve should be a vector of ones)
  unsigned n_dof=problem.ndof();
  CRDoubleMatrix matrix;
- Vector<double> residual(n_dof);
- Vector<double> other_rhs(n_dof);
- Vector<double> one(n_dof,1.0);
- Vector<double> solution(n_dof);
+ DoubleVector residual;
+ DoubleVector other_rhs;
+ DoubleVector one;
+ DoubleVector solution;
  problem.get_jacobian(residual,matrix);
+ one.rebuild(residual.distribution_pt());
+ other_rhs.rebuild(residual.distribution_pt());
+ one.initialise(1.0);
  matrix.multiply(one,other_rhs);
  linear_solver_pt->enable_resolve();
 
@@ -593,7 +596,7 @@ void run_it(LinearSolver* linear_solver_pt)
     open_convergence_history_file_stream("RESLT/la_solve_convergence.dat");
   }
  
- Vector<double> solution2(n_dof);
+ DoubleVector solution2;
  linear_solver_pt->solve(&matrix,other_rhs,solution2);
 
  // Get error
@@ -626,6 +629,9 @@ void run_it(LinearSolver* linear_solver_pt)
 //========================================================================
 int main(int argc, char *argv[])
 {
+#ifdef OOMPH_HAS_MPI
+ MPI_Helpers::init(argc,argv);
+#endif
 
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
@@ -811,5 +817,7 @@ int main(int argc, char *argv[])
    doit=false;
 
   }
-
+#ifdef OOMPH_HAS_MPI
+ MPI_Helpers::finalize();
+#endif
 } //end of main

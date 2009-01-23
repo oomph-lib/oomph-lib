@@ -1,4 +1,4 @@
-//LIC// ====================================================================
+#//LIC// ====================================================================
 //LIC// This file forms part of oomph-lib, the object-oriented, 
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
@@ -43,11 +43,7 @@
 #include "explicit_timesteppers.h"
 #include <complex>
 
-// mpi includes
-#ifdef OOMPH_HAS_MPI
-#include "distribution_info.h"
-//#include "distributed_matrices.h"
-#endif
+
 
 namespace oomph
 {
@@ -120,7 +116,7 @@ namespace oomph
 /// // Complete the build of all elements so they are fully functional
 ///
 ///  // Setup equation numbering scheme
-///  oomph_info <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
+///  oomph_info <<"Number of equations: " << assign_eqn_numbers() << std::endl;
 /// \endcode
 /// For time-dependent problems, we can then use
 /// \code assign_initial_values_impulsive (); \endcode
@@ -239,7 +235,7 @@ namespace oomph
 
  /// \short A function that performs the guts of the continuation
  /// derivative calculation in arc length continuation problems.
- void calculate_continuation_derivatives_helper(const Vector<double> &z);
+ void calculate_continuation_derivatives_helper(const DoubleVector &z);
 
 #ifdef OOMPH_HAS_MPI
 
@@ -436,12 +432,16 @@ protected:
  bool Arc_length_step_taken;
 
 #ifdef OOMPH_HAS_MPI
-
  /// Has the problem been distributed amongst multiple processors?
  bool Problem_has_been_distributed;
 
-#endif
+  public:
 
+ /// access function to the problem has been distributed flag
+ const bool distributed() const { return Problem_has_been_distributed; }
+
+  protected:
+#endif
 
  /// \short Any actions that are to be performed before a complete 
  /// Newton solve (e.g. adjust boundary conditions). CAREFUL: This
@@ -575,8 +575,17 @@ protected:
    return 0.0;
   }
 
-public:
+ /// The communicator for this problem - by default the underlying MPI_Comm
+ /// object is MPI_COMM_WORLD
+ OomphCommunicator* Communicator_pt;
 
+  public:
+
+ /// access function to the oomph-lib communicator
+ const OomphCommunicator* communicator_pt() const
+  {
+   return Communicator_pt;
+  }
 
  /// Function pointer for spatial error estimator
  typedef void(*SpatialErrorEstimatorFctPt)(Mesh*& mesh_pt, 
@@ -786,13 +795,13 @@ public:
 
  /// \short Return the vector of dofs, i.e. a vector containing the current
  /// values of all unknowns.
- void get_dofs(Vector<double>& dofs);
+ void get_dofs(DoubleVector& dofs);
 
  /// \short Set the values of the dofs
- void set_dofs(const Vector<double> &dofs);
+ void set_dofs(const DoubleVector &dofs);
 
  /// \short Add lambda x incremenet_dofs[l] to the l-th dof
- void add_to_dofs(const double &lambda, const Vector<double> &increment_dofs);
+ void add_to_dofs(const double &lambda, const DoubleVector &increment_dofs);
 
  /// \short i-th dof in the problem
  double& dof(const unsigned& i)
@@ -806,20 +815,20 @@ public:
    return *(Dof_pt[i]);
   }
 
- ///\shor Return the residual vector multiplied by the inverse mass matrix
+ ///\short Return the residual vector multiplied by the inverse mass matrix
  ///Virtual so that it can be overloaded for mpi problems
- virtual void get_inverse_mass_matrix_times_residuals(Vector<double> &Mres);
+ virtual void get_inverse_mass_matrix_times_residuals(DoubleVector &Mres);
 
  /// \short Return the fully-assembled residuals Vector for the problem: 
  /// Virtual so it can be overloaded in for mpi problems
- virtual void get_residuals(Vector<double> &residuals);
+ virtual void get_residuals(DoubleVector &residuals);
 
  /// \short Return the fully-assembled Jacobian and residuals for the problem
  /// Interface for the case when the Jacobian matrix is dense.
  /// This is virtual so, if we feel like it (e.g. for testing iterative
  /// solvers with specific test matrices, we can bypass the default
  /// assembly procedure for the Jacobian and the residual vector.
- virtual void get_jacobian(Vector<double> &residuals, 
+ virtual void get_jacobian(DoubleVector &residuals, 
                            DenseDoubleMatrix& jacobian);
 
  /// \short Return the fully-assembled Jacobian and residuals for the problem.
@@ -827,7 +836,7 @@ public:
  /// format. This is virtual so, if we feel like it (e.g. for testing iterative
  /// solvers with specific test matrices), we can bypass the default
  /// assembly procedure for the Jacobian and the residual vector.
- virtual void get_jacobian(Vector<double> &residuals,
+ virtual void get_jacobian(DoubleVector &residuals,
                            CRDoubleMatrix &jacobian);
 
  /// \short Return the fully-assembled Jacobian and residuals for the problem.
@@ -835,29 +844,18 @@ public:
  /// format. This is virtual so, if we feel like it (e.g. for testing iterative
  /// solvers with specific test matrices), we can bypass the default
  /// assembly procedure for the Jacobian and the residual vector.
- virtual void get_jacobian(Vector<double> &residuals, 
+ virtual void get_jacobian(DoubleVector &residuals, 
                            CCDoubleMatrix &jacobian);
-
-#ifdef OOMPH_HAS_MPI
-
- /// \short Compute the fully-assembled Jacobian and residuals for the problem.
- /// Interface for the case when the Jacobian is in distributed 
- /// row-compressed storage format. Returns the residuals vector as 
- /// a distributed vector.
- void get_jacobian(DistributedVector<double> &residuals,
-                   DistributedCRDoubleMatrix &jacobian);
-
-#endif
 
  /// \short Return the fully-assembled Jacobian and residuals, generated by
  /// finite differences
- void get_fd_jacobian(Vector<double> &residuals, 
+ void get_fd_jacobian(DoubleVector &residuals, 
                       DenseMatrix<double> &jacobian);
 
  /// \short Get the derivative of the entire residuals vector wrt a 
  /// global parameter, used in continuation problems
  void get_derivative_wrt_global_parameter(double* const &parameter_pt,
-                                          Vector<double> &result);
+                                          DoubleVector &result);
 
  /// \short Get derivative of an element in the problem wrt a global parameter,
  /// used in continuation problems
@@ -870,7 +868,7 @@ public:
  /// eigenvectors
  void solve_eigenproblem(const unsigned &n_eval, 
                          Vector<std::complex<double> > &eigenvalue,
-                         Vector<Vector<double> > &eigenvector);
+                         Vector<DoubleVector> &eigenvector);
 
  /// \short Solve an eigenproblem as assembled by EigenElements, 
  /// but only return the eigenvalues, not the eigenvectors
@@ -878,7 +876,7 @@ public:
                          Vector<std::complex<double> > &eigenvalue)
   {
    //Create temporary storage for the eigenvectors (potentially wasteful)
-   Vector<Vector<double> > eigenvector;
+   Vector<DoubleVector> eigenvector;
    solve_eigenproblem(n_eval,eigenvalue,eigenvector);
   }
 
@@ -891,13 +889,13 @@ public:
  /// \short Assign the eigenvector passed to the function
  /// to the dofs in the problem so that it can be output by
  /// the usual routines.
- void assign_eigenvector_to_dofs(Vector<double> &eigenvector);
+ void assign_eigenvector_to_dofs(DoubleVector &eigenvector);
  
  /// \short Add the eigenvector passed to the function scaled by
  /// the constat epsilon to the dofs in the problem so that 
  /// it can be output by the usual routines
  void add_eigenvector_to_dofs(const double &epsilon,
-                              Vector<double> &eigenvector);
+                              DoubleVector &eigenvector);
 
  /// \short Store the current values of the degrees of freedom
  void store_current_dof_values();
@@ -1057,7 +1055,7 @@ public:
  /// routine, as is a vector in which 
  /// to store the derivatives wrt the parameter, if required.
  unsigned newton_solve_continuation(double* const &parameter_pt, 
-                                    Vector<double> &z);
+                                    DoubleVector &z);
 
  ///\short A function to calculate the derivatives wrt the arc-length. This 
  /// version of the function actually does a linear solve so that the 
@@ -1077,7 +1075,7 @@ public:
  /// Jz = dR/dparameter, that gives du/dparameter and the direction 
  /// output from the newton_solve_continuation function. The derivatives
  /// are stored in the ContinuationParameters namespace.
- void calculate_continuation_derivatives(const Vector<double> &z);
+ void calculate_continuation_derivatives(const DoubleVector &z);
 
   public:
 
@@ -1110,7 +1108,7 @@ public:
  /// true (the default) then a block factorisation is used to solve the
  /// augmented system which is both faster and requires less memory.
  void activate_pitchfork_tracking(double* const &parameter_pt,
-                                  const Vector<double> &symmetry_vector,
+                                  const DoubleVector &symmetry_vector,
                                   const bool &block_solve=true);
 
  /// \short Turn on Hopf bifurcation
@@ -1136,8 +1134,8 @@ public:
  /// of the null vector, such as might be obtained from an eigensolve
  void activate_hopf_tracking(double* const &parameter_pt,
                              const double &omega,
-                             const Vector<double> &null_real,
-                             const Vector<double> &null_imag,
+                             const DoubleVector &null_real,
+                             const DoubleVector &null_imag,
                              const bool &block_solve=true);
 
  /// \short Deactivate all bifuraction tracking, by reseting

@@ -61,7 +61,7 @@ namespace oomph
 void ARPACK::solve_eigenproblem(Problem* const &problem_pt,
                                 const int &n_eval,
                                 Vector<std::complex<double> > &eigenvalue,
-                                Vector<Vector<double> > &eigenvector)
+                                Vector<DoubleVector > &eigenvector)
 {
  bool Verbose = false;
  
@@ -160,16 +160,21 @@ void ARPACK::solve_eigenproblem(Problem* const &problem_pt,
  //Real and imaginary parts of the shift
  double sigmar = Sigma_real, sigmai = 0.0;
 
+ // TEMPORARY
+ // only use non distributed matrice and vectors
+ Distribution_pt->rebuild(problem_pt->communicator_pt(),n,false);
+
  //Before we get into the Arnoldi loop solve the shifted matrix problem
  //Allocated Row compressed matrices for the mass matrix and shifted main 
  //matrix
- CRDoubleMatrix M,AsigmaM;
+ CRDoubleMatrix M(Distribution_pt), AsigmaM(Distribution_pt);
+
  //Assemble the matrices
  problem_pt->get_eigenproblem_matrices(M,AsigmaM,sigmar);
 
  //Allocate storage for the vectors to be used in matrix vector products
- Vector<double> rhs(n);
- Vector<double> x(n);
+ DoubleVector rhs(Distribution_pt);
+ DoubleVector x(Distribution_pt);
  
 
  bool LOOP_FLAG=true;
@@ -367,7 +372,7 @@ void ARPACK::solve_eigenproblem(Problem* const &problem_pt,
     eigenvector.resize(nconv);
     for(int j=0;j<nconv;j++)
      {
-      eigenvector[j].resize(n);
+      eigenvector[j].rebuild(Distribution_pt);
       for(int i=0;i<n;i++)
        {
         eigenvector[j][i] = z[0][j*n+i];
@@ -423,7 +428,7 @@ void ARPACK::solve_eigenproblem(Problem* const &problem_pt,
  void LAPACK_QZ::solve_eigenproblem(Problem* const &problem_pt,
                                     const int &n_eval,
                                     Vector<std::complex<double> > &eigenvalue,
-                                    Vector<Vector<double> > &eigenvector)
+                                    Vector<DoubleVector> &eigenvector)
 {
  //Some character identifiers for use in the LAPACK routine 
  //Do not calculate the left eigenvectors
@@ -452,11 +457,16 @@ void ARPACK::solve_eigenproblem(Problem* const &problem_pt,
  double *M = new double[padded_n*padded_n];
  double *A = new double[padded_n*padded_n];
 
+ // TEMPORARY
+ // only use non-distributed matrices and vectors
+ Distribution_pt->rebuild(problem_pt->communicator_pt(),n,false);
+
  //Enclose in a separate scope so that memory is cleaned after assembly
  {
   //Allocated Row compressed matrices for the mass matrix and shifted main 
   //matrix
-  CRDoubleMatrix temp_M,temp_AsigmaM;
+  CRDoubleMatrix temp_M(Distribution_pt),temp_AsigmaM(Distribution_pt);
+
   //Assemble the matrices
   problem_pt->get_eigenproblem_matrices(temp_M,temp_AsigmaM,sigmar);
   
@@ -525,8 +535,8 @@ void ARPACK::solve_eigenproblem(Problem* const &problem_pt,
    eigenvalue[i] = 
     std::complex<double>(sigmar + alpha_r[i]/beta[i],alpha_i[i]/beta[i]);
 
-   //Resize the eigenvector storage
-   eigenvector[i].resize(n);
+   //Resize the eigenvector  storage
+   eigenvector[i].rebuild(Distribution_pt);
    //Load up the eigenvector (assume that it's real)
    for(int k = 0; k < n; ++k ) 
     { 
@@ -648,5 +658,4 @@ void LAPACK_QZ::find_eigenvalues(const ComplexMatrixBase &A,
  delete[] A_linear;
  delete[] M_linear;
 }
-
 }

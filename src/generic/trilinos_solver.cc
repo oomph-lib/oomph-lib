@@ -45,7 +45,7 @@ namespace oomph
 /// any existing internal data and then generates a new AztecOO solver.
 //=============================================================================
  void TrilinosAztecOOSolver::solve(Problem* const &problem_pt,
-                                   Vector<double> &solution)
+                                   DoubleVector &solution)
  { 
   // clean up from previous solve
   clean_up_memory();
@@ -63,70 +63,73 @@ namespace oomph
   
   // store the problem_pt
   Problem_pt = problem_pt;
+
+  // get the number of DOFs
+  unsigned ndof = Problem_pt->ndof();
   
   //Get oomph-lib Jacobian matrix and residual vector
   
   // record the start time
-#ifdef OOMPH_HAS_MPI
-  double start_t = MPI_Wtime();
-#else
-  clock_t start_t = clock();
-#endif
+  double start_t = TimingHelpers::timer();
 
-  // get the jacobian
-#ifdef OOMPH_HAS_MPI
-  DistributedVector<double> residual_dist;
-  Vector<double> residual;
-  if (Assemble_serial_jacobian)
+  // set the distribution
+  bool distributed = !Assemble_serial_jacobian;
+  if (problem_pt->communicator_pt()->nproc() == 1)
    {
-    unsigned n_row = problem_pt->ndof();
-    residual.resize(n_row);
-    CRDoubleMatrix* matrix_pt = new CRDoubleMatrix;
-    problem_pt->get_jacobian(residual,*matrix_pt);
-    Oomph_matrix_pt = matrix_pt; 
+    distributed = false;
    }
-  else
-   {
-    DistributedCRDoubleMatrix* matrix_pt = new DistributedCRDoubleMatrix;
-    problem_pt->get_jacobian(residual_dist,*matrix_pt);
-    Oomph_matrix_pt = matrix_pt; 
-   }
-#else
-  CRDoubleMatrix* matrix_pt = new CRDoubleMatrix;
-  unsigned n_row = problem_pt->ndof();
-  Vector<double> residual(n_row);
-  problem_pt->get_jacobian(residual,*matrix_pt);
-  Oomph_matrix_pt = matrix_pt;
-#endif
+  Distribution_pt->rebuild(Problem_pt->communicator_pt(),
+                           ndof,distributed);
+
+  // create the residual
+  DoubleVector residual(Distribution_pt);
+
+  // create the jacobian
+  CRDoubleMatrix* cr_matrix_pt = new CRDoubleMatrix(Distribution_pt);
+  Oomph_matrix_pt = cr_matrix_pt;
+  problem_pt->get_jacobian(residual,*cr_matrix_pt);
 
   // record the end time and compute the matrix setup time
-#ifdef OOMPH_HAS_MPI
-  double end_t = MPI_Wtime();
+  double end_t = TimingHelpers::timer();
   Jacobian_setup_time = end_t-start_t;
-#else
-  clock_t end_t = clock();
-  Jacobian_setup_time = double(end_t-start_t)/CLOCKS_PER_SEC;
-#endif
-  
   if (this->doc_time())
    {
-    oomph_info << "Time to generate Jacobian [sec]           : "
+    oomph_info << "Time to generate Jacobian [sec]    : "
                << Jacobian_setup_time << std::endl;
    }
   
+  
+
+  // store the distribution of the solution vector
+  if (!solution.distribution_setup())
+    {
+      solution.rebuild(Distribution_pt);
+    }
+  LinearAlgebraDistribution solution_dist(solution.distribution_pt());
+
+
+
+  // redistribute the distribution
+  solution.redistribute(*Distribution_pt);
+
   // continue solving using matrix based solve function
-#ifdef OOMPH_HAS_MPI
-  if (Assemble_serial_jacobian)
-   {
-    solve(Oomph_matrix_pt, residual, solution);
-   }
-  else
-   {
-    solve(Oomph_matrix_pt, residual_dist, solution);
-   }
-#else
   solve(Oomph_matrix_pt, residual, solution);
-#endif
+
+  for (unsigned i = 0; i < solution.nrow_local(); i++)
+   {
+//    oomph_info << "s[" << i << "]=" << solution[i] << std::endl;
+   }
+
+  // return to the original distribution
+  solution.redistribute(solution_dist);
+
+  if (problem_pt->communicator_pt()->my_rank() == 0)
+   {
+  for (unsigned i = 0; i < solution.nrow_local(); i++)
+   {
+    //   std::cout << "" << i << " " << solution[i] << std::endl;
+   }
+   }
 }
 
 
@@ -139,29 +142,74 @@ namespace oomph
 /// generate a new AztecOO solver.
 //=============================================================================
 void TrilinosAztecOOSolver::solve(DoubleMatrixBase* const& matrix_pt,
-                                  const Vector<double> &rhs,
-                                  Vector<double> &solution)
+                                  const DoubleVector &rhs,
+                                  DoubleVector &result)
 {
 
  // start the timer
-#ifdef OOMPH_HAS_MPI
- double start_t = MPI_Wtime();
-#else
- clock_t start_t = clock();
-#endif
+ double start_t = TimingHelpers::timer();
 
 #ifdef PARANOID
- if (matrix_pt->nrow() != rhs.size())
+ // check that the matrix is square
+ if (matrix_pt->nrow() != matrix_pt->ncol())
   {
-   std::ostringstream error_message;
-   error_message << "The rhs vector and the matrix must have the same number "
-                 << "of rows.\n"
-                 << "The rhs vector has " << rhs.size() << " rows.\n"
-                 << "The matrix has " << matrix_pt->nrow() << " rows.\n";   
-   throw OomphLibError(error_message.str(),
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "The matrix at matrix_pt must be square.";
+   throw OomphLibError(error_message_stream.str(),
+                       "TrilinosAztecOOSolver::solve()",
+                       OOMPH_EXCEPTION_LOCATION);    
+  }
+ // check that the matrix and the rhs vector have the same nrow()
+ if (matrix_pt->nrow() != rhs.nrow())
+  {
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "The matrix and the rhs vector must have the same number of rows.";
+   throw OomphLibError(error_message_stream.str(),
                        "TrilinosAztecOOSolver::solve()",
                        OOMPH_EXCEPTION_LOCATION);
   }
+ 
+ // if the matrix is distributable then it too should have the same 
+ // communicator as the rhs vector and should not be distributed
+ CRDoubleMatrix* cr_matrix_pt =  dynamic_cast<CRDoubleMatrix*>(matrix_pt);
+ if (cr_matrix_pt != 0)
+  {
+   OomphCommunicator temp_comm(*rhs.distribution_pt()->communicator_pt());
+   if (!(temp_comm == *cr_matrix_pt->distribution_pt()->communicator_pt()))
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The matrix matrix_pt must have the same communicator as the vectors"
+      << " rhs and result must have the same communicator";
+     throw OomphLibError(error_message_stream.str(),
+                         "TrilinosAztecOOSolver::solve()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+ else
+  {
+   throw OomphLibError("Matrix must be of type CRDoubleMatrix",
+                       "TrilinosAztecOOSolver::factorise()",
+                       OOMPH_EXCEPTION_LOCATION);   
+  }
+
+ // if the result vector is setup then check it is not distributed and has 
+ // the same communicator as the rhs vector
+ if (result.distribution_setup())
+  {
+   if (!(*result.distribution_pt() == *rhs.distribution_pt()))
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The result vector distribution has been setup; it must have the "
+      << "same distribution as the rhs vector.";
+     throw OomphLibError(error_message_stream.str(),
+                         "TrilinosAztecOOSolver::solve()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }  
 #endif
 
  // setup the solver
@@ -181,7 +229,7 @@ void TrilinosAztecOOSolver::solve(DoubleMatrixBase* const& matrix_pt,
  solve_using_AztecOO(epetra_r_pt,epetra_z_pt);            
  
  // Copy result to z
- TrilinosHelpers::copy_to_oomphlib_vector(epetra_z_pt,solution);
+ TrilinosHelpers::copy_to_oomphlib_vector(epetra_z_pt,result);
 
  // clean up memory
  delete epetra_r_pt;
@@ -193,164 +241,19 @@ void TrilinosAztecOOSolver::solve(DoubleMatrixBase* const& matrix_pt,
   clean_up_memory();
  }
 
-#ifdef OOMPH_HAS_MPI
-  double end_t = MPI_Wtime();
-  Linear_solver_solution_time = end_t-start_t;
-#else
-  clock_t end_t = clock();
-  Linear_solver_solution_time = double(end_t-start_t)/CLOCKS_PER_SEC;
-#endif
+ // stop timers and compute solve time
+ double end_t = TimingHelpers::timer();
+ Linear_solver_solution_time = end_t-start_t;
 
  // output timings and info
  if (this->doc_time())
  {
-  oomph_info << "Time spent in solver                      : "
+  oomph_info << "Time for solve                        : "
              << Linear_solver_solution_time
              << "s" << std::endl;
  } 
 }
 
-#ifdef OOMPH_HAS_MPI
-//=============================================================================
-/// Function to solve the linear system defined by matrix_pt and rhs\n.
-/// \b NOTE 1. The matrix has to be of type CRDoubleMatrix or 
-/// DistributedCRDoubleMatrix.
-/// \b NOTE 2. This function will delete any existing internal data and 
-/// generate a new AztecOO solver.
-/// \b NOTE 3. The vector rhs must have the same distribution as the matrix
-//=============================================================================
-void TrilinosAztecOOSolver::solve(DoubleMatrixBase* const& matrix_pt,
-                                  const DistributedVector<double> &rhs,
-                                  Vector<double> &solution)
-{
- // start the timer
- double start_t = MPI_Wtime();
-
- // setup the solver
- solver_setup(matrix_pt);
-
-#ifdef PARANOID
- if (Solver_distribution != rhs.distribution())
-  {
-   std::ostringstream error_message;
-   error_message << "The rhs vector and the matrix must have the same "
-                 << "distribution.\n"; 
-   throw OomphLibError(error_message.str(),
-                       "TrilinosAztecOOSolver::solve()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
-
- // set up trilinos vectors
- Epetra_Vector* epetra_r_pt=0;
- Epetra_Vector* epetra_z_pt=0;
-
- // create Epetra version of r
- TrilinosHelpers::create_epetra_vector(rhs,Epetra_map_pt,epetra_r_pt);
-
- // create an empty Epetra vector for z
- TrilinosHelpers::create_epetra_vector(Epetra_map_pt,epetra_z_pt);
-
- // solve the system
- solve_using_AztecOO(epetra_r_pt,epetra_z_pt); 
-
- // copy the results to z
- TrilinosHelpers::copy_to_oomphlib_vector(epetra_z_pt,solution);
-
- // clean up memory
- delete epetra_r_pt;
- delete epetra_z_pt;
-
- // delete solver data if required
- if (!Enable_resolve)
- {
-  clean_up_memory();
- }
-
- // end of solve time
- double end_t = MPI_Wtime();
- Linear_solver_solution_time = end_t-start_t;
- 
- // output timings and info
- if (this->doc_time())
-  {
-   oomph_info << "Time for solve                            : "
-              << Linear_solver_solution_time
-              << "s" << std::endl;
-  } 
-}
-
-//=============================================================================
-/// Function to solve the linear system defined by matrix_pt and rhs\n.
-/// \b NOTE 1. The matrix has to be of type CRDoubleMatrix or 
-/// DistributedCRDoubleMatrix.
-/// \b NOTE 2. This function will delete any existing internal data and 
-/// generate a new AztecOO solver. 
-/// \b NOTE 3. The vectors rhs and solution must have the same distribution 
-/// as the matrix
-//=============================================================================
-void TrilinosAztecOOSolver::solve(DoubleMatrixBase* const& matrix_pt,
-                                  const DistributedVector<double> &rhs,
-                                  DistributedVector<double> &solution)
-{
- // start time
- double start_t = MPI_Wtime();
-
- // setup the solver
- solver_setup(matrix_pt);
-
-#ifdef PARANOID
- if (Solver_distribution != rhs.distribution())
-  {
-   std::ostringstream error_message;
-   error_message << "The rhs vector and the matrix must have the same "
-                 << "distribution.\n"; 
-   throw OomphLibError(error_message.str(),
-                       "TrilinosAztecOOSolver::solve()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
-
- // set up trilinos vectors
- Epetra_Vector* epetra_r_pt=0;
- Epetra_Vector* epetra_z_pt=0;
-
- // create Epetra version of r
- TrilinosHelpers::create_epetra_vector(rhs,Epetra_map_pt,epetra_r_pt);
-
- // create an empty Epetra vector for z
- TrilinosHelpers::create_epetra_vector(Epetra_map_pt,epetra_z_pt);
-
- // solve the system
- solve_using_AztecOO(epetra_r_pt,epetra_z_pt); 
-
- // copy the results to z
- TrilinosHelpers::copy_to_oomphlib_vector(epetra_z_pt,Solver_distribution,
-                                          solution);
-
- // clean up memory
- delete epetra_r_pt;
- delete epetra_z_pt;
-
- // delete solver data if required
- if (!Enable_resolve)
- {
-  clean_up_memory();
- }
-
- // end of solve time
- double end_t = MPI_Wtime();
- Linear_solver_solution_time = end_t-start_t;
- 
- // output timings and info
- if (this->doc_time())
-  {
-   oomph_info << "Time spent in linear solver               : "
-              << Linear_solver_solution_time
-              << "s" << std::endl;
-  } 
-}
-#endif
 
 //=============================================================================
 /// Helper function for setting up the solver. Converts the oomph-lib 
@@ -370,128 +273,32 @@ void TrilinosAztecOOSolver::solver_setup(DoubleMatrixBase* const& matrix_pt)
  // begin by setting up the Epetra Matrix
  //======================================
 
-#ifdef OOMPH_HAS_MPI
- double start_t_setup = MPI_Wtime();
-#else
- clock_t start_t_setup = clock();
-#endif
-
-
-
- // if this is a Distributed build then attempt to build Trilinos Matrix from
- // a CRDoubleMatrix or a DistributedCRDoubleMatrix
-#ifdef OOMPH_HAS_MPI
- bool cast_failed = true;
+ double start_t_setup = TimingHelpers::timer();
 
  // start by determining the distribution of this preconditioner
- // if DistributedCRDoubleMatrix then the distribution is the same as the 
+ // if distributed CRDoubleMatrix then the distribution is the same as the 
  // preconditioner.
- // if CRDoubleMatrix then the distribution is the uniform distribution
+ // if serial CRDoubleMatrix then the distribution is the uniform distribution
 
- // first try DistributedCRDoubleMatrix
- DistributedCRDoubleMatrix* cast_dist_matrix_pt = 
-  dynamic_cast<DistributedCRDoubleMatrix*>(matrix_pt);
- if (cast_dist_matrix_pt!=0)
-  {
-   #ifdef PARANOID
-   // check the matrix is square
-   if ( cast_dist_matrix_pt->nrow_global() != matrix_pt->ncol() )
-    {
-  std::ostringstream error_message;
-  error_message << "TrilinosAztecOOSolver require a square matrix. "
-                << "Matrix is " << matrix_pt->nrow()
-                << " by " << matrix_pt->ncol() << std::endl;
-  throw OomphLibError(error_message.str(),
-                      "TrilinosAztecOOSolver::solver_setup()",
-                      OOMPH_EXCEPTION_LOCATION);
- }
-#endif
-   // the distribution of this preconditioner is the same as the matrix
-   Solver_distribution = cast_dist_matrix_pt->distribution();
-   cast_failed = false;
-  }
+ // cast to CRDoubleMatrix
+ // note cast check performed in matrix based solve(...) method
+ CRDoubleMatrix* cast_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
 
- // if the cast failed try cast to CRDoubleMatrix
- if (cast_failed)
- {
-  CRDoubleMatrix* cast_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
-  if (cast_matrix_pt != 0)
-  {
-#ifdef PARANOID
-   // check the matrix is square
-   if ( matrix_pt->nrow() != matrix_pt->ncol() )
-    {
-     std::ostringstream error_message;
-     error_message << "TrilinosAztecOOSolver require a square matrix. "
-                   << "Matrix is " << matrix_pt->nrow()
-                   << " by " << matrix_pt->ncol() << std::endl;
-     throw OomphLibError(error_message.str(),
-                         "TrilinosAztecOOSolver::solver_setup()",
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-   // use default distribution
-   // NOTE: USE of MPI_COMM_WORLD
-   Solver_distribution.distribute(MPI_COMM_WORLD,
-                                  cast_matrix_pt->nrow());
-   cast_failed = false;
-  }
- }
- 
-#ifdef PARANOID
- // check the matrix is a 
- if (cast_failed)
-  {
-   std::ostringstream error_message;
-   error_message << "TrilinosSolver only work with "
-                 << "DistributedCRDoubleMatrix matrices" << std::endl;
-   throw OomphLibError(error_message.str(),
-                       "TrilinosSolver::solver_setup()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
+ // store the distribution
+ Distribution_pt->rebuild(cast_matrix_pt->distribution_pt());
  
  // assemble the map
- Epetra_comm_pt = new Epetra_MpiComm(MPI_COMM_WORLD);
- TrilinosHelpers::create_epetra_map(Solver_distribution,
+#ifdef OOMPH_HAS_MPI
+ // MPI version
+ Epetra_comm_pt = 
+  new Epetra_MpiComm(Distribution_pt->communicator_pt()->mpi_comm());
+ TrilinosHelpers::create_epetra_map(Distribution_pt,
                                     Epetra_comm_pt,
                                     Epetra_map_pt,Epetra_global_rows);
-
 #else
- // Serial Version
-
-#ifdef PARANOID
- // check the matrix is square
- if ( matrix_pt->nrow() != matrix_pt->ncol() )
- {
-  std::ostringstream error_message;
-  error_message << "TrilinosAztecOOSolver require a square matrix. "
-                << "Matrix is " << matrix_pt->nrow()
-                << " by " << matrix_pt->ncol() << std::endl;
-  throw OomphLibError(error_message.str(),
-                      "TrilinosAztecOOSolver::solver_setup()",
-                      OOMPH_EXCEPTION_LOCATION);
- }
-#endif
-
- // cast to CRDoubleMatrix*
- CRDoubleMatrix* cast_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
-#ifdef PARANOID
- // check the matrix is a CRDoubleMatrix
- if (cast_matrix_pt==0)
-  {
-   std::ostringstream error_message;
-   error_message << "TrilinosSolver only work with "
-                 << "CRDoubleMatrix matrices" << std::endl;
-   throw OomphLibError(error_message.str(),
-                       "TrilinosSolver::solver_setup()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
- // setup the epetra matrix
+ // Serial version
  Epetra_comm_pt = new Epetra_SerialComm;
- TrilinosHelpers::create_epetra_map(cast_matrix_pt->nrow(),
+ TrilinosHelpers::create_epetra_map(cast_matrix_pt->distribution_pt(),
                                     Epetra_comm_pt,
                                     Epetra_map_pt);
 #endif
@@ -501,22 +308,14 @@ void TrilinosAztecOOSolver::solver_setup(DoubleMatrixBase* const& matrix_pt)
                                        Epetra_map_pt,
                                        Epetra_matrix_pt);   
 
-  // record the end time and compute the matrix setup time
-#ifdef OOMPH_HAS_MPI
-  double end_t_setup = MPI_Wtime();
-#else
- clock_t end_t_setup = clock();
-#endif
+ // record the end time and compute the matrix setup time
+ double end_t_setup = TimingHelpers::timer();
 
  // output times
  if (Doc_time)
  {
-  oomph_info << "Time to generate Trilinos matrix          : "
-#ifdef OOMPH_HAS_MPI
+  oomph_info << "Time to generate Trilinos matrix      : "
              << double(end_t_setup-start_t_setup)
-#else
-             << double(end_t_setup-start_t_setup)/CLOCKS_PER_SEC
-#endif
              << "s" << std::endl;
  }
 
@@ -529,6 +328,19 @@ void TrilinosAztecOOSolver::solver_setup(DoubleMatrixBase* const& matrix_pt)
  // set the matrix
  AztecOO_solver_pt->SetUserMatrix(Epetra_matrix_pt);
  
+#ifdef PARANOID
+ // paranoid check the preconditioner exists
+ if (Preconditioner_pt == 0)
+    {
+     std::ostringstream error_message;
+     error_message << "Preconditioner_pt == 0. (Remember default "
+                   << "preconditioner is IdentityPreconditioner)";
+     throw OomphLibError(error_message.str(),
+                         "TrilinosAztecOOSolver::solver_setup()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
  // if the preconditioner is a trilinos preconditioner then set the
  // Epetra_Operator
  TrilinosPreconditionerBase* trilinos_prec_pt = 
@@ -550,13 +362,8 @@ void TrilinosAztecOOSolver::solver_setup(DoubleMatrixBase* const& matrix_pt)
   {
    // setup the preconditioner
    Preconditioner_pt->setup(Problem_pt,matrix_pt);
-#ifdef OOMPH_HAS_MPI
-   if (!Preconditioner_pt->distribution().setup())
-    {
-     Preconditioner_pt->distribution() = Solver_distribution;
-    }
 #ifdef PARANOID
-   if (Preconditioner_pt->distribution() != Solver_distribution)
+   if (*Preconditioner_pt->distribution_pt() != *Distribution_pt)
     {
      std::ostringstream error_message;
      error_message << "The oomph-lib preconditioner and the solver must "
@@ -566,19 +373,15 @@ void TrilinosAztecOOSolver::solver_setup(DoubleMatrixBase* const& matrix_pt)
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
-#endif
+
    
    // wrap the oomphlib preconditioner in the Epetra_Operator derived
    // OoomphLibPreconditionerEpetraOperator to allow it to be passed to the
    // trilinos preconditioner
-#ifdef OOMPH_HAS_MPI
    Epetra_preconditioner_pt = 
     new OomphLibPreconditionerEpetraOperator(Preconditioner_pt);
-#else
-   Epetra_preconditioner_pt = 
-    new OomphLibPreconditionerEpetraOperator(Preconditioner_pt,
-                                             matrix_pt->nrow());
-#endif
+
+   //set the preconditioner
    AztecOO_solver_pt->
     SetPrecOperator(Epetra_preconditioner_pt);    
   }
@@ -623,7 +426,7 @@ void TrilinosAztecOOSolver::solver_setup(DoubleMatrixBase* const& matrix_pt)
 
  if (Using_problem_based_solve)
   {
-   dynamic_cast<CRDoubleMatrix*>(Oomph_matrix_pt)->clean_up_memory();
+   dynamic_cast<CRDoubleMatrix*>(Oomph_matrix_pt)->clear();
    delete Oomph_matrix_pt;
    Oomph_matrix_pt = NULL;   
   }
@@ -631,7 +434,7 @@ void TrilinosAztecOOSolver::solver_setup(DoubleMatrixBase* const& matrix_pt)
  // delete Oomph-lib matrix if requested
  else if (Delete_matrix)
   {
-   dynamic_cast<CRDoubleMatrix*>(matrix_pt)->clean_up_memory();
+   dynamic_cast<CRDoubleMatrix*>(matrix_pt)->clear();
   }
 }
 
@@ -641,23 +444,19 @@ void TrilinosAztecOOSolver::solver_setup(DoubleMatrixBase* const& matrix_pt)
 /// function must be used after a call to solve(...) with
 /// enable_resolve set to true.
 //=============================================================================
-void TrilinosAztecOOSolver::resolve(const Vector<double> &rhs,
-                                    Vector<double> &solution)
+void TrilinosAztecOOSolver::resolve(const DoubleVector &rhs,
+                                    DoubleVector &solution)
 {
  // start the timer
-#ifdef OOMPH_HAS_MPI
- double start_t = MPI_Wtime();
-#else
- clock_t start_t = clock();
-#endif
+ double start_t = TimingHelpers::timer();
 
 #ifdef PARANOID
- if (Epetra_matrix_pt->NumGlobalRows() != static_cast<int>(rhs.size()))
+ if (Epetra_matrix_pt->NumGlobalRows() != static_cast<int>(rhs.nrow()))
   {
    std::ostringstream error_message;
    error_message << "The rhs vector and the matrix must have the same number "
                  << "of rows.\n"
-                 << "The rhs vector has " << rhs.size() << " rows.\n"
+                 << "The rhs vector has " << rhs.nrow() << " rows.\n"
                  << "The matrix has " << Epetra_matrix_pt->NumGlobalRows() 
                  << " rows.\n";   
    throw OomphLibError(error_message.str(),
@@ -678,152 +477,25 @@ void TrilinosAztecOOSolver::resolve(const Vector<double> &rhs,
 
  // solve the system
  solve_using_AztecOO(epetra_r_pt,epetra_z_pt);            
- 
-#ifdef OOMPH_HAS_MPI
+
  // Copy result to z
  TrilinosHelpers::copy_to_oomphlib_vector(epetra_z_pt,solution);
-#else
- // Copy result to z
- TrilinosHelpers::copy_to_oomphlib_vector(epetra_z_pt,solution);
-#endif
 
  // clean up memory
  delete epetra_r_pt;
  delete epetra_z_pt;
 
-#ifdef OOMPH_HAS_MPI
-  double end_t = MPI_Wtime();
-  Linear_solver_solution_time = end_t-start_t;
-#else
-  clock_t end_t = clock();
-  Linear_solver_solution_time = double(end_t-start_t)/CLOCKS_PER_SEC;
-#endif
+ double end_t = TimingHelpers::timer();
+ Linear_solver_solution_time = end_t-start_t;
 
  // output timings and info
  if (this->doc_time())
  {
-  oomph_info << "Time for resolve                            : "
+  oomph_info << "Time for resolve                        : "
              << Linear_solver_solution_time
              << "s" << std::endl;
  } 
 }
-
-#ifdef OOMPH_HAS_MPI
-//=============================================================================
-/// Function to resolve a linear system using the existing solver
-/// data, allowing a solve with a new right hand side vector. This
-/// function must be used after a call to solve(...) with
-/// enable_resolve set to true.
-//=============================================================================
-void TrilinosAztecOOSolver::resolve(const DistributedVector<double> &rhs,
-                                    Vector<double> &solution)
-{
- // start the timer
- double start_t = MPI_Wtime();
-
-#ifdef PARANOID
- if (Solver_distribution != rhs.distribution())
-  {
-   std::ostringstream error_message;
-   error_message << "The rhs vector and the matrix must have the same "
-                 << "distribution.\n"; 
-   throw OomphLibError(error_message.str(),
-                       "TrilinosAztecOOSolver::solve()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
-
- // set up trilinos vectors
- Epetra_Vector* epetra_r_pt=0;
- Epetra_Vector* epetra_z_pt=0;
-
- // create Epetra version of r
- TrilinosHelpers::create_epetra_vector(rhs,Epetra_map_pt,epetra_r_pt);
-
- // create an empty Epetra vector for z
- TrilinosHelpers::create_epetra_vector(Epetra_map_pt,epetra_z_pt);
-
- // solve the system
- solve_using_AztecOO(epetra_r_pt,epetra_z_pt); 
-
- // copy the results to z
- TrilinosHelpers::copy_to_oomphlib_vector(epetra_z_pt,solution);
-
- // clean up memory
- delete epetra_r_pt;
- delete epetra_z_pt;
-
- // end of solve time
- double end_t = MPI_Wtime();
- Linear_solver_solution_time = end_t-start_t;
- 
- // output timings and info
- if (this->doc_time())
-  {
-   oomph_info << "Time for resolve                            : "
-              << Linear_solver_solution_time
-              << "s" << std::endl;
-  } 
-}
-
-//=============================================================================
-/// \short Function to resolve a linear system using the existing solver
-/// data, allowing a solve with a new right hand side vector. This
-/// function must be used after a call to solve(...) with
-/// enable_resolve set to true.
-//=============================================================================
-void TrilinosAztecOOSolver::resolve(const DistributedVector<double> &rhs,
-                                    DistributedVector<double> &solution)
-{
- // start time
- double start_t = MPI_Wtime();
-
-#ifdef PARANOID
- if (Solver_distribution != rhs.distribution())
-  {
-   std::ostringstream error_message;
-   error_message << "The rhs vector and the matrix must have the same "
-                 << "distribution.\n"; 
-   throw OomphLibError(error_message.str(),
-                       "TrilinosAztecOOSolver::solve()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
-
- // set up trilinos vectors
- Epetra_Vector* epetra_r_pt=0;
- Epetra_Vector* epetra_z_pt=0;
-
- // create Epetra version of r
- TrilinosHelpers::create_epetra_vector(rhs,Epetra_map_pt,epetra_r_pt);
-
- // create an empty Epetra vector for z
- TrilinosHelpers::create_epetra_vector(Epetra_map_pt,epetra_z_pt);
-
- // solve the system
- solve_using_AztecOO(epetra_r_pt,epetra_z_pt); 
-
- // copy the results to z
- TrilinosHelpers::copy_to_oomphlib_vector(epetra_z_pt,Solver_distribution,
-                                          solution);
-
- // clean up memory
- delete epetra_r_pt;
- delete epetra_z_pt;
-
- // end of solve time
- double end_t = MPI_Wtime();
- Linear_solver_solution_time = end_t-start_t;
- 
- // output timings and info
- if (this->doc_time())
-  {
-   oomph_info << "Time for resolve                            : "
-              << Linear_solver_solution_time
-              << "s" << std::endl;
-  } 
-}
-#endif
 
 
 //=============================================================================

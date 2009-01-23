@@ -607,6 +607,7 @@ extern "C"
                      void*, int *);
 }
 
+
 //===================================================================
 /// Perform LU decomposition. Return the sign of the determinant
 //===================================================================
@@ -1214,5 +1215,4 @@ void CRComplexMatrix::multiply_transpose(
     }
   }
 }
-
 }

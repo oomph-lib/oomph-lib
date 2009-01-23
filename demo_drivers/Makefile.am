@@ -24,9 +24,9 @@ optimisation \
 bifurcation_tracking \
 FAQ \
 linear_solvers \
-biharmonic \
 linear_elasticity \
 womersley \
+biharmonic \
 reaction_diffusion \
 flux_transport \
 young_laplace \

@@ -236,9 +236,9 @@ namespace oomph
    /// \short The number of "blocks" that degrees of freedom in this element
    /// are sub-divided into: for now lump them all into one block.
    /// Can be adjusted later
-   unsigned nblock_types()
+   unsigned ndof_types()
     {
-     return 1;
+     return DIM;
     }
  
    /// \short Create a list of pairs for all unknowns in this element,
@@ -247,11 +247,10 @@ namespace oomph
    /// of the "block" that this unknown is associated with.
    /// (Function can obviously only be called if the equation numbering
    /// scheme has been set up.) 
-   void get_block_numbers_for_unknowns(
+   void get_dof_numbers_for_unknowns(
     std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
     {
-   
-     // temporary pair (used to store block lookup prior to being added to list)
+     // temporary pair (used to store block lookup prior to being added to list
      std::pair<unsigned,unsigned> block_lookup;
    
      // number of nodes
@@ -282,7 +281,7 @@ namespace oomph
              // store block lookup in temporary pair: First entry in pair
              // is global equation number; second entry is block type
              block_lookup.first = this->eqn_number(local_unknown);
-             block_lookup.second = 0;
+             block_lookup.second = i;
            
              // add to list
              block_lookup_list.push_front(block_lookup);

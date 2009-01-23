@@ -42,18 +42,15 @@ namespace oomph
 /// du/dn dirichlet BCs by pinning
 //=============================================================================
 template<unsigned DIM>
-void BiharmonicPlateProblem<DIM>::
-impose_clamped_edge(const unsigned& b, DirichletBCFctPt u_fn,
-                    DirichletBCFctPt dudn_fn)
+void BiharmonicProblem<DIM>::
+set_dirichlet_boundary_condition(const unsigned& b, DirichletBCFctPt u_fn,
+                                 DirichletBCFctPt dudn_fn)
 {
- // impose simply supported edge - pin u and duds_t
- impose_simply_supported_edge(b,u_fn);
- 
  // number of nodes on boundary b
- unsigned n_node = mesh_pt()->nboundary_node(b);
- 
+ unsigned n_node = Bulk_element_mesh_pt->nboundary_node(b);
+
  // fixed faced index for boundary
- int face_index = mesh_pt()->face_index_at_boundary(b,0);
+ int face_index = Bulk_element_mesh_pt->face_index_at_boundary(b,0);
 
  //Need to get the s_fixed_index
  unsigned s_fixed_index = 0;
@@ -71,236 +68,47 @@ impose_clamped_edge(const unsigned& b, DirichletBCFctPt u_fn,
    
   default:
    throw OomphLibError("Face Index not +/-1 or +/-2: Need 2D QElements",
-                       "BiharmonicPlateProblem::impose_clamped_edge()",
+                       "BiharmonicProblem::impose_clamped_edge()",
                        OOMPH_EXCEPTION_LOCATION);
-  }
-
- // if du/dn = 0 just pin nodes to zero
- // loop over nodes on boundary b                                         
- if (dudn_fn == 0)
-  {
-   for (unsigned n = 0; n < n_node; n++)              
-    {  
-     // pin du/ds_n dof and set value
-     mesh_pt()->boundary_node_pt(b,n)->pin(1+s_fixed_index);
-     mesh_pt()->boundary_node_pt(b,n)->set_value(1+s_fixed_index,0.0);
-     
-     // pin d2u/ds_nds_t dof and set value
-     mesh_pt()->boundary_node_pt(b,n)->pin(3);
-     mesh_pt()->boundary_node_pt(b,n)->set_value(3,0.0);
-    }
-  }
- else
-  {    
-   // node position along edge b in macro element boundary representation 
-   // [-1,1]
-   Vector<double> s(1);
-   
-   //Set the edge sign
-   int edge_sign = 0;
-   switch(face_index)
-    {
-    case -1:
-    case 2:
-     edge_sign = -1;
-     break;
-     
-    case 1:
-    case -2:
-     edge_sign = 1;
-     break;
-    }
-
-   // edge sign adjust
-   //int edge_sign = -int(s_limit) * int((s_fixed_index-0.5)*2);
+  } 
  
-   // finite difference step
-   const double h = 10e-8;
-
-   // loop over nodes on boundary b                                         
-   for (unsigned n = 0; n < n_node; n++)              
-    {
-     // vectors for dx_i/ds_n and dx_i/ds_t
-     Vector<double> dxds_n(2);
-     Vector<double> dxds_t(2);
-     dxds_n[0] = mesh_pt()->boundary_node_pt(b,n)->x_gen(1+s_fixed_index,0);
-     dxds_n[1] = mesh_pt()->boundary_node_pt(b,n)->x_gen(1+s_fixed_index,1);
-     dxds_t[0] = mesh_pt()->boundary_node_pt(b,n)->x_gen(2-s_fixed_index,0);
-     dxds_t[1] = mesh_pt()->boundary_node_pt(b,n)->x_gen(2-s_fixed_index,1);
-
-     // vector for d2xi/ds_n ds_t
-     Vector<double> d2xds_nds_t(2);
-     d2xds_nds_t[0] = mesh_pt()->boundary_node_pt(b,n)->x_gen(3,0);
-     d2xds_nds_t[1] = mesh_pt()->boundary_node_pt(b,n)->x_gen(3,1);
-
-     // compute dn/ds_n
-     double dnds_n = ((dxds_n[0]*dxds_t[1])-(dxds_n[1]*dxds_t[0]))
-      / (sqrt(dxds_t[0]*dxds_t[0]+dxds_t[1]*dxds_t[1])*edge_sign);
-
-     // compute dt/ds_n
-     double dtds_n = ((dxds_n[0]*dxds_t[0])+(dxds_n[1]*dxds_t[1]))
-      /sqrt(dxds_t[0]*dxds_t[0]+dxds_t[1]*dxds_t[1]);
-
-     // compute ds_t/dt
-     double ds_tdt = 1/sqrt(dxds_t[0]*dxds_t[0]+dxds_t[1]*dxds_t[1]);
-
-     // compute d2t/ds_nds_t
-     double d2tds_nds_t = (dxds_t[0]*d2xds_nds_t[0] + dxds_t[1]*d2xds_nds_t[1])
-      /sqrt(dxds_t[0]*dxds_t[0] + dxds_t[1]*dxds_t[1]);
-
-     // get m_t and dm_t/ds_t for this node
-     Vector<double> m_N(2);
-     mesh_pt()->boundary_node_pt(b,n)->get_coordinates_on_boundary(b,m_N);
-
-     // compute d2u/dm_t2 and d/dm_t(dudn) by finite difference
-     double d2udm_t2 = 0;
-     double ddm_tdudn = 0;
-     double u_2L,u_N,u_2R,dudn_L,dudn_R;
-     // evaluate u_fn and dudn_fn for current node
-     if (n == 0)
-      {
-       (*u_fn)(m_N[0],u_2L);
-       (*u_fn)(m_N[0]+h,u_N);
-       (*u_fn)(m_N[0]-2*h,u_2R);
-       (*dudn_fn)(m_N[0],dudn_L);
-       (*dudn_fn)(m_N[0]+h,dudn_R);
-      }
-     else if (n == n_node-1)
-      {
-       (*u_fn)(m_N[0]-2*h,u_2L);
-       (*u_fn)(m_N[0]-h,u_N);
-       (*u_fn)(m_N[0],u_2R);
-       (*dudn_fn)(m_N[0]-h,dudn_L);
-       (*dudn_fn)(m_N[0],dudn_R);
-      }
-     else
-      {
-       (*u_fn)(m_N[0]-h,u_2L);
-       u_N = mesh_pt()->boundary_node_pt(b,n)->value(0);
-       (*u_fn)(m_N[0]+h,u_2R);      
-       (*dudn_fn)(m_N[0]-0.5*h,dudn_L);
-       (*dudn_fn)(m_N[0]+0.5*h,dudn_R);
-      }
-     // compute
-     d2udm_t2 = (u_2L+u_2R-2*u_N)/(h*h);
-     ddm_tdudn = (dudn_R-dudn_L)/h;
-
-     // get dudn at the node
-     double dudn;
-     (*dudn_fn)(m_N[0],dudn);
-
-     // compute d2u/ds_t2
-     double d2uds_t2 = m_N[1]*m_N[1]*d2udm_t2;
-
-     // get duds_t
-     double duds_t = mesh_pt()->boundary_node_pt(b,n)->value(2-s_fixed_index);
-
-     // get du/dt
-     double dudt = ds_tdt*duds_t;
-
-     // compute d/ds_t(dudt)
-     double dds_tdudt = d2uds_t2*ds_tdt;
-
-     // compute du/ds_n
-     double duds_n = dnds_n*dudn + dtds_n*ds_tdt*duds_t;
-
-     // compute d2u/ds_nds_t
-     double d2uds_nds_t = m_N[1]*ddm_tdudn*dnds_n + d2tds_nds_t*dudt 
-      + dds_tdudt*dtds_n;
-
-     // pin du/ds_n dof and set value
-     mesh_pt()->boundary_node_pt(b,n)->pin(1+s_fixed_index);
-     mesh_pt()->boundary_node_pt(b,n)->set_value(1+s_fixed_index,duds_n);
-
-     // pin d2u/ds_nds_t dof and set value
-     mesh_pt()->boundary_node_pt(b,n)->pin(3);
-     mesh_pt()->boundary_node_pt(b,n)->set_value(3,d2uds_nds_t);
-    }
-  }
-}
-
-
-//=============================================================================
-/// \short Impose a Simply Supported Edge 
-///   + u -               dirichlet BC imposed by pinning 
-///   + laplacian(u) -    neumann BC imposed with flux edge elements
-//=============================================================================
-template<unsigned DIM>
-void BiharmonicPlateProblem<DIM>::
-impose_simply_supported_edge(const unsigned& b,DirichletBCFctPt u_fn,
-                             BiharmonicFluxElement<2>::FluxFctPt 
-                             flux0_fct_pt)
-{
+ // node position along edge b in macro element boundary representation 
+ // [-1,1]
+ Vector<double> s(1);
  
- // impose the flux boundary condition
- if (flux0_fct_pt != 0)
-  {
-   impose_free_edge(b,flux0_fct_pt);
-  }
- 
- // number of nodes on boundary b
- unsigned n_node = mesh_pt()->nboundary_node(b);
- 
- // fixed faced index for boundary
- int face_index = mesh_pt()->face_index_at_boundary(b,0);
-
- //Need to get the s_fixed_index
- unsigned s_fixed_index = 0;
+ //Set the edge sign
+ int edge_sign = 0;
  switch(face_index)
   {
   case -1:
-  case 1:
-   s_fixed_index = 0;
-   break;
-
-  case -2:
   case 2:
-   s_fixed_index = 1;
+   edge_sign = -1;
    break;
    
-  default:
-   throw OomphLibError("Face Index not +/-1 or +/-2: Need 2D QElements",
-                       "BiharmonicPlateProblem::impose_clamped_edge()",
-                       OOMPH_EXCEPTION_LOCATION);
+  case 1:
+  case -2:
+   edge_sign = 1;
+   break;
   }
  
- // if the function pointer is zero just pin nodes
- // u and duds_t are assumed zero
- if (u_fn == 0)
+ // finite difference step
+ const double h = 10e-8;
+ 
+ // node position along edge b in macro element boundary representation 
+ // [-1,1]
+ Vector<double> m(2);
+
+ // if u is prescribed then impose
+ if (u_fn != 0)
   {
-   
-   // loop over nodes on boundary b
-   for (unsigned n = 0; n < n_node; n++)
-    {
-     
-     // pin u type dof
-     mesh_pt()->boundary_node_pt(b,n)->pin(0);   
-     mesh_pt()->boundary_node_pt(b,n)->set_value(0,0.0);
-     
-     // pin duds_t type degree of freedom
-     mesh_pt()->boundary_node_pt(b,n)->pin(2-s_fixed_index);
-     mesh_pt()->boundary_node_pt(b,n)->set_value(2-s_fixed_index,0.0);
-    }
-  }
- 
- // if u function pointer is provided
- // pin nodes and get values of u and duds_t
- else                                                                 
-  {                                 
-   
-   // node position along edge b in macro element boundary representation 
-   // [-1,1]
-   Vector<double> m(2);
-   
-   // finite difference step
-   const double h = 10e-8;
    
    // loop over nodes on boundary b                                         
    for (unsigned n = 0; n < n_node; n++)              
     {                                        
      
      // find node position along edge [-1,1] in macro element representation
-     mesh_pt()->boundary_node_pt(b,n)->get_coordinates_on_boundary(b,m);
+     Bulk_element_mesh_pt->boundary_node_pt(b,n)->
+      get_coordinates_on_boundary(b,m);
      
      // get u at node
      double u;
@@ -336,15 +144,148 @@ impose_simply_supported_edge(const unsigned& b,DirichletBCFctPt u_fn,
      double duds_t = m[1]*dudm_t;
      
      // pin and set u type dof
-     mesh_pt()->boundary_node_pt(b,n)->pin(0);
-     mesh_pt()->boundary_node_pt(b,n)->set_value(0,u);
+     Bulk_element_mesh_pt->boundary_node_pt(b,n)->pin(0);
+     Bulk_element_mesh_pt->boundary_node_pt(b,n)->set_value(0,u);
      
      // pin and set duds_t type degree of freedom  
-     mesh_pt()->boundary_node_pt(b,n)->pin(2-s_fixed_index);
-     mesh_pt()->boundary_node_pt(b,n)->set_value(2-s_fixed_index,duds_t);
+     Bulk_element_mesh_pt->boundary_node_pt(b,n)->pin(2-s_fixed_index);
+     Bulk_element_mesh_pt->boundary_node_pt(b,n)
+      ->set_value(2-s_fixed_index,duds_t);
     }                                                          
   }
+
+ // if dudn is prescribed then impose
+ if (dudn_fn != 0)
+  {
+   
+   // loop over nodes on boundary b                                         
+   for (unsigned n = 0; n < n_node; n++)              
+    {
+     // vectors for dx_i/ds_n and dx_i/ds_t
+     Vector<double> dxds_n(2);
+     Vector<double> dxds_t(2);
+     dxds_n[0] = 
+      Bulk_element_mesh_pt->boundary_node_pt(b,n)->x_gen(1+s_fixed_index,0);
+     dxds_n[1] = 
+      Bulk_element_mesh_pt->boundary_node_pt(b,n)->x_gen(1+s_fixed_index,1);
+     dxds_t[0] = 
+      Bulk_element_mesh_pt->boundary_node_pt(b,n)->x_gen(2-s_fixed_index,0);
+     dxds_t[1] = 
+      Bulk_element_mesh_pt->boundary_node_pt(b,n)->x_gen(2-s_fixed_index,1);
+     
+     // vector for d2xi/ds_n ds_t
+     Vector<double> d2xds_nds_t(2);
+     d2xds_nds_t[0] = Bulk_element_mesh_pt->boundary_node_pt(b,n)->x_gen(3,0);
+     d2xds_nds_t[1] = Bulk_element_mesh_pt->boundary_node_pt(b,n)->x_gen(3,1);
+     
+     // compute dn/ds_n
+     double dnds_n = ((dxds_n[0]*dxds_t[1])-(dxds_n[1]*dxds_t[0]))
+      / (sqrt(dxds_t[0]*dxds_t[0]+dxds_t[1]*dxds_t[1])*edge_sign);
+     
+     // compute dt/ds_n
+     double dtds_n = ((dxds_n[0]*dxds_t[0])+(dxds_n[1]*dxds_t[1]))
+      /sqrt(dxds_t[0]*dxds_t[0]+dxds_t[1]*dxds_t[1]);
+     
+     // compute dt/ds_t
+     double dtds_t = sqrt(pow(dxds_t[0],2)+pow(dxds_t[1],2));
+
+     // compute ds_n/dn
+     double ds_ndn = -1.0*(edge_sign*sqrt(pow(dxds_t[0],2)+pow(dxds_t[1],2)))/
+      (dxds_t[0]*dxds_n[1]-dxds_n[0]*dxds_t[1]);
+
+     // compute ds_t/dt
+     double ds_tdt = 1/sqrt(dxds_t[0]*dxds_t[0]+dxds_t[1]*dxds_t[1]);
+
+     // compute d2t/ds_nds_t
+     double d2tds_nds_t = (dxds_t[0]*d2xds_nds_t[0] + dxds_t[1]*d2xds_nds_t[1])
+      /sqrt(dxds_t[0]*dxds_t[0] + dxds_t[1]*dxds_t[1]);
+
+     // compute d2s_t/ds_ndt
+     double d2s_tds_ndt = (dxds_t[0]*d2xds_nds_t[0] + dxds_t[1]*d2xds_nds_t[1])
+      /pow(dxds_t[0]*dxds_t[0] + dxds_t[1]*dxds_t[1],3.0/2.0);
+
+     // get m_t and dm_t/ds_t for this node
+     Vector<double> m_N(2);
+     Bulk_element_mesh_pt->boundary_node_pt(b,n)
+      ->get_coordinates_on_boundary(b,m_N);
+
+     // compute d2u/dm_t2 and d/dm_t(dudn) by finite difference
+     double d2udm_t2 = 0;
+     double ddm_tdudn = 0;
+     double u_2L,u_N,u_2R,dudn_L,dudn_R;
+     // evaluate u_fn and dudn_fn for current node
+     if (n == 0)
+      {
+       (*u_fn)(m_N[0],u_2L);
+       (*u_fn)(m_N[0]+h,u_N);
+       (*u_fn)(m_N[0]-2*h,u_2R);
+       (*dudn_fn)(m_N[0],dudn_L);
+       (*dudn_fn)(m_N[0]+h,dudn_R);
+      }
+     else if (n == n_node-1)
+      {
+       (*u_fn)(m_N[0]-2*h,u_2L);
+       (*u_fn)(m_N[0]-h,u_N);
+       (*u_fn)(m_N[0],u_2R);
+       (*dudn_fn)(m_N[0]-h,dudn_L);
+       (*dudn_fn)(m_N[0],dudn_R);
+      }
+     else
+      {
+       (*u_fn)(m_N[0]-h,u_2L);
+       u_N = Bulk_element_mesh_pt->boundary_node_pt(b,n)->value(0);
+       (*u_fn)(m_N[0]+h,u_2R);      
+       (*dudn_fn)(m_N[0]-0.5*h,dudn_L);
+       (*dudn_fn)(m_N[0]+0.5*h,dudn_R);
+      }
+     // compute
+     d2udm_t2 = (u_2L+u_2R-2*u_N)/(h*h);
+     ddm_tdudn = (dudn_R-dudn_L)/h;
+
+     // get dudn at the node
+     double dudn;
+     (*dudn_fn)(m_N[0],dudn);
+
+     // compute d2u/ds_t2
+     double d2uds_t2 = m_N[1]*m_N[1]*d2udm_t2;
+
+     // get duds_t
+     double duds_t = Bulk_element_mesh_pt->
+      boundary_node_pt(b,n)->value(2-s_fixed_index);
+
+     // get du/dt
+     double dudt = ds_tdt*duds_t;
+
+     // compute d2u/dndt
+     double d2udndt = ds_tdt= dtds_t*m_N[1]*ddm_tdudn;
+
+     // compute d2udt2
+     double dtds_nd2udt2 = edge_sign*(dxds_t[0]*dxds_n[1]-
+                                      dxds_n[0]*dxds_t[1])*
+      (ds_tdt*(d2udndt - ds_ndn*(d2s_tds_ndt*dudt+
+                                 ds_tdt*d2uds_t2)));
+     
+     // compute dds_n(dudt)
+     double dds_ndudt = dtds_nd2udt2 + dnds_n*d2udndt;
+
+     // compute du/ds_n
+     double duds_n = dnds_n*dudn + dtds_n*ds_tdt*duds_t;
+
+     // compute d2u/ds_nds_t
+     double d2uds_nds_t = d2tds_nds_t*dudt+dtds_t*dds_ndudt;
+
+     // pin du/ds_n dof and set value
+     Bulk_element_mesh_pt->boundary_node_pt(b,n)->pin(1+s_fixed_index);
+     Bulk_element_mesh_pt->boundary_node_pt(b,n)->
+      set_value(1+s_fixed_index,duds_n);
+
+     // pin d2u/ds_nds_t dof and set value
+     Bulk_element_mesh_pt->boundary_node_pt(b,n)->pin(3);
+     Bulk_element_mesh_pt->boundary_node_pt(b,n)->set_value(3,d2uds_nds_t);
+    }
+  }
 }
+
 
 
 //=============================================================================
@@ -352,14 +293,22 @@ impose_simply_supported_edge(const unsigned& b,DirichletBCFctPt u_fn,
 /// laplacian(u) and dlaplacian(u)/dn with flux edge elements
 //=============================================================================
 template<unsigned DIM>
-void BiharmonicPlateProblem<DIM>::
-impose_free_edge(const unsigned &b, 
-                 BiharmonicFluxElement<2>::FluxFctPt flux0_fct_pt,
-                 BiharmonicFluxElement<2>::FluxFctPt flux1_fct_pt)
+void BiharmonicProblem<DIM>::
+set_neumann_boundary_condition(const unsigned &b, 
+                               BiharmonicFluxElement<2>::FluxFctPt 
+                               flux0_fct_pt,
+                               BiharmonicFluxElement<2>::FluxFctPt 
+                               flux1_fct_pt)
 {
- 
+
+ // if the face element mesh pt does not exist then build it
+ if (Face_element_mesh_pt == 0)
+  {
+   Face_element_mesh_pt = new Mesh();
+  }
+
  // How many bulk elements are adjacent to boundary b?
- unsigned n_element = mesh_pt()->nboundary_element(b);
+ unsigned n_element = Bulk_element_mesh_pt->nboundary_element(b);
  
  // Loop over the bulk elements adjacent to boundary b?
  for(unsigned e=0;e<n_element;e++)
@@ -367,22 +316,26 @@ impose_free_edge(const unsigned &b,
    
    // Get pointer to the bulk element that is adjacent to boundary b
    FiniteElement* bulk_elem_pt = 
-    dynamic_cast<FiniteElement* >(mesh_pt()->boundary_element_pt(b,e));
+    dynamic_cast<FiniteElement* >(Bulk_element_mesh_pt->boundary_element_pt(b,e));
    
    // What is the face index along the boundary
-   int face_index = mesh_pt()->face_index_at_boundary(b,e);
+   int face_index = Bulk_element_mesh_pt->face_index_at_boundary(b,e);
    
    // Build the corresponding prescribed-flux element
    BiharmonicFluxElement<2> *flux_element_pt = new 
     BiharmonicFluxElement<2>
     (bulk_elem_pt, face_index, b);
+
      
    // pass the flux BC pointers to the flux elements
    flux_element_pt->flux0_fct_pt() = flux0_fct_pt;
-   flux_element_pt->flux1_fct_pt() = flux1_fct_pt;       
-   
+   if (flux1_fct_pt != 0)
+    {
+     flux_element_pt->flux1_fct_pt() = flux1_fct_pt;       
+    }
+
    //Add the prescribed-flux element to the mesh
-   mesh_pt()->add_element_pt(flux_element_pt);
+   Face_element_mesh_pt->add_element_pt(flux_element_pt);
   } 
 }
 
@@ -392,7 +345,7 @@ impose_free_edge(const unsigned &b,
 /// the error between the numerical and exact solution is presented
 //=============================================================================
 template<unsigned DIM>
-void BiharmonicPlateProblem<DIM>::
+void BiharmonicProblem<DIM>::
 doc_solution(DocInfo& doc_info, 
              FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
 {  
@@ -403,10 +356,10 @@ doc_solution(DocInfo& doc_info,
  unsigned npts=5;
 
  // Output solution 
- sprintf(filename,"%s/soln_%s.dat",doc_info.directory().c_str(),
-         doc_info.label().c_str());
+ sprintf(filename,"%s/soln_%i.dat",doc_info.directory().c_str(),
+         doc_info.number());
  some_file.open(filename);
- mesh_pt()->output(some_file,npts);
+ Bulk_element_mesh_pt->output(some_file,npts);
  some_file.close();
  
  // if the exact solution is not provided
@@ -414,18 +367,18 @@ doc_solution(DocInfo& doc_info,
   {
 
    // Output exact solution
-   sprintf(filename,"%s/exact_soln_%s.dat",doc_info.directory().c_str(),
-           doc_info.label().c_str());
+   sprintf(filename,"%s/exact_soln_%i.dat",doc_info.directory().c_str(),
+           doc_info.number());
    some_file.open(filename); 
-   mesh_pt()->output_fct(some_file,npts, exact_soln_pt);
+   Bulk_element_mesh_pt->output_fct(some_file,npts, exact_soln_pt);
    some_file.close();
      
    // Doc error and return of the square of the L2 error
    double error,norm;
-   sprintf(filename,"%s/error_%s.dat",doc_info.directory().c_str(),
-           doc_info.label().c_str());
+   sprintf(filename,"%s/error_%i.dat",doc_info.directory().c_str(),
+           doc_info.number());
    some_file.open(filename);
-   mesh_pt()->compute_error(some_file, exact_soln_pt, error, norm);
+   Bulk_element_mesh_pt->compute_error(some_file, exact_soln_pt, error, norm);
    some_file.close();
    
    // Doc L2 error and norm of solution
@@ -781,7 +734,7 @@ impose_fluid_flow_on_edge(const unsigned& b,FluidBCFctPt u_imposed_fn)
    
   default:
    throw OomphLibError("Face Index not +/-1 or +/-2: Need 2D QElements",
-                       "BiharmonicPlateProblem::impose_clamped_edge()",
+                       "BiharmonicProblem::impose_clamped_edge()",
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -948,7 +901,7 @@ doc_solution(DocInfo& doc_info,
 
 // ensure build
 template class BiharmonicFluidProblem<2>;
-template class BiharmonicPlateProblem<2>;
+template class BiharmonicProblem<2>;
 
 }
 

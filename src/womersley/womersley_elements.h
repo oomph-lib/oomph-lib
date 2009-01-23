@@ -1248,7 +1248,7 @@ public:
 
    // Local scope to make sure dx goes out of scope
    {
-    Vector<double> dx(n_dof);
+    DoubleVector dx;
     Womersley_problem_pt->linear_solver_pt()->solve(Womersley_problem_pt,dx);
    }
 
@@ -1256,8 +1256,10 @@ public:
    // Pre-compute derivative of p_in w.r.t. q
 
    // Setup vector of derivatives of residuals & unknowns w.r.t. Q
-   Vector<double> drdq(n_dof,0.0);
-   Vector<double> dxdq(n_dof,0.0);
+   LinearAlgebraDistribution dist(Womersley_problem_pt->communicator_pt(),
+                                  n_dof,false);
+   DoubleVector drdq(&dist);
+   DoubleVector dxdq(&dist);
 
    // What's the global equation number of the equation that
    // determines the pressure gradient

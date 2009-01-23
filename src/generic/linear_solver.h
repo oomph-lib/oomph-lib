@@ -44,6 +44,7 @@
 
 //oomph-lib headers
 #include "Vector.h"
+#include "double_vector.h"
 #include "matrices.h"
 
 namespace oomph
@@ -67,7 +68,7 @@ class Problem;
 /// and the rhs can be specified, but this are not guaranteed to
 /// implemented for all linear solvers (e.g. for frontal solvers).
 //====================================================================
-class LinearSolver
+ class LinearSolver : public DistributableLinearAlgebraObject
 {
   protected:
  
@@ -79,7 +80,7 @@ class LinearSolver
  /// \short Boolean flag that indicates whether the time taken
  // for the solves should be documented
  bool Doc_time;
- 
+
   public:
 
  /// Empty constructor, initialise the member data
@@ -122,8 +123,19 @@ class LinearSolver
  /// \short Solver: Takes pointer to problem and returns the results vector
  /// which contains the solution of the linear system defined by
  /// the problem's fully assembled Jacobian and residual vector.
- virtual void solve(Problem* const &problem_pt, Vector<double> &result)=0;
+ virtual void solve(Problem* const &problem_pt, DoubleVector &result)=0;
 
+ /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs 
+ /// vector and returns the solution of the linear system. 
+ virtual void solve(DoubleMatrixBase* const &matrix_pt,
+                    const DoubleVector &rhs,
+                    DoubleVector &result)
+  {
+   throw OomphLibError(
+    "DoubleVector based solve function not implemented for this solver",
+    "LinearSolver::solve()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
 
  /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs 
  /// vector and returns the solution of the linear system. 
@@ -132,75 +144,21 @@ class LinearSolver
                     Vector<double> &result)
   {
    throw OomphLibError(
-    "Linear-algebra-type solve function not implemented for this solver",
+    "Vector<double> based solve function not implemented for this solver",
     "LinearSolver::solve()",
     OOMPH_EXCEPTION_LOCATION);
   }
  
-#ifdef OOMPH_HAS_MPI
- /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs 
- /// vector and returns the solution of the linear system. 
- virtual void solve(DoubleMatrixBase* const &matrix_pt,
-                    const DistributedVector<double> &rhs,
-                    Vector<double> &solution)
-  {
-   throw OomphLibError(
-    "Resolve function not implemented for this linear solver",
-    "LinearSolver::solve()",
-    OOMPH_EXCEPTION_LOCATION);
-  }
- 
-
-
- /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs 
- /// vector and returns the solution of the linear system. 
- virtual void solve(DoubleMatrixBase* const &matrix_pt,
-                    const DistributedVector<double> &rhs,
-                    DistributedVector<double> &solution)
-  {
-   throw OomphLibError(
-    "Resolve function not implemented for this linear solver",
-    "LinearSolver::solve()",
-    OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
-
  /// \short Resolve the system defined by the last assembled jacobian
  /// and the rhs vector. Solution is returned in the vector result.
  /// (broken virtual)
- virtual void resolve(const Vector<double> &rhs, Vector<double> &result)
+ virtual void resolve(const DoubleVector &rhs, DoubleVector &result)
   {
    throw OomphLibError(
     "Resolve function not implemented for this linear solver",
     "LinearSolver::resolve()",
     OOMPH_EXCEPTION_LOCATION);
   }
-
-#ifdef OOMPH_HAS_MPI
- /// \short Resolve the system defined by the last assembled jacobian
- /// and the rhs vector. Solution is returned in the vector result.
- /// (broken virtual)
- virtual void resolve(const DistributedVector<double> &rhs,
-                      Vector<double> &solution)
-  {
-   throw OomphLibError(
-    "Resolve function not implemented for this linear solver",
-    "LinearSolver::resolve()",
-    OOMPH_EXCEPTION_LOCATION);
-  }
-
- /// \short Resolve the system defined by the last assembled jacobian
- /// and the rhs vector. Solution is returned in the vector result.
- /// (broken virtual)
- virtual void resolve(const DistributedVector<double> &rhs,
-                      DistributedVector<double> &solution)
-  {
-   throw OomphLibError(
-    "Resolve function not implemented for this linear solver",
-    "LinearSolver::resolve()",
-    OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
 
  /// \short Empty virtual function that can be overloaded in specific
  /// linear solvers to clean up any memory that may have been
@@ -223,18 +181,20 @@ class LinearSolver
  virtual double linear_solver_solution_time()
   {
    throw OomphLibError(
-    "linear_solver_solution_time has not been implemented for this linear solver",
+    "linear_solver_solution_time() not implemented for this linear solver",
     "LinearSolver::linear_solver_solution_time()",
     OOMPH_EXCEPTION_LOCATION);
    return 0;
   }
-
 };
 
-//====================================================================
-/// \short Dense LU decomposition-based solve of full assembled linear system
-/// VERY inefficient but useful to illustrate the principle.
-//====================================================================
+//=============================================================================
+/// \short Dense LU decomposition-based solve of full assembled linear system.
+/// VERY inefficient but useful to illustrate the principle.\n
+/// Only suitable for use with Serial matrices and vectors.\n
+/// This solver will only work with non-distributed matrices and vectors
+/// (note: DenseDoubleMatrix is not distributable)
+//============================================================================
 class DenseLU : public LinearSolver
 {
  ///The DenseDoubleMatrix class is a friend
@@ -246,7 +206,7 @@ class DenseLU : public LinearSolver
  DenseLU() : Jacobian_setup_time(0.0),
   Solution_time(0.0), 
   Sign_of_determinant_of_matrix(0),
-  Index(0), LU_factors(0), N_dof(0)
+  Index(0), LU_factors(0)
   {
    // Shut up!
    Doc_time=false;
@@ -270,12 +230,16 @@ class DenseLU : public LinearSolver
  /// \short Solver: Takes pointer to problem and returns the results Vector
  /// which contains the solution of the linear system defined by
  /// the problem's fully assembled Jacobian and residual Vector.
- void solve(Problem* const &problem_pt, Vector<double> &result);
+ void solve(Problem* const &problem_pt, DoubleVector &result);
 
  /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs 
  /// vector and returns the solution of the linear system.
- void solve(DoubleMatrixBase* const &matrix_pt,
-            const Vector<double> &rhs,
+ void solve(DoubleMatrixBase* const &matrix_pt,const DoubleVector &rhs,
+            DoubleVector &result);
+
+ /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs 
+ /// vector and returns the solution of the linear system.
+ void solve(DoubleMatrixBase* const &matrix_pt,const Vector<double> &rhs,
             Vector<double> &result);
 
  ///  \short returns the time taken to assemble the jacobian matrix and 
@@ -292,14 +256,20 @@ class DenseLU : public LinearSolver
    return Solution_time;
   }
 
+ /// access function to Doc_time
+ bool& doc_time() { return Doc_time; }
+
   protected:
 
  /// Perform the LU decomposition of the matrix
  void factorise(DoubleMatrixBase* const &matrix_pt);
 
  /// Do the backsubstitution step to solve the system LU result = rhs
- void backsub(const Vector<double> &rhs,
-              Vector<double> &result);
+ void backsub(const DoubleVector &rhs,
+              DoubleVector &result);
+
+ /// perform back substitution using Vector<double>
+ void backsub(const Vector<double> &rhs, Vector<double> &result);
 
  /// Clean up the stored LU factors
  void clean_up_memory();
@@ -321,11 +291,8 @@ class DenseLU : public LinearSolver
  
  /// Pointer to storage for the LU decomposition
  double* LU_factors;
-
- /// The number of unknowns in the linear system
- unsigned long N_dof;
-
 };
+
 
 //====================================================================
 /// \short Dense LU decomposition-based solve of linear system
@@ -354,7 +321,7 @@ class FD_LU : public DenseLU
  /// \short Solver: Takes pointer to problem and returns the results Vector
  /// which contains the solution of the linear system defined by
  /// the problem's residual Vector (Jacobian computed by FD approx.)
- void solve(Problem* const &problem_pt, Vector<double> &result);
+ void solve(Problem* const &problem_pt, DoubleVector &result);
 
  /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs 
  /// vector and returns the solution of the linear system. Problem pointer 
@@ -362,22 +329,23 @@ class FD_LU : public DenseLU
  /// which the preconditioner doesn't (mustn't!) require a pointer to an
  /// associated Problem. (broken virtual)
  void solve(DoubleMatrixBase* const &matrix_pt,
-            const Vector<double> &rhs,
-            Vector<double> &result)
+            const DoubleVector &rhs,
+            DoubleVector &result)
   {DenseLU::solve(matrix_pt,rhs,result);}
-
-
 };
 
 
 
 
 
-//====================================================================
+//=============================================================================
 /// \short SuperLU solver: Wrapper to Demmel, Eistenstat, Gilbert,
 /// Li & Liu's serial SuperLU solver.
-/// See http://crd.lbl.gov/~xiaoye/SuperLU/
-//====================================================================
+/// See http://crd.lbl.gov/~xiaoye/SuperLU/ \n
+/// This solver is only developed for non distributed matrices - distributable
+/// matrices (such as CRDoubleMatrix) mush not be distributed. Correspondingly
+/// the vectors must not be distributed either.
+//============================================================================
 class SuperLU : public LinearSolver
 {
  //The column and row compressed double matrices are friends
@@ -424,19 +392,19 @@ class SuperLU : public LinearSolver
  /// \short Solver: Takes pointer to problem and returns the results Vector
  /// which contains the solution of the linear system defined by
  /// the problem's fully assembled Jacobian and residual Vector.
- void solve(Problem* const &problem_pt, Vector<double> &result);
+ void solve(Problem* const &problem_pt, DoubleVector &result);
 
 
  /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs 
  /// vector and returns the solution of the linear system. Problem pointer 
  /// defaults to NULL and can be omitted.
  void solve(DoubleMatrixBase* const &matrix_pt,
-            const Vector<double> &rhs,
-            Vector<double> &result);
+            const DoubleVector &rhs,
+            DoubleVector &result);
  
  /// \short Resolve the system defined by the last assembled jacobian
  /// and the specified rhs vector. Solution is returned in the vector result
- void resolve(const Vector<double> &rhs, Vector<double> &result);
+ void resolve(const DoubleVector &rhs, DoubleVector &result);
 
  /// Return the doc_stats flag
  bool& doc_stats() {return Doc_stats;}
@@ -460,14 +428,12 @@ class SuperLU : public LinearSolver
    return Solution_time;
   }
 
-  protected:
-
  /// Do the factorisation stage
  void factorise(DoubleMatrixBase* const &matrix_pt);
   
  /// Do the backsubstitution for SuperLU solver
- void backsub(const Vector<double> &rhs,
-              Vector<double> &result);
+ void backsub(const DoubleVector &rhs,
+              DoubleVector &result);
  
  /// Clean up the memory allocated by the SuperLU solver
  void clean_up_memory();
@@ -500,12 +466,10 @@ class SuperLU : public LinearSolver
 
  /// Suppress solve?
  bool Suppress_solve;
-
-
 };
 
-#ifdef OOMPH_HAS_MPI
 
+#ifdef OOMPH_HAS_MPI
 //====================================================================
 /// \short SuperLU_dist_global_matrix solver: 
 /// Wrapper to Demmel, Eistenstat, Gilbert,
@@ -514,8 +478,8 @@ class SuperLU : public LinearSolver
 /// or on blocks of matrix rows that are held on the various processors.
 /// See http://crd.lbl.gov/~xiaoye/SuperLU/
 ///
-/// The matrix based interfaces work with CCDoubleMatrix (SuperLU_dist
-/// in global mode) or CRDoubleMatrix and DistributedCRDoubleMatrix
+/// The matrix based interfaces work with CCDoubleMatrix and CRDoubleMatrix
+/// (SuperLU_dist in global mode) or CRDoubleMatrix 
 /// (SuperLU_dist in distributed mode).
 //====================================================================
 class SuperLU_dist : public LinearSolver
@@ -530,18 +494,16 @@ class SuperLU_dist : public LinearSolver
   {
    // Set default values and nullify pointers
    Use_global_solver=false;
-   Distributed_rhs=false;
    Doc_stats=false;
    Suppress_solve=false;
    Delete_matrix_data=false;
    Solver_data_pt=0;
    Global_solve_data_allocated = false;
    Distributed_solve_data_allocated = false;
-   Ndof_local=0;
-   First_local_dof=0;
    Value_pt=0;
    Index_pt=0;
    Start_pt=0;
+   Suppress_solve = false;
 
    // Find number of rows and columns for the process grid
    // First guess at number of rows:
@@ -557,6 +519,7 @@ class SuperLU_dist : public LinearSolver
    /// Store Number of rows/columns for process grid
    Nprow=nprow;
    Npcol=MPI_Helpers::Nproc/Nprow;
+
   }
 
  /// Broken copy constructor
@@ -587,7 +550,7 @@ class SuperLU_dist : public LinearSolver
  /// \short Solver: Takes pointer to problem and returns the results Vector
  /// which contains the solution of the linear system defined by
  /// the problem's fully assembled Jacobian and residual Vector.
- void solve(Problem* const &problem_pt, Vector<double> &result);
+ void solve(Problem* const &problem_pt, DoubleVector &result);
 
 
  /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs 
@@ -597,13 +560,13 @@ class SuperLU_dist : public LinearSolver
  /// Note: if Delete_matrix_data is true the function 
  /// matrix_pt->clean_up_memory() will be used to wipe the matrix data.
  void solve(DoubleMatrixBase* const &matrix_pt,
-            const Vector<double> &rhs,
-            Vector<double> &result);
+            const DoubleVector &rhs,
+            DoubleVector &result);
  
  /// \short Resolve the system defined by the last assembled jacobian
  /// and the specified rhs vector if resolve has been enabled.
  /// Note: returns the global result Vector.
- void resolve(const Vector<double> &rhs, Vector<double> &result);
+ void resolve(const DoubleVector &rhs, DoubleVector &result);
 
  /// Return the Doc_stats flag
  bool& doc_stats()
@@ -667,18 +630,6 @@ class SuperLU_dist : public LinearSolver
   {
    return Delete_matrix_data;
   }
- 
- /// Returns the local number of unknowns in the distributed linear system
- int ndof_local() {return Ndof_local;}
-
- /// Returns the total number of unknowns in the linear system
- int ndof() {return Ndof;}
-
- /// \short Returns the first local dof number (i.e. matrix row or column
- /// for this processor
- int first_local_dof() {return First_local_dof;}
- 
-  protected:
 
  /// \short Do the factorisation stage
  /// Note: if Delete_matrix_data is true the function 
@@ -687,8 +638,8 @@ class SuperLU_dist : public LinearSolver
   
  /// \short Do the backsubstitution for SuperLU solver
  /// Note: returns the global result Vector.
- void backsub(const Vector<double> &rhs,
-              Vector<double> &result);
+ void backsub(const DoubleVector &rhs,
+              DoubleVector &result);
  
  /// Clean up the memory allocated by the SuperLU solver
  void clean_up_memory();
@@ -717,19 +668,6 @@ class SuperLU_dist : public LinearSolver
 
  /// Info flag for the SuperLU solver
  int Info;
-
- /// The local number of unknowns in the distributed linear system
- int Ndof_local;
-
- /// The total number of unknowns in the linear system
- int Ndof;
-
- /// The first local index of the matrix for this processor
- int First_local_dof;
-
- /// \short The local number of unknowns in the distributed linear system
- /// held on other processors
- Vector<int> Ndof_remote;
  
  /// Jacobian setup time
  double Jacobian_setup_time;
@@ -738,7 +676,7 @@ class SuperLU_dist : public LinearSolver
  double Solution_time;
 
  /// Flag is true if rhs vector is distributed
- bool Distributed_rhs;
+// bool Distributed_rhs;
  
  /// Suppress solve?
  bool Suppress_solve;
@@ -765,99 +703,8 @@ class SuperLU_dist : public LinearSolver
  // required by SuperLU_DIST
  int *Start_pt;
 };
-
-/* //==================================================================== */
-/* /// \short SuperLU_dist_global_matrix solver:  */
-/* /// Wrapper to Demmel, Eistenstat, Gilbert, */
-/* /// Li & Liu's distributed SuperLU solver, either operating on the */
-/* /// global matrix (i.e. the entire matrix is stored on each processor) */
-/* /// or on blocks of matrix rows that are held on the various processors. */
-/* /// See http://crd.lbl.gov/~xiaoye/SuperLU/ */
-/* //==================================================================== */
-/* class SuperLU_dist : public LinearSolver */
-/* { */
-/*   public: */
-
-/*  /// Constructor: By default we use the distributed memory version */
-/*  /// in which each processor only certain blocks of rows.  */
-/*  /// No doc by default */
-/*  SuperLU_dist() */
-/*   { */
-/*    Store_global_matrix=false; */
-/*    Doc_stats=false; */
-/*    Suppress_solve=false; */
-/*    Delete_matrix=false; */
-/*    Solver_data_pt=0; */
-   
-/*    //First attempt at number of rows for the process grid */
-/*    int nprow=int(sqrt(double(MPI_Helpers::Nproc))); */
-   
-/*    // Does this evenly divide the processor grid? */
-/*    while (nprow>1) */
-/*     { */
-/*      if (MPI_Helpers::Nproc%nprow==0) break; */
-/*      nprow-=1; */
-/*     } */
-   
-/*    /// Number of rows/columns for process grid */
-/*    Nprow=nprow; */
-/*    Npcol=MPI_Helpers::Nproc/Nprow; */
-/*   } */
-
-/*  /// \short Solver: Takes pointer to problem and returns the results Vector */
-/*  /// which contains the solution of the linear system defined by */
-/*  /// the problem's fully assembled Jacobian and residual Vector. */
-/*  void solve(Problem* const &problem_pt, Vector<double> &result); */
-
-/*  /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs  */
-/*  /// vector and returns the solution of the linear system.  */
-/*  void solve(DoubleMatrixBase* const &matrix_pt, */
-/*             Vector<double> const &rhs, */
-/*             Vector<double> &result); */
-
-
-/*  /// Return the doc_stats flag */
-/*  bool& doc_stats() {return Doc_stats;} */
-
-/*  /// \short Return the flag that decides if each processor stores the global */
-/*  ///  matrix or only a subset of its rows */
-/*  bool& store_global_matrix() {return Store_global_matrix;} */
-
-/*  /// \short Return the flag that decides if we're actually solving the */
-/*  /// system or just assembling the Jacobian and the rhs. */
-/*  /// (Used only for timing runs, obviously) */
-/*  bool& suppress_solve() {return Suppress_solve;} */
-
-/*   private: */
-
-/*  /// Storage for the LU factors and other data required by SuperLU */
-/*  void *Solver_data_pt; */
-
-/*  /// Number of rows for the process grid  */
-/*  int Nprow; */
-
-/*  /// Number of columns for the process grid */
-/*  int Npcol; */
-
-/*  /// Doc stats? */
-/*  bool Doc_stats; */
-
-/*  /// Store global matrix or distributed blocks? */
-/*  bool Store_global_matrix; */
-
-/*  /// Suppress solve? */
-/*  bool Suppress_solve; */
-
-/*  /// \short SuperLU_dist needs its own copy of the input matrix,  */
-/*  /// therefore a copy must be made if any matrix passed to this */
-/*  /// solver is to be preserved. If the input matrix can be deleted */
-/*  /// this flag can be set to true to reduce the amount of memory used. */
-/*  bool Delete_matrix; */
-
-/* }; */
-
 #endif
 
-}
 
+} // end of oomph namespace
 #endif

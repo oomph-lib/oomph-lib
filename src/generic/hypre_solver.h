@@ -56,56 +56,34 @@ namespace oomph
    /// message associated with any error, and reset the error flag to zero.
    int check_HYPRE_error_flag(std::ostringstream& message);
    
-   /// \short Helper function to create a serial HYPRE_IJVector and
-   /// HYPRE_ParVector. The length of the vector created is
-   /// n_values. An array of values (of length n_values) can be
-   /// inserted, or if (values==0) an empty Hypre vector is created.
-   /// indices can define the index of the entries in values, or if
-   /// (indices==0) values are inserted in the order they occur.
-   void create_HYPRE_Vector(const int& n_values,
+   /// \short Helper function to create a HYPRE_IJVector and HYPRE_ParVector.
+   /// + If no MPI then serial vectors are created\n
+   /// + If MPI and serial input vector then distributed hypre vectors are 
+   ///   created\n
+   /// + If MPI and distributed input vector the distributed output vectors
+   ///   are created.\n
+   void create_HYPRE_Vector(const DoubleVector& oomph_vec,
+                            const LinearAlgebraDistribution* dist_pt,
                             HYPRE_IJVector& hypre_ij_vector,
-                            HYPRE_ParVector& hypre_par_vector,
-                            const double* values=0,
-                            int* indices=0);
-   
+                            HYPRE_ParVector& hypre_par_vector);
+
+   /// \short Helper function to create an empty HYPRE_IJVector and 
+   /// HYPRE_ParVector.
+   /// + If no MPI then serial vectors are created\n
+   /// + If MPI and serial distribution then distributed hypre vectors are 
+   ///   created\n
+   /// + If MPI and distributed input distribution the distributed output 
+   ///   vectors are created.\n
+   void create_HYPRE_Vector(const LinearAlgebraDistribution* oomph_vec,
+                            HYPRE_IJVector& hypre_ij_vector,
+                            HYPRE_ParVector& hypre_par_vector);
+    
    /// \short Helper function to create a serial HYPRE_IJMatrix and
    /// HYPRE_ParCSRMatrix from a CRDoubleMatrix
-   void create_HYPRE_Matrix(const CRDoubleMatrix& oomph_matrix,
+   void create_HYPRE_Matrix(CRDoubleMatrix* oomph_matrix,
                             HYPRE_IJMatrix& hypre_ij_matrix,
-                            HYPRE_ParCSRMatrix& hypre_par_matrix);
-   
-#ifdef OOMPH_HAS_MPI
-   /// \short Helper function to create a distributed HYPRE_IJVector and
-   /// HYPRE_ParVector. lower and upper define the ranges of the contiguous
-   /// partitioning of the vector. An array of local values
-   /// (of length 1+upper-lower) can be inserted, or if (values==0) an empty
-   /// vector is created. indices can be used to define the global index
-   /// of the entries in values, or if (indices==0) values are inserted in
-   /// the order they occur.
-   void create_HYPRE_Vector(const int& lower,
-                            const int& upper,
-                            HYPRE_IJVector& hypre_ij_vector,
-                            HYPRE_ParVector& hypre_par_vector,
-                            const double* values=0,
-                            int* indices=0);
-   
-   /// \short Helper function to create a distributed HYPRE_IJMatrix and
-   /// HYPRE_ParCSRMatrix from a CRDoubleMatrix. lower and upper define
-   /// the range of the contiguous row partitioning of the Hypre matrix 
-   /// created.
-   void create_HYPRE_Matrix(const CRDoubleMatrix& oomph_matrix,
-                            const int& lower,
-                            const int& upper,
-                            HYPRE_IJMatrix& hypre_ij_matrix,
-                            HYPRE_ParCSRMatrix& hypre_par_matrix);
-   
-   /// \short Helper function to create a distributed HYPRE_IJMatrix and
-   /// HYPRE_ParCSRMatrix from a DistributedCRDoubleMatrix.
-   void create_HYPRE_Matrix(DistributedCRDoubleMatrix& oomph_matrix,
-                            HYPRE_IJMatrix& hypre_ij_matrix,
-                            HYPRE_ParCSRMatrix& hypre_par_matrix);
-   
-#endif
+                            HYPRE_ParCSRMatrix& hypre_par_matrix,
+                            LinearAlgebraDistribution* dist_pt);
   }
 
 
@@ -145,7 +123,10 @@ namespace oomph
       }
 #endif
 #endif
-     
+
+     // setup the distribution
+     Hypre_distribution_pt = new LinearAlgebraDistribution();
+
      // These keep track of which solver and preconditioner
      // (if any) currently exist
      Existing_solver = None;
@@ -201,6 +182,9 @@ namespace oomph
     {
      // call function to delete solver data
      hypre_clean_up_memory();
+
+     // delete teh oomph-lib distribution
+     delete Hypre_distribution_pt;
     }
    
    /// Broken copy constructor.
@@ -243,14 +227,6 @@ namespace oomph
    /// Last_global_row and other partitioning data and creates the distributed
    /// Hypre matrix (stored in Matrix_ij/Matrix_par) from the CRDoubleMatrix.
    void hypre_matrix_setup(CRDoubleMatrix* matrix_pt);
-   
-#ifdef OOMPH_HAS_MPI
-   /// \short Helper function which sets values of First_global_row,
-   /// Last_global_row and other partitioning data and creates the distributed
-   /// Hypre matrix (stored in Matrix_ij/Matrix_par) from the 
-   /// DistributedCRDoubleMatrix_dist.
-   void hypre_matrix_setup(DistributedCRDoubleMatrix* matrix_pt);
-#endif
 
    /// \short Sets up the data required for to use as an oomph-lib
    /// LinearSolver or Preconditioner. This must be called after
@@ -259,7 +235,7 @@ namespace oomph
 
    /// \short Helper function performs a solve if any solver
    /// exists.
-   void hypre_solve(const Vector<double> &rhs, Vector<double> &solution);
+   void hypre_solve(const DoubleVector &rhs, DoubleVector &solution);
 
    /// Flag is true to output info and results of timings
    bool Output_info;
@@ -447,22 +423,8 @@ namespace oomph
    /// Used to keep track of which preconditioner (if any) is currently stored.
    unsigned Existing_preconditioner;
 
-   /// Stores the number of rows in the matrix
-   unsigned long Nrow;
-   
-#ifdef OOMPH_HAS_MPI
-   /// Stores the first global row stored on a processor
-   int First_row;
-
-   /// Stores the last global row stored on a processor
-   int Last_row;
-
-   /// \short Used to store the number of rows stored on each processor,
-   /// N_rows_local[p] stores the number of rows on processor p. This is
-   /// needed to gather the distributed solution using MPI
-   Vector<int> Nrows_local;
-#endif   
-
+   /// the distribution for this helpers-
+   LinearAlgebraDistribution* Hypre_distribution_pt;
   };
 
 
@@ -639,7 +601,7 @@ namespace oomph
    /// generate a linear system which is then solved. This function deletes
    /// any existing internal data and then generates a new Hypre solver.
    void solve(Problem* const &problem_pt,
-              Vector<double> &solution);
+              DoubleVector &solution);
 
    /// \short Function to solve the linear system defined by matrix_pt
    /// and rhs. This function will delete any existing internal data
@@ -655,15 +617,15 @@ namespace oomph
    /// needs to be requested explicitly by the user with the
    /// delete_matrix() function.
    void solve(DoubleMatrixBase* const &matrix_pt,
-              const Vector<double> &rhs,
-              Vector<double> &solution);
+              const DoubleVector &rhs,
+              DoubleVector &solution);
 
    /// \short Function to resolve a linear system using the existing solver
    /// data, allowing a solve with a new right hand side vector. This
    /// function must be used after a call to solve(...) with
    /// enable_resolve set to true.
-   void resolve(const Vector<double> &rhs,
-                Vector<double> &solution);
+   void resolve(const DoubleVector &rhs,
+                DoubleVector &solution);
 
    /// Function deletes all solver data.
    void clean_up_memory();
@@ -881,8 +843,8 @@ namespace oomph
    /// However, this will not be the expected behaviour and therefore
    /// needs to be requested explicitly by the user with the
    /// delete_matrix() function.
-   void preconditioner_solve(const Vector<double> &r,
-                             Vector<double> &z);
+   void preconditioner_solve(const DoubleVector &r,
+                             DoubleVector &z);
 
    /// Function deletes all solver data.
    void clean_up_memory();

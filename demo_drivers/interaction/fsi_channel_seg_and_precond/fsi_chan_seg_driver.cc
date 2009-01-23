@@ -531,11 +531,9 @@ actions_before_newton_convergence_check()
    double max_res=0.0;
    get_solid_change(rms_change,max_change,rms_norm);
 
-   Vector<double> residual(ndof());
+   DoubleVector residual;
    get_residuals(residual);
-   max_res=std::abs(*std::max_element(residual.begin(),
-                                      residual.end(),          
-                                      AbsCmp<double>()));    
+   max_res=residual.max();
    
    std::cout << "==================================================\n";
    std::cout <<   "Iteration             : " 
@@ -605,13 +603,11 @@ actions_before_segregated_convergence_check()
    restore_fluid_dofs(); 
    rebuild_monolithic_mesh();
    assign_eqn_numbers();
-   Vector<double> residual(ndof());
+   DoubleVector residual;
    get_residuals(residual);
    
    //Get maximum residuals, using our own abscmp function
-   max_res =  std::abs(*std::max_element(residual.begin(),
-                                         residual.end(),          
-                                         AbsCmp<double>()));    
+   max_res =  residual.max();
   }
  
  // Write

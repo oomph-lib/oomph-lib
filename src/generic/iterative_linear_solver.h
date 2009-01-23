@@ -50,11 +50,11 @@ namespace oomph
 {
 
 
-//====================================================================
+//=============================================================================
 /// \short Base class for all linear iterative solvers.
 /// This merely defines standard interfaces for linear iterative solvers,
 /// so that different solvers can be used in a clean and transparent manner.
-//====================================================================
+//=============================================================================
 class IterativeLinearSolver : public LinearSolver
 {
   
@@ -201,9 +201,10 @@ class IterativeLinearSolver : public LinearSolver
 
 };
 
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
 
 
 
@@ -252,7 +253,7 @@ class CG : public IterativeLinearSolver
  /// \short Solver: Takes pointer to problem and returns the results vector
  /// which contains the solution of the linear system defined by
  /// the problem's fully assembled Jacobian and residual vector.
- void solve(Problem* const &problem_pt, Vector<double> &result);
+ void solve(Problem* const &problem_pt, DoubleVector &result);
  
  /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs 
  /// vector and returns the solution of the linear system. Problem pointer 
@@ -260,8 +261,8 @@ class CG : public IterativeLinearSolver
  /// the preconditioner doesn't (mustn't!) require a pointer to an
  /// associated Problem.
  void solve(DoubleMatrixBase* const &matrix_pt,
-            const Vector<double> &rhs,
-            Vector<double> &solution)
+            const DoubleVector &rhs,
+            DoubleVector &solution)
   {
    // Store the matrix if required
    if ((Enable_resolve)&&(!Resolving))
@@ -273,15 +274,27 @@ class CG : public IterativeLinearSolver
      Matrix_can_be_deleted=false;
     }
 
+   // set the distribution
+   if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt))
+    {
+     // the solver has the same distribution as the matrix if possible
+     Distribution_pt->rebuild(dynamic_cast<DistributableLinearAlgebraObject*>
+                              (matrix_pt)->distribution_pt());
+    }
+   else
+    {
+     // the solver has the same distribution as the RHS
+     Distribution_pt->rebuild(rhs.distribution_pt());
+    }
+
    //Call the helper function with no problem
    this->solve_helper(matrix_pt,rhs,solution,0);
-
   }
  
  /// \short Re-solve the system defined by the last assembled Jacobian
  /// and the rhs vector specified here. Solution is returned in the 
  /// vector result.
- void resolve(const Vector<double> &rhs, Vector<double> &result);
+ void resolve(const DoubleVector &rhs, DoubleVector &result);
  
  /// Number of iterations taken 
  unsigned iterations() 
@@ -294,8 +307,8 @@ class CG : public IterativeLinearSolver
 
  /// General interface to solve function 
  void solve_helper(DoubleMatrixBase* const &matrix_pt,
-                   const Vector<double> &rhs,
-                   Vector<double> &solution,
+                   const DoubleVector &rhs,
+                   DoubleVector &solution,
                    Problem* problem_pt);
 
  
@@ -322,15 +335,14 @@ class CG : public IterativeLinearSolver
  /// \short Boolean flag to indicate if the matrix pointed to be Matrix_pt
  /// can be deleted.
  bool Matrix_can_be_deleted;
-
 };
 
 
 
 
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -381,7 +393,7 @@ class BiCGStab : public IterativeLinearSolver
  /// \short Solver: Takes pointer to problem and returns the results vector
  /// which contains the solution of the linear system defined by
  /// the problem's fully assembled Jacobian and residual vector.
- void solve(Problem* const &problem_pt, Vector<double> &result);
+ void solve(Problem* const &problem_pt, DoubleVector &result);
  
  /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs 
  /// vector and returns the solution of the linear system. Problem pointer 
@@ -389,8 +401,8 @@ class BiCGStab : public IterativeLinearSolver
  /// the preconditioner doesn't (mustn't!) require a pointer to an
  /// associated Problem.
  void solve(DoubleMatrixBase* const &matrix_pt,
-            const Vector<double>& rhs,
-            Vector<double> &solution)
+            const DoubleVector& rhs,
+            DoubleVector &solution)
  {
   // Store the matrix if required
   if ((Enable_resolve)&&(!Resolving))
@@ -402,6 +414,19 @@ class BiCGStab : public IterativeLinearSolver
     Matrix_can_be_deleted=false;
    }
 
+ // set the distribution
+ if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt))
+  {
+   // the solver has the same distribution as the matrix if possible
+   Distribution_pt->rebuild(dynamic_cast<DistributableLinearAlgebraObject*>
+                            (matrix_pt)->distribution_pt());
+  }
+ else
+  {
+   // the solver has the same distribution as the RHS
+   Distribution_pt->rebuild(rhs.distribution_pt());
+  }
+
   //Call the helper function with no problem
   this->solve_helper(matrix_pt,rhs,solution,0);
  }
@@ -410,8 +435,8 @@ class BiCGStab : public IterativeLinearSolver
  /// \short Re-solve the system defined by the last assembled Jacobian
  /// and the rhs vector specified here. Solution is returned in the 
  /// vector result.
- void resolve(const Vector<double> &rhs, 
-              Vector<double> &result);
+ void resolve(const DoubleVector &rhs, 
+              DoubleVector &result);
  
 
  /// Number of iterations taken 
@@ -425,8 +450,8 @@ class BiCGStab : public IterativeLinearSolver
 
   /// General interface to solve function 
  void solve_helper(DoubleMatrixBase* const &matrix_pt,
-                   const Vector<double> &rhs,
-                   Vector<double> &solution,
+                   const DoubleVector &rhs,
+                   DoubleVector &solution,
                    Problem* problem_pt);
  
  /// Cleanup data that's stored for resolve (if any has been stored)
@@ -461,7 +486,6 @@ class BiCGStab : public IterativeLinearSolver
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
-
 
 
 
@@ -509,7 +533,7 @@ class GS : public IterativeLinearSolver
  /// \short Solver: Takes pointer to problem and returns the results vector
  /// which contains the solution of the linear system defined by
  /// the problem's fully assembled Jacobian and residual vector.
- void solve(Problem* const &problem_pt, Vector<double> &result);
+ void solve(Problem* const &problem_pt, DoubleVector &result);
  
  /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
  /// vector and returns the solution of the linear system. Problem pointer
@@ -517,9 +541,12 @@ class GS : public IterativeLinearSolver
  /// the preconditioner doesn't (mustn't!) require a pointer to an
  /// associated Problem.
  void solve(DoubleMatrixBase* const &matrix_pt,
-            const Vector<double> &rhs,
-            Vector<double> &solution)
+            const DoubleVector &rhs,
+            DoubleVector &solution)
  {
+  // setup the distribution
+  Distribution_pt->rebuild(rhs.distribution_pt());
+
   // Store the matrix if required
   if ((Enable_resolve)&&(!Resolving))
    {
@@ -537,8 +564,8 @@ class GS : public IterativeLinearSolver
  /// \short Re-solve the system defined by the last assembled Jacobian
  /// and the rhs vector specified here. Solution is returned in the
  /// vector result.
- void resolve(const Vector<double> &rhs,
-              Vector<double> &result);
+ void resolve(const DoubleVector &rhs,
+              DoubleVector &result);
 
 
  /// \short returns the the time taken to setup the preconditioner 
@@ -563,8 +590,8 @@ class GS : public IterativeLinearSolver
 
   /// General interface to solve function 
  void solve_helper(DoubleMatrixBase* const &matrix_pt,
-                   const Vector<double> &rhs,
-                   Vector<double> &solution,
+                   const DoubleVector &rhs,
+                   DoubleVector &solution,
                    Problem* problem_pt);
  
 
@@ -646,7 +673,7 @@ class GMRES : public IterativeLinearSolver
  /// \short Solver: Takes pointer to problem and returns the results vector
  /// which contains the solution of the linear system defined by
  /// the problem's fully assembled Jacobian and residual vector.
- void solve(Problem* const &problem_pt, Vector<double> &result);
+ void solve(Problem* const &problem_pt, DoubleVector &result);
  
  /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
  /// vector and returns the solution of the linear system. Problem pointer
@@ -654,9 +681,12 @@ class GMRES : public IterativeLinearSolver
  /// the preconditioner doesn't (mustn't!) require a pointer to an
  /// associated Problem.
  void solve(DoubleMatrixBase* const &matrix_pt,
-            const Vector<double> &rhs,
-            Vector<double> &solution)
+            const DoubleVector &rhs,
+            DoubleVector &solution)
  {
+  // setup the distribution
+  Distribution_pt->rebuild(rhs.distribution_pt());
+
   // Store the matrix if required
   if ((Enable_resolve)&&(!Resolving))
    {
@@ -674,8 +704,8 @@ class GMRES : public IterativeLinearSolver
  /// \short Re-solve the system defined by the last assembled Jacobian
  /// and the rhs vector specified here. Solution is returned in the
  /// vector result.
- void resolve(const Vector<double> &rhs,
-              Vector<double> &result);
+ void resolve(const DoubleVector &rhs,
+              DoubleVector &result);
 
  /// Number of iterations taken 
  unsigned iterations() 
@@ -713,8 +743,8 @@ class GMRES : public IterativeLinearSolver
 
  /// General interface to solve function 
  void solve_helper(DoubleMatrixBase* const &matrix_pt,
-                   const Vector<double> &rhs,
-                   Vector<double> &solution,
+                   const DoubleVector &rhs,
+                   DoubleVector &solution,
                    Problem* problem_pt);
  
 
@@ -734,8 +764,8 @@ class GMRES : public IterativeLinearSolver
 
  /// Helper function to update the result vector
  void update(const unsigned& k, const Vector<Vector<double> >& H, 
-             const Vector<double>& s, const Vector<Vector<double> >& v,
-             Vector<double> &x)
+             const Vector<double>& s, const Vector<DoubleVector>& v,
+             DoubleVector &x)
   {
    // Make a local copy of s
    Vector<double> y(s);
@@ -749,10 +779,10 @@ class GMRES : public IterativeLinearSolver
        y[j] -= H[i][j] * y[i];
       }
     }
-   
-   unsigned n_x=x.size();
-   Vector<double> temp(n_x,0.0);
-   Vector<double> z(n_x,0.0);
+
+   unsigned n_x=x.nrow();
+   DoubleVector temp(x.distribution_pt());
+   DoubleVector z(x.distribution_pt());
 //changes
    // x = Vy
    /*  unsigned n_x=x.size();    */
@@ -788,7 +818,7 @@ class GMRES : public IterativeLinearSolver
       {
        x[i] +=z[i];
       }
-    }
+    }   
   }
  
 
@@ -881,7 +911,6 @@ class GMRES : public IterativeLinearSolver
  bool Preconditioner_LHS;
 
 };
-
 }
 
 #endif

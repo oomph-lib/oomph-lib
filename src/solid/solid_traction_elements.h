@@ -902,7 +902,7 @@ fill_in_contribution_to_residuals_solid_traction(Vector<double> &residuals)
 
  /// \short The number of "blocks" that degrees of freedom in this element
  /// are sub-divided into: Just the solid degrees of freedom themselves.
- unsigned nblock_types()
+ unsigned ndof_types()
   {
    return 1;
   }
@@ -913,7 +913,7 @@ fill_in_contribution_to_residuals_solid_traction(Vector<double> &residuals)
  /// of the "block" that this unknown is associated with.
  /// (Function can obviously only be called if the equation numbering
  /// scheme has been set up.) 
- void get_block_numbers_for_unknowns(
+ void get_dof_numbers_for_unknowns(
   std::list<std::pair<unsigned long,unsigned> >& block_lookup_list);
 
 };
@@ -928,7 +928,7 @@ fill_in_contribution_to_residuals_solid_traction(Vector<double> &residuals)
 /// scheme has been set up.) This element is only in charge of the solid dofs.
 //=============================================================================
  template<class ELEMENT, unsigned DIM>
-void FSISolidTractionElement<ELEMENT,DIM>::get_block_numbers_for_unknowns(
+void FSISolidTractionElement<ELEMENT,DIM>::get_dof_numbers_for_unknowns(
  std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
 {
 

@@ -32,39 +32,40 @@
 
 
 //oomph-lib includes
-#include "preconditioner.h"
+#include "general_purpose_preconditioners.h"
 
 
 namespace oomph
 {
 
+
 //=============================================================
 /// \short Setup diagonal preconditioner: Store the inverse of the 
 /// diagonal entries from the fully
-/// assembled matrix. Problem pointer is ignored.
+/// assembled matrix.
 //=============================================================
 void MatrixBasedDiagPreconditioner::setup(Problem* problem_pt, 
                                           DoubleMatrixBase* matrix_pt)
 {
-#ifdef OOMPH_HAS_MPI
- bool cast_failed = true;
 
- // first attempt to cast to DistributedCRDoubleMatrix
- DistributedCRDoubleMatrix* dist_cr_matrix_pt = 
-  dynamic_cast<DistributedCRDoubleMatrix*>(matrix_pt);
- if (dist_cr_matrix_pt != 0)
+ // first attempt to cast to DistributableLinearAlgebraObject
+ DistributableLinearAlgebraObject* dist_matrix_pt = 
+  dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt);
+
+ // if it is a distributable matrix
+ if (dist_matrix_pt != 0)
   {
-   // store the distribution
-   Preconditioner_distribution = dist_cr_matrix_pt->distribution();
+   // cache the number of first_rows and nrow_local
+   unsigned nrow_local = dist_matrix_pt->nrow_local();
+   unsigned first_row = dist_matrix_pt->first_row();
 
-   // Resize the Inv_diag vector to accommodate the # of
-   // diagonal entries
-   Inv_diag.resize(Preconditioner_distribution.nrow_local());
+   // resize the inverse diagonal storage
+   Inv_diag.resize(nrow_local);
 
    //Extract the diagonal entries
-   for(unsigned i=0; i < Preconditioner_distribution.nrow_local(); i++)
+   for(unsigned i=0; i < nrow_local; i++)
     {
-     unsigned index = i + Preconditioner_distribution.first_row();
+     unsigned index = i + first_row;
 #ifdef PARANOID
      if ((*matrix_pt)(i,index)==0.0)
       {
@@ -76,89 +77,42 @@ void MatrixBasedDiagPreconditioner::setup(Problem* problem_pt,
 #endif
      Inv_diag[i] = 1.0/(*matrix_pt)(i,index);
     }
-      
-   cast_failed = false;
+   
+   // store the distribution
+   Distribution_pt->rebuild(dist_matrix_pt->distribution_pt());
   }
 
- if (cast_failed)
+ // else it is not a distributable matrix
+ else
   {
-   // then cr double matrix
-   CRDoubleMatrix* cr_matrix_pt =
-    dynamic_cast<CRDoubleMatrix*>(matrix_pt);
-   if (cr_matrix_pt != 0)
+   // # of rows in the matrix
+   unsigned n_row=matrix_pt->nrow();
+   
+   // Resize the Inv_diag vector to accommodate the # of 
+   //diagonal entries
+   Inv_diag.resize(n_row);
+   
+   //Extract the diagonal entries
+   for(unsigned i=0;i<n_row;i++)
     {
-     // number of rows in the global matrix
-     unsigned nrow = cr_matrix_pt->nrow();
-     
-     // store the distribution
-     // NOTE use of MPI_COMM_WORLD
-     Preconditioner_distribution.distribute(MPI_COMM_WORLD,nrow);
-     
-     // cache first_row and nrow_local
-     unsigned nrow_local = Preconditioner_distribution.nrow_local();
-     unsigned first_row = Preconditioner_distribution.first_row();
-     
-     // Resize the Inv_diag vector to accommodate the # of
-     // diagonal entries
-     Inv_diag.resize(nrow_local);
-     
-     //Extract the diagonal entries
-     for(unsigned i=0; i < nrow_local; i++)
+#ifdef PARANOID
+     if ((*matrix_pt)(i,i)==0.0) 
       {
-#ifdef PARANOID
-       if ((*matrix_pt)(i,first_row + i)==0.0)
-        {
-         throw OomphLibError(
-          "Zero diagonal in matrix --> Cannot use diagonal preconditioner.",
-          "MatrixBasedDiagPreconditioner::setup()",
-          OOMPH_EXCEPTION_LOCATION);
-        }
-#endif
-       Inv_diag[i] = 1.0/(*matrix_pt)(i,first_row + i);
+       throw OomphLibError(
+        "Zero diagonal in matrix --> Cannot use diagonal preconditioner.",
+        "MatrixBasedDiagPreconditioner::setup()",
+        OOMPH_EXCEPTION_LOCATION);
       }
-     
-     // succeeded
-     cast_failed = false;
+     else
+#endif
+      {
+       Inv_diag[i]=1.0/(*matrix_pt)(i,i);
+      }   
     }
-  }
 
-
-#ifdef PARANOID
- if (cast_failed)
-  {
-   throw OomphLibError(
-    "Matrix must be CRDoubleMatrix or DistributedCRDoubleMatrix",
-    "MatrixBasedDiagPreconditioner::setup()",
-    OOMPH_EXCEPTION_LOCATION);
-
+   // create the distribution
+   Distribution_pt->rebuild(problem_pt->communicator_pt(),n_row,false);
   }
-#endif
-#else
- // # of rows in the matrix
- unsigned n_row=matrix_pt->nrow();
- 
- // Resize the Inv_diag vector to accommodate the # of 
- //diagonal entries
- Inv_diag.resize(n_row);
- 
- //Extract the diagonal entries
- for(unsigned i=0;i<n_row;i++)
-  {
-#ifdef PARANOID
-   if ((*matrix_pt)(i,i)==0.0) 
-   {
-    throw OomphLibError(
-     "Zero diagonal in matrix --> Cannot use diagonal preconditioner.",
-     "MatrixBasedDiagPreconditioner::setup()",
-     OOMPH_EXCEPTION_LOCATION);
-   }
-   else
-#endif
-    {
-     Inv_diag[i]=1.0/(*matrix_pt)(i,i);
-    }   
-  }
-#endif
 }
 
 
@@ -166,44 +120,205 @@ void MatrixBasedDiagPreconditioner::setup(Problem* problem_pt,
 /// Apply preconditioner: Multiply r by the inverse of the diagonal.
 //=============================================================================
  void MatrixBasedDiagPreconditioner::preconditioner_solve(
-  const Vector<double> &r,Vector<double>& z)
-{
-#ifdef OOMPH_HAS_MPI
- // create the distributed vectors
- DistributedVector<double> dist_r(Preconditioner_distribution,r);
- DistributedVector<double> dist_z;
- 
- // apply the preconditioner
- preconditioner_solve(dist_r,dist_z);
-
- // copy the results back to serial z
- dist_z.global_vector(z);
-
-#else
- // serial preconditioner application
- unsigned n=r.size();
-  for (unsigned i=0;i<n;i++)
-   {      
-    z[i]=Inv_diag[i]*r[i];   
+  const DoubleVector &r,DoubleVector& z)
+ {
+#ifdef PARANOID
+  if (*r.distribution_pt() != *Distribution_pt)
+   {
+    std::ostringstream error_message_stream;
+    error_message_stream 
+     << "The r vector must have the same distribution as the preconditioner. "
+     << "(this is the same as the matrix passed to setup())";
+    throw OomphLibError
+     (error_message_stream.str(),
+      "MatrixBasedDiagPreconditioner::preconditioner_solve()",
+      OOMPH_EXCEPTION_LOCATION);
+   }
+  if (z.distribution_setup())
+   {
+    if (*z.distribution_pt() != *Distribution_pt)
+     {
+      std::ostringstream error_message_stream;
+      error_message_stream 
+       << "The z vector distribution has been setup; it must have the "
+       << "same distribution as the r vector (and preconditioner).";
+      throw OomphLibError
+       (error_message_stream.str(),
+        "MatrixBasedDiagPreconditioner::preconditioner_solve()",
+        OOMPH_EXCEPTION_LOCATION);
+     }
    }
 #endif
-}
 
-#ifdef OOMPH_HAS_MPI
-//=============================================================================
-/// Apply preconditioner: Multiply r by the inverse of the diagonal.
-//=============================================================================
-void MatrixBasedDiagPreconditioner::preconditioner_solve(
- const DistributedVector<double> &r,DistributedVector<double>& z)
-{
- // apply the preconditioner
- unsigned n=Preconditioner_distribution.nrow_local();
- for (unsigned i=0;i<n;i++)
+ // if z has not been setup then rebuild it
+ if (!z.distribution_setup())
   {
-   z[i]=Inv_diag[i]*r[i];
+   z.rebuild(Distribution_pt);
+  }
+
+ // apply the preconditioner
+ const double* r_values = r.values_pt();
+ double* z_values = z.values_pt();
+ unsigned nrow_local = this->nrow_local();
+ for (unsigned i=0;i<nrow_local;i++)
+  {      
+   z_values[i]=Inv_diag[i]*r_values[i];   
   }
 }
+
+//=============================================================================
+/// \short Setup the lumped preconditioner (problem_pt not used)
+/// Specialisation for CCDoubleMatrix 
+//=============================================================================
+template<>
+void MatrixBasedLumpedPreconditioner<CCDoubleMatrix>::
+setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
+{
+ // # of rows in the matrix
+ Nrow=matrix_pt->nrow();
+ 
+ // Create the vector for the inverse lumped
+ if (Inv_lumped_diag_pt !=0) { delete[] this->Inv_lumped_diag_pt; }
+ Inv_lumped_diag_pt = new double[this->Nrow];
+
+ // zero the vector
+ for (unsigned i = 0; i < Nrow; i++)
+  {
+   Inv_lumped_diag_pt[i] = 0.0;
+  }
+
+ // cast the Double Base Matrix to Compressed Column Double Matrix
+ CCDoubleMatrix* cc_matrix_pt = dynamic_cast<CCDoubleMatrix*>(matrix_pt);
+
+ // get the matrix
+ int* m_row_index = cc_matrix_pt->row_index();
+ double* m_value = cc_matrix_pt->value();
+ unsigned m_nnz = cc_matrix_pt->nnz();
+
+ // intially set positive matrix to true
+ Positive_matrix = true;
+
+ // lump the matrix
+ for(unsigned i=0;i< m_nnz;i++)
+  {
+   // if the matrix contains negative coefficient the matrix not positive
+   if (m_value[i] < 0.0) { Positive_matrix = false; }
+
+   // computed lumped matrix - temporarily stored in Inv_lumped_diag_pt
+   Inv_lumped_diag_pt[m_row_index[i]] += m_value[i];
+  }
+
+ // invert the lumped matrix
+ for (unsigned i = 0; i < Nrow; i++)
+  {
+   Inv_lumped_diag_pt[i] = 1.0 / Inv_lumped_diag_pt[i];
+  }
+ 
+ // create the distribution
+ Distribution_pt->rebuild(problem_pt->communicator_pt(),Nrow,false);
+}
+
+//=============================================================================
+/// \short Setup the lumped preconditioner (problem_pt not used)
+/// Specialisation for CRDoubleMatrix 
+//=============================================================================
+template<>
+void MatrixBasedLumpedPreconditioner<CRDoubleMatrix>::
+setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
+{
+ // first attempt to cast to CRDoubleMatrix
+ CRDoubleMatrix* cr_matrix_pt = 
+  dynamic_cast<CRDoubleMatrix*>(matrix_pt);
+
+ // # of rows in the matrix
+ Nrow=cr_matrix_pt->nrow_local();
+ 
+ // Create the vector for the inverse lumped
+ if (Inv_lumped_diag_pt !=0) { delete[] this->Inv_lumped_diag_pt; }
+ Inv_lumped_diag_pt = new double[this->Nrow];
+
+  // zero the vector
+ for (unsigned i = 0; i < Nrow; i++)
+  {
+   Inv_lumped_diag_pt[i] = 0.0;
+  }
+
+ // get the matrix
+ int* m_row_start = cr_matrix_pt->row_start();
+ double* m_value = cr_matrix_pt->value();
+
+ // intially set positive matrix to true
+ Positive_matrix = true;
+
+ // lump and invert matrix
+ for(unsigned i=0;i< Nrow;i++)
+  {
+   Inv_lumped_diag_pt[i] = 0.0;
+   for (int j = m_row_start[i]; j < m_row_start[i+1]; j++)
+    {
+     // if the matrix contains negative coefficient the matrix not positive
+     if (m_value[j] < 0.0) { Positive_matrix = false; }
+
+     // computed lumped coef (i,i)- temporarily stored in Inv_lumped_diag_pt
+     Inv_lumped_diag_pt[i] += m_value[j];
+    }
+   // invert coef (i,i) 
+   Inv_lumped_diag_pt[i] = 1.0/Inv_lumped_diag_pt[i];
+  }
+
+ // store the distribution
+ Distribution_pt->rebuild(cr_matrix_pt->distribution_pt());
+}
+
+
+//=============================================================================
+/// Apply preconditioner: Multiply r by the inverse of the lumped matrix
+//=============================================================================
+template<typename MATRIX>
+void MatrixBasedLumpedPreconditioner<MATRIX>::preconditioner_solve(
+  const DoubleVector &r,DoubleVector &z)
+{
+#ifdef PARANOID
+  if (*r.distribution_pt() != *Distribution_pt)
+   {
+    std::ostringstream error_message_stream;
+    error_message_stream 
+     << "The r vector must have teh same distribution as the preconditioner. "
+     << "(this is the same as the matrix passed to setup())";
+    throw OomphLibError
+     (error_message_stream.str(),
+      "MatrixBasedLumpedPreconditioner::preconditioner_solve()",
+      OOMPH_EXCEPTION_LOCATION);
+   }
+  if (z.distribution_setup())
+   {
+    if (*z.distribution_pt() != *Distribution_pt)
+     {
+      std::ostringstream error_message_stream;
+      error_message_stream 
+       << "The z vector distribution has been setup; it must have the "
+       << "same distribution as the r vector (and preconditioner).";
+      throw OomphLibError
+       (error_message_stream.str(),
+        "MatrixBasedLumpedPreconditioner::preconditioner_solve()",
+        OOMPH_EXCEPTION_LOCATION);
+     }
+   }
 #endif
+ 
+ z.rebuild(r.distribution_pt());  
+ for (unsigned i=0;i<Nrow;i++)
+  {      
+   z[i]=Inv_lumped_diag_pt[i]*r[i];   
+  }
+}
+
+
+// ensure the lumped preconditioner get built
+template class MatrixBasedLumpedPreconditioner<CCDoubleMatrix>;
+template class MatrixBasedLumpedPreconditioner<CRDoubleMatrix>;
+
+
 
 //=============================================================================
 /// setup ILU(0) preconditioner for Matrices of CCDoubleMatrix type
@@ -218,6 +333,9 @@ void ILUZeroPreconditioner<CCDoubleMatrix>::setup(Problem* problem_pt,
  // number of rows in matrix
  int n_row=cc_matrix_pt->nrow();
  
+ // set the distribution
+ Distribution_pt->rebuild(problem_pt->communicator_pt(),n_row,false);
+
  // declares variables to store number of non zero entires in L and U
  int l_nz = 0; 
  int u_nz = 0;
@@ -345,6 +463,23 @@ void ILUZeroPreconditioner<CRDoubleMatrix>::setup(Problem* problem_pt,
  // cast the Double Base Matrix to Compressed Column Double Matrix
  CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
  
+ // if the matrix is distributed then build global version
+ bool built_global = false;
+ if (cr_matrix_pt->distributed())
+  {
+   // get the global matrix
+   CRDoubleMatrix* global_matrix_pt = cr_matrix_pt->return_global_matrix();
+
+   // store at cr_matrix pointer
+   cr_matrix_pt = global_matrix_pt;
+
+   // set the flag so we can delete later
+   built_global = false;
+  }
+
+ // store the Distribution
+ Distribution_pt->rebuild(cr_matrix_pt->distribution_pt());
+
  // number of rows in matrix
  int n_row=cr_matrix_pt->nrow();
  
@@ -381,13 +516,11 @@ void ILUZeroPreconditioner<CRDoubleMatrix>::setup(Problem* problem_pt,
  //resize vectors to store the data for the lower prior to building the 
  //matrices
  L_row_start.resize(n_row+1);
- L_column_index.resize(l_nz);
- L_value.resize(l_nz);
+ L_row_entry.resize(l_nz);
  
  // and the upper matrix
  U_row_start.resize(n_row+1);
- U_column_index.resize(u_nz);
- U_value.resize(u_nz);
+ U_row_entry.resize(u_nz);
  
  // set first column pointers to zero
  L_row_start[0] = 0;
@@ -403,14 +536,14 @@ void ILUZeroPreconditioner<CRDoubleMatrix>::setup(Problem* problem_pt,
      if (m_column_index[j] < i)
       {
        int k = L_row_start[i+1]++;
-       L_value[k] = m_value[j];
-       L_column_index[k] = m_column_index[j];
+       L_row_entry[k].value() = m_value[j];
+       L_row_entry[k].index() = m_column_index[j];
       }
      else
       {
        int k = U_row_start[i+1]++;
-       U_value[k] = m_value[j];
-       U_column_index[k] = m_column_index[j];
+       U_row_entry[k].value() = m_value[j];
+       U_row_entry[k].index() = m_column_index[j];
       }
     }
   }
@@ -422,27 +555,37 @@ void ILUZeroPreconditioner<CRDoubleMatrix>::setup(Problem* problem_pt,
  for (i = 1; i < static_cast<unsigned>(n_row); i++) {
   for (j = L_row_start[i]; j < L_row_start[i+1]; j++)
    {
-    pn = U_row_start[L_column_index[j]];
-    multiplier = (L_value[j] /= U_value[pn]);
+    pn = U_row_start[L_row_entry[j].index()];
+    multiplier = (L_row_entry[j].value() /= U_row_entry[pn].value());
     qn = j + 1;
     rn = U_row_start[i];
-    for (pn++; pn < U_row_start[L_column_index[j]+1] && U_column_index[pn] < i;
-         pn++)
+    for (pn++; pn < U_row_start[L_row_entry[j].index()+1] && 
+          U_row_entry[pn].index() < i; pn++)
      {
-      while (qn < L_row_start[i+1] && L_column_index[qn] < U_column_index[pn])
+      while (qn < L_row_start[i+1] && L_row_entry[qn].index() 
+             < U_row_entry[pn].index())
        qn++;
-      if (qn < L_row_start[i+1] && U_column_index[pn] == L_column_index[qn])
-       L_value[qn] -= multiplier * U_value[pn];
+      if (qn < L_row_start[i+1] && U_row_entry[pn].index() == 
+          L_row_entry[qn].index())
+       L_row_entry[qn].value() -= multiplier * U_row_entry[pn].value();
      }
-    for ( ; pn < U_row_start[L_column_index[j]+1]; pn++)
+    for ( ; pn < U_row_start[L_row_entry[j].index()+1]; pn++)
      {
-      while (rn < U_row_start[i+1] && U_column_index[rn] < U_column_index[pn])
+      while (rn < U_row_start[i+1] && U_row_entry[rn].index() 
+             < U_row_entry[pn].index())
        rn++;
-      if (rn < U_row_start[i+1] && U_column_index[pn] == U_column_index[rn])
-       U_value[rn] -= multiplier * U_value[pn];
+      if (rn < U_row_start[i+1] && U_row_entry[pn].index() 
+          == U_row_entry[rn].index())
+       U_row_entry[rn].value() -= multiplier * U_row_entry[pn].value();
      }
    }
  }
+
+ // if we built the global matrix then delete it
+ if (built_global)
+  {
+   delete cr_matrix_pt;
+  }
 }
 
 
@@ -453,15 +596,25 @@ void ILUZeroPreconditioner<CRDoubleMatrix>::setup(Problem* problem_pt,
 /// and return z
 //=============================================================================
 void ILUZeroPreconditioner<CCDoubleMatrix>::preconditioner_solve(
-  const Vector<double>& r,Vector<double>& z)
+  const DoubleVector& r, DoubleVector& z)
 {
  // # of rows in the matrix
- int n_row=r.size();
+ int n_row=r.nrow();
+
+ // store the distribution of z
+ LinearAlgebraDistribution* z_dist = 0;
+ if (z.distribution_setup())
+  {
+   z_dist = new LinearAlgebraDistribution(z.distribution_pt());
+  }
 
  // copy r to z
- for (int i = 0; i < n_row; i++)
+ z = r;
+
+ // if z is distributed then change to global
+ if (z.distributed())
   {
-   z[i] = r[i];
+   z.redistribute(*Distribution_pt);
   }
 
  // solve Ly=r (note L matrix is unit and diagonal is not stored)
@@ -486,6 +639,13 @@ void ILUZeroPreconditioner<CCDoubleMatrix>::preconditioner_solve(
       -x*U_row_entry[j].value();
     }
   }
+
+ // if the distribution of z was preset the redistribute to original
+ if (z_dist != 0)
+  {
+   z.redistribute(*z_dist);
+   delete z_dist;
+  }
 }
 
 //=============================================================================
@@ -493,15 +653,25 @@ void ILUZeroPreconditioner<CCDoubleMatrix>::preconditioner_solve(
 ///  and return z
 //=============================================================================
 void ILUZeroPreconditioner<CRDoubleMatrix>::preconditioner_solve(
- const Vector<double>& r,Vector<double>& z)
+ const DoubleVector& r, DoubleVector& z)
 {
  // # of rows in the matrix
- int n_row=r.size();
+ int n_row=r.nrow();
  
- // copy r to z
- for (int i = 0; i < n_row; i++)
+ // store the distribution of z
+ LinearAlgebraDistribution* z_dist = 0;
+ if (z.distribution_setup())
   {
-   z[i] = r[i];
+   z_dist = new LinearAlgebraDistribution(z.distribution_pt());
+  }
+
+ // copy r to z
+ z = r;
+
+ // if z is distributed then change to global
+ if (z.distributed())
+  {
+   z.redistribute(*Distribution_pt);
   }
  
  // solve Ly=r (note L matrix is unit and diagonal is not stored)
@@ -511,7 +681,7 @@ void ILUZeroPreconditioner<CRDoubleMatrix>::preconditioner_solve(
    t = 0;
    for (unsigned j = L_row_start[i]; j <  L_row_start[i+1]; j++)
     {
-     t = t + L_value[j] * z[L_column_index[j]];
+     t = t + L_row_entry[j].value() * z[L_row_entry[j].index()];
     }
    z[i] = z[i] - t;
   }
@@ -522,13 +692,18 @@ void ILUZeroPreconditioner<CRDoubleMatrix>::preconditioner_solve(
    t = 0;
    for (unsigned j = U_row_start[i]+1; j < U_row_start[i+1]; j++)
     {
-     t = t + U_value[j] * z[U_column_index[j]];
+     t = t + U_row_entry[j].value() * z[U_row_entry[j].index()];
     }
    z[i] = z[i] - t;
-   z[i] = z[i] / U_value[U_row_start[i]];
+   z[i] = z[i] / U_row_entry[U_row_start[i]].value();
+  }
+
+ // if the distribution of z was preset the redistribute to original
+ if (z_dist != 0)
+  {
+   z.redistribute(*z_dist);
+   delete z_dist;
   }
 }
-
-
 }
 
