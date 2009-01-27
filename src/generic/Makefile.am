@@ -35,7 +35,7 @@ iterative_linear_solver.cc \
 general_purpose_preconditioners.cc block_preconditioner.cc 
 
 if WANT_MPI
-sources += superlu_dist_bridge.c preconditioner_array.cc
+sources += superlu_dist.c preconditioner_array.cc
 endif
 
 

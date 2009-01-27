@@ -1522,9 +1522,10 @@ int main(int argc, char *argv[])
      oomph_info << "-amplitude <value>        Set amplitude to value\n";
      oomph_info << "-validation_run           Generate validation data for 1D Womersley\n";
     }
-   
-   MPI_Finalize();
-   return (0);
+#ifdef OOMPH_HAS_MPI 
+   // finalize MPI
+   MPI_Helpers::finalize();
+#endif
   }
 
  // Set validation values

@@ -31,7 +31,17 @@ typedef struct
  double anorm;
 } superlu_dist_data;
 
-
+//=============================================================================
+// helper method - just calls the superlu method dCompRow_to_CompCol to convert
+// the c-style vectors of a cr matrix to a cc matrix
+//=============================================================================
+void superlu_cr_to_cc(int nrow, int ncol, int nnz, double* cr_values,
+                      int* cr_index, int* cr_start, double** cc_values,
+                      int** cc_index, int** cc_start)
+{
+ dCompRow_to_CompCol(nrow,ncol,nnz,cr_values,cr_index,cr_start,cc_values,
+                     cc_index,cc_start);
+}
 
 /*----------------------------------------------------------------
  * Bridge to distributed SuperLU with distributed memory (version 2.0).

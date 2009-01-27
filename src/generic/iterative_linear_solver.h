@@ -795,29 +795,34 @@ class GMRES : public IterativeLinearSolver
 /*     } */
 /*   } */
    // x = Vy
+   double* temp_pt = temp.values_pt();
    for (unsigned j = 0; j <= k; j++)
     {
+     double* vj_pt = v[j].values_pt();
      for (unsigned i = 0; i < n_x; i++)
       {
-       temp[i] += v[j][i] * y[j];
+       temp_pt[i] += vj_pt[i] * y[j];
       }
     }
    
+//   double* x_pt = x.values_pt();
    if(Preconditioner_LHS)
     { 
-     for (unsigned i = 0; i < n_x; i++)
-      {
-       x[i]+=temp[i];
-      }
+     x += temp;
+//     for (unsigned i = 0; i < n_x; i++)
+//      {
+//       x_pt[i]+=temp[i];
+//      }
     }
    else
     {
      //x=x0+M^{-1}Vy by saad p270
      preconditioner_pt()->preconditioner_solve(temp,z);
-     for (unsigned i = 0; i < n_x; i++)
-      {
-       x[i] +=z[i];
-      }
+     x+=z;
+//     for (unsigned i = 0; i < n_x; i++)
+//      {
+//       x[i] +=z_pt[i];
+//      }
     }   
   }
  

@@ -592,11 +592,11 @@ void Problem::set_dofs(const DoubleVector &dofs)
 {
  const unsigned long n_dof = this->ndof();
 #ifdef PARANOID
- if(n_dof != dofs.size())
+ if(n_dof != dofs.nrow())
   {
    std::ostringstream error_stream;
    error_stream << "Number of degrees of freedom in vector argument "
-                << dofs.size() << "\n"
+                << dofs.nrow() << "\n"
                 << "does not equal number of degrees of freedom in problem "
                 << n_dof;
    throw OomphLibError(error_stream.str(),

@@ -178,10 +178,11 @@ namespace oomph
     {
      j = hypre_first_row;
     }
+   double* o_pt = oomph_vec.values_pt();
    for (unsigned i=0; i<nrow_local; i++)
     {
      indices[i] = hypre_first_row + i;
-     values[i] = oomph_vec[j+i];
+     values[i] = o_pt[j+i];
     }
    
    // insert values
@@ -1159,13 +1160,6 @@ namespace oomph
                           indices, 
                           solution.values_pt());
   solution.redistribute(*rhs.distribution_pt());
-
-  for (unsigned i = 0; i < solution.nrow_local(); i++)
-   {
-    //   oomph_info << "s[" << i + solution.first_row() << "]="
-//               << solution[i] << std::endl;
-   }
-  // assert(false);
 
   delete[] indices;
   

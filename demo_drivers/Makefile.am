@@ -29,8 +29,10 @@ womersley \
 biharmonic \
 reaction_diffusion \
 flux_transport \
-young_laplace \
-mpi
+young_laplace
+if WANT_MPI
+SUBDIRS += mpi
+endif
 
 
 EXTRA_DIST=run_tests.bash

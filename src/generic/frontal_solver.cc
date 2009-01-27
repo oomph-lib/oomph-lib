@@ -45,7 +45,7 @@ namespace oomph
 /// that!
 //====================================================================
 void HSL_MA42::solve_for_one_dof(Problem* const &problem_pt, 
-                                 Vector<double> &result)
+                                 DoubleVector &result)
 {
 
  //Find the number of elements
@@ -121,7 +121,7 @@ void HSL_MA42::solve_for_one_dof(Problem* const &problem_pt,
 //====================================================================
 /// Wrapper for HSL MA42 frontal solver
 //====================================================================
-void HSL_MA42::solve(Problem* const &problem_pt, Vector<double> &result)
+void HSL_MA42::solve(Problem* const &problem_pt, DoubleVector &result)
 {
  //Find the number of elements
  unsigned long n_el = problem_pt->mesh_pt()->nelement();
@@ -792,7 +792,7 @@ void HSL_MA42::solve(Problem* const &problem_pt, Vector<double> &result)
 //====================================================================
 /// Wrapper for HSL MA42 frontal solver
 //====================================================================
-void HSL_MA42::resolve(const Vector<double> &rhs, Vector<double> &result)
+void HSL_MA42::resolve(const DoubleVector &rhs, DoubleVector &result)
 {
  //If we haven't stored the factors complain
  if(W==0) 
@@ -807,7 +807,7 @@ void HSL_MA42::resolve(const Vector<double> &rhs, Vector<double> &result)
 
  //Check that the number of DOFs is equal to the size of the RHS vector
 #ifdef PARANOID
- if(n_dof != static_cast<int>(rhs.size()))
+ if(n_dof != static_cast<int>(rhs.nrow()))
   {
    throw OomphLibError(
     "RHS does not have the same dimension as the linear system",

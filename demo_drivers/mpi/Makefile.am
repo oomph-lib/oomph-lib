@@ -1,15 +1,13 @@
 #Include commands common to every Makefile.am
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
+# DO NOT NEED TO CHECK FOR MPI BECAUSE IF WE DO NOT HAVE MPI WE DO NOT
+# DESCEND INTO THIS DIRECTORY
+
 # Name of executable
 check_PROGRAMS= \
 driven_cavity \
 direct_solver_test
-
-#=========================================
-# THE WHOLE LOT IS ONLY RUN IF WE HAVE MPI
-#=========================================
-if WANT_MPI
 
 # Do we have the TRILINOS library?
 #=================================
@@ -65,7 +63,6 @@ TrilinosSolver_test_LDADD = -L@libdir@ -lpoisson -lgeneric \
 
 endif
 
-endif
 
 
 # Include path for library headers: All library headers live in 

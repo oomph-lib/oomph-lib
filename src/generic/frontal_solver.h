@@ -60,7 +60,7 @@ class HSL_MA42 : public LinearSolver
 
  /// \short Special solver for problems with 1 dof (MA42 can't handle this
  /// case so solve() forwards the "solve" to this function.
- void solve_for_one_dof(Problem* const &problem_pt, Vector<double> &result);
+ void solve_for_one_dof(Problem* const &problem_pt, DoubleVector &result);
 
 
  /// Doc the solver stats or stay quiet?
@@ -170,12 +170,12 @@ class HSL_MA42 : public LinearSolver
  /// \short Solver: Takes pointer to problem and returns the results Vector
  /// which contains the solution of the linear system defined by
  /// the problem's fully assembled Jacobian and residual Vector.
- void solve(Problem* const &problem_pt, Vector<double> &result);
+ void solve(Problem* const &problem_pt, DoubleVector &result);
 
  /// \short Return the solution to the linear system Ax = result, where
  /// A is the most recently factorised jacobian matrix of the problem
  /// problem_pt. The solution is returned in the result vector.
- void resolve(const Vector<double> &rhs, Vector<double> &result);
+ void resolve(const DoubleVector &rhs, DoubleVector &result);
 
  /// \short Function to reorder the elements based on Sloan's algorithm
  void reorder_elements(Problem* const &problem_pt);

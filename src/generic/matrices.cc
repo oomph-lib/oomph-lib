@@ -1661,13 +1661,13 @@ void CRDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
    soln.rebuild(this->distribution_pt());
   }
 
+ if (this->distributed() && 
+     this->distribution_pt()->communicator_pt()->nproc() > 1)
+  {
 #ifdef HAVE_TRILINOS
  // This will only work if we have trilinos on board
  TrilinosHelpers::multiply(*this,x,soln);
 #else
- if (this->distributed() && 
-     this->distribution_pt()->communicator_pt()->nproc() > 1)
-  {
    std::ostringstream error_message_stream;
    error_message_stream 
     << "Matrix-vector product on multiple processors with distributed "
@@ -1675,6 +1675,7 @@ void CRDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
    throw OomphLibError(error_message_stream.str(),
                        "CRDoubleMatrix::multiply()",
                        OOMPH_EXCEPTION_LOCATION);
+#endif
   }
  else
   {   
@@ -1693,7 +1694,6 @@ void CRDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
       }
     }
   }
-#endif
 }
 
 

@@ -1722,16 +1722,18 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
    //b-Jx0=r for r(assumes x=0) by saad p270
    for(unsigned i=0;i<n_dof;i++)
     {
-     r[i]=rhs[i];
+     r=rhs;
+//     r[i]=rhs[i];
     }
   }
  //////////////// End of new version with RH preconditioning from Glyn
  double normb = 0;
  
  // compute norm(r)
+ double* r_pt = r.values_pt();
  for (unsigned i = 0; i < n_dof; i++)
   {
-   normb += r[i] * r[i];
+   normb += r_pt[i] * r_pt[i];
   }
  normb = sqrt(normb);
 
@@ -1796,9 +1798,10 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
 
    // set zeroth basis vector v[0] to r/beta
    v[0].rebuild(Distribution_pt);
+   double* v0_pt = v[0].values_pt();
    for (unsigned i = 0; i < n_dof; i++)
     {
-     v[0][i] = r[i] / beta;
+     v0_pt[i] = r_pt[i] / beta;
     }
 
    // 
@@ -1842,20 +1845,22 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
      ////////////// End of new version from Glyn
 
      //
+     double* w_pt = w.values_pt();
      for (unsigned k = 0; k <= iter_restart; k++)
       {
        
        // 
        H[iter_restart][k] = 0.0;
+       double* vk_pt = v[k].values_pt();
        for (unsigned i = 0; i < n_dof; i++)
         {
-         H[iter_restart][k] += w[i]*v[k][i];
+         H[iter_restart][k] += w_pt[i]*vk_pt[i];
         }
 
        //
        for (unsigned i = 0; i < n_dof; i++)
         {
-         w[i] -= H[iter_restart][k] * v[k][i];
+         w_pt[i] -= H[iter_restart][k] * vk_pt[i];
         }
       }
      
@@ -1864,7 +1869,7 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
       double temp_norm_w = 0.0;
       for (unsigned i = 0; i < n_dof; i++)
        {
-        temp_norm_w += w[i]*w[i];
+        temp_norm_w += w_pt[i]*w_pt[i];
        }
       temp_norm_w = sqrt(temp_norm_w);
       H[iter_restart][iter_restart+1] = temp_norm_w;
@@ -1872,9 +1877,10 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
     
      // 
      v[iter_restart + 1].rebuild(Distribution_pt);
+     double* v_pt = v[iter_restart + 1].values_pt();
      for (unsigned i = 0; i < n_dof; i++)
       {
-       v[iter_restart + 1][i] = w[i] / H[iter_restart][iter_restart+1];
+       v_pt[i] = w_pt[i] / H[iter_restart][iter_restart+1];
       }
 
      //
@@ -1968,9 +1974,11 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
    {
     DoubleVector temp(Distribution_pt);
     matrix_pt->multiply(solution,temp);
+    double* temp_pt = temp.values_pt();
+    double* rhs_pt = rhs.values_pt();
     for (unsigned i = 0; i < n_dof; i++)
      {
-      temp[i] = rhs[i] - temp[i];
+      temp_pt[i] = rhs_pt[i] - temp_pt[i];
      }
     
     if(Preconditioner_LHS)
@@ -1982,9 +1990,10 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
    
    // compute current residual
    beta = 0.0;
+   r_pt = r.values_pt();
    for (unsigned i = 0; i < n_dof; i++)
     {
-     beta += r[i] * r[i];
+     beta += r_pt[i] * r_pt[i];
     }
    beta = sqrt(beta);
 

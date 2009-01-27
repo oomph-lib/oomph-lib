@@ -168,7 +168,7 @@ class FSIDrivenCavityProblem : public virtual Problem
  /// next to the moving lid and the period of the lid's oscillation 
  FSIDrivenCavityProblem(const unsigned& nx, 
                         const unsigned& ny,
-                        const double& ly,
+                        const double& lx,
                         const double& ly,
                         const double& gap_fraction,
                         const double& period);
