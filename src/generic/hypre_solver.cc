@@ -26,7 +26,7 @@
 //LIC// 
 //LIC//====================================================================
 #include "hypre_solver.h"
-
+ 
 
 namespace oomph
 {
@@ -61,6 +61,9 @@ namespace oomph
    
    // Choose strength parameter for amg
    hypre_preconditioner_pt->amg_strength() = 0.25;
+
+   // Coarsening type
+   hypre_preconditioner_pt->amg_coarsening() = 0; 
   }
   
 

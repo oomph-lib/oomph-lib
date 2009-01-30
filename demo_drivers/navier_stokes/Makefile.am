@@ -20,5 +20,6 @@ turek_flag_non_fsi \
 channel_with_leaflet \
 free_surface_rotation \
 three_d_static_cap \
-falling_jet
+falling_jet \
+flux_control
 

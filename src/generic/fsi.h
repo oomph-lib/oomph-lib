@@ -217,7 +217,7 @@ class FSIWallElement : public virtual SolidFiniteElement,
  /// until its setup_fsi_wall_element() function has been called!
  FSIWallElement() : Only_front_is_loaded_by_fluid(true),
   Q_pt(&Default_Q_Value),  Add_external_load_data(true),
-  Include_external_shear_stress_load_data(true) {}
+  Ignore_shear_stress_in_jacobian(false) {}
 
  /// Broken copy constructor
  FSIWallElement(const FSIWallElement&) 
@@ -304,31 +304,28 @@ class FSIWallElement : public virtual SolidFiniteElement,
  /// for a time-dependent FSI problem.
  void exclude_external_load_data() {Add_external_load_data=false;}
 
- /// \short Include all external data that affects the load in the
+
+ /// \short Include all external fluid data that affects the load in the
  /// computation of the element's Jacobian matrix
  void include_external_load_data() 
   {
    Add_external_load_data=true;
-   Include_external_shear_stress_load_data=true;
+   Ignore_shear_stress_in_jacobian=false;
   }
 
- /// \short Do not include external data that affects the shear stress
- /// component of load in the computation of element's Jacobian matrix. This 
- /// functionality is provided to allow the  "user" to deem the coupling 
- /// to the shear stress conponent of the fluid equations to be
- /// irrelevant.
- void exclude_external_shear_stress_load_data() 
+ /// \short Access function to Ignore_shear_stress_in_jacobian, 
+ /// set this flag to true to ignore shear stress component
+ /// of load when calculating the Jacobian, i.e. to ignore
+ /// fluid velocity Data in the FSIFluidElement and "far away" 
+ /// geometric Data that affects nodal positions in the FSIFluidElement,
+ /// also to bypass node updates in the FSIFluidElement. 
+ /// This functionality is provided to allow the user to deem the coupling 
+ /// to the shear stress component of the fluid equations to be irrelevant.
+ bool& ignore_shear_stress_in_jacobian()
   {
-   Include_external_shear_stress_load_data=false;
+   return Ignore_shear_stress_in_jacobian;
   }
 
- /// \short Include external data that affects the shear stress
- /// component of the load in the computation of the element's Jacobian 
- /// matrix (also requires Add_external_load_data is true).
- void include_external_shear_stress_load_data() 
-  {
-   Include_external_shear_stress_load_data=true;
-  }
 
  /// \short Update the nodal positions in all fluid elements that affect 
  /// the traction on this FSIWallElement
@@ -466,9 +463,13 @@ class FSIWallElement : public virtual SolidFiniteElement,
  /// Problems are being solved.
  bool Add_external_load_data;
 
- /// \short Boolean flag used to determine whether to add the external data
- /// that affects the shear stress component of load.
- bool Include_external_shear_stress_load_data;
+ /// \short Set this flag to true to ignore shear stress component
+ /// of load when calculating the Jacobian, i.e. to ignore
+ /// fluid velocity Data in the FSIFluidElement and "far away" 
+ /// geometric Data that affects nodal positions in the FSIFluidElement,
+ /// also to bypass node updates in the FSIFluidElement. 
+ bool Ignore_shear_stress_in_jacobian;
+
 
 };
 

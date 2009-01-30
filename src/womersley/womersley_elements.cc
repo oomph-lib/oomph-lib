@@ -217,7 +217,7 @@ fill_in_generic_residual_contribution_womersley(Vector<double> &residuals,
 /// Compute volume flux through element
 //======================================================================
 template <unsigned DIM>
-double WomersleyEquations<DIM>::volume_flux()
+double WomersleyEquations<DIM>::get_volume_flux()
 {
  //Find out how many nodes there are
  unsigned n_node = nnode();

@@ -5,10 +5,29 @@
  * Lawrence Berkeley National Lab, Univ. of California Berkeley.
  * September 1, 1999
  *
+ * MODIFIED BY J BOYLE BECAUSE THE ORIGINAL FILE FAILS TO COMPILE WITH THE
+ * LATEST GNU COMPILERS ("auto" keyword).
  */
 
 #include <math.h>
 #include "superlu_ddefs.h"
+
+/*-- Function prototypes --*/
+
+/* This used to be "auto" rather than "static" */
+static void gather_1rhs_diag_to_all(int_t, double [], Glu_persist_t *,
+				    LocalLU_t *, gridinfo_t *, int_t, int_t [],
+				    int_t [], double [], double []);
+
+/* This used to be "auto" rather than "static" */
+static void redist_all_to_diag(int_t, double [], Glu_persist_t *,
+			       LocalLU_t *, gridinfo_t *, int_t [],
+			       double []);
+
+extern void pdgstrs1(int_t, LUstruct_t *, gridinfo_t *,
+		     double *, int, SuperLUStat_t *, int *);
+
+extern double dlamch_(char *);
 
 
 void
@@ -130,16 +149,6 @@ pdgsrfs_ABXglobal(int_t n, SuperMatrix *A, double anorm, LUstruct_t *LUstruct,
     int_t num_diag_procs, *diag_procs; /* Record diagonal process numbers. */
     int_t *diag_len; /* Length of the X vector on diagonal processes. */
 
-    /*-- Function prototypes --*/
-    auto void	gather_1rhs_diag_to_all(int_t, double [], Glu_persist_t *,
-				   LocalLU_t *, gridinfo_t *, int_t, int_t [],
-				   int_t [], double [], double []);
-    auto void redist_all_to_diag(int_t, double [], Glu_persist_t *,
-				   LocalLU_t *, gridinfo_t *, int_t [],
-				   double []);
-    extern void pdgstrs1(int_t, LUstruct_t *, gridinfo_t *,
-			 double *, int, SuperLUStat_t *, int *);
-    extern double dlamch_(char *);
     
     /* Test the input parameters. */
     *info = 0;
@@ -335,6 +344,7 @@ pdgsrfs_ABXglobal(int_t n, SuperMatrix *A, double anorm, LUstruct_t *LUstruct,
     CHECK_MALLOC(iam, "Exit pdgsrfs_ABXglobal()");
 #endif
 
+} /* PDGSRFS_ABXGLOBAL */
 
 
 /*
@@ -429,5 +439,3 @@ gather_1rhs_diag_to_all(int_t n, double x[],
     }
 } /* GATHER_1RHS_DIAG_TO_ALL */
 
-
-} /* PDGSRFS_ABXGLOBAL */

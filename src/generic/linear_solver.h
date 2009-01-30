@@ -497,6 +497,7 @@ class SuperLU_dist : public LinearSolver
    Doc_stats=false;
    Suppress_solve=false;
    Delete_matrix_data=false;
+   Allow_row_and_col_permutations=true;
    Solver_data_pt=0;
    Global_solve_data_allocated = false;
    Distributed_solve_data_allocated = false;
@@ -506,19 +507,19 @@ class SuperLU_dist : public LinearSolver
    Suppress_solve = false;
 
    // Find number of rows and columns for the process grid
-   // First guess at number of rows:
-   int nprow=int(sqrt(double(MPI_Helpers::Nproc)));
-   
-   // Does this evenly divide the processor grid?
-   while (nprow>1)
-    {
-     if (MPI_Helpers::Nproc%nprow==0) break;
-     nprow-=1;
-    }
-   
-   /// Store Number of rows/columns for process grid
-   Nprow=nprow;
-   Npcol=MPI_Helpers::Nproc/Nprow;
+//   // First guess at number of rows:
+//   int nprow=int(sqrt(double(MPI_Helpers::Nproc)));
+//   
+//   // Does this evenly divide the processor grid?
+//   while (nprow>1)
+//    {
+//     if (MPI_Helpers::Nproc%nprow==0) break;
+//     nprow-=1;
+//    }
+//   
+//   /// Store Number of rows/columns for process grid
+//   Nprow=nprow;
+//   Npcol=MPI_Helpers::Nproc/Nprow;
 
   }
 
@@ -630,6 +631,15 @@ class SuperLU_dist : public LinearSolver
   {
    return Delete_matrix_data;
   }
+  
+ /// \short Access function to Allow_row_and_col_permutations, if this flag
+ /// is true then SuperLU_DIST is allowed to permute matrix rows
+ /// and columns during factorisation. This is the default for SuperLU_DIST, 
+ /// and can lead to significantly faster solves.
+ bool &allow_row_and_col_permutations()
+  {
+   return Allow_row_and_col_permutations;
+  }
 
  /// \short Do the factorisation stage
  /// Note: if Delete_matrix_data is true the function 
@@ -683,6 +693,12 @@ class SuperLU_dist : public LinearSolver
 
  /// Set to true for SuperLU_dist to output statistics (false by default).
  bool Doc_stats;
+ 
+ /// \short If true then SuperLU_DIST is allowed to permute matrix rows
+ /// and columns during factorisation. This is the default for SuperLU_DIST, 
+ /// and can lead to significantly faster solves, but has been known to 
+ /// fail, hence the default value is 0.
+ bool Allow_row_and_col_permutations;
  
  /// \short Delete_matrix_data flag. SuperLU_dist needs its own copy 
  /// of the input matrix, therefore a copy must be made if any matrix 

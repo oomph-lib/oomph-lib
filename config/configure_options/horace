@@ -81,7 +81,7 @@
 #=====================================================================
 #
 # Compilation with lam mpi compilers (wrappers to gcc) with 
-# full optimisation.
+# debugging (-g) and full warnings. 
 # Library headers in the build directory are replaced by symbolic
 # links to the src directory -- this ensures that you don't
 # accidentally edit a file in the include directory only to have
@@ -91,19 +91,18 @@
 # to have been compiled with mpi support. Linking is done
 # with the lam mpi fortran compiler.
 #
---enable-suppress-doc
 --enable-MPI
+--enable-suppress-doc
 --enable-symbolic-links-for-headers
---with-blas=/home/mheil/local/lib/blas/blas.a
---with-lapack=/home/mheil/local/lib/lapack/lapack.a
---with-trilinos=/home/mheil/test_external_local/trilinos_default_installation_mpi
---with-hypre=/home/mheil/test_external_local/hypre_default_installation_mpi
---with-mpi-self-tests="mpirun -np 1"
-CXXFLAGS="-Wall -DPARANOID -DRANGE_CHECKING -g"
-CFLAGS="-g"
-FFLAGS="-g"
-CXX=mpic++
+--with-blas=""
+--with-lapack=""
+CXXFLAGS="-O3"
+CFLAGS="-O3"
+FFLAGS="-O3"
+LD=mpif90
+CXX=mpiCC
 CC=mpicc
 F77=mpif77
-LD=mpif77
+LIBS="-lmkl_solver -lmkl_lapack32 -lmkl_lapack64 -lmkl -lvml -lguide -lpthread"
+
 

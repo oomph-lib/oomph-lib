@@ -449,7 +449,10 @@ namespace oomph
     // wait for the recv to complete (the row_start recv which actually
     // contains the number of nnzs in each row)
     int c_recv = recv1_req.size();
-    MPI_Waitall(c_recv,&recv1_req[0],MPI_STATUS_IGNORE);
+    if (c_recv != 0)
+     {
+      MPI_Waitall(c_recv,&recv1_req[0],MPI_STATUS_IGNORE);
+     }
 
     // compute the total number of nnzs to be received
     Vector<int> total_nnz_recv_from_proc(nproc);
@@ -627,7 +630,10 @@ namespace oomph
        
     // wait for the recv to complete (for the column_index and the values_
     c_recv = recv2_req.size();
-    MPI_Waitall(c_recv,&recv2_req[0],MPI_STATUS_IGNORE);   
+    if (c_recv != 0)
+     {
+      MPI_Waitall(c_recv,&recv2_req[0],MPI_STATUS_IGNORE);   
+     }
 
     // create the matrix
     // creates a new compressed column sparse matrix for the pointer for
@@ -643,7 +649,10 @@ namespace oomph
 
     // wait for the send to complete (nnz / row_start)
     int c_send = send_req.size();
-    MPI_Waitall(c_send,&send_req[0],MPI_STATUS_IGNORE);
+    if (c_send)
+     {
+      MPI_Waitall(c_send,&send_req[0],MPI_STATUS_IGNORE);
+     }
 
     // delete temp storage used for assembling data for communication
     for (unsigned p = 0; p < nproc; p++)
@@ -1208,9 +1217,12 @@ namespace oomph
 
     // wait for recv to complete
     unsigned n_recv_req_nnz = recv_reqs_nnz.size();
+    if (n_recv_req_nnz)
+     {
     MPI_Waitall(n_recv_req_nnz,&recv_reqs_nnz[0],
                 MPI_STATUS_IGNORE);
-
+     }
+    
     // first compute the total number of nnzs to recv
     unsigned total_nnz_recv = 0;
     for (unsigned p = 0; p < nproc; p++)
@@ -1471,7 +1483,10 @@ namespace oomph
 
     // wait for the nnz requests to complete
     unsigned n_send_req_nnz = send_reqs_nnz.size();
-    MPI_Waitall(n_send_req_nnz,&send_reqs_nnz[0],MPI_STATUS_IGNORE);
+    if (n_send_req_nnz)
+     {
+      MPI_Waitall(n_send_req_nnz,&send_reqs_nnz[0],MPI_STATUS_IGNORE);
+     }
     for (unsigned p = 0; p < nproc; p++)
      {
       delete[] nnz_to_be_sent[p];
@@ -1479,7 +1494,10 @@ namespace oomph
 
     // wait for the indices/value send requests to complete
     unsigned n_send_reqs_coefs = send_reqs_coefs.size();
-    MPI_Waitall(n_send_reqs_coefs,&send_reqs_coefs[0],MPI_STATUS_IGNORE);
+    if (n_send_reqs_coefs)
+     {
+      MPI_Waitall(n_send_reqs_coefs,&send_reqs_coefs[0],MPI_STATUS_IGNORE);
+     }
 #endif    
    }
  }

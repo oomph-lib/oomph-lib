@@ -272,222 +272,222 @@ namespace oomph
  void ElementWithMovingNodes::fill_in_jacobian_from_geometric_data(
   Vector<double> &residuals, DenseMatrix<double> &jacobian)
  {
-
-  //Get number of Data items involved in node update operations
-  const unsigned n_geometric_data = ngeom_data();
-  
-  //If there is nothing to be done, then leave
-  if(n_geometric_data == 0) return;
-  
-  // Number of dofs
-  const unsigned n_dof = this->ndof();
+  if(!Bypass_fill_in_jacobian_from_geometric_data)
+   {
+    //Get number of Data items involved in node update operations
+    const unsigned n_geometric_data = ngeom_data();
     
-  // Number of nodes
-  unsigned n_nod=this->nnode();
-  
-  // If there are no dofs, return
-  if (n_nod==0) return;
-
-  // Get nodal dimension from first node
-  const unsigned dim_nod=node_pt(0)->ndim();
-
-  // Number of shape controlling nodes for nonrefineable elements
-  unsigned n_shape_controlling_node=nnode();
-  
-  // Are we dealing with a refineable element?
-  RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(this);
-  if (ref_el_pt!=0)
-   {      
-    // Adjust number of shape controlling nodes 
-    n_shape_controlling_node=ref_el_pt->nshape_controlling_nodes();
-   }
-  
-  // How are we going to evaluate the shape derivs?
-  unsigned method=0;
-  if (Method_for_shape_derivs==Shape_derivs_by_direct_fd)
-   {
-    method=0;
-   }
-  else if (Method_for_shape_derivs==Shape_derivs_by_chain_rule)
-   {
-    method=1;
-   }
-  else if (Method_for_shape_derivs==Shape_derivs_by_fastest_method)
-   {
-    // Direct FD-ing of residuals w.r.t. geometric dofs is likely to be faster
-    // if there are fewer geometric dofs than total nodal coordinates
-    // (nodes x dim) in element:
-    if (Ngeom_dof<(n_shape_controlling_node*dim_nod)) 
+    //If there is nothing to be done, then leave
+    if(n_geometric_data == 0) return;
+    
+    // Number of dofs
+    const unsigned n_dof = this->ndof();
+    
+    // Number of nodes
+    unsigned n_nod=this->nnode();
+    
+    // If there are no dofs, return
+    if (n_nod==0) return;
+    
+    // Get nodal dimension from first node
+    const unsigned dim_nod=node_pt(0)->ndim();
+    
+    // Number of shape controlling nodes for nonrefineable elements
+    unsigned n_shape_controlling_node=nnode();
+    
+    // Are we dealing with a refineable element?
+    RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(this);
+    if (ref_el_pt!=0)
+     {      
+      // Adjust number of shape controlling nodes 
+      n_shape_controlling_node=ref_el_pt->nshape_controlling_nodes();
+     }
+    
+    // How are we going to evaluate the shape derivs?
+    unsigned method=0;
+    if (Method_for_shape_derivs==Shape_derivs_by_direct_fd)
      {
       method=0;
      }
-    else
+    else if (Method_for_shape_derivs==Shape_derivs_by_chain_rule)
      {
-      method=1;
+    method=1;
      }
-
-   }
-
-  // Choose method
-  //===============
-  switch(method)
-   {
-
-    // Direct FD:
-    //-----------
-   case 0:
-    
-   {
-    //Create newres vector
-    Vector<double> newres(n_dof);
-    
-    //Use the default finite difference step
-    const double fd_step = GeneralisedElement::Default_fd_jacobian_step;
-        
-    //Integer storage for the local unknown
-    int local_unknown=0;
-    
-    //Loop over the Data items that affect the node update operations
-    for(unsigned i=0;i<n_geometric_data;i++)
+    else if (Method_for_shape_derivs==Shape_derivs_by_fastest_method)
      {
-      //Loop over values
-      unsigned n_value = Geom_data_pt[i]->nvalue();
-      for(unsigned j=0;j<n_value;j++)
+      // Direct FD-ing of residuals w.r.t. geometric dofs is likely to be 
+      //faster if there are fewer geometric dofs than total nodal coordinates
+      // (nodes x dim) in element:
+      if (Ngeom_dof<(n_shape_controlling_node*dim_nod)) 
        {
-        local_unknown = geometric_data_local_eqn(i,j);
-        
-        //If the value is free
-        if(local_unknown >= 0)
-         {
-          //Get a pointer to the geometric data value
-          double *value_pt = Geom_data_pt[i]->value_pt(j);
-          
-          //Save the old value
-          double old_var = *value_pt;
-          
-          //Increment the variable
-          *value_pt += fd_step;
-          
-          //Update the whole element (Bit inefficient)
-          this->node_update();
-          
-          //Calculate the new residuals
-          this->get_residuals(newres);
-          
-          //Now do finite differences
-          for(unsigned m=0;m<n_dof;m++)
-           {
-            //Stick the entry into the Jacobian matrix
-            jacobian(m,local_unknown) = (newres[m] - residuals[m])/fd_step;
-           }
-          
-          //Reset the variable
-          *value_pt = old_var;
-          
-          //We're relying on the total node update in the next loop
-         }
-       }
-     }
-    
-    // Node update the element one final time to get things back to
-    // the original state
-    this->node_update();
-   }
-   
-   break;
-   
-   // Chain rule
-   //-----------
-   case 1:
-    
-   {
-    // Get derivatives of residuals w.r.t. all nodal coordinates
-    RankThreeTensor<double> dresidual_dnodal_coordinates(
-     n_dof,
-     dim_nod,
-     n_shape_controlling_node,
-     0.0);
-    
-    // Use FD-version in base class?
-    if (Evaluate_dresidual_dnodal_coordinates_by_fd)
-     {
-      if (ref_el_pt!=0)
-       {
-        ref_el_pt->RefineableElement::get_dresidual_dnodal_coordinates(
-         dresidual_dnodal_coordinates);
+        method=0;
        }
       else
        {
-        FiniteElement::get_dresidual_dnodal_coordinates(
-         dresidual_dnodal_coordinates);
+        method=1;
        }
-     }
-    // Otherwise use the overloaded analytical version in derived
-    // class (if it exists -- if it doesn't this just drops through
-    // to the default implementation in FiniteElement).
-    else
-     {
-      this->get_dresidual_dnodal_coordinates(dresidual_dnodal_coordinates);
+      
      }
     
-    // Get derivatives of nodal coordinates w.r.t. geometric dofs
-    RankThreeTensor<double> dnodal_coordinates_dgeom_dofs(
-     n_dof,
-     dim_nod,
-     n_shape_controlling_node,
-     0.0);
-    
-    get_dnodal_coordinates_dgeom_dofs(dnodal_coordinates_dgeom_dofs);
-    
-    // Assemble Jacobian via chain rule
-    for (unsigned l=0;l<n_dof;l++)
+    // Choose method
+    //===============
+    switch(method)
      {
+      
+      // Direct FD:
+      //-----------
+     case 0:
+      
+     {
+      //Create newres vector
+      Vector<double> newres(n_dof);
+      
+      //Use the default finite difference step
+      const double fd_step = GeneralisedElement::Default_fd_jacobian_step;
+      
+      //Integer storage for the local unknown
+      int local_unknown=0;
+      
       //Loop over the Data items that affect the node update operations
-      for(unsigned i_data=0;i_data<n_geometric_data;i_data++)
+      for(unsigned i=0;i<n_geometric_data;i++)
        {
         //Loop over values
-        unsigned n_value = Geom_data_pt[i_data]->nvalue();
-        for(unsigned j_val=0;j_val<n_value;j_val++)
+        unsigned n_value = Geom_data_pt[i]->nvalue();
+        for(unsigned j=0;j<n_value;j++)
          {
-          int k = geometric_data_local_eqn(i_data,j_val);
+          local_unknown = geometric_data_local_eqn(i,j);
           
           //If the value is free
-          if(k >= 0)
+          if(local_unknown >= 0)
            {
-            jacobian(l,k)=0.0;
-            for (unsigned i=0;i<dim_nod;i++)
+            //Get a pointer to the geometric data value
+            double *value_pt = Geom_data_pt[i]->value_pt(j);
+            
+            //Save the old value
+            double old_var = *value_pt;
+            
+            //Increment the variable
+            *value_pt += fd_step;
+            
+            //Update the whole element (Bit inefficient)
+            this->node_update();
+            
+            //Calculate the new residuals
+            this->get_residuals(newres);
+            
+            //Now do finite differences
+            for(unsigned m=0;m<n_dof;m++)
              {
-              for (unsigned j=0;j<n_shape_controlling_node;j++)
+              //Stick the entry into the Jacobian matrix
+              jacobian(m,local_unknown) = (newres[m] - residuals[m])/fd_step;
+             }
+            
+            //Reset the variable
+            *value_pt = old_var;
+            
+            //We're relying on the total node update in the next loop
+           }
+         }
+       }
+      
+      // Node update the element one final time to get things back to
+      // the original state
+      this->node_update();
+     }
+     
+     break;
+     
+     // Chain rule
+     //-----------
+     case 1:
+      
+     {
+      // Get derivatives of residuals w.r.t. all nodal coordinates
+      RankThreeTensor<double> dresidual_dnodal_coordinates(
+       n_dof,
+       dim_nod,
+       n_shape_controlling_node,
+       0.0);
+      
+      // Use FD-version in base class?
+      if (Evaluate_dresidual_dnodal_coordinates_by_fd)
+       {
+        if (ref_el_pt!=0)
+         {
+          ref_el_pt->RefineableElement::get_dresidual_dnodal_coordinates(
+           dresidual_dnodal_coordinates);
+         }
+        else
+         {
+          FiniteElement::get_dresidual_dnodal_coordinates(
+           dresidual_dnodal_coordinates);
+         }
+       }
+      // Otherwise use the overloaded analytical version in derived
+      // class (if it exists -- if it doesn't this just drops through
+      // to the default implementation in FiniteElement).
+      else
+       {
+        this->get_dresidual_dnodal_coordinates(dresidual_dnodal_coordinates);
+       }
+      
+      // Get derivatives of nodal coordinates w.r.t. geometric dofs
+      RankThreeTensor<double> dnodal_coordinates_dgeom_dofs(
+       n_dof,
+       dim_nod,
+       n_shape_controlling_node,
+       0.0);
+      
+      get_dnodal_coordinates_dgeom_dofs(dnodal_coordinates_dgeom_dofs);
+      
+      // Assemble Jacobian via chain rule
+      for (unsigned l=0;l<n_dof;l++)
+       {
+        //Loop over the Data items that affect the node update operations
+        for(unsigned i_data=0;i_data<n_geometric_data;i_data++)
+         {
+          //Loop over values
+          unsigned n_value = Geom_data_pt[i_data]->nvalue();
+          for(unsigned j_val=0;j_val<n_value;j_val++)
+           {
+            int k = geometric_data_local_eqn(i_data,j_val);
+            
+            //If the value is free
+            if(k >= 0)
+             {
+              jacobian(l,k)=0.0;
+              for (unsigned i=0;i<dim_nod;i++)
                {
-                jacobian(l,k)+=
-                 dresidual_dnodal_coordinates(l,i,j)*
-                 dnodal_coordinates_dgeom_dofs(k,i,j);
+                for (unsigned j=0;j<n_shape_controlling_node;j++)
+                 {
+                  jacobian(l,k)+=
+                   dresidual_dnodal_coordinates(l,i,j)*
+                   dnodal_coordinates_dgeom_dofs(k,i,j);
+                 }
                }
              }
            }
          }
        }
      }
-   }
-   
+     
    break;
    
-   default:
-    
-    std::ostringstream error_message;
-    error_message << "Never get here: method " << method;
-    throw OomphLibError(
-     error_message.str(),
-     "ElementWithMovingNodes::fill_in_jacobian_from_geometric_data()",
-     OOMPH_EXCEPTION_LOCATION);
-    
+     default:
+      
+      std::ostringstream error_message;
+      error_message << "Never get here: method " << method;
+      throw OomphLibError(
+       error_message.str(),
+       "ElementWithMovingNodes::fill_in_jacobian_from_geometric_data()",
+       OOMPH_EXCEPTION_LOCATION);
+      
+     }
    }
-  
+
  }
-
-
-
-
+  
+ 
 //======================================================================
 /// \short Compute derivatives of the nodal coordinates w.r.t. 
 /// to the geometric dofs. Default implementation by FD can be overwritten

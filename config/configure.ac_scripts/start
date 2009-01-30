@@ -991,9 +991,9 @@ else \
 
     # Will trilinos library be built?
     #--------------------------------
-    AC_CHECK_FILES(external_distributions/trilinos/trilinos-7.0.8.tar.gz,
-                   echo "Found trilinos-7.0.8.tar.gz --> will build trilinos library"; will_have_trilinos=true, 
-                  echo "Not found trilinos-7.0.8.tar.gz --> will not build trilinos library"; will_have_trilinos=false)
+    AC_CHECK_FILES(external_distributions/trilinos/trilinos-9.0.2.tar.gz,
+                   echo "Found trilinos-9.0.2.tar.gz --> will build trilinos library"; will_have_trilinos=true, 
+                  echo "Not found trilinos-9.0.2.tar.gz --> will not build trilinos library"; will_have_trilinos=false)
     
    if test x$will_have_trilinos = xtrue; then \
     have_trilinos=true; \

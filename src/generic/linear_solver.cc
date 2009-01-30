@@ -991,16 +991,34 @@ void SuperLU::clean_up_memory()
 //===================================================================
 extern "C"
 {
+// // Interface to distributed SuperLU solver where each processor 
+// // holds the entire matrix
+// void superlu_dist_global_matrix(int opt_flag, int n, int nnz, 
+//                                 double *values, int *row_index, 
+//                                 int *col_start, double *b, int nprow, 
+//                                 int npcol, int doc, void **data, int *info);
+// 
+// // Interface to distributed SuperLU solver where each processor 
+// // holds part of the matrix
+// void superlu_dist_distributed_matrix(int opt_flag, int n, int nnz_local,
+//                                      int nrow_local, int first_row, 
+//                                      double *values, int *col_index, 
+//                                      int *row_start, double *b,
+//                                      int nprow, int npcol, 
+//                                      int doc, void **data, int *info);
+                                      
  // Interface to distributed SuperLU solver where each processor 
  // holds the entire matrix
- void superlu_dist_global_matrix(int opt_flag, int n, int nnz, 
-                                 double *values, int *row_index, 
-                                 int *col_start, double *b, int nprow, 
-                                 int npcol, int doc, void **data, int *info);
+ void superlu_dist_global_matrix(int opt_flag, int allow_permutations,
+                                 int n, int nnz, double *values, 
+                                 int *row_index, int *col_start, 
+                                 double *b, int nprow, int npcol, 
+                                 int doc, void **data, int *info);
  
  // Interface to distributed SuperLU solver where each processor 
  // holds part of the matrix
- void superlu_dist_distributed_matrix(int opt_flag, int n, int nnz_local,
+ void superlu_dist_distributed_matrix(int opt_flag, int allow_permutations,
+                                      int n, int nnz_local,
                                       int nrow_local, int first_row, 
                                       double *values, int *col_index, 
                                       int *row_start, double *b,
@@ -1041,6 +1059,21 @@ void SuperLU_dist::factorise(DoubleMatrixBase* const &matrix_pt)
   }
 #endif
 
+ // Find number of rows and columns for the process grid
+ // First guess at number of rows:
+ int nprow=int(sqrt(double(MPI_Helpers::Nproc)));
+   
+ // Does this evenly divide the processor grid?
+ while (nprow>1)
+  {
+   if (MPI_Helpers::Nproc%nprow==0) break;
+   nprow-=1;
+  }
+   
+ // Store Number of rows/columns for process grid
+ Nprow=nprow;
+ Npcol=MPI_Helpers::Nproc/Nprow;
+
  // Make sure any existing factors are deleted
  clean_up_memory();
   
@@ -1049,6 +1082,9 @@ void SuperLU_dist::factorise(DoubleMatrixBase* const &matrix_pt)
  
  // Rset Info
  Info=0;
+ 
+ // Flag for row and column permutations
+ int allow_permutations = Allow_row_and_col_permutations;
 
  // Is it a DistributedCRDoubleMatrix?
  if(dynamic_cast<CRDoubleMatrix*>(matrix_pt) != 0)
@@ -1113,7 +1149,8 @@ void SuperLU_dist::factorise(DoubleMatrixBase* const &matrix_pt)
       }
 
      // Factorize
-     superlu_dist_distributed_matrix(1, ndof, nnz_local, nrow_local, 
+     superlu_dist_distributed_matrix(1, allow_permutations,
+                                     ndof, nnz_local, nrow_local, 
                                      first_row, Value_pt, Index_pt, 
                                      Start_pt, 0, Nprow, Npcol, doc,
                                      &Solver_data_pt, &Info);
@@ -1148,7 +1185,8 @@ void SuperLU_dist::factorise(DoubleMatrixBase* const &matrix_pt)
       }
      
      // do the factorization
-     superlu_dist_global_matrix(1, nrow, nnz, Value_pt, Index_pt, Start_pt, 
+     superlu_dist_global_matrix(1, allow_permutations,
+                                nrow, nnz, Value_pt, Index_pt, Start_pt, 
                                 0, Nprow, Npcol, doc, &Solver_data_pt, &Info);
      
      // Record that data is stored
@@ -1207,7 +1245,8 @@ else if(dynamic_cast<CCDoubleMatrix*>(matrix_pt))
     }
    
    // do the factorization
-   superlu_dist_global_matrix(1, ndof, nnz, Value_pt, Index_pt, Start_pt, 
+   superlu_dist_global_matrix(1, allow_permutations,
+                              ndof, nnz, Value_pt, Index_pt, Start_pt, 
                               0, Nprow, Npcol, doc, &Solver_data_pt, &Info);
    
    // Record that data is stored
@@ -1250,14 +1289,14 @@ void SuperLU_dist::backsub(const DoubleVector &rhs,
  if (Distributed_solve_data_allocated)
   {
    // Call distributed solver
-   superlu_dist_distributed_matrix(2, ndof, 0, 0, 0, 0, 0, 0, 
+   superlu_dist_distributed_matrix(2, -1, ndof, 0, 0, 0, 0, 0, 0, 
                                    result.values_pt(), Nprow, Npcol, doc, 
                                    &Solver_data_pt, &Info);
   }
  else if (Global_solve_data_allocated)
   {
    // Call global solver
-   superlu_dist_global_matrix(2, ndof, 0, 0, 0, 0, result.values_pt(),
+   superlu_dist_global_matrix(2, -1, ndof, 0, 0, 0, 0, result.values_pt(),
                               Nprow, Npcol, doc, &Solver_data_pt, &Info);
   }
  else
@@ -1290,14 +1329,14 @@ void SuperLU_dist::clean_up_memory()
    
    if (Distributed_solve_data_allocated)
     {
-     superlu_dist_distributed_matrix(3, ndof, 0, 0, 0, 0, 0, 0, 0, 
+     superlu_dist_distributed_matrix(3, -1, ndof, 0, 0, 0, 0, 0, 0, 0, 
                                      Nprow, Npcol, doc, &Solver_data_pt, 
                                      &Info);
      Distributed_solve_data_allocated = false;
     }
    if (Global_solve_data_allocated)
     {
-     superlu_dist_global_matrix(3, ndof, 0, 0, 0, 0, 0,
+     superlu_dist_global_matrix(3, -1, ndof, 0, 0, 0, 0, 0,
                                 Nprow, Npcol, doc, &Solver_data_pt, &Info);
      Global_solve_data_allocated = false;
     }

@@ -1,9 +1,24 @@
 
 
 /*----------------------------------------------------------------
- * Interface to distributed SuperLU written by MH, based on
- * pdgssvx.c and pddrive.c demo code in superlu distribution.
+ * Interface to distributed SuperLU, created by JWB by adapting 
+ * code in the superlu distribution, i.e. files /SRC/pdgssvx.c 
+ * (function pdgssvx solves a system of linear equations) and 
+ * /EXAMPLE/pddrive.c demo (a driver program to illustrate how to
+ * use pdgssvx). 
+ * Essentially the code below performs the same functions as
+ * pdgssvx in a modified order which allows resolves. Much of the
+ * code taken from pdgssvx remains essentially unchanged other
+ * than changing the layout to match the oomph-lib standard. Comments
+ * from the original code have been left unchanged whenever possible
+ * to help match this code with that found in pdgssvx.c 
+ * 
+ * To update this driver code for use with later versions of 
+ * Distributed SuperLU I suggest first looking at changes (if any) to 
+ * the two distributed SuperLU files, and then making the corresponding
+ * changes to the code below.
  *
+ * Adapted from code found in:
  * -- Distributed SuperLU routine (version 2.0) --
  * Lawrence Berkeley National Lab, Univ. of California Berkeley.
  * March 15, 2003
@@ -73,14 +88,16 @@ void superlu_cr_to_cc(int nrow, int ncol, int nnz, double* cr_values,
  *                so the solution could not be computed.
  *             > A->ncol: number of bytes allocated when memory allocation
  *                failure occurred, plus A->ncol.
+ *         < 0: some other error
  *----------------------------------------------------------------
  */
-int superlu_dist_distributed_matrix(int opt_flag, int n, int nnz_local,
-                                    int nrow_local,int first_row, 
-                                    double *values, int *col_index, 
-                                    int *row_start, double *b, 
-                                    int nprow, int npcol,
-                                    int doc, void **data, int *info)
+void superlu_dist_distributed_matrix(int opt_flag, int allow_permutations, 
+                                     int n, int nnz_local, 
+                                     int nrow_local,int first_row,  
+                                     double *values, int *col_index,
+                                     int *row_start, double *b,  
+                                     int nprow, int npcol, 
+                                     int doc, void **data, int *info) 
 {
  /* Some SuperLU structures */
  superlu_options_t *options;
@@ -177,12 +194,17 @@ int superlu_dist_distributed_matrix(int opt_flag, int n, int nnz_local,
    /* Row permutations (NATURAL [= do nothing],     */
    /*                   LargeDiag [default], ...)?  */
    options->RowPerm=LargeDiag;
-   options->RowPerm=NATURAL;
-   
+     
    /* Column permutations (NATURAL [= do nothing],      */
    /*                      MMD_AT_PLUS_A [default],...) */
    options->ColPerm=MMD_AT_PLUS_A;
-   options->ColPerm=NATURAL;
+
+   /* Use natural ordering instead? */
+   if (allow_permutations==0) 
+    { 
+     options->ColPerm=NATURAL; 
+     options->RowPerm=NATURAL; 
+    } 
    
    /* Iterative refinement (essential as far as I can tell).*/
    /* Can be "NO" or "DOUBLE"*/
@@ -278,19 +300,19 @@ int superlu_dist_distributed_matrix(int opt_flag, int n, int nnz_local,
    if ( *info )
     {
      printf("Trouble in  pdgstrf. Info=%i\n",*info);
-     if (*info=-1)
+     if (*info==-1)
       {
        printf("Error in options.\n");
       }
-     else if (*info=-2)
+     else if (*info==-2)
       {
        printf("Error in matrix.\n");
       }
-     else if (*info=-5)
+     else if (*info==-5)
       {
        printf("ldb < m_loc\n");
       }
-     else if (*info=-6)
+     else if (*info==-6)
       {
        printf("nrhs < 0\n");
       }
@@ -1097,6 +1119,8 @@ int superlu_dist_distributed_matrix(int opt_flag, int n, int nnz_local,
  /*  Free storage */
  PStatFree(&stat);
 
+ return;
+
 }
 
 
@@ -1131,13 +1155,15 @@ int superlu_dist_distributed_matrix(int opt_flag, int n, int nnz_local,
  *                so the solution could not be computed.
  *             > A->ncol: number of bytes allocated when memory allocation
  *                failure occurred, plus A->ncol.
+ *         < 0: some other error
  *----------------------------------------------------------------
  */
-int superlu_dist_global_matrix(int opt_flag, int n_in, int nnz_in,
-                               double *values, 
-                               int *row_index, int *col_start,
-                               double *b, int nprow, int npcol,
-                               int doc, void **data, int *info)
+void superlu_dist_global_matrix(int opt_flag, int allow_permutations, 
+                                int n_in, int nnz_in, 
+                                double *values,  
+                                int *row_index, int *col_start, 
+                                double *b, int nprow, int npcol, 
+                                int doc, void **data, int *info) 
 {
  /* Some SuperLU structures */
  superlu_options_t *options;
@@ -1231,12 +1257,17 @@ int superlu_dist_global_matrix(int opt_flag, int n_in, int nnz_in,
    /* Row permutations (NATURAL [= do nothing],     */
    /*                   LargeDiag [default], ...)?  */
    options->RowPerm=LargeDiag;
-   options->RowPerm=NATURAL;
    
    /* Column permutations (NATURAL [= do nothing],      */
    /*                      MMD_AT_PLUS_A [default],...) */
    options->ColPerm=MMD_AT_PLUS_A;
-   options->ColPerm=NATURAL;
+
+   /* Use natural ordering instead? */
+   if (allow_permutations==0) 
+    { 
+     options->ColPerm=NATURAL;
+     options->RowPerm=NATURAL;
+    } 
    
    /* Iterative refinement (essential as far as I can tell).*/
    /* Can be "NO" or "DOUBLE"*/
@@ -1309,19 +1340,19 @@ int superlu_dist_global_matrix(int opt_flag, int n_in, int nnz_in,
    if ( *info )
     {
      printf("Trouble in  pdgstrf. Info=%i\n",-*info);
-     if (*info=-1)
+     if (*info==-1)
       {
        printf("Error in options.\n");
       }
-     else if (*info=-2)
+     else if (*info==-2)
       {
        printf("Error in matrix.\n");
       }
-     else if (*info=-5)
+     else if (*info==-5)
       {
        printf("ldb < A->nrow\n");
       }
-     else if (*info=-6)
+     else if (*info==-6)
       {
        printf("nrhs < 0\n");
       }
@@ -2129,6 +2160,8 @@ int superlu_dist_global_matrix(int opt_flag, int n_in, int nnz_in,
 
  /*  Free storage */
  PStatFree(&stat);
+
+ return;
 }
 
 

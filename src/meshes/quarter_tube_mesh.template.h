@@ -371,5 +371,286 @@ public:
 };
 
 
+
+//======================================================================
+/// AlgebraicMesh version of RefineableQuarterTubeMesh
+//=====================================================================
+
+
+//====================================================================
+/// \short Algebraic 3D quarter tube mesh class.
+/// \n
+/// The mesh boundaries are numbered as follows:
+/// - Boundary 0: "Inflow" cross section; located along the
+///               line parametrised by \f$ \xi_0 =  \xi_0^{lo} \f$
+///               on the geometric object that specifies the wall.
+/// - Boundary 1: Plane x=0
+/// - Boundary 2: Plane y=0
+/// - Boundary 3: The curved wall - specified by the GeomObject
+///               passed to the mesh constructor.
+/// - Boundary 4: "Outflow" cross section; located along the
+///               line parametrised by \f$ \xi_0 =  \xi_0^{hi} \f$
+///               on the geometric object that specifies the wall.
+//====================================================================
+
+
+
+//========================================================================
+/// Algebraic version of RefineableQuarterTubeMesh
+///
+/// Cross section through mesh looking along tube.........
+///
+///                      ---___
+///                     |      ---____
+///                     |              -   BOUNDARY 3
+///                     |                /
+///                     |  [Region 2]   /  |
+///                     |              /     |
+///                     | N           /        |
+///                     | |_ E       /          |
+///       BOUNDARY 1    |------------            |
+///                     |            |            |
+///                     | [Region 0] | [Region 1] |  ^
+///                     |            |            | / \  direction of
+///                     | N          |    N       |  |   2nd Lagrangian
+///                     | |_ E       |    |_ E    |  |   coordinate
+///                     |____________|____________|  |   along wall GeomObject
+///
+///                           BOUNDARY 2
+///
+/// The Domain is built of slices each consisting of three
+/// MacroElements as sketched.
+/// The local coordinates are such that the (E)astern direction
+/// coincides with the positive s_0 direction, while the
+/// (N)orther direction coincides with the positive s_1 direction.
+/// The positive s_2 direction points down the tube.
+///
+/// Elements need to be derived from AlgebraicElementBase. In
+/// addition to the refinement procedures available for the
+/// RefineableQuarterTubeMesh which forms the basis for this mesh,
+/// three algebraic node update functions are implemented for the nodes
+/// in the three regions defined by the Domain MacroElements.
+/// Note: it is assumed the cross section down the tube is
+/// uniform when setup_algebraic_node_update() is called.
+//========================================================================
+template<class ELEMENT>
+class AlgebraicRefineableQuarterTubeMesh :
+ public virtual AlgebraicMesh,
+ public RefineableQuarterTubeMesh<ELEMENT>
+{
+
+public:
+
+ /// \short Constructor: Pass pointer to geometric object, start and
+ /// end coordinates of the geometric object and the fraction along
+ /// the 2nd Lagrangian coordinate at which the dividing line between
+ /// region 1 and region 2 is to be placed, and timestepper
+ /// (defaults to (Steady) default timestepper defined in Mesh).
+ /// Sets up the refineable mesh (by calling the constructor for the
+ /// underlying RefineableQuarterTubeMesh).
+ AlgebraicRefineableQuarterTubeMesh(GeomObject* wall_pt,
+                                    const Vector<double>& xi_lo,
+                                    const double& fract_mid,
+                                    const Vector<double>& xi_hi,
+                                    const unsigned& nlayer,
+                                    const double centre_box_size=1.0,
+                                    TimeStepper* time_stepper_pt=
+                                    &Mesh::Default_TimeStepper) :
+  QuarterTubeMesh<ELEMENT>(wall_pt, xi_lo, fract_mid, xi_hi,
+                           nlayer, time_stepper_pt),
+  RefineableQuarterTubeMesh<ELEMENT>(wall_pt,xi_lo,fract_mid,xi_hi,
+                                     nlayer, time_stepper_pt),
+  Centre_box_size(centre_box_size)
+  {
+
+#ifdef PARANOID
+   ELEMENT* el_pt=new ELEMENT;
+   if (dynamic_cast<AlgebraicElementBase*>(el_pt)==0)
+    {
+     std::ostringstream error_message;
+
+     error_message << "Base class for ELEMENT in "
+                   << "AlgebraicRefineableQuarterTubeMesh needs"
+                   << "to be of type AlgebraicElement!\n";
+     error_message << "Whereas it is: typeid(el_pt).name()"
+                   << typeid(el_pt).name()
+                   << std::endl;
+
+     std::string function_name =
+      " AlgebraicRefineableQuarterTubeMesh::\n";
+     function_name += "AlgebraicRefineableQuarterTubeMesh()";
+
+     throw OomphLibError(error_message.str(),function_name,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   delete el_pt;
+#endif
+
+   // Setup algebraic node update operations
+   setup_algebraic_node_update();
+
+   // Ensure nodes are in their default position
+   node_update();
+  }
+
+ /// Run self-test for algebraic mesh -- return 0/1 for OK/failure
+ unsigned self_test()
+  {
+   return AlgebraicMesh::self_test();
+  }
+
+ /// \short Broken version of the QuarterTubeDomain function 
+ /// Function is broken because axial spacing isn't implemented
+ /// yet for the Algebraic version of the RefineableQuarterTubeMesh.
+ /// Note: this function must be used BEFORE algebraic_node_update(...)
+ /// is called.
+ QuarterTubeDomain::AxialSpacingFctPt& axial_spacing_fct_pt()
+  {
+   std::ostringstream error_message;
+   error_message << "AxialSpacingFctPt has not been implemented "
+                 << "for the AlgebraicRefineableQuarterTubeMesh\n";
+
+   std::string function_name =
+    " AlgebraicRefineableQuarterTubeMesh::AxialSpacingFctPt()";
+
+   throw OomphLibError(error_message.str(),function_name,
+                       OOMPH_EXCEPTION_LOCATION);
+
+   return this->Domain_pt->axial_spacing_fct_pt();
+  }
+
+ /// \short Resolve mesh update: Update current nodal
+ /// positions via algebraic node update.
+ /// [Doesn't make sense to use this mesh with SolidElements anyway,
+ /// so we buffer the case if update_all_solid_nodes is set to
+ /// true.]
+ void node_update(const bool& update_all_solid_nodes=false)
+  {
+#ifdef PARANOID
+   if (update_all_solid_nodes)
+    {
+     std::string error_message =
+      "Doesn't make sense to use an AlgebraicMesh with\n";
+     error_message +=
+      "SolidElements so specifying update_all_solid_nodes=true\n";
+     error_message += "doesn't make sense either\n";
+
+     std::string function_name =
+      " AlgebraicRefineableQuarterTubeMesh::";
+     function_name += "node_update()";
+
+     throw OomphLibError(error_message,function_name,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   AlgebraicMesh::node_update();
+  }
+
+
+ /// \short Implement the algebraic node update function for a node
+ /// at time level t (t=0: present; t>0: previous): Update with
+ /// the node's first (default) update function.
+ void algebraic_node_update(const unsigned& t, AlgebraicNode*& node_pt)
+  {
+   // Update with the update function for the node's first (default)
+   // node update fct
+   unsigned id=node_pt->node_update_fct_id();
+
+   switch (id)
+    {
+
+    case Central_region:
+
+     // Central region
+     node_update_central_region(t,node_pt);
+     break;
+
+    case Lower_right_region:
+
+     // Lower right region
+     node_update_lower_right_region(t,node_pt);
+     break;
+
+    case Upper_left_region:
+
+     // Upper left region
+     node_update_upper_left_region(t,node_pt);
+     break;
+
+    default:
+
+     std::ostringstream error_message;
+     error_message << "The node update fct id is "
+                   << id << ", but it should only be one of "
+                   << Central_region  << ", "
+                   << Lower_right_region << " or "
+                   << Upper_left_region << std::endl;
+     std::string function_name =
+      " AlgebraicRefineableQuarterTubeMesh::";
+     function_name += "algebraic_node_update()";
+
+     throw OomphLibError(error_message.str(),function_name,
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+
+ /// \short Update the node update info for specified algebraic node
+ /// following any spatial mesh adaptation.
+ void update_node_update(AlgebraicNode*& node_pt)
+  {
+   // Get all node update fct for this node (resizes internally)
+   Vector<int> id;
+   node_pt->node_update_fct_id(id);
+
+   // Loop over all update fcts
+   unsigned n_update=id.size();
+   for (unsigned i=0;i<n_update;i++)
+    {
+     update_node_update_in_region(node_pt, id[i]);
+    }
+
+  }
+
+private:
+
+ /// Size of centre box
+ double Centre_box_size;
+
+ /// Remesh function ids
+ enum{Central_region, Lower_right_region, Upper_left_region};
+
+ /// Fractional width of central region
+ double Lambda_x;
+
+ /// Fractional height of central region
+ double Lambda_y;
+
+ /// \short Algebraic update function for a node that is located
+ /// in the central region
+ void node_update_central_region(const unsigned& t,
+                                 AlgebraicNode*& node_pt);
+
+ /// \short Algebraic update function for a node that is located
+ /// in the lower-right region
+ void node_update_lower_right_region(const unsigned& t,
+                                     AlgebraicNode*& node_pt);
+
+ /// \short Algebraic update function for a node that is located
+ /// in the upper-left region
+ void node_update_upper_left_region(const unsigned& t,
+                                    AlgebraicNode*& node_pt);
+
+ /// \short Setup algebraic update operation for all nodes
+ void setup_algebraic_node_update();
+
+ /// \short Update algebraic node update function for nodes in
+ /// the region defined by region_id
+ void update_node_update_in_region(AlgebraicNode*& node_pt,
+                                   int& region_id);
+
+};
+
+
 }
 #endif

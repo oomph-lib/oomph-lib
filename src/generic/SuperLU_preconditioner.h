@@ -162,8 +162,8 @@ class SuperLUDistPreconditioner : public Preconditioner
 				  matrix_pt->nrow(),false);
        }
      solver.doc_time() = false;
-     solver.factorise(matrix_pt);
      solver.distribution_pt()->rebuild(Distribution_pt);
+     solver.factorise(matrix_pt);
    }
   
   /// \short Function applies SuperLU_Dist to vector r for (exact) 
@@ -179,6 +179,12 @@ class SuperLUDistPreconditioner : public Preconditioner
   virtual void clean_up_memory()
    {
     solver.clean_up_memory();
+   }
+
+  ///
+  bool& doc_time() 
+   {
+    return solver.doc_time();
    }
 
   private:

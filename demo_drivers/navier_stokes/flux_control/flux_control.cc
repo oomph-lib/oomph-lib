@@ -1189,7 +1189,11 @@ void CollapsibleChannelProblem<ELEMENT>::setup_outflow_flux_control_elements()
  NetFluxControlElement* flux_control_el_pt = new NetFluxControlElement(
   Outflow_flux_control_sub_mesh_pt,
   &Prescribed_volume_flux);
- 
+
+ // Set the block id for the pressure unknown in this element for the 
+ // preconditioning, in 2D the Navier-Stokes pressure is in block 2
+ flux_control_el_pt->ndof_number_for_unknown() = 0;
+
  // Add NetFluxControlElement to its mesh
  Outflow_flux_control_master_mesh_pt->
   add_element_pt(flux_control_el_pt);
@@ -1531,9 +1535,9 @@ int main(int argc, char *argv[])
  CommandLineArgs::setup(argc,argv);
 
  #ifdef OOMPH_HAS_MPI
- // Initialise MPI
+ // Set up MPI_Helpers
  MPI_Helpers::init(argc,argv);
-
+ 
  // Swtich off output modifier
  oomph_info.output_modifier_pt() = &default_output_modifier;
  
@@ -1703,8 +1707,8 @@ int main(int argc, char *argv[])
      oomph_info << "-amplitude <value>        Set amplitude to value\n";
      oomph_info << "-validation_run           Generate validation data for 1D Womersley\n";
     }
-#ifdef OOMPH_HAS_MPI 
-   // finalize MPI
+
+#ifdef OOMPH_HAS_MPI   
    MPI_Helpers::finalize();
 #endif
    return (0);
@@ -1727,7 +1731,7 @@ int main(int argc, char *argv[])
     }
    Global_Physical_Variables::Re = 100;
    Global_Physical_Variables::ReSt = 100;
-   solver=0;
+   solver=0;   
    refinement=0;
    amplitude=0.5;
    period=10.0;
@@ -1923,24 +1927,20 @@ int main(int argc, char *argv[])
 #ifdef HAVE_HYPRE
    if (p_solver==0)
     {
-#ifdef HAVE_HYPRE
      p_preconditioner_pt = new HyprePreconditioner;
      HyprePreconditioner* hypre_preconditioner_pt = 
       static_cast<HyprePreconditioner*>(p_preconditioner_pt);
      Hypre_default_settings::
       set_defaults_for_2D_poisson_problem(hypre_preconditioner_pt);
      ns_preconditioner_pt->set_p_preconditioner(*p_preconditioner_pt);
-#endif
     }
 #endif
 
 #ifdef HAVE_TRILINOS
    if (p_solver==1)
     {
-#ifdef HAVE_TRILINOS
      p_preconditioner_pt = new TrilinosMLPreconditioner;
      ns_preconditioner_pt->set_p_preconditioner(*p_preconditioner_pt);
-#endif
     }
 #endif
     
@@ -1948,7 +1948,6 @@ int main(int argc, char *argv[])
 #ifdef HAVE_HYPRE
    if (f_solver==0)
     {
-#ifdef HAVE_HYPRE
      f_preconditioner_pt = new HyprePreconditioner;
      HyprePreconditioner* hypre_preconditioner_pt = 
       static_cast<HyprePreconditioner*>(f_preconditioner_pt);
@@ -1959,14 +1958,12 @@ int main(int argc, char *argv[])
      hypre_preconditioner_pt->amg_damping()=f_bamg_damping;
      hypre_preconditioner_pt->amg_strength()=f_bamg_strength;
      ns_preconditioner_pt->set_f_preconditioner(*f_preconditioner_pt);
-#endif 
-   }
+    }
 #endif
 
 #ifdef HAVE_TRILINOS    
    if (f_solver==1)
     {
-#ifdef HAVE_TRILINOS
      f_preconditioner_pt = new TrilinosMLPreconditioner;
      TrilinosMLPreconditioner* trilinos_preconditioner_pt = 
       static_cast<TrilinosMLPreconditioner*>(f_preconditioner_pt);
@@ -1979,7 +1976,6 @@ int main(int argc, char *argv[])
        trilinos_preconditioner_pt->set_SA_default_values();
       }
      ns_preconditioner_pt->set_f_preconditioner(*f_preconditioner_pt);
-#endif
     }
 #endif
   }

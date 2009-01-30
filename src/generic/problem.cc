@@ -7646,6 +7646,11 @@ void Problem::check_halo_schemes(DocInfo& doc_info)
 //========================================================================
 void Problem::synchronise_dofs()
 { 
+if (!Problem_has_been_distributed)
+ {
+  return;
+ }
+
  MPI_Status status;
 
  // Loop over all processors whose eqn numbers are to be updated

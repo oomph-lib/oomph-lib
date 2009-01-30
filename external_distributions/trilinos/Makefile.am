@@ -24,7 +24,7 @@ run_command2 += " --with-lapack=$(LAPACK_LIB) "
 else
 run_command2 += " --with-lapack=$(oomph_abs_top_srcdir)/external_src/oomph_flapack/.libs/liboomph_flapack.a" 
 endif
-run_command2 += "--with-gnumake --disable-default-packages --enable-teuchos --enable-epetra --enable-epetraext  --enable-triutils --enable-ifpack --enable-aztecoo --enable-amesos --enable-ml --enable-anasazi --enable-meros --enable-new_package --enable-didasko"
+run_command2 += "--with-gnumake --disable-default-packages --enable-teuchos --enable-epetra --enable-epetraext  --enable-triutils --enable-ifpack --enable-aztecoo --enable-amesos --enable-ml --enable-anasazi"
 
 run_command2 += " F77=$(F77)  CC=$(CC) CXX=$(CXX) FFLAGS=\"$(FFLAGS)\"  CFLAGS=\"$(CFLAGS)\" CXXFLAGS=\"$(CXXFLAGS)\" " 
 
@@ -49,5 +49,5 @@ all:
 
 clean-local:
 	rm -f build_script.bash
-	rm -rf trilinos-7.0.8
+	rm -rf trilinos-9.0.2
 

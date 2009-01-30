@@ -426,6 +426,11 @@ namespace oomph
   // find the number of dimensions from the first element
   unsigned dim = 
    dynamic_cast<FiniteElement*>(Mesh_pt[0]->element_pt(0) )->dim();
+   
+  // pointers to the only two allowed element types
+  // (required for accessing the function get_velocity_mass_matrix_diagonal)
+  NavierStokesEquations<2>* el2d_pt=0;
+  NavierStokesEquations<3>* el3d_pt=0;
   
   // determine the rows required by this processor
   unsigned first_row = this->block_distribution_pt(0)->first_row();
@@ -533,15 +538,27 @@ namespace oomph
         // get the element contribution
         if (dim == 2)
          {
-          dynamic_cast< NavierStokesEquations<2>* >
-           ( Mesh_pt[0]->element_pt(e) )
-           ->get_velocity_mass_matrix_diagonal(el_vmm_diagonal);
+          el2d_pt = dynamic_cast< NavierStokesEquations<2>* >
+           ( Mesh_pt[0]->element_pt(e) );
+          if (el2d_pt!=0)
+           {
+            el2d_pt->get_velocity_mass_matrix_diagonal(el_vmm_diagonal);
+           }
+//          dynamic_cast< NavierStokesEquations<2>* >
+//           ( Mesh_pt[0]->element_pt(e) )
+//           ->get_velocity_mass_matrix_diagonal(el_vmm_diagonal);
          }
         else
          {
-          dynamic_cast< NavierStokesEquations<3>* >
-           ( Mesh_pt[0]->element_pt(e) )
-           ->get_velocity_mass_matrix_diagonal(el_vmm_diagonal);
+          el3d_pt = dynamic_cast< NavierStokesEquations<3>* >
+           ( Mesh_pt[0]->element_pt(e) );
+          if (el3d_pt!=0)
+           {
+            el3d_pt->get_velocity_mass_matrix_diagonal(el_vmm_diagonal);
+           }
+//          dynamic_cast< NavierStokesEquations<3>* >
+//           ( Mesh_pt[0]->element_pt(e) )
+//          ->get_velocity_mass_matrix_diagonal(el_vmm_diagonal);
          }
 
         // get the contribution for each dof
@@ -1009,15 +1026,27 @@ namespace oomph
       // get the element contribution
       if (dim==2)
        {
-      dynamic_cast< NavierStokesEquations<2>* >
-       ( Mesh_pt[0]->element_pt(e) )
-       ->get_velocity_mass_matrix_diagonal(el_vmm_diagonal);
+        el2d_pt = dynamic_cast< NavierStokesEquations<2>* >
+         ( Mesh_pt[0]->element_pt(e) );
+        if (el2d_pt!=0)
+         {
+          el2d_pt->get_velocity_mass_matrix_diagonal(el_vmm_diagonal);
+         }
+//      dynamic_cast< NavierStokesEquations<2>* >
+//       ( Mesh_pt[0]->element_pt(e) )
+//       ->get_velocity_mass_matrix_diagonal(el_vmm_diagonal);
        }
       else
        {
-        dynamic_cast< NavierStokesEquations<3>* >
-         ( Mesh_pt[0]->element_pt(e) )
-         ->get_velocity_mass_matrix_diagonal(el_vmm_diagonal);
+        el3d_pt = dynamic_cast< NavierStokesEquations<3>* >
+         ( Mesh_pt[0]->element_pt(e) );
+        if (el3d_pt!=0)
+         {
+          el3d_pt->get_velocity_mass_matrix_diagonal(el_vmm_diagonal);
+          }
+//        dynamic_cast< NavierStokesEquations<3>* >
+//         ( Mesh_pt[0]->element_pt(e) )
+//         ->get_velocity_mass_matrix_diagonal(el_vmm_diagonal);
        }
 
       // get the contribution for each dof

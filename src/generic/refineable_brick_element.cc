@@ -1665,6 +1665,9 @@ void RefineableQElement<3>::build(Mesh*& mesh_pt,
        
        aux_el_pt->method_for_shape_derivs()=
         aux_father_el_pt->method_for_shape_derivs();
+
+       aux_el_pt->bypass_fill_in_jacobian_from_geometric_data()=
+        aux_father_el_pt->bypass_fill_in_jacobian_from_geometric_data();
       }
 
      // Now do further build (if any)

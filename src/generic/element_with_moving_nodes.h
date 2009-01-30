@@ -81,6 +81,7 @@ namespace oomph
        
  ///Constructor 
  ElementWithMovingNodes() : Geometric_data_local_eqn(0) , 
+  Bypass_fill_in_jacobian_from_geometric_data(false),
   Evaluate_dresidual_dnodal_coordinates_by_fd(false),
   Method_for_shape_derivs(Shape_derivs_by_direct_fd) // hierher: temp fix
   // until more systematic timings have been performed. Should really use this:
@@ -203,6 +204,12 @@ namespace oomph
 
  /// Access to method (enumerated flag) for determination of shape derivs
  int& method_for_shape_derivs() {return Method_for_shape_derivs;}
+
+ /// Access function for Bypass_fill_in_jacobian_from_geometric_data
+ bool &bypass_fill_in_jacobian_from_geometric_data()
+  {
+   return Bypass_fill_in_jacobian_from_geometric_data;
+  }
  
   protected:
 
@@ -216,7 +223,7 @@ namespace oomph
  /// Construct the vector of (unique) geometric data
  void complete_setup_of_dependencies();
 
-/// Assign local equation numbers for the geometric Data in the element
+ /// Assign local equation numbers for the geometric Data in the element
  virtual void assign_all_generic_local_eqn_numbers();
 
  /// \short Calculate the contributions to the Jacobian matrix from the
@@ -232,15 +239,18 @@ namespace oomph
  ///the residuals vector before calculating the Jacobian terms
  void fill_in_jacobian_from_geometric_data(DenseMatrix<double> &jacobian)
   {
-   //Allocate storage for the residuals
-   const unsigned n_dof = ndof();
-   Vector<double> residuals(n_dof);
-
-   //Get the residuals for the entire element
-   get_residuals(residuals);
-
-   //Call the jacobian calculation
-   fill_in_jacobian_from_geometric_data(residuals,jacobian);
+   if(!Bypass_fill_in_jacobian_from_geometric_data)
+    {
+     //Allocate storage for the residuals
+     const unsigned n_dof = ndof();
+     Vector<double> residuals(n_dof);
+     
+     //Get the residuals for the entire element
+     get_residuals(residuals);
+     
+     //Call the jacobian calculation
+     fill_in_jacobian_from_geometric_data(residuals,jacobian);
+    }
   }
 
 
@@ -255,7 +265,6 @@ private:
  /// of the element depends
  unsigned ngeom_data() const {return Geom_data_pt.size();}
 
-
  /// \short Array to hold local eqn number information for the
  /// geometric Data variables
  int **Geometric_data_local_eqn;
@@ -263,6 +272,10 @@ private:
  /// \short Number of geometric dofs (computed on the fly when
  /// equation numbers are set up)
  unsigned Ngeom_dof;
+
+ /// \short Set flag to true to bypass calculation of Jacobain entries
+ /// resulting from geometric data.
+ bool Bypass_fill_in_jacobian_from_geometric_data;
 
  /// \short Boolean to decide if shape derivatives are to be evaluated
  /// by fd (using FiniteElement::get_dresidual_dnodal_coordinates())
@@ -289,17 +302,13 @@ template<class ELEMENT,class NODE_TYPE>
 
  /// Constructor, call the constructor of the base element
  ElementWithSpecificMovingNodes() : ELEMENT(), ElementWithMovingNodes()
-  {
-   Bypass_fill_in_jacobian_from_geometric_data=false;
-  }
+  {}
  
  /// Constructor used for face elements
  ElementWithSpecificMovingNodes(FiniteElement* const &element_pt, 
                                 const int &face_index) : 
   ELEMENT(element_pt, face_index), ElementWithMovingNodes()
-  {
-   Bypass_fill_in_jacobian_from_geometric_data=false;
-  }
+  {}
 
  /// Empty Destructor, 
  ~ElementWithSpecificMovingNodes() {} 
@@ -398,25 +407,10 @@ template<class ELEMENT,class NODE_TYPE>
    ELEMENT::get_jacobian(residuals,jacobian);
 
    //Now call the additional geometric Jacobian terms
-   if(!Bypass_fill_in_jacobian_from_geometric_data)
-    {
-     this->fill_in_jacobian_from_geometric_data(jacobian);
-    }
+   this->fill_in_jacobian_from_geometric_data(jacobian);
   }
-
- /// Access function for Bypass_fill_in_jacobian_from_geometric_data
- bool &bypass_fill_in_jacobian_from_geometric_data()
-  {
-   return Bypass_fill_in_jacobian_from_geometric_data;
-  }
-
+ 
   private:
-
- /// \short Set flag to true to bypass calculation of Jacobain entries
- /// resulting from geometric data.
- bool Bypass_fill_in_jacobian_from_geometric_data;
-
-
 };
 
 

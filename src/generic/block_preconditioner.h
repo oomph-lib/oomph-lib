@@ -1400,8 +1400,10 @@ namespace oomph
        // finally wait for the send requests to complete as we are leaving
        // an MPI block of code
        unsigned csr = send_requests.size();
-       MPI_Waitall(csr,&send_requests[0],MPI_STATUS_IGNORE);
-
+       if (csr)
+        {
+         MPI_Waitall(csr,&send_requests[0],MPI_STATUS_IGNORE);
+        }
 #ifdef PARANOID
        unsigned all_recv = true;
        for (unsigned i = 0; i < nlookup_rows; i++)
@@ -1560,7 +1562,10 @@ namespace oomph
 
        // and then wait
        unsigned nreq = requests.size();
-       MPI_Waitall(nreq,&requests[0],MPI_STATUS_IGNORE);
+       if (nreq)
+        {
+         MPI_Waitall(nreq,&requests[0],MPI_STATUS_IGNORE);
+        }
 #endif
       }
     }
@@ -2104,13 +2109,19 @@ namespace oomph
 
      // cleaning up Waitalls
      unsigned n_req_send_nrow = send_requests_nrow.size();
-     MPI_Waitall(n_req_send_nrow,&send_requests_nrow[0],MPI_STATUS_IGNORE);
+     if (n_req_send_nrow)
+      {
+       MPI_Waitall(n_req_send_nrow,&send_requests_nrow[0],MPI_STATUS_IGNORE);
+      }
      for (unsigned p = 0; p < nproc; p++)
       {
        delete[] nrows_to_send[p];
       }
      unsigned n_req_rows = req_rows.size();
-     MPI_Waitall(n_req_rows,&req_rows[0],MPI_STATUS_IGNORE);
+     if (n_req_rows)
+      {
+       MPI_Waitall(n_req_rows,&req_rows[0],MPI_STATUS_IGNORE);
+      }
      for (unsigned p = 0; p < nproc; p++)
       {
        if (p!= my_rank)
@@ -2500,7 +2511,10 @@ namespace oomph
      // and then just wait
      unsigned c = requests.size();
      Vector<MPI_Status> stat(c);
-     MPI_Waitall(c,&requests[0],&stat[0]);
+     if (c)
+      {
+       MPI_Waitall(c,&requests[0],&stat[0]);
+      }
      delete[] block_lengths;
 
 #else
@@ -2759,7 +2773,10 @@ namespace oomph
      // and then just wait
      unsigned c = requests.size();
      Vector<MPI_Status> stat(c);
-     MPI_Waitall(c,&requests[0],&stat[0]);
+     if (c)
+      {
+       MPI_Waitall(c,&requests[0],&stat[0]);
+      }
      delete[] block_lengths;
 
 #else
@@ -2923,7 +2940,10 @@ namespace oomph
      // and then just wait
      unsigned c = requests.size();
      Vector<MPI_Status> stat(c);
-     MPI_Waitall(c,&requests[0],&stat[0]);
+     if (c)
+      {
+       MPI_Waitall(c,&requests[0],&stat[0]);
+      }
      delete[] block_lengths;
 
 #else
@@ -3108,7 +3128,10 @@ namespace oomph
      // and then just wait
      unsigned c = requests.size();
      Vector<MPI_Status> stat(c);
-     MPI_Waitall(c,&requests[0],&stat[0]);
+     if (c)
+      {
+       MPI_Waitall(c,&requests[0],&stat[0]);
+      }
      delete[] block_lengths;
 
 #else
@@ -3267,7 +3290,10 @@ namespace oomph
      // and then just wait
      unsigned c = requests.size();
      Vector<MPI_Status> stat(c);
-     MPI_Waitall(c,&requests[0],&stat[0]);
+     if (c)
+      {
+       MPI_Waitall(c,&requests[0],&stat[0]);
+      }
      delete[] block_lengths;
 
 #else
@@ -3444,7 +3470,10 @@ namespace oomph
      // and then just wait
      unsigned c = requests.size();
      Vector<MPI_Status> stat(c);
-     MPI_Waitall(c,&requests[0],&stat[0]);
+     if (c)
+      {
+       MPI_Waitall(c,&requests[0],&stat[0]);
+      }
      delete[] block_lengths;
 
 #else

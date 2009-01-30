@@ -92,7 +92,7 @@ namespace TrilinosHelpers
   if (oomph_v.distributed())
    {
     // create the Epetra_Vector
-    unsigned nrow_local = oomph_v.nrow();
+    unsigned nrow_local = oomph_v.nrow_local();
     double* v = new double[nrow_local];
     for (unsigned i = 0; i < nrow_local; i++)
      {
