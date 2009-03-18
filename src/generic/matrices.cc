@@ -410,70 +410,6 @@ void DenseDoubleMatrix::eigenvalues_by_jacobi(Vector<double> & eigen_vals,
   }
 }
 
-/*
-//============================================================================
-///  Find the residual of Ax=b, i.e. r=b-Ax
-//============================================================================
-void DenseDoubleMatrix::residual(const DoubleVector &x, 
-                                 const DoubleVector &rhs, 
-                                 DoubleVector &residual)
-{
- std::cout << "broken" << std::endl;
- assert(false);
-
-#ifdef PARANOID
- // Check Matrix is square
- if (N!=M)
-  {
-   throw OomphLibError(
-    "This matrix is not square, the matrix MUST be square!",
-    "DenseDoubleMatrix::residual()",
-    OOMPH_EXCEPTION_LOCATION);
-  }
- // Check that size of rhs = nrow() 
- if (rhs.size()!=N)
-  {
-   std::ostringstream error_message_stream;
-   error_message_stream 
-    << "The rhs vector is not the right size. It is " << rhs.size() 
-    << ", it should be " << N << std::endl;
-   
-   throw OomphLibError(error_message_stream.str(),
-                       "DenseDoubleMatrix::residual()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
- // Check that the size of x is correct
- if (x.size()!=N)
-  {
-   std::ostringstream error_message_stream;
-   error_message_stream 
-    << "The x vector is not the right size. It is " << x.size() 
-    << ", it should be " << N << std::endl;
-   
-   throw OomphLibError(error_message_stream.str(),
-                       "DenseDoubleMatrix::residual()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
- // If size of residual is wrong, correct it!
- if (residual.size()!=N) 
-  { 
-   residual.resize(N);
-  }
-
- // Multiply the matrix by the vector x in residual vector
- for (unsigned long i=0;i<N;i++)
-  {
-   residual[i]=rhs[i]; 
-   for (unsigned long j=0;j<M;j++)
-    {
-     residual[i] -= Matrixdata[M*i+j]*x[j];
-    }
-  }
-}
-*/
-
-
 
 //============================================================================
 ///  Multiply the matrix by the vector x: soln=Ax
@@ -482,12 +418,12 @@ void DenseDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
 {
 #ifdef PARANOID
  // Check to see if x.size() = ncol().
- if (x.nrow()!=M)
+ if (x.nrow()!=this->ncol())
   {
    std::ostringstream error_message_stream;
    error_message_stream 
     << "The x vector is not the right size. It is " << x.nrow() 
-    << ", it should be " << M << std::endl;
+    << ", it should be " << this->ncol() << std::endl;
    throw OomphLibError(error_message_stream.str(),
                        "DenseDoubleMatrix::multiply()",
                        OOMPH_EXCEPTION_LOCATION);
@@ -503,15 +439,37 @@ void DenseDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
                        "DenseDoubleMatrix::multiply()",
                        OOMPH_EXCEPTION_LOCATION);
   }
- // if soln is setup then it should have the same distribution as x
+ // if soln is setup...
  if (soln.distribution_setup())
   {
-   if (!(*soln.distribution_pt() == *x.distribution_pt()))
+   // check that soln is not distributed
+   if (soln.distributed())
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The x vector cannot be distributed for DenseDoubleMatrix "
+      << "matrix-vector multiply" << std::endl;
+     throw OomphLibError(error_message_stream.str(),
+                         "DenseDoubleMatrix::multiply()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   if (soln.nrow() != this->nrow())
     {
      std::ostringstream error_message_stream;
      error_message_stream 
       << "The soln vector is setup and therefore must have the same "
-      << "distribution as the vector x";
+      << "number of rows as the matrix";
+     throw OomphLibError(error_message_stream.str(),
+                         "DenseDoubleMatrix::multiply()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   if (*x.distribution_pt()->communicator_pt() != 
+       *soln.distribution_pt()->communicator_pt())
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The soln vector and the x vector must have the same communicator"
+      << std::endl;
      throw OomphLibError(error_message_stream.str(),
                          "DenseDoubleMatrix::multiply()",
                          OOMPH_EXCEPTION_LOCATION);
@@ -522,17 +480,22 @@ void DenseDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
  // if soln is not setup then setup the distribution
  if (!soln.distribution_setup())
   {
-   // Resize and initialize the solution vector
-   soln.rebuild(x.distribution_pt());
+   LinearAlgebraDistribution* dist_pt = 
+    new LinearAlgebraDistribution(x.distribution_pt()->communicator_pt(),
+                                  this->nrow(),false);
+   soln.rebuild(dist_pt);
+   delete dist_pt;
   }
+ soln.initialise(0.0);
 
  // Multiply the matrix A, by the vector x 
+ double* x_pt = x.values_pt();
+ double* soln_pt = soln.values_pt();
  for (unsigned long i=0;i<N;i++)
   {
-   soln[i] = 0.0;
    for (unsigned long j=0;j<M;j++)
     {
-     soln[i] += Matrixdata[M*i+j]*x[j];
+     soln_pt[i] += Matrixdata[M*i+j]*x_pt[j];
     }
   }
 }
@@ -542,16 +505,16 @@ void DenseDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
 /// Multiply the transposed matrix by the vector x: soln=A^T x
 //=================================================================
 void DenseDoubleMatrix::multiply_transpose(const DoubleVector &x, 
-                                        DoubleVector &soln)
+                                           DoubleVector &soln)
 {
 #ifdef PARANOID
  // Check to see if x.size() = ncol().
- if (x.nrow()!=M)
+ if (x.nrow()!=this->nrow())
   {
    std::ostringstream error_message_stream;
    error_message_stream 
     << "The x vector is not the right size. It is " << x.nrow() 
-    << ", it should be " << M << std::endl;
+    << ", it should be " << this->nrow() << std::endl;
    throw OomphLibError(error_message_stream.str(),
                        "DenseDoubleMatrix::multiply()",
                        OOMPH_EXCEPTION_LOCATION);
@@ -567,41 +530,65 @@ void DenseDoubleMatrix::multiply_transpose(const DoubleVector &x,
                        "DenseDoubleMatrix::multiply()",
                        OOMPH_EXCEPTION_LOCATION);
   }
- // if soln is setup then it should have the same distribution as x
+ // if soln is setup...
  if (soln.distribution_setup())
   {
-   if (!(*soln.distribution_pt() == *x.distribution_pt()))
+   // check that soln is not distributed
+   if (soln.distributed())
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The x vector cannot be distributed for DenseDoubleMatrix "
+      << "matrix-vector multiply" << std::endl;
+     throw OomphLibError(error_message_stream.str(),
+                         "DenseDoubleMatrix::multiply()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   if (soln.nrow() != this->ncol())
     {
      std::ostringstream error_message_stream;
      error_message_stream 
       << "The soln vector is setup and therefore must have the same "
-      << "distribution as the vector x";
+      << "number of columns as the matrix";
+     throw OomphLibError(error_message_stream.str(),
+                         "DenseDoubleMatrix::multiply()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   if (*soln.distribution_pt()->communicator_pt() != 
+       *x.distribution_pt()->communicator_pt())
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The soln vector and the x vector must have the same communicator"
+      << std::endl;
      throw OomphLibError(error_message_stream.str(),
                          "DenseDoubleMatrix::multiply()",
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
 #endif
- 
+
  // if soln is not setup then setup the distribution
  if (!soln.distribution_setup())
   {
-   // Resize and initialize the solution vector
-   soln.rebuild(x.distribution_pt());
+   LinearAlgebraDistribution* dist_pt = 
+    new LinearAlgebraDistribution(x.distribution_pt()->communicator_pt(),
+                                  this->ncol(),false);
+   soln.rebuild(dist_pt);
+   delete dist_pt;
   }
 
  // Initialise the solution
- for (unsigned long i=0;i<M;i++)
-  {  
-   soln[i] = 0.0;
-  }
+ soln.initialise(0.0);
 
  // Matrix vector product
+ double* soln_pt = soln.values_pt();
+ double* x_pt = x.values_pt();
  for (unsigned long i=0;i<N;i++)
   {  
    for (unsigned long j=0;j<M;j++)
     {
-     soln[j] += Matrixdata[N*i+j]*x[i];
+     soln_pt[j] += Matrixdata[N*i+j]*x_pt[i];
     }
   }
 }
@@ -761,12 +748,12 @@ void CCDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
 {
 #ifdef PARANOID
  // Check to see if x.size() = ncol().
- if (x.nrow()!=M)
+ if (x.nrow()!=this->ncol())
   {
    std::ostringstream error_message_stream;
    error_message_stream 
     << "The x vector is not the right size. It is " << x.nrow() 
-    << ", it should be " << M << std::endl;
+    << ", it should be " << this->ncol() << std::endl;
    throw OomphLibError(error_message_stream.str(),
                        "CCDoubleMatrix::multiply()",
                        OOMPH_EXCEPTION_LOCATION);
@@ -782,15 +769,37 @@ void CCDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
                        "CCDoubleMatrix::multiply()",
                        OOMPH_EXCEPTION_LOCATION);
   }
- // if soln is setup then it should have the same distribution as x
+ // if soln is setup...
  if (soln.distribution_setup())
   {
-   if (!(*soln.distribution_pt() == *x.distribution_pt()))
+   // check that soln is not distributed
+   if (soln.distributed())
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The x vector cannot be distributed for CCDoubleMatrix "
+      << "matrix-vector multiply" << std::endl;
+     throw OomphLibError(error_message_stream.str(),
+                         "CCDoubleMatrix::multiply()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   if (soln.nrow() != this->nrow())
     {
      std::ostringstream error_message_stream;
      error_message_stream 
       << "The soln vector is setup and therefore must have the same "
-      << "distribution as the vector x";
+      << "number of rows as the matrix";
+     throw OomphLibError(error_message_stream.str(),
+                         "CCDoubleMatrix::multiply()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   if (*soln.distribution_pt()->communicator_pt() != 
+       *x.distribution_pt()->communicator_pt())
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The soln vector and the x vector must have the same communicator"
+      << std::endl;
      throw OomphLibError(error_message_stream.str(),
                          "CCDoubleMatrix::multiply()",
                          OOMPH_EXCEPTION_LOCATION);
@@ -801,22 +810,26 @@ void CCDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
  // if soln is not setup then setup the distribution
  if (!soln.distribution_setup())
   {
-   // Resize and initialize the solution vector
-   soln.rebuild(x.distribution_pt());
+   LinearAlgebraDistribution* dist_pt = 
+    new LinearAlgebraDistribution(x.distribution_pt()->communicator_pt(),
+                                  this->nrow(),false);
+   soln.rebuild(dist_pt);
+   delete dist_pt;
   }
 
- for (unsigned i=0;i<N;i++)
-  {
-   soln[i] = 0.0;
-  }
+ // zero
+ soln.initialise(0.0);
  
+ // multiply
+ double* soln_pt = soln.values_pt();
+ double* x_pt = x.values_pt();
  for (unsigned long j=0;j<N;j++)
   {
    for (long k=Column_start[j];k<Column_start[j+1];k++)
     {
      unsigned long i = Row_index[k];
      double a_ij = Value[k];
-     soln[i] += a_ij*x[j];
+     soln_pt[i] += a_ij*x_pt[j];
     }
   }
 }
@@ -832,12 +845,12 @@ void CCDoubleMatrix::multiply_transpose(const DoubleVector &x,
 {
 #ifdef PARANOID
  // Check to see if x.size() = ncol().
- if (x.nrow()!=M)
+ if (x.nrow()!=this->nrow())
   {
    std::ostringstream error_message_stream;
    error_message_stream 
     << "The x vector is not the right size. It is " << x.nrow() 
-    << ", it should be " << M << std::endl;
+    << ", it should be " << this->nrow() << std::endl;
    throw OomphLibError(error_message_stream.str(),
                        "CCDoubleMatrix::multiply()",
                        OOMPH_EXCEPTION_LOCATION);
@@ -853,36 +866,60 @@ void CCDoubleMatrix::multiply_transpose(const DoubleVector &x,
                        "CCDoubleMatrix::multiply()",
                        OOMPH_EXCEPTION_LOCATION);
   }
- // if soln is setup then it should have the same distribution as x
+ // if soln is setup...
  if (soln.distribution_setup())
   {
-   if (!(*soln.distribution_pt() == *x.distribution_pt()))
+   // check that soln is not distributed
+   if (soln.distributed())
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The x vector cannot be distributed for CCDoubleMatrix "
+      << "matrix-vector multiply" << std::endl;
+     throw OomphLibError(error_message_stream.str(),
+                         "CCDoubleMatrix::multiply()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   if (soln.nrow() != this->ncol())
     {
      std::ostringstream error_message_stream;
      error_message_stream 
       << "The soln vector is setup and therefore must have the same "
-      << "distribution as the vector x";
+      << "number of columns as the matrix";
+     throw OomphLibError(error_message_stream.str(),
+                         "CCDoubleMatrix::multiply()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   if (*soln.distribution_pt()->communicator_pt() != 
+       *x.distribution_pt()->communicator_pt())
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The soln vector and the x vector must have the same communicator"
+      << std::endl;
      throw OomphLibError(error_message_stream.str(),
                          "CCDoubleMatrix::multiply()",
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
 #endif
- 
+
  // if soln is not setup then setup the distribution
  if (!soln.distribution_setup())
   {
-   // Resize and initialize the solution vector
-   soln.rebuild(x.distribution_pt());
+   LinearAlgebraDistribution* dist_pt = 
+    new LinearAlgebraDistribution(x.distribution_pt()->communicator_pt(),
+                                  this->ncol(),false);
+   soln.rebuild(dist_pt);
+   delete dist_pt;
   }
 
- // Initialise the solution
- for (unsigned long i=0;i<M;i++)
-  {  
-   soln[i] = 0.0;
-  }
-
+ // zero
+ soln.initialise(0.0);
+ 
  // Matrix vector product
+ double* soln_pt = soln.values_pt();
+ double* x_pt = x.values_pt();
  for (unsigned long i=0;i<N;i++)
   {  
    
@@ -890,7 +927,7 @@ void CCDoubleMatrix::multiply_transpose(const DoubleVector &x,
     {
      unsigned long j=Row_index[k];
      double a_ij=Value[k];
-     soln[j]+=a_ij*x[i];
+     soln_pt[j]+=a_ij*x_pt[i];
     }
   }
 }
@@ -1638,15 +1675,15 @@ void CRDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
                        "CRDoubleMatrix::multiply()",
                        OOMPH_EXCEPTION_LOCATION);
   }
- // if soln is setup then it should have the same distribution as x
+ // if the soln is distributed
  if (soln.distribution_setup())
   {
-   if (!(*soln.distribution_pt() == *x.distribution_pt()))
+   if (!(*soln.distribution_pt() == Distribution_pt))
     {
      std::ostringstream error_message_stream;
      error_message_stream 
       << "The soln vector is setup and therefore must have the same "
-      << "distribution as the vector x";
+      << "distribution as the matrix";
      throw OomphLibError(error_message_stream.str(),
                          "CRDoubleMatrix::multiply()",
                          OOMPH_EXCEPTION_LOCATION);
@@ -1661,6 +1698,8 @@ void CRDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
    soln.rebuild(this->distribution_pt());
   }
 
+ // if distributed and on more than one processor use trilinos
+ // otherwise use the oomph-lib methods
  if (this->distributed() && 
      this->distribution_pt()->communicator_pt()->nproc() > 1)
   {
@@ -1683,14 +1722,16 @@ void CRDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
    const int* row_start = CR_matrix.row_start();
    const int* column_index = CR_matrix.column_index();
    const double* value = CR_matrix.value();
+   double* soln_pt = soln.values_pt();
+   double* x_pt = x.values_pt();
    for (unsigned long i=0;i<n;i++)
     {  
-     soln[i] = 0.0;
+     soln_pt[i] = 0.0;
      for (long k=row_start[i];k<row_start[i+1];k++)
       {
        unsigned long j=column_index[k];
        double a_ij=value[k];
-       soln[i]+=a_ij*x[j];
+       soln_pt[i]+=a_ij*x_pt[j];
       }
     }
   }
@@ -1728,12 +1769,12 @@ void CRDoubleMatrix::multiply_transpose(const DoubleVector &x,
  // if soln is setup then it should have the same distribution as x
  if (soln.distribution_setup())
   {
-   if (!(*soln.distribution_pt() == *x.distribution_pt()))
+   if (soln.distribution_pt()->nrow() != this->ncol())
     {
      std::ostringstream error_message_stream;
      error_message_stream 
       << "The soln vector is setup and therefore must have the same "
-      << "distribution as the vector x";
+      << "number of rows as the vector x";
      throw OomphLibError(error_message_stream.str(),
                          "CRDoubleMatrix::multiply_transpose()",
                          OOMPH_EXCEPTION_LOCATION);
@@ -1744,8 +1785,11 @@ void CRDoubleMatrix::multiply_transpose(const DoubleVector &x,
  // if soln is not setup then setup the distribution
  if (!soln.distribution_setup())
   {
-   // Resize and initialize the solution vector
-   soln.rebuild(x.distribution_pt());
+   LinearAlgebraDistribution* dist_pt = 
+    new LinearAlgebraDistribution(x.distribution_pt()->communicator_pt(),
+                                  this->ncol(),this->distributed());
+   soln.rebuild(dist_pt);
+   delete dist_pt;
   }
 
  if (this->distributed() && 
@@ -1770,6 +1814,8 @@ void CRDoubleMatrix::multiply_transpose(const DoubleVector &x,
    const int* row_start = CR_matrix.row_start();
    const int* column_index = CR_matrix.column_index();
    const double* value = CR_matrix.value();
+   double* soln_pt = soln.values_pt();
+   double* x_pt = x.values_pt();
    // Matrix vector product
    for (unsigned long i=0;i<n;i++)
     {  
@@ -1777,7 +1823,7 @@ void CRDoubleMatrix::multiply_transpose(const DoubleVector &x,
       {
        unsigned long j=column_index[k];
        double a_ij=value[k];
-       soln[j]+=a_ij*x[i];
+       soln_pt[j]+=a_ij*x_pt[i];
       }
     }
   }
@@ -1785,21 +1831,24 @@ void CRDoubleMatrix::multiply_transpose(const DoubleVector &x,
 
 
 //===========================================================================
-/// Function to multiply this matrix by the CRDoubleMatrix matrix_in
-/// The multiplication method used can be selected using the flag
-/// Matrix_matrix_multiply_method. By default Method 2 is used.
+/// Function to multiply this matrix by the CRDoubleMatrix matrix_in.\n
+/// In a serial matrix, there are 4 methods available: \n
 /// Method 1: First runs through this matrix and matrix_in to find the storage
 ///           requirements for result - arrays of the correct size are 
 ///           then allocated before performing the calculation.
-///           Minimises memory requirements but more costly.
+///           Minimises memory requirements but more costly. \n
 /// Method 2: Grows storage for values and column indices of result 'on the
 ///           fly' using an array of maps. Faster but more memory
-///           intensive.
+///           intensive. \n
 /// Method 3: Grows storage for values and column indices of result 'on the
 ///           fly' using a vector of vectors. Not particularly impressive
-///           on the platforms we tried...
+///           on the platforms we tried... \n
 /// Method 4: Trilinos Epetra Matrix Matrix multiply.\n
 /// Method 5: Trilinox Epetra Matrix Matrix Mulitply (ml based) \m
+/// If Trilinos is installed then Method 4 is employed by default, otherwise
+/// Method 2 is employed by default. \n
+/// In a distributed matrix, only Trilinos Epetra Matrix Matrix multiply
+/// is available.
 //=============================================================================
 void CRDoubleMatrix::multiply(CRDoubleMatrix& matrix_in,
                               CRDoubleMatrix& result)
@@ -2353,187 +2402,4 @@ CRDoubleMatrix* CRDoubleMatrix::return_global_matrix()
  return new CRDoubleMatrix(*this);
 #endif
 }
-
-/*
-#ifdef OOMPH_HAS_MPI
-
-///////////////////////////////////////////////////////////////////////////////
-// Functions for DistributedCRDoubleMatrix ////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-
-
- //============================================================================
- /// Overload round brackets to give access as a(i,j) (const version)
- //============================================================================
- const double& DistributedCRDoubleMatrix::operator()
-  (const unsigned long &i, const unsigned long &j) const
- {
-#ifdef PARANOID
-  if (i >= static_cast<unsigned>(Matrix_distribution.nrow_local()))
-   {
-    std::ostringstream error_message;
-    error_message << "Requested a coefficient in row i = " << i 
-                  << " on processor " << MPI_Helpers::My_rank << ".\n"
-                  << "This processor contains " 
-                  << Matrix_distribution.nrow_local() << " rows.\n";
-    throw OomphLibError(error_message.str(),
-                        "DistributedCRDoubleMatrix::() const",
-                        OOMPH_EXCEPTION_LOCATION);
-    }
-   else if (j>=ncol())
-    {
-     std::ostringstream error_message;
-     error_message << "Range Error: j=" << j << " is not in the range (0," 
-                   << ncol()-1 << ")." << std::endl; 
-     throw OomphLibError(error_message.str(),
-                         "DistributedCRDoubleMatrix::() const",
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-   for (long k=Row_start[i];k<Row_start[i+1];k++)
-    {
-     if (unsigned(Column_index[k])==j)
-      {
-       return this->Value[k];
-      }
-    }
-   return this->Zero;
-  }
-
-//=============================================================================
-/// Multiply the matrix by the vector x: soln=Ax.
-/// Currently this requires trilinos to be available. Will break
-/// otherwise.
-/// The vectors x and soln are both distributed vectors
-//=============================================================================
-void DistributedCRDoubleMatrix::multiply(const DistributedVector<double> &x, 
-                                       DistributedVector<double> &soln)
-{
-#ifdef HAVE_TRILINOS
- // This will only work if we have trilinos on board
- TrilinosHelpers::multiply(*this,x,soln);
-#else
-   throw OomphLibError("Matrix-vector product requires trilinos",
-                       "DistributedCRDoubleMatrix::multiply()",
-                       OOMPH_EXCEPTION_LOCATION);
-#endif
-}
-
-
-//=============================================================================
-///  Function to multiply this matrix by the 
-///  DistributedCRDoubleMatrix matrix_in. This requires Trilinos.
-//=============================================================================
-void DistributedCRDoubleMatrix::multiply(
- DistributedCRDoubleMatrix& matrix_in,
- DistributedCRDoubleMatrix& result)
-{
-#ifdef HAVE_TRILINOS
- //This will only work if we have trilinos on board
- TrilinosHelpers::multiply(*this,matrix_in,result,
-                           Matrix_matrix_multiply_using_ml);
-#else
- throw OomphLibError("Matrix-matrix product requires trilinos",
-                     "DistributedCRDoubleMatrix::multiply()",
-                     OOMPH_EXCEPTION_LOCATION);
-#endif
-}
-
-
-//=============================================================================
-/// Call the corresponding 
-/// constructor of the CRDoubleMatrix, initialise the
-/// member data to zero and set the default linear
-/// solver to be SuperLU dist
-//============================================================================
-DistributedCRDoubleMatrix::DistributedCRDoubleMatrix() 
- : CRDoubleMatrix(),
-   Distribution_pt(0)
-{ 
- //Delete the exisiting default linear solver pt
- delete Default_linear_solver_pt;
-
- //Replace with SuperLU dist
- Linear_solver_pt = Default_linear_solver_pt = new SuperLU_dist;
-
- // Set the trilinos matrix matrix multiplication method to not use the
- // ml method as default
- Matrix_matrix_multiply_using_ml=false;
-
-}
-
-//=============================================================================
-/// \short Constructor: Pass vector of values, vector of column indices,
-/// and vector of row starts. Since the rows of the matrix are 
-/// distributed over several processors we also need to pass the 
-/// number of the first row and the number of local rows stored here. 
-/// n and m are the total number of rows and columns. 
-/// \b NOTE: Number of nonzero entries is read
-/// off from value, so make sure the vector has been shrunk
-/// to its correct length.
-//=============================================================================
-DistributedCRDoubleMatrix::
-DistributedCRDoubleMatrix(const Vector<double>& value, 
-                          const Vector<int>& column_index,
-                          const Vector<int>& row_start, 
-                          const DistributionInfo& distribution,
-                          const unsigned& n_col)
- : CRDoubleMatrix(value,column_index,row_start,
-                  distribution.nrow_local(),n_col)
-{
- // store the distribution
- Distribution_pt = new DistributionInfo(distribution);
-
- //Delete the exisiting default linear solver pt
- delete Default_linear_solver_pt;
-
- //Replace with SuperLU dist
- Linear_solver_pt = Default_linear_solver_pt = new SuperLU_dist;
-
- // Set the trilinos matrix matrix multiplication method to not use the
- // ml method as default
- Matrix_matrix_multiply_using_ml=false;
-}
-
-
- //============================================================================
- /// \short Function to delete memory associated with the matrix and
- /// set all values to 0
- //============================================================================
- void DistributedCRDoubleMatrix::clean_up_memory()
- {
-  CRDoubleMatrix::clean_up_memory();
-  delete Distribution_pt;
-  Distribution_pt = 0;
- }
-
-
- //===========================================================================
- /// \short Build matrix from compressed representation:
- /// Pass vector of values, vector of column indices,
- /// and vector of row starts. Since the rows of the matrix are 
- /// distributed over several processors we also need to pass the 
- /// number of the first row and the number of local rows stored here. 
- /// n and m are the total number of rows and columns. 
- /// \b NOTE: Number of nonzero entries is read
- /// off from value, so make sure the vector has been shrunk
- /// to its correct length.
- //===========================================================================
-void DistributedCRDoubleMatrix::build(const Vector<double>& value,
-                                      const Vector<int>& column_index,
-                                      const Vector<int>& row_start,
-                                      const DistributionInfo& distribution,
-                                      const unsigned& n_col)
-{
- // call build in parent class
- CRMatrix<double>::build(value,column_index, row_start,
-                         distribution.nrow_global(),n_col);
- 
- // set the distribution
- delete Distribution_pt;
- Distribution_pt = new DistributionInfo(distribution);
-}
-
-#endif
-*/
 }

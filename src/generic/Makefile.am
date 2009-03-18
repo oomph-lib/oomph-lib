@@ -32,7 +32,8 @@ triangle_scaffold_mesh.cc  geompack_scaffold_mesh.cc \
 tetgen_scaffold_mesh.cc simple_cubic_scaffold_tet_mesh.cc \
 partitioning.cc linear_algebra_distribution.cc double_vector.cc \
 iterative_linear_solver.cc \
-general_purpose_preconditioners.cc block_preconditioner.cc 
+general_purpose_preconditioners.cc block_preconditioner.cc \
+matrix_vector_product.cc
 
 if WANT_MPI
 sources += superlu_dist.c preconditioner_array.cc
@@ -75,7 +76,8 @@ pseudo_buckling_ring.h simple_cubic_scaffold_tet_mesh.h \
 partitioning.h communicator.h linear_algebra_distribution.h double_vector.h \
 iterative_linear_solver.h preconditioner.h \
 general_purpose_preconditioners.h block_preconditioner.h \
-general_purpose_block_preconditioners.h SuperLU_preconditioner.h
+general_purpose_block_preconditioners.h SuperLU_preconditioner.h \
+matrix_vector_product.h
 
 if WANT_MPI
 headers += preconditioner_array.h

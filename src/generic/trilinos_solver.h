@@ -48,13 +48,19 @@ namespace oomph
 
   /// \short Constructor - takes the pointer to the oomph-lib 
   /// preconditioner and the distribution of the preconditioner\n
-  /// \b Note: the oomph-lib preconditioner must be setup
-  OomphLibPreconditionerEpetraOperator(Preconditioner* preconditioner_pt)
+  /// Note: the oomph-lib preconditioner must be setup.\n
+  /// If use_eptra_values is true then the epetra vector values is used
+  /// within the vectors passed to the oomph-lib
+  /// preconditioner. If this is true none of the vector rebuild methods can
+  /// be called.
+  OomphLibPreconditionerEpetraOperator(Preconditioner* preconditioner_pt,
+                                       bool use_epetra_values = false)
 #ifdef OOMPH_HAS_MPI
    : Operator_comm
-   (preconditioner_pt->distribution_pt()->communicator_pt()->mpi_comm())
+   (preconditioner_pt->distribution_pt()->communicator_pt()->mpi_comm()), 
+   Use_epetra_values(use_epetra_values)
 #else
-   : Operator_comm()
+   : Operator_comm(), Use_epetra_values(use_epetra_values)
 #endif
    {
     // set the ooomph-lib preconditioner
@@ -141,34 +147,60 @@ namespace oomph
                    Epetra_MultiVector &epetra_z) const
    {
     // the oomph-lib vector for r
-    DoubleVector oomph_r(Oomph_lib_preconditioner_pt->distribution_pt());
+    DoubleVector oomph_r;
 
     // copy the Epetra_MultiVector r into an oomph-lib vector
     double** r_pt;
     epetra_r.ExtractView(&r_pt);
-    unsigned nrow_local = 
-     Oomph_lib_preconditioner_pt->distribution_pt()->nrow_local();
-    for (unsigned i = 0; i < nrow_local; i++)
+    if (Use_epetra_values)
      {
-      oomph_r[i] = r_pt[0][i];
+      oomph_r.set_external_values
+       (Oomph_lib_preconditioner_pt->distribution_pt(),*r_pt);
+     }
+    else
+     {
+      oomph_r.rebuild(Oomph_lib_preconditioner_pt->distribution_pt());
+      unsigned nrow_local = 
+       Oomph_lib_preconditioner_pt->distribution_pt()->nrow_local();
+      for (unsigned i = 0; i < nrow_local; i++)
+       {
+        oomph_r[i] = r_pt[0][i];
+       }
      }
 
     // oomph-lib vector for Y
-    DoubleVector oomph_z(Oomph_lib_preconditioner_pt->distribution_pt());
-      
+    DoubleVector oomph_z;
+    if (Use_epetra_values)
+     {
+      double** z_pt;
+      epetra_z.ExtractView(&z_pt);
+      DoubleVector oomph_z;
+      oomph_z.set_external_values(
+       Oomph_lib_preconditioner_pt->distribution_pt(),
+       *z_pt);
+     }
+    else
+     {
+      oomph_z.rebuild(Oomph_lib_preconditioner_pt->distribution_pt());
+     }
+
     // apply the preconditioner
     Oomph_lib_preconditioner_pt->preconditioner_solve(oomph_r,oomph_z);
 
-    // copy the oomph-lib vector oomph_Y back to Y
-    for (unsigned i = 0; i < nrow_local; i++)
+    // if not using external data copy the oomph-lib vector oomph_Y back to Y
+    if (!Use_epetra_values)
      {
-      epetra_z.ReplaceMyValue(i,0,oomph_z[i]);
+      unsigned nrow_local = 
+       Oomph_lib_preconditioner_pt->distribution_pt()->nrow_local();
+      for (unsigned i = 0; i < nrow_local; i++)
+       {
+        epetra_z.ReplaceMyValue(i,0,oomph_z[i]);
+       }
      }
-  
+
     // return 0 to indicate success
     return 0;
    }
-
 
   /// Broken Epetra_Operator member - NormInf
   double NormInf() const
@@ -243,6 +275,11 @@ namespace oomph
   Epetra_SerialComm Operator_comm;
 #endif
 
+  /// \short Use the epetra data within the vectors passed to the oomph-lib
+  /// preconditioner. If this is true none of the vector rebuild methods can
+  /// be called.
+  bool Use_epetra_values;
+
   /// \short A pointer to an Epetra_Map object - describes distribution of the
   /// preconditioner, in this instance it is primarily used to prescribe the 
   /// distribution
@@ -253,15 +290,10 @@ namespace oomph
   /// \short the global of the preconditioner associated with the processor,
   /// for the trilinos Operator_map_pt
   int* My_global_rows;
-#else
-  /// number of row
-//  unsigned Nrow;
 #endif
 
   /// a label for the preconditioner ( for Epetra_Operator::Label() )
-  //char* Preconditioner_label;
   std::string Preconditioner_label;
-  
  };
 
 
@@ -290,11 +322,15 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
   // if a problem based solve is performed then it should generate a 
   // serial matrix
   Assemble_serial_jacobian = false;
+  
+  // by default we do not use external values in the oomph-lib preconditioner
+  If_oomphlib_preconditioner_use_epetra_values = false;
 
   // null the pts
   Problem_pt = 0;
   Epetra_matrix_pt = 0;
   Epetra_map_pt = 0;
+  Epetra_col_map_pt = 0;
   Epetra_comm_pt = 0;
   Oomph_matrix_pt = 0;
   Epetra_preconditioner_pt = 0;
@@ -304,8 +340,7 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
 
   // set solver defaults
   Solver_type = GMRES;
-  Tolerance = 1e-10;
-  Max_iter = 1000;
+  Tolerance = 10e-10;
  }
 
  /// Destructor - delete the solver and the matrices
@@ -350,6 +385,10 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
    delete Epetra_map_pt;
    Epetra_map_pt = 0;
 
+   // delete the Epetra col map
+   delete Epetra_col_map_pt;
+   Epetra_col_map_pt = 0;
+
    // delete the Epetra_Map
    delete Epetra_comm_pt;
    Epetra_comm_pt = 0;
@@ -370,6 +409,12 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
     {
      delete Epetra_preconditioner_pt;
      Epetra_preconditioner_pt = 0;
+    }
+
+   // don't delete the preconditioner but call its clean up memory method
+   if (this->preconditioner_pt() != 0)
+    {
+     this->preconditioner_pt()->clean_up_memory();
     }
   }
 
@@ -429,6 +474,16 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
  /// Access function to Assemble serial jacobian (const version)
  bool assemble_serial_jacobian() const { return Assemble_serial_jacobian; }
 
+ /// if this solver is using an oomph-lib preconditioner then the vectors
+ /// passed to preconditioner_solve(...) should be using the values in the
+ /// epetra vector as external data. If the vectors are using external
+ /// data then rebuild(...) methods cannot be used be used in the 
+ /// preconditioner.
+ bool& if_oomphlib_preconditioner_use_epetra_values()
+  {
+   return If_oomphlib_preconditioner_use_epetra_values;
+  }
+
  /// \short Enumerated list to define which AztecOO solver is used
  enum AztecOO_solver_types{CG,
                            GMRES,
@@ -445,12 +500,6 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
  /// Trilinos Aztec00 solver and passes in the matrix, preconditioner and 
  /// parameters.
  void solver_setup(DoubleMatrixBase* const& matrix_pt);
-
- /// Maximum number of iterations used in solver.
- unsigned Max_iter;
-
- /// Tolerance used to terminate solver.
- double Tolerance;
 
  /// Stores number of iterations used
  unsigned Iterations;
@@ -495,6 +544,9 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
  /// same as the matrix
  Epetra_Map* Epetra_map_pt;
 
+ /// \short A pointer the the Epetra_Map column map for this solver
+ Epetra_Map* Epetra_col_map_pt;
+
 #ifdef OOMPH_HAS_MPI
    /// \short Global rows of the Epetra_matrix_pt - only used when this 
    /// preconditioner is setup using the oomph-lib interface (and MPI)
@@ -516,6 +568,12 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
  /// \short Epetra communicator object (serial version)
  Epetra_SerialComm* Epetra_comm_pt;
 #endif
+
+ /// if this solver is using an oomph-lib preconditioner then the vectors
+ /// passed to preconditioner_solve(...) should be using the values in the
+ /// epetra vector as external data. If the vectors are using external
+ /// data then rebuild(...) methods cannot be used.
+ bool If_oomphlib_preconditioner_use_epetra_values;
 };
 
 }

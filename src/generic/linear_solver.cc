@@ -31,7 +31,6 @@
 #ifdef HAVE_CONFIG_H
   #include <oomph-lib-config.h>
 #endif
-
 #ifdef OOMPH_HAS_MPI
 #include "mpi.h"
 #endif
@@ -293,39 +292,41 @@ void DenseLU::factorise(DoubleMatrixBase* const &matrix_pt)
 void DenseLU::backsub(const DoubleVector &rhs,
                       DoubleVector &result)
 {
+ double* rhs_pt = rhs.values_pt();
+ double* result_pt = result.values_pt();
  const unsigned long n = rhs.nrow();
 
  //Copy the rhs vector into the result vector
  for(unsigned long i=0;i<n;++i) 
-  {result[i] = rhs[i];}
+  {result_pt[i] = rhs_pt[i];}
  
  unsigned long ii=0;
  for(unsigned long i=0;i<n;i++)
   {
    unsigned long ip = Index[i];
-   double sum = result[ip];
-   result[ip] = result[i];
+   double sum = result_pt[ip];
+   result_pt[ip] = result_pt[i];
    
    if(ii != 0)
     {
      for(unsigned long j=ii-1;j<i;j++) 
       {
-       sum -= LU_factors[n*i+j]*result[j];
+       sum -= LU_factors[n*i+j]*result_pt[j];
       }
     }
    else if(sum != 0.0)
     {
      ii = i+1;
     }
-   result[i] = sum;
+   result_pt[i] = sum;
   }
 
  //Now do the back substitution
  for (long i=long(n)-1;i>=0;i--)
   {
-   double sum = result[i];
-   for(long j=i+1;j<long(n);j++) sum -= LU_factors[n*i+j]*result[j];
-   result[i] = sum/LU_factors[n*i+i];
+   double sum = result_pt[i];
+   for(long j=i+1;j<long(n);j++) sum -= LU_factors[n*i+j]*result_pt[j];
+   result_pt[i] = sum/LU_factors[n*i+i];
   }
 }
 
@@ -730,12 +731,16 @@ void SuperLU::solve(DoubleMatrixBase* const &matrix_pt,
                     const DoubleVector &rhs,
                     DoubleVector &result)
 {
+
+ oomph_info << "matrix based solve" << std::endl;
  // Time solver
  double t_start = TimingHelpers::timer();
 
  // setup the distribution
  Distribution_pt->rebuild(rhs.distribution_pt()->communicator_pt(),
                           rhs.nrow(),false);
+
+
 
  //Factorise the matrix
  factorise(matrix_pt);
@@ -923,15 +928,8 @@ void SuperLU::backsub(const DoubleVector &rhs,
   }
 #endif
 
-
- /// RHS vector
- double* b=new double[n];
- 
- // Copy the values across
- for(int i=0;i<n;i++) 
-  {
-   b[i]=rhs[i];
-  }
+ // copy result to rhs
+ result=rhs;
  
  //Number of RHSs
  int nrhs=1;
@@ -944,21 +942,8 @@ void SuperLU::backsub(const DoubleVector &rhs,
  int i=2;
  superlu(&i, &n, 0,  &nrhs,
          0, 0, 0,
-         b, &n,  &transpose, &doc,
+         result.values_pt(), &n,  &transpose, &doc,
          &F_factors, &Info);
- 
- // Copy b into rhs vector
- if (!result.distribution_pt()->setup())
-  {
-   result.rebuild(Distribution_pt);
-  }
- for(int i=0;i<n;i++) 
-  {
-   result[i]=b[i];
-  }
- 
- // Cleanup the storage for the rhs vector
- delete[] b;
 }
 
 
@@ -1013,7 +998,8 @@ extern "C"
                                  int n, int nnz, double *values, 
                                  int *row_index, int *col_start, 
                                  double *b, int nprow, int npcol, 
-                                 int doc, void **data, int *info);
+                                 int doc, void **data, int *info,
+                                 MPI_Comm comm);
  
  // Interface to distributed SuperLU solver where each processor 
  // holds part of the matrix
@@ -1023,7 +1009,8 @@ extern "C"
                                       double *values, int *col_index, 
                                       int *row_start, double *b,
                                       int nprow, int npcol, 
-                                      int doc, void **data, int *info);
+                                      int doc, void **data, int *info,
+                                      MPI_Comm comm);
 
 // helper method - just calls the superlu method dCompRow_to_CompCol to convert
 // the c-style vectors of a cr matrix to a cc matrix
@@ -1059,20 +1046,28 @@ void SuperLU_dist::factorise(DoubleMatrixBase* const &matrix_pt)
   }
 #endif
 
+ // number of processors
+ unsigned nproc = MPI_Helpers::Nproc;
+ if(dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt) != 0)
+  {
+   nproc = dynamic_cast<DistributableLinearAlgebraObject*>
+    (matrix_pt)->distribution_pt()->communicator_pt()->nproc();
+  }
+
  // Find number of rows and columns for the process grid
  // First guess at number of rows:
- int nprow=int(sqrt(double(MPI_Helpers::Nproc)));
-   
+ int nprow=int(sqrt(double(nproc)));
+
  // Does this evenly divide the processor grid?
  while (nprow>1)
   {
-   if (MPI_Helpers::Nproc%nprow==0) break;
+   if (nproc%nprow==0) break;
    nprow-=1;
   }
    
  // Store Number of rows/columns for process grid
  Nprow=nprow;
- Npcol=MPI_Helpers::Nproc/Nprow;
+ Npcol=nproc/Nprow;
 
  // Make sure any existing factors are deleted
  clean_up_memory();
@@ -1153,7 +1148,9 @@ void SuperLU_dist::factorise(DoubleMatrixBase* const &matrix_pt)
                                      ndof, nnz_local, nrow_local, 
                                      first_row, Value_pt, Index_pt, 
                                      Start_pt, 0, Nprow, Npcol, doc,
-                                     &Solver_data_pt, &Info);
+                                     &Solver_data_pt, &Info,
+                                     Distribution_pt->
+                                     communicator_pt()->mpi_comm());
    
      // Record that data is stored
      Distributed_solve_data_allocated=true;
@@ -1187,7 +1184,9 @@ void SuperLU_dist::factorise(DoubleMatrixBase* const &matrix_pt)
      // do the factorization
      superlu_dist_global_matrix(1, allow_permutations,
                                 nrow, nnz, Value_pt, Index_pt, Start_pt, 
-                                0, Nprow, Npcol, doc, &Solver_data_pt, &Info);
+                                0, Nprow, Npcol, doc, &Solver_data_pt, &Info,
+                                Distribution_pt
+                                ->communicator_pt()->mpi_comm());
      
      // Record that data is stored
      Global_solve_data_allocated=true;
@@ -1247,7 +1246,8 @@ else if(dynamic_cast<CCDoubleMatrix*>(matrix_pt))
    // do the factorization
    superlu_dist_global_matrix(1, allow_permutations,
                               ndof, nnz, Value_pt, Index_pt, Start_pt, 
-                              0, Nprow, Npcol, doc, &Solver_data_pt, &Info);
+                              0, Nprow, Npcol, doc, &Solver_data_pt, &Info,
+                              Distribution_pt->communicator_pt()->mpi_comm());
    
    // Record that data is stored
    Global_solve_data_allocated=true;
@@ -1291,13 +1291,16 @@ void SuperLU_dist::backsub(const DoubleVector &rhs,
    // Call distributed solver
    superlu_dist_distributed_matrix(2, -1, ndof, 0, 0, 0, 0, 0, 0, 
                                    result.values_pt(), Nprow, Npcol, doc, 
-                                   &Solver_data_pt, &Info);
+                                   &Solver_data_pt, &Info,
+                                   Distribution_pt->
+                                   communicator_pt()->mpi_comm());
   }
  else if (Global_solve_data_allocated)
   {
    // Call global solver
    superlu_dist_global_matrix(2, -1, ndof, 0, 0, 0, 0, result.values_pt(),
-                              Nprow, Npcol, doc, &Solver_data_pt, &Info);
+                              Nprow, Npcol, doc, &Solver_data_pt, &Info,
+                              Distribution_pt->communicator_pt()->mpi_comm());
   }
  else
   {
@@ -1331,13 +1334,16 @@ void SuperLU_dist::clean_up_memory()
     {
      superlu_dist_distributed_matrix(3, -1, ndof, 0, 0, 0, 0, 0, 0, 0, 
                                      Nprow, Npcol, doc, &Solver_data_pt, 
-                                     &Info);
+                                     &Info,Distribution_pt->communicator_pt()
+                                     ->mpi_comm());
      Distributed_solve_data_allocated = false;
     }
    if (Global_solve_data_allocated)
     {
      superlu_dist_global_matrix(3, -1, ndof, 0, 0, 0, 0, 0,
-                                Nprow, Npcol, doc, &Solver_data_pt, &Info);
+                                Nprow, Npcol, doc, &Solver_data_pt, &Info,
+                                Distribution_pt->communicator_pt()
+                                ->mpi_comm());
      Global_solve_data_allocated = false;
     }
    

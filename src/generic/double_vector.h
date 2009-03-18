@@ -66,7 +66,7 @@ class CRDoubleMatrix;
  /// defaults to 0).
  DoubleVector(const LinearAlgebraDistribution* const &dist_pt, 
               const double& v = 0)
-  : Values_pt(0)
+  : Values_pt(0), Internal_values(true)
   {
    this->rebuild(dist_pt,v);
   }
@@ -79,7 +79,7 @@ class CRDoubleMatrix;
  
  /// Copy constructor
  DoubleVector(const DoubleVector& new_vector)
-  : Values_pt(0)
+  : Values_pt(0), Internal_values(true)
   {
    this->rebuild(new_vector);
   }
@@ -104,11 +104,67 @@ class CRDoubleMatrix;
  /// \short wipes the DoubleVector
  void clear() 
   {
-   delete[] Values_pt;
+   if (Internal_values)
+    {
+     delete[] Values_pt;
+    }
    Values_pt = 0;
    Distribution_pt->clear();
   }
+
+ /// \short Allows are external data to be used by this vector. \n
+ /// WARNING: The size of the external data must correspond to the 
+ /// LinearAlgebraDistribution dist_pt argument.
+ /// 1. When a rebuild method is called new internal values are created.\n
+ /// 2. It is not possible to redistribute(...) a vector with external
+ /// values \n.
+ /// 3. External values are never deleted by this vector.
+ void set_external_values(const LinearAlgebraDistribution* const& dist_pt,
+                          double* external_values)
+  {
+   // clean the memory
+   this->clear();
+
+   // Set the distribution
+   Distribution_pt->rebuild(dist_pt);
+
+   // set the external values
+   set_external_values(external_values);
+  }
  
+ /// \short Allows are external data to be used by this vector. \n
+ /// WARNING: The size of the external data must correspond to the 
+ /// distribution of this vector.
+ /// 1. When a rebuild method is called new internal values are created.\n
+ /// 2. It is not possible to redistribute(...) a vector with external
+ /// values \n.
+ /// 3. External values are never deleted by this vector.
+ void set_external_values(double* external_values)
+  {
+#ifdef PARANOID
+   // check that this distribution is setup
+   if (!Distribution_pt->setup())
+    {
+    // if this vector does not own the double* values then it cannot be
+    // distributed.
+    // note: this is not stictly necessary - would just need to be careful 
+    // with delete[] below.
+     std::ostringstream error_message;    
+     error_message << "The distribution of the vector must be setup before "
+                   << "external values can be set"; 
+     throw OomphLibError(error_message.str(),
+                         "DoubleVector::set_external_values(...)",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+   if (Internal_values)
+    {
+     delete[] Values_pt;
+    }
+   Values_pt = external_values;
+   Internal_values = false;
+  }
+
  /// \short The contents of the vector are redistributed to match the new
  /// distribution. In a non-MPI rebuild this method works, but does nothing. \n
  /// \b NOTE 1: The current distribution and the new distribution must have
@@ -119,6 +175,9 @@ class CRDoubleMatrix;
    
  /// \short [] access function to the (local) values of this vector
  double& operator[](int i);
+
+ /// \short == operator
+ bool operator==(const DoubleVector& v);
 
  /// \short += operator
  void operator+=(DoubleVector v);
@@ -132,12 +191,6 @@ class CRDoubleMatrix;
  /// \short returns the maximum coefficient
  double max();
 
- /// \short access function to the underlying values (const version)
-// const double* values_pt() const
-//  {
-//   return Values_pt;
-//  }
-
  /// access function to the underlying values
  double* values_pt()
   {
@@ -149,12 +202,6 @@ class CRDoubleMatrix;
   {
    return Values_pt;
   }
-
- /// \short access function to the underlying values (const version)
-// const double* values_pt()
-//  {
-//   return Values_pt;
-//  }
 
  /// output the contents of the vector
  void output(std::ostream &outfile);
@@ -181,7 +228,10 @@ class CRDoubleMatrix;
  private :
  
  /// the local vector
- double* Values_pt;                           
+ double* Values_pt;
+
+ ///
+ bool Internal_values;
 }; //end of DoubleVector                 
 } // end of oomph namespace
 #endif

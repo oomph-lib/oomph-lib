@@ -98,8 +98,6 @@ namespace oomph
                << Jacobian_setup_time << std::endl;
    }
   
-  
-
   // store the distribution of the solution vector
   if (!solution.distribution_setup())
     {
@@ -107,29 +105,14 @@ namespace oomph
     }
   LinearAlgebraDistribution solution_dist(solution.distribution_pt());
 
-
-
   // redistribute the distribution
   solution.redistribute(*Distribution_pt);
 
   // continue solving using matrix based solve function
   solve(Oomph_matrix_pt, residual, solution);
 
-  for (unsigned i = 0; i < solution.nrow_local(); i++)
-   {
-//    oomph_info << "s[" << i << "]=" << solution[i] << std::endl;
-   }
-
   // return to the original distribution
   solution.redistribute(solution_dist);
-
-  if (problem_pt->communicator_pt()->my_rank() == 0)
-   {
-  for (unsigned i = 0; i < solution.nrow_local(); i++)
-   {
-    //   std::cout << "" << i << " " << solution[i] << std::endl;
-   }
-   }
 }
 
 
@@ -267,26 +250,56 @@ void TrilinosAztecOOSolver::solver_setup(DoubleMatrixBase* const& matrix_pt)
  // clean up the memory
  //  - delete all except Oomph_matrix_pt, which may have been set in the 
  //    problem based solve
- //=====================================================================
  clean_up_memory();
-
- // begin by setting up the Epetra Matrix
- //======================================
-
- double start_t_setup = TimingHelpers::timer();
-
- // start by determining the distribution of this preconditioner
- // if distributed CRDoubleMatrix then the distribution is the same as the 
- // preconditioner.
- // if serial CRDoubleMatrix then the distribution is the uniform distribution
 
  // cast to CRDoubleMatrix
  // note cast check performed in matrix based solve(...) method
  CRDoubleMatrix* cast_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
 
  // store the distribution
+ // distribution of preconditioner is same as matrix
  Distribution_pt->rebuild(cast_matrix_pt->distribution_pt());
- 
+
+ // create the new solver
+ AztecOO_solver_pt = new AztecOO();
+
+ // if the preconditioner is an oomph-lib preconditioner then we set it up
+ TrilinosPreconditionerBase* trilinos_prec_pt = 
+  dynamic_cast<TrilinosPreconditionerBase* >(Preconditioner_pt);
+ if (trilinos_prec_pt == 0)
+  {
+   // setup the preconditioner
+   // start of prec setup
+   double prec_setup_start_t = TimingHelpers::timer();
+   Preconditioner_pt->setup(Problem_pt,matrix_pt);
+   // start of prec setup
+   double prec_setup_finish_t = TimingHelpers::timer();
+   if (Doc_time)
+    {
+     double t_prec_setup = prec_setup_finish_t - prec_setup_start_t;
+     oomph_info << "Time for preconditioner setup [sec]: "
+                << t_prec_setup << std::endl;
+    }
+#ifdef PARANOID
+   if (*Preconditioner_pt->distribution_pt() != *Distribution_pt)
+    {
+     std::ostringstream error_message;
+     error_message << "The oomph-lib preconditioner and the solver must "
+                   << "have the same distribution";
+     throw OomphLibError(error_message.str(),
+                         "TrilinosAztecOOSolver::solver_setup()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   // wrap the oomphlib preconditioner in the Epetra_Operator derived
+   // OoomphLibPreconditionerEpetraOperator to allow it to be passed to the
+   // trilinos preconditioner
+   Epetra_preconditioner_pt = 
+    new OomphLibPreconditionerEpetraOperator(Preconditioner_pt);
+  }
+
+
  // assemble the map
 #ifdef OOMPH_HAS_MPI
  // MPI version
@@ -302,36 +315,56 @@ void TrilinosAztecOOSolver::solver_setup(DoubleMatrixBase* const& matrix_pt)
                                     Epetra_comm_pt,
                                     Epetra_map_pt);
 #endif
- 
+
  // create the matrices
+ double start_t_matrix = TimingHelpers::timer();
+ Epetra_col_map_pt = new Epetra_Map(matrix_pt->ncol(),matrix_pt->ncol(),
+                                    0,*Epetra_comm_pt);
  TrilinosHelpers::create_epetra_matrix(matrix_pt,
                                        Epetra_map_pt,
+                                       Epetra_col_map_pt,
                                        Epetra_matrix_pt);   
 
  // record the end time and compute the matrix setup time
- double end_t_setup = TimingHelpers::timer();
+ double end_t_matrix = TimingHelpers::timer();
+ if (trilinos_prec_pt == 0)
+  {
+   if (Using_problem_based_solve)
+    {
+     dynamic_cast<CRDoubleMatrix*>(Oomph_matrix_pt)->clear();
+     delete Oomph_matrix_pt;
+     Oomph_matrix_pt = NULL;   
+    }
+   
+   // delete Oomph-lib matrix if requested
+   else if (Delete_matrix)
+    {
+     dynamic_cast<CRDoubleMatrix*>(matrix_pt)->clear();
+    }
+  }
 
  // output times
  if (Doc_time)
  {
   oomph_info << "Time to generate Trilinos matrix      : "
-             << double(end_t_setup-start_t_setup)
+             << double(end_t_matrix-start_t_matrix)
              << "s" << std::endl;
  }
 
- // setup the Aztec00 solver and Preconditioner
- //============================================
-
- // create the new solver
- AztecOO_solver_pt = new AztecOO();
-
  // set the matrix
  AztecOO_solver_pt->SetUserMatrix(Epetra_matrix_pt);
- 
+
+ //set the preconditioner
+ if (trilinos_prec_pt == 0)
+  {
+   AztecOO_solver_pt->
+    SetPrecOperator(Epetra_preconditioner_pt);  
+  }  
+
 #ifdef PARANOID
  // paranoid check the preconditioner exists
  if (Preconditioner_pt == 0)
-    {
+  {
      std::ostringstream error_message;
      error_message << "Preconditioner_pt == 0. (Remember default "
                    << "preconditioner is IdentityPreconditioner)";
@@ -341,49 +374,43 @@ void TrilinosAztecOOSolver::solver_setup(DoubleMatrixBase* const& matrix_pt)
     }
 #endif
 
- // if the preconditioner is a trilinos preconditioner then set the
- // Epetra_Operator
- TrilinosPreconditionerBase* trilinos_prec_pt = 
-  dynamic_cast<TrilinosPreconditionerBase* >(Preconditioner_pt);
+ // if the preconditioner is a trilinos preconditioner then setup the
+ // preconditioner
  if (trilinos_prec_pt != 0)
   {
+
+   // start of prec setup
+   double prec_setup_start_t = TimingHelpers::timer();
+
    // setup the preconditioner
    trilinos_prec_pt->setup(Problem_pt,Oomph_matrix_pt,Epetra_matrix_pt);
-   
+
    // set the preconditioner
    AztecOO_solver_pt->
     SetPrecOperator(trilinos_prec_pt->epetra_operator_pt());
-  }
- 
- // otherwise the preconditioner is an oomph-lib preconditioner and we wrap
- // it in the Epetra-Operator derived object 
- // OomphLibPreconditionerEpetraOperator
- else
-  {
-   // setup the preconditioner
-   Preconditioner_pt->setup(Problem_pt,matrix_pt);
-#ifdef PARANOID
-   if (*Preconditioner_pt->distribution_pt() != *Distribution_pt)
-    {
-     std::ostringstream error_message;
-     error_message << "The oomph-lib preconditioner and the solver must "
-                   << "have the same distribution";
-     throw OomphLibError(error_message.str(),
-                         "TrilinosAztecOOSolver::solver_setup()",
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
    
-   // wrap the oomphlib preconditioner in the Epetra_Operator derived
-   // OoomphLibPreconditionerEpetraOperator to allow it to be passed to the
-   // trilinos preconditioner
-   Epetra_preconditioner_pt = 
-    new OomphLibPreconditionerEpetraOperator(Preconditioner_pt);
+   // start of prec setup
+   double prec_setup_finish_t = TimingHelpers::timer();
+   if (Doc_time)
+    {
+     double t_prec_setup = prec_setup_finish_t - prec_setup_start_t;
+     oomph_info << "Time for preconditioner setup [sec]: "
+                << t_prec_setup << std::endl;
+    }
 
-   //set the preconditioner
-   AztecOO_solver_pt->
-    SetPrecOperator(Epetra_preconditioner_pt);    
+   // delete the oomph-matrix if required
+   if (Using_problem_based_solve)
+    {
+     dynamic_cast<CRDoubleMatrix*>(Oomph_matrix_pt)->clear();
+     delete Oomph_matrix_pt;
+     Oomph_matrix_pt = NULL;   
+    }
+   
+   // delete Oomph-lib matrix if requested
+   else if (Delete_matrix)
+    {
+     dynamic_cast<CRDoubleMatrix*>(matrix_pt)->clear();
+    }
   }
  
  // set solver options
@@ -414,27 +441,6 @@ void TrilinosAztecOOSolver::solver_setup(DoubleMatrixBase* const& matrix_pt)
    throw OomphLibError(error_message.str(),
                        "TrilinosAztecOOSolver::solver_setup()",
                        OOMPH_EXCEPTION_LOCATION);
-  }
- 
- 
- // Delete the oomph-lib matrix if required
- //========================================
-
- // if the solve function was initially called via the Problem based interface
- // set flags so that the oomph-lib copy of the Jacobian matrix is deleted once
- // the Trilinos matrix is created
-
- if (Using_problem_based_solve)
-  {
-   dynamic_cast<CRDoubleMatrix*>(Oomph_matrix_pt)->clear();
-   delete Oomph_matrix_pt;
-   Oomph_matrix_pt = NULL;   
-  }
-   
- // delete Oomph-lib matrix if requested
- else if (Delete_matrix)
-  {
-   dynamic_cast<CRDoubleMatrix*>(matrix_pt)->clear();
   }
 }
 
@@ -524,6 +530,7 @@ void TrilinosAztecOOSolver::solve_using_AztecOO(Epetra_Vector* &rhs_pt,
  
  // perform solve
  AztecOO_solver_pt->Iterate(Max_iter, Tolerance);
+
 
  // output iterations and final norm
  Iterations = AztecOO_solver_pt->NumIters();

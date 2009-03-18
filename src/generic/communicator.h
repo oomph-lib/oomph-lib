@@ -164,7 +164,7 @@ class OomphCommunicator
 
  /// \short == operator - only returns true if communicators are MPI_IDENT,
  /// i.e. if both group and context are the same
- bool operator==(const OomphCommunicator& other_comm)
+ bool operator==(const OomphCommunicator& other_comm) const
   {
 #ifdef OOMPH_HAS_MPI
    if (Serial_communicator != other_comm.serial_communicator())
@@ -191,7 +191,7 @@ class OomphCommunicator
   }
 
  /// \short != operator returns !(==operator) (see ==operator for more details)
- bool operator!=(const OomphCommunicator& other_comm)
+ bool operator!=(const OomphCommunicator& other_comm) const
   {
    return !(*this == other_comm);
   }

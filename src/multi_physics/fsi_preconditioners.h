@@ -628,7 +628,7 @@ void SimpleFSIPreconditioner<MATRIX>::identify_required_blocks(
 {
 
  // find number of block types
- unsigned n_dof = this->ndof_types();
+ unsigned n_dof = this->nblock_types();
  
  // Initialise all blocks to false
  for (unsigned i=0;i<n_dof;i++)

@@ -322,8 +322,6 @@ namespace oomph
 
    // set up a row map
    // and first row / nrow_local
-   const unsigned oomph_first_row = 
-    oomph_matrix->distribution_pt()->first_row();
    const unsigned hypre_nrow_local = dist_pt->nrow_local();
    const unsigned hypre_first_row = dist_pt->first_row();
    int* ncols_per_row = new int[hypre_nrow_local];

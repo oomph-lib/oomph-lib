@@ -218,8 +218,10 @@ void ARPACK::solve_eigenproblem(Problem* const &problem_pt,
      M.multiply(x,rhs);
 
      //Now solve the system
-     if(First) {Linear_solver_pt->solve(&AsigmaM,rhs,rhs); First=false;}
-     else {Linear_solver_pt->resolve(rhs,rhs);}
+     DoubleVector temp(rhs);
+     if(First) {Linear_solver_pt->solve(&AsigmaM,temp,rhs); First=false;}
+     else {Linear_solver_pt->resolve(temp,rhs);}
+     temp.clear();
      //AsigmaM.lubksub(rhs);
      //Put the solution into the workspace
      for(int i=0;i<n;i++)
@@ -239,8 +241,9 @@ void ARPACK::solve_eigenproblem(Problem* const &problem_pt,
       }
      //Now solve the system
      //AsigmaM.lubksub(rhs);
-     if(First) {Linear_solver_pt->solve(&AsigmaM,rhs,rhs); First=false;}
-     else {Linear_solver_pt->resolve(rhs,rhs);}
+     DoubleVector temp(rhs);
+     if(First) {Linear_solver_pt->solve(&AsigmaM,temp,rhs); First=false;}
+     else {Linear_solver_pt->resolve(temp,rhs);}
      //Put the solution into the workspace
      for(int i=0;i<n;i++)
       {

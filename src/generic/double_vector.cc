@@ -36,17 +36,23 @@ namespace oomph
  //============================================================================
  void DoubleVector::rebuild(const DoubleVector& old_vector)
   {
-   // reset the distribution and resize the data
-   this->rebuild(old_vector.distribution_pt());
-   
-   // copy the data
-   if (Distribution_pt->setup())
+   if (!(*this == old_vector))
     {
-     unsigned nrow_local = this->nrow_local();
-     const double* old_vector_values = old_vector.values_pt();
-     for (unsigned i = 0; i < nrow_local; i++)
+     // the vector owns the internal data
+     Internal_values = true;
+     
+     // reset the distribution and resize the data
+     this->rebuild(old_vector.distribution_pt());
+     
+     // copy the data
+     if (Distribution_pt->setup())
       {
-       Values_pt[i] = old_vector_values[i];
+       unsigned nrow_local = this->nrow_local();
+       const double* old_vector_values = old_vector.values_pt();
+       for (unsigned i = 0; i < nrow_local; i++)
+        {
+         Values_pt[i] = old_vector_values[i];
+        }
       }
     }
   }
@@ -56,11 +62,14 @@ namespace oomph
  /// each row is set to v
  //============================================================================
  void DoubleVector::rebuild(const LinearAlgebraDistribution* const &dist_pt, 
-              const double& v)
+                            const double& v)
   {
    // clean the memory
    this->clear();
-   
+
+   // the vector owns the internal data
+   Internal_values = true;
+
    // Set the distribution
    Distribution_pt->rebuild(dist_pt);
    // update the values
@@ -107,6 +116,20 @@ namespace oomph
  {
 #ifdef OOMPH_HAS_MPI
 #ifdef PARANOID
+  if (!Internal_values)
+   {
+    // if this vector does not own the double* values then it cannot be
+    // distributed.
+    // note: this is not stictly necessary - would just need to be careful 
+    // with delete[] below.
+     std::ostringstream error_message;    
+     error_message << "This vector does not own its data (i.e. it has been "
+                   << "passed in via set_external_values() and therefore "
+                   << "cannot be redistributed"; 
+     throw OomphLibError(error_message.str(),
+                         "DoubleVector::redistribute(...)",
+                         OOMPH_EXCEPTION_LOCATION);
+   }
    // paranoid check that the nrows for both distributions is the 
    // same
    if (new_dist.nrow() != Distribution_pt->nrow())
@@ -346,6 +369,39 @@ namespace oomph
     }
 #endif
    return Values_pt[i];
+  }
+
+ //============================================================================
+ /// \short == operator
+ //============================================================================
+ bool DoubleVector::operator==(const DoubleVector& v)
+  {
+   // if v is not setup return false 
+   if (v.distribution_setup() && !this->distribution_setup())
+    {
+     return false;
+    }
+   else if (!v.distribution_setup() && this->distribution_setup())
+    {
+     return false;
+    }
+   else if (!v.distribution_setup() && !this->distribution_setup())
+    {
+     return true;
+    }
+   else
+    {
+     double* v_values_pt = v.values_pt();
+     unsigned nrow_local = this->nrow_local();
+     for (unsigned i = 0; i < nrow_local; i++)
+      {
+       if (Values_pt[i] != v_values_pt[i])
+        {
+         return false;
+        }
+      }
+     return true;
+    }
   }
 
  //============================================================================

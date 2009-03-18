@@ -400,7 +400,7 @@ namespace oomph
    /// and build_preconditioner_matrix(...) have been called in this and 
    /// all subsidiary block preconditioners this method can be called to 
    /// reduce the memory requirement.
-   void post_block_matrix_assembly_partial_clean_up_memory()
+   void post_block_matrix_assembly_partial_clean_memory()
     {
      if (Master_block_preconditioner_pt == 0)
       {
@@ -418,8 +418,6 @@ namespace oomph
    /// in the block preconditioner. 
    Vector<Mesh*> Mesh_pt;
 
-    private:
-
    /// \short Clears all BlockPreconditioner data. Called by the destructor
    /// and the block_setup(...) methods
    void clean_memory()
@@ -432,12 +430,13 @@ namespace oomph
       {
        delete Block_distribution_pt[b];
       }
+     Block_distribution_pt.resize(0);
 
      // clear the global index
      Global_index.clear();
 
      // call the post block matrix assembly clear
-     this->post_block_matrix_assembly_partial_clean_up_memory();
+     this->post_block_matrix_assembly_partial_clean_memory();
 
 #ifdef OOMPH_HAS_MPI
      // storage if the matrix is distributed
@@ -475,6 +474,8 @@ namespace oomph
        Nblock_types = 0;
       }
     }
+
+    private:
 
    /// \short Private helper function to check that every element in the block 
    /// matrix (i,j) matches the corresponding element in the original matrix
@@ -1404,6 +1405,13 @@ namespace oomph
         {
          MPI_Waitall(csr,&send_requests[0],MPI_STATUS_IGNORE);
         }
+
+       // clean up
+       delete[] ndof_to_send;
+       delete[] first_dof_to_send;
+       delete[] ndof_to_recv;
+       delete[] my_global_dofs;
+       delete[] my_dof_numbers;
 #ifdef PARANOID
        unsigned all_recv = true;
        for (unsigned i = 0; i < nlookup_rows; i++)
@@ -1435,8 +1443,6 @@ namespace oomph
 
      // for every global degree of freedom required by this processor we now 
      // have the corresponding dof number
-
-     // next we compute the index in the dof block
 
      // clear the Ndof_in_dof_block storage
      Dof_dimension.resize(Ndof_types);
@@ -1569,9 +1575,6 @@ namespace oomph
 #endif
       }
     }
-
-   // next we assemble the block distributions and the block based lookup 
-   // schemes
 
    // compute the number of rows in each block
 

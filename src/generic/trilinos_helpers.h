@@ -29,7 +29,6 @@
 #define OOMPH_TRILINOS_HELPERS_HEADER
 
 // trilinos headers
-
 #include "Epetra_Map.h"
 #include "Epetra_Vector.h"
 #include "Epetra_CrsMatrix.h"
@@ -67,13 +66,15 @@ namespace TrilinosHelpers
 
  /// \short creates a distributed Epetra_Vector that has the same contents as
  /// oomph_v with distribution row_map_pt. \n
- /// NOTE 1. the Epetra_Map and the LinearAlgebraDistribution object in the
+ /// NOTE. the Epetra_Map and the LinearAlgebraDistribution object in the
  /// vector must descibe the same distribution \n
  void create_epetra_vector(const DoubleVector& oomph_v,
                            const Epetra_Map* row_map_pt,
-                           Epetra_Vector*& epetra_v_pt);
+                           Epetra_Vector*& epetra_v_pt,
+                           bool view = false);
 
- /// creates an empty trilinos vector with Epetra_Map row_map_pt
+ /// \short creates an empty trilinos vector with Epetra_Map row_map_pt. \n
+ /// NOTE. elements are NOT set to zero
  void create_epetra_vector(const Epetra_Map* row_map_pt,
                            Epetra_Vector*& epetra_v_pt);
 
@@ -88,9 +89,11 @@ namespace TrilinosHelpers
  /// NOTE 1. This function constructs an Epetra_CrsMatrix using new,
  /// "delete trilinos_matrix_pt;" is NOT called. \n
  void create_epetra_matrix(DoubleMatrixBase* oomph_matrix,
-                           const Epetra_Map* epetra_row_map_pt,
+                           const Epetra_Map* epetra_range_map_pt,
+                           const Epetra_Map* epetra_domain_map_pt,
                            const Epetra_Map* epetra_col_map_pt,
-                           Epetra_CrsMatrix* &epetra_matrix_pt);
+                           Epetra_CrsMatrix* &epetra_matrix_pt,
+                           bool view = false);
  
  /// \short Helper function to create a distributed Epetra_CrsMatrix from a 
  /// from a CRDoubleMatrix \n
@@ -98,7 +101,8 @@ namespace TrilinosHelpers
  /// "delete trilinos_matrix_pt;" is NOT called. \n
  /// NOTE 2. Specialisation for SQUARE matrices. \n
  void create_epetra_matrix(DoubleMatrixBase* oomph_matrix,
-                           const Epetra_Map* epetra_row_pt,
+                           const Epetra_Map* epetra_range_pt,
+                           const Epetra_Map* epetra_col_map_pt,
                            Epetra_CrsMatrix* &epetra_matrix_pt);
 
  /// \short  Function to perform a matrix-vector multiplication on a 

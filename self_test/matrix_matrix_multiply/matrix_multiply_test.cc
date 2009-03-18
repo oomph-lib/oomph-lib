@@ -246,9 +246,13 @@ int main()
  CCDoubleMatrix* CC_matrix1_pt = new CCDoubleMatrix;
  CCDoubleMatrix* CC_matrix2_pt = new CCDoubleMatrix;
  problem1_pt->get_jacobian(residual,*CR_matrix1_pt);
+ residual.clear();
  problem1_pt->get_jacobian(residual,*CR_matrix2_pt);
+ residual.clear();
  problem1_pt->get_jacobian(residual,*CC_matrix1_pt);
+ residual.clear();
  problem1_pt->get_jacobian(residual,*CC_matrix2_pt);
+ residual.clear();
 
  DenseDoubleMatrix* D_matrix1_pt = new DenseDoubleMatrix;
  DenseDoubleMatrix* D_matrix2_pt = new DenseDoubleMatrix;

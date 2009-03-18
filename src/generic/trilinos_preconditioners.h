@@ -54,6 +54,7 @@ namespace oomph
      Epetra_preconditioner_pt=0;
      Epetra_matrix_pt=0;
      Epetra_map_pt=0;
+     Epetra_col_map_pt=0;
      Epetra_comm_pt=0;
 #ifdef OOMPH_HAS_MPI
      Epetra_global_rows=0;
@@ -80,6 +81,10 @@ namespace oomph
      // delete the epetra matrix row map
      delete Epetra_map_pt;    
      Epetra_map_pt = 0;
+
+     // delete the epetra matrix col map
+     delete Epetra_col_map_pt;
+     Epetra_col_map_pt = 0;
 
      // delete the epetra matrix row map
      delete Epetra_comm_pt;    
@@ -155,6 +160,9 @@ namespace oomph
 
    /// \short Pointer to store the row map of the Epetra_matrix
    Epetra_Map* Epetra_map_pt;
+
+   /// \short point to store the column map of the the Epetra_matrix
+   Epetra_Map* Epetra_col_map_pt;
 
 #ifdef OOMPH_HAS_MPI
    /// \short Global rows of the Epetra_matrix_pt - only used when this 

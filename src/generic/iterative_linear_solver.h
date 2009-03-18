@@ -738,7 +738,6 @@ class GMRES : public IterativeLinearSolver
  /// if left hand or right hand preconditioning is used
  bool& preconditioner_LHS() {return Preconditioner_LHS;}
  
- 
   private:
 
  /// General interface to solve function 
@@ -747,7 +746,6 @@ class GMRES : public IterativeLinearSolver
                    DoubleVector &solution,
                    Problem* problem_pt);
  
-
  /// Cleanup data that's stored for resolve (if any has been stored)
  void clean_up_memory()
   {
@@ -757,10 +755,6 @@ class GMRES : public IterativeLinearSolver
      Matrix_pt=0;
     }
   }
-
-
-// NEW UPDATE FUNCTION FROM GLYN......
-// original function commented out below
 
  /// Helper function to update the result vector
  void update(const unsigned& k, const Vector<Vector<double> >& H, 
@@ -783,17 +777,7 @@ class GMRES : public IterativeLinearSolver
    unsigned n_x=x.nrow();
    DoubleVector temp(x.distribution_pt());
    DoubleVector z(x.distribution_pt());
-//changes
-   // x = Vy
-   /*  unsigned n_x=x.size();    */
-/*    for (unsigned j = 0; j <= k; j++) */
-/*     { */
-/*      for (unsigned i = 0; i < n_x; i++) */
-/*       { */
-/*        x[i] += v[j][i] * y[j]; */
-/*       } */
-/*     } */
-/*   } */
+
    // x = Vy
    double* temp_pt = temp.values_pt();
    for (unsigned j = 0; j <= k; j++)
@@ -805,58 +789,18 @@ class GMRES : public IterativeLinearSolver
       }
     }
    
-//   double* x_pt = x.values_pt();
    if(Preconditioner_LHS)
     { 
      x += temp;
-//     for (unsigned i = 0; i < n_x; i++)
-//      {
-//       x_pt[i]+=temp[i];
-//      }
     }
    else
     {
      //x=x0+M^{-1}Vy by saad p270
      preconditioner_pt()->preconditioner_solve(temp,z);
      x+=z;
-//     for (unsigned i = 0; i < n_x; i++)
-//      {
-//       x[i] +=z_pt[i];
-//      }
     }   
   }
  
-
-/*  /// Helper function to update the result vector */
-/*  void update(const unsigned& k, const Vector<Vector<double> >& H,  */
-/*              const Vector<double>& s, const Vector<Vector<double> >& v, */
-/*              Vector<double> &x) */
-/*   { */
-/*    // Make a local copy of s */
-/*    Vector<double> y(s); */
-   
-/*    // Backsolve:   */
-/*    for (int i = int(k); i >= 0; i--)  */
-/*     { */
-/*      y[i] /= H[i][i]; */
-/*      for (int j = i - 1; j >= 0; j--) */
-/*       { */
-/*        y[j] -= H[i][j] * y[i]; */
-/*       } */
-/*     } */
-
-/*    // x = Vy */
-/*    unsigned n_x=x.size();    */
-/*    for (unsigned j = 0; j <= k; j++) */
-/*     { */
-/*      for (unsigned i = 0; i < n_x; i++) */
-/*       { */
-/*        x[i] += v[j][i] * y[j]; */
-/*       } */
-/*     } */
-/*   } */
-
-
  /// \short Helper function: Generate plane rotation
  void generate_plane_rotation(double &dx, double &dy, double &cs, double &sn)
   {
@@ -879,8 +823,6 @@ class GMRES : public IterativeLinearSolver
     }
   }
 
-
-
  /// \short Helper function: Apply plane rotation
  void apply_plane_rotation(double &dx, double &dy, double &cs, double &sn)
   {
@@ -888,7 +830,6 @@ class GMRES : public IterativeLinearSolver
    dy = -sn * dx + cs * dy;
    dx = temp;
   }
-
 
  /// Number of iterations taken
  unsigned Iterations;
@@ -914,7 +855,6 @@ class GMRES : public IterativeLinearSolver
  /// \short boolean indicating use of left hand preconditioning (if true)
  /// or right hand preconditioning (if false)
  bool Preconditioner_LHS;
-
 };
 }
 

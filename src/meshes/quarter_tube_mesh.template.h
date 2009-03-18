@@ -80,7 +80,10 @@ public:
                  &Mesh::Default_TimeStepper);
 
  /// \short Destructor: empty
- virtual ~QuarterTubeMesh(){}
+ virtual ~QuarterTubeMesh()
+  {
+   delete Domain_pt;
+  }
 
 
 

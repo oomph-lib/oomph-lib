@@ -37,14 +37,15 @@ namespace TrilinosHelpers
  /// oomph_v with distribution row_map_pt. \n
  /// NOTE 1. the Epetra_Map and the LinearAlgebraDistribution object in the
  /// vector must descibe the same distribution
- /// NOTE 2. if the bool copy is true (default) then the values in the 
+ /// NOTE 2. if the bool view is false (default) then the values in the 
  /// oomph-lib vector (oomph_v) will be copied into the epetra vector, or if 
- /// it is false then the epetra vector will 'view' (i.e. point to) the 
+ /// it is true then the epetra vector will 'view' (i.e. point to) the 
  /// contents of the oomph-lib vector
  //============================================================================
  void create_epetra_vector(const DoubleVector& oomph_v,
                            const Epetra_Map* row_map_pt,
-                           Epetra_Vector*& epetra_v_pt)
+                           Epetra_Vector*& epetra_v_pt,
+                           bool view)
  {
 #ifdef PARANOID
   // check the the oomph lib vector is setup
@@ -87,79 +88,28 @@ namespace TrilinosHelpers
    }
 #endif
 
-  // if oomph has mpi and oomph_v is distributed
-#ifdef OOMPH_HAS_MPI
-  if (oomph_v.distributed())
+  // first local row of oomph vector to be inserted into the Epetra_Vector
+  unsigned offset = 0;
+  // NOTE assumption that the first global row in the vector is the 
+  // first_row. This is true of oomph-lib vectors, but not necessarily 
+  // for epetra vectors
+  if (!oomph_v.distributed() && 
+      oomph_v.distribution_pt()->communicator_pt()->nproc() > 1)
    {
-    // create the Epetra_Vector
-    unsigned nrow_local = oomph_v.nrow_local();
-    double* v = new double[nrow_local];
-    for (unsigned i = 0; i < nrow_local; i++)
-     {
-      v[i] = oomph_v[i];
-     }
-    epetra_v_pt = new Epetra_Vector(Copy,*row_map_pt,v);
-    delete[] v;
-    return;
+    int* global_rows = row_map_pt->MyGlobalElements();
+    offset = static_cast<unsigned>(global_rows[0]);
    }
-#endif
-  // otherwise...
 
-  // storage for data to be inserted
-  double* values;
-  int* indices;
-  unsigned nrow = 0;
-
-#ifdef OOMPH_HAS_MPI
-  int nproc = row_map_pt->Comm().NumProc();
-  if (nproc == 1)
+  //
+  double* v_pt = oomph_v.values_pt();
+  if (view)
    {
-    // store the data for insertion
-    nrow = oomph_v.nrow();
-    values = new double[nrow];
-    indices = new int[nrow];
-    for (unsigned i = 0; i < nrow; i++)
-     {
-      values[i] = oomph_v[i];
-      indices[i] = i;
-     }
+    epetra_v_pt = new Epetra_Vector(View,*row_map_pt,v_pt+offset);
    }
   else
    {
-    // get my nrow_local and first_row
-    unsigned nrow_local = row_map_pt->NumMyElements();
-    int* global_rows = row_map_pt->MyGlobalElements();
-    unsigned first_row = static_cast<unsigned>(global_rows[0]);
-
-    // store the data for insertion
-    nrow = nrow_local;
-    values = new double[nrow];
-    indices = new int[nrow];
-    for (unsigned i = 0; i < nrow; i++)
-     {
-      values[i] = oomph_v[i + first_row];
-      indices[i] = i + first_row;
-     }
+    epetra_v_pt = new Epetra_Vector(Copy,*row_map_pt,v_pt+offset);
    }
-#else
-  // store the data for insertion
-  nrow = oomph_v.nrow();
-  values = new double[nrow];
-  indices = new int[nrow];
-  for (unsigned i = 0; i < nrow; i++)
-   {
-    values[i] = oomph_v[i];
-    indices[i] = i;
-   }
-#endif
-
-  // insert
-  epetra_v_pt = new Epetra_Vector(*row_map_pt);
-  epetra_v_pt->ReplaceGlobalValues(nrow,values,indices);
-
-  // clean up memory
-  delete[] values;
-  delete[] indices;
  }
 
  //============================================================================
@@ -170,7 +120,7 @@ namespace TrilinosHelpers
  {
 
   // create the Epetra_Vector
-  epetra_v_pt = new Epetra_Vector(*row_map_pt);
+  epetra_v_pt = new Epetra_Vector(*row_map_pt,true);
  }
 
  //============================================================================
@@ -276,9 +226,11 @@ namespace TrilinosHelpers
 /// "delete trilinos_matrix_pt;" is NOT called.
 //=============================================================================
 void create_epetra_matrix(DoubleMatrixBase* matrix_pt,
-                          const Epetra_Map* epetra_row_map_pt,
+                          const Epetra_Map* epetra_range_map_pt,
+                          const Epetra_Map* epetra_domain_map_pt,
                           const Epetra_Map* epetra_col_map_pt,
-                          Epetra_CrsMatrix* &epetra_matrix_pt)
+                          Epetra_CrsMatrix* &epetra_matrix_pt,
+                          bool view)
 {
 
  // first try DistributedCRDoubleMatrix
@@ -316,13 +268,13 @@ void create_epetra_matrix(DoubleMatrixBase* matrix_pt,
    // oomph-lib matrix are the same
 #ifdef PARANOID
    compare_maps(cast_matrix_pt->distribution_pt(),
-                *epetra_row_map_pt);
+                *epetra_range_map_pt);
 #endif
    // paranoid check that the distribution of the map and the vector are the
   // same
 #ifdef PARANOID
   if (!compare_maps(cast_matrix_pt->distribution_pt(),
-                    *epetra_row_map_pt))
+                    *epetra_range_map_pt))
   {
     std::ostringstream error_message;
     error_message << "The oomph-lib distributed vector (oomph_v) and the "
@@ -350,27 +302,51 @@ void create_epetra_matrix(DoubleMatrixBase* matrix_pt,
     }
    
    // construct the new Epetra matrix
-   epetra_matrix_pt = new Epetra_CrsMatrix(Copy,*epetra_row_map_pt,
-                                           nnz_per_row);
-   
+   if (view)
+    {
+     epetra_matrix_pt = new Epetra_CrsMatrix(View,*epetra_range_map_pt,
+                                             *epetra_col_map_pt,
+                                             nnz_per_row,true);
+    }
+   else
+    {
+     epetra_matrix_pt = new Epetra_CrsMatrix(Copy,*epetra_range_map_pt,
+                                             nnz_per_row,true);
+    }
+
    // insert the values
    for (unsigned row=0; row<nrow_local; row++)
     {
      // get pointer to this row in values/columns
      int ptr = row_start[row];
+#ifdef PARANOID
+     int err = epetra_matrix_pt->InsertGlobalValues(first_row+row,
+                                                    nnz_per_row[row],
+                                                    value+ptr,
+                                                    column+ptr);
+     if (err != 0)
+      {
+       std::ostringstream error_message;
+       error_message 
+        << "Epetra Matrix Insert Global Values : epetra_error_flag = " 
+        << err;
+       throw OomphLibError(error_message.str(),
+                           "TrilinosHelpers::create_epetra_matrix(...)",
+                           OOMPH_EXCEPTION_LOCATION);       
+      }
+#else
      epetra_matrix_pt->InsertGlobalValues(first_row+row,
                                           nnz_per_row[row],
                                           value+ptr,
                                           column+ptr);
+#endif
     }
-   
-   // tidy up memory
-   delete[] nnz_per_row;
-   
+
    // complete the build of the trilinos matrix
 #ifdef PARANOID
    int err=0;
-   err = epetra_matrix_pt->FillComplete(*epetra_col_map_pt,*epetra_row_map_pt);
+   err = epetra_matrix_pt->FillComplete(*epetra_domain_map_pt,
+                                        *epetra_range_map_pt);
    if (err != 0)
     {
      std::ostringstream error_message;
@@ -382,8 +358,11 @@ void create_epetra_matrix(DoubleMatrixBase* matrix_pt,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #else
-   epetra_matrix_pt->FillComplete(*epetra_col_map_pt,*epetra_row_map_pt);
+   epetra_matrix_pt->FillComplete(*epetra_domain_map_pt,*epetra_range_map_pt);
 #endif
+
+   // tidy up memory
+   delete[] nnz_per_row;
   }
 
  // if the matrix is not distributed 
@@ -396,8 +375,8 @@ void create_epetra_matrix(DoubleMatrixBase* matrix_pt,
    int* row_start = cast_matrix_pt->row_start();
    
    // get my nrow_local and first_row
-   unsigned nrow_local = epetra_row_map_pt->NumMyElements();
-   int* global_rows = epetra_row_map_pt->MyGlobalElements();
+   unsigned nrow_local = epetra_range_map_pt->NumMyElements();
+   int* global_rows = epetra_range_map_pt->MyGlobalElements();
    unsigned first_row = static_cast<unsigned>(global_rows[0]);
 
    // store the number of non zero entries per row
@@ -409,8 +388,17 @@ void create_epetra_matrix(DoubleMatrixBase* matrix_pt,
     }
    
    // construct the new Epetra matrix
-   epetra_matrix_pt = new Epetra_CrsMatrix(Copy,*epetra_row_map_pt,
-                                           nnz_per_row);
+   if (view)
+    {
+     epetra_matrix_pt = new Epetra_CrsMatrix(View,*epetra_range_map_pt,
+                                             *epetra_col_map_pt,
+                                             nnz_per_row,true);
+    }
+   else
+    {
+     epetra_matrix_pt = new Epetra_CrsMatrix(Copy,*epetra_range_map_pt,
+                                             nnz_per_row,true);
+    }
 
    // insert the values
    for (unsigned row=0; row< nrow_local; row++)
@@ -430,7 +418,8 @@ void create_epetra_matrix(DoubleMatrixBase* matrix_pt,
    // complete the build of the trilinos matrix
 #ifdef PARANOID
    int err=0;
-   err = epetra_matrix_pt->FillComplete(*epetra_col_map_pt,*epetra_row_map_pt);
+   err = epetra_matrix_pt->FillComplete(*epetra_domain_map_pt,
+                                        *epetra_range_map_pt);
    if (err != 0)
     {
      std::ostringstream error_message;
@@ -442,7 +431,7 @@ void create_epetra_matrix(DoubleMatrixBase* matrix_pt,
                          OOMPH_EXCEPTION_LOCATION);
     }
 #else
-   epetra_matrix_pt->FillComplete(*epetra_col_map_pt,*epetra_row_map_pt);
+   epetra_matrix_pt->FillComplete(*epetra_domain_map_pt,*epetra_range_map_pt);
 #endif
 
  }
@@ -464,8 +453,18 @@ void create_epetra_matrix(DoubleMatrixBase* matrix_pt,
   }
 
  // construct the new Epetra matrix
- epetra_matrix_pt = new Epetra_CrsMatrix(Copy,*epetra_row_map_pt,
-                                         nnz_per_row);
+ if (view)
+  {
+   epetra_matrix_pt = new Epetra_CrsMatrix(View,*epetra_range_map_pt,
+                                           *epetra_col_map_pt,
+                                           nnz_per_row);
+  }
+ else
+  {
+   epetra_matrix_pt = new Epetra_CrsMatrix(Copy,*epetra_range_map_pt,
+                                           *epetra_col_map_pt,
+                                           nnz_per_row);
+  }
 
  // insert the values
  for (unsigned row=0;row<n_rows;row++)
@@ -482,7 +481,8 @@ void create_epetra_matrix(DoubleMatrixBase* matrix_pt,
  // complete the build of the trilinos matrix
 #ifdef PARANOID
  int err=0;
- err = epetra_matrix_pt->FillComplete(*epetra_col_map_pt,*epetra_row_map_pt);
+ err = epetra_matrix_pt->FillComplete(*epetra_domain_map_pt,
+                                      *epetra_range_map_pt);
  if (err != 0)
   {
    std::ostringstream error_message;
@@ -494,10 +494,11 @@ void create_epetra_matrix(DoubleMatrixBase* matrix_pt,
                          OOMPH_EXCEPTION_LOCATION);
   }
 #else
- epetra_matrix_pt->FillComplete(*epetra_col_map_pt,*epetra_row_map_pt);
+ epetra_matrix_pt->FillComplete(*epetra_domain_map_pt,*epetra_range_map_pt);
 #endif
 #endif
-}
+  }
+
 
 //=============================================================================
 /// Helper function to create a distributed Epetra_CrsMatrix from a 
@@ -507,12 +508,14 @@ void create_epetra_matrix(DoubleMatrixBase* matrix_pt,
 /// \b NOTE 2. Specialisation for SQUARE matrices.
 //=============================================================================
 void create_epetra_matrix(DoubleMatrixBase* oomph_matrix,
-                          const Epetra_Map* epetra_row_map_pt,
+                          const Epetra_Map* epetra_range_map_pt,
+                          const Epetra_Map* epetra_col_map_pt,
                           Epetra_CrsMatrix* &epetra_matrix_pt)
 {
- create_epetra_matrix(oomph_matrix,epetra_row_map_pt,epetra_row_map_pt,
-                      epetra_matrix_pt);
+ create_epetra_matrix(oomph_matrix,epetra_range_map_pt,epetra_range_map_pt,
+                      epetra_col_map_pt,epetra_matrix_pt);
 }
+
 
 //=============================================================================
 /// Function to perform a matrix-vector multiplication on a 
@@ -582,41 +585,46 @@ void multiply(CRDoubleMatrix &oomph_matrix,
 
  // create the maps corresponding the distribution of matrix1 and matrix2
 
- // matrix row map
- Epetra_Map* matrix_row_map_pt;
+ // matrix range map
+ Epetra_Map* matrix_range_map_pt;
 
 #ifdef OOMPH_HAS_MPI
  int* global_rows;
- create_epetra_map(oomph_matrix.distribution_pt(),comm_pt,matrix_row_map_pt,
+ create_epetra_map(oomph_matrix.distribution_pt(),comm_pt,matrix_range_map_pt,
                    global_rows);
 #else
- create_epetra_map(oomph_matrix.distribution_pt(),comm_pt,matrix_row_map_pt);
+ create_epetra_map(oomph_matrix.distribution_pt(),comm_pt,matrix_range_map_pt);
 #endif
 
- // matrix col map
- Epetra_Map* matrix_col_map_pt;
+ // matrix domain map
+ Epetra_Map* matrix_domain_map_pt;
 
 #ifdef OOMPH_HAS_MPI
  int* global_cols;
- create_epetra_map(oomph_x.distribution_pt(),comm_pt,matrix_col_map_pt,
+ create_epetra_map(oomph_x.distribution_pt(),comm_pt,matrix_domain_map_pt,
                    global_cols); 
 #else
- create_epetra_map(oomph_x.distribution_pt(),comm_pt,matrix_col_map_pt); 
+ create_epetra_map(oomph_x.distribution_pt(),comm_pt,matrix_domain_map_pt); 
 #endif
 
+ // matrix col map
+ Epetra_Map* matrix_col_map_pt = new Epetra_Map(oomph_matrix.ncol(),
+                                                oomph_matrix.ncol(),
+                                                0,*comm_pt);
+ 
  // convert matrix1 to epetra matrix
  Epetra_CrsMatrix* epetra_matrix_pt;
- create_epetra_matrix(&oomph_matrix,matrix_row_map_pt,matrix_col_map_pt,
-                      epetra_matrix_pt);
+ create_epetra_matrix(&oomph_matrix,matrix_range_map_pt,matrix_domain_map_pt,
+                      matrix_col_map_pt,epetra_matrix_pt,false);
 
  // convert x to Trilinos vector
  Epetra_Vector* epetra_x_pt;
- create_epetra_vector(oomph_x,matrix_col_map_pt,epetra_x_pt);
+ create_epetra_vector(oomph_x,matrix_domain_map_pt,epetra_x_pt);
 
  // create Trilinos vector for soln ( 'viewing' the contents of the oomph-lib
  // matrix)
  Epetra_Vector* epetra_soln_pt;
- create_epetra_vector(oomph_soln,matrix_row_map_pt,epetra_soln_pt);
+ create_epetra_vector(oomph_soln,matrix_range_map_pt,epetra_soln_pt);
 
  // do the multiply
  int epetra_error_flag = epetra_matrix_pt->Multiply(false,*epetra_x_pt,
@@ -644,7 +652,8 @@ void multiply(CRDoubleMatrix &oomph_matrix,
  epetra_error_flag=0;
 
  // clean up
- delete matrix_row_map_pt;
+ delete matrix_range_map_pt;
+ delete matrix_domain_map_pt;
  delete matrix_col_map_pt;
  delete epetra_matrix_pt;
  delete epetra_x_pt;
@@ -761,49 +770,55 @@ void multiply(CRDoubleMatrix &matrix1,
  // create the maps corresponding the distribution of matrix1 and matrix2
 
  // matrix 1
- Epetra_Map* matrix1_map_pt;
+ Epetra_Map* matrix1_range_map_pt;
 
 #ifdef OOMPH_HAS_MPI
  int* matrix1_global_rows;
- create_epetra_map(matrix1.distribution_pt(),comm_pt,matrix1_map_pt,
+ create_epetra_map(matrix1.distribution_pt(),comm_pt,matrix1_range_map_pt,
                    matrix1_global_rows);
 #else
- create_epetra_map(matrix1.distribution_pt(),comm_pt,matrix1_map_pt);
+ create_epetra_map(matrix1.distribution_pt(),comm_pt,matrix1_range_map_pt);
 #endif
 
  // matrix 2
- Epetra_Map* matrix2_map_pt;
+ Epetra_Map* matrix2_range_map_pt;
 
 #ifdef OOMPH_HAS_MPI
  int* matrix2_global_rows;
- create_epetra_map(matrix2.distribution_pt(),comm_pt,matrix2_map_pt,
+ create_epetra_map(matrix2.distribution_pt(),comm_pt,matrix2_range_map_pt,
                    matrix2_global_rows);
 #else
- create_epetra_map(matrix2.distribution_pt(),comm_pt,matrix2_map_pt);
+ create_epetra_map(matrix2.distribution_pt(),comm_pt,matrix2_range_map_pt);
 #endif
 
  // matrix 2 column distribution
- Epetra_Map* matrix2_col_map_pt;
+ Epetra_Map* matrix2_domain_map_pt;
  LinearAlgebraDistribution 
   matrix2_col_distribution(matrix2.distribution_pt()->communicator_pt(),
                            matrix2.ncol(),true); 
 
 #ifdef OOMPH_HAS_MPI
  int* matrix2_global_cols;
- create_epetra_map(&matrix2_col_distribution,comm_pt,matrix2_col_map_pt,
+ create_epetra_map(&matrix2_col_distribution,comm_pt,matrix2_domain_map_pt,
                    matrix2_global_cols);
 #else
- create_epetra_map(&matrix2_col_distribution,comm_pt,matrix2_col_map_pt);
+ create_epetra_map(&matrix2_col_distribution,comm_pt,matrix2_domain_map_pt);
 #endif
-
- // convert matrix1 to epetra matrix
+ // create matrix 1
+ Epetra_Map* matrix1_col_map_pt = new Epetra_Map(matrix1.ncol(),
+                                                 matrix1.ncol(),
+                                                 0,*comm_pt);
  Epetra_CrsMatrix* epetra_matrix1_pt;
- create_epetra_matrix(&matrix1,matrix1_map_pt,matrix2_map_pt,epetra_matrix1_pt);
-
- // convert matrix2 to epetra matrix
+ create_epetra_matrix(&matrix1,matrix1_range_map_pt,matrix2_range_map_pt,
+                      matrix1_col_map_pt,epetra_matrix1_pt,false);
+ 
+ // create matrix 2
+ Epetra_Map* matrix2_col_map_pt = new Epetra_Map(matrix2.ncol(),
+                                                 matrix2.ncol(),
+                                                 0,*comm_pt);
  Epetra_CrsMatrix* epetra_matrix2_pt;
- create_epetra_matrix(&matrix2,matrix2_map_pt,matrix2_col_map_pt,
-                      epetra_matrix2_pt);
+ create_epetra_matrix(&matrix2,matrix2_range_map_pt,matrix2_domain_map_pt,
+                      matrix2_col_map_pt,epetra_matrix2_pt,false);
 
  // create Trilinos matrix to hold solution - will have same map 
  // (and number of rows) as matrix1
@@ -827,8 +842,9 @@ void multiply(CRDoubleMatrix &matrix1,
  }
  else
  {
+
   // this method requires us to pass in the solution matrix
-  solution_pt = new Epetra_CrsMatrix(Copy,*matrix1_map_pt,1);
+  solution_pt = new Epetra_CrsMatrix(Copy,*matrix1_range_map_pt,1);
   int epetra_error_flag = 
    EpetraExt::MatrixMatrix::Multiply(*epetra_matrix1_pt,
                                      false,
@@ -943,13 +959,17 @@ void multiply(CRDoubleMatrix &matrix1,
  row_start[nrow_local] = ptr;
 
  // delete Trilinos objects
- delete matrix1_map_pt;
- delete matrix2_map_pt;
+ delete matrix1_range_map_pt;
+ delete matrix2_range_map_pt;
+ delete matrix2_domain_map_pt;
+ delete matrix1_col_map_pt;
  delete matrix2_col_map_pt;
  delete epetra_matrix1_pt;
  delete epetra_matrix2_pt;
  delete solution_pt;
  delete comm_pt;
+// delete column_indices1;
+// delete column_indices2;
 #ifdef OOMPH_HAS_MPI
  delete[] matrix1_global_rows;
  delete[] matrix2_global_rows; 

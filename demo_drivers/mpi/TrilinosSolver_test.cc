@@ -678,12 +678,11 @@ int main(int argc, char **argv)
     
    } // end of loop over preconditioner
  
-  // Delete oomph-lib preconditioner
-  delete preconditioner_pt;
-
   // delete the Trilinos solver
   delete linear_solver_pt;
-  
+
+  // Delete oomph-lib preconditioner
+  delete preconditioner_pt;  
  }
 
  conv_file.close();

@@ -50,8 +50,8 @@ namespace oomph
  (Problem* problem_pt,Vector<CRDoubleMatrix*> matrix_pt,
   Vector<Preconditioner*> prec_pt)
  {
-
-  XMPI_Buoy("setup_preconditioners(...)");
+  // clean memory
+  this->clean_up_memory();
 
   // get the number of preconditioners in the array
   Nprec = prec_pt.size();
@@ -168,7 +168,7 @@ namespace oomph
    }  
   Nproc_for_prec[Nprec-1] = nproc -  First_proc_for_prec[Nprec-1];         
   
-#ifdef PARANOID
+ #ifdef PARANOID
   // paranoid check that every preconditioner has more than one processor
   for (unsigned p=0;p<Nprec;p++)
    { 
@@ -193,7 +193,6 @@ namespace oomph
    }
 
   // create the local preconditioner
-  delete Local_communicator_pt;
   Local_communicator_pt = Global_communicator_pt->split(Color,my_rank);
 
   // pointer for the local matrix on this processor
@@ -458,7 +457,7 @@ namespace oomph
       // on the subset of processors
       if (!matrix_pt[i]->distributed())
        {
-  
+        oomph_info << "matrix not distributed" << std::endl;
         // if this matrix is to be preconditioned my this processor
         if (i == Color)
          {
@@ -574,8 +573,9 @@ namespace oomph
                 // values
                 int tag = this->compute_tag(nproc,p,my_rank,1);
                 MPI_Status stat1;
-                MPI_Recv(values_recv + offset_nnz,int(nnz_recv[i][p]),MPI_DOUBLE,
-                         p,tag,Global_communicator_pt->mpi_comm(),&stat1);
+                MPI_Recv(values_recv + offset_nnz,int(nnz_recv[i][p]),
+                         MPI_DOUBLE,p,tag,Global_communicator_pt->mpi_comm(),
+                         &stat1);
          
                 // column_index
                 tag = this->compute_tag(nproc,p,my_rank,2);
@@ -1481,7 +1481,7 @@ namespace oomph
         p = -1;
        }
      }
-        
+    
     // storage for derived datatypes
     Vector<MPI_Datatype> datatypes;
 
@@ -1507,7 +1507,7 @@ namespace oomph
         // just receive
         if (nnz_recv[Color][p] != 0)
          {
-          
+
           // create 3 MPI contiguous datatypes
           // + values
           // + column_index
@@ -1612,7 +1612,7 @@ namespace oomph
           // send
           if (nnz_send[i][p] != 0)
            {
-            
+
              // create 3 MPI contiguous datatypes
             // + values
             // + column_index
@@ -1778,7 +1778,7 @@ namespace oomph
                                                  row_start_recv);
 
     // and finally wait for the sends
-    Vector<MPI_Status> send_stat(c_recv);
+    Vector<MPI_Status> send_stat(c_send);
     MPI_Waitall(c_send,&send_req[0],&send_stat[0]);
     send_req.clear();
     send_stat.clear();
@@ -1974,18 +1974,6 @@ namespace oomph
                         Global_communicator_pt->mpi_comm(),&req[c]);
               c++;
              }
-/*
-            // non blocking recv
-            if (Nrow_local_from_proc[i][p] != 0)
-             {
-              int tag = this->compute_tag(nproc,p,my_rank,0);
-              MPI_Request tr;
-              req.push_back(tr);
-              MPI_Irecv(nnz_recv_temp + (i*nproc) + p,1,MPI_UNSIGNED,p,tag,
-                       Global_communicator_pt->mpi_comm(),&req[c]);
-              c++;
-             }
-*/
            }
           // receive from self
           else
@@ -1998,21 +1986,6 @@ namespace oomph
          }
        }
      }
-/*
-    Vector<MPI_Status> stat(c);
-    MPI_Waitall(c,&req[0],&stat[0]);
-    req.clear();
-    stat.clear();
-    c=0;
-    for (unsigned i = 0; i < Nprec; i++)
-     {
-      for (unsigned p = 0; p < nproc; p++)
-       {
-        nnz_recv[i][p] = nnz_recv_temp[(i*nproc)+p];
-       } 
-     }
-    delete nnz_recv_temp;
-*/
 
     for (unsigned i = 0; i < Nprec; i++)
      {
@@ -2388,670 +2361,16 @@ namespace oomph
      }
    }
  
-
-
-
-/*
-
-
-  /////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-  // METHOD 3
-  else if (Method == 4)
-   {
-
-    // temporary storgage for nnz recv
-    unsigned* nnz_recv_temp = new unsigned[nproc*Nprec];
-    for (unsigned j = 0; j < nproc*Nprec; j++)
-     {
-      nnz_recv_temp[j] = 0;
-     }
-    
-    // for every matrix we assemble the duplicate of the matrix on fewer
-    // processors and setup the preconditioner
-    for (unsigned i = 0; i < Nprec; i++)
-     {
-    
-      // if the matrix is global (!distributed) then just construct a copy
-      // on the subset of processors
-      if (!matrix_pt[i]->distributed())
-       {
-  
-        // if this matrix is to be preconditioned my this processor
-        if (i == Color)
-         {
-        
-          // create the local distribution for this matrix
-          LinearAlgebraDistribution* temp_dist_pt = 
-           new LinearAlgebraDistribution(Local_communicator_pt,
-                                         matrix_pt[i]->nrow(),
-                                         false);
-        
-          // create the corresponding matrix
-          local_matrix_pt = new CRDoubleMatrix(temp_dist_pt);
-          delete temp_dist_pt; // (dist has now been copied)
-        
-          // get pointers to the underlying data
-          double* values_pt = matrix_pt[i]->value();
-          int* column_index_pt = matrix_pt[i]->column_index();
-          int* row_start_pt = matrix_pt[i]->row_start();
-        
-          // build the matrix without a copy of the data
-          local_matrix_pt->rebuild_matrix_without_copy(matrix_pt[i]->ncol(),
-                                                       matrix_pt[i]->nnz(),
-                                                       values_pt,
-                                                       column_index_pt,
-                                                       row_start_pt);
-         }
-       }
-
-      // if the matrix is global (!distributed) then just construct a copy
-      // on the subset of processors
-      else
-       {
-      
-        // first compute the distribution of this preconditioner on its subset
-        // of processors
-      
-        // number of rows for this preconditioner
-        unsigned nrow = matrix_pt[i]->nrow();
-      
-        // setup First_row_for_local_prec and Nrow_local_for_local_prec
-        target_first_row[i].resize(nproc);
-        target_nrow_local[i].resize(nproc);
-        unsigned nproc_local = Nproc_for_prec[i];
-        for (unsigned p = 0; p < nproc_local; p++)
-         {
-          int pp = First_proc_for_prec[i] + p;
-          target_first_row[i][pp] =  unsigned(double(p*nrow)/ 
-                                              double(nproc_local));
-         }
-        for (unsigned p = 0; p < nproc_local-1; p++)
-         {
-          int pp = First_proc_for_prec[i] + p;
-          target_nrow_local[i][pp] = target_first_row[i][pp+1]
-           - target_first_row[i][pp];
-         }
-        unsigned last_local_proc = First_proc_for_prec[i] + nproc_local - 1;
-        target_nrow_local[i][last_local_proc] = nrow - 
-         target_first_row[i][last_local_proc];
-      
-        // get the details of the current distribution
-        Vector<unsigned> current_first_row(nproc);
-        Vector<unsigned> current_nrow_local(nproc);
-        for (unsigned p = 0; p < nproc; p++)
-         {
-          current_first_row[p] = matrix_pt[i]->first_row(p);
-          current_nrow_local[p] = matrix_pt[i]->nrow_local(p);
-         }
-
-        // resize storage for details of the data to be sent and received
-        First_row_for_proc[i].resize(nproc,0);
-        Nrow_local_for_proc[i].resize(nproc,0);
-        First_row_from_proc[i].resize(nproc,0);
-        Nrow_local_from_proc[i].resize(nproc,0);
-      
-        // for every processor compute first_row and nrow_local that will
-        // will sent and received by this processor
-        for (unsigned p = 0; p < nproc; p++)
-         {
-          // start with data to be sent
-          if ((target_first_row[i][p] < (current_first_row[my_rank] +
-                                         current_nrow_local[my_rank])) &&
-              (current_first_row[my_rank] < (target_first_row[i][p] +
-                                             target_nrow_local[i][p])))
-           {
-            First_row_for_proc[i][p] = 
-             std::max(current_first_row[my_rank],
-                      target_first_row[i][p]);
-            Nrow_local_for_proc[i][p] = 
-             std::min((current_first_row[my_rank] +
-                       current_nrow_local[my_rank]),
-                      (target_first_row[i][p] +
-                       target_nrow_local[i][p])) - First_row_for_proc[i][p];
-           }
-        
-          // and data to be received
-          if ((target_first_row[i][my_rank] < (current_first_row[p] +
-                                               current_nrow_local[p])) 
-              && (current_first_row[p] < (target_first_row[i][my_rank] +
-                                          target_nrow_local[i][my_rank])))
-           {
-            First_row_from_proc[i][p] = 
-             std::max(current_first_row[p],
-                      target_first_row[i][my_rank]);
-            Nrow_local_from_proc[i][p] = 
-             std::min((current_first_row[p] +
-                       current_nrow_local[p]),
-                      (target_first_row[i][my_rank] +
-                       target_nrow_local[i][my_rank]))-
-             First_row_from_proc[i][p];
-           }        
-         }
-
-        // resize nnz_send
-        nnz_send[i].resize(nproc);
-
-        // compute the number of nnzs to be sent
-        // and the number of send and receive requests to be made (nreq)
-        for (unsigned p = 0; p < nproc; p++)
-         {
-          if (Nrow_local_for_proc[i][p] != 0)
-           {
-            int* row_start = matrix_pt[i]->row_start();
-            unsigned k = First_row_for_proc[i][p]-current_first_row[my_rank];
-            nnz_send[i][p] = row_start[k + Nrow_local_for_proc[i][p]] - 
-             row_start[k];
-           }
-         }
-
-        // resize nnz_recv
-        nnz_recv[i].resize(nproc);
-
-        // send nnz to be sent to each processor
-        for (unsigned p = 0; p < nproc; p++)
-         {
-          
-          // send and recv
-
-          // dont mpi send to self
-          if (p != my_rank)
-           {
-            
-            // non block send
-            if (Nrow_local_for_proc[i][p] != 0)
-             {
-              
-              // send to other processors
-              int tag = this->compute_tag(nproc,my_rank,p,0);
-              MPI_Request tr;
-              req.push_back(tr);
-              MPI_Isend(&nnz_send[i][p],1,MPI_UNSIGNED,p,tag,
-                        Global_communicator_pt->mpi_comm(),&req[c]);
-              c++;
-             }
-
-            // non blocking recv
-            if (Nrow_local_from_proc[i][p] != 0)
-             {
-              int tag = this->compute_tag(nproc,p,my_rank,0);
-              MPI_Request tr;
-              req.push_back(tr);
-              MPI_Irecv(nnz_recv_temp + (i*nproc) + p,1,MPI_UNSIGNED,p,tag,
-                       Global_communicator_pt->mpi_comm(),&req[c]);
-              c++;
-             }
-           }
-          // receive from self
-          else
-           {
-            if (Nrow_local_for_proc[i][p] != 0)
-             {
-              nnz_recv_temp[(i*nproc)+p] = nnz_send[i][p];
-             }
-           }
-         }
-       }
-     }
-    Vector<MPI_Status> stat(c);
-    MPI_Waitall(c,&req[0],&stat[0]);
-    req.clear();
-    stat.clear();
-    c=0;
-    for (unsigned i = 0; i < Nprec; i++)
-     {
-      for (unsigned p = 0; p < nproc; p++)
-       {
-        nnz_recv[i][p] = nnz_recv_temp[(i*nproc)+p];
-       } 
-     }
-    delete nnz_recv_temp;
-
-    // get the number of nnzs to be received from each processor
-    
-    // total number of nnz to be reveived
-    unsigned nnz_total = 0;
-    for (unsigned p = 0; p < nproc; p++)
-     {
-      nnz_total += nnz_recv[Color][p];
-     }
-    
-    // compute nnz block start
-    Vector<unsigned> nnz_start_proc;
-    Vector<unsigned> nnz_start_index;
-    unsigned row_ptr = target_first_row[Color][my_rank];
-    int p = 0;
-    unsigned nnz_ptr = 0;
-    for (p = 0; p < int(nproc); p++)
-     {      
-      if (First_row_from_proc[Color][p] == row_ptr && 
-          Nrow_local_from_proc[Color][p] != 0 &&
-          nnz_ptr != nnz_total)
-       {
-        nnz_start_proc.push_back(p);
-        nnz_start_index.push_back(nnz_ptr);
-        nnz_ptr += nnz_recv[Color][p];
-        row_ptr += Nrow_local_from_proc[Color][p];
-        p = -1;
-       }
-     }
-        
-    // storage for received data
-    double* values_recv = new double[nnz_total];
-    int* column_index_recv = new int[nnz_total];
-    int* row_start_recv = new int[target_nrow_local[Color][my_rank]+1];
-    
-
-
-    // communicator information
-    int* send_displacements = new int[nproc];
-    int* recv_displacements = new int[nproc];
-    int* n_send = new int[nproc];
-    int* n_recv = new int[nproc];
-
-
-    ///////////////////////////////////////////////////////////////////////////
-    // ROW START
-    ///////////////////////////////////////////////////////////////////////////
-
-    // zero
-    for (unsigned p = 0; p < nproc; p++)
-     {
-      send_displacements[p] = 0;
-      recv_displacements[p] = 0;
-      n_send[p] = 0;
-      n_recv[p] = 0;
-     }
-
-    // assemble the send data structures
-    for (unsigned i = 0; i < Nprec; i++)
-     {
-      
-      // get pointers to the underlying data in the current matrix
-      int* row_start_send = matrix_pt[i]->row_start();
-      
-      // send and receive the contents of the vector
-      for (unsigned p = 0; p < nproc; p++)
-       {
-        
-        // use mpi methods to send to and receive from all but my rank
-        if (p != my_rank)
-         {
-            
-          // send
-          if (nnz_send[i][p] != 0)
-           {
-            
-            // number to be sent
-            n_send[p] = int(Nrow_local_for_proc[i][p]);
-
-            // compute the offset for row_start
-            int offset_n = 
-             First_row_for_proc[i][p]-matrix_pt[i]->first_row(my_rank);
-            
-            // next compute the displacements
-            MPI_Aint temp_aint;
-            MPI_Address(row_start_send + offset_n,&temp_aint);
-            send_displacements[p] = (int)(temp_aint-row_start_recv_aint);
-            send_displacements[p] = offset_n;
-           }
-         }
-       }
-     }
-      
-    // assemble the receive data structures
-    for (unsigned p = 0; p < nproc; p++)
-     {
-      
-      // use mpi methods to send to and receive from all but my rank
-      if (p != my_rank)
-       {
-        
-        // just receive
-        if (nnz_recv[Color][p] != 0)
-         {
-          // n recv
-          n_recv[p] = int(Nrow_local_from_proc[Color][p]);
-
-          // compute the offset for row_start
-          int offset_n = 
-           First_row_from_proc[Color][p]-target_first_row[Color][my_rank];
-          
-          oomph_info << "p = " << p << " offset_n = " 
-                     << offset_n << std::endl;
-
-          // compute the recv displacements
-         MPI_Aint temp_aint;
-          MPI_Address(row_start_recv + offset_n,&temp_aint);
-          oomph_info << "temp_aint = " << temp_aint << std::endl;
-          oomph_info << "row_start_recv_aint = " << row_start_recv_aint 
-          << std::endl;
-          recv_displacements[p] = offset_n;
-          //recv_displacements[p] = row_start_recv + offset_n;
-         }
-       }
-     }
-
-    for (unsigned p = 0; p < nproc; p++)
-     {
-      oomph_info << p << ": " 
-                 << n_send[p] << " " << send_displacements[p] << " "
-                 << n_recv[p] << " " << recv_displacements[p] << std::endl;
-     }
-
-    // and send
-    MPI_Alltoallv(row_start_recv,n_send,send_displacements,MPI_INT,
-                  0,n_recv,recv_displacements,MPI_INT,
-                  Global_communicator_pt->mpi_comm());
-
-
-    for (unsigned i = 0; i < matrix_pt[Color]->ncol() + 1; i++)
-     {
-      oomph_info << "r[" << i << "] = " << row_start_recv[i] << std::endl;
-     }
-
-    assert(false);
-    
-    ///////////////////////////////////////////////////////////////////////////
-    // COLUMN INDEX
-    ///////////////////////////////////////////////////////////////////////////
-
-    // zero
-    for (unsigned p = 0; p < nproc; p++)
-     {
-      send_displacements[p] = 0;
-      recv_displacements[p] = 0;
-      n_send[p] = 0;
-      n_recv[p] = 0;
-     }
-
-    // assemble the send data structures
-    for (unsigned i = 0; i < Nprec; i++)
-     {
-      
-      // get pointers to the underlying data in the current matrix
-      int* column_index_send = matrix_pt[i]->column_index();        
-      int* row_start_send = matrix_pt[i]->row_start();
-
-      // send and receive the contents of the vector
-      for (unsigned p = 0; p < nproc; p++)
-       {
-        
-        // use mpi methods to send to and receive from all but my rank
-        if (p != my_rank)
-         {
-            
-          // send
-          if (nnz_send[i][p] != 0)
-           {
-            
-            // number to be sent
-            n_send[p] = int(nnz_send[i][p]);;
-
-            // compute the offset for the values and column_index
-            int offset_n = 
-             First_row_for_proc[i][p]-matrix_pt[i]->first_row(my_rank);
-            int offset_nnz = row_start_send[offset_n];            
-
-            // next compute the displacements
-            send_displacements[p] = column_index_send + offset_nnz;
-           }
-         }
-       }
-     }
-      
-    // assemble the receive data structures
-    for (unsigned p = 0; p < nproc; p++)
-     {
-      
-      // use mpi methods to send to and receive from all but my rank
-      if (p != my_rank)
-       {
-        
-        // just receive
-        if (nnz_recv[Color][p] != 0)
-         {
-          
-          // store n_recv
-          n_recv[p] = int(nnz_recv[Color][p]);
-
-          // compute the offset for the values and column_index
-          unsigned k = 0;
-          while (nnz_start_proc[k] != p)
-           {
-            k++;
-           }
-          int offset_nnz = nnz_start_index[k];
-
-          // compute the recv displacements
-          recv_displacements[p] = column_index_recv + offset_nnz;
-         }
-       }
-     }
-
-    // and send
-    MPI_Alltoallv(0,n_send,*send_displacements,MPI_INT,0,n_recv,
-                  *recv_displacements,MPI_INT,
-                  Global_communicator_pt->mpi_comm());
-
-    ///////////////////////////////////////////////////////////////////////////
-    // VALUE
-    ///////////////////////////////////////////////////////////////////////////
-
-    // zero
-    for (unsigned p = 0; p < nproc; p++)
-     {
-      send_displacements[p] = 0;
-      recv_displacements[p] = 0;
-      n_send[p] = 0;
-      n_recv[p] = 0;
-     }
-
-    // assemble the send data structures
-    for (unsigned i = 0; i < Nprec; i++)
-     {
-      
-      // get pointers to the underlying data in the current matrix
-      int* row_start_send = matrix_pt[i]->row_start();
-      double* values_send = matrix_pt[i]->value();
-
-      // send and receive the contents of the vector
-      for (unsigned p = 0; p < nproc; p++)
-       {
-        
-        // use mpi methods to send to and receive from all but my rank
-        if (p != my_rank)
-         {
-            
-          // send
-          if (nnz_send[i][p] != 0)
-           {
-            
-            // number to be sent
-            n_send[p] = int(nnz_send[i][p]);;
-
-            // compute the offset for the values and column_index
-            int offset_n = 
-             First_row_for_proc[i][p]-matrix_pt[i]->first_row(my_rank);
-            int offset_nnz = row_start_send[offset_n];            
-
-            // next compute the displacements
-            send_displacements[p] = (int*)(values_send + offset_nnz);
-           }
-         }
-       }
-     }
-      
-    // assemble the receive data structures
-    for (unsigned p = 0; p < nproc; p++)
-     {
-      
-      // use mpi methods to send to and receive from all but my rank
-      if (p != my_rank)
-       {
-        
-        // just receive
-        if (nnz_recv[Color][p] != 0)
-         {
-          
-          // store n_recv
-          n_recv[p] = int(nnz_recv[Color][p]);
-
-          // compute the offset for the values and column_index
-          unsigned k = 0;
-          while (nnz_start_proc[k] != p)
-           {
-            k++;
-           }
-          int offset_nnz = nnz_start_index[k];
-
-          // compute the recv displacements
-          recv_displacements[p] = (int*)(values_recv + offset_nnz);
-         }
-       }
-     }
-
-    // and send
-    MPI_Alltoallv(0,n_send,*send_displacements,MPI_DOUBLE,0,n_recv,
-                  *recv_displacements,MPI_DOUBLE,
-                  Global_communicator_pt->mpi_comm());
-    
-    // otherwise send to self (copy)
-    if (nnz_recv[Color][my_rank] != 0)
-     {
-      
-      // get pointers to the underlying data in the current matrix
-      double* values_send = matrix_pt[Color]->value();
-      int* row_start_send = matrix_pt[Color]->row_start();
-      int* column_index_send = matrix_pt[Color]->column_index();   
-      
-      // offset for row_start send to self
-      unsigned offset_n_send = 
-       First_row_for_proc[Color][my_rank]-matrix_pt[Color]->first_row(my_rank);
-      
-      // offset for values and column+_index send to self
-      unsigned offset_nnz_send = row_start_send[offset_n_send];
-      
-      // offset for row_start receive from self
-      unsigned offset_n_recv = 
-       First_row_from_proc[Color][my_rank]-target_first_row[Color][my_rank];
-      
-      // offset for values and columm_index receive from self
-      unsigned k = 0;
-      while (nnz_start_proc[k] != my_rank)
-       {
-        k++;
-       }
-      unsigned offset_nnz_recv = nnz_start_index[k];
-      
-      // and send
-      
-      // values and column_index
-      unsigned n_nnz = nnz_send[Color][my_rank];
-      for (unsigned j = 0; j < n_nnz; j++)
-       {
-        values_recv[offset_nnz_recv + j] = 
-         values_send[offset_nnz_send + j];
-        column_index_recv[offset_nnz_recv + j] = 
-         column_index_send[offset_nnz_send + j];
-       }
-      
-      // row start
-      unsigned n_n = Nrow_local_from_proc[Color][my_rank];
-      for (unsigned j = 0; j < n_n; j++)
-       {
-        row_start_recv[offset_n_recv + j]  = 
-         row_start_send[offset_n_send + j];
-       }
-     }
-
-    // create the local distribution for this matrix
-    LinearAlgebraDistribution* temp_dist_pt = 
-     new LinearAlgebraDistribution
-     (Local_communicator_pt,target_first_row[Color][my_rank],
-      target_nrow_local[Color][my_rank]);
-    
-    // create the corresponding matrix
-    local_matrix_pt = new CRDoubleMatrix(temp_dist_pt);
-    delete temp_dist_pt; // (dist has now been copied)
-
-    // build the matrix
-
-    for (unsigned i = 0; i < nnz_total; i++)
-     {
-      oomph_info << "v[" << i << "] = " << values_recv[i] << std::endl;
-     }
-    for (unsigned i = 0; i < nnz_total; i++)
-     {
-      oomph_info << "c[" << i << "] = " << column_index_recv[i] << std::endl;
-     }
-    for (unsigned i = 0; i < matrix_pt[Color]->ncol() + 1; i++)
-     {
-      oomph_info << "r[" << i << "] = " << row_start_recv[i] << std::endl;
-     }
-
-    // update the row start
-    unsigned nproc_contrib = nnz_start_index.size();
-    for (unsigned j = 0; j < nproc_contrib; j++)
-     {
-      unsigned first = First_row_from_proc[Color][nnz_start_proc[j]] - 
-       target_first_row[Color][my_rank];
-      unsigned last = first + Nrow_local_from_proc[Color][nnz_start_proc[j]];
-      unsigned nnz_inc = nnz_start_index[j]-row_start_recv[first];
-      for (unsigned k = first; k < last; k++)
-       {
-        row_start_recv[k]+=nnz_inc;
-       }
-     }
-    row_start_recv[target_nrow_local[Color][my_rank]] = int(nnz_total);
-    
-    // build the matrix without a copy of the data
-    local_matrix_pt->rebuild_matrix_without_copy(matrix_pt[Color]->ncol(),
-                                                 nnz_total,
-                                                 values_recv,
-                                                 column_index_recv,
-                                                 row_start_recv);
-   }
-
-
-*/
-
-
-
-  /////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   // now setup the preconditioner
   Preconditioner_pt = prec_pt[Color];
   Preconditioner_pt->setup(problem_pt,local_matrix_pt);
   
   // clean up memory
-  delete local_matrix_pt;
-  
+  if (matrix_pt[0]->distributed())
+   {
+    delete local_matrix_pt;
+   }
+
   // delete the preconditioners not used on this processor
   for (unsigned i = 0; i < Nprec; i++)
    {
@@ -3069,7 +2388,6 @@ namespace oomph
  void PreconditionerArray::solve_preconditioners(const Vector<DoubleVector> &r,
                                                  Vector<DoubleVector> &z)
  {
-  XMPI_Buoy("solve_preconditioners(...)");
 #ifdef PARANOID
   // check that a preconditioner has been setup
   if (Preconditioner_pt == 0)
@@ -3104,31 +2422,10 @@ namespace oomph
                         "PreconditionerArray::solve_preconditioners(...)",
                         OOMPH_EXCEPTION_LOCATION);  
    }
-#endif
-  
-  // the local r vector
-  DoubleVector local_r(Preconditioner_pt->distribution_pt());
-
-  // Vector of MPI_Requests - used for distributed matrices
-  Vector<MPI_Request> req;
-  
-  // Counter for the number of requests used
-  unsigned c = 0;
-  
-  // number of processors
-  unsigned nproc = Global_communicator_pt->nproc();
-  
-  // cache my global rank
-  unsigned my_rank = Global_communicator_pt->my_rank();
-  
-  // for every vector we assemble the duplicate of the vector on the
-  // appropirate subset of processors 
+  // check that the vector has the same distribution as the
+  // preconditioner
   for (unsigned i = 0; i < Nprec; i++)
    {
-
-#ifdef PARANOID
-    // check that the vector has the same distribution as the
-    // preconditioner
     if (*r[i].distribution_pt() != *Distribution_pt[i])
      {
       std::ostringstream error_message;  
@@ -3139,30 +2436,40 @@ namespace oomph
                           "PreconditionerArray::solve_preconditioners(...)",
                           OOMPH_EXCEPTION_LOCATION);
      }
+   }
 #endif
+  
+  // the local r vector
+  DoubleVector local_r(Preconditioner_pt->distribution_pt());
+  
+  // number of processors
+  unsigned nproc = Global_communicator_pt->nproc();
+  
+  // cache my global rank
+  unsigned my_rank = Global_communicator_pt->my_rank();
 
+  // send and receive requests
+  Vector<MPI_Request> send_reqs;
+  Vector<MPI_Request> recv_reqs;
 
-    // we assemble a copy of the matrix distributed over a subset of
-    // processors
+  // cache first_row
+  unsigned first_row = Preconditioner_pt->first_row();
+            
+  // local residual values for this processor
+  double* local_r_values = local_r.values_pt();
+
+  // for every vector we assemble the duplicate of the vector on the
+  // appropirate subset of processors 
+  
+  // first we post the non-blocking sends and recvs
+  for (unsigned i = 0; i < Nprec; i++)
+   {
+
     if (r[i].distributed())
      {
-
-
+      
       // current first_row and nrow_local
       unsigned current_first_row = r[i].first_row();
-      unsigned current_nrow_local = r[i].nrow_local();
-
-
-
-
-      // pointer to underlying data in current vector
-      // note cannot be const because of MPI
-      const double* const_global_r_values = r[i].values_pt();
-      double* global_r_values = new double[current_nrow_local];
-      for (unsigned j = 0; j < current_nrow_local; j++)
-       {
-        global_r_values[j] = const_global_r_values[j];
-       }
 
       // send and receive the contents of the vector
       for (unsigned p = 0; p < nproc; p++)
@@ -3183,423 +2490,256 @@ namespace oomph
             // send the values
             int tag = this->compute_tag(nproc,my_rank,p,0);
             MPI_Request tr;
-            req.push_back(tr);
-            MPI_Isend(global_r_values + offset_n,
+            MPI_Isend(r[i].values_pt() + offset_n,
                       int(Nrow_local_for_proc[i][p]),MPI_DOUBLE,p,tag,
-                      Global_communicator_pt->mpi_comm(),&req[c]);
-            c++;
+                      Global_communicator_pt->mpi_comm(),&tr);
+            send_reqs.push_back(tr);
+           }
+
+          // recv
+          if (Nrow_local_from_proc[i][p] != 0)
+           {
+            
+            // compute the offset for row_start
+            int offset_n = 
+             First_row_from_proc[i][p]-first_row;
+            
+            // row_start
+            int tag = this->compute_tag(nproc,p,my_rank,0);
+            MPI_Request tr;
+            MPI_Irecv(local_r_values + offset_n,
+                      int(Nrow_local_from_proc[i][p]),MPI_DOUBLE,p,tag,
+                      Global_communicator_pt->mpi_comm(),&tr);
+            recv_reqs.push_back(tr);
            }
          }
        }
      }
    }
+ 
 
-
-
-
-
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-
-
-
-
-  
-  // for every vector we assemble the duplicate of the vector on the
-  // appropirate subset of processors 
-  for (unsigned i = 0; i < Nprec; i++)
+  // and now we send to self
+  if (!r[Color].distributed())
    {
-
-#ifdef PARANOID
-    // check that the vector has the same distribution as the
-    // preconditioner
-    if (*r[i].distribution_pt() != *Distribution_pt[i])
+    // just copy to the new vector
+    const double* r_pt = r[Color].values_pt();
+    unsigned nrow_local = local_r.nrow_local();
+    for (unsigned i = 0; i < nrow_local; i++)
      {
-      std::ostringstream error_message;  
-      error_message << "The distribution of r[" << i << "] does not have the"
-                    << " the same distribution as the matrix_pt[" << i 
-                    << "] that was passed to setup_preconditioners(...)";
-      throw OomphLibError(error_message.str(),
-                          "PreconditionerArray::solve_preconditioners(...)",
-                          OOMPH_EXCEPTION_LOCATION);
+      local_r_values[i] = r_pt[i];
      }
-#endif
+   }
+  else
+   {
+    // the incoming residual associated with the processor
+    const double* r_pt = r[Color].values_pt();
 
-    // if the matrix is global (!distributed) then just construct a copy
-    // on the subset of processors
-    if (!r[i].distributed())
+    // current first_row and nrow_local
+    unsigned current_first_row = r[Color].first_row();
+    
+    // cache first_row
+    unsigned first_row = Preconditioner_pt->first_row();
+
+    //
+    if (Nrow_local_from_proc[Color][my_rank] != 0)
      {
+      // offset for values send to self
+      unsigned offset_n_send = 
+       First_row_for_proc[Color][my_rank]-current_first_row;
       
-      // if this matrix is to be preconditioned my this processor
-      if (i == Color)
+      // offset for values receive from self
+      unsigned offset_n_recv = 
+       First_row_from_proc[Color][my_rank]-first_row;
+      
+      // send/receive
+      unsigned n_n = Nrow_local_from_proc[Color][my_rank];
+      for (unsigned j = 0; j < n_n; j++)
        {
-        // just copy to the new vector
-        const double* r_pt = r[i].values_pt();
-        double* local_r_pt = local_r.values_pt();
-        unsigned nrow_local = local_r.nrow_local();
-        for (unsigned i = 0; i < nrow_local; i++)
-         {
-          local_r_pt[i] = r_pt[i];
-         }
-       }
-     }
-        
-    // else we assemble a copy of the matrix distributed over a subset of
-    // processors
-    else
-     {
-
-      // current first_row and nrow_local
-      unsigned current_first_row = r[i].first_row();
-      unsigned current_nrow_local = r[i].nrow_local();
-
-      // if we are assembling the matrix on this processor
-      if (i == Color)
-       {
-
-        // cache first_row
-        unsigned first_row = Preconditioner_pt->first_row();
-
-        // pointer to values vector to be updated
-        double* local_r_values = local_r.values_pt();
-
-        // pointer to underlying data in current vector
-        // note cannot be const because of MPI
-        const double* const_global_r_values = r[i].values_pt();
-        double* global_r_values = new double[current_nrow_local];
-        for (unsigned j = 0; j < current_nrow_local; j++)
-         {
-          global_r_values[j] = const_global_r_values[j];
-         }
-
- 
-        // send and receive the contents of the vector
-        for (unsigned pp = 0; pp < nproc; pp++)
-         {
-
-          // next processor to receive from
-          unsigned p = (nproc + my_rank - pp)%nproc;
- 
-          // use mpi methods to send to and receive from all but my rank
-          if (p != my_rank)
-           {
-     
-            // just receive
-            if (Nrow_local_from_proc[i][p] != 0)
-             {
-
-              // compute the offset for row_start
-              int offset_n = 
-               First_row_from_proc[i][p]-first_row;
-           
-              // row_start
-              int tag = this->compute_tag(nproc,p,my_rank,0);
-              MPI_Status stat;
-              MPI_Recv(local_r_values + offset_n,
-                       int(Nrow_local_from_proc[i][p]),MPI_DOUBLE,p,tag,
-                       Global_communicator_pt->mpi_comm(),&stat);
-             }
-           }
-          // otehrwise just send to self (or copy)
-          else
-           {
-            if (Nrow_local_from_proc[i][p] != 0)
-             {
-              // offset for values send to self
-              unsigned offset_n_send = 
-               First_row_for_proc[i][my_rank]-current_first_row;
-              
-              // offset for values receive from self
-              unsigned offset_n_recv = 
-               First_row_from_proc[i][my_rank]-first_row;
-              
-              // send/receive
-              unsigned n_n = Nrow_local_from_proc[i][my_rank];
-              for (unsigned j = 0; j < n_n; j++)
-               {
-                local_r_values[offset_n_recv + j]  = 
-                 global_r_values[offset_n_send + j];
-               }
-             }
-           }
-         }
+        local_r_values[offset_n_recv + j]  = r_pt[offset_n_send + j];
        }
      }
    }
 
+  // wait for the receives to complete
+  unsigned n_recv = recv_reqs.size();
+  if (n_recv)
+   {
+    MPI_Waitall(n_recv,&recv_reqs[0],MPI_STATUS_IGNORE);
+   }
+  recv_reqs.clear();
 
-
-
-
-
-
-
-
-
-  // wait for all sends to complete
-  Vector<MPI_Status> stat(c);
-  MPI_Waitall(c,&req[0],&stat[0]);
-  
-  // the solution vector z
-  DoubleVector local_z;
-  XMPI_Buoy("about to apply preconditioner");
-
+  // next solve
   // apply the local preconditioner
+  DoubleVector local_z;
   Preconditioner_pt->preconditioner_solve(local_r,local_z);
   local_r.clear();
 
-  XMPI_Buoy("done");
+  // the local z values
+  double* local_z_values = local_z.values_pt();
 
-  // resize stat and req
-  stat.clear();
-  req.clear();
-
-  // reset the counter c
-  c = 0;
-
-  // for every vector we reassemble the global vectors from the
-  // appropirate subset of processors 
+  // setup the vectors
   for (unsigned i = 0; i < Nprec; i++)
    {
-
-    // if we are assembling the matrix on this processor
-    if (i == Color)
-     {
-
-      // else we assemble a copy of the matrix distributed over a subset of
-      // processors
-      if (r[i].distributed())
-       {
-
-//      std::cout << "i = " << i << std::endl;
-
-        // cache nrow_local and first_row and nrow
-        unsigned first_row = Preconditioner_pt->first_row();
-
-        // pointer to underlying data in current vector
-        // note cannot be const because of MPI
-        double* local_z_values = local_z.values_pt();
-
-        // send data back
-        for (unsigned pp = 0; pp < nproc; pp++)
-         {
-
-          // next processor to receive from
-          unsigned p = (nproc + my_rank - pp)%nproc;
- 
-
-//          std::cout << "p = " << p << std::endl;
-
-          // use mpi methods to send to and receive from all but my rank
-          if (p != my_rank)
-           {
-
-            // just receive
-            if (Nrow_local_from_proc[i][p] != 0)
-             {
-//            std::cout << "sending to " << p << std::endl;
-     
-
-
-
-              // compute the offset for row_start
-              int offset_n = 
-               First_row_from_proc[i][p]-first_row;
-           
-              // send the values
-              int tag = this->compute_tag(nproc,my_rank,p,0);
-              MPI_Request tr;
-              req.push_back(tr);
-              MPI_Isend(local_z_values + offset_n,
-                        int(Nrow_local_from_proc[i][p]),MPI_DOUBLE,p,tag,
-                        Global_communicator_pt->mpi_comm(),&req[c]);
-              c++;
-             }
-           }
-         }
-       }
-     }
-   }
-
-//  std::cout << std::endl << std::endl << std::endl;
-
-
-
-
-//////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-  // for every vector we reassemble the global vectors from the
-  // appropirate subset of processors 
-  for (unsigned i = 0; i < Nprec; i++)
-   {
-
-//    std::cout << "i = " << i << std::endl;
-
-    // r[i] and z[i] should have teh same distribution
-#ifdef PARANOID
-    if (z[i].distribution_setup())
-     {
-      if (*r[i].distribution_pt() != *z[i].distribution_pt())
-       {
-        std::ostringstream error_message;  
-        error_message << "The distribution of z[" << i << "] has been setup, "
-                      << " therefore it must be the same as the distribution "
-                      << " of r[" << i << "].";
-        throw OomphLibError(error_message.str(),
-                            "PreconditionerArray::solve_preconditioners(...)",
-                            OOMPH_EXCEPTION_LOCATION);
-       }
-     }
-#endif
     
     // if z[i] is not setup then set it up
     if (!z[i].distribution_setup())
      {
       z[i].rebuild(r[i].distribution_pt());
      }
+   }
 
-    // if the matrix is global (!distributed) then just construct a copy
-    // on the subset of processors
-    if (!r[i].distributed())
+  // first we post the non-blocking sends and recvs
+  for (unsigned i = 0; i < Nprec; i++)
+   {
+    if (r[i].distributed())
      {
-
-      // copy from local_z to z[i] on this processor first
-      if (i == Color)
-       {
-        double* z_pt = z[i].values_pt();
-        const double* local_z_pt = local_z.values_pt();
-        unsigned nrow_local = local_z.nrow_local();
-        for (unsigned i = 0; i < nrow_local; i++)
-         {
-          z_pt[i] = local_z_pt[i];
-         }
-       }
-
-      // broadcast vector to all processors
-      double* z_pt = z[i].values_pt();
-      int nrow = z[i].nrow();
-      MPI_Bcast(z_pt,nrow,MPI_DOUBLE,First_proc_for_prec[i],
-                Global_communicator_pt->mpi_comm());
-     }
-
-    // else we assemble a copy of the matrix distributed over a subset of
-    // processors
-    else
-     {
-
-//      std::cout << "not dist" << std::endl;
-
-      // pointer to values vector to be updated
-      double* global_z_values = z[i].values_pt();
-
+      
       // current first_row and nrow_local
       unsigned current_first_row = r[i].first_row();
 
-
-
-
-      // cache nrow_local and first_row and nrow
-      unsigned first_row = Preconditioner_pt->first_row();
-
-      // receive data
+      // send and receive the contents of the vector
       for (unsigned p = 0; p < nproc; p++)
        {
-
-//          std::cout << "p = " << p << std::endl;
 
         // use mpi methods to send to and receive from all but my rank
         if (p != my_rank)
          {
             
-//            std::cout << "receiving from somewhere else" << std::endl;
-
-          // receive
+          // send
           if (Nrow_local_for_proc[i][p] != 0)
            {
               
-//              std::cout << "receiving from p = " << p << std::endl;
-
             // compute the offset for the values
             int offset_n = 
              First_row_for_proc[i][p]-current_first_row;
-
-            // row_start
-            int tag = this->compute_tag(nproc,p,my_rank,0);
-            MPI_Status statr;
-            MPI_Recv(global_z_values + offset_n,
-                     int(Nrow_local_for_proc[i][p]),MPI_DOUBLE,p,tag,
-                     Global_communicator_pt->mpi_comm(),&statr);
+              
+            // send the values
+            int tag = this->compute_tag(nproc,my_rank,p,0);
+            MPI_Request tr;
+            MPI_Irecv(z[i].values_pt() + offset_n,
+                      int(Nrow_local_for_proc[i][p]),MPI_DOUBLE,p,tag,
+                      Global_communicator_pt->mpi_comm(),&tr);
+            recv_reqs.push_back(tr);
            }
-         }
-         
-        // otehrwise just send to self (or copy)
-        else
-         {
 
-//            std::cout << "receiving from self" << std::endl;
-
-          if (Nrow_local_for_proc[i][p] != 0)
+          // recv
+          if (Nrow_local_from_proc[i][p] != 0)
            {
-            // offset for values send to self
-            unsigned offset_n_send = 
-             First_row_for_proc[i][my_rank]-current_first_row;
-              
-            // offset for values receive from self
-            unsigned offset_n_recv = 
-             First_row_from_proc[i][my_rank]-first_row;
-
-            // pointer to underlying data in current vector
-            // note cannot be const because of MPI
-            double* local_z_values = local_z.values_pt();
-              
-            // send/receive
-            unsigned n_n = Nrow_local_from_proc[i][my_rank];
-            for (unsigned j = 0; j < n_n; j++)
-             {
-              global_z_values[offset_n_send + j]  = 
-               local_z_values[offset_n_recv + j];
-             }
+            
+            // compute the offset for row_start
+            int offset_n = 
+             First_row_from_proc[i][p]-first_row;
+            
+            // vector
+            int tag = this->compute_tag(nproc,p,my_rank,0);
+            MPI_Request tr;
+            MPI_Isend(local_z_values + offset_n,
+                      int(Nrow_local_from_proc[i][p]),MPI_DOUBLE,p,tag,
+                      Global_communicator_pt->mpi_comm(),&tr);
+            send_reqs.push_back(tr);
            }
          }
        }
-       
+     }
+    // otherwise we need to share the results
+    else
+     {
+      // number of processors associated with this preconditioner
+      unsigned nproc_local = Local_communicator_pt->nproc();
+
+      // my "proc number" for this preconditioner
+      unsigned my_local_rank = Local_communicator_pt->my_rank();
+      
+      // sends to self completed later
+      if (i != Color)
+       {
+        // post send requests
+        for (unsigned j = my_local_rank; j < Nproc_for_prec[i]; 
+             j += nproc_local)
+         {
+          int p = j + First_proc_for_prec[i];
+          MPI_Request tr;
+          MPI_Isend(local_z_values,z[Color].nrow(),MPI_DOUBLE,p,0,
+                    Global_communicator_pt->mpi_comm(),&tr);
+          send_reqs.push_back(tr);            
+         }
+
+        // compute the processor number to recv from
+        int p = my_local_rank;
+        while ((p - int(Nproc_for_prec[i])) >= 0) 
+         {
+          p-= Nproc_for_prec[i];
+         }
+        p += First_proc_for_prec[i];
+
+        // and recv
+        MPI_Request tr;
+        MPI_Irecv(z[i].values_pt(),z[i].nrow(),MPI_DOUBLE,p,0,
+                  Global_communicator_pt->mpi_comm(),&tr);
+        recv_reqs.push_back(tr);
+       }
      }
    }
 
+  // and now we send to self
+  if (!r[Color].distributed())
+   {
+    // just copy to the new vector
+    double* z_pt = z[Color].values_pt();
+    unsigned nrow_local = local_z.nrow_local();
+    for (unsigned i = 0; i < nrow_local; i++)
+     {
+      z_pt[i] = local_z_values[i];
+     }
+   }
+  else
+   {
+    //
+    double* z_pt = z[Color].values_pt();
+    
+    // current first_row and nrow_local
+    unsigned current_first_row = r[Color].first_row();
+    
+    // cache first_row
+    unsigned first_row = Preconditioner_pt->first_row();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //
+    if (Nrow_local_from_proc[Color][my_rank] != 0)
+     {
+      // offset for values send to self
+      unsigned offset_n_send = 
+       First_row_for_proc[Color][my_rank]-current_first_row;
+      
+      // offset for values receive from self
+      unsigned offset_n_recv = 
+       First_row_from_proc[Color][my_rank]-first_row;
+      
+      // send/receive
+      unsigned n_n = Nrow_local_from_proc[Color][my_rank];
+      for (unsigned j = 0; j < n_n; j++)
+       {
+        z_pt[offset_n_send + j]  = 
+         local_z_values[offset_n_recv + j];
+       }
+     }
+   }
  
-  // wait for all sends to complete
-  stat.resize(c);
-  MPI_Waitall(c,&req[0],&stat[0]);
 
-  XMPI_Buoy("finished solve_preconditioners(...)");
+  // wait for the receives to complete
+  n_recv = recv_reqs.size();
+  if (n_recv)
+   {
+    MPI_Waitall(n_recv,&recv_reqs[0],MPI_STATUS_IGNORE);
+   }
+  recv_reqs.clear();
+
+  // wait for the sends to complete
+  unsigned n_send = send_reqs.size();
+  if (n_send)
+   {
+    MPI_Waitall(n_send,&send_reqs[0],MPI_STATUS_IGNORE);
+   }
+  send_reqs.clear();
  }
-
-
-
 }
 

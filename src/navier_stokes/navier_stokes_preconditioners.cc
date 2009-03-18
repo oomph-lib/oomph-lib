@@ -80,10 +80,18 @@ namespace oomph
   // this preconditioner has two types of block:
   // type 0: velocity - corresponding to DOFs 0 to n-2
   // type 1: pressure - corresponding to DOF n-1
+  double t_block_start = TimingHelpers::timer();
   unsigned ndof_types = Mesh_pt[0]->element_pt(0)->ndof_types();
   Vector<unsigned> dof_to_block_map(ndof_types);
   dof_to_block_map[ndof_types-1]=1;
   this->block_setup(problem_pt,matrix_pt,dof_to_block_map);
+  double t_block_finish = TimingHelpers::timer();
+  double block_setup_time = t_block_finish - t_block_start;
+  if(Doc_time)
+   {
+    oomph_info << "Time for block_setup(...) [sec]: "
+               << block_setup_time << "\n";
+   }
 
   // determine whether the F preconditioner is a block preconditioner (and
   // therefore a subsidiary preconditioner)
@@ -95,85 +103,318 @@ namespace oomph
     F_preconditioner_is_block_preconditioner = false;
    }
   
-  // Get the blocks
-  this->get_block(0,1,cr_matrix_pt,Block_matrix_0_1_pt);
-  CRDoubleMatrix* block_matrix_1_0_pt = 0;
-  this->get_block(1,0,cr_matrix_pt,block_matrix_1_0_pt);
-  CRDoubleMatrix* block_matrix_0_0_pt = 0;
-  this->get_block(0,0,cr_matrix_pt,block_matrix_0_0_pt);
-
-  // Initialise timers 
-  double t_start = TimingHelpers::timer();
-
-  // Generate pressure Poisson matrix
-  // --------------------------------
-  P_matrix_pt = new CRDoubleMatrix;
-
-  // Vector to hold inverse of velocity mass matrix diagonal
-  Vector<double> ivmm_diagonal;
-
-  // If required,  multiply Block_matrix_pt(1,0) which currently
-  // points to the divergence matrix, D, by the inverse diagonal mass matrix:
-  CRDoubleMatrix* ivmm_pt = 0;
-  if (P_matrix_using_scaling)
+  // Get B (the divergence block)
+  double t_get_B_start = TimingHelpers::timer();
+  CRDoubleMatrix* b_pt = 0;
+  this->get_block(1,0,cr_matrix_pt,b_pt);
+  double t_get_B_finish = TimingHelpers::timer();
+  if(Doc_time)
    {
-     ivmm_pt = assemble_velocity_mass_matrix_diagonal();
-    CRDoubleMatrix* temp_matrix_pt = new CRDoubleMatrix;
-    block_matrix_1_0_pt->multiply(*ivmm_pt,*temp_matrix_pt);
-    delete block_matrix_1_0_pt;
-    block_matrix_1_0_pt = temp_matrix_pt;
+  double get_B_time = t_get_B_finish - t_get_B_start;
+    oomph_info << "Time to get B [sec]: "
+               << get_B_time << "\n";
    }
+  
+  // the pointer for f
+  CRDoubleMatrix* f_pt = 0;
+  
+  // the pointer for the p matrix 
+  CRDoubleMatrix* p_matrix_pt = new CRDoubleMatrix;
 
-  // Now multiply whatever's currently stored in  Block_matrix_pt(1,0)
-  // (i.e. D or D Q^{-1}) from the right by G, which is stored
-  // in Block_matrix_pt(0,1). Store the result in P_matrix_pt
-  // which now contains DG or D Q^{-1} G as required.
-  block_matrix_1_0_pt->multiply(*Block_matrix_0_1_pt, *P_matrix_pt);
+  // the pointer for bt
+  CRDoubleMatrix* bt_pt = 0;
 
-  // Generate matrix E for multiplication in Schur complement approximation
-  // ----------------------------------------------------------------------
-
-  // Auxiliary matrix for intermediate results
-  CRDoubleMatrix* aux_matrix_pt = new CRDoubleMatrix;
-
-  // Multiply the momentum matrix, stored in Block_matrix_pt(0,0)
-  // by the content of Block_matrix_pt(1,0) (either D or
-  // D Q^{-1}) and store the result, namely B Q^{-1} F in aux_matrix_pt.
-  block_matrix_1_0_pt->multiply(*block_matrix_0_0_pt, *aux_matrix_pt);
-
-  // We no longer need the divergence matrix -- kill it.
-  delete block_matrix_1_0_pt;
-
-  // Multiply auxiliary matrix by diagonal of velocity mass matrix if required
-  if (P_matrix_using_scaling)
+  // if BFBt is to be formed 
+  if (Form_BFBt_product)
    {
-    CRDoubleMatrix* temp_matrix_pt = new CRDoubleMatrix;
-    aux_matrix_pt->multiply(*ivmm_pt,*temp_matrix_pt);
+
+    // If using scaling then replace B with Bt
+    CRDoubleMatrix* ivmm_pt = 0;
+    if (P_matrix_using_scaling)
+     {
+      
+      // Assemble the ivmm diagonal
+      double ivmm_assembly_start_t = TimingHelpers::timer();
+      ivmm_pt = assemble_velocity_mass_matrix_diagonal();
+      double ivmm_assembly_finish_t = TimingHelpers::timer();
+      if (Doc_time)
+       {
+        double 
+         ivmm_assembly_time = ivmm_assembly_finish_t - ivmm_assembly_start_t;
+        oomph_info << "Time to assemble inverse velocity mass matrix [sec]: "
+                   << ivmm_assembly_time << "\n";
+       }
+      
+      // assemble BQ (stored in B)
+      double t_BQ_start = TimingHelpers::timer();
+      CRDoubleMatrix* temp_matrix_pt = new CRDoubleMatrix;
+      b_pt->multiply(*ivmm_pt,*temp_matrix_pt);
+      delete b_pt;
+      b_pt = temp_matrix_pt;
+      double t_BQ_finish = TimingHelpers::timer();
+      if(Doc_time)
+       {
+        double t_BQ_time = t_BQ_finish - t_BQ_start;
+        oomph_info << "Time to generate BQ [sec]: "
+                   << t_BQ_time << std::endl;
+       }
+     }
+    
+    // Get Bt
+    double t_get_Bt_start = TimingHelpers::timer();
+    this->get_block(0,1,cr_matrix_pt,bt_pt);
+    double t_get_Bt_finish = TimingHelpers::timer();
+    if(Doc_time)
+     {
+      double t_get_Bt_time = t_get_Bt_finish - t_get_Bt_start;
+      oomph_info << "Time to get Bt [sec]: "
+                 << t_get_Bt_time << std::endl;
+     }
+
+    // now form the P matrix by multiplying B (which if using scaling will be
+    // BQ) with Bt
+    double t_P_start = TimingHelpers::timer();
+    b_pt->multiply(*bt_pt,*p_matrix_pt);
+    double t_P_finish = TimingHelpers::timer();
+    if(Doc_time)
+     {
+      double t_P_time = t_P_finish - t_P_start;
+      oomph_info << "Time to generate P matrix [sec]: "
+                 << t_P_time << std::endl;
+     }
+
+    // Multiply auxiliary matrix by diagonal of velocity mass matrix if 
+    // required
+    if (P_matrix_using_scaling)
+     {
+      CRDoubleMatrix* temp_matrix_pt = new CRDoubleMatrix;
+      double t_QBt_start = TimingHelpers::timer();
+      ivmm_pt->multiply(*bt_pt,*temp_matrix_pt);
+      delete bt_pt;
+      bt_pt = temp_matrix_pt;
+      double t_QBt_finish = TimingHelpers::timer();
+      
+      // Output times
+      if(Doc_time)
+       {
+        double t_QBt_time = t_QBt_finish - t_QBt_start;
+        oomph_info << "Time to generate QBt [sec]: "
+                   << t_QBt_time << std::endl;
+       }
+     }
+
+    // Clean up memory
+    delete ivmm_pt;
+
+    // get block 0 0 
+    double t_get_F_start = TimingHelpers::timer();
+    this->get_block(0,0,cr_matrix_pt,f_pt);
+    double t_get_F_finish = TimingHelpers::timer();
+    if(Doc_time)
+     {
+      double t_get_F_time = t_get_F_finish - t_get_F_start;
+      oomph_info << "Time to get F [sec]: "
+                 << t_get_F_time << std::endl;
+     }
+
+    // Auxiliary matrix for intermediate results
+    double t_aux_matrix_start = TimingHelpers::timer();
+    CRDoubleMatrix* aux_matrix_pt = new CRDoubleMatrix;
+    f_pt->multiply(*bt_pt, *aux_matrix_pt);
+    double t_aux_matrix_finish = TimingHelpers::timer();
+    if(Doc_time)
+     {
+      double t_aux_time = t_aux_matrix_finish - t_aux_matrix_start;
+      oomph_info << "Time to generate FQBt [sec]: "
+                 << t_aux_time << std::endl;
+     }
+  
+    // can now delete Bt (or QBt if using scaling)
+    delete bt_pt;
+    bt_pt = 0;
+
+    // and if F requires a block preconditioner then we can delete F
+    if (F_preconditioner_is_block_preconditioner)
+     {
+      delete f_pt;
+     }  
+
+    // now form BFBt
+    double t_E_matrix_start = TimingHelpers::timer();
+    CRDoubleMatrix* e_matrix_pt = new CRDoubleMatrix;
+    b_pt->multiply(*aux_matrix_pt,*e_matrix_pt);
     delete aux_matrix_pt;
-    aux_matrix_pt = temp_matrix_pt;
+    delete b_pt;
+    double t_E_matrix_finish = TimingHelpers::timer();
+    if(Doc_time)
+     {
+      double t_E_time = t_E_matrix_finish - t_E_matrix_start;
+      oomph_info << "Time to generate E (B*(F*Bt)) [sec]: "
+                 << t_E_time << std::endl;
+     }
+    double t_E_matvec_start = TimingHelpers::timer();
+    E_mat_vec_pt = new MatrixVectorProduct;
+    E_mat_vec_pt->setup(e_matrix_pt);
+    double t_E_matvec_finish = TimingHelpers::timer();
+    delete e_matrix_pt;
+    if(Doc_time)
+     {
+      double t_E_time = t_E_matvec_finish - t_E_matvec_start;
+      oomph_info << "Time to build E (BFBt) matrix vector operator E [sec]: "
+                 << t_E_time << std::endl;
+     }
+
+    // and rebuild Bt
+    t_get_Bt_start = TimingHelpers::timer();
+    bt_pt = 0;
+    this->get_block(0,1,cr_matrix_pt,bt_pt);
+    t_get_Bt_finish = TimingHelpers::timer();
+    if(Doc_time)
+     {
+      double t_get_Bt_time = t_get_Bt_finish - t_get_Bt_start;
+      oomph_info << "Time to get Bt [sec]: "
+                 << t_get_Bt_time << std::endl;
+     }
    }
 
-  // Now multiply the auxiliary matrix by the gradient matrix,
-  // stored in Block_matrix_pt(0,1), to obtain either
-  // E = B Q^{-1} F Q^{-1} G or  E = B  F  G, as required.
-  E_matrix.clear();
-  aux_matrix_pt->multiply(*Block_matrix_0_1_pt,E_matrix);
 
-  // Clean up memory
-  delete aux_matrix_pt;
-  delete ivmm_pt;
+  /////////////////////////////////////////////////////////////////////////////
 
-  double t_end = TimingHelpers::timer();
-  double setup_time= t_end-t_start;
-  t_start = t_end;
- 
- // Output times
- if(Doc_time)
-  {
-   oomph_info << "Time to generate additional LSC matrices [sec]: "
-              << setup_time << "\n";
-  }
- 
+  
+  // otherwise we are not forming BFBt
+  else
+   {
+
+    // get the inverse velocity mass matrix (Q)
+    CRDoubleMatrix* ivmm_pt = 0;
+    if (P_matrix_using_scaling)
+     {
+      double ivmm_assembly_start_t = TimingHelpers::timer();
+      ivmm_pt = assemble_velocity_mass_matrix_diagonal();
+      double ivmm_assembly_finish_t = TimingHelpers::timer();
+      if (Doc_time)
+       {
+        double 
+         ivmm_assembly_time = ivmm_assembly_finish_t - ivmm_assembly_start_t;
+        oomph_info << "Time to assemble Q (inverse diagonal velocity "
+                   << "mass matrix) [sec]: "
+                   << ivmm_assembly_time << "\n";
+       }
+     }
+
+    // Get Bt
+    double t_get_Bt_start = TimingHelpers::timer();
+    this->get_block(0,1,cr_matrix_pt,bt_pt);
+    double t_get_Bt_finish = TimingHelpers::timer();
+    if(Doc_time)
+     {
+      double t_get_Bt_time = t_get_Bt_finish - t_get_Bt_start;
+      oomph_info << "Time to get Bt [sec]: "
+                 << t_get_Bt_time << std::endl;
+     }
+
+    // next QBt
+    if (P_matrix_using_scaling)
+     {
+      double t_QBt_matrix_start = TimingHelpers::timer();
+      CRDoubleMatrix* qbt_pt = new CRDoubleMatrix;
+      ivmm_pt->multiply(*bt_pt, *qbt_pt);
+      delete bt_pt;
+      bt_pt = qbt_pt;
+      double t_QBt_matrix_finish = TimingHelpers::timer();
+      if(Doc_time)
+       {
+        double t_QBt_time = t_QBt_matrix_finish - t_QBt_matrix_start;
+        oomph_info << "Time to generate QBt [sec]: "
+                   << t_QBt_time << std::endl;
+       }
+      delete ivmm_pt;
+     }
+
+    // form P
+    double t_p_matrix_start = TimingHelpers::timer();
+    b_pt->multiply(*bt_pt, *p_matrix_pt);
+    double t_p_matrix_finish = TimingHelpers::timer();
+    if(Doc_time)
+     {
+      double t_p_time = t_p_matrix_finish - t_p_matrix_start;
+      oomph_info << "Time to generate P [sec]: "
+                 << t_p_time << std::endl;
+     }
+    delete b_pt;
+
+    // build the matvec operator for QBt
+    double t_QBt_MV_start = TimingHelpers::timer();
+    QBt_mat_vec_pt = new MatrixVectorProduct;
+    QBt_mat_vec_pt->setup(bt_pt);
+    double t_QBt_MV_finish = TimingHelpers::timer();
+    if(Doc_time)
+     {
+      double t_p_time = t_QBt_MV_finish - t_QBt_MV_start;
+      oomph_info << "Time to build QBt matrix vector operator [sec]: "
+                 << t_p_time << std::endl;
+     }
+    delete bt_pt;
+
+    // get F
+    double t_get_F_start = TimingHelpers::timer();
+    this->get_block(0,0,cr_matrix_pt,f_pt);
+    double t_get_F_finish = TimingHelpers::timer();
+    if(Doc_time)
+     {
+      double t_get_F_time = t_get_F_finish - t_get_F_start;
+      oomph_info << "Time to get F [sec]: "
+                 << t_get_F_time << std::endl;
+     }
+    
+    // form the matrix vector product helper
+    double t_F_MV_start = TimingHelpers::timer();
+    F_mat_vec_pt = new MatrixVectorProduct;
+    F_mat_vec_pt->setup(f_pt);
+    double t_F_MV_finish = TimingHelpers::timer();
+    if(Doc_time)
+     {
+      double t_F_MV_time = t_F_MV_finish - t_F_MV_start;
+      oomph_info << "Time to build F Matrix Vector Operator [sec]: "
+                 << t_F_MV_time << std::endl;
+     }
+
+    // if F is a block preconditioner then we can delete the F matrix
+    if (F_preconditioner_is_block_preconditioner)
+     {
+      delete f_pt;
+     }
+  
+    // and rebuild Bt
+    t_get_Bt_start = TimingHelpers::timer();
+    bt_pt = 0;
+    this->get_block(0,1,cr_matrix_pt,bt_pt);
+    t_get_Bt_finish = TimingHelpers::timer();
+    if(Doc_time)
+     {
+      double t_get_Bt_time = t_get_Bt_finish - t_get_Bt_start;
+      oomph_info << "Time to get Bt [sec]: "
+                 << t_get_Bt_time << std::endl;
+     }
+   }
+
+
+  /////////////////////////////////////////////////////////////////////////////
+
+
+  // form the matrix vector operator for Bt
+  double t_Bt_MV_start = TimingHelpers::timer();
+  Bt_mat_vec_pt = new MatrixVectorProduct;
+  Bt_mat_vec_pt->setup(bt_pt);
+  double t_Bt_MV_finish = TimingHelpers::timer();
+  if(Doc_time)
+   {
+    double t_Bt_MV_time = t_Bt_MV_finish - t_Bt_MV_start;
+    oomph_info << "Time to build Bt Matrix Vector Operator [sec]: "
+               << t_Bt_MV_time << std::endl;
+   }
+  delete bt_pt;
+
   // if the P preconditioner has not been setup
   if (P_preconditioner_pt == 0)
    {
@@ -193,20 +434,16 @@ namespace oomph
    }
 
   // Setup the preconditioner for the Pressure matrix
-  P_preconditioner_pt->setup(problem_pt, P_matrix_pt);
-
-  // Delete oomph-lib pressure Poisson matrix
-  delete P_matrix_pt;
-  P_matrix_pt=0;
-  t_end = TimingHelpers::timer();
-  setup_time=double(t_end-t_start)/CLOCKS_PER_SEC;
-  t_start = t_end;
- 
-  // Output times
+  double t_p_prec_start = TimingHelpers::timer();
+  P_preconditioner_pt->setup(problem_pt, p_matrix_pt);
+  delete p_matrix_pt;
+  p_matrix_pt=0;
+  double t_p_prec_finish = TimingHelpers::timer();
   if(Doc_time)
    {
-    oomph_info << "P matrix sub-preconditioner setup time [sec]: "
-               << setup_time << "\n";
+    double t_p_prec_time = t_p_prec_finish - t_p_prec_start;
+    oomph_info << "P sub-preconditioner setup time [sec]: "
+               << t_p_prec_time << "\n";
    }
   
   // Set up solver for solution of system with momentum matrix
@@ -231,6 +468,7 @@ namespace oomph
    }
 
   // if F is a block preconditioner
+  double t_f_prec_start = TimingHelpers::timer();
   if (F_preconditioner_is_block_preconditioner)
    {
     unsigned ndof_types = this->ndof_types();
@@ -247,21 +485,15 @@ namespace oomph
   // otherwise F is not a block preconditioner
   else
    {
-    F_preconditioner_pt->setup(problem_pt,block_matrix_0_0_pt);
+    F_preconditioner_pt->setup(problem_pt,f_pt);
+    delete f_pt;
    }
-
-  // can now delete block 0 0
-  delete block_matrix_0_0_pt;
-
-  // compute the setup time
-  t_end = TimingHelpers::timer();
-  setup_time=double(t_end-t_start)/CLOCKS_PER_SEC;
- 
-  // Output times
+  double t_f_prec_finish = TimingHelpers::timer();
   if(Doc_time)
    {
-    oomph_info << "F matrix sub-preconditioner setup time [sec]: "
-               << setup_time << "\n";
+    double t_f_prec_time = t_f_prec_finish - t_f_prec_start;
+    oomph_info << "F sub-preconditioner setup time [sec]: "
+               << t_f_prec_time << "\n";
    }
   
   // Remember that the preconditioner has been setup so
@@ -345,11 +577,23 @@ namespace oomph
 
   // Multiply another_temp_vec by matrix E and stick the result into temp_vec
   temp_vec.clear();  
-  E_matrix.multiply(another_temp_vec, temp_vec);
+  if (Form_BFBt_product)
+   {
+    E_mat_vec_pt->multiply(another_temp_vec, temp_vec);
+   }
+  else
+   {
+    QBt_mat_vec_pt->multiply(another_temp_vec, temp_vec);
+    another_temp_vec.clear();
+    F_mat_vec_pt->multiply(temp_vec,another_temp_vec);
+    temp_vec.clear();
+    QBt_mat_vec_pt->multiply_transpose(another_temp_vec, temp_vec);
+   }
 
   // NOTE: The vector temp_vec now contains E P^{-1} r_p
 
   // Solve second pressure Poisson system using preconditioner_solve
+  another_temp_vec.clear();
   P_preconditioner_pt->preconditioner_solve(temp_vec, another_temp_vec);
 
   // NOTE: The vector another_temp_vec now contains  z_p = P^{-1} E P^{-1} r_p
@@ -370,47 +614,47 @@ namespace oomph
   // Multiply by G (stored in Block_matrix_pt(0,1) and store
   // result in temp_vec (vector resizes itself).
   temp_vec.clear();
-  Block_matrix_0_1_pt->multiply(another_temp_vec, temp_vec);
+  Bt_mat_vec_pt->multiply(another_temp_vec, temp_vec);
 
- // NOTE: temp_vec now contains -G z_p
+  // NOTE: temp_vec now contains -G z_p
 
- // The vector another_temp_vec is no longer needed -- re-use it to store
- // velocity quantities:
+  // The vector another_temp_vec is no longer needed -- re-use it to store
+  // velocity quantities:
   another_temp_vec.clear();
 
- // Loop over all enries in the global vector and find the
- // entries associated with the velocities:
- get_block_vector(0,r,another_temp_vec);
- another_temp_vec += temp_vec;
+  // Loop over all enries in the global vector and find the
+  // entries associated with the velocities:
+  get_block_vector(0,r,another_temp_vec);
+  another_temp_vec += temp_vec;
  
- // NOTE:  The vector another_temp_vec now contains r_u - G z_p
+  // NOTE:  The vector another_temp_vec now contains r_u - G z_p
 
- // Solve momentum system
+  // Solve momentum system
 #ifdef PARANOID
- // check a solver has been set
- if (F_preconditioner_pt==0)
-  {
-   std::ostringstream error_message;
-   error_message << "F_preconditioner_pt has not been set.";
-
-   throw OomphLibError(error_message.str(),
-                    	  "NavierStokesLSCPreconditioner::preconditioner_solve()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
+  // check a solver has been set
+  if (F_preconditioner_pt==0)
+   {
+    std::ostringstream error_message;
+    error_message << "F_preconditioner_pt has not been set."; 
+    throw OomphLibError(
+     error_message.str(),
+     "NavierStokesLSCPreconditioner::preconditioner_solve()",
+     OOMPH_EXCEPTION_LOCATION);
+   }
 #endif
 
- // use some Preconditioner's preconditioner solve
- // and return
- if (F_preconditioner_is_block_preconditioner)
-  {
-   return_block_vector(0,another_temp_vec,z);
-   F_preconditioner_pt->preconditioner_solve(z,z);
-  }
- else
-  {
-   F_preconditioner_pt->preconditioner_solve(another_temp_vec, temp_vec);
-   return_block_vector(0,temp_vec,z);
-  }
+  // use some Preconditioner's preconditioner solve
+  // and return
+  if (F_preconditioner_is_block_preconditioner)
+   {
+    return_block_vector(0,another_temp_vec,z);
+    F_preconditioner_pt->preconditioner_solve(z,z);
+   }
+  else
+   {
+    F_preconditioner_pt->preconditioner_solve(another_temp_vec, temp_vec);
+    return_block_vector(0,temp_vec,z);
+   }
  }
 
 
@@ -455,7 +699,7 @@ namespace oomph
   if (problem_pt->distributed() || 
       this->master_distribution_pt()->distributed())
    {
-     distributed = true;
+    distributed = true;
    }
 #endif
 
@@ -607,23 +851,23 @@ namespace oomph
              }
            }
         
-        // if we do not have the lookup information on this processor
-        // then we send the mass matrix contribution to a processor
-        // which we know does have the lookup information
-        // the assumption: the processor for which the master block
-        // preconditioner distribution will definitely hold the lookup
-        // data for eqn_number (although others may)
-        else if (problem_pt->distributed())
-         {
+          // if we do not have the lookup information on this processor
+          // then we send the mass matrix contribution to a processor
+          // which we know does have the lookup information
+          // the assumption: the processor for which the master block
+          // preconditioner distribution will definitely hold the lookup
+          // data for eqn_number (although others may)
+          else if (problem_pt->distributed())
+           {
           
-          // determine which processor requires the block index
-          unsigned p = 0;
-          while (!(eqn_number >= master_distribution_pt->first_row(p) &&
-                   (eqn_number < (master_distribution_pt->first_row(p)
-                                  +master_distribution_pt->nrow_local(p)))))
-            {
-             p++;
-            }
+            // determine which processor requires the block index
+            unsigned p = 0;
+            while (!(eqn_number >= master_distribution_pt->first_row(p) &&
+                     (eqn_number < (master_distribution_pt->first_row(p)
+                                    +master_distribution_pt->nrow_local(p)))))
+             {
+              p++;
+             }
 
             // store the data
             unclassified_contributions_send[p]
@@ -665,341 +909,345 @@ namespace oomph
     
     // allocate storage for the data to be recieved
     // and post the sends and recvs
-      Vector<double*> unclassified_contributions_recv(nproc);
-      Vector<unsigned*> unclassified_indices_recv(nproc);
-      Vector<MPI_Request> unclassified_recv_requests;
-      Vector<MPI_Request> unclassified_send_requests;
-      Vector<unsigned> unclassified_recv_proc;
-      for (unsigned p = 0; p < nproc; p++)
+    Vector<double*> unclassified_contributions_recv(nproc);
+    Vector<unsigned*> unclassified_indices_recv(nproc);
+    Vector<MPI_Request> unclassified_recv_requests;
+    Vector<MPI_Request> unclassified_send_requests;
+    Vector<unsigned> unclassified_recv_proc;
+    for (unsigned p = 0; p < nproc; p++)
+     {
+      if (p != my_rank)
        {
-        if (p != my_rank)
+        // recv
+        if (n_unclassified_recv[p] > 0)
          {
-          // recv
-          if (n_unclassified_recv[p] > 0)
-           {
-            unclassified_contributions_recv[p] 
-             = new double[n_unclassified_recv[p]];
-            unclassified_indices_recv[p] = new 
-             unsigned[n_unclassified_recv[p]];
+          unclassified_contributions_recv[p] 
+           = new double[n_unclassified_recv[p]];
+          unclassified_indices_recv[p] = new 
+           unsigned[n_unclassified_recv[p]];
             
-            // data for the struct data type
-            MPI_Datatype recv_types[2];
-            MPI_Aint recv_displacements[2];
-            int recv_sz[2];
+          // data for the struct data type
+          MPI_Datatype recv_types[2];
+          MPI_Aint recv_displacements[2];
+          int recv_sz[2];
             
-            // contributions
-            MPI_Type_contiguous(n_unclassified_recv[p],MPI_DOUBLE,
-                                &recv_types[0]);
-            MPI_Type_commit(&recv_types[0]);
-            MPI_Address(unclassified_contributions_recv[p],
-                        &recv_displacements[0]);
-            recv_displacements[0] -= base_displacement;
-            recv_sz[0] = 1;
+          // contributions
+          MPI_Type_contiguous(n_unclassified_recv[p],MPI_DOUBLE,
+                              &recv_types[0]);
+          MPI_Type_commit(&recv_types[0]);
+          MPI_Address(unclassified_contributions_recv[p],
+                      &recv_displacements[0]);
+          recv_displacements[0] -= base_displacement;
+          recv_sz[0] = 1;
             
-            // indices
-            MPI_Type_contiguous(n_unclassified_recv[p],MPI_UNSIGNED,
-                                &recv_types[1]);
-            MPI_Type_commit(&recv_types[1]);
-            MPI_Address(unclassified_indices_recv[p],
-                        &recv_displacements[1]);
-            recv_displacements[1] -= base_displacement;
-            recv_sz[1] = 1;
+          // indices
+          MPI_Type_contiguous(n_unclassified_recv[p],MPI_UNSIGNED,
+                              &recv_types[1]);
+          MPI_Type_commit(&recv_types[1]);
+          MPI_Address(unclassified_indices_recv[p],
+                      &recv_displacements[1]);
+          recv_displacements[1] -= base_displacement;
+          recv_sz[1] = 1;
             
-            // build the final recv type
-            MPI_Datatype final_recv_type;
-            MPI_Type_struct(2,recv_sz,recv_displacements,recv_types,
-                            &final_recv_type);
-            MPI_Type_commit(&final_recv_type);
+          // build the final recv type
+          MPI_Datatype final_recv_type;
+          MPI_Type_struct(2,recv_sz,recv_displacements,recv_types,
+                          &final_recv_type);
+          MPI_Type_commit(&final_recv_type);
             
-            // and recv
-            MPI_Request req;
-            MPI_Irecv(m_values,1,final_recv_type,p,0,
-                      problem_pt->communicator_pt()->mpi_comm(),&req);
-            unclassified_recv_requests.push_back(req);
-            unclassified_recv_proc.push_back(p); 
-            MPI_Type_free(&recv_types[0]);
-            MPI_Type_free(&recv_types[1]);
-            MPI_Type_free(&final_recv_type);
-           }
+          // and recv
+          MPI_Request req;
+          MPI_Irecv(m_values,1,final_recv_type,p,0,
+                    problem_pt->communicator_pt()->mpi_comm(),&req);
+          unclassified_recv_requests.push_back(req);
+          unclassified_recv_proc.push_back(p); 
+          MPI_Type_free(&recv_types[0]);
+          MPI_Type_free(&recv_types[1]);
+          MPI_Type_free(&final_recv_type);
+         }
           
-          // send
-          if (n_unclassified_send[p] > 0)
+        // send
+        if (n_unclassified_send[p] > 0)
+         {
+          // data for the struct data type
+          MPI_Datatype send_types[2];
+          MPI_Aint send_displacements[2];
+          int send_sz[2];
+            
+          // contributions
+          MPI_Type_contiguous(n_unclassified_send[p],MPI_DOUBLE,
+                              &send_types[0]);
+          MPI_Type_commit(&send_types[0]);
+          MPI_Address(&unclassified_contributions_send[p][0],
+                      &send_displacements[0]);
+          send_displacements[0] -= base_displacement;
+          send_sz[0] = 1;
+            
+          // indices
+          MPI_Type_contiguous(n_unclassified_send[p],MPI_UNSIGNED,
+                              &send_types[1]);
+          MPI_Type_commit(&send_types[1]);
+          MPI_Address(&unclassified_indices_send[p][0],
+                      &send_displacements[1]);
+          send_displacements[1] -= base_displacement;
+          send_sz[1] = 1;
+            
+          // build the final send type
+          MPI_Datatype final_send_type;
+          MPI_Type_struct(2,send_sz,send_displacements,send_types,
+                          &final_send_type);
+          MPI_Type_commit(&final_send_type);
+            
+          // and send
+          MPI_Request req;
+          MPI_Isend(m_values,1,final_send_type,p,0,
+                    problem_pt->communicator_pt()->mpi_comm(),&req);
+          unclassified_send_requests.push_back(req);
+          MPI_Type_free(&send_types[0]);
+          MPI_Type_free(&send_types[1]);
+          MPI_Type_free(&final_send_type);
+         }
+       }
+     }
+   
+    // next classify the data as it is received
+    unsigned n_unclassified_recv_req = unclassified_recv_requests.size();
+    while (n_unclassified_recv_req > 0)
+     {
+      // get the processor number and remove the completed request
+      // for the vector of requests
+      int req_num;
+      MPI_Waitany(n_unclassified_recv_req,&unclassified_recv_requests[0],
+                  &req_num,MPI_STATUS_IGNORE);
+      unsigned p = unclassified_recv_proc[req_num];
+      unclassified_recv_requests.erase(unclassified_recv_requests.begin()
+                                       +req_num);    
+      unclassified_recv_proc.erase(unclassified_recv_proc.begin()+req_num);
+      n_unclassified_recv_req--;
+       
+      // next classify the dofs 
+      // and store them for sending to other processors if required
+      unsigned n_recv = n_unclassified_recv[p];
+      for (unsigned i = 0; i < n_recv; i++)
+       {
+        unsigned eqn_number = unclassified_indices_recv[p][i];
+        // bypass non velocity DOFs
+        if ( this->block_number(eqn_number)==0 )
+         {
+           
+          // get the index in the block
+          unsigned index = this->index_in_block(eqn_number);
+           
+          // determine which processor requires the block index
+          for (unsigned pp = 0; pp < nproc; pp++)
            {
-            // data for the struct data type
-            MPI_Datatype send_types[2];
-            MPI_Aint send_displacements[2];
-            int send_sz[2];
-            
-            // contributions
-            MPI_Type_contiguous(n_unclassified_send[p],MPI_DOUBLE,
-                                &send_types[0]);
-            MPI_Type_commit(&send_types[0]);
-            MPI_Address(&unclassified_contributions_send[p][0],
-                        &send_displacements[0]);
-            send_displacements[0] -= base_displacement;
-            send_sz[0] = 1;
-            
-            // indices
-            MPI_Type_contiguous(n_unclassified_send[p],MPI_UNSIGNED,
-                                &send_types[1]);
-            MPI_Type_commit(&send_types[1]);
-            MPI_Address(&unclassified_indices_send[p][0],
-                        &send_displacements[1]);
-            send_displacements[1] -= base_displacement;
-            send_sz[1] = 1;
-            
-            // build the final send type
-            MPI_Datatype final_send_type;
-            MPI_Type_struct(2,send_sz,send_displacements,send_types,
-                            &final_send_type);
-            MPI_Type_commit(&final_send_type);
-            
-            // and send
-            MPI_Request req;
-            MPI_Isend(m_values,1,final_send_type,p,0,
-                      problem_pt->communicator_pt()->mpi_comm(),&req);
-            unclassified_send_requests.push_back(req);
-            MPI_Type_free(&send_types[0]);
-            MPI_Type_free(&send_types[1]);
-            MPI_Type_free(&final_send_type);
+             
+             
+            if (index >= velocity_dist_pt->first_row(pp) &&
+                (index < 
+                 (velocity_dist_pt->first_row(pp)
+                  +velocity_dist_pt->nrow_local(pp))))
+             {
+               
+              // if it is required by this processor then add the 
+              // contribution
+              if (pp == my_rank)
+               {
+                m_values[index-first_row]
+                 += unclassified_contributions_recv[p][i];
+               }
+              // other wise store it for communication
+              else
+               {
+                double v = unclassified_contributions_recv[p][i];
+                classified_contributions_send[pp].push_back(v);
+                classified_indices_send[pp].push_back(index);
+               }
+             }
            }
          }
        }
-   
-      // next classify the data as it is received
-      unsigned n_unclassified_recv_req = unclassified_recv_requests.size();
-     while (n_unclassified_recv_req > 0)
-      {
-       // get the processor number and remove the completed request
-       // for the vector of requests
-       int req_num;
-       MPI_Waitany(n_unclassified_recv_req,&unclassified_recv_requests[0],
-                   &req_num,MPI_STATUS_IGNORE);
-       unsigned p = unclassified_recv_proc[req_num];
-       unclassified_recv_requests.erase(unclassified_recv_requests.begin()
-                                        +req_num);    
-       unclassified_recv_proc.erase(unclassified_recv_proc.begin()+req_num);
-       n_unclassified_recv_req--;
        
-       // next classify the dofs 
-       // and store them for sending to other processors if required
-       unsigned n_recv = n_unclassified_recv[p];
-       for (unsigned i = 0; i < n_recv; i++)
-        {
-         unsigned eqn_number = unclassified_indices_recv[p][i];
-         // bypass non velocity DOFs
-         if ( this->block_number(eqn_number)==0 )
-          {
-           
-           // get the index in the block
-           unsigned index = this->index_in_block(eqn_number);
-           
-           // determine which processor requires the block index
-           for (unsigned pp = 0; pp < nproc; pp++)
-            {
-             
-             
-             if (index >= velocity_dist_pt->first_row(pp) &&
-                 (index < 
-                  (velocity_dist_pt->first_row(pp)
-                   +velocity_dist_pt->nrow_local(pp))))
-              {
-               
-               // if it is required by this processor then add the 
-               // contribution
-               if (pp == my_rank)
-                {
-                 m_values[index-first_row]
-                  += unclassified_contributions_recv[p][i];
-                }
-               // other wise store it for communication
-               else
-                {
-                 double v = unclassified_contributions_recv[p][i];
-                 classified_contributions_send[pp].push_back(v);
-                 classified_indices_send[pp].push_back(index);
-                }
-              }
-            }
-          }
-        }
-       
-       // clean up
-       delete[] unclassified_contributions_recv[p];
-       delete[] unclassified_indices_recv[p];
-      }
+      // clean up
+      delete[] unclassified_contributions_recv[p];
+      delete[] unclassified_indices_recv[p];
+     }
+    delete[] n_unclassified_recv;
      
-     // now all indices have been classified
+    // now all indices have been classified
      
-     // next the classified contributions are communicated to 
-     // processors that require them
+    // next the classified contributions are communicated to 
+    // processors that require them
      
-     // first determine how many classified rows are to be sent to
-     // each processor
-     unsigned* n_classified_send = new unsigned[nproc];
-     for (unsigned p = 0; p < nproc; p++)
-      {
-       if (p == my_rank)
-        {
-         n_classified_send[p] = 0;
-        }
-       else
-        {
-         n_classified_send[p] 
-          = classified_contributions_send[p].size();
-        }
-      }
+    // first determine how many classified rows are to be sent to
+    // each processor
+    unsigned* n_classified_send = new unsigned[nproc];
+    for (unsigned p = 0; p < nproc; p++)
+     {
+      if (p == my_rank)
+       {
+        n_classified_send[p] = 0;
+       }
+      else
+       {
+        n_classified_send[p] 
+         = classified_contributions_send[p].size();
+       }
+     }
      
-     // then all-to-all com number of classified to be sent / recv
-     unsigned* n_classified_recv = new unsigned[nproc];
-     MPI_Alltoall(n_classified_send,1,MPI_UNSIGNED,
-                  n_classified_recv,1,MPI_UNSIGNED,
-                  this->problem_pt()->communicator_pt()->mpi_comm());
+    // then all-to-all com number of classified to be sent / recv
+    unsigned* n_classified_recv = new unsigned[nproc];
+    MPI_Alltoall(n_classified_send,1,MPI_UNSIGNED,
+                 n_classified_recv,1,MPI_UNSIGNED,
+                 this->problem_pt()->communicator_pt()->mpi_comm());
      
-     // allocate storage for the data to be recieved
-     // and post the sends and recvs
-     Vector<double*> classified_contributions_recv(nproc);
-     Vector<unsigned*> classified_indices_recv(nproc);
-     Vector<MPI_Request> classified_recv_requests;
-     Vector<MPI_Request> classified_send_requests;
-     Vector<unsigned> classified_recv_proc;
-     for (unsigned p = 0; p < nproc; p++)
-      {
-       if (p != my_rank)
-        {
-         // recv
-         if (n_classified_recv[p] > 0)
-          {
-           classified_contributions_recv[p] 
-            = new double[n_classified_recv[p]];
-           classified_indices_recv[p] = new unsigned[n_classified_recv[p]];
+    // allocate storage for the data to be recieved
+    // and post the sends and recvs
+    Vector<double*> classified_contributions_recv(nproc);
+    Vector<unsigned*> classified_indices_recv(nproc);
+    Vector<MPI_Request> classified_recv_requests;
+    Vector<MPI_Request> classified_send_requests;
+    Vector<unsigned> classified_recv_proc;
+    for (unsigned p = 0; p < nproc; p++)
+     {
+      if (p != my_rank)
+       {
+        // recv
+        if (n_classified_recv[p] > 0)
+         {
+          classified_contributions_recv[p] 
+           = new double[n_classified_recv[p]];
+          classified_indices_recv[p] = new unsigned[n_classified_recv[p]];
            
-           // data for the struct data type
-           MPI_Datatype recv_types[2];
-           MPI_Aint recv_displacements[2];
-           int recv_sz[2];
+          // data for the struct data type
+          MPI_Datatype recv_types[2];
+          MPI_Aint recv_displacements[2];
+          int recv_sz[2];
            
-           // contributions
-           MPI_Type_contiguous(n_classified_recv[p],MPI_DOUBLE,
-                               &recv_types[0]);
-           MPI_Type_commit(&recv_types[0]);
-           MPI_Address(classified_contributions_recv[p],
-                       &recv_displacements[0]);
-           recv_displacements[0] -= base_displacement;
-           recv_sz[0] = 1;
+          // contributions
+          MPI_Type_contiguous(n_classified_recv[p],MPI_DOUBLE,
+                              &recv_types[0]);
+          MPI_Type_commit(&recv_types[0]);
+          MPI_Address(classified_contributions_recv[p],
+                      &recv_displacements[0]);
+          recv_displacements[0] -= base_displacement;
+          recv_sz[0] = 1;
            
-           // indices
-           MPI_Type_contiguous(n_classified_recv[p],MPI_UNSIGNED,
-                               &recv_types[1]);
-           MPI_Type_commit(&recv_types[1]);
-           MPI_Address(classified_indices_recv[p],
-                       &recv_displacements[1]);
-           recv_displacements[1] -= base_displacement;
-           recv_sz[1] = 1;
+          // indices
+          MPI_Type_contiguous(n_classified_recv[p],MPI_UNSIGNED,
+                              &recv_types[1]);
+          MPI_Type_commit(&recv_types[1]);
+          MPI_Address(classified_indices_recv[p],
+                      &recv_displacements[1]);
+          recv_displacements[1] -= base_displacement;
+          recv_sz[1] = 1;
            
-           // build the final recv type
-           MPI_Datatype final_recv_type;
-           MPI_Type_struct(2,recv_sz,recv_displacements,recv_types,
-                           &final_recv_type);
-           MPI_Type_commit(&final_recv_type);
+          // build the final recv type
+          MPI_Datatype final_recv_type;
+          MPI_Type_struct(2,recv_sz,recv_displacements,recv_types,
+                          &final_recv_type);
+          MPI_Type_commit(&final_recv_type);
            
-           // and recv
-           MPI_Request req;
-           MPI_Irecv(m_values,1,final_recv_type,p,0,
-                     problem_pt->communicator_pt()->mpi_comm(),&req);
-           classified_recv_requests.push_back(req);
-           classified_recv_proc.push_back(p);
-           MPI_Type_free(&recv_types[0]);
-           MPI_Type_free(&recv_types[1]);
-           MPI_Type_free(&final_recv_type);
-          }
+          // and recv
+          MPI_Request req;
+          MPI_Irecv(m_values,1,final_recv_type,p,0,
+                    problem_pt->communicator_pt()->mpi_comm(),&req);
+          classified_recv_requests.push_back(req);
+          classified_recv_proc.push_back(p);
+          MPI_Type_free(&recv_types[0]);
+          MPI_Type_free(&recv_types[1]);
+          MPI_Type_free(&final_recv_type);
+         }
          
-         // send
-         if (n_classified_send[p] > 0)
-          {
-           // data for the struct data type
-           MPI_Datatype send_types[2];
-           MPI_Aint send_displacements[2];
-           int send_sz[2];
+        // send
+        if (n_classified_send[p] > 0)
+         {
+          // data for the struct data type
+          MPI_Datatype send_types[2];
+          MPI_Aint send_displacements[2];
+          int send_sz[2];
            
-           // contributions
-           MPI_Type_contiguous(n_classified_send[p],MPI_DOUBLE,
-                               &send_types[0]);
-           MPI_Type_commit(&send_types[0]);
-           MPI_Address(&classified_contributions_send[p][0],
-                       &send_displacements[0]);
-           send_displacements[0] -= base_displacement;
-           send_sz[0] = 1;
+          // contributions
+          MPI_Type_contiguous(n_classified_send[p],MPI_DOUBLE,
+                              &send_types[0]);
+          MPI_Type_commit(&send_types[0]);
+          MPI_Address(&classified_contributions_send[p][0],
+                      &send_displacements[0]);
+          send_displacements[0] -= base_displacement;
+          send_sz[0] = 1;
            
-           // indices
-           MPI_Type_contiguous(n_classified_send[p],MPI_UNSIGNED,
-                               &send_types[1]);
-           MPI_Type_commit(&send_types[1]);
-           MPI_Address(&classified_indices_send[p][0],
-                       &send_displacements[1]);
-           send_displacements[1] -= base_displacement;
-           send_sz[1] = 1;
+          // indices
+          MPI_Type_contiguous(n_classified_send[p],MPI_UNSIGNED,
+                              &send_types[1]);
+          MPI_Type_commit(&send_types[1]);
+          MPI_Address(&classified_indices_send[p][0],
+                      &send_displacements[1]);
+          send_displacements[1] -= base_displacement;
+          send_sz[1] = 1;
            
-           // build the final send type
-           MPI_Datatype final_send_type;
-           MPI_Type_struct(2,send_sz,send_displacements,send_types,
-                           &final_send_type);
-           MPI_Type_commit(&final_send_type);
+          // build the final send type
+          MPI_Datatype final_send_type;
+          MPI_Type_struct(2,send_sz,send_displacements,send_types,
+                          &final_send_type);
+          MPI_Type_commit(&final_send_type);
            
-           // and send
-           MPI_Request req;
-           MPI_Isend(m_values,1,final_send_type,p,0,
-                     problem_pt->communicator_pt()->mpi_comm(),&req);
-           classified_send_requests.push_back(req);
-           MPI_Type_free(&send_types[0]);
-           MPI_Type_free(&send_types[1]);
-           MPI_Type_free(&final_send_type);
-          }
-        }
-      }
+          // and send
+          MPI_Request req;
+          MPI_Isend(m_values,1,final_send_type,p,0,
+                    problem_pt->communicator_pt()->mpi_comm(),&req);
+          classified_send_requests.push_back(req);
+          MPI_Type_free(&send_types[0]);
+          MPI_Type_free(&send_types[1]);
+          MPI_Type_free(&final_send_type);
+         }
+       }
+     }
      
-     // next classify the data as it is received
-     unsigned n_classified_recv_req = classified_recv_requests.size();
-     while (n_classified_recv_req > 0)
-      {
-       // get the processor number and remove the completed request
-       // for the vector of requests
-       int req_num;
-       MPI_Waitany(n_classified_recv_req,&classified_recv_requests[0],
-                   &req_num,MPI_STATUS_IGNORE);
-       unsigned p = classified_recv_proc[req_num];
-       classified_recv_requests.erase(classified_recv_requests.begin()
-                                      +req_num);    
-       classified_recv_proc.erase(classified_recv_proc.begin()+req_num);
-       n_classified_recv_req--;
+    // next classify the data as it is received
+    unsigned n_classified_recv_req = classified_recv_requests.size();
+    while (n_classified_recv_req > 0)
+     {
+      // get the processor number and remove the completed request
+      // for the vector of requests
+      int req_num;
+      MPI_Waitany(n_classified_recv_req,&classified_recv_requests[0],
+                  &req_num,MPI_STATUS_IGNORE);
+      unsigned p = classified_recv_proc[req_num];
+      classified_recv_requests.erase(classified_recv_requests.begin()
+                                     +req_num);    
+      classified_recv_proc.erase(classified_recv_proc.begin()+req_num);
+      n_classified_recv_req--;
        
-       // next classify the dofs 
-       // and store them for sending to other processors if required
-       unsigned n_recv = n_classified_recv[p];
-       for (unsigned i = 0; i < n_recv; i++)
-        {
-         m_values[classified_indices_recv[p][i]-first_row]
-          += classified_contributions_recv[p][i];
-        }
+      // next classify the dofs 
+      // and store them for sending to other processors if required
+      unsigned n_recv = n_classified_recv[p];
+      for (unsigned i = 0; i < n_recv; i++)
+       {
+        m_values[classified_indices_recv[p][i]-first_row]
+         += classified_contributions_recv[p][i];
+       }
        
-       // clean up
-       delete[] classified_contributions_recv[p];
-       delete[] classified_indices_recv[p];
-      }
+      // clean up
+      delete[] classified_contributions_recv[p];
+      delete[] classified_indices_recv[p];
+     }
      
-     // wait for the unclassified sends to complete
-     unsigned n_unclassified_send_req = unclassified_send_requests.size();
-     MPI_Waitall(n_unclassified_send_req,&classified_send_requests[0],
-                 MPI_STATUS_IGNORE);
-     delete[] unclassified_contributions_send;
-     delete[] unclassified_indices_send;
+    // wait for the unclassified sends to complete
+    unsigned n_unclassified_send_req = unclassified_send_requests.size();
+    MPI_Waitall(n_unclassified_send_req,&classified_send_requests[0],
+                MPI_STATUS_IGNORE);
+    delete[] unclassified_contributions_send;
+    delete[] unclassified_indices_send;
+    delete[] n_unclassified_send;
      
-     // wait for the classified sends to complete
-     unsigned n_classified_send_req = classified_send_requests.size();
-     MPI_Waitall(n_classified_send_req,&classified_send_requests[0],
-                 MPI_STATUS_IGNORE);
-     delete[] classified_indices_send;
-     delete[] classified_contributions_send;
+    // wait for the classified sends to complete
+    unsigned n_classified_send_req = classified_send_requests.size();
+    MPI_Waitall(n_classified_send_req,&classified_send_requests[0],
+                MPI_STATUS_IGNORE);
+    delete[] classified_indices_send;
+    delete[] classified_contributions_send;
+    delete[] n_classified_recv;
+    delete[] n_classified_send;
 #endif
    }
 
@@ -1043,7 +1291,7 @@ namespace oomph
         if (el3d_pt!=0)
          {
           el3d_pt->get_velocity_mass_matrix_diagonal(el_vmm_diagonal);
-          }
+         }
 //        dynamic_cast< NavierStokesEquations<3>* >
 //         ( Mesh_pt[0]->element_pt(e) )
 //         ->get_velocity_mass_matrix_diagonal(el_vmm_diagonal);
@@ -1100,9 +1348,22 @@ namespace oomph
  {
   if (Preconditioner_has_been_setup)
    {
-    // delete blocks
-    delete Block_matrix_0_1_pt;
-    Block_matrix_0_1_pt = 0;  
+    // delete matvecs
+    delete Bt_mat_vec_pt;
+    Bt_mat_vec_pt = 0;
+
+    if (!Form_BFBt_product)
+     {
+      delete F_mat_vec_pt;
+      F_mat_vec_pt = 0;
+      delete QBt_mat_vec_pt;
+      QBt_mat_vec_pt = 0;
+     }
+    else
+     {
+      delete E_mat_vec_pt;
+      E_mat_vec_pt = 0;
+     }
 
     // delete stuff from velocity solve
     if (Using_default_f_preconditioner)
@@ -1112,8 +1373,6 @@ namespace oomph
      }
 
     // delete stuff from Schur complement approx
-    delete P_matrix_pt;
-    P_matrix_pt = 0;
     if (Using_default_p_preconditioner)
      {
       delete P_preconditioner_pt;

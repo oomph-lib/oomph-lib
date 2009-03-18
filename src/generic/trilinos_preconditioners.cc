@@ -100,8 +100,11 @@ void TrilinosPreconditionerBase::setup(Problem* problem_pt,
 #endif
  
  // create the matrices
+ Epetra_col_map_pt = new Epetra_Map(matrix_pt->ncol(),matrix_pt->ncol(),
+                                    0,*Epetra_comm_pt);
  TrilinosHelpers::create_epetra_matrix(matrix_pt,
                                        Epetra_map_pt,
+                                       Epetra_col_map_pt,
                                        Epetra_matrix_pt);   
  
  // set up preconditioner

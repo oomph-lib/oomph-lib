@@ -79,7 +79,10 @@ namespace oomph
    /// Constructor (empty)
    PreconditionerArray()
     : Preconditioner_pt(0), Global_communicator_pt(0), Local_communicator_pt(0)
-    {};
+    {
+     Method = 0;
+     Nprec = 0;
+    };
    
    /// Broken copy constructor
    PreconditionerArray(const PreconditionerArray&) 
@@ -135,6 +138,9 @@ namespace oomph
      First_proc_for_prec.clear();
      Nproc_for_prec.clear();
 
+     // zero
+     Color = 0;
+
 #ifdef PARANOID
      // delete PARANOID check distribution pts
      for (unsigned i = 0;i < Nprec; i++)
@@ -188,7 +194,7 @@ namespace oomph
    
    /// the Color of this processor (or the preconditioner number)
    unsigned Color;
-   
+
    /// pointer to the global communicator for this preconditioner array
    OomphCommunicator* Global_communicator_pt;
    

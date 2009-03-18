@@ -148,6 +148,7 @@ class SuperLUDistPreconditioner : public Preconditioner
   /// CRDoubleMatrix or CCDoubleMatrix
   void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
    {
+    this->clean_up_memory();
      oomph_info << "Setting up SuperLU Dist (exact) preconditioner" 
 		<< std::endl;
      if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt) != 0)

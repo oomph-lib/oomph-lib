@@ -20,7 +20,7 @@
 //LIC// You should have received a copy of the GNU Lesser General Public
 //LIC// License along with this library; if not, write to the Free Software
 //LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-//LIC// 02110-1301  USA.[
+//LIC// 02110-1301  USA.
 //LIC// 
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
@@ -44,6 +44,7 @@
 
 namespace oomph
 {
+
 
 //////////////////////////////////////////////////////////////////
 //Non-inline functions for the problem class
@@ -108,34 +109,34 @@ namespace oomph
 //================================================================
 /// Destructor to clean up memory
 //================================================================
-Problem::~Problem()
-{
+ Problem::~Problem()
+ {
 
- // Delete the memory assigned for the global time
- // (it's created on the fly in Problem::add_time_stepper_pt()
- // so we are entitled to delete it.
- if (Time_pt!=0)
-  {
-   delete Time_pt; 
-   Time_pt = 0;
-  }
+  // Delete the memory assigned for the global time
+  // (it's created on the fly in Problem::add_time_stepper_pt()
+  // so we are entitled to delete it.
+  if (Time_pt!=0)
+   {
+    delete Time_pt; 
+    Time_pt = 0;
+   }
 
- // We're not using the default linear solver,
- // somebody else must have built it, so that person 
- // must be in charge of killing it. 
- // We can safely delete the defaults, however
- delete Default_linear_solver_pt;
- delete Default_eigen_solver_pt;
- delete Default_assembly_handler_pt;
- delete Communicator_pt;
+  // We're not using the default linear solver,
+  // somebody else must have built it, so that person 
+  // must be in charge of killing it. 
+  // We can safely delete the defaults, however
+  delete Default_linear_solver_pt;
+  delete Default_eigen_solver_pt;
+  delete Default_assembly_handler_pt;
+  delete Communicator_pt;
 
- // if this problem has sub meshes then we must delete the Mesh_pt
- if (Sub_mesh_pt.size() != 0)
-  {
-   Mesh_pt->flush_element_and_node_storage();
-   delete Mesh_pt;
-  }
-}
+  // if this problem has sub meshes then we must delete the Mesh_pt
+  if (Sub_mesh_pt.size() != 0)
+   {
+    Mesh_pt->flush_element_and_node_storage();
+    delete Mesh_pt;
+   }
+ }
 
 
 #ifdef OOMPH_HAS_MPI
@@ -218,41 +219,41 @@ Problem::~Problem()
 /// of submeshes which are passed as a vector of pointers to the
 /// submeshes. The ordering is not necessarily optimal.
 //==============================================================
-void Problem::build_global_mesh()
-{
+ void Problem::build_global_mesh()
+ {
 #ifdef PARANOID
- //Has a global mesh already been built
- if(Mesh_pt!=0)
-  {
-   std::string error_message = 
-    "Problem::build_global_mesh() called,\n";
-   error_message += " but a global mesh has already been built:\n";
-   error_message += "Problem::Mesh_pt is not zero!\n";
+  //Has a global mesh already been built
+  if(Mesh_pt!=0)
+   {
+    std::string error_message = 
+     "Problem::build_global_mesh() called,\n";
+    error_message += " but a global mesh has already been built:\n";
+    error_message += "Problem::Mesh_pt is not zero!\n";
 
-   throw OomphLibError(error_message,
-                       "Problem::build_global_mesh()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
- //Check that there are submeshes
- if(Sub_mesh_pt.size()==0)
-  {
-   std::string error_message = 
-    "Problem::build_global_mesh() called,\n";
-   error_message += " but there are no submeshes:\n";
-   error_message += "Problem::Sub_mesh_pt has no entries\n";
+    throw OomphLibError(error_message,
+                        "Problem::build_global_mesh()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  //Check that there are submeshes
+  if(Sub_mesh_pt.size()==0)
+   {
+    std::string error_message = 
+     "Problem::build_global_mesh() called,\n";
+    error_message += " but there are no submeshes:\n";
+    error_message += "Problem::Sub_mesh_pt has no entries\n";
    
-   throw OomphLibError(error_message,
-                       "Problem::build_global_mesh()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
+    throw OomphLibError(error_message,
+                        "Problem::build_global_mesh()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
 #endif
 
- //Create an empty mesh
- Mesh_pt = new Mesh();
+  //Create an empty mesh
+  Mesh_pt = new Mesh();
 
- //Call the rebuild function to construct the mesh
- rebuild_global_mesh();
-}
+  //Call the rebuild function to construct the mesh
+  rebuild_global_mesh();
+ }
 
 //====================================================================
 /// If one of the submeshes has changed (e.g. by
@@ -262,121 +263,121 @@ void Problem::build_global_mesh()
 /// N.B. This is essentially the same function as the Mesh constructor
 /// that assembles a single global mesh from submeshes
 //=====================================================================
-void Problem::rebuild_global_mesh()
-{
+ void Problem::rebuild_global_mesh()
+ {
 
- //Number of submeshes
- unsigned nsub_mesh=Sub_mesh_pt.size();
+  //Number of submeshes
+  unsigned nsub_mesh=Sub_mesh_pt.size();
 
- // Initialise element, node and boundary counters for global mesh
- unsigned long n_element=0;
- unsigned long n_node=0;
- unsigned n_bound=0;
+  // Initialise element, node and boundary counters for global mesh
+  unsigned long n_element=0;
+  unsigned long n_node=0;
+  unsigned n_bound=0;
 
- // Loop over submeshes and get total number of elements, nodes and
- // boundaries
- for(unsigned imesh=0;imesh<nsub_mesh;imesh++)
-  {
-   n_element += Sub_mesh_pt[imesh]->nelement();
-   n_node += Sub_mesh_pt[imesh]->nnode();
-   n_bound += Sub_mesh_pt[imesh]->nboundary();
-  }  
+  // Loop over submeshes and get total number of elements, nodes and
+  // boundaries
+  for(unsigned imesh=0;imesh<nsub_mesh;imesh++)
+   {
+    n_element += Sub_mesh_pt[imesh]->nelement();
+    n_node += Sub_mesh_pt[imesh]->nnode();
+    n_bound += Sub_mesh_pt[imesh]->nboundary();
+   }  
  
- // Reserve storage for element and node pointers 
- Mesh_pt->Element_pt.clear();
- Mesh_pt->Element_pt.reserve(n_element);
- Mesh_pt->Node_pt.clear();
- Mesh_pt->Node_pt.reserve(n_node);
- //Resize vector of vectors of nodes
- Mesh_pt->Boundary_node_pt.clear();
- Mesh_pt->Boundary_node_pt.resize(n_bound);
+  // Reserve storage for element and node pointers 
+  Mesh_pt->Element_pt.clear();
+  Mesh_pt->Element_pt.reserve(n_element);
+  Mesh_pt->Node_pt.clear();
+  Mesh_pt->Node_pt.reserve(n_node);
+  //Resize vector of vectors of nodes
+  Mesh_pt->Boundary_node_pt.clear();
+  Mesh_pt->Boundary_node_pt.resize(n_bound);
  
 
- // Sets of pointers to elements and nodes (to exlude duplicates -- they
- // shouldn't occur anyway but if they do, they must only be added
- // once in the global mesh to avoid trouble in the timestepping)
- std::set<GeneralisedElement*> element_set_pt;
- std::set<Node*> node_set_pt;
+  // Sets of pointers to elements and nodes (to exlude duplicates -- they
+  // shouldn't occur anyway but if they do, they must only be added
+  // once in the global mesh to avoid trouble in the timestepping)
+  std::set<GeneralisedElement*> element_set_pt;
+  std::set<Node*> node_set_pt;
 
- //Counter for total number of boundaries in all the submeshes
- unsigned ibound_global=0;   
- //Loop over the number of submeshes 
- for(unsigned imesh=0;imesh<nsub_mesh;imesh++)
-  {
-   //Loop over the elements of the submesh and add to vector
-   //duplicates are ignored
-   unsigned nel_before=0;
-   unsigned long n_element=Sub_mesh_pt[imesh]->nelement();
-   for (unsigned long e=0;e<n_element;e++)
-    {
-     GeneralisedElement* el_pt=Sub_mesh_pt[imesh]->element_pt(e);
+  //Counter for total number of boundaries in all the submeshes
+  unsigned ibound_global=0;   
+  //Loop over the number of submeshes 
+  for(unsigned imesh=0;imesh<nsub_mesh;imesh++)
+   {
+    //Loop over the elements of the submesh and add to vector
+    //duplicates are ignored
+    unsigned nel_before=0;
+    unsigned long n_element=Sub_mesh_pt[imesh]->nelement();
+    for (unsigned long e=0;e<n_element;e++)
+     {
+      GeneralisedElement* el_pt=Sub_mesh_pt[imesh]->element_pt(e);
       element_set_pt.insert(el_pt);
-     // Was it a duplicate?
-     unsigned nel_now=element_set_pt.size();
-     if (nel_now==nel_before)
-      {
-       std::ostringstream warning_stream;
-       warning_stream  <<"WARNING: " << std::endl
-                       <<"Element " << e << " in submesh " << imesh 
-                       <<" is a duplicate \n and was ignored when assembling " 
-                       <<"global mesh." << std::endl;
-       OomphLibWarning(warning_stream.str(),
-                       "Problem::rebuild_global_mesh()",
-                       OOMPH_EXCEPTION_LOCATION);
-      }
-     else
-      {
-       Mesh_pt->Element_pt.push_back(el_pt);
-      }
-     nel_before=nel_now;
-    }
+      // Was it a duplicate?
+      unsigned nel_now=element_set_pt.size();
+      if (nel_now==nel_before)
+       {
+        std::ostringstream warning_stream;
+        warning_stream  <<"WARNING: " << std::endl
+                        <<"Element " << e << " in submesh " << imesh 
+                        <<" is a duplicate \n and was ignored when assembling " 
+                        <<"global mesh." << std::endl;
+        OomphLibWarning(warning_stream.str(),
+                        "Problem::rebuild_global_mesh()",
+                        OOMPH_EXCEPTION_LOCATION);
+       }
+      else
+       {
+        Mesh_pt->Element_pt.push_back(el_pt);
+       }
+      nel_before=nel_now;
+     }
 
-   //Loop over the nodes of the submesh and add to vector
-   //duplicates are ignored
-   unsigned nnod_before=0;
-   unsigned long n_node=Sub_mesh_pt[imesh]->nnode();
-   for (unsigned long n=0;n<n_node;n++)
-    {
-     Node* nod_pt=Sub_mesh_pt[imesh]->node_pt(n);
-     node_set_pt.insert(nod_pt);
-     // Was it a duplicate?
-     unsigned nnod_now=node_set_pt.size();
-     if (nnod_now==nnod_before)
-      {
-       std::ostringstream warning_stream;
-       warning_stream << "WARNING: " << std::endl
-                      << "Node " << n << " in submesh " << imesh 
-                      << " is a duplicate \n and was ignored when assembling " 
-                      << "global mesh." << std::endl;
-       OomphLibWarning(warning_stream.str(),
-                       "Problem::rebuild_global_mesh()",
-                       OOMPH_EXCEPTION_LOCATION);
-      }
-     else
-      {
-       Mesh_pt->Node_pt.push_back(nod_pt);
-      }
-     nnod_before=nnod_now;
-    }
+    //Loop over the nodes of the submesh and add to vector
+    //duplicates are ignored
+    unsigned nnod_before=0;
+    unsigned long n_node=Sub_mesh_pt[imesh]->nnode();
+    for (unsigned long n=0;n<n_node;n++)
+     {
+      Node* nod_pt=Sub_mesh_pt[imesh]->node_pt(n);
+      node_set_pt.insert(nod_pt);
+      // Was it a duplicate?
+      unsigned nnod_now=node_set_pt.size();
+      if (nnod_now==nnod_before)
+       {
+        std::ostringstream warning_stream;
+        warning_stream << "WARNING: " << std::endl
+                       << "Node " << n << " in submesh " << imesh 
+                       << " is a duplicate \n and was ignored when assembling " 
+                       << "global mesh." << std::endl;
+        OomphLibWarning(warning_stream.str(),
+                        "Problem::rebuild_global_mesh()",
+                        OOMPH_EXCEPTION_LOCATION);
+       }
+      else
+       {
+        Mesh_pt->Node_pt.push_back(nod_pt);
+       }
+      nnod_before=nnod_now;
+     }
 
-   //Loop over the boundaries of the submesh
-   unsigned n_bound=Sub_mesh_pt[imesh]->nboundary();
-   for (unsigned ibound=0;ibound<n_bound;ibound++)
-    {
-     //Loop over the number of nodes on the boundary and add to the 
-     //global vector
-     unsigned long n_bound_node=Sub_mesh_pt[imesh]->nboundary_node(ibound);
-     for (unsigned long n=0;n<n_bound_node;n++)
-      {
-       Mesh_pt->Boundary_node_pt[ibound_global].push_back(
-        Sub_mesh_pt[imesh]->boundary_node_pt(ibound,n));
-      }
-     //Increase the number of the global boundary counter
-     ibound_global++;
-    }
-  } //End of loop over submeshes
+    //Loop over the boundaries of the submesh
+    unsigned n_bound=Sub_mesh_pt[imesh]->nboundary();
+    for (unsigned ibound=0;ibound<n_bound;ibound++)
+     {
+      //Loop over the number of nodes on the boundary and add to the 
+      //global vector
+      unsigned long n_bound_node=Sub_mesh_pt[imesh]->nboundary_node(ibound);
+      for (unsigned long n=0;n<n_bound_node;n++)
+       {
+        Mesh_pt->Boundary_node_pt[ibound_global].push_back(
+         Sub_mesh_pt[imesh]->boundary_node_pt(ibound,n));
+       }
+      //Increase the number of the global boundary counter
+      ibound_global++;
+     }
+   } //End of loop over submeshes
 
-}
+ }
 
 
 
@@ -387,65 +388,65 @@ void Problem::rebuild_global_mesh()
 /// create or resize the Time object so that it contains the appropriate
 /// number of levels of storage.
 //================================================================
-void Problem::add_time_stepper_pt(TimeStepper* const &time_stepper_pt) 
-{
- //Add the timestepper to the vector
- Time_stepper_pt.push_back(time_stepper_pt);
- //Find the number of timesteps required by the timestepper
- unsigned ndt = time_stepper_pt->ndt();
- //If time has not been allocated, create time object with the 
- //required number of time steps
- if(Time_pt==0) 
-  {
-   Time_pt = new Time(ndt);
-   oomph_info << "Created Time with " << ndt << " timesteps" << std::endl;
-  }
- else
-  {
-   //If the required number of time steps is greater than currently stored
-     //resize the time storage
-   if(ndt > Time_pt->ndt()) 
-    {
-     Time_pt->resize(ndt);
-     oomph_info << "Resized Time to include " << ndt << " timesteps" 
-               << std::endl;
-    }
-   //Otherwise report that we are OK
-   else
-    {
-     oomph_info << "Time object already has storage for " << ndt 
-               << " timesteps" << std::endl;
-    }
-  }
+ void Problem::add_time_stepper_pt(TimeStepper* const &time_stepper_pt) 
+ {
+  //Add the timestepper to the vector
+  Time_stepper_pt.push_back(time_stepper_pt);
+  //Find the number of timesteps required by the timestepper
+  unsigned ndt = time_stepper_pt->ndt();
+  //If time has not been allocated, create time object with the 
+  //required number of time steps
+  if(Time_pt==0) 
+   {
+    Time_pt = new Time(ndt);
+    oomph_info << "Created Time with " << ndt << " timesteps" << std::endl;
+   }
+  else
+   {
+    //If the required number of time steps is greater than currently stored
+    //resize the time storage
+    if(ndt > Time_pt->ndt()) 
+     {
+      Time_pt->resize(ndt);
+      oomph_info << "Resized Time to include " << ndt << " timesteps" 
+                 << std::endl;
+     }
+    //Otherwise report that we are OK
+    else
+     {
+      oomph_info << "Time object already has storage for " << ndt 
+                 << " timesteps" << std::endl;
+     }
+   }
  
- //Pass the pointer to time to the timestepper
- time_stepper_pt->time_pt() = Time_pt;
-}
+  //Pass the pointer to time to the timestepper
+  time_stepper_pt->time_pt() = Time_pt;
+ }
 
 //================================================================
 /// Set the explicit time stepper for the problem and also
 /// ensure that a time object has been created.
 //================================================================
-void Problem::set_explicit_time_stepper_pt(ExplicitTimeStepper* const 
-                                           &explicit_time_stepper_pt) 
-{
- //Set the explicit time stepper
- Explicit_time_stepper_pt = explicit_time_stepper_pt;
+ void Problem::set_explicit_time_stepper_pt(ExplicitTimeStepper* const 
+                                            &explicit_time_stepper_pt) 
+ {
+  //Set the explicit time stepper
+  Explicit_time_stepper_pt = explicit_time_stepper_pt;
 
- //If time has not been allocated, create time object with the 
- //required number of time steps
- if(Time_pt==0) 
-  {
-   Time_pt = new Time(0);
-   oomph_info << "Created Time with storage for no previous timestep" 
-              << std::endl;
-  }
- else
-  {
-   oomph_info << "Time object already exists " << std::endl;
-  }
+  //If time has not been allocated, create time object with the 
+  //required number of time steps
+  if(Time_pt==0) 
+   {
+    Time_pt = new Time(0);
+    oomph_info << "Created Time with storage for no previous timestep" 
+               << std::endl;
+   }
+  else
+   {
+    oomph_info << "Time object already exists " << std::endl;
+   }
 
-}
+ }
 
 
 //================================================================
@@ -453,175 +454,175 @@ void Problem::set_explicit_time_stepper_pt(ExplicitTimeStepper* const
  /// data (= data that isn't attached to any elements) and then
  /// does the equation numbering for the elements.
 //================================================================
-unsigned long Problem::assign_eqn_numbers()
-{
+ unsigned long Problem::assign_eqn_numbers()
+ {
 
 #ifdef OOMPH_HAS_MPI
 
- // If the problem has been distributed we first have to 
- // classify any potentially newly created nodes as
- // halo or haloed (or neither)
- if (Problem_has_been_distributed)
-  {
-   // Classify any so-far unclassified nodes
-   mesh_pt()->classify_halo_and_haloed_nodes();
+  // If the problem has been distributed we first have to 
+  // classify any potentially newly created nodes as
+  // halo or haloed (or neither)
+  if (Problem_has_been_distributed)
+   {
+    // Classify any so-far unclassified nodes
+    mesh_pt()->classify_halo_and_haloed_nodes();
 
-   // Check the synchronicity of hanging nodes for a refineable mesh
-   // - In a multi-physics case this should be called for every mesh
-   // - It is also possible that a single mesh contains different elements 
-   //   (with different values of ncont_interpolated_values);
-   //   in this instance, this routine needs a rethink.
-   if(RefineableMeshBase* mmesh_pt = 
-      dynamic_cast<RefineableMeshBase*>(mesh_pt(0))) 
-    {
-     unsigned ncont_interpolated_values=dynamic_cast<RefineableElement*>
-      (mmesh_pt->element_pt(0))->ncont_interpolated_values();
-     mmesh_pt->synchronise_hanging_nodes(ncont_interpolated_values);
-    }
-  }
+    // Check the synchronicity of hanging nodes for a refineable mesh
+    // - In a multi-physics case this should be called for every mesh
+    // - It is also possible that a single mesh contains different elements 
+    //   (with different values of ncont_interpolated_values);
+    //   in this instance, this routine needs a rethink.
+    if(RefineableMeshBase* mmesh_pt = 
+       dynamic_cast<RefineableMeshBase*>(mesh_pt(0))) 
+     {
+      unsigned ncont_interpolated_values=dynamic_cast<RefineableElement*>
+       (mmesh_pt->element_pt(0))->ncont_interpolated_values();
+      mmesh_pt->synchronise_hanging_nodes(ncont_interpolated_values);
+     }
+   }
  
 #endif
 
- //(Re)-set the dof pointer to zero length because entries are 
- //pushed back onto it -- if it's not reset here then we get into
- //trouble during mesh refinement when we reassign all dofs
- Dof_pt.resize(0);
- unsigned long n_dof=0;
+  //(Re)-set the dof pointer to zero length because entries are 
+  //pushed back onto it -- if it's not reset here then we get into
+  //trouble during mesh refinement when we reassign all dofs
+  Dof_pt.resize(0);
+  unsigned long n_dof=0;
 
- //Reset the equation number
- unsigned long equation_number=0;
+  //Reset the equation number
+  unsigned long equation_number=0;
 
- // Loop over all elements in the mesh and set up any additional 
- // dependencies that they may have (e.g. storing the geometric
- // Data, i.e. Data that affects an element's shape in elements
- // with algebraic node-update functions
- unsigned nel=Mesh_pt->nelement();
- for (unsigned e=0;e<nel;e++)
-  {
-   Mesh_pt->element_pt(e)->complete_setup_of_dependencies();
-  }
+  // Loop over all elements in the mesh and set up any additional 
+  // dependencies that they may have (e.g. storing the geometric
+  // Data, i.e. Data that affects an element's shape in elements
+  // with algebraic node-update functions
+  unsigned nel=Mesh_pt->nelement();
+  for (unsigned e=0;e<nel;e++)
+   {
+    Mesh_pt->element_pt(e)->complete_setup_of_dependencies();
+   }
 
- //Now set equation numbers for the global Data
- unsigned Nglobal_data = nglobal_data();
- for(unsigned i=0;i<Nglobal_data;i++)
-  {Global_data_pt[i]->assign_eqn_numbers(equation_number,Dof_pt);}
+  //Now set equation numbers for the global Data
+  unsigned Nglobal_data = nglobal_data();
+  for(unsigned i=0;i<Nglobal_data;i++)
+   {Global_data_pt[i]->assign_eqn_numbers(equation_number,Dof_pt);}
 
- //Check that the Mesh_pt has been assigned
- if(Mesh_pt==0)
-  {
-   std::string error_message =
-    "(Global) Mesh_pt must be assigned before calling ";
-   error_message += " assign_eqn_numbers()\n";;
+  //Check that the Mesh_pt has been assigned
+  if(Mesh_pt==0)
+   {
+    std::string error_message =
+     "(Global) Mesh_pt must be assigned before calling ";
+    error_message += " assign_eqn_numbers()\n";;
 
-   throw OomphLibError(error_message,
-                       "Problem::assign_eqn_numbers()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
+    throw OomphLibError(error_message,
+                        "Problem::assign_eqn_numbers()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
    
- // Loop over the submeshes: Note we need to call the submeshes' own
- // assign_*_eqn_number() otherwise we miss additional functionality
- // that is implemented (e.g.) in SolidMeshes!
- unsigned nsub_mesh=Sub_mesh_pt.size();
- if (nsub_mesh==0)
-  {
-   n_dof=Mesh_pt->assign_global_eqn_numbers(Dof_pt);
-   Mesh_pt->assign_local_eqn_numbers();
-   //Clear out the temporary global storage for hijacked equation numbers
-   //HijackedElementBase::reset_hijacked_data_pt();
-  }
- else
-  {
-   //Assign global equation numbers first
-   for (unsigned i=0;i<nsub_mesh;i++)
-    {
-     Sub_mesh_pt[i]->assign_global_eqn_numbers(Dof_pt);
-    }
-   for (unsigned i=0;i<nsub_mesh;i++)
-    {
-     Sub_mesh_pt[i]->assign_local_eqn_numbers();
-    }
-   //Clear out the temporaray global storage for hijacked equation numbers
-   //HijackedElementBase::reset_hijacked_data_pt();
-   n_dof=Dof_pt.size();
-  }
+  // Loop over the submeshes: Note we need to call the submeshes' own
+  // assign_*_eqn_number() otherwise we miss additional functionality
+  // that is implemented (e.g.) in SolidMeshes!
+  unsigned nsub_mesh=Sub_mesh_pt.size();
+  if (nsub_mesh==0)
+   {
+    n_dof=Mesh_pt->assign_global_eqn_numbers(Dof_pt);
+    Mesh_pt->assign_local_eqn_numbers();
+    //Clear out the temporary global storage for hijacked equation numbers
+    //HijackedElementBase::reset_hijacked_data_pt();
+   }
+  else
+   {
+    //Assign global equation numbers first
+    for (unsigned i=0;i<nsub_mesh;i++)
+     {
+      Sub_mesh_pt[i]->assign_global_eqn_numbers(Dof_pt);
+     }
+    for (unsigned i=0;i<nsub_mesh;i++)
+     {
+      Sub_mesh_pt[i]->assign_local_eqn_numbers();
+     }
+    //Clear out the temporaray global storage for hijacked equation numbers
+    //HijackedElementBase::reset_hijacked_data_pt();
+    n_dof=Dof_pt.size();
+   }
 
 #ifdef OOMPH_HAS_MPI
 
- // Only synchronise if the problem has actually been
- // distributed.
- if (Problem_has_been_distributed)
-  {
-   // Wait until all processes have assigned their eqn numbers
-   MPI_Barrier(MPI_COMM_WORLD);
+  // Only synchronise if the problem has actually been
+  // distributed.
+  if (Problem_has_been_distributed)
+   {
+    // Wait until all processes have assigned their eqn numbers
+    MPI_Barrier(MPI_COMM_WORLD);
    
-   // Synchronise the equation numbers and return the total
-   // number of degrees of freedom in the overall problem
-   n_dof=synchronise_eqn_numbers();
-  }
+    // Synchronise the equation numbers and return the total
+    // number of degrees of freedom in the overall problem
+    n_dof=synchronise_eqn_numbers();
+   }
  
 #endif
 
- return n_dof;
+  return n_dof;
 
-}
+ }
 
 //================================================================
 /// Get the vector of dofs, i.e. a vector containing the current
 /// values of all unknowns.
 //================================================================
-void Problem::get_dofs(DoubleVector& dofs)
-{
- //Find number of dofs
- const unsigned long n_dof = ndof();
+ void Problem::get_dofs(DoubleVector& dofs)
+ {
+  //Find number of dofs
+  const unsigned long n_dof = ndof();
 
- //Resize the vector
- LinearAlgebraDistribution dist(this->communicator_pt(),n_dof,false);
- dofs.rebuild(&dist);
+  //Resize the vector
+  LinearAlgebraDistribution dist(this->communicator_pt(),n_dof,false);
+  dofs.rebuild(&dist);
 
- //Copy dofs into vector
- for(unsigned long l=0;l<n_dof;l++)
-  {
-   dofs[l] = *Dof_pt[l];
-  }
-}
+  //Copy dofs into vector
+  for(unsigned long l=0;l<n_dof;l++)
+   {
+    dofs[l] = *Dof_pt[l];
+   }
+ }
 
 //=======================================================================
 /// Function that sets the values of the dofs in the object
 //======================================================================
-void Problem::set_dofs(const DoubleVector &dofs)
-{
- const unsigned long n_dof = this->ndof();
+ void Problem::set_dofs(const DoubleVector &dofs)
+ {
+  const unsigned long n_dof = this->ndof();
 #ifdef PARANOID
- if(n_dof != dofs.nrow())
-  {
-   std::ostringstream error_stream;
-   error_stream << "Number of degrees of freedom in vector argument "
-                << dofs.nrow() << "\n"
-                << "does not equal number of degrees of freedom in problem "
-                << n_dof;
-   throw OomphLibError(error_stream.str(),
-                       "Problem::set_dofs()",
-                       OOMPH_EXCEPTION_LOCATION);  
-  } 
+  if(n_dof != dofs.nrow())
+   {
+    std::ostringstream error_stream;
+    error_stream << "Number of degrees of freedom in vector argument "
+                 << dofs.nrow() << "\n"
+                 << "does not equal number of degrees of freedom in problem "
+                 << n_dof;
+    throw OomphLibError(error_stream.str(),
+                        "Problem::set_dofs()",
+                        OOMPH_EXCEPTION_LOCATION);  
+   } 
 #endif 
- for(unsigned long l=0;l<n_dof;l++)
-  {
-   *Dof_pt[l] = dofs[l];
-  }
-}
+  for(unsigned long l=0;l<n_dof;l++)
+   {
+    *Dof_pt[l] = dofs[l];
+   }
+ }
 
 //===================================================================
 ///Function that adds the values to the dofs
 //==================================================================
-void Problem::add_to_dofs(const double &lambda,
-                          const DoubleVector &increment_dofs)
-{
- const unsigned long n_dof = this->ndof();
-   for(unsigned long l=0;l<n_dof;l++)
-    {
-     *Dof_pt[l] += lambda*increment_dofs[l];
-    }
-}
+ void Problem::add_to_dofs(const double &lambda,
+                           const DoubleVector &increment_dofs)
+ {
+  const unsigned long n_dof = this->ndof();
+  for(unsigned long l=0;l<n_dof;l++)
+   {
+    *Dof_pt[l] += lambda*increment_dofs[l];
+   }
+ }
 
 
 
@@ -629,250 +630,250 @@ void Problem::add_to_dofs(const double &lambda,
 ///Return the residual vector multiplied by the inverse mass matrix
 ///Virtual so that it can be overloaded for mpi problems
 //=========================================================================
-void Problem::get_inverse_mass_matrix_times_residuals(DoubleVector &Mres)
-{
- //Find the number of degrees of freedom in the problem
- const unsigned n_dof = this->ndof();
+ void Problem::get_inverse_mass_matrix_times_residuals(DoubleVector &Mres)
+ {
+  //Find the number of degrees of freedom in the problem
+  const unsigned n_dof = this->ndof();
 
- //Resize the vector
- LinearAlgebraDistribution dist(this->communicator_pt(),n_dof,false);
- Mres.rebuild(&dist);
+  //Resize the vector
+  LinearAlgebraDistribution dist(this->communicator_pt(),n_dof,false);
+  Mres.rebuild(&dist);
  
- //If we have discontinuous formulation
- if(Discontinuous_element_formulation)
-  {
-   //Loop over the elements and get their residuals
-   const unsigned n_element = Problem::mesh_pt()->nelement();
-   Vector<double> element_Mres;
-   for(unsigned e=0;e<n_element;e++)
-    {
-     //Cache the element
-     DGElement* const elem_pt =
-      dynamic_cast<DGElement*>(Problem::mesh_pt()->element_pt(e));
+  //If we have discontinuous formulation
+  if(Discontinuous_element_formulation)
+   {
+    //Loop over the elements and get their residuals
+    const unsigned n_element = Problem::mesh_pt()->nelement();
+    Vector<double> element_Mres;
+    for(unsigned e=0;e<n_element;e++)
+     {
+      //Cache the element
+      DGElement* const elem_pt =
+       dynamic_cast<DGElement*>(Problem::mesh_pt()->element_pt(e));
      
-     const unsigned n_el_dofs = elem_pt->ndof();
-     elem_pt->get_inverse_mass_matrix_times_residuals(element_Mres);
+      const unsigned n_el_dofs = elem_pt->ndof();
+      elem_pt->get_inverse_mass_matrix_times_residuals(element_Mres);
      
-     for(unsigned i=0;i<n_el_dofs;i++)
-      {
-       Mres[elem_pt->eqn_number(i)] = element_Mres[i];
-      }
-    }
-  }
- //Otherwise it's continous
- else
-  {
-   //Now do the linear solve -- recycling Mass matrix if requested
-   //If we already have the factorised mass matrix, then resolve
-   if(Mass_matrix_reuse_is_enabled && Mass_matrix_has_been_computed)
-    {     
-     if(!Shut_up_in_newton_solve) 
-      {
-       oomph_info << "Not recomputing Mass Matrix " << std::endl;
-      }
+      for(unsigned i=0;i<n_el_dofs;i++)
+       {
+        Mres[elem_pt->eqn_number(i)] = element_Mres[i];
+       }
+     }
+   }
+  //Otherwise it's continous
+  else
+   {
+    //Now do the linear solve -- recycling Mass matrix if requested
+    //If we already have the factorised mass matrix, then resolve
+    if(Mass_matrix_reuse_is_enabled && Mass_matrix_has_been_computed)
+     {     
+      if(!Shut_up_in_newton_solve) 
+       {
+        oomph_info << "Not recomputing Mass Matrix " << std::endl;
+       }
      
-     //Get the residuals
-     DoubleVector residuals(&dist);
-     this->get_residuals(residuals);
+      //Get the residuals
+      DoubleVector residuals(&dist);
+      this->get_residuals(residuals);
      
-     // Resolve the linear system
-     this->linear_solver_pt()->resolve(residuals,Mres);
-    }
-   //Otherwise solve for the first time
-   else
-    {
-     //If we wish to reuse the mass matrix, then enable resolve
-     if(Mass_matrix_reuse_is_enabled)
-      {
-       if(!Shut_up_in_newton_solve) 
-        {
-         oomph_info << "Enabling resolve in explicit timestep" << std::endl;
-        }
-       this->linear_solver_pt()->enable_resolve();
-      }
+      // Resolve the linear system
+      this->linear_solver_pt()->resolve(residuals,Mres);
+     }
+    //Otherwise solve for the first time
+    else
+     {
+      //If we wish to reuse the mass matrix, then enable resolve
+      if(Mass_matrix_reuse_is_enabled)
+       {
+        if(!Shut_up_in_newton_solve) 
+         {
+          oomph_info << "Enabling resolve in explicit timestep" << std::endl;
+         }
+        this->linear_solver_pt()->enable_resolve();
+       }
      
-     //Store the old assembly handler
-     AssemblyHandler* old_assembly_handler_pt = this->assembly_handler_pt();
-     //Set the assembly handler to the explicit timestep handler
-     this->assembly_handler_pt() = new ExplicitTimeStepHandler;
+      //Store the old assembly handler
+      AssemblyHandler* old_assembly_handler_pt = this->assembly_handler_pt();
+      //Set the assembly handler to the explicit timestep handler
+      this->assembly_handler_pt() = new ExplicitTimeStepHandler;
      
-     //Solve the linear system
-     this->linear_solver_pt()->solve(this,Mres);
-     //The mass matrix has now been computed
-     Mass_matrix_has_been_computed=true;
+      //Solve the linear system
+      this->linear_solver_pt()->solve(this,Mres);
+      //The mass matrix has now been computed
+      Mass_matrix_has_been_computed=true;
      
-     //Delete the Explicit Timestep handler
-     delete this->assembly_handler_pt();
-     //Reset the assembly handler to the original handler
-     this->assembly_handler_pt() = old_assembly_handler_pt;
-    }
-  }
-}
+      //Delete the Explicit Timestep handler
+      delete this->assembly_handler_pt();
+      //Reset the assembly handler to the original handler
+      this->assembly_handler_pt() = old_assembly_handler_pt;
+     }
+   }
+ }
 
 
 //================================================================
 /// Get the total residuals Vector for the problem
 //================================================================
-void Problem::get_residuals(DoubleVector &residuals)
-{
+ void Problem::get_residuals(DoubleVector &residuals)
+ {
 
- // Three different cases; if MPI_Helpers::MPI_has_been_initialised=true 
- // this means MPI_Helpers::setup() has been called.  This could happen on a
- // code compiled with MPI but run serially; in this instance the
- // get_residuals function still works on one processor.
- //
- // Secondly, if a code has been compiled with MPI, but MPI_Helpers::setup()
- // has not been called, then MPI_Helpers::MPI_has_been_initialised=false 
- // and the code calls...
- //
- // Thirdly, the serial version (compiled by all, but only run when compiled
- // with MPI if MPI_Helpers::MPI_has_been_initialised=false
- //
- // The only case where an MPI code cannot run serially at present
- // is one where the distribute function is used (i.e. METIS is called)
+  // Three different cases; if MPI_Helpers::MPI_has_been_initialised=true 
+  // this means MPI_Helpers::setup() has been called.  This could happen on a
+  // code compiled with MPI but run serially; in this instance the
+  // get_residuals function still works on one processor.
+  //
+  // Secondly, if a code has been compiled with MPI, but MPI_Helpers::setup()
+  // has not been called, then MPI_Helpers::MPI_has_been_initialised=false 
+  // and the code calls...
+  //
+  // Thirdly, the serial version (compiled by all, but only run when compiled
+  // with MPI if MPI_Helpers::MPI_has_been_initialised=false
+  //
+  // The only case where an MPI code cannot run serially at present
+  // is one where the distribute function is used (i.e. METIS is called)
 
  
- // start by setting the distribution of the residuals vector if it is not 
- // setup
- if (!residuals.distribution_setup())
-  {
-   int n_dof=ndof();
-   LinearAlgebraDistribution dist(Communicator_pt,n_dof,false);
-   residuals.rebuild(&dist);
-  }
- // otherwise just zero the residuals
- else
-  {
+  // start by setting the distribution of the residuals vector if it is not 
+  // setup
+  if (!residuals.distribution_setup())
+   {
+    int n_dof=ndof();
+    LinearAlgebraDistribution dist(Communicator_pt,n_dof,false);
+    residuals.rebuild(&dist);
+   }
+  // otherwise just zero the residuals
+  else
+   {
 #ifdef PARANOID
-   // PARANOID check - if the residuals are distributed then this method
-   // cannot be used, a distributed residuals can only be assembled by
-   // get_jacobian(...) for CRDoubleMatrices
-   if (residuals.distributed())
-    {
-     throw OomphLibError
-      ("this method can only assemble a non-distributed residuals vector",
-       "Problem::get_residuals()",OOMPH_EXCEPTION_LOCATION);
-    }
+    // PARANOID check - if the residuals are distributed then this method
+    // cannot be used, a distributed residuals can only be assembled by
+    // get_jacobian(...) for CRDoubleMatrices
+    if (residuals.distributed())
+     {
+      throw OomphLibError
+       ("this method can only assemble a non-distributed residuals vector",
+        "Problem::get_residuals()",OOMPH_EXCEPTION_LOCATION);
+     }
 #endif
 
-   // and zero
-   residuals.initialise();
-  }
+    // and zero
+    residuals.initialise();
+   }
 
 #ifdef OOMPH_HAS_MPI
- if (MPI_Helpers::MPI_has_been_initialised)
-  {
+  if (MPI_Helpers::MPI_has_been_initialised)
+   {
  
-   // cache the number of local rows
-   unsigned nrow = residuals.nrow();
+    // cache the number of local rows
+    unsigned nrow = residuals.nrow();
 
-   // get a pointer to the underlying values
-   double* residuals_pt;
-   if (MPI_Helpers::Nproc>1)
-    {
-     residuals_pt = new double[nrow];
-     for (unsigned i = 0; i < residuals.nrow(); i++)
-      {
-       residuals_pt[i] = 0.0;  
-      }
-    }
-   else
-    {
-     residuals_pt = residuals.values_pt();
-    }
+    // get a pointer to the underlying values
+    double* residuals_pt;
+    if (MPI_Helpers::Nproc>1)
+     {
+      residuals_pt = new double[nrow];
+      for (unsigned i = 0; i < residuals.nrow(); i++)
+       {
+        residuals_pt[i] = 0.0;  
+       }
+     }
+    else
+     {
+      residuals_pt = residuals.values_pt();
+     }
 
-   // number of elements
-   int n_el=mesh_pt()->nelement();
+    // number of elements
+    int n_el=mesh_pt()->nelement();
  
-   // Default assignments for distributed problem
-   unsigned j_lo=0;
-   unsigned j_hi=n_el;
+    // Default assignments for distributed problem
+    unsigned j_lo=0;
+    unsigned j_hi=n_el;
  
-   // Otherwise just loop over fractions of the elements
-   if (!Problem_has_been_distributed)
-    {
-     // Distribute work evenly
-     unsigned range=unsigned(double(n_el)/double(Communicator_pt->nproc()));
-     j_lo=Communicator_pt->my_rank()*range;
-     j_hi=(Communicator_pt->my_rank()+1)*range;
+    // Otherwise just loop over fractions of the elements
+    if (!Problem_has_been_distributed)
+     {
+      // Distribute work evenly
+      unsigned range=unsigned(double(n_el)/double(Communicator_pt->nproc()));
+      j_lo=Communicator_pt->my_rank()*range;
+      j_hi=(Communicator_pt->my_rank()+1)*range;
     
-     // Last one needs to incorporate any dangling elements
-     if (Communicator_pt->my_rank() == Communicator_pt->nproc()-1)
-      {
-       j_hi=n_el;
-      }
-    }
+      // Last one needs to incorporate any dangling elements
+      if (Communicator_pt->my_rank() == Communicator_pt->nproc()-1)
+       {
+        j_hi=n_el;
+       }
+     }
 
-   // Assemble the partial residual vector: Note that this
-   // is a full-length vector but only contributions from 
-   // a sub-set of elements are filled in, other values
-   // are set to zero
+    // Assemble the partial residual vector: Note that this
+    // is a full-length vector but only contributions from 
+    // a sub-set of elements are filled in, other values
+    // are set to zero
  
-   //Loop over all the elements for this processor
-   for(unsigned long e=j_lo;e<j_hi;e++)
-    {
-     // Get element
-     GeneralisedElement* el_pt=mesh_pt()->element_pt(e);
+    //Loop over all the elements for this processor
+    for(unsigned long e=j_lo;e<j_hi;e++)
+     {
+      // Get element
+      GeneralisedElement* el_pt=mesh_pt()->element_pt(e);
    
-     // Is it a halo?
-     if (!el_pt->is_halo())
-      {
-       //Find number of dofs in the element
-       const unsigned n_el_dofs = el_pt->ndof();
+      // Is it a halo?
+      if (!el_pt->is_halo())
+       {
+        //Find number of dofs in the element
+        const unsigned n_el_dofs = el_pt->ndof();
      
-       //Set up a Vector
-       Vector<double> element_residuals(n_el_dofs);
+        //Set up a Vector
+        Vector<double> element_residuals(n_el_dofs);
      
-       //Fill the array
-       el_pt->get_residuals(element_residuals);
+        //Fill the array
+        el_pt->get_residuals(element_residuals);
        
-       //Now loop over the dofs and assign values to global Vector
-       for(unsigned l=0;l<n_el_dofs;l++)
-        {
-         residuals_pt[el_pt->eqn_number(l)]+=element_residuals[l];
-        }
-      }
-    }
+        //Now loop over the dofs and assign values to global Vector
+        for(unsigned l=0;l<n_el_dofs;l++)
+         {
+          residuals_pt[el_pt->eqn_number(l)]+=element_residuals[l];
+         }
+       }
+     }
  
-   // Receive from the other processors and assemble if required
-   if (Communicator_pt->nproc()>1)
-    {
-     // clear and resize residuals
-     MPI_Allreduce(residuals_pt,residuals.values_pt(),nrow,
-                   MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
-     delete[] residuals_pt;
-    }
+    // Receive from the other processors and assemble if required
+    if (Communicator_pt->nproc()>1)
+     {
+      // clear and resize residuals
+      MPI_Allreduce(residuals_pt,residuals.values_pt(),nrow,
+                    MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
+      delete[] residuals_pt;
+     }
    
    
-  }
- else // !MPI_Helpers::MPI_has_been_initialised
+   }
+  else // !MPI_Helpers::MPI_has_been_initialised
 #endif // OOMPH_HAS_MPI
-  {
+   {
 
-   //Locally cache pointer to assembly handler
-   AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
+    //Locally cache pointer to assembly handler
+    AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
 
-   //Loop over all the elements
-   unsigned long Element_pt_range = Mesh_pt->nelement();
-   for(unsigned long e=0;e<Element_pt_range;e++)
-    {
-     //Get the pointer to the element
-     GeneralisedElement* elem_pt = Mesh_pt->element_pt(e);
-     //Find number of dofs in the element
-     unsigned n_element_dofs = assembly_handler_pt->ndof(elem_pt); 
-     //Set up an array
-     Vector<double> element_residuals(n_element_dofs);
-     //Fill the array
-     assembly_handler_pt->get_residuals(elem_pt,element_residuals);
-     //Now loop over the dofs and assign values to global Vector
-     for(unsigned l=0;l<n_element_dofs;l++)
-      {
-       residuals[assembly_handler_pt->eqn_number(elem_pt,l)] 
-        += element_residuals[l];
-      }
-    }
-  }
-}
+    //Loop over all the elements
+    unsigned long Element_pt_range = Mesh_pt->nelement();
+    for(unsigned long e=0;e<Element_pt_range;e++)
+     {
+      //Get the pointer to the element
+      GeneralisedElement* elem_pt = Mesh_pt->element_pt(e);
+      //Find number of dofs in the element
+      unsigned n_element_dofs = assembly_handler_pt->ndof(elem_pt); 
+      //Set up an array
+      Vector<double> element_residuals(n_element_dofs);
+      //Fill the array
+      assembly_handler_pt->get_residuals(elem_pt,element_residuals);
+      //Now loop over the dofs and assign values to global Vector
+      for(unsigned l=0;l<n_element_dofs;l++)
+       {
+        residuals[assembly_handler_pt->eqn_number(elem_pt,l)] 
+         += element_residuals[l];
+       }
+     }
+   }
+ }
 
 //=============================================================================
 /// Get the fully assembled residual vector and Jacobian matrix
@@ -882,101 +883,101 @@ void Problem::get_residuals(DoubleVector &residuals)
 /// The matrix type DenseDoubleMatrix is not distributable and therefore 
 /// the residual vector is also assumed to be non distributable.
 //=============================================================================
-void Problem::get_jacobian(DoubleVector &residuals, 
-                           DenseDoubleMatrix& jacobian)
-{
- // get the number of degrees of freedom
- unsigned n_dof=ndof(); 
+ void Problem::get_jacobian(DoubleVector &residuals, 
+                            DenseDoubleMatrix& jacobian)
+ {
+  // get the number of degrees of freedom
+  unsigned n_dof=ndof(); 
 
 #ifdef PARANOID
- // PARANOID checks : if the distribution of residuals is setup then it must
- // must not be distributed, have the right number of rows, and the same 
- // communicator as the problem
- if (residuals.distribution_pt()->setup())
-  {
-   if (residuals.distribution_pt()->distributed())
-    {
-     std::ostringstream error_stream;
-     error_stream << "If the DoubleVector residuals is setup then it must not "
-                  << "be distributed.";
-     throw OomphLibError(error_stream.str(),
-                         "Problem::get_jacobian(...)",
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-   if (residuals.distribution_pt()->nrow() != n_dof)
-    {
-     std::ostringstream error_stream;
-     error_stream << "If the DoubleVector residuals is setup then it must have"
-                  << " the correct number of rows";
-     throw OomphLibError(error_stream.str(),
-                         "Problem::get_jacobian(...)",
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-   if (!(*Communicator_pt == *residuals.distribution_pt()->communicator_pt()))
-    {
-     std::ostringstream error_stream;
-     error_stream << "If the DoubleVector residuals is setup then it must have"
-                  << " the same communicator as the problem.";
-     throw OomphLibError(error_stream.str(),
-                         "Problem::get_jacobian(...)",
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-  }
+  // PARANOID checks : if the distribution of residuals is setup then it must
+  // must not be distributed, have the right number of rows, and the same 
+  // communicator as the problem
+  if (residuals.distribution_pt()->setup())
+   {
+    if (residuals.distribution_pt()->distributed())
+     {
+      std::ostringstream error_stream;
+      error_stream << "If the DoubleVector residuals is setup then it must not "
+                   << "be distributed.";
+      throw OomphLibError(error_stream.str(),
+                          "Problem::get_jacobian(...)",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+    if (residuals.distribution_pt()->nrow() != n_dof)
+     {
+      std::ostringstream error_stream;
+      error_stream << "If the DoubleVector residuals is setup then it must have"
+                   << " the correct number of rows";
+      throw OomphLibError(error_stream.str(),
+                          "Problem::get_jacobian(...)",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+    if (!(*Communicator_pt == *residuals.distribution_pt()->communicator_pt()))
+     {
+      std::ostringstream error_stream;
+      error_stream << "If the DoubleVector residuals is setup then it must have"
+                   << " the same communicator as the problem.";
+      throw OomphLibError(error_stream.str(),
+                          "Problem::get_jacobian(...)",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+   }
 #endif
 
- // set the residuals distribution if it is not setup
- if (!residuals.distribution_pt()->setup())
-  {
-   LinearAlgebraDistribution dist(Communicator_pt,n_dof,false);
-   residuals.rebuild(&dist,0.0);
-  }
- // else just zero the residuals
- else
-  {
-   residuals.initialise(0.0);
-  }
+  // set the residuals distribution if it is not setup
+  if (!residuals.distribution_pt()->setup())
+   {
+    LinearAlgebraDistribution dist(Communicator_pt,n_dof,false);
+    residuals.rebuild(&dist,0.0);
+   }
+  // else just zero the residuals
+  else
+   {
+    residuals.initialise(0.0);
+   }
 
- // Resize the matrices -- this cannot always be done externally
- // because get_jacobian exists in many different versions for
- // different storage formats -- resizing a CC or CR matrix doesn't
- // make sense.
+  // Resize the matrices -- this cannot always be done externally
+  // because get_jacobian exists in many different versions for
+  // different storage formats -- resizing a CC or CR matrix doesn't
+  // make sense.
 
- // resize the jacobian
- jacobian.resize(n_dof,n_dof);
- jacobian.initialise(0.0);
+  // resize the jacobian
+  jacobian.resize(n_dof,n_dof);
+  jacobian.initialise(0.0);
  
- //Locally cache pointer to assembly handler
- AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
+  //Locally cache pointer to assembly handler
+  AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
 
- //Loop over all the elements
- unsigned long n_element = Mesh_pt->nelement();
- for(unsigned long e=0;e<n_element;e++)
-  {
-   //Get the pointer to the element
-   GeneralisedElement* elem_pt = Mesh_pt->element_pt(e);  
-   //Find number of dofs in the element
-   unsigned n_element_dofs = assembly_handler_pt->ndof(elem_pt); 
-   //Set up an array
-   Vector<double> element_residuals(n_element_dofs);
-   //Set up a matrix
-   DenseMatrix<double> element_jacobian(n_element_dofs);
-   //Fill the array
-   assembly_handler_pt->get_jacobian(elem_pt,
-                                     element_residuals,element_jacobian);
-   //Now loop over the dofs and assign values to global Vector
-   for(unsigned l=0;l<n_element_dofs;l++)
-    {
-     unsigned long eqn_number = assembly_handler_pt->eqn_number(elem_pt,l);
-     residuals[eqn_number] += element_residuals[l];
-     for(unsigned l2=0;l2<n_element_dofs;l2++)
-      {
-       jacobian(eqn_number ,
-                assembly_handler_pt->eqn_number(elem_pt,l2)) += 
-        element_jacobian(l,l2);
-      }
-    }
-  }
-}
+  //Loop over all the elements
+  unsigned long n_element = Mesh_pt->nelement();
+  for(unsigned long e=0;e<n_element;e++)
+   {
+    //Get the pointer to the element
+    GeneralisedElement* elem_pt = Mesh_pt->element_pt(e);  
+    //Find number of dofs in the element
+    unsigned n_element_dofs = assembly_handler_pt->ndof(elem_pt); 
+    //Set up an array
+    Vector<double> element_residuals(n_element_dofs);
+    //Set up a matrix
+    DenseMatrix<double> element_jacobian(n_element_dofs);
+    //Fill the array
+    assembly_handler_pt->get_jacobian(elem_pt,
+                                      element_residuals,element_jacobian);
+    //Now loop over the dofs and assign values to global Vector
+    for(unsigned l=0;l<n_element_dofs;l++)
+     {
+      unsigned long eqn_number = assembly_handler_pt->eqn_number(elem_pt,l);
+      residuals[eqn_number] += element_residuals[l];
+      for(unsigned l2=0;l2<n_element_dofs;l2++)
+       {
+        jacobian(eqn_number ,
+                 assembly_handler_pt->eqn_number(elem_pt,l2)) += 
+         element_jacobian(l,l2);
+       }
+     }
+   }
+ }
 
 //=============================================================================
 /// Return the fully-assembled Jacobian and residuals for the problem,
@@ -990,171 +991,171 @@ void Problem::get_jacobian(DoubleVector &residuals,
 /// 2) if the distribution is distributed then it must be the default 
 /// distribution. \n
 //=============================================================================
-void Problem::get_jacobian(DoubleVector &residuals, CRDoubleMatrix &jacobian)
-{
+ void Problem::get_jacobian(DoubleVector &residuals, CRDoubleMatrix &jacobian)
+ {
  
- // Three different cases; if MPI_Helpers::MPI_has_been_initialised=true 
- // this means MPI_Helpers::setup() has been called.  This could happen on a
- // code compiled with MPI but run serially; in this instance the
- // get_residuals function still works on one processor.
- //
- // Secondly, if a code has been compiled with MPI, but MPI_Helpers::setup()
- // has not been called, then MPI_Helpers::MPI_has_been_initialised=false 
- // and the code calls...
- //
- // Thirdly, the serial version (compiled by all, but only run when compiled
- // with MPI if MPI_Helpers::MPI_has_been_initialised=false
- //
- // The only case where an MPI code cannot run serially at present
- // is one where the distribute function is used (i.e. METIS is called)
+  // Three different cases; if MPI_Helpers::MPI_has_been_initialised=true 
+  // this means MPI_Helpers::setup() has been called.  This could happen on a
+  // code compiled with MPI but run serially; in this instance the
+  // get_residuals function still works on one processor.
+  //
+  // Secondly, if a code has been compiled with MPI, but MPI_Helpers::setup()
+  // has not been called, then MPI_Helpers::MPI_has_been_initialised=false 
+  // and the code calls...
+  //
+  // Thirdly, the serial version (compiled by all, but only run when compiled
+  // with MPI if MPI_Helpers::MPI_has_been_initialised=false
+  //
+  // The only case where an MPI code cannot run serially at present
+  // is one where the distribute function is used (i.e. METIS is called)
 
- //Allocate storage for the matrix entries
- //The generalised Vector<Vector<>> structure is required
- //for the most general interface to sparse_assemble() which allows
- //the assembly of multiple matrices at once.
- Vector<Vector<int> > column_index(1);
- Vector<Vector<int> > row_start(1);
- Vector<Vector<double> > value(1); 
+  //Allocate storage for the matrix entries
+  //The generalised Vector<Vector<>> structure is required
+  //for the most general interface to sparse_assemble() which allows
+  //the assembly of multiple matrices at once.
+  Vector<Vector<int> > column_index(1);
+  Vector<Vector<int> > row_start(1);
+  Vector<Vector<double> > value(1); 
  
 #ifdef PARANOID
- // PARANOID checks that the distribution of the jacobian matches that of the
- // residuals (if they are setup) and that they have the right number of rows
- if (residuals.distribution_pt()->setup() && 
-     jacobian.distribution_pt()->setup())
-  {
-   if (!(*residuals.distribution_pt() == *jacobian.distribution_pt()))
-    {                                    
-     std::ostringstream error_stream;
-     error_stream << "If the distribution of the residuals must "
-                  << "be the same as the distribution of the jacobian."; 
-     throw OomphLibError(error_stream.str(),              
-                         "Problem::get_jacobian(...)", 
-                         OOMPH_EXCEPTION_LOCATION); 
-    }                                                 
-   if (jacobian.distribution_pt()->nrow() != this->ndof())
-    {
-     std::ostringstream error_stream;       
-     error_stream << "The distribution of the jacobian and residuals does not"
-                  << "have the correct number of global rows.";
+  // PARANOID checks that the distribution of the jacobian matches that of the
+  // residuals (if they are setup) and that they have the right number of rows
+  if (residuals.distribution_pt()->setup() && 
+      jacobian.distribution_pt()->setup())
+   {
+    if (!(*residuals.distribution_pt() == *jacobian.distribution_pt()))
+     {                                    
+      std::ostringstream error_stream;
+      error_stream << "If the distribution of the residuals must "
+                   << "be the same as the distribution of the jacobian."; 
+      throw OomphLibError(error_stream.str(),              
+                          "Problem::get_jacobian(...)", 
+                          OOMPH_EXCEPTION_LOCATION); 
+     }                                                 
+    if (jacobian.distribution_pt()->nrow() != this->ndof())
+     {
+      std::ostringstream error_stream;       
+      error_stream << "The distribution of the jacobian and residuals does not"
+                   << "have the correct number of global rows.";
       throw OomphLibError(error_stream.str(),                      
                           "Problem::get_jacobian(...)",       
                           OOMPH_EXCEPTION_LOCATION);              
-    }                 
-  }
- else if (residuals.distribution_pt()->setup() != 
-          jacobian.distribution_pt()->setup())
-  {
-     std::ostringstream error_stream; 
-     error_stream << "The distribution of the jacobian and residuals must "
-                  << "both be setup or both not setup";
-     throw OomphLibError(error_stream.str(),                           
-                         "Problem::get_jacobian(...)",              
-                         OOMPH_EXCEPTION_LOCATION); 
-  } 
+     }                 
+   }
+  else if (residuals.distribution_pt()->setup() != 
+           jacobian.distribution_pt()->setup())
+   {
+    std::ostringstream error_stream; 
+    error_stream << "The distribution of the jacobian and residuals must "
+                 << "both be setup or both not setup";
+    throw OomphLibError(error_stream.str(),                           
+                        "Problem::get_jacobian(...)",              
+                        OOMPH_EXCEPTION_LOCATION); 
+   } 
 #endif 
 
 
- //Allocate generalised storage format for passing to sparse_assemble()
- Vector<Vector<double>* > residuals_vector(1);
- residuals_vector[0] = new Vector<double>();
+  //Allocate generalised storage format for passing to sparse_assemble()
+  Vector<Vector<double>* > residuals_vector(1);
+  residuals_vector[0] = new Vector<double>();
  
- // determine whether the matrix is distributed (yes if multiple processors)
- bool distributed = true;
- if (Communicator_pt->nproc() == 1)
-  {
-   distributed = false;
-  }
+  // determine whether the matrix is distributed (yes if multiple processors)
+  bool distributed = true;
+  if (Communicator_pt->nproc() == 1)
+   {
+    distributed = false;
+   }
 
- // create a temporary distribution
- LinearAlgebraDistribution* dist_pt;
- if (jacobian.distribution_pt()->setup())
-  {
-   dist_pt = new LinearAlgebraDistribution(jacobian.distribution_pt());
-  }
- else
-  {
-   dist_pt = new LinearAlgebraDistribution(Communicator_pt,
-                                           this->ndof(),distributed);
-   jacobian.rebuild(dist_pt);
-  }
+  // create a temporary distribution
+  LinearAlgebraDistribution* dist_pt;
+  if (jacobian.distribution_pt()->setup())
+   {
+    dist_pt = new LinearAlgebraDistribution(jacobian.distribution_pt());
+   }
+  else
+   {
+    dist_pt = new LinearAlgebraDistribution(Communicator_pt,
+                                            this->ndof(),distributed);
+    jacobian.rebuild(dist_pt);
+   }
 
- //The matrix is in compressed row format
- bool compressed_row_flag=true;
+  //The matrix is in compressed row format
+  bool compressed_row_flag=true;
 
 #ifdef OOMPH_HAS_MPI
- // assemble distributed matrix and vector
- if (dist_pt->distributed())
-  {   
-   // temp ints for nrow_local and nrow total and first_row
-   unsigned long n_row_local;
-   unsigned long n_row_total;
-   unsigned long first_row;
+  // assemble distributed matrix and vector
+  if (dist_pt->distributed())
+   {   
+    // temp ints for nrow_local and nrow total and first_row
+    unsigned long n_row_local;
+    unsigned long n_row_total;
+    unsigned long first_row;
 
-   // Get my block of rows                                     
-   distributed_matrix_sparse_assemble(column_index,     
-                                      row_start,                           
-                                      value,                                  
-                                      residuals_vector,          
-                                      first_row,                   
-                                      n_row_local,           
-                                      n_row_total,         
-                                      compressed_row_flag);
+    // Get my block of rows                                     
+    distributed_matrix_sparse_assemble(column_index,     
+                                       row_start,                           
+                                       value,                                  
+                                       residuals_vector,          
+                                       first_row,                   
+                                       n_row_local,           
+                                       n_row_total,         
+                                       compressed_row_flag);
 
 #ifdef PARANOID
-   // final paranoid check the first row and nrow_local of the assembled 
-   // matrices and vectors are the same as the requested distribution.
-   // OR: the requested distribution is the default distribution.
-   if (dist_pt->first_row() != first_row || 
-       dist_pt->nrow_local() != n_row_local)
-    {
-     std::ostringstream error_stream;                                       
-     error_stream << "get_jacobian can only assemble the default distribution "
-                  << "the requested (distributed) distribution does not have "
-                  << "the same set of nrow_local and first_row.";
-     throw OomphLibError(error_stream.str(),                        
-                         "Problem::get_jacobian(...)",          
-                         OOMPH_EXCEPTION_LOCATION);    
-    }
+    // final paranoid check the first row and nrow_local of the assembled 
+    // matrices and vectors are the same as the requested distribution.
+    // OR: the requested distribution is the default distribution.
+    if (dist_pt->first_row() != first_row || 
+        dist_pt->nrow_local() != n_row_local)
+     {
+      std::ostringstream error_stream;                                       
+      error_stream << "get_jacobian can only assemble the default distribution "
+                   << "the requested (distributed) distribution does not have "
+                   << "the same set of nrow_local and first_row.";
+      throw OomphLibError(error_stream.str(),                        
+                          "Problem::get_jacobian(...)",          
+                          OOMPH_EXCEPTION_LOCATION);    
+     }
 #endif     
-  }
- // else we assemble the non distributed jacobian and residuals
- else
-  {
-   // Get matrix rows and residual in CR format
-   global_matrix_sparse_assemble(column_index,
-                                 row_start,
-                                 value,
-                                 residuals_vector,
-                                 compressed_row_flag);
-  }
+   }
+  // else we assemble the non distributed jacobian and residuals
+  else
+   {
+    // Get matrix rows and residual in CR format
+    global_matrix_sparse_assemble(column_index,
+                                  row_start,
+                                  value,
+                                  residuals_vector,
+                                  compressed_row_flag);
+   }
 #else
- //Call the helper function sparse_assemble
- sparse_assemble_row_or_column_compressed(column_index,
-                                          row_start,
-                                          value,
-                                          residuals_vector,
-                                          compressed_row_flag);
+  //Call the helper function sparse_assemble
+  sparse_assemble_row_or_column_compressed(column_index,
+                                           row_start,
+                                           value,
+                                           residuals_vector,
+                                           compressed_row_flag);
 #endif
 
- //Build the jacobian
+  //Build the jacobian
 
- //The jacobian is the first (and only) matrix assembled by this function
- jacobian.rebuild_matrix(dist_pt->nrow(),
-                         value[0],column_index[0],row_start[0]);
+  //The jacobian is the first (and only) matrix assembled by this function
+  jacobian.rebuild_matrix(dist_pt->nrow(),
+                          value[0],column_index[0],row_start[0]);
 
- //build the residuals
- // copy to the residuals DoubleVector
- residuals.rebuild(dist_pt);
- unsigned nrow_local = dist_pt->nrow_local();
- for (unsigned i = 0; i < nrow_local; i++)
-  {
-   residuals[i] = (*residuals_vector[0])[i];
-  }
+  //build the residuals
+  // copy to the residuals DoubleVector
+  residuals.rebuild(dist_pt);
+  unsigned nrow_local = dist_pt->nrow_local();
+  for (unsigned i = 0; i < nrow_local; i++)
+   {
+    residuals[i] = (*residuals_vector[0])[i];
+   }
 
- // clean up dist_pt and residuals_vector pt
- delete dist_pt;
- delete residuals_vector[0];
-}
+  // clean up dist_pt and residuals_vector pt
+  delete dist_pt;
+  delete residuals_vector[0];
+ }
 
 
 //=============================================================================
@@ -1162,130 +1163,130 @@ void Problem::get_jacobian(DoubleVector &residuals, CRDoubleMatrix &jacobian)
 /// in the case when the jacobian matrix is in column-compressed storage
 /// format.
 //=============================================================================
-void Problem::get_jacobian(DoubleVector &residuals, CCDoubleMatrix &jacobian)
-{
- // Three different cases; if MPI_Helpers::MPI_has_been_initialised=true 
- // this means MPI_Helpers::setup() has been called.  This could happen on a
- // code compiled with MPI but run serially; in this instance the
- // get_residuals function still works on one processor.
- //
- // Secondly, if a code has been compiled with MPI, but MPI_Helpers::setup()
- // has not been called, then MPI_Helpers::MPI_has_been_initialised=false 
- // and the code calls...
- //
- // Thirdly, the serial version (compiled by all, but only run when compiled
- // with MPI if MPI_Helpers::MPI_has_been_5Binitialised=false
- //
- // The only case where an MPI code cannot run serially at present
- // is one where the distribute function is used (i.e. METIS is called)
+ void Problem::get_jacobian(DoubleVector &residuals, CCDoubleMatrix &jacobian)
+ {
+  // Three different cases; if MPI_Helpers::MPI_has_been_initialised=true 
+  // this means MPI_Helpers::setup() has been called.  This could happen on a
+  // code compiled with MPI but run serially; in this instance the
+  // get_residuals function still works on one processor.
+  //
+  // Secondly, if a code has been compiled with MPI, but MPI_Helpers::setup()
+  // has not been called, then MPI_Helpers::MPI_has_been_initialised=false 
+  // and the code calls...
+  //
+  // Thirdly, the serial version (compiled by all, but only run when compiled
+  // with MPI if MPI_Helpers::MPI_has_been_5Binitialised=false
+  //
+  // The only case where an MPI code cannot run serially at present
+  // is one where the distribute function is used (i.e. METIS is called)
 
- // get the number of degrees of freedom  
- unsigned n_dof=ndof();   
+  // get the number of degrees of freedom  
+  unsigned n_dof=ndof();   
 
 #ifdef PARANOID   
- // PARANOID checks : if the distribution of residuals is setup then it must
- // must not be distributed, have the right number of rows, and the same 
- // communicator as the problem   
- if (residuals.distribution_pt()->setup())
-  {                                                            
-   if (residuals.distribution_pt()->distributed())  
-    {                  
-     std::ostringstream error_stream;                
-     error_stream << "If the DoubleVector residuals is setup then it must not "
-                  << "be distributed.";         
-     throw OomphLibError(error_stream.str(),      
-                         "Problem::get_jacobian(...)",      
-                         OOMPH_EXCEPTION_LOCATION);       
-    }                                        
-   if (residuals.distribution_pt()->nrow() != n_dof)     
-    {                               
-     std::ostringstream error_stream;                 
-     error_stream << "If the DoubleVector residuals is setup then it must have"
-                  << " the correct number of rows";     
-     throw OomphLibError(error_stream.str(),                          
-                         "Problem::get_jacobian(...)",     
-                         OOMPH_EXCEPTION_LOCATION);        
-    }                                 
-   if (!(*Communicator_pt == *residuals.distribution_pt()->communicator_pt()))
-    {                  
-     std::ostringstream error_stream;      
-     error_stream << "If the DoubleVector residuals is setup then it must have"
-                  << " the same communicator as the problem.";  
-     throw OomphLibError(error_stream.str(),                  
-                         "Problem::get_jacobian(...)",     
-                         OOMPH_EXCEPTION_LOCATION);       
-    }                                                
-  }                                           
+  // PARANOID checks : if the distribution of residuals is setup then it must
+  // must not be distributed, have the right number of rows, and the same 
+  // communicator as the problem   
+  if (residuals.distribution_pt()->setup())
+   {                                                            
+    if (residuals.distribution_pt()->distributed())  
+     {                  
+      std::ostringstream error_stream;                
+      error_stream << "If the DoubleVector residuals is setup then it must not "
+                   << "be distributed.";         
+      throw OomphLibError(error_stream.str(),      
+                          "Problem::get_jacobian(...)",      
+                          OOMPH_EXCEPTION_LOCATION);       
+     }                                        
+    if (residuals.distribution_pt()->nrow() != n_dof)     
+     {                               
+      std::ostringstream error_stream;                 
+      error_stream << "If the DoubleVector residuals is setup then it must have"
+                   << " the correct number of rows";     
+      throw OomphLibError(error_stream.str(),                          
+                          "Problem::get_jacobian(...)",     
+                          OOMPH_EXCEPTION_LOCATION);        
+     }                                 
+    if (!(*Communicator_pt == *residuals.distribution_pt()->communicator_pt()))
+     {                  
+      std::ostringstream error_stream;      
+      error_stream << "If the DoubleVector residuals is setup then it must have"
+                   << " the same communicator as the problem.";  
+      throw OomphLibError(error_stream.str(),                  
+                          "Problem::get_jacobian(...)",     
+                          OOMPH_EXCEPTION_LOCATION);       
+     }                                                
+   }                                           
 #endif  
 
- //Allocate storage for the matrix entries
- //The generalised Vector<Vector<>> structure is required
- //for the most general interface to sparse_assemble() which allows
- //the assembly of multiple matrices at once.
- Vector<Vector<int> > row_index(1);
- Vector<Vector<int> > column_start(1);
- Vector<Vector<double> > value(1); 
- //Allocate generalised storage format for passing to sparse_assemble()
- Vector<Vector<double>*> residuals_vector(1);
- //Set the residuals passed to sparse assemble to be those passed
- //into this function
- residuals_vector[0] = new Vector<double>;
+  //Allocate storage for the matrix entries
+  //The generalised Vector<Vector<>> structure is required
+  //for the most general interface to sparse_assemble() which allows
+  //the assembly of multiple matrices at once.
+  Vector<Vector<int> > row_index(1);
+  Vector<Vector<int> > column_start(1);
+  Vector<Vector<double> > value(1); 
+  //Allocate generalised storage format for passing to sparse_assemble()
+  Vector<Vector<double>*> residuals_vector(1);
+  //Set the residuals passed to sparse assemble to be those passed
+  //into this function
+  residuals_vector[0] = new Vector<double>;
  
- //The matrix is in compressed column format
- bool compressed_row_flag=false;
+  //The matrix is in compressed column format
+  bool compressed_row_flag=false;
  
 #ifdef OOMPH_HAS_MPI
- if (MPI_Helpers::MPI_has_been_initialised)
-  {
-   // Get matrix rows and residual in CC format
-   global_matrix_sparse_assemble(row_index,
-                                 column_start,
-                                 value,
-                                 residuals_vector,
-                                 compressed_row_flag);
-  }
- else
+  if (MPI_Helpers::MPI_has_been_initialised)
+   {
+    // Get matrix rows and residual in CC format
+    global_matrix_sparse_assemble(row_index,
+                                  column_start,
+                                  value,
+                                  residuals_vector,
+                                  compressed_row_flag);
+   }
+  else
 #endif
-  {
-   //Call the helper function sparse_assemble
-   sparse_assemble_row_or_column_compressed(row_index,
-                                            column_start,
-                                            value,
-                                            residuals_vector,
-                                            compressed_row_flag);
-  }
+   {
+    //Call the helper function sparse_assemble
+    sparse_assemble_row_or_column_compressed(row_index,
+                                             column_start,
+                                             value,
+                                             residuals_vector,
+                                             compressed_row_flag);
+   }
  
- // create a temporary distribution             
- LinearAlgebraDistribution* dist_pt;        
- if (residuals.distribution_pt()->setup()) 
-  {
-   dist_pt = new LinearAlgebraDistribution(*residuals.distribution_pt());
-  }                                                           
- else                             
-  {                                                   
-   dist_pt = new LinearAlgebraDistribution(Communicator_pt,this->ndof(),false);
-  }                               
+  // create a temporary distribution             
+  LinearAlgebraDistribution* dist_pt;        
+  if (residuals.distribution_pt()->setup()) 
+   {
+    dist_pt = new LinearAlgebraDistribution(*residuals.distribution_pt());
+   }                                                           
+  else                             
+   {                                                   
+    dist_pt = new LinearAlgebraDistribution(Communicator_pt,this->ndof(),false);
+   }                               
 
- //Build the jacobian                          
- //The jacobian is the first (and only) matrix assembled by this function   
- jacobian.build(value[0],row_index[0],column_start[0],n_dof,n_dof);     
+  //Build the jacobian                          
+  //The jacobian is the first (and only) matrix assembled by this function   
+  jacobian.build(value[0],row_index[0],column_start[0],n_dof,n_dof);     
                                                         
- //build the residuals                                                
- // copy to the residuals DoubleVector 
- residuals.rebuild(dist_pt);                                    
- unsigned nrow_local = dist_pt->nrow_local();
- for (unsigned i = 0; i < nrow_local; i++)   
-  {                                           
-   residuals[i] = (*residuals_vector[0])[i];  
-  }                                       
+  //build the residuals                                                
+  // copy to the residuals DoubleVector 
+  residuals.rebuild(dist_pt);                                    
+  unsigned nrow_local = dist_pt->nrow_local();
+  for (unsigned i = 0; i < nrow_local; i++)   
+   {                                           
+    residuals[i] = (*residuals_vector[0])[i];  
+   }                                       
                                                                  
- // clean up dist_pt and residuals_vector pt               
- delete dist_pt;                                                   
- delete residuals_vector[0];   
-}
+  // clean up dist_pt and residuals_vector pt               
+  delete dist_pt;                                                   
+  delete residuals_vector[0];   
+ }
 
 /*
-#ifdef OOMPH_HAS_MPI
+  #ifdef OOMPH_HAS_MPI
 
 //=============================================================================
 /// Compute the fully-assembled Jacobian and residuals for the problem.
@@ -1294,47 +1295,47 @@ void Problem::get_jacobian(DoubleVector &residuals, CCDoubleMatrix &jacobian)
 /// Returns the residual vector as a distributed vector
 //=============================================================================
 void Problem::get_jacobian(DistributedVector<double> &residuals,
-                           DistributedCRDoubleMatrix &jacobian)
+DistributedCRDoubleMatrix &jacobian)
 {
- // Provide storage
- Vector<Vector<int> > column_index(1);
- Vector<Vector<int> > row_start(1);
- Vector<Vector<double> > value(1);
- Vector<Vector<double>*> residuals_vector(1);
- Vector<double> temp_residuals;
- residuals_vector[0] = &temp_residuals;
- unsigned long first_row;
- unsigned long n_row_local;
- unsigned long n_row_total;
+// Provide storage
+Vector<Vector<int> > column_index(1);
+Vector<Vector<int> > row_start(1);
+Vector<Vector<double> > value(1);
+Vector<Vector<double>*> residuals_vector(1);
+Vector<double> temp_residuals;
+residuals_vector[0] = &temp_residuals;
+unsigned long first_row;
+unsigned long n_row_local;
+unsigned long n_row_total;
  
- // Get my block of rows
- distributed_matrix_sparse_assemble(column_index,
-                                    row_start,
-                                    value,
-                                    residuals_vector,
-                                    first_row,
-                                    n_row_local,
-                                    n_row_total,
-                                    true);
+// Get my block of rows
+distributed_matrix_sparse_assemble(column_index,
+row_start,
+value,
+residuals_vector,
+first_row,
+n_row_local,
+n_row_total,
+true);
 
- // create the distribution to assemble the distributed jacobian and residal
- DistributionInfo my_distribution(MPI_COMM_WORLD,first_row,n_row_local,
-                                  n_row_total);
+// create the distribution to assemble the distributed jacobian and residal
+DistributionInfo my_distribution(MPI_COMM_WORLD,first_row,n_row_local,
+n_row_total);
 
- // and then assembled the distributed matrix
- jacobian.build(value[0],
-                column_index[0],
-                row_start[0],
-                my_distribution,
-                n_row_total);
+// and then assembled the distributed matrix
+jacobian.build(value[0],
+column_index[0],
+row_start[0],
+my_distribution,
+n_row_total);
 
- // and then assemble the distributed vector
- residuals.distribute(my_distribution);
- unsigned nrow_local = my_distribution.nrow_local();
- for (unsigned i = 0; i < nrow_local; i++)
-  {
-   residuals[i] = temp_residuals[i];
-  }
+// and then assemble the distributed vector
+residuals.distribute(my_distribution);
+unsigned nrow_local = my_distribution.nrow_local();
+for (unsigned i = 0; i < nrow_local; i++)
+{
+ residuals[i] = temp_residuals[i];
+}
 }
 
 #endif
@@ -1380,7 +1381,7 @@ void Problem::sparse_assemble_row_or_column_compressed(
     residuals,
     compressed_row_flag);
 
-    break;
+   break;
 
   case Perform_assembly_using_two_vectors:
 
@@ -1488,7 +1489,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_maps(
  //Find the number of matrices to be assembled
  const unsigned n_matrix = column_or_row_index.size();
 
-  //Locally cache pointer to assembly handler
+ //Locally cache pointer to assembly handler
  AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
 
 //Error check dimensions
@@ -1508,7 +1509,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_maps(
     OOMPH_EXCEPTION_LOCATION);
   }
 
-if(value.size() != n_matrix)
+ if(value.size() != n_matrix)
   {
    std::ostringstream error_stream;
    error_stream
@@ -1573,63 +1574,63 @@ if(value.size() != n_matrix)
      {
 #endif
 
-    //Find number of degrees of freedom in the element
-    const unsigned nvar = assembly_handler_pt->ndof(elem_pt);
+      //Find number of degrees of freedom in the element
+      const unsigned nvar = assembly_handler_pt->ndof(elem_pt);
 
-    //Resize the storage for elemental jacobian and residuals
-    for(unsigned v=0;v<n_vector;v++) {el_residuals[v].resize(nvar);}
-    for(unsigned m=0;m<n_matrix;m++) {el_jacobian[m].resize(nvar);}
+      //Resize the storage for elemental jacobian and residuals
+      for(unsigned v=0;v<n_vector;v++) {el_residuals[v].resize(nvar);}
+      for(unsigned m=0;m<n_matrix;m++) {el_jacobian[m].resize(nvar);}
     
-    //Now get the residuals and jacobian for the element
-    assembly_handler_pt->
-     get_all_vectors_and_matrices(elem_pt,el_residuals, el_jacobian);
+      //Now get the residuals and jacobian for the element
+      assembly_handler_pt->
+       get_all_vectors_and_matrices(elem_pt,el_residuals, el_jacobian);
 
-    //---------------Insert the values into the maps--------------
+      //---------------Insert the values into the maps--------------
 
-    //Loop over the first index of local variables
-    for(unsigned i=0;i<nvar;i++)
-     {
-      //Get the local equation number
-      unsigned eqn_number = assembly_handler_pt->eqn_number(elem_pt,i);
-      //Add the contribution to the residuals
-      for(unsigned v=0;v<n_vector;v++)
+      //Loop over the first index of local variables
+      for(unsigned i=0;i<nvar;i++)
        {
-        //Fill in each residuals vector
-        (*residuals[v])[eqn_number] += el_residuals[v][i];
-       }
-
-      //Now loop over the other index
-      for(unsigned j=0;j<nvar;j++)
-       {
-        //Get the number of the unknown
-        unsigned unknown = assembly_handler_pt->eqn_number(elem_pt,j);
-
-        //Loop over the matrices
-        for(unsigned m=0;m<n_matrix;m++)
+        //Get the local equation number
+        unsigned eqn_number = assembly_handler_pt->eqn_number(elem_pt,i);
+        //Add the contribution to the residuals
+        for(unsigned v=0;v<n_vector;v++)
          {
-          //Get the value of the matrix at this point
-          double value = el_jacobian[m](i,j);
-          //Only bother to add to the map if it's non-zero
-          if(std::abs(value) > Numerical_zero_for_sparse_assembly)
+          //Fill in each residuals vector
+          (*residuals[v])[eqn_number] += el_residuals[v][i];
+         }
+
+        //Now loop over the other index
+        for(unsigned j=0;j<nvar;j++)
+         {
+          //Get the number of the unknown
+          unsigned unknown = assembly_handler_pt->eqn_number(elem_pt,j);
+
+          //Loop over the matrices
+          for(unsigned m=0;m<n_matrix;m++)
            {
-            //If it's compressed row storage, then our vector of maps
-            //is indexed by row (equation number)
-            if(compressed_row_flag)
+            //Get the value of the matrix at this point
+            double value = el_jacobian[m](i,j);
+            //Only bother to add to the map if it's non-zero
+            if(std::abs(value) > Numerical_zero_for_sparse_assembly)
              {
-              //Add the data into the map using the unknown as the map key
-              matrix_data_map[m][eqn_number][unknown] += value;
+              //If it's compressed row storage, then our vector of maps
+              //is indexed by row (equation number)
+              if(compressed_row_flag)
+               {
+                //Add the data into the map using the unknown as the map key
+                matrix_data_map[m][eqn_number][unknown] += value;
+               }
+              //Otherwise it's compressed column storage and our vector is
+              //indexed by column (the unknown)
+              else
+               {
+                //Add the data into the map using the eqn_numbe as the map key
+                matrix_data_map[m][unknown][eqn_number] += value;
+               }
              }
-            //Otherwise it's compressed column storage and our vector is
-            //indexed by column (the unknown)
-            else
-             {
-              //Add the data into the map using the eqn_numbe as the map key
-              matrix_data_map[m][unknown][eqn_number] += value;
-             }
-           }
-         } //End of loop over matrices
+           } //End of loop over matrices
+         }
        }
-     }
 
 #ifdef OOMPH_HAS_MPI
      } // endif halo element
@@ -1763,7 +1764,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_lists(
     OOMPH_EXCEPTION_LOCATION);
   }
 
-if(value.size() != n_matrix)
+ if(value.size() != n_matrix)
   {
    std::ostringstream error_stream;
    error_stream
@@ -1830,73 +1831,73 @@ if(value.size() != n_matrix)
      {
 #endif
 
-    //Find number of degrees of freedom in the element
-    const unsigned nvar = assembly_handler_pt->ndof(elem_pt);
+      //Find number of degrees of freedom in the element
+      const unsigned nvar = assembly_handler_pt->ndof(elem_pt);
     
-    //Resize the storage for the elemental jacobian and residuals
-    for(unsigned v=0;v<n_vector;v++) {el_residuals[v].resize(nvar);}
-    for(unsigned m=0;m<n_matrix;m++) {el_jacobian[m].resize(nvar);}
+      //Resize the storage for the elemental jacobian and residuals
+      for(unsigned v=0;v<n_vector;v++) {el_residuals[v].resize(nvar);}
+      for(unsigned m=0;m<n_matrix;m++) {el_jacobian[m].resize(nvar);}
     
-    //Now get the residuals and jacobian for the element
-    assembly_handler_pt->
-     get_all_vectors_and_matrices(elem_pt,el_residuals, el_jacobian);
+      //Now get the residuals and jacobian for the element
+      assembly_handler_pt->
+       get_all_vectors_and_matrices(elem_pt,el_residuals, el_jacobian);
     
-    //---------------- Insert the values into the lists -----------
+      //---------------- Insert the values into the lists -----------
       
-    //Loop over the first index of local variables
-    for(unsigned i=0;i<nvar;i++)
-     {
-      //Get the local equation number
-      unsigned eqn_number = assembly_handler_pt->eqn_number(elem_pt,i);
-      //Add the contribution to the residuals
-      for(unsigned v=0;v<n_vector;v++)
+      //Loop over the first index of local variables
+      for(unsigned i=0;i<nvar;i++)
        {
-        //Fill in the residuals vector
-        (*residuals[v])[eqn_number] += el_residuals[v][i];
-       }
-
-      //Now loop over the other index
-      for(unsigned j=0;j<nvar;j++)
-       {
-        //Get the number of the unknown
-        unsigned unknown = assembly_handler_pt->eqn_number(elem_pt,j);
-          
-        //Loop over the matrices
-        for(unsigned m=0;m<n_matrix;m++)
+        //Get the local equation number
+        unsigned eqn_number = assembly_handler_pt->eqn_number(elem_pt,i);
+        //Add the contribution to the residuals
+        for(unsigned v=0;v<n_vector;v++)
          {
-          //Get the value of the matrix at this point
-          double value = el_jacobian[m](i,j);
-          //Only add to theif it's non-zero
-          if(std::abs(value) > Numerical_zero_for_sparse_assembly)
+          //Fill in the residuals vector
+          (*residuals[v])[eqn_number] += el_residuals[v][i];
+         }
+
+        //Now loop over the other index
+        for(unsigned j=0;j<nvar;j++)
+         {
+          //Get the number of the unknown
+          unsigned unknown = assembly_handler_pt->eqn_number(elem_pt,j);
+          
+          //Loop over the matrices
+          for(unsigned m=0;m<n_matrix;m++)
            {
-            //If it's compressed row storage, then our vector is indexed
-            //by row (the equation number)
-            if(compressed_row_flag)
+            //Get the value of the matrix at this point
+            double value = el_jacobian[m](i,j);
+            //Only add to theif it's non-zero
+            if(std::abs(value) > Numerical_zero_for_sparse_assembly)
              {
-              //Find the list that corresponds to the desired row
-              list_pt = &matrix_data_list[m][eqn_number];
-              //Insert the data into the list, the first entry
-              //in the pair is the unknown (column index),
-              //the second is the value itself.
-              list_pt->
-               insert(list_pt->end(),std::make_pair(unknown,value));
-             }
-            //Otherwise it's compressed column storage, and our
-            //vector is indexed by column (the unknown)
-            else
-             {
-              //Find the list that corresponds to the desired column
-              list_pt = &matrix_data_list[m][unknown];
-              //Insert the data into the list, the first entry
-              //in the pair is the equation number (row index),
-              //the second is the value itself.
-              list_pt->
-               insert(list_pt->end(),std::make_pair(eqn_number,value));
+              //If it's compressed row storage, then our vector is indexed
+              //by row (the equation number)
+              if(compressed_row_flag)
+               {
+                //Find the list that corresponds to the desired row
+                list_pt = &matrix_data_list[m][eqn_number];
+                //Insert the data into the list, the first entry
+                //in the pair is the unknown (column index),
+                //the second is the value itself.
+                list_pt->
+                 insert(list_pt->end(),std::make_pair(unknown,value));
+               }
+              //Otherwise it's compressed column storage, and our
+              //vector is indexed by column (the unknown)
+              else
+               {
+                //Find the list that corresponds to the desired column
+                list_pt = &matrix_data_list[m][unknown];
+                //Insert the data into the list, the first entry
+                //in the pair is the equation number (row index),
+                //the second is the value itself.
+                list_pt->
+                 insert(list_pt->end(),std::make_pair(eqn_number,value));
+               }
              }
            }
          }
        }
-     }
 
 #ifdef OOMPH_HAS_MPI
      } // endif halo element
@@ -2089,7 +2090,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_vectors_of_pairs(
     OOMPH_EXCEPTION_LOCATION);
   }
 
-if(value.size() != n_matrix)
+ if(value.size() != n_matrix)
   {
    std::ostringstream error_stream;
    error_stream
@@ -2144,100 +2145,100 @@ if(value.size() != n_matrix)
      {
 #endif
 
-    //Find number of degrees of freedom in the element
-    const unsigned nvar = assembly_handler_pt->ndof(elem_pt);
+      //Find number of degrees of freedom in the element
+      const unsigned nvar = assembly_handler_pt->ndof(elem_pt);
 
-    //Resize the storage for elemental jacobian and residuals
-    for(unsigned v=0;v<n_vector;v++) {el_residuals[v].resize(nvar);}
-    for(unsigned m=0;m<n_matrix;m++) {el_jacobian[m].resize(nvar);}
+      //Resize the storage for elemental jacobian and residuals
+      for(unsigned v=0;v<n_vector;v++) {el_residuals[v].resize(nvar);}
+      for(unsigned m=0;m<n_matrix;m++) {el_jacobian[m].resize(nvar);}
 
-    //Now get the residuals and jacobian for the element
-    assembly_handler_pt->
-     get_all_vectors_and_matrices(elem_pt,el_residuals, el_jacobian);
+      //Now get the residuals and jacobian for the element
+      assembly_handler_pt->
+       get_all_vectors_and_matrices(elem_pt,el_residuals, el_jacobian);
     
-    //---------------Insert the values into the vectors--------------
+      //---------------Insert the values into the vectors--------------
     
-    //Loop over the first index of local variables
-    for(unsigned i=0;i<nvar;i++)
-     {
-      //Get the local equation number
-      unsigned eqn_number = assembly_handler_pt->eqn_number(elem_pt,i);
-      //Add the contribution to the residuals
-      for(unsigned v=0;v<n_vector;v++)
+      //Loop over the first index of local variables
+      for(unsigned i=0;i<nvar;i++)
        {
-        //Fill in each residuals vector
-        (*residuals[v])[eqn_number] += el_residuals[v][i];
-       }
-      
-      //Now loop over the other index
-      for(unsigned j=0;j<nvar;j++)
-       {
-        //Get the number of the unknown
-        unsigned unknown = assembly_handler_pt->eqn_number(elem_pt,j);
-        
-        //Loop over the matrices
-        //If it's compressed row storage, then our vector of maps
-        //is indexed by row (equation number)
-        for(unsigned m=0;m<n_matrix;m++)
+        //Get the local equation number
+        unsigned eqn_number = assembly_handler_pt->eqn_number(elem_pt,i);
+        //Add the contribution to the residuals
+        for(unsigned v=0;v<n_vector;v++)
          {
-          //Get the value of the matrix at this point
-          double value = el_jacobian[m](i,j);
-          //Only bother to add to the vector if it's non-zero
-          if(std::abs(value) > Numerical_zero_for_sparse_assembly)
+          //Fill in each residuals vector
+          (*residuals[v])[eqn_number] += el_residuals[v][i];
+         }
+      
+        //Now loop over the other index
+        for(unsigned j=0;j<nvar;j++)
+         {
+          //Get the number of the unknown
+          unsigned unknown = assembly_handler_pt->eqn_number(elem_pt,j);
+        
+          //Loop over the matrices
+          //If it's compressed row storage, then our vector of maps
+          //is indexed by row (equation number)
+          for(unsigned m=0;m<n_matrix;m++)
            {
-            //If it's compressed row storage, then our vector of maps
-            //is indexed by row (equation number)
-            if(compressed_row_flag)
+            //Get the value of the matrix at this point
+            double value = el_jacobian[m](i,j);
+            //Only bother to add to the vector if it's non-zero
+            if(std::abs(value) > Numerical_zero_for_sparse_assembly)
              {
-              //Find the correct position and add the data into the vectors
-              const unsigned size = matrix_data[m][eqn_number].size();
-              for(unsigned k=0; k<=size; k++)
+              //If it's compressed row storage, then our vector of maps
+              //is indexed by row (equation number)
+              if(compressed_row_flag)
                {
-                if(k==size)
+                //Find the correct position and add the data into the vectors
+                const unsigned size = matrix_data[m][eqn_number].size();
+                for(unsigned k=0; k<=size; k++)
                  {
-                  matrix_data[m][eqn_number].push_back(
-                   std::make_pair(unknown,value));
-                  break;
+                  if(k==size)
+                   {
+                    matrix_data[m][eqn_number].push_back(
+                     std::make_pair(unknown,value));
+                    break;
+                   }
+                  else if(matrix_data[m][eqn_number][k].first == unknown)
+                   {
+                    matrix_data[m][eqn_number][k].second += value;
+                    break;
+                   }
                  }
-                else if(matrix_data[m][eqn_number][k].first == unknown)
+               }
+              //Otherwise it's compressed column storage and our vector is
+              //indexed by column (the unknown)
+              else
+               {
+                //Add the data into the vectors in the correct position
+                const unsigned size = matrix_data[m][unknown].size();
+                for(unsigned k=0; k<=size; k++)
                  {
-                  matrix_data[m][eqn_number][k].second += value;
-                  break;
+                  if(k==size)
+                   {
+                    matrix_data[m][unknown].push_back(
+                     std::make_pair(eqn_number,value));
+                    break;
+                   }
+                  else if(matrix_data[m][unknown][k].first == eqn_number)
+                   {
+                    matrix_data[m][unknown][k].second += value;
+                    break;
+                   }
                  }
                }
              }
-            //Otherwise it's compressed column storage and our vector is
-            //indexed by column (the unknown)
-            else
-             {
-              //Add the data into the vectors in the correct position
-              const unsigned size = matrix_data[m][unknown].size();
-              for(unsigned k=0; k<=size; k++)
-               {
-                if(k==size)
-                 {
-                  matrix_data[m][unknown].push_back(
-                   std::make_pair(eqn_number,value));
-                  break;
-                 }
-                else if(matrix_data[m][unknown][k].first == eqn_number)
-                 {
-                  matrix_data[m][unknown][k].second += value;
-                  break;
-                 }
-               }
-             }
-           }
-         } //End of loop over matrices
+           } //End of loop over matrices
+         }
        }
-     }
 
 #ifdef OOMPH_HAS_MPI
      } // endif halo element
 #endif
    } //End of loop over the elements
  } //End of vector assembly
- 
+
  //-----------Finally we need to convert this vector storage scheme
  //------------------------to the containers required by SuperLU
  
@@ -2367,7 +2368,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_vectors(
     OOMPH_EXCEPTION_LOCATION);
   }
 
-if(value.size() != n_matrix)
+ if(value.size() != n_matrix)
   {
    std::ostringstream error_stream;
    error_stream
@@ -2428,100 +2429,100 @@ if(value.size() != n_matrix)
      {
 #endif
 
-    //Find number of degrees of freedom in the element
-    const unsigned nvar = assembly_handler_pt->ndof(elem_pt);
+      //Find number of degrees of freedom in the element
+      const unsigned nvar = assembly_handler_pt->ndof(elem_pt);
     
-    //Resize the storage for elemental jacobian and residuals
-    for(unsigned v=0;v<n_vector;v++) {el_residuals[v].resize(nvar);}
-    for(unsigned m=0;m<n_matrix;m++) {el_jacobian[m].resize(nvar);}
+      //Resize the storage for elemental jacobian and residuals
+      for(unsigned v=0;v<n_vector;v++) {el_residuals[v].resize(nvar);}
+      for(unsigned m=0;m<n_matrix;m++) {el_jacobian[m].resize(nvar);}
 
-    //Now get the residuals and jacobian for the element
-    assembly_handler_pt->
-     get_all_vectors_and_matrices(elem_pt,el_residuals, el_jacobian);
+      //Now get the residuals and jacobian for the element
+      assembly_handler_pt->
+       get_all_vectors_and_matrices(elem_pt,el_residuals, el_jacobian);
     
-    //---------------Insert the values into the vectors--------------
+      //---------------Insert the values into the vectors--------------
     
-    //Loop over the first index of local variables
-    for(unsigned i=0;i<nvar;i++)
-     {
-      //Get the local equation number
-      unsigned eqn_number = assembly_handler_pt->eqn_number(elem_pt,i);
-      //Add the contribution to the residuals
-      for(unsigned v=0;v<n_vector;v++)
+      //Loop over the first index of local variables
+      for(unsigned i=0;i<nvar;i++)
        {
-        //Fill in each residuals vector
-        (*residuals[v])[eqn_number] += el_residuals[v][i];
-       }
-      
-      //Now loop over the other index
-      for(unsigned j=0;j<nvar;j++)
-       {
-        //Get the number of the unknown
-        unsigned unknown = assembly_handler_pt->eqn_number(elem_pt,j);
-        
-        //Loop over the matrices
-        //If it's compressed row storage, then our vector of maps
-        //is indexed by row (equation number)
-        for(unsigned m=0;m<n_matrix;m++)
+        //Get the local equation number
+        unsigned eqn_number = assembly_handler_pt->eqn_number(elem_pt,i);
+        //Add the contribution to the residuals
+        for(unsigned v=0;v<n_vector;v++)
          {
-          //Get the value of the matrix at this point
-          double value = el_jacobian[m](i,j);
-          //Only bother to add to the vector if it's non-zero
-          if(std::abs(value) > Numerical_zero_for_sparse_assembly)
+          //Fill in each residuals vector
+          (*residuals[v])[eqn_number] += el_residuals[v][i];
+         }
+      
+        //Now loop over the other index
+        for(unsigned j=0;j<nvar;j++)
+         {
+          //Get the number of the unknown
+          unsigned unknown = assembly_handler_pt->eqn_number(elem_pt,j);
+        
+          //Loop over the matrices
+          //If it's compressed row storage, then our vector of maps
+          //is indexed by row (equation number)
+          for(unsigned m=0;m<n_matrix;m++)
            {
-            //If it's compressed row storage, then our vector of maps
-            //is indexed by row (equation number)
-            if(compressed_row_flag)
+            //Get the value of the matrix at this point
+            double value = el_jacobian[m](i,j);
+            //Only bother to add to the vector if it's non-zero
+            if(std::abs(value) > Numerical_zero_for_sparse_assembly)
              {
-              //Find the correct position and add the data into the vectors
-              const unsigned size = 
-               matrix_row_or_col_indices[m][eqn_number].size();
+              //If it's compressed row storage, then our vector of maps
+              //is indexed by row (equation number)
+              if(compressed_row_flag)
+               {
+                //Find the correct position and add the data into the vectors
+                const unsigned size = 
+                 matrix_row_or_col_indices[m][eqn_number].size();
               
-              for(unsigned k=0; k<=size; k++)
-               {
-                if(k==size)
+                for(unsigned k=0; k<=size; k++)
                  {
-                  matrix_row_or_col_indices[m][eqn_number].
-                   push_back(unknown);
-                  matrix_values[m][eqn_number].push_back(value);
-                  break;
+                  if(k==size)
+                   {
+                    matrix_row_or_col_indices[m][eqn_number].
+                     push_back(unknown);
+                    matrix_values[m][eqn_number].push_back(value);
+                    break;
+                   }
+                  else if(matrix_row_or_col_indices[m][eqn_number][k] == 
+                          unknown)
+                   {
+                    matrix_values[m][eqn_number][k] += value;
+                    break;
+                   }
                  }
-                else if(matrix_row_or_col_indices[m][eqn_number][k] == 
-                        unknown)
+               }
+              //Otherwise it's compressed column storage and our vector is
+              //indexed by column (the unknown)
+              else
+               {
+                //Add the data into the vectors in the correct position
+                const unsigned size = 
+                 matrix_row_or_col_indices[m][unknown].size();
+                for (unsigned k=0; k<=size; k++)
                  {
-                  matrix_values[m][eqn_number][k] += value;
-                  break;
+                  if (k==size)
+                   {
+                    matrix_row_or_col_indices[m][unknown].
+                     push_back(eqn_number);
+                    matrix_values[m][unknown].push_back(value);
+                    break;
+                   }
+                  else if (matrix_row_or_col_indices[m][unknown][k] == 
+                           eqn_number)
+                   {
+                    matrix_values[m][unknown][k] += value;
+                    break;
+                   }
                  }
                }
              }
-            //Otherwise it's compressed column storage and our vector is
-            //indexed by column (the unknown)
-            else
-             {
-              //Add the data into the vectors in the correct position
-              const unsigned size = 
-               matrix_row_or_col_indices[m][unknown].size();
-              for (unsigned k=0; k<=size; k++)
-               {
-                if (k==size)
-                 {
-                  matrix_row_or_col_indices[m][unknown].
-                   push_back(eqn_number);
-                  matrix_values[m][unknown].push_back(value);
-                  break;
-                 }
-                else if (matrix_row_or_col_indices[m][unknown][k] == 
-                         eqn_number)
-                 {
-                  matrix_values[m][unknown][k] += value;
-                  break;
-                 }
-               }
-             }
-           }
-         } //End of loop over matrices
+           } //End of loop over matrices
+         }
        }
-     }
 
 #ifdef OOMPH_HAS_MPI
      } // endif halo element
@@ -2619,7 +2620,7 @@ void Problem::global_matrix_sparse_assemble
  // When MPI_Helpers::Nproc>1 assemble the global matrix
  // from the blocks returned by distributed_matrix_sparse_assemble
  else 
- {
+  {
    //Clear everything
    value[0].clear();
    row_or_column_start[0].clear();
@@ -2699,17 +2700,17 @@ void Problem::global_matrix_sparse_assemble
    unsigned long value_offset = value_offsets[MPI_Helpers::My_rank];
    for(unsigned long i=0; i<my_n_value; i++)
     {
-      value[0][i+value_offset] = my_value[0][i];
-      column_or_row_index[0][i+value_offset] = my_col_or_row_index[0][i];
+     value[0][i+value_offset] = my_value[0][i];
+     column_or_row_index[0][i+value_offset] = my_col_or_row_index[0][i];
     }
   
    // Copy my_row_or_column_start and my_residuals to the global values
    unsigned long row_or_col_offset = row_or_col_offsets[MPI_Helpers::My_rank];
    for(unsigned long i=0; i<my_n_row_or_col; i++)
     {
-      row_or_column_start[0][i+row_or_col_offset] = 
-       my_row_or_col_start[0][i]+value_offset;
-      (*residuals[0])[i+row_or_col_offset] = my_residuals[i];
+     row_or_column_start[0][i+row_or_col_offset] = 
+      my_row_or_col_start[0][i]+value_offset;
+     (*residuals[0])[i+row_or_col_offset] = my_residuals[i];
     }
     
    // loop over communications with other processors
@@ -2926,8 +2927,8 @@ void Problem::distributed_matrix_sparse_assemble(
    
    // Vectors of maps that stores values and column indices
    // for each row
-   Vector< std::map<int,double> > matrix_data(n_row_or_column);
-  
+   Vector< Vector<std::pair<int,double> > > matrix_data(n_row_or_column);
+
    // Allocate storage for the residual vector and set values to zero
    // (this stores only the subset of entries this processor is in charge of)
    (*residuals[0]).resize(n_row_or_column, 0.0);
@@ -2947,9 +2948,8 @@ void Problem::distributed_matrix_sparse_assemble(
          j<my_row_or_col_start[0][i+1];
          j++)
       {
-       // copy values
-       matrix_data[i-first_row_or_column][my_col_or_row_index[0][j]] = 
-        my_value[0][j];
+       matrix_data[i-first_row_or_column].push_back
+        (std::make_pair(my_col_or_row_index[0][j],my_value[0][j]));
       }
   
      // Note: residual vector only stores a subset of entries with
@@ -2957,7 +2957,7 @@ void Problem::distributed_matrix_sparse_assemble(
      // returns the entries labeled by their global numbers:
      (*residuals[0])[i-first_row_or_column]=my_residuals[i];
     }
-  
+
    // Vectors to hold data to send
    Vector<double> value_to_send;
    Vector<double> residuals_to_send;
@@ -3007,9 +3007,7 @@ void Problem::distributed_matrix_sparse_assemble(
   
      // Loop over rows [or columns] to be sent
      end = first_row_or_col_to_send+n_row_or_col_to_send;
-     for(unsigned long i=first_row_or_col_to_send;
-         i<end;
-         i++)
+     for(unsigned long i=first_row_or_col_to_send;i<end;i++)
       {
        // Set row [column] start
        row_or_col_start_to_send[i-first_row_or_col_to_send]=entry_count;
@@ -3163,7 +3161,22 @@ void Problem::distributed_matrix_sparse_assemble(
               j++)
           {
            // Add the data into the map
-           matrix_data[i][col_or_row_index_recvd[j]] += value_recvd[j];
+	   unsigned n_coef_in_row_or_col = matrix_data[i].size();
+           bool added = false;
+	   for (unsigned k = 0; k <= n_coef_in_row_or_col && !added; k++)
+            {
+             if (k == n_coef_in_row_or_col)
+              {
+               matrix_data[i].
+                push_back(std::make_pair(col_or_row_index_recvd[j],
+					 value_recvd[j]));
+              }
+             else if (col_or_row_index_recvd[j] == matrix_data[i][k].first)
+              {
+               matrix_data[i][k].second += value_recvd[j];
+               added = true;
+              }
+            }
           }
         }
       }
@@ -3179,42 +3192,36 @@ void Problem::distributed_matrix_sparse_assemble(
       }
     } // end of loop over communications with other processors
   
-  
-   // Finally, copy from Vector of Maps to compressed
-   // storage format in Vectors:
-   
    // Provide storage for row [column] starts
    row_or_column_start[0].resize(n_row_or_column+1);
-  
-   // Counter for the number of entries so far in the storage scheme
-   unsigned long entry_count=0;
-  
-   // Loop over the rows [or columns]
-   for(unsigned long i=0; i<n_row_or_column; i++)
+
+   // Loop over all the entries in the map corresponding to the given
+   // row [or column] (it will be ordered)
+   unsigned long entry_count = 0;
+   for (unsigned long i=0;i<n_row_or_column;i++)
     {
+
      // Start index for the present row [column]
      row_or_column_start[0][i] = entry_count;
-  
-     // Loop over all the entries in the map corresponding to the given
-     // row [or column] (it will be ordered)
-     for(std::map<int,double>::iterator it = matrix_data[i].begin();
-         it!=matrix_data[i].end();
+
+     for(Vector< std::pair<int,double> >::iterator it = 
+          matrix_data[i].begin();it!=matrix_data[i].end();
          ++it)
       {
        // The first value is the column [row] index
        column_or_row_index[0].push_back(it->first);
-  
+       
        // The second value is the actual data value
        value[0].push_back(it->second);
-  
+       
        // Increase the value of the counter
        entry_count++;
       }
     }
+
    // Remember final entry in the row [column] start vector
    row_or_column_start[0][n_row_or_column] = entry_count;
-  } // End of multiple processor case
-
+  }
 }
 
 #endif
@@ -3554,7 +3561,7 @@ void Problem::restore_dof_values()
 
  if(Saved_dof_pt->size() != n_dof)
   {
-    throw OomphLibError(
+   throw OomphLibError(
     "The number of stored values is not equal to the current number of dofs\n",
     "Problem::restore_dof_values()",
     OOMPH_EXCEPTION_LOCATION);
@@ -3669,7 +3676,7 @@ void Problem::newton_solve()
     {
      oomph_info << std::endl << std::endl << std::endl;
      oomph_info << "This is a bit bizarre: The problem has no dofs." 
-               << std::endl;
+                << std::endl;
      oomph_info 
       << "I'll just return from the Newton solver without doing anything." 
       << std::endl;
@@ -3726,9 +3733,9 @@ void Problem::newton_solve()
 
    // Initialise timer for linear solver
 #ifdef OOMPH_HAS_MPI   
- double t_solver_start = MPI_Wtime();
+   double t_solver_start = MPI_Wtime();
 #else
- clock_t t_solver_start = clock();
+   clock_t t_solver_start = clock();
 #endif
    
    //Now do the linear solve -- recycling Jacobian if requested
@@ -3797,7 +3804,6 @@ void Problem::newton_solve()
      if (Dof_pt[l]!=0)
       *Dof_pt[l] -= dx_pt[l];
     }
-
 #ifdef OOMPH_HAS_MPI
    // Synchronise the solution on different processors
    synchronise_dofs();
@@ -3947,7 +3953,7 @@ void Problem::steady_newton_solve(unsigned const &max_adapt)
  catch(NewtonSolverError &error)
   {
    oomph_info << std::endl << "USER-DEFINED ERROR IN NEWTON SOLVER " 
-             << std::endl;
+              << std::endl;
    //Check whether it's the linear solver
    if(error.linear_solver_error)
     {
@@ -3964,7 +3970,7 @@ void Problem::steady_newton_solve(unsigned const &max_adapt)
     {
      oomph_info << "MAXIMUM RESIDUALS: " << error.maxres
                 << " EXCEEDS PREDEFINED MAXIMUM " << Max_residuals
-          << std::endl;
+                << std::endl;
     }
 
    //Die horribly!!
@@ -4537,7 +4543,7 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
  //Loop over the timesteppers and make them (temporarily) steady.
  //We can only do continuation for steady problems!
  unsigned n_time_steppers = ntime_stepper();
-  for(unsigned i=0;i<n_time_steppers;i++) 
+ for(unsigned i=0;i<n_time_steppers;i++) 
   {
    time_stepper_pt(i)->make_steady();
   }
@@ -4710,7 +4716,7 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
    
    //Calculate the derivatives required for the next stage of continuation
    //In this we pass the last value of z (i.e. approximation)
-    calculate_continuation_derivatives(z); 
+   calculate_continuation_derivatives(z); 
 
    //If it's the first step then the value of the next step should
    //be the change in parameter divided by the parameter derivative
@@ -4743,26 +4749,26 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
   }
 
  /*{
-  Vector<double> z(n_dofs);
-  //Cheeky tester
-  double length=0.0;
-  for(unsigned long l=0;l<n_dofs;l++)
+   Vector<double> z(n_dofs);
+   //Cheeky tester
+   double length=0.0;
+   for(unsigned long l=0;l<n_dofs;l++)
    {
-    z[l] = (*Dof_pt[l] - Dofs_current[l])/Ds_current;
-    length += Theta_squared*z[l]*z[l];
+   z[l] = (*Dof_pt[l] - Dofs_current[l])/Ds_current;
+   length += Theta_squared*z[l]*z[l];
    }
 
-  double Z = (*parameter_pt - Parameter_current)/Ds_current;
-  length += Z*Z;
+   double Z = (*parameter_pt - Parameter_current)/Ds_current;
+   length += Z*Z;
 
-  length = sqrt(length);
-  for(unsigned long l=0;l<n_dofs;l++)
+   length = sqrt(length);
+   for(unsigned long l=0;l<n_dofs;l++)
    {
-    Dof_derivatives[l] = z[l]/length;
+   Dof_derivatives[l] = z[l]/length;
    }
   
-  Parameter_derivative = Z/length;
-  } */
+   Parameter_derivative = Z/length;
+   } */
 
  //If we are trying to find a bifurcation and the first sign change
  //has occured, use bisection
@@ -4983,60 +4989,128 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
  //This loop surrounds the adaptive time-stepping critera
  do
   {
- //This loop surrounds the Newton solver and will not
- //be broken until a timestep is accepted
- do
-  {
-   //Initially the timestep is presumed to be accepted
-   REJECT_TIMESTEP=0;
-
-   //Set the new time and value of dt
-   time_pt()->time() += dt_actual;
-   time_pt()->dt() = dt_actual;
-
-   //Loop over all timesteppers and set the weights and predictor weights
-   for(unsigned i=0;i<n_time_steppers;i++)
+   //This loop surrounds the Newton solver and will not
+   //be broken until a timestep is accepted
+   do
     {
-     //If the time_stepper is non-adaptive, this will be zero
-     time_stepper_pt(i)->set_predictor_weights();
-     time_stepper_pt(i)->set_weights();
-    }
+     //Initially the timestep is presumed to be accepted
+     REJECT_TIMESTEP=0;
 
-   //Now calculate the predicted values for the all data and all positions
-   calculate_predictions();
+     //Set the new time and value of dt
+     time_pt()->time() += dt_actual;
+     time_pt()->dt() = dt_actual;
 
-   //Do any updates/boundary conditions changes here
-   actions_before_implicit_timestep();
-   
-   //Attempt to solver the non-linear system
-   try
-    {
-     //Solve the non-linear problem at this timestep
-     newton_solve();
-    }
-   //Catch any exceptions thrown
-   catch(NewtonSolverError &error)
-    {
-     //If it's a solver error then die
-     if(error.linear_solver_error)
+     //Loop over all timesteppers and set the weights and predictor weights
+     for(unsigned i=0;i<n_time_steppers;i++)
       {
-       std::string error_message =
-        "USER-DEFINED ERROR IN NEWTON SOLVER\n";
-       error_message +=  "ERROR IN THE LINEAR SOLVER\n";
+       //If the time_stepper is non-adaptive, this will be zero
+       time_stepper_pt(i)->set_predictor_weights();
+       time_stepper_pt(i)->set_weights();
+      }
 
-       //Die
-       throw OomphLibError(error_message,
+     //Now calculate the predicted values for the all data and all positions
+     calculate_predictions();
+
+     //Do any updates/boundary conditions changes here
+     actions_before_implicit_timestep();
+   
+     //Attempt to solver the non-linear system
+     try
+      {
+       //Solve the non-linear problem at this timestep
+       newton_solve();
+      }
+     //Catch any exceptions thrown
+     catch(NewtonSolverError &error)
+      {
+       //If it's a solver error then die
+       if(error.linear_solver_error)
+        {
+         std::string error_message =
+          "USER-DEFINED ERROR IN NEWTON SOLVER\n";
+         error_message +=  "ERROR IN THE LINEAR SOLVER\n";
+
+         //Die
+         throw OomphLibError(error_message,
+                             "Problem::adaptive_unsteady_newton_solve()",
+                             OOMPH_EXCEPTION_LOCATION);
+        }
+       else
+        {
+         oomph_info << "TIMESTEP REJECTED --- HALVING TIMESTEP AND TRYING AGAIN" 
+                    << std::endl;
+         //Reject the timestep, if we have an exception
+         REJECT_TIMESTEP=1;
+         //Essentially all I do here is half the next timestep
+         dt_actual *= 0.5;
+         //Reset the time
+         time_pt()->time() = time_current;
+         //Reload the dofs
+         for(unsigned i=0;i<n_dofs;i++) *Dof_pt[i] = dofs_current[i];
+
+#ifdef OOMPH_HAS_MPI
+         // Synchronise the solution on different processors
+         synchronise_dofs();
+#endif
+         //Call all "after" actions, e.g. to handle mesh updates
+         actions_after_newton_step();
+         actions_before_newton_convergence_check();
+         actions_after_newton_solve();
+         actions_after_implicit_timestep();
+         //Skip to the next iteration
+         continue;
+        }
+      }
+
+     //Break out of the loop if the timestep has become too small
+     if(dt_actual < Minimum_dt)
+      {
+       std::ostringstream error_message;
+       error_message 
+        << "TIMESTEP (" << dt_actual 
+        << ") HAS FALLEN BELOW SPECIFIED THRESHOLD: Problem::Minimum_dt=" 
+        << Minimum_dt << std::endl;
+
+       throw OomphLibError(error_message.str(),
                            "Problem::adaptive_unsteady_newton_solve()",
                            OOMPH_EXCEPTION_LOCATION);
       }
-     else
+
+     //Update anything that needs updating after the timestep
+     actions_after_implicit_timestep();
+    }
+   //Keep looping until we accept the timestep
+   while(REJECT_TIMESTEP);
+  
+   //If we have an adapative timestepper
+   if(ADAPTIVE_FLAG)
+    {
+     //Once timestep has been accepted can do fancy error processing
+     //Set the error weights
+     for(unsigned i=0;i<n_time_steppers;i++)
       {
-       oomph_info << "TIMESTEP REJECTED --- HALVING TIMESTEP AND TRYING AGAIN" 
-                  << std::endl;
-       //Reject the timestep, if we have an exception
+       time_stepper_pt(i)->set_error_weights();
+      }
+
+     //Call a global error, at the moment I'm just going to use a square norm 
+     double error = global_temporal_error_norm(); 
+
+     //Calculate the scaling  factor
+     DTSF = pow((epsilon/error),
+                (1.0/(1.0+time_stepper_pt()->order())));
+
+     oomph_info << "DTSF is  " << DTSF << std::endl;
+     oomph_info << "Estimated timestepping error is " << error << std::endl;
+
+     //Now decide what to do based upon DTSF
+     //If it's small reject the timestep
+     if(DTSF <= 0.8)
+      {
+       oomph_info << "TIMESTEP REJECTED" << std::endl;
+       //Reject the timestep
        REJECT_TIMESTEP=1;
-       //Essentially all I do here is half the next timestep
-       dt_actual *= 0.5;
+       //Modify the actual timestep
+       dt_actual *= DTSF;
        //Reset the time
        time_pt()->time() = time_current;
        //Reload the dofs
@@ -5046,94 +5120,26 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
        // Synchronise the solution on different processors
        synchronise_dofs();
 #endif
+
        //Call all "after" actions, e.g. to handle mesh updates
        actions_after_newton_step();
        actions_before_newton_convergence_check();
        actions_after_newton_solve();
        actions_after_implicit_timestep();
-       //Skip to the next iteration
        continue;
       }
-    }
-
-   //Break out of the loop if the timestep has become too small
-   if(dt_actual < Minimum_dt)
-    {
-     std::ostringstream error_message;
-     error_message 
-      << "TIMESTEP (" << dt_actual 
-      << ") HAS FALLEN BELOW SPECIFIED THRESHOLD: Problem::Minimum_dt=" 
-      << Minimum_dt << std::endl;
-
-     throw OomphLibError(error_message.str(),
-                         "Problem::adaptive_unsteady_newton_solve()",
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-
-   //Update anything that needs updating after the timestep
-   actions_after_implicit_timestep();
-  }
- //Keep looping until we accept the timestep
- while(REJECT_TIMESTEP);
-  
- //If we have an adapative timestepper
- if(ADAPTIVE_FLAG)
-  {
-   //Once timestep has been accepted can do fancy error processing
-   //Set the error weights
-   for(unsigned i=0;i<n_time_steppers;i++)
-    {
-     time_stepper_pt(i)->set_error_weights();
-    }
-
-   //Call a global error, at the moment I'm just going to use a square norm 
-   double error = global_temporal_error_norm(); 
-
-   //Calculate the scaling  factor
-   DTSF = pow((epsilon/error),
-              (1.0/(1.0+time_stepper_pt()->order())));
-
-   oomph_info << "DTSF is  " << DTSF << std::endl;
-   oomph_info << "Estimated timestepping error is " << error << std::endl;
-
-   //Now decide what to do based upon DTSF
-   //If it's small reject the timestep
-   if(DTSF <= 0.8)
-    {
-     oomph_info << "TIMESTEP REJECTED" << std::endl;
-     //Reject the timestep
-     REJECT_TIMESTEP=1;
-     //Modify the actual timestep
-     dt_actual *= DTSF;
-     //Reset the time
-     time_pt()->time() = time_current;
-     //Reload the dofs
-     for(unsigned i=0;i<n_dofs;i++) *Dof_pt[i] = dofs_current[i];
-
-#ifdef OOMPH_HAS_MPI
-       // Synchronise the solution on different processors
-       synchronise_dofs();
-#endif
-
-     //Call all "after" actions, e.g. to handle mesh updates
-     actions_after_newton_step();
-     actions_before_newton_convergence_check();
-     actions_after_newton_solve();
-     actions_after_implicit_timestep();
-     continue;
-    }
-   //If it's large change the timestep
-   if(DTSF >= 1.0)
-    {
-     //Restrict the increase
-     if(DTSF > DTSF_max_increase)
+     //If it's large change the timestep
+     if(DTSF >= 1.0)
       {
-       DTSF = DTSF_max_increase;
-       oomph_info << "DTSF LIMITED TO " << DTSF_max_increase << std::endl;
+       //Restrict the increase
+       if(DTSF > DTSF_max_increase)
+        {
+         DTSF = DTSF_max_increase;
+         oomph_info << "DTSF LIMITED TO " << DTSF_max_increase << std::endl;
+        }
       }
-    }
 
-  } //End of if adaptive flag
+    } //End of if adaptive flag
 
   }
  //Keep this loop going, again until we accept the timestep
@@ -5144,8 +5150,8 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
  if ((dt_actual*DTSF) > Maximum_dt)
   {
    oomph_info << "DTSF WOULD INCREASE TIMESTEP "
-        << "ABOVE SPECIFIED THRESHOLD: Problem::Maximum_dt=" 
-        <<  Maximum_dt << std::endl;
+              << "ABOVE SPECIFIED THRESHOLD: Problem::Maximum_dt=" 
+              <<  Maximum_dt << std::endl;
    DTSF =  Maximum_dt/dt_actual;
    oomph_info << "ADJUSTING DTSF TO " << DTSF << std::endl;
   }
@@ -5173,10 +5179,10 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
 /// shifting is performed anyway and a warning is issued.
 //========================================================================
 double Problem::doubly_adaptive_unsteady_newton_solve(const double &dt_desired,
-                                                     const double &epsilon, 
-                                                     const unsigned &max_adapt,
-                                                     const bool &first,
-                                                     const bool &shift_values)
+                                                      const double &epsilon, 
+                                                      const unsigned &max_adapt,
+                                                      const bool &first,
+                                                      const bool &shift_values)
 {
  //Store the initial time
  double initial_time = time_pt()->time();
@@ -5668,25 +5674,25 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
  else
   {
    // Loop over submeshes
-    for (unsigned imesh=0;imesh<n_mesh;imesh++)
-     {
-      // Refine single mesh (if its refineable)
-      if(RefineableMeshBase* mmesh_pt
-         =dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
-       {
-        // When we get in here the problem has been constructed
-        // by the constructor and the mesh is its original unrefined
-        // form. 
-        // RefineableMeshBase::refine(...) reads the refinement pattern from 
-        // the specified file and performs refinements until the mesh has
-        // reached the same level of refinement as the mesh that existed
-        // when the problem was dumped to disk.
-        mmesh_pt->refine(restart_file);
-       }
-     } // End of loop over submeshes
+   for (unsigned imesh=0;imesh<n_mesh;imesh++)
+    {
+     // Refine single mesh (if its refineable)
+     if(RefineableMeshBase* mmesh_pt
+        =dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
+      {
+       // When we get in here the problem has been constructed
+       // by the constructor and the mesh is its original unrefined
+       // form. 
+       // RefineableMeshBase::refine(...) reads the refinement pattern from 
+       // the specified file and performs refinements until the mesh has
+       // reached the same level of refinement as the mesh that existed
+       // when the problem was dumped to disk.
+       mmesh_pt->refine(restart_file);
+      }
+    } // End of loop over submeshes
 
-    // Rebuild the global mesh
-    rebuild_global_mesh();
+   // Rebuild the global mesh
+   rebuild_global_mesh();
   } 
 
  //Any actions after adapt
@@ -5694,7 +5700,7 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
     
  // Setup equation numbering scheme
  oomph_info <<"\nNumber of equations: " << assign_eqn_numbers() 
-      << std::endl<< std::endl; 
+            << std::endl<< std::endl; 
 
  std::string input_string;
  
@@ -5808,9 +5814,9 @@ void Problem::initialise_dt(const double& dt)
  
  //Loop over them all and set the weights
  for(unsigned i=0;i<n_time_steppers;i++)
-    {
-     time_stepper_pt(i)->set_weights();
-    }
+  {
+   time_stepper_pt(i)->set_weights();
+  }
 }
 
 //=========================================================================
@@ -5863,7 +5869,7 @@ unsigned Problem::self_test()
       {
        passed=false;
        oomph_info << "\n ERROR: Failed Mesh::self_test() for mesh imesh" 
-                 << imesh  << std::endl;
+                  << imesh  << std::endl;
       }
     }
   }
@@ -5877,7 +5883,7 @@ unsigned Problem::self_test()
     {
      passed=false;
      oomph_info << "\n ERROR: Failed Data::self_test() for global data iglobal" 
-          << iglobal << std::endl;
+                << iglobal << std::endl;
     }
   }
 
@@ -5962,7 +5968,7 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
                                                 *mmesh_pt->doc_info_pt());
         }
        
-        // Store max./min actual error
+       // Store max./min actual error
        mmesh_pt->max_error()=
         std::abs(*std::max_element(elemental_error.begin(),
                                    elemental_error.end(),AbsCmp<double>()));
@@ -5972,15 +5978,15 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
                                    elemental_error.end(),AbsCmp<double>()));
 
        oomph_info << "\n Max/min error: " 
-            << mmesh_pt->max_error() << " "
-            << mmesh_pt->min_error() << std::endl;
+                  << mmesh_pt->max_error() << " "
+                  << mmesh_pt->min_error() << std::endl;
        
        // Adapt mesh
-        mmesh_pt->adapt(elemental_error);
+       mmesh_pt->adapt(elemental_error);
         
-        // Add to counters
-        n_refined+=mmesh_pt->nrefined();
-        n_unrefined+=mmesh_pt->nunrefined();
+       // Add to counters
+       n_refined+=mmesh_pt->nrefined();
+       n_unrefined+=mmesh_pt->nunrefined();
 
       }
      else
@@ -6000,40 +6006,40 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
  else
   {
    // Loop over submeshes
-    for (unsigned imesh=0;imesh<Nmesh;imesh++)
-     {
-      // Refine single mesh uniformly if possible
-      if(RefineableMeshBase* mmesh_pt =
-         dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
-       {
-        // Get pointer to error estimator
-        ErrorEstimator* error_estimator_pt=mmesh_pt->
+   for (unsigned imesh=0;imesh<Nmesh;imesh++)
+    {
+     // Refine single mesh uniformly if possible
+     if(RefineableMeshBase* mmesh_pt =
+        dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
+      {
+       // Get pointer to error estimator
+       ErrorEstimator* error_estimator_pt=mmesh_pt->
         spatial_error_estimator_pt();
         
 #ifdef PARANOID
-        if (error_estimator_pt==0)
-         {
-          throw OomphLibError(
-           "Error estimator hasn't been set yet",
-           "Problem::adapt()",
-           OOMPH_EXCEPTION_LOCATION);
-         }
+       if (error_estimator_pt==0)
+        {
+         throw OomphLibError(
+          "Error estimator hasn't been set yet",
+          "Problem::adapt()",
+          OOMPH_EXCEPTION_LOCATION);
+        }
 #endif
         
-        if (mmesh_pt->adapt_flag())
-         {
-          // Get error for all elements
+       if (mmesh_pt->adapt_flag())
+        {
+         // Get error for all elements
          Vector<double> elemental_error(mmesh_pt->nelement());
          if (mmesh_pt->doc_info_pt()==0)
           {
            error_estimator_pt->get_element_errors(mesh_pt(imesh),
-                                                   elemental_error);
+                                                  elemental_error);
           }
          else
           {
-            error_estimator_pt->get_element_errors(mesh_pt(imesh),
-                                                   elemental_error,
-                                                   *mmesh_pt->doc_info_pt());
+           error_estimator_pt->get_element_errors(mesh_pt(imesh),
+                                                  elemental_error,
+                                                  *mmesh_pt->doc_info_pt());
           }
         
          // Store max./min error
@@ -6046,8 +6052,8 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
                                      elemental_error.end(),AbsCmp<double>()));
 
          oomph_info << "\n Max/min error: " 
-              << mmesh_pt->max_error() << " "
-              << mmesh_pt->min_error() << std::endl;
+                    << mmesh_pt->max_error() << " "
+                    << mmesh_pt->min_error() << std::endl;
 
          // Adapt mesh
          mmesh_pt->adapt(elemental_error); 
@@ -6056,22 +6062,22 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
          n_refined+=mmesh_pt->nrefined();
          n_unrefined+=mmesh_pt->nunrefined();
 
-         }
-        else
-         {
-          oomph_info << "Info/Warning: Mesh adaptation is disabled." 
-                     << std::endl;
-         }
-       }
-      else
-       {
-        oomph_info << "Info/Warning: Mesh cannot be adapted." << std::endl;
-       }
+        }
+       else
+        {
+         oomph_info << "Info/Warning: Mesh adaptation is disabled." 
+                    << std::endl;
+        }
+      }
+     else
+      {
+       oomph_info << "Info/Warning: Mesh cannot be adapted." << std::endl;
+      }
       
-     } // End of loop over submeshes
+    } // End of loop over submeshes
 
-    // Rebuild the global mesh
-    rebuild_global_mesh();
+   // Rebuild the global mesh
+   rebuild_global_mesh();
 
   } 
 
@@ -6080,7 +6086,7 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
 
  //Attach the boundary conditions to the mesh
  oomph_info <<"\nNumber of equations: " << assign_eqn_numbers() 
-      << std::endl<< std::endl; 
+            << std::endl<< std::endl; 
 
 }
 
@@ -6140,8 +6146,8 @@ void Problem::doc_errors(DocInfo& doc_info)
                                  elemental_error.end(),AbsCmp<double>()));
       
      oomph_info << "\n Max/min error: " 
-          << mmesh_pt->max_error() << " "
-          << mmesh_pt->min_error() << std::endl;
+                << mmesh_pt->max_error() << " "
+                << mmesh_pt->min_error() << std::endl;
 
     }
   }
@@ -6197,8 +6203,8 @@ void Problem::doc_errors(DocInfo& doc_info)
                                    elemental_error.end(),AbsCmp<double>()));
         
        oomph_info << "\n Max/min error: " 
-            << mmesh_pt->max_error() << " "
-            << mmesh_pt->min_error() << std::endl;
+                  << mmesh_pt->max_error() << " "
+                  << mmesh_pt->min_error() << std::endl;
       }
       
     } // End of loop over submeshes
@@ -6216,46 +6222,46 @@ void Problem::doc_errors(DocInfo& doc_info)
 //========================================================================
 void Problem::refine_selected_elements(const Vector<unsigned>& 
                                        elements_to_be_refined)
- {
-  actions_before_adapt();
+{
+ actions_before_adapt();
  
-  // Number of submeshes?
-  unsigned Nmesh=nsub_mesh();
+ // Number of submeshes?
+ unsigned Nmesh=nsub_mesh();
 
-  // Single mesh:
-  if (Nmesh==0)
-   {
-    // Refine single mesh if possible
-    if(RefineableMeshBase* mmesh_pt = 
-       dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
-     {
-      mmesh_pt->refine_selected_elements(elements_to_be_refined);
-     }
-    else
-     {
-      oomph_info << "Info/Warning: Mesh cannot be refined " 
-                 << std::endl;
-     }
-   }
-  //Multiple submeshes
-  else
-   {
-    std::string error_message = 
-     "Problem::refine_selected_elements(...) only works for\n";
-    error_message += "single-mesh problems at the moment.\n";
+ // Single mesh:
+ if (Nmesh==0)
+  {
+   // Refine single mesh if possible
+   if(RefineableMeshBase* mmesh_pt = 
+      dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
+    {
+     mmesh_pt->refine_selected_elements(elements_to_be_refined);
+    }
+   else
+    {
+     oomph_info << "Info/Warning: Mesh cannot be refined " 
+                << std::endl;
+    }
+  }
+ //Multiple submeshes
+ else
+  {
+   std::string error_message = 
+    "Problem::refine_selected_elements(...) only works for\n";
+   error_message += "single-mesh problems at the moment.\n";
     
-    throw OomphLibError(error_message,"Problem::refine_selected_elements()",
-                        OOMPH_EXCEPTION_LOCATION);
-   }
+   throw OomphLibError(error_message,"Problem::refine_selected_elements()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
 
-  //Any actions after the adapatation phase
-  actions_after_adapt();
+ //Any actions after the adapatation phase
+ actions_after_adapt();
 
-  //Attach the boundary conditions to the mesh
-  oomph_info <<"Number of equations: " 
+ //Attach the boundary conditions to the mesh
+ oomph_info <<"Number of equations: " 
             << assign_eqn_numbers() << std::endl; 
 
- }
+}
 
 
 
@@ -6269,46 +6275,46 @@ void Problem::refine_selected_elements(const Vector<unsigned>&
 //========================================================================
 void Problem::refine_selected_elements(const Vector<RefineableElement*>& 
                                        elements_to_be_refined_pt)
- {
-  actions_before_adapt();
+{
+ actions_before_adapt();
  
-  // Number of submeshes?
-  unsigned Nmesh=nsub_mesh();
+ // Number of submeshes?
+ unsigned Nmesh=nsub_mesh();
 
-  // Single mesh:
-  if (Nmesh==0)
-   {
-    // Refine single mesh if possible
-    if(RefineableMeshBase* mmesh_pt = 
-       dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
-     {
-      mmesh_pt->refine_selected_elements(elements_to_be_refined_pt);
-     }
-    else
-     {
-      oomph_info << "Info/Warning: Mesh cannot be refined " 
-                 << std::endl;
-     }
-   }
-  //Multiple submeshes
-  else
-   {
-    std::string error_message = 
-     "Problem::refine_selected_elements(...) only works for\n";
-    error_message += "single-mesh problems at the moment.\n";
+ // Single mesh:
+ if (Nmesh==0)
+  {
+   // Refine single mesh if possible
+   if(RefineableMeshBase* mmesh_pt = 
+      dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
+    {
+     mmesh_pt->refine_selected_elements(elements_to_be_refined_pt);
+    }
+   else
+    {
+     oomph_info << "Info/Warning: Mesh cannot be refined " 
+                << std::endl;
+    }
+  }
+ //Multiple submeshes
+ else
+  {
+   std::string error_message = 
+    "Problem::refine_selected_elements(...) only works for\n";
+   error_message += "single-mesh problems at the moment.\n";
     
-    throw OomphLibError(error_message,"Problem::refine_selected_elements()",
-                        OOMPH_EXCEPTION_LOCATION);
-   }
+   throw OomphLibError(error_message,"Problem::refine_selected_elements()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
 
-  //Any actions after the adapatation phase
-  actions_after_adapt();
+ //Any actions after the adapatation phase
+ actions_after_adapt();
 
-  //Do equation numbering
-  oomph_info <<"Number of equations: " << assign_eqn_numbers()
+ //Do equation numbering
+ oomph_info <<"Number of equations: " << assign_eqn_numbers()
             << std::endl; 
 
- }
+}
 
 
 
@@ -6320,49 +6326,49 @@ void Problem::refine_selected_elements(const Vector<RefineableElement*>&
 void Problem::refine_selected_elements(const unsigned& i_mesh,
                                        const Vector<RefineableElement*>& 
                                        elements_to_be_refined_pt)
- {
-  actions_before_adapt();
+{
+ actions_before_adapt();
  
-  // Number of submeshes?
-  unsigned n_mesh=nsub_mesh();
+ // Number of submeshes?
+ unsigned n_mesh=nsub_mesh();
 
-  if (i_mesh>=n_mesh)
-   {
-    std::ostringstream error_message;
-    error_message <<
-     "Problem only has " << n_mesh << " submeshes. Cannot refine submesh " 
-                         << i_mesh << std::endl;
-    throw OomphLibError(error_message.str(),
-                        "Problem::refine_selected_elements()",
-                        OOMPH_EXCEPTION_LOCATION);   
-   }
+ if (i_mesh>=n_mesh)
+  {
+   std::ostringstream error_message;
+   error_message <<
+    "Problem only has " << n_mesh << " submeshes. Cannot refine submesh " 
+                 << i_mesh << std::endl;
+   throw OomphLibError(error_message.str(),
+                       "Problem::refine_selected_elements()",
+                       OOMPH_EXCEPTION_LOCATION);   
+  }
 
-  // Refine single mesh if possible
-  if(RefineableMeshBase* mmesh_pt = 
-     dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
-   {
-    mmesh_pt->refine_selected_elements(elements_to_be_refined_pt);
-   }
-  else
-   {
-    oomph_info << "Info/Warning: Mesh cannot be refined " 
-               << std::endl;
-   }
+ // Refine single mesh if possible
+ if(RefineableMeshBase* mmesh_pt = 
+    dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
+  {
+   mmesh_pt->refine_selected_elements(elements_to_be_refined_pt);
+  }
+ else
+  {
+   oomph_info << "Info/Warning: Mesh cannot be refined " 
+              << std::endl;
+  }
 
-  if (n_mesh>1)
-   {
-    //Rebuild the global mesh
-    rebuild_global_mesh();
-   }
+ if (n_mesh>1)
+  {
+   //Rebuild the global mesh
+   rebuild_global_mesh();
+  }
 
-  //Any actions after the adapatation phase
-  actions_after_adapt();
+ //Any actions after the adapatation phase
+ actions_after_adapt();
 
-  //Do equation numbering
-  oomph_info <<"Number of equations: " << assign_eqn_numbers()
+ //Do equation numbering
+ oomph_info <<"Number of equations: " << assign_eqn_numbers()
             << std::endl; 
 
- }
+}
 
 
 
@@ -6374,57 +6380,57 @@ void Problem::refine_selected_elements(const unsigned& i_mesh,
 /// and doc refinement process.
 //========================================================================
 void Problem::refine_uniformly(DocInfo& doc_info)
- {
-  actions_before_adapt();
+{
+ actions_before_adapt();
 
-  // Number of submeshes?
-  unsigned Nmesh=nsub_mesh();
+ // Number of submeshes?
+ unsigned Nmesh=nsub_mesh();
   
-  // Single mesh:
-  if (Nmesh==0)
-   {
-    // Refine single mesh uniformly if possible
-    if(RefineableMeshBase* mmesh_pt = 
-       dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
-     {
-      mmesh_pt->refine_uniformly(doc_info);
-     }
-    else
-     {
-      oomph_info << "Info/Warning: Mesh cannot be refined uniformly " 
-                 << std::endl;
-     }
-   }
-  //Multiple submeshes
-  else
-   {
-    // Loop over submeshes
-    for (unsigned imesh=0;imesh<Nmesh;imesh++)
-     {
-      // Refine i-th submesh uniformly if possible
-      if (RefineableMeshBase* mmesh_pt =
-          dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
-       {
-        mmesh_pt->refine_uniformly(doc_info);
-       }
-      else
-       {
-        oomph_info << "Info/Warning: Cannot refine mesh " << imesh 
-                   << std::endl;
-       } 
-     }
-    //Rebuild the global mesh
-    rebuild_global_mesh();
-   }
+ // Single mesh:
+ if (Nmesh==0)
+  {
+   // Refine single mesh uniformly if possible
+   if(RefineableMeshBase* mmesh_pt = 
+      dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
+    {
+     mmesh_pt->refine_uniformly(doc_info);
+    }
+   else
+    {
+     oomph_info << "Info/Warning: Mesh cannot be refined uniformly " 
+                << std::endl;
+    }
+  }
+ //Multiple submeshes
+ else
+  {
+   // Loop over submeshes
+   for (unsigned imesh=0;imesh<Nmesh;imesh++)
+    {
+     // Refine i-th submesh uniformly if possible
+     if (RefineableMeshBase* mmesh_pt =
+         dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
+      {
+       mmesh_pt->refine_uniformly(doc_info);
+      }
+     else
+      {
+       oomph_info << "Info/Warning: Cannot refine mesh " << imesh 
+                  << std::endl;
+      } 
+    }
+   //Rebuild the global mesh
+   rebuild_global_mesh();
+  }
 
-  //Any actions after the adaptation phase
-  actions_after_adapt();
+ //Any actions after the adaptation phase
+ actions_after_adapt();
 
-  //Do equation numbering
-  oomph_info <<"Number of equations: " 
+ //Do equation numbering
+ oomph_info <<"Number of equations: " 
             << assign_eqn_numbers() << std::endl; 
 
- }
+}
 
 //========================================================================
 /// Refine submesh i_mesh uniformly and rebuild problem;
@@ -6437,42 +6443,42 @@ void Problem::refine_uniformly(const unsigned& i_mesh,
  
 #ifdef PARANOID
  // Number of submeshes?
-  if (i_mesh>=nsub_mesh())
-   {
-    std::ostringstream error_message;
-    error_message  << "imesh " << i_mesh 
-                   << " is greater than the number of sub meshes " 
-                   << nsub_mesh() << std::endl;
+ if (i_mesh>=nsub_mesh())
+  {
+   std::ostringstream error_message;
+   error_message  << "imesh " << i_mesh 
+                  << " is greater than the number of sub meshes " 
+                  << nsub_mesh() << std::endl;
  
-    throw OomphLibError(error_message.str(),
-                        "Problem::refine_uniformly()",
-                        OOMPH_EXCEPTION_LOCATION);
-   }
+   throw OomphLibError(error_message.str(),
+                       "Problem::refine_uniformly()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
 #endif
 
-  // Refine single mesh uniformly if possible
-  if(RefineableMeshBase* mmesh_pt = 
-     dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
-   {
-    mmesh_pt->refine_uniformly(doc_info);
-   }
-  else
-   {
-    oomph_info << "Info/Warning: Mesh cannot be refined uniformly " 
-               << std::endl;
-   }
+ // Refine single mesh uniformly if possible
+ if(RefineableMeshBase* mmesh_pt = 
+    dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
+  {
+   mmesh_pt->refine_uniformly(doc_info);
+  }
+ else
+  {
+   oomph_info << "Info/Warning: Mesh cannot be refined uniformly " 
+              << std::endl;
+  }
 
-  //Rebuild the global mesh
-  rebuild_global_mesh();
+ //Rebuild the global mesh
+ rebuild_global_mesh();
 
-  //Any actions after the adaptation phase
-  actions_after_adapt();
+ //Any actions after the adaptation phase
+ actions_after_adapt();
 
-  //Do equation numbering
-  oomph_info <<"Number of equations: " 
+ //Do equation numbering
+ oomph_info <<"Number of equations: " 
             << assign_eqn_numbers() << std::endl; 
 
- }
+}
  
 
 //========================================================================
@@ -6482,70 +6488,70 @@ void Problem::refine_uniformly(const unsigned& i_mesh,
 /// level)
 //========================================================================
 unsigned Problem::unrefine_uniformly()
- {
-  actions_before_adapt();
+{
+ actions_before_adapt();
 
-  // Has unrefinement been successful?
-  unsigned success_flag=0;
+ // Has unrefinement been successful?
+ unsigned success_flag=0;
 
-  // Number of submeshes?
-  unsigned Nmesh=nsub_mesh();
+ // Number of submeshes?
+ unsigned Nmesh=nsub_mesh();
 
-  // Single mesh:
-  if (Nmesh==0)
-   {
-    // Unrefine single mesh uniformly if possible
-    if(RefineableMeshBase* mmesh_pt = 
-       dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
-     {
-      success_flag+=mmesh_pt->unrefine_uniformly();
-     }
-    else
-     {
-      oomph_info << "Info/Warning: Mesh cannot be unrefined uniformly " 
-                 << std::endl;
-     }
-   }
-  //Multiple submeshes
-  else
-   {
-    // Loop over submeshes
-    for (unsigned imesh=0;imesh<Nmesh;imesh++)
-     {
-      // Unrefine i-th submesh uniformly if possible
-      if (RefineableMeshBase* mmesh_pt=
-          dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
-       {
-        success_flag+=mmesh_pt->unrefine_uniformly();
-       }
-      else
-       {
-        oomph_info << "Info/Warning: Cannot unrefine mesh " << imesh 
-                   << std::endl;
-       } 
-     }
-    //Rebuild the global mesh
-    rebuild_global_mesh();
-   }
+ // Single mesh:
+ if (Nmesh==0)
+  {
+   // Unrefine single mesh uniformly if possible
+   if(RefineableMeshBase* mmesh_pt = 
+      dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
+    {
+     success_flag+=mmesh_pt->unrefine_uniformly();
+    }
+   else
+    {
+     oomph_info << "Info/Warning: Mesh cannot be unrefined uniformly " 
+                << std::endl;
+    }
+  }
+ //Multiple submeshes
+ else
+  {
+   // Loop over submeshes
+   for (unsigned imesh=0;imesh<Nmesh;imesh++)
+    {
+     // Unrefine i-th submesh uniformly if possible
+     if (RefineableMeshBase* mmesh_pt=
+         dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
+      {
+       success_flag+=mmesh_pt->unrefine_uniformly();
+      }
+     else
+      {
+       oomph_info << "Info/Warning: Cannot unrefine mesh " << imesh 
+                  << std::endl;
+      } 
+    }
+   //Rebuild the global mesh
+   rebuild_global_mesh();
+  }
 
-  //Any actions after the adaptation phase
-  actions_after_adapt();
+ //Any actions after the adaptation phase
+ actions_after_adapt();
 
-  //Do equation numbering
-  oomph_info <<"Number of equations: " 
+ //Do equation numbering
+ oomph_info <<"Number of equations: " 
             << assign_eqn_numbers() << std::endl; 
 
-  // Judge success
-  if (success_flag>0)
-   {
-    return 1;
-   }
-  else
-   {
-    return 0;
-   }
+ // Judge success
+ if (success_flag>0)
+  {
+   return 1;
+  }
+ else
+  {
+   return 0;
+  }
 
- }
+}
 
 //========================================================================
 /// Unrefine submesh i_mesh uniformly and rebuild problem.
@@ -6554,60 +6560,60 @@ unsigned Problem::unrefine_uniformly()
 /// level)
 //========================================================================
 unsigned Problem::unrefine_uniformly(const unsigned& i_mesh)
- {
-  actions_before_adapt();
+{
+ actions_before_adapt();
 
-  // Has unrefinement been successful?
-  unsigned success_flag=0;
+ // Has unrefinement been successful?
+ unsigned success_flag=0;
 
 #ifdef PARANOID
-  // Number of submeshes?
-  if (i_mesh>=nsub_mesh())
-   {
-    std::ostringstream error_message;
-    error_message  << "imesh " << i_mesh 
-                   << " is greater than the number of sub meshes " 
-                   << nsub_mesh() << std::endl;
+ // Number of submeshes?
+ if (i_mesh>=nsub_mesh())
+  {
+   std::ostringstream error_message;
+   error_message  << "imesh " << i_mesh 
+                  << " is greater than the number of sub meshes " 
+                  << nsub_mesh() << std::endl;
  
-    throw OomphLibError(error_message.str(),
-                        "Problem::unrefine_uniformly()",
-                        OOMPH_EXCEPTION_LOCATION);
-   }
+   throw OomphLibError(error_message.str(),
+                       "Problem::unrefine_uniformly()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
 #endif
 
-  // Unrefine single mesh uniformly if possible
-  if(RefineableMeshBase* mmesh_pt = 
-     dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
-   {
-    success_flag+=mmesh_pt->unrefine_uniformly();
-   }
-  else
-   {
-    oomph_info << "Info/Warning: Mesh cannot be unrefined uniformly " 
-               << std::endl;
-   }
+ // Unrefine single mesh uniformly if possible
+ if(RefineableMeshBase* mmesh_pt = 
+    dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
+  {
+   success_flag+=mmesh_pt->unrefine_uniformly();
+  }
+ else
+  {
+   oomph_info << "Info/Warning: Mesh cannot be unrefined uniformly " 
+              << std::endl;
+  }
 
-  //Rebuild the global mesh
-  rebuild_global_mesh();
+ //Rebuild the global mesh
+ rebuild_global_mesh();
 
-  //Any actions after the adaptation phase
-  actions_after_adapt();
+ //Any actions after the adaptation phase
+ actions_after_adapt();
 
-  //Do equation numbering
-  oomph_info <<"Number of equations: " 
+ //Do equation numbering
+ oomph_info <<"Number of equations: " 
             << assign_eqn_numbers() << std::endl; 
 
-  // Judge success
-  if (success_flag>0)
-   {
-    return 1;
-   }
-  else
-   {
-    return 0;
-   }
+ // Judge success
+ if (success_flag>0)
+  {
+   return 1;
+  }
+ else
+  {
+   return 0;
+  }
 
- }
+}
 
 
 //========================================================================
@@ -6645,7 +6651,7 @@ void Problem::unsteady_newton_solve(const double &dt,
    oomph_info << "first_timestep: " << first_timestep << std::endl;
    oomph_info << "shift: " << shift << std::endl;
    oomph_info << "This doesn't make sense (shifting does have to be done" 
-             << std::endl;
+              << std::endl;
    oomph_info 
     << "since we're constantly re-assigning the initial conditions"
     << std::endl;
@@ -6674,29 +6680,29 @@ void Problem::unsteady_newton_solve(const double &dt,
      adapt(n_refined,n_unrefined);
 
 #ifdef OOMPH_HAS_MPI
-       // Adaptation only converges if ALL the processes have no
-       // refinement or unrefinement to perform
-       unsigned total_refined=0;
-       unsigned total_unrefined=0;
-       if (mesh_pt()->mesh_has_been_distributed())
-        {
-         MPI_Allreduce(&n_refined,&total_refined,1,MPI_INT,MPI_SUM,
-                       MPI_COMM_WORLD);
-         n_refined=total_refined;
-         MPI_Allreduce(&n_unrefined,&total_unrefined,1,MPI_INT,MPI_SUM,
-                       MPI_COMM_WORLD);
-         n_unrefined=total_unrefined;
-        }
+     // Adaptation only converges if ALL the processes have no
+     // refinement or unrefinement to perform
+     unsigned total_refined=0;
+     unsigned total_unrefined=0;
+     if (mesh_pt()->mesh_has_been_distributed())
+      {
+       MPI_Allreduce(&n_refined,&total_refined,1,MPI_INT,MPI_SUM,
+                     MPI_COMM_WORLD);
+       n_refined=total_refined;
+       MPI_Allreduce(&n_unrefined,&total_unrefined,1,MPI_INT,MPI_SUM,
+                     MPI_COMM_WORLD);
+       n_unrefined=total_unrefined;
+      }
 #endif
 
-       oomph_info << "---> " << n_refined << " elements to be refined, and " 
-                  << n_unrefined << " to be unrefined, in total." << std::endl;
+     oomph_info << "---> " << n_refined << " elements to be refined, and " 
+                << n_unrefined << " to be unrefined, in total." << std::endl;
      
      // Check convergence of adaptation cycle
      if ((n_refined==0)&&(n_unrefined==0))
       {
        oomph_info << "\n \n Solution is fully converged in "
-            << "Problem::unsteady_newton_solver() \n \n ";
+                  << "Problem::unsteady_newton_solver() \n \n ";
        break;
       }       
 
@@ -6730,11 +6736,11 @@ void Problem::unsteady_newton_solve(const double &dt,
    if (isolve==max_solve-1)
     {
      oomph_info << std::endl 
-          << "----------------------------------------------------------" 
-          << std::endl
-          << "Reached max. number of adaptations in \n"
-          << "Problem::unsteady_newton_solver().\n"
-          << "Accepting current soln with errors:" ;
+                << "----------------------------------------------------------" 
+                << std::endl
+                << "Reached max. number of adaptations in \n"
+                << "Problem::unsteady_newton_solver().\n"
+                << "Accepting current soln with errors:" ;
      //Call actions_before_adapt to handle case of mixed elemental mesh
      actions_before_adapt();
      doc_errors();
@@ -6744,9 +6750,9 @@ void Problem::unsteady_newton_solve(const double &dt,
      assign_eqn_numbers();
      
      oomph_info << std::endl
-          << "----------------------------------------------------------" 
-          << std::endl
-          << std::endl;
+                << "----------------------------------------------------------" 
+                << std::endl
+                << std::endl;
     }
    
   } // End of adaptation loop
@@ -6774,120 +6780,120 @@ void Problem::newton_solve(const unsigned &max_adapt)
  for (unsigned isolve=0;isolve<max_solve;isolve++)
   {
 
-     // Only adapt after the first solve has been done!
-     if (isolve>0)
-      {
+   // Only adapt after the first solve has been done!
+   if (isolve>0)
+    {
 
-       unsigned n_refined;
-       unsigned n_unrefined;
+     unsigned n_refined;
+     unsigned n_unrefined;
        
-       // Adapt problem 
-       adapt(n_refined,n_unrefined);
+     // Adapt problem 
+     adapt(n_refined,n_unrefined);
        
 #ifdef OOMPH_HAS_MPI
-       // Adaptation only converges if ALL the processes have no
-       // refinement or unrefinement to perform
-       unsigned total_refined=0;
-       unsigned total_unrefined=0;
-       if (mesh_pt()->mesh_has_been_distributed())
-        {
-         MPI_Allreduce(&n_refined,&total_refined,1,MPI_INT,MPI_SUM,
-                       MPI_COMM_WORLD);
-         n_refined=total_refined;
-         MPI_Allreduce(&n_unrefined,&total_unrefined,1,MPI_INT,MPI_SUM,
-                       MPI_COMM_WORLD);
-         n_unrefined=total_unrefined;
-        }
+     // Adaptation only converges if ALL the processes have no
+     // refinement or unrefinement to perform
+     unsigned total_refined=0;
+     unsigned total_unrefined=0;
+     if (mesh_pt()->mesh_has_been_distributed())
+      {
+       MPI_Allreduce(&n_refined,&total_refined,1,MPI_INT,MPI_SUM,
+                     MPI_COMM_WORLD);
+       n_refined=total_refined;
+       MPI_Allreduce(&n_unrefined,&total_unrefined,1,MPI_INT,MPI_SUM,
+                     MPI_COMM_WORLD);
+       n_unrefined=total_unrefined;
+      }
 #endif
 
-       oomph_info << "---> " << n_refined << " elements to be refined, and " 
-                  << n_unrefined << " to be unrefined, in total." << std::endl;
+     oomph_info << "---> " << n_refined << " elements to be refined, and " 
+                << n_unrefined << " to be unrefined, in total." << std::endl;
 
-       // Check convergence of adaptation cycle
-       if ((n_refined==0)&&(n_unrefined==0))
-        {
-         oomph_info << "\n \n Solution is fully converged in "
-              << "Problem::newton_solver(). \n \n ";
-         break;
-        }       
-      }
-
-
-     // Do actual solve
-     //----------------
-     {
-      
-      //Now update anything that needs updating
-      // NOT NEEDED -- IS CALLED IN newton_solve BELOW! #
-      // actions_before_newton_solve();
-      
-      try
-       {
-        //Solve the non-linear problem for this timestep with Newton's method
-        Problem::newton_solve();
-       }
-      //Catch any exceptions thrown in the Newton solver
-      catch(NewtonSolverError &error)
-       {
-        oomph_info << std::endl
-                  << "USER-DEFINED ERROR IN NEWTON SOLVER " << std::endl;
-        //Check to see whether we have reached Max_iterations
-        if(error.iterations==Max_newton_iterations)
-         {
-          oomph_info << "MAXIMUM NUMBER OF ITERATIONS (" 
-                    << error.iterations 
-                    << ") REACHED WITHOUT CONVERGENCE " << std::endl;
-         }
-        //If not, it must be that we have exceeded the maximum residuals
-        else
-         {
-          oomph_info << "MAXIMUM RESIDUALS: " << error.maxres
-                    <<"EXCEEDS PREDEFINED MAXIMUM " 
-                    << Max_residuals
-                    << std::endl;
-         }
-
-        //Die horribly!!
-        std::ostringstream error_stream;
-        error_stream << "Error occured in adaptive Newton solver. "
-                     << std::endl;
-        throw OomphLibError(error_stream.str(),
-                            "Problem::newton_solve()",
-                            OOMPH_EXCEPTION_LOCATION);
-       }
-
-      //Now update anything that needs updating
-      // NOT NEEDED -- WAS CALLED IN newton_solve ABOVE
-      // !actions_after_newton_solve();
-      
-     } //End of solve block
-
-
-     if (isolve==max_solve-1)
+     // Check convergence of adaptation cycle
+     if ((n_refined==0)&&(n_unrefined==0))
       {
-       oomph_info 
-        << std::endl 
-        << "----------------------------------------------------------" 
-        << std::endl
-        << "Reached max. number of adaptations in \n"
-        << "Problem::newton_solver().\n"
-        << "Accepting current soln with errors:" ;
-       
-       //Call actions_before_adapt to handle case of mixed elemental mesh
-       actions_before_adapt();
-       doc_errors(); 
-       //Complete the build of the problem 
-       //[given that it may have been broken by actions_before_adapt()]
-       actions_after_adapt();
-       assign_eqn_numbers();
-       
-       oomph_info 
-        << std::endl
-        << "----------------------------------------------------------" 
-        << std::endl << std::endl;
-      }
+       oomph_info << "\n \n Solution is fully converged in "
+                  << "Problem::newton_solver(). \n \n ";
+       break;
+      }       
+    }
 
-    } // End of adaptation loop
+
+   // Do actual solve
+   //----------------
+   {
+      
+    //Now update anything that needs updating
+    // NOT NEEDED -- IS CALLED IN newton_solve BELOW! #
+    // actions_before_newton_solve();
+      
+    try
+     {
+      //Solve the non-linear problem for this timestep with Newton's method
+      Problem::newton_solve();
+     }
+    //Catch any exceptions thrown in the Newton solver
+    catch(NewtonSolverError &error)
+     {
+      oomph_info << std::endl
+                 << "USER-DEFINED ERROR IN NEWTON SOLVER " << std::endl;
+      //Check to see whether we have reached Max_iterations
+      if(error.iterations==Max_newton_iterations)
+       {
+        oomph_info << "MAXIMUM NUMBER OF ITERATIONS (" 
+                   << error.iterations 
+                   << ") REACHED WITHOUT CONVERGENCE " << std::endl;
+       }
+      //If not, it must be that we have exceeded the maximum residuals
+      else
+       {
+        oomph_info << "MAXIMUM RESIDUALS: " << error.maxres
+                   <<"EXCEEDS PREDEFINED MAXIMUM " 
+                   << Max_residuals
+                   << std::endl;
+       }
+
+      //Die horribly!!
+      std::ostringstream error_stream;
+      error_stream << "Error occured in adaptive Newton solver. "
+                   << std::endl;
+      throw OomphLibError(error_stream.str(),
+                          "Problem::newton_solve()",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+
+    //Now update anything that needs updating
+    // NOT NEEDED -- WAS CALLED IN newton_solve ABOVE
+    // !actions_after_newton_solve();
+      
+   } //End of solve block
+
+
+   if (isolve==max_solve-1)
+    {
+     oomph_info 
+      << std::endl 
+      << "----------------------------------------------------------" 
+      << std::endl
+      << "Reached max. number of adaptations in \n"
+      << "Problem::newton_solver().\n"
+      << "Accepting current soln with errors:" ;
+       
+     //Call actions_before_adapt to handle case of mixed elemental mesh
+     actions_before_adapt();
+     doc_errors(); 
+     //Complete the build of the problem 
+     //[given that it may have been broken by actions_before_adapt()]
+     actions_after_adapt();
+     assign_eqn_numbers();
+       
+     oomph_info 
+      << std::endl
+      << "----------------------------------------------------------" 
+      << std::endl << std::endl;
+    }
+
+  } // End of adaptation loop
 
 
 }
@@ -7043,10 +7049,10 @@ void Problem::check_halo_schemes(DocInfo& doc_info)
 //              << ", with size=" << nod_dim*nnod_per_el*nelem_halo << std::endl;
          
          sprintf(filename,"%s/error_haloed_check%i_%i.dat",
-          doc_info.directory().c_str(),dd,MPI_Helpers::My_rank);
+                 doc_info.directory().c_str(),dd,MPI_Helpers::My_rank);
          haloed_file.open(filename);
          sprintf(filename,"%s/error_halo_check%i_%i.dat",
-          doc_info.directory().c_str(),dd,MPI_Helpers::My_rank);
+                 doc_info.directory().c_str(),dd,MPI_Helpers::My_rank);
          halo_file.open(filename);
      
          unsigned count=0;         
@@ -7114,7 +7120,7 @@ void Problem::check_halo_schemes(DocInfo& doc_info)
                          << error << " " << MPI_Helpers::My_rank << " " 
                          << dd << " " 
                          << other_hanging << std::endl; 
-                          // (communicated is_hanging value)
+               // (communicated is_hanging value)
               }
             } // j<nnod_per_el
           } // e<nelem_haloed
@@ -7646,11 +7652,6 @@ void Problem::check_halo_schemes(DocInfo& doc_info)
 //========================================================================
 void Problem::synchronise_dofs()
 { 
-if (!Problem_has_been_distributed)
- {
-  return;
- }
-
  MPI_Status status;
 
  // Loop over all processors whose eqn numbers are to be updated
@@ -7690,7 +7691,7 @@ if (!Problem_has_been_distributed)
          for (unsigned ival=0; ival<nval; ival++)
           {
            values_on_other_proc.push_back(solid_nod_pt
-                    ->variable_position_pt()->value(ival));
+                                          ->variable_position_pt()->value(ival));
            count++;
           }
         }
@@ -7790,7 +7791,7 @@ if (!Problem_has_been_distributed)
              for (unsigned ival=0;ival<nval;ival++)
               {
                solid_nod_pt->variable_position_pt()->set_value(ival,
-                values_on_other_proc[count]);
+                                                               values_on_other_proc[count]);
                count++;
               }
             }
@@ -7799,7 +7800,7 @@ if (!Problem_has_been_distributed)
 
          // Get number of halo elements whose non-halo is on process send_rank
          Vector<FiniteElement*> halo_elem_pt=mesh_pt()->
-                                  halo_element_pt(send_rank);
+          halo_element_pt(send_rank);
          unsigned nelem_halo=halo_elem_pt.size();
          
          // Receive size of vector of internal data values
@@ -7809,7 +7810,7 @@ if (!Problem_has_been_distributed)
          // Prepare and receive vector
          internal_values_on_other_proc.resize(count_intern);
          MPI_Recv(&internal_values_on_other_proc[0],count_intern,
-           MPI_DOUBLE,send_rank,3,MPI_COMM_WORLD,&status);
+                  MPI_DOUBLE,send_rank,3,MPI_COMM_WORLD,&status);
 
          // reset array counter index to zero
          count_intern=0;
@@ -7817,17 +7818,17 @@ if (!Problem_has_been_distributed)
           {
            unsigned nintern_data=halo_elem_pt[e]->ninternal_data();
            for (unsigned iintern=0;iintern<nintern_data;iintern++)
-             {
-              // Cache internal_data local copy
-              Data* int_data_pt=halo_elem_pt[e]->internal_data_pt(iintern);
-              unsigned nval=int_data_pt->nvalue();
-              for (unsigned ival=0;ival<nval;ival++)
-               {
-                int_data_pt->set_value(ival,
-                   internal_values_on_other_proc[count_intern]);
-                count_intern++;
-               }
-             }
+            {
+             // Cache internal_data local copy
+             Data* int_data_pt=halo_elem_pt[e]->internal_data_pt(iintern);
+             unsigned nval=int_data_pt->nvalue();
+             for (unsigned ival=0;ival<nval;ival++)
+              {
+               int_data_pt->set_value(ival,
+                                      internal_values_on_other_proc[count_intern]);
+               count_intern++;
+              }
+            }
           }
         }
       }
@@ -7877,7 +7878,7 @@ long Problem::synchronise_eqn_numbers()
    new_ndof+=dofs_on_proc[i];
   }
  
-  // Accumulate offset for eqn numbers
+ // Accumulate offset for eqn numbers
  unsigned bump=0;
  for (int i=0;i<MPI_Helpers::My_rank;i++)
   { 
@@ -7954,7 +7955,7 @@ long Problem::synchronise_eqn_numbers()
      for (unsigned ival=0;ival<nval;ival++)
       {
        int old_eqn_number=solid_nod_pt->variable_position_pt()
-                              ->eqn_number(ival);
+        ->eqn_number(ival);
        // include all eqn numbers
 
        if (old_eqn_number>=0)
@@ -8011,7 +8012,7 @@ long Problem::synchronise_eqn_numbers()
          for (unsigned ival=0; ival<nval; ival++)
           {
            eqn_numbers_on_other_proc.push_back(solid_nod_pt
-                    ->variable_position_pt()->eqn_number(ival));
+                                               ->variable_position_pt()->eqn_number(ival));
            count++;
           }
         }
@@ -8046,7 +8047,7 @@ long Problem::synchronise_eqn_numbers()
          for (unsigned ival=0;ival<nval;ival++)
           {
            internal_eqn_numbers_on_other_proc.push_back
-               (int_data_pt->eqn_number(ival));
+            (int_data_pt->eqn_number(ival));
            count_intern++;
           }
         }
@@ -8120,7 +8121,7 @@ long Problem::synchronise_eqn_numbers()
           }
          // Get number of halo elements whose non-halo is on process send_rank
          Vector<FiniteElement*> halo_elem_pt=mesh_pt()->
-                                     halo_element_pt(send_rank);
+          halo_element_pt(send_rank);
          unsigned nelem_halo=halo_elem_pt.size();
 
          // Receive size of vector of internal data values
@@ -8130,7 +8131,7 @@ long Problem::synchronise_eqn_numbers()
          // Prepare and receive vector
          internal_eqn_numbers_on_other_proc.resize(count_intern);
          MPI_Recv(&internal_eqn_numbers_on_other_proc[0],
-                 count_intern,MPI_INT,send_rank,3,MPI_COMM_WORLD,&status);
+                  count_intern,MPI_INT,send_rank,3,MPI_COMM_WORLD,&status);
 
          // reset array counter index to zero
          count_intern=0;
@@ -8138,18 +8139,18 @@ long Problem::synchronise_eqn_numbers()
           {
            unsigned nintern_data=halo_elem_pt[e]->ninternal_data();
            for (unsigned iintern=0;iintern<nintern_data;iintern++)
-             {
-              Data* int_data_pt=halo_elem_pt[e]->internal_data_pt(iintern); 
-              // cache internal_data_pt copy
-              unsigned nval=int_data_pt->nvalue();
+            {
+             Data* int_data_pt=halo_elem_pt[e]->internal_data_pt(iintern); 
+             // cache internal_data_pt copy
+             unsigned nval=int_data_pt->nvalue();
 
-              for (unsigned ival=0;ival<nval;ival++)
-               {
-                int_data_pt->eqn_number(ival)=
-                   internal_eqn_numbers_on_other_proc[count_intern];
-                count_intern++;
-               }
-             }
+             for (unsigned ival=0;ival<nval;ival++)
+              {
+               int_data_pt->eqn_number(ival)=
+                internal_eqn_numbers_on_other_proc[count_intern];
+               count_intern++;
+              }
+            }
           }
          
         }

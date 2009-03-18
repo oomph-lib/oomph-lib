@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=22
+NUM_TESTS=26
 
 # Doc what we're using to run tests on two processors
 echo " " 
@@ -42,9 +42,56 @@ else
          driven_cavity_results.dat >> validation.log
 fi
 
-
-
-
+# Airy Cantiliver
+#================
+echo "Running Airy Cantilever with BlockDiagonalPreconditioner"
+$MPI_RUN_COMMAND ../airy_cantilever 0 > OUTPUT_airy_0
+echo "done"
+echo ""
+echo "Running Airy Cantilever with BlockDiagonalPreconditioner with two level parallelisation"
+$MPI_RUN_COMMAND ../airy_cantilever 1 > OUTPUT_airy_1
+echo "done"
+echo ""
+echo "Running Airy Cantilever with BlockTriangularPreconditioner (Upper)"
+$MPI_RUN_COMMAND ../airy_cantilever 2 > OUTPUT_airy_2
+echo "done"
+echo ""
+echo "Running Airy Cantilever with BlockTriangularPreconditioner (Lower)"
+$MPI_RUN_COMMAND ../airy_cantilever 3 > OUTPUT_airy_3
+echo "done"
+echo ""
+echo " " >> validation.log
+echo "Airy Cantilever block preconditioner tests" >> validation.log
+echo "--------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../bin/fpdiff.py ../validata/airy_soln.dat.gz \
+    RESLT/airy_soln0.dat 0.1 10e-6 >> validation.log
+fi
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../bin/fpdiff.py ../validata/airy_soln.dat.gz \
+    RESLT/airy_soln1.dat 0.1 10e-6 >> validation.log
+fi
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../bin/fpdiff.py ../validata/airy_soln.dat.gz \
+    RESLT/airy_soln2.dat 0.1 10e-6 >> validation.log
+fi
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../bin/fpdiff.py ../validata/airy_soln.dat.gz \
+    RESLT/airy_soln3.dat 0.1 10e-6 >> validation.log
+fi
 
 # Trilinos test
 #==============

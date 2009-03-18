@@ -40,7 +40,7 @@
 #include "../generic/block_preconditioner.h"
 #include "../generic/preconditioner.h"
 #include "../generic/SuperLU_preconditioner.h"
-
+#include "../generic/matrix_vector_product.h"
 #include "navier_stokes_elements.h"
 #include "refineable_navier_stokes_elements.h"
 
@@ -167,10 +167,6 @@ namespace oomph
      // previously -- if setup() is called again, data can
      // be wiped.
      Preconditioner_has_been_setup = false;
-
-     // Default method used in matrix-matrix multiplication (this seems
-     // fastest on our machines)
-     Mult_method = 2; // BAD: Must get rid of this magic number.
      
      // resize the mesh pt
      Mesh_pt.resize(1);
@@ -185,16 +181,24 @@ namespace oomph
      // is used for scaling.
      P_matrix_using_scaling = true;
 
-     // set P_matrix_pt to null
-     P_matrix_pt = 0;
-
      // set Doc_time to false
      Doc_time = false;
 
-     // null the off diagonal Block matrix pts
-     Block_matrix_0_1_pt = 0;
-     }
+     // null the off diagonal Block matrix pt
+     Bt_mat_vec_pt = 0;
 
+     // null the F matrix vector product helper
+     F_mat_vec_pt = 0;
+
+     // null the QBt matrix vector product pt
+     QBt_mat_vec_pt = 0;
+
+     // null the E matrix vector product helper
+     E_mat_vec_pt = 0;
+
+     // by default we do not form the E matrix (BQFQBt)
+     Form_BFBt_product = false;
+    }
 
    /// Destructor
    ~NavierStokesLSCPreconditioner()
@@ -202,20 +206,17 @@ namespace oomph
      clean_up_memory();
     }
 
-
    /// Broken copy constructor
    NavierStokesLSCPreconditioner(const NavierStokesLSCPreconditioner&)
     {
      BrokenCopy::broken_copy("NavierStokesLSCPreconditioner");
     }
 
-
    /// Broken assignment operator
    void operator=(const NavierStokesLSCPreconditioner&)
     {
      BrokenCopy::broken_assign("NavierStokesLSCPreconditioner");
     }
-
 
    /// Setup the preconditioner
    void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
@@ -233,9 +234,6 @@ namespace oomph
    /// \short Flag which is true if velocity mass matrix diagonal
    /// scaling is used in the Schur complement approximation
    bool& p_matrix_using_scaling() {return P_matrix_using_scaling;}
-
-   /// Method used in the matrix-matrix multiplications
-   unsigned& mult_method() {return Mult_method;}
 
    /// Function to set a new pressure matrix preconditioner (inexact solver)
    void set_p_preconditioner(Preconditioner& new_p_preconditioner)
@@ -324,26 +322,24 @@ namespace oomph
    /// Access function for Doc_time
    bool& doc_time() {return Doc_time;}
 
-   protected:
+   /// boolean indicating how the matrix vector product with BFBt should
+   /// be performed.\n
+   /// if true then:\n
+   /// in setup(...) : BFBt is computed.\n
+   /// in preconditioner_solve(...) : a single matrix vector product with 
+   /// BFBt is performed.\n
+   /// if false then:\n
+   /// in setup(...) : the matrices B, F are assembled and stored.\n
+   /// in preconditioner_solve(...) : a sequence of matrix vector products
+   /// with B, F, and Bt is performed.\n
+   /// (Note: in this discussion no scaling was considered but B and Bt 
+   ///  are replaced with BQ and QBt with scaling)\n
+   bool& form_BFBt_product() { return Form_BFBt_product; }
 
+    private:
 
    // oomph-lib objects
    // -----------------
-
-   /// block matrix 0 1
-   CRDoubleMatrix* Block_matrix_0_1_pt;
-
-   /// \short Matrix for multiplication in Schur complement approximation
-   /// \c E_matrix \f$ =
-   /// {\bf D}\widehat{\bf Q}^{-1}{\bf F}\widehat{\bf Q}^{-1}{\bf G} \f$
-   /// (stored as a matrix rather than a pointer to a matrix,
-   /// because it comes out of a matrix-matrix product in that form)
-   CRDoubleMatrix E_matrix;
-
-   /// \short Matrix for solve in Schur complement approximation:
-   /// \c P_matrix_pt \f$ =  {\bf D}  \widehat{\bf Q}^{-1}  {\bf G} \f$
-   /// (stored via a pointer because that's how we use it).
-   CRDoubleMatrix* P_matrix_pt;
 
    // Pointers to preconditioner (=inexact solver) objects
    // -----------------------------------------------------
@@ -359,15 +355,10 @@ namespace oomph
    /// flag indicating whether the default P preconditioner is used
    bool Using_default_p_preconditioner;
 
-    private:
-
    /// \short Control flag is true if the preconditioner has been setup
    /// (used so we can wipe the data when the preconditioner is
    /// called again)
    bool Preconditioner_has_been_setup;
-
-   /// Method to use in matrix-matrix multiplication
-   unsigned Mult_method;
 
    /// \short Control flag is true if velocity mass matrix diagonal scaling
    /// is used in the Schur complement approximation
@@ -384,16 +375,32 @@ namespace oomph
    /// Boolean indicating whether the momentum system preconditioner is a 
    /// block preconditioner
    bool F_preconditioner_is_block_preconditioner;
+
    /// Set Doc_time to true for outputting results of timings
    bool Doc_time;
 
+   /// MatrixVectorProduct operator for F if BFBt is not to be formed.
+   MatrixVectorProduct* F_mat_vec_pt;
+
+   /// MatrixVectorProduct operator for QBt if BFBt is not to be formed.
+   MatrixVectorProduct* QBt_mat_vec_pt;
+
+   /// MatrixVectorProduct operator for Bt;
+   MatrixVectorProduct* Bt_mat_vec_pt;
+
+   /// MatrixVectorProduct operator for E (BFBt) if BFBt is to be formed.
+   MatrixVectorProduct* E_mat_vec_pt;
+
+   /// \short indicates whether BFBt should be formed or the component matrices
+   /// should be retained.
+   bool Form_BFBt_product;
   };
 
 
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 
 
 

@@ -1469,7 +1469,6 @@ template<typename MATRIX>
 void GMRES<MATRIX>::solve(Problem* const &problem_pt, DoubleVector &result)
 { 
 
-
  //Find # of degrees of freedom (variables)
  unsigned n_dof = problem_pt->ndof();
  
@@ -1623,29 +1622,6 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
    solution.initialise();
   }
 
-
-//  {
-//   unsigned n=rhs.size();
-//   for (unsigned i=0;i<n;i++)
-//    {
-//     std::cout << rhs[i] << std::endl;
-//    }
-//   pause("done in solve_helper bla [1.01]");
-//  }
-
- 
-
-
-//  {
-//   unsigned n=rhs.size();
-//   for (unsigned i=0;i<n;i++)
-//    {
-//     std::cout << rhs[i] << std::endl;
-//    }
-//   pause("done in solve_helper bla [1.02]");
-//  }
-
- 
  // Time solver
 #ifdef OOMPH_HAS_MPI   
  double t_start = MPI_Wtime();
@@ -1681,9 +1657,10 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
 #else
    clock_t t_start_prec = clock();
 #endif
-   
-   preconditioner_pt()->setup(problem_pt,matrix_pt);
 
+   // do not setup 
+   preconditioner_pt()->setup(problem_pt,matrix_pt);
+   
    // Doc time for setup of preconditioner
 #ifdef OOMPH_HAS_MPI   
    double t_end_prec = MPI_Wtime();
@@ -1710,23 +1687,14 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
 
  // solve b-Jx = Mr for r (assumes x = 0);
  DoubleVector r(Distribution_pt);
- // Original version commented out
-// preconditioner_pt()->preconditioner_solve(rhs,r); 
- //////////// New version with RH preconditioning from Glyn
  if(Preconditioner_LHS)
   {
    preconditioner_pt()->preconditioner_solve(rhs,r); 
   }
  else
   {
-   //b-Jx0=r for r(assumes x=0) by saad p270
-   for(unsigned i=0;i<n_dof;i++)
-    {
-     r=rhs;
-//     r[i]=rhs[i];
-    }
+   r=rhs;
   }
- //////////////// End of new version with RH preconditioning from Glyn
  double normb = 0;
  
  // compute norm(r)
@@ -1818,15 +1786,7 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
      // resize next column of upper hessenberg matrix
      H[iter_restart].resize(iter_restart+2);
 
-     // Original code commented out
-   //   // solve Jv[i] = Mw for w
-//      {
-//       Vector<double> temp(n_dof);
-//       matrix_pt->multiply(v[iter_restart],temp);
-//       preconditioner_pt()->preconditioner_solve(temp,w);
-//      }
-
-     ////////////// New version from Glyn (modified for DoubleVectors by RM)
+     // solve Jv[i] = Mw for w
      {
       DoubleVector temp(Distribution_pt);
       if(Preconditioner_LHS)
@@ -1842,7 +1802,6 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
         matrix_pt->multiply(temp,w);
        }
      }
-     ////////////// End of new version from Glyn
 
      //
      double* w_pt = w.values_pt();
@@ -1960,17 +1919,6 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
    if (iter_restart>0) update((iter_restart - 1), H, s, v, solution);
 
    // solve Mr = (b-Jx) for r
-   // Commented out original version
-  //  {
-//     Vector<double> temp(n_dof);
-//     matrix_pt->multiply(solution,temp);
-//     for (unsigned i = 0; i < n_dof; i++)
-//      {
-//       temp[i] = rhs[i] - temp[i];
-//      }
-//     preconditioner_pt()->preconditioner_solve(temp,r); 
-//    } 
-   ////////// New version from Glyn
    {
     DoubleVector temp(Distribution_pt);
     matrix_pt->multiply(solution,temp);
@@ -1986,7 +1934,6 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
       preconditioner_pt()->preconditioner_solve(temp,r); 
      }
    } 
-   /////// End of new version from Glyn
    
    // compute current residual
    beta = 0.0;

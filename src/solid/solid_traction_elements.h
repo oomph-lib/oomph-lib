@@ -1793,6 +1793,56 @@ protected:
   }
 
 
+ /// \short The number of "blocks" that degrees of freedom in this element
+ /// are sub-divided into: Just the solid degrees of freedom themselves.
+ unsigned ndof_types()
+  {
+   return 1;
+  }
+ 
+ /// \short Create a list of pairs for all unknowns in this element,
+ /// so that the first entry in each pair contains the global equation
+ /// number of the unknown, while the second one contains the number
+ /// of the dof that this unknown is associated with.
+ /// (Function can obviously only be called if the equation numbering
+ /// scheme has been set up.) 
+ void get_dof_numbers_for_unknowns(
+  std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
+ {
+   
+ // temporary pair (used to store block lookup prior to being added to list)
+ std::pair<unsigned,unsigned> block_lookup;
+ 
+ // number of nodes
+ const unsigned n_node = this->nnode();
+
+ //Loop over directions
+ unsigned dim_el = this->dim();
+ for(unsigned i=0;i<dim_el+1;i++)
+   {     
+     //Loop over the nodes
+     for(unsigned j=0;j<n_node;j++)
+       {          
+	 
+         // Local eqn number. Recall that the
+         // (additional) Lagrange multiplier values are stored
+         // after those that were created by the bulk elements:
+         int local_eqn=nodal_local_eqn(j,Nbulk_value[j]+i);
+         if (local_eqn>=0)
+	   {
+	     // store block lookup in temporary pair: First entry in pair
+	     // is global equation number; second entry is block type
+	     block_lookup.first = this->eqn_number(local_eqn);
+	     block_lookup.second = 0;
+	     
+	     // add to list
+	     block_lookup_list.push_front(block_lookup);
+	   }
+       }
+   }
+ }
+
+
 private:
  
  /// The boundary number in the bulk mesh to which this element is attached
@@ -1829,7 +1879,6 @@ private:
 
  /// hierher doc
  bool Sparsify;
-
 }; 
 
 

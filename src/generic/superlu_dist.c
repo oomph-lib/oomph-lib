@@ -97,7 +97,8 @@ void superlu_dist_distributed_matrix(int opt_flag, int allow_permutations,
                                      double *values, int *col_index,
                                      int *row_start, double *b,  
                                      int nprow, int npcol, 
-                                     int doc, void **data, int *info) 
+                                     int doc, void **data, int *info,
+                                     MPI_Comm comm) 
 {
  /* Some SuperLU structures */
  superlu_options_t *options;
@@ -165,7 +166,7 @@ void superlu_dist_distributed_matrix(int opt_flag, int allow_permutations,
    
    /* Initialize the superlu process grid. */
    grid = (gridinfo_t *) SUPERLU_MALLOC(sizeof(gridinfo_t)); 
-   superlu_gridinit(MPI_COMM_WORLD, nprow, npcol, grid);
+   superlu_gridinit(comm, nprow, npcol, grid);
    superlu_data->grid = grid;
    
    /* Bail out if I do not belong in the grid. */
@@ -1163,7 +1164,8 @@ void superlu_dist_global_matrix(int opt_flag, int allow_permutations,
                                 double *values,  
                                 int *row_index, int *col_start, 
                                 double *b, int nprow, int npcol, 
-                                int doc, void **data, int *info) 
+                                int doc, void **data, int *info,
+                                MPI_Comm comm) 
 {
  /* Some SuperLU structures */
  superlu_options_t *options;
@@ -1230,7 +1232,7 @@ void superlu_dist_global_matrix(int opt_flag, int allow_permutations,
    
    /* Initialize the superlu process grid. */
    grid = (gridinfo_t *) SUPERLU_MALLOC(sizeof(gridinfo_t)); 
-   superlu_gridinit(MPI_COMM_WORLD, nprow, npcol, grid);
+   superlu_gridinit(comm, nprow, npcol, grid);
    superlu_data->grid = grid;
    
    /* Bail out if I do not belong in the grid. */
