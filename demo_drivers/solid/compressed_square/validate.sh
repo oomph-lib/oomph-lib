@@ -17,21 +17,22 @@ cd Validation
 
 
 
-mkdir RESLT_norefine0
-mkdir RESLT_norefine1
-mkdir RESLT_norefine2
-mkdir RESLT_norefine3
-mkdir RESLT_norefine4
-mkdir RESLT_norefine5
-mkdir RESLT_norefine6
-mkdir RESLT_norefine7
-mkdir RESLT_norefine8
-mkdir RESLT_norefine9
-mkdir RESLT_norefine10
-mkdir RESLT_norefine11
-mkdir RESLT_norefine12
-mkdir RESLT_norefine13
-mkdir RESLT_norefine14
+mkdir RESLT0
+mkdir RESLT1
+mkdir RESLT2
+mkdir RESLT3
+mkdir RESLT4
+mkdir RESLT5
+mkdir RESLT6
+mkdir RESLT7
+mkdir RESLT8
+mkdir RESLT9
+mkdir RESLT10
+mkdir RESLT11
+mkdir RESLT12
+mkdir RESLT13
+mkdir RESLT14
+mkdir RESLT15
 
 
 
@@ -49,28 +50,29 @@ echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat \
-RESLT_norefine0/soln1.dat \
-RESLT_norefine1/soln1.dat \
-RESLT_norefine2/soln1.dat \
-RESLT_norefine3/soln1.dat \
-RESLT_norefine4/soln1.dat \
-RESLT_norefine5/soln1.dat \
-RESLT_norefine6/soln1.dat \
-RESLT_norefine7/soln1.dat \
-RESLT_norefine8/soln1.dat \
-RESLT_norefine9/soln1.dat \
-RESLT_norefine10/soln1.dat \
-RESLT_norefine11/soln1.dat \
-RESLT_norefine12/soln1.dat \
-RESLT_norefine13/soln1.dat \
-RESLT_norefine14/soln1.dat \
+RESLT0/soln1.dat \
+RESLT1/soln1.dat \
+RESLT2/soln1.dat \
+RESLT3/soln1.dat \
+RESLT4/soln1.dat \
+RESLT5/soln1.dat \
+RESLT6/soln1.dat \
+RESLT7/soln1.dat \
+RESLT8/soln1.dat \
+RESLT9/soln1.dat \
+RESLT10/soln1.dat \
+RESLT11/soln1.dat \
+RESLT12/soln1.dat \
+RESLT13/soln1.dat \
+RESLT14/soln1.dat \
+RESLT15/soln1.dat \
     > result.dat
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/result.dat.gz \
-    result.dat  >> validation.log
+    result.dat  0.1 1.0e-7 >> validation.log
 fi
 
 

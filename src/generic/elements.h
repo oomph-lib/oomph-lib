@@ -3403,6 +3403,58 @@ class FaceGeometry
 };
 
 
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+
+//======================================================================
+/// Dummy FaceElement for use with purely geometric operations
+/// such as mesh generation.
+//======================================================================
+template <class ELEMENT>
+class DummyFaceElement : public virtual FaceGeometry<ELEMENT>, 
+public virtual FaceElement
+{
+
+public:
+ 
+ /// \short Constructor, which takes a "bulk" element and the 
+ /// face index
+ DummyFaceElement(FiniteElement* const &element_pt, 
+                  const int &face_index) : 
+  FaceGeometry<ELEMENT>(), FaceElement()
+  {  
+   //Attach the geometrical information to the element. N.B. This function
+   //also assigns nbulk_value from the required_nvalue of the bulk element
+   element_pt->build_face_element(face_index,this);
+  }
+
+ /// Output nodal coordinates
+ void output(std::ostream &outfile)
+  {
+   outfile << "ZONE" << std::endl;
+   unsigned nnod=nnode();
+   for (unsigned j=0;j<nnod;j++)
+    {
+     Node* nod_pt=node_pt(j);
+     unsigned dim=nod_pt->ndim();
+     for (unsigned i=0;i<dim;i++)
+      {
+       outfile << nod_pt->x(i) << " ";
+      }
+     outfile << std::endl;
+    }     
+  }
+
+}; 
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
 }
 
 #endif

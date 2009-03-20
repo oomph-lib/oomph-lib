@@ -226,6 +226,15 @@ namespace Global_Physical_Variables
  /// Pseudo-solid mass density
  double Lambda_sq=0.0;
 
+ /// Pseudo-solid Poisson ratio
+ double Nu=0.1;
+
+ /// Pseudo-solid Mooney-Rivlin parameter
+ double C1=1.0;
+
+ /// Pseudo-solid Young's modulus
+ double E=0.5;
+
  /// Traction applied on the fluid at the left (inflow) boundary
  void prescribed_traction(const double& t,
                           const Vector<double>& x,
@@ -354,11 +363,11 @@ private :
  void delete_traction_elements(Mesh* const &traction_mesh_pt);
 
  /// \short Create elements that enforce prescribed boundary motion
- /// by Lagrange multiplilers
+ /// by Lagrange multipliers
  void create_lagrange_multiplier_elements();
 
  /// Delete elements that enforce prescribed boundary motion
- /// by Lagrange multiplilers
+ /// by Lagrange multipliers
  void delete_lagrange_multiplier_elements();
 
  ///Number of elements in the x direction in the upstream part of the channel
@@ -393,7 +402,7 @@ private :
  /// inflow
  Mesh* Applied_fluid_traction_mesh_pt; 
  
- /// Pointers to meshes of Lagrange multiplier elements
+ /// Pointers to mesh of Lagrange multiplier elements
  SolidMesh* Lagrange_multiplier_mesh_pt;
 
  /// Pointer to the "wall" mesh
@@ -517,8 +526,9 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
     
  //Set the constitutive law
  Constitutive_law_pt = new IsotropicStrainEnergyFunctionConstitutiveLaw(
-  new GeneralisedMooneyRivlin(0.1,1.0,0.5));
-
+  new GeneralisedMooneyRivlin(&Global_Physical_Variables::Nu,
+                              &Global_Physical_Variables::C1,
+                              &Global_Physical_Variables::E));
 
  // Complete build of fluid mesh
  //----------------------------- 

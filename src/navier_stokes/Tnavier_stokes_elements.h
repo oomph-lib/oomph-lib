@@ -691,7 +691,6 @@ template<>
 inline void TTaylorHoodElement<2>::pshape_nst(const Vector<double> &s, Shape &psi)
 const
 {
- // hierher hardcoded  -- should probably refer to other Telement<2,2>
  psi[0] = s[0];
  psi[1] = s[1];
  psi[2] = 1.0-s[0]-s[1];
@@ -705,7 +704,6 @@ template<>
 inline void TTaylorHoodElement<3>::pshape_nst(const Vector<double> &s, Shape &psi)
 const
 {
- // hierher hardcoded  -- should probably refer to other Telement<3,2>
  psi[0] = s[0];
  psi[1] = s[1];
  psi[2] = s[2];
@@ -743,7 +741,6 @@ inline void TTaylorHoodElement<3>::pshape_nst(const Vector<double> &s, Shape &ps
 }
 
 
-
 //=======================================================================
 /// Face geometry of the 2D Taylor_Hood elements
 //=======================================================================
@@ -751,13 +748,15 @@ template<>
 class FaceGeometry<TTaylorHoodElement<2> >: public virtual QElement<1,3>
 {
   public:
- FaceGeometry() : QElement<1,3>()
-  {
-   throw OomphLibError(
-    "Careful: FaceGeometries for TTaylorHood have not been tested",
-    "FaceGeometry::FaceGeometry()",
-    OOMPH_EXCEPTION_LOCATION);
-  }
+
+  /// Constructor: Call constructor of base
+  FaceGeometry() : QElement<1,3>() {}
+/*   { */
+/*    throw OomphLibWarning( */
+/*     "Careful: FaceGeometries for TTaylorHood have not been tested", */
+/*     "FaceGeometry::FaceGeometry()", */
+/*     OOMPH_EXCEPTION_LOCATION); */
+/*   } */
 };
 
 //=======================================================================
@@ -768,13 +767,15 @@ class FaceGeometry<TTaylorHoodElement<3> >: public virtual TElement<2,3>
 {
  
   public:
- FaceGeometry() : TElement<2,3>()
-  {
-  throw OomphLibError(
-   "Careful: FaceGeometries for TTaylorHood have not been tested",
-   "FaceGeometry::FaceGeometry()",
-   OOMPH_EXCEPTION_LOCATION);
-  }
+
+ /// Constructor: Call constructor of base
+  FaceGeometry() : TElement<2,3>() {}
+/*   { */
+/*    throw OomphLibWarning( */
+/*     "Careful: FaceGeometries for TTaylorHood have not been tested", */
+/*     "FaceGeometry::FaceGeometry()", */
+/*     OOMPH_EXCEPTION_LOCATION); */
+/*   } */
 };
 
 }

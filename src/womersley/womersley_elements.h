@@ -2192,9 +2192,6 @@ class NavierStokesImpedanceTractionElement :
   public virtual NavierStokesImpedanceTractionElementBase
 {
  
-
-// hierher reverse order of private/public
-
   private:
  
  /// \short Pointer to auxiliary integral, containing
@@ -2364,7 +2361,7 @@ class NavierStokesImpedanceTractionElement :
      double error=0.0;
      for(unsigned i=0;i<DIM+1;i++)
       {
-       error+=abs(x[i]- x_bulk[i]);
+       error+=std::fabs(x[i]- x_bulk[i]);
       }
      if (error>max_legal_error)
       {
@@ -2767,7 +2764,7 @@ fill_in_generic_residual_contribution_fluid_traction(
 /// is a suitable Womersley impedance tube to give the pressure via 
 /// its get_response(...) function.
 ///
-/// Note: the NavierStokesPressureControlElement element calculates 
+/// Note: the NavierStokesWomersleyPressureControlElement element calculates 
 /// Jacobian entries BOTH for itself AND for the 
 /// NetFluxControlElementForWomersleyPressureControl with respect to 
 /// the unknowns in this (NavierStokesWomersleyPressureControlElement)
@@ -2788,7 +2785,7 @@ public virtual GeneralisedElement
    Volume_flux_data_pt = new Data(1);
    
    // Add new Data to internal data
-   add_internal_data(Volume_flux_data_pt);
+   Volume_flux_data_id=add_internal_data(Volume_flux_data_pt);
   }
  
  /// Destructor should not delete anything
@@ -2862,11 +2859,11 @@ public virtual GeneralisedElement
  void fill_in_generic_residual_contribution_pressure_control(
   Vector<double> &residuals, 
   DenseMatrix<double> &jacobian,
-  unsigned flag)
+  const unsigned& flag)
   {
    // Get Womersley pressure and derivative with respect to the flux
-   double womersley_pressure;
-   double d_womersley_pressure_d_q;
+   double womersley_pressure=0.0;
+   double d_womersley_pressure_d_q=0.0;
    
    // Get response of impedance tube
    Womersley_tube_pt->get_response(womersley_pressure,

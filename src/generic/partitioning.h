@@ -74,6 +74,27 @@ void METIS_PartGraphVKway(int *, int *, int *, int *, int *,
 namespace METIS
 {
  
+
+
+ /// \short Default function that translates spatial
+ /// error into weight for METIS partitioning (unit weight regardless
+ /// of input)
+ extern void default_error_to_weight_fct(const double& spatial_error, 
+                                         const double& max_error, 
+                                         const double& min_error, 
+                                         int& weight);
+
+ /// \short Typedef for function pointer to to function that translates spatial
+ /// error into weight for METIS partitioning.
+ typedef void (*ErrorToWeightFctPt)(const double& spatial_error, 
+                                    const double& max_error, 
+                                    const double& min_error, 
+                                    int& weight);
+ 
+ /// \short Function pointer to to function that translates spatial
+ /// error into weight for METIS partitioning.
+ extern ErrorToWeightFctPt Error_to_weight_fct_pt;
+ 
  /// \short Partition mesh uniformly by dividing elements
  /// equally over the partitions, in the order
  /// in which they are returned by problem.
@@ -83,7 +104,7 @@ namespace METIS
  extern void uniform_partition_mesh(Problem* problem_pt,
                                     const unsigned& ndomain,
                                     Vector<unsigned>& element_domain);
-
+ 
  
  /// \short Use METIS to assign each element to a domain.
  /// On return, element_domain[ielem] contains the number
@@ -97,7 +118,7 @@ namespace METIS
                              const unsigned& ndomain,
                              const unsigned& objective,
                              Vector<unsigned>& element_domain);
-
+  
 
  /// \short Use METIS to assign each element to a domain.
  /// On return, element_domain[ielem] contains the number

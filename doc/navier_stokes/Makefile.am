@@ -16,7 +16,10 @@ spine_channel \
 collapsible_channel \
 algebraic_collapsible_channel \
 channel_with_leaflet \
-turek_flag_non_fsi
+turek_flag_non_fsi \
+unstructured_fluid \
+unstructured_three_d_fluid
+
 
 
 

@@ -58,7 +58,8 @@ class CollapsibleChannelDomain : public Domain
                            const double& ldown,
                            const double& ly, 
                            GeomObject* wall_pt) :  
-  BL_squash_fct_pt(&default_BL_squash_fct)
+  BL_squash_fct_pt(&default_BL_squash_fct),
+  Axial_spacing_fct_pt(&default_axial_spacing_fct)
   {
    Nup=nup;
    Ncollapsible=ncollapsible;
@@ -179,6 +180,25 @@ class CollapsibleChannelDomain : public Domain
    return BL_squash_fct_pt(s);
   }
 
+ /// \short Typedef for function pointer for function that implements
+ /// axial spacing of macro elements
+ typedef double (*AxialSpacingFctPt)(const double& xi);
+ 
+ /// \short Function pointer for function that  implements
+ /// axial spacing of macro elements
+ AxialSpacingFctPt& axial_spacing_fct_pt()
+  {
+   return Axial_spacing_fct_pt;
+  }
+
+ /// \short Function that implements
+ /// axial spacing of macro elements
+ double axial_spacing_fct(const double& xi)
+  {
+   return Axial_spacing_fct_pt(xi);
+  }
+
+
 /// \short Vector representation of the  imacro-th macro element
 /// boundary idirect (N/S/W/E) at time level t 
 /// (t=0: present; t>0: previous): \f$ {\bf r}({\bf zeta}) \f$
@@ -255,6 +275,17 @@ void macro_element_boundary(const unsigned& t,
  /// \short Function pointer for function that squashes
  /// the macro elements near the walls
  BLSquashFctPt BL_squash_fct_pt;
+
+ /// \short Function pointer for function that implements
+ /// axial spacing of macro elements
+ AxialSpacingFctPt Axial_spacing_fct_pt;
+
+ /// \short Default for function that  implements
+ /// axial spacing of macro elements
+ static double default_axial_spacing_fct(const double& xi)
+  {
+   return xi;
+  }
 
 
   ///Number of vertical element columns in upstream section
@@ -463,7 +494,7 @@ void CollapsibleChannelDomain::r_W_straight(const Vector<double>& zeta,
   case 0: //in the upstream part of the channel
    
    //Parametrize the boundary
-   r[0]=double(x)*(Lup/double(Nup));
+   r[0]=axial_spacing_fct(double(x)*(Lup/double(Nup)));
    r[1]=(double(y)+(0.5*(1.0+zeta[0])))*(Ly/double(Ny));
 
    // Map it via squash fct
@@ -474,7 +505,8 @@ void CollapsibleChannelDomain::r_W_straight(const Vector<double>& zeta,
   case 1 : //in the downstream part of the channel
    
    //Parametrizes the boundary
-   r[0]=double(x-Nup-Ncollapsible)*(Ldown/double(Ndown))+Lup+Lcollapsible;
+   r[0]=axial_spacing_fct(
+    double(x-Nup-Ncollapsible)*(Ldown/double(Ndown))+Lup+Lcollapsible);
    r[1]=(double(y)+(0.5*(1.0+zeta[0])))*(Ly/double(Ny));
 
    // Map it via squash fct
@@ -518,7 +550,7 @@ void CollapsibleChannelDomain::r_E_straight(const Vector<double>& zeta,
   case 0: //in the upstream part of the channel
   
    //Parametrizes the boundary
-   r[0]=(double(x)+1.0)*(Lup/double(Nup));
+   r[0]=axial_spacing_fct((double(x)+1.0)*(Lup/double(Nup)));
    r[1]=(double(y)+(0.5*(1.0+zeta[0])))*(Ly/double(Ny));
 
    // Map it via squash fct
@@ -529,8 +561,8 @@ void CollapsibleChannelDomain::r_E_straight(const Vector<double>& zeta,
   case 1: //in the downstream part of the channel
    
    //Parametrizes the boundary
-   r[0]=(double(x-Nup-Ncollapsible)+1.0)*
-    (Ldown/double(Ndown))+Lup+Lcollapsible;
+   r[0]=axial_spacing_fct((double(x-Nup-Ncollapsible)+1.0)*
+                          (Ldown/double(Ndown))+Lup+Lcollapsible);
    r[1]=(double(y)+(0.5*(1.0+zeta[0])))*(Ly/double(Ny));
 
    // Map it via squash fct
@@ -573,7 +605,7 @@ void CollapsibleChannelDomain::r_N_straight(const Vector<double>& zeta,
   case 0: //in the upstream part of the channel
    
    //Parametrizes the boundary
-   r[0]=(double(x)+(0.5*(1.0+zeta[0])))*(Lup/double(Nup));
+   r[0]=axial_spacing_fct((double(x)+(0.5*(1.0+zeta[0])))*(Lup/double(Nup)));
    r[1]=(double(y)+1.0)*(Ly/double(Ny));
 
    // Map it via squash fct
@@ -584,21 +616,22 @@ void CollapsibleChannelDomain::r_N_straight(const Vector<double>& zeta,
   case 1: //in the downstream part of the channel
    
    //Parametrizes the boundary
-   r[0]=(double(x-Nup-Ncollapsible)+
-         (0.5*(1.0+zeta[0])))*(Ldown/double(Ndown))+Lup+Lcollapsible;
+   r[0]=axial_spacing_fct((double(x-Nup-Ncollapsible)+
+                           (0.5*(1.0+zeta[0])))*
+                          (Ldown/double(Ndown))+Lup+Lcollapsible);
    r[1]=(double(y)+1.0)*(Ly/double(Ny));
-
+   
    // Map it via squash fct
    r[1]=Ly*s_squash(r[1]/Ly);
-
+   
    break;
    
   default:
    
-  
+   
    std::ostringstream error_stream;
    error_stream << "Never get here! part=" << part << std::endl;
-
+   
    throw OomphLibError(error_stream.str(),
                        "CollapsibleChannel::",
                        OOMPH_EXCEPTION_LOCATION);
@@ -628,37 +661,38 @@ void CollapsibleChannelDomain::r_S_straight(const Vector<double>& zeta,
   case 0: //in the upstream bit
    
    //Parametrizes the boundary
-  r[0]=(double(x)+(0.5*(1+zeta[0])))*(Lup/double(Nup));
-  r[1]=double(y)*(Ly/double(Ny));
-
-  // Map it via squash fct
-  r[1]=Ly*s_squash(r[1]/Ly);
-
+   r[0]=axial_spacing_fct((double(x)+(0.5*(1+zeta[0])))*(Lup/double(Nup)));
+   r[1]=double(y)*(Ly/double(Ny));
+   
+   // Map it via squash fct
+   r[1]=Ly*s_squash(r[1]/Ly);
+   
   break;
   
- case 1: //in the downstream bit
-
-  //Parametrizes the boundary
-  r[0]=(double(x-Nup-Ncollapsible)+
-        (0.5*(1+zeta[0])))*(Ldown/double(Ndown))+Lup+Lcollapsible;
-  r[1]=double(y)*(Ly/double(Ny));
-
-  // Map it via squash fct
-  r[1]=Ly*s_squash(r[1]/Ly);
-
-  break;
-
+  case 1: //in the downstream bit
+   
+   //Parametrizes the boundary
+   r[0]=axial_spacing_fct((double(x-Nup-Ncollapsible)+
+                           (0.5*(1+zeta[0])))*
+                          (Ldown/double(Ndown))+Lup+Lcollapsible);
+   r[1]=double(y)*(Ly/double(Ny));
+   
+   // Map it via squash fct
+   r[1]=Ly*s_squash(r[1]/Ly);
+   
+   break;
+   
   default:
    
-  
+   
    std::ostringstream error_stream;
    error_stream << "Never get here! part=" << part << std::endl;
-
+   
    throw OomphLibError(error_stream.str(),
                        "CollapsibleChannel::",
                        OOMPH_EXCEPTION_LOCATION);
    
- }
+  }
 }
 
 

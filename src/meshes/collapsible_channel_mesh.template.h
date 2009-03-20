@@ -113,6 +113,27 @@ public:
    return Domain_pt->bl_squash_fct_pt();
   }
 
+
+ /// \short Function pointer for function that redistributes the
+ /// elements in the axial direction. Virtual
+ /// so we can break it in derived classes (e.g. the Algebraic
+ /// versions of this mesh where it doesn't make any sense
+ /// to provide the bl_squash_fct after the mesh has been built).
+ virtual CollapsibleChannelDomain::AxialSpacingFctPt& axial_spacing_fct_pt()
+  {
+   return Domain_pt->axial_spacing_fct_pt();
+  }
+
+
+ /// \short Function pointer for function that redistributes the
+ /// elements in the axial direction. Const version
+ virtual CollapsibleChannelDomain::AxialSpacingFctPt& axial_spacing_fct_pt()
+  const 
+  {
+   return Domain_pt->axial_spacing_fct_pt();
+  }
+ 
+
 protected:
 
  /// Pointer to domain
@@ -484,6 +505,32 @@ public:
    // Dummy return
    return Dummy_fct_pt;
   }
+
+
+ /// \short Function pointer for function that redistributes nodes
+ /// axially. Default trivial mapping (the identity)
+ /// leaves vertical nodal positions unchanged. Mapping is
+ /// used in underlying CollapsibleChannelDomain. Broken function
+ /// that overloads the version in the CollapsibleChannelMesh.
+ /// It does not make sense to specify the function pointer
+ /// after the mesh has been set up!
+ CollapsibleChannelDomain::BLSquashFctPt& axial_spacing_fct_pt()
+  {
+   std::ostringstream error_message;
+   error_message 
+    << "It does not make sense to set the axial_spacing_fct_pt \n"
+    << "outside the constructor as it's only used to set up the \n"
+    << "algebraic remesh data when the algebraic mesh is first built. \n";
+    std::string function_name =
+     "AlgebraicCollapsibleChannelMesh::axial_spacing_fct_pt()\n";
+    
+    throw OomphLibError(error_message.str(),function_name,
+                        OOMPH_EXCEPTION_LOCATION);
+    
+   // Dummy return
+    return Dummy_fct_pt;
+  }
+
 
  /// \short Update nodal position at time level t (t=0: present; 
  /// t>0: previous)

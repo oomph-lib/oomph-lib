@@ -152,6 +152,13 @@ namespace oomph
     {
      this->Mesh_pt.push_back(new_mesh_pt);
     }
+
+   /// \short Access function to the i-th subsidiary preconditioner,
+   /// i.e. the preconditioner for the i-th block.
+   Preconditioner* subsidiary_block_preconditioner_pt(const unsigned& i)
+   {
+    return Diagonal_block_preconditioner_pt[i]; 
+   }
    
 #ifdef OOMPH_HAS_MPI
    /// \short access function to the two level parallelisation flag
@@ -219,7 +226,7 @@ namespace oomph
      if (Subsidiary_preconditioner_function_pt == 0)
       {
 #ifdef OOMPH_HAS_MPI
-       if (Distribution_pt->communicator_pt()->nproc() > 1)
+       if (this->Distribution_pt->communicator_pt()->nproc() > 1)
         {
          Diagonal_block_preconditioner_pt[i] = new SuperLUDistPreconditioner;
         }
@@ -506,7 +513,7 @@ namespace oomph
      if (Subsidiary_preconditioner_function_pt == 0)
       {
 #ifdef OOMPH_HAS_MPI
-       if (Distribution_pt->communicator_pt()->nproc() > 1)
+       if (this->Distribution_pt->communicator_pt()->nproc() > 1)
         {
          Diagonal_block_preconditioner_pt[i] = new SuperLUDistPreconditioner;
         }

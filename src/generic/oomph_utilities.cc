@@ -28,7 +28,8 @@
 #include "oomph_utilities.h"
 #include "Vector.h"
 #include "matrices.h"
-#include<algorithm>
+#include <algorithm>
+#include <limits.h>
 
 #ifdef OOMPH_HAS_MPI
 #include "mpi.h"

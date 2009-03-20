@@ -669,8 +669,8 @@ int main(int argc, char* argv[])
 
  // Create generalised Hookean constitutive equations
  Global_Physical_Variables::Constitutive_law_pt = 
-  new GeneralisedHookean(Global_Physical_Variables::Nu,
-                         Global_Physical_Variables::E);
+  new GeneralisedHookean(&Global_Physical_Variables::Nu,
+                         &Global_Physical_Variables::E);
  
  //Set up the problem
  CantileverProblem<MySolidElement<RefineableQPVDElement<2,3> > > problem;

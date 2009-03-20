@@ -68,7 +68,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/2d_euler.dat.gz \
-    2d_euler.dat  0.1 1.0e-14 >> validation.log
+    2d_euler.dat  0.1 1.0e-12 >> validation.log
 fi
 
 
@@ -92,7 +92,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/couette.dat.gz \
-    couette.dat  0.1 1.0e-14 >> validation.log
+    couette.dat  0.1 1.0e-12 >> validation.log
 fi
 
 # Append output to global validation log file

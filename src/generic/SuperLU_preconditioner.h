@@ -148,23 +148,26 @@ class SuperLUDistPreconditioner : public Preconditioner
   /// CRDoubleMatrix or CCDoubleMatrix
   void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
    {
-    this->clean_up_memory();
      oomph_info << "Setting up SuperLU Dist (exact) preconditioner" 
-		<< std::endl;
-     if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt) != 0)
-       {
-	 Distribution_pt
-	   ->rebuild(dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt)
-		     ->distribution_pt());
-       }
-     else
-       {
-	 Distribution_pt->rebuild(problem_pt->communicator_pt(),
-				  matrix_pt->nrow(),false);
-       }
-     solver.doc_time() = false;
-     solver.distribution_pt()->rebuild(Distribution_pt);
-     solver.factorise(matrix_pt);
+     		<< std::endl;
+                
+    // Wipe prev        iously allocated memory
+    clean_up_memory();  
+    
+    if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt) != 0)
+     {
+      Distribution_pt
+       ->rebuild(dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt)
+                 ->distribution_pt());
+     }
+    else
+     {
+      Distribution_pt->rebuild(problem_pt->communicator_pt(),
+                               matrix_pt->nrow(),false);
+     }
+    solver.doc_time() = false;
+    solver.distribution_pt()->rebuild(Distribution_pt);
+    solver.factorise(matrix_pt);
    }
   
   /// \short Function applies SuperLU_Dist to vector r for (exact) 

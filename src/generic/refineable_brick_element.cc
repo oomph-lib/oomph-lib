@@ -1113,10 +1113,6 @@ node_created_by_neighbour(const Vector<double> &s_fraction)
        //If there is a node, return it
        if(neighbour_node_pt!=0)
         {
-//          std::cout << "duplicated edge node at: "
-//                    << neighbour_node_pt->x(0) << " " 
-//                    << neighbour_node_pt->x(1) << " " 
-//                    << neighbour_node_pt->x(2) << " " << std::endl;
          return neighbour_node_pt;
         }
       }

@@ -92,8 +92,6 @@ class StrainEnergyFunction
  /// \short Return the derivatives of the strain energy function with 
  /// respect to the components of the strain tensor (default is to use 
  /// finite differences).
- /// hierher Andrew: Why default -- there's no default implemented!
- /// \todo Andrew: Why default -- there's no default implemented!
  virtual void derivative(const DenseMatrix<double> &gamma,
                          DenseMatrix<double> &dWdgamma)
   {
@@ -148,47 +146,39 @@ class StrainEnergyFunction
 
 //=====================================================================
 /// \short MooneyRivlin strain-energy function.
-/// hierher: Andrew: annotate and non-dimensionalise
-/// \todo Andrew: annotate and non-dimensionalise
+/// with constitutive parameters C1 and C2:
+/// \f[
+/// W = C_1 (I_0 - 3) + C_2 (I_1 - 3)
+/// \f]
+/// where incompressibility (\f$ I_2 \equiv 1\f$) is assumed. 
 //====================================================================
 class MooneyRivlin : public StrainEnergyFunction
 {
 
   public:
  
- /// Constructor takes the value of the constants
- MooneyRivlin(const double &c1, const double &c2) : StrainEnergyFunction(),
-  C1(c1), C2(c2) {}
+ /// Constructor takes the pointer to the value of the constants
+ MooneyRivlin(double* c1_pt, double* c2_pt) : StrainEnergyFunction(),
+  C1_pt(c1_pt), C2_pt(c2_pt) {}
 
-
- /// Empty virtual destructor
+ /// Empty Virtual destructor
  virtual ~MooneyRivlin(){}
-
 
  /// Return the strain energy in terms of strain tensor
  double W(const DenseMatrix<double> &gamma)
   {return StrainEnergyFunction::W(gamma);}
 
-
  /// Return the strain energy in terms of the strain invariants
  double W(const Vector<double> &I)
-  {return C1*(I[0]-3.0) + C2*(I[1]-3.0);}
-
-
-/*  /// \short Return the derivatives of the strain energy function with  */
-/*  /// respect to the components of the strain tensor (default is to use  */
-/*  /// finite differences). */
-/*  void derivative(const DenseMatrix<double> &gamma, */
-/*                  DenseMatrix<double> &dWdgamma) */
-/*   {StrainEnergyFunction::derivative(gamma,dWdgamma);} */
+ {return (*C1_pt)*(I[0]-3.0) + (*C2_pt)*(I[1]-3.0);}
 
  
  /// \short Return the derivatives of the strain energy function with
  /// respect to the strain invariants
  void derivatives(Vector<double> &I, Vector<double> &dWdI)
   {
-   dWdI[0] = C1;
-   dWdI[1] = C2;
+   dWdI[0] = (*C1_pt);
+   dWdI[1] = (*C2_pt);
    dWdI[2] = 0.0;
   }
 
@@ -201,11 +191,11 @@ class MooneyRivlin : public StrainEnergyFunction
 
   private:
  
- /// First Mooney Rivlin constant
- double C1;
+ /// Pointer to first Mooney Rivlin constant
+ double* C1_pt;
 
- /// Second Mooney Rivlin constant
- double C2;
+ /// Pointer to second Mooney Rivlin constant
+ double* C2_pt;
 
 };
 
@@ -216,80 +206,6 @@ class MooneyRivlin : public StrainEnergyFunction
 ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////
-
-
-
-
-//=====================================================================
-/// \short TongOne class of strain-energy functions. 
-/// hierher Andrew: this is obsolete as far as I'm concerned
-/// \todo Andrew: this is obsolete as far as I'm concerned
-//====================================================================
-class TongOne : public StrainEnergyFunction
-{
-  private:
- 
- /// Two constants
- double C1, G, Nu;
-
-  public:
- 
- /// Constructor takes the value of the constants
- TongOne(const double &c1, const double &g, const double &nu) : 
-  StrainEnergyFunction(), C1(c1), G(g), Nu(nu)
-  {
-   // ObsoleteCode::obsolete();
-  }
-
- /// Empty virtual destructor
- virtual ~TongOne(){}
-
- /// Return the strain energy in terms of strain tensor
- double W(const DenseMatrix<double> &gamma)
-  {return StrainEnergyFunction::W(gamma);}
- 
-
- /// Return the strain energy in terms of the strain invariants
- double W(const Vector<double> &I)
-  {return 0.5*(C1*(I[0]-3.0) + (G-C1)*(I[1]-3.0)
-               + (C1 - 2*G)*(I[2]-1.0) 
-               + (1-Nu)*G*(I[2]-1.0)*(I[2]-1.0)/(2.0*(1-2.0*Nu)));}
-
-
-/*  /// \short Return the derivatives of the strain energy function with  */
-/*  /// respect to the components of the strain tensor (default is to use  */
-/*  /// finite differences). */
-/*  void derivative(const DenseMatrix<double> &gamma, */
-/*                  DenseMatrix<double> &dWdgamma) */
-/*   {StrainEnergyFunction::derivative(gamma,dWdgamma);} */
- 
-
- /// \short Return the derivatives of the strain energy function with
- /// respect to the strain invariants
- void derivatives(Vector<double> &I, Vector<double> &dWdI)
-  {
-   dWdI[0] = 0.5* C1;
-   dWdI[1] = 0.5*(G - C1);
-   dWdI[2] = 0.5*(C1 - 2*G + 2*(1-Nu)*G*(I[2]-1.0)/(2.0*(1-2.0*Nu)));
-  }
-
-
- /// \short Pure virtual function in which the user must declare if the
- /// constitutive equation requires an incompressible formulation
- /// in which the volume constraint is enforced explicitly.
- /// Used as a sanity check in PARANOID mode. False.
- bool requires_incompressibility_constraint(){return false;}
- 
-};
-
-
-
-
-////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////
-
-
 
 
 //=====================================================================
@@ -301,84 +217,83 @@ class TongOne : public StrainEnergyFunction
 /// the behaviour becomes equivalent to that of linear elasticity
 /// with the same E and nu.
 ///
-/// \todo there's a factor of 2 difference between C1 and the Mooney
+/// Note that there's a factor of 2 difference between C1 and the Mooney
 /// Rivlin C1!
 //====================================================================
 class GeneralisedMooneyRivlin : public StrainEnergyFunction
 {
-
+ 
   public:
  
- /// \short Constructor takes the value of the constitutive parameters:
- /// Poisson's ratio, the Mooney-Rivlin parameter and Young's modulus --
- /// the latter defaults to 1, implying that it has been used to
- /// scale the stresses
- GeneralisedMooneyRivlin(const double &nu, const double &c1, 
-                         const double &e=1.0) :
-  StrainEnergyFunction(), Nu(nu), C1(c1), E(e)
+ /// \short Constructor takes the pointers to the constitutive parameters:
+ /// Poisson's ratio, the Mooney-Rivlin parameter. Young's modulus is set
+ /// to 1, implying that it has been used to scale the stresses
+  GeneralisedMooneyRivlin(double* nu_pt, double* c1_pt) :
+ StrainEnergyFunction(), Nu_pt(nu_pt), C1_pt(c1_pt), 
+  E_pt(new double(1.0)), Must_delete_e(true) {}
+ 
+ /// \short Constructor takes the pointers to the constitutive parameters:
+ /// Poisson's ratio, the Mooney-Rivlin parameter and Young's modulus
+  GeneralisedMooneyRivlin(double* nu_pt, double* c1_pt, 
+                          double* e_pt) :
+ StrainEnergyFunction(), Nu_pt(nu_pt), C1_pt(c1_pt), 
+  E_pt(e_pt), Must_delete_e(false) {}
+ 
+
+ /// Virtual destructor
+ virtual ~GeneralisedMooneyRivlin()
   {
-   // Shear modulus (used in actual representation of the strain energy)
-   G=E/(2.0*(1.0+Nu));
+   if (Must_delete_e) delete E_pt;
   }
  
-
- /// Empty virtual destructor
-  virtual ~GeneralisedMooneyRivlin(){}
-
- /// Return the strain energy in terms of strain tensor
+  /// Return the strain energy in terms of strain tensor
  double W(const DenseMatrix<double> &gamma)
-  {return StrainEnergyFunction::W(gamma);}
+ {return StrainEnergyFunction::W(gamma);}
  
-
+ 
  /// Return the strain energy in terms of the strain invariants
  double W(const Vector<double> &I)
-  {
-   return 0.5*(C1*(I[0]-3.0) + (G-C1)*(I[1]-3.0)
-               + (C1 - 2.0*G)*(I[2]-1.0) 
-               + (1.0-Nu)*G*(I[2]-1.0)*(I[2]-1.0)/(2.0*(1.0-2.0*Nu)));
-  }
+ {
+  double G=(*E_pt)/(2.0*(1.0+(*Nu_pt)));
+  return 0.5*((*C1_pt)*(I[0]-3.0) + (G-(*C1_pt))*(I[1]-3.0)
+              + ((*C1_pt) - 2.0*G)*(I[2]-1.0) 
+              + (1.0-(*Nu_pt))*G*(I[2]-1.0)*(I[2]-1.0)/
+              (2.0*(1.0-2.0*(*Nu_pt))));
+ }
  
-
-/*  /// \short Return the derivatives of the strain energy function with  */
-/*  /// respect to the components of the strain tensor (default is to use  */
-/*  /// finite differences). */
-/*  void derivative(const DenseMatrix<double> &gamma, */
-/*                  DenseMatrix<double> &dWdgamma) */
-/*   {StrainEnergyFunction::derivative(gamma,dWdgamma);} */
  
-
  /// \short Return the derivatives of the strain energy function with
  /// respect to the strain invariants
  void derivatives(Vector<double> &I, Vector<double> &dWdI)
-  {
-   dWdI[0] = 0.5*C1;
-   dWdI[1] = 0.5*(G - C1);
-   dWdI[2] = 0.5*(C1 - 2.0*G + 2.0*(1.0-Nu)*G*(I[2]-1.0)/(2.0*(1.0-2.0*Nu)));
-  }
-
-
+ {
+  double G=(*E_pt)/(2.0*(1.0+(*Nu_pt)));
+  dWdI[0] = 0.5*(*C1_pt);
+  dWdI[1] = 0.5*(G - (*C1_pt));
+  dWdI[2] = 0.5*((*C1_pt) - 2.0*G + 2.0*(1.0-(*Nu_pt))*G*(I[2]-1.0)/
+                 (2.0*(1.0-2.0*(*Nu_pt))));
+ }
+ 
+ 
  /// \short Pure virtual function in which the user must declare if the
  /// constitutive equation requires an incompressible formulation
  /// in which the volume constraint is enforced explicitly.
  /// Used as a sanity check in PARANOID mode. False.
  bool requires_incompressibility_constraint(){return false;}
- 
-
+  
   private:
  
  /// Poisson's ratio
- double Nu;
+ double* Nu_pt;
 
  /// Mooney-Rivlin parameter
- double C1;
+ double* C1_pt;
 
  /// Young's modulus
- double E;
+ double* E_pt;
 
- /// \short Shear modulus (regarded as a dependent parameter, computed
- /// in the constructor and stored to avoid re-computation)
- double G;
-
+ /// \short Boolean flag to indicate if storage for elastic modulus
+ /// must be deleted in destructor
+ bool Must_delete_e;
 
 };
 
@@ -732,15 +647,27 @@ class GeneralisedHookean : public ConstitutiveLaw
  
   public:
  
- /// The constructor takes the values of material parameters:
- /// Poisson's ratio and Young's modulus. By default E=1.0,
- /// implying that all stresses have been non-dimensionalised
- /// on Young's modulus.
- GeneralisedHookean(const double &nu, const double &e=1.0) : 
-  ConstitutiveLaw(), Nu(nu), E(e)
-  {}
+  /// The constructor takes the pointers to values of material parameters:
+  /// Poisson's ratio and Young's modulus.
+  GeneralisedHookean(double* nu_pt, double* e_pt) : 
+ ConstitutiveLaw(), Nu_pt(nu_pt), E_pt(e_pt),
+  Must_delete_e(false) {}
  
-
+ /// The constructor takes the pointers to value of
+ /// Poisson's ratio . Young's modulus is set to E=1.0,
+ /// implying that all stresses have been non-dimensionalised
+ /// on on it.
+  GeneralisedHookean(double* nu_pt) : 
+ ConstitutiveLaw(), Nu_pt(nu_pt), E_pt(new double(1.0)),
+  Must_delete_e(true) {}
+ 
+ 
+ /// Virtual destructor
+ virtual ~GeneralisedHookean()
+  {
+   if (Must_delete_e) delete E_pt;
+  }
+ 
   /// \short Calculate the contravariant 2nd Piola Kirchhoff 
   /// stress tensor. Arguments are the 
   /// covariant undeformed and deformed metric tensor and the 
@@ -789,12 +716,14 @@ class GeneralisedHookean : public ConstitutiveLaw
   private:
  
  /// Poisson ratio
- double Nu;
+ double* Nu_pt;
 
  /// Young's modulus 
- double E;
+ double* E_pt;
 
-
+ /// \short Boolean flag to indicate if storage for elastic modulus
+ /// must be deleted in destructor
+ bool Must_delete_e;
 };
 
 
@@ -803,37 +732,6 @@ class GeneralisedHookean : public ConstitutiveLaw
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
-
-
-//========================================================================
-/// Obsolete wrapper class
-//=========================================================================
-class DeformedMetricTensorLinearElasticConstitutiveLaw : public GeneralisedHookean
-{
-  public:
- 
- /// The constructor takes the values of material parameters
- DeformedMetricTensorLinearElasticConstitutiveLaw(const double &e, 
-                                                  const double &nu) : 
-  GeneralisedHookean(nu,e)
-  {
-   ObsoleteCode::obsolete();
-  }
- 
-  /// \short Pure virtual function in which the writer must declare if the
-  /// constitutive equation requires an incompressible formulation
-  /// in which the volume constraint is enforced explicitly.
-  /// Used as a sanity check in PARANOID mode. False.
-  bool requires_incompressibility_constraint(){return false;}
-
-
-};
-
-
-/////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////
-
 
 
 //=====================================================================

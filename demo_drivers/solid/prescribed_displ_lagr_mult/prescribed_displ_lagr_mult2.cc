@@ -119,7 +119,7 @@ namespace Global_Physical_Variables
  double Nu=0.3;
 
  // Generalised Hookean constitutive equations
- GeneralisedHookean Constitutive_law(Global_Physical_Variables::Nu);
+ GeneralisedHookean Constitutive_law(&Global_Physical_Variables::Nu);
  
 } //end namespace
 

@@ -2,9 +2,9 @@
 # Some of the makefiles are screwed up -- fix this
 #-------------------------------------------------
 
-mv ./packages/anasazi/test/MVOPTester/Makefile ./packages/anasazi/test/MVOPTester/Makefile.back
-
-sed "s/cp  \$(srcdir)\/mhd1280b.cua mhd1280b.cua/#cp  \$(srcdir)\/mhd1280b.cua mhd1280b.cua/g" < ./packages/anasazi/test/MVOPTester/Makefile.back > ./packages/anasazi/test/MVOPTester/Makefile
+# This is from version 7.*.*
+#mv ./packages/anasazi/test/MVOPTester/Makefile ./packages/anasazi/test/MVOPTester/Makefile.back
+#sed "s/cp  \$(srcdir)\/mhd1280b.cua mhd1280b.cua/#cp  \$(srcdir)\/mhd1280b.cua mhd1280b.cua/g" < ./packages/anasazi/test/MVOPTester/Makefile.back > ./packages/anasazi/test/MVOPTester/Makefile
 
 make 
 make install

@@ -1,0 +1,3 @@
+SUBDIRS = \
+general_mpi
+

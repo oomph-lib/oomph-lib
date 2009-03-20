@@ -10,8 +10,8 @@ by an external pressure. We also demonstrate:
 - how to incorporate isotropic growth into the model
 .
 We validate the numerical results by comparing them 
-against the analytical solution of the linearised equations,
-which are valid for small deflections. 
+against the analytical solution of the equations of linear
+elasticity which are valid for small deflections. 
 
 <HR>
 <HR>
@@ -110,26 +110,29 @@ strain softening.
 \subsection mr Generalised Mooney-Rivlin law
 
 The red, dashed line illustrates the behaviour when Fung \& Tong's
-generalisation of Mooney-Rivlin law (with Young's modulus, \f$ E \f$,
+generalisation of the Mooney-Rivlin law (with Young's modulus, \f$ E \f$,
 Poisson ratio \f$ \nu \f$ and Mooney-Rivlin parameter \f$ C_1\f$)
 is used as the constitutive equation. For this constitutive law, 
 the non-dimensional strain energy function \f$ W = W^*/{\cal S}\f$,
 where the characteristic stress is given by Young's modulus, i.e.  \f$ {\cal
-S} =E \f$,is given by
+S} =E \f$, is given by
 \f[
 W =  \frac{1}{2} (I_1-3) + (G-C_1)(I_2-3) + (C_1-2G)(I_3-1)
-+ (I_3-1)^2 \frac{G(1-\nu)}{2(1-2\nu)}
++ (I_3-1)^2 \ \frac{G(1-\nu)}{2(1-2\nu)} \ ,
 \f]
 where 
 \f[
-G = \frac{E}{(2(1+\nu)}
+G = \frac{E}{2(1+\nu)}
 \f]
-is the shear modulus and \f$ I_1, I_2 \f$ and \f$ I_3 \f$ are the
+is the shear modulus, and \f$ I_1, I_2 \f$ and \f$ I_3 \f$ are the
 three invariants of Green's strain tensor. See 
 <A HREF="../../solid_theory/html/index.html#strain-energy">
 "Solid mechanics: Theory and implementation"</A> for a detailed 
-discussion of strain energy functions. 
-
+discussion of strain energy functions. The figure shows that
+for small deflections, the disk's behaviour is again well approximated
+by linear elasticity. However, in the large-displacement regime
+the Mooney-Rivlin is strain hardening under extension and softening
+under compression when compared to the linear elastic behaviour.
       
 <HR>
 <HR>
@@ -147,7 +150,7 @@ parameters.
 
 Next we define the pressure load, using the general interface
 defined in the \c SolidTractionElement class.  The arguments
-the function reflect that  the load on 
+of the function reflect that  the load on 
 a solid may be a function of the Lagrangian and Eulerian coordinates, 
 and the external unit normal on the solid. Here we apply a spatially
 constant external pressure of magnitude \c P which acts in the
@@ -194,7 +197,7 @@ in the pressure/displacement formulation, using continous pressures
 The next computation employs
 \c RefineableQPVDElementWithPressure elements
 in which the pressure is interpolated by piecewise linear
-but globally discontinuous basis functions (Q2Q-1; Crozieux-Raviart).
+but globally discontinuous basis functions (Q2Q-1; Crouzeiux-Raviart).
 
 \until done case 2
 
@@ -337,7 +340,7 @@ The post-processing function outputs the shape of the deformed disk.
 We use the trace file to record how the
 disk's volume (area) and the radii of the control nodes on the
 curvilinear domain buondary vary with the applied pressure. To 
-facilitate the validaton of the results against the analytical
+facilitate the validation of the results against the analytical
 solution, we also add the radius predicted by the linear theory 
 to the trace file.
  
@@ -371,7 +374,7 @@ with curvilinear boundaries. When an element is refined, the
 element's \c MacroElement counterpart, rather than being determined
 by finite-element interpolation from the "father element". This ensures
 that <b>(i)</b> newly-created nodes on curvilinear domain boundaries are placed
-exactly on those boundaries and <b>(ii)</b> that newly-created nodes in the
+exactly onto those boundaries and <b>(ii)</b> that newly-created nodes in the
 interior are placed at positions that match smoothly onto the boundary.
 
 This strategy is adapted slightly for solid mechanics problems:
@@ -385,7 +388,7 @@ This strategy is adapted slightly for solid mechanics problems:
    coordinates of newly-created \c SolidNodes.
 .
 These modifications ensure that, as before, newly-created nodes 
-on curvilinear domain boundaries are placed exactly on those
+on curvilinear domain boundaries are placed exactly onto those
 boundaries if their positions are pinned by displacement boundary
 conditions. (If the nodal positions are not pinned, the node's
 Eulerian position will be determined as part of the

@@ -1593,6 +1593,22 @@ void Node::remove_from_boundary(const unsigned &b)
                      OOMPH_EXCEPTION_LOCATION);
 }
 
+
+//=========================================================================
+///  Interface to get the number of boundary coordinates on mesh boundary b. 
+/// Broken here in order to provide run-time error reporting. Must 
+/// be overloaded by all boundary nodes.
+//=========================================================================
+unsigned Node::ncoordinates_on_boundary(const unsigned &b)
+{
+ throw OomphLibError("Non-boundary Node cannot have boundary coordinates",
+                     "Node::ncoordinates_on_boundary()",
+                     OOMPH_EXCEPTION_LOCATION);
+ // dummy return
+ return 0;
+}
+
+
 //=========================================================================
 /// Interface for function to get the k-th generalised boundary coordinate
 /// of the node on boundary b. Broken here in order to 
@@ -2182,6 +2198,55 @@ bool BoundaryNodeBase::is_on_boundary(const unsigned &b)
  //If we haven't returned yet, then the node does not lie on the boundary
  return false;
 }
+
+
+//=========================================================================
+/// Get the number of boundary coordinates on mesh boundary b
+//=========================================================================
+unsigned BoundaryNodeBase::ncoordinates_on_boundary(const unsigned &b)
+{
+ //Check that the node lies on a boundary
+#ifdef PARANOID
+ if(Boundaries_pt==0)
+  {
+   throw OomphLibError("Node does not lie on any boundary",
+                       "Node::ncoordinates_on_boundary()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+
+
+ //Does the node lie on the mesh boundary b
+ if(!is_on_boundary(b))
+  {
+   std::ostringstream error_stream;
+   error_stream << "Node is not on boundary " << b << std::endl;
+
+   throw OomphLibError(error_stream.str(),
+                       "Node::get_coordinates_on_boundary()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+
+ //Check that the boundary coordinates have been set
+ if(Boundary_coordinates_pt == 0)
+  {
+   std::ostringstream error_stream;
+   error_stream << "Boundary coordinates have not been set\n"
+                << "[Note: In refineable problems, the boundary coordinates\n"
+                << "       will only be interpolated to newly created nodes\n"
+                << "       if Mesh::Boundary_coordinate_exists[...] has been\n"
+                << "       set to true!]\n";
+   throw OomphLibError(error_stream.str(),
+                       "Node::ncoordinates_on_boundary()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+  
+ //Find out how may coordinates there are from the map
+ return (*Boundary_coordinates_pt)[b]->nrow();
+
+}
+
+
 
 //=========================================================================
 /// Given the mesh boundary b, return the k-th generalised boundary 

@@ -30,7 +30,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-
+#include <stdlib.h>
 
 using namespace std;
 
@@ -382,9 +382,9 @@ int main(int argc, char* argv[])
   // Output "points in hole" in pslg format
   //---------------------------------------
   
-  /// \short Vector of points that are located in the holes in the domain
-  /// [NOTE: Historically (and in Gemma's thesis) this used to be 
-  /// called, somewhat confusingly, Hole_ID_pt]
+  // Vector of points that are located in the holes in the domain
+  // [NOTE: Historically (and in Gemma's thesis) this used to be 
+  // called, somewhat confusingly, Hole_ID_pt]
   vector<vector<double> > Point_in_hole;
   
   // Number of holes

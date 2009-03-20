@@ -29,7 +29,7 @@ mkdir RESLT_norefine9
 
 
 echo "Running 3d cantilever validation (1): const. eqns & analyt/FD Jacobian & no adapt "
-../three_d_cantilever > OUTPUT_constitutive_eqns_norefine
+../three_d_cantilever la > OUTPUT_constitutive_eqns_norefine
 
 
 echo "done"
@@ -81,7 +81,7 @@ mkdir RESLT_refine9
 
 
 echo "Running 3d cantilever validation (2): const. eqns & analyt/FD Jacobian & adapt "
-../three_d_cantilever_adapt > OUTPUT_constitutive_eqns_refine
+../three_d_cantilever_adapt la > OUTPUT_constitutive_eqns_refine
 
 
 echo "done"

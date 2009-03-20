@@ -103,7 +103,7 @@ void BiCGStab<MATRIX>::solve(Problem* const &problem_pt,
 { 
  // Initialise timer
 #ifdef OOMPH_HAS_MPI   
- double t_start = MPI_Wtime();
+ double t_start = TimingHelpers::timer(); 
 #else
  clock_t t_start = clock();
 #endif
@@ -126,7 +126,7 @@ void BiCGStab<MATRIX>::solve(Problem* const &problem_pt,
 
  // Doc time for setup
 #ifdef OOMPH_HAS_MPI   
- double t_end = MPI_Wtime();
+ double t_end = TimingHelpers::timer(); 
  Jacobian_setup_time= t_end-t_start;
 #else
  clock_t t_end = clock();
@@ -290,7 +290,7 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
  
  // Time solver
 #ifdef OOMPH_HAS_MPI   
- double t_start = MPI_Wtime();
+ double t_start = TimingHelpers::timer(); 
 #else
  clock_t t_start = clock();
 #endif
@@ -335,13 +335,8 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
    solution=x;
    
    // Doc time for solver
-#ifdef OOMPH_HAS_MPI   
-   double t_end = MPI_Wtime();
+   double t_end = TimingHelpers::timer(); 
    Solution_time = t_end-t_start;
-#else
-   clock_t t_end = clock();
-   Solution_time = double(t_end-t_start)/CLOCKS_PER_SEC;
-#endif
  
    if(Doc_time)
     {  
@@ -355,22 +350,13 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
  if (!Resolving)
   {
    //Setup preconditioner from the Jacobian matrix
-#ifdef OOMPH_HAS_MPI   
-   double t_start_prec = MPI_Wtime();
-#else
-   clock_t t_start_prec = clock();
-#endif
+   double t_start_prec = TimingHelpers::timer(); 
    
    preconditioner_pt()->setup(problem_pt,matrix_pt);
 
    // Doc time for setup of preconditioner
-#ifdef OOMPH_HAS_MPI   
-   double t_end_prec = MPI_Wtime();
+   double t_end_prec = TimingHelpers::timer(); 
    Preconditioner_setup_time = t_end_prec-t_start_prec;
-#else
-   clock_t t_end = clock();
-   Preconditioner_setup_time = double(t_end-t_start_prec)/CLOCKS_PER_SEC;
-#endif
 
    if(Doc_time)
     {  
@@ -481,13 +467,8 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
      Iterations = iter; 
 
      // Doc time for solver
-#ifdef OOMPH_HAS_MPI   
-     double t_end = MPI_Wtime();
+     double t_end = TimingHelpers::timer(); 
      Solution_time = t_end-t_start;
-#else
-     clock_t t_end = clock();
-     Solution_time = double(t_end-t_start)/CLOCKS_PER_SEC;
-#endif
      
      if(Doc_time)
       {
@@ -551,13 +532,8 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
      Iterations = iter; 
 
      // Doc time for solver
-#ifdef OOMPH_HAS_MPI   
-     double t_end = MPI_Wtime();
+     double t_end = TimingHelpers::timer(); 
      Solution_time = t_end-t_start;
-#else
-     clock_t t_end = clock();
-     Solution_time = double(t_end-t_start)/CLOCKS_PER_SEC;
-#endif
      
      if(Doc_time)
       {
@@ -583,13 +559,8 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
      Iterations = iter; 
 
      // Doc time for solver
-#ifdef OOMPH_HAS_MPI   
-     double t_end = MPI_Wtime();
+     double t_end = TimingHelpers::timer(); 
      Solution_time = t_end-t_start;
-#else
-     clock_t t_end = clock();
-     Solution_time = double(t_end-t_start)/CLOCKS_PER_SEC;
-#endif
 
      if(Doc_time)
       {
@@ -616,13 +587,8 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
  solution=x;   
  
  // Doc time for solver
-#ifdef OOMPH_HAS_MPI   
- double t_end = MPI_Wtime();
+ double t_end = TimingHelpers::timer(); 
  Solution_time = t_end-t_start;
-#else
- clock_t t_end = clock();
- Solution_time = double(t_end-t_start)/CLOCKS_PER_SEC;
-#endif
  
  if(Doc_time)
   {
@@ -757,11 +723,7 @@ void CG<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
  unsigned counter = 0; 
 
  // Time solver
-#ifdef OOMPH_HAS_MPI   
- double t_start = MPI_Wtime();
-#else
- clock_t t_start = clock();
-#endif
+ double t_start = TimingHelpers::timer();
  
  // Initialise: Zero initial guess so the initial residual is 
  // equal to the RHS
@@ -800,13 +762,8 @@ void CG<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
    solution=x;
    
    // Doc time for solver
-#ifdef OOMPH_HAS_MPI   
-   double t_end = MPI_Wtime();
+   double t_end = TimingHelpers::timer(); 
    Solution_time = t_end-t_start;
-#else
-   clock_t t_end = clock();
-   Solution_time = double(t_end-t_start)/CLOCKS_PER_SEC;
-#endif
    
    if(Doc_time)
     {
@@ -821,22 +778,13 @@ void CG<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
  if (!Resolving)
   {
    //Setup preconditioner from the Jacobian matrix
-#ifdef OOMPH_HAS_MPI   
-   double t_start_prec = MPI_Wtime();
-#else
-   clock_t t_start_prec = clock();
-#endif
+   double t_start_prec = TimingHelpers::timer(); 
    
    preconditioner_pt()->setup(problem_pt,matrix_pt);
 
    // Doc time for setup of preconditioner
-#ifdef OOMPH_HAS_MPI   
-   double t_end_prec = MPI_Wtime();
+   double t_end_prec = TimingHelpers::timer(); 
    Preconditioner_setup_time = t_end_prec-t_start_prec;
-#else
-   clock_t t_end = clock();
-   Preconditioner_setup_time = double(t_end-t_start_prec)/CLOCKS_PER_SEC;
-#endif
 
    if(Doc_time)
     {
@@ -960,14 +908,9 @@ void CG<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
  solution=x;   
 
  // Doc time for solver
-#ifdef OOMPH_HAS_MPI   
-   double t_end = MPI_Wtime();
-   Solution_time = t_end-t_start;
-#else
-   clock_t t_end = clock();
-   Solution_time = double(t_end-t_start)/CLOCKS_PER_SEC;
-#endif
-
+ double t_end = TimingHelpers::timer();
+ Solution_time = t_end-t_start;
+ 
  if(Doc_time)
   {
    oomph_info << "Time for solve with CG  [sec]: "
@@ -1019,11 +962,7 @@ template<typename MATRIX>
 void CG<MATRIX>::solve(Problem* const &problem_pt, DoubleVector &result)
 {  
  // Initialise timer
-#ifdef OOMPH_HAS_MPI   
- double t_start = MPI_Wtime();
-#else
- clock_t t_start = clock();
-#endif
+ double t_start = TimingHelpers::timer();
 
  // We're not re-solving
  Resolving=false;
@@ -1041,13 +980,8 @@ void CG<MATRIX>::solve(Problem* const &problem_pt, DoubleVector &result)
  Matrix_can_be_deleted=true;
 
  // Doc time for setup
-#ifdef OOMPH_HAS_MPI   
- double t_end = MPI_Wtime();
+ double t_end = TimingHelpers::timer();
  Jacobian_setup_time= t_end-t_start;
-#else
- clock_t t_end = clock();
- Jacobian_setup_time=double(t_end-t_start)/CLOCKS_PER_SEC;
-#endif
 
  if(Doc_time)
   {
@@ -1149,11 +1083,7 @@ void GS<MATRIX>::solve(Problem* const &problem_pt, DoubleVector &result)
  unsigned n_dof = problem_pt->ndof();
  
  // Initialise timer
-#ifdef OOMPH_HAS_MPI   
- double t_start = MPI_Wtime();
-#else
- clock_t t_start = clock();
-#endif
+ double t_start = TimingHelpers::timer();
 
  // We're not re-solving
  Resolving=false;
@@ -1183,13 +1113,8 @@ void GS<MATRIX>::solve(Problem* const &problem_pt, DoubleVector &result)
  Matrix_can_be_deleted=true;
 
  // Doc time for setup
-#ifdef OOMPH_HAS_MPI   
- double t_end = MPI_Wtime();
+ double t_end =TimingHelpers::timer();
  Jacobian_setup_time= t_end-t_start;
-#else
- clock_t t_end = clock();
- Jacobian_setup_time=double(t_end-t_start)/CLOCKS_PER_SEC;
-#endif
 
  if(Doc_time)
   {
@@ -1298,11 +1223,7 @@ void GS<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
  unsigned counter=1;
 
  // Initialise timer
-#ifdef OOMPH_HAS_MPI   
- double t_start = MPI_Wtime();
-#else
- clock_t t_start = clock();
-#endif
+ double t_start = TimingHelpers::timer();
 
  // Initial guess is zero so the residual is equal to the RHS
  DoubleVector x(Distribution_pt);
@@ -1402,13 +1323,8 @@ void GS<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
  solution = x;
  
  // Doc time for solver
-#ifdef OOMPH_HAS_MPI   
-   double t_end = MPI_Wtime();
-   Solution_time = t_end-t_start;
-#else
-   clock_t t_end = clock();
-   Solution_time = double(t_end-t_start)/CLOCKS_PER_SEC;
-#endif
+ double t_end = TimingHelpers::timer();
+ Solution_time = t_end-t_start;
 
  if(Doc_time)
   {
@@ -1473,11 +1389,7 @@ void GMRES<MATRIX>::solve(Problem* const &problem_pt, DoubleVector &result)
  unsigned n_dof = problem_pt->ndof();
  
  // Initialise timer
-#ifdef OOMPH_HAS_MPI   
- double t_start = MPI_Wtime();
-#else
- clock_t t_start = clock();
-#endif
+ double t_start = TimingHelpers::timer();
 
  // We're not re-solving
  Resolving=false;
@@ -1507,13 +1419,8 @@ void GMRES<MATRIX>::solve(Problem* const &problem_pt, DoubleVector &result)
  Matrix_can_be_deleted=true;
 
  // Doc time for setup
-#ifdef OOMPH_HAS_MPI   
- double t_end = MPI_Wtime();
+ double t_end = TimingHelpers::timer();
  Jacobian_setup_time= t_end-t_start;
-#else
- clock_t t_end = clock();
- Jacobian_setup_time=double(t_end-t_start)/CLOCKS_PER_SEC;
-#endif
 
  if(Doc_time)
   {
@@ -1623,11 +1530,7 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
   }
 
  // Time solver
-#ifdef OOMPH_HAS_MPI   
- double t_start = MPI_Wtime();
-#else
- clock_t t_start = clock();
-#endif
+ double t_start = TimingHelpers::timer();
 
  // relative residual
  double resid;
@@ -1652,23 +1555,14 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
  if (!Resolving)
   {
    //Setup preconditioner from the Jacobian matrix
-#ifdef OOMPH_HAS_MPI   
-   double t_start_prec = MPI_Wtime();
-#else
-   clock_t t_start_prec = clock();
-#endif
+   double t_start_prec = TimingHelpers::timer();
 
    // do not setup 
    preconditioner_pt()->setup(problem_pt,matrix_pt);
    
    // Doc time for setup of preconditioner
-#ifdef OOMPH_HAS_MPI   
-   double t_end_prec = MPI_Wtime();
+   double t_end_prec = TimingHelpers::timer();
    Preconditioner_setup_time = t_end_prec-t_start_prec;
-#else
-   clock_t t_end = clock();
-   Preconditioner_setup_time = double(t_end-t_start_prec)/CLOCKS_PER_SEC;
-#endif
 
    if(Doc_time)
     {
@@ -1735,13 +1629,8 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
                 << resid << std::endl;
     }
    // Doc time for solver
-#ifdef OOMPH_HAS_MPI   
-   double t_end = MPI_Wtime();
+   double t_end = TimingHelpers::timer();
    Solution_time = t_end-t_start;
-#else
-   clock_t t_end = clock();
-   Solution_time = double(t_end-t_start)/CLOCKS_PER_SEC;
-#endif
 
    if(Doc_time)
     {
@@ -1896,13 +1785,8 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
         }
        
        // Doc time for solver
-#ifdef OOMPH_HAS_MPI   
-       double t_end = MPI_Wtime();
+       double t_end = TimingHelpers::timer();
        Solution_time = t_end-t_start;
-#else
-       clock_t t_end = clock();
-       Solution_time = double(t_end-t_start)/CLOCKS_PER_SEC;
-#endif
 
        Iterations = iter;
 
@@ -1959,13 +1843,8 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
       }
      
      // Doc time for solver
-#ifdef OOMPH_HAS_MPI   
-     double t_end = MPI_Wtime();
+     double t_end = TimingHelpers::timer();
      Solution_time = t_end-t_start;
-#else
-     clock_t t_end = clock();
-     Solution_time = double(t_end-t_start)/CLOCKS_PER_SEC;
-#endif
      
      Iterations = iter;
 

@@ -386,20 +386,20 @@ solver). The list of solvers includes:
   <A HREF="http://crd.lbl.gov/~xiaoye/SuperLU/">
            http://crd.lbl.gov/~xiaoye/SuperLU/</A> for details.
 - \c HSL_MA42: An interface to the MA42 frontal solver from the HSL2000
-     library. See <A HREF="http://hsl.rl.ac.uk/archive/hslarchive.html">
-                           http://hsl.rl.ac.uk/archive/hslarchive.html</A>
-     for details.
+  library. See <A HREF="http://hsl.rl.ac.uk/archive/hslarchive.html">
+  http://hsl.rl.ac.uk/archive/hslarchive.html</A>
+  for details.
 - \c FD_LU: An extremely inefficient solver which computes the
-   Jacobian matrix by finite differencing and stores it in a dense
-   matrix. This solver is mainly provided to facilitate sanity checks 
-   during code development. (The residuals are easier to compute than the 
-   the Jacobian matrix!)
+  Jacobian matrix by finite differencing and stores it in a dense
+  matrix. This solver is mainly provided to facilitate sanity checks 
+  during code development. (The residuals are easier to compute than the 
+  the Jacobian matrix!)
 - ...and many others. See the 
   <a href="../../../linear_solvers/html/index.html">Linear Solvers 
   Tutorial</a> for a more detailed discussion of \c oomph-lib's
   various direct and iterative solvers.
-  .
 .
+
 By default the \c oomph-lib Newton solvers use \c SuperLU with
 compressed row storage for the Jacobian matrix as the linear solver.
 To change the linear solver to another type you can over-write

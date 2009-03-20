@@ -417,93 +417,86 @@ class RefineableSolidQElement<3> : public virtual RefineableQElement<3>,
          //Cast the node to an Solid node
          SolidNode* elastic_node_pt = 
           static_cast<SolidNode*>(node_pt(jnod));
-
-         // hierher
-/*          // Lagrangian coordinate: Always based on "undeformed" */
-/*          // MacroElement representation (if available) */
-/*          elastic_node_pt->xi(0) = xi[0]; */
-/*          elastic_node_pt->xi(1) = xi[1]; */
-/*          elastic_node_pt->xi(2) = xi[2]; */
-
+         
          // Eulerian coordinate: Based on "current" MacroElement representation
          // if the nodal position is constrained by displacement boundary 
          // conditions (because the "current" Domain provides an exact 
          // representation of the deformed domain). If the position is 
          // free, its current value is based on the FE interpolation which
          // provides the best "guess" to the so far unknown nodal position
-       for (unsigned i=0;i<3;i++)
-        {
-         if (elastic_node_pt->position_is_pinned(i))
+         for (unsigned i=0;i<3;i++)
           {
-           // x is based on the "current" MacroElement representation 
-           // (if the element has one...)
-           elastic_node_pt->x(i) = x[i];
-           elastic_node_pt->xi(i) = xi[i];
-          }
-         else
-          {
-           // x_fe is the FE representation
-           elastic_node_pt->x(i) = x_fe[i];
-           if (Use_undeformed_macro_element_for_new_lagrangian_coords)
+           if (elastic_node_pt->position_is_pinned(i))
             {
+             // x is based on the "current" MacroElement representation 
+             // (if the element has one...)
+             elastic_node_pt->x(i) = x[i];
              elastic_node_pt->xi(i) = xi[i];
             }
            else
             {
-             elastic_node_pt->xi(i) = xi_fe[i];
-            }
-          }
-        }
-       
-       // Are there any history values to be dealt with?
-       TimeStepper* time_stepper_pt=father_el_pt->
-        node_pt(0)->time_stepper_pt();
-       
-       // Number of history values (incl. present)
-       unsigned ntstorage=time_stepper_pt->ntstorage();
-       if (ntstorage!=1)
-        {
-         // Loop over # of history values (excluding present which has been
-         // done above)
-         for (unsigned t=1;t<ntstorage;t++)
-          {
-           // History values can (and in the case of Newmark timestepping,
-           // the scheme most likely to be used for Solid computations, do)
-           // include non-positional values, e.g. velocities and accelerations.
-           // These cannot be obtained from the MacroElement representation
-           // so the best we can do is to interpolate them based on the
-           // FE representation in the father. This is precisely what
-           // the time-dependent version of get_x does :)
-           Vector<double> x_prev(3);
-           father_el_pt->get_x(t,s,x_prev);
-         
-           // Set previous positions of the new node
-           for(unsigned i=0;i<3;i++)
-            {
-             // If the nodal position is pinned, we may set its history
-             // values based on the macro element representation
-             if (elastic_node_pt->position_is_pinned(i))
+             // x_fe is the FE representation
+             elastic_node_pt->x(i) = x_fe[i];
+             if (Use_undeformed_macro_element_for_new_lagrangian_coords)
               {
-               elastic_node_pt->x(t,i) = x_prev[i];
+               elastic_node_pt->xi(i) = xi[i];
               }
-             // If it's not pinned we must obtain the history values
-             // by FE interpolation from the father because its
-             // position is not (ever!) determined by macro elements
              else
               {
-               elastic_node_pt->x(t,i) = father_el_pt->interpolated_x(t,s,i);
+               elastic_node_pt->xi(i) = xi_fe[i];
               }
             }
           }
-        }       
+         
+         // Are there any history values to be dealt with?
+         TimeStepper* time_stepper_pt=father_el_pt->
+          node_pt(0)->time_stepper_pt();
+         
+         // Number of history values (incl. present)
+         unsigned ntstorage=time_stepper_pt->ntstorage();
+         if (ntstorage!=1)
+          {
+           // Loop over # of history values (excluding present which has been
+           // done above)
+           for (unsigned t=1;t<ntstorage;t++)
+            {
+             // History values can (and in the case of Newmark timestepping,
+             // the scheme most likely to be used for Solid computations, do)
+             // include non-positional values, e.g. velocities and accels.
+             // These cannot be obtained from the MacroElement representation
+             // so the best we can do is to interpolate them based on the
+             // FE representation in the father. This is precisely what
+             // the time-dependent version of get_x does :)
+             Vector<double> x_prev(3);
+             father_el_pt->get_x(t,s,x_prev);
+             
+             // Set previous positions of the new node
+             for(unsigned i=0;i<3;i++)
+              {
+               // If the nodal position is pinned, we may set its history
+               // values based on the macro element representation
+               if (elastic_node_pt->position_is_pinned(i))
+                {
+                 elastic_node_pt->x(t,i) = x_prev[i];
+                }
+               // If it's not pinned we must obtain the history values
+               // by FE interpolation from the father because its
+               // position is not (ever!) determined by macro elements
+               else
+                {
+                 elastic_node_pt->x(t,i) = father_el_pt->interpolated_x(t,s,i);
+                }
+              }
+            }
+          }       
         } //End of s2 loop
       } // End of vertical loop over nodes in element
-   
+     
     } // End of horizontal loop over nodes in element
- 
+   
   }
  
-
+ 
 };
 
 

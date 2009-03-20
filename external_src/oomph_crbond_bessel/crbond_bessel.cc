@@ -789,7 +789,9 @@ int msta1(double x,int mp)
     for (i=0;i<20;i++) {
         nn = n1-(n1-n0)/(1.0-f0/f1);
         f = 0.5*log10(6.28*nn)-nn*log10(1.36*a0/nn)-mp;
-        if (abs(nn-n1) < 1) break;
+        int aux=int(std::abs(float(nn-n1)));
+        //if (int(std::abs(nn-n1)) < 1) break;
+        if (aux < 1) break;
         n0 = n1;
         f0 = f1;
         n1 = nn;
@@ -820,7 +822,8 @@ int msta2(double x,int n,int mp)
     for (i=0;i<20;i++) {
         nn = n1-(n1-n0)/(1.0-f0/f1);
         f = 0.5*log10(6.28*nn)-nn*log10(1.36*a0/nn)-obj;
-        if (abs(nn-n1) < 1) break;
+        int aux=int(std::abs(float(nn-n1)));
+        if (aux < 1) break;
         n0 = n1;
         f0 = f1;
         n1 = nn;

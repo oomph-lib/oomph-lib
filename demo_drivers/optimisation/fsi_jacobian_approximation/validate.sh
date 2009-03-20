@@ -39,7 +39,7 @@ if test "$1" = "no_python"; then
 else
 ../../../../bin/fpdiff.py \
 ../validata/fsi_jacobian_approximation_steady.dat.gz  \
-fsi_jacobian_approximation_steady.dat >> validation.log
+fsi_jacobian_approximation_steady.dat  0.1 1.0e-11 >> validation.log
 fi
 
 # Validation for approximate FSI Jacobian (unsteady)
@@ -72,7 +72,7 @@ if test "$1" = "no_python"; then
 else
 ../../../../bin/fpdiff.py \
 ../validata/fsi_jacobian_approximation_unsteady.dat.gz  \
-fsi_jacobian_approximation_unsteady.dat >> validation.log
+fsi_jacobian_approximation_unsteady.dat 0.1 1.0e-11 >> validation.log
 fi
 
 # Append log to main validation log

@@ -99,7 +99,7 @@ clean-local:
 # We've taken the user drivers out of the SUBDIRS variable
 # so they need to be cleaned by hand for normal clean.
 # However, only do a clean if a Makefile exists!
-	(cd $(user_drivers_dirs) && if test -e Makefile; then ${MAKE} clean; fi )
+	(cd user_drivers && if test -e Makefile; then ${MAKE} clean; fi )
 # Kill stray symbolic links to private configure options
 	(cd config/configure_options && find . -type l -exec rm {} \; )
 # The private files are also not in the SUBDIRS variable

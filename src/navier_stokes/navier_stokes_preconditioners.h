@@ -372,8 +372,8 @@ namespace oomph
    /// \short Helper function to delete preconditioner data.
    void clean_up_memory();
 
-   /// Boolean indicating whether the momentum system preconditioner is a 
-   /// block preconditioner
+   /// \short Boolean indicating whether the momentum system preconditioner 
+   /// is a block preconditioner
    bool F_preconditioner_is_block_preconditioner;
 
    /// Set Doc_time to true for outputting results of timings

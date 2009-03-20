@@ -47,8 +47,7 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
  infile.close();
 
  // Create a vector of boolean so as not to create the same node twice
- std::vector<bool> done (n_node);
- for(unsigned i=0;i<n_node;i++){ done[i]=false;}
+ std::vector<bool> done (n_node,false);
  
  // Resize the Node vector
  Node_pt.resize(n_node);
@@ -83,7 +82,6 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
  Vector<unsigned> node(n_local_node);
    
  // Temporary storage for the global node numbers listed element-by-element
- // hierher unsigned b=n_element*n_local_node;
  Vector<unsigned> global_node(n_element*n_local_node);
    
  unsigned k=0;
@@ -135,7 +133,14 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
  Vector<double> x_node(n_node);
  Vector<double> y_node(n_node);
  Vector<double> z_node(n_node);
- Vector<unsigned> bound(n_node);
+ Vector<std::set<unsigned> > node_boundary(n_node); 
+
+ // Temporary storage for boundary ids read in (int so we can
+ // if they're negative and bark)
+ int bound=0;
+
+ // Number of boundaries
+ unsigned nbound=0;
 
 #ifdef PARANOID
  if(dimension!=3)
@@ -157,7 +162,18 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
        infile3>>x_node[i];
        infile3>>y_node[i];
        infile3>>z_node[i];
-       infile3>>bound[i];
+       infile3>>bound;
+#ifdef PARANOID
+       if (bound<0) 
+        {
+         throw OomphLibError("Boundary numbers must not be negative!\n",
+                             "TetgenScaffoldMesh::TetgenScaffoldMesh()",
+                             OOMPH_EXCEPTION_LOCATION);
+        }
+#endif
+
+       node_boundary[i].insert(bound);
+       if (bound>int(nbound)) nbound=bound;
       }
      infile3.close();
     }
@@ -169,7 +185,7 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
        infile3>>x_node[i];
        infile3>>y_node[i];
        infile3>>z_node[i];
-       bound[i]=0;
+       node_boundary[i].insert(0);
       }
      infile3.close();
     }
@@ -185,7 +201,18 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
        infile3>>y_node[i];
        infile3>>z_node[i];
        infile3>>dummy;
-       infile3>>bound[i];
+       infile3>>bound;
+#ifdef PARANOID
+       if (bound<0) 
+        {
+         throw OomphLibError("Boundary numbers must not be negative!\n",
+                             "TetgenScaffoldMesh::TetgenScaffoldMesh()",
+                             OOMPH_EXCEPTION_LOCATION);
+        }
+#endif
+
+       node_boundary[i].insert(bound);
+       if (bound>int(nbound)) nbound=bound;
       }
      infile3.close();
     }
@@ -198,11 +225,12 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
        infile3>>y_node[i];
        infile3>>z_node[i];
        infile3>>dummy;
-       bound[i]=0;
+       node_boundary[i].insert(0);
       }
      infile3.close();
-    }
+    } 
   }
+
 
  // Process face file to extract boundary faces
  //--------------------------------------------
@@ -240,48 +268,56 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
    face_file >> second_node[i];
    face_file >> third_node[i];
    face_file >> face_boundary_id[i];
+   if (face_boundary_id[i]>nbound) nbound=face_boundary_id[i];
+
+   // Now add face boundary id to nodes
+   node_boundary[first_node[i]-1].insert(face_boundary_id[i]);
+   node_boundary[second_node[i]-1].insert(face_boundary_id[i]);
+   node_boundary[third_node[i]-1].insert(face_boundary_id[i]);
   } 
  face_file.close();
-
-
-
- // Determine the number of distinct boundaries
- unsigned d=0;
- if(bound_markers==1)
-  { 
-   d=bound[0];
-   for(unsigned i=1;i<n_node;i++)
-    {
-     if (bound[i]>d)
-      {
-       d=bound[i];
-      }
-    }
-  }
-
-
+ 
  // Set number of boundaries
- if(d>0)
-  {
-   set_nboundary(d);
-  }
+ set_nboundary(nbound);
 
  // Create the elements
  unsigned l=0;
  for(unsigned e=0;e<n_element;e++)
   {
    Element_pt[e]=new TElement<3,2>;
-   unsigned c;
-   c=global_node[l];
-   if(done[c-1]==false) //c-1 because node number begins at 1 in triangle
+   unsigned c=global_node[l];
+   if(!done[c-1]) //c-1 because node number begins at 1 in tetgen
     { 
      //If the node is on a boundary, construct a boundary node
-     if((bound_markers==1) && (bound[c-1] > 0))
+     if((bound_markers==1) && (node_boundary[c-1].size() > 0))
       {
-       //Construct the boundary ndoe
-       Node_pt[c-1] = finite_element_pt(e)->construct_boundary_node(3);
-       //Add the boundary node
-       add_boundary_node(bound[c-1]-1,Node_pt[c-1]);
+       //Is it going to be a proper boundary node?
+       bool construct_boundary_node=false;
+       for (std::set<unsigned>::iterator it=node_boundary[c-1].begin();
+            it!=node_boundary[c-1].end();it++)
+        {
+         if ((*it)>0) construct_boundary_node=true;
+        }
+
+       if (construct_boundary_node)
+        {
+         //Construct the boundary ndoe
+         Node_pt[c-1] = finite_element_pt(e)->construct_boundary_node(3);
+         
+         //Add the boundary node to boundary lookup schemes
+         for (std::set<unsigned>::iterator it=node_boundary[c-1].begin();
+              it!=node_boundary[c-1].end();it++)
+          {
+           if ((*it)>0)
+            {
+             add_boundary_node((*it)-1,Node_pt[c-1]);
+            }
+          }
+        }
+       else
+        {
+         Node_pt[c-1]=finite_element_pt(e)->construct_node(3);
+        }
       }
      else
       {
@@ -301,15 +337,42 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
    for(unsigned j=0;j<(n_local_node-1);j++)
     {
      c=global_node[l];
-     if(done[c-1]==false) //c-1 because node number begins at 1 in triangle
+     if(done[c-1]==false) //c-1 because node number begins at 1 in tetgen
       { 
        //If we're on a boundary
-       if((bound_markers==1) && (bound[c-1] > 0))
+       if((bound_markers==1) && (node_boundary[c-1].size() > 0))
         {
-         //Construct the boundary node
-         Node_pt[c-1] = finite_element_pt(e)->construct_boundary_node(j);
-         //Add the boundary node look-up scheme
-         add_boundary_node(bound[c-1]-1,Node_pt[c-1]);
+
+         //Is it going to be a proper boundary node?
+         bool construct_boundary_node=false;
+         for (std::set<unsigned>::iterator it=node_boundary[c-1].begin();
+              it!=node_boundary[c-1].end();it++)
+          {
+           if ((*it)>0)
+            {
+             construct_boundary_node=true;
+            }
+          }
+         
+         if (construct_boundary_node)
+          {
+           //Construct the boundary node
+           Node_pt[c-1] = finite_element_pt(e)->construct_boundary_node(j);
+           
+           //Add the boundary node to boundary lookup schemes
+           for (std::set<unsigned>::iterator it=node_boundary[c-1].begin();
+                it!=node_boundary[c-1].end();it++)
+            {
+             if ((*it)>0)
+              {
+               add_boundary_node((*it)-1,Node_pt[c-1]);
+              }
+            }
+          }
+         else
+          {
+           Node_pt[c-1]=finite_element_pt(e)->construct_node(j);
+          }
         }
        else
         {

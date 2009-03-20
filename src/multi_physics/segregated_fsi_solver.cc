@@ -25,6 +25,9 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
+
+#include<algorithm>
+
 #include "segregated_fsi_solver.h"
 
 
@@ -688,7 +691,7 @@ namespace oomph
     assign_eqn_numbers();
      
     // Solve the fluid problem for the current wall geometry
-    std::cout <<"\n\nDOING FLUID SOLVE\n\n";
+    oomph_info <<"\n\nDOING FLUID SOLVE\n\n";
     //This is a fluid solve at the moment done by a newton solve
     Solve_type=Fluid_solve;
     newton_solve();
@@ -704,7 +707,7 @@ namespace oomph
     assign_eqn_numbers();
      
     // Solve the solid problem for the wall solution
-    std::cout <<"\n\nDOING SOLID SOLVE\n\n";
+    oomph_info <<"\n\nDOING SOLID SOLVE\n\n";
     //This is a solid solve, at the moment done by a newton method
     Solve_type = Solid_solve;
     newton_solve();

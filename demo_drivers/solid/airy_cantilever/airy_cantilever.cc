@@ -248,7 +248,7 @@ private:
  /// Pointer to solid mesh
  ElasticRefineableRectangularQuadMesh<ELEMENT>* Solid_mesh_pt;
 
- /// Pointers to meshes of traction elements
+ /// Pointer to mesh of traction elements
  SolidMesh* Traction_mesh_pt;
 
  /// DocInfo object for output
@@ -437,7 +437,7 @@ void CantileverProblem<ELEMENT>::create_traction_elements()
  // How many bulk elements are adjacent to boundary b?
  unsigned n_element = solid_mesh_pt()->nboundary_element(b);
  
- // Loop over the bulk elements adjacent to boundary b?
+ // Loop over the bulk elements adjacent to boundary b
  for(unsigned e=0;e<n_element;e++)
   {
    // Get pointer to the bulk element that is adjacent to boundary b
@@ -597,8 +597,8 @@ int main()
 
  // Create generalised Hookean constitutive equations
  Global_Physical_Variables::Constitutive_law_pt = 
-  new GeneralisedHookean(Global_Physical_Variables::Nu,
-                         Global_Physical_Variables::E);
+  new GeneralisedHookean(&Global_Physical_Variables::Nu,
+                         &Global_Physical_Variables::E);
  
  //Set up the problem
  CantileverProblem<MySolidElement<RefineableQPVDElement<2,3> > > problem;

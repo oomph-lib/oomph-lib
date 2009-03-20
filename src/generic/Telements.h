@@ -1108,7 +1108,8 @@ public:
          if(j<nplot-i-2)
           {
            outfile << nod_count+1 << " " 
-                   << nod_count+nplot-i+1 << " " << nod_count+nplot-i << std::endl;
+                   << nod_count+nplot-i+1 << " " 
+                   << nod_count+nplot-i << std::endl;
           }
         }
        ++nod_count;
@@ -1864,6 +1865,267 @@ public:
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
+
+
+//========================================================================
+/// Base class for Solid Telements 
+//========================================================================
+class TSolidElementBase : public virtual TElementBase,
+                          public virtual SolidFiniteElement
+{
+
+
+  public:
+
+ /// Constructor: Empty
+ TSolidElementBase(){};
+
+ /// Broken copy constructor
+ TSolidElementBase(const TSolidElementBase&) 
+  { 
+   BrokenCopy::broken_copy("TSolidElementBase");
+  } 
+ 
+ /// Broken assignment operator
+ void operator=(const TSolidElementBase&) 
+  {
+   BrokenCopy::broken_assign("TSolidElementBase");
+  }
+
+};
+
+
+
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+
+//=======================================================================
+/// SolidTElement elements are triangular/tet elements whose 
+/// derivatives also include those based upon the lagrangian 
+/// positions of the nodes.
+/// They are the basis for solid mechanics elements.
+//=======================================================================
+template <unsigned DIM, unsigned NNODE_1D> 
+class SolidTElement
+{};
+
+
+//=======================================================================
+///SolidTElement elements, specialised to one spatial dimension
+//=======================================================================
+template <unsigned NNODE_1D>
+class SolidTElement<1,NNODE_1D> : public virtual TElement<1,NNODE_1D>, 
+ public virtual TSolidElementBase
+{
+  public:
+
+ /// Constructor
+ SolidTElement() : TElement<1,NNODE_1D>(), SolidFiniteElement() 
+  {
+   //Set the Lagrangian dimension of the element
+   set_lagrangian_dimension(1);
+  }
+ 
+ /// Broken copy constructor
+ SolidTElement(const SolidTElement&) 
+  { 
+   BrokenCopy::broken_copy("SolidTElement");
+  } 
+ 
+ /// Broken assignment operator
+ void operator=(const SolidTElement&) 
+  {
+   BrokenCopy::broken_assign("SolidTElement");
+  }
+
+ /// \short Build the lower-dimensional FaceElement (an element of type
+ /// SolidPointElement).  The face index takes two values
+ /// corresponding to the two possible faces:
+ /// -1 (Left)  s[0] = -1.0
+ /// +1 (Right) s[0] =  1.0
+ inline void build_face_element(const int &face_index, 
+                                FaceElement* face_element_pt);
+ 
+
+};
+
+
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// SolidTElements
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////////////
+// 1D SolidTElements
+///////////////////////////////////////////////////////////////////////////
+
+
+//===========================================================
+/// Function to setup geometrical information for lower-dimensional 
+/// FaceElements (which are of type SolidTElement<0,1>).
+//===========================================================
+template<unsigned NNODE_1D>
+void SolidTElement<1,NNODE_1D>::
+build_face_element(const int &face_index,
+                   FaceElement *face_element_pt)
+{
+ //Build the standard non-solid FaceElement
+ TElement<1,NNODE_1D>::build_face_element(face_index,face_element_pt);
+
+ //Set the Lagrangian dimension from the first node of the present element
+ dynamic_cast<SolidFiniteElement*>(face_element_pt)->
+  set_lagrangian_dimension(static_cast<SolidNode*>(node_pt(0))->nlagrangian());
+}
+ 
+
+
+//=======================================================================
+/// SolidTElement elements, specialised to two spatial dimensions
+//=======================================================================
+template <unsigned NNODE_1D>
+class SolidTElement<2,NNODE_1D> : public virtual TElement<2,NNODE_1D>, 
+ public virtual TSolidElementBase
+{
+  private:
+
+ /// Lagrangian dimension of every node in this element
+ static const unsigned Every_node_nlagrangian;
+
+  public:
+
+ /// Constructor
+ SolidTElement() : TElementBase(), TElement<2,NNODE_1D>(),
+  SolidFiniteElement(), TSolidElementBase()
+  {
+   //Set the Lagrangian dimension of the element
+   set_lagrangian_dimension(2);
+  }
+
+ /// Broken copy constructor
+ SolidTElement(const SolidTElement&) 
+  { 
+   BrokenCopy::broken_copy("SolidTElement");
+  } 
+ 
+ /// Broken assignment operator
+ void operator=(const SolidTElement&) 
+  {
+   BrokenCopy::broken_assign("SolidTElement");
+  }
+
+ /// \short Build the lower-dimensional FaceElement (an element of type
+ /// SolidTElement<1,NNODE_1D>). The face index takes three possible values:
+ /// 0 (Left)         s[0] = 0.0
+ /// 1 (Bottom)       s[1] = 0.0
+ /// 2 (Sloping face) s[0] = 1.0 - s[1]
+ inline void build_face_element(const int &face_index,
+                                FaceElement* face_element_pt);
+ 
+};
+
+
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// 2D SolidTElements
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+
+
+//===========================================================
+/// Function to setup geometrical information for lower-dimensional 
+/// FaceElements (which are of type SolidTElement<1,NNODE_1D>).
+//===========================================================
+template<unsigned NNODE_1D>
+void SolidTElement<2,NNODE_1D>::
+build_face_element(const int &face_index, FaceElement *face_element_pt)
+{
+ //Build the standard non-solid FaceElement
+ TElement<2,NNODE_1D>::build_face_element(face_index,face_element_pt);
+ 
+ //Set the Lagrangian dimension from the first node of the present element
+ dynamic_cast<SolidFiniteElement*>(face_element_pt)->
+  set_lagrangian_dimension(static_cast<SolidNode*>(node_pt(0))->nlagrangian());
+}
+
+
+
+//=======================================================================
+/// SolidTElement elements, specialised to three spatial dimensions
+//=======================================================================
+template <unsigned NNODE_1D>
+class SolidTElement<3,NNODE_1D> : public virtual TElement<3,NNODE_1D>, 
+ public virtual TSolidElementBase
+{
+  private:
+
+ /// Lagrangian dimension of every node in this element
+ static const unsigned Every_node_nlagrangian;
+
+  public:
+
+ /// Constructor
+ SolidTElement() : TElementBase(), TElement<3,NNODE_1D>(),
+  SolidFiniteElement(), TSolidElementBase()
+  {
+   //Set the Lagrangian dimension of the element
+   set_lagrangian_dimension(3);
+  }
+
+ /// Broken copy constructor
+ SolidTElement(const SolidTElement&) 
+  { 
+   BrokenCopy::broken_copy("SolidTElement");
+  } 
+ 
+ /// Broken assignment operator
+ void operator=(const SolidTElement&) 
+  {
+   BrokenCopy::broken_assign("SolidTElement");
+  }
+
+
+ /// \short Build the lower-dimensional FaceElement (an element of type
+ /// SolidTElement<2,NNODE_1D>). The face index can take one of four values
+ /// corresponding to the four possible faces:
+ /// 0: (left)           s[0] = 0.0
+ /// 1: (bottom)         s[1] = 0.0
+ /// 2: (back)           s[2] = 0.0
+ /// 3: (sloping face)   s[0] + s[1] + s[2] = 1
+ inline void build_face_element(const int &face_index,
+                                FaceElement* face_element_pt);
+
+};
+
+
+
+///////////////////////////////////////////////////////////////////////////
+// 3D SolidTElements
+///////////////////////////////////////////////////////////////////////////
+
+
+//===========================================================
+/// Function to setup geometrical information for lower-dimensional 
+/// FaceElements (which are of type SolidTElement<1,NNODE_1D>).
+//===========================================================
+template<unsigned NNODE_1D>
+void SolidTElement<3,NNODE_1D>::
+ build_face_element(const int &face_index,
+                    FaceElement *face_element_pt)
+{
+ //Build the standard non-solid FaceElement
+ TElement<3,NNODE_1D>::build_face_element(face_index,face_element_pt);
+ 
+ //Set the Lagrangian dimension from the first node of the present element
+ dynamic_cast<SolidFiniteElement*>(face_element_pt)->
+  set_lagrangian_dimension(static_cast<SolidNode*>(node_pt(0))->nlagrangian());
+}
+
+
 
 }
 

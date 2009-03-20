@@ -740,9 +740,7 @@ class AlgebraicMesh : public virtual Mesh
         {
          nod_pt->x(i)=x[i];
         }
-
-       // hierher execute auxiliary node update
-       // function
+       nod_pt->perform_auxiliary_node_update_fct();
       }
     }
 

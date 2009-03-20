@@ -51,6 +51,23 @@ using namespace std;
 
 using namespace oomph;
 
+//====start_of_Global_Physical_Variables================
+/// Namespace for phyical parameters
+//======================================================
+namespace Global_Physical_Variables
+{
+
+ /// Pseudo-solid Poisson ratio
+ double Nu=0.1;
+
+ /// Pseudo-solid Mooney-Rivlin parameter
+ double C1=1.0;
+
+ /// Pseudo-solid Young's modulus
+ double E=2.2;
+
+}
+
 //============================================================================
 /// Specific mesh for the static cap problem: Essentially a 
 /// standard single-layer mesh with an additional element that applies
@@ -721,8 +738,12 @@ ElasticCapProblem<ELEMENT>::ElasticCapProblem(const bool& hijack_internal) :
   //obsolete: new DeformedMetricTensorLinearElasticConstitutiveLaw(1.0,0.001);
   //new GeneralisedHookean(0.001,1.0);
   //new IsotropicStrainEnergyFunctionConstitutiveLaw(new TongOne(1.0,1.0,0.1));
-  new IsotropicStrainEnergyFunctionConstitutiveLaw(new GeneralisedMooneyRivlin(0.1,1.0,2.2));
- //Loop over the elements
+  new IsotropicStrainEnergyFunctionConstitutiveLaw(
+   new GeneralisedMooneyRivlin(&Global_Physical_Variables::Nu,
+                               &Global_Physical_Variables::C1,
+                               &Global_Physical_Variables::E));
+ 
+//Loop over the elements
  unsigned n_bulk = mesh_pt()->nbulk();
  for(unsigned e=0;e<n_bulk;e++)
   {

@@ -482,9 +482,9 @@ int main(int argc, char* argv[])
 
  // Define a strain energy function: Generalised Mooney Rivlin
  Global_Physical_Variables::Strain_energy_function_pt = 
-  new GeneralisedMooneyRivlin(Global_Physical_Variables::Nu,
-                              Global_Physical_Variables::C1,
-                              Global_Physical_Variables::E);
+  new GeneralisedMooneyRivlin(&Global_Physical_Variables::Nu,
+                              &Global_Physical_Variables::C1,
+                              &Global_Physical_Variables::E);
  
  // Define a constitutive law (based on strain energy function)
   Global_Physical_Variables::Constitutive_law_pt = 

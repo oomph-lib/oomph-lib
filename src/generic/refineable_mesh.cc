@@ -31,6 +31,8 @@
 #include "mpi.h"
 #endif
 
+#include<stdlib.h>
+
 namespace oomph
 {
 

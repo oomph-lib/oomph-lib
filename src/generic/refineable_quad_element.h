@@ -391,13 +391,6 @@ class RefineableSolidQElement<2> : public virtual RefineableQElement<2>,
        SolidNode* elastic_node_pt = 
         static_cast<SolidNode*>(node_pt(n));
 
-
-       // hierher
-/*        // Lagrangian coordinate: Always based on "undeformed" */
-/*        // MacroElement representation (if available) */
-/*        elastic_node_pt->xi(0) = xi[0]; */
-/*        elastic_node_pt->xi(1) = xi[1]; */
-
        // Eulerian coordinate: Based on "current" MacroElement representation
        // if the nodal position is constrained by displacement boundary 
        // conditions (because the "current" Domain provides an exact 

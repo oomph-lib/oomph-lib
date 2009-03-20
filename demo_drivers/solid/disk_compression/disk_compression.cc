@@ -244,7 +244,7 @@ StaticDiskCompressionProblem<ELEMENT>::StaticDiskCompressionProblem()
  // Solid mesh is first sub-mesh
  add_sub_mesh(Solid_mesh_pt);
 
- // Traction mesh is first sub-mesh
+ // Traction mesh is second sub-mesh
  add_sub_mesh(Traction_mesh_pt);
 
  // Build combined "global" mesh
@@ -418,9 +418,9 @@ int main(int argc, char* argv[])
   
  // Define a strain energy function: Generalised Mooney Rivlin
  Global_Physical_Variables::Strain_energy_function_pt = 
-  new GeneralisedMooneyRivlin(Global_Physical_Variables::Nu,
-                              Global_Physical_Variables::C1,
-                              Global_Physical_Variables::E);
+  new GeneralisedMooneyRivlin(&Global_Physical_Variables::Nu,
+                              &Global_Physical_Variables::C1,
+                              &Global_Physical_Variables::E);
  
  // Define a constitutive law (based on strain energy function)
  Global_Physical_Variables::Constitutive_law_pt = 
@@ -478,8 +478,8 @@ int main(int argc, char* argv[])
  
  // Create oomph-lib's generalised Hooke's law constitutive equation
  Global_Physical_Variables::Constitutive_law_pt = 
-  new GeneralisedHookean(Global_Physical_Variables::Nu,
-                         Global_Physical_Variables::E);
+  new GeneralisedHookean(&Global_Physical_Variables::Nu,
+                         &Global_Physical_Variables::E);
  
  // Case 3: No pressure, generalised Hooke's law
  //----------------------------------------------

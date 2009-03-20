@@ -764,8 +764,8 @@ int main()
    //-------------------------------------------
    {
     Global_Physical_Variables::Constitutive_law_pt = 
-     new GeneralisedHookean(Global_Physical_Variables::Nu,
-                            Global_Physical_Variables::E);
+     new GeneralisedHookean(&Global_Physical_Variables::Nu,
+                            &Global_Physical_Variables::E);
 
     incompress=false;
     
@@ -837,8 +837,8 @@ int main()
    //-----------------------------
    {
     Global_Physical_Variables::Strain_energy_function_pt = 
-     new MooneyRivlin(Global_Physical_Variables::C1,
-                      Global_Physical_Variables::C2);
+     new MooneyRivlin(&Global_Physical_Variables::C1,
+                      &Global_Physical_Variables::C2);
     
     // Define a constitutive law (based on strain energy function)
     Global_Physical_Variables::Constitutive_law_pt = 

@@ -28,6 +28,7 @@
 #ifndef OOMPH_SIMPLE_CUBIC_TET_MESH_TEMPLATE_CC
 #define OOMPH_SIMPLE_CUBIC_TET_MESH_TEMPLATE_CC
 
+#include<algorithm>
 
 // Simple 3D tetrahedral mesh class
 #include "simple_cubic_tet_mesh.template.h"

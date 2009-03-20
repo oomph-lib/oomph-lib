@@ -31,7 +31,8 @@ mesh_from_xfig_poisson_SOURCES = mesh_from_xfig_poisson.cc
 mesh_from_xfig_poisson_LDADD = -L@libdir@  -lpoisson -lgeneric  \
 $(EXTERNAL_LIBS) $(FLIBS)
 
-
+install: fig2poly
+	if [ ! -e `pwd`/fig2poly ]; then $(LN_S) `pwd`/fig2poly ../../../bin ; fi
 
 
 # THE EXECUTABLE:

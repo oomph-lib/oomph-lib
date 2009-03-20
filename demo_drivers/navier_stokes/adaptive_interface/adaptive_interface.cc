@@ -37,6 +37,24 @@
 using namespace oomph;
 
 
+//=start_of_namespace================================================
+/// Namespace for physical parameters
+//===================================================================
+namespace Global_Physical_Variables
+{
+
+ /// Pseudo-solid Poisson ratio
+ double Nu=0.1;
+
+ /// Pseudo-solid Mooney-Rivlin parameter
+ double C1=1.0;
+
+ /// Pseudo-solid Young's modulus
+ double E=2.2;
+
+} // end_of_namespace
+
+
 //My own Ellipse class
 class GeneralEllipse : public GeomObject
 {
@@ -941,7 +959,11 @@ RefineableRotatingCylinderProblem<ELEMENT>::RefineableRotatingCylinderProblem(
   //obsolete: new DeformedMetricTensorLinearElasticConstitutiveLaw(1.0,0.001);
   //new GeneralisedHookean(0.001,1.0);
   new IsotropicStrainEnergyFunctionConstitutiveLaw(
-   new GeneralisedMooneyRivlin(0.1,1.0,2.2));
+   new GeneralisedMooneyRivlin(&Global_Physical_Variables::Nu,
+                               &Global_Physical_Variables::C1,
+                               &Global_Physical_Variables::E));
+ 
+
  
  /// Switch off full doc for frontal solver
  //static_cast<HSL_MA42*>(linear_solver_pt())->doc_stats()=false;

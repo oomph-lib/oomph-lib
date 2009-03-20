@@ -932,7 +932,6 @@ void AlgebraicCylinderWithFlagMesh<ELEMENT>::setup_algebraic_node_update()
 {
  
  //The update function requires six parameters in some cases:
- // hierher move inside
  Vector<double> ref_value(6);
  for(unsigned i=0;i<5;i++)
   {

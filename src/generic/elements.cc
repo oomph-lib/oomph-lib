@@ -4344,7 +4344,6 @@ fill_in_jacobian_for_newmark_accel(DenseMatrix<double> &jacobian)
 
    // Get multiplier for inertia terms
    double factor=multiplier(xi);
-   oomph_info << "Multiplier: " << factor << std::endl;
 
    //Premultiply the weights and the Jacobian
    double W = w*J;
@@ -4524,15 +4523,8 @@ void SolidFiniteElement::fill_in_generic_jacobian_for_solid_ic(
 
                  // Only diagonal term
                  unsigned ii=i;
-                 
-                 
+                                 
                  local_unknown = position_local_eqn(ll,kk,ii);
-                 
-                 
-                 std::cout << "ll kk ii local_unknown " 
-                           << ll << " " << kk<< " " 
-                           << ii<< " " << local_unknown << " " 
-                           << std::endl;
                  
                  //If it's not a boundary condition
                  if(local_unknown >= 0)

@@ -206,9 +206,6 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
  //Find out how many positional dofs there are
  unsigned n_position_type = this->nnodal_position_type();
  
- // Timescale ratio (non-dim density)
- double Lambda_sq = this->lambda_sq();
-  
  //Set up memory for the shape functions
  Shape psi(n_node,n_position_type);
  DShape dpsidxi(n_node,n_position_type,DIM);
@@ -218,10 +215,17 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
    
  //Set the vector to hold the local coordinates in the element
  Vector<double> s(DIM);
-
+ 
+ // Timescale ratio (non-dim density)
+ double lambda_sq = this->lambda_sq();
+ 
  // Time factor
- const double time_factor=this->node_pt(0)->time_stepper_pt()->weight(2,0);
-
+ double time_factor=0.0;
+ if (lambda_sq>0)
+  {
+   time_factor=this->node_pt(0)->position_time_stepper_pt()->weight(2,0);
+  }
+ 
  //Integer to store the local equation number
  int local_eqn=0;
 
@@ -271,7 +275,7 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
          interpolated_xi[i] += this->lagrangian_position_gen(l,k,i)*psi(l,k);
 
          // Only compute accelerations if inertia is switched on
-         if (this->unsteady())
+         if ((lambda_sq>0.0)&&(this->unsteady()))
           {
            accel[i] += this->dnodal_position_gen_dt(2,l,k,i)*psi(l,k);
           }
@@ -454,7 +458,7 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
            double sum=0.0;
 
            // Acceleration and body force
-           sum+=(Lambda_sq*accel[i]-b[i])*psi(l,k);
+           sum+=(lambda_sq*accel[i]-b[i])*psi(l,k);
 
            // Stress term
            for(unsigned a=0;a<DIM;a++)
@@ -551,7 +555,7 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
                        if (i==ii)
                         {
                          // Inertia term
-                         sum+=Lambda_sq*time_factor*psi(ll,kk)*psi(l,k);
+                         sum+=lambda_sq*time_factor*psi(ll,kk)*psi(l,k);
                          
                          // Stress term                       
                          unsigned count4=offset4;
@@ -625,101 +629,48 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
 //=======================================================================
 template <unsigned DIM>
 void PVDEquations<DIM>::output(std::ostream &outfile, const unsigned &n_plot)
+{
+ 
+ Vector<double> x(DIM);
+ Vector<double> xi(DIM);
+ Vector<double> s(DIM);
+ 
+ // Tecplot header info
+ outfile << this->tecplot_zone_string(n_plot);
+ 
+ // Loop over plot points
+ unsigned num_plot_points=this->nplot_points(n_plot);
+ for (unsigned iplot=0;iplot<num_plot_points;iplot++)
   {
-   //Set output Vector
-   Vector<double> s(DIM);
-   Vector<double> x(DIM);
-   Vector<double> xi(DIM);
-
-   switch(DIM)
-    {
-
-    case 2:
-
-     //Tecplot header info 
-     outfile << "ZONE I=" << n_plot << ", J=" << n_plot << std::endl;
-     
-     //Loop over element nodes
-     for(unsigned l2=0;l2<n_plot;l2++)
-      {
-       s[1] = -1.0 + l2*2.0/(n_plot-1);
-       for(unsigned l1=0;l1<n_plot;l1++)
-        {
-         s[0] = -1.0 + l1*2.0/(n_plot-1);
-         
-         // Get Eulerian and Lagrangian coordinates
-         this->interpolated_x(s,x);
-         this->interpolated_xi(s,xi);
-
-         // Get isotropic growth
-         double gamma;
-         this->get_isotropic_growth(s,xi,gamma);
-
-         //Output the x,y,..
-         for(unsigned i=0;i<DIM;i++) 
-          {outfile << x[i] << " ";}
-         // Output xi0,xi1,..
-         for(unsigned i=0;i<DIM;i++) 
-         {outfile << xi[i] << " ";} 
-         // Output growth
-         outfile << gamma << " ";
-         outfile << std::endl;
-        }
-      }
-     outfile << std::endl;
-     break;
-     
-    case 3:
-     //Tecplot header info 
-     outfile << "ZONE I=" << n_plot 
-             << ", J=" << n_plot 
-             << ", K=" << n_plot 
-             << std::endl;
-     
-     //Loop over element nodes
-     for(unsigned l3=0;l3<n_plot;l3++)
-      {
-       s[2] = -1.0 + l3*2.0/(n_plot-1);
-       for(unsigned l2=0;l2<n_plot;l2++)
-        {
-         s[1] = -1.0 + l2*2.0/(n_plot-1);
-         for(unsigned l1=0;l1<n_plot;l1++)
-          {
-           s[0] = -1.0 + l1*2.0/(n_plot-1);
-           
-
-           // Get Eulerian and Lagrangian coordinates
-           this->interpolated_x(s,x);
-           this->interpolated_xi(s,xi);
-           
-           // Get isotropic growth
-           double gamma;
-           this->get_isotropic_growth(s,xi,gamma);
-           
-           //Output the x,y,z
-           for(unsigned i=0;i<DIM;i++) 
-            {outfile << x[i] << " ";}
-           // Output xi0,xi1,xi2
-           for(unsigned i=0;i<DIM;i++) 
-            {outfile << xi[i] << " ";} 
-           // Output growth
-           outfile << gamma << " ";
-           outfile << std::endl;
-         
-          }
-        }
-      }
-     outfile << std::endl;
-     break;
-     
-    default:
-     std::ostringstream error_message;
-     error_message << "No output routine for PVDEquations<" << 
-      DIM << "> elements --  write it yourself!" << std::endl;
-     throw OomphLibError(error_message.str(),"PVDEquations<DIM>::output()",
-                         OOMPH_EXCEPTION_LOCATION);
-    }
+   // Get local coordinates of plot point
+   this->get_s_plot(iplot,n_plot,s);
+   
+   // Get Eulerian and Lagrangian coordinates
+   this->interpolated_x(s,x);
+   this->interpolated_xi(s,xi);
+   
+   // Get isotropic growth
+   double gamma;
+   this->get_isotropic_growth(s,xi,gamma);
+   
+   //Output the x,y,..
+   for(unsigned i=0;i<DIM;i++) 
+    {outfile << x[i] << " ";}
+   
+   // Output xi0,xi1,..
+   for(unsigned i=0;i<DIM;i++) 
+    {outfile << xi[i] << " ";} 
+   
+   // Output growth
+   outfile << gamma << " ";
+   outfile << std::endl;
   }
+ 
+
+ // Write tecplot footer (e.g. FE connectivity lists)
+ this->write_tecplot_zone_footer(outfile,n_plot);
+ outfile << std::endl;
+}
 
 
 
@@ -1186,9 +1137,6 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
  //Find out how many pressure dofs there are
  unsigned n_solid_pres = npres_solid();
 
- // Timescale ratio (non-dim density)
- double Lambda_sq = this->lambda_sq();
-
  //Set up memory for the shape functions
  Shape psi(n_node,n_position_type);
  DShape dpsidxi(n_node,n_position_type,DIM);
@@ -1202,8 +1150,15 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
  //Set the vector to hold the local coordinates in the element
  Vector<double> s(DIM);
 
+ // Timescale ratio (non-dim density)
+ double lambda_sq = this->lambda_sq();
+
  // Time factor
- const double time_factor=this->node_pt(0)->time_stepper_pt()->weight(2,0);
+ double time_factor=0.0;
+ if (lambda_sq>0)
+  {
+   time_factor=this->node_pt(0)->position_time_stepper_pt()->weight(2,0);
+  }
 
  //Integers to hold the local equation and unknown numbers
  int local_eqn=0, local_unknown=0;
@@ -1261,7 +1216,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
          // Only compute accelerations if inertia is switched on
          // otherwise the timestepper might not be able to 
          // work out dx_gen_dt(2,...)
-         if (this->unsteady())
+         if ((lambda_sq>0.0)&&(this->unsteady()))
           {
            accel[i] += this->dnodal_position_gen_dt(2,l,k,i)*psi(l,k);
           }
@@ -1567,7 +1522,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
            double sum=0.0;
            
            // Acceleration and body force
-           sum+=(Lambda_sq*accel[i]-b[i])*psi(l,k);
+           sum+=(lambda_sq*accel[i]-b[i])*psi(l,k);
            
            // Stress term
            for(unsigned a=0;a<DIM;a++)
@@ -1664,7 +1619,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
                        if (i==ii)
                         {
                          // Inertia term
-                         sum+=Lambda_sq*time_factor*psi(ll,kk)*psi(l,k);
+                         sum+=lambda_sq*time_factor*psi(ll,kk)*psi(l,k);
                          
                          // Stress term                       
                          unsigned count4=offset4;
@@ -2327,7 +2282,6 @@ template class PVDEquationsBase<2>;
 template class PVDEquations<2>;
 template class PVDEquationsWithPressure<2>;
 
-template class QPVDElement<3,3>;
 template class QPVDElementWithPressure<3>;
 template class QPVDElementWithContinuousPressure<3>;
 template class PVDEquationsBase<3>;

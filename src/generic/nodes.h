@@ -1147,6 +1147,10 @@ public:
  /// Here to provide error reporting.
  virtual void remove_from_boundary(const unsigned &b);
 
+ /// \short Get the number of boundary coordinates on mesh boundary b. 
+ /// Broken virtual interface provides run-time 
+ /// error checking
+ virtual unsigned ncoordinates_on_boundary(const unsigned &b);
 
  /// \short Return the vector of the k-th generalised boundary coordinates 
  /// on mesh boundary b. Broken virtual interface provides run-time 
@@ -1670,6 +1674,9 @@ class BoundaryNodeBase
  /// \short Test whether the node lies on mesh boundary b
  bool is_on_boundary(const unsigned &b);
 
+ /// \short Get the number of boundary coordinates on mesh boundary b
+ unsigned ncoordinates_on_boundary(const unsigned &b);
+
  /// \short Return the vector of boundary coordinates on mesh boundary b
  void get_coordinates_on_boundary(const unsigned &b, 
                                   Vector<double> &boundary_zeta)
@@ -1861,6 +1868,14 @@ class BoundaryNode: public NODE_TYPE, public BoundaryNodeBase
  /// \short Remover the node from mesh boundary b, final overload
  void remove_from_boundary(const unsigned &b)
   {BoundaryNodeBase::remove_from_boundary(b);}
+
+
+ /// \short Get the number of boundary coordinates on mesh boundary b. 
+ unsigned ncoordinates_on_boundary(const unsigned &b)
+  {
+   return BoundaryNodeBase::ncoordinates_on_boundary(b);
+  }
+
 
  /// \short Return the vector of coordinates on mesh boundary b
  /// Final overload

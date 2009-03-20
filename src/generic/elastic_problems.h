@@ -618,16 +618,18 @@ SolidFiniteElement::MultiplierFctPt multiplier_fct_pt)
  if (res_max>Max_residual_after_consistent_newton_ic)
   {
    std::ostringstream error_message;
-   error_message << "Residual is  bigger than allowed! Current tolerance: " 
-                 << Max_residual_after_consistent_newton_ic << std::endl;
+   error_message << "Residual is  bigger than allowed! [Current tolerance: " 
+                 << Max_residual_after_consistent_newton_ic << "]\n\n"; 
    error_message << "This is probably because you've not specified the "
-                 << "correct timescale \n ratio (non-dim density) for your "
-                 << "equations.\n"
+                 << "correct multiplier \n(the product of growth factor "
+                 << "and timescale ratio [the non-dim density]). \nPlease "
+                 << "check the Solid Mechanics Theory Tutorial for "
+                 << "details. \n\n"
                  << "If you're sure that the residual is OK, overwrite "
-                 << "default tolerance using\n";
+                 << "the default tolerance using\n";
    error_message 
-    << "SolidICProblem<TIMESTEPPER>::max_residual_after_consistent_newton_ic()"
-    << std::endl << "or switch off PARANOID" << std::endl;
+    << "SolidICProblem::max_residual_after_consistent_newton_ic()"
+    << std::endl << "or recompile without the PARANOID flag." << std::endl;
 
    throw OomphLibError(
     error_message.str(),

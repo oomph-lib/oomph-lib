@@ -3732,11 +3732,7 @@ void Problem::newton_solve()
     }
 
    // Initialise timer for linear solver
-#ifdef OOMPH_HAS_MPI   
-   double t_solver_start = MPI_Wtime();
-#else
-   clock_t t_solver_start = clock();
-#endif
+   double t_solver_start = TimingHelpers::timer();
    
    //Now do the linear solve -- recycling Jacobian if requested
    if (Jacobian_reuse_is_enabled&&Jacobian_has_been_computed)
@@ -3772,24 +3768,15 @@ void Problem::newton_solve()
     }
 
    // End of linear solver
-#ifdef OOMPH_HAS_MPI   
-   double t_solver_end = MPI_Wtime();
+   double t_solver_end = TimingHelpers::timer();
    total_linear_solver_time+=t_solver_end-t_solver_start;
-#else
-   clock_t t_solver_end = clock();
-   total_linear_solver_time+=
-    double(t_solver_end-t_solver_start)/CLOCKS_PER_SEC;
-#endif
+
    if (!Shut_up_in_newton_solve) 
     {
      oomph_info << std::endl;
      oomph_info << "Time for linear solver (ndof="
                 << n_dofs << ") [sec]: " 
-#ifdef OOMPH_HAS_MPI 
                 << t_solver_end-t_solver_start 
-#else
-                << double(t_solver_end-t_solver_start)/CLOCKS_PER_SEC 
-#endif
                 << std::endl << std::endl;
     }
 
@@ -3875,13 +3862,10 @@ void Problem::newton_solve()
    oomph_info << "Total time for linear solver (ndof="<< n_dofs << ") [sec]: " 
               << total_linear_solver_time << std::endl;
   }
-#ifdef OOMPH_HAS_MPI   
- double t_end = MPI_Wtime();
+
+ double t_end = TimingHelpers::timer();
  double total_time=t_end-t_start;
-#else
- clock_t t_end = clock();
- double total_time=double(t_end-t_start)/CLOCKS_PER_SEC;
-#endif
+
  if (!Shut_up_in_newton_solve) 
   {
    oomph_info << "Total time for Newton solver (ndof="<< n_dofs << ") [sec]: " 

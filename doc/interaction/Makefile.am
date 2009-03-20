@@ -11,7 +11,10 @@ fsi_collapsible_channel_algebraic \
 fsi_collapsible_channel_adapt \
 fsi_channel_segregated_solver \
 turek_flag \
-fsi_channel_with_leaflet 
+fsi_channel_with_leaflet \
+unstructured_fsi \
+unstructured_three_d_fsi
+
 
 
 

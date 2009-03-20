@@ -44,7 +44,7 @@ else
 ../../../../bin/fpdiff.py ../validata/res_pres.dat.gz \
     res_pres.dat 0.1 3.5e-10 >> validation.log
 ../../../../bin/fpdiff.py ../validata/res_cont_pres.dat.gz \
-    res_cont_pres.dat 0.1 9.0e-9 >> validation.log
+    res_cont_pres.dat 0.1 5.0e-8 >> validation.log
 fi
 
 
@@ -76,7 +76,7 @@ else
 ../../../../bin/fpdiff.py ../validata/res_pres_ref.dat.gz \
     res_pres_ref.dat 0.1 4.0e-10 >> validation.log
 ../../../../bin/fpdiff.py ../validata/res_cont_pres_ref.dat.gz \
-    res_cont_pres_ref.dat 0.1 4.0e-10 >> validation.log
+    res_cont_pres_ref.dat 0.1 5.0e-8 >> validation.log
 fi
 
 

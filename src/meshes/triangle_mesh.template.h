@@ -29,6 +29,7 @@
 #define OOMPH_TRIANGLE_MESH_HEADER
 
 #include "../generic/triangle_scaffold_mesh.h" 
+#include "../generic/triangle_mesh.h" 
 
 namespace oomph
 {
@@ -39,7 +40,7 @@ namespace oomph
 /// http://www.cs.cmu.edu/~quake/triangle.html
 //======================================================================
 template <class ELEMENT>
-class TriangleMesh : public Mesh
+class TriangleMesh : public virtual TriangleMeshBase
 {
 
 public:
@@ -81,6 +82,26 @@ public:
 
  /// Empty destructor 
  ~TriangleMesh() {}
+ 
+ /// \short Setup boundary coordinate on boundary b.
+ /// Boundary coordinate increases continously along
+ /// polygonal boundary. It's zero at the lexicographically
+ /// smallest node on the boundary.
+ void setup_boundary_coordinates(const unsigned& b)
+ {
+  // Dummy file
+  std::ofstream some_file;
+  setup_boundary_coordinates(b,some_file);
+ }
+ 
+ /// \short Setup boundary coordinate on boundary b. Doc Faces
+ /// in outfile.
+ /// Boundary coordinate increases continously along
+ /// polygonal boundary. It's zero at the lexicographically
+ /// smallest node on the boundary.
+ void setup_boundary_coordinates(const unsigned& b,
+                                 std::ofstream& outfile);
+
 
  /// Return the number of regions specified by attributes
  unsigned nregion() {return Region_element_pt.size();}

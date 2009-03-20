@@ -1,0 +1,56 @@
+# TetGen input file
+#
+
+
+# Part 1 - the node list.
+
+# 8 nodes in 3D, no attributes, one boundary marker.
+8  3  0 1
+
+  # The 4 inflow nodes:
+  1  0  0  0  0
+  2  2  0  0  0
+  3  2  2  0  0
+  4  0  2  0  0
+
+  # The 4  outflow nodes:
+  5  0  0 12  0
+  6  2  0 12  0
+  7  2  2 12  0
+  8  0  2 12  0
+
+
+
+
+# Part 2 - the facet list.
+# Six facets with boundary markers.
+6  1
+
+  # The leftmost facet (inflow)
+  1  0  1   # 1 polygon, no hole, boundary marker (1)
+  4  1 2 3 4
+
+  # The rightmost facet (outflow)
+  1  0  2   # 1 polygon, no hole, boundary marker (2)
+  4  5 6 7 8
+
+  # Other facets.
+  1 0 3 # 1 polygon, no hole, boundary marker (3)
+  4  1 5 6 2 # bottom side
+
+  1 0 4 # 1 polygon, no hole, boundary marker (4)
+  4  2 6 7 3 # back side
+
+  1 0 5 # 1 polygon, no hole, boundary marker (5)
+  4  3 7 8 4 # top side
+
+  1 0 6 # 1 polygon, no hole, boundary marker (6)
+  4  4 8 5 1 # front side
+
+# Part 3 - the hole list.
+# There is no hole in bar.
+0
+
+# Part 4 - the region list.
+# There is no region defined.
+0

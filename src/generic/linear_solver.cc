@@ -1273,6 +1273,7 @@ else if(dynamic_cast<CCDoubleMatrix*>(matrix_pt))
 void SuperLU_dist::backsub(const DoubleVector &rhs,
                            DoubleVector &result)
 {
+
  // Doc (0/1) = (true/false)
  int doc = !Doc_stats;
  
@@ -1376,7 +1377,7 @@ void SuperLU_dist::solve(DoubleMatrixBase* const &matrix_pt,
                          DoubleVector &result)
 {
  // Initialise timer
- double t_start = MPI_Wtime();
+ double t_start = TimingHelpers::timer(); 
 
 #ifdef PARANOID
  // check that the rhs vector is setup
@@ -1481,7 +1482,7 @@ void SuperLU_dist::solve(DoubleMatrixBase* const &matrix_pt,
  backsub(rhs,result);
 
  // Doc time for solve
- double t_end = MPI_Wtime();
+ double t_end = TimingHelpers::timer(); 
  Solution_time = t_end-t_start;
  
  if ((Doc_time) && (MPI_Helpers::My_rank==0))
@@ -1515,7 +1516,7 @@ void SuperLU_dist::solve(DoubleMatrixBase* const &matrix_pt,
 void SuperLU_dist::solve(Problem* const &problem_pt, DoubleVector &result)
 {
  // Initialise timer
- double t_start = MPI_Wtime();
+ double t_start = TimingHelpers::timer();
   
  // number of dofs
  unsigned n_dof = problem_pt->ndof();
@@ -1537,7 +1538,7 @@ void SuperLU_dist::solve(Problem* const &problem_pt, DoubleVector &result)
  if (!Use_global_solver)
   {
    // Initialise timer
-   double t_start = MPI_Wtime();
+   double t_start = TimingHelpers::timer();
 
    // Storage for the residuals vector
    DoubleVector residuals(Distribution_pt);
@@ -1547,7 +1548,7 @@ void SuperLU_dist::solve(Problem* const &problem_pt, DoubleVector &result)
    problem_pt->get_jacobian(residuals, jacobian);
 
    // Doc time for setup
-   double t_end = MPI_Wtime();
+   double t_end = TimingHelpers::timer();
    Jacobian_setup_time = t_end-t_start;
    if ((Doc_time) && (MPI_Helpers::My_rank==0))
     {
@@ -1576,7 +1577,7 @@ void SuperLU_dist::solve(Problem* const &problem_pt, DoubleVector &result)
  else
   {
    // Initialise timer
-   double t_start = MPI_Wtime();
+   double t_start = TimingHelpers::timer();
 
    // Storage for the residuals vector
    DoubleVector residuals;
@@ -1586,7 +1587,7 @@ void SuperLU_dist::solve(Problem* const &problem_pt, DoubleVector &result)
    problem_pt->get_jacobian(residuals, jacobian);
 
    // Doc time for setup
-   double t_end = MPI_Wtime();
+   double t_end = TimingHelpers::timer();
    Jacobian_setup_time = t_end-t_start;
    if ((Doc_time) && (MPI_Helpers::My_rank==0))
     {
@@ -1608,7 +1609,7 @@ void SuperLU_dist::solve(Problem* const &problem_pt, DoubleVector &result)
  // Finalise/doc timings
  if ((Doc_time) && (MPI_Helpers::My_rank==0))
   {
-   double t_end = MPI_Wtime();
+   double t_end = TimingHelpers::timer();
    oomph_info << std::endl << "Total time for SuperLU_dist " << "(np=" 
               << MPI_Helpers::Nproc << ",N=" << problem_pt->ndof()
               <<") [sec] : " << t_end-t_start << std::endl << std::endl;
@@ -1672,13 +1673,13 @@ void SuperLU_dist::resolve(const DoubleVector &rhs, DoubleVector &result)
 #endif
  
  // Store starting time for solve
- double t_start = MPI_Wtime();
+ double t_start = TimingHelpers::timer();
  
  //Now do the back substitution phase
  backsub(rhs,result);
 
  // Doc time for solve
- double t_end = MPI_Wtime();
+ double t_end = TimingHelpers::timer();
  Solution_time = t_end-t_start;
  
  if ((Doc_time) && (MPI_Helpers::My_rank==0))

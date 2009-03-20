@@ -2,10 +2,10 @@
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 # Name of executables that should run during the self-test
-check_PROGRAMS=one_d_womersley
+check_PROGRAMS=one_d_womersley 
 
 # Sources for executable
-one_d_womersley_SOURCES = one_d_womersley.cc
+one_d_womersley_SOURCES = one_d_womersley.cc flux_control_elements.h
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.

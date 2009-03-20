@@ -30,7 +30,7 @@
 #define OOMPH_TETGEN_MESH_HEADER
 
 #include "../generic/tetgen_scaffold_mesh.h"
-
+#include "../generic/tet_mesh.h"
 
 namespace oomph
 {
@@ -40,7 +40,7 @@ namespace oomph
 /// http://tetgen.berlios.de/
 //========================================================================
 template <class ELEMENT>
-class TetgenMesh : public Mesh
+class TetgenMesh : public virtual TetMeshBase
 {
 
 public:
@@ -67,9 +67,103 @@ public:
   }
 
 
+ /// \short Constructor with the input files. Setting the boolean
+ /// flag to true splits "corner" elements, i.e. elements that
+ /// that have at least three faces on a domain boundary. The 
+ /// relevant elements are split without introducing hanging
+ /// nodes so the sons have a "worse" shape than their fathers.
+ /// However, this step avoids otherwise-hard-to-diagnose
+ /// problems in fluids problems where the application of
+ /// boundary conditions at such "corner" elements can
+ /// overconstrain the solution. 
+ TetgenMesh(const std::string& node_file_name,
+            const std::string& element_file_name,
+            const std::string& face_file_name,
+            const bool& split_corner_elements,
+            TimeStepper* time_stepper_pt=
+            &Mesh::Default_TimeStepper)
+              
+  {
+   // Build scaffold
+   Tmp_mesh_pt= new 
+    TetgenScaffoldMesh(node_file_name,element_file_name,face_file_name);
+ 
+   // Convert mesh from scaffold to actual mesh
+   build_from_scaffold(time_stepper_pt);
+
+   // Kill the scaffold
+   delete Tmp_mesh_pt;
+   Tmp_mesh_pt=0;
+
+   // Split corner elements
+   if (split_corner_elements)
+    {
+     split_elements_in_corners();
+    }
+  }
 
  /// Empty destructor 
  ~TetgenMesh() {}
+
+
+ /// \short Setup boundary coordinate on boundary b which is
+ /// assumed to be planar. Boundary coordinates are the
+ /// x-y coordinates in the plane of that boundary with the
+ /// x-axis along the line from the (lexicographically)
+ /// "lower left" to the "upper right" node. The y axis
+ /// is obtained by taking the cross-product of the positive
+ /// x direction with the outer unit normal computed by
+ /// the face elements.
+ void setup_boundary_coordinates(const unsigned& b)
+ {
+  // Dummy file
+  std::ofstream some_file;
+  
+  // Don't switch the normal
+  bool switch_normal=false;
+
+  setup_boundary_coordinates(b,switch_normal,some_file);
+ }
+ 
+
+ /// \short Setup boundary coordinate on boundary b which is
+ /// assumed to be planar. Boundary coordinates are the
+ /// x-y coordinates in the plane of that boundary with the
+ /// x-axis along the line from the (lexicographically)
+ /// "lower left" to the "upper right" node. The y axis
+ /// is obtained by taking the cross-product of the positive
+ /// x direction with the outer unit normal computed by
+ /// the face elements. Doc faces in output file.
+ void setup_boundary_coordinates(const unsigned& b,
+                                 std::ofstream& outfile)
+  {
+   // Don't switch the normal
+   bool switch_normal=false;
+   
+   setup_boundary_coordinates(b,switch_normal,outfile);
+  }
+
+
+ /// \short Setup boundary coordinate on boundary b which is
+ /// assumed to be planar. Boundary coordinates are the
+ /// x-y coordinates in the plane of that boundary with the
+ /// x-axis along the line from the (lexicographically)
+ /// "lower left" to the "upper right" node. The y axis
+ /// is obtained by taking the cross-product of the positive
+ /// x direction with the outer unit normal computed by
+ /// the face elements (or its negative if switch_normal is set
+ /// to true). Doc faces in output file.
+ void setup_boundary_coordinates(const unsigned& b,
+                                 const bool& switch_normal,
+                                 std::ofstream& outfile);
+
+
+ /// \short Non-Delaunay split elements that have three faces on a boundary
+ /// into sons. Timestepper species timestepper for new nodes; defaults
+ /// to to steady timestepper.
+ void split_elements_in_corners(TimeStepper* time_stepper_pt=
+                                &Mesh::Default_TimeStepper);
+ 
 
   private:
 

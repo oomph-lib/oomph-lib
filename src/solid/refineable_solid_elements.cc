@@ -80,10 +80,14 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
  int local_eqn=0;
     
  // Timescale ratio (non-dim density)
- double Lambda_sq = this->lambda_sq();
+ double lambda_sq = this->lambda_sq();
   
  // Time factor
- const double time_factor=node_pt(0)->time_stepper_pt()->weight(2,0);
+ double time_factor=0.0;
+ if (lambda_sq>0)
+  {
+   time_factor=this->node_pt(0)->position_time_stepper_pt()->weight(2,0);
+  }
 
  //Set up memory for the shape functions
  Shape psi(n_node,n_position_type);
@@ -132,7 +136,7 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
          // Only compute accelerations if inertia is switched on
          // otherwise the timestepper might not be able to 
          // work out dx_gen_dt(2,...)
-         if(this->unsteady())
+         if ((lambda_sq>0.0)&&(this->unsteady()))
           {
            accel[i] += dnodal_position_gen_dt(2,l,k,i)*psi(l,k);
           }
@@ -371,7 +375,7 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
              double sum=0.0;
              
              // Acceleration and body force
-             sum+=(Lambda_sq*accel[i]-b[i])*psi(l,k);
+             sum+=(lambda_sq*accel[i]-b[i])*psi(l,k);
              
              // Stress term
              for(unsigned a=0;a<DIM;a++)
@@ -534,7 +538,7 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
                            if (i==ii)
                             {
                              // Inertia term
-                             sum+=Lambda_sq*time_factor*psi(ll,kk)*psi(l,k);
+                             sum+=lambda_sq*time_factor*psi(ll,kk)*psi(l,k);
                              
                              // Stress term                       
                              unsigned count4=offset4;
@@ -692,10 +696,16 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
  int local_eqn=0, local_unknown=0;
 
  // Timescale ratio (non-dim density)
- double Lambda_sq = this->lambda_sq();
+ double lambda_sq = this->lambda_sq();
+
 
  // Time factor
- const double time_factor=node_pt(0)->time_stepper_pt()->weight(2,0);
+ double time_factor=0.0;
+ if (lambda_sq>0)
+  {
+   time_factor=this->node_pt(0)->position_time_stepper_pt()->weight(2,0);
+  }
+
 
  //Set up memory for the shape functions
  Shape psi(n_node,n_position_type);
@@ -749,7 +759,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
          // Only compute accelerations if inertia is switched on
          // otherwise the timestepper might not be able to 
          // work out dx_gen_dt(2,...)
-         if (this->unsteady())
+         if ((lambda_sq>0.0)&&(this->unsteady()))
           {
            accel[i] += dnodal_position_gen_dt(2,l,k,i)*psi(l,k);
           }
@@ -1113,7 +1123,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
              double sum=0.0;
              
              // Acceleration and body force
-             sum+=(Lambda_sq*accel[i]-b[i])*psi(l,k);
+             sum+=(lambda_sq*accel[i]-b[i])*psi(l,k);
              
              // Stress term
              for(unsigned a=0;a<DIM;a++)
@@ -1276,7 +1286,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
                            if (i==ii)
                             {
                              // Inertia term
-                             sum+=Lambda_sq*time_factor*psi(ll,kk)*psi(l,k);
+                             sum+=lambda_sq*time_factor*psi(ll,kk)*psi(l,k);
                              
                              // Stress term                       
                              unsigned count4=offset4;

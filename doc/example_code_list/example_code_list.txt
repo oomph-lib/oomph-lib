@@ -56,6 +56,7 @@ directory).
   - <A HREF="#unsteady_heat">The unsteady heat equation; with an
            introduction to timestepping</A>
   - <A HREF="#wave">The linear wave equation</A>
+  - <A HREF="#young_laplace">The Young-Laplace equations</A>
   - <A HREF="#nst">The Navier-Stokes equations</A>
   - <A HREF="#axisym_nst">The axisymmetric Navier-Stokes equations</A>
   - <A HREF="#free_surface_nst">The free-surface Navier-Stokes equations</A>
@@ -603,6 +604,60 @@ only be used to "manually" refine meshes before the start of the simulation.
 ######################################################################
 <TR>
 <TD COLSPAN=3 bgcolor="lightcyan">
+<A NAME="young_laplace"><CENTER><B>The Young Laplace equation</B></CENTER></A>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
+<A HREF="../../young_laplace/young_laplace/html/index.html">
+<B>The solution of the Young-Laplace equation.
+</B>
+</A>
+\n\n
+We solve the Young Laplace equation that governs the shape of
+static air-liquid interfaces. 
+</TD>
+<TD>
+- Theory and implementation.
+- The use of spines for the representation of complicated
+  air-liquid interfaces.
+- Natural boundary conditions along free contact lines.
+- How to use displacement control to compute (past) limit
+  points in the load-displacement characteristics.
+  \n\n
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
+<A HREF="../../young_laplace/contact_angle/html/index.html">
+<B>
+Contact-angle boundary conditions for the Young-Laplace equation
+</B>
+</A>
+\n\n
+We demonstrate how to apply contact angle-boundary conditions for the
+Young-Laplace equation. 
+</TD>
+<TD>
+- Theory and implementation of contact angle-boundary conditions.
+- How to generate initial guesses for the solution
+- Limitations of the current approach and suggestions for improvement
+- An inherent difficulty in problems with zero contact angles.
+\n\n 
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+#####################################################################
+######################################################################
+<TR>
+<TD COLSPAN=3 bgcolor="lightcyan">
 <A NAME="nst"><CENTER><B>The Navier-Stokes equations</B></CENTER></A>
 </TD>
 </TR>
@@ -866,6 +921,27 @@ consider the case where the motion of the flag is prescribed.
 </TD>
 </TR>
 ######################################################################
+<TR>
+<TD>
+<A HREF="../../navier_stokes/unstructured_fluid/html/index.html">
+<B> Unstructured meshes for fluids problems
+</B>
+</A>
+\n\n
+This is a "warm-up" problem for 
+<A HREF="../../interaction/unstructured_fsi/html/index.html"> 
+another tutorial</A> in which we demonstrate the use of
+unstructured meshes for FSI problems.
+</TD>
+<TD>
+- How to use xfig/triangle-generated, unstructured meshes
+  for flow problems.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+######################################################################
 
 
 #####################################################################
@@ -1111,41 +1187,47 @@ the stress field.
 </A>
 \n\n
 We study the axisymmetric compression of a circular, elastic disk,
-loaded by an external traction and "self-gravity". The results
-are compared against the predictions from small-displacement
-elasticity. 
+loaded by an external traction. The results are compared against 
+the predictions from small-displacement elasticity. 
 </TD>
 <TD>
-- How to formulate solid mechanics problems.
-- How to choose a constitutive equation.
-- How to apply traction boundary conditions, using
-  \c FaceElements.
-- General conventions:
-  - ***
+- How to upgrade an existing mesh to \c SolidMesh.
+- Why it is necessary to use "undeformed MacroElements" to ensure 
+  that the numerical results converge to the correct solution under 
+  mesh refinement if the domain has curvilinear boundaries.
+- How to switch between different constitutive equations
+- how to incorporate isotropic growth into the model.
 </TD>
 <TD>
-<CENTER>driver code only</CENTER>
+<CENTER>complete</CENTER>
 </TD>
 </TR>
 ######################################################################
 <TR>
 <TD>
-#<A HREF="../../solid/large_shear/html/index.html">
-<B>Large shearing deformations of a hyper-elastic, incompressible
-block of material 
+<A HREF="../../solid/compressed_square/html/index.html">
+<B>Compressible and incompressible behaviour
 </B>
-#</A>
+</A>
 \n\n
-We solve a classical problem in large-displacement elasticity and
-comprare against Green and Zerna's exact solution. 
+We discuss various issues related to (in)compressible
+material behaviour and illustrate various solution
+techniques in a simple test-problem: The compression of
+a square block of (compressible or incompressible) material by 
+a gravitational body force. The results are compared against 
+the predictions from small-displacement elasticity. 
 </TD>
 <TD>
-- How to use incompressible materials.
-- General conventions:
-  - ***
+- Different formulations of the constitutive laws for
+  compressible, near-incompressible and incompressible behaviour.
+- How to combine the various constitutive laws with the displacement and
+  pressure/displacement formulations of the principle of virtual
+  displacements. 
+- The default setting: Incompressibility is not enforced automatically.
+  It must be requested explicitly.
 </TD>
 <TD>
-<CENTER>to be written!</CENTER>
+<CENTER>complete</CENTER>
 </TD>
 </TR>
 ######################################################################
@@ -1162,11 +1244,74 @@ against the predictions from small-displacement elasticity.
 </TD>
 <TD>
 - How to assign initial conditions for unsteady solid mechanics problems.
-- General conventions:
-  - ***
 </TD>
 <TD>
-<CENTER>driver code only</CENTER>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
+<A HREF="../../solid/prescribed_displ_lagr_mult/html/index.html">
+<B>Deformation of a solid by a prescribed boundary motion
+</B>
+</A>
+\n\n
+We study the large deformations of a 2D elastic domain,
+driven by the prescribed deformation of its boundary. 
+The boundary motion is imposed by Lagrange multipliers. 
+This technique is important for the solution of fluid-structure
+interaction problems in which the deformation of the fluid mesh
+is controlled by (pseudo-)elasticity.
+</TD>
+<TD>
+- How to impose displacement boundary conditions in solid mechanics
+  problems by Lagrange multipliers.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
+<A HREF="../../solid/three_d_cantilever/html/index.html">
+<B>Large-amplitude bending of an asymmetric 3D cantilever beam
+made of incompressible material.
+</B>
+</A>
+\n\n
+We study the deformation of an asymmetric 3D canvilever beam
+made of incompressible material.
+</TD>
+<TD>
+- How to enforce incompressible behaviour. 
+- How to solve 3D solid mechanics problems with spatial adaptivity.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
+<A HREF="../../solid/unstructured_solid/html/index.html">
+<B>Unstructured meshes for 2D and 3D solid mechanics problems.
+</B>
+</A>
+\n\n
+We demonstrate how to use unstructured meshes to solve 2D and
+3D solid mechanics problems. This tutorial acts as a "warm-up"
+problem for the solution of unstructured FSI problems. 
+</TD>
+<TD>
+- How to solve 2D and 3D solid mechanics problems on unstructured 
+  meshes. 
+- How to identify domain boundaries in xfig-generated unstructured
+  meshes. 
+</TD>
+<TD>
+<CENTER>complete</CENTER>
 </TD>
 </TR>
 ######################################################################
@@ -1180,9 +1325,7 @@ against the predictions from small-displacement elasticity.
 We study the propagation of shock waves in an elastic 2D circular disk.
 </TD>
 <TD>
-- Spatial adaptivity for solid mechanics problems. 
-- General conventions:
-  - ***
+- How to employ spatial adaptivity in time-dependent solid mechanics problems. 
 </TD>
 <TD>
 <CENTER>driver code only</CENTER>
@@ -1191,24 +1334,43 @@ We study the propagation of shock waves in an elastic 2D circular disk.
 ######################################################################
 <TR>
 <TD>
-<A HREF="../../solid/static_fish/html/index.html">
-<B>Boundary-driven deformation of a non-trivial 2D solid domain.
+<A HREF="../../solid/simple_shear/html/index.html">
+<B>Large shearing deformations of a hyper-elastic, incompressible
+block of material 
 </B>
 </A>
 \n\n
-We study the large deformations of a (fish-shaped) 2D elastic domain,
-driven by the prescribed deformation of its boundary. 
+We solve a classical problem in large-displacement elasticity and
+comprare against Green and Zerna's exact solution. 
 </TD>
 <TD>
-- Imposing displacement boundary conditions in solid mechanics
-  problems with curvilinear boundaries.
-- General conventions:
-  - ***
+- A validation problem.
 </TD>
 <TD>
-<CENTER>driver code and pretty pictures</CENTER>
+<CENTER>driver code only</CENTER>
 </TD>
 </TR>
+######################################################################
+#<TR>
+#<TD>
+#<A HREF="../../solid/static_fish/html/index.html">
+#<B>Boundary-driven deformation of a non-trivial 2D solid domain.
+#</B>
+#</A>
+#\n\n
+#We study the large deformations of a (fish-shaped) 2D elastic domain,
+#driven by the prescribed deformation of its boundary. 
+#</TD>
+#<TD>
+#- Imposing displacement boundary conditions in solid mechanics
+#  problems with curvilinear boundaries.
+#- General conventions:
+#  - ***
+#</TD>
+#<TD>
+#<CENTER>driver code and pretty pictures</CENTER>
+#</TD>
+#</TR>
 #####################################################################
 ######################################################################
 <TR>
@@ -1608,6 +1770,28 @@ We demonstrate how to discretise and solve this benchmark problem with
 - FSI problems with "proper" 2D solids (rather than beam or shell structures)
 - FSI problems with wall inertia.
 - Another application of \c oomph-lib's \c FSIPreconditioner. 
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
+<A HREF="../../interaction/unstructured_fsi/html/index.html">
+<B>Using unstructured meshes for FSI problems.
+</B>
+</A>
+\n\n
+We demonstrate how to use xfig/triangle-generated unstructured
+meshes for fluid-structure interaction problems.
+</TD>
+<TD>
+- How to use xfig/triangle-generated unstructured
+  meshes for fluid-structure interaction problems.
+- The automatic generation of boundary coordinates for
+  xfig/triangle-generated, unstructured meshes. How it works
+  and what can go wrong...
 </TD>
 <TD>
 <CENTER>complete</CENTER>

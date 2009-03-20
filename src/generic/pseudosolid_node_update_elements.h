@@ -830,13 +830,11 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
   }
  
 
- /// \short Number of vertex nodes in the element hierher 
- //// \todo TO BE MOVED TO BASE CLASS
+ /// \short Number of vertex nodes in the element
  unsigned nvertex_node() const
   {return BASIC::nvertex_node();}
 
- /// \short Pointer to the j-th vertex node in the element hierher \todo 
- /// TO BE MOVED TO BASE CLASS
+ /// \short Pointer to the j-th vertex node in the element
  Node* vertex_node_pt(const unsigned& j) const
   {return BASIC::vertex_node_pt(j);}
 

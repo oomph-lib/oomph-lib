@@ -3,8 +3,7 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 # Name of executables
 check_PROGRAMS= \
-turek_flag \
-turek_flag_work 
+turek_flag 
 
 
 
@@ -19,19 +18,7 @@ turek_flag_LDADD = \
  -L@libdir@ -lsolid -lconstitutive -lnavier_stokes -lmeshes -lgeneric  \
                      $(EXTERNAL_LIBS) $(FLIBS)
 
-
-
 #---------------------------------------------------------------------
-
-# Sources for first executable
-turek_flag_work_SOURCES = turek_flag_work.cc
-
-# Required libraries:
-# $(FLIBS) is included in case the solver involves fortran sources.
-turek_flag_work_LDADD = \
- -L@libdir@ -lsolid -lconstitutive -lnavier_stokes -lmeshes -lgeneric  \
-                     $(EXTERNAL_LIBS) $(FLIBS)
-
 
 
 EXTRA_DIST += animate_cylinder_with_flag.mcr fsi1.mcr fsi2.mcr

@@ -39,6 +39,7 @@
 
 //OOMPH-LIB headers
 #include "../generic/Qelements.h"
+#include "../generic/Telements.h"
 #include "../generic/mesh.h"
 #include "../generic/hermite_elements.h"
 #include "../constitutive/constitutive_laws.h"
@@ -1161,8 +1162,99 @@ public virtual PointElement
 {
   public:
  /// Constructor must call constructor of the underlying Point element
- FaceGeometry() : PointElement() {}
+  FaceGeometry() : PointElement() {}
 };
+
+
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+
+
+//===========================================================================
+/// An Element that solves the solid mechanics equations, based on
+/// the principle of virtual displacements in Cartesian coordinates,
+/// using SolidTElements for the interpolation of the variable positions. 
+//============================================================================
+template<unsigned DIM, unsigned NNODE_1D>
+ class TPVDElement : public virtual SolidTElement<DIM,NNODE_1D>,
+ public virtual PVDEquations<DIM>
+{
+  public:
+ 
+ /// Constructor, there are no internal data points
+  TPVDElement() : SolidTElement<DIM,NNODE_1D>(), PVDEquations<DIM>() { }
+ 
+ /// Output function
+ void output(std::ostream &outfile) {PVDEquations<DIM>::output(outfile);}
+ 
+ /// Output function
+ void output(std::ostream &outfile, const unsigned &n_plot)
+ {PVDEquations<DIM>::output(outfile,n_plot);}
+ 
+ 
+ /// C-style output function
+ void output(FILE* file_pt) {PVDEquations<DIM>::output(file_pt);}
+ 
+ /// C-style output function
+ void output(FILE* file_pt, const unsigned &n_plot)
+ {PVDEquations<DIM>::output(file_pt,n_plot);}
+  
+};
+
+
+//============================================================================
+/// FaceGeometry of a 2D TPVDElement element
+//============================================================================
+template<unsigned NNODE_1D>
+class FaceGeometry<TPVDElement<2,NNODE_1D> > :
+ public virtual SolidTElement<1,NNODE_1D>
+{
+  public:
+ /// Constructor must call the constructor of the underlying solid element
+  FaceGeometry() : SolidTElement<1,NNODE_1D>() {}
+};
+ 
+
+//==============================================================
+/// FaceGeometry of the FaceGeometry of the 2D TPVDElement 
+//==============================================================
+template<unsigned NNODE_1D>
+class FaceGeometry<FaceGeometry<TPVDElement<2,NNODE_1D> > >:
+ public virtual PointElement
+{
+  public:
+ //Make sure that we call the constructor of the SolidQElement
+ //Only the Intel compiler seems to need this!
+  FaceGeometry() : PointElement() {}
+};
+
+
+//============================================================================
+/// FaceGeometry of a 3D TPVDElement element
+//============================================================================
+template<unsigned NNODE_1D>
+class FaceGeometry<TPVDElement<3,NNODE_1D> > :
+ public virtual SolidTElement<2,NNODE_1D>
+{
+  public:
+ /// Constructor must call the constructor of the underlying solid element
+  FaceGeometry() : SolidTElement<2,NNODE_1D>() {}
+};
+ 
+//============================================================================
+/// FaceGeometry of FaceGeometry of a 3D TPVDElement element
+//============================================================================
+template<unsigned NNODE_1D>
+class FaceGeometry<FaceGeometry<TPVDElement<3,NNODE_1D> > > :
+ public virtual SolidTElement<1,NNODE_1D>
+{
+  public:
+ /// Constructor must call the constructor of the underlying solid element
+  FaceGeometry() : SolidTElement<1,NNODE_1D>() {}
+};
+
 
 
 //////////////////////////////////////////////////////////////////////

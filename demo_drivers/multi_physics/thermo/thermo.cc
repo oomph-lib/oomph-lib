@@ -221,6 +221,12 @@ namespace Global_Physical_Variables
  /// Thermal expansion coefficient 
  double Alpha=0.0;
  
+ /// Young's modulus for solid mechanics
+ double E = 1.0; // ADJUST 
+
+ /// Poisson ratio for solid mechanics
+ double Nu = 0.3; // ADJUST
+
  /// We need a constitutive law for the solid mechanics
  ConstitutiveLaw* Constitutive_law_pt;
 
@@ -394,12 +400,11 @@ void ThermalProblem<ELEMENT>::doc_solution()
 //====================================================================
 int main(int argc, char **argv)
 {
-  //Initialise physical parameters
- double E = 1.0; // ADJUST 
- double Nu = 0.3; // ADJUST
 
  // "Big G" Linear constitutive equations:
- Global_Physical_Variables::Constitutive_law_pt = new GeneralisedHookean(Nu,E);
+ Global_Physical_Variables::Constitutive_law_pt = 
+  new GeneralisedHookean(&Global_Physical_Variables::Nu,
+                         &Global_Physical_Variables::E);
 
  //Construct our problem
  ThermalProblem<QThermalPVDElement<2> > problem;

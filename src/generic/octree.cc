@@ -2140,20 +2140,6 @@ void OcTree::setup_static_data()
        }
    }
 
-//  std::cout << "Doc:" << std::endl;
-//  for(int i=LDB;i<=F;i++)
-//    {
-//     std::cout << Direct_string[i] << ": ";
-//     for(int j=0;j<3;j++)
-//      {
-//       std::cout << Direction_to_vector[i][j] << " " ;
-//      }
-//     std::cout << std::endl;
-//    }
-//  pause("done");
-    
-
-
 
  // Setup map that works out required rotations based on
  //-----------------------------------------------------
@@ -2339,26 +2325,6 @@ void OcTree::setup_static_data()
 
 
   }
-
- 
-//   for (int vertex=LDB;vertex<=RUF;vertex++)
-//    {
-//     for (int new_vertex=LDB;new_vertex<=RUF;new_vertex++)
-//      {
-//       std::cout << "\nvertex, new_vertex: " << Direct_string[vertex] << " " 
-//                 << Direct_string[new_vertex] << std::endl;
-//       std::set<std::pair<int,int> > aux=
-//        required_rotation[std::make_pair(vertex,new_vertex)];
-//       std::cout << aux.size() << std::endl;
-//       for (std::set<std::pair<int,int> >::iterator it=aux.begin();
-//            it!=aux.end();it++)
-//        {
-//         std::cout << Direct_string[it->first] << " " 
-//                   << Direct_string[it->second] << std::endl;
-//        }      
-//      } 
-//    }
-//  pause("done -- check");
 
 
  // Each vertex is part of three edges. This container stores the

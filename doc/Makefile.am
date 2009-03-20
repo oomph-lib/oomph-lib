@@ -36,7 +36,8 @@ subversion \
 paraview \
 preconditioners \
 to_be_written \
-young_laplace
+young_laplace \
+mpi
 
 include $(top_srcdir)/config/makefile_templates/doc
 

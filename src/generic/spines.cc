@@ -30,6 +30,7 @@
 
 #include "spines.h"
 
+#include <stdlib.h>
 
 namespace oomph
 {

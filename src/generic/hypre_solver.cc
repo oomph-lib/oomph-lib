@@ -148,10 +148,10 @@ namespace oomph
 /// + If MPI and distributed input vector the distributed output vectors
 ///   are created.
 //========================================================================
-  void HypreHelpers::create_HYPRE_Vector(const DoubleVector &oomph_vec, const 
-                                         LinearAlgebraDistribution* dist_pt,
-                                         HYPRE_IJVector& hypre_ij_vector,
-                                         HYPRE_ParVector& hypre_par_vector)
+  void create_HYPRE_Vector(const DoubleVector &oomph_vec, const 
+                           LinearAlgebraDistribution* dist_pt,
+                           HYPRE_IJVector& hypre_ij_vector,
+                           HYPRE_ParVector& hypre_par_vector)
   {
    // the lower and upper row of the vector on this processor
    unsigned lower = dist_pt->first_row();
@@ -208,10 +208,9 @@ namespace oomph
 /// + If MPI and distributed input vector the distributed output vectors
 ///   are created.
 //========================================================================
-  void HypreHelpers::create_HYPRE_Vector
-  (const LinearAlgebraDistribution* dist_pt,
-   HYPRE_IJVector& hypre_ij_vector,
-   HYPRE_ParVector& hypre_par_vector)
+  void create_HYPRE_Vector(const LinearAlgebraDistribution* dist_pt,
+                           HYPRE_IJVector& hypre_ij_vector,
+                           HYPRE_ParVector& hypre_par_vector)
   {
    // the lower and upper row of the vector on this processor
    unsigned lower = dist_pt->first_row();
@@ -428,13 +427,9 @@ namespace oomph
  void HypreInterface::hypre_solver_setup()
  {
   // Store time
-#ifdef OOMPH_HAS_MPI   
-  double t_start = MPI_Wtime();
+  double t_start = TimingHelpers::timer();
   double t_end = 0;
-#else
-  clock_t t_start = clock();
-  clock_t t_end = 0; 
-#endif
+
   
   // reset Hypre's global error flag
   hypre__global_error=0;
@@ -1001,13 +996,8 @@ namespace oomph
 
    }
 
-#ifdef OOMPH_HAS_MPI   
-  t_end = MPI_Wtime();
+  t_end = TimingHelpers::timer();
   double solver_setup_time = t_end-t_start; 
-#else
-  t_end = clock();
-  double solver_setup_time = double(t_end-t_start)/CLOCKS_PER_SEC;
-#endif
   
   // destroy dummy hypre vectors
   HYPRE_IJVectorDestroy(dummy_sol_ij);
@@ -1185,13 +1175,8 @@ namespace oomph
   double solve_time=0;
   if (Output_info)
    {
-#ifdef OOMPH_HAS_MPI   
-    double t_end = MPI_Wtime();
+    double t_end = TimingHelpers::timer();
     solve_time = t_end-t_start; 
-#else
-    clock_t t_end = clock();
-    solve_time = double(t_end-t_start)/CLOCKS_PER_SEC;
-#endif
    }
   
   // output timings and info
@@ -1305,11 +1290,7 @@ namespace oomph
  void HypreSolver::solve(Problem* const &problem_pt,
                          DoubleVector &solution)
  {
-#ifdef OOMPH_HAS_MPI   
-    double t_start = MPI_Wtime();
-#else
-    clock_t t_start = clock();
-#endif
+  double t_start = TimingHelpers::timer();
 
   // Set Output_time flag for HypreInterface
   Output_info = Doc_time;
@@ -1330,13 +1311,8 @@ namespace oomph
   if(Doc_time)
    {
     oomph_info << "Time to generate Jacobian and residual [s] : ";
-#ifdef OOMPH_HAS_MPI   
-    double t_end = MPI_Wtime();
+    double t_end = TimingHelpers::timer();
     oomph_info << t_end-t_start << std::endl; 
-#else
-    clock_t t_end = clock();
-    oomph_info << double(t_end-t_start)/CLOCKS_PER_SEC << std::endl;
-#endif
    }
   
   // generate hypre matrix

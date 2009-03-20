@@ -39,6 +39,7 @@
 
 // Oomph-lib includes
 #include "../generic/mesh.h"
+#include "../generic/triangle_mesh.h"
 
 namespace oomph
 {
@@ -47,7 +48,7 @@ namespace oomph
 /// Simple 2D triangular mesh for TElements
 //===================================================================
 template <class ELEMENT>
-class SimpleRectangularTriMesh : public Mesh
+class SimpleRectangularTriMesh : public virtual TriangleMeshBase
 {
 
 public:
@@ -67,17 +68,6 @@ public:
 
  /// Access function for number of elements in y directions
  const unsigned& ny() const {return Ny;}
-
- /// Setup the boundary element information
- void setup_boundary_element_info() 
-  {
-   std::ofstream outfile;
-   setup_boundary_element_info(outfile);
-  }
-
- /// Setup the boundary element information
- void setup_boundary_element_info(std::ostream &outfile); 
- 
 
 private:
 

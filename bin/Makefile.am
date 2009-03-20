@@ -1,7 +1,7 @@
 
 
 # Scripts do not need to be installed
-noinst_SCRIPTS = txt2h.sh
+noinst_SCRIPTS = txt2h.sh fig2poly
 
 # Instructions how  to build txt2h.sh from txt2h.sh.in
 txt2h.sh: txt2h.sh.in
@@ -28,11 +28,15 @@ EXTRA_DIST=build_mesh_makefile.sh change_headers_to_links.sh fpdiff.py\
 	   build_oomph_html_header.sh count_lines.sh \
            compare_file_length_with_tolerance.bash customise_latex.bash \
            oomph-convert  oomph-convert.py makePvd \
-           find_missing_doxygen_hooks.sh
+           find_missing_doxygen_hooks.sh big_diff.bash
 
 
-#Cleanup
+fig2poly:
+	(cd ../demo_drivers/meshing/mesh_from_xfig_triangle; make install)
+
+#Cleanup -- Note: fig2poly comes from 
+#                 demo_drivers/meshing/mesh_from_xfig_triangle
 clean-local:
-	rm -f *~ txt2h.sh
+	rm -f *~ txt2h.sh fig2poly
 distclean-local:
-	rm -f *~ txt2h.sh
+	rm -f *~ txt2h.sh fig2poly

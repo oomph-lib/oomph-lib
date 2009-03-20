@@ -46,6 +46,7 @@
 #include "matrices.h"
 #include "refineable_elements.h"
 #include <list>
+#include <typeinfo>
 
 namespace oomph
 {
@@ -118,11 +119,11 @@ class Mesh
  std::map<unsigned, Vector<Node*> > Haloed_node_pt;
 
  /// Map of vectors holding the pointers to the shared nodes
- std::map<unsigned, Vector<Node*> > Shared_node_pt;
  /// NB: These are all the nodes that are on two "neighbouring" processes
  ///     (the halo(ed) lookup scheme depends upon which processor is in charge
  ///     - a node which is on 3 processors, for example, will not feature in
  ///     the lookup scheme between the two lowest-numbered processors)
+ std::map<unsigned, Vector<Node*> > Shared_node_pt;
 
  /// bool to say whether the mesh has been distributed yet
  bool Mesh_has_been_distributed;

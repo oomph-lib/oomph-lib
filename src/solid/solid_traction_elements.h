@@ -180,15 +180,69 @@ public:
 
  /// \short Output function
  void output(std::ostream &outfile)
-  {FiniteElement::output(outfile);}
+  {
+   unsigned n_plot=5;
+   output(outfile,n_plot);
+  }
+ 
 
  /// \short Output function
  void output(std::ostream &outfile, const unsigned &n_plot)
-  {FiniteElement::output(outfile,n_plot);}
+ {
+  unsigned n_dim = this->nodal_dimension();
+  
+  Vector<double> x(n_dim);
+  Vector<double> xi(n_dim);
+  Vector<double> s(n_dim-1);
+ 
+  // Tecplot header info
+  outfile << this->tecplot_zone_string(n_plot);
+  
+  // Loop over plot points
+  unsigned num_plot_points=this->nplot_points(n_plot);
+  for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+   {
+    // Get local coordinates of plot point
+    this->get_s_plot(iplot,n_plot,s);
+    
+    // Get Eulerian and Lagrangian coordinates
+    this->interpolated_x(s,x);
+    this->interpolated_xi(s,x);   
 
+    // Outer unit normal
+    Vector<double> unit_normal(n_dim);
+    outer_unit_normal(s,unit_normal);
+
+    // Dummy
+    unsigned ipt=0;
+    
+    // Traction vector
+    Vector<double> traction(n_dim);
+    get_traction(ipt,xi,x,unit_normal,traction);
+    
+    //Output the x,y,..
+    for(unsigned i=0;i<n_dim;i++) 
+     {outfile << x[i] << " ";}
+    
+    // Output traction
+    for(unsigned i=0;i<n_dim;i++) 
+     {outfile << traction[i] << " ";} 
+    
+    // Output normal
+    for(unsigned i=0;i<n_dim;i++) 
+     {outfile << unit_normal[i] << " ";} 
+    
+    outfile << std::endl;
+   }
+   
+  // Write tecplot footer (e.g. FE connectivity lists)
+  this->write_tecplot_zone_footer(outfile,n_plot);
+  
+ }
+ 
  /// \short C_style output function
  void output(FILE* file_pt)
-  {FiniteElement::output(file_pt);}
+ {FiniteElement::output(file_pt);}
 
  /// \short C-style output function
  void output(FILE* file_pt, const unsigned &n_plot)
@@ -832,14 +886,14 @@ fill_in_contribution_to_residuals_solid_traction(Vector<double> &residuals)
 
 
 
- /// Output function hierher provide other versions
+ /// \short Output function: Note we can only output the traction
+ /// at Gauss points so n_plot is actually ignored.
  void output(std::ostream &outfile, const unsigned &n_plot)
   {
    //Tecplot header info 
    outfile << "ZONE" << std::endl;
    
    //Find the number of Gauss points of the element
-   //unsigned n_intpt = solid_element_pt->integral_pt()->nweight();
    unsigned n_intpt = this->integral_pt()->nweight();
    
    //Find the dimension of the element (i.e. its number of local coordinates)
@@ -872,14 +926,19 @@ fill_in_contribution_to_residuals_solid_traction(Vector<double> &residuals)
      Vector<double> traction(DIM);
      get_traction(ipt,xi,r,unit_normal,traction);
      
-     outfile << r[0]  << " ";
-     outfile << r[1] << " ";    
-     outfile << traction[0] << " ";
-     outfile <<  traction[1] << " ";
-     outfile <<  unit_normal[0] << " ";
-     outfile <<  unit_normal[1] << " ";
-     outfile << std::endl;
-     
+     for (unsigned i=0;i<DIM;i++)
+      {
+       outfile << r[i]  << " ";
+      }
+     for (unsigned i=0;i<DIM;i++)
+      {
+       outfile << traction[i] << " ";
+      }
+     for (unsigned i=0;i<DIM;i++)
+      {
+       outfile <<  unit_normal[i] << " ";
+      }
+     outfile << std::endl;     
     }
   }
  
@@ -1008,13 +1067,15 @@ public:
  /// \short Constructor takes a "bulk" element and the 
  /// index that identifies which face the FaceElement is supposed
  /// to be attached to.
- ImposeDisplacementByLagrangeMultiplierElement(FiniteElement* const &element_pt, 
-                      const int &face_index) : 
-  FaceGeometry<ELEMENT>(), FaceElement(), Boundary_shape_geom_object_pt(0)
+ ImposeDisplacementByLagrangeMultiplierElement(
+  FiniteElement* const &element_pt, 
+  const int &face_index) : 
+ FaceGeometry<ELEMENT>(), FaceElement(), Boundary_shape_geom_object_pt(0)
   { 
-   // By default don't sparsify -- this is a sensible default
-   // because sparsification requires GeomObject to specify the
-   // hierher complete documentation
+   // By default sparsify, i.e. check if the GeomObject that
+   // defines the boundary contains sub-GeomObjects. If so,
+   // only use their GeomData as the external Data that affects
+   // this element's residuals.
    Sparsify=true;
    
 #ifdef PARANOID
@@ -1101,9 +1162,10 @@ public:
    // the desired  boundary shape.
    Boundary_shape_geom_object_pt=boundary_shape_geom_object_pt;
 
-   // hierher check (1) remove old ones
-   //               (2) do locate_zeta to sparsify
 
+   // Don't sparsify: Use all the geometric Data associated with
+   // the (possibly compound) GeomObject that specifies the
+   // boundary shape as external data for this element.
    if (!Sparsify)
     {
      unsigned n_geom_data=boundary_shape_geom_object_pt->ngeom_data();
@@ -1137,6 +1199,10 @@ public:
      N_assigned_geom_data=n_geom_data;
 #endif
     }
+   // Sparsify: Use locate_zeta to determine the sub-GeomObjects that 
+   // make up  the (possibly compound) GeomObject that specifies the
+   // boundary shape. Use their geometric Data as external data for 
+   // this element.
    else
     {
      //Find out how many nodes there are
@@ -1208,14 +1274,14 @@ public:
             }
           }
         }
-       
+
        // Find sub-GeomObject and local coordinate within it
        // at integration point
        Zeta_sub_geom_object[ipt].resize(dim_el);
        Boundary_shape_geom_object_pt->locate_zeta(zeta, 
                                                   Sub_geom_object_pt[ipt], 
                                                   Zeta_sub_geom_object[ipt]);
-       
+      
        unsigned n_geom_data=Sub_geom_object_pt[ipt]->ngeom_data();
        for (unsigned i=0;i<n_geom_data;i++)
         {
@@ -1299,8 +1365,9 @@ public:
        // higher dimensional quantities
        for(unsigned i=0;i<dim_el+1;i++)
         {
-         x[i]+=nodal_position(j,i)*psi(j,0); // hierher need to sort
+         x[i]+=nodal_position(j,i)*psi(j,0); // need to sort
                                              // this out properly
+                                             // for generalised dofs
          lambda[i]+=node_pt(j)->value(Nbulk_value[j]+i)*psi(j,0);
         }
        //In-element quantities
@@ -1877,7 +1944,9 @@ private:
  /// points
  Vector<Vector<double> > Zeta_sub_geom_object;
 
- /// hierher doc
+ /// \short Boolean flag to indicate if we're using geometric Data of
+ /// sub-GeomObjects that make up the (possibly compound) GeomObject
+ /// that specifies the boundary shape. Defaults to true.
  bool Sparsify;
 }; 
 

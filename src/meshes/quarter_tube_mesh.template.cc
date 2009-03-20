@@ -405,27 +405,11 @@ QuarterTubeMesh<ELEMENT>::QuarterTubeMesh(GeomObject* wall_pt,
                 (double(ilayer)+double(i2)/double(n_p-1))*
                 (Xi_hi[0]-Xi_lo[0])/double(nlayer);
 
-//                std::cout << "r[2] zeta[0] " 
-//                          << Node_pt[node_count]->x(2) << " " 
-//                          << zeta[0] << " " 
-//                          << std::endl;
-
-
                // Get azimuthal boundary coordinate
                zeta[1]=Xi_lo[1]+
                 double(i1)/double(n_p-1)*0.5*(Xi_hi[1]-Xi_lo[1]);
 
-//                std::cout <<  "x,y,zeta[0] " 
-//                  <<  Node_pt[node_count]->x(0) << " "
-//                  <<  Node_pt[node_count]->x(1) << " "  
-//                          << zeta[1] << " " 
-//                          << std::endl;
-
-
                Node_pt[node_count]->set_coordinates_on_boundary(3,zeta);
-
-
-
                 
               }
 
@@ -624,25 +608,11 @@ QuarterTubeMesh<ELEMENT>::QuarterTubeMesh(GeomObject* wall_pt,
                   (double(ilayer)+double(i2)/double(n_p-1))*
                   (Xi_hi[0]-Xi_lo[0])/double(nlayer);
                  
-//                std::cout << "r[2] zeta[0] " 
-//                          << Node_pt[node_count]->x(2) << " " 
-//                          << zeta[0] << " " 
-//                          << std::endl;
-                 
-                 
                  // Get azimuthal boundary coordinate
                  zeta[1]=Xi_hi[1]-
                   double(i0)/double(n_p-1)*0.5*(Xi_hi[1]-Xi_lo[1]);
                  
-//                std::cout <<  "x,y,zeta[0] " 
-//                  <<  Node_pt[node_count]->x(0) << " "
-//                  <<  Node_pt[node_count]->x(1) << " "  
-//                          << zeta[1] << " " 
-//                          << std::endl;
-                 
-                 
                  Node_pt[node_count]->set_coordinates_on_boundary(3,zeta);
-                 
 
                 }
 

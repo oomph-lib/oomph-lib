@@ -573,6 +573,15 @@ namespace FSI_functions
   };
  
  
+
+ //================================================================
+ /// \short Output file to document the boundary coordinate 
+ /// along the FSI interface of the fluid mesh during call to
+ /// setup_fluid_load_info_for_solid_elements()
+ //================================================================
+ extern std::ofstream Doc_boundary_coordinate_file;
+
+
  //============================================================================
  /// \short Set up the information that the FSIWallElements
  /// in the specified solid mesh require to obtain the fluid loading from the
@@ -602,7 +611,6 @@ namespace FSI_functions
     <FLUID_ELEMENT,FaceElementAsGeomObject>(boundary_in_fluid_mesh,
                                             fluid_face_mesh_pt);
    
-
    // Loop over these new face elements and tell them the boundary number
    // from the bulk fluid mesh -- this is required to they can
    // get access to the boundary coordinates!
@@ -610,10 +618,44 @@ namespace FSI_functions
    for(unsigned e=0;e<n_face_element;e++)
     {
      //Cast the element pointer to the correct thing!
-     dynamic_cast<FaceElementAsGeomObject<FLUID_ELEMENT>*>
-      (fluid_face_mesh_pt->element_pt(e))->
-      set_boundary_number_in_bulk_mesh(boundary_in_fluid_mesh);
+     FaceElementAsGeomObject<FLUID_ELEMENT>* el_pt=
+      dynamic_cast<FaceElementAsGeomObject<FLUID_ELEMENT>*>
+      (fluid_face_mesh_pt->element_pt(e));
+     
+     // Set bulk boundary number
+     el_pt->set_boundary_number_in_bulk_mesh(boundary_in_fluid_mesh);
+     
+     // Doc?
+     if (Doc_boundary_coordinate_file.is_open())
+      {
+       Vector<double> s(DIM_FLUID-1);
+       Vector<double> zeta(DIM_FLUID-1);
+       Vector<double> x(DIM_FLUID);
+       unsigned n_plot=5;
+       Doc_boundary_coordinate_file << el_pt->tecplot_zone_string(n_plot);
+       
+       // Loop over plot points
+       unsigned num_plot_points=el_pt->nplot_points(n_plot);
+       for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+        {         
+         // Get local coordinates of plot point
+         el_pt->get_s_plot(iplot,n_plot,s);         
+         el_pt->interpolated_zeta(s,zeta);
+         el_pt->interpolated_x(s,x);
+         for (unsigned i=0;i<DIM_FLUID;i++)
+          {
+           Doc_boundary_coordinate_file << x[i] << " ";
+          }
+         for (unsigned i=0;i<DIM_FLUID-1;i++)
+          {
+           Doc_boundary_coordinate_file << zeta[i] << " ";
+          }
+         Doc_boundary_coordinate_file << std::endl;
+        }
+       el_pt->write_tecplot_zone_footer(Doc_boundary_coordinate_file,n_plot);
+      }   
     }
+
 
    // Now sort the elements based on the boundary coordinates.
    // This may allow a faster implementation of the locate_zeta
@@ -728,7 +770,7 @@ namespace FSI_functions
          
          throw OomphLibError(
           error_message.str(),
-          "FSI_functions::set_boundary_adjacent_to_solid()",
+          "FSI_functions::setup_fluid_load_info_for_solid_elements()",
           OOMPH_EXCEPTION_LOCATION);
         }
        

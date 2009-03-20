@@ -394,9 +394,13 @@ void Mesh::node_update(const bool& update_all_solid_nodes)
     }
   }
  
-
- // hierher loop over all nodes again and execute auxiliary node update
+ // Loop over all nodes again and execute auxiliary node update
  // function
+ for(unsigned long n=0;n<n_node;n++)
+  {
+   Node_pt[n]->perform_auxiliary_node_update_fct();
+  }
+
 }
 
 
@@ -1123,19 +1127,12 @@ void Mesh::calculate_predictions()
 void Mesh::convert_to_boundary_node(Node* &node_pt)
 {
 
-// std::cout << "\n Starting to convert to boundary node" << std::endl;
-
  //If the node is already a boundary node, then return straight away,
  //we don't need to do anything
  if (dynamic_cast<BoundaryNodeBase*>(node_pt)!=0)
   {
-//    std::cout << "Already a boundary node: " 
-//            << dynamic_cast<BoundaryNodeBase*>(node_pt) << std::endl;
    return;
   }
-
-//  std::cout << "not a boundary node yet: " 
-//            << dynamic_cast<BoundaryNodeBase*>(node_pt) << std::endl;
 
  //Loop over all the elements in the mesh and find all those in which
  //the present node is referenced and the corresponding local node number
@@ -1201,7 +1198,6 @@ void Mesh::convert_to_boundary_node(Node* &node_pt)
 
   //Now copy all the information accross from the old node
  
- /// \todo Sort out copying of solid nodes
  //Can we cast the node to a solid node
  SolidNode* solid_node_pt = dynamic_cast<SolidNode*>(new_node_pt);
  //If it's a solid node, do the casting
@@ -1213,31 +1209,6 @@ void Mesh::convert_to_boundary_node(Node* &node_pt)
   {
    new_node_pt->copy(old_node_pt);
   }
-
-
-//THIS SHOULDN'T BE NEEDED!!!!
-//  // copy boundary information across:
-//  // hierher move into copy; probably also needed for 
-//  // boundary coordinates. Gets messy for SolidBoundary etc?
-//  std::set<unsigned>* tmp_pt=0;
-//  std::cout << "tmp_pt before: " << tmp_pt << std::endl; 
-//  old_node_pt->get_boundaries_pt(tmp_pt);
-//  std::cout << "tmp_pt after: " << tmp_pt << std::endl; 
-//  if (tmp_pt!=0)
-//   {
-//    for (std::set<unsigned>::iterator it=tmp_pt->begin();
-//         it!=tmp_pt->end();it++)
-//     {
-//      std::cout << "HELLO: Adding new node to boundary: " << *it << std::endl;
-//      new_node_pt->add_to_boundary(*it);
-//     }
-//   }
-//  else
-//   {
-//    std::cout << "HELLO: old node isn't located on any boundaries" 
-//              << std::endl;
-//   }
-
 
  //Loop over all other elements in the list and set their pointers
  //to the new node
@@ -1265,8 +1236,6 @@ void Mesh::convert_to_boundary_node(Node* &node_pt)
  //node_pt vector. Still assignment is quicker than an if to check this.
  node_pt = new_node_pt;
 
-
-// std::cout << "Done converting node..." << std::endl << std::endl;
 }
 
 
@@ -2465,9 +2434,6 @@ void Mesh::redistribute(DocInfo& doc_info,
   }
    
 
- //char filename[100];
- //std::ofstream some_file;
-  
  // Declare all nodes as obsolete. We'll
  // change this setting for all nodes that must to be retained
  // further down
@@ -2477,11 +2443,6 @@ void Mesh::redistribute(DocInfo& doc_info,
    this->node_pt(j)->set_obsolete();
   }
  
-//    sprintf(filename,"%s/redistributable_halo_elements%i_on_proc%i.dat",
-//            doc_info.directory().c_str(),
-//            doc_info.number(),MPI_Helpers::My_rank);
-//    some_file.open(filename);
-
 
  // Backup old mesh data
  //---------------------
@@ -2507,22 +2468,7 @@ void Mesh::redistribute(DocInfo& doc_info,
        el_pt->node_pt(j)->set_non_obsolete();
       }
     }
-//      // If it's a halo check if it's been refined
-//      else
-//       {
-//        // Is the element's tree representation a root, i.e. has
-//        // the element not been refined?
-
-//        // hierher buffer for nonrefineable
-//        if (dynamic_cast<RefineableElement*>(el_pt)->tree_pt()->
-//            father_pt()!=0)
-//         {
-//          el_pt->output(some_file,5);
-//         }
-//       }
   }
-
-//   some_file.close();
    
 
  // Now loop over all halo elements and check if they

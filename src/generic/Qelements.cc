@@ -1467,11 +1467,4 @@ template class QElement<3,2>;
 template class QElement<3,3>;
 template class QElement<3,4>;
 
-//template class SolidQElement<1,2>;
-//template class SolidQElement<1,3>;
-//template class SolidQElement<1,4>;
-//template class SolidQElement<2,2>;
-//template class SolidQElement<2,3>;
-//template class SolidQElement<2,4>;
-
 }

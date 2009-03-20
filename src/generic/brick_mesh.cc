@@ -93,24 +93,15 @@ void BrickMeshBase::setup_boundary_element_info(std::ostream &outfile)
          std::set<unsigned>* boundaries_pt=0;
          fe_pt->node_pt(j)->get_boundaries_pt(boundaries_pt);
          
-
-//         std::cout << "element/node: " << e << " " << j << std::endl;
-
          // If the node lives on some boundaries....
          if (boundaries_pt!=0)
           {
-
-//            std::cout << "lives on " << boundaries_pt->size() 
-//                      << " boundaries, namely " << std::endl;
-
            for (std::set<unsigned>::iterator it=boundaries_pt->begin();
                 it!=boundaries_pt->end();++it)
             {
 
              // What's the boundary?
              unsigned boundary_id=*it;
-
-//              std::cout << boundary_id << " ";
 
              // Add pointer to finite element to set for the appropriate 
              // boundary -- storage in set makes sure we don't count elements
@@ -128,18 +119,9 @@ void BrickMeshBase::setup_boundary_element_info(std::ostream &outfile)
              // have exactly four corner nodes on the boundary.
              if (boundary_identifier(boundary_id,fe_pt)==0)
               {
-//                std::cout << "       " 
-//                          << "    allocating for " << boundary_id 
-//                          <<" " << e << std::endl;
                Vector<int>* tmp_pt=new Vector<int>;
                tmp_vect_pt.push_back(tmp_pt); 
                boundary_identifier(boundary_id,fe_pt)=tmp_pt;
-              }
-             else
-              {               
-//                std::cout << "       " 
-//                          << "NOT allocating for " << boundary_id 
-//                          <<" " << e << std::endl;
               }
             
              // Are we at a corner node?
@@ -159,14 +141,7 @@ void BrickMeshBase::setup_boundary_element_info(std::ostream &outfile)
                 push_back(3*(2*i2/(nnode_1d-1)-1));
               }
             }
-//              std::cout << std::endl;
           }
-//          else
-//           {
-//            std::cout << "...doesn't live on a boundary" << std::endl;
-//           }
-
-         
         }
       }     
     }  
@@ -181,8 +156,6 @@ void BrickMeshBase::setup_boundary_element_info(std::ostream &outfile)
  //---------------------
  for (unsigned i=0;i<nbound;i++)
   {
-
-//    std::cout << "Boundary: " << i << std::endl;
 
    // Number of elements on this boundary (currently stored in a set)
    unsigned nel=set_of_boundary_element_pt[i].size();
@@ -204,9 +177,6 @@ void BrickMeshBase::setup_boundary_element_info(std::ostream &outfile)
    //-------------------------------------
    for (unsigned e=0;e<nel;e++)
     {
-     
-//      std::cout << "Element: " << e << std::endl;
-
      // Recover pointer to element
      FiniteElement* fe_pt=Boundary_element_pt[i][e];
      
@@ -220,7 +190,6 @@ void BrickMeshBase::setup_boundary_element_info(std::ostream &outfile)
        for (int sign=-1;sign<3;sign+=2)
         {
          count[(ii+1)*sign]=0;
-//          std::cout << "Initialising for " << (ii+1)*sign << std::endl;
         }
       }
      
@@ -229,10 +198,6 @@ void BrickMeshBase::setup_boundary_element_info(std::ostream &outfile)
      for (unsigned j=0;j<n_indicators;j++)
       {
        count[(*boundary_identifier(i,fe_pt))[j] ]++;
-//        std::cout << "Added to " << (*boundary_identifier(i,fe_pt))[j] 
-//                  << " new value: "
-//                  << count[(*boundary_identifier(i,fe_pt))[j] ] << std::endl;
-
       }
 
      // Determine the correct boundary indicator by checking that it 
@@ -265,27 +230,9 @@ void BrickMeshBase::setup_boundary_element_info(std::ostream &outfile)
         }
       }
      
-
-
-//      // Loop over coordinates
-//      for (int ii=0;ii<3;ii++)
-//       {
-//        // Loop over upper/lower end of coordinates
-//        for (int sign=-1;sign<3;sign+=2)
-//         {
-//          std::cout << (ii+1)*sign << " " << count[(ii+1)*sign] << std::endl;
-//         }
-//       }
-//      std::cout << std::endl << std::endl;
-     
-
      // Check if we've found one boundary
      if (!found)
       {
-//        fe_pt->output(std::cout,3);
-//        pause("about to die..");
-
-
        std::ostringstream error_stream;
        error_stream
         << "Failed to find a boundary identifier.\n\n" 

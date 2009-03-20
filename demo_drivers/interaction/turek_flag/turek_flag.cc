@@ -333,7 +333,7 @@ namespace Global_Parameters
   Ramp_period=Dt*20.0;
 
   // "Big G" Linear constitutive equations:
-  Constitutive_law_pt = new GeneralisedHookean(Nu,E);
+  Constitutive_law_pt = new GeneralisedHookean(&Nu,&E);
   
   // Doc
   oomph_info << std::endl;

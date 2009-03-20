@@ -194,8 +194,9 @@ void superlu_dist_distributed_matrix(int opt_flag, int allow_permutations,
    
    /* Row permutations (NATURAL [= do nothing],     */
    /*                   LargeDiag [default], ...)?  */
+   /*    options->RowPerm=NATURAL; */
    options->RowPerm=LargeDiag;
-     
+
    /* Column permutations (NATURAL [= do nothing],      */
    /*                      MMD_AT_PLUS_A [default],...) */
    options->ColPerm=MMD_AT_PLUS_A;
@@ -206,6 +207,7 @@ void superlu_dist_distributed_matrix(int opt_flag, int allow_permutations,
      options->ColPerm=NATURAL; 
      options->RowPerm=NATURAL; 
     } 
+
    
    /* Iterative refinement (essential as far as I can tell).*/
    /* Can be "NO" or "DOUBLE"*/
@@ -1258,6 +1260,7 @@ void superlu_dist_global_matrix(int opt_flag, int allow_permutations,
    
    /* Row permutations (NATURAL [= do nothing],     */
    /*                   LargeDiag [default], ...)?  */
+   /*    options->RowPerm=NATURAL; */
    options->RowPerm=LargeDiag;
    
    /* Column permutations (NATURAL [= do nothing],      */

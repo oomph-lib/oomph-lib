@@ -412,7 +412,7 @@ public:
  Time*& time_pt() {return Time_pt;}
 
  /// Access function for j-th weight for the i-th derivative
- double weight(const unsigned &i, const unsigned &j) const
+ virtual double weight(const unsigned &i, const unsigned &j) const
   {return Weight(i,j);}
 
  /// \short Return the number of doubles required to represent history
@@ -480,7 +480,7 @@ public:
 /// for NSTEPS previous values.
 //====================================================================
 template<unsigned NSTEPS>
-class Steady : public TimeStepper
+class Steady : virtual public TimeStepper
 {
  
 public:
@@ -675,14 +675,20 @@ public:
  unsigned ndt() {return NSTEPS;}
 
 /*  /// Dummy: Access function for i-th weight (for the highest derivative) */
-/*  double &weight(const unsigned &i) {return Zero;} */
+/*  double weight(const unsigned &i) {return Zero;} */
 
-/*  /// Dummy: Access function for j-th weight for the i-th derivative */
-/*  double &weight(const unsigned &i, const unsigned &j) */
-/*   { */
-/*    if ((i==0)&&(j==0)) {return One;} */
-/*    else {return Zero;} */
-/*   } */
+ /// Dummy: Access function for j-th weight for the i-th derivative
+ double weight(const unsigned &i, const unsigned &j) const
+  {
+   if ((i==0)&&(j==0))
+    {
+     return One;
+    }
+   else 
+    {
+     return Zero;
+    }
+  }
 
 private:
  

@@ -38,14 +38,11 @@ using namespace std;
 
 using namespace oomph;
 
-//#define REFINE
-
 namespace oomph
 {
 
 //=================start_wrapper==================================
-/// Wrapper class for solid elements to modify their output 
-/// functions.
+/// Wrapper class for solid element to modify the output 
 //================================================================
 template <class ELEMENT>
 class MySolidElement : public virtual ELEMENT
@@ -54,91 +51,52 @@ class MySolidElement : public virtual ELEMENT
 public:
 
  /// Constructor: Call constructor of underlying element
- MySolidElement() : ELEMENT() {};
+ MySolidElement() : ELEMENT() {}
 
- /// Overload output function:
+ /// Overload output function
  void output(std::ostream &outfile, const unsigned &n_plot)
   {
-
-   // Element dimension
-   unsigned el_dim = this->dim();
-
-   Vector<double> s(el_dim);
-   Vector<double> x(el_dim);
-   Vector<double> xi(el_dim);
-   DenseMatrix<double> sigma(el_dim,el_dim);
+   Vector<double> s(2);
+   Vector<double> x(2);
+   Vector<double> xi(2);
+   DenseMatrix<double> sigma(2,2);
    
-   switch(el_dim)
+   //Tecplot header info 
+   outfile << "ZONE I=" << n_plot << ", J=" << n_plot << std::endl;
+   
+   //Loop over plot points
+   for(unsigned l2=0;l2<n_plot;l2++)
     {
-     
-    case 2:
-
-     //Tecplot header info 
-     outfile << "ZONE I=" << n_plot << ", J=" << n_plot << std::endl;
-     
-     //Loop over element nodes
-     for(unsigned l2=0;l2<n_plot;l2++)
+     s[1] = -1.0 + l2*2.0/(n_plot-1);
+     for(unsigned l1=0;l1<n_plot;l1++)
       {
-       s[1] = -1.0 + l2*2.0/(n_plot-1);
-       for(unsigned l1=0;l1<n_plot;l1++)
-        {
-         s[0] = -1.0 + l1*2.0/(n_plot-1);
-         
-         // Get Eulerian coordinates and stress
-         this->interpolated_x(s,x);
-         this->interpolated_xi(s,xi);
-
-         this->get_stress(s,sigma);
-
-         //Output the x,y,..
-         for(unsigned i=0;i<el_dim;i++) 
-          {outfile << x[i] << " ";}
-
-         for(unsigned i=0;i<el_dim;i++) 
-          {outfile << x[i]-xi[i] << " ";}
-
-
-         // hierher change to physical stress:
-         // sigma_phys_up(i,j)=sigma_up(i,j) sqrt(g_down(ii))  sqrt(g_down(jj))
- 
-         // Output stress
-         outfile << sigma(0,0) << " "
-                 << sigma(1,0) << " "
-                 << sigma(1,1) << " "
-                 << std::endl;
-        }
+       s[0] = -1.0 + l1*2.0/(n_plot-1);
+       
+       // Get Eulerian and Lagrangian coordinates and the stress
+       this->interpolated_x(s,x);
+       this->interpolated_xi(s,xi);
+       this->get_stress(s,sigma);
+       
+       //Output the x,y coordinates
+       for(unsigned i=0;i<2;i++) 
+        {outfile << x[i] << " ";}
+       
+       // Output displacements, the difference between Eulerian and Lagrangian
+       // coordinates
+       for(unsigned i=0;i<2;i++) 
+        {outfile << x[i]-xi[i] << " ";}
+       
+       //Output stress
+       outfile << sigma(0,0) << " "
+               << sigma(1,0) << " "
+               << sigma(1,1) << " "
+               << std::endl;
       }
-
-     break;
-     
-    default:
-
-     std::ostringstream error_message;
-     error_message << "Output for dim !=2 not implemented" << std::endl;
-     throw OomphLibError(error_message.str(),"MySolidElement::output()",
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-  
+    }  
   }
-
 };
 
-
-
-//===========start_face_geometry==============================================
-/// FaceGeometry of wrapped element is the same as the underlying element
-//============================================================================
-template<class ELEMENT>
-class FaceGeometry<MySolidElement<ELEMENT> > :
- public virtual FaceGeometry<ELEMENT>
-{
-};
-
-
-}
-
-
-
+} //end namespace extension
 
 
 
@@ -154,29 +112,20 @@ class FaceGeometry<MySolidElement<ELEMENT> > :
 namespace Global_Physical_Variables
 {
 
- /// Pointer to strain energy function
- StrainEnergyFunction*Strain_energy_function_pt;
+ /// Pointer to constitutive law
+ ConstitutiveLaw* Constitutive_law_pt=0;
 
- /// "Mooney Rivlin" coefficient for generalised Mooney Rivlin law
+ /// Poisson's ratio for Hooke's law
+ double Nu=0.45;
+
+ /// Pointer to strain energy function 
+ StrainEnergyFunction* Strain_energy_function_pt=0;
+
+ /// First "Mooney Rivlin" coefficient for generalised Mooney Rivlin law
  double C1=1.3;
 
- /// "Mooney Rivlin" coefficient for generalised Mooney Rivlin law
+ /// Second "Mooney Rivlin" coefficient for generalised Mooney Rivlin law
  double C2=1.3;
-
- /// Height of domain
- double H=1.0;
-
- /// Length of domain
- double L=1.0;
-
- /// Pointer to constitutive law
- ConstitutiveLaw* Constitutive_law_pt;
-
- /// Elastic modulus
- double E=1.0;
-
- /// Poisson's ratio
- double Nu=0.4999;
 
  /// Non-dim gravity
  double Gravity=0.0;
@@ -195,7 +144,7 @@ namespace Global_Physical_Variables
 
 
 //=============begin_problem============================================ 
-/// Problem class for the cantilever "beam" structure.
+/// Problem class
 //====================================================================== 
 template<class ELEMENT>
 class CompressedSquareProblem : public Problem
@@ -203,7 +152,8 @@ class CompressedSquareProblem : public Problem
 
 public:
 
- /// Constructor:
+ /// \short Constructor: Pass flag that determines if we want to use
+ /// a true incompressible formulation
  CompressedSquareProblem(const bool& incompress);
  
  /// Update function (empty)
@@ -212,18 +162,12 @@ public:
  /// Update function (empty)
  void actions_before_newton_solve() {}
 
-
- /// Actions before adapt
- void actions_before_adapt(){}
-
- /// Actions after adapt
- void actions_after_adapt();
-
- /// Doc the solution
- void doc_solution();
+ /// \short Doc the solution & exact (linear) solution for compressible 
+ /// or incompressible materials
+ void doc_solution(const bool& incompress);
 
  /// Run the job -- doc in RESLTi_case
- void run_it(const unsigned& i_case);
+ void run_it(const int& i_case,const bool& incompress);
 
 private:
 
@@ -240,7 +184,8 @@ private:
 
 
 //===========start_of_constructor======================================= 
-/// Constructor: 
+/// Constructor: Pass flag that determines if we want to enforce
+/// incompressibility
 //====================================================================== 
 template<class ELEMENT>
 CompressedSquareProblem<ELEMENT>::CompressedSquareProblem(
@@ -256,37 +201,16 @@ CompressedSquareProblem<ELEMENT>::CompressedSquareProblem(
  unsigned n_y=5;
 
  // Domain length in x-direction
- double l_x=Global_Physical_Variables::L;
+ double l_x=1.0;
 
  // Domain length in y-direction
- double l_y=Global_Physical_Variables::H;
-
- // Shift mesh downwards so that centreline is at y=0:
- Vector<double> origin(2);
- origin[0]=0.0;
- origin[1]=-0.5*l_y;
-
-#ifdef REFINE
-
- //Now create the mesh 
- mesh_pt() = new ElasticRefineableRectangularQuadMesh<ELEMENT>(
-  n_x,n_y,l_x,l_y,origin);
- 
- // Set error estimator
-  dynamic_cast<ElasticRefineableRectangularQuadMesh<ELEMENT>*>(
-   mesh_pt())->spatial_error_estimator_pt()=new Z2ErrorEstimator;
- 
-#else
+ double l_y=1.0;
  
  //Now create the mesh 
- mesh_pt() = new ElasticRectangularQuadMesh<ELEMENT>(
-  n_x,n_y,l_x,l_y,origin);
+ mesh_pt() = new ElasticRectangularQuadMesh<ELEMENT>(n_x,n_y,l_x,l_y);
 
-#endif
- 
 
- //Assign the physical properties to the elements before any refinement
- //Loop over the elements in the main mesh
+ //Assign the physical properties to the elements
  unsigned n_element=mesh_pt()->nelement();
  for(unsigned i=0;i<n_element;i++)
   {
@@ -299,87 +223,59 @@ CompressedSquareProblem<ELEMENT>::CompressedSquareProblem(
 
    //Set the body force
    el_pt->body_force_fct_pt() = Global_Physical_Variables::gravity;
-  
-   // Is it incompressible -- hierher switch to const eqn
-   if (incompress)
-    {     
-     PVDEquationsWithPressure<2>* test_pt = 
-      dynamic_cast<PVDEquationsWithPressure<2>*>(mesh_pt()->element_pt(i));
-     if (test_pt!=0)
-      {
+
+
+   // Is the element based on the pressure/displacement formulation?
+   PVDEquationsWithPressure<2>* test_pt = 
+    dynamic_cast<PVDEquationsWithPressure<2>*>(mesh_pt()->element_pt(i));
+   if (test_pt!=0)
+    {
+     // Do we want true incompressibility (formulation III in the 
+     // associated tutorial) or not (formulation II)
+     if (incompress)
+      {     
        test_pt->incompressible()=true;
       }
+     else
+      {
+       // Note that this assignment isn't strictly necessary as it's the
+       // default setting, but it doesn't do any harm to be explicit.
+       test_pt->incompressible()=false;
+      }
     }
-  }
-
-
+  } // end compressibility
+ 
+ 
  // Choose a control node: The last node in the solid mesh
  unsigned nnod=mesh_pt()->nnode();
  Trace_node_pt=mesh_pt()->node_pt(nnod-1);
-
-#ifdef REFINE
- 
- // Do a nonuniform refinement
-Vector<unsigned> elements_to_be_refined(3);
-elements_to_be_refined[0]=1;
-elements_to_be_refined[1]=3;
-elements_to_be_refined[2]=5;
- dynamic_cast<ElasticRefineableRectangularQuadMesh<ELEMENT>*>(
-  mesh_pt())->refine_selected_elements(elements_to_be_refined);
-
-#endif
- 
  
 // Pin the left and right boundaries (1 and 2) in the horizontal directions
-for (unsigned b=1;b<4;b+=2)
-{
- unsigned n_side = mesh_pt()->nboundary_node(b);
- 
- //Loop over the nodes
- for(unsigned i=0;i<n_side;i++)
+ for (unsigned b=1;b<4;b+=2)
   {
-   dynamic_cast<SolidNode*>(mesh_pt()->boundary_node_pt(b,i))->pin_position(0);
+   unsigned nnod = mesh_pt()->nboundary_node(b);
+   for(unsigned i=0;i<nnod;i++)
+    {
+     dynamic_cast<SolidNode*>(
+      mesh_pt()->boundary_node_pt(b,i))->pin_position(0);
+    }
   }
-}
-
-
+ 
 // Pin the bottom boundary (0) in the vertical direction
-unsigned b=0;
-{
- unsigned n_side = mesh_pt()->nboundary_node(b);
+ unsigned b=0;
+ {
+  unsigned nnod= mesh_pt()->nboundary_node(b);
+  for(unsigned i=0;i<nnod;i++)
+   {
+    dynamic_cast<SolidNode*>(
+     mesh_pt()->boundary_node_pt(b,i))->pin_position(1);
+   }
+ }
  
-//Loop over the nodes
- for(unsigned i=0;i<n_side;i++)
-  {
-   dynamic_cast<SolidNode*>(mesh_pt()->boundary_node_pt(b,i))->pin_position(1);
-  }
-}
+ //Assign equation numbers
+ assign_eqn_numbers();
 
- // Pin the redundant solid pressures (if any)
- PVDEquationsBase<2>::pin_redundant_nodal_solid_pressures(
-  mesh_pt()->element_pt());
-
- //Attach the boundary conditions to the mesh
- cout << assign_eqn_numbers() << std::endl; 
-
- 
 } //end of constructor
-
-
-
-
-//=====================start_of_actions_after_adapt=======================
-///  Actions after adapt
-//========================================================================
-template<class ELEMENT>
-void CompressedSquareProblem<ELEMENT>::actions_after_adapt()
-{
- 
- // Pin the redundant solid pressures (if any)
- PVDEquationsBase<2>::pin_redundant_nodal_solid_pressures(
-mesh_pt()->element_pt());
- 
-}// end of actions_after_adapt
 
 
 
@@ -387,9 +283,8 @@ mesh_pt()->element_pt());
 /// Doc the solution
 //==================================================================
 template<class ELEMENT>
-void CompressedSquareProblem<ELEMENT>::doc_solution()
+void CompressedSquareProblem<ELEMENT>::doc_solution(const bool& incompress)
 {
-
  ofstream some_file;
  char filename[100];
 
@@ -397,7 +292,6 @@ void CompressedSquareProblem<ELEMENT>::doc_solution()
  unsigned n_plot = 5; 
 
  // Output shape of and stress in deformed body
- //--------------------------------------------
  sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
@@ -409,6 +303,67 @@ void CompressedSquareProblem<ELEMENT>::doc_solution()
             << Trace_node_pt->x(0) << " " 
             << Trace_node_pt->x(1) << " " 
             << std::endl;
+
+
+ // Output exact solution for linear elasticity
+ // -------------------------------------------
+ sprintf(filename,"%s/exact_soln%i.dat",Doc_info.directory().c_str(),
+         Doc_info.number());
+ some_file.open(filename);
+ unsigned nelem=mesh_pt()->nelement(); 
+ Vector<double> s(2);
+ Vector<double> x(2);
+ DenseMatrix<double> sigma(2,2);
+ 
+ // Poisson's ratio
+ double nu=Global_Physical_Variables::Nu;
+ if (incompress) nu=0.5;
+
+ // Loop over all elements
+ for (unsigned e=0;e<nelem;e++)
+  {  
+   //Cast to a solid element
+   ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
+    
+   //Tecplot header info 
+   some_file << "ZONE I=" << n_plot << ", J=" << n_plot << std::endl;
+   
+   //Loop over plot points
+   for(unsigned l2=0;l2<n_plot;l2++)
+    {
+     s[1] = -1.0 + l2*2.0/(n_plot-1);
+     for(unsigned l1=0;l1<n_plot;l1++)
+      {
+       s[0] = -1.0 + l1*2.0/(n_plot-1);
+       
+       // Get Lagrangian coordinates
+         el_pt->interpolated_x(s,x);
+
+         // Output the x,y,..
+         for(unsigned i=0;i<2;i++) 
+          {some_file << x[i] << " ";}
+
+         // Exact vertical displacement
+         double v_exact=Global_Physical_Variables::Gravity*
+          (1.0+nu)*(1.0-2*nu)/(1.0-nu)*(0.5*x[1]*x[1]-x[1]);
+         
+         // x and y displacement
+         some_file << "0.0 " <<   v_exact << " ";
+
+         // Stresses
+         sigma(0,0)=nu/(1.0-nu)*Global_Physical_Variables::Gravity*(x[1]-1.0);
+         sigma(1,0)=0.0;
+         sigma(1,1)=Global_Physical_Variables::Gravity*(x[1]-1.0);
+          
+         // Output linear stress tensor
+         some_file << sigma(0,0) << " "
+                   << sigma(1,0) << " "
+                   << sigma(1,1) << " "
+                   << std::endl;
+      }
+    }
+  }
+ some_file.close();
 
  // Increment label for output files
  Doc_info.number()++;
@@ -423,22 +378,13 @@ void CompressedSquareProblem<ELEMENT>::doc_solution()
 /// Run it
 //==================================================================
 template<class ELEMENT>
-void CompressedSquareProblem<ELEMENT>::run_it(const unsigned& i_case)
+void CompressedSquareProblem<ELEMENT>::run_it(const int& i_case,
+                                              const bool& incompress)
 {
-
-#ifdef TIME_SOLID_JAC
-  PVDEquationsBase<2>::Solid_timer.reset();
-#endif
 
  // Set output directory
  char dirname[100];   
-
-#ifdef REFINE
- sprintf(dirname,"RESLT_refine%i",i_case);
-#else
- sprintf(dirname,"RESLT_norefine%i",i_case);
-#endif
-
+ sprintf(dirname,"RESLT%i",i_case);
  Doc_info.set_directory(dirname);
 
  // Open trace file
@@ -447,295 +393,238 @@ void CompressedSquareProblem<ELEMENT>::run_it(const unsigned& i_case)
  Trace_file.open(filename);
 
 
- // Doc solution
- doc_solution();
+ // Doc initial configuration
+ doc_solution(incompress);
 
  // Initial values for parameter values
  Global_Physical_Variables::Gravity=0.0;
  
  //Parameter incrementation
  unsigned nstep=1; 
- double g_increment=1.0e2;   
+ double g_increment=1.0e-2;   
  for(unsigned i=0;i<nstep;i++)
   {
-   // Solve the problem with Newton's method, allowing
-   // up to max_adapt mesh adaptations after every solve.
-
-   // Initial values for parameter values
+   // Bump up gravity
    Global_Physical_Variables::Gravity+=g_increment;
- 
-#ifdef REFINE
-
-   // Max. number of adaptations per solve
-   unsigned max_adapt=1;
    
-   newton_solve(max_adapt);
-
-#else
- 
+   // Solve
    newton_solve();
 
-#endif
-
    // Doc solution
-   doc_solution();
-   
+   doc_solution(incompress);
   }
 
 }
 
 
 //=======start_of_main==================================================
-/// Driver for cantilever beam loaded by surface traction and/or
-/// gravity
+/// Driver for compressed square
 //======================================================================
 int main()
 {
  
- // Is the material incomressible hierher switch to const eqn
+ //Flag to indicate if we want the material to be incompressible 
  bool incompress=false;
 
- // Nu values
- Vector<double> nu_value(3);
- nu_value[0]=0.45;
- nu_value[1]=0.499999;
- nu_value[2]=0.5;
- 
- unsigned case_number=0;
+ // Label for different cases
+ int case_number=-1;
  
  // Generalised Hookean constitutive equations
- //-------------------------------------------
+ //===========================================
  {
-  Global_Physical_Variables::Constitutive_law_pt = 
-   new GeneralisedHookean(Global_Physical_Variables::Nu,
-                          Global_Physical_Variables::E);
-  
+  // Nu values
+  Vector<double> nu_value(3);
+  nu_value[0]=0.45;
+  nu_value[1]=0.499999;
+  nu_value[2]=0.5;
   
   // Loop over nu values
   for (unsigned i=0;i<3;i++)
    {
     // Set Poisson ratio
     Global_Physical_Variables::Nu=nu_value[i];
+  
+    std::cout << "===========================================\n";
+    std::cout << "Doing Nu=" <<  Global_Physical_Variables::Nu 
+              << std::endl;
+    std::cout << "===========================================\n";
+
+    // Create constitutive equation
+    Global_Physical_Variables::Constitutive_law_pt = 
+     new GeneralisedHookean(&Global_Physical_Variables::Nu);
     
-    std::cout << "===========================================" << std::endl;
-    std::cout << "Doing Nu=" <<  Global_Physical_Variables::Nu << std::endl;
-    std::cout << "===========================================" << std::endl;
-    
-    
-    incompress=false;
-    
-    // nly do displacement-based elements if nu is not 1/2
+    // Displacement-based formulation
+    //--------------------------------
+    // (not for nu=1/2, obviously)
     if (i!=2) 
      {
-      
+      case_number++;
       std::cout 
        << "Doing Generalised Hookean with displacement formulation: Case "
        << case_number << std::endl;
       
-#ifdef REFINE
-      {
-       //Set up the problem with pure displacement based elements
-       CompressedSquareProblem<MySolidElement<RefineableQPVDElement<2,3> > > 
-        problem(incompress);
-       
-       problem.run_it(case_number);
-      }
-#else   
-      {
-       //Set up the problem with pure displacement based elements
-       CompressedSquareProblem<MySolidElement<QPVDElement<2,3> > > 
-        problem(incompress);
-       
-       problem.run_it(case_number);
-      }
-#endif
+      //Set up the problem with pure displacement based elements
+      incompress=false;
+      CompressedSquareProblem<MySolidElement<QPVDElement<2,3> > > 
+       problem(incompress);
+      
+      // Run it
+      problem.run_it(case_number,incompress);
      }
     
-    
-    case_number++;
-    std::cout 
-     << "Doing Generalised Hookean with displacement/cont pressure formulation: Case "
-     << case_number << std::endl;
 
-#ifdef REFINE
+    // Generalised Hookean with continuous pressure, compressible
+    //-----------------------------------------------------------
     {
-     //Set up the problem with continous pressure/displacement
-     CompressedSquareProblem<MySolidElement<
-      RefineableQPVDElementWithContinuousPressure<2> > > 
-      problem(incompress); 
+     case_number++;
+     std::cout 
+      << "Doing Generalised Hookean with displacement/cont pressure "
+      << "formulation: Case " << case_number << std::endl;     
      
-     problem.run_it(case_number);
-    }
-#else
-    {
      //Set up the problem with continous pressure/displacement
+     incompress=false;
      CompressedSquareProblem<MySolidElement<
       QPVDElementWithContinuousPressure<2> > > 
       problem(incompress); 
      
-     problem.run_it(case_number);
+     // Run it
+     problem.run_it(case_number,incompress);
     }
-#endif
-    
-   
-    case_number++;
-    std::cout 
-     << "Doing Generalised Hookean with displacement/discont pressure formulation: Case "
-     << case_number << std::endl; 
-
-#ifdef REFINE    
-    {
-     //Set up the problem with discontinous pressure/displacement
-     CompressedSquareProblem<MySolidElement<
-      RefineableQPVDElementWithPressure<2> > > problem(incompress); 
      
-     problem.run_it(case_number);
-    }
-#else
+    
+    // Generalised Hookean with discontinuous pressure, compressible
+    //--------------------------------------------------------------
     {
+     case_number++;
+     std::cout 
+      << "Doing Generalised Hookean with displacement/discont pressure "
+      << "formulation: Case " << case_number << std::endl; 
+
      //Set up the problem with discontinous pressure/displacement
      CompressedSquareProblem<MySolidElement<
       QPVDElementWithPressure<2> > > problem(incompress); 
      
-     problem.run_it(case_number);
+     // Run it
+     problem.run_it(case_number,incompress);
     }
-#endif
 
 
-    incompress=true;
 
-    case_number++;
-    std::cout 
-     << "Doing Generalised Hookean with displacement/cont pressure, incompressible formulation: Case "
-     << case_number << std::endl;
-
-#ifdef REFINE
+    // Generalised Hookean with continous pressure/displacement; 
+    //----------------------------------------------------------
+    // incompressible
+    //---------------
     {
-     //Set up the problem with continous pressure/displacement
-     CompressedSquareProblem<MySolidElement<
-      RefineableQPVDElementWithContinuousPressure<2> > > 
-      problem(incompress); 
+     case_number++;
+     std::cout 
+      << "Doing Generalised Hookean with displacement/cont pressure, "
+      << "incompressible formulation: Case " << case_number << std::endl;
      
-     problem.run_it(case_number);
-    }
-#else
-    {
      //Set up the problem with continous pressure/displacement
+     incompress=true;
      CompressedSquareProblem<MySolidElement<
       QPVDElementWithContinuousPressure<2> > > 
       problem(incompress); 
      
-     problem.run_it(case_number);
+     // Run it
+     problem.run_it(case_number,incompress);
     }
-#endif
-   
-    case_number++;
-    std::cout 
-     << "Doing Generalised Hookean with displacement/discont pressure, incompressible formulation: Case "
-     << case_number << std::endl; 
 
-#ifdef REFINE    
+
+    // Generalised Hookean with discontinous pressure/displacement; 
+    //-------------------------------------------------------------
+    // incompressible
+    //---------------
     {
-     //Set up the problem with discontinous pressure/displacement
-     CompressedSquareProblem<MySolidElement<
-      RefineableQPVDElementWithPressure<2> > > problem(incompress); 
+     case_number++;
+     std::cout 
+      << "Doing Generalised Hookean with displacement/discont pressure, "
+      << "incompressible formulation: Case " << case_number << std::endl; 
      
-     problem.run_it(case_number);
-    }
-#else
-    {
      //Set up the problem with discontinous pressure/displacement
+     incompress=true;
      CompressedSquareProblem<MySolidElement<
       QPVDElementWithPressure<2> > > problem(incompress); 
      
-     problem.run_it(case_number);
+     // Run it
+     problem.run_it(case_number,incompress);
     }
-#endif
+
+    // Clean up
+    delete Global_Physical_Variables::Constitutive_law_pt;
+    Global_Physical_Variables::Constitutive_law_pt=0;
     
+   } 
+ 
+ } // end generalised Hookean
 
-
-   } // end of loop over Poisson ratios
-  
-  delete Global_Physical_Variables::Constitutive_law_pt;
-  Global_Physical_Variables::Constitutive_law_pt=0;
- }
-   
+ 
  // Incompressible Mooney Rivlin
- //-----------------------------
+ //=============================
  {
+
+  // Create strain energy function
   Global_Physical_Variables::Strain_energy_function_pt = 
-   new MooneyRivlin(Global_Physical_Variables::C1,
-                    Global_Physical_Variables::C2);
+   new MooneyRivlin(&Global_Physical_Variables::C1,
+                    &Global_Physical_Variables::C2);
   
   // Define a constitutive law (based on strain energy function)
   Global_Physical_Variables::Constitutive_law_pt = 
    new IsotropicStrainEnergyFunctionConstitutiveLaw(
     Global_Physical_Variables::Strain_energy_function_pt);
     
-  incompress=true;
-    
-  case_number++;
-  std::cout 
-   << "Doing Mooney Rivlin with cont pressure formulation: Case "
-   << case_number << std::endl; 
 
-    
-#ifdef REFINE
+  // Mooney-Rivlin with continous pressure/displacement; 
+  //----------------------------------------------------
+  // incompressible
+  //---------------
   {
+   case_number++;
+   std::cout 
+    << "Doing Mooney Rivlin with cont pressure formulation: Case "
+    << case_number << std::endl; 
+   
    //Set up the problem with continous pressure/displacement
-   CompressedSquareProblem<MySolidElement<
-    RefineableQPVDElementWithContinuousPressure<2> > > 
-    problem(incompress); 
-     
-   problem.run_it(case_number);
-  }
-#else
-  {
-   //Set up the problem with continous pressure/displacement
+   incompress=true;
    CompressedSquareProblem<MySolidElement<
     QPVDElementWithContinuousPressure<2> > > 
     problem(incompress); 
      
-   problem.run_it(case_number);
+   // Run it
+   problem.run_it(case_number,incompress);
   }
-#endif
     
-    
-  case_number++;
-  std::cout 
-   << "Doing Mooney Rivlin with discont pressure formulation: Case "
-   << case_number << std::endl; 
 
-    
-#ifdef REFINE
+  // Mooney-Rivlin with discontinous pressure/displacement; 
+  //-------------------------------------------------------
+  // incompressible
+  //---------------
   {
+   case_number++;
+   std::cout 
+    << "Doing Mooney Rivlin with discont pressure formulation: Case "
+    << case_number << std::endl; 
+   
    //Set up the problem with discontinous pressure/displacement
-   CompressedSquareProblem<MySolidElement<
-    RefineableQPVDElementWithPressure<2> > > 
-    problem(incompress); 
-     
-   problem.run_it(case_number);
-  }
-#else
-  {
-   //Set up the problem with discontinous pressure/displacement
+   incompress=true;
    CompressedSquareProblem<MySolidElement<
     QPVDElementWithPressure<2> > > 
     problem(incompress); 
      
-   problem.run_it(case_number);
+   // Run it
+   problem.run_it(case_number,incompress);
   }
-#endif
-    
+
+
+  // Clean up
   delete  Global_Physical_Variables::Strain_energy_function_pt;
   Global_Physical_Variables::Strain_energy_function_pt=0;
-    
+  
   delete Global_Physical_Variables::Constitutive_law_pt;
   Global_Physical_Variables::Constitutive_law_pt=0;
+  
  }
    
-  
-
 } //end of main
 
 

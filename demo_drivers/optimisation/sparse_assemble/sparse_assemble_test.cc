@@ -27,6 +27,8 @@
 //LIC//====================================================================
 // Driver to compare different sparse matrix assembly strategies
 
+#include<time.h>
+
 // Generic includes
 #include "generic.h"
 #include "navier_stokes.h"
@@ -278,7 +280,7 @@ void RectangularDrivenCavityProblem<ELEMENT>::compare_assembly_strategies(
  bool compressed_row = true;
  
  clock_t clock1 = clock();
- time_t time1 = std::time(0);
+// time_t time1 = std::time(0);
  
  switch(method)
   {
@@ -339,7 +341,7 @@ void RectangularDrivenCavityProblem<ELEMENT>::compare_assembly_strategies(
                                           compressed_row);
   
  clock_t clock2 = clock();
- time_t time2 = std::time(0);
+ //time_t time2 = time(0);
  
  cout <<"CPU time for " 
       << Global_Variables::Nx << " x " 
@@ -347,8 +349,8 @@ void RectangularDrivenCavityProblem<ELEMENT>::compare_assembly_strategies(
       << method << ": "
       << double(clock2-clock1)/CLOCKS_PER_SEC << "s" << endl;
  
-cout << "Wall time for method " << method << ": "
-      << difftime(time2, time1) << "s" << endl;
+// cout << "Wall time for method " << method << ": "
+//       << difftime(time2, time1) << "s" << endl;
 
 //Read out the dimension of the matrix 
  unsigned long n = ndof();

@@ -62,9 +62,6 @@ namespace Global_Physical_Variables
  /// Poisson's ratio
  double Nu=0.3;
 
- /// "Mooney Rivlin" coefficient for generalised Mooney Rivlin law
- double C1=1.3;
-
  /// Uniform pressure
  double P = 0.00;
 
@@ -857,8 +854,8 @@ int main(int argc, char* argv[])
 
   // "Big G" Linear constitutive equations:
   Global_Physical_Variables::Constitutive_law_pt = 
-   new GeneralisedHookean(Global_Physical_Variables::Nu,
-                          Global_Physical_Variables::E);
+   new GeneralisedHookean(&Global_Physical_Variables::Nu,
+                          &Global_Physical_Variables::E);
  
   //Set up the problem:
   unsigned case_number=0;

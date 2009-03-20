@@ -495,19 +495,19 @@ public:
 //===============================================================
 /// A class that is used to assemble the augmented system that defines
 /// a Hopf bifurcation. The "standard" problem
-/// must be a function of a global parameter \f$\lambda\f$ and a solution
-/// is \f$R(u,\lambda) = 0\f$, where \f$u\f$ are the unknowns in the 
+/// must be a function of a global parameter \f$ \lambda \f$ and a solution
+/// is \f$ R(u,\lambda) = 0 \f$, where \f$ u \f$ are the unknowns in the 
 /// problem. A Hopf bifurcation may be specified by the augmented
-/// system of size \f$3N+2\f$.
-/// \f[ R(u,\lambda) = 0,\f]
-/// \f[ J\phi + \omega M \psi = 0,\f]
-/// \f[ J\psi - \omega M \phi = 0,\f]
-/// \f[ c \cdot \phi  = 1.\f]
-/// \f[ c \cdot \psi  = 0.\f]
-/// In the abovem \f$J\f$ is the  usual Jacobian matrix, \f$dR/du\f$ 
-/// and \f$M\f$ is the mass matrix that multiplies the time derivative terms.
-/// \f$\phi + i\psi\f$ is the (complex) null vector of the complex matrix
-/// \f$ J - i\omega M \f$, where $\f \omega \f$ is the critical frequency.
+/// system of size \f$ 3N+2 \f$.
+/// \f[ R(u,\lambda) = 0, \f]
+/// \f[ J\phi + \omega M \psi = 0, \f]
+/// \f[ J\psi - \omega M \phi = 0, \f]
+/// \f[ c \cdot \phi  = 1. \f]
+/// \f[ c \cdot \psi  = 0. \f]
+/// In the abovem \f$ J \f$ is the  usual Jacobian matrix, \f$ dR/du \f$ 
+/// and \f$ M \f$ is the mass matrix that multiplies the time derivative terms.
+/// \f$ \phi + i\psi \f$ is the (complex) null vector of the complex matrix
+/// \f$ J - i\omega M \f$, where $ \f \omega \f$ is the critical frequency.
 /// \f$ c \f$ is a constant vector that is used to ensure that the null vector
 /// is non-trivial.
 //===========================================================================

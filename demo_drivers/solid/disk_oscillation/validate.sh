@@ -1,7 +1,7 @@
 #! /bin/sh
 
 #Set the number of tests to be checked
-NUM_TESTS=4
+NUM_TESTS=1
 
 # Setup validation directory
 #---------------------------
@@ -10,18 +10,14 @@ mkdir Validation
 
 #######################################################################
 
-# Validation for static disk compression
-#---------------------------------------
+# Validation for disk oscillation
+#--------------------------------
 
 cd Validation
-mkdir RESLT0
-mkdir RESLT1
-mkdir RESLT2
-mkdir RESLT3
+mkdir RESLT
 
 echo "Running disk oscillation validation "
-../disk_oscillation lalal > OUTPUT 
-
+../disk_oscillation lala > OUTPUT 
 
 echo "done"
 echo " " >> validation.log
@@ -32,36 +28,15 @@ echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat RESLT0/displ9.dat RESLT0/trace.dat \
-    > disk_oscillation_results0.dat
-
-cat RESLT1/displ9.dat RESLT1/trace.dat \
-    > disk_oscillation_results1.dat
-
-cat RESLT2/displ9.dat RESLT2/trace.dat \
-    > disk_oscillation_results2.dat
-
-cat RESLT3/displ9.dat RESLT3/trace.dat \
-    > disk_oscillation_results3.dat
-
-
-
+cat RESLT/displ9.dat RESLT/trace.dat \
+    > disk_oscillation_results.dat
 
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/disk_oscillation_results0.dat.gz \
-    disk_oscillation_results0.dat  0.1 1.0e-5 >> validation.log
-
-../../../../bin/fpdiff.py ../validata/disk_oscillation_results1.dat.gz \
-    disk_oscillation_results1.dat  0.1 1.0e-5 >> validation.log
-
-../../../../bin/fpdiff.py ../validata/disk_oscillation_results2.dat.gz \
-    disk_oscillation_results2.dat  0.1 1.0e-5 >> validation.log
-
-../../../../bin/fpdiff.py ../validata/disk_oscillation_results3.dat.gz \
-    disk_oscillation_results3.dat   0.1 1.0e-5 >> validation.log
+../../../../bin/fpdiff.py ../validata/disk_oscillation_results.dat.gz \
+    disk_oscillation_results.dat >> validation.log
 fi
 
 

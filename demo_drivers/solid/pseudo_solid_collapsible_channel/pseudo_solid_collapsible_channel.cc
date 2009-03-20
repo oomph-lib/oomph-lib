@@ -264,6 +264,15 @@ namespace Global_Physical_Variables
  /// Pseudo-solid mass density
  double Lambda_sq=0.0;
 
+ /// Pseudo-solid Poisson ratio
+ double Nu=0.1;
+
+ /// Pseudo-solid Mooney-Rivlin parameter
+ double C1=1.0;
+
+ /// Pseudo-solid Young's modulus
+ double E=0.5;
+
  /// Traction required at the left boundary
  void prescribed_traction(const double& t,
                           const Vector<double>& x,
@@ -520,7 +529,9 @@ CollapsibleChannelProblem<ELEMENT>::CollapsibleChannelProblem(
 
  //Set the constitutive law
  Constitutive_law_pt = new IsotropicStrainEnergyFunctionConstitutiveLaw(
-  new GeneralisedMooneyRivlin(0.1,1.0,0.5));
+  new GeneralisedMooneyRivlin(&Global_Physical_Variables::Nu,
+                              &Global_Physical_Variables::C1,
+                              &Global_Physical_Variables::E));
  
  
  // Loop over the elements to set up element-specific 

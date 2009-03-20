@@ -33,8 +33,11 @@
 #include "HYPRE.h"
 #include "HYPRE_parcsr_ls.h"
 #include "HYPRE_krylov.h"
+#include "HYPRE_IJ_mv.h"
+#include "HYPRE_parcsr_mv.h"
 
 // OOMPH-LIB includes
+#include "linear_algebra_distribution.h"
 #include "linear_solver.h"
 #include "preconditioner.h"
 
@@ -62,7 +65,7 @@ namespace oomph
    ///   created\n
    /// + If MPI and distributed input vector the distributed output vectors
    ///   are created.\n
-   void create_HYPRE_Vector(const DoubleVector& oomph_vec,
+   extern void create_HYPRE_Vector(const DoubleVector& oomph_vec,
                             const LinearAlgebraDistribution* dist_pt,
                             HYPRE_IJVector& hypre_ij_vector,
                             HYPRE_ParVector& hypre_par_vector);
