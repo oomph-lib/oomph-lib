@@ -134,7 +134,7 @@ namespace oomph
     }
 
    /// Destructor (empty)
-   ~BlockPreconditioner()
+   virtual ~BlockPreconditioner()
     {   
      this->clean_memory();
     }

@@ -58,7 +58,7 @@ class CRDoubleMatrix;
   
   /// \short Constructor for a DoubleVector of size ZERO.
   DoubleVector()
-  : Values_pt(0)
+  : Values_pt(0), Internal_values(true)
   {}
  
  /// \short Constructor. Assembles a DoubleVector with a prescribed

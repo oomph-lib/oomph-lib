@@ -167,7 +167,11 @@ namespace oomph
      // previously -- if setup() is called again, data can
      // be wiped.
      Preconditioner_has_been_setup = false;
-     
+
+     // By default we use SuperLU for both p and f blocks
+     Using_default_p_preconditioner=true;
+     Using_default_f_preconditioner=true;
+
      // resize the mesh pt
      Mesh_pt.resize(1);
      Mesh_pt[0] = 0;

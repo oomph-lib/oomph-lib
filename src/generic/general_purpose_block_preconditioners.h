@@ -196,7 +196,7 @@ namespace oomph
                                                   DoubleMatrixBase* matrix_pt)
   {
    // clean the memory
-   this->clean_memory();
+   this->clean_up_memory();
 
    //setup the blocks look up schemes
    this->block_setup(problem_pt,matrix_pt);

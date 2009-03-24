@@ -144,6 +144,7 @@ public:
        OOMPH_EXCEPTION_LOCATION);
      }
    }
+  delete elem_pt;
  }
 #endif
 

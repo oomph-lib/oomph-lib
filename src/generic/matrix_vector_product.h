@@ -109,11 +109,11 @@ namespace oomph {
      delete[] Global_cols;
 #endif
      delete Epetra_comm_pt;
-     delete Column_distribution_pt;
      delete Epetra_col_map_pt;
 #else
      delete Oomph_matrix_pt;
 #endif
+     delete Column_distribution_pt;
     }
 
    /// \short Setup the matrix vector product operator.\n
