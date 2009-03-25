@@ -431,7 +431,7 @@ class GeneralisedMooneyRivlin : public StrainEnergyFunction
 ///    a separate equation for the pressure. Generally this takes the
 ///    form
 ///    \f[
-///    p = \kappa \ d
+///    p = - \kappa \ d
 ///    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (4) 
 ///    \f]
 ///    where \f$ \kappa \f$ is the "bulk modulus", a material property
@@ -444,7 +444,7 @@ class GeneralisedMooneyRivlin : public StrainEnergyFunction
 ///    any change in volume. To facilitate the implementation of
 ///    (4) as the equation for the pressure, we re-write it in the form
 ///    \f[
-///    p \ \frac{1}{\kappa} -  d\big(g_{ij},G_{ij}\big) = 0
+///    p \ \frac{1}{\kappa} +  d\big(g_{ij},G_{ij}\big) = 0
 ///    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (5) 
 ///    \f]
 ///    which only involves quantities that remain finite 

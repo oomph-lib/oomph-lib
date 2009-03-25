@@ -81,7 +81,7 @@ namespace oomph
   // type 0: velocity - corresponding to DOFs 0 to n-2
   // type 1: pressure - corresponding to DOF n-1
   double t_block_start = TimingHelpers::timer();
-  unsigned ndof_types = Mesh_pt[0]->element_pt(0)->ndof_types();
+  unsigned ndof_types = this->ndof_types();
   Vector<unsigned> dof_to_block_map(ndof_types);
   dof_to_block_map[ndof_types-1]=1;
   this->block_setup(problem_pt,matrix_pt,dof_to_block_map);
@@ -788,9 +788,6 @@ namespace oomph
            {
             el2d_pt->get_velocity_mass_matrix_diagonal(el_vmm_diagonal);
            }
-//          dynamic_cast< NavierStokesEquations<2>* >
-//           ( Mesh_pt[0]->element_pt(e) )
-//           ->get_velocity_mass_matrix_diagonal(el_vmm_diagonal);
          }
         else
          {
@@ -800,9 +797,6 @@ namespace oomph
            {
             el3d_pt->get_velocity_mass_matrix_diagonal(el_vmm_diagonal);
            }
-//          dynamic_cast< NavierStokesEquations<3>* >
-//           ( Mesh_pt[0]->element_pt(e) )
-//          ->get_velocity_mass_matrix_diagonal(el_vmm_diagonal);
          }
 
         // get the contribution for each dof

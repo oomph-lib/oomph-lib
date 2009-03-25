@@ -284,7 +284,20 @@ namespace oomph
    /// \short return the number of DOF types
    unsigned ndof_types() const
     {
-     return Ndof_types;
+     if (this->Master_block_preconditioner_pt != 0)
+      {
+       return Ndof_types;
+      }
+     else
+      {
+       unsigned nmesh = Mesh_pt.size();
+       unsigned ndof = 0;
+       for (unsigned i = 0; i < nmesh; i++)
+        {
+         ndof += Mesh_pt[i]->element_pt(0)->ndof_types();
+        }
+       return ndof;
+      }
     }
 
    /// \short Access to i-th mesh (of the various meshes that
@@ -928,7 +941,7 @@ namespace oomph
 
      // How many meshes to we have?
      unsigned n_mesh=Mesh_pt.size();
-
+    
      // Set Mesh_pt to the Problem' Mesh if nobody has made any
      // other assigment
      if (n_mesh==0)

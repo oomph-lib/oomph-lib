@@ -230,8 +230,10 @@ class CRDoubleMatrix;
  /// the local vector
  double* Values_pt;
 
- ///
+ /// \short Boolean flag to indicate whether the vector's data (values_pt) 
+ /// is owned by this vector.
  bool Internal_values;
+
 }; //end of DoubleVector                 
 } // end of oomph namespace
 #endif

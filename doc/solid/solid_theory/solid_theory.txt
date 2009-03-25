@@ -259,7 +259,7 @@ for compressible/incompressible/near-incompressible behaviour:
    plays the role of a pressure. In such cases, the 
    stress tensor has the form
    \f[
-   \sigma^{ij} = p G^{ij} + 
+   \sigma^{ij} = -p G^{ij} + 
    \overline{\sigma}^{ij}\big(\gamma_{kl}\big),
    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @E[incompressible_const]@  
    \f]
@@ -285,7 +285,7 @@ for compressible/incompressible/near-incompressible behaviour:
    its deviatoric and hydrostatic parts by writing the
    constitutive law in the form
    \f[
-   \sigma^{ij} = p G^{ij} + 
+   \sigma^{ij} = -p G^{ij} + 
    \overline{\sigma}^{ij}\big(\gamma_{kl}\big),
    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @E[nearly_incompressible_const]@
    \f]
@@ -301,7 +301,7 @@ for compressible/incompressible/near-incompressible behaviour:
    an additional equation for the pressure. Generally this takes the
    form
    \f[
-   p = \kappa \ d,
+   p = - \kappa \ d,
    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @E[bulk_eqn]@
    \f]
    where \f$ \kappa \f$ is the "bulk modulus", a material property
@@ -315,7 +315,7 @@ for compressible/incompressible/near-incompressible behaviour:
    (@R[bulk_eqn]@) as the equation for the pressure, we re-write 
    it in the form
    \f[
-   p \ \frac{1}{\kappa} -  d\big(g_{ij},G_{ij}\big) = 0,
+   p \ \frac{1}{\kappa} + d\big(g_{ij},G_{ij}\big) = 0,
    \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @E[bulk_eqn_rewritten]@ 
    \f]
    which only involves quantities that remain finite 
@@ -365,7 +365,7 @@ B^{ij} = I_{1} g^{ij} - g^{ir}g^{js}G_{rs}
 
  The abstract base class \c StrainEnergyFunction provides the interfaces \f$
  W(\gamma_{ij}) \f$ and \f$ W(I_{1},I_{2},I_{3}) \f$ and should be
- used as the template for all strain-energy functions.
+ used as the base class for all strain-energy functions.
  A class \c
  StrainEnergyFunctionConstitutiveLaw that inherits from \c
  ConstitutiveLaw uses a specified  strain-energy function 
@@ -387,7 +387,7 @@ first re-write equation (@R[continuous_pdv]@) as
  - \oint_{A_{tract}} {\bf T}^* \cdot \delta {\bf R}^* \ dA^* =0,
   \ \ \ \ \ \ \ \ @E[dim_continuous_pdv]@
  \f]
-where have used asterisks to label those
+where we have used asterisks to label those
 dimensional quantities that will have non-dimensional equivalents.
 (Some quantities, such as the strain, are already
 dimensionless, while others, such as the density will not have
@@ -509,53 +509,73 @@ increases the mass of the tumour).
 
 It is easy to incorporate such growth processes into our 
 theorertical framework. The general idea is sketched in the 
-following figure:
+following figures:
 
 
 
 
 
 
-
+<CENTER>
 <TABLE>
 <TR>
 <TD COLSPAN=2>
+<center><b>State 0:</b></center>
+
 <CENTER>
 @I w 0.35\textwidth  Isotropic_growth_0 " "
-\n <B> State 0:</B> Undeformed, ungrown and 
+\n Undeformed, ungrown and 
 stress-free reference configuration.
 </CENTER>
 </TD>
 </TR>
+</TABLE>
+</CENTER>
+
+
+<TABLE>
 <TR>
 <TD>
+<center><b>(Hypothetical) state U1:</b></center>
+
 @I w 0.35\textwidth Isotropic_growth_U1 " "
-\n <B> (Hypothetical) state U1:</B> The individual infinitesimal 
-material elements
+
+\n The individual infinitesimal material elements
 have expanded (or contracted) isotropically and the elements are in 
 a stress-free state. The isotropic growth
 is spatially uniform -- all elements have expanded (or contracted) 
 by the same amount.
 </TD>
 <TD>
+<center><b>(Hypothetical) state N1:</b></center>
+
 @I w 0.35\textwidth Isotropic_growth_N1 " "
-\n<B> (Hypothetical) state N1:</B>  All infinitesimal material elements
+
+\n All infinitesimal material elements
 have expanded (or contracted) isotropically and the elements are in 
 a stress-free state. The isotropic growth
 is spatially non-uniform, so individual elements
 have grown (or contracted) by different amounts.
 </TD>
 </TR>
+</TABLE>
+
+
+<TABLE>
 <TR>
 <TD>
+<center><b>State U2:</b></center>
+
 @I w 0.35\textwidth Isotropic_growth_U2 " "
-\n<B> State U2:</B> Since the isotropically-grown infinitesimal
+\n Since the isotropically-grown infinitesimal
  material elements have grown (or contracted) by the same amount, they can
  be (re-)assembled to form a continuous, stress-free body. 
 </TD>
 <TD>
+<center><b>State N2:</b></center>
+
 @I w 0.35\textwidth Isotropic_growth_N2 " "
-\n<B> State N2:</B> Since the individual material elements have
+\n Since the individual material elements have
 grown (or contracted) by different amounts they can (in general) 
 not be (re-)assembled to form a continous body without undergoing 
 some deformation. The deformation of the material elements (relative to their
@@ -563,10 +583,17 @@ stress-free shape in the hypothetical, stress-free state N1)
 induces internal stresses -- the so-called growth-stresses.
 </TD>
 </TR>
+</TABLE>
+
+
+
+<TABLE>
 <TR>
 <TD>
+<center><b>State UE:</b></center>
+
 @I w 0.35\textwidth Isotropic_growth_UE " "
-\n<B> State UE:</B> When subjected to external tractions 
+\n When subjected to external tractions 
 and to body forces, the uniformly-grown material elements deform. Their
 deformation (relative to their stress-free shape in state
 U1 (or, equivalently, U2), generates internal stresses which
@@ -574,8 +601,10 @@ U1 (or, equivalently, U2), generates internal stresses which
 - keep all infinitesimal material elements in local equilibrium.
 </TD>
 <TD>
+<center><b>State NE:</b></center>
+
 @I w 0.35\textwidth Isotropic_growth_NE " "
-\n<B> State NE:</B>  When subjected to external tractions 
+\n  When subjected to external tractions 
 and to body forces, the material elements deform further. Their
 deformation (relative to their stress-free shape in state
 N1), generates internal stresses which
@@ -1056,9 +1085,12 @@ member functions:
   to the unknown nodal positions, and with respect to any
   additional unknown solid mechanics variables (e.g. pressures). The
   derivatives with respect to the nodal positions result in 
-  fairly complex algebraic expressions and in our experience it
-  is more efficient to evaluate these entries by finite
-  differencing.  Examples are given by the \c PVDEquations and the 
+  fairly complex algebraic expressions and it is sometimes
+  more efficient to evaluate these entries by finite
+  differencing. By default, the derivatives are evaluated analytically
+  using carefully optimised assembly loops, but
+  a finite-difference-base evaluation can be activated instead;
+  see the detailed description of the \c PVDEquations and the 
   \c PVDEquationsWithPressure classes.
 
 
@@ -1082,7 +1114,7 @@ whose key additional features are:
   \endcode
   which assigns the current Eulerian coordinates of all \c Nodes
   to their Lagrangian coordinates, thus turning the current
-  configuration into the reference configuration. This function
+  configuration into the stress-free reference configuration. This function
   greatly facilitates the construction of \c SolidMeshes via
   inheritance from existing \c Meshes. If, for instance, \c SomeMesh
   is an existing, fully functional \c Mesh, the corresponding
@@ -1218,7 +1250,7 @@ f_{il}^{(1)} = \int \left( \sum_{j=1}^N X_{ij}^{(1)} \psi_j(\xi^k)
 \ \ \ \ \ \ \ \ \ \ \ \ \ @E[weak_initial_veloc]@
 \f]
 for the initial nodal velocities, \f$ X_{ij}^{(1)} \f$ (where
-\f$i=1,...3; \ j=1,...,N)\f$. Finally, assuminig that we have 
+\f$i=1,...3; \ j=1,...,N)\f$. Finally, assuming that we have 
 an exact solution for the accelerations, we solve
 \f[
 f_{il}^{(2)} = \int \left( \sum_{j=1}^N X_{ij}^{(2)} \psi_j(\xi^k) 
@@ -1368,7 +1400,7 @@ the multiplier is given by the timescale ratio
 growth, \f$\Gamma \ne 1\f$, the multiplier is equal to 
 \f$\Gamma \Lambda^2\f$. 
 If the wrong multiplier is specified (or if it is omitted, in
-which the default value of 1.0 is used) the residuals (@R[fe_pvd]@)
+which case the default value of 1.0 is used) the residuals (@R[fe_pvd]@)
 will be nonzero (or at least larger than the tolerance specified in \c
 SolidICProblem). In this case a warning is issued and the
 code execution terminates. This behaviour can be suppressed

@@ -191,8 +191,8 @@ UnstructuredSolidProblem<ELEMENT>::UnstructuredSolidProblem()
                                             element_file_name,
                                             face_file_name);
  
- // The following corresponds to the boundaries as specified by
- // facets in the tetgen input:
+ // The following IDs corresponds to the boundary IDs specified in
+ // the *.poly file from which tetgen generated the unstructured mesh.
  
  /// IDs of solid mesh boundaries where displacements are pinned
  Pinned_solid_boundary_id.resize(3);
@@ -355,14 +355,6 @@ void UnstructuredSolidProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  unsigned npts;
  npts=5;
 
- // Output domain boundaries
- //-------------------------
- sprintf(filename,"%s/boundaries%i.dat",doc_info.directory().c_str(),
-         doc_info.number());
- some_file.open(filename);
- Solid_mesh_pt->output_boundaries(some_file);
- some_file.close();
-
  // Output solid solution
  //-----------------------
  sprintf(filename,"%s/solid_soln%i.dat",doc_info.directory().c_str(),
@@ -383,7 +375,8 @@ void UnstructuredSolidProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
    Solid_traction_mesh_pt[i]->output(some_file,npts);
   }
  some_file.close();
-}
+
+} // end doc
 
 
 
@@ -416,7 +409,7 @@ int main(int argc, char **argv)
  double p_increment=1.0e-2; 
 
  unsigned nstep=6;
- if (CommandLineArgs::Argc==2)
+ if (CommandLineArgs::Argc!=1)
   {
    std::cout << "Validation -- only doing two steps" << std::endl;
    nstep=2;
