@@ -40,7 +40,7 @@ $!VARSET |first_tract|=(|NUMZONES|+1)
 
 $!FIELDMAP [1-|nbulk|]  GROUP = 2
 
-$!READDATASET  '"RESLT/fsi_traction0.dat" ' 
+$!READDATASET  '"RESLT/fsi_traction|step|.dat" ' 
   READDATAOPTION = APPEND
   RESETSTYLE = NO
   INCLUDETEXT = NO

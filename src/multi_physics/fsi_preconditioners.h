@@ -114,7 +114,24 @@ public :
   {
    BrokenCopy::broken_assign("FSIPreconditioner");
   }
-
+ 
+/// Set solid preconditioner (deletes existing one)
+ void set_solid_preconditioner_pt(Preconditioner* solid_preconditioner_pt)
+ {
+  // Kill existing one
+  if (Solid_preconditioner_pt!=0)
+   {
+    delete Solid_preconditioner_pt;
+   }
+  Solid_preconditioner_pt=solid_preconditioner_pt;
+ }
+ 
+ /// Read-only access to solid preconditoner (use set_... to set it)
+ Preconditioner* solid_preconditioner_pt() const
+ {
+  return Solid_preconditioner_pt;
+ }
+ 
 
  /// Switch to block-diagonal preconditioner
  void use_block_diagonal_version()
@@ -398,7 +415,6 @@ void FSIPreconditioner::preconditioner_solve(const DoubleVector &r,
  //-------------------------------------------------------------
  if (Retain_solid_onto_fluid_terms)
   {
-
    // Working vectors
    DoubleVector temp_solid_vec;
    DoubleVector temp_fluid_vec;

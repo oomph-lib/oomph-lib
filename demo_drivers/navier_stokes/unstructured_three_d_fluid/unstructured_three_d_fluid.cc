@@ -259,11 +259,13 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  unsigned n_element = Fluid_mesh_pt->nelement();
  for(unsigned e=0;e<n_element;e++)
   {
+
    // Upcast from GeneralisedElement to the present element
    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(e));
    
    //Set the Reynolds number
    el_pt->re_pt() = &Global_Parameters::Re;   
+
   } // end loop over elements
  
  
@@ -438,6 +440,7 @@ int main(int argc, char **argv)
    nstep=2;
   }
  
+ // Parameter study: Crank up the pressure drop along the vessel
  for (unsigned istep=0;istep<nstep;istep++)
   {
    // Solve the problem

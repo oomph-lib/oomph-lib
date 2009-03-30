@@ -5,8 +5,6 @@ $!VARSET |nstep|=1
 $!VARSET |dstep|=1
 
 $!VARSET |PNG|=0
-$!VARSET |potential|=1
-
 $!NEWLAYOUT 
 
 $!IF |PNG|==0
@@ -55,63 +53,38 @@ $!THREEDAXIS YDETAIL{SHOWAXIS = NO}
 $!THREEDAXIS ZDETAIL{SHOWAXIS = NO}
 
 
-$!IF |potential|==1
-
-        $!CREATERECTANGULARZONE 
-          IMAX = 2
-          JMAX = 2
-          KMAX = 2
-          X1 = -1
-          Y1 = -1
-          Z1 = -1
-          X2 = 1
-          Y2 = 1
-          Z2 = 2
-          XVAR = 1
-          YVAR = 2
-          ZVAR = 3
-
-$!ELSE
-
-        $!CREATERECTANGULARZONE 
-          IMAX = 2
-          JMAX = 2
-          KMAX = 2
-          X1 = -3
-          Y1 = -3
-          Z1 = -1
-          X2 = 5
-          Y2 = 5
-          Z2 = 12
-          XVAR = 1
-          YVAR = 2
-          ZVAR = 3
-
-
-$!ENDIF
-
-
-
+#        $!CREATERECTANGULARZONE 
+#          IMAX = 2
+#          JMAX = 2
+#          KMAX = 2
+#          X1 = -3
+#          Y1 = -3
+#          Z1 = -1
+#          X2 = 5
+#          Y2 = 5
+#          Z2 = 12
+#          XVAR = 1
+#          YVAR = 2
+#          ZVAR = 3
 $!ACTIVEFIELDMAPS += [|NUMZONES|]
-
-$!FIELDMAP [|NUMZONES|]  SHADE{SHOW = NO}
-$!FIELDMAP [|NUMZONES|]  CONTOUR{SHOW = NO}
-$!FIELDMAP [|NUMZONES|]  EDGELAYER{COLOR = BLUE}
+#$!FIELDMAP [|NUMZONES|]  SHADE{SHOW = NO}
+#$!FIELDMAP [|NUMZONES|]  CONTOUR{SHOW = NO}
+#$!FIELDMAP [|NUMZONES|]  EDGELAYER{COLOR = BLUE}
 #$!ACTIVEFIELDMAPS -= [|NUMZONES|]
 
 
-$!ATTACHTEXT 
-  ANCHORPOS
-    {
-    X = 25.44169611307421
-    Y = 89.59294984029967
-    }
-  TEXTSHAPE
-    {
-    FONT = HELV
-    HEIGHT = 12
-    }
-  TEXT = 'step:  |step|' 
+#$!ATTACHTEXT 
+#  ANCHORPOS
+#    {
+#    X = 25.44169611307421
+#    Y = 89.59294984029967
+#    }
+#  TEXTSHAPE
+#    {
+#    FONT = HELV
+#    HEIGHT = 12
+#    }
+#  TEXT = 'step:  |step|' 
 
 
 $!GLOBALTHREED 

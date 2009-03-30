@@ -1,7 +1,7 @@
 #!MC 1100
 
 $!VARSET |lostep|=0
-$!VARSET |nstep|=7. 
+$!VARSET |nstep|=5 
 $!VARSET |dstep|=1
 
 $!VARSET |PNG|=0
