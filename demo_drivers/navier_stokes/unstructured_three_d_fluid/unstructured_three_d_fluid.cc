@@ -32,7 +32,6 @@
 
 //Generic routines
 #include "generic.h"
-#include "solid.h"
 #include "constitutive.h"
 #include "navier_stokes.h"
 
@@ -91,7 +90,7 @@ namespace Global_Parameters
 
 
 
-//====================================================================
+//======start_problem_class===========================================
 /// Unstructured fluid problem
 //====================================================================
 template<class ELEMENT>
@@ -156,14 +155,12 @@ private:
 
 
 
-//========================================================================
-/// Constructor for unstructured fluid problem
+//==========start_constructor=============================================
+/// Constructor for unstructured 3D fluid problem
 //========================================================================
 template<class ELEMENT>
 UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
 { 
-
-
 
  // Define fluid mesh and its distinguished boundaries
  //---------------------------------------------------
@@ -178,7 +175,6 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
                                           face_file_name,
                                           split_corner_elements);
  
-
  // Find elements next to boundaries
  Fluid_mesh_pt->setup_boundary_element_info();
 
@@ -410,8 +406,8 @@ void UnstructuredFluidProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
 
 
-//========================================================================
-/// Demonstrate how to solve an unstructured solid problem
+//=============start_main=================================================
+/// Demonstrate how to solve an unstructured 3D fluids problem
 //========================================================================
 int main(int argc, char **argv)
 {
@@ -455,7 +451,7 @@ int main(int argc, char **argv)
    Global_Parameters::P_out-=p_increment;   
   }
  
-}
+} // end_of_main
 
 
 

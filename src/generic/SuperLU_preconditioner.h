@@ -151,7 +151,7 @@ class SuperLUDistPreconditioner : public Preconditioner
      oomph_info << "Setting up SuperLU Dist (exact) preconditioner" 
      		<< std::endl;
                 
-    // Wipe prev        iously allocated memory
+    // Wipe previously allocated memory
     clean_up_memory();  
     
     if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt) != 0)

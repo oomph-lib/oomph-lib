@@ -538,7 +538,7 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
     set_defaults_for_2D_poisson_problem(p_preconditioner_pt);
    
    // Pass to preconditioner
-   //prec_pt->set_p_preconditioner(*p_preconditioner_pt);
+   //prec_pt->set_p_preconditioner(p_preconditioner_pt);
    
    
    // Create internal preconditioner used on momentum block
@@ -554,7 +554,7 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
     set_defaults_for_navier_stokes_momentum_block(f_preconditioner_pt);
    
    // Use Hypre for momentum block
-   //prec_pt->set_f_preconditioner(*f_preconditioner_pt);
+   //prec_pt->set_f_preconditioner(f_preconditioner_pt);
 
 #endif
    

@@ -1347,7 +1347,7 @@ for (unsigned i = 0; i < nrow_local; i++)
 /// and compute residual vectors.
 /// The default action is to assemble the jacobian matrix and 
 /// residuals for the Newton method. The action can be
-/// overloaded at an elemental level by chaging the default
+/// overloaded at an elemental level by changing the default
 /// behaviour of the function Element::get_all_vectors_and_matrices().
 /// column_or_row_index: Column [or row] index of given entry
 /// row_or_column_start: Index of first entry for given row [or column]

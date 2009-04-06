@@ -9,7 +9,7 @@ unstructured_three_d_fluid_SOURCES = unstructured_three_d_fluid.cc
 
 # Required libraries: 
 # $(FLIBS) is included in case the solver involves fortran sources.
-unstructured_three_d_fluid_LDADD = -L@libdir@ -lsolid -lconstitutive -lnavier_stokes -lgeneric \
+unstructured_three_d_fluid_LDADD = -L@libdir@ -lnavier_stokes -lgeneric \
                            $(EXTERNAL_LIBS) $(FLIBS)
 
 EXTRA_DIST+= fsi_bifurcation_fluid.1.ele   fsi_bifurcation_fluid.1.node \

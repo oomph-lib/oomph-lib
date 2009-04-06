@@ -302,7 +302,7 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem(
       static_cast<HyprePreconditioner*>(P_matrix_preconditioner_pt));
      
      // Use Hypre for the Schur complement block
-     Prec_pt->set_p_preconditioner(*P_matrix_preconditioner_pt);
+     Prec_pt->set_p_preconditioner(P_matrix_preconditioner_pt);
      
      // Shut up!
      static_cast<HyprePreconditioner*>(P_matrix_preconditioner_pt)->
@@ -326,7 +326,7 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem(
       }
 #endif
        // Use Hypre for momentum block 
-       Prec_pt->set_f_preconditioner(*F_matrix_preconditioner_pt);
+       Prec_pt->set_f_preconditioner(F_matrix_preconditioner_pt);
     }
    else
     {
@@ -345,7 +345,7 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem(
         static_cast<HyprePreconditioner*>(F_matrix_preconditioner_pt));
        
        // Use Hypre for momentum block 
-       Prec_pt->set_f_preconditioner(*F_matrix_preconditioner_pt);
+       Prec_pt->set_f_preconditioner(F_matrix_preconditioner_pt);
       }
 #endif
     }

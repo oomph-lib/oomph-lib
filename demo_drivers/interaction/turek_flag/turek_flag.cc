@@ -834,7 +834,8 @@ TurekProblem(const double &length,
   set_defaults_for_2D_poisson_problem(P_hypre_solver_pt);
 
  // Use Hypre for the Schur complement block
- prec_pt->navier_stokes_preconditioner_pt()->set_p_preconditioner(*P_matrix_preconditioner_pt);
+ prec_pt->navier_stokes_preconditioner_pt()->
+  set_p_preconditioner(P_matrix_preconditioner_pt);
 
  // Shut up
  P_hypre_solver_pt->doc_time()=false;

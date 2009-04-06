@@ -1928,7 +1928,7 @@ int main(int argc, char *argv[])
       static_cast<HyprePreconditioner*>(p_preconditioner_pt);
      Hypre_default_settings::
       set_defaults_for_2D_poisson_problem(hypre_preconditioner_pt);
-     ns_preconditioner_pt->set_p_preconditioner(*p_preconditioner_pt);
+     ns_preconditioner_pt->set_p_preconditioner(p_preconditioner_pt);
 #endif
     }
 #endif
@@ -1938,7 +1938,7 @@ int main(int argc, char *argv[])
     {
 #ifdef HAVE_TRILINOS
      p_preconditioner_pt = new TrilinosMLPreconditioner;
-     ns_preconditioner_pt->set_p_preconditioner(*p_preconditioner_pt);
+     ns_preconditioner_pt->set_p_preconditioner(p_preconditioner_pt);
 #endif
     }
 #endif
@@ -1957,7 +1957,7 @@ int main(int argc, char *argv[])
      hypre_preconditioner_pt->amg_simple_smoother()=f_bamg_smoother;
      hypre_preconditioner_pt->amg_damping()=f_bamg_damping;
      hypre_preconditioner_pt->amg_strength()=f_bamg_strength;
-     ns_preconditioner_pt->set_f_preconditioner(*f_preconditioner_pt);
+     ns_preconditioner_pt->set_f_preconditioner(f_preconditioner_pt);
 #endif 
    }
 #endif
@@ -1977,7 +1977,7 @@ int main(int argc, char *argv[])
       {
        trilinos_preconditioner_pt->set_SA_default_values();
       }
-     ns_preconditioner_pt->set_f_preconditioner(*f_preconditioner_pt);
+     ns_preconditioner_pt->set_f_preconditioner(f_preconditioner_pt);
 #endif
     }
 #endif

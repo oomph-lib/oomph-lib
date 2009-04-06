@@ -466,7 +466,7 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
 
       // Use Hypre for the Schur complement block
       prec_pt->navier_stokes_preconditioner_pt()->
-       set_p_preconditioner(*P_matrix_preconditioner_pt);
+       set_p_preconditioner(P_matrix_preconditioner_pt);
 
       // Shut up
       P_matrix_preconditioner_pt->doc_time()=false;

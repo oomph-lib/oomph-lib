@@ -236,12 +236,12 @@ namespace oomph
    unsigned& mult_method() {return Mult_method;}
 
    /// Function to set a new pressure matrix preconditioner (inexact solver)
-   void set_p_preconditioner(Preconditioner& new_p_preconditioner)
+   void set_p_preconditioner(Preconditioner* new_p_preconditioner_pt)
    {
     // If the default preconditioner has been used
     // clean it up now...
     P_superlu_preconditioner.clean_up_memory();
-    P_preconditioner_pt = &new_p_preconditioner;
+    P_preconditioner_pt = new_p_preconditioner_pt;
    }
 
    /// \short Function to (re-)set pressure matrix preconditioner  (inexact 
@@ -252,12 +252,12 @@ namespace oomph
    }
 
    /// Function to set a new momentum matrix preconditioner (inexact solver)
-   void set_f_preconditioner(Preconditioner& new_f_preconditioner)
+   void set_f_preconditioner(Preconditioner* new_f_preconditioner_pt)
    {
     // If the default preconditioner has been used
     // clean it up now...
     F_superlu_preconditioner.clean_up_memory();
-    F_preconditioner_pt = &new_f_preconditioner;
+    F_preconditioner_pt = new_f_preconditioner_pt;
    }
 
    ///\short Function to (re-)set momentum matrix preconditioner (inexact 
