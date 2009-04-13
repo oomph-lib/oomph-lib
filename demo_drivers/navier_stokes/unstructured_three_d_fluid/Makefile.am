@@ -12,6 +12,13 @@ unstructured_three_d_fluid_SOURCES = unstructured_three_d_fluid.cc
 unstructured_three_d_fluid_LDADD = -L@libdir@ -lnavier_stokes -lgeneric \
                            $(EXTERNAL_LIBS) $(FLIBS)
 
-EXTRA_DIST+= fsi_bifurcation_fluid.1.ele   fsi_bifurcation_fluid.1.node \
-fsi_bifurcation_fluid.1.face  fsi_bifurcation_fluid.poly  \
+
+EXTRA_DIST+= fsi_bifurcation_fluid.poly  \
+fsi_bifurcation_fluid.1.ele  \
+fsi_bifurcation_fluid.1.node \
+fsi_bifurcation_fluid.1.face \
+fsi_bifurcation_fluid_with_extended_tubes.poly   \
+fsi_bifurcation_fluid_with_extended_tubes.1.node \
+fsi_bifurcation_fluid_with_extended_tubes.1.ele  \
+fsi_bifurcation_fluid_with_extended_tubes.1.face \
 three_d_unstructured_fluid.mcr

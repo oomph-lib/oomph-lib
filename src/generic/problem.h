@@ -289,6 +289,36 @@ namespace oomph
   unsigned long& n_row_or_column,
   unsigned long& n_tot,
   bool compressed_row_flag);
+
+ /// \short Set default first and last elements for parallel assembly
+ /// of non-distributed problem.
+ void set_default_first_and_last_element_for_assembly();
+
+ /// \short Helper function to re-assign the first and last elements to be 
+ /// assembled by each processor during parallel assembly for 
+ /// non-distributed problem. On each processor the vector 
+ /// elemental_assembly_time must contain the timings for the assembly
+ /// of the elements. Each processor ONLY fills in the timings for
+ /// elements it's in charge of when using the default distribution
+ /// which is re-assigned every time assign_eqn_numbers() is called.
+ /// First and last elements are then re-assigned to load-balance
+ /// any subsequent assemblies.
+ void recompute_load_balanced_assembly(Vector<double>& elemental_assembly_time);
+
+
+ /// \short First element to be assembled by given processor for non-distributed
+ /// problem (only kept up to date when default assingment is used)
+ Vector<unsigned> First_el_for_assembly;
+
+ /// \short Last element to be assembled by given processor for non-distributed
+ /// problem (only kept up to date when default assingment is used)
+ Vector<unsigned> Last_el_for_assembly;
+
+ /// \short Boolean indicating that the division of elements over processors
+ /// during the assembly process must be re-load-balanced.
+ /// (only used for non-distributed problems)
+ bool Must_recompute_load_balance_for_assembly;
+
 #endif
 
 protected:

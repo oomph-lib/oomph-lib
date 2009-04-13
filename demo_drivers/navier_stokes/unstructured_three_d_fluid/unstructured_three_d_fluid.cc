@@ -57,7 +57,7 @@ namespace Global_Parameters
  double Re=100.0;
 
  /// Fluid pressure on inflow boundary
- double P_in=10.0;
+ double P_in=0.5;
 
  /// Applied traction on fluid at the inflow boundary
  void prescribed_inflow_traction(const double& t,
@@ -71,7 +71,7 @@ namespace Global_Parameters
 
 
  /// Fluid pressure on outflow boundary
- double P_out=-10.0; 
+ double P_out=-0.5; 
 
  /// Applied traction on fluid at the inflow boundary
  void prescribed_outflow_traction(const double& t,
@@ -161,11 +161,8 @@ private:
 template<class ELEMENT>
 UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
 { 
-
- // Define fluid mesh and its distinguished boundaries
- //---------------------------------------------------
  
-   //Create fluid bulk mesh, sub-dividing "corner" elements
+ //Create fluid bulk mesh, sub-dividing "corner" elements
  string node_file_name="fsi_bifurcation_fluid.1.node";
  string element_file_name="fsi_bifurcation_fluid.1.ele";
  string face_file_name="fsi_bifurcation_fluid.1.face";
@@ -223,7 +220,8 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
      // Done!
      done[b]=true;
     }
-  }
+
+  } // done in and outflow
  
  
  
@@ -232,6 +230,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  unsigned nbound=Fluid_mesh_pt->nboundary();
  for(unsigned b=0;b<nbound;b++)
   {
+
    // Has the boundary been done yet?
    if (!done[b])
     {
@@ -247,7 +246,8 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
        nod_pt->pin(2); 
       }
     }
-  } 
+
+  } // done no slip elsewhere 
  
  
  // Complete the build of the fluid elements so they are fully functional
@@ -262,7 +262,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
    //Set the Reynolds number
    el_pt->re_pt() = &Global_Parameters::Re;   
 
-  } // end loop over elements
+  } 
  
  
  // Create meshes of fluid traction elements at inflow/outflow
@@ -301,7 +301,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  // Setup equation numbering scheme
  std::cout <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
  
-}
+} // end constructor
 
 
 
@@ -383,17 +383,8 @@ void UnstructuredFluidProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  unsigned npts;
  npts=5;
   
- // Output fluid boundaries
- //------------------------
- sprintf(filename,"%s/fluid_boundaries%i.dat",doc_info.directory().c_str(),
-         doc_info.number());
- some_file.open(filename);
- Fluid_mesh_pt->output_boundaries(some_file);
- some_file.close();
- 
  
  // Output fluid solution
- //-----------------------
  sprintf(filename,"%s/fluid_soln%i.dat",doc_info.directory().c_str(),
          doc_info.number());
  some_file.open(filename);
@@ -428,8 +419,8 @@ int main(int argc, char **argv)
  doc_info.number()++;   
 
  // Parameter study
- double p_increment=10.0;
- unsigned nstep=8;
+ double Re_increment=100.0;
+ unsigned nstep=4;
  if (CommandLineArgs::Argc==2)
   {
    std::cout << "Validation -- only doing two steps" << std::endl;
@@ -446,9 +437,9 @@ int main(int argc, char **argv)
    problem.doc_solution(doc_info);
    doc_info.number()++;
 
-   // Bump up pressure drop
-   Global_Parameters::P_in+=p_increment;   
-   Global_Parameters::P_out-=p_increment;   
+   // Bump up Reynolds number (equivalent to increasing the imposed pressure
+   // drop)
+   Global_Parameters::Re+=Re_increment;   
   }
  
 } // end_of_main

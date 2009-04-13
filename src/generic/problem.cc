@@ -57,7 +57,10 @@ namespace oomph
 //===============================================================
  Problem::Problem() : 
   Mesh_pt(0), Time_pt(0), Explicit_time_stepper_pt(0), Saved_dof_pt(0), 
-  Newton_solver_tolerance(1.0e-8),
+#ifdef OOMPH_HAS_MPI
+  Must_recompute_load_balance_for_assembly(true),
+#endif
+  Newton_solver_tolerance(1.0e-8), 
   Max_newton_iterations(10), Max_residuals(10.0),
   Jacobian_reuse_is_enabled(false), Jacobian_has_been_computed(false),
   Problem_is_nonlinear(true),
@@ -449,6 +452,216 @@ namespace oomph
  }
 
 
+#ifdef OOMPH_HAS_MPI
+
+//================================================================
+/// Set default first and last elements for parallel assembly
+/// of non-distributed problem.
+//================================================================
+ void Problem::set_default_first_and_last_element_for_assembly()
+ {
+  // Resize and make default assignments
+  unsigned n_elements=Mesh_pt->nelement();    
+  First_el_for_assembly.resize(MPI_Helpers::Nproc,0);
+  Last_el_for_assembly.resize(MPI_Helpers::Nproc,n_elements-1);
+  
+  // In the absence of any better knowledge distribute work evenly 
+  // over elements
+  unsigned long range = 
+   static_cast<unsigned long>(double(n_elements)/double(MPI_Helpers::Nproc));  
+  for (int p=0;p<MPI_Helpers::Nproc;p++)
+   {
+    First_el_for_assembly[p] = p*range;
+    Last_el_for_assembly[p] = (p+1)*range-1;
+   }
+  
+  // Last one needs to incorporate any dangling elements
+  Last_el_for_assembly[MPI_Helpers::Nproc-1] = n_elements-1;
+ 
+  // Doc
+  if (MPI_Helpers::Nproc>1)
+   {
+    oomph_info << "\nProblem is not distributed. Parallel assembly of "
+               << "Jacobian uses default partitioning: "<< std::endl;
+    for (int p=0;p<MPI_Helpers::Nproc;p++)
+     {
+      oomph_info << "Proc " << p << " assembles from element " 
+                 <<  First_el_for_assembly[p] << " to " 
+                 <<  Last_el_for_assembly[p] << " \n"; 
+     }
+   }
+ }
+ 
+
+//=======================================================================
+/// Helper function to re-assign the first and last elements to be 
+/// assembled by each processor during parallel assembly for 
+/// non-distributed problem. On each processor the vector 
+/// elemental_assembly_time must contain the timings for the assembly
+/// of the elements. Each processor ONLY fills in the timings for
+/// elements it's in charge of when using the default distribution
+/// which is re-assigned every time assign_eqn_numbers() is called.
+/// First and last elements are then re-assigned to load-balance
+/// any subsequent assemblies.
+//=======================================================================
+ void Problem::recompute_load_balanced_assembly(
+  Vector<double>& elemental_assembly_time)
+ {
+  // Wait until all processes have completed/timed their assembly
+  MPI_Barrier(MPI_COMM_WORLD);
+  
+  // Setup vectors storing the number of element timings to be sent
+  // and the offset in the final vector
+  Vector<int> receive_count(MPI_Helpers::Nproc);
+  Vector<int> displacement(MPI_Helpers::Nproc);
+  int offset=0;
+  for (int p=0;p<MPI_Helpers::Nproc;p++)
+   {
+    // Default distribution of labour
+    unsigned el_lo = First_el_for_assembly[p];
+    unsigned el_hi = Last_el_for_assembly[p];;
+     
+    // Number of timings to be sent and offset from start in
+    // final vector
+    receive_count[p]=el_hi-el_lo+1;
+    displacement[p]=offset;
+    offset+=el_hi-el_lo+1;
+   }
+      
+  // Gather timings on root processor: 
+  MPI_Gatherv(
+   &elemental_assembly_time[First_el_for_assembly[MPI_Helpers::My_rank]],
+   Last_el_for_assembly[MPI_Helpers::My_rank]-
+   First_el_for_assembly[MPI_Helpers::My_rank]+1,MPI_DOUBLE,
+   &elemental_assembly_time[0],&receive_count[0],&displacement[0],
+   MPI_DOUBLE,0,MPI_COMM_WORLD);
+   
+  // We have determined load balancing for current setup.
+  // This can remain the same until assign_eqn_numbers() is called
+  // again -- the flag is re-set to true there.
+  Must_recompute_load_balance_for_assembly=false;
+   
+  // Vector of first and last elements for each processor
+  Vector<int> first_and_last_element(2);
+   
+  // Re-distribute work
+  if (MPI_Helpers::My_rank==0)
+   {
+    oomph_info 
+     << std::endl
+     << "Re-assigning distribution of element assembly over processors:" 
+     << std::endl;
+     
+    // Get total assembly time
+    double total=0.0;
+    unsigned n_elements=Mesh_pt->nelement();    
+    for (unsigned e=0;e<n_elements;e++)
+     {
+      total+=elemental_assembly_time[e];
+     }
+     
+    // Target load per processor
+    double target_load=total/double(MPI_Helpers::Nproc);
+     
+    // We're on the root processor: Always start with the first element
+    int proc=0;
+    First_el_for_assembly[0]=0;
+     
+    // Initialise total work allocated
+    total=0.0;
+    for (unsigned e=0;e<n_elements;e++)
+     {
+      total+=elemental_assembly_time[e];
+       
+      if (total>target_load)
+       {
+         
+        // Keep it local on root
+        if (proc==0)
+         {
+          // Last element for current processor
+          Last_el_for_assembly[0]=e;
+           
+          // First element for next one
+          first_and_last_element[0]=e+1;
+           
+          // Doc
+          oomph_info 
+           << "Processor " << 0 << " assembles Jacobians" 
+           <<  " from elements " << First_el_for_assembly[0] << " to " 
+           <<  Last_el_for_assembly[0] << " " 
+           << std::endl;
+         }
+        else if (proc<(MPI_Helpers::Nproc-1))
+         {
+          // Last element for current processor
+          first_and_last_element[1]=e;
+
+          // Send two ints to processor p:
+          MPI_Send(&first_and_last_element[0],2,MPI_INT,proc,0,MPI_COMM_WORLD);
+
+          // Doc
+          oomph_info 
+           << "Processor " << proc << " assembles Jacobians" 
+           <<  " from elements " << first_and_last_element[0] << " to " 
+           <<  first_and_last_element[1] << " " 
+           << std::endl;
+
+
+          // Set first element for next one
+          first_and_last_element[0]=e+1;
+         }
+         
+        // Move on to the next processor
+        proc++;
+         
+        // Re-initialise
+        total=0.0;
+
+       } // end of test for "total exceeds target"
+     }
+     
+    // Last one
+    first_and_last_element[1]=n_elements-1;
+
+    // Send two ints to processor p:
+    MPI_Send(&first_and_last_element[0],2,MPI_INT,MPI_Helpers::Nproc-1,
+             0,MPI_COMM_WORLD);
+     
+    // Doc
+    oomph_info 
+     << "Processor " << MPI_Helpers::Nproc-1 << " assembles Jacobians" 
+     <<  " from elements " << first_and_last_element[0] << " to " 
+     <<  first_and_last_element[1] << " " 
+     << std::endl;
+    
+   }
+  // Receive first and last element from root on non-master processors
+  else
+   {
+    Vector<int> aux(2);
+    MPI_Status status;
+    MPI_Recv(&aux[0],2,MPI_INT,0,0,MPI_COMM_WORLD,&status);
+    First_el_for_assembly[MPI_Helpers::My_rank]=aux[0];
+    Last_el_for_assembly[MPI_Helpers::My_rank]=aux[1];
+   }
+
+  // Wipe all others
+  for (int p=0;p<MPI_Helpers::Nproc;p++)
+   {
+    if (p!=MPI_Helpers::My_rank)
+     {
+      First_el_for_assembly[p]=0;
+      Last_el_for_assembly[p]=0;
+     }
+   }
+
+ }
+ 
+#endif
+
+
+
 //================================================================
 /// Assign all equation numbers for problem: Deals with global
  /// data (= data that isn't attached to any elements) and then
@@ -480,7 +693,27 @@ namespace oomph
       mmesh_pt->synchronise_hanging_nodes(ncont_interpolated_values);
      }
    }
- 
+  // Re-distribution of elements over processors during assembly
+  // must be recomputed
+  else
+   {
+    if (MPI_Helpers::Nproc>1)
+     {
+      // Force re-analysis of time spent on assembly each
+      // elemental Jacobian
+      Must_recompute_load_balance_for_assembly=true;
+     }
+    else
+     {
+      Must_recompute_load_balance_for_assembly=false;
+     }
+
+    // Set default first and last elements for parallel assembly
+    // of non-distributed problem.
+    set_default_first_and_last_element_for_assembly();
+     
+   }
+
 #endif
 
   //(Re)-set the dof pointer to zero length because entries are 
@@ -1463,20 +1696,19 @@ void Problem::sparse_assemble_row_or_column_compressed_with_maps(
 
  // Default range of elements for distributed problems
  unsigned long el_lo=0;
- unsigned long el_hi=n_elements;
+ unsigned long el_hi=n_elements-1;
 
 #ifdef OOMPH_HAS_MPI
  // Otherwise just loop over a fraction of the elements
+ // (This will either have been initialised in
+ // Problem::set_default_first_and_last_element_for_assembly() or
+ // will have been re-assigned during a previous assembly loop
+ // Note that following the re-assignment only the entries
+ // for the current processor are relevant.
  if (!Problem_has_been_distributed)
   {
-   // Distribute work evenly
-   unsigned long range = 
-    static_cast<unsigned long>(double(n_elements)/double(MPI_Helpers::Nproc));
-   el_lo = MPI_Helpers::My_rank*range;
-   el_hi = (MPI_Helpers::My_rank+1)*range;
-   
-   // Last one needs to incorporate any dangling elements
-   if (MPI_Helpers::My_rank==MPI_Helpers::Nproc-1) el_hi = n_elements;
+   el_lo=First_el_for_assembly[MPI_Helpers::My_rank];
+   el_hi=Last_el_for_assembly[MPI_Helpers::My_rank];
   }
 #endif 
 
@@ -1552,6 +1784,23 @@ void Problem::sparse_assemble_row_or_column_compressed_with_maps(
  
  //Resize the residuals vectors
  for(unsigned v=0;v<n_vector;v++) {residuals[v]->resize(n_dof);}
+
+
+#ifdef OOMPH_HAS_MPI
+
+ 
+ // Storage for assembly time for elements
+ double t_assemble_start=0.0;
+ 
+ // Storage for assembly times
+ Vector<double> elemental_assembly_time;
+ if ((!Problem_has_been_distributed)&&
+     Must_recompute_load_balance_for_assembly)
+  {
+   elemental_assembly_time.resize(n_elements);
+  }
+
+#endif
    
  //----------------Assemble and populate the maps-------------------------
  {
@@ -1563,8 +1812,18 @@ void Problem::sparse_assemble_row_or_column_compressed_with_maps(
   Vector<DenseMatrix<double> > el_jacobian(n_matrix);
 
   //Loop over the elements for this processor
-  for(unsigned long e=el_lo;e<el_hi;e++)
+  for(unsigned long e=el_lo;e<=el_hi;e++)
    {
+
+#ifdef OOMPH_HAS_MPI
+    // Time it?
+    if ((!Problem_has_been_distributed)&&
+        Must_recompute_load_balance_for_assembly)
+     {
+      t_assemble_start=TimingHelpers::timer();
+     }
+#endif
+
     //Get the pointer to the element
     GeneralisedElement* elem_pt = mesh_pt()->element_pt(e);
 
@@ -1635,10 +1894,35 @@ void Problem::sparse_assemble_row_or_column_compressed_with_maps(
 #ifdef OOMPH_HAS_MPI
      } // endif halo element
 #endif
+
+
+#ifdef OOMPH_HAS_MPI
+  // Time it?
+  if ((!Problem_has_been_distributed)&&
+      Must_recompute_load_balance_for_assembly)
+   {
+    elemental_assembly_time[e]=TimingHelpers::timer()-t_assemble_start;
+   }
+#endif
+
    } //End of loop over the elements
 
  } //End of map assembly
  
+
+#ifdef OOMPH_HAS_MPI
+ 
+ // Postprocess timing information and re-allocate distribution of
+ // elements during subsequent assemblies.
+ if ((!Problem_has_been_distributed)&&
+     Must_recompute_load_balance_for_assembly)
+  {
+   recompute_load_balanced_assembly(elemental_assembly_time);
+  }
+
+#endif
+
+
  //-----------Finally we need to convert the beautiful map storage scheme
  //------------------------to the containers required by SuperLU
  
@@ -1718,20 +2002,19 @@ void Problem::sparse_assemble_row_or_column_compressed_with_lists(
 
  // Default range of elements for distributed problems
  unsigned long el_lo=0;
- unsigned long el_hi=n_elements;
+ unsigned long el_hi=n_elements-1;
 
 #ifdef OOMPH_HAS_MPI
  // Otherwise just loop over a fraction of the elements
+ // (This will either have been initialised in
+ // Problem::set_default_first_and_last_element_for_assembly() or
+ // will have been re-assigned during a previous assembly loop
+ // Note that following the re-assignment only the entries
+ // for the current processor are relevant.
  if (!Problem_has_been_distributed)
   {
-   // Distribute work evenly
-   unsigned long range = 
-    static_cast<unsigned long>(double(n_elements)/double(MPI_Helpers::Nproc));
-   el_lo = MPI_Helpers::My_rank*range;
-   el_hi = (MPI_Helpers::My_rank+1)*range;
-   
-   // Last one needs to incorporate any dangling elements
-   if (MPI_Helpers::My_rank==MPI_Helpers::Nproc-1) el_hi = n_elements;
+   el_lo=First_el_for_assembly[MPI_Helpers::My_rank];
+   el_hi=Last_el_for_assembly[MPI_Helpers::My_rank];
   }
 #endif 
 
@@ -1806,6 +2089,22 @@ void Problem::sparse_assemble_row_or_column_compressed_with_lists(
  //Resize the residuals vectors
  for(unsigned v=0;v<n_vector;v++) {residuals[v]->resize(n_dof);}
 
+#ifdef OOMPH_HAS_MPI
+
+
+ // Storage for assembly time for elements
+ double t_assemble_start=0.0;
+ 
+ // Storage for assembly times
+ Vector<double> elemental_assembly_time;
+ if ((!Problem_has_been_distributed)&&
+     Must_recompute_load_balance_for_assembly)
+  {
+   elemental_assembly_time.resize(n_elements);
+  }
+
+#endif
+
  //------------Assemble and populate the lists-----------------------
  {
   //Allocate local storage for the element's contribution to the
@@ -1820,8 +2119,18 @@ void Problem::sparse_assemble_row_or_column_compressed_with_lists(
   std::list<std::pair<unsigned,double> > *list_pt;
     
   //Loop over the all elements
-  for(unsigned long e=el_lo;e<el_hi;e++)
+  for(unsigned long e=el_lo;e<=el_hi;e++)
    {
+
+#ifdef OOMPH_HAS_MPI
+    // Time it?
+    if ((!Problem_has_been_distributed)&&
+        Must_recompute_load_balance_for_assembly)
+     {
+      t_assemble_start=TimingHelpers::timer();
+     }
+#endif
+
     //Get the pointer to the element
     GeneralisedElement* elem_pt = mesh_pt()->element_pt(e);
 
@@ -1902,9 +2211,34 @@ void Problem::sparse_assemble_row_or_column_compressed_with_lists(
 #ifdef OOMPH_HAS_MPI
      } // endif halo element
 #endif      
+
+
+#ifdef OOMPH_HAS_MPI
+  // Time it?
+  if ((!Problem_has_been_distributed)&&
+      Must_recompute_load_balance_for_assembly)
+   {
+    elemental_assembly_time[e]=TimingHelpers::timer()-t_assemble_start;
+   }
+#endif
+
    } //End of loop over the elements
     
  } //list_pt goes out of scope
+
+
+#ifdef OOMPH_HAS_MPI
+ 
+ // Postprocess timing information and re-allocate distribution of
+ // elements during subsequent assemblies.
+ if ((!Problem_has_been_distributed)&&
+     Must_recompute_load_balance_for_assembly)
+  {
+   recompute_load_balanced_assembly(elemental_assembly_time);
+  }
+
+#endif
+
 
  //----Finally we need to convert the beautiful list storage scheme---
  //----------to the containers required by SuperLU--------------------
@@ -2044,20 +2378,19 @@ void Problem::sparse_assemble_row_or_column_compressed_with_vectors_of_pairs(
 
  // Default range of elements for distributed problems
  unsigned long el_lo=0;
- unsigned long el_hi=n_elements;
+ unsigned long el_hi=n_elements-1;
  
 #ifdef OOMPH_HAS_MPI
  // Otherwise just loop over a fraction of the elements
+ // (This will either have been initialised in
+ // Problem::set_default_first_and_last_element_for_assembly() or
+ // will have been re-assigned during a previous assembly loop
+ // Note that following the re-assignment only the entries
+ // for the current processor are relevant.
  if (!Problem_has_been_distributed)
   {
-   // Distribute work evenly
-   unsigned long range = 
-    static_cast<unsigned long>(double(n_elements)/double(MPI_Helpers::Nproc));
-   el_lo = MPI_Helpers::My_rank*range;
-   el_hi = (MPI_Helpers::My_rank+1)*range;
-   
-   // Last one needs to incorporate any dangling elements
-   if (MPI_Helpers::My_rank==MPI_Helpers::Nproc-1) el_hi = n_elements;
+   el_lo=First_el_for_assembly[MPI_Helpers::My_rank];
+   el_hi=Last_el_for_assembly[MPI_Helpers::My_rank];
   }
 #endif 
 
@@ -2124,7 +2457,22 @@ void Problem::sparse_assemble_row_or_column_compressed_with_vectors_of_pairs(
  //Resize the residuals vectors
  for(unsigned v=0;v<n_vector;v++) {residuals[v]->resize(n_dof);}
  
- //----------------Assemble and populate the vector storage scheeme--------
+#ifdef OOMPH_HAS_MPI
+
+ // Storage for assembly time for elements
+ double t_assemble_start=0.0;
+ 
+ // Storage for assembly times
+ Vector<double> elemental_assembly_time;
+ if ((!Problem_has_been_distributed)&&
+     Must_recompute_load_balance_for_assembly)
+  {
+   elemental_assembly_time.resize(n_elements);
+  }
+
+#endif
+ 
+ //----------------Assemble and populate the vector storage scheme--------
  {
   //Allocate local storage for the element's contribution to the
   //residuals vectors and system matrices of the size of the maximum
@@ -2134,8 +2482,18 @@ void Problem::sparse_assemble_row_or_column_compressed_with_vectors_of_pairs(
   Vector<DenseMatrix<double> > el_jacobian(n_matrix);
 
   //Loop over the elements
-  for(unsigned long e=el_lo;e<el_hi;e++)
+  for(unsigned long e=el_lo;e<=el_hi;e++) 
    {
+
+#ifdef OOMPH_HAS_MPI
+    // Time it?
+    if ((!Problem_has_been_distributed)&&
+        Must_recompute_load_balance_for_assembly)
+     {
+      t_assemble_start=TimingHelpers::timer();
+     }
+#endif
+
     //Get the pointer to the element
     GeneralisedElement* elem_pt = mesh_pt()->element_pt(e);
     
@@ -2236,8 +2594,36 @@ void Problem::sparse_assemble_row_or_column_compressed_with_vectors_of_pairs(
 #ifdef OOMPH_HAS_MPI
      } // endif halo element
 #endif
+
+
+#ifdef OOMPH_HAS_MPI
+  // Time it?
+  if ((!Problem_has_been_distributed)&&
+      Must_recompute_load_balance_for_assembly)
+   {
+    elemental_assembly_time[e]=TimingHelpers::timer()-t_assemble_start;
+   }
+#endif
+  
    } //End of loop over the elements
+  
+  
  } //End of vector assembly
+
+
+
+#ifdef OOMPH_HAS_MPI
+ 
+ // Postprocess timing information and re-allocate distribution of
+ // elements during subsequent assemblies.
+ if ((!Problem_has_been_distributed)&&
+     Must_recompute_load_balance_for_assembly)
+  {
+   recompute_load_balanced_assembly(elemental_assembly_time);
+  }
+
+#endif
+
 
  //-----------Finally we need to convert this vector storage scheme
  //------------------------to the containers required by SuperLU
@@ -2322,20 +2708,20 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_vectors(
 
  // Default range of elements for distributed problems
  unsigned long el_lo=0;
- unsigned long el_hi=n_elements;
+ unsigned long el_hi=n_elements-1;
  
+
 #ifdef OOMPH_HAS_MPI
  // Otherwise just loop over a fraction of the elements
+ // (This will either have been initialised in
+ // Problem::set_default_first_and_last_element_for_assembly() or
+ // will have been re-assigned during a previous assembly loop
+ // Note that following the re-assignment only the entries
+ // for the current processor are relevant.
  if (!Problem_has_been_distributed)
   {
-   // Distribute work evenly
-   unsigned long range = 
-    static_cast<unsigned long>(double(n_elements)/double(MPI_Helpers::Nproc));
-   el_lo = MPI_Helpers::My_rank*range;
-   el_hi = (MPI_Helpers::My_rank+1)*range;
-   
-   // Last one needs to incorporate any dangling elements
-   if (MPI_Helpers::My_rank==MPI_Helpers::Nproc-1) el_hi = n_elements;
+   el_lo=First_el_for_assembly[MPI_Helpers::My_rank];
+   el_hi=Last_el_for_assembly[MPI_Helpers::My_rank];
   }
 #endif 
 
@@ -2407,6 +2793,23 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_vectors(
  
  //Resize the residuals vectors
  for(unsigned v=0;v<n_vector;v++) {residuals[v]->resize(n_dof);}
+
+
+#ifdef OOMPH_HAS_MPI
+
+ // Storage for assembly time for elements
+ double t_assemble_start=0.0;
+ 
+ // Storage for assembly times
+ Vector<double> elemental_assembly_time;
+ if ((!Problem_has_been_distributed)&&
+     Must_recompute_load_balance_for_assembly)
+  {
+   elemental_assembly_time.resize(n_elements);
+  }
+
+#endif
+
  
  //----------------Assemble and populate the vector storage scheme-------
  {
@@ -2418,8 +2821,18 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_vectors(
   Vector<DenseMatrix<double> > el_jacobian(n_matrix);
   
   //Loop over the elements
-  for(unsigned long e=el_lo;e<el_hi;e++)
+  for(unsigned long e=el_lo;e<=el_hi;e++)
    {
+
+#ifdef OOMPH_HAS_MPI
+    // Time it?
+    if ((!Problem_has_been_distributed)&&
+        Must_recompute_load_balance_for_assembly)
+     {
+      t_assemble_start=TimingHelpers::timer();
+     }
+#endif
+
     //Get the pointer to the element
     GeneralisedElement* elem_pt = mesh_pt()->element_pt(e);
 
@@ -2527,9 +2940,34 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_vectors(
 #ifdef OOMPH_HAS_MPI
      } // endif halo element
 #endif
+
+
+#ifdef OOMPH_HAS_MPI
+  // Time it?
+  if ((!Problem_has_been_distributed)&&
+      Must_recompute_load_balance_for_assembly)
+   {
+    elemental_assembly_time[e]=TimingHelpers::timer()-t_assemble_start;
+   }
+#endif
+
    } //End of loop over the elements
   
  } //End of vector assembly
+
+
+
+#ifdef OOMPH_HAS_MPI
+ 
+ // Postprocess timing information and re-allocate distribution of
+ // elements during subsequent assemblies.
+ if ((!Problem_has_been_distributed)&&
+     Must_recompute_load_balance_for_assembly)
+  {
+   recompute_load_balanced_assembly(elemental_assembly_time);
+  }
+
+#endif
  
    //-----------Finally we need to convert this lousy vector storage scheme
    //------------------------to the containers required by SuperLU

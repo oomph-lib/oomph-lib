@@ -45,7 +45,7 @@ namespace oomph
 {
 
 //========================================================================
-/// A 2D solid mes for (topologically) circular cylindrical shells.
+/// A 2D solid mesh for (topologically) circular cylindrical shells.
 /// The shell is represented by two Lagrangian coordinates that correspond
 /// to z and theta in cylindrical polars. The required mesh is therefore a
 /// 2D mesh and is therefore inherited from the generic RectangularQuadMesh

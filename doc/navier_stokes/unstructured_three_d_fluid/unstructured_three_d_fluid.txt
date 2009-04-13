@@ -2,10 +2,10 @@
 
 This tutorial provides another demonstration of how to use
 3D unstructured meshes for the solution of fluid flow problems.
-(The original <a href="../../../meshes/mesh_from_tetgen/html/index.html">
+(The main <a href="../../../meshes/mesh_from_tetgen/html/index.html">
 tetgen tutorial</a> already contains a 3D unstructured fluid example.)
 
-The specific problem considered here serves as a "warm-up problem" for the
+The specific problem considered here also serves as a "warm-up problem" for the
 <a href="../../../interaction/unstructured_three_d_fsi/html/index.html">
 corresponding fluid-structure interaction problem</a> in which the
 domain boundary is replaced by an elastic vessel.
@@ -16,15 +16,30 @@ domain boundary is replaced by an elastic vessel.
 
 \section problem The problem 
 Here is a sketch of the problem: Flow is driven through a 3D rigid vessel
-made of three approximately rectangular tubes that meet at a 
-common junction. The flow is driven by a prescribed pressure
+made of three rectangular tubes that meet at a common junction. 
+The flow is driven by a prescribed pressure
 drop between the upstream and the two downstream ends, \f$ \Delta p^* = 
-P^*_{in} - P^*_{out}, \f$ and we assume/impose parallel in and outflow
+P^*_{in} - P^*_{out}, \f$ and we assume/impose parallel in- and outflow
 in the inlet and outlet cross-sections which are parallel to 
 \f$ x-y \f$ coordinate plane. 
 
-@I w 0.75\textwidth problem_sketch "Sketch of the problem. "
- 
+@I w 0.75\textwidth problem_sketch "Sketch of the domain with boundary conditions. "
+
+We non-dimensionalise all lengths on the half-width, \f$ W \f$, of the
+square main vessel and use the overall pressure drop,
+\f$ \Delta P^* = P_{in}^* - P_{out}^* \f$ to define the (viscous) 
+velocity scale as
+\f[
+{\cal U} = \frac{\Delta P^*\  W}{\mu}.
+\f] 
+With this choice the Reynolds number becomes
+\f[
+Re = \frac{\rho {\cal U} W }{\mu} = \frac{ \Delta P^* \rho W^2 }{\mu^2}
+\f]
+and the flow is driven by a dimensionless pressure drop of
+\f$ \Delta P = 1. \f$ With this non-dimensionalisation an 
+increase in Reynolds number may be interpreted as in increase 
+in the applied (dimensional) pressure drop along the vessel.
 
 <HR>
 <HR> 
@@ -62,8 +77,9 @@ is located at:
 </center>
 
 We refer to the <A HREF="http://tetgen.berlios.de/"> \c tetgen webpages </A>
-and another <a href="../../../meshes/mesh_from_tetgen/html/index.html">
-\c oomph-lib tutorial</a> for further details on how to 
+and \c oomph-lib's own 
+<a href="../../../meshes/mesh_from_tetgen/html/index.html">
+tetgen tutorial</a> for further details on how to 
 create <code>*.poly</code> files.
 
 
@@ -101,7 +117,8 @@ Note how <A HREF="http://tetgen.berlios.de/"> \c tetgen </A>
 has subdivided each of the 15 original facets specified in the 
 <code>*.poly</code> file into a surface triangulation. The 
 nodes and tetrahedral elements that are located on (or adjacent to) the
-15 original facets inherit their boundary IDs.
+15 original facets inherit their boundary IDs. This is important
+when we assign the boundary conditions for the actual computation.
 
 <HR>
 <HR>
@@ -109,14 +126,14 @@ nodes and tetrahedral elements that are located on (or adjacent to) the
 
 
 \section results Results
-The animation shown below illustrates the flow field (streamribbons 
-coloured by pressure contours) for a Reynolds number of \f$ Re = ***. \f$
+The plot shown below illustrates the flow field (streamribbons 
+coloured by pressure contours) for a Reynolds number of \f$ Re = 100. \f$
 The transparent faces show the boundaries of the fluid elements and
 illustrate that the mesh is very coarse. As a result, the flow is 
 clearly under-resolved, particularly near the two outflow 
 cross-sections where the imposition of parallel outflow forces
 the fluid velocity to re-adjust rapidly as it approaches the outlet.
-(See \ref comm_ex for a more detailed discussion of this aspect.)
+(See \ref finer_mesh in \ref comm_ex for a more detailed discussion of this aspect.)
 
 @I w 0.75\textwidth flow_with_stream_ribbons "Flowfield (streamribbons, coloured by the pressure contours) and element boundaries.  "
 
@@ -127,7 +144,7 @@ the fluid velocity to re-adjust rapidly as it approaches the outlet.
 \section namespace Problem Parameters
 As usual we define the various problem parameters in a 
 global namespace. We define the Reynolds number and 
-specify the traction to be applied at the in and outlet 
+specify the traction to be applied at the in- and outflow 
 cross-sections:
 
 \dontinclude unstructured_three_d_fluid.cc
@@ -140,16 +157,16 @@ cross-sections:
 \section main The driver code
 
 We specify an output directory, create the \c Problem object 
-using ten-node tetrahedralTaylor Hood elements, and output the
+using ten-node tetrahedral Taylor-Hood elements, and output the
 initial guess for the flow field:
 
 
 \skipline start_main
 \until doc_info.number()++;
 
-Next we perform a parameter study in which we increase the applied
-pressure drop across the domain by increasing \f$ P_{in}\f$ and
-lowering \f$ P_{out}.\f$ (As usual we perform a smaller number
+Next we perform a parameter study in which we increase the Reynolds
+number of the flow -- corresponding to an increase in the
+applied pressure drop. (As usual we perform a smaller number
 of steps in a validation run -- performed when the code is run
 with nonzero number of command-line arguments.) 
 
@@ -162,11 +179,11 @@ with nonzero number of command-line arguments.)
 
 \section class The Problem class
 The \c Problem class has the usual member functions and provides
-explicit storage for the fluid mesh and the meshes that contain
+explicit storage for the fluid mesh and the meshes containing
 the \c FaceElements that apply the traction conditions at
-in- and outlet boundaries. We also provide storage for the
-IDs of the mesh boundaries that constitute the in- and outlet
-boundaries to facilitate the application of boundary conditions.
+in- and outflow boundaries. We also provide storage for the
+IDs of the mesh boundaries that constitute the in- and outflow
+boundaries to facilitate the application of the boundary conditions.
 
 
 \dontinclude unstructured_three_d_fluid.cc
@@ -186,62 +203,75 @@ by <A HREF="http://tetgen.berlios.de/"> \c tetgen </A>:
 \skipline start_constructor
 \until split_corner_elements);
 
-(See \ref comm_ex for a discussion of the \c split_corner_elements
-flag). 
+(See \ref split in the section \ref comm_ex for a discussion 
+of the \c split_corner_elements flag). 
 
  
-Next, we set up the boundary lookup schemes which determine which elements
-are located next to which domain boundaries and specify the 
+Next, we set up the boundary lookup schemes that determine which elements
+are located next to which domain boundaries, and specify the 
 IDs of the mesh boundaries that coincide with the in- and outflow
 cross-sections. Note that this information must correspond to the
-specication of the boundary IDs in the tetgen <code>*.poly</code>
+specification of the boundary IDs in the tetgen <code>*.poly</code>
 file. 
 
 \until Outflow_boundary_id[1]=2;
 
+Next we apply the boundary conditions. We impose parallel in- and
+outflow by pinning the transverse velocities at all nodes
+that are located on the in- and outflow boundaries, identifying the
+nodes via the boundary IDs just set up. We use the boolean map \c done
+to indicate which boundaries we have visited already.
 
-we apply the boundary conditions for the fluid and the 
-pseudo-solid equations. We pin the pseudo-solid nodes along
-all domain boundaries, apply a no-slip condition for the fluid velocity 
-along the solid boundary  (boundary 0), pin the velocity at the inflow
-(boundary 1, where we will impose a Poiseuille flow profile), and impose
-parallel outflow at the downstream end (boundary 2). 
-Given that the manual identification of
-mesh boundaries in unstructured meshes that are generated by
-third-party mesh generators is a relatively error-prone process, we
-document the boundary conditions in three separate files to allow 
-an external sanity check; see
-<a href="../../../solid/unstructured_solid/html/index.html#comm_ex">
-the comments in the corresponding solid mechanics tutorial.</a>
-The \ref comm_ex section of the present tutorial also has a sub-section 
-that illustrates what can go wrong. 
+\until done in and outflow
 
-\until solid_bc_file.close();
+The nodes on all other boundaries (i.e. the ones for which \c done[b] is
+still \c false) are subjected to no-slip conditions by pinning
+all three velocity components.
 
-We add the fluid mesh as a single sub-mesh to the \c Problem and build
-the global mesh (see the comment in \ref class .)
+\until done no slip elsewhere
 
-\until build_global
-
-We complete the build of the elements by specifying
-the Reynolds number and the constitutive equation for the pseudo-solid
-equations. 
+We complete the build of the Navier-Stokes elements by specifying
+the pointer to the Reynolds number,
 
 \until }
 
-Finally, we impose a Poiseuille profile at the inflow boundary (boundary
-1) and assign the equation numbers.
+and attach the \c FaceElements that apply the imposed in- and outflow
+tractions to the appropriate faces of the elements on the in- and
+outflow boundaries:
 
-\until end_of_constructor
+\until create_fluid_traction_elements();
+
+Finally, we combine the various sub-meshes to a combined global mesh
+and assign the equation numbers.
+
+\until end constructor
+
 
 
 <HR>
 <HR>
+
+\section traction Creating the fluid traction elements
+
+The helper function \c create_fluid_traction_elements() 
+loops over the bulk elements that are adjacent to the in- and outflow
+cross-sections and attaches \c NavierStokesTractionElements
+to the relevant faces. We store pointers to the newly-created
+elements in the appropriate meshes, and pass pointers to the functions
+that specify the imposed traction to the elements.
+
+
+\skipline start_of_fluid_traction_elements
+\until end of create
+
+
+<HR>
+<HR>
+
 
 \section doc Post-processing
 
 The post-processing routine outputs the flow field.
-
 \until }
 
 
@@ -255,140 +285,159 @@ The post-processing routine outputs the flow field.
 <HR> 
  
 
-\subsection split Split.... hierher
-bla
- 
-\subsection finer_mesh finer mesh and more appropriate outlet
-conditions
+\subsection split Splitting corner elements in unstructured meshes to avoid locking
+Meshes generated by <A HREF="http://tetgen.berlios.de/"> \c tetgen
+</A> tend to be of very high quality and can usually be used
+without further modification. However, in Navier-Stokes computations
+(or other problems in which the elements have to satisfy an LBB-type 
+stability constraint) problems can arise if too many of an 
+element's nodes are constrained by boundary conditions, causing
+the discretisation to "lock". This tends to 
+happen when three of the element's four faces are located on
+domain boundaries, as in the case of the top-left and bottom-left
+elements in the inflow cross-section shown below.
 
-Add straight outlet tubes or refine or use Lagrange multipliers.
 
-\subsection reynolds What is the Reynolds number?
- 
-The problem considered here is primarily a toy-problem, devised
-to illustrate the use of unstructured meshes for fluids problems.
-The specific non-dimensionalisation and parameter values are therefore
-of secondary importance. However, since \c oomph-lib's implementation
-of the Navier-Stokes equations is based on their non-dimensional form
-it is important to clarify the meaning of the Reynolds number 
-in the present problem. 
+@I w 0.75\textwidth mesh_without_split "Plot of the mesh generated by tetgen. "
 
-<a href="../../driven_cavity/html/index.html#equation">Recall</a> 
-that the Reynolds number is defined as 
-\f[
-Re = \frac{\rho {\cal U} {\cal L}}{\mu}
-\f]
-where \f$ \rho \f$ and \f$ \mu \f$ are the fluid density and viscosity,
-respectively.  \f$ {\cal L} \f$ is the reference length chosen for the
-non-dimensionalisation of the coordinates. In the present problem,
-where the domain boundaries were simply drawn in 
-<A HREF="http://www.xfig.org/">xfig </a>, no specific reference
-length was identified, but inspection of the maximum and minimum 
-y-coordinates of the inflow boundary in the mesh plot 
-shows that the inflow boundary has a (dimensional) length 
-of \f$ (4.0875 - 0.1125) {\cal L} = 3.975 {\cal L}. \f$
-In the non-dimensional version of the Navier-Stokes equations, all 
-velocities are non-dimensionalised with a reference velocity
-\f$ {\cal U} \f$. When we applied the inflow boundary conditions,
-we chose the (dimensionless) inflow profile such that its 
-integral over the inflow boundary yields a value of 1. The velocity 
-scale \f$ {\cal U} \f$ may therefore be interpreted as 
-the (dimensional) average inflow velocity through the channel, i.e. the
-volume flux divided by the width of the channel at its inflow.
+Ten-noded tetrahedral elements only have nodes on their vertices
+and edges. Therefore all the nodes in these two elements are located on
+domain boundaries. Furthermore, only one of these (the node 
+halfway along the edge that traverses the inflow cross-section) does
+not have all its velocities constrained by the no-slip condition that
+is imposed on the side walls -- the imposition of parallel flow at
+the inflow face only  constrains the node's transverse
+velocities. Both elements 
+therefore have only a single velocity degree of freedom (the axial 
+velocity at the node on the inflow face) while they retain their four pressure 
+degrees of freedom (the pressures at their vertices). This does not
+\e necessarily over-constrain the problem (and in the present problem
+it does not) -- "locking", due to the presence of too many
+pressure degrees of freedom, arises at the level of the global, fully-assembled
+problem, not on an element-by-element basis. However, the presence
+of such elements makes the occurence of locking more likely and we
+have occassionally come across examples in which locking does occur. 
+The remedy would be to pin exactly the required number of
+superfluous pressure degrees of freedom (no more and no fewer!) 
+to "unlock" the problem. However, the diagnosis of the problem 
+is as difficult as its practical resolution: How do we determine 
+in advance if a problem will lock and, if so, which pressures 
+should be pinned, etc.?
 
-<HR>
-
-\subsection bound Identification/assigment of mesh boundaries
-We wish to re-iterate the comments made in the 
-<a href="../../../solid/unstructured_solid/html/index.html#comm_ex">
-corresponding solid mechanics tutorial</a> that the manual 
-identification of nodes on domain boundaries is tedious and 
-therefore error prone. It pays off to <B>be  as a paranoid 
-as possible</B>, by always documenting the domain boundaries and the
-applied boundary conditions. 
-
- Here is the plot of boundary conditions applied in the present
-problem. Hollow blue markers indicate (pseudo-)solid boundary conditions
-(both displacements are pinned); small red markers identify nodes
-where the vertical fluid velocity is pinned; hollow green markers (filling
-the space between the blue and red lines markers) identify nodes at
-which the horizontal fluid velocity is pinned. 
-
-@I w 0.75\textwidth bcs "Plot of the correct boundary conditions. "
-
-Here is another plot, obtained with the initial version of 
-our driver code -- can you spot what's wrong and can you
-identify the lines we had to add to the mesh constructor to 
-fix the problem? 
-
-@I w 0.75\textwidth bcs_wrong "Plot of the wrong boundary conditions. "
+In order to avoid the problem altogether, \c oomph-lib's \c TetgenMesh mesh 
+constructor therefore provides
+an optional boolean flag, \c split_corner_elements. If this flag is 
+set to \c true, the mesh constructor identifies all elements in which at least 
+three faces are located on mesh boundaries. These elements are then
+split into four smaller ones, using a localised refinement as 
+shown in this plot:
 
 
 
-<HR>
+@I w 0.75\textwidth mesh_with_split "Plot of the mesh after splitting corner elements. "
 
-\subsection pseudo_elast Pseudo-elasticity
+Note that the localised refinement leads to a small deterioration 
+in the element quality but this is usually acceptable. If you are concerned 
+about this aspect, allow the splitting of corner elements only if 
+locking actually occurs (see below), or generate a different tetgen 
+mesh that does not suffer from this problem, e.g. by imposing a 
+different volume constraint. 
 
-As mentioned above, the elements' pseudo-elasticity plays no useful
-role in the present problem, as the domain boundaries remain
-at fixed positions and no mesh movement is required. 
-
-- As an exercise, remove all functionality related to the 
-  pseudo-elasticity by changing the element type from
-  \code
-  PseudoSolidNodeUpdateElement<TTaylorHoodElement<2>,TPVDElement<2,3> >
-  \endcode
-  to
-  \code
-  TTaylorHoodElement<2>
-  \endcode
-  Adjust the code as required (e.g. remove mesh's inheritance from the
-  \c SolidMesh base class; remove the application of boundary conditions
-  for the nodal positions; etc) and confirm that the results
-  for the flow field remain unchanged.
-  \n\n
-- Alternatively, the pseudo-elasticity can can be suppressed by 
-  pinning all nodal positions, drastically reducing the number
-  of degrees of freedom in the problem without the need to 
-  rewrite the rest of the code. (Note that this is also a useful
-  test for the development of FSI codes.)
-  \n\n
-- However, you may wish to retain the pseudo-elastic capabilities
-  and convince yourself that the fluid mesh can indeed deform as an elastic
-  body, by specifying a (solid mechanics) body force. To do this,
-  simply follow the steps used in 
-  <a href="../../../solid/unstructured_solid/html/index.html">
-  the corresponding solid mechanics problem:</a> Define the body
-  force in the namespace \c Global_Physical_Variables
-  and pass a (function-)pointer to it 
-  to the elements. (N.B. you will have to specify explicitly
-  that you're assigning the body force for the (pseudo-)solid
-  as the Navier-Stokes equations have their own body force
-  pointer! The compiler will complain about ambiguities if you
-  write
-  \n
-  \code
-  [...]
-
-   //Set the body force
-   el_pt->body_force_fct_pt() = Global_Physical_Variables::gravity;
-
-  [...]  
-  \endcode
-  You'll have to be more specific by writing
-  \n
-  \code
-  [...]
-
-   //Set the body force
-   el_pt->PVDEquationsBase<2>::body_force_fct_pt() = 
-    Global_Physical_Variables::gravity;
-  
-  [...]   
-  \endcode
-  instead, indicating that you wish to assign the body force defined in the
-  2D solid mechanics equations.
+<center>
+<b>How to spot "locking":</b>
+</center>
+- If a solution can be computed (using a direct solver) the occurence of
+  "locking" is easy to spot: Typically the pressure in over-constrained 
+  elements becomes extremely large while the rest of the flow field
+  looks fairly normal. Iterative solvers may fail to converge. If you
+  suspect that locking may have occured, try re-computing the
+  solution on a mesh with the \c split_corner_elements flag set to 
+  \c true.
 .
+
+<hr>
+ 
+\subsection finer_mesh Creating a finer mesh and applying more appropriate outflow boundary conditions
+
+
+The flow field shown in \ref results is clearly under-resolved and a much
+finer mesh would have to be used to fully resolve all flow features.
+This is made even worse by the fact that we imposed parallel outflow
+(i.e. flow in the z-direction) in the outflow cross-sections which 
+are aligned with the plane \f$ z = const. \f$ but terminate two tubes
+that are not aligned with the \f$ z \f$-axis. This creates thin
+(and artificial) outflow boundary layers within which the flow
+is forced to change direction as it exits the tubes. This motivates
+a few exercises that allow you to explore unstructured mesh generation.
+
+- <b>Exercise 1: Refining the mesh</b> \n\n
+  Create a finer mesh by specifying a smaller volume constraint for
+  tetgen. For instance, using 
+  \n \n
+  \code
+  tetgen -a0.02 fsi_bifurcation_fluid.poly
+  \endcode
+  \n
+  will generate a much finer mesh, containing 3345 tets. Note that the
+  driver code can remain completely unchanged.
+  \n\n
+- <b>Exercise 2: Add straight outflow vessels</b> \n\n
+  The imposition of parallel flow at the outlet boundaries would be
+  less problematic if at least the final part of the two outflow tubes was
+  aligned with the \f$ z \f$-axis. Modify the file 
+  <code><a href="../../../../demo_drivers/navier_stokes/unstructured_three_d_fluid/fsi_bifurcation_fluid.poly">fsi_bifurcation_fluid.poly</a>
+  </code> so that two straight vessel 
+  segments, parallel to the \f$ z \f$-axis, are added to the
+  mesh. The modification to the <code>*.poly</code> file should be 
+  straightforward. You have to add eight additional vertices and faces
+  and re-define the two outflow faces. 
+  \n\n
+  Here is a sample plot of a modified mesh in which two additional 
+  straight segments of different lengths have been attached to the
+  downstream tubes. Note that the enumeration of the in- 
+  and outflow boundaries was retained, allowing the mesh to be used with 
+  the same driver code.
+  \n\n
+@I w 0.75\textwidth mesh_boundaries_extended "Plot of the mesh, with two straight segments added to the outflow branches. "
+  \n
+  The modified mesh was created with the file
+  <code><a href="../../../../demo_drivers/navier_stokes/unstructured_three_d_fluid/fsi_bifurcation_fluid_with_extended_tubes.poly">fsi_bifurcation_fluid_with_extended_tubes.poly</a>
+  </code> which you may wish to consult. However, we do encourage you 
+  to do this exercise by yourself first, in order to familiarise 
+  yourself with tetgen -- you will notice that tetgen is not very 
+  forgiving (or verbose) when it encounters errors in the <code>*.poly</code>
+  file.
+  \n\n
+- <b>Exercise 3: Use Lagrange multipliers to allow parallel outflow in
+  cross-sections that are not aligned with the coordinate axes.</b>
+  \n\n
+  The main (only?) reason why we tend to impose parallel in- or outflow
+  in cross-sections that are aligned with the cartesian coordinate
+  planes is, of course, that such boundary conditons are easiest to apply in a 
+  discretisation that is based on the cartesian form of the
+  Navier-Stokes equations.  What if we wished to impose parallel
+  outflow from cross-sections that are not aligned with such planes?
+  The proper way to do this is to employ Lagrange multipliers 
+  to enforce the two constraints
+  \f[
+  {\bf u} \cdot {\bf t}_\alpha = 0 \mbox{\ \ \ \ for $\alpha = 1,2$,}
+  \f] 
+  where \f$ {\bf t}_\alpha \f$ (for \f$\alpha = 1,2\f$) are the
+  two tangent vectors spanning the in- or outflow cross-sections. 
+  The imposition of these constraints requires two Lagrange multiplier 
+  fields, defined in the in-/outflow cross-sections. Physically, these 
+  Lagrange multipliers act as tangential tractions that enforce the 
+  parallel in- or outflow.
+  The Lagrange multipliers introduce additional degrees of freedom
+  into the problem and their implementation would presumably be based
+  on an extension of the existing \c NavierStokesTractionElements.
+  Note that, compared to the previous two exercises, this one is not entirely 
+  trivial -- in fact, it is a capability that is on our "To-Do list".
+  <a href="../../../contact/html/index.html">Let us know</a> if 
+  you want to get involved! 
+.
+
+
 
 <HR>
 <HR>
