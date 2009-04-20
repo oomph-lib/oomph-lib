@@ -77,7 +77,10 @@ double QSUPGAdvectionDiffusionElement<DIM,NNODE_1D>::
 
  //Get wind
  Vector<double> wind(DIM);
- this->get_wind_adv_diff(s,interpolated_x,wind);
+ //Dummy ipt argument required... hierher this should probably be added
+ //to the function arguments...
+ unsigned ipt=0;
+ this->get_wind_adv_diff(ipt,s,interpolated_x,wind);
 
  //Loop over the test functions and derivatives and set them equal to the
  //shape functions + add stabilisation
@@ -141,7 +144,7 @@ double QSUPGAdvectionDiffusionElement<DIM,NNODE_1D>::
  
  //Get wind
  Vector<double> wind(DIM);
- this->get_wind_adv_diff(s,interpolated_x,wind);
+ this->get_wind_adv_diff(ipt,s,interpolated_x,wind);
 
  //Loop over the test functions and derivatives and set them equal to the
  //shape functions + add stabilisation

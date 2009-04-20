@@ -1,4 +1,4 @@
-#//LIC// ====================================================================
+//LIC// ===================================================================
 //LIC// This file forms part of oomph-lib, the object-oriented, 
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
@@ -290,6 +290,10 @@ namespace oomph
   unsigned long& n_tot,
   bool compressed_row_flag);
 
+ /// \short Private helper function to copy the haloed eqn numbers across
+ /// for the Mesh in the argument
+ void copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt);
+
  /// \short Set default first and last elements for parallel assembly
  /// of non-distributed problem.
  void set_default_first_and_last_element_for_assembly();
@@ -531,6 +535,31 @@ protected:
  /// Actions that are to be performed after a mesh adaptation.
  virtual void actions_after_adapt() {}
  
+#ifdef OOMPH_HAS_MPI
+ /// Actions to be performed before a (mesh) distribution
+ virtual void actions_before_distribute() {}
+
+ /// Actions to be performed after a (mesh) distribution
+ virtual void actions_after_distribute() {}
+
+ /// \short Complete the build of all halo elements
+ /// This interface is required to pass global parameters pointed to
+ /// by the root halo elements in the initial mesh to their sons...
+ virtual void complete_build_of_halo_elements()
+  {
+   std::ostringstream warn_message;
+   warn_message
+    << "Warning: using the default (empty) complete_build_of_halo_elements()\n"
+    << "There are certain properties of elements that may not be passed from\n"
+    << "father to son if the element is a halo; this needs to be taken care\n"
+    << "of by the user since they know about their elements.\n";
+   OomphLibWarning(warn_message.str(),
+                   "Problem::complete_build_of_halo_elements()",
+                   OOMPH_EXCEPTION_LOCATION);
+   
+  }
+#endif
+
  /// \short Actions that are to be performed when the global parameter
  /// has been changed in the function get_derivative_wrt_global_parameter()
  /// The default is to call actions_before_newton_solve(), 
@@ -612,6 +641,12 @@ protected:
   public:
 
  /// access function to the oomph-lib communicator
+ OomphCommunicator* communicator_pt()
+  {
+   return Communicator_pt;
+  }
+
+ /// access function to the oomph-lib communicator, const version
  const OomphCommunicator* communicator_pt() const
   {
    return Communicator_pt;
@@ -805,8 +840,11 @@ protected:
  /// \short Assign all equation numbers for problem: Deals with global
  /// data (= data that isn't attached to any elements) and then
  /// does the equation numbering for the elements. Virtual so it 
- /// can be overloaded in MPI problems.
- virtual unsigned long assign_eqn_numbers();
+ /// can be overloaded in MPI problems.  Bool argument can be set to false
+ /// to ignore assigning local equation numbers (found to be necessary in
+ /// the parallel implementation of locate_zeta between multiple meshes).
+ virtual unsigned long assign_eqn_numbers(const bool&
+                                          assign_local_eqn_numbers=true);
 
  /// \short Indicate that the problem involves discontinuous elements
  /// This allows for a more efficiently assembly and inversion of the
@@ -1010,12 +1048,21 @@ protected:
  /// \short Classify any non-classified nodes into halo/haloed and
  /// synchronise equation numbers. Return the total
  /// number of degrees of freedom in the overall problem
- long synchronise_eqn_numbers();
+ long synchronise_eqn_numbers(const bool& assign_local_eqn_numbers=true);
 
  /// \short Synchronise the degrees of freedom by overwriting
  /// the haloed values with their non-halo counterparts held
- /// on other processors
- void synchronise_dofs();
+ /// on other processors on the specified mesh
+ void synchronise_dofs(Mesh* &mesh_pt);
+
+ /// \short Synchronise the degrees of freedom from external
+ /// nodes and elements held on other processors for the
+ /// specified mesh; also pass in the external mesh for this mesh
+ void synchronise_external_dofs(Mesh* &mesh_pt);
+
+ /// \short A helper function to copy the external haloed eqn numbers
+ /// on the Mesh in the argument to the external halo eqn numbers
+ void copy_external_haloed_eqn_numbers_helper(Mesh* &mesh_pt);
 
  /// Check the halo/haloed node/element schemes
  void check_halo_schemes(DocInfo& doc_info);
@@ -1040,31 +1087,44 @@ protected:
    distribute(doc_info,report_stats);
   }
 
- /// \short (Irreversibly) redistribute elements and nodes, usually
+ /// /short Partition the global mesh, return vector specifying the processor
+ /// number for each element. Virtual so that it can be overloaded by
+ /// any user; the default is to use METIS to perform the partitioning
+ /// (with a bit of cleaning up afterwards to sort out "special cases").
+ virtual void partition_global_mesh(Mesh* &global_mesh_pt, DocInfo& doc_info,
+                                    Vector<unsigned>& element_domain,
+                                    const bool& report_stats=false);
+
+ /// \short (Irreversibly) prune halo(ed) elements and nodes, usually
  /// after another round of refinement, to get rid of
  /// excessively wide halo layers. Note that the current
  /// mesh will be now regarded as the base mesh and no unrefinement
  /// relative to it will be possible once this function 
  /// has been called.
- void redistribute(DocInfo& doc_info, 
-                   const bool& report_stats);
+ void prune_halo_elements_and_nodes(DocInfo& doc_info,
+                                    const bool& report_stats);
 
-
- /// \short (Irreversibly) redistribute elements and nodes, usually
+ /// \short (Irreversibly) prune halo(ed) elements and nodes, usually
  /// after another round of refinement, to get rid of
  /// excessively wide halo layers. Note that the current
  /// mesh will be now regarded as the base mesh and no unrefinement
  /// relative to it will be possible once this function 
  /// has been called.
-  void redistribute(const bool& report_stats=false)
+ void prune_halo_elements_and_nodes(const bool& report_stats=false)
   {
    DocInfo doc_info;
    doc_info.doc_flag()=false;
-   redistribute(doc_info,report_stats);
+   prune_halo_elements_and_nodes(doc_info,report_stats);
   }
   
   /// Threshold for error throwing in Problem::check_halo_schemes()
   double Max_permitted_error_for_halo_check;
+
+  /// Access to Problem_has_been_distributed flag
+  bool problem_has_been_distributed()
+   {
+    return Problem_has_been_distributed;
+   }
 
 #endif
 
@@ -1326,20 +1386,21 @@ protected:
 
  /// \short Refine (one and only!) mesh by splitting the elements identified
  /// by their numbers relative to the problems' only mesh, then rebuild 
- /// the problem. [Can't see how/why one would want to do this for multiple
- /// meshes -- if you need this functionality implement it yourself;
- /// you'll probably need to pass a Vector of refinement Vectors...].
+ /// the problem. 
  void refine_selected_elements(const Vector<unsigned>& 
                                elements_to_be_refined);
 
 
  /// \short Refine (one and only!) mesh by splitting the elements identified
- /// by their pointers, then rebuild 
- /// the problem. [Can't see how/why one would want to do this for multiple
- /// meshes -- if you need this functionality implement it yourself;
- /// you'll probably need to pass a Vector of refinement Vectors...].
+ /// by their pointers, then rebuild the problem. 
  void refine_selected_elements(const Vector<RefineableElement*>& 
                                elements_to_be_refined_pt);
+
+ /// \short Refine specified submesh by splitting the elements identified
+ /// by their numbers relative to the submesh, then rebuild the problem.
+ void refine_selected_elements(const unsigned& i_mesh,
+                               const Vector<unsigned>& 
+                               elements_to_be_refined);
 
  /// \short Refine specified submesh by splitting the elements identified
  /// by their pointers, then rebuild the problem.
@@ -1347,6 +1408,17 @@ protected:
                                const Vector<RefineableElement*>& 
                                elements_to_be_refined_pt);
 
+ /// \short Refine all submeshes by splitting the elements identified
+ /// by their numbers relative to each submesh in a Vector of Vectors, 
+ /// then rebuild the problem.
+ void refine_selected_elements(const Vector<Vector<unsigned> >& 
+                               elements_to_be_refined);
+
+ /// \short Refine all submeshes by splitting the elements identified
+ /// by their pointers within each submesh in a Vector of Vectors, 
+ /// then rebuild the problem.
+ void refine_selected_elements(const Vector<Vector<RefineableElement*> >& 
+                               elements_to_be_refined_pt);
 
  /// \short  Refine (all) refineable (sub)mesh(es) uniformly and 
  /// rebuild problem. Return 0 for success,
@@ -1442,6 +1514,7 @@ class NewtonSolverError
 /*   } */
 
 };
+
 
 }
 

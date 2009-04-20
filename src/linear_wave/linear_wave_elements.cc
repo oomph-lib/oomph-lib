@@ -156,7 +156,7 @@ fill_in_generic_residual_contribution_lin_wave(Vector<double> &residuals,
    //Get source function
    //-------------------
    double source;
-   get_source_lin_wave(time(),interpolated_x,source);
+   get_source_lin_wave(time(),ipt,interpolated_x,source);
 
    // Assemble residuals and Jacobian
    //--------------------------------

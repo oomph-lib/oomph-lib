@@ -769,13 +769,13 @@ TurekProblem(const double &length,
    // pointers to the meshes. The interaction boundary are boundaries 5,6,7
    // of the 2D fluid mesh.
    FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
-    (5,Fluid_mesh_pt,Traction_mesh_pt[0]);  
+    (5,Fluid_mesh_pt,Traction_mesh_pt[0],this);  
    
    FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
-    (6,Fluid_mesh_pt,Traction_mesh_pt[2]);  
+    (6,Fluid_mesh_pt,Traction_mesh_pt[2],this);  
    
    FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
-    (7,Fluid_mesh_pt,Traction_mesh_pt[1]); 
+    (7,Fluid_mesh_pt,Traction_mesh_pt[1],this); 
   } 
 
 
@@ -934,13 +934,13 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::actions_after_adapt()
 
    // Re-setup the fluid load information for fsi solid traction elements
    FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
-    (5,Fluid_mesh_pt,Traction_mesh_pt[0]); 
+    (5,Fluid_mesh_pt,Traction_mesh_pt[0],this); 
    
    FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
-    (6,Fluid_mesh_pt,Traction_mesh_pt[2]); 
+    (6,Fluid_mesh_pt,Traction_mesh_pt[2],this); 
    
    FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
-    (7,Fluid_mesh_pt,Traction_mesh_pt[1]); 
+    (7,Fluid_mesh_pt,Traction_mesh_pt[1],this); 
   }
 
  

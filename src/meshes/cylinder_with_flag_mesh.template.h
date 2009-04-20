@@ -183,6 +183,12 @@ public virtual CylinderWithFlagMesh<ELEMENT>
   Length(length),Height(height), Flag_length(flag_length),
   Flag_height(flag_height),Centre_x(centre_x),Centre_y(centre_y),A(a)
   {
+   // Add the geometric objects to the list associated with this AlgebraicMesh
+   AlgebraicMesh::add_geom_object_list_pt(cylinder_pt);
+   AlgebraicMesh::add_geom_object_list_pt(top_flag_pt);   
+   AlgebraicMesh::add_geom_object_list_pt(bottom_flag_pt);  
+   AlgebraicMesh::add_geom_object_list_pt(tip_flag_pt);
+
    //Setup algebraic node update operations
    setup_algebraic_node_update();
   }

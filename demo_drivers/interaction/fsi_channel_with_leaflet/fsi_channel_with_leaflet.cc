@@ -474,12 +474,12 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
  // could be omitted)
  unsigned face=0; 
  FSI_functions::setup_fluid_load_info_for_solid_elements<ELEMENT,2>
-  (4,Fluid_mesh_pt,Wall_mesh_pt,face); 
+  (4,Fluid_mesh_pt,Wall_mesh_pt,this,face); 
  
  // Back of leaflet: face 1, needs to be specified explicitly
  face=1; 
  FSI_functions::setup_fluid_load_info_for_solid_elements<ELEMENT,2>
-  (5,Fluid_mesh_pt,Wall_mesh_pt,face); 
+  (5,Fluid_mesh_pt,Wall_mesh_pt,this,face); 
  
  // Setup equation numbering scheme
  cout <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
@@ -621,12 +621,12 @@ void FSIChannelWithLeafletProblem<ELEMENT>::actions_after_adapt()
  // could be omitted)
  unsigned face=0; 
  FSI_functions::setup_fluid_load_info_for_solid_elements<ELEMENT,2>
-  (4,Fluid_mesh_pt,Wall_mesh_pt,face); 
+  (4,Fluid_mesh_pt,Wall_mesh_pt,this,face); 
  
  // Back of leaflet: face 1, needs to be specified explicitly
  face=1; 
  FSI_functions::setup_fluid_load_info_for_solid_elements<ELEMENT,2>
-  (5,Fluid_mesh_pt,Wall_mesh_pt,face); 
+  (5,Fluid_mesh_pt,Wall_mesh_pt,this,face); 
   
 } // end_of_actions_after_adapt
 

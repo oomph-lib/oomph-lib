@@ -85,7 +85,11 @@ public:
    delete Domain_pt;
   }
 
+ /// Access function to GeomObject representing wall
+ GeomObject*& wall_pt(){return Wall_pt;}
 
+ /// Access function to domain
+ QuarterTubeDomain* domain_pt(){return Domain_pt;}
 
  /// \short Function pointer for function that squashes
  /// the outer macro elements towards 
@@ -370,6 +374,15 @@ public:
      // node update depends on     
      el_pt->set_node_update_info(geom_object_pt);
     }
+
+   // Add the geometric object(s) for the wall to the mesh's storage
+   Vector<GeomObject*> geom_object_pt(1);
+   geom_object_pt[0] = this->Wall_pt;
+   MacroElementNodeUpdateMesh::set_geom_object_vector_pt(geom_object_pt);
+
+   // Fill in the domain pointer to the mesh's storage in the base class
+   MacroElementNodeUpdateMesh::dom_pt()=this->domain_pt();
+
   }
 };
 
@@ -488,6 +501,9 @@ public:
     }
    delete el_pt;
 #endif
+
+   // Add the geometric object to the list associated with this AlgebraicMesh
+   AlgebraicMesh::add_geom_object_list_pt(wall_pt);
 
    // Setup algebraic node update operations
    setup_algebraic_node_update();

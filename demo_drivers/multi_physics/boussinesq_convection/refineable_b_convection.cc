@@ -355,7 +355,8 @@ void compute_error(ostream &outfile,
  /// \short Overload the wind function in the advection-diffusion equations.
  /// This provides the coupling from the Navier--Stokes equations to the
  /// advection-diffusion equations because the wind is the fluid velocity.
- void get_wind_adv_diff(const Vector<double> &s, const Vector<double>& x,
+ void get_wind_adv_diff(const unsigned& ipt,
+                        const Vector<double> &s, const Vector<double>& x,
                         Vector<double>& wind) const
   {
    //The wind function is simply the velocity at the points
@@ -368,8 +369,8 @@ void compute_error(ostream &outfile,
  /// to the Navier--Stokes equations, the body force is the
  /// temperature multiplied by the Rayleigh number acting in the
  /// direction opposite to gravity.
- void get_body_force_nst(const double& time, const Vector<double> &s,
-                         const Vector<double> &x, 
+ void get_body_force_nst(const double& time, const unsigned& ipt,
+                         const Vector<double> &s, const Vector<double> &x,
                          Vector<double> &result)
   {
    // Get vector that indicates the direction of gravity from

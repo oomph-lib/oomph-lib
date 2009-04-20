@@ -102,6 +102,7 @@ namespace oomph
           
       // Find the number of geometric objects
       unsigned n_geom_obj = master_node_pt->ngeom_object();
+
       //If there are geometric objects, add them to the set
       if(n_geom_obj > 0)
        {

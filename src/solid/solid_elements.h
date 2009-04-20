@@ -188,7 +188,8 @@ namespace oomph
    /// This function is virtual to allow overloading in multi-physics
    /// problems where the growth function might be determined by 
    /// another system of equations
-   virtual inline void get_isotropic_growth(const Vector<double> &s,
+   virtual inline void get_isotropic_growth(const unsigned& ipt,
+                                            const Vector<double> &s,
                                             const Vector<double>& xi, 
                                             double& gamma) const
     {

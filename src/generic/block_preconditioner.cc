@@ -30,6 +30,11 @@
 namespace oomph
 {
 
+ /// \short Static boolean to allow block_matrix_test(...) to be run.
+ /// Defaults to false.
+ template<typename MATRIX> 
+ bool BlockPreconditioner<MATRIX>::Run_block_matrix_test=false;
+ 
 //=============================================================================
 /// \short Gets block (i,j) from the original matrix and returns it in
 /// block_matrix_pt (Specialisation for CCDoubleMatrix)
@@ -132,8 +137,11 @@ namespace oomph
                                   temp_column_start,block_nrow,block_ncol);
 
 #ifdef PARANOID
-    // checks to see if block matrix has been set up correctly 
-    block_matrix_test(matrix_pt,i,j,block_pt);
+    if (Run_block_matrix_test)
+     {
+      // checks to see if block matrix has been set up correctly 
+      block_matrix_test(matrix_pt,i,j,block_pt);
+     }
 #endif
    }
  
@@ -277,8 +285,11 @@ namespace oomph
                                           temp_row_start);
  
 #ifdef PARANOID
-    // checks to see if block matrix has been set up correctly 
-    block_matrix_test(matrix_pt,block_i,block_j,block_pt);
+    if (Run_block_matrix_test)
+     {
+      // checks to see if block matrix has been set up correctly 
+      block_matrix_test(matrix_pt,block_i,block_j,block_pt);
+     }
 #endif 
    }
 

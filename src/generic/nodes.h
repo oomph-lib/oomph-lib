@@ -437,7 +437,7 @@ class Data
    // I'm sure this can be simplified but my brain hurts...
    bool i_am_in_charge=(Processor_in_charge==MPI_Helpers::My_rank);
    bool no_one_is_in_charge=(Processor_in_charge==
-                            Not_associated_with_any_processor);
+                             Not_associated_with_any_processor);
    return (!((no_one_is_in_charge)||(i_am_in_charge)));
   } 
 

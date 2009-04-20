@@ -41,7 +41,9 @@ namespace oomph
   //Get the wind
   Vector<double> W(DIM);
   Vector<double> s(DIM), x(DIM);
-  this->get_wind_scalar_adv(s,x,W);
+  //Dummy integration point
+  unsigned ipt=0;
+  this->get_wind_scalar_adv(ipt,s,x,W);
   
   //Flux is the wind multiplied by the flux
   for(unsigned j=0;j<DIM;j++) {f(0,j) = W[j]*u[0];}
@@ -59,7 +61,9 @@ namespace oomph
    //Get the wind
    Vector<double> W(DIM);
    Vector<double> s(DIM), x(DIM);
-   this->get_wind_scalar_adv(s,x,W);
+   //Dummy integration point
+   unsigned ipt=0;
+   this->get_wind_scalar_adv(ipt,s,x,W);
 
    df_du.initialise(0.0);
 

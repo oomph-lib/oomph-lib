@@ -205,7 +205,8 @@ public:
 
  /// \short Get source term at continous time t and (Eulerian) position x.
  /// Virtual so it can be overloaded in derived multiphysics elements. 
- virtual inline void get_source_ust_heat(const double& t, 
+ virtual inline void get_source_ust_heat(const double& t,
+                                         const unsigned& ipt,
                                          const Vector<double>& x,
                                          double& source) const
   {

@@ -139,7 +139,9 @@ public virtual QAdvectionDiffusionElement<DIM,NNODE_1D>
 
    //Get wind
    Vector<double> wind(DIM);
-   this->get_wind_adv_diff(s,interpolated_x,wind);
+   //Dummy ipt argument required? hierher
+   unsigned ipt=0;
+   this->get_wind_adv_diff(ipt,s,interpolated_x,wind);
    double abs_wind = 0;
    for(unsigned j=0;j<DIM;j++)
    {
@@ -193,7 +195,9 @@ public virtual QAdvectionDiffusionElement<DIM,NNODE_1D>
 
      // Get the wind
      Vector<double> wind(DIM);
-     this->get_wind_adv_diff(s,x,wind);
+     // Dummy ipt argument
+     unsigned ipt=0;
+     this->get_wind_adv_diff(ipt,s,x,wind);
      for(unsigned i=0;i<DIM;i++)
       {
        outfile << wind[i] << " ";

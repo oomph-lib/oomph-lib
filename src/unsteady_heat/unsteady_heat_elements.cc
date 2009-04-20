@@ -129,7 +129,7 @@ fill_in_generic_residual_contribution_ust_heat(Vector<double> &residuals,
    //Get source function
    //-------------------
    double source;
-   get_source_ust_heat(time(),interpolated_x,source);
+   get_source_ust_heat(time(),ipt,interpolated_x,source);
 
    // Assemble residuals and Jacobian
    //--------------------------------

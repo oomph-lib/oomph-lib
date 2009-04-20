@@ -42,6 +42,8 @@
 #include "face_element_as_geometric_object.h"
 #include "mesh_as_geometric_object.h"
 #include "integral.h"
+#include "problem.h"
+#include "multi_domain.h"
 
 namespace oomph
 {
@@ -205,7 +207,7 @@ class FSIFluidElement : public virtual FiniteElement
 /// access function FSIWallElement::q_pt().
 //=========================================================================
 class FSIWallElement : public virtual SolidFiniteElement, 
- public virtual GeomObject
+ public virtual GeomObject, public virtual ElementWithExternalElement
 {
 
   public:
@@ -253,28 +255,18 @@ class FSIWallElement : public virtual SolidFiniteElement,
  /// non-dimensionalise the fluid and solid equations.
  double* &q_pt() {return Q_pt;}
 
- /// \short Pointer to FSI fluid element that is adjacent to
- /// i-th Gauss point in wall element. face=0 refers to the 
- /// data associated with the fluid
- /// element "in front" of the FSIWallElement, and the one 
- /// "at the back" (if any) for face=1.
- FSIFluidElement*& adjacent_fluid_element_pt(const unsigned& face,
-                                             const unsigned& i)
+ /// \short Flush the storage associated with the "adjacent fluid
+ /// element" for the specified face and integration point
+ /// NOTE: this storage is in the ElementWithExternalElement now
+ void flush_adjacent_fluid_element_pt_and_coord(const unsigned& face,
+                                                const unsigned& i)
   {
-   return Adjacent_fluid_element_pt[face][i];
+   external_element_pt(face,i)=0;
+   unsigned n_local=external_element_local_coord(face,i).size();
+   Vector<double> s_local(n_local,0.0);
+   external_element_local_coord(face,i)=s_local;
   }
 
- /// \short Vector of local coordinates (in the
- /// FSI fluid element) that identify the point "opposite" the  
- /// i-th Gauss point in the wall element. face=0 refers to the 
- /// data associated with the fluid
- /// element "in front" of the FSIWallElement, and the one 
- /// "at the back" (if any) for face=1.
- Vector<double>& adjacent_fluid_local_coord(const unsigned& face,
-                                            const unsigned& i)
-  {
-   return Adjacent_fluid_local_coord[face][i];
-  }
 
  /// \short Allow element to be loaded by fluid on both
  /// sides. (Resizes containers for lookup schemes and initialises
@@ -367,7 +359,16 @@ class FSIWallElement : public virtual SolidFiniteElement,
    fill_in_jacobian_from_solid_position_and_external_by_fd(jacobian);
   }
 
-
+ /// \short Overload assign_all_generic_local_equation_numbers to
+ ///        strip out external data and add back unique data
+ void assign_all_generic_local_eqn_numbers()
+  {
+   //External data may not be distinct from other data depending upon
+   //the source element, so call helper to remove non-unique external data
+   assign_unique_external_data_helper();
+   //Now call the solid finite element equation numbering
+   SolidFiniteElement::assign_all_generic_local_eqn_numbers();
+  }
 
   protected:
 
@@ -416,27 +417,6 @@ class FSIWallElement : public virtual SolidFiniteElement,
  /// each integration point is loaded by two adjacent
  /// fluid elements, one at the "front" and one at the "back".
  bool Only_front_is_loaded_by_fluid;
-
- /// \short Vector storing the pointers to the FSI fluid elements that
- /// overlap with the Gauss points in this FSIWallElement. This is
- /// a vector of vectors to cover the case in which the element is
- /// immersed in (and therefore loaded by) fluid from two sides.
- /// Adjacent_fluid_element_pt[0][i] points to the fluid element
- /// adjacent to the element's i-th integration point at the
- /// "front"; Adjacent_fluid_element_pt[1][i] points to the fluid
- /// element at the "back"
- Vector<Vector<FSIFluidElement*> > Adjacent_fluid_element_pt;
-
- /// \short Vector storing the vectors of local coordinates (in the
- /// FSI fluid element) that identify the point "opposite" the  
- /// Gauss points in this FSIWallElement. This is
- /// a vector of vectors to cover the case in which the element is
- /// immersed in (and therefore loaded by) fluid from two sides.
- /// Adjacent_fluid_local_coord[0][...][...] refers to the fluid element
- /// adjacent to the element's i-th integration point at the
- /// "front"; Adjacent_fluid_local_coord[1][...][...] refers to the fluid
- /// element at the "back"
- Vector<Vector<Vector<double> > > Adjacent_fluid_local_coord;
 
  /// \short Vector of pointers to external Data that affect the load
  /// on the element. N.B. This must be the same size
@@ -504,6 +484,12 @@ namespace FSI_functions
  /// Initialised to 1.0.
  //============================================================================
  extern double Strouhal_for_no_slip;
+
+ //============================================================================
+ /// \short Boolean flag to specify whether to use external storage in the
+ /// setup of fluid load info for solid elements.  Default value is false.
+ //============================================================================
+ extern bool Use_external_storage;
 
  //============================================================================
  /// \short A class to do comparison of the elements by lexicographic
@@ -596,12 +582,11 @@ namespace FSI_functions
  /// schemes for fluid loading along the "back" of the FSIWallElements.
  //============================================================================
  template<class FLUID_ELEMENT, unsigned DIM_FLUID>
-  void setup_fluid_load_info_for_solid_elements(
+  void setup_fluid_load_info_for_solid_elements_without_external_storage(
    const unsigned &boundary_in_fluid_mesh,
    Mesh* const &fluid_mesh_pt,
    Mesh* const &solid_mesh_pt,
-   const unsigned& face=0)
-  
+   const unsigned& face=0)  
   {
    // Create a face mesh adjacent to the fluid mesh's b-th boundary. 
    // The face mesh consists of FaceElements that may also be 
@@ -673,8 +658,9 @@ namespace FSI_functions
     FaceElementAsGeomObject<FLUID_ELEMENT> >* fluid_face_mesh_geom_object_pt = 
     new MeshAsGeomObject<DIM_FLUID-1,DIM_FLUID,
     FaceElementAsGeomObject<FLUID_ELEMENT> >(fluid_face_mesh_pt);
- 
-   //Loop over the solid elements in the solid mesh
+
+   // Finally, loop over the solid elements in the solid mesh in order to
+   // set adjacent elements etc.
    unsigned n_solid_element = solid_mesh_pt->nelement();
    for(unsigned e=0;e<n_solid_element;e++)
     {
@@ -708,7 +694,7 @@ namespace FSI_functions
         << e << std::endl
         << "which is (still) assumed to be loaded on the `front' only."
         << std::endl 
-        << "You should call FSIWallElement::enable_fluid_loading_on_both_sides() first!"
+        << "Use FSIWallElement::enable_fluid_loading_on_both_sides() first!"
         << std::endl;
        
        throw OomphLibError(
@@ -766,8 +752,9 @@ namespace FSI_functions
          error_message << std::endl
                        << " on the face of any element in the surface mesh\n"
                        << " You might need to adjust the Tolerances in\n"
-                       << " the locate_zeta() routines\n";
-         
+                       << " the locate_zeta() routines.\n"
+                       << "If you are running in parallel then you need\n"
+                       << "to set FSI_functions::Use_external_storage to true";
          throw OomphLibError(
           error_message.str(),
           "FSI_functions::setup_fluid_load_info_for_solid_elements()",
@@ -781,7 +768,7 @@ namespace FSI_functions
        // The bulk fluid element adjacent to the integration point is 
        // the bulk fluid element used to create the face element
        // that contained the required zeta coordinate
-       solid_element_pt->adjacent_fluid_element_pt(face,ipt) = 
+       solid_element_pt->external_element_pt(face,ipt) =
         dynamic_cast<FSIFluidElement*>(face_element_geom_object_pt->
                                        bulk_element_pt());
        
@@ -793,8 +780,9 @@ namespace FSI_functions
         get_local_coordinate_in_bulk(s_face,local_s_fluid_bulk);
       
        //Set the value of the local coordinates in the fluid bulk element
-       solid_element_pt->adjacent_fluid_local_coord(face,ipt) = 
+       solid_element_pt->external_element_local_coord(face,ipt) = 
         local_s_fluid_bulk;
+
       }
     }
    
@@ -818,6 +806,188 @@ namespace FSI_functions
    delete fluid_face_mesh_pt;
   }
 
+
+ //============================================================================
+ /// \short Set up the information that the FSIWallElements
+ /// in the specified solid mesh require to obtain the fluid loading from the
+ /// adjacent fluid elements in the specified fluid mesh.
+ /// The parameter b specifies the boundary in the fluid mesh
+ /// that is adjacent to the solid mesh. The template parameters
+ /// specify the type of the fluid element and their spatial
+ /// dimension. The optional final argument, face, identifies the
+ /// face of the FSIWallElements that is exposed to the fluid. face
+ /// defaults to 0, indicating that the front is loaded along the
+ /// specified fluid mesh boundary. Set it to 1 to set up the FSI lookup
+ /// schemes for fluid loading along the "back" of the FSIWallElements.
+ /// This routine uses the procedures in the Multi_domain_functions namespace
+ /// to set up the interaction by locating the adjacent (source) elements
+ /// for each integration point of each solid element
+ //============================================================================
+ template<class FLUID_ELEMENT, unsigned DIM_FLUID>
+  void setup_fluid_load_info_for_solid_elements_using_external_storage(
+   const unsigned &boundary_in_fluid_mesh,
+   Mesh* const &fluid_mesh_pt,
+   Mesh* const &solid_mesh_pt,
+   Problem* problem_pt,
+   const unsigned& face=0)
+  {
+   // Flush all previous external storage
+   unsigned n_solid_element=solid_mesh_pt->nelement();
+   for (unsigned e=0;e<n_solid_element;e++)
+    {
+     //Cast each element to an FSIWallElement
+     FSIWallElement *solid_element_pt = dynamic_cast<FSIWallElement*>(
+      solid_mesh_pt->element_pt(e));
+
+     //Find the number of Gauss points of the element
+     unsigned n_intpt = solid_element_pt->integral_pt()->nweight();
+
+     //Loop over the integration points
+     for(unsigned ipt=0;ipt<n_intpt;ipt++)
+      {
+       // Null the adjacent fluid element storage for the current face and ipt
+       solid_element_pt->flush_adjacent_fluid_element_pt_and_coord(face,ipt);
+      }
+
+    }
+
+   // Create a face mesh adjacent to the fluid mesh's b-th boundary. 
+   // The face mesh consists of FaceElements that may also be 
+   // interpreted as GeomObjects
+   Mesh* fluid_face_mesh_pt = new Mesh;
+   fluid_mesh_pt->template build_face_mesh
+    <FLUID_ELEMENT,FaceElementAsGeomObject>(boundary_in_fluid_mesh,
+                                            fluid_face_mesh_pt);
+   
+   // Loop over these new face elements and tell them the boundary number
+   // from the bulk fluid mesh -- this is required to they can
+   // get access to the boundary coordinates!
+   unsigned n_face_element = fluid_face_mesh_pt->nelement();
+   for(unsigned e=0;e<n_face_element;e++)
+    {
+     //Cast the element pointer to the correct thing!
+     FaceElementAsGeomObject<FLUID_ELEMENT>* el_pt=
+      dynamic_cast<FaceElementAsGeomObject<FLUID_ELEMENT>*>
+      (fluid_face_mesh_pt->element_pt(e));
+
+     // Set bulk boundary number
+     el_pt->set_boundary_number_in_bulk_mesh(boundary_in_fluid_mesh);
+     
+     // Doc?
+     if (Doc_boundary_coordinate_file.is_open())
+      {
+       Vector<double> s(DIM_FLUID-1);
+       Vector<double> zeta(DIM_FLUID-1);
+       Vector<double> x(DIM_FLUID);
+       unsigned n_plot=5;
+       Doc_boundary_coordinate_file << el_pt->tecplot_zone_string(n_plot);
+       
+       // Loop over plot points
+       unsigned num_plot_points=el_pt->nplot_points(n_plot);
+       for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+        {         
+         // Get local coordinates of plot point
+         el_pt->get_s_plot(iplot,n_plot,s);         
+         el_pt->interpolated_zeta(s,zeta);
+         el_pt->interpolated_x(s,x);
+         for (unsigned i=0;i<DIM_FLUID;i++)
+          {
+           Doc_boundary_coordinate_file << x[i] << " ";
+          }
+         for (unsigned i=0;i<DIM_FLUID-1;i++)
+          {
+           Doc_boundary_coordinate_file << zeta[i] << " ";
+          }
+         Doc_boundary_coordinate_file << std::endl;
+        }
+       el_pt->write_tecplot_zone_footer(Doc_boundary_coordinate_file,n_plot);
+      }   
+    }
+
+   // Now sort the elements based on the boundary coordinates.
+   // This may allow a faster implementation of the locate_zeta
+   // function for the MeshAsGeomObject representation of this
+   // mesh, but also creates a unique ordering of the elements
+   std::sort(fluid_face_mesh_pt->element_pt().begin(),
+             fluid_face_mesh_pt->element_pt().end(),
+             CompareBoundaryCoordinate<FLUID_ELEMENT>());
+
+   // Tell the external storage method to make the bulk elements external
+   Multi_domain_functions::Use_bulk_element_as_external=true;
+
+   // Set the external elements for this problem using the surface mesh
+   // on the fluid mesh.  The interaction parameter in this instance is
+   // given by the "face" parameter.
+   Multi_domain_functions::set_external_storage<FSIWallElement,FLUID_ELEMENT,
+    FaceElementAsGeomObject<FLUID_ELEMENT>,DIM_FLUID-1,DIM_FLUID >
+    (problem_pt,solid_mesh_pt,fluid_mesh_pt,face,fluid_face_mesh_pt);
+
+#ifdef OOMPH_HAS_MPI
+   // Remove any duplicated equation numbers
+   if (MPI_Helpers::Nproc!=1)
+    {
+     // Need to call all non-local assigns in Problem::assign_eqn_numbers
+     std::cout << "FSI: Assign non-local equations only, number=" <<
+      problem_pt->assign_eqn_numbers(false) << std::endl;
+
+     // Now remove all the duplications, which are in the FLUID mesh!
+     Multi_domain_functions::remove_duplicate_eqn_numbers(fluid_mesh_pt);
+    }
+   else
+    {
+     oomph_info << "INFO: No need to remove duplicate equation numbers"
+                << " on a single-process run, continuing" << std::endl;
+    }
+#endif
+
+   // The source elements and coordinates have now all been set
+
+   //Clean up the memory allocated:
+
+   //The MeshAsGeomObject has already been deleted (in set_external_storage)
+
+   //Must be careful with the FaceMesh, because we cannot delete the nodes
+   //Loop over the elements backwards (paranoid!) and delete them
+   for(unsigned e=n_face_element;e>0;e--)
+    {
+     delete fluid_face_mesh_pt->element_pt(e-1);
+     fluid_face_mesh_pt->element_pt(e-1) = 0;
+    }
+   //Now clear all element and node storage (should maybe fine-grain this)
+   fluid_face_mesh_pt->flush_element_and_node_storage();
+
+   //Finally delete the mesh
+   delete fluid_face_mesh_pt;
+  }
+
+ //============================================================================
+ /// Short wrapper function to choose between using external storage or not
+ /// in the setup of fluid load information for solid elements.  The choice
+ /// is made by setting the flag FSI_functions::Use_external_storage, where
+ /// the default value is false.  In order to do a distributed 
+ /// FSI problem in parallel, this flag needs to be set to true.
+ //============================================================================
+ template<class FLUID_ELEMENT, unsigned DIM_FLUID>
+  void setup_fluid_load_info_for_solid_elements(
+   const unsigned &boundary_in_fluid_mesh,
+   Mesh* const &fluid_mesh_pt,
+   Mesh* const &solid_mesh_pt,
+   Problem* problem_pt,
+   const unsigned& face=0)
+  {
+   if (Use_external_storage)
+    {
+     setup_fluid_load_info_for_solid_elements_using_external_storage
+      <FLUID_ELEMENT,DIM_FLUID>
+      (boundary_in_fluid_mesh,fluid_mesh_pt,solid_mesh_pt,problem_pt,face);
+    }
+   else
+    {
+     setup_fluid_load_info_for_solid_elements_without_external_storage
+      <FLUID_ELEMENT,DIM_FLUID>
+      (boundary_in_fluid_mesh,fluid_mesh_pt,solid_mesh_pt,face);
+    }
+  }
 
 //============================================================================
 /// Doc FSI: 
@@ -901,6 +1071,24 @@ void doc_fsi(Mesh* fluid_mesh_pt,
   }
 
 
+#ifdef OOMPH_HAS_MPI
+ // External halo elements must also be included in this check
+ for (int d=0;d<MPI_Helpers::Nproc;d++)
+  {
+   unsigned n_ext_halo_f=fluid_mesh_pt->nexternal_halo_element(d);
+   for (unsigned e=0;e<n_ext_halo_f;e++)
+    {
+     unsigned ninternal=fluid_mesh_pt->
+      external_halo_element_pt(d,e)->ninternal_data();
+     for (unsigned k=0;k<ninternal;k++)
+      {
+       internal_data_element_pt[
+        fluid_mesh_pt->external_halo_element_pt(d,e)->internal_data_pt(k)]=
+        fluid_mesh_pt->external_halo_element_pt(d,e);
+      }
+    }
+  }
+#endif
 
 
 
@@ -917,187 +1105,198 @@ void doc_fsi(Mesh* fluid_mesh_pt,
    // Get pointer to wall element
    FSIWallElement* el_pt=
     dynamic_cast<FSIWallElement*>(wall_mesh_pt->finite_element_pt(e));
-   
-   // Storage for local and global coords
-   unsigned ndim_local = el_pt->dim();
-   Vector<double> s(ndim_local);
-   unsigned ndim_eulerian = el_pt->nodal_dimension();
-   Vector<double> x(ndim_eulerian);
-   
 
-   // Map to indicate if the internal Data for a given 
-   // fluid element has been plotted already
-   std::map<FiniteElement*,bool> element_internal_data_has_been_plotted;
-
-   // Loop over Gauss points and doc their position
-   //-----------------------------------------------
-   unsigned nint=el_pt->integral_pt()->nweight();
-   some_file << "ZONE I=" << nint << std::endl;
-   for (unsigned i=0;i<nint;i++)
+#ifdef OOMPH_HAS_MPI
+   // If it's a halo element then it will not have set an adjacent
+   // fluid element so there's no point trying to output it!
+   if (!el_pt->is_halo())
     {
-     for (unsigned j=0;j<ndim_local;j++)
-      {
-       s[j]=el_pt->integral_pt()->knot(i,j);
-      }
-     el_pt->interpolated_x(s,x);
-     for (unsigned j=0;j<ndim_eulerian;j++)
-      {
-       some_file << x[j] << " ";
-      }
-     some_file << i <<  std::endl;
-    }
+#endif
+   
+     // Storage for local and global coords
+     unsigned ndim_local = el_pt->dim();
+     Vector<double> s(ndim_local);
+     unsigned ndim_eulerian = el_pt->nodal_dimension();
+     Vector<double> x(ndim_eulerian);
+   
 
+     // Map to indicate if the internal Data for a given 
+     // fluid element has been plotted already
+     std::map<FiniteElement*,bool> element_internal_data_has_been_plotted;
 
-   // Loop over Gauss points again to find corresponding points in fluid
-   //--------------------------------------------------------------------
-   // elements
-   //---------
-    
-   // Loop over front and back if required: Get number of fluid-loaded faces
-   unsigned n_loaded_face=2;
-   if (el_pt->only_front_is_loaded_by_fluid()) n_loaded_face=1;
-  
-   for (unsigned face=0;face<n_loaded_face;face++)
-    {
+     // Loop over Gauss points and doc their position
+     //-----------------------------------------------
+     unsigned nint=el_pt->integral_pt()->nweight();
      some_file << "ZONE I=" << nint << std::endl;
      for (unsigned i=0;i<nint;i++)
       {
-       // Get corresponding fluid element
-       FSIFluidElement* fluid_el_pt=dynamic_cast<FSIFluidElement*>(
-        el_pt->adjacent_fluid_element_pt(face,i));
-       
-       // Get local coordinates in fluid element by copy operation
-       Vector<double> s_fluid(el_pt->adjacent_fluid_local_coord(face,i));
-       
-       // Get Eulerian position in fluid element
-       fluid_el_pt->interpolated_x(s_fluid,x);
+       for (unsigned j=0;j<ndim_local;j++)
+        {
+         s[j]=el_pt->integral_pt()->knot(i,j);
+        }
+       el_pt->interpolated_x(s,x);
        for (unsigned j=0;j<ndim_eulerian;j++)
         {
          some_file << x[j] << " ";
         }
-       some_file << i << std::endl;
+       some_file << i <<  std::endl;
       }
-    }
 
 
-   // Get the multiplicity of data that affects the load on this wall element
-   //------------------------------------------------------------------------
-   std::map<Data*,unsigned> data_count;
-   std::map<FiniteElement*,unsigned> internal_data_count;
-   Vector<Data*> load_data_pt(el_pt->load_data_pt());
-   unsigned nload=load_data_pt.size();
-   for (unsigned l=0;l<nload;l++)
-    {
-     data_count[load_data_pt[l]]++;
-     if (internal_data_element_pt[load_data_pt[l]]!=0)
+     // Loop over Gauss points again to find corresponding points in fluid
+     //--------------------------------------------------------------------
+     // elements
+     //---------
+    
+     // Loop over front and back if required: Get number of fluid-loaded faces
+     unsigned n_loaded_face=2;
+     if (el_pt->only_front_is_loaded_by_fluid()) n_loaded_face=1;
+  
+     for (unsigned face=0;face<n_loaded_face;face++)
       {
-       internal_data_count[internal_data_element_pt[load_data_pt[l]]]++;
-      }
-    }
-
-
-   // Loop over unique data entries
-   //------------------------------
-   for(std::map<Data*,unsigned>::iterator it=data_count.begin();
-       it != data_count.end(); it++)
-    {
-     Data* unique_data_pt=it->first;
-
-     // Try to cast to a Node
-     //----------------------
-     Node* node_pt=dynamic_cast<Node*>(unique_data_pt);
-     if (node_pt==0)
-      {
-       //oomph_info << "Is not a node: Repeats:" << it->second;
-
-       // Is it a solid node? NOTE: This query makes sense as we're
-       //----------------------------------------------------------
-       // checking for the SolidNode's *positional* Data, not for
-       //--------------------------------------------------------
-       // the SolidNode itself!
-       //----------------------
-       if (solid_node_pt[unique_data_pt]!=0)
+       some_file << "ZONE I=" << nint << std::endl;
+       for (unsigned i=0;i<nint;i++)
         {
-         //oomph_info << "... it's a solid node! " ;
+         // Get corresponding fluid element
+         FSIFluidElement* fluid_el_pt=dynamic_cast<FSIFluidElement*>(
+          el_pt->external_element_pt(face,i));
+       
+         // Get local coordinates in fluid element by copy operation
+         Vector<double> s_fluid(el_pt->external_element_local_coord(face,i));
+       
+         // Get Eulerian position in fluid element
+         fluid_el_pt->interpolated_x(s_fluid,x);
+         for (unsigned j=0;j<ndim_eulerian;j++)
+          {
+           some_file << x[j] << " ";
+          }
+         some_file << i << std::endl;
+        }
+      }
+
+
+     // Get the multiplicity of data that affects the load on this wall element
+     //------------------------------------------------------------------------
+     std::map<Data*,unsigned> data_count;
+     std::map<FiniteElement*,unsigned> internal_data_count;
+     Vector<Data*> load_data_pt(el_pt->load_data_pt());
+     unsigned nload=load_data_pt.size();
+     for (unsigned l=0;l<nload;l++)
+      {
+       data_count[load_data_pt[l]]++;
+       if (internal_data_element_pt[load_data_pt[l]]!=0)
+        {
+         internal_data_count[internal_data_element_pt[load_data_pt[l]]]++;
+        }
+      }
+
+
+     // Loop over unique data entries
+     //------------------------------
+     for(std::map<Data*,unsigned>::iterator it=data_count.begin();
+         it != data_count.end(); it++)
+      {
+       Data* unique_data_pt=it->first;
+
+       // Try to cast to a Node
+       //----------------------
+       Node* node_pt=dynamic_cast<Node*>(unique_data_pt);
+       if (node_pt==0)
+        {
+         //oomph_info << "Is not a node: Repeats:" << it->second;
+
+         // Is it a solid node? NOTE: This query makes sense as we're
+         //----------------------------------------------------------
+         // checking for the SolidNode's *positional* Data, not for
+         //--------------------------------------------------------
+         // the SolidNode itself!
+         //----------------------
+         if (solid_node_pt[unique_data_pt]!=0)
+          {
+           //oomph_info << "... it's a solid node! " ;
+           some_file << "TEXT " ;
+           for (unsigned j=0;j<ndim_eulerian;j++)
+            {
+             some_file << label[j] << solid_node_pt[unique_data_pt]->x(j) 
+                       << " ";
+            }
+
+           some_file <<"CS=GRID, HU=FRAME, H=2.5, AN=MIDCENTER, C=GREEN "
+                     << "T=\"" <<  it->second << "\"" << std::endl;
+          }       
+
+         // Is it internal (pressure) Data in a fluid element?
+         //---------------------------------------------------
+         else if (internal_data_element_pt[unique_data_pt]!=0)
+          {
+           //oomph_info << "... it's internal (pressure) Data! " ;
+           if (!element_internal_data_has_been_plotted[
+                internal_data_element_pt[unique_data_pt]])
+            {
+             some_file << "TEXT " ;
+             // Pointer to fluid element that contains this internal data
+             FiniteElement* fluid_el_pt=internal_data_element_pt[unique_data_pt];
+           
+             // Get the plot coordinates in this element: centre + a bit of
+             // offset
+             double s_max=fluid_el_pt->s_max();
+             double s_min=fluid_el_pt->s_min();
+             Vector<double> s_fluid(ndim_eulerian);
+             Vector<double> x_fluid(ndim_eulerian);
+             for (unsigned k=0;k<ndim_eulerian;k++)
+              {
+               s_fluid[k]=0.5*(s_max+s_min)+0.1*(s_max-s_min);
+              }
+             fluid_el_pt->interpolated_x(s_fluid,x_fluid);
+             for (unsigned j=0;j<ndim_eulerian;j++)
+              {           
+               some_file << label[j] << x_fluid[j] << " ";
+              }
+           
+             some_file <<"CS=GRID, HU=FRAME, H=2.5, AN=MIDCENTER, C=BLUE "
+                       << "T=\"" << it->second << "\"" 
+              // internal_data_count[fluid_el_pt] 
+                       << std::endl;
+           
+             // Now we have plotted it....
+             element_internal_data_has_been_plotted[
+              internal_data_element_pt[unique_data_pt]]=true;
+            }
+
+          }
+         else
+          {
+           std::ostringstream error_message;
+           error_message 
+            << "Data that affects the load on an FSIWallElement\n" 
+            << "is neither a (fluid) Node, nor a SolidNode nor\n" 
+            << "internal Data in a (fluid) element\n" 
+            << "I don't think this should happen..."
+            << std::endl;
+           throw OomphLibError(error_message.str(),
+                               "FSI_functions::doc_fsi()",
+                               OOMPH_EXCEPTION_LOCATION);
+          }
+        }
+       // It must be a node then
+       //-----------------------
+       else
+        {
+         //oomph_info << "Is a node: Repeats:"  << it->second << std::endl;
          some_file << "TEXT " ;
          for (unsigned j=0;j<ndim_eulerian;j++)
           {
-           some_file << label[j] << solid_node_pt[unique_data_pt]->x(j) 
-                     << " ";
+           some_file << label[j] << node_pt->x(j) << ", ";         
           }
-
-         some_file <<"CS=GRID, HU=FRAME, H=2.5, AN=MIDCENTER, C=GREEN "
-                   << "T=\"" <<  it->second << "\"" << std::endl;
-        }       
-
-       // Is it internal (pressure) Data in a fluid element?
-       //---------------------------------------------------
-       else if (internal_data_element_pt[unique_data_pt]!=0)
-        {
-         //oomph_info << "... it's internal (pressure) Data! " ;
-         if (!element_internal_data_has_been_plotted[
-              internal_data_element_pt[unique_data_pt]])
-          {
-           some_file << "TEXT " ;
-           // Pointer to fluid element that contains this internal data
-           FiniteElement* fluid_el_pt=internal_data_element_pt[unique_data_pt];
-           
-           // Get the plot coordinates in this element: centre + a bit of
-           // offset
-           double s_max=fluid_el_pt->s_max();
-           double s_min=fluid_el_pt->s_min();
-           Vector<double> s_fluid(ndim_eulerian);
-           Vector<double> x_fluid(ndim_eulerian);
-           for (unsigned k=0;k<ndim_eulerian;k++)
-            {
-             s_fluid[k]=0.5*(s_max+s_min)+0.1*(s_max-s_min);
-            }
-           fluid_el_pt->interpolated_x(s_fluid,x_fluid);
-           for (unsigned j=0;j<ndim_eulerian;j++)
-            {           
-             some_file << label[j] << x_fluid[j] << " ";
-            }
-           
-           some_file <<"CS=GRID, HU=FRAME, H=2.5, AN=MIDCENTER, C=BLUE "
-                     << "T=\"" << it->second << "\"" 
-            // internal_data_count[fluid_el_pt] 
-                     << std::endl;
-           
-           // Now we have plotted it....
-           element_internal_data_has_been_plotted[
-            internal_data_element_pt[unique_data_pt]]=true;
-          }
-
-        }
-       else
-        {
-         std::ostringstream error_message;
-         error_message 
-          << "Data that affects the load on an FSIWallElement\n" 
-          << "is neither a (fluid) Node, nor a SolidNode nor\n" 
-          << "internal Data in a (fluid) element\n" 
-          << "I don't think this should happen..."
-          << std::endl;
-         throw OomphLibError(error_message.str(),
-                             "FSI_functions::doc_fsi()",
-                             OOMPH_EXCEPTION_LOCATION);
+         some_file <<"CS=GRID, HU=FRAME, H=2.5, AN=MIDCENTER, C=RED "<< "T=\""
+                   <<  it->second << "\"" 
+                   << std::endl;
         }
       }
-     // It must be a node then
-     //-----------------------
-     else
-      {
-       //oomph_info << "Is a node: Repeats:"  << it->second << std::endl;
-       some_file << "TEXT " ;
-       for (unsigned j=0;j<ndim_eulerian;j++)
-        {
-         some_file << label[j] << node_pt->x(j) << ", ";         
-        }
-       some_file <<"CS=GRID, HU=FRAME, H=2.5, AN=MIDCENTER, C=RED "<< "T=\""
-                 <<  it->second << "\"" 
-                 << std::endl;
-      }
-    }
+
+#ifdef OOMPH_HAS_MPI
+    } // end is_halo()
+#endif
    some_file.close(); 
   }
  

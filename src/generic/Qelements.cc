@@ -267,6 +267,14 @@ void QElement<1,NNODE_1D>::build_face_element(const int &face_index,
  
  // Set the pointer to the "bulk" element
  face_element_pt->bulk_element_pt()=this;
+
+#ifdef OOMPH_HAS_MPI
+ // If the bulk element is halo then the face element must be too
+ if (this->is_halo())
+  {
+   face_element_pt->is_halo()=true;
+  }
+#endif
  
  // Resize the storage for the original number of values at the (one and only)
  // node of the face element.
@@ -704,6 +712,14 @@ void QElement<2,NNODE_1D>::build_face_element(const int &face_index,
 
  // Set the pointer to the "bulk" element
  face_element_pt->bulk_element_pt()=this;
+
+#ifdef OOMPH_HAS_MPI
+ // If the bulk element is halo then the face element must be too
+ if (this->is_halo())
+  {
+   face_element_pt->is_halo()=true;
+  }
+#endif
 
  // Resize the storage for the original number of values at 
  // NNODE_1D nodes of the FaceElement
@@ -1219,6 +1235,14 @@ void QElement<3,NNODE_1D>::output(FILE* file_pt, const unsigned &n_plot)
 
  //Set the pointer to the orginal "bulk" element
  face_element_pt->bulk_element_pt()=this;
+
+#ifdef OOMPH_HAS_MPI
+ // If the bulk element is halo then the face element must be too
+ if (this->is_halo())
+  {
+   face_element_pt->is_halo()=true;
+  }
+#endif
 
  // Resize storage for the number of values originally stored
  // at the face element's NNODE_1D*NNODE_1D nodes.

@@ -140,21 +140,21 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
  
  //Get body force
  double source;
- this->get_source_cons_adv_diff(interpolated_x,source);
+ this->get_source_cons_adv_diff(ipt,interpolated_x,source);
  
  
  //Get wind
  //--------
  Vector<double> wind(DIM);
- this->get_wind_cons_adv_diff(s,interpolated_x,wind);
+ this->get_wind_cons_adv_diff(ipt,s,interpolated_x,wind);
 
  //Get the conserved wind (non-divergence free)
  Vector<double> conserved_wind(DIM);
- this->get_conserved_wind_cons_adv_diff(s,interpolated_x,conserved_wind);
+ this->get_conserved_wind_cons_adv_diff(ipt,s,interpolated_x,conserved_wind);
 
  //Get diffusivity tensor
  DenseMatrix<double> D(DIM,DIM);
- this->get_diff_cons_adv_diff(s,interpolated_x,D);
+ this->get_diff_cons_adv_diff(ipt,s,interpolated_x,D);
  
  // Assemble residuals and Jacobian
  //================================

@@ -193,7 +193,7 @@ class QElementBase : public virtual FiniteElement
  /// \short Global coordinates as function of local coordinates.
  /// Either via FE representation of QElement or
  /// via macro-element (if Macro_elem_pt!=0).
- void get_x(Vector<double>& s, Vector<double>& x) const
+ void get_x(const Vector<double>& s, Vector<double>& x) const
   {
    // Either read in position directly from underlying FE representation
    if(Macro_elem_pt==0) {interpolated_x(s,x);}
@@ -214,7 +214,7 @@ class QElementBase : public virtual FiniteElement
  /// at previous time "level" t (t=0: present; t>0: previous).
  /// Either via FE representation of QElement or
  /// via macro-element (if Macro_elem_pt!=0).
- void get_x(const unsigned& t, Vector<double>& s, Vector<double>& x) 
+ void get_x(const unsigned& t, const Vector<double>& s, Vector<double>& x) 
   {
    // Get timestepper from first node
    TimeStepper* time_stepper_pt=node_pt(0)->time_stepper_pt();

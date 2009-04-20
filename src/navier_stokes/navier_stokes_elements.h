@@ -173,7 +173,8 @@ class NavierStokesEquations : public virtual FSIFluidElement
  /// Eulerian position. This function is virtual so that it can be 
  /// overloaded in multi-physics elements where the body force might
  /// depend on another variable.
- virtual void get_body_force_nst(const double& time, 
+ virtual void get_body_force_nst(const double& time,
+                                 const unsigned& ipt,
                                  const Vector<double> &s,
                                  const Vector<double> &x, 
                                  Vector<double> &result)
@@ -198,6 +199,7 @@ class NavierStokesEquations : public virtual FSIFluidElement
  /// (if set) or by finite differencing (default)
  inline virtual void get_body_force_gradient_nst(
   const double& time,
+  const unsigned& ipt,
   const Vector<double>& s,
   const Vector<double>& x, 
   DenseMatrix<double>& d_body_force_dx)
@@ -208,7 +210,7 @@ class NavierStokesEquations : public virtual FSIFluidElement
     {
      // Reference value
      Vector<double> body_force(DIM,0.0);
-     get_body_force_nst(time,s,x,body_force);
+     get_body_force_nst(time,ipt,s,x,body_force);
 
      // FD it
      double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
@@ -217,7 +219,7 @@ class NavierStokesEquations : public virtual FSIFluidElement
      for (unsigned i=0;i<DIM;i++)
       {
        x_pls[i]+=eps_fd;
-       get_body_force_nst(time,s,x_pls,body_force_pls);
+       get_body_force_nst(time,ipt,s,x_pls,body_force_pls);
        for (unsigned j=0;j<DIM;j++)
         {
          d_body_force_dx(j,i)=(body_force_pls[j]-body_force[j])/eps_fd;
@@ -236,7 +238,8 @@ class NavierStokesEquations : public virtual FSIFluidElement
 
  /// \short Calculate the source fct at given time and
  /// Eulerian position 
- virtual double get_source_nst(const double& time, const Vector<double> &x)
+ virtual double get_source_nst(const double& time, const unsigned& ipt,
+                               const Vector<double> &x)
   {
    //If the function pointer is zero return zero
    if (Source_fct_pt == 0) {return 0;}
@@ -252,6 +255,7 @@ class NavierStokesEquations : public virtual FSIFluidElement
  /// (if set) or by finite differencing (default)
  inline virtual void get_source_gradient_nst(
   const double& time,
+  const unsigned& ipt,
   const Vector<double>& x, 
   Vector<double>& gradient)
   {
@@ -260,7 +264,7 @@ class NavierStokesEquations : public virtual FSIFluidElement
 /*    if(Source_fct_gradient_pt==0) */
     {
      // Reference value
-     double source=get_source_nst(time,x);
+     double source=get_source_nst(time,ipt,x);
 
      // FD it
      double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
@@ -269,7 +273,7 @@ class NavierStokesEquations : public virtual FSIFluidElement
      for (unsigned i=0;i<DIM;i++)
       {
        x_pls[i]+=eps_fd;
-       source_pls=get_source_nst(time,x_pls);
+       source_pls=get_source_nst(time,ipt,x_pls);
        gradient[i]=(source_pls-source)/eps_fd;
        x_pls[i]=x[i];
       }

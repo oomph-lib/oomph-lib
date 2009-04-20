@@ -492,7 +492,8 @@ template<class FLUID_ELEMENT, unsigned DIM_FLUID>
 void FSI_functions::setup_fluid_load_info_for_solid_elements(
      const unsigned &boundary_in_fluid_mesh,
      Mesh* const& fluid_mesh_pt,
-     Mesh* const& solid_mesh_pt);
+     Mesh* const& solid_mesh_pt,
+     Problem* problem_pt);
 \endcode
 
 which is defined in the namespace \c FSI_functions. The template
@@ -972,7 +973,7 @@ to work out the fluid traction. The required lookup tables are
 created by the function 
 \c FSI_functions::setup_fluid_load_info_for_solid_elements(...):
 
-\until    (3,Bulk_mesh_pt,Wall_mesh_pt);
+\until    (3,Bulk_mesh_pt,Wall_mesh_pt,this);
 
 Finally, we set up the equation numbering scheme.
 

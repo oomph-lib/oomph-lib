@@ -291,7 +291,7 @@ void AlgebraicFSIDrivenCavityMesh<ELEMENT>::setup_algebraic_node_update()
 
 
  // Loop over all nodes in mesh
- unsigned nnod=nnode();
+ unsigned nnod=this->nnode();
  for (unsigned j=0;j<nnod;j++)
   {
    // Get pointer to node -- recall that that Mesh::node_pt(...) has been

@@ -264,6 +264,14 @@ void TElement<1,NNODE_1D>::build_face_element(const int &face_index,
  // Set the pointer to the "bulk" element
  face_element_pt->bulk_element_pt()=this;
  
+#ifdef OOMPH_HAS_MPI
+ // If the bulk element is halo then the face element must be too
+ if (this->is_halo())
+  {
+   face_element_pt->is_halo()=true;
+  }
+#endif
+
  // Resize the storage for the original number of values at the (one and only)
  // node of the face element.
  face_element_pt->nbulk_value_resize(1);
@@ -451,6 +459,14 @@ namespace TElement2BulkCoordinateDerivatives
 
  //Set the pointer to the orginal "bulk" element
  face_element_pt->bulk_element_pt()=this;
+
+#ifdef OOMPH_HAS_MPI
+ // If the bulk element is halo then the face element must be too
+ if (this->is_halo())
+  {
+   face_element_pt->is_halo()=true;
+  }
+#endif
 
  //Calculate the number of nodes in the face element
  const unsigned n_face_nodes = NNODE_1D;
@@ -936,6 +952,14 @@ const unsigned TElement<3,3>::NodeOnFace[4][6] =
 
  //Set the pointer to the orginal "bulk" element
  face_element_pt->bulk_element_pt()=this;
+
+#ifdef OOMPH_HAS_MPI
+ // If the bulk element is halo then the face element must be too
+ if (this->is_halo())
+  {
+   face_element_pt->is_halo()=true;
+  }
+#endif
 
  //Calculate the number of nodes in the face element
  const unsigned n_face_nodes = (NNODE_1D*(NNODE_1D+1))/2;

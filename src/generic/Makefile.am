@@ -26,7 +26,7 @@ fsi.cc octree.cc tree.cc orthpoly.cc             \
 superlu.c superlu_complex.c refineable_brick_element.cc \
 brick_mesh.cc spines.cc element_with_moving_nodes.cc \
 macro_element_node_update_element.cc \
-face_element_as_geometric_object.cc \
+multi_domain.cc \
 eigen_solver.cc \
 triangle_scaffold_mesh.cc  geompack_scaffold_mesh.cc \
 tetgen_scaffold_mesh.cc simple_cubic_scaffold_tet_mesh.cc \
@@ -35,6 +35,7 @@ partitioning.cc linear_algebra_distribution.cc double_vector.cc \
 iterative_linear_solver.cc \
 general_purpose_preconditioners.cc block_preconditioner.cc \
 matrix_vector_product.cc
+#face_element_as_geometric_object.cc
 
 
 if WANT_MPI
@@ -77,7 +78,7 @@ triangle_scaffold_mesh.h geompack_scaffold_mesh.h tetgen_scaffold_mesh.h \
 pseudo_buckling_ring.h simple_cubic_scaffold_tet_mesh.h \
 triangle_mesh.h tet_mesh.h \
 partitioning.h communicator.h linear_algebra_distribution.h double_vector.h \
-iterative_linear_solver.h preconditioner.h \
+multi_domain.h iterative_linear_solver.h preconditioner.h \
 general_purpose_preconditioners.h block_preconditioner.h \
 general_purpose_block_preconditioners.h SuperLU_preconditioner.h \
 matrix_vector_product.h

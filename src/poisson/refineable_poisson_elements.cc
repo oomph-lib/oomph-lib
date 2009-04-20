@@ -101,7 +101,7 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
  
  //Get body force
  double source;
- this->get_source_poisson(interpolated_x,source);
+ this->get_source_poisson(ipt,interpolated_x,source);
  
  
  // Assemble residuals and Jacobian
@@ -318,7 +318,7 @@ void RefineablePoissonEquations<DIM>::get_dresidual_dnodal_coordinates(
    //Get source function
    //-------------------
    double source;
-   this->get_source_poisson(interpolated_x,source);
+   this->get_source_poisson(ipt,interpolated_x,source);
 
    // FD step 
    double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
@@ -384,7 +384,7 @@ void RefineablePoissonEquations<DIM>::get_dresidual_dnodal_coordinates(
     }
    
    // Get gradient of source function
-   this->get_source_gradient_poisson(interpolated_x, d_source_dx);
+   this->get_source_gradient_poisson(ipt, interpolated_x, d_source_dx);
 
    
    // Assemble shape derivatives

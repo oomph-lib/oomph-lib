@@ -31,6 +31,7 @@
 
 #include "../generic/problem.h"
 #include "../generic/geom_objects.h"
+#include "../generic/mesh.h"
 
 namespace oomph
 {

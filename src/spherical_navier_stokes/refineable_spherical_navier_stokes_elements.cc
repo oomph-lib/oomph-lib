@@ -187,10 +187,10 @@ int local_eqn=0, local_unknown=0;
    
    //Get the user-defined body force terms
    Vector<double> body_force(3);
-   this->get_body_force_spherical_nst(time(),s,interpolated_x,body_force);
+   this->get_body_force_spherical_nst(time(),ipt,s,interpolated_x,body_force);
    
    //Get the user-defined source function
-   //double source=this->get_source_spherical_nst(time(),interpolated_x);
+   //double source=this->get_source_spherical_nst(time(),ipt,interpolated_x);
    
    // r is the first postition component
    const double r = interpolated_x[0];

@@ -139,13 +139,13 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
  
  //Get body force
  double source;
- this->get_source_adv_diff(interpolated_x,source);
+ this->get_source_adv_diff(ipt,interpolated_x,source);
  
  
  //Get wind
  //--------
  Vector<double> wind(DIM);
- this->get_wind_adv_diff(s,interpolated_x,wind);
+ this->get_wind_adv_diff(ipt,s,interpolated_x,wind);
  
  // Assemble residuals and Jacobian
  //================================

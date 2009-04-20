@@ -308,7 +308,8 @@ public:
  /// virtual to allow overloading in multi-physics problems where
  /// the strength of the source function might be determined by
  /// another system of equations 
- inline virtual void get_source_adv_diff_react(const Vector<double>& x, 
+ inline virtual void get_source_adv_diff_react(const unsigned& ipt,
+                                               const Vector<double>& x,
                                                Vector<double> &source) const
   {
    //If no source function has been set, return zero
@@ -328,7 +329,8 @@ public:
  /// virtual to allow overloading in multi-physics problems where
  /// the wind function might be determined by
  /// another system of equations 
- inline virtual void get_wind_adv_diff_react(const Vector<double> &s, 
+ inline virtual void get_wind_adv_diff_react(const unsigned& ipt,
+                                             const Vector<double> &s,
                                              const Vector<double>& x,
                                              Vector<double>& wind) const
   {
@@ -350,7 +352,8 @@ public:
  /// virtual to allow overloading in multi-physics problems where
  /// the reaction function might be determined by
  /// another system of equations 
- inline virtual void get_reaction_adv_diff_react(const Vector<double> &C, 
+ inline virtual void get_reaction_adv_diff_react(const unsigned& ipt,
+                                                 const Vector<double> &C,
                                                  Vector<double>& R) const
   {
    //If no wind function has been set, return zero
@@ -368,7 +371,8 @@ public:
  /// \short Get the derivatives of the reaction terms with respect to the 
  /// concentration variables. If no explicit function pointer is set,
  /// these will be calculated by finite differences
- virtual void get_reaction_deriv_adv_diff_react(const Vector<double> &C,
+ virtual void get_reaction_deriv_adv_diff_react(const unsigned& ipt,
+                                                const Vector<double> &C,
                                                 DenseMatrix<double> &dRdC)
   const
   {

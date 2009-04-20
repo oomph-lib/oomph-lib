@@ -204,6 +204,17 @@ class MacroElement
    assemble_macro_to_eulerian_jacobian2(t,s,jacobian2);
   }
 
+ ///\short Access function to the Macro_element_number
+ unsigned& macro_element_number()
+  {
+   return Macro_element_number;
+  }
+
+ ///\short Access function to the Domain_pt
+ Domain*& domain_pt()
+  {
+   return Domain_pt;
+  }
 
   protected:
 

@@ -38,7 +38,7 @@
 #include "elements.h"
 #include "nodes.h"
 #include "quadtree.h"
-#include "mesh.h"
+//#include "mesh.h"
 #include "timesteppers.h"
 
 
@@ -46,6 +46,7 @@ namespace oomph
 {
 
 class AlgebraicNode;
+class AlgebraicMesh;
 
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -215,7 +216,11 @@ public:
     << "GeomObject::ngeom_data() is a broken virtual function.\n"
     << "Please implement it (and its companion GeomObject::geom_data_pt())\n"
     << "for any GeomObject whose shape depends on Data whose values may \n"
-    << "be unknowns in the global Problem. \n";
+    << "be unknowns in the global Problem. \n"
+    << "If you have arrived here in a parallel job then it may be the case \n"
+    << "that you have not set the keep_all_elements_as_halos() flag to true \n"
+    << "for the MeshAsGeomObject representing the lower-dimensional mesh \n"
+    << "in a problem with multiple meshes. \n";
    throw OomphLibError(error_message.str(),
                        "GeomObject::ngeom_data()",
                        OOMPH_EXCEPTION_LOCATION);
@@ -233,7 +238,11 @@ public:
     << "GeomObject::geom_data_pt() is a broken virtual function.\n"
     << "Please implement it (and its companion GeomObject::ngeom_data())\n"
     << "for any GeomObject whose shape depends on Data whose values may \n"
-    << "be unknowns in the global Problem. \n";
+    << "be unknowns in the global Problem. \n"
+    << "If you have arrived here in a parallel job then it may be the case \n"
+    << "that you have not set the keep_all_elements_as_halos() flag to true \n"
+    << "for the MeshAsGeomObject representing the lower-dimensional mesh \n"
+    << "in a problem with multiple meshes. \n";
    throw OomphLibError(error_message.str(),
                        "GeomObject::geom_data_pt()",
                        OOMPH_EXCEPTION_LOCATION);

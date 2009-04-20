@@ -29,8 +29,10 @@
 #define OOMPH_MACRO_ELEMENT_NODE_UPDATE_ELEMENTS_HEADER
 
 #include "geom_objects.h"
+#include "mesh.h"
 #include "elements.h"
 #include "element_with_moving_nodes.h"
+#include "domain.h"
 
 namespace oomph
 {
@@ -104,8 +106,8 @@ public:
  void node_update(const bool& update_all_time_levels_for_new_node=false);
  
  /// \short  Pointer to finite element that performs the update by referring
- /// to its macro-element representation.
- FiniteElement* node_update_element_pt()
+ /// to its macro-element representation (Access required...)
+ FiniteElement*& node_update_element_pt()
   {
    return Node_update_element_pt;
   }
@@ -390,6 +392,13 @@ class MacroElementNodeUpdateMesh : public virtual Mesh
    BrokenCopy::broken_assign("MacroElementNodeUpdateMesh");
   }
 
+ /// Access to domain_pt for MacroElementNodeUpdateMesh; this
+ /// must be filled in by any mesh which inherits from here
+ Domain*& dom_pt()
+  {
+   return Domain_pt;
+  }
+
  /// \short Update all nodal positions via sparse MacroElement-based 
  /// update functions. If a Node is hanging its position is updated
  /// after updating the position of its masters first. 
@@ -436,7 +445,93 @@ class MacroElementNodeUpdateMesh : public virtual Mesh
 #endif
      nod_pt->node_update();
     }
+
+#ifdef OOMPH_HAS_MPI
+   // Update positions for external halo nodes attached to this mesh
+   // Loop over processors
+   for (int iproc=0;iproc<MPI_Helpers::Nproc;iproc++)
+    {
+     unsigned n_ext_halo_node=nexternal_halo_node(iproc);
+     for (unsigned n=0;n<n_ext_halo_node;n++)
+      {
+       MacroElementNodeUpdateNode* nod_pt=dynamic_cast
+        <MacroElementNodeUpdateNode*>(external_halo_node_pt(iproc,n));
+#ifdef PARANOID
+       if (nod_pt==0)
+        {
+         std::ostringstream error_message;
+         error_message 
+          << "Failed to cast (ext. halo) to MacroElementNodeUpdateNode.\n"
+          << "Node is of type: " << typeid(node_pt(n)).name() << std::endl;
+       
+         throw OomphLibError(error_message.str(),
+                             "MacroElementNodeUpdateMesh::node_update()",
+                             OOMPH_EXCEPTION_LOCATION);
+        }
+#endif
+       nod_pt->node_update();
+      }
+    } // end loop over processors
+#endif // (ifdef OOMPH_HAS_MPI)
   }
+
+#ifdef OOMPH_HAS_MPI
+ /// \short Overload the base class distribute function to deal
+ /// with halo nodes on halo elements that may have pointers
+ /// to macro elements that no longer exist
+ void distribute(const Vector<unsigned>& element_domain,
+                 DocInfo& doc_info,
+                 const bool& report_stats)
+  {
+   // Call underlying Mesh::distribute first
+   Mesh::distribute(element_domain,doc_info,report_stats);
+
+   // The original call to set_node_update_info on the 
+   // non-distributed problem may have set a macro element which no 
+   // longer exists for some halo nodes which are on halo elements 
+   // within the distributed Mesh; this deals with the problem by 
+   // recalling the set_node_update_info for every halo element
+   for (int iproc=0;iproc<MPI_Helpers::Nproc;iproc++)
+    {
+     Vector<FiniteElement*> halo_el_pt=halo_element_pt(iproc);
+     unsigned n_halo_el=halo_el_pt.size();
+     for (unsigned e=0;e<n_halo_el;e++)
+      {
+       // Cast to a MacroElementNodeUpdateElement
+       MacroElementNodeUpdateElementBase* macro_el_pt=
+        dynamic_cast<MacroElementNodeUpdateElementBase*>(halo_el_pt[e]);
+
+       // The vector of GeomObjects should not change!
+       Vector<GeomObject*> geom_object_pt=macro_el_pt->geom_object_pt();
+
+       // So we can just call set_node_update_info for the element!
+       macro_el_pt->set_node_update_info(geom_object_pt);
+      }
+    }
+
+  }
+#endif
+
+ /// \short Set geometric objects associated with MacroElementNodeUpdateMesh;
+ /// this must also be called from the constructor of each derived mesh
+ void set_geom_object_vector_pt(Vector<GeomObject*> geom_object_vector_pt)
+  {
+   Geom_object_vector_pt=geom_object_vector_pt;
+  }
+
+ /// \short Access function to the vector of GeomObject
+ Vector<GeomObject*> geom_object_vector_pt()
+  {
+   return Geom_object_vector_pt;
+  }
+
+  private:
+ 
+ /// \short Vector of GeomObject associated with MacroElementNodeUpdateNodeMesh
+ Vector<GeomObject*> Geom_object_vector_pt;
+
+ /// \short Domain associated with MacroElementNodeUpdateNodeMesh
+ Domain* Domain_pt;
 
 };
 

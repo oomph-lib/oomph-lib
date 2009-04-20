@@ -156,22 +156,22 @@ fill_in_generic_residual_contribution_adv_diff_react(
 
    //Get source function
    Vector<double> source(NREAGENT);
-   get_source_adv_diff_react(interpolated_x,source);
+   get_source_adv_diff_react(ipt,interpolated_x,source);
 
 
    //Get wind
    Vector<double> wind(DIM);
-   get_wind_adv_diff_react(s,interpolated_x,wind);
+   get_wind_adv_diff_react(ipt,s,interpolated_x,wind);
 
    //Get reaction terms
    Vector<double> R(NREAGENT);
-   get_reaction_adv_diff_react(interpolated_c,R);
+   get_reaction_adv_diff_react(ipt,interpolated_c,R);
 
    //If we are getting the jacobian the get the derivative terms
    DenseMatrix<double> dRdC(NREAGENT);
    if(flag)
     {
-     get_reaction_deriv_adv_diff_react(interpolated_c,dRdC);
+     get_reaction_deriv_adv_diff_react(ipt,interpolated_c,dRdC);
     }
    
 
@@ -400,7 +400,9 @@ output(std::ostream &outfile, const unsigned &nplot)
 
    // Get the wind
    Vector<double> wind(DIM);
-   get_wind_adv_diff_react(s,x,wind);
+   // Dummy integration point needed
+   unsigned ipt=0;
+   get_wind_adv_diff_react(ipt,s,x,wind);
    for(unsigned i=0;i<DIM;i++) 
     {
      outfile << wind[i] << " ";

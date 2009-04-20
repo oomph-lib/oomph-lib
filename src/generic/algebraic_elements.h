@@ -29,6 +29,7 @@
 #define OOMPH_ALGEBRAIC_ELEMENTS_HEADER
 
 #include "geom_objects.h"
+#include "mesh.h"
 #include "elements.h"
 #include "domain.h"
 #include "element_with_moving_nodes.h"
@@ -626,8 +627,13 @@ class AlgebraicMesh : public virtual Mesh
 
   public:
 
- /// Emtpty constructor
- AlgebraicMesh(){};
+ /// Constructor: create a null zeroth entry in the Geom_object_list_pt
+ /// Vector (each AlgebraicMesh's constructor should add any other 
+ /// geometric objects to this list)
+ AlgebraicMesh()
+  {
+   add_geom_object_list_pt(0);
+  }
 
  /// Broken copy constructor
  AlgebraicMesh(const AlgebraicMesh&) 
@@ -699,54 +705,116 @@ class AlgebraicMesh : public virtual Mesh
    // hanging ones)
    AlgebraicNode* alg_nod_pt=0;
    unsigned n_node=nnode();
-   for (unsigned n=0;n<n_node;n++)
-    {
-     alg_nod_pt=static_cast<AlgebraicNode*>(node_pt(n));
-     alg_nod_pt->node_update();
-    }
 
-   // Figure out spatial dimension of node
-   unsigned n_dim = alg_nod_pt->ndim();
-   
-   // Now loop over hanging nodes and adjust their nodal positions
-   // to reflect the hanging node constraints
-   for (unsigned n=0;n<n_node;n++)
+   // In parallel there may be no nodes on a particular process
+   if (n_node>0)
     {
-     Node* nod_pt=node_pt(n);
-     if (nod_pt->is_hanging())
+     for (unsigned n=0;n<n_node;n++)
       {
-       // Initialise
-       Vector<double> x(n_dim);
-       for (unsigned i=0;i<n_dim;i++)
+       alg_nod_pt=static_cast<AlgebraicNode*>(node_pt(n));
+       alg_nod_pt->node_update();
+      }
+
+     // Figure out spatial dimension of node
+     unsigned n_dim = alg_nod_pt->ndim();
+   
+     // Now loop over hanging nodes and adjust their nodal positions
+     // to reflect the hanging node constraints
+     for (unsigned n=0;n<n_node;n++)
+      {
+       Node* nod_pt=node_pt(n);
+       if (nod_pt->is_hanging())
         {
-         x[i]=0.0;
+         // Initialise
+         Vector<double> x(n_dim);
+         for (unsigned i=0;i<n_dim;i++)
+          {
+           x[i]=0.0;
+          }
+
+         //Loop over master nodes
+         unsigned nmaster=nod_pt->hanging_pt()->nmaster();
+         for (unsigned imaster=0;imaster<nmaster;imaster++)
+          {
+           // Loop over directions
+           for (unsigned i=0;i<n_dim;i++)
+            {           
+             x[i]+=nod_pt->hanging_pt()->
+              master_node_pt(imaster)->x(i)*
+              nod_pt->hanging_pt()->master_weight(imaster);           
+            }
+          }
+
+         // Copy across
+         for (unsigned i=0;i<n_dim;i++)
+          {
+           nod_pt->x(i)=x[i];
+          }
+         nod_pt->perform_auxiliary_node_update_fct();
+        }
+      }
+    } // end if (n_node>0)
+
+#ifdef OOMPH_HAS_MPI
+   // Update positions for external halo nodes attached to this mesh
+   // Loop over processors
+   for (int iproc=0;iproc<MPI_Helpers::Nproc;iproc++)
+    {
+     AlgebraicNode* alg_nod_pt=0;
+     unsigned n_ext_halo_node=nexternal_halo_node(iproc);
+     // Only act if there are any external halo nodes
+     if (n_ext_halo_node>0)
+      {
+       for (unsigned n=0;n<n_ext_halo_node;n++)
+        {
+         alg_nod_pt=static_cast<AlgebraicNode*>
+          (external_halo_node_pt(iproc,n));
+         alg_nod_pt->node_update();
         }
 
-       //Loop over master nodes
-       unsigned nmaster=nod_pt->hanging_pt()->nmaster();
-       for (unsigned imaster=0;imaster<nmaster;imaster++)
+       // Figure out spatial dimension of node
+       unsigned n_dim = alg_nod_pt->ndim();
+   
+       // Now loop over hanging nodes and adjust their nodal positions
+       // to reflect the hanging node constraints
+       for (unsigned n=0;n<n_ext_halo_node;n++)
         {
-         // Loop over directions
-         for (unsigned i=0;i<n_dim;i++)
-          {           
-           x[i]+=nod_pt->hanging_pt()->
-            master_node_pt(imaster)->x(i)*
-            nod_pt->hanging_pt()->master_weight(imaster);           
+         Node* nod_pt=external_halo_node_pt(iproc,n);
+         if (nod_pt->is_hanging())
+          {
+           // Initialise
+           Vector<double> x(n_dim);
+           for (unsigned i=0;i<n_dim;i++)
+            {
+             x[i]=0.0;
+            }
+
+           //Loop over master nodes
+           unsigned nmaster=nod_pt->hanging_pt()->nmaster();
+           for (unsigned imaster=0;imaster<nmaster;imaster++)
+            {
+             // Loop over directions
+             for (unsigned i=0;i<n_dim;i++)
+              {
+               x[i]+=nod_pt->hanging_pt()->
+                master_node_pt(imaster)->x(i)*
+                nod_pt->hanging_pt()->master_weight(imaster);
+              }
+            }
+
+           // Copy across
+           for (unsigned i=0;i<n_dim;i++)
+            {
+             nod_pt->x(i)=x[i];
+            }
           }
         }
-
-       // Copy across
-       for (unsigned i=0;i<n_dim;i++)
-        {
-         nod_pt->x(i)=x[i];
-        }
-       nod_pt->perform_auxiliary_node_update_fct();
       }
-    }
+
+    } // end loop over processors
+#endif
 
   }
-
-
 
  /// \short Self test: check consistentency of multiple node updates.
  unsigned self_test()
@@ -779,6 +847,32 @@ class AlgebraicMesh : public virtual Mesh
    
   }
 
+ /// \short Add the specified GeomObject to the list of geometric objects
+ /// associated with this AlgebraicMesh; remembering that the zeroth entry
+ /// is null (set in the constructor above)
+ void add_geom_object_list_pt(GeomObject* geom_object_pt)
+  {
+   Geom_object_list_pt.push_back(geom_object_pt);
+  }
+
+ /// \short Return number of geometric objects associated with AlgebraicMesh
+ unsigned ngeom_object_list_pt()
+  {
+   return Geom_object_list_pt.size();
+  }
+
+ /// \short Access function to the ith GeomObject
+ GeomObject* geom_object_list_pt(const unsigned& i)
+  {
+   // Probably should be a range check in here...
+   return Geom_object_list_pt[i];
+  }
+
+  private:
+ 
+ /// \short Vector of GeomObjects associated with this AlgebraicMesh
+ /// The zeroth entry is null, proper entries from the 1st index onwards...
+ Vector<GeomObject*> Geom_object_list_pt;
 
 };
 
@@ -826,6 +920,13 @@ class DummyAlgebraicMesh : public virtual AlgebraicMesh
  /// mesh, though it may, of course, be left empty which is exactly
  /// what we do here
  virtual void update_node_update(AlgebraicNode*& node_pt){}
+
+ /// \short Setup algebraic node update for specified node;
+ /// do nothing in this dummy version
+ virtual void setup_algebraic_node_update(AlgebraicNode*& nod_pt){}
+
+
+
 
 };
 

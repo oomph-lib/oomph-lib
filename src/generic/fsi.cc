@@ -1,4 +1,4 @@
-//LIC// ====================================================================
+///LIC// ====================================================================
 //LIC// This file forms part of oomph-lib, the object-oriented, 
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
@@ -41,6 +41,10 @@ namespace FSI_functions
  /// Strouhal number St = a/(UT) for application of no slip condition.
  /// Initialised to 1.0.
  double Strouhal_for_no_slip=1.0;
+
+ /// Boolean flag to specify whether to use external storage in the
+ /// setup of fluid load info for solid elements.  Default value is false.
+ bool Use_external_storage=false;
 
  /// Apply no-slip condition for N.St. on a moving wall node 
  /// u = St dR/dt, where the Strouhal number St = a/(UT) is defined by
@@ -99,24 +103,8 @@ bool FSIWallElement::Dont_warn_about_missing_adjacent_fluid_elements=false;
   // Number of Gauss integration points
   unsigned n_intpt=integral_pt()->nweight();
   
-  // Only need lookup schemes for fluid elements that are 
-  // adjacent to the element's "front"
-  Adjacent_fluid_element_pt.resize(1);
-  Adjacent_fluid_local_coord.resize(1);
-  
-  // Storage for FSI fluid elements that are adjacent to Gauss point
-  Adjacent_fluid_element_pt[0].resize(n_intpt);
-  
-  // Storage for local coordinates in FSI fluid elements that are 
-  // adjacent to wall Gauss point
-  Adjacent_fluid_local_coord[0].resize(n_intpt);
-  
-  // Resize of vectors of local coordinates & initialise element pointers
-  for (unsigned i=0;i<n_intpt;i++)
-   {
-    Adjacent_fluid_element_pt[0][i]=0;
-    Adjacent_fluid_local_coord[0][i].resize(ndim_fluid);
-   }
+  // Set source element storage - one interaction
+  initialise_external_element_storage(1,n_intpt,ndim_fluid);
  
  }
  
@@ -141,24 +129,9 @@ bool FSIWallElement::Dont_warn_about_missing_adjacent_fluid_elements=false;
   // Both faces are loaded
   Only_front_is_loaded_by_fluid=false;
   
-  // Add storage for lookup schemes for fluid elements that are 
-  // adjacent to the element's "back"
-  Adjacent_fluid_element_pt.resize(2);
-  Adjacent_fluid_local_coord.resize(2);
+  // Set source element storage - two interactions
+  initialise_external_element_storage(2,n_intpt,ndim_fluid);
 
-  // Storage for FSI fluid elements that are adjacent to Gauss point
-  Adjacent_fluid_element_pt[1].resize(n_intpt);
-  
-  // Storage for local coordinates in FSI fluid elements that are 
-   // adjacent to wall Gauss point
-   Adjacent_fluid_local_coord[1].resize(n_intpt);
-
-   // Resize of vectors of local coordinates & initialise element pointers
-   for (unsigned i=0;i<n_intpt;i++)
-    {
-     Adjacent_fluid_element_pt[1][i]=0;
-     Adjacent_fluid_local_coord[1][i].resize(ndim_fluid);
-    }
  }
 
 
@@ -198,13 +171,14 @@ bool FSIWallElement::Dont_warn_about_missing_adjacent_fluid_elements=false;
     {
      //Get the local coordinate in the fluid element (copy 
      // operation for Vector)
-     Vector<double> s_adjacent(adjacent_fluid_local_coord(face,intpt));
+     Vector<double> s_adjacent(external_element_local_coord(face,intpt));
  
      //Call the load function for adjacent element
-     if (Adjacent_fluid_element_pt[face][intpt]!=0)
+     FSIFluidElement* el_f_pt=dynamic_cast<FSIFluidElement*>
+      (external_element_pt(face,intpt));
+     if (el_f_pt!=0)
       {
-       Adjacent_fluid_element_pt[face][intpt]->
-        get_load(s_adjacent,N,fluid_load);
+       el_f_pt->get_load(s_adjacent,N,fluid_load);
       }
      else
       {
@@ -263,12 +237,13 @@ bool FSIWallElement::Dont_warn_about_missing_adjacent_fluid_elements=false;
     for (unsigned iint=0;iint<n_intpt;iint++)
      {
       // Get fluid element that affects this integration point
-      FSIFluidElement* el_f_pt=Adjacent_fluid_element_pt[face][iint];
+      FSIFluidElement* el_f_pt=dynamic_cast<FSIFluidElement*>
+       (external_element_pt(face,iint));
       
       // Is there an adjacent fluid element?
       if (el_f_pt!=0)
        {
-        // Have we update its positions yet?
+        // Have we updated its positions yet?
         if (!done[el_f_pt])
          {
           // Update nodal positions
@@ -324,13 +299,15 @@ void FSIWallElement::assign_load_data_local_eqn_numbers()
      for(unsigned ipt=0;ipt<n_intpt;ipt++)
       {
        //Add the element adjacent to the element into the set
-       all_load_elements_pt.insert(Adjacent_fluid_element_pt[face][ipt]);
+       all_load_elements_pt.insert
+        (dynamic_cast<FSIFluidElement*>(external_element_pt(face,ipt)));
       }
     }
   
+
    //For safety erase any null pointers
    all_load_elements_pt.erase(0);
-   
+
    // Storage for a pairs of load data (pointer to Data and the index
    // of the load value within this Data object) affecting the element
    std::set<std::pair<Data*,unsigned> > paired_load_data;
@@ -410,7 +387,7 @@ void FSIWallElement::assign_load_data_local_eqn_numbers()
  
  //Find the number of load data
  unsigned n_load_data = nload_data();
- 
+
  //Resize the storage for the load data local equation numbers
  //initially all local equations are unclassified
  Load_data_local_eqn.resize(n_load_data, Data::Is_unclassified);

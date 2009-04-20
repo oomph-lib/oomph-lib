@@ -175,6 +175,7 @@ class LinearWaveEquations : public virtual FiniteElement
  /// \short Get source term at continous time t and (Eulerian) position x.
  /// Virtual so it can be overloaded in derived multiphysics elements. 
  inline void get_source_lin_wave(const double& t, 
+                                 const unsigned& ipt,
                                  const Vector<double>& x,
                                  double& source) const
   {

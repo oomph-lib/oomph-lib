@@ -274,7 +274,7 @@ void MyAlgebraicCollapsibleChannelMesh<ELEMENT>::setup_algebraic_node_update()
  double l_collapsible=this->domain_pt()->l_collapsible();
 
  // Loop over all nodes in mesh
- unsigned nnod=nnode();
+ unsigned nnod=this->nnode();
  for (unsigned j=0;j<nnod;j++)
   {
    // Get pointer to node

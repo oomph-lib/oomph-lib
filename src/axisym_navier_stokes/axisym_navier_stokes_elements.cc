@@ -908,10 +908,10 @@ fill_in_generic_residual_contribution_axi_nst(Vector<double> &residuals,
    
    //Get the user-defined body force terms
    Vector<double> body_force(3);
-   get_body_force(time(),interpolated_x,body_force);
+   get_body_force(time(),ipt,interpolated_x,body_force);
    
    //Get the user-defined source function
-   double source = get_source_fct(time(),interpolated_x);
+   double source = get_source_fct(time(),ipt,interpolated_x);
 
    //r is the first position component
    double r = interpolated_x[0];

@@ -96,6 +96,12 @@ class Tree
  /// represented by the tree
  RefineableElement* object_pt() const {return Object_pt;}
 
+ /// Flush the object represented by the tree
+ void flush_object()
+  {
+   Object_pt=0;
+  }
+
  /// \short Return pointer to the son for a given index. Note that
  /// to aid code readability specific enums have been defined for
  /// specific trees. However, these are simply aliases for ints and
@@ -110,6 +116,12 @@ class Tree
 
  /// Return number of sons (zero if it's a leaf node)
  unsigned nsons() const {return Son_pt.size();}
+
+ /// Flush the sons
+ void flush_sons()
+  {
+   Son_pt.clear();
+  }
  
  /// Return pointer to root of the tree
  TreeRoot* root_pt() {return Root_pt;}
@@ -179,6 +191,12 @@ class Tree
  
  /// Return pointer to father: NULL if it's a root node
  Tree* father_pt() const {return Father_pt;}
+
+ /// Set the father
+ void set_father_pt(Tree* const &father_pt)
+  {
+   Father_pt=father_pt;
+  }
  
  /// \short Return the level of the Tree (root=0)
  unsigned level() const {return Level;}
@@ -393,6 +411,13 @@ class TreeForest
 
  /// Return pointer to i-th tree in forest
  TreeRoot* tree_pt(const unsigned &i) const {return Trees_pt[i];}
+
+ /// Flush trees from forest
+ void flush_trees() 
+  {
+   // Clear Trees_pt vector
+   Trees_pt.clear();
+  }
     
   protected:
 

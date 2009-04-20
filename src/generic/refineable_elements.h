@@ -458,6 +458,30 @@ class RefineableElement : public virtual FiniteElement
     }
   }
 
+ /// Return a pointer to the "father" element at the specified refinement level
+ void get_father_at_refinement_level(unsigned& refinement_level, 
+                                     RefineableElement*& father_at_reflevel_pt)
+  {
+   // Get the father in the tree (it shouldn't try to get a null Tree...)
+   Tree* father_pt = Tree_pt->father_pt();
+   // Get the refineable element associated with this father
+   RefineableElement* father_el_pt=dynamic_cast<RefineableElement*>
+    (father_pt->object_pt());
+   // Get the refinement level
+   unsigned level=father_el_pt->refinement_level();
+   // If the level matches the required one then return, if not call again
+   if (level==refinement_level) 
+    {
+     father_at_reflevel_pt=father_el_pt;
+    }
+   else
+    {
+     // Recursive call
+     father_el_pt->get_father_at_refinement_level(refinement_level,
+                                                  father_at_reflevel_pt);
+    }
+  }
+
  /// \short Further build: e.g. deal with interpolation of internal values
  virtual void further_build() {}
  

@@ -41,6 +41,7 @@
 #include "eigen_solver.h"
 #include "assembly_handler.h"
 #include "dg_elements.h"
+#include "partitioning.h"
 
 namespace oomph
 {
@@ -149,13 +150,19 @@ namespace oomph
  //==================================================================
  void Problem::distribute(DocInfo& doc_info, const bool& report_stats)
  {
+  // Call actions before distribute
+  actions_before_distribute();
+
   int n_element=mesh_pt()->nelement();
   if (MPI_Helpers::Nproc==1)
    {
-    oomph_info << "WARNING: You've tried to distribute a problem over only\n"
-               << "one processor: this would make METIS crash.\n" 
-               << "Ignoring your request for distribution."
-               << std::endl << std::endl;
+    if (report_stats)
+     {
+      oomph_info << "WARNING: You've tried to distribute a problem over only\n"
+                 << "one processor: this would make METIS crash.\n" 
+                 << "Ignoring your request for distribution."
+                 << std::endl << std::endl;
+     }
    }
   else if (MPI_Helpers::Nproc>n_element)
    {
@@ -171,44 +178,391 @@ namespace oomph
    }
   else
    {
-    // Distribute the mesh
-    mesh_pt()->distribute(doc_info,report_stats);
+    // Need to partition the global mesh before distributing
+    Mesh* global_mesh_pt = mesh_pt();
+    char filename[100];
+    std::ofstream some_file;
+
+    // Record the original total number of elements in the mesh
+    // to be able to assess the efficiency of the distribution
+    unsigned orig_nelem=global_mesh_pt->nelement();
+
+    // Vector listing the affiliation of each element
+    unsigned nelem=orig_nelem;
+    Vector<unsigned> element_domain(nelem);
+
+    // Partition the mesh
+    partition_global_mesh(global_mesh_pt,doc_info,element_domain);
+
+    // Prepare vector of vectors for submesh element domains
+    unsigned n_mesh=nsub_mesh();
+    Vector<Vector<unsigned> > submesh_element_domain(n_mesh);
   
+    // The submeshes need to know their own element domains
+    if (n_mesh!=0)
+     {
+      unsigned count=0;
+      for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
+       {
+        unsigned nsub_elem=mesh_pt(i_mesh)->nelement();
+        submesh_element_domain[i_mesh].resize(nsub_elem);
+        for (unsigned e=0; e<nsub_elem; e++)
+         {
+          submesh_element_domain[i_mesh][e]=element_domain[count];
+          count++;
+         }
+       }
+     }
+
+    // Doc the partitioning (only on processor 0) 
+    //-------------------------------------------
+    if (doc_info.doc_flag())
+     {
+      if (MPI_Helpers::My_rank==0)
+       {
+        // Open files for doc of element partitioning
+        Vector<std::ofstream*> domain_file(MPI_Helpers::Nproc);
+        for (int d=0;d<MPI_Helpers::Nproc;d++)
+         {
+          sprintf(filename,"%s/domain%i-%i.dat",doc_info.directory().c_str(),
+                  d,doc_info.number());
+          domain_file[d]=new std::ofstream(filename);
+         }
+     
+        // Doc
+        for (unsigned e=0;e<nelem;e++)
+         {
+          global_mesh_pt->finite_element_pt(e)->
+           output(*domain_file[element_domain[e]],5);
+         }
+     
+        for (int d=0;d<MPI_Helpers::Nproc;d++)
+         {
+          domain_file[d]->close();
+         }
+       }
+     }
+
+    // Loop over all elements, associate all 
+    //--------------------------------------
+    // nodes with the highest-numbered processor and record all
+    //---------------------------------------------------------
+    // processors the node is associated with
+    //---------------------------------------
+    for (unsigned e=0;e<nelem;e++)
+     {
+      // Get element and its domain
+      FiniteElement* el_pt=global_mesh_pt->finite_element_pt(e);
+      unsigned el_domain=element_domain[e];
+
+      // Associate nodes with highest numbered processor
+      unsigned nnod=el_pt->nnode();
+      for (unsigned j=0;j<nnod;j++)
+       {
+        Node* nod_pt=el_pt->node_pt(j); 
+
+        // Recall that processor in charge is initialised to -1
+        if (int(el_domain)>nod_pt->processor_in_charge())
+         {
+          nod_pt->processor_in_charge()=el_domain;
+         }
+        nod_pt->processors_associated_with_data().insert(el_domain);
+       }
+     }
+
+    // Doc the partitioning (only on processor 0) 
+    //-------------------------------------------
+    if (doc_info.doc_flag())
+     {
+      if (MPI_Helpers::My_rank==0)
+       {
+        // Open files for doc of node partitioning
+        Vector<std::ofstream*> node_file(MPI_Helpers::Nproc);
+        for (int d=0;d<MPI_Helpers::Nproc;d++)
+         {
+          sprintf(filename,"%s/node%i-%i.dat",doc_info.directory().c_str(),
+                  d,doc_info.number());
+          node_file[d]=new std::ofstream(filename);
+         }
+     
+        // Doc
+        unsigned nnod=global_mesh_pt->nnode();
+        for (unsigned j=0;j<nnod;j++)
+         {
+          Node* nod_pt=global_mesh_pt->node_pt(j);
+          *node_file[nod_pt->processor_in_charge()]
+           << nod_pt->x(0) << " " 
+           << nod_pt->x(1) << std::endl;
+         }
+        for (int d=0;d<MPI_Helpers::Nproc;d++)
+         {
+          node_file[d]->close();
+         }
+       }
+     }
+
+    // Declare all nodes as obsolete. We'll
+    // change this setting for all nodes that must be retained
+    // further down
+    unsigned nnod=global_mesh_pt->nnode();
+    for (unsigned j=0;j<nnod;j++)
+     {
+      global_mesh_pt->node_pt(j)->set_obsolete();
+     }
+
+    // "Distribute" the (sub)meshes (i.e., sort out their haloes)
+    n_mesh=nsub_mesh();
+    if (n_mesh==0)
+     {
+      mesh_pt()->distribute(element_domain,doc_info,report_stats);
+     }
+    else // There are submeshes, "distribute" each one separately
+     {
+      for (unsigned i_mesh=0; i_mesh<n_mesh; i_mesh++)
+       {
+        if (report_stats)
+         {
+          oomph_info << "Distributing submesh " << i_mesh << std::endl
+                     << "--------------------" << std::endl;
+         }
+        // Set the doc_info number to reflect the submesh
+        doc_info.number()=i_mesh;
+        mesh_pt(i_mesh)->distribute(submesh_element_domain[i_mesh],
+                                    doc_info,report_stats);
+       }
+      // Rebuild the global mesh
+      rebuild_global_mesh();
+     }
     // Now the problem has been distributed
     Problem_has_been_distributed=true;
-  
-    // Re-assign the equation numbers (incl synchronisation if reqd)
-    assign_eqn_numbers();
    }
+  // Call actions after distribute
+  actions_after_distribute();   
+
+  // Re-assign the equation numbers (incl synchronisation if reqd)
+  oomph_info << "Number of equations: " << assign_eqn_numbers()
+             << std::endl;
  }
 
+ //==================================================================
+ /// Partition the global mesh, return vector specifying the processor
+ /// number for each element. Virtual so that it can be overloaded by
+ /// any user; the default is to use METIS to perform the partitioning
+ /// (with a bit of cleaning up afterwards to sort out "special cases").
+ //==================================================================
+ void Problem::partition_global_mesh(Mesh* &global_mesh_pt, DocInfo& doc_info,
+                                     Vector<unsigned>& element_domain,
+                                     const bool& report_stats)
+ {
+  char filename[100];
+  std::ofstream some_file;
+
+  // Doc the original mesh on proc 0
+  //--------------------------------
+  if (doc_info.doc_flag())
+   {
+    if (MPI_Helpers::My_rank==0)
+     {
+      sprintf(filename,"%s/complete_mesh%i.dat",doc_info.directory().c_str(),
+              doc_info.number());
+      global_mesh_pt->output(filename,5);
+     }
+   }
+
+//  oomph_info << "Partioning mesh....";
+//  clock_t t_start=clock();
+
+  // Partition the mesh
+  //-------------------
+  // METIS Objective (0: minimise edge cut; 1: minimise total comm volume)
+  unsigned objective=0;
+
+  // Do the partitioning
+  METIS::partition_mesh(global_mesh_pt,MPI_Helpers::Nproc,
+                        objective,element_domain);
+
+  // On very coarse meshes with larger numbers of processors, METIS 
+  // occasionally returns an element_domain Vector for which a particular 
+  // processor has no elements affiliated to it; the following fixes this
+
+  // Convert element_domain to integer storage
+  unsigned nelem=element_domain.size();
+  Vector<int> int_element_domain(nelem);
+  for (unsigned e=0;e<nelem;e++)
+   {
+    int_element_domain[e]=element_domain[e];
+   }
+
+  // Global storage for number of elements on each process
+  int my_number_of_elements=0;
+  Vector<int> number_of_elements(MPI_Helpers::Nproc,0);
+
+  for (unsigned e=0;e<nelem;e++)
+   {
+    if (int_element_domain[e]==MPI_Helpers::My_rank)
+     {
+      my_number_of_elements++;
+     }
+   }
+
+  // Communicate the correct value for each single process into
+  // the global storage vector
+  MPI_Allgather(&my_number_of_elements,1,MPI_INT,
+                &number_of_elements[0],1,MPI_INT,MPI_COMM_WORLD);
+
+  // If a process has no elements then switch an element with the
+  // process with the largest number of elements, assuming
+  // that it still has enough elements left to share
+  int max_number_of_elements=0;
+  int process_with_max_elements=0;
+  for (int d=0;d<MPI_Helpers::Nproc;d++)
+   {
+    if (number_of_elements[d]==0)
+     {
+      // Find the process with maximum number of elements
+      if (max_number_of_elements<=1)
+       {
+        for (int dd=0;dd<MPI_Helpers::Nproc;dd++)
+         {
+          if (number_of_elements[dd]>max_number_of_elements)
+           {
+            max_number_of_elements=number_of_elements[dd];
+            process_with_max_elements=dd;
+           }
+         }
+       }
+
+      // Check that this number of elements is okay for sharing...
+      if (max_number_of_elements<=1)
+       {
+        // Throw error; we shouldn't arrive here, but you never know...
+        std::ostringstream error_stream;
+        error_stream << "No process has more than 1 element, and\n"
+                     << "at least one process has no elements!\n"
+                     << "Suggest rerunning with more refinement.\n"
+                     << std::endl;
+        throw OomphLibError(error_stream.str(),
+                            "Mesh::partition_global_mesh()",
+                            OOMPH_EXCEPTION_LOCATION);
+
+       }
+
+      // Loop over the element domain vector and switch
+      // one value for process "process_with_max_elements" with d
+      for (unsigned e=0;e<nelem;e++)
+       {
+        if (int_element_domain[e]==process_with_max_elements)
+         {
+          int_element_domain[e]=d;
+          // Change the numbers associated with these processes
+          number_of_elements[d]++;
+          number_of_elements[process_with_max_elements]--;
+          // Reduce the number of elements available on "max" process
+          max_number_of_elements--;
+          // Inform the user that a switch has taken place
+          oomph_info << "INFO: Switched element domain at position " << e 
+                     << std::endl 
+                     << "from process " << process_with_max_elements 
+                     << " to process " << d 
+                     << std::endl
+                     << "which was given no elements by METIS partition" 
+                     << std::endl;           
+          // Only need to do this once for this element loop, otherwise
+          // this will take all the elements from "max" process and put them
+          // in process d, thus leaving essentially the same problem!
+          break;
+         }
+       }
+     }
+
+   }
+
+  // Reassign new values to the element_domain vector
+  for (unsigned e=0;e<nelem;e++)
+   {
+    element_domain[e]=int_element_domain[e];
+   }
+
+  unsigned count_elements=0;
+  for (unsigned e=0; e<nelem; e++)
+   {
+    if(int(element_domain[e])==MPI_Helpers::My_rank)
+     {
+      count_elements++;
+     }
+   }
+
+  if (report_stats)
+   { 
+    oomph_info << "I have " << count_elements
+               << " elements from this partition" << std::endl << std::endl;
+   }
+
+  // Set the GLOBAL Mesh_has_been_distributed flag
+  global_mesh_pt->mesh_has_been_distributed()=true;
+ }
 
  //==================================================================
- /// (Irreversibly) redistribute elements and nodes, usually
+ /// (Irreversibly) prune halo(ed) elements and nodes, usually
  /// after another round of refinement, to get rid of
  /// excessively wide halo layers. Note that the current
  /// mesh will be now regarded as the base mesh and no unrefinement
  /// relative to it will be possible once this function 
  /// has been called.
  //==================================================================
- void Problem::redistribute(DocInfo& doc_info, const bool& report_stats)
+ void Problem::prune_halo_elements_and_nodes(DocInfo& doc_info, 
+                                             const bool& report_stats)
  {
   
   // Distribution required?
   if (!Problem_has_been_distributed)
    {
     oomph_info 
-     << " Problem::redistribute() was called on non-distributed Problem" 
-     << std::endl;
+     << "Problem::prune_halo_elements_and_nodes() was called on a "
+     << "non-distributed Problem!" << std::endl;
     oomph_info << "Calling Problem::distribute() first..." << std::endl;
     distribute(doc_info,report_stats);
-   } 
+   }
 
-  // Redistribute the mesh
-  mesh_pt()->redistribute(doc_info,report_stats);
+  // There's no point in redistributing if it's a single-process job   
+  if (MPI_Helpers::Nproc==1)
+   {
+    oomph_info << "WARNING: You've tried to re-distribute a problem over\n"
+               << "only one processor: this is unnecessary.\n" 
+               << "Ignoring your request for re-distribution."
+               << std::endl << std::endl;
+   }
+  else
+   {
+    // Call actions before distribute
+    actions_before_distribute();
+
+    // Prune the halo elements and nodes of the mesh(es)
+    unsigned n_mesh=nsub_mesh();
+    if (n_mesh==0)
+     {
+      // Prune halo elements and nodes for the (single) global mesh
+      mesh_pt()->prune_halo_elements_and_nodes(doc_info,report_stats);
+     }
+    else
+     {
+      // Loop over individual submeshes and prune separately
+      for (unsigned i_mesh=0; i_mesh<n_mesh; i_mesh++)
+       {
+        mesh_pt(i_mesh)->prune_halo_elements_and_nodes(doc_info,report_stats);
+       }
+
+      // Rebuild the global mesh
+      rebuild_global_mesh();
+     }
+
+    // Call actions after distribute
+    actions_after_distribute();
   
-  // Re-assign the equation numbers (incl synchronisation if reqd)
-  assign_eqn_numbers();
+    // Re-assign the equation numbers (incl synchronisation if reqd)
+    oomph_info << "Number of equations: " << assign_eqn_numbers() << std::endl;
+   }
+
  }
 
 
@@ -664,35 +1018,78 @@ namespace oomph
 
 //================================================================
 /// Assign all equation numbers for problem: Deals with global
- /// data (= data that isn't attached to any elements) and then
- /// does the equation numbering for the elements.
+/// data (= data that isn't attached to any elements) and then
+/// does the equation numbering for the elements.  Bool argument
+/// can be set to false to ignore assigning local equation numbers 
+/// (necessary in the parallel implementation of locate_zeta 
+/// between multiple meshes).
 //================================================================
- unsigned long Problem::assign_eqn_numbers()
- {
+unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
+{
 
 #ifdef OOMPH_HAS_MPI
 
-  // If the problem has been distributed we first have to 
-  // classify any potentially newly created nodes as
-  // halo or haloed (or neither)
-  if (Problem_has_been_distributed)
-   {
-    // Classify any so-far unclassified nodes
-    mesh_pt()->classify_halo_and_haloed_nodes();
+ // If the problem has been distributed we first have to 
+ // classify any potentially newly created nodes as
+ // halo or haloed (or neither)
+ if (Problem_has_been_distributed)
+  {
+   // Classify any so-far unclassified nodes
+   // Perform at submesh level
+   unsigned nmesh=nsub_mesh();
 
-    // Check the synchronicity of hanging nodes for a refineable mesh
-    // - In a multi-physics case this should be called for every mesh
-    // - It is also possible that a single mesh contains different elements 
-    //   (with different values of ncont_interpolated_values);
-    //   in this instance, this routine needs a rethink.
-    if(RefineableMeshBase* mmesh_pt = 
-       dynamic_cast<RefineableMeshBase*>(mesh_pt(0))) 
-     {
-      unsigned ncont_interpolated_values=dynamic_cast<RefineableElement*>
-       (mmesh_pt->element_pt(0))->ncont_interpolated_values();
-      mmesh_pt->synchronise_hanging_nodes(ncont_interpolated_values);
-     }
-   }
+   if (nmesh==0)
+    {
+     mesh_pt()->classify_halo_and_haloed_nodes();
+
+     // Cast to a refineable mesh and call synchronisation routine
+     if(RefineableMeshBase* mmesh_pt = 
+      dynamic_cast<RefineableMeshBase*>(mesh_pt(0))) 
+      {
+       unsigned ncont_interpolated_values=dynamic_cast<RefineableElement*>
+           (mmesh_pt->element_pt(0))->ncont_interpolated_values();
+
+       mmesh_pt->synchronise_hanging_nodes(ncont_interpolated_values);       
+      }
+    }
+   else // nmesh!=0
+    {
+     for (unsigned imesh=0;imesh<nmesh;imesh++)
+      {
+       mesh_pt(imesh)->classify_halo_and_haloed_nodes();
+      }
+
+     // Check the synchronicity of hanging nodes for a refineable mesh
+     // - In a multi-physics case this should be called for every mesh
+     // - It is also possible that a single mesh contains different elements 
+     //   (with different values of ncont_interpolated_values);
+     //   in this instance, this routine needs a rethink.
+     for (unsigned imesh=0;imesh<nmesh;imesh++)
+      {
+       // Cast to a refineable mesh and call synchronisation routine
+       if(RefineableMeshBase* mmesh_pt = 
+        dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh))) 
+         {
+          unsigned n_int_values=0;
+          // Ensure the mesh has elements on this processor
+          if (mesh_pt(imesh)->nelement()>0)
+           {
+            n_int_values=dynamic_cast<RefineableElement*>
+             (mmesh_pt->element_pt(0))->ncont_interpolated_values();
+           }
+
+          unsigned ncont_interpolated_values;
+          // Need to use the largest value of n_int_values 
+          // when calling the routine
+          MPI_Allreduce(&n_int_values,&ncont_interpolated_values,1,
+                        MPI_INT,MPI_MAX,MPI_COMM_WORLD);
+
+          // All processes call the routine to ensure correct communications
+          mmesh_pt->synchronise_hanging_nodes(ncont_interpolated_values);
+         }
+      }
+    }
+  }
   // Re-distribution of elements over processors during assembly
   // must be recomputed
   else
@@ -735,49 +1132,74 @@ namespace oomph
     Mesh_pt->element_pt(e)->complete_setup_of_dependencies();
    }
 
-  //Now set equation numbers for the global Data
-  unsigned Nglobal_data = nglobal_data();
-  for(unsigned i=0;i<Nglobal_data;i++)
-   {Global_data_pt[i]->assign_eqn_numbers(equation_number,Dof_pt);}
+#ifdef OOMPH_HAS_MPI
+ // Complete setup of dependencies for external halo elements too
+ unsigned n_mesh=nsub_mesh();
+ for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
+  {
+   for (int iproc=0;iproc<MPI_Helpers::Nproc;iproc++)
+    {
+     unsigned n_ext_halo_el=mesh_pt(i_mesh)->nexternal_halo_element(iproc);
+     for (unsigned e=0;e<n_ext_halo_el;e++)
+      {
+       mesh_pt(i_mesh)->external_halo_element_pt(iproc,e)
+        ->complete_setup_of_dependencies();
+      }
+    }
+  }
+#endif
 
-  //Check that the Mesh_pt has been assigned
-  if(Mesh_pt==0)
-   {
-    std::string error_message =
-     "(Global) Mesh_pt must be assigned before calling ";
-    error_message += " assign_eqn_numbers()\n";;
+ //Now set equation numbers for the global Data
+ unsigned Nglobal_data = nglobal_data();
+ for(unsigned i=0;i<Nglobal_data;i++)
+  {Global_data_pt[i]->assign_eqn_numbers(equation_number,Dof_pt);}
 
-    throw OomphLibError(error_message,
-                        "Problem::assign_eqn_numbers()",
-                        OOMPH_EXCEPTION_LOCATION);
-   }
+
+ //Check that the Mesh_pt has been assigned
+ if(Mesh_pt==0)
+  {
+   std::string error_message =
+    "(Global) Mesh_pt must be assigned before calling ";
+   error_message += " assign_eqn_numbers()\n";
+
+   throw OomphLibError(error_message,
+                       "Problem::assign_eqn_numbers()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
    
-  // Loop over the submeshes: Note we need to call the submeshes' own
-  // assign_*_eqn_number() otherwise we miss additional functionality
-  // that is implemented (e.g.) in SolidMeshes!
-  unsigned nsub_mesh=Sub_mesh_pt.size();
-  if (nsub_mesh==0)
-   {
-    n_dof=Mesh_pt->assign_global_eqn_numbers(Dof_pt);
-    Mesh_pt->assign_local_eqn_numbers();
-    //Clear out the temporary global storage for hijacked equation numbers
-    //HijackedElementBase::reset_hijacked_data_pt();
-   }
-  else
-   {
-    //Assign global equation numbers first
-    for (unsigned i=0;i<nsub_mesh;i++)
-     {
-      Sub_mesh_pt[i]->assign_global_eqn_numbers(Dof_pt);
-     }
-    for (unsigned i=0;i<nsub_mesh;i++)
-     {
-      Sub_mesh_pt[i]->assign_local_eqn_numbers();
-     }
-    //Clear out the temporaray global storage for hijacked equation numbers
-    //HijackedElementBase::reset_hijacked_data_pt();
-    n_dof=Dof_pt.size();
-   }
+ // Loop over the submeshes: Note we need to call the submeshes' own
+ // assign_*_eqn_number() otherwise we miss additional functionality
+ // that is implemented (e.g.) in SolidMeshes!
+ unsigned nsub_mesh=Sub_mesh_pt.size();
+ if (nsub_mesh==0)
+  {
+   n_dof=Mesh_pt->assign_global_eqn_numbers(Dof_pt);
+   if (assign_local_eqn_numbers)
+    {
+     Mesh_pt->assign_local_eqn_numbers();
+    }
+   //Clear out the temporary global storage for hijacked equation numbers
+   //HijackedElementBase::reset_hijacked_data_pt();
+  }
+ else
+  {
+   //Assign global equation numbers first
+   for (unsigned i=0;i<nsub_mesh;i++)
+    {
+     Sub_mesh_pt[i]->assign_global_eqn_numbers(Dof_pt);
+    }
+   //Assign local equation numbers if required
+   if (assign_local_eqn_numbers)
+    {
+     for (unsigned i=0;i<nsub_mesh;i++)
+      {
+       Sub_mesh_pt[i]->assign_local_eqn_numbers();
+      }
+    }
+   //Clear out the temporaray global storage for hijacked equation numbers
+   //HijackedElementBase::reset_hijacked_data_pt();
+   n_dof=Dof_pt.size();
+  }
 
 #ifdef OOMPH_HAS_MPI
 
@@ -790,7 +1212,7 @@ namespace oomph
    
     // Synchronise the equation numbers and return the total
     // number of degrees of freedom in the overall problem
-    n_dof=synchronise_eqn_numbers();
+    n_dof=synchronise_eqn_numbers(assign_local_eqn_numbers);
    }
  
 #endif
@@ -949,7 +1371,6 @@ namespace oomph
 //================================================================
  void Problem::get_residuals(DoubleVector &residuals)
  {
-
   // Three different cases; if MPI_Helpers::MPI_has_been_initialised=true 
   // this means MPI_Helpers::setup() has been called.  This could happen on a
   // code compiled with MPI but run serially; in this instance the
@@ -1059,7 +1480,7 @@ namespace oomph
      
         //Fill the array
         el_pt->get_residuals(element_residuals);
-       
+
         //Now loop over the dofs and assign values to global Vector
         for(unsigned l=0;l<n_el_dofs;l++)
          {
@@ -1518,61 +1939,6 @@ namespace oomph
   delete residuals_vector[0];   
  }
 
-/*
-  #ifdef OOMPH_HAS_MPI
-
-//=============================================================================
-/// Compute the fully-assembled Jacobian and residuals for the problem.
-/// Interface for the case when the Jacobian is in distributed 
-/// row-compressed storage format. 
-/// Returns the residual vector as a distributed vector
-//=============================================================================
-void Problem::get_jacobian(DistributedVector<double> &residuals,
-DistributedCRDoubleMatrix &jacobian)
-{
-// Provide storage
-Vector<Vector<int> > column_index(1);
-Vector<Vector<int> > row_start(1);
-Vector<Vector<double> > value(1);
-Vector<Vector<double>*> residuals_vector(1);
-Vector<double> temp_residuals;
-residuals_vector[0] = &temp_residuals;
-unsigned long first_row;
-unsigned long n_row_local;
-unsigned long n_row_total;
- 
-// Get my block of rows
-distributed_matrix_sparse_assemble(column_index,
-row_start,
-value,
-residuals_vector,
-first_row,
-n_row_local,
-n_row_total,
-true);
-
-// create the distribution to assemble the distributed jacobian and residal
-DistributionInfo my_distribution(MPI_COMM_WORLD,first_row,n_row_local,
-n_row_total);
-
-// and then assembled the distributed matrix
-jacobian.build(value[0],
-column_index[0],
-row_start[0],
-my_distribution,
-n_row_total);
-
-// and then assemble the distributed vector
-residuals.distribute(my_distribution);
-unsigned nrow_local = my_distribution.nrow_local();
-for (unsigned i = 0; i < nrow_local; i++)
-{
- residuals[i] = temp_residuals[i];
-}
-}
-
-#endif
-*/
 
 //=====================================================================
 /// This is a (private) helper function that is used to assemble system
@@ -4142,13 +4508,30 @@ void Problem::newton_solve()
      if (Problem_is_nonlinear)
       {
 #ifdef OOMPH_HAS_MPI
-       // Synchronise the solution on different processors
-       synchronise_dofs();
+       // Synchronise the solution on different processors (on each submesh)
+       unsigned nmesh=nsub_mesh();
+       if (nmesh==0)
+        {
+         synchronise_dofs(mesh_pt());
+        }
+       else
+        {
+         // Synchronise ALL halo(ed) dofs BEFORE external halo(ed) dofs
+         for (unsigned imesh=0; imesh<nmesh; imesh++)
+          {
+           synchronise_dofs(mesh_pt(imesh));
+          }
+         for (unsigned imesh=0; imesh<nmesh; imesh++)
+          {
+           synchronise_external_dofs(mesh_pt(imesh));
+          }
+        }
 #endif
+
        actions_before_newton_convergence_check();
        dx.clear();
        get_residuals(dx);
-       
+
        //Get maximum residuals
        double maxres = dx.max();
 
@@ -4230,8 +4613,24 @@ void Problem::newton_solve()
       *Dof_pt[l] -= dx_pt[l];
     }
 #ifdef OOMPH_HAS_MPI
-   // Synchronise the solution on different processors
-   synchronise_dofs();
+   // Synchronise the solution on different processors (on each submesh)
+   unsigned nmesh=nsub_mesh();
+   if (nmesh==0)
+    {
+     synchronise_dofs(mesh_pt());
+    }
+   else
+    {
+     // Synchronise ALL halo(ed) dofs BEFORE external halo(ed) dofs
+     for (unsigned imesh=0; imesh<nmesh; imesh++)
+      {
+       synchronise_dofs(mesh_pt(imesh));
+      }
+     for (unsigned imesh=0; imesh<nmesh; imesh++)
+      {
+       synchronise_external_dofs(mesh_pt(imesh));
+      }
+    }
 #endif
 
    // Do any updates that are required 
@@ -4495,10 +4894,28 @@ newton_solve_continuation(double* const &parameter_pt,
    if(count==1)
     {
 #ifdef OOMPH_HAS_MPI
-     // Synchronise the solution on different processors
-     synchronise_dofs();
+     // Synchronise the solution on different processors (on each submesh)
+     unsigned nmesh=nsub_mesh();
+     if (nmesh==0)
+      {
+       synchronise_dofs(mesh_pt());
+      }
+     else
+      {
+       // Synchronise ALL halo(ed) dofs BEFORE external halo(ed) dofs
+       for (unsigned imesh=0; imesh<nmesh; imesh++)
+        {
+         synchronise_dofs(mesh_pt(imesh));
+        }
+       for (unsigned imesh=0; imesh<nmesh; imesh++)
+        {
+         synchronise_external_dofs(mesh_pt(imesh));
+        }
+      }
 #endif
+
      actions_before_newton_convergence_check();
+
      get_residuals(y);
      //Get maximum residuals, using our own abscmp function
      double maxres = y.max();
@@ -4597,15 +5014,32 @@ newton_solve_continuation(double* const &parameter_pt,
      *Dof_pt[l] -= y[l] - dparam*z[l];
     }
 
-   // Do any updates that are required 
-   actions_after_newton_step();
-   
    //Calculate the new residuals
 #ifdef OOMPH_HAS_MPI
-   // Synchronise the solution on different processors
-   synchronise_dofs();
+   // Synchronise the solution on different processors (on each submesh)
+   unsigned nmesh=nsub_mesh();
+   if (nmesh==0)
+    {
+     synchronise_dofs(mesh_pt());
+    }
+   else
+    {
+     // Synchronise ALL halo(ed) dofs BEFORE external halo(ed) dofs
+     for (unsigned imesh=0; imesh<nmesh; imesh++)
+      {
+       synchronise_dofs(mesh_pt(imesh));
+      }
+     for (unsigned imesh=0; imesh<nmesh; imesh++)
+      {
+       synchronise_external_dofs(mesh_pt(imesh));
+      }
+    }
 #endif
+
+   // Do any updates that are required 
+   actions_after_newton_step();
    actions_before_newton_convergence_check();
+
    get_residuals(y);
    
    //Get the maximum residuals
@@ -5471,8 +5905,24 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
          for(unsigned i=0;i<n_dofs;i++) *Dof_pt[i] = dofs_current[i];
 
 #ifdef OOMPH_HAS_MPI
-         // Synchronise the solution on different processors
-         synchronise_dofs();
+         // Synchronise the solution on different processors (on each submesh)
+         unsigned nmesh=nsub_mesh();
+         if (nmesh==0)
+          {
+           synchronise_dofs(mesh_pt());
+          }
+         else
+          {
+           // Synchronise ALL halo(ed) dofs BEFORE external halo(ed) dofs
+           for (unsigned imesh=0; imesh<nmesh; imesh++)
+            {
+             synchronise_dofs(mesh_pt(imesh));
+            }
+           for (unsigned imesh=0; imesh<nmesh; imesh++)
+            {
+             synchronise_external_dofs(mesh_pt(imesh));
+            }
+          }
 #endif
          //Call all "after" actions, e.g. to handle mesh updates
          actions_after_newton_step();
@@ -5539,8 +5989,24 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
        for(unsigned i=0;i<n_dofs;i++) *Dof_pt[i] = dofs_current[i];
 
 #ifdef OOMPH_HAS_MPI
-       // Synchronise the solution on different processors
-       synchronise_dofs();
+       // Synchronise the solution on different processors (on each submesh)
+       unsigned nmesh=nsub_mesh();
+       if (nmesh==0)
+        {
+         synchronise_dofs(mesh_pt());
+        }
+       else
+        {
+          // Synchronise ALL halo(ed) dofs BEFORE external halo(ed) dofs
+         for (unsigned imesh=0; imesh<nmesh; imesh++)
+          {
+           synchronise_dofs(mesh_pt(imesh));
+          }
+         for (unsigned imesh=0; imesh<nmesh; imesh++)
+          {
+           synchronise_external_dofs(mesh_pt(imesh));
+          }
+        }
 #endif
 
        //Call all "after" actions, e.g. to handle mesh updates
@@ -5548,6 +6014,7 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
        actions_before_newton_convergence_check();
        actions_after_newton_solve();
        actions_after_implicit_timestep();
+
        continue;
       }
      //If it's large change the timestep
@@ -5687,7 +6154,6 @@ void Problem::assign_initial_values_impulsive()
    Global_data_pt[iglobal]->time_stepper_pt()->
     assign_initial_values_impulsive(Global_data_pt[iglobal]);
   }
-
 }
 
 
@@ -6357,7 +6823,7 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
  //------------
  if(Nmesh==0)
   {
-   // Refine single mesh uniformly if possible
+   // Refine single mesh if possible
    if(RefineableMeshBase* mmesh_pt = 
       dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
     { 
@@ -6464,14 +6930,17 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
                                                   *mmesh_pt->doc_info_pt());
           }
         
-         // Store max./min error
-         mmesh_pt->max_error()=
-          std::abs(*std::max_element(elemental_error.begin(),
-                                     elemental_error.end(),AbsCmp<double>()));
+         // Store max./min error if the mesh has any elements
+         if (mesh_pt(imesh)->nelement()>0)
+          {
+           mmesh_pt->max_error()=
+            std::abs(*std::max_element(elemental_error.begin(),
+                                       elemental_error.end(),AbsCmp<double>()));
           
-         mmesh_pt->min_error()=
-          std::abs(*std::min_element(elemental_error.begin(),
-                                     elemental_error.end(),AbsCmp<double>()));
+           mmesh_pt->min_error()=
+            std::abs(*std::min_element(elemental_error.begin(),
+                                       elemental_error.end(),AbsCmp<double>()));
+          }
 
          oomph_info << "\n Max/min error: " 
                     << mmesh_pt->max_error() << " "
@@ -6615,15 +7084,18 @@ void Problem::doc_errors(DocInfo& doc_info)
                                                 *mmesh_pt->doc_info_pt());
         }
         
-       // Store max./min error
-       mmesh_pt->max_error()=
-        std::abs(*std::max_element(elemental_error.begin(),
-                                   elemental_error.end(),AbsCmp<double>()));
+       // Store max./min error if the mesh has any elements
+       if (mesh_pt(imesh)->nelement()>0)
+        {
+         mmesh_pt->max_error()=
+          std::abs(*std::max_element(elemental_error.begin(),
+                                     elemental_error.end(),AbsCmp<double>()));
         
-       mmesh_pt->min_error()=
-        std::abs(*std::min_element(elemental_error.begin(),
-                                   elemental_error.end(),AbsCmp<double>()));
-        
+         mmesh_pt->min_error()=
+          std::abs(*std::min_element(elemental_error.begin(),
+                                     elemental_error.end(),AbsCmp<double>()));
+        }
+
        oomph_info << "\n Max/min error: " 
                   << mmesh_pt->max_error() << " "
                   << mmesh_pt->min_error() << std::endl;
@@ -6638,9 +7110,7 @@ void Problem::doc_errors(DocInfo& doc_info)
 //========================================================================
 /// Refine (one and only!) mesh by splitting the elements identified
 /// by their numbers relative to the problems' only mesh, then rebuild 
-/// the problem. [Can't see how/why one would want to do this for multiple
-/// meshes -- if you need this functionality implement it yourself;
-/// you'll probably need to pass a Vector of refinement Vectors...].
+/// the problem. 
 //========================================================================
 void Problem::refine_selected_elements(const Vector<unsigned>& 
                                        elements_to_be_refined)
@@ -6668,11 +7138,14 @@ void Problem::refine_selected_elements(const Vector<unsigned>&
  //Multiple submeshes
  else
   {
-   std::string error_message = 
-    "Problem::refine_selected_elements(...) only works for\n";
-   error_message += "single-mesh problems at the moment.\n";
-    
-   throw OomphLibError(error_message,"Problem::refine_selected_elements()",
+   std::ostringstream error_message;
+   error_message << "Problem::refine_selected_elements(...) only works for\n"
+                 << "multiple-mesh problems if you specify the mesh\n"
+                 << "number in the function argument before the Vector,\n"
+                 << "or a Vector of Vectors for each submesh.\n"
+                 << std::endl;
+   throw OomphLibError(error_message.str(),
+                       "Problem::refine_selected_elements()",
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -6682,18 +7155,11 @@ void Problem::refine_selected_elements(const Vector<unsigned>&
  //Attach the boundary conditions to the mesh
  oomph_info <<"Number of equations: " 
             << assign_eqn_numbers() << std::endl; 
-
 }
-
-
-
 
 //========================================================================
 /// Refine (one and only!) mesh by splitting the elements identified
-/// by their pointers, then rebuild 
-/// the problem. [Can't see how/why one would want to do this for multiple
-/// meshes -- if you need this functionality implement it yourself;
-/// you'll probably need to pass a Vector of refinement Vectors...].
+/// by their pointers, then rebuild the problem. 
 //========================================================================
 void Problem::refine_selected_elements(const Vector<RefineableElement*>& 
                                        elements_to_be_refined_pt)
@@ -6721,11 +7187,14 @@ void Problem::refine_selected_elements(const Vector<RefineableElement*>&
  //Multiple submeshes
  else
   {
-   std::string error_message = 
-    "Problem::refine_selected_elements(...) only works for\n";
-   error_message += "single-mesh problems at the moment.\n";
-    
-   throw OomphLibError(error_message,"Problem::refine_selected_elements()",
+   std::ostringstream error_message;
+   error_message << "Problem::refine_selected_elements(...) only works for\n"
+                 << "multiple-mesh problems if you specify the mesh\n"
+                 << "number in the function argument before the Vector,\n"
+                 << "or a Vector of Vectors for each submesh.\n"
+                 << std::endl;
+   throw OomphLibError(error_message.str(),
+                       "Problem::refine_selected_elements()",
                        OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -6735,10 +7204,60 @@ void Problem::refine_selected_elements(const Vector<RefineableElement*>&
  //Do equation numbering
  oomph_info <<"Number of equations: " << assign_eqn_numbers()
             << std::endl; 
-
 }
 
+//========================================================================
+/// Refine specified submesh by splitting the elements identified
+/// by their numbers relative to the specified mesh, then rebuild the problem. 
+//========================================================================
+void Problem::refine_selected_elements(const unsigned& i_mesh,
+                                       const Vector<unsigned>& 
+                                       elements_to_be_refined)
+ {
+  actions_before_adapt();
+ 
+  // Number of submeshes?
+  unsigned n_mesh=nsub_mesh();
 
+  if (i_mesh>=n_mesh)
+   {
+    std::ostringstream error_message;
+    error_message <<
+     "Problem only has " << n_mesh << " submeshes. Cannot refine submesh " 
+                         << i_mesh << std::endl;
+    throw OomphLibError(error_message.str(),
+                        "Problem::refine_selected_elements()",
+                        OOMPH_EXCEPTION_LOCATION);   
+   }
+
+  // Refine single mesh if possible
+  if (mesh_pt(i_mesh)->nelement()>0)
+   {
+    if(RefineableMeshBase* mmesh_pt = 
+       dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
+     {
+      mmesh_pt->refine_selected_elements(elements_to_be_refined);
+     }
+    else
+     {
+      oomph_info << "Info/Warning: Mesh cannot be refined " 
+                 << std::endl;
+     }
+   }
+
+  if (n_mesh>1)
+   {
+    //Rebuild the global mesh
+    rebuild_global_mesh();
+   }
+
+  //Any actions after the adapatation phase
+  actions_after_adapt();
+
+  //Do equation numbering
+  oomph_info <<"Number of equations: " << assign_eqn_numbers()
+            << std::endl; 
+ }
 
 
 //========================================================================
@@ -6766,15 +7285,18 @@ void Problem::refine_selected_elements(const unsigned& i_mesh,
   }
 
  // Refine single mesh if possible
- if(RefineableMeshBase* mmesh_pt = 
-    dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
+ if (mesh_pt(i_mesh)->nelement()>0)
   {
-   mmesh_pt->refine_selected_elements(elements_to_be_refined_pt);
-  }
- else
-  {
-   oomph_info << "Info/Warning: Mesh cannot be refined " 
-              << std::endl;
+   if(RefineableMeshBase* mmesh_pt = 
+      dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
+    {
+     mmesh_pt->refine_selected_elements(elements_to_be_refined_pt);
+    }
+   else
+    {
+     oomph_info << "Info/Warning: Mesh cannot be refined " 
+                << std::endl;
+    }
   }
 
  if (n_mesh>1)
@@ -6789,12 +7311,92 @@ void Problem::refine_selected_elements(const unsigned& i_mesh,
  //Do equation numbering
  oomph_info <<"Number of equations: " << assign_eqn_numbers()
             << std::endl; 
-
 }
 
+//========================================================================
+/// Refine all submeshes by splitting the elements identified by their
+/// numbers relative to each submesh in a Vector of Vectors, then 
+/// rebuild the problem. 
+//========================================================================
+void Problem::refine_selected_elements(const Vector<Vector<unsigned> >&
+                                       elements_to_be_refined)
+ {
+  actions_before_adapt();
+ 
+  // Number of submeshes?
+  unsigned n_mesh=nsub_mesh();
 
+  // Refine all submeshes if possible
+  for (unsigned i_mesh=0; i_mesh<n_mesh; i_mesh++)
+   {
+    if (mesh_pt(i_mesh)->nelement()>0)
+     {
+      if(RefineableMeshBase* mmesh_pt = 
+         dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
+       {
+        mmesh_pt->refine_selected_elements(elements_to_be_refined[i_mesh]);
+       }
+      else
+       {
+        oomph_info << "Info/Warning: Mesh cannot be refined " 
+                   << std::endl;
+       }
+     }
+   }
 
+  //Rebuild the global mesh
+  rebuild_global_mesh();
 
+  //Any actions after the adapatation phase
+  actions_after_adapt();
+
+  //Do equation numbering
+  oomph_info <<"Number of equations: " << assign_eqn_numbers()
+            << std::endl; 
+ }
+
+//========================================================================
+/// Refine all submeshes by splitting the elements identified by their
+/// pointers within each submesh in a Vector of Vectors, then 
+/// rebuild the problem. 
+//========================================================================
+void Problem::refine_selected_elements(const 
+                                       Vector<Vector<RefineableElement*> >&
+                                       elements_to_be_refined_pt)
+ {
+  actions_before_adapt();
+ 
+  // Number of submeshes?
+  unsigned n_mesh=nsub_mesh();
+
+  // Refine all submeshes if possible
+  for (unsigned i_mesh=0; i_mesh<n_mesh; i_mesh++)
+   {
+    if (mesh_pt(i_mesh)->nelement()>0)
+     {
+      if(RefineableMeshBase* mmesh_pt = 
+         dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
+       {
+        mmesh_pt->refine_selected_elements(elements_to_be_refined_pt[i_mesh]);
+       }
+      else
+       {
+        oomph_info << "Info/Warning: Mesh cannot be refined " 
+                   << std::endl;
+       }
+     }
+   }
+
+  //Rebuild the global mesh
+  rebuild_global_mesh();
+
+  //Any actions after the adapatation phase
+  actions_after_adapt();
+
+  //Do equation numbering
+  oomph_info <<"Number of equations: " << assign_eqn_numbers()
+            << std::endl; 
+ }
 
 
 //========================================================================
@@ -6829,17 +7431,21 @@ void Problem::refine_uniformly(DocInfo& doc_info)
    // Loop over submeshes
    for (unsigned imesh=0;imesh<Nmesh;imesh++)
     {
-     // Refine i-th submesh uniformly if possible
-     if (RefineableMeshBase* mmesh_pt =
-         dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
+     // If the mesh has elements...
+     if (mesh_pt(imesh)->nelement()>0)
       {
-       mmesh_pt->refine_uniformly(doc_info);
+       // Refine i-th submesh uniformly if possible
+       if (RefineableMeshBase* mmesh_pt =
+           dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
+        {
+         mmesh_pt->refine_uniformly(doc_info);
+        }
+       else
+        {
+         oomph_info << "Info/Warning: Cannot refine mesh " << imesh 
+                    << std::endl;
+        } 
       }
-     else
-      {
-       oomph_info << "Info/Warning: Cannot refine mesh " << imesh 
-                  << std::endl;
-      } 
     }
    //Rebuild the global mesh
    rebuild_global_mesh();
@@ -6878,16 +7484,20 @@ void Problem::refine_uniformly(const unsigned& i_mesh,
   }
 #endif
 
- // Refine single mesh uniformly if possible
- if(RefineableMeshBase* mmesh_pt = 
-    dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
+ // If the mesh has elements...
+ if (mesh_pt(i_mesh)->nelement()>0)
   {
-   mmesh_pt->refine_uniformly(doc_info);
-  }
- else
-  {
-   oomph_info << "Info/Warning: Mesh cannot be refined uniformly " 
-              << std::endl;
+   // Refine single mesh uniformly if possible
+   if(RefineableMeshBase* mmesh_pt = 
+      dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
+    {
+     mmesh_pt->refine_uniformly(doc_info);
+    }
+   else
+    {
+     oomph_info << "Info/Warning: Mesh cannot be refined uniformly " 
+                << std::endl;
+    }
   }
 
  //Rebuild the global mesh
@@ -6940,17 +7550,21 @@ unsigned Problem::unrefine_uniformly()
    // Loop over submeshes
    for (unsigned imesh=0;imesh<Nmesh;imesh++)
     {
-     // Unrefine i-th submesh uniformly if possible
-     if (RefineableMeshBase* mmesh_pt=
-         dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
+     // If the mesh has elements...
+     if (mesh_pt(imesh)->nelement()>0)
       {
-       success_flag+=mmesh_pt->unrefine_uniformly();
+       // Unrefine i-th submesh uniformly if possible
+       if (RefineableMeshBase* mmesh_pt=
+           dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
+        {
+         success_flag+=mmesh_pt->unrefine_uniformly();
+        }
+       else
+        {
+         oomph_info << "Info/Warning: Cannot unrefine mesh " << imesh 
+                    << std::endl;
+        } 
       }
-     else
-      {
-       oomph_info << "Info/Warning: Cannot unrefine mesh " << imesh 
-                  << std::endl;
-      } 
     }
    //Rebuild the global mesh
    rebuild_global_mesh();
@@ -7003,16 +7617,20 @@ unsigned Problem::unrefine_uniformly(const unsigned& i_mesh)
   }
 #endif
 
- // Unrefine single mesh uniformly if possible
- if(RefineableMeshBase* mmesh_pt = 
-    dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
+ // If the mesh has elements...
+ if (mesh_pt(i_mesh)->nelement()>0)
   {
-   success_flag+=mmesh_pt->unrefine_uniformly();
-  }
- else
-  {
-   oomph_info << "Info/Warning: Mesh cannot be unrefined uniformly " 
-              << std::endl;
+   // Unrefine single mesh uniformly if possible
+   if(RefineableMeshBase* mmesh_pt = 
+      dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
+    {
+     success_flag+=mmesh_pt->unrefine_uniformly();
+    }
+   else
+    {
+     oomph_info << "Info/Warning: Mesh cannot be unrefined uniformly " 
+                << std::endl;
+    }
   }
 
  //Rebuild the global mesh
@@ -7321,758 +7939,46 @@ void Problem::newton_solve(const unsigned &max_adapt)
 }
 
 
+
 #ifdef OOMPH_HAS_MPI
 
 //========================================================================
 /// Check the halo/haloed/shared node/element schemes.
 //========================================================================
 void Problem::check_halo_schemes(DocInfo& doc_info)
-{ 
- MPI_Status status;
+{
+ // The bulk of the stuff that was in this routine is mesh-based, and 
+ // should therefore drop into the Mesh base class.  All that needs to remain
+ // here is a "wrapper" which calls the function dependent upon the number
+ // of (sub)meshes that may have been distributed.
 
- char filename[100];
- std::ofstream halo_file;
- std::ofstream haloed_file;
- std::ofstream shared_file;
+ unsigned n_mesh=nsub_mesh();
 
- // Doc halo/haoloed element lookup schemes
- //-----------------------------------------
- if (doc_info.doc_flag())
+ if (n_mesh==0)
   {
-   // Loop over domains for halo elements
-   for (int dd=0;dd<MPI_Helpers::Nproc;dd++)
-    {
-     sprintf(filename,"%s/halo_element_check%i_%i.dat",
-             doc_info.directory().c_str(),MPI_Helpers::My_rank,dd);
-     halo_file.open(filename);
-     
-     // Get vectors of halo/haloed elements by copy operation
-     Vector<FiniteElement*> 
-      halo_elem_pt(mesh_pt()->halo_element_pt(dd));
-     
-     unsigned nelem=halo_elem_pt.size();
-
-     for (unsigned e=0;e<nelem;e++)
-      {
-       halo_file << "ZONE " << std::endl;
-       unsigned nnod=halo_elem_pt[e]->nnode();
-       for (unsigned j=0;j<nnod;j++)
-        {
-         Node* nod_pt=halo_elem_pt[e]->node_pt(j);
-         unsigned ndim=nod_pt->ndim();
-         for (unsigned i=0;i<ndim;i++)
-          {
-           halo_file << nod_pt->position(i) << " ";
-          }
-         halo_file << std::endl;
-        }
-      }
-     halo_file.close(); 
-    }
-   
-   
-   
-   // Loop over domains for halo elements
-   for (int d=0;d<MPI_Helpers::Nproc;d++)
-    {
-     sprintf(filename,"%s/haloed_element_check%i_%i.dat",
-             doc_info.directory().c_str(),d,MPI_Helpers::My_rank);
-     haloed_file.open(filename);
-     
-     // Get vectors of halo/haloed elements by copy operation
-     Vector<FiniteElement*> 
-      haloed_elem_pt(mesh_pt()->haloed_element_pt(d));
-     
-     unsigned nelem2=haloed_elem_pt.size(); 
-     for (unsigned e=0;e<nelem2;e++)
-      {
-       haloed_file << "ZONE " << std::endl;
-       unsigned nnod2=haloed_elem_pt[e]->nnode();
-       for (unsigned j=0;j<nnod2;j++)
-        {
-         Node* nod_pt=haloed_elem_pt[e]->node_pt(j);
-         unsigned ndim=nod_pt->ndim();
-         for (unsigned i=0;i<ndim;i++)
-          {
-           haloed_file << nod_pt->position(i) << " ";
-          }
-         haloed_file << std::endl;
-        }
-      }
-     haloed_file.close(); 
-    }
+   oomph_info << "Checking halo schemes on single mesh" << std::endl;
+   mesh_pt()->check_halo_schemes(doc_info,Max_permitted_error_for_halo_check);
   }
-
- // Check halo/haloed element lookup schemes
- //-----------------------------------------
- double max_error=0.0;
-
- // Loop over domains for haloed elements
- for (int d=0;d<MPI_Helpers::Nproc;d++)
+ else // there are submeshes
   {
-   // Are my haloed elements being checked?
-   if (d==MPI_Helpers::My_rank)
+   for (unsigned i_mesh=0; i_mesh<n_mesh; i_mesh++)
     {
-     // Loop over domains for halo elements
-     for (int dd=0;dd<MPI_Helpers::Nproc;dd++)
-      {
-       // Don't talk to yourself
-       if (dd!=d)
-        {
-         // Get vectors of haloed elements by copy operation
-         Vector<FiniteElement*> 
-          haloed_elem_pt(mesh_pt()->haloed_element_pt(dd));
-         
-         // How many of my elements are haloed elements whose halo
-         // counterpart is located on processor dd?
-         int nelem_haloed=haloed_elem_pt.size();
-
-         // Receive from processor dd how many of his elements are halo
-         // nodes whose non-halo counterparts are located here
-         int nelem_halo=0;
-         MPI_Recv(&nelem_halo,1, MPI_INT,dd,
-                  0,MPI_COMM_WORLD,&status);
-         if (nelem_halo!=nelem_haloed)
-          {
-           std::ostringstream error_message;
-           error_message 
-            << "Clash in numbers of halo and haloed elements! " 
-            << std::endl;           
-           error_message 
-            << "# of haloed elements whose halo counterpart lives on proc "
-            << dd << ": " << nelem_haloed << std::endl;
-           error_message
-            << "# of halo elements whose non-halo counterpart lives on proc "
-            << d << ": " << nelem_halo << std::endl;
-           error_message 
-            << "(Re-)run Problem::check_halo_schemes() with DocInfo object"
-            << std::endl;
-           error_message 
-            << "to identify the problem" << std::endl;
-           throw OomphLibError(error_message.str(),
-                               "Problem::check_halo_schemes()",
-                               OOMPH_EXCEPTION_LOCATION);
-          }
-
-
-         // Get strung-together elemental nodal positions from other processor
-         unsigned nnod_per_el=mesh_pt()->
-          finite_element_pt(0)->nnode();
-         unsigned nod_dim=mesh_pt()->
-          finite_element_pt(0)->node_pt(0)->ndim();
-         Vector<double> other_nodal_positions(nod_dim*nnod_per_el*nelem_halo);
-         Vector<int> other_nodal_hangings(nnod_per_el*nelem_halo);
-         MPI_Recv(&other_nodal_positions[0],nod_dim*nnod_per_el*nelem_halo,
-                  MPI_DOUBLE,dd,0,MPI_COMM_WORLD,&status);
-         MPI_Recv(&other_nodal_hangings[0],nnod_per_el*nelem_halo,MPI_INT,dd,1,
-                  MPI_COMM_WORLD,&status);
-
-//         oomph_info << "Received from process " << dd 
-//              << ", with size=" << nod_dim*nnod_per_el*nelem_halo << std::endl;
-         
-         sprintf(filename,"%s/error_haloed_check%i_%i.dat",
-                 doc_info.directory().c_str(),dd,MPI_Helpers::My_rank);
-         haloed_file.open(filename);
-         sprintf(filename,"%s/error_halo_check%i_%i.dat",
-                 doc_info.directory().c_str(),dd,MPI_Helpers::My_rank);
-         halo_file.open(filename);
-     
-         unsigned count=0;         
-         unsigned count_hanging=0;
-         for (int e=0;e<nelem_haloed;e++)
-          {   
-           for (unsigned j=0;j<nnod_per_el;j++)
-            {
-             // andy, testing POSITIONS, not x location 
-             // (cf hanging nodes, nodes.h)
-             double x_haloed=haloed_elem_pt[e]->node_pt(j)->position(0);
-             double y_haloed=haloed_elem_pt[e]->node_pt(j)->position(1);
-             double z_haloed=0.0;
-             if (nod_dim==3)
-              {
-               z_haloed=haloed_elem_pt[e]->node_pt(j)->position(2);
-              }
-             double x_halo=other_nodal_positions[count];
-             count++;
-             double y_halo=other_nodal_positions[count];
-             count++;
-             int other_hanging=other_nodal_hangings[count_hanging];
-             count_hanging++;
-             double z_halo=0.0;
-             if (nod_dim==3)
-              {
-               z_halo=other_nodal_positions[count];
-               count++;
-              }
-             double error=sqrt( pow(x_haloed-x_halo,2)+ 
-                                pow(y_haloed-y_halo,2)+
-                                pow(z_haloed-z_halo,2));
-             if (fabs(error)>max_error) max_error=fabs(error);
-             if (fabs(error)>0.0)
-              {
-               // Report error. NOTE: ERROR IS THROWN BELOW ONCE 
-               // ALL THIS HAS BEEN PROCESSED.
-               oomph_info
-                << "Discrepancy between nodal coordinates of halo(ed) element."
-                << " Error: " << error << std::endl;
-               oomph_info
-                << "Domain with non-halo (i.e. haloed) elem: " 
-                << dd << std::endl;
-               oomph_info
-                << "Domain with    halo                elem: " << d
-                << std::endl;
-               oomph_info
-                << "Current processor is " << MPI_Helpers::My_rank << std::endl
-                << "Nodal positions: " << x_halo << " " << y_halo << std::endl
-                << "and haloed: " << x_haloed << " " << y_haloed << std::endl
-                << "Node pointer: " << haloed_elem_pt[e]->node_pt(j)
-                << std::endl;
-//               oomph_info << "Haloed: " << x_haloed << " " << y_haloed << " "
-//                          << error << " " << MPI_Helpers::My_rank << " "
-//                          << dd << std::endl;
-//               oomph_info << "Halo: " << x_halo << " " << y_halo << " "
-//                          << error << " " << MPI_Helpers::My_rank << " "
-//                          << dd << std::endl;
-               haloed_file << x_haloed << " " << y_haloed << " "
-                           << error << " " << MPI_Helpers::My_rank << " " 
-                           << dd << " "
-                           << haloed_elem_pt[e]->node_pt(j)->is_hanging() 
-                           << std::endl;
-               halo_file << x_halo << " " << y_halo << " "
-                         << error << " " << MPI_Helpers::My_rank << " " 
-                         << dd << " " 
-                         << other_hanging << std::endl; 
-               // (communicated is_hanging value)
-              }
-            } // j<nnod_per_el
-          } // e<nelem_haloed
-//         oomph_info << "Check count (receive)... " << count << std::endl;
-         haloed_file.close();
-         halo_file.close();  
-        }
-      }
-    }
-   // My haloed elements are not being checked: Send my halo elements
-   // whose non-halo counterparts are located on processor d
-   else
-    {
-
-     // Get vectors of halo elements by copy operation
-     Vector<FiniteElement*> 
-      halo_elem_pt(mesh_pt()->halo_element_pt(d));
-     
-     // How many of my elements are halo elements whose non-halo
-     // counterpart is located on processor d?
-     unsigned nelem_halo=halo_elem_pt.size();
-          
-     // Send it across to the processor whose haloed nodes are being checked
-     MPI_Send(&nelem_halo,1,MPI_INT,d,0,
-              MPI_COMM_WORLD);
-
-
-     // Now string together the nodal positions of all halo nodes
-     unsigned nnod_per_el=mesh_pt()->finite_element_pt(0)->nnode();
-     unsigned nod_dim=mesh_pt()->finite_element_pt(0)->node_pt(0)->ndim();
-     Vector<double> nodal_positions(nod_dim*nnod_per_el*nelem_halo); 
-     Vector<int> nodal_hangings(nnod_per_el*nelem_halo);
-     unsigned count=0;
-     unsigned count_hanging=0;
-     for (unsigned e=0;e<nelem_halo;e++)
-      {
-       FiniteElement* el_pt= halo_elem_pt[e];
-       for (unsigned j=0;j<nnod_per_el;j++)
-        {
-         // andy: testing POSITIONS, not x location (cf hanging nodes, nodes.h)
-         nodal_positions[count]=el_pt->node_pt(j)->position(0);
-         count++;
-         nodal_positions[count]=el_pt->node_pt(j)->position(1);
-         count++;
-         if (el_pt->node_pt(j)->is_hanging())
-          {
-           nodal_hangings[count_hanging]=1;
-          }
-         else
-          {
-           nodal_hangings[count_hanging]=0;
-          }
-         count_hanging++;
-         if (nod_dim==3)
-          {
-           nodal_positions[count]=el_pt->node_pt(j)->position(2);
-           count++;
-          }
-        }
-      }
-     // Send it across to the processor whose haloed elements are being 
-     // checked
-
-     MPI_Send(&nodal_positions[0],nod_dim*nnod_per_el*nelem_halo,
-              MPI_DOUBLE,d,0,MPI_COMM_WORLD);
-     MPI_Send(&nodal_hangings[0],nnod_per_el*nelem_halo,
-              MPI_INT,d,1,MPI_COMM_WORLD);
+     oomph_info << "Checking halo schemes on submesh " << i_mesh << std::endl;
+     mesh_pt(i_mesh)->check_halo_schemes(doc_info,
+                                         Max_permitted_error_for_halo_check);
     }
   }
 
- oomph_info << "Max. error for halo/haloed elements " << max_error
-            << std::endl;
-
- if (max_error>Max_permitted_error_for_halo_check)
-  {         
-   std::ostringstream error_message;
-   error_message
-    << "This is bigger than the permitted threshold huiguy "
-    << Problem::Max_permitted_error_for_halo_check << std::endl;
-   error_message
-    << "If you believe this to be acceptable for your problem\n"
-    << "increase Problem::Max_permitted_error_for_halo_check and re-run \n";
-   throw OomphLibError(error_message.str(),
-                       "Problem::check_halo_schemes()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
-
-
- 
- // Doc halo/haloed nodes lookup schemes
- //-------------------------------------
- if (doc_info.doc_flag())
-  {
-   // Loop over domains for halo nodes
-   for (int dd=0;dd<MPI_Helpers::Nproc;dd++)
-    {   
-     sprintf(filename,"%s/halo_node_check%i_%i.dat",
-             doc_info.directory().c_str(),MPI_Helpers::My_rank,dd);
-     halo_file.open(filename);
-     halo_file << "ZONE " << std::endl;
-     
-     unsigned nnod= mesh_pt()->nhalo_node(dd);
-     for (unsigned j=0;j<nnod;j++)
-      {
-       Node* nod_pt=mesh_pt()->halo_node_pt(dd,j);
-       unsigned ndim=nod_pt->ndim();
-       for (unsigned i=0;i<ndim;i++)
-        {
-         halo_file << nod_pt->position(i) << " ";
-        }
-       halo_file << std::endl;
-      }
-     // Dummy output for processor that doesn't share halo nodes
-     // (needed for tecplot)
-     if (nnod==0)
-      {
-       unsigned ndim=mesh_pt()->finite_element_pt(0)->node_pt(0)->ndim();
-       if (ndim==2)
-        {
-         halo_file   << " 1.0 1.1 " << std::endl;
-        }
-       else
-        {
-         halo_file   << " 1.0 1.1 1.1" << std::endl;
-        }
-      }
-     halo_file.close(); 
-    }
-   
-   
-   // Loop over domains for haloed nodes
-   for (int d=0;d<MPI_Helpers::Nproc;d++)
-    {
-     sprintf(filename,"%s/haloed_node_check%i_%i.dat",
-             doc_info.directory().c_str(),d,MPI_Helpers::My_rank);
-     haloed_file.open(filename);
-     haloed_file << "ZONE " << std::endl;
-     
-     unsigned nnod= mesh_pt()->nhaloed_node(d);
-     for (unsigned j=0;j<nnod;j++)
-      {
-       Node* nod_pt=mesh_pt()->haloed_node_pt(d,j);
-       unsigned ndim=nod_pt->ndim();
-       for (unsigned i=0;i<ndim;i++)
-        {
-         haloed_file << nod_pt->position(i) << " ";
-        }
-       haloed_file << std::endl;
-      }
-     // Dummy output for processor that doesn't share halo nodes
-     // (needed for tecplot)
-     if (nnod==0)
-      {
-       unsigned ndim=mesh_pt()->finite_element_pt(0)->node_pt(0)->ndim();
-       if (ndim==2)
-        {
-         halo_file   << " 1.0 1.1 " << std::endl;
-        }
-       else
-        {
-         halo_file   << " 1.0 1.1 1.1" << std::endl;
-        }
-      }
-     haloed_file.close(); 
-    }
-  }
-
- // Check halo/haloed nodes lookup schemes
- //---------------------------------------
- max_error=0.0;
-
- // Loop over domains for haloed nodes
- for (int d=0;d<MPI_Helpers::Nproc;d++)
-  {
-   // Are my haloed nodes being checked?
-   if (d==MPI_Helpers::My_rank)
-    {
-     // Loop over domains for halo nodes
-     for (int dd=0;dd<MPI_Helpers::Nproc;dd++)
-      {
-       // Don't talk to yourself
-       if (dd!=d)
-        {
-         // How many of my nodes are haloed nodes whose halo
-         // counterpart is located on processor dd?
-         int nnod_haloed=mesh_pt()->nhaloed_node(dd);
-         
-         // Receive from processor dd how many of his nodes are halo
-         // nodes whose non-halo counterparts are located here
-         int nnod_halo=0;
-         MPI_Recv(&nnod_halo,1, MPI_INT,dd,
-                  0,MPI_COMM_WORLD,&status);
-         
-         if (nnod_haloed!=nnod_halo)
-          {
-           std::ostringstream error_message;
-           
-           error_message
-            << "Clash in numbers of halo and haloed nodes! " 
-            << std::endl;
-           error_message 
-            << "# of haloed nodes whose halo counterpart lives on proc "
-            << dd << ": " << nnod_haloed << std::endl;
-           error_message
-            << "# of halo nodes whose non-halo counterpart lives on proc "
-            << d << ": " << nnod_halo << std::endl;
-           error_message 
-            << "(Re-)run Problem::check_halo_schemes() with DocInfo object"
-            << std::endl;
-           error_message 
-            << "to identify the problem" << std::endl;
-           throw OomphLibError(error_message.str(),
-                               "Problem::check_halo_schemes()",
-                               OOMPH_EXCEPTION_LOCATION);
-          }
-
-
-         unsigned nod_dim=mesh_pt()->
-          finite_element_pt(0)->node_pt(0)->ndim();
-         
-         // Get strung-together nodal positions from other processor
-         Vector<double> other_nodal_positions(nod_dim*nnod_halo);
-         MPI_Recv(&other_nodal_positions[0],nod_dim*nnod_halo,MPI_DOUBLE,dd,
-                  0,MPI_COMM_WORLD,&status);
-
-         // Check
-         unsigned count=0;
-         for (int j=0;j<nnod_halo;j++)
-          {
-           double x_haloed=
-            mesh_pt()->haloed_node_pt(dd,j)->position(0);
-           double y_haloed=
-            mesh_pt()->haloed_node_pt(dd,j)->position(1);
-           double z_haloed=0.0;
-           if (nod_dim==3)
-            {
-             z_haloed=mesh_pt()->haloed_node_pt(dd,j)->position(2);
-            }
-           double x_halo=other_nodal_positions[count];
-           count++;
-           double y_halo=other_nodal_positions[count];
-           count++;
-           double z_halo=0.0;
-           if (nod_dim==3)
-            {
-             z_halo=other_nodal_positions[count];
-             count++;
-            }
-           double error=sqrt( pow(x_haloed-x_halo,2)+
-                              pow(y_haloed-y_halo,2)+
-                              pow(z_haloed-z_halo,2));
-           if (fabs(error)>max_error)
-            {
-//              std::cout << "ZONE" << std::endl;
-//              std::cout << x_halo << " " 
-//                        << y_halo << " " 
-//                        << y_halo << " " 
-//                        << d << " " << dd 
-//                        << std::endl;
-//              std::cout << x_haloed << " " 
-//                        << y_haloed << " " 
-//                        << y_haloed << " "
-//                        << d << " " << dd  
-//                        << std::endl;
-//              std::cout << std::endl;
-             max_error=fabs(error);       
-            }
-          }
-        }
-      }
-    }
-   // My haloed nodes are not being checked: Send my halo nodes
-   // whose non-halo counterparts are located on processor d
-   else
-    {
-     int nnod_halo=mesh_pt()->nhalo_node(d);
-     
-     // Send it across to the processor whose haloed nodes are being checked
-     MPI_Send(&nnod_halo,1,MPI_INT,d,0,
-              MPI_COMM_WORLD);
-
-     unsigned nod_dim=mesh_pt()->
-      finite_element_pt(0)->node_pt(0)->ndim();
-         
-     // Now string together the nodal positions of all halo nodes
-     Vector<double> nodal_positions(nod_dim*nnod_halo);
-     unsigned count=0;
-     for (int j=0;j<nnod_halo;j++)
-      {
-       nodal_positions[count]=mesh_pt()->halo_node_pt(d,j)->position(0);
-       count++;
-       nodal_positions[count]=mesh_pt()->halo_node_pt(d,j)->position(1);
-       count++;
-       if (nod_dim==3)
-        {
-         nodal_positions[count]=mesh_pt()->halo_node_pt(d,j)->position(2);
-         count++;
-        }
-      }
-     // Send it across to the processor whose haloed nodes are being checked
-     MPI_Send(&nodal_positions[0],nod_dim*nnod_halo,MPI_DOUBLE,d,0,
-              MPI_COMM_WORLD);     
-    }
-  }
-
- oomph_info << "Max. error for halo/haloed nodes " << max_error
-            << std::endl;
-
- if (max_error>Max_permitted_error_for_halo_check)
-  {         
-   std::ostringstream error_message;
-   error_message
-    << "This is bigger than the permitted threshold "
-    << Problem::Max_permitted_error_for_halo_check << std::endl;
-   error_message
-    << "If you believe this to be acceptable for your problem\n"
-    << "increase Problem::Max_permitted_error_for_halo_check and re-run \n";
-   throw OomphLibError(error_message.str(),
-                       "Problem::check_halo_schemes()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
-
- // Doc shared nodes lookup schemes
- //-------------------------------------
- if (doc_info.doc_flag())
-  {
-   // Loop over domains for shared nodes
-   for (int dd=0;dd<MPI_Helpers::Nproc;dd++)
-    {   
-     sprintf(filename,"%s/shared_node_check%i_%i.dat",
-             doc_info.directory().c_str(),MPI_Helpers::My_rank,dd);
-     shared_file.open(filename);
-     shared_file << "ZONE " << std::endl;
-     
-     unsigned nnod= mesh_pt()->nshared_node(dd);
-     for (unsigned j=0;j<nnod;j++)
-      {
-       Node* nod_pt=mesh_pt()->shared_node_pt(dd,j);
-       unsigned ndim=nod_pt->ndim();
-       for (unsigned i=0;i<ndim;i++)
-        {
-         shared_file << nod_pt->position(i) << " ";
-        }
-       shared_file << std::endl;
-      }
-     // Dummy output for processor that doesn't share nodes
-     // (needed for tecplot)
-     if (nnod==0)
-      {
-       unsigned ndim=mesh_pt()->finite_element_pt(0)->node_pt(0)->ndim();
-       if (ndim==2)
-        {
-         shared_file   << " 1.0 1.1 " << std::endl;
-        }
-       else
-        {
-         shared_file   << " 1.0 1.1 1.1" << std::endl;
-        }
-      }
-     shared_file.close(); 
-    }
-
-  }
-
- // Check shared nodes lookup schemes
- //---------------------------------------
- max_error=0.0;
-
- // Loop over domains for shared nodes
- for (int d=0;d<MPI_Helpers::Nproc;d++)
-  {
-   // Are my shared nodes being checked?
-   if (d==MPI_Helpers::My_rank)
-    {
-     // Loop over domains for shared nodes
-     for (int dd=0;dd<MPI_Helpers::Nproc;dd++)
-      {
-       // Don't talk to yourself
-       if (dd!=d)
-        {
-         // How many of my nodes are shared nodes with processor dd?
-         int nnod_shared=mesh_pt()->nshared_node(dd);
-         
-         // Receive from processor dd how many of his nodes are shared
-         // with this processor
-         int nnod_share=0;
-         MPI_Recv(&nnod_share,1, MPI_INT,dd,
-                  0,MPI_COMM_WORLD,&status);
-         
-         if (nnod_shared!=nnod_share)
-          {
-           std::ostringstream error_message;
-           
-           error_message
-            << "Clash in numbers of shared nodes! " 
-            << std::endl;
-           error_message 
-            << "# of shared nodes on proc "
-            << dd << ": " << nnod_shared << std::endl;
-           error_message
-            << "# of shared nodes on proc "
-            << d << ": " << nnod_share << std::endl;
-           error_message 
-            << "(Re-)run Problem::check_halo_schemes() with DocInfo object"
-            << std::endl;
-           error_message 
-            << "to identify the problem" << std::endl;
-           throw OomphLibError(error_message.str(),
-                               "Problem::check_halo_schemes()",
-                               OOMPH_EXCEPTION_LOCATION);
-          }
-
-
-         unsigned nod_dim=mesh_pt()->
-          finite_element_pt(0)->node_pt(0)->ndim();
-         
-         // Get strung-together nodal positions from other processor
-         Vector<double> other_nodal_positions(nod_dim*nnod_share);
-         MPI_Recv(&other_nodal_positions[0],nod_dim*nnod_share,MPI_DOUBLE,dd,
-                  0,MPI_COMM_WORLD,&status);
-
-         // Check
-         unsigned count=0;
-         for (int j=0;j<nnod_share;j++)
-          {
-           double x_shared=
-            mesh_pt()->shared_node_pt(dd,j)->position(0);
-           double y_shared=
-            mesh_pt()->shared_node_pt(dd,j)->position(1);
-           double z_shared=0.0;
-           if (nod_dim==3)
-            {
-             z_shared=mesh_pt()->shared_node_pt(dd,j)->position(2);
-            }
-           double x_share=other_nodal_positions[count];
-           count++;
-           double y_share=other_nodal_positions[count];
-           count++;
-           double z_share=0.0;
-           if (nod_dim==3)
-            {
-             z_share=other_nodal_positions[count];
-             count++;
-            }
-           double error=sqrt( pow(x_shared-x_share,2)+
-                              pow(y_shared-y_share,2)+
-                              pow(z_shared-z_share,2));
-           if (fabs(error)>max_error)
-            {
-//              std::cout << "ZONE" << std::endl;
-//              std::cout << x_halo << " " 
-//                        << y_halo << " " 
-//                        << y_halo << " " 
-//                        << d << " " << dd 
-//                        << std::endl;
-//              std::cout << x_haloed << " " 
-//                        << y_haloed << " " 
-//                        << y_haloed << " "
-//                        << d << " " << dd  
-//                        << std::endl;
-//              std::cout << std::endl;
-             max_error=fabs(error);       
-            }
-          }
-        }
-      }
-    }
-   // My shared nodes are not being checked: Send my shared nodes
-   // to the other processor
-   else
-    {
-     int nnod_share=mesh_pt()->nshared_node(d);
-     
-     // Send it across to the processor whose shared nodes are being checked
-     MPI_Send(&nnod_share,1,MPI_INT,d,0,
-              MPI_COMM_WORLD);
-
-
-     unsigned nod_dim=mesh_pt()->
-      finite_element_pt(0)->node_pt(0)->ndim();
-         
-     // Now string together the nodal positions of all shared nodes
-     Vector<double> nodal_positions(nod_dim*nnod_share);
-     unsigned count=0;
-     for (int j=0;j<nnod_share;j++)
-      {
-       nodal_positions[count]=mesh_pt()->shared_node_pt(d,j)->position(0);
-       count++;
-       nodal_positions[count]=mesh_pt()->shared_node_pt(d,j)->position(1);
-       count++;
-       if (nod_dim==3)
-        {
-         nodal_positions[count]=mesh_pt()->shared_node_pt(d,j)->position(2);
-         count++;
-        }
-      }
-     // Send it across to the processor whose shared nodes are being checked
-     MPI_Send(&nodal_positions[0],nod_dim*nnod_share,MPI_DOUBLE,d,0,
-              MPI_COMM_WORLD);     
-    }
-  }
-
- oomph_info << "Max. error for shared nodes " << max_error
-            << std::endl;
-
- if (max_error>Max_permitted_error_for_halo_check)
-  {         
-   std::ostringstream error_message;
-   error_message
-    << "This is bigger than the permitted threshold "
-    << Problem::Max_permitted_error_for_halo_check << std::endl;
-   error_message
-    << "If you believe this to be acceptable for your problem\n"
-    << "increase Problem::Max_permitted_error_for_halo_check and re-run \n";
-   throw OomphLibError(error_message.str(),
-                       "Problem::check_halo_schemes()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
- 
 }
-
 
 
 
 //========================================================================
 ///  Synchronise the degrees of freedom by overwriting
 /// the haloed values with their non-halo counterparts held
-/// on other processors
+/// on other processors. This works on the (sub)mesh argument
 //========================================================================
-void Problem::synchronise_dofs()
+void Problem::synchronise_dofs(Mesh* &mesh_pt)
 { 
  MPI_Status status;
 
@@ -8090,18 +7996,29 @@ void Problem::synchronise_dofs()
     {
      // How many of my nodes are haloed by the processor whose values
      // are updated?
-     unsigned nnod=mesh_pt()->nhaloed_node(rank);
+     unsigned nnod=mesh_pt->nhaloed_node(rank);
      unsigned count=0;
      for (unsigned j=0;j<nnod;j++)
       {
        // Generalised to variable number of values per node
-       Node* haloed_nod_pt=mesh_pt()->haloed_node_pt(rank,j);
+       Node* haloed_nod_pt=mesh_pt->haloed_node_pt(rank,j);
+
+       // Does the node have a timestepper?  Synchronise all history values!
+       unsigned n_prev=1;
+       if (haloed_nod_pt->time_stepper_pt()!=0)
+        {
+         n_prev+=haloed_nod_pt->time_stepper_pt()->nprev_values();
+        }
+
        unsigned nval=haloed_nod_pt->nvalue();
 
        for (unsigned ival=0;ival<nval;ival++)
         {
-         values_on_other_proc.push_back(haloed_nod_pt->value(ival));
-         count++;
+         for (unsigned t=0;t<n_prev;t++)
+          {
+           values_on_other_proc.push_back(haloed_nod_pt->value(t,ival));
+           count++;
+          }
         }
 
        // Is it a solid node?
@@ -8112,10 +8029,25 @@ void Problem::synchronise_dofs()
          unsigned nval=solid_nod_pt->variable_position_pt()->nvalue();
          for (unsigned ival=0; ival<nval; ival++)
           {
-           values_on_other_proc.push_back(solid_nod_pt
-                                          ->variable_position_pt()->value(ival));
-           count++;
+           for (unsigned t=0;t<n_prev;t++)
+            {
+             values_on_other_proc.push_back
+              (solid_nod_pt->variable_position_pt()->value(t,ival));
+             count++;
+            }
           }
+
+         // Synchronise positions too!
+         unsigned n_dim=solid_nod_pt->ndim();
+         for (unsigned i_dim=0;i_dim<n_dim;i_dim++)
+          {
+           for (unsigned t=0;t<n_prev;t++)
+            {
+             values_on_other_proc.push_back(solid_nod_pt->x(t,i_dim));
+             count++;
+            }
+          }
+
         }
 
       }
@@ -8132,7 +8064,7 @@ void Problem::synchronise_dofs()
               MPI_COMM_WORLD);
      
      // Now loop over haloed elements and prepare to send internal data
-     Vector<FiniteElement*> haloed_elem_pt=mesh_pt()->haloed_element_pt(rank);
+     Vector<FiniteElement*> haloed_elem_pt=mesh_pt->haloed_element_pt(rank);
      unsigned nelem_haloed=haloed_elem_pt.size();
      unsigned count_intern=0;
 
@@ -8145,12 +8077,23 @@ void Problem::synchronise_dofs()
         {
          // Cache internal_data local copy
          Data* int_data_pt=haloed_elem_pt[e]->internal_data_pt(iintern);
+
+         unsigned n_prev=1;
+         if (int_data_pt->time_stepper_pt()!=0)
+          {
+           n_prev+=int_data_pt->time_stepper_pt()->nprev_values();
+          }
+
          unsigned nval=int_data_pt->nvalue();
 
          for (unsigned ival=0;ival<nval;ival++)
           {
-           internal_values_on_other_proc.push_back(int_data_pt->value(ival));
-           count_intern++;
+           for (unsigned t=0;t<n_prev;t++)
+            {
+             internal_values_on_other_proc.push_back(int_data_pt
+                                                     ->value(t,ival));
+             count_intern++;
+            }
           }
         }
       }
@@ -8176,7 +8119,7 @@ void Problem::synchronise_dofs()
         {
          // How many of my nodes are halos whose non-halo counter
          // parts live on processor send_rank?
-         unsigned nnod=mesh_pt()->nhalo_node(send_rank);
+         unsigned nnod=mesh_pt->nhalo_node(send_rank);
          
          // Receive size of vector of values
          unsigned count;
@@ -8195,13 +8138,24 @@ void Problem::synchronise_dofs()
          for (unsigned j=0;j<nnod;j++)
           {
            // Generalised to variable number of values per node
-           Node* halo_nod_pt=mesh_pt()->halo_node_pt(send_rank,j);
+           Node* halo_nod_pt=mesh_pt->halo_node_pt(send_rank,j);
+
+           // Does the node have a timestepper?  Synchronise all history values
+           unsigned n_prev=1;
+           if (halo_nod_pt->time_stepper_pt()!=0)
+            {
+             n_prev+=halo_nod_pt->time_stepper_pt()->nprev_values();
+            }
+
            unsigned nval=halo_nod_pt->nvalue();
         
            for (unsigned ival=0;ival<nval;ival++)
             {
-             halo_nod_pt->set_value(ival,values_on_other_proc[count]);
-             count++; // increase array index
+             for (unsigned t=0;t<n_prev;t++)
+              {
+               halo_nod_pt->set_value(t,ival,values_on_other_proc[count]);
+               count++; // increase array index
+              }
             }
 
            // Is this a solid node?
@@ -8212,16 +8166,31 @@ void Problem::synchronise_dofs()
              unsigned nval=solid_nod_pt->variable_position_pt()->nvalue();
              for (unsigned ival=0;ival<nval;ival++)
               {
-               solid_nod_pt->variable_position_pt()->set_value(ival,
-                                                               values_on_other_proc[count]);
-               count++;
+               for (unsigned t=0;t<n_prev;t++)
+                {
+                 solid_nod_pt->variable_position_pt()->set_value(t,ival,
+                  values_on_other_proc[count]);
+                 count++;
+                }
               }
+
+             // Synchronise positions too
+             unsigned n_dim=solid_nod_pt->ndim();
+             for (unsigned i_dim=0;i_dim<n_dim;i_dim++)
+              {
+               for (unsigned t=0;t<n_prev;t++)
+                {
+                 solid_nod_pt->x(t,i_dim)=values_on_other_proc[count];
+                 count++;
+                }
+              }
+
             }
 
           }
 
          // Get number of halo elements whose non-halo is on process send_rank
-         Vector<FiniteElement*> halo_elem_pt=mesh_pt()->
+         Vector<FiniteElement*> halo_elem_pt=mesh_pt->
           halo_element_pt(send_rank);
          unsigned nelem_halo=halo_elem_pt.size();
          
@@ -8243,12 +8212,297 @@ void Problem::synchronise_dofs()
             {
              // Cache internal_data local copy
              Data* int_data_pt=halo_elem_pt[e]->internal_data_pt(iintern);
+
+             // Does the data have a timestepper?
+             unsigned n_prev=1;
+             if (int_data_pt->time_stepper_pt()!=0)
+              {
+               n_prev+=int_data_pt->time_stepper_pt()->nprev_values();
+              }
+
              unsigned nval=int_data_pt->nvalue();
              for (unsigned ival=0;ival<nval;ival++)
               {
-               int_data_pt->set_value(ival,
-                                      internal_values_on_other_proc[count_intern]);
-               count_intern++;
+               for (unsigned t=0;t<n_prev;t++)
+                {
+                 int_data_pt->set_value
+                  (t,ival,internal_values_on_other_proc[count_intern]);
+                 count_intern++;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//========================================================================
+/// Synchronise the external degrees of freedom by overwriting
+/// the external halo values with their external haloed counterparts held
+/// on other processors and the external mesh.
+//========================================================================
+void Problem::synchronise_external_dofs(Mesh* &mesh_pt)
+{ 
+ MPI_Status status;
+
+ // Loop over all processors whose eqn numbers are to be updated
+ for (int rank=0;rank<MPI_Helpers::Nproc;rank++)
+  {   
+   // Prepare a vector of values
+   Vector<double> values_on_other_proc;
+   Vector<double> internal_values_on_other_proc;
+   
+   // If I'm not the processor whose external halo values are updated,
+   // some of my nodes may be externally haloed: Stick their
+   // values into the vector
+   if (rank!=MPI_Helpers::My_rank)
+    {
+     // How many of my nodes are externally haloed by the processor whose
+     // values are updated?  NB these nodes are on the external mesh.
+     unsigned next_nod=mesh_pt->nexternal_haloed_node(rank);
+
+     unsigned count=0;
+     for (unsigned j=0;j<next_nod;j++)
+      {
+       // Generalised to variable number of values per node
+       Node* ext_haloed_nod_pt=mesh_pt->external_haloed_node_pt(rank,j);
+
+       // Does the node have a timestepper?  Synchronise all history values!
+       unsigned n_prev=1;
+       if (ext_haloed_nod_pt->time_stepper_pt()!=0)
+        {
+         n_prev+=ext_haloed_nod_pt->time_stepper_pt()->nprev_values();
+        }
+
+       // Synchronise nodal values
+       unsigned nval=ext_haloed_nod_pt->nvalue();
+       for (unsigned ival=0;ival<nval;ival++)
+        {
+         for (unsigned t=0;t<n_prev;t++)
+          {
+           values_on_other_proc.push_back(ext_haloed_nod_pt->value(t,ival));
+           count++;
+          }
+        }
+
+       // Synchronise history values for positions
+       unsigned n_dim=ext_haloed_nod_pt->ndim();
+       for (unsigned i_dim=0;i_dim<n_dim;i_dim++)
+        {
+         for (unsigned t=0;t<n_prev;t++)
+          {
+           values_on_other_proc.push_back(ext_haloed_nod_pt->x(t,i_dim));
+           count++;
+          }
+        }
+
+       // Is it a solid node? Synchronise solid node values too
+       SolidNode* ext_solid_nod_pt=
+        dynamic_cast<SolidNode*>(ext_haloed_nod_pt);
+
+       if (ext_solid_nod_pt!=0)
+        {
+         unsigned nval=ext_solid_nod_pt->variable_position_pt()->nvalue();
+         for (unsigned ival=0; ival<nval; ival++)
+          {
+           for (unsigned t=0;t<n_prev;t++)
+            {
+             values_on_other_proc.push_back
+              (ext_solid_nod_pt->variable_position_pt()->value(t,ival));
+             count++;
+            }
+          }
+        }
+      }
+          
+     // Since nval may vary from node to node in the most general case,
+     // the best way to send/receive here is to get the size of
+     // the array before the array is sent, and send that first, so that
+     // the receiver knows how much data to expect.  The order will be
+     // preserved since the halo/haloed nodes are already ordered correctly
+     MPI_Send(&count,1,MPI_INT,rank,0,MPI_COMM_WORLD);
+
+     if (count!=0)
+      {
+       // Send it across
+       MPI_Send(&values_on_other_proc[0],count,MPI_DOUBLE,rank,1,
+                MPI_COMM_WORLD);
+      }
+     
+     // Now loop over haloed elements and prepare to send internal data
+     unsigned next_elem_haloed=mesh_pt->nexternal_haloed_element(rank);
+     unsigned count_intern=0;
+
+     for (unsigned e=0; e<next_elem_haloed; e++)
+      {
+       // How many internal data values for this element?
+       unsigned nintern_data = mesh_pt->
+        external_haloed_element_pt(rank,e)->ninternal_data();
+       for (unsigned iintern=0; iintern<nintern_data; iintern++)
+        {
+         // Cache internal_data local copy
+         Data* int_data_pt=mesh_pt->
+          external_haloed_element_pt(rank,e)->internal_data_pt(iintern);
+
+         // Does the data have a timestepper?
+         unsigned n_prev=1;
+         if (int_data_pt->time_stepper_pt()!=0)
+          {
+           n_prev+=int_data_pt->time_stepper_pt()->nprev_values();
+          }
+
+         unsigned nval=int_data_pt->nvalue();
+         for (unsigned ival=0;ival<nval;ival++)
+          {
+           for (unsigned t=0;t<n_prev;t++)
+            {
+             internal_values_on_other_proc.push_back(int_data_pt
+                                                     ->value(t,ival));
+             count_intern++;
+            }
+          }
+        }
+      }
+     // Send the size of the vector of internal data values to the receiver
+     MPI_Send(&count_intern,1,MPI_INT,rank,2,MPI_COMM_WORLD);
+
+     if (count_intern!=0)
+      {
+       // Now send the vector itself
+       MPI_Send(&internal_values_on_other_proc[0],count_intern,MPI_DOUBLE,rank,
+                3,MPI_COMM_WORLD);
+      }
+    }
+   // Receive the vector of values
+   else
+    {
+     // Loop over all other processors to receive their values
+     for (int send_rank=0;send_rank<MPI_Helpers::Nproc;send_rank++)
+      {
+       // Don't talk to yourself
+       if (send_rank!=MPI_Helpers::My_rank)
+        {
+         // How many of my nodes are external halos whose external non-halo
+         // counterparts live on processor send_rank? 
+         unsigned next_nod=mesh_pt->nexternal_halo_node(send_rank);
+
+         // Receive size of vector of values
+         unsigned count;
+         MPI_Recv(&count,1,MPI_INT,send_rank,0,MPI_COMM_WORLD,&status);
+
+         if (count!=0)
+          {
+           // Prepare vector for receipt of values
+           values_on_other_proc.resize(count);
+      
+           // Receive 
+           MPI_Recv(&values_on_other_proc[0],count, MPI_DOUBLE, send_rank,
+                    1, MPI_COMM_WORLD,&status);
+
+           // Copy into the values of the external halo nodes
+           // on the present processors
+           count=0; // reset array index counter to zero
+           for (unsigned j=0;j<next_nod;j++)
+            {
+             // Generalised to variable number of values per node
+             Node* ext_halo_nod_pt=mesh_pt->external_halo_node_pt(send_rank,j);
+
+             // Does the node have a timestepper?  Synchronise all values!
+             unsigned n_prev=1;
+             if (ext_halo_nod_pt->time_stepper_pt()!=0)
+              {
+               n_prev+=ext_halo_nod_pt->time_stepper_pt()->nprev_values();
+              }
+
+             // Synchronise values
+             unsigned nval=ext_halo_nod_pt->nvalue();        
+             for (unsigned ival=0;ival<nval;ival++)
+              {
+               for (unsigned t=0;t<n_prev;t++)
+                {
+                 ext_halo_nod_pt->set_value(t,ival,
+                                            values_on_other_proc[count]);
+                 count++;
+                }
+              }
+
+             // Synchronise history values for positions
+             unsigned n_dim=ext_halo_nod_pt->ndim();
+             for (unsigned i_dim=0;i_dim<n_dim;i_dim++)
+              {
+               for (unsigned t=0;t<n_prev;t++)
+                {
+                 ext_halo_nod_pt->x(t,i_dim)=values_on_other_proc[count];
+                 count++;
+                }
+              }
+
+             // Is this a solid node?
+             SolidNode* ext_solid_nod_pt=
+              dynamic_cast<SolidNode*>(ext_halo_nod_pt);
+             if (ext_solid_nod_pt!=0)
+              {
+               unsigned nval=ext_solid_nod_pt->
+                variable_position_pt()->nvalue();
+               for (unsigned ival=0;ival<nval;ival++)
+                {
+                 for (unsigned t=0;t<n_prev;t++)
+                  {
+                   ext_solid_nod_pt->variable_position_pt()->
+                    set_value(t,ival,values_on_other_proc[count]);
+                   count++;
+                  }
+                }
+              }
+            }
+          }
+
+         // Get number of halo elements whose non-halo is on process send_rank
+         unsigned next_elem_halo=mesh_pt->nexternal_halo_element(send_rank);
+         
+         // Receive size of vector of internal data values
+         unsigned count_intern;
+         MPI_Recv(&count_intern,1,MPI_INT,send_rank,2,MPI_COMM_WORLD,&status);
+
+         if (count_intern!=0)
+          {
+           // Prepare and receive vector
+           internal_values_on_other_proc.resize(count_intern);
+           MPI_Recv(&internal_values_on_other_proc[0],count_intern,
+                    MPI_DOUBLE,send_rank,3,MPI_COMM_WORLD,&status);
+
+           // reset array counter index to zero
+           count_intern=0;
+           for (unsigned e=0;e<next_elem_halo;e++)
+            {
+             unsigned nintern_data=mesh_pt->
+              external_halo_element_pt(send_rank,e)->ninternal_data();
+             for (unsigned iintern=0;iintern<nintern_data;iintern++)
+              {
+               // Cache internal_data local copy
+               Data* int_data_pt=mesh_pt->
+                external_halo_element_pt(send_rank,e)->
+                internal_data_pt(iintern);
+
+               // Does the data have a timestepper?
+               unsigned n_prev=1;
+               if (int_data_pt->time_stepper_pt()!=0)
+                {
+                 n_prev+=int_data_pt->time_stepper_pt()->nprev_values();
+                }
+
+               unsigned nval=int_data_pt->nvalue();
+               for (unsigned ival=0;ival<nval;ival++)
+                {
+                 for (unsigned t=0;t<n_prev;t++)
+                  {
+                   int_data_pt->set_value
+                    (t,ival,internal_values_on_other_proc[count_intern]);
+                   count_intern++;
+                  }
+                }
               }
             }
           }
@@ -8259,16 +8513,12 @@ void Problem::synchronise_dofs()
 }
 
 
-
-
 //========================================================================
 ///  Synchronise equation numbers and return the total
 /// number of degrees of freedom in the overall problem
 //========================================================================
-long Problem::synchronise_eqn_numbers()
+long Problem::synchronise_eqn_numbers(const bool& assign_local_eqn_numbers)
 { 
- MPI_Status status;
-
  // Step 1: Bump up eqn numbers by the number of dofs on 
  // previous processor
 
@@ -8317,7 +8567,6 @@ long Problem::synchronise_eqn_numbers()
 
  // Loop over all internal data (on elements) and bump up their
  // equation numbers if they exist
-
  unsigned nelem=mesh_pt()->nelement();
  for (unsigned e=0;e<nelem;e++)
   {
@@ -8356,7 +8605,7 @@ long Problem::synchronise_eqn_numbers()
    for (unsigned ival=0;ival<nval;ival++)
     {
      int old_eqn_number=nod_pt->eqn_number(ival); 
-     // andy: include all eqn numbers
+     // Include all eqn numbers
      if (old_eqn_number>=0)
       {
        // Bump up eqn number
@@ -8392,10 +8641,69 @@ long Problem::synchronise_eqn_numbers()
     }
   }
 
-
+ // The following copies the halo(ed) eqn numbers, and therefore
+ // needs to be called at a submesh level as the halo(ed) structure
+ // is only visible at the submesh level
+ unsigned nmesh=nsub_mesh();
  // Now copy the haloed eqn numbers across
  // This has to include the internal data equation numbers as well
  // as the solid node equation numbers
+ if (nmesh==0)
+  {
+   copy_haloed_eqn_numbers_helper(mesh_pt());
+  }
+ else // nmesh!=0
+  {
+   for (unsigned imesh=0; imesh<nmesh; imesh++)
+    {
+     // Do the haloed eqn numbers for this submesh
+     copy_haloed_eqn_numbers_helper(mesh_pt(imesh));
+    }
+  }
+
+ // Also copy external haloed equation numbers
+ for (unsigned i=0;i<nmesh;i++)
+  {
+   copy_external_haloed_eqn_numbers_helper(mesh_pt(i));
+  }
+
+ // Now the global equation numbers have been updated.
+ //---------------------------------------------------
+ // Setup the local equation numbers again.
+ //----------------------------------------
+
+ if (assign_local_eqn_numbers)
+  {
+   // Loop over the submeshes: Note we need to call the submeshes' own
+   // assign_*_eqn_number() otherwise we miss additional functionality
+   // that is implemented (e.g.) in SolidMeshes!
+   unsigned n_sub_mesh=nsub_mesh();
+   if (n_sub_mesh==0)
+    {
+     mesh_pt()->assign_local_eqn_numbers();
+    }
+   else
+    {
+     for (unsigned i=0;i<n_sub_mesh;i++)
+      {
+       mesh_pt(i)->assign_local_eqn_numbers();
+      }
+    }
+  }
+
+ // Return new total number of equations
+ return new_ndof;
+
+}
+
+//=======================================================================
+/// A private helper function to
+/// copy the haloed equation numbers into the halo equation numbers.
+/// The argument is the mesh/submesh which will be worked on.
+//===================================================================
+void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
+{
+ MPI_Status status;
 
  // Loop over all processors whose eqn numbers are to be updated
  for (int rank=0;rank<MPI_Helpers::Nproc;rank++)
@@ -8411,12 +8719,12 @@ long Problem::synchronise_eqn_numbers()
     {
      // How many of my nodes are haloed by the processor whose eqn
      // numbers are updated?
-     unsigned nnod=mesh_pt()->nhaloed_node(rank);
+     unsigned nnod=mesh_pt->nhaloed_node(rank);
      unsigned count=0;     
      for (unsigned j=0;j<nnod;j++)
       {
        // Generalise to variable number of values per node
-       Node* haloed_nod_pt=mesh_pt()->haloed_node_pt(rank,j);
+       Node* haloed_nod_pt=mesh_pt->haloed_node_pt(rank,j);
        unsigned nval=haloed_nod_pt->nvalue();
 
        for (unsigned ival=0;ival<nval;ival++)
@@ -8433,8 +8741,8 @@ long Problem::synchronise_eqn_numbers()
          unsigned nval=solid_nod_pt->variable_position_pt()->nvalue();
          for (unsigned ival=0; ival<nval; ival++)
           {
-           eqn_numbers_on_other_proc.push_back(solid_nod_pt
-                                               ->variable_position_pt()->eqn_number(ival));
+           eqn_numbers_on_other_proc.push_back
+            (solid_nod_pt->variable_position_pt()->eqn_number(ival));
            count++;
           }
         }
@@ -8451,7 +8759,7 @@ long Problem::synchronise_eqn_numbers()
 
      // now loop over haloed elements and prepare to send 
      // equation numbers for internal data
-     Vector<FiniteElement*> haloed_elem_pt=mesh_pt()->haloed_element_pt(rank);
+     Vector<FiniteElement*> haloed_elem_pt=mesh_pt->haloed_element_pt(rank);
      unsigned nelem_haloed=haloed_elem_pt.size();
      unsigned count_intern=0;
 
@@ -8498,7 +8806,7 @@ long Problem::synchronise_eqn_numbers()
         {
          // How many of my nodes are halos whose non-halo counter
          // parts live on processor send_rank?
-         nnod=mesh_pt()->nhalo_node(send_rank);
+         unsigned nnod=mesh_pt->nhalo_node(send_rank);
          
          // Receive the size of the vector of eqn numbers
          unsigned count;
@@ -8510,14 +8818,14 @@ long Problem::synchronise_eqn_numbers()
          // Receive it
          MPI_Recv(&eqn_numbers_on_other_proc[0],count,MPI_INT,send_rank,
                   1, MPI_COMM_WORLD,&status);
-         
+
          // Copy into the equation numbers of the halo nodes
          // on the present processors
          count=0; // reset count for array index
          for (unsigned j=0;j<nnod;j++)
           {
            // Generalise to variable number of values per node
-           Node* halo_nod_pt=mesh_pt()->halo_node_pt(send_rank,j);
+           Node* halo_nod_pt=mesh_pt->halo_node_pt(send_rank,j);
            unsigned nval=halo_nod_pt->nvalue();
 
            for (unsigned ival=0;ival<nval;ival++)
@@ -8542,7 +8850,7 @@ long Problem::synchronise_eqn_numbers()
 
           }
          // Get number of halo elements whose non-halo is on process send_rank
-         Vector<FiniteElement*> halo_elem_pt=mesh_pt()->
+         Vector<FiniteElement*> halo_elem_pt=mesh_pt->
           halo_element_pt(send_rank);
          unsigned nelem_halo=halo_elem_pt.size();
 
@@ -8582,44 +8890,225 @@ long Problem::synchronise_eqn_numbers()
   }
 
 
+}
 
+//=======================================================================
+/// A helper function to copy the external haloed equation 
+/// numbers into the external halo equation numbers.
+/// The arguments are the submesh for the external halo nodes and the
+/// (external) submesh for the external haloed nodes
+//===================================================================
+void Problem::copy_external_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
+{
+ MPI_Status status;
 
- // Now the global equation numbers have been updated.
- //---------------------------------------------------
- // Setup the local equation numbers again.
- //----------------------------------------
-
- // Loop over the submeshes: Note we need to call the submeshes' own
- // assign_*_eqn_number() otherwise we miss additional functionality
- // that is implemented (e.g.) in SolidMeshes!
- unsigned n_sub_mesh=nsub_mesh();
- if (n_sub_mesh==0)
+ // Loop over all processors whose eqn numbers are to be updated
+ for (int rank=0;rank<MPI_Helpers::Nproc;rank++)
   {
-   mesh_pt()->assign_local_eqn_numbers();
-  }
- else
-  {
-   for (unsigned i=0;i<n_sub_mesh;i++)
+   // Prepare a vector of equation numbers 
+   Vector<int> eqn_numbers_on_other_proc;
+   Vector<int> internal_eqn_numbers_on_other_proc;
+
+   // If I'm not the processor whose external halo eqn numbers are updated,
+   // some of my nodes may be externally haloed: Stick their
+   // eqn numbers into the vector
+   if (rank!=MPI_Helpers::My_rank)
     {
-     mesh_pt(i)->assign_local_eqn_numbers();
+     // How many of my nodes are externally haloed by the processor whose
+     // eqn numbers are updated?
+     unsigned next_nod=mesh_pt->nexternal_haloed_node(rank);
+
+     unsigned count=0;
+     for (unsigned j=0;j<next_nod;j++)
+      {
+       // Variable number of values per node
+       Node* ext_haloed_nod_pt=mesh_pt->external_haloed_node_pt(rank,j);
+       unsigned nval=ext_haloed_nod_pt->nvalue();
+       for (unsigned ival=0;ival<nval;ival++)
+        {
+         eqn_numbers_on_other_proc.push_back
+          (ext_haloed_nod_pt->eqn_number(ival));
+         count++;
+        }
+
+       // Is it a solid node?
+       SolidNode* ext_solid_nod_pt=
+        dynamic_cast<SolidNode*>(ext_haloed_nod_pt);
+
+       if (ext_solid_nod_pt!=0)
+        {
+         unsigned nval=ext_solid_nod_pt->variable_position_pt()->nvalue();
+         for (unsigned ival=0; ival<nval; ival++)
+          {
+           eqn_numbers_on_other_proc.push_back
+            (ext_solid_nod_pt->variable_position_pt()->eqn_number(ival));
+           count++;
+          }
+        }
+
+      }
+
+     // The receiving process needs to know how many values it's getting
+     // since it only descends into the loop over the nodes after
+     // receiving the vector
+     MPI_Send(&count,1,MPI_INT,rank,0,MPI_COMM_WORLD);
+
+     if (count!=0)
+      {
+       // Send it across
+       MPI_Send(&eqn_numbers_on_other_proc[0],count,MPI_INT,rank,1,
+                MPI_COMM_WORLD);
+      }
+
+     // now loop over external haloed elements and prepare to send 
+     // equation numbers for internal data
+     unsigned next_elem_haloed=mesh_pt->nexternal_haloed_element(rank);
+     unsigned count_intern=0;
+
+     for (unsigned e=0; e<next_elem_haloed; e++)
+      {
+       // how many internal data values for this element?
+       unsigned nintern_data = mesh_pt->
+        external_haloed_element_pt(rank,e)->ninternal_data();
+ 
+       for (unsigned iintern=0; iintern<nintern_data; iintern++)
+        {
+         // Cache local copy of data
+         Data* int_data_pt=mesh_pt->
+          external_haloed_element_pt(rank,e)->internal_data_pt(iintern);
+         unsigned nval=int_data_pt->nvalue();
+
+         for (unsigned ival=0;ival<nval;ival++)
+          {
+           internal_eqn_numbers_on_other_proc.push_back
+            (int_data_pt->eqn_number(ival));
+           count_intern++;
+          }
+        }
+      }
+     
+     // send the size of the vector of internal data values to the receiver
+     MPI_Send(&count_intern,1,MPI_INT,rank,2,MPI_COMM_WORLD);
+
+     if (count_intern!=0)
+      {
+       // now send the vector itself
+       MPI_Send(&internal_eqn_numbers_on_other_proc[0],count_intern,
+                MPI_INT,rank,3,MPI_COMM_WORLD);
+      }
+     // done
+
     }
+   // Receive the vector of eqn numbers
+   else
+    {
+     // Loop over all other processors to receive their
+     // eqn numbers
+     for (int send_rank=0;send_rank<MPI_Helpers::Nproc;send_rank++)
+      {
+       // Don't talk to yourself
+       if (send_rank!=MPI_Helpers::My_rank)
+        {
+         // How many of my nodes are external halos whose external non-halo
+         // counterparts live on processor send_rank?
+         unsigned next_nod=mesh_pt->nexternal_halo_node(send_rank);
+
+         // Receive the size of the vector of eqn numbers
+         unsigned count;
+         MPI_Recv(&count,1,MPI_INT,send_rank,0,MPI_COMM_WORLD,&status);
+         
+         if (count!=0)
+          {
+           // Prepare vector for receipt of eqn numbers
+           eqn_numbers_on_other_proc.resize(count);
+         
+           // Receive it
+           MPI_Recv(&eqn_numbers_on_other_proc[0],count,MPI_INT,send_rank,
+                    1, MPI_COMM_WORLD,&status);
+
+           // Copy into the equation numbers of the external halo nodes
+           // on the present processors
+           count=0; // reset count for array index
+           for (unsigned j=0;j<next_nod;j++)
+            {
+             // Generalise to variable number of values per node
+             Node* ext_halo_nod_pt=mesh_pt->
+              external_halo_node_pt(send_rank,j);
+             unsigned nval=ext_halo_nod_pt->nvalue();
+
+             for (unsigned ival=0;ival<nval;ival++)
+              {
+               ext_halo_nod_pt->eqn_number(ival)=
+                eqn_numbers_on_other_proc[count];
+               count++;
+              }
+
+             // Is this a solid node?
+             SolidNode* ext_solid_nod_pt=
+              dynamic_cast<SolidNode*>(ext_halo_nod_pt);
+
+             if (ext_solid_nod_pt!=0)
+              {
+               unsigned nval=ext_solid_nod_pt->
+                variable_position_pt()->nvalue();
+               for (unsigned ival=0;ival<nval;ival++)
+                {
+                 ext_solid_nod_pt->variable_position_pt()->
+                  eqn_number(ival)=eqn_numbers_on_other_proc[count];
+                 count++;
+                }
+              }
+            }
+          }
+         // Get number of external halo elements whose external non-halo
+         // element is on process send_rank
+         unsigned next_elem_halo=mesh_pt->nexternal_halo_element(send_rank);
+
+         // Receive size of vector of internal data values
+         unsigned count_intern;
+         MPI_Recv(&count_intern,1,MPI_INT,send_rank,2,MPI_COMM_WORLD,&status);
+
+         if (count_intern!=0)
+          {
+           // Prepare and receive vector
+           internal_eqn_numbers_on_other_proc.resize(count_intern);
+           MPI_Recv(&internal_eqn_numbers_on_other_proc[0],
+                    count_intern,MPI_INT,send_rank,3,MPI_COMM_WORLD,&status);
+
+           // reset array counter index to zero
+           count_intern=0;
+           for (unsigned e=0;e<next_elem_halo;e++)
+            {
+             unsigned nintern_data=mesh_pt->
+              external_halo_element_pt(send_rank,e)->ninternal_data();
+             for (unsigned iintern=0;iintern<nintern_data;iintern++)
+              {
+               Data* int_data_pt=mesh_pt->
+                external_halo_element_pt(send_rank,e)->
+                internal_data_pt(iintern);
+               // cache internal_data_pt copy
+               unsigned nval=int_data_pt->nvalue();
+
+               for (unsigned ival=0;ival<nval;ival++)
+                {
+                 int_data_pt->eqn_number(ival)=
+                  internal_eqn_numbers_on_other_proc[count_intern];
+                 count_intern++;
+                }
+              }
+            }
+          }
+
+        }
+      }
+    }
+
   }
 
- // Return new total number of equations
- return new_ndof;
 
 }
 
-
-
 #endif
-
-
-
-
-
-
-
 
 
 }

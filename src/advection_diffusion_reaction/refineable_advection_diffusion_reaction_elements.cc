@@ -149,22 +149,22 @@ fill_in_generic_residual_contribution_adv_diff_react(
    
    //Get source function
    Vector<double> source(NREAGENT);
-   this->get_source_adv_diff_react(interpolated_x,source);
+   this->get_source_adv_diff_react(ipt,interpolated_x,source);
    
    
    //Get wind
    Vector<double> wind(DIM);
-   this->get_wind_adv_diff_react(s,interpolated_x,wind);
+   this->get_wind_adv_diff_react(ipt,s,interpolated_x,wind);
    
    //Get reaction terms
    Vector<double> R(NREAGENT);
-   this->get_reaction_adv_diff_react(interpolated_c,R);
+   this->get_reaction_adv_diff_react(ipt,interpolated_c,R);
    
    //If we are getting the jacobian the get the derivative terms
    DenseMatrix<double> dRdC(NREAGENT);
    if(flag)
     {
-     this->get_reaction_deriv_adv_diff_react(interpolated_c,dRdC);
+     this->get_reaction_deriv_adv_diff_react(ipt,interpolated_c,dRdC);
     }
    
    // Assemble residuals and Jacobian

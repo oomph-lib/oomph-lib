@@ -113,7 +113,9 @@ void PVDEquationsBase<DIM>::get_strain(const Vector<double> &s,
  
  //Get isotropic growth factor
  double gamma=1.0;
- get_isotropic_growth(s,interpolated_xi,gamma);
+ //Dummy integration point 
+ unsigned ipt=0;
+ get_isotropic_growth(ipt,s,interpolated_xi,gamma);
  
  // We use Cartesian coordinates as the reference coordinate
  // system. In this case the undeformed metric tensor is always
@@ -292,7 +294,7 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
        
    //Get isotropic growth factor
    double gamma=1.0;
-   this->get_isotropic_growth(s,interpolated_xi,gamma);
+   this->get_isotropic_growth(ipt,s,interpolated_xi,gamma);
 
 
    //Get body force at current time
@@ -651,7 +653,9 @@ void PVDEquations<DIM>::output(std::ostream &outfile, const unsigned &n_plot)
    
    // Get isotropic growth
    double gamma;
-   this->get_isotropic_growth(s,xi,gamma);
+   // Dummy integration point
+   unsigned ipt=0;
+   this->get_isotropic_growth(ipt,s,xi,gamma);
    
    //Output the x,y,..
    for(unsigned i=0;i<DIM;i++) 
@@ -709,7 +713,9 @@ void PVDEquations<DIM>::output(FILE* file_pt, const unsigned &n_plot)
 
          // Get isotropic growth
          double gamma;
-         this->get_isotropic_growth(s,xi,gamma);
+         // Dummy integration point
+         unsigned ipt=0;
+         this->get_isotropic_growth(ipt,s,xi,gamma);
 
          //Output the x,y,..
          for(unsigned i=0;i<DIM;i++) 
@@ -757,7 +763,9 @@ void PVDEquations<DIM>::output(FILE* file_pt, const unsigned &n_plot)
            
            // Get isotropic growth
            double gamma;
-           this->get_isotropic_growth(s,xi,gamma);
+           // Dummy integration point
+           unsigned ipt=0;
+           this->get_isotropic_growth(ipt,s,xi,gamma);
            
            //Output the x,y,z
            for(unsigned i=0;i<DIM;i++) 
@@ -825,7 +833,9 @@ void PVDEquations<DIM>::get_stress(const Vector<double> &s,
  
  //Get isotropic growth factor
  double gamma;
- this->get_isotropic_growth(s,xi,gamma);
+ //Dummy integration point
+ unsigned ipt=0;
+ this->get_isotropic_growth(ipt,s,xi,gamma);
  
  // We use Cartesian coordinates as the reference coordinate
  // system. In this case the undeformed metric tensor is always
@@ -1233,7 +1243,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
 
    //Get isotropic growth factor
    double gamma=1.0;
-   this->get_isotropic_growth(s,interpolated_xi,gamma);
+   this->get_isotropic_growth(ipt,s,interpolated_xi,gamma);
 
    //Get body force at current time
    Vector<double> b(DIM);
@@ -1891,7 +1901,9 @@ void PVDEquationsWithPressure<DIM>::output(std::ostream &outfile,
        
        // Get isotropic growth
        double gamma;
-       this->get_isotropic_growth(s,xi,gamma);
+       // Dummy integration point
+       unsigned ipt=0;
+       this->get_isotropic_growth(ipt,s,xi,gamma);
        
        //Output the x,y,..
        for(unsigned i=0;i<DIM;i++) 
@@ -1932,7 +1944,9 @@ void PVDEquationsWithPressure<DIM>::output(std::ostream &outfile,
            
            // Get isotropic growth
            double gamma;
-           this->get_isotropic_growth(s,xi,gamma);
+           // Dummy integration point
+           unsigned ipt=0;
+           this->get_isotropic_growth(ipt,s,xi,gamma);
            
            //Output the x,y,..
            for(unsigned i=0;i<DIM;i++) 
@@ -1996,7 +2010,9 @@ void PVDEquationsWithPressure<DIM>::output(FILE* file_pt,
        
        // Get isotropic growth
        double gamma;
-       this->get_isotropic_growth(s,xi,gamma);
+       // Dummy integration point
+       unsigned ipt=0;       
+       this->get_isotropic_growth(ipt,s,xi,gamma);
        
        //Output the x,y,..
        for(unsigned i=0;i<DIM;i++) 
@@ -2048,7 +2064,9 @@ void PVDEquationsWithPressure<DIM>::output(FILE* file_pt,
            
            // Get isotropic growth
            double gamma;
-           this->get_isotropic_growth(s,xi,gamma);
+           // Dummy integration point
+           unsigned ipt=0;
+           this->get_isotropic_growth(ipt,s,xi,gamma);
            
            //Output the x,y,..
            for(unsigned i=0;i<DIM;i++) 
@@ -2128,7 +2146,9 @@ void PVDEquationsWithPressure<DIM>::get_stress(const Vector<double> &s,
  
  //Get isotropic growth factor
  double gamma;
- this->get_isotropic_growth(s,xi,gamma);
+ //Dummy integration point
+ unsigned ipt=0;
+ this->get_isotropic_growth(ipt,s,xi,gamma);
  
  // We use Cartesian coordinates as the reference coordinate
  // system. In this case the undeformed metric tensor is always

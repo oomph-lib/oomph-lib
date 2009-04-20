@@ -173,8 +173,8 @@ public:
 
  /// \short Overload the growth function in the advection-diffusion equations.
  /// to be temperature-dependent.
- void get_isotropic_growth(const Vector<double> &s, const Vector<double>& xi,
-                           double &gamma) const
+ void get_isotropic_growth(const unsigned& ipt, const Vector<double> &s, 
+                           const Vector<double>& xi, double &gamma) const
  {
   //The growth is the undeformed coefficient plus linear thermal
   //expansion

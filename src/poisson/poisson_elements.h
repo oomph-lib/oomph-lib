@@ -173,7 +173,8 @@ public:
  /// virtual to allow overloading in multi-physics problems where
  /// the strength of the source function might be determined by
  /// another system of equations.
- inline virtual void get_source_poisson(const Vector<double>& x, 
+ inline virtual void get_source_poisson(const unsigned& ipt,
+                                        const Vector<double>& x,
                                         double& source) const
   {
    //If no source function has been set, return zero
@@ -192,6 +193,7 @@ public:
  /// another system of equations. Computed via function pointer 
  /// (if set) or by finite differencing (default)
  inline virtual void get_source_gradient_poisson(
+  const unsigned& ipt,
   const Vector<double>& x, 
   Vector<double>& gradient) const
   {
@@ -200,7 +202,7 @@ public:
     {
      // Reference value
      double source=0.0;
-     get_source_poisson(x,source);
+     get_source_poisson(ipt,x,source);
 
      // FD it
      double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
@@ -209,7 +211,7 @@ public:
      for (unsigned i=0;i<DIM;i++)
       {
        x_pls[i]+=eps_fd;
-       get_source_poisson(x_pls,source_pls);
+       get_source_poisson(ipt,x_pls,source_pls);
        gradient[i]=(source_pls-source)/eps_fd;
        x_pls[i]=x[i];
       }

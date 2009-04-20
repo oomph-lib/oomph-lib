@@ -114,7 +114,7 @@ fill_in_generic_residual_contribution_biharmonic(
 
    // evaluate source function at knot position
    double source = 0.0; 
-   get_source(interpolated_position, source);
+   get_source(ipt, interpolated_position, source);
 
    // loop over nodes
    for (unsigned n1 = 0; n1 < n_node; n1++)

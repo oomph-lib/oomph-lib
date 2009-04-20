@@ -761,6 +761,10 @@ namespace oomph
    /// indices on a particular processor are stored. \n
    /// The variable is only used by the master preconditioner
    unsigned Nglobal_indices;
+
+   /// \short Static boolean to allow block_matrix_test(...) to be run.
+   /// Defaults to false.
+   static bool Run_block_matrix_test;
   };
 
 

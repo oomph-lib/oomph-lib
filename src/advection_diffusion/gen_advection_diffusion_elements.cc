@@ -139,22 +139,22 @@ fill_in_generic_residual_contribution_cons_adv_diff(Vector<double> &residuals,
    //Get source function
    //-------------------
    double source;
-   get_source_cons_adv_diff(interpolated_x,source);
+   get_source_cons_adv_diff(ipt,interpolated_x,source);
 
 
    //Get wind
    //--------
    Vector<double> wind(DIM);
-   get_wind_cons_adv_diff(s,interpolated_x,wind);
+   get_wind_cons_adv_diff(ipt,s,interpolated_x,wind);
 
    //Get the conserved wind (non-divergence free)
    Vector<double> conserved_wind(DIM);
-   get_conserved_wind_cons_adv_diff(s,interpolated_x,conserved_wind);
+   get_conserved_wind_cons_adv_diff(ipt,s,interpolated_x,conserved_wind);
 
 
    //Get diffusivity tensor
    DenseMatrix<double> D(DIM,DIM);
-   get_diff_cons_adv_diff(s,interpolated_x,D);
+   get_diff_cons_adv_diff(ipt,s,interpolated_x,D);
 
    // Assemble residuals and Jacobian
    //--------------------------------
@@ -337,7 +337,9 @@ void  GeneralisedAdvectionDiffusionEquations<DIM>::output(std::ostream &outfile,
     
    // Get the wind
    Vector<double> wind(DIM);
-   get_wind_cons_adv_diff(s,x,wind);
+   // Dummy integration point variable needed
+   unsigned ipt=0;
+   get_wind_cons_adv_diff(ipt,s,x,wind);
    for(unsigned i=0;i<DIM;i++) 
     {
      outfile << wind[i] << " ";

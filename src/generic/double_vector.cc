@@ -549,7 +549,8 @@ namespace oomph
    // otherwise use MPI_Allreduce to find the global maximum
    else
     {
-     MPI_Allreduce(&max,&max,1,MPI_DOUBLE,MPI_MAX,
+     double local_max = max;
+     MPI_Allreduce(&local_max,&max,1,MPI_DOUBLE,MPI_MAX,
                    Distribution_pt->communicator_pt()->mpi_comm());
      return max;
     }

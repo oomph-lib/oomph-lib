@@ -60,6 +60,9 @@ void RefineableMeshBase::get_refinement_pattern(
    if (level>max_level) max_level=level;
   }
 
+ oomph_info << "there are " << nnodes << " elements in total, with max level="
+            << max_level << std::endl;
+
  // Assign storage for refinement pattern
  to_be_refined.clear();
  to_be_refined.resize(max_level);
@@ -103,6 +106,32 @@ void RefineableMeshBase::get_refinement_pattern(
   }
 }
 
+//========================================================================
+/// \short Extract the elements at a particular refinement level in
+/// the refinement pattern (used in Mesh::redistribute or whatever it's
+/// going to be called (RefineableMeshBase::reduce_halo_layers or something)
+//========================================================================
+void RefineableMeshBase::get_elements_at_refinement_level(
+ unsigned& refinement_level,
+ Vector<RefineableElement*>& level_elements)
+{
+ // Extract *all* elements from current (fully refined) mesh.
+ Vector<Tree*> all_tree_nodes_pt;
+ forest_pt()->stick_all_tree_nodes_into_vector(all_tree_nodes_pt);
+
+ // Add the element to the vector if its level matches refinement_level
+ unsigned nnodes=all_tree_nodes_pt.size();
+ for (unsigned e=0;e<nnodes;e++)
+  {
+   unsigned level=all_tree_nodes_pt[e]->level();
+   if (level==refinement_level)
+    {
+     level_elements.push_back(dynamic_cast<RefineableElement*>
+                              (all_tree_nodes_pt[e]->object_pt()));
+    }
+  }
+
+}
 
 //========================================================================
 /// Refine original, unrefined mesh according to specified refinement 
@@ -486,9 +515,9 @@ void RefineableMeshBase::adapt(Vector<double>& elemental_error)
 
   if ((total_n_refine > 0) || (total_n_unrefine > max_keep_unrefined()))
    {
-    //Refine the mesh
+    //Perform the actual adaptation
     adapt_mesh(local_doc_info);
-    //The number of refineable elements should still be local to each process
+    //The number of refineable elements is still local to each process
     nunrefined()=n_unrefine;
     nrefined()=n_refine;
    }
@@ -601,475 +630,488 @@ get_refinement_levels(unsigned& min_refinement_level,
 //=================================================================
 void RefineableMeshBase::adapt_mesh(DocInfo& doc_info)
 {
- // Pointer to mesh needs to be passed to some functions
- Mesh* mesh_pt=this;
+#ifdef OOMPH_HAS_MPI
+ // Flush any external element storage before performing the adaptation
+ // (in particular, external halo nodes that are on mesh boundaries)
+ this->flush_all_external_storage();
+#endif
+
+ //Only perform the adapt step if the mesh has any elements.  This is relevant
+ //in a distributed problem with multiple meshes, where a particular
+ // process may not have any elements on a particular submesh.
+ if (this->nelement()>0)
+  {
+   // Pointer to mesh needs to be passed to some functions
+   Mesh* mesh_pt=this;
  
- // Do refinement(=splitting) of elements that have been selected
- // This function encapsulates the template parameter
- this->split_elements_if_required();
+   // Do refinement(=splitting) of elements that have been selected
+   // This function encapsulates the template parameter
+   this->split_elements_if_required();
 
- // Now elements have been created -- build all the leaves
- //-------------------------------------------------------
- //Firstly put all the elements into a vector
- Vector<Tree*> leaf_nodes_pt;
- Forest_pt->stick_leaves_into_vector(leaf_nodes_pt);
+   // Now elements have been created -- build all the leaves
+   //-------------------------------------------------------
+   //Firstly put all the elements into a vector
+   Vector<Tree*> leaf_nodes_pt;
+   Forest_pt->stick_leaves_into_vector(leaf_nodes_pt);
 
- //If we are documenting the output, create the filename
- char fullname[100];
- std::ofstream new_nodes_file;
- if(doc_info.doc_flag())
-  {
-   sprintf(fullname,"%s/new_nodes%i.dat",doc_info.directory().c_str(),
-           doc_info.number());
-   new_nodes_file.open(fullname);
-  }
- 
- // Build all elements and store vector of pointers to new nodes
- // (Note: build() checks if the element has been built 
- // already, i.e. if it's not a new element).
- Vector<Node*> new_node_pt;
- bool was_already_built;
- unsigned long num_tree_nodes=leaf_nodes_pt.size();
- for (unsigned long e=0;e<num_tree_nodes;e++)
-  {
-   leaf_nodes_pt[e]->object_pt()
-    ->build(mesh_pt,new_node_pt,was_already_built,new_nodes_file);
-  }
-
- //Close the new nodes files, if it was opened
- if(doc_info.doc_flag()) {new_nodes_file.close();}
-
- // Loop over all nodes in mesh and free the dofs of those that were
- //-----------------------------------------------------------------
- // pinned only because they were hanging nodes. Also update their
- //-----------------------------------------------------------------
- // nodal values so that they contain data that is consistent
- //----------------------------------------------------------
- // with the hanging node representation
- //-------------------------------------
- // (Even if the nodal data isn't actually accessed because the node 
- // is still hanging -- we don't know this yet, and this step makes
- // sure that all nodes are fully functional and up-to-date, should
- // they become non-hanging below).
- unsigned long n_node=this->nnode();
- for (unsigned long n=0;n<n_node;n++)
-  {
-   //Get the pointer to the node
-   Node* nod_pt=this->node_pt(n);
-  
-   //Get the number of values in the node
-   unsigned n_value=nod_pt->nvalue();
-   
-   //We need to find if any of the values are hanging
-   bool is_hanging = nod_pt->is_hanging();
-   //Loop over the values and find out whether any are hanging
-   for(unsigned n=0;n<n_value;n++)
-    {is_hanging |= nod_pt->is_hanging(n);}
-
-   //If the node is hanging then ...
-   if(is_hanging)
+   //If we are documenting the output, create the filename
+   char fullname[100];
+   std::ofstream new_nodes_file;
+   if(doc_info.doc_flag())
     {
-     // Unless they are turned into hanging nodes again below
-     // (this might or might not happen), fill in all the necessary
-     // data to make them 'proper' nodes again.
-     
-     // Reconstruct the nodal values/position from the node's 
-     // hanging node representation
-     unsigned nt=nod_pt->ntstorage();
-     Vector<double> values(n_value);
-     unsigned n_dim=nod_pt->ndim();
-     Vector<double> position(n_dim);
-     // Loop over all history values
-     for(unsigned t=0;t<nt;t++)
-      {
-       nod_pt->value(t,values);
-       for(unsigned i=0;i<n_value;i++) {nod_pt->set_value(t,i,values[i]);}
-       nod_pt->position(t,position);
-       for(unsigned i=0;i<n_dim;i++) {nod_pt->x(t,i)=position[i];}
-      }
-
-     // If it's an algebraic node: Update its previous nodal positions too
-     AlgebraicNode* alg_node_pt=dynamic_cast<AlgebraicNode*>(nod_pt);
-     if (alg_node_pt!=0)
-      {
-       bool update_all_time_levels=true;
-       alg_node_pt->node_update(update_all_time_levels);
-      }
-     
-     
-     //If it's a Solid node, update Lagrangian coordinates
-     // from its hanging node representation
-     SolidNode* solid_node_pt = dynamic_cast<SolidNode*>(nod_pt);
-     if(solid_node_pt!=0)
-      {
-       unsigned n_lagrangian = solid_node_pt->nlagrangian();
-       for(unsigned i=0;i<n_lagrangian;i++)
-        {
-         solid_node_pt->xi(i) = solid_node_pt->lagrangian_position(i);
-        }
-      }
+     sprintf(fullname,"%s/new_nodes%i.dat",doc_info.directory().c_str(),
+             doc_info.number());
+     new_nodes_file.open(fullname);
+    }
+ 
+   // Build all elements and store vector of pointers to new nodes
+   // (Note: build() checks if the element has been built 
+   // already, i.e. if it's not a new element).
+   Vector<Node*> new_node_pt;
+   bool was_already_built;
+   unsigned long num_tree_nodes=leaf_nodes_pt.size();
+   for (unsigned long e=0;e<num_tree_nodes;e++)
+    {
+     leaf_nodes_pt[e]->object_pt()
+      ->build(mesh_pt,new_node_pt,was_already_built,new_nodes_file);
     }
 
-   // Initially mark all nodes as 'non-hanging' and `obsolete' 
-   nod_pt->set_nonhanging();
-   nod_pt->set_obsolete();
-  }
+   //Close the new nodes files, if it was opened
+   if(doc_info.doc_flag()) {new_nodes_file.close();}
 
- // Unrefine all the selected elements: This needs to be
- // all elements, because the father elements are not actually leaves.
- //--------------------------------
- for (unsigned long e=0;e<Forest_pt->ntree();e++)
-  {Forest_pt->tree_pt(e)->traverse_all(&Tree::merge_sons_if_required,
-                                       mesh_pt);}
-
- // Add the newly created elements to mesh
- //---------------------------------------
-
- // Stick all elements into a new vector
- //(note the leaves may have changed, so this is not duplicated work)
- Vector<Tree*> tree_nodes_pt;
- Forest_pt->stick_leaves_into_vector(tree_nodes_pt);
-
- //Copy the elements into the mesh Vector
- num_tree_nodes=tree_nodes_pt.size();
- Element_pt.resize(num_tree_nodes);
- for (unsigned long e=0;e<num_tree_nodes;e++)
-  {
-   Element_pt[e]=tree_nodes_pt[e]->object_pt();
-
-   // Now loop over all nodes in element and mark them as non-obsolete
-   // Logic: Initially all nodes in the unrefined mesh were labeled
-   // as deleteable. Then we create new elements (whose newly created
-   // nodes are obviously non-obsolete), and killed some other elements (by
-   // by deleting them and marking the nodes that were not shared by
-   // their father as obsolete. Now we loop over all the remaining
-   // elements and (re-)label all their nodes as non-obsolete. This
-   // saves some nodes that were regarded as obsolete by deleted
-   // elements but are still required in some surviving ones
-   // from a tragic early death...
-   FiniteElement* this_el_pt=this->finite_element_pt(e); // andy 
-   unsigned n_node=this_el_pt->nnode(); // andy caching pre-loop
-   for (unsigned n=0;n<n_node;n++)
-    {
-     this_el_pt->node_pt(n)->set_non_obsolete(); // andy
-    }
-  }
-
- // Cannot delete nodes that are still marked as obsolete
- // because they may still be required to assemble the hanging schemes
- //-------------------------------------------------------------------
-
- // Mark up hanging nodes
- //----------------------
- 
- //Output streams for the hanging nodes
- Vector<std::ofstream*> hanging_output_files;
- //Setup the output files for hanging nodes, this must be called
- //precisely once for the forest. Note that the files will only
- //actually be opened if doc_info.doc_flag() is true
- Forest_pt->open_hanging_node_files(doc_info,hanging_output_files);
-
- for(unsigned long e=0;e<num_tree_nodes;e++)
-  {
-   //Generic setup
-   tree_nodes_pt[e]->object_pt()->setup_hanging_nodes(hanging_output_files);
-   //Element specific setup
-   tree_nodes_pt[e]->object_pt()->further_setup_hanging_nodes();
-  }
-
- //Close the hanging node files and delete the memory allocated 
- //for the streams
- Forest_pt->close_hanging_node_files(doc_info,hanging_output_files);
-
- // Read out the number of continously interpolated values
- // from one of the elements (assuming it's the same in all elements)
- unsigned ncont_interpolated_values=
-  tree_nodes_pt[0]->object_pt()->ncont_interpolated_values();
-
- // Complete the hanging nodes schemes by dealing with the
- // recursively hanging nodes
- complete_hanging_nodes(ncont_interpolated_values);
-
-  /// Update the boundary element info -- this can be a costly procedure
- /// and for this reason the mesh writer might have decided not to set up this
- /// scheme. If so, we won't change this and suppress its creation...
- if (Lookup_for_elements_next_boundary_is_setup)
-  {
-   this->setup_boundary_element_info(); 
-  }
-
-#ifdef PARANOID
- 
- // Doc/check the neighbours
- //-------------------------
- Vector<Tree*> all_tree_nodes_pt;
- Forest_pt->stick_all_tree_nodes_into_vector(all_tree_nodes_pt);
-
- //Check the neighbours
- Forest_pt->check_all_neighbours(doc_info);
- 
- // Check the integrity of the elements
- // -----------------------------------
- 
- // Loop over elements and get the elemental integrity
- double max_error=0.0;
- for (unsigned long e=0;e<num_tree_nodes;e++)
-  {
-   double max_el_error;
-   tree_nodes_pt[e]->object_pt()->check_integrity(max_el_error);
-   //If the elemental error is greater than our maximum error
-   //reset the maximum
-   if(max_el_error > max_error) {max_error=max_el_error;}
-  }
-
- if (max_error>RefineableElement::max_integrity_tolerance())
-  {
-   std::ostringstream error_stream;
-   error_stream << "Mesh refined: Max. error in integrity check: " 
-                << max_error << " is too big\n";
-   error_stream
-    << "i.e. bigger than RefineableElement::max_integrity_tolerance()="
-    << RefineableElement::max_integrity_tolerance() << std::endl;
-
-   std::ofstream some_file;
-   some_file.open("ProblemMesh.dat");
+   // Loop over all nodes in mesh and free the dofs of those that were
+   //-----------------------------------------------------------------
+   // pinned only because they were hanging nodes. Also update their
+   //-----------------------------------------------------------------
+   // nodal values so that they contain data that is consistent
+   //----------------------------------------------------------
+   // with the hanging node representation
+   //-------------------------------------
+   // (Even if the nodal data isn't actually accessed because the node 
+   // is still hanging -- we don't know this yet, and this step makes
+   // sure that all nodes are fully functional and up-to-date, should
+   // they become non-hanging below).
+   unsigned long n_node=this->nnode();
    for (unsigned long n=0;n<n_node;n++)
     {
      //Get the pointer to the node
-     Node* nod_pt = this->node_pt(n);
-     //Get the dimension
-     unsigned n_dim = nod_pt->ndim();
-     //Output the coordinates
-     for(unsigned i=0;i<n_dim;i++)
-      {
-       some_file << this->node_pt(n)->x(i) << " ";
-      }
-     some_file << std::endl;
-    }
-   some_file.close();
-
-   error_stream << "Doced problem mesh in ProblemMesh.dat" << std::endl;
-
-   throw OomphLibError(error_stream.str(),
-                       "RefineableMeshBase::adapt_mesh()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
- else
-  {
-   oomph_info << "Mesh refined: Max. error in integrity check: " 
-        << max_error << " is OK" << std::endl;
-   oomph_info << "i.e. less than RefineableElement::max_integrity_tolerance()="
-        << RefineableElement::max_integrity_tolerance() << std::endl;
-  }
- 
-#endif
-
- //Loop over all elements other than the final level and deactivate the
- //objects, essentially set the pointer that point to nodes that are
- //about to be deleted to NULL. This must take place here because nodes
- //addressed by elements that are dead but still living in the tree might
- //have been made obsolete in the last round of refinement
- for (unsigned long e=0;e<Forest_pt->ntree();e++)
-  {
-   Forest_pt->tree_pt(e)->
-    traverse_all_but_leaves(&Tree::deactivate_object);
-  }
- 
- //Now we can prune the dead nodes from the mesh.
- this->prune_dead_nodes();
-
- // Finally: Reorder the nodes within the mesh's node vector
- // to establish a standard ordering regardless of the sequence
- // of mesh refinements -- this is required to allow dump/restart
- // on refined meshes
- this->reorder_nodes();
+     Node* nod_pt=this->node_pt(n);
   
- // Final doc
- //-----------
- if (doc_info.doc_flag())
-  {
-   // Doc the boundary conditions ('0' for non-existent, '1' for free, 
-   //----------------------------------------------------------------
-   // '2' for pinned -- ideal for tecplot scatter sizing.
-   //----------------------------------------------------
-   //num_tree_nodes=tree_nodes_pt.size();
-
-   // Determine maximum number of values at any node in this type of element
-   RefineableElement* el_pt = tree_nodes_pt[0]->object_pt();
-   //Initalise max_nval
-   unsigned max_nval=0;
-   for (unsigned n=0;n<el_pt->nnode();n++)
-    {
-     if (el_pt->node_pt(n)->nvalue()>max_nval)
-      {max_nval=el_pt->node_pt(n)->nvalue();}
-    }
-
-   //Open the output file
-   std::ofstream bcs_file;
-   sprintf(fullname,"%s/bcs%i.dat",doc_info.directory().c_str(),
-           doc_info.number());
-   bcs_file.open(fullname);  
+     //Get the number of values in the node
+     unsigned n_value=nod_pt->nvalue();
    
-   // Loop over elements
-   for(unsigned long e=0;e<num_tree_nodes;e++)
-    {
-     el_pt = tree_nodes_pt[e]->object_pt();
-     // Loop over nodes in element
-     unsigned n_nod=el_pt->nnode();
-     for(unsigned n=0;n<n_nod;n++)
+     //We need to find if any of the values are hanging
+     bool is_hanging = nod_pt->is_hanging();
+     //Loop over the values and find out whether any are hanging
+     for(unsigned n=0;n<n_value;n++)
+      {is_hanging |= nod_pt->is_hanging(n);}
+
+     //If the node is hanging then ...
+     if(is_hanging)
       {
-       //Get pointer to the node
-       Node* nod_pt=el_pt->node_pt(n);
-       //Find the dimension of the node
-       unsigned n_dim = nod_pt->ndim();
-       //Write the nodal coordinates to the file
-       for(unsigned i=0;i<n_dim;i++)
-        {bcs_file << nod_pt->x(i) << " ";}
-       
-       // Loop over all values in this element
-       for(unsigned i=0;i<max_nval;i++)
+       // Unless they are turned into hanging nodes again below
+       // (this might or might not happen), fill in all the necessary
+       // data to make them 'proper' nodes again.
+     
+       // Reconstruct the nodal values/position from the node's 
+       // hanging node representation
+       unsigned nt=nod_pt->ntstorage();
+       Vector<double> values(n_value);
+       unsigned n_dim=nod_pt->ndim();
+       Vector<double> position(n_dim);
+       // Loop over all history values
+       for(unsigned t=0;t<nt;t++)
         {
-         // Value exists at this node:
-         if (i<nod_pt->nvalue())
+         nod_pt->value(t,values);
+         for(unsigned i=0;i<n_value;i++) {nod_pt->set_value(t,i,values[i]);}
+         nod_pt->position(t,position);
+         for(unsigned i=0;i<n_dim;i++) {nod_pt->x(t,i)=position[i];}
+        }
+
+       // If it's an algebraic node: Update its previous nodal positions too
+       AlgebraicNode* alg_node_pt=dynamic_cast<AlgebraicNode*>(nod_pt);
+       if (alg_node_pt!=0)
+        {
+         bool update_all_time_levels=true;
+         alg_node_pt->node_update(update_all_time_levels);
+        }
+     
+     
+       //If it's a Solid node, update Lagrangian coordinates
+       // from its hanging node representation
+       SolidNode* solid_node_pt = dynamic_cast<SolidNode*>(nod_pt);
+       if(solid_node_pt!=0)
+        {
+         unsigned n_lagrangian = solid_node_pt->nlagrangian();
+         for(unsigned i=0;i<n_lagrangian;i++)
           {
-           bcs_file << " " << 1+nod_pt->is_pinned(i);
-          }
-         // ...if not just dump out a zero
-         else
-          {
-           bcs_file << " 0 ";
+           solid_node_pt->xi(i) = solid_node_pt->lagrangian_position(i);
           }
         }
-       bcs_file << std::endl;
-      }  
-    }
-   bcs_file.close();
-   
-   // Doc all nodes
-   //---------------
-   std::ofstream all_nodes_file;
-   sprintf(fullname,"%s/all_nodes%i.dat",doc_info.directory().c_str(),
-           doc_info.number());
-   all_nodes_file.open(fullname);  
-   
-   all_nodes_file << "ZONE \n"; 
-   for(unsigned long n=0;n<n_node;n++)
-    {
-     Node* nod_pt = this->node_pt(n);
-     unsigned n_dim = nod_pt->ndim();
-     for(unsigned i=0;i<n_dim;i++)
-      {
-       all_nodes_file << this->node_pt(n)->x(i) << " ";
       }
-     all_nodes_file << std::endl;
+
+     // Initially mark all nodes as 'non-hanging' and `obsolete' 
+     nod_pt->set_nonhanging();
+     nod_pt->set_obsolete();
     }
-   
-   all_nodes_file.close();
 
+   // Unrefine all the selected elements: This needs to be
+   // all elements, because the father elements are not actually leaves.
+   //--------------------------------
+   for (unsigned long e=0;e<Forest_pt->ntree();e++)
+    {Forest_pt->tree_pt(e)->traverse_all(&Tree::merge_sons_if_required,
+                                         mesh_pt);}
 
-   // Doc all hanging nodes:
-   //-----------------------
-   std::ofstream some_file;
-   sprintf(fullname,"%s/all_hangnodes%i.dat",doc_info.directory().c_str(),
-           doc_info.number());
-   some_file.open(fullname);
-   for(unsigned long n=0;n<n_node;n++)
+   // Add the newly created elements to mesh
+   //---------------------------------------
+
+   // Stick all elements into a new vector
+   //(note the leaves may have changed, so this is not duplicated work)
+   Vector<Tree*> tree_nodes_pt;
+   Forest_pt->stick_leaves_into_vector(tree_nodes_pt);
+
+   //Copy the elements into the mesh Vector
+   num_tree_nodes=tree_nodes_pt.size();
+   Element_pt.resize(num_tree_nodes);
+   for (unsigned long e=0;e<num_tree_nodes;e++)
     {
-     Node* nod_pt=this->node_pt(n);
+     Element_pt[e]=tree_nodes_pt[e]->object_pt();
 
-     if (nod_pt->is_hanging())
+     // Now loop over all nodes in element and mark them as non-obsolete
+     // Logic: Initially all nodes in the unrefined mesh were labeled
+     // as deleteable. Then we create new elements (whose newly created
+     // nodes are obviously non-obsolete), and killed some other elements (by
+     // by deleting them and marking the nodes that were not shared by
+     // their father as obsolete. Now we loop over all the remaining
+     // elements and (re-)label all their nodes as non-obsolete. This
+     // saves some nodes that were regarded as obsolete by deleted
+     // elements but are still required in some surviving ones
+     // from a tragic early death...
+     FiniteElement* this_el_pt=this->finite_element_pt(e);
+     unsigned n_node=this_el_pt->nnode(); // caching pre-loop
+     for (unsigned n=0;n<n_node;n++)
       {
-       unsigned n_dim = nod_pt->ndim();       
+       this_el_pt->node_pt(n)->set_non_obsolete();
+      }
+    }
+
+   // Cannot delete nodes that are still marked as obsolete
+   // because they may still be required to assemble the hanging schemes
+   //-------------------------------------------------------------------
+
+   // Mark up hanging nodes
+   //----------------------
+ 
+   //Output streams for the hanging nodes
+   Vector<std::ofstream*> hanging_output_files;
+   //Setup the output files for hanging nodes, this must be called
+   //precisely once for the forest. Note that the files will only
+   //actually be opened if doc_info.doc_flag() is true
+   Forest_pt->open_hanging_node_files(doc_info,hanging_output_files);
+
+   for(unsigned long e=0;e<num_tree_nodes;e++)
+    {
+     //Generic setup
+     tree_nodes_pt[e]->object_pt()->setup_hanging_nodes(hanging_output_files);
+     //Element specific setup
+     tree_nodes_pt[e]->object_pt()->further_setup_hanging_nodes();
+    }
+
+   //Close the hanging node files and delete the memory allocated 
+   //for the streams
+   Forest_pt->close_hanging_node_files(doc_info,hanging_output_files);
+
+   // Read out the number of continously interpolated values
+   // from one of the elements (assuming it's the same in all elements)
+   unsigned ncont_interpolated_values=
+    tree_nodes_pt[0]->object_pt()->ncont_interpolated_values();
+
+   // Complete the hanging nodes schemes by dealing with the
+   // recursively hanging nodes
+   complete_hanging_nodes(ncont_interpolated_values);
+
+   /// Update the boundary element info -- this can be a costly procedure
+   /// and for this reason the mesh writer might have decided not to set up this
+   /// scheme. If so, we won't change this and suppress its creation...
+   if (Lookup_for_elements_next_boundary_is_setup)
+    {
+     this->setup_boundary_element_info(); 
+    }
+
+#ifdef PARANOID
+ 
+   // Doc/check the neighbours
+   //-------------------------
+   Vector<Tree*> all_tree_nodes_pt;
+   Forest_pt->stick_all_tree_nodes_into_vector(all_tree_nodes_pt);
+
+   //Check the neighbours
+   Forest_pt->check_all_neighbours(doc_info);
+ 
+   // Check the integrity of the elements
+   // -----------------------------------
+ 
+   // Loop over elements and get the elemental integrity
+   double max_error=0.0;
+   for (unsigned long e=0;e<num_tree_nodes;e++)
+    {
+     double max_el_error;
+     tree_nodes_pt[e]->object_pt()->check_integrity(max_el_error);
+     //If the elemental error is greater than our maximum error
+     //reset the maximum
+     if(max_el_error > max_error) {max_error=max_el_error;}
+    }
+
+   if (max_error>RefineableElement::max_integrity_tolerance())
+    {
+     std::ostringstream error_stream;
+     error_stream << "Mesh refined: Max. error in integrity check: " 
+                  << max_error << " is too big\n";
+     error_stream
+      << "i.e. bigger than RefineableElement::max_integrity_tolerance()="
+      << RefineableElement::max_integrity_tolerance() << std::endl;
+
+     std::ofstream some_file;
+     some_file.open("ProblemMesh.dat");
+     for (unsigned long n=0;n<n_node;n++)
+      {
+       //Get the pointer to the node
+       Node* nod_pt = this->node_pt(n);
+       //Get the dimension
+       unsigned n_dim = nod_pt->ndim();
+       //Output the coordinates
        for(unsigned i=0;i<n_dim;i++)
         {
-         some_file << nod_pt->x(i) << " ";
-         }
-       
-       //ALH: Added this to stop Solid problems seg-faulting
-       if(this->node_pt(n)->nvalue() > 0)
-        {
-         some_file  << " " << nod_pt->raw_value(0);
+         some_file << this->node_pt(n)->x(i) << " ";
         }
        some_file << std::endl;
       }
-    }
-   some_file.close();
+     some_file.close();
 
-   // Doc all hanging nodes and their masters 
-   // View with QHangingNodesWithMasters.mcr
-   sprintf(fullname,"%s/geometric_hangnodes_withmasters%i.dat",
-           doc_info.directory().c_str(),doc_info.number());
-   some_file.open(fullname);
-   for(unsigned long n=0;n<n_node;n++)
+     error_stream << "Doced problem mesh in ProblemMesh.dat" << std::endl;
+
+     throw OomphLibError(error_stream.str(),
+                         "RefineableMeshBase::adapt_mesh()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   else
     {
-     Node* nod_pt=this->node_pt(n);
-     if (nod_pt->is_hanging())
+     oomph_info << "Mesh refined: Max. error in integrity check: " 
+                << max_error << " is OK" << std::endl;
+     oomph_info << "i.e. less than RefineableElement::max_integrity_tolerance()="
+                << RefineableElement::max_integrity_tolerance() << std::endl;
+    }
+ 
+#endif
+
+   //Loop over all elements other than the final level and deactivate the
+   //objects, essentially set the pointer that point to nodes that are
+   //about to be deleted to NULL. This must take place here because nodes
+   //addressed by elements that are dead but still living in the tree might
+   //have been made obsolete in the last round of refinement
+   for (unsigned long e=0;e<Forest_pt->ntree();e++)
+    {
+     Forest_pt->tree_pt(e)->
+      traverse_all_but_leaves(&Tree::deactivate_object);
+    }
+ 
+   //Now we can prune the dead nodes from the mesh.
+   this->prune_dead_nodes();
+
+   // Finally: Reorder the nodes within the mesh's node vector
+   // to establish a standard ordering regardless of the sequence
+   // of mesh refinements -- this is required to allow dump/restart
+   // on refined meshes
+   this->reorder_nodes();
+  
+   // Final doc
+   //-----------
+   if (doc_info.doc_flag())
+    {
+     // Doc the boundary conditions ('0' for non-existent, '1' for free, 
+     //----------------------------------------------------------------
+     // '2' for pinned -- ideal for tecplot scatter sizing.
+     //----------------------------------------------------
+     //num_tree_nodes=tree_nodes_pt.size();
+
+     // Determine maximum number of values at any node in this type of element
+     RefineableElement* el_pt = tree_nodes_pt[0]->object_pt();
+     //Initalise max_nval
+     unsigned max_nval=0;
+     for (unsigned n=0;n<el_pt->nnode();n++)
       {
+       if (el_pt->node_pt(n)->nvalue()>max_nval)
+        {max_nval=el_pt->node_pt(n)->nvalue();}
+      }
+
+     //Open the output file
+     std::ofstream bcs_file;
+     sprintf(fullname,"%s/bcs%i.dat",doc_info.directory().c_str(),
+             doc_info.number());
+     bcs_file.open(fullname);  
+   
+     // Loop over elements
+     for(unsigned long e=0;e<num_tree_nodes;e++)
+      {
+       el_pt = tree_nodes_pt[e]->object_pt();
+       // Loop over nodes in element
+       unsigned n_nod=el_pt->nnode();
+       for(unsigned n=0;n<n_nod;n++)
+        {
+         //Get pointer to the node
+         Node* nod_pt=el_pt->node_pt(n);
+         //Find the dimension of the node
+         unsigned n_dim = nod_pt->ndim();
+         //Write the nodal coordinates to the file
+         for(unsigned i=0;i<n_dim;i++)
+          {bcs_file << nod_pt->x(i) << " ";}
+       
+         // Loop over all values in this element
+         for(unsigned i=0;i<max_nval;i++)
+          {
+           // Value exists at this node:
+           if (i<nod_pt->nvalue())
+            {
+             bcs_file << " " << 1+nod_pt->is_pinned(i);
+            }
+           // ...if not just dump out a zero
+           else
+            {
+             bcs_file << " 0 ";
+            }
+          }
+         bcs_file << std::endl;
+        }  
+      }
+     bcs_file.close();
+   
+     // Doc all nodes
+     //---------------
+     std::ofstream all_nodes_file;
+     sprintf(fullname,"%s/all_nodes%i.dat",doc_info.directory().c_str(),
+             doc_info.number());
+     all_nodes_file.open(fullname);  
+   
+     all_nodes_file << "ZONE \n"; 
+     for(unsigned long n=0;n<n_node;n++)
+      {
+       Node* nod_pt = this->node_pt(n);
        unsigned n_dim = nod_pt->ndim();
-       unsigned nmaster=nod_pt->hanging_pt()->nmaster();
-       some_file << "ZONE I="<<nmaster+1 << std::endl;
        for(unsigned i=0;i<n_dim;i++)
         {
-         some_file << nod_pt->x(i) << " ";
-         }
-       some_file << " 2 " <<  std::endl;
-       
-       for (unsigned imaster=0;imaster<nmaster;imaster++)
-        {
-         Node* master_nod_pt = 
-          nod_pt->hanging_pt()->master_node_pt(imaster);
-         unsigned n_dim = master_nod_pt->ndim();
-         for(unsigned i=0;i<n_dim;i++)
-          {
-           some_file << master_nod_pt->x(i) << " ";
-          }
-         some_file << " 1 " << std::endl;
+         all_nodes_file << this->node_pt(n)->x(i) << " ";
         }
+       all_nodes_file << std::endl;
       }
-    }
-   some_file.close();
    
-   // Doc all hanging nodes and their masters 
-   // View with QHangingNodesWithMasters.mcr
-   for(unsigned i=0;i<ncont_interpolated_values;i++)
-    {
-     sprintf(fullname,"%s/nonstandard_hangnodes_withmasters%i_%i.dat",
-             doc_info.directory().c_str(),i,doc_info.number());
+     all_nodes_file.close();
+
+
+     // Doc all hanging nodes:
+     //-----------------------
+     std::ofstream some_file;
+     sprintf(fullname,"%s/all_hangnodes%i.dat",doc_info.directory().c_str(),
+             doc_info.number());
      some_file.open(fullname);
-     unsigned n_nod=this->nnode();
-     for(unsigned long n=0;n<n_nod;n++)
+     for(unsigned long n=0;n<n_node;n++)
       {
        Node* nod_pt=this->node_pt(n);
-       if (nod_pt->is_hanging(i))
+
+       if (nod_pt->is_hanging())
         {
-         if (nod_pt->hanging_pt(i)!=nod_pt->hanging_pt())
+         unsigned n_dim = nod_pt->ndim();       
+         for(unsigned i=0;i<n_dim;i++)
           {
-           unsigned nmaster=nod_pt->hanging_pt(i)->nmaster();
-           some_file << "ZONE I="<<nmaster+1 << std::endl;
-           unsigned n_dim = nod_pt->ndim();
-           for(unsigned j=0;j<n_dim;j++)
+           some_file << nod_pt->x(i) << " ";
+          }
+       
+         //ALH: Added this to stop Solid problems seg-faulting
+         if(this->node_pt(n)->nvalue() > 0)
+          {
+           some_file  << " " << nod_pt->raw_value(0);
+          }
+         some_file << std::endl;
+        }
+      }
+     some_file.close();
+
+     // Doc all hanging nodes and their masters 
+     // View with QHangingNodesWithMasters.mcr
+     sprintf(fullname,"%s/geometric_hangnodes_withmasters%i.dat",
+             doc_info.directory().c_str(),doc_info.number());
+     some_file.open(fullname);
+     for(unsigned long n=0;n<n_node;n++)
+      {
+       Node* nod_pt=this->node_pt(n);
+       if (nod_pt->is_hanging())
+        {
+         unsigned n_dim = nod_pt->ndim();
+         unsigned nmaster=nod_pt->hanging_pt()->nmaster();
+         some_file << "ZONE I="<<nmaster+1 << std::endl;
+         for(unsigned i=0;i<n_dim;i++)
+          {
+           some_file << nod_pt->x(i) << " ";
+          }
+         some_file << " 2 " <<  std::endl;
+       
+         for (unsigned imaster=0;imaster<nmaster;imaster++)
+          {
+           Node* master_nod_pt = 
+            nod_pt->hanging_pt()->master_node_pt(imaster);
+           unsigned n_dim = master_nod_pt->ndim();
+           for(unsigned i=0;i<n_dim;i++)
             {
-             some_file << nod_pt->x(j) << " ";
-             }
-           some_file << " 2 " << std::endl;
-           for (unsigned imaster=0;imaster<nmaster;imaster++)
-            {
-             Node* master_nod_pt = 
-              nod_pt->hanging_pt(i)->master_node_pt(imaster);
-             unsigned n_dim = master_nod_pt->ndim();
-             for(unsigned j=0;j<n_dim;j++)
-              {
-//               some_file << master_nod_pt->x(i) << " ";
-              }
-             some_file << " 1 " << std::endl;
+             some_file << master_nod_pt->x(i) << " ";
             }
+           some_file << " 1 " << std::endl;
           }
         }
       }
      some_file.close();
-    }
    
-  } //End of documentation
+     // Doc all hanging nodes and their masters 
+     // View with QHangingNodesWithMasters.mcr
+     for(unsigned i=0;i<ncont_interpolated_values;i++)
+      {
+       sprintf(fullname,"%s/nonstandard_hangnodes_withmasters%i_%i.dat",
+               doc_info.directory().c_str(),i,doc_info.number());
+       some_file.open(fullname);
+       unsigned n_nod=this->nnode();
+       for(unsigned long n=0;n<n_nod;n++)
+        {
+         Node* nod_pt=this->node_pt(n);
+         if (nod_pt->is_hanging(i))
+          {
+           if (nod_pt->hanging_pt(i)!=nod_pt->hanging_pt())
+            {
+             unsigned nmaster=nod_pt->hanging_pt(i)->nmaster();
+             some_file << "ZONE I="<<nmaster+1 << std::endl;
+             unsigned n_dim = nod_pt->ndim();
+             for(unsigned j=0;j<n_dim;j++)
+              {
+               some_file << nod_pt->x(j) << " ";
+              }
+             some_file << " 2 " << std::endl;
+             for (unsigned imaster=0;imaster<nmaster;imaster++)
+              {
+               Node* master_nod_pt = 
+                nod_pt->hanging_pt(i)->master_node_pt(imaster);
+               unsigned n_dim = master_nod_pt->ndim();
+               for(unsigned j=0;j<n_dim;j++)
+                {
+//               some_file << master_nod_pt->x(i) << " ";
+                }
+               some_file << " 1 " << std::endl;
+              }
+            }
+          }
+        }
+       some_file.close();
+      }
+   
+    } //End of documentation
+
+  } // End if (this->nelement()>0)
 
 }
 
@@ -1424,7 +1466,7 @@ complete_hanging_nodes_recursively(Node*& nod_pt,
  if(nod_pt->is_hanging(i))
   {
    // Loop over all master nodes
-   HangInfo* const hang_pt = nod_pt->hanging_pt(i); // andy
+   HangInfo* const hang_pt = nod_pt->hanging_pt(i);
    unsigned nmaster=hang_pt->nmaster();
 
    for(unsigned m=0;m<nmaster;m++)
@@ -1447,7 +1489,7 @@ complete_hanging_nodes_recursively(Node*& nod_pt,
      // node depends on
      unsigned n_new_master_node = master_nodes.size();
 
-     double mtr_weight=hang_pt->master_weight(m); // andy
+     double mtr_weight=hang_pt->master_weight(m);
 
      for(unsigned k=first_new_node;k<n_new_master_node;k++)
       {
@@ -1578,79 +1620,81 @@ complete_hanging_nodes(const int& ncont_interpolated_values)
 /// (i.e. the hanging status of the haloed and halo layers disagrees)
 //========================================================================
 void RefineableMeshBase::synchronise_hanging_nodes
-                  (const unsigned& ncont_interpolated_values)
- {
-  MPI_Status status;
-  int ncont_inter_values=ncont_interpolated_values;
+(const unsigned& ncont_interpolated_values)
+{
+ MPI_Status status;
+ int ncont_inter_values=ncont_interpolated_values;
 
-  Vector<Vector<int> > vector_haloed_hanging(MPI_Helpers::Nproc);
-  Vector<Vector<int> > vector_halo_hanging(MPI_Helpers::Nproc);
+ Vector<Vector<int> > vector_haloed_hanging(MPI_Helpers::Nproc);
+ Vector<Vector<int> > vector_halo_hanging(MPI_Helpers::Nproc);
 
-  // Loop over the hanging status for each interpolated variable
-  for (int icont=-1; icont<ncont_inter_values; icont++)
-   { 
-     // geometric hanging data is stored at -1
-     // is it possible to ignore i>=0 if its hanging data is the same
-     // as the geometric case? I'm not sure it is in this case - it
-     // makes sense in complete_hanging_nodes(...) above but not here
-     // From nodes.h, once it's done for icont=-1, all other hanging
-     // data that is the same as the geometric case is also done
+ // Loop over the hanging status for each interpolated variable
+ for (int icont=-1; icont<ncont_inter_values; icont++)
+  { 
+   // geometric hanging data is stored at -1
+   // is it possible to ignore i>=0 if its hanging data is the same
+   // as the geometric case? I'm not sure it is in this case - it
+   // makes sense in complete_hanging_nodes(...) above but not here
+   // From nodes.h, once it's done for icont=-1, all other hanging
+   // data that is the same as the geometric case is also done
 
-  for (int d=0; d<MPI_Helpers::Nproc; d++)
-  {
-   if (d!=MPI_Helpers::My_rank) // no halo with yourself!
+   for (int d=0; d<MPI_Helpers::Nproc; d++)
     {
-     // store the hanging state of each haloed node
-     unsigned nhd_nod=nhaloed_node(d);
-     Vector<int> nhaloed_hanging(nhd_nod);
-     for (unsigned j=0; j<nhd_nod; j++)
+     if (d!=MPI_Helpers::My_rank) // no halo with yourself!
       {
-       // Need to receive hanging information from appropriate process,
-       // but MPI cannot send bools, so convert to integers first
-       if (haloed_node_pt(d,j)->is_hanging(icont))
+       // store the hanging state of each haloed node
+       unsigned nhd_nod=nhaloed_node(d);
+       Vector<int> nhaloed_hanging(nhd_nod);
+       for (unsigned j=0; j<nhd_nod; j++)
         {
-         nhaloed_hanging[j]=1;
-        }
-       else
-        {
-         nhaloed_hanging[j]=0;
-        }
-      }
-     // Receive the hanging state of the equivalent halo nodes
-     Vector<int> nhalo_hanging(nhd_nod);     
-     MPI_Recv(&nhalo_hanging[0],nhd_nod,MPI_INT,d,0,MPI_COMM_WORLD,&status);
-
-     // Store these vectors in a vector of length MPI_Helpers::Nproc
-     vector_haloed_hanging[d]=nhaloed_hanging;
-     vector_halo_hanging[d]=nhalo_hanging;
-    }
-   else // d==MPI_Helpers::My_rank
-    {
-     // send halo hanging status to relevant process
-     for (int dd=0; dd<MPI_Helpers::Nproc; dd++)
-      {
-       if (dd!=d) // no halo with yourself
-        {
-         unsigned nh_nod=nhalo_node(dd);
-         Vector<int> nhalo_hanging(nh_nod);
-         for (unsigned j=0; j<nh_nod; j++)
+         // Need to receive hanging information from appropriate process,
+         // but MPI cannot send bools, so convert to integers first
+         if (haloed_node_pt(d,j)->is_hanging(icont))
           {
-           // Convert bools into integers
-           if (halo_node_pt(dd,j)->is_hanging(icont))
-            {
-             nhalo_hanging[j]=1; // can't send bools via MPI
-            }
-           else
-            {
-             nhalo_hanging[j]=0;
-            }
+           nhaloed_hanging[j]=1;
           }
-         // send this to the relevant process
-         MPI_Send(&nhalo_hanging[0],nh_nod,MPI_INT,dd,0,MPI_COMM_WORLD);
+         else
+          {
+           nhaloed_hanging[j]=0;
+          }
+        }
+
+       // Receive the hanging state of the equivalent halo nodes
+       Vector<int> nhalo_hanging(nhd_nod);
+       MPI_Recv(&nhalo_hanging[0],nhd_nod,MPI_INT,d,0,MPI_COMM_WORLD,&status);
+
+       // Store these vectors in a vector of length MPI_Helpers::Nproc
+       vector_haloed_hanging[d]=nhaloed_hanging;
+       vector_halo_hanging[d]=nhalo_hanging;
+      }
+     else // d==MPI_Helpers::My_rank
+      {
+       // send halo hanging status to relevant process
+       for (int dd=0; dd<MPI_Helpers::Nproc; dd++)
+        {
+         if (dd!=d) // no halo with yourself
+          {
+           unsigned nh_nod=nhalo_node(dd);
+           Vector<int> nhalo_hanging(nh_nod);
+           for (unsigned j=0; j<nh_nod; j++)
+            {
+             // Convert bools into integers
+             if (halo_node_pt(dd,j)->is_hanging(icont))
+              {
+               nhalo_hanging[j]=1; // can't send bools via MPI
+              }
+             else
+              {
+               nhalo_hanging[j]=0;
+              }
+            }
+
+           // send this to the relevant process
+           MPI_Send(&nhalo_hanging[0],nh_nod,MPI_INT,dd,0,MPI_COMM_WORLD);
+          }
         }
       }
     }
-  }
 
 
 // Next, compare equivalent halo and haloed vectors to find discrepancies.
@@ -1659,233 +1703,204 @@ void RefineableMeshBase::synchronise_hanging_nodes
 // introduced, which stores all nodes that are on each process in the same
 // order on each process
 
-  for (int d=0; d<MPI_Helpers::Nproc; d++)
-   {
-    if (d!=MPI_Helpers::My_rank) // no halo with yourself
-     {
-      Vector<int> haloed_hanging=vector_haloed_hanging[d];
-      Vector<int> halo_hanging=vector_halo_hanging[d];
-//      unsigned nhaloed=haloed_hanging.size();
-//      unsigned nhalo=halo_hanging.size();
-      unsigned nnod_haloed=nhaloed_node(d);
-      unsigned nnod_shared=nshared_node(d);
-      Vector<int> hanging_nodes(nnod_haloed);
-      unsigned count_masters=0; // count for hanging_masters size
-      Vector<int> hanging_masters;
-      unsigned count_weights=0; // count for hanging_master_weights size
-      Vector<double> hanging_master_weights;
-//      oomph_info << "With process " << d << std::endl 
-//                 << ", haloed check: " << nnod_haloed << std::endl
-//                 << "-- Shared nodes: " << nnod_shared << std::endl;
+   for (int d=0; d<MPI_Helpers::Nproc; d++)
+    {
+     if (d!=MPI_Helpers::My_rank) // no halo with yourself
+      {
+       Vector<int> haloed_hanging=vector_haloed_hanging[d];
+       Vector<int> halo_hanging=vector_halo_hanging[d];
+       unsigned nnod_haloed=nhaloed_node(d);
+       unsigned nnod_shared=nshared_node(d);
+       Vector<int> hanging_nodes(nnod_haloed);
+       unsigned count_masters=0; // count for hanging_masters size
+       Vector<int> hanging_masters;
+       unsigned count_weights=0; // count for hanging_master_weights size
+       Vector<double> hanging_master_weights;
 
-      for (unsigned j=0; j<nnod_haloed; j++)
-       {
-        // Compare hanging status of halo/haloed counterpart structure
-        if ((haloed_hanging[j]==1) && (halo_hanging[j]==0))
-         {
-          // Something needs to be done about the hanging status of the halo
-          // if it is geometric OR has hanging data that
-          // is different from the geometric data
+       for (unsigned j=0; j<nnod_haloed; j++)
+        {
+         // Compare hanging status of halo/haloed counterpart structure
+         if ((haloed_hanging[j]==1) && (halo_hanging[j]==0))
+          {
+           // Something needs to be done about the hanging status of the halo
+           // if it is geometric OR has hanging data that
+           // is different from the geometric data
 
-          // Find master nodes of haloed node
-          HangInfo* hang_pt=haloed_node_pt(d,j)->hanging_pt(icont);
-          unsigned nhd_master=hang_pt->nmaster();
+           // Find master nodes of haloed node
+           HangInfo* hang_pt=haloed_node_pt(d,j)->hanging_pt(icont);
+           unsigned nhd_master=hang_pt->nmaster();
 
-          // Create a vector of size nhaloed with nhd_master in
-          // entries where there's a discrepancy, zero otherwise (see later)
-          hanging_nodes[j]=nhd_master;
+           // Create a vector of size nhaloed with nhd_master in
+           // entries where there's a discrepancy, zero otherwise (see later)
+           hanging_nodes[j]=nhd_master;
 
-          unsigned master_haloed=0;
+           unsigned master_haloed=0;
 
-          for (unsigned m=0; m<nhd_master; m++)
-           {
-            // Get mth master node
-            Node* nod_pt=hang_pt->master_node_pt(m);
+           for (unsigned m=0; m<nhd_master; m++)
+            {
+             // Get mth master node
+             Node* nod_pt=hang_pt->master_node_pt(m);
 
-              // This node will be shared: find it!
-              for (unsigned k=0; k<nnod_shared; k++)
-               {
-                if (nod_pt==shared_node_pt(d,k))
-                 {
-                  // found a master: increment counter
-                  master_haloed++;
-                  // put its number into a vector
-                  hanging_masters.push_back(k);
-                  // increase count for vector size
-                  count_masters++;
-                  // put the weight into another vector
-                  hanging_master_weights.push_back(hang_pt->master_weight(m));
-                  // increase count for this vector size
-                  count_weights++;
-                 }
-               }
+             // This node will be shared: find it!
+             for (unsigned k=0; k<nnod_shared; k++)
+              {
+               if (nod_pt==shared_node_pt(d,k))
+                {
+                 // found a master: increment counter
+                 master_haloed++;
+                 // put its number into a vector
+                 hanging_masters.push_back(k);
+                 // increase count for vector size
+                 count_masters++;
+                 // put the weight into another vector
+                 hanging_master_weights.push_back(hang_pt->master_weight(m));
+                 // increase count for this vector size
+                 count_weights++;
+                }
+              }
 
-           } // loop over master nodes
+            } // loop over master nodes
 
-          if (master_haloed!=nhd_master)
-           {
-            oomph_info << "----- WARNING, only found " << master_haloed 
-                       << " nodes out of " << nhd_master 
-                       << " master nodes in synchronise_hanging_nodes! -----"
-                       << std::endl;
-           }
+           if (master_haloed!=nhd_master)
+            {
+             oomph_info << "----- WARNING, only found " << master_haloed 
+                        << " nodes out of " << nhd_master 
+                        << " master nodes in synchronise_hanging_nodes! -----"
+                        << std::endl;
+            }
 
-         }
-        else if ((haloed_hanging[j]==0) && (halo_hanging[j]==1))
-         {
-          // The halo node should not be hanging in this instance
-          // as far as I can tell from the instances I have seen so far
-          // Can't access this directly - it has to be "sent" to the correct
-          // process - use a negative number to denote this
-          hanging_nodes[j]=-1;
-          hanging_masters.push_back(-1);
+          }
+         else if ((haloed_hanging[j]==0) && (halo_hanging[j]==1))
+          {
+           // The halo node should not be hanging in this instance
+           // as far as I can tell from the instances I have seen so far
+           // Can't access this directly - it has to be "sent" to the correct
+           // process - use a negative number to denote this
+           hanging_nodes[j]=-1;
+           hanging_masters.push_back(-1);
   
-          // This needs to be counted as a "master"
-          count_masters++; 
-         }
-        else if (haloed_hanging[j]==halo_hanging[j]) 
-         {
-          // No discrepancy
-          hanging_nodes[j]=0;
-         }
+           // This needs to be counted as a "master"
+           count_masters++; 
+          }
+         else if (haloed_hanging[j]==halo_hanging[j]) 
+          {
+           // No discrepancy
+           hanging_nodes[j]=0;
+          }
 
-       } // loop over haloed nodes
+        } // loop over haloed nodes
 
-      // Now send all the required info to the halo layer
-      MPI_Send(&count_masters,1,MPI_INT,d,0,MPI_COMM_WORLD);
+       // Now send all the required info to the halo layer
+       MPI_Send(&count_masters,1,MPI_INT,d,0,MPI_COMM_WORLD);
 
-      // If there are no discrepancies, no need to send anything
-      if (count_masters!=0)
-       {
-        // Send the master node numbers
-        MPI_Send(&hanging_masters[0],count_masters,MPI_INT,d,1,MPI_COMM_WORLD);
-        // Send the master weights
-        MPI_Send(&count_weights,1,MPI_INT,d,2,MPI_COMM_WORLD);
-        MPI_Send(&hanging_master_weights[0],count_weights,MPI_DOUBLE,d,3,
-                 MPI_COMM_WORLD);
-        // Send the vector showing where the discrepancies are
-        MPI_Send(&hanging_nodes[0],nnod_haloed,MPI_INT,d,4,MPI_COMM_WORLD);
-       }
+       // If there are no discrepancies, no need to send anything
+       if (count_masters!=0)
+        {
+         // Send the master node numbers
+         MPI_Send(&hanging_masters[0],count_masters,MPI_INT,d,1,
+                  MPI_COMM_WORLD);
+         // Send the master weights
+         MPI_Send(&count_weights,1,MPI_INT,d,2,MPI_COMM_WORLD);
+         MPI_Send(&hanging_master_weights[0],count_weights,MPI_DOUBLE,d,3,
+                  MPI_COMM_WORLD);
+         // Send the vector showing where the discrepancies are
+         MPI_Send(&hanging_nodes[0],nnod_haloed,MPI_INT,d,4,MPI_COMM_WORLD);
+        }
      
-     }
-    else // (d==MPI_Helpers::My_rank)
-     {
-      // Recevie the master nodes and weights in order to create new 
-      // hanging nodes in the halo layer
+      }
+     else // (d==MPI_Helpers::My_rank)
+      {
+       // Recevie the master nodes and weights in order to create new 
+       // hanging nodes in the halo layer
 
-      for (int dd=0; dd<MPI_Helpers::Nproc; dd++)
-       {
-        if (dd!=d) // don't talk to yourself
-         {
-          // Loop over the halo layer of dd
-          Vector<int> haloed_hanging=vector_haloed_hanging[dd];
-          Vector<int> halo_hanging=vector_halo_hanging[dd];
-//          unsigned nhaloed=haloed_hanging.size();
-//          unsigned nnod_halo=halo_hanging.size();
-          // the above two lines would appear to be unnecessary
-          unsigned nhalo=nhalo_node(dd);
-//          unsigned nshare=nshared_node(dd);
-          Vector<int> hanging_nodes(nhalo);
-          unsigned count_masters; // count for hanging_masters size
-          Vector<int> hanging_masters;
-          unsigned count_weights; // count for hanging_master_weights size
-          Vector<double> hanging_master_weights;
-//          oomph_info << "From process " << dd << std::endl
-//                     << ", halo check: " << nhalo << std::endl
-//                     << "-- Shared nodes: " << nshare << std::endl;
+       for (int dd=0; dd<MPI_Helpers::Nproc; dd++)
+        {
+         if (dd!=d) // don't talk to yourself
+          {
+           // Loop over the halo layer of dd
+           Vector<int> haloed_hanging=vector_haloed_hanging[dd];
+           Vector<int> halo_hanging=vector_halo_hanging[dd];
+           unsigned nhalo=nhalo_node(dd);
+           Vector<int> hanging_nodes(nhalo);
+           unsigned count_masters; // count for hanging_masters size
+           Vector<int> hanging_masters;
+           unsigned count_weights; // count for hanging_master_weights size
+           Vector<double> hanging_master_weights;
 
-          // How mcuh information are we receiving?
-          MPI_Recv(&count_masters,1,MPI_INT,dd,0,MPI_COMM_WORLD,&status);
+           // How mcuh information are we receiving?
+           MPI_Recv(&count_masters,1,MPI_INT,dd,0,MPI_COMM_WORLD,&status);
 
-          // If no information, no need to do anything else
-          if (count_masters!=0)
-           {
-            // Receive the master node numbers
-            hanging_masters.resize(count_masters);
-            MPI_Recv(&hanging_masters[0],count_masters,MPI_INT,dd,1,
-                   MPI_COMM_WORLD,&status);
+           // If no information, no need to do anything else
+           if (count_masters!=0)
+            {
+             // Receive the master node numbers
+             hanging_masters.resize(count_masters);
+             MPI_Recv(&hanging_masters[0],count_masters,MPI_INT,dd,1,
+                      MPI_COMM_WORLD,&status);
 
-            // Receive the master weights
-            MPI_Recv(&count_weights,1,MPI_INT,dd,2,MPI_COMM_WORLD,&status);
-            hanging_master_weights.resize(count_weights);
-            MPI_Recv(&hanging_master_weights[0],count_weights,MPI_DOUBLE,dd,3,
-                   MPI_COMM_WORLD,&status);
+             // Receive the master weights
+             MPI_Recv(&count_weights,1,MPI_INT,dd,2,MPI_COMM_WORLD,&status);
+             hanging_master_weights.resize(count_weights);
+             MPI_Recv(&hanging_master_weights[0],count_weights,MPI_DOUBLE,dd,
+                      3,MPI_COMM_WORLD,&status);
 
-            // Receive the vector describing the position of discrepancies
-            hanging_nodes.resize(nhalo);
-            MPI_Recv(&hanging_nodes[0],nhalo,MPI_INT,dd,4,
-                     MPI_COMM_WORLD,&status);
+             // Receive the vector describing the position of discrepancies
+             hanging_nodes.resize(nhalo);
+             MPI_Recv(&hanging_nodes[0],nhalo,MPI_INT,dd,4,
+                      MPI_COMM_WORLD,&status);
 
-            count_masters=0;
-            count_weights=0; // reset counters
+             count_masters=0;
+             count_weights=0; // reset counters
 
-            for (unsigned j=0; j<nhalo; j++)
-             {
-              // Find positive entries of the hanging_nodes vector
-              if (hanging_nodes[j]>0) 
-               {
-                // This entry tells us how many master nodes we have
-                unsigned nhd_master=hanging_nodes[j];
-//                count_masters++;
+             for (unsigned j=0; j<nhalo; j++)
+              {
+               // Find positive entries of the hanging_nodes vector
+               if (hanging_nodes[j]>0) 
+                {
+                 // This entry tells us how many master nodes we have
+                 unsigned nhd_master=hanging_nodes[j];
 
-                // Set up a new HangInfo for this node
-                HangInfo* hang_pt = new HangInfo(nhd_master);
+                 // Set up a new HangInfo for this node
+                 HangInfo* hang_pt = new HangInfo(nhd_master);
   
-                // Now set up the master nodes and weights
-                for (unsigned m=0; m<nhd_master; m++)
-                 {
-                  // Get the sent master node (a shared node) and the weight
-                  Node* nod_pt=shared_node_pt(dd,
-                                            hanging_masters[count_masters]);
-                  count_masters++;
-                  double mtr_weight=hanging_master_weights[count_weights];
-                  count_weights++;
+                 // Now set up the master nodes and weights
+                 for (unsigned m=0; m<nhd_master; m++)
+                  {
+                   // Get the sent master node (a shared node) and the weight
+                   Node* nod_pt=shared_node_pt(dd,
+                                               hanging_masters[count_masters]);
+                   count_masters++;
+                   double mtr_weight=hanging_master_weights[count_weights];
+                   count_weights++;
 
-                  // Set as a master node (with corresponding weight)
-                  hang_pt->set_master_node_pt(m,nod_pt,mtr_weight);
-                 }
+                   // Set as a master node (with corresponding weight)
+                   hang_pt->set_master_node_pt(m,nod_pt,mtr_weight);
+                  }
 
-                // set the hanging pointer to the current halo node
-                halo_node_pt(dd,j)->set_hanging_pt(hang_pt,icont);
+                 // set the hanging pointer to the current halo node
+                 halo_node_pt(dd,j)->set_hanging_pt(hang_pt,icont);
 
-                // This is just for a Node: should it also be done for a 
-                // SolidNode?  It would seem not - is_hanging==1 for all
-                // examples that I've seen so far... (andy, 20/02/08)
-                // I can't think of a case where this would be needed,
-                // so I've commented it out for now
+                }
+               else if (hanging_nodes[j]<0)
+                {
+                 // The hanging node already exists, but it shouldn't!
+                 // Set it to nonhanging
+                 halo_node_pt(dd,j)->set_nonhanging();
 
-//                SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>
-//                 (halo_node_pt(dd,j));
-//
-//                if (solid_nod_pt!=0)
-//                 {
-//                  oomph_info << "This is also a solid node with is_hanging="
-//                             << solid_nod_pt->is_hanging(icont)
-//                             << " (" << solid_nod_pt << ")" << std::endl;
-//                  solid_nod_pt->set_hanging_pt(hang_pt,icont);
-//                 }
-
-               }
-              else if (hanging_nodes[j]<0)
-               {
-                // The hanging node already exists, but it shouldn't!
-                // Set it to nonhanging
-                halo_node_pt(dd,j)->set_nonhanging();
-
-                count_masters++;
-               }
-             } // loop over halo nodes
+                 count_masters++;
+                }
+              } // loop over halo nodes
           
-           } // if count_masters!=0
+            } // if count_masters!=0
          
-         } // if dd!=d
+          } // if dd!=d
          
-       } // loop over other processors
-     }
+        } // loop over other processors
+      }
 
-   } // loop over all processors
+    } // loop over all processors
 
-   } // loop over interpolated values
+  } // loop over interpolated values
 
  }
 

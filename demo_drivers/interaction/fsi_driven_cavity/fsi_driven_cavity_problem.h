@@ -480,7 +480,7 @@ FSIDrivenCavityProblem<ELEMENT>::FSIDrivenCavityProblem(
  // pointers to the meshes. The interaction boundary is boundary 3 of the 
  // 2D fluid mesh.
  FSI_functions::setup_fluid_load_info_for_solid_elements<ELEMENT,2>
-  (3,Bulk_mesh_pt,Wall_mesh_pt);
+  (3,Bulk_mesh_pt,Wall_mesh_pt,this);
   
  // Setup equation numbering scheme
  cout <<"Number of equations: " << assign_eqn_numbers() << std::endl; 

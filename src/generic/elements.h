@@ -43,7 +43,6 @@
 #include "integral.h"
 #include "nodes.h"
 
-
 namespace oomph
 {
  //Forward definition for time
@@ -1348,7 +1347,7 @@ public:
  /// Either via FE representation or via macro-element (if Macro_elem_pt!=0)
  /// (Broken virtual -- overload in specific geometric element class
  /// if you want to use this functionality.)
- virtual void get_x(Vector<double>& s, Vector<double>& x) const
+ virtual void get_x(const Vector<double>& s, Vector<double>& x) const
   {
    throw OomphLibError(
     "get_x(...) is not implemented for this element\n",
@@ -1362,7 +1361,8 @@ public:
  /// via macro-element (if Macro_elem_pt!=0).
  /// (Broken virtual -- overload in specific geometric element class
  /// if you want to use this functionality.)
- virtual void get_x(const unsigned& t, Vector<double>& s, Vector<double>& x) 
+ virtual void get_x(const unsigned& t, const Vector<double>& s, 
+                    Vector<double>& x)
   {
    throw OomphLibError(
     "get_x(...) is not implemented for this element\n",
@@ -2257,11 +2257,9 @@ class SolidInitialCondition
 };
 
 
-
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
-
 
 
 //============================================================================
@@ -3456,6 +3454,7 @@ public:
 
 
 }
+
 
 #endif
 

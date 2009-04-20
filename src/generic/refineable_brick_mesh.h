@@ -95,21 +95,109 @@ public:
  /// Do what it says...
  void setup_octree_forest()
   {
-   //Turn elements into individual octrees and plant in forest
-   Vector<TreeRoot*> trees_pt;
-   unsigned nel=nelement();
-   for (unsigned iel=0;iel<nel;iel++)
+   if (this->Forest_pt!=0)
     {
-     // Get pointer to full element type 
-     ELEMENT* el_pt=dynamic_cast<ELEMENT*>(element_pt(iel));
-     
-     // Build associated octree(root) -- pass pointer to corresponding
-     // finite element and add the pointer to vector of octree (roots):
-     OcTreeRoot* octree_root_pt=new OcTreeRoot(el_pt);
-     trees_pt.push_back(octree_root_pt);
+     // Get all the tree nodes
+     Vector<Tree*> all_tree_nodes_pt;
+     this->Forest_pt->stick_all_tree_nodes_into_vector(all_tree_nodes_pt);
+
+     // Get min and max refinement level from the tree
+     unsigned min_ref;
+     unsigned max_ref;
+     this->get_refinement_levels(min_ref,max_ref);
+
+     // Vector to store trees for new Forest
+     Vector<TreeRoot*> trees_pt;
+
+     // Loop over tree nodes (e.g. elements)
+     unsigned n_tree_nodes=all_tree_nodes_pt.size();
+     for (unsigned e=0;e<n_tree_nodes;e++)
+      {
+       Tree* tree_pt=all_tree_nodes_pt[e];
+
+       // If the object_pt has been flushed then we don't want to keep
+       // this tree
+       if (tree_pt->object_pt()!=0)
+        {
+         // Get the refinement level of the current tree node
+         RefineableElement* el_pt=dynamic_cast<RefineableElement*>
+          (tree_pt->object_pt());
+         unsigned level=el_pt->refinement_level();
+
+         // If we are below the minimum refinement level, remove tree
+         if (level<min_ref)
+          {
+           // Flush sons for this tree
+           tree_pt->flush_sons();
+
+           // Delete the tree (no recursion)
+           delete tree_pt;
+
+           // Delete the element
+           delete el_pt;
+          }
+         else if (level==min_ref)
+          {
+           // Get the sons (if there are any) and store them
+           unsigned n_sons=tree_pt->nsons();
+           Vector<Tree*> backed_up_sons(n_sons);
+           for (unsigned i_son=0;i_son<n_sons;i_son++)
+            {
+             backed_up_sons[i_son]=tree_pt->son_pt(i_son);
+            }
+
+           // Make the element into a new treeroot
+           OcTreeRoot* tree_root_pt=new OcTreeRoot(el_pt);
+
+           // Loop over sons and make the new treeroot their father
+           for (unsigned i_son=0;i_son<n_sons;i_son++)
+            {
+             Tree* son_pt=backed_up_sons[i_son];
+             son_pt->set_father_pt(tree_root_pt);
+            }
+
+           // Add treeroot to the trees_pt vector
+           trees_pt.push_back(tree_root_pt);
+          }
+
+        }
+       else // tree_pt->object_pt() is null, so delete tree
+        {
+         // Flush sons for this tree
+         tree_pt->flush_sons();
+
+         // Delete the tree (no recursion)
+         delete tree_pt;
+        }
+      }
+
+     // Flush the Forest's current trees
+     this->Forest_pt->flush_trees();
+
+     // Delete the old Forest
+     delete Forest_pt;
+
+     // Make a new Forest with the trees_pt roots created earlier
+     this->Forest_pt = new OcTreeForest(trees_pt);
     }
-   // Plant OcTreeRoots in OcTreeForest
-   this->Forest_pt = new OcTreeForest(trees_pt);
+   else // Create a new Forest from scratch in the "usual" uniform way
+    {
+     //Turn elements into individual octrees and plant in forest
+     Vector<TreeRoot*> trees_pt;
+     unsigned nel=nelement();
+     for (unsigned iel=0;iel<nel;iel++)
+      {
+       // Get pointer to full element type 
+       ELEMENT* el_pt=dynamic_cast<ELEMENT*>(element_pt(iel));
+     
+       // Build associated octree(root) -- pass pointer to corresponding
+       // finite element and add the pointer to vector of octree (roots):
+       OcTreeRoot* octree_root_pt=new OcTreeRoot(el_pt);
+       trees_pt.push_back(octree_root_pt);
+      }
+     // Plant OcTreeRoots in OcTreeForest
+     this->Forest_pt = new OcTreeForest(trees_pt);
+    }
   }
 
   protected:

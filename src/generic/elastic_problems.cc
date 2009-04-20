@@ -542,6 +542,18 @@ void SolidICProblem::set_static_initial_condition(Problem* problem_pt,
                                                   SolidInitialCondition* ic_pt,
                                                   const double& time)
 {
+ // Tell this sub-problem it is distributed if the main problem is distributed
+#ifdef OOMPH_HAS_MPI
+ if (problem_pt->problem_has_been_distributed())
+  {
+   Problem_has_been_distributed=true;
+  }
+ // This (sub-)problem needs to know about the oomph communicator
+ // [the question is, does it need to know in all cases or just when
+ //  the problem has been distributed?]
+ Communicator_pt=problem_pt->communicator_pt();
+#endif
+
 
  // Backup value of time
  double backup_time=0.0;

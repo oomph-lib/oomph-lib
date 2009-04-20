@@ -1871,12 +1871,12 @@ oc_hang_helper(const int &value_id,
 
            if(make_hanging_node == true)
             {
-             //Cache refineable element used here (andy)
+             //Cache refineable element used here
              RefineableElement* const obj_pt = neigh_pt->object_pt();
 
              //Get shape functions in neighbour element
-             Shape psi(obj_pt->ninterpolating_node(value_id)); // andy
-             obj_pt->interpolating_basis(s_in_neighb,psi,value_id); // andy
+             Shape psi(obj_pt->ninterpolating_node(value_id));
+             obj_pt->interpolating_basis(s_in_neighb,psi,value_id);
              
              //Allocate the storage for the Hang pointer
              //We know that it will hold n_p*n_p nodes
@@ -1932,7 +1932,7 @@ oc_hang_helper(const int &value_id,
                   set_master_node_pt(ii0*n_p + ii1,
                                      obj_pt->interpolating_node_pt(n_neighbour,
                                                              value_id),
-                                     psi[n_neighbour]); // andy
+                                     psi[n_neighbour]);
                 }
               }
              //Now set the hanging data for the position

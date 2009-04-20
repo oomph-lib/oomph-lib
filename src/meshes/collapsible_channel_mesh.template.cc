@@ -318,18 +318,17 @@ void AlgebraicCollapsibleChannelMesh<ELEMENT>::algebraic_node_update(
 
 //=====start_setup=================================================
 /// Setup algebraic mesh update -- assumes that mesh has
-/// initially been set up with a flush upper wall.
+/// initially been set up with a flush upper wall
 //=================================================================
 template<class ELEMENT>
 void AlgebraicCollapsibleChannelMesh<ELEMENT>::setup_algebraic_node_update()
 {
-
  // Shorthand for some geometric data:
  double l_up=this->domain_pt()->l_up();
  double l_collapsible=this->domain_pt()->l_collapsible();
 
  // Loop over all nodes in mesh
- unsigned nnod=nnode();
+ unsigned nnod=this->nnode();
  for (unsigned j=0;j<nnod;j++)
   {
    // Get pointer to node -- recall that that Mesh::node_pt(...) has been
@@ -381,7 +380,8 @@ void AlgebraicCollapsibleChannelMesh<ELEMENT>::setup_algebraic_node_update()
         "CollapsibleChannelMesh::setup_algebraic_node_update()",
         OOMPH_EXCEPTION_LOCATION);
       }
-#endif       
+#endif 
+     
 
 
      // One geometric object is involved in update operation

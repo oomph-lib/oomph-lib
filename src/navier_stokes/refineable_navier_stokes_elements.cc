@@ -181,10 +181,10 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
 
  //Get the user-defined body force terms
  Vector<double> body_force(DIM);
- this->get_body_force_nst(time(),s,interpolated_x,body_force);
+ this->get_body_force_nst(time(),ipt,s,interpolated_x,body_force);
  
  //Get the user-defined source function
- double source = this->get_source_nst(time(),interpolated_x);
+ double source = this->get_source_nst(time(),ipt,interpolated_x);
  
  //MOMENTUM EQUATIONS
  //==================
@@ -791,10 +791,10 @@ void RefineableNavierStokesEquations<DIM>::get_dresidual_dnodal_coordinates(
 
    //Get the user-defined body force terms
    Vector<double> body_force(DIM);
-   this->get_body_force_nst(time(),s,interpolated_x,body_force);
+   this->get_body_force_nst(time(),ipt,s,interpolated_x,body_force);
    
    //Get the user-defined source function
-   double source = this->get_source_nst(time(),interpolated_x);
+   double source = this->get_source_nst(time(),ipt,interpolated_x);
 
    
    // FD loop over shape-controlling nodes
@@ -859,11 +859,12 @@ void RefineableNavierStokesEquations<DIM>::get_dresidual_dnodal_coordinates(
 
    // Get gradient of body force function
    DenseMatrix<double> d_body_force_dx(DIM,DIM,0.0);
-   this->get_body_force_gradient_nst(time(),s,interpolated_x, d_body_force_dx);
+   this->get_body_force_gradient_nst(time(),ipt,s,
+                                     interpolated_x, d_body_force_dx);
 
    // Get gradient of source function
    Vector<double> source_gradient(DIM,0.0);
-   this->get_source_gradient_nst(time(),interpolated_x, source_gradient);
+   this->get_source_gradient_nst(time(),ipt,interpolated_x, source_gradient);
 
 
    // Assemble shape derivatives

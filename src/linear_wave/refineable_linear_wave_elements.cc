@@ -115,7 +115,7 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
 
  //Get body force
  double source;
- this->get_source_lin_wave(time(),interpolated_x,source);
+ this->get_source_lin_wave(time(),ipt,interpolated_x,source);
 
 
  // Assemble residuals and Jacobian

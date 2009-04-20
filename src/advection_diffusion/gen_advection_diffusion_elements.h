@@ -271,8 +271,9 @@ public:
  /// virtual to allow overloading in multi-physics problems where
  /// the strength of the source function might be determined by
  /// another system of equations 
- inline virtual void get_source_cons_adv_diff(const Vector<double>& x, 
-                                         double& source) const
+ inline virtual void get_source_cons_adv_diff(const unsigned& ipt,
+                                              const Vector<double>& x,
+                                              double& source) const
   {
    //If no source function has been set, return zero
    if(Source_fct_pt==0) {source = 0.0;}
@@ -288,9 +289,10 @@ public:
  /// virtual to allow overloading in multi-physics problems where
  /// the wind function might be determined by
  /// another system of equations 
- inline virtual void get_wind_cons_adv_diff(const Vector<double> &s, 
-                                       const Vector<double>& x,
-                                       Vector<double>& wind) const
+ inline virtual void get_wind_cons_adv_diff(const unsigned& ipt,
+                                            const Vector<double> &s,
+                                            const Vector<double>& x,
+                                            Vector<double>& wind) const
   {
    //If no wind function has been set, return zero
    if(Wind_fct_pt==0)
@@ -312,6 +314,7 @@ public:
  /// the wind function might be determined by
  /// another system of equations 
  inline virtual void get_conserved_wind_cons_adv_diff(
+  const unsigned& ipt,
   const Vector<double> &s, 
   const Vector<double>& x,
   Vector<double>& wind) const
@@ -335,9 +338,10 @@ public:
  /// virtual to allow overloading in multi-physics problems where
  /// the wind function might be determined by
  /// another system of equations 
- inline virtual void get_diff_cons_adv_diff(const Vector<double> &s, 
-                                       const Vector<double>& x,
-                                       DenseMatrix<double>& D) const
+ inline virtual void get_diff_cons_adv_diff(const unsigned& ipt,
+                                            const Vector<double> &s,
+                                            const Vector<double>& x,
+                                            DenseMatrix<double>& D) const
   {
    //If no wind function has been set, return identity
    if(Diff_fct_pt==0)

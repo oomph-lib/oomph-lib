@@ -416,7 +416,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
 
    //Get isotropic growth factor
    double gamma=1.0;
-   this->get_isotropic_growth(s,interpolated_xi,gamma);
+   this->get_isotropic_growth(ipt,s,interpolated_xi,gamma);
 
    //Get body force at current time
    Vector<double> b(DIM);

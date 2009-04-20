@@ -110,7 +110,7 @@ fill_in_generic_residual_contribution_poisson(Vector<double> &residuals,
    //Get source function
    //-------------------
    double source;
-   get_source_poisson(interpolated_x,source);
+   get_source_poisson(ipt,interpolated_x,source);
 
    // Assemble residuals and Jacobian
    //--------------------------------
@@ -234,7 +234,7 @@ void  PoissonEquations<DIM>::get_dresidual_dnodal_coordinates(
    //Get source function
    //-------------------
    double source;
-   get_source_poisson(interpolated_x,source);
+   get_source_poisson(ipt,interpolated_x,source);
 
    // FD step 
    double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
@@ -291,7 +291,7 @@ void  PoissonEquations<DIM>::get_dresidual_dnodal_coordinates(
     }
 
    // Get gradient of source function
-   get_source_gradient_poisson(interpolated_x, d_source_dx);
+   get_source_gradient_poisson(ipt,interpolated_x, d_source_dx);
 
 
    // Assemble shape derivatives

@@ -268,6 +268,12 @@ public:
  virtual void get_refinement_levels(unsigned& min_refinement_level,
                                     unsigned& max_refinement_level);
 
+ /// \short Extract the elements at a particular refinement level in
+ /// the refinement pattern - used in Mesh::redistribute or whatever it's
+ /// going to be called (RefineableMeshBase::reduce_halo_layers or something)
+ virtual void get_elements_at_refinement_level(
+  unsigned& refinement_level, Vector<RefineableElement*>& level_elements);
+
  /// \short Extract refinement pattern: Consider the hypothetical mesh 
  /// obtained by truncating the refinement of the current mesh to a given 
  /// level (where \c level=0 is the un-refined base mesh). To advance

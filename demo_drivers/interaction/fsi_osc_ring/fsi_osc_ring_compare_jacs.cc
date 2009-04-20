@@ -204,7 +204,7 @@ public:
    // to the meshes. The interaction boundary is boundary 1 of the 2D 
    // fluid mesh.
    FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
-    (1,Fluid_mesh_pt,Wall_mesh_pt);
+    (1,Fluid_mesh_pt,Wall_mesh_pt,this);
   }
 
  /// \short Doc solution: Pass number of timestep, i (we append to tracefile
@@ -684,7 +684,7 @@ FSIRingProblem::FSIRingProblem(const unsigned& N,
  // to the meshes. The interaction boundary is boundary 1 of the 
  // 2D fluid mesh.
  FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
-  (1,Fluid_mesh_pt,Wall_mesh_pt);
+  (1,Fluid_mesh_pt,Wall_mesh_pt,this);
 
  // Do equation numbering
  cout << "# of dofs " << assign_eqn_numbers() << std::endl;

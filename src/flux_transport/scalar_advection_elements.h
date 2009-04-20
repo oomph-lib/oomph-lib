@@ -68,7 +68,8 @@ protected:
  void dflux_du(const Vector<double> &u, RankThreeTensor<double> &df_du);
  
  ///\short Return the wind at a given position
- inline virtual void get_wind_scalar_adv(const Vector<double> &s, 
+ inline virtual void get_wind_scalar_adv(const unsigned& ipt,
+                                         const Vector<double> &s,
                                          const Vector<double>& x,
                                          Vector<double>& wind) const
   {
@@ -152,7 +153,7 @@ public:
 
      //Get the global wind
      Vector<double> wind(DIM);
-     this->get_wind_scalar_adv(s,interpolated_x,wind);
+     this->get_wind_scalar_adv(ipt,s,interpolated_x,wind);
 
      //Rescale the position
      for(unsigned i=0;i<DIM;i++)
@@ -406,8 +407,10 @@ public virtual QSpectralElement<DIM-1,NNODE_1D>
     const unsigned dim = this->nodal_dimension();
     Vector<double> Wind(dim);
     Vector<double> s, x;
+    // Dummy integration point
+    unsigned ipt=0;
     dynamic_cast<ELEMENT*>(this->bulk_element_pt())->
-     get_wind_scalar_adv(s,x,Wind);
+     get_wind_scalar_adv(ipt,s,x,Wind);
 
     //Now we can work this out for standard upwind advection
     double dot=0.0;

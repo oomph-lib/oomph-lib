@@ -70,11 +70,11 @@ namespace oomph {
      Global_cols = 0;
 #endif
      Epetra_comm_pt = 0;
-     Column_distribution_pt = 0;
      Epetra_col_map_pt = 0;
 #else
      Oomph_matrix_pt = 0;
 #endif
+     Column_distribution_pt = 0;
     }
 
    /// Broken copy constructor

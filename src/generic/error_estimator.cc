@@ -27,7 +27,6 @@
 //LIC//====================================================================
 #ifdef OOMPH_HAS_MPI
 #include "mpi.h"
-//#include "../../mpi/mpi_src/mpi_generic/mpi_helpers.h"
 #endif
 
 #include "refineable_quad_element.h"
@@ -396,7 +395,7 @@ void Z2ErrorEstimator::get_recovered_flux_in_patch(
  for (unsigned e=0;e<nelem;e++)
   {
    // Get pointer to element
-   ElementWithZ2ErrorEstimator* const el_pt=patch_el_pt[e]; // andy
+   ElementWithZ2ErrorEstimator* const el_pt=patch_el_pt[e];
   
    // Create storage for the recovery shape function values 
    Vector<double> psi_r(num_recovery_terms);
@@ -404,30 +403,27 @@ void Z2ErrorEstimator::get_recovered_flux_in_patch(
    //Create vector to hold local coordinates
    Vector<double> s(dim); 
 
-   // multiple dereferencing occuring to el_pt->integral_pt() (andy)
+   // multiple dereferencing occuring to el_pt->integral_pt()
    Integral* const integ_pt = el_pt->integral_pt();
 
    //Loop over the integration points
-   //unsigned Nintpt = el_pt->integral_pt()->nweight();
-
-   // testing
-   unsigned Nintpt = integ_pt->nweight(); // changed
+   unsigned Nintpt = integ_pt->nweight();
 
    for(unsigned ipt=0;ipt<Nintpt;ipt++)
     {
-     //Assign values of s
+     //Assign values of s, the local coordinate
      for(unsigned i=0;i<dim;i++)
       {
-       s[i] = integ_pt->knot(ipt,i); // changed
+       s[i] = integ_pt->knot(ipt,i);
       }
      
      //Get the integral weight
-     double w = integ_pt->weight(ipt); // changed
+     double w = integ_pt->weight(ipt);
      
      //Jaocbian of mapping
      double J = el_pt->J_eulerian(s);
      
-     // Global (Eulerian) coordinate
+     // Interpolate the global (Eulerian) coordinate
      Vector<double> x(dim);
      el_pt->interpolated_x(s,x);
 
@@ -649,7 +645,76 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
  {
 #ifdef OOMPH_HAS_MPI
   MPI_Status status;
+  // Initialise local values for all processes on mesh
+  unsigned num_flux_terms_local=0;
+  unsigned dim_local=0;
+  unsigned recovery_order_local=0;
 #endif
+
+  // Global variables
+  unsigned num_flux_terms;
+  unsigned dim;
+  unsigned recovery_order;
+
+#ifdef OOMPH_HAS_MPI
+  // It may be possible that a submesh contains no elements on a
+  // particular process after distribution. In order to instigate the 
+  // error estimator calculations we need some information from the 
+  // "first" element in a mesh; the following uses an MPI_Allreduce
+  // to figure out this information and communicate it to all processors
+  if (mesh_pt->nelement()>0)
+   {
+    // Extract a few vital parameters from first element in mesh:
+    ElementWithZ2ErrorEstimator* el_pt=
+     dynamic_cast<ElementWithZ2ErrorEstimator*>(mesh_pt->element_pt(0)) ;
+#ifdef PARANOID
+    if (el_pt==0)
+     {
+      throw OomphLibError(
+       "Element needs to inherit from ElementWithZ2ErrorEstimator!",
+       "Z2ErrorEstimator::get_element_errors()",
+       OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+
+    // Number of 'flux'-like terms to be recovered
+    num_flux_terms_local=el_pt->num_Z2_flux_terms();
+  
+    // Determine spatial dimension of all elements from first element
+    dim_local=el_pt->dim();
+
+    // Do we need to determine the recovery order from first element?
+    if (Recovery_order_from_first_element)
+     {
+      recovery_order_local=el_pt->nrecovery_order();
+     }
+
+   } // end if (mesh_pt->nelement()>0)
+
+  // Now communicate these via an MPI_Allreduce to every process
+  // if the mesh has been distributed
+  if (mesh_pt->mesh_has_been_distributed())
+   {
+    MPI_Allreduce(&num_flux_terms_local,&num_flux_terms,1,MPI_INT,
+                  MPI_MAX,MPI_COMM_WORLD);
+    MPI_Allreduce(&dim_local,&dim,1,MPI_INT,MPI_MAX,MPI_COMM_WORLD);
+    MPI_Allreduce(&recovery_order_local,&recovery_order,1,MPI_INT,
+                  MPI_MAX,MPI_COMM_WORLD);
+   }
+  else
+   {
+    num_flux_terms=num_flux_terms_local;
+    dim=dim_local;
+    recovery_order=recovery_order_local;
+   }
+
+  // Do we need to determine the recovery order from first element?
+  if (Recovery_order_from_first_element)
+   {
+    Recovery_order=recovery_order;
+   }
+
+#else // !OOMPH_HAS_MPI
 
   // Extract a few vital parameters from first element in mesh:
   ElementWithZ2ErrorEstimator* el_pt=
@@ -665,16 +730,18 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
 #endif
 
   // Number of 'flux'-like terms to be recovered
-  unsigned num_flux_terms=el_pt->num_Z2_flux_terms();
-  
+  num_flux_terms=el_pt->num_Z2_flux_terms();
+ 
   // Determine spatial dimension of all elements from first element
-  unsigned dim=el_pt->dim();
+  dim=el_pt->dim();
 
   // Do we need to determine the recovery order from first element?
   if (Recovery_order_from_first_element)
    {
     Recovery_order=el_pt->nrecovery_order();
    }
+
+#endif
 
   // Determine number of coefficients for expansion of recovered fluxes
   // Use complete polynomial of given order for recovery
@@ -736,28 +803,20 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
   else
    {
 #endif
-    itbegin=0; // mesh has already been distributed, or serial problem
+    itbegin=0; // Mesh has already been distributed, or serial problem
     range=n_patch;
     itend=n_patch;
 #ifdef OOMPH_HAS_MPI
    }
 #endif
 
-  // set up matrices and vectors which will be sent later
+  // Set up matrices and vectors which will be sent later
   // - full matrix of all recovered coefficients
   Vector<DenseMatrix<double>*> vector_of_recovered_flux_coefficient_pt_to_send;
   // - vectors containing element numbers in each patch
   Vector<Vector<int> > vector_of_elements_in_patch_to_send;
 
-  // go to the first patch
-//  IT it=adjacent_elements_pt.begin(); // hierher: this appears to contain
-                                      // entries in different order 
-                                      // on different processors.
-
-//  for (int i=0;i<itbegin;i++) 
-//   { it++; } // move through to the patch on current process
-
-  // now we can loop over the patches on the current process
+  // Now we can loop over the patches on the current process
   for (int i=itbegin;i<itend;i++)
    {
     // Which vertex node are we at?
@@ -813,31 +872,26 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
   // All local recovered fluxes have been calculated, so now share result
   for (int iproc=0;iproc<MPI_Helpers::Nproc;iproc++)
    {
-     // broadcast number of patches processed
+     // Broadcast number of patches processed
     int n_patches=vector_of_recovered_flux_coefficient_pt_to_send.size();
-
-//    oomph_info << "Number of patches: " << n_patches << std::endl;
-
     MPI_Bcast(&n_patches,1,MPI_INT,iproc,MPI_COMM_WORLD);
 
-//    oomph_info << "Number of patches after bcast: " << n_patches << std::endl;
-
-    // loop over these patches, broadcast recovered flux coefficients
+    // Loop over these patches, broadcast recovered flux coefficients
     for (int ipatch=0;ipatch<n_patches;ipatch++)
      {
-      // number of elements in this patch
+      // Number of elements in this patch
       Vector<int> elements(0);
-      unsigned nelements; // needs to be int for elem_num call later??
+      unsigned nelements; // Needs to be int for elem_num call later
       if (MPI_Helpers::My_rank==iproc) 
        {  
         elements=vector_of_elements_in_patch_to_send[ipatch]; 
         nelements=elements.size();
        }
 
-//    broadcast elements
+      // Broadcast elements
       MPI_Helpers::broadcast_vector(elements,iproc,MPI_COMM_WORLD);
 
-      // now get recovered flux coefficients
+      // Now get recovered flux coefficients
       DenseMatrix<double>* recovered_flux_coefficient_pt;
 
       if (MPI_Helpers::My_rank==iproc)
@@ -857,7 +911,7 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
 
       *recovered_flux_coefficient_pt=mattosend;
 
-      // end of parallel broadcasting
+      // End of parallel broadcasting
       vector_of_recovered_flux_coefficient_pt.
        push_back(recovered_flux_coefficient_pt);
 
@@ -875,7 +929,7 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
         unsigned num_nod=el_pt->nnode();
         for (unsigned n=0;n<num_nod;n++)
          {
-          // get the node
+          // Get the node
           Node* nod_pt=el_pt->node_pt(n);
           // Add the pointer to the current flux coefficient matrix 
           // to the set for the node
@@ -885,9 +939,9 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
          }
        }
  
-     } // loop over patches on current processor
+     } // end loop over patches on current processor
 
-   } // loop over processors
+   } // end loop over processors
    
   }
  else // mesh_has_been_distributed=true
@@ -895,21 +949,21 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
 
 #endif // end ifdef OOMPH_HAS_MPI for parallel job without mesh distribution
 
-   // do the same for a distributed mesh as for a serial job
+   // Do the same for a distributed mesh as for a serial job
    // up to the point where the elemental error is calculated
    // and then communicate that (see below)
    int n_patches=vector_of_recovered_flux_coefficient_pt_to_send.size();
 
-   // loop over these patches
+   // Loop over these patches
    for (int ipatch=0;ipatch<n_patches;ipatch++)
     {
-     // number of elements in this patch
+     // Number of elements in this patch
      Vector<int> elements;
-     int nelements; // needs to be int for elem_num call later
+     int nelements; // Needs to be int for elem_num call later
      elements=vector_of_elements_in_patch_to_send[ipatch]; 
      nelements=elements.size();
 
-     // now get recovered flux coefficients
+     // Now get recovered flux coefficients
      DenseMatrix<double>* recovered_flux_coefficient_pt;
      recovered_flux_coefficient_pt=
       vector_of_recovered_flux_coefficient_pt_to_send[ipatch];
@@ -937,14 +991,14 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
          }
        }
  
-    } // loop over patches on current processor
+    } // End loop over patches on current processor
 
 
 #ifdef OOMPH_HAS_MPI
-  } // end if(mesh_has_been_distributed)
+  } // End if(mesh_has_been_distributed)
 #endif
 
-  // Cleanup patch storage scheme // hierher
+  // Cleanup patch storage scheme
   for (IT it=adjacent_elements_pt.begin();
        it!=adjacent_elements_pt.end();it++)
    {   
@@ -1165,7 +1219,7 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
 
   for (int iproc=0; iproc<MPI_Helpers::Nproc; iproc++)
    {
-    if (iproc!=MPI_Helpers::My_rank) // not current process, so send
+    if (iproc!=MPI_Helpers::My_rank) // Not current process, so send
      {
       Vector<FiniteElement*> haloed_elem_pt=mesh_pt->haloed_element_pt(iproc);
       int nelem_haloed=haloed_elem_pt.size();
@@ -1173,7 +1227,7 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
       Vector<double> haloed_elem_error(nelem_haloed);
       for (int e=0; e<nelem_haloed; e++)
        {
-        // find element number
+        // Find element number
         element_num=elem_num[dynamic_cast<ElementWithZ2ErrorEstimator*>
                              (haloed_elem_pt[e])];
         // Put the error in a vector to send

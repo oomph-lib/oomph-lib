@@ -307,8 +307,8 @@ protected:
                              Shape &test) const=0;
 
  /// Calculate the body force at a given time and Eulerian position
- void get_body_force(const double& time, const Vector<double> &x, 
-                     Vector<double> &result)
+ void get_body_force(const double& time, const unsigned& ipt,
+                     const Vector<double> &x, Vector<double> &result)
   {
    //If the function pointer is zero return zero
    if(Body_force_fct_pt == 0)
@@ -325,7 +325,8 @@ protected:
 
  /// \short Calculate the source fct at given time and
  /// Eulerian position 
- double get_source_fct(const double& time, const Vector<double> &x)
+ double get_source_fct(const double& time, const unsigned& ipt,
+                       const Vector<double> &x)
   {
    //If the function pointer is zero return zero
    if (Source_fct_pt == 0)

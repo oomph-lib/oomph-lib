@@ -73,7 +73,8 @@ public:
  
  
  /// gets source strength
- virtual void get_source(const Vector<double>& x, double& source) const
+ virtual void get_source(const unsigned& ipt, const Vector<double>& x, 
+                         double& source) const
   {
    // if source function is not provided, i.e. zero, then return zero
    if(Source_fct_pt==0) { source = 0.0; }

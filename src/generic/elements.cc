@@ -479,9 +479,6 @@ DenseMatrix<double> GeneralisedElement::Dummy_matrix;
     set_of_global_eqn_numbers.insert(Eqn_number[n]);
    }
 
-//  oomph_info << " set.size=" << set_of_global_eqn_numbers.size() 
-//             << ", Ndof=" << Ndof << std::endl;
-
   //If the sizes do not match we have a repeat, throw an error
   if(set_of_global_eqn_numbers.size() != Ndof)
    {
@@ -650,7 +647,7 @@ DenseMatrix<double> GeneralisedElement::Dummy_matrix;
   //Locally cache the number of internal data
   const unsigned n_internal_data = Ninternal_data;
 
-  //If there aren't any internal data, then return straight awayy
+  //If there aren't any internal data, then return straight away
   if(n_internal_data == 0) {return;}
 
   //Call the update function to ensure that the element is in

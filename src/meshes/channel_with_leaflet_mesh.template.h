@@ -244,6 +244,15 @@ public virtual MacroElementNodeUpdateMesh,
      // node update depends on     
      el_pt->set_node_update_info(geom_object_pt);
     }
+
+   // Add the geometric object(s) for the wall to the mesh's storage
+   Vector<GeomObject*> geom_object_pt(1);
+   geom_object_pt[0] = this->Leaflet_pt;
+   MacroElementNodeUpdateMesh::set_geom_object_vector_pt(geom_object_pt);
+
+   // Fill in the domain pointer to the mesh's storage in the base class
+   MacroElementNodeUpdateMesh::dom_pt()=this->domain_pt();
+
   } // end of constructor
  
  
@@ -352,6 +361,9 @@ public virtual ChannelWithLeafletMesh<ELEMENT>
    // through the domain, of course)
    Hleaflet = hleaflet;  
    
+   // Add the geometric object to the list associated with this AlgebraicMesh
+   AlgebraicMesh::add_geom_object_list_pt(leaflet_pt);
+
    //Setup algebraic node update operations
    setup_algebraic_node_update();
   }

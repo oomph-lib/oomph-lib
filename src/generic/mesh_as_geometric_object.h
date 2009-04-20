@@ -37,7 +37,7 @@
   #include <oomph-lib-config.h>
 #endif
 
-//Include the geometric obeject header file
+//Include the geometric object header file
 #include "geom_objects.h"
 
 namespace oomph
@@ -62,13 +62,32 @@ private:
 
  ///Internal storage for the elements that constitute the object
  Vector<ELEMENT*> Sub_geom_object_pt;
- 
+
+ ///Storage for paired objects and coords in each bin 
+ Vector<Vector<std::pair<ELEMENT*,Vector<double> > > > Bin_object_coord_pairs;
+
+ ///Storage for min and max coordinates of the bin structure
+ Vector<double> Minmax_coords;
+
+ ///Number of bins in each direction
+ unsigned Nx_bin;
+ unsigned Ny_bin;
+ unsigned Nz_bin;
+
 public:
  
- ///Constructor, pass the pointer to the mesh
- MeshAsGeomObject(Mesh* const &mesh_pt) : 
-  GeomObject(DIM_LAGRANGIAN,DIM_EULERIAN)
+ ///Constructor, pass the pointer to the mesh and optional flag to 
+ ///keep all the elements in this geometric object as halos
+ MeshAsGeomObject(Mesh* const &mesh_pt,
+                  const bool& keep_all_elements_as_halos=false) :
+  GeomObject(DIM_LAGRANGIAN,DIM_EULERIAN), Nx_bin(10), Ny_bin(10), Nz_bin(10)
   {
+#ifdef OOMPH_HAS_MPI
+   // Set flag to allow the mesh to be haloed to all processors
+   // during distribution of the global mesh
+   mesh_pt->keep_all_elements_as_halos()=keep_all_elements_as_halos;
+#endif
+
    // Create temporary storage for geometric Data (don't count 
    // Data twice!
    std::set<Data*> tmp_geom_data;
@@ -115,6 +134,13 @@ public:
      count++;
     }
 
+   // Find the maximum and minimum coordinates for the mesh
+   get_min_and_max_coordinates(mesh_pt);
+
+   // Create the bin structure
+   create_bins_of_objects();
+
+
  }
 
  /// Empty constructor
@@ -148,24 +174,371 @@ public:
  /// contain the required coordinate. 
  void locate_zeta(const Vector<double>& zeta, 
                   GeomObject*& sub_geom_object_pt, 
-                  Vector<double>& s) 
+                  Vector<double>& s)
+  {
+   bool called_simultaneously=false;
+   locate_zeta(zeta,sub_geom_object_pt,s,called_simultaneously);
+  }
+
+
+ /// \short Find the sub geometric object and local coordinate therein that
+ /// corresponds to the intrinsic coordinate zeta. If sub_geom_object_pt=0
+ /// on return from this function, none of the constituent sub-objects 
+ /// contain the required coordinate. The final argument should be set
+ /// to true if the function is being called simultaneously in MPI
+ void locate_zeta(const Vector<double>& zeta, 
+                  GeomObject*& sub_geom_object_pt, 
+                  Vector<double>& s,
+                  bool& called_simultaneously)
   {
    // Initialise return to null -- if it's still null when we're
    // leaving we've failed!
    sub_geom_object_pt=0;
 
-   // Loop over sub-elements to check if they contain the zeta coordinate
-   unsigned n_sub = Sub_geom_object_pt.size();
-   for(unsigned e=0;e<n_sub;e++)
+   // Does the zeta coordinate lie within the current bin structure?
+   // If not then modify Minmax_coords and re-populate the bin structure
+   if (DIM_LAGRANGIAN==1)
     {
-     //Test whether zeta is in the sub object or not
-     Sub_geom_object_pt[e]->locate_zeta(zeta,sub_geom_object_pt,s);
-     //If we've found zeta, then break
-     if (sub_geom_object_pt!=0)
+     if (zeta[0]<Minmax_coords[0])
       {
-       break;
+       Minmax_coords[0]=zeta[0];
+       create_bins_of_objects();
+      }
+     else if (zeta[0]>Minmax_coords[1])
+      {
+       Minmax_coords[1]=zeta[0];
+       create_bins_of_objects();
       }
     }
+   else if (DIM_LAGRANGIAN==2)
+    {
+     if (zeta[0]<Minmax_coords[0])
+      {
+       Minmax_coords[0]=zeta[0];
+       create_bins_of_objects();
+      }
+     else if (zeta[0]>Minmax_coords[1])
+      {
+       Minmax_coords[1]=zeta[0];
+       create_bins_of_objects();
+      }
+     // and in the second direction...
+     if (zeta[1]<Minmax_coords[2])
+      {
+       Minmax_coords[2]=zeta[1];
+       create_bins_of_objects();
+      }
+     else if (zeta[1]>Minmax_coords[3])
+      {
+       Minmax_coords[3]=zeta[1];
+       create_bins_of_objects();
+      }
+    }
+   else if (DIM_LAGRANGIAN==3)
+    {
+     if (zeta[0]<Minmax_coords[0])
+      {
+       Minmax_coords[0]=zeta[0];
+       create_bins_of_objects();
+      }
+     else if (zeta[0]>Minmax_coords[1])
+      {
+       Minmax_coords[1]=zeta[0];
+       create_bins_of_objects();
+      }
+     // and in the second direction...
+     if (zeta[1]<Minmax_coords[2])
+      {
+       Minmax_coords[2]=zeta[1];
+       create_bins_of_objects();
+      }
+     else if (zeta[1]>Minmax_coords[3])
+      {
+       Minmax_coords[3]=zeta[1];
+       create_bins_of_objects();
+      }
+     // and in the third direction...
+     if (zeta[2]<Minmax_coords[4])
+      {
+       Minmax_coords[4]=zeta[2];
+       create_bins_of_objects();
+      }
+     else if (zeta[2]>Minmax_coords[5])
+      {
+       Minmax_coords[5]=zeta[2];
+       create_bins_of_objects();
+      }
+    }
+
+   unsigned bin_number=0;
+   // Get the min and max coords of the bin structure, and find
+   // the bin structure containing the current zeta cooordinate
+   if (DIM_LAGRANGIAN==1)
+    {
+     double x_min=Minmax_coords[0];
+     double x_max=Minmax_coords[1];
+
+     bin_number=int(Nx_bin*((zeta[0]-x_min)/(x_max-x_min)));
+     if (bin_number==Nx_bin) {bin_number=Nx_bin-1;}
+    }
+   else if (DIM_LAGRANGIAN==2)
+    {
+     double x_min=Minmax_coords[0];
+     double x_max=Minmax_coords[1];
+     double y_min=Minmax_coords[2];
+     double y_max=Minmax_coords[3];
+
+     bin_number=int(Nx_bin*((zeta[0]-x_min)/(x_max-x_min)))
+      +Nx_bin*int(Ny_bin*((zeta[1]-y_min)/(y_max-y_min)));
+     if (bin_number==Nx_bin*Ny_bin) {bin_number=Nx_bin*Ny_bin-1;}
+    }
+   else if (DIM_LAGRANGIAN==3)
+    {
+     double x_min=Minmax_coords[0];
+     double x_max=Minmax_coords[1];
+     double y_min=Minmax_coords[2];
+     double y_max=Minmax_coords[3];
+     double z_min=Minmax_coords[4];
+     double z_max=Minmax_coords[5];
+
+     bin_number=int(Nx_bin*((zeta[0]-x_min)/(x_max-x_min)))
+      +Nx_bin*int(Ny_bin*((zeta[1]-y_min)/(y_max-y_min)))
+      +Ny_bin*Nx_bin*int(Nz_bin*((zeta[2]-z_min)/(z_max-z_min)));
+     if (bin_number==Nx_bin*Ny_bin*Nz_bin) 
+      {
+       bin_number=Nx_bin*Ny_bin*Nz_bin-1;
+      }
+    }
+
+   // How many object-coordinate pairs are there in this bin?
+   unsigned n_sample=Bin_object_coord_pairs[bin_number].size();
+
+   // Attempt to locate zeta, but only if there are any samples in the bin
+   ELEMENT* selected_el_pt=0;
+   if (n_sample>0)
+    {
+     // Try the first object in the bin
+     selected_el_pt=Bin_object_coord_pairs[bin_number][0].first;
+     selected_el_pt->locate_zeta(zeta,sub_geom_object_pt,s);
+    }
+
+   // Is sub_geom_object_pt a halo on this process?
+   // If it is then reset sub_geom_object_pt to null
+   // Only do this if it was called simultaneously
+   ELEMENT* test_el_pt=dynamic_cast<ELEMENT*>(sub_geom_object_pt);
+   if (called_simultaneously)
+    {
+#ifdef OOMPH_HAS_MPI
+     if (test_el_pt!=0)
+      {
+       if (test_el_pt->is_halo()) {sub_geom_object_pt=0;}
+      }
+#endif
+    }
+
+   // Setup "request" structure to ask whether any process has succeeded
+   unsigned found_on_a_process=0;
+   if (called_simultaneously)
+    {
+     test_locate(sub_geom_object_pt,found_on_a_process);
+    }
+
+   // If not found (either locally or on another process)
+   // then try the rest of the objects in the
+   // current bin before going on to any other bins
+   if ((sub_geom_object_pt==0) && (found_on_a_process==0))
+    {
+     // Loop over the remaining samples in this bin first
+     n_sample=Bin_object_coord_pairs[bin_number].size();
+     for (unsigned i_sam=1;i_sam<n_sample;i_sam++)
+      {
+       ELEMENT* el_pt=Bin_object_coord_pairs[bin_number][i_sam].first;
+       // Only try a locate if this is different from the original element
+       if (el_pt!=selected_el_pt)
+        {
+         el_pt->locate_zeta(zeta,sub_geom_object_pt,s);
+
+         // Test whether this object is a halo element
+         if (called_simultaneously)
+          {
+           test_el_pt=dynamic_cast<ELEMENT*>(sub_geom_object_pt);
+#ifdef OOMPH_HAS_MPI
+           if (test_el_pt!=0)
+            {
+             if (test_el_pt->is_halo()) {sub_geom_object_pt=0;}
+            }
+#endif
+          }
+
+         // If it has been located and is non-halo then break
+         if (sub_geom_object_pt!=0)
+          {
+           break;
+          }
+        }
+      }
+
+     // Test again whether the locate has worked anywhere
+     found_on_a_process=0;
+     if (called_simultaneously)
+      {
+       test_locate(sub_geom_object_pt,found_on_a_process);
+      }
+
+     // If it still hasn't been found then spiral out to the next level
+     // of bins surrounding the initial bin
+     if ((sub_geom_object_pt==0) && (found_on_a_process==0))
+      {
+       // Loop over the "levels" in the neighbourhood scheme
+       // The maximum size this can be is the maximum out of N*_bin
+       unsigned n_level=Nx_bin;
+       if (DIM_LAGRANGIAN>=2)
+        {
+         if (Ny_bin>n_level) {n_level=Ny_bin;}
+        }
+       if (DIM_LAGRANGIAN==3)
+        {
+         if (Nz_bin>n_level) {n_level=Nz_bin;}
+        }
+
+       // Don't need to loop over the zeroth level since this only contains
+       // the bin that was already visited
+       for (unsigned i_level=1;i_level<n_level;i_level++)
+        {
+         // Call helper function to find the neighbouring bins at this level
+         Vector<unsigned> neighbour_bin;
+         get_neighbouring_bins_helper(bin_number,i_level,neighbour_bin);
+         unsigned n_nbr_bin=neighbour_bin.size();
+
+         // Set bool for finding zeta
+         bool found_zeta=false;
+         for (unsigned i_nbr=0;i_nbr<n_nbr_bin;i_nbr++)
+          {
+           // Get the number of element-sample point pairs in this bin
+           unsigned n_sample=
+            Bin_object_coord_pairs[neighbour_bin[i_nbr]].size();
+
+           // Don't do anything if this bin has no sample points
+           if (n_sample>0)
+            {
+             // Try the first sample point first
+             ELEMENT* first_el_pt=
+              Bin_object_coord_pairs[neighbour_bin[i_nbr]][0].first;
+             first_el_pt->locate_zeta(zeta,sub_geom_object_pt,s);
+
+             // Again check this is non-halo
+             if (called_simultaneously)
+              {
+               test_el_pt=dynamic_cast<ELEMENT*>(sub_geom_object_pt);
+#ifdef OOMPH_HAS_MPI
+               if (test_el_pt!=0)
+                {
+                 if (test_el_pt->is_halo()) {sub_geom_object_pt=0;}
+                }
+#endif
+              }
+
+             if (sub_geom_object_pt!=0)
+              {
+               found_zeta=true;
+              }
+             else // loop over the other sample points
+              {
+               for (unsigned i_sam=1;i_sam<n_sample;i_sam++)
+                {
+                 ELEMENT* el_pt=Bin_object_coord_pairs
+                  [neighbour_bin[i_nbr]][i_sam].first;
+                 // Only try a locate if this is different from 
+                 // first element within this bin
+                 if (el_pt!=first_el_pt)
+                  {
+                   el_pt->locate_zeta(zeta,sub_geom_object_pt,s);
+
+                   // Again check this is non-halo
+                   if (called_simultaneously)
+                    {
+                     test_el_pt=dynamic_cast<ELEMENT*>(sub_geom_object_pt);
+#ifdef OOMPH_HAS_MPI
+                     if (test_el_pt!=0)
+                      {
+                       if (test_el_pt->is_halo()) {sub_geom_object_pt=0;}
+                      }
+#endif
+                    }
+
+                   if (sub_geom_object_pt!=0)
+                    {
+                     found_zeta=true;
+                     break;
+                    }
+                  }
+                }
+              }
+            }
+
+           // Check whether any process has located zeta yet
+           found_on_a_process=0;
+           if (called_simultaneously)
+            {
+             test_locate(sub_geom_object_pt,found_on_a_process);
+            }
+
+           if ((found_zeta) || (found_on_a_process!=0))
+            {
+             break;
+            }
+
+          } // end loop over bins at this level
+
+         // If zeta has been found there's no need to carry on
+         if ((found_zeta) || (found_on_a_process!=0))
+          {
+           break;
+          }
+
+        } // end loop over all levels for this bin_number
+
+
+       // If it still hasn't worked, then throw an error
+       if ((sub_geom_object_pt==0) && (found_on_a_process==0))
+        {
+         // Throw an error
+         std::ostringstream error_message;
+         error_message << "Cannot locate zeta: ";
+         for(unsigned i=0;i<DIM_LAGRANGIAN;i++)
+          {
+           error_message << zeta[i] << " ";
+          }
+         error_message << " using current binning method."
+                       << std::endl;
+         throw OomphLibError(error_message.str(),
+                             "MeshAsGeomObject::locate_zeta()",
+                             OOMPH_EXCEPTION_LOCATION);
+        }
+
+      }
+     
+    }
+
+     /// PREVIOUS BRUTE-FORCE LOOP - DO WE STILL WANT IT AS AN OPTION?
+/*     } */
+/*    else // Do the brute-force loop over all elements until the right object */
+/*         // is located */
+/*     { */
+/*      // Loop over sub-elements to check if they contain the zeta coordinate */
+/*      unsigned n_sub = Sub_geom_object_pt.size(); */
+/*      for(unsigned e=0;e<n_sub;e++) */
+/*       { */
+/*        //Test whether zeta is in the sub object or not */
+/*        Sub_geom_object_pt[e]->locate_zeta(zeta,sub_geom_object_pt,s); */
+/*        //If we've found zeta, then break */
+/*        if (sub_geom_object_pt!=0) */
+/*         { */
+/*          break; */
+/*         } */
+/*       } */
+/*     } */
+
   }
 
  /// \short Return the position as a function of the intrinsic coordinate zeta.
@@ -223,6 +596,493 @@ public:
                        "MeshAsGeomObject::dposition()",
                        OOMPH_EXCEPTION_LOCATION);
   }
+
+ ///Access functions to number of bins in each dimension
+ unsigned& nx_bin() {return Nx_bin;}
+ unsigned& ny_bin() {return Ny_bin;}
+ unsigned& nz_bin() {return Nz_bin;}
+
+ ///Access functions for min and max coordinates in each dimension
+ double& x_min() {return Minmax_coords[0];}
+ double& x_max() {return Minmax_coords[1];}
+ double& y_min() {return Minmax_coords[2];}
+ double& y_max() {return Minmax_coords[3];}
+ double& z_min() {return Minmax_coords[4];}
+ double& z_max() {return Minmax_coords[5];}
+
+ ///Get the min and max coordinates for the mesh, in each dimension
+ void get_min_and_max_coordinates(Mesh* const &mesh_pt)
+  {
+   // Storage locally (i.e. in parallel on each processor)
+   double x_min_local=1.0e10;
+   double x_max_local=1.0e-10;
+   double y_min_local=1.0e10;
+   double y_max_local=1.0e-10;
+   double z_min_local=1.0e10;
+   double z_max_local=1.0e-10;
+
+   // Loop over the elements of the mesh
+   unsigned n_el=mesh_pt->nelement();
+   for (unsigned e=0;e<n_el;e++)
+    {
+     ELEMENT* el_pt=dynamic_cast<ELEMENT*>(mesh_pt->element_pt(e));
+
+     // Get the number of vertices (call nplot_points with nplot=2)
+     unsigned n_plot=2;
+     unsigned n_plot_points=el_pt->nplot_points(n_plot);
+
+     // Loop over the number of plot points
+     for (unsigned i=0;i<n_plot_points;i++)
+      {
+       Vector<double> el_local(DIM_LAGRANGIAN);
+       Vector<double> el_global(DIM_LAGRANGIAN);
+
+       // Get the local s
+       el_pt->get_s_plot(i,n_plot,el_local);
+
+       // Now interpolate to global coordinates
+       el_pt->interpolated_zeta(el_local,el_global);
+
+       // Check the max and min in each direction
+       if (el_global[0] < x_min_local) {x_min_local=el_global[0];}
+       if (el_global[0] > x_max_local) {x_max_local=el_global[0];}
+       if (DIM_LAGRANGIAN>=2)
+        {
+         if (el_global[1] < y_min_local) {y_min_local=el_global[1];}
+         if (el_global[1] > y_max_local) {y_max_local=el_global[1];}
+        }
+       if (DIM_LAGRANGIAN==3)
+        {
+         if (el_global[2] < z_min_local) {z_min_local=el_global[2];}
+         if (el_global[2] > z_max_local) {z_max_local=el_global[2];}
+        }
+      }
+    }
+
+   // Global extrema - in parallel, need to get max/min across all processors
+   double x_min, x_max, y_min, y_max, z_min, z_max;
+#ifdef OOMPH_HAS_MPI
+   if (MPI_Helpers::Nproc>1)
+    {
+     MPI_Allreduce(&x_min_local,&x_min,1,MPI_DOUBLE,MPI_MIN,MPI_COMM_WORLD);
+     MPI_Allreduce(&x_max_local,&x_max,1,MPI_DOUBLE,MPI_MAX,MPI_COMM_WORLD);
+     if (DIM_LAGRANGIAN>=2)
+      {
+       MPI_Allreduce(&y_min_local,&y_min,1,MPI_DOUBLE,MPI_MIN,MPI_COMM_WORLD);
+       MPI_Allreduce(&y_max_local,&y_max,1,MPI_DOUBLE,MPI_MAX,MPI_COMM_WORLD);
+      }
+     if (DIM_LAGRANGIAN==3)
+      {
+       MPI_Allreduce(&z_min_local,&z_min,1,MPI_DOUBLE,MPI_MIN,MPI_COMM_WORLD);
+       MPI_Allreduce(&z_max_local,&z_max,1,MPI_DOUBLE,MPI_MAX,MPI_COMM_WORLD);
+      }
+    }
+   else // Need to cover the case where MPI hasn't been initialised
+    {
+     x_min=x_min_local;
+     x_max=x_max_local;
+     if (DIM_LAGRANGIAN>=2)
+      {
+       y_min=y_min_local;
+       y_max=y_max_local;
+      }
+     if (DIM_LAGRANGIAN==3)
+      {
+       z_min=z_min_local;
+       z_max=z_max_local;
+      }
+    }
+#else   
+   x_min=x_min_local;
+   x_max=x_max_local;
+   if (DIM_LAGRANGIAN>=2)
+    {
+     y_min=y_min_local;
+     y_max=y_max_local;
+    }
+   if (DIM_LAGRANGIAN==3)
+    {
+     z_min=z_min_local;
+     z_max=z_max_local;
+    }
+#endif
+
+   // Decrease/increase min and max to allow for any overshoot in
+   // meshes that may move around
+   // There's no point in doing this for DIM_LAGRANGIAN==1
+   double percentage_offset=0.05;
+   if (DIM_LAGRANGIAN>=2)
+    {
+     double x_length=x_max-x_min;
+     double y_length=y_max-y_min;
+     x_min=x_min-(percentage_offset*x_length);
+     x_max=x_max+(percentage_offset*x_length);
+     y_min=y_min-(percentage_offset*y_length);
+     y_max=y_max+(percentage_offset*y_length);
+    }
+   if (DIM_LAGRANGIAN==3)
+    {
+     double z_length=z_max-z_min;
+     z_min=z_min-(percentage_offset*z_length);
+     z_max=z_max+(percentage_offset*z_length);
+    }
+
+   // Add these entries to the Minmax_coords vector
+   Minmax_coords.resize(DIM_LAGRANGIAN*2);
+   Minmax_coords[0]=x_min;
+   Minmax_coords[1]=x_max;
+   if (DIM_LAGRANGIAN>=2)
+    {
+     Minmax_coords[2]=y_min;
+     Minmax_coords[3]=y_max;
+    }
+   if (DIM_LAGRANGIAN==3)
+    {
+     Minmax_coords[4]=z_min;
+     Minmax_coords[5]=z_max;
+    }
+
+  }
+
+ ///Initialise the "bin" structure for locating coordinates in a more
+ ///efficient manner than a brute force loop over all the (sub)objects
+ void create_bins_of_objects()
+  {
+   // Output message regarding bin structure setup
+   oomph_info << "==============================================" << std::endl;
+   oomph_info << " MeshAsGeomObject: setting up bin search with:" << std::endl;
+   oomph_info << "   Nx_bin=" << Nx_bin << "  ";
+   if (DIM_LAGRANGIAN>=2)
+    {
+     std::cout << "Ny_bin=" << Ny_bin << "  ";
+    }
+   if (DIM_LAGRANGIAN==3)
+    {
+     std::cout << "Nz_bin=" << Nz_bin;
+    }
+   std::cout << std::endl;
+   oomph_info << "   Xminmax=" << Minmax_coords[0] << " " << Minmax_coords[1] 
+              << "  ";
+   if (DIM_LAGRANGIAN>=2)
+    {
+     std::cout << "Yminmax=" << Minmax_coords[2] << " " << Minmax_coords[3]
+              << "  ";
+    }
+   if (DIM_LAGRANGIAN==3)
+    {
+     std::cout << "Zminmax=" << Minmax_coords[4] << " " << Minmax_coords[5] 
+              << "  ";
+    }
+   std::cout << std::endl;
+   oomph_info << "==============================================" << std::endl;
+
+   /// Flush any storage that may have been created in the past
+   flush_bins_of_objects();
+
+   ///The storage for these bins is of size Nx_bin*Ny_bin*Nz_bin
+   unsigned ntotalbin=Nx_bin;
+   if (DIM_LAGRANGIAN==2)
+    {
+     ntotalbin=Nx_bin*Ny_bin;
+    }
+   else if (DIM_LAGRANGIAN==3)
+    {
+     ntotalbin=Nx_bin*Ny_bin*Nz_bin;
+    }
+   Bin_object_coord_pairs.resize(ntotalbin);
+
+   ///Loop over subobjects to decide which bin they belong in...
+   unsigned n_sub=Sub_geom_object_pt.size();
+
+   oomph_info << "There are " << n_sub << " elements to be put into bins"
+              << std::endl << std::endl;
+
+   for (unsigned e=0;e<n_sub;e++)
+    {
+     ///Need to cast to the element first
+     ELEMENT* el_pt=dynamic_cast<ELEMENT*>(Sub_geom_object_pt[e]);
+
+     ///Cache element coord min and max
+     double el_min=el_pt->s_min();
+     double el_max=el_pt->s_max();
+
+     ///Create a set of sampling points within the element
+     unsigned n_sample=5;
+
+     ///Cases for each dimension
+     if (DIM_LAGRANGIAN==1)
+      {
+       double x_min=Minmax_coords[0];
+       double x_max=Minmax_coords[1];
+
+       for (unsigned i_sam=0;i_sam<n_sample;i_sam++)
+        {
+         Vector<double> local_coord(DIM_LAGRANGIAN,0.0);
+         local_coord[0]=(double(i_sam+1)/double(n_sample+1))*
+          (el_max-el_min)+el_min;
+         //Interpolate to global coordinates
+         Vector<double> global_coord(DIM_LAGRANGIAN,0.0);
+         el_pt->interpolated_zeta(local_coord,global_coord);
+
+         //Which bin are the global coordinates in?
+         unsigned bin_number=
+          int(Nx_bin*(global_coord[0]-x_min)/(x_max-x_min));
+
+         //Add element-sample coord pair to the calculated bin
+         Bin_object_coord_pairs[bin_number].push_back
+          (std::make_pair(el_pt,global_coord));
+        }
+      }
+     else if (DIM_LAGRANGIAN==2)
+      {
+       double x_min=Minmax_coords[0];
+       double x_max=Minmax_coords[1];
+       double y_min=Minmax_coords[2];
+       double y_max=Minmax_coords[3];
+
+       for (unsigned i_sam=0;i_sam<n_sample;i_sam++)
+        {
+         for (unsigned j_sam=0;j_sam<n_sample;j_sam++)
+          {
+           Vector<double> local_coord(DIM_LAGRANGIAN,0.0);
+           local_coord[0]=(double(i_sam+1)/double(n_sample+1))*
+            (el_max-el_min)+el_min;
+           local_coord[1]=(double(j_sam+1)/double(n_sample+1))*
+            (el_max-el_min)+el_min;
+           //Interpolate to global coordinates...
+           Vector<double> global_coord(DIM_LAGRANGIAN,0.0);
+           el_pt->interpolated_zeta(local_coord,global_coord);
+
+           //Which bin are the global coordinates in?
+           unsigned bin_number=
+            int(Nx_bin*(global_coord[0]-x_min)/(x_max-x_min))
+            +Nx_bin*int(Ny_bin*(global_coord[1]-y_min)/(y_max-y_min));
+
+           //Add element-sample coord pair to the calculated bin
+           Bin_object_coord_pairs[bin_number].push_back
+            (std::make_pair(el_pt,global_coord));
+
+          }
+        }
+      }
+     else if (DIM_LAGRANGIAN==3)
+      {
+       double x_min=Minmax_coords[0];
+       double x_max=Minmax_coords[1];
+       double y_min=Minmax_coords[2];
+       double y_max=Minmax_coords[3];
+       double z_min=Minmax_coords[4];
+       double z_max=Minmax_coords[5];
+
+       for (unsigned i_sam=0;i_sam<n_sample;i_sam++)
+        {
+         for (unsigned j_sam=0;j_sam<n_sample;j_sam++)
+          {
+           for (unsigned k_sam=0;k_sam<n_sample;k_sam++)
+            {
+             Vector<double> local_coord(DIM_LAGRANGIAN,0.0);
+             local_coord[0]=(double(i_sam+1)/double(n_sample+1))*
+              (el_max-el_min)+el_min;
+             local_coord[1]=(double(j_sam+1)/double(n_sample+1))*
+              (el_max-el_min)+el_min;
+             local_coord[2]=(double(k_sam+1)/double(n_sample+1))*
+              (el_max-el_min)+el_min;
+             //Interpolate to global coordinates...
+             Vector<double> global_coord(DIM_LAGRANGIAN,0.0);
+             el_pt->interpolated_zeta(local_coord,global_coord);
+
+             //Which bin are the global coordinates in?
+             unsigned bin_number=
+              int(Nx_bin*(global_coord[0]-x_min)/(x_max-x_min))
+              +Nx_bin*int(Ny_bin*(global_coord[1]-y_min)/(y_max-y_min))
+              +Ny_bin*Nx_bin*int(Nz_bin*(global_coord[2]-z_min)/(z_max-z_min));
+
+             //Add element-sample coord pair to the calculated bin
+             Bin_object_coord_pairs[bin_number].push_back
+              (std::make_pair(el_pt,global_coord));
+            }
+          }
+        }
+      }
+    }
+
+  }
+
+ ///Flush the storage for the binning method
+ void flush_bins_of_objects()
+  {
+   Bin_object_coord_pairs.clear();
+  }
+
+ ///Calculate the bin numbers of all the neighbours to "bin" given the level
+ void get_neighbouring_bins_helper(const unsigned& bin, const unsigned& level,
+                                   Vector<unsigned>& neighbour_bin)
+  {
+   // This will be different depending on the value of DIM_LAGRANGIAN
+   if (DIM_LAGRANGIAN==1)
+    {
+     // Single "loop" in one direction - always a vector of max size 2
+     unsigned nbr_bin_left=bin-level;
+     if ((nbr_bin_left>=0) && (nbr_bin_left<Nx_bin))
+      {
+       unsigned nbr_bin=nbr_bin_left;
+       neighbour_bin.push_back(nbr_bin);
+      }
+     unsigned nbr_bin_right=bin+level;
+     if ((nbr_bin_right>=0) && (nbr_bin_right<Nx_bin))
+      {
+       unsigned nbr_bin=nbr_bin_right;
+       neighbour_bin.push_back(nbr_bin);
+      }
+    }
+   else if (DIM_LAGRANGIAN==2)
+    {
+     unsigned n_total_bin=Nx_bin*Ny_bin;
+
+     // Which row of the bin structure is the current bin on?
+     // This is just given by the integer answer of dividing bin
+     // by Nx_bin (the number of bins in a single row)
+     // e.g. in a 6x6 grid, bins 6 through 11 would all have bin_row=1
+     unsigned bin_row=bin/Nx_bin;
+
+     // The neighbour_bin vector contains all bin numbers at the 
+     // specified "distance" (level) away from the current bin
+
+     // Row/column length
+     unsigned n_length=(level*2)+1;
+
+     // Loop over the rows
+     for (unsigned j=0;j<n_length;j++)
+      {
+       // Loop over the columns
+       for (unsigned i=0;i<n_length;i++)
+        {
+         // Only do this for all the first & last row, and the
+         // end points of every other row
+         if ((j==0) || (j==n_length-1) || (i==0) || (i==n_length-1))
+          {
+           unsigned nbr_bin=bin-level+i-((level-j)*Nx_bin);
+           // This number might fall on the wrong
+           // row of the bin structure; this needs to be tested
+
+           // Which row is this number on? (see above)
+           unsigned nbr_bin_row=nbr_bin/Nx_bin;
+
+           // Which row should it be on?
+           unsigned row=bin_row-level+j;
+
+           // These numbers for the rows must match; 
+           // if it is then add nbr_bin to the neighbour scheme
+           // (The bin number must also be greater than zero
+           //  and less than the total number of bins)
+           if ((row==nbr_bin_row) && (nbr_bin>=0) && (nbr_bin<n_total_bin))
+            {
+             neighbour_bin.push_back(nbr_bin);
+            }  
+          }
+        }
+
+      }
+
+    }
+   else if (DIM_LAGRANGIAN==3)
+    {
+     unsigned n_total_bin=Nx_bin*Ny_bin*Nz_bin;
+
+     // Which layer of the bin structure is the current bin on?
+     // This is just given by the integer answer of dividing bin
+     // by Nx_bin*Ny_bin (the number of bins in a single layer
+     // e.g. in a 6x6x6 grid, bins 72 through 107 would all have bin_layer=2
+     unsigned bin_layer=bin/(Nx_bin*Ny_bin);
+
+     // Which row in this layer is the bin number on?
+     unsigned bin_row=(bin/Nx_bin)-(bin_layer*Ny_bin);
+
+     // The neighbour_bin vector contains all bin numbers at the 
+     // specified "distance" (level) away from the current bin
+
+     // Row/column/layer length
+     unsigned n_length=(level*2)+1;
+
+     // Loop over the layers
+     for (unsigned k=0;k<n_length;k++)
+      {
+       // Loop over the rows
+       for (unsigned j=0;j<n_length;j++)
+        {
+         // Loop over the columns
+         for (unsigned i=0;i<n_length;i++)
+          {
+           // Only do this for the end points of every row/layer/column
+           if ((k==0) || (k==n_length-1) || (j==0) || 
+               (j==n_length-1) || (i==0) || (i==n_length-1))
+            {
+             unsigned nbr_bin=bin-level+i-((level-j)*Nx_bin)-
+              ((level-k)*Nx_bin*Ny_bin);
+             // This number might fall on the wrong
+             // row or layer of the bin structure; this needs to be tested
+
+             // Which layer is this number on?
+             unsigned nbr_bin_layer=nbr_bin/(Nx_bin*Ny_bin);
+
+             // Which row is this number on? (see above)
+             unsigned nbr_bin_row=(nbr_bin/Nx_bin)-(nbr_bin_layer*Ny_bin);
+
+             // Which layer and row should it be on, given level?
+             unsigned layer=bin_layer-level+k;
+             unsigned row=bin_row-level+j;
+
+             // These layers and rows must match up:
+             // if so then add nbr_bin to the neighbour schemes
+             // (The bin number must also be greater than zero
+             //  and less than the total number of bins)
+             if ((row==nbr_bin_row) && (layer==nbr_bin_layer)
+                 && (nbr_bin>=0) && (nbr_bin<n_total_bin))
+              {
+               neighbour_bin.push_back(nbr_bin);
+              }  
+            }
+
+          }
+        }
+      }
+
+    }
+  }
+
+ /// Test whether a (sub-)GeomObject has been located on any process
+ void test_locate(GeomObject*& sub_geom_object_pt, 
+                  unsigned &found_on_a_process)
+  {
+   // Written this just using MPI_Allreduce - it seemed
+   // incredibly slow otherwise (when using MPI_Testany with MPI_Request)
+   int found;
+
+   if (sub_geom_object_pt!=0)
+    {
+     found=1;
+    }
+   else
+    {
+     found=0;
+    }
+
+#ifdef OOMPH_HAS_MPI
+   if (MPI_Helpers::Nproc>1)
+    {
+     MPI_Allreduce(&found,&found_on_a_process,1,MPI_INT,MPI_SUM,
+                   MPI_COMM_WORLD);
+    }
+   else // Need to cover the case where MPI hasn't been initialised
+    {
+     found_on_a_process=found;
+    }
+#else
+   found_on_a_process=found;
+#endif
+  }
+
+
 
  
 };

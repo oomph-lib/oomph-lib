@@ -1647,10 +1647,10 @@ fill_in_generic_residual_contribution_spherical_nst(
    
    //Get the user-defined body force terms
    Vector<double> body_force(3);
-   get_body_force_spherical_nst(time(),s,interpolated_x,body_force);
+   get_body_force_spherical_nst(time(),ipt,s,interpolated_x,body_force);
    
    //Get the user-defined source function
-   //double source = get_source_spherical_nst(time(),interpolated_x);
+   //double source = get_source_spherical_nst(time(),ipt,interpolated_x);
 
 
    //MOMENTUM EQUATIONS

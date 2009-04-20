@@ -240,7 +240,8 @@ public:
  /// virtual to allow overloading in multi-physics problems where
  /// the strength of the source function might be determined by
  /// another system of equations 
- inline virtual void get_source_adv_diff(const Vector<double>& x, 
+ inline virtual void get_source_adv_diff(const unsigned& ipt,
+                                         const Vector<double>& x,
                                          double& source) const
   {
    //If no source function has been set, return zero
@@ -257,7 +258,8 @@ public:
  /// virtual to allow overloading in multi-physics problems where
  /// the wind function might be determined by
  /// another system of equations 
- inline virtual void get_wind_adv_diff(const Vector<double> &s, 
+ inline virtual void get_wind_adv_diff(const unsigned& ipt,
+                                       const Vector<double> &s,
                                        const Vector<double>& x,
                                        Vector<double>& wind) const
   {
@@ -272,7 +274,6 @@ public:
      (*Wind_fct_pt)(x,wind);
     }
   }
-
 
  /// Get flux: \f$\mbox{flux}[i] = \mbox{d}u / \mbox{d}x_i \f$
  void get_flux(const Vector<double>& s, Vector<double>& flux) const

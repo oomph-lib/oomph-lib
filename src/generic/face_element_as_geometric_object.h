@@ -40,27 +40,34 @@
 
 #include<algorithm>
 
-//Include the geometric obeject header file
+//Include the geometric object header file
 #include "geom_objects.h"
 #include "shape.h"
+#include "multi_domain.h"
 
 namespace oomph
 {
 
-//======================================================================
-/// \short Helper namespace for the locate zeta tolerances
-//======================================================================
-namespace Locate_zeta_helpers
-{
- /// Convergence tolerance for the Newton solver
- extern double Newton_tolerance;	
+/* //====================================================================== */
+/* /// \short Helper namespace for the locate zeta tolerances */
+/* //====================================================================== */
+/* namespace Locate_zeta_helpers */
+/* { */
+/*  /// Convergence tolerance for the Newton solver */
+/*  extern double Newton_tolerance;	 */
 
- /// Maximum number of Newton iterations
- extern unsigned Max_newton_iterations;
+/*  /// Maximum number of Newton iterations */
+/*  extern unsigned Max_newton_iterations; */
  
- /// Rounding tolerance for whether coordinate is in element or not
- extern double Rounding_tolerance;
-} 
+/*  /// Rounding tolerance for whether coordinate is in element or not */
+/*  extern double Rounding_tolerance; */
+
+/*  /// Number of points along one dimension of each element used */
+/*  /// to create coordinates within the element in order to see */
+/*  /// which has the smallest initial residual (and is therefore used */
+/*  /// as the initial guess in the Newton method for locate_zeta) */
+/*  extern unsigned N_local_points; */
+/* }  */
 
 //=======================================================================
 /// Class that is used to create FaceElement from bulk elements and to
@@ -74,7 +81,8 @@ namespace Locate_zeta_helpers
 //=======================================================================
 template<class ELEMENT>
 class FaceElementAsGeomObject : public virtual FaceGeometry<ELEMENT>,
- public virtual FaceElement, public virtual GeomObject
+ public virtual FaceElement, public virtual GeomObject, 
+ public virtual ElementWithExternalElement
  {
 private:
 
@@ -105,7 +113,8 @@ public:
   //The geometric object has an intrinsic dimension one less than 
   //the "bulk" element, but the actual dimension of the problem remains 
   //the same
-  GeomObject(element_pt->dim()-1,element_pt->nodal_dimension())
+  GeomObject(element_pt->dim()-1,element_pt->nodal_dimension()),
+  ElementWithExternalElement()
   { 
 #ifdef PARANOID
    Boundary_number_in_bulk_mesh_has_been_set = false;
@@ -164,10 +173,10 @@ public:
   const
   {
    //Vector in which to hold the intrinsic coordinate
-   Vector<double> zeta(dim());
+   Vector<double> zeta(this->dim());
 
    //Get the k-th generalised boundary coordinate at node n
-   node_pt(n)->get_coordinates_on_boundary(
+   this->node_pt(n)->get_coordinates_on_boundary(
     Boundary_number_in_bulk_mesh,k,zeta);
 
    //Return the individual coordinate
@@ -181,7 +190,7 @@ public:
  void interpolated_zeta(const Vector<double> &s, Vector<double> &zeta) const
   {
    //Find the number of nodes
-   unsigned n_node = nnode();
+   unsigned n_node = this->nnode();
 
    //Find the number of positional types
    unsigned n_position_type = this->nnodal_position_type();
@@ -190,10 +199,10 @@ public:
    Shape psi(n_node,n_position_type);
 
    //Get the values of the shape functions at the local coordinate s
-   shape(s,psi);
+   this->shape(s,psi);
    
    //Find the number of coordinates
-   unsigned ncoord = dim();
+   unsigned ncoord = this->dim();
    
    //Initialise the value of zeta to zero
    for(unsigned i=0;i<ncoord;i++) {zeta[i] = 0.0;}
@@ -235,7 +244,7 @@ public:
    //Initialise s to the middle of the element
    for(unsigned i=0;i<ncoord;i++) 
     {
-     s[i] = 0.5*(s_max()+s_min());
+     s[i] = 0.5*(this->s_max()+this->s_min());
     }
    
    //Counter for the number of Newton steps
@@ -293,7 +302,7 @@ public:
      DShape dpsids(n_node,n_position_type,ncoord);
 
      //Get the local shape functions and their derivatives
-     dshape_local(s,psi,dpsids);
+     this->dshape_local(s,psi,dpsids);
      
      //Calculate the values of dzetads
      DenseMatrix<double> interpolated_dzetads(ncoord,ncoord,0.0);
@@ -350,8 +359,8 @@ public:
    for(unsigned i=0;i<ncoord;i++)
     {
      // We're outside -- return the null pointer for the geom object
-     if((s[i] - s_max() >  Rounding_tolerance) || 
-        (s_min() - s[i] >  Rounding_tolerance)) 
+     if((s[i] - this->s_max() >  Rounding_tolerance) || 
+        (this->s_min() - s[i] >  Rounding_tolerance)) 
       {
        geom_object_pt=0; 
        return;
@@ -364,8 +373,8 @@ public:
    //If we're over the limit by less than the rounding error, adjust
    for(unsigned i=0;i<ncoord;i++)
     {
-     if(s[i] > s_max()) {s[i] = s_max();}
-     if(s[i] < s_min()) {s[i] = s_min();}
+     if(s[i] > this->s_max()) {s[i] = this->s_max();}
+     if(s[i] < this->s_min()) {s[i] = this->s_min();}
     }
   }
 
@@ -389,6 +398,12 @@ public:
     return 0;
   }
 
+ /// Unique final overrider needed for assign_all_generic_local_eqn_numbers
+ void assign_all_generic_local_eqn_numbers()
+  {
+   // Call the ElementWithExternalElement's assign function
+   ElementWithExternalElement::assign_all_generic_local_eqn_numbers();
+  }
  
 
 };

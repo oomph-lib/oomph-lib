@@ -189,10 +189,10 @@ for(unsigned ipt=0;ipt<Nintpt;ipt++)
 
  //Get the user-defined body force terms
  Vector<double> body_force(DIM+1);
- get_body_force(time(),interpolated_x,body_force);
+ get_body_force(time(),ipt,interpolated_x,body_force);
       
  //Get the user-defined source function
- double source=get_source_fct(time(),interpolated_x);
+ double source=get_source_fct(time(),ipt,interpolated_x);
 
  // r is the first postition component
  double r = interpolated_x[0];

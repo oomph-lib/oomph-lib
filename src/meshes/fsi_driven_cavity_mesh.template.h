@@ -190,6 +190,9 @@ public:
   FSIDrivenCavityMesh<ELEMENT>(nx, ny, lx, ly, gap_fraction, wall_pt,
                                time_stepper_pt)
   {
+   // Add the geometric object to the list associated with this AlgebraicMesh
+   AlgebraicMesh::add_geom_object_list_pt(wall_pt);
+
    // Setup algebraic node update operations
    setup_algebraic_node_update();
   }

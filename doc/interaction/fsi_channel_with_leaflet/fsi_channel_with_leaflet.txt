@@ -584,14 +584,14 @@ and to establish the direction of the unit normal on the beam.
    // Front of leaflet: face 0
    face=0; 
    FSI_functions::setup_fluid_load_info_for_solid_elements<ELEMENT,2>
-    (5,Fluid_mesh_pt,Wall_mesh_pt,face); 
+    (5,Fluid_mesh_pt,Wall_mesh_pt,face,this); 
    \endcode
    \n and mesh boundary 4 with the "back" via \n\n
     \code
    // Back of leaflet: face 1
    face=1; 
    FSI_functions::setup_fluid_load_info_for_solid_elements<ELEMENT,2>
-    (4,Fluid_mesh_pt,Wall_mesh_pt,face); 
+    (4,Fluid_mesh_pt,Wall_mesh_pt,face,this); 
    \endcode
    \n the code gives the right results again (make sure you change 
    the code in the problem constructor and in the actions

@@ -948,7 +948,8 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
        // Setup FSI: Pass ID of fluid FSI boundary and associated
        // mesh of solid fsi traction elements.
        FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,3>
-        (Fluid_fsi_boundary_id[i],Fluid_mesh_pt,Solid_fsi_traction_mesh_pt[i]);
+        (Fluid_fsi_boundary_id[i],Fluid_mesh_pt,
+         Solid_fsi_traction_mesh_pt[i],this);
        
 #ifdef OOMPH_HAS_MPI
        if ( MPI_Helpers::My_rank==0)
