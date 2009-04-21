@@ -291,7 +291,6 @@ int main(int argc, char **argv)
   doc_info.set_directory("RESLT_TH");
   DocInfo mesh_doc_info;
   mesh_doc_info.set_directory("RESLT_TH_MESH");
-  bool report_stats=false;
 
   doc_info.number()=0;
   problem.doc_solution(doc_info);
@@ -299,7 +298,35 @@ int main(int argc, char **argv)
   // Distribute
 #ifdef OOMPH_HAS_MPI
   mesh_doc_info.number()=0;
-  problem.distribute(mesh_doc_info,report_stats);
+
+  std::ifstream input_file;
+  std::ofstream output_file;
+  char filename[100];
+
+  // Get the partition to be used from file
+  unsigned n_partition=problem.mesh_pt()->nelement();
+  Vector<unsigned> element_partition(n_partition);
+  sprintf(filename,"adaptive_cavity_1_partition.dat");
+  input_file.open(filename);
+  std::string input_string;
+  for (unsigned e=0;e<n_partition;e++)
+   {
+    getline(input_file,input_string,'\n');
+    element_partition[e]=atoi(input_string.c_str());
+   }
+
+//  Vector<unsigned> out_element_partition;
+  bool report_stats=false;
+  problem.distribute(mesh_doc_info,report_stats,element_partition);
+//                     out_element_partition);
+
+//   sprintf(filename,"out_adaptive_cavity_1_partition.dat");
+//   output_file.open(filename);
+//   for (unsigned e=0;e<n_partition;e++)
+//    {
+//     output_file << out_element_partition[e] << std::endl;
+//    }
+
   // Check halos
   problem.check_halo_schemes(mesh_doc_info);
 #endif
@@ -348,7 +375,6 @@ int main(int argc, char **argv)
   doc_info.set_directory("RESLT_CR");
   DocInfo mesh_doc_info;
   mesh_doc_info.set_directory("RESLT_CR_MESH");
-  bool report_stats=false;
 
   doc_info.number()=0;
   problem.doc_solution(doc_info);
@@ -356,7 +382,35 @@ int main(int argc, char **argv)
   // Distribute
 #ifdef OOMPH_HAS_MPI
   mesh_doc_info.number()=0;
-  problem.distribute(mesh_doc_info,report_stats);
+
+  std::ifstream input_file;
+  std::ofstream output_file;
+  char filename[100];
+
+  // Get the partition to be used from file
+  unsigned n_partition=problem.mesh_pt()->nelement();
+  Vector<unsigned> element_partition(n_partition);
+  sprintf(filename,"adaptive_cavity_2_partition.dat");
+  input_file.open(filename);
+  std::string input_string;
+  for (unsigned e=0;e<n_partition;e++)
+   {
+    getline(input_file,input_string,'\n');
+    element_partition[e]=atoi(input_string.c_str());
+   }
+
+//  Vector<unsigned> out_element_partition;
+  bool report_stats=false;
+  problem.distribute(mesh_doc_info,report_stats,element_partition);
+//                     out_element_partition);
+
+//   sprintf(filename,"out_adaptive_cavity_2_partition.dat");
+//   output_file.open(filename);
+//   for (unsigned e=0;e<n_partition;e++)
+//    {
+//     output_file << out_element_partition[e] << std::endl;
+//    }
+
   // Check halos
   problem.check_halo_schemes(mesh_doc_info);
 #endif

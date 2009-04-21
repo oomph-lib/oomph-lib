@@ -1575,8 +1575,11 @@ namespace Multi_domain_functions
    // Do an MPI_Allreduce on the found_zeta array to pool the information
    // onto the current loop process
 #ifdef OOMPH_HAS_MPI
-   MPI_Allreduce(&Found_zeta[0],&All_found_zeta[0],Count_zeta_dim,
-                 MPI_INT,MPI_MAX,MPI_COMM_WORLD);
+   if (Count_zeta_dim!=0)
+    {
+     MPI_Allreduce(&Found_zeta[0],&All_found_zeta[0],Count_zeta_dim,
+                   MPI_INT,MPI_MAX,MPI_COMM_WORLD);
+    }
 #else
    // Copy from Found_zeta to All_found_zeta which is used in
    // create_external_elements later on

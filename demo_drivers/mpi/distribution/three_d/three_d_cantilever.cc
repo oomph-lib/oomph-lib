@@ -1041,7 +1041,34 @@ int main(int argc, char **argv)
 
 #ifdef OOMPH_HAS_MPI
      //Distribute it
-     problem.distribute(mesh_doc_info,report_stats);
+     std::ifstream input_file;
+     std::ofstream output_file;
+     char filename[100];
+
+     // Get partition from file
+     unsigned n_partition=problem.mesh_pt()->nelement();
+     Vector<unsigned> element_partition(n_partition);
+     sprintf(filename,"three_d_cantilever_%i_partition.dat",0+i*ncase);
+     input_file.open(filename);
+     std::string input_string;
+     for (unsigned e=0;e<n_partition;e++)
+      {
+       getline(input_file,input_string,'\n');
+       element_partition[e]=atoi(input_string.c_str());
+      }
+
+//     Vector<unsigned> out_element_partition;
+     problem.distribute(mesh_doc_info,report_stats,element_partition);
+//                         out_element_partition);
+
+//      sprintf(filename,"out_three_d_cantilever_%i_partition.dat",0+i*ncase);
+//      output_file.open(filename);
+//      for (unsigned e=0;e<n_partition;e++)
+//       {
+//        output_file << out_element_partition[e] << std::endl;
+//       }
+
+//     problem.distribute(mesh_doc_info,report_stats);
      problem.check_halo_schemes(mesh_doc_info);
      mesh_doc_info.number()++;
 #endif
@@ -1056,7 +1083,33 @@ int main(int argc, char **argv)
 
 #ifdef OOMPH_HAS_MPI
      //Distribute it
-     problem.distribute(mesh_doc_info,report_stats);
+     std::ifstream input_file;
+     std::ofstream output_file;
+     char filename[100];
+
+     // Get partition from file
+     unsigned n_partition=problem.mesh_pt()->nelement();
+     Vector<unsigned> element_partition(n_partition);
+     sprintf(filename,"three_d_cantilever_%i_partition.dat",0+i*ncase);
+     input_file.open(filename);
+     std::string input_string;
+     for (unsigned e=0;e<n_partition;e++)
+      {
+       getline(input_file,input_string,'\n');
+       element_partition[e]=atoi(input_string.c_str());
+      }
+
+//     Vector<unsigned> out_element_partition;
+     problem.distribute(mesh_doc_info,report_stats,element_partition);
+//                         out_element_partition);
+
+//      sprintf(filename,"out_three_d_cantilever_%i_partition.dat",0+i*ncase);
+//      output_file.open(filename);
+//      for (unsigned e=0;e<n_partition;e++)
+//       {
+//        output_file << out_element_partition[e] << std::endl;
+//       }
+//     problem.distribute(mesh_doc_info,report_stats);
      problem.check_halo_schemes(mesh_doc_info);
      mesh_doc_info.number()++;
 #endif
@@ -1074,7 +1127,33 @@ int main(int argc, char **argv)
      
 #ifdef OOMPH_HAS_MPI
      //Distribute it
-     problem.distribute(mesh_doc_info,report_stats);
+     std::ifstream input_file;
+     std::ofstream output_file;
+     char filename[100];
+
+     // Get partition from file
+     unsigned n_partition=problem.mesh_pt()->nelement();
+     Vector<unsigned> element_partition(n_partition);
+     sprintf(filename,"three_d_cantilever_%i_partition.dat",1+i*ncase);
+     input_file.open(filename);
+     std::string input_string;
+     for (unsigned e=0;e<n_partition;e++)
+      {
+       getline(input_file,input_string,'\n');
+       element_partition[e]=atoi(input_string.c_str());
+      }
+
+//     Vector<unsigned> out_element_partition;
+     problem.distribute(mesh_doc_info,report_stats,element_partition);
+//                         out_element_partition);
+
+//      sprintf(filename,"out_three_d_cantilever_%i_partition.dat",1+i*ncase);
+//      output_file.open(filename);
+//      for (unsigned e=0;e<n_partition;e++)
+//       {
+//        output_file << out_element_partition[e] << std::endl;
+//       }
+//     problem.distribute(mesh_doc_info,report_stats);
      problem.check_halo_schemes(mesh_doc_info);
      mesh_doc_info.number()++;
 #endif
@@ -1089,7 +1168,33 @@ int main(int argc, char **argv)
      
 #ifdef OOMPH_HAS_MPI
      //Distribute it
-     problem.distribute(mesh_doc_info,report_stats);
+     std::ifstream input_file;
+     std::ofstream output_file;
+     char filename[100];
+
+     // Get partition from file
+     unsigned n_partition=problem.mesh_pt()->nelement();
+     Vector<unsigned> element_partition(n_partition);
+     sprintf(filename,"three_d_cantilever_%i_partition.dat",0+i*ncase);
+     input_file.open(filename);
+     std::string input_string;
+     for (unsigned e=0;e<n_partition;e++)
+      {
+       getline(input_file,input_string,'\n');
+       element_partition[e]=atoi(input_string.c_str());
+      }
+
+//     Vector<unsigned> out_element_partition;
+     problem.distribute(mesh_doc_info,report_stats,element_partition);
+//                         out_element_partition);
+
+//      sprintf(filename,"out_three_d_cantilever_%i_partition.dat",1+i*ncase);
+//      output_file.open(filename);
+//      for (unsigned e=0;e<n_partition;e++)
+//       {
+//        output_file << out_element_partition[e] << std::endl;
+//       }
+//     problem.distribute(mesh_doc_info,report_stats);
      problem.check_halo_schemes(mesh_doc_info);
      mesh_doc_info.number()++;
 #endif
@@ -1159,7 +1264,33 @@ int main(int argc, char **argv)
      
 #ifdef OOMPH_HAS_MPI
      //Distribute it
-     problem.distribute(mesh_doc_info,report_stats);
+     std::ifstream input_file;
+     std::ofstream output_file;
+     char filename[100];
+
+     // Get partition from file
+     unsigned n_partition=problem.mesh_pt()->nelement();
+     Vector<unsigned> element_partition(n_partition);
+     sprintf(filename,"three_d_cantilever_%i_partition.dat",3+i*ncase);
+     input_file.open(filename);
+     std::string input_string;
+     for (unsigned e=0;e<n_partition;e++)
+      {
+       getline(input_file,input_string,'\n');
+       element_partition[e]=atoi(input_string.c_str());
+      }
+
+//     Vector<unsigned> out_element_partition;
+     problem.distribute(mesh_doc_info,report_stats,element_partition);
+//                         out_element_partition);
+
+//      sprintf(filename,"out_three_d_cantilever_%i_partition.dat",3+i*ncase);
+//      output_file.open(filename);
+//      for (unsigned e=0;e<n_partition;e++)
+//       {
+//        output_file << out_element_partition[e] << std::endl;
+//       }
+//     problem.distribute(mesh_doc_info,report_stats);
      problem.check_halo_schemes(mesh_doc_info);
      mesh_doc_info.number()++;
 #endif
@@ -1174,7 +1305,33 @@ int main(int argc, char **argv)
      
 #ifdef OOMPH_HAS_MPI
      //Distribute it
-     problem.distribute(mesh_doc_info,report_stats);
+     std::ifstream input_file;
+     std::ofstream output_file;
+     char filename[100];
+
+     // Get partition from file
+     unsigned n_partition=problem.mesh_pt()->nelement();
+     Vector<unsigned> element_partition(n_partition);
+     sprintf(filename,"three_d_cantilever_%i_partition.dat",3+i*ncase);
+     input_file.open(filename);
+     std::string input_string;
+     for (unsigned e=0;e<n_partition;e++)
+      {
+       getline(input_file,input_string,'\n');
+       element_partition[e]=atoi(input_string.c_str());
+      }
+
+//     Vector<unsigned> out_element_partition;
+     problem.distribute(mesh_doc_info,report_stats,element_partition);
+//                         out_element_partition);
+
+//      sprintf(filename,"out_three_d_cantilever_%i_partition.dat",3+i*ncase);
+//      output_file.open(filename);
+//      for (unsigned e=0;e<n_partition;e++)
+//       {
+//        output_file << out_element_partition[e] << std::endl;
+//       }
+//     problem.distribute(mesh_doc_info,report_stats);
      problem.check_halo_schemes(mesh_doc_info);
      mesh_doc_info.number()++;
 #endif
@@ -1193,7 +1350,33 @@ int main(int argc, char **argv)
      
 #ifdef OOMPH_HAS_MPI
      //Distribute it
-     problem.distribute(mesh_doc_info,report_stats);
+     std::ifstream input_file;
+     std::ofstream output_file;
+     char filename[100];
+
+     // Get partition from file
+     unsigned n_partition=problem.mesh_pt()->nelement();
+     Vector<unsigned> element_partition(n_partition);
+     sprintf(filename,"three_d_cantilever_%i_partition.dat",4+i*ncase);
+     input_file.open(filename);
+     std::string input_string;
+     for (unsigned e=0;e<n_partition;e++)
+      {
+       getline(input_file,input_string,'\n');
+       element_partition[e]=atoi(input_string.c_str());
+      }
+
+//     Vector<unsigned> out_element_partition;
+     problem.distribute(mesh_doc_info,report_stats,element_partition);
+//                         out_element_partition);
+
+//      sprintf(filename,"out_three_d_cantilever_%i_partition.dat",4+i*ncase);
+//      output_file.open(filename);
+//      for (unsigned e=0;e<n_partition;e++)
+//       {
+//        output_file << out_element_partition[e] << std::endl;
+//       }
+//     problem.distribute(mesh_doc_info,report_stats);
      problem.check_halo_schemes(mesh_doc_info);
      mesh_doc_info.number()++;
 #endif
@@ -1208,7 +1391,33 @@ int main(int argc, char **argv)
      
 #ifdef OOMPH_HAS_MPI
      //Distribute it
-     problem.distribute(mesh_doc_info,report_stats);
+     std::ifstream input_file;
+     std::ofstream output_file;
+     char filename[100];
+
+     // Get partition from file
+     unsigned n_partition=problem.mesh_pt()->nelement();
+     Vector<unsigned> element_partition(n_partition);
+     sprintf(filename,"three_d_cantilever_%i_partition.dat",4+i*ncase);
+     input_file.open(filename);
+     std::string input_string;
+     for (unsigned e=0;e<n_partition;e++)
+      {
+       getline(input_file,input_string,'\n');
+       element_partition[e]=atoi(input_string.c_str());
+      }
+
+//     Vector<unsigned> out_element_partition;
+     problem.distribute(mesh_doc_info,report_stats,element_partition);
+//                         out_element_partition);
+
+//      sprintf(filename,"out_three_d_cantilever_%i_partition.dat",4+i*ncase);
+//      output_file.open(filename);
+//      for (unsigned e=0;e<n_partition;e++)
+//       {
+//        output_file << out_element_partition[e] << std::endl;
+//       }
+//     problem.distribute(mesh_doc_info,report_stats);
      problem.check_halo_schemes(mesh_doc_info);
      mesh_doc_info.number()++;
 #endif

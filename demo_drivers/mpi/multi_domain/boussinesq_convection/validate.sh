@@ -16,6 +16,7 @@ rm -r -f Validation
 mkdir Validation
 
 cd Validation
+cp ../*partition.dat .
 
 # Validation for Boussinesq convection problem using multi-domain method
 #-----------------------------------------------------------------------

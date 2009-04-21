@@ -148,12 +148,35 @@ namespace oomph
  //==================================================================
  /// Distribute the problem and doc
  //==================================================================
- void Problem::distribute(DocInfo& doc_info, const bool& report_stats)
+ Vector<unsigned>& Problem::distribute(const bool& report_stats)
+  {
+   // Set dummy paramemters
+   DocInfo doc_info;
+   doc_info.doc_flag()=false;
+   // Set the sizes of the input and output vectors
+   unsigned n_element=mesh_pt()->nelement();
+   Vector<unsigned> element_partition(n_element,0);
+   Element_partition.resize(n_element);
+   Element_partition=distribute(doc_info,report_stats,element_partition);
+
+   return Element_partition;
+  }
+
+ //==================================================================
+ /// Distribute the problem and doc
+ //==================================================================
+ Vector<unsigned>& Problem::distribute
+ (DocInfo& doc_info,const bool& report_stats,
+  const Vector<unsigned>& element_partition)
  {
   // Call actions before distribute
   actions_before_distribute();
 
   int n_element=mesh_pt()->nelement();
+
+  // Vector to be returned
+  Element_partition.resize(n_element);
+
   if (MPI_Helpers::Nproc==1)
    {
     if (report_stats)
@@ -191,8 +214,25 @@ namespace oomph
     unsigned nelem=orig_nelem;
     Vector<unsigned> element_domain(nelem);
 
-    // Partition the mesh
-    partition_global_mesh(global_mesh_pt,doc_info,element_domain);
+    // Partition the mesh, unless the partition has already been passed in
+    // If it hasn't then the sum of all the entries of the vector should be 0
+    unsigned sum_element_partition=0;
+    for (unsigned e=0;e<nelem;e++)
+     {
+      sum_element_partition+=element_partition[e];
+     }
+    if (sum_element_partition==0)
+     {
+      partition_global_mesh(global_mesh_pt,doc_info,element_domain);
+     }
+    else
+     {
+      oomph_info << "INFO: using pre-set partition of elements" << std::endl;
+      element_domain=element_partition;
+     }
+
+    // Set the returned vector
+    Element_partition=element_domain;
 
     // Prepare vector of vectors for submesh element domains
     unsigned n_mesh=nsub_mesh();
@@ -342,6 +382,10 @@ namespace oomph
   // Re-assign the equation numbers (incl synchronisation if reqd)
   oomph_info << "Number of equations: " << assign_eqn_numbers()
              << std::endl;
+
+  // Return the partition vector
+  return Element_partition;
+
  }
 
  //==================================================================
@@ -512,55 +556,56 @@ namespace oomph
  //==================================================================
  void Problem::prune_halo_elements_and_nodes(DocInfo& doc_info, 
                                              const bool& report_stats)
- {
-  
-  // Distribution required?
+ {  
+  // Has the problem been distributed yet?
   if (!Problem_has_been_distributed)
    {
     oomph_info 
-     << "Problem::prune_halo_elements_and_nodes() was called on a "
+     << "WARNING: Problem::prune_halo_elements_and_nodes() was called on a "
      << "non-distributed Problem!" << std::endl;
-    oomph_info << "Calling Problem::distribute() first..." << std::endl;
-    distribute(doc_info,report_stats);
-   }
-
-  // There's no point in redistributing if it's a single-process job   
-  if (MPI_Helpers::Nproc==1)
-   {
-    oomph_info << "WARNING: You've tried to re-distribute a problem over\n"
-               << "only one processor: this is unnecessary.\n" 
-               << "Ignoring your request for re-distribution."
-               << std::endl << std::endl;
+    oomph_info << "Ignoring your request..." << std::endl;
    }
   else
    {
-    // Call actions before distribute
-    actions_before_distribute();
-
-    // Prune the halo elements and nodes of the mesh(es)
-    unsigned n_mesh=nsub_mesh();
-    if (n_mesh==0)
+    // There's no point in redistributing if it's a single-process job   
+    if (MPI_Helpers::Nproc==1)
      {
-      // Prune halo elements and nodes for the (single) global mesh
-      mesh_pt()->prune_halo_elements_and_nodes(doc_info,report_stats);
+      oomph_info << "WARNING: You've tried to re-distribute a problem over\n"
+                 << "only one processor: this is unnecessary.\n" 
+                 << "Ignoring your request for re-distribution."
+                 << std::endl << std::endl;
      }
     else
      {
-      // Loop over individual submeshes and prune separately
-      for (unsigned i_mesh=0; i_mesh<n_mesh; i_mesh++)
+      // Call actions before distribute
+      actions_before_distribute();
+
+      // Prune the halo elements and nodes of the mesh(es)
+      unsigned n_mesh=nsub_mesh();
+      if (n_mesh==0)
        {
-        mesh_pt(i_mesh)->prune_halo_elements_and_nodes(doc_info,report_stats);
+        // Prune halo elements and nodes for the (single) global mesh
+        mesh_pt()->prune_halo_elements_and_nodes(doc_info,report_stats);
+       }
+      else
+       {
+        // Loop over individual submeshes and prune separately
+        for (unsigned i_mesh=0; i_mesh<n_mesh; i_mesh++)
+         {
+          mesh_pt(i_mesh)->
+           prune_halo_elements_and_nodes(doc_info,report_stats);
+         }
+
+        // Rebuild the global mesh
+        rebuild_global_mesh();
        }
 
-      // Rebuild the global mesh
-      rebuild_global_mesh();
-     }
-
-    // Call actions after distribute
-    actions_after_distribute();
+      // Call actions after distribute
+      actions_after_distribute();
   
-    // Re-assign the equation numbers (incl synchronisation if reqd)
-    oomph_info << "Number of equations: " << assign_eqn_numbers() << std::endl;
+      // Re-assign the equation numbers (incl synchronisation if reqd)
+      oomph_info << "No. of equations: " << assign_eqn_numbers() << std::endl;
+     }
    }
 
  }
@@ -7835,7 +7880,7 @@ void Problem::newton_solve(const unsigned &max_adapt)
      // refinement or unrefinement to perform
      unsigned total_refined=0;
      unsigned total_unrefined=0;
-     if (mesh_pt()->mesh_has_been_distributed())
+     if (Problem_has_been_distributed)
       {
        MPI_Allreduce(&n_refined,&total_refined,1,MPI_INT,MPI_SUM,
                      MPI_COMM_WORLD);
@@ -8060,8 +8105,11 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
      MPI_Send(&count,1,MPI_INT,rank,0,MPI_COMM_WORLD);
 
      // Send it across
-     MPI_Send(&values_on_other_proc[0],count,MPI_DOUBLE,rank,1,
-              MPI_COMM_WORLD);
+     if (count!=0)
+      {
+       MPI_Send(&values_on_other_proc[0],count,MPI_DOUBLE,rank,1,
+                MPI_COMM_WORLD);
+      }
      
      // Now loop over haloed elements and prepare to send internal data
      Vector<FiniteElement*> haloed_elem_pt=mesh_pt->haloed_element_pt(rank);
@@ -8101,8 +8149,11 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
      MPI_Send(&count_intern,1,MPI_INT,rank,2,MPI_COMM_WORLD);
 
      // now send the vector itself
-     MPI_Send(&internal_values_on_other_proc[0],count_intern,MPI_DOUBLE,rank,3,
-              MPI_COMM_WORLD);
+     if (count_intern!=0)
+      {
+       MPI_Send(&internal_values_on_other_proc[0],count_intern,MPI_DOUBLE,rank,
+                3,MPI_COMM_WORLD);
+      }
   
      // done
     }
@@ -8125,68 +8176,71 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
          unsigned count;
          MPI_Recv(&count,1,MPI_INT,send_rank,0,MPI_COMM_WORLD,&status);
 
-         // Prepare vector for receipt of values
-         values_on_other_proc.resize(count);
-      
-         // Receive 
-         MPI_Recv(&values_on_other_proc[0],count, MPI_DOUBLE, send_rank,
-                  1, MPI_COMM_WORLD,&status);
-
-         // Copy into the values of the halo nodes
-         // on the present processors
-         count=0; // reset array index counter to zero
-         for (unsigned j=0;j<nnod;j++)
+         if (count!=0)
           {
-           // Generalised to variable number of values per node
-           Node* halo_nod_pt=mesh_pt->halo_node_pt(send_rank,j);
+           // Prepare vector for receipt of values
+           values_on_other_proc.resize(count);
+      
+           // Receive 
+           MPI_Recv(&values_on_other_proc[0],count, MPI_DOUBLE, send_rank,
+                    1, MPI_COMM_WORLD,&status);
 
-           // Does the node have a timestepper?  Synchronise all history values
-           unsigned n_prev=1;
-           if (halo_nod_pt->time_stepper_pt()!=0)
+           // Copy into the values of the halo nodes
+           // on the present processors
+           count=0; // reset array index counter to zero
+           for (unsigned j=0;j<nnod;j++)
             {
-             n_prev+=halo_nod_pt->time_stepper_pt()->nprev_values();
-            }
+             // Generalised to variable number of values per node
+             Node* halo_nod_pt=mesh_pt->halo_node_pt(send_rank,j);
 
-           unsigned nval=halo_nod_pt->nvalue();
-        
-           for (unsigned ival=0;ival<nval;ival++)
-            {
-             for (unsigned t=0;t<n_prev;t++)
+             // If the node has a timestepper, synchronise all history values
+             unsigned n_prev=1;
+             if (halo_nod_pt->time_stepper_pt()!=0)
               {
-               halo_nod_pt->set_value(t,ival,values_on_other_proc[count]);
-               count++; // increase array index
+               n_prev+=halo_nod_pt->time_stepper_pt()->nprev_values();
               }
-            }
 
-           // Is this a solid node?
-           SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(halo_nod_pt);
-
-           if (solid_nod_pt!=0)
-            {
-             unsigned nval=solid_nod_pt->variable_position_pt()->nvalue();
+             unsigned nval=halo_nod_pt->nvalue();
+        
              for (unsigned ival=0;ival<nval;ival++)
               {
                for (unsigned t=0;t<n_prev;t++)
                 {
-                 solid_nod_pt->variable_position_pt()->set_value(t,ival,
-                  values_on_other_proc[count]);
-                 count++;
+                 halo_nod_pt->set_value(t,ival,values_on_other_proc[count]);
+                 count++; // increase array index
                 }
               }
 
-             // Synchronise positions too
-             unsigned n_dim=solid_nod_pt->ndim();
-             for (unsigned i_dim=0;i_dim<n_dim;i_dim++)
+             // Is this a solid node?
+             SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(halo_nod_pt);
+
+             if (solid_nod_pt!=0)
               {
-               for (unsigned t=0;t<n_prev;t++)
+               unsigned nval=solid_nod_pt->variable_position_pt()->nvalue();
+               for (unsigned ival=0;ival<nval;ival++)
                 {
-                 solid_nod_pt->x(t,i_dim)=values_on_other_proc[count];
-                 count++;
+                 for (unsigned t=0;t<n_prev;t++)
+                  {
+                   solid_nod_pt->variable_position_pt()->set_value(t,ival,
+                                                                   values_on_other_proc[count]);
+                   count++;
+                  }
                 }
+
+               // Synchronise positions too
+               unsigned n_dim=solid_nod_pt->ndim();
+               for (unsigned i_dim=0;i_dim<n_dim;i_dim++)
+                {
+                 for (unsigned t=0;t<n_prev;t++)
+                  {
+                   solid_nod_pt->x(t,i_dim)=values_on_other_proc[count];
+                   count++;
+                  }
+                }
+
               }
 
             }
-
           }
 
          // Get number of halo elements whose non-halo is on process send_rank
@@ -8199,35 +8253,38 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
          MPI_Recv(&count_intern,1,MPI_INT,send_rank,2,MPI_COMM_WORLD,&status);
 
          // Prepare and receive vector
-         internal_values_on_other_proc.resize(count_intern);
-         MPI_Recv(&internal_values_on_other_proc[0],count_intern,
-                  MPI_DOUBLE,send_rank,3,MPI_COMM_WORLD,&status);
-
-         // reset array counter index to zero
-         count_intern=0;
-         for (unsigned e=0;e<nelem_halo;e++)
+         if (count_intern!=0)
           {
-           unsigned nintern_data=halo_elem_pt[e]->ninternal_data();
-           for (unsigned iintern=0;iintern<nintern_data;iintern++)
+           internal_values_on_other_proc.resize(count_intern);
+           MPI_Recv(&internal_values_on_other_proc[0],count_intern,
+                    MPI_DOUBLE,send_rank,3,MPI_COMM_WORLD,&status);
+
+           // reset array counter index to zero
+           count_intern=0;
+           for (unsigned e=0;e<nelem_halo;e++)
             {
-             // Cache internal_data local copy
-             Data* int_data_pt=halo_elem_pt[e]->internal_data_pt(iintern);
-
-             // Does the data have a timestepper?
-             unsigned n_prev=1;
-             if (int_data_pt->time_stepper_pt()!=0)
+             unsigned nintern_data=halo_elem_pt[e]->ninternal_data();
+             for (unsigned iintern=0;iintern<nintern_data;iintern++)
               {
-               n_prev+=int_data_pt->time_stepper_pt()->nprev_values();
-              }
+               // Cache internal_data local copy
+               Data* int_data_pt=halo_elem_pt[e]->internal_data_pt(iintern);
 
-             unsigned nval=int_data_pt->nvalue();
-             for (unsigned ival=0;ival<nval;ival++)
-              {
-               for (unsigned t=0;t<n_prev;t++)
+               // Does the data have a timestepper?
+               unsigned n_prev=1;
+               if (int_data_pt->time_stepper_pt()!=0)
                 {
-                 int_data_pt->set_value
-                  (t,ival,internal_values_on_other_proc[count_intern]);
-                 count_intern++;
+                 n_prev+=int_data_pt->time_stepper_pt()->nprev_values();
+                }
+
+               unsigned nval=int_data_pt->nvalue();
+               for (unsigned ival=0;ival<nval;ival++)
+                {
+                 for (unsigned t=0;t<n_prev;t++)
+                  {
+                   int_data_pt->set_value
+                    (t,ival,internal_values_on_other_proc[count_intern]);
+                   count_intern++;
+                  }
                 }
               }
             }
@@ -8753,9 +8810,12 @@ void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
      // receiving the vector
      MPI_Send(&count,1,MPI_INT,rank,0,MPI_COMM_WORLD);
 
-     // Send it across
-     MPI_Send(&eqn_numbers_on_other_proc[0],count,MPI_INT,rank,1,
-              MPI_COMM_WORLD);
+     if (count!=0)
+      {
+       // Send it across
+       MPI_Send(&eqn_numbers_on_other_proc[0],count,MPI_INT,rank,1,
+                MPI_COMM_WORLD);
+      }
 
      // now loop over haloed elements and prepare to send 
      // equation numbers for internal data
@@ -8782,15 +8842,17 @@ void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
           }
         }
       }
-     // Does this cause a problem if count_intern is zero?
-     // Perhaps the vector should only be sent if count_intern is non-zero?
+     // This vector should only be sent if count_intern is non-zero
      
      // send the size of the vector of internal data values to the receiver
      MPI_Send(&count_intern,1,MPI_INT,rank,2,MPI_COMM_WORLD);
 
      // now send the vector itself
-     MPI_Send(&internal_eqn_numbers_on_other_proc[0],count_intern,
-              MPI_INT,rank,3,MPI_COMM_WORLD);
+     if (count_intern!=0)
+      {
+       MPI_Send(&internal_eqn_numbers_on_other_proc[0],count_intern,
+                MPI_INT,rank,3,MPI_COMM_WORLD);
+      }
      // done
 
     }
@@ -8812,43 +8874,46 @@ void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
          unsigned count;
          MPI_Recv(&count,1,MPI_INT,send_rank,0,MPI_COMM_WORLD,&status);
          
-         // Prepare vector for receipt of eqn numbers
-         eqn_numbers_on_other_proc.resize(count);
-         
-         // Receive it
-         MPI_Recv(&eqn_numbers_on_other_proc[0],count,MPI_INT,send_rank,
-                  1, MPI_COMM_WORLD,&status);
-
-         // Copy into the equation numbers of the halo nodes
-         // on the present processors
-         count=0; // reset count for array index
-         for (unsigned j=0;j<nnod;j++)
+         if (count!=0)
           {
-           // Generalise to variable number of values per node
-           Node* halo_nod_pt=mesh_pt->halo_node_pt(send_rank,j);
-           unsigned nval=halo_nod_pt->nvalue();
+           // Prepare vector for receipt of eqn numbers
+           eqn_numbers_on_other_proc.resize(count);
+         
+           // Receive it
+           MPI_Recv(&eqn_numbers_on_other_proc[0],count,MPI_INT,send_rank,
+                    1, MPI_COMM_WORLD,&status);
 
-           for (unsigned ival=0;ival<nval;ival++)
+           // Copy into the equation numbers of the halo nodes
+           // on the present processors
+           count=0; // reset count for array index
+           for (unsigned j=0;j<nnod;j++)
             {
-             halo_nod_pt->eqn_number(ival)=eqn_numbers_on_other_proc[count];
-             count++;
-            }
+             // Generalise to variable number of values per node
+             Node* halo_nod_pt=mesh_pt->halo_node_pt(send_rank,j);
+             unsigned nval=halo_nod_pt->nvalue();
 
-           // Is this a solid node?
-           SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(halo_nod_pt);
-
-           if (solid_nod_pt!=0)
-            {
-             unsigned nval=solid_nod_pt->variable_position_pt()->nvalue();
              for (unsigned ival=0;ival<nval;ival++)
               {
-               solid_nod_pt->variable_position_pt()->eqn_number(ival)=
-                eqn_numbers_on_other_proc[count];
+               halo_nod_pt->eqn_number(ival)=eqn_numbers_on_other_proc[count];
                count++;
               }
-            }
 
+             // Is this a solid node?
+             SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(halo_nod_pt);
+
+             if (solid_nod_pt!=0)
+              {
+               unsigned nval=solid_nod_pt->variable_position_pt()->nvalue();
+               for (unsigned ival=0;ival<nval;ival++)
+                {
+                 solid_nod_pt->variable_position_pt()->eqn_number(ival)=
+                  eqn_numbers_on_other_proc[count];
+                 count++;
+                }
+              }
+            }
           }
+
          // Get number of halo elements whose non-halo is on process send_rank
          Vector<FiniteElement*> halo_elem_pt=mesh_pt->
           halo_element_pt(send_rank);
@@ -8859,26 +8924,29 @@ void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
          MPI_Recv(&count_intern,1,MPI_INT,send_rank,2,MPI_COMM_WORLD,&status);
 
          // Prepare and receive vector
-         internal_eqn_numbers_on_other_proc.resize(count_intern);
-         MPI_Recv(&internal_eqn_numbers_on_other_proc[0],
-                  count_intern,MPI_INT,send_rank,3,MPI_COMM_WORLD,&status);
-
-         // reset array counter index to zero
-         count_intern=0;
-         for (unsigned e=0;e<nelem_halo;e++)
+         if (count_intern!=0)
           {
-           unsigned nintern_data=halo_elem_pt[e]->ninternal_data();
-           for (unsigned iintern=0;iintern<nintern_data;iintern++)
-            {
-             Data* int_data_pt=halo_elem_pt[e]->internal_data_pt(iintern); 
-             // cache internal_data_pt copy
-             unsigned nval=int_data_pt->nvalue();
+           internal_eqn_numbers_on_other_proc.resize(count_intern);
+           MPI_Recv(&internal_eqn_numbers_on_other_proc[0],
+                    count_intern,MPI_INT,send_rank,3,MPI_COMM_WORLD,&status);
 
-             for (unsigned ival=0;ival<nval;ival++)
+           // reset array counter index to zero
+           count_intern=0;
+           for (unsigned e=0;e<nelem_halo;e++)
+            {
+             unsigned nintern_data=halo_elem_pt[e]->ninternal_data();
+             for (unsigned iintern=0;iintern<nintern_data;iintern++)
               {
-               int_data_pt->eqn_number(ival)=
-                internal_eqn_numbers_on_other_proc[count_intern];
-               count_intern++;
+               Data* int_data_pt=halo_elem_pt[e]->internal_data_pt(iintern); 
+               // cache internal_data_pt copy
+               unsigned nval=int_data_pt->nvalue();
+
+               for (unsigned ival=0;ival<nval;ival++)
+                {
+                 int_data_pt->eqn_number(ival)=
+                  internal_eqn_numbers_on_other_proc[count_intern];
+                 count_intern++;
+                }
               }
             }
           }

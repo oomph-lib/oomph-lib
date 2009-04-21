@@ -349,8 +349,32 @@ void parallel_test(const unsigned& n_refine_first,
  t_start = clock();
  if (doc)
   {
+   std::ifstream input_file;
+   std::ofstream output_file;
+
+   // Get the partition to be used from file
+   unsigned n_partition=problem_pt->mesh_pt()->nelement();
+   Vector<unsigned> element_partition(n_partition);
+   sprintf(filename,"two_d_mesh_dist_partition.dat");
+   input_file.open(filename);
+   std::string input_string;
+   for (unsigned e=0;e<n_partition;e++)
+    {
+     getline(input_file,input_string,'\n');
+     element_partition[e]=atoi(input_string.c_str());
+    }
+
+   Vector<unsigned> out_element_partition;
    bool report_stats=false;
-   problem_pt->distribute(doc_info,report_stats);
+   out_element_partition=problem_pt->distribute(doc_info,report_stats,
+                                                element_partition);
+
+   sprintf(filename,"out_two_d_mesh_dist_partition.dat");
+   output_file.open(filename);
+   for (unsigned e=0;e<n_partition;e++)
+    {
+     output_file << out_element_partition[e] << std::endl;
+    }
   }
  else
   {

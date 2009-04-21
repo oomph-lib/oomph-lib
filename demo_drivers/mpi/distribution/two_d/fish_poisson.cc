@@ -210,13 +210,42 @@ void solve_with_incremental_adaptation()
  for (unsigned mym=0;mym<2;mym++)
   {
    // Distribute before next round of refinement
-   if (mym==0) {
-    problem.refine_uniformly();
-    problem.refine_uniformly();
-    oomph_info << "Distributing problem" << std::endl;
-    problem.distribute(mesh_doc_info,report_stats);
-    problem.check_halo_schemes(mesh_doc_info);
-   }
+   if (mym==0) 
+    {
+     problem.refine_uniformly();
+     problem.refine_uniformly();
+
+     oomph_info << "Distributing problem" << std::endl;
+     std::ifstream input_file;
+     std::ofstream output_file;
+     char filename[100];
+
+     // Get the partition to be used from file
+     unsigned n_partition=problem.mesh_pt()->nelement();
+     Vector<unsigned> element_partition(n_partition,0);
+     sprintf(filename,"fish_incremental_partition.dat");
+     input_file.open(filename);
+     std::string input_string;
+     for (unsigned e=0;e<n_partition;e++)
+      {
+       getline(input_file,input_string,'\n');
+       element_partition[e]=atoi(input_string.c_str());
+      }
+
+//     Vector<unsigned> out_element_partition;
+//     bool report_stats=false;
+     problem.distribute(mesh_doc_info,report_stats,element_partition);
+//                        out_element_partition);
+
+//      sprintf(filename,"out_fish_incremental_partition.dat");
+//      output_file.open(filename);
+//      for (unsigned e=0;e<n_partition;e++)
+//       {
+//        output_file << out_element_partition[e] << std::endl;
+//       }
+
+     problem.check_halo_schemes(mesh_doc_info);
+    }
   
    // another round of refinement
    oomph_info << "Refine again..." << std::endl;
@@ -368,25 +397,53 @@ void solve_with_fully_automatic_adaptation()
   oomph_info << "-----------------------------------------" << std::endl;
   oomph_info << "--- Distributing problem (fully auto) ---" << std::endl;
   oomph_info << "-----------------------------------------" << std::endl;
-  problem.distribute(mesh_doc_info,report_stats);
+
+  std::ifstream input_file;
+  std::ofstream output_file;
+  char filename[100];
+
+  // Get the partition to be used from file
+  unsigned n_partition=problem.mesh_pt()->nelement();
+  Vector<unsigned> element_partition(n_partition,0);
+  sprintf(filename,"fish_fully_automatic_partition.dat");
+  input_file.open(filename);
+  std::string input_string;
+  for (unsigned e=0;e<n_partition;e++)
+   {
+    getline(input_file,input_string,'\n');
+    element_partition[e]=atoi(input_string.c_str());
+   }
+
+//  Vector<unsigned> out_element_partition;
+//  bool report_stats=false;
+  problem.distribute(mesh_doc_info,report_stats,element_partition);
+//                     out_element_partition);
+
+//   sprintf(filename,"out_fish_fully_automatic_partition.dat");
+//   output_file.open(filename);
+//   for (unsigned e=0;e<n_partition;e++)
+//    {
+//     output_file << out_element_partition[e] << std::endl;
+//    }
+
   problem.check_halo_schemes(mesh_doc_info);
 
-//    Maximum number of adaptations:
-    unsigned max_adapt=5;
+  //Maximum number of adaptations:
+  unsigned max_adapt=5;
 
-    oomph_info << "Solve with max_adapt=" << max_adapt << std::endl;
+  oomph_info << "Solve with max_adapt=" << max_adapt << std::endl;
 
-//    Solve the problem; perform up to specified number of adaptations.
-    problem.newton_solve(max_adapt);
+  //Solve the problem; perform up to specified number of adaptations.
+  problem.newton_solve(max_adapt);
 
-    //Output solution
-    oomph_info << "-----------------------" << std::endl;
-    oomph_info << "Now output the solution" << std::endl;
-    oomph_info << "-----------------------" << std::endl;
-    problem.doc_solution(doc_info);   
+  //Output solution
+  oomph_info << "-----------------------" << std::endl;
+  oomph_info << "Now output the solution" << std::endl;
+  oomph_info << "-----------------------" << std::endl;
+  problem.doc_solution(doc_info);   
 
-    //increment doc_info number
-    doc_info.number()++;
+  //increment doc_info number
+  doc_info.number()++;
 
 } // end black box
 
@@ -430,7 +487,35 @@ void solve_with_selected_refinement_pattern()
   oomph_info << "----------------------------------------" << std::endl;
   oomph_info << "--- Distributing problem (selective) ---" << std::endl;
   oomph_info << "----------------------------------------" << std::endl;
-  problem.distribute(mesh_doc_info,report_stats);
+
+  std::ifstream input_file;
+  std::ofstream output_file;
+  char filename[100];
+
+  // Get the partition to be used from file
+  unsigned n_partition=problem.mesh_pt()->nelement();
+  Vector<unsigned> element_partition(n_partition,0);
+  sprintf(filename,"fish_selective_partition.dat");
+  input_file.open(filename);
+  std::string input_string;
+  for (unsigned e=0;e<n_partition;e++)
+   {
+    getline(input_file,input_string,'\n');
+    element_partition[e]=atoi(input_string.c_str());
+   }
+
+//  Vector<unsigned> out_element_partition;
+//  bool report_stats=false;
+  problem.distribute(mesh_doc_info,report_stats,element_partition);
+//                     out_element_partition);
+
+//   sprintf(filename,"out_fish_selective_partition.dat");
+//   output_file.open(filename);
+//   for (unsigned e=0;e<n_partition;e++)
+//    {
+//     output_file << out_element_partition[e] << std::endl;
+//    }
+
   problem.check_halo_schemes(mesh_doc_info);
 
 //   // Test what happens with uniform refinement after distributing

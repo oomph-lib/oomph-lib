@@ -794,10 +794,16 @@ namespace Multi_domain_functions
          if (d!=iproc)
           {
            MPI_Send(&Count_zeta_dim,1,MPI_INT,d,1,MPI_COMM_WORLD);
-           MPI_Send(&Zeta_dim[0],Count_zeta_dim,MPI_INT,
-                    d,3,MPI_COMM_WORLD);
+           if (Count_zeta_dim!=0)
+            {
+             MPI_Send(&Zeta_dim[0],Count_zeta_dim,MPI_INT,
+                      d,3,MPI_COMM_WORLD);
+            }
            MPI_Send(&Count_zetas,1,MPI_INT,d,4,MPI_COMM_WORLD);
-           MPI_Send(&Zetas[0],Count_zetas,MPI_DOUBLE,d,5,MPI_COMM_WORLD);
+           if (Count_zetas!=0)
+            {           
+             MPI_Send(&Zetas[0],Count_zetas,MPI_DOUBLE,d,5,MPI_COMM_WORLD);
+            }
           }
         }
 #endif
@@ -813,14 +819,20 @@ namespace Multi_domain_functions
       {
        // Receive the zeta array from the loop process
        MPI_Recv(&Count_zeta_dim,1,MPI_INT,iproc,1,MPI_COMM_WORLD,&status);
-       Zeta_dim.resize(Count_zeta_dim);
-       MPI_Recv(&Zeta_dim[0],Count_zeta_dim,MPI_INT,iproc,3,
-                MPI_COMM_WORLD,&status);
+       if (Count_zeta_dim!=0)
+        {
+         Zeta_dim.resize(Count_zeta_dim);
+         MPI_Recv(&Zeta_dim[0],Count_zeta_dim,MPI_INT,iproc,3,
+                  MPI_COMM_WORLD,&status);
+        }
 
        MPI_Recv(&Count_zetas,1,MPI_INT,iproc,4,MPI_COMM_WORLD,&status);
-       Zetas.resize(Count_zetas);
-       MPI_Recv(&Zetas[0],Count_zetas,MPI_DOUBLE,iproc,5,
-                MPI_COMM_WORLD,&status);
+       if (Count_zetas!=0)
+        {       
+         Zetas.resize(Count_zetas);
+         MPI_Recv(&Zetas[0],Count_zetas,MPI_DOUBLE,iproc,5,
+                  MPI_COMM_WORLD,&status);
+        }
       }
 #endif
     }
@@ -861,28 +873,43 @@ namespace Multi_domain_functions
         {
          MPI_Recv(&Count_double_values,1,MPI_INT,d,1,MPI_COMM_WORLD,&status);
          All_count_double_values[d]=Count_double_values;
-         All_double_values[d].resize(Count_double_values);
 
-         MPI_Recv(&All_double_values[d][0],Count_double_values,MPI_DOUBLE,d,2,
-                  MPI_COMM_WORLD,&status);
+         if (Count_double_values!=0)
+          {
+           All_double_values[d].resize(Count_double_values);
 
-         All_located_zetas[d].resize(Count_zeta_dim);
-         MPI_Recv(&All_located_zetas[d][0],Count_zeta_dim,MPI_INT,d,3,
-                  MPI_COMM_WORLD,&status);
+           MPI_Recv(&All_double_values[d][0],Count_double_values,MPI_DOUBLE,d,
+                    2,MPI_COMM_WORLD,&status);
+          }
+
+         if (Count_zeta_dim!=0)
+          {
+           All_located_zetas[d].resize(Count_zeta_dim);
+           MPI_Recv(&All_located_zetas[d][0],Count_zeta_dim,MPI_INT,d,3,
+                    MPI_COMM_WORLD,&status);
+          }
 
          MPI_Recv(&Count_located_coord,1,MPI_INT,d,4,
                   MPI_COMM_WORLD,&status);
+
          All_count_located_coord[d]=Count_located_coord;
-         All_located_coord[d].resize(Count_located_coord);
-         MPI_Recv(&All_located_coord[d][0],Count_located_coord,MPI_DOUBLE,d,5,
-                  MPI_COMM_WORLD,&status);
+         if (Count_located_coord!=0)
+          {
+           All_located_coord[d].resize(Count_located_coord);
+           MPI_Recv(&All_located_coord[d][0],Count_located_coord,MPI_DOUBLE,d,
+                    5,MPI_COMM_WORLD,&status);
+          }
 
          MPI_Recv(&Count_unsigned_values,1,MPI_INT,d,14,
                   MPI_COMM_WORLD,&status);
+
          All_count_unsigned_values[d]=Count_unsigned_values;
-         All_unsigned_values[d].resize(Count_unsigned_values);
-         MPI_Recv(&All_unsigned_values[d][0],Count_unsigned_values,MPI_INT,
-                  d,15,MPI_COMM_WORLD,&status);
+         if (Count_unsigned_values!=0)
+          {
+           All_unsigned_values[d].resize(Count_unsigned_values);
+           MPI_Recv(&All_unsigned_values[d][0],Count_unsigned_values,MPI_INT,
+                    d,15,MPI_COMM_WORLD,&status);
+          }
 
         }
       }
@@ -896,19 +923,31 @@ namespace Multi_domain_functions
      // (Note that the order is preserved due to the found_zeta[..] array)
 
      MPI_Send(&Count_double_values,1,MPI_INT,iproc,1,MPI_COMM_WORLD);
-     MPI_Send(&Double_values[0],Count_double_values,MPI_DOUBLE,iproc,2,
-              MPI_COMM_WORLD);
+     if (Count_double_values!=0)
+      {
+       MPI_Send(&Double_values[0],Count_double_values,MPI_DOUBLE,iproc,2,
+                MPI_COMM_WORLD);
+      }
 
-     MPI_Send(&Located_element[0],Count_zeta_dim,MPI_INT,
-              iproc,3,MPI_COMM_WORLD);
+     if (Count_zeta_dim!=0)
+      {
+       MPI_Send(&Located_element[0],Count_zeta_dim,MPI_INT,
+                iproc,3,MPI_COMM_WORLD);
+      }
 
      MPI_Send(&Count_located_coord,1,MPI_INT,iproc,4,MPI_COMM_WORLD);
-     MPI_Send(&Located_coord[0],Count_located_coord,MPI_DOUBLE,
-              iproc,5,MPI_COMM_WORLD);
+     if (Count_located_coord!=0)
+      {     
+       MPI_Send(&Located_coord[0],Count_located_coord,MPI_DOUBLE,
+                iproc,5,MPI_COMM_WORLD);
+      }
 
      MPI_Send(&Count_unsigned_values,1,MPI_INT,iproc,14,MPI_COMM_WORLD);
-     MPI_Send(&Unsigned_values[0],Count_unsigned_values,MPI_INT,iproc,15,
-              MPI_COMM_WORLD);
+     if (Count_unsigned_values!=0)
+      {     
+       MPI_Send(&Unsigned_values[0],Count_unsigned_values,MPI_INT,iproc,15,
+                MPI_COMM_WORLD);
+      }
 
     }
 

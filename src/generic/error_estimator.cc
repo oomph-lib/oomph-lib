@@ -1234,8 +1234,11 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
         haloed_elem_error[e]=elemental_error[element_num];
        }
       // Send the haloed_elem_error vector
-      MPI_Send(&haloed_elem_error[0],nelem_haloed,MPI_DOUBLE,iproc,0,
-               MPI_COMM_WORLD);
+      if (nelem_haloed!=0)
+       {
+        MPI_Send(&haloed_elem_error[0],nelem_haloed,MPI_DOUBLE,iproc,0,
+                 MPI_COMM_WORLD);
+       }
      }
     else // iproc=MPI_Helpers::My_rank, so receive errors from others
      {
@@ -1250,16 +1253,19 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
           Vector<double> halo_elem_error(nelem_halo);
 
           // Receive the elem_error vector from process send_rank
-          MPI_Recv(&halo_elem_error[0],nelem_halo,MPI_DOUBLE,send_rank,0,
-                   MPI_COMM_WORLD,&status);
-
-          for (int e=0; e<nelem_halo; e++)
+          if (nelem_halo!=0)
            {
-            // Find element number
-            element_num=elem_num[dynamic_cast<ElementWithZ2ErrorEstimator*>
-                                 (halo_elem_pt[e])];
-            // Put the error in this location
-            elemental_error[element_num]=halo_elem_error[e];
+            MPI_Recv(&halo_elem_error[0],nelem_halo,MPI_DOUBLE,send_rank,0,
+                     MPI_COMM_WORLD,&status);
+
+            for (int e=0; e<nelem_halo; e++)
+             {
+              // Find element number
+              element_num=elem_num[dynamic_cast<ElementWithZ2ErrorEstimator*>
+                                   (halo_elem_pt[e])];
+              // Put the error in this location
+              elemental_error[element_num]=halo_elem_error[e];
+             }
            }
          }
        }

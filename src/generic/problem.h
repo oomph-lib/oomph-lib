@@ -469,6 +469,9 @@ protected:
  /// Has the problem been distributed amongst multiple processors?
  bool Problem_has_been_distributed;
 
+ /// Vector of the partitioning of the elements
+ Vector<unsigned> Element_partition;
+
   public:
 
  /// access function to the problem has been distributed flag
@@ -1075,17 +1078,14 @@ protected:
    check_halo_schemes(tmp_doc_info);
   }
 
- /// Distribute the problem and doc
- void distribute(DocInfo& doc_info, 
-                 const bool& report_stats);
+ /// Distribute the problem and doc; returns a vector which
+ /// details the partitioning
+ Vector<unsigned>& distribute(DocInfo& doc_info, const bool& report_stats,
+                              const Vector<unsigned>& element_partition);
  
- /// Distribute the problem
- void distribute(const bool& report_stats=false)
-  {
-   DocInfo doc_info;
-   doc_info.doc_flag()=false;
-   distribute(doc_info,report_stats);
-  }
+ /// Distribute the problem; returns a vector which
+ /// details the partitioning
+ Vector<unsigned>& distribute(const bool& report_stats=false);
 
  /// /short Partition the global mesh, return vector specifying the processor
  /// number for each element. Virtual so that it can be overloaded by

@@ -877,7 +877,37 @@ void FSIRingProblem::dynamic_run()
 
 #ifdef OOMPH_HAS_MPI
  // Now distribute the (still uniformly refined) problem
- distribute();
+ std::ifstream input_file;
+ std::ofstream output_file;
+ char filename[100];
+
+ // Get partition from file
+ unsigned n_partition=mesh_pt()->nelement();
+ Vector<unsigned> element_partition(n_partition);
+ sprintf(filename,"fsi_osc_ring_partition.dat");
+ input_file.open(filename);
+ std::string input_string;
+ for (unsigned e=0;e<n_partition;e++)
+  {
+   getline(input_file,input_string,'\n');
+   element_partition[e]=atoi(input_string.c_str());
+  }
+
+// Vector<unsigned> out_element_partition;
+ bool report_stats=false;
+ DocInfo mesh_doc_info;
+ mesh_doc_info.doc_flag()=false;
+ distribute(mesh_doc_info,report_stats,element_partition);
+//             out_element_partition);
+
+//  sprintf(filename,"out_fsi_osc_ring_partition.dat");
+//  output_file.open(filename);
+//  for (unsigned e=0;e<n_partition;e++)
+//   {
+//    output_file << out_element_partition[e] << std::endl;
+//   }
+
+// distribute();
 #endif
 
 //  {

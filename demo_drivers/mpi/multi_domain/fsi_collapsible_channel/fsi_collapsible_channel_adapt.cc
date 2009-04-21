@@ -1153,7 +1153,41 @@ int main(int argc, char* argv[])
 
 #ifdef OOMPH_HAS_MPI
  // Distribute the problem
- problem.distribute();
+ std::ifstream input_file;
+ std::ofstream output_file;
+// char filename[100];
+
+ /// Only the fluid and solid meshes were partitioned
+ unsigned n_partition=(problem.bulk_mesh_pt()->nelement())+
+  (problem.wall_mesh_pt()->nelement());
+
+ // Get partition from file
+ Vector<unsigned> element_partition(n_partition,0);
+ sprintf(filename,"fsi_collapsible_channel_partition.dat");
+ input_file.open(filename);
+ std::string input_string;
+ for (unsigned e=0;e<n_partition;e++)
+  {
+   getline(input_file,input_string,'\n');
+   element_partition[e]=atoi(input_string.c_str());
+  }
+
+// Vector<unsigned> out_element_partition(n_partition);
+ bool report_stats=false;
+ DocInfo mesh_doc_info;
+ mesh_doc_info.doc_flag()=false;
+ problem.distribute(mesh_doc_info,report_stats,element_partition);
+//                     out_element_partition);
+
+//  sprintf(filename,"out_fsi_collapsible_channel_partition.dat");
+//  output_file.open(filename);
+//  for (unsigned e=0;e<n_partition;e++)
+//   {
+//    output_file << out_element_partition[e] << std::endl;
+//   }
+
+
+// problem.distribute();
 
  // Check halo schemes (on submeshes)
  problem.check_halo_schemes(); 

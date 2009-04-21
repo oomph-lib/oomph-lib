@@ -506,10 +506,40 @@ int main(int argc, char* argv[])
 
 #ifdef OOMPH_HAS_MPI
  // Distribute the problem
- problem.distribute();
  DocInfo mesh_doc_info;
  mesh_doc_info.set_directory("RESLT_MESH");
  mesh_doc_info.number()=38;
+
+ std::ifstream input_file;
+ std::ofstream output_file;
+ char filename[100];
+
+ /// Only the solid ("bulk") mesh was distributed
+ unsigned n_partition=problem.solid_mesh_pt()->nelement();
+
+ // Get the partition from file
+ Vector<unsigned> element_partition(n_partition);
+ sprintf(filename,"presc_displ_lagr_mult_partition.dat");
+ input_file.open(filename);
+ std::string input_string;
+ for (unsigned e=0;e<n_partition;e++)
+  {
+   getline(input_file,input_string,'\n');
+   element_partition[e]=atoi(input_string.c_str());
+  }
+
+// Vector<unsigned> out_element_partition;
+ bool report_stats=false;
+ problem.distribute(mesh_doc_info,report_stats,element_partition);
+//                     out_element_partition);
+
+//  sprintf(filename,"out_presc_displ_lagr_mult_partition.dat");
+//  output_file.open(filename);
+//  for (unsigned e=0;e<n_partition;e++)
+//   {
+//    output_file << out_element_partition[e] << std::endl;
+//   }
+
  problem.check_halo_schemes(mesh_doc_info);
 #endif
  

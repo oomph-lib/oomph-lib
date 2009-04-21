@@ -1661,7 +1661,11 @@ void RefineableMeshBase::synchronise_hanging_nodes
 
        // Receive the hanging state of the equivalent halo nodes
        Vector<int> nhalo_hanging(nhd_nod);
-       MPI_Recv(&nhalo_hanging[0],nhd_nod,MPI_INT,d,0,MPI_COMM_WORLD,&status);
+       if (nhd_nod!=0)
+        {
+         MPI_Recv(&nhalo_hanging[0],nhd_nod,MPI_INT,d,0,
+                  MPI_COMM_WORLD,&status);
+        }
 
        // Store these vectors in a vector of length MPI_Helpers::Nproc
        vector_haloed_hanging[d]=nhaloed_hanging;
@@ -1690,7 +1694,10 @@ void RefineableMeshBase::synchronise_hanging_nodes
             }
 
            // send this to the relevant process
-           MPI_Send(&nhalo_hanging[0],nh_nod,MPI_INT,dd,0,MPI_COMM_WORLD);
+           if (nh_nod!=0)
+            {
+             MPI_Send(&nhalo_hanging[0],nh_nod,MPI_INT,dd,0,MPI_COMM_WORLD);
+            }
           }
         }
       }
