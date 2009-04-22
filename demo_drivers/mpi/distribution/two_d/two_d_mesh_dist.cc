@@ -283,7 +283,7 @@ void parallel_test(const unsigned& n_refine_first,
  unsigned max_number_halo_nodes;
  unsigned min_number_halo_nodes;
  
- char filename[100];
+ char filename[200];
  std::ofstream some_file;
 
  DocInfo doc_info;

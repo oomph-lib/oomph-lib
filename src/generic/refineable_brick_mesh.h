@@ -175,7 +175,7 @@ public:
      this->Forest_pt->flush_trees();
 
      // Delete the old Forest
-     delete Forest_pt;
+     delete this->Forest_pt;
 
      // Make a new Forest with the trees_pt roots created earlier
      this->Forest_pt = new OcTreeForest(trees_pt);
