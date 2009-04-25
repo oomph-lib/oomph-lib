@@ -518,7 +518,7 @@ public:
    return AlgebraicMesh::self_test();
   }
 
- /// \short Broken version of the QuarterTubeDomain function 
+ /// \short Broken version of the QuarterTubeDomain function
  /// Function is broken because axial spacing isn't implemented
  /// yet for the Algebraic version of the RefineableQuarterTubeMesh.
  /// Note: this function must be used BEFORE algebraic_node_update(...)

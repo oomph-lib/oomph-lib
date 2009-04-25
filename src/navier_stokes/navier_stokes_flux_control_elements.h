@@ -343,13 +343,6 @@ class NavierStokesFluxControlElement :
    fill_in_generic_residual_contribution_fluid_traction(residuals,jacobian,1);
   }
  
- ///Overload the output function
- void output(std::ostream &outfile) {FiniteElement::output(outfile);}
- 
- /// Output function: x,y,[z],u,v,[w],p in tecplot format
- void output(std::ostream &outfile, const unsigned &nplot)
-  {FiniteElement::output(outfile,nplot);}
-
  /// Function to get the integral of the volume flux
  double get_volume_flux()
   {

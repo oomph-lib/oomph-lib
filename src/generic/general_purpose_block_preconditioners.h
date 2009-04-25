@@ -87,6 +87,9 @@ namespace oomph
      // null the Preconditioner array pt
      Preconditioner_array_pt = 0;
 #endif
+
+     // Don't doc by default
+     Doc_time_during_preconditioner_solve=false;
     }
  
    /// Destructor - delete the preconditioner matrices
@@ -168,6 +171,12 @@ namespace oomph
     }
 #endif
 
+   /// Doc timings in application of block sub-preconditioners
+   bool& doc_time_during_preconditioner_solve()
+   {
+    return Doc_time_during_preconditioner_solve;
+   }
+
    private :
   
     /// \short Vector of SuperLU preconditioner pointers for storing the 
@@ -186,6 +195,10 @@ namespace oomph
    /// Use two level parallelism using the PreconditionerArray
    bool Use_two_level_parallelisation;
 #endif
+
+   /// Doc timings in application of block sub-preconditioners?
+   bool Doc_time_during_preconditioner_solve;
+   
   };
 
 //============================================================================
@@ -321,8 +334,20 @@ namespace oomph
      // solve each diagonal block
      for (unsigned i = 0; i < n_block; i++)
       {
+       double t_start=0.0;
+       if (Doc_time_during_preconditioner_solve)
+        {
+         t_start=TimingHelpers::timer();
+        }
        Diagonal_block_preconditioner_pt[i]->preconditioner_solve(block_r[i],
                                                                  block_z[i]);
+       if (Doc_time_during_preconditioner_solve)
+        {
+         oomph_info << "Time for application of " << i 
+                    << "-th block preconditioner: " 
+                    << TimingHelpers::timer()-t_start 
+                    << std::endl;
+        }
       }
     }
 

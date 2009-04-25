@@ -29,7 +29,7 @@ the two single-physics problems shown at the top of the sketch:
 The flow through a channel with a rigid obstacle (shown on the top left), 
 and the deformation of the elastic obstacle in response to 
 a prescribed surface traction (shown on the top right). When the 
-two constitituent single-physics problems interact, the 
+two constituent single-physics problems interact, the 
 fluid provides the traction onto the solid while the
 change in the solid's shape affects the fluid domain. 
 
@@ -273,12 +273,16 @@ output created here.
 \section main The driver code
 
 We specify an output directory and instantiate the constitutive 
-equation for the solid mechanics computations, specifying a 
-Poisson ratio of 0.3.
+equation for the solid mechanics computations, specifying the
+Poisson ratio. 
+(<a href="../../../solid/solid_theory/html/index.html#non-dim_solid">
+Recall</a> that the omission of Young's modulus \f$ E \f$ in the
+constructor of the constitutive equation implies that all stresses
+and tractions are non-dimensionalised on \f$ E \f$.)
 
 \dontinclude unstructured_two_d_fsi.cc
 \skipline start_of_main
-\until 0.3);
+\until ::Nu);
 
 We create the \c Problem object and output the domain boundaries
 and the initial guess for the solution.

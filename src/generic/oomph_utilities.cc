@@ -239,12 +239,12 @@ void LevenbergMarquardtFitter::fit_it(
 
  if (!quiet)
   {
-   std::cout << "Chi_squared" << " ";
+   oomph_info << "Chi_squared" << " ";
    for (unsigned i=0;i<unsigned(ma);i++)
     { 
-     std::cout << " parameter " << i << " ";
+     oomph_info << " parameter " << i << " ";
     }       
-   std::cout << std::endl;
+   oomph_info << std::endl;
   }
 
  // Start iteration with almda negative for setup

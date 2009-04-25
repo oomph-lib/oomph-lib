@@ -2,6 +2,7 @@
 #-----------------------
 
 
+
 # Define the sources
 sources =  \
 oomph_definitions.cc oomph_utilities.cc \
@@ -34,9 +35,12 @@ triangle_mesh.cc tet_mesh.cc \
 partitioning.cc linear_algebra_distribution.cc double_vector.cc \
 iterative_linear_solver.cc \
 general_purpose_preconditioners.cc block_preconditioner.cc \
-matrix_vector_product.cc
+matrix_vector_product.cc 
 #face_element_as_geometric_object.cc
 
+if HAVE_MUMPS
+sources+=mumps_fortran_solver.F mumps_solver.cc
+endif
 
 if WANT_MPI
 sources += superlu_dist.c preconditioner_array.cc
@@ -81,8 +85,11 @@ partitioning.h communicator.h linear_algebra_distribution.h double_vector.h \
 multi_domain.h iterative_linear_solver.h preconditioner.h \
 general_purpose_preconditioners.h block_preconditioner.h \
 general_purpose_block_preconditioners.h SuperLU_preconditioner.h \
-matrix_vector_product.h
+matrix_vector_product.h 
 
+if HAVE_MUMPS
+headers+=mumps_solver.h 
+endif
 
 if WANT_MPI
 headers += preconditioner_array.h
@@ -121,7 +128,7 @@ endif
 
 # Need to worry about these for dependency but they shouldn't
 # be included into the include directory
-extra_headers = cfortran.h frontal.h arpack.h lapack_qz.h
+extra_headers = cfortran.h frontal.h arpack.h lapack_qz.h mumps.h
 
 # Define name of library
 libname = generic
@@ -158,6 +165,12 @@ library_include_HEADERS=$(headers) $(templates)
 # Include path for library headers -- need to refer to include files
 # in src as they will not have been installed yet! 
 INCLUDES = -I$(top_srcdir)/external_src 
+
+
+
+
+# -I/home/mheil/local/include/mumps
+
 
 
 # Combined header file

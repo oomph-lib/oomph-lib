@@ -4655,8 +4655,11 @@ void Problem::newton_solve()
      // held on the current processor are nulled out. Can change
      // this once/if the Dof_pt vector is distributed too. 
      if (Dof_pt[l]!=0)
-      *Dof_pt[l] -= dx_pt[l];
+      {
+       *Dof_pt[l] -= dx_pt[l];
+      }
     }
+
 #ifdef OOMPH_HAS_MPI
    // Synchronise the solution on different processors (on each submesh)
    unsigned nmesh=nsub_mesh();

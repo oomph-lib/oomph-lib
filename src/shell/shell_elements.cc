@@ -576,9 +576,11 @@ void KirchhoffLoveShellEquations::get_energy(double& pot_en, double& kin_en)
     "Warning: Not sure if the energy is computed correctly\n";
    error_message += " for nonzero prestress\n";
 
-   throw OomphLibError(error_message,
-                       "KirchhoffLoveShellEquations::get_energy()",
-                       OOMPH_EXCEPTION_LOCATION);
+   oomph_info << error_message << std::endl;
+
+//    throw OomphLibWarning(error_message,
+//                          "KirchhoffLoveShellEquations::get_energy()",
+//                          OOMPH_EXCEPTION_LOCATION);
   }
 #endif
 

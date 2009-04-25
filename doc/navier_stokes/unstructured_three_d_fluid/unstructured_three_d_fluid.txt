@@ -18,28 +18,28 @@ domain boundary is replaced by an elastic vessel.
 Here is a sketch of the problem: Flow is driven through a 3D rigid vessel
 made of three rectangular tubes that meet at a common junction. 
 The flow is driven by a prescribed pressure
-drop between the upstream and the two downstream ends, \f$ \Delta p^* = 
+drop between the upstream and the two downstream ends, \f$ \Delta P^* = 
 P^*_{in} - P^*_{out}, \f$ and we assume/impose parallel in- and outflow
-in the inlet and outlet cross-sections which are parallel to 
+in the inlet and outlet cross-sections, all of which are parallel to 
 \f$ x-y \f$ coordinate plane. 
 
 @I w 0.75\textwidth problem_sketch "Sketch of the domain with boundary conditions. "
 
 We non-dimensionalise all lengths on the half-width, \f$ W \f$, of the
 square main vessel and use the overall pressure drop,
-\f$ \Delta P^* = P_{in}^* - P_{out}^* \f$ to define the (viscous) 
-velocity scale as
+\f$ \Delta P^* \f$ to define the (viscous) 
+velocity scale
 \f[
 {\cal U} = \frac{\Delta P^*\  W}{\mu}.
 \f] 
 With this choice the Reynolds number becomes
 \f[
-Re = \frac{\rho {\cal U} W }{\mu} = \frac{ \Delta P^* \rho W^2 }{\mu^2}
+Re = \frac{\rho {\cal U} W }{\mu} = \frac{ \Delta P^* \rho W^2 }{\mu^2},
 \f]
 and the flow is driven by a dimensionless pressure drop of
-\f$ \Delta P = 1. \f$ With this non-dimensionalisation an 
-increase in Reynolds number may be interpreted as in increase 
-in the applied (dimensional) pressure drop along the vessel.
+\f$ \Delta P = 1. \f$ An increase in Reynolds number may 
+therefore be interpreted as in increase in the applied 
+(dimensional) pressure drop along the vessel.
 
 <HR>
 <HR> 
@@ -83,12 +83,24 @@ tetgen tutorial</a> for further details on how to
 create <code>*.poly</code> files.
 
 
-Here is a plot of the domain specified by <a
-href="../../../../demo_drivers/navier_stokes/unstructured_three_d_fluid/fsi_bifurcation_fluid.poly">fsi_bifurcation_fluid.poly</a>.
+Here is a plot of the domain specified by 
+<a href="../../../../demo_drivers/navier_stokes/unstructured_three_d_fluid/fsi_bifurcation_fluid.poly">fsi_bifurcation_fluid.poly</a>.
 The plot was created using \c tetview which is distributed with
 <A HREF="http://tetgen.berlios.de/"> \c tetgen </A>.
 
 @I w 0.75\textwidth tetgen_boundaries  "The domain and its bounding facets. "
+
+
+Note that we have deliberately assigned a different boundary ID to 
+each facet. This will make the assignment of the boundary
+condition somewhat tedious as the domain boundaries of interest 
+tend to be represented by multiple, separate mesh boundaries. However, 
+the assignment of distinct boundary IDs for the different facets 
+is essential for the automatic generation of boundary coordinates in the
+<a href="../../../interaction/unstructured_three_d_fsi/html/index.html">
+corresponding fluid-structure interaction problem </a> and is
+therefore <b>strongly recommended</b>.
+
 
 <A HREF="http://tetgen.berlios.de/"> \c Tetgen </A> generates
 an unstructured volumetric mesh from the information contained
@@ -96,11 +108,10 @@ in the <code>*.poly</code> file and outputs the mesh's nodes,
 elements and faces in the files
 - <a href="../../../../demo_drivers/navier_stokes/unstructured_three_d_fluid/fsi_bifurcation_fluid.1.node">demo_drivers/navier_stokes/unstructured_three_d_fluid/fsi_bifurcation_fluid.1.node</a>
 - <a href="../../../../demo_drivers/navier_stokes/unstructured_three_d_fluid/fsi_bifurcation_fluid.1.ele">demo_drivers/navier_stokes/unstructured_three_d_fluid/fsi_bifurcation_fluid.1.ele</a>
-- <a
-href="../../../../demo_drivers/navier_stokes/unstructured_three_d_fluid/fsi_bifurcation_fluid.1.face">demo_drivers/navier_stokes/unstructured_three_d_fluid/fsi_bifurcation_fluid.1.face</a>
+- <a href="../../../../demo_drivers/navier_stokes/unstructured_three_d_fluid/fsi_bifurcation_fluid.1.face">demo_drivers/navier_stokes/unstructured_three_d_fluid/fsi_bifurcation_fluid.1.face</a>
 .
 These files can be used as input to \c oomph-lib's \c TetgenMesh
-class, using the procedure disussed in 
+class, using the procedure discussed in 
 <a href="../../../meshes/mesh_from_tetgen/html/index.html">
 another tutorial.</a>
    
@@ -141,7 +152,7 @@ the fluid velocity to re-adjust rapidly as it approaches the outlet.
 <HR>
 <HR>
 
-\section namespace Problem Parameters
+\section namespace Problem parameters
 As usual we define the various problem parameters in a 
 global namespace. We define the Reynolds number and 
 specify the traction to be applied at the in- and outflow 
@@ -180,7 +191,7 @@ with nonzero number of command-line arguments.)
 \section class The Problem class
 The \c Problem class has the usual member functions and provides
 explicit storage for the fluid mesh and the meshes containing
-the \c FaceElements that apply the traction conditions at
+the \c FaceElements that apply the traction conditions at the
 in- and outflow boundaries. We also provide storage for the
 IDs of the mesh boundaries that constitute the in- and outflow
 boundaries to facilitate the application of the boundary conditions.
@@ -203,15 +214,15 @@ by <A HREF="http://tetgen.berlios.de/"> \c tetgen </A>:
 \skipline start_constructor
 \until split_corner_elements);
 
-(See \ref split in the section \ref comm_ex for a discussion 
-of the \c split_corner_elements flag). 
+(We refer to the subsection \ref split in the 
+section \ref comm_ex for a discussion of the \c split_corner_elements flag). 
 
  
 Next, we set up the boundary lookup schemes that determine which elements
 are located next to which domain boundaries, and specify the 
 IDs of the mesh boundaries that coincide with the in- and outflow
-cross-sections. Note that this information must correspond to the
-specification of the boundary IDs in the tetgen <code>*.poly</code>
+cross-sections. Note that this information reflects the
+specification of the boundary IDs in the \c tetgen <code>*.poly</code>
 file. 
 
 \until Outflow_boundary_id[1]=2;
@@ -226,7 +237,8 @@ to indicate which boundaries we have visited already.
 
 The nodes on all other boundaries (i.e. the ones for which \c done[b] is
 still \c false) are subjected to no-slip conditions by pinning
-all three velocity components.
+all three velocity components. (This approach facilitates
+the "extension" of the mesh discussed in section \ref finer_mesh ).
 
 \until done no slip elsewhere
 
@@ -324,7 +336,7 @@ is as difficult as its practical resolution: How do we determine
 in advance if a problem will lock and, if so, which pressures 
 should be pinned, etc.?
 
-In order to avoid the problem altogether, \c oomph-lib's \c TetgenMesh mesh 
+To avoid the problem altogether, \c oomph-lib's \c TetgenMesh 
 constructor therefore provides
 an optional boolean flag, \c split_corner_elements. If this flag is 
 set to \c true, the mesh constructor identifies all elements in which at least 
@@ -339,8 +351,8 @@ shown in this plot:
 Note that the localised refinement leads to a small deterioration 
 in the element quality but this is usually acceptable. If you are concerned 
 about this aspect, allow the splitting of corner elements only if 
-locking actually occurs (see below), or generate a different tetgen 
-mesh that does not suffer from this problem, e.g. by imposing a 
+locking actually occurs (see below), or try to generate a different 
+\c tetgen mesh that does not suffer from this problem, e.g. by imposing a 
 different volume constraint. 
 
 <center>
@@ -360,13 +372,14 @@ different volume constraint.
 \subsection finer_mesh Creating a finer mesh and applying more appropriate outflow boundary conditions
 
 
-The flow field shown in \ref results is clearly under-resolved and a much
+The flow field shown in the \ref results section is clearly 
+under-resolved and a much
 finer mesh would have to be used to fully resolve all flow features.
 This is made even worse by the fact that we imposed parallel outflow
 (i.e. flow in the z-direction) in the outflow cross-sections which 
 are aligned with the plane \f$ z = const. \f$ but terminate two tubes
 that are not aligned with the \f$ z \f$-axis. This creates thin
-(and artificial) outflow boundary layers within which the flow
+outflow boundary layers within which the flow
 is forced to change direction as it exits the tubes. This motivates
 a few exercises that allow you to explore unstructured mesh generation.
 
@@ -389,7 +402,7 @@ a few exercises that allow you to explore unstructured mesh generation.
   </code> so that two straight vessel 
   segments, parallel to the \f$ z \f$-axis, are added to the
   mesh. The modification to the <code>*.poly</code> file should be 
-  straightforward. You have to add eight additional vertices and faces
+  straightforward. You have to add eight additional vertices and faces,
   and re-define the two outflow faces. 
   \n\n
   Here is a sample plot of a modified mesh in which two additional 
@@ -404,7 +417,7 @@ a few exercises that allow you to explore unstructured mesh generation.
   <code><a href="../../../../demo_drivers/navier_stokes/unstructured_three_d_fluid/fsi_bifurcation_fluid_with_extended_tubes.poly">fsi_bifurcation_fluid_with_extended_tubes.poly</a>
   </code> which you may wish to consult. However, we do encourage you 
   to do this exercise by yourself first, in order to familiarise 
-  yourself with tetgen -- you will notice that tetgen is not very 
+  yourself with \c tetgen -- you will notice that \c tetgen is not very 
   forgiving (or verbose) when it encounters errors in the <code>*.poly</code>
   file.
   \n\n
@@ -429,8 +442,12 @@ a few exercises that allow you to explore unstructured mesh generation.
   Lagrange multipliers act as tangential tractions that enforce the 
   parallel in- or outflow.
   The Lagrange multipliers introduce additional degrees of freedom
-  into the problem and their implementation would presumably be based
-  on an extension of the existing \c NavierStokesTractionElements.
+  into the problem and we suggest to base their implementation 
+  on an extension of the existing \c NavierStokesTractionElements,
+  using a technique similar to that used to enforce prescribed
+  boundary displacements in solid mechanics problems, discussed
+  in   <a href="../../../solid/prescribed_displ_lagr_mult/html/index.html">
+  another tutorial.</a>
   Note that, compared to the previous two exercises, this one is not entirely 
   trivial -- in fact, it is a capability that is on our "To-Do list".
   <a href="../../../contact/html/index.html">Let us know</a> if 

@@ -17,8 +17,8 @@ cd Validation
 echo "Running 3D unstructured FSI validation "
 
 # Get mesh files
-cp ../fsi_fluid.1.* .
-cp ../fsi_solid.1.* .
+cp ../fsi_bifurcation_fluid.1.* .
+cp ../fsi_bifurcation_solid.1.* .
 
 mkdir RESLT
 

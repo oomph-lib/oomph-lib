@@ -37,6 +37,9 @@
   #include <oomph-lib-config.h>
 #endif
 
+#include<limits.h>
+#include<float.h>
+
 //Include the geometric object header file
 #include "geom_objects.h"
 
@@ -614,12 +617,12 @@ public:
  void get_min_and_max_coordinates(Mesh* const &mesh_pt)
   {
    // Storage locally (i.e. in parallel on each processor)
-   double x_min_local=1.0e10;
-   double x_max_local=1.0e-10;
-   double y_min_local=1.0e10;
-   double y_max_local=1.0e-10;
-   double z_min_local=1.0e10;
-   double z_max_local=1.0e-10;
+   double x_min_local=DBL_MAX;
+   double x_max_local=-DBL_MAX;
+   double y_min_local=DBL_MAX;
+   double y_max_local=-DBL_MAX;
+   double z_min_local=DBL_MAX;
+   double z_max_local=-DBL_MAX;
 
    // Loop over the elements of the mesh
    unsigned n_el=mesh_pt->nelement();
@@ -710,7 +713,7 @@ public:
    // Decrease/increase min and max to allow for any overshoot in
    // meshes that may move around
    // There's no point in doing this for DIM_LAGRANGIAN==1
-   double percentage_offset=0.05;
+   double percentage_offset=30.0; // hierher0.05;
    if (DIM_LAGRANGIAN>=2)
     {
      double x_length=x_max-x_min;
@@ -754,26 +757,26 @@ public:
    oomph_info << "   Nx_bin=" << Nx_bin << "  ";
    if (DIM_LAGRANGIAN>=2)
     {
-     std::cout << "Ny_bin=" << Ny_bin << "  ";
+     oomph_info << "Ny_bin=" << Ny_bin << "  ";
     }
    if (DIM_LAGRANGIAN==3)
     {
-     std::cout << "Nz_bin=" << Nz_bin;
+     oomph_info << "Nz_bin=" << Nz_bin;
     }
-   std::cout << std::endl;
+   oomph_info << std::endl;
    oomph_info << "   Xminmax=" << Minmax_coords[0] << " " << Minmax_coords[1] 
               << "  ";
    if (DIM_LAGRANGIAN>=2)
     {
-     std::cout << "Yminmax=" << Minmax_coords[2] << " " << Minmax_coords[3]
+     oomph_info << "Yminmax=" << Minmax_coords[2] << " " << Minmax_coords[3]
               << "  ";
     }
    if (DIM_LAGRANGIAN==3)
     {
-     std::cout << "Zminmax=" << Minmax_coords[4] << " " << Minmax_coords[5] 
+     oomph_info << "Zminmax=" << Minmax_coords[4] << " " << Minmax_coords[5] 
               << "  ";
     }
-   std::cout << std::endl;
+   oomph_info << std::endl;
    oomph_info << "==============================================" << std::endl;
 
    /// Flush any storage that may have been created in the past
@@ -857,6 +860,16 @@ public:
            unsigned bin_number=
             int(Nx_bin*(global_coord[0]-x_min)/(x_max-x_min))
             +Nx_bin*int(Ny_bin*(global_coord[1]-y_min)/(y_max-y_min));
+
+           // hierher Andy this is where it goes wrong
+           //         the 3D unstrutured fsi problem
+           //         comes across a y-coordinate that's
+           //         larger than y_max!
+/*            cout << "\nx: " << global_coord[0] << " " << x_min << " " << x_max */
+/*                 << "\ny: " << global_coord[1] << " " << y_min << " " << y_max */
+/*                 << std::endl; */
+/*            cout << "bin_number " << bin_number  */
+/*                 << " " << Bin_object_coord_pairs.size() << std::endl; */
 
            //Add element-sample coord pair to the calculated bin
            Bin_object_coord_pairs[bin_number].push_back

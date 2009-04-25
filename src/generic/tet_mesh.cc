@@ -191,12 +191,12 @@ void TetMeshBase::setup_boundary_element_info(std::ostream &outfile)
        //If we're on more than one boundary, this is weird, so die
        if(count > 1)
         {         
-
-         // hierher Comment on likely cause: Mesh too coarse
          std::ostringstream error_stream;
          error_stream << "Face " << i << " is on " << 
           count << " boundaries.\n";
          error_stream << "This is rather strange, so I'm going to die\n";
+         error_stream << "Your mesh may be too coarse or your tetgen mesh\n";
+         error_stream << "may be screwed up...\n";
          throw OomphLibError(
           error_stream.str(),
           "TetMeshBase::setup_boundary_element_info()",

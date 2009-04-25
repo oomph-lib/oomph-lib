@@ -19,8 +19,8 @@
 #cd linear_wave; make check; cd ..
 #cd eigenproblems; make check; cd ..
 #cd interaction; make check; cd ..
-#cd meshing; make check; cd ..
-#cd multi_physics; make check; cd ..
+cd meshing; make check; cd ..
+cd multi_physics; make check; cd ..
 cd linking; make check; cd ..
 cd optimisation; make check; cd ..
 cd bifurcation_tracking; make check; cd ..

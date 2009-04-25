@@ -25,6 +25,7 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
+#include <cstring>
 
 // Generic oomph-lib includes
 #include "generic.h"

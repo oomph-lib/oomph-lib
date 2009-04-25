@@ -1,63 +1,57 @@
-\mainpage Demo problem: 2D FSI on unstructured meshes
+\mainpage Demo problem: 3D FSI on unstructured meshes
 
-\include unstructured_three_d_fsi_for_doc.cc
 
 This tutorial demonstrates the use of unstructured meshes
-in 2D fluid-structure interaction problems. We combine two 
+in 3D fluid-structure interaction problems. We combine two 
 single-physics problems, namely
-- <a href="../../../solid/unstructured_solid/html/index.html">
-  Large deformations of an elastic 2D solid, loaded
-  by surface tractions and a gravitational body force</a>
+- <a href="../../../solid/unstructured_three_d_solid/html/index.html">
+  Large deformations of an elastic 3D bifurcating tube, loaded
+  by an internal pressure</a>
   \n\n
-- <a href="../../../navier_stokes/unstructured_fluid/html/index.html">
-  Flow through a 2D channel that is partly obstructed by a 
-  rigid 2D solid body</a>
+- <a href="../../../navier_stokes/unstructured_three_d_fluid/html/index.html">
+  Flow through a rigid 3D bifurcating tube</a>
 .
-for which we have already created unstructured 2D meshes, using the combination
-of <A HREF="http://www.xfig.org/">xfig</A>, \c oomph-lib's conversion 
-code <a href="../../../meshes/mesh_from_xfig/html/index.html">\c
-fig2poly,</a>  and the unstructured mesh generator 
-<A HREF="http://www.cs.cmu.edu/~quake/triangle.html">\c Triangle. </A>
+for which we have already created unstructured 3D meshes, 
+using <A HREF="http://www.wias-berlin.de/~si ">Hang Si's</A>
+open-source mesh generator  <A HREF="http://tetgen.berlios.de/"> \c tetgen </A>.
 
 <HR>
 <HR>
 
 \section the_problem The problem
-The figure below shows a sketch of the problem. A 2D channel
-is partly obstructed by an odd-shaped elastic obstacle that
-deforms in response to gravity and to the traction that the fluid 
-exerts onto it. The coupled problem is a straightforward combination of
-the two single-physics problems shown at the top of the sketch: 
-The flow through a channel with a rigid obstacle (shown on the top left), 
-and the deformation of the elastic obstacle in response to 
-a prescribed surface traction (shown on the top right). When the 
-two constitituent single-physics problems interact, the 
-fluid provides the traction onto the solid while the
-change in the solid's shape affects the fluid domain. 
+The two figures below show a sketch of the problem. An applied pressure
+drop drives fluid through an elastic, bifurcating tube whose
+branches have approximately rectangular cross-sections. We solve this
+problem as a fully-coupled fluid-structure interaction problem
+in which the fluid provides the traction onto the solid whose
+deformation changes the fluid domain. 
 
 
 
-@I w 0.75\textwidth fsi_sketch "Sketch of the problem and its two single-physics constituents. "
+@I w 0.75\textwidth problem_sketch_forward "Sketch of the problem. "
 
-As usual, we solve the problem in non-dimensional form. For this
-purpose we non-dimensionalise all lengths on some reference 
-length \f$ {\cal L} \f$
-and use the average inflow velocity, \f$ {\cal U}\f$, to
-non-dimensionalise the velocities in the Navier-Stokes equations. 
-As discussed in the 
-<a href="../../../navier_stokes/unstructured_fluid/html/index.html#reynolds">
-single-physics fluids tutorial,</a> the Reynolds number of the flow
-is then given by
+@I w 0.75\textwidth problem_sketch_backward "Sketch of the problem (reverse view). "
+
+
+As usual, we formulate the problem in non-dimensional form. For this
+purpose we non-dimensionalise all lengths on the half-width, \f$ W
+\f$, of the square inflow cross-section, and use the overall pressure drop,
+\f$ \Delta P^* = P_{in}^* - P_{out}^* \f$ to define the (viscous) 
+velocity scale 
 \f[
-Re = \frac{\rho {\cal U} {\cal L}}{\mu} \ ,
+{\cal U} = \frac{\Delta P^*\  W}{\mu}.
+\f] 
+With this choice the Reynolds number becomes
+\f[
+Re = \frac{\rho {\cal U} W }{\mu} = \frac{ \Delta P^* \rho W^2 }{\mu^2}
 \f]
-where \f$ \rho \f$ and \f$ \mu \f$ are the fluid density and viscosity,
-respectively. \c oomph-lib's Navier Stokes elements non-dimensionalise
-the fluid stresses, and in particular the pressure, on the
-viscous scale, \f$ \mu {\cal U}/{\cal L} \f$.
+and the flow is driven by a dimensionless pressure drop of
+\f$ \Delta P = 1. \f$ With this non-dimensionalisation an 
+increase in the Reynolds number may be interpreted as in increase 
+in the applied (dimensional) pressure drop along the vessel.
 
 We assume that the solid's constitutive equation is given by
-\c oomph-lib's generalised Hookean constitituve law and
+\c oomph-lib's generalised Hookean constitutive law and
 non-dimensionalise the solid-mechanics stresses and tractions
 with Young's modulus \f$ E \f$. 
 
@@ -65,65 +59,61 @@ The FSI interaction parameter \f$ Q \f$ which represents the ratio
 of the (viscous) fluid stress scale to the reference stress used
 to non-dimensionalise the solid stresses is therefore given by
 \f[
-Q = \frac{\mu {\cal U}}{{\cal L} E} \ .
+Q = \frac{\mu {\cal U}}{{\cal L} E} = \frac{\Delta P^*}{E} \ . 
 \f]
+
+
 
 
 <HR> 
 <HR>
 
 \section results Results
-The animation below shows a number of steady flow fields (streamlines 
-and pressure contours) and deformations, obtained in a parameter 
-study in which we first compute the solution of the coupled problem
-at zero Reynolds number and for a vanishing FSI interaction parameter, 
-\f$ Q=0 \f$. For these parameter values, the structure is loaded 
-only by gravity  and does not feel the presence of the fluid, whereas
-the fluid flow is affected by the changes to the fluid domain
-when the obstacle deforms (first frame). Next, we increase the
-Reynolds number to \f$ Re=10\f$ and re-compute the solution (second
-frame), before increasing \f$ Q \f$ in small increments
-(subsequent frames). The increase in  \f$ Q \f$ may be interpreted
-as a reduction in the obstacle's stiffness and the animation shows
-clearly how this increases its flow-induced deformation.
+The animation below illustrates the system's behaviour in a parameter
+study in which we keep the Reynolds number fixed at \f$ Re=100 \f$
+while increasing the FSI parameter \f$ Q \f$ in small increments. 
+The increase in  \f$ Q \f$ may be interpreted as a reduction in the
+tube's stiffness and the animation shows clearly how this increases 
+its flow-induced deformation: The upstream end bulges out while
+the downstream end is compressed.
 
 
 
-@I w 0.75\textwidth flow "Animation of the flow field (streamlines and pressure contours) and the deformation. "
+@I w 0.75\textwidth unstructured_fluid "Animation of the flow field (pressure contours and velocity vectors). "
+
+@I w 0.75\textwidth unstructured_solid "Animation of the wall deformation -- the vectors indicate the fluid load.  "
+
+
 
 <HR> 
 <HR>
 
 \section overview_implementation Overview of the implementation
 
+
 Since the driver code, discussed in detail below, is somewhat lengthy
 (partly because of the large number of self-tests and diagnostics
 included), we provide a brief overview of the main steps
 required to solve this problem:
 \n\n
--# Use the combination of
-   <A HREF="http://www.xfig.org/">xfig</A>,
-   \c oomph-lib's conversion code
-   <a href="../../../meshes/mesh_from_xfig/html/index.html">\c
-   fig2poly,</a> and the unstructured
-   mesh generator <A HREF="http://www.cs.cmu.edu/~quake/triangle.html">\c 
-   Triangle </A> to generate the solid mesh, as already discussed in 
-   <a href="../../../solid/unstructured_solid/html/index.html#mesh">
+-# Use the unstructured 3D mesh generator <A HREF="http://tetgen.berlios.de/">
+   \c tetgen </A> to generate the solid mesh, using the procedure discussed in 
+   <a href="../../../solid/unstructured_three_d_solid/html/index.html#mesh">
    another tutorial.</a>
    \n\n
 -# Use the same procedure to generate the fluid mesh, as discussed in 
-   <a href="../../../navier_stokes/unstructured_fluid/html/index.html#mesh">
+   <a href="../../../navier_stokes/unstructured_three_d_fluid/html/index.html#mesh">
    the single-physics fluids tutorial.</a> Make sure that the 
-   fluid mesh is derived
-   from the \c SolidMesh base class to allow the use of
+   fluid mesh is derived from the \c SolidMesh base class to allow the use of
    pseudo-elasticity to update the nodal positions in response
    to the deformation of the domain boundary.
    \n\n
 -# Ensure that boundary coordinates are set up (consistently) on the 
    FSI interface between the two meshes. For meshes derived from 
-   \c oomph-lib's \c TriangleMesh class, this may be done 
+   \c oomph-lib's \c TetgenMesh class, this may be done 
    by calling the function \c
-   TriangleMesh::setup_boundary_coordinates().
+   TetgenMesh::setup_boundary_coordinates(); see the section
+   \ref boundary_coord for details.
    \n\n
 -# Attach \c FSISolidTractionElements to the faces of the "bulk"
    solid elements that are exposed to the fluid flow. These
@@ -150,19 +140,18 @@ required to solve this problem:
 .
 
 In our experience, the most error-prone part of this procedure is the
-identification of the mesh boundaries in the
-<A HREF="http://www.xfig.org/">xfig</a>-based, unstructured meshes. 
-It is very easy to exclude a node at the end of the FSI boundary,
-in the fluid mesh, say, while "remembering" it in the solid mesh. If this
-happens, the automatic matching of the unstructured fluid and solid meshes
-will not work (see \ref boundary_coord for details). For 
-this reason, the driver code presented below
-generates a lot of output that can be used to identify and fix
-such problems. See also the section \ref go_wrong at the end 
-of this tutorial. 
+identification of the mesh boundaries. In particular, if the
+description of the FSI interface as viewed from the fluid and solid
+meshes is inconsistent, the automatic matching of the unstructured 
+fluid and solid meshes will not work (see \ref boundary_coord for details). For 
+this reason, the driver code presented below generates a lot of 
+output that can be used to identify and fix such problems. 
+See also the section \ref go_wrong at the end of this tutorial. 
 
 <HR>
 <HR>
+
+
 
 \section namespace Problem Parameters
 As usual we define the various problem parameters in a 
@@ -173,28 +162,24 @@ the FSI interaction parameter \f$ Q \f$.
 \skipline start_of_namespace
 \until Q=
 
-We define the gravitational body force that acts (only!) on the solid  
-(see \ref b_f to find out why this is odd...)
-
-\until }
-
-and provide a pointer to the consitutive equation for the
+We provide a pointer to the consitutive equation for the
 solid. This constitutive equation will also be used for 
 the (pseudo-)solid elements that determine the deformation of 
 the fluid mesh. 
 
-\until Constitutive_law_pt
+\until Nu=
 
-Finally, we provide a helper function that will be used 
-to establish if a node is located on the FSI boundary when the
-mesh is in its  undeformed configuration. This function is written 
-by "brute force". It is required because currently our 
-<A HREF="http://www.xfig.org/">xfig</a>-based
-mesh generation procedures do not allow us to associate fractional
-parts of a polygonal domain boundary as belonging to different
-mesh boundaries. Such boundaries therefore have to be 
-identified a posteriori in the driver code.
-
+Finally, we define the tractions that act on the fluid
+at the in and outflow cross-sections. We enforce the non-dimensional 
+pressure drop of \f$ \Delta P = 1\f$ (on the viscous scale) by 
+setting \f$ P_{in} = -P_{out}=0.5 \f$, thus pressurising the tube's 
+upstream end  while applying an equal and opposite "suction" 
+downstream. (Note that in the  
+<a href="../../../navier_stokes/unstructured_three_d_fluid/html/index.html">
+corresponding single-physics fluids problem</a> the actual pressure
+values were irrelevant because the vessel walls were rigid. 
+In the FSI problem considered here it obviously makes a big difference 
+if the fluid pressure is positive or negative.) 
 
 \until end_of_namespace 
 
@@ -206,63 +191,55 @@ identified a posteriori in the driver code.
 \section mesh_code Creating the meshes
 
 \subsection solid_mesh The solid mesh
-Following the procedure discussed in the corresponding
-<a href="../../../solid/unstructured_solid/html/index.html">
+Following the procedure discussed in the 
+<a href="../../../solid/unstructured_three_d_solid/html/index.html">
 single-physics solid mechanics problem</a> we create the mesh
-for the elastic obstacle using multiple inheritance 
-from \c oomph-lib's \c TriangleMesh and the \c SolidMesh base
+for the elastic tube using multiple inheritance 
+from \c oomph-lib's \c TetgenMesh and the \c SolidMesh base
 class.
 
+\dontinclude unstructured_three_d_fsi.cc
 \skipline start_solid_mesh
 \until {
 
 As before, we set the Lagrangian coordinates to the current
 nodal positions to make the initial configuration stress-free. 
-Initially all boundary nodes are located on the same single boundary -- 
-corresponding to the single xfig polyline that defines the surface
-of the elastic obstacle. In the current problem we have to identify
-two additional boundaries: The "bottom boundary" (boundary 1) where
-the  positions of the solid nodes will be pinned; and the nodes
-that are located on the FSI boundary (boundary 2). 
-
-\until done boundary
-
-
-Finally, we identify the elements that are located next to the
-newly created domain boundaries and create boundary coordinates
-along boundaries 1 and 2.
-
+Next, we identify the elements next to the various boundaries
+(<a href="../../../solid/unstructured_three_d_solid/html/index.html">recall
+</a> that the domain boundaries are specified in the tetgen 
+<code>*.poly</code> file), and set up the boundary
+coordinates. In the interest of continuous paranoia, we document these
+to facilitate debugging; see the section \ref boundary_coord for details.
 
 \until };
 
+
 <HR>
+
 
 
 
 \subsection fluid_mesh The fluid mesh
 The creation of the fluid mesh follows the same process but uses
 the mesh created for the  
-<a href="../../../navier_stokes/unstructured_fluid/html/index.html">
+<a href="../../../navier_stokes/unstructured_three_d_fluid/html/index.html">
 single-physics fluids problem.</a>
-The use of multiple inheritance from the \c TriangleMesh and \c SolidMesh base
-classes will allow us to employ pseudo-solid node-update techniques 
+The use of multiple inheritance from the \c TetgenMesh and \c SolidMesh base
+classes allows us to employ a pseudo-solid node-update techniques 
 to update the position of the fluid nodes in response to changes 
-in the domain boundary. 
+in the domain boundary. We refer to the 
+<a href="../../../navier_stokes/unstructured_three_d_fluid/html/index.html">
+fluids tutorial</a> for a discussion of the \c split_corner_elements flag.
 
 
 \skipline start_fluid_mesh
-\until set_lagrangian
-
-The fluid problem requires the identification of three additional 
-boundaries: The inflow boundary (boundary 1), the outflow boundary
-(boundary 2) and the FSI boundary (boundary 3). 
-
 \until setup_boundary_element_info()
 
-We create boundary coordinates along the three newly-created
-mesh boundaries and document the process for the FSI boundary 
-(boundary 3). See \ref go_wrong for a more detailed discussion of the
-output created here.  
+We create boundary coordinates along all mesh boundaries. To ensure
+that fluid and solid boundary coordinates are aligned properly,
+we use the flag \ switch_normal to change the direction of the 
+normal vector for the fluid mesh; see \ref boundary_coord for details.
+
 
 \until };
 
@@ -275,27 +252,29 @@ output created here.
 \section main The driver code
 
 We specify an output directory and instantiate the constitutive 
-equation for the solid mechanics computations, specifying a 
-Poisson ratio of 0.3.
+equation (\c oomph-lib's generalisation of Hooke's law), specifying a 
+Poisson ratio of 0.3. This constitutive equation will be used for
+"proper" solid mechanics that determines the deformation of 
+the elastic vessel walls, and for the pseudo-solid that determines 
+the deformation of the fluid mesh. 
+
 
 \dontinclude unstructured_three_d_fsi.cc
 \skipline start_of_main
-\until 0.3);
+\until Nu);
 
-We create the \c Problem object and output the domain boundaries
-and the initial guess for the solution.
+We create the \c Problem object and output the initial guess 
+for the solution.
 
-\until ()++
+\until ()++;
 
-Finally, we perform a two-stage parameter study. We start
-by solving the problem at zero Reynolds number with 
-the FSI parameter \f$ Q \f$ set to zero. 
+Finally, we perform a parameter study in which we compute the
+solution of the fully-coupled FSI problem for increasing 
+values of the FSI parameter \f$ Q \f$ -- physically, an increase
+in \f$ Q \f$ can be interpreted as a reduction in the
+stiffness of the tube walls while keeping the fluid 
+properties and the driving pressure drop constant.
 
-\until  ()++
-
-Next we re-solve the problem at finite Reynolds number,
-before slowly increasing the strength of the fluid-structure
-interaction.
 
 \until end_of_main
 
@@ -313,22 +292,42 @@ and a post-processing routine.
 \skipline start_of_problem_class
 \until doc_solution
 
-The class provides two private helper functions that attach
-the \c FaceElements that apply the fluid traction to the solid and the
-\c FaceElements that use Lagrange multipliers to deform the fluid
-mesh according to the motion of the solid boundary. 
+We provide several helper functions to create the 
+\c FaceElements that (i) apply the applied traction on the fluid
+at the in- and outflow cross-sections; (ii) apply the fluid traction onto 
+the solid, and (iii) create the Lagrange multipliers that
+apply the solid displacement onto the pseudo-solid fluid mesh.
 
 \until create_lagrange
 
-Another private helper function is provided to document the
-boundary parametrisation of the solid's FSI interface:
 
-\until doc_solid_boundary_coordinates()
+We also provide a helper function that documents the boundary coordinates
+on the solid mesh.  
+
+\until doc_solid_boundary_coordinates(
+
+Finally we provide a large number of additional helper functions that
+specify the number the various mesh boundaries (as 
+defined in the tetgen <code>*.poly</code> file) that make up 
+the physical boundaries of interest: the in- and outflow boundaries 
+in the fluid domain; the FSI boundaries of the fluid and solid domains 
+and the boundaries along which the tube wall is held in a fixed position.
+
+
+\until end npinned_solid_boundary
 
 The private member data includes pointers to the various
-meshes and a \c GeomObject representation of the FSI boundary.
+meshes and the \c GeomObject representation of the FSI boundary
+(created from the \c FaceElements attached to the solid mesh).
+
+\until Solid_fsi_boundary_pt;
+
+Finally, here are the vectors that store the mesh boundary IDs 
+associated with the various domain boundaries of interest.
 
 \until };
+
+
 
 
 
@@ -338,127 +337,164 @@ meshes and a \c GeomObject representation of the FSI boundary.
 \section constructor The Problem constructor
 
 We start by building the fluid mesh, using the files created
-by <A HREF="http://www.cs.cmu.edu/~quake/triangle.html">\c Triangle
-</A>; see the discussion in the corresponding
-<a href="../../../navier_stokes/unstructured_fluid/html/index.html#mesh">
+by <A HREF="http://tetgen.berlios.de/"> \c tetgen </A>; see the 
+discussion in the corresponding 
+<a href="../../../navier_stokes/unstructured_three_d_fluid/html/index.html#mesh">
 single-physics fluids problem.</a>
 
+
 \skipline start_of_constructor
-\until fluid_poly_file_name);
+\until split_corner_elements);
  
 
-Next, we apply the boundary conditions for the fluid and the 
-pseudo-solid equations. We pin the pseudo-solid nodes along
-all domain boundaries, apart from the FSI boundary (boundary 3), 
-apply a no-slip condition for the fluid velocity along the solid
-channel walls (boundary 0), pin the velocity at the inflow
-(boundary 1, where we will impose a Poiseuille flow profile), and impose
-parallel outflow at the downstream end (boundary 2). 
-As mentioned before, the manual identification of
-mesh boundaries in unstructured meshes that are generated by
-third-party mesh generators is a relatively error-prone process.
-Therefore we document the boundary conditions for the pseudo-solid 
-to allow an external sanity check.
+Next we associated the \c tetgen boundary IDs with the various
+boundaries of interest: The inflow boundary is represented by 
+\c tetgen boundary 0, and the two outflow boundaries
+have IDs 1 and 2. 
+
+\until Outflow_boundary_id[1]=2;
+
+The FSI boundary (i.e. the boundary of the fluid mesh that is
+exposed to the elastic vessel wall) comprises 12 separate
+tetgen facets which were numbered 3 to 14 in the <code>*.poly</code> 
+that describes the fluid mesh. 
+
+\until }
+
+Next, we apply the boundary conditons for the fluid mesh:
+We impose parallel in- and outflow at the in- and outflow
+boundaries and apply boundary conditions
+for the pseudo-elastic deformation of the fluid mesh. Since
+the in- and outflow cross-sections of the elastic tube are
+held in place, we pin the position of the fluid nodes
+in these cross-sections too. To facilitate debugging we 
+document the position of the fluid nodes whose 
+(pseudo-solid) displacements we suppressed.
 
 \until pseudo_solid_bc_file.close();
 
-We complete the build of the elements by specifying
-the Reynolds number and the constitutive equation for the pseudo-solid
-equations. 
+Finally, we apply the no-slip condition on the fluid nodes
+that are located on the FSI boundary.
+
+\until done no slip on fsi boundary
+
+
+We complete the build of the fluid elements by specifying
+the Reynolds number and the constitutive equation for the 
+pseudo-solid equations -- we simply use the same constitutive 
+equation that was used for the tube wall.
 
 \until }
 
-Finally, we impose a Poiseuille profile at the inflow boundary (boundary
-1) and assign the equation numbers.
+We create the fluid traction elements that impose
+the applied pressures in the in- and outflow cross-sections.
 
-\until end Poiseuille
+\until create_fluid_traction_elements();
+
+
   
 
 Next, we create the solid mesh, using the files created
-by <A HREF="http://www.cs.cmu.edu/~quake/triangle.html">\c Triangle
-</A>; see the discussion in the corresponding
-<a href="../../../solid/unstructured_solid/html/index.html#mesh">
+by <A HREF="http://tetgen.berlios.de/"> \c tetgen </A>; 
+see the discussion in the corresponding
+<a href="../../../solid/unstructured_three_d_solid/html/index.html#mesh">
 single-physics solids problem.</a>
 
+\skipline Define solid mesh and its
+\until face_file_name);
 
-\until solid_poly_file_name);
+Following the procedure used for the fluid mesh, we identify the 
+mesh boundaries that make up the (pinned) ends of the tube
+(boundaries 0, 1 and 2, as defined in the tetgen <code>*.poly</code>
+file) and the FSI boundary (boundaries 3 to 14 -- note that this enumeration
+matches that in the fluid mesh; see \ref boundary_coord
+for further details of how the fluid and solid meshes are matched). 
+
+
+\until }
+
+
+We pin the positions of the nodes that are located at the
+ends of the elastic tube, and, just to be on the safe side,
+document their positions to allow for debugging and sanity-checking.
+
+\until bc_file.close();
+
 
 We complete the build of the solid elements by passing the pointer
-to the constitutive equation and the function pointer to the
-gravitational body force.
+to the constitutive equation.
+
 
 \until }
-
-We suppress the displacements of the nodes on boundary 1.
-
-\until }
-
 
 Next, we create the \c FaceElements that apply the fluid traction
-to the solid
+to the solid,
 
 \until create_fsi_traction_elements();
 
 and the \c FaceElements that employ Lagrange multipliers to deform
 the fluid mesh to keep it aligned with the FSI boundary.
 
-\until create_lagrange
+\until create_lagrange_multiplier_elements();
 
 We combine the various sub-meshes to a global mesh.
 
-\until build_global
+\until build_global_mesh();
 
 Finally, we set up the fluid-structure interaction by determining
 which "bulk" fluid elements are located next to the FSI traction elements
-that apply the fluid load to the solid. We document the boundary 
-coordinate along the FSI interface by opening the  \c
-FSI_functions::Doc_boundary_coordinate_file stream before
+that apply the fluid load to the solid. This is done separately for
+each of the mesh boundaries that make up the FSI boundary. 
+We therefore specify the boundary ID in the fluid mesh and the 
+pointer to the fluid mesh, as well as the pointer to the mesh
+that contains the FSI traction elements that occupy that part
+of the FSI boundary. To facilitate debugging,  we document the boundary 
+coordinates along the FSI interface (as seen by the fluid) by opening 
+the  \c FSI_functions::Doc_boundary_coordinate_file stream before
 calling  \c
-FSI_functions::setup_fluid_load_info_for_solid_elements(...)
+FSI_functions::setup_fluid_load_info_for_solid_elements(...).
 If this stream is open, the setup routine writes the Eulerian 
 coordinates of the points on the FSI interface and their 
-intrinsic surface coordinate \f$ [ x, y, \zeta ] \f$ to the specified 
-file. 
+intrinsic surface coordinate \f$ [ x, y, z, \zeta_1, \zeta_2  ] \f$ 
+to the specified file. This may be compared against the corresponding data for
+the solid's view of the FSI interface, documented in 
+\c doc_solid_boundary_coordinates().
 
-\until .close();
 
-We use the private helper function \c doc_solid_boundary_coordinates()
-to create the same output from the "solid side" of the FSI interface.
-This is useful for debugging purposes as it allows
-us to check if the fluid and solid meshes employ a matching
-parametrisation of the FSI interface; see \ref go_wrong for more
-detail. 
+\until }
 
-\until doc_solid_boundary_coordinates();
 
-All that's left to do is to set up the equation numbering scheme and 
+All that's now left to do is to set up the equation numbering scheme and 
 the problem is ready to be solved.
 
 
-\until end_of_constructor
+\until }
 
 <HR>
 <HR>
+
+
 
 \section fsi_traction Creating the FSI traction elements
 The creation of the FSI traction elements that apply the 
 fluid traction to the solid elements that are adjacent to the
-solid boundary 2 follows the usual procedure: We loop over the
-relevant 2D "bulk" solid elements and attach the 
+FSI boundary follows the usual procedure: We loop over the
+relevant 3D "bulk" solid elements and attach the 
 \c FSISolidTractionElements to the appropriate faces. 
 
-\skipline start_of_create_traction_elements
-\until new FSISolidTractionElement<SOLID_ELEMENT,2>(bulk_elem_pt,face_index);
+\skipline start_of_create_fsi_traction_elements
+\until new FSISolidTractionElement<SOLID_ELEMENT,3>(bulk_elem_pt,face_index);
 
 Next we add he newly-created \c FaceElement to the mesh of traction
 elements, specify which boundary of the bulk mesh it is attached to,
 and pass the FSI interaction parameter \f$ Q \f$ to the element. 
 
-\until  end of create_traction_elements
+\until  end of create_fsi_traction_elements
 
 
 <HR>
 <HR>
+
 
 \section create_lagr Creating the Lagrange multiplier elements
 The creation of the \c FaceElements that employ Lagrange multipliers
@@ -466,44 +502,66 @@ to impose the boundary displacement of the pseudo-solid fluid mesh
 is again fairly straightfoward (the use of Lagrange multipliers
 for the imposition of boundary displacements is explained
 in <a href="../../../solid/prescribed_displ_lagr_mult/html/index.html">
-another tutorial</a>): We start by combining the
- \c FSISolidTractionElements that are attached to the
-solid's FSI boundary to a compound \c GeomObject. This \c GeomObject
-provides a continuous representation of the FSI boundary (as determined
-by the deformation of the solid) and is parametrised by the 
-boundary coordinate assigned earlier.
+another tutorial</a>): For each part of the FSI boundary we 
+combine the \c FSISolidTractionElements that are attached to the
+solid mesh to a compound \c GeomObject. This \c GeomObject
+provides a continuous representation of the relevant part of the 
+FSI boundary -- it is parametrised by the boundary coordinate assigned 
+earlier while its shape is determined by the deformation of 
+the 3D solid elements that the \c FSISolidTractionElements are
+attached to.
 
-\until (Traction_mesh_pt);
+\until (Solid_fsi_traction_mesh_pt[i]);
 
-Now we attach \c ImposeDisplacementByLagrangeMultiplierElements
+Having represented the boundary by a (compound) \c GeomObject,
+we now attach \c ImposeDisplacementByLagrangeMultiplierElements
 to the appropriate faces of the "bulk" fluid elements that are 
-adjacent to the FSI interface (boundary 3 in the fluid mesh). 
+adjacent to the FSI interface and add them to their own mesh:
 
 \until add_element_pt
 
-Next we pass a pointer to the compound \c GeomObject that imposes
+Next we pass a pointer to the compound \c GeomObject that defines
 the shape of the FSI interface and specify which boundary in the
-"bulk" fluid mesh the element is attached to.
+"bulk" fluid mesh the \c ImposeDisplacementByLagrangeMultiplierElement
+is attached to.
 
 \until set_boundary_shape
 
 Finally, we apply boundary conditions for the Lagrange multipliers:
 We pin the Lagrange multipliers for nodes that are located on 
-boundary 0 where the nodal displacements are pinned. 
-(<a href="../../../solid/prescribed_displ_lagr_mult/html/index.html">
+the in- and outflow boundaries where the nodal positions are 
+pinned.  (<a href="../../../solid/prescribed_displ_lagr_mult/html/index.html">
 Recall</a> that the Lagrange multipliers are additional degrees of
 freedom that are added to the "bulk" degrees of freedom that were
 originally created by the "bulk" element that the Lagrange multiplier
-elements are attached to.)
+elements are attached to.) The documentation of the position of
+the pinned Lagrange multiplier nodes in 
+\c RESLT/pinned_lagrange_multiplier_nodes.dat is again done to
+facilitate the debugging of the code and is highly recommended.
 
 \until end of create_lagrange_multiplier_elements
 
 <HR>
 <HR>
 
+\section fluid_traction Attaching the fluid traction elements
+The helper function \c create_fluid_traction_elements() 
+attaches \c  NavierStokesTractionElement to the in- and outflow
+cross-sections of the fluid mesh and thus imposes the
+prescribed pressure drop onto the fluid.
+
+
+\skipline start_of_fluid_traction_elements
+\until end of create_traction_elements
+
+
+<HR>
+<HR>
+
 \section doc_solution Post-processing
 The post-processing routine simply executes the output functions for 
-the fluid and solid elements. 
+the fluid and solid meshes and documents their mesh boundaries. We 
+also document the FSI traction that the fluid exerts onto the solid.
 
 \skipline start_of_doc_solution
 \until end_of_doc
@@ -514,9 +572,8 @@ the fluid and solid elements.
 
 \section doc_solid_zeta Sanity check: Documenting the solid boundary coordinates
 Here is the function that documents the parametrisation of the
-solid's FSI boundary in the file 
-<code>solid_boundary_test.dat</code>. The file contains the solid's 
-counterpart of the \f$ [ x, y, \zeta ] \f$ data 
+solid's FSI boundary by outputting the solid's 
+counterpart of the \f$ [ x, y, z, \zeta_1, \zeta_2 ] \f$ data 
 that we created for the fluid side of the FSI interface
 when setting up the fluid-structure interaction with 
 \c FSI_functions::setup_fluid_load_info_for_solid_elements(...).
@@ -525,18 +582,7 @@ The two parametrisations should be consistent; see
  
 \dontinclude unstructured_three_d_fsi.cc
 \skipline start_doc_solid_zeta
-\until  the_file.close();
-
-The file <code>fsi_geom_object.dat</code> may be used to 
-check the integrity of the compound \c GeomObject  
-that represents the FSI interface of the solid: As \f$ \zeta \f$
-sweeps along the  range used to parametrise the
-boundary (\f$ \zeta_{min} \f$  and \f$ \zeta_{max} \f$ were
-determined above), the position vector \f$ {\bf R}(\zeta) \f$, returned
-by \c GeomObject::position(...) should follow the
-FSI interface.
-
-\until end doc_solid_zeta
+\until end doc_solid_zeta 
 
 <HR>
 <HR>
@@ -547,156 +593,227 @@ FSI interface.
 
 The use of pseudo-elasticity for the node update in the fluid mesh 
 makes the solution of FSI problems extremely straightforward. 
-They key ingredient that allows the "automatic" coupling between the 
-unstructured fluid and solid meshes  
-is the (consistent!) generation of the boundary coordinate  \f$ \zeta \f$
-along the FSI interface. The function 
-\c TriangleMesh::setup_boundary_coordinates(...) achieves this
-automatically and exploits the facts that 
+They key feature that allows the "automatic" coupling of the 
+unstructured fluid and solid meshes is the (consistent!) generation 
+of the boundary coordinates  \f$ (\zeta_1,\zeta_2) \f$ along 
+the FSI interface. The implementation of this functionality in 
+\c TetgenMesh::setup_boundary_coordinates(...) exploits the 
+fact that
 -# Meshes generated
-   by  <A HREF="http://www.cs.cmu.edu/~quake/triangle.html">\c Triangle
-   </A> are bounded by polygonal line segments. 
--# Vertices in the polygonal domain boundary coincide with 
-   vertex nodes of the triangular finite elements. 
+   by  <A HREF="http://tetgen.berlios.de/"> \c tetgen </A>
+   are bounded by planar facets, and \n\n
+-# We insist that all facets are given distinct boundary IDs  
+   when defining the domain in the tetgen <code>*.poly</code> file. 
 .
-The generation of the boundary coordinate along mesh boundary \c b
-works as follows:
--# Attach \c FaceElements to the relevant faces of the "bulk" elements
-   that are adjacent to mesh boundary \c b. 
--# Sort the \c FaceElements according to their position along
-   the boundary. 
--# Locate the "lowest left" boundary node on the boundary and set
-   its boundary coordinate to zero.
--# Step through the \c FaceElements (and their nodes) in order (taking
-   into account that some \c FaceElements may be reversed relative
-   to each other) and use the distance between adjacent nodes as the
-   increment in the boundary coordinate. 
--# Delete the \c FaceElements. 
+
+  The figure below illustrates the generation of the boundary 
+coordinates within a representative planar facet (shown in cyan) 
+that defines a particular mesh boundary. 
+
+@I w 0.75\textwidth boundary_coords_with_mesh "Sketch illustrating the generation of boundary coordinates on a mesh boundary that is defined by a planar facet (shown in cyan). "
+
+
+Here is how we generate the boundary coordinates:
+
+-# We start by attaching \c FaceElements to the appropriate faces of 
+   the "bulk" elements that are adjacent to the mesh boundary defined
+   by the facet. These \c FaceElements provide a surface triangulation 
+   of the boundary. In the sketch above, the surface triangulation
+   is represented by the blue surface mesh. \n\n
+-# We locate the "lower left" and "upper right" nodes
+   within the surface mesh, based on a lexicographical 
+   ordering of the nodes' 3D coordinates. \n\n
+-# The straight line from the "lower left" to the "upper right"
+   node (shown by the dashed red line) defines a direction that 
+   is co-planar with the facet and therefore allows us to define 
+   an in-plane unit vector, \f$ {\bf T}_1\f$, shown in red. \n\n
+-# A second in-plane unit vector, \f$ {\bf T}_2\f$ 
+   (shown in yellow), can then be constructed by taking the cross-product
+   of \f$ {\bf T}_1\f$ and the outer unit normal \f$ {\bf N} \f$.
+   (The outer unit normal can be obtained from any of the adjacent 
+   bulk elements.) \n\n
+-# The orthonormal in-plane vectors \f$ {\bf T}_1\f$ and \f$ {\bf T}_2\f$ 
+   define a unique parametrisation of the boundary in terms of 
+   the boundary coordinates \f$ (\zeta_1,\zeta_2) \f$, if we 
+   insist that for every point on the boundary we have
+   \f[
+   {\bf R}(\zeta_1,\zeta_2) = {\bf R}_{\mbox{lower left}} + 
+   \zeta_1 {\bf T}_1 + \zeta_2 {\bf T}_2.
+   \f]
+   This allows the assignment of boundary coordinates for each
+   of the nodes on this boundary. \n\n
+-# Once this is done we can delete the \c FaceElements that defined
+   the surface triangulation. \n\n
 .
-This procedure generates a consistent boundary parametrisation,
-irrespective of how many fluid and solid elements meet at the
-shared FSI boundary. This is because the nodes along all \c FaceElements 
-are located along the same straight line segments. The method would not
-work if the boundary was curvilinear! 
 
-The method also fails, if the "lower left" boundary nodes identified
-in the two meshes are not located at the same position. This tends to 
-happen if boundary nodes are assigned inconsistently, e.g. because
-the final node on the FSI interface was identified as being located
-on the appropriate mesh boundary in the fluid mesh but not in the 
-solid mesh. In that case the boundary coordinates of the two meshes 
-are offset relatively to each other by an amount equal to the 
-distance between the respective "lower left" nodes.
+Since the generation of the boundary coordinates by the above
+procedure only relies on the position of the "lower left" and 
+"upper right" vertices (which are
+properties of the facet rather than the \c tetgen mesh) the
+boundary coordinates are unique, regardless of the actual
+discretisation generated by \c tetgen. Furthermore, 
+the boundary coordinates created from the fluid and solid meshes
+will be consistent \e provided we reverse the direction of the outer
+unit normal in one of the meshes. This is exactly what the
+\c switch_normal flag in \c TetgenMesh::setup_boundary_coordinates(...)
+is for. When generating the boundary coordinates for 
+our problem, we switched the direction of the normal
+in the fluid mesh;  see the section \ref fluid_mesh, above.
 
-Here is a plot of the boundary coordinate \f$ \zeta \f$ generated from
-the fluid (blue) and solid (red) sides, with \f$ \zeta \f$ being 
-plotted "on top" of the unstructured solid mesh. 
+Here is an animation of the automatically-generated boundary
+coordinates along the 12 mesh boundaries that constitute the
+FSI boundary, when viewed from the fluid and the solid, respectively.
+In each of the frames the contours indicate the value of  
+\f$ \zeta_1 \f$ within the respective boundary. Note that the
+boundary coordinates established in the two meshes match, even 
+though the discretisations do not.
 
 
-@I w 0.75\textwidth boundary_coordinate_check "Plot of the boundary coordinates generated from the fluid and solid sides of the FSI interface. "
 
+@I w 0.75\textwidth fluid_boundary_test "Contour plot of the automatically-generated boundary coordinates on the FSI boundary, viewed from the fluid mesh. "
+
+
+@I w 0.75\textwidth solid_boundary_test "Contour plot of the automatically-generated boundary coordinates on the FSI boundary, viewed from the solid mesh. "
+
+
+You should explore this procedure yourself as an \b exercise: For
+instance you may want to explore what happens
+if you don't switch the direction of the normal in the fluid mesh when 
+generating the boundary coordinates. 
 
 <HR>
 
-\subsection non_matching Fluid and solid meshes do not have to be matching
-To demonstrate that the fluid and solid meshes to not have to 
-be matching across the FSI interface, here are the results of 
-another computation in which a much finer fluid mesh was used.
-
-This computation was performed by re-generating the mesh, running
-triangle with a smaller maximum element size:
+\subsection matching_fluid_and_solid Fluid and solid meshes do not have to be matching
+The mesh shown in the problem sketch at the beginning of this 
+tutorial already suggested that the fluid and solid meshes do not have to 
+match across the FSI interface. To illustrate this point more clearly, here 
+is the result of another computation for which we generated 
+a much finer fluid mesh, using
 
 \code
- triangle -q -a0.01 fluid.fig.poly
+tetgen -a0.05 fsi_bifurcation_fluid.poly
 \endcode
 
-The driver code remained completely unchanged.
-
-@I w 0.75\textwidth flow_fine "Animation of the flow field (streamlines and pressure contours) and the deformation, computed on a refined fluid mesh. "
-
-<HR>
+The resulting tetgen <code>*.ele</code>,  <code>*.node</code> and
+<code>*.face</code> files can be used with same driver code.
 
 
-\subsection b_f Gravity only affects the solid -- really?
+@I w 0.75\textwidth finer_fluid_mesh "Solution computed with a finer fluid mesh. "
 
-The computations presented above suffer from a rather embarrassing
-modelling error. We have implicitly assumed that the solid is deformed
-significantly by gravity whereas no body force acts in the fluid. 
-This cannot be right but makes for a useful exercise. 
--# Formulate the problem properly, starting from the dimensional
-   form of the governing equations, to determine the correct
-   non-dimensional body forces for the fluid and the solid. 
-   \n\n
--# Use your analysis to explain under what circumstances our "error" 
-   could actually be a justifable approximation to the real system.
-.
-
+As an \b exercise, generate some finer fluid and solid meshes yourself
+and confirm that they may be used without having to change the driver
+code.
 
 <HR>
 
 
 \subsection go_wrong What can go wrong?
-As indicated above, the methodology employed in this tutorial makes the
-formulation of 2D FSI problems extremely straightforward. 
 Here are a few things that can (and often do) go wrong. 
-They typically result in the code not being able to set up
-consistent boundary coordinates. 
-- <b> Boundaries don't match in xfig:</b> \n\n
-  When drawing the boundaries of the fluid and solid domains in
-  <A HREF="http://www.xfig.org/">xfig</A>, 
-  it is important to ensure that the FSI boundary is the same. We
-  typically draw the fluid domain first and then make a copy of the
-  resulting *.fig file. Once the file has been renamed it can be loaded into 
-  <A HREF="http://www.xfig.org/">xfig</A> 
-  where the polygonal vertices that are not part of the FSI
-  interface can be deleted, while new vertices that are only part of
-  the solid boundary can be added. Just make sure that you don't move
-  any of the vertices that define the FSI interface!
+- <b>The facets that define the FSI boundary don't match:</b> \n\n
+  This tends to happen if the <code>*.poly</code> files 
+  describing the fluid and solid meshes do not use
+  the same facets to describe the FSI interface. While we
+  do not expect the fluid and solid meshes themselves
+  to match, the representation of the FSI interface via
+  facets \c must be consistent. This is most easily done
+  by using the following procedure:
   \n\n
-- <b> The mesh is too coarse for the automatic generation of
-  boundary-lookup schemes:</b> \n\n
-  Another problem arises if the mesh generated by 
-  <A HREF="http://www.cs.cmu.edu/~quake/triangle.html"> \c Triangle </a> 
-  is too coarse for the automatic identification
-  of mesh boundaries by \c TriangleMeshBase::setup_boundary_element_info(). 
-  This function gets (justifiably) confused when the mesh is so coarse
-  that both vertex nodes on an element edge that crosses the interior
-  of the domain are located on the same mesh boundary. 
-  We do not intend to fix this problem -- if your mesh is that coarse,
-  you should refine it! Anyway, if it happens, the problem may be
-  diagnosed by plotting the output written to 
-  \c FSI_functions::Doc_boundary_coordinate_file if this stream is
-  open when \c FSI_functions::setup_fluid_load_info_for_solid_elements(...)
-  is called. The file (<code>fluid_boundary_test.dat</code> in our
-  driver code) contains the \c FaceElements that are attached
-  to the (perceived) FSI boundary in the fluid mesh. (The file 
-  <code>solid_boundary_test.dat</code>, generated manually in our
-  driver code, contains the same information for the solid mesh.)
+  -# Write the <code>*.poly</code> file for the fluid mesh.
+     Make sure that each facet is given a separate boundary ID
+     (at least for the facets describing the FSI interface). 
+     \n\n
+  -# Solve a single-physics fluids problem on this mesh to check the
+     integrity of the mesh -- the solution of this problem will
+     also give you some insight into the expected flow field.
+     \n\n
+  -# Make a copy of the <code>*.poly</code> file for the fluid mesh
+     and modify it to describe the solid mesh, leaving the facets
+     that define the FSI interface unchanged. This automatically
+     ensures that the representation of the FSI boundary from the
+     fluid's and the solid's point of view is consistent.
+     \n\n
+  -# Solve a single-physics solids problem on this mesh to check the
+     integrity of the mesh, e.g. by applying some pressure loading on 
+     the future FSI boundary  -- the solution of this problem will
+     also give you some insight into the expected wall deformation.
+     \n\n
+  -# Couple the two problems, as shown in this tutorial.
+     \n\n
+  .
+  As an \b exercise, modify the tetgen <code>*.poly</code> files
+  and the driver code so that it can handle the extended domain
+  considered in the 
+  <a href="../../../navier_stokes/unstructured_three_d_fluid/html/index.html#finer_mesh">
+  single-physics fluids problem.</a>
   \n\n
-  Here is what the plot should look like if the fluid mesh is
-  sufficiently fine (the \c FaceElements are shown as thick red lines
-  on top of the "bulk" fluid mesh): 
+- <b> An FSI (sub-)boundary is not planar:</b> \n\n
+  In an unstructured mesh, the FSI boundary will usually be 
+  represented by a large number of distinct mesh boundaries. 
+  The automatic setup of the boundary coordinates on these
+  mesh boundaries requires them to be (individually) planar -- at least in the
+  problem's initial configuration. Provided you have followed our advice
+  and associated each of the facets that define the FSI boundary 
+  with a different boundary ID, you should not have any problems as
+  \c tetgen won't allow non-planar facets.
   \n\n
-@I w 0.75\textwidth  boundary_generation_test "Correct FSI boundary. "
-  \n
-  In the next figure, the fluid mesh is too coarse and the 
-  boundary detection has failed spectactularly:
+- <b> The solver does not converge:</b> \n\n
+  A large-displacement FSI problem is a highly nonlinear problem and the
+  provison of a good initial guess for the Newton iteration
+  is essential. We tend to proceed as follows:
   \n\n
-@I w 0.75\textwidth  boundary_generation_test_too_coarse "Wrongly identified FSI boundary on a (too) coarse fluid mesh.  "
+  -# Follow the steps outlined above, to study the constituent
+     single-physics problems first. This will already give you
+     some insight into the behaviour of the problem. For instance,
+     the solution of the single-physics Navier-Stokes equations at 
+     the desired Reynolds number may have to be computed via a parameter
+     incrementation, starting from Stokes flow. Similarly, the
+     study of the single-physics solid problem will reveal what
+     load increments can be accomodated without causing the
+     Newton iteration to diverge.
+     \n\n
+  -# Combine the two single-physics problems into a combined code
+     using the steps described in this tutorial. 
+     \n\n
+  -# Switch off the fluid-structure interaction by 
+     \n\n
+     -# setting the FSI parameter to zero, \f$ Q = 0, \f$ 
+     \n\n
+     -# commenting out the call to 
+        \c FSI_functions::setup_fluid_load_info_for_solid_elements(...),
+     \n\n
+     -# not creating the Lagrange-multiplier elements that
+        enforce the solid displacements onto the fluid mesh.
+     .
+     \n\n
+     This completely uncouples the two problems, allowing you
+     to replicate the single-physics parameter studies already
+     performed. 
+     \n\n
+  -# Now switch on the various interactions, one-by-one, while
+     carefully validating the results at each stage. We tend to 
+     proceed as follows:
+     \n\n
+     -# Solve the uncoupled problem at zero Reynolds number.
+        \n\n
+     -# Increase the Reynolds number in small increments to its
+        target value.
+        \n\n
+     -# Re-enable the call to 
+        \c FSI_functions::setup_fluid_load_info_for_solid_elements(...)
+        and attach the Lagrange multiplier elements but keep 
+        \f$ Q = 0. \f$ If the solid is not loaded by any 
+        forces/tractions other than those arising from the fluid,
+        the solution should not change as the solid remains unloaded.
+        \n\n
+     -# Gently increase the value of the FSI parameter, \f$ Q \f$,
+        remembering that it represents the ratio of the typical
+        viscous fluid stresses to the stiffness of the solid.
+        Hence, even relatively small values of \f$ Q \f$
+        tend to lead to relatively large solid displacements. 
+        Be gentle!
+     .
+  .
   \n\n
-- <b> The boundary coordinates on the fluid and solid side
-  of the FSI interface don't match:</b> 
-  \n\n
-  We have already alluded to this problem when discussing
-  \ref boundary_coord. The problem arises mainly (only?) when 
-  nodes at the "end" of the FSI interface are only
-  added to the FSI boundary in one of the meshes but not the other.
-  For this reason, we strongly recommend outputting the mesh
-  boundaries and checking them carefully before proceeding.
-  Here is a plot of the mesh boundaries for the current problem:
-  \n\n
-@I w 0.75\textwidth boundaries "Boundary nodes in the fluid (triangle) and solid (square) meshes. "
-  \n
 .
   
 

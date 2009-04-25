@@ -105,7 +105,8 @@ public:
      if (mesh_pt()->node_pt(j)->x(0)==0 && 
          mesh_pt()->node_pt(j)->x(1)==0) // 2d problem only
       {
-         fix_pressure(0,0,0.0);
+       oomph_info << "I'm fixing the pressure " << std::endl;
+       fix_pressure(0,0,0.0);
       }
     }
 
@@ -204,6 +205,7 @@ RefineableDrivenCavityProblem<ELEMENT>::RefineableDrivenCavityProblem()
     if (mesh_pt()->node_pt(j)->x(0)==0 && 
         mesh_pt()->node_pt(j)->x(1)==0) // 2d problem only
         {
+         oomph_info << "I'm fixing the pressure (2) " << std::endl;       
          fix_pressure(0,0,0.0);
         }
    }
@@ -274,10 +276,11 @@ int main(int argc, char **argv)
   RefineableDrivenCavityProblem<RefineableQTaylorHoodElement<2> > problem;
 
 #ifdef OOMPH_HAS_MPI
-  // Setup solver
-  problem.linear_solver_pt() = new SuperLU_dist;
-  static_cast<SuperLU_dist*>(problem.linear_solver_pt())->
-   enable_distributed_solve();
+// hierher
+//   // Setup solver
+//   problem.linear_solver_pt() = new SuperLU_dist;
+//  static_cast<SuperLU_dist*>(problem.linear_solver_pt())->
+//   enable_distributed_solve();
 #endif
 
   // Initial solve
@@ -358,10 +361,11 @@ int main(int argc, char **argv)
   RefineableDrivenCavityProblem<RefineableQCrouzeixRaviartElement<2> > problem;
 
 #ifdef OOMPH_HAS_MPI
-  // Setup solver
-  problem.linear_solver_pt() = new SuperLU_dist;
-  static_cast<SuperLU_dist*>(problem.linear_solver_pt())->
-   enable_distributed_solve();
+// hierher
+//   // Setup solver
+//   problem.linear_solver_pt() = new SuperLU_dist;
+//    static_cast<SuperLU_dist*>(problem.linear_solver_pt())->
+//     enable_distributed_solve();
 #endif
 
   // Initial solve

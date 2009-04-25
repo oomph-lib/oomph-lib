@@ -78,12 +78,25 @@ and another <a href="../../../meshes/mesh_from_tetgen/html/index.html">
 create <code>*.poly</code> files.
 
 
-Here is a plot of the domain specified by <a
-href="../../../../demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.poly">fsi_bifurcation_solid.poly</a>.
+Here is a plot of the domain specified by 
+<a href="../../../../demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.poly">fsi_bifurcation_solid.poly</a>.
 The plot was created using \c tetview which is distributed with
 <A HREF="http://tetgen.berlios.de/"> \c tetgen </A>.
 
 @I w 0.75\textwidth tetgen_boundaries  "The domain and its bounding facets. "
+
+
+Note that we have deliberately assigned a different boundary ID to 
+each facet. This will make the assignment of the traction boundary
+condition somewhat tedious as the inner surface of the vessel (where the
+traction is to be applied) is represented by twelve separate
+mesh boundaries. However, the assignment of distinct boundary
+IDs for the different facets is essential for the automatic generation
+of boundary coordinates in the
+<a href="../../../interaction/unstructured_three_d_fsi/html/index.html">
+corresponding fluid-structure interaction problem </a> and is
+therefore <b>strongly recommended</b>.
+
 
 <A HREF="http://tetgen.berlios.de/"> \c Tetgen </A> generates
 an unstructured volumetric mesh from the information contained
@@ -94,7 +107,7 @@ elements and faces in the files
 - <a href="../../../../demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.1.face">demo_drivers/solid/unstructured_three_d_solid/fsi_bifurcation_solid.1.face</a>
 .
 These files can be used as input to \c oomph-lib's \c TetgenMesh
-class, using the procedure disussed in 
+class, using the procedure discussed in 
 <a href="../../../meshes/mesh_from_tetgen/html/index.html">
 another tutorial.</a>
 
@@ -111,7 +124,8 @@ Note how <A HREF="http://tetgen.berlios.de/"> \c tetgen </A>
 has subdivided each of the 27 original facets specified in the 
 <code>*.poly</code> file into a surface triangulation. The 
 nodes and tetrahedral elements that are located on (or adjacent to) the
-27 original facets inherit their boundary IDs.
+27 original facets inherit their boundary IDs. This will be important
+when we assign the boundary conditions.
 
 <HR>
 <HR>
@@ -136,7 +150,8 @@ stress-free.
 \until set_lagrangian_nodal_coordinates()
 
 Finally, we identify the elements that are located next to the 
-various mesh boundaries.
+various mesh boundaries to facilitate the application of the
+traction boundary conditions.
 
 \until };
 
@@ -162,7 +177,9 @@ the negative \f$x\f$-direction,
 \until }
 
 and the pressure load, \f$ {\bf t} = -P {\bf n} \f$, that acts on 
-internal walls of the bifurcation.
+internal walls of the bifurcation (note that the outer unit
+normal \f$ {\bf n} \f$ on the wall is passed to the
+function. 
 
 
 \until end namespace
@@ -174,7 +191,7 @@ internal walls of the bifurcation.
 
 The driver code is straightforward. We store the command line
 arguments, specify an output directory and create the problem object,
-using nine-noded tetrahedral solid mechanics elements to 
+using ten-noded tetrahedral solid mechanics elements to 
 discretise the principle of virtual displacements. 
 
 \dontinclude unstructured_three_d_solid.cc
@@ -210,11 +227,11 @@ We employ two vectors, \c Pinned_solid_boundary_id and
 \c Solid_traction_boundary_id, to store the IDs of mesh boundaries
 that make up the in- and outflow cross-sections (where the
 bifurcation is pinned), and the internal boundaries (where
-the pressure load has to be applied). (Recall that tetgen requires the domain 
+the pressure load has to be applied). Recall that \c tetgen requires the domain 
 boundaries to be specified as a collection of planar facets. Boundary
 of interest in the computation, such as the "internal boundary of the
 bifurcation", therefore tend to comprise multiple distinct mesh
-boundaries.)
+boundaries.
 
 \until };
 
@@ -327,6 +344,14 @@ to the inside of the vessel:
 
 @I w 0.75\textwidth traction_faces "Plot of the SolidTractionElements that apply the pressure load to the inner surface of the vessel. " 
 
+
+<HR>
+
+\subsection your_own Exercise: Try it yourself
+
+Experiment with the \c tetgen -based mesh generation by
+modifying the <code>*.poly</code> file used in this example
+to different vessel geometries.
 
 
 

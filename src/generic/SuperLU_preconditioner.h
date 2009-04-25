@@ -185,7 +185,7 @@ class SuperLUDistPreconditioner : public Preconditioner
     solver.clean_up_memory();
    }
 
-  ///
+  /// Enable documentation of time
   bool& doc_time() 
    {
     return solver.doc_time();

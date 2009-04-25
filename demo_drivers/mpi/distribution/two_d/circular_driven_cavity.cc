@@ -328,11 +328,12 @@ int main(int argc, char **argv)
    problem(&Global_Physical_Variables::zero_body_force);
 
 #ifdef OOMPH_HAS_MPI
-  // Build a linear solver with SuperLU_dist
-  problem.linear_solver_pt() = new SuperLU_dist;
+// hierher
+//   // Build a linear solver with SuperLU_dist
+//   problem.linear_solver_pt() = new SuperLU_dist;
 
-  static_cast<SuperLU_dist*>(problem.linear_solver_pt())->
-   enable_distributed_solve();
+//   static_cast<SuperLU_dist*>(problem.linear_solver_pt())->
+//    enable_distributed_solve();
 #endif
 
   // output error estimates during solver
@@ -417,11 +418,12 @@ int main(int argc, char **argv)
    problem(&Global_Physical_Variables::body_force);
 
 #ifdef OOMPH_HAS_MPI
-  // Build a linear solver with SuperLU_dist
-  problem.linear_solver_pt() = new SuperLU_dist;
+// hierher
+ //  // Build a linear solver with SuperLU_dist
+//   problem.linear_solver_pt() = new SuperLU_dist;
 
-  static_cast<SuperLU_dist*>(problem.linear_solver_pt())->
-   enable_distributed_solve();
+//   static_cast<SuperLU_dist*>(problem.linear_solver_pt())->
+//    enable_distributed_solve();
 #endif
  
   // Initial solve

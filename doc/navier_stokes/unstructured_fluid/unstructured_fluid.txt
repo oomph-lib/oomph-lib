@@ -157,11 +157,11 @@ elements).
 \section main The driver code
 
 We specify an output directory and instantiate a constitutive 
-equation for the pseudo-elasticity, specifying a Poisson ratio of 0.3.
+equation for the pseudo-elasticity, specifying the Poisson ratio.
 
 \dontinclude unstructured_two_d_fluid.cc
 \skipline start_of_main
-\until 0.3);
+\until Nu);
 
 We create the \c Problem object and output the domain boundaries
 and the initial guess for the flow field.

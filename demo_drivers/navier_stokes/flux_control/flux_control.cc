@@ -26,6 +26,7 @@
 //LIC// 
 //LIC//====================================================================
 #include <iostream>
+#include <cstring>
 
 // Generic oomph-lib includes
 #include "generic.h"

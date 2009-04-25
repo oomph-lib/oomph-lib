@@ -202,9 +202,16 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
    for (unsigned i=0;i<n;i++)
     {
      // Get boundary ID
-     unsigned b=Inflow_boundary_id[i];
-     if (in_out==1) b=Outflow_boundary_id[i];
-     
+     unsigned b=0;
+     if (in_out==0)
+      {
+       b=Inflow_boundary_id[i];
+      }
+     else
+      {
+       b=Outflow_boundary_id[i];
+      }
+
      // Number of nodes on that boundary
      unsigned num_nod=Fluid_mesh_pt->nboundary_node(b);
      for (unsigned inod=0;inod<num_nod;inod++)
@@ -324,8 +331,15 @@ void UnstructuredFluidProblem<ELEMENT>::create_fluid_traction_elements()
    for (unsigned i=0;i<n;i++)
     {
      // Get boundary ID
-     unsigned b=Inflow_boundary_id[i];
-     if (in_out==1) b=Outflow_boundary_id[i];
+     unsigned b=0;
+     if (in_out==0)
+      {
+       b=Inflow_boundary_id[i];
+      }
+     else
+      {
+       b=Outflow_boundary_id[i];
+      }
      
      // How many bulk elements are adjacent to boundary b?
      unsigned n_element = Fluid_mesh_pt->nboundary_element(b);
