@@ -1,7 +1,7 @@
 #! /bin/sh
 
 #Set the number of tests to be checked
-NUM_TESTS=3
+NUM_TESTS=5
 
 # Setup validation directory
 #---------------------------
@@ -14,7 +14,8 @@ mkdir Validation
 #---------------------------------------
 
 cd Validation
-mkdir RESLT_fold RESLT_pitch RESLT_hopf
+mkdir RESLT_fold RESLT_pitch RESLT_hopf RESLT_adaptive_pitch \
+      RESLT_adaptive_hopf
 
 echo "Running fold bifurcation validation "
 cd RESLT_fold
@@ -87,13 +88,61 @@ else
 fi
 
 
+echo "Running adaptive pitchfork bifurcation validation "
+cd RESLT_adaptive_pitch
+../../adaptive_pitchfork > ../OUTPUT_adaptive_pitchfork
+cd ..
+
+echo "done"
+echo " " >> validation.log
+echo "Adaptive pitchfork bifurcation validation" >> validation.log
+echo "----------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT_adaptive_pitch/trace.dat RESLT_adaptive_pitch/bif_soln.dat \
+    > adaptive_pitch.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../bin/fpdiff.py ../validata/adaptive_pitch.dat.gz adaptive_pitch.dat \
+ >> validation.log
+fi
+
+
+
+echo "Running adaptive hopf bifurcation validation "
+cd RESLT_adaptive_hopf
+ln -s ../../adapt_hopf_eigen.dat eigen.dat
+../../adaptive_hopf > ../OUTPUT_adaptive_hopf
+cd ..
+
+echo "done"
+echo " " >> validation.log
+echo "Adaptive hopf bifurcation validation" >> validation.log
+echo "----------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT_adaptive_hopf/trace.dat RESLT_adaptive_hopf/bif_soln.dat \
+    > adaptive_hopf.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../bin/fpdiff.py ../validata/adaptive_hopf.dat.gz adaptive_hopf.dat \
+ 0.1 3.0e-9 >> validation.log
+fi
+
 
 # Append output to global validation log file
 #--------------------------------------------
 cat validation.log >> ../../../validation.log
-
-
-
 
 
 cd ..

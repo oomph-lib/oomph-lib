@@ -29,8 +29,7 @@
 //oomph-lib headers
 
 #include "spines.h"
-
-#include <stdlib.h>
+#include <cstdlib>
 
 namespace oomph
 {

@@ -26,6 +26,7 @@
 //LIC// 
 //LIC//====================================================================
 #include "refineable_mesh.h"
+#include <cstdlib>
 
 #ifdef OOMPH_HAS_MPI
 #include "mpi.h"
@@ -258,7 +259,7 @@ void RefineableMeshBase::read_refinement(
  restart_file.ignore(80,'\n');
 
  // Convert
- unsigned max_level=atoi(input_string.c_str());
+ unsigned max_level=std::atoi(input_string.c_str());
 
  // Assign storage for refinement pattern
  to_be_refined.resize(max_level);

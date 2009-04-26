@@ -33,6 +33,7 @@
 
 //Simple 2D triangle mesh class
 #include "simple_rectangular_tri_mesh.template.h"
+#include <algorithm>
 
 
 namespace oomph

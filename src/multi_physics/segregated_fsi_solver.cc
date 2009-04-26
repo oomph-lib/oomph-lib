@@ -29,7 +29,7 @@
 #include<algorithm>
 
 #include "segregated_fsi_solver.h"
-
+#include <algorithm>
 
 namespace oomph
 {

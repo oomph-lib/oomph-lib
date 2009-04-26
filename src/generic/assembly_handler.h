@@ -90,7 +90,21 @@ class AssemblyHandler
  virtual void get_all_vectors_and_matrices(
   GeneralisedElement* const &elem_pt,
   Vector<Vector<double> >&vec, Vector<DenseMatrix<double> > &matrix);
- 
+
+ /// \short Return an unsigned integer to indicate whether the
+ /// handler is a bifurcation tracking handler. The default
+ /// is zero (not)
+ virtual int bifurcation_type() const {return 0;}
+
+ /// \short Return a pointer to the
+ /// bifurcation parameter in bifurcation tracking problems
+ virtual double* bifurcation_parameter_pt() const;
+
+ /// \short Return the eigenfunction(s) associated with the bifurcation that
+ /// has been detected in bifurcation tracking problems
+ virtual void get_eigenfunction(Vector<DoubleVector> &eigenfunction);
+
+
  /// \short Empty virtual destructor
  virtual ~AssemblyHandler() {}
 };
@@ -195,7 +209,7 @@ class EigenProblemHandler : public AssemblyHandler
 /// A custom linear solver class that is used to solve a block-factorised
 /// version of the Fold bifurcation detection problem.
 //========================================================================
-class BlockFoldLinearSolver : public LinearSolver
+class AugmentedBlockFoldLinearSolver : public LinearSolver
 {
  ///Pointer to the original linear solver
  LinearSolver* Linear_solver_pt;
@@ -212,11 +226,11 @@ class BlockFoldLinearSolver : public LinearSolver
 public:
  
  ///Constructor, inherits the original linear solver
- BlockFoldLinearSolver(LinearSolver* const linear_solver_pt)
+ AugmentedBlockFoldLinearSolver(LinearSolver* const linear_solver_pt)
   : Linear_solver_pt(linear_solver_pt), Problem_pt(0), Alpha_pt(0), E_pt(0) {}
  
  ///Destructor: clean up the allocated memory
- ~BlockFoldLinearSolver();
+ ~AugmentedBlockFoldLinearSolver();
 
  /// The solve function uses the block factorisation
  void solve(Problem* const &problem_pt, DoubleVector &result);
@@ -246,11 +260,18 @@ public:
 //====================================================================== 
 class FoldHandler : public AssemblyHandler
  {
-  friend class BlockFoldLinearSolver;
+  friend class AugmentedBlockFoldLinearSolver;
 
-  /// \short Boolean flag to indicate whether we are solving a block-factorised
-  /// system or not
-  bool Solve_block_system;
+  /// A little private enum to determine whether we are solving
+  /// the block system or not
+  enum {Full_augmented,Block_J,Block_augmented_J};
+  
+  /// \short Integer flag to indicate which system should be assembled.
+  /// There are three possibilities. The full augmented system (0),
+  /// the non-augmented jacobian system (1), a system in which the 
+  /// jacobian is augmented by 1 row and column to ensure that it is
+  /// non-singular (2). See the enum above
+  unsigned Solve_which_system;
 
   ///Pointer to the problem
   Problem *Problem_pt;
@@ -264,12 +285,15 @@ class FoldHandler : public AssemblyHandler
   Vector<double> Phi;
 
   /// \short Storage for the null vector
-  Vector<double> Y;
+  Vector<double>  Y;
 
   /// \short A vector that is used to determine how many elements
   /// contribute to a particular equation. It is used to ensure
   /// that the global system is correctly formulated. 
   Vector<int> Count;
+
+  /// \short Storage for the pointer to the parameter
+  double *Parameter_pt;
 
  public:
 
@@ -277,7 +301,7 @@ class FoldHandler : public AssemblyHandler
   /// initialise the fold handler, by setting initial guesses
   /// for Y, Phi and calculating count. If the system changes, a new
   /// fold handler must be constructed
-  FoldHandler(Problem* const &problem_pt, double* const &parmater_pt);
+  FoldHandler(Problem* const &problem_pt, double* const &parameter_pt);
   
   /// \short Destructor, return the problem to its original state
   /// before the augmented system was added
@@ -300,6 +324,21 @@ class FoldHandler : public AssemblyHandler
                     Vector<double> &residuals, 
                     DenseMatrix<double> &jacobian);
 
+  ///\short Indicate that we are tracking a fold bifurcation by returning 1
+  int bifurcation_type() const {return 1;}
+
+  /// \short Return a pointer to the
+  /// bifurcation parameter in bifurcation tracking problems
+  double* bifurcation_parameter_pt() const
+   {return Parameter_pt;}
+
+  /// \short Return the eigenfunction(s) associated with the bifurcation that
+  /// has been detected in bifurcation tracking problems
+  void get_eigenfunction(Vector<DoubleVector> &eigenfunction);
+
+  /// \short Set to solve the augmented block system
+  void solve_augmented_block_system();
+
   /// \short Set to solve the block system
   void solve_block_system();
 
@@ -309,11 +348,57 @@ class FoldHandler : public AssemblyHandler
  };
 
 
+
 //========================================================================
 /// A custom linear solver class that is used to solve a block-factorised
 /// version of the PitchFork bifurcation detection problem.
 //========================================================================
 class BlockPitchForkLinearSolver : public LinearSolver
+{
+ ///Pointer to the original linear solver
+ LinearSolver* Linear_solver_pt;
+
+ ///Pointer to the problem, used in the resolve
+ Problem* Problem_pt;
+
+ ///Pointer to the storage for the vector b
+ DoubleVector *B_pt;
+
+ ///Pointer to the storage for the vector c
+ DoubleVector *C_pt;
+
+ ///Pointer to the storage for the vector d
+ DoubleVector *D_pt;
+
+public:
+ 
+ ///Constructor, inherits the original linear solver
+ BlockPitchForkLinearSolver(LinearSolver* const linear_solver_pt)
+  : Linear_solver_pt(linear_solver_pt), Problem_pt(0),
+   B_pt(0), C_pt(0), D_pt(0) {}
+ 
+ ///Destructor: clean up the allocated memory
+ ~BlockPitchForkLinearSolver();
+
+ /// The solve function uses the block factorisation
+ void solve(Problem* const &problem_pt, DoubleVector &result);
+
+ /// The resolve function also uses the block factorisation
+ void resolve(const DoubleVector &rhs, DoubleVector  &result);
+
+ /// Access function to the original linear solver
+ LinearSolver* linear_solver_pt() const {return Linear_solver_pt;}
+
+};
+
+
+
+
+//========================================================================
+/// A custom linear solver class that is used to solve a block-factorised
+/// version of the PitchFork bifurcation detection problem.
+//========================================================================
+class AugmentedBlockPitchForkLinearSolver : public LinearSolver
 {
  ///Pointer to the original linear solver
  LinearSolver* Linear_solver_pt;
@@ -330,12 +415,12 @@ class BlockPitchForkLinearSolver : public LinearSolver
 public:
  
  ///Constructor, inherits the original linear solver
- BlockPitchForkLinearSolver(LinearSolver* const linear_solver_pt)
+ AugmentedBlockPitchForkLinearSolver(LinearSolver* const linear_solver_pt)
   : Linear_solver_pt(linear_solver_pt), Problem_pt(0),
    Alpha_pt(0), E_pt(0) {}
  
  ///Destructor: clean up the allocated memory
- ~BlockPitchForkLinearSolver();
+ ~AugmentedBlockPitchForkLinearSolver();
 
  /// The solve function uses the block factorisation
  void solve(Problem* const &problem_pt, DoubleVector &result);
@@ -374,10 +459,18 @@ public:
  class PitchForkHandler : public AssemblyHandler
   {
    friend class BlockPitchForkLinearSolver;
+   friend class AugmentedBlockPitchForkLinearSolver;
 
-   /// \short Boolean flag to indicate whether we are solving 
-   /// a block-factorised system or not
-   bool Solve_block_system;
+   /// A little private enum to determine whether we are solving
+   /// the block system or not
+   enum {Full_augmented,Block_J,Block_augmented_J};
+
+   /// \short Integer flag to indicate which system should be assembled.
+   /// There are three possibilities. The full augmented system (0),
+   /// the non-augmented jacobian system (1), a system in which the 
+   /// jacobian is augmented by 1 row and column to ensure that it is
+   /// non-singular (2). See the enum above
+   unsigned Solve_which_system;
 
    ///Pointer to the problem
    Problem *Problem_pt;
@@ -404,6 +497,10 @@ public:
   /// contribute to a particular equation. It is used to ensure
   /// that the global system is correctly formulated. 
   Vector<int> Count;
+
+  /// \short Storage for the pointer to the parameter
+  double *Parameter_pt;
+
 
  public:
 
@@ -434,6 +531,23 @@ public:
   void get_jacobian(GeneralisedElement* const &elem_pt,
                     Vector<double> &residuals, 
                     DenseMatrix<double> &jacobian);
+
+  ///\short Indicate that we are tracking a pitchfork 
+  /// bifurcation by returning 2
+  int bifurcation_type() const {return 2;}
+
+  /// \short Return a pointer to the
+  /// bifurcation parameter in bifurcation tracking problems
+  double* bifurcation_parameter_pt() const
+   {return Parameter_pt;}
+
+   /// \short Return the eigenfunction(s) associated with the bifurcation that
+  /// has been detected in bifurcation tracking problems
+  void get_eigenfunction(Vector<DoubleVector> &eigenfunction);
+
+
+  /// \short Set to solve the augmented block system
+  void solve_augmented_block_system();
 
   /// \short Set to solve the block system
   void solve_block_system();
@@ -539,7 +653,7 @@ class HopfHandler : public AssemblyHandler
   Vector<double> Phi;
 
   /// \short The imaginary part of the null vector
-  Vector<double> Psi;
+  Vector<double>  Psi;
 
   /// \short A constant vector used to ensure that the null vector is
   /// not trivial
@@ -581,6 +695,22 @@ class HopfHandler : public AssemblyHandler
   void get_jacobian(GeneralisedElement* const &elem_pt,
                     Vector<double> &residuals, 
                     DenseMatrix<double> &jacobian);
+
+   ///\short Indicate that we are tracking a Hopf 
+  /// bifurcation by returning 3
+  int bifurcation_type() const {return 3;}
+
+  /// \short Return a pointer to the
+  /// bifurcation parameter in bifurcation tracking problems
+  double* bifurcation_parameter_pt() const 
+   {return Parameter_pt;}
+
+  /// \short Return the eigenfunction(s) associated with the bifurcation that
+  /// has been detected in bifurcation tracking problems
+  void get_eigenfunction(Vector<DoubleVector> &eigenfunction);
+
+  /// \short Return the frequency of the bifurcation
+  const double &omega() const {return Omega;}
   
   /// \short Set to solve the standard system
   void solve_standard_system();

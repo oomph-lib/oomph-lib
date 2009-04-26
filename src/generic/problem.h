@@ -136,6 +136,8 @@ namespace oomph
  friend class HopfHandler;
  friend class BlockFoldLinearSolver;
  friend class BlockPitchForkLinearSolver;
+ friend class AugmentedBlockFoldLinearSolver;
+ friend class AugmentedBlockPitchForkLinearSolver;
  friend class BlockHopfLinearSolver;
 
   private: 
@@ -177,6 +179,18 @@ namespace oomph
  /// Pointer to vector for backup of dofs
  Vector<double>* Saved_dof_pt;
 
+  protected:
+ ///\short Vector of pointers to copies of the problem used in adaptive 
+ ///bifurcation tracking problems (ALH: TEMPORARY HACK, WILL BE FIXED)
+ Vector<Problem*> Copy_of_problem_pt;
+
+ /// \short Set all pinned values to zero.
+ /// Used to set boundary conditions to be homogeneous in the copy
+ /// of the problem  used in adaptive bifurcation tracking 
+ /// (ALH: TEMPORARY HACK, WILL BE FIXED)
+ void set_pinned_values_to_zero();
+
+  private:
  /// \short Private helper function that is used to assemble the Jacobian 
  /// matrix in the case when the storage is row or column compressed.
  /// The boolean Flag indicates
@@ -236,6 +250,19 @@ namespace oomph
  /// \short A function that performs the guts of the continuation
  /// derivative calculation in arc length continuation problems.
  void calculate_continuation_derivatives_helper(const DoubleVector &z);
+
+ /// \short A function that is used to adapt a bifurcation-tracking
+ /// problem, which requires separate interpolation of the 
+ /// associated eigenfunction. The error measure is chosen to be
+ /// a suitable combination of the errors in the base flow and the
+ /// eigenfunction
+ void bifurcation_adapt_helper(unsigned &n_refined, unsigned &n_unrefined,
+                               const unsigned &bifurcation_type,
+                               const bool &actually_adapt=true);
+ 
+ /// \short A function that is used to document the errors used
+ /// in the adaptive solution of bifurcation problems.
+ void bifurcation_adapt_doc_errors(const unsigned &bifurcation_type);
 
 #ifdef OOMPH_HAS_MPI
 
@@ -537,7 +564,7 @@ protected:
  
  /// Actions that are to be performed after a mesh adaptation.
  virtual void actions_after_adapt() {}
- 
+
 #ifdef OOMPH_HAS_MPI
  /// Actions to be performed before a (mesh) distribution
  virtual void actions_before_distribute() {}
@@ -936,19 +963,28 @@ protected:
 
  /// \short Solve an eigenproblem as assembled by EigenElements
  /// calculate n_eval eigenvalues and return the corresponding
- /// eigenvectors
+ /// eigenvectors. The boolean flag (default true) specifies whether
+ /// the steady jacobian should be assembled. If the flag is false
+ /// then the weighted mass-matrix terms from the timestepper will
+ /// be included in the jacobian --- this is almost certainly never
+ /// wanted.
  void solve_eigenproblem(const unsigned &n_eval, 
                          Vector<std::complex<double> > &eigenvalue,
-                         Vector<DoubleVector> &eigenvector);
+                         Vector<DoubleVector> &eigenvector,
+                         const bool &steady=true);
 
  /// \short Solve an eigenproblem as assembled by EigenElements, 
- /// but only return the eigenvalues, not the eigenvectors
+ /// but only return the eigenvalues, not the eigenvectors.
+ /// The boolean flag (default true) is used to specify whether the
+ /// weighted mass-matrix terms from the timestepping scheme should
+ /// be included in the jacobian.
  void solve_eigenproblem(const unsigned &n_eval,
-                         Vector<std::complex<double> > &eigenvalue)
+                         Vector<std::complex<double> > &eigenvalue,
+                         const bool &steady=true)
   {
    //Create temporary storage for the eigenvectors (potentially wasteful)
    Vector<DoubleVector> eigenvector;
-   solve_eigenproblem(n_eval,eigenvalue,eigenvector);
+   solve_eigenproblem(n_eval,eigenvalue,eigenvector,steady);
   }
 
  /// \short Get the matrices required by a eigensolver. If the
@@ -967,6 +1003,7 @@ protected:
  /// it can be output by the usual routines
  void add_eigenvector_to_dofs(const double &epsilon,
                               DoubleVector &eigenvector);
+
 
  /// \short Store the current values of the degrees of freedom
  void store_current_dof_values();
@@ -1026,6 +1063,12 @@ protected:
 /// "this" one. This functionality is required, e.g. for
 /// multigrid computations.
  void copy(Problem* orig_problem_pt);
+
+ /// \short Make and return a pointer to the copy of the problem. A virtual
+ /// function that must be filled in by the user is they wish to perform
+ /// adaptive refinement in bifurcation tracking or in multigrid problems.
+ /// ALH: WILL NOT BE NECESSARY IN BIFURCATION TRACKING IN LONG RUN...
+ virtual Problem* make_copy();
 
  /// \short Read refinement pattern of all refineable meshes and refine them
  /// accordingly, then read all Data and nodal position info from 
@@ -1168,6 +1211,27 @@ protected:
  void calculate_continuation_derivatives(const DoubleVector &z);
 
   public:
+
+ /// \short Virtual function that is used to symmetrise the problem so that
+ /// the current solution exactly satisfies any symmetries within the system.
+ /// Used when adpativly solving pitchfork detection problems when small 
+ /// asymmetries in the coarse solution can be magnified
+ /// leading to very inaccurate answers on the fine mesh. 
+ /// This is always problem-specific and must be filled in by the user
+ /// The default issues a warning
+ virtual void symmetrise_eigenfunction_for_adaptive_pitchfork_tracking();
+
+ ///\short Return pointer to the parameter that is used in the
+ /// bifurcation detection. If we are not tracking a bifurcation then
+ /// an error will be thrown by the AssemblyHandler
+ double* bifurcation_parameter_pt() const;
+
+
+ /// \short Return the eigenfunction calculated as part of a
+ /// bifurcation tracking process. If we are not tracking a bifurcation
+ /// then an error will be thrown by the AssemblyHandler
+ void get_bifurcation_eigenfunction(Vector<DoubleVector> &eigenfunction);
+
 
  /// \short Turn on fold tracking using the augmented system specified
  /// in the FoldHandler class. After a call to this function subsequent calls
@@ -1452,6 +1516,41 @@ protected:
    unsigned n_refined, n_unrefined;
    adapt(n_refined,n_unrefined);
   }
+
+
+ /// \short Adapt problem:
+ /// Perform mesh adaptation for (all) refineable (sub)mesh(es),
+ /// based on the error estimates in elemental_error 
+ /// and the target errors specified
+ /// in the mesh(es). Following mesh adaptation,
+ /// update global mesh, and re-assign equation numbers. 
+ /// Return # of refined/unrefined elements. On return from this
+ /// function, Problem can immediately be solved again.
+ void adapt_based_on_error_estimates(unsigned &n_refined, 
+                                     unsigned &n_unrefined,
+                                     Vector<Vector<double> > &elemental_error);
+
+ /// \short Adapt problem:
+ /// Perform mesh adaptation for (all) refineable (sub)mesh(es),
+ /// based on the error estimates in elemental_error 
+ /// and the target errors specified
+ /// in the mesh(es). Following mesh adaptation,
+ /// update global mesh, and re-assign equation numbers. 
+ /// Return # of refined/unrefined elements. On return from this
+ /// function, Problem can immediately be solved again.
+ /// [Wrapper without n_refined and n_unrefined arguments]
+ void adapt_based_on_error_estimates(
+  Vector<Vector<double> > &elemental_error)
+  {
+   unsigned n_refined, n_unrefined;
+   adapt_based_on_error_estimates(n_refined,n_unrefined,elemental_error);
+  }
+
+
+ /// \short  Return the error estimates computed by (all) refineable 
+ /// (sub)mesh(es) in the elemental_error structure, which consists of
+ /// a vector of vectors of elemental errors, one vector for each (sub)mesh.
+ void get_all_error_estimates(Vector<Vector<double> > &elemental_error);
 
  /// \short Get max and min error for all elements in submeshes
  void doc_errors(DocInfo& doc_info);

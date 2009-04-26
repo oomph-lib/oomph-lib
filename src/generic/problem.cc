@@ -134,12 +134,21 @@ namespace oomph
   delete Default_assembly_handler_pt;
   delete Communicator_pt;
 
-  // if this problem has sub meshes then we must delete the Mesh_pt
-  if (Sub_mesh_pt.size() != 0)
-   {
-    Mesh_pt->flush_element_and_node_storage();
-    delete Mesh_pt;
-   }
+ // Delete any copies of the problem that have been created for
+ // use in adaptive bifurcation tracking.
+ // ALH: This will eventually go
+ unsigned n_copies = Copy_of_problem_pt.size();
+ for(unsigned c=0;c<n_copies;c++)
+  {
+   delete Copy_of_problem_pt[c];
+  }
+ 
+ // if this problem has sub meshes then we must delete the Mesh_pt
+ if (Sub_mesh_pt.size() != 0)
+  {
+   Mesh_pt->flush_element_and_node_storage();
+   delete Mesh_pt;
+  }
  }
 
 
@@ -1984,6 +1993,156 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
   delete residuals_vector[0];   
  }
 
+
+//===================================================================
+/// \short Set all pinned values to zero.
+/// Used to set boundary conditions to be homogeneous in the copy
+/// of the problem  used in adaptive bifurcation tracking 
+/// (ALH: TEMPORARY HACK, WILL BE FIXED)
+//==================================================================
+void Problem::set_pinned_values_to_zero()
+{
+ //NOTE THIS DOES NOT ZERO ANY SPINE DATA, but otherwise everything else 
+ //should be zeroed
+
+ //Zero any pinned global Data
+ const unsigned n_global_data = nglobal_data();
+ for(unsigned i=0;i<n_global_data;i++)
+  {
+   Data* const local_data_pt = Global_data_pt[i];
+   const unsigned n_value = local_data_pt->nvalue();
+   for(unsigned j=0;j<n_value;j++)
+    {
+     //If the data value is pinned set the value to zero
+     if(local_data_pt->is_pinned(j)) {local_data_pt->set_value(j,0.0);}
+    }
+  }
+
+ // Loop over the submeshes:
+ const unsigned n_sub_mesh=Sub_mesh_pt.size();
+ if(n_sub_mesh==0)
+  {
+   //Loop over the nodes in the element
+   const unsigned n_node = Mesh_pt->nnode();
+   for(unsigned n=0;n<n_node;n++)
+    {
+     Node* const local_node_pt = Mesh_pt->node_pt(n);
+     const unsigned n_value = local_node_pt->nvalue();
+     for(unsigned j=0;j<n_value;j++)
+      {
+       //If the data value is pinned set the value to zero
+       if(local_node_pt->is_pinned(j)) {local_node_pt->set_value(j,0.0);}
+      }
+     
+     //Try to cast to a solid node
+     SolidNode* const local_solid_node_pt = 
+      dynamic_cast<SolidNode*>(local_node_pt);
+     //If we are successful
+     if(local_solid_node_pt)
+      {
+       //Find the dimension of the node
+       const unsigned n_dim = local_solid_node_pt->ndim();
+       //Find number of positions
+       const unsigned n_position_type = local_solid_node_pt->nposition_type();
+       
+       for(unsigned k=0;k<n_position_type;k++)
+        {
+         for(unsigned i=0;i<n_dim;i++)
+          {
+           //If the generalised position is pinned,
+           //set the value to zero
+           if(local_solid_node_pt->position_is_pinned(k,i))
+            {
+             local_solid_node_pt->x_gen(k,i) = 0.0;
+            }
+          }
+        }
+      }
+    }
+
+   //Now loop over the element's and zero the internal data
+   const unsigned n_element = Mesh_pt->nelement();
+   for(unsigned e=0;e<n_element;e++)
+    {
+     GeneralisedElement* const local_element_pt = Mesh_pt->element_pt(e);
+     const unsigned n_internal = local_element_pt->ninternal_data();
+     for(unsigned i=0;i<n_internal;i++)
+      {
+       Data* const local_data_pt = local_element_pt->internal_data_pt(i);
+       const unsigned n_value = local_data_pt->nvalue();
+       for(unsigned j=0;j<n_value;j++)
+        {
+         //If the data value is pinned set the value to zero
+         if(local_data_pt->is_pinned(j)) {local_data_pt->set_value(j,0.0);}
+        }
+      }
+    } //End of loop over elements
+  }
+ else
+  {
+   //Alternatively loop over all sub meshes
+   for (unsigned m=0;m<n_sub_mesh;m++)
+    {
+     //Loop over the nodes in the element
+     const unsigned n_node = Sub_mesh_pt[m]->nnode();
+     for(unsigned n=0;n<n_node;n++)
+      {
+       Node* const local_node_pt = Sub_mesh_pt[m]->node_pt(n);
+       const unsigned n_value = local_node_pt->nvalue();
+       for(unsigned j=0;j<n_value;j++)
+        {
+         //If the data value is pinned set the value to zero
+         if(local_node_pt->is_pinned(j)) {local_node_pt->set_value(j,0.0);}
+        }
+       
+       //Try to cast to a solid node
+       SolidNode* const local_solid_node_pt = 
+        dynamic_cast<SolidNode*>(local_node_pt);
+       //If we are successful
+       if(local_solid_node_pt)
+        {
+         //Find the dimension of the node
+         const unsigned n_dim = local_solid_node_pt->ndim();
+         //Find number of positions
+         const unsigned n_position_type = 
+          local_solid_node_pt->nposition_type();
+         
+         for(unsigned k=0;k<n_position_type;k++)
+          {
+           for(unsigned i=0;i<n_dim;i++)
+            {
+             //If the generalised position is pinned,
+             //set the value to zero
+             if(local_solid_node_pt->position_is_pinned(k,i))
+              {
+               local_solid_node_pt->x_gen(k,i) = 0.0;
+              }
+            }
+          }
+        }
+      }
+
+     //Now loop over the element's and zero the internal data
+     const unsigned n_element = Sub_mesh_pt[m]->nelement();
+     for(unsigned e=0;e<n_element;e++)
+      {
+       GeneralisedElement* const local_element_pt = 
+        Sub_mesh_pt[m]->element_pt(e);
+       const unsigned n_internal = local_element_pt->ninternal_data();
+       for(unsigned i=0;i<n_internal;i++)
+        {
+         Data* const local_data_pt = local_element_pt->internal_data_pt(i);
+         const unsigned n_value = local_data_pt->nvalue();
+         for(unsigned j=0;j<n_value;j++)
+          {
+           //If the data value is pinned set the value to zero
+           if(local_data_pt->is_pinned(j)) {local_data_pt->set_value(j,0.0);}
+          }
+        }
+      } //End of loop over elements
+    }
+  }
+}
 
 //=====================================================================
 /// This is a (private) helper function that is used to assemble system
@@ -4263,10 +4422,49 @@ void Problem::get_derivative_wrt_global_parameter(
 //==================================================================
 void Problem::solve_eigenproblem(const unsigned &n_eval,
                                  Vector<std::complex<double> > &eigenvalue,
-                                 Vector<DoubleVector> &eigenvector)
+                                 Vector<DoubleVector> &eigenvector,
+                                 const bool &steady)
 {
- //Call the Eigenproblem for the eigensolver
- Eigen_solver_pt->solve_eigenproblem(this,n_eval,eigenvalue,eigenvector);
+ //If the boolean flag is steady, then make all the timesteppers steady
+ //before solving the eigenproblem. This will "switch off" the time-derivative
+ //terms in the jacobian matrix
+ if(steady)
+  {
+   //Find out how many timesteppers there are
+   const unsigned n_time_steppers = ntime_stepper();
+   
+   // Vector of bools to store the is_steady status of the various
+   // timesteppers when we came in here
+   std::vector<bool> was_steady(n_time_steppers);
+   
+   //Loop over them all and make them (temporarily) static
+   for(unsigned i=0;i<n_time_steppers;i++)
+    {
+     was_steady[i]=time_stepper_pt(i)->is_steady();
+     time_stepper_pt(i)->make_steady();
+    }
+   
+   //Call the Eigenproblem for the eigensolver
+   Eigen_solver_pt->solve_eigenproblem(this,n_eval,eigenvalue,eigenvector);
+   
+   // Reset the is_steady status of all timesteppers that
+   // weren't already steady when we came in here and reset their
+   // weights
+   for(unsigned i=0;i<n_time_steppers;i++)
+    {
+     if (!was_steady[i])
+      {
+       time_stepper_pt(i)->undo_make_steady();
+      }
+    }
+  }
+ //Otherwise if we don't want to make the problem steady, just
+ //assemble and solve the eigensystem
+ else
+  {
+   //Call the Eigenproblem for the eigensolver
+   Eigen_solver_pt->solve_eigenproblem(this,n_eval,eigenvalue,eigenvector);
+  }
 }
 
 //===================================================================
@@ -5266,6 +5464,12 @@ void Problem::calculate_continuation_derivatives_helper(
  unsigned long n_dofs = ndof();
 
  //Work out the continuation direction
+ //The idea is that (du/ds)_{old} . (du/ds)_{new} >= 0 
+ //if the direction is to remain the same.
+ //du/ds_{new} = [dlambda/ds; du/ds] = [dlambda/ds ; - dlambda/ds z]
+ //so (du/ds)_{new} . (du/ds)_{old} 
+ // = dlambda/ds [1 ; - z] . [ Parameter_derivative ; Dof_derivaives]
+ // = dlambda/ds (Parameter_derivative - Dof_derivatives . z)
  Continuation_direction = Parameter_derivative;
  for(unsigned long l=0;l<n_dofs;l++) 
   {Continuation_direction -= Dof_derivatives[l]*z[l];}
@@ -5300,6 +5504,51 @@ void Problem::calculate_continuation_derivatives_helper(
   }
 }
 
+
+/// \short Virtual function that is used to symmetrise the problem so that
+/// the current solution exactly satisfies any symmetries within the system.
+/// Used when adpativly solving pitchfork detection problems when small 
+/// asymmetries in the coarse solution can be magnified
+/// leading to very inaccurate answers on the fine mesh. 
+/// This is always problem-specific and must be filled in by the user
+/// The default issues a warning
+void Problem::symmetrise_eigenfunction_for_adaptive_pitchfork_tracking()
+{
+ std::ostringstream warn_message;
+ warn_message
+  << "Warning: This function is called after spatially adapting the\n"
+  << "eigenfunction associated with a pitchfork bifurcation and should\n"
+  << "ensure that the exact (anti-)symmetries of problem are enforced\n"
+  << "within that eigenfunction. It is problem specific and must be\n"
+  << "filled in by the user if required.\n"
+  << "A sign of problems is if the slack paramter gets too large and\n"
+  << "if the solution at the Pitchfork is not symmetric.\n";
+ OomphLibWarning(
+  warn_message.str(),
+  "Problem::symmetrise_eigenfunction_for_adaptive_pitchfork_tracking()",
+  OOMPH_EXCEPTION_LOCATION);
+}
+
+//====================================================================
+///Return pointer to the parameter that is used in the
+/// bifurcation detection. If we are not tracking a bifurcation then
+/// an error will be thrown by the AssemblyHandler
+//====================================================================
+double* Problem::bifurcation_parameter_pt() const 
+{return Assembly_handler_pt->bifurcation_parameter_pt();}
+
+//====================================================================
+/// Return the eigenfunction calculated as part of a
+/// bifurcation tracking process. If we are not tracking a bifurcation
+/// then an error will be thrown by the AssemblyHandler
+//======================================================================
+void Problem::get_bifurcation_eigenfunction(
+ Vector<DoubleVector> &eigenfunction)
+{
+ //Simply call the appropriate assembly handler function
+ Assembly_handler_pt->get_eigenfunction(eigenfunction);
+}
+
 //============================================================
 /// Activate the fold tracking system by changing the assembly
 /// handler and initialising it using the parameter addressed 
@@ -5322,7 +5571,7 @@ void Problem::activate_fold_tracking(double* const &parameter_pt,
  //solver to the original non-block version.
  if(block_solve)
   {
-   Linear_solver_pt = new BlockFoldLinearSolver(Linear_solver_pt);
+   Linear_solver_pt = new AugmentedBlockFoldLinearSolver(Linear_solver_pt);
   }
 }
 
@@ -5353,7 +5602,8 @@ void Problem::activate_pitchfork_tracking(
  //solver to the original non-block version.
  if(block_solve)
   {
-   Linear_solver_pt = new BlockPitchForkLinearSolver(Linear_solver_pt);
+   Linear_solver_pt = 
+    new BlockPitchForkLinearSolver(Linear_solver_pt);
   }
 }
 
@@ -6484,6 +6734,25 @@ void Problem::copy(Problem* orig_problem_pt)
 
 }
 
+//=========================================================================
+/// Make and return a pointer to the copy of the problem. A virtual
+/// function that must be filled in by the user is they wish to perform
+/// adaptive refinement in bifurcation tracking or in multigrid problems.
+/// ALH: WILL NOT BE NECESSARY IN BIFURCATION TRACKING IN LONG RUN...
+//=========================================================================
+Problem* Problem::make_copy()
+{
+ std::ostringstream error_stream;
+ error_stream 
+  << "This function must be overloaded in your specific problem, and must\n"
+  << "create an exact copy of your problem. Usually this will be achieved\n"
+  << "by a call to the constructor with exactly the same arguments as used\n";
+
+ throw OomphLibError(error_stream.str(),
+                     "Problem::make_copy()",
+                     OOMPH_EXCEPTION_LOCATION);
+}
+
 
 
 //=========================================================================
@@ -6842,6 +7111,313 @@ unsigned Problem::self_test()
 
 }
 
+//====================================================================
+/// A function that is used to adapt a bifurcation-tracking
+/// problem, which requires separate interpolation of the 
+/// associated eigenfunction. The error measure is chosen to be
+/// a suitable combination of the errors in the base flow and the
+/// eigenfunction. The bifurcation type is passed as an argument
+//=====================================================================
+void Problem::bifurcation_adapt_helper(
+ unsigned &n_refined, unsigned &n_unrefined,
+ const unsigned &bifurcation_type, const bool &actually_adapt)
+{
+ //Storage for eigenfunction from the problem
+ Vector<DoubleVector> eigenfunction;
+ //Get the eigenfunction from the problem
+ this->get_bifurcation_eigenfunction(eigenfunction);
+ 
+ //Get the bifurcation parameter 
+ double *parameter_pt = this->bifurcation_parameter_pt();
+ 
+ //Get the frequency parameter if tracking a Hopf bifurcation
+ double omega = 0.0;
+ //If we're tracking a Hopf then also get the frequency
+ if(bifurcation_type==3)
+  {
+   omega = dynamic_cast<HopfHandler*>(assembly_handler_pt())->omega();
+  }
+
+ //If we're tracking a Pitchfork get the slack parameter (Hack)
+ double sigma = 0.0;
+ if(bifurcation_type==2)
+  {
+   sigma = this->dof(this->ndof()-1);
+  }
+
+ //We can now deactivate the bifurcation tracking in the problem
+ //to restore the degrees of freedom to the unaugmented value
+ this->deactivate_bifurcation_tracking();
+ 
+ //Next, we create copies of the present problem
+ //The number of copies depends on the number of eigenfunctions 
+ //One copy for each eigenfunction
+ const unsigned n_copies = eigenfunction.size();
+ Copy_of_problem_pt.resize(n_copies);
+ 
+ //Loop over the number of copies
+ for(unsigned c=0;c<n_copies;c++)
+  {
+   //If we don't already have a copy
+   if(Copy_of_problem_pt[c]==0)
+    {
+     //Create the copy
+     Copy_of_problem_pt[c] = this->make_copy();
+
+     //Refine the copy to the same level as the current problem
+     
+     //Find number of submeshes
+     const unsigned N_mesh = Copy_of_problem_pt[c]->nsub_mesh();
+     //If there is only one mesh
+     if(N_mesh==0)
+      {
+       //Can we refine the mesh
+       if(RefineableMeshBase* mmesh_pt =
+          dynamic_cast<RefineableMeshBase*>(Copy_of_problem_pt[c]->mesh_pt(0)))
+        {
+         //Is the adapt flag set
+         if(mmesh_pt->adapt_flag())
+          {
+           //Now get the original problem's mesh if it's refineable
+           if(RefineableMeshBase* original_mesh_pt
+              = dynamic_cast<RefineableMeshBase*>(this->mesh_pt(0)))
+           {
+            mmesh_pt->refine_base_mesh_as_in_reference_mesh(original_mesh_pt);
+           }
+           else
+            {
+             oomph_info 
+              << 
+              "Info/Warning: Mesh in orginal problem is not refineable."
+              << std::endl;
+            }
+          }
+         else
+          {
+           oomph_info << "Info/Warning: Mesh adaptation is disabled in copy." 
+                      << std::endl;
+          }
+        }
+       else
+        {
+         oomph_info << "Info/Warning: Mesh cannot be adapted in copy."
+                    << std::endl;
+        }
+      } //End of single mesh case
+     //Otherwise loop over the submeshes
+     else
+      {
+       for(unsigned m=0;m<N_mesh;m++)
+        {
+         //Can we refine the submesh
+         if(RefineableMeshBase* mmesh_pt =
+            dynamic_cast<RefineableMeshBase*>(
+             Copy_of_problem_pt[c]->mesh_pt(m)))
+          {
+           //Is the adapt flag set
+           if(mmesh_pt->adapt_flag())
+            {
+             //Now get the original problem's mesh
+             if(RefineableMeshBase* original_mesh_pt
+                = dynamic_cast<RefineableMeshBase*>(this->mesh_pt(m)))
+              {
+               mmesh_pt->
+                refine_base_mesh_as_in_reference_mesh(original_mesh_pt);
+              }
+             else
+              {
+               oomph_info 
+                << 
+                "Info/Warning: Mesh in orginal problem is not refineable."
+                << std::endl;
+              }
+            }
+           else
+            {
+             oomph_info << 
+              "Info/Warning: Mesh adaptation is disabled in copy." 
+                        << std::endl;
+            }
+          }
+         else
+           {
+            oomph_info << "Info/Warning: Mesh cannot be adapted in copy."
+                       << std::endl;
+           }
+        }
+       //rebuild the global mesh in the copy
+       Copy_of_problem_pt[c]->rebuild_global_mesh();
+
+      } //End of multiple mesh case
+     
+     //Must call actions after adapt
+     Copy_of_problem_pt[c]->actions_after_adapt();
+     
+     //Assign the equation numbers to the copy (quietly)
+     (void)Copy_of_problem_pt[c]->assign_eqn_numbers();
+    }
+  } //End of creation of copies
+ 
+
+ //Now check some numbers
+ for(unsigned c=0;c<n_copies;c++)
+  {
+   //Check that the dofs match for each copy
+#ifdef PARANOID
+   //If the problems don't match then complain
+   if(Copy_of_problem_pt[c]->ndof() != this->ndof())
+    {
+       std::ostringstream error_stream;
+       error_stream 
+        << 
+        "Number of unknowns in the problem copy " << c << " "
+        << "not equal to number in the original:\n"
+        << this->ndof() << " (original) " << Copy_of_problem_pt[c]->ndof() 
+        << " (copy)\n";
+       
+       throw OomphLibError(error_stream.str(),
+                           "Problem::bifurcation_adapt_helper()",
+                         OOMPH_EXCEPTION_LOCATION);
+      }
+#endif    
+     
+   //Assign the eigenfunction(s) to the copied problems 
+   Copy_of_problem_pt[c]->assign_eigenvector_to_dofs(eigenfunction[c]);
+   //Set all pinned values to zero
+   Copy_of_problem_pt[c]->set_pinned_values_to_zero();
+  }
+ 
+ //Symmetrise the problem if we are solving a pitchfork
+ if(bifurcation_type==2)
+  {Copy_of_problem_pt[0]->
+    symmetrise_eigenfunction_for_adaptive_pitchfork_tracking();}
+ 
+ //Find error estimates based on current problem and eigenproblem
+ //Now we need to get the error estimates for both problems.
+ Vector<Vector<double> > base_error, eigenfunction_error;
+ this->get_all_error_estimates(base_error);
+ //Loop over the copies
+ for(unsigned c=0;c<n_copies;c++)
+  {
+   //Get the error estimates for the copy
+   Copy_of_problem_pt[c]->get_all_error_estimates(eigenfunction_error);
+
+   //Find the number of meshes
+   unsigned n_mesh = base_error.size();
+
+#ifdef PARANOID   
+   if(n_mesh != eigenfunction_error.size())
+    {
+     std::ostringstream error_stream;
+     error_stream << 
+      "Problems do not have the same number of meshes\n"
+                  << "Base : " << n_mesh 
+                  << " : Eigenproblem : " 
+                  << eigenfunction_error.size() << "\n";
+     throw OomphLibError(error_stream.str(),
+                         "Problem::bifurcation_adapt_helper()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   for(unsigned m=0;m<n_mesh;m++)
+    {
+     //Check the number of elements is the same
+     unsigned n_element = base_error[m].size();
+#ifdef PARANOID
+     if(n_element != eigenfunction_error[m].size())
+      {
+       std::ostringstream error_stream;
+       error_stream << "Mesh " << m << 
+        " does not have the same number of elements in the two problems:\n"
+                    << "Base: " << n_element << " :  Eigenproblem: " 
+                    << eigenfunction_error[m].size() << "\n";
+       throw OomphLibError(error_stream.str(),
+                           "Problem::bifurcation_adapt_helper()",
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+     //Now add all the error esimates together
+     for(unsigned e=0;e<n_element;e++)
+      {
+       //Add the error estimates (lazy)
+       base_error[m][e] += eigenfunction_error[m][e];
+      }
+      }
+    } //End of loop over copies
+ 
+ //Then refine all problems based on the combined measure
+ //if we are actually adapting (not just estimating the errors)
+ if(actually_adapt)
+  {
+   this->adapt_based_on_error_estimates(n_refined,n_unrefined,base_error);
+   for(unsigned c=0;c<n_copies;c++)
+    {
+     Copy_of_problem_pt[c]->
+      adapt_based_on_error_estimates(n_refined,n_unrefined,base_error);
+    }
+   //Symmetrise the problem (again) if we are solving for a pitchfork
+   if(bifurcation_type==2)
+    {Copy_of_problem_pt[0]->
+      symmetrise_eigenfunction_for_adaptive_pitchfork_tracking();}
+  
+   //Now get the refined guess for the eigenvector
+   for(unsigned c=0;c<n_copies;c++)
+    {
+     Copy_of_problem_pt[c]->get_dofs(eigenfunction[c]);
+    }
+  }
+
+ //Reactivate the tracking
+ switch(bifurcation_type)
+  {
+   //Fold tracking
+  case 1:
+   this->activate_fold_tracking(parameter_pt);
+   break;
+   
+   //Pitchfork
+  case 2:
+   this->activate_pitchfork_tracking(parameter_pt,eigenfunction[0]);
+   //reset the slack parameter
+   this->dof(this->ndof()-1) = sigma;
+   break;
+
+   //Hopf
+  case 3:
+   this->activate_hopf_tracking(parameter_pt,omega,
+                                eigenfunction[0],eigenfunction[1]);
+   break;
+   
+  default:
+   std::ostringstream error_stream;
+   error_stream << "Bifurcation type " << bifurcation_type << " not known\n"
+                << "1: Fold, 2: Pitchfork, 3: Hopf\n";
+   throw OomphLibError(error_stream.str(),
+                       "Problem::bifurcation_adapt_helper()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+}
+
+
+//====================================================================
+/// A function that is used to document the errors when
+/// adapting a bifurcation-tracking
+/// problem, which requires separate interpolation of the 
+/// associated eigenfunction. The error measure is chosen to be
+/// a suitable combination of the errors in the base flow and the
+/// eigenfunction. The bifurcation type is passed as an argument
+//=====================================================================
+void Problem::bifurcation_adapt_doc_errors(const unsigned &bifurcation_type)
+{
+ //Dummy arguments
+ unsigned n_refined, n_unrefined;
+ //Just call the bifurcation helper without actually adapting
+ bifurcation_adapt_helper(n_refined,n_unrefined,bifurcation_type,false);
+}
+
+
+
 //========================================================================
 /// Adapt problem:
 /// Perform mesh adaptation for (all) refineable (sub)mesh(es),
@@ -6853,6 +7429,16 @@ unsigned Problem::self_test()
 //======================================================================
 void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
 {
+ //Get the bifurcation type
+ int bifurcation_type = this->Assembly_handler_pt->bifurcation_type();
+ //If we are tracking a bifurcation then call the bifurcation adapt function
+ if(bifurcation_type!=0)
+  {
+   this->bifurcation_adapt_helper(n_refined,n_unrefined,bifurcation_type);
+   //Return immediately
+   return;
+  }
+
  oomph_info << std::endl << std::endl;
  oomph_info << "Adapting problem:" << std::endl;
  oomph_info << "=================" << std::endl;
@@ -7030,11 +7616,284 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
 }
 
 //========================================================================
+/// Perform mesh adaptation for (all) refineable (sub)mesh(es),
+/// based on the error estimates in elemental_error 
+/// and the target errors specified
+/// in the mesh(es). Following mesh adaptation,
+/// update global mesh, and re-assign equation numbers. 
+/// Return # of refined/unrefined elements. On return from this
+/// function, Problem can immediately be solved again.
+//========================================================================
+void Problem::adapt_based_on_error_estimates(unsigned &n_refined, 
+                                             unsigned &n_unrefined,
+                                             Vector<Vector<double> > 
+                                             &elemental_error)
+{
+ oomph_info << std::endl << std::endl;
+ oomph_info << "Adapting problem:" << std::endl;
+ oomph_info << "=================" << std::endl;
+ 
+ //Call the actions before adaptation
+ actions_before_adapt();
+ 
+ //Initialise counters
+ n_refined = 0;
+ n_unrefined = 0;
+ 
+ // Number of submeshes?
+ unsigned Nmesh=nsub_mesh();
+ 
+ // Single mesh:
+ //------------
+ if(Nmesh==0)
+  {
+   // Refine single mesh uniformly if possible
+   if(RefineableMeshBase* mmesh_pt = 
+      dynamic_cast<RefineableMeshBase*>(Problem::mesh_pt(0)))
+    { 
+     if (mmesh_pt->adapt_flag())
+      {
+       // Adapt mesh
+       mmesh_pt->adapt(elemental_error[0]);
+       
+       // Add to counters
+       n_refined += mmesh_pt->nrefined();
+       n_unrefined += mmesh_pt->nunrefined();
+       
+      }
+     else
+      {
+       oomph_info << "Info/Warning: Mesh adaptation is disabled." 
+                  << std::endl;
+      }
+    }
+   else
+    {
+     oomph_info << "Info/Warning: Mesh cannot be adapted" << std::endl;
+    }
+   
+  }
+ 
+ //Multiple submeshes
+ //------------------
+ else
+  {
+   // Loop over submeshes
+    for (unsigned imesh=0;imesh<Nmesh;imesh++)
+     {
+      // Refine single mesh uniformly if possible
+      if(RefineableMeshBase* mmesh_pt =
+         dynamic_cast<RefineableMeshBase*>(Problem::mesh_pt(imesh)))
+       {
+        if (mmesh_pt->adapt_flag())
+         {
+          // Adapt mesh
+          mmesh_pt->adapt(elemental_error[imesh]); 
+          
+          // Add to counters
+          n_refined += mmesh_pt->nrefined();
+          n_unrefined += mmesh_pt->nunrefined();
+         }
+        else
+         {
+          oomph_info << "Info/Warning: Mesh adaptation is disabled." 
+                     << std::endl;
+         }
+       }
+      else
+       {
+        oomph_info << "Info/Warning: Mesh cannot be adapted." << std::endl;
+       }
+      
+     } // End of loop over submeshes
+    
+    // Rebuild the global mesh
+    rebuild_global_mesh();
+    
+  }
+
+ //Any actions after adapt
+ actions_after_adapt();
+ 
+ //Attach the boundary conditions to the mesh
+ oomph_info <<"\nNumber of equations: " << assign_eqn_numbers() 
+            << std::endl<< std::endl; 
+ 
+}
+
+
+//========================================================================
+/// Return the error estimates computed by (all) refineable 
+/// (sub)mesh(es) in the elemental_error structure, which consists of
+/// a vector of elemental errors for each (sub)mesh.
+//========================================================================
+void Problem::get_all_error_estimates(Vector<Vector<double> > &elemental_error)
+{
+ // Number of submeshes?
+ const unsigned Nmesh=nsub_mesh();
+
+ // Single mesh:
+ //------------
+ if(Nmesh==0)
+  {
+   //There is only one mesh
+   elemental_error.resize(1);
+   // Refine single mesh uniformly if possible
+   if(RefineableMeshBase* mmesh_pt = 
+      dynamic_cast<RefineableMeshBase*>(Problem::mesh_pt(0)))
+    { 
+     //If we can adapt the mesh
+     if(mmesh_pt->adapt_flag())
+      {
+       // Get pointer to error estimator
+       ErrorEstimator* error_estimator_pt=mmesh_pt->
+        spatial_error_estimator_pt();
+       
+#ifdef PARANOID
+       if (error_estimator_pt==0)
+          {
+           throw OomphLibError(
+            "Error estimator hasn't been set yet",
+            "Problem::get_all_error_estimates()",
+            OOMPH_EXCEPTION_LOCATION);
+          }
+#endif
+       
+       // Get error for all elements
+       elemental_error[0].resize(mmesh_pt->nelement());
+       //Are we documenting the errors or not
+       if(mmesh_pt->doc_info_pt()==0)
+        {
+         error_estimator_pt->get_element_errors(Problem::mesh_pt(0),
+                                                elemental_error[0]);
+        }
+       else
+        {
+         error_estimator_pt->get_element_errors(Problem::mesh_pt(0),
+                                                elemental_error[0],
+                                                *mmesh_pt->doc_info_pt());
+        }
+       
+       // Store max./min actual error
+       mmesh_pt->max_error()=
+        std::abs(*std::max_element(elemental_error[0].begin(),
+                                   elemental_error[0].end(),AbsCmp<double>()));
+       
+       mmesh_pt->min_error()=
+        std::abs(*std::min_element(elemental_error[0].begin(),
+                                   elemental_error[0].end(),AbsCmp<double>()));
+       
+       oomph_info << "\n Max/min error: " 
+                  << mmesh_pt->max_error() << " "
+                  << mmesh_pt->min_error() << std::endl;
+      }
+     else
+      {
+       oomph_info << "Info/Warning: Mesh adaptation is disabled." 
+                  << std::endl;
+      }
+    }
+   else
+    {
+     oomph_info << "Info/Warning: Mesh cannot be adapted" << std::endl;
+    }
+   
+  }
+ 
+ //Multiple submeshes
+ //------------------
+ else
+  {
+   //Resize to the number of submeshes
+   elemental_error.resize(Nmesh);
+   
+   // Loop over submeshes
+   for (unsigned imesh=0;imesh<Nmesh;imesh++)
+    {
+     // Refine single mesh uniformly if possible
+     if(RefineableMeshBase* mmesh_pt =
+        dynamic_cast<RefineableMeshBase*>(Problem::mesh_pt(imesh)))
+      {
+       // Get pointer to error estimator
+       ErrorEstimator* error_estimator_pt=mmesh_pt->
+        spatial_error_estimator_pt();
+       
+#ifdef PARANOID
+       if (error_estimator_pt==0)
+        {
+         throw OomphLibError(
+          "Error estimator hasn't been set yet",
+          "Problem::get_all_error_estimates()",
+          OOMPH_EXCEPTION_LOCATION);
+        }
+#endif
+       //If we can adapt the mesh
+       if (mmesh_pt->adapt_flag())
+        {
+         // Get error for all elements
+         elemental_error[imesh].resize(mmesh_pt->nelement());
+         if (mmesh_pt->doc_info_pt()==0)
+          {
+           error_estimator_pt->get_element_errors(Problem::mesh_pt(imesh),
+                                                  elemental_error[imesh]);
+          }
+         else
+          {
+           error_estimator_pt->get_element_errors(Problem::mesh_pt(imesh),
+                                                  elemental_error[imesh],
+                                                  *mmesh_pt->doc_info_pt());
+          }
+         
+         // Store max./min error
+         mmesh_pt->max_error()=
+          std::abs(*std::max_element(elemental_error[imesh].begin(),
+                                     elemental_error[imesh].end(),
+                                     AbsCmp<double>()));
+         
+         mmesh_pt->min_error()=
+          std::abs(*std::min_element(elemental_error[imesh].begin(),
+                                     elemental_error[imesh].end(),
+                                     AbsCmp<double>()));
+         
+         oomph_info << "\n Max/min error: " 
+                    << mmesh_pt->max_error() << " "
+                    << mmesh_pt->min_error() << std::endl;
+        }
+       else
+        {
+         oomph_info << "Info/Warning: Mesh adaptation is disabled." 
+                    << std::endl;
+        }
+      }
+     else
+      {
+       oomph_info << "Info/Warning: Mesh cannot be adapted." << std::endl;
+      }
+     
+    } // End of loop over submeshes
+
+  }
+}
+
+//========================================================================
 /// \short Get max and min error for all elements in submeshes
 //========================================================================
 void Problem::doc_errors(DocInfo& doc_info)
 {
- 
+ //Get the bifurcation type
+ int bifurcation_type = this->Assembly_handler_pt->bifurcation_type();
+ //If we are tracking a bifurcation then call the bifurcation adapt function
+ if(bifurcation_type!=0)
+  {
+   this->bifurcation_adapt_doc_errors(bifurcation_type);
+   //Return immediately
+   return;
+  }
+
+
+ //Call the actions before adaptation
+ actions_before_adapt();
+
  // Number of submeshes?
  unsigned Nmesh=nsub_mesh();
  
@@ -7151,7 +8010,14 @@ void Problem::doc_errors(DocInfo& doc_info)
       
     } // End of loop over submeshes
 
-  } 
+  }
+
+ //Any actions after adapt
+ actions_after_adapt();
+ 
+ //Reassign the equation numbers in case things have changed by actions
+ //before and after adapt
+ (void)assign_eqn_numbers();
 
 }
 
@@ -7829,13 +8695,8 @@ void Problem::unsteady_newton_solve(const double &dt,
                 << "Reached max. number of adaptations in \n"
                 << "Problem::unsteady_newton_solver().\n"
                 << "Accepting current soln with errors:" ;
-     //Call actions_before_adapt to handle case of mixed elemental mesh
-     actions_before_adapt();
+     //Document the errors
      doc_errors();
-     //Complete the build of the problem 
-     //[given that it may have been broken by actions_before_adapt()]
-     actions_after_adapt();
-     assign_eqn_numbers();
      
      oomph_info << std::endl
                 << "----------------------------------------------------------" 
@@ -7967,13 +8828,16 @@ void Problem::newton_solve(const unsigned &max_adapt)
       << "Problem::newton_solver().\n"
       << "Accepting current soln with errors:" ;
        
+       //Document the errors
+       doc_errors(); 
+
      //Call actions_before_adapt to handle case of mixed elemental mesh
-     actions_before_adapt();
-     doc_errors(); 
+     //actions_before_adapt();
+     //doc_errors(); 
      //Complete the build of the problem 
      //[given that it may have been broken by actions_before_adapt()]
-     actions_after_adapt();
-     assign_eqn_numbers();
+     //actions_after_adapt();
+     //assign_eqn_numbers();
        
      oomph_info 
       << std::endl

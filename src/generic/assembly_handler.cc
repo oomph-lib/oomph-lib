@@ -82,6 +82,48 @@ namespace oomph
  }
 
 
+ //=======================================================================
+ /// Return the eigenfunction(s) associated with the bifurcation that
+ /// has been detected in bifurcation tracking problems. Default
+ /// Broken implementation
+ //=======================================================================
+ double* AssemblyHandler::bifurcation_parameter_pt() const
+ {
+  std::ostringstream error_stream;
+  error_stream 
+   << 
+   "There is no bifurcation parameter associated with the current assembly handler.\n"
+   <<
+   "Eigenfunction are only calculated by the Fold, PitchFork and Hopf Handlers"
+   << "\n";
+  
+  throw OomphLibError(error_stream.str(),
+                      "AssemblyHandler::get_bifurcation_parameter_pt()",
+                      OOMPH_EXCEPTION_LOCATION);
+  return 0;
+ }
+
+
+ //=======================================================================
+ /// Return the eigenfunction(s) associated with the bifurcation that
+ /// has been detected in bifurcation tracking problems. Default
+ /// Broken implementation
+ //=======================================================================
+ void AssemblyHandler::get_eigenfunction(
+  Vector<DoubleVector> &eigenfunction)
+ {
+  std::ostringstream error_stream;
+  error_stream 
+   << 
+   "There is no eigenfunction associated with the current assembly handler.\n"
+   <<
+   "Eigenfunction are only calculated by the Fold, PitchFork and Hopf Handlers"
+   << "\n";
+  
+  throw OomphLibError(error_stream.str(),
+                      "AssemblyHandler::get_eigenfunction()",
+                      OOMPH_EXCEPTION_LOCATION);
+ }
 
 
  ///////////////////////////////////////////////////////////////////////
@@ -237,7 +279,7 @@ namespace oomph
  //======================================================================
  /// Clean up the memory that may have been allocated by the solver
  //=====================================================================
- BlockFoldLinearSolver::~BlockFoldLinearSolver()
+ AugmentedBlockFoldLinearSolver::~AugmentedBlockFoldLinearSolver()
  {
   if(Alpha_pt!=0) {delete Alpha_pt;}
   if(E_pt!=0) {delete E_pt;}
@@ -247,8 +289,8 @@ namespace oomph
  /// Use a block factorisation to solve the augmented system
  /// associated with a PitchFork bifurcation.
  //===================================================================
- void BlockFoldLinearSolver:: solve(Problem* const &problem_pt, 
-                                    DoubleVector &result)
+ void AugmentedBlockFoldLinearSolver::solve(Problem* const &problem_pt, 
+                                            DoubleVector &result)
  {
 
   // if the result is setup then it should not be distributed
@@ -269,7 +311,7 @@ namespace oomph
    static_cast<FoldHandler*>(problem_pt->assembly_handler_pt());
 
   //Switch the handler to "block solver" mode
-  handler_pt->solve_block_system();
+  handler_pt->solve_augmented_block_system();
 
   //We need to find out the number of dofs in the problem
   unsigned n_dof = problem_pt->ndof();
@@ -502,14 +544,14 @@ namespace oomph
  //======================================================================
  //Hack the re-solve to use the block factorisation
  //======================================================================
- void BlockFoldLinearSolver::resolve(const DoubleVector & rhs,
-                                     DoubleVector &result)
+ void AugmentedBlockFoldLinearSolver::resolve(const DoubleVector &rhs,
+                                              DoubleVector &result)
  {
   //Check that the factors have been stored
   if(Alpha_pt==0)
    {
     throw OomphLibError("The required vectors have not been stored",
-                        "BlockFoldLinearSolver::resolve()",
+                        "AugmentedBlockFoldLinearSolver::resolve()",
                         OOMPH_EXCEPTION_LOCATION);
    }
   
@@ -520,7 +562,7 @@ namespace oomph
    static_cast<FoldHandler*>(problem_pt->assembly_handler_pt());
   
   //Switch things to our block solver
-  handler_pt->solve_block_system();
+  handler_pt->solve_augmented_block_system();
 
   //We need to find out the number of dofs in the problem
   unsigned n_dof = problem_pt->ndof();
@@ -683,7 +725,7 @@ namespace oomph
  //========================================================================
  FoldHandler::FoldHandler(Problem* const &problem_pt, 
                           double* const &parameter_pt) : 
-  Solve_block_system(false)
+  Solve_which_system(Full_augmented), Parameter_pt(parameter_pt)
  {
   //Set the problem pointer
   Problem_pt = problem_pt;
@@ -782,8 +824,29 @@ namespace oomph
  unsigned FoldHandler::ndof(GeneralisedElement* const &elem_pt)
  {
   unsigned raw_ndof = elem_pt->ndof();
-  if(Solve_block_system) {return (raw_ndof+1);}
-  else {return (2*raw_ndof + 1);}
+  //Return different values depending on the type of block decomposition
+  switch(Solve_which_system)
+   {
+   case Full_augmented:
+    return (2*raw_ndof + 1);
+    break;
+
+   case Block_augmented_J: 
+    return (raw_ndof+1);
+    break;
+
+   case Block_J:
+    return raw_ndof;
+    break;
+
+   default:
+    std::ostringstream error_stream;
+    error_stream << "The Solve_which_system flag can only take values 0, 1, 2"
+                 << " not " << Solve_which_system << "\n";
+    throw OomphLibError(error_stream.str(),
+                        "FoldHandler::ndof()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
  }
  
  //=====================================================================
@@ -829,8 +892,19 @@ namespace oomph
   //Need to get raw residuals and jacobian
   unsigned raw_ndof = elem_pt->ndof();
 
-  //If we are solving the block system
-  if(Solve_block_system)
+  //Find out which system we are solving
+  switch(Solve_which_system)
+   {
+    //If we are solving the standard system
+   case Block_J:
+   {
+    //Get the basic residuals
+    elem_pt->get_residuals(residuals);
+   }
+   break;
+
+   //If we are solving the augmented-by-one system
+   case Block_augmented_J:
    {
     //Get the basic residuals
     elem_pt->get_residuals(residuals);
@@ -838,7 +912,10 @@ namespace oomph
     //Zero the final residual
     residuals[raw_ndof] = 0.0;
    }
-  else
+   break;
+
+   //If we are solving the full augmented system
+   case Full_augmented:
    {
     DenseMatrix<double> jacobian(raw_ndof);
     //Get the basic residuals and jacobian initially
@@ -863,6 +940,16 @@ namespace oomph
        (Phi[global_eqn]*Y[global_eqn])/Count[global_eqn];
      }
    }
+   break;
+
+   default:
+    std::ostringstream error_stream;
+    error_stream << "The Solve_which_system flag can only take values 0, 1, 2"
+                 << " not " << Solve_which_system << "\n";
+    throw OomphLibError(error_stream.str(),
+                        "FoldHandler::get_residuals()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
  }
     
   
@@ -880,8 +967,19 @@ namespace oomph
   //Find the non-augmented dofs
   unsigned raw_ndof = elem_pt->ndof();
   
-  //If solving the block system
-  if(Solve_block_system)
+  //Which system are we solving
+  switch(Solve_which_system)
+   {
+    //If we are solving the original system
+   case Block_J:
+   {
+    //Just get the raw jacobian and residuals
+    elem_pt->get_jacobian(residuals,jacobian);
+   }
+   break;
+   
+   //If we are solving the augmented-by-one system
+   case Block_augmented_J:
    {
     //Get the full residuals, we need them
     get_residuals(elem_pt,residuals);
@@ -928,8 +1026,10 @@ namespace oomph
        = Phi[local_eqn]/Count[local_eqn];
      }
    }
+   break;
+   
   //Otherwise solving the full system
-  else
+   case Full_augmented:
    {
     //Get the residuals for the augmented system
     get_residuals(elem_pt,residuals);
@@ -1039,8 +1139,39 @@ namespace oomph
 //       *unknown_pt = init;
 //      }
    }
+   break;
+
+   default:
+    std::ostringstream error_stream;
+    error_stream << "The Solve_which_system flag can only take values 0, 1, 2"
+                 << " not " << Solve_which_system << "\n";
+    throw OomphLibError(error_stream.str(),
+                        "FoldHandler::get_jacobian()",
+                        OOMPH_EXCEPTION_LOCATION);
+    
+   }
  }
  
+ //==========================================================================
+ /// Return the eigenfunction(s) associated with the bifurcation that
+ /// has been detected in bifurcation tracking problems
+ //==========================================================================
+ void FoldHandler::get_eigenfunction(Vector<DoubleVector> &eigenfunction)
+ {
+  //There is only one (real) null vector
+  eigenfunction.resize(1);
+  LinearAlgebraDistribution dist(Problem_pt->communicator_pt(),Ndof,false);
+  //Rebuild the vector
+  eigenfunction[0].rebuild(&dist);
+  //Set the value to be the null vector
+  for(unsigned n=0;n<Ndof;n++)
+   {
+    eigenfunction[0][n] = Y[n];
+   }
+ }
+
+
+
  //=======================================================================
  /// Destructor return the problem to its original (non-augmented) state
  //=======================================================================
@@ -1048,8 +1179,10 @@ namespace oomph
  {
   //If we are using the block solver reset the problem's linear solver 
   //to the original one
-  BlockFoldLinearSolver *block_fold_solver_pt
-   = dynamic_cast<BlockFoldLinearSolver*>(Problem_pt->linear_solver_pt());
+  AugmentedBlockFoldLinearSolver *block_fold_solver_pt
+   = dynamic_cast<AugmentedBlockFoldLinearSolver*>(
+    Problem_pt->linear_solver_pt());
+
   if(block_fold_solver_pt)
    {
     //Reset the problem's linear solver
@@ -1063,16 +1196,41 @@ namespace oomph
  }
 
  //====================================================================
- /// Set to solve the block system
+ /// Set to solve the augmented-by-one block system.
  //===================================================================
- void FoldHandler::solve_block_system()
+ void FoldHandler::solve_augmented_block_system()
  {
-  if(!Solve_block_system)
+  //Only bother to do anything if we haven't already set the flag
+  if(Solve_which_system!=Block_augmented_J)
    {
-    Solve_block_system = true;
+    //If we were solving the system with the original jacobian add the
+    //parameter
+    if(Solve_which_system==Block_J)
+     {Problem_pt->Dof_pt.push_back(Parameter_pt);}
+    
     //Restrict the problem to the standard variables and
     //the bifurcation parameter only
     Problem_pt->Dof_pt.resize(Ndof+1);
+    
+    //Set the solve flag
+    Solve_which_system = Block_augmented_J;
+   }
+ }
+
+
+ //====================================================================
+ /// Set to solve the block system. The boolean flag specifies
+ /// whether the block decomposition should use exactly the same jacobian
+ //===================================================================
+ void FoldHandler::solve_block_system()
+ {
+  //Only bother to do anything if we haven't already set the flag
+  if(Solve_which_system!=Block_J)
+   {
+    //Restrict the problem to the standard variables
+    Problem_pt->Dof_pt.resize(Ndof);
+    //Set the solve flag
+    Solve_which_system = Block_J;
    }
  }
 
@@ -1081,25 +1239,34 @@ namespace oomph
  //=================================================================
  void FoldHandler::solve_full_system()
  {
-  if(Solve_block_system)
+  //Only do something if we are not solving the full system
+  if(Solve_which_system!=Full_augmented)
    {
-    Solve_block_system = false;
-    
-    //Add the additional unknowns back into the problem
+    //If we were solving the problem without any augmentation,
+    //add the parameter again
+    if(Solve_which_system==Block_J)
+     {Problem_pt->Dof_pt.push_back(Parameter_pt);}
+
+    //Always add the additional unknowns back into the problem
     for(unsigned n=0;n<Ndof;n++)
      {
       Problem_pt->Dof_pt.push_back(&Y[n]);
      }
+
+    Solve_which_system = Full_augmented;
    }
  }
+
+
 
  //======================================================================
  /// Clean up the memory that may have been allocated by the solver
  //=====================================================================
  BlockPitchForkLinearSolver::~BlockPitchForkLinearSolver()
  {
-  if(Alpha_pt!=0) {delete Alpha_pt;}
-  if(E_pt!=0) {delete E_pt;}
+  if(B_pt!=0) {delete B_pt;}
+  if(C_pt!=0) {delete C_pt;}
+  if(D_pt!=0) {delete D_pt;}
  }
 
  //===================================================================
@@ -1116,7 +1283,7 @@ namespace oomph
     if (result.distributed())
      {
       throw OomphLibError("The result vector must not be distributed",
-                          "BlockFoldLinearSolver::solve()",
+                          "BlockPitchForkLinearSolver::solve()",
                           OOMPH_EXCEPTION_LOCATION);
      }
    }
@@ -1126,16 +1293,538 @@ namespace oomph
   PitchForkHandler* handler_pt =
    static_cast<PitchForkHandler*>(problem_pt->assembly_handler_pt());
 
+  //Locally cache a pointer to the parameter
+  double* const parameter_pt = handler_pt->Parameter_pt;
+
   //Switch the handler to "block solver" mode
   handler_pt->solve_block_system();
 
   //We need to find out the number of dofs in the problem
+  const unsigned n_dof = problem_pt->ndof();
+  
+  // create the linear algebra distribution for this solver
+  // currently only global (non-distributed) distributions are allowed
+  Distribution_pt->rebuild(problem_pt->communicator_pt(),n_dof,false);
+  
+  // if the result vector is not setup then rebuild with distribution = global
+  if (!result.distribution_setup())
+   {
+    result.rebuild(Distribution_pt);
+   }
+
+  //Allocate storage for B, C and D which can be used in the resolve
+  if(B_pt!=0) {delete B_pt;}
+  B_pt = new DoubleVector(Distribution_pt);
+  if(C_pt!=0) {delete C_pt;}
+  C_pt = new DoubleVector(Distribution_pt);
+  if(D_pt!=0) {delete D_pt;}
+  D_pt = new DoubleVector(Distribution_pt);
+  
+  //Temporary vector
+  DoubleVector x1(Distribution_pt);
+  
+  //We are going to do resolves using the underlying linear solver
+  Linear_solver_pt->enable_resolve();
+  //Solve the first (standard) system Jx1 = R
+  Linear_solver_pt->solve(problem_pt,x1);
+
+  //Get the symmetry vector from the handler
+  DoubleVector psi(Distribution_pt);
+  for(unsigned n=0;n<n_dof;++n)  {psi[n] = handler_pt->Psi[n];}
+
+  DoubleVector res(Distribution_pt), newres(Distribution_pt);
+  DoubleVector F(Distribution_pt);
+
+
+  //Finite difference step
+  const double FD_step = 1.0e-8;
+  {
+   //Get the unpeturbed residuals
+   problem_pt->get_residuals(res);
+
+   //Peturb the unknown
+   const double parameter_back = *parameter_pt;
+   *parameter_pt += FD_step;
+     
+   //Not do any possible updates
+   problem_pt
+    ->actions_after_change_in_bifurcation_parameter();
+     
+   //Get the new (modified) residuals
+   problem_pt->get_residuals(newres);
+     
+   //The final column  is given by the difference
+   //between the residuals
+   for(unsigned n=0;n<n_dof;n++)
+    {
+     F[n] = (newres[n] - res[n])/FD_step;
+    }
+   
+   //Reset the global parameter
+   *parameter_pt = parameter_back;
+     
+   //Now do any possible updates
+   problem_pt
+    ->actions_after_change_in_bifurcation_parameter();
+  }
+
+  //Now resolve to find c and d
+  Linear_solver_pt->resolve(F,*C_pt);
+  Linear_solver_pt->resolve(psi,*D_pt);
+
+  //We can now construct various dot products
+  double psi_d = 0.0, psi_c = 0.0, psi_x1 = 0.0;
+  for(unsigned n=0;n<n_dof;n++) 
+   {
+    const double psi_ = psi[n];
+    psi_d += psi_*(*D_pt)[n]; 
+    psi_c += psi_*(*C_pt)[n];
+    psi_x1 += psi_*x1[n];
+   }
+  //Calculate another intermediate constant
+  const double Psi = psi_d/psi_c;
+
+  //Construct the second intermediate value, 
+  //assumption is that result has been 
+  //set to the current value of the residuals
+  double x2 = (psi_x1 - result[n_dof])/psi_c;
+
+  //Now construct the vectors that multiply the jacobian terms
+  Vector<double> D(n_dof+1), X1(n_dof+1);
+  for(unsigned n=0;n<n_dof;n++)
+   {
+    const double C_ = (*C_pt)[n];
+    D[n] = (*D_pt)[n] - Psi*C_;
+    X1[n] = x1[n] - x2*C_;
+   }
+  //Finial terms that are used to peturb the parameter
+  D[n_dof] = Psi;
+  X1[n_dof] = x2;
+
+  //We can now construct our multipliers
+  //Prepare to scale
+  double dof_length=0.0, d_length=0.0, x1_length=0.0;
+  for(unsigned n=0;n<n_dof;n++)
+   {
+    if(std::abs(problem_pt->dof(n)) > dof_length) 
+     {dof_length = std::abs(problem_pt->dof(n));}
+   }
+  if(std::abs(*parameter_pt) > dof_length) 
+   {dof_length = std::abs(*parameter_pt);}
+
+  for(unsigned n=0;n<n_dof+1;n++)
+   {
+    if(std::abs(D[n]) > d_length) {d_length = std::abs(D[n]);}
+    if(std::abs(X1[n]) > x1_length) {x1_length = std::abs(X1[n]);}
+   }
+  
+  double d_mult = dof_length/d_length;
+  double x1_mult = dof_length/x1_length;
+  d_mult += FD_step; x1_mult += FD_step;
+  d_mult *= FD_step; x1_mult *= FD_step;
+
+  //Local storage for the product terms
+  DoubleVector Jprod_D(Distribution_pt), Jprod_X1(Distribution_pt);
+  Vector<double> b(n_dof,0.0);
+
+  //Calculate the product of the jacobian matrices, etc
+  unsigned long n_element = problem_pt->mesh_pt()->nelement();
+  for(unsigned long e = 0;e<n_element;e++)
+   {
+    GeneralisedElement *elem_pt = problem_pt->mesh_pt()->element_pt(e);
+    //Loop over the ndofs in each element
+    unsigned n_var = handler_pt->ndof(elem_pt);
+    //Get the jacobian matrices
+    DenseMatrix<double> jac(n_var), jac_D(n_var), jac_X1(n_var);
+    //Get unperturbed jacobian
+    handler_pt->get_jacobian(elem_pt,b,jac);
+    
+    //Backup the dofs
+    Vector<double> dof_bac(n_var);
+    //Perturb the dofs
+    for(unsigned n=0;n<n_var;n++)
+     {
+      unsigned eqn_number = handler_pt->eqn_number(elem_pt,n);
+      dof_bac[n] = problem_pt->dof(eqn_number);
+      //Pertub by vector a
+      problem_pt->dof(eqn_number) += d_mult*D[eqn_number]; 
+     }
+
+    //Backup and peturb the parameter
+    double parameter_bac = *parameter_pt;
+    *parameter_pt += d_mult*D[n_dof];
+
+    problem_pt->actions_after_change_in_bifurcation_parameter();
+    
+    //Now get the new jacobian
+    handler_pt->get_jacobian(elem_pt,b,jac_D);
+    
+    //Perturb the dofs
+    for(unsigned n=0;n<n_var;n++)
+     {
+      unsigned eqn_number = handler_pt->eqn_number(elem_pt,n);
+      problem_pt->dof(eqn_number) = dof_bac[n];
+      //Pertub by vector a
+      problem_pt->dof(eqn_number) += x1_mult*X1[eqn_number]; 
+     }
+    
+    //Peturb the parameter
+    *parameter_pt = parameter_bac;
+    *parameter_pt += x1_mult*X1[n_dof];
+
+    problem_pt->actions_after_change_in_bifurcation_parameter();
+    
+    //Now get the new jacobian
+    handler_pt->get_jacobian(elem_pt,b,jac_X1);
+    
+    //Reset the dofs
+    for(unsigned n=0;n<n_var;n++)
+     {
+      unsigned eqn_number = handler_pt->eqn_number(elem_pt,n);
+      problem_pt->dof(eqn_number) = dof_bac[n];
+     }
+    
+    //Reset the parameter
+    *parameter_pt = parameter_bac;
+
+    problem_pt->actions_after_change_in_bifurcation_parameter();
+    
+    //OK, now work out the products
+    for(unsigned n=0;n<n_var;n++)
+     {
+      unsigned eqn_number = handler_pt->eqn_number(elem_pt,n);
+      double prod_d=0.0, prod_x1=0.0;
+      for(unsigned m=0;m<n_var;m++)
+       {
+        unsigned unknown = handler_pt->eqn_number(elem_pt,m);
+        prod_d += (jac_D(n,m) - jac(n,m))*
+         handler_pt->Y[unknown];
+        prod_x1 += (jac_X1(n,m) - jac(n,m))*
+         handler_pt->Y[unknown];
+       }
+      Jprod_D[eqn_number] += prod_d/d_mult;
+      Jprod_X1[eqn_number] += prod_x1/x1_mult;
+     }
+   }
+
+  //OK, now we can formulate the next vectors 
+  //(again assuming result contains residuals)
+  for(unsigned n=0;n<n_dof;n++)
+   {
+    F[n] = result[n_dof+1+n] - Jprod_X1[n];
+    Jprod_D[n] *= -1.0;
+   }
+  
+  //Linear solve to get B
+  Linear_solver_pt->resolve(Jprod_D,*B_pt);
+  //Liner solve to get x3
+  DoubleVector x3(Distribution_pt);
+  Linear_solver_pt->resolve(F,x3);
+  
+  //Construst a couple of additional products
+  double l_x3 = 0.0, l_b = 0.0;
+  for(unsigned n=0;n<n_dof;n++)
+   {
+    const double l_ = psi[n];
+    l_x3 += l_*x3[n];
+    l_b += l_*(*B_pt)[n];
+   }
+
+  //get the last intermediate variable
+  const double delta_sigma = (l_x3 - result[2*n_dof+1])/l_b;
+  const double delta_lambda = x2 - delta_sigma*Psi;
+
+  for(unsigned n=0;n<n_dof;n++)
+   {
+    result[n] = x1[n] - delta_lambda*(*C_pt)[n] - delta_sigma*(*D_pt)[n];
+    result[n_dof+1+n] = x3[n] - delta_sigma*(*B_pt)[n];
+   }
+  
+  result[n_dof] = delta_lambda;
+  result[2*n_dof+1] = delta_sigma;
+
+  //The sign of the determinant is given by the sign of the product psi_c and l_b
+  //NOT CHECKED YET!
+   problem_pt->sign_of_jacobian() = 
+    static_cast<int>(std::abs(psi_c*l_b)/(psi_c*l_b));
+   
+   //Switch things to our block solver
+   handler_pt->solve_full_system();
+
+   //If we are not storing things, clear the results
+   if(!Enable_resolve) 
+    {
+     //We no longer need to store the matrix
+     Linear_solver_pt->disable_resolve();
+     delete B_pt; B_pt=0;
+     delete C_pt; C_pt=0;
+     delete D_pt; D_pt=0;
+    }
+   //Otherwise also store the pointer to the problem
+   else
+    {
+     Problem_pt = problem_pt;
+    }
+ }
+
+
+ //==============================================================
+ //Hack the re-solve to use the block factorisation
+ //==============================================================
+ void BlockPitchForkLinearSolver::resolve(const DoubleVector &rhs,
+                                          DoubleVector &result)
+ {
+  //Check that the factors have been stored
+  if(B_pt==0)
+   {
+    throw OomphLibError("The required vectors have not been stored",
+                        "BlockPitchForkLinearSolver::resolve()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  
+  //Get the pointer to the problem
+  Problem* const problem_pt = Problem_pt;
+
+  PitchForkHandler* handler_pt =
+   static_cast<PitchForkHandler*>(problem_pt->assembly_handler_pt());
+
+  //Locally cache a pointer to the parameter
+  double* const parameter_pt = handler_pt->Parameter_pt;
+  
+  //Switch things to our block solver
+  handler_pt->solve_block_system();
+  //We need to find out the number of dofs
   unsigned n_dof = problem_pt->ndof();
 
   // create the linear algebra distribution for this solver
   // currently only global (non-distributed) distributions are allowed
   Distribution_pt->rebuild(problem_pt->communicator_pt(),n_dof,false);
 
+  // if the result vector is not setup then rebuild with distribution = global
+  if (!result.distribution_setup())
+   {
+    result.rebuild(Distribution_pt);
+   }
+  
+  //Setup storage
+  DoubleVector x1(Distribution_pt), x3(Distribution_pt);
+  
+  //Set the values of the a vector
+  for(unsigned n=0;n<n_dof;n++) {x1[n] = rhs[n];}
+  
+  Linear_solver_pt->enable_resolve();
+
+  // Copy rhs vector into local storage so it doesn't get overwritten
+  // if the linear solver decides to initialise the solution vector, say,
+  // which it's quite entitled to do!
+  DoubleVector input_x1(x1);
+
+  Linear_solver_pt->resolve(input_x1,x1);
+
+  //Get the symmetry vector from the handler
+  Vector<double> psi(n_dof);
+  for(unsigned n=0;n<n_dof;++n)  {psi[n] = handler_pt->Psi[n];}
+
+
+  //We can now construct various dot products
+  double psi_d = 0.0, psi_c = 0.0, psi_x1 = 0.0;
+  for(unsigned n=0;n<n_dof;n++) 
+   {
+    const double psi_ = psi[n];
+    psi_d += psi_*(*D_pt)[n]; 
+    psi_c += psi_*(*C_pt)[n];
+    psi_x1 += psi_*x1[n];
+   }
+  //Calculate another intermediate constant
+  const double Psi = psi_d/psi_c;
+
+  //Construct the second intermediate value, 
+  //assumption is that rhs has been set to the current value of the residuals
+  double x2 = (psi_x1 - rhs[n_dof])/psi_c;
+
+  //Now construct the vectors that multiply the jacobian terms
+  Vector<double> X1(n_dof+1);
+  for(unsigned n=0;n<n_dof;n++)
+   {
+    X1[n] = x1[n] - x2*(*C_pt)[n];
+   }
+  //Finial terms that are used to peturb the parameter
+  X1[n_dof] = x2;
+
+  //We can now construct our multipliers
+  //Prepare to scale
+  double dof_length=0.0, x1_length=0.0;
+  for(unsigned n=0;n<n_dof;n++)
+   {
+    if(std::abs(problem_pt->dof(n)) > dof_length) 
+     {dof_length = std::abs(problem_pt->dof(n));}
+   }
+  if(std::abs(*parameter_pt) > dof_length) 
+   {dof_length = std::abs(*parameter_pt);}
+
+  for(unsigned n=0;n<n_dof+1;n++)
+   {
+    if(std::abs(X1[n]) > x1_length) {x1_length = std::abs(X1[n]);}
+   }
+
+  //Finite difference step
+  const double FD_step = 1.0e-8;
+  
+  double x1_mult = dof_length/x1_length;
+  x1_mult += FD_step;
+  x1_mult *= FD_step;
+
+  //Local storage for the product terms
+  Vector<double> Jprod_X1(n_dof,0.0), b(n_dof,0.0);
+  DoubleVector Mod_Jprod_X1(Distribution_pt);
+
+
+  //Calculate the product of the jacobian matrices, etc
+  unsigned long n_element = problem_pt->mesh_pt()->nelement();
+  for(unsigned long e = 0;e<n_element;e++)
+   {
+    GeneralisedElement *elem_pt = problem_pt->mesh_pt()->element_pt(e);
+    //Loop over the ndofs in each element
+    unsigned n_var = handler_pt->ndof(elem_pt);
+    //Get the jacobian matrices
+    DenseMatrix<double> jac(n_var), jac_X1(n_var);
+    //Get unperturbed jacobian
+    handler_pt->get_jacobian(elem_pt,b,jac);
+    
+    //Backup the dofs
+    Vector<double> dof_bac(n_var);
+    //Perturb the dofs
+    for(unsigned n=0;n<n_var;n++)
+     {
+      unsigned eqn_number = handler_pt->eqn_number(elem_pt,n);
+      dof_bac[n] = problem_pt->dof(eqn_number);
+      //Pertub by vector a
+      problem_pt->dof(eqn_number) += x1_mult*X1[eqn_number]; 
+     }
+
+    //Backup and peturb the parameter
+    double parameter_bac = *parameter_pt;
+    *parameter_pt += x1_mult*X1[n_dof];
+
+    problem_pt->actions_after_change_in_bifurcation_parameter();
+    
+    //Now get the new jacobian
+    handler_pt->get_jacobian(elem_pt,b,jac_X1);
+        
+    //Reset the dofs
+    for(unsigned n=0;n<n_var;n++)
+     {
+      unsigned eqn_number = handler_pt->eqn_number(elem_pt,n);
+      problem_pt->dof(eqn_number) = dof_bac[n];
+     }
+    
+    //Reset the parameter
+    *parameter_pt = parameter_bac;
+    //Do anything that needs to be done
+    problem_pt->actions_after_change_in_bifurcation_parameter();
+    
+    //OK, now work out the products
+    for(unsigned n=0;n<n_var;n++)
+     {
+      unsigned eqn_number = handler_pt->eqn_number(elem_pt,n);
+      double prod_x1=0.0;
+      for(unsigned m=0;m<n_var;m++)
+       {
+        unsigned unknown = handler_pt->eqn_number(elem_pt,m);
+        prod_x1 += (jac_X1(n,m) - jac(n,m))*
+         handler_pt->Y[unknown];
+       }
+      Jprod_X1[eqn_number] += prod_x1/x1_mult;
+     }
+   }
+
+  //OK, now we can formulate the next vectors 
+  //(again assuming result contains residuals)
+  for(unsigned n=0;n<n_dof;n++)
+   {
+    Mod_Jprod_X1[n] = result[n_dof+1+n] - Jprod_X1[n];
+   }
+  
+  //Liner solve to get x3
+  Linear_solver_pt->resolve(Mod_Jprod_X1,x3);
+  
+  //Construst a couple of additional products
+  double l_x3 = 0.0, l_b = 0.0;
+  for(unsigned n=0;n<n_dof;n++)
+   {
+    const double l_ = psi[n];
+    l_x3 += l_*x3[n];
+    l_b += l_*(*B_pt)[n];
+   }
+
+  //get the last intermediate variable
+  const double delta_sigma = (l_x3 - rhs[2*n_dof+1])/l_b;
+  const double delta_lambda = x2 - delta_sigma*Psi;
+
+  for(unsigned n=0;n<n_dof;n++)
+   {
+    result[n] = x1[n] - delta_lambda*(*C_pt)[n] - delta_sigma*(*D_pt)[n];
+    result[n_dof+1+n] = x3[n] - delta_sigma*(*B_pt)[n];
+   }
+  
+  result[n_dof] = delta_lambda;
+  result[2*n_dof+1] = delta_sigma;
+
+  Linear_solver_pt->disable_resolve();
+  
+  //Switch things to our block solver
+  handler_pt->solve_full_system();
+ }
+
+
+//--------------------------------------------------------------
+
+
+
+ //======================================================================
+ /// Clean up the memory that may have been allocated by the solver
+ //=====================================================================
+ AugmentedBlockPitchForkLinearSolver::~AugmentedBlockPitchForkLinearSolver()
+ {
+  if(Alpha_pt!=0) {delete Alpha_pt;}
+  if(E_pt!=0) {delete E_pt;}
+ }
+
+ //===================================================================
+ /// Use a block factorisation to solve the augmented system
+ /// associated with a PitchFork bifurcation.
+ //===================================================================
+ void AugmentedBlockPitchForkLinearSolver:: solve(Problem* const &problem_pt, 
+                                                  DoubleVector &result)
+ {
+  // if the result is setup then it should not be distributed
+#ifdef PARANOID
+  if (result.distribution_setup())
+   {
+    if (result.distributed())
+     {
+      throw OomphLibError("The result vector must not be distributed",
+                          "AugmentedBlockPitchForkLinearSolver::solve()",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+   }
+#endif
+
+
+  //Locally cache the pointer to the handler.
+  PitchForkHandler* handler_pt =
+   static_cast<PitchForkHandler*>(problem_pt->assembly_handler_pt());
+
+  //Switch the handler to "block solver" mode
+  handler_pt->solve_augmented_block_system();
+
+  //We need to find out the number of dofs in the problem
+  unsigned n_dof = problem_pt->ndof();
+  
+  // create the linear algebra distribution for this solver
+  // currently only global (non-distributed) distributions are allowed
+  Distribution_pt->rebuild(problem_pt->communicator_pt(),n_dof,false);
+  
   // if the result vector is not setup then rebuild with distribution = global
   if (!result.distribution_setup())
    {
@@ -1318,14 +2007,14 @@ namespace oomph
  //==============================================================
  //Hack the re-solve to use the block factorisation
  //==============================================================
- void BlockPitchForkLinearSolver::resolve(const DoubleVector & rhs,
-                                          DoubleVector &result)
+ void AugmentedBlockPitchForkLinearSolver::resolve(const DoubleVector & rhs,
+                                                   DoubleVector &result)
  {
   //Check that the factors have been stored
   if(Alpha_pt==0)
    {
     throw OomphLibError("The required vectors have not been stored",
-                        "BlockPitchForkLinearSolver::resolve()",
+                        "AugmentedBlockPitchForkLinearSolver::resolve()",
                         OOMPH_EXCEPTION_LOCATION);
    }
   
@@ -1336,10 +2025,21 @@ namespace oomph
    static_cast<PitchForkHandler*>(problem_pt->assembly_handler_pt());
   
   //Switch things to our block solver
-  handler_pt->solve_block_system();
+  handler_pt->solve_augmented_block_system();
   //We need to find out the number of dofs
   unsigned n_dof = problem_pt->ndof();
   
+  // create the linear algebra distribution for this solver
+  // currently only global (non-distributed) distributions are allowed
+  Distribution_pt->rebuild(problem_pt->communicator_pt(),n_dof,false);
+
+  // if the result vector is not setup then rebuild with distribution = global
+  if (!result.distribution_setup())
+   {
+    result.rebuild(Distribution_pt);
+   }
+  
+
   //Setup storage
   DoubleVector a(Distribution_pt), b(Distribution_pt);
   
@@ -1464,10 +2164,12 @@ namespace oomph
  ///Constructor: Initialise the PitchForkHandler by setting intial
  ///guesses for Sigma, Y, specifying C and Psi and calculating count.
  //==================================================================
- PitchForkHandler::PitchForkHandler(
-  Problem* const &problem_pt, double* const &parameter_pt,
-  const DoubleVector &symmetry_vector) : Solve_block_system(false), 
-                                           Sigma(0.0)
+ PitchForkHandler::PitchForkHandler(Problem* const &problem_pt, 
+                                    double* const &parameter_pt,
+                                    const DoubleVector &symmetry_vector) : 
+  Solve_which_system(Full_augmented),
+  Sigma(0.0), 
+  Parameter_pt(parameter_pt)
  {
   //Set the problem pointer
   Problem_pt = problem_pt;
@@ -1522,7 +2224,9 @@ namespace oomph
   //If we are using the block solver reset the problem's linear solver 
   //to the original one
   BlockPitchForkLinearSolver* block_pitchfork_solver_pt
-   = dynamic_cast<BlockPitchForkLinearSolver*>(Problem_pt->linear_solver_pt());
+   = dynamic_cast<BlockPitchForkLinearSolver*>(
+    Problem_pt->linear_solver_pt());
+  
   if(block_pitchfork_solver_pt)
    {
     //Reset the problem's linear solver
@@ -1531,6 +2235,23 @@ namespace oomph
     //Delete the block solver
     delete block_pitchfork_solver_pt;
    }
+  
+  //If we are using the augmented 
+  //block solver reset the problem's linear solver 
+  //to the original one
+  AugmentedBlockPitchForkLinearSolver* augmented_block_pitchfork_solver_pt
+   = dynamic_cast<AugmentedBlockPitchForkLinearSolver*>(
+    Problem_pt->linear_solver_pt());
+  
+  if(augmented_block_pitchfork_solver_pt)
+   {
+    //Reset the problem's linear solver
+    Problem_pt->linear_solver_pt() = 
+     augmented_block_pitchfork_solver_pt->linear_solver_pt();
+    //Delete the block solver
+    delete augmented_block_pitchfork_solver_pt;
+   }
+
   //Now return the problem to its original size
   Problem_pt->Dof_pt.resize(Ndof);
  }
@@ -1541,8 +2262,30 @@ namespace oomph
  unsigned PitchForkHandler::ndof(GeneralisedElement* const &elem_pt)
  {
   unsigned raw_ndof = elem_pt->ndof();
-  if(Solve_block_system) {return (raw_ndof + 1);}
-  else {return (2*raw_ndof + 2);}
+
+  //Return different values depending on the type of block decomposition
+  switch(Solve_which_system)
+   {
+   case Full_augmented:
+    return (2*raw_ndof + 2);
+    break;
+
+   case Block_augmented_J: 
+    return (raw_ndof+1);
+    break;
+    
+   case Block_J:
+    return raw_ndof;
+    break;
+
+   default:
+    std::ostringstream error_stream;
+    error_stream << "The Solve_which_system flag can only take values 0, 1, 2"
+                 << " not " << Solve_which_system << "\n";
+    throw OomphLibError(error_stream.str(),
+                        "PitchForkHandler::ndof()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
  }
  
  ///Get the global equation number of the local unknown
@@ -1586,8 +2329,26 @@ namespace oomph
   //Need to get raw residuals and jacobian
   unsigned raw_ndof = elem_pt->ndof();
 
-  //If we are solving the block system
-  if(Solve_block_system)
+  //Find out which system we are solving
+  switch(Solve_which_system)
+   {
+    //If we are solving the original system
+   case Block_J:
+   {
+    //get the basic residuals
+    elem_pt->get_residuals(residuals);
+    //Now multiply to fill in the residuals for the final term
+    for(unsigned i=0;i<raw_ndof;i++)
+     {
+      unsigned local_eqn = elem_pt->eqn_number(i);
+      //Add the slack parameter to the final residuals
+      residuals[i] += Sigma*Psi[local_eqn]/Count[local_eqn];
+     }
+   }
+   break;
+
+   //If we are solving the augmented-by-one system
+   case Block_augmented_J:
    {
     //Get the basic residuals
     elem_pt->get_residuals(residuals);
@@ -1605,7 +2366,10 @@ namespace oomph
        Count[local_eqn];
      }
    }
-  else
+   break;
+
+   //Otherwise we are solving the fully augemented system
+   case Full_augmented:
    {
     DenseMatrix<double> jacobian(raw_ndof);
     
@@ -1639,6 +2403,17 @@ namespace oomph
        Count[local_eqn];
      }
    }
+   break;
+
+   default:
+    std::ostringstream error_stream;
+    error_stream << "The Solve_which_system flag can only take values 0, 1, 2"
+                 << " not " << Solve_which_system << "\n";
+    throw OomphLibError(error_stream.str(),
+                        "PitchForkHandler::get_residuals()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+
  }
  
   //======================================================================
@@ -1652,8 +2427,27 @@ namespace oomph
     unsigned augmented_ndof = ndof(elem_pt);
     unsigned raw_ndof = elem_pt->ndof();
     
-    //If solving the block system
-    if(Solve_block_system)
+    //Which system are we solving
+    switch(Solve_which_system)
+     {
+      //If we are solving the original system
+     case Block_J:
+     {
+      //get the raw residuals and jacobian
+      elem_pt->get_jacobian(residuals,jacobian);
+
+      //Now multiply to fill in the residuals for the final term
+      for(unsigned i=0;i<raw_ndof;i++)
+       {
+        unsigned local_eqn = elem_pt->eqn_number(i);
+        //Add the slack parameter to the final residuals
+        residuals[i] += Sigma*Psi[local_eqn]/Count[local_eqn];
+       }
+     }
+     break;
+      
+     //If we are solving the augmented-by-one system
+     case Block_augmented_J:
      {
       //Get the full residuals, we need them
       get_residuals(elem_pt,residuals);
@@ -1700,8 +2494,10 @@ namespace oomph
          = Psi[local_eqn]/Count[local_eqn];
        }
      }
-    //Otherwise solving the full system
-    else
+     break;
+
+     //Otherwise solving the full system
+     case Full_augmented:
      {
       //Get the basic jacobian and residuals
       elem_pt->get_jacobian(residuals,jacobian);
@@ -1778,19 +2574,78 @@ namespace oomph
        Problem_pt->actions_after_change_in_bifurcation_parameter();
       }
      }
+     break;
+
+     default:
+      std::ostringstream error_stream;
+      error_stream << "The Solve_which_system flag can only take values 0, 1, 2"
+                   << " not " << Solve_which_system << "\n";
+      throw OomphLibError(error_stream.str(),
+                          "PitchForkHandler::get_jacobian()",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+
    }
  
+
+ //==========================================================================
+ /// Return the eigenfunction(s) associated with the bifurcation that
+ /// has been detected in bifurcation tracking problems
+ //==========================================================================
+ void PitchForkHandler::get_eigenfunction(
+  Vector<DoubleVector> &eigenfunction)
+ {
+  //There is only one (real) null vector
+  eigenfunction.resize(1);
+  LinearAlgebraDistribution dist(Problem_pt->communicator_pt(),Ndof,false);
+  //Rebuild the vector
+  eigenfunction[0].rebuild(&dist);
+  //Set the value to be the null vector
+  for(unsigned n=0;n<Ndof;n++)
+   {
+    eigenfunction[0][n] = Y[n];
+   }
+ }
+
+
+ //====================================================================
+ /// Set to solve the augmented-by-one block system.
+ //===================================================================
+ void PitchForkHandler::solve_augmented_block_system()
+ {
+  //Only bother to do anything if we haven't already set the flag
+  if(Solve_which_system!=Block_augmented_J)
+   {
+    //If we were solving the system with the original jacobian add the
+    //parameter back
+    if(Solve_which_system==Block_J)
+     {Problem_pt->Dof_pt.push_back(Parameter_pt);}
+
+    //Restrict the problem to the standard variables and
+    //the bifurcation parameter only
+    Problem_pt->Dof_pt.resize(Ndof+1);
+
+    //Set the solve flag
+    Solve_which_system = Block_augmented_J;
+   }
+ }
+
+
+
   //==============================================================
-  /// Set to solve the block system
+  /// Set to solve the block system. The boolean flag is used
+  /// to specify whether the block decomposition should use exactly
+  /// the same jacobian as the original system.
   //==============================================================
   void PitchForkHandler::solve_block_system()
    {
-    if(!Solve_block_system)
+    //Only bother to do anything if we haven't already set the flag
+    if(Solve_which_system!=Block_J)
      {
-      Solve_block_system = true;
-      //Restrict the problem to the standard variables and
-      //the bifurcation parameter only
-      Problem_pt->Dof_pt.resize(Ndof+1);
+      //Restrict the problem to the standard variables
+      Problem_pt->Dof_pt.resize(Ndof);
+      //Set the solve flag
+        Solve_which_system = Block_J;
      }
    }
 
@@ -1799,16 +2654,23 @@ namespace oomph
   //==============================================================
  void PitchForkHandler::solve_full_system()
    {
-    if(Solve_block_system)
+    //Only do something if we are not solving the full system
+    if(Solve_which_system!=Full_augmented)
      {
-      Solve_block_system = false;
+      //If we were solving the problem without any augementation
+      //add the parameter again
+      if(Solve_which_system==Block_J)
+       {Problem_pt->Dof_pt.push_back(Parameter_pt);}
       
-      //Add the additional unknowns back into the problem
+      //Always add the additional unknowns back into the problem
       for(unsigned n=0;n<Ndof;n++)
        {
         Problem_pt->Dof_pt.push_back(&Y[n]);
        }
       Problem_pt->Dof_pt.push_back(&Sigma);
+      
+      //Set the solve flag
+      Solve_which_system = Full_augmented;
      }
    }
 
@@ -3051,6 +3913,29 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
    }
  }
+
+
+ //==========================================================================
+ /// Return the eigenfunction(s) associated with the bifurcation that
+ /// has been detected in bifurcation tracking problems
+ //==========================================================================
+ void HopfHandler::get_eigenfunction(
+  Vector<DoubleVector> &eigenfunction)
+ {
+  //There is a real and imaginary part of the null vector
+  eigenfunction.resize(2);
+  LinearAlgebraDistribution dist(Problem_pt->communicator_pt(),Ndof,false);
+  //Rebuild the vector
+  eigenfunction[0].rebuild(&dist);
+  eigenfunction[1].rebuild(&dist);
+  //Set the value to be the null vector
+  for(unsigned n=0;n<Ndof;n++)
+   {
+    eigenfunction[0][n] = Phi[n];
+    eigenfunction[1][n] = Psi[n];
+   }
+ }
+
  
  //====================================================================
  /// Set to solve the standard (underlying jacobian)  system

@@ -33,7 +33,7 @@
 // Simple 3D tetrahedral mesh class
 #include "simple_cubic_tet_mesh.template.h"
 #include "../generic/map_matrix.h"
-
+#include <algorithm>
 
 
 namespace oomph
