@@ -448,24 +448,10 @@ void RefineableConvectionProblem<NST_ELEMENT,AD_ELEMENT>::doc_solution()
 
  // Output whole solution (this will output elements from one mesh
  //----------------------  followed by the other mesh at the moment...?)
- sprintf(filename,"%s/soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
-         Doc_info.number(),MPI_Helpers::My_rank);
+ sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
+         Doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
- some_file.close();
-
- // Output solution for each mesh
- //------------------------------
- sprintf(filename,"%s/vel_soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
-         Doc_info.number(),MPI_Helpers::My_rank);
- some_file.open(filename);
- nst_mesh_pt()->output(some_file,npts);
- some_file.close();
-
- sprintf(filename,"%s/temp_soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
-         Doc_info.number(),MPI_Helpers::My_rank);
- some_file.open(filename);
- adv_diff_mesh_pt()->output(some_file,npts);
  some_file.close();
 
  Doc_info.number()++;
@@ -478,10 +464,6 @@ void RefineableConvectionProblem<NST_ELEMENT,AD_ELEMENT>::doc_solution()
 //====================================================================
 int main(int argc, char **argv)
 {
-#ifdef OOMPH_HAS_MPI
- MPI_Helpers::init(argc,argv);
-#endif
-
  // Set the direction of gravity
  Global_Physical_Variables::Direction_of_gravity[0] = 0.0;
  Global_Physical_Variables::Direction_of_gravity[1] = -1.0;
@@ -494,42 +476,6 @@ int main(int argc, char **argv)
  // Apply a perturbation to the upper boundary condition to
  // force the solution into the symmetry-broken state.
  problem.use_imperfection() = true;
-
- // Distribute the problem (and set the sources)
-#ifdef OOMPH_HAS_MPI
- DocInfo mesh_doc_info;
- bool report_stats=true;
-
- std::ifstream input_file;
- std::ofstream output_file;
- char filename[100];
-
- // Get partition from file
- unsigned n_partition=problem.mesh_pt()->nelement();
- Vector<unsigned> element_partition(n_partition);
- sprintf(filename,"multimesh_ind_ref_b_partition.dat");
- input_file.open(filename);
- std::string input_string;
- for (unsigned e=0;e<n_partition;e++)
-  {
-   getline(input_file,input_string,'\n');
-   element_partition[e]=atoi(input_string.c_str());
-  }
-
-// Vector<unsigned> out_element_partition;
- problem.distribute(mesh_doc_info,report_stats,element_partition);
-//                     out_element_partition);
-
-//  sprintf(filename,"out_multimesh_ind_ref_b_partition.dat");
-//  output_file.open(filename);
-//  for (unsigned e=0;e<n_partition;e++)
-//   {
-//    output_file << out_element_partition[e] << std::endl;
-//   }
-
-// problem.distribute(mesh_doc_info,report_stats);
-#endif
-
  
  //Solve the problem with (up to) two levels of adaptation
  problem.newton_solve(2);
@@ -545,10 +491,6 @@ int main(int argc, char **argv)
  problem.use_imperfection() = false;
  problem.newton_solve(2);
  problem.doc_solution();
-
-#ifdef OOMPH_HAS_MPI
- MPI_Helpers::finalize();
-#endif
 
 } // end of main
 

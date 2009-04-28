@@ -402,7 +402,21 @@ void compute_error(ostream &outfile,
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                    DenseMatrix<double> &jacobian)
   {
+#ifdef USE_FD_JACOBIAN_FOR_REFINEABLE_BUOYANT_Q_ELEMENT
    FiniteElement::fill_in_contribution_to_jacobian(residuals,jacobian);
+#else
+   //Calculate the Navier-Stokes contributions (diagonal block and residuals)
+   RefineableNavierStokesEquations<DIM>::
+    fill_in_contribution_to_jacobian(residuals,jacobian);
+
+   //Calculate the advection-diffusion contributions 
+   //(diagonal block and residuals)
+   RefineableAdvectionDiffusionEquations<DIM>::
+    fill_in_contribution_to_jacobian(residuals,jacobian);
+
+   //We now fill in the off-diagonal (interaction) blocks analytically
+   this->fill_in_off_diagonal_jacobian_blocks_analytic(residuals,jacobian);
+#endif
   } //End of jacobian calculation
 
  /// Add the element's contribution to its residuals vector,
@@ -415,6 +429,289 @@ void compute_error(ostream &outfile,
    FiniteElement::fill_in_contribution_to_jacobian_and_mass_matrix(
      residuals,jacobian,mass_matrix);
   }
+
+ /// \short Compute the contribution of the off-diagonal blocks
+ /// analytically.
+ void fill_in_off_diagonal_jacobian_blocks_analytic(
+  Vector<double> &residuals, DenseMatrix<double> &jacobian)
+  {
+   //Perform another loop over the integration loops using the information
+   //from the original elements' residual assembly loops to determine
+   //the conributions to the jacobian
+   
+   // Local storage for pointers to hang_info objects
+   HangInfo *hang_info_pt=0, *hang_info2_pt=0;   
+   
+   //Local storage for the index in the nodes at which the
+   //Navier-Stokes velocities are stored (we know that this should be 0,1,2)
+   unsigned u_nodal_nst[DIM];
+   for(unsigned i=0;i<DIM;i++) {u_nodal_nst[i] = this->u_index_nst(i);}
+   
+   //Local storage for the  index at which the temperature is stored
+   const unsigned u_nodal_adv_diff = this->u_index_adv_diff();
+   
+   //Find out how many nodes there are
+   const unsigned n_node = this->nnode();
+   
+   //Set up memory for the shape and test functions and their derivatives
+   Shape psif(n_node), testf(n_node);
+   DShape dpsifdx(n_node,DIM), dtestfdx(n_node,DIM);
+   
+   //Number of integration points
+   const unsigned n_intpt = this->integral_pt()->nweight();
+   
+   //Get Physical Variables from Element
+   double Ra = this->ra();
+   double Pe = this->pe();
+   Vector<double> gravity = this->g();
+   
+   //Integers to store the local equations and unknowns
+   int local_eqn=0, local_unknown=0;
+   
+   //Loop over the integration points
+   for(unsigned ipt=0;ipt<n_intpt;ipt++)
+    {
+     //Get the integral weight
+     double w = this->integral_pt()->weight(ipt);
+     
+     //Call the derivatives of the shape and test functions
+     double J = 
+      this->dshape_and_dtest_eulerian_at_knot_nst(ipt,psif,dpsifdx,
+                                                  testf,dtestfdx);
+     
+     //Premultiply the weights and the Jacobian
+     double W = w*J;
+     
+     //Calculate local values of temperature derivatives
+     //Allocate
+     Vector<double> interpolated_du_adv_diff_dx(DIM,0.0);
+     
+     // Loop over nodes
+     for(unsigned l=0;l<n_node;l++) 
+      {
+       //Get the nodal value
+       double u_value = this->nodal_value(l,u_nodal_adv_diff);
+       //Loop over the derivative directions
+       for(unsigned j=0;j<DIM;j++)
+        {
+         interpolated_du_adv_diff_dx[j] += u_value*dpsifdx(l,j);
+        }
+      }
+     
+     //Assemble the Jacobian terms
+     //---------------------------
+     
+     //Loop over the test functions/eqns
+     for(unsigned l=0;l<n_node;l++)
+      {
+       //Local variables to store the number of master nodes and 
+       //the weight associated with the shape function if the node is hanging
+       unsigned n_master=1; 
+       double hang_weight=1.0;
+       
+       //Local bool (is the node hanging)
+       bool is_node_hanging = this->node_pt(l)->is_hanging();
+       
+       //If the node is hanging, get the number of master nodes
+       if(is_node_hanging)
+        {
+         hang_info_pt = this->node_pt(l)->hanging_pt();
+         n_master = hang_info_pt->nmaster();
+        }
+       //Otherwise there is just one master node, the node itself
+       else 
+        {
+         n_master = 1;
+        }
+       
+       //Loop over the master nodes
+       for(unsigned m=0;m<n_master;m++)
+        {
+         //If the node is hanging get weight from master node
+         if(is_node_hanging)
+          {
+           //Get the hang weight from the master node
+           hang_weight = hang_info_pt->master_weight(m);
+          }
+         else
+          {
+           // Node contributes with full weight
+           hang_weight = 1.0;
+          }
+         
+         
+         //Assemble derivatives of Navier Stokes momentum w.r.t. temperature
+         //-----------------------------------------------------------------
+         
+         // Loop over velocity components for equations
+         for(unsigned i=0;i<DIM;i++)
+          {
+           
+           //Get the equation number
+           if(is_node_hanging)
+            {
+             //Get the equation number from the master node
+             local_eqn = this->local_hang_eqn(hang_info_pt->master_node_pt(m),
+                                              u_nodal_nst[i]);
+            }
+           else
+            {
+             // Local equation number
+             local_eqn = this->nodal_local_eqn(l,u_nodal_nst[i]);
+            }
+           
+           if(local_eqn >= 0)
+            {
+             //Local variables to store the number of master nodes
+             //and the weights associated with each hanging node
+             unsigned n_master2=1; 
+             double hang_weight2=1.0;
+             
+             //Loop over the nodes for the unknowns
+             for(unsigned l2=0;l2<n_node;l2++)
+              { 
+               //Local bool (is the node hanging)
+               bool is_node2_hanging = this->node_pt(l2)->is_hanging();
+               
+               //If the node is hanging, get the number of master nodes
+               if(is_node2_hanging)
+                {
+                 hang_info2_pt = this->node_pt(l2)->hanging_pt();
+                 n_master2 = hang_info2_pt->nmaster();
+                }
+               //Otherwise there is one master node, the node itself
+               else
+                {
+                 n_master2 = 1;
+                }
+               
+               //Loop over the master nodes
+               for(unsigned m2=0;m2<n_master2;m2++)
+                {
+                 if(is_node2_hanging)
+                  {
+                   //Read out the local unknown from the master node
+                   local_unknown = 
+                    this->local_hang_eqn(hang_info2_pt->master_node_pt(m2),
+                                         u_nodal_adv_diff);
+                   //Read out the hanging weight from the master node
+                   hang_weight2 = hang_info2_pt->master_weight(m2);
+                  }
+                 else
+                  {
+                   //The local unknown number comes from the node
+                   local_unknown = this->nodal_local_eqn(l2,u_nodal_adv_diff);
+                   //The hang weight is one
+                   hang_weight2 = 1.0;
+                  }
+                 
+                 if(local_unknown >= 0)
+                  {
+                   //Add contribution to jacobian matrix
+                   jacobian(local_eqn,local_unknown) 
+                    += -gravity[i]*psif(l2)*Ra*testf(l)* 
+                    W*hang_weight*hang_weight2;
+                  }
+                }
+              }
+            }
+          }
+         
+         
+         //Assemble derivative of adv diff eqn w.r.t. fluid veloc
+         //------------------------------------------------------
+         {
+          //Get the equation number
+          if(is_node_hanging)
+           {
+            //Get the equation number from the master node
+            local_eqn = this->local_hang_eqn(hang_info_pt->master_node_pt(m),
+                                             u_nodal_adv_diff);
+           }
+          else
+           {
+            // Local equation number
+            local_eqn = this->nodal_local_eqn(l,u_nodal_adv_diff);
+           }
+          
+          //If it's not pinned
+          if(local_eqn >= 0)
+           {
+            //Local variables to store the number of master nodes
+            //and the weights associated with each hanging node
+            unsigned n_master2=1; 
+            double hang_weight2=1.0;
+            
+            //Loop over the nodes for the unknowns
+            for(unsigned l2=0;l2<n_node;l2++)
+             { 
+              //Local bool (is the node hanging)
+              bool is_node2_hanging = this->node_pt(l2)->is_hanging();
+              
+              //If the node is hanging, get the number of master nodes
+              if(is_node2_hanging)
+               {
+                hang_info2_pt = this->node_pt(l2)->hanging_pt();
+                n_master2 = hang_info2_pt->nmaster();
+               }
+              //Otherwise there is one master node, the node itself
+              else
+               {
+                n_master2 = 1;
+               }
+              
+              //Loop over the master nodes
+              for(unsigned m2=0;m2<n_master2;m2++)
+               {
+                //If the node is hanging
+                if(is_node2_hanging)
+                 {
+                  //Read out the hanging weight from the master node
+                  hang_weight2 = hang_info2_pt->master_weight(m2);
+                 }
+                //If the node is not hanging
+                else
+                 {
+                  //The hang weight is one
+                  hang_weight2 = 1.0;
+                 }
+                
+                //Loop over the velocity degrees of freedom
+                for(unsigned i2=0;i2<DIM;i2++)
+                 {
+                  //If the node is hanging
+                  if(is_node2_hanging)
+                   {
+                    //Read out the local unknown from the master node
+                    local_unknown = 
+                     this->local_hang_eqn(hang_info2_pt->master_node_pt(m2),
+                                          u_nodal_nst[i2]);
+                   }
+                  else
+                   {
+                    //The local unknown number comes from the node
+                    local_unknown=this->nodal_local_eqn(l2, u_nodal_nst[i2]);
+                   }
+                  
+                  //If it's not pinned
+                  if(local_unknown >= 0)
+                   {
+                    //Add the contribution to the jacobian matrix
+                    jacobian(local_eqn,local_unknown)
+                     -= Pe*psif(l2)*interpolated_du_adv_diff_dx[i2]*testf(l)
+                     *W*hang_weight*hang_weight2;
+                   }
+                 }
+               }
+             }
+           }
+         }
+         
+        }
+      }
+    }
+  } //End of function
+
 
 };
 

@@ -647,6 +647,27 @@ public:
   }
 
 
+ ///\short Return the local equation number corresponding to the ieqn_global-th
+ ///global equation number. Returns minus one (-1) if there is no
+ ///local degree of freedom corresponding to the chosen global equation
+ ///number
+ int local_eqn_number(const unsigned long &ieqn_global)
+  {
+   //Cache the number of degrees of freedom in the element
+   const unsigned n_dof = this->Ndof;
+   //Loop over the local equation numbers
+   for(unsigned n=0;n<n_dof;n++)
+    {
+     //If the global equation numbers match return
+     if(ieqn_global==Eqn_number[n]) {return n;}
+    }
+
+   //If we've got all the way to the end the number has not been found
+   //return minus one.
+   return -1;
+  }
+
+
  /// Add a (pointer to an) external data object to the element and return its
  /// index (i.e. the index required to obtain it from 
  /// the access function \c external_data_pt(...). The optional boolean

@@ -196,6 +196,145 @@ public virtual ElementWithZ2ErrorEstimator
    this->ALE_is_disabled = cast_father_element_pt->ALE_is_disabled;
   }
 
+
+ /// \short Compute the derivatives of the i-th component of 
+ /// velocity at point s with respect
+ /// to all data that can affect its value. In addition, return the global
+ /// equation numbers corresponding to the data.
+ /// Overload the non-refineable version to take account of hanging node
+ /// information
+ void dinterpolated_u_nst_ddata(const Vector<double> &s,
+                                const unsigned &i,
+                                Vector<double> &du_ddata,
+                                Vector<unsigned> &global_eqn_number)
+  {
+   //Find number of nodes
+   unsigned n_node = this->nnode();
+   //Local shape function
+   Shape psi(n_node);
+   //Find values of shape function at the given local coordinate
+   this->shape(s,psi);
+   
+   //Find the index at which the velocity component is stored
+   const unsigned u_nodal_index = this->u_index_nst(i);
+   
+   //Storage for hang info pointer
+   HangInfo* hang_info_pt=0;
+   //Storage for local equation
+   int local_eqn = 0;
+          
+   //Find the number of dofs associated with interpolated u
+   unsigned n_u_dof=0;
+   for(unsigned l=0;l<n_node;l++)
+    {
+     unsigned n_master = 1;
+     
+     //Local bool (is the node hanging)
+     bool is_node_hanging = this->node_pt(l)->is_hanging();
+     
+     //If the node is hanging, get the number of master nodes
+     if(is_node_hanging)
+      {
+       hang_info_pt = this->node_pt(l)->hanging_pt();
+       n_master = hang_info_pt->nmaster();
+      }
+     //Otherwise there is just one master node, the node itself
+     else 
+      {
+       n_master = 1;
+      }
+     
+     //Loop over the master nodes
+     for(unsigned m=0;m<n_master;m++)
+      {
+       //Get the equation number
+       if(is_node_hanging)
+        {
+         //Get the equation number from the master node
+         local_eqn = this->local_hang_eqn(hang_info_pt->master_node_pt(m),
+                                          u_nodal_index);
+        }
+       else
+        {
+         // Local equation number
+         local_eqn = this->nodal_local_eqn(l,u_nodal_index);
+        }
+       
+       //If it's positive add to the count
+       if(local_eqn >= 0) {++n_u_dof;}
+      }
+    }
+   
+   //Now resize the storage schemes
+   du_ddata.resize(n_u_dof,0.0);
+   global_eqn_number.resize(n_u_dof,0.0);
+   
+   //Loop over th nodes again and set the derivatives
+   unsigned count=0;
+   //Loop over the local nodes and sum
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     unsigned n_master = 1;
+     double hang_weight = 1.0;
+     
+     //Local bool (is the node hanging)
+     bool is_node_hanging = this->node_pt(l)->is_hanging();
+     
+     //If the node is hanging, get the number of master nodes
+     if(is_node_hanging)
+      {
+       hang_info_pt = this->node_pt(l)->hanging_pt();
+       n_master = hang_info_pt->nmaster();
+      }
+     //Otherwise there is just one master node, the node itself
+     else 
+      {
+       n_master = 1;
+      }
+     
+     //Loop over the master nodes
+     for(unsigned m=0;m<n_master;m++)
+      {
+       //If the node is hanging get weight from master node
+       if(is_node_hanging)
+        {
+         //Get the hang weight from the master node
+         hang_weight = hang_info_pt->master_weight(m);
+        }
+       else
+        {
+         // Node contributes with full weight
+         hang_weight = 1.0;
+        }
+       
+       //Get the equation number
+       if(is_node_hanging)
+        {
+         //Get the equation number from the master node
+         local_eqn = this->local_hang_eqn(hang_info_pt->master_node_pt(m),
+                                          u_nodal_index);
+        }
+       else
+        {
+         // Local equation number
+         local_eqn = this->nodal_local_eqn(l,u_nodal_index);
+        }
+       
+       if(local_eqn >= 0)
+        {
+         //Set the global equation number
+         global_eqn_number[count] = this->eqn_number(local_eqn);
+         //Set the derivative with respect to the unknown
+         du_ddata[count] = psi[l]*hang_weight;
+         //Increase the counter
+         ++count;
+        }
+      }
+    }
+  }
+
+
+
   protected:
 
 
@@ -348,6 +487,7 @@ public virtual RefineableQElement<DIM>
    //(no history is carried in the pressure)
    values[DIM] = this->interpolated_p_nst(s);
   }
+
   
  ///  \short Perform additional hanging node procedures for variables
  /// that are not interpolated by all nodes. The pressures are stored 

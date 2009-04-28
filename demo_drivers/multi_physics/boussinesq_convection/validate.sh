@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=4
+NUM_TESTS=6
 
 
 # Setup validation directory
@@ -113,11 +113,69 @@ else
    ref_bous_convection_results.dat  0.1 1.0e-7 >> validation.log
 fi
 
+mv RESLT RESLT_refineable
+
+
+# Validation for Boussinesq convection problem using multi-domain method
+#-----------------------------------------------------------------------
+
+echo "Running Boussinesq convection problem (multi-domain method) "
+mkdir RESLT
+../multimesh_boussinesq_convection validate > OUTPUT_multimesh_b_convection
+echo "done"
+echo " " >> validation.log
+echo "Boussinesq convection (multi-domain) validation" >> validation.log
+echo "------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/soln0.dat RESLT/soln5.dat \
+    > multimesh_b_convection.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/multimesh_b_convection.dat.gz  \
+         multimesh_b_convection.dat 0.1 1.5e-7 >> validation.log
+fi
+
+mv RESLT RESLT_multimesh_boussinesq_convection
+
+
+# Validation for refineable Boussinesq convection problem, multi-domain
+#----------------------------------------------------------------------
+
+echo "Running refineable Boussinesq convection problem (multi-domain method) "
+mkdir RESLT
+../multimesh_ref_b_convection > OUTPUT_multimesh_ref_b_convection
+echo "done"
+echo " " >> validation.log
+echo "Refineable Boussinesq convection (multi-domain) validation" >> validation.log
+echo "------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/soln0.dat RESLT/soln1.dat \
+    > multimesh_ref_b_convection.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/multimesh_ref_b_convection.dat.gz  \
+         multimesh_ref_b_convection.dat 0.1 1.0e-7 >> validation.log
+fi
+
+mv RESLT RESLT_multimesh_ref_b_convection
+
+
 # Append output to global validation log file
 #--------------------------------------------
 cat validation.log >> ../../../../validation.log
 
-mv RESLT RESLT_refineable
 
 cd ..
 

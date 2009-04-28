@@ -368,6 +368,59 @@ public:
   }
 
 
+ ///\short Return derivative of u at point s with respect to all data
+ ///that can affect its value.
+ ///In addition, return the global equation numbers corresponding to the
+ ///data. This is virtual so that it can be overloaded in the
+ ///refineable version
+ virtual void dinterpolated_u_adv_diff_ddata(
+  const Vector<double> &s, Vector<double> &du_ddata,
+  Vector<unsigned> &global_eqn_number)
+  {
+   //Find number of nodes
+   const unsigned n_node = nnode();
+
+   //Get the nodal index at which the unknown is stored
+   const unsigned u_nodal_index = u_index_adv_diff();
+
+   //Local shape function
+   Shape psi(n_node);
+
+   //Find values of shape function
+   shape(s,psi);
+
+   //Find the number of dofs associated with interpolated u
+   unsigned n_u_dof=0;
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     int local_eqn = this->nodal_local_eqn(l,u_nodal_index);
+     //If it's positive add to the count
+     if(local_eqn >= 0) {++n_u_dof;}
+    }
+     
+   //Now resize the storage schemes
+   du_ddata.resize(n_u_dof,0.0); global_eqn_number.resize(n_u_dof,0.0);
+   
+   //Loop over the nodes again and set the derivatives
+   unsigned count=0;
+   for(unsigned l=0;l<n_node;l++)
+    {
+     //Get the local equation
+     int local_eqn = this->nodal_local_eqn(l,u_nodal_index);
+     //If it's positive
+     if(local_eqn >=0)
+      {
+       //Set the global equation number
+       global_eqn_number[count] = this->eqn_number(local_eqn);
+       //Set the derivative with respect to the unknown
+       du_ddata[count] = psi[l];
+       //Increase the counter
+       ++count;
+      }
+    }
+  }
+
+
  /// \short Self-test: Return 0 for OK
  unsigned self_test();
 
