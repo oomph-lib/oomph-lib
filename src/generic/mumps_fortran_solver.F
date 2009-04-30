@@ -274,7 +274,11 @@ C.....check for error
       if (mumps_par%infog(1).ne.0) then
 C........Increase scaling factor for workspace and run again         
          if (mumps_par%myid.eq.0) then
-            write(*,*) 'Error during mumps factorisation!'
+            write(*,*) 'Processor', mumps_par%myid, 
+     &                 'has error during mumps factorisation!'
+            write(*,*) 'Processor', mumps_par%myid, 
+     &                 'error codes: ',mumps_par%info(1), " ",
+     &                  mumps_par%info(2)
          end if
          workspace_scaling_factor=workspace_scaling_factor*2
          if (mumps_par%myid.eq.0) then
