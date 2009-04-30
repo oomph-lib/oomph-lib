@@ -731,8 +731,6 @@ void SuperLU::solve(DoubleMatrixBase* const &matrix_pt,
                     const DoubleVector &rhs,
                     DoubleVector &result)
 {
-
- oomph_info << "matrix based solve" << std::endl;
  // Time solver
  double t_start = TimingHelpers::timer();
 

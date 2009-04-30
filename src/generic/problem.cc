@@ -8830,14 +8830,6 @@ void Problem::newton_solve(const unsigned &max_adapt)
        
        //Document the errors
        doc_errors(); 
-
-     //Call actions_before_adapt to handle case of mixed elemental mesh
-     //actions_before_adapt();
-     //doc_errors(); 
-     //Complete the build of the problem 
-     //[given that it may have been broken by actions_before_adapt()]
-     //actions_after_adapt();
-     //assign_eqn_numbers();
        
      oomph_info 
       << std::endl

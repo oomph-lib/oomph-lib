@@ -706,7 +706,7 @@ public:
    
    //Now resize the storage schemes
    du_ddata.resize(n_u_dof,0.0);
-   global_eqn_number.resize(n_u_dof,0.0);
+   global_eqn_number.resize(n_u_dof,0);
    
    //Loop over th nodes again and set the derivatives
    unsigned count=0;

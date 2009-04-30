@@ -128,11 +128,11 @@ public virtual ElementWithZ2ErrorEstimator
   {
 #ifdef PARANOID
    unsigned num_entries=DIM+(DIM*(DIM-1))/2;
-   if (flux.size()!=num_entries)
+   if (flux.size() < num_entries)
     {
      std::ostringstream error_message;
      error_message << "The flux vector has the wrong number of entries, " 
-                   << flux.size() << ", whereas it should be " 
+                   << flux.size() << ", whereas it should be at least " 
                    << num_entries << std::endl;
      throw OomphLibError(error_message.str(),
                          "RefineableNavierStokesEquations::get_Z2_flux()",
@@ -267,7 +267,7 @@ public virtual ElementWithZ2ErrorEstimator
    
    //Now resize the storage schemes
    du_ddata.resize(n_u_dof,0.0);
-   global_eqn_number.resize(n_u_dof,0.0);
+   global_eqn_number.resize(n_u_dof,0);
    
    //Loop over th nodes again and set the derivatives
    unsigned count=0;

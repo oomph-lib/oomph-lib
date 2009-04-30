@@ -311,12 +311,16 @@ public:
  unsigned nrecovery_order() 
   {return RefineableQCrouzeixRaviartElement<DIM>::nrecovery_order();}
 
+ /// \short The number of compound fluxes is two (one for the fluid and
+ /// one for the temperature)
+ unsigned ncompound_fluxes() {return 2;}
 
  /// \short The number of Z2 flux terms is the same as that in 
- /// the fluid element.
+ /// the fluid element plus that in the advection-diffusion element
  unsigned num_Z2_flux_terms()
   {
-   return RefineableQCrouzeixRaviartElement<DIM>::num_Z2_flux_terms();
+   return (RefineableQCrouzeixRaviartElement<DIM>::num_Z2_flux_terms() +
+           RefineableQAdvectionDiffusionElement<DIM,3>::num_Z2_flux_terms());
   }
 
 
@@ -324,9 +328,44 @@ public:
  /// Get the Z2 flux from the fluid element
  void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
   {
+   //Find the number of fluid fluxes
+   unsigned n_fluid_flux = 
+    RefineableQCrouzeixRaviartElement<DIM>::num_Z2_flux_terms();
+   //Fill in the first flux entries as the velocity entries
    RefineableQCrouzeixRaviartElement<DIM>::get_Z2_flux(s,flux);
+
+   //Find the number of temperature fluxes
+   unsigned n_temp_flux =  
+    RefineableQAdvectionDiffusionElement<DIM,3>::num_Z2_flux_terms();
+   Vector<double> temp_flux(n_temp_flux);
+   //Get the temperature flux
+   RefineableQAdvectionDiffusionElement<DIM,3>::get_Z2_flux(s,temp_flux);
+   
+   //Add the temperature flux to the end of the flux vector
+   for(unsigned i=0;i<n_temp_flux;i++)
+    {
+     flux[n_fluid_flux+i] = temp_flux[i];
+    }
   } //end of get_Z2_flux
 
+ /// \short Fill in which flux components are associated with the fluid
+ /// measure and which are associated with the temperature measure
+ void get_Z2_compound_flux_indices(Vector<unsigned> &flux_index) 
+  {
+   //Find the number of fluid fluxes
+   unsigned n_fluid_flux = 
+    RefineableQCrouzeixRaviartElement<DIM>::num_Z2_flux_terms();
+   //Find the number of temperature fluxes
+   unsigned n_temp_flux =  
+    RefineableQAdvectionDiffusionElement<DIM,3>::num_Z2_flux_terms();
+
+   //The fluid fluxes are first 
+   //The values of the flux_index vector are zero on entry, so we
+   //could omit this line
+   for(unsigned i=0;i<n_fluid_flux;i++) {flux_index[i] = 0;}
+   //Set the temperature fluxes (the last set of fluxes
+   for(unsigned i=0;i<n_temp_flux;i++) {flux_index[n_fluid_flux + i] = 1;}
+  }
 
 
  /// \short Validate against exact solution at given time
@@ -870,7 +909,7 @@ RefineableConvectionProblem() : Imperfect(false)
  cast_mesh_pt->spatial_error_estimator_pt()=new Z2ErrorEstimator;
 
  // Set error targets for adaptive refinement
- cast_mesh_pt->max_permitted_error()=1.0e-4; 
+ cast_mesh_pt->max_permitted_error()=0.5e-3; 
  cast_mesh_pt->min_permitted_error()=0.5e-4; 
 
 

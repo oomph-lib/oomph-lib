@@ -204,7 +204,48 @@ void Z2ErrorEstimator::shape_rec(const Vector<double>& x,
 }
 
 
+//==========================================================================
+/// Return a combined error estimate from all compound flux errors
+/// The default is to return the maximum of the compound flux errors
+/// which will always force refinment if any field is above the single
+/// mesh error threshold and unrefinement if both are below the lower limit. 
+/// Any other fancy combinations can be selected by
+/// specifying a user-defined combined estimate by setting a function
+/// pointer.
+//==========================================================================
+double Z2ErrorEstimator::get_combined_error_estimate(
+ const Vector<double> &compound_error)
+{
+ //If the function pointer has been set, call that function
+ if(Combined_error_fct_pt!=0) 
+  {return (*Combined_error_fct_pt)(compound_error);}
+ 
+ //Otherwise simply return the maximum of the compound errors
+ const unsigned n_compound_error = compound_error.size();
+//If there are no errors then we have a problem
+#ifdef PARANOID
+ if(n_compound_error==0) 
+  {
+   throw OomphLibError(
+    "No compound errors have been passed, so maximum cannot be found.",
+    "Z2ErrorEstimator::get_combined_error_estimate()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+ 
 
+ //Initialise the maxmimum to the first compound error
+ double max_error = compound_error[0];
+ //Loop over the other errors to find the maximum 
+ //(we have already taken absolute values, so we don't need to do so here)
+ for(unsigned i=1;i<n_compound_error;i++)
+  {
+   if(compound_error[i] > max_error) {max_error = compound_error[i];}
+  }
+
+ //Return the maximum
+ return max_error;
+}
 
 //======================================================================
 /// Setup patches: For each vertex node pointed to by nod_pt,
@@ -652,10 +693,9 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
 #endif
 
   // Global variables
-  unsigned num_flux_terms;
-  unsigned dim;
-  unsigned recovery_order;
-
+  unsigned num_flux_terms=0;
+  unsigned dim=0;
+  
 #ifdef OOMPH_HAS_MPI
   // It may be possible that a submesh contains no elements on a
   // particular process after distribution. In order to instigate the 
@@ -690,6 +730,9 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
      }
 
    } // end if (mesh_pt->nelement()>0)
+
+  //Storage for the recovery order
+  unsigned recovery_order=0;
 
   // Now communicate these via an MPI_Allreduce to every process
   // if the mesh has been distributed
@@ -1102,11 +1145,45 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
 
   // Get error estimates for all elements
   //======================================
-  double flux_norm=0.0;
+
+  //Find the number of compound fluxes
+  //Loop over all (non-halo) elements
+  nelem = mesh_pt->nelement();
+  //Initialise the number of compound fluxes 
+  //Must be an integer for an MPI call later on
+  int n_compound_flux = 1;
+  for (unsigned e=0;e<nelem;e++)
+   {
+    ElementWithZ2ErrorEstimator* el_pt=
+     dynamic_cast<ElementWithZ2ErrorEstimator*>(mesh_pt->element_pt(e));
+
+#ifdef OOMPH_HAS_MPI
+    if (!el_pt->is_halo()) // Should be fine for serial code with OOMPH_HAS_MPI
+                           // as it will always return true since no haloes
+     {
+#endif
+      
+      //Find the number of compound fluxes in the element
+      const int n_compound_flux_el = el_pt->ncompound_fluxes();
+      //If it's greater than the current (global) number of compound fluxes
+      //bump up the global number
+      if (n_compound_flux_el > n_compound_flux) 
+       {n_compound_flux = n_compound_flux_el;}
+#ifdef OOMPH_HAS_MPI
+     } // end if (!el_pt->is_halo())
+#endif
+   }
+
+  //Initialise a vector of flux norms
+  Vector<double> flux_norm(n_compound_flux,0.0);
+
   unsigned test_count=0;
 
-  //Loop over all (non-halo) elements
-  nelem=mesh_pt->nelement();
+  //Storage for the elemental compound flux error
+  DenseMatrix<double> 
+   elemental_compound_flux_error(nelem,n_compound_flux,0.0);
+
+  //Loop over all (non-halo) elements again
   for (unsigned e=0;e<nelem;e++)
    {
     ElementWithZ2ErrorEstimator* el_pt=
@@ -1120,16 +1197,17 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
 
     Vector<double> s(dim);
 
-    // Initialise elemental error
-    double error=0.0;
+    // Initialise elemental error one for each compound flux in the element
+    const unsigned n_compound_flux_el = el_pt->ncompound_fluxes();
+    Vector<double> error(n_compound_flux_el,0.0);
 
     Integral* integ_pt = el_pt->integral_pt();
 
     //Set the value of Nintpt
-    unsigned Nintpt = integ_pt->nweight();
+    const unsigned n_intpt = integ_pt->nweight();
 
     //Loop over the integration points
-    for(unsigned ipt=0;ipt<Nintpt;ipt++)
+    for(unsigned ipt=0;ipt<n_intpt;ipt++)
      {
 
       //Assign values of s
@@ -1180,24 +1258,35 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
       // FE flux 
       Vector<double> fe_flux(num_flux_terms);
       el_pt->get_Z2_flux(s,fe_flux);
+      // Get compound flux indices. Initialised to zero
+      Vector<unsigned> flux_index(num_flux_terms,0);
+      el_pt->get_Z2_compound_flux_indices(flux_index);
 
-      // Add to RMS error:
-      double sum=0.0;
-      double sum2=0.0;
+      // Add to RMS errors for each compound flux:
+      Vector<double> sum(n_compound_flux_el,0.0);
+      Vector<double> sum2(n_compound_flux_el,0.0);
       for (unsigned i=0;i<num_flux_terms;i++)
        {
-        sum+=(rec_flux[i]-fe_flux[i])*(rec_flux[i]-fe_flux[i]);
-        sum2+=rec_flux[i]*rec_flux[i];
+        sum[flux_index[i]]+=(rec_flux[i]-fe_flux[i])*(rec_flux[i]-fe_flux[i]);
+        sum2[flux_index[i]]+=rec_flux[i]*rec_flux[i];
        }
-      error+=sum*W;
 
-      // Add to flux norm
-      flux_norm+=sum2*W;
-
+      for(unsigned i=0;i<n_compound_flux_el;i++)
+       {
+        //Add the errors to the appropriate compound flux error
+        error[i]+=sum[i]*W;
+        // Add to flux norm
+        flux_norm[i]+=sum2[i]*W;
+       }
      }
     // Unscaled elemental RMS error:
     test_count++; // counting elements visited
-    elemental_error[e]=sqrt(error);
+
+    //elemental_error[e]=sqrt(error);
+    //Take the square-root of the appropriate flux error and
+    //store the result
+    for(unsigned i=0;i<n_compound_flux_el;i++)
+     {elemental_compound_flux_error(e,i) = sqrt(error[i]);}
 
 #ifdef OOMPH_HAS_MPI
      } // end if (!el_pt->is_halo())
@@ -1221,22 +1310,37 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
    {
     if (iproc!=MPI_Helpers::My_rank) // Not current process, so send
      {
+      //Get the haloed elements
       Vector<FiniteElement*> haloed_elem_pt=mesh_pt->haloed_element_pt(iproc);
+      //Find the number of haloed elements
       int nelem_haloed=haloed_elem_pt.size();
-      int element_num;
-      Vector<double> haloed_elem_error(nelem_haloed);
-      for (int e=0; e<nelem_haloed; e++)
-       {
-        // Find element number
-        element_num=elem_num[dynamic_cast<ElementWithZ2ErrorEstimator*>
-                             (haloed_elem_pt[e])];
-        // Put the error in a vector to send
-        haloed_elem_error[e]=elemental_error[element_num];
-       }
-      // Send the haloed_elem_error vector
+
+      //If there are some haloed elements, assemble and send the
+      //errors
       if (nelem_haloed!=0)
        {
-        MPI_Send(&haloed_elem_error[0],nelem_haloed,MPI_DOUBLE,iproc,0,
+        //Find the number of error entires:
+        //number of haloed elements x number of compound fluxes
+        int n_elem_error_haloed = nelem_haloed*n_compound_flux;
+        //Vector for elemental errors
+        Vector<double> haloed_elem_error(n_elem_error_haloed);
+        //Counter for the vector index
+        unsigned count=0;
+        for (int e=0; e<nelem_haloed; e++)
+         {
+          // Find element number
+          int element_num=elem_num[dynamic_cast<ElementWithZ2ErrorEstimator*>
+                                   (haloed_elem_pt[e])];
+          // Put the error in a vector to send
+          for(int i=0;i<n_compound_flux;i++)
+           {
+            haloed_elem_error[count]=
+             elemental_compound_flux_error(element_num,i);
+            ++count;
+           }
+         }
+        //Send the errors
+        MPI_Send(&haloed_elem_error[0],n_elem_error_haloed,MPI_DOUBLE,iproc,0,
                  MPI_COMM_WORLD);
        }
      }
@@ -1248,31 +1352,47 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
          {
           Vector<FiniteElement*> halo_elem_pt=mesh_pt->
                                               halo_element_pt(send_rank);
+          //Find number of halo elements
           int nelem_halo=halo_elem_pt.size();
-          int element_num;
-          Vector<double> halo_elem_error(nelem_halo);
-
-          // Receive the elem_error vector from process send_rank
+          //If there are some halo elements, receive errors and
+          //put in the appropriate places
           if (nelem_halo!=0)
            {
-            MPI_Recv(&halo_elem_error[0],nelem_halo,MPI_DOUBLE,send_rank,0,
+            //Find the number of error entires:
+            //number of haloed elements x number of compound fluxes
+            int n_elem_error_halo = nelem_halo*n_compound_flux;
+            //Vector for elemental errors
+            Vector<double> halo_elem_error(n_elem_error_halo);
+            
+            
+            //Receive the errors from processor send_rank
+            MPI_Recv(&halo_elem_error[0],n_elem_error_halo,
+                     MPI_DOUBLE,send_rank,0,
                      MPI_COMM_WORLD,&status);
 
+            //Counter for the vector index
+            unsigned count=0;
             for (int e=0; e<nelem_halo; e++)
              {
               // Find element number
-              element_num=elem_num[dynamic_cast<ElementWithZ2ErrorEstimator*>
-                                   (halo_elem_pt[e])];
-              // Put the error in this location
-              elemental_error[element_num]=halo_elem_error[e];
+              int element_num=
+               elem_num[dynamic_cast<ElementWithZ2ErrorEstimator*>
+                        (halo_elem_pt[e])];
+              // Put the error in the correct location
+              for(int i=0;i<n_compound_flux;i++)
+               {
+                elemental_compound_flux_error(element_num,i) =
+                 halo_elem_error[count];
+                ++count;
+               }
              }
-           }
-         }
-       }
-     }
-   }
-
-   }
+           } //End of if there are halo elements
+         } //End of if it's not the sending processor
+       } // End of loop over processors
+     } //End of else
+   } //End of loop over processors
+  
+   } //End of if mesh has been distributed
 
 #endif
 
@@ -1290,7 +1410,11 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
   // Use computed flux norm or externally imposed reference value?
   if (Reference_flux_norm!=0.0)
    {
-    flux_norm=Reference_flux_norm;
+    //At the moment assume that all fluxes have the same reference norm
+    for(int i=0;i<n_compound_flux;i++)
+     {
+      flux_norm[i]=Reference_flux_norm;
+     }
    }
   else
    {
@@ -1298,19 +1422,28 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
 #ifdef OOMPH_HAS_MPI
     if (mesh_pt->mesh_has_been_distributed())
      {
-      double total_flux_norm;
+      Vector<double> total_flux_norm(n_compound_flux);
       // every process needs to know the sum
-      MPI_Allreduce(&flux_norm,&total_flux_norm,1,
+      MPI_Allreduce(&flux_norm[0],&total_flux_norm[0],n_compound_flux,
                     MPI_DOUBLE,MPI_SUM,MPI_COMM_WORLD);
       // take sqrt
-      flux_norm=sqrt(total_flux_norm);
+      for(int i=0;i<n_compound_flux;i++)
+       {
+        flux_norm[i]=sqrt(total_flux_norm[i]);
+       }
      }
-    else // mesh has not been distirbuted, so flux_norm already global
+    else // mesh has not been distributed, so flux_norm already global
      {
-      flux_norm=sqrt(flux_norm);
+      for(int i=0;i<n_compound_flux;i++)
+       {
+        flux_norm[i]=sqrt(flux_norm[i]);
+       }
      }
 #else // serial problem, so flux_norm already global
-    flux_norm=sqrt(flux_norm);
+    for(int i=0;i<n_compound_flux;i++)
+     {
+      flux_norm[i]=sqrt(flux_norm[i]);
+     }
 #endif
    }
 
@@ -1320,8 +1453,18 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
   nelem=mesh_pt->nelement();
   for (unsigned e=0;e<nelem;e++)
    {
-    elemental_error[e]/=flux_norm;
-   }
+    //Get the vector of normalised compound fluxes
+    Vector<double> normalised_compound_flux_error(n_compound_flux);
+    for(int i=0;i<n_compound_flux;i++)
+     {
+      normalised_compound_flux_error[i] = 
+       elemental_compound_flux_error(e,i) / flux_norm[i]; 
+     }
+    
+    //calculate the combined error estimate
+    elemental_error[e] = get_combined_error_estimate(
+     normalised_compound_flux_error);
+     }
 
   // Doc global fluxes?
   if (doc_info.doc_flag())

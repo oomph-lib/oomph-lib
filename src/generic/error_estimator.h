@@ -91,9 +91,8 @@ class ErrorEstimator
 //========================================================================
 class ElementWithZ2ErrorEstimator : public virtual FiniteElement
 {
-
+ 
   public:
-
 
  /// Default empty constructor
  ElementWithZ2ErrorEstimator(){}
@@ -113,8 +112,22 @@ class ElementWithZ2ErrorEstimator : public virtual FiniteElement
  /// \short Number of 'flux' terms for Z2 error estimation
  virtual unsigned num_Z2_flux_terms()=0;
 
+ /// \short A stuitable error estimator for
+ /// a multi-physics elements may require one Z2 error estimate for each
+ /// field (e.g. velocity and temperature in a fluid convection problem).
+ /// It is assumed that these error estimates will each use
+ /// selected flux terms. The number of compound fluxes returns the number
+ /// of such combinations of the flux terms. Default value is one and all 
+ /// flux terms are combined with equal weight.
+ virtual unsigned ncompound_fluxes() {return 1;}
+
  /// \short Z2 'flux' terms for Z2 error estimation
  virtual void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)=0;
+
+ /// \short Return the compound flux index of each flux component
+ /// The default (do nothing behaviour) will mean that all indices
+ /// remain at the default value zero.
+ virtual void get_Z2_compound_flux_indices(Vector<unsigned> &flux_index) { }
 
  /// \short Number of vertex nodes in the element
  virtual unsigned nvertex_node() const =0;
@@ -280,13 +293,16 @@ class ElementWithZ2ErrorEstimator : public virtual FiniteElement
 //========================================================================
 class Z2ErrorEstimator : public virtual ErrorEstimator
 {
- 
   public:
  
+ 
+ /// \short Function pointer to combined error estimator function
+ typedef double (*CombinedErrorEstimateFctPt)(const Vector<double> &errors);
+
  /// Constructor: Set order of recovery shape functions
  Z2ErrorEstimator(const unsigned& recovery_order) : 
   Recovery_order(recovery_order), Recovery_order_from_first_element(false),
-  Reference_flux_norm(0.0)                                    
+  Reference_flux_norm(0.0), Combined_error_fct_pt(0)
   {}
   
   
@@ -294,7 +310,8 @@ class Z2ErrorEstimator : public virtual ErrorEstimator
   /// for now -- they will be read out from first element of the mesh 
   /// when the error estimator is applied
   Z2ErrorEstimator() : Recovery_order(0), 
-   Recovery_order_from_first_element(true), Reference_flux_norm(0.0)
+   Recovery_order_from_first_element(true), Reference_flux_norm(0.0),
+   Combined_error_fct_pt(0)
     {}
    
   /// Broken copy constructor
@@ -326,6 +343,15 @@ class Z2ErrorEstimator : public virtual ErrorEstimator
  
   /// Access function for order of recovery polynomials (const version)
   unsigned recovery_order() const {return Recovery_order;}
+
+/// Access function: Pointer to combined error estimate function
+ CombinedErrorEstimateFctPt& combined_error_fct_pt() 
+  {return Combined_error_fct_pt;}
+
+ ///\short  Access function: Pointer to combined error estimate function. 
+ /// Const version
+ CombinedErrorEstimateFctPt combined_error_fct_pt() const 
+  {return Combined_error_fct_pt;}
   
   /// \short Setup patches: For each vertex node pointed to by nod_pt,
   /// adjacent_elements_pt[nod_pt] contains the pointer to the vector that 
@@ -341,6 +367,9 @@ class Z2ErrorEstimator : public virtual ErrorEstimator
                                                             
  /// Access function for prescribed reference flux norm (const. version)
  double reference_flux_norm() const {return Reference_flux_norm;}
+
+ /// Return a combined error estimate from all compound errors
+ double get_combined_error_estimate(const Vector<double> &compound_error);
  
   private:
 
@@ -386,6 +415,9 @@ class Z2ErrorEstimator : public virtual ErrorEstimator
 
  /// Prescribed reference flux norm 
  double Reference_flux_norm;
+
+ /// Function pointer to combined error estimator function
+ CombinedErrorEstimateFctPt Combined_error_fct_pt;
                     
 };
 
