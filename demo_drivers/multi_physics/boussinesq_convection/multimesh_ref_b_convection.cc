@@ -464,6 +464,14 @@ void RefineableConvectionProblem<NST_ELEMENT,AD_ELEMENT>::doc_solution()
 //====================================================================
 int main(int argc, char **argv)
 {
+
+
+#ifdef OOMPH_HAS_MPI
+ // Set up MPI_Helpers
+ MPI_Helpers::init(argc,argv);
+#endif
+
+
  // Set the direction of gravity
  Global_Physical_Variables::Direction_of_gravity[0] = 0.0;
  Global_Physical_Variables::Direction_of_gravity[1] = -1.0;
@@ -491,6 +499,12 @@ int main(int argc, char **argv)
  problem.use_imperfection() = false;
  problem.newton_solve(2);
  problem.doc_solution();
+
+
+#ifdef OOMPH_HAS_MPI 
+ // finalize MPI
+ MPI_Helpers::finalize();
+#endif
 
 } // end of main
 

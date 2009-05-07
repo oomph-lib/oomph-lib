@@ -267,7 +267,7 @@ class RefineableElement : public virtual FiniteElement
     }
   }
 
- /// \Short Interface to function that builds the element: i.e. 
+ /// \short Interface to function that builds the element: i.e. 
  /// construct the nodes, assign their positions, 
  //  apply boundary conditions, etc. The 
  /// required procedures depend on the geometrical type of the element
@@ -528,6 +528,107 @@ class RefineableElement : public virtual FiniteElement
 
 };
  
+
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+
+
+
+
+//=======================================================================
+/// A base class for elements that can have hanging nodes
+/// but are not refineable as such. This class is usually used as a
+/// base class for FaceElements that are attached to refineable
+/// bulk elements (and stripped out before adapting the bulk
+/// mesh, so they don't participate in the refimenent process
+/// itself). We therefore simply break the pure virtual functions
+/// that don't make any sense for such elements
+//======================================================================
+ class NonRefineableElementWithHangingNodes : public virtual RefineableElement
+  {
+   
+    public:
+   
+   
+   /// Broken build function -- shouldn't really be needed
+   void build(Mesh* &mesh_pt, Vector<Node*> &new_node_pt,
+              bool &was_already_built, std::ofstream &new_nodes_file)
+    {
+     std::ostringstream error_message;
+     error_message << "This function is broken as it's only needed/used \n"
+                   << "during \"proper\" refinement\n";
+     throw OomphLibError(error_message.str(),
+                         "NonRefineableElementWithHangingNodes::build()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   
+   
+   
+   /// \short Broken function -- this shouldn't really be needed.
+   void get_interpolated_values(const Vector<double>&s, 
+                                Vector<double>& values)
+    {
+     std::ostringstream error_message;
+     error_message << "This function is broken as it's only needed/used \n"
+                   << "during \"proper\" refinement\n";
+     throw OomphLibError(
+      error_message.str(),
+      "NonRefineableElementWithHangingNodes::get_interpolated_values()",
+      OOMPH_EXCEPTION_LOCATION);
+    }
+   
+   /// \short Broken function -- this shouldn't really be needed.
+   virtual void get_interpolated_values(const unsigned& t,
+                                        const Vector<double>&s, 
+                                        Vector<double>& values)
+    {
+     std::ostringstream error_message;
+     error_message << "This function is broken as it's only needed/used \n"
+                   << "during \"proper\" refinement\n";
+     throw OomphLibError(
+      error_message.str(),
+      "NonRefineableElementWithHangingNodes::get_interpolated_values()",
+      OOMPH_EXCEPTION_LOCATION);
+    }
+   
+   
+   /// Broken function -- this shouldn't really be needed.
+   void check_integrity(double &max_error)
+    {    
+     std::ostringstream error_message;
+     error_message << "This function is broken as it's only needed/used \n"
+                   << "during \"proper\" refinement\n";
+     throw OomphLibError(
+      error_message.str(),
+      "NonRefineableElementWithHangingNodes::check_integrity()",
+      OOMPH_EXCEPTION_LOCATION);
+    }
+   
+   /// Broken function -- this shouldn't really be needed.
+   void rebuild_from_sons(Mesh* &mesh_pt)
+    {
+     std::ostringstream error_message;
+     error_message << "This function is broken as it's only needed/used \n"
+                   << "during \"proper\" refinement\n";
+     throw OomphLibError(
+      error_message.str(),
+      "NonRefineableElementWithHangingNodes::rebuild_from_sons()",
+      OOMPH_EXCEPTION_LOCATION);
+    }
+   
+   
+   
+  };
+
+
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+
+
 
 //=======================================================================
 /// RefineableSolidElements are SolidFiniteElements that may 

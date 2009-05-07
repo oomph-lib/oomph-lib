@@ -290,8 +290,7 @@ class NavierStokesFluxControlElement :
 {
   public:
  
- ///Constructor, which takes a "bulk" element and the value of the index
- ///and its limit
+ ///Constructor, which takes a "bulk" element and face index
  NavierStokesFluxControlElement(FiniteElement* const &element_pt, 
                                 const int &face_index) : 
   NavierStokesSurfacePowerElement<ELEMENT>(element_pt, face_index)
@@ -306,9 +305,14 @@ class NavierStokesFluxControlElement :
       //Is it refineable
       if(dynamic_cast<RefineableElement*>(elem_pt))
        {
-        //Issue a warning
-        OomphLibWarning(
-         "This flux element will not work correctly if nodes are hanging\n",
+        //Throw Error
+        stream error_message;
+        error_message 
+         << "This element does not work properly with refineable bulk \n"
+         << "elements in 3D. Please use the refineable version\n"
+         << "instead.\n";
+        throw OomphLibError(
+         error_message.str(),
          "NavierStokesFluxControlElement::Constructor",
          OOMPH_EXCEPTION_LOCATION);
        }
@@ -467,12 +471,237 @@ protected:
     }
   }
  
-private:
+protected:
  
  ///The highest dimension of the problem 
  unsigned Dim;
 
 }; 
+
+
+
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+
+
+
+
+//======================================================================
+/// A class of element to impose an applied boundary pressure to 
+/// Navier-Stokes elements to control to control a volume flux. A mesh of 
+/// these elements are used in conjunction with a NetFluxControlElement. 
+/// The template arguement ELEMENT is a Navier-Stokes "bulk" element. 
+///
+/// Note: This element calculates Jacobian contributions for both itself
+/// and also for the NetFluxControlElement with respect to its unknowns.
+///
+/// THIS IS THE REFINEABLE VERSION.
+//======================================================================
+template <class ELEMENT>
+class RefineableNavierStokesFluxControlElement : 
+public virtual NavierStokesFluxControlElement<ELEMENT>, 
+ public virtual NonRefineableElementWithHangingNodes
+{
+  public:
+ 
+ ///Constructor, which takes a "bulk" element and the face index
+ RefineableNavierStokesFluxControlElement(FiniteElement* const &element_pt, 
+                                          const int &face_index) : 
+  NavierStokesSurfacePowerElement<ELEMENT>(element_pt, face_index),
+  NavierStokesFluxControlElement<ELEMENT>(element_pt, face_index)
+  {}
+ 
+ /// Destructor should not delete anything
+ ~RefineableNavierStokesFluxControlElement() {}
+
+ 
+ /// \short Number of continuously interpolated values are the
+ /// same as those in the bulk element.
+ unsigned ncont_interpolated_values() const
+  {
+   return dynamic_cast<ELEMENT*>(this->bulk_element_pt())->
+    ncont_interpolated_values();
+  }
+
+ ///This function returns just the residuals
+ inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+  {
+   //Call the generic residuals function using a dummy matrix argument
+   refineable_fill_in_generic_residual_contribution_fluid_traction(
+    residuals,GeneralisedElement::Dummy_matrix,0);
+  }
+ 
+ ///\short This function returns the residuals and the Jacobian 
+ /// including the Jacobian contribution from the flux control 
+ ///master element with respect to dof in this 
+ ///element 
+ inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
+                                              DenseMatrix<double> &jacobian)
+  {
+   //Call the generic routine
+   refineable_fill_in_generic_residual_contribution_fluid_traction(residuals,
+                                                                   jacobian,1);
+  }
+  
+protected:
+ 
+  
+ ///\short This function returns the residuals for the traction function
+ ///flag=1(or 0): do (or don't) compute the Jacobian as well. 
+ ///This function also calculates the Jacobian contribution for the 
+ ///NetFluxControlElement
+ void refineable_fill_in_generic_residual_contribution_fluid_traction(
+  Vector<double> &residuals, 
+  DenseMatrix<double> &jacobian,
+  unsigned flag)
+  {
+   // Get the indices at which the velocity components are stored
+   unsigned u_nodal_index[this->Dim];
+   for(unsigned i=0;i<this->Dim;i++) 
+    {
+     u_nodal_index[i] = dynamic_cast<ELEMENT*>(
+      this->bulk_element_pt())->u_index_nst(i);
+    }
+
+   //Pointer to hang info object
+   HangInfo* hang_info_pt=0;
+   
+   //Find out how many nodes there are
+   unsigned n_node = this->nnode();
+   
+   //Set up memory for the shape and test functions
+   Shape psif(n_node), testf(n_node);
+   
+   //Set the value of n_intpt
+   unsigned n_intpt = this->integral_pt()->nweight();
+   
+   //Integers to store local equation numbers
+   int local_eqn=0;
+   
+   // Get the pressure at the outflow
+   double pressure=this->external_data_pt(this->pressure_data_id())->value(0);
+   
+   //Loop over the integration points
+   for(unsigned ipt=0;ipt<n_intpt;ipt++)
+    {
+     //Get the integral weight
+     double w = this->integral_pt()->weight(ipt);
+     
+     //Find the shape and test functions and return the Jacobian
+     //of the mapping
+     double J = this->shape_and_test_at_knot(ipt,psif,testf);
+     
+     //Premultiply the weights and the Jacobian
+     double W = w*J;
+     
+     // Get the outer unit normal
+     Vector<double> unit_normal(this->Dim);
+     this->outer_unit_normal(ipt, unit_normal);
+     
+     // Calculate the traction
+     Vector<double> traction(this->Dim);
+     for (unsigned i=0; i<this->Dim; i++)
+      {
+       traction[i] = -pressure*unit_normal[i];
+      }
+     
+     
+     
+     //Number of master nodes and storage for the weight of the shape function
+     unsigned n_master=1; double hang_weight=1.0;
+     
+     //Loop over the nodes for the test functions/equations
+     //----------------------------------------------------
+     for(unsigned l=0;l<n_node;l++)
+      {
+       //Local boolean to indicate whether the node is hanging
+       bool is_node_hanging = this->node_pt(l)->is_hanging();
+       
+       //If the node is hanging
+       if(is_node_hanging)
+        {
+         hang_info_pt = this->node_pt(l)->hanging_pt();
+         
+         //Read out number of master nodes from hanging data
+         n_master = hang_info_pt->nmaster();
+        }
+       //Otherwise the node is its own master
+       else
+        {
+         n_master = 1;
+        }
+       
+       //Loop over the master nodes
+       for(unsigned m=0;m<n_master;m++)
+        {
+         // Loop over velocity components for equations
+         for(unsigned i=0;i<this->Dim;i++)
+          {
+           //Get the equation number
+           //If the node is hanging
+           if(is_node_hanging)
+            {
+             //Get the equation number from the master node
+             local_eqn = this->local_hang_eqn(hang_info_pt->master_node_pt(m),
+                                              u_nodal_index[i]);
+             //Get the hang weight from the master node
+             hang_weight = hang_info_pt->master_weight(m);
+            }
+           //If the node is not hanging
+           else
+            {
+             // Local equation number
+             local_eqn = this->nodal_local_eqn(l,u_nodal_index[i]);
+             
+             // Node contributes with full weight
+             hang_weight = 1.0;
+            }
+           
+           //If it's not a boundary condition...
+           if(local_eqn>= 0)
+            {     
+
+             //Add the user-defined traction terms
+             residuals[local_eqn] += traction[i]*testf[l]*W*hang_weight;
+             
+             //Calculate the Jacobian if required. It is assumed 
+             //that traction DOES NOT depend upon velocities
+             //or pressures in the Navier Stokes elements, but 
+             //depend in the Data value which holds the 
+             //pressure.
+             if (flag)
+              {
+               //Get equation number of the pressure data unknown
+               int local_unknown =
+                this->external_local_eqn(this->pressure_data_id(),0);
+               
+               //IF it's not a boundary condition
+               if(local_unknown >= 0)
+                {
+                 //Add to Jacobian for this element
+                 double jac_contribution=-unit_normal[i]*testf[l]*W*
+                  hang_weight;
+                 jacobian(local_eqn,local_unknown) += jac_contribution;
+                 
+                 //Add to Jacobian for master element
+                 jacobian(local_unknown,local_eqn) += jac_contribution;
+                }
+              }
+            }          
+          } //End of loop over dimension
+        }  // End of loop over master nodes
+      } //End of loop over nodes
+    }
+  }
+ 
+}; 
+
+
+
+
+
+
 
 }
 

@@ -1535,7 +1535,7 @@ int main(int argc, char *argv[])
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
 
- #ifdef OOMPH_HAS_MPI
+#ifdef OOMPH_HAS_MPI
  // Set up MPI_Helpers
  MPI_Helpers::init(argc,argv);
  
