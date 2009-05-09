@@ -688,7 +688,7 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
 #endif
 
  FSI_functions::setup_fluid_load_info_for_solid_elements<ELEMENT,2>
-  (3,bulk_mesh_pt(),Wall_mesh_pt,this);
+  (this,3,bulk_mesh_pt(),Wall_mesh_pt);
 
  // Re-setup equation numbering scheme
  cout <<"Number of equations: " << assign_eqn_numbers() 
@@ -964,7 +964,7 @@ void FSICollapsibleChannelProblem<ELEMENT>::actions_after_adapt()
  // pointers to the meshes. The interaction boundary is boundary 3 of 
  // the Fluid mesh.
  FSI_functions::setup_fluid_load_info_for_solid_elements<ELEMENT,2>
-  (3,bulk_mesh_pt(),Wall_mesh_pt,this);
+  (this,3,bulk_mesh_pt(),Wall_mesh_pt);
 
  // The functions used to update the no slip boundary conditions 
  // must be set on any new nodes that have been created during the 

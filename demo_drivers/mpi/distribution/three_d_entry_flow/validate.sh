@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=5
+NUM_TESTS=2
 
 # Doc what we're using to run tests on two processors
 echo " " 
@@ -17,39 +17,6 @@ mkdir Validation
 
 cd Validation
 cp ../*partition.dat .
-
-# Validation for 3D mesh distribution test
-#-----------------------------------------
-
-echo "Running 3D mesh distribution problem "
-mkdir RESLT
-$MPI_RUN_COMMAND ../three_d_mesh_dist > OUTPUT_three_d_mesh_dist
-echo "done"
-echo " " >> validation.log
-echo "3D mesh distribution validation" >> validation.log
-echo "------------------------------------" >> validation.log
-echo " " >> validation.log
-echo "Validation directory: " >> validation.log
-echo " " >> validation.log
-echo "  " `pwd` >> validation.log
-echo " " >> validation.log
-cat RESLT/mesh0_0.dat RESLT/mesh1_0.dat RESLT/haloed_nodes_on_proc0_0.dat \
-    RESLT/haloed_nodes_on_proc1_0.dat RESLT/halo_elements_on_proc0_0.dat \
-    RESLT/halo_elements_on_proc1_0.dat > three_d_mesh_dist_results.dat
-cat RESLT/soln0_on_proc0.dat RESLT/soln0_on_proc1.dat RESLT/soln1_on_proc0.dat \
-    RESLT/soln1_on_proc1.dat \
-    > three_d_soln_results.dat
-
-if test "$1" = "no_fpdiff"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
-else
-../../../../../bin/fpdiff.py ../validata/three_d_mesh_dist_results.dat.gz  \
-         three_d_mesh_dist_results.dat >> validation.log
-../../../../../bin/fpdiff.py ../validata/three_d_soln_results.dat.gz  \
-         three_d_soln_results.dat >> validation.log
-fi
-
-mv RESLT RESLT_three_d_mesh_dist
 
 #----------------------------------------------------------------------
 
@@ -90,45 +57,6 @@ mv RESLT_TH RESLT_three_d_entry_flow
 mv RESLT_CR RESLT_three_d_entry_flow
 
 #----------------------------------------------------------------------
-
-# Validation for 3D cantilever deformation problem
-#-------------------------------------------------
-
-echo "Running 3D cantilever problem "
-mkdir RESLT_refine0
-mkdir RESLT_refine1
-mkdir RESLT_refine3
-mkdir RESLT_refine4
-mkdir RESLT_refine5
-mkdir RESLT_refine6
-mkdir RESLT_refine8
-mkdir RESLT_refine9
-$MPI_RUN_COMMAND ../three_d_cantilever_adapt > OUTPUT_three_d_cantilever_adapt
-echo "done"
-echo " " >> validation.log
-echo "3D cantilever validation" >> validation.log
-echo "------------------------------------" >> validation.log
-echo " " >> validation.log
-echo "Validation directory: " >> validation.log
-echo " " >> validation.log
-echo "  " `pwd` >> validation.log
-echo " " >> validation.log
-cat RESLT_refine0/soln0_on_proc0.dat RESLT_refine1/soln0_on_proc1.dat \
-    RESLT_refine3/soln1_on_proc1.dat RESLT_refine4/soln0_on_proc0.dat \
-    RESLT_refine5/soln0_on_proc1.dat RESLT_refine6/soln1_on_proc0.dat \
-    RESLT_refine8/soln0_on_proc0.dat RESLT_refine8/soln0_on_proc1.dat \
-    RESLT_refine9/soln1_on_proc0.dat RESLT_refine9/soln1_on_proc1.dat \
-    > three_d_cantilever_results.dat
-
-if test "$1" = "no_fpdiff"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
-else
-../../../../../bin/fpdiff.py ../validata/three_d_cantilever_results.dat.gz  \
-         three_d_cantilever_results.dat >> validation.log
-fi
-
-mkdir RESLT_three_d_cantilever_adapt
-mv RESLT_refine* RESLT_three_d_cantilever_adapt
 
 # Append log to main validation log
 cat validation.log >> ../../../../../validation.log

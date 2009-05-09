@@ -731,10 +731,10 @@ namespace Multi_domain_functions
                              Mesh* const &external_face_mesh_pt=0);
 
 #ifdef OOMPH_HAS_MPI
-  /// \short A helper function to remove duplicate equation numbers that 
+  /// \short A helper function to remove duplicate data that 
   /// are created due to coincident nodes between external halo elements 
   /// on different processors
-  void remove_duplicate_eqn_numbers(Mesh* const &mesh_pt);
+  void remove_duplicate_data(Mesh* const &mesh_pt);
 #endif
 
   /// Helper function to add external data from source elements at each
@@ -917,11 +917,11 @@ namespace Multi_domain_functions
 #ifdef OOMPH_HAS_MPI
    if (MPI_Helpers::Nproc!=1)
     {
-     cout << "Duplicate check, number of global equation numbers:"
-          << problem_pt->assign_eqn_numbers(false) << std::endl;
+     oomph_info << "Duplicate removal, number of global equation numbers:"
+                << problem_pt->assign_eqn_numbers(false) << std::endl;
 
-     remove_duplicate_eqn_numbers(first_mesh_pt);
-     remove_duplicate_eqn_numbers(second_mesh_pt);
+     remove_duplicate_data(first_mesh_pt);
+     remove_duplicate_data(second_mesh_pt);
     }
    else
     {
@@ -969,16 +969,25 @@ namespace Multi_domain_functions
      t_start=TimingHelpers::timer();
     }
 
-   // Print a warning for the case where the external mesh is solid -
-   // this has not yet been comprehensively tested
-   SolidMesh* solid_mesh_pt=dynamic_cast<SolidMesh*>(external_mesh_pt);
-   if (solid_mesh_pt!=0)
+#ifdef OOMPH_HAS_MPI
+   // Print a warning for the case where the external mesh is solid and 
+   // the problem has been distributed - this has not yet been tested
+   if (problem_pt->problem_has_been_distributed())
     {
-     OomphLibWarning(
-      "Multi-domain method has not comprehensively tested for SolidMesh.\n",
-      "Multi_domain_functions::set_external_storage(...)",
-      OOMPH_EXCEPTION_LOCATION);
+     SolidMesh* solid_mesh_pt=dynamic_cast<SolidMesh*>(external_mesh_pt);
+     if (solid_mesh_pt!=0)
+      {
+       std::ostringstream warning_stream;
+       warning_stream << "Multi-domain method has not been comprehensively "
+                      << "tested for \n distributed problems where the "
+                      << "external mesh is a SolidMesh." << std::endl;
+       OomphLibWarning(
+        warning_stream.str(),
+        "Multi_domain_functions::set_external_storage(...)",
+        OOMPH_EXCEPTION_LOCATION);
+      }
     }
+#endif
 
    // Geometric object used to represent the external (face) mesh
    MeshAsGeomObject<EL_DIM_LAG,EL_DIM_EUL,GEOM_OBJECT >* mesh_geom_obj_pt;
@@ -1246,8 +1255,15 @@ namespace Multi_domain_functions
       }
 
      unsigned total_successes;
-     MPI_Allreduce(&test_success,&total_successes,1,MPI_INT,MPI_SUM,
-                   MPI_COMM_WORLD);
+     if (MPI_Helpers::Nproc>1)
+      {
+       MPI_Allreduce(&test_success,&total_successes,1,MPI_INT,MPI_SUM,
+                     MPI_COMM_WORLD);
+      }
+     else
+      {
+       total_successes=test_success;
+      }
 
      // If total_successes=0, we have a problem
      if (total_successes==0)
@@ -1577,8 +1593,20 @@ namespace Multi_domain_functions
 #ifdef OOMPH_HAS_MPI
    if (Count_zeta_dim!=0)
     {
-     MPI_Allreduce(&Found_zeta[0],&All_found_zeta[0],Count_zeta_dim,
-                   MPI_INT,MPI_MAX,MPI_COMM_WORLD);
+     if (MPI_Helpers::Nproc>1)
+      {
+       MPI_Allreduce(&Found_zeta[0],&All_found_zeta[0],Count_zeta_dim,
+                     MPI_INT,MPI_MAX,MPI_COMM_WORLD);
+      }
+     else
+      {
+       // Copy from Found_zeta to All_found_zeta which is used in
+       // create_external_elements later on
+       for (unsigned i=0;i<Count_zeta_dim;i++)
+        {
+         All_found_zeta[i]=Found_zeta[i];
+        }
+      }
     }
 #else
    // Copy from Found_zeta to All_found_zeta which is used in
@@ -1812,7 +1840,8 @@ namespace Multi_domain_functions
                    unsigned macro_el_num=All_unsigned_values[loc_p]
                     [All_count_unsigned_values[loc_p]];
                    new_el_pt->set_macro_elem_pt
-                    (macro_mesh_pt->dom_pt()->macro_element_pt(macro_el_num));
+                    (macro_mesh_pt->macro_domain_pt()->
+                     macro_element_pt(macro_el_num));
                    All_count_unsigned_values[loc_p]++;
 
                    // we need to receive
@@ -2528,7 +2557,7 @@ template<class EXT_ELEMENT>
         unsigned macro_el_num=
          All_unsigned_values[loc_p][All_count_unsigned_values[loc_p]];
         new_node_update_el_pt->set_macro_elem_pt
-         (macro_mesh_pt->dom_pt()->macro_element_pt(macro_el_num));
+         (macro_mesh_pt->macro_domain_pt()->macro_element_pt(macro_el_num));
         All_count_unsigned_values[loc_p]++;
 
         // we need to receive

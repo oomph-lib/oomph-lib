@@ -196,6 +196,24 @@ public virtual CylinderWithFlagMesh<ELEMENT>
  /// \short Destructor: empty
  virtual ~AlgebraicCylinderWithFlagMesh(){}
 
+ /// "Access" functions to the "refineable" geometric objects... 
+ void set_bottom_flag_pt(GeomObject* bottom_flag_pt)
+  {
+   // Need to alter the domain's bottom_flag_pt too
+   domain_pt()->bottom_flag_pt()=bottom_flag_pt;
+   Bottom_flag_pt=bottom_flag_pt;
+  }
+ void set_top_flag_pt(GeomObject* top_flag_pt)
+  {
+   domain_pt()->top_flag_pt()=top_flag_pt;
+   Top_flag_pt=top_flag_pt;
+  }
+ void set_tip_flag_pt(GeomObject* tip_flag_pt)
+  {
+   domain_pt()->tip_flag_pt()=tip_flag_pt;
+   Tip_flag_pt=tip_flag_pt;
+  }
+
  /// \short Update the geometric references that are used 
  /// to update node after mesh adaptation.
  /// Empty -- no update of node update required without adaptativity

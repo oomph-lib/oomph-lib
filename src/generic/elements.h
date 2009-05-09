@@ -125,6 +125,9 @@ class GeneralisedElement
  /// Is this element a halo?
  bool Is_halo;
 
+ /// Does this element need to be kept as a halo element during a distribute?
+ bool Must_be_kept_as_halo;
+
 #endif
 
  /// \short Add a (pointer to an) internal data object to the element and
@@ -513,7 +516,7 @@ public:
  GeneralisedElement() : Time_pt(0), Eqn_number(0), Data_pt(0),
   Data_local_eqn(0), Ndof(0), Ninternal_data(0), Nexternal_data(0)
 #ifdef OOMPH_HAS_MPI
-  , Is_halo(false)
+  , Is_halo(false), Must_be_kept_as_halo(false)
 #endif
  {}
 
@@ -839,6 +842,9 @@ public:
 
  /// Is this element a halo?
  bool& is_halo() {return Is_halo;}
+
+ /// Does this element need to be kept as a halo element during a distribute?
+ bool& must_be_kept_as_halo() {return Must_be_kept_as_halo;}
 
 #endif
 

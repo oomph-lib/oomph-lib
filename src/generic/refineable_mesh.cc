@@ -1632,12 +1632,6 @@ void RefineableMeshBase::synchronise_hanging_nodes
  // Loop over the hanging status for each interpolated variable
  for (int icont=-1; icont<ncont_inter_values; icont++)
   { 
-   // geometric hanging data is stored at -1
-   // is it possible to ignore i>=0 if its hanging data is the same
-   // as the geometric case? I'm not sure it is in this case - it
-   // makes sense in complete_hanging_nodes(...) above but not here
-   // From nodes.h, once it's done for icont=-1, all other hanging
-   // data that is the same as the geometric case is also done
 
    for (int d=0; d<MPI_Helpers::Nproc; d++)
     {
@@ -1704,12 +1698,11 @@ void RefineableMeshBase::synchronise_hanging_nodes
       }
     }
 
-
 // Next, compare equivalent halo and haloed vectors to find discrepancies.
-// It is possible that a node may not be on either process; to work round
-// this, a new concept of a "shared node" between two processes has been
-// introduced, which stores all nodes that are on each process in the same
-// order on each process
+// It is possible that a master node may not be on either process involved
+// in the halo-haloed scheme; to work round this, we use the shared_node
+// storage scheme, which stores all nodes that are on each pair of processors
+// in the same order on each of the two processors
 
    for (int d=0; d<MPI_Helpers::Nproc; d++)
     {
@@ -1782,8 +1775,8 @@ void RefineableMeshBase::synchronise_hanging_nodes
           {
            // The halo node should not be hanging in this instance
            // as far as I can tell from the instances I have seen so far
-           // Can't access this directly - it has to be "sent" to the correct
-           // process - use a negative number to denote this
+           // Can't access this directly on this processor - it has to be 
+           // "sent" to the correct process
            hanging_nodes[j]=-1;
            hanging_masters.push_back(-1);
   

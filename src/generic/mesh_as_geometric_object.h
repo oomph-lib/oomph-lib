@@ -713,21 +713,21 @@ public:
    // Decrease/increase min and max to allow for any overshoot in
    // meshes that may move around
    // There's no point in doing this for DIM_LAGRANGIAN==1
-   double percentage_offset=30.0; // hierher0.05;
+   double percentage_offset=5.0;
    if (DIM_LAGRANGIAN>=2)
     {
      double x_length=x_max-x_min;
      double y_length=y_max-y_min;
-     x_min=x_min-(percentage_offset*x_length);
-     x_max=x_max+(percentage_offset*x_length);
-     y_min=y_min-(percentage_offset*y_length);
-     y_max=y_max+(percentage_offset*y_length);
+     x_min=x_min-((percentage_offset/100.0)*x_length);
+     x_max=x_max+((percentage_offset/100.0)*x_length);
+     y_min=y_min-((percentage_offset/100.0)*y_length);
+     y_max=y_max+((percentage_offset/100.0)*y_length);
     }
    if (DIM_LAGRANGIAN==3)
     {
      double z_length=z_max-z_min;
-     z_min=z_min-(percentage_offset*z_length);
-     z_max=z_max+(percentage_offset*z_length);
+     z_min=z_min-((percentage_offset/100.0)*z_length);
+     z_max=z_max+((percentage_offset/100.0)*z_length);
     }
 
    // Add these entries to the Minmax_coords vector
@@ -802,120 +802,74 @@ public:
 
    for (unsigned e=0;e<n_sub;e++)
     {
-     ///Need to cast to the element first
+     // Cast to the element (sub-object) first
      ELEMENT* el_pt=dynamic_cast<ELEMENT*>(Sub_geom_object_pt[e]);
 
-     ///Cache element coord min and max
-     double el_min=el_pt->s_min();
-     double el_max=el_pt->s_max();
+     // Get specified number of points within the element
+     unsigned n_plot=5;
+     unsigned n_plot_points=el_pt->nplot_points(n_plot);
 
-     ///Create a set of sampling points within the element
-     unsigned n_sample=5;
-
-     ///Cases for each dimension
-     if (DIM_LAGRANGIAN==1)
+     for (unsigned i=0;i<n_plot_points;i++)
       {
+       // Storage for local and global coordinates
+       Vector<double> local_coord(DIM_LAGRANGIAN,0.0);
+       Vector<double> global_coord(DIM_LAGRANGIAN,0.0);
+
+       // Get local coordinate and interpolate to global
+       el_pt->get_s_plot(i,n_plot,local_coord);
+       el_pt->interpolated_zeta(local_coord,global_coord);
+
+       //Which bin are the global coordinates in?
+       unsigned bin_number=0;
+
+       //Get max coordinates of bin structure in 1st dimension
        double x_min=Minmax_coords[0];
        double x_max=Minmax_coords[1];
 
-       for (unsigned i_sam=0;i_sam<n_sample;i_sam++)
+       //Work out bin number in this dimension
+       unsigned bin_number_x=int(Nx_bin*(global_coord[0]-x_min)/(x_max-x_min));
+       // Buffer the case where global_coord[0]==x_max
+       if (bin_number_x==Nx_bin) {bin_number_x=Nx_bin-1;}
+
+       //Work out the bin number (in higher dimensions if required)
+       if (DIM_LAGRANGIAN==1)
         {
-         Vector<double> local_coord(DIM_LAGRANGIAN,0.0);
-         local_coord[0]=(double(i_sam+1)/double(n_sample+1))*
-          (el_max-el_min)+el_min;
-         //Interpolate to global coordinates
-         Vector<double> global_coord(DIM_LAGRANGIAN,0.0);
-         el_pt->interpolated_zeta(local_coord,global_coord);
-
-         //Which bin are the global coordinates in?
-         unsigned bin_number=
-          int(Nx_bin*(global_coord[0]-x_min)/(x_max-x_min));
-
-         //Add element-sample coord pair to the calculated bin
-         Bin_object_coord_pairs[bin_number].push_back
-          (std::make_pair(el_pt,global_coord));
+         bin_number=bin_number_x;
         }
-      }
-     else if (DIM_LAGRANGIAN==2)
-      {
-       double x_min=Minmax_coords[0];
-       double x_max=Minmax_coords[1];
-       double y_min=Minmax_coords[2];
-       double y_max=Minmax_coords[3];
-
-       for (unsigned i_sam=0;i_sam<n_sample;i_sam++)
+       else // DIM_LAGRANGIAN=2,3
         {
-         for (unsigned j_sam=0;j_sam<n_sample;j_sam++)
+         double y_min=Minmax_coords[2];
+         double y_max=Minmax_coords[3];
+
+         // Bin number along second dimension
+         unsigned bin_number_y=
+          int(Ny_bin*(global_coord[1]-y_min)/(y_max-y_min));
+         if (bin_number_y==Ny_bin) {bin_number_y=Ny_bin-1;}
+
+         if (DIM_LAGRANGIAN==2)
           {
-           Vector<double> local_coord(DIM_LAGRANGIAN,0.0);
-           local_coord[0]=(double(i_sam+1)/double(n_sample+1))*
-            (el_max-el_min)+el_min;
-           local_coord[1]=(double(j_sam+1)/double(n_sample+1))*
-            (el_max-el_min)+el_min;
-           //Interpolate to global coordinates...
-           Vector<double> global_coord(DIM_LAGRANGIAN,0.0);
-           el_pt->interpolated_zeta(local_coord,global_coord);
+           // Total bin number
+           bin_number=bin_number_x+(Nx_bin*bin_number_y);
+          }
+         else if (DIM_LAGRANGIAN==3)
+          {
+           double z_min=Minmax_coords[4];
+           double z_max=Minmax_coords[5];
 
-           //Which bin are the global coordinates in?
-           unsigned bin_number=
-            int(Nx_bin*(global_coord[0]-x_min)/(x_max-x_min))
-            +Nx_bin*int(Ny_bin*(global_coord[1]-y_min)/(y_max-y_min));
+           // Bin number along third dimension
+           unsigned bin_number_z=
+            int(Nz_bin*(global_coord[2]-z_min)/(z_max-z_min));
+           if (bin_number_z==Nz_bin) {bin_number_z=Nz_bin-1;}
 
-           // hierher Andy this is where it goes wrong
-           //         the 3D unstrutured fsi problem
-           //         comes across a y-coordinate that's
-           //         larger than y_max!
-/*            cout << "\nx: " << global_coord[0] << " " << x_min << " " << x_max */
-/*                 << "\ny: " << global_coord[1] << " " << y_min << " " << y_max */
-/*                 << std::endl; */
-/*            cout << "bin_number " << bin_number  */
-/*                 << " " << Bin_object_coord_pairs.size() << std::endl; */
-
-           //Add element-sample coord pair to the calculated bin
-           Bin_object_coord_pairs[bin_number].push_back
-            (std::make_pair(el_pt,global_coord));
-
+           // Total bin number
+           bin_number=bin_number_x+(Nx_bin*bin_number_y)
+            +(Ny_bin*Nx_bin*bin_number_z);
           }
         }
-      }
-     else if (DIM_LAGRANGIAN==3)
-      {
-       double x_min=Minmax_coords[0];
-       double x_max=Minmax_coords[1];
-       double y_min=Minmax_coords[2];
-       double y_max=Minmax_coords[3];
-       double z_min=Minmax_coords[4];
-       double z_max=Minmax_coords[5];
 
-       for (unsigned i_sam=0;i_sam<n_sample;i_sam++)
-        {
-         for (unsigned j_sam=0;j_sam<n_sample;j_sam++)
-          {
-           for (unsigned k_sam=0;k_sam<n_sample;k_sam++)
-            {
-             Vector<double> local_coord(DIM_LAGRANGIAN,0.0);
-             local_coord[0]=(double(i_sam+1)/double(n_sample+1))*
-              (el_max-el_min)+el_min;
-             local_coord[1]=(double(j_sam+1)/double(n_sample+1))*
-              (el_max-el_min)+el_min;
-             local_coord[2]=(double(k_sam+1)/double(n_sample+1))*
-              (el_max-el_min)+el_min;
-             //Interpolate to global coordinates...
-             Vector<double> global_coord(DIM_LAGRANGIAN,0.0);
-             el_pt->interpolated_zeta(local_coord,global_coord);
-
-             //Which bin are the global coordinates in?
-             unsigned bin_number=
-              int(Nx_bin*(global_coord[0]-x_min)/(x_max-x_min))
-              +Nx_bin*int(Ny_bin*(global_coord[1]-y_min)/(y_max-y_min))
-              +Ny_bin*Nx_bin*int(Nz_bin*(global_coord[2]-z_min)/(z_max-z_min));
-
-             //Add element-sample coord pair to the calculated bin
-             Bin_object_coord_pairs[bin_number].push_back
-              (std::make_pair(el_pt,global_coord));
-            }
-          }
-        }
+       //Add element-sample coord pair to the calculated bin
+       Bin_object_coord_pairs[bin_number].push_back
+        (std::make_pair(el_pt,global_coord));
       }
     }
 

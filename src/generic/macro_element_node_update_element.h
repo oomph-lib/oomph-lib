@@ -392,11 +392,11 @@ class MacroElementNodeUpdateMesh : public virtual Mesh
    BrokenCopy::broken_assign("MacroElementNodeUpdateMesh");
   }
 
- /// Access to domain_pt for MacroElementNodeUpdateMesh; this
+ /// Access to Macro_domain_pt for MacroElementNodeUpdateMesh; this
  /// must be filled in by any mesh which inherits from here
- Domain*& dom_pt()
+ Domain*& macro_domain_pt()
   {
-   return Domain_pt;
+   return Macro_domain_pt;
   }
 
  /// \short Update all nodal positions via sparse MacroElement-based 
@@ -531,7 +531,7 @@ class MacroElementNodeUpdateMesh : public virtual Mesh
  Vector<GeomObject*> Geom_object_vector_pt;
 
  /// \short Domain associated with MacroElementNodeUpdateNodeMesh
- Domain* Domain_pt;
+ Domain* Macro_domain_pt;
 
 };
 

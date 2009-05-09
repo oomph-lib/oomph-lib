@@ -1564,7 +1564,7 @@ void Mesh::classify_halo_and_haloed_nodes(DocInfo& doc_info,
         {
          Node* nod_pt=el_pt->node_pt(j);
 
-         // Add it as a shared node from current domain (?)
+         // Add it as a shared node from current domain
          if (!node_shared[nod_pt])
           {
            this->add_shared_node_pt(d,nod_pt);
@@ -1866,8 +1866,10 @@ void Mesh::distribute(const Vector<unsigned>& element_domain,
             }
          
            // Add a root halo element either if keep_it=true OR this 
-           // current mesh has been told to keep all elements as halos.
-           if ((keep_it) || (keep_all_elements_as_halos()))
+           // current mesh has been told to keep all elements as halos,
+           // OR the element itself knows that it must be kept
+           if ((keep_it) || (keep_all_elements_as_halos())
+               || (el_pt->must_be_kept_as_halo()))
             {
              // Add as root halo element whose non-halo counterpart is
              // located on processor el_domain
@@ -2394,53 +2396,56 @@ void Mesh::prune_halo_elements_and_nodes(DocInfo& doc_info,
            Vector<int> halo_kept(nelem);
            
            // Receive this vector from processor dd 
-           MPI_Status status;
-           MPI_Recv(&halo_kept[0],nelem,MPI_INT,dd,0,MPI_COMM_WORLD,&status);
-           
-           // Classify haloed element accordingly
-           for (unsigned e=0;e<nelem;e++)
+           if (nelem!=0)
             {
-             RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>
-              (haloed_elem_pt[e]);
-
-             // An element should only be kept if its refinement
-             // level is the same as the minimum refinement level
-             unsigned haloed_el_level=ref_el_pt->refinement_level();
-
-             // Go up the tree to the correct level
-             RefineableElement* el_pt;
-
-             if (haloed_el_level==min_ref)
+             MPI_Status status;
+             MPI_Recv(&halo_kept[0],nelem,MPI_INT,dd,0,MPI_COMM_WORLD,&status);
+           
+             // Classify haloed element accordingly
+             for (unsigned e=0;e<nelem;e++)
               {
-               // Already at the correct level
-               el_pt=ref_el_pt;
-              }
-             else
-              {
-               // Need to go up the tree to the father element at min_ref
-               RefineableElement* father_el_pt;
-               ref_el_pt->get_father_at_refinement_level
-                (min_ref,father_el_pt);
-               el_pt=father_el_pt;
-              }
+               RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>
+                (haloed_elem_pt[e]);
 
-             if (halo_kept[e]==1)
-              {
-               // I am being haloed by processor dd
-               // Only keep it if it's not already in the storage
-               unsigned n_root_haloed=tmp_root_haloed_element_pt[dd].size();
-               bool already_root_haloed=false;
-               for (unsigned e_root=0;e_root<n_root_haloed;e_root++)
+               // An element should only be kept if its refinement
+               // level is the same as the minimum refinement level
+               unsigned haloed_el_level=ref_el_pt->refinement_level();
+
+               // Go up the tree to the correct level
+               RefineableElement* el_pt;
+
+               if (haloed_el_level==min_ref)
                 {
-                 if (el_pt==tmp_root_haloed_element_pt[dd][e_root])
-                  {
-                   already_root_haloed=true;
-                   break;
-                  }
+                 // Already at the correct level
+                 el_pt=ref_el_pt;
                 }
-               if (!already_root_haloed)
+               else
                 {
-                 tmp_root_haloed_element_pt[dd].push_back(el_pt);
+                 // Need to go up the tree to the father element at min_ref
+                 RefineableElement* father_el_pt;
+                 ref_el_pt->get_father_at_refinement_level
+                  (min_ref,father_el_pt);
+                 el_pt=father_el_pt;
+                }
+
+               if (halo_kept[e]==1)
+                {
+                 // I am being haloed by processor dd
+                 // Only keep it if it's not already in the storage
+                 unsigned n_root_haloed=tmp_root_haloed_element_pt[dd].size();
+                 bool already_root_haloed=false;
+                 for (unsigned e_root=0;e_root<n_root_haloed;e_root++)
+                  {
+                   if (el_pt==tmp_root_haloed_element_pt[dd][e_root])
+                    {
+                     already_root_haloed=true;
+                     break;
+                    }
+                  }
+                 if (!already_root_haloed)
+                  {
+                   tmp_root_haloed_element_pt[dd].push_back(el_pt);
+                  }
                 }
               }
             }
@@ -2492,7 +2497,10 @@ void Mesh::prune_halo_elements_and_nodes(DocInfo& doc_info,
              // Now send this vector to processor d to tell it which of
              // the haloed elements (which are listed in the same order)
              // are to be retained as haloed elements.
-             MPI_Send(&halo_kept[0],nelem,MPI_INT,d,0,MPI_COMM_WORLD);
+             if (nelem!=0)
+              {
+               MPI_Send(&halo_kept[0],nelem,MPI_INT,d,0,MPI_COMM_WORLD);
+              }
             }
           }
         }
@@ -2792,18 +2800,21 @@ void Mesh::prune_halo_elements_and_nodes(DocInfo& doc_info,
            Vector<int> halo_kept(nelem);
            
            // Receive this vector from processor dd 
-           MPI_Status status;
-           MPI_Recv(&halo_kept[0],nelem,MPI_INT,dd,0,MPI_COMM_WORLD,&status);
-           
-           // Classify haloed element accordingly
-           for (unsigned e=0;e<nelem;e++)
+           if (nelem!=0)
             {
-             FiniteElement* el_pt=haloed_elem_pt[e];
-             if (halo_kept[e]==1)
+             MPI_Status status;
+             MPI_Recv(&halo_kept[0],nelem,MPI_INT,dd,0,MPI_COMM_WORLD,&status);
+           
+             // Classify haloed element accordingly
+             for (unsigned e=0;e<nelem;e++)
               {
-               // I am being haloed by processor dd
-               tmp_root_haloed_element_pt[dd].push_back(el_pt);
+               FiniteElement* el_pt=haloed_elem_pt[e];
+               if (halo_kept[e]==1)
+                {
+                 // I am being haloed by processor dd
+                 tmp_root_haloed_element_pt[dd].push_back(el_pt);
 //               el_pt->output(some_file,5);
+                }
               }
             }
           }
@@ -2832,7 +2843,10 @@ void Mesh::prune_halo_elements_and_nodes(DocInfo& doc_info,
              // Now send this vector to processor d to tell it which of
              // the haloed elements (which are listed in the same order)
              // are to be retained as haloed elements.
-             MPI_Send(&halo_kept[0],nelem,MPI_INT,d,0,MPI_COMM_WORLD);
+             if (nelem!=0)
+              {
+               MPI_Send(&halo_kept[0],nelem,MPI_INT,d,0,MPI_COMM_WORLD);
+              }
             }
           }
         }

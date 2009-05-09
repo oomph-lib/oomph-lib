@@ -189,8 +189,8 @@ class RefineableAdvectionDiffusionEquations :
    
    //Storage for hang info pointer
    HangInfo* hang_info_pt=0;
-   //Storage for local equation
-   int local_eqn = 0;
+   //Storage for global equation
+   int global_eqn = 0;
           
    //Find the number of dofs associated with interpolated u
    unsigned n_u_dof=0;
@@ -220,17 +220,17 @@ class RefineableAdvectionDiffusionEquations :
        if(is_node_hanging)
         {
          //Get the equation number from the master node
-         local_eqn = this->local_hang_eqn(hang_info_pt->master_node_pt(m),
-                                          u_nodal_index);
+         global_eqn = hang_info_pt->master_node_pt(m)->
+          eqn_number(u_nodal_index);
         }
        else
         {
-         // Local equation number
-         local_eqn = this->nodal_local_eqn(l,u_nodal_index);
+         // Global equation number
+         global_eqn = this->node_pt(l)->eqn_number(u_nodal_index);
         }
        
        //If it's positive add to the count
-       if(local_eqn >= 0) {++n_u_dof;}
+       if (global_eqn >= 0) {++n_u_dof;}
       }
     }
    
@@ -280,19 +280,19 @@ class RefineableAdvectionDiffusionEquations :
        if(is_node_hanging)
         {
          //Get the equation number from the master node
-         local_eqn = this->local_hang_eqn(hang_info_pt->master_node_pt(m),
-                                          u_nodal_index);
+         global_eqn = hang_info_pt->master_node_pt(m)->
+          eqn_number(u_nodal_index);
         }
        else
         {
-         // Local equation number
-         local_eqn = this->nodal_local_eqn(l,u_nodal_index);
+         // Global equation number
+         global_eqn = this->node_pt(l)->eqn_number(u_nodal_index);
         }
        
-       if(local_eqn >= 0)
+       if (global_eqn >= 0)
         {
          //Set the global equation number
-         global_eqn_number[count] = this->eqn_number(local_eqn);
+         global_eqn_number[count] = global_eqn;
          //Set the derivative with respect to the unknown
          du_ddata[count] = psi[l]*hang_weight;
          //Increase the counter

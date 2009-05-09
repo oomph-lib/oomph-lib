@@ -6,31 +6,7 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 # Name of executable
 check_PROGRAMS= \
-three_d_mesh_dist \
-three_d_entry_flow \
 three_d_cantilever_adapt
-
-#----------------------------------------------------------------------
-
-# Sources for executable
-three_d_mesh_dist_SOURCES = three_d_mesh_dist.cc
-
-# Required libraries:
-# $(FLIBS) is included in case the solver involves fortran sources.
-three_d_mesh_dist_LDADD = \
-                -L@libdir@ -lpoisson  \
-                -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
-
-#----------------------------------------------------------------------
-
-# Sources for executable
-three_d_entry_flow_SOURCES = three_d_entry_flow.cc
-
-# Required libraries:
-# $(FLIBS) is included in case the solver involves fortran sources.
-three_d_entry_flow_LDADD = \
-                -L@libdir@ -lnavier_stokes  \
-                -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
 #----------------------------------------------------------------------
 
@@ -46,7 +22,14 @@ three_d_cantilever_adapt_CXXFLAGS = -DREFINE
 
 #----------------------------------------------------------------------
 
-
+EXTRA_DIST += three_d_cantilever_0_partition.dat \
+              three_d_cantilever_1_partition.dat \
+              three_d_cantilever_3_partition.dat \
+              three_d_cantilever_4_partition.dat \
+              three_d_cantilever_5_partition.dat \
+              three_d_cantilever_6_partition.dat \
+              three_d_cantilever_8_partition.dat \
+              three_d_cantilever_9_partition.dat
 
 # Include path for library headers: All library headers live in 
 # the include directory which we specify with -I

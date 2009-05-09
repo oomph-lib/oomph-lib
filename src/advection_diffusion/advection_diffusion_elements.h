@@ -393,25 +393,26 @@ public:
    unsigned n_u_dof=0;
    for(unsigned l=0;l<n_node;l++) 
     {
-     int local_eqn = this->nodal_local_eqn(l,u_nodal_index);
+     int global_eqn = this->node_pt(l)->eqn_number(u_nodal_index);
      //If it's positive add to the count
-     if(local_eqn >= 0) {++n_u_dof;}
+     if (global_eqn >=0) {++n_u_dof;}
     }
      
    //Now resize the storage schemes
-   du_ddata.resize(n_u_dof,0.0); global_eqn_number.resize(n_u_dof,0);
+   du_ddata.resize(n_u_dof,0.0); 
+   global_eqn_number.resize(n_u_dof,0);
    
    //Loop over the nodes again and set the derivatives
    unsigned count=0;
    for(unsigned l=0;l<n_node;l++)
     {
-     //Get the local equation
-     int local_eqn = this->nodal_local_eqn(l,u_nodal_index);
+     //Get the global equation number
+     int global_eqn=this->node_pt(l)->eqn_number(u_nodal_index);
      //If it's positive
-     if(local_eqn >=0)
+     if (global_eqn >= 0)
       {
        //Set the global equation number
-       global_eqn_number[count] = this->eqn_number(local_eqn);
+       global_eqn_number[count] = global_eqn;
        //Set the derivative with respect to the unknown
        du_ddata[count] = psi[l];
        //Increase the counter

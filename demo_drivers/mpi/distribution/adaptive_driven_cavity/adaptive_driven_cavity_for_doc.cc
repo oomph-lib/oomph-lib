@@ -1,3 +1,30 @@
+//LIC// ====================================================================
+//LIC// This file forms part of oomph-lib, the object-oriented, 
+//LIC// multi-physics finite-element library, available 
+//LIC// at http://www.oomph-lib.org.
+//LIC// 
+//LIC//           Version 0.85. June 9, 2008.
+//LIC// 
+//LIC// Copyright (C) 2006-2008 Matthias Heil and Andrew Hazel
+//LIC// 
+//LIC// This library is free software; you can redistribute it and/or
+//LIC// modify it under the terms of the GNU Lesser General Public
+//LIC// License as published by the Free Software Foundation; either
+//LIC// version 2.1 of the License, or (at your option) any later version.
+//LIC// 
+//LIC// This library is distributed in the hope that it will be useful,
+//LIC// but WITHOUT ANY WARRANTY; without even the implied warranty of
+//LIC// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+//LIC// Lesser General Public License for more details.
+//LIC// 
+//LIC// You should have received a copy of the GNU Lesser General Public
+//LIC// License along with this library; if not, write to the Free Software
+//LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+//LIC// 02110-1301  USA.
+//LIC// 
+//LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
+//LIC// 
+//LIC//====================================================================
 // Driver for adaptive 2D rectangular driven cavity. Solved with black
 // box adaptation, using Taylor Hood and Crouzeix Raviart elements.
 
@@ -9,14 +36,6 @@
 
 // The mesh
 #include "meshes/rectangular_quadmesh.h"
-
-#ifdef OOMPH_HAS_MPI
-// MPI header
-#include "mpi.h"
-#endif
-
-// Error-catching
-//#include "fenv.h"
 
 using namespace std;
 
@@ -39,14 +58,14 @@ namespace Global_Physical_Variables
 //====================================================================
 template<class ELEMENT>
 class RefineableDrivenCavityProblem : public Problem
-{ // perhaps this should have an ifdef OOMPH_HAS_MPI so it works in serial too?
+{
 
 public:
 
  /// Constructor
  RefineableDrivenCavityProblem();
 
- /// Destructor: Empty -- all memory gets cleaned up in base destructor
+ /// Destructor: Empty
  ~RefineableDrivenCavityProblem() {}
 
  /// Update the after solve (empty)
@@ -196,20 +215,9 @@ RefineableDrivenCavityProblem<ELEMENT>::RefineableDrivenCavityProblem()
  RefineableNavierStokesEquations<2>::
   pin_redundant_nodal_pressures(mesh_pt()->element_pt());
  
-  // Now set the first pressure dof in the first element to 0.0
-  // The "first element" contains the point (0,0)
-  // no real need to do it here because problem not yet distributed
-  unsigned nnod=mesh_pt()->nnode();
-  for (unsigned j=0; j<nnod; j++)
-   {
-    if (mesh_pt()->node_pt(j)->x(0)==0 && 
-        mesh_pt()->node_pt(j)->x(1)==0) // 2d problem only
-        {
-         oomph_info << "I'm fixing the pressure (2) " << std::endl;       
-         fix_pressure(0,0,0.0);
-        }
-   }
- 
+ // Now set the first pressure dof in the first element to 0.0
+ fix_pressure(0,0,0.0);
+  
  // Setup equation numbering scheme
  cout <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
  
@@ -248,188 +256,126 @@ void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 //=====================================================================
 int main(int argc, char **argv)
 {
-// feenableexcept(FE_INVALID | FE_DIVBYZERO | FE_OVERFLOW | FE_UNDERFLOW);
-
- // initialise MPI and setup MPI_Helpers
+ // Initialise MPI
 #ifdef OOMPH_HAS_MPI
  MPI_Helpers::init(argc,argv);
 #endif
 
- // output
-// char filename[100];
- std::ofstream eqn_file;
- std::ofstream internal_file;
- std::ofstream jacobian_file;
+ CommandLineArgs::setup(argc,argv);
+
+ // Set output directory
+ DocInfo doc_info;
+ doc_info.set_directory("RESLT");
 
  // Set max. number of black-box adaptation
  unsigned max_adapt=3;
 
+ // Doc example only - see main driver code for details of validation run
+
  // Solve problem with Taylor Hood elements
  //---------------------------------------
  {
-  oomph_info << " " << std::endl
-             << "------------------------------------------" << std::endl
-             << "-- Solving MPI problem with TH elements --" << std::endl
-             << "------------------------------------------" << std::endl;
-
   //Build problem
   RefineableDrivenCavityProblem<RefineableQTaylorHoodElement<2> > problem;
 
 #ifdef OOMPH_HAS_MPI
-// hierher
-//   // Setup solver
-//   problem.linear_solver_pt() = new SuperLU_dist;
-//  static_cast<SuperLU_dist*>(problem.linear_solver_pt())->
-//   enable_distributed_solve();
+  // Distribute the problem
+  problem.distribute();
+
+  // Check halo schemes (optional)
+  problem.check_halo_schemes(doc_info);
 #endif
 
-  // Initial solve
-  problem.newton_solve();
-
-  // Initial uniform refinement
-  problem.refine_uniformly();
-  
-  // Set output directory
-  DocInfo doc_info;
-  doc_info.set_directory("RESLT_TH");
-  DocInfo mesh_doc_info;
-  mesh_doc_info.set_directory("RESLT_TH_MESH");
-
-  doc_info.number()=0;
-  problem.doc_solution(doc_info);
-
-  // Distribute
-#ifdef OOMPH_HAS_MPI
-  mesh_doc_info.number()=0;
-
-  std::ifstream input_file;
-  std::ofstream output_file;
-  char filename[100];
-
-  // Get the partition to be used from file
-  unsigned n_partition=problem.mesh_pt()->nelement();
-  Vector<unsigned> element_partition(n_partition);
-  sprintf(filename,"adaptive_cavity_1_partition.dat");
-  input_file.open(filename);
-  std::string input_string;
-  for (unsigned e=0;e<n_partition;e++)
-   {
-    getline(input_file,input_string,'\n');
-    element_partition[e]=atoi(input_string.c_str());
-   }
-
-//  Vector<unsigned> out_element_partition;
-  bool report_stats=false;
-  problem.distribute(mesh_doc_info,report_stats,element_partition);
-//                     out_element_partition);
-
-//   sprintf(filename,"out_adaptive_cavity_1_partition.dat");
-//   output_file.open(filename);
-//   for (unsigned e=0;e<n_partition;e++)
-//    {
-//     output_file << out_element_partition[e] << std::endl;
-//    }
-
-  // Check halos
-  problem.check_halo_schemes(mesh_doc_info);
-#endif
-
-  // Re-solve with adaptation
+  // Solve the problem with automatic adaptation
   problem.newton_solve(max_adapt);
-
-  // change doc_info number
-  doc_info.number()=1;
-
+  
+  // Step number
+  doc_info.number()=0;
+   
   //Output solution
   problem.doc_solution(doc_info);
-
-  mesh_doc_info.number()=1;
-  problem.mesh_pt()->doc_mesh_distribution(mesh_doc_info);
-
  } // end of Taylor Hood elements
  
 
  // Solve problem with Crouzeix Raviart elements
  //--------------------------------------------
  {
-  oomph_info << " " << std::endl
-             << "------------------------------------------" << std::endl
-             << "-- Solving MPI problem with CR elements --" << std::endl
-             << "------------------------------------------" << std::endl;
-
   // Build problem
   RefineableDrivenCavityProblem<RefineableQCrouzeixRaviartElement<2> > problem;
 
-#ifdef OOMPH_HAS_MPI
-// hierher
-//   // Setup solver
-//   problem.linear_solver_pt() = new SuperLU_dist;
-//    static_cast<SuperLU_dist*>(problem.linear_solver_pt())->
-//     enable_distributed_solve();
-#endif
-
-  // Initial solve
-  problem.newton_solve();
-
-  // Initial refine
-  problem.refine_uniformly();
-
-  // Set output directory
-  DocInfo doc_info;
-  doc_info.set_directory("RESLT_CR");
-  DocInfo mesh_doc_info;
-  mesh_doc_info.set_directory("RESLT_CR_MESH");
-
-  doc_info.number()=0;
-  problem.doc_solution(doc_info);
-
-  // Distribute
-#ifdef OOMPH_HAS_MPI
-  mesh_doc_info.number()=0;
-
-  std::ifstream input_file;
-  std::ofstream output_file;
-  char filename[100];
-
-  // Get the partition to be used from file
-  unsigned n_partition=problem.mesh_pt()->nelement();
-  Vector<unsigned> element_partition(n_partition);
-  sprintf(filename,"adaptive_cavity_2_partition.dat");
-  input_file.open(filename);
-  std::string input_string;
-  for (unsigned e=0;e<n_partition;e++)
+  //Are there command-line arguments?
+  if (CommandLineArgs::Argc==1)
    {
-    getline(input_file,input_string,'\n');
-    element_partition[e]=atoi(input_string.c_str());
-   }
+#ifdef OOMPH_HAS_MPI
+    // Distribute the problem
+    problem.distribute();
 
-//  Vector<unsigned> out_element_partition;
-  bool report_stats=false;
-  problem.distribute(mesh_doc_info,report_stats,element_partition);
-//                     out_element_partition);
-
-//   sprintf(filename,"out_adaptive_cavity_2_partition.dat");
-//   output_file.open(filename);
-//   for (unsigned e=0;e<n_partition;e++)
-//    {
-//     output_file << out_element_partition[e] << std::endl;
-//    }
-
-  // Check halos
-  problem.check_halo_schemes(mesh_doc_info);
+    // Check halo schemes (optional)
+    problem.check_halo_schemes(doc_info);
 #endif
 
-  // Re-solve with adaptation
-  problem.newton_solve(max_adapt);
+    // Solve the problem with automatic adaptation
+    problem.newton_solve(max_adapt);
+  
+    // Step number
+    doc_info.number()=1;
+   
+    //Output solution
+    problem.doc_solution(doc_info);
+   }
+  else // Validation run - read in partition from file
+   {
+#ifdef OOMPH_HAS_MPI
+    DocInfo mesh_doc_info;
+    mesh_doc_info.set_directory("RESLT_CR_MESH");
+    mesh_doc_info.number()=0;
 
-  // change doc_info number
-  doc_info.number()=1;
+    std::ifstream input_file;
+    char filename[100];
 
-  //Output solution
-  problem.doc_solution(doc_info);
+    // Get the partition to be used from file
+    unsigned n_partition=problem.mesh_pt()->nelement();
+    Vector<unsigned> element_partition(n_partition);
+    sprintf(filename,"adaptive_cavity_2_partition.dat");
+    input_file.open(filename);
+    std::string input_string;
+    for (unsigned e=0;e<n_partition;e++)
+     {
+      getline(input_file,input_string,'\n');
+      element_partition[e]=atoi(input_string.c_str());
+     }
 
-  mesh_doc_info.number()=1;
-  problem.mesh_pt()->doc_mesh_distribution(mesh_doc_info);
+    // Now perform the distribution
+    bool report_stats=true;
+    problem.distribute(mesh_doc_info,report_stats,element_partition);
+
+    // This commented out section details how to write a partition to disk
+//    Vector<unsigned> out_element_partition;
+//    out_element_partition=problem.distribute();
+//    std::ofstream output_file;
+//    sprintf(filename,"out_adaptive_cavity_2_partition.dat");
+//    output_file.open(filename);
+//    for (unsigned e=0;e<n_partition;e++)
+//     {
+//      output_file << out_element_partition[e] << std::endl;
+//     }
+
+//     // Check halos
+//     problem.check_halo_schemes(mesh_doc_info);
+#endif
+
+    // Re-solve with adaptation
+    problem.newton_solve(max_adapt);
+
+    // change doc_info number
+    doc_info.number()=1;
+
+    //Output solution
+    problem.doc_solution(doc_info);
+
+    mesh_doc_info.number()=1;
+    problem.mesh_pt()->doc_mesh_distribution(mesh_doc_info);
+   }
 
  } // end of Crouzeix Raviart elements
 

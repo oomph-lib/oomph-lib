@@ -186,7 +186,7 @@ public:
    // to the meshes. The interaction boundary is boundary 1 of the 2D 
    // fluid mesh.
    FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
-    (1,Fluid_mesh_pt,Wall_mesh_pt,this);
+    (this,1,Fluid_mesh_pt,Wall_mesh_pt);
 
    // The functions used to update the no slip boundary conditions 
    // must be set on any new nodes that have been created during the 
@@ -224,7 +224,7 @@ public:
    // to the meshes. The interaction boundary is boundary 1 of the 2D 
    // fluid mesh.
    FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
-    (1,Fluid_mesh_pt,Wall_mesh_pt,this);
+    (this,1,Fluid_mesh_pt,Wall_mesh_pt);
 
    // The functions used to update the no slip boundary conditions 
    // must be set on any new nodes that have been created during the 
@@ -723,7 +723,7 @@ FSIRingProblem::FSIRingProblem(const unsigned& N,
  FSI_functions::Use_external_storage=true;
 #endif
  FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
-  (1,Fluid_mesh_pt,Wall_mesh_pt,this);
+  (this,1,Fluid_mesh_pt,Wall_mesh_pt);
 
  // Re-assign auxiliary node update functions, as the above step
  // may have added new boundary nodes

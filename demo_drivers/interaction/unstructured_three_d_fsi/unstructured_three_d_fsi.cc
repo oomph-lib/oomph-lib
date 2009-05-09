@@ -651,7 +651,6 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
  n=nsolid_fsi_boundary();
  for (unsigned i=0;i<n;i++)
   {
-   
    // Sanity check: Doc boundary coordinates from solid side
    doc_solid_boundary_coordinates(i);
    
@@ -663,7 +662,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
    // Setup FSI: Pass ID of fluid FSI boundary and associated
    // mesh of solid fsi traction elements.
    FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,3>
-    (Fluid_fsi_boundary_id[i],Fluid_mesh_pt,Solid_fsi_traction_mesh_pt[i],this);
+    (this,Fluid_fsi_boundary_id[i],Fluid_mesh_pt,Solid_fsi_traction_mesh_pt[i]);
    
    // Close the doc file
    FSI_functions::Doc_boundary_coordinate_file.close();

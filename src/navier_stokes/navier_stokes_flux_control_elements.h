@@ -306,7 +306,7 @@ class NavierStokesFluxControlElement :
       if(dynamic_cast<RefineableElement*>(elem_pt))
        {
         //Throw Error
-        stream error_message;
+        std::ostringstream error_message;
         error_message 
          << "This element does not work properly with refineable bulk \n"
          << "elements in 3D. Please use the refineable version\n"

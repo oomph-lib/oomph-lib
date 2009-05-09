@@ -73,6 +73,7 @@ namespace oomph
    }
 #endif
 
+
   // Set up block look up schemes (done automatically in the
   // BlockPreconditioner base class, based on the information 
   // provided in the block-preconditionable elements in the problem)
@@ -82,7 +83,7 @@ namespace oomph
   // type 1: pressure - corresponding to DOF n-1
   double t_block_start = TimingHelpers::timer();
   unsigned ndof_types = this->ndof_types();
-  Vector<unsigned> dof_to_block_map(ndof_types);
+  Vector<unsigned> dof_to_block_map(ndof_types,0);
   dof_to_block_map[ndof_types-1]=1;
   this->block_setup(problem_pt,matrix_pt,dof_to_block_map);
   double t_block_finish = TimingHelpers::timer();

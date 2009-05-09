@@ -361,7 +361,17 @@ namespace oomph
    /// The methods block_number(...) and index_in_block(...) will only
    /// work for global indices between first_lookup_row() and 
    /// first_lookup_row()+nlookup_rows()
-   const unsigned first_lookup_row() { return Min_global_index; }
+   const unsigned first_lookup_row() 
+    {
+     if (Master_block_preconditioner_pt == 0)
+      {
+       return Min_global_index; 
+      }
+     else
+      {
+       return Master_block_preconditioner_pt->first_lookup_row();
+      }
+    }
 
    /// \short Returns the number of global indices for which there is 
    /// block mapping data. \n
@@ -370,7 +380,17 @@ namespace oomph
    /// The methods block_number(...) and index_in_block(...) will only
    /// work for global indices between first_lookup_row() and 
    /// first_lookup_row()+nlookup_rows()
-   const unsigned nlookup_rows() { return Nglobal_indices; }
+   const unsigned nlookup_rows() 
+    { 
+     if (Master_block_preconditioner_pt == 0)
+      {
+       return Nglobal_indices; 
+      }
+     else
+      {
+       return Master_block_preconditioner_pt->nlookup_rows();
+      }
+    }
 
    /// \short What is the size of  the "block" i, i.e. 
    // how many degrees of freedom

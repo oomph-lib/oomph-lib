@@ -202,7 +202,7 @@ public:
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                    DenseMatrix<double> &jacobian)
   {
-#ifdef USE_FD_JACOBIAN_FOR_MY_NAVIER_STOKES_ELEMENT   
+#ifdef USE_FD_JACOBIAN_FOR_NAVIER_STOKES_ELEMENT   
    // This function computes the Jacobian by finite-differencing
    FiniteElement::fill_in_contribution_to_jacobian(residuals,jacobian);
 #else
@@ -459,7 +459,7 @@ public:
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                    DenseMatrix<double> &jacobian)
   {
-#ifdef USE_FD_JACOBIAN_FOR_MY_ADVECTION_DIFFUSION_ELEMENT   
+#ifdef USE_FD_JACOBIAN_FOR_ADVECTION_DIFFUSION_ELEMENT   
    // This function computes the Jacobian by finite-differencing
    FiniteElement::fill_in_contribution_to_jacobian(residuals,jacobian);
 #else
@@ -784,6 +784,8 @@ public:
    // Set binning parameters
 //   Multi_domain_functions::Setup_bins=true;
 //   Multi_domain_functions::N_bin_dim=5;
+   // hierher DEBUG testing
+   Multi_domain_functions::Shut_up=false;
 
    // Set interaction indices (default now)
 //   unsigned interaction_nst=0;
@@ -994,14 +996,14 @@ ConvectionProblem<NST_ELEMENT,AD_ELEMENT>::ConvectionProblem()
    el_pt->time_pt() = time_pt();
   }
 
- // Set sources
- Multi_domain_functions::set_sources<NST_ELEMENT,AD_ELEMENT,2,2>
-  (this,nst_mesh_pt(),adv_diff_mesh_pt());
-
  // combine the submeshes
  add_sub_mesh(Nst_mesh_pt);
  add_sub_mesh(Adv_diff_mesh_pt);
  build_global_mesh();
+
+ // Set sources
+ Multi_domain_functions::set_sources<NST_ELEMENT,AD_ELEMENT,2,2>
+  (this,nst_mesh_pt(),adv_diff_mesh_pt());
 
  // Setup equation numbering scheme
  cout <<"Number of equations: " << assign_eqn_numbers() << endl; 

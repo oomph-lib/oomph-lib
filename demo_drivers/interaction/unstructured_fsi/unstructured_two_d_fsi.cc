@@ -551,7 +551,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
  // pointers to the meshes. The interaction boundary is boundary 3
  // of the 2D fluid mesh.
  FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
-  (3,Fluid_mesh_pt,Traction_mesh_pt,this);
+  (this,3,Fluid_mesh_pt,Traction_mesh_pt);
  
  // Close it
  FSI_functions::Doc_boundary_coordinate_file.close();

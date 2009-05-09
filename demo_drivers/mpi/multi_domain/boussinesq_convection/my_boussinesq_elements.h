@@ -768,10 +768,10 @@ public:
 
 };
 
-//============================================================
-// Overload get_body_force_nst to get the temperature "body force"
-// from the "source" AdvectionDiffusion element via current integration point
-//========================================================
+//======================start_of_get_body_force_nst========================
+/// \short Overload get_body_force_nst to get the temperature "body force"
+/// from the "source" AdvectionDiffusion element via current integration point
+//=========================================================================
 template<unsigned DIM>
 void RefineableQCrouzeixRaviartElementWithExternalElement<DIM>::
 get_body_force_nst
@@ -796,7 +796,7 @@ get_body_force_nst
    result[i] = -gravity[i]*source_el_pt->interpolated_u_adv_diff
     (external_element_local_coord(interaction,ipt))*ra();
   }
-}
+} // end of get_body_force_nst
 
 //=========================================================================
 /// Fill in the derivatives of the body force with respect to the external
@@ -844,7 +844,7 @@ get_dbody_force_nst_dexternal_element_data(const unsigned &ipt,
 
 
 
-//==========================================================================
+//=================start_of_get_wind_adv_diff===============================
 /// \short Overload the wind function in the advection-diffusion equations.
 /// This provides the coupling from the Navier--Stokes equations to the
 /// advection-diffusion equations because the wind is the fluid velocity,
@@ -867,7 +867,7 @@ get_wind_adv_diff
  //The wind function is simply the velocity at the points of the source element
  source_el_pt->interpolated_u_nst
   (external_element_local_coord(interaction,ipt),wind);
-}  
+} // end of get_wind_adv_diff
 
 
 

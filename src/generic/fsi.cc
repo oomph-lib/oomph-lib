@@ -43,8 +43,8 @@ namespace FSI_functions
  double Strouhal_for_no_slip=1.0;
 
  /// Boolean flag to specify whether to use external storage in the
- /// setup of fluid load info for solid elements.  Default value is false.
- bool Use_external_storage=false;
+ /// setup of fluid load info for solid elements.  Default value is true.
+ bool Use_external_storage=true;
 
  /// Apply no-slip condition for N.St. on a moving wall node 
  /// u = St dR/dt, where the Strouhal number St = a/(UT) is defined by

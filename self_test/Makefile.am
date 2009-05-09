@@ -7,12 +7,13 @@
 #------------------------------------------------------------
 if WANT_EXTENDED_SELF_TESTS
   full_self_test = \
-    navier_stokes poisson matrix_matrix_multiply
+    navier_stokes poisson matrix_matrix_multiply 
+if WANT_MPI
+  full_self_test += mpi
+endif
 else
   full_self_test = 
 endif
-
-
 
 
 

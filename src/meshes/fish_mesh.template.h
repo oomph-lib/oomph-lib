@@ -292,7 +292,7 @@ public:
    MacroElementNodeUpdateMesh::set_geom_object_vector_pt(geom_object_pt);
 
    // Fill in the domain pointer to the mesh's storage in the base class
-   MacroElementNodeUpdateMesh::dom_pt()=this->domain_pt();
+   MacroElementNodeUpdateMesh::macro_domain_pt()=this->domain_pt();
 
   }
 

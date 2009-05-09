@@ -170,11 +170,11 @@ namespace Multi_domain_functions
 #ifdef OOMPH_HAS_MPI
 
   //======================================================================
-  /// Function which removes duplicate nodes that exist because
+  /// Function which removes duplicate data that exist because
   /// they have been distinctly created by communications from different
-  /// processors, but the nodes are in fact the same
+  /// processors, whereas the data are in fact the same
   //======================================================================
-  void remove_duplicate_eqn_numbers(Mesh* const &mesh_pt)
+  void remove_duplicate_data(Mesh* const &mesh_pt)
   {
    // Each individual container of external halo elements has unique
    // nodes/equation numbers, but there may be some duplication between

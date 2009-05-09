@@ -35,7 +35,7 @@ fsi_collapsible_channel_macro_adapt_external_CXXFLAGS = -DMACRO_ELEMENT_NODE_UPD
 
 #----------------------------------------------------------------------
 
-
+EXTRA_DIST += fsi_collapsible_channel_partition.dat
 
 # Include path for library headers: All library headers live in 
 # the include directory which we specify with -I

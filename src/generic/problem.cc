@@ -155,19 +155,56 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
 
  //==================================================================
- /// Distribute the problem and doc
+ /// Distribute the problem without doc; report stats if required
  //==================================================================
  Vector<unsigned>& Problem::distribute(const bool& report_stats)
   {
-   // Set dummy paramemters
+   // Set dummy doc paramemters
    DocInfo doc_info;
    doc_info.doc_flag()=false;
    // Set the sizes of the input and output vectors
    unsigned n_element=mesh_pt()->nelement();
    Vector<unsigned> element_partition(n_element,0);
    Element_partition.resize(n_element);
+   // Distribute
    Element_partition=distribute(doc_info,report_stats,element_partition);
+   // Return partition that was used
+   return Element_partition;
+  }
 
+ //==================================================================
+ /// Distribute the problem according to specified partition
+ //==================================================================
+ Vector<unsigned>& Problem::distribute
+ (const Vector<unsigned>& element_partition, const bool& report_stats)
+  {
+   // Set dummy doc paramemters
+   DocInfo doc_info;
+   doc_info.doc_flag()=false;
+   // Set the size of the output vector
+   unsigned n_element=element_partition.size();
+   Element_partition.resize(n_element);
+   // Distribute
+   Element_partition=distribute(doc_info,report_stats,element_partition);
+   // Return the partition that was used
+   return Element_partition;
+  }
+
+ //==================================================================
+ /// Distribute the problem and doc to specified DocInfo
+ //==================================================================
+ Vector<unsigned>& Problem::distribute(DocInfo& doc_info,
+                                       const bool& report_stats)
+  {
+   // Set the sizes of the input and output vectors
+   unsigned n_element=mesh_pt()->nelement();
+   // Dummy input vector
+   Vector<unsigned> element_partition(n_element,0);
+   // Set size of output vector
+   Element_partition.resize(n_element);
+   // Distribute
+   Element_partition=distribute(doc_info,report_stats,element_partition);
+   // Return partition that was used
    return Element_partition;
   }
 
@@ -1241,7 +1278,9 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
    for (unsigned i=0;i<nsub_mesh;i++)
     {
      Sub_mesh_pt[i]->assign_global_eqn_numbers(Dof_pt);
+     n_dof=Dof_pt.size();
     }
+
    //Assign local equation numbers if required
    if (assign_local_eqn_numbers)
     {
@@ -7890,10 +7929,6 @@ void Problem::doc_errors(DocInfo& doc_info)
    return;
   }
 
-
- //Call the actions before adaptation
- actions_before_adapt();
-
  // Number of submeshes?
  unsigned Nmesh=nsub_mesh();
  
@@ -7901,7 +7936,7 @@ void Problem::doc_errors(DocInfo& doc_info)
  //------------
  if (Nmesh==0)
   {
-   // Refine single mesh uniformly if possible
+   // Is the single mesh refineable?
    if (RefineableMeshBase* mmesh_pt =
        dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
     { 
@@ -7948,6 +7983,7 @@ void Problem::doc_errors(DocInfo& doc_info)
                 << mmesh_pt->min_error() << std::endl;
 
     }
+
   }
   
  //Multiple submeshes
@@ -7958,7 +7994,7 @@ void Problem::doc_errors(DocInfo& doc_info)
    for (unsigned imesh=0;imesh<Nmesh;imesh++)
     {
 
-     // Refine single mesh uniformly if possible
+     // Is the single mesh refineable?
      if (RefineableMeshBase* mmesh_pt=
          dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
       { 
@@ -8007,17 +8043,10 @@ void Problem::doc_errors(DocInfo& doc_info)
                   << mmesh_pt->max_error() << " "
                   << mmesh_pt->min_error() << std::endl;
       }
-      
+
     } // End of loop over submeshes
 
   }
-
- //Any actions after adapt
- actions_after_adapt();
- 
- //Reassign the equation numbers in case things have changed by actions
- //before and after adapt
- (void)assign_eqn_numbers();
 
 }
 
@@ -8638,7 +8667,7 @@ void Problem::unsteady_newton_solve(const double &dt,
      // refinement or unrefinement to perform
      unsigned total_refined=0;
      unsigned total_unrefined=0;
-     if (mesh_pt()->mesh_has_been_distributed())
+     if (Problem_has_been_distributed)
       {
        MPI_Allreduce(&n_refined,&total_refined,1,MPI_INT,MPI_SUM,
                      MPI_COMM_WORLD);
@@ -8690,16 +8719,11 @@ void Problem::unsteady_newton_solve(const double &dt,
    if (isolve==max_solve-1)
     {
      oomph_info << std::endl 
-                << "----------------------------------------------------------" 
+                << "----------------------------------------------------------"
                 << std::endl
                 << "Reached max. number of adaptations in \n"
                 << "Problem::unsteady_newton_solver().\n"
-                << "Accepting current soln with errors:" ;
-     //Document the errors
-     doc_errors();
-     
-     oomph_info << std::endl
-                << "----------------------------------------------------------" 
+                << "----------------------------------------------------------"
                 << std::endl
                 << std::endl;
     }
@@ -8826,13 +8850,6 @@ void Problem::newton_solve(const unsigned &max_adapt)
       << std::endl
       << "Reached max. number of adaptations in \n"
       << "Problem::newton_solver().\n"
-      << "Accepting current soln with errors:" ;
-       
-       //Document the errors
-       doc_errors(); 
-       
-     oomph_info 
-      << std::endl
       << "----------------------------------------------------------" 
       << std::endl << std::endl;
     }
@@ -8842,6 +8859,28 @@ void Problem::newton_solve(const unsigned &max_adapt)
 
 }
 
+//========================================================================
+/// Flush any external storage for any submeshes
+/// NB this would ordinarily take place within the adaptation procedure
+/// for each submesh (See RefineableMesh::adapt_mesh(...)), but there
+/// are instances where the actions_before/after_adapt routines are used
+/// and no adaptive routines are called in between (e.g. when doc-ing 
+/// errors at the end of an adaptive newton solver)
+//========================================================================
+void Problem::flush_all_external_storage()
+{
+ //Number of submeshes
+ unsigned n_mesh=nsub_mesh();
+
+ //External storage will only exist if there is more than one (sub)mesh
+ if (n_mesh>1)
+  {
+   for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
+    {
+     mesh_pt(i_mesh)->flush_all_external_storage();
+    }
+  }
+}
 
 
 #ifdef OOMPH_HAS_MPI

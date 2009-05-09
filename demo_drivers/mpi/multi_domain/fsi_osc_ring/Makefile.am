@@ -22,7 +22,7 @@ fsi_osc_ring_external_CXXFLAGS = -DUSE_EXTERNAL_ELEMENTS
 
 #----------------------------------------------------------------------
 
-
+EXTRA_DIST += fsi_osc_ring_partition.dat
 
 # Include path for library headers: All library headers live in 
 # the include directory which we specify with -I

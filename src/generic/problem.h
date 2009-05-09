@@ -1121,12 +1121,21 @@ protected:
    check_halo_schemes(tmp_doc_info);
   }
 
- /// Distribute the problem and doc; returns a vector which
- /// details the partitioning
+ /// \short Distribute the problem and doc, using the specified partition; 
+ /// returns a vector which details the partitioning
  Vector<unsigned>& distribute(DocInfo& doc_info, const bool& report_stats,
                               const Vector<unsigned>& element_partition);
  
- /// Distribute the problem; returns a vector which
+ /// \short Distribute the problem; returns a vector which
+ /// details the partitioning
+ Vector<unsigned>& distribute(DocInfo& doc_info, const bool& report_stats);
+
+ /// \short Distribute the problem using the specified partition; 
+ /// returns a vector which details the partitioning
+ Vector<unsigned>& distribute(const Vector<unsigned>& element_partition,
+                              const bool& report_stats=false);
+
+ /// \short Distribute the problem; returns a vector which
  /// details the partitioning
  Vector<unsigned>& distribute(const bool& report_stats=false);
 
@@ -1170,6 +1179,10 @@ protected:
    }
 
 #endif
+
+  /// \short Wrapper function to call flush_external_storage for
+  /// each submesh of the problem
+  void flush_all_external_storage();
 
   /// \short Boolean to indicate if all output is suppressed in 
   /// Problem::newton_solve(). Defaults to false.

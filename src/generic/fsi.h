@@ -487,7 +487,7 @@ namespace FSI_functions
 
  //============================================================================
  /// \short Boolean flag to specify whether to use external storage in the
- /// setup of fluid load info for solid elements.  Default value is false.
+ /// setup of fluid load info for solid elements.  Default value is true.
  //============================================================================
  extern bool Use_external_storage;
 
@@ -825,10 +825,10 @@ namespace FSI_functions
  //============================================================================
  template<class FLUID_ELEMENT, unsigned DIM_FLUID>
   void setup_fluid_load_info_for_solid_elements_using_external_storage(
+   Problem* problem_pt,
    const unsigned &boundary_in_fluid_mesh,
    Mesh* const &fluid_mesh_pt,
    Mesh* const &solid_mesh_pt,
-   Problem* problem_pt,
    const unsigned& face=0)
   {
    // Flush all previous external storage
@@ -923,19 +923,19 @@ namespace FSI_functions
     (problem_pt,solid_mesh_pt,fluid_mesh_pt,face,fluid_face_mesh_pt);
 
 #ifdef OOMPH_HAS_MPI
-   // Remove any duplicated equation numbers
+   // Remove any duplicated data by checking equation numbering
    if (MPI_Helpers::Nproc!=1)
     {
      // Need to call all non-local assigns in Problem::assign_eqn_numbers
-     std::cout << "FSI: Assign non-local equations only, number=" <<
+     oomph_info << "FSI: Assign non-local equations only, number=" <<
       problem_pt->assign_eqn_numbers(false) << std::endl;
 
      // Now remove all the duplications, which are in the FLUID mesh!
-     Multi_domain_functions::remove_duplicate_eqn_numbers(fluid_mesh_pt);
+     Multi_domain_functions::remove_duplicate_data(fluid_mesh_pt);
     }
    else
     {
-     oomph_info << "INFO: No need to remove duplicate equation numbers"
+     oomph_info << "INFO: No need to remove duplicate data"
                 << " on a single-process run, continuing" << std::endl;
     }
 #endif
@@ -969,17 +969,17 @@ namespace FSI_functions
  //============================================================================
  template<class FLUID_ELEMENT, unsigned DIM_FLUID>
   void setup_fluid_load_info_for_solid_elements(
+   Problem* problem_pt,
    const unsigned &boundary_in_fluid_mesh,
    Mesh* const &fluid_mesh_pt,
    Mesh* const &solid_mesh_pt,
-   Problem* problem_pt,
    const unsigned& face=0)
   {
    if (Use_external_storage)
     {
      setup_fluid_load_info_for_solid_elements_using_external_storage
       <FLUID_ELEMENT,DIM_FLUID>
-      (boundary_in_fluid_mesh,fluid_mesh_pt,solid_mesh_pt,problem_pt,face);
+      (problem_pt,boundary_in_fluid_mesh,fluid_mesh_pt,solid_mesh_pt,face);
     }
    else
     {

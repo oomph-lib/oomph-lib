@@ -84,6 +84,11 @@ public:
  /// that represents the cylinder
  Circle* cylinder_pt() {return Cylinder_pt;}
 
+ /// \short Access fct to GeomObjects for top, bottom and tip
+ GeomObject*& bottom_flag_pt() {return Bottom_flag_pt;}
+ GeomObject*& top_flag_pt() {return Top_flag_pt;}
+ GeomObject*& tip_flag_pt() {return Tip_flag_pt;}
+
 private:
 
  /// \short Helper function to interpolate linearly between the
