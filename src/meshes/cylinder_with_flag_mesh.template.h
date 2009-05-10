@@ -200,17 +200,17 @@ public virtual CylinderWithFlagMesh<ELEMENT>
  void set_bottom_flag_pt(GeomObject* bottom_flag_pt)
   {
    // Need to alter the domain's bottom_flag_pt too
-   domain_pt()->bottom_flag_pt()=bottom_flag_pt;
+   this->domain_pt()->bottom_flag_pt()=bottom_flag_pt;
    Bottom_flag_pt=bottom_flag_pt;
   }
  void set_top_flag_pt(GeomObject* top_flag_pt)
   {
-   domain_pt()->top_flag_pt()=top_flag_pt;
+   this->domain_pt()->top_flag_pt()=top_flag_pt;
    Top_flag_pt=top_flag_pt;
   }
  void set_tip_flag_pt(GeomObject* tip_flag_pt)
   {
-   domain_pt()->tip_flag_pt()=tip_flag_pt;
+   this->domain_pt()->tip_flag_pt()=tip_flag_pt;
    Tip_flag_pt=tip_flag_pt;
   }
 
