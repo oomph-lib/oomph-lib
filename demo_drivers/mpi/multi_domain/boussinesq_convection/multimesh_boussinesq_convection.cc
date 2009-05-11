@@ -848,9 +848,6 @@ protected:
 template<class NST_ELEMENT,class AD_ELEMENT>
 ConvectionProblem<NST_ELEMENT,AD_ELEMENT>::ConvectionProblem()
 {
- // Suppress warnings about repeated external data
- GeneralisedElement::Suppress_warning_about_repeated_external_data=true;
-
  //Allocate a timestepper
  add_time_stepper_pt(new BDF<2>);
 

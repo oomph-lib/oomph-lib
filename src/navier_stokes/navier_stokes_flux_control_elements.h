@@ -292,29 +292,34 @@ class NavierStokesFluxControlElement :
  
  ///Constructor, which takes a "bulk" element and face index
  NavierStokesFluxControlElement(FiniteElement* const &element_pt, 
-                                const int &face_index) : 
+                                const int &face_index,
+                                const bool& 
+                                called_from_refineable_constructor=false) : 
   NavierStokesSurfacePowerElement<ELEMENT>(element_pt, face_index)
   { 
 #ifdef PARANOID
    {
     //Check that the element is not a refineable 3d element
-    ELEMENT* elem_pt = new ELEMENT;
-    //If it's three-d
-    if(elem_pt->dim()==3)
+    if (!called_from_refineable_constructor)
      {
-      //Is it refineable
-      if(dynamic_cast<RefineableElement*>(elem_pt))
+      ELEMENT* elem_pt = new ELEMENT;
+      //If it's three-d
+      if(elem_pt->dim()==3)
        {
-        //Throw Error
-        std::ostringstream error_message;
-        error_message 
-         << "This element does not work properly with refineable bulk \n"
-         << "elements in 3D. Please use the refineable version\n"
-         << "instead.\n";
-        throw OomphLibError(
-         error_message.str(),
-         "NavierStokesFluxControlElement::Constructor",
-         OOMPH_EXCEPTION_LOCATION);
+        //Is it refineable
+        if(dynamic_cast<RefineableElement*>(elem_pt))
+         {
+          //Throw Error
+          std::ostringstream error_message;
+          error_message 
+           << "This element does not work properly with refineable bulk \n"
+           << "elements in 3D. Please use the refineable version\n"
+           << "instead.\n";
+          throw OomphLibError(
+           error_message.str(),
+           "NavierStokesFluxControlElement::Constructor",
+           OOMPH_EXCEPTION_LOCATION);
+         }
        }
      }
    }
@@ -509,7 +514,8 @@ public virtual NavierStokesFluxControlElement<ELEMENT>,
  RefineableNavierStokesFluxControlElement(FiniteElement* const &element_pt, 
                                           const int &face_index) : 
   NavierStokesSurfacePowerElement<ELEMENT>(element_pt, face_index),
-  NavierStokesFluxControlElement<ELEMENT>(element_pt, face_index)
+   // we're calling this from the constructor of the refineable version.
+   NavierStokesFluxControlElement<ELEMENT>(element_pt, face_index,true)
   {}
  
  /// Destructor should not delete anything

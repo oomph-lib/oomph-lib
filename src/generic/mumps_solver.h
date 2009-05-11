@@ -38,10 +38,44 @@
   #include <oomph-lib-config.h>
 #endif
 
+#include<stack>
+
 #include "linear_solver.h"
+#include "preconditioner.h"
 
 namespace oomph
 {
+
+
+
+
+//====================================================================
+/// \short Namespace for pool of fortran mumps solvers
+//====================================================================
+namespace MumpsSolverPool 
+{
+
+ ///Stack containing the IDs of available mumps solvers
+ extern std::stack<int> Available_solver_ids;
+ 
+ /// Bool indicating that the pool has been set up
+ extern bool Pool_has_been_setup;
+ 
+ /// Default max. number of mumps solvers
+ extern int Max_n_solvers;
+ 
+ /// Get new solver from pool
+ extern void get_new_solver_id(unsigned& solver_id);
+ 
+ /// Return solver to pool
+ extern void return_solver(const unsigned& solver_id);
+
+ /// \short Setup namespace -- specify the max. number of solver
+ /// instantiations required.
+ extern void setup(const unsigned& max_n_solvers); 
+
+}
+
 
 
 
@@ -155,6 +189,10 @@ class MumpsSolver : public LinearSolver
  /// Set scaling factor for workspace (defaults is 2)
  void set_workspace_scaling_factor(const unsigned& s);
 
+ /// \short Default factor for workspace -- static so it can be overwritten
+ /// globally.
+ static int Default_workspace_scaling_factor;
+
   private:
 
  /// Jacobian setup time
@@ -176,10 +214,104 @@ class MumpsSolver : public LinearSolver
  /// required, and the matrix data will be wiped using its clean_up_memory()
  /// function. Default value is false.
  bool Delete_matrix_data;
- 
+
+ /// Solver ID in pool
+ unsigned Solver_ID_in_pool;
+
 };
  
 
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+
+//====================================================================
+/// An interface to allow Mumps to be used as an (exact) Preconditioner
+//====================================================================
+class MumpsPreconditioner : public Preconditioner
+{
+ public:
+
+ /// Constructor.
+ MumpsPreconditioner()
+  {}
+ 
+ /// Destructor.
+ ~MumpsPreconditioner()
+  {}
+ 
+  /// Broken copy constructor.
+  MumpsPreconditioner(const MumpsPreconditioner&)
+  {
+   BrokenCopy::broken_copy("MumpsPreconditioner");
+  }
+
+
+  /// Broken assignment operator.
+  void operator=(const MumpsPreconditioner&)
+  {
+   BrokenCopy::broken_assign("MumpsPreconditioner");
+  }
+  
+  /// \short Function to set up a preconditioner for the linear
+  /// system defined by matrix_pt. This function must be called
+  /// before using preconditioner_solve.
+  /// Note: matrix_pt must point to an object of class
+  /// CRDoubleMatrix or CCDoubleMatrix
+  void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
+  {
+   oomph_info << "Setting up Mumps (exact) preconditioner" 
+              << std::endl;
+   
+   // Wipe previously allocated memory
+   Solver.clean_up_memory();
+   
+   if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt) != 0)
+    {
+     Distribution_pt
+      ->rebuild(dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt)
+                ->distribution_pt());
+    }
+   else
+    {
+     Distribution_pt->rebuild(problem_pt->communicator_pt(),
+                              matrix_pt->nrow(),false);
+    }
+   Solver.doc_time() = false;
+   Solver.distribution_pt()->rebuild(Distribution_pt);
+   Solver.factorise(matrix_pt);
+    
+  }
+  
+  /// \short Function applies Mumps to vector r for (exact) 
+  /// preconditioning, this requires a call to setup(...) first.
+  void preconditioner_solve(const DoubleVector &r, DoubleVector &z)
+  {
+   Solver.resolve(r, z);
+  }
+  
+
+  /// \short Clean up memory -- forward the call to the version in
+  /// Mumps in its LinearSolver incarnation.
+  void clean_up_memory()
+  {
+   Solver.clean_up_memory();
+  }
+  
+  /// Enable documentation of time
+  bool& doc_time() 
+   {
+    return Solver.doc_time();
+   }
+  
+  private:
+  
+  /// \short the Mumps solver emplyed by this preconditioner
+  MumpsSolver Solver;
+};
 
 }
 

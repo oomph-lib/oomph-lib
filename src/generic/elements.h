@@ -627,7 +627,7 @@ public:
  static bool Suppress_warning_about_repeated_internal_data;
 
  /// \short Static boolean to suppress warnings about repeated external
- /// data. Defaults to false.
+ /// data. Defaults to true.
  static bool Suppress_warning_about_repeated_external_data;
 
  /// \short Return the global equation number corresponding to the 

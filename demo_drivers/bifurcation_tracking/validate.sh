@@ -109,7 +109,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../bin/fpdiff.py ../validata/adaptive_pitch.dat.gz adaptive_pitch.dat \
- >> validation.log
+ 0.1 5.0e-7 >> validation.log
 fi
 
 

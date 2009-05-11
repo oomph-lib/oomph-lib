@@ -28,40 +28,40 @@
 /*cfortran.h headers for the mumps routines*/
 
 
-PROTOCCALLSFSUB0(MUMPS_SETUP,mumps_setup)
-#define mumps_setup() CCALLSFSUB0(MUMPS_SETUP,mumps_setup)
+
+PROTOCCALLSFSUB1(MUMPS_SETUP_SOLVER_POOL,mumps_setup_solver_pool,INT)
+#define mumps_setup_solver_pool(N_POOL) CCALLSFSUB1(MUMPS_SETUP_SOLVER_POOL,mumps_setup_solver_pool,INT,N_POOL)
+
+PROTOCCALLSFSUB2(MUMPS_SETUP,mumps_setup,INT,INT)
+#define mumps_setup(I_POOL,S) CCALLSFSUB2(MUMPS_SETUP,mumps_setup,INT,INT,I_POOL,S)
 
 
-PROTOCCALLSFSUB1(MUMPS_SET_WORKSPACE_SCALING_FACTOR,mumps_set_workspace_scaling_factor,INT)
-#define mumps_set_workspace_scaling_factor(S) CCALLSFSUB1(MUMPS_SET_WORKSPACE_SCALING_FACTOR,mumps_set_workspace_scaling_factor,INT,S)
+PROTOCCALLSFSUB2(MUMPS_SET_WORKSPACE_SCALING_FACTOR,mumps_set_workspace_scaling_factor,INT,INT)
+#define mumps_set_workspace_scaling_factor(I_POOL,S) CCALLSFSUB2(MUMPS_SET_WORKSPACE_SCALING_FACTOR,mumps_set_workspace_scaling_factor,INT,INT,I_POOL,S)
 
 
-PROTOCCALLSFSUB0(MUMPS_SWITCH_ON_DOC,mumps_switch_on_doc)
-#define mumps_switch_on_doc() CCALLSFSUB0(MUMPS_SWITCH_ON_DOC,mumps_switch_on_doc)
+PROTOCCALLSFSUB1(MUMPS_SWITCH_ON_DOC,mumps_switch_on_doc,INT)
+#define mumps_switch_on_doc(I_POOL) CCALLSFSUB1(MUMPS_SWITCH_ON_DOC,mumps_switch_on_doc,INT,I_POOL)
 
 
-PROTOCCALLSFSUB0(MUMPS_SWITCH_OFF_DOC,mumps_switch_off_doc)
-#define mumps_switch_off_doc() CCALLSFSUB0(MUMPS_SWITCH_OFF_DOC,mumps_switch_off_doc)
+PROTOCCALLSFSUB1(MUMPS_SWITCH_OFF_DOC,mumps_switch_off_doc,INT)
+#define mumps_switch_off_doc(I_POOL) CCALLSFSUB1(MUMPS_SWITCH_OFF_DOC,mumps_switch_off_doc,INT,I_POOL)
 
 
-PROTOCCALLSFSUB5(MUMPS_FACTORISE,mumps_factorise,INT,INT,INTV,INTV,DOUBLEV)
-#define mumps_factorise(N,NZ_LOC,IRN_LOC,JCN_LOC,A_LOC) CCALLSFSUB5(MUMPS_FACTORISE,mumps_factorise,INT,INT,INTV,INTV,DOUBLEV,N,NZ_LOC,IRN_LOC,JCN_LOC,A_LOC)
+PROTOCCALLSFSUB6(MUMPS_FACTORISE,mumps_factorise,INT,INT,INT,INTV,INTV,DOUBLEV)
+#define mumps_factorise(I_POOL,N,NZ_LOC,IRN_LOC,JCN_LOC,A_LOC) CCALLSFSUB6(MUMPS_FACTORISE,mumps_factorise,INT,INT,INT,INTV,INTV,DOUBLEV,I_POOL,N,NZ_LOC,IRN_LOC,JCN_LOC,A_LOC)
 
-PROTOCCALLSFSUB6(MUMPS_SOLVE,mumps_solve,INT,INT,INTV,INTV,DOUBLEV,DOUBLEV)
-#define mumps_solve(N,NZ_LOC,IRN_LOC,JCN_LOC,A_LOC,RHS) CCALLSFSUB6(MUMPS_SOLVE,mumps_solve,INT,INT,INTV,INTV,DOUBLEV,DOUBLEV,N,NZ_LOC,IRN_LOC,JCN_LOC,A_LOC,RHS)
-
-
-PROTOCCALLSFSUB2(MUMPS_BACKSUB,mumps_backsub,INT,DOUBLEV)
-#define mumps_backsub(N,RHS) CCALLSFSUB2(MUMPS_BACKSUB,mumps_backsub,INT,DOUBLEV,N,RHS)
+PROTOCCALLSFSUB7(MUMPS_SOLVE,mumps_solve,INT,INT,INT,INTV,INTV,DOUBLEV,DOUBLEV)
+#define mumps_solve(I_POOL,N,NZ_LOC,IRN_LOC,JCN_LOC,A_LOC,RHS) CCALLSFSUB7(MUMPS_SOLVE,mumps_solve,INT,INT,INT,INTV,INTV,DOUBLEV,DOUBLEV,I_POOL,N,NZ_LOC,IRN_LOC,JCN_LOC,A_LOC,RHS)
 
 
-PROTOCCALLSFSUB0(MUMPS_CLEANUP_MEMORY,mumps_cleanup_memory)
-#define mumps_cleanup_memory() CCALLSFSUB0(MUMPS_CLEANUP_MEMORY,mumps_cleanup_memory)
+PROTOCCALLSFSUB3(MUMPS_BACKSUB,mumps_backsub,INT,INT,DOUBLEV)
+#define mumps_backsub(I_POOL,N,RHS) CCALLSFSUB3(MUMPS_BACKSUB,mumps_backsub,INT,INT,DOUBLEV,I_POOL,N,RHS)
 
 
-PROTOCCALLSFSUB0(MUMPS_SHUTDOWN,mumps_shutdown)
-#define mumps_shutdown() CCALLSFSUB0(MUMPS_SHUTDOWN,mumps_shutdown)
+PROTOCCALLSFSUB1(MUMPS_CLEANUP_MEMORY,mumps_cleanup_memory,INT)
+#define mumps_cleanup_memory(I_POOL) CCALLSFSUB1(MUMPS_CLEANUP_MEMORY,mumps_cleanup_memory,INT,I_POOL)
 
 
-PROTOCCALLSFSUB0(MUMPS_TEST_SOLVE,mumps_test_solve)
-#define mumps_test_solve() CCALLSFSUB0(MUMPS_TEST_SOLVE,mumps_test_solve)
+PROTOCCALLSFSUB1(MUMPS_SHUTDOWN,mumps_shutdown,INT)
+#define mumps_shutdown(I_POOL) CCALLSFSUB1(MUMPS_SHUTDOWN,mumps_shutdown,INT,I_POOL)

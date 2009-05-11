@@ -203,9 +203,6 @@ template<class NST_ELEMENT,class AD_ELEMENT>
 RefineableConvectionProblem<NST_ELEMENT,AD_ELEMENT>::
 RefineableConvectionProblem()
 { 
- // Suppress warnings about repeated external data
- GeneralisedElement::Suppress_warning_about_repeated_external_data=true;
- 
  // Set output directory
  Doc_info.set_directory("RESLT");
  

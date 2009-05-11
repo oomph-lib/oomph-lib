@@ -1014,19 +1014,27 @@ namespace oomph
      // every processor tells every other processor which rows
      // it is interested in
      unsigned* send_req_rows = new unsigned[2];
-     send_req_rows[0] = min_matrix_index;
-     send_req_rows[1] = max_matrix_index;
-     unsigned* recv_req_rows = new unsigned[2*nproc];
-     MPI_Allgather(send_req_rows,2,MPI_UNSIGNED,
-                   recv_req_rows,2,MPI_UNSIGNED,
-                   problem_pt->communicator_pt()->mpi_comm());
-     delete[] send_req_rows;
-     for (unsigned p = 0; p < nproc; p++)
+     if (nproc > 1)
       {
-       required_rows(p,0) = recv_req_rows[2*p];
-       required_rows(p,1) = recv_req_rows[2*p+1];
+       send_req_rows[0] = min_matrix_index;
+       send_req_rows[1] = max_matrix_index;
+       unsigned* recv_req_rows = new unsigned[2*nproc];
+       MPI_Allgather(send_req_rows,2,MPI_UNSIGNED,
+                     recv_req_rows,2,MPI_UNSIGNED,
+                     problem_pt->communicator_pt()->mpi_comm());
+       delete[] send_req_rows;
+       for (unsigned p = 0; p < nproc; p++)
+        {
+         required_rows(p,0) = recv_req_rows[2*p];
+         required_rows(p,1) = recv_req_rows[2*p+1];
+        }
+       delete[] recv_req_rows;
       }
-     delete[] recv_req_rows;
+     else
+      {
+       required_rows(0,0) = min_matrix_index;
+       required_rows(0,1) = max_matrix_index;
+      }
 #endif
 
      // if the problem is not distributed

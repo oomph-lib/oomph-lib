@@ -1454,11 +1454,6 @@ unsteady_run(string directory_for_data, double nstep, bool validation_run)
  sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
  trace_file.open(filename);
 
- // Set SuperLU_dist as solver if have MPI
-// #ifdef OOMPH_HAS_MPI
-//  problem.linear_solver_pt() = new SuperLU_dist;
-// #endif
- 
  // Number of timesteps per period
  unsigned nsteps_per_period=40;
  
@@ -1669,7 +1664,7 @@ int main(int argc, char *argv[])
  
  if (print_help)
   {
-   if (MPI_Helpers::My_rank==0)
+   //if (MPI_Helpers::My_rank==0)
     {
      oomph_info << "\n\nOption flags:\n";
      oomph_info << "-dir <n>                  Data saved to /RESLTn\n";
@@ -1709,9 +1704,6 @@ int main(int argc, char *argv[])
      oomph_info << "-validation_run           Generate validation data for 1D Womersley\n";
     }
 
-#ifdef OOMPH_HAS_MPI   
-   MPI_Helpers::finalize();
-#endif
    return (0);
   }
 
@@ -1990,13 +1982,7 @@ int main(int argc, char *argv[])
  iterative_solver_pt=0;
  delete ns_preconditioner_pt;
  ns_preconditioner_pt=0;
- 
-
-#ifdef OOMPH_HAS_MPI 
- // finalize MPI
- MPI_Helpers::finalize();
-#endif
- 
+  
 } //end of driver code
 
   

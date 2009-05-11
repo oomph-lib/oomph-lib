@@ -32,7 +32,7 @@
 #include "refineable_mesh.h"
 
 
-#define USE_OLD_VERSION
+//#define USE_OLD_VERSION
 
 
 namespace oomph
@@ -408,8 +408,8 @@ void METIS::partition_mesh(Mesh* mesh_pt, const unsigned& ndomain,
                               weight);
        vwgt[j]=weight;
        
-       // hierher doc
-       mesh_pt->node_pt(j)->set_value(0,double(vwgt[j]));
+       // doc weight
+       //mesh_pt->node_pt(j)->set_value(0,double(vwgt[j]));
       }
     }
   }
@@ -640,55 +640,42 @@ void METIS::partition_mesh(Mesh* mesh_pt, const unsigned& ndomain,
  // Start timer
  clock_t cpu_start=clock();
 
- // Container to collect all elements associated with given Data object
- std::map<Data*,std::set<unsigned> > elements_connected_with_data;
+ // Container to collect all elements associated with given global eqn number
+ std::map<unsigned,std::set<unsigned> > elements_connected_with_global_eqn;
  
- // Container for all unique Data objects
- std::set<Data*> all_data;
+ // Container for all unique global eqn numbers
+ std::set<unsigned> all_global_eqns;
 
  // Loop over all elements
  for (unsigned e=0;e<nelem;e++)
   {
    FiniteElement* el_pt=mesh_pt->finite_element_pt(e);
 
-   // Add nodal data
-   unsigned nnode=el_pt->nnode();
-   for (unsigned j=0;j<nnode;j++)
+   // Add all global eqn numbers
+   unsigned ndof=el_pt->ndof();
+   for (unsigned j=0;j<ndof;j++)
     {
-     // Pointer to node
-     Node* nod_pt=el_pt->node_pt(j);
-     elements_connected_with_data[nod_pt].insert(e);
-     all_data.insert(nod_pt);
-    }
-
-   // hierher add internal data? Not really connected though it may
-   // acts as external data for other elements so should be included!
-
-   // Add external data 
-   unsigned next=el_pt->nexternal_data();
-   for (unsigned j=0;j<next;j++)
-    {
-     // Pointer to Data
-     Data* data_pt=el_pt->external_data_pt(j);
-     elements_connected_with_data[data_pt].insert(e);
-     all_data.insert(data_pt);
+     // Get global eqn number
+     unsigned eqn_number=el_pt->eqn_number(j);
+     elements_connected_with_global_eqn[eqn_number].insert(e);
+     all_global_eqns.insert(eqn_number);
     }
   }
 
    
  // Now reverse the lookup scheme to find out all elements
- // that are connected because they share data
+ // that are connected because they share the same global eqn
  Vector<std::set<unsigned> > connected_elements(nelem);
  
  // Counter for total number of entries in connected_elements structure
- unsigned count=0; // hierher
+ unsigned count=0; 
    
- // Loop over all data items
- for (std::set<Data*>::iterator it=all_data.begin();
-      it!=all_data.end();it++)
+ // Loop over all global eqns
+ for (std::set<unsigned>::iterator it=all_global_eqns.begin();
+      it!=all_global_eqns.end();it++)
   {
    // Get set of elements connected with this data item
-   std::set<unsigned> elements=elements_connected_with_data[*it];
+   std::set<unsigned> elements=elements_connected_with_global_eqn[*it];
    
    // Double loop over connnected elements: Everybody's connected to
    // everybody
@@ -712,7 +699,7 @@ void METIS::partition_mesh(Mesh* mesh_pt, const unsigned& ndomain,
  Vector<int> adjacency_vector;
  
  // Reserve (too much) space
- adjacency_vector.reserve(count); // hierher
+ adjacency_vector.reserve(count); 
 
  // Initialise counters
  unsigned ientry=0;
@@ -820,7 +807,7 @@ void METIS::partition_mesh(Mesh* mesh_pt, const unsigned& ndomain,
                               weight);
        vwgt[e]=weight;
        
-       // hierher doc
+       // doc weight
        //mesh_pt->element_pt(j)->set_value(0,double(vwgt[j]));
       }
     }

@@ -30,6 +30,7 @@
 #include<iostream>
 #include<vector>
 
+
 //oomph-lib headers
 #include "cfortran.h"
 #include "mumps.h"
@@ -45,14 +46,124 @@ namespace oomph
 
  
 
+//====================================================================
+/// \short Namespace for pool of fortran mumps solvers
+//====================================================================
+namespace MumpsSolverPool 
+{
+
+ ///Stack containing the IDs of available mumps solvers
+ std::stack<int> Available_solver_ids;
+
+ /// Bool indicating that the pool has been set up
+ bool Pool_has_been_setup=false;
+ 
+ /// Default max. number of mumps solvers
+ int Max_n_solvers=10;
+ 
+ /// Get new solver from pool and return its id
+ void get_new_solver_id(unsigned& solver_id)
+ {
+  if (Available_solver_ids.size()==0)
+   {
+    std::ostringstream error_message_stream;
+    error_message_stream 
+     << "Sorry, all available mumps solvers are in use.\n" 
+     << "Please increase MumpsSolverPool::Max_n_solvers from its \n" 
+     << "current value of " << Max_n_solvers << " and try again." 
+     << std::endl;
+    
+    throw OomphLibError(error_message_stream.str(),
+                        "MumpsSolverPool::get_new_solver_id()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  else
+   {
+    // Get solver id from top of stack and pops it
+    solver_id=Available_solver_ids.top();
+    Available_solver_ids.pop();
+   }
+ }
+ 
+ /// Return solver to pool
+ void return_solver(const unsigned& solver_id)
+ {
+  // Put it back on stack
+  Available_solver_ids.push(solver_id);
+ }
+
+ /// \short Setup namespace -- specify the max. number of solver
+ /// instantiations required.
+ void setup(const unsigned& max_n_solvers=Max_n_solvers)
+ {
+  if (!Pool_has_been_setup)
+   {
+    Pool_has_been_setup=true;
+
+    // Setup pool in fortran
+    mumps_setup_solver_pool(int(max_n_solvers));
+    Max_n_solvers=max_n_solvers;
+
+    // Declare available IDs -- Fortran 1-based indexing!
+    for (unsigned i=1;i<=max_n_solvers;i++)
+     {
+      Available_solver_ids.push(i);
+     }
+   }
+  else
+   {
+    std::ostringstream error_message_stream;
+    error_message_stream 
+     << "Mumps solver pool has already been set up. Can't do it again.\n";
+    throw OomphLibError(error_message_stream.str(),
+                        "MumpsSolverPool::setup()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+
+ }
+
+}
+
+
+
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+ //=========================================================================
+ /// \short Default factor for workspace -- static so it can be overwritten
+ /// globally.
+ //=========================================================================
+ int MumpsSolver::Default_workspace_scaling_factor=1;
+
+
+
 //=============================================================================
 /// Constructor: Call setup
 //=============================================================================
  MumpsSolver::MumpsSolver()
  {
+  // Setup pool
+  if (!MumpsSolverPool::Pool_has_been_setup)
+   {
+    // Setup with default number of solver instantiations
+    MumpsSolverPool::setup();
+   }
+
+  // Get new solver ID from pool
+  MumpsSolverPool::get_new_solver_id(Solver_ID_in_pool);
+
+  oomph_info << "New solver id: " << Solver_ID_in_pool << std::endl;
+
   Doc_stats=false;
   Suppress_solve=false;
-  mumps_setup();
+  Delete_matrix_data=false;
+  mumps_setup(Solver_ID_in_pool,Default_workspace_scaling_factor);
  }
  
 //=============================================================================
@@ -60,7 +171,14 @@ namespace oomph
 //=============================================================================
 MumpsSolver::~MumpsSolver()
  {
-  mumps_shutdown();
+
+  oomph_info << "Returning solver id: " << Solver_ID_in_pool << std::endl;
+
+  /// Return solver to pool
+  MumpsSolverPool::return_solver(Solver_ID_in_pool);
+  
+  /// Shut it down
+  mumps_shutdown(Solver_ID_in_pool);
  }
  
 
@@ -69,7 +187,7 @@ MumpsSolver::~MumpsSolver()
 //=============================================================================
 void MumpsSolver::set_workspace_scaling_factor(const unsigned& s)
 {
- mumps_set_workspace_scaling_factor(int(s));
+ mumps_set_workspace_scaling_factor(Solver_ID_in_pool,int(s));
 }
  
 
@@ -99,7 +217,7 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
 #endif
 
  // Doc stats?
- if (Doc_stats) mumps_switch_on_doc();
+ if (Doc_stats) mumps_switch_on_doc(Solver_ID_in_pool);
 
  // number of processors
  unsigned nproc = MPI_Helpers::Nproc;
@@ -129,7 +247,8 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
 #endif
    
    // if the matrix is distributed then set up solver
-   if (cr_matrix_pt->distributed())
+   if ((cr_matrix_pt->distribution_pt()->communicator_pt()->nproc()==1)||
+       (cr_matrix_pt->distributed()))
     {
      // Find the number of rows and non-zero entries in the matrix
      const int nnz_loc = int(cr_matrix_pt->nnz());
@@ -172,11 +291,13 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
      // Now delete the matrix if we are allowed
      if (Delete_matrix_data==true)
       {
+       oomph_info << "MUMPS is clearing the matrix" << std::endl;
        cr_matrix_pt->clear();
       }
 
      // Call mumps factorisation
-     mumps_factorise(n,nnz_loc,&irn_loc[0],&jcn_loc[0],&a_loc[0]);
+     mumps_factorise(Solver_ID_in_pool,n,nnz_loc,
+                     &irn_loc[0],&jcn_loc[0],&a_loc[0]);
      
     }
    // else the CRDoubleMatrix is not distributed
@@ -205,7 +326,7 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
 
 
  // Switch off docing again
- mumps_switch_off_doc();
+ mumps_switch_off_doc(Solver_ID_in_pool);
  
 
 }
@@ -219,10 +340,8 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
                            DoubleVector &result)
  {
   
-  oomph_info << "In backsub" << std::endl;
-
   // Doc stats?
-  if (Doc_stats) mumps_switch_on_doc();
+  if (Doc_stats) mumps_switch_on_doc(Solver_ID_in_pool);
 
   // number of DOFs
   int ndof = Distribution_pt->nrow();
@@ -244,7 +363,7 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
   
   // Do the backsubsitution phase -- overwrites the tmp_rhs vector with the
   // solution
-  mumps_backsub(ndof,&tmp_rhs[0]);
+  mumps_backsub(Solver_ID_in_pool,ndof,&tmp_rhs[0]);
   
   // Broadcast the result which is only held on root
   MPI_Bcast(&tmp_rhs[0],ndof,MPI_DOUBLE,0,
@@ -256,13 +375,17 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
    {
     tmp_rhs.redistribute(*result.distribution_pt());
    }
+  else
+   {
+    tmp_rhs.redistribute(*Distribution_pt);    
+   }
   
   // Now copy the tmp_rhs vector into the (matching) result
   result = tmp_rhs;
  
 
   // Switch off docing again
-  mumps_switch_off_doc();
+  mumps_switch_off_doc(Solver_ID_in_pool);
 
 }
 
@@ -273,7 +396,7 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
 void MumpsSolver::clean_up_memory()
 {
  //Cleanup
- mumps_cleanup_memory();
+ mumps_cleanup_memory(Solver_ID_in_pool);
 }
 
 
@@ -290,13 +413,11 @@ void MumpsSolver::solve(DoubleMatrixBase* const &matrix_pt,
                         DoubleVector &result)
 {
 
- oomph_info << "In matrix based solve \n";
-
  // Initialise timer
  double t_start = TimingHelpers::timer(); 
  
  // Doc stats?
- if (Doc_stats) mumps_switch_on_doc();
+ if (Doc_stats) mumps_switch_on_doc(Solver_ID_in_pool);
 
 #ifdef PARANOID
  // check that the rhs vector is setup
@@ -341,17 +462,11 @@ void MumpsSolver::solve(DoubleMatrixBase* const &matrix_pt,
                             (matrix_pt)->distribution_pt());
   }
 
- oomph_info << "Going into factorise \n";
- 
  //Factorise the matrix
  factorise(matrix_pt);
  
- oomph_info << "Going into backsub \n";
-
  //Now do the back solve
  backsub(rhs,result);
-
- oomph_info << "done backsub \n";
 
  // Doc time for solve
  double t_end = TimingHelpers::timer(); 
@@ -373,7 +488,7 @@ void MumpsSolver::solve(DoubleMatrixBase* const &matrix_pt,
 
 
  // Switch off docing again
- mumps_switch_off_doc();
+ mumps_switch_off_doc(Solver_ID_in_pool);
  
  }
 
@@ -385,14 +500,11 @@ void MumpsSolver::solve(DoubleMatrixBase* const &matrix_pt,
 void MumpsSolver::solve(Problem* const &problem_pt, DoubleVector &result)
 {
 
- oomph_info << "In probblem based solve \n";
-
-
  // Initialise timer
  double t_start = TimingHelpers::timer();
 
  // Doc stats?
- if (Doc_stats) mumps_switch_on_doc();
+ if (Doc_stats) mumps_switch_on_doc(Solver_ID_in_pool);
   
  // number of dofs
  unsigned n_dof = problem_pt->ndof();
@@ -425,22 +537,17 @@ void MumpsSolver::solve(Problem* const &problem_pt, DoubleVector &result)
               << Jacobian_setup_time << std::endl;
   }
 
- oomph_info << "Going into matrix based solve \n"; 
-
  //Now call the linear algebra solve, if desired
  if(!Suppress_solve) 
   {
    solve(&jacobian,residuals,result);
   }
  
- oomph_info << "Back from matrix based solve \n"; 
-
-
  // Set Delete_matrix back to original value
  Delete_matrix_data = copy_of_Delete_matrix_data;
  
  // Switch off docing again
- mumps_switch_off_doc();
+ mumps_switch_off_doc(Solver_ID_in_pool);
 
  // Finalise/doc timings
  if ((Doc_time) && (MPI_Helpers::My_rank==0))
@@ -506,7 +613,7 @@ void MumpsSolver::resolve(const DoubleVector &rhs, DoubleVector &result)
  
 
  // Doc stats?
- if (Doc_stats) mumps_switch_on_doc();
+ if (Doc_stats) mumps_switch_on_doc(Solver_ID_in_pool);
   
  //Now do the back substitution phase
  backsub(rhs,result);
@@ -516,7 +623,7 @@ void MumpsSolver::resolve(const DoubleVector &rhs, DoubleVector &result)
  Solution_time = t_end-t_start;
 
  // Switch off docing again
- mumps_switch_off_doc();
+ mumps_switch_off_doc(Solver_ID_in_pool);
  
  if ((Doc_time) && (MPI_Helpers::My_rank==0))
   {

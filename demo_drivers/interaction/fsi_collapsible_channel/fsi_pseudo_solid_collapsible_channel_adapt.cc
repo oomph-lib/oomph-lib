@@ -1155,9 +1155,6 @@ void FSICollapsibleChannelProblem<ELEMENT>::actions_after_adapt()
 //=============================================================================
 int main(int argc, char* argv[])
 {
- // Shut up
- GeneralisedElement::Suppress_warning_about_repeated_external_data=true;
-
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
   

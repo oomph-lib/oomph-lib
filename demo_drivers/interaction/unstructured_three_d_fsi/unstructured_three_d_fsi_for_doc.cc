@@ -1025,9 +1025,6 @@ int main(int argc, char **argv)
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
  
- // blabla check where this is first used. hierher
- GeneralisedElement::Suppress_warning_about_repeated_external_data=true;
- 
  // Label for output
  DocInfo doc_info;
  

@@ -45,8 +45,8 @@ bool GeneralisedElement::Suppress_warning_about_repeated_internal_data=false;
 
 
 /// Static boolean to suppress warnings about repeated external
-/// data. Defaults to false
-bool GeneralisedElement::Suppress_warning_about_repeated_external_data=false;
+/// data. Defaults to true
+bool GeneralisedElement::Suppress_warning_about_repeated_external_data=true;
 
 
 ///////////////////////////////////////////////////////////////////////////
