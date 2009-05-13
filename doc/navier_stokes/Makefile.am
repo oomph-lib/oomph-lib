@@ -3,6 +3,7 @@ driven_cavity \
 adaptive_driven_cavity \
 circular_driven_cavity \
 three_d_entry_flow \
+curved_pipe \
 osc_ellipse \
 bretherton \
 single_layer \

@@ -633,8 +633,15 @@ QuarterTubeMesh<ELEMENT>::QuarterTubeMesh(GeomObject* wall_pt,
  // Terminate if there's been an error
  if (stopit)
   {
-   throw OomphLibError("Error in killing nodes",
-                       "QuaterTubeMesh::QuarterTubeMesh()",
+   std::ostringstream error_stream;
+   error_stream << "Error in killing nodes\n"
+                << "The most probable cause is that the domain is not\n"
+                << "compatible with the mesh.\n"
+                << "For the QuarterTubeMesh, the domain must be\n"
+                << "topologically consistent with a quarter tube with a\n"
+                << "non-curved centreline.\n";
+   throw OomphLibError(error_stream.str(),
+                       "QuatrerTubeMesh::QuarterTubeMesh()",
                        OOMPH_EXCEPTION_LOCATION);
   }
 

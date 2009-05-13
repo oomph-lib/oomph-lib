@@ -10,6 +10,7 @@ adaptive_interface \
 bretherton \
 static_cap \
 three_d_entry_flow \
+curved_pipe \
 rayleigh_channel \
 rayleigh_traction_channel \
 osc_ellipse \

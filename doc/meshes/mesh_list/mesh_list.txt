@@ -493,6 +493,32 @@ QuarterTubeMesh<ELEMENT>
 #####################################################################
 <TR>   
 <TD>
+<A HREF="classoomph_1_1TubeMesh.html"><B>
+TubeMesh<ELEMENT>
+</B></A> \n\n
+- This mesh can be used with all \c FiniteElements that are derived from
+  the geometric finite element \c QElement<3,NNODE_1D>.
+- This mesh forms the basis for numerous derived meshes that describe
+  toplogically-tube-shaped domains.
+- The entire domain is represented by a \c GeomObject
+  and the mesh has a \c Domain representation, allowing a \c
+  MacroElement - based node update. 
+- A refineable version of this mesh exists.
+.
+<B>Example driver code:</B> \n
+- The refineable version of this mesh is used in the driver code for 
+  <A HREF="../../../navier_stokes/curved_pipe/html/index.html">
+  the simulation of 3D flow in a curved cylindrical pipe.
+  </A>
+.
+</TD>
+<TD>
+@I w 0.75\textwidth tube_mesh " "
+</TD>
+</TR>
+#####################################################################
+<TR>   
+<TD>
 <A HREF="classoomph_1_1EighthSphereMesh.html"><B>
 EighthSphereMesh<ELEMENT>
 </B></A> \n\n

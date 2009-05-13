@@ -59,6 +59,10 @@ namespace oomph
 /// - Boundary 4: "Outflow" cross section; located along the 
 ///               line parametrised by \f$ \xi_0 =  \xi_0^{hi} \f$
 ///               on the geometric object that specifies the wall.
+///
+/// IMPORTANT NOTE: The interface looks more general than it should.
+///                 The toplogy must remain that of a quarter tube,
+///                 or the mesh generation will break. 
 //====================================================================
 template <class ELEMENT>
 class QuarterTubeMesh : public virtual BrickMeshBase
