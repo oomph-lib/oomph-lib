@@ -38,7 +38,7 @@ void position (const Vector<double>& xi, Vector<double>& r) const
 {
  r[0] = (1.0/Delta)*cos(xi[0]) + xi[2]*Radius*cos(xi[0])*cos(xi[1]);
  r[1] = (1.0/Delta)*sin(xi[0]) + xi[2]*Radius*sin(xi[0])*cos(xi[1]);
- r[2] = P*xi[0]/(2.0*Pi) + xi[2]*Radius*sin(xi[1]);
+ r[2] = P*xi[0]/(2.0*Pi) - xi[2]*Radius*sin(xi[1]);
 }
 
 

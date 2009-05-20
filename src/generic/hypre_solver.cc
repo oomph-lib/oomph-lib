@@ -1049,7 +1049,7 @@ namespace oomph
 
   // temporarily rebuild the solution vector so that is has the same
   // distribution as this Hypre solver
-  solution.rebuild(Hypre_distribution_pt);
+  //solution.rebuild(Hypre_distribution_pt);
 
   // set up rhs_values and vec_indices
   HypreHelpers::create_HYPRE_Vector(rhs,
@@ -1057,7 +1057,9 @@ namespace oomph
                                     rhs_ij,
                                     rhs_par);
   
-  HypreHelpers::create_HYPRE_Vector(solution,
+  //Create solution vector using the RHS vector
+  //Ideally we should be able to create an empty HYPRE vector
+  HypreHelpers::create_HYPRE_Vector(rhs,
                                     Hypre_distribution_pt,
                                     solution_ij,
                                     solution_par);
@@ -1145,7 +1147,10 @@ namespace oomph
    {
     indices[i] = first_row + i;
    }
-  solution.initialise(0.0);
+
+  //Make solution vector consistent with Hypre distribution
+  //and set all initial values to zero
+  solution.rebuild(Hypre_distribution_pt,0.0);
   HYPRE_IJVectorGetValues(solution_ij, 
                           nrow_local, 
                           indices, 
