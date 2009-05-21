@@ -95,28 +95,32 @@ public :
    //Set the temperature preconditioner
    Temperature_preconditioner_pt = new SuperLUPreconditioner;
 
+   //Initialise the P and F block preconditioners
+   P_preconditioner_pt = 0;
+   F_preconditioner_pt = 0;
+
 #ifdef HAVE_HYPRE
   //Set up the internal preconditioners
-   Preconditioner* P_matrix_preconditioner_pt = new HyprePreconditioner;
+   P_preconditioner_pt = new HyprePreconditioner;
    
    // Set parameters for use as preconditioner on Poisson-type problem
    Hypre_default_settings::set_defaults_for_3D_poisson_problem(
-    static_cast<HyprePreconditioner*>(P_matrix_preconditioner_pt));
+    static_cast<HyprePreconditioner*>(P_preconditioner_pt));
    
    // Use Hypre for the Schur complement block
    Navier_stokes_preconditioner_pt->
-    set_p_preconditioner(P_matrix_preconditioner_pt);
+    set_p_preconditioner(P_preconditioner_pt);
    
-   Preconditioner* F_matrix_preconditioner_pt = new HyprePreconditioner;
+   F_preconditioner_pt = new HyprePreconditioner;
    
    // Set parameters for use as preconditioner in for momentum 
    // block in Navier-Stokes problem
    Hypre_default_settings::set_defaults_for_navier_stokes_momentum_block(
-    static_cast<HyprePreconditioner*>(F_matrix_preconditioner_pt));
+    static_cast<HyprePreconditioner*>(F_preconditioner_pt));
    
    // Use Hypre for momentum block 
    Navier_stokes_preconditioner_pt->
-    set_f_preconditioner(F_matrix_preconditioner_pt);
+    set_f_preconditioner(F_preconditioner_pt);
 
    //Set the Temperature preconditioner to also use AMG
    delete Temperature_preconditioner_pt;
@@ -144,6 +148,12 @@ public :
   {
    // Do what it says
    clean_up_memory();
+
+   //Delete the P block preconditioners
+   delete P_preconditioner_pt;
+
+   //Delete the F block preconditioner
+   delete F_preconditioner_pt;
 
    //Delete the Navier-Stokes preconditioner (inexact solver)
    delete Navier_stokes_preconditioner_pt;
@@ -1369,8 +1379,24 @@ public:
  ///Constructor
  RefineableConvectionProblem();
 
- /// Destructor. Empty
- ~RefineableConvectionProblem() {}
+ /// Destructor. Clean up all allocated memory
+ ~RefineableConvectionProblem() 
+  {
+   //Delete the mesh's error estimator
+   delete mesh_pt()->spatial_error_estimator_pt();
+   //Delete the mesh
+   delete Problem::mesh_pt();
+
+   //Can we cast the solver to an iterative linear solver
+   GMRES<CRDoubleMatrix>* iterative_linear_solver_pt = 
+    dynamic_cast<GMRES<CRDoubleMatrix>*>(this->linear_solver_pt());
+   //If so delete the preconditioner and the solver
+   if(iterative_linear_solver_pt)
+    {
+     delete iterative_linear_solver_pt->preconditioner_pt();
+     delete iterative_linear_solver_pt;
+    }
+  }
 
  /// \short Update the problem specs before solve:
  void actions_before_newton_solve();
@@ -1658,7 +1684,7 @@ void RefineableConvectionProblem<ELEMENT>::doc_solution()
 /// Driver code for 2D Boussinesq convection problem with 
 /// adaptivity.
 //====================================================================
-int main()
+int main(int argc, char **argv)
 {
 #ifdef OOMPH_HAS_MPI
  // Set up MPI_Helpers

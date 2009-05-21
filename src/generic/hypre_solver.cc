@@ -1148,15 +1148,20 @@ namespace oomph
     indices[i] = first_row + i;
    }
 
-  //Make solution vector consistent with Hypre distribution
+   //Store the RHS distribution pointer, in case somebody has passed
+  //in the same vector as RHS and solution.
+  LinearAlgebraDistribution  rhs_dist = *rhs.distribution_pt();
+
+  //Now, make solution vector consistent with Hypre distribution
   //and set all initial values to zero
   solution.rebuild(Hypre_distribution_pt,0.0);
   HYPRE_IJVectorGetValues(solution_ij, 
                           nrow_local, 
                           indices, 
                           solution.values_pt());
-  solution.redistribute(*rhs.distribution_pt());
-
+  //Redistribute according to the original RHS distribution
+  solution.redistribute(rhs_dist);
+  //Clean up
   delete[] indices;
   
   // output any error message
@@ -1571,7 +1576,7 @@ namespace oomph
 #endif
    }
 
-  // call hypre_solver_setup
+  // call hypre_solve\r_setup
   hypre_solver_setup();
  }
 

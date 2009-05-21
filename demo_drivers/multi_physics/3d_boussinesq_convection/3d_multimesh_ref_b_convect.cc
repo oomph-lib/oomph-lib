@@ -102,8 +102,21 @@ public:
  ///Constructor
  RefineableConvectionProblem();
 
- /// Destructor. Empty
- ~RefineableConvectionProblem() {}
+ /// Destructor. clean up after the allocated memory
+ ~RefineableConvectionProblem() 
+  {
+   //Fluid mesh
+   //Delete the mesh's error estimator
+   delete Nst_mesh_pt->spatial_error_estimator_pt();
+   //Delete the mesh
+   delete Nst_mesh_pt;
+   
+   //Temperature mesh
+   //Delete the mesh's error estimator
+   delete Adv_diff_mesh_pt->spatial_error_estimator_pt();
+   //Delete the mesh
+   delete Adv_diff_mesh_pt;
+  }
 
  /// \short Update the problem specs before solve:
  void actions_before_newton_solve();
