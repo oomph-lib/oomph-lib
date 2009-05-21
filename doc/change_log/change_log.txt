@@ -27,9 +27,13 @@ for known bugs and their resolution.
 The remainder of this document covers the following issues:
 
 - \ref interface_changes
+- \ref zero_point_eight_five_to_zero_point_nine
+  - \ref new_functionality_zero_point_nine
+  - \ref major_interface_changes_zero_point_nine 
+  .
 - \ref zero_point_eight_to_zero_point_five
-  - \ref major_interface_changes_zero_point_five 
   - \ref new_functionality_zero_point_five
+  - \ref major_interface_changes_zero_point_five 
   .
 .
 
@@ -133,35 +137,233 @@ Obviously, you should only compile the library with
 \c WARN_ABOUT_SUBTLY_CHANGED_OOMPH_INTERFACES if you encounter
 problems after upgrading to a new version. 
 
+
+
+
+
+
+
+<HR>
+
+
+\subsection zero_point_eight_five_to_zero_point_nine Changes between version 0.85 and 0.9
+
+
+\subsubsection new_functionality_zero_point_nine Major new functionality
+- Significantly extended \c oomph-lib's parallel processing
+  capabilities. The library's solver and (block) preconditioning framework is
+  now fully parallelised; the parallel assembly of the Jacobian
+  and residual vector has been optimised, and problems can be 
+  now distributed by domain decomposition techniques. 
+  <a href="../../mpi/general_mpi/html/index.html">A new tutorial</a>
+  provides an overview of these capabilities.
+  \n\n
+- Introduced \c ElementWithExternalElement as base class for 
+  multi-physics elements in which elements in different meshes/
+  domains interact via source/load functions (e.g. in 
+  fluid-structure interaction or thermal convection problems).
+  \n\n
+- Parallelised and optimised the \c MeshAsGeomObject class to use
+  bin structures to accelerate the search in \c locate_zeta(...).
+  \n\n
+- Completed the documentation of \c oomph-lib's solid
+  mechanics (large-displacement elasticity) capabilities. We provide 
+  an overview of the
+  <a href="../../solid/solid_theory/html/index.html">theory and 
+  implementation</a>, as well as
+  <a href="../../example_code_list/html/index.html#solid">numerous 
+  tutorials</a> discussing the solution of steady and unsteady, 
+  2D and 3D problems with compressible and incompressible
+  materials on structured and unstructured meshes.
+  \n\n
+- Extended FSI capabilities so that such problems can be solved
+  on unstructured meshes. We provide new tutorials
+  that demonstrate this capability for 
+  <a href="../../interaction/unstructured_fsi/html/index.html">2D</a> and
+  <a href="../../interaction/unstructured_three_d_fsi/html/index.html">3D</a> 
+  problems.
+  \n\n
+- Extended the \c Z2ErrorEstimator so that the elemental error estimate can be
+  based on the maximum of various distinct fluxes -- useful for
+  multi-field problems such as Boussinesq convection.
+  \n\n
+- Significantly extended oomph-lib's bifurcation tracking routines
+  (no tutorials yet, though).
+  \n\n
+- Provided general framework and driver codes for discontinous
+  Galerkin methods and explicit timesteppers (no tutorials yet, though).
+  \n\n
+- 
+.
+
+
+<HR>
+
+\subsubsection major_interface_changes_zero_point_nine Major interface changes
+
+- \code SolidFiniteElement::add_jacobian_for_solid_ic() \endcode becomes 
+  \code SolidFiniteElement::fill_in_jacobian_for_solid_ic()\endcode 
+  \n\n
+- \code SolidFiniteElement::add_residuals_for_ic()\endcode  becomes 
+  \code SolidFiniteElement::fill_in_residuals_for_solid_ic()\endcode 
+  \n\n
+- \code SolidFiniteElement::get_residuals_for_ic()\endcode  becomes 
+  \code SolidFiniteElement::fill_in_residuals_for_solid_ic()\endcode 
+  \n\n
+- Changed order of arguments in \c PVDEquationsBase::BodyForceFctPt 
+  so that time goes first (as it should!).
+  \n\n
+- Not exactly an interface change but important: 
+  \c AlgebraicMeshes and  \c MacroElementNodeUpdateMeshes \b should now 
+  specify the \c GeomObjects involved in their node update functions. 
+  (This \b must be done if such meshes are to be used in parallel 
+  computations involving domain decomposion). The declaration of
+  the \c GeomObjects should use the functions
+  \c  AlgebraicMesh::add_geom_object_list_pt(...) and
+  \c MacroElementNodeUpdateMesh::set_geom_object_vector_pt(...),
+  respectively.
+  \n\n
+- Added integration point arguments to all get_source-type functions in
+  elements to allow for overloading in multi-domain calculations.
+  For example, 
+  \n\n
+  \code
+  NavierStokesEquations<DIM>::get_body_force_nst(const double& time,
+                                                 const Vector<double> &s,
+                                                 const Vector<double> &x,
+                                                 Vector<double> &result)
+  \endcode                                                  
+  \n\n
+  has been changed to
+  \n\n
+  \code 
+  NavierStokesEquations<DIM>::get_body_force_nst(const double& time,
+                                                 const unsigned& ipt,
+                                                 const Vector<double> &s,
+                                                 const Vector<double> &x,
+                                                 Vector<double> &result)
+  \endcode
+  \n\n
+- \c FSI_functions::setup_fluid_load_info_for_solid_elements(...) now
+  requires a pointer to the \c Problem to be specified as the first argument. 
+  \n\n
+- Removed all explicit references to \c MPI_COMM_WORLD and the parameters
+  \c MPI_Helpers::Nproc \c MPI_Helpers::My_rank. The total number of
+  processors and the rank of each processor should be obtained from 
+  the appropriate \c OomphCommunicator.
+  \n\n
+- Replaced \c MPI_Helpers::setup(...) with MPI_Helpers::init(...)
+  and added MPI_Helpers::finalize(). These should be called instead
+  of MPI's own \c init() and \c finalize() functions. 
+  \n\n
+- Introduced \c DoubleVector -- a distributable vector storing double
+  precision numbers.
+  \n\n
+- Merged \c CRDoubleMatrix and \c DistributableCRDoubleMatrix 
+  into \c CRDoubleMatrix. (Note: \c CRDoubleMatrix is the only 
+  distributable matrix within \c oomph-lib.)
+  \n\n
+- Updated all solvers/preconditioners to handle new \c CRDoubleMatrix and 
+  \c DoubleVector.
+  \n\n
+- In \c NavierStokesLSCPreconditioner \n\n
+  \code
+  void set_f_preconditioner(Preconditioner& new_f_preconditioner)
+  \endcode
+  and \n\n
+  \code
+  void set_p_preconditioner(Preconditioner& new_f_preconditioner)
+  \endcode
+  \n\n
+  were changed to 
+  \n\n
+  \code 
+  void set_f_preconditioner(Preconditioner* new_f_preconditioner_pt)
+  \endcode
+  \n\n
+  and
+  \n\n
+  \code 
+  void set_p_preconditioner(Preconditioner* new_f_preconditioner_pt)
+  \endcode
+  \n\n
+  respectively, to make them consistent with the rest of the code.
+  \n\n
+- Changed 
+  \code
+  FiniteElement::get_block_numbers_for_unknowns(...)
+  \endcode 
+  to 
+  \code
+  FiniteElement::get_dof_numbers_for_unknowns(...)
+  \endcode
+  and 
+  \code
+  FiniteElement::nblock_types()
+  \endcode
+  to 
+  \code
+  FiniteElement::ndof_types()
+  \endcode
+  \n\n
+- Nearly an interface change:  We now provide the option to exclude/wipe the 
+  validata from the distribution (during \c make \c dist). To make sure that
+  the self-test procedure doesn't break if there's
+  no validata, configure now assesses the
+  availability of validata by checking the existence
+  of 
+  \code
+  demo_drivers/poisson/one_d_poisson/validata/one_d_poisson_results.dat.gz
+  \endcode
+  If this is not found, we'll assume that there's
+  no validata anywhere. In that case, "make check" will still
+  compile and run the demo drivers but not use
+  fpdiff.py to compare them against the validata.
+  The behaviour is thus similar to what's done if
+  we don't have python. We therefore modified the 
+  "no_python" argument that used to be passed
+  to all validate.sh scripts to suppress the
+  execution of fpdiff.py and replaced it by
+  "no_fpdiff". As a result all validate.sh scripts
+  had to be changed. MAKE SURE YOU UPDATE ANY NEW ONES BEFORE 
+  ADDING THEM TO THE DISTRIBUTION!
+  \n\n
+  To reflect the fact that the fpdiff-ing can now
+  be suppressed for multiple reasons, we renamed
+  \code
+  bin/validate_no_python.sh
+  \endcode
+  to
+  \code
+  bin/dummy_validate.sh
+  \endcode
+  \n\n
+- All the bools in calls to the various 
+  \c node_update(...) functions were changed to 
+  \c const \c bool& (rather than \c bool).
+  \n\n
+- The constructors for all constitutive 
+  equations now take pointers to constitutive parameters
+  rather than the parameters themselves. (With the
+  previous approach, changing Young's modulus, say,
+  required the construction of a new constitutive 
+  equation object that then had to be passed to 
+  all elements again etc.)
+  \n\n
+- Got rid of all other instances where
+  time argument was passed by copy rather than by
+  constant reference -- as long as grep-ing for the
+  pattern '(double t' detected it. In practice this
+  involved various Navier-Stokes traction, body force
+  and source functions. 
+.
+
+
+
+<HR>
 <HR>
 
 \subsection zero_point_eight_to_zero_point_five Changes between version 0.8 and 0.85
-
-\subsubsection major_interface_changes_zero_point_five Major interface changes
-
-- \c Problem::actions_before_solve() becomes 
-  \c Problem::actions_before_newton_solve()
-  \n\n
-- \c Problem::actions_after_solve() 
-  becomes \c Problem::actions_after_newton_solve()
-  \n\n
-- \c TCrouzeixRaviartElement<DIM>
-  becomes \c TCrouzeixRaviartElement<DIM>
-  \n\n
-- \c QCrouzeixRaviartElement<DIM>
-  becomes \c QCrouzeixRaviartElement<DIM>
-  \n\n
-- \c RefineableQCrouzeixRaviartElement<DIM>
-  becomes \c RefineableQCrouzeixRaviartElement<DIM>
-  \n\n
-- Fixed various violations of our naming conventions; see 
-  \ref interface_changes.
-  \n\n
-- Changed the interface of to the \c FaceElements so that the faces 
-  are represented by an integer \c face_index, rather than the
-  combination \c s_fixed_index and \c s_limit which was not 
-  sufficiently general. 
-.
 
 
 \subsubsection new_functionality_zero_point_five Major new functionality
@@ -253,26 +455,30 @@ problems after upgrading to a new version.
 .  
 
 
+<HR>
 
-\subsection zero_point_five_to_zero_point_five_plus Changes between version 0.85 and 0.85+ hierher
+\subsubsection major_interface_changes_zero_point_five Major interface changes
 
-\subsubsection major_interface_changes_zero_point_five_plus Major interface changes
-
-- \c SolidFiniteElement::add_jacobian_for_solid_ic() becomes 
-  \c SolidFiniteElement::fill_in_jacobian_for_solid_ic()
+- \c Problem::actions_before_solve() becomes 
+  \c Problem::actions_before_newton_solve()
   \n\n
-- \c SolidFiniteElement::add_residuals_for_ic() becomes 
-  \c SolidFiniteElement::fill_in_residuals_for_solid_ic()
+- \c Problem::actions_after_solve() 
+  becomes \c Problem::actions_after_newton_solve()
   \n\n
-- \c SolidFiniteElement::get_residuals_for_ic() becomes 
-  \c SolidFiniteElement::fill_in_residuals_for_solid_ic()
+- \c TCrouzeixRaviartElement<DIM>
+  becomes \c TCrouzeixRaviartElement<DIM>
   \n\n
-- Changed order of arguments in \c PVDEquationsBase::BodyForceFctPt 
-  so that time goes first (as it should!).
+- \c QCrouzeixRaviartElement<DIM>
+  becomes \c QCrouzeixRaviartElement<DIM>
   \n\n
-.
-
-
-\subsubsection new_functionality_zero_point_five_plus Major new functionality
-- Lots!
+- \c RefineableQCrouzeixRaviartElement<DIM>
+  becomes \c RefineableQCrouzeixRaviartElement<DIM>
+  \n\n
+- Fixed various violations of our naming conventions; see 
+  \ref interface_changes.
+  \n\n
+- Changed the interface of to the \c FaceElements so that the faces 
+  are represented by an integer \c face_index, rather than the
+  combination \c s_fixed_index and \c s_limit which was not 
+  sufficiently general. 
 .
