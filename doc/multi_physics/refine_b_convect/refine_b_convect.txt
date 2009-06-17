@@ -35,7 +35,7 @@ the problem using the new
 As discussed in the  <a href="../../b_convection/html/index.html">
 previous example,</a> a small perturbation is required to force
 the solution from the trivial steady state of zero velocity
-and linear temperature variation. Therefore, we activate
+and linear temperature variation. Therefore, we add
 a small perturbation to the vertical velocity on the
 upper wall before solving the steady problem, allowing for up to 
 two levels of adaptive mesh refinement. 
@@ -184,20 +184,48 @@ identical to those in the non-refineable version:
 We shall only discuss those additional functions that are required 
 in the refineable version of the combined multi-physics element.
 
-Both consituent elements are derived from the
+Both constituent elements are derived from the
 \c ElementWithZ2ErrorEstimator base class and each element
 provides its own definition of the "Z2-flux" that is used
 by the Z2 error estimator to compute elemental error estimates. 
-For simplicity, we will base the error estimation entirely on the 
-fluid flow. Hence the final overloads for the functions
-required by the \c Z2ErrorEstimator simply call the corresponding
-versions in the \c RefineableQCrouzeixRaviartElement class;
-see \ref comments for more detailed discussion of this aspect.
+We must decide on a single error estimator for the combined
+element. We could base the error estimation entirely on the fluid
+flow, or the temperature field, but instead we shall choose our single
+error estimate to be the maximum of the fluid and temperature error
+estimates. The functions required by the \c Z2ErrorEstimator are
+overloaded to return all the flux terms associated with
+both the velocity and temperature
+fields, with the velocity field terms stored first. 
 
 \dontinclude refineable_b_convection.cc
 \skipline The recovery order is that of
 \until end of get_Z2_flux
-  
+
+The default behaviour of the Z2 error estimator is to combine all
+components of the flux vector into a single compound flux. In the present
+multi-physics element, we instead define two compound fluxes: one
+correponding to the combined
+temperature fluxes and the other to the combined velocity field
+fluxes. The flux components associated with each compound flux must
+specified by overloading the function \c get_Z2_compound_flux_indices
+which returns a vector of the same length as the number of flux
+components, containing the index of the compound flux to which
+the each flux component contributes.
+
+\dontinclude refineable_b_convection.cc
+\skipline The number of compound fluxes
+\until end of get_Z2_compound_flux_indices
+
+The \c Z2ErrorEstimator calculates the error estimates for each compound flux,
+which are combined into a single error estimate by the function
+\c Z2ErrorEstimator::get_combined_error_estimate(). By default the single
+error estimate is chosen to be the maximum of all calculated error estimates.
+Alternative user-defined functions
+can be specified via the function pointer 
+\c Z2ErrorEstimator::CombinedErrorEstimateFctPt& \c combined_error_fct_pt(),
+see \ref comments for a more detailed discussion of this aspect.  
+
+
 The vertex nodes are defined by the underlying geometric element, but
 require a final overload to prevent ambiguities:
 
@@ -252,19 +280,31 @@ must be passed to the sons after refinement.
   It is not obvious what combination of these flux terms should 
   be used to compute the error estimates for the combined
   multi-physics element. The most general option would be 
-  to concatenate the two flux vectors, possibly using
+  to combine the two flux vectors, possibly using
   a weighting factor to control the relative importance of the
   various components. 
   \n\n
-  In the example above, we adopted a simpler choice and based 
-  the error estimate exclusively on the Navier-Stokes flux. This 
-  is an appropriate choice for problems in which the variations in the velocity
+  In the example above, we chose an error estimate that was the maximum value
+  of the individual error estimates for the Navier-Stokes flux and the
+  temperature flux. Refinement will be performed if either of the
+  single-physics error estimates are above the chosen thresholds. It is also
+  possible to base the error estimation entirely on the Navier-Stokes fluxes;
+  an appropriate choice for problems in which the variations in the velocity
   field are expected to be much more rapid than those in the
-  temperature field. 
-  It would be easy to re-implement an alternative version in which
-  the error estimation is based exclusively on the temperature field;
-  this choice would be appropriate for problems with thin
-  thermal boundary layers.  
+  temperature field. Alternatively,  
+  the error estimation could be based exclusively on the temperature field;
+  a choice that would be appropriate for problems with thin
+  thermal boundary layers. The different error estimates can all be 
+  specified by user-defined functions that combine the vector of 
+  compound-flux error estimates into a single number. For example, 
+  the function
+  \code
+   double navier_stokes_flux_error(const Vector<double> &errors)
+    {return errors[0];}
+  \endcode
+   specifies that the combined error estimate is the first of the 
+   compound error esimates ---
+   the error estimate for the Navier--Stokes equations.
   \n\n
   In the current example both fields vary very smoothly, and as a result
   spatial adaptivity is not really required in this problem. This is why
@@ -281,6 +321,9 @@ must be passed to the sons after refinement.
    unchanged in this case.\n\n
 -# Try using \c RefineableQTaylorHoodElements as the "fluid" element 
    part of the multi-physics elements. 
+-# Change the error estimate to be based entirely on the error in the
+   Navier--Stokes fluxes by using a user-defined function. Is there any
+   difference in the refinement pattern?
 .
 
 <HR>

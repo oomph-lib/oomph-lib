@@ -311,10 +311,6 @@ public:
  unsigned nrecovery_order() 
   {return RefineableQCrouzeixRaviartElement<DIM>::nrecovery_order();}
 
- /// \short The number of compound fluxes is two (one for the fluid and
- /// one for the temperature)
- unsigned ncompound_fluxes() {return 2;}
-
  /// \short The number of Z2 flux terms is the same as that in 
  /// the fluid element plus that in the advection-diffusion element
  unsigned num_Z2_flux_terms()
@@ -322,7 +318,6 @@ public:
    return (RefineableQCrouzeixRaviartElement<DIM>::num_Z2_flux_terms() +
            RefineableQAdvectionDiffusionElement<DIM,3>::num_Z2_flux_terms());
   }
-
 
 
  /// Get the Z2 flux from the fluid element
@@ -348,6 +343,10 @@ public:
     }
   } //end of get_Z2_flux
 
+ /// \short The number of compound fluxes is two (one for the fluid and
+ /// one for the temperature)
+ unsigned ncompound_fluxes() {return 2;}
+
  /// \short Fill in which flux components are associated with the fluid
  /// measure and which are associated with the temperature measure
  void get_Z2_compound_flux_indices(Vector<unsigned> &flux_index) 
@@ -365,7 +364,7 @@ public:
    for(unsigned i=0;i<n_fluid_flux;i++) {flux_index[i] = 0;}
    //Set the temperature fluxes (the last set of fluxes
    for(unsigned i=0;i<n_temp_flux;i++) {flux_index[n_fluid_flux + i] = 1;}
-  }
+  } //end of get_Z2_compound_flux_indices
 
 
  /// \short Validate against exact solution at given time

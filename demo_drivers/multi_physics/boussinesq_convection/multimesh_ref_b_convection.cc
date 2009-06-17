@@ -127,14 +127,14 @@ public:
    //(Re)set all the sources in the problem
 
    // Set binning parameters
-   Multi_domain_functions::Setup_bins_again=true;
+   /*Multi_domain_functions::Setup_bins_again=true;
    Multi_domain_functions::Nx_bin=50;
    Multi_domain_functions::Ny_bin=50;
 
    Multi_domain_functions::X_min=0.0;
    Multi_domain_functions::X_max=3.0;
    Multi_domain_functions::Y_min=0.0;
-   Multi_domain_functions::Y_max=1.0;
+   Multi_domain_functions::Y_max=1.0;*/
 
    // Set sources
    Multi_domain_functions::set_sources<NST_ELEMENT,AD_ELEMENT,2,2>
@@ -145,14 +145,14 @@ public:
  void actions_after_distribute()
   {
    // Set binning parameters
-   Multi_domain_functions::Setup_bins_again=true;
+   /* Multi_domain_functions::Setup_bins_again=true;
    Multi_domain_functions::Nx_bin=50;
    Multi_domain_functions::Ny_bin=50;
 
    Multi_domain_functions::X_min=0.0;
    Multi_domain_functions::X_max=3.0;
    Multi_domain_functions::Y_min=0.0;
-   Multi_domain_functions::Y_max=1.0;
+   Multi_domain_functions::Y_max=1.0;*/
 
    // Set sources
    Multi_domain_functions::set_sources<NST_ELEMENT,AD_ELEMENT,2,2>

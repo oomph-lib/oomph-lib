@@ -1210,7 +1210,7 @@ strain_rate(const Vector<double>& s,
 
  //Add the negative powers of the radius, unless we are
  //at the origin
- if(std::abs(interpolated_r) > 1.0e-16)
+ if(std::abs(interpolated_r) > 1.0e-15)
   {
    const double pi = 4.0*atan(1.0);
    double inverse_r = 1.0/interpolated_r;
@@ -1219,8 +1219,8 @@ strain_rate(const Vector<double>& s,
    bool include_cot_terms = false;
    double cot_theta = 0.0;
    //If we in the legal range then include cot
-   if((std::abs(interpolated_theta) > 1.0e-16) && 
-      (std::abs(pi - interpolated_theta) > 1.0e-16))
+   if((std::abs(interpolated_theta) > 1.0e-15) && 
+      (std::abs(pi - interpolated_theta) > 1.0e-15))
     {
      include_cot_terms = true;
      cot_theta = this->cot(interpolated_theta);
