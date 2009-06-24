@@ -107,6 +107,39 @@ public:
  /// \short Parametrised acceleration on object at current time: 
  /// accel = d^2 r(xi)/dt^2.
  void accel(const Vector<double>& xi, Vector<double>& accel);
+ 
+ /// \short Parametrised j-th time-derivative on object at current time: 
+ /// \f$ \frac{d^{j} r(\zeta)}{dt^j} \f$.
+ void dpositiondt(const Vector<double>& xi, const unsigned& j, 
+                  Vector<double>& drdt)
+  {
+   switch (j)
+    {
+     // Current position
+    case 0:
+     position(xi,drdt);
+     break;
+     
+     // Velocity:
+    case 1:
+     veloc(xi,drdt);
+     break;
+
+     // Acceleration:
+    case 2:
+     accel(xi,drdt);
+     break;
+     
+    default:
+     std::ostringstream error_message;
+     error_message << j << "th derivative not implemented\n";
+     
+     throw OomphLibError(error_message.str(),
+                         "AxisymOscillatingDisk::dpositiondt()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+
    
  /// \short Residual of dispersion relation for use in black-box Newton method
  /// which requires global (or static) functions. 

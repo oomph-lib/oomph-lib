@@ -419,14 +419,31 @@ class RefineableElement : public virtual FiniteElement
  static double max_integrity_tolerance()
   { return Max_integrity_tolerance;}
 
+  /// \short The purpose of this function is to identify all possible
+ /// Data that can affect the fields interpolated by the FiniteElement.
+ /// This must be overloaded to include data from any hanging nodes 
+ /// correctly
+ void identify_field_data_for_interactions(
+  std::set<std::pair<Data*,unsigned> > &paired_field_data);
+
+
+ /// \short Overload the function that assigns local equation numbers
+ /// for the Data stored at the nodes so that hanging data is taken 
+ /// into account
+ inline void assign_nodal_local_eqn_numbers()
+  {
+   FiniteElement::assign_nodal_local_eqn_numbers();
+   assign_hanging_local_eqn_numbers();
+  }
+
  /// Setup the local equation numbering schemes:
- virtual inline void assign_all_generic_local_eqn_numbers()
+ /*virtual inline void assign_all_generic_local_eqn_numbers()
   {
    //Call the standard FiniteElement local numbering scheme
    FiniteElement::assign_all_generic_local_eqn_numbers();
    //Set up the generic hanging-node-based look-up schemes
    assign_hanging_local_eqn_numbers();
-  }
+  }*/
 
  /// \short Pointer to the root element in refinement hierarchy (must be 
  /// implemented in specific elements that do refinement via
@@ -702,7 +719,7 @@ void assemble_local_to_lagrangian_jacobian(
   DenseMatrix<double> &inverse_jacobian) const;
 
   public:
-
+ 
  /// Constructor
  RefineableSolidElement() : RefineableElement(), SolidFiniteElement(),
   Use_undeformed_macro_element_for_new_lagrangian_coords(false){}
@@ -710,19 +727,37 @@ void assemble_local_to_lagrangian_jacobian(
  /// Virtual Destructor, delete any allocated storage
  virtual ~RefineableSolidElement() { }
  
-
- /// \short Assign local equations numbers for the solid positions.
- /// Overload the standard version to include hanging node information
- virtual inline void assign_all_generic_local_eqn_numbers()
+ /// \short Overload the local equation numbers for Data stored as part
+ /// of solid nodes to include hanging node data
+ void assign_solid_local_eqn_numbers()
   {
-   //Call the non-solid finite element equations, including the hanging
-   //schemes
-   RefineableElement::assign_all_generic_local_eqn_numbers();
-   //Call the solid values
-   assign_solid_local_eqn_numbers();
-   //Set generic solid hanging equation numbers
+   SolidFiniteElement::assign_solid_local_eqn_numbers();
    assign_solid_hanging_local_eqn_numbers();
   }
+
+ ///\short The number of geometric data affecting a 
+ /// RefineableSolidFiniteElemnet is not
+ ///the same as the number of nodes (one variable position data per node)
+ inline unsigned ngeom_data() const 
+  {
+   throw OomphLibError(
+    "Geometric Data not yet set up for RefineableSolidNodes\n",
+    "RefineableSolidElement::ngeom_data()",
+    OOMPH_EXCEPTION_LOCATION);
+   return nnode();
+  }
+
+ /// \short Return pointer to the j-th Data item that the object's 
+ /// shape depends on. (Redirects to the nodes' positional Data).
+ inline Data* geom_data_pt(const unsigned& j)
+  {
+   throw OomphLibError(
+    "Geometric Data not yet set up for RefineableSolidNodes\n",
+    "RefineableSolidElement::geom_data_pt()",
+    OOMPH_EXCEPTION_LOCATION);
+   return static_cast<SolidNode*>(node_pt(j))->variable_position_pt();
+  }
+ 
 
  /// \short Compute element residual Vector and element Jacobian matrix
  /// corresponding to the solid positions. Overloaded version to take

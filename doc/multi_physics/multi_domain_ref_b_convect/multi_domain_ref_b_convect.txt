@@ -1,0 +1,326 @@
+\mainpage Refineable Boussinesq Convection using a multi-domain approach: Combining (Refineable) Navier--Stokes and Advection-Diffusion domains
+
+We consider a <a href="../../b_convection/html/index.html"> 
+previously-described, </a>
+ two-dimensional Boussinesq convection problem in
+which an incompressible, Newtonian fluid is heated from below.
+
+When two or more physical processes interact within the same spatial
+domain there are three different approaches to setting up the
+interaction within \c oomph-lib. One approach is to write a completely
+new interaction \c Element. The second approach described in 
+<a  href="../../b_convection/html/index.html"> the non-refineable  </a> and 
+<a href="../../refine_b_convect/html/index.html">refineable </a> 
+single-domain versions of the present problem is to create a combined
+ multi-physics element using inheritance from two, or more, existing
+ elements. In both these cases, the physical processes interact within an 
+element and this is termed a \b multi-field approach.
+
+In this example we describe the third approach to multi-physics
+problems, in which 
+ we solve the problem using two different elements on two different
+ domains, each occupying the same physical space. One domain is used for 
+ the solution of the Navier--Stokes equations and the other for 
+ the solution of the advection-diffusion 
+equation. Rather than interacting locally within elements, the
+different physical processes interact directly between the two domaians. 
+One benefit of such a \b multi-domain approach, compared to a \b
+multi-field approach, is that different error estimators can be 
+used on each domain and there is no longer a need to construct 
+a combined multi-physics error estimator. Moreover, the domains do not
+have to follow the same refinement pattern, which can be
+advantageous if the different physical processes act over different
+spatial scales.  The figure below shows that in
+this instance the Navier--Stokes mesh (panel (a)) requires much more
+refinement than the advection-diffusion mesh (panel (b)).
+
+@I w 0.75\textwidth two_domains "Steady Convection Rolls: (a) contours of x-velocity and corresponding element boundaries in Navier--Stokes mesh, (b) contours of temperature and corresponding element boundaries in advection-diffusion mesh. "
+
+
+\section external_elements The ElementWithExternalElement class
+
+ Interaction between different elements in different domains is a
+fundamental feature of many multi-physics problems and the generic
+features of such interactions are provided by the \c
+ElementWithExternalElement class. 
+Any element which requires information from an "external" element in 
+another "external" mesh, for example
+ the \c
+FSIWallElement described in the <a
+href="../../../interaction/fsi_collapsible_channel/html/index.html">
+flow in a collapsible channel problem, </a>
+ must inherit from the base class \c
+ElementWithExternalElement.  
+
+ In the finite element context, we require the "external" element that
+ contributes to the interaction at each integration point of the
+ finite element. Typically, the contribution to the interaction is
+ provided by a function of the field variables interpolated by the
+ external element, so we also require the local coordinate within the
+ external element that corresponds to the physical location of the
+ integration point. Accordingly,
+ \c ElementWithExternalElements can store a pointer to an
+  external element and a vector of local coordinates at
+ each integration point:
+\code
+FiniteElement*& external_element_pt(const unsigned& interaction, const
+unsigned& ipt);
+\endcode
+\code
+Vector<double>& external_element_local_coord(const unsigned&
+interaction, const unsigned& ipt);
+\endcode
+where the unsigned parameter \c interaction denotes the interaction
+index (required in cases where an element has more than one element
+with which it interacts, <em> e.g. </em> 
+an FSI problem where a solid element is
+affected by a fluid load on both its "front" and "back", see the 
+<a href="../../../interaction/fsi_channel_with_leaflet/html/index.html">FSI 
+channel with leaflet problem</a> for further details).
+
+Any \c Data from the external elements involved in the
+interaction must also be specified. For convenience, 
+such data is divided into 
+- <em> external field data: </em> fields 
+interpolated by the external element that affect the interaction; 
+.
+- <em> external geometric data: </em> any geometric data that affects
+the external element and, therefore, spatial derivatives of its fields. 
+.
+These data must be specified by two member
+functions in the \c ElementWithExternalElement class
+\code
+  virtual void identify_all_field_data_for_external_interaction(
+    Vector<std::set<FiniteElement*> >  const &external_elements_pt,
+    std::set<std::pair<Data*,unsigned> > &paired_interaction_data); 
+\endcode
+\code
+   virtual void identify_all_geometric_data_for_external_interaction(
+    Vector<std::set<FiniteElement*> >  const &external_elements_pt,
+    std::set<Data*> &external_geometric_data_pt);
+\endcode   
+ The default implementation is that for each interaction the member functions
+\code
+ void FiniteElement::identify_field_data_for_interactions(...)
+\endcode 
+and
+\code
+void FiniteElement::identify_geometric_data(..)
+\endcode
+are called for each external element, where the default implementation
+of the function \c
+FiniteElement::identify_field_data_for_interactions(...) returns all
+internal and nodal data, including \c Data located at the master nodes
+associated with any hanging nodes. 
+
+
+\subsection element_modifications Modifying the Navier--Stokes and Advection--Diffusion elements for use in multi-domain problems
+
+ In the present Boussinesq convection problem, we must write new
+ elements so that the Navier-Stokes equations and advection-diffusion
+ equations can be coupled between different domains:
+\code
+template<unsigned DIM>
+class RefineableQCrouzeixRaviartElementWithExternalElement : 
+ public virtual RefineableQCrouzeixRaviartElement<DIM>,
+ public virtual ElementWithExternalElement 
+
+template<unsigned DIM>
+class RefineableQAdvectionDiffusionElementWithExternalElement : 
+ public virtual RefineableQAdvectionDiffusionElement<DIM,3>,
+ public virtual ElementWithExternalElement
+\endcode
+
+Within these new elements we overload appropriate functions so  
+that the required coupling information is obtained
+directly from  the "external" element.  In this instance, therefore, 
+we overload \c
+get_body_force_nst() and \c get_wind_adv_diff() as follows:
+
+\dontinclude my_boussinesq_elements.h
+\skipline start_of_get_body_force_nst
+\until end of get_body_force_nst
+
+\skipline start_of_get_wind_adv_diff
+\until end of get_wind_adv_diff
+
+In both elements, we must specify the number of interactions so 
+ that storage for the pointers to external
+elements and local coordinates can be correctly  allocated. This is most easily
+performed in the element constructors: <em> e. g. </em>  for the \c
+RefineableQCrouzeixRaviartElementWithExternalElement:
+
+\dontinclude my_boussinesq_elements.h
+\skipline Constructor
+\until }
+
+Apart from the initialisation of the pointer to the Rayleigh number, 
+the same code is required in the constructor of the \c
+RefineableQAdvectionDiffusionElementWithExternalElement. 
+
+Similar modifications are required to create a \c
+RefineableQAdvectionDiffusionElementWithExternalElement.
+
+- Explain the \c fill_in_off_diagonal_block_analytic() routine?
+
+<HR>
+
+
+
+
+\section setting_up_interaction Setting up the interaction
+
+To set up a two-way interaction between two meshes, the function
+\code
+template<class ELEMENT_0,class ELEMENT_1,unsigned EL_DIM_0,unsigned EL_DIM_1>
+void Multi_domain_functions::set_sources
+ (Problem* problem_pt, 
+  Mesh* const &first_mesh_pt, Mesh* const &second_mesh_pt, 
+  const unsigned& first_interaction=0, 
+  const unsigned& second_interaction=0);
+\endcode
+is used.  This must be called by the user prior to the assignment of
+equation numbers in the problem constructor.  Subsequently,
+since the elements involved in the interaction (may) change once a 
+problem has been refined, the user must also ensure that this
+function is called from their driver code in \c actions_after_adapt().
+
+Within this function, each of \c ELEMENT_0 and \c ELEMENT_1 (the
+element types within \c first_mesh_pt and \c second_mesh_pt
+respectively, which are of dimension \c EL_DIM_0 and \c EL_DIM_1
+respectively) must both inherit from the class \c
+ElementWithExternalElement described above.  The 
+optional interaction parameters may be used if the interaction in
+either direction is not the only interaction for either of the domains.
+
+<HR>
+<HR>
+
+\section multi_domain_boussinesq Multi-domain Boussinesq problem
+<HR>
+
+
+\subsection driver_code The driver code
+
+The driver code itself is structurally very simimlar to the
+single-domain example.  We start by initialising MPI, setting the
+direction of gravity, and creating the problem with our newly defined
+elements: 
+
+\dontinclude multimesh_ref_b_convection.cc
+\skipline start_of_main
+\until problem;
+
+The remainder of the main body is the same as in the single-domain
+case, with an additional call to finalise MPI:
+\skipline Apply a perturbation
+\until end of main
+
+<HR>
+
+\subsection problem_class The problem class
+
+The problem class contains the constructor and destructor, actions
+routines, and access functions to the two meshes involved in the problem.
+
+\dontinclude multimesh_ref_b_convection.cc
+\skipline start_of_problem_class
+\until end of mesh access function
+
+Nothing is required to happen before any adaptation occurs, but
+following any mesh adaptation exactly one pressure degree of freedom
+(in the Navier--Stokes mesh) must be pinned.  Following this, the
+external elements must be re-set for each mesh.  The parameters used
+in the multi-domain method can be changed by the user as shown.
+
+\skipline Actions before adapt
+\until end_of_fix_pressure
+
+Finally the remaining member functions provide access to control the
+application of the imperfection, and to document the solution.
+
+\skipline Access function to boolean
+\until doc_solution();
+
+<HR>
+
+\subsection constructor The constructor
+
+The constructor first builds two coarse meshes with the same number of
+elements (\f$ 9 \times 8 \f$, as in the original problem) and
+dimensions for each mesh, and sets error estimators for each mesh.
+
+\dontinclude multimesh_ref_b_convection.cc
+\skipline start_of_constructor
+\until Adv_diff_mesh_pt->min_permitted_error
+
+The boundary constraints are applied to each mesh in turn; firstly on
+the Navier--Stokes mesh, where we must also pin a single pressure:
+
+\skipline Set the boundary conditions
+\until fix_pressure
+
+We then apply boundary constraints to the advection-diffusion mesh:
+
+\skipline Loop over the boundaries of the AD mesh
+\until end of loop over AD mesh boundaries
+
+and complete the build of all elements in each mesh by setting the
+pointers to the required physical parameters in each domain:
+
+\skipline Complete the build of all elements
+\until end of setup for all AD elements
+
+Finally we combine the submeshes, call the \c actions_after_adapt()
+routine to set up the interaction between the two meshes, and then
+assign the equation numbers.
+
+\skipline combine the submeshes
+\until end of constructor
+
+<HR>
+
+\subsection actions_before_newton_solve The function actions_before_newton_solve(...)
+
+In this function we update the problem specifications before a
+solution by re-applying the specific values of the Dirichlet boundary
+conditions for each mesh, and ensuring that the mass-conserving
+imperfection is applied to the velocity boundary conditions on the
+Navier--Stokes mesh if required.
+
+\dontinclude multimesh_ref_b_convection.cc
+\skipline start_actions_before_newton_solve
+\until end of actions before solve
+
+<HR>
+
+\subsection doc_solution The function doc_solution(...)
+
+This function outputs all fields to the specified solution file in the
+directory pointed to by the \c DocInfo object.  Note: the direct call
+to \c mesh_pt() specifies the global mesh, so this function will
+output the fields in mesh order: the Navier--Stokes mesh followed by
+the advection-diffusion mesh.  To output these fields separately we
+simply call the output function for each mesh.
+
+\dontinclude multimesh_ref_b_convection.cc
+\skipline start_of_doc_solution
+\until end of doc
+
+<HR>
+
+Example codes, for both the refineable and non-refineable multi-domain
+versions of the Boussinesq convection problem, can be found in
+<CENTER>
+<A HREF="../../../../demo_drivers/multi_physics/boussinesq_convection">
+demo_drivers/multi_physics/boussinesq_convection
+</A>
+</CENTER>
+
+[The same principle applies to any problem where two sets of
+equations "interact" within the same physical space: (1) call the \c
+set_sources(...) function to set up the interaction, and
+(2) ensure that the functions which provide the relevant source terms
+within these equations are overloaded to use the external elements
+which were set by the call to \c set_sources(...).]
+

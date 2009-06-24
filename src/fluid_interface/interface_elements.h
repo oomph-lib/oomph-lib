@@ -352,6 +352,16 @@ public PointFluidInterfaceEdgeElement, public virtual SolidFiniteElement
 
 {
   public:
+
+
+ /// Specify the value of nodal zeta from the face geometry
+ /// \short The "global" intrinsic coordinate of the element when
+ /// viewed as part of a geometric object should be given by
+ /// the FaceElement representation, by default
+ double zeta_nodal(const unsigned &n, const unsigned &k,           
+                          const unsigned &i) const 
+  {return FaceElement::zeta_nodal(n,k,i);}     
+
  
  ElasticPointFluidInterfaceEdgeElement() : 
   FaceGeometry<FaceGeometry<ELEMENT> >(),
@@ -449,6 +459,15 @@ public LineFluidInterfaceEdgeElement, public virtual SolidFiniteElement
  ElasticLineFluidInterfaceEdgeElement() : 
   FaceGeometry<FaceGeometry<ELEMENT> >(),
   LineFluidInterfaceEdgeElement() {}
+
+ /// Specify the value of nodal zeta from the face geometry
+ /// \short The "global" intrinsic coordinate of the element when
+ /// viewed as part of a geometric object should be given by
+ /// the FaceElement representation, by default
+ double zeta_nodal(const unsigned &n, const unsigned &k,           
+                          const unsigned &i) const 
+  {return FaceElement::zeta_nodal(n,k,i);}     
+
 
  /// Overload the output function
  void output(std::ostream &outfile) {FiniteElement::output(outfile);}

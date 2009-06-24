@@ -207,7 +207,7 @@ class FSIFluidElement : public virtual FiniteElement
 /// access function FSIWallElement::q_pt().
 //=========================================================================
 class FSIWallElement : public virtual SolidFiniteElement, 
- public virtual GeomObject, public virtual ElementWithExternalElement
+ public virtual ElementWithExternalElement
 {
 
   public:
@@ -218,8 +218,7 @@ class FSIWallElement : public virtual SolidFiniteElement,
  /// \short Constructor. Note that element is not fully-functional
  /// until its setup_fsi_wall_element() function has been called!
  FSIWallElement() : Only_front_is_loaded_by_fluid(true),
-  Q_pt(&Default_Q_Value),  Add_external_load_data(true),
-  Ignore_shear_stress_in_jacobian(false) {}
+  Q_pt(&Default_Q_Value), Ignore_shear_stress_in_jacobian(false) {}
 
  /// Broken copy constructor
  FSIWallElement(const FSIWallElement&) 
@@ -255,18 +254,6 @@ class FSIWallElement : public virtual SolidFiniteElement,
  /// non-dimensionalise the fluid and solid equations.
  double* &q_pt() {return Q_pt;}
 
- /// \short Flush the storage associated with the "adjacent fluid
- /// element" for the specified face and integration point
- /// NOTE: this storage is in the ElementWithExternalElement now
- void flush_adjacent_fluid_element_pt_and_coord(const unsigned& face,
-                                                const unsigned& i)
-  {
-   external_element_pt(face,i)=0;
-   unsigned n_local=external_element_local_coord(face,i).size();
-   Vector<double> s_local(n_local,0.0);
-   external_element_local_coord(face,i)=s_local;
-  }
-
 
  /// \short Allow element to be loaded by fluid on both
  /// sides. (Resizes containers for lookup schemes and initialises
@@ -294,14 +281,14 @@ class FSIWallElement : public virtual SolidFiniteElement,
  /// irrelevant and to facilitate the solution of a auxiliary solids-only
  /// problems, e.g. during the assignment of initial conditions
  /// for a time-dependent FSI problem.
- void exclude_external_load_data() {Add_external_load_data=false;}
+ void exclude_external_load_data() {Add_external_interaction_data=false;}
 
 
  /// \short Include all external fluid data that affects the load in the
  /// computation of the element's Jacobian matrix
  void include_external_load_data() 
   {
-   Add_external_load_data=true;
+   Add_external_interaction_data=true;
    Ignore_shear_stress_in_jacobian=false;
   }
 
@@ -324,29 +311,6 @@ class FSIWallElement : public virtual SolidFiniteElement,
  void node_update_adjacent_fluid_elements();
 
 
- /// \short Return the number of Data items that affect the 
- /// fluid traction  on this element. This includes e.g. fluid velocities
- /// and pressures in adjacent fluid elements, and any geometric Data
- /// in the problem that affects the nodal positions in these fluid elements. 
- /// Note that any Data items that are already included in the
- /// FSIWallElement's internal, external or nodal Data are \b not included 
- /// its the load Data to avoid double-counting.
- unsigned nload_data() const {return Load_data_pt.size();}
-   
-
- /// \short Return vector of pointers to the Data objects that affect the load
- /// on the element. 
- Vector<Data*> load_data_pt() const {return Load_data_pt;}
-
- /// \short Overload the SolidFiniteElement::assign_solid_local_eqn_numbers 
- /// function to include the load Data into the local equation 
- /// numbering procedure
- void assign_solid_local_eqn_numbers()
-  {
-   SolidFiniteElement::assign_solid_local_eqn_numbers();
-   assign_load_data_local_eqn_numbers();
-  }
-
  /// Fill in the element's contribution to the Jacobian matrix
  /// and the residual vector: Done by finite differencing the
  /// residual vector w.r.t. all nodal, internal, external and load Data.
@@ -355,22 +319,157 @@ class FSIWallElement : public virtual SolidFiniteElement,
   {
    //Add the contribution to the residuals
    fill_in_contribution_to_residuals(residuals);
-   //Now do the position and other terms by finite differences
-   fill_in_jacobian_from_solid_position_and_external_by_fd(jacobian);
-  }
 
- /// \short Overload assign_all_generic_local_equation_numbers to
- ///        strip out external data and add back unique data
- void assign_all_generic_local_eqn_numbers()
-  {
-   //External data may not be distinct from other data depending upon
-   //the source element, so call helper to remove non-unique external data
-   assign_unique_external_data_helper();
-   //Now call the solid finite element equation numbering
-   SolidFiniteElement::assign_all_generic_local_eqn_numbers();
+   //Solve for the consistent acceleraction in the Newmark scheme
+   if(Solve_for_consistent_newmark_accel_flag)
+    {
+     fill_in_jacobian_for_newmark_accel(jacobian);
+     return;
+    }
+   
+   //Allocate storage for the full residuals (residuals of the entire element)
+   Vector<double> full_residuals(this->ndof());
+   //Get the residuals for the entire element
+   get_residuals(full_residuals);
+   //Add the internal and external by finite differences
+   fill_in_jacobian_from_internal_by_fd(full_residuals,jacobian);
+   fill_in_jacobian_from_external_by_fd(full_residuals,jacobian);
+   fill_in_jacobian_from_nodal_by_fd(full_residuals,jacobian);
+   fill_in_jacobian_from_solid_position_by_fd(jacobian);
+   fill_in_jacobian_from_external_interaction_by_fd(full_residuals,jacobian);
   }
 
   protected:
+
+ /// \short After an internal data change, update the nodal positions
+ inline void update_in_internal_fd(const unsigned &i) 
+  {
+   if (!Ignore_shear_stress_in_jacobian)
+    {
+     node_update_adjacent_fluid_elements();
+    }
+  }
+
+ //Do nothing
+ inline void reset_in_internal_fd(const unsigned &i) { } 
+
+ //After all internal stuff reset
+ inline void reset_after_internal_fd() 
+  { 
+   if (!Ignore_shear_stress_in_jacobian)
+    {
+     node_update_adjacent_fluid_elements();
+    }
+  }
+
+
+ /// \short After an external data change, update the nodal positions
+ inline void update_in_external_fd(const unsigned &i) 
+  {
+   if (!Ignore_shear_stress_in_jacobian)
+    {
+     node_update_adjacent_fluid_elements();
+    }
+  }
+
+ //Do nothing
+ inline void reset_in_external_fd(const unsigned &i) { } 
+
+ //After all external stuff reset
+ inline void reset_after_external_fd() 
+  { 
+   if (!Ignore_shear_stress_in_jacobian)
+    {
+     node_update_adjacent_fluid_elements();
+    }
+  }
+
+ 
+ /// \short After a nodal data change, update the nodal positions
+ inline void update_in_nodal_fd(const unsigned &i) 
+  {
+   if (!Ignore_shear_stress_in_jacobian)
+    {
+     node_update_adjacent_fluid_elements();
+    }
+  }
+
+ //Do nothing
+ inline void reset_in_nodal_fd(const unsigned &i) { } 
+
+ //After all nodal stuff reset
+ inline void reset_after_nodal_fd() 
+  { 
+   if (!Ignore_shear_stress_in_jacobian)
+    {
+     node_update_adjacent_fluid_elements();
+    }
+  }
+
+ /// \short After an external field data change, update the nodal positions
+ inline void update_in_external_interaction_field_fd(const unsigned &i) 
+  {
+   if (!Ignore_shear_stress_in_jacobian)
+    {
+     node_update_adjacent_fluid_elements();
+    }
+  }
+
+ //Do nothing
+ inline void reset_in_external_interaction_field_fd(const unsigned &i) { } 
+
+ //After all external field stuff reset
+ inline void reset_after_external_interaction_field_fd() 
+  { 
+   if (!Ignore_shear_stress_in_jacobian)
+    {
+     node_update_adjacent_fluid_elements();
+    }
+  }
+ 
+
+ /// \short After an external geometric data change, update the nodal positions
+ inline void update_in_external_interaction_geometric_fd(const unsigned &i) 
+  {
+   if (!Ignore_shear_stress_in_jacobian)
+    {
+     node_update_adjacent_fluid_elements();
+    }
+  }
+
+ //Do nothing
+ inline void reset_in_external_interaction_geometric_fd(const unsigned &i) { } 
+
+ //After all external geometric stuff reset
+ inline void reset_after_external_interaction_geometric_fd() 
+  { 
+   if (!Ignore_shear_stress_in_jacobian)
+    {
+     node_update_adjacent_fluid_elements();
+    }
+  }
+
+
+ /// \short After an internal data change, update the nodal positions
+ inline void update_in_solid_position_fd(const unsigned &i) 
+  {
+   if (!Ignore_shear_stress_in_jacobian)
+    {
+     node_update_adjacent_fluid_elements();
+    }
+  }
+
+ //Do nothing
+ inline void reset_in_solid_position_fd(const unsigned &i) { } 
+
+ //After all internal stuff reset
+ inline void reset_after_solid_position_fd() 
+  { 
+   if (!Ignore_shear_stress_in_jacobian)
+    {
+     node_update_adjacent_fluid_elements();
+    }
+  }
 
 
  /// \short Get FE Jacobian by systematic finite differencing w.r.t.
@@ -384,8 +483,8 @@ class FSIWallElement : public virtual SolidFiniteElement,
  /// this may be overloaded in derived classes, e.g. if it is known
  /// that for a specific FSIWallElement, the internal Data does not
  /// affect the nodal positions in adjacent fluid elements.
- void fill_in_jacobian_from_solid_position_and_external_by_fd(
-  DenseMatrix<double>& jacobian);
+ //void fill_in_jacobian_from_solid_position_and_external_by_fd(
+ // DenseMatrix<double>& jacobian);
 
  
  /// \short  Get the contribution to the load vector provided by 
@@ -403,9 +502,17 @@ class FSIWallElement : public virtual SolidFiniteElement,
 
   private:
 
- /// \short Assign the local equation numbers for those 
- /// Data values that affect the load on the element
- void assign_load_data_local_eqn_numbers();
+ /// \short Overload the function that must return all data involved
+ /// in the interactions from the external (fluid) element
+  void identify_all_field_data_for_external_interaction(
+   Vector<std::set<FiniteElement*> > const &external_elements_pt,
+   std::set<std::pair<Data*,unsigned> > &paired_iteraction_data); 
+
+   /// \short Function that must return all geometric data involved 
+   /// in the desired interactions from the external element
+  void identify_all_geometric_data_for_external_interaction(
+   Vector<std::set<FiniteElement*> > const &external_elements_pt,
+   std::set<Data*> &external_geometric_data_pt);
 
  /// \short Static default value for the ratio of stress scales
  /// used in the fluid and solid equations (default is 1.0)
@@ -418,30 +525,10 @@ class FSIWallElement : public virtual SolidFiniteElement,
  /// fluid elements, one at the "front" and one at the "back".
  bool Only_front_is_loaded_by_fluid;
 
- /// \short Vector of pointers to external Data that affect the load
- /// on the element. N.B. This must be the same size
- /// as Load_data_index.
- Vector<Data*> Load_data_pt;
-
- /// \short Vector of indices of the values in the external Data addressed
- /// by Load_data_pt that affect the load on the element. N.B. This 
- /// must be the same size as Load_data_pt
- Vector<unsigned> Load_data_index;
-
- /// \short Vector that holds the local equation numbers associated with
- /// the external data that affects the fluid load. N.B. Must be the
- /// same size as Load_data_pt
- Vector<int> Load_data_local_eqn;
-
  /// \short Pointer to the ratio, \f$ Q \f$ , of the stress used to
  /// non-dimensionalise the fluid stresses to the stress used to
  /// non-dimensionalise the solid stresses.
  double *Q_pt;
-
- /// \short Boolean flag used to determine whether to add the external data
- /// that affects that load. Such data should *NOT* be added when SolidIC
- /// Problems are being solved.
- bool Add_external_load_data;
 
  /// \short Set this flag to true to ignore shear stress component
  /// of load when calculating the Jacobian, i.e. to ignore
@@ -831,26 +918,6 @@ namespace FSI_functions
    Mesh* const &solid_mesh_pt,
    const unsigned& face=0)
   {
-   // Flush all previous external storage
-   unsigned n_solid_element=solid_mesh_pt->nelement();
-   for (unsigned e=0;e<n_solid_element;e++)
-    {
-     //Cast each element to an FSIWallElement
-     FSIWallElement *solid_element_pt = dynamic_cast<FSIWallElement*>(
-      solid_mesh_pt->element_pt(e));
-
-     //Find the number of Gauss points of the element
-     unsigned n_intpt = solid_element_pt->integral_pt()->nweight();
-
-     //Loop over the integration points
-     for(unsigned ipt=0;ipt<n_intpt;ipt++)
-      {
-       // Null the adjacent fluid element storage for the current face and ipt
-       solid_element_pt->flush_adjacent_fluid_element_pt_and_coord(face,ipt);
-      }
-
-    }
-
    // Create a face mesh adjacent to the fluid mesh's b-th boundary. 
    // The face mesh consists of FaceElements that may also be 
    // interpreted as GeomObjects
@@ -1179,17 +1246,38 @@ void doc_fsi(Mesh* fluid_mesh_pt,
      //------------------------------------------------------------------------
      std::map<Data*,unsigned> data_count;
      std::map<FiniteElement*,unsigned> internal_data_count;
-     Vector<Data*> load_data_pt(el_pt->load_data_pt());
-     unsigned nload=load_data_pt.size();
-     for (unsigned l=0;l<nload;l++)
-      {
-       data_count[load_data_pt[l]]++;
-       if (internal_data_element_pt[load_data_pt[l]]!=0)
-        {
-         internal_data_count[internal_data_element_pt[load_data_pt[l]]]++;
-        }
-      }
-
+     {
+      Vector<Data*> external_interaction_field_data_pt(
+       el_pt->external_interaction_field_data_pt());
+      unsigned nexternal_interaction_field =
+       external_interaction_field_data_pt.size();
+      for (unsigned l=0;l<nexternal_interaction_field;l++)
+       {
+        data_count[external_interaction_field_data_pt[l]]++;
+        if (internal_data_element_pt[external_interaction_field_data_pt[l]]!=0)
+         {
+          internal_data_count[internal_data_element_pt[
+                               external_interaction_field_data_pt[l]]]++;
+         }
+       }
+     }
+     
+     {
+      Vector<Data*> external_interaction_geometric_data_pt(
+       el_pt->external_interaction_geometric_data_pt());
+      unsigned nexternal_interaction_geom =
+       external_interaction_geometric_data_pt.size();
+      for (unsigned l=0;l<nexternal_interaction_geom;l++)
+       {
+        data_count[external_interaction_geometric_data_pt[l]]++;
+        if (internal_data_element_pt[
+             external_interaction_geometric_data_pt[l]]!=0)
+         {
+          internal_data_count[internal_data_element_pt[
+                               external_interaction_geometric_data_pt[l]]]++;
+         }
+       }
+     }
 
      // Loop over unique data entries
      //------------------------------

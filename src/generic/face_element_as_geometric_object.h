@@ -48,27 +48,6 @@
 namespace oomph
 {
 
-/* //====================================================================== */
-/* /// \short Helper namespace for the locate zeta tolerances */
-/* //====================================================================== */
-/* namespace Locate_zeta_helpers */
-/* { */
-/*  /// Convergence tolerance for the Newton solver */
-/*  extern double Newton_tolerance;	 */
-
-/*  /// Maximum number of Newton iterations */
-/*  extern unsigned Max_newton_iterations; */
- 
-/*  /// Rounding tolerance for whether coordinate is in element or not */
-/*  extern double Rounding_tolerance; */
-
-/*  /// Number of points along one dimension of each element used */
-/*  /// to create coordinates within the element in order to see */
-/*  /// which has the smallest initial residual (and is therefore used */
-/*  /// as the initial guess in the Newton method for locate_zeta) */
-/*  extern unsigned N_local_points; */
-/* }  */
-
 //=======================================================================
 /// Class that is used to create FaceElement from bulk elements and to
 /// provide these FaceElement with a geometric object representation.
@@ -81,22 +60,9 @@ namespace oomph
 //=======================================================================
 template<class ELEMENT>
 class FaceElementAsGeomObject : public virtual FaceGeometry<ELEMENT>,
- public virtual FaceElement, public virtual GeomObject, 
+ public virtual FaceElement,
  public virtual ElementWithExternalElement
  {
-private:
-
- /// The boundary number in the bulk mesh to which this element is attached
- unsigned Boundary_number_in_bulk_mesh;
-
-#ifdef PARANOID
-
- /// \short Has the Boundary_number_in_bulk_mesh been set? Only included if
- /// compiled with PARANOID switched on.
- bool Boundary_number_in_bulk_mesh_has_been_set;
-
-#endif
-
 public:
 
  ///\short Constructor which takes a pointer to a "bulk" element,
@@ -113,16 +79,14 @@ public:
   //The geometric object has an intrinsic dimension one less than 
   //the "bulk" element, but the actual dimension of the problem remains 
   //the same
-  GeomObject(element_pt->dim()-1,element_pt->nodal_dimension()),
+  //GeomObject(element_pt->dim()-1,element_pt->nodal_dimension()),
   ElementWithExternalElement()
   { 
-#ifdef PARANOID
-   Boundary_number_in_bulk_mesh_has_been_set = false;
-#endif
    //Attach the geometrical information to the element. N.B. This function
    //also assigns nbulk_value from the required_nvalue of the bulk element
    element_pt->build_face_element(face_index,this);
-
+   GeomObject::set_nlagrangian_and_ndim(element_pt->dim()-1,
+                                        element_pt->nodal_dimension());
   }
 
 
@@ -137,246 +101,14 @@ public:
   {
    BrokenCopy::broken_assign("FaceElementAsGeomObject");
   }
-
  
- /// Access function for the boundary number in bulk mesh
- const unsigned& boundary_number_in_bulk_mesh() const
-  {
-   return Boundary_number_in_bulk_mesh;
-  }
+ /// \short The "global" intrinsic coordinate of the element when
+ /// viewed as part of a geometric object should be given by
+ /// the FaceElement representation, by default
+ double zeta_nodal(const unsigned &n, const unsigned &k,           
+                          const unsigned &i) const 
+  {return FaceElement::zeta_nodal(n,k,i);}     
 
-
- /// Set function for the boundary number in bulk mesh
- void set_boundary_number_in_bulk_mesh(const unsigned& b) 
-  { 
-   Boundary_number_in_bulk_mesh=b;
-#ifdef PARANOID
-   Boundary_number_in_bulk_mesh_has_been_set=true;
-#endif
-  }
-
- /// Specify the position within the element in its geometric object
- /// incarnation. Return the position r, at the local coordinate vector, s.
- void position(const Vector<double> &s, Vector<double> &r) const
-  {
-   //Merely return the interpolated position
-   interpolated_x(s,r);
-  }
-
- /// \short Specify the values of the boundary coordinate, zeta,
- /// at local node n in this element. k is the type of the
- /// coordinate, i identifies the coordinate direction). 
- /// Note: Boundary coordinates will have been set up when
- /// creating the underlying mesh, and their values will have 
- /// been stored at the nodes.
- double zeta_nodal(const unsigned &n, const unsigned &k, const unsigned &i)
-  const
-  {
-   //Vector in which to hold the intrinsic coordinate
-   Vector<double> zeta(this->dim());
-
-   //Get the k-th generalised boundary coordinate at node n
-   this->node_pt(n)->get_coordinates_on_boundary(
-    Boundary_number_in_bulk_mesh,k,zeta);
-
-   //Return the individual coordinate
-   return zeta[i];
-  }
-
-
- /// \short Calculate the interpolated value of zeta, the boundary coordinate
- /// on the mesh boundary to which this element is attached, 
- /// at the local coordinate s of the element
- void interpolated_zeta(const Vector<double> &s, Vector<double> &zeta) const
-  {
-   //Find the number of nodes
-   unsigned n_node = this->nnode();
-
-   //Find the number of positional types
-   unsigned n_position_type = this->nnodal_position_type();
-   
-   //Storage for the shape functions
-   Shape psi(n_node,n_position_type);
-
-   //Get the values of the shape functions at the local coordinate s
-   this->shape(s,psi);
-   
-   //Find the number of coordinates
-   unsigned ncoord = this->dim();
-   
-   //Initialise the value of zeta to zero
-   for(unsigned i=0;i<ncoord;i++) {zeta[i] = 0.0;}
-
-   //Add the contributions from each nodal dof to the interpolated value
-   //of zeta.
-   for(unsigned l=0;l<n_node;l++)
-    {
-     for(unsigned k=0;k<n_position_type;k++)
-      {
-       for(unsigned i=0;i<ncoord;i++)
-        {
-         zeta[i] += this->zeta_nodal(l,k,i)*psi(l,k);
-        }
-      }
-    }
-  }
- 
- /// \short For a given value of zeta, the boundary coordinate
- /// (assigned in the mesh and stored at the nodes), find the local 
- /// coordinate in this element that corresponds to zeta. This is achieved
- /// in generality by using Newton's method to find the value s such that
- /// interpolated_zeta(s) is equal to the desired value of zeta.
- /// If zeta cannot be located in this element, geom_object_pt is set
- /// to NULL. If zeta is located in this element, we return its "this"
- /// pointer.
- void locate_zeta(const Vector<double> &zeta, GeomObject*& geom_object_pt,
-                  Vector<double> &s)
-  {
-   using namespace Locate_zeta_helpers;
-
-   //Find the number of coordinates
-   unsigned ncoord = zeta.size();
-
-   //Assign storage for the vector and matrix used in Newton's method
-   Vector<double> dx(ncoord,0.0);
-   DenseDoubleMatrix jacobian(ncoord,ncoord,0.0);
-
-   //Initialise s to the middle of the element
-   for(unsigned i=0;i<ncoord;i++) 
-    {
-     s[i] = 0.5*(this->s_max()+this->s_min());
-    }
-   
-   //Counter for the number of Newton steps
-   unsigned count=0;
-
-   //Control flag for the Newton loop
-   bool keep_going=true;
-   
-   //Storage for the interpolated value of zeta
-   Vector<double> inter_zeta(ncoord);
-   
-   //Get the value of zeta at the initial guess
-   interpolated_zeta(s,inter_zeta);
-   
-   //Set up the residuals
-   for(unsigned i=0;i<ncoord;i++) {dx[i] = zeta[i] - inter_zeta[i];}
-   
-   //Main Newton Loop
-   do    // start of do while loop
-    {
-     //Increase loop counter
-     count++;
-
-     //Bail out if necessary
-     if(count > Max_newton_iterations)
-      {
-       std::ostringstream error_message;
-       error_message << "Newton solver not converged in " 
-                     << count << " steps\n"
-                     << "Try adjusting the Tolerances, or refining the mesh."
-                     << std::endl;
-       throw OomphLibError(error_message.str(),
-                           "FaceAsGeomObject::locate_zeta()",
-                           OOMPH_EXCEPTION_LOCATION);
-      }
-	     
-     //If it's the first time round the loop, check the initial residuals
-     if(count==1)
-      {
-       double maxres = 
-        std::abs(*std::max_element(dx.begin(),dx.end(),AbsCmp<double>()));
-
-       //If it's small enough exit
-       if(maxres < Newton_tolerance) 
-        {
-         keep_going=false;
-         continue;
-        }
-      }
-     
-     //Compute the entries of the Jacobian matrix
-     unsigned n_node = this->nnode();
-     unsigned n_position_type = this->nnodal_position_type();
-     Shape psi(n_node,n_position_type);
-     DShape dpsids(n_node,n_position_type,ncoord);
-
-     //Get the local shape functions and their derivatives
-     this->dshape_local(s,psi,dpsids);
-     
-     //Calculate the values of dzetads
-     DenseMatrix<double> interpolated_dzetads(ncoord,ncoord,0.0);
-     for(unsigned l=0;l<n_node;l++)
-      {
-       for(unsigned k=0;k<n_position_type;k++)
-        {
-         for(unsigned i=0;i<ncoord;i++)
-          {
-           for(unsigned j=0;j<ncoord;j++)
-            {
-             interpolated_dzetads(i,j) += 
-              this->zeta_nodal(l,k,i)*dpsids(l,k,j);
-            }
-          }
-        }
-      }
-     
-     //The entries of the Jacobian matrix are merely dresiduals/ds
-     //i.e. - dzeta/ds
-     for(unsigned i=0;i<ncoord;i++)
-      {
-       for(unsigned j=0;j<ncoord;j++)
-        {
-         jacobian(i,j) = - interpolated_dzetads(i,j);
-        }
-      }
-     
-     //Now solve the damn thing
-     jacobian.solve(dx);
-     
-     //Add the correction to the local coordinates
-     for(unsigned i=0;i<ncoord;i++) {s[i] -= dx[i];}
-     
-     //Get the new residuals
-     interpolated_zeta(s,inter_zeta);
-     for(unsigned i=0;i<ncoord;i++) {dx[i] = zeta[i] - inter_zeta[i];}
-     
-     //Get the maximum residuals
-     double maxres = 
-      std::abs(*std::max_element(dx.begin(),dx.end(),AbsCmp<double>()));
-     //If we have converged jump straight to the test at the end of the loop
-     if(maxres < Newton_tolerance) 
-      {
-       keep_going=false; 
-       continue;
-      } 
-    }
-   while(keep_going);
-
-
- 
-   //Test that the solution is within the element
-   for(unsigned i=0;i<ncoord;i++)
-    {
-     // We're outside -- return the null pointer for the geom object
-     if((s[i] - this->s_max() >  Rounding_tolerance) || 
-        (this->s_min() - s[i] >  Rounding_tolerance)) 
-      {
-       geom_object_pt=0; 
-       return;
-      }
-    }
-   
-   //Otherwise the required point is located in "this" element:
-   geom_object_pt = this;
-   
-   //If we're over the limit by less than the rounding error, adjust
-   for(unsigned i=0;i<ncoord;i++)
-    {
-     if(s[i] > this->s_max()) {s[i] = this->s_max();}
-     if(s[i] < this->s_min()) {s[i] = this->s_min();}
-    }
-  }
 
  /// \short How many items of Data does the shape of the object depend on?
  /// None! We're dealing with a pure geometric FiniteElement!
@@ -397,6 +129,27 @@ public:
     // Dummy return
     return 0;
   }
+
+ /// Override fill in contribution to jacobian, nothing should be done
+ void fill_in_contribution_to_jacobian(Vector<double> &residuals,
+                                       DenseMatrix<double> &jacobian) 
+  {
+   std::ostringstream warn_message;
+   warn_message
+    << "Warning: You have just called the empty function \n"
+    << 
+    "fill_in_contribution_to_jacobian() for a FaceElementAsGeometricObject.\n"
+    << 
+    "These Elements should only be used to setup interactions, so should\n"
+    << 
+    "not be included in any jacobian calculations\n";
+   
+   OomphLibWarning(
+    warn_message.str(),
+    "FaceElementAsGeometricObject::fill_in_contribution_to_jacobian()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+
 
  /// Unique final overrider needed for assign_all_generic_local_eqn_numbers
  void assign_all_generic_local_eqn_numbers()

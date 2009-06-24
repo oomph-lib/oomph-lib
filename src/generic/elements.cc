@@ -32,12 +32,10 @@
 #include "timesteppers.h"
 #include "integral.h"
 #include "shape.h"
-#include "geom_objects.h"
+//#include "geom_objects.h"
 
 namespace oomph
 {
-
-
 
 /// Static boolean to suppress warnings about repeated internal
 /// data. Defaults to false
@@ -925,11 +923,36 @@ DenseMatrix<double> GeneralisedElement::Dummy_matrix;
   else {return 1;}
  }
 
+
+//======================================================================
+/// Helper namespace for tolerances, number of iterations, etc
+/// used in the locate_zeta function in FiniteElement
+//======================================================================
+namespace Locate_zeta_helpers
+{
+ /// Convergence tolerance for the newton solver
+ double Newton_tolerance = 1.0e-7;	
+ 
+ /// Maximum number of newton iterations
+ unsigned Max_newton_iterations = 10;
+ 
+ /// Rounding tolerance for whether coordinate is in element or not
+ double Rounding_tolerance = 1.0e-12;
+
+ /// Number of points along one dimension of each element used
+ /// to create coordinates within the element in order to see
+ /// which has the smallest initial residual (and is therefore used
+ /// as the initial guess in the Newton method when locating coordinate)
+ unsigned N_local_points = 2;
+}
+
+
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 //  Functions for finite elements
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
+
 
 
 //========================================================================
@@ -3019,6 +3042,395 @@ void FiniteElement::get_dresidual_dnodal_coordinates(
    }
  }
 
+//============================================================================
+/// Calculate the interpolated value of zeta, the intrinsic coordinate
+/// of the element when viewed as a compound geometric object within a Mesh
+/// as a function of the local coordinate of the element, s.
+///  The default 
+/// assumption is the zeta is interpolated using the shape functions of
+/// the element with the values given by zeta_nodal().
+/// A MacroElement representation of the intrinsic coordinate parametrised
+/// by the local coordinate s is used if available. 
+/// Choosing the MacroElement representation of zeta (Eulerian x by default)
+/// allows a correspondence to be established between elements on different
+/// Meshes covering the same curvilinear domain in cases where one element
+/// is much coarser than the other.
+//==========================================================================
+ void FiniteElement::interpolated_zeta(const Vector<double> &s,  
+                                       Vector<double> &zeta) const       
+{
+ //If there is a macro element use it
+ if(Macro_elem_pt!=0) {this->get_x_from_macro_element(s,zeta);}
+ //Otherwise interpolate zeta_nodal using the shape functions
+ else
+  {
+   //Find the number of nodes
+   const unsigned n_node = this->nnode();
+   //Find the number of positional types
+   const unsigned n_position_type = this->nnodal_position_type();
+   //Storage for the shape functions
+   Shape psi(n_node,n_position_type);
+   //Get the values of the shape functions at the local coordinate s
+   this->shape(s,psi);
+   
+   //Find the number of coordinates
+   const unsigned ncoord = this->dim();
+   //Initialise the value of zeta to zero
+   for(unsigned i=0;i<ncoord;i++) {zeta[i] = 0.0;}
+
+   //Add the contributions from each nodal dof to the interpolated value
+   //of zeta.
+   for(unsigned l=0;l<n_node;l++)
+    {
+     for(unsigned k=0;k<n_position_type;k++)
+      {
+       //Locally cache the value of the shape function
+       const double psi_ = psi(l,k);
+       for(unsigned i=0;i<ncoord;i++)
+        {
+         zeta[i] += this->zeta_nodal(l,k,i)*psi_;
+        }
+      }
+    }
+  }
+}
+
+//==========================================================================
+/// For a given value of zeta, the "global" intrinsic coordinate of
+/// a mesh of FiniteElements represented as a compound geometric object,
+/// find the local coordinate in this element that corresponds to the 
+/// requested value of zeta. 
+/// This is achieved in generality by using Newton's method to find the value 
+/// of the local coordinate, s, such that
+/// interpolated_zeta(s) is equal to the requested value of zeta.
+/// If zeta cannot be located in this element, geom_object_pt is set
+/// to NULL. If zeta is located in this element, we return its "this"
+/// pointer.
+//=========================================================================
+void FiniteElement::locate_zeta(const Vector<double> &zeta,
+                    GeomObject*& geom_object_pt, Vector<double> &s)
+    {
+     using namespace Locate_zeta_helpers;
+
+     //Find the number of coordinates, the dimension of the element
+     //This must be the same for the local and intrinsic global coordinate
+     unsigned ncoord = this->dim();
+
+     //Assign storage for the vector and matrix used in Newton's method
+     Vector<double> dx(ncoord,0.0);
+     DenseDoubleMatrix jacobian(ncoord,ncoord,0.0);
+
+     // Make a list of (equally-spaced) local coordinates inside the element
+     unsigned n_list=N_local_points; // see namespace Locate_zeta_helpers
+     double list_space=(1.0/(double(n_list)-1.0))*(s_max()-s_min());
+     Vector<Vector<double> > s_list;
+
+     if(Macro_elem_pt==0)
+      {
+       for(unsigned i=0;i<ncoord;i++)
+        {
+         s[i] = 0.5*(s_max()+s_min());
+        }
+      }
+     else
+      {
+       if (ncoord==1)
+        {
+         for (unsigned i=0;i<n_list;i++)
+          {
+           Vector<double> s_c(ncoord);
+           s_c[0]=s_min()+(double(i)*list_space);
+           s_list.push_back(s_c);
+          }
+        }
+       else if (ncoord==2)
+        {
+         for (unsigned i=0;i<n_list;i++)
+          {
+           for (unsigned j=0;j<n_list;j++)
+            {
+             Vector<double> s_c(ncoord);
+             s_c[0]=s_min()+(double(i)*list_space);
+             s_c[1]=s_min()+(double(j)*list_space);
+             s_list.push_back(s_c);
+            }
+          }
+        }
+       else if (ncoord==3)
+        {
+         for (unsigned i=0;i<n_list;i++)
+          {
+           for (unsigned j=0;j<n_list;j++)
+            {
+             for (unsigned k=0;k<n_list;k++)
+              {
+               Vector<double> s_c(ncoord);
+               s_c[0]=s_min()+(double(i)*list_space);
+               s_c[1]=s_min()+(double(j)*list_space);
+               s_c[2]=s_min()+(double(k)*list_space);
+               s_list.push_back(s_c);
+              }
+            }
+          }
+        }
+       else
+        {
+         // Shouldn't get in here...
+         std::ostringstream error_stream;
+         error_stream << "Element dimension is not equal to 1, 2 or 3 - why?\n";
+         throw OomphLibError(error_stream.str(),
+                             "FiniteElement::locate_zeta()",
+                             OOMPH_EXCEPTION_LOCATION);
+        }
+      }
+   
+     //Counter for the number of Newton steps
+     unsigned count=0;
+
+     //Control flag for the Newton loop
+     bool keep_going=true;
+   
+     //Storage for the interpolated value of x
+     Vector<double> inter_x(ncoord);
+   
+     if (macro_elem_pt()==0)
+      {
+       //Get the value of x at the initial guess
+       this->interpolated_zeta(s,inter_x);
+   
+       //Set up the residuals
+       for(unsigned i=0;i<ncoord;i++) {dx[i] = zeta[i] - inter_x[i];}
+      }
+     else
+      {
+       // Find the smallest residual from the list of coordinates made earlier
+       double my_min_resid=10e8;
+       Vector<double> s_local(ncoord);
+       Vector<double> work_x(ncoord);
+       Vector<double> work_dx(ncoord);
+
+       unsigned n_list_coord=s_list.size();
+
+       for (unsigned i_coord=0; i_coord<n_list_coord; i_coord++)
+        {
+         for (unsigned i=0;i<ncoord;i++)
+          {
+           s_local[i]=s_list[i_coord][i];
+          }
+         // get_x for this coordinate
+         this->interpolated_zeta(s_local,work_x);
+
+         // calculate residuals
+         for(unsigned i=0;i<ncoord;i++)
+          {
+           work_dx[i] = zeta[i] - work_x[i];
+          }
+
+         double maxres =
+          std::abs(*std::max_element(work_dx.begin(),work_dx.end(),
+                                     AbsCmp<double>()));
+
+         // test against previous residuals
+         if (maxres<my_min_resid)
+          {
+           my_min_resid=maxres;
+           dx=work_dx;
+           inter_x=work_x;
+           s=s_local;
+          }
+
+        }
+
+      }
+
+     //Main Newton Loop
+     do    // start of do while loop
+      {
+       //Increase loop counter
+       count++;
+
+       //Bail out if necessary (without an error for now...)
+       if(count > Max_newton_iterations)
+        {
+         keep_going=false;
+         continue;
+        }
+	     
+       //If it's the first time round the loop, check the initial residuals
+       if(count==1)
+        {
+         double maxres =
+          std::abs(*std::max_element(dx.begin(),dx.end(),AbsCmp<double>()));
+
+         //If it's small enough exit
+         if(maxres < Newton_tolerance)
+          {
+           keep_going=false;
+           continue;
+          }
+        }
+
+       //Is there a macro element? If so, assemble the Jacobian by FD-ing
+       if (macro_elem_pt()!=0)
+        {
+         // Assemble jacobian on the fly by finite differencing
+         Vector<double> work_s=s;
+         Vector<double> r=inter_x; // i.e. the result of previous call to get_x
+
+         // Finite difference step
+         double fd_step=GeneralisedElement::Default_fd_jacobian_step;
+
+         // Storage for calculated r from incremented s
+         Vector<double> work_r(ncoord,0.0);
+
+         // Loop over s coordinates
+         for (unsigned i=0; i<ncoord; i++)
+          {
+           // Increment work_s by a small amount
+           work_s[i]+=fd_step;
+
+           // Calculate work_r from macro element
+           this->interpolated_zeta(work_s,work_r);
+
+           // Loop over r to fill Jacobian
+           for (unsigned j=0; j<ncoord; j++)
+            {
+             jacobian(j,i)=-(work_r[j]-r[j])/fd_step;
+            }
+         
+           // Reset work_s
+           work_s[i]=s[i];
+
+          }
+
+        }
+       else // no macro element, so compute Jacobian with shape functions etc.
+        {
+         //Compute the entries of the Jacobian matrix
+         unsigned n_node = this->nnode();
+         unsigned n_position_type = this->nnodal_position_type();
+         Shape psi(n_node,n_position_type);
+         DShape dpsids(n_node,n_position_type,ncoord);
+
+         //Get the local shape functions and their derivatives
+         dshape_local(s,psi,dpsids);
+     
+         //Calculate the values of dxds
+         DenseMatrix<double> interpolated_dxds(ncoord,ncoord,0.0);
+
+         //This implementation will only work for n_position_type=1
+         //since the function nodal_position_gen does not yet exist
+#ifdef PARANOID
+         if (n_position_type!=1)
+          {
+           std::ostringstream error_stream;
+           error_stream << "This implementation does not exist yet;\n"
+                        << "it currently uses raw_nodal_position_gen\n"
+                        << "which does not take hangingness into account\n"
+                        << "It will work if n_position_type=1\n";
+           throw OomphLibError(error_stream.str(),
+                               "FiniteElement::locate_zeta()",
+                               OOMPH_EXCEPTION_LOCATION);
+          }
+#endif
+
+         // Loop over the nodes
+         for(unsigned l=0;l<n_node;l++)
+          {
+           // Loop over position type even though it should be 1 - the
+           // functionality for n_position_type>1 will exist in the future
+           for(unsigned k=0;k<n_position_type;k++)
+            {
+             // Add the contribution from the nodal coordinates to the matrix
+             for(unsigned i=0;i<ncoord;i++)
+              {
+               for(unsigned j=0;j<ncoord;j++)
+                {
+                 interpolated_dxds(i,j) +=
+                  this->zeta_nodal(l,k,i)*dpsids(l,k,j);
+                }
+              }
+            }
+          }
+
+         //The entries of the Jacobian matrix are merely dresiduals/ds
+         //i.e. - dx/ds
+         for(unsigned i=0;i<ncoord;i++)
+          {
+           for(unsigned j=0;j<ncoord;j++)
+            {
+             jacobian(i,j) = - interpolated_dxds(i,j);
+            }
+          }
+
+        }
+
+       //Now solve the damn thing
+       try
+        {
+         jacobian.solve(dx);
+        }
+       catch(OomphLibError &error)
+        {
+         oomph_info << "Error in linear solve for "
+                    << "FiniteElement::locate_zeta"
+                    << std::endl;
+         oomph_info << "Should not affect the result!" << std::endl;
+        }
+
+       //Add the correction to the local coordinates
+       for(unsigned i=0;i<ncoord;i++) {s[i] -= dx[i];}
+     
+       //Get the new residuals
+       this->interpolated_zeta(s,inter_x);
+       for(unsigned i=0;i<ncoord;i++) {dx[i] = zeta[i] - inter_x[i];}
+     
+       //Get the maximum residuals
+       double maxres =
+        std::abs(*std::max_element(dx.begin(),dx.end(),AbsCmp<double>()));
+       //If we have converged jump straight to the test at the end of the loop
+
+       if(maxres < Newton_tolerance)
+        {
+         keep_going=false;
+         continue;
+        }
+      }
+     while(keep_going);
+
+
+     //Test that the solution is within the element
+     for(unsigned i=0;i<ncoord;i++)
+      {
+       // We're outside -- return the null pointer for the geom object
+       if((s[i] - s_max() >  Rounding_tolerance) ||
+          (s_min() - s[i] >  Rounding_tolerance))
+        {
+         geom_object_pt=0;
+         return;
+        }
+      }
+
+     // It is also possible now that it may not have converged "correctly", 
+     // i.e. count is greater than Max_newton_iterations
+     if (count > Max_newton_iterations)
+      {
+       // Don't trust the current answer, return null
+       geom_object_pt=0;
+       return;
+      }
+
+     //Otherwise the required point is located in "this" element:
+     geom_object_pt = this;
+   
+     //If we're over the limit by less than the rounding error, adjust
+     for(unsigned i=0;i<ncoord;i++)
+      {
+       if(s[i] > s_max()) {s[i] = s_max();}
+       if(s[i] < s_min()) {s[i] = s_min();}
+      }
+    }
+
 
 //=======================================================================
 /// Loop over all nodes in the element and update their positions
@@ -3029,6 +3441,60 @@ void FiniteElement::get_dresidual_dnodal_coordinates(
   const unsigned n_node = nnode();
   for(unsigned n=0;n<n_node;n++) {node_pt(n)->node_update();}
  }
+
+//======================================================================
+/// The purpose of this function is to identify all possible
+/// Data that can affect the fields interpolated by the FiniteElement.
+/// The information will typically be used in interaction problems in
+/// which the FiniteElement provides a forcing term for an 
+/// ElementWithExternalElement. The Data must be provided as 
+/// \c paired_load data containing
+///  - the pointer to a Data object
+/// and
+/// - the index of the value in that Data object
+/// .
+/// The generic implementation (should be overloaded in more specific
+/// applications) is to include all nodal and internal Data stored in
+/// the FiniteElement. Note that the geometric data, 
+/// which includes the positions
+/// of SolidNodes, is treated separately by the function 
+/// \c identify_geometric_data()
+//======================================================================
+void FiniteElement::identify_field_data_for_interactions(
+ std::set<std::pair<Data*,unsigned> > &paired_field_data)
+{
+ //Loop over all internal data
+ const unsigned n_internal = this->ninternal_data();
+ for(unsigned n=0;n<n_internal;n++)
+  {
+   //Cache the data pointer
+   Data* const dat_pt = this->internal_data_pt(n);
+   //Find the number of data values stored in the data object
+   const unsigned n_value = dat_pt->nvalue();
+   //Add the index of each data value and the pointer to the set
+   //of pairs
+   for(unsigned i=0;i<n_value;i++)
+    {
+     paired_field_data.insert(std::make_pair(dat_pt,i));
+    }
+  }
+
+ //Loop over all the nodes
+ const unsigned n_node = this->nnode();
+ for(unsigned n=0;n<n_node;n++)
+  {
+   //Cache the node pointer
+   Node* const nod_pt = this->node_pt(n);
+   //Find the number of values stored at the node
+   const unsigned n_value = nod_pt->nvalue();
+   //Add the index of each data value and the pointer to the set
+   //of pairs
+   for(unsigned i=0;i<n_value;i++) 
+    {
+     paired_field_data.insert(std::make_pair(nod_pt,i));
+    }
+  }
+}
 
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
@@ -4126,6 +4592,9 @@ void FaceElement::get_local_coordinate_in_bulk(
           // Perform any auxialiary node updates
           node_pt(n)->perform_auxiliary_node_update_fct();
 
+          // Update any other slaved variables
+          update_in_solid_position_fd(n);
+
           //Calculate the new residuals
           get_residuals(newres);
          
@@ -4159,8 +4628,12 @@ void FaceElement::get_local_coordinate_in_bulk(
           //Reset the (generalised) Eulerian nodal position
           *value_pt = old_var;
 
+
           // Perform any auxialiary node updates
           node_pt(n)->perform_auxiliary_node_update_fct();
+          
+          // Reset any other slaved variables
+          reset_in_solid_position_fd(n);
          }
        }
      }
@@ -4481,7 +4954,7 @@ void SolidFiniteElement::fill_in_generic_jacobian_for_solid_ic(
    // Get initial condition
    Vector<double> drdt_ic(nodal_dim);
    Solid_ic_pt->geom_object_pt()->
-    drdt(xi,Solid_ic_pt->ic_time_deriv(),drdt_ic);
+    dpositiondt(xi,Solid_ic_pt->ic_time_deriv(),drdt_ic);
    
    // Weak form of assignment of initial guess
    

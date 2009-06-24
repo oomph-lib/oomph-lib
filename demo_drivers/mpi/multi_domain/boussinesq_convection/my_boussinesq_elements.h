@@ -69,13 +69,12 @@ public:
   {
    Ra_pt = &Default_Physical_Constant_Value;
 
-   // Setup the storage for the interaction between elements
-   unsigned n_interaction=1;
-   unsigned nint_pt=integral_pt()->nweight();
-   // The dimension of the source element is the same as this element
-   unsigned n_dim_source=ndim();
+   //There is one interaction
+   this->set_ninteraction(1);
 
-   initialise_external_element_storage(n_interaction,nint_pt,n_dim_source);
+   //We do not need to add any external geometric data because the
+   //element is fixed
+   this->ignore_external_geometric_data();
   } 
 
  ///\short The required number of values stored at the nodes is the number of
@@ -199,13 +198,6 @@ public:
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
                     double& error, double& norm)
   {FiniteElement::compute_error(outfile,exact_soln_pt,error,norm);}
-
- /// \short global position vector at local s (return interpolated_x)
- void position(const Vector<double>& s, Vector<double>& r) const
-  {
-   // Get the position vector using interpolated_x
-   interpolated_x(s,r);
-  }
 
  // Overload get_body_force_nst to get the temperature "body force"
  // from the "source" AdvectionDiffusion element via current integration point
@@ -396,17 +388,6 @@ public:
     }
   }
 
- /// \short Overload assign_all_generic_local_equation_numbers to
- ///        strip out external data and add back unique data
- void assign_all_generic_local_eqn_numbers()
-  {
-   //External data may not be distinct from nodal data depending upon
-   //the source element, so call helper to remove non-unique external data
-   assign_unique_external_data_helper();
-   //Now call the refineable element equation num. (int, ext, nodal)
-   RefineableElement::assign_all_generic_local_eqn_numbers();
-  }
-
 };
 
 //======================class definitions==============================
@@ -414,7 +395,7 @@ public:
 /// ElementWithExternalElement so that it can "communicate" with the 
 /// MyNavierStokesElement
 //=====================================================================
-template<unsigned DIM> // second templated argument?
+template<unsigned DIM>
 class RefineableQAdvectionDiffusionElementWithExternalElement : 
  public virtual RefineableQAdvectionDiffusionElement<DIM,3>,
  public virtual ElementWithExternalElement
@@ -426,13 +407,12 @@ public:
  RefineableQAdvectionDiffusionElementWithExternalElement() : 
   RefineableQAdvectionDiffusionElement<DIM,3>(), ElementWithExternalElement()
   { 
-   // Setup the storage for the interaction between elements
-   unsigned n_interaction=1;
-   unsigned nint_pt=integral_pt()->nweight();
-   // The dimension of the source element is the same as this element
-   unsigned n_dim_source=ndim();
+   //There is one interaction
+   this->set_ninteraction(1);
 
-   initialise_external_element_storage(n_interaction,nint_pt,n_dim_source);
+   //We do not need to add any external geometric data because the
+   //element is fixed
+   this->ignore_external_geometric_data();
   }
 
  ///\short The required number of values stored at the nodes is the number of
@@ -543,13 +523,6 @@ public:
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
                     double& error, double& norm)
   {FiniteElement::compute_error(outfile,exact_soln_pt,error,norm);}
-
-  /// \short global position vector at local s (return interpolated_x)
- void position(const Vector<double>& s, Vector<double>& r) const
-  {
-   // Get the position vector using interpolated_x
-   interpolated_x(s,r);
-  }
 
  /// \short Overload the wind function in the advection-diffusion equations.
  /// This provides the coupling from the Navier--Stokes equations to the
@@ -754,24 +727,12 @@ public:
     }
   }
 
-
- /// \short Overload assign_all_generic_local_equation_numbers to
- ///        strip out external data and add back unique data
- void assign_all_generic_local_eqn_numbers()
-  {
-   //External data may not be distinct from nodal data depending upon
-   //the source element, so call helper to remove non-unique external data
-   assign_unique_external_data_helper();
-   //Now call the refineable element equation num. (int, ext, nodal)
-   RefineableElement::assign_all_generic_local_eqn_numbers();
-  }
-
 };
 
-//======================start_of_get_body_force_nst========================
-/// \short Overload get_body_force_nst to get the temperature "body force"
-/// from the "source" AdvectionDiffusion element via current integration point
-//=========================================================================
+//======================start_of_get_body_force_nst============================
+// Overload get_body_force_nst to get the temperature "body force"
+// from the "source" AdvectionDiffusion element via current integration point
+//=============================================================================
 template<unsigned DIM>
 void RefineableQCrouzeixRaviartElementWithExternalElement<DIM>::
 get_body_force_nst
@@ -796,7 +757,7 @@ get_body_force_nst
    result[i] = -gravity[i]*source_el_pt->interpolated_u_adv_diff
     (external_element_local_coord(interaction,ipt))*ra();
   }
-} // end of get_body_force_nst
+} //end of get_body_force_nst
 
 //=========================================================================
 /// Fill in the derivatives of the body force with respect to the external
@@ -844,7 +805,7 @@ get_dbody_force_nst_dexternal_element_data(const unsigned &ipt,
 
 
 
-//=================start_of_get_wind_adv_diff===============================
+//==========================start_of_get_wind_adv_diff====================
 /// \short Overload the wind function in the advection-diffusion equations.
 /// This provides the coupling from the Navier--Stokes equations to the
 /// advection-diffusion equations because the wind is the fluid velocity,
@@ -867,7 +828,7 @@ get_wind_adv_diff
  //The wind function is simply the velocity at the points of the source element
  source_el_pt->interpolated_u_nst
   (external_element_local_coord(interaction,ipt),wind);
-} // end of get_wind_adv_diff
+}  //end of get_wind_adv_diff
 
 
 

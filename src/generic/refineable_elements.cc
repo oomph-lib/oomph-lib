@@ -497,6 +497,74 @@ namespace oomph
    } //End of if nodes
  }
 
+ //======================================================================
+ /// The purpose of this function is to identify all possible
+ /// Data that can affect the fields interpolated by the FiniteElement.
+ /// This must be overloaded to include data from any hanging nodes 
+ /// correctly
+ //======================================================================= 
+void RefineableElement::identify_field_data_for_interactions(
+  std::set<std::pair<Data*,unsigned> > &paired_field_data)
+{
+ //Loop over all internal data
+ const unsigned n_internal = this->ninternal_data();
+ for(unsigned n=0;n<n_internal;n++)
+  {
+   //Cache the data pointer
+   Data* const dat_pt = this->internal_data_pt(n);
+   //Find the number of data values stored in the data object
+   const unsigned n_value = dat_pt->nvalue();
+   //Add the index of each data value and the pointer to the set
+   //of pairs
+   for(unsigned i=0;i<n_value;i++)
+    {
+     paired_field_data.insert(std::make_pair(dat_pt,i));
+    }
+  }
+
+ //Loop over all the nodes
+ const unsigned n_node = this->nnode();
+ for(unsigned n=0;n<n_node;n++)
+  {
+   //Cache the node pointer
+   Node* const nod_pt = this->node_pt(n);
+   //Find the number of values stored at the node
+   const unsigned n_value = nod_pt->nvalue();
+ 
+   //Loop over the number of values
+   for(unsigned i=0;i<n_value;i++)
+    {
+     //If the node is hanging in the variable
+     if(nod_pt->is_hanging(i))
+      {
+       //Cache the pointer to the HangInfo object for this variable
+       HangInfo* const hang_pt = nod_pt->hanging_pt(i);
+       //Get number of master nodes
+       const unsigned nmaster = hang_pt->nmaster();
+       
+       // Loop over masters
+       for(unsigned m=0;m<nmaster;m++)
+        {
+         //Cache the pointer to the master node
+         Node* const master_nod_pt=hang_pt->master_node_pt(m);
+       
+         //Under the assumption that the same data value is interpolated
+         //by the hanging nodes, which it really must be
+         //Add it to the paired field data
+         paired_field_data.insert(std::make_pair(master_nod_pt,i));
+        }
+      }
+     //Otherwise the node is not hanging in the variable, treat as normal
+     else
+      {
+       //Add the index of each data value and the pointer to the set
+       //of pairs
+       paired_field_data.insert(std::make_pair(nod_pt,i));
+      }
+    }
+  }
+}
+
 
 
 //==========================================================================
@@ -1111,7 +1179,11 @@ namespace oomph
 
             // Perform any auxialiary node updates
             local_node_pt->perform_auxiliary_node_update_fct();
-            
+         
+            // Update any other slaved variables
+            update_in_solid_position_fd(l);
+          
+   
             //Calculate the new residuals
             get_residuals(newres);
        
@@ -1147,7 +1219,9 @@ namespace oomph
 
             // Perform any auxialiary node updates
             local_node_pt->perform_auxiliary_node_update_fct();
-            
+
+            // Reset any other slaved variables
+            reset_in_solid_position_fd(l);
            }
          }
        }
@@ -1189,7 +1263,10 @@ namespace oomph
 
               // Perform any auxialiary node updates
               master_node_pt->perform_auxiliary_node_update_fct();
-             
+            
+              // Update any slaved variables
+              update_in_solid_position_fd(l);
+ 
               //Calculate the new residuals
               get_residuals(newres);
              
@@ -1226,7 +1303,9 @@ namespace oomph
 
               // Perform any auxialiary node updates
               master_node_pt->perform_auxiliary_node_update_fct();
-
+              
+              // Reset any other slaved variables
+              reset_in_solid_position_fd(l);
              }
            }
          }

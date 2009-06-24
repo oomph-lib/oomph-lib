@@ -39,27 +39,6 @@ namespace oomph
 {
 
 //======================================================================
-/// Helper namespace for the locate zeta tolerances
-//======================================================================
-namespace Locate_zeta_helpers
-{
- /// Convergence tolerance for the newton solver
- double Newton_tolerance = 1.0e-7;	
- 
- /// Maximum number of newton iterations
- unsigned Max_newton_iterations = 10;
- 
- /// Rounding tolerance for whether coordinate is in element or not
- double Rounding_tolerance = 1.0e-12;
-
- /// Number of points along one dimension of each element used
- /// to create coordinates within the element in order to see
- /// which has the smallest initial residual (and is therefore used
- /// as the initial guess in the Newton method when locating coordinate)
- unsigned N_local_points = 2;
-}
-
-//======================================================================
 // Namespace for "global" multi-domain functions
 //======================================================================
 namespace Multi_domain_functions

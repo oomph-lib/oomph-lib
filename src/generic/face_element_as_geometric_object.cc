@@ -27,27 +27,3 @@
 //LIC//====================================================================
 //Non-inline member functions for the element viewed as a geometric object
 //class
-
-//oomph-lib header
-// #include "face_element_as_geometric_object.h"
-
-// namespace oomph
-// {
-
-// //======================================================================
-// /// Helper namespace for the locate zeta tolerances
-// ///
-// //======================================================================
-// namespace Locate_zeta_helpers
-// {
-//  /// Convergence tolerance for the newton solver
-//  double Newton_tolerance = 1.0e-7;	
- 
-//  /// Maximum number of newton iterations
-//  unsigned Max_newton_iterations = 10;
- 
-//  /// Rounding tolerance for whether coordinate is in element or not
-//  double Rounding_tolerance = 1.0e-12;
-// }
-
-// }

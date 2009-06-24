@@ -466,15 +466,16 @@ required for such computations is provided in the virtual base class
 
 \code
 class FSIWallElement : public virtual SolidFiniteElement, 
-                       public virtual GeomObject
+                       public virtual ElementWithExternalElement
 \endcode
 
-By inheriting from the \c GeomObject base class, we insist
-that each specific \c FSIWallElement provides an implementation of the
-\c GeomObject::position(...) function.This is  typically done by
-regarding the element's local coordinate as the intrinisic
-coordinate that parametrises its shape. Thus we provide a standard 
-interface via which an \c FSIWallElement can be used to parametrise 
+The \c FiniteElement class inherits from \c GeomObject and by
+default the \c GeomObject::position(...) function calls the function \c
+FiniteElement::interpolate_x(..); in other words,
+the element's local coordinate is
+regarded as the intrinisic
+coordinate that parametrises its shape. Thus we already have a standard 
+interface through which an \c FSIWallElement can be used to parametrise 
 the shape of (part of) the domain boundary. \n\n
 
 By inheriting from the \c SolidFiniteElement class,
@@ -483,8 +484,16 @@ by the positional \c Data stored at its constituent \c SolidNodes. Recall that
 this information is required during the computation of the shape 
 derivatives of the fluid equations.
 
-The various lookup schemes required to determine which fluid elements
-are adjacent to a given Gauss point in an \c FSIWallElement, etc. 
+The \c ElementWithExternalElement class provides the generic storage and helper
+functions required to keep track of the external elements that are
+adjacent to Gauss points in any \c FiniteElement, see also the
+tutorial on <a
+href="../../../multi_physics/multi_domain_ref_b_convect/html/index.html">
+Boussinesq convection with a multi-domain approach. </a>
+In the \c
+FSIWallElement, it is the fluid elements that load the structure which
+are adjacent to the Gauss points.
+The various lookup schemes required to determine these fluid elements
 may be generated completely automatically by the helper function
 
 \code

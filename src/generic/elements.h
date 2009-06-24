@@ -42,6 +42,7 @@
 //oomph-lib includes
 #include "integral.h"
 #include "nodes.h"
+#include "geom_objects.h"
 
 namespace oomph
 {
@@ -219,8 +220,10 @@ class GeneralisedElement
  /// \short Assign the local equation numbers for the internal 
  /// and external Data
  /// This must be called after the global equation numbers have all been
- /// assigned
- void assign_internal_and_external_local_eqn_numbers();
+ /// assigned. It is virtual so that it can be overloaded by
+ /// ElementWithExternalElements so that any external data from the
+ /// external elements in included in the numbering scheme.
+ virtual void assign_internal_and_external_local_eqn_numbers();
 
  /// \short Assign all the local equation numbering schemes that can
  /// be applied generically for the element. In most cases, this is the
@@ -896,6 +899,28 @@ class Shape;
 class DShape;
 class Integral;
 
+//===========================================================================
+/// \short Helper namespace for tolerances and iterations within the Newton
+/// method used in the locate_zeta function in FiniteElements.
+//===========================================================================
+namespace Locate_zeta_helpers
+{
+ /// Convergence tolerance for the Newton solver
+ extern double Newton_tolerance;
+
+ /// Maximum number of Newton iterations
+ extern unsigned Max_newton_iterations;
+ 
+ /// Rounding tolerance for whether coordinate is in element or not
+ extern double Rounding_tolerance;
+
+ /// Number of points along one dimension of each element used
+ /// to create coordinates within the element in order to see
+ /// which has the smallest initial residual (and is therefore used
+ /// as the initial guess in the Newton method for locate_zeta)
+ extern unsigned N_local_points;
+}
+
 
 //========================================================================
 /// \short A general Finite Element class.
@@ -913,7 +938,7 @@ class Integral;
 /// element's Jacobian matrix and/or the Vector of residuals 
 /// (inherited from GeneralisedElement) plus various output routines. 
 //========================================================================
-class FiniteElement : public virtual GeneralisedElement
+class FiniteElement : public virtual GeneralisedElement, public GeomObject
 {
   private:
 
@@ -990,7 +1015,7 @@ class FiniteElement : public virtual GeneralisedElement
  /// the dimension of the nodes to be the same as the dimension of the
  /// element.
  void set_dimension(const unsigned &dim)
-  {Elemental_dimension = dim; Nodal_dimension = dim; }
+  {Elemental_dimension = dim; Nodal_dimension = dim;}
  
   public:
 
@@ -1372,31 +1397,69 @@ public:
 
  /// \short Global coordinates as function of local coordinates.
  /// Either via FE representation or via macro-element (if Macro_elem_pt!=0)
- /// (Broken virtual -- overload in specific geometric element class
- /// if you want to use this functionality.)
- virtual void get_x(const Vector<double>& s, Vector<double>& x) const
+ void get_x(const Vector<double> &s, Vector<double> &x) const
   {
-   throw OomphLibError(
-    "get_x(...) is not implemented for this element\n",
-    "FiniteElement::get_x()",
-    OOMPH_EXCEPTION_LOCATION);
+   //If there is no macro element then return interpolated x
+   if(Macro_elem_pt==0) {interpolated_x(s,x);}
+   //Otherwise call the macro element representation
+   else {get_x_from_macro_element(s,x);}
   }
+
 
  /// \short Global coordinates as function of local coordinates
  /// at previous time "level" t (t=0: present; t>0: previous).
  /// Either via FE representation of QElement or
  /// via macro-element (if Macro_elem_pt!=0).
- /// (Broken virtual -- overload in specific geometric element class
- /// if you want to use this functionality.)
- virtual void get_x(const unsigned& t, const Vector<double>& s, 
-                    Vector<double>& x)
+ void get_x(const unsigned &t, const Vector<double> &s, 
+            Vector<double> &x)
+  {
+   // Get timestepper from first node
+   TimeStepper* time_stepper_pt=node_pt(0)->time_stepper_pt();
+   
+   // Number of previous values
+   const unsigned nprev=time_stepper_pt->nprev_values();
+
+   // If t > nprev_values(), we're not dealing with a previous value
+   // but a generalised history value -- this cannot be recovered from
+   // macro element but must be determined by finite element interpolation
+
+   //If there is no macro element, or we're dealing with a generalised
+   //history value then use the FE representation
+   if((Macro_elem_pt==0)||(t>nprev)) {interpolated_x(t,s,x);}
+   //Otherwise use the macro element representation
+   else {get_x_from_macro_element(t,s,x);}
+  }
+
+
+ /// \short Global coordinates as function of local coordinates
+ /// using macro element representation. 
+ /// (Broken virtual --- this  must be overloaded in specific geometric
+ /// element classes)
+ virtual void get_x_from_macro_element(const Vector<double>& s, 
+                                       Vector<double>& x) const
   {
    throw OomphLibError(
-    "get_x(...) is not implemented for this element\n",
-    "FiniteElement::get_x()",
+    "get_x_from_macro_element(...) is not implemented for this element\n",
+    "FiniteElement::get_x_from_macro_element()",
     OOMPH_EXCEPTION_LOCATION);
   }
  
+ /// \short Global coordinates as function of local coordinates
+ /// at previous time "level" t (t=0: present; t>0: previous).
+ /// using macro element representation
+ /// (Broken virtual -- overload in specific geometric element class
+ /// if you want to use this functionality.)
+ virtual void get_x_from_macro_element(const unsigned& t, 
+                                       const Vector<double>& s, 
+                                       Vector<double>& x)
+  {
+   throw OomphLibError(
+    "get_x_from_macro_element(...) is not implemented for this element\n",
+    "FiniteElement::get_x_from_macro_element()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+
+
  ///Set the spatial integration scheme
  virtual void set_integration_scheme(Integral* const &integral_pt); 
 
@@ -1541,7 +1604,8 @@ public:
                                          DShape &d2psidx) const;
  
  /// \short Assign the local equation numbers for Data stored at the nodes
- void assign_nodal_local_eqn_numbers();
+ /// Virtual so that it can be overloaded by RefineableFiniteElements
+ virtual void assign_nodal_local_eqn_numbers();
 
  /// \short Overloaded version of the calculation of the local equation
  /// numbers. 
@@ -1912,10 +1976,111 @@ public:
                                 const unsigned &t,
                                 Vector<double>& dxdt);
  
+ /// \short A standard FiniteElement is fixed, so there are no geometric
+ /// data when viewed in its GeomObject incarnation
+ inline unsigned ngeom_data() const {return 0;}
+
+ /// \short A standard FiniteElement is fixed, so there are no geometric
+ /// data when viewed in its GeomObject incarnation
+ inline Data* geom_data_pt(const unsigned &j) {return 0;}
+
+ /// \short Return the parametrised position of the FiniteElement in 
+ /// its incarnation as a GeomObject, r(zeta). 
+ /// The position is given by the Eulerian coordinate and the intrinsic
+ /// coordinate (zeta) is the local coordinate of the element (s).
+ void position(const Vector<double>& zeta, Vector<double>& r) 
+  const {this->interpolated_x(zeta,r);}
+
+ /// \short Return the parametrised position of the FiniteElement
+ /// in its GeomObject incarnation: 
+ /// r(zeta). The position is given by the Eulerian coordinate and the
+ /// intrinsic coordinate (zeta) is the local coordinate of the element (s)
+ /// This version of the function returns the position as a function
+ /// of time t=0: current time; t>0: previous
+ /// timestep. Works for t=0 but needs to be overloaded
+ /// if genuine time-dependence is required.
+ void position(const unsigned& t, const Vector<double>& zeta, 
+               Vector<double>& r) const
+  {this->interpolated_x(t,zeta,r);}
+
+ /// \short Return the t-th time derivative of the 
+ /// parametrised position of the FiniteElement
+ /// in its GeomObject incarnation: 
+ /// \f$ \frac{d^{t} dr(zeta)}{d t^{t}} \f$. 
+ /// Call the t-th time derivative of the FE-interpolated Eulerian coordinate 
+ void dpositiondt(const Vector<double> &zeta, const unsigned &t,
+                  Vector<double>  &drdt)
+  {this->interpolated_dxdt(zeta,t,drdt);}
+   
+ /// \short Specify the values of the "global" intrinsic coordinate, zeta, 
+ /// of a compound geometric object (a mesh of elements) when 
+ /// the element is viewied as a sub-geometric object. 
+ /// The default assumption is that the element will be 
+ /// treated as a sub-geometric object in a bulk Mesh of other elements
+ /// (geometric objects). The "global" coordinate of the compound geometric
+ /// object is simply the Eulerian coordinate, x.  
+ /// The second default assumption is that the coordinate zeta will
+ /// be stored at the nodes and interpolated using the shape functions
+ /// of the element. This function returns the value of zeta stored at
+ /// local node n, where k is the type of coordinate and i is the 
+ /// coordinate direction. The function is virtual so that it can
+ /// be overloaded by different types of element: FaceElements
+ /// and SolidFiniteElements
+ virtual double zeta_nodal(const unsigned &n, const unsigned &k,           
+                           const unsigned &i) const 
+  {                                                                        
+  //By default return the value for nodal_position_gen   
+   return nodal_position_gen(n,k,i);                             
+  }     
+
+
+ /// \short Calculate the interpolated value of zeta, the intrinsic coordinate
+ /// of the element when viewed as a compound geometric object within a Mesh
+ /// as a function of the local coordinate of the element, s. The default 
+ /// assumption is the zeta is interpolated using the shape functions of
+ /// the element with the values given by zeta_nodal().
+  /// A MacroElement representation of the intrinsic coordinate parametrised
+ /// by the local coordinate s is used if available. 
+ /// Choosing the MacroElement representation of zeta (Eulerian x by default)
+ /// allows a correspondence to be established between elements on different
+ /// Meshes covering the same curvilinear domain in cases where one element
+ /// is much coarser than the other.
+ void interpolated_zeta(const Vector<double> &s,                              
+                        Vector<double> &zeta) const;       
+
+ /// \short For a given value of zeta, the "global" intrinsic coordinate of
+ /// a mesh of FiniteElements represented as a compound geometric object,
+ /// find the local coordinate in this element that corresponds to the 
+ /// requested value of zeta. 
+ /// If zeta cannot be located in this element, geom_object_pt is set
+ /// to NULL. If zeta is located in this element, we return its "this"
+ /// pointer.
+ void locate_zeta(const Vector<double> &zeta,
+                  GeomObject*& geom_object_pt, Vector<double> &s);
+
+
  /// \short Update the positions of all nodes in the element using
  /// each node update function. The default implementation may
  /// be overloaded so that more efficient versions can be written
  virtual void node_update();
+
+ /// \short The purpose of this function is to identify all possible
+ /// Data that can affect the fields interpolated by the FiniteElement.
+ /// The information will typically be used in interaction problems in
+ /// which the FiniteElement provides a forcing term for an 
+ /// ElementWithExternalElement. The Data must be provided as 
+ /// \c paired_load data containing
+ ///  - the pointer to a Data object
+ /// and
+ /// - the index of the value in that Data object
+ /// .
+ /// The generic implementation (should be overloaded in more specific
+ /// applications) is to include all nodal and internal Data stored in
+ /// the FiniteElement. The geometric data, which includes the positions
+ /// of SolidNodes, is treated separately by the function 
+ /// \c identify_geometric_data()
+ virtual void identify_field_data_for_interactions(
+  std::set<std::pair<Data*,unsigned> > &paired_field_data);
 
 
  /// \short The purpose of this
@@ -2356,6 +2521,24 @@ public:
    BrokenCopy::broken_assign("SolidFiniteElement");
   }
 
+ ///\short The number of geometric data affecting a SolidFiniteElemnet is
+ ///the same as the number of nodes (one variable position data per node)
+ inline unsigned ngeom_data() const {return nnode();}
+
+ /// \short Return pointer to the j-th Data item that the object's 
+ /// shape depends on. (Redirects to the nodes' positional Data).
+ inline Data* geom_data_pt(const unsigned& j)
+  {return static_cast<SolidNode*>(node_pt(j))->variable_position_pt();}
+
+ /// \short In a SolidFiniteElement, the "global" intrinsic coordinate
+ /// of the element when viewed as part of a compound geometric
+ /// object (a Mesh) is, by default, the Lagrangian coordinate
+ /// Note the assumption here is that we are always using isoparameteric
+ /// elements in which the lagrangian coordinate is interpolated by the
+ /// same shape functions as the eulerian coordinate.
+ inline double zeta_nodal(const unsigned &n, const unsigned &k,           
+                          const unsigned &i) const 
+  {return lagrangian_position_gen(n,k,i);}     
 
  /// \short Eulerian and Lagrangian coordinates as function of the
  /// local coordinates: The Eulerian position is returned in 
@@ -2382,7 +2565,7 @@ public:
  /// \short Set pointer to MacroElement -- overloads generic version
  /// and uses the MacroElement 
  /// also as the default for the "undeformed" configuration.
- /// This assignment can/must be overwritten with 
+ /// This assignment must be overwritten with 
  /// set_undeformed_macro_elem_pt(...) if the deformation of 
  /// the solid body is driven by a deformation of the
  /// "current" Domain/MacroElement representation of it's boundary.
@@ -2732,8 +2915,6 @@ public:
 
   protected:
 
-
-
  /// \short Helper function to fill in the residuals and (if flag==1) the 
  /// Jacobian for the setup of an initial condition. The global equations are:
  /// \f[
@@ -2855,6 +3036,7 @@ public:
 
   protected:
 
+
  /// \short Overload the fill_in_contribution_to_jacobian() function to
  /// use finite
  /// differences to calculate the solid residuals by default
@@ -2888,6 +3070,8 @@ public:
    fill_in_jacobian_from_nodal_by_fd(full_residuals,jacobian);
   }
 
+
+
  /// \short Use finite differences to calculate the Jacobian entries
  /// corresponding to the solid positions. This version assumes
  /// that the residuals vector has already been computed
@@ -2918,7 +3102,19 @@ virtual void
  /// the solid position data. This may be overloaded to reset any slaved
  /// variables that may have changed during the finite differencing.
  virtual inline void reset_after_solid_position_fd() { }
- 
+
+ /// \short Function called within the finite difference loop for 
+ /// the solid position dat after a change in any values in the n-th 
+ ///  node.
+ virtual inline void update_in_solid_position_fd(const unsigned &i) { }
+
+ /// \short Function called within the finite difference loop for
+ /// solid position data after the values in the i-th node
+ /// are reset. The default behaviour is to call the update function.
+ virtual inline void reset_in_solid_position_fd(const unsigned &i)
+  {update_in_solid_position_fd(i);}
+
+
 private:
  
  /// \short Assemble the jacobian matrix for the mapping from local
@@ -3043,8 +3239,19 @@ class FaceElement: public virtual FiniteElement
 
  /// \short Index of the face
  int Face_index;
-
+ 
   protected:
+ 
+ /// The boundary number in the bulk mesh to which this element is attached
+ unsigned Boundary_number_in_bulk_mesh;
+ 
+#ifdef PARANOID
+ 
+ /// \short Has the Boundary_number_in_bulk_mesh been set? Only included if
+ /// compiled with PARANOID switched on.
+ bool Boundary_number_in_bulk_mesh_has_been_set;
+
+#endif
 
  /// \short Pointer to the associated higher-dimensional "bulk" element
  FiniteElement* Bulk_element_pt;
@@ -3065,11 +3272,17 @@ class FaceElement: public virtual FiniteElement
 
   public:
  
- /// Constructor: Initialise pointer to bulk element
+ /// Constructor: Initialise all appropriate member data
  FaceElement() : Face_to_bulk_coordinate_fct_pt(0), 
-  Bulk_coordinate_derivatives_fct_pt(0), Normal_sign(0), Face_index(0), 
+  Bulk_coordinate_derivatives_fct_pt(0), Normal_sign(0), Face_index(0),
+  Boundary_number_in_bulk_mesh(0),
   Bulk_element_pt(0)
   {
+   //Check whether things have been set
+#ifdef PARANOID
+   Boundary_number_in_bulk_mesh_has_been_set = false;
+#endif
+
    //Bulk_position_type[0] is always 0 (the position)
    Bulk_position_type.push_back(0);
   }
@@ -3088,6 +3301,41 @@ class FaceElement: public virtual FiniteElement
  void operator=(const FaceElement&) 
   {
    BrokenCopy::broken_assign("FaceElement");
+  }
+ 
+ /// Access function for the boundary number in bulk mesh
+ inline const unsigned& boundary_number_in_bulk_mesh() const
+  {return Boundary_number_in_bulk_mesh;}
+ 
+ 
+ /// Set function for the boundary number in bulk mesh
+ inline void set_boundary_number_in_bulk_mesh(const unsigned& b) 
+  { 
+   Boundary_number_in_bulk_mesh=b;
+#ifdef PARANOID
+   Boundary_number_in_bulk_mesh_has_been_set=true;
+#endif
+  }
+
+ /// \short In a FaceElement, the "global" intrinsic coordinate
+ /// of the element along the boundary, when viewed as part of
+ /// a compound geometric object is specified using the
+ /// boundary coordinate defined by the mesh. 
+ /// Note: Boundary coordinates will have been set up when
+ /// creating the underlying mesh, and their values will have 
+ /// been stored at the nodes.
+ double zeta_nodal(const unsigned &n, const unsigned &k, const unsigned &i)
+  const
+  {
+   //Vector in which to hold the intrinsic coordinate
+   Vector<double> zeta(this->dim());
+
+   //Get the k-th generalised boundary coordinate at node n
+   this->node_pt(n)->get_coordinates_on_boundary(
+    Boundary_number_in_bulk_mesh,k,zeta);
+   
+   //Return the individual coordinate
+   return zeta[i];
   }
 
  /// \short Return the Jacobian of mapping from local to global 
@@ -3344,6 +3592,16 @@ class SolidFaceElement: public virtual FaceElement,
 
   public:
 
+ /// \short The "global" intrinsic coordinate of the element when
+ /// viewed as part of a geometric object should be given by
+ /// the FaceElement representation, by default
+ /// This final over-ride is required because both SolidFiniteElements 
+ /// and FaceElements overload zeta_nodal
+ double zeta_nodal(const unsigned &n, const unsigned &k,           
+                          const unsigned &i) const 
+  {return FaceElement::zeta_nodal(n,k,i);}     
+
+
 
  /// \short Return i-th FE-interpolated Lagrangian coordinate xi[i] at
  /// local coordinate s. Overloaded from SolidFiniteElement. Note that
@@ -3455,6 +3713,14 @@ public:
    //also assigns nbulk_value from the required_nvalue of the bulk element
    element_pt->build_face_element(face_index,this);
   }
+
+  /// \short The "global" intrinsic coordinate of the element when
+ /// viewed as part of a geometric object should be given by
+ /// the FaceElement representation, by default
+ double zeta_nodal(const unsigned &n, const unsigned &k,           
+                          const unsigned &i) const 
+  {return FaceElement::zeta_nodal(n,k,i);}     
+
 
  /// Output nodal coordinates
  void output(std::ostream &outfile)

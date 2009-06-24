@@ -486,12 +486,48 @@ public:
 
   }
 
+
+ /// \short j-th time-derivative on object at current time: 
+ /// \f$ \frac{d^{j} r(\zeta)}{dt^j} \f$.
+ void dpositiondt(const Vector<double>& zeta, const unsigned& j, 
+                  Vector<double>& drdt)
+  {
+   switch (j)
+    {
+     // Current position
+    case 0:
+     position(zeta,drdt);
+     break;
+     
+     // Velocity:
+    case 1:
+     veloc(zeta,drdt);
+     break;
+
+     // Acceleration:
+    case 2:
+     accel(zeta,drdt);
+     break;
+
+    default:
+     std::ostringstream error_message;
+     error_message << j << "th derivative not implemented\n";
+     
+     throw OomphLibError(error_message.str(),
+                         "PseudoBucklingRing::dpositiondt()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+
+
  /// How many items of Data does the shape of the object depend on?
  unsigned ngeom_data() const {return Geom_data_pt.size();}
  
  /// \short Return pointer to the j-th Data item that the object's 
  /// shape depends on 
  Data* geom_data_pt(const unsigned& j) {return Geom_data_pt[j];}
+
+
  
 protected:
 

@@ -336,98 +336,11 @@ class FSIHermiteBeamElement : public virtual HermiteBeamElement,
  /// \short Does the normal computed by 
  /// KirchhoffLoveBeamEquations::get_normal(...) point into the fluid?
  bool &normal_points_into_fluid() {return Normal_points_into_fluid;}
-
- /// \short How many items of Data does the shape of the object depend on?
- /// Same as # of nodes.
- unsigned ngeom_data() const
-  {
-   // Geom data = variable position data with one per node
-   return nnode();
-  }
- 
- /// \short Return pointer to the j-th Data item that the object's 
- /// shape depends on. (Redirects to the nodes' positional Data).
- Data* geom_data_pt(const unsigned& j)
-  {
-   return static_cast<SolidNode*>(node_pt(j))->variable_position_pt();
-  }
- 
- /// \short Position vector at local coordinate s 
- void position(const Vector<double>& s, Vector<double>& r) const
-  {
-   // Position Vector
-   interpolated_x(s,r);
-  }
-
- /// \short Position vector at local coordinate s at discrete
- /// previous time (t=0: present time; t>0: previous time)   
- void position(const unsigned& t, const Vector<double>& s, 
-               Vector<double>& r) const
-  {
-   // Position vector at previous time level t
-   interpolated_x(t,s,r);
-  }
-
  
  /// \short Derivative of position vector w.r.t. the SolidFiniteElement's
  /// Lagrangian coordinates; evaluated at current time.
  void dposition_dlagrangian_at_local_coordinate(
   const Vector<double>& s, DenseMatrix<double> &drdxi) const;
-
-
- /// \short Derivative of position vector w.r.t. to the GeomObject's
- /// intrinsic coordinates which are identical to the SolidFiniteElement's
- /// local coordinates, so dR_i/dzeta_alpha = dR_i/ds_alpha= drds(alpha,i). 
- /// Evaluated at current time.
- void dposition(const Vector<double>& s, 
-                DenseMatrix<double> &drds) const
-  {
-   throw OomphLibError(
-    "Broken -- who calls this \n",
-    "FSIHermiteBeamElement::dposition()",
-    OOMPH_EXCEPTION_LOCATION);
-  }
-
- /// \short 2nd derivative of position vector w.r.t. to coordinates: 
- /// d^2R_i/dxi_alpha dxi_beta = ddrdxi(alpha,beta,i). 
- /// Evaluated at current time. (broken)
- void d2position(const Vector<double> &xi, 
-               RankThreeTensor<double> &ddrdxi) const
-  {
-   throw OomphLibError(
-    "This version of d2position() hasn't been coded up (yet) \n",
-    "FSIHermiteBeamElement::d2position()",
-    OOMPH_EXCEPTION_LOCATION);
-  }
-
- /// \short Posn vector and its  1st & 2nd derivatives
- /// w.r.t. to coordinates:  dR_i/dxi_alpha = drdxi(alpha,i)
- /// d^2R_i/dxi_alpha dxi_beta = ddrdxi(alpha,beta,i).
- /// Evaluated at current time. (broken)
- void d2position(const Vector<double>& xi, Vector<double>& r,
-               DenseMatrix<double> &drdxi,
-               RankThreeTensor<double> &ddrdxi) const
-  {
-   throw OomphLibError(
-    "This version of d2position() hasn't been coded up (yet) \n",
-    "FSIHermiteBeamElement::d2position()",
-    OOMPH_EXCEPTION_LOCATION);
-  }
-
- /// \short Velocity vector at local coordinate s 
- void veloc(const Vector<double>& s, Vector<double>& veloc)
-  {
-   // First time deriv of position vector
-   interpolated_dxdt(s,1,veloc);
-  }
-
-
- /// \short Acceleration vector at local coordinate s 
- void accel(const Vector<double>& s, Vector<double>& accel)
-  {
-   // Second time deriv of osition Vector
-   interpolated_dxdt(s,2,accel);
-  }
 
  /// \short Get the load vector: Pass number of the integration point,
  /// Lagr. coordinate, Eulerian coordinate and normal vector 
@@ -471,30 +384,11 @@ class FSIHermiteBeamElement : public virtual HermiteBeamElement,
  virtual void fill_in_contribution_to_jacobian(Vector<double> &residuals, 
                                                DenseMatrix<double> &jacobian)
   {
-   //Call the element's residuals vector
-   fill_in_contribution_to_residuals_beam(residuals);
-   
-   //Solve for the consistent acceleration in Newmark scheme?
-   if(Solve_for_consistent_newmark_accel_flag)
-    {
-     fill_in_jacobian_for_newmark_accel(jacobian);
-     return;
-    }
-   
-   FSIWallElement::
-    fill_in_jacobian_from_solid_position_and_external_by_fd(jacobian);  
+   //Call the standard beam element's jacobian function
+   HermiteBeamElement::fill_in_contribution_to_jacobian(residuals,jacobian);
+   //Now add the external interaction data by finite differences
+   this->fill_in_jacobian_from_external_interaction_by_fd(jacobian);
   }
-
- /// \short In the GeomObject incarnation of the FSIWallElement
- /// the Lagrangian coordinate \f$ \xi \f$ used in the solid mechanics
- /// is equal to the "global" intrinsic coordinate \f$ \zeta \f$ in 
- /// the compound GeomObject (the wall mesh) this element is a
- /// member of. This function computes zeta as a function of s,
- /// the local coordinate in the element which acts as the
- /// intrinsic coordinate for the element itself. (Are you still
- /// with me?)
- void interpolated_zeta(const Vector<double> &s, Vector<double> &zeta)
-  const {interpolated_xi(s,zeta);}
 
  /// \short Find the local coordinate s in this element
  /// that corresponds to the global "intrinsic" coordinate \f$ \zeta \f$

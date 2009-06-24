@@ -76,8 +76,8 @@ of freedom of the element that this point is located in. The
 degree of freedom are zero. We will therefore modify the node-update 
 procedure as follows: Each \c AlgebraicNode stores a pointer to the \c
 FSIHermiteBeamElement that its reference point is located in.
-This is possible because \c FSIHermiteBeamElements are derived
-from the \c FSIWallElement class which, in turn, is derived from
+This is possible because \c FSIHermiteBeamElements are derived from the
+\c FiniteElement class which, in turn, is derived from
 the \c GeomObject class. In other words, the sub-objects of
 the compound \c MeshAsGeomObject are \c GeomObjects themselves. 
 Their shape is parametrised by the \c FSIHermiteBeamElement's

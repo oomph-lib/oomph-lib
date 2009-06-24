@@ -70,13 +70,12 @@ public:
   {
    Ra_pt = &Default_Physical_Constant_Value;
 
-   // Setup the storage for the interaction between elements
-   unsigned n_interaction=1;
-   unsigned nint_pt=integral_pt()->nweight();
-   // The dimension of the source element is the same as this element
-   unsigned n_dim_source=ndim();
+   //There is only one interaction
+   this->set_ninteraction(1);
 
-   initialise_external_element_storage(n_interaction,nint_pt,n_dim_source);
+   //We do not need to add any external geometric data because the
+   //element is fixed
+   this->ignore_external_geometric_data();
   } 
 
  ///\short The required number of values stored at the nodes is the number of
@@ -176,13 +175,6 @@ public:
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
                     double& error, double& norm)
   {FiniteElement::compute_error(outfile,exact_soln_pt,error,norm);}
-
- /// \short global position vector at local s (return interpolated_x)
- void position(const Vector<double>& s, Vector<double>& r) const
-  {
-   // Get the position vector using interpolated_x
-   interpolated_x(s,r);
-  }
 
  // Overload get_body_force_nst to get the temperature "body force"
  // from the "source" AdvectionDiffusion element via current integration point
@@ -333,16 +325,16 @@ class QAdvectionDiffusionElementWithExternalElement :
 public:
 
  /// \short Constructor: call the underlying constructors
- QAdvectionDiffusionElementWithExternalElement() : QAdvectionDiffusionElement<DIM,3>(),
-                                 ElementWithExternalElement()
+ QAdvectionDiffusionElementWithExternalElement() : 
+  QAdvectionDiffusionElement<DIM,3>(),
+  ElementWithExternalElement()
   { 
-   // Setup the storage for the interaction between elements
-   unsigned n_interaction=1;
-   unsigned nint_pt=integral_pt()->nweight();
-   // The dimension of the source element is the same as this element
-   unsigned n_dim_source=ndim();
+   //There is only one interaction
+   this->set_ninteraction(1);
 
-   initialise_external_element_storage(n_interaction,nint_pt,n_dim_source);
+    //We do not need to add any external geometric data because the
+   //element is fixed
+   this->ignore_external_geometric_data();
   } 
 
  ///\short The required number of values stored at the nodes is the number of
@@ -432,13 +424,6 @@ public:
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
                     double& error, double& norm)
   {FiniteElement::compute_error(outfile,exact_soln_pt,error,norm);}
-
-  /// \short global position vector at local s (return interpolated_x)
- void position(const Vector<double>& s, Vector<double>& r) const
-  {
-   // Get the position vector using interpolated_x
-   interpolated_x(s,r);
-  }
 
  /// \short Overload the wind function in the advection-diffusion equations.
  /// This provides the coupling from the Navier--Stokes equations to the
@@ -588,7 +573,6 @@ public:
     }
   }
 
-
 };
 
 //============================================================
@@ -596,11 +580,12 @@ public:
 // from the "source" AdvectionDiffusion element via current integration point
 //========================================================
 template<unsigned DIM>
-void QCrouzeixRaviartElementWithExternalElement<DIM>::get_body_force_nst(const double& time, 
-                                                    const unsigned& ipt,
-                                                    const Vector<double> &s,
-                                                    const Vector<double> &x,
-                                                    Vector<double> &result)
+void QCrouzeixRaviartElementWithExternalElement<DIM>::
+get_body_force_nst(const double& time, 
+                   const unsigned& ipt,
+                   const Vector<double> &s,
+                   const Vector<double> &x,
+                   Vector<double> &result)
 {
  // The interaction index is 0 in this case
  unsigned interaction=0;
@@ -781,14 +766,6 @@ public:
  /// Actions after distribute: set sources
  void actions_after_distribute()
   {
-   // Set binning parameters
-//   Multi_domain_functions::Setup_bins=true;
-//   Multi_domain_functions::N_bin_dim=5;
-
-   // Set interaction indices (default now)
-//   unsigned interaction_nst=0;
-//   unsigned interaction_ad=0;
-
    // Set sources
    Multi_domain_functions::set_sources<NST_ELEMENT,AD_ELEMENT,2,2>
     (this,nst_mesh_pt(),adv_diff_mesh_pt());

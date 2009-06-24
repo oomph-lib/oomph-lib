@@ -69,13 +69,12 @@ public:
   {
    Ra_pt = &Default_Physical_Constant_Value;
 
-   // Setup the storage for the interaction between elements
-   unsigned n_interaction=1;
-   unsigned nint_pt=integral_pt()->nweight();
-   // The dimension of the source element is the same as this element
-   unsigned n_dim_source=ndim();
+   //There is one interaction
+   this->set_ninteraction(1);
 
-   initialise_external_element_storage(n_interaction,nint_pt,n_dim_source);
+   //We do not need to add any external geometric data because the
+   //element is fixed
+   this->ignore_external_geometric_data();
   } 
 
  ///\short The required number of values stored at the nodes is the number of
@@ -199,13 +198,6 @@ public:
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
                     double& error, double& norm)
   {FiniteElement::compute_error(outfile,exact_soln_pt,error,norm);}
-
- /// \short global position vector at local s (return interpolated_x)
- void position(const Vector<double>& s, Vector<double>& r) const
-  {
-   // Get the position vector using interpolated_x
-   interpolated_x(s,r);
-  }
 
  // Overload get_body_force_nst to get the temperature "body force"
  // from the "source" AdvectionDiffusion element via current integration point
@@ -396,17 +388,6 @@ public:
     }
   }
 
- /// \short Overload assign_all_generic_local_equation_numbers to
- ///        strip out external data and add back unique data
- void assign_all_generic_local_eqn_numbers()
-  {
-   //External data may not be distinct from nodal data depending upon
-   //the source element, so call helper to remove non-unique external data
-   assign_unique_external_data_helper();
-   //Now call the refineable element equation num. (int, ext, nodal)
-   RefineableElement::assign_all_generic_local_eqn_numbers();
-  }
-
  // Preconditioner overloads required
  void get_dof_numbers_for_unknowns
   (std::list<std::pair<unsigned long, unsigned> >& block_lookup_list)
@@ -441,13 +422,12 @@ public:
  RefineableQAdvectionDiffusionElementWithExternalElement() : 
   RefineableQAdvectionDiffusionElement<DIM,3>(), ElementWithExternalElement()
   { 
-   // Setup the storage for the interaction between elements
-   unsigned n_interaction=1;
-   unsigned nint_pt=integral_pt()->nweight();
-   // The dimension of the source element is the same as this element
-   unsigned n_dim_source=ndim();
+   //There is one interaction
+   this->set_ninteraction(1);
 
-   initialise_external_element_storage(n_interaction,nint_pt,n_dim_source);
+   //We do not need to add any external geometric data because the
+   //element is fixed
+   this->ignore_external_geometric_data();
   }
 
  ///\short The required number of values stored at the nodes is the number of
@@ -558,13 +538,6 @@ public:
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
                     double& error, double& norm)
   {FiniteElement::compute_error(outfile,exact_soln_pt,error,norm);}
-
-  /// \short global position vector at local s (return interpolated_x)
- void position(const Vector<double>& s, Vector<double>& r) const
-  {
-   // Get the position vector using interpolated_x
-   interpolated_x(s,r);
-  }
 
  /// \short Overload the wind function in the advection-diffusion equations.
  /// This provides the coupling from the Navier--Stokes equations to the
@@ -769,17 +742,6 @@ public:
     }
   }
 
-
- /// \short Overload assign_all_generic_local_equation_numbers to
- ///        strip out external data and add back unique data
- void assign_all_generic_local_eqn_numbers()
-  {
-   //External data may not be distinct from nodal data depending upon
-   //the source element, so call helper to remove non-unique external data
-   assign_unique_external_data_helper();
-   //Now call the refineable element equation num. (int, ext, nodal)
-   RefineableElement::assign_all_generic_local_eqn_numbers();
-  }
 
  void get_dof_numbers_for_unknowns
   (std::list<std::pair<unsigned long, unsigned> >& block_lookup_list)

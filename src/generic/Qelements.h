@@ -191,57 +191,52 @@ class QElementBase : public virtual FiniteElement
   }
 
  /// \short Global coordinates as function of local coordinates.
- /// Either via FE representation of QElement or
- /// via macro-element (if Macro_elem_pt!=0).
- void get_x(const Vector<double>& s, Vector<double>& x) const
+ /// using the macro element representation
+ void get_x_from_macro_element(const Vector<double> &s, 
+                               Vector<double> &x) const
   {
-   // Either read in position directly from underlying FE representation
-   if(Macro_elem_pt==0) {interpolated_x(s,x);}
-   // or refer to macro element
-   else 
+   //Check that there is a macro element
+   if(Macro_elem_pt==0) 
     {
-     unsigned el_dim = dim();
-     Vector<double> s_macro(el_dim);
-     for(unsigned i=0;i<el_dim;i++)
-      {
-       s_macro[i]=s_macro_ll(i)+0.5*(s[i]+1.0)*(s_macro_ur(i)-s_macro_ll(i));
-      }
-     Macro_elem_pt->macro_map(s_macro,x);
+     throw OomphLibError(
+      "Macro Element pointer not set in this element\n",
+      "QElementBase::get_x_from_macro_element()",
+      OOMPH_EXCEPTION_LOCATION);
     }
+   
+   //Use macro element representation
+   unsigned el_dim = dim();
+   Vector<double> s_macro(el_dim);
+   for(unsigned i=0;i<el_dim;i++)
+    {
+     s_macro[i]=s_macro_ll(i)+0.5*(s[i]+1.0)*(s_macro_ur(i)-s_macro_ll(i));
+    }
+   Macro_elem_pt->macro_map(s_macro,x);
   }
  
  /// \short Global coordinates as function of local coordinates
- /// at previous time "level" t (t=0: present; t>0: previous).
- /// Either via FE representation of QElement or
- /// via macro-element (if Macro_elem_pt!=0).
- void get_x(const unsigned& t, const Vector<double>& s, Vector<double>& x) 
+ /// at previous time "level" t (t=0: present; t>0: previous)
+ /// using the macro element representation
+ void get_x_from_macro_element(const unsigned& t, const Vector<double>& s, 
+                               Vector<double>& x) 
   {
-   // Get timestepper from first node
-   TimeStepper* time_stepper_pt=node_pt(0)->time_stepper_pt();
-
-   // Number of previous values
-   unsigned nprev=time_stepper_pt->nprev_values();
-
-   // If t > nprev_values(), we're not dealing with a previous value
-   // but a generalised history value -- this cannot be recovered from
-   // macro element but must be determined by finite element interpolation
-
-   // Either read in position directly from underlying FE representation
-   if ((Macro_elem_pt==0)||(t>nprev))
+   //Check that there is a macro element
+   if(Macro_elem_pt==0) 
     {
-     interpolated_x(t,s,x);
+     throw OomphLibError(
+      "Macro Element pointer not set in this element\n",
+      "QElementBase::get_x_from_macro_element()",
+      OOMPH_EXCEPTION_LOCATION);
     }
-   // or refer to macro element
-   else
+
+   //Use the macro element representation
+   unsigned el_dim = dim();
+   Vector<double> s_macro(el_dim);
+   for(unsigned i=0;i<el_dim;i++)
     {
-     unsigned el_dim = dim();
-     Vector<double> s_macro(el_dim);
-     for(unsigned i=0;i<el_dim;i++)
-      {
-       s_macro[i]=s_macro_ll(i)+0.5*(s[i]+1.0)*(s_macro_ur(i)-s_macro_ll(i));
-      }
-     Macro_elem_pt->macro_map(t,s_macro,x);
+     s_macro[i]=s_macro_ll(i)+0.5*(s[i]+1.0)*(s_macro_ur(i)-s_macro_ll(i));
     }
+   Macro_elem_pt->macro_map(t,s_macro,x);
   }
 
   private:

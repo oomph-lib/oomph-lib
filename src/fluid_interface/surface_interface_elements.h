@@ -270,6 +270,13 @@ public SurfaceFluidInterfaceElement
    resize_nodes(additional_data_values);
   }
 
+ /// \short The "global" intrinsic coordinate of the element when 
+ /// viewed as part of a geometric object should be given by 
+ /// the FaceElement representation, by default
+ double zeta_nodal(const unsigned &n, const unsigned &k,
+                   const unsigned &i) const                              
+  {return FaceElement::zeta_nodal(n,k,i);}                                     
+
  /// Return the lagrange multiplier at local node n
  double &lagrange(const unsigned &n)
   {

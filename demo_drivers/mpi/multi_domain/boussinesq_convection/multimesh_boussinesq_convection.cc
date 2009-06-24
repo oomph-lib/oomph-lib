@@ -70,13 +70,11 @@ public:
   {
    Ra_pt = &Default_Physical_Constant_Value;
 
-   // Setup the storage for the interaction between elements
-   unsigned n_interaction=1;
-   unsigned nint_pt=integral_pt()->nweight();
-   // The dimension of the source element is the same as this element
-   unsigned n_dim_source=ndim();
+   // There is one interaction
+   this->set_ninteraction(1);
 
-   initialise_external_element_storage(n_interaction,nint_pt,n_dim_source);
+   // The external  element does not move
+   this->ignore_external_geometric_data();
   } 
 
  ///\short The required number of values stored at the nodes is the number of
@@ -336,13 +334,11 @@ public:
  QAdvectionDiffusionElementWithExternalElement() : QAdvectionDiffusionElement<DIM,3>(),
                                  ElementWithExternalElement()
   { 
-   // Setup the storage for the interaction between elements
-   unsigned n_interaction=1;
-   unsigned nint_pt=integral_pt()->nweight();
-   // The dimension of the source element is the same as this element
-   unsigned n_dim_source=ndim();
-
-   initialise_external_element_storage(n_interaction,nint_pt,n_dim_source);
+   // There is one interaction
+   this->set_ninteraction(1);
+   
+   // The external  element does not move
+   this->ignore_external_geometric_data();
   } 
 
  ///\short The required number of values stored at the nodes is the number of

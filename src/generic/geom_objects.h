@@ -35,18 +35,12 @@
 #endif
 
 //oomph-lib headers
-#include "elements.h"
 #include "nodes.h"
-#include "quadtree.h"
-//#include "mesh.h"
 #include "timesteppers.h"
 
 
 namespace oomph
 {
-
-class AlgebraicNode;
-class AlgebraicMesh;
 
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -84,14 +78,14 @@ class AlgebraicMesh;
 /// which can be free/pinned and have a time history, etc. This makes
 /// it possible to `upgrade' GeomObjects to GeneralisedElements -- in this
 /// case the geometric Data plays the role of internal Data in the
-/// GeneralisedElement.  Conversely, certain elements
-/// of type GeneralisedElement s can be derived from GeomObjects. This
-/// is particularly useful in FSI computations:
+/// GeneralisedElement.  Conversely, FiniteElements, in which a geometry
+/// (spatial coordinate) has been defined, inherit from GeomObjects,
+/// which is particularly useful in FSI computations:
 /// Meshing of moving domains is typically performed by representing the
 /// domain as an object of type Domain and, by default, Domain boundaries are 
 /// represented by GeomObjects. In FSI computations, the boundary
 /// of the fluid domain is represented by a number of solid mechanics elements.
-/// We use inheritance to upgrade the solid mechanics elements to GeomObjects 
+/// These elements are, in fact,  GeomObjects via inheritance
 /// so that the we can use the standard interfaces of the GeomObject class
 /// for mesh generation. An example is the class \c FSIHermiteBeamElement which
 /// is derived from the class \c HermiteBeamElement (a `normal' beam element)
@@ -269,81 +263,30 @@ public:
    position(zeta,r);
   }
 
- 
- ///\short Parametrised velocity on object at current time: veloc = 
- /// d r(zeta)/dt.
- /// Default version assumes static geometric object and sets velocity
- /// to zero. Overload for your own time-dependent object
-  virtual void veloc(const Vector<double>& zeta, Vector<double>& veloc)
-  {
-   std::ostringstream warning_stream;
-   warning_stream    
-    << "Using default assignment veloc=0 in GeomObject::veloc(...)\n" 
-    << "Overload for your specific geometric object if this is not \n" 
-    << "appropriate. \n";
-   OomphLibWarning(warning_stream.str(),
-                   "GeomObject::velc()",
-                   OOMPH_EXCEPTION_LOCATION);
-
-   unsigned n=veloc.size();
-   for (unsigned i=0;i<n;i++)
-    {
-     veloc[i]=0.0;
-    }
-  }
-
-
- /// \short Parametrised acceleration on object at current time: 
- /// accel = d^2 r(zeta)/dt^2.
- /// Default version assumes static geometric object and sets accel.
- /// to zero. Overload for your own time-dependent object
- virtual void accel(const Vector<double>& zeta, Vector<double>& accel) 
-  {
-   std::ostringstream warning_stream;
-   warning_stream    
-    << "Using default assignment accel=0 in GeomObject::accel(...)\n" 
-    << "Overload for your specific geometric object if this is not \n" 
-    << "appropriate. \n";
-   OomphLibWarning(warning_stream.str(),
-                   "GeomObject::accel()",
-                   OOMPH_EXCEPTION_LOCATION);
-   unsigned n=accel.size();
-   for (unsigned i=0;i<n;i++)
-    {
-     accel[i]=0.0;
-    }
-  }
-
 
  /// \short j-th time-derivative on object at current time: 
  /// \f$ \frac{d^{j} r(\zeta)}{dt^j} \f$.
- virtual void drdt(const Vector<double>& zeta, const unsigned& j, 
-                   Vector<double>& drdt)
+ virtual void dpositiondt(const Vector<double>& zeta, const unsigned& j, 
+                          Vector<double>& drdt)
   {
-   switch (j)
+   //If the index is zero the return the position
+   if(j==0) {position(zeta,drdt);}
+   //Otherwise assume that the geometric object is static
+   //and return zero after throwing a warning
+   else
     {
-     // Current position
-    case 0:
-     position(zeta,drdt);
-     break;
+     std::ostringstream warning_stream;
+     warning_stream    
+      << "Using default (static) assignment " << j 
+      << "-th time derivative in GeomObject::dpositiondt(...) is zero\n" 
+      << "Overload for your specific geometric object if this is not \n" 
+      << "appropriate. \n";
+     OomphLibWarning(warning_stream.str(),
+                     "GeomObject::dpositiondt()",
+                     OOMPH_EXCEPTION_LOCATION);
      
-     // Velocity:
-    case 1:
-     veloc(zeta,drdt);
-     break;
-
-     // Acceleration:
-    case 2:
-     accel(zeta,drdt);
-     break;
-
-    default:
-     std::ostringstream error_message;
-     error_message << j << "th derivative not implemented\n";
-     
-     throw OomphLibError(error_message.str(),
-                         "GeomObject::drdt()",
-                         OOMPH_EXCEPTION_LOCATION);
+     unsigned n=drdt.size();
+     for (unsigned i=0;i<n;i++) {drdt[i]=0.0;}
     }
   }
 

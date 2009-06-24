@@ -100,12 +100,8 @@ bool FSIWallElement::Dont_warn_about_missing_adjacent_fluid_elements=false;
   // Set storage for underlying GeomObject
   set_nlagrangian_and_ndim(nlagr_solid, ndim_fluid);
   
-  // Number of Gauss integration points
-  unsigned n_intpt=integral_pt()->nweight();
-  
   // Set source element storage - one interaction
-  initialise_external_element_storage(1,n_intpt,ndim_fluid);
- 
+  this->set_ninteraction(1);
  }
  
  
@@ -117,21 +113,11 @@ bool FSIWallElement::Dont_warn_about_missing_adjacent_fluid_elements=false;
  //==================================================================
  void FSIWallElement::enable_fluid_loading_on_both_sides()
  {
-  
-
-  // Dimension of fluid elements has been stored in Eulerian dimension
-  // of the FSIWallElement's GeomObject representation
-  unsigned ndim_fluid=ndim();
-
-  // Number of Gauss integration points
-  unsigned n_intpt=integral_pt()->nweight();
-  
   // Both faces are loaded
   Only_front_is_loaded_by_fluid=false;
   
   // Set source element storage - two interactions
-  initialise_external_element_storage(2,n_intpt,ndim_fluid);
-
+  this->set_ninteraction(2);
  }
 
 
@@ -262,521 +248,66 @@ bool FSIWallElement::Dont_warn_about_missing_adjacent_fluid_elements=false;
 //=================================================================
 double FSIWallElement::Default_Q_Value=1.0;
 
-
-//==========================================================================
-/// This function determines the all Data that affects the load on the
-/// element, and adds its global equation numbers to the 
-/// local-to-global look-up scheme. Note that we only include
-/// Data items into the element's Load_data if they are not already
-/// included in the element's nodal positional Data, its internal
-/// or external Data.
-//==========================================================================
-void FSIWallElement::assign_load_data_local_eqn_numbers()
-{
- //Clear all the data storage
- Load_data_pt.clear(); 
- Load_data_index.clear();
-
- //If desired, determine the Data that affects the load but is not
- //already included in elements other generic Data.
- //The conditional test is done here, so that the vectors are cleared
- //and not re-filled if Add_external_load_data is false
- if(Add_external_load_data)
-  {
-   // Number of integration points
-   unsigned n_intpt = integral_pt()->nweight();
-
-   //A set of all FSIFluidElements that affect the load
-   std::set<FSIFluidElement*> all_load_elements_pt;
-   
-   // Loop over front and back if required: Get number of fluid-loaded faces
-   unsigned n_loaded_face=2;
-   if (Only_front_is_loaded_by_fluid) n_loaded_face=1;
-   for (unsigned face=0;face<n_loaded_face;face++)
-    {  
-     //Loop over the integration points and the adjacent element at
-     //each integration point to the set
-     for(unsigned ipt=0;ipt<n_intpt;ipt++)
-      {
-       //Add the element adjacent to the element into the set
-       all_load_elements_pt.insert
-        (dynamic_cast<FSIFluidElement*>(external_element_pt(face,ipt)));
-      }
-    }
+ //===================================================================
+/// This function identifies all data that is required for the 
+/// interaction
+//=======================================================================
+ void FSIWallElement::identify_all_field_data_for_external_interaction(
+  Vector<std::set<FiniteElement*> > const &external_elements_pt,
+  std::set<std::pair<Data*,unsigned> > &paired_interaction_data) 
+ {
+  //Loop over each inteaction
+  const unsigned n_interaction = this->ninteraction();
+  for(unsigned i=0;i<n_interaction;i++)
+   {
+    //Loop over each element in the set 
+    for(std::set<FiniteElement*>::iterator it=external_elements_pt[i].begin();
+       it != external_elements_pt[i].end(); it++)
+     {
+      //Cast the element  the specific fluid element
+      FSIFluidElement *external_fluid_el_pt = 
+        dynamic_cast<FSIFluidElement*>(*it);
   
-
-   //For safety erase any null pointers
-   all_load_elements_pt.erase(0);
-
-   // Storage for a pairs of load data (pointer to Data and the index
-   // of the load value within this Data object) affecting the element
-   std::set<std::pair<Data*,unsigned> > paired_load_data;
-   
-   //Storage for a set of external geometric Data affecting the element
-   std::set<Data*> external_geometric_data_pt;
-   
-   //Now, loop over all the adjacent FSIFluidElements and get the data 
-   //that affects the load.
-   for(std::set<FSIFluidElement*>::iterator it=all_load_elements_pt.begin();
-       it != all_load_elements_pt.end(); it++)
-    {
-     if (Ignore_shear_stress_in_jacobian)
-      {
-       // Add the "pressure" load data
-       (*it)->identify_pressure_data(paired_load_data);
-      }
+      //Only add pressure load if so desired
+      if (Ignore_shear_stress_in_jacobian)
+       {
+        // Add the "pressure" load data
+        external_fluid_el_pt->identify_pressure_data(paired_interaction_data);
+       }
      else
-      {
-       // Add the "direct" load data (usually velocities and pressures)
-       // to the set
-       (*it)->identify_load_data(paired_load_data);
+   {
+    // Add the "direct" load data (usually velocities and pressures)
+    // to the set
+    external_fluid_el_pt->identify_load_data(paired_interaction_data);
+   }
+     }
+   } //End of loop over interactions
+ }
 
-       // Add the "indirect" load data to the set: All geometric Data that 
-       // affects the nodal positions in the FSIFluidElement and thus 
-       // indirectly affects the load.
-       (*it)->identify_geometric_data(external_geometric_data_pt);
-      }
-    }
-   
-   // Now loop over the geometric data of the FSIWallElement itself 
-   // and erase them from the external_geometric_data_pt 
-   // because these data are actually intrinsic 
-   // data of this element and are counted and numbered elsewhere
-   unsigned n_geom_data = ngeom_data();
-   for(unsigned j=0;j<n_geom_data;j++)
-    {
-     external_geometric_data_pt.erase(geom_data_pt(j));
-    }
-   
-   //It is possible that the geometric data may have already been added as
-   //external data. We should erase any common entries from the Load_data
-   //but not touch the external data that has been set up by a "knowledgeable"
-   //user
-   unsigned n_external = nexternal_data();
-   for(unsigned j=0;j<n_external;j++)
-    {
-     external_geometric_data_pt.erase(external_data_pt(j));
-    }
-   
-   //Add the pairs of data to the load vector
-   for(std::set<std::pair<Data*,unsigned> >::iterator it=
-        paired_load_data.begin();
-       it != paired_load_data.end();it++)
-    {
-     Load_data_pt.push_back(it->first);
-     Load_data_index.push_back(it->second);
-    }
-   
-   // Now we can add all the remaining geometric data to the load vector
-   for(std::set<Data*>::iterator it=external_geometric_data_pt.begin();
-       it != external_geometric_data_pt.end(); it++)
-    {
-     //Find the number of values stored in the geometric data
-     unsigned n_value = (*it)->nvalue();
-     //Loop over the values
-     for(unsigned j=0;j<n_value;j++)
-      {
-       //Add data to the Load data
-       Load_data_pt.push_back((*it));
-       Load_data_index.push_back(j);
-      }
-    }
-  }
- 
- //External load data has now been specified
- 
- //Find the number of load data
- unsigned n_load_data = nload_data();
-
- //Resize the storage for the load data local equation numbers
- //initially all local equations are unclassified
- Load_data_local_eqn.resize(n_load_data, Data::Is_unclassified);
- 
- //If there are load data fill in the internal storage
- if(n_load_data > 0)
-  {
-   //Find the number of local equations assigned so far
-   unsigned local_eqn_number = ndof();
-   
-   //A local queue to store the global equation numbers
-   std::deque<unsigned long> global_eqn_number_queue;
- 
-   //Now loop over the load data again assign local equation numbers
-   for(unsigned i=0;i<n_load_data;i++)
-    {
-     //Get the GLOBAL equation number
-     long eqn_number = Load_data_pt[i]->eqn_number(Load_data_index[i]);
-
-     //If the GLOBAL equation number is positive (a free variable)
-     if(eqn_number >= 0)
-      {
-       //Add the GLOBAL equation number to the local queue
-       global_eqn_number_queue.push_back(eqn_number);
-       //Add the local equation number to the local scheme
-       Load_data_local_eqn[i] = local_eqn_number;
-       //Increase the local number
-       local_eqn_number++;
-      }
-     else
-      {
-       //Set the local scheme to be pinned
-       Load_data_local_eqn[i] = Data::Is_pinned;
-      }
-    }
-   //Now add our global equations numbers to the internal element storage
-   add_global_eqn_numbers(global_eqn_number_queue);
-  }
-}
-
-
-//======================================================================
-/// Get FE Jacobian by systematic finite differencing w.r.t.
-/// nodal positition Data, internal and external Data and any
-/// load Data that is not included in the previous categories.
-/// This is a re-implementation of the generic FD routines with 
-/// they key difference being that any updates of values are followed
-/// by a node update in the adjacent fluid elements since their
-/// position (and hence the shear stresses they exert onto the solid)
-/// may be indirectly affected by these. For greater efficiency
-/// this may be overloaded in derived classes, e.g. if it is known
-/// that for a specific FSIWallElement, the internal Data does not
-/// affect the nodal positions in adjacent fluid elements.
-/// 
-/// \todo Note: skipping the node update doesn't
-/// seem to do much harm --> investigate properly and maybe allow it
-/// to be switched off.
-//======================================================================
-void  FSIWallElement::fill_in_jacobian_from_solid_position_and_external_by_fd(
- DenseMatrix<double>& jacobian)
-{
-// bool use_first_order_fd=false;
-
- //Should probably give this a more global scope
- double fd_step = SolidFiniteElement::Default_fd_jacobian_step;
- 
- //Create a new residuals Vector
- unsigned n_dof = ndof();
- Vector<double> residuals(n_dof), newres(n_dof); // , newres_minus(n_dof);
- 
- //Get the residuals. Note that this computes the full residuals, so in 
- //coupled problems all solid dof entries will be computed by FDs
- get_residuals(residuals);
- 
- //Get number of nodes
- unsigned n_node = nnode();
- 
- //Get the number of position dofs and dimensions for the nodes
- unsigned n_position_type = this->nnodal_position_type();
- unsigned n_dim = this->nodal_dimension();
- 
- //Integer for the local unknown
- int local_unknown=0;
-
-
- // FD w.r.t. nodal position Data:
- //-------------------------------
-
- //Loop over the nodes
- for(unsigned l=0;l<n_node;l++)
-  {
-   //Loop over position dofs
-   for(unsigned k=0;k<n_position_type;k++)
-    {
-     //Loop over dimension
-     for(unsigned i=0;i<n_dim;i++)
-      {
-       //If the variable is free
-       local_unknown = position_local_eqn(l,k,i);
-       if(local_unknown >= 0)
-        {
-         //Save old value of the (generalised) Eulerian nodal position
-         double old_var = node_pt(l)->x_gen(k,i);
-         
-         //Increment the  (generalised) Eulerian nodal position
-         node_pt(l)->x_gen(k,i) += fd_step;
-         
-         //I am FSI element: Need to update adjacent fluid nodes/elements
-         if (!Ignore_shear_stress_in_jacobian)
-          {
-           node_update_adjacent_fluid_elements();
-          }
-         
-         //Calculate the new residuals
-         get_residuals(newres);
-         
-//         if (use_first_order_fd)
-          {
-           //Do forward finite differences
-           for(unsigned m=0;m<n_dof;m++)
-            {
-             //Stick the entry into the Jacobian matrix
-             jacobian(m,local_unknown) = (newres[m] - residuals[m])/fd_step;
-            }
-          }
-//          else
-//           {
-//            //Take backwards step for the  (generalised) Eulerian nodal
-//            // position
-//            node_pt(l)->x_gen(k,i) = old_var-fd_step;
-
-//            //I am FSI element: Need to update adjacent fluid nodes/elements
-//            if (!Ignore_shear_stress_in_jacobian)
-//             {
-//              node_update_adjacent_fluid_elements();
-//             }         
-//            //Calculate the new residuals at backward position
-//            get_residuals(newres_minus);
-
-//            //Do central finite differences
-//            for(unsigned m=0;m<n_dof;m++)
-//             {
-//              //Stick the entry into the Jacobian matrix
-//              jacobian(m,local_unknown) =
-//               (newres[m] - newres_minus[m])/(2.0*fd_step);
-//             }
-//           }
-
-         // Reset the (generalised) Eulerian nodal position
-         // (no node-update in adjacent fluid elements req'd
-         // as we'll reset it next time we go around this loop)
-         node_pt(l)->x_gen(k,i) = old_var;
-        }
-      }
-    }
-  }
-  
-
-
- // FD w.r.t. load Data that affects the residual vector but is not
- //----------------------------------------------------------------
- // included in the internal, external or the element's own 
- //--------------------------------------------------------
- // nodal position Data
- //--------------------
- 
- unsigned n_load_data = nload_data();
- for(unsigned i=0;i<n_load_data;i++)
-  {
-   // Free or BC?
-   local_unknown = Load_data_local_eqn[i];
-   if (local_unknown >= 0)
-    {
-     //Store a pointer to the load value
-     double *value_pt = Load_data_pt[i]->value_pt(Load_data_index[i]);
-
-     //Save the old value of the load value
-     double old_var = *value_pt;
-     
-     //Increment the value
-     *value_pt += fd_step;
-     
-     // I am FSI element: need to update affected fluid nodes/elements
-     // because the load Data may include values that affect the nodal
-     // position in adjacent fluid elements (via shear stresses!)
-     if (!Ignore_shear_stress_in_jacobian)
-      {
-       node_update_adjacent_fluid_elements();
-      }
-     
-     //Calculate the new residuals
-     get_residuals(newres);
-
-//     if (use_first_order_fd)
-      {
-       //Do forward finite differences
-       for(unsigned m=0;m<n_dof;m++)
-        {
-         //Stick the entry into the Jacobian matrix
-         jacobian(m,local_unknown) = (newres[m] - residuals[m])/fd_step;
-        }
-      }
-//      else
-//       {
-//        //Take backwards step
-//        *value_pt = old_var-fd_step;
-
-//        // I am FSI element: need to update affected fluid nodes/elements
-//        // because the load Data may include values that affect the nodal
-//        // position in adjacent fluid elements (via shear stresses!)
-//        if (!Ignore_shear_stress_in_jacobian)
-//         {
-//          node_update_adjacent_fluid_elements();
-//         }
-//        //Calculate the new residuals at backward position
-//        get_residuals(newres_minus);
-
-//        //Do central finite differences
-//        for(unsigned m=0;m<n_dof;m++)
-//         {
-//          //Stick the entry into the Jacobian matrix
-//          jacobian(m,local_unknown) =
-//           (newres[m] - newres_minus[m])/(2.0*fd_step);
-//         }
-//       }
-          
-     // Reset the variables 
-     // (no node-update in adjacent fluid elements req'd
-     // as we'll reset it next time we go around this loop)
-     *value_pt = old_var;
-    }
-  }
- 
- // FD w.r.t. external Data:
- //-------------------------
- 
- unsigned n_external=nexternal_data();
- for (unsigned idata=0;idata<n_external;idata++)
-  {
-   
-   Data* ext_data_pt=external_data_pt(idata);
-   
-   // Loop over values in Data
-   unsigned initial_nvalue=ext_data_pt->nvalue();
-   for (unsigned ival=0;ival<initial_nvalue;ival++)
-    {
-     // Free or BC?
-     local_unknown = external_local_eqn(idata,ival);
-     if (local_unknown >= 0)
-      {
-       //Store a pointer to the external data's value pointers
-       double *value_pt = ext_data_pt->value_pt(ival);
-       
-       //Save the old value
-       double old_var= *value_pt;
-       
-       //Increment the value
-       *value_pt += fd_step;
-       
-       // I am FSI element: need to update affected fluid nodes/elements
-       if (!Ignore_shear_stress_in_jacobian)
-        {
-         node_update_adjacent_fluid_elements();
-        }
-       
-       //Calculate the new residuals
-       get_residuals(newres);
-       
-
-//       if (use_first_order_fd)
-        {
-         //Do forward finite differences
-         for(unsigned m=0;m<n_dof;m++)
-          {
-           //Stick the entry into the Jacobian matrix
-           jacobian(m,local_unknown) = (newres[m] - residuals[m])/fd_step;
-          }
-        }
-//        else
-//         {
-//          //Take backwards step 
-//          *value_pt = old_var-fd_step;
-       
-//          // I am FSI element: need to update affected fluid nodes/elements
-//          if (!Ignore_shear_stress_in_jacobian)
-//           {
-//            node_update_adjacent_fluid_elements();
-//           }
-//          //Calculate the new residuals at backward position
-//          get_residuals(newres_minus);
-
-//          //Do central finite differences
-//          for(unsigned m=0;m<n_dof;m++)
-//           {
-//            //Stick the entry into the Jacobian matrix
-//            jacobian(m,local_unknown) =
-//             (newres[m] - newres_minus[m])/(2.0*fd_step);
-//           }
-//         }
-
-       // Reset the variables
-       // (no node-update in adjacent fluid elements req'd
-       // as we'll reset it next time we go around this loop)
-       *value_pt = old_var;
-      }
-    }
-  }
-
-
- // FD w.r.t. internal Data:
- //-------------------------
-
- unsigned n_internal=ninternal_data();
- for (unsigned idata=0;idata<n_internal;idata++)
-  {
-   
-   Data* int_data_pt=internal_data_pt(idata);
-   
-   // Loop over values in Data
-   unsigned initial_nvalue=int_data_pt->nvalue();
-   for (unsigned ival=0;ival<initial_nvalue;ival++)
-    {
-     // Free or BC?
-     local_unknown = internal_local_eqn(idata,ival);
-     if (local_unknown >= 0)
-      {
-       //Store a pointer to the internal data pointer
-       double *value_pt = int_data_pt->value_pt(ival);
-
-       //Save the old value
-       double old_var = *value_pt;
-       
-       //Increment the value
-       *value_pt += fd_step;
-       
-       // I am FSI element: need to update affected fluid nodes/elements
-       if (!Ignore_shear_stress_in_jacobian)
-        {
-         node_update_adjacent_fluid_elements();
-        }
-       
-       //Calculate the new residuals
-       get_residuals(newres);
-
-
-//       if (use_first_order_fd)
-        {
-         //Do forward finite differences
-         for(unsigned m=0;m<n_dof;m++)
-          {
-           //Stick the entry into the Jacobian matrix
-           jacobian(m,local_unknown) = (newres[m] - residuals[m])/fd_step;
-          }
-        }
-//        else
-//         {
-//          //Take backwards step 
-//          *value_pt=old_var-fd_step;
-       
-//          // I am FSI element: need to update affected fluid nodes/elements
-//          if (!Ignore_shear_stress_in_jacobian)
-//           {
-//            node_update_adjacent_fluid_elements();
-//           }
-//          //Calculate the new residuals at backward position
-//          get_residuals(newres_minus);
-
-//          //Do central finite differences
-//          for(unsigned m=0;m<n_dof;m++)
-//           {
-//            //Stick the entry into the Jacobian matrix
-//            jacobian(m,local_unknown) =
-//             (newres[m] - newres_minus[m])/(2.0*fd_step);
-//           }
-//         }
-              
-       // Reset the variables
-       // (no node-update in adjacent fluid elements req'd
-       // as we'll reset it next time we go around this loop)
-       *value_pt = old_var;
-      }
-    }
-  }
- 
- // Cleanup and reset the lot (only needed at the end)
- node_update_adjacent_fluid_elements();
- 
-}
-
+ /// \short Function that must return all geometric data involved 
+ /// in the desired interactions from the external element
+ void FSIWallElement::identify_all_geometric_data_for_external_interaction(
+  Vector<std::set<FiniteElement*> > const &external_elements_pt,
+  std::set<Data*> &external_geometric_data_pt) 
+ {
+  //If we are ignoring the shear stress, then we can ignore all
+  //external geometric data
+  if(Ignore_shear_stress_in_jacobian) {return;}
+  else
+   {
+  //Loop over each inteaction
+  const unsigned n_interaction = this->ninteraction();
+  for(unsigned i=0;i<n_interaction;i++)
+   {
+    //Loop over each element in the set 
+    for(std::set<FiniteElement*>::iterator it=external_elements_pt[i].begin();
+       it != external_elements_pt[i].end(); it++)
+     {
+     (*it)->identify_geometric_data(external_geometric_data_pt);
+     }
+   }
+   }
+ }
 
 
 }
