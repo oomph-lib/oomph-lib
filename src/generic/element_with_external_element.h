@@ -422,7 +422,7 @@ class ElementWithExternalElement : public virtual FiniteElement
     private:
 
    /// \short Helper function to check that storage has actually been allocated
-   void check_storage_allocated()
+   void check_storage_allocated() const
     {
      //If either of the storage arrays is zero, then storage has not
      //yet been allocated. Both arrays are allocated at once, so 

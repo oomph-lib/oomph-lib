@@ -584,7 +584,9 @@ fill_in_contribution_to_residuals_solid_traction(Vector<double> &residuals)
      Vector<double> traction(DIM);
      //Don't get the traction if you are a halo element because
      //the external elements will not have been set up
+#ifdef OOMPH_HAS_MPI
      if(!this->is_halo())
+#endif
       {
        get_traction(ipt,xi,r,unit_normal,traction);
       }

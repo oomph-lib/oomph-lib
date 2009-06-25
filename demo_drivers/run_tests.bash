@@ -13,11 +13,11 @@
 #cd navier_stokes; make check; cd ..
 #cd axisym_navier_stokes; make check; cd ..
 #cd solid; make check; cd ..
-cd beam; make check; cd ..
-cd shell; make check; cd ..
-cd linear_wave; make check; cd ..
-cd eigenproblems; make check; cd ..
-cd interaction; make check; cd ..
+#cd beam; make check; cd ..
+#cd shell; make check; cd ..
+#cd linear_wave; make check; cd ..
+#cd eigenproblems; make check; cd ..
+#cd interaction; make check; cd ..
 cd meshing; make check; cd ..
 cd multi_physics; make check; cd ..
 cd linking; make check; cd ..
