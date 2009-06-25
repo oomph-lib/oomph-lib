@@ -1366,7 +1366,7 @@ namespace Global_Physical_Variables
 
 
 //=======start_of_problem_class=======================================
-/// 2D Convection  problem on rectangular domain, discretised 
+/// 3D Convection  problem on rectangular domain, discretised 
 /// with refineable elements. The specific type
 /// of element is specified via the template parameter.
 //====================================================================
@@ -1681,7 +1681,7 @@ void RefineableConvectionProblem<ELEMENT>::doc_solution()
 
 
 //===============start_of_main========================================
-/// Driver code for 2D Boussinesq convection problem with 
+/// Driver code for 3D Boussinesq convection problem with 
 /// adaptivity.
 //====================================================================
 int main(int argc, char **argv)
@@ -1696,7 +1696,7 @@ int main(int argc, char **argv)
  Global_Physical_Variables::Direction_of_gravity[1] = -1.0;
  Global_Physical_Variables::Direction_of_gravity[2] = 0.0;
 
- // Create the problem with 2D nine-node refineable elements.
+ // Create the problem with 3D twenty-seven-node refineable elements.
  RefineableConvectionProblem<
   RefineableBuoyantQCrouzeixRaviartElement<3> > problem;
 

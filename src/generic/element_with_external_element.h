@@ -98,6 +98,9 @@ class ElementWithExternalElement : public virtual FiniteElement
    FiniteElement*& external_element_pt(const unsigned &interaction_index,
                                        const unsigned &ipt)
     {
+#ifdef PARANOID
+     check_storage_allocated();
+#endif
 #ifdef RANGE_CHECKING
      range_check(interaction_index,ipt);
 #endif     
@@ -109,6 +112,9 @@ class ElementWithExternalElement : public virtual FiniteElement
    FiniteElement* const &external_element_pt(const unsigned &interaction_index,
                                              const unsigned &ipt) const
     {
+#ifdef PARANOID
+     check_storage_allocated();
+#endif
 #ifdef RANGE_CHECKING
      range_check(interaction_index,ipt);
 #endif     
@@ -122,6 +128,9 @@ class ElementWithExternalElement : public virtual FiniteElement
     const unsigned &interaction_index,
     const unsigned &ipt)
     {
+#ifdef PARANOID
+     check_storage_allocated();
+#endif
 #ifdef RANGE_CHECKING
      range_check(interaction_index,ipt);
 #endif     
@@ -132,6 +141,9 @@ class ElementWithExternalElement : public virtual FiniteElement
    Vector<double> const &external_element_local_coord
     (const unsigned &interaction_index, const unsigned &ipt) const
     {
+#ifdef PARANOID
+     check_storage_allocated();
+#endif
 #ifdef RANGE_CHECKING
      range_check(interaction_index,ipt);
 #endif     
@@ -408,6 +420,27 @@ class ElementWithExternalElement : public virtual FiniteElement
    bool Add_external_geometric_data;
    
     private:
+
+   /// \short Helper function to check that storage has actually been allocated
+   void check_storage_allocated()
+    {
+     //If either of the storage arrays is zero, then storage has not
+     //yet been allocated. Both arrays are allocated at once, so 
+     //if one is zero both will (should) be
+     if((External_element_pt==0) || (External_element_local_coord==0))
+        {
+         std::ostringstream error_stream;
+         error_stream
+          << "Storage for the external elements has not been allocated.\n"
+          << "initialise_external_element_storage() must be called\n"
+          << "followed by a function that calls set_external_storage()\n";
+         
+         throw OomphLibError(
+          error_stream.str(),
+          "ElementWithExternalElement::check_storage_allocated()",
+          OOMPH_EXCEPTION_LOCATION);
+        }
+    }
 
    /// Helper function for range checking in the access functions
    void range_check(const unsigned& interaction_index, const unsigned& ipt)

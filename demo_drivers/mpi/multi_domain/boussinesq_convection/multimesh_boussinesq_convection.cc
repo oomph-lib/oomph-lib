@@ -62,7 +62,7 @@ private:
 
 public: 
 
- /// \short Constructor: call the underlying constructors and 
+/// \short Constructor: call the underlying constructors and 
  /// initialise the pointer to the Rayleigh number to point
  /// to the default value of 0.0.
  QCrouzeixRaviartElementWithExternalElement() : QCrouzeixRaviartElement<DIM>(),
@@ -202,7 +202,8 @@ public:
   {
 #ifdef USE_FD_JACOBIAN_FOR_NAVIER_STOKES_ELEMENT   
    // This function computes the Jacobian by finite-differencing
-   FiniteElement::fill_in_contribution_to_jacobian(residuals,jacobian);
+   ElementWithExternalElement::fill_in_contribution_to_jacobian(residuals,
+                                                                jacobian);
 #else
    //Get the contribution from the basic Navier--Stokes element
    QCrouzeixRaviartElement<DIM>::
@@ -457,7 +458,8 @@ public:
   {
 #ifdef USE_FD_JACOBIAN_FOR_ADVECTION_DIFFUSION_ELEMENT   
    // This function computes the Jacobian by finite-differencing
-   FiniteElement::fill_in_contribution_to_jacobian(residuals,jacobian);
+   ElementWithExternalElement::
+    fill_in_contribution_to_jacobian(residuals,jacobian);
 #else
    //Get the contribution from the basic advection-diffusion element
    QAdvectionDiffusionElement<DIM,3>::

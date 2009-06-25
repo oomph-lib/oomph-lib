@@ -582,7 +582,12 @@ fill_in_contribution_to_residuals_solid_traction(Vector<double> &residuals)
      // Compute traction with dummy arguments for xi
      Vector<double> xi(el_dim,0.0);
      Vector<double> traction(DIM);
-     get_traction(ipt,xi,r,unit_normal,traction);
+     //Don't get the traction if you are a halo element because
+     //the external elements will not have been set up
+     if(!this->is_halo())
+      {
+       get_traction(ipt,xi,r,unit_normal,traction);
+      }
      
      for (unsigned i=0;i<DIM;i++)
       {

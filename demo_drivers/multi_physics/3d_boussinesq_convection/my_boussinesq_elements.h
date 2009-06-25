@@ -811,8 +811,8 @@ get_body_force_nst
  unsigned interaction=0;
 
  // Dynamic cast the source element at this integration point to correct type
- RefineableQAdvectionDiffusionElementWithExternalElement<DIM>* source_el_pt=
-  dynamic_cast<RefineableQAdvectionDiffusionElementWithExternalElement<DIM>*>
+ RefineableAdvectionDiffusionEquations<DIM>* source_el_pt=
+  dynamic_cast<RefineableAdvectionDiffusionEquations<DIM>*>
   (external_element_pt(interaction,ipt));
 
  // Get vector that indicates the direction of gravity from
@@ -841,8 +841,8 @@ get_dbody_force_nst_dexternal_element_data(const unsigned &ipt,
  unsigned interaction=0;
  
  // Dynamic cast "other" element to correct type
- RefineableQAdvectionDiffusionElementWithExternalElement<DIM>* source_el_pt=
-  dynamic_cast<RefineableQAdvectionDiffusionElementWithExternalElement<DIM>*>
+ RefineableAdvectionDiffusionEquations<DIM>* source_el_pt=
+  dynamic_cast<RefineableAdvectionDiffusionEquations<DIM>*>
   (external_element_pt(interaction,ipt));
  
  // Get vector that indicates the direction of gravity from
@@ -889,8 +889,8 @@ get_wind_adv_diff
  unsigned interaction=0;
 
  // Dynamic cast "other" element to correct type
- RefineableQCrouzeixRaviartElementWithExternalElement<DIM>* source_el_pt=
-  dynamic_cast<RefineableQCrouzeixRaviartElementWithExternalElement<DIM>*>
+ RefineableNavierStokesEquations<DIM>* source_el_pt=
+  dynamic_cast<RefineableNavierStokesEquations<DIM>*>
   (external_element_pt(interaction,ipt));
 
  //The wind function is simply the velocity at the points of the source element
@@ -915,8 +915,8 @@ get_dwind_adv_diff_dexternal_element_data(const unsigned &ipt,
  unsigned interaction=0;
  
  // Dynamic cast "other" element to correct type
- RefineableQCrouzeixRaviartElementWithExternalElement<DIM>* source_el_pt=
-  dynamic_cast<RefineableQCrouzeixRaviartElementWithExternalElement<DIM>*>
+ RefineableNavierStokesEquations<DIM>* source_el_pt=
+  dynamic_cast<RefineableNavierStokesEquations<DIM>*>
   (external_element_pt(interaction,ipt));
   
  // Get the external element's derivatives of the velocity with respect

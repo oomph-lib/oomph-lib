@@ -196,7 +196,8 @@ public:
   {
 #ifdef USE_FD_JACOBIAN_FOR_MY_NAVIER_STOKES_ELEMENT   
    // This function computes the Jacobian by finite-differencing
-   FiniteElement::fill_in_contribution_to_jacobian(residuals,jacobian);
+   ElementWithExternalElement::
+    fill_in_contribution_to_jacobian(residuals,jacobian);
 #else
    //Get the contribution from the basic Navier--Stokes element
    QCrouzeixRaviartElement<DIM>::
@@ -446,7 +447,8 @@ public:
   {
 #ifdef USE_FD_JACOBIAN_FOR_MY_ADVECTION_DIFFUSION_ELEMENT   
    // This function computes the Jacobian by finite-differencing
-   FiniteElement::fill_in_contribution_to_jacobian(residuals,jacobian);
+   ElementWithExternalElement::
+    fill_in_contribution_to_jacobian(residuals,jacobian);
 #else
    //Get the contribution from the basic advection-diffusion element
    QAdvectionDiffusionElement<DIM,3>::
