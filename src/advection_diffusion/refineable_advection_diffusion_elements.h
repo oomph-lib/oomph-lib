@@ -129,7 +129,32 @@ class RefineableAdvectionDiffusionEquations :
  void get_interpolated_values(const unsigned& t, const Vector<double>&s,
                               Vector<double>& values)
   {
-   if (t!=0)
+   // Set size of Vector: u
+   values.resize(1);
+   
+   //Find number of nodes
+   const unsigned n_node = nnode();
+
+   //Find the index at which the unknown is stored
+   const unsigned u_nodal_index = this->u_index_adv_diff();
+   
+   //Local shape function
+   Shape psi(n_node);
+   
+   //Find values of shape function
+   shape(s,psi);
+   
+   //Initialise value of u
+   values[0] = 0.0;
+   
+   //Loop over the local nodes and sum
+   for(unsigned l=0;l<n_node;l++)
+    {
+     values[0] += this->nodal_value(t,l,u_nodal_index)*psi[l];
+    }
+  }
+
+ /*if (t!=0)
     {
      std::string error_message =
       "Time-dependent version of get_interpolated_values() ";
@@ -147,7 +172,7 @@ class RefineableAdvectionDiffusionEquations :
      RefineableAdvectionDiffusionEquations<DIM>::
       get_interpolated_values(s,values);
     }
-  }
+    }*/
 
  
  ///  Further build: Copy source function pointer from father element

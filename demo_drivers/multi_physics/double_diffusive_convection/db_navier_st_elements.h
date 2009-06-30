@@ -106,7 +106,7 @@ public:
  ///Access function for the pointer to the thermal Rayleigh number
  double* &ra_t_pt() {return Ra_T_pt;}
 
- ///Access function for the solutale Rayleigh number (const version)
+ ///Access function for the solutal Rayleigh number (const version)
  const double &ra_s() const {return *Ra_S_pt;}
 
  ///Access function for the pointer to the solutal Rayleigh number

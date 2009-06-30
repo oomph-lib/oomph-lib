@@ -91,23 +91,23 @@ public:
  /// Update the problem after solve (empty)
  void actions_after_newton_solve(){}
 
- /// \short Overloaded version of the problem's access function to 
- /// the NST mesh. Recasts the pointer to the base Mesh object to 
+ /// \short Access function to the NST mesh. 
+ /// Casts the pointer to the base Mesh object to 
  /// the actual mesh type.
  RefineableRectangularQuadMesh<NST_ELEMENT>* nst_mesh_pt() 
   {
    return dynamic_cast<RefineableRectangularQuadMesh<NST_ELEMENT>*>
     (Nst_mesh_pt);
-  }
+  } // end_of_nst_mesh
 
- /// \short Overloaded version of the problem's access function to 
- /// the AD mesh. Recasts the pointer to the base Mesh object to 
+ /// \short Access function to the AD mesh. 
+ /// Casts the pointer to the base Mesh object to 
  /// the actual mesh type.
  RefineableRectangularQuadMesh<AD_ELEMENT>* adv_diff_mesh_pt() 
   {
    return dynamic_cast<RefineableRectangularQuadMesh<AD_ELEMENT>*>
     (Adv_diff_mesh_pt);
-  }
+  } // end_of_ad_mesh
 
  /// Actions before adapt:(empty)
  void actions_before_adapt() {}
@@ -124,40 +124,11 @@ public:
    // its value to zero
    fix_pressure(0,0,0.0);
 
-   //(Re)set all the sources in the problem
-
-   // Set binning parameters
-   /*Multi_domain_functions::Setup_bins_again=true;
-   Multi_domain_functions::Nx_bin=50;
-   Multi_domain_functions::Ny_bin=50;
-
-   Multi_domain_functions::X_min=0.0;
-   Multi_domain_functions::X_max=3.0;
-   Multi_domain_functions::Y_min=0.0;
-   Multi_domain_functions::Y_max=1.0;*/
-
    // Set sources
    Multi_domain_functions::set_sources<NST_ELEMENT,AD_ELEMENT,2,2>
     (this,nst_mesh_pt(),adv_diff_mesh_pt());
-  }
+  } //end_of_actions_after_adapt
 
- /// Actions after distribute: set sources
- void actions_after_distribute()
-  {
-   // Set binning parameters
-   /* Multi_domain_functions::Setup_bins_again=true;
-   Multi_domain_functions::Nx_bin=50;
-   Multi_domain_functions::Ny_bin=50;
-
-   Multi_domain_functions::X_min=0.0;
-   Multi_domain_functions::X_max=3.0;
-   Multi_domain_functions::Y_min=0.0;
-   Multi_domain_functions::Y_max=1.0;*/
-
-   // Set sources
-   Multi_domain_functions::set_sources<NST_ELEMENT,AD_ELEMENT,2,2>
-    (this,nst_mesh_pt(),adv_diff_mesh_pt());
-  }
 
  ///Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned &e, const unsigned &pdof, 
@@ -239,7 +210,7 @@ RefineableConvectionProblem()
  // free by default -- only need to pin the ones that have Dirichlet 
  // conditions here
 
- //Loop over the boundaries
+ //Loop over the boundaries of the NST mesh
  unsigned num_bound = nst_mesh_pt()->nboundary();
  for(unsigned ibound=0;ibound<num_bound;ibound++)
   {
@@ -303,7 +274,7 @@ RefineableConvectionProblem()
         }
       }
     }
-  }
+  } // end of loop over AD mesh boundaries
  
  // Complete the build of all elements so they are fully functional 
 
@@ -342,7 +313,7 @@ RefineableConvectionProblem()
 
    // Set the Peclet number multiplied by the Strouhal number
    el_pt->pe_st_pt() =&Global_Physical_Variables::Peclet;
-  }
+  } // end of setup for all AD elements
 
  // combine the submeshes
  add_sub_mesh(Nst_mesh_pt);
@@ -459,14 +430,8 @@ void RefineableConvectionProblem<NST_ELEMENT,AD_ELEMENT>::doc_solution()
 /// Driver code for 2D Boussinesq convection problem with 
 /// adaptivity.
 //====================================================================
-int main(int argc, char **argv)
+int main()
 {
-
-
-#ifdef OOMPH_HAS_MPI
- // Set up MPI_Helpers
- MPI_Helpers::init(argc,argv);
-#endif
 
 
  // Set the direction of gravity
@@ -496,12 +461,6 @@ int main(int argc, char **argv)
  problem.use_imperfection() = false;
  problem.newton_solve(2);
  problem.doc_solution();
-
-
-#ifdef OOMPH_HAS_MPI 
- // finalize MPI
- MPI_Helpers::finalize();
-#endif
 
 } // end of main
 

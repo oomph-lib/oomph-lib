@@ -230,6 +230,9 @@ public:
                          const Vector<double> &s, const Vector<double> &x,
                          Vector<double> &result)
   {
+   //Get the temperature
+   const double interpolated_t = this->interpolated_u_adv_diff(s);
+
    // Get vector that indicates the direction of gravity from
    // the Navier-Stokes equations
    Vector<double> gravity(NavierStokesEquations<DIM>::g());
@@ -237,7 +240,7 @@ public:
    // Temperature-dependent body force:
    for (unsigned i=0;i<DIM;i++)
     {
-     result[i] = -gravity[i]*this->interpolated_u_adv_diff(s)*ra();
+     result[i] = -gravity[i]*interpolated_t*ra();
     }
   }
 

@@ -45,15 +45,18 @@ using namespace std;
 /// RefineableQAdvectionDiffusionElementWithExternalElement
 //=====================================================================
 template<unsigned DIM>
-class RefineableQCrouzeixRaviartElementWithExternalElement : 
+class RefineableQCrouzeixRaviartElementWithTwoExternalElement : 
  public virtual RefineableQCrouzeixRaviartElement<DIM>,
  public virtual ElementWithExternalElement
 {
 
 private:
 
- /// Pointer to a private data member, the Rayleigh number
- double* Ra_pt;
+ /// Pointer to a private data member, the thermal Rayleigh number
+ double* Ra_T_pt;
+
+ /// Pointer to the private data member, the solutal Rayleigh number
+ double* Ra_S_pt;
 
  /// The static default value of the Rayleigh number
  static double Default_Physical_Constant_Value;
@@ -63,14 +66,16 @@ public:
  /// \short Constructor: call the underlying constructors and 
  /// initialise the pointer to the Rayleigh number to point
  /// to the default value of 0.0.
- RefineableQCrouzeixRaviartElementWithExternalElement() : 
+ RefineableQCrouzeixRaviartElementWithTwoExternalElement() : 
   RefineableQCrouzeixRaviartElement<DIM>(),
   ElementWithExternalElement()
   {
-   Ra_pt = &Default_Physical_Constant_Value;
+   Ra_T_pt = &Default_Physical_Constant_Value;
 
-   //There is one interaction
-   this->set_ninteraction(1);
+   Ra_S_pt = &Default_Physical_Constant_Value;
+
+   //There are two interactions
+   this->set_ninteraction(2);
 
    //We do not need to add any external geometric data because the
    //element is fixed
@@ -78,10 +83,17 @@ public:
   } 
 
  ///Access function for the Rayleigh number (const version)
- const double &ra() const {return *Ra_pt;}
+ const double &ra_t() const {return *Ra_T_pt;}
 
  ///Access function for the pointer to the Rayleigh number
- double* &ra_pt() {return Ra_pt;}
+ double* &ra_t_pt() {return Ra_T_pt;}
+
+
+  ///Access function for the solutal Rayleigh number (const version)
+ const double &ra_s() const {return *Ra_S_pt;}
+
+ ///Access function for the pointer to the solutal Rayleigh number
+ double* &ra_s_pt() {return Ra_S_pt;}
 
  /// \short Call the underlying single-physics element's further_build()
  /// functions and make sure that the pointer to the Rayleigh number
@@ -92,14 +104,17 @@ public:
 
    //Cast the pointer to the father element to the specific
    //element type
-   RefineableQCrouzeixRaviartElementWithExternalElement<DIM>* 
+   RefineableQCrouzeixRaviartElementWithTwoExternalElement<DIM>* 
     cast_father_element_pt
-    = dynamic_cast<RefineableQCrouzeixRaviartElementWithExternalElement<DIM>*>(
+    = dynamic_cast<
+    RefineableQCrouzeixRaviartElementWithTwoExternalElement<DIM>*>(
      this->father_element_pt());
 
-   //Set the pointer to the Rayleigh number to be the same as that in
+   //Set the pointer to the Rayleigh numbers to be the same as that in
    //the father
-   this->Ra_pt = cast_father_element_pt->ra_pt();
+   this->Ra_T_pt = cast_father_element_pt->ra_t_pt();
+
+   this->Ra_S_pt = cast_father_element_pt->ra_s_pt();
   }
 
  // Overload get_body_force_nst to get the temperature "body force"
@@ -318,50 +333,6 @@ public:
    this->ignore_external_geometric_data();
   }
 
-
- /// \short Output function:  
- ///  Output x, y, theta at Nplot^DIM plot points
- // Start of output function
- void output(ostream &outfile, const unsigned &nplot)
-  {
-   //vector of local coordinates
-   Vector<double> s(DIM);
-   
-   // Tecplot header info
-   outfile << this->tecplot_zone_string(nplot);
-   
-   // Loop over plot points
-   unsigned num_plot_points=this->nplot_points(nplot);
-   for (unsigned iplot=0;iplot<num_plot_points;iplot++)
-    {
-     // Get local coordinates of plot point
-     this->get_s_plot(iplot,nplot,s);
-     
-     // Output the position of the plot point
-     for(unsigned i=0;i<DIM;i++) 
-      {outfile << this->interpolated_x(s,i) << " ";}
-     
-     // Output the temperature (the advected variable) at the plot point
-     outfile << this->interpolated_u_adv_diff(s) << std::endl;   
-    }
-   outfile << std::endl;
-   
-   // Write tecplot footer (e.g. FE connectivity lists)
-   this->write_tecplot_zone_footer(outfile,nplot);
-  } //End of output function
-
-
- ///  Overload the standard output function with the broken default
- void output(ostream &outfile) {FiniteElement::output(outfile);}
-
- /// \short C-style output function: Broken default
- void output(FILE* file_pt)
-  {FiniteElement::output(file_pt);}
-
- ///  \short C-style output function: Broken default
- void output(FILE* file_pt, const unsigned &n_plot)
-  {FiniteElement::output(file_pt,n_plot);}
-
  /// \short Overload the wind function in the advection-diffusion equations.
  /// This provides the coupling from the Navier--Stokes equations to the
  /// advection-diffusion equations because the wind is the fluid velocity,
@@ -572,19 +543,31 @@ public:
 // from the "source" AdvectionDiffusion element via current integration point
 //=============================================================================
 template<unsigned DIM>
-void RefineableQCrouzeixRaviartElementWithExternalElement<DIM>::
+void RefineableQCrouzeixRaviartElementWithTwoExternalElement<DIM>::
 get_body_force_nst
 (const double& time,const unsigned& ipt,const Vector<double> &s,
  const Vector<double> &x,Vector<double> &result)
 {
- // The interaction is stored at index 0 of the AD element
- const unsigned interaction=0;
+ //Let's choose the thermal interaction to be interaction zeo
+ const unsigned t_interaction=0;
+ //The solutal interaction is interaction 1
+ const unsigned c_interaction=1;
 
- // Get the temperature interpolated from the externeal element
- const double interpolated_t =
-  dynamic_cast<AdvectionDiffusionEquations<DIM>*>(
-   external_element_pt(interaction,ipt))->
-  interpolated_u_adv_diff(external_element_local_coord(interaction,ipt));
+ //Get the temperature field from the external element
+ const double interpolated_t = 
+  dynamic_cast<AdvectionDiffusionEquations<DIM>*>
+  (external_element_pt(t_interaction,ipt))->
+  interpolated_u_adv_diff(external_element_local_coord(t_interaction,ipt));
+
+ 
+ //Get the interpolated concentration field from the external element
+ const double interpolated_c =  dynamic_cast<AdvectionDiffusionEquations<DIM>*>
+  (external_element_pt(c_interaction,ipt))->
+  interpolated_u_adv_diff(external_element_local_coord(c_interaction,ipt));
+
+ //Combine into the buoyancy force
+ const double buoyancy = interpolated_t*ra_t() + interpolated_c*ra_s();
+
 
  // Get vector that indicates the direction of gravity from
  // the Navier-Stokes equations
@@ -593,8 +576,9 @@ get_body_force_nst
  // Temperature-dependent body force:
  for (unsigned i=0;i<DIM;i++)
   {
-   result[i] = -gravity[i]*interpolated_t*ra();
+   result[i] = -gravity[i]*buoyancy;
   }
+
 } //end of get_body_force_nst
 
 //==========start_of_get_dbody_force=========== ===========================
@@ -602,43 +586,82 @@ get_body_force_nst
 /// unknowns in the Navier--Stokes equations
 //=========================================================================
 template<unsigned DIM>
-void RefineableQCrouzeixRaviartElementWithExternalElement<DIM>::
+void RefineableQCrouzeixRaviartElementWithTwoExternalElement<DIM>::
 get_dbody_force_nst_dexternal_element_data(const unsigned &ipt,
                                            DenseMatrix<double> &result,
                                            Vector<unsigned> &global_eqn_number)
 {
- // The interaction index is 0 in this case
- unsigned interaction=0;
- 
- // Dynamic cast "other" element to correct type
- RefineableQAdvectionDiffusionElementWithExternalElement<DIM>* source_el_pt=
-  dynamic_cast<RefineableQAdvectionDiffusionElementWithExternalElement<DIM>*>
-  (external_element_pt(interaction,ipt));
+ // The temperature interaction index is 0 in this case
+ unsigned t_interaction=0;
+ // The concentration interaction index is 1 in this case
+ unsigned c_interaction = 1;
+
+ //Get the temperature interactions
+ Vector<double> du_temp_ddata;
+ Vector<unsigned> global_eqn_number_temp;
+
+ //Get the interation data from the temperature element
+ dynamic_cast<AdvectionDiffusionEquations<DIM>*>
+  (external_element_pt(t_interaction,ipt))->
+  dinterpolated_u_adv_diff_ddata(
+  external_element_local_coord(t_interaction,ipt),du_temp_ddata,
+  global_eqn_number_temp);
+
+ //Get the concentration interactions
+ Vector<double> du_conc_ddata;
+ Vector<unsigned> global_eqn_number_conc;
+
+ //Get the interation data from the temperature element
+ dynamic_cast<AdvectionDiffusionEquations<DIM>*>
+  (external_element_pt(c_interaction,ipt))->
+  dinterpolated_u_adv_diff_ddata(
+  external_element_local_coord(c_interaction,ipt),du_conc_ddata,
+  global_eqn_number_conc);
  
  // Get vector that indicates the direction of gravity from
  // the Navier-Stokes equations
  Vector<double> gravity(NavierStokesEquations<DIM>::g());
- 
- // Get the external element's derivatives
- Vector<double> du_adv_diff_ddata;
- source_el_pt->dinterpolated_u_adv_diff_ddata(
-  external_element_local_coord(interaction,ipt),du_adv_diff_ddata,
-  global_eqn_number);
   
  //Find the number of external data
- unsigned n_external_element_data = du_adv_diff_ddata.size();
+ //Assuming that the temperature and concentration elements are separate
+ //which they are!
+ unsigned n_external_temp_data = du_temp_ddata.size();
+ unsigned n_external_conc_data = du_conc_ddata.size();
+
  //Set the size of the matrix to be returned
- result.resize(DIM,n_external_element_data);
+ result.resize(DIM,n_external_temp_data+n_external_conc_data);
 
  // Temperature-dependent body force:
  for (unsigned i=0;i<DIM;i++)
   {
-   //Loop over the external data
-   for(unsigned n=0;n<n_external_element_data;n++)
+   //Loop over the temperature external data
+   for(unsigned n=0;n<n_external_temp_data;n++)
     {
-     result(i,n) = -gravity[i]*du_adv_diff_ddata[n]*ra();
+     result(i,n) = -gravity[i]*du_temp_ddata[n]*ra_t();
+    }
+
+   //Loop over the concentration external data
+   //Loop over the temperature external data
+   for(unsigned n=0;n<n_external_conc_data;n++)
+    {
+     result(i,n_external_temp_data+n) = -gravity[i]*du_conc_ddata[n]*ra_s();
     }
   }
+
+ //Set the size of the global equation numbers
+ global_eqn_number.resize(n_external_temp_data+n_external_conc_data);
+ //Fill in the entries temperature first
+ for(unsigned n=0;n<n_external_temp_data;n++)
+  {
+   global_eqn_number[n] = global_eqn_number_temp[n];
+  }
+ //Concentration second
+ for(unsigned n=0;n<n_external_conc_data;n++)
+  {
+   global_eqn_number[n_external_temp_data+n] = global_eqn_number_conc[n];
+  }
+ 
+
 } // end_of_get_dbody_force
 
 
@@ -659,10 +682,10 @@ get_wind_adv_diff
  unsigned interaction=0;
 
  // Dynamic cast "other" element to correct type
- RefineableQCrouzeixRaviartElementWithExternalElement<DIM>* source_el_pt=
-  dynamic_cast<RefineableQCrouzeixRaviartElementWithExternalElement<DIM>*>
+ NavierStokesEquations<DIM>* source_el_pt=
+  dynamic_cast<NavierStokesEquations<DIM>*>
   (external_element_pt(interaction,ipt));
-
+ 
  //The wind function is simply the velocity at the points of the source element
  source_el_pt->interpolated_u_nst
   (external_element_local_coord(interaction,ipt),wind);
@@ -685,8 +708,8 @@ get_dwind_adv_diff_dexternal_element_data(const unsigned &ipt,
  unsigned interaction=0;
  
  // Dynamic cast "other" element to correct type
- RefineableQCrouzeixRaviartElementWithExternalElement<DIM>* source_el_pt=
-  dynamic_cast<RefineableQCrouzeixRaviartElementWithExternalElement<DIM>*>
+ NavierStokesEquations<DIM>* source_el_pt=
+  dynamic_cast<NavierStokesEquations<DIM>*>
   (external_element_pt(interaction,ipt));
   
  // Get the external element's derivatives of the velocity with respect
@@ -703,10 +726,12 @@ get_dwind_adv_diff_dexternal_element_data(const unsigned &ipt,
 /// Set the default physical value to be zero in 2D and 3D
 //=========================================================================
 template<>
-double RefineableQCrouzeixRaviartElementWithExternalElement<2>::Default_Physical_Constant_Value=0.0;
+double RefineableQCrouzeixRaviartElementWithTwoExternalElement<2>::
+Default_Physical_Constant_Value=0.0;
 
 template<>
-double RefineableQCrouzeixRaviartElementWithExternalElement<3>::Default_Physical_Constant_Value=0.0;
+double RefineableQCrouzeixRaviartElementWithTwoExternalElement<3>::
+Default_Physical_Constant_Value=0.0;
 
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////

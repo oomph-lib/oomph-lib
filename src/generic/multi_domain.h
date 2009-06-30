@@ -349,10 +349,10 @@ namespace Multi_domain_functions
    // Call set_external_storage in both directions
    // (NB the GEOM_OBJECT and the EXT_ELEMENT should be the same in this case)
    set_external_storage<ELEMENT_0,ELEMENT_1,ELEMENT_1,EL_0_DIM,EL_1_DIM>
-    (problem_pt,first_mesh_pt,second_mesh_pt);
+    (problem_pt,first_mesh_pt,second_mesh_pt,first_interaction);
 
    set_external_storage<ELEMENT_1,ELEMENT_0,ELEMENT_0,EL_1_DIM,EL_0_DIM>
-    (problem_pt,second_mesh_pt,first_mesh_pt);
+    (problem_pt,second_mesh_pt,first_mesh_pt,second_interaction);
 
    // Check for and remove duplicate equation numbers between external halo
    // storage across different processors

@@ -8,7 +8,7 @@ which an incompressible, Newtonian fluid is heated from below.
 When two or more physical processes interact within the same spatial
 domain there are three different approaches to setting up the
 interaction within \c oomph-lib. One approach is to write a completely
-new interaction \c Element. The second approach described in 
+new interaction Element. The second approach described in 
 <a  href="../../b_convection/html/index.html"> the non-refineable  </a> and 
 <a href="../../refine_b_convect/html/index.html">refineable </a> 
 single-domain versions of the present problem is to create a combined
@@ -79,15 +79,20 @@ affected by a fluid load on both its "front" and "back", see the
 channel with leaflet problem</a> for further details).
 
 Any \c Data from the external elements involved in the
-interaction must also be specified. For convenience, 
-such data is divided into 
+interaction must also be specified so that
+interaction blocks in the Jacobian matrix can be calculated.
+Such data is divided into 
 - <em> external field data: </em> fields 
 interpolated by the external element that affect the interaction; 
 .
 - <em> external geometric data: </em> any geometric data that affects
 the external element and, therefore, spatial derivatives of its fields. 
 .
-These data must be specified by two member
+The rationale for the division is that 
+in many cases the field data's contribution to the Jacobian interaction blocks
+can be found analytically, whereas the geometric
+data is more easily handled by finite differences. 
+These external data are specified by two member
 functions in the \c ElementWithExternalElement class
 \code
   virtual void identify_all_field_data_for_external_interaction(
@@ -99,7 +104,11 @@ functions in the \c ElementWithExternalElement class
     Vector<std::set<FiniteElement*> >  const &external_elements_pt,
     std::set<Data*> &external_geometric_data_pt);
 \endcode   
- The default implementation is that for each interaction the member functions
+ which can be overloaded in any specific element. For example, the
+ FSIWallElement overloads both these functions so that viscous load
+ terms can be neglected if desired.
+ The default implementation is that for each interaction the
+ \c FiniteElement member functions
 \code
  void FiniteElement::identify_field_data_for_interactions(...)
 \endcode 
@@ -107,12 +116,11 @@ and
 \code
 void FiniteElement::identify_geometric_data(..)
 \endcode
-are called for each external element, where the default implementation
-of the function \c
-FiniteElement::identify_field_data_for_interactions(...) returns all
+are called for each external element. The default implementation
+of the function \c identify_field_data_for_interactions(...) returns all
 internal and nodal data, including \c Data located at the master nodes
-associated with any hanging nodes. 
-
+associated with any hanging nodes. Again, these functions can be
+overloaded to improve efficiency in specific interaction elements.
 
 \subsection element_modifications Modifying the Navier--Stokes and Advection--Diffusion elements for use in multi-domain problems
 
@@ -144,33 +152,149 @@ get_body_force_nst() and \c get_wind_adv_diff() as follows:
 \skipline start_of_get_wind_adv_diff
 \until end of get_wind_adv_diff
 
-In both elements, we must specify the number of interactions so 
+Note that the functions are similar to those  
+the <a href="../../refine_b_convect/html/index.html">
+single-domain version of the problem. </a>  They are exactly the
+same if \c source_element_pt is replaced by \c this pointer and
+\c external_element_local_coord(...) is replaced by \c s.
+
+In both elements, we specify the number of interactions in the
+ element constructors so 
  that storage for the pointers to external
-elements and local coordinates can be correctly  allocated. This is most easily
-performed in the element constructors: <em> e. g. </em>  for the \c
-RefineableQCrouzeixRaviartElementWithExternalElement:
+elements and local coordinates can be allocated. In addition, there is
+ no external geometric data because neither set of elements moves and
+ we call the member function \c ignore_external_geometric_data() to
+ avoid the call to \c
+ identify_all_geometric_data_for_external_interaction(..) and a wasted
+ loop over the elements.
 
 \dontinclude my_boussinesq_elements.h
 \skipline Constructor
 \until }
 
-Apart from the initialisation of the pointer to the Rayleigh number, 
-the same code is required in the constructor of the \c
-RefineableQAdvectionDiffusionElementWithExternalElement. 
+\skipline Constructor
+\until }
 
-Similar modifications are required to create a \c
-RefineableQAdvectionDiffusionElementWithExternalElement.
+\subsubsection off_diag_jac Computation of the Jacobian matrix
 
-- Explain the \c fill_in_off_diagonal_block_analytic() routine?
+ The easiest, but not the most efficient, method to compute the
+ Jacobian matrix is to use finite
+differences to assemble the entire matrix, 
+but this ignores
+the fact that the original elements compute their Jacobians analytically. As
+discussed in the <a href="../../b_convection/html/index.html#comments">
+comments </a> section of the single-domain version of the problem, we
+can re-use the
+ underlying element's \c fill_in_contribution_to_jacobian(...) 
+function and then finite-difference the off-diagonal blocks of the
+Jacobian. The off-diagonal blocks represent the effects of the data
+ from the external element on the residuals and can be calculated by
+ using the function
+\code
+ElementWithExternalElement::fill_in_jacobian_from_external_interaction_by_fd(..)
+\endcode
+which calls two functions
+\code
+ElementWithExternalElement::fill_in_jacobian_from_external_interaction_field_by_fd(..)
+\endcode
+and
+\code
+ElementWithExternalElement::fill_in_jacobian_from_external_interaction_geometric_by_fd(..)
+\endcode
+can be used to calculate the off-diagonal blocks.
+In the present example we would only need to call the finite
+difference routine for the external field data because the elements
+don't move. 
+
+The procedure for calculating the off-diagonal blocks analytically is
+more involved than in the single-domain case and requires:
+- the derivatives of the functions called from the external elements
+with respect to the external elements' degrees of freedom;
+.
+and
+- knowledge of the local equation numbers corresponding to the
+external elements' degrees of freedom.
+.
+
+The derivatives of the external elements' 
+functions with respect to degrees of freedom
+must be provided by the external elements themselves, <em> i.e. </em>
+\code
+void AdvectionDiffusionEquations<DIM>::
+dinterpolated_u_adv_diff_ddata(const Vector<double> &s, 
+  Vector<double> &du_ddata,Vector<unsigned> &global_eqn_number)
+\endcode
+returns the derivatives that correspond to the function
+\code
+double AdvectionDiffusionEquations<DIM>::
+interpolated_u_adv_diff( const Vector<double> &s)
+\endcode
+and
+\code
+void NavierStokeEquations<DIM>::
+dinterpolated_u_nst_ddata(const Vector<double> &s, const unsigned &i,
+Vector<double> &du_ddata, Vector<unsigned> &global_eqn_number)
+\endcode
+returns the derivatives that correspond to the function
+\code
+double NavierStokesEquations<DIM>::
+interpolated_u_nst(const Vector<double> &s, const unsigned &i)
+\endcode
+
+We recommend that all such functions add the same two additional
+vector arguments, \c du_ddata and \c global_eqn_number, and, on return,
+these vectors should contain the derivatives of the
+function with respect to each degree of freedom and the corresponding
+global equation number of the degree of freedom, respectively. Thus,
+the vectors will both be the same size: the number of degrees of
+freedom of the (external) element.
+
+These external element member functions are used to calculate the
+derivatives of the body force in the Navier--Stokes element 
+with respect to the temperature
+(external) degrees of freedom 
+and the derivatives of the wind in the 
+advection-diffusion element with respect to the velocity (external)
+degrees of freedom
+
+\dontinclude my_boussinesq_elements.h
+\skipline start_of_get_dbody_force
+\until end_of_get_dbody_force
+
+\skipline start_of_get_dwind
+\until end_of_get_dwind
+
+The use of these functions means that we have derivatives
+and the global equation numbers of the corresponding unknowns.
+The equivalent local equation numbers 
+can then be found from the global equation
+numbers by using the function
+\code
+int GeneralisedElement::local_eqn_number(const unsigned long &ieqn_global)
+\endcode
+
+The analytic computation of the off-diagonal terms 
+is now reasonably straightforward, although
+it is complicated by the potential presence of hanging nodes, and the
+implementations are presented in the functions
+\code
+RefineableQCrouzeixRaviartElementWithExternalElement::
+fill_in_off_diagonal_block_analytic(...)
+\endcode
+\code
+RefineableQAdvectionDiffusionElementWithExternalElement::
+fill_in_off_diagonal_block_analytic(...)
+\endcode
+
+Once again, there is a dramatic decrease in the assembly time of the
+Jacobian matrix when all entries are calculated analytically.
 
 <HR>
 
 
-
-
 \section setting_up_interaction Setting up the interaction
 
-To set up a two-way interaction between two meshes, the function
+The function
 \code
 template<class ELEMENT_0,class ELEMENT_1,unsigned EL_DIM_0,unsigned EL_DIM_1>
 void Multi_domain_functions::set_sources
@@ -179,11 +303,12 @@ void Multi_domain_functions::set_sources
   const unsigned& first_interaction=0, 
   const unsigned& second_interaction=0);
 \endcode
-is used.  This must be called by the user prior to the assignment of
-equation numbers in the problem constructor.  Subsequently,
-since the elements involved in the interaction (may) change once a 
-problem has been refined, the user must also ensure that this
-function is called from their driver code in \c actions_after_adapt().
+should be used to set up the two-way interaction between the mesh of
+Navier--Stokes elements and the mesh of advection-diffusion
+elements. The function must be called prior to the assignment of
+any equation numbers. Thus it is called in the problem constructor
+and in \c actions_after_adapt() because the elements involved in the
+interaction may change after refinement.
 
 Within this function, each of \c ELEMENT_0 and \c ELEMENT_1 (the
 element types within \c first_mesh_pt and \c second_mesh_pt
@@ -202,53 +327,44 @@ either direction is not the only interaction for either of the domains.
 
 \subsection driver_code The driver code
 
-The driver code itself is structurally very simimlar to the
-single-domain example.  We start by initialising MPI, setting the
-direction of gravity, and creating the problem with our newly defined
-elements: 
-
-\dontinclude multimesh_ref_b_convection.cc
-\skipline start_of_main
-\until problem;
-
-The remainder of the main body is the same as in the single-domain
-case, with an additional call to finalise MPI:
-\skipline Apply a perturbation
-\until end of main
+The driver code itself is structurally very similar to that of the
+single-domain example, indeed the \c main() functions are virtually
+identical. The only difference is that the \c
+RefineableConvectionProblem takes two template arguments (two
+different elements) instead of one (a combined element).
 
 <HR>
 
 \subsection problem_class The problem class
 
-The problem class contains the constructor and destructor, actions
-routines, and access functions to the two meshes involved in the problem.
+Once again, the problem class is similar to that of the
+single-domain example and many of the functions are the same. 
+There are now two meshes, however, one for the
+fluid elements and one for the advection-diffusion elements
 
 \dontinclude multimesh_ref_b_convection.cc
-\skipline start_of_problem_class
-\until end of mesh access function
+\skipline Access function to the NST mesh
+\until end_of_nst_mesh
 
-Nothing is required to happen before any adaptation occurs, but
-following any mesh adaptation exactly one pressure degree of freedom
-(in the Navier--Stokes mesh) must be pinned.  Following this, the
-external elements must be re-set for each mesh.  The parameters used
-in the multi-domain method can be changed by the user as shown.
+\skipline Access function to the AD mesh
+\until  end_of_ad_mesh
 
-\skipline Actions before adapt
-\until end_of_fix_pressure
+and after mesh adaptation, the
+interaction between the two meshes must be set up again.
 
-Finally the remaining member functions provide access to control the
-application of the imperfection, and to document the solution.
-
-\skipline Access function to boolean
-\until doc_solution();
+\skipline Actions after adapt
+\until end_of_actions_after_adapt
 
 <HR>
 
 \subsection constructor The constructor
 
-The constructor first builds two coarse meshes with the same number of
-elements (\f$ 9 \times 8 \f$, as in the original problem) and
-dimensions for each mesh, and sets error estimators for each mesh.
+The constructor is somewhat different from the equivalent
+single-domain version mainly because there are two meshes instead of
+one. Firstly, we build two coarse meshes with the same number of
+elements (\f$ 9 \times 8 \f$, as in the original single-domain problem) and
+dimensions for each mesh. Error estimators and error targets are set
+separately for each mesh. 
 
 \dontinclude multimesh_ref_b_convection.cc
 \skipline start_of_constructor
@@ -272,7 +388,7 @@ pointers to the required physical parameters in each domain:
 \until end of setup for all AD elements
 
 Finally we combine the submeshes, call the \c actions_after_adapt()
-routine to set up the interaction between the two meshes, and then
+routine to set up the interaction between the two meshes, and
 assign the equation numbers.
 
 \skipline combine the submeshes
@@ -286,7 +402,10 @@ In this function we update the problem specifications before a
 solution by re-applying the specific values of the Dirichlet boundary
 conditions for each mesh, and ensuring that the mass-conserving
 imperfection is applied to the velocity boundary conditions on the
-Navier--Stokes mesh if required.
+Navier--Stokes mesh if required. The boundary conditions are exactly
+the same as for the single-domain version of the problem, but they
+must be applied differently because there are now two meshes instead
+of one.
 
 \dontinclude multimesh_ref_b_convection.cc
 \skipline start_actions_before_newton_solve
@@ -301,26 +420,89 @@ directory pointed to by the \c DocInfo object.  Note: the direct call
 to \c mesh_pt() specifies the global mesh, so this function will
 output the fields in mesh order: the Navier--Stokes mesh followed by
 the advection-diffusion mesh.  To output these fields separately we
-simply call the output function for each mesh.
+could simply call the output function for each mesh.
 
 \dontinclude multimesh_ref_b_convection.cc
 \skipline start_of_doc_solution
 \until end of doc
 
 <HR>
+<hr>
+\section comm_and_ex Comments and Exercises
+\subsection comments Comments
+- The use of two separate meshes with different error estimators means
+that, in principle, a more accurate solution can be obtained with
+fewer degrees of freedom than using a combined error estimator on a
+single mesh. The combined error estimator implemented in the single-domain
+version of the problem will cause refinement if either the fluid
+error or the advection-diffusion error is above the
+specified tolerance. Thus, a fully-converged solution in the
+single-domain problem is one in which the estimated error in 
+all field variables is below the tolerance, but this may be at the
+cost of some over-refinement in one or more of the field variables. In
+the present multi-domain approach, if the solution is converged on
+both meshes then the estimated error in all field variables is again
+below the tolerance. Hence, it is fair, in some sense, to 
+compare the results between fully-converged
+solutions for the single- and multi-domain problems. As suggested by
+the figure above, for this Boussinesq convection problem
+we do obtain fully-converged solutions
+with fewer degrees of freedom using the multi-domain approach because
+the temperature field is over-refined in the single-domain
+case. Of course, the multi-domain solution includes the extra overhead
+of setting up the interaction, but, in general, this cost is
+negligible compared to the solution of the linear systems.
+- The general procedures described in this tutorial can be used to
+setup any interaction between different types of elements using
+multiple meshes. 
+- Before any refinements take place the combined Jacobian that is
+assembled is exactly the same as that in the single-domain problem and
+so the residuals at each Newton step will be exactly the same. You can
+verify this by comparing the appropriate output files in the
+Validation  directory.
+.
 
-Example codes, for both the refineable and non-refineable multi-domain
-versions of the Boussinesq convection problem, can be found in
+<hr>
+
+\subsection exercises Exercises
+-# Investigate the difference between the solutions for the
+multi-domain and single-domain problems by continuing to refine until
+the solutions are fully-converged to a given error tolerance. What is
+the difference in total number of degrees of freedom? What is the
+difference in solution time? What is the difference between the two
+solutions?
+-# Investigate double-diffusive convection by adding another
+advection-diffusion mesh to the problem that interpolates a
+concentration field.
+.
+<hr>
+<hr>
+\section sources Source files for this tutorial
+-  The source files for this tutorial are located in the directory:\n\n
 <CENTER>
 <A HREF="../../../../demo_drivers/multi_physics/boussinesq_convection">
 demo_drivers/multi_physics/boussinesq_convection
 </A>
 </CENTER>
-
-[The same principle applies to any problem where two sets of
-equations "interact" within the same physical space: (1) call the \c
-set_sources(...) function to set up the interaction, and
-(2) ensure that the functions which provide the relevant source terms
-within these equations are overloaded to use the external elements
-which were set by the call to \c set_sources(...).]
+ which contains refineable and non-refineable multi-domain
+versions of the Boussinesq convection problem.
+- The refineable driver code described in this tutorial is:\n\n
+<CENTER>
+<A HREF="
+../../../../
+demo_drivers/multi_physics/boussinesq_convection/multimesh_ref_b_convection.cc
+">
+demo_drivers/multi_physics/boussinesq_convection/multimesh_ref_b_convection.cc
+</A>
+</CENTER>
+- The non-refineable driver code is:\n\n
+<CENTER>
+<A HREF="
+../../../../
+demo_drivers/multi_physics/boussinesq_convection/multimesh_boussinesq_convection.cc
+">
+demo_drivers/multi_physics/boussinesq_convection/multimesh_ref_boussinesq_convection.cc
+</A>
+</CENTER>
+.
 

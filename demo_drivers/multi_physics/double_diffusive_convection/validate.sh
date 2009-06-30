@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=1
+NUM_TESTS=3
 
 
 # Setup validation directory
@@ -33,8 +33,58 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/dd.dat.gz \
-    dd.dat  >> validation.log
+    dd.dat  0.1 1.0e-14 >> validation.log
 fi
+mv RESLT RESLT_dd
+
+
+echo "Running 2D double-diffusive convection (multimesh) validation "
+mkdir RESLT
+../multimesh_dd_convection lalala > ./OUTPUT_dd_multimesh
+echo "done"
+echo " " >> validation.log
+echo "2D double-diffusive convection (multimesh) validation " >> validation.log
+echo "------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/trace.dat RESLT/soln5.dat > dd_multimesh.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/dd_multimesh.dat.gz \
+    dd_multimesh.dat  0.1 1.0e-14 >> validation.log
+fi
+mv RESLT RESLT_dd_multimesh
+
+echo "Running Refineable 2D double-diffusive convection (multimesh) validation "
+mkdir RESLT_ref_multimesh
+../multimesh_ref_dd_convection lalala > ./OUTPUT_ref_dd_multimesh
+echo "done"
+echo " " >> validation.log
+echo "Refineable 2D double-diffusive convection (multimesh) validation " >> validation.log
+echo "------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT_ref_multimesh/trace.dat RESLT_ref_multimesh/nst_soln5.dat \
+    RESLT_ref_multimesh/temp_soln5.dat RESLT_ref_multimesh/conc_soln5.dat \
+     > ref_dd_multimesh.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/ref_dd_multimesh.dat.gz \
+    ref_dd_multimesh.dat  0.1 1.0e-14>> validation.log
+fi
+
+
+
 
 
 # Append output to global validation log file
