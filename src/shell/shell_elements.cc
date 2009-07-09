@@ -1066,7 +1066,8 @@ void HermiteShellElement::output(FILE* file_pt, const unsigned &n_plot)
 //======================================================================
 void FSIDiagHermiteShellElement::locate_zeta(const Vector<double> &zeta,
                                              GeomObject* &geom_object_pt,
-                                             Vector<double> &s)
+                                             Vector<double> &s,
+                                   const bool& use_coordinate_as_initial_guess)
 {
 
  // Loop over two coordinate directions

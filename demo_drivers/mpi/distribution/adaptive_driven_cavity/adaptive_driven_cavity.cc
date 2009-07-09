@@ -37,6 +37,9 @@
 // The mesh
 #include "meshes/rectangular_quadmesh.h"
 
+// hierher error catching
+#include "fenv.h"
+
 using namespace std;
 
 using namespace oomph;
@@ -116,16 +119,20 @@ public:
     pin_redundant_nodal_pressures(mesh_pt()->element_pt());
    
    // Now set the first pressure dof in the first element to 0.0
-   // The "first element" contains the point (0,0)
-   // need it here for distributed problem
-   unsigned nnod=mesh_pt()->nnode();
-   for (unsigned j=0; j<nnod; j++)
+
+   // Loop over all elements
+   unsigned n_element=mesh_pt()->nelement();
+   for (unsigned e=0;e<n_element;e++)
     {
-     if (mesh_pt()->node_pt(j)->x(0)==0 && 
-         mesh_pt()->node_pt(j)->x(1)==0) // 2d problem only
+     // If the lower left node of this element is (0,0), then fix the 
+     // pressure dof in this element to zero
+     if (mesh_pt()->finite_element_pt(e)->node_pt(0)->x(0)==0.0 && 
+         mesh_pt()->finite_element_pt(e)->node_pt(0)->x(1)==0.0) // 2d problem
       {
        oomph_info << "I'm fixing the pressure " << std::endl;
-       fix_pressure(0,0,0.0);
+       // Fix the pressure in element e at pdof=0 to 0.0
+       unsigned pdof=0;
+       fix_pressure(e,pdof,0.0);
       }
     }
 
@@ -238,10 +245,12 @@ void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  // Number of plot points
  unsigned npts=5; 
 
+ // Get current process rank
+ int my_rank=this->communicator_pt()->my_rank();
 
  // Output solution 
  sprintf(filename,"%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
-         doc_info.number(),MPI_Helpers::My_rank);
+         doc_info.number(),my_rank);
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
  some_file.close();
@@ -260,6 +269,9 @@ int main(int argc, char **argv)
 #ifdef OOMPH_HAS_MPI
  MPI_Helpers::init(argc,argv);
 #endif
+
+ // Enable error catching
+ feenableexcept(FE_INVALID | FE_DIVBYZERO | FE_OVERFLOW);
 
  CommandLineArgs::setup(argc,argv);
 
@@ -280,8 +292,23 @@ int main(int argc, char **argv)
   if (CommandLineArgs::Argc==1)
    {
 #ifdef OOMPH_HAS_MPI
+    // The returned partition vector is the size of the number of elements
+    unsigned n_partition=problem.mesh_pt()->nelement();
+    Vector<unsigned> out_element_partition(n_partition);
+
     // Distribute the problem
-    problem.distribute();
+    bool report_stats=true;
+    out_element_partition=problem.distribute(report_stats);
+
+    // Write partition to disk
+    std::ofstream output_file;
+    char filename[100];
+    sprintf(filename,"out_adaptive_cavity_1_partition.dat");
+    output_file.open(filename);
+    for (unsigned e=0;e<n_partition;e++)
+     {
+      output_file << out_element_partition[e] << std::endl;
+     }
 
     // Check halo schemes (optional)
     problem.check_halo_schemes(doc_info);
@@ -295,14 +322,13 @@ int main(int argc, char **argv)
    
     //Output solution
     problem.doc_solution(doc_info);
-   }
+   } // end of no command line argument
   else // Validation run - read in partition from file
    {
 #ifdef OOMPH_HAS_MPI
     DocInfo mesh_doc_info;
     mesh_doc_info.set_directory("RESLT_TH_MESH");
     mesh_doc_info.number()=0;
-
     std::ifstream input_file;
     char filename[100];
 
@@ -320,21 +346,7 @@ int main(int argc, char **argv)
 
     // Now perform the distribution
     bool report_stats=true;
-    problem.distribute(mesh_doc_info,report_stats,element_partition);
-
-    // This commented out section details how to write a partition to disk
-//   Vector<unsigned> out_element_partition;
-//   out_element_partition=problem.distribute();
-//   std::ofstream output_file;
-//   sprintf(filename,"out_adaptive_cavity_1_partition.dat");
-//   output_file.open(filename);
-//   for (unsigned e=0;e<n_partition;e++)
-//    {
-//     output_file << out_element_partition[e] << std::endl;
-//    }
-
-//     // Check halo schemes
-//     problem.check_halo_schemes(mesh_doc_info);
+    problem.distribute(element_partition,mesh_doc_info,report_stats);
 #endif
 
     // Re-solve with adaptation
@@ -346,8 +358,11 @@ int main(int argc, char **argv)
     //Output solution
     problem.doc_solution(doc_info);
 
+#ifdef OOMPH_HAS_MPI
     mesh_doc_info.number()=1;
-    problem.mesh_pt()->doc_mesh_distribution(mesh_doc_info);
+    problem.mesh_pt()->doc_mesh_distribution(problem.communicator_pt(),
+                                             mesh_doc_info);
+#endif
    }
 
  } // end of Taylor Hood elements
@@ -378,14 +393,13 @@ int main(int argc, char **argv)
    
     //Output solution
     problem.doc_solution(doc_info);
-   }
+   } // end of no command-line arguments
   else // Validation run - read in partition from file
    {
 #ifdef OOMPH_HAS_MPI
     DocInfo mesh_doc_info;
     mesh_doc_info.set_directory("RESLT_CR_MESH");
     mesh_doc_info.number()=0;
-
     std::ifstream input_file;
     char filename[100];
 
@@ -403,21 +417,7 @@ int main(int argc, char **argv)
 
     // Now perform the distribution
     bool report_stats=true;
-    problem.distribute(mesh_doc_info,report_stats,element_partition);
-
-    // This commented out section details how to write a partition to disk
-//    Vector<unsigned> out_element_partition;
-//    out_element_partition=problem.distribute();
-//    std::ofstream output_file;
-//    sprintf(filename,"out_adaptive_cavity_2_partition.dat");
-//    output_file.open(filename);
-//    for (unsigned e=0;e<n_partition;e++)
-//     {
-//      output_file << out_element_partition[e] << std::endl;
-//     }
-
-//     // Check halos
-//     problem.check_halo_schemes(mesh_doc_info);
+    problem.distribute(element_partition,mesh_doc_info,report_stats);
 #endif
 
     // Re-solve with adaptation
@@ -429,14 +429,17 @@ int main(int argc, char **argv)
     //Output solution
     problem.doc_solution(doc_info);
 
+#ifdef OOMPH_HAS_MPI
     mesh_doc_info.number()=1;
-    problem.mesh_pt()->doc_mesh_distribution(mesh_doc_info);
+    problem.mesh_pt()->doc_mesh_distribution(problem.communicator_pt(),
+                                             mesh_doc_info);
+#endif
    }
 
  } // end of Crouzeix Raviart elements
 
+ // Finalise MPI
 #ifdef OOMPH_HAS_MPI
-// Finalise MPI
  MPI_Helpers::finalize();
 #endif
 

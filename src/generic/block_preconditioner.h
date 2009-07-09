@@ -902,14 +902,14 @@ namespace oomph
       {
        if (nproc > 1)
         {
-         distributed = 
+         distributed =
           dynamic_cast<DistributableLinearAlgebraObject*>
           (matrix_pt)->distribution_pt()->distributed();
         }
       }
      Distribution_pt->rebuild(problem_pt->communicator_pt(),
-                              matrix_pt->nrow(),distributed); 
-     Nrow = matrix_pt->nrow();
+                              matrix_pt->nrow(),distributed);
+     Nrow = matrix_pt->nrow(); 
 
      // boolean to indicate whether the matrix is acutally distributed
      // ie distributed and on more than one processor
@@ -1584,11 +1584,14 @@ namespace oomph
                                   required_rows(p,1)+1)
               - first_row_send;
             }
+           if (nrow_send > 0)
+            {
            MPI_Request sreq;
            MPI_Isend(&Index_in_dof_block[first_row_send-Min_global_index],
                      nrow_send,MPI_UNSIGNED,p,3,
                      problem_pt->communicator_pt()->mpi_comm(),&sreq);
            requests.push_back(sreq);
+            }
 
            // and then the recvs
            unsigned first_row_recv = 0;
@@ -1603,11 +1606,14 @@ namespace oomph
                                   Distribution_pt->nrow_local(p),
                                   required_rows(my_rank,1)+1) - first_row_recv;
             }
+           if (nrow_recv > 0)
+            {
            MPI_Request rreq;
            MPI_Irecv(&Index_in_dof_block[first_row_recv-Min_global_index],
                      nrow_recv,MPI_UNSIGNED,p,3,
                      problem_pt->communicator_pt()->mpi_comm(),&rreq);
            requests.push_back(rreq);
+            }
           }
         }
 

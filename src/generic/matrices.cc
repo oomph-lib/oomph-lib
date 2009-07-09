@@ -2323,7 +2323,7 @@ CRDoubleMatrix* CRDoubleMatrix::return_global_matrix()
  int* dist_first_row = new int[nproc];
  int* dist_nrow_local =  new int[nproc];
  int nnz_global = 0;
- for (int p = 0; p < MPI_Helpers::Nproc; p++)
+ for (int p = 0; p < nproc; p++)
   {
    nnz_global += dist_nnz_pt[p];
    dist_first_row[p] = this->first_row(p);
@@ -2331,9 +2331,9 @@ CRDoubleMatrix* CRDoubleMatrix::return_global_matrix()
   }
 
  // conpute the offset for the values and column index data
- int* nnz_offset = new int[MPI_Helpers::Nproc];
+ int* nnz_offset = new int[nproc];
  nnz_offset[0] = 0;
- for (int p = 1; p < MPI_Helpers::Nproc; p++)
+ for (int p = 1; p < nproc; p++)
   {
    nnz_offset[p] = nnz_offset[p-1] + dist_nnz_pt[p-1];
   }

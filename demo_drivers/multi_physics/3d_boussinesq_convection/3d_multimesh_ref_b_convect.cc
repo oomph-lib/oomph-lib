@@ -150,7 +150,7 @@ public:
  void actions_after_adapt()
   {
    // Set binning parameters
-   Multi_domain_functions::Setup_bins_again=true;
+   Multi_domain_functions::Change_from_default_bin_parameters=true;
    Multi_domain_functions::Nx_bin=50;
    Multi_domain_functions::Ny_bin=50;
    Multi_domain_functions::Nz_bin=50;
@@ -163,15 +163,15 @@ public:
    Multi_domain_functions::Z_max=Lz;
 
    // Set sources
-   Multi_domain_functions::set_sources<NST_ELEMENT,AD_ELEMENT,3,3>
-    (this,nst_mesh_pt(),adv_diff_mesh_pt());
+   Multi_domain_functions::setup_multi_domain_interactions
+    <NST_ELEMENT,AD_ELEMENT>(this,nst_mesh_pt(),adv_diff_mesh_pt());
   }
 
- /// Actions after distribute: set sources
- void actions_after_distribute()
-  {
-   actions_after_adapt();
-  }
+//  /// Actions after distribute: set sources
+//  void actions_after_distribute()
+//   {
+//    actions_after_adapt();
+//   }
   
  /// \short Doc the solution.
  void doc_solution();
@@ -603,11 +603,11 @@ int main(int argc, char **argv)
   RefineableQAdvectionDiffusionElementWithExternalElement<3> > problem;
 
  // Distribute the problem (including set sources)
-#ifdef OOMPH_HAS_MPI
- DocInfo mesh_doc_info;
- bool report_stats=true;
- problem.distribute(mesh_doc_info,report_stats);
-#endif
+// #ifdef OOMPH_HAS_MPI
+//  DocInfo mesh_doc_info;
+//  bool report_stats=true;
+//  problem.distribute(mesh_doc_info,report_stats);
+// #endif
   
  //Solve the problem with (up to) two levels of adaptation
  //problem.switch_to_iterative_linear_solver();

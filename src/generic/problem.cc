@@ -167,7 +167,7 @@ namespace oomph
    Vector<unsigned> element_partition(n_element,0);
    Element_partition.resize(n_element);
    // Distribute
-   Element_partition=distribute(doc_info,report_stats,element_partition);
+   Element_partition=distribute(element_partition,doc_info,report_stats);
    // Return partition that was used
    return Element_partition;
   }
@@ -185,7 +185,7 @@ namespace oomph
    unsigned n_element=element_partition.size();
    Element_partition.resize(n_element);
    // Distribute
-   Element_partition=distribute(doc_info,report_stats,element_partition);
+   Element_partition=distribute(element_partition,doc_info,report_stats);
    // Return the partition that was used
    return Element_partition;
   }
@@ -203,7 +203,7 @@ namespace oomph
    // Set size of output vector
    Element_partition.resize(n_element);
    // Distribute
-   Element_partition=distribute(doc_info,report_stats,element_partition);
+   Element_partition=distribute(element_partition,doc_info,report_stats);
    // Return partition that was used
    return Element_partition;
   }
@@ -212,34 +212,39 @@ namespace oomph
  /// Distribute the problem and doc
  //==================================================================
  Vector<unsigned>& Problem::distribute
- (DocInfo& doc_info,const bool& report_stats,
-  const Vector<unsigned>& element_partition)
+ (const Vector<unsigned>& element_partition,
+  DocInfo& doc_info, const bool& report_stats)
  {
-  // Call actions before distribute
-  actions_before_distribute();
-
+  // Storage for number of processors and number of elements in global mesh
+  int n_proc=this->communicator_pt()->nproc();
   int n_element=mesh_pt()->nelement();
 
   // Vector to be returned
   Element_partition.resize(n_element);
 
-  if (MPI_Helpers::Nproc==1)
+  // Buffer extreme cases
+  if (n_proc==1) // single-process job - don't do anything
    {
     if (report_stats)
      {
-      oomph_info << "WARNING: You've tried to distribute a problem over only\n"
-                 << "one processor: this would make METIS crash.\n" 
-                 << "Ignoring your request for distribution."
-                 << std::endl << std::endl;
+      std::ostringstream warn_message;
+      warn_message << "WARNING: You've tried to distribute a problem over\n"
+                   << "only one processor: this would make METIS crash.\n"
+                   << "Ignoring your request for distribution.\n";
+      OomphLibWarning(warn_message.str(),
+                      "Problem::distribute()",
+                      OOMPH_EXCEPTION_LOCATION);
      }
    }
-  else if (MPI_Helpers::Nproc>n_element)
+  else if (n_proc>n_element) // more processors than elements
    {
+    // Throw an error
     std::ostringstream error_stream;
-    error_stream << "ERROR: You've tried to distribute a problem with\n"
-                 << n_element << " elements over " << MPI_Helpers::Nproc
-                 << " processors; if you want to\n"
-                 << "use this many processors then refine the mesh first!\n"
+    error_stream << "You have tried to distribute a problem\n"
+                 << "but there are less elements than processors.\n"  
+                 << "Please re-run with more elements!\n"
+                 << "Please also ensure that actions_before_distribute().\n"
+                 << "and actions_after_distribute() are correctly set up.\n"
                  << std::endl;
     throw OomphLibError(error_stream.str(),
                         "Problem::distribute()",
@@ -247,189 +252,175 @@ namespace oomph
    }
   else
    {
-    // Need to partition the global mesh before distributing
-    Mesh* global_mesh_pt = mesh_pt();
-    char filename[100];
-    std::ofstream some_file;
-
-    // Record the original total number of elements in the mesh
-    // to be able to assess the efficiency of the distribution
-    unsigned orig_nelem=global_mesh_pt->nelement();
-
-    // Vector listing the affiliation of each element
-    unsigned nelem=orig_nelem;
-    Vector<unsigned> element_domain(nelem);
-
-    // Partition the mesh, unless the partition has already been passed in
-    // If it hasn't then the sum of all the entries of the vector should be 0
-    unsigned sum_element_partition=0;
-    for (unsigned e=0;e<nelem;e++)
+    // We only distribute uniformly-refined meshes; buffer the case where
+    // either mesh is not uniformly refined
+    bool a_mesh_is_not_uniformly_refined=false;
+    unsigned n_mesh=nsub_mesh();
+    if (n_mesh==0)
      {
-      sum_element_partition+=element_partition[e];
-     }
-    if (sum_element_partition==0)
-     {
-      partition_global_mesh(global_mesh_pt,doc_info,element_domain);
+      // Check refinement levels 
+      if (RefineableMeshBase* mmesh_pt = 
+          dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
+       {
+        unsigned min_ref_level=0;
+        unsigned max_ref_level=0;
+        mmesh_pt->get_refinement_levels(min_ref_level,max_ref_level);
+        // If they are not the same
+        if (max_ref_level!=min_ref_level)
+         {
+          a_mesh_is_not_uniformly_refined=true;
+         }
+       }
      }
     else
      {
-      oomph_info << "INFO: using pre-set partition of elements" << std::endl;
-      element_domain=element_partition;
-     }
-
-    // Set the returned vector
-    Element_partition=element_domain;
-
-    // Prepare vector of vectors for submesh element domains
-    unsigned n_mesh=nsub_mesh();
-    Vector<Vector<unsigned> > submesh_element_domain(n_mesh);
-  
-    // The submeshes need to know their own element domains
-    if (n_mesh!=0)
-     {
-      unsigned count=0;
       for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
        {
-        unsigned nsub_elem=mesh_pt(i_mesh)->nelement();
-        submesh_element_domain[i_mesh].resize(nsub_elem);
-        for (unsigned e=0; e<nsub_elem; e++)
+        // Check refinement levels for each mesh individually
+        // (one mesh is allowed to be "more uniformly refined" than another)
+        if (RefineableMeshBase* mmesh_pt = 
+            dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
          {
-          submesh_element_domain[i_mesh][e]=element_domain[count];
-          count++;
+          unsigned min_ref_level=0;
+          unsigned max_ref_level=0;
+          mmesh_pt->get_refinement_levels(min_ref_level,max_ref_level);
+          // If they are not the same
+          if (max_ref_level!=min_ref_level)
+           {
+            a_mesh_is_not_uniformly_refined=true;
+           }
          }
        }
      }
 
-    // Doc the partitioning (only on processor 0) 
-    //-------------------------------------------
-    if (doc_info.doc_flag())
+    // If any mesh is not uniformly refined
+    if (a_mesh_is_not_uniformly_refined)
      {
-      if (MPI_Helpers::My_rank==0)
+      // Again it may make more sense to throw an error here as the user
+      // will probably not be running a problem that is small enough to
+      // fit the whole of on each processor
+      std::ostringstream error_stream;
+      error_stream << "You have tried to distribute a problem\n"
+                   << "but at least one of your meshes is no longer\n"  
+                   << "uniformly refined.  In order to preserve the Tree\n"
+                   << "and TreeForest structure, Problem::distribute() can\n"
+                   << "only be called while meshes are uniformly refined.\n"
+                   << std::endl;
+      throw OomphLibError(error_stream.str(),
+                          "Problem::distribute()",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+    else
+     {
+      // Is there any global data?  If so, distributing the problem won't work
+      if (nglobal_data() > 0)
        {
-        // Open files for doc of element partitioning
-        Vector<std::ofstream*> domain_file(MPI_Helpers::Nproc);
-        for (int d=0;d<MPI_Helpers::Nproc;d++)
-         {
-          sprintf(filename,"%s/domain%i-%i.dat",doc_info.directory().c_str(),
-                  d,doc_info.number());
-          domain_file[d]=new std::ofstream(filename);
-         }
-     
-        // Doc
-        for (unsigned e=0;e<nelem;e++)
-         {
-          global_mesh_pt->finite_element_pt(e)->
-           output(*domain_file[element_domain[e]],5);
-         }
-     
-        for (int d=0;d<MPI_Helpers::Nproc;d++)
-         {
-          domain_file[d]->close();
-         }
+        std::ostringstream error_stream;
+        error_stream << "You have tried to distribute a problem\n"
+                     << "and there is some global data.\n"  
+                     << "This is not likely to work...\n"
+                     << std::endl;
+        throw OomphLibError(error_stream.str(),
+                            "Problem::distribute()",
+                            OOMPH_EXCEPTION_LOCATION);
        }
-     }
 
-    // Loop over all elements, associate all 
-    //--------------------------------------
-    // nodes with the highest-numbered processor and record all
-    //---------------------------------------------------------
-    // processors the node is associated with
-    //---------------------------------------
-    for (unsigned e=0;e<nelem;e++)
-     {
-      // Get element and its domain
-      FiniteElement* el_pt=global_mesh_pt->finite_element_pt(e);
-      unsigned el_domain=element_domain[e];
+      // Need to partition the global mesh before distributing
+      Mesh* global_mesh_pt = mesh_pt();
 
-      // Associate nodes with highest numbered processor
-      unsigned nnod=el_pt->nnode();
-      for (unsigned j=0;j<nnod;j++)
+      // Vector listing the affiliation of each element
+      unsigned nelem=global_mesh_pt->nelement();
+      Vector<unsigned> element_domain(nelem);
+
+      // Partition the mesh, unless the partition has already been passed in
+      // If it hasn't then the sum of all the entries of the vector should be 0
+      unsigned sum_element_partition=0;
+      for (unsigned e=0;e<nelem;e++)
        {
-        Node* nod_pt=el_pt->node_pt(j); 
-
-        // Recall that processor in charge is initialised to -1
-        if (int(el_domain)>nod_pt->processor_in_charge())
-         {
-          nod_pt->processor_in_charge()=el_domain;
-         }
-        nod_pt->processors_associated_with_data().insert(el_domain);
+        sum_element_partition+=element_partition[e];
        }
-     }
-
-    // Doc the partitioning (only on processor 0) 
-    //-------------------------------------------
-    if (doc_info.doc_flag())
-     {
-      if (MPI_Helpers::My_rank==0)
+      if (sum_element_partition==0)
        {
-        // Open files for doc of node partitioning
-        Vector<std::ofstream*> node_file(MPI_Helpers::Nproc);
-        for (int d=0;d<MPI_Helpers::Nproc;d++)
-         {
-          sprintf(filename,"%s/node%i-%i.dat",doc_info.directory().c_str(),
-                  d,doc_info.number());
-          node_file[d]=new std::ofstream(filename);
-         }
-     
-        // Doc
-        unsigned nnod=global_mesh_pt->nnode();
-        for (unsigned j=0;j<nnod;j++)
-         {
-          Node* nod_pt=global_mesh_pt->node_pt(j);
-          *node_file[nod_pt->processor_in_charge()]
-           << nod_pt->x(0) << " " 
-           << nod_pt->x(1) << std::endl;
-         }
-        for (int d=0;d<MPI_Helpers::Nproc;d++)
-         {
-          node_file[d]->close();
-         }
+        partition_global_mesh(global_mesh_pt,doc_info,element_domain);
        }
-     }
-
-    // Declare all nodes as obsolete. We'll
-    // change this setting for all nodes that must be retained
-    // further down
-    unsigned nnod=global_mesh_pt->nnode();
-    for (unsigned j=0;j<nnod;j++)
-     {
-      global_mesh_pt->node_pt(j)->set_obsolete();
-     }
-
-    // "Distribute" the (sub)meshes (i.e., sort out their haloes)
-    n_mesh=nsub_mesh();
-    if (n_mesh==0)
-     {
-      mesh_pt()->distribute(element_domain,doc_info,report_stats);
-     }
-    else // There are submeshes, "distribute" each one separately
-     {
-      for (unsigned i_mesh=0; i_mesh<n_mesh; i_mesh++)
+      else
        {
         if (report_stats)
          {
-          oomph_info << "Distributing submesh " << i_mesh << std::endl
-                     << "--------------------" << std::endl;
+          oomph_info << "INFO: using pre-set partition of elements"
+                     << std::endl;
          }
-        // Set the doc_info number to reflect the submesh
-        doc_info.number()=i_mesh;
-        mesh_pt(i_mesh)->distribute(submesh_element_domain[i_mesh],
-                                    doc_info,report_stats);
+        element_domain=element_partition;
        }
-      // Rebuild the global mesh
-      rebuild_global_mesh();
-     }
-    // Now the problem has been distributed
-    Problem_has_been_distributed=true;
-   }
-  // Call actions after distribute
-  actions_after_distribute();   
 
-  // Re-assign the equation numbers (incl synchronisation if reqd)
-  oomph_info << "Number of equations: " << assign_eqn_numbers()
-             << std::endl;
+      // Set the GLOBAL Mesh_has_been_distributed flag
+      global_mesh_pt->mesh_has_been_distributed()=true;
 
-  // Return the partition vector
+      // Set the returned vector
+      Element_partition=element_domain;
+
+      // Prepare vector of vectors for submesh element domains
+      Vector<Vector<unsigned> > submesh_element_domain(n_mesh);
+  
+      // The submeshes need to know their own element domains
+      if (n_mesh!=0)
+       {
+        unsigned count=0;
+        for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
+         {
+          unsigned nsub_elem=mesh_pt(i_mesh)->nelement();
+          submesh_element_domain[i_mesh].resize(nsub_elem);
+          for (unsigned e=0; e<nsub_elem; e++)
+           {
+            submesh_element_domain[i_mesh][e]=element_domain[count];
+            count++;
+           }
+         }
+       }
+
+      // Partitioning complete; call actions before distribute
+      actions_before_distribute();
+
+      // Distribute the (sub)meshes (i.e. sort out their halo lookup schemes)
+      n_mesh=nsub_mesh();
+      if (n_mesh==0)
+       {
+        mesh_pt()->distribute(this->communicator_pt(),
+                              element_domain,doc_info,report_stats);
+       }
+      else // There are submeshes, "distribute" each one separately
+       {
+        for (unsigned i_mesh=0; i_mesh<n_mesh; i_mesh++)
+         {
+          if (report_stats)
+           {
+            oomph_info << "Distributing submesh " << i_mesh << std::endl
+                       << "--------------------" << std::endl;
+           }
+          // Set the doc_info number to reflect the submesh
+          doc_info.number()=i_mesh;
+          mesh_pt(i_mesh)->distribute(this->communicator_pt(),
+                                      submesh_element_domain[i_mesh],
+                                      doc_info,report_stats);
+         }
+        // Rebuild the global mesh
+        rebuild_global_mesh();
+       }
+      // Now the problem has been distributed
+      Problem_has_been_distributed=true;
+
+      // Call actions after distribute
+      actions_after_distribute();
+
+      // Re-assign the equation numbers (incl synchronisation if reqd)
+      oomph_info << "Number of equations: " << assign_eqn_numbers()
+                 << std::endl;
+
+     } // end if to check for uniformly refined mesh(es)
+
+   } // end if to check number of processors vs. number of elements etc.
+
+  // Return the partition vector used in the distribution
   return Element_partition;
 
  }
@@ -444,6 +435,10 @@ namespace oomph
                                      Vector<unsigned>& element_domain,
                                      const bool& report_stats)
  {
+  // Storage for number of processors and current processor
+  int n_proc=this->communicator_pt()->nproc();
+  int rank=this->communicator_pt()->my_rank();
+
   char filename[100];
   std::ofstream some_file;
 
@@ -451,7 +446,7 @@ namespace oomph
   //--------------------------------
   if (doc_info.doc_flag())
    {
-    if (MPI_Helpers::My_rank==0)
+    if (rank==0)
      {
       sprintf(filename,"%s/complete_mesh%i.dat",doc_info.directory().c_str(),
               doc_info.number());
@@ -468,8 +463,8 @@ namespace oomph
   unsigned objective=0;
 
   // Do the partitioning
-  METIS::partition_mesh(global_mesh_pt,MPI_Helpers::Nproc,
-                        objective,element_domain);
+  METIS::partition_mesh(this->communicator_pt(),global_mesh_pt,
+                        n_proc,objective,element_domain);
 
   // On very coarse meshes with larger numbers of processors, METIS 
   // occasionally returns an element_domain Vector for which a particular 
@@ -485,11 +480,11 @@ namespace oomph
 
   // Global storage for number of elements on each process
   int my_number_of_elements=0;
-  Vector<int> number_of_elements(MPI_Helpers::Nproc,0);
+  Vector<int> number_of_elements(n_proc,0);
 
   for (unsigned e=0;e<nelem;e++)
    {
-    if (int_element_domain[e]==MPI_Helpers::My_rank)
+    if (int_element_domain[e]==rank)
      {
       my_number_of_elements++;
      }
@@ -498,21 +493,22 @@ namespace oomph
   // Communicate the correct value for each single process into
   // the global storage vector
   MPI_Allgather(&my_number_of_elements,1,MPI_INT,
-                &number_of_elements[0],1,MPI_INT,MPI_COMM_WORLD);
+                &number_of_elements[0],1,MPI_INT,
+                this->communicator_pt()->mpi_comm());
 
   // If a process has no elements then switch an element with the
   // process with the largest number of elements, assuming
   // that it still has enough elements left to share
   int max_number_of_elements=0;
   int process_with_max_elements=0;
-  for (int d=0;d<MPI_Helpers::Nproc;d++)
+  for (int d=0;d<n_proc;d++)
    {
     if (number_of_elements[d]==0)
      {
       // Find the process with maximum number of elements
       if (max_number_of_elements<=1)
        {
-        for (int dd=0;dd<MPI_Helpers::Nproc;dd++)
+        for (int dd=0;dd<n_proc;dd++)
          {
           if (number_of_elements[dd]>max_number_of_elements)
            {
@@ -522,17 +518,17 @@ namespace oomph
          }
        }
 
-      // Check that this number of elements is okay for sharing...
+      // Check that this number of elements is okay for sharing
       if (max_number_of_elements<=1)
        {
-        // Throw error; we shouldn't arrive here, but you never know...
+        // Throw an error if elements can't be shared
         std::ostringstream error_stream;
         error_stream << "No process has more than 1 element, and\n"
                      << "at least one process has no elements!\n"
                      << "Suggest rerunning with more refinement.\n"
                      << std::endl;
         throw OomphLibError(error_stream.str(),
-                            "Mesh::partition_global_mesh()",
+                            "Problem::partition_global_mesh()",
                             OOMPH_EXCEPTION_LOCATION);
 
        }
@@ -550,13 +546,16 @@ namespace oomph
           // Reduce the number of elements available on "max" process
           max_number_of_elements--;
           // Inform the user that a switch has taken place
-          oomph_info << "INFO: Switched element domain at position " << e 
-                     << std::endl 
-                     << "from process " << process_with_max_elements 
-                     << " to process " << d 
-                     << std::endl
-                     << "which was given no elements by METIS partition" 
-                     << std::endl;           
+          if (report_stats)
+           {
+            oomph_info << "INFO: Switched element domain at position " << e 
+                       << std::endl 
+                       << "from process " << process_with_max_elements 
+                       << " to process " << d 
+                       << std::endl
+                       << "which was given no elements by METIS partition" 
+                       << std::endl;
+           }
           // Only need to do this once for this element loop, otherwise
           // this will take all the elements from "max" process and put them
           // in process d, thus leaving essentially the same problem!
@@ -576,7 +575,7 @@ namespace oomph
   unsigned count_elements=0;
   for (unsigned e=0; e<nelem; e++)
    {
-    if(int(element_domain[e])==MPI_Helpers::My_rank)
+    if(int(element_domain[e])==rank)
      {
       count_elements++;
      }
@@ -587,9 +586,6 @@ namespace oomph
     oomph_info << "I have " << count_elements
                << " elements from this partition" << std::endl << std::endl;
    }
-
-  // Set the GLOBAL Mesh_has_been_distributed flag
-  global_mesh_pt->mesh_has_been_distributed()=true;
  }
 
  //==================================================================
@@ -603,6 +599,9 @@ namespace oomph
  void Problem::prune_halo_elements_and_nodes(DocInfo& doc_info, 
                                              const bool& report_stats)
  {  
+  // Storage for number of processors and current processor
+  int n_proc=this->communicator_pt()->nproc();
+
   // Has the problem been distributed yet?
   if (!Problem_has_been_distributed)
    {
@@ -613,12 +612,12 @@ namespace oomph
    }
   else
    {
-    // There's no point in redistributing if it's a single-process job   
-    if (MPI_Helpers::Nproc==1)
+    // There are no halo layers to prune if it's a single-process job   
+    if (n_proc==1)
      {
-      oomph_info << "WARNING: You've tried to re-distribute a problem over\n"
-                 << "only one processor: this is unnecessary.\n" 
-                 << "Ignoring your request for re-distribution."
+      oomph_info << "WARNING: You've tried to prune halo layers on a problem\n"
+                 << "with only one processor: this is unnecessary.\n" 
+                 << "Ignoring your request."
                  << std::endl << std::endl;
      }
     else
@@ -631,15 +630,16 @@ namespace oomph
       if (n_mesh==0)
        {
         // Prune halo elements and nodes for the (single) global mesh
-        mesh_pt()->prune_halo_elements_and_nodes(doc_info,report_stats);
+        mesh_pt()->prune_halo_elements_and_nodes
+         (this->communicator_pt(),doc_info,report_stats);
        }
       else
        {
         // Loop over individual submeshes and prune separately
         for (unsigned i_mesh=0; i_mesh<n_mesh; i_mesh++)
          {
-          mesh_pt(i_mesh)->
-           prune_halo_elements_and_nodes(doc_info,report_stats);
+          mesh_pt(i_mesh)->prune_halo_elements_and_nodes
+           (this->communicator_pt(),doc_info,report_stats);
          }
 
         // Rebuild the global mesh
@@ -906,29 +906,30 @@ namespace oomph
  void Problem::set_default_first_and_last_element_for_assembly()
  {
   // Resize and make default assignments
+  int n_proc=this->communicator_pt()->nproc();
   unsigned n_elements=Mesh_pt->nelement();    
-  First_el_for_assembly.resize(MPI_Helpers::Nproc,0);
-  Last_el_for_assembly.resize(MPI_Helpers::Nproc,n_elements-1);
+  First_el_for_assembly.resize(n_proc,0);
+  Last_el_for_assembly.resize(n_proc,n_elements-1);
   
   // In the absence of any better knowledge distribute work evenly 
   // over elements
   unsigned long range = 
-   static_cast<unsigned long>(double(n_elements)/double(MPI_Helpers::Nproc));  
-  for (int p=0;p<MPI_Helpers::Nproc;p++)
+   static_cast<unsigned long>(double(n_elements)/double(n_proc));
+  for (int p=0;p<n_proc;p++)
    {
     First_el_for_assembly[p] = p*range;
     Last_el_for_assembly[p] = (p+1)*range-1;
    }
   
   // Last one needs to incorporate any dangling elements
-  Last_el_for_assembly[MPI_Helpers::Nproc-1] = n_elements-1;
+  Last_el_for_assembly[n_proc-1] = n_elements-1;
  
   // Doc
-  if (MPI_Helpers::Nproc>1)
+  if (n_proc>1)
    {
     oomph_info << "\nProblem is not distributed. Parallel assembly of "
                << "Jacobian uses default partitioning: "<< std::endl;
-    for (int p=0;p<MPI_Helpers::Nproc;p++)
+    for (int p=0;p<n_proc;p++)
      {
       oomph_info << "Proc " << p << " assembles from element " 
                  <<  First_el_for_assembly[p] << " to " 
@@ -953,14 +954,18 @@ namespace oomph
   Vector<double>& elemental_assembly_time)
  {
   // Wait until all processes have completed/timed their assembly
-  MPI_Barrier(MPI_COMM_WORLD);
+  MPI_Barrier(this->communicator_pt()->mpi_comm());
+
+  // Storage for number of processors and current processor
+  int n_proc=this->communicator_pt()->nproc();
+  int rank=this->communicator_pt()->my_rank();
   
   // Setup vectors storing the number of element timings to be sent
   // and the offset in the final vector
-  Vector<int> receive_count(MPI_Helpers::Nproc);
-  Vector<int> displacement(MPI_Helpers::Nproc);
+  Vector<int> receive_count(n_proc);
+  Vector<int> displacement(n_proc);
   int offset=0;
-  for (int p=0;p<MPI_Helpers::Nproc;p++)
+  for (int p=0;p<n_proc;p++)
    {
     // Default distribution of labour
     unsigned el_lo = First_el_for_assembly[p];
@@ -975,11 +980,10 @@ namespace oomph
       
   // Gather timings on root processor: 
   MPI_Gatherv(
-   &elemental_assembly_time[First_el_for_assembly[MPI_Helpers::My_rank]],
-   Last_el_for_assembly[MPI_Helpers::My_rank]-
-   First_el_for_assembly[MPI_Helpers::My_rank]+1,MPI_DOUBLE,
+   &elemental_assembly_time[First_el_for_assembly[rank]],
+   Last_el_for_assembly[rank]-First_el_for_assembly[rank]+1,MPI_DOUBLE,
    &elemental_assembly_time[0],&receive_count[0],&displacement[0],
-   MPI_DOUBLE,0,MPI_COMM_WORLD);
+   MPI_DOUBLE,0,this->communicator_pt()->mpi_comm());
    
   // We have determined load balancing for current setup.
   // This can remain the same until assign_eqn_numbers() is called
@@ -990,7 +994,7 @@ namespace oomph
   Vector<int> first_and_last_element(2);
    
   // Re-distribute work
-  if (MPI_Helpers::My_rank==0)
+  if (rank==0)
    {
     oomph_info 
      << std::endl
@@ -1006,7 +1010,7 @@ namespace oomph
      }
      
     // Target load per processor
-    double target_load=total/double(MPI_Helpers::Nproc);
+    double target_load=total/double(n_proc);
      
     // We're on the root processor: Always start with the first element
     int proc=0;
@@ -1037,13 +1041,14 @@ namespace oomph
            <<  Last_el_for_assembly[0] << " " 
            << std::endl;
          }
-        else if (proc<(MPI_Helpers::Nproc-1))
+        else if (proc<(n_proc-1))
          {
           // Last element for current processor
           first_and_last_element[1]=e;
 
           // Send two ints to processor p:
-          MPI_Send(&first_and_last_element[0],2,MPI_INT,proc,0,MPI_COMM_WORLD);
+          MPI_Send(&first_and_last_element[0],2,MPI_INT,proc,0,
+                   this->communicator_pt()->mpi_comm());
 
           // Doc
           oomph_info 
@@ -1070,12 +1075,12 @@ namespace oomph
     first_and_last_element[1]=n_elements-1;
 
     // Send two ints to processor p:
-    MPI_Send(&first_and_last_element[0],2,MPI_INT,MPI_Helpers::Nproc-1,
-             0,MPI_COMM_WORLD);
+    MPI_Send(&first_and_last_element[0],2,MPI_INT,n_proc-1,
+             0,this->communicator_pt()->mpi_comm());
      
     // Doc
     oomph_info 
-     << "Processor " << MPI_Helpers::Nproc-1 << " assembles Jacobians" 
+     << "Processor " << n_proc-1 << " assembles Jacobians" 
      <<  " from elements " << first_and_last_element[0] << " to " 
      <<  first_and_last_element[1] << " " 
      << std::endl;
@@ -1086,15 +1091,16 @@ namespace oomph
    {
     Vector<int> aux(2);
     MPI_Status status;
-    MPI_Recv(&aux[0],2,MPI_INT,0,0,MPI_COMM_WORLD,&status);
-    First_el_for_assembly[MPI_Helpers::My_rank]=aux[0];
-    Last_el_for_assembly[MPI_Helpers::My_rank]=aux[1];
+    MPI_Recv(&aux[0],2,MPI_INT,0,0,
+             this->communicator_pt()->mpi_comm(),&status);
+    First_el_for_assembly[rank]=aux[0];
+    Last_el_for_assembly[rank]=aux[1];
    }
 
   // Wipe all others
-  for (int p=0;p<MPI_Helpers::Nproc;p++)
+  for (int p=0;p<n_proc;p++)
    {
-    if (p!=MPI_Helpers::My_rank)
+    if (p!=rank)
      {
       First_el_for_assembly[p]=0;
       Last_el_for_assembly[p]=0;
@@ -1120,6 +1126,9 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
 
 #ifdef OOMPH_HAS_MPI
 
+ // Storage for number of processors
+ int n_proc=this->communicator_pt()->nproc();
+
  // If the problem has been distributed we first have to 
  // classify any potentially newly created nodes as
  // halo or haloed (or neither)
@@ -1129,27 +1138,48 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
    // Perform at submesh level
    unsigned nmesh=nsub_mesh();
 
+#ifdef PARANOID
+   bool report_stats=true;
+#endif
    if (nmesh==0)
     {
-     mesh_pt()->classify_halo_and_haloed_nodes();
-
      // Cast to a refineable mesh and call synchronisation routine
      if(RefineableMeshBase* mmesh_pt = 
-      dynamic_cast<RefineableMeshBase*>(mesh_pt(0))) 
+        dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
       {
        unsigned ncont_interpolated_values=dynamic_cast<RefineableElement*>
            (mmesh_pt->element_pt(0))->ncont_interpolated_values();
 
-       mmesh_pt->synchronise_hanging_nodes(ncont_interpolated_values);       
+       mmesh_pt->synchronise_hanging_nodes(this->communicator_pt(),
+                                           ncont_interpolated_values);
       }
+
+     // Now classify all the halo and haloed nodes
+#ifdef PARANOID 
+     mesh_pt()->
+      classify_halo_and_haloed_nodes(this->communicator_pt(),report_stats);
+#else
+     mesh_pt()->classify_halo_and_haloed_nodes(this->communicator_pt());
+#endif
+
+     // The degrees of freedom must be synchronised 
+     // before calling check_halo_schemes
+     synchronise_dofs(mesh_pt());
+
+#ifdef PARANOID
+     // Check that the halo schemes are okay if all eqn numbers 
+     // are being assigned
+     if (assign_local_eqn_numbers)
+      {
+       DocInfo error_doc_info;
+       error_doc_info.set_directory("HALO_ERROR");
+       check_halo_schemes(error_doc_info);
+      }
+#endif
+
     }
    else // nmesh!=0
     {
-     for (unsigned imesh=0;imesh<nmesh;imesh++)
-      {
-       mesh_pt(imesh)->classify_halo_and_haloed_nodes();
-      }
-
      // Check the synchronicity of hanging nodes for a refineable mesh
      // - In a multi-physics case this should be called for every mesh
      // - It is also possible that a single mesh contains different elements 
@@ -1159,7 +1189,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
       {
        // Cast to a refineable mesh and call synchronisation routine
        if(RefineableMeshBase* mmesh_pt = 
-        dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh))) 
+          dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
          {
           unsigned n_int_values=0;
           // Ensure the mesh has elements on this processor
@@ -1169,23 +1199,51 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
              (mmesh_pt->element_pt(0))->ncont_interpolated_values();
            }
 
-          unsigned ncont_interpolated_values;
+          unsigned ncont_interpolated_values=0;
           // Need to use the largest value of n_int_values 
           // when calling the routine
           MPI_Allreduce(&n_int_values,&ncont_interpolated_values,1,
-                        MPI_INT,MPI_MAX,MPI_COMM_WORLD);
+                        MPI_INT,MPI_MAX,this->communicator_pt()->mpi_comm());
 
           // All processes call the routine to ensure correct communications
-          mmesh_pt->synchronise_hanging_nodes(ncont_interpolated_values);
+          mmesh_pt->synchronise_hanging_nodes(this->communicator_pt(),
+                                              ncont_interpolated_values);
          }
       }
+
+     // Now classify all halo/haloed nodes on each mesh in turn
+     for (unsigned imesh=0;imesh<nmesh;imesh++)
+      {
+#ifdef PARANOID
+       mesh_pt(imesh)->
+        classify_halo_and_haloed_nodes(this->communicator_pt(),report_stats);
+#else
+       mesh_pt(imesh)->classify_halo_and_haloed_nodes(this->communicator_pt());
+#endif
+
+       // Degrees of freedom must be synchronised before
+       // calling check_halo_schemes
+       synchronise_dofs(mesh_pt(imesh));
+      }
+
+#ifdef PARANOID
+     // Check that the halo schemes are okay if all eqn numbers 
+     // are being assigned
+     if (assign_local_eqn_numbers)
+      {
+       DocInfo error_doc_info;
+       error_doc_info.set_directory("HALO_ERROR");
+       check_halo_schemes(error_doc_info);
+      }
+#endif
+
     }
   }
   // Re-distribution of elements over processors during assembly
   // must be recomputed
   else
    {
-    if (MPI_Helpers::Nproc>1)
+    if (n_proc>1)
      {
       // Force re-analysis of time spent on assembly each
       // elemental Jacobian
@@ -1228,7 +1286,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
  unsigned n_mesh=nsub_mesh();
  for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
   {
-   for (int iproc=0;iproc<MPI_Helpers::Nproc;iproc++)
+   for (int iproc=0;iproc<n_proc;iproc++)
     {
      unsigned n_ext_halo_el=mesh_pt(i_mesh)->nexternal_halo_element(iproc);
      for (unsigned e=0;e<n_ext_halo_el;e++)
@@ -1301,7 +1359,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
   if (Problem_has_been_distributed)
    {
     // Wait until all processes have assigned their eqn numbers
-    MPI_Barrier(MPI_COMM_WORLD);
+    MPI_Barrier(this->communicator_pt()->mpi_comm());
    
     // Synchronise the equation numbers and return the total
     // number of degrees of freedom in the overall problem
@@ -1465,20 +1523,16 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
  void Problem::get_residuals(DoubleVector &residuals)
  {
   // Three different cases; if MPI_Helpers::MPI_has_been_initialised=true 
-  // this means MPI_Helpers::setup() has been called.  This could happen on a
+  // this means MPI_Helpers::init() has been called.  This could happen on a
   // code compiled with MPI but run serially; in this instance the
   // get_residuals function still works on one processor.
   //
-  // Secondly, if a code has been compiled with MPI, but MPI_Helpers::setup()
+  // Secondly, if a code has been compiled with MPI, but MPI_Helpers::init()
   // has not been called, then MPI_Helpers::MPI_has_been_initialised=false 
   // and the code calls...
   //
   // Thirdly, the serial version (compiled by all, but only run when compiled
   // with MPI if MPI_Helpers::MPI_has_been_initialised=false
-  //
-  // The only case where an MPI code cannot run serially at present
-  // is one where the distribute function is used (i.e. METIS is called)
-
  
   // start by setting the distribution of the residuals vector if it is not 
   // setup
@@ -1507,6 +1561,9 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
     residuals.initialise();
    }
 
+  // Storage for the number of processors
+  int n_proc=this->communicator_pt()->nproc();
+
 #ifdef OOMPH_HAS_MPI
   if (MPI_Helpers::MPI_has_been_initialised)
    {
@@ -1516,7 +1573,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
 
     // get a pointer to the underlying values
     double* residuals_pt;
-    if (MPI_Helpers::Nproc>1)
+    if (n_proc>1)
      {
       residuals_pt = new double[nrow];
       for (unsigned i = 0; i < residuals.nrow(); i++)
@@ -1583,11 +1640,11 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
      }
  
     // Receive from the other processors and assemble if required
-    if (Communicator_pt->nproc()>1)
+    if (n_proc>1)
      {
       // clear and resize residuals
       MPI_Allreduce(residuals_pt,residuals.values_pt(),nrow,
-                    MPI_DOUBLE, MPI_SUM, MPI_COMM_WORLD);
+                    MPI_DOUBLE,MPI_SUM,Communicator_pt->mpi_comm());
       delete[] residuals_pt;
      }
    
@@ -1742,19 +1799,16 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
  {
  
   // Three different cases; if MPI_Helpers::MPI_has_been_initialised=true 
-  // this means MPI_Helpers::setup() has been called.  This could happen on a
+  // this means MPI_Helpers::init() has been called.  This could happen on a
   // code compiled with MPI but run serially; in this instance the
   // get_residuals function still works on one processor.
   //
-  // Secondly, if a code has been compiled with MPI, but MPI_Helpers::setup()
+  // Secondly, if a code has been compiled with MPI, but MPI_Helpers::init()
   // has not been called, then MPI_Helpers::MPI_has_been_initialised=false 
   // and the code calls...
   //
   // Thirdly, the serial version (compiled by all, but only run when compiled
   // with MPI if MPI_Helpers::MPI_has_been_initialised=false
-  //
-  // The only case where an MPI code cannot run serially at present
-  // is one where the distribute function is used (i.e. METIS is called)
 
   //Allocate storage for the matrix entries
   //The generalised Vector<Vector<>> structure is required
@@ -1913,19 +1967,16 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
  void Problem::get_jacobian(DoubleVector &residuals, CCDoubleMatrix &jacobian)
  {
   // Three different cases; if MPI_Helpers::MPI_has_been_initialised=true 
-  // this means MPI_Helpers::setup() has been called.  This could happen on a
+  // this means MPI_Helpers::init() has been called.  This could happen on a
   // code compiled with MPI but run serially; in this instance the
   // get_residuals function still works on one processor.
   //
-  // Secondly, if a code has been compiled with MPI, but MPI_Helpers::setup()
+  // Secondly, if a code has been compiled with MPI, but MPI_Helpers::init()
   // has not been called, then MPI_Helpers::MPI_has_been_initialised=false 
   // and the code calls...
   //
   // Thirdly, the serial version (compiled by all, but only run when compiled
   // with MPI if MPI_Helpers::MPI_has_been_5Binitialised=false
-  //
-  // The only case where an MPI code cannot run serially at present
-  // is one where the distribute function is used (i.e. METIS is called)
 
   // get the number of degrees of freedom  
   unsigned n_dof=ndof();   
@@ -2308,16 +2359,19 @@ void Problem::sparse_assemble_row_or_column_compressed_with_maps(
  unsigned long el_hi=n_elements-1;
 
 #ifdef OOMPH_HAS_MPI
- // Otherwise just loop over a fraction of the elements
+ // Storage for current process
+ int rank=this->communicator_pt()->my_rank();
+
+ // Loop over a fraction of the elements
  // (This will either have been initialised in
  // Problem::set_default_first_and_last_element_for_assembly() or
- // will have been re-assigned during a previous assembly loop
+ // will have been re-assigned during a previous assembly loop)
  // Note that following the re-assignment only the entries
  // for the current processor are relevant.
  if (!Problem_has_been_distributed)
   {
-   el_lo=First_el_for_assembly[MPI_Helpers::My_rank];
-   el_hi=Last_el_for_assembly[MPI_Helpers::My_rank];
+   el_lo=First_el_for_assembly[rank];
+   el_hi=Last_el_for_assembly[rank];
   }
 #endif 
 
@@ -2614,7 +2668,10 @@ void Problem::sparse_assemble_row_or_column_compressed_with_lists(
  unsigned long el_hi=n_elements-1;
 
 #ifdef OOMPH_HAS_MPI
- // Otherwise just loop over a fraction of the elements
+ // Storage for current processor
+ int rank=this->communicator_pt()->my_rank();
+
+ // Loop over a fraction of the elements
  // (This will either have been initialised in
  // Problem::set_default_first_and_last_element_for_assembly() or
  // will have been re-assigned during a previous assembly loop
@@ -2622,8 +2679,8 @@ void Problem::sparse_assemble_row_or_column_compressed_with_lists(
  // for the current processor are relevant.
  if (!Problem_has_been_distributed)
   {
-   el_lo=First_el_for_assembly[MPI_Helpers::My_rank];
-   el_hi=Last_el_for_assembly[MPI_Helpers::My_rank];
+   el_lo=First_el_for_assembly[rank];
+   el_hi=Last_el_for_assembly[rank];
   }
 #endif 
 
@@ -2990,7 +3047,10 @@ void Problem::sparse_assemble_row_or_column_compressed_with_vectors_of_pairs(
  unsigned long el_hi=n_elements-1;
  
 #ifdef OOMPH_HAS_MPI
- // Otherwise just loop over a fraction of the elements
+ // Storage for current processor
+ int rank=this->communicator_pt()->my_rank();
+
+ // Loop over a fraction of the elements
  // (This will either have been initialised in
  // Problem::set_default_first_and_last_element_for_assembly() or
  // will have been re-assigned during a previous assembly loop
@@ -2998,8 +3058,8 @@ void Problem::sparse_assemble_row_or_column_compressed_with_vectors_of_pairs(
  // for the current processor are relevant.
  if (!Problem_has_been_distributed)
   {
-   el_lo=First_el_for_assembly[MPI_Helpers::My_rank];
-   el_hi=Last_el_for_assembly[MPI_Helpers::My_rank];
+   el_lo=First_el_for_assembly[rank];
+   el_hi=Last_el_for_assembly[rank];
   }
 #endif 
 
@@ -3321,7 +3381,10 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_vectors(
  
 
 #ifdef OOMPH_HAS_MPI
- // Otherwise just loop over a fraction of the elements
+ // Storage for current processor
+ int rank=this->communicator_pt()->my_rank();
+
+ // Loop over a fraction of the elements
  // (This will either have been initialised in
  // Problem::set_default_first_and_last_element_for_assembly() or
  // will have been re-assigned during a previous assembly loop
@@ -3329,8 +3392,8 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_vectors(
  // for the current processor are relevant.
  if (!Problem_has_been_distributed)
   {
-   el_lo=First_el_for_assembly[MPI_Helpers::My_rank];
-   el_hi=Last_el_for_assembly[MPI_Helpers::My_rank];
+   el_lo=First_el_for_assembly[rank];
+   el_hi=Last_el_for_assembly[rank];
   }
 #endif 
 
@@ -3654,8 +3717,12 @@ void Problem::global_matrix_sparse_assemble
  //       in square brackets refer to compressed column storage
  //---------------------------------------------------------------
 
+ // Storage for number of processors
+ int n_proc=this->communicator_pt()->nproc();
+ int rank=this->communicator_pt()->my_rank();
+
  // deal with single processor case
- if (MPI_Helpers::Nproc==1)
+ if (n_proc==1)
   {
    // Call sparse_assemble
    sparse_assemble_row_or_column_compressed(column_or_row_index,
@@ -3664,7 +3731,7 @@ void Problem::global_matrix_sparse_assemble
                                             residuals,
                                             compressed_row_flag);
   }
- // When MPI_Helpers::Nproc>1 assemble the global matrix
+ // When n_proc>1 assemble the global matrix
  // from the blocks returned by distributed_matrix_sparse_assemble
  else 
   {
@@ -3700,18 +3767,18 @@ void Problem::global_matrix_sparse_assemble
    // Create a array to store the number of values held on each processor
    // and get these - communicate via a single Allgather
    unsigned long my_n_value = my_value[0].size();
-   Vector<unsigned long> n_values(MPI_Helpers::Nproc);
+   Vector<unsigned long> n_values(n_proc);
    MPI_Allgather(&my_n_value, 1,
                  MPI_UNSIGNED_LONG,
                  &n_values[0], 1,
                  MPI_UNSIGNED_LONG,
-                 MPI_COMM_WORLD);
+                 this->communicator_pt()->mpi_comm());
   
    // Calculate the total number of values and the position of the
    // first value from each processor in the global matrix
    unsigned long total_n_value = 0;
-   Vector<unsigned long> value_offsets(MPI_Helpers::Nproc);
-   for (int i=0; i<MPI_Helpers::Nproc; i++)
+   Vector<unsigned long> value_offsets(n_proc);
+   for (int i=0; i<n_proc; i++)
     {
      value_offsets[i] = total_n_value;
      total_n_value += n_values[i];
@@ -3719,17 +3786,17 @@ void Problem::global_matrix_sparse_assemble
   
    // Create a array to store the number of rows held on each processor
    // and get those values - communicate via a single Allgather
-   Vector<unsigned long> n_rows_or_cols(MPI_Helpers::Nproc);
+   Vector<unsigned long> n_rows_or_cols(n_proc);
    MPI_Allgather(&my_n_row_or_col, 1,
                  MPI_UNSIGNED_LONG,
                  &n_rows_or_cols[0],1,
                  MPI_UNSIGNED_LONG,
-                 MPI_COMM_WORLD);
+                 this->communicator_pt()->mpi_comm());
   
    // Calculate the position of the first row for each block
-   Vector<unsigned long> row_or_col_offsets(MPI_Helpers::Nproc);
+   Vector<unsigned long> row_or_col_offsets(n_proc);
    row_or_col_offsets[0] = 0;
-   for (int i=0; i<MPI_Helpers::Nproc-1; i++)
+   for (int i=0; i<n_proc-1; i++)
     {
      row_or_col_offsets[i+1] = row_or_col_offsets[i] + n_rows_or_cols[i];
     }
@@ -3744,7 +3811,7 @@ void Problem::global_matrix_sparse_assemble
    row_or_column_start[0][n_dof] = total_n_value;
   
    // Copy my_value and my_column_or_row_index to the global matrix
-   unsigned long value_offset = value_offsets[MPI_Helpers::My_rank];
+   unsigned long value_offset = value_offsets[rank];
    for(unsigned long i=0; i<my_n_value; i++)
     {
      value[0][i+value_offset] = my_value[0][i];
@@ -3752,7 +3819,7 @@ void Problem::global_matrix_sparse_assemble
     }
   
    // Copy my_row_or_column_start and my_residuals to the global values
-   unsigned long row_or_col_offset = row_or_col_offsets[MPI_Helpers::My_rank];
+   unsigned long row_or_col_offset = row_or_col_offsets[rank];
    for(unsigned long i=0; i<my_n_row_or_col; i++)
     {
      row_or_column_start[0][i+row_or_col_offset] = 
@@ -3761,20 +3828,20 @@ void Problem::global_matrix_sparse_assemble
     }
     
    // loop over communications with other processors
-   for (int comm=1; comm<MPI_Helpers::Nproc; comm++)
+   for (int comm=1; comm<n_proc; comm++)
     {
      // Select processor to send data to
-     int send_proc = MPI_Helpers::My_rank + comm;
-     if (send_proc >= MPI_Helpers::Nproc)
+     int send_proc = rank + comm;
+     if (send_proc >= n_proc)
       {
-       send_proc -= MPI_Helpers::Nproc;
+       send_proc -= n_proc;
       }
     
      // Select processor to receive data from
-     int recv_proc = MPI_Helpers::My_rank - comm;
+     int recv_proc = rank - comm;
      if (recv_proc < 0)
       {
-       recv_proc += MPI_Helpers::Nproc;
+       recv_proc += n_proc;
       }
 
      // Get offsets for values from receive processor
@@ -3793,7 +3860,7 @@ void Problem::global_matrix_sparse_assemble
                my_n_row_or_col,
                MPI_DOUBLE,
                send_proc, 0,
-               MPI_COMM_WORLD,
+               this->communicator_pt()->mpi_comm(),
                &request[0]);
 
      MPI_Recv(&(*residuals[0])[row_or_col_offset],
@@ -3801,7 +3868,7 @@ void Problem::global_matrix_sparse_assemble
               MPI_DOUBLE,
               recv_proc,
               MPI_ANY_TAG,
-              MPI_COMM_WORLD,
+              this->communicator_pt()->mpi_comm(),
               &status);
 
      // communicate column [row] indices 
@@ -3809,7 +3876,7 @@ void Problem::global_matrix_sparse_assemble
                my_n_value,
                MPI_INT,
                send_proc, 0,
-               MPI_COMM_WORLD,
+               this->communicator_pt()->mpi_comm(),
                &request[1]);
 
      MPI_Recv(&column_or_row_index[0][value_offset],
@@ -3817,7 +3884,7 @@ void Problem::global_matrix_sparse_assemble
               MPI_INT,
               recv_proc,
               MPI_ANY_TAG,
-              MPI_COMM_WORLD,
+              this->communicator_pt()->mpi_comm(),
               &status);
 
      // communicate row [column] starts remembering we only need to send
@@ -3827,7 +3894,7 @@ void Problem::global_matrix_sparse_assemble
                my_n_row_or_col,
                MPI_INT,
                send_proc, 0,
-               MPI_COMM_WORLD,
+               this->communicator_pt()->mpi_comm(),
                &request[2]);
 
      MPI_Recv(&row_or_column_start[0][row_or_col_offset],
@@ -3835,7 +3902,7 @@ void Problem::global_matrix_sparse_assemble
               MPI_INT, 
               recv_proc,
               MPI_ANY_TAG,
-              MPI_COMM_WORLD,
+              this->communicator_pt()->mpi_comm(),
               &status);
 
      // communicate value
@@ -3843,7 +3910,7 @@ void Problem::global_matrix_sparse_assemble
                my_n_value,
                MPI_DOUBLE,
                send_proc, 0,
-               MPI_COMM_WORLD,
+               this->communicator_pt()->mpi_comm(),
                &request[3]);
 
      MPI_Recv(&value[0][value_offset],
@@ -3851,7 +3918,7 @@ void Problem::global_matrix_sparse_assemble
               MPI_DOUBLE,
               recv_proc,
               MPI_ANY_TAG,
-              MPI_COMM_WORLD,
+              this->communicator_pt()->mpi_comm(),
               &status);
      
      // Shift the received row_or_column_start by value_offset
@@ -3909,11 +3976,15 @@ void Problem::distributed_matrix_sparse_assemble(
  //       in square brackets refer to compressed column storage
  //---------------------------------------------------------------
 
+ // Storage for number of processors and current processor
+ int n_proc=this->communicator_pt()->nproc();
+ int rank=this->communicator_pt()->my_rank();
+
  // Set n_tot - total number of rows [columns]
  n_tot=ndof();
  
  // deal with single processor case
- if (MPI_Helpers::Nproc==1)
+ if (n_proc==1)
   {
    sparse_assemble_row_or_column_compressed(column_or_row_index,
                                             row_or_column_start,
@@ -3940,22 +4011,22 @@ void Problem::distributed_matrix_sparse_assemble(
    // of rows [columns] for all processors
   
    // Setup the first row and the number of rows for all processors
-   Vector<unsigned long> first_rows_or_cols(MPI_Helpers::Nproc+1);
-   Vector<unsigned long>  n_rows_or_cols(MPI_Helpers::Nproc);
-   for (int i=0; i<MPI_Helpers::Nproc; i++)
+   Vector<unsigned long> first_rows_or_cols(n_proc+1);
+   Vector<unsigned long>  n_rows_or_cols(n_proc);
+   for (int i=0; i<n_proc; i++)
     {
      first_rows_or_cols[i]=static_cast<unsigned long>
-      (double(i*n_tot)/double(MPI_Helpers::Nproc));
+      (double(i*n_tot)/double(n_proc));
     }
-   first_rows_or_cols[MPI_Helpers::Nproc]=n_tot;
-   for (int i=0; i<MPI_Helpers::Nproc; i++)
+   first_rows_or_cols[n_proc]=n_tot;
+   for (int i=0; i<n_proc; i++)
     {
      n_rows_or_cols[i]=first_rows_or_cols[i+1]-first_rows_or_cols[i];
     }
 
    // Set the number of rows [columns] this processor owns
-   first_row_or_column=first_rows_or_cols[MPI_Helpers::My_rank];
-   n_row_or_column=n_rows_or_cols[MPI_Helpers::My_rank];
+   first_row_or_column=first_rows_or_cols[rank];
+   n_row_or_column=n_rows_or_cols[rank];
    
    // Vectors to hold my data
    Vector<Vector<double> > my_value(1);
@@ -4018,20 +4089,20 @@ void Problem::distributed_matrix_sparse_assemble(
    Vector<int> row_or_col_start_recvd;
   
    // loop over communications with other processors
-   for (int comm=1; comm<MPI_Helpers::Nproc; comm++)
+   for (int comm=1; comm<n_proc; comm++)
     {
      // Select processor to send data to
-     int send_proc = MPI_Helpers::My_rank + comm;
-     if (send_proc >= MPI_Helpers::Nproc)
+     int send_proc = rank + comm;
+     if (send_proc >= n_proc)
       {
-       send_proc -= MPI_Helpers::Nproc;
+       send_proc -= n_proc;
       }
     
      // Select processor to receive data from
-     int recv_proc = MPI_Helpers::My_rank - comm;
+     int recv_proc = rank - comm;
      if (recv_proc < 0)
       {
-       recv_proc += MPI_Helpers::Nproc;
+       recv_proc += n_proc;
       }
   
      // Set up data to send - note matrix and residual are indexed
@@ -4093,7 +4164,7 @@ void Problem::distributed_matrix_sparse_assemble(
      MPI_Isend(&n_value_to_send, 1,
                MPI_UNSIGNED_LONG,
                send_proc, 0,
-               MPI_COMM_WORLD,
+               this->communicator_pt()->mpi_comm(),
                &send_request[0]);
 
      // blocking receive
@@ -4101,7 +4172,7 @@ void Problem::distributed_matrix_sparse_assemble(
               MPI_UNSIGNED_LONG,
               recv_proc, 
               MPI_ANY_TAG,
-              MPI_COMM_WORLD,
+              this->communicator_pt()->mpi_comm(),
               &status);
      
      // Note: if n_values_recvd is 0 then we can bypass the receiving the
@@ -4121,7 +4192,7 @@ void Problem::distributed_matrix_sparse_assemble(
                n_row_or_col_to_send,
                MPI_DOUBLE,
                send_proc, 0,
-               MPI_COMM_WORLD,
+               this->communicator_pt()->mpi_comm(),
                &send_request[1]);
 
      // blocking receive
@@ -4130,7 +4201,7 @@ void Problem::distributed_matrix_sparse_assemble(
               MPI_DOUBLE,
               recv_proc,
               MPI_ANY_TAG,
-              MPI_COMM_WORLD,
+              this->communicator_pt()->mpi_comm(),
               &status);
 
      // non-blocking sends of Jacobian matrix
@@ -4140,21 +4211,21 @@ void Problem::distributed_matrix_sparse_assemble(
                  n_value_to_send,
                  MPI_INT,
                  send_proc, 0,
-                 MPI_COMM_WORLD,
+                 this->communicator_pt()->mpi_comm(),
                  &send_request[2]);
 
        MPI_Isend(&row_or_col_start_to_send[0],
                  n_row_or_col_to_send+1,
                  MPI_INT,
                  send_proc, 0,
-                 MPI_COMM_WORLD,
+                 this->communicator_pt()->mpi_comm(),
                  &send_request[3]);
 
        MPI_Isend(&value_to_send[0],
                  n_value_to_send, 
                  MPI_DOUBLE,
                  send_proc, 0,
-                 MPI_COMM_WORLD,
+                 this->communicator_pt()->mpi_comm(),
                  &send_request[4]);
       }
      
@@ -4166,7 +4237,7 @@ void Problem::distributed_matrix_sparse_assemble(
                  MPI_INT,
                  recv_proc,
                  MPI_ANY_TAG,
-                 MPI_COMM_WORLD,
+                 this->communicator_pt()->mpi_comm(),
                  &recv_request[0]);
 
        MPI_Irecv(&row_or_col_start_recvd[0],
@@ -4174,7 +4245,7 @@ void Problem::distributed_matrix_sparse_assemble(
                  MPI_INT,
                  recv_proc,
                  MPI_ANY_TAG,
-                 MPI_COMM_WORLD,
+                 this->communicator_pt()->mpi_comm(),
                  &recv_request[1]);
 
        MPI_Irecv(&value_recvd[0],
@@ -4182,7 +4253,7 @@ void Problem::distributed_matrix_sparse_assemble(
                  MPI_DOUBLE,
                  recv_proc,
                  MPI_ANY_TAG,
-                 MPI_COMM_WORLD,
+                 this->communicator_pt()->mpi_comm(),
                  &recv_request[2]);
       }
 
@@ -7521,11 +7592,13 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
        
        if (mmesh_pt->doc_info_pt()==0)
         {
-         error_estimator_pt->get_element_errors(mesh_pt(0),elemental_error);
+         error_estimator_pt->get_element_errors(this->communicator_pt(),
+                                                mesh_pt(0),elemental_error);
         }
        else
         {
-         error_estimator_pt->get_element_errors(mesh_pt(0),elemental_error,
+         error_estimator_pt->get_element_errors(this->communicator_pt(),
+                                                mesh_pt(0),elemental_error,
                                                 *mmesh_pt->doc_info_pt());
         }
        
@@ -7543,7 +7616,7 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
                   << mmesh_pt->min_error() << std::endl;
        
        // Adapt mesh
-       mmesh_pt->adapt(elemental_error);
+       mmesh_pt->adapt(this->communicator_pt(),elemental_error);
         
        // Add to counters
        n_refined+=mmesh_pt->nrefined();
@@ -7593,12 +7666,14 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
          Vector<double> elemental_error(mmesh_pt->nelement());
          if (mmesh_pt->doc_info_pt()==0)
           {
-           error_estimator_pt->get_element_errors(mesh_pt(imesh),
+           error_estimator_pt->get_element_errors(this->communicator_pt(),
+                                                  mesh_pt(imesh),
                                                   elemental_error);
           }
          else
           {
-           error_estimator_pt->get_element_errors(mesh_pt(imesh),
+           error_estimator_pt->get_element_errors(this->communicator_pt(),
+                                                  mesh_pt(imesh),
                                                   elemental_error,
                                                   *mmesh_pt->doc_info_pt());
           }
@@ -7608,11 +7683,13 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
           {
            mmesh_pt->max_error()=
             std::abs(*std::max_element(elemental_error.begin(),
-                                       elemental_error.end(),AbsCmp<double>()));
+                                       elemental_error.end(),
+                                       AbsCmp<double>()));
           
            mmesh_pt->min_error()=
             std::abs(*std::min_element(elemental_error.begin(),
-                                       elemental_error.end(),AbsCmp<double>()));
+                                       elemental_error.end(),
+                                       AbsCmp<double>()));
           }
 
          oomph_info << "\n Max/min error: " 
@@ -7620,7 +7697,7 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
                     << mmesh_pt->min_error() << std::endl;
 
          // Adapt mesh
-         mmesh_pt->adapt(elemental_error); 
+         mmesh_pt->adapt(this->communicator_pt(),elemental_error); 
   
          // Add to counters
          n_refined+=mmesh_pt->nrefined();
@@ -7693,7 +7770,7 @@ void Problem::adapt_based_on_error_estimates(unsigned &n_refined,
      if (mmesh_pt->adapt_flag())
       {
        // Adapt mesh
-       mmesh_pt->adapt(elemental_error[0]);
+       mmesh_pt->adapt(this->communicator_pt(),elemental_error[0]);
        
        // Add to counters
        n_refined += mmesh_pt->nrefined();
@@ -7727,7 +7804,7 @@ void Problem::adapt_based_on_error_estimates(unsigned &n_refined,
         if (mmesh_pt->adapt_flag())
          {
           // Adapt mesh
-          mmesh_pt->adapt(elemental_error[imesh]); 
+          mmesh_pt->adapt(this->communicator_pt(),elemental_error[imesh]); 
           
           // Add to counters
           n_refined += mmesh_pt->nrefined();
@@ -7803,12 +7880,14 @@ void Problem::get_all_error_estimates(Vector<Vector<double> > &elemental_error)
        //Are we documenting the errors or not
        if(mmesh_pt->doc_info_pt()==0)
         {
-         error_estimator_pt->get_element_errors(Problem::mesh_pt(0),
+         error_estimator_pt->get_element_errors(this->communicator_pt(),
+                                                Problem::mesh_pt(0),
                                                 elemental_error[0]);
         }
        else
         {
-         error_estimator_pt->get_element_errors(Problem::mesh_pt(0),
+         error_estimator_pt->get_element_errors(this->communicator_pt(),
+                                                Problem::mesh_pt(0),
                                                 elemental_error[0],
                                                 *mmesh_pt->doc_info_pt());
         }
@@ -7873,12 +7952,14 @@ void Problem::get_all_error_estimates(Vector<Vector<double> > &elemental_error)
          elemental_error[imesh].resize(mmesh_pt->nelement());
          if (mmesh_pt->doc_info_pt()==0)
           {
-           error_estimator_pt->get_element_errors(Problem::mesh_pt(imesh),
+           error_estimator_pt->get_element_errors(this->communicator_pt(),
+                                                  Problem::mesh_pt(imesh),
                                                   elemental_error[imesh]);
           }
          else
           {
-           error_estimator_pt->get_element_errors(Problem::mesh_pt(imesh),
+           error_estimator_pt->get_element_errors(this->communicator_pt(),
+                                                  Problem::mesh_pt(imesh),
                                                   elemental_error[imesh],
                                                   *mmesh_pt->doc_info_pt());
           }
@@ -7959,12 +8040,14 @@ void Problem::doc_errors(DocInfo& doc_info)
      Vector<double> elemental_error(mmesh_pt->nelement());
      if (!doc_info.doc_flag())
       {
-       error_estimator_pt->get_element_errors(mesh_pt(0),
+       error_estimator_pt->get_element_errors(this->communicator_pt(),
+                                              mesh_pt(0),
                                               elemental_error);
       }
      else
       {
-       error_estimator_pt->get_element_errors(mesh_pt(0),
+       error_estimator_pt->get_element_errors(this->communicator_pt(),
+                                              mesh_pt(0),
                                               elemental_error,
                                               doc_info);
       }
@@ -8017,12 +8100,14 @@ void Problem::doc_errors(DocInfo& doc_info)
        Vector<double> elemental_error(mmesh_pt->nelement());
        if (mmesh_pt->doc_info_pt()==0)
         {
-         error_estimator_pt->get_element_errors(mesh_pt(imesh),
+         error_estimator_pt->get_element_errors(this->communicator_pt(),
+                                                mesh_pt(imesh),
                                                 elemental_error);
         }
        else
         {
-         error_estimator_pt->get_element_errors(mesh_pt(imesh),
+         error_estimator_pt->get_element_errors(this->communicator_pt(),
+                                                mesh_pt(imesh),
                                                 elemental_error,
                                                 *mmesh_pt->doc_info_pt());
         }
@@ -8479,7 +8564,7 @@ unsigned Problem::unrefine_uniformly()
    if(RefineableMeshBase* mmesh_pt = 
       dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
     {
-     success_flag+=mmesh_pt->unrefine_uniformly();
+     success_flag+=mmesh_pt->unrefine_uniformly(this->communicator_pt());
     }
    else
     {
@@ -8500,7 +8585,7 @@ unsigned Problem::unrefine_uniformly()
        if (RefineableMeshBase* mmesh_pt=
            dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
         {
-         success_flag+=mmesh_pt->unrefine_uniformly();
+         success_flag+=mmesh_pt->unrefine_uniformly(this->communicator_pt());
         }
        else
         {
@@ -8567,7 +8652,7 @@ unsigned Problem::unrefine_uniformly(const unsigned& i_mesh)
    if(RefineableMeshBase* mmesh_pt = 
       dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
     {
-     success_flag+=mmesh_pt->unrefine_uniformly();
+     success_flag+=mmesh_pt->unrefine_uniformly(this->communicator_pt());
     }
    else
     {
@@ -8670,16 +8755,16 @@ void Problem::unsteady_newton_solve(const double &dt,
      if (Problem_has_been_distributed)
       {
        MPI_Allreduce(&n_refined,&total_refined,1,MPI_INT,MPI_SUM,
-                     MPI_COMM_WORLD);
+                     this->communicator_pt()->mpi_comm());
        n_refined=total_refined;
        MPI_Allreduce(&n_unrefined,&total_unrefined,1,MPI_INT,MPI_SUM,
-                     MPI_COMM_WORLD);
+                     this->communicator_pt()->mpi_comm());
        n_unrefined=total_unrefined;
       }
 #endif
 
-     oomph_info << "---> " << n_refined << " elements to be refined, and " 
-                << n_unrefined << " to be unrefined, in total." << std::endl;
+     oomph_info << "---> " << n_refined << " elements were refined, and " 
+                << n_unrefined << " were unrefined, in total." << std::endl;
      
      // Check convergence of adaptation cycle
      if ((n_refined==0)&&(n_unrefined==0))
@@ -8771,16 +8856,16 @@ void Problem::newton_solve(const unsigned &max_adapt)
      if (Problem_has_been_distributed)
       {
        MPI_Allreduce(&n_refined,&total_refined,1,MPI_INT,MPI_SUM,
-                     MPI_COMM_WORLD);
+                     this->communicator_pt()->mpi_comm());
        n_refined=total_refined;
        MPI_Allreduce(&n_unrefined,&total_unrefined,1,MPI_INT,MPI_SUM,
-                     MPI_COMM_WORLD);
+                     this->communicator_pt()->mpi_comm());
        n_unrefined=total_unrefined;
       }
 #endif
 
-     oomph_info << "---> " << n_refined << " elements to be refined, and " 
-                << n_unrefined << " to be unrefined, in total." << std::endl;
+     oomph_info << "---> " << n_refined << " elements were refined, and " 
+                << n_unrefined << " were unrefined, in total." << std::endl;
 
      // Check convergence of adaptation cycle
      if ((n_refined==0)&&(n_unrefined==0))
@@ -8900,14 +8985,16 @@ void Problem::check_halo_schemes(DocInfo& doc_info)
  if (n_mesh==0)
   {
    oomph_info << "Checking halo schemes on single mesh" << std::endl;
-   mesh_pt()->check_halo_schemes(doc_info,Max_permitted_error_for_halo_check);
+   mesh_pt()->check_halo_schemes(this->communicator_pt(),doc_info,
+                                 Max_permitted_error_for_halo_check);
   }
  else // there are submeshes
   {
    for (unsigned i_mesh=0; i_mesh<n_mesh; i_mesh++)
     {
      oomph_info << "Checking halo schemes on submesh " << i_mesh << std::endl;
-     mesh_pt(i_mesh)->check_halo_schemes(doc_info,
+     doc_info.number()=i_mesh;
+     mesh_pt(i_mesh)->check_halo_schemes(this->communicator_pt(),doc_info,
                                          Max_permitted_error_for_halo_check);
     }
   }
@@ -8925,8 +9012,12 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
 { 
  MPI_Status status;
 
+ // Storage for number of processors and current processor
+ int n_proc=this->communicator_pt()->nproc();
+ int my_rank=this->communicator_pt()->my_rank();
+
  // Loop over all processors whose eqn numbers are to be updated
- for (int rank=0;rank<MPI_Helpers::Nproc;rank++)
+ for (int rank=0;rank<n_proc;rank++)
   {   
    // Prepare a vector of values
    Vector<double> values_on_other_proc;
@@ -8935,7 +9026,7 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
    // If I'm not the processor whose halo values are updated,
    // some of my nodes may be haloed: Stick their
    // values into the vector
-   if (rank!=MPI_Helpers::My_rank)
+   if (rank!=my_rank)
     {
      // How many of my nodes are haloed by the processor whose values
      // are updated?
@@ -8964,6 +9055,17 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
           }
         }
 
+       // Synchronise positions too!
+       unsigned n_dim=haloed_nod_pt->ndim();
+       for (unsigned i_dim=0;i_dim<n_dim;i_dim++)
+        {
+         for (unsigned t=0;t<n_prev;t++)
+          {
+           values_on_other_proc.push_back(haloed_nod_pt->x(t,i_dim));
+           count++;
+          }
+        }
+
        // Is it a solid node?
        SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(haloed_nod_pt);
 
@@ -8980,17 +9082,6 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
             }
           }
 
-         // Synchronise positions too!
-         unsigned n_dim=solid_nod_pt->ndim();
-         for (unsigned i_dim=0;i_dim<n_dim;i_dim++)
-          {
-           for (unsigned t=0;t<n_prev;t++)
-            {
-             values_on_other_proc.push_back(solid_nod_pt->x(t,i_dim));
-             count++;
-            }
-          }
-
         }
 
       }
@@ -9000,13 +9091,13 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
      // the array before the array is sent, and send that first, so that
      // the receiver knows how much data to expect.  The order will be
      // preserved since the halo/haloed nodes are already ordered correctly
-     MPI_Send(&count,1,MPI_INT,rank,0,MPI_COMM_WORLD);
+     MPI_Send(&count,1,MPI_INT,rank,0,this->communicator_pt()->mpi_comm());
 
      // Send it across
      if (count!=0)
       {
        MPI_Send(&values_on_other_proc[0],count,MPI_DOUBLE,rank,1,
-                MPI_COMM_WORLD);
+                this->communicator_pt()->mpi_comm());
       }
      
      // Now loop over haloed elements and prepare to send internal data
@@ -9044,13 +9135,14 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
         }
       }
      // send the size of the vector of internal data values to the receiver
-     MPI_Send(&count_intern,1,MPI_INT,rank,2,MPI_COMM_WORLD);
+     MPI_Send(&count_intern,1,MPI_INT,rank,2,
+              this->communicator_pt()->mpi_comm());
 
      // now send the vector itself
      if (count_intern!=0)
       {
        MPI_Send(&internal_values_on_other_proc[0],count_intern,MPI_DOUBLE,rank,
-                3,MPI_COMM_WORLD);
+                3,this->communicator_pt()->mpi_comm());
       }
   
      // done
@@ -9060,19 +9152,20 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
     {
      // Loop over all other processors to receive their
      // values
-     for (int send_rank=0;send_rank<MPI_Helpers::Nproc;send_rank++)
+     for (int send_rank=0;send_rank<n_proc;send_rank++)
       {
        
        // Don't talk to yourself
-       if (send_rank!=MPI_Helpers::My_rank)
+       if (send_rank!=my_rank)
         {
          // How many of my nodes are halos whose non-halo counter
          // parts live on processor send_rank?
          unsigned nnod=mesh_pt->nhalo_node(send_rank);
          
          // Receive size of vector of values
-         unsigned count;
-         MPI_Recv(&count,1,MPI_INT,send_rank,0,MPI_COMM_WORLD,&status);
+         unsigned count=0;
+         MPI_Recv(&count,1,MPI_INT,send_rank,0,
+                  this->communicator_pt()->mpi_comm(),&status);
 
          if (count!=0)
           {
@@ -9080,8 +9173,8 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
            values_on_other_proc.resize(count);
       
            // Receive 
-           MPI_Recv(&values_on_other_proc[0],count, MPI_DOUBLE, send_rank,
-                    1, MPI_COMM_WORLD,&status);
+           MPI_Recv(&values_on_other_proc[0],count,MPI_DOUBLE,send_rank,
+                    1,this->communicator_pt()->mpi_comm(),&status);
 
            // Copy into the values of the halo nodes
            // on the present processors
@@ -9109,6 +9202,17 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
                 }
               }
 
+             // Synchronise positions too
+             unsigned n_dim=halo_nod_pt->ndim();
+             for (unsigned i_dim=0;i_dim<n_dim;i_dim++)
+              {
+               for (unsigned t=0;t<n_prev;t++)
+                {
+                 halo_nod_pt->x(t,i_dim)=values_on_other_proc[count];
+                 count++;
+                }
+              }
+
              // Is this a solid node?
              SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(halo_nod_pt);
 
@@ -9119,23 +9223,11 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
                 {
                  for (unsigned t=0;t<n_prev;t++)
                   {
-                   solid_nod_pt->variable_position_pt()->set_value(t,ival,
-                                                                   values_on_other_proc[count]);
+                   solid_nod_pt->variable_position_pt()->set_value
+                    (t,ival,values_on_other_proc[count]);;
                    count++;
                   }
                 }
-
-               // Synchronise positions too
-               unsigned n_dim=solid_nod_pt->ndim();
-               for (unsigned i_dim=0;i_dim<n_dim;i_dim++)
-                {
-                 for (unsigned t=0;t<n_prev;t++)
-                  {
-                   solid_nod_pt->x(t,i_dim)=values_on_other_proc[count];
-                   count++;
-                  }
-                }
-
               }
 
             }
@@ -9147,15 +9239,17 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
          unsigned nelem_halo=halo_elem_pt.size();
          
          // Receive size of vector of internal data values
-         unsigned count_intern;
-         MPI_Recv(&count_intern,1,MPI_INT,send_rank,2,MPI_COMM_WORLD,&status);
+         unsigned count_intern=0;
+         MPI_Recv(&count_intern,1,MPI_INT,send_rank,2,
+                  this->communicator_pt()->mpi_comm(),&status);
 
          // Prepare and receive vector
          if (count_intern!=0)
           {
            internal_values_on_other_proc.resize(count_intern);
            MPI_Recv(&internal_values_on_other_proc[0],count_intern,
-                    MPI_DOUBLE,send_rank,3,MPI_COMM_WORLD,&status);
+                    MPI_DOUBLE,send_rank,3,
+                    this->communicator_pt()->mpi_comm(),&status);
 
            // reset array counter index to zero
            count_intern=0;
@@ -9202,8 +9296,12 @@ void Problem::synchronise_external_dofs(Mesh* &mesh_pt)
 { 
  MPI_Status status;
 
+ // Storage for number of processors and current processor
+ int n_proc=this->communicator_pt()->nproc();
+ int my_rank=this->communicator_pt()->my_rank();
+
  // Loop over all processors whose eqn numbers are to be updated
- for (int rank=0;rank<MPI_Helpers::Nproc;rank++)
+ for (int rank=0;rank<n_proc;rank++)
   {   
    // Prepare a vector of values
    Vector<double> values_on_other_proc;
@@ -9212,7 +9310,7 @@ void Problem::synchronise_external_dofs(Mesh* &mesh_pt)
    // If I'm not the processor whose external halo values are updated,
    // some of my nodes may be externally haloed: Stick their
    // values into the vector
-   if (rank!=MPI_Helpers::My_rank)
+   if (rank!=my_rank)
     {
      // How many of my nodes are externally haloed by the processor whose
      // values are updated?  NB these nodes are on the external mesh.
@@ -9277,13 +9375,13 @@ void Problem::synchronise_external_dofs(Mesh* &mesh_pt)
      // the array before the array is sent, and send that first, so that
      // the receiver knows how much data to expect.  The order will be
      // preserved since the halo/haloed nodes are already ordered correctly
-     MPI_Send(&count,1,MPI_INT,rank,0,MPI_COMM_WORLD);
+     MPI_Send(&count,1,MPI_INT,rank,0,this->communicator_pt()->mpi_comm());
 
      if (count!=0)
       {
        // Send it across
        MPI_Send(&values_on_other_proc[0],count,MPI_DOUBLE,rank,1,
-                MPI_COMM_WORLD);
+                this->communicator_pt()->mpi_comm());
       }
      
      // Now loop over haloed elements and prepare to send internal data
@@ -9321,31 +9419,33 @@ void Problem::synchronise_external_dofs(Mesh* &mesh_pt)
         }
       }
      // Send the size of the vector of internal data values to the receiver
-     MPI_Send(&count_intern,1,MPI_INT,rank,2,MPI_COMM_WORLD);
+     MPI_Send(&count_intern,1,MPI_INT,rank,2,
+              this->communicator_pt()->mpi_comm());
 
      if (count_intern!=0)
       {
        // Now send the vector itself
        MPI_Send(&internal_values_on_other_proc[0],count_intern,MPI_DOUBLE,rank,
-                3,MPI_COMM_WORLD);
+                3,this->communicator_pt()->mpi_comm());
       }
     }
    // Receive the vector of values
    else
     {
      // Loop over all other processors to receive their values
-     for (int send_rank=0;send_rank<MPI_Helpers::Nproc;send_rank++)
+     for (int send_rank=0;send_rank<n_proc;send_rank++)
       {
        // Don't talk to yourself
-       if (send_rank!=MPI_Helpers::My_rank)
+       if (send_rank!=my_rank)
         {
          // How many of my nodes are external halos whose external non-halo
          // counterparts live on processor send_rank? 
          unsigned next_nod=mesh_pt->nexternal_halo_node(send_rank);
 
          // Receive size of vector of values
-         unsigned count;
-         MPI_Recv(&count,1,MPI_INT,send_rank,0,MPI_COMM_WORLD,&status);
+         unsigned count=0;
+         MPI_Recv(&count,1,MPI_INT,send_rank,0,
+                  this->communicator_pt()->mpi_comm(),&status);
 
          if (count!=0)
           {
@@ -9353,8 +9453,8 @@ void Problem::synchronise_external_dofs(Mesh* &mesh_pt)
            values_on_other_proc.resize(count);
       
            // Receive 
-           MPI_Recv(&values_on_other_proc[0],count, MPI_DOUBLE, send_rank,
-                    1, MPI_COMM_WORLD,&status);
+           MPI_Recv(&values_on_other_proc[0],count,MPI_DOUBLE,send_rank,
+                    1,this->communicator_pt()->mpi_comm(),&status);
 
            // Copy into the values of the external halo nodes
            // on the present processors
@@ -9418,15 +9518,17 @@ void Problem::synchronise_external_dofs(Mesh* &mesh_pt)
          unsigned next_elem_halo=mesh_pt->nexternal_halo_element(send_rank);
          
          // Receive size of vector of internal data values
-         unsigned count_intern;
-         MPI_Recv(&count_intern,1,MPI_INT,send_rank,2,MPI_COMM_WORLD,&status);
+         unsigned count_intern=0;
+         MPI_Recv(&count_intern,1,MPI_INT,send_rank,2,
+                  this->communicator_pt()->mpi_comm(),&status);
 
          if (count_intern!=0)
           {
            // Prepare and receive vector
            internal_values_on_other_proc.resize(count_intern);
            MPI_Recv(&internal_values_on_other_proc[0],count_intern,
-                    MPI_DOUBLE,send_rank,3,MPI_COMM_WORLD,&status);
+                    MPI_DOUBLE,send_rank,3,
+                    this->communicator_pt()->mpi_comm(),&status);
 
            // reset array counter index to zero
            count_intern=0;
@@ -9474,40 +9576,44 @@ void Problem::synchronise_external_dofs(Mesh* &mesh_pt)
 //========================================================================
 long Problem::synchronise_eqn_numbers(const bool& assign_local_eqn_numbers)
 { 
+ // Storage for number of processors and current processor
+ int n_proc=this->communicator_pt()->nproc();
+ int my_rank=this->communicator_pt()->my_rank();
+
  // Step 1: Bump up eqn numbers by the number of dofs on 
  // previous processor
 
  // Assemble vector that contains current number of dofs on the
  // various processors
- Vector<int> dofs_on_proc(MPI_Helpers::Nproc,-1);
+ Vector<int> dofs_on_proc(n_proc,-1);
  
  // Store own number of dofs
  int my_ndof=ndof();
- dofs_on_proc[MPI_Helpers::My_rank]=my_ndof;
+ dofs_on_proc[my_rank]=my_ndof;
 
  // Gather information on root processor: First argument group
  // specifies what is to be sent (one int from each procssor, indicating
  // the number of dofs on it), the second group indicates where
  // the results are to be gathered (in rank order) on root processor.
- MPI_Gather(&dofs_on_proc[MPI_Helpers::My_rank],1,MPI_INT,
+ MPI_Gather(&dofs_on_proc[my_rank],1,MPI_INT,
             &dofs_on_proc[0],1, MPI_INT,
-            0,MPI_COMM_WORLD);
+            0,this->communicator_pt()->mpi_comm());
  
  // Now broadcast the result back out: Nproc integers, starting
  // from the beginning of dofs_on_proc. 
- MPI_Bcast(&dofs_on_proc[0], MPI_Helpers::Nproc,MPI_INT,0,
-           MPI_COMM_WORLD);
+ MPI_Bcast(&dofs_on_proc[0],n_proc,MPI_INT,0,
+           this->communicator_pt()->mpi_comm());
 
  // Get total number of dofs in problem
  unsigned new_ndof=0;
- for (int i=0;i<MPI_Helpers::Nproc;i++)
+ for (int i=0;i<n_proc;i++)
   { 
    new_ndof+=dofs_on_proc[i];
   }
  
  // Accumulate offset for eqn numbers
  unsigned bump=0;
- for (int i=0;i<MPI_Helpers::My_rank;i++)
+ for (int i=0;i<my_rank;i++)
   { 
    bump+= dofs_on_proc[i];
   }
@@ -9660,8 +9766,12 @@ void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
 {
  MPI_Status status;
 
+ // Storage for number of processors and current processor
+ int n_proc=this->communicator_pt()->nproc();
+ int my_rank=this->communicator_pt()->my_rank();
+
  // Loop over all processors whose eqn numbers are to be updated
- for (int rank=0;rank<MPI_Helpers::Nproc;rank++)
+ for (int rank=0;rank<n_proc;rank++)
   {
    // Prepare a vector of equation numbers 
    Vector<int> eqn_numbers_on_other_proc;
@@ -9670,7 +9780,7 @@ void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
    // If I'm not the processor whose halo eqn numbers are updated,
    // some of my nodes may be haloed: Stick their
    // eqn numbers into the vector
-   if (rank!=MPI_Helpers::My_rank)
+   if (rank!=my_rank)
     {
      // How many of my nodes are haloed by the processor whose eqn
      // numbers are updated?
@@ -9706,13 +9816,13 @@ void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
      // The receiving process needs to know how many values it's getting
      // since it only descends into the loop over the nodes after
      // receiving the vector
-     MPI_Send(&count,1,MPI_INT,rank,0,MPI_COMM_WORLD);
+     MPI_Send(&count,1,MPI_INT,rank,0,this->communicator_pt()->mpi_comm());
 
      if (count!=0)
       {
        // Send it across
        MPI_Send(&eqn_numbers_on_other_proc[0],count,MPI_INT,rank,1,
-                MPI_COMM_WORLD);
+                this->communicator_pt()->mpi_comm());
       }
 
      // now loop over haloed elements and prepare to send 
@@ -9743,13 +9853,14 @@ void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
      // This vector should only be sent if count_intern is non-zero
      
      // send the size of the vector of internal data values to the receiver
-     MPI_Send(&count_intern,1,MPI_INT,rank,2,MPI_COMM_WORLD);
+     MPI_Send(&count_intern,1,MPI_INT,rank,2,
+              this->communicator_pt()->mpi_comm());
 
      // now send the vector itself
      if (count_intern!=0)
       {
        MPI_Send(&internal_eqn_numbers_on_other_proc[0],count_intern,
-                MPI_INT,rank,3,MPI_COMM_WORLD);
+                MPI_INT,rank,3,this->communicator_pt()->mpi_comm());
       }
      // done
 
@@ -9759,18 +9870,19 @@ void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
     {
      // Loop over all other processors to receive their
      // eqn numbers
-     for (int send_rank=0;send_rank<MPI_Helpers::Nproc;send_rank++)
+     for (int send_rank=0;send_rank<n_proc;send_rank++)
       {
        // Don't talk to yourself
-       if (send_rank!=MPI_Helpers::My_rank)
+       if (send_rank!=my_rank)
         {
          // How many of my nodes are halos whose non-halo counter
          // parts live on processor send_rank?
          unsigned nnod=mesh_pt->nhalo_node(send_rank);
          
          // Receive the size of the vector of eqn numbers
-         unsigned count;
-         MPI_Recv(&count,1,MPI_INT,send_rank,0,MPI_COMM_WORLD,&status);
+         unsigned count=0;
+         MPI_Recv(&count,1,MPI_INT,send_rank,0,
+                  this->communicator_pt()->mpi_comm(),&status);
          
          if (count!=0)
           {
@@ -9779,7 +9891,7 @@ void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
          
            // Receive it
            MPI_Recv(&eqn_numbers_on_other_proc[0],count,MPI_INT,send_rank,
-                    1, MPI_COMM_WORLD,&status);
+                    1,this->communicator_pt()->mpi_comm(),&status);
 
            // Copy into the equation numbers of the halo nodes
            // on the present processors
@@ -9818,15 +9930,17 @@ void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
          unsigned nelem_halo=halo_elem_pt.size();
 
          // Receive size of vector of internal data values
-         unsigned count_intern;
-         MPI_Recv(&count_intern,1,MPI_INT,send_rank,2,MPI_COMM_WORLD,&status);
+         unsigned count_intern=0;
+         MPI_Recv(&count_intern,1,MPI_INT,send_rank,2,
+                  this->communicator_pt()->mpi_comm(),&status);
 
          // Prepare and receive vector
          if (count_intern!=0)
           {
            internal_eqn_numbers_on_other_proc.resize(count_intern);
            MPI_Recv(&internal_eqn_numbers_on_other_proc[0],
-                    count_intern,MPI_INT,send_rank,3,MPI_COMM_WORLD,&status);
+                    count_intern,MPI_INT,send_rank,3,
+                    this->communicator_pt()->mpi_comm(),&status);
 
            // reset array counter index to zero
            count_intern=0;
@@ -9868,8 +9982,12 @@ void Problem::copy_external_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
 {
  MPI_Status status;
 
+ // Storage for number of processors and current processor
+ int n_proc=this->communicator_pt()->nproc();
+ int my_rank=this->communicator_pt()->my_rank();
+
  // Loop over all processors whose eqn numbers are to be updated
- for (int rank=0;rank<MPI_Helpers::Nproc;rank++)
+ for (int rank=0;rank<n_proc;rank++)
   {
    // Prepare a vector of equation numbers 
    Vector<int> eqn_numbers_on_other_proc;
@@ -9878,7 +9996,7 @@ void Problem::copy_external_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
    // If I'm not the processor whose external halo eqn numbers are updated,
    // some of my nodes may be externally haloed: Stick their
    // eqn numbers into the vector
-   if (rank!=MPI_Helpers::My_rank)
+   if (rank!=my_rank)
     {
      // How many of my nodes are externally haloed by the processor whose
      // eqn numbers are updated?
@@ -9917,13 +10035,13 @@ void Problem::copy_external_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
      // The receiving process needs to know how many values it's getting
      // since it only descends into the loop over the nodes after
      // receiving the vector
-     MPI_Send(&count,1,MPI_INT,rank,0,MPI_COMM_WORLD);
+     MPI_Send(&count,1,MPI_INT,rank,0,this->communicator_pt()->mpi_comm());
 
      if (count!=0)
       {
        // Send it across
        MPI_Send(&eqn_numbers_on_other_proc[0],count,MPI_INT,rank,1,
-                MPI_COMM_WORLD);
+                this->communicator_pt()->mpi_comm());
       }
 
      // now loop over external haloed elements and prepare to send 
@@ -9954,13 +10072,14 @@ void Problem::copy_external_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
       }
      
      // send the size of the vector of internal data values to the receiver
-     MPI_Send(&count_intern,1,MPI_INT,rank,2,MPI_COMM_WORLD);
+     MPI_Send(&count_intern,1,MPI_INT,rank,2,
+              this->communicator_pt()->mpi_comm());
 
      if (count_intern!=0)
       {
        // now send the vector itself
        MPI_Send(&internal_eqn_numbers_on_other_proc[0],count_intern,
-                MPI_INT,rank,3,MPI_COMM_WORLD);
+                MPI_INT,rank,3,this->communicator_pt()->mpi_comm());
       }
      // done
 
@@ -9970,18 +10089,19 @@ void Problem::copy_external_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
     {
      // Loop over all other processors to receive their
      // eqn numbers
-     for (int send_rank=0;send_rank<MPI_Helpers::Nproc;send_rank++)
+     for (int send_rank=0;send_rank<n_proc;send_rank++)
       {
        // Don't talk to yourself
-       if (send_rank!=MPI_Helpers::My_rank)
+       if (send_rank!=my_rank)
         {
          // How many of my nodes are external halos whose external non-halo
          // counterparts live on processor send_rank?
          unsigned next_nod=mesh_pt->nexternal_halo_node(send_rank);
 
          // Receive the size of the vector of eqn numbers
-         unsigned count;
-         MPI_Recv(&count,1,MPI_INT,send_rank,0,MPI_COMM_WORLD,&status);
+         unsigned count=0;
+         MPI_Recv(&count,1,MPI_INT,send_rank,0,
+                  this->communicator_pt()->mpi_comm(),&status);
          
          if (count!=0)
           {
@@ -9990,7 +10110,7 @@ void Problem::copy_external_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
          
            // Receive it
            MPI_Recv(&eqn_numbers_on_other_proc[0],count,MPI_INT,send_rank,
-                    1, MPI_COMM_WORLD,&status);
+                    1,this->communicator_pt()->mpi_comm(),&status);
 
            // Copy into the equation numbers of the external halo nodes
            // on the present processors
@@ -10001,7 +10121,6 @@ void Problem::copy_external_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
              Node* ext_halo_nod_pt=mesh_pt->
               external_halo_node_pt(send_rank,j);
              unsigned nval=ext_halo_nod_pt->nvalue();
-
              for (unsigned ival=0;ival<nval;ival++)
               {
                ext_halo_nod_pt->eqn_number(ival)=
@@ -10026,20 +10145,23 @@ void Problem::copy_external_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
               }
             }
           }
-         // Get number of external halo elements whose external non-halo
-         // element is on process send_rank
+
+         // Get number of external halo elements whose external haloed
+         // counterpart is on process send_rank
          unsigned next_elem_halo=mesh_pt->nexternal_halo_element(send_rank);
 
          // Receive size of vector of internal data values
-         unsigned count_intern;
-         MPI_Recv(&count_intern,1,MPI_INT,send_rank,2,MPI_COMM_WORLD,&status);
+         unsigned count_intern=0;
+         MPI_Recv(&count_intern,1,MPI_INT,send_rank,2,
+                  this->communicator_pt()->mpi_comm(),&status);
 
          if (count_intern!=0)
           {
            // Prepare and receive vector
            internal_eqn_numbers_on_other_proc.resize(count_intern);
            MPI_Recv(&internal_eqn_numbers_on_other_proc[0],
-                    count_intern,MPI_INT,send_rank,3,MPI_COMM_WORLD,&status);
+                    count_intern,MPI_INT,send_rank,3,
+                    this->communicator_pt()->mpi_comm(),&status);
 
            // reset array counter index to zero
            count_intern=0;

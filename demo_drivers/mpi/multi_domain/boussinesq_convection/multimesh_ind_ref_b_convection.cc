@@ -122,12 +122,21 @@ public:
 
    //Pin the zero-th pressure dof in the zero-th element and set
    // its value to zero
-   fix_pressure(0,0,0.0);
+   unsigned nnod=nst_mesh_pt()->nnode();
+   for (unsigned j=0; j<nnod; j++)
+    {
+     if (mesh_pt()->node_pt(j)->x(0)==0 && 
+         mesh_pt()->node_pt(j)->x(1)==0) // 2d problem only
+      {
+       fix_pressure(0,0,0.0);
+      }
+    }
 
-   //(Re)set all the sources in the problem
+   //Change the default bin parameters
+   Multi_domain_functions::Change_from_default_bin_parameters=true;
 
-   // Set binning parameters
-   Multi_domain_functions::Setup_bins_again=true;
+   //Change the number of bins in each direction, 
+   //the minimum, maximum and the percentage offset
    Multi_domain_functions::Nx_bin=50;
    Multi_domain_functions::Ny_bin=50;
 
@@ -135,17 +144,21 @@ public:
    Multi_domain_functions::X_max=3.0;
    Multi_domain_functions::Y_min=0.0;
    Multi_domain_functions::Y_max=1.0;
+   Multi_domain_functions::Percentage_offset=0.0;
 
-   // Set sources
-   Multi_domain_functions::set_sources<NST_ELEMENT,AD_ELEMENT,2,2>
-    (this,nst_mesh_pt(),adv_diff_mesh_pt());
+   //(Re)set all the sources in the problem
+   Multi_domain_functions::setup_multi_domain_interactions
+    <NST_ELEMENT,AD_ELEMENT>(this,nst_mesh_pt(),adv_diff_mesh_pt());
   }
 
  /// Actions after distribute: set sources
  void actions_after_distribute()
   {
-   // Set binning parameters
-   Multi_domain_functions::Setup_bins_again=true;
+   //Change the default bin parameters
+   Multi_domain_functions::Change_from_default_bin_parameters=true;
+
+   //Change the number of bins in each direction, 
+   //the minimum, maximum and the percentage offset
    Multi_domain_functions::Nx_bin=50;
    Multi_domain_functions::Ny_bin=50;
 
@@ -153,24 +166,21 @@ public:
    Multi_domain_functions::X_max=3.0;
    Multi_domain_functions::Y_min=0.0;
    Multi_domain_functions::Y_max=1.0;
+   Multi_domain_functions::Percentage_offset=0.0;
 
    // Set sources
-   Multi_domain_functions::set_sources<NST_ELEMENT,AD_ELEMENT,2,2>
-    (this,nst_mesh_pt(),adv_diff_mesh_pt());
-  }
+   Multi_domain_functions::setup_multi_domain_interactions
+    <NST_ELEMENT,AD_ELEMENT>(this,nst_mesh_pt(),adv_diff_mesh_pt());
+  } // end of actions_after_distribute
 
  ///Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned &e, const unsigned &pdof, 
                    const double &pvalue)
   {
    //Cast to specific element and fix pressure in NST element
-   if (nst_mesh_pt()->nelement()>0)
-    {
-     dynamic_cast<NST_ELEMENT*>(nst_mesh_pt()->element_pt(e))->
-      fix_pressure(pdof,pvalue);
-    }
+   dynamic_cast<NST_ELEMENT*>(nst_mesh_pt()->element_pt(e))->
+    fix_pressure(pdof,pvalue);
   } // end_of_fix_pressure
-
  
  /// \short Access function to boolean flag that determines if the
  /// boundary condition on the upper wall is perturbed slightly
@@ -190,7 +200,10 @@ private:
 
 protected:
 
+ /// Mesh object for Navier--Stokes domain
  RefineableRectangularQuadMesh<NST_ELEMENT>* Nst_mesh_pt;
+
+ /// Mesh object for advection-diffusion domain
  RefineableRectangularQuadMesh<AD_ELEMENT>* Adv_diff_mesh_pt;
 
 }; // end of problem class
@@ -204,7 +217,7 @@ RefineableConvectionProblem<NST_ELEMENT,AD_ELEMENT>::
 RefineableConvectionProblem()
 { 
  // Set output directory
- Doc_info.set_directory("RESLT");
+ Doc_info.set_directory("RESLT_MULTI");
  
  // # of elements in x-direction
  unsigned n_x=9;
@@ -366,7 +379,8 @@ RefineableConvectionProblem()
 /// to include an imperfection (or not) depending on the control flag.
 //========================================================================
 template<class NST_ELEMENT,class AD_ELEMENT>
-void RefineableConvectionProblem<NST_ELEMENT,AD_ELEMENT>::actions_before_newton_solve()
+void RefineableConvectionProblem<NST_ELEMENT,AD_ELEMENT>::
+actions_before_newton_solve()
 {
  // Loop over the boundaries on the NST mesh
  unsigned num_bound = nst_mesh_pt()->nboundary();
@@ -444,9 +458,9 @@ void RefineableConvectionProblem<NST_ELEMENT,AD_ELEMENT>::doc_solution()
  unsigned npts=5;
 
  // Output whole solution (this will output elements from one mesh
- //----------------------  followed by the other mesh at the moment...?)
+ //----------------------  followed by the other mesh)
  sprintf(filename,"%s/soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
-         Doc_info.number(),MPI_Helpers::My_rank);
+         Doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
  some_file.close();
@@ -454,13 +468,13 @@ void RefineableConvectionProblem<NST_ELEMENT,AD_ELEMENT>::doc_solution()
  // Output solution for each mesh
  //------------------------------
  sprintf(filename,"%s/vel_soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
-         Doc_info.number(),MPI_Helpers::My_rank);
+         Doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  nst_mesh_pt()->output(some_file,npts);
  some_file.close();
 
  sprintf(filename,"%s/temp_soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
-         Doc_info.number(),MPI_Helpers::My_rank);
+         Doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  adv_diff_mesh_pt()->output(some_file,npts);
  some_file.close();
@@ -479,6 +493,9 @@ int main(int argc, char **argv)
  MPI_Helpers::init(argc,argv);
 #endif
 
+ // Store command line arguments
+ CommandLineArgs::setup(argc,argv);
+
  // Set the direction of gravity
  Global_Physical_Variables::Direction_of_gravity[0] = 0.0;
  Global_Physical_Variables::Direction_of_gravity[1] = -1.0;
@@ -495,36 +512,37 @@ int main(int argc, char **argv)
  // Distribute the problem (and set the sources)
 #ifdef OOMPH_HAS_MPI
  DocInfo mesh_doc_info;
+ mesh_doc_info.number()=0;
+ mesh_doc_info.set_directory("RESLT_MULTI");
  bool report_stats=true;
 
- std::ifstream input_file;
- std::ofstream output_file;
- char filename[100];
-
- // Get partition from file
- unsigned n_partition=problem.mesh_pt()->nelement();
- Vector<unsigned> element_partition(n_partition);
- sprintf(filename,"multimesh_ind_ref_b_partition.dat");
- input_file.open(filename);
- std::string input_string;
- for (unsigned e=0;e<n_partition;e++)
+ // Are there command-line arguments?
+ if (CommandLineArgs::Argc==1)
   {
-   getline(input_file,input_string,'\n');
-   element_partition[e]=atoi(input_string.c_str());
+   // No arguments, so distribute without reference to partition vector
+   problem.distribute(mesh_doc_info,report_stats);
   }
+ else
+  {
+   // Command line argument(s), so read in partition from file
+   std::ifstream input_file;
+   std::ofstream output_file;
+   char filename[100];
 
-// Vector<unsigned> out_element_partition;
- problem.distribute(mesh_doc_info,report_stats,element_partition);
-//                     out_element_partition);
+   // Get partition from file
+   unsigned n_partition=problem.mesh_pt()->nelement();
+   Vector<unsigned> element_partition(n_partition);
+   sprintf(filename,"multimesh_ind_ref_b_partition.dat");
+   input_file.open(filename);
+   std::string input_string;
+   for (unsigned e=0;e<n_partition;e++)
+    {
+     getline(input_file,input_string,'\n');
+     element_partition[e]=atoi(input_string.c_str());
+    }
 
-//  sprintf(filename,"out_multimesh_ind_ref_b_partition.dat");
-//  output_file.open(filename);
-//  for (unsigned e=0;e<n_partition;e++)
-//   {
-//    output_file << out_element_partition[e] << std::endl;
-//   }
-
-// problem.distribute(mesh_doc_info,report_stats);
+   problem.distribute(element_partition,mesh_doc_info,report_stats);
+  }
 #endif
 
  

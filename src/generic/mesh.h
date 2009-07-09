@@ -95,12 +95,6 @@ class Mesh
 
 #ifdef OOMPH_HAS_MPI
 
- /// Which processors share halos of elements/nodes with this Mesh?
- std::set<unsigned> Processors_that_share_halos;
-
- /// Which processors share nodes with this Mesh?
- std::set<unsigned> Processors_that_share_nodes;
-
  /// Map of vectors holding the pointers to the root halo elements
  std::map<unsigned, Vector<FiniteElement*> > Root_halo_element_pt;
 
@@ -205,10 +199,14 @@ public:
    // Lookup scheme hasn't been setup yet
    Lookup_for_elements_next_boundary_is_setup=false;
 #ifdef OOMPH_HAS_MPI
-   // Mesh hasn't been distributed yet
+   // Set defaults for distributed meshes
+
+   // Mesh hasn't been distributed
    Mesh_has_been_distributed=false;
-   // Don't keep all objects as halos yet
+   // Don't keep all objects as halos
    Keep_all_elements_as_halos=false;
+   // Don't output halo elements
+   Output_halo_elements=false;
 #endif
   }
 
@@ -404,6 +402,14 @@ public:
      //Add the face element to the face mesh
      face_mesh_pt->add_element_pt(face_element_pt);
     }
+
+#ifdef OOMPH_HAS_MPI
+   // If the bulk mesh has been distributed then the face mesh is too
+   if (this->mesh_has_been_distributed())
+    {
+     face_mesh_pt->mesh_has_been_distributed()=true;
+    }
+#endif
   }
 
  /// \short Self-test: Check elements and nodes. Return 0 for OK
@@ -671,17 +677,19 @@ public:
 
  /// Distribute the problem and doc; make this virtual to allow
  /// overloading for particular meshes where further work is required
- virtual void distribute(const Vector<unsigned>& element_domain,
+ virtual void distribute(OomphCommunicator* comm_pt,
+                         const Vector<unsigned>& element_domain,
                          DocInfo& doc_info,
                          const bool& report_stats);
   
  /// Distribute the problem
- void distribute(const Vector<unsigned>& element_domain, 
+ void distribute(OomphCommunicator* comm_pt,
+                 const Vector<unsigned>& element_domain,
                  const bool& report_stats=false)
   {
    DocInfo doc_info;
    doc_info.doc_flag()=false;
-   distribute(element_domain,doc_info,report_stats);
+   distribute(comm_pt,element_domain,doc_info,report_stats);
   }
 
  /// \short (Irreversibly) prune halo(ed) elements and nodes, usually
@@ -690,11 +698,12 @@ public:
  /// mesh will be now regarded as the base mesh and no unrefinement
  /// relative to it will be possible once this function 
  /// has been called.
- void prune_halo_elements_and_nodes(const bool& report_stats=false)
+ void prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
+                                    const bool& report_stats=false)
   {
    DocInfo doc_info;
    doc_info.doc_flag()=false;
-   prune_halo_elements_and_nodes(doc_info,report_stats);
+   prune_halo_elements_and_nodes(comm_pt,doc_info,report_stats);
   }
 
 
@@ -704,34 +713,38 @@ public:
  /// mesh will be now regarded as the base mesh and no unrefinement
  /// relative to it will be possible once this function 
  /// has been called.
- void prune_halo_elements_and_nodes(DocInfo& doc_info, 
+ void prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
+                                    DocInfo& doc_info,
                                     const bool& report_stats);
 
  /// \short Get efficiency of mesh distribution: In an ideal distribution
  /// without halo overhead, each processor would only hold its own
  /// elements. Efficieny per processor =  (number of non-halo elements)/
  /// (total number of elements). 
- void get_efficiency_of_mesh_distribution(double& av_efficiency, 
+ void get_efficiency_of_mesh_distribution(OomphCommunicator* comm_pt,
+                                          double& av_efficiency,
                                           double& max_efficiency,
                                           double& min_efficiency);
 
  /// Doc the mesh distribution, to be processed with tecplot macros
- void doc_mesh_distribution(DocInfo& doc_info);
+ void doc_mesh_distribution(OomphCommunicator* comm_pt, DocInfo& doc_info);
  
  /// Check halo and shared schemes on the mesh
- void check_halo_schemes(DocInfo& doc_info, 
+ void check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info, 
                          double& max_permitted_error_for_halo_check);
 
  /// \short Classify the halo and haloed nodes in the mesh
- void classify_halo_and_haloed_nodes(DocInfo& doc_info,
+ void classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
+                                     DocInfo& doc_info,
                                      const bool& report_stats);
 
  /// Classify the halo and haloed nodes in the mesh
- void classify_halo_and_haloed_nodes(const bool& report_stats=false)
+ void classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
+                                     const bool& report_stats=false)
   {
    DocInfo doc_info;
    doc_info.doc_flag()=false;
-   classify_halo_and_haloed_nodes(doc_info,report_stats);
+   classify_halo_and_haloed_nodes(comm_pt,doc_info,report_stats);
   }
 
  /// \short Return vector of halo elements in this Mesh 
@@ -846,7 +859,6 @@ public:
   {
    Root_halo_element_pt[p].push_back(el_pt);
    el_pt->is_halo()=true; 
-   Processors_that_share_halos.insert(p);
   }
 
  /// \short Total number of halo nodes in this Mesh
@@ -873,7 +885,6 @@ public:
  void add_halo_node_pt(const unsigned& p, Node*& nod_pt)
   {
    Halo_node_pt[p].push_back(nod_pt);
-   Processors_that_share_halos.insert(p);
   }
 
 
@@ -919,7 +930,6 @@ public:
  void add_root_haloed_element_pt(const unsigned& p, FiniteElement*& el_pt)
   {
    Root_haloed_element_pt[p].push_back(el_pt);
-   Processors_that_share_halos.insert(p);
   }
 
 
@@ -955,15 +965,22 @@ public:
  void add_haloed_node_pt(const unsigned& p, Node*& nod_pt)
   {
    Haloed_node_pt[p].push_back(nod_pt);
-   Processors_that_share_halos.insert(p);
   }
 
- /// Which processors share halos of elements/nodes with this Mesh?
- std::set<unsigned> processors_that_share_halos()
+ /// Bool for output of halo elements
+ bool Output_halo_elements;
+
+ /// Function to disable halo element output
+ void disable_output_of_halo_elements()
   {
-   return Processors_that_share_halos;
+   Output_halo_elements=false;
   }
 
+ /// Function to enable halo element output
+ void enable_output_of_halo_elements()
+  {
+   Output_halo_elements=true;
+  }
 
  /// \short Total number of shared nodes in this Mesh
  unsigned nshared_node()
@@ -997,21 +1014,14 @@ public:
  void add_shared_node_pt(const unsigned& p, Node*& nod_pt)
   {
    Shared_node_pt[p].push_back(nod_pt);
-   Processors_that_share_nodes.insert(p);
   }
-
- /// Which processors share nodes with this Mesh?
- std::set<unsigned> processors_that_share_nodes()
-  {
-   return Processors_that_share_nodes;
-  }
-
 
  /// \short Get halo node stats for this distributed mesh:
  /// Average/max/min number of halo nodes over all processors.
  /// \b Careful: Involves MPI Broadcasts and must therefore
  /// be called on all processors!
- void get_halo_node_stats(double& av_number, 
+ void get_halo_node_stats(OomphCommunicator* comm_pt,
+                          double& av_number,
                           unsigned& max_number,
                           unsigned& min_number);
 
@@ -1019,12 +1029,13 @@ public:
  /// Average/max/min number of haloed nodes over all processors.
  /// \b Careful: Involves MPI Broadcasts and must therefore
  /// be called on all processors!
- void get_haloed_node_stats(double& av_number, 
+ void get_haloed_node_stats(OomphCommunicator* comm_pt,
+                            double& av_number,
                             unsigned& max_number,
                             unsigned& min_number);
 
- /// External halo(ed) elements are "source/other" elements which are
- /// on different processes to the element for which they are the source
+ // External halo(ed) elements are "source/other" elements which are
+ // on different processes to the element for which they are the source
 
  /// \short Total number of external halo elements in this Mesh
  unsigned nexternal_halo_element()
@@ -1039,21 +1050,21 @@ public:
    return n;
   }
 
- /// \short Number of root halo elements in this Mesh whose non-halo 
+ /// \short Number of external halo elements in this Mesh whose non-halo 
  /// counterpart is held on processor p.
  unsigned nexternal_halo_element(const unsigned& p)
   {
    return External_halo_element_pt[p].size();
   }
 
- /// \short Access fct to the e-th root halo element in this Mesh 
+ /// \short Access fct to the e-th external halo element in this Mesh 
  /// whose non-halo counterpart is held on processor p.
  FiniteElement* external_halo_element_pt(const unsigned& p, const unsigned& e)
   {
    return External_halo_element_pt[p][e];
   }
 
- /// \short Add root halo element whose non-halo counterpart is held 
+ /// \short Add external halo element whose non-halo counterpart is held 
  /// on processor p to this Mesh. 
  void add_external_halo_element_pt(const unsigned& p, FiniteElement*& el_pt)
   {
@@ -1080,7 +1091,7 @@ public:
    return External_haloed_element_pt[p].size();
   }
 
- /// \short Access fct to the e-th root haloed element in this Mesh 
+ /// \short Access fct to the e-th external haloed element in this Mesh 
  /// whose non-halo counterpart is held on processor p.
  FiniteElement* external_haloed_element_pt(const unsigned& p, 
                                            const unsigned& e)
@@ -1088,12 +1099,10 @@ public:
    return External_haloed_element_pt[p][e];
   }
 
- /// \short Add root haloed element whose non-halo counterpart is held 
+ /// \short Add external haloed element whose non-halo counterpart is held 
  /// on processor p to the storage scheme for haloed elements.
- void add_external_haloed_element_pt(const unsigned& p, FiniteElement*& el_pt)
-  {
-   External_haloed_element_pt[p].push_back(el_pt);
-  }
+ unsigned add_external_haloed_element_pt(const unsigned& p, 
+                                         FiniteElement*& el_pt);
 
  /// \short Total number of external halo nodes in this Mesh
  unsigned nexternal_halo_node()
@@ -1157,9 +1166,16 @@ public:
 
  /// \short Add external haloed node whose halo (external) counterpart
  /// is held on processor p to the storage scheme for haloed nodes.
- void add_external_haloed_node_pt(const unsigned& p, Node*& nod_pt)
+ unsigned add_external_haloed_node_pt(const unsigned& p, Node*& nod_pt);
+
+ /// \short Return the size of the External_halo(ed)_node_pt storage
+ /// (which should always be the same as the number of processors used
+ ///  by the communicator passed into Mesh::distribute(...))  This is
+ /// required to avoid having to pass a communicator into the node_update 
+ /// functions for Algebraic-based and MacroElement-based Meshes
+ unsigned nexternal_halo_proc()
   {
-   External_haloed_node_pt[p].push_back(nod_pt);
+   return External_halo_node_pt.size();
   }
 
 #endif 
@@ -1180,10 +1196,7 @@ public:
   }
 
  /// \short Add external element to this Mesh.
- void add_external_element_pt(FiniteElement*& el_pt)
-  {
-   External_element_pt.push_back(el_pt);
-  }
+ bool add_external_element_pt(FiniteElement*& el_pt);
 
  /// External nodes are on the external elements
 
@@ -1200,101 +1213,10 @@ public:
   }
 
  /// \short Add external node to this Mesh.
- void add_external_node_pt(Node*& nod_pt)
-  {
-   External_node_pt.push_back(nod_pt);
-  }
+ bool add_external_node_pt(Node*& nod_pt);
 
  /// \short Wipe the storage for all externally-based elements
- void flush_all_external_storage()
-  {
-   External_element_pt.clear();
-   External_node_pt.clear();
-#ifdef OOMPH_HAS_MPI
-   // Careful: some of the external halo nodes are also in boundary
-   //          node storage and should be removed from this first
-   for (int d=0;d<MPI_Helpers::Nproc;d++)
-    {
-     // How many external haloes with this process?
-     unsigned n_ext_halo_nod=nexternal_halo_node(d);
-     for (unsigned j=0;j<n_ext_halo_nod;j++)
-      {
-       Node* ext_halo_nod_pt=external_halo_node_pt(d,j);
-       unsigned n_bnd=nboundary();
-       for (unsigned i_bnd=0;i_bnd<n_bnd;i_bnd++)
-        {
-         // Call this for all boundaries; it will do nothing
-         // if the node is not on the current boundary
-         remove_boundary_node(i_bnd,ext_halo_nod_pt);
-        }
-      }
-    }
-
-   // A loop to delete external halo nodes
-   for (int d=0;d<MPI_Helpers::Nproc;d++)
-    {
-     unsigned n_ext_halo_nod=nexternal_halo_node(d);
-     for (unsigned j=0;j<n_ext_halo_nod;j++)
-      {
-       // Only delete if it's not a node stored in the current mesh
-       bool is_a_mesh_node=false;
-       unsigned n_node=nnode();
-       for (unsigned jj=0;jj<n_node;jj++)
-        {
-         if (Node_pt[jj]==External_halo_node_pt[d][j])
-          {
-           is_a_mesh_node=true;
-          }
-        }
-
-       // There will also be duplications between multiple processors,
-       // so make sure that we don't try to delete these twice
-       if (!is_a_mesh_node)
-        {
-         // Loop over all other higher-numbered processors and check
-         // for duplicated external halo nodes
-         // (The highest numbered processor should delete all its ext halos)
-         for (int dd=d+1;dd<MPI_Helpers::Nproc;dd++)
-          {
-           unsigned n_ext_halo=nexternal_halo_node(dd);
-           for (unsigned jjj=0;jjj<n_ext_halo;jjj++)
-            {
-             if (External_halo_node_pt[dd][jjj]==External_halo_node_pt[d][j])
-              {
-               is_a_mesh_node=true;
-              }
-            }
-          }
-        }
-
-       // Only now if no duplicates exist can the node be safely deleted
-       if (!is_a_mesh_node)
-        {
-         delete External_halo_node_pt[d][j];
-        }
-      }
-    }
-
-   // Another loop to delete external halo elements (which are distinct)
-   for (int d=0;d<MPI_Helpers::Nproc;d++)
-    {
-     unsigned n_ext_halo_el=nexternal_halo_element(d);
-     for (unsigned e=0;e<n_ext_halo_el;e++)
-      {
-       delete External_halo_element_pt[d][e];
-      }
-    }
-
-   // Now we are okay to clear the external halo node storage
-   External_halo_node_pt.clear();
-   External_halo_element_pt.clear();
-
-   // External haloed nodes and elements are actual members
-   // of the external mesh and should not be deleted
-   External_haloed_node_pt.clear();
-   External_haloed_element_pt.clear();
-#endif
-  }
+ void flush_all_external_storage();
 
 
 };

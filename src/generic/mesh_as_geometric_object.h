@@ -72,23 +72,40 @@ private:
  ///Storage for min and max coordinates of the bin structure
  Vector<double> Minmax_coords;
 
- ///Number of bins in each direction
+ ///Number of bins in x direction
  unsigned Nx_bin;
+
+ ///Number of bins in y direction
  unsigned Ny_bin;
+
+ ///Number of bins in z direction
  unsigned Nz_bin;
+
+ ///Current spiralling level
+ unsigned Current_spiral_level;
+
+ ///Communicator
+ OomphCommunicator* Communicator_pt;
+
+/* #ifdef OOMPH_HAS_MPI */
+/*  ///Distributed flag */
+/*  bool Mesh_as_geom_object_has_been_distributed; */
+/* #endif */
 
 public:
  
- ///Constructor, pass the pointer to the mesh and optional flag to 
- ///keep all the elements in this geometric object as halos
+ ///Constructor, pass the pointer to the mesh and optional communicator
  MeshAsGeomObject(Mesh* const &mesh_pt,
-                  const bool& keep_all_elements_as_halos=false) :
-  GeomObject(DIM_LAGRANGIAN,DIM_EULERIAN), Nx_bin(10), Ny_bin(10), Nz_bin(10)
+                  OomphCommunicator* comm_pt=0,
+                  const bool& change_from_default_bin_parameters=false) :
+  GeomObject(DIM_LAGRANGIAN,DIM_EULERIAN)
   {
 #ifdef OOMPH_HAS_MPI
-   // Set flag to allow the mesh to be haloed to all processors
-   // during distribution of the global mesh
-   mesh_pt->keep_all_elements_as_halos()=keep_all_elements_as_halos;
+   // Set communicator
+   Communicator_pt=comm_pt;
+/*    // Set distributed flag */
+/*    Mesh_as_geom_object_has_been_distributed= */
+/*     mesh_pt->mesh_has_been_distributed(); */
 #endif
 
    // Create temporary storage for geometric Data (don't count 
@@ -137,14 +154,24 @@ public:
      count++;
     }
 
-   // Find the maximum and minimum coordinates for the mesh
-   get_min_and_max_coordinates(mesh_pt);
+   // Set storage for minimum and maximum coordinates
+   Minmax_coords.resize(DIM_LAGRANGIAN*2);
 
-   // Create the bin structure
-   create_bins_of_objects();
+   // Are we using default parameters or not?
+   if (!change_from_default_bin_parameters)
+    {
+     // Find the maximum and minimum coordinates for the mesh
+     get_min_and_max_coordinates(mesh_pt);
 
+     // Use default parameters (can I set these earlier...?)
+     Nx_bin=10; 
+     Ny_bin=10;
+     Nz_bin=10;
 
- }
+     // Create the bin structure
+     create_bins_of_objects();
+    }
+  }
 
  /// Empty constructor
  MeshAsGeomObject(){} 
@@ -179,20 +206,22 @@ public:
                   GeomObject*& sub_geom_object_pt, 
                   Vector<double>& s)
   {
-   bool called_simultaneously=false;
-   locate_zeta(zeta,sub_geom_object_pt,s,called_simultaneously);
+   bool called_within_spiral=false;
+   locate_zeta(zeta,sub_geom_object_pt,s,called_within_spiral);
   }
 
 
  /// \short Find the sub geometric object and local coordinate therein that
  /// corresponds to the intrinsic coordinate zeta. If sub_geom_object_pt=0
  /// on return from this function, none of the constituent sub-objects 
- /// contain the required coordinate. The final argument should be set
- /// to true if the function is being called simultaneously in MPI
+ /// contain the required coordinate.
+ /// Setting the optional bool argument to true means that each
+ /// time the sub-object's locate_zeta function is called, the coordinate
+ /// argument "s" is used as the initial guess
  void locate_zeta(const Vector<double>& zeta, 
                   GeomObject*& sub_geom_object_pt, 
                   Vector<double>& s,
-                  bool& called_simultaneously)
+                  bool& called_within_spiral)
   {
    // Initialise return to null -- if it's still null when we're
    // leaving we've failed!
@@ -313,215 +342,147 @@ public:
       }
     }
 
-   // How many object-coordinate pairs are there in this bin?
-   unsigned n_sample=Bin_object_coord_pairs[bin_number].size();
-
-   // Attempt to locate zeta, but only if there are any samples in the bin
-   ELEMENT* selected_el_pt=0;
-   if (n_sample>0)
+   if (called_within_spiral)
     {
-     // Try the first object in the bin
-     selected_el_pt=Bin_object_coord_pairs[bin_number][0].first;
-     selected_el_pt->locate_zeta(zeta,sub_geom_object_pt,s);
-    }
+     // Current "spiral" level
+     unsigned i_level=current_spiral_level();
 
-   // Is sub_geom_object_pt a halo on this process?
-   // If it is then reset sub_geom_object_pt to null
-   // Only do this if it was called simultaneously
-   ELEMENT* test_el_pt=dynamic_cast<ELEMENT*>(sub_geom_object_pt);
-   if (called_simultaneously)
-    {
-#ifdef OOMPH_HAS_MPI
-     if (test_el_pt!=0)
+     // Call helper function to find the neighbouring bins at this level
+     Vector<unsigned> neighbour_bin;
+     get_neighbouring_bins_helper(bin_number,i_level,neighbour_bin);
+     unsigned n_nbr_bin=neighbour_bin.size();
+
+     // Set bool for finding zeta
+     bool found_zeta=false;
+     for (unsigned i_nbr=0;i_nbr<n_nbr_bin;i_nbr++)
       {
-       if (test_el_pt->is_halo()) {sub_geom_object_pt=0;}
-      }
-#endif
-    }
+       // Get the number of element-sample point pairs in this bin
+       unsigned n_sample=
+        Bin_object_coord_pairs[neighbour_bin[i_nbr]].size();
 
-   // Setup "request" structure to ask whether any process has succeeded
-   unsigned found_on_a_process=0;
-   if (called_simultaneously)
-    {
-     test_locate(sub_geom_object_pt,found_on_a_process);
-    }
-
-   // If not found (either locally or on another process)
-   // then try the rest of the objects in the
-   // current bin before going on to any other bins
-   if ((sub_geom_object_pt==0) && (found_on_a_process==0))
-    {
-     // Loop over the remaining samples in this bin first
-     n_sample=Bin_object_coord_pairs[bin_number].size();
-     for (unsigned i_sam=1;i_sam<n_sample;i_sam++)
-      {
-       ELEMENT* el_pt=Bin_object_coord_pairs[bin_number][i_sam].first;
-       // Only try a locate if this is different from the original element
-       if (el_pt!=selected_el_pt)
+       // Don't do anything if this bin has no sample points
+       if (n_sample>0)
         {
-         el_pt->locate_zeta(zeta,sub_geom_object_pt,s);
-
-         // Test whether this object is a halo element
-         if (called_simultaneously)
+         for (unsigned i_sam=0;i_sam<n_sample;i_sam++)
           {
-           test_el_pt=dynamic_cast<ELEMENT*>(sub_geom_object_pt);
+           // Get the element
+           ELEMENT* el_pt=Bin_object_coord_pairs
+            [neighbour_bin[i_nbr]][i_sam].first;
+
+           // Get the local coordinate
+           s=Bin_object_coord_pairs[neighbour_bin[i_nbr]][i_sam].second;
+
+           // Use this coordinate as the initial guess
+           bool use_coordinate_as_initial_guess=true;
+
+           // Attempt to find zeta within a sub-object
+           el_pt->locate_zeta(zeta,sub_geom_object_pt,s,
+                              use_coordinate_as_initial_guess);
+
 #ifdef OOMPH_HAS_MPI
+           // Dynamic cast the result to an ELEMENT
+           ELEMENT* test_el_pt=dynamic_cast<ELEMENT*>(sub_geom_object_pt);
            if (test_el_pt!=0)
             {
+             // We only want to exit if this is a non-halo element
              if (test_el_pt->is_halo()) {sub_geom_object_pt=0;}
             }
 #endif
-          }
 
-         // If it has been located and is non-halo then break
-         if (sub_geom_object_pt!=0)
-          {
-           break;
-          }
-        }
-      }
-
-     // Test again whether the locate has worked anywhere
-     found_on_a_process=0;
-     if (called_simultaneously)
-      {
-       test_locate(sub_geom_object_pt,found_on_a_process);
-      }
-
-     // If it still hasn't been found then spiral out to the next level
-     // of bins surrounding the initial bin
-     if ((sub_geom_object_pt==0) && (found_on_a_process==0))
-      {
-       // Loop over the "levels" in the neighbourhood scheme
-       // The maximum size this can be is the maximum out of N*_bin
-       unsigned n_level=Nx_bin;
-       if (DIM_LAGRANGIAN>=2)
-        {
-         if (Ny_bin>n_level) {n_level=Ny_bin;}
-        }
-       if (DIM_LAGRANGIAN==3)
-        {
-         if (Nz_bin>n_level) {n_level=Nz_bin;}
-        }
-
-       // Don't need to loop over the zeroth level since this only contains
-       // the bin that was already visited
-       for (unsigned i_level=1;i_level<n_level;i_level++)
-        {
-         // Call helper function to find the neighbouring bins at this level
-         Vector<unsigned> neighbour_bin;
-         get_neighbouring_bins_helper(bin_number,i_level,neighbour_bin);
-         unsigned n_nbr_bin=neighbour_bin.size();
-
-         // Set bool for finding zeta
-         bool found_zeta=false;
-         for (unsigned i_nbr=0;i_nbr<n_nbr_bin;i_nbr++)
-          {
-           // Get the number of element-sample point pairs in this bin
-           unsigned n_sample=
-            Bin_object_coord_pairs[neighbour_bin[i_nbr]].size();
-
-           // Don't do anything if this bin has no sample points
-           if (n_sample>0)
+           // If the ELEMENT is non-halo and has been located, exit
+           if (sub_geom_object_pt!=0)
             {
-             // Try the first sample point first
-             ELEMENT* first_el_pt=
-              Bin_object_coord_pairs[neighbour_bin[i_nbr]][0].first;
-             first_el_pt->locate_zeta(zeta,sub_geom_object_pt,s);
+             found_zeta=true;
+             break;
+            }
+          } // end loop over sample points
+        }
 
-             // Again check this is non-halo
-             if (called_simultaneously)
-              {
-               test_el_pt=dynamic_cast<ELEMENT*>(sub_geom_object_pt);
-#ifdef OOMPH_HAS_MPI
-               if (test_el_pt!=0)
-                {
-                 if (test_el_pt->is_halo()) {sub_geom_object_pt=0;}
-                }
-#endif
-              }
+       if (found_zeta)
+        {
+         break;
+        }
 
+      } // end loop over bins at this level
+
+    }
+   else
+    {
+     // Not called from within a spiral procedure
+     // (i.e. the loop in multi_domain.h), so do the spiralling here
+
+     // Loop over all levels... maximum of N*_bin
+     unsigned n_level=Nx_bin;
+     if (DIM_LAGRANGIAN>=2)
+      {
+       if (n_level < Ny_bin) { n_level=Ny_bin; }
+      }
+     if (DIM_LAGRANGIAN==3)
+      {
+       if (n_level < Nz_bin) { n_level=Nz_bin; }
+      }
+
+     // Set bool for finding zeta
+     bool found_zeta=false;
+     for (unsigned i_level=0;i_level<n_level;i_level++)
+      {
+       // Call helper function to find the neighbouring bins at this level
+       Vector<unsigned> neighbour_bin;
+       get_neighbouring_bins_helper(bin_number,i_level,neighbour_bin);
+       unsigned n_nbr_bin=neighbour_bin.size();
+
+       // Loop over neighbouring bins
+       for (unsigned i_nbr=0;i_nbr<n_nbr_bin;i_nbr++)
+        {
+         // Get the number of element-sample point pairs in this bin
+         unsigned n_sample=
+          Bin_object_coord_pairs[neighbour_bin[i_nbr]].size();
+
+         // Don't do anything if this bin has no sample points
+         if (n_sample>0)
+          {
+           for (unsigned i_sam=0;i_sam<n_sample;i_sam++)
+            {
+             // Get the element
+             ELEMENT* el_pt=Bin_object_coord_pairs
+              [neighbour_bin[i_nbr]][i_sam].first;
+
+             // Get the local coordinate
+             s=Bin_object_coord_pairs[neighbour_bin[i_nbr]][i_sam].second;
+
+             // Use this coordinate as the initial guess in locate_zeta
+             bool use_coordinate_as_initial_guess=true;
+
+             // Attempt to loacte the correct sub-object
+             el_pt->locate_zeta(zeta,sub_geom_object_pt,s,
+                                use_coordinate_as_initial_guess);
+
+             // If it was found then break
              if (sub_geom_object_pt!=0)
               {
                found_zeta=true;
+               break;
               }
-             else // loop over the other sample points
-              {
-               for (unsigned i_sam=1;i_sam<n_sample;i_sam++)
-                {
-                 ELEMENT* el_pt=Bin_object_coord_pairs
-                  [neighbour_bin[i_nbr]][i_sam].first;
-                 // Only try a locate if this is different from 
-                 // first element within this bin
-                 if (el_pt!=first_el_pt)
-                  {
-                   el_pt->locate_zeta(zeta,sub_geom_object_pt,s);
+            } // end loop over sample points
+          }
 
-                   // Again check this is non-halo
-                   if (called_simultaneously)
-                    {
-                     test_el_pt=dynamic_cast<ELEMENT*>(sub_geom_object_pt);
-#ifdef OOMPH_HAS_MPI
-                     if (test_el_pt!=0)
-                      {
-                       if (test_el_pt->is_halo()) {sub_geom_object_pt=0;}
-                      }
-#endif
-                    }
-
-                   if (sub_geom_object_pt!=0)
-                    {
-                     found_zeta=true;
-                     break;
-                    }
-                  }
-                }
-              }
-            }
-
-           // Check whether any process has located zeta yet
-           found_on_a_process=0;
-           if (called_simultaneously)
-            {
-             test_locate(sub_geom_object_pt,found_on_a_process);
-            }
-
-           if ((found_zeta) || (found_on_a_process!=0))
-            {
-             break;
-            }
-
-          } // end loop over bins at this level
-
-         // If zeta has been found there's no need to carry on
-         if ((found_zeta) || (found_on_a_process!=0))
+         // Break out of the bin loop if locate was successful
+         if (found_zeta)
           {
            break;
           }
 
-        } // end loop over all levels for this bin_number
+        } // end loop over bins at this level
 
-
-       // If it still hasn't worked, then throw an error
-       if ((sub_geom_object_pt==0) && (found_on_a_process==0))
+       // Break out of the spiral loop if locate was successful
+       if (found_zeta)
         {
-         // Throw an error
-         std::ostringstream error_message;
-         error_message << "Cannot locate zeta: ";
-         for(unsigned i=0;i<DIM_LAGRANGIAN;i++)
-          {
-           error_message << zeta[i] << " ";
-          }
-         error_message << " using current binning method."
-                       << std::endl;
-         throw OomphLibError(error_message.str(),
-                             "MeshAsGeomObject::locate_zeta()",
-                             OOMPH_EXCEPTION_LOCATION);
+         break;
         }
 
-      }
-     
-    }
+      } // end loop over levels
+
+    } // end if (called_within_spiral)
 
      /// PREVIOUS BRUTE-FORCE LOOP - DO WE STILL WANT IT AS AN OPTION?
 /*     } */
@@ -590,8 +551,6 @@ public:
 
   } // end of position
 
-
-
  ///Return the derivative of the position
  void dposition(const Vector<double> &xi, DenseMatrix<double> &drdxi) const
   {
@@ -600,29 +559,37 @@ public:
                        OOMPH_EXCEPTION_LOCATION);
   }
 
- ///Access functions to number of bins in each dimension
+ ///Access function to number of bins in x direction
  unsigned& nx_bin() {return Nx_bin;}
+ ///Access function to number of bins in y direction
  unsigned& ny_bin() {return Ny_bin;}
+ ///Access function to number of bins in z direction
  unsigned& nz_bin() {return Nz_bin;}
+ ///Access function to current spiral level
+ unsigned& current_spiral_level() {return Current_spiral_level;}
+ ///Access function to max number of spirals
+// unsigned& n_max_spirals() {return N_max_spirals;}
 
- ///Access functions for min and max coordinates in each dimension
+ ///Access function for min coordinate in x direction
  double& x_min() {return Minmax_coords[0];}
+ ///Access function for max coordinate in x direction
  double& x_max() {return Minmax_coords[1];}
+ ///Access function for min coordinate in y direction
  double& y_min() {return Minmax_coords[2];}
+ ///Access function for max coordinate in y direction
  double& y_max() {return Minmax_coords[3];}
+ ///Access function for min coordinate in z direction
  double& z_min() {return Minmax_coords[4];}
+ ///Access function for max coordinate in z direction
  double& z_max() {return Minmax_coords[5];}
 
  ///Get the min and max coordinates for the mesh, in each dimension
  void get_min_and_max_coordinates(Mesh* const &mesh_pt)
   {
    // Storage locally (i.e. in parallel on each processor)
-   double x_min_local=DBL_MAX;
-   double x_max_local=-DBL_MAX;
-   double y_min_local=DBL_MAX;
-   double y_max_local=-DBL_MAX;
-   double z_min_local=DBL_MAX;
-   double z_max_local=-DBL_MAX;
+   double x_min_local=DBL_MAX; double x_max_local=-DBL_MAX;
+   double y_min_local=DBL_MAX; double y_max_local=-DBL_MAX;
+   double z_min_local=DBL_MAX; double z_max_local=-DBL_MAX;
 
    // Loop over the elements of the mesh
    unsigned n_el=mesh_pt->nelement();
@@ -663,24 +630,50 @@ public:
     }
 
    // Global extrema - in parallel, need to get max/min across all processors
-   double x_min, x_max, y_min, y_max, z_min, z_max;
+   double x_min=0.0, x_max=0.0, y_min=0.0, y_max=0.0, z_min=0.0, z_max=0.0;
 #ifdef OOMPH_HAS_MPI
-   if (MPI_Helpers::Nproc>1)
+   // If the mesh has been distributed...
+   if (mesh_pt->mesh_has_been_distributed())
     {
-     MPI_Allreduce(&x_min_local,&x_min,1,MPI_DOUBLE,MPI_MIN,MPI_COMM_WORLD);
-     MPI_Allreduce(&x_max_local,&x_max,1,MPI_DOUBLE,MPI_MAX,MPI_COMM_WORLD);
-     if (DIM_LAGRANGIAN>=2)
+     // .. we need a non-null communicator!
+     if (Communicator_pt!=0)
       {
-       MPI_Allreduce(&y_min_local,&y_min,1,MPI_DOUBLE,MPI_MIN,MPI_COMM_WORLD);
-       MPI_Allreduce(&y_max_local,&y_max,1,MPI_DOUBLE,MPI_MAX,MPI_COMM_WORLD);
+       int n_proc=Communicator_pt->nproc();
+       if (n_proc>1)
+        {
+         MPI_Allreduce(&x_min_local,&x_min,1,MPI_DOUBLE,MPI_MIN,
+                       Communicator_pt->mpi_comm());
+         MPI_Allreduce(&x_max_local,&x_max,1,MPI_DOUBLE,MPI_MAX,
+                       Communicator_pt->mpi_comm());
+         if (DIM_LAGRANGIAN>=2)
+          {
+           MPI_Allreduce(&y_min_local,&y_min,1,MPI_DOUBLE,MPI_MIN,
+                         Communicator_pt->mpi_comm());
+           MPI_Allreduce(&y_max_local,&y_max,1,MPI_DOUBLE,MPI_MAX,
+                         Communicator_pt->mpi_comm());
+          }
+         if (DIM_LAGRANGIAN==3)
+          {
+           MPI_Allreduce(&z_min_local,&z_min,1,MPI_DOUBLE,MPI_MIN,
+                         Communicator_pt->mpi_comm());
+           MPI_Allreduce(&z_max_local,&z_max,1,MPI_DOUBLE,MPI_MAX,
+                         Communicator_pt->mpi_comm());
+          }
+        }
       }
-     if (DIM_LAGRANGIAN==3)
+     else // Null communicator - throw an error
       {
-       MPI_Allreduce(&z_min_local,&z_min,1,MPI_DOUBLE,MPI_MIN,MPI_COMM_WORLD);
-       MPI_Allreduce(&z_max_local,&z_max,1,MPI_DOUBLE,MPI_MAX,MPI_COMM_WORLD);
+       std::ostringstream error_message_stream;                           
+       error_message_stream                                        
+        << "Communicator not set for a MeshAsGeomObject\n"
+        << "that was created from a distributed Mesh";
+       throw OomphLibError(error_message_stream.str(),                  
+                           "MeshAsGeomObject::get_min_and_max_coordinates(..)",
+                           OOMPH_EXCEPTION_LOCATION);
       }
     }
-   else // Need to cover the case where MPI hasn't been initialised
+   else // If the mesh hasn't been distributed then the 
+        // max and min are the same on all processors
     {
      x_min=x_min_local;
      x_max=x_max_local;
@@ -695,7 +688,7 @@ public:
        z_max=z_max_local;
       }
     }
-#else   
+#else // If we're not using MPI then the mesh can't be distributed
    x_min=x_min_local;
    x_max=x_max_local;
    if (DIM_LAGRANGIAN>=2)
@@ -731,7 +724,6 @@ public:
     }
 
    // Add these entries to the Minmax_coords vector
-   Minmax_coords.resize(DIM_LAGRANGIAN*2);
    Minmax_coords[0]=x_min;
    Minmax_coords[1]=x_max;
    if (DIM_LAGRANGIAN>=2)
@@ -779,7 +771,7 @@ public:
    oomph_info << std::endl;
    oomph_info << "==============================================" << std::endl;
 
-   /// Flush any storage that may have been created in the past
+   /// Flush all objects out of the bin structure
    flush_bins_of_objects();
 
    ///The storage for these bins is of size Nx_bin*Ny_bin*Nz_bin
@@ -867,9 +859,9 @@ public:
           }
         }
 
-       //Add element-sample coord pair to the calculated bin
+       //Add element-sample local (?) coord pair to the calculated bin
        Bin_object_coord_pairs[bin_number].push_back
-        (std::make_pair(el_pt,global_coord));
+        (std::make_pair(el_pt,local_coord));
       }
     }
 
@@ -896,7 +888,8 @@ public:
        neighbour_bin.push_back(nbr_bin);
       }
      unsigned nbr_bin_right=bin+level;
-     if ((nbr_bin_right>=0) && (nbr_bin_right<Nx_bin))
+     if ((nbr_bin_right>=0) && (nbr_bin_right<Nx_bin) && 
+         (nbr_bin_right!=nbr_bin_left))
       {
        unsigned nbr_bin=nbr_bin_right;
        neighbour_bin.push_back(nbr_bin);
@@ -1017,37 +1010,51 @@ public:
     }
   }
 
- /// Test whether a (sub-)GeomObject has been located on any process
- void test_locate(GeomObject*& sub_geom_object_pt, 
-                  unsigned &found_on_a_process)
-  {
-   // Written this just using MPI_Allreduce - it seemed
-   // incredibly slow otherwise (when using MPI_Testany with MPI_Request)
-   int found;
+/*  /// Test whether a (sub-)GeomObject has been located on any process */
+/*  void test_locate(GeomObject*& sub_geom_object_pt,  */
+/*                   unsigned &found_on_a_process) */
+/*   { */
+/*    // Written this just using MPI_Allreduce - it seemed */
+/*    // incredibly slow otherwise (when using MPI_Testany with MPI_Request) */
+/*    int found=0; */
 
-   if (sub_geom_object_pt!=0)
-    {
-     found=1;
-    }
-   else
-    {
-     found=0;
-    }
+/*    if (sub_geom_object_pt!=0) */
+/*     { */
+/*      found=1; */
+/*     } */
 
-#ifdef OOMPH_HAS_MPI
-   if (MPI_Helpers::Nproc>1)
-    {
-     MPI_Allreduce(&found,&found_on_a_process,1,MPI_INT,MPI_SUM,
-                   MPI_COMM_WORLD);
-    }
-   else // Need to cover the case where MPI hasn't been initialised
-    {
-     found_on_a_process=found;
-    }
-#else
-   found_on_a_process=found;
-#endif
-  }
+/* #ifdef OOMPH_HAS_MPI */
+/*    // If the MeshAsGeomObject is based on a distributed mesh, then */
+/*    // communicate the result from other processors */
+/*    if (Mesh_as_geom_object_has_been_distributed) */
+/*     { */
+/*      if (Communicator_pt!=0) */
+/*       { */
+/*        int n_proc=Communicator_pt->nproc(); */
+/*        if (n_proc>1) */
+/*         { */
+/*          MPI_Allreduce(&found,&found_on_a_process,1,MPI_INT,MPI_SUM, */
+/*                        Communicator_pt->mpi_comm()); */
+/*         } */
+/*       } */
+/*      else // Null communicator: throw an error */
+/*       { */
+/*        std::ostringstream error_message_stream;                            */
+/*        error_message_stream                                         */
+/*         << "Communicator not set for a distributed MeshAsGeomObject\n"; */
+/*        throw OomphLibError(error_message_stream.str(),                   */
+/*                            "MeshAsGeomObject::test_locate(..)", */
+/*                            OOMPH_EXCEPTION_LOCATION); */
+/*       } */
+/*     } */
+/*    else // Need to cover the case where the mesh hasn't been distributed */
+/*     { */
+/*      found_on_a_process=found; */
+/*     } */
+/* #else // Mesh cannot be distributed for a non-MPI problem */
+/*    found_on_a_process=found; */
+/* #endif */
+/*   } */
 
 
 

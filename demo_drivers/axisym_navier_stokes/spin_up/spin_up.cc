@@ -382,9 +382,8 @@ doc_solution(DocInfo& doc_info)
   Mesh* tmp_mesh_pt=mesh_pt();
   unsigned nel=mesh_pt()->nelement();
   Vector<double> elemental_error(nel);
-  mesh_pt()->spatial_error_estimator_pt()->get_element_errors(tmp_mesh_pt,
-                                                              elemental_error, 
-                                                              doc_info);
+  mesh_pt()->spatial_error_estimator_pt()->get_element_errors
+   (this->communicator_pt(),tmp_mesh_pt,elemental_error,doc_info);
  }
 
  ofstream some_file;

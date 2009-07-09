@@ -997,7 +997,8 @@ bool compare_maps(const LinearAlgebraDistribution* oomph_distribution,
  // create the epetra_map for oomph distribution
  Epetra_Map* temp_map_pt = 0;
  int* global_rows;
- Epetra_MpiComm* comm_pt = new Epetra_MpiComm(MPI_COMM_WORLD);
+ Epetra_MpiComm* comm_pt = 
+  new Epetra_MpiComm(oomph_distribution->communicator_pt()->mpi_comm());
  create_epetra_map(oomph_distribution,comm_pt,temp_map_pt,global_rows);
 
  // compare

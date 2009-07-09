@@ -6,32 +6,31 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 # Name of executable
 check_PROGRAMS= \
-fsi_collapsible_channel_adapt_external \
-fsi_collapsible_channel_macro_adapt_external
+fsi_collapsible_channel_adapt \
+fsi_collapsible_channel_macro_adapt
 
 #----------------------------------------------------------------------
 
 # Sources for executable
-fsi_collapsible_channel_adapt_external_SOURCES = fsi_collapsible_channel_adapt.cc
+fsi_collapsible_channel_adapt_SOURCES = fsi_collapsible_channel_adapt.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
-fsi_collapsible_channel_adapt_external_LDADD = \
+fsi_collapsible_channel_adapt_LDADD = \
                 -L@libdir@ -lbeam -lnavier_stokes  \
                 -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
-fsi_collapsible_channel_adapt_external_CXXFLAGS = -DUSE_EXTERNAL_ELEMENTS
 
 #----------------------------------------------------------------------
 
 # Sources for executable
-fsi_collapsible_channel_macro_adapt_external_SOURCES = fsi_collapsible_channel_adapt.cc
+fsi_collapsible_channel_macro_adapt_SOURCES = fsi_collapsible_channel_adapt.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
-fsi_collapsible_channel_macro_adapt_external_LDADD = \
+fsi_collapsible_channel_macro_adapt_LDADD = \
                 -L@libdir@ -lbeam -lnavier_stokes  \
                 -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
-fsi_collapsible_channel_macro_adapt_external_CXXFLAGS = -DMACRO_ELEMENT_NODE_UPDATE -DUSE_EXTERNAL_ELEMENTS
+fsi_collapsible_channel_macro_adapt_CXXFLAGS = -DMACRO_ELEMENT_NODE_UPDATE
 
 #----------------------------------------------------------------------
 

@@ -16,14 +16,16 @@ rm -r -f Validation
 mkdir Validation
 
 cd Validation
+# hierher remove this!
+mkdir HALO_ERROR
 cp ../*partition.dat .
 
 # Validation for FSI channel with leaflet problem (algebraic node update)
 #------------------------------------------------------------------------
 
 echo "Running FSI channel with leaflet (algebraic node update) validation "
-mkdir RESLT_FSI_LEAF_EXT
-$MPI_RUN_COMMAND ../fsi_channel_with_leaflet_external validate > OUTPUT_fsi_channel_with_leaflet_external
+mkdir RESLT_FSI_LEAF
+$MPI_RUN_COMMAND ../fsi_channel_with_leaflet validate > OUTPUT_fsi_channel_with_leaflet
 echo "done"
 echo " " >> validation.log
 echo "FSI channel with leaflet (algebraic) validation" >> validation.log
@@ -33,7 +35,7 @@ echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat RESLT_FSI_LEAF_EXT/soln1_on_proc0.dat RESLT_FSI_LEAF_EXT/soln1_on_proc1.dat RESLT_FSI_LEAF_EXT/soln3_on_proc0.dat RESLT_FSI_LEAF_EXT/soln3_on_proc1.dat RESLT_FSI_LEAF_EXT/wall_soln2_on_proc0.dat RESLT_FSI_LEAF_EXT/wall_soln2_on_proc1.dat > fsi_channel_with_leaflet_external_results.dat
+cat RESLT_FSI_LEAF/soln1_on_proc0.dat RESLT_FSI_LEAF/soln1_on_proc1.dat RESLT_FSI_LEAF/soln3_on_proc0.dat RESLT_FSI_LEAF/soln3_on_proc1.dat RESLT_FSI_LEAF/wall_soln2_on_proc0.dat RESLT_FSI_LEAF/wall_soln2_on_proc1.dat > fsi_channel_with_leaflet_external_results.dat
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log

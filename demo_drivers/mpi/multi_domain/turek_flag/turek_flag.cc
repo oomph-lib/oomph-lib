@@ -447,6 +447,16 @@ private:
 
  /// Pointer to fluid control node
  Node* Fluid_control_node_pt;
+
+ /// Coordinates of control nodes
+ double Solid_control_x0;
+ double Solid_control_x1;
+ double Fluid_control_x0;
+ double Fluid_control_x1;
+
+ /// Processor id for any process containing control nodes
+ int Solid_control_process_id;
+ int Fluid_control_process_id;
  
 };// end_of_problem_class
 
@@ -461,13 +471,14 @@ TurekProblem(const double &length,
                                       Domain_length(length)
  
 {
- // Don't print warning message about missing adjacent fluid elements
- FSIWallElement::Dont_warn_about_missing_adjacent_fluid_elements=true;
-
  // Increase max. number of iterations in Newton solver to
  // accomodate possible poor initial guesses
  Max_newton_iterations=20;
  Max_residuals=1.0e4;
+
+ // Default process ids (for serial)
+ Solid_control_process_id=this->communicator_pt()->my_rank();
+ Fluid_control_process_id=this->communicator_pt()->my_rank();
 
  // Build solid mesh
  //------------------
@@ -520,6 +531,9 @@ TurekProblem(const double &length,
            << Solid_control_node_pt->x(0) << " " 
            << Solid_control_node_pt->x(1) << " " << std::endl;
 
+ Solid_control_x0=Solid_control_node_pt->x(0);
+ Solid_control_x1=Solid_control_node_pt->x(1);
+
  // Complete build of solid elements - needs to happen before refinement
  //---------------------------------------------------------------------
 
@@ -540,11 +554,7 @@ TurekProblem(const double &length,
 
    // Timescale ratio for solid
    el_pt->lambda_sq_pt() = &Global_Parameters::Lambda_sq;
-  }
-
- // Don't refine this uniformly yet; if this mesh is allowed to adapt
- // then it doesn't refine many of the elements beyond the coarsest state
-// solid_mesh_pt()->refine_uniformly();
+  } // end build of solid elements
 
  // Build mesh of solid traction elements that apply the fluid
  //------------------------------------------------------------
@@ -635,6 +645,13 @@ TurekProblem(const double &length,
  // upstream tip of the cylinder
  Fluid_control_node_pt=Fluid_mesh_pt->node_pt(5);
 
+ std::cout << "Coordinates of fluid control point " 
+           << Fluid_control_node_pt->x(0) << " " 
+           << Fluid_control_node_pt->x(1) << " " << std::endl;
+
+ Fluid_control_x0=Fluid_control_node_pt->x(0);
+ Fluid_control_x1=Fluid_control_node_pt->x(1);
+
  // Set error estimator for the fluid mesh
  Z2ErrorEstimator* fluid_error_estimator_pt=new Z2ErrorEstimator;
  fluid_mesh_pt()->spatial_error_estimator_pt()=fluid_error_estimator_pt;
@@ -663,8 +680,8 @@ TurekProblem(const double &length,
  
 
 
- // Apply solid boundary conditons
- //-------------------------------
+ // Apply solid boundary conditions
+ //--------------------------------
  
  //Solid mesh: Pin the left boundary (boundary 3) in both directions
  unsigned n_side = mesh_pt()->nboundary_node(3);
@@ -726,30 +743,6 @@ TurekProblem(const double &length,
   }
  
 
-//  // Complete build of solid elements
-//  //---------------------------------
-
-//  //Pass problem parameters to solid elements
-//  unsigned  n_element =solid_mesh_pt()->nelement();
-//  for(unsigned i=0;i<n_element;i++)
-//   {
-//    //Cast to a solid element
-//    SOLID_ELEMENT *el_pt = dynamic_cast<SOLID_ELEMENT*>(
-//     solid_mesh_pt()->element_pt(i));
-   
-//    // Set the constitutive law
-//    el_pt->constitutive_law_pt() =
-//     Global_Parameters::Constitutive_law_pt;
-   
-//    //Set the body force
-//    el_pt->body_force_fct_pt() = Global_Parameters::gravity;
-
-//    // Timescale ratio for solid
-//    el_pt->lambda_sq_pt() = &Global_Parameters::Lambda_sq;
-//   }
- 
- 
-
  // Complete build of fluid elements
  //---------------------------------
 
@@ -782,9 +775,6 @@ TurekProblem(const double &length,
  // and specify the velocity of the fluid nodes based on the wall motion
  if (!Global_Parameters::Ignore_fluid_loading)
   {
-   // Output information to screen
-   Multi_domain_functions::Shut_up=false;
-
    // Work out which fluid dofs affect the residuals of the wall elements:
    // We pass the boundary between the fluid and solid meshes and 
    // pointers to the meshes. The interaction boundary are boundaries 5,6,7
@@ -813,82 +803,14 @@ TurekProblem(const double &length,
          FSI_functions::apply_no_slip_on_moving_wall);
       }
     } // done automatic application of no-slip
-  } 
+  } // end of FSI setup
 
-
-// NB: not using the preconditioner in parallel at the moment as it needs
-//     to be fixed to run properly for distributed problems where certain
-//     processors might not have any elements on a particular (sub)mesh
-
-//  // Build solver/preconditioner
-//  //----------------------------
-
-//  // Build iterative linear solver
-//  GMRES<CRDoubleMatrix>* iterative_linear_solver_pt =
-//   new GMRES<CRDoubleMatrix>;
- 
-//  // Set maximum number of iterations
-//  iterative_linear_solver_pt->max_iter() = 100;
- 
-//  // Set tolerance
-//  iterative_linear_solver_pt->tolerance() = 1.0e-10;
- 
-//  // Assign solver
-//  linear_solver_pt()=iterative_linear_solver_pt;
-
-//  // Build preconditioner
-//  FSIPreconditioner* prec_pt=new FSIPreconditioner;
-
-//  // Set Navier Stokes mesh:
-//  prec_pt->navier_stokes_mesh_pt()=Fluid_mesh_pt;
-
-//  // Set solid mesh:
-//  prec_pt->wall_mesh_pt()=solid_mesh_pt();
-
-//  // Set flags in the underlying Navier-Stokes preconditioner
-//  prec_pt->navier_stokes_preconditioner_pt()->p_matrix_using_scaling() = true;
-
-//  // Retain fluid onto solid terms
-//  prec_pt->use_block_triangular_version_with_fluid_on_solid();
-
-//  // Set preconditioner
-//  iterative_linear_solver_pt->preconditioner_pt()= prec_pt;
-
-//  // By default, the LSC Preconditioner uses SuperLU as
-//  // an exact preconditioner (i.e. a solver) for the
-//  // momentum and Schur complement blocks.
-//  // Can overwrite this by passing pointers to
-//  // other preconditioners that perform the (approximate)
-//  // solves of these blocks.
-
-// #ifdef HAVE_HYPRE
-
-//  // Create internal preconditioners used on Schur block
-//  Preconditioner* P_matrix_preconditioner_pt = new HyprePreconditioner;
-
-//  HyprePreconditioner* P_hypre_solver_pt =
-//   static_cast<HyprePreconditioner*>(P_matrix_preconditioner_pt);
- 
-//  // Set defaults parameters for use as preconditioner on Poisson-type
-//  // problem
-//  Hypre_default_settings::
-//   set_defaults_for_2D_poisson_problem(P_hypre_solver_pt);
-
-//  // Use Hypre for the Schur complement block
-//  prec_pt->navier_stokes_preconditioner_pt()->set_p_preconditioner(*P_matrix_preconditioner_pt);
-
-//  // Shut up
-//  P_hypre_solver_pt->doc_time()=false;
-
-// #endif
-
- // Just use SuperLU_dist for now
+ // Use SuperLU_dist as the solver
  linear_solver_pt() = new SuperLU_dist;
  static_cast<SuperLU_dist*>(linear_solver_pt())->enable_distributed_solve();
 
  // Assign equation numbers
  cout << assign_eqn_numbers() << std::endl; 
-
 
 }//end_of_constructor
 
@@ -988,13 +910,12 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::actions_after_adapt()
   (Traction_mesh_pt[2]);
 
  // Tell the fluid mesh about the new "refined" MeshAsGeomObjects
- // NB can this be made more generic?
  fluid_mesh_pt()->set_bottom_flag_pt(bottom_flag_pt);
  fluid_mesh_pt()->set_top_flag_pt(top_flag_pt);
  fluid_mesh_pt()->set_tip_flag_pt(tip_flag_pt);
 
- // Call update_node_update for all the fluid mesh nodes, as the
- // geometric objects representing the interaction boundaries have change
+ // Call update_node_update for all the fluid mesh nodes, as the compound
+ // geometric objects representing the interaction boundaries have changed
  unsigned n_fluid_node=fluid_mesh_pt()->nnode();
  for (unsigned n=0;n<n_fluid_node;n++)
   {
@@ -1022,7 +943,7 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::actions_after_adapt()
  PVDEquationsBase<2>::pin_redundant_nodal_solid_pressures(
   solid_mesh_pt()->element_pt());
 
- // Now rebuild the global mesh (NB can this move... ?)
+ // Now rebuild the global mesh
  rebuild_global_mesh();
 
  // If the solid is to be loaded by the fluid, then set up the interaction
@@ -1056,6 +977,20 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::actions_after_adapt()
     }
 
   }
+
+ // Synchronise positions... ? Not sure this will help, but...
+#ifdef OOMPH_HAS_MPI
+ unsigned n_mesh=nsub_mesh();
+ for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
+  {
+   synchronise_dofs(mesh_pt(i_mesh));
+  }
+ // Hmmm.  Do external dofs need to be synchronised as well?
+//  for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
+//   {
+//    synchronise_external_dofs(mesh_pt(i_mesh));
+//   }
+#endif
 
 }// end of actions_after_adapt
 
@@ -1220,24 +1155,61 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::actions_after_distribute()
     }
   }
 
- // Re-set control nodes 
- FiniteElement* el_pt=solid_mesh_pt()->finite_element_pt(0);
- unsigned nnod=el_pt->nnode();
+ // Re-set control nodes
 
- Solid_control_node_pt=el_pt->node_pt(nnod-1);
-
- std::cout << "Coordinates of solid control point " 
-           << Solid_control_node_pt->x(0) << " " 
-           << Solid_control_node_pt->x(1) << " " << std::endl;
-
-#ifdef OOMPH_HAS_MPI
- if (Fluid_mesh_pt->nnode()!=0)
+ // Loop over solid nodes
+ unsigned n_solid_nod=solid_mesh_pt()->nnode();
+ for (unsigned j=0;j<n_solid_nod;j++)
   {
-   Fluid_control_node_pt=Fluid_mesh_pt->node_pt(5);
+   if ((solid_mesh_pt()->node_pt(j)->x(0)==Solid_control_x0) &&
+       (solid_mesh_pt()->node_pt(j)->x(1)==Solid_control_x1))
+    {
+     // The node still exists on this process...
+     Solid_control_process_id=this->communicator_pt()->my_rank();
+     break;
+    }
+
+   // if the end has been reached then set process id to -1
+   if (j==n_solid_nod-1)
+    {
+     Solid_control_process_id=-1;
+    }
   }
-#else
- Fluid_control_node_pt=Fluid_mesh_pt->node_pt(5);
-#endif
+
+ if (Solid_control_process_id>=0)
+  {
+   std::cout << "Coordinates of solid control point (" 
+             << Solid_control_node_pt->x(0) << "," 
+             << Solid_control_node_pt->x(1) << ") on process" 
+             << Solid_control_process_id << std::endl;
+  }
+
+ // Loop over fluid nodes
+ unsigned n_fluid_nod=fluid_mesh_pt()->nnode();
+ for (unsigned j=0;j<n_fluid_nod;j++)
+  {
+   if ((fluid_mesh_pt()->node_pt(j)->x(0)==Fluid_control_x0) &&
+       (fluid_mesh_pt()->node_pt(j)->x(1)==Fluid_control_x1))
+    {
+     // The node still exists on this process...
+     Fluid_control_process_id=this->communicator_pt()->my_rank();
+     break;
+    }
+
+   // if the end has been reached then set process id to -1
+   if (j==n_fluid_nod-1)
+    {
+     Fluid_control_process_id=-1;
+    }
+  }
+
+ if (Fluid_control_process_id>=0)
+  {
+   std::cout << "Coordinates of fluid control point (" 
+             << Fluid_control_node_pt->x(0) << "," 
+             << Fluid_control_node_pt->x(1) << ") on process" 
+             << Fluid_control_process_id << std::endl;
+  }
  
 } // end of actions after distribute
 
@@ -1324,12 +1296,8 @@ template<class FLUID_ELEMENT,class SOLID_ELEMENT >
 void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::doc_solution(
  DocInfo& doc_info, ofstream& trace_file)
 {
- 
-//  FSI_functions::doc_fsi<AlgebraicNode>(Fluid_mesh_pt,
-//                                        Combined_traction_mesh_pt,
-//                                        doc_info);
-
-//  pause("done");
+ // Current process
+ int my_rank=this->communicator_pt()->my_rank();
 
  ofstream some_file;
  char filename[100];
@@ -1339,14 +1307,14 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::doc_solution(
 
  // Output solid solution
  sprintf(filename,"%s/solid_soln%i_on_proc%i.dat",doc_info.directory().c_str(),
-         doc_info.number(),MPI_Helpers::My_rank);
+         doc_info.number(),my_rank);
  some_file.open(filename);
  solid_mesh_pt()->output(some_file,n_plot);
  some_file.close();
  
  // Output fluid solution
  sprintf(filename,"%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
-         doc_info.number(),MPI_Helpers::My_rank);
+         doc_info.number(),my_rank);
  some_file.open(filename);
  fluid_mesh_pt()->output(some_file,n_plot);
  some_file.close();
@@ -1354,7 +1322,7 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::doc_solution(
 
 //Output the traction
  sprintf(filename,"%s/traction%i_on_proc%i.dat",doc_info.directory().c_str(),
-         doc_info.number(),MPI_Helpers::My_rank);
+         doc_info.number(),my_rank);
  some_file.open(filename);
 // Loop over the traction meshes
  for(unsigned i=0;i<3;i++)
@@ -1366,19 +1334,22 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::doc_solution(
      FSISolidTractionElement<SOLID_ELEMENT,2>* el_pt = 
       dynamic_cast<FSISolidTractionElement<SOLID_ELEMENT,2>* > (
        Traction_mesh_pt[i]->element_pt(e) );
-     
-     el_pt->output(some_file,5);
+
+     // Only output halo elements
+     if (!el_pt->is_halo())
+      {
+       el_pt->output(some_file,5);
+      }
     }
   }
  some_file.close();  
 
 
  // Write trace (we're only using Taylor Hood elements so we know that
- // the pressure is the third value at the fluid control node...
+ // the pressure is the third value at the fluid control node...)
 
- //// Is there a sensible way to do this in MPI?
- //// I suppose 
- if (fluid_mesh_pt()->nnode()!=0)
+ if ((Solid_control_process_id==my_rank) &&
+     (Fluid_control_process_id==my_rank))
   {
    trace_file << time_pt()->time() << " " 
               << Solid_control_node_pt->x(0) << " " 
@@ -1388,9 +1359,9 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::doc_solution(
               << std::endl;
   }
  
- cout << "Doced solution for step " 
-      << doc_info.number() 
-      << std::endl << std::endl << std::endl;
+ oomph_info << "Doced solution for step " 
+            << doc_info.number()
+            << std::endl << std::endl << std::endl;
 
 }//end_of_doc_solution
 
@@ -1434,17 +1405,6 @@ int main(int argc, char* argv[])
  // argument
  Global_Parameters::set_parameters(case_id);
 
- // Prepare output
- DocInfo doc_info;
- ofstream trace_file; 
-#ifdef USE_EXTERNAL_ELEMENTS
- doc_info.set_directory("RESLT_TUREK_EXT");
- trace_file.open("RESLT_TUREK_EXT/trace.dat");
-#else
- doc_info.set_directory("RESLT_TUREK");
- trace_file.open("RESLT_TUREK/trace.dat");
-#endif
- 
  // Length and height of domain
  double length=25.0;
  double height=4.1;
@@ -1453,6 +1413,15 @@ int main(int argc, char* argv[])
  TurekProblem<AlgebraicElement<RefineableQTaylorHoodElement<2> >,
   RefineableQPVDElement<2,3> > problem(length, height);
 
+ // Prepare output
+ DocInfo doc_info;
+ ofstream trace_file; 
+ char filename[100];
+ doc_info.set_directory("RESLT_TUREK");
+ sprintf(filename,"%s/trace_on_proc%i.dat",doc_info.directory().c_str(),
+         problem.communicator_pt()->my_rank());
+ trace_file.open(filename);
+ 
  // Default number of timesteps
  unsigned nstep=4000;
  if (Global_Parameters::Case_ID=="FSI1")
@@ -1482,37 +1451,38 @@ int main(int argc, char* argv[])
 
 #ifdef OOMPH_HAS_MPI
  // Distribute the problem
- std::ifstream input_file;
-// std::ofstream output_file;
- char filename[100];
+ bool report_stats=true;
 
- // Only the fluid and solid meshes are partitioned
- unsigned n_partition=(problem.fluid_mesh_pt()->nelement())+
-  (problem.solid_mesh_pt()->nelement());
- Vector<unsigned> in_element_partition(n_partition,0);
-// Vector<unsigned> out_element_partition(n_partition,0);
-
- // Get partition from file
- sprintf(filename,"turek_flag_partition.dat");
- input_file.open(filename);
- std::string input_string;
- for (unsigned e=0;e<n_partition;e++)
+ // Are there command-line arguments?
+ if (CommandLineArgs::Argc==1)
   {
-   getline(input_file,input_string,'\n');
-   in_element_partition[e]=atoi(input_string.c_str());
+   // No arguments, so it's a validation run
+   std::ifstream input_file;
+
+   // All meshes are partitioned
+   unsigned n_partition=problem.mesh_pt()->nelement();
+   Vector<unsigned> in_element_partition(n_partition,0);
+
+   // Get partition from file
+   sprintf(filename,"turek_flag_partition.dat");
+   input_file.open(filename);
+   std::string input_string;
+   for (unsigned e=0;e<n_partition;e++)
+    {
+     getline(input_file,input_string,'\n');
+     in_element_partition[e]=atoi(input_string.c_str());
+    }
+  
+   // Now distribute the (still uniformly refined) problem
+   problem.distribute(in_element_partition,report_stats);
+  }
+ else
+  {
+   // There were command-line arguments, so distribute without
+   // reference to any partition vector
+   problem.distribute(report_stats);
   }
 
- bool report_stats=true;
- // Now distribute the (still uniformly refined) problem
- problem.distribute(in_element_partition,report_stats);
-//  out_element_partition=problem.distribute(in_element_partition,report_stats);
-
-//  sprintf(filename,"out_turek_flag_partition.dat");
-//  output_file.open(filename);
-//  for (unsigned e=0;e<n_partition;e++)
-//   {
-//    output_file << out_element_partition[e] << std::endl;
-//   }
 
 #endif
  

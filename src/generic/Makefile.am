@@ -33,7 +33,8 @@ eigen_solver.cc \
 triangle_scaffold_mesh.cc  geompack_scaffold_mesh.cc \
 tetgen_scaffold_mesh.cc simple_cubic_scaffold_tet_mesh.cc \
 triangle_mesh.cc tet_mesh.cc \
-partitioning.cc linear_algebra_distribution.cc double_vector.cc \
+partitioning.cc communicator.cc linear_algebra_distribution.cc \
+double_vector.cc \
 iterative_linear_solver.cc \
 general_purpose_preconditioners.cc block_preconditioner.cc \
 matrix_vector_product.cc 

@@ -10,13 +10,6 @@
 // The mesh
 #include "meshes/quarter_circle_sector_mesh.h"
 
-#ifdef OOMPH_HAS_MPI
-#include "mpi.h"
-#endif
-
-// nan-catching header
-//#include "fenv.h"
-
 using namespace std;
 
 using namespace oomph;
@@ -123,13 +116,20 @@ public:
     pin_redundant_nodal_pressures(mesh_pt()->element_pt());
    
    // Now pin the first pressure dof in the first element and set it to 0.0
-   unsigned nnod=mesh_pt()->nnode();
-   for (unsigned j=0; j<nnod; j++)
+
+   // Loop over all elements
+   unsigned n_element=mesh_pt()->nelement();
+   for (unsigned e=0;e<n_element;e++)
     {
-     if (mesh_pt()->node_pt(j)->x(0)==0 && 
-         mesh_pt()->node_pt(j)->x(1)==0) // 2d problem
+     // If the lower left node of this element is (0,0), then fix the 
+     // pressure dof in this element to zero
+     if (mesh_pt()->finite_element_pt(e)->node_pt(0)->x(0)==0.0 && 
+         mesh_pt()->finite_element_pt(e)->node_pt(0)->x(1)==0.0) // 2d problem
       {
-       fix_pressure(0,0,0.0);
+       oomph_info << "I'm fixing the pressure " << std::endl;
+       // Fix the pressure in element e at pdof=0 to 0.0
+       unsigned pdof=0;
+       fix_pressure(e,pdof,0.0);
       }
     }
 
@@ -232,23 +232,13 @@ QuarterCircleDrivenCavityProblem<ELEMENT>::QuarterCircleDrivenCavityProblem(
  // Initial refinement level
  refine_uniformly();
  refine_uniformly();
- // NB running on more than 4 processes at this level of refinement
- // would seem to be a somewhat pointless waste of processes
 
  // Pin redudant pressure dofs
  RefineableNavierStokesEquations<2>::
   pin_redundant_nodal_pressures(mesh_pt()->element_pt());
  
  // Now pin the first pressure dof in the first element and set it to 0.0
- unsigned nnod=mesh_pt()->nnode();
- for (unsigned j=0; j<nnod; j++)
-  {
-   if (mesh_pt()->node_pt(j)->x(0)==0 &&
-       mesh_pt()->node_pt(j)->x(1)==0)
-    {
-     fix_pressure(0,0,0.0);
-    }
-  }
+ fix_pressure(0,0,0.0);
  
  // Setup equation numbering scheme
  cout <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
@@ -273,7 +263,7 @@ void QuarterCircleDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output solution 
  sprintf(filename,"%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
-         doc_info.number(),MPI_Helpers::My_rank);
+         doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
  some_file.close();
@@ -290,9 +280,6 @@ int main(int argc, char **argv)
 #ifdef OOMPH_HAS_MPI
  MPI_Helpers::init(argc,argv);
 #endif
-
- // enable nan-catching
-// feenableexcept(FE_DIVBYZERO | FE_OVERFLOW);
 
  // Set output directory and initialise count
  DocInfo doc_info;
@@ -348,9 +335,7 @@ int main(int argc, char **argv)
   problem.newton_solve();
 
 #ifdef OOMPH_HAS_MPI
-  // distribute mesh (uniform refinement has already occurred in problem build)
   mesh_doc_info.number()=0;
-
   std::ifstream input_file;
   std::ofstream output_file;
   char filename[100];
@@ -367,17 +352,8 @@ int main(int argc, char **argv)
     element_partition[e]=atoi(input_string.c_str());
    }
 
-//  Vector<unsigned> out_element_partition;
-  problem.distribute(mesh_doc_info,report_stats,element_partition);
-//                     out_element_partition);
-
-//   sprintf(filename,"out_circular_cavity_1_partition.dat");
-//   output_file.open(filename);
-//   for (unsigned e=0;e<n_partition;e++)
-//    {
-//     output_file << out_element_partition[e] << std::endl;
-//    }
-
+  // Distribute the problem and check halo schemes
+  problem.distribute(element_partition,mesh_doc_info,report_stats);
   problem.check_halo_schemes(mesh_doc_info);
 
   oomph_info << "---- Now solve after distribute ----" << std::endl;
@@ -430,8 +406,6 @@ int main(int argc, char **argv)
   problem.newton_solve();
 
 #ifdef OOMPH_HAS_MPI
-  // distribute mesh (uniform refinement has already occurred in problem build)
-
   std::ifstream input_file;
   std::ofstream output_file;
   char filename[100];
@@ -448,21 +422,11 @@ int main(int argc, char **argv)
     element_partition[e]=atoi(input_string.c_str());
    }
 
-//  Vector<unsigned> out_element_partition;
-  problem.distribute(mesh_doc_info,report_stats,element_partition);
-//                     out_element_partition);
-
-//   sprintf(filename,"out_circular_cavity_2_partition.dat");
-//   output_file.open(filename);
-//   for (unsigned e=0;e<n_partition;e++)
-//    {
-//     output_file << out_element_partition[e] << std::endl;
-//    }
-
+  // Distribute problem and check halo schemes
+  problem.distribute(element_partition,mesh_doc_info,report_stats);
   problem.check_halo_schemes(mesh_doc_info);
 
   oomph_info << "---- Now solve after distribute ----" << std::endl;
-
 #endif // (OOMPH_HAS_MPI)
 
   // Solve the problem with automatic adaptation

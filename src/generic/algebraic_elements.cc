@@ -284,7 +284,6 @@ Vector<GeomObject*> AlgebraicNode::Dummy_geom_object_pt;
          AlgebraicMesh* mesh_pt=Mesh_pt.begin()->second;
          // Not sure why I need this intermediate variable....
          AlgebraicNode* node_pt=this;
-//          std::cout << "algebraic_node_update ";
          mesh_pt->algebraic_node_update(t,node_pt);         
         }
       }
@@ -293,9 +292,9 @@ Vector<GeomObject*> AlgebraicNode::Dummy_geom_object_pt;
    /// Perform auxiliary update of function values?
    if (Aux_node_update_fct_pt!=0)
     {
-//      std::cout << "auxiliary node update called ";
      Aux_node_update_fct_pt(this);
     }
+
   }
 
 

@@ -177,11 +177,12 @@ public:
    fix_pressure(0,0,0.0);
 
    // Set sources for temperature
-   Multi_domain_functions::set_sources<NST_ELEMENT,AD_ELEMENT,2,2>
-    (this,nst_mesh_pt(),temp_mesh_pt());
+   Multi_domain_functions::setup_multi_domain_interactions
+    <NST_ELEMENT,AD_ELEMENT>(this,nst_mesh_pt(),temp_mesh_pt());
+
    // Set sources for concentration
-   Multi_domain_functions::set_sources<NST_ELEMENT,AD_ELEMENT,2,2>
-    (this,nst_mesh_pt(),conc_mesh_pt(),1,0);
+   Multi_domain_functions::setup_multi_domain_interactions
+    <NST_ELEMENT,AD_ELEMENT>(this,nst_mesh_pt(),conc_mesh_pt(),1,0);
 
   } //end_of_actions_after_adapt
 

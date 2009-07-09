@@ -86,7 +86,8 @@ namespace METIS
                      const unsigned& objective,
                      Vector<unsigned>& element_domain)
  {
-  partition_mesh(problem_pt->mesh_pt(),
+  partition_mesh(problem_pt->communicator_pt(),
+                 problem_pt->mesh_pt(),
                  ndomain,
                  objective,
                  element_domain);
@@ -101,7 +102,8 @@ namespace METIS
  /// - objective=1: minimise total communications volume.
  /// .
  /// Partioning is based on nodal graph of mesh.
- void partition_mesh(Mesh* mesh_pt,
+ void partition_mesh(OomphCommunicator* comm_pt,
+                     Mesh* mesh_pt,
                      const unsigned& ndomain,
                      const unsigned& objective,
                      Vector<unsigned>& element_domain);
@@ -179,7 +181,8 @@ void METIS::uniform_partition_mesh(Problem* problem_pt,
 /// .
 /// Partioning is based on nodal graph of mesh.
 //==================================================================
-void METIS::partition_mesh(Mesh* mesh_pt, const unsigned& ndomain,
+void METIS::partition_mesh(OomphCommunicator* comm_pt,
+                           Mesh* mesh_pt, const unsigned& ndomain,
                            const unsigned& objective,
                            Vector<unsigned>& element_domain)
 {
@@ -374,7 +377,7 @@ void METIS::partition_mesh(Mesh* mesh_pt, const unsigned& ndomain,
      Vector<unsigned> node_count(nnode,0);
      
      mmesh_pt->spatial_error_estimator_pt()->
-      get_element_errors(mesh_pt,elemental_error);
+      get_element_errors(comm_pt,mesh_pt,elemental_error);
      
      // Now loop over all elements and add error to their nodes
      for (unsigned e=0;e<nelem;e++)
@@ -613,7 +616,8 @@ void METIS::partition_mesh(Mesh* mesh_pt, const unsigned& ndomain,
 /// .
 /// Partioning is based on dual graph of mesh.
 //==================================================================
-void METIS::partition_mesh(Mesh* mesh_pt, const unsigned& ndomain,
+void METIS::partition_mesh(OomphCommunicator* comm_pt,
+                           Mesh* mesh_pt, const unsigned& ndomain,
                            const unsigned& objective,
                            Vector<unsigned>& element_domain)
 {
@@ -662,7 +666,6 @@ void METIS::partition_mesh(Mesh* mesh_pt, const unsigned& ndomain,
     }
   }
 
-   
  // Now reverse the lookup scheme to find out all elements
  // that are connected because they share the same global eqn
  Vector<std::set<unsigned> > connected_elements(nelem);
@@ -791,7 +794,7 @@ void METIS::partition_mesh(Mesh* mesh_pt, const unsigned& ndomain,
      // Get error for all elements
      Vector<double> elemental_error(nelem);     
      mmesh_pt->spatial_error_estimator_pt()->
-      get_element_errors(mesh_pt,elemental_error);
+      get_element_errors(comm_pt,mesh_pt,elemental_error);
      
      double max_error=*(std::max_element(elemental_error.begin(),
                                          elemental_error.end()));

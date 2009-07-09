@@ -43,8 +43,9 @@ using namespace std;
 
 
 //======================class definitions==============================
-/// Build QCrouzeixRaviartElementWithExternalElement that inherits from ElementWithExternalElement
-/// so that it can "communicate" with QAdvectionDiffusionElementWithExternalElement
+/// Build QCrouzeixRaviartElementWithExternalElement that inherits from 
+/// ElementWithExternalElement so that it can "communicate" with 
+/// QAdvectionDiffusionElementWithExternalElement
 //=====================================================================
 template<unsigned DIM>
 class QCrouzeixRaviartElementWithExternalElement : 
@@ -332,8 +333,8 @@ class QAdvectionDiffusionElementWithExternalElement :
 public:
 
  /// \short Constructor: call the underlying constructors
- QAdvectionDiffusionElementWithExternalElement() : QAdvectionDiffusionElement<DIM,3>(),
-                                 ElementWithExternalElement()
+ QAdvectionDiffusionElementWithExternalElement() : 
+  QAdvectionDiffusionElement<DIM,3>(), ElementWithExternalElement()
   { 
    // There is one interaction
    this->set_ninteraction(1);
@@ -594,11 +595,9 @@ public:
 // from the "source" AdvectionDiffusion element via current integration point
 //========================================================
 template<unsigned DIM>
-void QCrouzeixRaviartElementWithExternalElement<DIM>::get_body_force_nst(const double& time, 
-                                                    const unsigned& ipt,
-                                                    const Vector<double> &s,
-                                                    const Vector<double> &x,
-                                                    Vector<double> &result)
+void QCrouzeixRaviartElementWithExternalElement<DIM>::get_body_force_nst
+(const double& time, const unsigned& ipt, const Vector<double> &s,
+ const Vector<double> &x, Vector<double> &result)
 {
  // The interaction index is 0 in this case
  unsigned interaction=0;
@@ -756,7 +755,7 @@ namespace Global_Physical_Variables
 /// of elements is specified via the template parameters.
 //====================================================================
 template<class NST_ELEMENT,class AD_ELEMENT> 
-class ConvectionProblem : public Problem //public virtual HelmholtzProblem
+class ConvectionProblem : public Problem 
 {
 
 public:
@@ -779,19 +778,9 @@ public:
  /// Actions after distribute: set sources
  void actions_after_distribute()
   {
-   // Set binning parameters
-//   Multi_domain_functions::Setup_bins=true;
-//   Multi_domain_functions::N_bin_dim=5;
-   // hierher DEBUG testing
-   Multi_domain_functions::Shut_up=false;
-
-   // Set interaction indices (default now)
-//   unsigned interaction_nst=0;
-//   unsigned interaction_ad=0;
-
    // Set sources
-   Multi_domain_functions::set_sources<NST_ELEMENT,AD_ELEMENT,2,2>
-    (this,nst_mesh_pt(),adv_diff_mesh_pt());
+   Multi_domain_functions::setup_multi_domain_interactions
+    <NST_ELEMENT,AD_ELEMENT>(this,nst_mesh_pt(),adv_diff_mesh_pt());
   }
 
  /// \short Actions before the timestep (update the the time-dependent 
@@ -835,7 +824,10 @@ private:
 
 protected:
 
+ /// Mesh object for Navier--Stokes domain
  RectangularQuadMesh<NST_ELEMENT>* Nst_mesh_pt;
+
+ /// Mesh object for advection-diffusion domain
  RectangularQuadMesh<AD_ELEMENT>* Adv_diff_mesh_pt;
 
 }; // end of problem class
@@ -850,7 +842,11 @@ ConvectionProblem<NST_ELEMENT,AD_ELEMENT>::ConvectionProblem()
  add_time_stepper_pt(new BDF<2>);
 
  // Set output directory
+#ifdef USE_FD_JACOBIAN_FOR_NAVIER_STOKES_ELEMENT   
+ Doc_info.set_directory("RESLT_FD");
+#else
  Doc_info.set_directory("RESLT");
+#endif
  
  // # of elements in x-direction
  unsigned n_x=8;
@@ -997,8 +993,8 @@ ConvectionProblem<NST_ELEMENT,AD_ELEMENT>::ConvectionProblem()
  build_global_mesh();
 
  // Set sources
- Multi_domain_functions::set_sources<NST_ELEMENT,AD_ELEMENT,2,2>
-  (this,nst_mesh_pt(),adv_diff_mesh_pt());
+ Multi_domain_functions::setup_multi_domain_interactions
+  <NST_ELEMENT,AD_ELEMENT>(this,nst_mesh_pt(),adv_diff_mesh_pt());
 
  // Setup equation numbering scheme
  cout <<"Number of equations: " << assign_eqn_numbers() << endl; 
@@ -1091,10 +1087,10 @@ void ConvectionProblem<NST_ELEMENT,AD_ELEMENT>::doc_solution()
  // Number of plot points: npts x npts
  unsigned npts=5;
 
- // Output whole solution (this will output elements from one mesh
- //----------------------  followed by the other mesh at the moment...?)
+ // Output whole solution
+ //----------------------
  sprintf(filename,"%s/soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
-         Doc_info.number(),MPI_Helpers::My_rank);
+         Doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
  some_file.close();
@@ -1102,13 +1098,13 @@ void ConvectionProblem<NST_ELEMENT,AD_ELEMENT>::doc_solution()
  // Output solution for each mesh
  //------------------------------
  sprintf(filename,"%s/vel_soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
-         Doc_info.number(),MPI_Helpers::My_rank);
+         Doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  nst_mesh_pt()->output(some_file,npts);
  some_file.close();
 
  sprintf(filename,"%s/temp_soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
-         Doc_info.number(),MPI_Helpers::My_rank);
+         Doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  adv_diff_mesh_pt()->output(some_file,npts);
  some_file.close();
@@ -1126,6 +1122,9 @@ int main(int argc, char **argv)
  MPI_Helpers::init(argc,argv);
 #endif
 
+ // Store command line arguments
+ CommandLineArgs::setup(argc,argv);
+
  // Set the direction of gravity
  Global_Physical_Variables::Direction_of_gravity[0] = 0.0;
  Global_Physical_Variables::Direction_of_gravity[1] = -1.0;
@@ -1141,36 +1140,54 @@ int main(int argc, char **argv)
  // Distribute the problem (and set the sources)
 #ifdef OOMPH_HAS_MPI
  DocInfo mesh_doc_info;
+ mesh_doc_info.number()=0;
+#ifdef USE_FD_JACOBIAN_FOR_NAVIER_STOKES_ELEMENT   
+ mesh_doc_info.set_directory("RESLT_FD");
+#else
+ mesh_doc_info.set_directory("RESLT");
+#endif
  bool report_stats=true;
 
- std::ifstream input_file;
- std::ofstream output_file;
- char filename[100];
-
- // Get partition from file
- unsigned n_partition=problem.mesh_pt()->nelement();
- Vector<unsigned> element_partition(n_partition);
- sprintf(filename,"multimesh_boussinesq_partition.dat");
- input_file.open(filename);
- std::string input_string;
- for (unsigned e=0;e<n_partition;e++)
+ // Are there command-line arguments?
+ if (CommandLineArgs::Argc==1)
   {
-   getline(input_file,input_string,'\n');
-   element_partition[e]=atoi(input_string.c_str());
+   // No arguments, so distribute without reference to partition vector
+   problem.distribute(mesh_doc_info,report_stats);
+  }
+ else
+  {
+   // Command line argument(s), so read in partition from file
+   std::ifstream input_file;
+   std::ofstream output_file;
+   char filename[100];
+
+   // Get partition from file
+   unsigned n_partition=problem.mesh_pt()->nelement();
+   Vector<unsigned> element_partition(n_partition);
+   // Two possible partitions on two processors - one for "normal" 
+   // METIS behaviour, the other gives one mesh to one processor 
+   // and the other mesh to the other processor
+   if (atoi(argv[2])==2)
+    {
+     oomph_info << "Using connected partitioning" << std::endl;
+     sprintf(filename,"multimesh_boussinesq_partition_2.dat");
+    }
+   else
+    {
+     oomph_info << "Giving a mesh to each processor" << std::endl;
+     sprintf(filename,"multimesh_boussinesq_partition.dat");
+    }
+   input_file.open(filename);
+   std::string input_string;
+   for (unsigned e=0;e<n_partition;e++)
+    {
+     getline(input_file,input_string,'\n');
+     element_partition[e]=atoi(input_string.c_str());
+    }
+
+   problem.distribute(element_partition,mesh_doc_info,report_stats);
   }
 
-// Vector<unsigned> out_element_partition;
- problem.distribute(mesh_doc_info,report_stats,element_partition);
-//                     out_element_partition);
-
-//  sprintf(filename,"out_multimesh_boussinesq_partition.dat");
-//  output_file.open(filename);
-//  for (unsigned e=0;e<n_partition;e++)
-//   {
-//    output_file << out_element_partition[e] << std::endl;
-//   }
-
-// problem.distribute(mesh_doc_info,report_stats);
 #endif
 
  //Perform a single steady Newton solve
@@ -1187,10 +1204,8 @@ int main(int argc, char **argv)
 
  //Set the number of timesteps to our default value
  unsigned n_steps = 200;
-// unsigned n_steps = 20;
 
  //If we have a command line argument, perform fewer steps 
- //(used for self-test runs)
  if(argc > 1) {n_steps = 5;}
 
  //Perform n_steps timesteps

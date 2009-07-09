@@ -243,7 +243,7 @@ void RefineablePoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output solution 
  sprintf(filename,"%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
-         doc_info.number(),MPI_Helpers::My_rank);
+         doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
  some_file.close();
@@ -300,7 +300,9 @@ void parallel_test(const unsigned& n_refine_first,
   new RefineablePoissonProblem<RefineableQPoissonElement<2,3> >(
    &TanhSolnForPoisson::get_source);
 
-
+ // Storage for number of processors and current rank
+ unsigned n_proc=problem_pt->communicator_pt()->nproc();
+ unsigned my_rank=problem_pt->communicator_pt()->my_rank();
 
  // Initial number of dofs in base mesh
  unsigned n_dof_orig=problem_pt->ndof();
@@ -319,7 +321,7 @@ void parallel_test(const unsigned& n_refine_first,
  
 
  // Doc stats
- if (MPI_Helpers::My_rank==0)
+ if (my_rank==0)
   {
    double t_tot=double(t_end-t_start)/CLOCKS_PER_SEC;
    oomph_info << "Time for initial adaptation [ndof=" << problem_pt->ndof() 
@@ -366,8 +368,8 @@ void parallel_test(const unsigned& n_refine_first,
 
    Vector<unsigned> out_element_partition;
    bool report_stats=false;
-   out_element_partition=problem_pt->distribute(doc_info,report_stats,
-                                                element_partition);
+   out_element_partition=problem_pt->distribute(element_partition,
+                                                doc_info,report_stats);
 
    sprintf(filename,"out_two_d_mesh_dist_partition.dat");
    output_file.open(filename);
@@ -385,16 +387,16 @@ void parallel_test(const unsigned& n_refine_first,
 
  // Assess the quality of the distribution
  //---------------------------------------
- problem_pt->mesh_pt()->get_halo_node_stats(av_number_halo_nodes, 
+ problem_pt->mesh_pt()->get_halo_node_stats(problem_pt->communicator_pt(),
+                                            av_number_halo_nodes,
                                             max_number_halo_nodes,
                                             min_number_halo_nodes);
- problem_pt->mesh_pt()->get_efficiency_of_mesh_distribution(av_efficiency, 
-                                                            max_efficiency,
-                                                            min_efficiency);
+ problem_pt->mesh_pt()->get_efficiency_of_mesh_distribution
+  (problem_pt->communicator_pt(),av_efficiency,max_efficiency,min_efficiency);
  
 
  // Doc stats
- if (MPI_Helpers::My_rank==0)
+ if (my_rank==0)
   {
    double t_tot=double(t_end-t_start)/CLOCKS_PER_SEC;
    oomph_info << "Time for problem distribution [ndof=" << problem_pt->ndof() 
@@ -404,11 +406,11 @@ void parallel_test(const unsigned& n_refine_first,
     filename,
     "%s/two_d_initial_distr_np_%i_nrefinement_%i_ndof_%i.dat",
     doc_info.directory().c_str(),
-    MPI_Helpers::Nproc,
+    n_proc,
     n_refine_first,
     n_dof);
    some_file.open(filename);
-   some_file << MPI_Helpers::Nproc << " " 
+   some_file << n_proc << " " 
              << n_dof << " " 
              << t_tot << " "
              << av_number_halo_nodes << " " 
@@ -493,15 +495,16 @@ void parallel_test(const unsigned& n_refine_first,
 
    // Assess efficiency
    //------------------
-   problem_pt->mesh_pt()->get_halo_node_stats(av_number_halo_nodes, 
+   problem_pt->mesh_pt()->get_halo_node_stats(problem_pt->communicator_pt(),
+                                              av_number_halo_nodes,
                                               max_number_halo_nodes,
                                               min_number_halo_nodes);
-   problem_pt->mesh_pt()->get_efficiency_of_mesh_distribution(av_efficiency, 
-                                                              max_efficiency,
-                                                              min_efficiency);
+   problem_pt->mesh_pt()->get_efficiency_of_mesh_distribution
+    (problem_pt->communicator_pt(),av_efficiency,
+     max_efficiency,min_efficiency);
  
 
-   if (MPI_Helpers::My_rank==0)
+   if (my_rank==0)
     {
      double t_tot=double(t_end-t_start)/CLOCKS_PER_SEC;
      oomph_info << "Time for distributed adaptation [ndof=" 
@@ -519,13 +522,13 @@ void parallel_test(const unsigned& n_refine_first,
       filename,
       "%s/two_d_distributed_refinement_np_%i_ninitialrefinement_%i_ntotalrefinement_%i_ndof_%i_with%sredistribution.dat",
       doc_info.directory().c_str(),
-      MPI_Helpers::Nproc,
+      n_proc,
       n_refine_first,
       n_refine_first+i+1,
       n_dof,
       snippet.c_str());
      some_file.open(filename);
-     some_file << MPI_Helpers::Nproc << " " 
+     some_file << n_proc << " " 
                << n_dof_orig << " " 
                << n_dof << " " 
                << t_tot << " "
@@ -556,7 +559,7 @@ void parallel_test(const unsigned& n_refine_first,
       double t_tot=double(t_end-t_start)/CLOCKS_PER_SEC;
      
 
-      if (MPI_Helpers::My_rank==0)
+      if (my_rank==0)
        {
 
         oomph_info << "Av., min. max. efficiency before redistribution " 
@@ -568,12 +571,12 @@ void parallel_test(const unsigned& n_refine_first,
          filename,
          "%s/two_d_redistribution_np_%i_ninitialrefinement_%i_ntotalrefinement_%i_ndof_%i.dat",
          doc_info.directory().c_str(),
-         MPI_Helpers::Nproc,
+         n_proc,
          n_refine_first,
          n_refine_first+i+1,
          n_dof);
         some_file.open(filename);
-        some_file << MPI_Helpers::Nproc << " " 
+        some_file << n_proc << " " 
                   << n_dof << " " 
                   << t_tot << " "
                   << av_number_halo_nodes << " " 
@@ -588,23 +591,25 @@ void parallel_test(const unsigned& n_refine_first,
 
       // Re-assess efficiency
       //----------------------
-      problem_pt->mesh_pt()->get_halo_node_stats(av_number_halo_nodes, 
+      problem_pt->mesh_pt()->get_halo_node_stats(problem_pt->communicator_pt(),
+                                                 av_number_halo_nodes,
                                                  max_number_halo_nodes,
                                                  min_number_halo_nodes);
       problem_pt->mesh_pt()->
-       get_efficiency_of_mesh_distribution(av_efficiency, 
+       get_efficiency_of_mesh_distribution(problem_pt->communicator_pt(),
+                                           av_efficiency,
                                            max_efficiency,
                                            min_efficiency);
       
       
-      if (MPI_Helpers::My_rank==0)
+      if (my_rank==0)
        {
         oomph_info << "Time for redistribution  [ndof=" 
                    << problem_pt->ndof() 
                    << "]: " << t_tot << std::endl;
 
 
-        some_file << MPI_Helpers::Nproc << " " 
+        some_file << n_proc << " " 
                   << n_dof << " " 
                   << t_tot << " "
                   << av_number_halo_nodes << " " 
@@ -618,7 +623,8 @@ void parallel_test(const unsigned& n_refine_first,
        }
             
       problem_pt->mesh_pt()->
-       get_efficiency_of_mesh_distribution(av_efficiency, 
+       get_efficiency_of_mesh_distribution(problem_pt->communicator_pt(),
+                                           av_efficiency,
                                            max_efficiency,
                                            min_efficiency);
       oomph_info << "Av., min., max. efficiency after redistribution " 
@@ -663,7 +669,7 @@ void parallel_test(const unsigned& n_refine_first,
    problem_pt->unrefine_uniformly();
    t_end = clock();
    
-   if (MPI_Helpers::My_rank==0)
+   if (my_rank==0)
     {
      double t_tot=double(t_end-t_start)/CLOCKS_PER_SEC;
      oomph_info << "Time for distributed unrefinement [ndof=" 
@@ -677,12 +683,12 @@ void parallel_test(const unsigned& n_refine_first,
       filename,
       "%s/two_d_distributed_unrefinement_np_%i_ninitialrefinement_%i_ntotalrefinement_%i_ndof_%i.dat",
       doc_info.directory().c_str(),
-      MPI_Helpers::Nproc,
+      n_proc,
       n_refine_first,
       n_refine_first+n_refine_once_distributed,
       n_dof);
      some_file.open(filename);
-     some_file << MPI_Helpers::Nproc << " " 
+     some_file << n_proc << " " 
                << n_dof_orig << " " 
                << n_dof << " " 
                << t_tot << " "
@@ -797,13 +803,6 @@ int main(int argc, char **argv)
             << redistribute  << " " 
             << std::endl;
  
-
- // switch off output for all but one processor
-// if (MPI_Helpers::My_rank>0)
-//  {
-//   oomph_info.stream_pt() = &oomph_nullstream;
-//  }
-
 
  // Solve and self test?
  bool solve=true;

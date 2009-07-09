@@ -498,6 +498,9 @@ namespace CommandLineArgs
 
 }
 
+// forward declaration of OomphCommunicator class
+class OomphCommunicator;
+
 #ifdef OOMPH_HAS_MPI
 //========================================================================
 /// MPI output modifier: Preceeds every output by 
@@ -517,40 +520,21 @@ private:
  /// processor (default: false)
  bool Output_from_single_processor;
 
+ /// Communicator
+ OomphCommunicator* Communicator_pt;
+
 public:
 
 
  /// Constructor -- initialise flags for output from all processors
- MPIOutputModifier() : Output_rank(0), Output_from_single_processor(false)
+ MPIOutputModifier() : Output_rank(0), 
+  Output_from_single_processor(false)
   {}
 
- /// Preceed the output by the processor ID but output everything
- bool operator()(std::ostream &stream)
-  {
-   int my_rank;
-   MPI_Comm_rank(MPI_COMM_WORLD,&my_rank);
-   
-   if (!Output_from_single_processor)
-    {
-     stream << "Processor " << my_rank << ":   ";
-     // Continue processing 
-     return true;
-    }
-   else
-    {
-     if (unsigned(my_rank)==Output_rank)
-      {
-       stream << "Processor " << my_rank << ":   ";
-       // Continue processing 
-       return true;
-      }
-     else
-      {
-       return false;
-      }
-    }
-  }
+ OomphCommunicator*& communicator_pt() { return Communicator_pt; }
 
+ /// Precede the output by the processor ID but output everything
+ virtual bool operator()(std::ostream &stream);
 
  /// Switch to ensure output is only produced from a single
  /// processor (default: Master node, i.e. rank 0)
@@ -581,12 +565,12 @@ extern MPIOutputModifier oomph_mpi_output;
 template <class T>
 class DenseMatrix;
 
+// forward declaration of oomph-communicator class
+//class OomphCommunicator;
+
 #endif
 
 
-
- // forward declaration of oomph-communicator class
- class OomphCommunicator;
 
 //======================================================================
 /// Basic namespace for MPI helper data and functions; this
@@ -617,200 +601,200 @@ namespace MPI_Helpers
  /// finalize mpi
  void finalize();
 
- /// LEGACY
+ /// LEGACY - keep this for now?
  /// Setup MPI helpers
  void setup();
  
- /// \short Check that length of vector (passed as argument) is less 
- /// than max. int (otherwise it can't be sent through standard MPI send). 
- /// Code dies with exception if vector is too long -- function 
- /// should therefore only be called from within PARANOID block.
- void check_length(const unsigned long& length);
+/*  /// \short Check that length of vector (passed as argument) is less  */
+/*  /// than max. int (otherwise it can't be sent through standard MPI send).  */
+/*  /// Code dies with exception if vector is too long -- function  */
+/*  /// should therefore only be called from within PARANOID block. */
+/*  void check_length(const unsigned long& length); */
 
- /// Self-test all the STL send/receive routines
- unsigned self_test();
+/*  /// Self-test all the STL send/receive routines */
+/*  unsigned self_test(); */
 
- /// Output MPI error message and abort.
- void deal_with_communicator_error(int& mpi_error);
+/*  /// Output MPI error message and abort. */
+/*  void deal_with_communicator_error(int& mpi_error); */
 
- /// \short Broadcast a vector from processor "source"  to all
- /// others, using the specified communicator. Need to instantiate 
- /// this function for all required template
- /// types as the entries of the vector need to be converted into 
- /// standard C-types before they can be sent with standard MPI
- /// routines.
- template<class T>
- void broadcast_vector(Vector<T>& x,
-                       const int& source,
-                       MPI_Comm comm);
+/*  /// \short Broadcast a vector from processor "source"  to all */
+/*  /// others, using the specified communicator. Need to instantiate  */
+/*  /// this function for all required template */
+/*  /// types as the entries of the vector need to be converted into  */
+/*  /// standard C-types before they can be sent with standard MPI */
+/*  /// routines. */
+/*  template<class T> */
+/*  void broadcast_vector(Vector<T>& x, */
+/*                        const int& source, */
+/*                        MPI_Comm comm); */
 
 
- /// \short Broadcast a vector of doubles from processor "source"  to all
- /// others, using the specified communicator.
- template<>
- void broadcast_vector<double>(Vector<double>& x,
-                               const int& source,
-                               MPI_Comm comm);
+/*  /// \short Broadcast a vector of doubles from processor "source"  to all */
+/*  /// others, using the specified communicator. */
+/*  template<> */
+/*  void broadcast_vector<double>(Vector<double>& x, */
+/*                                const int& source, */
+/*                                MPI_Comm comm); */
  
- /// \short Broadcast a vector of ints from processor "source"  to all
- /// others, using the specified communicator.
- template<>
- void broadcast_vector<int>(Vector<int>& x,
-                            const int& source,
-                            MPI_Comm comm);
+/*  /// \short Broadcast a vector of ints from processor "source"  to all */
+/*  /// others, using the specified communicator. */
+/*  template<> */
+/*  void broadcast_vector<int>(Vector<int>& x, */
+/*                             const int& source, */
+/*                             MPI_Comm comm); */
 
- /// \short Send a vector from current processor to processor "destination",
- /// using the specified tag and communicator.
- /// Need to instantiate this function for all required template
- /// types as the entries of the vector need to be converted into 
- /// standard C-types before they can be sent with standard MPI
- /// routines.
- template<class T>
- void send_vector(const Vector<T>& x,
-                  const int& destination,
-                  const int& tag,            
-                  MPI_Comm comm);
+/*  /// \short Send a vector from current processor to processor "destination", */
+/*  /// using the specified tag and communicator. */
+/*  /// Need to instantiate this function for all required template */
+/*  /// types as the entries of the vector need to be converted into  */
+/*  /// standard C-types before they can be sent with standard MPI */
+/*  /// routines. */
+/*  template<class T> */
+/*  void send_vector(const Vector<T>& x, */
+/*                   const int& destination, */
+/*                   const int& tag,             */
+/*                   MPI_Comm comm); */
  
- /// \short Send a vector of doubles from current processor to processor 
- /// "destination", using the specified tag and communicator.
- template<>
- void send_vector<double>(const Vector<double>& x,
-                          const int& destination,
-                          const int& tag,            
-                          MPI_Comm comm);
+/*  /// \short Send a vector of doubles from current processor to processor  */
+/*  /// "destination", using the specified tag and communicator. */
+/*  template<> */
+/*  void send_vector<double>(const Vector<double>& x, */
+/*                           const int& destination, */
+/*                           const int& tag,             */
+/*                           MPI_Comm comm); */
 
 
- /// \short Send a vector of intsfrom current processor to processor 
- /// "destination", using the specified tag and communicator.
- template<>
- void send_vector<int>(const Vector<int>& x,
-                       const int& destination,
-                       const int& tag,            
-                       MPI_Comm comm);
+/*  /// \short Send a vector of intsfrom current processor to processor  */
+/*  /// "destination", using the specified tag and communicator. */
+/*  template<> */
+/*  void send_vector<int>(const Vector<int>& x, */
+/*                        const int& destination, */
+/*                        const int& tag,             */
+/*                        MPI_Comm comm); */
  
 
- /// \short Receive a vector on the current processor from processor "source",
- /// using the specified tag and communicator. 
- /// Need to instantiate this function for all required template
- /// types as the entries of the vector need to be converted into 
- /// standard C-types before they can be sent with standard MPI
- /// routines.
- template<class T>
- void receive_vector(Vector<T>& x,
-                     const int& source,
-                     const int& tag,            
-                     MPI_Comm comm);
+/*  /// \short Receive a vector on the current processor from processor "source", */
+/*  /// using the specified tag and communicator.  */
+/*  /// Need to instantiate this function for all required template */
+/*  /// types as the entries of the vector need to be converted into  */
+/*  /// standard C-types before they can be sent with standard MPI */
+/*  /// routines. */
+/*  template<class T> */
+/*  void receive_vector(Vector<T>& x, */
+/*                      const int& source, */
+/*                      const int& tag,             */
+/*                      MPI_Comm comm); */
 
- /// \short Receive a vector of doubles on the current processor from 
- /// processor "source", using the specified tag and communicator.
- template<>
- void receive_vector<double>(Vector<double>& x,
-                             const int& source,
-                             const int& tag,            
-                             MPI_Comm comm);
+/*  /// \short Receive a vector of doubles on the current processor from  */
+/*  /// processor "source", using the specified tag and communicator. */
+/*  template<> */
+/*  void receive_vector<double>(Vector<double>& x, */
+/*                              const int& source, */
+/*                              const int& tag,             */
+/*                              MPI_Comm comm); */
 
- /// \short Receive a vector of ints on the current processor from 
- /// processor "source", using the specified tag and communicator.
- template<>
- void receive_vector<int>(Vector<int>& x,
-                          const int& source,
-                          const int& tag,            
-                          MPI_Comm comm);
+/*  /// \short Receive a vector of ints on the current processor from  */
+/*  /// processor "source", using the specified tag and communicator. */
+/*  template<> */
+/*  void receive_vector<int>(Vector<int>& x, */
+/*                           const int& source, */
+/*                           const int& tag,             */
+/*                           MPI_Comm comm); */
 
 
- /// \short Send a matrix from current processor to processor "destination",
- /// using the specified tag and communicator.
- /// Need to instantiate this function for all required template
- /// types as the entries of the vector need to be converted into 
- /// standard C-types before they can be sent with standard MPI
- /// routines.
- template<class T>
- void send_matrix(const DenseMatrix<T>& x,
-                  const int& destination,
-                  const int& tag,            
-                  MPI_Comm comm);
+/*  /// \short Send a matrix from current processor to processor "destination", */
+/*  /// using the specified tag and communicator. */
+/*  /// Need to instantiate this function for all required template */
+/*  /// types as the entries of the vector need to be converted into  */
+/*  /// standard C-types before they can be sent with standard MPI */
+/*  /// routines. */
+/*  template<class T> */
+/*  void send_matrix(const DenseMatrix<T>& x, */
+/*                   const int& destination, */
+/*                   const int& tag,             */
+/*                   MPI_Comm comm); */
 
- /// \short Send a matrix of doubles from current processor to 
- /// processor "destination", using the specified tag and 
- /// communicator
- template<>
- void send_matrix<double>(const DenseMatrix<double>& x,
-                          const int& destination,
-                          const int& tag,            
-                          MPI_Comm comm);
+/*  /// \short Send a matrix of doubles from current processor to  */
+/*  /// processor "destination", using the specified tag and  */
+/*  /// communicator */
+/*  template<> */
+/*  void send_matrix<double>(const DenseMatrix<double>& x, */
+/*                           const int& destination, */
+/*                           const int& tag,             */
+/*                           MPI_Comm comm); */
  
- /// \short Send a matrix of ints from current processor to 
- /// processor "destination", using the specified tag and 
- /// communicator
- template<>
-  void send_matrix<int>(const DenseMatrix<int>& x,
-                        const int& destination,
-                        const int& tag,            
-                        MPI_Comm comm);
+/*  /// \short Send a matrix of ints from current processor to  */
+/*  /// processor "destination", using the specified tag and  */
+/*  /// communicator */
+/*  template<> */
+/*   void send_matrix<int>(const DenseMatrix<int>& x, */
+/*                         const int& destination, */
+/*                         const int& tag,             */
+/*                         MPI_Comm comm); */
  
- /// \short Receive a matrix on the current processor from processor "source",
- /// using the specified tag and communicator.
- /// Need to instantiate this function for all required template
- /// types as the entries of the vector need to be converted into 
- /// standard C-types before they can be sent with standard MPI
- /// routines.
- template<class T>
- void receive_matrix(DenseMatrix<T>& x,
-                     const int& source,
-                     const int& tag,            
-                     MPI_Comm comm);
+/*  /// \short Receive a matrix on the current processor from processor "source", */
+/*  /// using the specified tag and communicator. */
+/*  /// Need to instantiate this function for all required template */
+/*  /// types as the entries of the vector need to be converted into  */
+/*  /// standard C-types before they can be sent with standard MPI */
+/*  /// routines. */
+/*  template<class T> */
+/*  void receive_matrix(DenseMatrix<T>& x, */
+/*                      const int& source, */
+/*                      const int& tag,             */
+/*                      MPI_Comm comm); */
 
- /// \short Send a matrix of ints from current processor to 
- /// processor "destination", using the specified tag and 
- /// communicator
- template<>
-  void send_matrix<int>(const DenseMatrix<int>& x,
-                        const int& destination,
-                        const int& tag,            
-                        MPI_Comm comm);
+/*  /// \short Send a matrix of ints from current processor to  */
+/*  /// processor "destination", using the specified tag and  */
+/*  /// communicator */
+/*  template<> */
+/*   void send_matrix<int>(const DenseMatrix<int>& x, */
+/*                         const int& destination, */
+/*                         const int& tag,             */
+/*                         MPI_Comm comm); */
  
- /// \short Receive a matrix of doubles on the current processor from 
- /// processor "source", using the specified tag and communicator.
- template<>
- void receive_matrix<double>(DenseMatrix<double>& x,
-                     const int& source,
-                     const int& tag,            
-                     MPI_Comm comm);
+/*  /// \short Receive a matrix of doubles on the current processor from  */
+/*  /// processor "source", using the specified tag and communicator. */
+/*  template<> */
+/*  void receive_matrix<double>(DenseMatrix<double>& x, */
+/*                      const int& source, */
+/*                      const int& tag,             */
+/*                      MPI_Comm comm); */
 
- /// \short Receive a matrix of ints on the current processor from 
- /// processor "source", using the specified tag and communicator.
- template<>
- void receive_matrix<int>(DenseMatrix<int>& x,
-                          const int& source,
-                          const int& tag,            
-                          MPI_Comm comm);
+/*  /// \short Receive a matrix of ints on the current processor from  */
+/*  /// processor "source", using the specified tag and communicator. */
+/*  template<> */
+/*  void receive_matrix<int>(DenseMatrix<int>& x, */
+/*                           const int& source, */
+/*                           const int& tag,             */
+/*                           MPI_Comm comm); */
                           
 
- /// \short Broadcast a matrix from processor "source"  to all
- /// others, using the specified communicator. Need to instantiate 
- /// this function for all required template
- /// types as the entries of the vector need to be converted into 
- /// standard C-types before they can be sent with standard MPI
- /// routines.
- template<class T>
- void broadcast_matrix(DenseMatrix<T>& x,
-                       const int& source,
-                       MPI_Comm comm);
+/*  /// \short Broadcast a matrix from processor "source"  to all */
+/*  /// others, using the specified communicator. Need to instantiate  */
+/*  /// this function for all required template */
+/*  /// types as the entries of the vector need to be converted into  */
+/*  /// standard C-types before they can be sent with standard MPI */
+/*  /// routines. */
+/*  template<class T> */
+/*  void broadcast_matrix(DenseMatrix<T>& x, */
+/*                        const int& source, */
+/*                        MPI_Comm comm); */
 
 
- /// \short Broadcast a matrix of doubles from processor "source"  to all
- /// others, using the specified communicator.
- template<>
-  void  broadcast_matrix<double>(DenseMatrix<double>& x,
-                                 const int& source,
-                                 MPI_Comm comm);
+/*  /// \short Broadcast a matrix of doubles from processor "source"  to all */
+/*  /// others, using the specified communicator. */
+/*  template<> */
+/*   void  broadcast_matrix<double>(DenseMatrix<double>& x, */
+/*                                  const int& source, */
+/*                                  MPI_Comm comm); */
 
- /// \short Broadcast a matrix of ints from processor "source"  to all
- /// others, using the specified communicator.
- template<>
-  void  broadcast_matrix<int>(DenseMatrix<int>& x,
-                              const int& source,
-                              MPI_Comm comm);
+/*  /// \short Broadcast a matrix of ints from processor "source"  to all */
+/*  /// others, using the specified communicator. */
+/*  template<> */
+/*   void  broadcast_matrix<int>(DenseMatrix<int>& x, */
+/*                               const int& source, */
+/*                               MPI_Comm comm); */
 
 #endif
 }

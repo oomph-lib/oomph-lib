@@ -253,11 +253,10 @@ double Z2ErrorEstimator::get_combined_error_estimate(
 /// contains the pointers to the elements that the node is part of.
 /// Also returns a Vector of vertex nodes for use in get_element_errors.
 //======================================================================
-void Z2ErrorEstimator::setup_patches(Mesh*& mesh_pt,
-      std::map<Node*,Vector<ElementWithZ2ErrorEstimator*>*>& 
-                                     adjacent_elements_pt,
-                                     Vector<Node*>& vertex_node_pt)
-
+void Z2ErrorEstimator::setup_patches
+(Mesh*& mesh_pt,
+ std::map<Node*,Vector<ElementWithZ2ErrorEstimator*>*>& adjacent_elements_pt,
+ Vector<Node*>& vertex_node_pt)
  {
   // (see also note at the end of get_element_errors below) 
   // NOTE FOR FUTURE REFERENCE - revisit in case of adaptivity problems in
@@ -680,10 +679,15 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
 /// - flux_fe*.dat
 /// - flux_rec*.dat 
 //======================================================================
- void Z2ErrorEstimator::get_element_errors(Mesh*& mesh_pt,
-                                           Vector<double>& elemental_error, 
-                                           DocInfo& doc_info)
+void Z2ErrorEstimator::get_element_errors(OomphCommunicator* comm_pt,
+                                          Mesh*& mesh_pt,
+                                          Vector<double>& elemental_error,
+                                          DocInfo& doc_info)
  {
+  // Storage for number of processors and current processor
+  int n_proc=comm_pt->nproc();
+  int my_rank=comm_pt->my_rank();
+
 #ifdef OOMPH_HAS_MPI
   MPI_Status status;
   // Initialise local values for all processes on mesh
@@ -739,10 +743,10 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
   if (mesh_pt->mesh_has_been_distributed())
    {
     MPI_Allreduce(&num_flux_terms_local,&num_flux_terms,1,MPI_INT,
-                  MPI_MAX,MPI_COMM_WORLD);
-    MPI_Allreduce(&dim_local,&dim,1,MPI_INT,MPI_MAX,MPI_COMM_WORLD);
+                  MPI_MAX,comm_pt->mpi_comm());
+    MPI_Allreduce(&dim_local,&dim,1,MPI_INT,MPI_MAX,comm_pt->mpi_comm());
     MPI_Allreduce(&recovery_order_local,&recovery_order,1,MPI_INT,
-                  MPI_MAX,MPI_COMM_WORLD);
+                  MPI_MAX,comm_pt->mpi_comm());
    }
   else
    {
@@ -825,31 +829,28 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
 
   // This isn't a global variable
   int n_patch=adjacent_elements_pt.size(); // also needed by serial version
-  int itbegin,itend,range;
+
+  // Default values for serial AND parallel distributed problem
+  int itbegin=0;
+  int range=n_patch;
+  int itend=n_patch;
 
 #ifdef OOMPH_HAS_MPI
-
-  if (!(mesh_pt->mesh_has_been_distributed())) // see mesh.h
+  // Work out values for parallel non-distributed problem
+  if (!(mesh_pt->mesh_has_been_distributed()))
    {
     // setup the loop variables
-    range = n_patch/MPI_Helpers::Nproc; // number of patches on each proc
+    range = n_patch/n_proc; // number of patches on each proc
  
-    itbegin = MPI_Helpers::My_rank*range;
-    itend = (MPI_Helpers::My_rank+1)*range;
+    itbegin = my_rank*range;
+    itend = (my_rank+1)*range;
 
-    if (MPI_Helpers::My_rank==((MPI_Helpers::Nproc)-1))
-       {
-        itend=n_patch;
-       }
+    // if on the last processor, ensure the end matches
+    if (my_rank==(n_proc-1))
+     {
+      itend=n_patch;
+     }
 
-   }
-  else
-   {
-#endif
-    itbegin=0; // Mesh has already been distributed, or serial problem
-    range=n_patch;
-    itend=n_patch;
-#ifdef OOMPH_HAS_MPI
    }
 #endif
 
@@ -901,7 +902,7 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
        push_back(recovered_flux_coefficient_pt);
 
       } // end of if(nelem>=2)
-    //   it++; // move to next patch map
+
    }
 
 // Now broadcast the result from each process to every other process
@@ -910,111 +911,114 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
 #ifdef OOMPH_HAS_MPI
 
   if (!mesh_pt->mesh_has_been_distributed() 
-       && MPI_Helpers::MPI_has_been_initialised)
-  {
-  // All local recovered fluxes have been calculated, so now share result
-  for (int iproc=0;iproc<MPI_Helpers::Nproc;iproc++)
+      && MPI_Helpers::MPI_has_been_initialised)
    {
-     // Broadcast number of patches processed
-    int n_patches=vector_of_recovered_flux_coefficient_pt_to_send.size();
-    MPI_Bcast(&n_patches,1,MPI_INT,iproc,MPI_COMM_WORLD);
-
-    // Loop over these patches, broadcast recovered flux coefficients
-    for (int ipatch=0;ipatch<n_patches;ipatch++)
+    // All local recovered fluxes have been calculated, so now share result
+    for (int iproc=0;iproc<n_proc;iproc++)
      {
-      // Number of elements in this patch
-      Vector<int> elements(0);
-      unsigned nelements; // Needs to be int for elem_num call later
-      if (MPI_Helpers::My_rank==iproc) 
-       {  
-        elements=vector_of_elements_in_patch_to_send[ipatch]; 
-        nelements=elements.size();
-       }
+      // Broadcast number of patches processed
+      int n_patches=vector_of_recovered_flux_coefficient_pt_to_send.size();
+      MPI_Bcast(&n_patches,1,MPI_INT,iproc,comm_pt->mpi_comm());
 
-      // Broadcast elements
-      MPI_Helpers::broadcast_vector(elements,iproc,MPI_COMM_WORLD);
-
-      // Now get recovered flux coefficients
-      DenseMatrix<double>* recovered_flux_coefficient_pt;
-
-      if (MPI_Helpers::My_rank==iproc)
+      // Loop over these patches, broadcast recovered flux coefficients
+      for (int ipatch=0;ipatch<n_patches;ipatch++)
        {
-        recovered_flux_coefficient_pt=
-         vector_of_recovered_flux_coefficient_pt_to_send[ipatch];
-       }
-      else
-       {
-        recovered_flux_coefficient_pt=new DenseMatrix<double>;
-       }
+        // Number of elements in this patch
+        Vector<int> elements(0);
+        unsigned nelements=0;
 
-      // broadcast this matrix from the loop processor
-      DenseMatrix<double> mattosend=*recovered_flux_coefficient_pt;
-
-      MPI_Helpers::broadcast_matrix(mattosend,iproc,MPI_COMM_WORLD);
-
-      *recovered_flux_coefficient_pt=mattosend;
-
-      // End of parallel broadcasting
-      vector_of_recovered_flux_coefficient_pt.
-       push_back(recovered_flux_coefficient_pt);
-
-      // Loop over elements in patch (work out nelements again after bcast)
-      nelements=elements.size();
-
-      for (unsigned e=0;e<nelements;e++)
-       {
-        // Get pointer to element
-        ElementWithZ2ErrorEstimator* el_pt=
-         dynamic_cast<ElementWithZ2ErrorEstimator*>(
-          mesh_pt->element_pt(elements[e]));
-
-        // Loop over all nodes in element 
-        unsigned num_nod=el_pt->nnode();
-        for (unsigned n=0;n<num_nod;n++)
-         {
-          // Get the node
-          Node* nod_pt=el_pt->node_pt(n);
-          // Add the pointer to the current flux coefficient matrix 
-          // to the set for the node
-          // Mesh not distributed here so nod_pt cannot be halo
-          flux_coeff_pt[nod_pt].
-           insert(recovered_flux_coefficient_pt);
+        // Which processor are we on?
+        if (my_rank==iproc) 
+         {  
+          elements=vector_of_elements_in_patch_to_send[ipatch]; 
+          nelements=elements.size();
          }
-       }
- 
-     } // end loop over patches on current processor
 
-   } // end loop over processors
+        // Broadcast elements
+        comm_pt->broadcast(iproc,elements);
+
+        // Now get recovered flux coefficients
+        DenseMatrix<double>* recovered_flux_coefficient_pt;
+
+        // Which processor are we on?
+        if (my_rank==iproc)
+         {
+          recovered_flux_coefficient_pt=
+           vector_of_recovered_flux_coefficient_pt_to_send[ipatch];
+         }
+        else
+         {
+          recovered_flux_coefficient_pt=new DenseMatrix<double>;
+         }
+
+        // broadcast this matrix from the loop processor
+        DenseMatrix<double> mattosend=*recovered_flux_coefficient_pt;
+        comm_pt->broadcast(iproc,mattosend);
+
+        // Set pointer on all processors
+        *recovered_flux_coefficient_pt=mattosend;
+
+        // End of parallel broadcasting
+        vector_of_recovered_flux_coefficient_pt.
+         push_back(recovered_flux_coefficient_pt);
+
+        // Loop over elements in patch (work out nelements again after bcast)
+        nelements=elements.size();
+
+        for (unsigned e=0;e<nelements;e++)
+         {
+          // Get pointer to element
+          ElementWithZ2ErrorEstimator* el_pt=
+           dynamic_cast<ElementWithZ2ErrorEstimator*>(
+            mesh_pt->element_pt(elements[e]));
+
+          // Loop over all nodes in element 
+          unsigned num_nod=el_pt->nnode();
+          for (unsigned n=0;n<num_nod;n++)
+           {
+            // Get the node
+            Node* nod_pt=el_pt->node_pt(n);
+            // Add the pointer to the current flux coefficient matrix 
+            // to the set for the node
+            // Mesh not distributed here so nod_pt cannot be halo
+            flux_coeff_pt[nod_pt].
+             insert(recovered_flux_coefficient_pt);
+           }
+         }
+ 
+       } // end loop over patches on current processor
+
+     } // end loop over processors
    
-  }
- else // mesh_has_been_distributed=true
-  {
+   }
+  else // mesh_has_been_distributed=true
+   {
 
 #endif // end ifdef OOMPH_HAS_MPI for parallel job without mesh distribution
 
-   // Do the same for a distributed mesh as for a serial job
-   // up to the point where the elemental error is calculated
-   // and then communicate that (see below)
-   int n_patches=vector_of_recovered_flux_coefficient_pt_to_send.size();
+    // Do the same for a distributed mesh as for a serial job
+    // up to the point where the elemental error is calculated
+    // and then communicate that (see below)
+    int n_patches=vector_of_recovered_flux_coefficient_pt_to_send.size();
 
-   // Loop over these patches
-   for (int ipatch=0;ipatch<n_patches;ipatch++)
-    {
-     // Number of elements in this patch
-     Vector<int> elements;
-     int nelements; // Needs to be int for elem_num call later
-     elements=vector_of_elements_in_patch_to_send[ipatch]; 
-     nelements=elements.size();
+    // Loop over these patches
+    for (int ipatch=0;ipatch<n_patches;ipatch++)
+     {
+      // Number of elements in this patch
+      Vector<int> elements;
+      int nelements; // Needs to be int for elem_num call later
+      elements=vector_of_elements_in_patch_to_send[ipatch]; 
+      nelements=elements.size();
 
-     // Now get recovered flux coefficients
-     DenseMatrix<double>* recovered_flux_coefficient_pt;
-     recovered_flux_coefficient_pt=
-      vector_of_recovered_flux_coefficient_pt_to_send[ipatch];
+      // Now get recovered flux coefficients
+      DenseMatrix<double>* recovered_flux_coefficient_pt;
+      recovered_flux_coefficient_pt=
+       vector_of_recovered_flux_coefficient_pt_to_send[ipatch];
 
-     vector_of_recovered_flux_coefficient_pt.
+      vector_of_recovered_flux_coefficient_pt.
        push_back(recovered_flux_coefficient_pt);
 
-     for (int e=0;e<nelements;e++)
+      for (int e=0;e<nelements;e++)
        {
         // Get pointer to element
         ElementWithZ2ErrorEstimator* el_pt=
@@ -1030,15 +1034,15 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
           // Add the pointer to the current flux coefficient matrix 
           // to the set for this node
           flux_coeff_pt[nod_pt].
-             insert(recovered_flux_coefficient_pt);
+           insert(recovered_flux_coefficient_pt);
          }
        }
  
-    } // End loop over patches on current processor
+     } // End loop over patches on current processor
 
 
 #ifdef OOMPH_HAS_MPI
-  } // End if(mesh_has_been_distributed)
+   } // End if(mesh_has_been_distributed)
 #endif
 
   // Cleanup patch storage scheme
@@ -1071,7 +1075,6 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
      (num_recovery_terms,num_flux_terms,0.0);
 
     // Loop over matrices for different patches and add contributions
-    // hierher
     typedef std::set<DenseMatrix<double>*>::iterator IT;
     for (IT it=flux_coeff_pt[nod_pt].begin();
            it!=flux_coeff_pt[nod_pt].end();it++)
@@ -1158,11 +1161,10 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
      dynamic_cast<ElementWithZ2ErrorEstimator*>(mesh_pt->element_pt(e));
 
 #ifdef OOMPH_HAS_MPI
-    if (!el_pt->is_halo()) // Should be fine for serial code with OOMPH_HAS_MPI
-                           // as it will always return true since no haloes
+    // Ignore halo elements
+    if (!el_pt->is_halo())
      {
-#endif
-      
+#endif      
       //Find the number of compound fluxes in the element
       const int n_compound_flux_el = el_pt->ncompound_fluxes();
       //If it's greater than the current (global) number of compound fluxes
@@ -1190,8 +1192,8 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
      dynamic_cast<ElementWithZ2ErrorEstimator*>(mesh_pt->element_pt(e));
 
 #ifdef OOMPH_HAS_MPI
-    if (!el_pt->is_halo()) // Should be fine for serial code with OOMPH_HAS_MPI
-                           // as it will always return true since no haloes
+    // Ignore halo elements
+    if (!el_pt->is_halo())
      {
 #endif
 
@@ -1305,94 +1307,94 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
 
   if (mesh_pt->mesh_has_been_distributed())
    {
-
-  for (int iproc=0; iproc<MPI_Helpers::Nproc; iproc++)
-   {
-    if (iproc!=MPI_Helpers::My_rank) // Not current process, so send
+    for (int iproc=0; iproc<n_proc; iproc++)
      {
-      //Get the haloed elements
-      Vector<FiniteElement*> haloed_elem_pt=mesh_pt->haloed_element_pt(iproc);
-      //Find the number of haloed elements
-      int nelem_haloed=haloed_elem_pt.size();
-
-      //If there are some haloed elements, assemble and send the
-      //errors
-      if (nelem_haloed!=0)
+      if (iproc!=my_rank) // Not current process, so send
        {
-        //Find the number of error entires:
-        //number of haloed elements x number of compound fluxes
-        int n_elem_error_haloed = nelem_haloed*n_compound_flux;
-        //Vector for elemental errors
-        Vector<double> haloed_elem_error(n_elem_error_haloed);
-        //Counter for the vector index
-        unsigned count=0;
-        for (int e=0; e<nelem_haloed; e++)
-         {
-          // Find element number
-          int element_num=elem_num[dynamic_cast<ElementWithZ2ErrorEstimator*>
-                                   (haloed_elem_pt[e])];
-          // Put the error in a vector to send
-          for(int i=0;i<n_compound_flux;i++)
-           {
-            haloed_elem_error[count]=
-             elemental_compound_flux_error(element_num,i);
-            ++count;
-           }
-         }
-        //Send the errors
-        MPI_Send(&haloed_elem_error[0],n_elem_error_haloed,MPI_DOUBLE,iproc,0,
-                 MPI_COMM_WORLD);
-       }
-     }
-    else // iproc=MPI_Helpers::My_rank, so receive errors from others
-     {
-      for (int send_rank=0; send_rank<MPI_Helpers::Nproc; send_rank++)
-       {
-        if (iproc!=send_rank) // iproc=MPI_Helpers::My_rank already!
-         {
-          Vector<FiniteElement*> halo_elem_pt=mesh_pt->
-                                              halo_element_pt(send_rank);
-          //Find number of halo elements
-          int nelem_halo=halo_elem_pt.size();
-          //If there are some halo elements, receive errors and
-          //put in the appropriate places
-          if (nelem_halo!=0)
-           {
-            //Find the number of error entires:
-            //number of haloed elements x number of compound fluxes
-            int n_elem_error_halo = nelem_halo*n_compound_flux;
-            //Vector for elemental errors
-            Vector<double> halo_elem_error(n_elem_error_halo);
-            
-            
-            //Receive the errors from processor send_rank
-            MPI_Recv(&halo_elem_error[0],n_elem_error_halo,
-                     MPI_DOUBLE,send_rank,0,
-                     MPI_COMM_WORLD,&status);
+        //Get the haloed elements
+        Vector<FiniteElement*> haloed_elem_pt=
+         mesh_pt->haloed_element_pt(iproc);
+        //Find the number of haloed elements
+        int nelem_haloed=haloed_elem_pt.size();
 
-            //Counter for the vector index
-            unsigned count=0;
-            for (int e=0; e<nelem_halo; e++)
+        //If there are some haloed elements, assemble and send the
+        //errors
+        if (nelem_haloed!=0)
+         {
+          //Find the number of error entires:
+          //number of haloed elements x number of compound fluxes
+          int n_elem_error_haloed = nelem_haloed*n_compound_flux;
+          //Vector for elemental errors
+          Vector<double> haloed_elem_error(n_elem_error_haloed);
+          //Counter for the vector index
+          unsigned count=0;
+          for (int e=0; e<nelem_haloed; e++)
+           {
+            // Find element number
+            int element_num=elem_num[dynamic_cast<ElementWithZ2ErrorEstimator*>
+                                     (haloed_elem_pt[e])];
+            // Put the error in a vector to send
+            for(int i=0;i<n_compound_flux;i++)
              {
-              // Find element number
-              int element_num=
-               elem_num[dynamic_cast<ElementWithZ2ErrorEstimator*>
-                        (halo_elem_pt[e])];
-              // Put the error in the correct location
-              for(int i=0;i<n_compound_flux;i++)
+              haloed_elem_error[count]=
+               elemental_compound_flux_error(element_num,i);
+              ++count;
+             }
+           }
+          //Send the errors
+          MPI_Send(&haloed_elem_error[0],n_elem_error_haloed,MPI_DOUBLE,
+                   iproc,0,comm_pt->mpi_comm());
+         }
+       }
+      else // iproc=my_rank, so receive errors from others
+       {
+        for (int send_rank=0; send_rank<n_proc; send_rank++)
+         {
+          if (iproc!=send_rank) // iproc=my_rank already!
+           {
+            Vector<FiniteElement*> halo_elem_pt=mesh_pt->
+             halo_element_pt(send_rank);
+            //Find number of halo elements
+            int nelem_halo=halo_elem_pt.size();
+            //If there are some halo elements, receive errors and
+            //put in the appropriate places
+            if (nelem_halo!=0)
+             {
+              //Find the number of error entires:
+              //number of haloed elements x number of compound fluxes
+              int n_elem_error_halo = nelem_halo*n_compound_flux;
+              //Vector for elemental errors
+              Vector<double> halo_elem_error(n_elem_error_halo);
+            
+            
+              //Receive the errors from processor send_rank
+              MPI_Recv(&halo_elem_error[0],n_elem_error_halo,
+                       MPI_DOUBLE,send_rank,0,
+                       comm_pt->mpi_comm(),&status);
+
+              //Counter for the vector index
+              unsigned count=0;
+              for (int e=0; e<nelem_halo; e++)
                {
-                elemental_compound_flux_error(element_num,i) =
-                 halo_elem_error[count];
-                ++count;
+                // Find element number
+                int element_num=
+                 elem_num[dynamic_cast<ElementWithZ2ErrorEstimator*>
+                          (halo_elem_pt[e])];
+                // Put the error in the correct location
+                for(int i=0;i<n_compound_flux;i++)
+                 {
+                  elemental_compound_flux_error(element_num,i) =
+                   halo_elem_error[count];
+                  ++count;
+                 }
                }
              }
-           } //End of if there are halo elements
-         } //End of if it's not the sending processor
-       } // End of loop over processors
-     } //End of else
-   } //End of loop over processors
+           }
+         } // End of interior loop over processors
+       }
+     } //End of exterior loop over processors
   
-   } //End of if mesh has been distributed
+   } //End of if (mesh has been distributed)
 
 #endif
 
@@ -1425,7 +1427,7 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
       Vector<double> total_flux_norm(n_compound_flux);
       // every process needs to know the sum
       MPI_Allreduce(&flux_norm[0],&total_flux_norm[0],n_compound_flux,
-                    MPI_DOUBLE,MPI_SUM,MPI_COMM_WORLD);
+                    MPI_DOUBLE,MPI_SUM,comm_pt->mpi_comm());
       // take sqrt
       for(int i=0;i<n_compound_flux;i++)
        {
@@ -1469,7 +1471,8 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
   // Doc global fluxes?
   if (doc_info.doc_flag())
    {
-    doc_flux(mesh_pt,num_flux_terms,rec_flux_map,elemental_error,doc_info);
+    doc_flux(comm_pt,mesh_pt,num_flux_terms,
+             rec_flux_map,elemental_error,doc_info);
    }
 
  }
@@ -1478,7 +1481,7 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
 //==================================================================
 /// Doc FE and recovered flux
 //==================================================================
-void Z2ErrorEstimator::doc_flux(Mesh* mesh_pt,
+void Z2ErrorEstimator::doc_flux(OomphCommunicator* comm_pt, Mesh* mesh_pt,
                                 const unsigned& num_flux_terms,
                                 MapMatrixMixed<Node*,int,double>& rec_flux_map,
                                 const Vector<double>& elemental_error,
@@ -1488,10 +1491,10 @@ void Z2ErrorEstimator::doc_flux(Mesh* mesh_pt,
  std::ofstream some_file,feflux_file;
  char filename[100];
  sprintf(filename,"%s/flux_rec%i_on_proc_%i.dat",doc_info.directory().c_str(),
-         doc_info.number(),MPI_Helpers::My_rank);
+         doc_info.number(),comm_pt->my_rank());
  some_file.open(filename);
  sprintf(filename,"%s/flux_fe%i_on_proc_%i.dat",doc_info.directory().c_str(),
-         doc_info.number(),MPI_Helpers::My_rank);
+         doc_info.number(),comm_pt->my_rank());
  feflux_file.open(filename);
 
  // Extract first element to determine spatial dimension

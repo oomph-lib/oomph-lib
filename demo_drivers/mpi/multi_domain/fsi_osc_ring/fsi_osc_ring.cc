@@ -423,15 +423,9 @@ void FSIRingProblem::doc_solution(const unsigned& i,
     char filename[100];
     //Construct the output filename from the doc_info number and the
     //output directory
-#ifdef USE_EXTERNAL_ELEMENTS
     sprintf(filename,"%s/new_soln%i_on_proc%i.dat",
             doc_info.directory().c_str(),
-            doc_info.number(),MPI_Helpers::My_rank);
-#else
-    sprintf(filename,"%s/old_soln%i_on_proc%i.dat",
-            doc_info.directory().c_str(),
-            doc_info.number(),MPI_Helpers::My_rank);
-#endif
+            doc_info.number(),this->communicator_pt()->my_rank());
     //Open the output file
     some_file.open(filename);
     ///Output the solution using 5x5 plot points 
@@ -440,15 +434,9 @@ void FSIRingProblem::doc_solution(const unsigned& i,
     some_file.close();
 
     // Output the wall mesh as well
-#ifdef USE_EXTERNAL_ELEMENTS
     sprintf(filename,"%s/new_wall_soln%i_on_proc%i.dat",
             doc_info.directory().c_str(),
-            doc_info.number(),MPI_Helpers::My_rank);
-#else
-    sprintf(filename,"%s/old_wall_soln%i_on_proc%i.dat",
-            doc_info.directory().c_str(),
-            doc_info.number(),MPI_Helpers::My_rank);
-#endif
+            doc_info.number(),this->communicator_pt()->my_rank());
     //Open the output file
     some_file.open(filename);
     ///Output the solution using 5x5 plot points 
@@ -561,13 +549,12 @@ FSIRingProblem::FSIRingProblem(const unsigned& N,
  double fract_mid=0.5;
 
  // Flag to tell the wall mesh that all its elements should be halo
- bool keep_all_elements_as_halos=true;
+ Wall_mesh_pt->keep_all_elements_as_halos()=true;
  
  //Create a geometric object that represents the wall geometry from the
  //wall mesh (one Lagrangian, two Eulerian coordinates).
  MeshAsGeomObject<1,2,SOLID_ELEMENT> *wall_mesh_as_geometric_object_pt
-  = new MeshAsGeomObject<1,2,SOLID_ELEMENT>(Wall_mesh_pt,
-                                            keep_all_elements_as_halos);
+  = new MeshAsGeomObject<1,2,SOLID_ELEMENT>(Wall_mesh_pt);
 
  // Build fluid mesh using the wall mesh as a geometric object
  Fluid_mesh_pt = new AlgebraicRefineableQuarterCircleSectorMesh<FLUID_ELEMENT >
@@ -719,9 +706,6 @@ FSIRingProblem::FSIRingProblem(const unsigned& N,
  // We pass the boundary between the fluid and solid meshes and pointers
  // to the meshes. The interaction boundary is boundary 1 of the 
  // 2D fluid mesh.
-#ifdef USE_EXTERNAL_ELEMENTS
- FSI_functions::Use_external_storage=true;
-#endif
  FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
   (this,1,Fluid_mesh_pt,Wall_mesh_pt);
 
@@ -768,11 +752,7 @@ void FSIRingProblem::dynamic_run()
  doc_info.number()=0;
 
  //Open a trace file
-#ifdef USE_EXTERNAL_ELEMENTS
  ofstream trace_file("RESLT/new_trace_ring.dat");
-#else
- ofstream trace_file("RESLT/old_trace_ring.dat");
-#endif
  
  // Write header for trace file
  trace_file << "VARIABLES=\"time\",\"V_c_t_r_l\"";
@@ -893,21 +873,11 @@ void FSIRingProblem::dynamic_run()
    element_partition[e]=atoi(input_string.c_str());
   }
 
-// Vector<unsigned> out_element_partition;
  bool report_stats=false;
  DocInfo mesh_doc_info;
  mesh_doc_info.doc_flag()=false;
- distribute(mesh_doc_info,report_stats,element_partition);
-//             out_element_partition);
+ distribute(element_partition,mesh_doc_info,report_stats);
 
-//  sprintf(filename,"out_fsi_osc_ring_partition.dat");
-//  output_file.open(filename);
-//  for (unsigned e=0;e<n_partition;e++)
-//   {
-//    output_file << out_element_partition[e] << std::endl;
-//   }
-
-// distribute();
 #endif
 
 //  {

@@ -590,6 +590,7 @@ fill_in_contribution_to_residuals_solid_traction(Vector<double> &residuals)
       {
        get_traction(ipt,xi,r,unit_normal,traction);
       }
+
      
      for (unsigned i=0;i<DIM;i++)
       {

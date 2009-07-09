@@ -630,6 +630,35 @@ namespace CommandLineArgs
 /// Single (global) instantiation of the mpi output modifier
 //========================================================================
 MPIOutputModifier oomph_mpi_output;
+
+//========================================================================
+/// Precede the output by the processor ID but output everything
+//========================================================================
+ bool MPIOutputModifier::operator()(std::ostream &stream)
+  {
+   int my_rank = Communicator_pt->my_rank();
+   
+   if (!Output_from_single_processor)
+    {
+     stream << "Processor " << my_rank << ":   ";
+     // Continue processing 
+     return true;
+    }
+   else
+    {
+     if (unsigned(my_rank)==Output_rank)
+      {
+       stream << "Processor " << my_rank << ":   ";
+       // Continue processing        
+       return true;
+      }
+     else
+      {
+       return false;
+      }
+    }
+  }
+
 #endif
 
 //=========================================================================
@@ -676,9 +705,9 @@ namespace MPI_Helpers
     // rather than aborting
     MPI_Errhandler_set(oomph_comm_world, MPI_ERRORS_RETURN);
     
-    // just create a communicator with MPI_COMM_WORLD
     // Use MPI output modifier: Each processor preceeds its output
     // by its rank
+    oomph_mpi_output.communicator_pt() = Communicator_pt;
     oomph_info.output_modifier_pt() = &oomph_mpi_output;
 
     // LEGACY - until My_rank and Nproc are deleted
@@ -746,412 +775,413 @@ namespace MPI_Helpers
 
   // Use MPI output modifier: Each processor preceeds its output
   // by its rank
+  oomph_mpi_output.communicator_pt() = Communicator_pt;
   oomph_info.output_modifier_pt() = &oomph_mpi_output;
   
  }
 
- /// Check that length of vector (passed as argument) is less 
- /// than max. int (otherwise it can't be sent through standard MPI send). 
- /// Code dies with exception if vector is too long -- function 
- /// should therefore only be called from within PARANOID block.
- void check_length(const unsigned long& length)
- {
-  if (length>=INT_MAX)
-   {
-    std::ostringstream error_message;
-    error_message 
-     << "Vector has " << length << " entries but only \n" 
-     << INT_MAX << " can be sent via standard MPI send" << std::endl;
-    throw OomphLibError(error_message.str(),
-                        "MPI_Helpers::check_length",
-                        OOMPH_EXCEPTION_LOCATION);
-   }
- }
+//  /// Check that length of vector (passed as argument) is less 
+//  /// than max. int (otherwise it can't be sent through standard MPI send). 
+//  /// Code dies with exception if vector is too long -- function 
+//  /// should therefore only be called from within PARANOID block.
+//  void check_length(const unsigned long& length)
+//  {
+//   if (length>=INT_MAX)
+//    {
+//     std::ostringstream error_message;
+//     error_message 
+//      << "Vector has " << length << " entries but only \n" 
+//      << INT_MAX << " can be sent via standard MPI send" << std::endl;
+//     throw OomphLibError(error_message.str(),
+//                         "MPI_Helpers::check_length",
+//                         OOMPH_EXCEPTION_LOCATION);
+//    }
+//  }
 
- /// Self-test all the STL send/receive routines
- unsigned self_test()
- {
+//  /// Self-test all the STL send/receive routines
+//  unsigned self_test()
+//  {
 
-  // Doc limits
-  if (MPI_Helpers::My_rank==0)
-   {
-    oomph_info << "Limits: " << std::endl;
-    oomph_info << "Max. int                 : " << INT_MAX << std::endl;
-    oomph_info << "Max. unsigned long       : " << ULONG_MAX << std::endl;
-    Vector<double> dummy;
-    oomph_info << "Max. length of Vector<>  : " << dummy.max_size() 
-              << std::endl;
-   }
+//   // Doc limits
+//   if (MPI_Helpers::My_rank==0)
+//    {
+//     oomph_info << "Limits: " << std::endl;
+//     oomph_info << "Max. int                 : " << INT_MAX << std::endl;
+//     oomph_info << "Max. unsigned long       : " << ULONG_MAX << std::endl;
+//     Vector<double> dummy;
+//     oomph_info << "Max. length of Vector<>  : " << dummy.max_size() 
+//               << std::endl;
+//    }
 
-  MPI_Barrier(MPI_COMM_WORLD);
+//   MPI_Barrier(MPI_COMM_WORLD);
 
-  // Length for all vectors
-  unsigned n_length=500000; 
+//   // Length for all vectors
+//   unsigned n_length=500000; 
 
-  // Broadcasting double vectors from all processors
-  //-------------------------------------------------
-  {
-   for (int source=0;source<Nproc;source++)
-    {
-     // Create double vector on all processors -- assign some garbage
-     Vector<double> x_double(13,13.2);
+//   // Broadcasting double vectors from all processors
+//   //-------------------------------------------------
+//   {
+//    for (int source=0;source<Nproc;source++)
+//     {
+//      // Create double vector on all processors -- assign some garbage
+//      Vector<double> x_double(13,13.2);
      
-     // Create vector on source processor
-     if (MPI_Helpers::My_rank==source)
-      {
-       x_double.resize(n_length);
-       for (unsigned i=0;i<n_length;i++)
-        {
-         x_double[i]=double(i*(source+1));
-        }
-      }
-     //Broadcast 
-     broadcast_vector(x_double,source,MPI_COMM_WORLD);
+//      // Create vector on source processor
+//      if (MPI_Helpers::My_rank==source)
+//       {
+//        x_double.resize(n_length);
+//        for (unsigned i=0;i<n_length;i++)
+//         {
+//          x_double[i]=double(i*(source+1));
+//         }
+//       }
+//      //Broadcast 
+//      broadcast_vector(x_double,source,MPI_COMM_WORLD);
      
-     // Check receipt
-     double max_error=0.0;
-     for (unsigned i=0;i<n_length;i++)
-      {
-       double error=std::abs(x_double[i]-double(i*(source+1)));
-       if (error>max_error) max_error=error;
-      }
-     oomph_info << "Broadcast double from " << source << " error on proc " 
-               << My_rank << ": " 
-               << max_error << std::endl; 
+//      // Check receipt
+//      double max_error=0.0;
+//      for (unsigned i=0;i<n_length;i++)
+//       {
+//        double error=std::abs(x_double[i]-double(i*(source+1)));
+//        if (error>max_error) max_error=error;
+//       }
+//      oomph_info << "Broadcast double from " << source << " error on proc " 
+//                << My_rank << ": " 
+//                << max_error << std::endl; 
 
-     MPI_Barrier(MPI_COMM_WORLD);
-    }
-  }
+//      MPI_Barrier(MPI_COMM_WORLD);
+//     }
+//   }
    
    
   
-  // Broadcast vector from all processors
-  //-------------------------------------
-  {
-   for (int source=0;source<Nproc;source++)
-    {
-     // Create int vector on all processors -- assign some garbage
-     Vector<int> x_int(13,13);
+//   // Broadcast vector from all processors
+//   //-------------------------------------
+//   {
+//    for (int source=0;source<Nproc;source++)
+//     {
+//      // Create int vector on all processors -- assign some garbage
+//      Vector<int> x_int(13,13);
    
-     // Create vector on source processor
-     if (MPI_Helpers::My_rank==source)
-      {
-       x_int.resize(n_length);
-       for (unsigned i=0;i<n_length;i++)
-        {
-         x_int[i]=int(i*(source+1));
-        }
-      }
+//      // Create vector on source processor
+//      if (MPI_Helpers::My_rank==source)
+//       {
+//        x_int.resize(n_length);
+//        for (unsigned i=0;i<n_length;i++)
+//         {
+//          x_int[i]=int(i*(source+1));
+//         }
+//       }
      
-     //Broadcast 
-     broadcast_vector(x_int,source,MPI_COMM_WORLD);
+//      //Broadcast 
+//      broadcast_vector(x_int,source,MPI_COMM_WORLD);
      
-     // Check receipt
-     double max_error=0.0;
-     for (unsigned i=0;i<n_length;i++)
-      {
-       double error=std::abs(double(x_int[i]-(i*(source+1))));
-       if (error>max_error) max_error=error;
-      }
-     oomph_info << "Broadcast int from " << source << " error on proc " 
-               << My_rank << ": " 
-               << max_error << std::endl; 
+//      // Check receipt
+//      double max_error=0.0;
+//      for (unsigned i=0;i<n_length;i++)
+//       {
+//        double error=std::abs(double(x_int[i]-(i*(source+1))));
+//        if (error>max_error) max_error=error;
+//       }
+//      oomph_info << "Broadcast int from " << source << " error on proc " 
+//                << My_rank << ": " 
+//                << max_error << std::endl; 
      
-     MPI_Barrier(MPI_COMM_WORLD);
-    }
-  }
+//      MPI_Barrier(MPI_COMM_WORLD);
+//     }
+//   }
 
 
-  // Sending/receiving double vectors from all processors
-  //-----------------------------------------------------
-  {
+//   // Sending/receiving double vectors from all processors
+//   //-----------------------------------------------------
+//   {
 
-   for (int source=0;source<Nproc;source++)
-    {
+//    for (int source=0;source<Nproc;source++)
+//     {
    
 
-     // Create double vector on all processors -- assign some garbage
-     Vector<double> x_double(13,13.2);
+//      // Create double vector on all processors -- assign some garbage
+//      Vector<double> x_double(13,13.2);
   
-     // Create vector on source processor
-     if (MPI_Helpers::My_rank==source)
-      {
-       x_double.resize(n_length);
-       for (unsigned i=0;i<n_length;i++)
-        {
-         x_double[i]=double(i*(source+1));
-        }
+//      // Create vector on source processor
+//      if (MPI_Helpers::My_rank==source)
+//       {
+//        x_double.resize(n_length);
+//        for (unsigned i=0;i<n_length;i++)
+//         {
+//          x_double[i]=double(i*(source+1));
+//         }
 
-       // Send to all other processors
-       for (int destination=0;destination<Nproc;destination++)
-        {  
-         if (source!=destination)
-          {
-           //Send
-           send_vector(x_double,destination,1,MPI_COMM_WORLD);
-          }
-        }
-      }
+//        // Send to all other processors
+//        for (int destination=0;destination<Nproc;destination++)
+//         {  
+//          if (source!=destination)
+//           {
+//            //Send
+//            send_vector(x_double,destination,1,MPI_COMM_WORLD);
+//           }
+//         }
+//       }
      
-     // Receive on all other processors
-     for (int destination=0;destination<Nproc;destination++)
-      {  
-       if ((My_rank==destination)&&(destination!=source))
-        {
-         //Receive
-         receive_vector(x_double,source,1,MPI_COMM_WORLD);
+//      // Receive on all other processors
+//      for (int destination=0;destination<Nproc;destination++)
+//       {  
+//        if ((My_rank==destination)&&(destination!=source))
+//         {
+//          //Receive
+//          receive_vector(x_double,source,1,MPI_COMM_WORLD);
 
-         // Check receipt
-         double max_error=0.0;
-         for (unsigned i=0;i<n_length;i++)
-          {
-           double error=std::abs(x_double[i]-double(i*(source+1)));
-           if (error>max_error) max_error=error;
-          }
-         oomph_info << "Send double error on source/dest " << source 
-                   << " " << My_rank << ": " 
-                   << max_error << std::endl; 
+//          // Check receipt
+//          double max_error=0.0;
+//          for (unsigned i=0;i<n_length;i++)
+//           {
+//            double error=std::abs(x_double[i]-double(i*(source+1)));
+//            if (error>max_error) max_error=error;
+//           }
+//          oomph_info << "Send double error on source/dest " << source 
+//                    << " " << My_rank << ": " 
+//                    << max_error << std::endl; 
          
          
-        }
-      }
+//         }
+//       }
 
-     MPI_Barrier(MPI_COMM_WORLD);
+//      MPI_Barrier(MPI_COMM_WORLD);
 
-    }
-  }
+//     }
+//   }
 
   
-  // Sending/receiving int vectors from all processors
-  //-----------------------------------------------------
-  {
+//   // Sending/receiving int vectors from all processors
+//   //-----------------------------------------------------
+//   {
 
-   for (int source=0;source<Nproc;source++)
-    {
-     // Create int vector on all processors -- assign some garbage
-     Vector<int> x_int(13,13);
+//    for (int source=0;source<Nproc;source++)
+//     {
+//      // Create int vector on all processors -- assign some garbage
+//      Vector<int> x_int(13,13);
   
-     // Create vector on source processor
-     if (MPI_Helpers::My_rank==source)
-      {
-       x_int.resize(n_length);
-       for (unsigned i=0;i<n_length;i++)
-        {
-         x_int[i]=int(i*(source+1));
-        }
+//      // Create vector on source processor
+//      if (MPI_Helpers::My_rank==source)
+//       {
+//        x_int.resize(n_length);
+//        for (unsigned i=0;i<n_length;i++)
+//         {
+//          x_int[i]=int(i*(source+1));
+//         }
 
-       // Send to all other processors
-       for (int destination=0;destination<Nproc;destination++)
-        {  
-         if (source!=destination)
-          {
-           //Send
-           send_vector(x_int,destination,1,MPI_COMM_WORLD);
-          }
-        }
-      }
+//        // Send to all other processors
+//        for (int destination=0;destination<Nproc;destination++)
+//         {  
+//          if (source!=destination)
+//           {
+//            //Send
+//            send_vector(x_int,destination,1,MPI_COMM_WORLD);
+//           }
+//         }
+//       }
      
-     // Receive on all other processors
-     for (int destination=0;destination<Nproc;destination++)
-      {  
-       if ((My_rank==destination)&&(destination!=source))
-        {
-         //Receive
-         receive_vector(x_int,source,1,MPI_COMM_WORLD);
+//      // Receive on all other processors
+//      for (int destination=0;destination<Nproc;destination++)
+//       {  
+//        if ((My_rank==destination)&&(destination!=source))
+//         {
+//          //Receive
+//          receive_vector(x_int,source,1,MPI_COMM_WORLD);
 
-         // Check receipt
-         double max_error=0.0;
-         for (unsigned i=0;i<n_length;i++)
-          {
-           double error=std::abs(double(x_int[i]-int(i*(source+1))));
-           if (error>max_error) max_error=error;
-          }
-         oomph_info << "Send int error on source/dest " << source 
-                    << " " << My_rank << ": " 
-                    << max_error << std::endl; 
-        }
-      }
+//          // Check receipt
+//          double max_error=0.0;
+//          for (unsigned i=0;i<n_length;i++)
+//           {
+//            double error=std::abs(double(x_int[i]-int(i*(source+1))));
+//            if (error>max_error) max_error=error;
+//           }
+//          oomph_info << "Send int error on source/dest " << source 
+//                     << " " << My_rank << ": " 
+//                     << max_error << std::endl; 
+//         }
+//       }
 
-     MPI_Barrier(MPI_COMM_WORLD);
-    }
-  }
+//      MPI_Barrier(MPI_COMM_WORLD);
+//     }
+//   }
       
-//////////////////////////////////////////////////////////////////////////
+// //////////////////////////////////////////////////////////////////////////
 
   
-  unsigned m_length=10;
+//   unsigned m_length=10;
 
-  // Broadcasting double matrices from all processors
-  //-------------------------------------------------
-  {
-   for (int source=0;source<Nproc;source++)
-    {
-     // Create double matrix on all processors -- assign some garbage
-     DenseMatrix<double> a_double(13,12,13.2);
+//   // Broadcasting double matrices from all processors
+//   //-------------------------------------------------
+//   {
+//    for (int source=0;source<Nproc;source++)
+//     {
+//      // Create double matrix on all processors -- assign some garbage
+//      DenseMatrix<double> a_double(13,12,13.2);
      
-     // Create matrix on source processor
-     if (MPI_Helpers::My_rank==source)
-      {
-       a_double.resize(n_length,m_length);
-       for (unsigned i=0;i<n_length;i++)
-        {
-         for (unsigned j=0;j<m_length;j++)
-          {
-           a_double(i,j)=double(j+i*(source+1));
-          }
-        }
-      }
-     //Broadcast 
-     broadcast_matrix(a_double,source,MPI_COMM_WORLD);
+//      // Create matrix on source processor
+//      if (MPI_Helpers::My_rank==source)
+//       {
+//        a_double.resize(n_length,m_length);
+//        for (unsigned i=0;i<n_length;i++)
+//         {
+//          for (unsigned j=0;j<m_length;j++)
+//           {
+//            a_double(i,j)=double(j+i*(source+1));
+//           }
+//         }
+//       }
+//      //Broadcast 
+//      broadcast_matrix(a_double,source,MPI_COMM_WORLD);
      
-     // Check receipt
-     double max_error=0.0;
-     for (unsigned i=0;i<n_length;i++)
-      {
-       for (unsigned j=0;j<m_length;j++)
-        {
-         double error=std::abs(a_double(i,j)-double(j+i*(source+1)));
-         if (error>max_error) max_error=error;
-        }
-      }
-     oomph_info << "Broadcast double  matrix from " << source 
-               << " error on proc " 
-               << My_rank << ": " 
-               << max_error << std::endl; 
+//      // Check receipt
+//      double max_error=0.0;
+//      for (unsigned i=0;i<n_length;i++)
+//       {
+//        for (unsigned j=0;j<m_length;j++)
+//         {
+//          double error=std::abs(a_double(i,j)-double(j+i*(source+1)));
+//          if (error>max_error) max_error=error;
+//         }
+//       }
+//      oomph_info << "Broadcast double  matrix from " << source 
+//                << " error on proc " 
+//                << My_rank << ": " 
+//                << max_error << std::endl; 
 
-     MPI_Barrier(MPI_COMM_WORLD);
-    }
-  }
+//      MPI_Barrier(MPI_COMM_WORLD);
+//     }
+//   }
    
    
 
-  // Sending/receiving double matrices from all processors
-  //-------------------------------------------------------
-  {
-   for (int source=0;source<Nproc;source++)
-    {
+//   // Sending/receiving double matrices from all processors
+//   //-------------------------------------------------------
+//   {
+//    for (int source=0;source<Nproc;source++)
+//     {
    
-     // Create double matrix on all processors -- assign some garbage
-     DenseMatrix<double> a_double(13,13,13.2);
+//      // Create double matrix on all processors -- assign some garbage
+//      DenseMatrix<double> a_double(13,13,13.2);
   
-     // Create vector on source processor
-     if (MPI_Helpers::My_rank==source)
-      {
-       a_double.resize(n_length,m_length);
-       for (unsigned i=0;i<n_length;i++)
-        {
-         for (unsigned j=0;j<m_length;j++)
-          {
-           a_double(i,j)=double(j+i*(source+1));
-          }
-        }
+//      // Create vector on source processor
+//      if (MPI_Helpers::My_rank==source)
+//       {
+//        a_double.resize(n_length,m_length);
+//        for (unsigned i=0;i<n_length;i++)
+//         {
+//          for (unsigned j=0;j<m_length;j++)
+//           {
+//            a_double(i,j)=double(j+i*(source+1));
+//           }
+//         }
 
-       // Send to all other processors
-       for (int destination=0;destination<Nproc;destination++)
-        {  
-         if (source!=destination)
-          {
-           //Send
-           send_matrix(a_double,destination,1,MPI_COMM_WORLD);
-          }
-        }
-      }
+//        // Send to all other processors
+//        for (int destination=0;destination<Nproc;destination++)
+//         {  
+//          if (source!=destination)
+//           {
+//            //Send
+//            send_matrix(a_double,destination,1,MPI_COMM_WORLD);
+//           }
+//         }
+//       }
      
-     // Receive on all other processors
-     for (int destination=0;destination<Nproc;destination++)
-      {  
-       if ((My_rank==destination)&&(destination!=source))
-        {
-         //Receive
-         receive_matrix(a_double,source,1,MPI_COMM_WORLD);
+//      // Receive on all other processors
+//      for (int destination=0;destination<Nproc;destination++)
+//       {  
+//        if ((My_rank==destination)&&(destination!=source))
+//         {
+//          //Receive
+//          receive_matrix(a_double,source,1,MPI_COMM_WORLD);
 
-         // Check receipt
-         double max_error=0.0;
-         for (unsigned i=0;i<n_length;i++)
-          {
-           for (unsigned j=0;j<m_length;j++)
-            {
-             double error=std::abs(a_double(i,j)-double(j+i*(source+1)));
-             if (error>max_error) max_error=error;
-            }
-          }
-         oomph_info << "Send double matrix on source/dest " << source 
-                   << " " << My_rank << ": " 
-                   << max_error << std::endl; 
-        }
-      }
+//          // Check receipt
+//          double max_error=0.0;
+//          for (unsigned i=0;i<n_length;i++)
+//           {
+//            for (unsigned j=0;j<m_length;j++)
+//             {
+//              double error=std::abs(a_double(i,j)-double(j+i*(source+1)));
+//              if (error>max_error) max_error=error;
+//             }
+//           }
+//          oomph_info << "Send double matrix on source/dest " << source 
+//                    << " " << My_rank << ": " 
+//                    << max_error << std::endl; 
+//         }
+//       }
 
-     MPI_Barrier(MPI_COMM_WORLD);
+//      MPI_Barrier(MPI_COMM_WORLD);
 
 
-    }
-  }
+//     }
+//   }
      
 
   
-  // Sending/receiving int vectors from all processors
-  //-----------------------------------------------------
-  {
+//   // Sending/receiving int vectors from all processors
+//   //-----------------------------------------------------
+//   {
 
-   for (int source=0;source<Nproc;source++)
-    {
+//    for (int source=0;source<Nproc;source++)
+//     {
    
 
-     // Create int vector on all processors -- assign some garbage
-     Vector<int> x_int(13,13);
+//      // Create int vector on all processors -- assign some garbage
+//      Vector<int> x_int(13,13);
   
-     // Create vector on source processor
-     if (MPI_Helpers::My_rank==source)
-      {
-       x_int.resize(n_length);
-       for (unsigned i=0;i<n_length;i++)
-        {
-         x_int[i]=int(i*(source+1));
-        }
+//      // Create vector on source processor
+//      if (MPI_Helpers::My_rank==source)
+//       {
+//        x_int.resize(n_length);
+//        for (unsigned i=0;i<n_length;i++)
+//         {
+//          x_int[i]=int(i*(source+1));
+//         }
 
-       // Send to all other processors
-       for (int destination=0;destination<Nproc;destination++)
-        {  
-         if (source!=destination)
-          {
-           //Send
-           send_vector(x_int,destination,1,MPI_COMM_WORLD);
-          }
-        }
-      }
+//        // Send to all other processors
+//        for (int destination=0;destination<Nproc;destination++)
+//         {  
+//          if (source!=destination)
+//           {
+//            //Send
+//            send_vector(x_int,destination,1,MPI_COMM_WORLD);
+//           }
+//         }
+//       }
      
-     // Receive on all other processors
-     for (int destination=0;destination<Nproc;destination++)
-      {  
-       if ((My_rank==destination)&&(destination!=source))
-        {
-         //Receive
-         receive_vector(x_int,source,1,MPI_COMM_WORLD);
+//      // Receive on all other processors
+//      for (int destination=0;destination<Nproc;destination++)
+//       {  
+//        if ((My_rank==destination)&&(destination!=source))
+//         {
+//          //Receive
+//          receive_vector(x_int,source,1,MPI_COMM_WORLD);
 
-         // Check receipt
-         double max_error=0.0;
-         for (unsigned i=0;i<n_length;i++)
-          {
-           double error=std::abs(double(x_int[i]-int(i*(source+1))));
-           if (error>max_error) max_error=error;
-          }
-         oomph_info << "Send int error on source/dest " << source 
-                   << " " << My_rank << ": " 
-                   << max_error << std::endl; 
+//          // Check receipt
+//          double max_error=0.0;
+//          for (unsigned i=0;i<n_length;i++)
+//           {
+//            double error=std::abs(double(x_int[i]-int(i*(source+1))));
+//            if (error>max_error) max_error=error;
+//           }
+//          oomph_info << "Send int error on source/dest " << source 
+//                    << " " << My_rank << ": " 
+//                    << max_error << std::endl; 
          
          
-        }
-      }
+//         }
+//       }
 
-     MPI_Barrier(MPI_COMM_WORLD);
+//      MPI_Barrier(MPI_COMM_WORLD);
 
 
-    }
-  }
+//     }
+//   }
       
 
-  return 0;
- }
+//   return 0;
+//  }
 
 #endif
 
@@ -1160,406 +1190,406 @@ namespace MPI_Helpers
 
 #ifdef OOMPH_HAS_MPI
 
-//======================================================================
-/// Broadcast a double Vector from processor "source"  to all
-/// others, using the specified communicator.
-//======================================================================
-template<>
-void MPI_Helpers::broadcast_vector<double>(Vector<double>& x,
-                                           const int& source,
-                                           MPI_Comm comm)
-{
+// //======================================================================
+// /// Broadcast a double Vector from processor "source"  to all
+// /// others, using the specified communicator.
+// //======================================================================
+// template<>
+// void MPI_Helpers::broadcast_vector<double>(Vector<double>& x,
+//                                            const int& source,
+//                                            MPI_Comm comm)
+// {
 
- // Length of vector (as int)
- int n;
+//  // Length of vector (as int)
+//  int n;
 
- // Get number of entries on processor source (where the vector exists)
- unsigned long n_long;
- if (MPI_Helpers::My_rank==source)
-  {
-   n_long=x.size();
+//  // Get number of entries on processor source (where the vector exists)
+//  unsigned long n_long;
+//  if (MPI_Helpers::My_rank==source)
+//   {
+//    n_long=x.size();
 
-#ifdef PARANOID
-   check_length(n_long);
-#endif
+// #ifdef PARANOID
+//    check_length(n_long);
+// #endif
    
-   // Convert to int
-   n=int(n_long);
-  }
+//    // Convert to int
+//    n=int(n_long);
+//   }
  
- // Broadcast to everybody how many entries to expect
- MPI_Bcast(&n,1,MPI_INT,source,comm);
+//  // Broadcast to everybody how many entries to expect
+//  MPI_Bcast(&n,1,MPI_INT,source,comm);
 
- // Convert local vector into C-style array
- double* x_bcast=new double[n];
- if (MPI_Helpers::My_rank==source)
-  {
-   for (int i=0;i<n;i++)
-    {
-     x_bcast[i]=x[i];
-    }
-  }
+//  // Convert local vector into C-style array
+//  double* x_bcast=new double[n];
+//  if (MPI_Helpers::My_rank==source)
+//   {
+//    for (int i=0;i<n;i++)
+//     {
+//      x_bcast[i]=x[i];
+//     }
+//   }
  
- // Broadcast the array
- MPI_Bcast(x_bcast,n,MPI_DOUBLE,source,comm);
+//  // Broadcast the array
+//  MPI_Bcast(x_bcast,n,MPI_DOUBLE,source,comm);
 
- // Now convert back into vector (everywhere apart from source)
- if (MPI_Helpers::My_rank!=source)
-  {
-   x.resize(n);
-   for (int i=0;i<n;i++)
-    {
-     x[i]=x_bcast[i];
-    }
-  }
+//  // Now convert back into vector (everywhere apart from source)
+//  if (MPI_Helpers::My_rank!=source)
+//   {
+//    x.resize(n);
+//    for (int i=0;i<n;i++)
+//     {
+//      x[i]=x_bcast[i];
+//     }
+//   }
 
-  // delete work array
-  delete[] x_bcast;
-}
+//   // delete work array
+//   delete[] x_bcast;
+// }
 
 
 
-//======================================================================
-/// Broadcast an int Vector from processor "source"  to all
-/// others, using the specified communicator.
-//======================================================================
-template<>
-void MPI_Helpers::broadcast_vector<int>(Vector<int>& x,
-                                        const int& source,
-                                        MPI_Comm comm)
-{
+// //======================================================================
+// /// Broadcast an int Vector from processor "source"  to all
+// /// others, using the specified communicator.
+// //======================================================================
+// template<>
+// void MPI_Helpers::broadcast_vector<int>(Vector<int>& x,
+//                                         const int& source,
+//                                         MPI_Comm comm)
+// {
 
- // Length of vector (as int)
- int n;
+//  // Length of vector (as int)
+//  int n;
 
- // Get number of entries on processor source (where the vector exists)
- unsigned long n_long;
- if (MPI_Helpers::My_rank==source)
-  {
-   n_long=x.size();
+//  // Get number of entries on processor source (where the vector exists)
+//  unsigned long n_long;
+//  if (MPI_Helpers::My_rank==source)
+//   {
+//    n_long=x.size();
 
-#ifdef PARANOID
-   check_length(n_long);
-#endif
+// #ifdef PARANOID
+//    check_length(n_long);
+// #endif
    
-   // Convert to int
-   n=int(n_long);
-  }
+//    // Convert to int
+//    n=int(n_long);
+//   }
 
 
- // Broadcast to everybody how many entries to expect
- MPI_Bcast(&n,1,MPI_INT,source,comm);
+//  // Broadcast to everybody how many entries to expect
+//  MPI_Bcast(&n,1,MPI_INT,source,comm);
 
- // Convert local vector into C-style array
- int* x_bcast=new int[n];
- if (MPI_Helpers::My_rank==source)
-  {
-   for (int i=0;i<n;i++)
-    {
-     x_bcast[i]=x[i];
-    }
-  }
+//  // Convert local vector into C-style array
+//  int* x_bcast=new int[n];
+//  if (MPI_Helpers::My_rank==source)
+//   {
+//    for (int i=0;i<n;i++)
+//     {
+//      x_bcast[i]=x[i];
+//     }
+//   }
 
- // Broadcast the array
- MPI_Bcast(x_bcast,n,MPI_INT,source,comm);
+//  // Broadcast the array
+//  MPI_Bcast(x_bcast,n,MPI_INT,source,comm);
 
- // Now convert back into vector (everywhere apart from source)
- if (MPI_Helpers::My_rank!=source)
-  {
-   x.resize(n);
-   for (int i=0;i<n;i++)
-    {
-     x[i]=x_bcast[i];
-    }
-  }
+//  // Now convert back into vector (everywhere apart from source)
+//  if (MPI_Helpers::My_rank!=source)
+//   {
+//    x.resize(n);
+//    for (int i=0;i<n;i++)
+//     {
+//      x[i]=x_bcast[i];
+//     }
+//   }
 
-  // Deallocate x_bcast
-  delete[] x_bcast;
-}
+//   // Deallocate x_bcast
+//   delete[] x_bcast;
+// }
 
 
 
-//======================================================================
-/// Send a double vector from current processor to processor "destination",
-/// using the specified tag and communicator.
-//======================================================================
-template<>
-void  MPI_Helpers::send_vector<double>(const Vector<double>& x,
-                                       const int& destination,
-                                       const int& tag,            
-                                       MPI_Comm comm)
-{
- // Length of vector (as int)
- int n;
+// //======================================================================
+// /// Send a double vector from current processor to processor "destination",
+// /// using the specified tag and communicator.
+// //======================================================================
+// template<>
+// void  MPI_Helpers::send_vector<double>(const Vector<double>& x,
+//                                        const int& destination,
+//                                        const int& tag,            
+//                                        MPI_Comm comm)
+// {
+//  // Length of vector (as int)
+//  int n;
 
- // Convert local vector into C-style array
- unsigned long n_long=x.size();
+//  // Convert local vector into C-style array
+//  unsigned long n_long=x.size();
 
-#ifdef PARANOID
- check_length(n_long);
-#endif
+// #ifdef PARANOID
+//  check_length(n_long);
+// #endif
    
- // Convert to int
- n=int(n_long);
+//  // Convert to int
+//  n=int(n_long);
 
- double* x_send=new double[n];
- for (int i=0;i<n;i++)
-  {
-   x_send[i]=x[i];
-  }
+//  double* x_send=new double[n];
+//  for (int i=0;i<n;i++)
+//   {
+//    x_send[i]=x[i];
+//   }
 
- // Tell the other end how many entries to expect
- MPI_Send(&n,1,MPI_INT,destination,tag,comm);
+//  // Tell the other end how many entries to expect
+//  MPI_Send(&n,1,MPI_INT,destination,tag,comm);
 
- // Send the data itself
- MPI_Send(x_send,n,MPI_DOUBLE,destination,tag,comm);
+//  // Send the data itself
+//  MPI_Send(x_send,n,MPI_DOUBLE,destination,tag,comm);
 
-  // delete work array
- delete[] x_send;
-}
+//   // delete work array
+//  delete[] x_send;
+// }
 
 
 
-//======================================================================
-/// Send an int vector from current processor to processor "destination",
-/// using the specified tag and communicator.
-//======================================================================
-template<>
-void MPI_Helpers::send_vector<int>(const Vector<int>& x,
-                                   const int& destination,
-                                   const int& tag,            
-                                   MPI_Comm comm)
-{
- // Length of vector (as int)
- int n;
+// //======================================================================
+// /// Send an int vector from current processor to processor "destination",
+// /// using the specified tag and communicator.
+// //======================================================================
+// template<>
+// void MPI_Helpers::send_vector<int>(const Vector<int>& x,
+//                                    const int& destination,
+//                                    const int& tag,            
+//                                    MPI_Comm comm)
+// {
+//  // Length of vector (as int)
+//  int n;
 
- // Convert local vector into C-style array
- unsigned long n_long=x.size();
+//  // Convert local vector into C-style array
+//  unsigned long n_long=x.size();
 
-#ifdef PARANOID
- check_length(n_long);
-#endif
+// #ifdef PARANOID
+//  check_length(n_long);
+// #endif
    
- // Convert to int
- n=int(n_long);
+//  // Convert to int
+//  n=int(n_long);
 
- int* x_send=new int[n];
- for (int i=0;i<n;i++)
-  {
-   x_send[i]=x[i];
-  }
+//  int* x_send=new int[n];
+//  for (int i=0;i<n;i++)
+//   {
+//    x_send[i]=x[i];
+//   }
 
- // Tell the other end how many entries to expect
- MPI_Send(&n,1,MPI_INT,destination,tag,comm);
+//  // Tell the other end how many entries to expect
+//  MPI_Send(&n,1,MPI_INT,destination,tag,comm);
 
- // Send the data itself
- MPI_Send(x_send,n,MPI_INT,destination,tag,comm);
+//  // Send the data itself
+//  MPI_Send(x_send,n,MPI_INT,destination,tag,comm);
 
- // delete work array
- delete[] x_send;
-}
-
-
-//==========================================================================
-/// Receive a double vector on the current processor from processor "source",
-/// using the specified tag and communicator.
-//==========================================================================
-template<>
-void MPI_Helpers::receive_vector<double>(Vector<double>& x,
-                                         const int& source,
-                                         const int& tag,            
-                                         MPI_Comm comm)
-{
- // Find out how many entries to expect
- int n;
- MPI_Status status;
- MPI_Recv(&n,1,MPI_INT,source,tag,comm,&status);
-
- // Prepare C-style array for receiped
- double* x_recv=new double[n];
-
- // Receive the data itself
- MPI_Recv(x_recv,n,MPI_DOUBLE,source,tag,comm,&status);
-
- // Copy across
- x.resize(n);
- for (int i=0;i<n;i++)
-  {
-   x[i]=x_recv[i];
-  }
-
- // delete x_recv
- delete[] x_recv;
-}
+//  // delete work array
+//  delete[] x_send;
+// }
 
 
+// //==========================================================================
+// /// Receive a double vector on the current processor from processor "source",
+// /// using the specified tag and communicator.
+// //==========================================================================
+// template<>
+// void MPI_Helpers::receive_vector<double>(Vector<double>& x,
+//                                          const int& source,
+//                                          const int& tag,            
+//                                          MPI_Comm comm)
+// {
+//  // Find out how many entries to expect
+//  int n;
+//  MPI_Status status;
+//  MPI_Recv(&n,1,MPI_INT,source,tag,comm,&status);
 
-//==========================================================================
-/// Receive an int vector on the current processor from processor "source",
-/// using the specified tag and communicator.
-//==========================================================================
-template<>
-void MPI_Helpers::receive_vector<int>(Vector<int>& x,
-                                      const int& source,
-                                      const int& tag,            
-                                      MPI_Comm comm)
-{
- // Find out how many entries to expect
- int n;
- MPI_Status status;
- MPI_Recv(&n,1,MPI_INT,source,tag,comm,&status);
+//  // Prepare C-style array for receiped
+//  double* x_recv=new double[n];
 
- // Prepare C-style array for received
- int* x_recv=new int[n];
+//  // Receive the data itself
+//  MPI_Recv(x_recv,n,MPI_DOUBLE,source,tag,comm,&status);
 
- // Receive the data itself
- MPI_Recv(x_recv,n,MPI_INT,source,tag,comm,&status);
+//  // Copy across
+//  x.resize(n);
+//  for (int i=0;i<n;i++)
+//   {
+//    x[i]=x_recv[i];
+//   }
 
- // Copy across
- x.resize(n);
- for (int i=0;i<n;i++)
-  {
-   x[i]=x_recv[i];
-  }
-
- // delete x_recv
- delete[] x_recv;
-}
+//  // delete x_recv
+//  delete[] x_recv;
+// }
 
 
 
-//======================================================================
-/// Send a double matrix from current processor to processor "destination",
-/// using the specified tag and communicator.
-//======================================================================
-template<>
-void  MPI_Helpers::send_matrix<double>(const DenseMatrix<double>& x,
-                                       const int& destination,
-                                       const int& tag,            
-                                       MPI_Comm comm)
-{
- unsigned long ncol=x.ncol();
- unsigned long nrow=x.nrow();
+// //==========================================================================
+// /// Receive an int vector on the current processor from processor "source",
+// /// using the specified tag and communicator.
+// //==========================================================================
+// template<>
+// void MPI_Helpers::receive_vector<int>(Vector<int>& x,
+//                                       const int& source,
+//                                       const int& tag,            
+//                                       MPI_Comm comm)
+// {
+//  // Find out how many entries to expect
+//  int n;
+//  MPI_Status status;
+//  MPI_Recv(&n,1,MPI_INT,source,tag,comm,&status);
 
- // Tell the other end how many rows to expect
- MPI_Send(&nrow,1,MPI_UNSIGNED_LONG,destination,tag,comm);
+//  // Prepare C-style array for received
+//  int* x_recv=new int[n];
 
- // Tell the other end how many columns to expect
- MPI_Send(&ncol,1,MPI_UNSIGNED_LONG,destination,tag,comm);
+//  // Receive the data itself
+//  MPI_Recv(x_recv,n,MPI_INT,source,tag,comm,&status);
 
- double* x_send=new double[nrow*ncol];
- for (unsigned long i=0;i<nrow;i++)
-  {
-   for (unsigned long j=0;j<ncol;j++)
-    {
-     x_send[i*ncol+j]=x(i,j);
-    }
-  }
+//  // Copy across
+//  x.resize(n);
+//  for (int i=0;i<n;i++)
+//   {
+//    x[i]=x_recv[i];
+//   }
+
+//  // delete x_recv
+//  delete[] x_recv;
+// }
+
+
+
+// //======================================================================
+// /// Send a double matrix from current processor to processor "destination",
+// /// using the specified tag and communicator.
+// //======================================================================
+// template<>
+// void  MPI_Helpers::send_matrix<double>(const DenseMatrix<double>& x,
+//                                        const int& destination,
+//                                        const int& tag,            
+//                                        MPI_Comm comm)
+// {
+//  unsigned long ncol=x.ncol();
+//  unsigned long nrow=x.nrow();
+
+//  // Tell the other end how many rows to expect
+//  MPI_Send(&nrow,1,MPI_UNSIGNED_LONG,destination,tag,comm);
+
+//  // Tell the other end how many columns to expect
+//  MPI_Send(&ncol,1,MPI_UNSIGNED_LONG,destination,tag,comm);
+
+//  double* x_send=new double[nrow*ncol];
+//  for (unsigned long i=0;i<nrow;i++)
+//   {
+//    for (unsigned long j=0;j<ncol;j++)
+//     {
+//      x_send[i*ncol+j]=x(i,j);
+//     }
+//   }
  
- // Send the data itself
- MPI_Send(x_send,ncol*nrow,MPI_DOUBLE,destination,tag,comm);
+//  // Send the data itself
+//  MPI_Send(x_send,ncol*nrow,MPI_DOUBLE,destination,tag,comm);
 
- // delete x_send
- delete[] x_send;
-}
-
-
-
-//==========================================================================
-/// Receive a double matrix on the current processor from processor "source",
-/// using the specified tag and communicator.
-//==========================================================================
-template<>
-void MPI_Helpers::receive_matrix<double>(DenseMatrix<double>& x,
-                                         const int& source,
-                                         const int& tag,            
-                                         MPI_Comm comm)
-{
- // Find out how many entries to expect
- unsigned long nrow;
- unsigned long ncol;
- MPI_Status status;
- MPI_Recv(&nrow,1,MPI_UNSIGNED_LONG,source,tag,comm,&status);
- MPI_Recv(&ncol,1,MPI_UNSIGNED_LONG,source,tag,comm,&status);
-
- // Prepare C-style array for receiped
- double* x_recv=new double[nrow*ncol];
-
- // Receive the data itself
- MPI_Recv(x_recv,nrow*ncol,MPI_DOUBLE,source,tag,comm,&status);
-
- // Copy across
- x.resize(nrow,ncol);
- for (unsigned long i=0;i<nrow;i++)
-  for (unsigned long j=0;j<ncol;j++)
-  {
-   x(i,j)=x_recv[i*ncol+j];
-  }
-
- // delete x_recv
- delete[] x_recv;
-}
+//  // delete x_send
+//  delete[] x_send;
+// }
 
 
-//======================================================================
-/// Broadcast a double matrix from processor "source"  to all
-/// others, using the specified communicator.
-//======================================================================
-template<>
-void MPI_Helpers::broadcast_matrix<double>(DenseMatrix<double>& x,
-                                           const int& source,
-                                           MPI_Comm comm)
-{
- // Get number of entries on processor source (where the vector exists)
- unsigned nrow,ncol;
- if (MPI_Helpers::My_rank==source)
-  {
-   nrow=x.nrow();
-   if(nrow>0)
-    {ncol=x.ncol();}
-   else
-    {ncol=0;} 
-  }
 
- // Broadcast to everybody how many entries to expect
- MPI_Bcast(&nrow,1,MPI_UNSIGNED_LONG,source,comm);
- MPI_Bcast(&ncol,1,MPI_UNSIGNED_LONG,source,comm);
+// //==========================================================================
+// /// Receive a double matrix on the current processor from processor "source",
+// /// using the specified tag and communicator.
+// //==========================================================================
+// template<>
+// void MPI_Helpers::receive_matrix<double>(DenseMatrix<double>& x,
+//                                          const int& source,
+//                                          const int& tag,            
+//                                          MPI_Comm comm)
+// {
+//  // Find out how many entries to expect
+//  unsigned long nrow;
+//  unsigned long ncol;
+//  MPI_Status status;
+//  MPI_Recv(&nrow,1,MPI_UNSIGNED_LONG,source,tag,comm,&status);
+//  MPI_Recv(&ncol,1,MPI_UNSIGNED_LONG,source,tag,comm,&status);
 
- if(ncol!=0 && nrow!=0)
-  { 
-   // convert into a C-style array
-   double* x_bcast=new double[nrow*ncol];
+//  // Prepare C-style array for receiped
+//  double* x_recv=new double[nrow*ncol];
 
-   if(MPI_Helpers::My_rank==source)
-    for (unsigned long i=0;i<nrow;i++)
-     {
-      for (unsigned long j=0;j<ncol;j++)
-       {
-        x_bcast[i*ncol+j]=x(i,j);
-       }
-     }
+//  // Receive the data itself
+//  MPI_Recv(x_recv,nrow*ncol,MPI_DOUBLE,source,tag,comm,&status);
+
+//  // Copy across
+//  x.resize(nrow,ncol);
+//  for (unsigned long i=0;i<nrow;i++)
+//   for (unsigned long j=0;j<ncol;j++)
+//   {
+//    x(i,j)=x_recv[i*ncol+j];
+//   }
+
+//  // delete x_recv
+//  delete[] x_recv;
+// }
+
+
+// //======================================================================
+// /// Broadcast a double matrix from processor "source"  to all
+// /// others, using the specified communicator.
+// //======================================================================
+// template<>
+// void MPI_Helpers::broadcast_matrix<double>(DenseMatrix<double>& x,
+//                                            const int& source,
+//                                            MPI_Comm comm)
+// {
+//  // Get number of entries on processor source (where the vector exists)
+//  unsigned nrow,ncol;
+//  if (MPI_Helpers::My_rank==source)
+//   {
+//    nrow=x.nrow();
+//    if(nrow>0)
+//     {ncol=x.ncol();}
+//    else
+//     {ncol=0;} 
+//   }
+
+//  // Broadcast to everybody how many entries to expect
+//  MPI_Bcast(&nrow,1,MPI_UNSIGNED_LONG,source,comm);
+//  MPI_Bcast(&ncol,1,MPI_UNSIGNED_LONG,source,comm);
+
+//  if(ncol!=0 && nrow!=0)
+//   { 
+//    // convert into a C-style array
+//    double* x_bcast=new double[nrow*ncol];
+
+//    if(MPI_Helpers::My_rank==source)
+//     for (unsigned long i=0;i<nrow;i++)
+//      {
+//       for (unsigned long j=0;j<ncol;j++)
+//        {
+//         x_bcast[i*ncol+j]=x(i,j);
+//        }
+//      }
    
-   // broadcast the array
-   MPI_Bcast(x_bcast,ncol*nrow,MPI_DOUBLE,source,comm);
+//    // broadcast the array
+//    MPI_Bcast(x_bcast,ncol*nrow,MPI_DOUBLE,source,comm);
 
-   // Now convert back into vector (everywhere apart from source)
-   if (MPI_Helpers::My_rank!=source)
-    {
-     x.resize(nrow,ncol);
-     for (unsigned long i=0;i<nrow;i++)
-      for (unsigned long j=0;j<ncol;j++)
-       {
-        x(i,j)=x_bcast[i*ncol+j];
-       }
-    }
-   // delete array
-   delete[] x_bcast; 
-  }
- else
-  {
-   x.resize(0,0);
-  }
-}
+//    // Now convert back into vector (everywhere apart from source)
+//    if (MPI_Helpers::My_rank!=source)
+//     {
+//      x.resize(nrow,ncol);
+//      for (unsigned long i=0;i<nrow;i++)
+//       for (unsigned long j=0;j<ncol;j++)
+//        {
+//         x(i,j)=x_bcast[i*ncol+j];
+//        }
+//     }
+//    // delete array
+//    delete[] x_bcast; 
+//   }
+//  else
+//   {
+//    x.resize(0,0);
+//   }
+// }
 
 #endif // OOMPH_HAS_MPI
 

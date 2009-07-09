@@ -80,6 +80,9 @@ directory).
 -# <A HREF="#visualisation">Visualisation</A>
   - <A HREF="#paraview">Visualising oomph-lib's output files with Paraview</A>
   .
+-# <A HREF="#parallel">Parallel driver codes</A>
+  - <A HREF="#distributed">Distributed problems</A>
+  .
 .
 
 
@@ -2274,13 +2277,124 @@ problems.
 Displaying results with paraview</B></A></a> \n\n
 We demonstrate how to use 
 <a href="http://www.mechanics.citg.tudelft.nl/~simone/">Angelo 
-Simone's</a> conversion scripts that allow the \c oomph-lib's
+Simone's</a> conversion scripts that allow the \c oomph-lib
 results to be displayed by 
 <a href="http://www.paraview.org/New/index.html">paraview.</a>
 </TD>
 <TD>
-- How to display \c  \c oomph-lib's results with
+- How to display \c oomph-lib's results with
   <a href="http://www.paraview.org/New/index.html">paraview.</a>
+.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+######################################################################
+######################################################################
+</TABLE>
+</CENTER>  
+
+
+#///////////////////////////////////////////////////////////////////////
+
+<hr>
+<hr>
+
+
+
+<A NAME="parallel"><B>Parallel driver codes</B></A>
+
+<CENTER>
+<TABLE>
+#####################################################################
+######################################################################
+<TR>
+<TD COLSPAN=3 bgcolor="lightcyan">
+<CENTER><B>Distributed problems</B></CENTER>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
+<A NAME="distributed">
+<A HREF="../../mpi/adaptive_driven_cavity/html/index.html"><B>
+Adaptive driven cavity problem</B></A></a> \n\n
+We demonstrate how to distribute a straightforward single-physics
+problem.
+</TD>
+<TD>
+- Initialising and finalizing MPI
+- Distributing the problem
+- Specifying a pre-determined partition of the problem
+- Modifying the output filename
+- Pinning values in specific elements
+.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
+<A HREF="../../mpi/two_d_poisson_flux_bc_adapt/html/index.html"><B>
+2D Poisson problem with flux boundary conditions</B></A></a> \n\n
+We demonstrate the modifications required to distribute a problem
+involving \c FaceElements.
+</TD>
+<TD>
+- Actions before and after distribute
+.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
+<A HREF="../../mpi/boussinesq_convection/html/index.html"><B>
+Boussinesq convection problem</B></A></a> \n\n
+We demonstrate how to distribute a straightforward multi-physics
+problem where two domains interact.
+</TD>
+<TD>
+- Actions before and after distribute
+.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
+<A HREF="../../mpi/fsi_channel_with_leaflet/html/index.html"><B>
+FSI problem: Channel with an elastic leaflet</B></A></a> \n\n
+We demonstrate how to distribute FSI problems involving shells and
+beams.
+</TD>
+<TD>
+- Actions before and after distribute
+- Marking meshes whose elements need to be retained on all processors
+.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
+<A HREF="../../mpi/turek_flag/html/index.html"><B>
+Turek and Hron's FSI benchmark problem</B></A></a> \n\n
+We demonstrate how to distribute a problem involving refineable 2D
+solid and fluid meshes that interact along interface boundaries.
+</TD>
+<TD>
+- Actions before and after distribute
+- Marking elements that need to be retained on all processors
 .
 </TD>
 <TD>

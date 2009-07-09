@@ -128,7 +128,8 @@ namespace METIS
  /// - objective=1: minimise total communications volume.
  /// .
  /// Partioning is based on nodal graph of mesh.
-  extern void partition_mesh(Mesh* mesh_pt,
+  extern void partition_mesh(OomphCommunicator* comm_pt,
+                             Mesh* mesh_pt,
                              const unsigned& ndomain,
                              const unsigned& objective,
                              Vector<unsigned>& element_domain);

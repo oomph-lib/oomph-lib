@@ -6,19 +6,18 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 # Name of executable
 check_PROGRAMS= \
-fsi_channel_with_leaflet_external
+fsi_channel_with_leaflet
 
 #----------------------------------------------------------------------
 
 # Sources for executable
-fsi_channel_with_leaflet_external_SOURCES = fsi_channel_with_leaflet.cc
+fsi_channel_with_leaflet_SOURCES = fsi_channel_with_leaflet.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
-fsi_channel_with_leaflet_external_LDADD = \
+fsi_channel_with_leaflet_LDADD = \
                 -L@libdir@ -lbeam -lnavier_stokes  \
                 -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
-fsi_channel_with_leaflet_external_CXXFLAGS = -DUSE_EXTERNAL_ELEMENTS
 
 #----------------------------------------------------------------------
 

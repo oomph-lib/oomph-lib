@@ -221,16 +221,6 @@ long Data::Is_unclassified=-10;
 //================================================================
 long Data::Is_constrained=-2;
 
-#ifdef OOMPH_HAS_MPI
-
-//================================================================
-/// \short Static "Magic number" to indicate that the Data has
-/// not yet been associated with a processor.
-//================================================================
-int Data::Not_associated_with_any_processor=-1;
-
-#endif
-
 //================================================================
 /// Default constructor.
 //================================================================
@@ -239,7 +229,7 @@ int Data::Not_associated_with_any_processor=-1;
                 Copy_of_data_pt(0),
                 Nvalue(0), Ncopies(0)
 #ifdef OOMPH_HAS_MPI
-                , Processor_in_charge(Not_associated_with_any_processor)
+                , Is_halo(false)
 #endif
 
  {}
@@ -255,7 +245,7 @@ int Data::Not_associated_with_any_processor=-1;
   Nvalue(initial_n_value),
   Ncopies(0)
 #ifdef OOMPH_HAS_MPI
-  , Processor_in_charge(Not_associated_with_any_processor)
+  , Is_halo(false)
 #endif
  {
   //Only bother to do something if there are values
@@ -301,7 +291,7 @@ Data::Data(TimeStepper* const &time_stepper_pt,
  Nvalue(initial_n_value), 
  Ncopies(0)
 #ifdef OOMPH_HAS_MPI
- , Processor_in_charge(Not_associated_with_any_processor)
+ , Is_halo(false)
 #endif
 {
  //If we are in charge of allocating the storage,

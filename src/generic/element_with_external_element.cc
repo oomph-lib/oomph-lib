@@ -106,7 +106,7 @@ namespace oomph
  //========================================================================
  void ElementWithExternalElement::flush_all_external_element_storage()
  {
-  //Delete the memory if it has been allocate3d
+  //Delete the memory if it has been allocated
   if(External_element_pt) 
    {
     delete[] External_element_pt;
@@ -225,7 +225,7 @@ assign_external_interaction_data_local_eqn_numbers()
    External_interaction_geometric_data_local_eqn=0;
   }
 
- //Only bother with non-halo elemets
+ //Only bother with non-halo elements
 #ifdef OOMPH_HAS_MPI
  if(!this->is_halo())
 #endif
@@ -403,7 +403,7 @@ assign_external_interaction_data_local_eqn_numbers()
  
  //Find the number of external field data
  const unsigned n_external_field_data = nexternal_interaction_field_data();
- 
+
  //If there are interaction data fill in the internal storage
  if(n_external_field_data > 0)
   {
@@ -446,10 +446,9 @@ assign_external_interaction_data_local_eqn_numbers()
    //Now add our global equations numbers to the internal element storage
    add_global_eqn_numbers(global_eqn_number_queue);
   }
- 
+
  //Find the number of external geometric data
  unsigned n_external_geom_data = nexternal_interaction_geometric_data();
- 
  
  //If there are external geometric data fill in the internal storage
  if(n_external_geom_data > 0)

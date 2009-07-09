@@ -146,7 +146,6 @@ void QuadMeshBase::setup_boundary_element_info(std::ostream &outfile)
     //}
   }
 
- 
  // Now copy everything across into permanent arrays
  //-------------------------------------------------
 
@@ -314,8 +313,9 @@ void QuadMeshBase::setup_boundary_element_info(std::ostream &outfile)
   }
  
 
- // Lookup scheme has now been setup yet
+ // Lookup scheme has now been setup
  Lookup_for_elements_next_boundary_is_setup=true;
+
 
 }
 

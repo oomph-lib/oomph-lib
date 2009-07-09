@@ -388,12 +388,8 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
  Ldown=ldown;
  Ly=ly;
 
- // Overwrite Ncollapsible (DEBUG)
-// Ncollapsible=2;
-
  // Overwrite maximum allowed residual to accomodate bad initial guesses
  Problem::Max_residuals=1000.0;
-// Problem::Max_newton_iterations=2;
 
  // Allocate the timestepper for the Navier-Stokes equations
  BDF<2>* fluid_time_stepper_pt=new BDF<2>;
@@ -418,13 +414,12 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
  
  // Flag for MeshAsGeomObject to set all elements as halo if required
  // (this is necessary if Problem::distribute is going to be called)
- bool keep_all_elements_as_halos=true;
+ Wall_mesh_pt->keep_all_elements_as_halos()=true;
 
  // Build a geometric object (one Lagrangian, two Eulerian coordinates)
  // from the wall mesh
  MeshAsGeomObject<1,2,FSIHermiteBeamElement>* wall_geom_object_pt= 
-  new MeshAsGeomObject<1,2,FSIHermiteBeamElement>(Wall_mesh_pt,
-                                                  keep_all_elements_as_halos);
+  new MeshAsGeomObject<1,2,FSIHermiteBeamElement>(Wall_mesh_pt);
 
 #ifdef MACRO_ELEMENT_NODE_UPDATE
 
@@ -454,13 +449,6 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
    fluid_time_stepper_pt);
 
 #endif
-
- // Don't do the uniform refinement on a validation run
-//  if (CommandLineArgs::Argc>1)
-//   {
-//    // One round of uniform refinement
-//    Bulk_mesh_pt->refine_uniformly();
-//   }
 
  // Create "surface mesh" that will contain only the prescribed-traction 
  // elements. The constructor just creates the mesh without
@@ -683,10 +671,6 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
  // We pass the boundary between the fluid and solid meshes and 
  // pointers to the meshes. The interaction boundary is boundary 3 of the 
  // 2D fluid mesh.
-#ifdef USE_EXTERNAL_ELEMENTS
- FSI_functions::Use_external_storage=true;
-#endif
-
  FSI_functions::setup_fluid_load_info_for_solid_elements<ELEMENT,2>
   (this,3,bulk_mesh_pt(),Wall_mesh_pt);
 
@@ -707,26 +691,6 @@ template <class ELEMENT>
 void FSICollapsibleChannelProblem<ELEMENT>::doc_solution(DocInfo& doc_info, 
                                                          ofstream& trace_file)
 { 
-
-// #ifdef MACRO_ELEMENT_NODE_UPDATE
-
-//  // Doc fsi
-//  if (CommandLineArgs::Argc>1)
-//   {
-//    FSI_functions::doc_fsi<MacroElementNodeUpdateNode>
-//     (Bulk_mesh_pt,Wall_mesh_pt,doc_info);
-//   }
-
-// #else
-
-//  // Doc fsi
-//  if (CommandLineArgs::Argc>1)
-//   {
-//    FSI_functions::doc_fsi<AlgebraicNode>(Bulk_mesh_pt,Wall_mesh_pt,doc_info);
-//   }
-
-// #endif
-
  ofstream some_file;
  char filename[100];
 
@@ -735,26 +699,16 @@ void FSICollapsibleChannelProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
  npts=5; 
 
  // Output fluid solution 
-#ifdef USE_EXTERNAL_ELEMENTS
  sprintf(filename,"%s/new_soln%i_on_proc%i.dat",doc_info.directory().c_str(),
-         doc_info.number(),MPI_Helpers::My_rank);
-#else
- sprintf(filename,"%s/old_soln%i_on_proc%i.dat",doc_info.directory().c_str(),
-         doc_info.number(),MPI_Helpers::My_rank);
-#endif
+         doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  bulk_mesh_pt()->output(some_file,npts);
  some_file.close();
 
  // Document the wall shape
  // NB the wall is on every processor so this is somewhat unnecessary I guess
-#ifdef USE_EXTERNAL_ELEMENTS
  sprintf(filename,"%s/new_beam%i_on_proc%i.dat",doc_info.directory().c_str(),
-         doc_info.number(),MPI_Helpers::My_rank);
-#else
- sprintf(filename,"%s/old_beam%i_on_proc%i.dat",doc_info.directory().c_str(),
-         doc_info.number(),MPI_Helpers::My_rank);
-#endif
+         doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  wall_mesh_pt()->output(some_file,npts);
  some_file.close();
@@ -765,15 +719,9 @@ void FSICollapsibleChannelProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
  unsigned nsteps=time_stepper_pt(1)->nprev_values();
  for (unsigned t=0;t<=nsteps;t++)
   {     
-#ifdef USE_EXTERNAL_ELEMENTS
    sprintf(filename,"%s/new_wall%i-%i_on_proc%i.dat",
            doc_info.directory().c_str(),
-           doc_info.number(),t,MPI_Helpers::My_rank);
-#else
-   sprintf(filename,"%s/old_wall%i-%i_on_proc%i.dat",
-           doc_info.directory().c_str(),
-           doc_info.number(),t,MPI_Helpers::My_rank);
-#endif
+           doc_info.number(),t,this->communicator_pt()->my_rank());
    some_file.open(filename);
    unsigned n_elem=wall_mesh_pt()->nelement();
    for (unsigned ielem=0;ielem<n_elem;ielem++)
@@ -1108,7 +1056,11 @@ int main(int argc, char* argv[])
 
  //Set output directory
  DocInfo doc_info;
+#ifdef MACRO_ELEMENT_NODE_UPDATE
  doc_info.set_directory("RESLT");
+#else
+ doc_info.set_directory("RESLT_ALG");
+#endif
  
  // Open a trace file 
  ofstream trace_file;
@@ -1135,31 +1087,12 @@ int main(int argc, char* argv[])
  problem.bulk_mesh_pt()->max_permitted_error()=1.0e-3;
  problem.bulk_mesh_pt()->min_permitted_error()=1.0e-5;
 
- // Overwrite for validation run - 
- // - in parallel, this causes a problem, since once the problem
- // is distributed it's not possible to unrefine beyond the base uniform
- // mesh at this particular stage, and the parameters specified below lead
- // to only unrefinement actually taking place in a single-process job. [The
- // basest mesh is originally uniformly refined once for a validation run
- // in the constructor].  I've therefore gone with the usual max
- // and min error for the validation run in parallel.
-
-//  if (CommandLineArgs::Argc>1)
-//   {
-//    // Set targets for spatial adaptivity
-//    problem.bulk_mesh_pt()->max_permitted_error()=0.5e-2;
-//    problem.bulk_mesh_pt()->min_permitted_error()=0.5e-4;
-//   }
-
 #ifdef OOMPH_HAS_MPI
  // Distribute the problem
  std::ifstream input_file;
- std::ofstream output_file;
-// char filename[100];
 
- /// Only the fluid and solid meshes were partitioned
- unsigned n_partition=(problem.bulk_mesh_pt()->nelement())+
-  (problem.wall_mesh_pt()->nelement());
+ /// All meshes were partitioned
+ unsigned n_partition=problem.mesh_pt()->nelement();
 
  // Get partition from file
  Vector<unsigned> element_partition(n_partition,0);
@@ -1172,22 +1105,10 @@ int main(int argc, char* argv[])
    element_partition[e]=atoi(input_string.c_str());
   }
 
-// Vector<unsigned> out_element_partition(n_partition);
  bool report_stats=false;
  DocInfo mesh_doc_info;
  mesh_doc_info.doc_flag()=false;
- problem.distribute(mesh_doc_info,report_stats,element_partition);
-//                     out_element_partition);
-
-//  sprintf(filename,"out_fsi_collapsible_channel_partition.dat");
-//  output_file.open(filename);
-//  for (unsigned e=0;e<n_partition;e++)
-//   {
-//    output_file << out_element_partition[e] << std::endl;
-//   }
-
-
-// problem.distribute();
+ problem.distribute(element_partition,mesh_doc_info,report_stats);
 
  // Check halo schemes (on submeshes)
  problem.check_halo_schemes(); 

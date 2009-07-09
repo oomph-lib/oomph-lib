@@ -1237,7 +1237,8 @@ void HermiteBeamElement::output(FILE* file_pt)
 //======================================================================
 void FSIHermiteBeamElement::locate_zeta(const Vector<double> &zeta,
                                         GeomObject* &geom_object_pt, 
-                                        Vector<double> &s)
+                                        Vector<double> &s,
+                                  const bool& use_coordinate_as_initial_guess)
 {
  //Assumed that the first node has a lower xi coordinate than the second
  unsigned lo=0, hi=1;

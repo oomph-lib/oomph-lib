@@ -23,7 +23,7 @@ cp ../*partition.dat .
 
 echo "Running FSI oscillating ring (algebraic node update) validation "
 mkdir RESLT
-$MPI_RUN_COMMAND ../fsi_osc_ring_external validate > OUTPUT_fsi_osc_ring_external
+$MPI_RUN_COMMAND ../fsi_osc_ring validate > OUTPUT_fsi_osc_ring
 echo "done"
 echo " " >> validation.log
 echo "FSI oscillating ring (algebraic) validation" >> validation.log

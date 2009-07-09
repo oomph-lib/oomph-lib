@@ -22,8 +22,8 @@ cp ../*partition.dat .
 #-------------------------------------------------------------------------
 
 echo "Running Turek flag validation "
-mkdir RESLT_TUREK_EXT
-$MPI_RUN_COMMAND ../turek_flag_external > OUTPUT_turek_flag_external
+mkdir RESLT_TUREK
+$MPI_RUN_COMMAND ../turek_flag > OUTPUT_turek_flag
 echo "done"
 echo " " >> validation.log
 echo "Turek flag validation" >> validation.log
@@ -33,7 +33,7 @@ echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat RESLT_TUREK_EXT/soln1_on_proc0.dat RESLT_TUREK_EXT/soln1_on_proc1.dat RESLT_TUREK_EXT/soln2_on_proc0.dat RESLT_TUREK_EXT/soln2_on_proc1.dat RESLT_TUREK_EXT/solid_soln1_on_proc0.dat RESLT_TUREK_EXT/solid_soln1_on_proc1.dat RESLT_TUREK_EXT/solid_soln2_on_proc0.dat RESLT_TUREK_EXT/solid_soln2_on_proc1.dat > turek_flag_external_results.dat
+cat RESLT_TUREK/soln1_on_proc0.dat RESLT_TUREK/soln1_on_proc1.dat RESLT_TUREK/soln2_on_proc0.dat RESLT_TUREK/soln2_on_proc1.dat RESLT_TUREK/solid_soln1_on_proc0.dat RESLT_TUREK/solid_soln1_on_proc1.dat RESLT_TUREK/solid_soln2_on_proc0.dat RESLT_TUREK/solid_soln2_on_proc1.dat > turek_flag_external_results.dat
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log

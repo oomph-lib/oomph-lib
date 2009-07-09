@@ -6,19 +6,18 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 # Name of executable
 check_PROGRAMS= \
-fsi_osc_ring_external
+fsi_osc_ring
 
 #----------------------------------------------------------------------
 
 # Sources for executable
-fsi_osc_ring_external_SOURCES = fsi_osc_ring.cc
+fsi_osc_ring_SOURCES = fsi_osc_ring.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
-fsi_osc_ring_external_LDADD = \
+fsi_osc_ring_LDADD = \
                 -L@libdir@ -lbeam -lnavier_stokes  \
                 -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
-fsi_osc_ring_external_CXXFLAGS = -DUSE_EXTERNAL_ELEMENTS
 
 #----------------------------------------------------------------------
 

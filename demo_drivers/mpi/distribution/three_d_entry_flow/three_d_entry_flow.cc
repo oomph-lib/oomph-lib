@@ -7,10 +7,6 @@
 // The mesh
 #include "meshes/quarter_tube_mesh.h"
 
-#ifdef OOMPH_HAS_MPI
-#include "mpi.h"
-#endif
-
 using namespace std;
 
 using namespace oomph;
@@ -259,7 +255,7 @@ void EntryFlowProblem<ELEMENT>::doc_solution()
 
  // Output solution 
  sprintf(filename,"%s/soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
-         Doc_info.number(),MPI_Helpers::My_rank);
+         Doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
  some_file.close();
@@ -304,7 +300,7 @@ int main(int argc, char* argv[])
  // error targets for adaptation
  if (CommandLineArgs::Argc==1)
   {
-   // Up to two adaptations (on 2 procs for test, any more takes a long time!)
+   // Up to two adaptations
    max_adapt=2;
 
    // Error targets for adaptive refinement
@@ -367,18 +363,8 @@ int main(int argc, char* argv[])
     element_partition[e]=atoi(input_string.c_str());
    }
 
-//   Vector<unsigned> out_element_partition;
-  problem.distribute(mesh_doc_info,report_stats,element_partition);
-//                           out_element_partition);
-
-//    sprintf(filename,"out_three_d_entry_flow_1_partition.dat");
-//    output_file.open(filename);
-//    for (unsigned e=0;e<n_partition;e++)
-//     {
-//      output_file << out_element_partition[e] << std::endl;
-//     }
-
-
+  // Distribute and check halo schemes
+  problem.distribute(element_partition,mesh_doc_info,report_stats);
   problem.check_halo_schemes(mesh_doc_info);
 
   oomph_info << "---- Now solve TH after distribute ----" << std::endl;
@@ -439,18 +425,8 @@ int main(int argc, char* argv[])
     element_partition[e]=atoi(input_string.c_str());
    }
 
-//   Vector<unsigned> out_element_partition;
-  problem.distribute(mesh_doc_info,report_stats,element_partition);
-//                           out_element_partition);
-
-//    sprintf(filename,"out_three_d_entry_flow_2_partition.dat");
-//    output_file.open(filename);
-//    for (unsigned e=0;e<n_partition;e++)
-//     {
-//      output_file << out_element_partition[e] << std::endl;
-//     }
-
-//  problem.distribute(mesh_doc_info,report_stats);
+  // Distribute and check halo schemes
+  problem.distribute(element_partition,mesh_doc_info,report_stats);
   problem.check_halo_schemes(mesh_doc_info);
 
   oomph_info << "---- Now solve CR after distribute ----" << std::endl;

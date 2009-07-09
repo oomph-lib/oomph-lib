@@ -63,19 +63,20 @@ class ErrorEstimator
  
  /// \short Compute the elemental error-measures for a given mesh
  /// and store them in a vector.
- void get_element_errors(Mesh*& mesh_pt, Vector<double>& elemental_error)
+ void get_element_errors(OomphCommunicator* comm_pt, Mesh*& mesh_pt, 
+                         Vector<double>& elemental_error)
   {
    // Create dummy doc info object and switch off output
    DocInfo doc_info;
    doc_info.doc_flag()=false;
    // Forward call to version with doc.
-   get_element_errors(mesh_pt, elemental_error, doc_info);
+   get_element_errors(comm_pt,mesh_pt,elemental_error,doc_info);
   }
 
 
  /// \short Compute the elemental error measures for a given mesh
  /// and store them in a vector. Doc errors etc.
- virtual void get_element_errors(Mesh*& mesh_pt, 
+ virtual void get_element_errors(OomphCommunicator* comm_pt, Mesh*& mesh_pt, 
                                  Vector<double>& elemental_error,
                                  DocInfo& doc_info)=0;
 
@@ -334,7 +335,7 @@ class Z2ErrorEstimator : public virtual ErrorEstimator
   /// If doc_info.doc_flag()=true, doc FE and recovered fluxes in 
   /// - flux_fe*.dat
   /// - flux_rec*.dat 
-  void get_element_errors(Mesh*& mesh_pt, 
+  void get_element_errors(OomphCommunicator* comm_pt, Mesh*& mesh_pt, 
                           Vector<double>& elemental_error,
                           DocInfo& doc_info);
   
@@ -407,7 +408,7 @@ class Z2ErrorEstimator : public virtual ErrorEstimator
  bool Recovery_order_from_first_element;
 
  /// Doc flux and recovered flux
- void doc_flux(Mesh* mesh_pt,
+ void doc_flux(OomphCommunicator* comm_pt, Mesh* mesh_pt,
                const unsigned& num_flux_terms,
                MapMatrixMixed<Node*,int,double>& rec_flux_map,
                const Vector<double>& elemental_error,

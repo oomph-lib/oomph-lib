@@ -241,7 +241,7 @@ void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output solution 
  sprintf(filename,"%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
-         doc_info.number(),MPI_Helpers::My_rank);
+         doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
  some_file.close();
@@ -347,7 +347,7 @@ int main(int argc, char **argv)
 
     // Now perform the distribution
     bool report_stats=true;
-    problem.distribute(mesh_doc_info,report_stats,element_partition);
+    problem.distribute(element_partition,mesh_doc_info,report_stats);
 
     // This commented out section details how to write a partition to disk
 //    Vector<unsigned> out_element_partition;

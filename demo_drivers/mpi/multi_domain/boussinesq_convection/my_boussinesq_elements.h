@@ -172,11 +172,6 @@ public:
    this->Ra_pt = cast_father_element_pt->ra_pt();
   }
 
- /// Does something need to be done about the Z2 flux? In order to test
- /// against the single-mesh problem this just needs to come from this mesh,
- /// so don't overload this one - overload the other one to have the same
- /// values as this one, somehow...
-
  /// \short Validate against exact solution at given time
  /// Solution is provided via function pointer.
  /// Plot at a given number of plot points and compute L2 error
@@ -391,9 +386,9 @@ public:
 };
 
 //======================class definitions==============================
-/// Build MyAdvectionDiffusionElement that inherits from 
+/// Build RefineableQAdvectionDiffusionElement that inherits from 
 /// ElementWithExternalElement so that it can "communicate" with the 
-/// MyNavierStokesElement
+/// RefineableQCrouzeixRaviartElement
 //=====================================================================
 template<unsigned DIM>
 class RefineableQAdvectionDiffusionElementWithExternalElement : 
@@ -480,27 +475,6 @@ public:
    FiniteElement::
     output_fct(outfile,Nplot,time,exact_soln_pt);
   }
-
- /// Testing firstly what happens when each mesh has the same refinement
- /// pattern as the single mesh with the combined element.  In that case
- /// the recovery order and flux terms were solely based on the fluid.
-
-//  /// The recovery order is that of the NavierStokes elements.
-//  unsigned nrecovery_order() 
-//   {return RefineableQCrouzeixRaviartElement<DIM>::nrecovery_order();}
-
-//  /// \short The number of Z2 flux terms is the same as that in 
-//  /// the NavierStokes (fluid) element.
-//  unsigned num_Z2_flux_terms()
-//   {
-//    return RefineableQCrouzeixRaviartElement<DIM>::num_Z2_flux_terms();
-//   }
-
-//  /// Get the Z2 flux from the fluid element
-//  void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
-//   {
-//    RefineableQCrouzeixRaviartElement<DIM>::get_Z2_flux(s,flux);
-//   } //end of get_Z2_flux
 
  /// \short Validate against exact solution at given time
  /// Solution is provided via function pointer.

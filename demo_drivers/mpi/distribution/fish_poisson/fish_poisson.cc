@@ -11,10 +11,6 @@
 // The fish mesh 
 #include "meshes/fish_mesh.h"
 
-#ifdef OOMPH_HAS_MPI
-#include "mpi.h"
-#endif
-
 using namespace std;
 
 using namespace oomph;
@@ -149,7 +145,7 @@ void RefineableFishPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Output solution 
  sprintf(filename,"%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
-         doc_info.number(),MPI_Helpers::My_rank);
+         doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
  some_file.close();
@@ -194,9 +190,9 @@ void solve_with_incremental_adaptation()
  problem.mesh_pt()->doc_adaptivity_targets(cout);
  
  // Solve/doc the problem on the initial, very coarse mesh
-  problem.linear_solver_pt() = new SuperLU_dist;
-  static_cast<SuperLU_dist*>(problem.linear_solver_pt())->
-   enable_distributed_solve(); 
+ problem.linear_solver_pt() = new SuperLU_dist;
+ static_cast<SuperLU_dist*>(problem.linear_solver_pt())->
+  enable_distributed_solve();
 
  problem.newton_solve();
   
@@ -206,10 +202,10 @@ void solve_with_incremental_adaptation()
  //Increment counter for solutions 
  doc_info.number()++;
 
- // loop for refining selected elements
+ //Loop for refining uniformly
  for (unsigned mym=0;mym<2;mym++)
   {
-   // Distribute before next round of refinement
+   //On the first step refine uniformly twice and then distribute
    if (mym==0) 
     {
      problem.refine_uniformly();
@@ -232,18 +228,8 @@ void solve_with_incremental_adaptation()
        element_partition[e]=atoi(input_string.c_str());
       }
 
-//     Vector<unsigned> out_element_partition;
-//     bool report_stats=false;
-     problem.distribute(mesh_doc_info,report_stats,element_partition);
-//                        out_element_partition);
-
-//      sprintf(filename,"out_fish_incremental_partition.dat");
-//      output_file.open(filename);
-//      for (unsigned e=0;e<n_partition;e++)
-//       {
-//        output_file << out_element_partition[e] << std::endl;
-//       }
-
+     // Distribute and check halo schemes
+     problem.distribute(element_partition,mesh_doc_info,report_stats);
      problem.check_halo_schemes(mesh_doc_info);
     }
   
@@ -252,7 +238,7 @@ void solve_with_incremental_adaptation()
    problem.refine_uniformly();
  
    // Solve the problem 
-   oomph_info << "Solve again (MPI)..." << std::endl;
+   oomph_info << "Solve again..." << std::endl;
 
    problem.newton_solve();
  
@@ -272,34 +258,27 @@ void solve_with_incremental_adaptation()
  unsigned max_solve=4;
  for (unsigned isolve=0;isolve<max_solve;isolve++)
   {
-   // Test adapt interpolates correctly - doc solution before
-//   problem.doc_solution(doc_info);
-//   doc_info.number()++;   
-
    oomph_info << "Adapting problem - isolve=" << isolve << std::endl;
 
    // Adapt problem/mesh
    problem.adapt(); 
 
-   // Now doc solution after
-//   problem.doc_solution(doc_info);
-//   doc_info.number()++;
-         
    // Re-solve the problem if the adaptation has changed anything
 #ifdef OOMPH_HAS_MPI
    // Make sure all processors know if refinement is taking place
-       // Adaptation only converges if ALL the processes have no
-       // refinement or unrefinement to perform
+   // Adaptation only converges if ALL the processes have no
+   // refinement or unrefinement to perform
    unsigned total_refined;
    unsigned total_unrefined;
    unsigned n_refined=problem.mesh_pt()->nrefined();
    unsigned n_unrefined=problem.mesh_pt()->nunrefined();
 
    MPI_Allreduce(&n_refined,&total_refined,1,MPI_INT,MPI_SUM,
-                 MPI_COMM_WORLD);
+                 problem.communicator_pt()->mpi_comm());
    n_refined=total_refined;
+
    MPI_Allreduce(&n_unrefined,&total_unrefined,1,MPI_INT,MPI_SUM,
-                 MPI_COMM_WORLD);
+                 problem.communicator_pt()->mpi_comm());
    n_unrefined=total_unrefined;
 #endif
 
@@ -323,31 +302,21 @@ void solve_with_incremental_adaptation()
    doc_info.number()++;
   }
 
-
-//  // Attempt to redistribute this non-uniformly refined mesh
-//  mesh_doc_info.number()++;
-//  problem.prune_halo_elements_and_nodes(mesh_doc_info,report_stats);
-//  problem.check_halo_schemes(mesh_doc_info);
-
-//  // Resolve and output solution
-//  problem.newton_solve();
-//  problem.doc_solution(doc_info);
-//  doc_info.number()++;
- 
+ // Loop for uniform unrefinement
  for(unsigned myn=0;myn<10;myn++)
   {
-  // Test the unrefine_uniformly command and re-solve
-  //--------------------------------------------------------
-  problem.unrefine_uniformly();
+   // Test the unrefine_uniformly command and re-solve
+   //--------------------------------------------------------
+   problem.unrefine_uniformly();
  
-  // Solve the problem 
-  problem.newton_solve();
+   // Solve the problem 
+   problem.newton_solve();
  
-  //Output solution
-  problem.doc_solution(doc_info);
+   //Output solution
+   problem.doc_solution(doc_info);
  
-  //Increment counter for solutions 
-  doc_info.number()++;
+   //Increment counter for solutions 
+   doc_info.number()++;
   }
 
 } // end of incremental
@@ -360,90 +329,80 @@ void solve_with_incremental_adaptation()
 //========================================================================
 void solve_with_fully_automatic_adaptation()
 {
-  //Set up the problem with nine-node refineable Poisson elements
-  RefineableFishPoissonProblem<RefineableQPoissonElement<2,3> > problem;
+ //Set up the problem with nine-node refineable Poisson elements
+ RefineableFishPoissonProblem<RefineableQPoissonElement<2,3> > problem;
   
-  // Setup labels for output
-  //------------------------
-  DocInfo doc_info, mesh_doc_info;
-  bool report_stats=true;
+ // Setup labels for output
+ //------------------------
+ DocInfo doc_info, mesh_doc_info;
+ bool report_stats=true;
   
-  // Set output directory
-  doc_info.set_directory("RESLT_fully_automatic"); 
-  mesh_doc_info.set_directory("RESLT_adapt_mesh"); 
+ // Set output directory
+ doc_info.set_directory("RESLT_fully_automatic"); 
+ mesh_doc_info.set_directory("RESLT_adapt_mesh"); 
   
-  // Step number
-  doc_info.number()=0;
-  mesh_doc_info.number()=20;
+ // Step number
+ doc_info.number()=0;
+ mesh_doc_info.number()=20;
 
-  // Doc (default) refinement targets
-  //----------------------------------
-  problem.mesh_pt()->doc_adaptivity_targets(cout);
+ // Doc (default) refinement targets
+ //----------------------------------
+ problem.mesh_pt()->doc_adaptivity_targets(cout);
 
-  // Setup the linear solver for MPI use
-  //------------------------------------
-  problem.linear_solver_pt() = new SuperLU_dist;
-  static_cast<SuperLU_dist*>(problem.linear_solver_pt())->
-   enable_distributed_solve();
+ // Setup the linear solver for MPI use
+ //------------------------------------
+ problem.linear_solver_pt() = new SuperLU_dist;
+ static_cast<SuperLU_dist*>(problem.linear_solver_pt())->
+  enable_distributed_solve();
 
-  // Solve/doc the problem with fully automatic adaptation
-  //------------------------------------------------------
+ // Solve/doc the problem with fully automatic adaptation
+ //------------------------------------------------------
 
-  // Refine coarse original mesh first
-  //----------------------------------
-  problem.refine_uniformly();
-  problem.refine_uniformly();
+ // Refine coarse original mesh first
+ //----------------------------------
+ problem.refine_uniformly();
+ problem.refine_uniformly();
 
-  oomph_info << "-----------------------------------------" << std::endl;
-  oomph_info << "--- Distributing problem (fully auto) ---" << std::endl;
-  oomph_info << "-----------------------------------------" << std::endl;
+ oomph_info << "-----------------------------------------" << std::endl;
+ oomph_info << "--- Distributing problem (fully auto) ---" << std::endl;
+ oomph_info << "-----------------------------------------" << std::endl;
 
-  std::ifstream input_file;
-  std::ofstream output_file;
-  char filename[100];
+ std::ifstream input_file;
+ std::ofstream output_file;
+ char filename[100];
 
-  // Get the partition to be used from file
-  unsigned n_partition=problem.mesh_pt()->nelement();
-  Vector<unsigned> element_partition(n_partition,0);
-  sprintf(filename,"fish_fully_automatic_partition.dat");
-  input_file.open(filename);
-  std::string input_string;
-  for (unsigned e=0;e<n_partition;e++)
-   {
-    getline(input_file,input_string,'\n');
-    element_partition[e]=atoi(input_string.c_str());
-   }
+ // Get the partition to be used from file
+ unsigned n_partition=problem.mesh_pt()->nelement();
+ Vector<unsigned> element_partition(n_partition,0);
+ sprintf(filename,"fish_fully_automatic_partition.dat");
+ input_file.open(filename);
+ std::string input_string;
+ for (unsigned e=0;e<n_partition;e++)
+  {
+   getline(input_file,input_string,'\n');
+   element_partition[e]=atoi(input_string.c_str());
+  }
 
-//  Vector<unsigned> out_element_partition;
-//  bool report_stats=false;
-  problem.distribute(mesh_doc_info,report_stats,element_partition);
-//                     out_element_partition);
+ // Distribute and check halo schemes
+ problem.distribute(element_partition,mesh_doc_info,report_stats);
+ problem.check_halo_schemes(mesh_doc_info);
 
-//   sprintf(filename,"out_fish_fully_automatic_partition.dat");
-//   output_file.open(filename);
-//   for (unsigned e=0;e<n_partition;e++)
-//    {
-//     output_file << out_element_partition[e] << std::endl;
-//    }
+ //Maximum number of adaptations:
+ unsigned max_adapt=5;
 
-  problem.check_halo_schemes(mesh_doc_info);
+ oomph_info << "Solve with max_adapt=" << max_adapt << std::endl;
 
-  //Maximum number of adaptations:
-  unsigned max_adapt=5;
+ //Solve the problem; perform up to specified number of adaptations.
+ problem.newton_solve(max_adapt);
 
-  oomph_info << "Solve with max_adapt=" << max_adapt << std::endl;
+ //Output solution
+ oomph_info << "-----------------------" << std::endl;
+ oomph_info << "Now output the solution" << std::endl;
+ oomph_info << "-----------------------" << std::endl;
+ problem.doc_solution(doc_info);   
 
-  //Solve the problem; perform up to specified number of adaptations.
-  problem.newton_solve(max_adapt);
-
-  //Output solution
-  oomph_info << "-----------------------" << std::endl;
-  oomph_info << "Now output the solution" << std::endl;
-  oomph_info << "-----------------------" << std::endl;
-  problem.doc_solution(doc_info);   
-
-  //increment doc_info number
-  doc_info.number()++;
+ //increment doc_info number
+ doc_info.number()++;
 
 } // end black box
 
@@ -452,123 +411,97 @@ void solve_with_fully_automatic_adaptation()
 //========================================================================
 void solve_with_selected_refinement_pattern()
 {
-  //Set up the problem with nine-node refineable Poisson elements
-  RefineableFishPoissonProblem<RefineableQPoissonElement<2,3> > problem;
+ //Set up the problem with nine-node refineable Poisson elements
+ RefineableFishPoissonProblem<RefineableQPoissonElement<2,3> > problem;
   
-  // Setup labels for output
-  //------------------------
-  DocInfo doc_info, mesh_doc_info;
-  bool report_stats=true;
+ // Setup labels for output
+ //------------------------
+ DocInfo doc_info, mesh_doc_info;
+ bool report_stats=true;
   
-  // Set output directory
-  doc_info.set_directory("RESLT_select_refine"); 
-  mesh_doc_info.set_directory("RESLT_select_mesh"); 
+ // Set output directory
+ doc_info.set_directory("RESLT_select_refine"); 
+ mesh_doc_info.set_directory("RESLT_select_mesh"); 
   
-  // Step number
-  doc_info.number()=0;
-  mesh_doc_info.number()=20;
+ // Step number
+ doc_info.number()=0;
+ mesh_doc_info.number()=20;
 
-  // Doc (default) refinement targets
-  //----------------------------------
-  problem.mesh_pt()->doc_adaptivity_targets(cout);
+ // Doc (default) refinement targets
+ //----------------------------------
+ problem.mesh_pt()->doc_adaptivity_targets(cout);
 
-  // Setup the linear solver for MPI use
-  //------------------------------------
-  problem.linear_solver_pt() = new SuperLU_dist;
-  static_cast<SuperLU_dist*>(problem.linear_solver_pt())->
-   enable_distributed_solve();
+ // Setup the linear solver for MPI use
+ //------------------------------------
+ problem.linear_solver_pt() = new SuperLU_dist;
+ static_cast<SuperLU_dist*>(problem.linear_solver_pt())->
+  enable_distributed_solve();
 
-  // Refine coarse original mesh first
-  //----------------------------------
-  problem.refine_uniformly();
-  problem.refine_uniformly();
+ // Refine coarse original mesh first
+ //----------------------------------
+ problem.refine_uniformly();
+ problem.refine_uniformly();
 
-  // Distribute the problem and doc mesh info
-  oomph_info << "----------------------------------------" << std::endl;
-  oomph_info << "--- Distributing problem (selective) ---" << std::endl;
-  oomph_info << "----------------------------------------" << std::endl;
+ // Distribute the problem and doc mesh info
+ oomph_info << "----------------------------------------" << std::endl;
+ oomph_info << "--- Distributing problem (selective) ---" << std::endl;
+ oomph_info << "----------------------------------------" << std::endl;
 
-  std::ifstream input_file;
-  std::ofstream output_file;
-  char filename[100];
+ std::ifstream input_file;
+ std::ofstream output_file;
+ char filename[100];
 
-  // Get the partition to be used from file
-  unsigned n_partition=problem.mesh_pt()->nelement();
-  Vector<unsigned> element_partition(n_partition,0);
-  sprintf(filename,"fish_selective_partition.dat");
-  input_file.open(filename);
-  std::string input_string;
-  for (unsigned e=0;e<n_partition;e++)
-   {
-    getline(input_file,input_string,'\n');
-    element_partition[e]=atoi(input_string.c_str());
-   }
+ // Get the partition to be used from file
+ unsigned n_partition=problem.mesh_pt()->nelement();
+ Vector<unsigned> element_partition(n_partition,0);
+ sprintf(filename,"fish_selective_partition.dat");
+ input_file.open(filename);
+ std::string input_string;
+ for (unsigned e=0;e<n_partition;e++)
+  {
+   getline(input_file,input_string,'\n');
+   element_partition[e]=atoi(input_string.c_str());
+  }
 
-//  Vector<unsigned> out_element_partition;
-//  bool report_stats=false;
-  problem.distribute(mesh_doc_info,report_stats,element_partition);
-//                     out_element_partition);
+ // Distribute and check halo schemes
+ problem.distribute(element_partition,mesh_doc_info,report_stats);
+ problem.check_halo_schemes(mesh_doc_info);
 
-//   sprintf(filename,"out_fish_selective_partition.dat");
-//   output_file.open(filename);
-//   for (unsigned e=0;e<n_partition;e++)
-//    {
-//     output_file << out_element_partition[e] << std::endl;
-//    }
+ // Add some selective refinement on top of this
+ unsigned nsoln=3; // number of selective refinements - validate, 3
 
-  problem.check_halo_schemes(mesh_doc_info);
+ for (unsigned isoln=0; isoln<nsoln; isoln++)
+  {
+   // Refine selected elements based upon y-coordinate
+   // of the central node of the element (node 4)
+   Vector<unsigned> more_middle_els;
+   unsigned nels=problem.mesh_pt()->nelement();
+   for (unsigned e=0; e<nels; e++)
+    {
+     FiniteElement* el_pt=dynamic_cast<FiniteElement*>
+      (problem.mesh_pt()->element_pt(e));
+     if ((el_pt->node_pt(4)->x(1)>=(-0.35)) &&
+         (el_pt->node_pt(4)->x(1)<=0.35))
+      {
+       more_middle_els.push_back(e);
+      }
+    }
 
-//   // Test what happens with uniform refinement after distributing
-//   problem.refine_uniformly();
-//   problem.refine_uniformly();
+   oomph_info << "--------------------------------" << std::endl;
+   oomph_info << "This time, refine " << more_middle_els.size() 
+              << " selected elements" << std::endl;
+   oomph_info << "--------------------------------" << std::endl;
+   problem.refine_selected_elements(more_middle_els);
 
-  // Add some selective refinement on top of this
-  unsigned nsoln=3; // number of selective refinements - validate, 3
+   // Now solve the problem
+   problem.newton_solve();
 
-  for (unsigned isoln=0; isoln<nsoln; isoln++)
-   {
-    // Refine selected elements based upon y-coordinate
-    // of the central node of the element (node 4)
-    Vector<unsigned> more_middle_els;
-    unsigned nels=problem.mesh_pt()->nelement();
-    for (unsigned e=0; e<nels; e++)
-     {
-      FiniteElement* el_pt=dynamic_cast<FiniteElement*>
-            (problem.mesh_pt()->element_pt(e));
-//      oomph_info << "Again node 4 y: " 
-//                 << el_pt->node_pt(4)->x(1) << std::endl;
-      if ((el_pt->node_pt(4)->x(1)>=(-0.35)) &&
-          (el_pt->node_pt(4)->x(1)<=0.35))
-       {
-        more_middle_els.push_back(e);
-       }
-     }
+   // Doc the solution
+   problem.doc_solution(doc_info);   
 
-    oomph_info << "--------------------------------" << std::endl;
-    oomph_info << "This time, refine " << more_middle_els.size() 
-               << " selected elements" << std::endl;
-    oomph_info << "--------------------------------" << std::endl;
-    problem.refine_selected_elements(more_middle_els);
-
-    // Now solve the problem
-    problem.newton_solve();
-
-    // Doc the solution
-    problem.doc_solution(doc_info);   
-
-    // Increment doc_info number
-    doc_info.number()++;
-   }
-
-//   // Attempt to redistribute this non-uniformly refined mesh
-//   mesh_doc_info.number()++;
-//   problem.prune_halo_elements_and_nodes(mesh_doc_info,report_stats);
-//   problem.check_halo_schemes(mesh_doc_info);
-
-//   // Resolve and output solution
-//   problem.newton_solve();
-//   problem.doc_solution(doc_info);
-//   doc_info.number()++;
+   // Increment doc_info number
+   doc_info.number()++;
+  }
 
 }
 

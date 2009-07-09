@@ -843,7 +843,15 @@ public:
 
    //Pin the zero-th pressure dof in the zero-th element and set
    // its value to zero
-   fix_pressure(0,0,0.0);
+   unsigned nnod=mesh_pt()->nnode();
+   for (unsigned j=0; j<nnod; j++)
+    {
+     if (mesh_pt()->node_pt(j)->x(0)==0 && 
+         mesh_pt()->node_pt(j)->x(1)==0) // 2d problem only
+      {
+       fix_pressure(0,0,0.0);
+      }
+    }
   }
 
  ///Fix pressure in element e at pressure dof pdof and set to pvalue
@@ -883,7 +891,7 @@ RefineableConvectionProblem<ELEMENT>::
 RefineableConvectionProblem() : Imperfect(false)
 { 
  // Set output directory
- Doc_info.set_directory("RESLT");
+ Doc_info.set_directory("RESLT_SINGLE");
  
  // # of elements in x-direction
  unsigned n_x=9;
@@ -1045,7 +1053,7 @@ void RefineableConvectionProblem<ELEMENT>::doc_solution()
  // Output solution 
  //-----------------
  sprintf(filename,"%s/soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
-         Doc_info.number(),MPI_Helpers::My_rank);
+         Doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
  some_file.close();
@@ -1064,6 +1072,9 @@ int main(int argc, char **argv)
  MPI_Helpers::init(argc,argv);
 #endif
 
+ // Store command line arguments
+ CommandLineArgs::setup(argc,argv);
+
  // Set the direction of gravity
  Global_Physical_Variables::Direction_of_gravity[0] = 0.0;
  Global_Physical_Variables::Direction_of_gravity[1] = -1.0;
@@ -1077,36 +1088,33 @@ int main(int argc, char **argv)
  problem.use_imperfection() = true;
 
 #ifdef OOMPH_HAS_MPI
- // Distribute the problem
- unsigned n_partition=problem.mesh_pt()->nelement();
- Vector<unsigned> in_element_partition(n_partition);
-
- std::ifstream input_file;
- char filename[100];
- sprintf(filename,"refineable_b_convection_partition.dat");
- input_file.open(filename);
- std::string input_string;
- for (unsigned e=0;e<n_partition;e++)
+ bool report_stats=true;
+ // Are there command-line arguments?
+ if (CommandLineArgs::Argc==1)
   {
-   getline(input_file,input_string,'\n');
-   in_element_partition[e]=atoi(input_string.c_str());
+   // No arguments, so distribute without reference to partition vector
+   problem.distribute(report_stats);
   }
+ else
+  {
+   // Command line argument(s), so read in partition vector from file
+   unsigned n_partition=problem.mesh_pt()->nelement();
+   Vector<unsigned> in_element_partition(n_partition);
 
-//  problem.distribute();
+   std::ifstream input_file;
+   char filename[100];
+   sprintf(filename,"refineable_b_convection_partition.dat");
+   input_file.open(filename);
+   std::string input_string;
+   for (unsigned e=0;e<n_partition;e++)
+    {
+     getline(input_file,input_string,'\n');
+     in_element_partition[e]=atoi(input_string.c_str());
+    }
 
- problem.distribute(in_element_partition);
-
-//  Vector<unsigned> out_element_partition(n_partition);
-//  out_element_partition=problem.distribute();
-
-//  char filename[100];
-//  std::ofstream output_file;
-//  sprintf(filename,"refineable_b_convection_partition.dat");
-//  output_file.open(filename);
-//  for (unsigned e=0;e<n_partition;e++)
-//   {
-//    output_file << out_element_partition[e] << std::endl;
-//   }
+   // Distribute the problem
+   problem.distribute(in_element_partition,report_stats);
+  }
 #endif
 
  //Solve the problem with (up to) two levels of adaptation
@@ -1121,7 +1129,8 @@ int main(int argc, char **argv)
  // converges to the symmetry broken solution, even without
  // the perturbation
  problem.use_imperfection() = false;
- problem.newton_solve(2);
+ problem.newton_solve(2); //hierher hierher change, trying to debug error
+// problem.newton_solve(1);
  problem.doc_solution();
 
 #ifdef OOMPH_HAS_MPI

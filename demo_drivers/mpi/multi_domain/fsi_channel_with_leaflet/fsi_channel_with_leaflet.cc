@@ -302,7 +302,7 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
   (n_wall_el,hleaflet,undeformed_wall_pt,wall_time_stepper_pt);
 
  // Flag to tell the wall mesh that all its elements should be halo
- bool keep_all_elements_as_halos=true;
+ Wall_mesh_pt->keep_all_elements_as_halos()=true;
 
  // Provide GeomObject representation of leaflet mesh and build fluid mesh
  //-----------------------------------------------------------------------
@@ -310,8 +310,7 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
  // Build a geometric object (one Lagrangian, two Eulerian coordinates)
  // from the wall mesh
  MeshAsGeomObject<1,2,FSIHermiteBeamElement>* wall_geom_object_pt=
-  new MeshAsGeomObject<1,2,FSIHermiteBeamElement>(Wall_mesh_pt,
-                                                  keep_all_elements_as_halos);
+  new MeshAsGeomObject<1,2,FSIHermiteBeamElement>(Wall_mesh_pt);
 
 //Build the mesh
  Fluid_mesh_pt =new RefineableAlgebraicChannelWithLeafletMesh<ELEMENT>(
@@ -460,11 +459,6 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
  // pointers to the meshes. The interaction boundary is boundary 4 and 5
  // of the 2D fluid mesh.
 
-#ifdef USE_EXTERNAL_ELEMENTS
- FSI_functions::Use_external_storage=true;
- Multi_domain_functions::Shut_up=false;
-#endif
-
  // Front of leaflet: Set face=0 (which is also the default so this argument
  // could be omitted)
  unsigned face=0; 
@@ -495,87 +489,84 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
  // Setup equation numbering scheme
  cout <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
 
-
-
-//  // Choose iterative solvers with FSI preconditioner (only if not test)
-//  //====================================================================
-//  if (CommandLineArgs::Argc==1)
-//   {
+ // Choose iterative solvers with FSI preconditioner (only if not test)
+ if (CommandLineArgs::Argc==1)
+  {
    
-//    // Build iterative linear solver
-//    //------------------------------
-//    GMRES<CRDoubleMatrix>* iterative_linear_solver_pt =
-//     new GMRES<CRDoubleMatrix>;
+   // Build iterative linear solver
+   //------------------------------
+   GMRES<CRDoubleMatrix>* iterative_linear_solver_pt =
+    new GMRES<CRDoubleMatrix>;
    
-//    // Set maximum number of iterations
-//    iterative_linear_solver_pt->max_iter() = 200;
+   // Set maximum number of iterations
+   iterative_linear_solver_pt->max_iter() = 200;
    
-//    // Pass solver to problem:
-//    linear_solver_pt()=iterative_linear_solver_pt;
+   // Pass solver to problem:
+   linear_solver_pt()=iterative_linear_solver_pt;
    
    
-//    // Build preconditioner
-//    //---------------------
-//    FSIPreconditioner* prec_pt=new FSIPreconditioner;
+   // Build preconditioner
+   //---------------------
+   FSIPreconditioner* prec_pt=new FSIPreconditioner;
    
-//    // Set Navier Stokes mesh:
-//    prec_pt->navier_stokes_mesh_pt()=Fluid_mesh_pt;
+   // Set Navier Stokes mesh:
+   prec_pt->navier_stokes_mesh_pt()=Fluid_mesh_pt;
    
-//    // Set solid mesh:
-//    prec_pt->wall_mesh_pt()=Wall_mesh_pt;
+   // Set solid mesh:
+   prec_pt->wall_mesh_pt()=Wall_mesh_pt;
    
-//    // Set flags in the underlying Navier-Stokes preconditioner
-//    prec_pt->navier_stokes_preconditioner_pt()->p_matrix_using_scaling() = true;
+   // Set flags in the underlying Navier-Stokes preconditioner
+   prec_pt->navier_stokes_preconditioner_pt()->p_matrix_using_scaling() = true;
    
-//    // By default, the LSC Preconditioner uses SuperLU as
-//    // an exact preconditioner (i.e. a solver) for the
-//    // momentum and Schur complement blocks.
-//    // Can overwrite this by passing pointers to
-//    // other preconditioners that perform the (approximate)
-//    // solves of these blocks
+   // By default, the LSC Preconditioner uses SuperLU as
+   // an exact preconditioner (i.e. a solver) for the
+   // momentum and Schur complement blocks.
+   // Can overwrite this by passing pointers to
+   // other preconditioners that perform the (approximate)
+   // solves of these blocks
 
   
-// #ifdef HAVE_HYPRE
+#ifdef HAVE_HYPRE
 
-//    // Create internal preconditioner used on Schur block
-//    //---------------------------------------------------
-//    HyprePreconditioner* p_preconditioner_pt = new HyprePreconditioner;
+   // Create internal preconditioner used on Schur block
+   //---------------------------------------------------
+   HyprePreconditioner* p_preconditioner_pt = new HyprePreconditioner;
    
-//    // Shut up!
-//    p_preconditioner_pt->doc_time() = false;
+   // Shut up!
+   p_preconditioner_pt->doc_time() = false;
    
-//    // Set defaults parameters for use as preconditioner on Poisson-type problem
-//    Hypre_default_settings::
-//     set_defaults_for_2D_poisson_problem(p_preconditioner_pt);
+   // Set defaults parameters for use as preconditioner on Poisson-type problem
+   Hypre_default_settings::
+    set_defaults_for_2D_poisson_problem(p_preconditioner_pt);
    
-//    // Pass to preconditioner
-//    //prec_pt->set_p_preconditioner(p_preconditioner_pt);
+   // Pass to preconditioner
+   //prec_pt->set_p_preconditioner(p_preconditioner_pt);
    
    
-//    // Create internal preconditioner used on momentum block
-//    //------------------------------------------------------
-//    HyprePreconditioner* f_preconditioner_pt = new HyprePreconditioner;
+   // Create internal preconditioner used on momentum block
+   //------------------------------------------------------
+   HyprePreconditioner* f_preconditioner_pt = new HyprePreconditioner;
    
-//    // Shut up!
-//    f_preconditioner_pt->doc_time() = false;
+   // Shut up!
+   f_preconditioner_pt->doc_time() = false;
    
-//    // Set default parameters for use as preconditioner in for momentum 
-//    // block in Navier-Stokes problem
-//    Hypre_default_settings::
-//     set_defaults_for_navier_stokes_momentum_block(f_preconditioner_pt);
+   // Set default parameters for use as preconditioner in for momentum 
+   // block in Navier-Stokes problem
+   Hypre_default_settings::
+    set_defaults_for_navier_stokes_momentum_block(f_preconditioner_pt);
    
-//    // Use Hypre for momentum block
-//    //prec_pt->set_f_preconditioner(f_preconditioner_pt);
+   // Use Hypre for momentum block
+   //prec_pt->set_f_preconditioner(f_preconditioner_pt);
 
-// #endif
+#endif
    
-//    // Retain fluid onto solid terms in FSI preconditioner
-//    prec_pt->use_block_triangular_version_with_fluid_on_solid();
+   // Retain fluid onto solid terms in FSI preconditioner
+   prec_pt->use_block_triangular_version_with_fluid_on_solid();
 
-//    // Pass preconditioner to iterative linear solver
-//    iterative_linear_solver_pt->preconditioner_pt()= prec_pt;
+   // Pass preconditioner to iterative linear solver
+   iterative_linear_solver_pt->preconditioner_pt()= prec_pt;
      
-//   }
+  }
 
   
 }//end of constructor
@@ -707,14 +698,14 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
 
  // Output fluid solution 
  sprintf(filename,"%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
-         doc_info.number(),MPI_Helpers::My_rank);
+         doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  Fluid_mesh_pt->output(some_file,npts);
  some_file.close();
 
  // Output wall solution 
  sprintf(filename,"%s/wall_soln%i_on_proc%i.dat",doc_info.directory().c_str(),
-         doc_info.number(),MPI_Helpers::My_rank);
+         doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  Wall_mesh_pt->output(some_file,npts);
  some_file.close();
@@ -745,7 +736,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
  unsigned bound=4;
  sprintf(filename,"%s/fluid_boundary_elements_front_%i_on_proc%i.dat",
          doc_info.directory().c_str(),
-         doc_info.number(),MPI_Helpers::My_rank);
+         doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  unsigned nel= Fluid_mesh_pt->nboundary_element(bound);
  for (unsigned e=0;e<nel;e++)
@@ -761,7 +752,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
  bound=5;
  sprintf(filename,"%s/fluid_boundary_elements_back_%i_on_proc%i.dat",
          doc_info.directory().c_str(),
-         doc_info.number(),MPI_Helpers::My_rank);
+         doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  nel= Fluid_mesh_pt->nboundary_element(bound);
  for (unsigned e=0;e<nel;e++)
@@ -775,7 +766,7 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
  // Output normal vector on wall elements
  sprintf(filename,"%s/wall_normal_%i_on_proc%i.dat",
          doc_info.directory().c_str(),
-         doc_info.number(),MPI_Helpers::My_rank);
+         doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  nel=Wall_mesh_pt->nelement();
  Vector<double> s(1);
@@ -851,11 +842,7 @@ int main(int argc, char* argv[])
 
  // Set up doc info
  DocInfo doc_info; 
-#ifdef USE_EXTERNAL_ELEMENTS
- doc_info.set_directory("RESLT_FSI_LEAF_EXT");
-#else
  doc_info.set_directory("RESLT_FSI_LEAF");
-#endif
 
  // Trace file
  ofstream trace;
@@ -865,8 +852,7 @@ int main(int argc, char* argv[])
 
 
  // Number of timesteps (reduced for validation)
-// unsigned nstep=200;
- unsigned nstep=2;
+ unsigned nstep=200;
  if (CommandLineArgs::Argc>1)
   {
    nstep=2;
@@ -884,46 +870,44 @@ int main(int argc, char* argv[])
 
 
 #ifdef OOMPH_HAS_MPI
+
  // Distribute the problem (output info to screen)
-
- std::ifstream input_file;
-// std::ofstream output_file;
-// char filename[100];
-
- // All meshes are partitioned
- unsigned n_partition=problem.mesh_pt()->nelement();
- Vector<unsigned> in_element_partition(n_partition,0);
-//  Vector<unsigned> out_element_partition(n_partition,0);
-
- // Get partition from file
- sprintf(filename,"fsi_channel_with_leaflet_partition.dat");
- input_file.open(filename);
- std::string input_string;
- for (unsigned e=0;e<n_partition;e++)
-  {
-   getline(input_file,input_string,'\n');
-   in_element_partition[e]=atoi(input_string.c_str());
-  }
-
  bool report_stats=true;
- // Now distribute the (still uniformly refined) problem
- problem.distribute(in_element_partition,report_stats);
-//  out_element_partition=problem.distribute(report_stats);
 
-//  sprintf(filename,"out_fsi_channel_with_leaflet_partition.dat");
-//  output_file.open(filename);
-//  for (unsigned e=0;e<n_partition;e++)
-//   {
-//    output_file << out_element_partition[e] << std::endl;
-//   }
+ if (CommandLineArgs::Argc==1)
+  {
+   // No arguments, distribute without reference to partition vector
+   problem.distribute(report_stats);
+  }
+ else
+  {
+   // Command line arguments, read in partition vector (2-processor job)
+   std::ifstream input_file;
 
+   // All meshes are partitioned
+   unsigned n_partition=problem.mesh_pt()->nelement();
+   Vector<unsigned> in_element_partition(n_partition,0);
+
+   // Get partition from file
+   sprintf(filename,"fsi_channel_with_leaflet_partition.dat");
+   input_file.open(filename);
+   std::string input_string;
+   for (unsigned e=0;e<n_partition;e++)
+    {
+     getline(input_file,input_string,'\n');
+     in_element_partition[e]=atoi(input_string.c_str());
+    }
+
+   // Now distribute the (still uniformly refined) problem
+   problem.distribute(in_element_partition,report_stats);
+  }
 #endif
  
  // Initial loop to increment the Reynolds number in sequence of steady solves
  //---------------------------------------------------------------------------
-// unsigned n_increment=4;
- unsigned n_increment=1;
- // Just to one step for validation run
+ unsigned n_increment=4;
+
+ // Just do one step for validation run
  if (CommandLineArgs::Argc>1)
   {
    n_increment=1;
@@ -931,6 +915,12 @@ int main(int argc, char* argv[])
 
  // Set max. number of adaptations
  unsigned max_adapt=3;
+
+ // Just do one adaptation for validation run
+ if (CommandLineArgs::Argc>1)
+  {
+   max_adapt=1;
+  }
 
  Global_Physical_Variables::Re=0.0;
  for (unsigned i=0;i<n_increment;i++)

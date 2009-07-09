@@ -449,7 +449,8 @@ class MacroElementNodeUpdateMesh : public virtual Mesh
 #ifdef OOMPH_HAS_MPI
    // Update positions for external halo nodes attached to this mesh
    // Loop over processors
-   for (int iproc=0;iproc<MPI_Helpers::Nproc;iproc++)
+   int n_proc=nexternal_halo_proc();
+   for (int iproc=0;iproc<n_proc;iproc++)
     {
      unsigned n_ext_halo_node=nexternal_halo_node(iproc);
      for (unsigned n=0;n<n_ext_halo_node;n++)
@@ -479,19 +480,23 @@ class MacroElementNodeUpdateMesh : public virtual Mesh
  /// \short Overload the base class distribute function to deal
  /// with halo nodes on halo elements that may have pointers
  /// to macro elements that no longer exist
- void distribute(const Vector<unsigned>& element_domain,
+ void distribute(OomphCommunicator* comm_pt,
+                 const Vector<unsigned>& element_domain,
                  DocInfo& doc_info,
                  const bool& report_stats)
   {
    // Call underlying Mesh::distribute first
-   Mesh::distribute(element_domain,doc_info,report_stats);
+   Mesh::distribute(comm_pt,element_domain,doc_info,report_stats);
+
+   // Storage for number of processors
+   int n_proc=comm_pt->nproc();
 
    // The original call to set_node_update_info on the 
    // non-distributed problem may have set a macro element which no 
    // longer exists for some halo nodes which are on halo elements 
    // within the distributed Mesh; this deals with the problem by 
    // recalling the set_node_update_info for every halo element
-   for (int iproc=0;iproc<MPI_Helpers::Nproc;iproc++)
+   for (int iproc=0;iproc<n_proc;iproc++)
     {
      Vector<FiniteElement*> halo_el_pt=halo_element_pt(iproc);
      unsigned n_halo_el=halo_el_pt.size();

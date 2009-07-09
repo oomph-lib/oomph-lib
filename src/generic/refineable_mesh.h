@@ -205,7 +205,8 @@ public:
  
  /// \short Adapt mesh: Refine elements whose error is lager than err_max
  /// and (try to) unrefine those whose error is smaller than err_min
- virtual void adapt(Vector<double>& elemental_error);
+ virtual void adapt(OomphCommunicator* comm_pt,
+                    Vector<double>& elemental_error);
 
  /// \short Perform the actual mesh adaptation, documenting the progress in
  /// the directory specified in DocInfo object.
@@ -261,7 +262,7 @@ public:
  /// \short Unrefine mesh uniformly: Return 0 for success,
  /// 1 for failure (if unrefinement has reached the coarsest permitted
  /// level)
- virtual unsigned unrefine_uniformly();
+ virtual unsigned unrefine_uniformly(OomphCommunicator* comm_pt);
 
 
  /// Get max/min refinement levels in mesh
@@ -298,7 +299,8 @@ public:
 
 #ifdef OOMPH_HAS_MPI
  /// Synchronise the hanging nodes if the mesh is distributed
- void synchronise_hanging_nodes(const unsigned& ncont_interpolated_values);
+ void synchronise_hanging_nodes(OomphCommunicator* comm_pt,
+                                const unsigned& ncont_interpolated_values);
 #endif
 
 protected:

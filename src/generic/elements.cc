@@ -488,6 +488,29 @@ DenseMatrix<double> GeneralisedElement::Dummy_matrix;
       error_stream << "  " << n << "        " << Eqn_number[n] << std::endl;
      }
 
+    // It's helpful for debugging purposes to output more about this element
+    error_stream << std::endl << " element address is " << this << std::endl;
+
+    // If it's a FiniteElement then output its nodes
+    FiniteElement* f_el_pt=dynamic_cast<FiniteElement*>(this);
+
+    if (f_el_pt!=0)
+     {
+      unsigned n_node=f_el_pt->nnode();
+      unsigned n_dim=f_el_pt->dim();
+      for (unsigned n=0;n<n_node;n++)
+       {
+        Node* nod_pt=f_el_pt->node_pt(n);
+        error_stream << "Node " << n << " at ( ";
+        for (unsigned i=0;i<n_dim;i++)
+         {
+          error_stream << nod_pt->x(i) << " ";
+         }
+        error_stream << ")" << std::endl;
+       }
+     }
+
+
     throw OomphLibError(error_stream.str(),
                         "GeneralisedElement::assign_local_eqn_numbers()",
                         OOMPH_EXCEPTION_LOCATION);
@@ -3108,7 +3131,8 @@ void FiniteElement::get_dresidual_dnodal_coordinates(
 /// pointer.
 //=========================================================================
 void FiniteElement::locate_zeta(const Vector<double> &zeta,
-                    GeomObject*& geom_object_pt, Vector<double> &s)
+                                GeomObject*& geom_object_pt, Vector<double> &s,
+                                const bool& use_coordinate_as_initial_guess)
     {
      using namespace Locate_zeta_helpers;
 
@@ -3125,65 +3149,73 @@ void FiniteElement::locate_zeta(const Vector<double> &zeta,
      double list_space=(1.0/(double(n_list)-1.0))*(s_max()-s_min());
      Vector<Vector<double> > s_list;
 
-     if(Macro_elem_pt==0)
+     // If the boolean argument use_coordinate_as_initial_guess was set
+     // to true then we don't need to initialise s
+     if (!use_coordinate_as_initial_guess)
       {
-       for(unsigned i=0;i<ncoord;i++)
+       // If there is no macro element
+       if(Macro_elem_pt==0)
         {
-         s[i] = 0.5*(s_max()+s_min());
-        }
-      }
-     else
-      {
-       if (ncoord==1)
-        {
-         for (unsigned i=0;i<n_list;i++)
+         // Default to the centre of the element
+         for(unsigned i=0;i<ncoord;i++)
           {
-           Vector<double> s_c(ncoord);
-           s_c[0]=s_min()+(double(i)*list_space);
-           s_list.push_back(s_c);
-          }
-        }
-       else if (ncoord==2)
-        {
-         for (unsigned i=0;i<n_list;i++)
-          {
-           for (unsigned j=0;j<n_list;j++)
-            {
-             Vector<double> s_c(ncoord);
-             s_c[0]=s_min()+(double(i)*list_space);
-             s_c[1]=s_min()+(double(j)*list_space);
-             s_list.push_back(s_c);
-            }
-          }
-        }
-       else if (ncoord==3)
-        {
-         for (unsigned i=0;i<n_list;i++)
-          {
-           for (unsigned j=0;j<n_list;j++)
-            {
-             for (unsigned k=0;k<n_list;k++)
-              {
-               Vector<double> s_c(ncoord);
-               s_c[0]=s_min()+(double(i)*list_space);
-               s_c[1]=s_min()+(double(j)*list_space);
-               s_c[2]=s_min()+(double(k)*list_space);
-               s_list.push_back(s_c);
-              }
-            }
+           s[i] = 0.5*(s_max()+s_min());
           }
         }
        else
         {
-         // Shouldn't get in here...
-         std::ostringstream error_stream;
-         error_stream << "Element dimension is not equal to 1, 2 or 3 - why?\n";
-         throw OomphLibError(error_stream.str(),
-                             "FiniteElement::locate_zeta()",
-                             OOMPH_EXCEPTION_LOCATION);
+         // Create a list of coordinates within the element
+         if (ncoord==1)
+          {
+           for (unsigned i=0;i<n_list;i++)
+            {
+             Vector<double> s_c(ncoord);
+             s_c[0]=s_min()+(double(i)*list_space);
+             s_list.push_back(s_c);
+            }
+          }
+         else if (ncoord==2)
+          {
+           for (unsigned i=0;i<n_list;i++)
+            {
+             for (unsigned j=0;j<n_list;j++)
+              {
+               Vector<double> s_c(ncoord);
+               s_c[0]=s_min()+(double(i)*list_space);
+               s_c[1]=s_min()+(double(j)*list_space);
+               s_list.push_back(s_c);
+              }
+            }
+          }
+         else if (ncoord==3)
+          {
+           for (unsigned i=0;i<n_list;i++)
+            {
+             for (unsigned j=0;j<n_list;j++)
+              {
+               for (unsigned k=0;k<n_list;k++)
+                {
+                 Vector<double> s_c(ncoord);
+                 s_c[0]=s_min()+(double(i)*list_space);
+                 s_c[1]=s_min()+(double(j)*list_space);
+                 s_c[2]=s_min()+(double(k)*list_space);
+                 s_list.push_back(s_c);
+                }
+              }
+            }
+          }
+         else
+          {
+           // Shouldn't get in here...
+           std::ostringstream error_stream;
+           error_stream << "Element dimension is not equal to 1, 2 or 3 - ?\n";
+           throw OomphLibError(error_stream.str(),
+                               "FiniteElement::locate_zeta()",
+                               OOMPH_EXCEPTION_LOCATION);
+          }
         }
       }
-   
+
      //Counter for the number of Newton steps
      unsigned count=0;
 
@@ -3193,7 +3225,8 @@ void FiniteElement::locate_zeta(const Vector<double> &zeta,
      //Storage for the interpolated value of x
      Vector<double> inter_x(ncoord);
    
-     if (macro_elem_pt()==0)
+     // If no macro element, or we have specified the coordinate already
+     if ((macro_elem_pt()==0) || (use_coordinate_as_initial_guess))
       {
        //Get the value of x at the initial guess
        this->interpolated_zeta(s,inter_x);

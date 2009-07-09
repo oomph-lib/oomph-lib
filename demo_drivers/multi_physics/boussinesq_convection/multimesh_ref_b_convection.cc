@@ -125,10 +125,9 @@ public:
    fix_pressure(0,0,0.0);
 
    // Set sources
-   Multi_domain_functions::set_sources<NST_ELEMENT,AD_ELEMENT,2,2>
-    (this,nst_mesh_pt(),adv_diff_mesh_pt());
-  } //end_of_actions_after_adapt
-
+   Multi_domain_functions::setup_multi_domain_interactions
+    <NST_ELEMENT,AD_ELEMENT>(this,nst_mesh_pt(),adv_diff_mesh_pt());
+  } // end of actions_after_adapt
 
  ///Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned &e, const unsigned &pdof, 
@@ -326,9 +325,6 @@ RefineableConvectionProblem()
  // Setup equation numbering scheme
  cout << "Number of equations: " << assign_eqn_numbers() << endl; 
 
- // Set this to higher than default (10)
- Problem::Max_newton_iterations=20;
-
 } // end of constructor
 
 
@@ -415,11 +411,27 @@ void RefineableConvectionProblem<NST_ELEMENT,AD_ELEMENT>::doc_solution()
  unsigned npts=5;
 
  // Output whole solution (this will output elements from one mesh
- //----------------------  followed by the other mesh at the moment...?)
+ //----------------------  followed by the other mesh)
  sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
+ some_file.close();
+
+ // Output N-S solution
+ //--------------------
+ sprintf(filename,"%s/nst_soln%i.dat",Doc_info.directory().c_str(),
+         Doc_info.number());
+ some_file.open(filename);
+ nst_mesh_pt()->output(some_file,npts);
+ some_file.close();
+
+ // Output A-D solution
+ //--------------------
+ sprintf(filename,"%s/ad_soln%i.dat",Doc_info.directory().c_str(),
+         Doc_info.number());
+ some_file.open(filename);
+ adv_diff_mesh_pt()->output(some_file,npts);
  some_file.close();
 
  Doc_info.number()++;
@@ -428,12 +440,10 @@ void RefineableConvectionProblem<NST_ELEMENT,AD_ELEMENT>::doc_solution()
 
 //===============start_of_main========================================
 /// Driver code for 2D Boussinesq convection problem with 
-/// adaptivity.
+/// adaptivity, using the multi-domain method.
 //====================================================================
 int main()
 {
-
-
  // Set the direction of gravity
  Global_Physical_Variables::Direction_of_gravity[0] = 0.0;
  Global_Physical_Variables::Direction_of_gravity[1] = -1.0;

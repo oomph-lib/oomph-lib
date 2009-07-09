@@ -21,10 +21,10 @@ cp ../*partition.dat .
 
 #----------------------------------------------------------------------
 
-# Validation for circular driven cavity (TH, 2 problems)
-#-------------------------------------------------------
+# Validation for circular driven cavity (TH and CR problems)
+#-----------------------------------------------------------
 mkdir RESLT
-echo "Running adaptive circular driven cavity (TH, 2 problems) validation "
+echo "Running adaptive circular driven cavity (TH, CR problems) validation "
 $MPI_RUN_COMMAND ../circular_driven_cavity > OUTPUT_circular_driven_cavity
 echo "done"
 echo " " >> validation.log

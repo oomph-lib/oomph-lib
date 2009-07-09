@@ -18,7 +18,7 @@
 //LIC// Lesser General Public License for more details.
 //LIC// 
 //LIC// You should have received a copy of the GNU Lesser General Public
-//LIC// License along with this library; if not, write to the Free Software
+//LIC// License along with thi library; if not, write to the Free Software
 //LIC// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 //LIC// 02110-1301  USA.
 //LIC// 
@@ -51,42 +51,51 @@
 
 namespace oomph
 {
+
 //======================================================================
-// Namespace for "global" multi-domain functions
+// Namespace for global multi-domain functions
 //======================================================================
 namespace Multi_domain_functions
  {
+  // Lookup scheme for whether an element's integration point
+  // has had an external element assigned to it
+  extern Vector<Vector<unsigned> > External_element_located;
 
   // List of all Vectors used by the external storage routines 
   
   /// \short Vector of (local) coordinates at integration points of
   /// elements on current processor
+  extern Vector<double> Local_zetas;
+
+  /// \short Vector of (local) coordinates at integration points of
+  /// elements received from elsewhere
   extern Vector<double> Zetas;
 
   /// \short Vector of the dimension of the element on current processor
+  extern Vector<unsigned> Local_zeta_dim;
+
+  /// \short Vector of the dimension of the element received from elsewhere
   extern Vector<unsigned> Zeta_dim;
 
-  /// \short Vector to indicate which processor a coordinate is located on
+  /// \short Vector to indicate locally which processor a coordinate 
+  /// has been located on
   extern Vector<int> Found_zeta;
-
-  /// \short Vector of any elements found locally by current processor
-  extern Vector<FiniteElement*> Found_element;
 
   /// \short Vector of local coordinates within any elements found
   /// locally by current processor
   extern Vector<Vector<double> > Found_ss;
 
-  /// \short Global vector which combines all Found_zeta vectors on
-  /// every processor
-  extern Vector<int> All_found_zeta;
-
   /// \short Vector to indicate (on another process) whether a
-  /// located element should be newly created (2), already exists (1), or
-  /// is not on the current process at all (0)
+  /// located element should be newly created (New), already exists (Exists), 
+  /// or is not on the current process at all (Not_found)
   extern Vector<unsigned> Located_element;
 
   /// \short Vector of the local coordinates for each entry in Located_element
   extern Vector<double> Located_coord;
+
+  /// \short Vector for current processor which indicates when an external
+  /// halo element (and subsequent nodes) should be created
+  extern Vector<unsigned> Located_zetas;
 
   /// \short Vector of doubles to be sent from another processor
   extern Vector<double> Double_values;
@@ -94,40 +103,49 @@ namespace Multi_domain_functions
   /// \short Vector of unsigneds to be sent from another processor
   extern Vector<unsigned> Unsigned_values;
 
-  // Counters for arrays used in the external storage routines
+  // Counters for each of the above arrays
+
+  /// \short Double_values
   extern unsigned Count_double_values;
+
+  /// \short Unsigned_values
   extern unsigned Count_unsigned_values;
+
+  /// \short Located_coord
   extern unsigned Count_located_coord;
-  extern unsigned Count_found_elements;
+
+  /// \short Local_zeta_dim
+  extern unsigned Count_local_zeta_dim;
+
+  /// \short Zeta_dim
   extern unsigned Count_zeta_dim;
+
+  /// \short Local_zetas
+  extern unsigned Count_local_zetas;
+ 
+  /// \short Zetas
   extern unsigned Count_zetas;
 
-  // The following Vector of Vectors (of size Nproc) store each required 
-  // set of the above information from each process required to create 
-  // external (halo) elements and nodes
-  extern Vector<Vector<unsigned> > All_located_zetas;
-  extern Vector<Vector<double> > All_located_coord;
-  extern Vector<Vector<double> > All_double_values;
-  extern Vector<Vector<unsigned> > All_unsigned_values;
-
-  // These Vectors help to count through the above Vectors of Vectors
-  extern Vector<unsigned> All_count_double_values;
-  extern Vector<unsigned> All_count_located_coord;
-  extern Vector<unsigned> All_count_unsigned_values;
-
-
+  /// \short Enumerators for location procedure
+  enum { New, Exists, Not_found };
 
   /// Default parameters for binning method to be passed to MeshAsGeomObject
 
-  /// \short Bool to tell the MeshAsGeomObject to setup bins again
+  /// \short Bool to tell the MeshAsGeomObject of a change in default params
   /// (should only be used in conjunction with a change from default N*_bin;
   ///  the minimum and maximum of the Mesh can also be specified)
-  extern bool Setup_bins_again;
+  extern bool Change_from_default_bin_parameters;
 
-  /// \short Number of bins along each dimension in binning method in
-  /// set_external_storage(). Default value of 10.
+  /// \short Number of bins in the first dimension in binning method in
+  /// setup_multi_domain_interaction(). Default value of 10.
   extern unsigned Nx_bin;
+
+  /// \short Number of bins in the second dimension in binning method in
+  /// setup_multi_domain_interaction(). Default value of 10.
   extern unsigned Ny_bin;
+
+  /// \short Number of bins in the third dimension in binning method in
+  /// setup_multi_domain_interaction(). Default value of 10.
   extern unsigned Nz_bin;
 
   /// \short Minimum and maximum coordinates for
@@ -136,11 +154,23 @@ namespace Multi_domain_functions
   /// No defaults; can be set by user if they know their mesh's coordinates
   /// (the MeshAsGeomObject calculates these values by default based
   ///  upon the mesh itself; see MeshAsGeomObject::get_max_and_min_coords(...))
+
+  /// \short Minimum coordinate in first dimension
   extern double X_min;
+
+  /// \short Maximum coordinate in first dimension
   extern double X_max;
+
+  /// \short Minimum coordinate in second dimension
   extern double Y_min;
+
+  /// \short Maximum coordinate in second dimension
   extern double Y_max;
+
+  /// \short Minimum coordinate in third dimension
   extern double Z_min;
+
+  /// \short Maximum coordinate in third dimension
   extern double Z_max;
 
   /// \short Percentage offset to add to each extreme of the bin structure.
@@ -155,103 +185,143 @@ namespace Multi_domain_functions
   /// \short Boolean to indicate whether to doc timings or not.
   extern bool Doc_timings;
 
-  /// \short Boolean to indicate whether to output info during
-  ///        set_external_storage routines
-  extern bool Shut_up;
+  /// \short Boolean to indicate whether to document info (to screen)
+  ///        during setup_multi_domain_interaction() routines
+  extern bool Doc_stats;
 
-  /// Set the source element and source functions for the problem
-  /// This is a two-mesh example where mesh_pt(0) and mesh_pt(1)
+#ifdef OOMPH_HAS_MPI
+  /// \short Boolean to indicate when to check for duplicate data
+  ///        between the external halo storage schemes  
+  extern bool Check_for_duplicates;
+#endif
+
+  // Functions for multi-domain method
+
+  /// \short Set up the multi-domain interactions for the specified problem
+  /// This is a two-mesh example where first_mesh_pt and second_mesh_pt
   /// occupy the same physical space and are populated by
-  /// ELEMENT_0 and ELEMENT_1 respectively
-  /// The interaction indices default to zero
-  template<class ELEMENT_0,class ELEMENT_1,unsigned EL_0_DIM,unsigned EL_1_DIM>
-   void set_sources(Problem* problem_pt, 
-                    Mesh* const &first_mesh_pt, Mesh* const &second_mesh_pt, 
-                    const unsigned& first_interaction=0, 
-                    const unsigned& second_interaction=0);
+  /// ELEMENT_0 and ELEMENT_1 respectively, and are combined to solve
+  /// a single problem.  The interaction indices default to zero
+  template<class ELEMENT_0,class ELEMENT_1>
+   void setup_multi_domain_interactions(Problem* problem_pt, 
+                                        Mesh* const &first_mesh_pt,
+                                        Mesh* const &second_mesh_pt,
+                                        const unsigned& first_interaction=0,
+                                        const unsigned& second_interaction=0);
 
-  /// Helper function to set the external storage structures
-  /// When this is called the ELEMENTs should be in the current mesh
-  /// and the EXT_ELEMENTs should be in external_mesh_pt; the GEOM_OBJECT
-  /// should be the objects that are used to make the MeshAsGeomObject
-  /// (in some cases this will be the same as EXT_ELEMENT)
-  /// The interaction index defaults to zero
-  /// The final default argument is a face mesh created from the external
-  /// mesh, which needs to be set in FSI problems
-  template<class ELEMENT,class EXT_ELEMENT,class GEOM_OBJECT,
-   unsigned EL_DIM_LAG,unsigned EL_DIM_EUL>
-   void set_external_storage(Problem* problem_pt,
-                             Mesh* const &mesh_pt,
-                             Mesh* const &external_mesh_pt,
-                             const unsigned& interaction_index=0,
-                             Mesh* const &external_face_mesh_pt=0);
+ /// \short Function to set up the multi-domain interactions for 
+ /// non-FSI problems involving \c ElementWithExternalElements. 
+ /// - \c mesh_pt points to the mesh of ElemenWithExternalElements for which
+ ///   the interaction is set up. 
+ ///   \n\n
+ /// - \c external_mesh_pt points to the mesh that contains the elements
+ ///   of type EXT_ELEMENT that provide the "source" for the
+ ///   \c ElementWithExternalElements.
+ /// - The interaction_index parameter defaults to zero and must be otherwise
+ ///   set by the user if there is more than one mesh that provides sources
+ ///   for the Mesh pointed to by mesh_pt
+ template<class EXT_ELEMENT, unsigned EL_DIM>
+   void setup_multi_domain_interaction(Problem* problem_pt,
+                                       Mesh* const &mesh_pt,
+                                       Mesh* const &external_mesh_pt,
+                                       const unsigned& interaction_index=0);
+
+ /// \short Function to set up the multi-domain interactions for 
+ /// FSI problems (involving \c ElementWithExternalElements). 
+ /// - \c mesh_pt points to the mesh of ElemenWithExternalElements for which
+ ///   the interaction is set up. 
+ /// - \c external_mesh_pt points to the mesh that contains the elements
+ ///   of type EXT_ELEMENT that provide the "source" for the
+ ///   \c ElementWithExternalElements.
+ /// - \c external_face_mesh_pt points to the face mesh created from
+ ///   the \c external_mesh_pt which is of the same dimension as \c mesh_pt.
+ ///   The elements contained in \c external_face_mesh_pt are of type 
+ ///   FACE_ELEMENT_GEOM_OBJECT 
+ /// - The interaction_index parameter defaults to zero and must be otherwise
+ ///   set by the user if there is more than one mesh that provides sources
+ ///   for the Mesh pointed to by mesh_pt
+ template<class EXT_ELEMENT, class FACE_ELEMENT_GEOM_OBJECT, unsigned EL_DIM>
+   void setup_multi_domain_interaction(Problem* problem_pt,
+                                       Mesh* const &mesh_pt,
+                                       Mesh* const &external_mesh_pt,
+                                       Mesh* const &external_face_mesh_pt,
+                                       const unsigned& interaction_index=0);
+
+ /// \short Auxiliary function which is called from the two preceding
+ /// functions 
+ template<class EXT_ELEMENT, class GEOM_OBJECT,
+  unsigned EL_DIM_LAG, unsigned EL_DIM_EUL>
+  void aux_setup_multi_domain_interaction(Problem* problem_pt,
+                                          Mesh* const &mesh_pt,
+                                          Mesh* const &external_mesh_pt,
+                                          const unsigned& interaction_index,
+                                          Mesh* const &external_face_mesh_pt=0);
 
 #ifdef OOMPH_HAS_MPI
   /// \short A helper function to remove duplicate data that 
   /// are created due to coincident nodes between external halo elements 
   /// on different processors
-  void remove_duplicate_data(Mesh* const &mesh_pt);
+  void remove_duplicate_data(Problem* problem_pt, Mesh* const &mesh_pt);
 #endif
 
-  /// Helper function to add external data from source elements at each
-  /// integration point of the specified mesh's elements
+  /// \short Helper function to add external data from source elements
+  /// at each integration point of the specified mesh's elements
   void add_external_data_from_source_elements
    (Mesh* const &mesh_pt,const unsigned& interaction_index);
 
-  /// Helper function to broadcast local zeta coordinates from current process
-  void broadcast_local_zeta(int& iproc, Mesh* const &mesh_pt);
-
-  /// Helper function to perform "parallel" locate zeta on each process and
-  /// return results in correct format to create external halo(ed) elements
-  /// and nodes as necessary
+  /// \short Helper function to locate "local" zeta coordinates
   template<class GEOM_OBJECT,unsigned EL_DIM_LAG,unsigned EL_DIM_EUL>
-   void simultaneous_locate_zeta(int& iproc,
-                                 Mesh* const &external_mesh_pt,
-                                 Problem* problem_pt,
-                                 MeshAsGeomObject<EL_DIM_LAG,EL_DIM_EUL,
-                                 GEOM_OBJECT >* &mesh_geom_obj_pt);
+   void locate_zeta_for_local_coordinates
+   (Mesh* mesh_pt,Mesh* const &external_mesh_pt,Problem* problem_pt,
+    MeshAsGeomObject<EL_DIM_LAG,EL_DIM_EUL,GEOM_OBJECT >* &mesh_geom_obj_pt,
+    const unsigned& interaction_index);
 
 #ifdef OOMPH_HAS_MPI
-  /// Helper function to prepare and send external haloed information from
-  /// non-loop process to loop process to create external halo information
-  void prepare_and_send_external_element_info(int& iproc,
-                                              Mesh* const &external_mesh_pt,
-                                              Problem* problem_pt);
-#endif
+  /// \short Helper function to send any "missing" zeta coordinates to
+  /// the next process and receive any coordinates from previous process
+  void send_and_receive_missing_zetas(Problem* problem_pt);
 
-  /// Helper function to create external (halo) elements on the loop process
-  /// based on the information received from each locate_zeta call on others
-  template<class ELEMENT,class EXT_ELEMENT,class GEOM_OBJECT,
-   unsigned EL_DIM_LAG,unsigned EL_DIM_EUL>
-   void create_external_elements(int& iproc, Mesh* const &mesh_pt,
-                                 Mesh* const &external_mesh_pt,
-                                 Problem* problem_pt,
-                                 const unsigned& interaction_index);
+  /// \short Helper function to locate these "missing" zeta coordinates
+  template<class GEOM_OBJECT,unsigned EL_DIM_LAG,unsigned EL_DIM_EUL>
+   void locate_zeta_for_missing_coordinates
+   (int& iproc,Mesh* const &external_mesh_pt,Problem* problem_pt,
+    MeshAsGeomObject<EL_DIM_LAG,EL_DIM_EUL,GEOM_OBJECT >* &mesh_geom_obj_pt);
 
-#ifdef OOMPH_HAS_MPI
+  /// \short Helper function to send back any located information
+  void send_and_receive_located_info(int& iproc, Mesh* const &external_mesh_pt,
+                                     Problem* problem_pt);
+
+  /// \short Helper function to create external (halo) elements on the loop 
+  /// process based on the info received in send_and_received_located_info
+  template<class EXT_ELEMENT,unsigned EL_DIM_LAG,unsigned EL_DIM_EUL>
+   void create_external_halo_elements(int& iproc, Mesh* const &mesh_pt,
+                                      Mesh* const &external_mesh_pt,
+                                      Problem* problem_pt,
+                                      const unsigned& interaction_index);
+
   // Helper functions for external haloed node identification
 
-  // Helper function to add external haloed nodes, including any masters
+  /// \short Helper function to add external haloed nodes, inc. masters
   void add_external_haloed_node_to_storage(int& iproc, Node* nod_pt,
                                            Problem* problem_pt,
                                            Mesh* const &external_mesh_pt,
                                            int& n_cont_inter_values,
                                            FiniteElement* f_el_pt);
 
-  // Helper function to add external haloed node that is not a master
+  /// \short Helper function to add external haloed node that is not a master
   void add_external_haloed_node_helper(int& iproc, Node* nod_pt,
                                        Problem* problem_pt,
                                        Mesh* const &external_mesh_pt,
                                        int& n_cont_inter_values,
                                        FiniteElement* f_el_pt);
 
-  // Helper function to add external haloed node that is a master
+  /// \short Helper function to add external haloed node that is a master
   void add_external_haloed_master_node_helper(int& iproc,Node* master_nod_pt,
-                                              Node* nod_pt,Problem* problem_pt,
+                                              Problem* problem_pt,
                                               Mesh* const &external_mesh_pt,
                                               int& n_cont_inter_values);
 
-  /// Helper function to get the required nodal information from an
+  /// \short Helper function to get the required nodal information from an
   /// external haloed node so that a fully-functional external halo
   /// node (and therefore element) can be created on the receiving process
   void get_required_nodal_information_helper(int& iproc, Node* nod_pt,
@@ -260,16 +330,16 @@ namespace Multi_domain_functions
                                              int& n_cont_inter_values,
                                              FiniteElement* f_el_pt);
 
-  /// Helper function to get the required master nodal information from an
-  /// external haloed master node so that a fully-functional external halo
+  /// \short Helper function to get the required master nodal information from
+  /// an external haloed master node so that a fully-functional external halo
   /// master node (and possible element) can be created on the receiving proc
   void get_required_master_nodal_information_helper
-   (int& iproc, Node* master_nod_pt, Node* nod_pt, Problem* problem_pt,
+   (int& iproc, Node* master_nod_pt, Problem* problem_pt,
     Mesh* const &external_mesh_pt, int& n_cont_inter_values);
 
-  /// The following are the equivalent helper functions for external halo nodes
+  // Helper functions for external halo node identification
 
-  /// Helper function to add external halo nodes, including any masters,
+  /// \short Helper function to add external halo nodes, including any masters,
   /// based on information received from the haloed process
   template<class EXT_ELEMENT>
    void add_external_halo_node_to_storage(Node* &new_nod_pt,
@@ -280,7 +350,7 @@ namespace Multi_domain_functions
                                           int& n_cont_inter_values,
                                           Problem* problem_pt);
 
-  /// Helper function to add external halo node that is not a master
+  /// \short Helper function to add external halo node that is not a master
   template<class EXT_ELEMENT>
    void add_external_halo_node_helper(Node* &new_nod_pt,
                                       Mesh* const &external_mesh_pt,
@@ -290,7 +360,7 @@ namespace Multi_domain_functions
                                       int& n_cont_inter_values,
                                       Problem* problem_pt);
 
-  /// Helper function to add external halo node that is a master
+  /// \short Helper function to add external halo node that is a master
   template<class EXT_ELEMENT>
    void add_external_halo_master_node_helper(Node* &new_master_nod_pt,
                                              Node* &new_nod_pt,
@@ -301,8 +371,8 @@ namespace Multi_domain_functions
                                              Problem* problem_pt);
 
 
-  /// Helper function which constructs a new external halo node (on an element)
-  /// with the required information sent from the haloed process
+  /// \short Helper function which constructs a new external halo node 
+  /// (on an element) with the information sent from the haloed process
   template<class EXT_ELEMENT>
    void construct_new_external_halo_node_helper(Node* &new_nod_pt,
                                                 unsigned& loc_p,
@@ -311,8 +381,8 @@ namespace Multi_domain_functions
                                                 Mesh* const &external_mesh_pt,
                                                 Problem* problem_pt);
 
-  /// Helper function which constructs a new external halo master node
-  /// with the required information sent from the haloed process
+  /// \short Helper function which constructs a new external halo master node
+  /// with the information sent from the haloed process
   template<class EXT_ELEMENT>
    void construct_new_external_halo_master_node_helper
    (Node* &new_master_nod_pt,Node* &nod_pt,unsigned& loc_p,
@@ -333,48 +403,163 @@ namespace Multi_domain_functions
 /// Each time this routine is called it needs to start from scratch
 /// with new external halo(ed) elements and nodes, and add their data
 /// as external data.
-/// This is an example for a two-domain problem where the meshes occupy
-/// the same physical space.
+/// This is an example for a single two-domain problem where the 
+/// meshes occupy the same physical space.
 //========================================================================
- template<class ELEMENT_0,class ELEMENT_1,unsigned EL_0_DIM,unsigned EL_1_DIM>
-  void Multi_domain_functions::set_sources(Problem* problem_pt,
-                                           Mesh* const &first_mesh_pt,
-                                           Mesh* const &second_mesh_pt,
-                                           const unsigned& first_interaction,
-                                           const unsigned& second_interaction)
+ template<class ELEMENT_0,class ELEMENT_1>
+  void Multi_domain_functions::setup_multi_domain_interactions
+  (Problem* problem_pt,Mesh* const &first_mesh_pt, Mesh* const &second_mesh_pt,
+   const unsigned& first_interaction, const unsigned& second_interaction)
   {
+   // Storage for number of processors, current process and communicator
+   OomphCommunicator* comm_pt=problem_pt->communicator_pt();
+   int n_proc=comm_pt->nproc();
+
    // Flush all the current external halo(ed) element and node storage
    first_mesh_pt->flush_all_external_storage();
+   second_mesh_pt->flush_all_external_storage();
 
-   // Call set_external_storage in both directions
-   // (NB the GEOM_OBJECT and the EXT_ELEMENT should be the same in this case)
-   set_external_storage<ELEMENT_0,ELEMENT_1,ELEMENT_1,EL_0_DIM,EL_1_DIM>
-    (problem_pt,first_mesh_pt,second_mesh_pt,first_interaction);
-
-   set_external_storage<ELEMENT_1,ELEMENT_0,ELEMENT_0,EL_1_DIM,EL_0_DIM>
-    (problem_pt,second_mesh_pt,first_mesh_pt,second_interaction);
-
-   // Check for and remove duplicate equation numbers between external halo
-   // storage across different processors
-   // NB this only needs to be called in parallel
-#ifdef OOMPH_HAS_MPI
-   if (MPI_Helpers::Nproc!=1)
+   // Extract the element dimensions from the first element of each mesh
+   unsigned el_dim_first=0;
+   if (first_mesh_pt->nelement() > 0)
     {
-     oomph_info << "Duplicate removal, number of global equation numbers:"
-                << problem_pt->assign_eqn_numbers(false) << std::endl;
+     el_dim_first=
+      dynamic_cast<ELEMENT_0*>(first_mesh_pt->element_pt(0))->dim();
+    }
+   unsigned el_dim_second=0;
+   if (second_mesh_pt->nelement() > 0)
+    {
+     el_dim_second=
+      dynamic_cast<ELEMENT_1*>(second_mesh_pt->element_pt(0))->dim();
+    }
 
-     remove_duplicate_data(first_mesh_pt);
-     remove_duplicate_data(second_mesh_pt);
+   // Need to do an Allreduce
+#ifdef OOMPH_HAS_MPI
+   if (n_proc > 1)
+    {
+     unsigned el_dim_first_reduce;
+     MPI_Allreduce(&el_dim_first,&el_dim_first_reduce,1,MPI_INT,MPI_MAX,
+                   comm_pt->mpi_comm());
+     el_dim_first=el_dim_first_reduce;
+
+     unsigned el_dim_second_reduce;
+     MPI_Allreduce(&el_dim_second,&el_dim_second_reduce,1,MPI_INT,MPI_MAX,
+                   comm_pt->mpi_comm());
+     el_dim_second=el_dim_second_reduce;
+    }
+#endif
+
+   // Check the dimensions are the same!
+   if (el_dim_first!=el_dim_second)
+    {
+     std::ostringstream error_stream;
+     error_stream << "The elements within the two meshes do not\n"
+                  << "have the same dimension, so the multi-domain\n"
+                  << "method will not work.\n"
+                  << "first mesh: " << el_dim_first 
+                  << ", second mesh: " << el_dim_second << "\n";
+     throw OomphLibError
+      (error_stream.str(),
+       "Multi_domain_functions::setup_multi_domain_interactions(...)",
+       OOMPH_EXCEPTION_LOCATION);
+    }
+
+   // Call setup_multi_domain_interaction in both directions
+   // Don't check for duplicates after setting the first interaction
+   // Wrapper for element dimension
+   if (el_dim_first==1)
+    {
+     Check_for_duplicates=false;
+     setup_multi_domain_interaction<ELEMENT_1,1>
+      (problem_pt,first_mesh_pt,second_mesh_pt,first_interaction);
+
+     Check_for_duplicates=true;
+     setup_multi_domain_interaction<ELEMENT_0,1>
+      (problem_pt,second_mesh_pt,first_mesh_pt,second_interaction);
+    }
+   else if (el_dim_first==2)
+    {
+     oomph_info << "first_interaction=" << first_interaction << std::endl;
+     Check_for_duplicates=false;
+     setup_multi_domain_interaction<ELEMENT_1,2>
+      (problem_pt,first_mesh_pt,second_mesh_pt,first_interaction);
+
+     Check_for_duplicates=true;
+     setup_multi_domain_interaction<ELEMENT_0,2>
+      (problem_pt,second_mesh_pt,first_mesh_pt,second_interaction);
+    }
+   else if (el_dim_first==3)
+    {
+     Check_for_duplicates=false;
+     setup_multi_domain_interaction<ELEMENT_1,3>
+      (problem_pt,first_mesh_pt,second_mesh_pt,first_interaction);
+
+     Check_for_duplicates=true;
+     setup_multi_domain_interaction<ELEMENT_0,3>
+      (problem_pt,second_mesh_pt,first_mesh_pt,second_interaction);
     }
    else
     {
-     if (!Shut_up)
-      {
-       oomph_info << "INFO: No need to remove duplicate equation numbers"
-                  << " on a single-process run, continuing" << std::endl;
-      }
+     std::ostringstream error_stream;
+     error_stream << "The elements within the two meshes have a\n"
+                  << "dimension not equal to 1, 2 or 3.\n"
+                  << "The multi-domain method will not work in this case.\n"
+                  << "The dimension is: " << el_dim_second << "\n";
+     throw OomphLibError
+      (error_stream.str(),
+       "Multi_domain_functions::setup_multi_domain_interactions(...)",
+       OOMPH_EXCEPTION_LOCATION);
     }
-#endif
+
+  }
+
+
+//========================================================================
+/// Setup multi-domain interactions for two meshes occupying
+/// the same physical space; 
+/// - \c mesh_pt points to the mesh of ElementWithExternalElements
+/// - \c external_mesh_pt contains the "sources" for these
+///      ElementWithExternalElements
+//========================================================================
+ template<class EXT_ELEMENT,unsigned EL_DIM>
+  void Multi_domain_functions::setup_multi_domain_interaction
+  (Problem* problem_pt, Mesh* const &mesh_pt, Mesh* const &external_mesh_pt,
+   const unsigned& interaction_index)
+  {
+   // Call the auxiliary function with GEOM_OBJECT=EXT_ELEMENT
+   // and EL_DIM_EUL=EL_DIM_LAG=EL_DIM
+   aux_setup_multi_domain_interaction<EXT_ELEMENT,EXT_ELEMENT,EL_DIM,EL_DIM>
+    (problem_pt,mesh_pt,external_mesh_pt,interaction_index);
+  }
+
+
+//========================================================================
+/// Setup multi-domain interactions for two meshes where one is of
+/// a higher dimension and has an associated mesh for the face where it
+/// interacts with the other mesh
+/// - \c mesh_pt points to the mesh of ElementWithExternalElements
+/// - \c external_mesh_pt points to the mesh that contains the elements
+///   of type EXT_ELEMENT that provide the "source" for the
+///   \c ElementWithExternalElements.
+/// - \c external_face_mesh_pt points to the face mesh created from
+///   the \c external_mesh_pt which is of the same dimension as \c mesh_pt.
+///   The elements contained in \c external_face_mesh_pt are of type 
+///   FACE_ELEMENT_GEOM_OBJECT 
+//========================================================================
+ template<class EXT_ELEMENT,class FACE_ELEMENT_GEOM_OBJECT,unsigned EL_DIM>
+  void Multi_domain_functions::setup_multi_domain_interaction
+  (Problem* problem_pt, Mesh* const &mesh_pt, Mesh* const &external_mesh_pt,
+   Mesh* const &external_face_mesh_pt, const unsigned& interaction_index)
+  {
+   // Bulk elements must be external elements in this case
+   Use_bulk_element_as_external=true;
+
+   // Call the auxiliary routine with GEOM_OBJECT=FACE_ELEMENT_GEOM_OBJECT
+   // and EL_DIM_LAG=EL_DIM-1, EL_DIM_EUL=EL_DIM
+   aux_setup_multi_domain_interaction
+    <EXT_ELEMENT,FACE_ELEMENT_GEOM_OBJECT,EL_DIM-1,EL_DIM>
+    (problem_pt,mesh_pt,external_mesh_pt,
+     interaction_index,external_face_mesh_pt);
   }
 
 
@@ -389,17 +574,24 @@ namespace Multi_domain_functions
 /// or two meshes interact along some boundary of the external mesh,
 /// represented by a "face mesh", such as an FSI problem.
 //========================================================================
- template<class ELEMENT,class EXT_ELEMENT,class GEOM_OBJECT,
+ template<class EXT_ELEMENT,class GEOM_OBJECT,
   unsigned EL_DIM_LAG,unsigned EL_DIM_EUL>
-  void Multi_domain_functions::set_external_storage
+  void Multi_domain_functions::aux_setup_multi_domain_interaction
   (Problem* problem_pt, Mesh* const &mesh_pt, Mesh* const &external_mesh_pt,
    const unsigned& interaction_index, Mesh* const &external_face_mesh_pt)
   {
-   double t_start=0.0;
-   double t_end=0.0;
-   double t_set=0.0;
-   double t_locate=0.0;
-   double t_create=0.0;
+#ifdef OOMPH_HAS_MPI
+   // Storage for number of processors
+   int n_proc=problem_pt->communicator_pt()->nproc();
+#endif
+
+   // Timing
+   double t_start=0.0; double t_end=0.0; double t_local=0.0;
+   double t_set=0.0; double t_locate=0.0; double t_spiral_start=0.0;
+#ifdef OOMPH_HAS_MPI
+   double t_loop_start=0.0; double t_sendrecv=0.0; double t_missing=0.0;
+   double t_send_info=0.0; double t_create_halo=0.0;
+#endif
 
    if (Doc_timings) 
     {
@@ -420,7 +612,7 @@ namespace Multi_domain_functions
                       << "external mesh is a SolidMesh." << std::endl;
        OomphLibWarning(
         warning_stream.str(),
-        "Multi_domain_functions::set_external_storage(...)",
+        "Multi_domain_functions::aux_setup_multi_domain_interaction(...)",
         OOMPH_EXCEPTION_LOCATION);
       }
     }
@@ -434,16 +626,18 @@ namespace Multi_domain_functions
     {
      // Set the geometric object from the external mesh
      mesh_geom_obj_pt=new MeshAsGeomObject<EL_DIM_LAG,EL_DIM_EUL,GEOM_OBJECT >
-      (external_mesh_pt);
+      (external_mesh_pt,problem_pt->communicator_pt(),
+       Change_from_default_bin_parameters);
     }
    else
     {
      // Set the geometric object from the external face mesh argument
      mesh_geom_obj_pt=new MeshAsGeomObject<EL_DIM_LAG,EL_DIM_EUL,GEOM_OBJECT >
-      (external_face_mesh_pt);
+      (external_face_mesh_pt,problem_pt->communicator_pt(),
+       Change_from_default_bin_parameters);
     }
 
-   if (Setup_bins_again)
+   if (Change_from_default_bin_parameters)
     {
      // New values for number of bins in each direction
      mesh_geom_obj_pt->nx_bin()=Nx_bin;
@@ -463,57 +657,207 @@ namespace Multi_domain_functions
        mesh_geom_obj_pt->z_min()=Z_min-Percentage_offset*(Z_max-Z_min);;
        mesh_geom_obj_pt->z_max()=Z_max+Percentage_offset*(Z_max-Z_min);;
       }
-     
-     // (Re-)create the bin structure
-     mesh_geom_obj_pt->create_bins_of_objects();
 
+     // Create the bin structure
+     mesh_geom_obj_pt->create_bins_of_objects();
     }
 
    if (Doc_timings) 
     {
      t_set=TimingHelpers::timer();
-     oomph_info << std::endl << "CPU for bin creation: "
+     oomph_info << "CPU for bin creation: "
                 << t_set-t_start << std::endl;
     }
 
-   // Loop over processes
-   for (int iproc=0;iproc<MPI_Helpers::Nproc;iproc++)
+   // Total number of integration points
+   unsigned tot_int=0;
+
+   // Loop over (this processor's) elements and set lookup array
+   unsigned n_element=mesh_pt->nelement();
+   External_element_located.resize(n_element);
+   for (unsigned e=0;e<n_element;e++)
     {
-     // Broadcast the local zeta coordinates to all processors
-     broadcast_local_zeta(iproc, mesh_pt);// zetas, zeta_dim, count_zeta_dim);
-
-     // Simultaneously perform locate_zeta on each process (including local)
-     simultaneous_locate_zeta<GEOM_OBJECT,EL_DIM_LAG,EL_DIM_EUL>
-      (iproc, external_mesh_pt, problem_pt, mesh_geom_obj_pt);
-
-     if (Doc_timings)
+     ElementWithExternalElement *el_pt=
+      dynamic_cast<ElementWithExternalElement*>(mesh_pt->element_pt(e));
+     External_element_located[e].resize(0);
+#ifdef OOMPH_HAS_MPI
+     if (!el_pt->is_halo())
+#endif
       {
-       t_locate=TimingHelpers::timer();
-       oomph_info << std::endl << "CPU for element location: "
-                  << t_locate-t_set << std::endl;
+       //We need to allocate storage for the external elements
+       //within the element. Memory will actually only be 
+       //allocated the first time this function is called for 
+       //each element, or if the number of interactions or integration
+       //points within the element has changed.
+       el_pt->initialise_external_element_storage();
+
+       unsigned n_intpt=el_pt->integral_pt()->nweight();
+       for (unsigned ipt=0;ipt<n_intpt;ipt++)
+        {
+         External_element_located[e].push_back(0);
+         tot_int++;
+        }
+      }
+    }
+
+   /// Loop over "spirals" from here instead; increment the "level"
+   /// and pass it in to the relevant locate_* functions
+   unsigned n_max_level=mesh_geom_obj_pt->nx_bin();
+   if (EL_DIM_LAG>=2)
+    {
+     if (mesh_geom_obj_pt->ny_bin() > n_max_level) 
+      {
+       n_max_level=mesh_geom_obj_pt->ny_bin();
+      }
+    }
+   if (EL_DIM_LAG==3)
+    {
+     if (mesh_geom_obj_pt->nz_bin() > n_max_level) 
+      {
+       n_max_level=mesh_geom_obj_pt->nz_bin();
+      }
+    }
+
+
+   // Loop over "spirals/levels" away from the current position
+   for (unsigned i_level=0;i_level<n_max_level;i_level++)
+    {
+     // Record time at start of spiral loop
+     if (Doc_timings) 
+      {
+       t_spiral_start=TimingHelpers::timer();
       }
 
-     // Prepare and send information from non-loop processes to the loop
-     // process in order to create external (halo) elements.
-     // This routine is only necessary in a parallel job.
+     // Tell MeshAsGeomObject the current spiral level
+     mesh_geom_obj_pt->current_spiral_level()=i_level;
+
+     // Perform locate_zeta locally first!
+     locate_zeta_for_local_coordinates(mesh_pt,external_mesh_pt,
+                                       mesh_geom_obj_pt,interaction_index);
+
+     if (Doc_stats)
+      {
+       oomph_info << "At level " << i_level << " percent discovered so far = " 
+                  << 100.0*double(tot_int-Count_local_zeta_dim)/double(tot_int)
+                  << " (on local processor) " << std::endl;
+      }
+
+     if (Doc_timings) 
+      {
+       t_local=TimingHelpers::timer();
+       oomph_info << "CPU for local location of zeta coordinate: "
+                  << t_local-t_spiral_start << std::endl;
+      }
+
+     // Now test whether anything needs to be broadcast elsewhere
+     // (i.e. were there any failures in the locate method above?)
+     // If there are, then the zetas for these failures need to be
+     // broadcast...
+
+     // local size of Zetas array
+     unsigned all_count_zetas=Count_local_zetas;
 #ifdef OOMPH_HAS_MPI
-     prepare_and_send_external_element_info
-      (iproc, external_mesh_pt, problem_pt);
+     // Only perform the reduction operation if there's more than one process
+     if (problem_pt->communicator_pt()->nproc() > 1)
+      {
+       MPI_Allreduce(&Count_local_zetas,&all_count_zetas,1,MPI_INT,MPI_SUM,
+                     problem_pt->communicator_pt()->mpi_comm());
+      }
+
+     // If the zetas array is not empty on any process 
+     // and the problem is distributed, we need to locate elsewhere
+     if ((all_count_zetas!=0) && (problem_pt->problem_has_been_distributed()))
+      {
+       // Loop over (number of processes - 1) starting from 1
+       // - this number is the "distance" from the current process to the
+       // process for which it is attempting to locate an element for the
+       // current set of zeta coordinates
+       for (int iproc=1;iproc<n_proc;iproc++)
+        {
+         // Record time at start of loop
+         if (Doc_timings) 
+          {
+           t_loop_start=TimingHelpers::timer();
+          }
+
+         // Send the zeta values you haven't found to the
+         // next process, receive from the previous process
+         send_and_receive_missing_zetas(problem_pt);
+
+         if (Doc_timings) 
+          {
+           t_sendrecv=TimingHelpers::timer();
+           oomph_info << "CPU for send/recv of remaining zeta coordinates: "
+                      << t_sendrecv-t_loop_start << std::endl;
+          }
+
+         // Perform the locate_zeta for the new set of zetas on this process
+         locate_zeta_for_missing_coordinates<GEOM_OBJECT,EL_DIM_LAG,EL_DIM_EUL>
+          (iproc,external_mesh_pt,problem_pt,mesh_geom_obj_pt);
+
+         if (Doc_timings) 
+          {
+           t_missing=TimingHelpers::timer();
+           oomph_info << "CPU for location of missing zeta coordinates: "
+                      << t_missing-t_sendrecv << std::endl;
+          }
+
+         // Send any located coordinates back to the correct process, and 
+         // prepare to send on to the next process if necessary
+         send_and_receive_located_info(iproc,external_mesh_pt,problem_pt);
+
+         if (Doc_timings) 
+          {
+           t_send_info=TimingHelpers::timer();
+           oomph_info << "CPU for send/recv of new element info: "
+                      << t_send_info-t_missing << std::endl;
+          }
+
+         // Create any located external halo elements on the current process
+         create_external_halo_elements<EXT_ELEMENT,EL_DIM_LAG,EL_DIM_EUL>
+          (iproc,mesh_pt,external_mesh_pt,problem_pt,interaction_index);
+
+         if (Doc_timings) 
+          {
+           t_create_halo=TimingHelpers::timer();
+           oomph_info << "CPU for local creation of external halo objects: "
+                      << t_create_halo-t_send_info << std::endl;
+          }
+        }
+      } // end if (all_count_zetas!=0)
 #endif
 
-     // Now create the external (halo) elements and nodes on the loop processor
-     create_external_elements
-      <ELEMENT,EXT_ELEMENT,GEOM_OBJECT,EL_DIM_LAG,EL_DIM_EUL>
-      (iproc, mesh_pt, external_mesh_pt, problem_pt, interaction_index);
-
-     if (Doc_timings)
+     // Output information about location of elements for integration points
+     if (Doc_stats)
       {
-       t_create=TimingHelpers::timer();
-       oomph_info << std::endl << "CPU for element creation: "
-                  << t_create-t_locate << std::endl;
+       oomph_info << "At level " << i_level << " percent discovered so far = " 
+                  << 100.0*double(tot_int-Count_local_zeta_dim)/double(tot_int)
+                  << " (on the other processors) " << std::endl;
       }
 
-    } // end loop over processes
+     // Do we have any further locating to do?
+     // Only perform the reduction operation if there's more than one process
+     all_count_zetas=Count_local_zetas;
+#ifdef OOMPH_HAS_MPI
+     if (problem_pt->communicator_pt()->nproc() > 1)
+      {
+       MPI_Allreduce(&Count_local_zetas,&all_count_zetas,1,MPI_INT,MPI_SUM,
+                     problem_pt->communicator_pt()->mpi_comm());
+      }
+#endif
+
+     /// If all_count_zetas is now zero then break out of the spirals loop
+     if (all_count_zetas==0) { break; }
+
+    } // end of "spirals" loop
+
+   // Doc timings if required
+   if (Doc_timings)
+    {
+     t_locate=TimingHelpers::timer();
+     oomph_info << "CPU for location and creation of all external elements: "
+                << t_locate-t_start << std::endl;
+    }
 
    // Delete the geometric object representing the mesh
    delete mesh_geom_obj_pt;
@@ -522,17 +866,51 @@ namespace Multi_domain_functions
    // external storage information
    clean_up();
 
+   // Check for and remove duplicate equation numbers between external halo
+   // storage across different processors
+   // NB this only needs to be called in parallel
+#ifdef OOMPH_HAS_MPI
+   if (Check_for_duplicates)
+    {
+     // Only necessary to do this on a multi-processor job
+     if (n_proc!=1)
+      {
+       if (Doc_stats)
+        {
+         oomph_info << "Duplicate removal, number of global equation numbers:"
+                    << problem_pt->assign_eqn_numbers(false) << std::endl;
+        }
+       else
+        {
+         problem_pt->assign_eqn_numbers(false);
+        }
+
+       // Must remove duplicates from both meshes in a two-way interaction
+       remove_duplicate_data(problem_pt,external_mesh_pt);
+       remove_duplicate_data(problem_pt,mesh_pt);
+      }
+     else
+      {
+       if (Doc_stats)
+        {
+         oomph_info << "INFO: No need to remove duplicate equation numbers"
+                    << " on a single-process run, continuing" << std::endl;
+        }
+      }
+    }
+#endif
+
    // Doc timings if required
    if (Doc_timings)
     {
      t_end=TimingHelpers::timer();
-     oomph_info << std::endl << "CPU for set_external_storage: "
+     oomph_info << "CPU for setup_multi_domain_interaction: "
                 << t_end-t_start << std::endl;
     }
 
 #ifdef OOMPH_HAS_MPI
    // Output information about external storage if required
-   if (!Shut_up)
+   if (Doc_stats)
     {
      // How many external elements does the external mesh have now?
      oomph_info << "------------------------------------------" << std::endl;
@@ -564,7 +942,7 @@ namespace Multi_domain_functions
                 << " external nodes (already on this process)." << std::endl;
 
      // How many elements does this submesh have for each of the processors?
-     for (int iproc=0;iproc<MPI_Helpers::Nproc;iproc++)
+     for (int iproc=0;iproc<n_proc;iproc++)
       {
        oomph_info << "----------------------------------------" << std::endl;
        oomph_info << "With process " << iproc << " there are "
@@ -595,185 +973,269 @@ namespace Multi_domain_functions
     }
 #endif
 
-  } // end of set_external_storage
+  } // end of aux_setup_multi_domain_interaction
 
-
-
-//======================================================================
-/// Performs locate_zeta procedure simultaneously on all processors, 
-/// on the coordinates (and dims) specified in zetas (zeta_dim) array.  
-/// Returns information required to create external (haloed) elements 
-/// and nodes as necessary for the problem.
-//======================================================================
+ //=====================================================================
+ /// locate zeta for current set of "local" coordinates
+ //=====================================================================
  template<class GEOM_OBJECT,unsigned EL_DIM_LAG,unsigned EL_DIM_EUL>
-  void Multi_domain_functions::simultaneous_locate_zeta
+  void Multi_domain_functions::locate_zeta_for_local_coordinates
+  (Mesh* const &mesh_pt, Mesh* const &external_mesh_pt,
+   MeshAsGeomObject<EL_DIM_LAG,EL_DIM_EUL,GEOM_OBJECT >* &mesh_geom_obj_pt,
+   const unsigned& interaction_index)
+  {
+   // Number of local elements
+   unsigned n_element=mesh_pt->nelement();
+
+   // Initialise counters and arrays
+   Local_zetas.resize(0);
+   Local_zeta_dim.resize(0);
+   Count_local_zetas=0;
+   Count_zetas=0;
+   Count_local_zeta_dim=0;
+   Count_zeta_dim=0;
+
+   // Loop over this processor's elements
+   for (unsigned e=0;e<n_element;e++)
+    {
+     ElementWithExternalElement *el_pt=
+      dynamic_cast<ElementWithExternalElement*>(mesh_pt->element_pt(e));
+#ifdef OOMPH_HAS_MPI
+     // Only visit non-halo elements
+     if (!el_pt->is_halo())
+#endif
+      {
+       // Find number of Gauss points and element dimension
+       unsigned n_intpt=el_pt->integral_pt()->nweight();
+       unsigned el_dim=el_pt->dim();
+       // Set storage for local and global coordinates
+       Vector<double> s_local(el_dim);
+       Vector<double> x_global(el_dim);
+
+       // Loop over integration points
+       for (unsigned ipt=0;ipt<n_intpt;ipt++)
+        {         
+         // Has this integration point been done yet?
+         if (External_element_located[e][ipt]==0)
+          {
+           // Get local coordinates
+           for (unsigned i=0;i<el_dim;i++)
+            {
+             s_local[i]=el_pt->integral_pt()->knot(ipt,i);
+            }
+           // Interpolate to global coordinates
+           el_pt->interpolated_zeta(s_local,x_global);
+
+           // Storage for geometric object and its local coordinates
+           GeomObject* sub_geom_obj_pt=0;
+           Vector<double> s_ext(el_dim);
+
+           // Perform locate_zeta locally for this coordinate
+           bool called_from_multi_domain=true;
+           mesh_geom_obj_pt->locate_zeta(x_global,sub_geom_obj_pt,s_ext,
+                                         called_from_multi_domain);
+
+           // Has the required element been located?
+           if (sub_geom_obj_pt!=0)
+            {
+             // The required element has been located
+             // The located coordinates have the same dimension as the bulk
+             FiniteElement* source_el_pt;
+             Vector<double> s_source(EL_DIM_EUL);
+
+             // Is the bulk element the actual external element?
+             if (!Use_bulk_element_as_external)
+              {
+               // Use the object directly
+               source_el_pt=dynamic_cast<FiniteElement*>(sub_geom_obj_pt);
+               s_source=s_ext;
+              }
+             else
+              {
+               // Cast to a FaceElement and use the bulk element
+               FaceElement* face_el_pt=
+                dynamic_cast<FaceElement*>(sub_geom_obj_pt);
+               source_el_pt=dynamic_cast<FiniteElement*>(face_el_pt->
+                                                         bulk_element_pt());
+               // Translate the returned local coords into the bulk element
+               face_el_pt->get_local_coordinate_in_bulk(s_ext,s_source);
+              }
+
+             // Check if it's a halo; if it is then the non-halo equivalent
+             // needs to be located from another processor
+#ifdef OOMPH_HAS_MPI
+             if (!source_el_pt->is_halo())
+#endif
+              {
+               // Set the external element pointer and local coordinates
+               el_pt->external_element_pt(interaction_index,ipt)=source_el_pt;
+               el_pt->external_element_local_coord(interaction_index,ipt)
+                =s_source;
+
+               // Set the lookup array to 1/true 
+               External_element_located[e][ipt]=1;
+
+               // Has this been used as a source for this element already?
+               bool source_already_used=false;
+               if (!source_already_used)
+                {
+                 // Add to the external mesh's external element storage
+                 bool added_external_element;
+                 added_external_element=
+                  external_mesh_pt->add_external_element_pt(source_el_pt);
+
+                 // If it was added then also try to add its nodes
+                 if (added_external_element)
+                  {
+                   // Loop over the nodes of this external element
+                   // and add (uniquely) as external nodes
+                   unsigned n_node=source_el_pt->nnode();
+                   for (unsigned j=0; j<n_node; j++)
+                    {
+                     Node* nod_pt=source_el_pt->node_pt(j);
+
+                     bool added_external_node;
+                     added_external_node=
+                      external_mesh_pt->add_external_node_pt(nod_pt);
+
+                     // If the node was added then try to add any masters too
+                     if (added_external_node)
+                      {
+                       // Now do the same for any master nodes
+                       if (dynamic_cast<RefineableElement*>(source_el_pt)!=0)
+                        {
+                         int n_cont=dynamic_cast<RefineableElement*>
+                          (source_el_pt)->ncont_interpolated_values();
+                         for (int i_cont=-1;i_cont<n_cont;i_cont++)
+                          {
+                           // Is this a hanging node in this variable?
+                           if (nod_pt->is_hanging(i_cont))
+                            {
+                             HangInfo* hang_pt=nod_pt->
+                              hanging_pt(i_cont);
+                             // Loop over the master nodes
+                             unsigned n_master=hang_pt->nmaster();
+                             for (unsigned m=0; m<n_master; m++)
+                              {
+                               Node* master_nod_pt=
+                                hang_pt->master_node_pt(m);
+
+                               // Again this will only add if the node
+                               // is not in the storage already
+                               external_mesh_pt->
+                                add_external_node_pt(master_nod_pt);
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+#ifdef OOMPH_HAS_MPI
+             else // elements can only be halo if MPI is turned on
+              {
+               // Add required information to arrays
+               for (unsigned i=0;i<el_dim;i++)
+                {
+                 Local_zetas.push_back(x_global[i]);
+                 Count_local_zetas++;
+                }
+               Local_zeta_dim.push_back(el_dim);
+               Count_local_zeta_dim++;
+              }
+#endif
+            }
+           else
+            {
+             // If it has failed then add the required information to the
+             // arrays which need to be sent to the other processors so that
+             // they can perform the locate_zeta
+
+             // Add this global coordinate to the LOCAL zeta array
+             for (unsigned i=0;i<el_dim;i++)
+              {
+               Local_zetas.push_back(x_global[i]);
+               Count_local_zetas++;
+              }
+             // Add the element dimension to the LOCAL Zeta_dim array
+             Local_zeta_dim.push_back(el_dim);
+             Count_local_zeta_dim++;
+             // Need another array indicating the current element number
+             // for which the locate_zeta method did not work locally?
+            }
+          }
+        } // end loop over integration points
+      }
+    } // end loop over local elements
+
+  }
+
+#ifdef OOMPH_HAS_MPI
+ 
+ //=====================================================================
+ /// locate zeta for current set of missing coordinates
+ //=====================================================================
+ template<class GEOM_OBJECT,unsigned EL_DIM_LAG,unsigned EL_DIM_EUL>
+  void Multi_domain_functions::locate_zeta_for_missing_coordinates
   (int& iproc, Mesh* const &external_mesh_pt, Problem* problem_pt,
    MeshAsGeomObject<EL_DIM_LAG,EL_DIM_EUL,GEOM_OBJECT >* &mesh_geom_obj_pt)
   {
-   // Set sizes...
-   Found_zeta.resize(Count_zeta_dim);
-   All_found_zeta.resize(Count_zeta_dim);
-   Located_element.resize(Count_zeta_dim);
+   // Storage for number of processors, current process and communicator
+   OomphCommunicator* comm_pt=problem_pt->communicator_pt();
+   int n_proc=comm_pt->nproc();
+   int my_rank=comm_pt->my_rank();
 
-   // Resize to zero the Found_element, Found_ss (locals found by locate_zeta),
-   // Double_values, Unsigned_values (doubles and unsigned to send),
-   // and Located_coord (non-local coordinates found by locate zeta)
-   Found_element.resize(0);
-   Found_ss.resize(0);
+   // Reset counters and resize vectors to be sent
+   Count_double_values=0;
+   Count_unsigned_values=0;
+   Count_located_coord=0;
    Double_values.resize(0);
    Unsigned_values.resize(0);
    Located_coord.resize(0);
 
-   // Nil out the entries to kill any previous storage
+   Count_zetas=0;
+   Count_local_zeta_dim=0;
+   Count_local_zetas=0;
+   Local_zeta_dim.resize(0);
+   Local_zetas.resize(0);
+
+   Found_zeta.resize(Count_zeta_dim);
+   Located_element.resize(Count_zeta_dim);
+
+   // Loop over the Zeta_dim array...
    for (unsigned i=0;i<Count_zeta_dim;i++)
     {
-     Located_element[i]=0;
-     Found_zeta[i]=0;
-    }
-
-   // (Re)set counters
-   unsigned Count_found_elements=0;
-   unsigned Count_zetas=0;
-   Count_double_values=0;
-   Count_unsigned_values=0;
-   Count_located_coord=0;
-
-   // Now each process has the zeta array for the loop process
-   for (unsigned i=0;i<Count_zeta_dim;i++)
-    {
-     // The global coordinates are in zetas,
-     // dimensions of this array were sent in zeta_dim
      unsigned el_dim=Zeta_dim[i];
-     Vector<double> x_global(el_dim);
-     // Loop to fill in coordinates
-     for (unsigned ii=0;ii<el_dim;ii++)
+     if (el_dim==0)
       {
-       x_global[ii]=Zetas[Count_zetas];
-       Count_zetas++;
+       // The coordinate was already located 
+       Found_zeta[i]=0; 
+       Located_element[i]=0;
       }
-
-     // Perform locate_zeta for these coordinates
-     // Note that every process should now go into this function
-     // at the "same time" with the same x_global
-     GeomObject *sub_geom_obj_pt;
-     Vector<double> ss(el_dim);
-     bool called_simultaneously=true;
-     mesh_geom_obj_pt->locate_zeta(x_global,sub_geom_obj_pt,ss,
-                                   called_simultaneously);
-
-#ifdef OOMPH_HAS_MPI
-     // Deal with the possibility that two (or more) processes succeed
-     unsigned test_success;
-     if (sub_geom_obj_pt!=0)
+     else // It was not found yet, so try to find it on the current process
       {
-       FiniteElement *source_el_pt;
-       if (!Use_bulk_element_as_external)
+       // Storage for global coordinates to be located
+       Vector<double> x_global(el_dim);
+       // Loop to fill in coordinates
+       for (unsigned ii=0;ii<el_dim;ii++)
         {
-         source_el_pt=dynamic_cast<FiniteElement*>(sub_geom_obj_pt);
-        }
-       else
-        {
-         FaceElement *face_el_pt=dynamic_cast<FaceElement*>(sub_geom_obj_pt);
-         source_el_pt=dynamic_cast<FiniteElement*>(face_el_pt->
-                                                   bulk_element_pt());
-        }
-       if (!source_el_pt->is_halo())
-        {
-         test_success=1;
-        }
-       else
-        {
-         test_success=0;
-        }
-      }
-     else
-      {
-       test_success=0;
-      }
-
-     unsigned total_successes;
-     if (MPI_Helpers::Nproc>1)
-      {
-       MPI_Allreduce(&test_success,&total_successes,1,MPI_INT,MPI_SUM,
-                     MPI_COMM_WORLD);
-      }
-     else
-      {
-       total_successes=test_success;
-      }
-
-     // If total_successes=0, we have a problem
-     if (total_successes==0)
-      {           
-       // Throw an error
-       std::ostringstream error_message;
-       error_message << "Geometric object not located anywhere for coords: ";
-       for(unsigned i=0;i<el_dim;i++)
-        {
-         error_message << x_global[i] << " ";
-        }
-       error_message << std::endl;
-       throw OomphLibError(error_message.str(),
-                          "Multi_domain_functions::simultaneous_locate_zeta()",
-                           OOMPH_EXCEPTION_LOCATION);
-      }
-     // If total_successes>1 then we also have a problem,
-     // but it can be dealt with!
-     else if (total_successes>1)
-      {
-       // Create vector of size Nproc to indicate success or not
-       Vector<unsigned> success(MPI_Helpers::Nproc,0);
-       Vector<unsigned> all_success(MPI_Helpers::Nproc,0);
-
-       // If true locally fill in that part of the vector
-       if (test_success==1)
-        {
-         success[MPI_Helpers::My_rank]=test_success;
+         x_global[ii]=Zetas[Count_zetas];
+         Count_zetas++;
         }
 
-       MPI_Allreduce(&success[0],&all_success[0],MPI_Helpers::Nproc,MPI_INT,
-                     MPI_SUM,MPI_COMM_WORLD);
+       // Perform locate_zeta for these coordinates
+       GeomObject *sub_geom_obj_pt;
+       Vector<double> ss(el_dim);
+       bool called_from_multi_domain=true;
+       mesh_geom_obj_pt->locate_zeta(x_global,sub_geom_obj_pt,ss,
+                                     called_from_multi_domain);
 
-       // If the "local" entry (i.e. iproc) is non-zero, then
-       // null out sub_geom_obj_pt everywhere else
-       if (all_success[iproc]==1)
-        {
-         if (iproc!=MPI_Helpers::My_rank)
-          {
-           sub_geom_obj_pt=0;
-          }
-        }
-       // Otherwise, find the first location in this vector which is
-       // non-zero and null out sub_geom_obj_pt on every other process
-       else
-        {
-         for (int dd=0;dd<MPI_Helpers::Nproc;dd++)
-          {
-           if (all_success[dd]==1)
-            {
-             // Null everything EXCEPT dd
-             if (dd!=MPI_Helpers::My_rank)
-              {
-               sub_geom_obj_pt=0;
-              }
-             // Get out of the loop
-             break;
-            }
-          }
-        }
-
-      }
-#endif // end MPI check for more than one success in location
-
-     // Now we have the correct sub_geom_obj_pt; if it is on current process,
-     // then add to external_element storage; if not, package the information
-     // required to send to the current process 
-     if (iproc==MPI_Helpers::My_rank)
-      {
-       // Did locate_zeta work?
+       // Did the locate method work?
        if (sub_geom_obj_pt!=0)
         {
-         // Use the bulk element attached to the element if required
+         // Get the source element - bulk or not?
          FiniteElement *source_el_pt;
          if (!Use_bulk_element_as_external)
           {
@@ -781,118 +1243,44 @@ namespace Multi_domain_functions
           }
          else
           {
-           // Cast to a FaceElement first
            FaceElement *face_el_pt=dynamic_cast<FaceElement*>(sub_geom_obj_pt);
-           // Use the bulk element attached to this FaceElement as the source
            source_el_pt=dynamic_cast<FiniteElement*>(face_el_pt->
                                                      bulk_element_pt());
           }
 
-         // Check the resulting element's halo status
-#ifdef OOMPH_HAS_MPI
-         if (!source_el_pt->is_halo()) // Use this one
-#endif
-          {
-           // Indicate which process this has been located on
-           // (add 1 to distinguish first proc from 0, which indicates failure)
-           Found_zeta[i]=iproc+1;
-           // Store the source element and coordinates in vectors for later
-           Found_element.push_back(source_el_pt);
-           // If the source element is a bulk element then a translation of
-           // coordinates is needed
-           if (!Use_bulk_element_as_external)
-            {
-             Found_ss.push_back(ss);
-            }
-           else
-            {
-             // The translation is from Lagrangian to Eulerian
-             Vector<double> s_trans(EL_DIM_EUL);
-             FaceElement *face_el_pt=
-              dynamic_cast<FaceElement*>(sub_geom_obj_pt);
-             face_el_pt->get_local_coordinate_in_bulk(ss,s_trans);
-             Found_ss.push_back(s_trans);
-            }
-           Count_found_elements++;
-          }
-#ifdef OOMPH_HAS_MPI
-         else // Another process will find the non-halo version
-          {
-           Found_zeta[i]=0;
-          }
-#endif
-        }
-       else // locate_zeta did not work locally
-        {
-         Found_zeta[i]=0;
-        }
-
-      }
-     else // not the loop process
-      {
-#ifdef OOMPH_HAS_MPI
-       if (sub_geom_obj_pt!=0)
-        {
-         // We are on another process, and need to send information
-         // to the loop process in order to create external halo
-         // storage for elements and nodes; setup the vectors required
-         // here (i.e. setup external haloed structure ready to be "sent")
-
-         // Create the external haloed elements first
-         FiniteElement *source_el_pt;
-
-         // Is it an FSI problem or not?
-         if (!Use_bulk_element_as_external)
-          {
-           source_el_pt=dynamic_cast<FiniteElement*>(sub_geom_obj_pt);
-          }
-         else // It is an FSI problem, so need to add the adjacent bulk mesh
-          // element as the external haloed element
-          {
-           // Cast to a FaceElement first
-           FaceElement *face_el_pt=dynamic_cast<FaceElement*>(sub_geom_obj_pt);
-           // Use the bulk element attached to the FaceElement as the source
-           source_el_pt=dynamic_cast<FiniteElement*>(face_el_pt->
-                                                     bulk_element_pt());
-          }
-
-         // Check whether this geometric object is a halo element
-         // If it is, then wait until we find the haloed equivalent
+         // Check if the returned element is halo
          if (!source_el_pt->is_halo())
           {
-           Found_zeta[i]=MPI_Helpers::My_rank+1;
-           // This source element is an external halo on process iproc...
-           // ... but it should only be added to the storage if it hasn't
+           // The correct non-halo element has been located; this will become
+           // an external haloed element on the current process, and an
+           // external halo copy needs to be created on the current process
+           // minus wherever we are in the "ring-loop"
+           int halo_copy_proc=my_rank-iproc;
+           // If iproc is bigger than my_rank then we've "gone through" nproc-1
+           if (my_rank<iproc) { halo_copy_proc=n_proc+halo_copy_proc; }
+
+           // So, we found zeta on the current processor
+           Found_zeta[i]=my_rank+1;
+           // This source element is an external halo on process halo_copy_proc
+           // but it should only be added to the storage if it hasn't
            // been added already, and this information also needs to be
            // communicated over to the other process
+
            unsigned n_extern_haloed=external_mesh_pt->
-            nexternal_haloed_element(iproc);
-
-           bool already_external_element=false;
+            nexternal_haloed_element(halo_copy_proc);
            unsigned external_haloed_el_index;
-           // Is this already set as an external haloed element?
-           for (unsigned eh=0;eh<n_extern_haloed;eh++)
-            {
-             if (source_el_pt==external_mesh_pt->
-                 external_haloed_element_pt(iproc,eh))
-              {
-               // It's already there, so...
-               already_external_element=true;
-               // ...set the index of this element
-               external_haloed_el_index=eh;
-               break;
-              }
-            }
+           external_haloed_el_index=
+            external_mesh_pt->add_external_haloed_element_pt(halo_copy_proc,
+                                                             source_el_pt);
 
-           if (!already_external_element)
+           // If it was added to the storage then the returned index
+           // will be the same as the (old) size of the storage
+           if (external_haloed_el_index==n_extern_haloed)
             {
-             // Add as an external haloed element to the external mesh
-             // i.e. the mesh in which zeta has been located
-             external_mesh_pt->add_external_haloed_element_pt
-              (iproc,source_el_pt);
-             // Index of 2 indicates it should be newly created
-             Located_element[i]=2;
+             // Set index in Located_element to say it should be newly created
+             Located_element[i]=New;
 
+             // How many continuously interpolated values are there?
              int n_cont_inter_values;
              if (dynamic_cast<RefineableElement*>(source_el_pt)!=0)
               {
@@ -906,7 +1294,8 @@ namespace Multi_domain_functions
 
              // Since it is (externally) haloed from the current process,
              // the info required to create a new element in the equivalent
-             // external halo layer on process iproc needs to be sent there
+             // external halo layer on process halo_copy_proc needs to be 
+             // sent there
 
              // If we're using macro elements to update...
              MacroElementNodeUpdateMesh* macro_mesh_pt=
@@ -967,18 +1356,18 @@ namespace Multi_domain_functions
                // Add the node to the storage; this routine
                // also takes care of any master nodes if the
                // node is hanging
-               add_external_haloed_node_to_storage(iproc,nod_pt,
+               add_external_haloed_node_to_storage(halo_copy_proc,nod_pt,
                                                    problem_pt,
                                                    external_mesh_pt,
                                                    n_cont_inter_values,
                                                    source_el_pt);
               }
-
+            
             }
            else // it has already been added, so tell the other process
             {
-             // Index of 1 indicates an element has already been added
-             Located_element[i]=1;
+             // Set index to indicate an element has already been added
+             Located_element[i]=Exists;
              Unsigned_values.push_back(external_haloed_el_index);
              Count_unsigned_values++;
             }
@@ -987,9 +1376,9 @@ namespace Multi_domain_functions
            // in the setup of the source elements on the other process
            if (!Use_bulk_element_as_external)
             {
-             for (unsigned i=0;i<el_dim;i++)
+             for (unsigned ii=0;ii<el_dim;ii++)
               {
-               Located_coord.push_back(ss[i]);
+               Located_coord.push_back(ss[ii]);
                Count_located_coord++;
               }
             }
@@ -1000,60 +1389,48 @@ namespace Multi_domain_functions
              FaceElement *face_el_pt=
               dynamic_cast<FaceElement*>(sub_geom_obj_pt);
              face_el_pt->get_local_coordinate_in_bulk(ss,s_trans);
-             for (unsigned i=0;i<EL_DIM_EUL;i++)
+             for (unsigned ii=0;ii<EL_DIM_EUL;ii++)
               {
-               Located_coord.push_back(s_trans[i]);
+               Located_coord.push_back(s_trans[ii]);
                Count_located_coord++;
               }
             }
           }
-         else // It's a halo element, so another process will locate
+         else // halo, so search again until non-halo equivalent is located
           {
+           // Add required information to arrays (as below)
+           for (unsigned ii=0;ii<el_dim;ii++)
+            {
+             Local_zetas.push_back(x_global[ii]);
+             Count_local_zetas++;
+            }
+           Local_zeta_dim.push_back(el_dim);
+           Count_local_zeta_dim++;
+           // It wasn't found here
            Found_zeta[i]=0;
-           Located_element[i]=0;
+           // Set index to indicate not found
+           Located_element[i]=Not_found;
           }
         }
-       else // It wasn't found on this process
+       else // not successful this time, so prepare for next process to try
         {
+         // Add this global coordinate to the LOCAL zeta array
+         for (unsigned ii=0;ii<el_dim;ii++)
+          {
+           Local_zetas.push_back(x_global[ii]);
+           Count_local_zetas++;
+          }
+         // Add the element dimension to the LOCAL Zeta_dim array
+         Local_zeta_dim.push_back(el_dim);
+         Count_local_zeta_dim++;
+         // It wasn't found here
          Found_zeta[i]=0;
-         Located_element[i]=0;
-        }
-#endif
-      }
-
-    } // end loop over zeta coordinates
-
-//  std::cout << "simultaneous_locate_zeta complete" << std::endl << std::endl;
-
-   // Do an MPI_Allreduce on the found_zeta array to pool the information
-   // onto the current loop process
-#ifdef OOMPH_HAS_MPI
-   if (Count_zeta_dim!=0)
-    {
-     if (MPI_Helpers::Nproc>1)
-      {
-       MPI_Allreduce(&Found_zeta[0],&All_found_zeta[0],Count_zeta_dim,
-                     MPI_INT,MPI_MAX,MPI_COMM_WORLD);
-      }
-     else
-      {
-       // Copy from Found_zeta to All_found_zeta which is used in
-       // create_external_elements later on
-       for (unsigned i=0;i<Count_zeta_dim;i++)
-        {
-         All_found_zeta[i]=Found_zeta[i];
+         // Set index to indicate not found
+         Located_element[i]=Not_found;
         }
       }
-    }
-#else
-   // Copy from Found_zeta to All_found_zeta which is used in
-   // create_external_elements later on
-   for (unsigned i=0;i<Count_zeta_dim;i++)
-    {
-     All_found_zeta[i]=Found_zeta[i];
-    }
-#endif
 
+    }
 
   }
 
@@ -1062,325 +1439,194 @@ namespace Multi_domain_functions
 /// Creates external (halo) elements on the loop process based on the
 /// information received from each locate_zeta call on other processes
 //=====================================================================
- template<class ELEMENT,class EXT_ELEMENT,class GEOM_OBJECT,
-  unsigned EL_DIM_LAG,unsigned EL_DIM_EUL>
-  void Multi_domain_functions::create_external_elements
+ template<class EXT_ELEMENT,unsigned EL_DIM_LAG,unsigned EL_DIM_EUL>
+  void Multi_domain_functions::create_external_halo_elements
   (int& iproc, Mesh* const &mesh_pt, Mesh* const &external_mesh_pt, 
    Problem* problem_pt, const unsigned& interaction_index)
   {
-   // Reset counters to zero
-   unsigned Count_zeta_dim=0;
-   unsigned Count_found_elements=0;
+   OomphCommunicator* comm_pt=problem_pt->communicator_pt();
+   int my_rank=comm_pt->my_rank();
 
-   // Reset counters for all processors
-#ifdef OOMPH_HAS_MPI
-   for (int d=0;d<MPI_Helpers::Nproc;d++)
-    {
-     All_count_double_values[d]=0;
-     All_count_located_coord[d]=0;
-     All_count_unsigned_values[d]=0;
-    }
-#endif
+   // Reset counters
+   Count_zeta_dim=0;
+   Count_double_values=0;
+   Count_located_coord=0;
+   Count_unsigned_values=0;
 
-   // Loop over the curret loop processor's elements and integration points 
-   // again to set "other" (i.e. source and external halo(ed) elements),
-   // either locally or from the communicated arrays
-   if (iproc==MPI_Helpers::My_rank)
+   // The creation all happens on the current processor
+   // Loop over this processors elements
+   unsigned n_element=mesh_pt->nelement();
+   for (unsigned e=0;e<n_element;e++)
     {
-     unsigned n_element=mesh_pt->nelement();
-     for (unsigned e=0;e<n_element;e++)
+     // Cast to ElementWithExternalElement to set external element (if located)
+     ElementWithExternalElement *el_pt=
+      dynamic_cast<ElementWithExternalElement*>(mesh_pt->element_pt(e));
+     if (!el_pt->is_halo())
       {
-       // Need to dynamic_cast in order to use external_element_pt
-       ELEMENT *el_pt=dynamic_cast<ELEMENT*>
-        (mesh_pt->element_pt(e));
-       // Only need to work on non-halo elements
-#ifdef OOMPH_HAS_MPI
-       if (!el_pt->is_halo())
-#endif
+       // Loop over integration points
+       unsigned n_intpt=el_pt->integral_pt()->nweight();
+       for (unsigned ipt=0;ipt<n_intpt;ipt++)
         {
-
-         //We need to allocate storage for the external elements
-         //within the element. Memory will actually only be 
-         //allocated the first time this function is called for 
-         //each element, or if the number of interactions or integration
-         //points within the element has changed.
-         el_pt->initialise_external_element_storage();
-
-         // Find number of Gauss points and element dimension
-         unsigned n_intpt=el_pt->integral_pt()->nweight();
-
-         // Loop over integration points
-         for (unsigned ipt=0;ipt<n_intpt;ipt++)
+         // Has an external element been assigned to this integration point?
+         if (External_element_located[e][ipt]==0)
           {
-           // Test whether zeta was found locally; if not, then use sent
-           // information
-           if ((All_found_zeta[Count_zeta_dim]-1)==iproc)
+
+           // Was a (non-halo) element located for this integration point
+           if (((Found_zeta[Count_zeta_dim]-1)==my_rank) || 
+               (Found_zeta[Count_zeta_dim]==0))
             {
-             FiniteElement *source_el_pt=
-              Found_element[Count_found_elements];
-             // The dimension of the local coordinates is the source
-             // element's dimension
-             unsigned el_dim=source_el_pt->dim();
-             Vector<double> ss(el_dim);
-             ss=Found_ss[Count_found_elements];
-             Count_found_elements++;
-             // Set this element as the source element
-             el_pt->external_element_pt(interaction_index,ipt)=source_el_pt;
-             el_pt->external_element_local_coord(interaction_index,ipt)=ss;
-
-             // Has this been used as a source for this element already?
-             bool source_already_used=false;
-             for (unsigned jpt=0;jpt<ipt;jpt++)
-              {
-               if (source_el_pt==
-                   el_pt->external_element_pt(interaction_index,jpt))
-                {
-                 source_already_used=true;
-                }
-              }
-             if (!source_already_used)
-              {
-               // Add the element to the external element storage if
-               // it's not already there
-               FiniteElement* f_el_pt=
-                dynamic_cast<FiniteElement*>(source_el_pt);
-               bool already_external_element=false;
-               unsigned n_ext_el=external_mesh_pt->nexternal_element();
-               for (unsigned e_ext=0;e_ext<n_ext_el;e_ext++)
-                {
-                 if (f_el_pt==
-                     external_mesh_pt->external_element_pt(e_ext))
-                  {
-                   already_external_element=true;
-                   break;
-                  }
-                }
-               if (!already_external_element)
-                {
-                 external_mesh_pt->add_external_element_pt(f_el_pt);
-                 // Loop over the nodes of this external element
-                 // and add (uniquely) as external nodes
-                 unsigned n_node=f_el_pt->nnode();
-                 for (unsigned j=0; j<n_node; j++)
-                  {
-                   Node* nod_pt=f_el_pt->node_pt(j);
-                   bool node_is_external=false;
-                   unsigned n_ext_nod=external_mesh_pt->nexternal_node();
-                   for (unsigned j_ext=0;j_ext<n_ext_nod;j_ext++)
-                    {
-                     if (nod_pt==
-                         external_mesh_pt->external_node_pt(j_ext))
-                      {
-                       node_is_external=true;
-                       break;
-                      }
-                    }
-                   if (!node_is_external)
-                    {
-                     external_mesh_pt->add_external_node_pt(nod_pt);
-
-                     // Now do the same for any master nodes
-                     if (dynamic_cast<RefineableElement*>(f_el_pt)!=0)
-                      {
-                       int n_cont=dynamic_cast<RefineableElement*>
-                        (f_el_pt)->ncont_interpolated_values();
-                       for (int i_cont=-1;i_cont<n_cont;i_cont++)
-                        {
-                         // Is this a hanging node in this variable?
-                         if (nod_pt->is_hanging(i_cont))
-                          {
-                           HangInfo* hang_pt=nod_pt->
-                            hanging_pt(i_cont);
-                           // Loop over the master nodes
-                           unsigned n_master=hang_pt->nmaster();
-                           for (unsigned m=0; m<n_master; m++)
-                            {
-                             Node* master_nod_pt=
-                              hang_pt->master_node_pt(m);
-                             // Check if the node is already there
-                             bool master_is_external=false;
-                             unsigned n_ext_nod=external_mesh_pt->
-                              nexternal_node();
-                             for (unsigned j_ext=0;j_ext<n_ext_nod;
-                                  j_ext++)
-                              {
-                               if (master_nod_pt==external_mesh_pt->
-                                   external_node_pt(j_ext))
-                                {
-                                 master_is_external=true;
-                                 break;
-                                }
-                              }
-                             if (!master_is_external)
-                              {
-                               external_mesh_pt->
-                                add_external_node_pt(master_nod_pt);
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
+             // Either it was already found, or not found on the current set
+             // In either case, we don't need to do anything for this
+             // integration point
             }
-#ifdef OOMPH_HAS_MPI // Zeta should always be located locally in serial
-           else // iproc!=(found_zeta[Count_zeta_dim]-1)
+           else
             {
-             // Get the locating process
-             unsigned loc_p=All_found_zeta[Count_zeta_dim]-1;
+             // Get the process number on which the element was located
+             unsigned loc_p=Found_zeta[Count_zeta_dim]-1;
 
-             // Access the Vector of Vectors that is indexed
-             // first by locating process
-             // ... was it located by process loc_p? (communicated)
-             if (All_located_zetas[loc_p][Count_zeta_dim]>=1)
+             // Is it a new external halo element or not?
+             // If so, then create it, populate it, and add it as a
+             // source; if not, then find the right one which
+             // has already been created and use it as the source
+             // element. 
+
+             // FiniteElement stored at this integration point
+             FiniteElement* f_el_pt=0;
+
+             // Is it a new element?
+             if (Located_zetas[Count_zeta_dim]==New)
               {
-               // Is it a new external halo element or not?
-               // If so, then create it, populate it, and add it as a
-               // source; if not, then find the right one which
-               // has already been created and use it as the source
-               // element: it is a new element if the value of 
-               // located_zetas[Count_zeta_dim] matches the
-               // counter, which is increased every time a new
-               // external halo element is added
-               EXT_ELEMENT *new_el_pt;
-               // Index of 2 indicates new element required
-               if (All_located_zetas[loc_p][Count_zeta_dim]==2)
+               // Create a new element from the communicated values
+               // and coords from the process that located zeta
+               EXT_ELEMENT *new_el_pt= new EXT_ELEMENT;
+
+               // Add it to the external halo element storage
+               f_el_pt=dynamic_cast<FiniteElement*>(new_el_pt);
+
+               // Add external halo element to this mesh
+               external_mesh_pt->
+                add_external_halo_element_pt(loc_p,f_el_pt);
+
+               // We need the number of interpolated values if Refineable
+               int n_cont_inter_values;
+               if (dynamic_cast<RefineableElement*>(new_el_pt)!=0)
                 {
-                 // Create a new element from the communicated values
-                 // and coords from the process that located zeta
-                 new_el_pt=new EXT_ELEMENT;
+                 n_cont_inter_values=dynamic_cast<RefineableElement*>
+                  (new_el_pt)->ncont_interpolated_values();
+                }
+               else
+                {
+                 n_cont_inter_values=-1;
+                }
 
-                 // Add it to the external halo element storage
-                 // (Why is a dynamic_cast needed here??)
-                 FiniteElement *f_el_pt=
-                  dynamic_cast<FiniteElement*>(new_el_pt);
-                 // Add external halo element to this mesh
-                 external_mesh_pt->
-                  add_external_halo_element_pt(loc_p,f_el_pt);
+               // If we're using macro elements to update
+               if (Unsigned_values[Count_unsigned_values]==1)
+                {
+                 Count_unsigned_values++;
 
-                 // We need the number of interpolated values if Refineable
-                 int n_cont_inter_values;
-                 if (dynamic_cast<RefineableElement*>(new_el_pt)!=0)
+                 // Set the macro element
+                 MacroElementNodeUpdateMesh* macro_mesh_pt=
+                  dynamic_cast<MacroElementNodeUpdateMesh*>
+                  (external_mesh_pt);
+                 unsigned macro_el_num=Unsigned_values[Count_unsigned_values];
+                 new_el_pt->set_macro_elem_pt
+                  (macro_mesh_pt->macro_domain_pt()->
+                   macro_element_pt(macro_el_num));
+                 Count_unsigned_values++;
+
+                 // We need to receive the lower left
+                 // and upper right coordinates of the macro element
+                 QElementBase* q_el_pt=
+                  dynamic_cast<QElementBase*>(new_el_pt);
+                 if (q_el_pt!=0)
                   {
-                   n_cont_inter_values=dynamic_cast<RefineableElement*>
-                    (new_el_pt)->ncont_interpolated_values();
-                  }
-                 else
-                  {
-                   n_cont_inter_values=-1;
-                  }
-
-                 // If we're using macro elements to update,
-                 if (All_unsigned_values[loc_p]
-                     [All_count_unsigned_values[loc_p]]==1)
-                  {
-                   All_count_unsigned_values[loc_p]++;
-
-                   // Set the macro element
-                   MacroElementNodeUpdateMesh* macro_mesh_pt=
-                    dynamic_cast<MacroElementNodeUpdateMesh*>
-                    (external_mesh_pt);
-                   unsigned macro_el_num=All_unsigned_values[loc_p]
-                    [All_count_unsigned_values[loc_p]];
-                   new_el_pt->set_macro_elem_pt
-                    (macro_mesh_pt->macro_domain_pt()->
-                     macro_element_pt(macro_el_num));
-                   All_count_unsigned_values[loc_p]++;
-
-                   // we need to receive
-                   // the lower left and upper right coordinates of the macro
-                   QElementBase* q_el_pt=
-                    dynamic_cast<QElementBase*>(new_el_pt);
-                   if (q_el_pt!=0)
+                   unsigned el_dim=q_el_pt->dim();
+                   for (unsigned i_dim=0;i_dim<el_dim;i_dim++)
                     {
-                     unsigned el_dim=q_el_pt->dim();
-                     for (unsigned i_dim=0;i_dim<el_dim;i_dim++)
-                      {
-                       q_el_pt->s_macro_ll(i_dim)=All_double_values[loc_p]
-                        [All_count_double_values[loc_p]];
-                       All_count_double_values[loc_p]++;
-                       q_el_pt->s_macro_ur(i_dim)=All_double_values[loc_p]
-                        [All_count_double_values[loc_p]];
-                       All_count_double_values[loc_p]++;
-                      }
-                    }
-                   else // Throw an error
-                    {
-                     std::ostringstream error_stream;
-                     error_stream << "Using MacroElement node update\n"
-                                  << "in a case with non-QElements\n"
-                                  << "has not yet been implemented.\n";
-                     throw OomphLibError
-                      (error_stream.str(),
-                       "Multi_domain_functions::create_external_elements()",
-                       OOMPH_EXCEPTION_LOCATION);
-
+                     q_el_pt->s_macro_ll(i_dim)=
+                      Double_values[Count_double_values];
+                     Count_double_values++;
+                     q_el_pt->s_macro_ur(i_dim)=
+                      Double_values[Count_double_values];
+                     Count_double_values++;
                     }
                   }
-                 else // No macro element
+                 else // Throw an error, since this is only implemented for Q
                   {
-                   All_count_unsigned_values[loc_p]++;
-                  }
+                   std::ostringstream error_stream;
+                   error_stream << "Using MacroElement node update\n"
+                                << "in a case with non-QElements\n"
+                                << "has not yet been implemented.\n";
+                   throw OomphLibError
+                    (error_stream.str(),
+                     "Multi_domain_functions::create_external_elements()",
+                     OOMPH_EXCEPTION_LOCATION);
 
-                 unsigned n_node=new_el_pt->nnode();
-                 for (unsigned j=0;j<n_node;j++)
-                  {
-                   Node* new_nod_pt=0;
-
-                   // Call the add external halo node helper function
-                   add_external_halo_node_to_storage<EXT_ELEMENT>
-                    (new_nod_pt,external_mesh_pt,loc_p,j,new_el_pt,
-                     n_cont_inter_values,problem_pt);
                   }
                 }
-               else // the element already exists as an external_halo
-                // (the value in All_located_zetas[...] should be 1)
+               else // Not using macro elements
                 {
-                 // The index itself is in All_unsigned_values[...]
-                 unsigned external_halo_el_index=
-                  All_unsigned_values[loc_p][All_count_unsigned_values[loc_p]];
-                 All_count_unsigned_values[loc_p]++;
-                 // Use this index to get the element
-                 FiniteElement *f_el_pt=external_mesh_pt->
-                  external_halo_element_pt
-                  (loc_p,external_halo_el_index);
-                 // Cast to EXT_ELEMENT to use external_element_pt
-                 new_el_pt=dynamic_cast<EXT_ELEMENT*>(f_el_pt);
+                 Count_unsigned_values++;
                 }
-               // The source element storage was initialised but
-               // not filled earlier, so do it now
-               // The located coordinates are required
-               // (which could be a different dimension to zeta, e.g. in FSI)
-               unsigned el_dim=new_el_pt->dim();
-               Vector<double> s_located(el_dim);
-               for (unsigned i=0;i<el_dim;i++)
+
+               // Now we add nodes to the new element
+               unsigned n_node=new_el_pt->nnode();
+               for (unsigned j=0;j<n_node;j++)
                 {
-                 s_located[i]=All_located_coord[loc_p]
-                  [All_count_located_coord[loc_p]];
-                 All_count_located_coord[loc_p]++;
+                 Node* new_nod_pt=0;
+
+                 // Call the add external halo node helper function
+                 add_external_halo_node_to_storage<EXT_ELEMENT>
+                  (new_nod_pt,external_mesh_pt,loc_p,j,new_el_pt,
+                   n_cont_inter_values,problem_pt);
                 }
-               // Set the element for this integration point
-               el_pt->external_element_pt(interaction_index,ipt)=new_el_pt;
-               el_pt->
-                external_element_local_coord(interaction_index,ipt)=s_located;
               }
-            } // end ifs to check whether zeta's located on this process
-#endif // (OOMPH_HAS_MPI)
+             else // the element already exists as an external_halo
+              {
+               // The index itself is in Unsigned_values[...]
+               unsigned external_halo_el_index=
+                Unsigned_values[Count_unsigned_values];
+               Count_unsigned_values++;
+
+               // Use this index to get the element
+               f_el_pt=external_mesh_pt->
+                external_halo_element_pt
+                (loc_p,external_halo_el_index);
+              }
+             // The source element storage was initialised but
+             // not filled earlier, so do it now
+             // The located coordinates are required
+             // (which could be a different dimension to zeta, e.g. in FSI)
+             unsigned el_dim=f_el_pt->dim();
+             Vector<double> s_located(el_dim);
+             for (unsigned i=0;i<el_dim;i++)
+              {
+               s_located[i]=Located_coord[Count_located_coord];
+               Count_located_coord++;
+              }
+
+             // Set the element for this integration point
+             el_pt->external_element_pt(interaction_index,ipt)=f_el_pt;
+             el_pt->
+              external_element_local_coord(interaction_index,ipt)=s_located;
+
+             // Set the lookup array to true
+             External_element_located[e][ipt]=1;
+            }
+           // Increment the integration point counter
            Count_zeta_dim++;
+
           }
-        }
 
-      } // end loop over elements
+        } // end loop over integration points
 
-    } // end if iproc==MPI_Helpers::My_rank
+      }
+    } // end loop over local processor's elements
 
   }
 
-#ifdef OOMPH_HAS_MPI
 
-//============start of add_external_halo_node_to_storage===================
+//============start of add_external_halo_node_to_storage===============
 /// Helper function to add external halo nodes, including any masters,
 /// based on information received from the haloed process
 //=========================================================================
@@ -1397,12 +1643,12 @@ namespace Multi_domain_functions
 
    for (int i_cont=-1;i_cont<n_cont_inter_values;i_cont++)
     {
-     if (All_unsigned_values[loc_p][All_count_unsigned_values[loc_p]]==1)
+     if (Unsigned_values[Count_unsigned_values]==1)
       {
-       All_count_unsigned_values[loc_p]++;
-       unsigned n_master=All_unsigned_values[loc_p]
-        [All_count_unsigned_values[loc_p]];
-       All_count_unsigned_values[loc_p]++;
+       Count_unsigned_values++;
+       unsigned n_master=Unsigned_values
+        [Count_unsigned_values];
+       Count_unsigned_values++;
        // Setup new HangInfo
        HangInfo* hang_pt=new HangInfo(n_master);
        for (unsigned m=0;m<n_master;m++)
@@ -1414,16 +1660,16 @@ namespace Multi_domain_functions
            n_cont_inter_values,problem_pt);
 
          // Get the weight and set the HangInfo
-         double master_weight=All_double_values[loc_p]
-          [All_count_double_values[loc_p]];
-         All_count_double_values[loc_p]++;
+         double master_weight=Double_values
+          [Count_double_values];
+         Count_double_values++;
          hang_pt->set_master_node_pt(m,master_nod_pt,master_weight);
         }
        new_nod_pt->set_hanging_pt(hang_pt,i_cont);
       }
      else // Not a hanging node
       {
-       All_count_unsigned_values[loc_p]++;
+       Count_unsigned_values++;
       }
     } // end loop over continous interpolated values
 
@@ -1440,10 +1686,10 @@ template<class EXT_ELEMENT>
  {
   // Given the node and the external mesh, and received information
   // about them from process loc_p, construct them on the current process
-  if (All_unsigned_values[loc_p][All_count_unsigned_values[loc_p]]==1)
+  if (Unsigned_values[Count_unsigned_values]==1)
    {
     // Increment counter
-    All_count_unsigned_values[loc_p]++;
+    Count_unsigned_values++;
     // Construct a new node based upon sent information
     construct_new_external_halo_node_helper<EXT_ELEMENT>
      (new_nod_pt,loc_p,node_index,new_el_pt,external_mesh_pt,problem_pt);
@@ -1451,13 +1697,13 @@ template<class EXT_ELEMENT>
   else
    {
     // Increment counter (node already exists)
-    All_count_unsigned_values[loc_p]++;
+    Count_unsigned_values++;
     // Copy node from received location
     new_nod_pt=external_mesh_pt->external_halo_node_pt
-     (loc_p,All_unsigned_values[loc_p][All_count_unsigned_values[loc_p]]);
+     (loc_p,Unsigned_values[Count_unsigned_values]);
     new_el_pt->node_pt(node_index)=new_nod_pt;
     // Increment counter
-    All_count_unsigned_values[loc_p]++;
+    Count_unsigned_values++;
    }
  }
 
@@ -1472,10 +1718,10 @@ template<class EXT_ELEMENT>
  {
   // Given the node and the external mesh, and received information
   // about them from process loc_p, construct them on the current process
-  if (All_unsigned_values[loc_p][All_count_unsigned_values[loc_p]]==1)
+  if (Unsigned_values[Count_unsigned_values]==1)
    {
     // Increment counter
-    All_count_unsigned_values[loc_p]++;
+    Count_unsigned_values++;
     // Construct a new node based upon sent information
     construct_new_external_halo_master_node_helper<EXT_ELEMENT>
      (new_master_nod_pt,new_nod_pt,loc_p,new_el_pt,
@@ -1484,12 +1730,12 @@ template<class EXT_ELEMENT>
   else
    {
     // Increment counter (node already exists)
-    All_count_unsigned_values[loc_p]++;
+    Count_unsigned_values++;
     // Copy node from received location
     new_master_nod_pt=external_mesh_pt->external_halo_node_pt
-     (loc_p,All_unsigned_values[loc_p][All_count_unsigned_values[loc_p]]);
+     (loc_p,Unsigned_values[Count_unsigned_values]);
     // Increment counter
-    All_count_unsigned_values[loc_p]++;
+    Count_unsigned_values++;
    }
  }
 
@@ -1510,28 +1756,28 @@ template<class EXT_ELEMENT>
 
   // The first entry in nodal_info indicates
   // if a timestepper is required for this halo node
-  if (All_unsigned_values[loc_p]
-      [All_count_unsigned_values[loc_p]]==1)
+  if (Unsigned_values
+      [Count_unsigned_values]==1)
    {
-    All_count_unsigned_values[loc_p]++;
+    Count_unsigned_values++;
     // Index
     time_stepper_pt=problem_pt->time_stepper_pt
-     (All_unsigned_values[loc_p][All_count_unsigned_values[loc_p]]);
-    All_count_unsigned_values[loc_p]++;
+     (Unsigned_values[Count_unsigned_values]);
+    Count_unsigned_values++;
     // Check whether number of prev values is "sent" across
     n_prev+=time_stepper_pt->nprev_values();
    }
   else
    {
     // No timestepper, increment counter
-    All_count_unsigned_values[loc_p]++;
+    Count_unsigned_values++;
    }
 
   // If this node was on a boundary then it needs to
   // be on the same boundary here
-  if (All_unsigned_values[loc_p][All_count_unsigned_values[loc_p]]==1)
+  if (Unsigned_values[Count_unsigned_values]==1)
    {
-    All_count_unsigned_values[loc_p]++;
+    Count_unsigned_values++;
 
     // Construct a new boundary node
     if (time_stepper_pt!=0)
@@ -1548,25 +1794,25 @@ template<class EXT_ELEMENT>
     unsigned n_bnd=external_mesh_pt->nboundary();
     for (unsigned i_bnd=0;i_bnd<n_bnd;i_bnd++)
      {
-      if (All_unsigned_values[loc_p]
-          [All_count_unsigned_values[loc_p]]==1)
+      if (Unsigned_values
+          [Count_unsigned_values]==1)
        {
         // Add to current boundary; increment counter
         external_mesh_pt->add_boundary_node(i_bnd,
                                             new_nod_pt);
-        All_count_unsigned_values[loc_p]++;
+        Count_unsigned_values++;
        }
       else
        {
         // Not on this boundary; increment counter
-        All_count_unsigned_values[loc_p]++;
+        Count_unsigned_values++;
        }
      }
    }
   else
    {
     // Not on boundary, increment counter
-    All_count_unsigned_values[loc_p]++;
+    Count_unsigned_values++;
 
     // Construct an ordinary (non-boundary) node
     if (time_stepper_pt!=0)
@@ -1599,26 +1845,26 @@ template<class EXT_ELEMENT>
     /// the default node update id
     /// e.g. for the quarter circle there are 
     /// "Upper_left_box", "Lower right box" etc...
-    unsigned update_id=All_unsigned_values[loc_p]
-     [All_count_unsigned_values[loc_p]];
-    All_count_unsigned_values[loc_p]++;
+    unsigned update_id=Unsigned_values
+     [Count_unsigned_values];
+    Count_unsigned_values++;
 
     Vector<double> ref_value;
 
     // The size of this vector is in the next entry
     // of All_alg_nodal_info
-    unsigned n_ref_val=All_unsigned_values[loc_p]
-     [All_count_unsigned_values[loc_p]];
-    All_count_unsigned_values[loc_p]++;
+    unsigned n_ref_val=Unsigned_values
+     [Count_unsigned_values];
+    Count_unsigned_values++;
 
     // The reference values themselves are in
     // All_alg_ref_value
     ref_value.resize(n_ref_val);
     for (unsigned i_ref=0;i_ref<n_ref_val;i_ref++)
      {
-      ref_value[i_ref]=All_double_values[loc_p]
-       [All_count_double_values[loc_p]];
-      All_count_double_values[loc_p]++;
+      ref_value[i_ref]=Double_values
+       [Count_double_values];
+      Count_double_values++;
      }
 
     Vector<GeomObject*> geom_object_pt;
@@ -1628,18 +1874,18 @@ template<class EXT_ELEMENT>
 
     // The size of this vector is in the next entry
     // of All_alg_nodal_info
-    unsigned n_geom_obj=All_unsigned_values[loc_p]
-     [All_count_unsigned_values[loc_p]];
-    All_count_unsigned_values[loc_p]++;
+    unsigned n_geom_obj=Unsigned_values
+     [Count_unsigned_values];
+    Count_unsigned_values++;
 
     // The remaining indices are in the rest of 
     // All_alg_nodal_info
     geom_object_pt.resize(n_geom_obj);
     for (unsigned i_geom=0;i_geom<n_geom_obj;i_geom++)
      {
-      unsigned geom_index=All_unsigned_values[loc_p]
-       [All_count_unsigned_values[loc_p]];
-      All_count_unsigned_values[loc_p]++;
+      unsigned geom_index=Unsigned_values
+       [Count_unsigned_values];
+      Count_unsigned_values++;
       // This index indicates which of the AlgebraicMesh's
       // stored geometric objects should be used
       // (0 is a null pointer; everything else should have
@@ -1699,8 +1945,8 @@ template<class EXT_ELEMENT>
        {
         solid_nod_pt->variable_position_pt()->
          set_value(t,i_val,
-                   All_double_values[loc_p][All_count_double_values[loc_p]]);
-        All_count_double_values[loc_p]++;
+                   Double_values[Count_double_values]);
+        Count_double_values++;
        }
      }
    }
@@ -1711,9 +1957,9 @@ template<class EXT_ELEMENT>
    {
     for (unsigned t=0;t<n_prev;t++)
      {
-      new_nod_pt->set_value(t,i_val,All_double_values[loc_p]
-                            [All_count_double_values[loc_p]]);
-      All_count_double_values[loc_p]++;
+      new_nod_pt->set_value(t,i_val,Double_values
+                            [Count_double_values]);
+      Count_double_values++;
      }
    }
 
@@ -1724,9 +1970,9 @@ template<class EXT_ELEMENT>
     for (unsigned t=0;t<n_prev;t++)
      {
       // Copy to coordinate
-      new_nod_pt->x(t,idim)=All_double_values[loc_p]
-       [All_count_double_values[loc_p]];
-      All_count_double_values[loc_p]++;
+      new_nod_pt->x(t,idim)=Double_values
+       [Count_double_values];
+      Count_double_values++;
      }
    }
 
@@ -1743,14 +1989,14 @@ template<class EXT_ELEMENT>
  {
   // First three sent numbers are dimension, position type and nvalue
   // (to be used in Node constructors)
-  unsigned n_dim=All_unsigned_values[loc_p][All_count_unsigned_values[loc_p]];
-  All_count_unsigned_values[loc_p]++;
-  unsigned n_position_type=All_unsigned_values[loc_p]
-   [All_count_unsigned_values[loc_p]];
-  All_count_unsigned_values[loc_p]++;
-  unsigned n_value=All_unsigned_values[loc_p]
-   [All_count_unsigned_values[loc_p]];
-  All_count_unsigned_values[loc_p]++;
+  unsigned n_dim=Unsigned_values[Count_unsigned_values];
+  Count_unsigned_values++;
+  unsigned n_position_type=Unsigned_values
+   [Count_unsigned_values];
+  Count_unsigned_values++;
+  unsigned n_value=Unsigned_values
+   [Count_unsigned_values];
+  Count_unsigned_values++;
   
 
   // If it's a solid node also receive the lagrangian dimension and pos type
@@ -1759,10 +2005,10 @@ template<class EXT_ELEMENT>
   unsigned n_lag_type;
   if (solid_nod_pt!=0)
    {
-    n_lag_dim=All_unsigned_values[loc_p][All_count_unsigned_values[loc_p]];
-    All_count_unsigned_values[loc_p]++;
-    n_lag_type=All_unsigned_values[loc_p][All_count_unsigned_values[loc_p]];
-    All_count_unsigned_values[loc_p]++;
+    n_lag_dim=Unsigned_values[Count_unsigned_values];
+    Count_unsigned_values++;
+    n_lag_type=Unsigned_values[Count_unsigned_values];
+    Count_unsigned_values++;
    }
 
   // Null TimeStepper for now
@@ -1772,20 +2018,20 @@ template<class EXT_ELEMENT>
 
   // The first entry in nodal_info indicates
   // the timestepper required for this halo node
-  if (All_unsigned_values[loc_p]
-      [All_count_unsigned_values[loc_p]]==1)
+  if (Unsigned_values
+      [Count_unsigned_values]==1)
    {
-    All_count_unsigned_values[loc_p]++;
+    Count_unsigned_values++;
     // Index minus one!
     time_stepper_pt=problem_pt->time_stepper_pt
-     (All_unsigned_values[loc_p][All_count_unsigned_values[loc_p]]);
-    All_count_unsigned_values[loc_p]++;
+     (Unsigned_values[Count_unsigned_values]);
+    Count_unsigned_values++;
     // Check whether number of prev values is "sent" across
     n_prev+=time_stepper_pt->nprev_values();
    }
   else
    {
-    All_count_unsigned_values[loc_p]++;
+    Count_unsigned_values++;
    }
 
   // Is the node for which the master is required Algebraic, Macro or Solid?
@@ -1800,9 +2046,9 @@ template<class EXT_ELEMENT>
 
     // If this master node's haloed copy is on a boundary then 
     // it needs to be on the same boundary here
-    if (All_unsigned_values[loc_p][All_count_unsigned_values[loc_p]]==1)
+    if (Unsigned_values[Count_unsigned_values]==1)
      {
-      All_count_unsigned_values[loc_p]++;
+      Count_unsigned_values++;
       // Create a new BoundaryNode (not attached to an element)
       if (time_stepper_pt!=0)
        {
@@ -1818,23 +2064,23 @@ template<class EXT_ELEMENT>
       unsigned n_bnd=external_mesh_pt->nboundary();
       for (unsigned i_bnd=0;i_bnd<n_bnd;i_bnd++)
        {
-        if (All_unsigned_values[loc_p][All_count_unsigned_values[loc_p]]==1)
+        if (Unsigned_values[Count_unsigned_values]==1)
          {
           // Add to current boundary; increment counter
           external_mesh_pt->add_boundary_node(i_bnd,new_master_nod_pt);
-          All_count_unsigned_values[loc_p]++;
+          Count_unsigned_values++;
          }
         else
          {
           // Not on this boundary; incremenet counter
-          All_count_unsigned_values[loc_p]++;
+          Count_unsigned_values++;
          }
        }
      }
     else
      {
       // Not on any boundary, incremenet counter
-      All_count_unsigned_values[loc_p]++;
+      Count_unsigned_values++;
 
       // Create node (not attached to any element)
       if (time_stepper_pt!=0)
@@ -1857,43 +2103,43 @@ template<class EXT_ELEMENT>
      (external_mesh_pt);
 
     /// The first entry of All_unsigned_values is the default node update id
-    unsigned update_id=All_unsigned_values[loc_p]
-     [All_count_unsigned_values[loc_p]];
-    All_count_unsigned_values[loc_p]++;
+    unsigned update_id=Unsigned_values
+     [Count_unsigned_values];
+    Count_unsigned_values++;
 
     // Setup algebraic node update info for this new node
     Vector<double> ref_value;
 
     // The size of this vector is in the next entry
-    unsigned n_ref_val=All_unsigned_values[loc_p]
-     [All_count_unsigned_values[loc_p]];
-    All_count_unsigned_values[loc_p]++;
+    unsigned n_ref_val=Unsigned_values
+     [Count_unsigned_values];
+    Count_unsigned_values++;
 
     // The reference values are in the subsequent entries of All_double_values
     ref_value.resize(n_ref_val);
     for (unsigned i_ref=0;i_ref<n_ref_val;i_ref++)
      {
-      ref_value[i_ref]=All_double_values[loc_p]
-       [All_count_double_values[loc_p]];
-      All_count_double_values[loc_p]++;
+      ref_value[i_ref]=Double_values
+       [Count_double_values];
+      Count_double_values++;
      }
 
     // Also require a Vector of geometric objects
     Vector<GeomObject*> geom_object_pt;
 
     // The size of this vector is in the next entry of All_unsigned_values
-    unsigned n_geom_obj=All_unsigned_values[loc_p]
-     [All_count_unsigned_values[loc_p]];
-    All_count_unsigned_values[loc_p]++;
+    unsigned n_geom_obj=Unsigned_values
+     [Count_unsigned_values];
+    Count_unsigned_values++;
 
     // The remaining indices are in the rest of 
     // All_alg_nodal_info
     geom_object_pt.resize(n_geom_obj);
     for (unsigned i_geom=0;i_geom<n_geom_obj;i_geom++)
      {
-      unsigned geom_index=All_unsigned_values[loc_p]
-       [All_count_unsigned_values[loc_p]];
-      All_count_unsigned_values[loc_p]++;
+      unsigned geom_index=Unsigned_values
+       [Count_unsigned_values];
+      Count_unsigned_values++;
       // This index indicates which (if any) of the AlgebraicMesh's
       // stored geometric objects should be used
       geom_object_pt[i_geom]=alg_mesh_pt->geom_object_list_pt(geom_index);
@@ -1915,9 +2161,9 @@ template<class EXT_ELEMENT>
     // The master node should also be a macro node
     // If this master node's haloed copy is on a boundary then 
     // it needs to be on the same boundary here
-    if (All_unsigned_values[loc_p][All_count_unsigned_values[loc_p]]==1)
+    if (Unsigned_values[Count_unsigned_values]==1)
      {
-      All_count_unsigned_values[loc_p]++;
+      Count_unsigned_values++;
       // Create a new BoundaryNode (not attached to an element)
       if (time_stepper_pt!=0)
        {
@@ -1933,23 +2179,23 @@ template<class EXT_ELEMENT>
       unsigned n_bnd=external_mesh_pt->nboundary();
       for (unsigned i_bnd=0;i_bnd<n_bnd;i_bnd++)
        {
-        if (All_unsigned_values[loc_p][All_count_unsigned_values[loc_p]]==1)
+        if (Unsigned_values[Count_unsigned_values]==1)
          {
           // Add to current boundary; increment counter
           external_mesh_pt->add_boundary_node(i_bnd,new_master_nod_pt);
-          All_count_unsigned_values[loc_p]++;
+          Count_unsigned_values++;
          }
         else
          {
           // Not on this boundary; incremenet counter
-          All_count_unsigned_values[loc_p]++;
+          Count_unsigned_values++;
          }
        }
      }
     else
      {
       // Not on boundary, incremenet counter
-      All_count_unsigned_values[loc_p]++;
+      Count_unsigned_values++;
 
       // Create node (not attached to any element)
       if (time_stepper_pt!=0)
@@ -1964,14 +2210,14 @@ template<class EXT_ELEMENT>
        }
      }
 
-    // Add this as an external halo node BEFORE considering node update!
+    // Add this as an external halo node
     external_mesh_pt->add_external_halo_node_pt(loc_p,new_master_nod_pt);
 
     // Create a new node update element for this master node if required
     EXT_ELEMENT *new_node_update_el_pt;
-    if (All_unsigned_values[loc_p][All_count_unsigned_values[loc_p]]==1)
+    if (Unsigned_values[Count_unsigned_values]==1)
      {
-      All_count_unsigned_values[loc_p]++;
+      Count_unsigned_values++;
       new_node_update_el_pt=new EXT_ELEMENT;
 
       FiniteElement *f_el_pt=
@@ -1991,19 +2237,19 @@ template<class EXT_ELEMENT>
        }
 
       // If we're using macro elements to update,
-      if (All_unsigned_values[loc_p][All_count_unsigned_values[loc_p]]==1)
+      if (Unsigned_values[Count_unsigned_values]==1)
        {
-        All_count_unsigned_values[loc_p]++;
+        Count_unsigned_values++;
 
         // Set the macro element
         MacroElementNodeUpdateMesh* macro_mesh_pt=
          dynamic_cast<MacroElementNodeUpdateMesh*>
          (external_mesh_pt);
         unsigned macro_el_num=
-         All_unsigned_values[loc_p][All_count_unsigned_values[loc_p]];
+         Unsigned_values[Count_unsigned_values];
         new_node_update_el_pt->set_macro_elem_pt
          (macro_mesh_pt->macro_domain_pt()->macro_element_pt(macro_el_num));
-        All_count_unsigned_values[loc_p]++;
+        Count_unsigned_values++;
 
         // we need to receive
         // the lower left and upper right coordinates of the macro
@@ -2014,12 +2260,12 @@ template<class EXT_ELEMENT>
           unsigned el_dim=q_el_pt->dim();
           for (unsigned i_dim=0;i_dim<el_dim;i_dim++)
            {
-            q_el_pt->s_macro_ll(i_dim)=All_double_values[loc_p]
-             [All_count_double_values[loc_p]];
-            All_count_double_values[loc_p]++;
-            q_el_pt->s_macro_ur(i_dim)=All_double_values[loc_p]
-             [All_count_double_values[loc_p]];
-            All_count_double_values[loc_p]++;
+            q_el_pt->s_macro_ll(i_dim)=Double_values
+             [Count_double_values];
+            Count_double_values++;
+            q_el_pt->s_macro_ur(i_dim)=Double_values
+             [Count_double_values];
+            Count_double_values++;
            }
          }
         else // Throw an error
@@ -2036,7 +2282,7 @@ template<class EXT_ELEMENT>
        }
       else // No macro element
        {
-        All_count_unsigned_values[loc_p]++;
+        Count_unsigned_values++;
        }
 
 
@@ -2052,11 +2298,11 @@ template<class EXT_ELEMENT>
      }
     else // The node update element exists already
      {
-      All_count_unsigned_values[loc_p]++;
+      Count_unsigned_values++;
       new_node_update_el_pt=dynamic_cast<EXT_ELEMENT*>
        (external_mesh_pt->external_halo_element_pt
-        (loc_p,All_unsigned_values[loc_p][All_count_unsigned_values[loc_p]]));
-      All_count_unsigned_values[loc_p]++;
+        (loc_p,Unsigned_values[Count_unsigned_values]));
+      Count_unsigned_values++;
      }
 
     // Remaining required information to create functioning
@@ -2104,9 +2350,9 @@ template<class EXT_ELEMENT>
     // The master node should also be a SolidNode
     // If this node was on a boundary then it needs to
     // be on the same boundary here
-    if (All_unsigned_values[loc_p][All_count_unsigned_values[loc_p]]==1)
+    if (Unsigned_values[Count_unsigned_values]==1)
      {
-      All_count_unsigned_values[loc_p]++;
+      Count_unsigned_values++;
       // Construct a new boundary node
       if (time_stepper_pt!=0)
        {
@@ -2122,24 +2368,24 @@ template<class EXT_ELEMENT>
       unsigned n_bnd=external_mesh_pt->nboundary();
       for (unsigned i_bnd=0;i_bnd<n_bnd;i_bnd++)
        {
-        if (All_unsigned_values[loc_p][All_count_unsigned_values[loc_p]]==1)
+        if (Unsigned_values[Count_unsigned_values]==1)
          {
           // Add to current boundary; increment counter
           external_mesh_pt->add_boundary_node(i_bnd,
                                               new_master_nod_pt);
-          All_count_unsigned_values[loc_p]++;
+          Count_unsigned_values++;
          }
         else
          {
           // Not on this boundary; increment counter
-          All_count_unsigned_values[loc_p]++;
+          Count_unsigned_values++;
          }
        }
      }
     else
      {
       // Not on boundary, increment counter
-      All_count_unsigned_values[loc_p]++;
+      Count_unsigned_values++;
       // Construct an ordinary (non-boundary) node
       if (time_stepper_pt!=0)
        {
@@ -2165,7 +2411,7 @@ template<class EXT_ELEMENT>
        {
         solid_master_nod_pt->variable_position_pt()->
          set_value(t,i_val,
-                   All_double_values[loc_p][All_count_double_values[loc_p]]);
+                   Double_values[Count_double_values]);
        }
      }
 
@@ -2174,9 +2420,9 @@ template<class EXT_ELEMENT>
    {
     // If this node was on a boundary then it needs to
     // be on the same boundary here
-    if (All_unsigned_values[loc_p][All_count_unsigned_values[loc_p]]==1)
+    if (Unsigned_values[Count_unsigned_values]==1)
      {
-      All_count_unsigned_values[loc_p]++;
+      Count_unsigned_values++;
       // Construct a new boundary node
       if (time_stepper_pt!=0)
        {
@@ -2192,24 +2438,24 @@ template<class EXT_ELEMENT>
       unsigned n_bnd=external_mesh_pt->nboundary();
       for (unsigned i_bnd=0;i_bnd<n_bnd;i_bnd++)
        {
-        if (All_unsigned_values[loc_p][All_count_unsigned_values[loc_p]]==1)
+        if (Unsigned_values[Count_unsigned_values]==1)
          {
           // Add to current boundary; increment counter
           external_mesh_pt->add_boundary_node(i_bnd,
                                               new_master_nod_pt);
-          All_count_unsigned_values[loc_p]++;
+          Count_unsigned_values++;
          }
         else
          {
           // Not on this boundary; increment counter
-          All_count_unsigned_values[loc_p]++;
+          Count_unsigned_values++;
          }
        }
      }
     else
      {
       // Not on boundary, increment counter
-      All_count_unsigned_values[loc_p]++;
+      Count_unsigned_values++;
       // Construct an ordinary (non-boundary) node
       if (time_stepper_pt!=0)
        {
@@ -2234,9 +2480,9 @@ template<class EXT_ELEMENT>
    {
     for (unsigned t=0;t<n_prev;t++)
      {
-      new_master_nod_pt->set_value(t,i_val,All_double_values[loc_p]
-                                   [All_count_double_values[loc_p]]);
-      All_count_double_values[loc_p]++;
+      new_master_nod_pt->set_value(t,i_val,Double_values
+                                   [Count_double_values]);
+      Count_double_values++;
      }
    }
 
@@ -2247,9 +2493,9 @@ template<class EXT_ELEMENT>
     for (unsigned t=0;t<n_prev;t++)
      {
       // Copy to coordinate
-      new_master_nod_pt->x(t,idim)=All_double_values[loc_p]
-       [All_count_double_values[loc_p]];
-      All_count_double_values[loc_p]++;
+      new_master_nod_pt->x(t,idim)=Double_values
+       [Count_double_values];
+      Count_double_values++;
      }
    }
 

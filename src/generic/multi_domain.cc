@@ -43,29 +43,33 @@ namespace oomph
 //======================================================================
 namespace Multi_domain_functions
  {
+  // Lookup scheme for whether an element's integration point
+  // has had an external element assigned to it
+  Vector<Vector<unsigned> > External_element_located;
 
   // List of all Vectors used by the external storage routines 
   
   /// \short Vector of (local) coordinates at integration points of
   /// elements on current processor
+  Vector<double> Local_zetas;
+
+  /// \short Vector of (local) coordinates at integration points of
+  /// elements received from elsewhere
   Vector<double> Zetas;
 
   /// \short Vector of the dimension of the element on current processor
+  Vector<unsigned> Local_zeta_dim;
+
+  /// \short Vector of the dimension of the element received from elsewhere
   Vector<unsigned> Zeta_dim;
 
-  /// \short Vector to indicate which processor a coordinate is located on
+  /// \short Vector to indicate locally which processor a coordinate 
+  /// has been located on
   Vector<int> Found_zeta;
-
-  /// \short Vector of any elements found locally by current processor
-  Vector<FiniteElement*> Found_element;
 
   /// \short Vector of local coordinates within any elements found
   /// locally by current processor
   Vector<Vector<double> > Found_ss;
-
-  /// \short Global vector which combines all Found_zeta vectors on
-  /// every processor
-  Vector<int> All_found_zeta;
 
   /// \short Vector to indicate (on another process) whether a
   /// located element should be newly created (2), already exists (1), or
@@ -75,57 +79,80 @@ namespace Multi_domain_functions
   /// \short Vector of the local coordinates for each entry in Located_element
   Vector<double> Located_coord;
 
+  /// \short Vector for current processor which indicates when an external
+  /// halo element (and subsequent nodes) should be created
+  Vector<unsigned> Located_zetas;
+
   /// \short Vector of doubles to be sent from another processor
   Vector<double> Double_values;
 
   /// \short Vector of unsigneds to be sent from another processor
   Vector<unsigned> Unsigned_values;
 
-  // Counters for arrays used in the external storage routines
+  // Counters for each of the above arrays
+
+  /// \short Double_values
   unsigned Count_double_values;
+
+  /// \short Unsigned_values
   unsigned Count_unsigned_values;
+
+  /// \short Located_coord
   unsigned Count_located_coord;
-  unsigned Count_found_elements;
+
+  /// \short Local_zeta_dim
+  unsigned Count_local_zeta_dim;
+
+  /// \short Zeta_dim
   unsigned Count_zeta_dim;
+
+  /// \short Local_zetas
+  unsigned Count_local_zetas;
+ 
+  /// \short Zetas
   unsigned Count_zetas;
 
-  // The following Vector of Vectors (of size Nproc) store each required 
-  // set of the above information from each process required to create 
-  // external (halo) elements and nodes
-  Vector<Vector<unsigned> > All_located_zetas;
-  Vector<Vector<double> > All_located_coord;
-  Vector<Vector<double> > All_double_values;
-  Vector<Vector<unsigned> > All_unsigned_values;
+  /// Default parameters for the binning method
 
-  // These Vectors help to count through the above Vectors of Vectors
-  Vector<unsigned> All_count_double_values;
-  Vector<unsigned> All_count_located_coord;
-  Vector<unsigned> All_count_unsigned_values;
-
-
-  /// Default binning parameters
-
-  /// \short Bool to tell the MeshAsGeomObject to setup bins again
+  /// \short Bool to tell the MeshAsGeomObject of a change in default params
   /// (should only be used in conjunction with a change from default N*_bin;
   ///  the minimum and maximum of the Mesh used must also be specified)
-  bool Setup_bins_again=false;
+  bool Change_from_default_bin_parameters=false;
 
-  /// \short Number of bins along each dimension in binning method in
-  /// set_external_storage(). Default value of 10.
+  /// \short Number of bins in the first dimension in binning method in
+  /// setup_multi_domain_interaction(). Default value of 10.
   unsigned Nx_bin=10;
+
+  /// \short Number of bins in the second dimension in binning method in
+  /// setup_multi_domain_interaction(). Default value of 10.
   unsigned Ny_bin=10;
+
+  /// \short Number of bins in the third dimension in binning method in
+  /// setup_multi_domain_interaction(). Default value of 10.
   unsigned Nz_bin=10;
 
   /// \short Minimum and maximum coordinates for
   /// each dimension of the external mesh used to "create" the bins in
-  /// set_external_storage(). No defaults; set by user if they want to
-  /// (otherwise the MeshAsGeomObject calculates these values based
-  ///  upon the mesh itself; see MeshAsGeomObject::get_max_and_min_coords(...))
+  /// setup_multi_domain_interaction(). No defaults; set by user if they
+  /// want to (otherwise the MeshAsGeomObject calculates these values based
+  /// upon the mesh itself; see MeshAsGeomObject::get_max_and_min_coords(...))
+
+  /// \short Minimum coordinate in first dimension
   double X_min;
+
+  /// \short Maximum coordinate in first dimension
   double X_max;
+
+  /// \short Minimum coordinate in second dimension
   double Y_min;
+
+  /// \short Maximum coordinate in second dimension
   double Y_max;
+
+  /// \short Minimum coordinate in third dimension
   double Z_min;
+
+  /// \short Maximum coordinate in third dimension
   double Z_max;
 
   /// \short Percentage offset to add to each extreme of the bin structure.
@@ -141,28 +168,32 @@ namespace Multi_domain_functions
   bool Doc_timings=false;
 
   /// \short Boolean to indicate whether to output info during
-  ///        set_external_storage routines
-  bool Shut_up=true;
-
-  // Functions for location method in multi-domain problems 
+  ///        setup_multi_domain_interaction() routines
+  bool Doc_stats=false;
 
 #ifdef OOMPH_HAS_MPI
+
+  /// \short Boolean to indicate when to check for duplicate data
+  ///        between the external halo storage schemes
+  bool Check_for_duplicates=true;
+
+  // Functions for location method in multi-domain problems 
 
   //======================================================================
   /// Function which removes duplicate data that exist because
   /// they have been distinctly created by communications from different
   /// processors, whereas the data are in fact the same
   //======================================================================
-  void remove_duplicate_data(Mesh* const &mesh_pt)
+  void remove_duplicate_data(Problem* problem_pt, Mesh* const &mesh_pt)
   {
-   // Each individual container of external halo elements has unique
+   // Each individual container of external halo nodes has unique
    // nodes/equation numbers, but there may be some duplication between
    // two or more different containers; the following code checks for this
-   // and removes the duplication by pointing the a data point with an already
-   // existing eqn number to the original data point which had the eqn no.
+   // and removes the duplication by overwriting any data point with an already
+   // existing eqn number with the original data point which had the eqn no.
 
-   // Storage for existing global equation numbers
-   Vector<std::pair<Vector<int>,Node*> > existing_global_eqn_numbers(0);
+   // Storage for existing global equation numbers for each node
+   Vector<std::pair<Vector<int>,Node*> > existing_global_eqn_numbers;
 
    // Add all the global eqn numbers for external elements and nodes
    // that are stored locally first
@@ -183,6 +214,7 @@ namespace Multi_domain_functions
         {
          nodal_eqn_numbers[i_val]=nod_pt->eqn_number(i_val);
         }
+
        // All these nodes have unique equation numbers, so add all
        existing_global_eqn_numbers.push_back
         (make_pair(nodal_eqn_numbers,nod_pt));
@@ -206,9 +238,9 @@ namespace Multi_domain_functions
        // Take into account master nodes too
        if (dynamic_cast<RefineableElement*>(ext_el_pt)!=0)
         {
-         int n_cont_inter_values=dynamic_cast<RefineableElement*>
+         int n_cont_int_values=dynamic_cast<RefineableElement*>
           (ext_el_pt)->ncont_interpolated_values();
-         for (int i_cont=-1;i_cont<n_cont_inter_values;i_cont++)
+         for (int i_cont=-1;i_cont<n_cont_int_values;i_cont++)
           {
            if (nod_pt->is_hanging(i_cont))
             {
@@ -224,7 +256,7 @@ namespace Multi_domain_functions
                  master_nodal_eqn_numbers[i_val]=
                   master_nod_pt->eqn_number(i_val);
                 }
- 
+
                // Add these equation numbers to the existing storage
                existing_global_eqn_numbers.push_back
                 (make_pair(master_nodal_eqn_numbers,master_nod_pt));
@@ -255,14 +287,16 @@ namespace Multi_domain_functions
      // Internal data equation numbers do not need to be added since halo
      // elements cannot be external elements
     }
-    
+
    // Now loop over the other processors from highest to lowest
    // (i.e. if there is a duplicate between these containers
    //  then this will use the node on the highest numbered processor)
-   for (int iproc=MPI_Helpers::Nproc-1;iproc>=0;iproc--)
+   int n_proc=problem_pt->communicator_pt()->nproc();
+   int my_rank=problem_pt->communicator_pt()->my_rank();
+   for (int iproc=n_proc-1;iproc>=0;iproc--)
     {
      // Don't have external halo elements with yourself!
-     if (iproc!=MPI_Helpers::My_rank)
+     if (iproc!=my_rank)
       {
        // Loop over external halo elements with iproc for internal data
        // to remove the duplicates in the external halo element storage
@@ -402,8 +436,7 @@ namespace Multi_domain_functions
                // for them to be bypassed in assign_(local)_eqn_numbers; they
                // receive the correct global equation numbers during the
                // synchronisation process in 
-               // Problem::copy_external_haloed_eqn_numbers_helper(...)
-   
+               // Problem::copy_external_haloed_eqn_numbers_helper(...)   
                for (unsigned i_val=0;i_val<n_val;i_val++)
                 {
                  solid_nod_pt->variable_position_pt()->
@@ -461,8 +494,8 @@ namespace Multi_domain_functions
                                [i_val])
                             {
                              is_a_duplicate=true;
-                             // It's a duplicate, so point the current master 
-                             // node at the original node instead!
+                             // It's a duplicate, so point this node's
+                             // master at the original node instead!
                              // Need the weight of the original node
                              double m_weight=hang_pt->master_weight(m);
                              // Set master
@@ -490,7 +523,7 @@ namespace Multi_domain_functions
                      // These external halo nodes need to be unclassified in
                      // order for them to be bypassed in assign_eqn_numbers;
                      // they receive the correct global equation numbers during
-                     // the synchronisation process in 
+                     // the synchronisation process in
                      // Problem::copy_external_haloed_eqn_numbers_helper(...)
                      for (unsigned i_val=0;i_val<n_val;i_val++)
                       {
@@ -578,15 +611,15 @@ namespace Multi_domain_functions
                       }
 
 
-                    } 
+                    }
 
                   }
                 }
               } // end hanging loop over continous interpolated variables
             }
-
-          } // end loop over nodes on external halo elements 
-
+          
+          } // end loop over nodes on external halo elements
+        
          // Reset any internal data to Is_unclassified as there
          // cannot be any duplication (a halo element cannot be an 
          // external halo element)
@@ -685,252 +718,269 @@ namespace Multi_domain_functions
     }
   }
 
-
+#ifdef OOMPH_HAS_MPI
 
 //========================================================================
-/// Broadcast the zeta coordinates from the current process (iproc) to 
-/// all other processes
+/// Send the zeta coordinates from the current process to 
+/// the next process; receive from the previous process
 //========================================================================
-  void broadcast_local_zeta(int& iproc, Mesh* const &mesh_pt)
+  void send_and_receive_missing_zetas(Problem* problem_pt)
   {
-#ifdef OOMPH_HAS_MPI
+   // MPI info
    MPI_Status status;
-#endif
-   // Resize arrays
-   Zetas.resize(0);
-   Zeta_dim.resize(0);
-   // Initialise counters
-   Count_zetas=0;
-   Count_zeta_dim=0;
+   MPI_Request request;
 
-   // Number of elements
-   unsigned n_element;
-   // Current process?
-   if (iproc==MPI_Helpers::My_rank)
+   // Storage for number of processors, current process and communicator
+   int n_proc=problem_pt->communicator_pt()->nproc();
+   int my_rank=problem_pt->communicator_pt()->my_rank();
+   OomphCommunicator* comm_pt=problem_pt->communicator_pt();
+
+   // Work out processors to send and receive from
+   int send_to_proc=my_rank+1;
+   int recv_from_proc=my_rank-1;
+   if (send_to_proc==n_proc) { send_to_proc=0; }
+   if (recv_from_proc<0) { recv_from_proc=n_proc-1; }
+
+   // Copy the "local" arrays in order to send to required process
+   Count_zeta_dim=Count_local_zeta_dim;
+   Zeta_dim.resize(Count_zeta_dim);
+   for (unsigned i=0;i<Count_zeta_dim;i++)
     {
-     // Find the "zetas" on this process and send them to all other processes
-     n_element=mesh_pt->nelement();
-     // If there are no elements then there's no need to do anything on any
-     // process; "broadcast" the number of elements to every other process
-     // "Broadcast" the number of elements to expect to every other process
-#ifdef OOMPH_HAS_MPI
-     for (int d=0;d<MPI_Helpers::Nproc;d++)
-      {
-       if (d!=iproc)
-        {
-         MPI_Send(&n_element,1,MPI_INT,d,0,MPI_COMM_WORLD);
-        }
-      }
-#endif
-     // Only need to do any work if this process has any elements
-     if (n_element>0)
-      {
-       // Prepare vectors to send to other processes
-       for (unsigned e=0;e<n_element;e++)
-        {
-         ElementWithExternalElement *el_pt=
-          dynamic_cast<ElementWithExternalElement*>(mesh_pt->element_pt(e));
-         // Only need to work on non-halo elements
-#ifdef OOMPH_HAS_MPI
-         if (!el_pt->is_halo())
-#endif
-          {
-           // Find number of Gauss points and element dimension
-           unsigned n_intpt=el_pt->integral_pt()->nweight();
-           unsigned el_dim=el_pt->dim();
-           // Set storage for local and global coordinates
-           Vector<double> s_local(el_dim);
-           Vector<double> x_global(el_dim);
-
-           // Loop over integration points
-           for (unsigned ipt=0;ipt<n_intpt;ipt++)
-            {
-             // Get local coordinates
-             for (unsigned i=0;i<el_dim;i++)
-              {
-               s_local[i]=el_pt->integral_pt()->knot(ipt,i);
-              }
-             // Interpolate to global coordinates
-             el_pt->interpolated_zeta(s_local,x_global);
-             // Add this global coordinate to the zeta array
-             for (unsigned i=0;i<el_dim;i++)
-              {
-               Zetas.push_back(x_global[i]);
-               Count_zetas++;
-              }
-             // Add the element dimension to the Zeta_dim array
-             Zeta_dim.push_back(el_dim);
-             Count_zeta_dim++;
-            }
-          }
-        }
-
-#ifdef OOMPH_HAS_MPI
-       // Send the Zetas array to all other processes
-       for (int d=0;d<MPI_Helpers::Nproc;d++)
-        {
-         // Don't send to yourself
-         if (d!=iproc)
-          {
-           MPI_Send(&Count_zeta_dim,1,MPI_INT,d,1,MPI_COMM_WORLD);
-           if (Count_zeta_dim!=0)
-            {
-             MPI_Send(&Zeta_dim[0],Count_zeta_dim,MPI_INT,
-                      d,3,MPI_COMM_WORLD);
-            }
-           MPI_Send(&Count_zetas,1,MPI_INT,d,4,MPI_COMM_WORLD);
-           if (Count_zetas!=0)
-            {           
-             MPI_Send(&Zetas[0],Count_zetas,MPI_DOUBLE,d,5,MPI_COMM_WORLD);
-            }
-          }
-        }
-#endif
-
-      }  
+     Zeta_dim[i]=Local_zeta_dim[i];
     }
-   else
+   Count_zetas=Count_local_zetas;
+   Zetas.resize(Count_zetas);
+   for (unsigned i=0;i<Count_zetas;i++)
     {
-#ifdef OOMPH_HAS_MPI
-     MPI_Recv(&n_element,1,MPI_INT,iproc,0,MPI_COMM_WORLD,&status);
-
-     if (n_element>0)
-      {
-       // Receive the zeta array from the loop process
-       MPI_Recv(&Count_zeta_dim,1,MPI_INT,iproc,1,MPI_COMM_WORLD,&status);
-       if (Count_zeta_dim!=0)
-        {
-         Zeta_dim.resize(Count_zeta_dim);
-         MPI_Recv(&Zeta_dim[0],Count_zeta_dim,MPI_INT,iproc,3,
-                  MPI_COMM_WORLD,&status);
-        }
-
-       MPI_Recv(&Count_zetas,1,MPI_INT,iproc,4,MPI_COMM_WORLD,&status);
-       if (Count_zetas!=0)
-        {       
-         Zetas.resize(Count_zetas);
-         MPI_Recv(&Zetas[0],Count_zetas,MPI_DOUBLE,iproc,5,
-                  MPI_COMM_WORLD,&status);
-        }
-      }
-#endif
+     Zetas[i]=Local_zetas[i];
     }
+
+   // Send "local" values to next processor up
+   MPI_Isend(&Count_local_zeta_dim,1,MPI_INT,
+            send_to_proc,1,comm_pt->mpi_comm(),&request);
+   // Receive from previous processor
+   MPI_Recv(&Count_zeta_dim,1,MPI_INT,recv_from_proc,
+            1,comm_pt->mpi_comm(),&status);
+   MPI_Wait(&request,MPI_STATUS_IGNORE);
+
+   // Now do the Zeta_dim array
+   if (Count_local_zeta_dim!=0)
+    {
+     MPI_Isend(&Local_zeta_dim[0],Count_local_zeta_dim,MPI_INT,
+              send_to_proc,3,comm_pt->mpi_comm(),&request);
+    }
+   if (Count_zeta_dim!=0)
+    {
+     Zeta_dim.resize(Count_zeta_dim);
+     MPI_Recv(&Zeta_dim[0],Count_zeta_dim,MPI_INT,recv_from_proc,3,
+              comm_pt->mpi_comm(),&status);
+     MPI_Wait(&request,MPI_STATUS_IGNORE);
+    }
+
+   // Now do the Zetas array
+   MPI_Isend(&Count_local_zetas,1,MPI_INT,send_to_proc,4,comm_pt->mpi_comm(),
+             &request);
+   MPI_Recv(&Count_zetas,1,MPI_INT,recv_from_proc,
+            4,comm_pt->mpi_comm(),&status);
+
+   MPI_Wait(&request,MPI_STATUS_IGNORE);
+
+   if (Count_local_zetas!=0)
+    {           
+     MPI_Isend(&Local_zetas[0],Count_local_zetas,MPI_DOUBLE,
+              send_to_proc,5,comm_pt->mpi_comm(),&request);
+    }
+   if (Count_zetas!=0)
+    {       
+     Zetas.resize(Count_zetas);
+     MPI_Recv(&Zetas[0],Count_zetas,MPI_DOUBLE,recv_from_proc,5,
+              comm_pt->mpi_comm(),&status);
+     MPI_Wait(&request,MPI_STATUS_IGNORE);
+    }
+
+   // Now we should have the Zetas and Zeta_dim arrays set up correctly
+   // for the next round of locations
+
   }
 
-
-
-#ifdef OOMPH_HAS_MPI
-//========start of prepare_and_send_external_element_info=================
-/// Prepares external element information from non-loop processor to
-/// send to loop processor for the creation of external halo elements
+//========start of send_and_receive_located_info==========================
+/// Send location information from current process; Received location
+/// information from (current process + iproc) modulo (nproc)
 //========================================================================
-  void prepare_and_send_external_element_info
+  void send_and_receive_located_info
   (int& iproc, Mesh* const &external_mesh_pt, Problem* problem_pt)
   {
+   // Set MPI info
    MPI_Status status;
+   MPI_Request request;
 
-   // Initialise all the required arrays on the loop processor
-   All_double_values.resize(MPI_Helpers::Nproc);
-   All_located_coord.resize(MPI_Helpers::Nproc);
-   All_located_zetas.resize(MPI_Helpers::Nproc);
-   All_unsigned_values.resize(MPI_Helpers::Nproc);
+   // Storage for number of processors, current process and communicator
+   OomphCommunicator* comm_pt=problem_pt->communicator_pt();
+   int n_proc=comm_pt->nproc();
+   int my_rank=comm_pt->my_rank();
 
-   All_count_double_values.resize(MPI_Helpers::Nproc);
-   All_count_located_coord.resize(MPI_Helpers::Nproc);
-   All_count_unsigned_values.resize(MPI_Helpers::Nproc);
- 
-   // Are we on the "main" loop processor?
-   if (iproc==MPI_Helpers::My_rank)
+   // Prepare vectors to receive information
+   Vector<double> received_double_values;
+   Vector<unsigned> received_unsigned_values;
+   Vector<double> received_located_coord;
+   Vector<int> received_found_zeta;
+
+   // Communicate the located information back to the original process
+   int orig_send_proc=my_rank-iproc;
+   if (my_rank<iproc) { orig_send_proc=n_proc+orig_send_proc; }
+   int orig_recv_proc=my_rank+iproc;
+   if ((my_rank+iproc)>=n_proc) { orig_recv_proc=orig_recv_proc-n_proc; }
+
+   // Store all this processor's Count_* variables to use in sends
+   unsigned send_count_double_values=Count_double_values;
+   unsigned send_count_zeta_dim=Count_zeta_dim;
+   unsigned send_count_located_coord=Count_located_coord;
+   unsigned send_count_unsigned_values=Count_unsigned_values;
+
+   // Send the double values associated with external halos
+   MPI_Isend(&send_count_double_values,1,MPI_INT,
+            orig_send_proc,1,comm_pt->mpi_comm(),&request);
+   MPI_Recv(&Count_double_values,1,MPI_INT,
+            orig_recv_proc,1,comm_pt->mpi_comm(),&status);
+   MPI_Wait(&request,MPI_STATUS_IGNORE);
+
+   if (send_count_double_values!=0)
     {
-     // Receive the sent information from the other processes
-     // where locate_zeta succeeded and setup external halo structure
-     
-     // Loop over other processes
-     for (int d=0;d<MPI_Helpers::Nproc;d++)
-      {
-       if (d!=iproc)
-        {
-         MPI_Recv(&Count_double_values,1,MPI_INT,d,1,MPI_COMM_WORLD,&status);
-         All_count_double_values[d]=Count_double_values;
-
-         if (Count_double_values!=0)
-          {
-           All_double_values[d].resize(Count_double_values);
-
-           MPI_Recv(&All_double_values[d][0],Count_double_values,MPI_DOUBLE,d,
-                    2,MPI_COMM_WORLD,&status);
-          }
-
-         if (Count_zeta_dim!=0)
-          {
-           All_located_zetas[d].resize(Count_zeta_dim);
-           MPI_Recv(&All_located_zetas[d][0],Count_zeta_dim,MPI_INT,d,3,
-                    MPI_COMM_WORLD,&status);
-          }
-
-         MPI_Recv(&Count_located_coord,1,MPI_INT,d,4,
-                  MPI_COMM_WORLD,&status);
-
-         All_count_located_coord[d]=Count_located_coord;
-         if (Count_located_coord!=0)
-          {
-           All_located_coord[d].resize(Count_located_coord);
-           MPI_Recv(&All_located_coord[d][0],Count_located_coord,MPI_DOUBLE,d,
-                    5,MPI_COMM_WORLD,&status);
-          }
-
-         MPI_Recv(&Count_unsigned_values,1,MPI_INT,d,14,
-                  MPI_COMM_WORLD,&status);
-
-         All_count_unsigned_values[d]=Count_unsigned_values;
-         if (Count_unsigned_values!=0)
-          {
-           All_unsigned_values[d].resize(Count_unsigned_values);
-           MPI_Recv(&All_unsigned_values[d][0],Count_unsigned_values,MPI_INT,
-                    d,15,MPI_COMM_WORLD,&status);
-          }
-
-        }
-      }
-
+     MPI_Isend(&Double_values[0],send_count_double_values,MPI_DOUBLE,
+              orig_send_proc,2,comm_pt->mpi_comm(),&request);
     }
-   else // iproc!=MPI_Helpers::My_rank i.e. not current process
+
+   // Receive the double values from the correct processor
+   if (Count_double_values!=0)
     {
-     // Now that locate_zeta ought to have worked for each integration
-     // point on each (non-halo) element in iproc's mesh, communicate
-     // the required element and node info back to process iproc
-     // (Note that the order is preserved due to the found_zeta[..] array)
+     received_double_values.resize(Count_double_values);
+     MPI_Recv(&received_double_values[0],Count_double_values,
+              MPI_DOUBLE,orig_recv_proc,2,comm_pt->mpi_comm(),&status);
+    }
 
-     MPI_Send(&Count_double_values,1,MPI_INT,iproc,1,MPI_COMM_WORLD);
-     if (Count_double_values!=0)
-      {
-       MPI_Send(&Double_values[0],Count_double_values,MPI_DOUBLE,iproc,2,
-                MPI_COMM_WORLD);
-      }
+   if (send_count_double_values!=0)
+    {
+     MPI_Wait(&request,MPI_STATUS_IGNORE);
+    }
 
-     if (Count_zeta_dim!=0)
-      {
-       MPI_Send(&Located_element[0],Count_zeta_dim,MPI_INT,
-                iproc,3,MPI_COMM_WORLD);
-      }
+   // Now send unsigned values associated with external halos
+   MPI_Isend(&send_count_unsigned_values,1,MPI_INT,
+            orig_send_proc,14,comm_pt->mpi_comm(),&request);
 
-     MPI_Send(&Count_located_coord,1,MPI_INT,iproc,4,MPI_COMM_WORLD);
-     if (Count_located_coord!=0)
-      {     
-       MPI_Send(&Located_coord[0],Count_located_coord,MPI_DOUBLE,
-                iproc,5,MPI_COMM_WORLD);
-      }
+   MPI_Recv(&Count_unsigned_values,1,MPI_INT,orig_recv_proc,14,
+            comm_pt->mpi_comm(),&status);
 
-     MPI_Send(&Count_unsigned_values,1,MPI_INT,iproc,14,MPI_COMM_WORLD);
-     if (Count_unsigned_values!=0)
-      {     
-       MPI_Send(&Unsigned_values[0],Count_unsigned_values,MPI_INT,iproc,15,
-                MPI_COMM_WORLD);
-      }
+   MPI_Wait(&request,MPI_STATUS_IGNORE);
 
+   if (send_count_unsigned_values!=0)
+    {     
+     MPI_Isend(&Unsigned_values[0],send_count_unsigned_values,MPI_INT,
+              orig_send_proc,15,comm_pt->mpi_comm(),&request);
+    }
+
+   // Receive the unsigned values from the correct processor
+   if (Count_unsigned_values!=0)
+    {
+     received_unsigned_values.resize(Count_unsigned_values);
+     MPI_Recv(&received_unsigned_values[0],Count_unsigned_values,MPI_INT,
+              orig_recv_proc,15,comm_pt->mpi_comm(),&status);
+    }
+
+   if (send_count_unsigned_values!=0)
+    {
+     MPI_Wait(&request,MPI_STATUS_IGNORE);
+    }
+
+   // Send and received the Located_element and Found_zeta arrays
+   MPI_Isend(&send_count_zeta_dim,1,MPI_INT,orig_send_proc,
+            20,comm_pt->mpi_comm(),&request);
+   MPI_Recv(&Count_zeta_dim,1,MPI_INT,orig_recv_proc,
+            20,comm_pt->mpi_comm(),&status);
+   MPI_Wait(&request,MPI_STATUS_IGNORE);
+
+   if (send_count_zeta_dim!=0)
+    {
+     MPI_Isend(&Located_element[0],send_count_zeta_dim,MPI_INT,
+              orig_send_proc,3,comm_pt->mpi_comm(),&request);
+    }
+   if (Count_zeta_dim!=0)
+    {
+     Located_zetas.resize(Count_zeta_dim);
+     MPI_Recv(&Located_zetas[0],Count_zeta_dim,MPI_INT,orig_recv_proc,3,
+              comm_pt->mpi_comm(),&status);
+    }
+   if (send_count_zeta_dim!=0)
+    {
+     MPI_Wait(&request,MPI_STATUS_IGNORE);
+    }
+
+
+   if (send_count_zeta_dim!=0)
+    {
+     MPI_Isend(&Found_zeta[0],send_count_zeta_dim,MPI_INT,
+              orig_send_proc,13,comm_pt->mpi_comm(),&request);
+    }
+   if (Count_zeta_dim!=0)
+    {
+     received_found_zeta.resize(Count_zeta_dim);
+     MPI_Recv(&received_found_zeta[0],Count_zeta_dim,MPI_INT,orig_recv_proc,13,
+              comm_pt->mpi_comm(),&status);
+    }
+   if (send_count_zeta_dim!=0)
+    {
+     MPI_Wait(&request,MPI_STATUS_IGNORE);
+    }
+
+
+   // And finally the Located_coord array
+   MPI_Isend(&send_count_located_coord,1,MPI_INT,
+            orig_send_proc,4,comm_pt->mpi_comm(),&request);
+   MPI_Recv(&Count_located_coord,1,MPI_INT,orig_recv_proc,4,
+            comm_pt->mpi_comm(),&status);
+   MPI_Wait(&request,MPI_STATUS_IGNORE);
+
+   if (send_count_located_coord!=0)
+    {     
+     MPI_Isend(&Located_coord[0],send_count_located_coord,MPI_DOUBLE,
+              orig_send_proc,5,comm_pt->mpi_comm(),&request);
+    }
+   if (Count_located_coord!=0)
+    {
+     received_located_coord.resize(Count_located_coord);
+     MPI_Recv(&received_located_coord[0],Count_located_coord,MPI_DOUBLE,
+              orig_recv_proc,5,comm_pt->mpi_comm(),&status);
+    }
+   if (send_count_located_coord!=0)
+    {
+     MPI_Wait(&request,MPI_STATUS_IGNORE);
+    }
+
+   // Fill in local arrays again: double and unsigned values
+   Double_values.resize(Count_double_values);
+   for (unsigned ii=0;ii<Count_double_values;ii++)
+    {
+     Double_values[ii]=received_double_values[ii];
+    }
+   Unsigned_values.resize(Count_unsigned_values);
+   for (unsigned ii=0;ii<Count_unsigned_values;ii++)
+    {
+     Unsigned_values[ii]=received_unsigned_values[ii];
+    }
+
+   // Found_zeta and Located_coord
+   Found_zeta.resize(Count_zeta_dim);
+   for (unsigned ii=0;ii<Count_zeta_dim;ii++)
+    {
+     Found_zeta[ii]=received_found_zeta[ii];
+    }
+   Located_coord.resize(Count_located_coord);
+   for (unsigned ii=0;ii<Count_located_coord;ii++)
+    {
+     Located_coord[ii]=received_located_coord[ii];
     }
 
   }
+
 
 //========start of add_external_haloed_node_to_storage====================
 /// Helper function to add external haloed nodes, including any masters
@@ -965,9 +1015,10 @@ namespace Multi_domain_functions
        for (unsigned m=0;m<n_master;m++)
         {
          Node* master_nod_pt=hang_pt->master_node_pt(m);
+
          // Call the helper function for master nodes
          add_external_haloed_master_node_helper(iproc,master_nod_pt,
-                                                nod_pt,problem_pt,
+                                                problem_pt,
                                                 external_mesh_pt,
                                                 n_cont_inter_values);
 
@@ -995,36 +1046,26 @@ namespace Multi_domain_functions
                                       int& n_cont_inter_values,
                                       FiniteElement* f_el_pt)
   {
-   // Check whether node is currently an external haloed node
-   bool is_an_external_haloed_node=false;
-   unsigned external_haloed_node_index;
+   // Attempt to add this node as an external haloed node
    unsigned n_ext_haloed_nod=external_mesh_pt->nexternal_haloed_node(iproc);
-   for (unsigned k=0;k<n_ext_haloed_nod;k++)
-    {
-     if (nod_pt==
-         external_mesh_pt->external_haloed_node_pt(iproc,k))
-      {
-       is_an_external_haloed_node=true;
-       external_haloed_node_index=k;
-       break;
-      }
-    }
+   unsigned external_haloed_node_index;
+   external_haloed_node_index=
+    external_mesh_pt->add_external_haloed_node_pt(iproc,nod_pt);
 
-   // If it's not then add it
-   if (!is_an_external_haloed_node)
+   // If it was added then the new index should match the size of the storage
+   if (external_haloed_node_index==n_ext_haloed_nod)
     {
      // Indicate that this node needs to be constructed on
      // the other process
      Unsigned_values.push_back(1);
      Count_unsigned_values++;
-     // This gets all the required information for the specified
-     // node and stores it into MPI-sendable information
+
+     // This helper function gets all the required information for the 
+     // specified node and stores it into MPI-sendable information
      // so that a halo copy can be made on the receiving process
      get_required_nodal_information_helper(iproc,nod_pt,
                                            problem_pt,external_mesh_pt,
                                            n_cont_inter_values,f_el_pt);
-     // Add it as an external haloed node
-     external_mesh_pt->add_external_haloed_node_pt(iproc,nod_pt);
     }
    else // It was already added
     {
@@ -1042,31 +1083,19 @@ namespace Multi_domain_functions
 /// Helper function to add external haloed node that is a master
 //========================================================================
  void add_external_haloed_master_node_helper(int& iproc, Node* master_nod_pt,
-                                             Node* nod_pt, Problem* problem_pt,
+                                             Problem* problem_pt,
                                              Mesh* const &external_mesh_pt,
                                              int& n_cont_inter_values)
   {
-   // Check whether node is currently an external haloed node
-   bool is_an_external_haloed_node=false;
-   unsigned external_haloed_node_index;
+   // Attempt to add node as an external haloed node
    unsigned n_ext_haloed_nod=external_mesh_pt->nexternal_haloed_node(iproc);
-   for (unsigned k=0;k<n_ext_haloed_nod;k++)
-    {
-     if (master_nod_pt==
-         external_mesh_pt->external_haloed_node_pt(iproc,k))
-      {
-       is_an_external_haloed_node=true;
-       external_haloed_node_index=k;
-       break;
-      }
-    }
+   unsigned external_haloed_node_index;
+   external_haloed_node_index=
+    external_mesh_pt->add_external_haloed_node_pt(iproc,master_nod_pt);
 
-   // If it's not then add it
-   if (!is_an_external_haloed_node)
+   // If it was added the returned index is the same as current storage size
+   if (external_haloed_node_index==n_ext_haloed_nod)
     {
-     // Add it as an external haloed node
-     external_mesh_pt->add_external_haloed_node_pt(iproc,master_nod_pt);
-
      // Indicate that this node needs to be constructed on
      // the other process
      Unsigned_values.push_back(1);
@@ -1076,7 +1105,7 @@ namespace Multi_domain_functions
      // master node and stores it into MPI-sendable information
      // so that a halo copy can be made on the receiving process
      get_required_master_nodal_information_helper(iproc,master_nod_pt,
-                                                  nod_pt,problem_pt,
+                                                  problem_pt,
                                                   external_mesh_pt,
                                                   n_cont_inter_values);
     }
@@ -1218,14 +1247,8 @@ namespace Multi_domain_functions
       }
     }
 
-   // Is it a MacroElementNodeUpdateNode?
-   MacroElementNodeUpdateNode* macro_nod_pt=
-    dynamic_cast<MacroElementNodeUpdateNode*>(nod_pt);
-   if (macro_nod_pt!=0)
-    {
-     // It would appear as though everything required is taken care
-     // of in the element anyway
-    }
+   // If it is a MacroElementNodeUpdateNode, everything has been
+   // dealt with by the new element already
 
    // Is it a SolidNode?
    SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
@@ -1275,7 +1298,7 @@ namespace Multi_domain_functions
 /// master node (and possible element) can be created on the receiving process
 //========================================================================
  void get_required_master_nodal_information_helper
- (int& iproc, Node* master_nod_pt, Node* nod_pt, Problem* problem_pt,
+ (int& iproc, Node* master_nod_pt, Problem* problem_pt,
   Mesh* const &external_mesh_pt, int& n_cont_inter_values)
   {
    // Need to send over dimension, position type and number of values
@@ -1420,32 +1443,20 @@ namespace Multi_domain_functions
     {
      // Loop over current external haloed elements - has the element which
      // controls the node update for this node been added yet?
-     bool already_external_haloed_element=false;
-     unsigned external_haloed_index;
-
      FiniteElement* macro_node_update_el_pt=
       macro_nod_pt->node_update_element_pt();
+
      unsigned n_ext_haloed_el=external_mesh_pt->
       nexternal_haloed_element(iproc);
-     for (unsigned e=0;e<n_ext_haloed_el;e++)
-      {
-       if (macro_node_update_el_pt==
-           (external_mesh_pt->external_haloed_element_pt(iproc,e)))
-        {
-         already_external_haloed_element=true;
-         external_haloed_index=e;
-         break;
-        }
-      }
+     unsigned external_haloed_el_index;
+     external_haloed_el_index=external_mesh_pt->
+      add_external_haloed_element_pt(iproc,macro_node_update_el_pt);
 
-     // If it's not already externally haloed then it needs to be
-     if (!already_external_haloed_element)
+     // If it wasn't already added, we need to create a halo copy
+     if (external_haloed_el_index==n_ext_haloed_el)
       {
        Unsigned_values.push_back(1);
        Count_unsigned_values++;
-
-       external_mesh_pt->add_external_haloed_element_pt
-        (iproc,macro_node_update_el_pt);
 
        // We're using macro elements to update...
        MacroElementNodeUpdateMesh* macro_mesh_pt=
@@ -1513,12 +1524,12 @@ namespace Multi_domain_functions
                                              macro_node_update_el_pt);
         }
       }
-     else // The external haloed node already exists
+     else // The external haloed element already exists
       {
        Unsigned_values.push_back(0);
        Count_unsigned_values++;
 
-       Unsigned_values.push_back(external_haloed_index);
+       Unsigned_values.push_back(external_haloed_el_index);
        Count_unsigned_values++;
       }
 
@@ -1571,29 +1582,20 @@ namespace Multi_domain_functions
  void clean_up()
   {
    // Clear every vector associated with the external storage creation
+   Local_zetas.clear();
    Zetas.clear();
+   Local_zeta_dim.clear();
    Zeta_dim.clear();
+
    Found_zeta.clear();
-   Found_element.clear();
    Found_ss.clear();
-   All_found_zeta.clear();
 
    Located_element.clear();
+   Located_zetas.clear();
    Located_coord.clear();
+
    Double_values.clear();
    Unsigned_values.clear();
-
-   // These Vector of Vectors (of size Nproc) stored each required set of 
-   // information from each process to create external (halo) elements
-   All_double_values.clear();
-   All_located_coord.clear();
-   All_located_zetas.clear();
-   All_unsigned_values.clear();
-
-   // Clear the corresponding counter arrays
-   All_count_double_values.clear();
-   All_count_located_coord.clear();
-   All_count_unsigned_values.clear();
   }
 
 

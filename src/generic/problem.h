@@ -1123,12 +1123,14 @@ protected:
 
  /// \short Distribute the problem and doc, using the specified partition; 
  /// returns a vector which details the partitioning
- Vector<unsigned>& distribute(DocInfo& doc_info, const bool& report_stats,
-                              const Vector<unsigned>& element_partition);
+ Vector<unsigned>& distribute(const Vector<unsigned>& element_partition,
+                              DocInfo& doc_info, 
+                              const bool& report_stats=false);
  
  /// \short Distribute the problem; returns a vector which
  /// details the partitioning
- Vector<unsigned>& distribute(DocInfo& doc_info, const bool& report_stats);
+ Vector<unsigned>& distribute(DocInfo& doc_info, 
+                              const bool& report_stats=false);
 
  /// \short Distribute the problem using the specified partition; 
  /// returns a vector which details the partitioning

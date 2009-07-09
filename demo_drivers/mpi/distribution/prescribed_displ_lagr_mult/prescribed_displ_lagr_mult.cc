@@ -459,7 +459,7 @@ void PrescribedBoundaryDisplacementProblem<ELEMENT>::doc_solution()
  // Output shape of deformed body
  //------------------------------
  sprintf(filename,"%s/soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
-         Doc_info.number(),MPI_Helpers::My_rank);
+         Doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  solid_mesh_pt()->output(some_file,n_plot);
  some_file.close();
@@ -467,7 +467,7 @@ void PrescribedBoundaryDisplacementProblem<ELEMENT>::doc_solution()
  // Output Lagrange multipliers
  //----------------------------
  sprintf(filename,"%s/lagr%i_on_proc%i.dat",Doc_info.directory().c_str(),
-         Doc_info.number(),MPI_Helpers::My_rank);
+         Doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
 
  // This makes sure the elements are ordered in same way every time
@@ -514,8 +514,8 @@ int main(int argc, char* argv[])
  std::ofstream output_file;
  char filename[100];
 
- /// Only the solid ("bulk") mesh was distributed
- unsigned n_partition=problem.solid_mesh_pt()->nelement();
+ /// All meshes are partitioned
+ unsigned n_partition=problem.mesh_pt()->nelement();
 
  // Get the partition from file
  Vector<unsigned> element_partition(n_partition);
@@ -528,18 +528,9 @@ int main(int argc, char* argv[])
    element_partition[e]=atoi(input_string.c_str());
   }
 
-// Vector<unsigned> out_element_partition;
+ // Distribute and check halo schemes
  bool report_stats=false;
- problem.distribute(mesh_doc_info,report_stats,element_partition);
-//                     out_element_partition);
-
-//  sprintf(filename,"out_presc_displ_lagr_mult_partition.dat");
-//  output_file.open(filename);
-//  for (unsigned e=0;e<n_partition;e++)
-//   {
-//    output_file << out_element_partition[e] << std::endl;
-//   }
-
+ problem.distribute(element_partition,mesh_doc_info,report_stats);
  problem.check_halo_schemes(mesh_doc_info);
 #endif
  

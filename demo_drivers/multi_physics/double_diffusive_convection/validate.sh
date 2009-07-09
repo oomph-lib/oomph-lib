@@ -56,7 +56,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/dd_multimesh.dat.gz \
-    dd_multimesh.dat  0.1 1.0e-14 >> validation.log
+    dd_multimesh.dat  0.1 1.0e-12 >> validation.log
 fi
 mv RESLT RESLT_dd_multimesh
 
@@ -80,7 +80,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/ref_dd_multimesh.dat.gz \
-    ref_dd_multimesh.dat  0.1 1.0e-14>> validation.log
+    ref_dd_multimesh.dat 0.1 2.0e-12 >> validation.log
 fi
 
 

@@ -25,9 +25,9 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-//Driver for 3D Airy cantilever beam problem
-
-#include <fenv.h>
+//Driver for 3D Airy cantilever beam problem [Note: actually this does not
+//use any traction elements, so perhaps it should be renamed?  As with the
+//2D example, gravity is the parameter that is incremented.]
 
 //Oomph-lib includes
 #include "generic.h"
@@ -39,11 +39,6 @@
 
 // The mesh
 #include "meshes/quarter_tube_mesh.h"
-
-#ifdef OOMPH_HAS_MPI
-// MPI
-#include "mpi.h"
-#endif
 
 using namespace std;
 
@@ -381,30 +376,6 @@ public:
  /// Update function (empty)
  void actions_before_newton_solve() {}
 
-// #ifdef REFINE
-
-//  /// Access function for the solid mesh
-//  //RefineableElasticCubicMesh<ELEMENT>*& solid_mesh_pt() 
-//  // {return Solid_mesh_pt;} 
-
-//  /// Access function for the mesh
-//  RefineableElasticQuarterTubeMesh<ELEMENT>*& solid_mesh_pt()
-//   {return Solid_mesh_pt;}
-
-// #else
-
-//  /// Access function for the mesh
-//  //ElasticCubicMesh<ELEMENT>*& solid_mesh_pt() {return Solid_mesh_pt;}
-
-//  /// Access function for the mesh
-//  ElasticQuarterTubeMesh<ELEMENT>*& solid_mesh_pt() {return Solid_mesh_pt;}
-
-// #endif
-
-
-//  /// Access function to the mesh of surface traction elements
-//  SolidMesh*& traction_mesh_pt(){return Traction_mesh_pt;} 
-
  /// Actions before adapt: Wipe the mesh of traction elements
  void actions_before_adapt();
 
@@ -434,29 +405,6 @@ private:
  
  /// Pointers to node whose position we're tracing
  Node* Trace_node_pt;
-
-
-// #ifdef REFINE
-
-//  /// Pointer to solid mesh
-//  //RefineableElasticCubicMesh<ELEMENT>* Solid_mesh_pt;
-
-//  /// Pointer to solid mesh
-//  RefineableElasticQuarterTubeMesh<ELEMENT>* Solid_mesh_pt;
-
-// #else
-
-//  /// Pointer to solid mesh
-//  //ElasticCubicMesh<ELEMENT>* Solid_mesh_pt;
-
-//  /// Pointer to solid mesh
-//  ElasticQuarterTubeMesh<ELEMENT>* Solid_mesh_pt;
-
-// #endif
-
-
-//  /// Pointers to meshes of traction elements
-//  SolidMesh* Traction_mesh_pt;
 
  /// DocInfo object for output
  DocInfo Doc_info;
@@ -523,14 +471,6 @@ CantileverProblem<ELEMENT>::CantileverProblem(const bool& incompress,
 
 #ifdef REFINE
 
-//  //Now create the mesh 
-//  solid_mesh_pt() = new RefineableElasticCubicMesh<ELEMENT>
-//   (n_x,n_y,n_z,l_x,l_y,l_z);
- 
-//  // Set error estimator
-//  dynamic_cast<RefineableElasticCubicMesh<ELEMENT>* >(
-//   solid_mesh_pt())->spatial_error_estimator_pt()=new Z2ErrorEstimator;
-
  //Now create the mesh 
  Problem::mesh_pt() = new RefineableElasticQuarterTubeMesh<ELEMENT>
   (wall_pt,xi_lo,frac_mid,xi_hi,nlayer);
@@ -549,9 +489,6 @@ CantileverProblem<ELEMENT>::CantileverProblem(const bool& incompress,
 
 #else
  
- //Now create the mesh 
- //solid_mesh_pt() = new ElasticCubicMesh<ELEMENT>(n_x,n_y,n_z,l_x,l_y,l_z);
-
  //Now create the mesh 
  Problem::mesh_pt() = new ElasticQuarterTubeMesh<ELEMENT>
   (wall_pt,xi_lo,frac_mid,xi_hi,nlayer);
@@ -595,34 +532,6 @@ CantileverProblem<ELEMENT>::CantileverProblem(const bool& incompress,
  unsigned nnod=mesh_pt()->nnode();
  Trace_node_pt=mesh_pt()->node_pt(nnod-1);
 
-#ifdef REFINE
- 
-//  // Refine the mesh uniformly
-//  dynamic_cast<RefineableElasticCubicMesh<ELEMENT>* >(
-//   solid_mesh_pt())->refine_uniformly();
- 
- // hierher
- //solid_mesh_pt()->set_lagrangian_nodal_coordinates();
- 
-#endif
- 
-//  // Construct the traction element mesh
-//  Traction_mesh_pt=new SolidMesh;
-//  create_traction_elements();
- 
-//  // Pass pointer to traction function to the elements
-//  // in the traction mesh
-//  set_traction_pt();
- 
-//  // Solid mesh is first sub-mesh
-//  add_sub_mesh(solid_mesh_pt());
-
-//  // Add traction sub-mesh
-//  add_sub_mesh(traction_mesh_pt());
-
-//  // Build combined "global" mesh
-//  build_global_mesh();
- 
  // Pin the left boundary (boundary 0) in all directions
  unsigned b=0; // hierher
  unsigned n_side = mesh_pt()->nboundary_node(b);
@@ -666,137 +575,28 @@ CantileverProblem<ELEMENT>::CantileverProblem(const bool& incompress,
 
 
 //=====================start_of_actions_before_adapt======================
-/// Actions before adapt: Wipe the mesh of traction elements
+/// Actions before adapt: empty
 //========================================================================
 template<class ELEMENT>
 void CantileverProblem<ELEMENT>::actions_before_adapt()
 {
-
-// hierher
-
-//  // Kill the traction elements and wipe surface mesh
-//  delete_traction_elements();
- 
-//  // Rebuild the Problem's global mesh from its various sub-meshes
-//  rebuild_global_mesh();
 
 }// end of actions_before_adapt
 
 
 
 //=====================start_of_actions_after_adapt=======================
-///  Actions after adapt: Rebuild the mesh of traction elements
+///  Actions after adapt: pin redundant pressures
 //========================================================================
 template<class ELEMENT>
 void CantileverProblem<ELEMENT>::actions_after_adapt()
 {
-// hierher
-
-//  // Create traction elements from all elements that are 
-//  // adjacent to boundary 2 and add them to surface meshes
-//  create_traction_elements();
- 
-//  // Rebuild the Problem's global mesh from its various sub-meshes
-//  rebuild_global_mesh();
- 
-//  // Set pointer to prescribed traction function for traction elements
-//  set_traction_pt();
- 
  // Pin the redundant solid pressures (if any)
  PVDEquationsBase<3>::pin_redundant_nodal_solid_pressures(
   mesh_pt()->element_pt());
 
 }// end of actions_after_adapt
 
-
-
-//==================start_of_set_traction_pt==============================
-/// Set pointer to traction function for the relevant
-/// elements in the traction mesh
-//========================================================================
-template<class ELEMENT>
-void CantileverProblem<ELEMENT>::set_traction_pt()
-{
-// hierher
-
-//  // Loop over the elements in the traction element mesh
-//  // for elements on the top boundary (boundary 2)
-//  unsigned n_element=traction_mesh_pt()->nelement();
-//  for(unsigned i=0;i<n_element;i++)
-//   {
-//    //Cast to a solid traction element
-//    SolidTractionElement<ELEMENT> *el_pt = 
-//     dynamic_cast<SolidTractionElement<ELEMENT>*>
-//     (traction_mesh_pt()->element_pt(i));
-
-//    //Set the traction function
-//    el_pt->traction_fct_pt() = Global_Physical_Variables::constant_pressure;
-//   }
- 
-}// end of set traction pt
-
-
- 
-//============start_of_create_traction_elements==============================
-/// Create traction elements 
-//=======================================================================
-template<class ELEMENT>
-void CantileverProblem<ELEMENT>::create_traction_elements()
-{
-// hierher
-
-//  // Traction elements are located on boundary 2:
-//  unsigned b=2;
-
-//  // How many bulk elements are adjacent to boundary b?
-//  unsigned n_element = solid_mesh_pt()->nboundary_element(b);
- 
-//  // Loop over the bulk elements adjacent to boundary b?
-//  for(unsigned e=0;e<n_element;e++)
-//   {
-//    // Get pointer to the bulk element that is adjacent to boundary b
-//    ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
-//     solid_mesh_pt()->boundary_element_pt(b,e));
-   
-//    //Find the index of the face of element e along boundary b
-//    int face_index = solid_mesh_pt()->face_index_at_boundary(b,e);
-      
-//    // Create new element and add to mesh
-//    Traction_mesh_pt->add_element_pt(new SolidTractionElement<ELEMENT>
-//                                     (bulk_elem_pt,face_index));   
-//   }  
-
-//  // Pass the pointer to the traction function to the traction elements
-//  set_traction_pt();
- 
-} // end of create_traction_elements
-
-
-
-
-//============start_of_delete_traction_elements==============================
-/// Delete traction elements and wipe the  traction meshes
-//=======================================================================
-template<class ELEMENT>
-void CantileverProblem<ELEMENT>::delete_traction_elements()
-{
-
-// hierher
-
-//  // How many surface elements are in the surface mesh
-//  unsigned n_element = Traction_mesh_pt->nelement();
- 
-//  // Loop over the surface elements
-//  for(unsigned e=0;e<n_element;e++)
-//   {
-//    // Kill surface element
-//    delete Traction_mesh_pt->element_pt(e);
-//   }
- 
-//  // Wipe the mesh
-//  Traction_mesh_pt->flush_element_and_node_storage();
-
-} // end of delete_traction_elements
 
 
 
@@ -816,82 +616,10 @@ void CantileverProblem<ELEMENT>::doc_solution()
  // Output shape of and stress in deformed body
  //--------------------------------------------
  sprintf(filename,"%s/soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
-         Doc_info.number(),MPI_Helpers::My_rank);
+         Doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  mesh_pt()->output(some_file,n_plot);
  some_file.close();
-
-// hierher
-
-//  // Output St. Venant solution
-//  //---------------------------
-//  sprintf(filename,"%s/exact_soln%i.dat",Doc_info.directory().c_str(),
-//          Doc_info.number());
-//  some_file.open(filename);
-
-//  // Element dimension
-//  unsigned el_dim=2;
- 
-//  Vector<double> s(el_dim);
-//  Vector<double> x(el_dim);
-//  Vector<double> xi(el_dim);
-//  DenseMatrix<double> sigma(el_dim,el_dim);
- 
-//  // Constants for exact (St. Venant) solution
-//  double a=-1.0/4.0*Global_Physical_Variables::P;
-//  double b=-3.0/8.0*Global_Physical_Variables::P/Global_Physical_Variables::H;
-//  double c=1.0/8.0*Global_Physical_Variables::P/
-//   pow(Global_Physical_Variables::H,3);
-//  double d=1.0/20.0*Global_Physical_Variables::P/Global_Physical_Variables::H;
-
-//  // Loop over all elements to plot exact solution for stresses
-//  unsigned nel=solid_mesh_pt()->nelement();
-//  for (unsigned e=0;e<nel;e++)
-//   {   
-//    // Get pointer to element
-//    ELEMENT* el_pt=dynamic_cast<ELEMENT*>(
-//     solid_mesh_pt()->element_pt(e));
-   
-//    //Tecplot header info 
-//    some_file << "ZONE I=" << n_plot << ", J=" << n_plot << std::endl;
-   
-//    //Loop over plot points
-//    for(unsigned l2=0;l2<n_plot;l2++)
-//     {
-//      s[1] = -1.0 + l2*2.0/(n_plot-1);
-//      for(unsigned l1=0;l1<n_plot;l1++)
-//       {
-//        s[0] = -1.0 + l1*2.0/(n_plot-1);
-       
-//        // Get Eulerian and Lagrangian coordinates
-//        el_pt->interpolated_x(s,x);
-//        el_pt->interpolated_xi(s,xi);
-       
-//        //Output the x,y,..
-//        for(unsigned i=0;i<el_dim;i++) 
-//         {some_file << x[i] << " ";}
-       
-//        // Change orientation of coordinate system relative
-//        // to solution in lecture notes
-//        double xx=Global_Physical_Variables::L-xi[0];
-//        double yy=xi[1];
-
-//          // Approximate analytical (St. Venant) solution
-//          sigma(0,0)=c*(6.0*xx*xx*yy-4.0*yy*yy*yy)+
-//           6.0*d*yy;
-//          sigma(1,1)=2.0*(a+b*yy+c*yy*yy*yy);
-//          sigma(1,0)=2.0*(b*xx+3.0*c*xx*yy*yy);
-//          sigma(0,1)=sigma(1,0);
-
-//          // Output stress
-//          some_file << sigma(0,0) << " "
-//                    << sigma(1,0) << " "
-//                    << sigma(1,1) << " "
-//                    << std::endl;
-//         }
-//       }
-//   }
-//  some_file.close();
 
  // Select a trace node to be the last available node on each process
  // (to get round the problem of the original trace node possibly not
@@ -941,7 +669,7 @@ void CantileverProblem<ELEMENT>::run_it(const unsigned& i_case)
  // Open trace file
  char filename[100];   
  sprintf(filename,"%s/trace_on_proc%i.dat",Doc_info.directory().c_str(),
-         MPI_Helpers::My_rank);
+         this->communicator_pt()->my_rank());
  Trace_file.open(filename);
 
 
@@ -959,8 +687,7 @@ void CantileverProblem<ELEMENT>::run_it(const unsigned& i_case)
  double g_increment=1.0e-4;   
  for(unsigned i=0;i<nstep;i++)
   {
-   // Increment pressure load
-   // Global_Physical_Variables::P+=p_increment;
+   // Increment gravity
    Global_Physical_Variables::Gravity+=g_increment;
 
    // Solve the problem with Newton's method, allowing
@@ -1057,18 +784,8 @@ int main(int argc, char **argv)
        element_partition[e]=atoi(input_string.c_str());
       }
 
-//     Vector<unsigned> out_element_partition;
-     problem.distribute(mesh_doc_info,report_stats,element_partition);
-//                         out_element_partition);
+     problem.distribute(element_partition,mesh_doc_info,report_stats);
 
-//      sprintf(filename,"out_three_d_cantilever_%i_partition.dat",0+i*ncase);
-//      output_file.open(filename);
-//      for (unsigned e=0;e<n_partition;e++)
-//       {
-//        output_file << out_element_partition[e] << std::endl;
-//       }
-
-//     problem.distribute(mesh_doc_info,report_stats);
      problem.check_halo_schemes(mesh_doc_info);
      mesh_doc_info.number()++;
 #endif
@@ -1099,17 +816,8 @@ int main(int argc, char **argv)
        element_partition[e]=atoi(input_string.c_str());
       }
 
-//     Vector<unsigned> out_element_partition;
-     problem.distribute(mesh_doc_info,report_stats,element_partition);
-//                         out_element_partition);
+     problem.distribute(element_partition,mesh_doc_info,report_stats);
 
-//      sprintf(filename,"out_three_d_cantilever_%i_partition.dat",0+i*ncase);
-//      output_file.open(filename);
-//      for (unsigned e=0;e<n_partition;e++)
-//       {
-//        output_file << out_element_partition[e] << std::endl;
-//       }
-//     problem.distribute(mesh_doc_info,report_stats);
      problem.check_halo_schemes(mesh_doc_info);
      mesh_doc_info.number()++;
 #endif
@@ -1143,17 +851,8 @@ int main(int argc, char **argv)
        element_partition[e]=atoi(input_string.c_str());
       }
 
-//     Vector<unsigned> out_element_partition;
-     problem.distribute(mesh_doc_info,report_stats,element_partition);
-//                         out_element_partition);
+     problem.distribute(element_partition,mesh_doc_info,report_stats);
 
-//      sprintf(filename,"out_three_d_cantilever_%i_partition.dat",1+i*ncase);
-//      output_file.open(filename);
-//      for (unsigned e=0;e<n_partition;e++)
-//       {
-//        output_file << out_element_partition[e] << std::endl;
-//       }
-//     problem.distribute(mesh_doc_info,report_stats);
      problem.check_halo_schemes(mesh_doc_info);
      mesh_doc_info.number()++;
 #endif
@@ -1184,17 +883,8 @@ int main(int argc, char **argv)
        element_partition[e]=atoi(input_string.c_str());
       }
 
-//     Vector<unsigned> out_element_partition;
-     problem.distribute(mesh_doc_info,report_stats,element_partition);
-//                         out_element_partition);
+     problem.distribute(element_partition,mesh_doc_info,report_stats);
 
-//      sprintf(filename,"out_three_d_cantilever_%i_partition.dat",1+i*ncase);
-//      output_file.open(filename);
-//      for (unsigned e=0;e<n_partition;e++)
-//       {
-//        output_file << out_element_partition[e] << std::endl;
-//       }
-//     problem.distribute(mesh_doc_info,report_stats);
      problem.check_halo_schemes(mesh_doc_info);
      mesh_doc_info.number()++;
 #endif
@@ -1280,17 +970,8 @@ int main(int argc, char **argv)
        element_partition[e]=atoi(input_string.c_str());
       }
 
-//     Vector<unsigned> out_element_partition;
-     problem.distribute(mesh_doc_info,report_stats,element_partition);
-//                         out_element_partition);
+     problem.distribute(element_partition,mesh_doc_info,report_stats);
 
-//      sprintf(filename,"out_three_d_cantilever_%i_partition.dat",3+i*ncase);
-//      output_file.open(filename);
-//      for (unsigned e=0;e<n_partition;e++)
-//       {
-//        output_file << out_element_partition[e] << std::endl;
-//       }
-//     problem.distribute(mesh_doc_info,report_stats);
      problem.check_halo_schemes(mesh_doc_info);
      mesh_doc_info.number()++;
 #endif
@@ -1321,17 +1002,8 @@ int main(int argc, char **argv)
        element_partition[e]=atoi(input_string.c_str());
       }
 
-//     Vector<unsigned> out_element_partition;
-     problem.distribute(mesh_doc_info,report_stats,element_partition);
-//                         out_element_partition);
+     problem.distribute(element_partition,mesh_doc_info,report_stats);
 
-//      sprintf(filename,"out_three_d_cantilever_%i_partition.dat",3+i*ncase);
-//      output_file.open(filename);
-//      for (unsigned e=0;e<n_partition;e++)
-//       {
-//        output_file << out_element_partition[e] << std::endl;
-//       }
-//     problem.distribute(mesh_doc_info,report_stats);
      problem.check_halo_schemes(mesh_doc_info);
      mesh_doc_info.number()++;
 #endif
@@ -1366,17 +1038,8 @@ int main(int argc, char **argv)
        element_partition[e]=atoi(input_string.c_str());
       }
 
-//     Vector<unsigned> out_element_partition;
-     problem.distribute(mesh_doc_info,report_stats,element_partition);
-//                         out_element_partition);
+     problem.distribute(element_partition,mesh_doc_info,report_stats);
 
-//      sprintf(filename,"out_three_d_cantilever_%i_partition.dat",4+i*ncase);
-//      output_file.open(filename);
-//      for (unsigned e=0;e<n_partition;e++)
-//       {
-//        output_file << out_element_partition[e] << std::endl;
-//       }
-//     problem.distribute(mesh_doc_info,report_stats);
      problem.check_halo_schemes(mesh_doc_info);
      mesh_doc_info.number()++;
 #endif
@@ -1407,17 +1070,8 @@ int main(int argc, char **argv)
        element_partition[e]=atoi(input_string.c_str());
       }
 
-//     Vector<unsigned> out_element_partition;
-     problem.distribute(mesh_doc_info,report_stats,element_partition);
-//                         out_element_partition);
+     problem.distribute(element_partition,mesh_doc_info,report_stats);
 
-//      sprintf(filename,"out_three_d_cantilever_%i_partition.dat",4+i*ncase);
-//      output_file.open(filename);
-//      for (unsigned e=0;e<n_partition;e++)
-//       {
-//        output_file << out_element_partition[e] << std::endl;
-//       }
-//     problem.distribute(mesh_doc_info,report_stats);
      problem.check_halo_schemes(mesh_doc_info);
      mesh_doc_info.number()++;
 #endif

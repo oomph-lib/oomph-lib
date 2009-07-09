@@ -27,8 +27,9 @@ distributed problems. For less-straightforward problems, the user may
 have to intervene in the distribution process and/or be aware of the
 consequences of distribution. Hence, the section \ref domain_decomposition
 provides an overview of the underlying design used for problem
-distribution within \c oomph-lib. A number of demo driver codes for
-distributed problems are provided ANDY: PUT THE REFERENCE IN HERE and
+distribution within \c oomph-lib. A number of 
+<a href="../../../example_code_list/html/index.html#distributed">demo
+driver codes for distributed problems</a> are provided and
 any additional concerns are discussed in the accompanying tutorials.
 
 #########################################################################
@@ -326,8 +327,9 @@ By default, \c oomph-lib's mesh-based output functions do
   specific element (or node), and  \b (ii) the pointer to the "first" 
   element in a mesh (say) points to a different element on each processor.
   The particular example of pinning a pressure degree of freedom in a
-  Navier--Stokes problem is discussed in detail in the ADAPTIVE DRIVEN
-  CAVITY TUTORIAL.
+  Navier--Stokes problem is discussed in detail in the 
+  <a href="../../adaptive_driven_cavity/html/index.html">adaptive
+  driven cavity tutorial</a>.
 . 
 
 ########################################################################
@@ -563,8 +565,8 @@ that store pointers to any "external" elements that take part
 in the interaction. These "external" elements are
 determined by helper functions such as 
  \c FSI_functions::setup_fluid_load_info_for_solid_elements(...) or
-\c Multi_domain_functions::set_sources(...), both of which use the
-function \c
+\c Multi_domain_functions::setup_multi_domain_interactions(...), 
+both of which use the function \c
 Multi_domain_functions::locate_external_elements(...). The appropriate
 helper functions must be called in the function 
 \c Problem::actions_after_distribute() to ensure that the interactions
@@ -613,8 +615,7 @@ The procedure discussed above has the following important consequence:
   after \c FSI_functions::setup_fluid_load_info_for_solid_elements() 
   has been called. This is exactly equivalent to the sequence of steps
   required following an adaptive mesh refinement; see <em> e.g.</em> the
-  <a href=
-  "../../../interaction/fsi_collapsible_channel_adapt/html/index.html#before_and_after">tutorial
+  <a href="../../../interaction/fsi_collapsible_channel_adapt/html/index.html#before_and_after">tutorial
   discussing the adaptive solution of the collapsible channel problem</a>
   for a more detailed discussion of this issue. We note that "external"
   halo-nodes are added to the mesh's boundary lookup schemes, so the
@@ -671,9 +672,9 @@ available to every processor.
 We stress that the increase in storage requirements due to the
 retention of these elements is minimal because the  
 elements are only located along the (lower-dimensional) boundaries 
-of the domain. For instance, in the <a href=
-"../../../interaction/fsi_collapsible_channel_algebraic/html/index.html">
-collapsible channel problem</a> the 1D mesh of beam elements
+of the domain. For instance, in the 
+<a href="../../../interaction/fsi_collapsible_channel_algebraic/html/index.html">collapsible 
+channel problem</a> the 1D mesh of beam elements
 bounds the 2D mesh of fluid elements; in
 <A HREF="../../../interaction/turek_flag/html/index.html">Turek and 
 Hron's FSI benchmark problem</a>, the 2D fluid domain is bounded

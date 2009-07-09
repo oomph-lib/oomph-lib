@@ -133,12 +133,8 @@ class Data
 
 #ifdef OOMPH_HAS_MPI
 
- ///  Which processors are associated with this Data?
- std::set<unsigned> Processors_associated_with_data;
-
- /// \short Which processor is in charge of this Data? (can be negative
- /// for Data that hasn't been associated with a processor yet!)
- int Processor_in_charge;
+ /// \short Is the Data a halo?
+ bool Is_halo;
 
 #endif
 
@@ -194,14 +190,6 @@ class Data
  ///with non-conforming element boundaries --- a hanging node ---
  ///(and is therefore pinned)
  static long Is_constrained;
-
-#ifdef OOMPH_HAS_MPI
- 
- /// \short Static "Magic number" to indicate that the Data has
- /// not yet been associated with a processor
- static int Not_associated_with_any_processor;
-
-#endif
 
  ///\short Default: Just set pointer to (steady) timestepper.
  /// No storage for values is allocated.
@@ -429,32 +417,12 @@ class Data
  
 #ifdef OOMPH_HAS_MPI
 
- /// \short Is this Data a halo? By default it's not. If a processor has
- /// been put in charge of the Data, the Data is a halo if the current 
- /// processor differs from the processor that's in charge of it.
- bool is_halo() 
+ /// \short Is this Data a halo?
+ bool& is_halo() 
   {
-   // I'm sure this can be simplified but my brain hurts...
-   bool i_am_in_charge=(Processor_in_charge==MPI_Helpers::My_rank);
-   bool no_one_is_in_charge=(Processor_in_charge==
-                             Not_associated_with_any_processor);
-   return (!((no_one_is_in_charge)||(i_am_in_charge)));
+   return Is_halo;
   } 
 
-
- /// Which processors are associated with this Data?
- std::set<unsigned>& processors_associated_with_data()
-  {
-   return Processors_associated_with_data;
-  }
-
- /// \short Which processor is in charge of this Data (can be negative
- /// for Data that hasn't been associated with a processor yet!)
- int& processor_in_charge()
-  {
-   return Processor_in_charge;
-  }
- 
 #endif
 
 };

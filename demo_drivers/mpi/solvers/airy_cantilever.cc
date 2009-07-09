@@ -615,7 +615,7 @@ int main(int argc, char* argv[])
 #endif
 
  // switch off oomph_info output for all processors but rank 0
- if (MPI_Helpers::My_rank!=0)
+ if (MPI_Helpers::Communicator_pt->my_rank()!=0)
   {
    oomph_info.stream_pt() = &oomph_nullstream;
    OomphLibWarning::set_stream_pt(&oomph_nullstream);

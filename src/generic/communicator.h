@@ -11,11 +11,14 @@
 #include "mpi.h"
 #endif
 
-//Oomph-libe error handler
+// Oomph-lib error handler
 #include "oomph_definitions.h"
 #include "oomph_utilities.h"
 
 namespace oomph{
+
+template <class T>
+class DenseMatrix;
 
 //=============================================================================
 /// \short An oomph-lib wrapper to the MPI_Comm communicator object. Just 
@@ -208,7 +211,7 @@ class OomphCommunicator
      error_message_stream                                        
       << "Attempted to split a serial communicator.";               
      throw OomphLibError(error_message_stream.str(),                  
-                         "OomphCommunicator::split()",                             
+                         "OomphCommunicator::split()",
                          OOMPH_EXCEPTION_LOCATION);         
     }
 #endif
@@ -242,9 +245,9 @@ class OomphCommunicator
     {
      std::ostringstream error_message_stream;                           
      error_message_stream                                        
-      << "Requested the MPI_Comm object for a serial communicator.";               
+      << "Requested the MPI_Comm object for a serial communicator.";
      throw OomphLibError(error_message_stream.str(),                  
-                         "OomphCommunicator::mpi_comm()",                             
+                         "OomphCommunicator::mpi_comm()",
                          OOMPH_EXCEPTION_LOCATION);         
     }
 #endif
@@ -257,6 +260,53 @@ class OomphCommunicator
   {
    return Serial_communicator;
   }
+
+ /// broadcast function for Vector<int>
+ void broadcast(const int& source, Vector<int>& x)
+  {
+   int n;
+
+   // Get number of entries on processor source (where the vector exists)
+   unsigned long n_long;
+   if (this->my_rank()==source)
+    {
+     n_long=x.size();
+
+     // Convert to int
+     n=int(n_long);
+    }
+ 
+   // Broadcast to everybody how many entries to expect
+   MPI_Bcast(&n,1,MPI_INT,source,this->mpi_comm());
+
+   // Broadcast the Vector directly
+   MPI_Bcast(&x[0],n,MPI_INT,source,this->mpi_comm());
+  }
+
+ /// broadcast function for Vector<double>
+ void broadcast(const int& source, Vector<double>& x)
+  {
+   int n;
+
+   // Get number of entries on processor source (where the vector exists)
+   unsigned long n_long;
+   if (this->my_rank()==source)
+    {
+     n_long=x.size();
+
+     // Convert to int
+     n=int(n_long);
+    }
+ 
+   // Broadcast to everybody how many entries to expect
+   MPI_Bcast(&n,1,MPI_INT,source,this->mpi_comm());
+
+   // Broadcast the Vector directly
+   MPI_Bcast(&x[0],n,MPI_DOUBLE,source,this->mpi_comm());
+  }
+
+ /// broadcast function for DenseMatrix<double>
+ void broadcast(const int& source, DenseMatrix<double>& x);
 
 #endif
 
