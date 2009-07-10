@@ -98,12 +98,12 @@
 --with-mumps=/home/mheil/local/mumps
 --with-blas=/home/mheil/local/lib/blas/blas.a
 --with-lapack=/home/mheil/local/lib/lapack/lapack.a
---with-hypre=/home/mheil/test_external_local/hypre_default_installation_mpi
---with-trilinos=/home/mheil/test_external_local/trilinos_default_installation_mpi
+--with-hypre=/home/mheil/local/hypre_default_installation_mpi
+--with-trilinos=/home/mheil/local/trilinos_default_installation_mpi
 --with-mpi-self-tests="mpirun -np 2"
-CXXFLAGS="-g -DPARANOID -DRANGE_CHECKING -Wall"
-CFLAGS="-g"
-FFLAGS="-g"
+CXXFLAGS="-O6 -Wall"
+CFLAGS="-O6"
+FFLAGS="-O6"
 CXX=mpic++
 CC=mpicc
 F77=mpif77

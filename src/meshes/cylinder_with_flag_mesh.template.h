@@ -196,23 +196,56 @@ public virtual CylinderWithFlagMesh<ELEMENT>
  /// \short Destructor: empty
  virtual ~AlgebraicCylinderWithFlagMesh(){}
 
- /// "Access" functions to the "refineable" geometric objects... 
+
+ /// \short Set geometric object that defines the
+ /// bottom face of the flag
  void set_bottom_flag_pt(GeomObject* bottom_flag_pt)
   {
    // Need to alter the domain's bottom_flag_pt too
    this->domain_pt()->bottom_flag_pt()=bottom_flag_pt;
    Bottom_flag_pt=bottom_flag_pt;
   }
+
+ /// \short Set the geometric object that defines the
+ /// top face of the flag
  void set_top_flag_pt(GeomObject* top_flag_pt)
   {
    this->domain_pt()->top_flag_pt()=top_flag_pt;
    Top_flag_pt=top_flag_pt;
   }
+
+
+ /// \short Set the geometric object that defines the
+ /// tip of the flag
  void set_tip_flag_pt(GeomObject* tip_flag_pt)
-  {
-   this->domain_pt()->tip_flag_pt()=tip_flag_pt;
-   Tip_flag_pt=tip_flag_pt;
-  }
+ {
+  this->domain_pt()->tip_flag_pt()=tip_flag_pt;
+  Tip_flag_pt=tip_flag_pt;
+ }
+ 
+ 
+ /// \short Read-only access to geometric object that defines the
+ /// bottom face of the flag
+ GeomObject* bottom_flag_pt() const
+ {
+  return Bottom_flag_pt;
+ }
+ 
+ 
+ /// \short Read-only access to geometric object that defines the
+ /// top face of the flag
+ GeomObject* top_flag_pt() const
+ {
+  return Top_flag_pt;
+ }
+
+ /// \short Read-only access to geometric object that defines the
+ /// tip of the flag
+ GeomObject* tip_flag_pt() const
+ {
+  return Tip_flag_pt;
+ }
+
 
  /// \short Update the geometric references that are used 
  /// to update node after mesh adaptation.

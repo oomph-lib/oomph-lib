@@ -1,0 +1,193 @@
+\mainpage Parallel solution of the FSI channel with leaflet problem: Distributing problems with algebraic node updates
+
+This document provides an overview of how to distribute 
+fluid-structure interaction problems in which algebraic 
+node update methods are used to update the fluid mesh in response
+to changes in the shape of the domain boundary. It is part of a
+<a href="../../../example_code_list/html/index.html#distributed">
+series of tutorials</a>
+that discuss how to modify existing serial driver codes so that the
+\c Problem object can be distributed across multiple processors.
+
+As discussed in the 
+<a href="../../general_mpi/html/index.html#alg_node_update">general 
+MPI tutorial</a>, the implementation of algebraic node update methods
+for specific meshes is greatly facilitated if the \c GeomObject
+that describes the motion of the moving domain boundary is available
+on all processors. In FSI problems, the moving boundary 
+is typically represented by a \c MeshAsGeomObject -- a compound
+\c GeomObject that is formed from the lower-dimensional mesh of 
+\c SolidElements that define the moving boundary of the fluid domain.
+To ensure that the \c MeshAsGeomObject remains available on all
+processors when the underlying mesh is distributed, we use the
+function \c Mesh::keep_all_elements_as_halos() to indicate that
+all elements should be retained on all processors. 
+
+
+\n
+
+<CENTER>
+<TABLE BORDER=1, WIDTH=500px>
+<TR>
+<TD bgcolor="cornsilk">
+<CENTER>
+\b Note
+</CENTER>
+\n\n
+ The procedure described here is appropriate \b only 
+if the solid mesh used to
+create the \c MeshAsGeomObject is \b not \b adapted during the solution of
+the problem. We refer to 
+<a href="../../turek_flag/html/index.html">another tutorial</a> 
+for instructions on how to deal with this scenario.
+\n\n
+</TD>
+</TR>
+</TABLE>
+</CENTER>
+\n\n
+
+<HR>
+
+\section fsi_channel_with_leaflet Revisiting the FSI channel with leaflet problem
+
+We demonstrate the methodology for problem of 
+<a href="../../../interaction/fsi_channel_with_leaflet/html/index.html">
+flow past an elastic leaflet in a 2D channel</a>.
+Since most of driver code is identical to its serial counterpart
+we only discuss the changes required to distribute the problem
+and refer to 
+<a href="../../../interaction/fsi_channel_with_leaflet/html/index.html">
+another tutorial</a> for a more detailed discussion of the
+problem and its (serial) implementation.  
+
+<HR>
+
+\subsection main_body The main function
+
+As with other parallel driver codes, we start by initialising MPI:
+
+\dontinclude fsi_channel_with_leaflet.cc
+\skipline start_of_main
+\until #endif
+
+The construction of the problem and the initialisation of the
+timestepping procedure are identical to the serial driver code
+and their listing is omitted here.
+Once the problem is set up, we call \c Problem::distribute(...),
+using the boolean flag \c report_stats to indicate that
+the statistics of the distribution should be reported on screen.
+
+\skipline Distribute problem using METIS
+\until problem.distribute(
+
+
+We can now solve the distributed problem, exactly as in the corresponding
+<a href="../../../interaction/fsi_channel_with_leaflet/html/index.html">serial
+version of the driver code</a>.
+
+<HR>
+
+\subsection problem_class The problem class
+
+The only addition here is the \c actions_after_distribute() function,
+described <a href="#actions_routines">later in this tutorial</a>.
+
+<HR>
+
+\subsection constructor The problem constructor
+
+The initial parts of the problem constructor are identical 
+to that in the serial counterpart and we omit the code
+for the construction of the fluid and solid timesteppers.
+
+We build the "wall" mesh as before but now insist that all elements
+are kept as halos when the mesh is distributed.
+
+\dontinclude fsi_channel_with_leaflet.cc
+\skipline Discretise leaflet
+\until keep_all_elements_as_halos()
+
+The rest of the problem constructor remains unchanged from the serial
+version.
+
+<HR>
+
+\subsection action_after_adapt Actions after adaptation
+
+The \c actions_after_adapt() function only requires a minor change
+from the serial version -- a simple re-ordering of the sequence
+in which the various steps are performed. In the parallel version of
+the code we move the assignment of the auxiliary node update function
+\b after the (re-)setup of the fluid-structure interaction. This 
+is necessary because the function 
+\c FSI_functions::setup_fluid_load_info_for_solid_elements(...)
+which determines the fluid elements that are adjacent to the 
+wall elements for which they provide the traction, creates halo copies
+of the fluid elements (and their nodes!) if the required fluid element
+is not present on the current processor. The execution of this
+function may therefore create new fluid nodes on the FSI boundary.
+These are accessible via the usual boundary lookup schemes and 
+must be told about the auxiliary node update function which applies
+the no-slip condition. 
+
+
+\skipline start_of_actions_after_adapt
+\until end_of_actions_after_adapt
+
+<HR>
+
+\subsection action_after_distribution Actions after distribution
+
+Since the problem distribution deletes certain elements
+(or replaces them by halo copies) the fluid-structure interaction
+must be re-setup when the problem has been distributed. As discussed 
+above, the auxiliary node update function that applies the no-slip 
+condition on the fluid nodes on the FSI boundary must be set up again 
+\b after the call to
+\c FSI_functions::setup_fluid_load_info_for_solid_elements(...)
+
+\skipline start_of_actions_after_distribute
+\until end_of_actions_after_distribute
+
+<HR>
+
+\subsection doc_solution The doc_solution() function
+
+As usual, we add the processor number to the end of the filename for 
+each output file to make sure that the different processors
+don't over-write each other's output.
+
+
+The trace file documents the time trace of the imposed influx
+and the displacement of the node at the tip of the leaflet. It could be
+written by any processor since all solid elements are retained
+everywhere. We only write to the trace file from processor 0.
+
+
+\skipline start_of_doc_solution
+\until end_of_doc_solution
+
+
+<HR>
+<HR>
+
+\section sources Source files for this tutorial
+
+The source files for this tutorial can be found in
+
+<CENTER>
+<A HREF="../../../../demo_drivers/mpi/multi_domain/fsi_channel_with_leaflet">
+demo_drivers/mpi/multi_domain/fsi_channel_with_leaflet
+</A>
+</CENTER>
+
+Similar examples of modified driver codes for FSI problems for a
+channel with a collapsible wall and an oscillating ring can be found
+in
+<CENTER>
+<A HREF="../../../../demo_drivers/mpi/multi_domain/">
+demo_drivers/mpi/multi_domain
+</A>
+</CENTER>
+

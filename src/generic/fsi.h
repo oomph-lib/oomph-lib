@@ -502,18 +502,20 @@ class FSIWallElement : public virtual SolidFiniteElement,
 
   private:
 
- /// \short Overload the function that must return all data involved
- /// in the interactions from the external (fluid) element
-  void identify_all_field_data_for_external_interaction(
-   Vector<std::set<FiniteElement*> > const &external_elements_pt,
-   std::set<std::pair<Data*,unsigned> > &paired_iteraction_data); 
-
-   /// \short Function that must return all geometric data involved 
-   /// in the desired interactions from the external element
-  void identify_all_geometric_data_for_external_interaction(
-   Vector<std::set<FiniteElement*> > const &external_elements_pt,
-   std::set<Data*> &external_geometric_data_pt);
-
+ /// \short Overload the function that must return all field data involved
+ /// in the interactions from the external (fluid) element. It allows
+ /// the velocity degrees of freedom to be ignored if we want to 
+ /// ignore the shear stresses when computing the Jacobian.
+ void identify_all_field_data_for_external_interaction(
+  Vector<std::set<FiniteElement*> > const &external_elements_pt,
+  std::set<std::pair<Data*,unsigned> > &paired_iteraction_data); 
+ 
+ /// \short Function that must return all geometric data involved 
+ /// in the desired interactions from the external element
+ void identify_all_geometric_data_for_external_interaction(
+  Vector<std::set<FiniteElement*> > const &external_elements_pt,
+  std::set<Data*> &external_geometric_data_pt);
+ 
  /// \short Static default value for the ratio of stress scales
  /// used in the fluid and solid equations (default is 1.0)
  static double Default_Q_Value;

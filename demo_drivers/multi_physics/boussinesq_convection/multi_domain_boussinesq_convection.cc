@@ -784,8 +784,9 @@ ConvectionProblem<NST_ELEMENT,AD_ELEMENT>::ConvectionProblem()
   }
 
  // Set sources
- Multi_domain_functions::setup_multi_domain_interactions
-  <NST_ELEMENT,AD_ELEMENT>(this,nst_mesh_pt(),adv_diff_mesh_pt());
+ Multi_domain_functions::
+  setup_multi_domain_interactions<NST_ELEMENT,AD_ELEMENT>
+  (this,nst_mesh_pt(),adv_diff_mesh_pt());
 
  // combine the submeshes
  add_sub_mesh(Nst_mesh_pt);

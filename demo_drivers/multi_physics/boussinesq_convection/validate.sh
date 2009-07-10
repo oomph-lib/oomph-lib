@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=6
+NUM_TESTS=7
 
 
 # Setup validation directory
@@ -121,7 +121,7 @@ mv RESLT RESLT_refineable
 
 echo "Running Boussinesq convection problem (multi-domain method) "
 mkdir RESLT
-../multimesh_boussinesq_convection validate > OUTPUT_multimesh_b_convection
+../multi_domain_boussinesq_convection validate > OUTPUT_multi_domain_b_convection
 echo "done"
 echo " " >> validation.log
 echo "Boussinesq convection (multi-domain) validation" >> validation.log
@@ -132,16 +132,16 @@ echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/soln0.dat RESLT/soln5.dat \
-    > multimesh_b_convection.dat
+    > multi_domain_b_convection.dat
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/multimesh_b_convection.dat.gz  \
-         multimesh_b_convection.dat 0.1 1.5e-7 >> validation.log
+../../../../bin/fpdiff.py ../validata/multi_domain_b_convection.dat.gz  \
+         multi_domain_b_convection.dat 0.1 1.5e-7 >> validation.log
 fi
 
-mv RESLT RESLT_multimesh_boussinesq_convection
+mv RESLT RESLT_multi_domain_boussinesq_convection
 
 
 # Validation for refineable Boussinesq convection problem, multi-domain
@@ -149,27 +149,58 @@ mv RESLT RESLT_multimesh_boussinesq_convection
 
 echo "Running refineable Boussinesq convection problem (multi-domain method) "
 mkdir RESLT
-../multimesh_ref_b_convection > OUTPUT_multimesh_ref_b_convection
+../multi_domain_ref_b_convection > OUTPUT_multi_domain_ref_b_convection
 echo "done"
 echo " " >> validation.log
 echo "Refineable Boussinesq convection (multi-domain) validation" >> validation.log
-echo "------------------------------------" >> validation.log
+echo "----------------------------------------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat RESLT/soln0.dat RESLT/soln1.dat \
-    > multimesh_ref_b_convection.dat
+cat RESLT/fluid_soln0.dat RESLT/fluid_soln1.dat \
+    RESLT/temperature_soln0.dat RESLT/temperature_soln1.dat \
+    > multi_domain_ref_b_convection.dat
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/multimesh_ref_b_convection.dat.gz  \
-         multimesh_ref_b_convection.dat 0.1 1.0e-7 >> validation.log
+../../../../bin/fpdiff.py ../validata/multi_domain_ref_b_convection.dat.gz  \
+         multi_domain_ref_b_convection.dat 0.1 1.0e-7 >> validation.log
 fi
 
-mv RESLT RESLT_multimesh_ref_b_convection
+mv RESLT RESLT_multi_domain_ref_b_convection
+
+
+
+# Validation for refineable Boussinesq convection problem, multi-domain, FD for external data
+#--------------------------------------------------------------------------------------------
+
+echo "Running refineable Boussinesq convection problem (multi-domain method; FD for external data) "
+mkdir RESLT
+../multi_domain_ref_b_convection_fd_for_external_data  > OUTPUT_multi_domain_ref_b_convection_fd_for_external_data 
+echo "done"
+echo " " >> validation.log
+echo "Refineable Boussinesq convection (multi-domain; FD for external data) validation" >> validation.log
+echo "--------------------------------------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/fluid_soln0.dat RESLT/fluid_soln1.dat \
+    RESLT/temperature_soln0.dat RESLT/temperature_soln1.dat \
+    > multi_domain_ref_b_convection_fd_for_external_data.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/multi_domain_ref_b_convection.dat.gz  \
+         multi_domain_ref_b_convection_fd_for_external_data.dat 0.1 1.0e-7 >> validation.log
+fi
+
+mv RESLT RESLT_multi_domain_ref_b_convection_fd_for_external_data 
 
 
 # Append output to global validation log file

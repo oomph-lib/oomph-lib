@@ -26,6 +26,8 @@ cp ../*partition.dat .
 
 echo "Running 2D poisson problem with flux boundary conditions "
 mkdir RESLT
+mkdir RESLT_MESH
+
 $MPI_RUN_COMMAND ../two_d_poisson_flux_bc_adapt > OUTPUT_two_d_poisson_flux_bc_adapt
 echo "done"
 echo " " >> validation.log
@@ -47,8 +49,7 @@ else
          two_d_poisson_flux_bc_adapt_results.dat >> validation.log
 fi
 
-mkdir RESLT_two_d_poisson_flux_bc_adapt
-mv RESLT/*.dat RESLT_two_d_poisson_flux_bc_adapt
+mv RESLT RESLT_two_d_poisson_flux_bc_adapt
 
 #------------------------------------------------------
 

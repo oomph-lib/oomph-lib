@@ -320,12 +320,14 @@ public:
   }
 
 
- /// Get the Z2 flux from the fluid element
+ /// \short Get the Z2 flux by concatenating the fluxes from the fluid and
+ /// the advection diffusion elements.
  void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
   {
    //Find the number of fluid fluxes
    unsigned n_fluid_flux = 
     RefineableQCrouzeixRaviartElement<DIM>::num_Z2_flux_terms();
+
    //Fill in the first flux entries as the velocity entries
    RefineableQCrouzeixRaviartElement<DIM>::get_Z2_flux(s,flux);
 
@@ -333,6 +335,7 @@ public:
    unsigned n_temp_flux =  
     RefineableQAdvectionDiffusionElement<DIM,3>::num_Z2_flux_terms();
    Vector<double> temp_flux(n_temp_flux);
+
    //Get the temperature flux
    RefineableQAdvectionDiffusionElement<DIM,3>::get_Z2_flux(s,temp_flux);
    
@@ -341,6 +344,7 @@ public:
     {
      flux[n_fluid_flux+i] = temp_flux[i];
     }
+
   } //end of get_Z2_flux
 
  /// \short The number of compound fluxes is two (one for the fluid and
@@ -362,8 +366,10 @@ public:
    //The values of the flux_index vector are zero on entry, so we
    //could omit this line
    for(unsigned i=0;i<n_fluid_flux;i++) {flux_index[i] = 0;}
+
    //Set the temperature fluxes (the last set of fluxes
    for(unsigned i=0;i<n_temp_flux;i++) {flux_index[n_fluid_flux + i] = 1;}
+
   } //end of get_Z2_compound_flux_indices
 
 

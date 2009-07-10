@@ -5,7 +5,9 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 check_PROGRAMS= \
 boussinesq_convection boussinesq_convection_fd boussinesq_convection_analytic \
 refineable_b_convection \
-multimesh_boussinesq_convection multimesh_ref_b_convection
+multi_domain_boussinesq_convection \
+multi_domain_ref_b_convection \
+multi_domain_ref_b_convection_fd_for_external_data 
 
 #---------------------------------------------------------------------
 
@@ -56,24 +58,41 @@ refineable_b_convection_LDADD = -L@libdir@ -ladvection_diffusion \
 #----------------------------------------------------------------------
 
 # Sources for executable
-multimesh_boussinesq_convection_SOURCES = multimesh_boussinesq_convection.cc
+multi_domain_boussinesq_convection_SOURCES = multi_domain_boussinesq_convection.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
-multimesh_boussinesq_convection_LDADD = \
+multi_domain_boussinesq_convection_LDADD = \
                 -L@libdir@ -ladvection_diffusion -lnavier_stokes  \
                 -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
 #----------------------------------------------------------------------
 
 # Sources for executable
-multimesh_ref_b_convection_SOURCES = \
- multimesh_ref_b_convection.cc \
- my_boussinesq_elements.h
+multi_domain_ref_b_convection_SOURCES = \
+ multi_domain_ref_b_convection.cc \
+ multi_domain_boussinesq_elements.h
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
-multimesh_ref_b_convection_LDADD = \
+multi_domain_ref_b_convection_LDADD = \
+                -L@libdir@ -ladvection_diffusion -lnavier_stokes  \
+                -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
+
+
+#----------------------------------------------------------------------
+
+# Sources for executable
+multi_domain_ref_b_convection_fd_for_external_data_SOURCES = \
+ multi_domain_ref_b_convection.cc \
+ multi_domain_boussinesq_elements.h
+
+multi_domain_ref_b_convection_fd_for_external_data_CXXFLAGS = \
+-DUSE_FD_FOR_DERIVATIVES_WRT_EXTERNAL_DATA
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+multi_domain_ref_b_convection_fd_for_external_data_LDADD = \
                 -L@libdir@ -ladvection_diffusion -lnavier_stokes  \
                 -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 

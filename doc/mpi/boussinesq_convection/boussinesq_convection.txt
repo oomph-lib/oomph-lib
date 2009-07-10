@@ -1,0 +1,91 @@
+\mainpage Parallel version of the Boussinesq convection problem
+
+This document provides an overview of how to distribute the Boussinesq
+convection problem, using both the 
+<a href="../../../multi_physics/refine_b_convect/html/index.html">single-domain</a>
+and 
+<a href="../../../multi_physics/multi_domain_ref_b_convect/html/index.html">multi-domain</a>
+methods.
+
+For the single-domain discretisation of the problem, in which the
+Navier--Stokes and advection-diffusion equations are combined using a
+single element, the procedure required to distribute
+the problem is exactly the same as that described in the
+<a href="../../adaptive_driven_cavity/html/index.html">adaptive driven
+cavity tutorial</a>.
+
+For the multi-domain problem, the interaction between the domains
+must be set up again after any distribution of the problem has
+taken place.  This is done by calling \c
+Multi_domain_functions::set_sources() from within the \c
+actions_after_distribute() function.  When this function is executed
+on a distributed problem, the element required from the other domain
+may be on a different processor; if it is then an external halo
+element is created.  See the relevant section of the 
+<a href="../../general_mpi/html/index.html#external_halo_elements">general
+MPI document</a> for more details.
+
+<HR>
+
+\section main_body The main body
+
+The main body begins and ends with calls to \c MPI_Helpers::init() and 
+\c MPI_Helpers::finalize().
+
+As with previous examples, we impose a pre-determined partitioning of
+the elements when the code is run in self-test mode, indicated by the
+use of a command line argument.  The remainder of the main body is
+identical to the 
+<a href="../../../multi_physics/multi_domain_ref_b_convect/html/index.html">serial version</a>.
+
+\dontinclude multimesh_ind_ref_b_convection.cc
+\skipline Distribute the problem
+\until #endif
+
+<HR>
+
+\section problem_class The problem class
+  
+The \c actions_before_adapt() function undergoes the usual
+modification to ensure that only the first element in the mesh is the
+one in which the pressure is fixed.  Aside from this, the problem
+class is the same as in the serial case with the addition of the \c
+actions_after_distribute() function.  Since the pressure has already
+been fixed in the first element on all processors (in the problem
+constructor), it will remain fixed on any processor that still
+contains the first element after a distribution, so we do not need to
+fix it again.  However, the elements available locally on each
+processor will have changed, so the interaction between the meshes
+must be set up again.
+
+\dontinclude multimesh_ind_ref_b_convection.cc
+\skipline Actions after adaptation
+\until end of actions_after_distribute
+
+<HR>
+
+\section doc_solution The doc_solution() routine
+
+The \c doc_solution() function is modified to allow output for each
+individual processor's collection of elements on both of the meshes
+involved in the problem.  The global mesh is simply a container
+for the two sub-meshes, and so the call to the global mesh's output
+function will simply list all elements on the first mesh followed by
+all elements on the second mesh for the current processor.
+
+\skipline start_of_doc_solution
+\until end of doc
+
+<HR>
+
+The remainder of this driver code is the same as the 
+<a href="../../../multi_physics/multi_domain_ref_b_convect/html/index.html">serial version</a>.
+
+For example driver codes for the distributed Boussinesq problem using 
+both single- and multi-domain methods, see
+<CENTER>
+<A HREF="../../../../demo_drivers/mpi/multi_domain/boussinesq_convection">
+demo_drivers/mpi/multi_domain/boussinesq_convection
+</A>
+</CENTER>
+

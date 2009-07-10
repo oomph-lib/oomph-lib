@@ -1,0 +1,213 @@
+\mainpage Parallel solution of the adaptive driven cavity problem
+
+This document discusses the parallel solution of the 
+<a href="../../../navier_stokes/adaptive_driven_cavity/html/index.html">adaptive
+driven cavity problem</a>.  It is the first in a
+<a href="../../../example_code_list/html/index.html#distributed">
+series 
+of tutorials</a>
+which discuss how to modify existing serial driver codes so that the
+\c Problem object can be distributed across multiple processors.
+
+Since most of driver code is identical to its serial counterpart
+we only discuss the changes required to distribute the problem
+and refer to
+<a href="../../../navier_stokes/adaptive_driven_cavity/html/index.html">
+another tutorial</a> for a more detailed discussion of the
+problem and its (serial) implementation. 
+
+<HR>
+<HR>
+
+\section main_body The main body of the code
+
+All parallel driver codes must initialise oomph-lib's MPI routines
+by calling \c MPI_Helpers::init(...). We surround all parallel
+sections of code with \c \#ifdefs to ensure that the code remains
+functional if compiled without parallel support (in which case
+the macro \c OOMPH_HAS_MPI is undefined). 
+
+
+\dontinclude adaptive_driven_cavity.cc
+\skipline start_of_main
+\until #endif
+
+We note that the functions \c MPI_Helpers::init(...) 
+and \c  MPI_Helpers::finalize() call their MPI counterparts,
+\c MPI_Init(...) and \c MPI_Finalize(), which must therefore \b not be called
+again. 
+
+
+Following the initialisation, we set up the problem as in the 
+serial driver code:
+
+\skipline Store command
+\until problem;
+
+
+The driver code demonstrates two of the different options available 
+for the \c distribute() function. They are selected by the presence or 
+absence of command line arguments.
+
+<HR>
+
+\subsection no_disk Option I: Distributing a problem using METIS and documenting its partitioning
+
+If no command line arguments are specified we determine the problem
+partitioning using \c METIS, and write the partitioning to a file. This
+is done as follows:
+
+\skipline Are there
+\until {
+
+We start by creating a vector of unsigneds whose values will indicate which 
+partition each element in the problem's mesh is associated with.
+
+\until out_element_partiti
+
+We distribute the problem with a call to \c Problem::distribute(...),
+using the boolean flag to request that the relevant statistics
+are displayed on screen. The partitioning chosen for the elements 
+is returned in the vector created earlier.
+
+\until problem.distribute(
+
+We document the partitioning by writing the partitioning vector
+to a file. 
+
+\until }
+
+Finally, we perform an optional self-test of the halo-haloed lookup
+schemes.
+
+\until #endif
+
+The problem can now be solved as in the serial code, using the 
+specified maximum number of mesh adaptations. 
+
+\until }
+
+<HR>
+
+\subsection from_disk Option II: Using a pre-determined distribution
+
+If command line arguments are specified (typically when the code is 
+run in validation mode) we read the partitioning from disk,
+using a file that was written using the procedure shown above.
+(This is useful because in our experience \c METIS may produce 
+slightly different partitionings on different machines. This would
+cause the self-tests to fail even though the computed results 
+would be correct). 
+
+We start by creating a \c DocInfo object that specifies the directory
+in which the problem distribution will be documented.
+
+\until set_directory 
+
+Next we create a vector whose entries indicate which partition
+each element in the mesh is associated with, and read its values
+from disk: 
+
+\until }
+
+We pass the partitioning vector to \c Problem::distribute(...) and
+thus bypass the partitioning by \c METIS. 
+
+\until #endif
+
+The problem can now be solved as in the serial code.
+
+\until doc_solution
+
+We note that it is possible to document a mesh's distribution
+at any point, using the \c Mesh::doc_mesh_distribution(...) function,
+as indicated here
+
+\until end of Taylor Hood elements
+
+Finally we shut down \c oomph-lib's MPI.
+
+\skipline Finalise MPI
+\until end_of_main
+
+<HR>
+
+\section problem_class Changes to the problem class
+
+A special feature of the
+<a href="../../../navier_stokes/adaptive_driven_cavity/html/index.html"> 
+driven cavity problem</a> is that the flow is completely enclosed
+and that a single pressure degree of freedom must be prescribed. 
+In the serial driver code, we arbitrarily pinned the first pressure
+degree of freedom in the "first" element in the mesh. 
+Once the problem is distributed this element may only be available to
+particular processors.  Consequently we re-write the \c actions_after_adapt()
+function as follows:
+
+\dontinclude adaptive_driven_cavity.cc
+\skipline After adaptation: Unpin pressure
+\until end_of_actions_after_adapt
+
+This change ensures that every processor that holds the element
+containing the node at position (0,0) (i.e. the first element) 
+fixes the pressure for that element.
+
+Note that it is not necessary to change the corresponding statements
+in the problem constructor since the problem distribution occurs after 
+the problem has been constructed.  In fact, the problem constructor 
+is unchanged from the serial version.
+
+<HR>
+
+\section doc_solution Changes to doc_solution
+
+The \c doc_solution() routine requires a slight modification to ensure
+that the output from different processors can be distinguished; this 
+is achieved by including the current processor number in the 
+filename of the solution:
+
+\skipline start_of_doc_solution
+\until end_of_doc_solution
+
+<HR>
+
+The figure below shows the mesh after the final solution of this
+problem, distributed across two processors, with the two colours
+indicating which processor the elements belong to.
+
+@I w 0.75\textwidth partition "Plot illustrating the distribution of the mesh for the adaptive driven cavity problem"
+
+
+
+
+
+
+<HR>
+<HR>
+
+\section sources Source files for this tutorial
+
+The driver code from which this example is taken also solves the same
+distributed problem using Crouzeix-Raviart elements.  The fully
+modified parallel driver code can be found at
+
+<CENTER>
+<A HREF="../../../../demo_drivers/mpi/distribution/adaptive_driven_cavity/adaptive_driven_cavity.cc">
+demo_drivers/mpi/distribution/adaptive_driven_cavity/adaptive_driven_cavity.cc
+</A>
+</CENTER>
+
+For further examples of using the \c distribute() function for both 
+two-dimensional and three-dimensional single-domain problems, see
+the directory
+
+<CENTER>
+<A HREF="../../../../demo_drivers/mpi/distribution/">
+demo_drivers/mpi/distribution/
+</A>
+</CENTER>
+
+
+
+
+

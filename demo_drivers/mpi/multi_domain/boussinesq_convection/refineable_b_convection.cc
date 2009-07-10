@@ -1129,8 +1129,7 @@ int main(int argc, char **argv)
  // converges to the symmetry broken solution, even without
  // the perturbation
  problem.use_imperfection() = false;
- problem.newton_solve(2); //hierher hierher change, trying to debug error
-// problem.newton_solve(1);
+ problem.newton_solve(2); 
  problem.doc_solution();
 
 #ifdef OOMPH_HAS_MPI

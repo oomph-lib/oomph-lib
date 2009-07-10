@@ -172,13 +172,15 @@ private:
  /// Actions after adapt: Rebuild the mesh of prescribed flux elements
  void actions_after_adapt();
 
- /// Actions before distribute: same as actions before adapt...
+ /// \short Actions before distribute: Wipe the mesh of prescribed flux elements
+ /// (simply call actions_before_adapt() which does the same thing)
  void actions_before_distribute()
   {
    actions_before_adapt();
   }
 
- /// Actions after distribute: same as actions after adapt...
+ /// \short Actions after distribute: Rebuild the mesh of prescribed flux 
+ /// elements (simply call actions_after_adapt() which does the same thing)
  void actions_after_distribute()
   {
    actions_after_adapt();
@@ -546,42 +548,41 @@ int main(int argc, char* argv[])
  MPI_Helpers::init(argc,argv);
 #endif
 
- //Set up the problem
- //------------------
-
  //Set up the problem with 2D nine-node elements from the
  //QPoissonElement family. Pass pointer to source function. 
  RefineableTwoMeshFluxPoissonProblem<RefineableQPoissonElement<2,3> > 
   problem(&TanhSolnForPoisson::source_function);
  
 #ifdef OOMPH_HAS_MPI
- //Distribute the problem
- DocInfo mesh_doc_info;
- mesh_doc_info.set_directory("RESLT_MESH");
- mesh_doc_info.number()=35;
 
- std::ifstream input_file;
- std::ofstream output_file;
- char filename[100];
-
- /// All meshes are partitioned
- unsigned n_partition=problem.mesh_pt()->nelement();
+ // Number of elements for which we specify the partition: all of them!
+ unsigned n_el=problem.mesh_pt()->nelement();
 
  //Get the partition from file
- Vector<unsigned> element_partition(n_partition);
+ Vector<unsigned> element_partition(n_el);
+ std::ifstream input_file;
+ char filename[100];
  sprintf(filename,"two_d_poisson_flux_partition.dat");
  input_file.open(filename);
  std::string input_string;
- for (unsigned e=0;e<n_partition;e++)
+ for (unsigned e=0;e<n_el;e++)
   {
    getline(input_file,input_string,'\n');
    element_partition[e]=atoi(input_string.c_str());
   }
 
- // Distribute and check halo schemes
+ // Output directory for documentation of partitioning
+ DocInfo mesh_doc_info;
+ mesh_doc_info.set_directory("RESLT_MESH");
+
+ // Distribute the problem
  bool report_stats=false;
  problem.distribute(element_partition,mesh_doc_info,report_stats);
+
+
+ // Optionally check and document the halo schemes
  problem.check_halo_schemes(mesh_doc_info);
+
 #endif
 
  // Create label for output

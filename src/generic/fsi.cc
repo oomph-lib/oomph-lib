@@ -244,9 +244,12 @@ bool FSIWallElement::Dont_warn_about_missing_adjacent_fluid_elements=false;
 //=================================================================
 double FSIWallElement::Default_Q_Value=1.0;
 
- //===================================================================
-/// This function identifies all data that is required for the 
-/// interaction
+
+//=======================================================================
+/// Overload the function that must return all field data involved
+/// in the interactions from the external (fluid) element. It allows
+/// the velocity degrees of freedom to be ignored if we want to 
+/// ignore the shear stresses when computing the Jacobian.
 //=======================================================================
  void FSIWallElement::identify_all_field_data_for_external_interaction(
   Vector<std::set<FiniteElement*> > const &external_elements_pt,
@@ -258,52 +261,57 @@ double FSIWallElement::Default_Q_Value=1.0;
    {
     //Loop over each element in the set 
     for(std::set<FiniteElement*>::iterator it=external_elements_pt[i].begin();
-       it != external_elements_pt[i].end(); it++)
+        it != external_elements_pt[i].end(); it++)
      {
       //Cast the element  the specific fluid element
       FSIFluidElement *external_fluid_el_pt = 
-        dynamic_cast<FSIFluidElement*>(*it);
-  
+       dynamic_cast<FSIFluidElement*>(*it);
+      
       //Only add pressure load if so desired
       if (Ignore_shear_stress_in_jacobian)
        {
         // Add the "pressure" load data
         external_fluid_el_pt->identify_pressure_data(paired_interaction_data);
        }
-     else
-   {
-    // Add the "direct" load data (usually velocities and pressures)
-    // to the set
-    external_fluid_el_pt->identify_load_data(paired_interaction_data);
-   }
+      else
+       {
+        // Add the "direct" load data (usually velocities and pressures)
+        // to the set
+        external_fluid_el_pt->identify_load_data(paired_interaction_data);
+       }
      }
    } //End of loop over interactions
  }
 
- /// \short Function that must return all geometric data involved 
+ //===================================================================
+ /// Function that must return all geometric data involved 
  /// in the desired interactions from the external element
+ //===================================================================
  void FSIWallElement::identify_all_geometric_data_for_external_interaction(
   Vector<std::set<FiniteElement*> > const &external_elements_pt,
   std::set<Data*> &external_geometric_data_pt) 
  {
   //If we are ignoring the shear stress, then we can ignore all
   //external geometric data
-  if(Ignore_shear_stress_in_jacobian) {return;}
+  if(Ignore_shear_stress_in_jacobian)
+   {
+    return;
+   }
   else
    {
-  //Loop over each inteaction
-  const unsigned n_interaction = this->ninteraction();
-  for(unsigned i=0;i<n_interaction;i++)
-   {
-    //Loop over each element in the set 
-    for(std::set<FiniteElement*>::iterator it=external_elements_pt[i].begin();
-       it != external_elements_pt[i].end(); it++)
+    //Loop over each inteaction
+    const unsigned n_interaction = this->ninteraction();
+    for(unsigned i=0;i<n_interaction;i++)
      {
-     (*it)->identify_geometric_data(external_geometric_data_pt);
+      //Loop over each element in the set 
+      for(std::set<FiniteElement*>::iterator it=external_elements_pt[i].begin();
+          it != external_elements_pt[i].end(); it++)
+       {
+        (*it)->identify_geometric_data(external_geometric_data_pt);
+       }
      }
    }
-   }
  }
-
-
+ 
+ 
 }

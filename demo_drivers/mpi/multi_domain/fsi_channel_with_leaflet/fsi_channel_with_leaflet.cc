@@ -717,16 +717,21 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
  // Get time:
  double time=time_pt()->time();
 
- // Write trace file
- trace << time << " " 
-       << Global_Physical_Variables::flux(time) << " " 
-       << tip_node_pt->x(0) << " "
-       << tip_node_pt->x(1) << " "
-       << tip_node_pt->dposition_dt(0) << " "
-       << tip_node_pt->dposition_dt(1) << " "
-       << doc_info.number() << " " 
-       << std::endl;
-
+ // Write trace file (only on processor 0) -- Tip node exists on
+ // every processor (because all wall elements are kept as halos)
+ // but we don't want different processors to overwrite (or replicate)
+ // the trace file.
+ if (this->communicator_pt()->my_rank()==0)
+  {
+   trace << time << " " 
+         << Global_Physical_Variables::flux(time) << " " 
+         << tip_node_pt->x(0) << " "
+         << tip_node_pt->x(1) << " "
+         << tip_node_pt->dposition_dt(0) << " "
+         << tip_node_pt->dposition_dt(1) << " "
+         << doc_info.number() << " " 
+         << std::endl;
+  }
 
  // Help me figure out what the "front" and "back" faces of the leaflet are
  //------------------------------------------------------------------------
@@ -811,9 +816,13 @@ void FSIChannelWithLeafletProblem<ELEMENT>::doc_solution(DocInfo& doc_info,
 //=====================================================================
 int main(int argc, char* argv[])
 {
+
 #ifdef OOMPH_HAS_MPI
+
  MPI_Helpers::init(argc,argv);
+
 #endif
+
 
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
@@ -844,12 +853,14 @@ int main(int argc, char* argv[])
  DocInfo doc_info; 
  doc_info.set_directory("RESLT_FSI_LEAF");
 
- // Trace file
+ // Trace file (only on processor zero)
  ofstream trace;
  char filename[150];
- sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
- trace.open(filename);
-
+ if (problem.communicator_pt()->my_rank()==0)
+  {
+   sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
+   trace.open(filename);
+  }
 
  // Number of timesteps (reduced for validation)
  unsigned nstep=200;
@@ -876,7 +887,7 @@ int main(int argc, char* argv[])
 
  if (CommandLineArgs::Argc==1)
   {
-   // No arguments, distribute without reference to partition vector
+   // Distribute problem using METIS to determine the partitioning
    problem.distribute(report_stats);
   }
  else
@@ -901,6 +912,7 @@ int main(int argc, char* argv[])
    // Now distribute the (still uniformly refined) problem
    problem.distribute(in_element_partition,report_stats);
   }
+
 #endif
  
  // Initial loop to increment the Reynolds number in sequence of steady solves

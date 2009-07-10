@@ -14,7 +14,7 @@
 
  In this example, we solve the same physical problem, but using refineable
  elements. As an alternative to the time-stepping procedure adopted
- previously, we petrurb the trivial steady-state solution and re-solve
+ previously, we perturb the trivial steady-state solution and re-solve
  the steady equations to obtain the steady symmetry-broken solution.
  In what follows, we shall only describe those parts of the code that
  differ from the non-refineable version.
@@ -42,10 +42,10 @@ two levels of adaptive mesh refinement.
 
 \until doc_solution
 
-Having forced the solution into a non-trivial symmetry broken state,
+Having forced the solution into a non-trivial symmetry-broken state,
 we switch off the perturbation and re-solve the problem, allowing
 for another two levels of adaptive refinement. The Newton solver
-now converges to the unperturbed but symmetry broken solution
+now converges to the unperturbed but symmetry-broken solution
 shown above.
 
 \until end of main
@@ -65,7 +65,7 @@ mesh used in this problem.
 No specific action is required before the adaptation but
 following the mesh adaptation exactly one pressure degree of freedom
 must be pinned in the problem. (Since the domain is enclosed the 
-pressure is only determine up to an arbitrary constant.) 
+pressure is only determined up to an arbitrary constant.) 
 The pressure degree of freedom that was pinned before the adaptation
 may have disappeared during the adpaptation, therefore 
 the constraint must be re-applied. However, we unpin all pressure
@@ -210,14 +210,15 @@ fluxes. The flux components associated with each compound flux must
 specified by overloading the function \c get_Z2_compound_flux_indices
 which returns a vector of the same length as the number of flux
 components, containing the index of the compound flux to which
-the each flux component contributes.
+the flux component contributes.
 
 \dontinclude refineable_b_convection.cc
 \skipline The number of compound fluxes
 \until end of get_Z2_compound_flux_indices
 
-The \c Z2ErrorEstimator calculates the error estimates for each compound flux,
-which are combined into a single error estimate by the function
+The \c Z2ErrorEstimator calculates the error estimates for each compound flux.
+The individual error estimates are then combined to a single 
+error estimate by the function
 \c Z2ErrorEstimator::get_combined_error_estimate(). By default the single
 error estimate is chosen to be the maximum of all calculated error estimates.
 Alternative user-defined functions

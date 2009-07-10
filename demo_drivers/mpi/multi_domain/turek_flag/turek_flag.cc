@@ -448,15 +448,15 @@ private:
  /// Pointer to fluid control node
  Node* Fluid_control_node_pt;
 
- /// Coordinates of control nodes
- double Solid_control_x0;
- double Solid_control_x1;
+ /// Backed-up x coordinate of fluid control node
  double Fluid_control_x0;
+
+ /// Backed-up y coordinate of fluid control node
  double Fluid_control_x1;
 
- /// Processor id for any process containing control nodes
- int Solid_control_process_id;
- int Fluid_control_process_id;
+ /// \short Boolean indicating if the current processor contains the
+ /// fluid control node
+ bool I_have_the_fluid_control_node;
  
 };// end_of_problem_class
 
@@ -476,10 +476,10 @@ TurekProblem(const double &length,
  Max_newton_iterations=20;
  Max_residuals=1.0e4;
 
- // Default process ids (for serial)
- Solid_control_process_id=this->communicator_pt()->my_rank();
- Fluid_control_process_id=this->communicator_pt()->my_rank();
-
+ // By default all processors contain the fluid control node
+ I_have_the_fluid_control_node=true;
+ 
+ 
  // Build solid mesh
  //------------------
 
@@ -530,9 +530,6 @@ TurekProblem(const double &length,
  std::cout << "Coordinates of solid control point " 
            << Solid_control_node_pt->x(0) << " " 
            << Solid_control_node_pt->x(1) << " " << std::endl;
-
- Solid_control_x0=Solid_control_node_pt->x(0);
- Solid_control_x1=Solid_control_node_pt->x(1);
 
  // Complete build of solid elements - needs to happen before refinement
  //---------------------------------------------------------------------
@@ -649,6 +646,8 @@ TurekProblem(const double &length,
            << Fluid_control_node_pt->x(0) << " " 
            << Fluid_control_node_pt->x(1) << " " << std::endl;
 
+ // Back it up so we can check if the node still exists
+ // once the problem has been distributed
  Fluid_control_x0=Fluid_control_node_pt->x(0);
  Fluid_control_x1=Fluid_control_node_pt->x(1);
 
@@ -663,10 +662,11 @@ TurekProblem(const double &length,
  // Build combined global mesh
  //---------------------------
 
- // Add Fluid mesh
+ // Add Fluid mesh. Note: It's important that the fluid mesh is
+ // added before the solid mesh!
  add_sub_mesh(fluid_mesh_pt());
  
- // Add Solid mesh to the problem's collection of submeshes
+ // Now add the solid mesh to the problem's collection of submeshes
  add_sub_mesh(solid_mesh_pt());
 
  // Add traction sub-meshes
@@ -978,25 +978,14 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::actions_after_adapt()
 
   }
 
- // Synchronise positions... ? Not sure this will help, but...
-#ifdef OOMPH_HAS_MPI
- unsigned n_mesh=nsub_mesh();
- for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
-  {
-   synchronise_dofs(mesh_pt(i_mesh));
-  }
- // Hmmm.  Do external dofs need to be synchronised as well?
-//  for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
-//   {
-//    synchronise_external_dofs(mesh_pt(i_mesh));
-//   }
-#endif
-
 }// end of actions_after_adapt
 
 //==================start_of_actions_before_distribute====================
-///  Actions before distribute: bulk solid elements attached to
-///  FSISolidTractionElements need to be kept as halo elements
+/// Actions before distribute: Make sure that the bulk solid elements 
+/// attached to the FSISolidTractionElements are kept as halo elements.
+/// Unlike in most other parallel codes we DON'T delete the 
+/// FSISolidTractionElements here, though, because they need to 
+/// be around while the fluid mesh is adapted.
 //========================================================================
 template<class FLUID_ELEMENT,class SOLID_ELEMENT >
 void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::actions_before_distribute()
@@ -1007,9 +996,8 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::actions_before_distribute()
  // There are 3 traction meshes
  for (unsigned b=0;b<3;b++)
   {
+   // Loop over elements in traction meshes
    unsigned n_element=Traction_mesh_pt[b]->nelement();
-   oomph_info << "Traction mesh " << b << " has " << n_element
-              << " elements" << std::endl;
    for (unsigned e=0;e<n_element;e++)
     {
      FSISolidTractionElement<SOLID_ELEMENT,2>* traction_elem_pt=
@@ -1021,17 +1009,20 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::actions_before_distribute()
       (traction_elem_pt->bulk_element_pt());
 
      // Require bulk to be kept as a (possible) halo element
-     solid_elem_pt->must_be_kept_as_halo()=true;
      // Note: The traction element itself will "become" a halo element 
      // when it is recreated after the distribution has taken place
+     solid_elem_pt->must_be_kept_as_halo()=true;
     }
-  }
+  } // end of loop over meshes of fsi traction elements
  
+
  // Flush all the submeshes out - we're keeping the traction meshes
  // on each process for now
  flush_sub_meshes();
 
  // Add the fluid mesh and the solid mesh back again
+ // Remember that it's important that the fluid mesh is
+ // added before the solid mesh!
  add_sub_mesh(fluid_mesh_pt());
  add_sub_mesh(solid_mesh_pt());
 
@@ -1095,9 +1086,14 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::actions_after_distribute()
   new MeshAsGeomObject<1,2,FSISolidTractionElement<SOLID_ELEMENT,2> >
   (Traction_mesh_pt[2]);
 
- // Tell the fluid mesh about the new "refined" MeshAsGeomObjects
+
+ // Delete the old MeshAsGeomObjects and tell the fluid mesh 
+ // about the new "refined" ones.
+ delete fluid_mesh_pt()->bottom_flag_pt();
  fluid_mesh_pt()->set_bottom_flag_pt(bottom_flag_pt);
+ delete fluid_mesh_pt()->top_flag_pt();
  fluid_mesh_pt()->set_top_flag_pt(top_flag_pt);
+ delete fluid_mesh_pt()->tip_flag_pt();
  fluid_mesh_pt()->set_tip_flag_pt(tip_flag_pt);
 
  // Call update_node_update for all the fluid mesh nodes, as the
@@ -1144,8 +1140,6 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::actions_after_distribute()
    for(unsigned ibound=5;ibound<8;ibound++ )
     { 
      unsigned num_nod= Fluid_mesh_pt->nboundary_node(ibound);
-     oomph_info << "After interaction setup there are " << num_nod
-                << " nodes on fluid boundary " << ibound << std::endl;
      for (unsigned inod=0;inod<num_nod;inod++)
       {   
        Fluid_mesh_pt->boundary_node_pt(ibound, inod)->
@@ -1153,36 +1147,10 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::actions_after_distribute()
          FSI_functions::apply_no_slip_on_moving_wall);
       }
     }
-  }
+
+  } // end of (re-)assignment of the auxiliary node update fct
 
  // Re-set control nodes
-
- // Loop over solid nodes
- unsigned n_solid_nod=solid_mesh_pt()->nnode();
- for (unsigned j=0;j<n_solid_nod;j++)
-  {
-   if ((solid_mesh_pt()->node_pt(j)->x(0)==Solid_control_x0) &&
-       (solid_mesh_pt()->node_pt(j)->x(1)==Solid_control_x1))
-    {
-     // The node still exists on this process...
-     Solid_control_process_id=this->communicator_pt()->my_rank();
-     break;
-    }
-
-   // if the end has been reached then set process id to -1
-   if (j==n_solid_nod-1)
-    {
-     Solid_control_process_id=-1;
-    }
-  }
-
- if (Solid_control_process_id>=0)
-  {
-   std::cout << "Coordinates of solid control point (" 
-             << Solid_control_node_pt->x(0) << "," 
-             << Solid_control_node_pt->x(1) << ") on process" 
-             << Solid_control_process_id << std::endl;
-  }
 
  // Loop over fluid nodes
  unsigned n_fluid_nod=fluid_mesh_pt()->nnode();
@@ -1192,23 +1160,15 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::actions_after_distribute()
        (fluid_mesh_pt()->node_pt(j)->x(1)==Fluid_control_x1))
     {
      // The node still exists on this process...
-     Fluid_control_process_id=this->communicator_pt()->my_rank();
+     I_have_the_fluid_control_node=true;
      break;
     }
 
-   // if the end has been reached then set process id to -1
+   // if the end has been reached then we've lost the control node
    if (j==n_fluid_nod-1)
     {
-     Fluid_control_process_id=-1;
+     I_have_the_fluid_control_node=false;
     }
-  }
-
- if (Fluid_control_process_id>=0)
-  {
-   std::cout << "Coordinates of fluid control point (" 
-             << Fluid_control_node_pt->x(0) << "," 
-             << Fluid_control_node_pt->x(1) << ") on process" 
-             << Fluid_control_process_id << std::endl;
   }
  
 } // end of actions after distribute
@@ -1345,11 +1305,9 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::doc_solution(
  some_file.close();  
 
 
- // Write trace (we're only using Taylor Hood elements so we know that
- // the pressure is the third value at the fluid control node...)
-
- if ((Solid_control_process_id==my_rank) &&
-     (Fluid_control_process_id==my_rank))
+ // Write trace if we still have the fluid control node
+ // (the solid control node
+ if (I_have_the_fluid_control_node)
   {
    trace_file << time_pt()->time() << " " 
               << Solid_control_node_pt->x(0) << " " 

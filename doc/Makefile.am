@@ -37,7 +37,8 @@ paraview \
 preconditioners \
 to_be_written \
 young_laplace \
-mpi
+mpi \
+creating_doc
 
 include $(top_srcdir)/config/makefile_templates/doc
 

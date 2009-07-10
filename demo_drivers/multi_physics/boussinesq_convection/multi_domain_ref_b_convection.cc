@@ -29,7 +29,7 @@
 //mesh to an advection diffusion mesh, giving Boussinesq convection
 
 //Oomph-lib headers and derived elements are in a separate header file
-#include "my_boussinesq_elements.h"
+#include "multi_domain_boussinesq_elements.h"
 
 // Both meshes are the standard rectangular quadmesh
 #include "meshes/rectangular_quadmesh.h"
@@ -124,10 +124,13 @@ public:
    // its value to zero
    fix_pressure(0,0,0.0);
 
-   // Set sources
-   Multi_domain_functions::setup_multi_domain_interactions
-    <NST_ELEMENT,AD_ELEMENT>(this,nst_mesh_pt(),adv_diff_mesh_pt());
-  } // end of actions_after_adapt
+   // Set external elements for the multi-domain solution.
+   Multi_domain_functions::
+    setup_multi_domain_interactions<NST_ELEMENT,AD_ELEMENT>
+    (this,nst_mesh_pt(),adv_diff_mesh_pt());
+ 
+  } //end_of_actions_after_adapt
+
 
  ///Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned &e, const unsigned &pdof, 
@@ -160,7 +163,10 @@ private:
 
 protected:
 
+ /// Navier Stokes mesh
  RefineableRectangularQuadMesh<NST_ELEMENT>* Nst_mesh_pt;
+
+ /// Advection diffusion mesh
  RefineableRectangularQuadMesh<AD_ELEMENT>* Adv_diff_mesh_pt;
 
 }; // end of problem class
@@ -250,7 +256,7 @@ RefineableConvectionProblem()
  for(unsigned ibound=0;ibound<num_bound;ibound++)
   {
    //Set the maximum index to be pinned (all values by default)
-   unsigned val_max;//=3;
+   unsigned val_max;
 
    //Loop over the number of nodes on the boundry
    unsigned num_nod= adv_diff_mesh_pt()->nboundary_node(ibound);
@@ -298,6 +304,12 @@ RefineableConvectionProblem()
 
    //Set Gravity vector
    el_pt->g_pt() = &Global_Physical_Variables::Direction_of_gravity;
+
+   // We can ignore the external geometric data in the "external"
+   // advection diffusion element when computing the Jacobian matrix
+   // because the interaction does not involve spatial gradients of 
+   // the temperature (and also because the mesh isn't moving!)
+   el_pt->ignore_external_geometric_data();
   }
 
  unsigned n_ad_element = adv_diff_mesh_pt()->nelement();
@@ -312,18 +324,30 @@ RefineableConvectionProblem()
 
    // Set the Peclet number multiplied by the Strouhal number
    el_pt->pe_st_pt() =&Global_Physical_Variables::Peclet;
+
+   // We can ignore the external geometric data in the "external"
+   // Navier Stokes element when computing the Jacobian matrix
+   // because the interaction does not involve spatial gradients of 
+   // the velocities (and also because the mesh isn't moving!)
+   el_pt->ignore_external_geometric_data();
+
   } // end of setup for all AD elements
 
  // combine the submeshes
  add_sub_mesh(Nst_mesh_pt);
  add_sub_mesh(Adv_diff_mesh_pt);
  build_global_mesh();
-
- // Setup the interaction
- actions_after_adapt();
-
+ 
+ // Set external elements for the multi-domain solution.
+ Multi_domain_functions::
+  setup_multi_domain_interactions<NST_ELEMENT,AD_ELEMENT>
+  (this,nst_mesh_pt(),adv_diff_mesh_pt());
+ 
  // Setup equation numbering scheme
  cout << "Number of equations: " << assign_eqn_numbers() << endl; 
+
+ // Set this to higher than default (10)
+ Problem::Max_newton_iterations=20;
 
 } // end of constructor
 
@@ -410,29 +434,20 @@ void RefineableConvectionProblem<NST_ELEMENT,AD_ELEMENT>::doc_solution()
  // Number of plot points: npts x npts
  unsigned npts=5;
 
- // Output whole solution (this will output elements from one mesh
- //----------------------  followed by the other mesh)
- sprintf(filename,"%s/soln%i.dat",Doc_info.directory().c_str(),
-         Doc_info.number());
- some_file.open(filename);
- mesh_pt()->output(some_file,npts);
- some_file.close();
-
- // Output N-S solution
- //--------------------
- sprintf(filename,"%s/nst_soln%i.dat",Doc_info.directory().c_str(),
+ // Output Navier-Stokes solution
+ sprintf(filename,"%s/fluid_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  nst_mesh_pt()->output(some_file,npts);
  some_file.close();
 
- // Output A-D solution
- //--------------------
- sprintf(filename,"%s/ad_soln%i.dat",Doc_info.directory().c_str(),
+ // Output advection diffusion solution
+ sprintf(filename,"%s/temperature_soln%i.dat",Doc_info.directory().c_str(),
          Doc_info.number());
  some_file.open(filename);
  adv_diff_mesh_pt()->output(some_file,npts);
  some_file.close();
+
 
  Doc_info.number()++;
 } // end of doc
@@ -440,18 +455,20 @@ void RefineableConvectionProblem<NST_ELEMENT,AD_ELEMENT>::doc_solution()
 
 //===============start_of_main========================================
 /// Driver code for 2D Boussinesq convection problem with 
-/// adaptivity, using the multi-domain method.
+/// adaptivity.
 //====================================================================
 int main()
 {
+
+
  // Set the direction of gravity
  Global_Physical_Variables::Direction_of_gravity[0] = 0.0;
  Global_Physical_Variables::Direction_of_gravity[1] = -1.0;
 
  // Create the problem with 2D nine-node refineable elements.
  RefineableConvectionProblem<
-  RefineableQCrouzeixRaviartElementWithExternalElement<2>,
-  RefineableQAdvectionDiffusionElementWithExternalElement<2> > problem;
+  RefineableQCrouzeixRaviartBoussinesqElement<2>,
+  RefineableQAdvectionDiffusionBoussinesqElement<2> > problem;
  
  // Apply a perturbation to the upper boundary condition to
  // force the solution into the symmetry-broken state.

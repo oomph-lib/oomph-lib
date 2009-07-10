@@ -140,7 +140,7 @@ fluid.
 A linear stability analysis shows that this solution becomes unstable
 via an up-down, symmetry-breaking, pitchfork bifurcation 
 at a critial Rayleigh number of \f$ Ra_{crit} \approx 1708 \f$ with a
-critical wavenumber of \f$ k \approx 3.11 \f$ , see for example Hydrodynamic
+critical wavenumber of \f$ k \approx 3.11, \f$  see for example Hydrodynamic
 and Hydromagnetic Stability by S. Chandrasekhar OUP (1961). 
 Thus, for \f$ Ra > 1708 \f$ there are three possible steady
 solutions, the (unstable) trivial steady state and two (stable)
@@ -151,7 +151,7 @@ initial guess for the velocity and temperature, the Newton method
 converges to the trivial state. In order to demonstrate that 
 this state is indeed unstable we therefore apply a time-dependent, 
 mass-conserving  perturbation to the vertical velocity at the upper 
-wall and time march the system while rapidly reducing the size of the 
+wall and time-march the system while rapidly reducing the size of the 
 perturbation. The system then evolves towards the nontrivial steady state
 as shown in the <a href="../figures/convect.avi">animation</a> from
 which the plots shown above were extracted. (In the 
@@ -221,11 +221,10 @@ i.e. if any command-line parameters are passed to the driver code.
 
 \section problem The problem class
 The problem class contains five non-trivial functions:
-\ref const "the constructor", \ref fix_p "fix_pressure(...)",
-\ref set_bound "set_boundary_conditions(...)", 
-\ref actions_bef 
-"actions_before_implicit_timestep(...)." and \ref doc
-"doc_solution(...)".
+the constructor, the \c fix_pressure(...) function,
+as well as the functions \c set_boundary_conditions(...),
+\c actions_before_implicit_timestep(...) and 
+\c doc_solution(...), all discussed below.
 
 
 <HR>
@@ -519,7 +518,7 @@ velocities, the fluid pressure and the temperature.
     to solve steady problems.
     \n\n
   - Given the solution at time \f$ t = t_{\mbox{orig}} \f$ , the unsteady 
-    Newton solver \c Problem::unsteady_newton_solve(dt,...) 
+    Newton solver <code> Problem::unsteady_newton_solve(dt,...) </code>
     increments time by \c dt, shifts the "history" values and then
     computes the solution at the advanced time, \f$ t =
     t_{\mbox{orig}} \f$ + \c dt.
@@ -620,7 +619,7 @@ velocities, the fluid pressure and the temperature.
      the source code for the
      \c BuoyantQCrouzeixRaviartElement includes such an implementation 
      and, moreover, it is the default behaviour. We found the assembly
-     time for the analytic coupled jacobian to be approximately 15\%
+     time for the analytic coupled Jacobian to be approximately 15\%
      of the finite-difference based versions. The implementation 
      is reasonably straightforward and can be found in the
      source code
@@ -631,7 +630,7 @@ velocities, the fluid pressure and the temperature.
      element:</STRONG> \n\n
      Although recycling the analytically computed diagonal blocks in the
      Jacobian matrix leads to a modest speedup, and the use of
-     analytic off-diagonal blocks to a futher speedup, the
+     analytic off-diagonal blocks to a further speedup, the
      computation of the coupled residual vector and Jacobian matrix
      are still somewhat inefficient. This is because the contributions
      from the Navier-Stokes and advection-diffusion equations are 

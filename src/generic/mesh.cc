@@ -4436,7 +4436,7 @@ unsigned Mesh::add_external_haloed_element_pt(const unsigned& p,
 
  // Is this already an external haloed element?
  bool already_external_haloed_element=false;
- unsigned external_haloed_el_index;
+ unsigned external_haloed_el_index=0;
  for (unsigned eh=0;eh<n_extern_haloed;eh++)
   {
    if (el_pt==External_haloed_element_pt[p][eh])
@@ -4476,7 +4476,7 @@ unsigned Mesh::add_external_haloed_node_pt(const unsigned& p, Node*& nod_pt)
 
  // Is this already an external haloed node?
  bool is_an_external_haloed_node=false;
- unsigned external_haloed_node_index;
+ unsigned external_haloed_node_index=0;
  for (unsigned k=0;k<n_ext_haloed_nod;k++)
   {
    if (nod_pt==External_haloed_node_pt[p][k])
