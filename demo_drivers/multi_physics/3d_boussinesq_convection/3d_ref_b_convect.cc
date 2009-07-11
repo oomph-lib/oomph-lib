@@ -1700,14 +1700,6 @@ int main(int argc, char **argv)
  RefineableConvectionProblem<
   RefineableBuoyantQCrouzeixRaviartElement<3> > problem;
 
- // Distribute the problem (including set sources)
-#ifdef OOMPH_HAS_MPI
- DocInfo mesh_doc_info;
- bool report_stats=true;
- problem.distribute(mesh_doc_info,report_stats);
-#endif
-
- 
  //Solve the problem with (up to) two levels of adaptation
  problem.newton_solve();
  

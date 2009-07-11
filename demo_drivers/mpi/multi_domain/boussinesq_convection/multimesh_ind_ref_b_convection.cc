@@ -132,21 +132,7 @@ public:
       }
     }
 
-   //Change the default bin parameters
-   Multi_domain_functions::Change_from_default_bin_parameters=true;
-
-   //Change the number of bins in each direction, 
-   //the minimum, maximum and the percentage offset
-   Multi_domain_functions::Nx_bin=50;
-   Multi_domain_functions::Ny_bin=50;
-
-   Multi_domain_functions::X_min=0.0;
-   Multi_domain_functions::X_max=3.0;
-   Multi_domain_functions::Y_min=0.0;
-   Multi_domain_functions::Y_max=1.0;
-   Multi_domain_functions::Percentage_offset=0.0;
-
-   //(Re)set all the sources in the problem
+   // Reset all the interactions in the problem
    Multi_domain_functions::setup_multi_domain_interactions
     <NST_ELEMENT,AD_ELEMENT>(this,nst_mesh_pt(),adv_diff_mesh_pt());
   }
@@ -154,21 +140,7 @@ public:
  /// Actions after distribute: set sources
  void actions_after_distribute()
   {
-   //Change the default bin parameters
-   Multi_domain_functions::Change_from_default_bin_parameters=true;
-
-   //Change the number of bins in each direction, 
-   //the minimum, maximum and the percentage offset
-   Multi_domain_functions::Nx_bin=50;
-   Multi_domain_functions::Ny_bin=50;
-
-   Multi_domain_functions::X_min=0.0;
-   Multi_domain_functions::X_max=3.0;
-   Multi_domain_functions::Y_min=0.0;
-   Multi_domain_functions::Y_max=1.0;
-   Multi_domain_functions::Percentage_offset=0.0;
-
-   // Set sources
+   // Reset all the interactions in the problem
    Multi_domain_functions::setup_multi_domain_interactions
     <NST_ELEMENT,AD_ELEMENT>(this,nst_mesh_pt(),adv_diff_mesh_pt());
   } // end of actions_after_distribute
@@ -363,7 +335,23 @@ RefineableConvectionProblem()
  build_global_mesh();
 
  // Setup the interaction
- actions_after_adapt();
+
+ // Change from the default number of bins in each direction
+ Multi_domain_functions::Nx_bin=50;
+ Multi_domain_functions::Ny_bin=50;
+
+ // Change the minimum, maximum and the percentage offset
+ Multi_domain_functions::Compute_extreme_bin_coordinates=false;
+ Multi_domain_functions::X_min=0.0;
+ Multi_domain_functions::X_max=3.0;
+ Multi_domain_functions::Y_min=0.0;
+ Multi_domain_functions::Y_max=1.0;
+ Multi_domain_functions::Percentage_offset=0.0;
+
+ // Now set up the interaction
+ Multi_domain_functions::setup_multi_domain_interactions
+  <NST_ELEMENT,AD_ELEMENT>(this,nst_mesh_pt(),adv_diff_mesh_pt());
+
 
  // Setup equation numbering scheme
  cout << "Number of equations: " << assign_eqn_numbers() << endl; 

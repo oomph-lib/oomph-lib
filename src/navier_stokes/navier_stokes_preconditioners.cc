@@ -1229,16 +1229,22 @@ namespace oomph
      
     // wait for the unclassified sends to complete
     unsigned n_unclassified_send_req = unclassified_send_requests.size();
-    MPI_Waitall(n_unclassified_send_req,&classified_send_requests[0],
-                MPI_STATUS_IGNORE);
+    if (n_unclassified_send_req!=0)
+     {
+      MPI_Waitall(n_unclassified_send_req,&unclassified_send_requests[0],
+                  MPI_STATUS_IGNORE);
+     }
     delete[] unclassified_contributions_send;
     delete[] unclassified_indices_send;
     delete[] n_unclassified_send;
      
     // wait for the classified sends to complete
     unsigned n_classified_send_req = classified_send_requests.size();
-    MPI_Waitall(n_classified_send_req,&classified_send_requests[0],
-                MPI_STATUS_IGNORE);
+    if (n_classified_send_req!=0)
+     {
+      MPI_Waitall(n_classified_send_req,&classified_send_requests[0],
+                  MPI_STATUS_IGNORE);
+     }
     delete[] classified_indices_send;
     delete[] classified_contributions_send;
     delete[] n_classified_recv;

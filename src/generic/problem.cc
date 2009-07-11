@@ -1171,9 +1171,9 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
      // are being assigned
      if (assign_local_eqn_numbers)
       {
-       DocInfo error_doc_info;
-       error_doc_info.set_directory("HALO_ERROR");
-       check_halo_schemes(error_doc_info);
+       oomph_info << "Calling check_halo_schemes() from assign_eqn_numbers()"
+                  << std::endl << std::endl;
+       check_halo_schemes();
       }
 #endif
 
@@ -1231,9 +1231,9 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
      // are being assigned
      if (assign_local_eqn_numbers)
       {
-       DocInfo error_doc_info;
-       error_doc_info.set_directory("HALO_ERROR");
-       check_halo_schemes(error_doc_info);
+       oomph_info << "Calling check_halo_schemes() from assign_eqn_numbers()"
+                  << std::endl << std::endl;
+       check_halo_schemes();
       }
 #endif
 

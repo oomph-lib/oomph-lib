@@ -25,11 +25,12 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-//Multi-domain functions which act on more than one mesh and set up the
-//storage and interaction between the two
+//Non-templated multi-domain functions which act on more than one mesh 
+//and set up the storage and interaction between the two
 
 //oomph-lib header
 #include "multi_domain.h"
+#include "multi_domain.template.cc"
 #include "mesh.h"
 #include "algebraic_elements.h"
 #include "macro_element_node_update_element.h"
@@ -114,10 +115,9 @@ namespace Multi_domain_functions
 
   /// Default parameters for the binning method
 
-  /// \short Bool to tell the MeshAsGeomObject of a change in default params
-  /// (should only be used in conjunction with a change from default N*_bin;
-  ///  the minimum and maximum of the Mesh used must also be specified)
-  bool Change_from_default_bin_parameters=false;
+  /// \short Bool to tell the MeshAsGeomObject whether to calculate
+  /// the extreme coordinates of the bin structure
+  bool Compute_extreme_bin_coordinates=true;
 
   /// \short Number of bins in the first dimension in binning method in
   /// setup_multi_domain_interaction(). Default value of 10.

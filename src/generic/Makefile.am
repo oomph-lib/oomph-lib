@@ -101,7 +101,7 @@ endif
 # Template-only files: Need to be included in include directory
 # but should not be listed in combined header file
 templates = \
-tree.template.cc
+tree.template.cc mesh_as_geometric_object.template.cc multi_domain.template.cc
 
 # Do we have the HYPRE library?
 if HAVE_HYPRE

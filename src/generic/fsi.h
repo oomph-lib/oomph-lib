@@ -40,10 +40,10 @@
 #include "mesh.h"
 #include "geom_objects.h"
 #include "face_element_as_geometric_object.h"
-#include "mesh_as_geometric_object.h"
 #include "integral.h"
 #include "problem.h"
-#include "multi_domain.h"
+//#include "multi_domain.h"
+#include "multi_domain.template.cc"
 
 namespace oomph
 {

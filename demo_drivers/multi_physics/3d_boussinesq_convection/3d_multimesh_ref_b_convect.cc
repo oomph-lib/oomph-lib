@@ -149,30 +149,11 @@ public:
  /// re-pin a single pressure degree of freedom
  void actions_after_adapt()
   {
-   // Set binning parameters
-   Multi_domain_functions::Change_from_default_bin_parameters=true;
-   Multi_domain_functions::Nx_bin=50;
-   Multi_domain_functions::Ny_bin=50;
-   Multi_domain_functions::Nz_bin=50;
-
-   Multi_domain_functions::X_min=0.0;
-   Multi_domain_functions::X_max=1.0;
-   Multi_domain_functions::Y_min=0.0;
-   Multi_domain_functions::Y_max=1.0;
-   Multi_domain_functions::Z_min=0.0;
-   Multi_domain_functions::Z_max=Lz;
-
-   // Set sources
+   // Setup all interactions
    Multi_domain_functions::setup_multi_domain_interactions
     <NST_ELEMENT,AD_ELEMENT>(this,nst_mesh_pt(),adv_diff_mesh_pt());
   }
 
-//  /// Actions after distribute: set sources
-//  void actions_after_distribute()
-//   {
-//    actions_after_adapt();
-//   }
-  
  /// \short Doc the solution.
  void doc_solution();
 
@@ -333,7 +314,25 @@ RefineableConvectionProblem()
  build_global_mesh();
 
  // Setup the interaction
- actions_after_adapt();
+
+ // Change default number of bins in each dimension
+ Multi_domain_functions::Nx_bin=50;
+ Multi_domain_functions::Ny_bin=50;
+ Multi_domain_functions::Nz_bin=50;
+
+ // Don't compute extreme bin coordinates
+ Multi_domain_functions::Compute_extreme_bin_coordinates=false;
+ // Specify extreme bin coordinates directly
+ Multi_domain_functions::X_min=0.0;
+ Multi_domain_functions::X_max=1.0;
+ Multi_domain_functions::Y_min=0.0;
+ Multi_domain_functions::Y_max=1.0;
+ Multi_domain_functions::Z_min=0.0;
+ Multi_domain_functions::Z_max=Lz;
+
+ // Setup all interactions
+ Multi_domain_functions::setup_multi_domain_interactions
+  <NST_ELEMENT,AD_ELEMENT>(this,nst_mesh_pt(),adv_diff_mesh_pt());
 
  // Setup equation numbering scheme
  cout << "Number of equations: " << assign_eqn_numbers() << endl; 
