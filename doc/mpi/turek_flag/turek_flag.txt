@@ -6,8 +6,8 @@
 This document provides an overview of 
 - how to change the serial driver code for 
   <a href="../../../interaction/turek_flag/html/index.html">Turek &
-  Hron's FSI benchmark problem</a> so that the fluid and solid meshes
-  can both be adapted, 
+  Hron's FSI benchmark problem</a> so that both the fluid and solid meshes
+  can be adapted, 
 .
 and 
 - how to distribute the problem across multiple processors. 
@@ -26,13 +26,13 @@ which discuss how to modify existing serial driver codes so that the
 \section double_adapt Enabling spatial adaptivity for the fluid and solid meshes
 In the original (serial) driver code for 
 <a href="../../../interaction/turek_flag/html/index.html">Turek &
-Hron's FSI benchmark problem</a> we only allowed the fluid mesh
-to be adapted. Before discussing how to modify the code to allow
-fluid and solid meshes to be refined simultaneously, we provide a
+Hron's FSI benchmark problem</a> we only adapted the fluid mesh. 
+Before discussing how to modify the code to refine the 
+fluid and solid meshes simultaneously, we provide a
 brief reminder of the procedure used to discretise fluid-structure
 interaction problems that involve fluid and solid domains of equal spatial
 dimension (e.g. a 2D fluid domain interacting with a 2D solid domain)
-while using algebraic node update methods to update the position of
+when using algebraic node update methods to update the position of
 the nodes in the fluid mesh.  
 We refer to <a href="../../fsi_channel_with_leaflet/html/index.html">
 another tutorial</a> for a discussion of FSI
@@ -42,15 +42,15 @@ shell and beam structures.
 
 <HR>
 
-\subsection orig The existing, basic implementation
+\subsection orig General methodology
   
-The figure below shows a sketch of the problem setup for a simple(r)
+The figure below shows a sketch of  a simple(r)
 fluid-structure interaction problem involving fluid and solid domains 
 that meet along a single mesh boundary. We assume that the fluid mesh 
-(shown at the bottom of the sketch) is a mesh with an algebraic node 
-update function that allows the position of its nodes to be 
-updated in response to changes in the shape and position of the domain 
-boundary which is represented by the \c GeomObject shown in 
+uses an algebraic node 
+update function to update the position of its nodes 
+in response to changes in the domain 
+boundary, represented by the \c GeomObject shown in 
 magenta. (You may wish to consult
 <a href="../../../interaction/fsi_collapsible_channel_algebraic/html/index.html">
 another tutorial</a> for a reminder of how \c oomph-lib's algebraic
@@ -59,32 +59,19 @@ node update methods work).
 
 @I w 0.75\textwidth fsi_with_adaptive_wall_basic "Basic setup for FSI problems involving algebraic node updates for the fluid mesh. "
  
-In an FSI problem, the shape and position of the fluid mesh's free
-boundary is determined by the FSI boundary of the solid mesh, i.e. the
+In an FSI problem, the fluid mesh's free
+boundary is a boundary of the solid mesh, <em> i.e. </em> the
 boundary along which the fluid exerts a traction onto the solid.
 Within \c oomph-lib, the fluid traction is applied to the solid domain
 by attaching \c FSISolidTractionElements to the faces of the 
-"bulk" solid elements that are adjacent to the FSI boundary. 
+"bulk" solid elements adjacent to the FSI boundary. 
 (In the above sketch the \c FSISolidTractionElements are shown
-in blue.) We combine the \c FSISolidTractionElements into a
-\c MeshAsGeomObject -- a compound \c GeomObject that now represents the
-shape and position of the entire FSI boundary. The constituent
-\c FSISolidTractionElements act as sub-\c GeomObjects within the
-compound \c GeomObject. The deformation of the fluid and solid meshes 
-can then be coupled by using the \c MeshAsGeomObject formed from 
+in blue.)
+The deformation of the fluid and solid meshes 
+is coupled by using the \c MeshAsGeomObject formed from 
 the \c FSISolidTractionElements as the \c GeomObject that defines
 the moving boundary of the fluid mesh. (In sketch above, this is 
 indicated by the magenta arrow.)
-
-As discussed in 
-<a href="../../../interaction/fsi_collapsible_channel_algebraic/html/index.html">
-the algebraic node update tutorial</a>, the sparsity/efficiency of
-the algebraic node updates is greatly increased if the setup of the
-algebraic node update function employs the  \c MeshAsGeomObject's
-\c locate_zeta(...) function to determine its shape and position
-via direct access to its constituent sub-\c GeomObjects. All of 
-\c oomph-lib's exisiting \c AlgebraicMeshes employ this methodology
-and it is important to retain it. 
 
 
 \subsection modification1 Modifications to allow adaptivity of the fluid and solid meshes
@@ -96,16 +83,15 @@ as described
 <a href="../../../interaction/fsi_collapsible_channel_algebraic/html/index.html">elsewhere</a>.
 In particular, the node update data for
 newly-created fluid nodes is created automatically by a call to 
-the \c AlgebraicMesh::update_node_update(...) function, which obtains
-the information about the FSI boundary from the unchanged 
-\c MeshAsGeomObject that is built from the \c FSISolidTractionElements.
+the \c AlgebraicMesh::update_node_update(...) function during the adaptation. 
+This function obtains the required
+information about the boundary by using the \c MeshAsGeomObject 
+built from the \c FSISolidTractionElements.
 
-
-If the solid mesh is adapted too, then the existing 
+If the solid mesh is also adapted, then the existing 
 \c FSISolidTractionElements must (at some point) be deleted and new ones
-must be attached to the adapted "bulk" solid mesh. (If this is not done, we may 
-end up with "dangling" \c FSISolidTractionElements that are attached to "bulk" 
-solid elements that no longer exist.) This is typically done by
+must be attached to the adapted "bulk" solid mesh. In all other problems, this
+is done by
 deleting the \c FSISolidTractionElements in \c
 Problem::actions_before_adapt() and attaching new ones in 
 \c Problem::actions_after_adapt(); see, e.g. the 
@@ -114,7 +100,7 @@ on the solution of a Poisson problem with flux boundary
 conditions.</a> However, in the present problem
 this is not possible because, once the \c FSISolidTractionElements 
 have been deleted, the \c MeshAsGeomObject can no longer be used to 
-represent the shape and position of the FSI boundary, and this would cause
+represent the shape and position of the FSI boundary, which would cause
 the adaptation of the fluid mesh to fail. 
 
 To avoid this problem, we adopt the following strategy:
@@ -123,18 +109,17 @@ To avoid this problem, we adopt the following strategy:
    \b before the solid mesh. (This happens to be what was done
    already in the original driver code.) Usually, the order in which 
    sub-meshes are added to the \c Problem is irrelevant. Here the order
-   does matter because we will exploit the fact that
+   \b does matter because we will exploit the fact that
    the sub-meshes are adapted individually, in the 
    order in which they were added to the \c Problem.
    \n\n
 -# Rather than deleting the \c FSISolidTractionElements in
-   \c Problem::actions_before_adapt() (as done in most other
-   spatially adaptive computations involving \c FaceElements) 
-   we keep them attached to the "bulk" solid elements throughout 
+   \c Problem::actions_before_adapt(), we remove them from the global
+   mesh, but they remain attached to the "bulk" solid elements throughout 
    the mesh adaptation procedure. 
-   When the fluid mesh is adapted, the \c MeshAsGeomObject
-   that defines the FSI boundary is therefore still fully-functional
-   (and refers to the FSI boundary as represented by the solid domain
+   When the fluid mesh is adapted, the appropriate \c MeshAsGeomObject
+   is, therefore, still fully-functional
+   (and refers to the boundary as represented by the solid domain
    \b before the "bulk" solid mesh is adapted). 
    \n\n
    Here is a sketch of problem after adaptation of the fluid mesh:
@@ -145,24 +130,24 @@ To avoid this problem, we adopt the following strategy:
    to turn some of the \c FSISolidTractionElements into "dangling"
    elements. (This occurs whenever a \c FSISolidTractionElements
    is attached to a "bulk" solid elements that disappears during the
-   adaptation, e.g. by being refined.) 
+   adaptation, <em> e.g. </em> by being refined.) 
    \n\n
    Here is a plot of the problem following the adaptation of the
    solid mesh :
    \n\n
 @I w 0.75\textwidth fsi_with_adaptive_wall_adapted_solid "Sketch of the problem following the adaptation of the solid mesh -- the `dangling' FSISolidTractionElements are represented by dotted lines. "
    \n\n
--# We rectify this in \c Problem::actions_after_adapt() where we 
+-# Hence, in \c Problem::actions_after_adapt() we 
    delete the existing  \c FSISolidTractionElements and immediately 
-   (re-)attach new ones. The \c MeshAsGeomObject that represents the
-   FSI boundary is now broken because it still refers to the just deleted 
+   (re-)attach new ones. Now, the \c MeshAsGeomObject that represents the
+   FSI boundary is broken because it refers to the just deleted 
    \c FSISolidTractionElements. 
    \n\n
 @I w 0.75\textwidth fsi_with_adaptive_wall_new_face_elements "Sketch of the problem following the creation of new FSISolidTractionElements. The fact that the MeshAsGeomObject is broken is indicated by the dashed lines. "
    \n\n
--# We rectify this by rebuilding the \c MeshAsGeomObject from the 
-   newly created \c FSISolidTractionElements, and update the
-   fluid mesh's pointer to the \c GeomObject that describes the
+-# Thus, we rebuild the \c MeshAsGeomObject from the 
+   newly-created \c FSISolidTractionElements, and update the
+   fluid mesh's pointer to this new \c GeomObject that describes the
    boundary shape. 
    \n\n
 @I w 0.75\textwidth fsi_with_adaptive_wall_done "Sketch of the problem with re-built MeshAsGeomObject. "
@@ -184,7 +169,7 @@ To avoid this problem, we adopt the following strategy:
 The distribution of the \c Problem requires the same straightforward
 modifications as
 in the <a href="../../fsi_channel_with_leaflet/html/index.html">
-earlier example</a> where we discussed the distribution of a problem
+earlier example</a> 
 involving the interaction of a 2D fluid domain with a 1D beam structure.
 Again, the only major intervention required
 to allow the problem to be distributed is the the retention
@@ -195,9 +180,9 @@ problem</a> this was achieved by retaining \b all elements in the
 1D mesh of \c FSIHermiteBeamElements as halos, using the
 function \c Mesh::keep_all_elements_as_halos(). While the 
 same methodology could be used here, it would be extremely wasteful
-to retain all the solid elements in the "bulk" solid mesh since only
-the elements next to the FSI boundary are actually required to 
-represent that boundary. We therefore use a more fine-grained
+to retain all the solid elements in the "bulk" solid mesh because only
+the elements next to the FSI boundary are required. 
+We therefore use a more fine-grained
 method of retaining elements, using the function \c
 GeneralisedElement::must_be_kept_as_halo(). 
 
@@ -218,8 +203,8 @@ the fluid and solid meshes, and (ii) the problem distribution.
 \subsection main_body The main function
 
 As usual in a parallel driver code, the only addition to the \c main()
-function is the inclusion of calls to \c MPI_Helpers::init() and \c
-MPI_Helpers::finalize(), and the call to the \c Problem::distribute()
+function is the inclusion of calls to \c MPI_Helpers::init(), \c
+MPI_Helpers::finalize(), and the \c Problem::distribute()
 function. 
 
 <HR>
@@ -252,18 +237,18 @@ already-exisiting \c create_fsi_traction_elements() function:
 
 \subsection actions_before_distribute Actions before distribute
 
- As discussed above, we have to ensure that the "bulk" solid
-elements adjacent to the FSI boundary are retained on all processors
-when the problem is distributed. The \c actions_before_distribute()
-function therefore starts with a loop over the 
+ As discussed above, we must ensure that the "bulk" solid
+elements adjacent to the FSI boundary are retained on all processors.
+The \c actions_before_distribute()
+function starts with a loop over the 
 \c FSISolidTractionElements within which we use the 
 function \c GeneralisedElement::must_be_kept_as_halo() 
-to indicate that the associated bulk elements must be retained
-during the problem distribution.
+to indicate that the associated bulk elements must be retained.
 
  We stress again that the \c FSISolidTractionElements are \b not 
 deleted at this point as they are still required during the 
-adaptation of the fluid mesh.
+adaptation of the fluid mesh. <b> MATTHIAS THE MESH IS NOT ADAPTED AT THIS
+POINT SO WHAT DO YOU MEAN? </b>
 
 \dontinclude turek_flag.cc
 \skipline start_of_actions_before_distribute
@@ -271,11 +256,9 @@ adaptation of the fluid mesh.
 
 Next, we flush all the meshes from the problem's
 collection of sub-meshes and add only the "bulk" fluid and solid
-meshes (in that order!).
+meshes (in that order!). <b> WHY DO YOU DO THIS? </b>
 
 \until end of actions before distribute
-
-
 
 
 <HR>
@@ -303,8 +286,8 @@ newly-created \c FSISolidTractionElements and pass them to the
 \skipline Turn the three meshes of FSI traction elements
 \until set_tip_flag_pt
 
-Since the sub-\c GeomObjects of the \c MeshAsGeomObjects have changed, we
-must now call the \c update_node_update() function again for each
+The \c MeshAsGeomObjects have changed, so we
+must call the \c update_node_update() function again for each
 node in the fluid mesh:
 
 \until }
@@ -351,7 +334,7 @@ As with the other parallel driver codes, the main modification to the
 post-processing function is the
 addition of the processor number to all output files. 
 Furthermore, we only write the trace file on the processors that
-contains the fluid control node. In the interest of brevity 
+contain the fluid control node. In the interest of brevity 
 we omit the listing of the modified function.
 
 <HR>

@@ -118,7 +118,7 @@ public:
    // Now set the first pressure dof in the first element to 0.0
 
    // Loop over all elements
-   unsigned n_element=mesh_pt()->nelement();
+   const unsigned n_element=mesh_pt()->nelement();
    for (unsigned e=0;e<n_element;e++)
     {
      // If the lower left node of this element is (0,0), then fix the 
@@ -202,7 +202,7 @@ RefineableDrivenCavityProblem<ELEMENT>::RefineableDrivenCavityProblem()
   } // end loop over boundaries
 
  //Find number of elements in mesh
- unsigned n_element = mesh_pt()->nelement();
+ const unsigned n_element = mesh_pt()->nelement();
 
  // Loop over the elements to set up element-specific 
  // things that cannot be handled by constructor: Pass pointer to Reynolds
@@ -293,7 +293,7 @@ int main(int argc, char **argv)
 #ifdef OOMPH_HAS_MPI
 
     // Provide storage for each element's partition number
-    unsigned n_element=problem.mesh_pt()->nelement();
+    const unsigned n_element=problem.mesh_pt()->nelement();
     Vector<unsigned> out_element_partition(n_element);
 
     // Distribute the problem
@@ -334,8 +334,8 @@ int main(int argc, char **argv)
     mesh_doc_info.set_directory("RESLT_TH_MESH");
 
     // Create storage for pre-determined partitioning
-    unsigned n_partition=problem.mesh_pt()->nelement();
-    Vector<unsigned> element_partition(n_partition);
+    const unsigned n_element=problem.mesh_pt()->nelement();
+    Vector<unsigned> element_partition(n_element);
 
     // Read in partitioning from disk
     std::ifstream input_file;
@@ -343,7 +343,7 @@ int main(int argc, char **argv)
     sprintf(filename,"adaptive_cavity_1_partition.dat");
     input_file.open(filename);
     std::string input_string;
-    for (unsigned e=0;e<n_partition;e++)
+    for (unsigned e=0;e<n_element;e++)
      {
       getline(input_file,input_string,'\n');
       element_partition[e]=atoi(input_string.c_str());
@@ -410,12 +410,12 @@ int main(int argc, char **argv)
     char filename[100];
 
     // Get the partition to be used from file
-    unsigned n_partition=problem.mesh_pt()->nelement();
-    Vector<unsigned> element_partition(n_partition);
+    const unsigned n_element=problem.mesh_pt()->nelement();
+    Vector<unsigned> element_partition(n_element);
     sprintf(filename,"adaptive_cavity_2_partition.dat");
     input_file.open(filename);
     std::string input_string;
-    for (unsigned e=0;e<n_partition;e++)
+    for (unsigned e=0;e<n_element;e++)
      {
       getline(input_file,input_string,'\n');
       element_partition[e]=atoi(input_string.c_str());
@@ -446,9 +446,9 @@ int main(int argc, char **argv)
  } // end of Crouzeix Raviart elements
 
 
+// Finalise MPI
 #ifdef OOMPH_HAS_MPI
 
- // Finalise MPI
  MPI_Helpers::finalize();
 
 #endif

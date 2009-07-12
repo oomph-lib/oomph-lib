@@ -126,32 +126,44 @@ namespace oomph
    // Wrapper for element dimension
    if (el_dim_first==1)
     {
+#ifdef OOMPH_HAS_MPI
      Check_for_duplicates=false;
+#endif
      setup_multi_domain_interaction<ELEMENT_1,1>
       (problem_pt,first_mesh_pt,second_mesh_pt,first_interaction);
 
+#ifdef OOMPH_HAS_MPI
      Check_for_duplicates=true;
+#endif
      setup_multi_domain_interaction<ELEMENT_0,1>
       (problem_pt,second_mesh_pt,first_mesh_pt,second_interaction);
     }
    else if (el_dim_first==2)
     {
      oomph_info << "first_interaction=" << first_interaction << std::endl;
+#ifdef OOMPH_HAS_MPI
      Check_for_duplicates=false;
+#endif
      setup_multi_domain_interaction<ELEMENT_1,2>
       (problem_pt,first_mesh_pt,second_mesh_pt,first_interaction);
 
+#ifdef OOMPH_HAS_MPI
      Check_for_duplicates=true;
+#endif
      setup_multi_domain_interaction<ELEMENT_0,2>
       (problem_pt,second_mesh_pt,first_mesh_pt,second_interaction);
     }
    else if (el_dim_first==3)
     {
+#ifdef OOMPH_HAS_MPI
      Check_for_duplicates=false;
+#endif
      setup_multi_domain_interaction<ELEMENT_1,3>
       (problem_pt,first_mesh_pt,second_mesh_pt,first_interaction);
 
+#ifdef OOMPH_HAS_MPI
      Check_for_duplicates=true;
+#endif
      setup_multi_domain_interaction<ELEMENT_0,3>
       (problem_pt,second_mesh_pt,first_mesh_pt,second_interaction);
     }

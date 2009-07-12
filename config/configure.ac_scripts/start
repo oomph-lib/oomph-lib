@@ -626,20 +626,22 @@ AC_CHECK_FILES(private,
                have_private_directory=false)
 AM_CONDITIONAL(HAVE_PRIVATE_DIRECTORY, test x$have_private_directory = xtrue)
 
-
 # Define subdirectories in private directory
 if test x$have_private_directory = xtrue; then  \
 
+  PRIVATE_DIR="private"; \
   touch config/configure.ac_scripts/private.dir_list
   PRIVATE_SUBDIRECTORIES=`sed "s/private\///g" config/configure.ac_scripts/private.dir_list | awk '{if($1!="private") printf "%s ", $1} END{print " "}' `; \
 
   echo "Do have private subdirectories" $PRIVATE_SUBDIRECTORIES; \
 else \
 
+  PRIVATE_DIR="";\ 
   PRIVATE_SUBDIRECTORIES=""; \
   echo "Don't have private subdirectories: " $PRIVATE_SUBDIRECTORIES; \
 fi;
 
+AC_SUBST(PRIVATE_DIR)
 AC_SUBST(PRIVATE_SUBDIRECTORIES)
 
 # Do we have private user sources?

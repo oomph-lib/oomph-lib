@@ -9,25 +9,23 @@ series of tutorials</a>
 that discuss how to modify existing serial driver codes so that the
 \c Problem object can be distributed across multiple processors.
 
-
-
-A special feature
+A feature
 of this problem is that the flux boundary conditions are applied by
-attaching "flux elements" (which are derived from the \c FaceElement 
-base class) to the "bulk elements" that are adjacent to the appropriate mesh 
+attaching "flux elements" (derived from the \c FaceElement 
+base class) to the "bulk elements" adjacent to the appropriate mesh 
 boundary.  As discussed in the 
 <a href="../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html">
 tutorial for the serial driver code</a>, the \c FaceElements are 
-neither involved in nor adapted by any mesh adaptation that 
-takes place within the bulk mesh. Instead, they are detached 
-before the bulk mesh is adapted and re-attached following the 
-adaptation. This ensures that the \c FaceElements are only attached
-to bulk elements that are present in the adapted mesh.
+not involved in any adaptation within the bulk mesh. 
+Instead, they are detached 
+before the bulk mesh is adapted and re-attached afterwards, which
+ ensures that the \c FaceElements are only attached
+to bulk elements present in the adapted mesh.
 
 The same issue arises when the \c Problem is distributed:
-All \c FaceElements must be attached to their bulk elements
+all \c FaceElements must be attached 
 before the problem is distributed to allow \c METIS to 
-correctly analyse the interaction between face and bulk elements.
+analyse the interaction between face and bulk elements correctly.
 However, after the \c Problem has been distributed, some of the bulk 
 elements on each processor will have been deleted, leaving the
 corresponding \c FaceElement dangling. To deal with such problems,
@@ -46,13 +44,13 @@ Problem::actions_after_distribute()
 which are called automatically by \c Problem::distribute(...).
 Specifically, \c Problem::actions_before_distribute() is called 
 \b after the problem partitioning has been determined by 
-\c METIS and \b before the actual distribution (during which
+\c METIS but \b before the actual distribution (during which
 elements are deleted) takes place. \c
 Problem::actions_after_distribute() is called after the problem
 distribution is complete.
 
 
-In the present problem we therefore
+In the present problem we 
 overload the functions \c Problem::actions_before_distribute() and \c 
 Problem::actions_after_distribute() to perform the same functions as \c 
 actions_before_adapt() (i.e. delete the flux elements) and \c
@@ -63,9 +61,9 @@ mesh becomes a halo element itself; see the
 MPI tutorial</a> for further details. 
 
 
-Since most of driver code is identical to its serial counterpart
-we only discuss the changes required to distribute the problem
-and refer to
+Most of driver code is identical to its serial counterpart and
+we only discuss the changes required to distribute the problem. Please
+ refer to 
 <a href="../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html">
 another tutorial</a> for a more detailed discussion of the
 problem and its (serial) implementation. 
@@ -73,44 +71,19 @@ problem and its (serial) implementation.
 
 <HR>
 
-\section main_body The main body
+\section main_body The main function
 
-
-We start by initialising \c oomph-lib's MPI routines and 
-build the \c Problem object as in the serial case.
-
-\dontinclude two_d_poisson_flux_bc_adapt.cc
-\skipline start_of_main
-\until ::source_function
-
-As with other parallel driver codes, the \c Problem is distributed by
-a call to the  \c Problem::distribute(...) function. Since \c METIS
-may return slightly different partitionings on different computers,
-we read a pre-determined partitioning from a file and
-note that this file must specify the partition for \b all elements, 
+The only changes required to the main function are the usual calls to 
+initialise and finalise \c oomph-lib's MPI routines and a single call
+to \c Problem::distribute() after the problem has been
+constructed. The source code is actually slightly more complicated because the
+partition is read in from a file so that the driver can be used as a
+self-test. Note that the file must specify 
+the partition for \b all elements, 
 including the \c FaceElements. (We refer to 
 <a href="../../adaptive_driven_cavity/html/index.html#no_disk">
 another tutorial</a>
 for details on how to create the partitioning file.) 
-
-\until }
-
-We specify the directory in which the partitioning will be documented
-and distribute the problem without reporting the statistics.
-
-***hierher Andy: Why 35 and can boolean flag be suppressed? ***
-
-\until problem.distribute
-
-We perform an (optional) check of the halo/haloed lookup schemes.
-
-\until #endif
-
-The rest of the main function is identical to its serial counterpart
-until the final call to \c MPI_Helpers::finalize():
-
-\skipline #ifdef
-\until end of main
 
 <HR> 
 

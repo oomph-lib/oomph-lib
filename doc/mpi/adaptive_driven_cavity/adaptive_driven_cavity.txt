@@ -1,147 +1,97 @@
 \mainpage Parallel solution of the adaptive driven cavity problem
 
-This document discusses the parallel solution of the 
+This document concerns the parallel solution of the 
 <a href="../../../navier_stokes/adaptive_driven_cavity/html/index.html">adaptive
 driven cavity problem</a>.  It is the first in a
 <a href="../../../example_code_list/html/index.html#distributed">
 series 
 of tutorials</a>
-which discuss how to modify existing serial driver codes so that the
-\c Problem object can be distributed across multiple processors.
+that discuss how to modify serial driver codes to distribute the
+\c Problem object across multiple processors.
 
-Since most of driver code is identical to its serial counterpart
-we only discuss the changes required to distribute the problem
-and refer to
+Most of the driver code is identical to its serial counterpart and
+we only discuss the changes required to distribute the problem. Please
+refer to
 <a href="../../../navier_stokes/adaptive_driven_cavity/html/index.html">
 another tutorial</a> for a more detailed discussion of the
 problem and its (serial) implementation. 
 
 <HR>
-<HR>
 
-\section main_body The main body of the code
+\section main_body The main function
 
-All parallel driver codes must initialise oomph-lib's MPI routines
-by calling \c MPI_Helpers::init(...). We surround all parallel
+As described in the <a href="../../general_mpi/html/index.html">
+parallel processing document </a> all parallel driver codes must 
+initialise and shutdown oomph-lib's MPI routines
+by calling \c MPI_Helpers::init(...) and \c MPI_Helpers::finalize(). 
+The functions \c MPI_Helpers::init(...) 
+and \c  MPI_Helpers::finalize() call their MPI counterparts,
+\c MPI_Init(...) and \c MPI_Finalize(), which must \b not be called
+again. 
+
+In our demo driver codes, we surround all parallel
 sections of code with \c \#ifdefs to ensure that the code remains
 functional if compiled without parallel support (in which case
-the macro \c OOMPH_HAS_MPI is undefined). 
-
+the macro \c OOMPH_HAS_MPI is undefined), for example. 
 
 \dontinclude adaptive_driven_cavity.cc
 \skipline start_of_main
 \until #endif
 
-We note that the functions \c MPI_Helpers::init(...) 
-and \c  MPI_Helpers::finalize() call their MPI counterparts,
-\c MPI_Init(...) and \c MPI_Finalize(), which must therefore \b not be called
-again. 
+In order to distribute the problem over multiple processors a single
+call to the function \c problem.distribute() is all that is
+required. Thus, a minimally-changed serial driver code would be
+\code
+ // Set output directory
+ DocInfo doc_info;
+ doc_info.set_directory("RESLT");
 
 
-Following the initialisation, we set up the problem as in the 
-serial driver code:
+ // Set max. number of black-box adaptation
+ unsigned max_adapt=3;
 
-\skipline Store command
-\until problem;
+ // Solve problem with Taylor Hood elements
+ //---------------------------------------
+ {
+  //Build problem
+  RefineableDrivenCavityProblem<RefineableQTaylorHoodElement<2> > problem;
+  //Distribute the problem (only change from serial version)
+  problem.distribute();         
+  //Solve the problem with automatic adaptation
+  problem.newton_solve(max_adapt);
+  //Output solution
+  problem.doc_solution(doc_info);
+ }
+\endcode
 
-
-The driver code demonstrates two of the different options available 
-for the \c distribute() function. They are selected by the presence or 
-absence of command line arguments.
-
-<HR>
-
-\subsection no_disk Option I: Distributing a problem using METIS and documenting its partitioning
-
-If no command line arguments are specified we determine the problem
-partitioning using \c METIS, and write the partitioning to a file. This
-is done as follows:
-
-\skipline Are there
-\until {
-
-We start by creating a vector of unsigneds whose values will indicate which 
-partition each element in the problem's mesh is associated with.
-
-\until out_element_partiti
-
-We distribute the problem with a call to \c Problem::distribute(...),
-using the boolean flag to request that the relevant statistics
-are displayed on screen. The partitioning chosen for the elements 
-is returned in the vector created earlier.
-
-\until problem.distribute(
-
-We document the partitioning by writing the partitioning vector
-to a file. 
-
-\until }
-
-Finally, we perform an optional self-test of the halo-haloed lookup
-schemes.
-
-\until #endif
-
-The problem can now be solved as in the serial code, using the 
-specified maximum number of mesh adaptations. 
-
-\until }
-
-<HR>
-
-\subsection from_disk Option II: Using a pre-determined distribution
-
-If command line arguments are specified (typically when the code is 
-run in validation mode) we read the partitioning from disk,
-using a file that was written using the procedure shown above.
-(This is useful because in our experience \c METIS may produce 
-slightly different partitionings on different machines. This would
-cause the self-tests to fail even though the computed results 
-would be correct). 
-
-We start by creating a \c DocInfo object that specifies the directory
-in which the problem distribution will be documented.
-
-\until set_directory 
-
-Next we create a vector whose entries indicate which partition
-each element in the mesh is associated with, and read its values
-from disk: 
-
-\until }
-
-We pass the partitioning vector to \c Problem::distribute(...) and
-thus bypass the partitioning by \c METIS. 
-
-\until #endif
-
-The problem can now be solved as in the serial code.
-
-\until doc_solution
-
-We note that it is possible to document a mesh's distribution
-at any point, using the \c Mesh::doc_mesh_distribution(...) function,
-as indicated here
-
-\until end of Taylor Hood elements
-
-Finally we shut down \c oomph-lib's MPI.
-
+ Finally, we must call \c MPI_finalize() before the end of the main
+ function
+\dontinclude adaptive_driven_cavity.cc
 \skipline Finalise MPI
-\until end_of_main
+\until }
+
+The actual driver code is more complicated that the minimally-changed
+version above because it also functions as a self-test. The automatic
+distribution of the problem is performed by \c METIS and results may vary
+between different machines. To ensure reproducible results when acting as
+a self-test the code (like all our parallel test codes) 
+reads a predetermined partition from the disk, see 
+<a href="#distribution">  below </a> for more details.
 
 <HR>
 
 \section problem_class Changes to the problem class
 
-A special feature of the
+A particular feature of the
 <a href="../../../navier_stokes/adaptive_driven_cavity/html/index.html"> 
 driven cavity problem</a> is that the flow is completely enclosed
 and that a single pressure degree of freedom must be prescribed. 
 In the serial driver code, we arbitrarily pinned the first pressure
 degree of freedom in the "first" element in the mesh. 
-Once the problem is distributed this element may only be available to
-particular processors.  Consequently we re-write the \c actions_after_adapt()
+Once the problem is distributed this element will only be available to
+particular processors and the pressure degree of freedom must be
+pinned on each one.
+Consequently we re-write the \c actions_after_adapt()
 function as follows:
 
 \dontinclude adaptive_driven_cavity.cc
@@ -150,12 +100,15 @@ function as follows:
 
 This change ensures that every processor that holds the element
 containing the node at position (0,0) (i.e. the first element) 
-fixes the pressure for that element.
+fixes the pressure for that element. The floating-point comparison
+does not cause any problems in this case because the \c Node's
+position is explicitly set to "exactly" (0.0,0.0) in the Mesh
+constructor and never changes.
 
-Note that it is not necessary to change the corresponding statements
-in the problem constructor since the problem distribution occurs after 
+It is not necessary to change the corresponding statements
+in the problem constructor because the problem distribution occurs after 
 the problem has been constructed.  In fact, the problem constructor 
-is unchanged from the serial version.
+is unchanged from the serial version. 
 
 <HR>
 
@@ -178,9 +131,74 @@ indicating which processor the elements belong to.
 @I w 0.75\textwidth partition "Plot illustrating the distribution of the mesh for the adaptive driven cavity problem"
 
 
+<HR>
 
+\section distribution Customising the distribution
 
+The actual driver code demonstrates two of the different options available 
+for the \c distribute() function, selected by the presence or 
+absence of command line arguments.
 
+\subsection no_disk Option I: Distributing a problem using METIS and documenting its partitioning
+
+If no command line arguments are specified we determine the problem
+partitioning using \c METIS, and write the partitioning to a file.
+
+\skipline Are there
+\until {
+
+The partition is represented by a vector of unsigneds whose values indicate
+the processor on which the corresponding element is stored.
+
+\until out_element_partiti
+
+We distribute the problem with a call to \c Problem::distribute(...),
+using the boolean flag to request that the relevant statistics
+are displayed on screen. The partitioning chosen for the elements 
+is returned in the vector created earlier.
+
+\until problem.distribute(
+
+We document the partitioning by writing the partitioning vector
+to a file. 
+
+\until }
+
+Finally, we perform an optional self-test of the halo-haloed lookup
+schemes.
+
+\until #endif
+
+<HR>
+
+\subsection from_disk Option II: Using a pre-determined distribution
+
+If command line arguments are specified (typically when the code is 
+run in validation mode) we read the partitioning from disk,
+using a file that was written using the procedure shown above.
+(This is useful because in our experience \c METIS may produce 
+slightly different partitionings on different machines. This would
+cause the self-tests to fail even though the computed results 
+would be correct). 
+
+We start by creating a \c DocInfo object that specifies the directory
+in which the problem distribution will be documented and by reading in
+the vector that represents the partition
+
+\dontinclude adaptive_driven_cavity.cc
+\skipline partition from file
+\until }
+
+We pass the partitioning vector to \c Problem::distribute(...) and
+thus bypass the partitioning by \c METIS. 
+
+\until #endif
+
+We note that it is possible to document a mesh's distribution
+at any point, using the \c Mesh::doc_mesh_distribution(...) function,
+as indicated here
+
+\until end of Taylor Hood elements
 
 <HR>
 <HR>

@@ -60,9 +60,6 @@ else
   doc_dirs =
 endif
 
-
-
-
 # The ultimate list of sub-directories (does not include user drivers!)
 #----------------------------------------------------------------------
 SUBDIRS = $(sub_dirs) $(doc_dirs) self_test 
@@ -71,11 +68,11 @@ SUBDIRS = $(sub_dirs) $(doc_dirs) self_test
 #----------------------------------------------------------------
 # includes the private stuff and the user drivers
 #------------------------------------------------
-if HAVE_PRIVATE_DIRECTORY
-DIST_SUBDIRS = user_drivers $(sub_dirs) $(doc_dirs) self_test private
-else
-DIST_SUBDIRS = user_drivers $(sub_dirs) $(doc_dirs) self_test	
-endif	
+# Note that the PRIVATE_DIR is substituted from the configure.ac file
+# ---------------------------------------------------------------------
+# because otherwise automake breaks
+# ---------------------------------------------------------------------
+DIST_SUBDIRS = user_drivers $(sub_dirs) $(doc_dirs) self_test $(PRIVATE_DIR)
 
 # A few extract scripts to be included into the distribution
 #-----------------------------------------------------------
