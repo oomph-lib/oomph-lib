@@ -1561,12 +1561,12 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
     residuals.initialise();
    }
 
-  // Storage for the number of processors
-  int n_proc=this->communicator_pt()->nproc();
 
 #ifdef OOMPH_HAS_MPI
   if (MPI_Helpers::MPI_has_been_initialised)
    {
+    // Storage for the number of processors
+    int n_proc=this->communicator_pt()->nproc();
  
     // cache the number of local rows
     unsigned nrow = residuals.nrow();

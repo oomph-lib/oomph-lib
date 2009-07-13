@@ -343,9 +343,14 @@ public:
  /// is at an "interface" between sub-objects, either one can be returned.
  /// The default implementation merely returns, the pointer to the "entire"
  /// GeomObject and the coordinate, zeta
+ /// The optional boolean flag only applies if a Newton method is used to
+ /// find the value of zeta, and if true the value of the coordinate
+ /// s is used as the initial guess for the method. If the flag is false 
+ /// (the default) a value of s=0 is used as the initial guess.
  virtual void locate_zeta(const Vector<double> &zeta, 
                           GeomObject* &sub_geom_object_pt, 
-                          Vector<double> &s)
+                          Vector<double> &s,
+                          const bool &use_coordinate_as_initial_guess=false)
   {
    //By default, the local coordinate is intrinsic coordinate
    s = zeta;

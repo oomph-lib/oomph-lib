@@ -67,8 +67,8 @@ public:
   {
    Ra_pt = &Default_Physical_Constant_Value;
 
-   //There is one interaction: The effect of the advection diffusion
-   // element onto the bouancy term
+   //There is one interaction: The effect of the advection-diffusion
+   //element onto the buoyancy term
    this->set_ninteraction(1);
   } 
 

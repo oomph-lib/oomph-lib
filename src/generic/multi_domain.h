@@ -271,7 +271,7 @@ namespace Multi_domain_functions
   /// \short Helper function to locate "local" zeta coordinates
   template<class GEOM_OBJECT,unsigned EL_DIM_LAG,unsigned EL_DIM_EUL>
    void locate_zeta_for_local_coordinates
-   (Mesh* mesh_pt,Mesh* const &external_mesh_pt,Problem* problem_pt,
+   (Mesh* const &mesh_pt, Mesh* const &external_mesh_pt,
     MeshAsGeomObject<EL_DIM_LAG,EL_DIM_EUL,GEOM_OBJECT >* &mesh_geom_obj_pt,
     const unsigned& interaction_index);
 

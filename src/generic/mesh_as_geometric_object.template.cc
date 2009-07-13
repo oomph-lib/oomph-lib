@@ -142,7 +142,7 @@ namespace oomph
  template<unsigned DIM_LAGRANGIAN, unsigned DIM_EULERIAN, class ELEMENT>
  void MeshAsGeomObject<DIM_LAGRANGIAN,DIM_EULERIAN,ELEMENT>::locate_zeta
  (const Vector<double>& zeta,GeomObject*& sub_geom_object_pt,
-  Vector<double>& s,bool& called_within_spiral)
+  Vector<double>& s, const bool &called_within_spiral)
   {
    // Initialise return to null -- if it's still null when we're
    // leaving we've failed!

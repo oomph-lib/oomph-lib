@@ -18,12 +18,11 @@ Feel free to skip the theory if you want to jump straight in...
   procedure for the specific example of a Boussinesq convection problem. We 
   demonstrate how to implement a two-way, multi-domain interaction between 
   the Navier-Stokes equations in which the body force is affected by thermal
-  buoyancy effects, and the advection-diffusion equations which determine the
-  temperature distribution in response to the "wind" given by the
-  Navier-Stokes equations.  
+  buoyancy effects, and the advection-diffusion equations for the
+  temperature, in which the "wind" is given by fluid velocity.  
   \n\n
 - <a href="#multi_domain_boussinesq"><b>Part III</b></a> discusses the
-  driver code that solves the Boussinesq problem, using the elements developed 
+  driver code to solve the Boussinesq problem, using the elements developed 
   in Part II.
   \n\n
 - <a href="#optimise"><b>Part IV</b></a> discusses how to optimise
@@ -56,11 +55,11 @@ physical space.  Rather than interacting locally
 within elements, the different physical processes interact 
 directly between the two domains, so that, in 
 the Boussinesq convection problem considered here, each 
-advection diffusion element obtains the "wind" from the (separate) 
+advection-diffusion element obtains the "wind" from the (separate) 
 Navier-Stokes element that occupies the same position, while 
 the Navier-Stokes elements obtain the temperature
-required for the computation of the buyoancy force from the
-corresponding advection diffusion element.
+required for the computation of the buoyancy force from the
+corresponding advection-diffusion element.
 
 
 One benefit of this \b multi-domain approach, compared to a \b
@@ -93,7 +92,7 @@ base class \c ElementWithExternalElement.
 "External elements" typically provide source-like terms for the
 \c ElementWithExternalElement. For instance, in the Boussinesq
 convection problem studied here,
-the advection diffusion element is the "external element" for
+the advection-diffusion element is the "external element" for
 the Navier-Stokes element because it affects the body force
 in the Navier-Stokes equations; in a fluid-structure interaction 
 problem, the Navier-Stokes elements that are adjacent to the
@@ -125,16 +124,19 @@ Vector<double>& ElementWithExternalElement::external_element_local_coord(
 \endcode
 
 For a given integration point, \c ipt, within the \c
-ElementWithExternalElement, these functions return the pointer to the
-"external element" that occupies the same spatial position as the
-integration point, and the local coordinate
-of that point within the "external element", respectively.
+ElementWithExternalElement, these functions return a pointer to the
+"external element" and its local coordinate corresponding to the
+same spatial position as the specific integration point, respectively.
 The unsigned parameter \c interaction denotes the interaction
-index. It is required to allow for cases in which an element interacts with more
-than one "external element". This occurs, for instance, in doubly-diffusive
-convection problems ***hierher Andrew link*** , where the body force 
-in the Navier-Stokes equations is affected by two separate advection 
-diffusion processes; or in FSI problems where a beam or shell element is
+index, required if an element interacts with more
+than one "external element". This occurs, for instance, in double-diffusive
+convection problems, see the <a
+href="../../../../demo_drivers/multi_physics/double_diffusive_convection/multimesh_dd_convection.cc">
+example driver code </a>, in which the body force 
+in the Navier-Stokes equations is affected by two physical properties,
+<em> e.g.</em> temperature and salinity, both of which are transported by
+separate advection-diffusion processes; 
+or in FSI problems where a beam or shell element is
 affected by a fluid load on both its "front" and "back" (see, e.g., the 
 <a href="../../../interaction/fsi_channel_with_leaflet/html/index.html">FSI 
 channel with leaflet problem</a>).
@@ -145,11 +147,11 @@ must be specified so that the off-diagonal blocks in the
 derivatives of the \c ElementWithExternalElement's residual vector
 with respect to the \c Data in the "external elements")
 can be calculated. We divide such data into two categories:
-- <em> External field data: </em> This is all \c Data that affects the 
+- <em> External field data: </em> all \c Data that affects the 
 fields by which the "external element" interacts with 
 \c ElementWithExternalElement.
 .
-- <em> External geometric data: </em> This is all geometric \c Data that affects
+- <em> External geometric data: </em> all geometric \c Data that affects
 the shape and position of the "external element" and, therefore, spatial 
 derivatives of its fields. 
 .
@@ -158,7 +160,7 @@ data's contribution to the interaction blocks in the Jacobian matrix
 can be found analytically, whereas the geometric
 data is more easily handled by finite differencing.
 
-Both types of external data are determined automatically by two member
+The types of external data are determined (automatically) by two member
 functions of the \c ElementWithExternalElement. The first one,
 
 \code
@@ -205,13 +207,13 @@ We note that the default implementation of these functions can
 (and, where possible, should) be overloaded to exclude data values
 that do not actually contribute to the interaction. For instance,
 in the Boussinesq convection problem considered here, the
-advection diffusion elements are only affected by the
+advection-diffusion elements are only affected by the
 velocity degrees of freedom in the Navier-Stokes elements but
 not by the pressures. Our re-implementation of \c
 ElementWithExternalElement::identify_all_field_data_for_external_interaction(...)
 in the multi-domain advection-diffusion element for the Boussinesq problem
-therefore excludes the pressure degrees of freedom. This is discussed
-in more detail in <a href="#optimise"><b>Part IV</b></a>.
+therefore excludes the pressure degrees of freedom, see
+<a href="#optimise"><b>Part IV</b></a>.
 
 <HR>
 
@@ -222,7 +224,7 @@ to compute their own Jacobians analytically. These functions compute the
 derivatives of the element's residual vector with respect to the 
 element's "own" degrees of freedom (e.g. the fluid velocity and pressure in a
 Navier-Stokes element). The interaction with the "external element"
-introduces additional dependencies since the element's residual vector
+introduces additional dependencies because the element's residual vector
 now also depends on the unknowns associated with the "external
 elements". The derivatives of the element's residual
 vector with respect to these unknowns must therefore be included into the
@@ -231,7 +233,7 @@ computation of the element's Jacobian matrix.
 
 To maximise code re-use, we follow the approach discussed in 
 the <a href="../../b_convection/html/index.html#comments">
-comments </a> section of the single-domain version of the problem, 
+comments </a> section of the single-domain version of the problem 
 and re-use the underlying element's \c fill_in_contribution_to_jacobian(...) 
 function, while employing finite-differencing to evaluate the derivatives
 of the element's residual vector with respect to the unknowns
@@ -257,9 +259,10 @@ ElementWithExternalElement::fill_in_jacobian_from_external_interaction_geometric
 \endcode
 
 If, in a particular problem, it is known that the interaction is not
-affected by the position or shape of the "external elements" (i.e. if
+affected by the position or shape of the "external elements" (<em>
+i.e. </em>  if
 the interaction terms do not involve spatial derivatives of the
-"external element's" field variables, the unnecessary computation of the 
+"external element's" field variables) the unnecessary computation of the 
 derivatives with respect to the "external element's" geometric data
 may be suppressed using a call to
 
@@ -269,7 +272,7 @@ ElementWithExternalElement::ignore_external_geometric_data();
 
 Depending on the complexity of the interaction terms, it may be
 worthwhile to provide a function that computes the off-diagonal
-blocks analytically. This is discussed in more detail in
+blocks analytically, discussed in more detail in
 <a href="#optimise"><b>Part IV</b></a>.
 
 
@@ -298,13 +301,13 @@ interacting meshes whose elements (of type \c ELEMENT_0 and
 \c ELEMENT_1, respectively), must be derived
 from the \c ElementWithExternalElement class. 
 The optional interaction parameters may be used to specify 
-which interaction is set up in either mesh. If the parameter is not specified
-it defaults to zero, which is appropriate if there if there is
+which interaction is set up in each mesh. If the parameter is not specified
+it defaults to zero, appropriate if there is
 only a single interaction.
 
 The function must be called prior to the assignment of the equation 
 numbers, and then again whenever either of the two meshes has changed, 
-e.g. after a mesh adaptation.
+<em> e.g.</em> after a mesh adaptation.
 
 
 <HR>
@@ -313,9 +316,9 @@ e.g. after a mesh adaptation.
 
 \section implement_boussinesq Part II: Implementing multi-domain interaction elements for the Boussinesq convection problem 
 
-We shall now illustrate the general procedures discussed above
+We illustrate the general procedures discussed above
 by demonstrating how to upgrade existing single-physics
-Navier-Stokes and advection diffusion elements to \c ElementWithExternalElements
+Navier-Stokes and advection-diffusion elements to \c ElementWithExternalElements
 that can be used for the multi-domain-based solution of the 
 Boussinesq convection problem. 
 
@@ -324,11 +327,11 @@ Boussinesq convection problem.
 \subsection nst Upgrading the Navier-Stokes element to an ElementWithExternalElement 
 
 
-We employ multiple inheritance to upgrade the existing
+We use multiple inheritance to upgrade the existing
 \c RefineableQCrouzeixRaviartElement to a 
 \c RefineableQCrouzeixRaviartBoussinesqElement
 in which the temperature that affects the body force is given by
-an "external" advection diffusion element. 
+an "external" advection-diffusion element. 
 
 \dontinclude multi_domain_boussinesq_elements.h
 \skipline nst_bous_class
@@ -340,7 +343,7 @@ The constructor calls the constructors of the underlying elements,
 initialises the pointer to the Rayleigh number (stored as private
 member data in the class) and sets the number of interactions to one,
 indicating that the residuals of the Navier-Stokes element are only
-affected by a single type of "external element" -- the advection diffusion
+affected by a single type of "external element" -- the advection-diffusion
 element that determines the temperature distribution. 
 
 \until }
@@ -362,37 +365,27 @@ point, as computed by the "external element":
 
 \dontinclude multi_domain_boussinesq_elements.h
 \skipline  Overload get_body_force_nst
-\until {
-
-The element only involves a single interaction so the interaction 
-index is zero:
-
-\until interaction=0
-
-We obtain the pointer to the "external element" and cast it to 
-an advection diffusion element:
-
-\until external_element_pt
-
-Following this pointer to the advection diffusion element, we
-obtain the temperature by evaluating 
-\c AdvectionDiffusionnEquations::interpolated_u_adv_diff(...).
-
-\until interpolated_u_adv_diff(
-
-We can now compute the body force by multiplying the temperature
-by the Rayleigh number and the unit vector in the direction of gravity.
-
 \until end overloaded body force
 
+There is only one external interaction so that interaction index is
+set to zero and the value of the temperature at the integration point
+is obtained by casting the external element to an \c
+AdvectionDiffusionElement and finding its interpolated field at the
+appropriate stored local coordinate. Once the temperature has been obtained the
+code is identical to that in the multi-field
+\c BuoyantQCrouzeixRaviartElement. In that case, however, the
+temperature can be found from a member function because the
+interaction is internal to the element.
 
 Finally, we have to compute the element's Jacobian matrix. 
-The easiest (but also the least efficient) way to do this is to recycle the 
+The easiest (although potentially inefficient) 
+way to do this is to recycle the 
 analytical computation of the derivatives of the Navier-Stokes 
 residuals with respect to the fluid degrees of
 freedom, as implemented in  
 \c RefineableQCrouzeixRaviartElement::fill_in_contribution_to_jacobian(...),
 
+\dontinclude multi_domain_boussinesq_elements.h
 \skipline Compute the element's residual vector and 
 \until fill_in_contribution_to_jacobian(residuals,jacobian);
 
@@ -412,9 +405,9 @@ that computes the required entries in the Jacobian analytically:
 the macro  \c USE_FD_FOR_DERIVATIVES_WRT_EXTERNAL_DATA
 to choose which one to use.)
 
-That's all, as far as a basic implementation is concerned! We 
+We
 refer to <a href="#optimise"><b>Part IV</b></a>  for a discussion of how to
-implement the fully-analytical computation of the
+implement the fully-analytic computation of the
 Jacobian matrix in the function \c fill_in_off_diagonal_block_analytic(...).
 
 
@@ -422,10 +415,10 @@ Jacobian matrix in the function \c fill_in_off_diagonal_block_analytic(...).
 
 <HR>
 
-\subsection ad Upgrading the advection diffusion element to an ElementWithExternalElement 
+\subsection ad Upgrading the advection-diffusion element to an ElementWithExternalElement 
 
 
-Upgrading the advection diffusion element to an \c
+Upgrading the advection-diffusion element to an \c
 ElementWithExternalElement in which the wind is given by the
 "external" Navier Stokes element follows the same procedure.
 We use multiple inheritance to construct the element and
@@ -443,34 +436,20 @@ the "external element":
 
 \dontinclude multi_domain_boussinesq_elements.h
 \skipline  Overload the wind
-\until {
-
-The element only involves a single interaction so the interaction 
-index is zero:
-
-\until interaction=0
-
-We obtain the pointer to the "external element" and cast it to 
-the Navier-Stokes element:
-
-\until external_element_pt
-
-We follow the pointer to this element and evaluate the "wind"
-by evaluating \c NavierStokesEquations::interpolated_u_nst(...)
-at the local coordinate that coincides with the position of the
-integration point:
-
 \until }  //end of get_wind_adv_diff
 
+Again, there is only one external interaction so the interaction index
+is set to zero and the external element
+must be cast to a \c NavierStokesElement so that the interpolated
+velocity field can be found. The code is similar to that in the
+multi-field \c BuoyantQCrouzeixRaviartElement's \c get_wind_adv_diff()
+function, which uses internal, rather than external, interaction.
 
-Again, the element's Jacobian matrix can be computed by two
-different methods, as discussed for the Navier-Stokes elements:
+The element's Jacobian matrix can be computed by the
+different methods discussed for the Navier-Stokes elements:
 
 \skipline Compute the element
 \until }
-
-
-That's all!
 
 
 <HR>
@@ -593,17 +572,16 @@ directory pointed to by the \c DocInfo object.
 
 \section optimise Part IV: Optimising multi-domain interactions
 We showed in <a href="#implement_boussinesq"><b>Part II</b></a>
-that typically only a small number of functions must be implemented to upgrade
+that only a small number of functions <b> must </b> be implemented to upgrade
 an existing single-physics element to an \c ElementWithExternalElement
 that can interact with another element in a different domain. This is
 because much of the required functionality is already implemented 
-in the \c ElementWithExternalElement base class. While this makes
-the implementation of multi-physics interactions very easy, the 
+in the \c ElementWithExternalElement base class, which makes
+the implementation of multi-physics interactions very easy. The 
 use of general-purpose functions may incur unnecessary computational
-cost if they are used in problems in which certain types of
-interactions do not occur. It is therefore possible
-to overload the relevant functions when implementing a specific 
-\c ElementWithExternalElement. Here are some examples.
+cost, however. Hence, a better efficiency can be achieved by
+overloading certain functions when implementing a specific 
+\c ElementWithExternalElement.
 
 <HR>
 
@@ -616,7 +594,7 @@ the interaction with the \c ElementWithExternalElement. In many
 cases this assumption is overly pessimistic (and costly). For
 instance in the Boussinesq convection problem only the velocity 
 degrees of freedom in the (external) Navier-Stokes element affect
-the the advection diffusion equations via the "wind". It is therefore
+the the advection-diffusion equations via the "wind". It is therefore
 sensible to exclude the pressure degrees of freedom from the
 interaction by re-implementing 
 \c identify_all_field_data_for_external_interaction(...) as follows
@@ -681,18 +659,18 @@ derivative of its fields with respect to its own (differently numbered)
 local degrees of freedom (d.o.f.s). To establish which local d.o.f. in the
 "external element" corresponds to a given local d.o.f.
 in the \c ElementWithExternalElement we exchange the (unique) global
-equation numbers associated with each d.o.f. With this trick, the
+equation numbers associated with each d.o.f. Using this trick, the
 computation of the derivatives becomes relatively straightforward.
 Mathematically, it involves repeated applications of the chain rule. 
-In the cases we considered, the fully-analytical computation of the
+In the cases we considered, the fully-analytic computation of the
 elemental Jacobian matrix was about 3 to 4 times faster than 
 finite-difference-based computation implemented in the
-\c ElementWithExternalElement base class. If this speedup is
+\c ElementWithExternalElement base class. Whether the speedup is
 worth the additional (human) time required to implement the
-analytical computation of the off-diagonal entries depends on 
+analytic computation of the off-diagonal entries depends on 
 the application (and you!). If nothing else, the availability of a
 finite-difference based routine helps in the validation of any
-newly-developed analytical re-implementation. 
+newly-developed analytic re-implementation. 
 
 
 <HR>
@@ -728,8 +706,8 @@ negligible compared to the solution of the linear systems.
 set up any interaction between different types of elements using
 multiple meshes. 
 \n\n
-- Before any refinements take place the combined Jacobian that is
-assembled is exactly the same as that in the single-domain problem and
+- Before any refinements take place the combined Jacobian
+is exactly the same as that in the single-domain problem and
 so the residuals at each Newton step will be exactly the same. You can
 verify this by comparing the appropriate output files in the
 \c Validation  directory.
@@ -747,7 +725,8 @@ verify this by comparing the appropriate output files in the
    \n\n
 -# Investigate double-diffusive convection by adding another
    advection-diffusion mesh to the problem that interpolates a
-   concentration field. ***hierher reference to driver code? ***
+   concentration field. Examples may be found in the <a
+   href="../../../../demo_drivers/multi_physics/double_diffusive_convection"> double_diffusive_convection </a> directory.
 .
 <hr>
 <hr>
@@ -779,7 +758,7 @@ demo_drivers/multi_physics/boussinesq_convection/multi_domain_ref_b_convection.c
 ../../../../
 demo_drivers/multi_physics/boussinesq_convection/multi_domain_boussinesq_convection.cc
 ">
-demo_drivers/multi_physics/boussinesq_convection/multi_domain_ref_boussinesq_convection.cc
+demo_drivers/multi_physics/boussinesq_convection/multi_domain_boussinesq_convection.cc
 </A>
 </CENTER>
 .
@@ -793,172 +772,3 @@ demo_drivers/multi_physics/boussinesq_convection/multi_domain_ref_boussinesq_con
 
 
 @@END@@
-
-\subsection element_modifications Modifying the Navier--Stokes and Advection--Diffusion elements for use in multi-domain problems
-
- In the present Boussinesq convection problem, we must write new
- elements so that the Navier-Stokes equations and advection-diffusion
- equations can be coupled between different domains:
-\code
-template<unsigned DIM>
-class RefineableQCrouzeixRaviartElementWithExternalElement : 
- public virtual RefineableQCrouzeixRaviartElement<DIM>,
- public virtual ElementWithExternalElement 
-
-template<unsigned DIM>
-class RefineableQAdvectionDiffusionElementWithExternalElement : 
- public virtual RefineableQAdvectionDiffusionElement<DIM,3>,
- public virtual ElementWithExternalElement
-\endcode
-
-Within these new elements we overload appropriate functions so  
-that the required coupling information is obtained
-directly from  the "external element".  In this instance, therefore, 
-we overload \c
-get_body_force_nst() and \c get_wind_adv_diff() as follows:
-
-\dontinclude my_boussinesq_elements.h
-\skipline start_of_get_body_force_nst
-\until end of get_body_force_nst
-
-\skipline start_of_get_wind_adv_diff
-\until end of get_wind_adv_diff
-
-Note that the functions are similar to those  
-the <a href="../../refine_b_convect/html/index.html">
-single-domain version of the problem. </a>  They are exactly the
-same if \c source_element_pt is replaced by \c this pointer and
-\c external_element_local_coord(...) is replaced by \c s.
-
-In both elements, we specify the number of interactions in the
- element constructors so 
- that storage for the pointers to "external
-elements" and local coordinates can be allocated. In addition, there is
- no external geometric data because neither set of elements moves and
- we call the member function \c ignore_external_geometric_data() to
- avoid the call to \c
- identify_all_geometric_data_for_external_interaction(..) and a wasted
- loop over the elements.
-
-\dontinclude my_boussinesq_elements.h
-\skipline Constructor
-\until }
-
-\skipline Constructor
-\until }
-
-\subsubsection off_diag_jac Computation of the Jacobian matrix
-
- The easiest, but not the most efficient, method to compute the
- Jacobian matrix is to use finite
-differences to assemble the entire matrix, 
-but this ignores
-the fact that the original elements compute their Jacobians analytically. As
-discussed in the <a href="../../b_convection/html/index.html#comments">
-comments </a> section of the single-domain version of the problem, we
-can re-use the
- underlying element's \c fill_in_contribution_to_jacobian(...) 
-function and then finite-difference the off-diagonal blocks of the
-Jacobian. The off-diagonal blocks represent the effects of the data
-from the "external element" on the residuals and can be calculated by
-using the function
-\code
-ElementWithExternalElement::fill_in_jacobian_from_external_interaction_by_fd(..)
-\endcode
-which calls two functions
-\code
-ElementWithExternalElement::fill_in_jacobian_from_external_interaction_field_by_fd(..)
-\endcode
-and
-\code
-ElementWithExternalElement::fill_in_jacobian_from_external_interaction_geometric_by_fd(..)
-\endcode
-can be used to calculate the off-diagonal blocks.
-In the present example we would only need to call the finite
-difference routine for the external field data because the elements
-don't move. 
-
-The procedure for calculating the off-diagonal blocks analytically is
-more involved than in the single-domain case and requires:
-- the derivatives of the functions called from the external elements
-with respect to the external elements' degrees of freedom;
-.
-and
-- knowledge of the local equation numbers corresponding to the
-external elements' degrees of freedom.
-.
-
-The derivatives of the external elements' 
-functions with respect to degrees of freedom
-must be provided by the external elements themselves, <em> i.e. </em>
-\code
-void AdvectionDiffusionEquations<DIM>::
-dinterpolated_u_adv_diff_ddata(const Vector<double> &s, 
-  Vector<double> &du_ddata,Vector<unsigned> &global_eqn_number)
-\endcode
-returns the derivatives that correspond to the function
-\code
-double AdvectionDiffusionEquations<DIM>::
-interpolated_u_adv_diff( const Vector<double> &s)
-\endcode
-and
-\code
-void NavierStokeEquations<DIM>::
-dinterpolated_u_nst_ddata(const Vector<double> &s, const unsigned &i,
-Vector<double> &du_ddata, Vector<unsigned> &global_eqn_number)
-\endcode
-returns the derivatives that correspond to the function
-\code
-double NavierStokesEquations<DIM>::
-interpolated_u_nst(const Vector<double> &s, const unsigned &i)
-\endcode
-
-We recommend that all such functions add the same two additional
-vector arguments, \c du_ddata and \c global_eqn_number, and, on return,
-these vectors should contain the derivatives of the
-function with respect to each degree of freedom and the corresponding
-global equation number of the degree of freedom, respectively. Thus,
-the vectors will both be the same size: the number of degrees of
-freedom of the (external) element.
-
-These external element member functions are used to calculate the
-derivatives of the body force in the Navier--Stokes element 
-with respect to the temperature
-(external) degrees of freedom 
-and the derivatives of the wind in the 
-advection-diffusion element with respect to the velocity (external)
-degrees of freedom
-
-\dontinclude my_boussinesq_elements.h
-\skipline start_of_get_dbody_force
-\until end_of_get_dbody_force
-
-\skipline start_of_get_dwind
-\until end_of_get_dwind
-
-The use of these functions means that we have derivatives
-and the global equation numbers of the corresponding unknowns.
-The equivalent local equation numbers 
-can then be found from the global equation
-numbers by using the function
-\code
-int GeneralisedElement::local_eqn_number(const unsigned long &ieqn_global)
-\endcode
-
-The analytic computation of the off-diagonal terms 
-is now reasonably straightforward, although
-it is complicated by the potential presence of hanging nodes, and the
-implementations are presented in the functions
-\code
-RefineableQCrouzeixRaviartElementWithExternalElement::
-fill_in_off_diagonal_block_analytic(...)
-\endcode
-\code
-RefineableQAdvectionDiffusionElementWithExternalElement::
-fill_in_off_diagonal_block_analytic(...)
-\endcode
-
-Once again, there is a dramatic decrease in the assembly time of the
-Jacobian matrix when all entries are calculated analytically.
-
-<HR>

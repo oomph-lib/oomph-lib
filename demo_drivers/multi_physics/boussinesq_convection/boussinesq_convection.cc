@@ -242,7 +242,7 @@ public:
     {
      result[i] = -gravity[i]*interpolated_t*ra();
     }
-  }
+  } // end of get_body_force
 
  /// \short Calculate the element's contribution to the residual vector.
  /// Recall that fill_in_* functions MUST NOT initialise the entries 

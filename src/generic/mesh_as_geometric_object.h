@@ -121,20 +121,6 @@ public:
  /// \short Return pointer to the j-th Data item that the object's 
  /// shape depends on 
  Data* geom_data_pt(const unsigned& j) {return Geom_data_pt[j];}
- 
-
- /// \short Find the sub geometric object and local coordinate therein that
- /// corresponds to the intrinsic coordinate zeta. If sub_geom_object_pt=0
- /// on return from this function, none of the constituent sub-objects 
- /// contain the required coordinate. 
- void locate_zeta(const Vector<double>& zeta, 
-                  GeomObject*& sub_geom_object_pt, 
-                  Vector<double>& s)
-  {
-   bool called_within_spiral=false;
-   locate_zeta(zeta,sub_geom_object_pt,s,called_within_spiral);
-  }
-
 
  /// \short Find the sub geometric object and local coordinate therein that
  /// corresponds to the intrinsic coordinate zeta. If sub_geom_object_pt=0
@@ -146,7 +132,7 @@ public:
  void locate_zeta(const Vector<double>& zeta, 
                   GeomObject*& sub_geom_object_pt, 
                   Vector<double>& s,
-                  bool& called_within_spiral);
+                  const bool &called_within_spiral=false);
 
  /// \short Return the position as a function of the intrinsic coordinate zeta.
  /// This provides an (expensive!) default implementation in which
