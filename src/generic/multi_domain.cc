@@ -131,6 +131,10 @@ namespace Multi_domain_functions
   /// setup_multi_domain_interaction(). Default value of 10.
   unsigned Nz_bin=10;
 
+  /// \short (Measure of) the number of sampling points within the elements 
+  /// when populating the bin
+  unsigned Nsample_points=5;
+
   /// \short Minimum and maximum coordinates for
   /// each dimension of the external mesh used to "create" the bins in
   /// setup_multi_domain_interaction(). No defaults; set by user if they
@@ -138,7 +142,7 @@ namespace Multi_domain_functions
   /// upon the mesh itself; see MeshAsGeomObject::get_max_and_min_coords(...))
 
   /// \short Minimum coordinate in first dimension
-  double X_min;
+  double X_min; // hierher initialise???
 
   /// \short Maximum coordinate in first dimension
   double X_max;
@@ -642,81 +646,83 @@ namespace Multi_domain_functions
 #endif
 
 
-//======================================================================
-/// Function which adds external data to current elements from the
-/// external elements at each integration point of the current element
-/// for the specified interaction index
-//======================================================================
-  void add_external_data_from_source_elements
-  (Mesh* const &mesh_pt,const unsigned& interaction_index)
-  {
-   unsigned n_element=mesh_pt->nelement();
-   // Loop over elements
-   for (unsigned e=0;e<n_element;e++)
-    {
-     ElementWithExternalElement* el_pt=
-      dynamic_cast<ElementWithExternalElement*>(mesh_pt->element_pt(e));
-     // Only bother with non-halo elements
-#ifdef OOMPH_HAS_MPI
-     if (!el_pt->is_halo())
-#endif
-      {
-       unsigned n_intpt=el_pt->integral_pt()->nweight();
-       // Loop over integration points
-       for (unsigned i=0;i<n_intpt;i++)
-        {
-         FiniteElement* source_el_pt=dynamic_cast<FiniteElement*>
-          (el_pt->external_element_pt(interaction_index,i));
-         if (source_el_pt==0)
-          {
-           std::ostringstream error_message;
-           error_message << "Source element pointer not set for element " << e
-                         << " at integration point " << i << ".\n";
-           throw OomphLibError
-            (error_message.str(),
-             "Multi_domain_functions::add_external_data_from_source_elements",
-             OOMPH_EXCEPTION_LOCATION);
-          }
-         unsigned n_node=source_el_pt->nnode();
-         for (unsigned j=0;j<n_node;j++)
-          {
-           // Add the node as external data
-           el_pt->add_external_data(source_el_pt->node_pt(j));
-           // If this "source" node is hanging (in any variable) then its
-           // master nodes also need to be added as external data
-           if (dynamic_cast<RefineableElement*>(source_el_pt)!=0)
-            {
-             int n_cont_inter_values=dynamic_cast<RefineableElement*>
-              (source_el_pt)->ncont_interpolated_values();
-             for (int i_cont=-1;i_cont<n_cont_inter_values;i_cont++)
-              {
-               if (source_el_pt->node_pt(j)->is_hanging(i_cont))
-                {
-                 HangInfo* hang_pt=source_el_pt->node_pt(j)
-                  ->hanging_pt(i_cont);
-                 unsigned n_master=hang_pt->nmaster();
-                 // Loop over master nodes
-                 for (unsigned m=0; m<n_master; m++)
-                  {
-                   Node* master_nod_pt=hang_pt->master_node_pt(m);
-                   // Add this node as external data
-                   el_pt->add_external_data(master_nod_pt);
-                  }
-                }
-              }
-            }
-          }
-         // Add internal data points as external data
-         unsigned n_int_data=source_el_pt->ninternal_data();
-         for (unsigned i_int=0;i_int<n_int_data;i_int++)
-          {
-           el_pt->add_external_data(source_el_pt->internal_data_pt(i_int));
-          }       
+// // hierher used?
 
-        } // end loop over integration points
-      }
-    }
-  }
+// //======================================================================
+// /// Function which adds external data to current elements from the
+// /// external elements at each integration point of the current element
+// /// for the specified interaction index
+// //======================================================================
+//   void add_external_data_from_source_elements
+//   (Mesh* const &mesh_pt,const unsigned& interaction_index)
+//   {
+//    unsigned n_element=mesh_pt->nelement();
+//    // Loop over elements
+//    for (unsigned e=0;e<n_element;e++)
+//     {
+//      ElementWithExternalElement* el_pt=
+//       dynamic_cast<ElementWithExternalElement*>(mesh_pt->element_pt(e));
+//      // Only bother with non-halo elements
+// #ifdef OOMPH_HAS_MPI
+//      if (!el_pt->is_halo())
+// #endif
+//       {
+//        unsigned n_intpt=el_pt->integral_pt()->nweight();
+//        // Loop over integration points
+//        for (unsigned i=0;i<n_intpt;i++)
+//         {
+//          FiniteElement* source_el_pt=dynamic_cast<FiniteElement*>
+//           (el_pt->external_element_pt(interaction_index,i));
+//          if (source_el_pt==0)
+//           {
+//            std::ostringstream error_message;
+//            error_message << "Source element pointer not set for element " << e
+//                          << " at integration point " << i << ".\n";
+//            throw OomphLibError
+//             (error_message.str(),
+//              "Multi_domain_functions::add_external_data_from_source_elements",
+//              OOMPH_EXCEPTION_LOCATION);
+//           }
+//          unsigned n_node=source_el_pt->nnode();
+//          for (unsigned j=0;j<n_node;j++)
+//           {
+//            // Add the node as external data
+//            el_pt->add_external_data(source_el_pt->node_pt(j));
+//            // If this "source" node is hanging (in any variable) then its
+//            // master nodes also need to be added as external data
+//            if (dynamic_cast<RefineableElement*>(source_el_pt)!=0)
+//             {
+//              int n_cont_inter_values=dynamic_cast<RefineableElement*>
+//               (source_el_pt)->ncont_interpolated_values();
+//              for (int i_cont=-1;i_cont<n_cont_inter_values;i_cont++)
+//               {
+//                if (source_el_pt->node_pt(j)->is_hanging(i_cont))
+//                 {
+//                  HangInfo* hang_pt=source_el_pt->node_pt(j)
+//                   ->hanging_pt(i_cont);
+//                  unsigned n_master=hang_pt->nmaster();
+//                  // Loop over master nodes
+//                  for (unsigned m=0; m<n_master; m++)
+//                   {
+//                    Node* master_nod_pt=hang_pt->master_node_pt(m);
+//                    // Add this node as external data
+//                    el_pt->add_external_data(master_nod_pt);
+//                   }
+//                 }
+//               }
+//             }
+//           }
+//          // Add internal data points as external data
+//          unsigned n_int_data=source_el_pt->ninternal_data();
+//          for (unsigned i_int=0;i_int<n_int_data;i_int++)
+//           {
+//            el_pt->add_external_data(source_el_pt->internal_data_pt(i_int));
+//           }       
+
+//         } // end loop over integration points
+//       }
+//     }
+//   }
 
 #ifdef OOMPH_HAS_MPI
 

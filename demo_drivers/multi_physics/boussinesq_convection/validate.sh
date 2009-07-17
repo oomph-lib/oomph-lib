@@ -131,7 +131,8 @@ echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat RESLT/soln0.dat RESLT/soln5.dat \
+cat RESLT/fluid_soln0.dat RESLT/fluid_soln5.dat \
+    RESLT/temperature_soln0.dat RESLT/temperature_soln5.dat \
     > multi_domain_b_convection.dat
 
 if test "$1" = "no_fpdiff"; then

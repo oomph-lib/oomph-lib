@@ -891,8 +891,14 @@ public:
  void get_s_plot(const unsigned& i, const unsigned& nplot,
                  Vector<double>& s)
   {
-   s[0] = double(i)/double(nplot-1);
-   return;
+   if (nplot>1)
+    {
+     s[0] = double(i)/double(nplot-1);
+    }
+   else
+    {
+     s[0]=0.5;
+    }
   }
  
  /// \short Return string for tecplot zone header (when plotting 
@@ -1059,19 +1065,27 @@ public:
  void get_s_plot(const unsigned& iplot, const unsigned& nplot,
                  Vector<double>& s)
   {
-   unsigned np=0,i,j;
-   for(i=0;i<nplot;++i)
+   if (nplot>1)
     {
-     for(j=0;j<nplot-i;++j)
+     unsigned np=0,i,j;
+     for(i=0;i<nplot;++i)
       {
-       if(np==iplot)
+       for(j=0;j<nplot-i;++j)
         {
-         s[0] = double(j)/double(nplot-1);
-         s[1] = double(i)/double(nplot-1);
-         return;
+         if(np==iplot)
+          {
+           s[0] = double(j)/double(nplot-1);
+           s[1] = double(i)/double(nplot-1);
+           return;
+          }
+         ++np;
         }
-       ++np;
       }
+    }
+   else
+    {
+     s[0] = 1.0/3.0;
+     s[1] = 1.0/3.0;
     }
   }
  
@@ -1699,28 +1713,37 @@ public:
   void get_s_plot(const unsigned& iplot, const unsigned& nplot,
                   Vector<double>& s)
   {
-   unsigned np=0;
-   for(unsigned i=0;i<nplot;++i)
+   if (nplot>1)
     {
-     for(unsigned j=0;j<nplot-i;++j)
+     unsigned np=0;
+     for(unsigned i=0;i<nplot;++i)
       {
-       for(unsigned k=0;k<nplot-i-j;++k)
+       for(unsigned j=0;j<nplot-i;++j)
         {
-         if(np==iplot)
+         for(unsigned k=0;k<nplot-i-j;++k)
           {
-           {
-            s[0] = double(j)/double(nplot-1);
-            s[1] = double(i)/double(nplot-1);
-            s[2] = double(k)/double(nplot-1);
-            return;
-           }
+           if(np==iplot)
+            {
+             {
+              s[0] = double(j)/double(nplot-1);
+              s[1] = double(i)/double(nplot-1);
+              s[2] = double(k)/double(nplot-1);
+              return;
+             }
+            }
+           np++;
           }
-         np++;
         }
       }
     }
+   else
+    {
+     s[0] = 1.0/4.0;
+     s[1] = 1.0/4.0;
+     s[2] = 1.0/4.0;
+    }
   }
-  
+
   /// \short Return string for tecplot zone header (when plotting
   /// nplot points in each "coordinate direction)
   std::string tecplot_zone_string(const unsigned& nplot)

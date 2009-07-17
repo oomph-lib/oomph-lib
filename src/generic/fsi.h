@@ -574,12 +574,6 @@ namespace FSI_functions
  //============================================================================
  extern double Strouhal_for_no_slip;
 
-/*  //============================================================================ */
-/*  /// \short Boolean flag to specify whether to use external storage in the */
-/*  /// setup of fluid load info for solid elements.  Default value is true. */
-/*  //============================================================================ */
-/*  extern bool Use_external_storage; // hierher not needed now? */
-
  //============================================================================
  /// \short A class to do comparison of the elements by lexicographic
  /// ordering, based on the boundary coordinates at the element's first node. 

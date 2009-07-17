@@ -25,6 +25,9 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
+#ifndef OOMPH_SUPG_ADV_DIFF_ELEMENTS_HEADER
+#define OOMPH_SUPG_ADV_DIFF_ELEMENTS_HEADER
+
 #include "../advection_diffusion/refineable_advection_diffusion_elements.h"
 
 namespace oomph
@@ -304,3 +307,5 @@ class RefineableQSUPGAdvectionDiffusionElement :
 
 
 }
+
+#endif

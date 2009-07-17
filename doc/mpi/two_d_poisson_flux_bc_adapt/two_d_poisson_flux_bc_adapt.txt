@@ -43,7 +43,7 @@ Problem::actions_after_distribute()
 
 which are called automatically by \c Problem::distribute(...).
 Specifically, \c Problem::actions_before_distribute() is called 
-\b after the problem partitioning has been determined by 
+\b after the problem distribution has been determined by 
 \c METIS but \b before the actual distribution (during which
 elements are deleted) takes place. \c
 Problem::actions_after_distribute() is called after the problem
@@ -77,13 +77,13 @@ The only changes required to the main function are the usual calls to
 initialise and finalise \c oomph-lib's MPI routines and a single call
 to \c Problem::distribute() after the problem has been
 constructed. The source code is actually slightly more complicated because the
-partition is read in from a file so that the driver can be used as a
+distribution is read in from a file so that the driver can be used as a
 self-test. Note that the file must specify 
 the partition for \b all elements, 
 including the \c FaceElements. (We refer to 
 <a href="../../adaptive_driven_cavity/html/index.html#no_disk">
 another tutorial</a>
-for details on how to create the partitioning file.) 
+for details on how to create the distribution file.) 
 
 <HR> 
 

@@ -311,10 +311,6 @@ public:
  unsigned nrecovery_order() 
   {return RefineableQCrouzeixRaviartElement<DIM>::nrecovery_order();}
 
- /// \short The number of compound fluxes is two (one for the fluid and
- /// one for the temperature)
- unsigned ncompound_fluxes() {return 2;}
-
  /// \short The number of Z2 flux terms is the same as that in 
  /// the fluid element plus that in the advection-diffusion element
  unsigned num_Z2_flux_terms()
@@ -324,13 +320,14 @@ public:
   }
 
 
-
- /// Get the Z2 flux from the fluid element
+ /// \short Get the Z2 flux by concatenating the fluxes from the fluid and
+ /// the advection diffusion elements.
  void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
   {
    //Find the number of fluid fluxes
    unsigned n_fluid_flux = 
     RefineableQCrouzeixRaviartElement<DIM>::num_Z2_flux_terms();
+
    //Fill in the first flux entries as the velocity entries
    RefineableQCrouzeixRaviartElement<DIM>::get_Z2_flux(s,flux);
 
@@ -338,6 +335,7 @@ public:
    unsigned n_temp_flux =  
     RefineableQAdvectionDiffusionElement<DIM,3>::num_Z2_flux_terms();
    Vector<double> temp_flux(n_temp_flux);
+
    //Get the temperature flux
    RefineableQAdvectionDiffusionElement<DIM,3>::get_Z2_flux(s,temp_flux);
    
@@ -346,7 +344,12 @@ public:
     {
      flux[n_fluid_flux+i] = temp_flux[i];
     }
+
   } //end of get_Z2_flux
+
+ /// \short The number of compound fluxes is two (one for the fluid and
+ /// one for the temperature)
+ unsigned ncompound_fluxes() {return 2;}
 
  /// \short Fill in which flux components are associated with the fluid
  /// measure and which are associated with the temperature measure
@@ -363,9 +366,11 @@ public:
    //The values of the flux_index vector are zero on entry, so we
    //could omit this line
    for(unsigned i=0;i<n_fluid_flux;i++) {flux_index[i] = 0;}
+
    //Set the temperature fluxes (the last set of fluxes
    for(unsigned i=0;i<n_temp_flux;i++) {flux_index[n_fluid_flux + i] = 1;}
-  }
+
+  } //end of get_Z2_compound_flux_indices
 
 
  /// \short Validate against exact solution at given time
@@ -412,6 +417,9 @@ void compute_error(ostream &outfile,
                          const Vector<double> &s, const Vector<double> &x,
                          Vector<double> &result)
   {
+   // Get the temperature
+   const double interpolated_t = this->interpolated_u_adv_diff(s);
+
    // Get vector that indicates the direction of gravity from
    // the Navier-Stokes equations
    Vector<double> gravity(NavierStokesEquations<DIM>::g());
@@ -419,7 +427,7 @@ void compute_error(ostream &outfile,
    // Temperature-dependent body force:
    for (unsigned i=0;i<DIM;i++)
     {
-     result[i] = -gravity[i]*this->interpolated_u_adv_diff(s)*ra();
+     result[i] = -gravity[i]*interpolated_t*ra();
     }
   }
 
@@ -850,6 +858,7 @@ public:
          mesh_pt()->node_pt(j)->x(1)==0) // 2d problem only
       {
        fix_pressure(0,0,0.0);
+       break;
       }
     }
   }
@@ -1068,6 +1077,7 @@ void RefineableConvectionProblem<ELEMENT>::doc_solution()
 //====================================================================
 int main(int argc, char **argv)
 {
+
 #ifdef OOMPH_HAS_MPI
  MPI_Helpers::init(argc,argv);
 #endif
@@ -1086,8 +1096,10 @@ int main(int argc, char **argv)
  // Apply a perturbation to the upper boundary condition to
  // force the solution into the symmetry-broken state.
  problem.use_imperfection() = true;
+ 
 
 #ifdef OOMPH_HAS_MPI
+
  bool report_stats=true;
  // Are there command-line arguments?
  if (CommandLineArgs::Argc==1)
@@ -1098,15 +1110,15 @@ int main(int argc, char **argv)
  else
   {
    // Command line argument(s), so read in partition vector from file
-   unsigned n_partition=problem.mesh_pt()->nelement();
-   Vector<unsigned> in_element_partition(n_partition);
+   unsigned n_element=problem.mesh_pt()->nelement();
+   Vector<unsigned> in_element_partition(n_element);
 
    std::ifstream input_file;
    char filename[100];
    sprintf(filename,"refineable_b_convection_partition.dat");
    input_file.open(filename);
    std::string input_string;
-   for (unsigned e=0;e<n_partition;e++)
+   for (unsigned e=0;e<n_element;e++)
     {
      getline(input_file,input_string,'\n');
      in_element_partition[e]=atoi(input_string.c_str());
@@ -1115,6 +1127,7 @@ int main(int argc, char **argv)
    // Distribute the problem
    problem.distribute(in_element_partition,report_stats);
   }
+
 #endif
 
  //Solve the problem with (up to) two levels of adaptation
@@ -1129,8 +1142,9 @@ int main(int argc, char **argv)
  // converges to the symmetry broken solution, even without
  // the perturbation
  problem.use_imperfection() = false;
- problem.newton_solve(2); 
+ problem.newton_solve(2);
  problem.doc_solution();
+
 
 #ifdef OOMPH_HAS_MPI
  MPI_Helpers::finalize();

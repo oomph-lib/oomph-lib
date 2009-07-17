@@ -39,13 +39,12 @@ the macro \c OOMPH_HAS_MPI is undefined), for example.
 \until #endif
 
 In order to distribute the problem over multiple processors a single
-call to the function \c problem.distribute() is all that is
+call to the function \c Problem::distribute() is all that is
 required. Thus, a minimally-changed serial driver code would be
 \code
  // Set output directory
  DocInfo doc_info;
  doc_info.set_directory("RESLT");
-
 
  // Set max. number of black-box adaptation
  unsigned max_adapt=3;
@@ -55,10 +54,13 @@ required. Thus, a minimally-changed serial driver code would be
  {
   //Build problem
   RefineableDrivenCavityProblem<RefineableQTaylorHoodElement<2> > problem;
+
   //Distribute the problem (only change from serial version)
   problem.distribute();         
+
   //Solve the problem with automatic adaptation
   problem.newton_solve(max_adapt);
+
   //Output solution
   problem.doc_solution(doc_info);
  }
@@ -70,12 +72,13 @@ required. Thus, a minimally-changed serial driver code would be
 \skipline Finalise MPI
 \until }
 
-The actual driver code is more complicated that the minimally-changed
-version above because it also functions as a self-test. The automatic
-distribution of the problem is performed by \c METIS and results may vary
-between different machines. To ensure reproducible results when acting as
-a self-test the code (like all our parallel test codes) 
-reads a predetermined partition from the disk, see 
+The actual driver code is slightly more complicated that the 
+version shown above because it also acts as a self-test. The distribution
+of individual elements over the processors is determined by 
+\c METIS and we have found that \c METIS occasionally gives slightly
+different results on different machines. To ensure reproducible 
+results when acting as a self-test, the code (like all our parallel test codes) 
+reads a predetermined element distribution from the disk; see 
 <a href="#distribution">  below </a> for more details.
 
 <HR>
@@ -136,30 +139,30 @@ indicating which processor the elements belong to.
 \section distribution Customising the distribution
 
 The actual driver code demonstrates two of the different options available 
-for the \c distribute() function, selected by the presence or 
+for the \c Problem::distribute() function, selected by the presence or 
 absence of command line arguments.
 
-\subsection no_disk Option I: Distributing a problem using METIS and documenting its partitioning
+\subsection no_disk Option I: Distributing a problem using METIS and documenting its distribution
 
 If no command line arguments are specified we determine the problem
-partitioning using \c METIS, and write the partitioning to a file.
+distribution using \c METIS, and write the distribution to a file.
 
 \skipline Are there
 \until {
 
-The partition is represented by a vector of unsigneds whose values indicate
+The distribution is represented by a vector of unsigneds whose values indicate
 the processor on which the corresponding element is stored.
 
 \until out_element_partiti
 
 We distribute the problem with a call to \c Problem::distribute(...),
 using the boolean flag to request that the relevant statistics
-are displayed on screen. The partitioning chosen for the elements 
+are displayed on screen. The distribution chosen for the elements 
 is returned in the vector created earlier.
 
 \until problem.distribute(
 
-We document the partitioning by writing the partitioning vector
+We document the distribution by writing the distribution vector
 to a file. 
 
 \until }
@@ -174,22 +177,22 @@ schemes.
 \subsection from_disk Option II: Using a pre-determined distribution
 
 If command line arguments are specified (typically when the code is 
-run in validation mode) we read the partitioning from disk,
+run in validation mode) we read the distribution from disk,
 using a file that was written using the procedure shown above.
 (This is useful because in our experience \c METIS may produce 
-slightly different partitionings on different machines. This would
+slightly different distribution on different machines. This would
 cause the self-tests to fail even though the computed results 
 would be correct). 
 
 We start by creating a \c DocInfo object that specifies the directory
 in which the problem distribution will be documented and by reading in
-the vector that represents the partition
+the vector that represents the distribution
 
 \dontinclude adaptive_driven_cavity.cc
 \skipline partition from file
 \until }
 
-We pass the partitioning vector to \c Problem::distribute(...) and
+We pass the distribution vector to \c Problem::distribute(...) and
 thus bypass the partitioning by \c METIS. 
 
 \until #endif

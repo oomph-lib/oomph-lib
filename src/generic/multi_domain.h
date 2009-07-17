@@ -147,6 +147,10 @@ namespace Multi_domain_functions
   /// setup_multi_domain_interaction(). Default value of 10.
   extern unsigned Nz_bin;
 
+  /// \short (Measure of) the number of sampling points within the elements 
+  /// when populating the bin
+  extern unsigned Nsample_points;
+
   /// \short Minimum and maximum coordinates for
   /// each dimension of the bin structure used in
   /// MeshAsGeomObject::locate_zeta(...). 
@@ -196,11 +200,17 @@ namespace Multi_domain_functions
 
   // Functions for multi-domain method
 
-  /// \short Set up the multi-domain interactions for the specified problem
-  /// This is a two-mesh example where first_mesh_pt and second_mesh_pt
+  /// \short Set up the two-way multi-domain interactions for the 
+  /// problem pointed to by \c problem_pt.
+  /// Use this for cases where first_mesh_pt and second_mesh_pt
   /// occupy the same physical space and are populated by
   /// ELEMENT_0 and ELEMENT_1 respectively, and are combined to solve
-  /// a single problem.  The interaction indices default to zero
+  /// a single problem. The elements in two meshes interact both ways
+  /// the elements in each mesh act as "external elements" for the 
+  /// elements in the "other" mesh. The interaction indices allow the 
+  /// specification of which interaction we're setting up in the two 
+  /// meshes. They default to zero, which is appropriate if there's 
+  /// only a single interaction.
   template<class ELEMENT_0,class ELEMENT_1>
    void setup_multi_domain_interactions(Problem* problem_pt, 
                                         Mesh* const &first_mesh_pt,
@@ -208,65 +218,78 @@ namespace Multi_domain_functions
                                         const unsigned& first_interaction=0,
                                         const unsigned& second_interaction=0);
 
- /// \short Function to set up the multi-domain interactions for 
- /// non-FSI problems involving \c ElementWithExternalElements. 
- /// - \c mesh_pt points to the mesh of ElemenWithExternalElements for which
- ///   the interaction is set up. 
- ///   \n\n
- /// - \c external_mesh_pt points to the mesh that contains the elements
- ///   of type EXT_ELEMENT that provide the "source" for the
- ///   \c ElementWithExternalElements.
- /// - The interaction_index parameter defaults to zero and must be otherwise
- ///   set by the user if there is more than one mesh that provides sources
- ///   for the Mesh pointed to by mesh_pt
- template<class EXT_ELEMENT, unsigned EL_DIM>
+  /// \short Function to set up the one-way multi-domain interaction for 
+  /// problems where the meshes pointed to by \c mesh_pt and \c external_mesh_pt
+  /// occupy the same physical space, and the elements in \c external_mesh_pt
+  /// act as "external elements" for the \c ElementWithExternalElements
+  /// in \c mesh_pt (but not vice versa):
+  /// - \c mesh_pt points to the mesh of ElemenWithExternalElements for which
+  ///   the interaction is set up. 
+  /// - \c external_mesh_pt points to the mesh that contains the elements
+  ///   of type EXT_ELEMENT that act as "external elements" for the
+  ///   \c ElementWithExternalElements in \ mesh_pt.
+  /// - The interaction_index parameter defaults to zero and must be otherwise
+  ///   set by the user if there is more than one mesh that provides sources
+  ///   for the Mesh pointed to by mesh_pt.
+  template<class EXT_ELEMENT, unsigned EL_DIM>
    void setup_multi_domain_interaction(Problem* problem_pt,
                                        Mesh* const &mesh_pt,
                                        Mesh* const &external_mesh_pt,
                                        const unsigned& interaction_index=0);
 
- /// \short Function to set up the multi-domain interactions for 
- /// FSI problems (involving \c ElementWithExternalElements). 
- /// - \c mesh_pt points to the mesh of ElemenWithExternalElements for which
- ///   the interaction is set up. 
- /// - \c external_mesh_pt points to the mesh that contains the elements
- ///   of type EXT_ELEMENT that provide the "source" for the
- ///   \c ElementWithExternalElements.
- /// - \c external_face_mesh_pt points to the face mesh created from
- ///   the \c external_mesh_pt which is of the same dimension as \c mesh_pt.
- ///   The elements contained in \c external_face_mesh_pt are of type 
- ///   FACE_ELEMENT_GEOM_OBJECT 
- /// - The interaction_index parameter defaults to zero and must be otherwise
- ///   set by the user if there is more than one mesh that provides sources
- ///   for the Mesh pointed to by mesh_pt
- template<class EXT_ELEMENT, class FACE_ELEMENT_GEOM_OBJECT, unsigned EL_DIM>
+  /// \short Function to set up the one-way multi-domain interaction for 
+  /// FSI-like problems. 
+  /// - \c mesh_pt points to the mesh of \c ElemenWithExternalElements for which
+  ///   the interaction is set up. In an FSI example, this mesh would contain
+  ///   the \c FSIWallElements (either beam/shell elements or the
+  ///   \c FSISolidTractionElements that apply the traction to 
+  ///   a "bulk" solid mesh that is loaded by the fluid.)
+  /// - \c external_mesh_pt points to the mesh that contains the elements
+  ///   of type EXT_ELEMENT that provide the "source" for the
+  ///   \c ElementWithExternalElements. In an FSI example, this 
+  ///   mesh would contain the "bulk" fluid elements.
+  /// - \c external_face_mesh_pt points to the mesh of \c FaceElements
+  ///   attached to the \c external_mesh_pt. The mesh pointed to by
+  ///   \c external_face_mesh_pt has the same dimension as \c mesh_pt.
+  ///   The elements contained in \c external_face_mesh_pt are of type 
+  ///   FACE_ELEMENT_GEOM_OBJECT. In an FSI example, these elements
+  ///   are usually the \c FaceElementAsGeomObjects (templated by the
+  ///   type of the "bulk" fluid elements to which they are attached)
+  ///   that define the FSI boundary of the fluid domain.
+  /// - The interaction_index parameter defaults to zero and must otherwise be
+  ///   set by the user if there is more than one mesh that provides "external
+  ///   elements" for the Mesh pointed to by mesh_pt (e.g. in the case
+  ///   when a beam or shell structure is loaded by fluid from both sides.)
+  template<class EXT_ELEMENT, class FACE_ELEMENT_GEOM_OBJECT, unsigned EL_DIM>
    void setup_multi_domain_interaction(Problem* problem_pt,
                                        Mesh* const &mesh_pt,
                                        Mesh* const &external_mesh_pt,
                                        Mesh* const &external_face_mesh_pt,
                                        const unsigned& interaction_index=0);
-
- /// \short Auxiliary function which is called from the two preceding
- /// functions 
- template<class EXT_ELEMENT, class GEOM_OBJECT,
-  unsigned EL_DIM_LAG, unsigned EL_DIM_EUL>
-  void aux_setup_multi_domain_interaction(Problem* problem_pt,
-                                          Mesh* const &mesh_pt,
-                                          Mesh* const &external_mesh_pt,
-                                          const unsigned& interaction_index,
-                                          Mesh* const &external_face_mesh_pt=0);
-
+  
+  /// \short Auxiliary function which is called from the two preceding
+  /// functions 
+  template<class EXT_ELEMENT, class GEOM_OBJECT,
+   unsigned EL_DIM_LAG, unsigned EL_DIM_EUL>
+   void aux_setup_multi_domain_interaction(Problem* problem_pt,
+                                           Mesh* const &mesh_pt,
+                                           Mesh* const &external_mesh_pt,
+                                           const unsigned& interaction_index,
+                                           Mesh* const &external_face_mesh_pt=0);
+  
 #ifdef OOMPH_HAS_MPI
   /// \short A helper function to remove duplicate data that 
   /// are created due to coincident nodes between external halo elements 
   /// on different processors
   void remove_duplicate_data(Problem* problem_pt, Mesh* const &mesh_pt);
 #endif
+  
 
-  /// \short Helper function to add external data from source elements
-  /// at each integration point of the specified mesh's elements
-  void add_external_data_from_source_elements
-   (Mesh* const &mesh_pt,const unsigned& interaction_index);
+// hierher used?
+/*   /// \short Helper function to add external data from the "external elements" */
+/*   /// at each integration point of the specified mesh's elements */
+/*   void add_external_data_from_source_elements */
+/*    (Mesh* const &mesh_pt,const unsigned& interaction_index); */
 
   /// \short Helper function to locate "local" zeta coordinates
   template<class GEOM_OBJECT,unsigned EL_DIM_LAG,unsigned EL_DIM_EUL>

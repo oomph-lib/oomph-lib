@@ -29,7 +29,7 @@
 //mesh to an advection diffusion mesh, giving Boussinesq convection
 
 //Oomph-lib headers and derived elements are in a separate header file
-#include "my_boussinesq_elements.h"
+#include "../../../multi_physics/boussinesq_convection/multi_domain_boussinesq_elements.h"
 
 // Both meshes are the standard rectangular quadmesh
 #include "meshes/rectangular_quadmesh.h"
@@ -91,28 +91,28 @@ public:
  /// Update the problem after solve (empty)
  void actions_after_newton_solve(){}
 
- /// \short Overloaded version of the problem's access function to 
- /// the NST mesh. Recasts the pointer to the base Mesh object to 
+ /// \short Access function to the NST mesh. 
+ /// Casts the pointer to the base Mesh object to 
  /// the actual mesh type.
  RefineableRectangularQuadMesh<NST_ELEMENT>* nst_mesh_pt() 
   {
    return dynamic_cast<RefineableRectangularQuadMesh<NST_ELEMENT>*>
     (Nst_mesh_pt);
-  }
+  } // end_of_nst_mesh
 
- /// \short Overloaded version of the problem's access function to 
- /// the AD mesh. Recasts the pointer to the base Mesh object to 
+ /// \short Access function to the AD mesh. 
+ /// Casts the pointer to the base Mesh object to 
  /// the actual mesh type.
  RefineableRectangularQuadMesh<AD_ELEMENT>* adv_diff_mesh_pt() 
   {
    return dynamic_cast<RefineableRectangularQuadMesh<AD_ELEMENT>*>
     (Adv_diff_mesh_pt);
-  }
+  } // end_of_ad_mesh
 
  /// Actions before adapt:(empty)
  void actions_before_adapt() {}
 
- /// \short Actions after adaptation, reset all sources, then
+ /// \short Actions after adaptation, re-set all interactions, then
  /// re-pin a single pressure degree of freedom
  void actions_after_adapt()
   {
@@ -125,34 +125,39 @@ public:
    unsigned nnod=nst_mesh_pt()->nnode();
    for (unsigned j=0; j<nnod; j++)
     {
-     if (mesh_pt()->node_pt(j)->x(0)==0 && 
-         mesh_pt()->node_pt(j)->x(1)==0) // 2d problem only
+     if (mesh_pt()->node_pt(j)->x(0)==0.0 && 
+         mesh_pt()->node_pt(j)->x(1)==0.0) // 2d problem only
       {
        fix_pressure(0,0,0.0);
+       break;
       }
     }
 
-   // Reset all the interactions in the problem
-   Multi_domain_functions::setup_multi_domain_interactions
-    <NST_ELEMENT,AD_ELEMENT>(this,nst_mesh_pt(),adv_diff_mesh_pt());
-  }
+   // Set external elements for the multi-domain solution.
+   Multi_domain_functions::
+    setup_multi_domain_interactions<NST_ELEMENT,AD_ELEMENT>
+    (this,nst_mesh_pt(),adv_diff_mesh_pt());
+ 
+  } //end_of_actions_after_adapt
 
- /// Actions after distribute: set sources
+
+ /// Actions after distribute: Re-setup multi-domain interaction
  void actions_after_distribute()
   {
-   // Reset all the interactions in the problem
+   // Re-set all the interactions in the problem
    Multi_domain_functions::setup_multi_domain_interactions
     <NST_ELEMENT,AD_ELEMENT>(this,nst_mesh_pt(),adv_diff_mesh_pt());
-  } // end of actions_after_distribute
+  } 
+
 
  ///Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned &e, const unsigned &pdof, 
                    const double &pvalue)
   {
-   //Cast to specific element and fix pressure in NST element
    dynamic_cast<NST_ELEMENT*>(nst_mesh_pt()->element_pt(e))->
     fix_pressure(pdof,pvalue);
-  } // end_of_fix_pressure
+  }
+
  
  /// \short Access function to boolean flag that determines if the
  /// boundary condition on the upper wall is perturbed slightly
@@ -172,10 +177,10 @@ private:
 
 protected:
 
- /// Mesh object for Navier--Stokes domain
+ /// Navier Stokes mesh
  RefineableRectangularQuadMesh<NST_ELEMENT>* Nst_mesh_pt;
 
- /// Mesh object for advection-diffusion domain
+ /// Advection diffusion mesh
  RefineableRectangularQuadMesh<AD_ELEMENT>* Adv_diff_mesh_pt;
 
 }; // end of problem class
@@ -224,7 +229,7 @@ RefineableConvectionProblem()
  // free by default -- only need to pin the ones that have Dirichlet 
  // conditions here
 
- //Loop over the boundaries
+ //Loop over the boundaries of the NST mesh
  unsigned num_bound = nst_mesh_pt()->nboundary();
  for(unsigned ibound=0;ibound<num_bound;ibound++)
   {
@@ -265,7 +270,7 @@ RefineableConvectionProblem()
  for(unsigned ibound=0;ibound<num_bound;ibound++)
   {
    //Set the maximum index to be pinned (all values by default)
-   unsigned val_max;//=3;
+   unsigned val_max;
 
    //Loop over the number of nodes on the boundry
    unsigned num_nod= adv_diff_mesh_pt()->nboundary_node(ibound);
@@ -288,7 +293,7 @@ RefineableConvectionProblem()
         }
       }
     }
-  }
+  } // end of loop over AD mesh boundaries
  
  // Complete the build of all elements so they are fully functional 
 
@@ -313,6 +318,12 @@ RefineableConvectionProblem()
 
    //Set Gravity vector
    el_pt->g_pt() = &Global_Physical_Variables::Direction_of_gravity;
+
+   // We can ignore the external geometric data in the "external"
+   // advection diffusion element when computing the Jacobian matrix
+   // because the interaction does not involve spatial gradients of 
+   // the temperature (and also because the mesh isn't moving!)
+   el_pt->ignore_external_geometric_data();
   }
 
  unsigned n_ad_element = adv_diff_mesh_pt()->nelement();
@@ -327,20 +338,29 @@ RefineableConvectionProblem()
 
    // Set the Peclet number multiplied by the Strouhal number
    el_pt->pe_st_pt() =&Global_Physical_Variables::Peclet;
-  }
+
+   // We can ignore the external geometric data in the "external"
+   // Navier Stokes element when computing the Jacobian matrix
+   // because the interaction does not involve spatial gradients of 
+   // the velocities (and also because the mesh isn't moving!)
+   el_pt->ignore_external_geometric_data();
+
+  } // end of setup for all AD elements
 
  // combine the submeshes
  add_sub_mesh(Nst_mesh_pt);
  add_sub_mesh(Adv_diff_mesh_pt);
  build_global_mesh();
-
- // Setup the interaction
+ 
+ // Change default parameters for setup of bins and doc stats
+ Multi_domain_functions::Doc_stats=true;
 
  // Change from the default number of bins in each direction
- Multi_domain_functions::Nx_bin=50;
- Multi_domain_functions::Ny_bin=50;
+ Multi_domain_functions::Nx_bin=30;
+ Multi_domain_functions::Ny_bin=10;
 
- // Change the minimum, maximum and the percentage offset
+ // Change the minimum and maximum bin coordinates and the percentage offset
+ // and avoid the computation of the bin boundaries "on the fly"
  Multi_domain_functions::Compute_extreme_bin_coordinates=false;
  Multi_domain_functions::X_min=0.0;
  Multi_domain_functions::X_max=3.0;
@@ -348,11 +368,18 @@ RefineableConvectionProblem()
  Multi_domain_functions::Y_max=1.0;
  Multi_domain_functions::Percentage_offset=0.0;
 
- // Now set up the interaction
- Multi_domain_functions::setup_multi_domain_interactions
-  <NST_ELEMENT,AD_ELEMENT>(this,nst_mesh_pt(),adv_diff_mesh_pt());
+ // Set the parameter that controls the number of sampling points
+ // for the setup of the bin structure. (Note that, in general, this is not
+ // the same as the actual number of sampling points for the elements --
+ // it plays a role similar to the nplot parameter for the output
+ // functions
+ Multi_domain_functions::Nsample_points=1;
 
-
+ // Set external elements for the multi-domain solution.
+ Multi_domain_functions::
+  setup_multi_domain_interactions<NST_ELEMENT,AD_ELEMENT>
+  (this,nst_mesh_pt(),adv_diff_mesh_pt());
+ 
  // Setup equation numbering scheme
  cout << "Number of equations: " << assign_eqn_numbers() << endl; 
 
@@ -367,8 +394,7 @@ RefineableConvectionProblem()
 /// to include an imperfection (or not) depending on the control flag.
 //========================================================================
 template<class NST_ELEMENT,class AD_ELEMENT>
-void RefineableConvectionProblem<NST_ELEMENT,AD_ELEMENT>::
-actions_before_newton_solve()
+void RefineableConvectionProblem<NST_ELEMENT,AD_ELEMENT>::actions_before_newton_solve()
 {
  // Loop over the boundaries on the NST mesh
  unsigned num_bound = nst_mesh_pt()->nboundary();
@@ -445,29 +471,23 @@ void RefineableConvectionProblem<NST_ELEMENT,AD_ELEMENT>::doc_solution()
  // Number of plot points: npts x npts
  unsigned npts=5;
 
- // Output whole solution (this will output elements from one mesh
- //----------------------  followed by the other mesh)
- sprintf(filename,"%s/soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
-         Doc_info.number(),this->communicator_pt()->my_rank());
- some_file.open(filename);
- mesh_pt()->output(some_file,npts);
- some_file.close();
-
- // Output solution for each mesh
- //------------------------------
- sprintf(filename,"%s/vel_soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
+ // Output Navier-Stokes solution
+ sprintf(filename,"%s/fluid_soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
          Doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  nst_mesh_pt()->output(some_file,npts);
  some_file.close();
 
- sprintf(filename,"%s/temp_soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
+ // Output advection diffusion solution
+ sprintf(filename,"%s/temperature_soln%i_on_proc%i.dat",
+         Doc_info.directory().c_str(),
          Doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  adv_diff_mesh_pt()->output(some_file,npts);
  some_file.close();
 
  Doc_info.number()++;
+
 } // end of doc
 
 
@@ -477,6 +497,7 @@ void RefineableConvectionProblem<NST_ELEMENT,AD_ELEMENT>::doc_solution()
 //====================================================================
 int main(int argc, char **argv)
 {
+
 #ifdef OOMPH_HAS_MPI
  MPI_Helpers::init(argc,argv);
 #endif
@@ -490,20 +511,21 @@ int main(int argc, char **argv)
 
  // Create the problem with 2D nine-node refineable elements.
  RefineableConvectionProblem<
-  RefineableQCrouzeixRaviartElementWithExternalElement<2>,
-  RefineableQAdvectionDiffusionElementWithExternalElement<2> > problem;
+  RefineableQCrouzeixRaviartBoussinesqElement<2>,
+  RefineableQAdvectionDiffusionBoussinesqElement<2> > problem;
  
  // Apply a perturbation to the upper boundary condition to
  // force the solution into the symmetry-broken state.
  problem.use_imperfection() = true;
 
- // Distribute the problem (and set the sources)
+ // Distribute the problem
 #ifdef OOMPH_HAS_MPI
+
  DocInfo mesh_doc_info;
  mesh_doc_info.number()=0;
  mesh_doc_info.set_directory("RESLT_MULTI");
  bool report_stats=true;
-
+ 
  // Are there command-line arguments?
  if (CommandLineArgs::Argc==1)
   {
@@ -517,23 +539,21 @@ int main(int argc, char **argv)
    std::ofstream output_file;
    char filename[100];
 
-   // Get partition from file
-   unsigned n_partition=problem.mesh_pt()->nelement();
-   Vector<unsigned> element_partition(n_partition);
-   sprintf(filename,"multimesh_ind_ref_b_partition.dat");
+   // Get distribution from file
+   unsigned n_element=problem.mesh_pt()->nelement();
+   Vector<unsigned> element_partition(n_element);
+   sprintf(filename,"multi_domain_ref_b_partition.dat");
    input_file.open(filename);
    std::string input_string;
-   for (unsigned e=0;e<n_partition;e++)
+   for (unsigned e=0;e<n_element;e++)
     {
      getline(input_file,input_string,'\n');
      element_partition[e]=atoi(input_string.c_str());
     }
-
    problem.distribute(element_partition,mesh_doc_info,report_stats);
   }
 #endif
 
- 
  //Solve the problem with (up to) two levels of adaptation
  problem.newton_solve(2);
  

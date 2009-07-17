@@ -52,7 +52,7 @@ itself adapted.
 
 \section fsi_channel_with_leaflet Revisiting the FSI channel with leaflet problem
 
-We demonstrate the methodology for problem of 
+We demonstrate the methodology for the problem of 
 <a href="../../../interaction/fsi_channel_with_leaflet/html/index.html">
 flow past an elastic leaflet in a 2D channel</a>.
 Most of driver code is identical to its serial counterpart
@@ -91,7 +91,7 @@ described <a href="#actions_routines">later in this tutorial</a>.
 \subsection constructor The problem constructor
 
  The only difference from the serial counterpart is that we  
-insist that all elements are kept as halos when the mesh 
+insist that all beam elements are kept as halos when the mesh 
 is distributed.
 
 \dontinclude fsi_channel_with_leaflet.cc
@@ -131,7 +131,7 @@ the no-slip condition.
  The actions required after distribution are extremely similar to those
  required after adaptation because distribution deletes certain elements
 (or replaces them by halo copies). The only difference is that the
- redundant pressure degrees of freedom do not to be repinned.
+ redundant pressure degrees of freedom do not have to be re-pinned.
 
 \skipline start_of_actions_after_distribute
 \until end_of_actions_after_distribute

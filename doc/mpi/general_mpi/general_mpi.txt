@@ -86,6 +86,8 @@ any additional concerns are discussed in the accompanying tutorials.
 
 ########################################################################
 
+<HR>
+
 \subsection running How to run a driver code in parallel
 
 - MPI <strong> must </strong> be initialised in every driver code 
@@ -150,6 +152,8 @@ any additional concerns are discussed in the accompanying tutorials.
 
 ########################################################################
 
+<HR>
+
 \subsection solvers oomph-lib's parallel linear solvers
 
 - \c oomph-lib's default linear solver is 
@@ -180,6 +184,8 @@ any additional concerns are discussed in the accompanying tutorials.
 .
 
 ########################################################################
+
+<HR>
 
 \subsection self_tests How to include parallel demo codes into the self-tests
 
@@ -230,6 +236,8 @@ allows the mesh adaptation to be performed in parallel.
 
 ########################################################################
 
+<HR>
+
 \subsection how_to_distribute Basic usage: How to distribute a simple problem
 
 - In most cases the problem distribution is extremely
@@ -271,37 +279,15 @@ allows the mesh adaptation to be performed in parallel.
   elements, it is sensible to modify the post-processing 
   routines such that output files are labeled by the processor 
   number:
-  \n\n
+  \n\n 
   \dontinclude adaptive_driven_cavity.cc
   \skipline start_of_doc_solution
   \until end_of_doc_solution
-
-#  \code
-#
-#  [...]
-#
-#  // Get number of processor from the problem's communicator
-#  int my_rank=Problem::Communicator_pt->nproc();
-#
-#  // Label filename by processor number
-#  char filename[100];
-#  sprintf(filename,"solution_on_processor_%i.dat",my_rank);
-#
-#  // Output
-#  ofstream some_file;
-#  some_file.open(filename);
-#  mesh_pt()->output(some_file);
-#  some_file.close();
-#
-#  [...]
-#
-#  \endcode
-#  \n
-
+  \n 
   Without such a modification multiple processors will attempt to
-write to the same file, leading to incomplete output if the file 
-produced by one processor is overwritten by another. 
-By default, \c oomph-lib's mesh-based output functions do
+  write to the same file, leading to incomplete output if the file 
+  produced by one processor is overwritten by another. 
+  By default, \c oomph-lib's mesh-based output functions do
   not include output from halo elements; this can be re-enabled or
   disabled by calls to
   \n\n 
@@ -333,6 +319,8 @@ By default, \c oomph-lib's mesh-based output functions do
 . 
 
 ########################################################################
+
+<HR>
 
 \subsection how_it_works Overview of the implementation of Problem distribution
 
@@ -472,6 +460,8 @@ If this is done
 can no longer be unrefined below the previous highest level of uniform
 refinement.
 
+<HR>
+
 \subsection advanced Customising the distribution
 
  The procedures described above are completely sufficient 
@@ -500,6 +490,8 @@ can be used to perform any additional commands required to complete
 
 
 ########################################################################
+
+<HR>
 
 \subsubsection face_elements Distributing problems involving FaceElements
 
@@ -553,6 +545,8 @@ a Poisson problem with Neumann boundary conditions.
 
 
 ########################################################################
+
+<HR>
 
 \subsubsection multi_domain Distributing multi-domain problems
 
@@ -689,6 +683,7 @@ Turek and Hron's FSI benchmark problem </a>.
 ########################################################################
 ########################################################################
 
+<HR>
 <HR>
 
 \section problems Trouble-shooting and debugging

@@ -29,7 +29,8 @@
 //mesh to an advection diffusion mesh, giving Boussinesq convection
 
 //Oomph-lib headers and derived elements are in a separate header file
-#include "multi_domain_boussinesq_elements.h"
+#include "../../../multi_physics/boussinesq_convection/multi_domain_boussinesq_elements.h"
+
 
 //Oomph-lib headers, we require the generic, advection-diffusion,
 //and navier-stokes elements.
@@ -95,6 +96,14 @@ public:
  /// Actions before adapt:(empty)
  void actions_before_adapt(){}
 
+ /// Actions after distribute: re-setup multi-domain interaction
+ void actions_after_distribute()
+  {
+   // Re-setup multi-domain interaction
+   Multi_domain_functions::setup_multi_domain_interactions
+    <NST_ELEMENT,AD_ELEMENT>(this,nst_mesh_pt(),adv_diff_mesh_pt());
+  }
+
  /// \short Actions before the timestep (update the the time-dependent 
  /// boundary conditions)
  void actions_before_implicit_timestep() 
@@ -154,8 +163,13 @@ ConvectionProblem<NST_ELEMENT,AD_ELEMENT>::ConvectionProblem()
  //Allocate a timestepper
  add_time_stepper_pt(new BDF<2>);
 
+
  // Set output directory
+#ifdef USE_FD_JACOBIAN
+ Doc_info.set_directory("RESLT_FD");
+#else
  Doc_info.set_directory("RESLT");
+#endif
  
  // # of elements in x-direction
  unsigned n_x=8;
@@ -313,7 +327,7 @@ ConvectionProblem<NST_ELEMENT,AD_ELEMENT>::ConvectionProblem()
  add_sub_mesh(Adv_diff_mesh_pt);
  build_global_mesh();
 
- // Set sources
+ // Setup multi-domain interaction 
  Multi_domain_functions::
   setup_multi_domain_interactions<NST_ELEMENT,AD_ELEMENT>
   (this,nst_mesh_pt(),adv_diff_mesh_pt());
@@ -410,15 +424,19 @@ void ConvectionProblem<NST_ELEMENT,AD_ELEMENT>::doc_solution()
  unsigned npts=5;
 
  // Output Navier-Stokes solution
- sprintf(filename,"%s/fluid_soln%i.dat",Doc_info.directory().c_str(),
-         Doc_info.number());
+ sprintf(filename,"%s/fluid_soln%i_on_proc%i.dat",
+         Doc_info.directory().c_str(),
+         Doc_info.number(),
+         this->communicator_pt()->my_rank());
  some_file.open(filename);
  nst_mesh_pt()->output(some_file,npts);
  some_file.close();
 
  // Output advection diffusion solution
- sprintf(filename,"%s/temperature_soln%i.dat",Doc_info.directory().c_str(),
-         Doc_info.number());
+ sprintf(filename,"%s/temperature_soln%i_on_proc%i.dat",
+         Doc_info.directory().c_str(),
+         Doc_info.number(),
+         this->communicator_pt()->my_rank());
  some_file.open(filename);
  adv_diff_mesh_pt()->output(some_file,npts);
  some_file.close();
@@ -434,6 +452,13 @@ void ConvectionProblem<NST_ELEMENT,AD_ELEMENT>::doc_solution()
 int main(int argc, char **argv)
 {
 
+#ifdef OOMPH_HAS_MPI
+ MPI_Helpers::init(argc,argv);
+#endif
+
+ // Store command line arguments
+ CommandLineArgs::setup(argc,argv);
+
  // Set the direction of gravity
  Global_Physical_Variables::Direction_of_gravity[0] = 0.0;
  Global_Physical_Variables::Direction_of_gravity[1] = -1.0;
@@ -445,6 +470,65 @@ int main(int argc, char **argv)
 
  // Apply the boundary condition at time zero
  problem.set_boundary_conditions(0.0);
+
+
+ // Distribute the problem
+ //-----------------------
+
+#ifdef OOMPH_HAS_MPI
+
+ DocInfo mesh_doc_info;
+ mesh_doc_info.number()=0;
+
+#ifdef USE_FD_JACOBIAN
+ mesh_doc_info.set_directory("RESLT_FD");
+#else
+ mesh_doc_info.set_directory("RESLT");
+#endif
+
+ bool report_stats=true;
+
+ // Are there command-line arguments?
+ if (CommandLineArgs::Argc==1)
+  {
+   // No arguments, so distribute without reference to partition vector
+   problem.distribute(mesh_doc_info,report_stats);
+  }
+ else
+  {
+   // Command line argument(s), so read in partition from file
+   std::ifstream input_file;
+   std::ofstream output_file;
+   char filename[100];
+   
+   // Get partition from file
+   unsigned n_element=problem.mesh_pt()->nelement();
+   Vector<unsigned> element_partition(n_element);
+   // Two possible partitions on two processors - one for "normal" 
+   // METIS behaviour, the other gives one mesh to one processor 
+   // and the other mesh to the other processor
+   if (atoi(argv[2])==2)
+    {
+     oomph_info << "Using connected partitioning" << std::endl;
+     sprintf(filename,"multi_domain_boussinesq_partition_2.dat");
+    }
+   else
+    {
+     oomph_info << "Giving a mesh to each processor" << std::endl;
+     sprintf(filename,"multi_domain_boussinesq_partition.dat");
+    }
+   input_file.open(filename);
+   std::string input_string;
+   for (unsigned e=0;e<n_element;e++)
+    {
+     getline(input_file,input_string,'\n');
+     element_partition[e]=atoi(input_string.c_str());
+    }
+
+   problem.distribute(element_partition,mesh_doc_info,report_stats);
+  }
+
+#endif
 
  //Perform a single steady Newton solve
  problem.steady_newton_solve();
@@ -471,6 +555,12 @@ int main(int argc, char **argv)
    problem.unsteady_newton_solve(dt);
    problem.doc_solution();
   }
+
+
+#ifdef OOMPH_HAS_MPI
+ MPI_Helpers::finalize();
+#endif
+
 
 } // end of main
 

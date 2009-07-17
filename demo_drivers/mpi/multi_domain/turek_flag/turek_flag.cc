@@ -910,8 +910,11 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::actions_after_adapt()
   (Traction_mesh_pt[2]);
 
  // Tell the fluid mesh about the new "refined" MeshAsGeomObjects
+ delete fluid_mesh_pt()->bottom_flag_pt();
  fluid_mesh_pt()->set_bottom_flag_pt(bottom_flag_pt);
+ delete fluid_mesh_pt()->top_flag_pt();
  fluid_mesh_pt()->set_top_flag_pt(top_flag_pt);
+ delete fluid_mesh_pt()->tip_flag_pt();
  fluid_mesh_pt()->set_tip_flag_pt(tip_flag_pt);
 
  // Call update_node_update for all the fluid mesh nodes, as the compound
@@ -1016,8 +1019,8 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::actions_before_distribute()
   } // end of loop over meshes of fsi traction elements
  
 
- // Flush all the submeshes out - we're keeping the traction meshes
- // on each process for now
+ // Flush all the submeshes out but keep the meshes of FSISolidTractionElements
+ // alive (i.e. don't delete them)
  flush_sub_meshes();
 
  // Add the fluid mesh and the solid mesh back again
@@ -1041,7 +1044,8 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::actions_after_distribute()
  // The solid mesh has now been distributed, so it now has halo elements
  // on certain processors. The traction elements attached to these new
  // halo elements need to be halo themselves, so we need to delete the
- // old ones and re-attach new ones (which become halo generically)
+ // old ones and re-attach new ones. Recall that FaceElements attached
+ // to bulk halo elements become halos themselves.
  delete_fsi_traction_elements();
 
  // (Re-)Build the FSI traction elements
@@ -1088,7 +1092,7 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::actions_after_distribute()
 
 
  // Delete the old MeshAsGeomObjects and tell the fluid mesh 
- // about the new "refined" ones.
+ // about the new ones.
  delete fluid_mesh_pt()->bottom_flag_pt();
  fluid_mesh_pt()->set_bottom_flag_pt(bottom_flag_pt);
  delete fluid_mesh_pt()->top_flag_pt();

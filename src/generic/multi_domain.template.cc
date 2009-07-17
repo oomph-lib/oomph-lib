@@ -56,12 +56,17 @@ namespace oomph
 //// Templated helper functions for multi-domain methods using locate_zeta
 
 //========================================================================
-/// Set the source element(s) for each element in each mesh
-/// Each time this routine is called it needs to start from scratch
-/// with new external halo(ed) elements and nodes, and add their data
-/// as external data.
-/// This is an example for a single two-domain problem where the 
-/// meshes occupy the same physical space.
+/// Set up the two-way multi-domain interactions for the 
+/// problem pointed to by \c problem_pt.
+/// Use this for cases where first_mesh_pt and second_mesh_pt
+/// occupy the same physical space and are populated by
+/// ELEMENT_0 and ELEMENT_1 respectively, and are combined to solve
+/// a single problem. The elements in two meshes interact both ways
+/// the elements in each mesh act as "external elements" for the 
+/// elements in the "other" mesh. The interaction indices allow the 
+/// specification of which interaction we're setting up in the two 
+/// meshes. They default to zero, which is appropriate if there's 
+/// only a single interaction.
 //========================================================================
  template<class ELEMENT_0,class ELEMENT_1>
   void Multi_domain_functions::setup_multi_domain_interactions
@@ -140,7 +145,6 @@ namespace oomph
     }
    else if (el_dim_first==2)
     {
-     oomph_info << "first_interaction=" << first_interaction << std::endl;
 #ifdef OOMPH_HAS_MPI
      Check_for_duplicates=false;
 #endif
@@ -184,11 +188,19 @@ namespace oomph
 
 
 //========================================================================
-/// Setup multi-domain interactions for two meshes occupying
-/// the same physical space; 
-/// - \c mesh_pt points to the mesh of ElementWithExternalElements
-/// - \c external_mesh_pt contains the "sources" for these
-///      ElementWithExternalElements
+ ///  Function to set up the one-way multi-domain interaction for 
+ /// problems where the meshes pointed to by \c mesh_pt and \c external_mesh_pt
+ /// occupy the same physical space, and the elements in \c external_mesh_pt
+ /// act as "external elements" for the \c ElementWithExternalElements
+ /// in \c mesh_pt (but not vice versa):
+ /// - \c mesh_pt points to the mesh of ElemenWithExternalElements for which
+ ///   the interaction is set up. 
+ /// - \c external_mesh_pt points to the mesh that contains the elements
+ ///   of type EXT_ELEMENT that act as "external elements" for the
+ ///   \c ElementWithExternalElements in \ mesh_pt.
+ /// - The interaction_index parameter defaults to zero and must be otherwise
+ ///   set by the user if there is more than one mesh that provides sources
+ ///   for the Mesh pointed to by mesh_pt.
 //========================================================================
  template<class EXT_ELEMENT,unsigned EL_DIM>
   void Multi_domain_functions::setup_multi_domain_interaction
@@ -203,17 +215,29 @@ namespace oomph
 
 
 //========================================================================
-/// Setup multi-domain interactions for two meshes where one is of
-/// a higher dimension and has an associated mesh for the face where it
-/// interacts with the other mesh
-/// - \c mesh_pt points to the mesh of ElementWithExternalElements
-/// - \c external_mesh_pt points to the mesh that contains the elements
-///   of type EXT_ELEMENT that provide the "source" for the
-///   \c ElementWithExternalElements.
-/// - \c external_face_mesh_pt points to the face mesh created from
-///   the \c external_mesh_pt which is of the same dimension as \c mesh_pt.
-///   The elements contained in \c external_face_mesh_pt are of type 
-///   FACE_ELEMENT_GEOM_OBJECT 
+ /// Function to set up the one-way multi-domain interaction for 
+ /// FSI-like problems. 
+ /// - \c mesh_pt points to the mesh of \c ElemenWithExternalElements for which
+ ///   the interaction is set up. In an FSI example, this mesh would contain
+ ///   the \c FSIWallElements (either beam/shell elements or the
+ ///   \c FSISolidTractionElements that apply the traction to 
+ ///   a "bulk" solid mesh that is loaded by the fluid.)
+ /// - \c external_mesh_pt points to the mesh that contains the elements
+ ///   of type EXT_ELEMENT that provide the "source" for the
+ ///   \c ElementWithExternalElements. In an FSI example, this 
+ ///   mesh would contain the "bulk" fluid elements.
+ /// - \c external_face_mesh_pt points to the mesh of \c FaceElements
+ ///   attached to the \c external_mesh_pt. The mesh pointed to by
+ ///   \c external_face_mesh_pt has the same dimension as \c mesh_pt.
+ ///   The elements contained in \c external_face_mesh_pt are of type 
+ ///   FACE_ELEMENT_GEOM_OBJECT. In an FSI example, these elements
+ ///   are usually the \c FaceElementAsGeomObjects (templated by the
+ ///   type of the "bulk" fluid elements to which they are attached)
+ ///   that define the FSI boundary of the fluid domain.
+ /// - The interaction_index parameter defaults to zero and must otherwise be
+ ///   set by the user if there is more than one mesh that provides "external
+ ///   elements" for the Mesh pointed to by mesh_pt (e.g. in the case
+ ///   when a beam or shell structure is loaded by fluid from both sides.)
 //========================================================================
  template<class EXT_ELEMENT,class FACE_ELEMENT_GEOM_OBJECT,unsigned EL_DIM>
   void Multi_domain_functions::setup_multi_domain_interaction
@@ -288,7 +312,7 @@ namespace oomph
 #endif
 
    // Geometric object used to represent the external (face) mesh
-   MeshAsGeomObject<EL_DIM_LAG,EL_DIM_EUL,GEOM_OBJECT >* mesh_geom_obj_pt;
+   MeshAsGeomObject<EL_DIM_LAG,EL_DIM_EUL,GEOM_OBJECT >* mesh_geom_obj_pt=0;
 
    // Are bulk elements used as external elements?
    if (!Use_bulk_element_as_external)
@@ -308,21 +332,16 @@ namespace oomph
 
    if (!Compute_extreme_bin_coordinates)
     {
-     // New values for number of bins in each direction - not needed
-//     mesh_geom_obj_pt->nx_bin()=Nx_bin;
-
      // New maxima and minima to be used in each direction
      mesh_geom_obj_pt->x_min()=X_min-Percentage_offset*(X_max-X_min);
      mesh_geom_obj_pt->x_max()=X_max+Percentage_offset*(X_max-X_min);
      if (EL_DIM_LAG>=2)
       {
-//       mesh_geom_obj_pt->ny_bin()=Ny_bin;
        mesh_geom_obj_pt->y_min()=Y_min-Percentage_offset*(Y_max-Y_min);
        mesh_geom_obj_pt->y_max()=Y_max+Percentage_offset*(Y_max-Y_min);
       }
      if (EL_DIM_LAG==3)
       {
-//       mesh_geom_obj_pt->nz_bin()=Nz_bin;
        mesh_geom_obj_pt->z_min()=Z_min-Percentage_offset*(Z_max-Z_min);;
        mesh_geom_obj_pt->z_max()=Z_max+Percentage_offset*(Z_max-Z_min);;
       }

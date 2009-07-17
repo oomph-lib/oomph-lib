@@ -15,7 +15,7 @@ and
 The document is part of a
 <a href="../../../example_code_list/html/index.html#distributed">
 series of tutorials</a>
-which discuss how to modify existing serial driver codes so that the
+that discuss how to modify existing serial driver codes so that the
 \c Problem object can be distributed across multiple processors.
 
 
@@ -137,7 +137,7 @@ To avoid this problem, we adopt the following strategy:
 -# Hence, in \c Problem::actions_after_adapt() we 
    delete the existing  \c FSISolidTractionElements and immediately 
    (re-)attach new ones. Now, the \c MeshAsGeomObject that represents the
-   FSI boundary is broken because it refers to the just deleted 
+   FSI boundary is broken because it still refers to the just deleted 
    \c FSISolidTractionElements. 
    \n\n
 @I w 0.75\textwidth fsi_with_adaptive_wall_new_face_elements "Sketch of the problem following the creation of new FSISolidTractionElements. The fact that the MeshAsGeomObject is broken is indicated by the dashed lines. "
@@ -174,10 +174,10 @@ boundary conditions in a Poisson problem </a> for more details.
 In the  <a href="../../fsi_channel_with_leaflet/html/index.html">
 previous example</a> 
 involving the interaction of a 2D fluid domain with a 1D beam
-structure there were only two meshes a "bulk" fluid mesh
-and a "surface" solid mesh. As described previously, 
+structure there were only two meshes: a "bulk" fluid mesh
+and a "surface" solid mesh. In that problem
 \b all elements in the
-1D mesh of \c FSIHermiteBeamElements are retained on all processors 
+1D mesh of \c FSIHermiteBeamElements were retained on all processors 
 as halo elements by using the function 
 \c Mesh::keep_all_elements_as_halos(). The 
 same methodology could be used here, but it would be extremely wasteful
@@ -205,7 +205,7 @@ the fluid and solid meshes, and (ii) the problem distribution.
 As usual in a parallel driver code, the only addition to the \c main()
 function is the inclusion of calls to \c MPI_Helpers::init(), \c
 MPI_Helpers::finalize(), and the \c Problem::distribute()
-function. 
+functions. 
 
 <HR>
 
@@ -251,8 +251,8 @@ to indicate that the associated bulk elements must be retained.
 
 Next, we flush all the meshes from the problem's
 collection of sub-meshes and add only the "bulk" fluid and solid
-meshes (in that order!) because the \c FaceElement's do not need to be
-distributed, they will be recreated in \c actions_after_distribute().
+meshes (in that order!). The \c FaceElements do not need to be
+distributed, because they will be re-created in \c actions_after_distribute().
 
 \until end of actions before distribute
 
@@ -297,11 +297,11 @@ Finally, we re-set the fluid load on the solid elements by
 calling \c FSI_functions::setup_fluid_load_info_for_solid_elements(...)
 before re-assigning the auxiliary node update function that imposes the 
 no-slip condition for all fluid nodes on the FSI boundaries.
-(<a href="../../fsi_channel_with_leaflet/html/index.html#action_after_adapt">
+[<a href="../../fsi_channel_with_leaflet/html/index.html#action_after_adapt">
 Recall</a>
 that the (re-)assignment of the auxiliary node-update function
 must be performed \b after the call to  \c
-FSI_functions::setup_fluid_load_info_for_solid_elements(...).
+FSI_functions::setup_fluid_load_info_for_solid_elements(...).]
 
 \until end of (re-)assignment of the auxiliary node update fct
 

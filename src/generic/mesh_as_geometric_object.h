@@ -60,6 +60,12 @@ class MeshAsGeomObject : public GeomObject
 
 private:
 
+ /// \short  Helper function for constructor: Oass the pointer to the mesh, 
+ /// communicator and boolean
+ ///to specify whether to calculate coordinate extrema or not
+ void construct_it(Mesh* const &mesh_pt, OomphCommunicator* comm_pt,
+                   const bool& compute_extreme_bin_coords);
+
  /// \short Vector of pointers to Data items that affects the object's shape
  Vector<Data*> Geom_data_pt;
 
@@ -90,14 +96,50 @@ private:
 public:
  
 // using namespace Multi_domain_functions;
+ 
+ 
+ ///\short Constructor, pass the pointer to the mesh
+  MeshAsGeomObject(Mesh* const &mesh_pt) :
+ GeomObject(DIM_LAGRANGIAN,DIM_EULERIAN)
+  {
+   OomphCommunicator* comm_pt=0;
+   bool compute_extreme_bin_coords=true;
+   this->construct_it(mesh_pt,comm_pt,compute_extreme_bin_coords);
+  }
 
- ///Constructor, pass the pointer to the mesh, optional communicator and
- ///optional boolean to bypass the computation of the extreme coordinates
+
+ ///\short Constructor, pass the pointer to the mesh and communicator
+  MeshAsGeomObject(Mesh* const &mesh_pt,
+                   OomphCommunicator* comm_pt) :
+ GeomObject(DIM_LAGRANGIAN,DIM_EULERIAN)
+  {
+   bool compute_extreme_bin_coords=true;
+   this->construct_it(mesh_pt,comm_pt,compute_extreme_bin_coords);
+  }
+
+ ///\short Constructor, pass the pointer to the mesh and 
+ /// boolean to bypass the computation of the extreme coordinates
  ///of the bin used in the locate_zeta method
  MeshAsGeomObject(Mesh* const &mesh_pt,
-                  OomphCommunicator* comm_pt=0,
-                  const bool& compute_extreme_bin_coords=true);
+                  const bool& compute_extreme_bin_coords) :
+ GeomObject(DIM_LAGRANGIAN,DIM_EULERIAN)
+  {
+   OomphCommunicator* comm_pt=0;
+   this->construct_it(mesh_pt,comm_pt,compute_extreme_bin_coords);
+  }
 
+
+ ///\short Constructor, pass the pointer to the mesh, communicator, and 
+ /// boolean to bypass the computation of the extreme coordinates
+ ///of the bin used in the locate_zeta method
+ MeshAsGeomObject(Mesh* const &mesh_pt,
+                  OomphCommunicator* comm_pt,
+                  const bool& compute_extreme_bin_coords) :
+ GeomObject(DIM_LAGRANGIAN,DIM_EULERIAN)
+  {
+   this->construct_it(mesh_pt,comm_pt,compute_extreme_bin_coords);
+  }
+ 
  /// Empty constructor
  MeshAsGeomObject(){} 
 

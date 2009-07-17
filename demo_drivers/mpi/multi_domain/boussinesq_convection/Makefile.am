@@ -7,9 +7,20 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 # Name of executable
 check_PROGRAMS= \
 refineable_b_convection \
-multimesh_boussinesq_convection \
-multimesh_boussinesq_convection_fd \
-multimesh_ind_ref_b_convection
+multi_domain_boussinesq_convection \
+multi_domain_boussinesq_convection_fd \
+multi_domain_ref_b_convection
+
+#----------------------------------------------------------------------
+
+# Sources for executable
+multi_domain_ref_b_convection_SOURCES = multi_domain_ref_b_convection.cc
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+multi_domain_ref_b_convection_LDADD = \
+                -L@libdir@ -ladvection_diffusion -lnavier_stokes  \
+                -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
 #----------------------------------------------------------------------
 
@@ -25,46 +36,31 @@ refineable_b_convection_LDADD = \
 #----------------------------------------------------------------------
 
 # Sources for executable
-multimesh_boussinesq_convection_SOURCES = multimesh_boussinesq_convection.cc
+multi_domain_boussinesq_convection_SOURCES = multi_domain_boussinesq_convection.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
-multimesh_boussinesq_convection_LDADD = \
+multi_domain_boussinesq_convection_LDADD = \
                 -L@libdir@ -ladvection_diffusion -lnavier_stokes  \
                 -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
 #----------------------------------------------------------------------
 
 # Sources for executable
-multimesh_boussinesq_convection_fd_SOURCES = multimesh_boussinesq_convection.cc
+multi_domain_boussinesq_convection_fd_SOURCES = multi_domain_boussinesq_convection.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
-multimesh_boussinesq_convection_fd_LDADD = \
+multi_domain_boussinesq_convection_fd_LDADD = \
                 -L@libdir@ -ladvection_diffusion -lnavier_stokes  \
                 -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
-multimesh_boussinesq_convection_fd_CXXFLAGS = \
- -DUSE_FD_JACOBIAN_FOR_NAVIER_STOKES_ELEMENT \
- -DUSE_FD_JACOBIAN_FOR_ADVECTION_DIFFUSION_ELEMENT
+multi_domain_boussinesq_convection_fd_CXXFLAGS = -DUSE_FD_JACOBIAN
 
 #----------------------------------------------------------------------
 
-# Sources for executable
-multimesh_ind_ref_b_convection_SOURCES = \
- multimesh_ind_ref_b_convection.cc \
- my_boussinesq_elements.h
-
-# Required libraries:
-# $(FLIBS) is included in case the solver involves fortran sources.
-multimesh_ind_ref_b_convection_LDADD = \
-                -L@libdir@ -ladvection_diffusion -lnavier_stokes  \
-                -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
-
-#----------------------------------------------------------------------
-
-EXTRA_DIST += multimesh_boussinesq_partition.dat \
-              multimesh_ind_ref_b_partition.dat \
+EXTRA_DIST += multi_domain_boussinesq_partition.dat \
+              multi_domain_ind_ref_b_partition.dat \
               refineable_b_convection_partition.dat
 
 # Include path for library headers: All library headers live in 

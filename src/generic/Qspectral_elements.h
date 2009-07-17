@@ -392,7 +392,14 @@ public:
  void get_s_plot(const unsigned& i, const unsigned& nplot,
                  Vector<double>& s)
   {
-   s[0]=-1.0+2.0*double(i)/double(nplot-1);
+   if (nplot>1)
+    {
+     s[0]=-1.0+2.0*double(i)/double(nplot-1);
+    }
+   else
+    {
+     s[0]=0.0;
+    }
   }
  
  /// \short Return string for tecplot zone header (when plotting 
@@ -641,11 +648,19 @@ public:
  void get_s_plot(const unsigned& i, const unsigned& nplot,
                  Vector<double>& s)
   {
-   unsigned i0=i%nplot;
-   unsigned i1=(i-i0)/nplot;
-   
-   s[0]=-1.0+2.0*double(i0)/double(nplot-1);
-   s[1]=-1.0+2.0*double(i1)/double(nplot-1);
+   if (nplot>1)
+    {
+     unsigned i0=i%nplot;
+     unsigned i1=(i-i0)/nplot;
+     
+     s[0]=-1.0+2.0*double(i0)/double(nplot-1);
+     s[1]=-1.0+2.0*double(i1)/double(nplot-1);
+    }
+   else
+    {
+     s[0]=0.0;
+     s[1]=0.0;
+    }
   }
 
  
@@ -931,16 +946,25 @@ public:
  /// nplot points in each "coordinate direction).
  void get_s_plot(const unsigned& i, const unsigned& nplot,
                  Vector<double>& s)
-  {
-   unsigned i01=i%(nplot*nplot);
-   unsigned i0=i01%nplot;
-   unsigned i1=(i01-i0)/nplot;
-   unsigned i2=(i-i01)/(nplot*nplot);
-   
-   s[0]=-1.0+2.0*double(i0)/double(nplot-1);
-   s[1]=-1.0+2.0*double(i1)/double(nplot-1);
-   s[2]=-1.0+2.0*double(i2)/double(nplot-1);
-  }
+ {
+  if (nplot>1)
+   {
+    unsigned i01=i%(nplot*nplot);
+    unsigned i0=i01%nplot;
+    unsigned i1=(i01-i0)/nplot;
+    unsigned i2=(i-i01)/(nplot*nplot);
+    
+    s[0]=-1.0+2.0*double(i0)/double(nplot-1);
+    s[1]=-1.0+2.0*double(i1)/double(nplot-1);
+    s[2]=-1.0+2.0*double(i2)/double(nplot-1);
+   }
+  else
+   {
+    s[0]=0.0;
+    s[1]=0.0;
+    s[2]=0.0;
+   }
+ }
 
  
  /// \short Return string for tecplot zone header (when plotting 

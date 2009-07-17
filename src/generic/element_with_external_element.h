@@ -233,6 +233,11 @@ class ElementWithExternalElement : public virtual FiniteElement
    /// to re-enable inclusion of external geometric data
    void include_external_geometric_data() {Add_external_geometric_data = true;}
 
+   /// \short Is the external geometric data taken into account when forming
+   /// the Jacobian?
+   bool external_geometric_data_is_included() const
+   {return Add_external_geometric_data;}
+   
     protected:
 
    /// \short Overload the assign internal and external local equation

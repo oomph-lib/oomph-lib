@@ -2092,30 +2092,7 @@ public:
  /// function since it can only be implemented in conjunction
  /// with a node-update strategy. A specific implementation
  /// is provided in the ElementWithMovingNodes class.
- /// \n\n
- /// Since this function is typically only called during the setup 
- /// of an FSI problem it is extremely unlikely that it is called
- /// without having been overloaded in such an element. After all, 
- /// the fact that the nodes in the fluid mesh move in response to 
- /// changes in the domain boundaries is a key feature of FSI problems! 
- /// We therefore issue a warning when this default empty version
- /// is executed.
- virtual void identify_geometric_data(std::set<Data*> &geometric_data_pt) 
-  {
-   std::ostringstream warn_message;
-   warn_message
-    << "Warning: The default (empty) "
-    << "FiniteElement::identify_geometric_data(...) function\n"
-    << "has been called. This seems extremely suspicious as this \n" 
-    << "function is usually only executed when setting up FSI problems. \n"
-    << "In that case, the update of the nodal positions in the fluid\n"
-    << "mesh in response to changes in the domain boundary introduces \n"
-    << "a dependency of the fluid traction on at least some geometric Data.\n"
-    << "This dependency should be encapsulated in this function!\n";
-   OomphLibWarning(warn_message.str(),
-                   "FiniteElement::identify_geometric_data()",
-                   OOMPH_EXCEPTION_LOCATION);
-  }
+ virtual void identify_geometric_data(std::set<Data*> &geometric_data_pt){}
 
 
  /// Min value of local coordinate

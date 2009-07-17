@@ -46,15 +46,15 @@ namespace oomph
 {
 
 //========================================================================
-///Constructor, pass the pointer to the mesh, communicator and boolean
+/// Helper function for constructor: Oass the pointer to the mesh, 
+/// communicator and boolean
 ///to specify whether to calculate coordinate extrema or not
 //========================================================================
  template<unsigned DIM_LAGRANGIAN, unsigned DIM_EULERIAN, class ELEMENT>
- MeshAsGeomObject<DIM_LAGRANGIAN,DIM_EULERIAN,ELEMENT>::MeshAsGeomObject
+ void MeshAsGeomObject<DIM_LAGRANGIAN,DIM_EULERIAN,ELEMENT>::construct_it
  (Mesh* const &mesh_pt, OomphCommunicator* comm_pt,
-  const bool& compute_extreme_bin_coords) :
-  GeomObject(DIM_LAGRANGIAN,DIM_EULERIAN)
-  {
+  const bool& compute_extreme_bin_coords)
+ {
 #ifdef OOMPH_HAS_MPI
    // Set communicator
    Communicator_pt=comm_pt;
@@ -111,13 +111,12 @@ namespace oomph
 
    // Get the default parameters for the number of bins in each 
    // dimension from the Multi_domain_functions namespace
-   using namespace Multi_domain_functions;
-
+   
    // Parameters are at Nx_bin, Ny_bin, Nz_bin
-   Nbin_x=Nx_bin;
-   Nbin_y=Ny_bin;
-   Nbin_z=Nz_bin;
-
+   Nbin_x=Multi_domain_functions::Nx_bin;
+   Nbin_y=Multi_domain_functions::Ny_bin;
+   Nbin_z=Multi_domain_functions::Nz_bin;
+   
    // Are we computing the extreme bin coordinates here?
    if (compute_extreme_bin_coords)
     {
@@ -128,6 +127,10 @@ namespace oomph
      create_bins_of_objects();
     }
   }
+
+
+
+
 
 
 //========================================================================
@@ -425,7 +428,7 @@ namespace oomph
     {
      ELEMENT* el_pt=dynamic_cast<ELEMENT*>(mesh_pt->element_pt(e));
 
-     // Get the number of vertices (call nplot_points with nplot=2)
+     // Get the number of vertices (nplot=2 does the trick)
      unsigned n_plot=2;
      unsigned n_plot_points=el_pt->nplot_points(n_plot);
 
@@ -629,8 +632,8 @@ namespace oomph
      ELEMENT* el_pt=dynamic_cast<ELEMENT*>(Sub_geom_object_pt[e]);
 
      // Get specified number of points within the element
-     unsigned n_plot=5;
-     unsigned n_plot_points=el_pt->nplot_points(n_plot);
+     unsigned n_plot_points=
+      el_pt->nplot_points(Multi_domain_functions::Nsample_points);
 
      for (unsigned i=0;i<n_plot_points;i++)
       {
@@ -639,7 +642,7 @@ namespace oomph
        Vector<double> global_coord(DIM_LAGRANGIAN,0.0);
 
        // Get local coordinate and interpolate to global
-       el_pt->get_s_plot(i,n_plot,local_coord);
+       el_pt->get_s_plot(i,Multi_domain_functions::Nsample_points,local_coord);
        el_pt->interpolated_zeta(local_coord,global_coord);
 
        //Which bin are the global coordinates in?

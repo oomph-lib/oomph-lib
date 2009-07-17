@@ -124,15 +124,16 @@ Vector<double>& ElementWithExternalElement::external_element_local_coord(
 \endcode
 
 For a given integration point, \c ipt, within the \c
-ElementWithExternalElement, these functions return a pointer to the
-"external element" and its local coordinate corresponding to the
-same spatial position as the specific integration point, respectively.
+ElementWithExternalElement, these functions 
+identify the corresponding point in the "external element" by
+returning a pointer to the "external element" and the local coordinate 
+within it, respectively.
 The unsigned parameter \c interaction denotes the interaction
 index, required if an element interacts with more
 than one "external element". This occurs, for instance, in double-diffusive
-convection problems, see the <a
+convection problems (discussed in  <a
 href="../../../../demo_drivers/multi_physics/double_diffusive_convection/multimesh_dd_convection.cc">
-example driver code </a>, in which the body force 
+a separate demo driver code </a>, in which the body force 
 in the Navier-Stokes equations is affected by two physical properties,
 <em> e.g.</em> temperature and salinity, both of which are transported by
 separate advection-diffusion processes; 
@@ -148,7 +149,7 @@ derivatives of the \c ElementWithExternalElement's residual vector
 with respect to the \c Data in the "external elements")
 can be calculated. We divide such data into two categories:
 - <em> External field data: </em> all \c Data that affects the 
-fields by which the "external element" interacts with 
+fields by which the "external element" interacts with the
 \c ElementWithExternalElement.
 .
 - <em> External geometric data: </em> all geometric \c Data that affects
@@ -160,7 +161,7 @@ data's contribution to the interaction blocks in the Jacobian matrix
 can be found analytically, whereas the geometric
 data is more easily handled by finite differencing.
 
-The types of external data are determined (automatically) by two member
+Both types of external data are determined (automatically) by two member
 functions of the \c ElementWithExternalElement. The first one,
 
 \code
@@ -237,7 +238,7 @@ comments </a> section of the single-domain version of the problem
 and re-use the underlying element's \c fill_in_contribution_to_jacobian(...) 
 function, while employing finite-differencing to evaluate the derivatives
 of the element's residual vector with respect to the unknowns
-associated with the "external element". This is done most easily by
+associated with the "external elements". This is done most easily by
 using the function
 
 \code
@@ -272,7 +273,7 @@ ElementWithExternalElement::ignore_external_geometric_data();
 
 Depending on the complexity of the interaction terms, it may be
 worthwhile to provide a function that computes the off-diagonal
-blocks analytically, discussed in more detail in
+blocks analytically. This is discussed in more detail in
 <a href="#optimise"><b>Part IV</b></a>.
 
 
@@ -282,7 +283,8 @@ blocks analytically, discussed in more detail in
 
 The namespace \c Multi_domain_functions provides numerous helper
 functions that facilitate the setup of multi-domain interactions.
-Specifically, the function \c Multi_domain_functions::set_sources(...)
+Specifically, the function 
+\c Multi_domain_functions::setup_multi_domain_interactions(...)
 can be used to identify the "external elements" in a two-way
 interaction between two meshes. The function has the following
 interface:
@@ -371,7 +373,8 @@ There is only one external interaction so that interaction index is
 set to zero and the value of the temperature at the integration point
 is obtained by casting the external element to an \c
 AdvectionDiffusionElement and finding its interpolated field at the
-appropriate stored local coordinate. Once the temperature has been obtained the
+appropriate stored local coordinate. Once the temperature has been
+obtained, the
 code is identical to that in the multi-field
 \c BuoyantQCrouzeixRaviartElement. In that case, however, the
 temperature can be found from a member function because the
@@ -446,7 +449,7 @@ multi-field \c BuoyantQCrouzeixRaviartElement's \c get_wind_adv_diff()
 function, which uses internal, rather than external, interaction.
 
 The element's Jacobian matrix can be computed by the
-different methods discussed for the Navier-Stokes elements:
+same methods discussed for the Navier-Stokes elements:
 
 \skipline Compute the element
 \until }
@@ -497,7 +500,7 @@ interaction between the two meshes must be set up again.
 \subsection constructor The Problem constructor
 
 The problem constructor is slightly different from the equivalent
-single-domain version mainly because there are two meshes instead of
+single-domain version, mainly because there are two meshes instead of
 one. Firstly, we build two coarse meshes with the same number of
 elements (\f$ 9 \times 8 \f$, as in the original single-domain problem) and
 dimensions for each mesh. Error estimators and error targets are set
