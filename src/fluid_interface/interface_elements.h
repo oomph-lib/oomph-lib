@@ -38,6 +38,7 @@
 #include "../generic/elements.h"
 #include "../generic/spines.h"
 #include "../generic/shape.h"
+#include "../generic/hijacked_elements.h"
 
 namespace oomph
 {
@@ -299,14 +300,14 @@ public:
 //===================================================================== 
 template<class ELEMENT>
 class SpinePointFluidInterfaceEdgeElement : 
-public SpineElement<FaceGeometry<FaceGeometry<ELEMENT> > >,
+public Hijacked< SpineElement<FaceGeometry<FaceGeometry<ELEMENT> > > >,
 public PointFluidInterfaceEdgeElement
                                        
 {
   public:
  
  SpinePointFluidInterfaceEdgeElement() : 
-  SpineElement<FaceGeometry<FaceGeometry<ELEMENT> > >(),
+  Hijacked<SpineElement<FaceGeometry<FaceGeometry<ELEMENT> > > >(),
   PointFluidInterfaceEdgeElement() {}
 
  /// Overload the output function
@@ -402,14 +403,14 @@ public PointFluidInterfaceEdgeElement, public virtual SolidFiniteElement
 
 template<class ELEMENT>
 class SpineLineFluidInterfaceEdgeElement : public 
- SpineElement<FaceGeometry<FaceGeometry<ELEMENT> > >,
+ Hijacked<SpineElement<FaceGeometry<FaceGeometry<ELEMENT> > > >,
  public LineFluidInterfaceEdgeElement
                                        
 {
   public:
  
  SpineLineFluidInterfaceEdgeElement() : 
-  SpineElement<FaceGeometry<FaceGeometry<ELEMENT> > >(),
+  Hijacked<SpineElement<FaceGeometry<FaceGeometry<ELEMENT> > > >(),
   LineFluidInterfaceEdgeElement() {}
 
  /// Overload the output function

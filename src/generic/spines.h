@@ -362,11 +362,17 @@ public:
  /// the update function in the Node's SpineMesh
  void node_update(const bool& update_all_time_levels_for_new_node=false);
 
- /// Return the number of geometric data
- unsigned ngeom_data() const {return Spine_pt->ngeom_data();}
+ /// \short Return the number of geometric data, zero if no spine.
+ unsigned ngeom_data() const {
+  if(Spine_pt) {return Spine_pt->ngeom_data();}
+  else {return 0;}
+ }
  
- /// Return the number of geometric objects
- unsigned ngeom_object() const {return Spine_pt->ngeom_object();}
+ /// Return the number of geometric objects, zero if no spine.
+ unsigned ngeom_object() const {
+  if(Spine_pt) {return Spine_pt->ngeom_object();}
+  else {return 0;}
+ }
 
  ///Return the vector of all geometric data
  Data** all_geom_data_pt() 
@@ -469,6 +475,21 @@ public:
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+
+#ifdef PARANOID
+   //If there is no spine then you can't get the local equation
+   if(Spine_geometric_index[n]==this->ngeom_data())
+    {
+     std::ostringstream error_stream;
+     error_stream 
+      << "SpineNode " << n << " does not have a Spine attached,\n"
+      << "so you can't get its local equation number.\n"
+      << "Check that the Mesh is correctly associating Spines with is Nodes\n";
+     throw OomphLibError(error_stream.str(),
+                         "SpineElement<ELEMENT>::spine_local_eqn()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
    return this->geometric_data_local_eqn(Spine_geometric_index[n],0);
   }
 
@@ -554,6 +575,10 @@ public:
 
  /// Return the number of spines in the mesh
  unsigned long nspine() {return Spine_pt.size();}
+
+ /// Add a spine to the mesh
+ void add_spine_pt(Spine* const &spine_pt)
+  {Spine_pt.push_back(spine_pt);}
  
  /// Return a pointer to the n-th global SpineNode 
  //Can safely cast the nodes to SpineNodes
@@ -666,20 +691,33 @@ void SpineElement<ELEMENT>::complete_setup_of_dependencies()
   //Now loop over data and find out where it fits
   for(unsigned n=0;n<n_node;n++)
    {
-    //Find the pointer to the data
-    Data* spine_height_data_pt = 
-     static_cast<SpineNode*>(
-      this->node_pt(n))->spine_pt()->spine_height_pt();
-    
-    //Now find the index of the corresponding spine
-    const unsigned n_node_update_data = this->Geom_data_pt.size();
-    for(unsigned i=0;i<n_node_update_data;i++)
+    //Find pointer to the spine
+    Spine* const spine_pt = static_cast<SpineNode*>(
+     this->node_pt(n))->spine_pt();
+
+    //If there is a spine then find the pointer to the data
+    if(spine_pt)
      {
-      if(this->Geom_data_pt[i]==spine_height_data_pt)
+      //Find the pointer to the data
+      Data* spine_height_data_pt =  spine_pt->spine_height_pt();
+      
+      //Now find the index of the corresponding spine
+      const unsigned n_node_update_data = this->ngeom_data();
+      for(unsigned i=0;i<n_node_update_data;i++)
        {
-        Spine_geometric_index[n] = i;
-        break;
+        if(this->Geom_data_pt[i]==spine_height_data_pt)
+         {
+          Spine_geometric_index[n] = i;
+          break;
+         }
        }
+     }
+    //Otherwise issue a warning
+    else
+     {
+      //Set the spine_geometric_index out of range,
+      //which will cause the spine_local_eqn to return a pinned value
+      Spine_geometric_index[n] = this->ngeom_data();
      }
    }
  }

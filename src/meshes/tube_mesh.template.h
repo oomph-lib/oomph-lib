@@ -126,7 +126,7 @@ protected:
 ///
 //=============================================================
 template<class ELEMENT> 
-class RefineableTubeMesh : public virtual TubeMesh<ELEMENT>,
+class RefineableTubeMesh : public TubeMesh<ELEMENT>,
   public RefineableBrickMesh<ELEMENT>
   
 {

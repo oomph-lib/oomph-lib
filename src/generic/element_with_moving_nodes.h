@@ -258,12 +258,12 @@ namespace oomph
  /// node update operations, i.e. the variables that can affect
  /// the position of the node. 
  Vector<Data*> Geom_data_pt;
-
-private: 
  
  /// \short Return the number of geometric data upon which the shape
  /// of the element depends
  unsigned ngeom_data() const {return Geom_data_pt.size();}
+
+private: 
 
  /// \short Array to hold local eqn number information for the
  /// geometric Data variables

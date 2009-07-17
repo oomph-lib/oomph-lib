@@ -8,6 +8,7 @@ two_layer_interface \
 three_d_free_surface \
 adaptive_interface \
 bretherton \
+three_d_bretherton \
 static_cap \
 three_d_entry_flow \
 curved_pipe \
