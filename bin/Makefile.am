@@ -28,7 +28,9 @@ EXTRA_DIST=build_mesh_makefile.sh change_headers_to_links.sh fpdiff.py\
 	   build_oomph_html_header.sh count_lines.sh \
            compare_file_length_with_tolerance.bash customise_latex.bash \
            oomph-convert  oomph-convert.py makePvd \
-           find_missing_doxygen_hooks.sh big_diff.bash
+           find_missing_doxygen_hooks.sh big_diff.bash \
+           make_all_distributions.bash \
+           destruct_test_distribution.bash
 
 
 fig2poly:

@@ -1846,9 +1846,11 @@ int main(int argc, char *argv[])
  oomph_info << "Amplitude=" << amplitude
             << "\nPeriod=" << period << "\n";
  
- // Solver stuff
- Preconditioner* p_preconditioner_pt=0;
- Preconditioner* f_preconditioner_pt=0;
+ // Solver stuff (definitions needed if hypre and trilinos are around)
+ Preconditioner* p_preconditioner_pt;
+ p_preconditioner_pt=0;
+ Preconditioner* f_preconditioner_pt;
+ f_preconditioner_pt=0;
  GMRES<CRDoubleMatrix>* iterative_solver_pt=0;
  NavierStokesLSCPreconditioner* ns_preconditioner_pt=0; 
  
