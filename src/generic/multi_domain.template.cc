@@ -73,116 +73,23 @@ namespace oomph
   (Problem* problem_pt,Mesh* const &first_mesh_pt, Mesh* const &second_mesh_pt,
    const unsigned& first_interaction, const unsigned& second_interaction)
   {
-   // Storage for number of processors, current process and communicator
-   OomphCommunicator* comm_pt=problem_pt->communicator_pt();
-   int n_proc=comm_pt->nproc();
-
    // Flush all the current external halo(ed) element and node storage
    first_mesh_pt->flush_all_external_storage();
    second_mesh_pt->flush_all_external_storage();
 
-   // Extract the element dimensions from the first element of each mesh
-   unsigned el_dim_first=0;
-   if (first_mesh_pt->nelement() > 0)
-    {
-     el_dim_first=
-      dynamic_cast<ELEMENT_0*>(first_mesh_pt->element_pt(0))->dim();
-    }
-   unsigned el_dim_second=0;
-   if (second_mesh_pt->nelement() > 0)
-    {
-     el_dim_second=
-      dynamic_cast<ELEMENT_1*>(second_mesh_pt->element_pt(0))->dim();
-    }
-
-   // Need to do an Allreduce
-#ifdef OOMPH_HAS_MPI
-   if (n_proc > 1)
-    {
-     unsigned el_dim_first_reduce;
-     MPI_Allreduce(&el_dim_first,&el_dim_first_reduce,1,MPI_INT,MPI_MAX,
-                   comm_pt->mpi_comm());
-     el_dim_first=el_dim_first_reduce;
-
-     unsigned el_dim_second_reduce;
-     MPI_Allreduce(&el_dim_second,&el_dim_second_reduce,1,MPI_INT,MPI_MAX,
-                   comm_pt->mpi_comm());
-     el_dim_second=el_dim_second_reduce;
-    }
-#endif
-
-   // Check the dimensions are the same!
-   if (el_dim_first!=el_dim_second)
-    {
-     std::ostringstream error_stream;
-     error_stream << "The elements within the two meshes do not\n"
-                  << "have the same dimension, so the multi-domain\n"
-                  << "method will not work.\n"
-                  << "first mesh: " << el_dim_first 
-                  << ", second mesh: " << el_dim_second << "\n";
-     throw OomphLibError
-      (error_stream.str(),
-       "Multi_domain_functions::setup_multi_domain_interactions(...)",
-       OOMPH_EXCEPTION_LOCATION);
-    }
-
    // Call setup_multi_domain_interaction in both directions
    // Don't check for duplicates after setting the first interaction
-   // Wrapper for element dimension
-   if (el_dim_first==1)
-    {
 #ifdef OOMPH_HAS_MPI
-     Check_for_duplicates=false;
+   Check_for_duplicates=false;
 #endif
-     setup_multi_domain_interaction<ELEMENT_1,1>
-      (problem_pt,first_mesh_pt,second_mesh_pt,first_interaction);
+   setup_multi_domain_interaction<ELEMENT_1>
+    (problem_pt,first_mesh_pt,second_mesh_pt,first_interaction);
 
 #ifdef OOMPH_HAS_MPI
-     Check_for_duplicates=true;
+   Check_for_duplicates=true;
 #endif
-     setup_multi_domain_interaction<ELEMENT_0,1>
-      (problem_pt,second_mesh_pt,first_mesh_pt,second_interaction);
-    }
-   else if (el_dim_first==2)
-    {
-#ifdef OOMPH_HAS_MPI
-     Check_for_duplicates=false;
-#endif
-     setup_multi_domain_interaction<ELEMENT_1,2>
-      (problem_pt,first_mesh_pt,second_mesh_pt,first_interaction);
-
-#ifdef OOMPH_HAS_MPI
-     Check_for_duplicates=true;
-#endif
-     setup_multi_domain_interaction<ELEMENT_0,2>
-      (problem_pt,second_mesh_pt,first_mesh_pt,second_interaction);
-    }
-   else if (el_dim_first==3)
-    {
-#ifdef OOMPH_HAS_MPI
-     Check_for_duplicates=false;
-#endif
-     setup_multi_domain_interaction<ELEMENT_1,3>
-      (problem_pt,first_mesh_pt,second_mesh_pt,first_interaction);
-
-#ifdef OOMPH_HAS_MPI
-     Check_for_duplicates=true;
-#endif
-     setup_multi_domain_interaction<ELEMENT_0,3>
-      (problem_pt,second_mesh_pt,first_mesh_pt,second_interaction);
-    }
-   else
-    {
-     std::ostringstream error_stream;
-     error_stream << "The elements within the two meshes have a\n"
-                  << "dimension not equal to 1, 2 or 3.\n"
-                  << "The multi-domain method will not work in this case.\n"
-                  << "The dimension is: " << el_dim_second << "\n";
-     throw OomphLibError
-      (error_stream.str(),
-       "Multi_domain_functions::setup_multi_domain_interactions(...)",
-       OOMPH_EXCEPTION_LOCATION);
-    }
+   setup_multi_domain_interaction<ELEMENT_0>
+    (problem_pt,second_mesh_pt,first_mesh_pt,second_interaction);
 
   }
 
@@ -202,15 +109,44 @@ namespace oomph
  ///   set by the user if there is more than one mesh that provides sources
  ///   for the Mesh pointed to by mesh_pt.
 //========================================================================
- template<class EXT_ELEMENT,unsigned EL_DIM>
+ template<class EXT_ELEMENT>
   void Multi_domain_functions::setup_multi_domain_interaction
   (Problem* problem_pt, Mesh* const &mesh_pt, Mesh* const &external_mesh_pt,
    const unsigned& interaction_index)
   {
    // Call the auxiliary function with GEOM_OBJECT=EXT_ELEMENT
-   // and EL_DIM_EUL=EL_DIM_LAG=EL_DIM
-   aux_setup_multi_domain_interaction<EXT_ELEMENT,EXT_ELEMENT,EL_DIM,EL_DIM>
-    (problem_pt,mesh_pt,external_mesh_pt,interaction_index);
+   // and EL_DIM_EUL=EL_DIM_LAG=dimension returned from helper function
+   unsigned dim=0;
+   get_dim_helper(problem_pt,mesh_pt,external_mesh_pt,dim);
+
+   // Wrapper for each dimension (template parameter)
+   if (dim==1)
+    {
+     aux_setup_multi_domain_interaction<EXT_ELEMENT,EXT_ELEMENT,1,1>
+      (problem_pt,mesh_pt,external_mesh_pt,interaction_index);
+    }
+   else if (dim==2)
+    {
+     aux_setup_multi_domain_interaction<EXT_ELEMENT,EXT_ELEMENT,2,2>
+      (problem_pt,mesh_pt,external_mesh_pt,interaction_index);
+    }
+   else if (dim==3)
+    {
+     aux_setup_multi_domain_interaction<EXT_ELEMENT,EXT_ELEMENT,3,3>
+      (problem_pt,mesh_pt,external_mesh_pt,interaction_index);
+    }
+   else
+    {
+     std::ostringstream error_stream;
+     error_stream << "The elements within the two interacting meshes have a\n"
+                  << "dimension not equal to 1, 2 or 3.\n"
+                  << "The multi-domain method will not work in this case.\n"
+                  << "The dimension is: " << dim << "\n";
+     throw OomphLibError
+      (error_stream.str(),
+       "Multi_domain_functions::setup_multi_domain_interaction(...)",
+       OOMPH_EXCEPTION_LOCATION);
+    }
   }
 
 
@@ -239,7 +175,7 @@ namespace oomph
  ///   elements" for the Mesh pointed to by mesh_pt (e.g. in the case
  ///   when a beam or shell structure is loaded by fluid from both sides.)
 //========================================================================
- template<class EXT_ELEMENT,class FACE_ELEMENT_GEOM_OBJECT,unsigned EL_DIM>
+ template<class EXT_ELEMENT,class FACE_ELEMENT_GEOM_OBJECT>
   void Multi_domain_functions::setup_multi_domain_interaction
   (Problem* problem_pt, Mesh* const &mesh_pt, Mesh* const &external_mesh_pt,
    Mesh* const &external_face_mesh_pt, const unsigned& interaction_index)
@@ -248,11 +184,36 @@ namespace oomph
    Use_bulk_element_as_external=true;
 
    // Call the auxiliary routine with GEOM_OBJECT=FACE_ELEMENT_GEOM_OBJECT
-   // and EL_DIM_LAG=EL_DIM-1, EL_DIM_EUL=EL_DIM
-   aux_setup_multi_domain_interaction
-    <EXT_ELEMENT,FACE_ELEMENT_GEOM_OBJECT,EL_DIM-1,EL_DIM>
-    (problem_pt,mesh_pt,external_mesh_pt,
-     interaction_index,external_face_mesh_pt);
+   // and EL_DIM_LAG=dim, EL_DIM_EUL=dim+1
+   unsigned dim=0;
+   get_dim_helper(problem_pt,mesh_pt,external_face_mesh_pt,dim);
+
+   if (dim==1)
+    {
+     aux_setup_multi_domain_interaction
+      <EXT_ELEMENT,FACE_ELEMENT_GEOM_OBJECT,1,2>
+      (problem_pt,mesh_pt,external_mesh_pt,
+       interaction_index,external_face_mesh_pt);
+    }
+   else if (dim==2)
+    {
+     aux_setup_multi_domain_interaction
+      <EXT_ELEMENT,FACE_ELEMENT_GEOM_OBJECT,2,3>
+      (problem_pt,mesh_pt,external_mesh_pt,
+       interaction_index,external_face_mesh_pt);
+    }
+   else
+    {
+     std::ostringstream error_stream;
+     error_stream << "The elements within the two interacting meshes have a\n"
+                  << "dimension not equal to 1 or 2.\n"
+                  << "The multi-domain method will not work in this case.\n"
+                  << "The dimension is: " << dim << "\n";
+     throw OomphLibError
+      (error_stream.str(),
+       "Multi_domain_functions::setup_multi_domain_interaction(...)",
+       OOMPH_EXCEPTION_LOCATION);
+    }
   }
 
 
@@ -332,16 +293,58 @@ namespace oomph
 
    if (!Compute_extreme_bin_coordinates)
     {
+     // Check X_min is less than X_max
+     if (X_min >= X_max)
+      {
+       std::ostringstream error_stream;
+       error_stream << "Minimum coordinate in the X direction of the bin\n"
+                    << "to be used in the multi-domain method is greater\n"
+                    << "than or equal to the maximum coordinate.\n"
+                    << "  X_min=" << X_min << ", X_max=" << X_max << "\n";
+       throw OomphLibError
+        (error_stream.str(),
+         "Multi_domain_functions::aux_setup_multi_domain_interactions(...)",
+         OOMPH_EXCEPTION_LOCATION);
+      }
+
      // New maxima and minima to be used in each direction
      mesh_geom_obj_pt->x_min()=X_min-Percentage_offset*(X_max-X_min);
      mesh_geom_obj_pt->x_max()=X_max+Percentage_offset*(X_max-X_min);
      if (EL_DIM_LAG>=2)
       {
+       // Check Y_min is less than Y_max
+       if (Y_min >= Y_max)
+        {
+         std::ostringstream error_stream;
+         error_stream << "Minimum coordinate in the Y direction of the bin\n"
+                      << "to be used in the multi-domain method is greater\n"
+                      << "than or equal to the maximum coordinate.\n"
+                      << "  Y_min=" << Y_min << ", Y_max=" << Y_max << "\n";
+         throw OomphLibError
+          (error_stream.str(),
+           "Multi_domain_functions::aux_setup_multi_domain_interactions(...)",
+           OOMPH_EXCEPTION_LOCATION);
+        }
+
        mesh_geom_obj_pt->y_min()=Y_min-Percentage_offset*(Y_max-Y_min);
        mesh_geom_obj_pt->y_max()=Y_max+Percentage_offset*(Y_max-Y_min);
       }
      if (EL_DIM_LAG==3)
       {
+       // Check Z_min is less than Z_max
+       if (Z_min >= Z_max)
+        {
+         std::ostringstream error_stream;
+         error_stream << "Minimum coordinate in the Z direction of the bin\n"
+                      << "to be used in the multi-domain method is greater\n"
+                      << "than or equal to the maximum coordinate.\n"
+                      << "  Z_min=" << Z_min << ", Z_max=" << Z_max << "\n";
+         throw OomphLibError
+          (error_stream.str(),
+           "Multi_domain_functions::aux_setup_multi_domain_interactions(...)",
+           OOMPH_EXCEPTION_LOCATION);
+        }
+
        mesh_geom_obj_pt->z_min()=Z_min-Percentage_offset*(Z_max-Z_min);;
        mesh_geom_obj_pt->z_max()=Z_max+Percentage_offset*(Z_max-Z_min);;
       }
@@ -406,6 +409,10 @@ namespace oomph
       }
     }
 
+   // Storage for info about coordinate location
+   Vector<double> coords_located_locally(n_max_level,0.0);
+   Vector<double> coords_located_elsewhere(n_max_level,0.0);
+   unsigned max_level_reached=1;
 
    // Loop over "spirals/levels" away from the current position
    for (unsigned i_level=0;i_level<n_max_level;i_level++)
@@ -423,11 +430,28 @@ namespace oomph
      locate_zeta_for_local_coordinates(mesh_pt,external_mesh_pt,
                                        mesh_geom_obj_pt,interaction_index);
 
+     // Store stats about successful locates for reporting later
      if (Doc_stats)
       {
-       oomph_info << "At level " << i_level << " percent discovered so far = " 
-                  << 100.0*double(tot_int-Count_local_zeta_dim)/double(tot_int)
-                  << " (on local processor) " << std::endl;
+       unsigned count_locates=0;
+       for (unsigned e=0;e<n_element;e++)
+        {
+         ElementWithExternalElement *el_pt=
+          dynamic_cast<ElementWithExternalElement*>(mesh_pt->element_pt(e));
+#ifdef OOMPH_HAS_MPI
+         if (!el_pt->is_halo())
+#endif
+          {
+           unsigned n_intpt=el_pt->integral_pt()->nweight();
+           for (unsigned ipt=0;ipt<n_intpt;ipt++)
+            {
+             count_locates+=External_element_located[e][ipt];
+            }
+          }
+        }
+       // Store percentage of integration points successfully located
+       coords_located_locally[i_level]=
+        100.0*double(count_locates)/double(tot_int);
       }
 
      if (Doc_timings) 
@@ -515,12 +539,28 @@ namespace oomph
       } // end if (all_count_zetas!=0)
 #endif
 
-     // Output information about location of elements for integration points
+     // Store information about location of elements for integration points
      if (Doc_stats)
       {
-       oomph_info << "At level " << i_level << " percent discovered so far = " 
-                  << 100.0*double(tot_int-Count_local_zeta_dim)/double(tot_int)
-                  << " (on the other processors) " << std::endl;
+       unsigned count_locates=0;
+       for (unsigned e=0;e<n_element;e++)
+        {
+         ElementWithExternalElement *el_pt=
+          dynamic_cast<ElementWithExternalElement*>(mesh_pt->element_pt(e));
+#ifdef OOMPH_HAS_MPI
+         if (!el_pt->is_halo())
+#endif
+          {
+           unsigned n_intpt=el_pt->integral_pt()->nweight();
+           for (unsigned ipt=0;ipt<n_intpt;ipt++)
+            {
+             count_locates+=External_element_located[e][ipt];
+            }
+          }
+        }
+       // Store total percentage of locates so far
+       coords_located_elsewhere[i_level]=
+        100.0*double(count_locates)/double(tot_int);
       }
 
      // Do we have any further locating to do?
@@ -534,6 +574,8 @@ namespace oomph
       }
 #endif
 
+     // Specify max level reached for later loop
+     max_level_reached=i_level+1;
      /// If all_count_zetas is now zero then break out of the spirals loop
      if (all_count_zetas==0) { break; }
 
@@ -554,81 +596,51 @@ namespace oomph
    // external storage information
    clean_up();
 
-   // Check for and remove duplicate equation numbers between external halo
-   // storage across different processors
-   // NB this only needs to be called in parallel
-#ifdef OOMPH_HAS_MPI
-   if (Check_for_duplicates)
-    {
-     // Only necessary to do this on a multi-processor job
-     if (n_proc!=1)
-      {
-       if (Doc_stats)
-        {
-         oomph_info << "Duplicate removal, number of global equation numbers:"
-                    << problem_pt->assign_eqn_numbers(false) << std::endl;
-        }
-       else
-        {
-         problem_pt->assign_eqn_numbers(false);
-        }
-
-       // Must remove duplicates from both meshes in a two-way interaction
-       remove_duplicate_data(problem_pt,external_mesh_pt);
-       remove_duplicate_data(problem_pt,mesh_pt);
-      }
-     else
-      {
-       if (Doc_stats)
-        {
-         oomph_info << "INFO: No need to remove duplicate equation numbers"
-                    << " on a single-process run, continuing" << std::endl;
-        }
-      }
-    }
-#endif
-
-   // Doc timings if required
-   if (Doc_timings)
-    {
-     t_end=TimingHelpers::timer();
-     oomph_info << "CPU for setup_multi_domain_interaction: "
-                << t_end-t_start << std::endl;
-    }
-
 #ifdef OOMPH_HAS_MPI
    // Output information about external storage if required
    if (Doc_stats)
     {
+     // Report stats regarding location method
+     oomph_info << "-------------------------------------------" << std::endl;
+     oomph_info << "- Cumulative percentage of locate success -" << std::endl; 
+     oomph_info << "--- Spiral -- Found local -- Found else ---" << std::endl;
+     for (unsigned level=0; level<max_level_reached; level++)
+      {
+       oomph_info << "---   " << level << "   -- " 
+                  << coords_located_locally[level] << " -- "
+                  << coords_located_elsewhere[level] << " ---" << std::endl;
+      }
+     oomph_info << "-------------------------------------------" << std::endl;
+
+
      // How many external elements does the external mesh have now?
      oomph_info << "------------------------------------------" << std::endl;
      oomph_info << "External mesh: I have " << external_mesh_pt->nelement()
-                << " elements, of which "
-                << external_mesh_pt->nroot_halo_element()
-                << " are root halo elements, and "
-                << external_mesh_pt->nroot_haloed_element() 
-                << " are root haloed elements, and there are " 
+                << " elements, and " << std::endl
                 << external_mesh_pt->nexternal_halo_element()
                 << " external halo elements, "
                 << external_mesh_pt->nexternal_haloed_element()
-                << " external haloed elements, and "
+                << " external haloed elements," << std::endl << "and "
                 << external_mesh_pt->nexternal_element()
-                << " external elements (on this process)." << std::endl;
+                << " external elements (on this processor)." << std::endl;
 
      // How many external nodes does each submesh have now?
      oomph_info << "------------------------------------------" << std::endl;
      oomph_info << "External mesh: I have " << external_mesh_pt->nnode()
-                << " nodes, of which " << external_mesh_pt->nhalo_node()
-                << " are halo nodes, and "
-                << external_mesh_pt->nhaloed_node() << " are haloed "
-                << "nodes" << std::endl
-                << "and there are " << external_mesh_pt->nexternal_halo_node()
+                << " nodes, and " << std::endl
+                << external_mesh_pt->nexternal_halo_node()
                 << " external halo nodes, "
                 << external_mesh_pt->nexternal_haloed_node()
-                << " external haloed nodes, and "
+                << " external haloed nodes," << std::endl << "and "
                 << external_mesh_pt->nexternal_node()
-                << " external nodes (already on this process)." << std::endl;
+                << " external nodes (already on this processor)." << std::endl;
+     oomph_info << "------------------------------------------" << std::endl;
+    }
 
+   // Output further information about (external) halo(ed)
+   // elements and nodes if required
+   if (Doc_full_stats)
+    {
      // How many elements does this submesh have for each of the processors?
      for (int iproc=0;iproc<n_proc;iproc++)
       {
@@ -659,7 +671,39 @@ namespace oomph
      oomph_info << "-----------------------------------------" << std::endl
                 << std::endl;
     }
+
+   // Check for and remove duplicate equation numbers between external halo
+   // storage across different processors
+   // NB this only needs to be called in parallel
+   if (Check_for_duplicates)
+    {
+     // Only necessary to do this on a multi-processor job
+     if (n_proc!=1)
+      {
+       if (Doc_stats)
+        {
+         oomph_info << "Duplicate removal, number of global equation numbers:"
+                    << problem_pt->assign_eqn_numbers(false) << std::endl;
+        }
+       else
+        {
+         problem_pt->assign_eqn_numbers(false);
+        }
+
+       // Must remove duplicates from both meshes in a two-way interaction
+       remove_duplicate_data(problem_pt,external_mesh_pt);
+       remove_duplicate_data(problem_pt,mesh_pt);
+      }
+    }
 #endif
+
+   // Doc timings if required
+   if (Doc_timings)
+    {
+     t_end=TimingHelpers::timer();
+     oomph_info << "CPU for setup_multi_domain_interaction: "
+                << t_end-t_start << std::endl;
+    }
 
   } // end of aux_setup_multi_domain_interaction
 

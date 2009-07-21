@@ -740,7 +740,7 @@ namespace FSI_functions
    // on the fluid mesh.  The interaction parameter in this instance is
    // given by the "face" parameter.
    Multi_domain_functions::setup_multi_domain_interaction
-    <FLUID_ELEMENT,FaceElementAsGeomObject<FLUID_ELEMENT>,DIM_FLUID>
+    <FLUID_ELEMENT,FaceElementAsGeomObject<FLUID_ELEMENT> >
     (problem_pt,solid_mesh_pt,fluid_mesh_pt,fluid_face_mesh_pt,face);
 
    // The source elements and coordinates have now all been set

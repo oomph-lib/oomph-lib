@@ -154,9 +154,10 @@ namespace Multi_domain_functions
   /// \short Minimum and maximum coordinates for
   /// each dimension of the bin structure used in
   /// MeshAsGeomObject::locate_zeta(...). 
-  /// No defaults; can be set by user if they know their mesh's coordinates
+  /// These can be set by user if they know their mesh's extreme coordinates
   /// (or the MeshAsGeomObject calculates these values by default based
   ///  upon the mesh itself; see MeshAsGeomObject::get_max_and_min_coords(...))
+  /// They default to "incorrect" values initially.
 
   /// \short Minimum coordinate in first dimension
   extern double X_min;
@@ -188,9 +189,13 @@ namespace Multi_domain_functions
   /// \short Boolean to indicate whether to doc timings or not.
   extern bool Doc_timings;
 
-  /// \short Boolean to indicate whether to document info (to screen)
+  /// \short Boolean to indicate whether to document basic info (to screen)
   ///        during setup_multi_domain_interaction() routines
   extern bool Doc_stats;
+
+  /// \short Boolean to indicate whether to document further info (to screen)
+  ///        during setup_multi_domain_interaction() routines
+  extern bool Doc_full_stats;
 
 #ifdef OOMPH_HAS_MPI
   /// \short Boolean to indicate when to check for duplicate data
@@ -231,7 +236,7 @@ namespace Multi_domain_functions
   /// - The interaction_index parameter defaults to zero and must be otherwise
   ///   set by the user if there is more than one mesh that provides sources
   ///   for the Mesh pointed to by mesh_pt.
-  template<class EXT_ELEMENT, unsigned EL_DIM>
+  template<class EXT_ELEMENT>
    void setup_multi_domain_interaction(Problem* problem_pt,
                                        Mesh* const &mesh_pt,
                                        Mesh* const &external_mesh_pt,
@@ -260,7 +265,7 @@ namespace Multi_domain_functions
   ///   set by the user if there is more than one mesh that provides "external
   ///   elements" for the Mesh pointed to by mesh_pt (e.g. in the case
   ///   when a beam or shell structure is loaded by fluid from both sides.)
-  template<class EXT_ELEMENT, class FACE_ELEMENT_GEOM_OBJECT, unsigned EL_DIM>
+  template<class EXT_ELEMENT, class FACE_ELEMENT_GEOM_OBJECT>
    void setup_multi_domain_interaction(Problem* problem_pt,
                                        Mesh* const &mesh_pt,
                                        Mesh* const &external_mesh_pt,
@@ -284,13 +289,6 @@ namespace Multi_domain_functions
   void remove_duplicate_data(Problem* problem_pt, Mesh* const &mesh_pt);
 #endif
   
-
-// hierher used?
-/*   /// \short Helper function to add external data from the "external elements" */
-/*   /// at each integration point of the specified mesh's elements */
-/*   void add_external_data_from_source_elements */
-/*    (Mesh* const &mesh_pt,const unsigned& interaction_index); */
-
   /// \short Helper function to locate "local" zeta coordinates
   template<class GEOM_OBJECT,unsigned EL_DIM_LAG,unsigned EL_DIM_EUL>
    void locate_zeta_for_local_coordinates
@@ -411,6 +409,11 @@ namespace Multi_domain_functions
     EXT_ELEMENT* new_el_pt,Mesh* const &external_mesh_pt,Problem* problem_pt);
 
 #endif
+
+  /// Helper function that returns the dimension of the elements within
+  /// each of the specified meshes (and checks they are the same)
+  void get_dim_helper(Problem* problem_pt, Mesh* const &mesh_pt, 
+                      Mesh* const &external_mesh_pt, unsigned& dim);
 
   /// Helper function that clears all the intermediate information used
   /// during the external storage creation at the end of the procedure

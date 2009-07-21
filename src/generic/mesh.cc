@@ -2154,18 +2154,21 @@ void Mesh::distribute(OomphCommunicator* comm_pt,
      if (report_stats)
       {
        // Check number of retained halo elements on this process
-       oomph_info << "Percentage of extra halo elements retained: ";
        if (number_of_retained_elements[dummy_my_rank]!=0)
         {
-         oomph_info << 100.0*double(number_of_retained_halo_elements)/
-          double(number_of_retained_elements[dummy_my_rank]);
+         oomph_info << "Percentage of extra halo elements retained: "
+                    << 100.0*double(number_of_retained_halo_elements)/
+          double(number_of_retained_elements[dummy_my_rank])
+                    << " on process " << dummy_my_rank 
+                    << " in loop number " << myi << std::endl;
         }
-       else
+       else // Dummy output in case a process has no retained elements
+            // (relevant in some multi-mesh problems)
         {
-         oomph_info << 0.0;
+         oomph_info << "Percentage of extra halo elements retained: "
+                    << 0.0 << " on process " << dummy_my_rank
+                    << " in loop number " << myi << std::endl;
         }
-       oomph_info << " on process " << dummy_my_rank 
-                  << " in loop number " << myi << std::endl;
       }
 
     } // end of loop over all "processors"; we've now established the

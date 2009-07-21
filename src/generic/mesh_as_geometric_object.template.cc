@@ -577,33 +577,36 @@ namespace oomph
  void MeshAsGeomObject<DIM_LAGRANGIAN,DIM_EULERIAN,ELEMENT>::
  create_bins_of_objects()
   {
-   // Output message regarding bin structure setup
-   oomph_info << "==============================================" << std::endl;
-   oomph_info << " MeshAsGeomObject: setting up bin search with:" << std::endl;
-   oomph_info << "   Nbin_x=" << Nbin_x << "  ";
-   if (DIM_LAGRANGIAN>=2)
+   // Output message regarding bin structure setup if required
+   if (Multi_domain_functions::Doc_stats)
     {
-     oomph_info << "Nbin_y=" << Nbin_y << "  ";
+     oomph_info << "============================================" << std::endl;
+     oomph_info << " MeshAsGeomObject: set up bin search with:" << std::endl;
+     oomph_info << "   Nbin_x=" << Nbin_x << "  ";
+     if (DIM_LAGRANGIAN>=2)
+      {
+       oomph_info << "Nbin_y=" << Nbin_y << "  ";
+      }
+     if (DIM_LAGRANGIAN==3)
+      {
+       oomph_info << "Nbin_z=" << Nbin_z;
+      }
+     oomph_info << std::endl;
+     oomph_info << "  Xminmax=" << Minmax_coords[0] << " " << Minmax_coords[1] 
+                << "  ";
+     if (DIM_LAGRANGIAN>=2)
+      {
+       oomph_info << "Yminmax=" << Minmax_coords[2] << " " << Minmax_coords[3]
+                  << "  ";
+      }
+     if (DIM_LAGRANGIAN==3)
+      {
+       oomph_info << "Zminmax=" << Minmax_coords[4] << " " << Minmax_coords[5] 
+                  << "  ";
+      }
+     oomph_info << std::endl;
+     oomph_info << "============================================" << std::endl;
     }
-   if (DIM_LAGRANGIAN==3)
-    {
-     oomph_info << "Nbin_z=" << Nbin_z;
-    }
-   oomph_info << std::endl;
-   oomph_info << "   Xminmax=" << Minmax_coords[0] << " " << Minmax_coords[1] 
-              << "  ";
-   if (DIM_LAGRANGIAN>=2)
-    {
-     oomph_info << "Yminmax=" << Minmax_coords[2] << " " << Minmax_coords[3]
-              << "  ";
-    }
-   if (DIM_LAGRANGIAN==3)
-    {
-     oomph_info << "Zminmax=" << Minmax_coords[4] << " " << Minmax_coords[5] 
-              << "  ";
-    }
-   oomph_info << std::endl;
-   oomph_info << "==============================================" << std::endl;
 
    /// Flush all objects out of the bin structure
    flush_bins_of_objects();
@@ -693,7 +696,7 @@ namespace oomph
           }
         }
 
-       //Add element-sample local (?) coord pair to the calculated bin
+       //Add element-sample local coord pair to the calculated bin
        Bin_object_coord_pairs[bin_number].push_back
         (std::make_pair(el_pt,local_coord));
       }

@@ -137,27 +137,28 @@ namespace Multi_domain_functions
 
   /// \short Minimum and maximum coordinates for
   /// each dimension of the external mesh used to "create" the bins in
-  /// setup_multi_domain_interaction(). No defaults; set by user if they
+  /// setup_multi_domain_interaction(). These can be set by user if they
   /// want to (otherwise the MeshAsGeomObject calculates these values based
   /// upon the mesh itself; see MeshAsGeomObject::get_max_and_min_coords(...))
+  /// They default to "incorrect" values initially
 
   /// \short Minimum coordinate in first dimension
-  double X_min; // hierher initialise???
+  double X_min=1.0;
 
   /// \short Maximum coordinate in first dimension
-  double X_max;
+  double X_max=-1.0;
 
   /// \short Minimum coordinate in second dimension
-  double Y_min;
+  double Y_min=1.0;
 
   /// \short Maximum coordinate in second dimension
-  double Y_max;
+  double Y_max=-1.0;
 
   /// \short Minimum coordinate in third dimension
-  double Z_min;
+  double Z_min=1.0;
 
   /// \short Maximum coordinate in third dimension
-  double Z_max;
+  double Z_max=-1.0;
 
   /// \short Percentage offset to add to each extreme of the bin structure.
   /// Default value of 0.05.
@@ -171,9 +172,13 @@ namespace Multi_domain_functions
   /// \short Boolean to indicate whether to doc timings or not.
   bool Doc_timings=false;
 
-  /// \short Boolean to indicate whether to output info during
+  /// \short Boolean to indicate whether to output basic info during
   ///        setup_multi_domain_interaction() routines
   bool Doc_stats=false;
+
+  /// \short Boolean to indicate whether to output further info during
+  ///        setup_multi_domain_interaction() routines
+  bool Doc_full_stats=false;
 
 #ifdef OOMPH_HAS_MPI
 
@@ -642,89 +647,6 @@ namespace Multi_domain_functions
     } // end loop over processors
 
   }
-
-#endif
-
-
-// // hierher used?
-
-// //======================================================================
-// /// Function which adds external data to current elements from the
-// /// external elements at each integration point of the current element
-// /// for the specified interaction index
-// //======================================================================
-//   void add_external_data_from_source_elements
-//   (Mesh* const &mesh_pt,const unsigned& interaction_index)
-//   {
-//    unsigned n_element=mesh_pt->nelement();
-//    // Loop over elements
-//    for (unsigned e=0;e<n_element;e++)
-//     {
-//      ElementWithExternalElement* el_pt=
-//       dynamic_cast<ElementWithExternalElement*>(mesh_pt->element_pt(e));
-//      // Only bother with non-halo elements
-// #ifdef OOMPH_HAS_MPI
-//      if (!el_pt->is_halo())
-// #endif
-//       {
-//        unsigned n_intpt=el_pt->integral_pt()->nweight();
-//        // Loop over integration points
-//        for (unsigned i=0;i<n_intpt;i++)
-//         {
-//          FiniteElement* source_el_pt=dynamic_cast<FiniteElement*>
-//           (el_pt->external_element_pt(interaction_index,i));
-//          if (source_el_pt==0)
-//           {
-//            std::ostringstream error_message;
-//            error_message << "Source element pointer not set for element " << e
-//                          << " at integration point " << i << ".\n";
-//            throw OomphLibError
-//             (error_message.str(),
-//              "Multi_domain_functions::add_external_data_from_source_elements",
-//              OOMPH_EXCEPTION_LOCATION);
-//           }
-//          unsigned n_node=source_el_pt->nnode();
-//          for (unsigned j=0;j<n_node;j++)
-//           {
-//            // Add the node as external data
-//            el_pt->add_external_data(source_el_pt->node_pt(j));
-//            // If this "source" node is hanging (in any variable) then its
-//            // master nodes also need to be added as external data
-//            if (dynamic_cast<RefineableElement*>(source_el_pt)!=0)
-//             {
-//              int n_cont_inter_values=dynamic_cast<RefineableElement*>
-//               (source_el_pt)->ncont_interpolated_values();
-//              for (int i_cont=-1;i_cont<n_cont_inter_values;i_cont++)
-//               {
-//                if (source_el_pt->node_pt(j)->is_hanging(i_cont))
-//                 {
-//                  HangInfo* hang_pt=source_el_pt->node_pt(j)
-//                   ->hanging_pt(i_cont);
-//                  unsigned n_master=hang_pt->nmaster();
-//                  // Loop over master nodes
-//                  for (unsigned m=0; m<n_master; m++)
-//                   {
-//                    Node* master_nod_pt=hang_pt->master_node_pt(m);
-//                    // Add this node as external data
-//                    el_pt->add_external_data(master_nod_pt);
-//                   }
-//                 }
-//               }
-//             }
-//           }
-//          // Add internal data points as external data
-//          unsigned n_int_data=source_el_pt->ninternal_data();
-//          for (unsigned i_int=0;i_int<n_int_data;i_int++)
-//           {
-//            el_pt->add_external_data(source_el_pt->internal_data_pt(i_int));
-//           }       
-
-//         } // end loop over integration points
-//       }
-//     }
-//   }
-
-#ifdef OOMPH_HAS_MPI
 
 //========================================================================
 /// Send the zeta coordinates from the current process to 
@@ -1583,6 +1505,65 @@ namespace Multi_domain_functions
 
 #endif
 
+ /// Helper function that returns the dimension of the elements within
+ /// each of the specified meshes (and checks they are the same)
+ void get_dim_helper(Problem* problem_pt, Mesh* const &mesh_pt, 
+                     Mesh* const &external_mesh_pt, unsigned& dim)
+  {
+   // Storage for number of processors, current process and communicator
+   OomphCommunicator* comm_pt=problem_pt->communicator_pt();
+   int n_proc=comm_pt->nproc();
+
+   // Extract the element dimensions from the first element of each mesh
+   unsigned mesh_dim=0;
+   if (mesh_pt->nelement() > 0)
+    {
+     mesh_dim=
+      dynamic_cast<FiniteElement*>(mesh_pt->element_pt(0))->dim();
+    }
+   unsigned external_mesh_dim=0;
+   if (external_mesh_pt->nelement() > 0)
+    {
+     external_mesh_dim=
+      dynamic_cast<FiniteElement*>(external_mesh_pt->element_pt(0))->dim();
+    }
+
+   // Need to do an Allreduce
+#ifdef OOMPH_HAS_MPI
+   if (n_proc > 1)
+    {
+     unsigned mesh_dim_reduce;
+     MPI_Allreduce(&mesh_dim,&mesh_dim_reduce,1,MPI_INT,
+                   MPI_MAX,comm_pt->mpi_comm());
+     mesh_dim=mesh_dim_reduce;
+
+     unsigned external_mesh_dim_reduce;
+     MPI_Allreduce(&external_mesh_dim,&external_mesh_dim_reduce,1,MPI_INT,
+                   MPI_MAX,comm_pt->mpi_comm());
+     external_mesh_dim=external_mesh_dim_reduce;
+    }
+#endif
+
+   // Check the dimensions are the same!
+   if (mesh_dim!=external_mesh_dim)
+    {
+     std::ostringstream error_stream;
+     error_stream << "The elements within the two meshes do not\n"
+                  << "have the same dimension, so the multi-domain\n"
+                  << "method will not work.\n"
+                  << "For the mesh, dim=" << mesh_dim 
+                  << ", and the external mesh, dim=" << external_mesh_dim 
+                  << "\n";
+     throw OomphLibError
+      (error_stream.str(),
+       "Multi_domain_functions::get_dim_helper(...)",
+       OOMPH_EXCEPTION_LOCATION);
+    }
+
+   // Set returned dimension
+   dim=mesh_dim;
+ }
+
  /// Helper function that clears all the information used
  /// during the external storage creation
  void clean_up()
@@ -1602,6 +1583,8 @@ namespace Multi_domain_functions
 
    Double_values.clear();
    Unsigned_values.clear();
+
+   External_element_located.clear();
   }
 
 

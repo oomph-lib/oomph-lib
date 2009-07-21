@@ -674,8 +674,11 @@ namespace oomph
      }
   
     // wait for all sends to complete
-    Vector<MPI_Status> stat(c);
-    MPI_Waitall(c,&req[0],&stat[0]);
+    if (c!=0)
+     {
+      Vector<MPI_Status> stat(c);
+      MPI_Waitall(c,&req[0],&stat[0]);
+     }
    }
 
 
@@ -882,10 +885,13 @@ namespace oomph
          }
        }
      }
-    Vector<MPI_Status> stat(c);
-    MPI_Waitall(c,&req[0],&stat[0]);
-    req.clear();
-    stat.clear();
+    if (c!=0)
+     {
+      Vector<MPI_Status> stat(c);
+      MPI_Waitall(c,&req[0],&stat[0]);
+      req.clear();
+      stat.clear();
+     }
     c=0;
     for (unsigned i = 0; i < Nprec; i++)
      {
@@ -1191,10 +1197,13 @@ namespace oomph
     ///////////////////////////////////////////////////////////////////////////
     // and WAIT...
     ///////////////////////////////////////////////////////////////////////////
-    Vector<MPI_Status> recv_stat(c_recv);
-    MPI_Waitall(c_recv,&recv_req[0],&recv_stat[0]);
-    recv_req.clear();
-    recv_stat.clear();
+    if (c_recv!=0)
+     {
+      Vector<MPI_Status> recv_stat(c_recv);
+      MPI_Waitall(c_recv,&recv_req[0],&recv_stat[0]);
+      recv_req.clear();
+      recv_stat.clear();
+     }
 
     // build the matrix
 
@@ -1221,10 +1230,13 @@ namespace oomph
                                                  row_start_recv);
 
     // and finally wait for the sends
-    Vector<MPI_Status> send_stat(c_recv);
-    MPI_Waitall(c_send,&send_req[0],&send_stat[0]);
-    send_req.clear();
-    send_stat.clear();
+    if (c_recv!=0)
+     {
+      Vector<MPI_Status> send_stat(c_recv);
+      MPI_Waitall(c_send,&send_req[0],&send_stat[0]);
+      send_req.clear();
+      send_stat.clear();
+     }
 
     // and clear the datatype
     unsigned ndatatypes = datatypes.size();
@@ -1439,11 +1451,14 @@ namespace oomph
          }
        }
      }
-    Vector<MPI_Status> stat(c);
-    MPI_Waitall(c,&req[0],&stat[0]);
-    req.clear();
-    stat.clear();
-    c=0;
+    if (c!=0)
+     {
+      Vector<MPI_Status> stat(c);
+      MPI_Waitall(c,&req[0],&stat[0]);
+      req.clear();
+      stat.clear();
+      c=0;
+     }
     for (unsigned i = 0; i < Nprec; i++)
      {
       for (unsigned p = 0; p < nproc; p++)
@@ -1748,10 +1763,13 @@ namespace oomph
     ///////////////////////////////////////////////////////////////////////////
     // and WAIT...
     ///////////////////////////////////////////////////////////////////////////
-    Vector<MPI_Status> recv_stat(c_recv);
-    MPI_Waitall(c_recv,&recv_req[0],&recv_stat[0]);
-    recv_req.clear();
-    recv_stat.clear();
+    if (c_recv!=0)
+     {
+      Vector<MPI_Status> recv_stat(c_recv);
+      MPI_Waitall(c_recv,&recv_req[0],&recv_stat[0]);
+      recv_req.clear();
+      recv_stat.clear();
+     }
 
     // build the matrix
 
@@ -1778,10 +1796,13 @@ namespace oomph
                                                  row_start_recv);
 
     // and finally wait for the sends
-    Vector<MPI_Status> send_stat(c_send);
-    MPI_Waitall(c_send,&send_req[0],&send_stat[0]);
-    send_req.clear();
-    send_stat.clear();
+    if (c_send!=0)
+     {
+      Vector<MPI_Status> send_stat(c_send);
+      MPI_Waitall(c_send,&send_req[0],&send_stat[0]);
+      send_req.clear();
+      send_stat.clear();
+     }
 
     // and clear the datatype
     unsigned ndatatypes = datatypes.size();
@@ -2318,10 +2339,13 @@ namespace oomph
     ///////////////////////////////////////////////////////////////////////////
     // and WAIT...
     ///////////////////////////////////////////////////////////////////////////
-    Vector<MPI_Status> recv_stat(c_recv);
-    MPI_Waitall(c_recv,&recv_req[0],&recv_stat[0]);
-    recv_req.clear();
-    recv_stat.clear();
+    if (c_recv!=0)
+     {
+      Vector<MPI_Status> recv_stat(c_recv);
+      MPI_Waitall(c_recv,&recv_req[0],&recv_stat[0]);
+      recv_req.clear();
+      recv_stat.clear();
+     }
 
     // build the matrix
 
@@ -2348,10 +2372,13 @@ namespace oomph
                                                  row_start_recv);
 
     // and finally wait for the sends
-    Vector<MPI_Status> send_stat(c_recv);
-    MPI_Waitall(c_send,&send_req[0],&send_stat[0]);
-    send_req.clear();
-    send_stat.clear();
+    if (c_recv!=0)
+     {
+      Vector<MPI_Status> send_stat(c_recv);
+      MPI_Waitall(c_send,&send_req[0],&send_stat[0]);
+      send_req.clear();
+      send_stat.clear();
+     }
 
     // and clear the datatype
     unsigned ndatatypes = datatypes.size();
