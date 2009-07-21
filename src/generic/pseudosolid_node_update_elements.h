@@ -250,33 +250,55 @@ template<class BASIC, class SOLID>
  /// if it's used
  unsigned ndof_types()
   {
-   throw OomphLibError(
-    "nblock_types() is deliberately broken. Provide your own final overload!",
-    "PseudoSolidNodeUpdateElement::block_types()",
-    OOMPH_EXCEPTION_LOCATION);
-   
-   // dummy return
-   return 1;
+   return BASIC::ndof_types() + SOLID::ndof_types();
+  }
+
+ /// \short return the number of DOF types associated with the BASIC 
+ /// elements in this combined element
+ unsigned nbasic_dof_types()
+  {
+   return BASIC::ndof_types();
+  }
+
+ /// \short return the number of DOF types associated with the SOLID 
+ /// elements in this combined element
+ unsigned nsolid_dof_types()
+  {
+   return SOLID::ndof_types();
   }
 
  /// \short Create a list of pairs for all unknowns in this element,
  /// so that the first entry in each pair contains the global equation
  /// number of the unknown, while the second one contains the number
- /// of the "block" that this unknown is associated with.
- /// (Function can obviously only be called if the equation numbering
- /// scheme has been set up.)
- /// This is needed as a final overload in cases where both fluid and
- /// solid elements are block preconditionable. However, we break
- /// it here because it isn't obvious which classification we
- /// should use. This forces the user to re-implement this function
- /// if it's used
+ /// of the "block" that this unknown is associated with.\n
+ /// This method combines the get_dof_numbers_for_unknowns(...)
+ /// method for the BASIC and SOLID elements. The basic elements
+ /// retain their DOF type numbering and the SOLID elements
+ /// DOF type numbers are incremented by nbasic_dof_types().
  void get_dof_numbers_for_unknowns(
   std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
   {
-   throw OomphLibError(
-    "get_dof_numbers_for_unknowns() is deliberately broken. Provide your own final overload!",
-    "PseudoSolidNodeUpdateElement::get_dof_numbers_for_unknowns()",
-    OOMPH_EXCEPTION_LOCATION);
+   // get the solid list
+   std::list<std::pair<unsigned long,unsigned> > solid_list;
+   SOLID::get_dof_numbers_for_unknowns(solid_list);
+
+   // get the basic list
+   BASIC::get_dof_numbers_for_unknowns(block_lookup_list);
+
+   // get the number of basic dof types
+   unsigned nbasic_dof_types = BASIC::ndof_types();
+
+   // add the solid lookup list to the basic lookup list 
+   // incrementing the solid dof numbers by nbasic_dof_types
+   typedef std::list<std::pair<unsigned long,unsigned> >::iterator IT;
+   for (IT it=solid_list.begin();
+        it!=solid_list.end();it++)
+    {
+     std::pair<unsigned long,unsigned> new_pair;
+     new_pair.first = it->first;
+     new_pair.second = it->second + nbasic_dof_types;
+     block_lookup_list.push_front(new_pair);
+    }
   }
 
 

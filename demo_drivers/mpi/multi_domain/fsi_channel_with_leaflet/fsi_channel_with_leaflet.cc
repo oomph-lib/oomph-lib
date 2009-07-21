@@ -510,10 +510,10 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
    FSIPreconditioner* prec_pt=new FSIPreconditioner;
    
    // Set Navier Stokes mesh:
-   prec_pt->navier_stokes_mesh_pt()=Fluid_mesh_pt;
+   prec_pt->set_navier_stokes_mesh(Fluid_mesh_pt);
    
    // Set solid mesh:
-   prec_pt->wall_mesh_pt()=Wall_mesh_pt;
+   prec_pt->set_wall_mesh(Wall_mesh_pt);
    
    // Set flags in the underlying Navier-Stokes preconditioner
    prec_pt->navier_stokes_preconditioner_pt()->p_matrix_using_scaling() = true;

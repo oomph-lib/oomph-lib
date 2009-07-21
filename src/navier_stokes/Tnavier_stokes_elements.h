@@ -544,7 +544,58 @@ public:
  void output(FILE* file_pt, const unsigned &n_plot)
   {NavierStokesEquations<DIM>::output(file_pt,n_plot);}
 
+ /// \short The number of "blocks" that degrees of freedom in this element
+ /// are sub-divided into: Velocity and pressure.
+ unsigned ndof_types()
+  {
+   return DIM+1;
+  }
+ 
+ /// \short Create a list of pairs for all unknowns in this element,
+ /// so that the first entry in each pair contains the global equation
+ /// number of the unknown, while the second one contains the number
+ /// of the "block" that this unknown is associated with.
+ /// (Function can obviously only be called if the equation numbering
+ /// scheme has been set up.) Velocity=0; Pressure=1
+ void get_dof_numbers_for_unknowns(
+  std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
+  {
+   // number of nodes
+   unsigned n_node = this->nnode();
+   
+   // temporary pair (used to store block lookup prior to being added to list)
+   std::pair<unsigned,unsigned> block_lookup;
+   
+   // loop over the nodes
+   for (unsigned n = 0; n < n_node; n++)
+    {
+     // find the number of values at this node
+     unsigned nv = this->node_pt(n)->nvalue(); 
 
+     //loop over these values
+     for (unsigned v = 0; v < nv; v++)
+      {
+       // determine local eqn number
+       int local_eqn_number = this->nodal_local_eqn(n, v);
+       
+       // ignore pinned values - far away degrees of freedom resulting 
+       // from hanging nodes can be ignored since these are be dealt
+       // with by the element containing their master nodes
+       if (local_eqn_number >= 0)
+        {
+         // store block lookup in temporary pair: Global equation number
+         // is the first entry in pair
+         block_lookup.first = this->eqn_number(local_eqn_number);
+         
+         // set block numbers: Block number is the second entry in pair
+         block_lookup.second = v;
+         
+         // add to list
+         block_lookup_list.push_front(block_lookup);
+        }
+      }
+    }
+  }
 };
 
 //Inline functions

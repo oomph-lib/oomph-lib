@@ -157,9 +157,9 @@ void BiCGStab<MATRIX>::solve(Problem* const &problem_pt,
   {
    LinearAlgebraDistribution 
     temp_global_dist(result.distribution_pt());       
-   result.rebuild(Distribution_pt);
+   result.build(Distribution_pt,0.0);
    this->solve_helper(Matrix_pt,f,result,problem_pt);
-   result.redistribute(temp_global_dist);
+   result.redistribute(&temp_global_dist);
   }
  else
   {
@@ -276,12 +276,12 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
  // setup the solution if it is not
  if (!solution.distribution_pt()->setup())
   {
-   solution.rebuild(Distribution_pt);
+   solution.build(Distribution_pt,0.0);
   }
  // zero
  else
   {
-   solution.initialise();
+   solution.initialise(0.0);
   }
 
  // Get number of dofs
@@ -301,7 +301,7 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
  double residual_norm = residual.norm();
  double rhs_norm = residual_norm;
  if (rhs_norm==0.0) rhs_norm=1.0; 
- DoubleVector x(rhs.distribution_pt());
+ DoubleVector x(rhs.distribution_pt(),0.0);
  
  // Hat residual by copy operation
  DoubleVector r_hat(residual);
@@ -349,19 +349,23 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
  // Setup preconditioner only if we're not re-solving
  if (!Resolving)
   {
-   //Setup preconditioner from the Jacobian matrix
-   double t_start_prec = TimingHelpers::timer(); 
-   
-   preconditioner_pt()->setup(problem_pt,matrix_pt);
-
-   // Doc time for setup of preconditioner
-   double t_end_prec = TimingHelpers::timer(); 
-   Preconditioner_setup_time = t_end_prec-t_start_prec;
-
-   if(Doc_time)
-    {  
-     oomph_info << "Time for setup of preconditioner  [sec]: "
-                << Preconditioner_setup_time << std::endl;
+   // only setup the preconditioner if required
+   if (Setup_preconditioner_before_solve)
+    {
+     //Setup preconditioner from the Jacobian matrix
+     double t_start_prec = TimingHelpers::timer(); 
+     
+     preconditioner_pt()->setup(problem_pt,matrix_pt);
+     
+     // Doc time for setup of preconditioner
+     double t_end_prec = TimingHelpers::timer(); 
+     Preconditioner_setup_time = t_end_prec-t_start_prec;
+     
+     if(Doc_time)
+      {  
+       oomph_info << "Time for setup of preconditioner  [sec]: "
+                  << Preconditioner_setup_time << std::endl;
+      }
     }
   }
  else
@@ -381,8 +385,9 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
  double s_norm,r_norm;
  
  // Some vectors
- DoubleVector p(Distribution_pt),p_hat(Distribution_pt),v(Distribution_pt),
-  z(Distribution_pt),t(Distribution_pt),s(Distribution_pt);
+ DoubleVector p(Distribution_pt,0.0),p_hat(Distribution_pt,0.0),
+  v(Distribution_pt,0.0),z(Distribution_pt,0.0),t(Distribution_pt,0.0),
+  s(Distribution_pt,0.0);
 
  // Loop over max. number of iterations
  for (unsigned iter=1;iter<=Max_iter;iter++)
@@ -707,12 +712,12 @@ void CG<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
  // setup the solution if it is not
  if (!solution.distribution_pt()->setup())
   {
-   solution.rebuild(Distribution_pt);
+   solution.build(Distribution_pt,0.0);
   }
  // zero
  else
   {
-   solution.initialise();
+   solution.initialise(0.0);
   }
 
  // Get number of dofs
@@ -727,7 +732,7 @@ void CG<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
  
  // Initialise: Zero initial guess so the initial residual is 
  // equal to the RHS
- DoubleVector x(Distribution_pt);
+ DoubleVector x(Distribution_pt,0.0);
  DoubleVector residual(rhs);
  double residual_norm = residual.norm();
  double rhs_norm=residual_norm;
@@ -777,19 +782,23 @@ void CG<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
  // Setup preconditioner only if we're not re-solving
  if (!Resolving)
   {
-   //Setup preconditioner from the Jacobian matrix
-   double t_start_prec = TimingHelpers::timer(); 
-   
-   preconditioner_pt()->setup(problem_pt,matrix_pt);
-
-   // Doc time for setup of preconditioner
-   double t_end_prec = TimingHelpers::timer(); 
-   Preconditioner_setup_time = t_end_prec-t_start_prec;
-
-   if(Doc_time)
+   // only setup the preconditioner if required
+   if (Setup_preconditioner_before_solve)
     {
-     oomph_info << "Time for setup of preconditioner  [sec]: "
-                << Preconditioner_setup_time << std::endl;   
+     //Setup preconditioner from the Jacobian matrix
+     double t_start_prec = TimingHelpers::timer(); 
+     
+     preconditioner_pt()->setup(problem_pt,matrix_pt);
+     
+     // Doc time for setup of preconditioner
+     double t_end_prec = TimingHelpers::timer(); 
+     Preconditioner_setup_time = t_end_prec-t_start_prec;
+     
+     if(Doc_time)
+      {
+       oomph_info << "Time for setup of preconditioner  [sec]: "
+                  << Preconditioner_setup_time << std::endl;   
+      }
     }
   }
  else
@@ -804,8 +813,8 @@ void CG<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
 
  // Auxiliary vectors
 // Vector<double> z(n_dof),p(n_dof),jacobian_times_p(n_dof,0.0);
- DoubleVector z(Distribution_pt), p(Distribution_pt), 
-  jacobian_times_p(Distribution_pt);
+ DoubleVector z(Distribution_pt,0.0), p(Distribution_pt,0.0), 
+  jacobian_times_p(Distribution_pt,0.0);
  
  // Auxiliary values
  double alpha,beta,rz;
@@ -1005,7 +1014,7 @@ void CG<MATRIX>::solve(Problem* const &problem_pt, DoubleVector &result)
  // if the result vector is not setup
  if (!result.distribution_pt()->setup())
    {
-     result.rebuild(Distribution_pt);
+     result.build(Distribution_pt,0.0);
    }
 
  // Call linear algebra-style solver
@@ -1013,9 +1022,9 @@ void CG<MATRIX>::solve(Problem* const &problem_pt, DoubleVector &result)
   {
    LinearAlgebraDistribution 
     temp_global_dist(result.distribution_pt());       
-   result.rebuild(Distribution_pt);
+   result.build(Distribution_pt,0.0);
    this->solve_helper(Matrix_pt,f,result,problem_pt);
-       result.redistribute(temp_global_dist);
+   result.redistribute(&temp_global_dist);
   }
  else
   {
@@ -1103,8 +1112,8 @@ void GS<MATRIX>::solve(Problem* const &problem_pt, DoubleVector &result)
   {
    if (dynamic_cast<CRDoubleMatrix*>(Matrix_pt) != 0)
     {
-     dynamic_cast<CRDoubleMatrix* >(Matrix_pt)->rebuild(Distribution_pt);
-     f.rebuild(Distribution_pt);
+     dynamic_cast<CRDoubleMatrix* >(Matrix_pt)->build(Distribution_pt);
+     f.build(Distribution_pt,0.0);
     }
   }
  problem_pt->get_jacobian(f,*Matrix_pt);  
@@ -1210,12 +1219,12 @@ void GS<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
  // setup the solution if it is not
  if (!solution.distribution_pt()->setup())
   {
-   solution.rebuild(Distribution_pt);
+   solution.build(Distribution_pt,0.0);
   }
  // zero
  else
   {
-   solution.initialise();
+   solution.initialise(0.0);
   }
 
 
@@ -1226,8 +1235,8 @@ void GS<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
  double t_start = TimingHelpers::timer();
 
  // Initial guess is zero so the residual is equal to the RHS
- DoubleVector x(Distribution_pt);
- DoubleVector local_residual(Distribution_pt);
+ DoubleVector x(Distribution_pt,0.0);
+ DoubleVector local_residual(Distribution_pt,0.0);
  for(unsigned i=0;i<n_dof;i++)
   {   
    local_residual[i]=rhs[i];
@@ -1256,7 +1265,7 @@ void GS<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
     }
   }
  
- DoubleVector current_residual(Distribution_pt);
+ DoubleVector current_residual(Distribution_pt,0.0);
  // Start of the main GS loop
  while((norm_res>Tolerance)&&(counter!=Max_iter))
   {
@@ -1409,8 +1418,8 @@ void GMRES<MATRIX>::solve(Problem* const &problem_pt, DoubleVector &result)
   {
    if (dynamic_cast<CRDoubleMatrix*>(Matrix_pt) != 0)
     {
-     dynamic_cast<CRDoubleMatrix* >(Matrix_pt)->rebuild(Distribution_pt);
-     f.rebuild(Distribution_pt);
+     dynamic_cast<CRDoubleMatrix* >(Matrix_pt)->build(Distribution_pt);
+     f.build(Distribution_pt,0.0);
     }
   }
  problem_pt->get_jacobian(f,*Matrix_pt);  
@@ -1521,12 +1530,12 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
  // setup the solution if it is not
  if (!solution.distribution_pt()->setup())
   {
-   solution.rebuild(Distribution_pt);
+   solution.build(Distribution_pt,0.0);
   }
  // zero
  else
   {
-   solution.initialise();
+   solution.initialise(0.0);
   }
 
  // Time solver
@@ -1548,26 +1557,31 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
  Vector<double> s(Restart + 1,0);
  Vector<double> cs(Restart + 1);
  Vector<double> sn(Restart + 1);
- DoubleVector w(Distribution_pt);
+ DoubleVector w(Distribution_pt,0.0);
  
 
  // Setup preconditioner only if we're not re-solving
  if (!Resolving)
   {
-   //Setup preconditioner from the Jacobian matrix
-   double t_start_prec = TimingHelpers::timer();
-
-   // do not setup 
-   preconditioner_pt()->setup(problem_pt,matrix_pt);
-   
-   // Doc time for setup of preconditioner
-   double t_end_prec = TimingHelpers::timer();
-   Preconditioner_setup_time = t_end_prec-t_start_prec;
-
-   if(Doc_time)
+   // only setup the preconditioner before solve if require
+   if (Setup_preconditioner_before_solve)
     {
-     oomph_info << "Time for setup of preconditioner  [sec]: "
-                << Preconditioner_setup_time << std::endl;     
+     
+     //Setup preconditioner from the Jacobian matrix
+     double t_start_prec = TimingHelpers::timer();
+     
+     // do not setup 
+     preconditioner_pt()->setup(problem_pt,matrix_pt);
+     
+     // Doc time for setup of preconditioner
+     double t_end_prec = TimingHelpers::timer();
+     Preconditioner_setup_time = t_end_prec-t_start_prec;
+     
+     if(Doc_time)
+      {
+       oomph_info << "Time for setup of preconditioner  [sec]: "
+                  << Preconditioner_setup_time << std::endl;     
+      }
     }
   }
  else
@@ -1580,7 +1594,7 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
   } 
 
  // solve b-Jx = Mr for r (assumes x = 0);
- DoubleVector r(Distribution_pt);
+ DoubleVector r(Distribution_pt,0.0);
  if(Preconditioner_LHS)
   {
    preconditioner_pt()->preconditioner_solve(rhs,r); 
@@ -1654,7 +1668,7 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
   {
 
    // set zeroth basis vector v[0] to r/beta
-   v[0].rebuild(Distribution_pt);
+   v[0].build(Distribution_pt,0.0);
    double* v0_pt = v[0].values_pt();
    for (unsigned i = 0; i < n_dof; i++)
     {
@@ -1677,7 +1691,7 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
 
      // solve Jv[i] = Mw for w
      {
-      DoubleVector temp(Distribution_pt);
+      DoubleVector temp(Distribution_pt,0.0);
       if(Preconditioner_LHS)
        {
         // solve Jv[i] = Mw for w
@@ -1724,7 +1738,7 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
      }
     
      // 
-     v[iter_restart + 1].rebuild(Distribution_pt);
+     v[iter_restart + 1].build(Distribution_pt,0.0);
      double* v_pt = v[iter_restart + 1].values_pt();
      for (unsigned i = 0; i < n_dof; i++)
       {
@@ -1804,7 +1818,7 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
 
    // solve Mr = (b-Jx) for r
    {
-    DoubleVector temp(Distribution_pt);
+    DoubleVector temp(Distribution_pt,0.0);
     matrix_pt->multiply(solution,temp);
     double* temp_pt = temp.values_pt();
     double* rhs_pt = rhs.values_pt();

@@ -96,9 +96,7 @@ namespace oomph
   OomphLibPreconditionerEpetraOperator
    (const OomphLibPreconditionerEpetraOperator&)
 #ifdef OOMPH_HAS_MPI
-   // NOTE: MPI_COMM_WORLD used just to construct Operator_comm - it ok because
-   // this method is broken
-   : Operator_comm(MPI_COMM_WORLD) 
+   : Operator_comm(MPI_Helpers::Communicator_pt->mpi_comm()) 
 #else
    : Operator_comm()
 #endif
@@ -155,11 +153,11 @@ namespace oomph
     if (Use_epetra_values)
      {
       oomph_r.set_external_values
-       (Oomph_lib_preconditioner_pt->distribution_pt(),*r_pt);
+       (Oomph_lib_preconditioner_pt->distribution_pt(),*r_pt,false);
      }
     else
      {
-      oomph_r.rebuild(Oomph_lib_preconditioner_pt->distribution_pt());
+      oomph_r.build(Oomph_lib_preconditioner_pt->distribution_pt(),0.0);
       unsigned nrow_local = 
        Oomph_lib_preconditioner_pt->distribution_pt()->nrow_local();
       for (unsigned i = 0; i < nrow_local; i++)
@@ -177,11 +175,11 @@ namespace oomph
       DoubleVector oomph_z;
       oomph_z.set_external_values(
        Oomph_lib_preconditioner_pt->distribution_pt(),
-       *z_pt);
+       *z_pt,false);
      }
     else
      {
-      oomph_z.rebuild(Oomph_lib_preconditioner_pt->distribution_pt());
+      oomph_z.build(Oomph_lib_preconditioner_pt->distribution_pt(),0.0);
      }
 
     // apply the preconditioner

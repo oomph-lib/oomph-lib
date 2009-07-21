@@ -186,7 +186,7 @@ preconditioner_solve(const DoubleVector &r, DoubleVector &z)
  Epetra_preconditioner_pt->ApplyInverse(*epetra_r_pt,*epetra_z_pt);
 
  // Copy result to z
- z.rebuild(Distribution_pt);
+ z.build(Distribution_pt,0.0);
  TrilinosHelpers::copy_to_oomphlib_vector(epetra_z_pt,z);
 
  // clean up memory

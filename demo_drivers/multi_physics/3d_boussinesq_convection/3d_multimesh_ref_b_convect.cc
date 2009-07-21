@@ -368,8 +368,8 @@ switch_to_iterative_linear_solver()
  FSIPreconditioner* prec_pt=new FSIPreconditioner; 
  
  // Tell preconditioner about meshes
- prec_pt->navier_stokes_mesh_pt()=Nst_mesh_pt;
- prec_pt->wall_mesh_pt()=Adv_diff_mesh_pt;
+ prec_pt->set_navier_stokes_mesh(Nst_mesh_pt);
+ prec_pt->set_wall_mesh(Adv_diff_mesh_pt);
 
  // This is probably the most important because the temperature will
  // affect the fluid motion more than the other way round.

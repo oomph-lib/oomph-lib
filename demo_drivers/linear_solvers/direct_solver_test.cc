@@ -380,9 +380,9 @@ int main(int argc, char **argv)
   unsigned ndof = problem.ndof();
   LinearAlgebraDistribution global_dist(problem.communicator_pt(),ndof,false);
   CRDoubleMatrix A(&global_dist);
-  DoubleVector b(&global_dist);
-  DoubleVector x(&global_dist);
-  SuperLU solver;
+  DoubleVector b(&global_dist,0.0);
+  DoubleVector x(&global_dist,0.0);
+  SuperLUSolver solver;
   problem.get_jacobian(b,A);
   solver.doc_time() = true;
   solver.solve(&A,b,x);
@@ -404,7 +404,7 @@ int main(int argc, char **argv)
   CCDoubleMatrix A;
   DoubleVector b;
   DoubleVector x;
-  SuperLU solver;
+  SuperLUSolver solver;
   problem.get_jacobian(b,A);
   solver.doc_time() = true;
   solver.solve(&A,b,x);
@@ -424,136 +424,13 @@ int main(int argc, char **argv)
   OneDPoissonProblem<QPoissonElement<1,4> >
     problem(n_element,FishSolnOneDPoisson::source_function);
   DoubleVector x;
-  SuperLU solver;
+  SuperLUSolver solver;
   problem.linear_solver_pt() = &solver;
   problem.newton_solve();
   doc_info.number()++;
   problem.doc_solution(doc_info);
   problem.zero_dofs();
  }
-
-#ifdef OOMPH_HAS_MPI
- //////////////////////////////////////////////////////////////////////////////
- // SuperLU_dist Test
- //////////////////////////////////////////////////////////////////////////////
-
- // MATRIX BASED SOLVE / CRDoubleMatrix (global)
- {
-  oomph_info 
-   << "///////////////////////////////////////////////////////////////////////"
-   << std::endl;
-  oomph_info 
-   << "TESTING: SuperLU_dist matrix based solve w/ global CRDoubleMatrix"
-   << std::endl;
-  oomph_info 
-   << "///////////////////////////////////////////////////////////////////////"
-   << std::endl << std::endl;
-  OneDPoissonProblem<QPoissonElement<1,4> >
-    problem(n_element,FishSolnOneDPoisson::source_function);
-  unsigned ndof = problem.ndof();
-  LinearAlgebraDistribution global_dist(problem.communicator_pt(),ndof,false);
-  CRDoubleMatrix A(&global_dist);
-  DoubleVector b(&global_dist);
-  DoubleVector x(&global_dist);
-  SuperLU_dist solver;
-  problem.get_jacobian(b,A);
-  solver.doc_time() = true;
-  solver.solve(&A,b,x);
-  x.output("RESLT/SuperLU_dist_CRDoubleMatrix_global.dat");
- }
-
- // MATRIX BASED SOLVE / CRDoubleMatrix (distributed)
- {
-  oomph_info 
-   << "///////////////////////////////////////////////////////////////////////"
-   << std::endl;
-  oomph_info 
-   << "TESTING: SuperLU_dist matrix based solve w/ dist CRDoubleMatrix"
-   << std::endl;
-  oomph_info 
-   << "///////////////////////////////////////////////////////////////////////"
-   << std::endl << std::endl;
-  OneDPoissonProblem<QPoissonElement<1,4> >
-    problem(n_element,FishSolnOneDPoisson::source_function);
-  unsigned ndof = problem.ndof();
-  LinearAlgebraDistribution distributed_dist(problem.communicator_pt(),
-					     ndof,true);
-  CRDoubleMatrix A(&distributed_dist);
-  DoubleVector b(&distributed_dist);
-  DoubleVector x(&distributed_dist);
-  SuperLU_dist solver;
-  problem.get_jacobian(b,A);
-  solver.doc_time() = true;
-  solver.solve(&A,b,x);
-  x.output("RESLT/SuperLU_dist_CRDoubleMatrix_distributed.dat");
- }
-
- // MATRIX BASED SOLVE / CCDoubleMatrix
- {
-  oomph_info 
-   << "///////////////////////////////////////////////////////////////////////"
-   << std::endl;
-  oomph_info << "TESTING: SuperLU matrix based solve w/ CCDoubleMatrix"
-             << std::endl;
-  oomph_info 
-   << "///////////////////////////////////////////////////////////////////////"
-   << std::endl << std::endl;
-  OneDPoissonProblem<QPoissonElement<1,4> >
-    problem(n_element,FishSolnOneDPoisson::source_function);
-  CCDoubleMatrix A;
-  DoubleVector b;
-  DoubleVector x;
-  SuperLU_dist solver;
-  problem.get_jacobian(b,A);
-  solver.doc_time() = true;
-  solver.solve(&A,b,x);
-  x.output("RESLT/SuperLU_dist_CCDoubleMatrix.dat");
- }
-
- // PROBLEM BASED SOLVE (global)
- {
-  oomph_info 
-   << "///////////////////////////////////////////////////////////////////////"
-   << std::endl;
-  oomph_info << "TESTING: SuperLU_dist global problem based solve"
-             << std::endl;
-  oomph_info 
-   << "///////////////////////////////////////////////////////////////////////"
-   << std::endl << std::endl;
-  OneDPoissonProblem<QPoissonElement<1,4> >
-    problem(n_element,FishSolnOneDPoisson::source_function);
-  DoubleVector x;
-  SuperLU_dist solver;
-  solver.enable_global_solve();
-  problem.linear_solver_pt() = &solver;
-  problem.newton_solve();
-  doc_info.number()++;
-  problem.doc_solution(doc_info);
-  problem.zero_dofs();
- }
-
- // PROBLEM BASED SOLVE (distributed)
- {
-  oomph_info 
-   << "///////////////////////////////////////////////////////////////////////"
-   << std::endl;
-  oomph_info << "TESTING: SuperLU_dist global problem based solve"
-             << std::endl;
-  oomph_info 
-   << "///////////////////////////////////////////////////////////////////////"
-   << std::endl << std::endl;
-  OneDPoissonProblem<QPoissonElement<1,4> >
-    problem(n_element,FishSolnOneDPoisson::source_function);
-  DoubleVector x;
-  SuperLU_dist solver;
-  solver.enable_distributed_solve();
-  problem.linear_solver_pt() = &solver;
-  problem.newton_solve();
-  doc_info.number()++;
-  problem.doc_solution(doc_info);
-  problem.zero_dofs();
- }
-#endif
 
 #ifdef OOMPH_HAS_MPI
  MPI_Helpers::finalize();

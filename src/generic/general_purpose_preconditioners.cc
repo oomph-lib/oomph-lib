@@ -153,7 +153,7 @@ void MatrixBasedDiagPreconditioner::setup(Problem* problem_pt,
  // if z has not been setup then rebuild it
  if (!z.distribution_setup())
   {
-   z.rebuild(Distribution_pt);
+   z.build(Distribution_pt,0.0);
   }
 
  // apply the preconditioner
@@ -306,7 +306,7 @@ void MatrixBasedLumpedPreconditioner<MATRIX>::preconditioner_solve(
    }
 #endif
  
- z.rebuild(r.distribution_pt());  
+ z.build(r.distribution_pt(),0.0);  
  for (unsigned i=0;i<Nrow;i++)
   {      
    z[i]=Inv_lumped_diag_pt[i]*r[i];   
@@ -614,7 +614,7 @@ void ILUZeroPreconditioner<CCDoubleMatrix>::preconditioner_solve(
  // if z is distributed then change to global
  if (z.distributed())
   {
-   z.redistribute(*Distribution_pt);
+   z.redistribute(Distribution_pt);
   }
 
  // solve Ly=r (note L matrix is unit and diagonal is not stored)
@@ -643,7 +643,7 @@ void ILUZeroPreconditioner<CCDoubleMatrix>::preconditioner_solve(
  // if the distribution of z was preset the redistribute to original
  if (z_dist != 0)
   {
-   z.redistribute(*z_dist);
+   z.redistribute(z_dist);
    delete z_dist;
   }
 }
@@ -671,7 +671,7 @@ void ILUZeroPreconditioner<CRDoubleMatrix>::preconditioner_solve(
  // if z is distributed then change to global
  if (z.distributed())
   {
-   z.redistribute(*Distribution_pt);
+   z.redistribute(Distribution_pt);
   }
  
  // solve Ly=r (note L matrix is unit and diagonal is not stored)
@@ -701,7 +701,7 @@ void ILUZeroPreconditioner<CRDoubleMatrix>::preconditioner_solve(
  // if the distribution of z was preset the redistribute to original
  if (z_dist != 0)
   {
-   z.redistribute(*z_dist);
+   z.redistribute(z_dist);
    delete z_dist;
   }
 }

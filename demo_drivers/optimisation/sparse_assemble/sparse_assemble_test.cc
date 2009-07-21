@@ -269,14 +269,14 @@ void RectangularDrivenCavityProblem<ELEMENT>::compare_assembly_strategies(
  // Halt code execution?
  Problem::Pause_at_end_of_sparse_assembly=Global_Variables::Halt_code;
 
- Vector<double> residual;
+ DoubleVector residual;
  CRDoubleMatrix matrix;
   
- Vector<Vector<int> > col_index(1);
- Vector<Vector<int> > row_start(1);
- Vector<Vector<double> > value(1);
- Vector<Vector<double>*> residuals(1);
- residuals[0] = &residual;
+ Vector<int*> col_index(1);
+ Vector<int* > row_start(1);
+ Vector<double* > value(1);
+ Vector<unsigned> nnz(1);
+ Vector<double* > residuals(1);
  bool compressed_row = true;
  
  clock_t clock1 = clock();
@@ -325,6 +325,18 @@ void RectangularDrivenCavityProblem<ELEMENT>::compare_assembly_strategies(
              << std::endl << std::endl;
      
    break;
+
+
+  case 5:
+     
+   Problem::Sparse_assembly_method=
+    Problem::Perform_assembly_using_two_arrays;
+
+
+   std::cout << std::endl << "Oomph arrays" 
+             << std::endl << std::endl;
+     
+   break;
      
   default:
    
@@ -337,6 +349,7 @@ void RectangularDrivenCavityProblem<ELEMENT>::compare_assembly_strategies(
  sparse_assemble_row_or_column_compressed(col_index,
                                           row_start,
                                           value,
+                                          nnz,
                                           residuals,
                                           compressed_row);
   
@@ -355,7 +368,8 @@ void RectangularDrivenCavityProblem<ELEMENT>::compare_assembly_strategies(
 //Read out the dimension of the matrix 
  unsigned long n = ndof();
  LinearAlgebraDistribution dist(this->communicator_pt(),n,false);
- matrix.rebuild(&dist,n,value[0],col_index[0],row_start[0]);
+ matrix.build(&dist);
+ matrix.build_matrix_without_copy(n,nnz[0],value[0],col_index[0],row_start[0]);
  
  /// Dump matrix?
  if (Global_Variables::Dump_matrices)

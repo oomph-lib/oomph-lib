@@ -674,7 +674,7 @@ int main()
    }
 
   LinearAlgebraDistribution dist(problem.communicator_pt(),n_dof,false);
-  DoubleVector symm(&dist);
+  DoubleVector symm(&dist,0.0);
   for(unsigned n=0;n<n_dof;n++)
    {
     symm[n] = problem.dof(n);

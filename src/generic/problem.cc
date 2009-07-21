@@ -65,8 +65,10 @@ namespace oomph
   Max_newton_iterations(10), Max_residuals(10.0),
   Jacobian_reuse_is_enabled(false), Jacobian_has_been_computed(false),
   Problem_is_nonlinear(true),
-  Sparse_assembly_method(Perform_assembly_using_vectors_of_pairs), 
   Pause_at_end_of_sparse_assembly(false),
+  Sparse_assembly_method(Perform_assembly_using_vectors_of_pairs), 
+  Sparse_assemble_with_arrays_initial_allocation(400),
+  Sparse_assemble_with_arrays_allocation_increment(150),
   Numerical_zero_for_sparse_assembly(0.0),
   Mass_matrix_reuse_is_enabled(false), Mass_matrix_has_been_computed(false),
   Discontinuous_element_formulation(false),
@@ -76,8 +78,10 @@ namespace oomph
   Parameter_derivative(1.0), Parameter_current(0.0),
   Ds_current(0.0), Desired_newton_iterations_ds(5), 
   Minimum_ds(1.0e-10), Bifurcation_detection(false), 
-  First_jacobian_sign_change(false), Arc_length_step_taken(false),
+  First_jacobian_sign_change(false),Arc_length_step_taken(false),
 #ifdef OOMPH_HAS_MPI
+  Dist_problem_matrix_distribution(Uniform_matrix_distribution),
+  Parallel_sparse_assemble_previous_allocation(0),
   Problem_has_been_distributed(false),
   Max_permitted_error_for_halo_check(1.0e-14),
 #endif
@@ -89,7 +93,7 @@ namespace oomph
   Time_stepper_pt.resize(0);
   
   //Set the linear solvers, eigensolver and assembly handler
-  Linear_solver_pt = Default_linear_solver_pt = new SuperLU;
+  Linear_solver_pt = Default_linear_solver_pt = new SuperLUSolver;
   
   Eigen_solver_pt = Default_eigen_solver_pt = new ARPACK;
   
@@ -108,6 +112,11 @@ namespace oomph
 #else
   Communicator_pt = new OomphCommunicator();
 #endif
+
+  // just create an empty linear algebra distribution for the 
+  // DOFs
+  // this is setup when assign_eqn_numbers(...) is called.
+  Dof_distribution_pt = new LinearAlgebraDistribution;
  }
 
 //================================================================
@@ -130,9 +139,11 @@ namespace oomph
   // must be in charge of killing it. 
   // We can safely delete the defaults, however
   delete Default_linear_solver_pt;
+
   delete Default_eigen_solver_pt;
   delete Default_assembly_handler_pt;
   delete Communicator_pt;
+  delete Dof_distribution_pt;
 
  // Delete any copies of the problem that have been created for
  // use in adaptive bifurcation tracking.
@@ -142,7 +153,7 @@ namespace oomph
   {
    delete Copy_of_problem_pt[c];
   }
- 
+
  // if this problem has sub meshes then we must delete the Mesh_pt
  if (Sub_mesh_pt.size() != 0)
   {
@@ -978,13 +989,19 @@ namespace oomph
     offset+=el_hi-el_lo+1;
    }
       
-  // Gather timings on root processor: 
+  // Gather timings on root processor:
+  unsigned n_e = Last_el_for_assembly[rank]-First_el_for_assembly[rank]+1;
+  double* el_ass_time = new double[n_e];
+  for (unsigned i = 0; i < n_e; i++)
+   {
+    el_ass_time[i] = elemental_assembly_time[i];
+   }
   MPI_Gatherv(
-   &elemental_assembly_time[First_el_for_assembly[rank]],
-   Last_el_for_assembly[rank]-First_el_for_assembly[rank]+1,MPI_DOUBLE,
+   el_ass_time,n_e,MPI_DOUBLE,
    &elemental_assembly_time[0],&receive_count[0],&displacement[0],
    MPI_DOUBLE,0,this->communicator_pt()->mpi_comm());
-   
+  delete[] el_ass_time;
+
   // We have determined load balancing for current setup.
   // This can remain the same until assign_eqn_numbers() is called
   // again -- the flag is re-set to true there.
@@ -1110,9 +1127,6 @@ namespace oomph
  }
  
 #endif
-
-
-
 //================================================================
 /// Assign all equation numbers for problem: Deals with global
 /// data (= data that isn't attached to any elements) and then
@@ -1352,25 +1366,33 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
    n_dof=Dof_pt.size();
   }
 
-#ifdef OOMPH_HAS_MPI
 
+#ifdef OOMPH_HAS_MPI
+  // reset previous allocation
+  Parallel_sparse_assemble_previous_allocation = 0;
+ 
   // Only synchronise if the problem has actually been
   // distributed.
   if (Problem_has_been_distributed)
    {
-    // Wait until all processes have assigned their eqn numbers
-    MPI_Barrier(this->communicator_pt()->mpi_comm());
    
     // Synchronise the equation numbers and return the total
     // number of degrees of freedom in the overall problem
     n_dof=synchronise_eqn_numbers(assign_local_eqn_numbers);
    }
- 
+  // just setup the Dof_distribution_pt
+  // NOTE - this is setup by synchronise_eqn_numbers(...)
+  // if Problem_has_been_distributed
+  else
 #endif
+   {
+    Dof_distribution_pt->rebuild(Communicator_pt,n_dof,false);
+   }
 
+  // and return the total number of DOFs
   return n_dof;
-
  }
+
 
 //================================================================
 /// Get the vector of dofs, i.e. a vector containing the current
@@ -1382,8 +1404,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
   const unsigned long n_dof = ndof();
 
   //Resize the vector
-  LinearAlgebraDistribution dist(this->communicator_pt(),n_dof,false);
-  dofs.rebuild(&dist);
+  dofs.build(Dof_distribution_pt,0.0);
 
   //Copy dofs into vector
   for(unsigned long l=0;l<n_dof;l++)
@@ -1443,7 +1464,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
 
   //Resize the vector
   LinearAlgebraDistribution dist(this->communicator_pt(),n_dof,false);
-  Mres.rebuild(&dist);
+  Mres.build(&dist,0.0);
  
   //If we have discontinuous formulation
   if(Discontinuous_element_formulation)
@@ -1479,7 +1500,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
        }
      
       //Get the residuals
-      DoubleVector residuals(&dist);
+      DoubleVector residuals(&dist,0.0);
       this->get_residuals(residuals);
      
       // Resolve the linear system
@@ -1540,7 +1561,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
    {
     int n_dof=ndof();
     LinearAlgebraDistribution dist(Communicator_pt,n_dof,false);
-    residuals.rebuild(&dist);
+    residuals.build(&dist,0.0);
    }
   // otherwise just zero the residuals
   else
@@ -1558,7 +1579,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
 #endif
 
     // and zero
-    residuals.initialise();
+    residuals.initialise(0.0);
    }
 
 
@@ -1733,7 +1754,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
   if (!residuals.distribution_pt()->setup())
    {
     LinearAlgebraDistribution dist(Communicator_pt,n_dof,false);
-    residuals.rebuild(&dist,0.0);
+    residuals.build(&dist,0.0);
    }
   // else just zero the residuals
   else
@@ -1785,39 +1806,42 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
 
 //=============================================================================
 /// Return the fully-assembled Jacobian and residuals for the problem,
-/// in the case where the Jacobian matrix is in a row compressed storage
-/// format. \n
-/// The jacobian is a CRDoubleMatrix which is distributable. This method will
-/// by default assemble distributed jacobian and residual, if the
-/// distribution of the jacobian and residuals is not setup. \n 
-/// If the distribution of the jacobian and residuals is setup then: \n
-/// 1) the jacobian and residuals must have the same distribution. \n
-/// 2) if the distribution is distributed then it must be the default 
-/// distribution. \n
+/// in the case where the Jacobian matrix is in a distributable 
+/// row compressed storage format. \n
+/// 1. If the distribution of the jacobian and residuals is setup then, they 
+/// will be returned with that distribution.
+/// Note. the jacobian and residuals must have the same distribution. \n
+/// 2. If the distribution of the jacobian and residuals are not setup then
+/// their distribution will computed based on:
+/// Distributed_problem_matrix_distribution.
 //=============================================================================
  void Problem::get_jacobian(DoubleVector &residuals, CRDoubleMatrix &jacobian)
  {
- 
+
   // Three different cases; if MPI_Helpers::MPI_has_been_initialised=true 
-  // this means MPI_Helpers::init() has been called.  This could happen on a
+  // this means MPI_Helpers::setup() has been called.  This could happen on a
   // code compiled with MPI but run serially; in this instance the
   // get_residuals function still works on one processor.
   //
-  // Secondly, if a code has been compiled with MPI, but MPI_Helpers::init()
+  // Secondly, if a code has been compiled with MPI, but MPI_Helpers::setup()
   // has not been called, then MPI_Helpers::MPI_has_been_initialised=false 
   // and the code calls...
   //
   // Thirdly, the serial version (compiled by all, but only run when compiled
   // with MPI if MPI_Helpers::MPI_has_been_initialised=false
+  //
+  // The only case where an MPI code cannot run serially at present
+  // is one where the distribute function is used (i.e. METIS is called)
 
   //Allocate storage for the matrix entries
   //The generalised Vector<Vector<>> structure is required
   //for the most general interface to sparse_assemble() which allows
   //the assembly of multiple matrices at once.
-  Vector<Vector<int> > column_index(1);
-  Vector<Vector<int> > row_start(1);
-  Vector<Vector<double> > value(1); 
- 
+  Vector<int* > column_index(1);
+  Vector<int* > row_start(1);
+  Vector<double* > value(1); 
+  Vector<unsigned> nnz(1);
+
 #ifdef PARANOID
   // PARANOID checks that the distribution of the jacobian matches that of the
   // residuals (if they are setup) and that they have the right number of rows
@@ -1857,107 +1881,140 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
 
 
   //Allocate generalised storage format for passing to sparse_assemble()
-  Vector<Vector<double>* > residuals_vector(1);
-  residuals_vector[0] = new Vector<double>();
+  Vector<double* > res(1);
  
-  // determine whether the matrix is distributed (yes if multiple processors)
-  bool distributed = true;
-  if (Communicator_pt->nproc() == 1)
-   {
-    distributed = false;
-   }
+  // number of rows
+  unsigned nrow = this->ndof();
 
-  // create a temporary distribution
-  LinearAlgebraDistribution* dist_pt;
+  // determine the distribution for the jacobian.
+  // IF the jacobian has distribution setup then use that
+  // ELSE determine the distribution based on the 
+  // distributed_matrix_distribution enum
+  LinearAlgebraDistribution* dist_pt=0;
   if (jacobian.distribution_pt()->setup())
    {
     dist_pt = new LinearAlgebraDistribution(jacobian.distribution_pt());
    }
   else
    {
-    dist_pt = new LinearAlgebraDistribution(Communicator_pt,
-                                            this->ndof(),distributed);
-    jacobian.rebuild(dist_pt);
+#ifdef OOMPH_HAS_MPI
+    // if problem is only one one processor
+    if (Communicator_pt->nproc() == 1)
+     {
+      dist_pt = new LinearAlgebraDistribution(Communicator_pt,nrow,false);
+     }
+    // if the problem is not distributed then assemble the jacobian with
+    // a uniform distributed distribution
+    else if (!Problem_has_been_distributed)
+     {
+      dist_pt = new LinearAlgebraDistribution(Communicator_pt,nrow,true);
+     }
+    // otherwise the problem is a distributed problem
+    else
+     {
+      switch (Dist_problem_matrix_distribution)
+       {
+       case Uniform_matrix_distribution:
+        dist_pt = new LinearAlgebraDistribution(Communicator_pt,nrow,true);
+        break;
+       case Problem_matrix_distribution:
+        dist_pt = new LinearAlgebraDistribution(Dof_distribution_pt);
+        break;
+       case Default_matrix_distribution:
+        LinearAlgebraDistribution* uniform_dist_pt = 
+         new LinearAlgebraDistribution(Communicator_pt,nrow,true);
+        bool use_problem_dist = true;
+        unsigned nproc = Communicator_pt->nproc();
+        for (unsigned p = 0; p < nproc; p++)
+         {
+          if ((double)Dof_distribution_pt->nrow_local(p) > 
+              ((double)uniform_dist_pt->nrow_local(p))*1.1)
+           {
+            use_problem_dist = false;
+           }
+         }
+        if (use_problem_dist)
+         {
+          dist_pt = new LinearAlgebraDistribution(Dof_distribution_pt);
+         }
+        else
+         {
+          dist_pt = new LinearAlgebraDistribution(uniform_dist_pt);
+         }
+        delete uniform_dist_pt;
+        break;
+       }
+     }
+#else
+    dist_pt = new LinearAlgebraDistribution(Communicator_pt,nrow,false);
+#endif
    }
+
 
   //The matrix is in compressed row format
   bool compressed_row_flag=true;
-
+  
 #ifdef OOMPH_HAS_MPI
-  // assemble distributed matrix and vector
-  if (dist_pt->distributed())
-   {   
-    // temp ints for nrow_local and nrow total and first_row
-    unsigned long n_row_local;
-    unsigned long n_row_total;
-    unsigned long first_row;
-
-    // Get my block of rows                                     
-    distributed_matrix_sparse_assemble(column_index,     
-                                       row_start,                           
-                                       value,                                  
-                                       residuals_vector,          
-                                       first_row,                   
-                                       n_row_local,           
-                                       n_row_total,         
-                                       compressed_row_flag);
-
-#ifdef PARANOID
-    // final paranoid check the first row and nrow_local of the assembled 
-    // matrices and vectors are the same as the requested distribution.
-    // OR: the requested distribution is the default distribution.
-    if (dist_pt->first_row() != first_row || 
-        dist_pt->nrow_local() != n_row_local)
-     {
-      std::ostringstream error_stream;                                       
-      error_stream << "get_jacobian can only assemble the default distribution "
-                   << "the requested (distributed) distribution does not have "
-                   << "the same set of nrow_local and first_row.";
-      throw OomphLibError(error_stream.str(),                        
-                          "Problem::get_jacobian(...)",          
-                          OOMPH_EXCEPTION_LOCATION);    
-     }
-#endif     
+  //
+  if (Communicator_pt->nproc() == 1)
+   {
+#endif
+    sparse_assemble_row_or_column_compressed(column_index,
+                                             row_start,
+                                             value,
+                                             nnz,
+                                             res,
+                                             compressed_row_flag);
+    jacobian.build(dist_pt);
+    jacobian.build_matrix_without_copy(dist_pt->nrow(),nnz[0],
+                                       value[0],column_index[0],row_start[0]);
+    residuals.build(dist_pt,0.0);
+    residuals.set_external_values(res[0],true);
+#ifdef OOMPH_HAS_MPI
    }
-  // else we assemble the non distributed jacobian and residuals
   else
    {
-    // Get matrix rows and residual in CR format
-    global_matrix_sparse_assemble(column_index,
-                                  row_start,
-                                  value,
-                                  residuals_vector,
-                                  compressed_row_flag);
+    if (dist_pt->distributed())
+     {
+      parallel_sparse_assemble(dist_pt,
+                               column_index,
+                               row_start,
+                               value,
+                               nnz,
+                               res);
+      jacobian.build(dist_pt);
+      jacobian.build_matrix_without_copy(dist_pt->nrow(),nnz[0],
+                                         value[0],column_index[0],
+                                         row_start[0]); 
+      residuals.build(dist_pt,0.0);
+      residuals.set_external_values(res[0],true);   
+     }
+    else
+     {
+      LinearAlgebraDistribution* temp_dist_pt = 
+       new LinearAlgebraDistribution(Communicator_pt,dist_pt->nrow(),true);
+      parallel_sparse_assemble(temp_dist_pt,
+                               column_index,
+                               row_start,
+                               value,
+                               nnz,
+                               res);
+      jacobian.build(temp_dist_pt);
+      jacobian.build_matrix_without_copy(dist_pt->nrow(),nnz[0],
+                                         value[0],column_index[0],
+                                         row_start[0]); 
+      jacobian.redistribute(dist_pt);
+      residuals.build(temp_dist_pt,0.0);
+      residuals.set_external_values(res[0],true);   
+      residuals.redistribute(dist_pt);
+      delete temp_dist_pt;
+     }
    }
-#else
-  //Call the helper function sparse_assemble
-  sparse_assemble_row_or_column_compressed(column_index,
-                                           row_start,
-                                           value,
-                                           residuals_vector,
-                                           compressed_row_flag);
 #endif
-
-  //Build the jacobian
-
-  //The jacobian is the first (and only) matrix assembled by this function
-  jacobian.rebuild_matrix(dist_pt->nrow(),
-                          value[0],column_index[0],row_start[0]);
-
-  //build the residuals
-  // copy to the residuals DoubleVector
-  residuals.rebuild(dist_pt);
-  unsigned nrow_local = dist_pt->nrow_local();
-  for (unsigned i = 0; i < nrow_local; i++)
-   {
-    residuals[i] = (*residuals_vector[0])[i];
-   }
 
   // clean up dist_pt and residuals_vector pt
   delete dist_pt;
-  delete residuals_vector[0];
  }
-
 
 //=============================================================================
 /// Return the fully-assembled Jacobian and residuals for the problem,
@@ -1967,16 +2024,19 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
  void Problem::get_jacobian(DoubleVector &residuals, CCDoubleMatrix &jacobian)
  {
   // Three different cases; if MPI_Helpers::MPI_has_been_initialised=true 
-  // this means MPI_Helpers::init() has been called.  This could happen on a
+  // this means MPI_Helpers::setup() has been called.  This could happen on a
   // code compiled with MPI but run serially; in this instance the
   // get_residuals function still works on one processor.
   //
-  // Secondly, if a code has been compiled with MPI, but MPI_Helpers::init()
+  // Secondly, if a code has been compiled with MPI, but MPI_Helpers::setup()
   // has not been called, then MPI_Helpers::MPI_has_been_initialised=false 
   // and the code calls...
   //
   // Thirdly, the serial version (compiled by all, but only run when compiled
   // with MPI if MPI_Helpers::MPI_has_been_5Binitialised=false
+  //
+  // The only case where an MPI code cannot run serially at present
+  // is one where the distribute function is used (i.e. METIS is called)
 
   // get the number of degrees of freedom  
   unsigned n_dof=ndof();   
@@ -1990,8 +2050,9 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
     if (residuals.distribution_pt()->distributed())  
      {                  
       std::ostringstream error_stream;                
-      error_stream << "If the DoubleVector residuals is setup then it must not "
-                   << "be distributed.";         
+      error_stream 
+       << "If the DoubleVector residuals is setup then it must not "
+       << "be distributed.";         
       throw OomphLibError(error_stream.str(),      
                           "Problem::get_jacobian(...)",      
                           OOMPH_EXCEPTION_LOCATION);       
@@ -1999,8 +2060,9 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
     if (residuals.distribution_pt()->nrow() != n_dof)     
      {                               
       std::ostringstream error_stream;                 
-      error_stream << "If the DoubleVector residuals is setup then it must have"
-                   << " the correct number of rows";     
+      error_stream 
+       << "If the DoubleVector residuals is setup then it must have"
+       << " the correct number of rows";     
       throw OomphLibError(error_stream.str(),                          
                           "Problem::get_jacobian(...)",     
                           OOMPH_EXCEPTION_LOCATION);        
@@ -2008,8 +2070,9 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
     if (!(*Communicator_pt == *residuals.distribution_pt()->communicator_pt()))
      {                  
       std::ostringstream error_stream;      
-      error_stream << "If the DoubleVector residuals is setup then it must have"
-                   << " the same communicator as the problem.";  
+      error_stream 
+       << "If the DoubleVector residuals is setup then it must have"
+       << " the same communicator as the problem.";  
       throw OomphLibError(error_stream.str(),                  
                           "Problem::get_jacobian(...)",     
                           OOMPH_EXCEPTION_LOCATION);       
@@ -2021,66 +2084,61 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
   //The generalised Vector<Vector<>> structure is required
   //for the most general interface to sparse_assemble() which allows
   //the assembly of multiple matrices at once.
-  Vector<Vector<int> > row_index(1);
-  Vector<Vector<int> > column_start(1);
-  Vector<Vector<double> > value(1); 
+  Vector<int* > row_index(1);
+  Vector<int* > column_start(1);
+  Vector<double* > value(1); 
+
   //Allocate generalised storage format for passing to sparse_assemble()
-  Vector<Vector<double>*> residuals_vector(1);
-  //Set the residuals passed to sparse assemble to be those passed
-  //into this function
-  residuals_vector[0] = new Vector<double>;
+  Vector<double* > res(1);
+
+  // allocate storage for the number of non-zeros in each matrix
+  Vector<unsigned> nnz(1);
  
   //The matrix is in compressed column format
   bool compressed_row_flag=false;
- 
-#ifdef OOMPH_HAS_MPI
-  if (MPI_Helpers::MPI_has_been_initialised)
+  
+  // get the distribution for the residuals
+  LinearAlgebraDistribution* dist_pt;
+  if (!residuals.distribution_setup())
    {
-    // Get matrix rows and residual in CC format
-    global_matrix_sparse_assemble(row_index,
-                                  column_start,
-                                  value,
-                                  residuals_vector,
-                                  compressed_row_flag);
+    dist_pt 
+     = new LinearAlgebraDistribution(Communicator_pt,this->ndof(),false);
    }
   else
-#endif
    {
-    //Call the helper function sparse_assemble
+    dist_pt = new LinearAlgebraDistribution(residuals.distribution_pt());
+   }
+
+#ifdef OOMPH_HAS_MPI
+  if (communicator_pt()->nproc() == 1)
+   {
+#endif
     sparse_assemble_row_or_column_compressed(row_index,
                                              column_start,
                                              value,
-                                             residuals_vector,
-                                             compressed_row_flag);
+                                             nnz,
+                                             res,
+                                             compressed_row_flag);    
+    jacobian.build_without_copy(value[0],row_index[0],column_start[0],nnz[0],
+                                n_dof,n_dof); 
+    residuals.build(dist_pt,0.0);
+    residuals.set_external_values(res[0],true);
+#ifdef OOMPH_HAS_MPI
    }
- 
-  // create a temporary distribution             
-  LinearAlgebraDistribution* dist_pt;        
-  if (residuals.distribution_pt()->setup()) 
+  else
    {
-    dist_pt = new LinearAlgebraDistribution(*residuals.distribution_pt());
-   }                                                           
-  else                             
-   {                                                   
-    dist_pt = new LinearAlgebraDistribution(Communicator_pt,this->ndof(),false);
-   }                               
+   std::ostringstream error_stream;
+   error_stream
+    << "Cannot assemble a CCDoubleMatrix Jacobian on more "
+    << "than one processor."; 
+   throw OomphLibError(error_stream.str(),
+                       "Problem::get_jacobian(...)",
+                       OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
 
-  //Build the jacobian                          
-  //The jacobian is the first (and only) matrix assembled by this function   
-  jacobian.build(value[0],row_index[0],column_start[0],n_dof,n_dof);     
-                                                        
-  //build the residuals                                                
-  // copy to the residuals DoubleVector 
-  residuals.rebuild(dist_pt);                                    
-  unsigned nrow_local = dist_pt->nrow_local();
-  for (unsigned i = 0; i < nrow_local; i++)   
-   {                                           
-    residuals[i] = (*residuals_vector[0])[i];  
-   }                                       
-                                                                 
-  // clean up dist_pt and residuals_vector pt               
-  delete dist_pt;                                                   
-  delete residuals_vector[0];   
+  // clean up
+  delete dist_pt;
  }
 
 
@@ -2234,6 +2292,9 @@ void Problem::set_pinned_values_to_zero()
   }
 }
 
+
+
+
 //=====================================================================
 /// This is a (private) helper function that is used to assemble system
 /// matrices in compressed row or column format
@@ -2254,10 +2315,11 @@ void Problem::set_pinned_values_to_zero()
 /// the public flag Problem::Sparse_assembly_method.
 //=====================================================================
 void Problem::sparse_assemble_row_or_column_compressed(
- Vector<Vector<int> > &column_or_row_index, 
- Vector<Vector<int> > &row_or_column_start, 
- Vector<Vector<double> > &value, 
- Vector<Vector<double>*> &residuals,
+ Vector<int* > &column_or_row_index, 
+ Vector<int* > &row_or_column_start, 
+ Vector<double* > &value,
+ Vector<unsigned > &nnz, 
+ Vector<double* > &residuals,
  bool compressed_row_flag)
 {
 
@@ -2271,6 +2333,7 @@ void Problem::sparse_assemble_row_or_column_compressed(
     column_or_row_index, 
     row_or_column_start, 
     value, 
+    nnz,
     residuals,
     compressed_row_flag);
 
@@ -2281,7 +2344,8 @@ void Problem::sparse_assemble_row_or_column_compressed(
    sparse_assemble_row_or_column_compressed_with_two_vectors(
     column_or_row_index, 
     row_or_column_start, 
-    value, 
+    value,
+    nnz,
     residuals,
     compressed_row_flag);
 
@@ -2292,7 +2356,8 @@ void Problem::sparse_assemble_row_or_column_compressed(
    sparse_assemble_row_or_column_compressed_with_maps(
     column_or_row_index, 
     row_or_column_start, 
-    value, 
+    value,
+    nnz,
     residuals,
     compressed_row_flag);
 
@@ -2303,7 +2368,20 @@ void Problem::sparse_assemble_row_or_column_compressed(
    sparse_assemble_row_or_column_compressed_with_lists(
     column_or_row_index, 
     row_or_column_start, 
-    value, 
+    value,
+    nnz,
+    residuals,
+    compressed_row_flag);
+
+   break;
+
+  case Perform_assembly_using_two_arrays:
+
+  sparse_assemble_row_or_column_compressed_with_two_arrays(
+    column_or_row_index, 
+    row_or_column_start, 
+    value,
+    nnz,
     residuals,
     compressed_row_flag);
 
@@ -2321,7 +2399,6 @@ void Problem::sparse_assemble_row_or_column_compressed(
                        "Problem::sparse_assemble_row_or_column_compressed",
                        OOMPH_EXCEPTION_LOCATION);
   }
-
 }
 
 
@@ -2345,10 +2422,11 @@ void Problem::sparse_assemble_row_or_column_compressed(
 ///                      arguments is as stated in square brackets].
 //=====================================================================
 void Problem::sparse_assemble_row_or_column_compressed_with_maps(
- Vector<Vector<int> > &column_or_row_index, 
- Vector<Vector<int> > &row_or_column_start, 
- Vector<Vector<double> > &value, 
- Vector<Vector<double>*> &residuals,
+ Vector<int* > &column_or_row_index, 
+ Vector<int* > &row_or_column_start, 
+ Vector<double* > &value,
+ Vector<unsigned> &nnz,
+ Vector<double* > &residuals,
  bool compressed_row_flag)
 {
  //Total number of elements
@@ -2359,24 +2437,21 @@ void Problem::sparse_assemble_row_or_column_compressed_with_maps(
  unsigned long el_hi=n_elements-1;
 
 #ifdef OOMPH_HAS_MPI
- // Storage for current process
- int rank=this->communicator_pt()->my_rank();
-
- // Loop over a fraction of the elements
+ // Otherwise just loop over a fraction of the elements
  // (This will either have been initialised in
  // Problem::set_default_first_and_last_element_for_assembly() or
- // will have been re-assigned during a previous assembly loop)
+ // will have been re-assigned during a previous assembly loop
  // Note that following the re-assignment only the entries
  // for the current processor are relevant.
  if (!Problem_has_been_distributed)
   {
-   el_lo=First_el_for_assembly[rank];
-   el_hi=Last_el_for_assembly[rank];
+   el_lo=First_el_for_assembly[Communicator_pt->my_rank()];
+   el_hi=Last_el_for_assembly[Communicator_pt->my_rank()];
   }
 #endif 
 
- //Total number of degrees of freedom
- const unsigned long n_dof = Problem::ndof();
+ // number of dofs
+ unsigned ndof = this->ndof();
 
  //Find the number of vectors to be assembled
  const unsigned n_vector = residuals.size();
@@ -2443,10 +2518,17 @@ void Problem::sparse_assemble_row_or_column_compressed_with_maps(
  Vector<Vector<std::map<unsigned,double> > > matrix_data_map(n_matrix);
  //Loop over the number of matrices being assembled and resize
  //each vector of maps to the number of rows or columns of the matrix
- for(unsigned m=0;m<n_matrix;m++) {matrix_data_map[m].resize(n_dof);}
+ for(unsigned m=0;m<n_matrix;m++) {matrix_data_map[m].resize(ndof);}
  
  //Resize the residuals vectors
- for(unsigned v=0;v<n_vector;v++) {residuals[v]->resize(n_dof);}
+ for(unsigned v=0;v<n_vector;v++) 
+  { 
+   residuals[v] = new double[ndof];
+   for (unsigned i = 0; i < ndof; i++)
+    {
+     residuals[v][i] = 0;
+    }
+  }
 
 
 #ifdef OOMPH_HAS_MPI
@@ -2513,12 +2595,14 @@ void Problem::sparse_assemble_row_or_column_compressed_with_maps(
       for(unsigned i=0;i<nvar;i++)
        {
         //Get the local equation number
-        unsigned eqn_number = assembly_handler_pt->eqn_number(elem_pt,i);
+        unsigned eqn_number 
+         = assembly_handler_pt->eqn_number(elem_pt,i);
+ 
         //Add the contribution to the residuals
         for(unsigned v=0;v<n_vector;v++)
          {
           //Fill in each residuals vector
-          (*residuals[v])[eqn_number] += el_residuals[v][i];
+          residuals[v][eqn_number] += el_residuals[v][i];
          }
 
         //Now loop over the other index
@@ -2593,13 +2677,24 @@ void Problem::sparse_assemble_row_or_column_compressed_with_maps(
  for(unsigned m=0;m<n_matrix;m++)
   {
    //Set the number of rows or columns
-   row_or_column_start[m].resize(n_dof+1);
+   row_or_column_start[m] = new int[ndof];
    //Counter for the total number of entries in the storage scheme
    unsigned long entry_count=0;
    row_or_column_start[m][0] = entry_count;
    
+   // first we compute the number of non-zeros
+   nnz[m] = 0;
+   for(unsigned long i_global=0;i_global<ndof;i_global++)
+    {
+     nnz[m] += matrix_data_map[m][i_global].size();
+    }
+
+   // and then resize the storage
+   column_or_row_index[m] = new int[nnz[m]];
+   value[m] = new double[nnz[m]];
+
    //Now we merely loop over the number of rows or columns 
-   for(unsigned long i_global=0;i_global<n_dof;i_global++)
+   for(unsigned long i_global=0;i_global<ndof;i_global++)
     {
      //Start index for the present row
      row_or_column_start[m][i_global] = entry_count;
@@ -2608,21 +2703,22 @@ void Problem::sparse_assemble_row_or_column_compressed_with_maps(
 
      //Loop over all the entries in the map corresponding to the given
      //row or column. It will be ordered
+     
      for(std::map<unsigned,double>::iterator 
           it = matrix_data_map[m][i_global].begin();
          it!=matrix_data_map[m][i_global].end();++it)
       {
        //The first value is the column or row index
-       column_or_row_index[m].push_back(it->first);
+       column_or_row_index[m][entry_count] = it->first;
        //The second value is the actual data value
-       value[m].push_back(it->second);
+       value[m][entry_count] = it->second;
        //Increase the value of the counter
        entry_count++;
       }
     }
      
    //Final entry in the row/column start vector
-   row_or_column_start[m][n_dof] = entry_count;
+   row_or_column_start[m][ndof] = entry_count;
   } //End of the loop over the matrices
 
  if (Pause_at_end_of_sparse_assembly)
@@ -2654,10 +2750,11 @@ void Problem::sparse_assemble_row_or_column_compressed_with_maps(
 ///                      arguments is as stated in square brackets].
 //=====================================================================
 void Problem::sparse_assemble_row_or_column_compressed_with_lists(
- Vector<Vector<int> > &column_or_row_index, 
- Vector<Vector<int> > &row_or_column_start, 
- Vector<Vector<double> > &value, 
- Vector<Vector<double>*> &residuals,
+ Vector<int* > &column_or_row_index, 
+ Vector<int* > &row_or_column_start, 
+ Vector<double* > &value,
+ Vector<unsigned> &nnz,
+ Vector<double* > &residuals,
  bool compressed_row_flag)
 {
  //Total number of elements
@@ -2668,10 +2765,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_lists(
  unsigned long el_hi=n_elements-1;
 
 #ifdef OOMPH_HAS_MPI
- // Storage for current processor
- int rank=this->communicator_pt()->my_rank();
-
- // Loop over a fraction of the elements
+ // Otherwise just loop over a fraction of the elements
  // (This will either have been initialised in
  // Problem::set_default_first_and_last_element_for_assembly() or
  // will have been re-assigned during a previous assembly loop
@@ -2679,13 +2773,13 @@ void Problem::sparse_assemble_row_or_column_compressed_with_lists(
  // for the current processor are relevant.
  if (!Problem_has_been_distributed)
   {
-   el_lo=First_el_for_assembly[rank];
-   el_hi=Last_el_for_assembly[rank];
+   el_lo=First_el_for_assembly[Communicator_pt->my_rank()];
+   el_hi=Last_el_for_assembly[Communicator_pt->my_rank()];
   }
 #endif 
 
- //Total number of degrees of freedom
- const unsigned long n_dof = Problem::ndof();
+ // number of dofs
+ unsigned ndof = this->ndof();
 
  //Find the number of vectors to be assembled
  const unsigned n_vector = residuals.size();
@@ -2750,10 +2844,17 @@ void Problem::sparse_assemble_row_or_column_compressed_with_lists(
  Vector<Vector<std::list<std::pair<unsigned,double> > > > 
   matrix_data_list(n_matrix);
  //Loop over the number of matrices and resize
- for(unsigned m=0;m<n_matrix;m++) {matrix_data_list[m].resize(n_dof);}
+ for(unsigned m=0;m<n_matrix;m++) {matrix_data_list[m].resize(ndof);}
 
  //Resize the residuals vectors
- for(unsigned v=0;v<n_vector;v++) {residuals[v]->resize(n_dof);}
+ for(unsigned v=0;v<n_vector;v++) 
+  { 
+   residuals[v] = new double[ndof];
+   for (unsigned i = 0; i < ndof; i++)
+    {
+     residuals[v][i] = 0;
+    }
+  }
 
 #ifdef OOMPH_HAS_MPI
 
@@ -2822,13 +2923,15 @@ void Problem::sparse_assemble_row_or_column_compressed_with_lists(
       //Loop over the first index of local variables
       for(unsigned i=0;i<nvar;i++)
        {
-        //Get the local equation number
-        unsigned eqn_number = assembly_handler_pt->eqn_number(elem_pt,i);
+      //Get the local equation number
+        unsigned eqn_number 
+         = assembly_handler_pt->eqn_number(elem_pt,i);
+
         //Add the contribution to the residuals
         for(unsigned v=0;v<n_vector;v++)
          {
           //Fill in the residuals vector
-          (*residuals[v])[eqn_number] += el_residuals[v][i];
+          residuals[v][eqn_number] += el_residuals[v][i];
          }
 
         //Now loop over the other index
@@ -2913,14 +3016,25 @@ void Problem::sparse_assemble_row_or_column_compressed_with_lists(
  for(unsigned m=0;m<n_matrix;m++)
   {
    //Set the number of rows or columns
-   row_or_column_start[m].resize(n_dof+1);
+   row_or_column_start[m] = new int[ndof+1];
    //Counter for the total number of entries in the storage scheme
    unsigned long entry_count=0;
    //The first entry is 0
    row_or_column_start[m][0] = entry_count;
+
+   // first we compute the number of non-zeros
+   nnz[m] = 0;
+   for(unsigned long i_global=0;i_global<ndof;i_global++)
+    {
+     nnz[m] += matrix_data_list[m][i_global].size();
+    }
+
+   // and then resize the storage
+   column_or_row_index[m] = new int[nnz[m]];
+   value[m] = new double[nnz[m]];
      
    //Now we merely loop over the number of rows or columns 
-   for(unsigned long i_global=0;i_global<n_dof;i_global++)
+   for(unsigned long i_global=0;i_global<ndof;i_global++)
     {
      //Start index for the present row is the number of entries so far
      row_or_column_start[m][i_global] = entry_count;
@@ -2961,9 +3075,9 @@ void Problem::sparse_assemble_row_or_column_compressed_with_lists(
        else
         {
          //Add the row or column index to the vector
-         column_or_row_index[m].push_back(current_index);
+         column_or_row_index[m][entry_count] = current_index;
          //Add the actual value to the vector
-         value[m].push_back(current_value);
+         value[m][entry_count] = current_value;
          //Increase the counter for the number of entries in each vector
          entry_count++;
            
@@ -2990,12 +3104,13 @@ void Problem::sparse_assemble_row_or_column_compressed_with_lists(
         //If we have a single equation number, this will not be evaluated.
         //If we don't then we do the test to check that the final
         //entry is added
-        ||(static_cast<int>(current_index) != column_or_row_index[m].back()))
+        ||(static_cast<int>(current_index) != 
+           column_or_row_index[m][entry_count-1]))
       {
        //Add the row or column index to the vector
-       column_or_row_index[m].push_back(current_index);
+       column_or_row_index[m][entry_count] = current_index;
        //Add the actual value to the vector
-       value[m].push_back(current_value);
+       value[m][entry_count] = current_value;
        //Increase the counter for the number of entries in each vector
        entry_count++;
       }
@@ -3003,7 +3118,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_lists(
     } //End of loop over the rows or columns of the entire matrix
      
    //Final entry in the row/column start vector
-   row_or_column_start[m][n_dof] = entry_count;
+   row_or_column_start[m][ndof] = entry_count;
   } //End of loop over matrices
 
  if (Pause_at_end_of_sparse_assembly)
@@ -3033,10 +3148,11 @@ void Problem::sparse_assemble_row_or_column_compressed_with_lists(
 ///                      arguments is as stated in square brackets].
 //=====================================================================
 void Problem::sparse_assemble_row_or_column_compressed_with_vectors_of_pairs(
- Vector<Vector<int> > &column_or_row_index, 
- Vector<Vector<int> > &row_or_column_start, 
- Vector<Vector<double> > &value, 
- Vector<Vector<double>*> &residuals,
+ Vector<int* > &column_or_row_index, 
+ Vector<int* > &row_or_column_start, 
+ Vector<double* > &value, 
+ Vector<unsigned> &nnz,
+ Vector<double*> &residuals,
  bool compressed_row_flag)
 {
  //Total number of elements
@@ -3047,10 +3163,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_vectors_of_pairs(
  unsigned long el_hi=n_elements-1;
  
 #ifdef OOMPH_HAS_MPI
- // Storage for current processor
- int rank=this->communicator_pt()->my_rank();
-
- // Loop over a fraction of the elements
+ // Otherwise just loop over a fraction of the elements
  // (This will either have been initialised in
  // Problem::set_default_first_and_last_element_for_assembly() or
  // will have been re-assigned during a previous assembly loop
@@ -3058,14 +3171,14 @@ void Problem::sparse_assemble_row_or_column_compressed_with_vectors_of_pairs(
  // for the current processor are relevant.
  if (!Problem_has_been_distributed)
   {
-   el_lo=First_el_for_assembly[rank];
-   el_hi=Last_el_for_assembly[rank];
+   el_lo=First_el_for_assembly[Communicator_pt->my_rank()];
+   el_hi=Last_el_for_assembly[Communicator_pt->my_rank()];
   }
 #endif 
 
- //Total number of degrees of freedom
- const unsigned long n_dof = Problem::ndof();
- 
+ // number of local eqns
+ unsigned ndof = this->ndof();
+
  //Find the number of vectors to be assembled
  const unsigned n_vector = residuals.size();
  
@@ -3121,11 +3234,18 @@ void Problem::sparse_assemble_row_or_column_compressed_with_vectors_of_pairs(
  
  //Loop over the number of matrices being assembled and resize
  //each Vector of Vectors to the number of rows or columns of the matrix
- for(unsigned m=0;m<n_matrix;m++) {matrix_data[m].resize(n_dof);}
+ for(unsigned m=0;m<n_matrix;m++) {matrix_data[m].resize(ndof);} 
  
  //Resize the residuals vectors
- for(unsigned v=0;v<n_vector;v++) {residuals[v]->resize(n_dof);}
- 
+ for(unsigned v=0;v<n_vector;v++) 
+  { 
+   residuals[v] = new double[ndof];
+   for (unsigned i = 0; i < ndof; i++)
+    {
+     residuals[v][i] = 0;
+    }
+  }
+
 #ifdef OOMPH_HAS_MPI
 
  // Storage for assembly time for elements
@@ -3188,13 +3308,16 @@ void Problem::sparse_assemble_row_or_column_compressed_with_vectors_of_pairs(
       //Loop over the first index of local variables
       for(unsigned i=0;i<nvar;i++)
        {
+
         //Get the local equation number
-        unsigned eqn_number = assembly_handler_pt->eqn_number(elem_pt,i);
+        unsigned eqn_number 
+         = assembly_handler_pt->eqn_number(elem_pt,i);
+
         //Add the contribution to the residuals
         for(unsigned v=0;v<n_vector;v++)
          {
           //Fill in each residuals vector
-          (*residuals[v])[eqn_number] += el_residuals[v][i];
+          residuals[v][eqn_number] += el_residuals[v][i];
          }
       
         //Now loop over the other index
@@ -3301,23 +3424,24 @@ void Problem::sparse_assemble_row_or_column_compressed_with_vectors_of_pairs(
  for(unsigned m=0;m<n_matrix;m++)
   {
    //Set the number of rows or columns
-   row_or_column_start[m].resize(n_dof+1);
+   row_or_column_start[m]  = new int[ndof+1];
    
    // fill row_or_column_start and find the number of entries
    row_or_column_start[m][0] = 0;
-   for(unsigned long i=0;i<n_dof;i++)
+   for(unsigned long i=0;i<ndof;i++)
     {
      row_or_column_start[m][i+1] = row_or_column_start[m][i]
       + matrix_data[m][i].size();
     }
-   const unsigned entries = row_or_column_start[m][n_dof];
+   const unsigned entries = row_or_column_start[m][ndof];
    
    // resize vectors
-   column_or_row_index[m].resize(entries);
-   value[m].resize(entries);
+   column_or_row_index[m] = new int[entries];
+   value[m] = new double[entries];
+   nnz[m] = entries;
    
    //Now we merely loop over the number of rows or columns
-   for(unsigned long i_global=0;i_global<n_dof;i_global++)
+   for(unsigned long i_global=0;i_global<ndof;i_global++)
     {
      //If there are no entries in the vector then skip the rest of the loop
      if(matrix_data[m][i_global].empty()) {continue;}
@@ -3366,10 +3490,11 @@ void Problem::sparse_assemble_row_or_column_compressed_with_vectors_of_pairs(
 ///                      arguments is as stated in square brackets].
 //=====================================================================
 void Problem::sparse_assemble_row_or_column_compressed_with_two_vectors(
- Vector<Vector<int> > &column_or_row_index, 
- Vector<Vector<int> > &row_or_column_start, 
- Vector<Vector<double> > &value, 
- Vector<Vector<double>*> &residuals,
+ Vector<int* > &column_or_row_index, 
+ Vector<int* > &row_or_column_start, 
+ Vector<double* > &value, 
+ Vector<unsigned> &nnz,
+ Vector<double* > &residuals,
  bool compressed_row_flag)
 {
  //Total number of elements
@@ -3381,10 +3506,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_vectors(
  
 
 #ifdef OOMPH_HAS_MPI
- // Storage for current processor
- int rank=this->communicator_pt()->my_rank();
-
- // Loop over a fraction of the elements
+ // Otherwise just loop over a fraction of the elements
  // (This will either have been initialised in
  // Problem::set_default_first_and_last_element_for_assembly() or
  // will have been re-assigned during a previous assembly loop
@@ -3392,13 +3514,13 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_vectors(
  // for the current processor are relevant.
  if (!Problem_has_been_distributed)
   {
-   el_lo=First_el_for_assembly[rank];
-   el_hi=Last_el_for_assembly[rank];
+   el_lo=First_el_for_assembly[Communicator_pt->my_rank()];
+   el_hi=Last_el_for_assembly[Communicator_pt->my_rank()];
   }
 #endif 
 
- //Total number of degrees of freedom
- const unsigned long n_dof = Problem::ndof();
+ // number of local eqns
+ unsigned ndof = this->ndof();
 
  //Find the number of vectors to be assembled
  const unsigned n_vector = residuals.size();
@@ -3459,13 +3581,19 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_vectors(
  //each vector of vectors to the number of rows or columns of the matrix
  for(unsigned m=0;m<n_matrix;m++)
   {
-   matrix_row_or_col_indices[m].resize(n_dof);
-   matrix_values[m].resize(n_dof);
+   matrix_row_or_col_indices[m].resize(ndof);
+   matrix_values[m].resize(ndof);
   }
  
  //Resize the residuals vectors
- for(unsigned v=0;v<n_vector;v++) {residuals[v]->resize(n_dof);}
-
+ for(unsigned v=0;v<n_vector;v++) 
+  { 
+   residuals[v] = new double[ndof];
+   for (unsigned i = 0; i < ndof; i++)
+    {
+     residuals[v][i] = 0;
+    }
+  }
 
 #ifdef OOMPH_HAS_MPI
 
@@ -3531,12 +3659,14 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_vectors(
       for(unsigned i=0;i<nvar;i++)
        {
         //Get the local equation number
-        unsigned eqn_number = assembly_handler_pt->eqn_number(elem_pt,i);
+        unsigned eqn_number 
+         = assembly_handler_pt->eqn_number(elem_pt,i);
+       
         //Add the contribution to the residuals
         for(unsigned v=0;v<n_vector;v++)
          {
           //Fill in each residuals vector
-          (*residuals[v])[eqn_number] += el_residuals[v][i];
+          residuals[v][eqn_number] += el_residuals[v][i];
          }
       
         //Now loop over the other index
@@ -3648,23 +3778,24 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_vectors(
  for(unsigned m=0;m<n_matrix;m++)
   {
    //Set the number of rows or columns
-   row_or_column_start[m].resize(n_dof+1);
+   row_or_column_start[m] = new int[ndof+1];
    
    // fill row_or_column_start and find the number of entries
    row_or_column_start[m][0] = 0;
-   for (unsigned long i=0;i<n_dof;i++)
+   for (unsigned long i=0;i<ndof;i++)
     {
      row_or_column_start[m][i+1] = row_or_column_start[m][i]
       + matrix_values[m][i].size();
     }
-   const unsigned entries = row_or_column_start[m][n_dof];
+   const unsigned entries = row_or_column_start[m][ndof];
    
    // resize vectors
-   column_or_row_index[m].resize(entries);
-   value[m].resize(entries);
+   column_or_row_index[m] = new int[entries];
+   value[m] = new double[entries];
+   nnz[m] = entries;
    
    //Now we merely loop over the number of rows or columns
-   for(unsigned long  i_global=0;i_global<n_dof;i_global++)
+   for(unsigned long  i_global=0;i_global<ndof;i_global++)
     {
      //If there are no entries in the vector then skip the rest of the loop
      if(matrix_values[m][i_global].empty()) {continue;}
@@ -3690,659 +3821,1819 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_vectors(
 
 }
 
-#ifdef OOMPH_HAS_MPI
-//================================================================
-/// Assemble Jacobian matrix in compressed row or column format in
-/// parallel. Each processor first assembles a block of rows of the
-/// complete Jacobian and residual, and then assembles the whole
-/// Jacobian and residual.
-/// column_or_row_index : Column [or row] index of given entry
-/// row_or_column_start : Index of first entry for given row [or column]
-/// value               : Vector of nonzero entries
-/// residuals           : Residual vector
-/// compressed_row_flag : compressed row storage? Otherwise
-///                       compressed column -- defaults to false as 
-///                       this is the format required by the global memory
-///                       version of SuperLU_dist
-//================================================================
-void Problem::global_matrix_sparse_assemble
-(Vector<Vector<int> > &column_or_row_index,
- Vector<Vector<int> > &row_or_column_start,
- Vector<Vector<double> > &value,
- Vector<Vector<double>*> &residuals,
+
+//=====================================================================
+/// This is a (private) helper function that is used to assemble system
+/// matrices in compressed row or column format
+/// and compute residual vectors using two vectors.
+/// The default action is to assemble the jacobian matrix and 
+/// residuals for the Newton method. The action can be
+/// overloaded at an elemental level by chaging the default
+/// behaviour of the function Element::get_all_vectors_and_matrices().
+/// column_or_row_index: Column [or row] index of given entry
+/// row_or_column_start: Index of first entry for given row [or column]
+/// value              : Vector of nonzero entries
+/// residuals          : Residual vector
+/// compressed_row_flag: Bool flag to indicate if storage format is 
+///                      compressed row [if false interpretation of
+///                      arguments is as stated in square brackets].
+//=====================================================================
+void Problem::sparse_assemble_row_or_column_compressed_with_two_arrays(
+ Vector<int* > &column_or_row_index, 
+ Vector<int* > &row_or_column_start, 
+ Vector<double* > &value, 
+ Vector<unsigned> &nnz,
+ Vector<double* > &residuals,
  bool compressed_row_flag)
 {
- //---------------------------------------------------------------
- // Note: Main comments refer to compressed row storage, comments
- //       in square brackets refer to compressed column storage
- //---------------------------------------------------------------
+ 
+ //Total number of elements
+ const unsigned long  n_elements = mesh_pt()->nelement();
 
- // Storage for number of processors
- int n_proc=this->communicator_pt()->nproc();
- int rank=this->communicator_pt()->my_rank();
+ // Default range of elements for distributed problems
+ unsigned long el_lo=0;
+ unsigned long el_hi=n_elements-1;
+ 
 
- // deal with single processor case
- if (n_proc==1)
+#ifdef OOMPH_HAS_MPI
+ // Otherwise just loop over a fraction of the elements
+ // (This will either have been initialised in
+ // Problem::set_default_first_and_last_element_for_assembly() or
+ // will have been re-assigned during a previous assembly loop
+ // Note that following the re-assignment only the entries
+ // for the current processor are relevant.
+ if (!Problem_has_been_distributed)
   {
-   // Call sparse_assemble
-   sparse_assemble_row_or_column_compressed(column_or_row_index,
-                                            row_or_column_start,
-                                            value,
-                                            residuals,
-                                            compressed_row_flag);
+   el_lo=First_el_for_assembly[Communicator_pt->my_rank()];
+   el_hi=Last_el_for_assembly[Communicator_pt->my_rank()];
   }
- // When n_proc>1 assemble the global matrix
- // from the blocks returned by distributed_matrix_sparse_assemble
- else 
+#endif 
+
+ // number of local eqns
+ unsigned ndof = this->ndof();
+
+ //Find the number of vectors to be assembled
+ const unsigned n_vector = residuals.size();
+
+ //Find the number of matrices to be assembled
+ const unsigned n_matrix = column_or_row_index.size();
+
+ //Locally cache pointer to assembly handler
+ AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
+
+//Error check dimensions
+#ifdef PARANOID
+ if(row_or_column_start.size() != n_matrix)
   {
-   //Clear everything
-   value[0].clear();
-   row_or_column_start[0].clear();
-   column_or_row_index[0].clear();
-   (*residuals[0]).clear();
-  
-   // Total number of dofs in the problem
-   unsigned long n_dof=0;
-  
-   // Contribution to the Jacobian matrix and residual vector
-   unsigned long my_first_row_or_col=0;
-   unsigned long my_n_row_or_col=0;
-   Vector<Vector<double> > my_value(1);
-   Vector<Vector<int> > my_col_or_row_index(1);
-   Vector<Vector<int> > my_row_or_col_start(1);
-   Vector<double> my_residuals;
-   Vector<Vector<double>*> my_residuals_vector(1);
-   my_residuals_vector[0] = &my_residuals; 
-  
-   // Call distributed_matrix_sparse_assemble on local processor
-   distributed_matrix_sparse_assemble(my_col_or_row_index,
-                                      my_row_or_col_start,
-                                      my_value,
-                                      my_residuals_vector,
-                                      my_first_row_or_col,
-                                      my_n_row_or_col,
-                                      n_dof,
-                                      compressed_row_flag);
-  
-   // Create a array to store the number of values held on each processor
-   // and get these - communicate via a single Allgather
-   unsigned long my_n_value = my_value[0].size();
-   Vector<unsigned long> n_values(n_proc);
-   MPI_Allgather(&my_n_value, 1,
-                 MPI_UNSIGNED_LONG,
-                 &n_values[0], 1,
-                 MPI_UNSIGNED_LONG,
-                 this->communicator_pt()->mpi_comm());
-  
-   // Calculate the total number of values and the position of the
-   // first value from each processor in the global matrix
-   unsigned long total_n_value = 0;
-   Vector<unsigned long> value_offsets(n_proc);
-   for (int i=0; i<n_proc; i++)
+   std::ostringstream error_stream;
+   error_stream
+    << "Error: " << std::endl
+    << "row_or_column_start.size() " << row_or_column_start.size() 
+    << " does not equal "
+    << "column_or_row_index.size() " 
+    <<  column_or_row_index.size() << std::endl;
+   throw OomphLibError(
+    error_stream.str(),
+    "Problem::sparse_assemble_row_or_column_compressed_with_lists",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+
+ if(value.size() != n_matrix)
+  {
+   std::ostringstream error_stream;
+   error_stream
+    << "Error: " 
+    << std::endl
+    << "value.size() " << value.size() << " does not equal "
+    << "column_or_row_index.size() " 
+    << column_or_row_index.size() << std::endl<< std::endl
+    << std::endl;
+   throw OomphLibError(
+    error_stream.str(),
+    "Problem::sparse_assemble_row_or_column_compressed_with_two_vectors",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+// The idea behind this sparse assembly routine is to use Vectors of
+// Vectors for the entries in each complete matrix. And a second
+// Vector of Vectors stores the global row (or column) indeces. This
+// will not have the memory overheads associated with the methods using
+// lists or maps, but insertion will be more costly.
+ 
+// Set up two vector of vectors to store the entries of each  matrix,
+// indexed by either the column or row. The entries of the vector for
+// each matrix correspond to all the rows or columns of that matrix.
+ Vector<unsigned**> matrix_row_or_col_indices(n_matrix);
+ Vector<double**> matrix_values(n_matrix);
+ 
+ //Loop over the number of matrices being assembled and resize
+ //each vector of vectors to the number of rows or columns of the matrix
+ for(unsigned m=0;m<n_matrix;m++)
+  {
+   matrix_row_or_col_indices[m] = new unsigned*[ndof];
+   matrix_values[m] = new double*[ndof];
+  }
+ 
+ //Resize the residuals vectors
+ for(unsigned v=0;v<n_vector;v++) 
+  { 
+   residuals[v] = new double[ndof];
+   for (unsigned i = 0; i < ndof; i++)
     {
-     value_offsets[i] = total_n_value;
-     total_n_value += n_values[i];
+     residuals[v][i] = 0;
     }
-  
-   // Create a array to store the number of rows held on each processor
-   // and get those values - communicate via a single Allgather
-   Vector<unsigned long> n_rows_or_cols(n_proc);
-   MPI_Allgather(&my_n_row_or_col, 1,
-                 MPI_UNSIGNED_LONG,
-                 &n_rows_or_cols[0],1,
-                 MPI_UNSIGNED_LONG,
-                 this->communicator_pt()->mpi_comm());
-  
-   // Calculate the position of the first row for each block
-   Vector<unsigned long> row_or_col_offsets(n_proc);
-   row_or_col_offsets[0] = 0;
-   for (int i=0; i<n_proc-1; i++)
+  }
+
+#ifdef OOMPH_HAS_MPI
+
+ // Storage for assembly time for elements
+ double t_assemble_start=0.0;
+ 
+ // Storage for assembly times
+ Vector<double> elemental_assembly_time;
+ if ((!Problem_has_been_distributed)&&
+     Must_recompute_load_balance_for_assembly)
+  {
+   elemental_assembly_time.resize(n_elements);
+  }
+
+#endif
+
+ // number of coefficients in each row
+ Vector<Vector<unsigned> > ncoef(n_matrix);
+ for (unsigned m = 0; m < n_matrix; m++)
+  {
+   ncoef[m].resize(ndof,0);
+  }
+
+ if (Sparse_assemble_with_arrays_previous_allocation.size() == 0)
+  {
+   Sparse_assemble_with_arrays_previous_allocation.resize(n_matrix);
+   for (unsigned m = 0; m < n_matrix; m++)
     {
-     row_or_col_offsets[i+1] = row_or_col_offsets[i] + n_rows_or_cols[i];
+     Sparse_assemble_with_arrays_previous_allocation[m].resize(ndof,0);
     }
+  }
+
+ //----------------Assemble and populate the vector storage scheme-------
+ {
+  //Allocate local storage for the element's contribution to the
+  //residuals vectors and system matrices of the size of the maximum
+  //number of dofs in any element
+  //This means that the storage will only be allocated (and deleted) once
+  Vector<Vector<double> > el_residuals(n_vector);
+  Vector<DenseMatrix<double> > el_jacobian(n_matrix);
   
-   // Resize arrays
-   value[0].resize(total_n_value);
-   row_or_column_start[0].resize(n_dof+1);
-   column_or_row_index[0].resize(total_n_value);
-   (*residuals[0]).resize(n_dof);
-  
-   // Set last value in row_or_column_start
-   row_or_column_start[0][n_dof] = total_n_value;
-  
-   // Copy my_value and my_column_or_row_index to the global matrix
-   unsigned long value_offset = value_offsets[rank];
-   for(unsigned long i=0; i<my_n_value; i++)
-    {
-     value[0][i+value_offset] = my_value[0][i];
-     column_or_row_index[0][i+value_offset] = my_col_or_row_index[0][i];
-    }
-  
-   // Copy my_row_or_column_start and my_residuals to the global values
-   unsigned long row_or_col_offset = row_or_col_offsets[rank];
-   for(unsigned long i=0; i<my_n_row_or_col; i++)
-    {
-     row_or_column_start[0][i+row_or_col_offset] = 
-      my_row_or_col_start[0][i]+value_offset;
-     (*residuals[0])[i+row_or_col_offset] = my_residuals[i];
-    }
+  //Loop over the elements
+  for(unsigned long e=el_lo;e<=el_hi;e++)
+   {
+
+#ifdef OOMPH_HAS_MPI
+    // Time it?
+    if ((!Problem_has_been_distributed)&&
+        Must_recompute_load_balance_for_assembly)
+     {
+      t_assemble_start=TimingHelpers::timer();
+     }
+#endif
+
+    //Get the pointer to the element
+    GeneralisedElement* elem_pt = mesh_pt()->element_pt(e);
+
+#ifdef OOMPH_HAS_MPI
+    //Ignore halo elements
+    if (!elem_pt->is_halo())
+     {
+#endif
+
+      //Find number of degrees of freedom in the element
+      const unsigned nvar = assembly_handler_pt->ndof(elem_pt);
     
-   // loop over communications with other processors
-   for (int comm=1; comm<n_proc; comm++)
-    {
-     // Select processor to send data to
-     int send_proc = rank + comm;
-     if (send_proc >= n_proc)
-      {
-       send_proc -= n_proc;
-      }
+      //Resize the storage for elemental jacobian and residuals
+      for(unsigned v=0;v<n_vector;v++) {el_residuals[v].resize(nvar);}
+      for(unsigned m=0;m<n_matrix;m++) {el_jacobian[m].resize(nvar);}
+
+      //Now get the residuals and jacobian for the element
+      assembly_handler_pt->
+       get_all_vectors_and_matrices(elem_pt,el_residuals, el_jacobian);
     
-     // Select processor to receive data from
-     int recv_proc = rank - comm;
-     if (recv_proc < 0)
-      {
-       recv_proc += n_proc;
-      }
-
-     // Get offsets for values from receive processor
-     value_offset = value_offsets[recv_proc];
-     row_or_col_offset = row_or_col_offsets[recv_proc];
-  
-     // Stuff needed for MPI communications
-     MPI_Status status;
-     MPI_Request request[4];
-
-     // MPI communications using non-blocking sends and blocking receives
-     // and receiving directly into the correct positions in the Vectors
-
-     // communicate residuals 
-     MPI_Isend(&my_residuals[0],
-               my_n_row_or_col,
-               MPI_DOUBLE,
-               send_proc, 0,
-               this->communicator_pt()->mpi_comm(),
-               &request[0]);
-
-     MPI_Recv(&(*residuals[0])[row_or_col_offset],
-              n_rows_or_cols[recv_proc],
-              MPI_DOUBLE,
-              recv_proc,
-              MPI_ANY_TAG,
-              this->communicator_pt()->mpi_comm(),
-              &status);
-
-     // communicate column [row] indices 
-     MPI_Isend(&my_col_or_row_index[0][0],
-               my_n_value,
-               MPI_INT,
-               send_proc, 0,
-               this->communicator_pt()->mpi_comm(),
-               &request[1]);
-
-     MPI_Recv(&column_or_row_index[0][value_offset],
-              n_values[recv_proc], 
-              MPI_INT,
-              recv_proc,
-              MPI_ANY_TAG,
-              this->communicator_pt()->mpi_comm(),
-              &status);
-
-     // communicate row [column] starts remembering we only need to send
-     // the first my_n_row_or_col values and only need to receive the
-     // first n_row_or_cols[recv_proc] values
-     MPI_Isend(&my_row_or_col_start[0][0],
-               my_n_row_or_col,
-               MPI_INT,
-               send_proc, 0,
-               this->communicator_pt()->mpi_comm(),
-               &request[2]);
-
-     MPI_Recv(&row_or_column_start[0][row_or_col_offset],
-              n_rows_or_cols[recv_proc],
-              MPI_INT, 
-              recv_proc,
-              MPI_ANY_TAG,
-              this->communicator_pt()->mpi_comm(),
-              &status);
-
-     // communicate value
-     MPI_Isend(&my_value[0][0],
-               my_n_value,
-               MPI_DOUBLE,
-               send_proc, 0,
-               this->communicator_pt()->mpi_comm(),
-               &request[3]);
-
-     MPI_Recv(&value[0][value_offset],
-              n_values[recv_proc],
-              MPI_DOUBLE,
-              recv_proc,
-              MPI_ANY_TAG,
-              this->communicator_pt()->mpi_comm(),
-              &status);
+      //---------------Insert the values into the vectors--------------
+    
+      //Loop over the first index of local variables
+      for(unsigned i=0;i<nvar;i++)
+       {
+      //Get the local equation number
+        unsigned eqn_number 
+         = assembly_handler_pt->eqn_number(elem_pt,i);
      
-     // Shift the received row_or_column_start by value_offset
-     const unsigned long end = row_or_col_offset+n_rows_or_cols[recv_proc];
-     for (unsigned long i=row_or_col_offset;
-          i<end;
-          i++)
+        //Add the contribution to the residuals
+        for(unsigned v=0;v<n_vector;v++)
+         {
+          //Fill in each residuals vector
+          residuals[v][eqn_number] += el_residuals[v][i];
+         }
+      
+        //Now loop over the other index
+        for(unsigned j=0;j<nvar;j++)
+         {
+          //Get the number of the unknown
+          unsigned unknown = assembly_handler_pt->eqn_number(elem_pt,j);
+        
+          //Loop over the matrices
+          //If it's compressed row storage, then our vector of maps
+          //is indexed by row (equation number)
+          for(unsigned m=0;m<n_matrix;m++)
+           {
+            //Get the value of the matrix at this point
+            double value = el_jacobian[m](i,j);
+            //Only bother to add to the vector if it's non-zero
+            if(std::abs(value) > Numerical_zero_for_sparse_assembly)
+             {
+              // number of entrys in this row
+              const unsigned size = ncoef[m][eqn_number];
+              
+              // if no data has been allocated for this row then allocate
+              if (size == 0)
+               {
+                // do we have previous allocation data
+                if (Sparse_assemble_with_arrays_previous_allocation
+                    [m][eqn_number] != 0)
+                 {
+                  matrix_row_or_col_indices[m][eqn_number] = 
+                   new unsigned
+                   [Sparse_assemble_with_arrays_previous_allocation[m]
+                    [eqn_number]];
+                  matrix_values[m][eqn_number] = 
+                   new double
+                   [Sparse_assemble_with_arrays_previous_allocation[m]
+                    [eqn_number]];
+                 }
+                else
+                 {
+                  matrix_row_or_col_indices[m][eqn_number] = 
+                   new unsigned
+                   [Sparse_assemble_with_arrays_initial_allocation];
+                  matrix_values[m][eqn_number] = 
+                   new double
+                   [Sparse_assemble_with_arrays_initial_allocation];
+                  Sparse_assemble_with_arrays_previous_allocation[m]
+                   [eqn_number]=
+                   Sparse_assemble_with_arrays_initial_allocation;
+                 }
+               }
+              
+              //If it's compressed row storage, then our vector of maps
+              //is indexed by row (equation number)
+              if(compressed_row_flag)
+               {
+                // next add the data
+                for(unsigned k=0; k<=size; k++)
+                 {
+                  if(k==size)
+                   {
+                    // do we need to allocate more storage
+                    if (Sparse_assemble_with_arrays_previous_allocation
+                        [m][eqn_number] == ncoef[m][eqn_number])
+                     {
+                      unsigned new_allocation = ncoef[m][eqn_number]+
+                       Sparse_assemble_with_arrays_allocation_increment;
+                      double* new_values = new double[new_allocation];
+                      unsigned* new_indices = new unsigned[new_allocation];
+                      for (unsigned c = 0; c < ncoef[m][eqn_number]; c++)
+                       {
+                        new_values[c] = matrix_values[m][eqn_number][c];
+                        new_indices[c] = 
+                         matrix_row_or_col_indices[m][eqn_number][c];
+                       }
+                      delete[] matrix_values[m][eqn_number];
+                      delete[] matrix_row_or_col_indices[m][eqn_number];
+                      matrix_values[m][eqn_number]=new_values;
+                      matrix_row_or_col_indices[m][eqn_number]=new_indices;
+                      Sparse_assemble_with_arrays_previous_allocation
+                       [m][eqn_number] = new_allocation;
+                     }
+                    // and now add the data
+                    unsigned entry = ncoef[m][eqn_number];
+                    ncoef[m][eqn_number]++;
+                    matrix_row_or_col_indices[m][eqn_number][entry] = unknown;
+                    matrix_values[m][eqn_number][entry] = value;
+                    break;
+                   }
+                  else if(matrix_row_or_col_indices[m][eqn_number][k] == 
+                          unknown)
+                   {
+                    matrix_values[m][eqn_number][k] += value;
+                    break;
+                   }
+                 }
+               }
+              //Otherwise it's compressed column storage and our vector is
+              //indexed by column (the unknown)
+              else
+               {
+                //Add the data into the vectors in the correct position
+                for(unsigned k=0; k<=size; k++)
+                 {
+                  if(k==size)
+                   {
+                    // do we need to allocate more storage
+                    if (Sparse_assemble_with_arrays_previous_allocation
+                        [m][unknown] == ncoef[m][unknown])
+                     {
+                      unsigned new_allocation = ncoef[m][unknown]+
+                       Sparse_assemble_with_arrays_allocation_increment;
+                      double* new_values = new double[new_allocation];
+                      unsigned* new_indices = new unsigned[new_allocation];
+                      for (unsigned c = 0; c < ncoef[m][unknown]; c++)
+                       {
+                        new_values[c] = matrix_values[m][unknown][c];
+                        new_indices[c] = 
+                         matrix_row_or_col_indices[m][unknown][c];
+                       }
+                      delete[] matrix_values[m][unknown];
+                      delete[] matrix_row_or_col_indices[m][unknown];
+                      Sparse_assemble_with_arrays_previous_allocation
+                       [m][unknown] = new_allocation;
+                     }
+                    // and now add the data
+                    unsigned entry = ncoef[m][unknown];
+                    ncoef[m][unknown]++;
+                    matrix_row_or_col_indices[m][unknown][entry] = eqn_number;
+                    matrix_values[m][unknown][entry] = value;
+                    break;
+                   }
+                  else if(matrix_row_or_col_indices[m][unknown][k] == 
+                          eqn_number)
+                   {
+                    matrix_values[m][unknown][k] += value;
+                    break;
+                   }
+                 }
+               }
+             }
+           } //End of loop over matrices
+         }
+       }
+
+#ifdef OOMPH_HAS_MPI
+     } // endif halo element
+#endif
+
+
+#ifdef OOMPH_HAS_MPI
+  // Time it?
+  if ((!Problem_has_been_distributed)&&
+      Must_recompute_load_balance_for_assembly)
+   {
+    elemental_assembly_time[e]=TimingHelpers::timer()-t_assemble_start;
+   }
+#endif
+
+   } //End of loop over the elements
+  
+ } //End of vector assembly
+
+
+
+#ifdef OOMPH_HAS_MPI
+ 
+ // Postprocess timing information and re-allocate distribution of
+ // elements during subsequent assemblies.
+ if ((!Problem_has_been_distributed)&&
+     Must_recompute_load_balance_for_assembly)
+  {
+   recompute_load_balanced_assembly(elemental_assembly_time);
+  }
+
+#endif
+ 
+   //-----------Finally we need to convert this lousy vector storage scheme
+   //------------------------to the containers required by SuperLU
+ 
+   //Loop over the number of matrices
+ for(unsigned m=0;m<n_matrix;m++)
+  {
+   //Set the number of rows or columns
+   row_or_column_start[m] = new int[ndof+1];
+   
+   // fill row_or_column_start and find the number of entries
+   row_or_column_start[m][0] = 0;
+   for (unsigned long i=0;i<ndof;i++)
+    {
+     row_or_column_start[m][i+1] = row_or_column_start[m][i]
+      + ncoef[m][i];
+     Sparse_assemble_with_arrays_previous_allocation[m][i] = ncoef[m][i];
+    }
+   const unsigned entries = row_or_column_start[m][ndof];
+   
+   // resize vectors
+   column_or_row_index[m] = new int[entries];
+   value[m] = new double[entries];
+   nnz[m] = entries;
+   
+   //Now we merely loop over the number of rows or columns
+   for(unsigned long  i_global=0;i_global<ndof;i_global++)
+    {
+     //If there are no entries in the vector then skip the rest of the loop
+     if(ncoef[m][i_global]==0) {continue;}
+     
+     //Loop over all the entries in the vectors corresponding to the given
+     //row or column. It will NOT be ordered
+     unsigned p = 0;
+     for(int j=row_or_column_start[m][i_global];
+         j<row_or_column_start[m][i_global+1]; j++)
       {
-       row_or_column_start[0][i] += value_offset;
+       column_or_row_index[m][j] = matrix_row_or_col_indices[m][i_global][p];
+       value[m][j] = matrix_values[m][i_global][p];
+       ++p;
       }
 
-     // Wait for sends to complete
-     MPI_Waitall(4, request, MPI_STATUS_IGNORE);
-  
-    } // end of loop over communications with other processors
-  } // End of matrix and residual assembly
+     // and delete
+     delete[] matrix_row_or_col_indices[m][i_global];
+     delete[] matrix_values[m][i_global];
+    }
+
+   //
+   delete[] matrix_row_or_col_indices[m];
+   delete[] matrix_values[m];
+  } //End of the loop over the matrices
+
+ if (Pause_at_end_of_sparse_assembly)
+  {
+   oomph_info << "Pausing at end of sparse assembly." << std::endl;
+   pause("Check memory usage now.");
+  }
 }
 
 
-//================================================================
-/// Assembles a block of successive rows of the Jacobian matrix 
-/// in distributed compressed row format (as required by
-/// the distributed storage version of SuperLU_dist) or in compressed
-/// column storage, plus associated distributed residuals.
-/// This function assembles the rows [or columns] for each processor
-/// by first calling partial_sparse_assemble and then communicates
-/// between processors to assemble distributed sets of rows [or columns].
-/// Arguments are the obvious ones, but note the following:
-/// - Matrix is stored in CR [or CC] format, however only the
-///   entries for a subset of rows are included, with
-///   \c first_row_or_column being the first row [or column] stored here.
-/// - The i-th entry in \c row_or_column_start corresponds
-///   to the (i+first_row_or_column) -th row [or column] in the global matrix.
-/// - The residual vector contains the subset of entries corresponding
-///   to the same set of rows [or columns] of the matrix, so the
-///   i-th entry in the residual vector returned corresponds
-///   to the (i+first_row_or_column) -th entry in the global residual vector.
-///   (This is the format that is required by SuperLU_dist).
-/// - \c n_row_or_column is number of consecutive rows [columns] stored here.
-/// - \c n_tot is total number of rows [columns] in the overall matrix.
-/// - \c compressed_row_flag defaults to true.
-//================================================================
-void Problem::distributed_matrix_sparse_assemble(
- Vector<Vector<int> > &column_or_row_index,
- Vector<Vector<int> > &row_or_column_start,
- Vector<Vector<double> > &value,
- Vector<Vector<double>*> &residuals,
- unsigned long& first_row_or_column,
- unsigned long& n_row_or_column,
- unsigned long& n_tot,
- bool compressed_row_flag)
+#ifdef OOMPH_HAS_MPI
+//=============================================================================
+/// \short Helper method to assemble CRDoubleMatrices from distributed
+/// on multiple processors.
+//=============================================================================
+void Problem::parallel_sparse_assemble
+(const LinearAlgebraDistribution* const& target_dist_pt,
+ Vector<int* > &column_indices, 
+ Vector<int* > &row_start, 
+ Vector<double* > &values,
+ Vector<unsigned > &nnz, 
+ Vector<double* > &residuals)
 {
- //---------------------------------------------------------------
- // Note: Main comments refer to compressed row storage, comments
- //       in square brackets refer to compressed column storage
- //---------------------------------------------------------------
 
- // Storage for number of processors and current processor
- int n_proc=this->communicator_pt()->nproc();
- int rank=this->communicator_pt()->my_rank();
-
- // Set n_tot - total number of rows [columns]
- n_tot=ndof();
+ // my rank and nproc
+ unsigned my_rank = Communicator_pt->my_rank();
+ unsigned nproc = Communicator_pt->nproc();
  
- // deal with single processor case
- if (n_proc==1)
+ // start by assembling the sorted set of equations which this processor
+ // contributes to
+ //======================================================================
+ Vector<unsigned> my_eqns;
+ unsigned dof_first_row = Dof_distribution_pt->first_row();
+ unsigned dof_nrow_local = Dof_distribution_pt->nrow_local();
+ unsigned dof_last_row = dof_first_row + dof_nrow_local;
+
+ // first the local eqn numbers
+ for (unsigned i = dof_first_row; i < dof_last_row; i++)
   {
-   sparse_assemble_row_or_column_compressed(column_or_row_index,
-                                            row_or_column_start,
-                                            value,
-                                            residuals,
-                                            compressed_row_flag);
-   // Set n_row_or_column and first_row_or_column
-   n_row_or_column = n_tot;
-   first_row_or_column = 0;
+   my_eqns.push_back(i);
   }
- // for multiple processors form the distributed matrix
- else
+
+ // Each processor assembles equations from each mesh... I have no idea
+ // how this worked for any distributed FSI problem... assuming it did... ?
+ // This current method won't pick up any halo equation numbers at all as the
+ // global mesh doesn't store any halo objects at all; they are all stored
+ // by the relevant submesh
+
+ unsigned nmesh=nsub_mesh();
+
+ // If there are no submeshes then the current method works fine
+ if (nmesh==0)
   {
-   // Clear everything to be safe
-   value[0].clear();
-   row_or_column_start[0].clear();
-   column_or_row_index[0].clear();
-   (*residuals[0]).clear();
-  
-   // Set n_tot - total number of rows [columns]
-   n_tot=ndof();
-  
-   // Partition matrix - calculate first row [or column] and the number
-   // of rows [columns] for all processors
-  
-   // Setup the first row and the number of rows for all processors
-   Vector<unsigned long> first_rows_or_cols(n_proc+1);
-   Vector<unsigned long>  n_rows_or_cols(n_proc);
-   for (int i=0; i<n_proc; i++)
-    {
-     first_rows_or_cols[i]=static_cast<unsigned long>
-      (double(i*n_tot)/double(n_proc));
-    }
-   first_rows_or_cols[n_proc]=n_tot;
-   for (int i=0; i<n_proc; i++)
-    {
-     n_rows_or_cols[i]=first_rows_or_cols[i+1]-first_rows_or_cols[i];
-    }
+   // hierher: I suspect that for a single-mesh problem there's no need
+   //          to look for any "external" eqn numbers (whether halo or not)
 
-   // Set the number of rows [columns] this processor owns
-   first_row_or_column=first_rows_or_cols[rank];
-   n_row_or_column=n_rows_or_cols[rank];
-   
-   // Vectors to hold my data
-   Vector<Vector<double> > my_value(1);
-   Vector<Vector<int> > my_col_or_row_index(1);
-   Vector<Vector<int> > my_row_or_col_start(1);
-   Vector<double> my_residuals;
-   Vector<Vector<double>*> my_residuals_vector(1);
-   my_residuals_vector[0] = &my_residuals;
+//    // hang on, there are "local" external eqn numbers too
+//    unsigned n_ext_node=mesh_pt()->nexternal_node();
+//    for (unsigned j=0;j<n_ext_node;j++)
+//     {
+//      Node* ext_nod_pt=mesh_pt()->external_node_pt(j);
+//      unsigned nval=ext_nod_pt->nvalue();
+//      for (unsigned ival=0;ival<nval;ival++)
+//       {
+//        int eqn_num = ext_nod_pt->eqn_number(ival);
+//        if (eqn_num>=0)
+//         {
+//          my_eqns.push_back(eqn_num);
+//         }
+//       }
+//     }
 
-   // Call sparse assembly in compressed row [or column] mode
-   sparse_assemble_row_or_column_compressed(my_col_or_row_index,
-                                            my_row_or_col_start,
-                                            my_value,
-                                            my_residuals_vector,
-                                            compressed_row_flag);
-   
-   // Vectors of maps that stores values and column indices
-   // for each row
-   Vector< Vector<std::pair<int,double> > > matrix_data(n_row_or_column);
-
-   // Allocate storage for the residual vector and set values to zero
-   // (this stores only the subset of entries this processor is in charge of)
-   (*residuals[0]).resize(n_row_or_column, 0.0);
-  
-   // Add the contributions from partial_sparse_assemble to the rows [or
-   // columns] in the portion of the Jacobian matrix to be assembled by
-   // this processor, i.e. from first_row_or_column to
-   // first_row_or_column+n_row_or_column (plus associated entries in
-   // the residuals)
-   unsigned long end = first_row_or_column+n_row_or_column;
-   for(unsigned long i=first_row_or_column;
-       i<end;
-       i++)
+   // then the halo equation numbers
+   for (unsigned p = 0; p < nproc; p++)
     {
-     // Loop through the row [column] entries
-     for(int j=my_row_or_col_start[0][i];
-         j<my_row_or_col_start[0][i+1];
-         j++)
-      {
-       matrix_data[i-first_row_or_column].push_back
-        (std::make_pair(my_col_or_row_index[0][j],my_value[0][j]));
-      }
-  
-     // Note: residual vector only stores a subset of entries with
-     // numering starting at zero where as sparse assemble
-     // returns the entries labeled by their global numbers:
-     (*residuals[0])[i-first_row_or_column]=my_residuals[i];
-    }
-
-   // Vectors to hold data to send
-   Vector<double> value_to_send;
-   Vector<double> residuals_to_send;
-   Vector<int> col_or_row_index_to_send;
-   Vector<int> row_or_col_start_to_send;
-  
-   // Vectors to hold received data
-   Vector<double> value_recvd;
-   Vector<double> residuals_recvd;
-   Vector<int> col_or_row_index_recvd;
-   Vector<int> row_or_col_start_recvd;
-  
-   // loop over communications with other processors
-   for (int comm=1; comm<n_proc; comm++)
-    {
-     // Select processor to send data to
-     int send_proc = rank + comm;
-     if (send_proc >= n_proc)
-      {
-       send_proc -= n_proc;
-      }
-    
-     // Select processor to receive data from
-     int recv_proc = rank - comm;
-     if (recv_proc < 0)
-      {
-       recv_proc += n_proc;
-      }
-  
-     // Set up data to send - note matrix and residual are indexed
-     // such that i-th row [or column] in the matrix sent corresponds
-     // to i+first_row_or_col_to_send-th row [or column] in the global
-     // matrix and i-th entry i in the residual sent corresponds to
-     // i+first_row_or_col_to_send-th entry in the global residual
-     const unsigned long first_row_or_col_to_send = 
-      first_rows_or_cols[send_proc];
-     const unsigned long n_row_or_col_to_send = n_rows_or_cols[send_proc];
-  
-     // Initialise and resize send arrays
-     value_to_send.clear();
-     col_or_row_index_to_send.clear();
-     row_or_col_start_to_send.resize(n_row_or_col_to_send+1);
-     residuals_to_send.resize(n_row_or_col_to_send);
-       
-     // Count of number of entries inserted
-     int entry_count=0;
-  
-     // Loop over rows [or columns] to be sent
-     end = first_row_or_col_to_send+n_row_or_col_to_send;
-     for(unsigned long i=first_row_or_col_to_send;i<end;i++)
-      {
-       // Set row [column] start
-       row_or_col_start_to_send[i-first_row_or_col_to_send]=entry_count;
-  
-       // Loop over my entries in this row
-       for(int j=my_row_or_col_start[0][i];
-           j<my_row_or_col_start[0][i+1];
-           j++)
+     if (p != my_rank)
+      {       
+       unsigned n_halo_node=mesh_pt()->nhalo_node(p);
+       for (unsigned j=0;j<n_halo_node;j++)
         {
-         // Add to values and index vectors
-         value_to_send.push_back(my_value[0][j]);
-         col_or_row_index_to_send.push_back(my_col_or_row_index[0][j]);
-  
-         // Bump up number of entries
-         entry_count++;
-        }
-  
-       // Copy residual (indexed from zero!)
-       residuals_to_send[i-first_row_or_col_to_send]=my_residuals[i];
-      }
-     // Remember to set final entry in row start vector
-     row_or_col_start_to_send[n_row_or_col_to_send]=entry_count;
-     
-     // Set number of values to send
-     unsigned long n_value_to_send = value_to_send.size();
-     
-     // stuff for MPI communications
-     MPI_Status status;
-     MPI_Request send_request[5];
-     MPI_Request recv_request[3];
-
-     // Send n_value_to_send and receive corresponding value from recv_proc
-     unsigned long n_value_recvd=0;
-
-     // non-blocking send
-     MPI_Isend(&n_value_to_send, 1,
-               MPI_UNSIGNED_LONG,
-               send_proc, 0,
-               this->communicator_pt()->mpi_comm(),
-               &send_request[0]);
-
-     // blocking receive
-     MPI_Recv(&n_value_recvd, 1,
-              MPI_UNSIGNED_LONG,
-              recv_proc, 
-              MPI_ANY_TAG,
-              this->communicator_pt()->mpi_comm(),
-              &status);
-     
-     // Note: if n_values_recvd is 0 then we can bypass the receiving the
-     // matrix and if n_value_to_send is 0 then we can bypass sending
-     // What about residuals?
-
-     // resize Vectors for receiving data
-     value_recvd.resize(n_value_recvd);
-     col_or_row_index_recvd.resize(n_value_recvd);
-     row_or_col_start_recvd.resize(n_row_or_column+1);
-     residuals_recvd.resize(n_row_or_column);
-     
-     // Communicate residuals
-
-     // non-blocking send
-     MPI_Isend(&residuals_to_send[0],
-               n_row_or_col_to_send,
-               MPI_DOUBLE,
-               send_proc, 0,
-               this->communicator_pt()->mpi_comm(),
-               &send_request[1]);
-
-     // blocking receive
-     MPI_Recv(&residuals_recvd[0],
-              n_row_or_column,
-              MPI_DOUBLE,
-              recv_proc,
-              MPI_ANY_TAG,
-              this->communicator_pt()->mpi_comm(),
-              &status);
-
-     // non-blocking sends of Jacobian matrix
-     if (n_value_to_send>0)
-      {
-       MPI_Isend(&col_or_row_index_to_send[0],
-                 n_value_to_send,
-                 MPI_INT,
-                 send_proc, 0,
-                 this->communicator_pt()->mpi_comm(),
-                 &send_request[2]);
-
-       MPI_Isend(&row_or_col_start_to_send[0],
-                 n_row_or_col_to_send+1,
-                 MPI_INT,
-                 send_proc, 0,
-                 this->communicator_pt()->mpi_comm(),
-                 &send_request[3]);
-
-       MPI_Isend(&value_to_send[0],
-                 n_value_to_send, 
-                 MPI_DOUBLE,
-                 send_proc, 0,
-                 this->communicator_pt()->mpi_comm(),
-                 &send_request[4]);
-      }
-     
-     // non-blocking receives of Jacobian matrix
-     if (n_value_recvd>0)
-      {
-       MPI_Irecv(&col_or_row_index_recvd[0],
-                 n_value_recvd,
-                 MPI_INT,
-                 recv_proc,
-                 MPI_ANY_TAG,
-                 this->communicator_pt()->mpi_comm(),
-                 &recv_request[0]);
-
-       MPI_Irecv(&row_or_col_start_recvd[0],
-                 n_row_or_column+1,
-                 MPI_INT,
-                 recv_proc,
-                 MPI_ANY_TAG,
-                 this->communicator_pt()->mpi_comm(),
-                 &recv_request[1]);
-
-       MPI_Irecv(&value_recvd[0],
-                 n_value_recvd,
-                 MPI_DOUBLE,
-                 recv_proc,
-                 MPI_ANY_TAG,
-                 this->communicator_pt()->mpi_comm(),
-                 &recv_request[2]);
-      }
-
-  
-     // Add new residuals to my global values
-     for (unsigned long i=0;i<n_row_or_column;i++)
-      {
-       // Add contribution to residual vector
-       (*residuals[0])[i]+=residuals_recvd[i];
-      }
-
-     // Add any new matrix values to my global values
-     // after non-blocking receives have finished
-     if (n_value_recvd>0)
-      {
-       MPI_Waitall(3, recv_request, MPI_STATUS_IGNORE);
-
-       for (unsigned long i=0;i<n_row_or_column;i++)
-        {
-         // loop through the entries in the row [column]
-         for (int j=row_or_col_start_recvd[i];
-              j<row_or_col_start_recvd[i+1];
-              j++)
+         Node* halo_node_pt=mesh_pt()->halo_node_pt(p,j);
+         unsigned nval=halo_node_pt->nvalue();
+         for (unsigned ival=0;ival<nval;ival++)
           {
-           // Add the data into the map
-	   unsigned n_coef_in_row_or_col = matrix_data[i].size();
-           bool added = false;
-	   for (unsigned k = 0; k <= n_coef_in_row_or_col && !added; k++)
+           int eqn_num = halo_node_pt->eqn_number(ival);
+           if (eqn_num>=0)
             {
-             if (k == n_coef_in_row_or_col)
+             my_eqns.push_back(eqn_num);
+            }
+          }
+         SolidNode* solid_node_pt=dynamic_cast<SolidNode*>(halo_node_pt);
+         if (solid_node_pt!=0)
+          {
+           unsigned nval=solid_node_pt->variable_position_pt()->nvalue();
+           for (unsigned ival=0; ival<nval; ival++)
+            {
+             int eqn_num = 
+              solid_node_pt->variable_position_pt()->eqn_number(ival);
+             if (eqn_num>=0)
               {
-               matrix_data[i].
-                push_back(std::make_pair(col_or_row_index_recvd[j],
-					 value_recvd[j]));
-              }
-             else if (col_or_row_index_recvd[j] == matrix_data[i][k].first)
-              {
-               matrix_data[i][k].second += value_recvd[j];
-               added = true;
+               my_eqns.push_back(eqn_num);
               }
             }
           }
         }
       }
-      
-     // Ensure all non-blocking sends have completed
-     if (n_value_to_send>0)
-      {
-       MPI_Waitall(5, send_request, MPI_STATUS_IGNORE);
-      }
-     else
-      {
-       MPI_Waitall(2, send_request, MPI_STATUS_IGNORE);
-      }
-    } // end of loop over communications with other processors
-  
-   // Provide storage for row [column] starts
-   row_or_column_start[0].resize(n_row_or_column+1);
+    }
 
-   // Loop over all the entries in the map corresponding to the given
-   // row [or column] (it will be ordered)
-   unsigned long entry_count = 0;
-   for (unsigned long i=0;i<n_row_or_column;i++)
+//    // and finally the external halo equation numbers
+//    for (unsigned p = 0; p < nproc; p++)
+//     {
+//      if (p != my_rank)
+//       {       
+//        unsigned n_ext_halo_node=mesh_pt()->nexternal_halo_node(p);
+//        for (unsigned j=0;j<n_ext_halo_node;j++)
+//         {
+//          Node* ext_halo_node_pt = mesh_pt()->external_halo_node_pt(p,j);
+//          unsigned nval = ext_halo_node_pt->nvalue();
+//          for (unsigned ival=0;ival<nval;ival++)
+//           {
+//            int eqn_num = ext_halo_node_pt->eqn_number(ival);
+//            if (eqn_num>=0)
+//             {
+//              my_eqns.push_back(eqn_num);
+//             }
+//           }
+//          SolidNode* solid_node_pt=dynamic_cast<SolidNode*>(ext_halo_node_pt);
+//          if (solid_node_pt!=0)
+//           {
+//            unsigned nval=solid_node_pt->variable_position_pt()->nvalue();
+//            for (unsigned ival=0; ival<nval; ival++)
+//             {
+//              int eqn_num = 
+//               solid_node_pt->variable_position_pt()->eqn_number(ival);
+//              if (eqn_num>=0)
+//               {
+//                my_eqns.push_back(eqn_num);
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }  
+
+//    // finally loop over the internal data in external halo elements
+//    for (unsigned p = 0; p < nproc; p++)
+//     {
+//      if (p!=my_rank)
+//       {
+//        unsigned n_ext_halo_element = mesh_pt()->nexternal_halo_element(p);
+//        for (unsigned j = 0; j < n_ext_halo_element; j++)
+//         {
+//          FiniteElement* ext_halo_element_pt = 
+//           mesh_pt()->external_halo_element_pt(p,j);
+//          unsigned ndata = ext_halo_element_pt->ninternal_data();
+//          for (unsigned i = 0; i < ndata; i++)
+//           {
+//            unsigned nvalue = 
+//             ext_halo_element_pt->internal_data_pt(i)->nvalue();
+//            for (unsigned k = 0; k < nvalue; k++)
+//             {
+//              int eqn_num 
+//               = ext_halo_element_pt->internal_data_pt(i)->eqn_number(k);
+//              if (eqn_num>=0)
+//               {
+//                my_eqns.push_back(eqn_num);
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+
+//    // finally loop over the internal data in halo elements
+//    for (unsigned p = 0; p < nproc; p++)
+//     {
+//      if (p!=my_rank)
+//       {
+//        Vector<FiniteElement*> halo_element_pt = mesh_pt()->halo_element_pt(p);
+//        unsigned n_halo_element = halo_element_pt.size();
+//        for (unsigned j = 0; j < n_halo_element; j++)
+//         {
+//          unsigned ndata = halo_element_pt[j]->ninternal_data();
+//          for (unsigned i = 0; i < ndata; i++)
+//           {
+//            unsigned nvalue = halo_element_pt[j]->internal_data_pt(i)->nvalue();
+//            for (unsigned k = 0; k < nvalue; k++)
+//             {
+//              int eqn_num 
+//               = halo_element_pt[j]->internal_data_pt(i)->eqn_number(k);
+//              if (eqn_num>=0)
+//               {
+//                my_eqns.push_back(eqn_num);
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+  }
+ else // there are submeshes
+  {
+   // Loop over submeshes
+   for (unsigned imesh=0;imesh<nmesh;imesh++)
+    {
+     // There are "local" external eqn numbers
+     unsigned n_ext_node=mesh_pt(imesh)->nexternal_node();
+     for (unsigned j=0;j<n_ext_node;j++)
+      {
+       Node* ext_nod_pt=mesh_pt(imesh)->external_node_pt(j);
+       unsigned nval=ext_nod_pt->nvalue();
+       for (unsigned ival=0;ival<nval;ival++)
+        {
+         int eqn_num = ext_nod_pt->eqn_number(ival);
+         if (eqn_num>=0)
+          {
+           my_eqns.push_back(eqn_num);
+          }
+        }
+      }
+
+     // then the halo equation numbers
+     for (unsigned p = 0; p < nproc; p++)
+      {
+       if (p != my_rank)
+        {       
+         unsigned n_halo_node=mesh_pt(imesh)->nhalo_node(p);
+         for (unsigned j=0;j<n_halo_node;j++)
+          {
+           Node* halo_node_pt=mesh_pt(imesh)->halo_node_pt(p,j);
+           unsigned nval=halo_node_pt->nvalue();
+           for (unsigned ival=0;ival<nval;ival++)
+            {
+             int eqn_num = halo_node_pt->eqn_number(ival);
+             if (eqn_num>=0)
+              {
+               my_eqns.push_back(eqn_num);
+              }
+            }
+           SolidNode* solid_node_pt=dynamic_cast<SolidNode*>(halo_node_pt);
+           if (solid_node_pt!=0)
+            {
+             unsigned nval=solid_node_pt->variable_position_pt()->nvalue();
+             for (unsigned ival=0; ival<nval; ival++)
+              {
+               int eqn_num = 
+                solid_node_pt->variable_position_pt()->eqn_number(ival);
+               if (eqn_num>=0)
+                {
+                 my_eqns.push_back(eqn_num);
+                }
+              }
+            }
+          }
+        }
+      }
+
+     // and finally the external halo equation numbers
+     for (unsigned p = 0; p < nproc; p++)
+      {
+       if (p != my_rank)
+        {       
+         unsigned n_ext_halo_node=mesh_pt(imesh)->nexternal_halo_node(p);
+         for (unsigned j=0;j<n_ext_halo_node;j++)
+          {
+           Node* ext_halo_node_pt = mesh_pt(imesh)->external_halo_node_pt(p,j);
+           unsigned nval = ext_halo_node_pt->nvalue();
+           for (unsigned ival=0;ival<nval;ival++)
+            {
+             int eqn_num = ext_halo_node_pt->eqn_number(ival);
+             if (eqn_num>=0)
+              {
+               my_eqns.push_back(eqn_num);
+              }
+            }
+           SolidNode* solid_node_pt=dynamic_cast<SolidNode*>(ext_halo_node_pt);
+           if (solid_node_pt!=0)
+            {
+             unsigned nval=solid_node_pt->variable_position_pt()->nvalue();
+             for (unsigned ival=0; ival<nval; ival++)
+              {
+               int eqn_num = 
+                solid_node_pt->variable_position_pt()->eqn_number(ival);
+               if (eqn_num>=0)
+                {
+                 my_eqns.push_back(eqn_num);
+                }
+              }
+            }
+          }
+        }
+      }  
+
+     // finally loop over the internal data in external halo elements
+     for (unsigned p = 0; p < nproc; p++)
+      {
+       if (p!=my_rank)
+        {
+         unsigned n_ext_halo_element = 
+          mesh_pt(imesh)->nexternal_halo_element(p);
+         for (unsigned j = 0; j < n_ext_halo_element; j++)
+          {
+           FiniteElement* ext_halo_element_pt = 
+            mesh_pt(imesh)->external_halo_element_pt(p,j);
+           unsigned ndata = ext_halo_element_pt->ninternal_data();
+           for (unsigned i = 0; i < ndata; i++)
+            {
+             unsigned nvalue = 
+              ext_halo_element_pt->internal_data_pt(i)->nvalue();
+             for (unsigned k = 0; k < nvalue; k++)
+              {
+               int eqn_num 
+                = ext_halo_element_pt->internal_data_pt(i)->eqn_number(k);
+               if (eqn_num>=0)
+                {
+                 my_eqns.push_back(eqn_num);
+                }
+              }
+            }
+          }
+        }
+      }
+
+     // finally loop over the internal data in halo elements
+     for (unsigned p = 0; p < nproc; p++)
+      {
+       if (p!=my_rank)
+        {
+         Vector<FiniteElement*> halo_element_pt = 
+          mesh_pt(imesh)->halo_element_pt(p);
+         unsigned n_halo_element = halo_element_pt.size();
+         for (unsigned j = 0; j < n_halo_element; j++)
+          {
+           unsigned ndata = halo_element_pt[j]->ninternal_data();
+           for (unsigned i = 0; i < ndata; i++)
+            {
+             unsigned nvalue = 
+              halo_element_pt[j]->internal_data_pt(i)->nvalue();
+             for (unsigned k = 0; k < nvalue; k++)
+              {
+               int eqn_num 
+                = halo_element_pt[j]->internal_data_pt(i)->eqn_number(k);
+               if (eqn_num>=0)
+                {
+                 my_eqns.push_back(eqn_num);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+ // and sort and remove duplicate entries
+ std::sort(my_eqns.begin(),my_eqns.end());
+ Vector<unsigned>::iterator it = std::unique(my_eqns.begin(),my_eqns.end());
+ my_eqns.resize(it-my_eqns.begin());
+
+ // number of equations
+ unsigned my_n_eqn = my_eqns.size();
+
+ // next we assemble the data into an array of arrays
+ // =================================================
+
+ //Total number of elements
+ const unsigned long  n_elements = mesh_pt()->nelement();
+   
+ // Default range of elements for distributed problems
+ unsigned long el_lo=0;
+ unsigned long el_hi=n_elements-1;
+   
+ // Otherwise just loop over a fraction of the elements
+ // (This will either have been initialised in
+ // Problem::set_default_first_and_last_element_for_assembly() or
+ // will have been re-assigned during a previous assembly loop
+ // Note that following the re-assignment only the entries
+ // for the current processor are relevant.
+ if (!Problem_has_been_distributed)
+  {
+   el_lo=First_el_for_assembly[my_rank];
+   el_hi=Last_el_for_assembly[my_rank];
+  }
+      
+ //Find the number of vectors to be assembled
+ const unsigned n_vector = residuals.size();
+   
+ //Find the number of matrices to be assembled
+ const unsigned n_matrix = column_indices.size();
+   
+ //Locally cache pointer to assembly handler
+ AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
+   
+//Error check dimensions
+#ifdef PARANOID
+ if(row_start.size() != n_matrix)
+  {
+   std::ostringstream error_stream;
+   error_stream
+    << "Error: " << std::endl
+    << "row_or_column_start.size() " << row_start.size() 
+    << " does not equal "
+    << "column_or_row_index.size() " 
+    <<  column_indices.size() << std::endl;
+   throw OomphLibError(
+    error_stream.str(),
+    "Problem::parallel_sparse_assemble()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+   
+ if(values.size() != n_matrix)
+  {
+   std::ostringstream error_stream;
+   error_stream
+    << "Error: " 
+    << std::endl
+    << "value.size() " << values.size() << " does not equal "
+    << "column_or_row_index.size() " 
+    << column_indices.size() << std::endl<< std::endl
+    << std::endl;
+   throw OomphLibError(
+    error_stream.str(),
+    "Problem::parallel_sparse_assemble()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+// The idea behind this sparse assembly routine is to use an array of
+// arrays for the entries in each complete matrix. And a second
+// array of arrays stores the global row (or column) indeces.
+ 
+// Set up two vector of vectors to store the entries of each  matrix,
+// indexed by either the column or row. The entries of the vector for
+// each matrix correspond to all the rows or columns of that matrix.
+ Vector<unsigned**> matrix_col_indices(n_matrix);
+ Vector<double**> matrix_values(n_matrix);
+ 
+ //Loop over the number of matrices being assembled and resize
+ //each vector of vectors to the number of rows or columns of the matrix
+ for(unsigned m=0;m<n_matrix;m++)
+  {
+   matrix_col_indices[m] = new unsigned*[my_n_eqn];
+   matrix_values[m] = new double*[my_n_eqn];
+   for (unsigned i = 0; i < my_n_eqn; i++)
+    {
+     matrix_col_indices[m][i]=0;
+     matrix_values[m][i]=0;
+    }
+  }
+ 
+ //Resize the residuals vectors
+ Vector<double*> residuals_data(n_vector);
+ for(unsigned v=0;v<n_vector;v++) 
+  { 
+   residuals_data[v] = new double[my_n_eqn];
+   for (unsigned i = 0; i < my_n_eqn; i++)
+    {
+     residuals_data[v][i] = 0;
+    }
+  }
+
+ // Storage for assembly time for elements
+ double t_assemble_start=0.0;
+ 
+ // Storage for assembly times
+ Vector<double> elemental_assembly_time;
+ if ((!Problem_has_been_distributed)&&
+     Must_recompute_load_balance_for_assembly)
+  {
+   elemental_assembly_time.resize(n_elements);
+  }
+
+ // number of coefficients in each row
+ Vector<Vector<unsigned> > ncoef(n_matrix);
+ for (unsigned m = 0; m < n_matrix; m++)
+  {
+   ncoef[m].resize(my_n_eqn,0);
+  }
+
+ // Sparse_assemble_with_arrays_previous_allocation stores the number of
+ // coefs in each row.
+ // if a matrix of this size has not been assembled before then resize this
+ // storage 
+ if (Sparse_assemble_with_arrays_previous_allocation.size() == 0)
+  {
+   Sparse_assemble_with_arrays_previous_allocation.resize(n_matrix);
+   for (unsigned m = 0; m < n_matrix; m++)
+    {
+     Sparse_assemble_with_arrays_previous_allocation[m].resize(my_n_eqn,0);
+    }
+  }
+
+ // assemble and populate an array based storage scheme
+ {
+  //Allocate local storage for the element's contribution to the
+  //residuals vectors and system matrices of the size of the maximum
+  //number of dofs in any element
+  //This means that the storage will only be allocated (and deleted) once
+  Vector<Vector<double> > el_residuals(n_vector);
+  Vector<DenseMatrix<double> > el_jacobian(n_matrix);
+  
+  //Loop over the elements
+  for(unsigned long e=el_lo;e<=el_hi;e++)
+   {
+
+    // Time it?
+    if ((!Problem_has_been_distributed)&&
+        Must_recompute_load_balance_for_assembly)
+     {
+      t_assemble_start=TimingHelpers::timer();
+     }
+
+    //Get the pointer to the element
+    GeneralisedElement* elem_pt = mesh_pt()->element_pt(e);
+
+    //Ignore halo elements
+    if (!elem_pt->is_halo())
+     {
+
+      //Find number of degrees of freedom in the element
+      const unsigned nvar = assembly_handler_pt->ndof(elem_pt);
+    
+      //Resize the storage for elemental jacobian and residuals
+      for(unsigned v=0;v<n_vector;v++) {el_residuals[v].resize(nvar);}
+      for(unsigned m=0;m<n_matrix;m++) {el_jacobian[m].resize(nvar);}
+
+      //Now get the residuals and jacobian for the element
+      assembly_handler_pt->
+       get_all_vectors_and_matrices(elem_pt,el_residuals, el_jacobian);
+    
+      //---------------Insert the values into the vectors--------------
+    
+      //Loop over the first index of local variables
+      for(unsigned i=0;i<nvar;i++)
+       {
+        //Get the local equation number
+        unsigned global_eqn_number 
+         = assembly_handler_pt->eqn_number(elem_pt,i);
+        
+        // determine the element number in my set of eqns using the 
+        // bisection method
+        int left = 0;
+        int right = my_n_eqn-1;
+        int eqn_number = right/2;
+        while (my_eqns[eqn_number] != global_eqn_number)
+         {
+          if (left == right)
+           {
+            std::ostringstream error_stream;
+            error_stream
+             << "Internal Error: " 
+             << std::endl
+             << "Could not find global equation number "
+             << global_eqn_number << "in my_eqns vector of equation numbers.";
+            throw OomphLibError(
+             error_stream.str(),
+             "Problem::parallel_sparse_assemble()",
+             OOMPH_EXCEPTION_LOCATION);
+           }
+          if (my_eqns[eqn_number] > global_eqn_number)
+           {
+            right = std::max(eqn_number-1,left);
+           }
+          else
+           {
+            left = std::min(eqn_number+1,right);
+           }
+          eqn_number = (right+left)/2;
+         }
+
+        //Add the contribution to the residuals
+        for(unsigned v=0;v<n_vector;v++)
+         {
+          //Fill in each residuals vector
+          residuals_data[v][eqn_number] += el_residuals[v][i];
+         }
+      
+        //Now loop over the other index
+        for(unsigned j=0;j<nvar;j++)
+         {
+          //Get the number of the unknown
+          unsigned unknown = assembly_handler_pt->eqn_number(elem_pt,j);
+        
+          //Loop over the matrices
+          //If it's compressed row storage, then our vector of maps
+          //is indexed by row (equation number)
+          for(unsigned m=0;m<n_matrix;m++)
+           {
+            //Get the value of the matrix at this point
+            double value = el_jacobian[m](i,j);
+            //Only bother to add to the vector if it's non-zero
+            if(std::abs(value) > Numerical_zero_for_sparse_assembly)
+             {
+              // number of entrys in this row
+              const unsigned size = ncoef[m][eqn_number];
+              
+              // if no data has been allocated for this row then allocate
+              if (size == 0)
+               {
+                // do we have previous allocation data
+                if (Sparse_assemble_with_arrays_previous_allocation
+                    [m][eqn_number] != 0)
+                 {
+                  matrix_col_indices[m][eqn_number] = 
+                   new unsigned
+                   [Sparse_assemble_with_arrays_previous_allocation[m]
+                    [eqn_number]];
+                  matrix_values[m][eqn_number] = 
+                   new double
+                   [Sparse_assemble_with_arrays_previous_allocation[m]
+                    [eqn_number]];
+                 }
+                else
+                 {
+                  matrix_col_indices[m][eqn_number] = 
+                   new unsigned
+                   [Sparse_assemble_with_arrays_initial_allocation];
+                  matrix_values[m][eqn_number] = 
+                   new double
+                   [Sparse_assemble_with_arrays_initial_allocation];
+                  Sparse_assemble_with_arrays_previous_allocation[m]
+                   [eqn_number]=
+                   Sparse_assemble_with_arrays_initial_allocation;
+                 }
+               }
+
+              // next add the data
+              for(unsigned k=0; k<=size; k++)
+               {
+                if(k==size)
+                 {
+                  // do we need to allocate more storage
+                  if (Sparse_assemble_with_arrays_previous_allocation
+                      [m][eqn_number] == ncoef[m][eqn_number])
+                   {
+                    unsigned new_allocation = ncoef[m][eqn_number]+
+                     Sparse_assemble_with_arrays_allocation_increment;
+                    double* new_values = new double[new_allocation];
+                    unsigned* new_indices = new unsigned[new_allocation];
+                    for (unsigned c = 0; c < ncoef[m][eqn_number]; c++)
+                     {
+                      new_values[c] = matrix_values[m][eqn_number][c];
+                      new_indices[c] = matrix_col_indices[m][eqn_number][c];
+                     }
+                    delete[] matrix_values[m][eqn_number];
+                    delete[] matrix_col_indices[m][eqn_number];
+                    matrix_values[m][eqn_number] = new_values;
+                    matrix_col_indices[m][eqn_number] = new_indices;
+                    Sparse_assemble_with_arrays_previous_allocation
+                     [m][eqn_number] = new_allocation;
+                   }
+                  // and now add the data
+                  unsigned entry = ncoef[m][eqn_number];
+                  ncoef[m][eqn_number]++;
+                  matrix_col_indices[m][eqn_number][entry] = unknown;
+                  matrix_values[m][eqn_number][entry] = value;
+                  break;
+                 }
+                else if(matrix_col_indices[m][eqn_number][k] == unknown)
+                 {
+                  matrix_values[m][eqn_number][k] += value;
+                  break;
+                 }
+               }
+             }//numerical zero check
+           } //End of loop over matrices
+         }
+       }
+     } // endif halo element
+
+    // Time it?
+    if ((!Problem_has_been_distributed)&&
+        Must_recompute_load_balance_for_assembly)
+     {
+      elemental_assembly_time[e]=TimingHelpers::timer()-t_assemble_start;
+     }
+   } //End of loop over the elements
+ } //End of vector assembly
+
+ // Postprocess timing information and re-allocate distribution of
+ // elements during subsequent assemblies.
+ if ((!Problem_has_been_distributed)&&
+     Must_recompute_load_balance_for_assembly)
+  {
+   recompute_load_balanced_assembly(elemental_assembly_time);
+  }
+
+ // next we compute the number of equations and number of non-zeros to be
+ // sent to each processor, and send/recv that information
+ // =====================================================================
+ 
+ // determine the number of eqns to be sent to each processor
+ Vector<unsigned> n_eqn_for_proc(nproc,0);
+ Vector<unsigned> first_eqn_element_for_proc(nproc);
+ unsigned current_p = target_dist_pt->rank_of_global_row(my_eqns[0]);
+ first_eqn_element_for_proc[current_p] = 0;
+ n_eqn_for_proc[current_p] = 1;
+ for (unsigned i = 1; i < my_n_eqn; i++)
+  {
+   unsigned next_p = target_dist_pt->rank_of_global_row(my_eqns[i]);
+   if (next_p != current_p)
+    {
+     current_p = next_p;
+     first_eqn_element_for_proc[current_p] = i;
+    }
+   n_eqn_for_proc[current_p]++;
+  }
+
+ // determine the number of non-zeros to be sent to each processor for each 
+ // matrix
+ DenseMatrix<unsigned> nnz_for_proc(nproc,n_matrix,0);
+ for (unsigned p = 0; p < nproc; p++)
+  {
+   int first_eqn_element = first_eqn_element_for_proc[p];
+   int last_eqn_element = (int)(first_eqn_element + n_eqn_for_proc[p]) - 1;
+   for (unsigned m = 0; m < n_matrix; m++)
+    {
+     for (int i = first_eqn_element; i <= last_eqn_element; i++)
+      {
+       nnz_for_proc(p,m) += ncoef[m][i];
+      }
+    }
+  }
+
+ // next post the sends and recvs to the corresponding processors
+ Vector<unsigned*> temp_send_storage(nproc);
+ Vector<unsigned*> temp_recv_storage(nproc);
+ Vector<MPI_Request> send_nnz_reqs;
+ Vector<MPI_Request> recv_nnz_reqs;
+ for (unsigned p = 0; p < nproc; p++)
+  {
+   if (p != my_rank)
+    {
+   temp_send_storage[p] = new unsigned[n_matrix+1];
+   temp_send_storage[p][0] = n_eqn_for_proc[p];
+   for (unsigned m = 0; m < n_matrix; m++)
+    {
+     temp_send_storage[p][m+1] = nnz_for_proc(p,m);
+    }
+   MPI_Request sreq;
+   MPI_Isend(temp_send_storage[p],n_matrix+1,MPI_UNSIGNED,p,0,
+             Communicator_pt->mpi_comm(),&sreq);
+   send_nnz_reqs.push_back(sreq);
+   temp_recv_storage[p] = new unsigned[n_matrix+1];
+   MPI_Request rreq;
+   MPI_Irecv(temp_recv_storage[p],n_matrix+1,MPI_UNSIGNED,p,0,
+             Communicator_pt->mpi_comm(),&rreq);
+   recv_nnz_reqs.push_back(rreq);
+  }
+  }
+
+ // assemble the data to be sent to each processor
+ // ==============================================
+
+ // storage
+ Vector<unsigned*> eqns_for_proc(nproc);
+ DenseMatrix<double*> residuals_for_proc(nproc,n_vector);
+ DenseMatrix<unsigned*> row_start_for_proc(nproc,n_matrix);
+ DenseMatrix<unsigned*> column_indices_for_proc(nproc,n_matrix);
+ DenseMatrix<double*> values_for_proc(nproc,n_matrix);
+   
+ // equation numbers
+ for (unsigned p = 0; p < nproc; p++)
+  {
+   unsigned first_eqn_element = first_eqn_element_for_proc[p];
+   unsigned first_row = target_dist_pt->first_row(p);
+   unsigned n_eqns_p = n_eqn_for_proc[p];
+   if (n_eqns_p > 0)
+    {
+     eqns_for_proc[p] = new unsigned[n_eqns_p];
+     for (unsigned i = 0; i < n_eqns_p; i++)
+      {
+       eqns_for_proc[p][i] = my_eqns[i+first_eqn_element]-first_row;
+      }
+    }
+  }
+
+ // residuals for p
+ for (unsigned v = 0; v < n_vector; v++)
+  {
+   for (unsigned p = 0; p < nproc; p++)
+    {
+     unsigned n_eqns_p = n_eqn_for_proc[p];
+     if (n_eqns_p > 0)
+      {
+//       oomph_info << "allocating: " << v << " " << p << std::endl;
+       unsigned first_eqn_element = first_eqn_element_for_proc[p];
+       residuals_for_proc(p,v) = new double[n_eqns_p];
+       for (unsigned i = 0; i < n_eqns_p; i++)
+        {
+         residuals_for_proc(p,v)[i] = residuals_data[v][first_eqn_element+i];
+        }
+      }
+    }
+   delete[] residuals_data[v];
+  }
+
+ // matrices for p
+ for (unsigned m = 0; m < n_matrix; m++)
+  {
+   for (unsigned p = 0; p < nproc; p++)
+    {
+     unsigned n_eqns_p = n_eqn_for_proc[p];
+     if (n_eqns_p > 0)
+      {
+       unsigned first_eqn_element = first_eqn_element_for_proc[p];     
+       row_start_for_proc(p,m) = new unsigned[n_eqns_p+1];
+       column_indices_for_proc(p,m) = new unsigned[nnz_for_proc(p,m)];
+       values_for_proc(p,m) = new double[nnz_for_proc(p,m)];
+       unsigned entry = 0;
+       for (unsigned i = 0; i < n_eqns_p; i++)
+        {
+         row_start_for_proc(p,m)[i] = entry;
+         unsigned n_coef_in_row = ncoef[m][first_eqn_element+i];
+         for (unsigned j = 0; j < n_coef_in_row; j++)
+          {
+           column_indices_for_proc(p,m)[entry] 
+            = matrix_col_indices[m][i+first_eqn_element][j];
+           values_for_proc(p,m)[entry] 
+            = matrix_values[m][i+first_eqn_element][j];
+           entry++;
+          }
+        }
+       row_start_for_proc(p,m)[n_eqns_p]=entry;
+      }
+    }
+   for (unsigned i = 0; i < my_n_eqn; i++)
+    {
+     delete[] matrix_col_indices[m][i];
+     delete[] matrix_values[m][i];
+    }
+   delete[] matrix_col_indices[m];
+   delete[] matrix_values[m];
+  }
+  
+ // need to wait for the recv nnzs to complete
+ // before we can allocate storage for the matrix recvs
+ // ===================================================
+
+ // recv and copy the datafrom the recv storage to 
+ // + nnz_from_proc
+ // + n_eqn_from_proc
+ Vector<MPI_Status> recv_nnz_stat(nproc-1);
+ MPI_Waitall(nproc-1,&recv_nnz_reqs[0],&recv_nnz_stat[0]);
+ Vector<unsigned> n_eqn_from_proc(nproc-1);
+ DenseMatrix<unsigned> nnz_from_proc(nproc,n_matrix);
+ for (unsigned p = 0; p < nproc; p++)
+  {
+   if (p != my_rank)
+    {
+   n_eqn_from_proc[p] = temp_recv_storage[p][0];
+   for (unsigned m = 0; m < n_matrix; m++)
+    {
+     nnz_from_proc(p,m) = temp_recv_storage[p][m+1];
+    }
+   delete[] temp_recv_storage[p];
+  }
+   else
+    {
+     n_eqn_from_proc[p] = n_eqn_for_proc[p];
+     for (unsigned m = 0; m < n_matrix; m++)
+      {
+       nnz_from_proc(p,m) = nnz_for_proc(p,m);
+      }
+    }
+  }
+ recv_nnz_stat.clear();
+ recv_nnz_reqs.clear();
+
+ // allocate the storage for the data to be recv and post the sends recvs
+ // =====================================================================
+
+ // storage
+ Vector<unsigned*> eqns_from_proc(nproc);
+ DenseMatrix<double*> residuals_from_proc(nproc,n_vector);
+ DenseMatrix<unsigned*> row_start_from_proc(nproc,n_matrix);
+ DenseMatrix<unsigned*> column_indices_from_proc(nproc,n_matrix);
+ DenseMatrix<double*> values_from_proc(nproc,n_matrix);
+
+ // allocate and post sends and recvs
+ double base;
+ MPI_Aint communication_base;
+ MPI_Address(&base,&communication_base);
+ unsigned n_comm_types = 1 + 1*n_vector + 3*n_matrix;
+ Vector<MPI_Request> recv_reqs;
+ Vector<MPI_Request> send_reqs;
+ for (unsigned p = 0; p < nproc; p++)
+  {
+   if (p != my_rank)
     {
 
-     // Start index for the present row [column]
-     row_or_column_start[0][i] = entry_count;
-
-     for(Vector< std::pair<int,double> >::iterator it = 
-          matrix_data[i].begin();it!=matrix_data[i].end();
-         ++it)
+     // allocate
+     if (n_eqn_from_proc[p] > 0)
       {
-       // The first value is the column [row] index
-       column_or_row_index[0].push_back(it->first);
+       eqns_from_proc[p] = new unsigned[n_eqn_from_proc[p]];
+       for (unsigned v = 0; v < n_vector; v++)
+        {
+         residuals_from_proc(p,v) = new double[n_eqn_from_proc[p]];
+        }
+       for (unsigned m = 0; m < n_matrix; m++)
+        {
+         row_start_from_proc(p,m) = new unsigned[n_eqn_from_proc[p]+1];
+         column_indices_from_proc(p,m) = new unsigned[nnz_from_proc(p,m)];
+         values_from_proc(p,m) = new double[nnz_from_proc(p,m)];
+        }
+      }
+     
+     // recv
+     if (n_eqn_from_proc[p] > 0)
+      {
+       MPI_Datatype types[n_comm_types];
+       MPI_Aint offsets[n_comm_types];
+       int count[n_comm_types];
+       int pt = 0;
        
-       // The second value is the actual data value
-       value[0].push_back(it->second);
+       // equations
+       count[pt] = 1;
+       MPI_Address(eqns_from_proc[p],&offsets[pt]);
+       offsets[pt] -= communication_base;
+       MPI_Type_contiguous(n_eqn_from_proc[p],MPI_UNSIGNED,&types[pt]);
+       MPI_Type_commit(&types[pt]);
+       pt++;
        
-       // Increase the value of the counter
-       entry_count++;
+       // vectors
+       for (unsigned v = 0; v < n_vector; v++)
+        {
+         count[pt] = 1;
+         MPI_Address(residuals_from_proc(p,v),&offsets[pt]);
+         offsets[pt] -= communication_base;
+         MPI_Type_contiguous(n_eqn_from_proc[p],MPI_DOUBLE,&types[pt]);
+         MPI_Type_commit(&types[pt]);
+         pt++;
+        }
+
+       // matrices
+       for (unsigned m = 0; m < n_matrix; m++)
+        {
+         // row start
+         count[pt] = 1;
+         MPI_Address(row_start_from_proc(p,m),&offsets[pt]);
+         offsets[pt] -= communication_base;
+         MPI_Type_contiguous(n_eqn_from_proc[p]+1,MPI_UNSIGNED,&types[pt]);
+         MPI_Type_commit(&types[pt]);
+         pt++;         
+         
+
+         // column indices
+         count[pt] = 1;
+         MPI_Address(column_indices_from_proc(p,m),&offsets[pt]);
+         offsets[pt] -= communication_base;
+         MPI_Type_contiguous(nnz_from_proc(p,m),MPI_UNSIGNED,&types[pt]);
+         MPI_Type_commit(&types[pt]);
+         pt++;   
+
+         // values
+         count[pt] = 1;
+         MPI_Address(values_from_proc(p,m),&offsets[pt]);
+         offsets[pt] -= communication_base;
+         MPI_Type_contiguous(nnz_from_proc(p,m),MPI_DOUBLE,&types[pt]);
+         MPI_Type_commit(&types[pt]);
+         pt++;
+        }
+
+       // build the combined type
+       MPI_Datatype recv_type;
+       MPI_Type_struct(n_comm_types,count,offsets,types,&recv_type);
+       MPI_Type_commit(&recv_type);
+       for (unsigned t = 0; t < n_comm_types; t++)
+        {
+         MPI_Type_free(&types[t]);
+        }
+       MPI_Request req;
+       MPI_Irecv(&base,1,recv_type,p,1,
+                 Communicator_pt->mpi_comm(),&req);
+       MPI_Type_free(&recv_type);
+       recv_reqs.push_back(req);
+      }
+     
+     // send
+     if (n_eqn_for_proc[p] > 0)
+      {
+       MPI_Datatype types[n_comm_types];
+       MPI_Aint offsets[n_comm_types];
+       int count[n_comm_types];
+       int pt = 0;
+       
+       // equations
+       count[pt] = 1;
+       MPI_Address(eqns_for_proc[p],&offsets[pt]);
+       offsets[pt] -= communication_base;
+       MPI_Type_contiguous(n_eqn_for_proc[p],MPI_UNSIGNED,&types[pt]);
+       MPI_Type_commit(&types[pt]);
+       pt++;
+       
+       // vectors
+       for (unsigned v = 0; v < n_vector; v++)
+        {
+         count[pt] = 1;
+         MPI_Address(residuals_for_proc(p,v),&offsets[pt]);
+         offsets[pt] -= communication_base;
+         MPI_Type_contiguous(n_eqn_for_proc[p],MPI_DOUBLE,&types[pt]);
+         MPI_Type_commit(&types[pt]);
+         pt++;
+        }
+
+       // matrices
+       for (unsigned m = 0; m < n_matrix; m++)
+        {
+         // row start
+         count[pt] = 1;
+         MPI_Address(row_start_for_proc(p,m),&offsets[pt]);
+         offsets[pt] -= communication_base;
+         MPI_Type_contiguous(n_eqn_for_proc[p]+1,MPI_UNSIGNED,&types[pt]);
+         MPI_Type_commit(&types[pt]);
+         pt++;         
+         
+
+         // column indices
+         count[pt] = 1;
+         MPI_Address(column_indices_for_proc(p,m),&offsets[pt]);
+         offsets[pt] -= communication_base;
+         MPI_Type_contiguous(nnz_for_proc(p,m),MPI_UNSIGNED,&types[pt]);
+         MPI_Type_commit(&types[pt]);
+         pt++;   
+
+         // values
+         count[pt] = 1;
+         MPI_Address(values_for_proc(p,m),&offsets[pt]);
+         offsets[pt] -= communication_base;
+         MPI_Type_contiguous(nnz_for_proc(p,m),MPI_DOUBLE,&types[pt]);
+         MPI_Type_commit(&types[pt]);
+         pt++;
+        }
+
+       // build the combined type
+       MPI_Datatype send_type;
+       MPI_Type_struct(n_comm_types,count,offsets,types,&send_type);
+       MPI_Type_commit(&send_type);
+       for (unsigned t = 0; t < n_comm_types; t++)
+        {
+         MPI_Type_free(&types[t]);
+        }
+       MPI_Request req;
+       MPI_Isend(&base,1,send_type,p,1,
+                 Communicator_pt->mpi_comm(),&req);
+       MPI_Type_free(&send_type);
+       send_reqs.push_back(req);
+      }
+    }
+   // otherwise send to self
+   else
+    {
+     eqns_from_proc[p] = eqns_for_proc[p];
+     for (unsigned v = 0; v < n_vector; v++)
+      {
+       residuals_from_proc(p,v) = residuals_for_proc(p,v);
+      }
+     for (unsigned m = 0; m < n_matrix; m++)
+      {
+       row_start_from_proc(p,m) = row_start_for_proc(p,m);
+       column_indices_from_proc(p,m) = column_indices_for_proc(p,m);
+       values_from_proc(p,m) = values_for_proc(p,m);
+      }
+    }
+  }
+
+ // wait for the recvs to complete
+ unsigned n_recv_req = recv_reqs.size();
+ if (n_recv_req > 0)
+  {
+   Vector<MPI_Status> recv_stat(n_recv_req);
+   MPI_Waitall(n_recv_req,&recv_reqs[0],&recv_stat[0]);
+  }
+
+ // ==============================================
+ unsigned target_nrow_local = target_dist_pt->nrow_local();
+
+ // loop over the matrices
+ for (unsigned m = 0; m < n_matrix; m++)
+  {
+
+   // allocate row_start
+   row_start[m] = new int[target_nrow_local+1];
+   row_start[m][0] = 0;
+
+   // initially allocate storage based on the maximum number of non-zeros
+   // from any one processor
+   unsigned nnz_allocation = Parallel_sparse_assemble_previous_allocation;
+   for (unsigned p = 0; p < nproc; p++)
+    {
+     nnz_allocation = std::max(nnz_allocation,nnz_from_proc(p,m));
+    }
+   Vector<double*> values_chunk(1);
+   values_chunk[0] = new double[nnz_allocation];
+   Vector<int*> column_indices_chunk(1);
+   column_indices_chunk[0] = new int[nnz_allocation];
+   Vector<unsigned> ncoef_in_chunk(1,0);
+   Vector<unsigned> size_of_chunk(1,0);
+   size_of_chunk[0] = nnz_allocation;
+   unsigned current_chunk = 0;
+
+   // for each row on this processor
+   for (unsigned i = 0; i < target_nrow_local; i++)
+    {
+     row_start[m][i]=0;
+
+     // determine the processors that this row is on
+     Vector<int> row_on_proc(nproc,-1);
+     for (unsigned p = 0; p < nproc; p++)
+      {
+       if (n_eqn_from_proc[p]==0)
+        {
+         row_on_proc[p]=-1;
+        }
+       else
+        {
+       int left = 0;
+       int right = n_eqn_from_proc[p]-1;
+       int midpoint = right/2;
+       bool complete = false;
+       while (!complete)
+        {
+         midpoint = (right+left)/2;
+         if (midpoint > right) { midpoint = right; }
+         if (midpoint < left) { midpoint = left; }
+         if (left==right)
+          {
+           if (eqns_from_proc[p][midpoint] == i)
+            {
+             midpoint=left;
+            }
+           else
+            {
+             midpoint = -1;
+            }
+           complete=true;
+          }
+         else if (eqns_from_proc[p][midpoint] == i)
+          {
+           complete = true;
+          }
+         else if (eqns_from_proc[p][midpoint] > i)
+          {
+           right = std::max(midpoint-1,left);
+          }
+         else
+          {
+           left = std::min(midpoint+1,right);
+          }
+        }
+       row_on_proc[p] = midpoint;
+        }
+      }
+
+     // for each processor build this row of the matrix
+     unsigned check_first = ncoef_in_chunk[current_chunk];
+     unsigned check_last = check_first;
+     for (unsigned p = 0; p < nproc; p++)
+      {
+       if (row_on_proc[p] != -1)
+        {
+         int row = row_on_proc[p];
+         unsigned first = row_start_from_proc(p,m)[row];
+         unsigned last = row_start_from_proc(p,m)[row+1];
+         for (unsigned l = first; l < last; l++)
+          {
+           bool done = false;
+           for (unsigned j = check_first; j <=check_last && !done; j++)
+            {
+             if (j==check_last)
+              {
+               // is this temp array full, do we need to allocate
+               // a new temp array
+               if (ncoef_in_chunk[current_chunk] ==
+                   size_of_chunk[current_chunk])
+                {
+
+                 // number of chunks allocated
+                 unsigned n_chunk = values_chunk.size();
+
+                 // determine the number of non-zeros added so far
+                 // (excluding the current row)
+                 unsigned nnz_so_far = 0;
+                 for (unsigned c = 0; c < n_chunk; c++)
+                  {
+                   nnz_so_far += ncoef_in_chunk[c];
+                  }
+                 nnz_so_far -= row_start[m][i];
+
+                 // average number of non-zeros per row
+                 unsigned avg_nnz = nnz_so_far/(i+1);
+
+                 // number of rows left +1
+                 unsigned nrows_left = target_nrow_local-i;
+
+                 // allocation for next chunk
+                 unsigned next_chunk_size = avg_nnz*nrows_left+row_start[m][i];
+
+                 // allocate storage in next chunk
+                 current_chunk++;
+                 n_chunk++;
+                 values_chunk.resize(n_chunk);
+                 values_chunk[current_chunk] = new double[next_chunk_size];
+                 column_indices_chunk.resize(n_chunk);
+                 column_indices_chunk[current_chunk] 
+                  = new int[next_chunk_size];
+                 size_of_chunk.resize(n_chunk);
+                 size_of_chunk[current_chunk] = next_chunk_size;
+                 ncoef_in_chunk.resize(n_chunk);
+
+                 // copy current row from previous chunk to new chunk
+                 for (unsigned k = check_first; k < check_last; k++)
+                  {
+                   values_chunk[current_chunk][k-check_first] =
+                    values_chunk[current_chunk-1][k];
+                   column_indices_chunk[current_chunk][k-check_first] = 
+                    column_indices_chunk[current_chunk-1][k];
+                  }
+                 ncoef_in_chunk[current_chunk-1]-=row_start[m][i];
+                 ncoef_in_chunk[current_chunk]=row_start[m][i];
+          
+                 // update first_check and last_check
+                 check_first=0;
+                 check_last=row_start[m][i];
+                 j=check_last;
+                }
+
+               // add the coefficient             
+               values_chunk[current_chunk][j]=values_from_proc(p,m)[l];
+               column_indices_chunk[current_chunk][j]
+                =column_indices_from_proc(p,m)[l];
+               ncoef_in_chunk[current_chunk]++;
+               row_start[m][i]++;
+               check_last++;
+               done=true;
+              }
+             else if (column_indices_chunk[current_chunk][j] == 
+                      (int)column_indices_from_proc(p,m)[l])
+              {
+               values_chunk[current_chunk][j] += values_from_proc(p,m)[l];
+               done=true;
+              }
+            }
+          }
+        }
       }
     }
 
-   // Remember final entry in the row [column] start vector
-   row_or_column_start[0][n_row_or_column] = entry_count;
+   // delete recv data for this matrix
+   for (unsigned p = 0; p < nproc; p++)
+    {
+     if (n_eqn_from_proc[p] > 0)
+      {
+       delete[] row_start_from_proc(p,m);
+       delete[] column_indices_from_proc(p,m);
+       delete[] values_from_proc(p,m);
+      }
+    }
+
+   // next we take the chunk base storage of the column indices and values
+   // and copy into a single contiguous block of memory
+   // ====================================================================
+   unsigned n_chunk = values_chunk.size();
+   nnz[m]=0;
+   for (unsigned c = 0; c < n_chunk; c++)
+    {
+     nnz[m]+=ncoef_in_chunk[c];
+    }
+   Parallel_sparse_assemble_previous_allocation=nnz[m];
+
+   // allocate
+   values[m] = new double[nnz[m]];
+   column_indices[m] = new int[nnz[m]];
+                               
+   // copy
+   unsigned pt = 0;
+   for (unsigned c = 0; c < n_chunk; c++)
+    {
+     unsigned nc = ncoef_in_chunk[c];
+     for (unsigned i = 0; i < nc; i++)
+      {
+       values[m][pt+i]=values_chunk[c][i];
+       column_indices[m][pt+i]=column_indices_chunk[c][i];
+      }
+     pt += nc;
+     delete[] values_chunk[c];
+     delete[] column_indices_chunk[c];
+    }
+
+   // the row_start vector currently contains the number of coefs in each
+   // row. Update
+   // ===================================================================
+   unsigned g = row_start[m][0];
+   row_start[m][0] = 0;
+   for (unsigned i = 1; i < target_nrow_local; i++)
+    {
+     unsigned h = g+row_start[m][i];
+     row_start[m][i] = g;
+     g=h;
+    }
+   row_start[m][target_nrow_local]=g;
+  }
+
+ // next accumulate the residuals
+ for (unsigned v = 0; v < n_vector; v++)
+  {
+   residuals[v] = new double[target_nrow_local];
+   for (unsigned i = 0; i < target_nrow_local; i++)
+    {
+     residuals[v][i] = 0;
+    }
+   for (unsigned p = 0; p < nproc; p++)
+    {
+     if (n_eqn_from_proc[p] > 0)
+      {
+       unsigned n_eqn_p = n_eqn_from_proc[p];
+       for (unsigned i = 0; i < n_eqn_p; i++)
+        {
+         residuals[v][eqns_from_proc[p][i]]+=residuals_from_proc(p,v)[i];
+        }
+       delete[] residuals_from_proc(p,v);
+      }
+    }
+  }
+
+ // delete list of eqns from proc
+ for (unsigned p = 0; p < nproc; p++)
+  {
+   if (n_eqn_from_proc[p] > 0)
+    {
+     delete[] eqns_from_proc[p];
+    }
+  }
+ 
+ // and wait for sends to complete
+ Vector<MPI_Status> send_nnz_stat(nproc-1);
+ MPI_Waitall(nproc-1,&send_nnz_reqs[0],&send_nnz_stat[0]);
+ for (unsigned p = 0; p < nproc; p++)
+  {
+   if (p != my_rank)
+    {
+   delete[] temp_send_storage[p];
+  }
+  }
+ send_nnz_stat.clear();
+ send_nnz_reqs.clear();
+
+ // wait for the matrix data sends to complete and delete the data
+ unsigned n_send_reqs = send_reqs.size();
+ if (n_send_reqs > 0)
+  {
+   Vector<MPI_Status> send_stat(n_send_reqs);
+   MPI_Waitall(n_send_reqs,&send_reqs[0],&send_stat[0]);
+   for (unsigned p = 0; p < nproc; p++)
+    {
+     if (p != my_rank)
+      {
+       if (n_eqn_for_proc[p])
+        {
+         delete[] eqns_for_proc[p];
+         for (unsigned m = 0; m < n_matrix; m++)
+          {
+           delete[] row_start_for_proc(p,m);
+           delete[] column_indices_for_proc(p,m);
+           delete[] values_for_proc(p,m);
+          }
+         for (unsigned v = 0; v < n_vector; v++)
+          {
+           delete[] residuals_for_proc(p,v);
+          }
+        }
+      }
+    }
   }
 }
-
 #endif
+
 
 //================================================================
 /// \short Get the full Jacobian by finite differencing
@@ -4429,7 +5720,7 @@ void Problem::get_derivative_wrt_global_parameter(double* const &parameter_pt,
   LinearAlgebraDistribution(Communicator_pt,n_dof,false);
 
  // rebuild the result
- result.rebuild(dist_pt);
+ result.build(dist_pt,0.0);
 
  //Initialise the result vector to zero 
  result.initialise(0.0);
@@ -4438,7 +5729,7 @@ void Problem::get_derivative_wrt_global_parameter(double* const &parameter_pt,
  get_residuals(result);
 
  //Storage for the new residuals
- DoubleVector newres(dist_pt);
+ DoubleVector newres(dist_pt,0.0);
   
  //Increase the global parameter
  const double FD_step = 1.0e-8;
@@ -4577,6 +5868,9 @@ void Problem::solve_eigenproblem(const unsigned &n_eval,
   }
 }
 
+
+
+
 //===================================================================
 /// Get the matrices required to solve an eigenproblem
 /// WARNING: temporarily this method only works with non-distributed 
@@ -4639,11 +5933,11 @@ void Problem::get_eigenproblem_matrices(CRDoubleMatrix &mass_matrix,
    LinearAlgebraDistribution dist(this->communicator_pt(),this->ndof(),false);
    if (!main_matrix.distribution_setup())
     {
-     main_matrix.rebuild(&dist);
+     main_matrix.build(&dist);
     }
    if (!mass_matrix.distribution_setup())
     {
-     mass_matrix.rebuild(&dist);
+     mass_matrix.build(&dist);
     }
   }
 
@@ -4653,17 +5947,19 @@ void Problem::get_eigenproblem_matrices(CRDoubleMatrix &mass_matrix,
  Assembly_handler_pt = new EigenProblemHandler(shift);
 
  //Prepare the storage formats.
- Vector<Vector<int> > column_or_row_index(2);
- Vector<Vector<int> > row_or_column_start(2);
- Vector<Vector<double> > value(2); 
+ Vector<int* > column_or_row_index(2);
+ Vector<int* > row_or_column_start(2);
+ Vector<double* > value(2); 
+ Vector<unsigned> nnz(2);
  //Allocate pointer to residuals, although not used in these problems
- Vector<Vector<double>*> residuals_vectors(0);
+ Vector<double* > residuals_vectors(0);
 
  bool compressed_row_flag=true;
 
  sparse_assemble_row_or_column_compressed(column_or_row_index,
                                           row_or_column_start,
                                           value,
+                                          nnz,
                                           residuals_vectors,
                                           compressed_row_flag);
 
@@ -4671,17 +5967,20 @@ void Problem::get_eigenproblem_matrices(CRDoubleMatrix &mass_matrix,
  unsigned long n_dof = ndof();
 
  //The main matrix is the first entry
- main_matrix.rebuild_matrix(n_dof,value[0],column_or_row_index[0],
-                            row_or_column_start[0]);
+ main_matrix.build_matrix_without_copy(n_dof,nnz[0],value[0],
+                                       column_or_row_index[0],
+                                       row_or_column_start[0]);
  //The mass matrix is the second entry
- mass_matrix.rebuild_matrix(n_dof,value[1],column_or_row_index[1],
-                            row_or_column_start[1]);   
+ mass_matrix.build_matrix_without_copy(n_dof,nnz[1],value[1],
+                                       column_or_row_index[1],
+                                       row_or_column_start[1]);   
 
  //Delete the eigenproblem handler
  delete Assembly_handler_pt;
  //Reset the assembly handler to the original handler
  Assembly_handler_pt = old_assembly_handler_pt;
 }
+
 
 //=======================================================================
 /// Stored the current values of the dofs
@@ -4789,7 +6088,6 @@ void Problem::add_eigenvector_to_dofs(const double &epsilon,
 }
 
 
-
 //================================================================
 /// General Newton solver. Requires only a convergence tolerance. 
 /// The linear solver takes a pointer to the problem (which defines
@@ -4808,7 +6106,6 @@ void Problem::newton_solve()
  unsigned long n_dofs = ndof();
 
  //Set up the Vector to hold the solution
- LinearAlgebraDistribution global_dist(Communicator_pt,n_dofs,false);
  DoubleVector dx;
 
  //Set the counter
@@ -4955,17 +6252,12 @@ void Problem::newton_solve()
     }
 
    //Subtract the new values from the true dofs
-   dx.redistribute(global_dist);
+   dx.redistribute(Dof_distribution_pt);
    double* dx_pt = dx.values_pt();
-   for(unsigned l=0;l<n_dofs;l++)
-    { 
-     // This is needed during parallel runs when dofs that are not
-     // held on the current processor are nulled out. Can change
-     // this once/if the Dof_pt vector is distributed too. 
-     if (Dof_pt[l]!=0)
-      {
-       *Dof_pt[l] -= dx_pt[l];
-      }
+   unsigned ndof_local = Dof_distribution_pt->nrow_local();
+   for (unsigned l = 0; l < ndof_local; l++)
+    {
+     *Dof_pt[l] -= dx_pt[l];
     }
 
 #ifdef OOMPH_HAS_MPI
@@ -5086,8 +6378,6 @@ void Problem::newton_solve()
   }
  if (!Shut_up_in_newton_solve) oomph_info << std::endl;
 }  
- 
-
 
 
 //========================================================================
@@ -5191,7 +6481,7 @@ newton_solve_continuation(double* const &parameter_pt)
  //Set up memory for z 
  unsigned long n_dofs = ndof();
  LinearAlgebraDistribution dist(Communicator_pt,n_dofs,false);
- DoubleVector z(&dist);
+ DoubleVector z(&dist,0.0);
  //Call the solver
  return newton_solve_continuation(parameter_pt,z);
 }
@@ -5217,7 +6507,7 @@ newton_solve_continuation(double* const &parameter_pt,
  LinearAlgebraDistribution dist(this->communicator_pt(),n_dofs,false);
 
  //Assign memory for solutions of the equations
- DoubleVector y(&dist);
+ DoubleVector y(&dist,0.0);
 
  //Assign memory for the dot products of the uderivatives and y and z
  double uderiv_dot_y = 0.0, uderiv_dot_z = 0.0;
@@ -5470,7 +6760,7 @@ calculate_continuation_derivatives(double* const &parameter_pt)
  LinearAlgebraDistribution dist(Communicator_pt,n_dofs,false);
 
  //Assign memory for solutions of the equations
- DoubleVector z(&dist);
+ DoubleVector z(&dist,0.0);
 
  //If it's the block hopf solver need to solve for both RHS
  //at once, but this would all be alleviated if we have the solve
@@ -5484,7 +6774,7 @@ calculate_continuation_derivatives(double* const &parameter_pt)
    // Copy rhs vector into local storage so it doesn't get overwritten
    // if the linear solver decides to initialise the solution vector, say,
    // which it's quite entitled to do!
-   DoubleVector dummy(&dist), input_z(z);
+   DoubleVector dummy(&dist,0.0), input_z(z);
 
    //Solve for the two RHSs
    dynamic_cast<BlockHopfLinearSolver*>(Linear_solver_pt)->
@@ -5833,7 +7123,7 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
  //This is needed here (outside the loop), so that we can save on 
  //one linear solve when calculating the derivatives wrt the arc-length
  LinearAlgebraDistribution dist(Communicator_pt,n_dofs,false);
- DoubleVector z(&dist);
+ DoubleVector z(&dist,0.0);
 
  //Store sign of the Jacobian, used for bifurcation detection
  //If this is the first time that we are calling the arc-length solver,
@@ -9569,62 +10859,45 @@ void Problem::synchronise_external_dofs(Mesh* &mesh_pt)
   }
 }
 
-
 //========================================================================
 ///  Synchronise equation numbers and return the total
 /// number of degrees of freedom in the overall problem
 //========================================================================
 long Problem::synchronise_eqn_numbers(const bool& assign_local_eqn_numbers)
 { 
- // Storage for number of processors and current processor
- int n_proc=this->communicator_pt()->nproc();
- int my_rank=this->communicator_pt()->my_rank();
+ // number of equations on this processor
+ unsigned my_n_eqn = Dof_pt.size();
 
- // Step 1: Bump up eqn numbers by the number of dofs on 
- // previous processor
-
- // Assemble vector that contains current number of dofs on the
- // various processors
- Vector<int> dofs_on_proc(n_proc,-1);
+ // my rank
+ unsigned my_rank = Communicator_pt->my_rank();
  
- // Store own number of dofs
- int my_ndof=ndof();
- dofs_on_proc[my_rank]=my_ndof;
+ // number of processors
+ unsigned nproc = Communicator_pt->nproc();
 
- // Gather information on root processor: First argument group
- // specifies what is to be sent (one int from each procssor, indicating
- // the number of dofs on it), the second group indicates where
- // the results are to be gathered (in rank order) on root processor.
- MPI_Gather(&dofs_on_proc[my_rank],1,MPI_INT,
-            &dofs_on_proc[0],1, MPI_INT,
-            0,this->communicator_pt()->mpi_comm());
- 
- // Now broadcast the result back out: Nproc integers, starting
- // from the beginning of dofs_on_proc. 
- MPI_Bcast(&dofs_on_proc[0],n_proc,MPI_INT,0,
-           this->communicator_pt()->mpi_comm());
-
- // Get total number of dofs in problem
- unsigned new_ndof=0;
- for (int i=0;i<n_proc;i++)
-  { 
-   new_ndof+=dofs_on_proc[i];
-  }
- 
- // Accumulate offset for eqn numbers
- unsigned bump=0;
- for (int i=0;i<my_rank;i++)
-  { 
-   bump+= dofs_on_proc[i];
+ // send my_n_eqn to with rank greater than my_rank
+ unsigned n_send = nproc-my_rank-1;
+ Vector<MPI_Request> send_req(n_send);
+ for (unsigned p = my_rank+1; p < nproc; p++)
+  {
+   MPI_Isend(&my_n_eqn,1,MPI_UNSIGNED,p,0,
+             Communicator_pt->mpi_comm(),&send_req[p-my_rank-1]);
   }
 
- // Backup current dof_pt vector
- Vector<double*> old_dof_pt(Dof_pt);
- 
- // Resize Dof_pt vector to total number of dofs in problem
- // and null out ALL of its entries, not just the newly created ones
- Dof_pt.resize(new_ndof,0);
- for (unsigned i=0;i<new_ndof;i++) Dof_pt[i]=0;
+ // recv n_eqn from processors with rank less than my_rank
+ Vector<unsigned> n_eqn_on_proc(my_rank);
+ for (unsigned p = 0; p < my_rank; p++)
+  {
+   MPI_Recv(&n_eqn_on_proc[p],1,MPI_UNSIGNED,p,0,
+            Communicator_pt->mpi_comm(),MPI_STATUS_IGNORE);
+  }
+
+ // determine the number of equation on processors with rank
+ // less than my_rank
+ unsigned my_eqn_num_base = 0;
+ for (unsigned p = 0; p < my_rank; p++)
+  {
+   my_eqn_num_base += n_eqn_on_proc[p];
+  }
 
  // Loop over all internal data (on elements) and bump up their
  // equation numbers if they exist
@@ -9644,10 +10917,8 @@ long Problem::synchronise_eqn_numbers(const bool& assign_local_eqn_numbers)
        if (old_eqn_number>=0) // i.e. it's being used
         {
          // Bump up eqn number
-         int new_eqn_number=old_eqn_number+bump;
+         int new_eqn_number=old_eqn_number+my_eqn_num_base;
          int_data_pt->eqn_number(ival)=new_eqn_number;
-         // Update entries in Dof_pt
-         Dof_pt[new_eqn_number]=old_dof_pt[old_eqn_number];
         }
       }
     }
@@ -9670,10 +10941,8 @@ long Problem::synchronise_eqn_numbers(const bool& assign_local_eqn_numbers)
      if (old_eqn_number>=0)
       {
        // Bump up eqn number
-       int new_eqn_number=old_eqn_number+bump;
+       int new_eqn_number=old_eqn_number+my_eqn_num_base;
        nod_pt->eqn_number(ival)=new_eqn_number;
-       // Update entries in Dof_pt
-       Dof_pt[new_eqn_number]=old_dof_pt[old_eqn_number];
       }
     }
 
@@ -9693,10 +10962,8 @@ long Problem::synchronise_eqn_numbers(const bool& assign_local_eqn_numbers)
        if (old_eqn_number>=0)
         {
          // Bump up eqn number
-         int new_eqn_number=old_eqn_number+bump;
+         int new_eqn_number=old_eqn_number+my_eqn_num_base;
          solid_nod_pt->variable_position_pt()->eqn_number(ival)=new_eqn_number;
-         // Update entries in Dof_pt
-         Dof_pt[new_eqn_number]=old_dof_pt[old_eqn_number];  
         }
       }
     }
@@ -9752,10 +11019,24 @@ long Problem::synchronise_eqn_numbers(const bool& assign_local_eqn_numbers)
     }
   }
 
- // Return new total number of equations
- return new_ndof;
+ // wait for the sends to complete
+ if (n_send > 0)
+  {
+   Vector<MPI_Status> send_status(n_send);
+   MPI_Waitall(n_send,&send_req[0],&send_status[0]);
+  }
 
+ // build the Dof distribution pt
+ Dof_distribution_pt->rebuild(Communicator_pt,my_eqn_num_base,
+                              my_n_eqn);
+
+ // resize the sparse assemble with arrays previous allocation
+ Sparse_assemble_with_arrays_previous_allocation.resize(0);
+ 
+ // and return the total number of equations in the problem
+ return (long)Dof_distribution_pt->nrow();
 }
+
 
 //=======================================================================
 /// A private helper function to

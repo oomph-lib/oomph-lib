@@ -197,10 +197,11 @@ namespace oomph
  /// if we want compressed row format (true) or compressed column.
  /// This version uses vectors of pairs.
  virtual void sparse_assemble_row_or_column_compressed_with_vectors_of_pairs(
-  Vector<Vector<int> > &column_or_row_index,
-  Vector<Vector<int> > &row_or_column_start,
-  Vector<Vector<double> > &value, 
-  Vector<Vector<double>*> &residual,
+  Vector<int* > &column_or_row_index,
+  Vector<int* > &row_or_column_start,
+  Vector<double* > &value, 
+  Vector<unsigned> &nnz,
+  Vector<double* > &residual,
   bool compressed_row_flag);
 
  /// \short Private helper function that is used to assemble the Jacobian 
@@ -209,10 +210,11 @@ namespace oomph
  /// if we want compressed row format (true) or compressed column.
  /// This version uses two vectors.
  virtual void sparse_assemble_row_or_column_compressed_with_two_vectors(
-  Vector<Vector<int> > &column_or_row_index,
-  Vector<Vector<int> > &row_or_column_start,
-  Vector<Vector<double> > &value, 
-  Vector<Vector<double>*> &residual,
+  Vector<int* > &column_or_row_index,
+  Vector<int* > &row_or_column_start,
+  Vector<double* > &value,
+  Vector<unsigned> &nnz, 
+  Vector<double* > &residual,
   bool compressed_row_flag);
 
  /// \short Private helper function that is used to assemble the Jacobian 
@@ -221,10 +223,11 @@ namespace oomph
  /// if we want compressed row format (true) or compressed column.
  /// This version uses maps
  virtual void sparse_assemble_row_or_column_compressed_with_maps(
-  Vector<Vector<int> > &column_or_row_index,
-  Vector<Vector<int> > &row_or_column_start,
-  Vector<Vector<double> > &value, 
-  Vector<Vector<double>*> &residual,
+  Vector<int* > &column_or_row_index,
+  Vector<int* > &row_or_column_start,
+  Vector<double* > &value,
+  Vector<unsigned> &nnz, 
+  Vector<double* > &residual,
   bool compressed_row_flag);
 
  /// \short Private helper function that is used to assemble the Jacobian 
@@ -233,12 +236,25 @@ namespace oomph
  /// if we want compressed row format (true) or compressed column.
  /// This version uses lists
  virtual void sparse_assemble_row_or_column_compressed_with_lists(
-  Vector<Vector<int> > &column_or_row_index,
-  Vector<Vector<int> > &row_or_column_start,
-  Vector<Vector<double> > &value, 
-  Vector<Vector<double>*> &residual,
+  Vector<int* > &column_or_row_index,
+  Vector<int* > &row_or_column_start,
+  Vector<double* > &value,
+  Vector<unsigned> &nnz, 
+  Vector<double* > &residual,
   bool compressed_row_flag);
 
+ /// \short Private helper function that is used to assemble the Jacobian 
+ /// matrix in the case when the storage is row or column compressed.
+ /// The boolean Flag indicates
+ /// if we want compressed row format (true) or compressed column.
+ /// This version uses lists
+ virtual void sparse_assemble_row_or_column_compressed_with_two_arrays(
+  Vector<int* > &column_or_row_index,
+  Vector<int* > &row_or_column_start,
+  Vector<double* > &value,
+  Vector<unsigned> &nnz, 
+  Vector<double* > &residual,
+  bool compressed_row_flag);
 
  /// \short Vector of global data: "Nobody" (i.e. none of the elements etc.)
  /// is "in charge" of this Data so it would be overlooked when it
@@ -264,58 +280,26 @@ namespace oomph
  /// in the adaptive solution of bifurcation problems.
  void bifurcation_adapt_doc_errors(const unsigned &bifurcation_type);
 
+ /// \short The distribution of the DOFs in this problem.\n
+ /// This object is created in the Problem constructor and setup
+ /// when assign_eqn_numbers(...) is called. \n
+ /// If this problem is distributed then this distribution will match
+ /// the distribution of the equation numbers. \n
+ /// If this problem is not distributed then this distribution will
+ /// be uniform over all processors.
+ LinearAlgebraDistribution* Dof_distribution_pt;
+
 #ifdef OOMPH_HAS_MPI
 
- /// \short Assemble entire Jacobian matrix in compressed row [or column]
- /// format in parallel. Each processor first assembles a block of rows
- /// of the complete Jacobian and residual, and then assembles the whole
- /// Jacobian and residual.
- /// column_or_row_index : Column [or row] index of given entry
- /// row_or_column_start : Index of first entry for given row [or column]
- /// value               : Vector of nonzero entries
- /// residuals           : Residual vector
- /// compressed_row_flag : compressed row storage? Otherwise
- ///                       compressed column -- defaults to false as 
- ///                       this is the format required by the global memory
- ///                       version of SuperLU_dist
- void global_matrix_sparse_assemble
- (Vector<Vector<int> > &column_or_row_index,
-  Vector<Vector<int> > &row_or_column_start,
-  Vector<Vector<double> > &value,
-  Vector<Vector<double>*> &residuals,
-  bool compressed_row_flag=false);
-
-
- /// \short Assembles a block of successive rows [or columns] of the
- /// Jacobian matrix in distributed compressed row format (as required by
- /// the distributed storage version of SuperLU_dist) or in compressed
- /// column storage, plus the associated distributed residuals.
- /// This function assembles the rows [or columns] for each processor
- /// by first calling partial_sparse_assemble and then communicates
- /// between processors to assemble distributed sets of rows [or columns].
- /// Arguments are the obvious ones, but note the following:
- /// - Matrix is stored in CR [or CC] format, however only the
- ///   entries for a subset of rows are included, with
- ///   \c first_row_or_column being the first row [or column] stored here.
- /// - The i-th entry in \c row_or_column_start corresponds
- ///   to the (i+first_row_or_column) -th row [or column] in the global matrix.
- /// - The residual vector contains the subset of entries corresponding
- ///   to the same set of rows [or columns] of the matrix, so the
- ///   i-th entry in the residual vector returned corresponds
- ///   to the (i+first_row_or_column) -th entry in the global residual vector.
- ///   (This is the format that is required by SuperLU_dist).
- /// - \c n_row_or_column is number of consecutive rows [columns] held locally.
- /// - \c n_tot is total number of rows [columns] in the overall matrix.
- /// - \c compressed_row_flag defaults to true.
- void distributed_matrix_sparse_assemble(
-  Vector<Vector<int> > &column_or_row_index,
-  Vector<Vector<int> > &row_or_column_start,
-  Vector<Vector<double> > &value,
-  Vector<Vector<double>*> &residuals,
-  unsigned long& first_row_or_column,
-  unsigned long& n_row_or_column,
-  unsigned long& n_tot,
-  bool compressed_row_flag);
+ /// \short Helper method to assemble CRDoubleMatrices from distributed
+/// on multiple processors.
+ void parallel_sparse_assemble
+  (const LinearAlgebraDistribution* const &dist_pt,
+   Vector<int* > &column_or_row_index, 
+   Vector<int* > &row_or_column_start, 
+   Vector<double* > &value,
+   Vector<unsigned > &nnz, 
+   Vector<double* > &residuals);
 
  /// \short Private helper function to copy the haloed eqn numbers across
  /// for the Mesh in the argument
@@ -334,11 +318,13 @@ namespace oomph
  /// which is re-assigned every time assign_eqn_numbers() is called.
  /// First and last elements are then re-assigned to load-balance
  /// any subsequent assemblies.
- void recompute_load_balanced_assembly(Vector<double>& elemental_assembly_time);
+ void recompute_load_balanced_assembly
+  (Vector<double>& elemental_assembly_time);
 
 
- /// \short First element to be assembled by given processor for non-distributed
- /// problem (only kept up to date when default assingment is used)
+ /// \short First element to be assembled by given processor for 
+ /// non-distributed problem (only kept up to date when default assingment 
+ /// is used)
  Vector<unsigned> First_el_for_assembly;
 
  /// \short Last element to be assembled by given processor for non-distributed
@@ -384,35 +370,52 @@ protected:
  /// can be over-written in specific Problem class.
  bool Problem_is_nonlinear;
 
- /// \short Flag to determine which sparse assembly method to use
- /// By default we use assembly by vectors of pairs.
- unsigned Sparse_assembly_method;
-
  /// \short Protected boolean flag to halt program execution
  /// during sparse assemble process to assess peak memory 
  /// usage. Initialised to false (obviously!)
  bool Pause_at_end_of_sparse_assembly;
 
+ /// \short Flag to determine which sparse assembly method to use
+ /// By default we use assembly by vectors of pairs.
+ unsigned Sparse_assembly_method;
+
  /// Enumerated flags to determine which sparse assembly method is used
  enum Assembly_method {Perform_assembly_using_vectors_of_pairs,
                        Perform_assembly_using_two_vectors,
                        Perform_assembly_using_maps,
-                       Perform_assembly_using_lists};
+                       Perform_assembly_using_lists,
+                       Perform_assembly_using_two_arrays};
  
+ /// \short the number of elements to initially allocate for a matrix row 
+ /// within the sparse_assembly_with_two_arrays(...) method (if a matrix 
+ /// of this size has not been assembled already). If a matrix of this size
+ /// has been assembled then the number of elements in each row in that matrix
+ /// is used as the initial allocation
+ unsigned Sparse_assemble_with_arrays_initial_allocation;
+
+ /// \short the number of elements to add to a matrix row when the initial
+ /// allocation is exceeded within the sparse_assemble_with_two_arrays(...)
+ /// method.
+ unsigned Sparse_assemble_with_arrays_allocation_increment;
+
+ /// \short the number of elements in each row of a compressed matrix 
+ /// in the previous matrix assembly.
+ Vector<Vector<unsigned> > Sparse_assemble_with_arrays_previous_allocation;
+
  /// \short A tolerance used to determine whether the entry in a sparse
  /// matrix is zero. If it is then storage need not be allocated.
  double Numerical_zero_for_sparse_assembly;
-
 
  /// \short Protected helper function that is used to assemble the Jacobian 
  /// matrix in the case when the storage is row or column compressed.
  /// The boolean Flag indicates
  /// if we want compressed row format (true) or compressed column.
  virtual void sparse_assemble_row_or_column_compressed(
-  Vector<Vector<int> > &column_or_row_index,
-  Vector<Vector<int> > &row_or_column_start,
-  Vector<Vector<double> > &value, 
-  Vector<Vector<double>*> &residual,
+  Vector<int* > &column_or_row_index,
+  Vector<int* > &row_or_column_start,
+  Vector<double* > &value, 
+  Vector<unsigned> &nnz,
+  Vector<double* > &residual,
   bool compressed_row_flag);
 
  //---------------------Explicit time-stepping parameters
@@ -493,18 +496,63 @@ protected:
  bool Arc_length_step_taken;
 
 #ifdef OOMPH_HAS_MPI
- /// Has the problem been distributed amongst multiple processors?
- bool Problem_has_been_distributed;
-
- /// Vector of the partitioning of the elements
- Vector<unsigned> Element_partition;
 
   public:
+
+ /// \short enum for distribution of distributed jacobians.
+ /// \n 1 - Automatic - the Problem distribution is employed, unless any
+ /// processor has number of rows equal to 110% of N/P, in which case
+ /// uniform distribution is employed.
+ /// \n 2 - Problem - the jacobian on processor p only contains rows that
+ /// correspond to equations that are on this processor. (minimises 
+ /// communication)
+ /// \n 3 - Uniform - each processor holds as close to N/P matrix rows as 
+ /// possible. (very well load balanced)
+ enum Distributed_problem_matrix_distribution 
+  { Default_matrix_distribution, 
+    Problem_matrix_distribution, 
+    Uniform_matrix_distribution };
+
+ /// \short accesss function to the distributed matrix distribution method
+ /// \n 1 - Automatic - the Problem distribution is employed, unless any
+ /// processor has number of rows equal to 110% of N/P, in which case
+ /// uniform distribution is employed.
+ /// \n 2 - Problem - the jacobian on processor p only contains rows that
+ /// correspond to equations that are on this processor. (minimises 
+ /// communication)
+ /// \n 3 - Uniform - each processor holds as close to N/P matrix rows as 
+ /// possible. (very well load balanced)
+ Distributed_problem_matrix_distribution& 
+  distributed_problem_matrix_distribution()
+  {
+   return Dist_problem_matrix_distribution;
+  }
+
+ /// The distributed matrix distribution method
+ /// \n 1 - Automatic - the Problem distribution is employed, unless any
+ /// processor has number of rows equal to 110% of N/P, in which case
+ /// uniform distribution is employed.
+ /// \n 2 - Problem - the jacobian on processor p only contains rows that
+ /// correspond to equations that are on this processor. (minimises 
+ /// communication)
+ /// \n 3 - Uniform - each processor holds as close to N/P matrix rows as 
+ /// possible. (very well load balanced)
+ Distributed_problem_matrix_distribution Dist_problem_matrix_distribution;
+
+ ///
+ unsigned Parallel_sparse_assemble_previous_allocation;
+
+ /// Has the problem been distributed amongst multiple processors?
+ bool Problem_has_been_distributed;
 
  /// access function to the problem has been distributed flag
  const bool distributed() const { return Problem_has_been_distributed; }
 
   protected:
+
+ /// Vector of the partitioning of the elements
+ Vector<unsigned> Element_partition;
+
 #endif
 
  /// \short Any actions that are to be performed before a complete 
@@ -664,8 +712,7 @@ protected:
    return 0.0;
   }
 
- /// The communicator for this problem - by default the underlying MPI_Comm
- /// object is MPI_COMM_WORLD
+ /// The communicator for this problem
  OomphCommunicator* Communicator_pt;
 
   public:
@@ -853,10 +900,9 @@ protected:
  /// Data objects are not deleted!
  void flush_global_data() {Global_data_pt.resize(0);}
 
-
  /// Return the number of dofs
  unsigned long ndof() const 
-  {return Dof_pt.size();}
+  {return Dof_distribution_pt->nrow();}
 
  /// Return the number of time steppers
  unsigned ntime_stepper() const {return Time_stepper_pt.size();}

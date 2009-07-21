@@ -189,11 +189,7 @@ void solve_with_incremental_adaptation()
  //----------------------------------
  problem.mesh_pt()->doc_adaptivity_targets(cout);
  
- // Solve/doc the problem on the initial, very coarse mesh
- problem.linear_solver_pt() = new SuperLU_dist;
- static_cast<SuperLU_dist*>(problem.linear_solver_pt())->
-  enable_distributed_solve();
-
+ // solve
  problem.newton_solve();
   
  //Output solution
@@ -349,12 +345,6 @@ void solve_with_fully_automatic_adaptation()
  //----------------------------------
  problem.mesh_pt()->doc_adaptivity_targets(cout);
 
- // Setup the linear solver for MPI use
- //------------------------------------
- problem.linear_solver_pt() = new SuperLU_dist;
- static_cast<SuperLU_dist*>(problem.linear_solver_pt())->
-  enable_distributed_solve();
-
  // Solve/doc the problem with fully automatic adaptation
  //------------------------------------------------------
 
@@ -430,12 +420,6 @@ void solve_with_selected_refinement_pattern()
  // Doc (default) refinement targets
  //----------------------------------
  problem.mesh_pt()->doc_adaptivity_targets(cout);
-
- // Setup the linear solver for MPI use
- //------------------------------------
- problem.linear_solver_pt() = new SuperLU_dist;
- static_cast<SuperLU_dist*>(problem.linear_solver_pt())->
-  enable_distributed_solve();
 
  // Refine coarse original mesh first
  //----------------------------------

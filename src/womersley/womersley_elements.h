@@ -1294,8 +1294,8 @@ public:
    // Setup vector of derivatives of residuals & unknowns w.r.t. Q
    LinearAlgebraDistribution dist(Womersley_problem_pt->communicator_pt(),
                                   n_dof,false);
-   DoubleVector drdq(&dist);
-   DoubleVector dxdq(&dist);
+   DoubleVector drdq(&dist,0.0);
+   DoubleVector dxdq(&dist,0.0);
 
    // What's the global equation number of the equation that
    // determines the pressure gradient

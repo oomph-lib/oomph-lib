@@ -45,7 +45,10 @@ class SuperLUPreconditioner : public Preconditioner
 
  /// Constructor.
  SuperLUPreconditioner()
-  {}
+  {
+   solver.doc_stats() = false;
+   solver.doc_time() = false;
+  }
  
  /// Destructor.
  ~SuperLUPreconditioner()
@@ -108,10 +111,11 @@ class SuperLUPreconditioner : public Preconditioner
   private:
 
   /// \short the superLU solver emplyed by this preconditioner
-  SuperLU solver;
+  SuperLUSolver solver;
 };
 
 
+/*
 #ifdef OOMPH_HAS_MPI
 //====================================================================
 /// An interface to allow SuperLU_Dist to be used as an (exact) Preconditioner
@@ -197,5 +201,6 @@ class SuperLUDistPreconditioner : public Preconditioner
   SuperLU_dist solver;
 };
 #endif
+*/
 }
 #endif

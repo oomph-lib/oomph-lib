@@ -60,9 +60,9 @@ public :
  FSIPreconditioner()
   {
    // set the mesh pointers
-   this->Mesh_pt.resize(2);
-   this->Mesh_pt[0]=0;
-   this->Mesh_pt[1]=0;
+   this->set_nmesh(2);
+   Navier_stokes_mesh_pt = 0;
+   Wall_mesh_pt = 0;
 
    // Default setting: Fluid onto solid as it this was shown to be
    // marginally faster than solid onto fluid; see Heil CMAME 193 (2004)
@@ -158,18 +158,17 @@ public :
  
  /// \short Access function to mesh containing the block-preconditionable
  /// Navier-Stokes elements. 
- Mesh*& navier_stokes_mesh_pt() 
+ void set_navier_stokes_mesh(Mesh* mesh_pt) 
   {
-   return Mesh_pt[0];
+   Navier_stokes_mesh_pt = mesh_pt;
   }
 
  /// \short Access function to mesh containing the block-preconditionable
  /// FSI solid elements. 
- Mesh*& wall_mesh_pt() 
+ void set_wall_mesh(Mesh* mesh_pt) 
   {
-   return Mesh_pt[1];
+   Wall_mesh_pt = mesh_pt;
   }
-
 
  /// \short Setup the preconditioner
  void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
@@ -233,6 +232,12 @@ private:
 
  /// Set Doc_time to true for outputting results of timings
  bool Doc_time;
+
+ /// Pointer to the navier stokes mesh
+ Mesh* Navier_stokes_mesh_pt;
+
+ /// pointer to the solid mesh
+ Mesh* Wall_mesh_pt;
  };
 
 
@@ -255,39 +260,31 @@ void FSIPreconditioner::setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
   this->clean_up_memory();
 
 #ifdef PARANOID
-  if (Mesh_pt.size()!=2)
+  if (Navier_stokes_mesh_pt==0)
    {
     std::ostringstream error_message;
-    error_message << "FSIPreconditioner needs two meshes!\n"
-                  << "We have: "  << Mesh_pt.size() << std::endl;
+    error_message << "Pointer to fluid mesh hasn't been set!\n";
     throw OomphLibError(error_message.str(),
-                     	"FSIPreconditioner::setup()",
+                        "FSIPreconditioner::setup()",
                         OOMPH_EXCEPTION_LOCATION);
    }
-  else
+  if (Wall_mesh_pt==0)
    {
-    if (Mesh_pt[0]==0)
-     {
-      std::ostringstream error_message;
-      error_message << "Pointer to fluid mesh hasn't been set!\n";
-      throw OomphLibError(error_message.str(),
-                          "FSIPreconditioner::setup()",
-                          OOMPH_EXCEPTION_LOCATION);
-     }
-    if (Mesh_pt[1]==0)
-     {
-      std::ostringstream error_message;
-      error_message << "Pointer to solid mesh hasn't been set!\n";
-      throw OomphLibError(error_message.str(),
-                          "FSIPreconditioner::setup()",
-                          OOMPH_EXCEPTION_LOCATION);
-     }
+    std::ostringstream error_message;
+    error_message << "Pointer to solid mesh hasn't been set!\n";
+    throw OomphLibError(error_message.str(),
+                        "FSIPreconditioner::setup()",
+                        OOMPH_EXCEPTION_LOCATION);
    }
 #endif
 
+  // setup the meshes
+  this->set_mesh(0,problem_pt,Navier_stokes_mesh_pt);
+  this->set_mesh(1,problem_pt,Wall_mesh_pt);
+
  // get the number of fluid dofs from teh first element in the mesh
-  unsigned n_fluid_dof = Mesh_pt[0]->element_pt(0)->ndof_types();
-  unsigned n_dof = n_fluid_dof + Mesh_pt[1]->element_pt(0)->ndof_types();
+  unsigned n_fluid_dof = this->ndof_types_in_mesh(0);
+  unsigned n_dof = n_fluid_dof + this->ndof_types_in_mesh(1);
 
   // this fsi precondtioner has two types of DOF fluid dofs and solid dofs
   Vector<unsigned> dof_to_block_map(n_dof,0);
@@ -315,7 +312,8 @@ void FSIPreconditioner::setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
 
   // Setup the navier stokes preconditioner: Tell it about the
   // Navier Stokes mesh and set it up.
-  Navier_stokes_preconditioner_pt->navier_stokes_mesh_pt() = Mesh_pt[0];
+  Navier_stokes_preconditioner_pt->
+   set_navier_stokes_mesh(Navier_stokes_mesh_pt);
   Navier_stokes_preconditioner_pt->setup(problem_pt,matrix_pt);
 
   // Recast Jacobian matrix to CRDoubleMatrix
@@ -351,6 +349,14 @@ void FSIPreconditioner::setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
     this->get_block(1,0,cr_matrix_pt,Block_matrix_1_0_pt);
    }
   
+    if (problem_pt->communicator_pt()->my_rank()==0)
+     {
+      block_matrix_1_1_pt->sparse_indexed_output("t0.txt");
+     }
+    else
+     {
+      block_matrix_1_1_pt->sparse_indexed_output("t1.txt");
+     }
 
   // Setup the solid preconditioner (inexact solver)
   double t_start = TimingHelpers::timer();
@@ -404,7 +410,7 @@ void FSIPreconditioner::preconditioner_solve(const DoubleVector &r,
   // if z is not setup then give it the same distribution
   if (!z.distribution_pt()->setup())
    {
-    z.rebuild(r.distribution_pt());
+    z.build(r.distribution_pt(),0.0);
    }
 
  // Make copy of residual vector (to overcome const-ness
@@ -426,6 +432,7 @@ void FSIPreconditioner::preconditioner_solve(const DoubleVector &r,
     
    // Solve solid system by back-substitution
    // with LU-decomposed stiffness matrix   
+//   DoubleVector temp_solid_vec2(temp_solid_vec);
    Solid_preconditioner_pt->preconditioner_solve(temp_solid_vec,
                                                  temp_solid_vec);
    this->return_block_vector(1,temp_solid_vec,z);
@@ -518,9 +525,10 @@ public :
  /// Constructor. 
  SimpleFSIPreconditioner() : BlockPreconditioner<MATRIX>()
   {
-   this->Mesh_pt.resize(2);
-   this->Mesh_pt[0]=0;
-   this->Mesh_pt[1]=0;
+   // set the mesh pointers
+   Navier_stokes_mesh_pt = 0;
+   Wall_mesh_pt = 0;
+   set_nmesh(2);
 
    // Default setting: Retain fluid on solid
    Retain_solid_onto_fluid_terms=false;
@@ -556,22 +564,21 @@ public :
   {
    BrokenCopy::broken_assign("SimpleFSIPreconditioner");
   }
- 
- 
+  
  /// \short Access function to mesh containing the block-preconditionable
  /// Navier-Stokes elements. 
- Mesh*& navier_stokes_mesh_pt() 
+ void set_navier_stokes_mesh(Mesh* mesh_pt) 
   {
-   return this->Mesh_pt[0];
+   Navier_stokes_mesh_pt = mesh_pt;
   }
 
  /// \short Access function to mesh containing the block-preconditionable
  /// FSI solid elements. 
- Mesh*& wall_mesh_pt() 
+ void set_wall_mesh(Mesh* mesh_pt) 
   {
-   return this->Mesh_pt[1];
+   Wall_mesh_pt = mesh_pt;
   }
-
+ 
  /// \short Setup the preconditioner
  void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
   
@@ -621,6 +628,11 @@ private:
  /// and the selected FSI-off diagonals.
  virtual void identify_required_blocks(DenseMatrix<bool>& required_blocks);
  
+ /// Pointer to the navier stokes mesh
+ Mesh* Navier_stokes_mesh_pt;
+
+ /// pointer to the solid mesh
+ Mesh* Wall_mesh_pt;
 };
 
 
@@ -702,43 +714,32 @@ void SimpleFSIPreconditioner<MATRIX>::identify_required_blocks(
     delete Preconditioner_pt;
     Preconditioner_pt = 0;
    }
-   
-#ifdef PARANOID
-  if (this->Mesh_pt.size()!=2)
+   #ifdef PARANOID
+  if (Navier_stokes_mesh_pt==0)
    {
     std::ostringstream error_message;
-    error_message << "SimpleFSIPreconditioner needs two meshes!\n"
-                  << "We have: "  << this->Mesh_pt.size() << std::endl;
+    error_message << "Pointer to fluid mesh hasn't been set!\n";
     throw OomphLibError(error_message.str(),
-                     	"SimpleFSIPreconditioner::setup()",
+                        "FSIPreconditioner::setup()",
                         OOMPH_EXCEPTION_LOCATION);
    }
-  else
+  if (Wall_mesh_pt==0)
    {
-    if (this->Mesh_pt[0]==0)
-     {
-      std::ostringstream error_message;
-      error_message << "Pointer to fluid mesh hasn't been set!\n";
-      throw OomphLibError(error_message.str(),
-                          "SimpleFSIPreconditioner::setup()",
-                          OOMPH_EXCEPTION_LOCATION);
-     }
-    if (this->Mesh_pt[1]==0)
-     {
-      std::ostringstream error_message;
-      error_message << "Pointer to solid mesh hasn't been set!\n";
-      throw OomphLibError(error_message.str(),
-                          "SimpleFSIPreconditioner::setup()",
-                          OOMPH_EXCEPTION_LOCATION);
-     }
+    std::ostringstream error_message;
+    error_message << "Pointer to solid mesh hasn't been set!\n";
+    throw OomphLibError(error_message.str(),
+                        "FSIPreconditioner::setup()",
+                        OOMPH_EXCEPTION_LOCATION);
    }
 #endif
 
-  // Extract the upper (or lower) 3x3 blocks
+  // setup the meshes
+  this->set_mesh(0,problem_pt,Navier_stokes_mesh_pt);
+  this->set_mesh(1,problem_pt,Wall_mesh_pt);
 
- // get the number of fluid dofs from the first element in the mesh
-  unsigned n_fluid_dof = this->Mesh_pt[0]->element_pt(0)->ndof_types();
-  unsigned n_dof = n_fluid_dof + this->Mesh_pt[1]->element_pt(0)->ndof_types();
+ // get the number of fluid dofs from teh first element in the mesh
+  unsigned n_fluid_dof = this->ndof_types_in_mesh(0);
+  unsigned n_dof = n_fluid_dof + this->ndof_types_in_mesh(1);
 
   // this fsi precondtioner has two types of DOF fluid dofs and solid dofs
   Vector<unsigned> dof_to_block_map(n_dof,0);

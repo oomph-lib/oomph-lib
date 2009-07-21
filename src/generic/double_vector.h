@@ -65,10 +65,10 @@ class CRDoubleMatrix;
  /// distribution. Additionally every entry can be set (with argument v - 
  /// defaults to 0).
  DoubleVector(const LinearAlgebraDistribution* const &dist_pt, 
-              const double& v = 0)
+              const double& v)
   : Values_pt(0), Internal_values(true)
   {
-   this->rebuild(dist_pt,v);
+   this->build(dist_pt,v);
   }
    
  /// Destructor - just calls this->clear() to delete the distribution and data
@@ -81,26 +81,36 @@ class CRDoubleMatrix;
  DoubleVector(const DoubleVector& new_vector)
   : Values_pt(0), Internal_values(true)
   {
-   this->rebuild(new_vector);
+   this->build(new_vector);
   }
  
  /// assignment operator
  void operator=(const DoubleVector& old_vector)
   {
-   this->rebuild(old_vector);
+   this->build(old_vector);
   }
  
  /// \short Just copys the argument DoubleVector
- void rebuild(const DoubleVector& old_vector);
+ void build(const DoubleVector& old_vector);
 
  /// \short Assembles a DoubleVector with distribution dist, if v is specified 
- /// each row is set to v
- void rebuild(const LinearAlgebraDistribution* const &dist_pt, 
-              const double& v = 0);
+ /// each element is set to v, otherwise each element is set to 0.0
+ void build(const LinearAlgebraDistribution* const &dist_pt, 
+            const double& v);
+
+ /// \short Assembles a DoubleVector with a distribution dist and coefficients
+ /// taken from the vector v.\n
+ /// Note. The vector v MUST be of length nrow()
+ void build(const LinearAlgebraDistribution* const &dist_pt,
+            const Vector<double>& v);
 
  /// \short initialise the whole vector with value v
- void initialise(const double& v = 0.0);
- 
+ void initialise(const double& v);
+
+ /// \short initialise the vector with coefficient from the vector v.\n
+ /// Note: The vector v must be of length 
+ void initialise(const Vector<double> v);
+
  /// \short wipes the DoubleVector
  void clear() 
   {
@@ -118,9 +128,11 @@ class CRDoubleMatrix;
  /// 1. When a rebuild method is called new internal values are created.\n
  /// 2. It is not possible to redistribute(...) a vector with external
  /// values \n.
- /// 3. External values are never deleted by this vector.
+ /// 3. External values are only deleted by this vector if
+ /// delete_external_values = true.
  void set_external_values(const LinearAlgebraDistribution* const& dist_pt,
-                          double* external_values)
+                          double* external_values,
+                          bool delete_external_values)
   {
    // clean the memory
    this->clear();
@@ -129,7 +141,7 @@ class CRDoubleMatrix;
    Distribution_pt->rebuild(dist_pt);
 
    // set the external values
-   set_external_values(external_values);
+   set_external_values(external_values,delete_external_values);
   }
  
  /// \short Allows are external data to be used by this vector. \n
@@ -138,8 +150,10 @@ class CRDoubleMatrix;
  /// 1. When a rebuild method is called new internal values are created.\n
  /// 2. It is not possible to redistribute(...) a vector with external
  /// values \n.
- /// 3. External values are never deleted by this vector.
- void set_external_values(double* external_values)
+ /// 3. External values are only deleted by this vector if
+ /// delete_external_values = true.
+ void set_external_values(double* external_values, 
+                          bool delete_external_values)
   {
 #ifdef PARANOID
    // check that this distribution is setup
@@ -162,7 +176,7 @@ class CRDoubleMatrix;
      delete[] Values_pt;
     }
    Values_pt = external_values;
-   Internal_values = false;
+   Internal_values = delete_external_values;
   }
 
  /// \short The contents of the vector are redistributed to match the new
@@ -171,7 +185,7 @@ class CRDoubleMatrix;
  /// the same number of global rows.\n
  /// \b NOTE 2: The current distribution and the new distribution must have
  /// the same Communicator.
- void redistribute(LinearAlgebraDistribution& new_dist);
+ void redistribute(const LinearAlgebraDistribution* const& dist_pt);
    
  /// \short [] access function to the (local) values of this vector
  double& operator[](int i);
@@ -186,7 +200,7 @@ class CRDoubleMatrix;
  void operator-=(DoubleVector v);
 
  /// \short [] access function to the (local) values of this vector
- const double operator[](int i) const;
+ const double& operator[](int i) const;
 
  /// \short returns the maximum coefficient
  double max();

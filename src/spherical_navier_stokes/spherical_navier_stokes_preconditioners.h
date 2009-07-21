@@ -174,8 +174,8 @@ namespace oomph
      Mult_method = 2; // BAD: Must get rid of this magic number.
      
      // resize the mesh pt
-     Mesh_pt.resize(1);
-     Mesh_pt[0] = 0;
+     this->set_nmesh(1);
+     Navier_stokes_mesh_pt = 0;
 
      // Set default preconditioners (inexact solvers) -- they are 
      // members of this class!
@@ -224,11 +224,12 @@ namespace oomph
    /// Apply preconditioner to Vector r
    void preconditioner_solve(const DoubleVector&r, DoubleVector &z);
 
-   /// \short Access function to mesh containing the block-preconditionable
-   /// Navier-Stokes elements.
-   Mesh*& navier_stokes_mesh_pt()
+   /// specify the mesh containing the mesh containing the 
+   /// block-preconditionable Navier-Stokes elements. The dimension of the
+   /// problem must also be specified.
+   void set_navier_stokes_mesh(Mesh* mesh_pt)
     {
-     return Mesh_pt[0];
+     Navier_stokes_mesh_pt = mesh_pt;
     }
 
    /// \short Flag which is true if velocity mass matrix diagonal
@@ -257,25 +258,7 @@ namespace oomph
    {
     if (!Using_default_p_preconditioner)
      {
-#ifdef OOMPH_HAS_MPI
-      if (Distribution_pt->setup())
-       {
-        if (Distribution_pt->communicator_pt()->nproc() > 1)
-         {
-          P_preconditioner_pt = new SuperLUDistPreconditioner;
-         }
-        else
-         {
-          P_preconditioner_pt = new SuperLUPreconditioner;
-         }
-       }
-      else
-       {
-        P_preconditioner_pt = new SuperLUPreconditioner;
-       }
-#else
       P_preconditioner_pt = new SuperLUPreconditioner;
-#endif        
       Using_default_p_preconditioner = true;
      }
    }
@@ -299,25 +282,7 @@ namespace oomph
    {
     if (!Using_default_f_preconditioner)
      {
-#ifdef OOMPH_HAS_MPI
-      if (Distribution_pt->setup())
-       {
-        if (Distribution_pt->communicator_pt()->nproc() > 1)
-         {
-          F_preconditioner_pt = new SuperLUDistPreconditioner;
-         }
-        else
-         {
-          F_preconditioner_pt = new SuperLUPreconditioner;
-         }
-       }
-      else
-       {
-        F_preconditioner_pt = new SuperLUPreconditioner;
-       }
-#else
       F_preconditioner_pt = new SuperLUPreconditioner;
-#endif 
       Using_default_f_preconditioner = true;
      }
    }
@@ -386,9 +351,13 @@ namespace oomph
    /// Boolean indicating whether the momentum system preconditioner is a 
    /// block preconditioner
    bool F_preconditioner_is_block_preconditioner;
+
    /// Set Doc_time to true for outputting results of timings
    bool Doc_time;
 
+   /// \short the pointer to the mesh of block preconditionable Navier
+   /// Stokes elements.
+   Mesh* Navier_stokes_mesh_pt;
   };
 
 

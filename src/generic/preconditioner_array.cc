@@ -478,11 +478,11 @@ namespace oomph
           int* row_start_pt = matrix_pt[i]->row_start();
         
           // build the matrix without a copy of the data
-          local_matrix_pt->rebuild_matrix_without_copy(matrix_pt[i]->ncol(),
-                                                       matrix_pt[i]->nnz(),
-                                                       values_pt,
-                                                       column_index_pt,
-                                                       row_start_pt);
+          local_matrix_pt->build_matrix_without_copy(matrix_pt[i]->ncol(),
+                                                     matrix_pt[i]->nnz(),
+                                                     values_pt,
+                                                     column_index_pt,
+                                                     row_start_pt);
          }
        }
    
@@ -664,7 +664,7 @@ namespace oomph
           row_start_recv[target_nrow_local[i][my_rank]] = int(nnz_total);
         
           // build the matrix without a copy of the data
-          local_matrix_pt->rebuild_matrix_without_copy(matrix_pt[i]->ncol(),
+          local_matrix_pt->build_matrix_without_copy(matrix_pt[i]->ncol(),
                                                        nnz_total,
                                                        values_recv,
                                                        column_index_recv,
@@ -729,7 +729,7 @@ namespace oomph
           int* row_start_pt = matrix_pt[i]->row_start();
         
           // build the matrix without a copy of the data
-          local_matrix_pt->rebuild_matrix_without_copy(matrix_pt[i]->ncol(),
+          local_matrix_pt->build_matrix_without_copy(matrix_pt[i]->ncol(),
                                                        matrix_pt[i]->nnz(),
                                                        values_pt,
                                                        column_index_pt,
@@ -1223,7 +1223,7 @@ namespace oomph
     row_start_recv[target_nrow_local[Color][my_rank]] = int(nnz_total);
     
     // build the matrix without a copy of the data
-    local_matrix_pt->rebuild_matrix_without_copy(matrix_pt[Color]->ncol(),
+    local_matrix_pt->build_matrix_without_copy(matrix_pt[Color]->ncol(),
                                                  nnz_total,
                                                  values_recv,
                                                  column_index_recv,
@@ -1295,7 +1295,7 @@ namespace oomph
           int* row_start_pt = matrix_pt[i]->row_start();
         
           // build the matrix without a copy of the data
-          local_matrix_pt->rebuild_matrix_without_copy(matrix_pt[i]->ncol(),
+          local_matrix_pt->build_matrix_without_copy(matrix_pt[i]->ncol(),
                                                        matrix_pt[i]->nnz(),
                                                        values_pt,
                                                        column_index_pt,
@@ -1789,7 +1789,7 @@ namespace oomph
     row_start_recv[target_nrow_local[Color][my_rank]] = int(nnz_total);
     
     // build the matrix without a copy of the data
-    local_matrix_pt->rebuild_matrix_without_copy(matrix_pt[Color]->ncol(),
+    local_matrix_pt->build_matrix_without_copy(matrix_pt[Color]->ncol(),
                                                  nnz_total,
                                                  values_recv,
                                                  column_index_recv,
@@ -1862,7 +1862,7 @@ namespace oomph
           int* row_start_pt = matrix_pt[i]->row_start();
         
           // build the matrix without a copy of the data
-          local_matrix_pt->rebuild_matrix_without_copy(matrix_pt[i]->ncol(),
+          local_matrix_pt->build_matrix_without_copy(matrix_pt[i]->ncol(),
                                                        matrix_pt[i]->nnz(),
                                                        values_pt,
                                                        column_index_pt,
@@ -2365,7 +2365,7 @@ namespace oomph
     row_start_recv[target_nrow_local[Color][my_rank]] = int(nnz_total);
     
     // build the matrix without a copy of the data
-    local_matrix_pt->rebuild_matrix_without_copy(matrix_pt[Color]->ncol(),
+    local_matrix_pt->build_matrix_without_copy(matrix_pt[Color]->ncol(),
                                                  nnz_total,
                                                  values_recv,
                                                  column_index_recv,
@@ -2467,7 +2467,7 @@ namespace oomph
 #endif
   
   // the local r vector
-  DoubleVector local_r(Preconditioner_pt->distribution_pt());
+  DoubleVector local_r(Preconditioner_pt->distribution_pt(),0.0);
   
   // number of processors
   unsigned nproc = Global_communicator_pt->nproc();
@@ -2611,7 +2611,7 @@ namespace oomph
     // if z[i] is not setup then set it up
     if (!z[i].distribution_setup())
      {
-      z[i].rebuild(r[i].distribution_pt());
+      z[i].build(r[i].distribution_pt(),0.0);
      }
    }
 

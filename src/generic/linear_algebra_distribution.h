@@ -330,17 +330,18 @@ class LinearAlgebraDistribution
    return true;
   }
 
- // \short == Operator
+ /// \short == Operator
  bool operator==(const LinearAlgebraDistribution& other_dist);
 
- // \short != operator
+ /// \short != operator
  bool operator!=(const LinearAlgebraDistribution& other_dist)
   {
    return !(*this == other_dist);
   }
 
- // \short << operator
- friend std::ostream& operator<<(std::ostream& stream, LinearAlgebraDistribution dist)
+ /// \short << operator
+ friend std::ostream& operator<<(std::ostream& stream, 
+                                 LinearAlgebraDistribution dist)
   {
    stream << "nrow() = " << dist.nrow();
    stream << " nrow_local() = " << dist.nrow_local();
@@ -348,7 +349,40 @@ class LinearAlgebraDistribution
    stream << " distributed() = " << dist.distributed() << std::endl;
    return stream;
   }
+ 
+ /// \short return the local index corresponding to the global index 
+ unsigned global_to_local_row_map(const unsigned& global_i)
+  {
+#ifdef PARANOID
+   if (global_i >= Nrow)
+    {
+     throw OomphLibError
+      ("Requested global row outside the number of global rows",
+       "LinearAlgebraDistribution::global_to_local_row_map()",     
+       OOMPH_EXCEPTION_LOCATION);      
+    }
+#endif
+   int local_i = global_i;
+   int p = 0;
+   while ((int)(local_i - (int)nrow_local(p)) >= 0)
+    {
+     local_i -= (int)nrow_local(p);
+     p++;
+    }
+   return (unsigned)local_i;
+  }
 
+ /// \short return the processor rank of the global row number i 
+ unsigned rank_of_global_row(const unsigned i) const
+  {
+   unsigned p = 0;
+   while (i < first_row(p) || i >= first_row(p)+nrow_local(p))
+    {
+     p++;
+    }
+   return p;
+  }
+ 
   private:
  
  /// the number of global rows

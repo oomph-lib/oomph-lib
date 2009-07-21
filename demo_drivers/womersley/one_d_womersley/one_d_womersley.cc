@@ -1893,12 +1893,13 @@ int main(int argc, char *argv[])
       (fsi_preconditioner_pt->navier_stokes_preconditioner_pt());
 
      // Set solid mesh
-     fsi_preconditioner_pt->wall_mesh_pt()=
-      problem.outflow_impedance_master_mesh_pt();
+     fsi_preconditioner_pt->
+      set_wall_mesh(problem.outflow_impedance_master_mesh_pt());
 
      // Set fluid mesh
-     fsi_preconditioner_pt->navier_stokes_mesh_pt()=
-      problem.create_mesh_for_navier_stokes_preconditioner();
+     fsi_preconditioner_pt->
+      set_navier_stokes_mesh
+      (problem.create_mesh_for_navier_stokes_preconditioner());
 
      // Pass the FSI preconditioner to the solver
      iterative_solver_pt->preconditioner_pt() = fsi_preconditioner_pt;
@@ -1909,16 +1910,16 @@ int main(int argc, char *argv[])
      ns_preconditioner_pt = new NavierStokesLSCPreconditioner;
 
      // Setup the fluid mesh
-     ns_preconditioner_pt->navier_stokes_mesh_pt()=
-      problem.create_mesh_for_navier_stokes_preconditioner();
+     ns_preconditioner_pt->set_navier_stokes_mesh
+      (problem.create_mesh_for_navier_stokes_preconditioner());
      
      // Pass the LSC preconditioner to the solver
      iterative_solver_pt->preconditioner_pt() = ns_preconditioner_pt;
     }
 
    // Settings for the LCS preconditioner
-   ns_preconditioner_pt->navier_stokes_mesh_pt()=
-    problem.create_mesh_for_navier_stokes_preconditioner();
+   ns_preconditioner_pt->set_navier_stokes_mesh(
+    problem.create_mesh_for_navier_stokes_preconditioner());
    ns_preconditioner_pt->doc_time() = true;
    
    // Set up the P sub block preconditioner

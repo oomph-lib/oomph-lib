@@ -101,19 +101,28 @@ namespace oomph {
 #ifdef HAVE_TRILINOS
      delete Epetra_matrix_pt;
      delete Epetra_range_map_pt;
+     Epetra_matrix_pt = 0;
+     Epetra_range_map_pt = 0;
 #ifdef OOMPH_HAS_MPI
      delete[] Global_rows;
+     Global_rows = 0;
 #endif
      delete Epetra_domain_map_pt;
+     Epetra_domain_map_pt = 0;
 #ifdef OOMPH_HAS_MPI
      delete[] Global_cols;
+     Global_cols = 0;
 #endif
      delete Epetra_comm_pt;
      delete Epetra_col_map_pt;
+     Epetra_comm_pt = 0;
+     Epetra_col_map_pt = 0;
 #else
      delete Oomph_matrix_pt;
+     Oomph_matrix_pt = 0;
 #endif
      delete Column_distribution_pt;
+     Column_distribution_pt = 0;
     }
 
    /// \short Setup the matrix vector product operator.\n

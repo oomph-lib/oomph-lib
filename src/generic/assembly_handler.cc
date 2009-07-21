@@ -292,7 +292,6 @@ namespace oomph
  void AugmentedBlockFoldLinearSolver::solve(Problem* const &problem_pt, 
                                             DoubleVector &result)
  {
-
   // if the result is setup then it should not be distributed
 #ifdef PARANOID
   if (result.distribution_setup())
@@ -322,16 +321,16 @@ namespace oomph
 
   // if the result vector is not setup then rebuild with distribution = global
   if (!result.distribution_setup())
-   {
-    result.rebuild(Distribution_pt);
-   }
+    {
+     result.build(Distribution_pt,0.0);
+    }
 
   //Setup storage for temporary vectors
-  DoubleVector a(Distribution_pt), b(Distribution_pt);
+  DoubleVector a(Distribution_pt,0.0), b(Distribution_pt,0.0);
 
   //Allocate storage for Alpha which can be used in the resolve
   if(Alpha_pt!=0) {delete Alpha_pt;}
-  Alpha_pt = new DoubleVector(Distribution_pt);
+  Alpha_pt = new DoubleVector(Distribution_pt,0.0);
 
   //We are going to do resolves using the underlying linear solver
   Linear_solver_pt->enable_resolve();
@@ -343,15 +342,14 @@ namespace oomph
   //by the null vector
   
   //Get the present null vector from the handler
-  DoubleVector y(Distribution_pt);
+  DoubleVector y(Distribution_pt,0.0);
   for(unsigned n=0;n<(n_dof-1);++n)  {y[n] = handler_pt->Y[n];}
   //For simplicity later, add a zero at the end
   y[n_dof-1] = 0.0;
 
   //Loop over the elements and assemble the product
   //Local storage for the product terms
-  DoubleVector Jy(Distribution_pt);
-  Jy.initialise();
+  DoubleVector Jy(Distribution_pt,0.0);
 
   //Calculate the product of the jacobian matrices, etc
   unsigned long n_element = problem_pt->mesh_pt()->nelement();
@@ -384,7 +382,7 @@ namespace oomph
   Linear_solver_pt->resolve(Jy,*Alpha_pt);
 
   //The vector that multiplie the product matrix is actually y - alpha
-  DoubleVector y_minus_alpha(Distribution_pt);
+  DoubleVector y_minus_alpha(Distribution_pt,0.0);
   for(unsigned n=0;n<n_dof;n++)
    {
     y_minus_alpha[n] = y[n] - (*Alpha_pt)[n];
@@ -409,9 +407,7 @@ namespace oomph
   a_mult *= FD_step; alpha_mult *= FD_step;
 
   //Local storage for the product terms
-  DoubleVector Jprod_a(Distribution_pt), Jprod_alpha(Distribution_pt);
-  Jprod_a.initialise(0.0);
-  Jprod_alpha.initialise(0.0);
+  DoubleVector Jprod_a(Distribution_pt,0.0), Jprod_alpha(Distribution_pt,0.0);
 
   //Calculate the product of the jacobian matrices, etc
   for(unsigned long e = 0;e<n_element;e++)
@@ -498,10 +494,8 @@ namespace oomph
    
    //Allocate storage for E which can be used in the resolve
    if(E_pt!=0) {delete E_pt;}
-   E_pt = new DoubleVector(Distribution_pt);
-
-   DoubleVector f(Distribution_pt);
-
+   E_pt = new DoubleVector(Distribution_pt,0.0);
+   DoubleVector f(Distribution_pt,0.0);
    Linear_solver_pt->resolve(b,f);
    Linear_solver_pt->resolve(Jprod_alpha,*E_pt);
 
@@ -521,7 +515,7 @@ namespace oomph
    //The sign of the jacobian is the sign of the final entry in e
    problem_pt->sign_of_jacobian() = 
     static_cast<int>(std::abs(e_final)/e_final);
-   
+
    //Switch things to our block solver
    handler_pt->solve_full_system();
 
@@ -590,11 +584,11 @@ namespace oomph
   // if the result vector is not setup then rebuild with distribution = global
   if (!result.distribution_setup())
    {
-    result.rebuild(rhs.distribution_pt());
+    result.build(rhs.distribution_pt(),0.0);
    }
 
   //Setup storage
-  DoubleVector a(Distribution_pt), b(Distribution_pt);
+  DoubleVector a(Distribution_pt,0.0), b(Distribution_pt,0.0);
   
   //Set the values of the a vector
   for(unsigned n=0;n<(n_dof-1);n++) {a[n] = rhs[n];}
@@ -625,8 +619,7 @@ namespace oomph
   a_mult += FD_step; 
   a_mult *= FD_step;
   
-  DoubleVector Jprod_a(Distribution_pt);
-  Jprod_a.initialise(0.0);
+  DoubleVector Jprod_a(Distribution_pt,0.0);
   
   unsigned long n_element = problem_pt->mesh_pt()->nelement();
    for(unsigned long e = 0;e<n_element;e++)
@@ -691,7 +684,7 @@ namespace oomph
    //with the parameter
    b[n_dof-1] = rhs[n_dof-1];
 
-   DoubleVector f(Distribution_pt);
+   DoubleVector f(Distribution_pt,0.0);
 
    Linear_solver_pt->resolve(b,f);
 
@@ -769,7 +762,7 @@ namespace oomph
   linear_solver_pt->enable_resolve();
 
   //Storage for the solution
-  DoubleVector x(dist_pt);
+  DoubleVector x(dist_pt,0.0);
 
   //Solve the standard problem, we only want to make sure that
   //we factorise the matrix, if it has not been factorised. We shall
@@ -800,6 +793,7 @@ namespace oomph
   //Add the global parameter as an unknown to the problem
   problem_pt->Dof_pt.push_back(parameter_pt);
   
+
   //Normalise the initial guesses for phi
   double length = 0.0;
   for(unsigned n=0;n<Ndof;n++) {length += x[n]*x[n];}
@@ -814,6 +808,8 @@ namespace oomph
    }
 
   // delete the dist_pt
+  problem_pt->Dof_distribution_pt->rebuild(problem_pt->communicator_pt(),
+                                           Ndof*2+1,true);
   delete dist_pt;
  }
 
@@ -1162,7 +1158,7 @@ namespace oomph
   eigenfunction.resize(1);
   LinearAlgebraDistribution dist(Problem_pt->communicator_pt(),Ndof,false);
   //Rebuild the vector
-  eigenfunction[0].rebuild(&dist);
+  eigenfunction[0].build(&dist,0.0);
   //Set the value to be the null vector
   for(unsigned n=0;n<Ndof;n++)
    {
@@ -1193,6 +1189,8 @@ namespace oomph
 
   //Resize the number of dofs
   Problem_pt->Dof_pt.resize(Ndof);
+  Problem_pt->Dof_distribution_pt->rebuild(Problem_pt->communicator_pt(),
+                                           Ndof,false);
  }
 
  //====================================================================
@@ -1206,11 +1204,15 @@ namespace oomph
     //If we were solving the system with the original jacobian add the
     //parameter
     if(Solve_which_system==Block_J)
-     {Problem_pt->Dof_pt.push_back(Parameter_pt);}
+     {
+      Problem_pt->Dof_pt.push_back(Parameter_pt);
+     }
     
     //Restrict the problem to the standard variables and
     //the bifurcation parameter only
     Problem_pt->Dof_pt.resize(Ndof+1);
+    Problem_pt->Dof_distribution_pt->rebuild(Problem_pt->communicator_pt(),
+                                             Ndof+1,false);
     
     //Set the solve flag
     Solve_which_system = Block_augmented_J;
@@ -1229,6 +1231,9 @@ namespace oomph
    {
     //Restrict the problem to the standard variables
     Problem_pt->Dof_pt.resize(Ndof);
+    Problem_pt->Dof_distribution_pt->rebuild(Problem_pt->communicator_pt(),
+                                             Ndof,false);
+
     //Set the solve flag
     Solve_which_system = Block_J;
    }
@@ -1252,6 +1257,10 @@ namespace oomph
      {
       Problem_pt->Dof_pt.push_back(&Y[n]);
      }
+
+    // update the Dof distribution pt
+    Problem_pt->Dof_distribution_pt->rebuild(Problem_pt->communicator_pt(),
+                                             Ndof*2+1,false);
 
     Solve_which_system = Full_augmented;
    }
@@ -1309,19 +1318,19 @@ namespace oomph
   // if the result vector is not setup then rebuild with distribution = global
   if (!result.distribution_setup())
    {
-    result.rebuild(Distribution_pt);
+    result.build(Distribution_pt,0.0);
    }
 
   //Allocate storage for B, C and D which can be used in the resolve
   if(B_pt!=0) {delete B_pt;}
-  B_pt = new DoubleVector(Distribution_pt);
+  B_pt = new DoubleVector(Distribution_pt,0.0);
   if(C_pt!=0) {delete C_pt;}
-  C_pt = new DoubleVector(Distribution_pt);
+  C_pt = new DoubleVector(Distribution_pt,0.0);
   if(D_pt!=0) {delete D_pt;}
-  D_pt = new DoubleVector(Distribution_pt);
+  D_pt = new DoubleVector(Distribution_pt,0.0);
   
   //Temporary vector
-  DoubleVector x1(Distribution_pt);
+  DoubleVector x1(Distribution_pt,0.0);
   
   //We are going to do resolves using the underlying linear solver
   Linear_solver_pt->enable_resolve();
@@ -1329,11 +1338,11 @@ namespace oomph
   Linear_solver_pt->solve(problem_pt,x1);
 
   //Get the symmetry vector from the handler
-  DoubleVector psi(Distribution_pt);
+  DoubleVector psi(Distribution_pt,0.0);
   for(unsigned n=0;n<n_dof;++n)  {psi[n] = handler_pt->Psi[n];}
 
-  DoubleVector res(Distribution_pt), newres(Distribution_pt);
-  DoubleVector F(Distribution_pt);
+  DoubleVector res(Distribution_pt,0.0), newres(Distribution_pt,0.0);
+  DoubleVector F(Distribution_pt,0.0);
 
 
   //Finite difference step
@@ -1424,7 +1433,7 @@ namespace oomph
   d_mult *= FD_step; x1_mult *= FD_step;
 
   //Local storage for the product terms
-  DoubleVector Jprod_D(Distribution_pt), Jprod_X1(Distribution_pt);
+  DoubleVector Jprod_D(Distribution_pt,0.0), Jprod_X1(Distribution_pt,0.0);
   Vector<double> b(n_dof,0.0);
 
   //Calculate the product of the jacobian matrices, etc
@@ -1518,7 +1527,7 @@ namespace oomph
   //Linear solve to get B
   Linear_solver_pt->resolve(Jprod_D,*B_pt);
   //Liner solve to get x3
-  DoubleVector x3(Distribution_pt);
+  DoubleVector x3(Distribution_pt,0.0);
   Linear_solver_pt->resolve(F,x3);
   
   //Construst a couple of additional products
@@ -1603,11 +1612,11 @@ namespace oomph
   // if the result vector is not setup then rebuild with distribution = global
   if (!result.distribution_setup())
    {
-    result.rebuild(Distribution_pt);
+    result.build(Distribution_pt,0.0);
    }
   
   //Setup storage
-  DoubleVector x1(Distribution_pt), x3(Distribution_pt);
+  DoubleVector x1(Distribution_pt,0.0), x3(Distribution_pt,0.0);
   
   //Set the values of the a vector
   for(unsigned n=0;n<n_dof;n++) {x1[n] = rhs[n];}
@@ -1676,7 +1685,7 @@ namespace oomph
 
   //Local storage for the product terms
   Vector<double> Jprod_X1(n_dof,0.0), b(n_dof,0.0);
-  DoubleVector Mod_Jprod_X1(Distribution_pt);
+  DoubleVector Mod_Jprod_X1(Distribution_pt,0.0);
 
 
   //Calculate the product of the jacobian matrices, etc
@@ -1828,15 +1837,15 @@ namespace oomph
   // if the result vector is not setup then rebuild with distribution = global
   if (!result.distribution_setup())
    {
-    result.rebuild(Distribution_pt);
+    result.build(Distribution_pt,0.0);
    }
   
   //Setup storage for temporary vectors
-  DoubleVector a(Distribution_pt), b(Distribution_pt);
+  DoubleVector a(Distribution_pt,0.0), b(Distribution_pt,0.0);
 
   //Allocate storage for Alpha which can be used in the resolve
   if(Alpha_pt!=0) {delete Alpha_pt;}
-  Alpha_pt = new DoubleVector(Distribution_pt);
+  Alpha_pt = new DoubleVector(Distribution_pt,0.0);
 
   //We are going to do resolves using the underlying linear solver
   Linear_solver_pt->enable_resolve();
@@ -1844,7 +1853,7 @@ namespace oomph
   Linear_solver_pt->solve(problem_pt,a);
 
   //Get the symmetry vector from the handler
-  DoubleVector psi(Distribution_pt);
+  DoubleVector psi(Distribution_pt,0.0);
   for(unsigned n=0;n<(n_dof-1);++n)  {psi[n] = handler_pt->Psi[n];}
   //Set the final entry to zero
   psi[n_dof-1] = 0.0;
@@ -1871,7 +1880,7 @@ namespace oomph
   a_mult *= FD_step; alpha_mult *= FD_step;
 
   //Local storage for the product terms
-  DoubleVector Jprod_a(Distribution_pt), Jprod_alpha(Distribution_pt);
+  DoubleVector Jprod_a(Distribution_pt,0.0), Jprod_alpha(Distribution_pt,0.0);
 
   //Calculate the product of the jacobian matrices, etc
   unsigned long n_element = problem_pt->mesh_pt()->nelement();
@@ -1959,9 +1968,9 @@ namespace oomph
    
    //Allocate storage for E which can be used in the resolve
    if(E_pt!=0) {delete E_pt;}
-   E_pt = new DoubleVector(Distribution_pt);
+   E_pt = new DoubleVector(Distribution_pt,0.0);
 
-   DoubleVector f(Distribution_pt);
+   DoubleVector f(Distribution_pt,0.0);
 
    Linear_solver_pt->resolve(b,f);
    Linear_solver_pt->resolve(Jprod_alpha,*E_pt);
@@ -2036,12 +2045,12 @@ namespace oomph
   // if the result vector is not setup then rebuild with distribution = global
   if (!result.distribution_setup())
    {
-    result.rebuild(Distribution_pt);
+    result.build(Distribution_pt,0.0);
    }
   
 
   //Setup storage
-  DoubleVector a(Distribution_pt), b(Distribution_pt);
+  DoubleVector a(Distribution_pt,0.0), b(Distribution_pt,0.0);
   
   //Set the values of the a vector
   for(unsigned n=0;n<n_dof;n++) {a[n] = rhs[n];}
@@ -2070,7 +2079,7 @@ namespace oomph
   a_mult += FD_step; 
   a_mult *= FD_step;
   
-  DoubleVector Jprod_a(Distribution_pt);
+  DoubleVector Jprod_a(Distribution_pt,0.0);
   
   unsigned long n_element = problem_pt->mesh_pt()->nelement();
    for(unsigned long e = 0;e<n_element;e++)
@@ -2086,7 +2095,7 @@ namespace oomph
      handler_pt->get_jacobian(elem_pt,res_elemental,jac);
    
      //Backup the dofs
-     DoubleVector dof_bac(Distribution_pt);
+     DoubleVector dof_bac(Distribution_pt,0.0);
      //Perturb the dofs
      for(unsigned n=0;n<n_var;n++)
       {
@@ -2134,7 +2143,7 @@ namespace oomph
     }
    b[n_dof-1] = rhs[2*n_dof-1];
 
-   DoubleVector f(Distribution_pt);
+   DoubleVector f(Distribution_pt,0.0);
 
    Linear_solver_pt->resolve(b,f);
 
@@ -2214,6 +2223,10 @@ namespace oomph
    }
   //Add the slack parameter to the problem
   Problem_pt->Dof_pt.push_back(&Sigma);
+
+  // resize
+  Problem_pt->Dof_distribution_pt->rebuild(Problem_pt->communicator_pt(),
+                                           2*Ndof+2,false);
  }
 
  //=====================================================================
@@ -2254,6 +2267,8 @@ namespace oomph
 
   //Now return the problem to its original size
   Problem_pt->Dof_pt.resize(Ndof);
+  Problem_pt->Dof_distribution_pt->rebuild(Problem_pt->communicator_pt(),
+                                           Ndof,false);
  }
  
  //================================================================
@@ -2599,7 +2614,7 @@ namespace oomph
   eigenfunction.resize(1);
   LinearAlgebraDistribution dist(Problem_pt->communicator_pt(),Ndof,false);
   //Rebuild the vector
-  eigenfunction[0].rebuild(&dist);
+  eigenfunction[0].build(&dist,0.0);
   //Set the value to be the null vector
   for(unsigned n=0;n<Ndof;n++)
    {
@@ -2624,6 +2639,8 @@ namespace oomph
     //Restrict the problem to the standard variables and
     //the bifurcation parameter only
     Problem_pt->Dof_pt.resize(Ndof+1);
+    Problem_pt->Dof_distribution_pt->rebuild(Problem_pt->communicator_pt(),
+                                             Ndof+1,false);
 
     //Set the solve flag
     Solve_which_system = Block_augmented_J;
@@ -2644,6 +2661,9 @@ namespace oomph
      {
       //Restrict the problem to the standard variables
       Problem_pt->Dof_pt.resize(Ndof);
+      Problem_pt->Dof_distribution_pt->rebuild(Problem_pt->communicator_pt(),
+                                               Ndof,false);
+
       //Set the solve flag
         Solve_which_system = Block_J;
      }
@@ -2668,6 +2688,10 @@ namespace oomph
         Problem_pt->Dof_pt.push_back(&Y[n]);
        }
       Problem_pt->Dof_pt.push_back(&Sigma);
+      
+      // update the Dof distribution
+      Problem_pt->Dof_distribution_pt->rebuild(Problem_pt->communicator_pt(),
+                                               Ndof*2+2,false);
       
       //Set the solve flag
       Solve_which_system = Full_augmented;
@@ -2724,7 +2748,7 @@ namespace oomph
 
   //Firstly, let's calculate the derivative of the residuals wrt
   //the parameter
-  DoubleVector dRdparam(Distribution_pt);
+  DoubleVector dRdparam(Distribution_pt,0.0);
   
   const double FD_step = 1.0e-8;
   {
@@ -2760,11 +2784,11 @@ namespace oomph
   Distribution_pt->rebuild(problem_pt->communicator_pt(),n_dof,false);
   
   //Setup storage for temporary vector
-  DoubleVector y1(Distribution_pt), alpha(Distribution_pt);
+  DoubleVector y1(Distribution_pt,0.0), alpha(Distribution_pt,0.0);
 
   //Allocate storage for A which can be used in the resolve
   if(A_pt!=0) {delete A_pt;}
-  A_pt = new DoubleVector(Distribution_pt);
+  A_pt = new DoubleVector(Distribution_pt,0.0);
 
   //We are going to do resolves using the underlying linear solver
   Linear_solver_pt->enable_resolve();
@@ -2789,7 +2813,7 @@ namespace oomph
 
   //Resize the stored vector G
   if(G_pt!=0) {delete G_pt;}
-  G_pt = new DoubleVector(Distribution_pt);
+  G_pt = new DoubleVector(Distribution_pt,0.0);
 
   //Solve the first Zg = (Mz -My)
   Linear_solver_pt->solve(problem_pt,*G_pt);
@@ -2907,10 +2931,10 @@ namespace oomph
     }
 
    //Temporary storage
-   DoubleVector y2(Distribution_pt);
+   DoubleVector y2(Distribution_pt,0.0);
 
    // DoubleVector for rhs
-   DoubleVector rhs2(Distribution_pt);
+   DoubleVector rhs2(Distribution_pt,0.0);
    for (unsigned i = 0; i < 2*n_dof; i++)
     {
      rhs2[i] = rhs[i];
@@ -2927,7 +2951,7 @@ namespace oomph
 
    //Resive the storage
    if(E_pt!=0) {delete E_pt;}
-   E_pt = new DoubleVector(Distribution_pt);
+   E_pt = new DoubleVector(Distribution_pt,0.0);
 
    //Solve for the next RHS
    for (unsigned i = 0; i < 2*n_dof; i++)
@@ -3051,16 +3075,16 @@ namespace oomph
   // if the result vector is not setup then rebuild with distribution = global
   if (!result.distribution_setup())
    {
-    result.rebuild(Distribution_pt);
+    result.build(Distribution_pt,0.0);
    }
   if (!result2.distribution_setup())
    {
-    result2.rebuild(Distribution_pt);
+    result2.build(Distribution_pt,0.0);
    }
 
   //Firstly, let's calculate the derivative of the residuals wrt
   //the parameter
-  DoubleVector dRdparam(Distribution_pt);
+  DoubleVector dRdparam(Distribution_pt,0.0);
   
   const double FD_step = 1.0e-8;
   {
@@ -3096,12 +3120,12 @@ namespace oomph
   Distribution_pt->rebuild(problem_pt->communicator_pt(),n_dof,false);
   
   //Setup storage for temporary vector
-  DoubleVector y1(Distribution_pt), alpha(Distribution_pt), 
-   y1_resolve(Distribution_pt);
+  DoubleVector y1(Distribution_pt,0.0), alpha(Distribution_pt,0.0), 
+   y1_resolve(Distribution_pt,0.0);
 
   //Allocate storage for A which can be used in the resolve
   if(A_pt!=0) {delete A_pt;}
-  A_pt = new DoubleVector(Distribution_pt);
+  A_pt = new DoubleVector(Distribution_pt,0.0);
 
   //We are going to do resolves using the underlying linear solver
   Linear_solver_pt->enable_resolve();
@@ -3132,7 +3156,7 @@ namespace oomph
 
   //Resize the stored vector G
   if(G_pt!=0) {delete G_pt;}
-  G_pt = new DoubleVector(Distribution_pt);
+  G_pt = new DoubleVector(Distribution_pt,0.0);
 
   //Solve the first Zg = (Mz -My)
   Linear_solver_pt->solve(problem_pt,*G_pt);
@@ -3274,10 +3298,10 @@ namespace oomph
     }
 
    //Temporary storage
-   DoubleVector y2(Distribution_pt);
+   DoubleVector y2(Distribution_pt,0.0);
 
    //Solve it
-   DoubleVector temp_rhs(Distribution_pt);
+   DoubleVector temp_rhs(Distribution_pt,0.0);
    for (unsigned i = 0; i < 2*n_dof; i++)
     {
      temp_rhs[i] = rhs[i];
@@ -3292,7 +3316,7 @@ namespace oomph
 
    //Resive the storage
    if(E_pt!=0) {delete E_pt;}
-   E_pt = new DoubleVector(Distribution_pt);
+   E_pt = new DoubleVector(Distribution_pt,0.0);
 
    //Solve for the next RHS
    for (unsigned i = 0; i < 2* n_dof; i++)
@@ -3307,7 +3331,7 @@ namespace oomph
      rhs[n] = rhs2[n_dof+n] - Jprod_y1_resolve[n];
     }
 
-   DoubleVector y2_resolve(Distribution_pt);
+   DoubleVector y2_resolve(Distribution_pt,0.0);
    for (unsigned i = 0; i < 2* n_dof; i++)
     {
      temp_rhs[i] = rhs[i];
@@ -3487,7 +3511,7 @@ namespace oomph
   linear_solver_pt->enable_resolve();
 
   //Storage for the solution
-  DoubleVector x(dist_pt);
+  DoubleVector x(dist_pt,0.0);
 
   //Solve the standard problem, we only want to make sure that
   //we factorise the matrix, if it has not been factorised. We shall
@@ -3556,6 +3580,10 @@ namespace oomph
   //Finally add the frequency
   problem_pt->Dof_pt.push_back(&Omega);
 
+  // rebuild the dof dist 
+  Problem_pt->Dof_distribution_pt->rebuild(Problem_pt->communicator_pt(),
+                                           Ndof*3+2,false);
+
   // delete the dist_pt
   delete dist_pt;
  }
@@ -3621,6 +3649,10 @@ namespace oomph
   problem_pt->Dof_pt.push_back(parameter_pt);
   //Finally add the frequency
   problem_pt->Dof_pt.push_back(&Omega);
+
+  // rebuild the Dof_distribution_pt
+  Problem_pt->Dof_distribution_pt->rebuild(Problem_pt->communicator_pt(),
+                                           Ndof*3+2,false);
  }
 
 
@@ -3643,6 +3675,8 @@ namespace oomph
    }
   //Now return the problem to its original size
   Problem_pt->Dof_pt.resize(Ndof);
+  Problem_pt->Dof_distribution_pt->rebuild(Problem_pt->communicator_pt(),
+                                           Ndof,false);
  }
 
 
@@ -3926,8 +3960,8 @@ namespace oomph
   eigenfunction.resize(2);
   LinearAlgebraDistribution dist(Problem_pt->communicator_pt(),Ndof,false);
   //Rebuild the vector
-  eigenfunction[0].rebuild(&dist);
-  eigenfunction[1].rebuild(&dist);
+  eigenfunction[0].build(&dist,0.0);
+  eigenfunction[1].build(&dist,0.0);
   //Set the value to be the null vector
   for(unsigned n=0;n<Ndof;n++)
    {
@@ -3947,6 +3981,8 @@ namespace oomph
     Solve_which_system = 1;
     //Restrict the problem to the standard variables only
     Problem_pt->Dof_pt.resize(Ndof);
+    Problem_pt->Dof_distribution_pt->rebuild(Problem_pt->communicator_pt(),
+                                             Ndof,false);
    }
  }
 
@@ -3968,6 +4004,8 @@ namespace oomph
      {
       Problem_pt->Dof_pt.push_back(&Phi[n]);
      }
+    Problem_pt->Dof_distribution_pt->rebuild(Problem_pt->communicator_pt(),
+                                             Ndof*2,false);
    }
  }
 
@@ -3998,6 +4036,10 @@ namespace oomph
     Problem_pt->Dof_pt.push_back(Parameter_pt);
     //Finally add the frequency
     Problem_pt->Dof_pt.push_back(&Omega);
+
+    //
+    Problem_pt->Dof_distribution_pt->rebuild(Problem_pt->communicator_pt(),
+                                             3*Ndof+2,false);
    }
  }
 }

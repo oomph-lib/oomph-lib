@@ -34,7 +34,7 @@ namespace oomph
  //============================================================================
  /// Just copys the argument DoubleVector
  //============================================================================
- void DoubleVector::rebuild(const DoubleVector& old_vector)
+ void DoubleVector::build(const DoubleVector& old_vector)
   {
    if (!(*this == old_vector))
     {
@@ -42,7 +42,7 @@ namespace oomph
      Internal_values = true;
      
      // reset the distribution and resize the data
-     this->rebuild(old_vector.distribution_pt());
+     this->build(old_vector.distribution_pt(),0.0);
      
      // copy the data
      if (Distribution_pt->setup())
@@ -61,7 +61,7 @@ namespace oomph
  /// Assembles a DoubleVector with distribution dist, if v is specified 
  /// each row is set to v
  //============================================================================
- void DoubleVector::rebuild(const LinearAlgebraDistribution* const &dist_pt, 
+ void DoubleVector::build(const LinearAlgebraDistribution* const &dist_pt, 
                             const double& v)
   {
    // clean the memory
@@ -87,6 +87,27 @@ namespace oomph
   }
 
  //============================================================================
+ /// \short Assembles a DoubleVector with a distribution dist and coefficients
+ /// taken from the vector v.\n
+ /// Note. The vector v MUST be of length nrow()
+ //============================================================================
+ void DoubleVector::build(const LinearAlgebraDistribution* const &dist_pt,
+                            const Vector<double>& v)
+ {
+  // clean the memory
+   this->clear();
+
+   // the vector owns the internal data
+   Internal_values = true;
+
+   // Set the distribution
+   Distribution_pt->rebuild(dist_pt);
+
+   // use the initialise method to populate the vector
+   this->initialise(v);
+ }
+
+ //============================================================================
  /// \short initialise the whole vector with value v
  //============================================================================
  void DoubleVector::initialise(const double& v)
@@ -105,6 +126,31 @@ namespace oomph
   }
 
  //============================================================================
+ /// \short initialise the vector with coefficient from the vector v.\n
+ /// Note: The vector v must be of length 
+ //============================================================================
+ void DoubleVector::initialise(const Vector<double> v)
+ {
+#ifdef PARANOID
+  std::ostringstream error_message;    
+  error_message << "The vector passed to initialise(...) must be of length "
+                << "nrow()";
+  throw OomphLibError(error_message.str(),
+                      "DoubleVector::initialise(...)",
+                      OOMPH_EXCEPTION_LOCATION);
+#endif
+   if (this->distribution_setup())
+    {  
+     unsigned begin = this->first_row();
+     unsigned end = begin + this->nrow_local();
+     for (unsigned i = begin; i < end; i++)
+      {
+       Values_pt[i-begin] = v[i];
+      }
+    }
+ }
+
+ //============================================================================
  /// The contents of the vector are redistributed to match the new
  /// distribution. In a non-MPI build this method works, but does nothing. \n
  /// \b NOTE 1: The current distribution and the new distribution must have
@@ -112,7 +158,8 @@ namespace oomph
  /// \b NOTE 2: The current distribution and the new distribution must have
  /// the same Communicator.
  //============================================================================
- void DoubleVector::redistribute(LinearAlgebraDistribution& new_dist)
+ void DoubleVector::redistribute(const LinearAlgebraDistribution* 
+                                 const& dist_pt)
  {
 #ifdef OOMPH_HAS_MPI
 #ifdef PARANOID
@@ -132,11 +179,11 @@ namespace oomph
    }
    // paranoid check that the nrows for both distributions is the 
    // same
-   if (new_dist.nrow() != Distribution_pt->nrow())
+   if (dist_pt->nrow() != Distribution_pt->nrow())
     {
      std::ostringstream error_message;    
      error_message << "The number of global rows in the new distribution ("
-                   << new_dist.nrow() << ") is not equal to the number"
+                   << dist_pt->nrow() << ") is not equal to the number"
                    << " of global rows in the current distribution ("
                    << Distribution_pt->nrow() << ").\n"; 
      throw OomphLibError(error_message.str(),
@@ -145,7 +192,7 @@ namespace oomph
     }
    // paranoid check that the current distribution and the new distribution
    // have the same Communicator
-   OomphCommunicator temp_comm(*new_dist.communicator_pt());
+   OomphCommunicator temp_comm(*dist_pt->communicator_pt());
    if (!(temp_comm == *Distribution_pt->communicator_pt()))
     {
      std::ostringstream error_message;  
@@ -158,7 +205,7 @@ namespace oomph
 #endif
 
    // check the distributions are not the same
-   if (!((*Distribution_pt) == new_dist))
+   if (!((*Distribution_pt) == *dist_pt))
     {
      
      // get the rank and the number of processors
@@ -166,7 +213,7 @@ namespace oomph
      int nproc = Distribution_pt->communicator_pt()->nproc();
 
      // if both vectors are distributed
-     if (this->distributed() && new_dist.distributed())
+     if (this->distributed() && dist_pt->distributed())
       {
 
        // new nrow_local and first_row data
@@ -176,8 +223,8 @@ namespace oomph
        Vector<unsigned> current_nrow_local_data(nproc);
        for (int i = 0; i < nproc; i++)
         {
-         new_first_row_data[i] = new_dist.first_row(i);
-         new_nrow_local_data[i] = new_dist.nrow_local(i);
+         new_first_row_data[i] = dist_pt->first_row(i);
+         new_nrow_local_data[i] = dist_pt->nrow_local(i);
          current_first_row_data[i] = this->first_row(i);
          current_nrow_local_data[i] = this->nrow_local(i);
         }
@@ -266,7 +313,7 @@ namespace oomph
 
        // copy from temp data to Values_pt
        delete[] Values_pt;
-       unsigned nrow_local = new_dist.nrow_local();
+       unsigned nrow_local = dist_pt->nrow_local();
        Values_pt = new double[nrow_local];
        for (unsigned i = 0; i < nrow_local; i++)
         {
@@ -276,7 +323,7 @@ namespace oomph
       }
 
      // if this vector is distributed but the new distributed is global
-     else if (this->distributed() && !new_dist.distributed())
+     else if (this->distributed() && !dist_pt->distributed())
       {
 
        // copy existing Values_pt to temp_data
@@ -307,7 +354,7 @@ namespace oomph
                       Distribution_pt->communicator_pt()->mpi_comm());
        
        // update the distribution
-       Distribution_pt->rebuild(new_dist);
+       Distribution_pt->rebuild(dist_pt);
 
        // delete the temp_data
        delete[] temp_data;
@@ -318,14 +365,14 @@ namespace oomph
       }
      
      // if this vector is not distrubted but the target vector is
-     else if (!this->distributed() && new_dist.distributed())
+     else if (!this->distributed() && dist_pt->distributed())
       {   
 
        // cache the new nrow_local
-       unsigned nrow_local = new_dist.nrow_local();
+       unsigned nrow_local = dist_pt->nrow_local();
        
        // and first_row
-       unsigned first_row = new_dist.first_row();
+       unsigned first_row = dist_pt->first_row();
 
        // temp storage for the new data
        double* temp_data = new double[nrow_local];
@@ -341,12 +388,12 @@ namespace oomph
        Values_pt= temp_data;
 
        // update the distribution
-       Distribution_pt->rebuild(new_dist);
+       Distribution_pt->rebuild(dist_pt);
 
       }
      
      // copy the Distribution
-     Distribution_pt->rebuild(new_dist);
+     Distribution_pt->rebuild(dist_pt);
     }
 #endif
   }
@@ -497,7 +544,7 @@ namespace oomph
  //============================================================================
  /// [] access function to the (local) values of this vector
  //============================================================================
- const double DoubleVector::operator[](int i) const
+ const double& DoubleVector::operator[](int i) const
   {
 #ifdef RANGE_CHECKING
    if (i >= int(this->nrow_local()))
@@ -762,7 +809,7 @@ namespace oomph
 #endif
 
    // compute the matrix norm
-   DoubleVector x(Distribution_pt);
+   DoubleVector x(Distribution_pt,0.0);
    matrix_pt->multiply(*this,x);
    return sqrt(this->dot(x));
   }

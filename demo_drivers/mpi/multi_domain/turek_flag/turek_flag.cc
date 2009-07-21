@@ -806,8 +806,11 @@ TurekProblem(const double &length,
   } // end of FSI setup
 
  // Use SuperLU_dist as the solver
- linear_solver_pt() = new SuperLU_dist;
- static_cast<SuperLU_dist*>(linear_solver_pt())->enable_distributed_solve();
+ linear_solver_pt() = new SuperLUSolver;
+ static_cast<SuperLUSolver*>(linear_solver_pt())
+  ->set_solver_type(SuperLUSolver::Distributed);
+ static_cast<SuperLUSolver*>(linear_solver_pt())
+  ->use_distributed_solve_in_superlu_dist();
 
  // Assign equation numbers
  cout << assign_eqn_numbers() << std::endl; 

@@ -98,6 +98,7 @@ class OomphCommunicator
  /// of another communicator.
  ~OomphCommunicator()
   {
+   Owns_mpi_comm=false;
 #ifdef OOMPH_HAS_MPI
    if (Owns_mpi_comm)
     {

@@ -337,209 +337,83 @@ class FD_LU : public DenseLU
 
 
 
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+
+
 
 //=============================================================================
-/// \short SuperLU solver: Wrapper to Demmel, Eistenstat, Gilbert,
-/// Li & Liu's serial SuperLU solver.
-/// See http://crd.lbl.gov/~xiaoye/SuperLU/ \n
-/// This solver is only developed for non distributed matrices - distributable
-/// matrices (such as CRDoubleMatrix) mush not be distributed. Correspondingly
-/// the vectors must not be distributed either.
-//============================================================================
-class SuperLU : public LinearSolver
+/// \short. SuperLU Project Solver class. This is a combined wrapper for both 
+/// SuperLU and SuperLU Dist.
+/// See http://crd.lbl.gov/~xiaoye/SuperLU/
+/// Default Behaviour: If this solver is distributed over more than one 
+/// processor then SuperLU Dist is used.\n
+/// Member data naming convention: member data associated with the SuperLU
+/// Dist solver begins Dist_... and member data associated with the serial
+/// SuperLU solver begins Serial_... .\n 
+//=============================================================================
+class SuperLUSolver : public LinearSolver
 {
- //The column and row compressed double matrices are friends
- friend class CRDoubleMatrix;
- friend class CCDoubleMatrix;
-
+ 
   public:
 
- /// Constructor: Use compressed row version and no doc by default
- SuperLU() :  F_factors(0)
+ /// \short enum type to specify the solver behaviour.\n
+ /// Default - will employ superlu dist if more than 1 processor.\n
+ /// Serial - will always try use superlu (serial).
+ /// Distributed - will always try to use superlu dist.
+ enum Type { Default, Serial, Distributed };
+
+ /// Constructor. Set the defaults.
+ SuperLUSolver() 
+  :   Serial_f_factors(0)
   {
-   Compressed_row_flag=true;
+   // Set solver wide default values and null pointers
    Doc_stats=false;
    Suppress_solve=false;
-   Sign_of_determinant_of_matrix=0;
-   N_dof=0;
-  }
-
- /// Broken copy constructor
- SuperLU(const SuperLU& dummy) 
-  { 
-   BrokenCopy::broken_copy("SuperLU");
-  } 
- 
- /// Broken assignment operator
- void operator=(const SuperLU&) 
-  {
-   BrokenCopy::broken_assign("SuperLU");
-  }
-
- ///Destructor, clean up the stored matrices
- ~SuperLU()  {clean_up_memory();}
- 
- /// Access function to compressed row flag
- bool& compressed_row_flag() {return Compressed_row_flag;}
- 
- /// Overload disable resolve so that it cleans up memory too
- void disable_resolve()
-  {
-   LinearSolver::disable_resolve();
-   clean_up_memory();
-  }
- 
- /// \short Solver: Takes pointer to problem and returns the results Vector
- /// which contains the solution of the linear system defined by
- /// the problem's fully assembled Jacobian and residual Vector.
- void solve(Problem* const &problem_pt, DoubleVector &result);
-
-
- /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs 
- /// vector and returns the solution of the linear system. Problem pointer 
- /// defaults to NULL and can be omitted.
- void solve(DoubleMatrixBase* const &matrix_pt,
-            const DoubleVector &rhs,
-            DoubleVector &result);
- 
- /// \short Resolve the system defined by the last assembled jacobian
- /// and the specified rhs vector. Solution is returned in the vector result
- void resolve(const DoubleVector &rhs, DoubleVector &result);
-
- /// Return the doc_stats flag
- bool& doc_stats() {return Doc_stats;}
-
- /// \short Return the flag that decides if we're actually solving the
- /// system or just assembling the Jacobian and the rhs.
- /// (Used only for timing runs, obviously)
- bool& suppress_solve() {return Suppress_solve;}
-
- /// \short returns the time taken to assemble the jacobian matrix and 
- /// residual vector
- double jacobian_setup_time()
-  {
-   return Jacobian_setup_time;
-  }
-
- /// \short return the time taken to solve the linear system (needs to be 
- /// overloaded for each linear solver)
- virtual double linear_solver_solution_time()
-  {
-   return Solution_time;
-  }
-
- /// Do the factorisation stage
- void factorise(DoubleMatrixBase* const &matrix_pt);
-  
- /// Do the backsubstitution for SuperLU solver
- void backsub(const DoubleVector &rhs,
-              DoubleVector &result);
- 
- /// Clean up the memory allocated by the SuperLU solver
- void clean_up_memory();
-
-  private:
-
- /// Storage for the LU factors as required by SuperLU
- void *F_factors;
-
- /// Info flag for the SuperLU solver
- int Info;
-
- /// The number of unknowns in the linear system
- unsigned long N_dof;
- 
- /// Sign of the determinant of the matrix
- int Sign_of_determinant_of_matrix;
-
- /// Jacobian setup time
- double Jacobian_setup_time;
-
- /// Solution time
- double Solution_time;
- 
- /// Use compressed row version?
- bool Compressed_row_flag;
-
- /// Doc stats?
- bool Doc_stats;
-
- /// Suppress solve?
- bool Suppress_solve;
-};
-
+   Using_dist = false;
+   Solver_type = Default;
 
 #ifdef OOMPH_HAS_MPI
-//====================================================================
-/// \short SuperLU_dist_global_matrix solver: 
-/// Wrapper to Demmel, Eistenstat, Gilbert,
-/// Li & Liu's distributed SuperLU solver, either operating on the
-/// global matrix (i.e. the entire matrix is stored on each processor)
-/// or on blocks of matrix rows that are held on the various processors.
-/// See http://crd.lbl.gov/~xiaoye/SuperLU/
-///
-/// The matrix based interfaces work with CCDoubleMatrix and CRDoubleMatrix
-/// (SuperLU_dist in global mode) or CRDoubleMatrix 
-/// (SuperLU_dist in distributed mode).
-//====================================================================
-class SuperLU_dist : public LinearSolver
-{
- 
-  public:
+   // Set default values and nullify pointers for SuperLU Dist
+   Dist_use_global_solver=false;
+   Dist_delete_matrix_data=false;
+   Dist_allow_row_and_col_permutations=true;
+   Dist_solver_data_pt=0;
+   Dist_global_solve_data_allocated = false;
+   Dist_distributed_solve_data_allocated = false;
+   Dist_value_pt=0;
+   Dist_index_pt=0;
+   Dist_start_pt=0;
+#endif   
 
- /// \short Constructor: By default we use the distributed memory version
- /// in which each processor holds only certain blocks of rows and 
- /// set Doc_stat to false.
- SuperLU_dist() 
-  {
-   // Set default values and nullify pointers
-   Use_global_solver=false;
-   Doc_stats=false;
-   Suppress_solve=false;
-   Delete_matrix_data=false;
-   Allow_row_and_col_permutations=true;
-   Solver_data_pt=0;
-   Global_solve_data_allocated = false;
-   Distributed_solve_data_allocated = false;
-   Value_pt=0;
-   Index_pt=0;
-   Start_pt=0;
-   Suppress_solve = false;
-
-   // Find number of rows and columns for the process grid
-//   // First guess at number of rows:
-//   int nprow=int(sqrt(double(MPI_Helpers::Nproc)));
-//   
-//   // Does this evenly divide the processor grid?
-//   while (nprow>1)
-//    {
-//     if (MPI_Helpers::Nproc%nprow==0) break;
-//     nprow-=1;
-//    }
-//   
-//   /// Store Number of rows/columns for process grid
-//   Nprow=nprow;
-//   Npcol=MPI_Helpers::Nproc/Nprow;
-
+   // Set default values and null pointers for SuperLU (serial)
+   Serial_compressed_row_flag=true;
+   Serial_sign_of_determinant_of_matrix=0;
+   Serial_n_dof=0;
   }
 
  /// Broken copy constructor
- SuperLU_dist(const SuperLU_dist& dummy) 
+ SuperLUSolver(const SuperLUSolver& dummy) 
   { 
-   BrokenCopy::broken_copy("SuperLU_dist");
+   BrokenCopy::broken_copy("SuperLUSolver");
   } 
  
  /// Broken assignment operator
- void operator=(const SuperLU_dist&) 
+ void operator=(const SuperLUSolver&) 
   {
-   BrokenCopy::broken_assign("SuperLU_dist");
+   BrokenCopy::broken_assign("SuperLUSolver");
   }
 
  ///Destructor, clean up the stored matrices
- ~SuperLU_dist()
+ ~SuperLUSolver()
   {
    clean_up_memory();
   }
+
+ // SuperLUSolver methods
+ ////////////////////////
  
  /// Overload disable resolve so that it cleans up memory too
  void disable_resolve()
@@ -552,7 +426,6 @@ class SuperLU_dist : public LinearSolver
  /// which contains the solution of the linear system defined by
  /// the problem's fully assembled Jacobian and residual Vector.
  void solve(Problem* const &problem_pt, DoubleVector &result);
-
 
  /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs 
  /// vector and returns the solution of the linear system. Problem pointer 
@@ -589,58 +462,6 @@ class SuperLU_dist : public LinearSolver
    return Solution_time;
   }
 
-  /// \short Sets the MPIProblem based solve function to use the global
-  /// version of SuperLU_DIST (default is to not use the global solver).
-  /// Note: calling this function will delete any distributed solve data.
-  void enable_global_solve() 
-  {
-   if (!Use_global_solver)
-    {
-     clean_up_memory();
-     Use_global_solver=true;
-    }
-  }
-
-  /// \short Sets the MPIProblem based solve function to use the distributed
-  /// version of SuperLU_DIST (default is to use the distributed solver).
-  /// Note: calling this function will delete any global solve data.
-  void enable_distributed_solve() 
-  {
-   if (Use_global_solver)
-    {
-     clean_up_memory();
-     Use_global_solver=false;
-    }
-  }
-
- /// \short Return the flag that decides if we're actually solving the
- /// system or just assembling the Jacobian and the rhs.
- /// (Used only for timing runs, obviously)
- bool &suppress_solve() 
-  {
-   return Suppress_solve;
-  }
- 
- /// \short Returns Delete_matrix_data flag. SuperLU_dist needs its own copy 
- /// of the input matrix, therefore a copy must be made if any matrix 
- /// used with this solver is to be preserved. If the input matrix can be 
- /// deleted the flag can be set to true to reduce the amount of memory 
- /// required, and the matrix data will be wiped using its clean_up_memory()
- /// function.  Default value is false.
- bool &delete_matrix_data()
-  {
-   return Delete_matrix_data;
-  }
-  
- /// \short Access function to Allow_row_and_col_permutations, if this flag
- /// is true then SuperLU_DIST is allowed to permute matrix rows
- /// and columns during factorisation. This is the default for SuperLU_DIST, 
- /// and can lead to significantly faster solves.
- bool &allow_row_and_col_permutations()
-  {
-   return Allow_row_and_col_permutations;
-  }
-
  /// \short Do the factorisation stage
  /// Note: if Delete_matrix_data is true the function 
  /// matrix_pt->clean_up_memory() will be used to wipe the matrix data.
@@ -651,54 +472,169 @@ class SuperLU_dist : public LinearSolver
  void backsub(const DoubleVector &rhs,
               DoubleVector &result);
  
- /// Clean up the memory allocated by the SuperLU solver
+ /// Clean up the memory allocated by the solver
  void clean_up_memory();
+
+ /// \short Specify the solve type. Either default, serial or distributed.\n
+ /// See enum SuperLU_solver_type for more details.
+ void set_solver_type(const Type& t)
+  {
+   this->clean_up_memory();
+   Solver_type = t;
+  }
+
+ // SuperLU (serial) methods
+ ///////////////////////////
+
+ /// Access function to compressed row flag for superlu serial
+ bool& compressed_row_flag_for_superlu_serial() 
+  {
+   return Serial_compressed_row_flag;
+  }
+
+#ifdef OOMPH_HAS_MPI
+
+ // SuperLU Dist methods
+ ///////////////////////
+
+ /// \short Returns Delete_matrix_data flag. SuperLU_dist needs its own copy 
+ /// of the input matrix, therefore a copy must be made if any matrix 
+ /// used with this solver is to be preserved. If the input matrix can be 
+ /// deleted the flag can be set to true to reduce the amount of memory 
+ /// required, and the matrix data will be wiped using its clean_up_memory()
+ /// function.  Default value is false.
+ bool &delete_matrix_data_in_superlu_dist()
+  {
+   return Dist_delete_matrix_data;
+  }
+  
+ /// \short Access function to Allow_row_and_col_permutations, if this flag
+ /// is true then SuperLU_DIST is allowed to permute matrix rows
+ /// and columns during factorisation. This is the default for SuperLU_DIST, 
+ /// and can lead to significantly faster solves.
+ bool &allow_row_and_col_permutations_in_superlu_dist()
+  {
+   return Dist_allow_row_and_col_permutations;
+  }
+
+  /// \short Calling this method will ensure that when the problem based
+  /// solve interface is used, a global (serial) jacobian will be 
+  /// assembled.\n
+  /// Note: calling this function will delete any distributed solve data.
+  void use_global_solve_in_superlu_dist() 
+  {
+   if (!Dist_use_global_solver)
+    {
+     clean_up_memory();
+     Dist_use_global_solver=true;
+    }
+  }
+
+  /// \short Calling this method will ensure that when the problem based
+  /// solve interface is used, a distributed jacobian will be 
+  /// assembled.\n
+  /// Note: calling this function will delete any global solve data.
+  void use_distributed_solve_in_superlu_dist() 
+  {
+   if (Dist_use_global_solver)
+    {
+     clean_up_memory();
+     Dist_use_global_solver=false;
+    }
+  }
+
+#endif
 
   private:
 
- /// \short Flag that determines whether the MPIProblem based solve function 
- /// uses the global or distributed version of SuperLU_DIST 
- /// (default value is false).
- bool Use_global_solver;
- 
- ///  Flag is true if solve data has been generated for a global matrix
- bool Global_solve_data_allocated;
+  /// factorise method for SuperLU (serial)
+ void factorise_serial(DoubleMatrixBase* const &matrix_pt);
+  
+ /// backsub method for SuperLU (serial)
+ void backsub_serial(const DoubleVector &rhs,
+                     DoubleVector &result);
 
- ///  Flag is true if solve data has been generated for distributed matrix
- bool Distributed_solve_data_allocated;
+#ifdef OOMPH_HAS_MPI
+  /// factorise method for SuperLU Dist
+ void factorise_distributed(DoubleMatrixBase* const &matrix_pt);
+  
+ /// backsub method for SuperLU Dist
+ void backsub_distributed(const DoubleVector &rhs,
+              DoubleVector &result);
+#endif
 
- /// Storage for the LU factors and other data required by SuperLU
- void *Solver_data_pt;
+ // SuperLUSolver member data
+ ////////////////////////////
 
- /// Number of rows for the process grid 
- int Nprow;
-
- /// Number of columns for the process grid
- int Npcol;
-
- /// Info flag for the SuperLU solver
- int Info;
- 
  /// Jacobian setup time
  double Jacobian_setup_time;
 
  /// Solution time
  double Solution_time;
 
- /// Flag is true if rhs vector is distributed
-// bool Distributed_rhs;
- 
  /// Suppress solve?
  bool Suppress_solve;
 
- /// Set to true for SuperLU_dist to output statistics (false by default).
+ /// Set to true to output statistics (false by default).
  bool Doc_stats;
+
+ /// the solver type. see SuperLU_solver_type for details.
+ Type Solver_type;
+
+ /// boolean flag indicating whether superlu dist is being used
+ bool Using_dist;
+
+ // SuperLU (serial) member data
+ ///////////////////////////////
+
+ /// Storage for the LU factors as required by SuperLU
+ void *Serial_f_factors;
+
+ /// Info flag for the SuperLU solver
+ int Serial_info;
+
+ /// The number of unknowns in the linear system
+ unsigned long Serial_n_dof;
+ 
+ /// Sign of the determinant of the matrix
+ int Serial_sign_of_determinant_of_matrix;
+ 
+ /// Use compressed row version?
+ bool Serial_compressed_row_flag;
+
+#ifdef OOMPH_HAS_MPI
+
+ // SuperLU Dist member data
+ ///////////////////////////
+
+ /// \short Flag that determines whether the MPIProblem based solve function 
+ /// uses the global or distributed version of SuperLU_DIST 
+ /// (default value is false).
+ bool Dist_use_global_solver;
+ 
+ ///  Flag is true if solve data has been generated for a global matrix
+ bool Dist_global_solve_data_allocated;
+
+ ///  Flag is true if solve data has been generated for distributed matrix
+ bool Dist_distributed_solve_data_allocated;
+
+ /// Storage for the LU factors and other data required by SuperLU
+ void *Dist_solver_data_pt;
+
+ /// Number of rows for the process grid 
+ int Dist_nprow;
+
+ /// Number of columns for the process grid
+ int Dist_npcol;
+
+ /// Info flag for the SuperLU solver
+ int Dist_info;
  
  /// \short If true then SuperLU_DIST is allowed to permute matrix rows
  /// and columns during factorisation. This is the default for SuperLU_DIST, 
  /// and can lead to significantly faster solves, but has been known to 
  /// fail, hence the default value is 0.
- bool Allow_row_and_col_permutations;
+ bool Dist_allow_row_and_col_permutations;
  
  /// \short Delete_matrix_data flag. SuperLU_dist needs its own copy 
  /// of the input matrix, therefore a copy must be made if any matrix 
@@ -706,21 +642,20 @@ class SuperLU_dist : public LinearSolver
  /// deleted the flag can be set to true to reduce the amount of memory 
  /// required, and the matrix data will be wiped using its clean_up_memory()
  /// function. Default value is false.
- bool Delete_matrix_data;
+ bool Dist_delete_matrix_data;
 
  /// Pointer for storage of the matrix values required by SuperLU_DIST
- double *Value_pt;
+ double *Dist_value_pt;
 
  /// \short Pointer for storage of matrix rows or column indices required 
  /// by SuperLU_DIST
- int *Index_pt;
+ int *Dist_index_pt;
 
  /// \short Pointers for storage of matrix column or row starts 
  // required by SuperLU_DIST
- int *Start_pt;
-};
+ int *Dist_start_pt;
+
 #endif
-
-
+}; // end of SuperLUSolver 
 } // end of oomph namespace
 #endif

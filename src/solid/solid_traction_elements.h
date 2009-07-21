@@ -1280,8 +1280,8 @@ protected:
  /// are sub-divided into: Just the solid degrees of freedom themselves.
  unsigned ndof_types()
   {
-   return 1;
-  }
+   return this->dim()+1;
+  };
  
  /// \short Create a list of pairs for all unknowns in this element,
  /// so that the first entry in each pair contains the global equation
@@ -1316,7 +1316,7 @@ protected:
 	     // store block lookup in temporary pair: First entry in pair
 	     // is global equation number; second entry is block type
 	     block_lookup.first = this->eqn_number(local_eqn);
-	     block_lookup.second = 0;
+	     block_lookup.second = i;
 	     
 	     // add to list
 	     block_lookup_list.push_front(block_lookup);

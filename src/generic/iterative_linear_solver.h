@@ -75,6 +75,9 @@ class IterativeLinearSolver : public LinearSolver
 
    // set default for document convergence history
    Doc_convergence_history = false;
+
+   // set default
+   Setup_preconditioner_before_solve = true;
   }    
  
  /// Broken copy constructor
@@ -167,6 +170,13 @@ class IterativeLinearSolver : public LinearSolver
    return Preconditioner_setup_time;
   }
 
+ /// \short boolean indicating whether a preconditioner should be set up
+ /// before solve
+ bool& setup_preconditioner_before_solve()
+  {
+   return Setup_preconditioner_before_solve;
+  }
+
   protected:
 
  /// \short Flag indicating if the convergence history is to be
@@ -199,6 +209,9 @@ class IterativeLinearSolver : public LinearSolver
  /// Preconditioner setup time
  double Preconditioner_setup_time;
 
+ /// \short indicates whether the preconditioner should be setup before solve.
+ /// Default = true;
+ bool Setup_preconditioner_before_solve;
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -775,8 +788,8 @@ class GMRES : public IterativeLinearSolver
     }
 
    unsigned n_x=x.nrow();
-   DoubleVector temp(x.distribution_pt());
-   DoubleVector z(x.distribution_pt());
+   DoubleVector temp(x.distribution_pt(),0.0);
+   DoubleVector z(x.distribution_pt(),0.0);
 
    // x = Vy
    double* temp_pt = temp.values_pt();

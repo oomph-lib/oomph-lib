@@ -12,7 +12,6 @@
 #include "../generic/block_preconditioner.h"
 #include "../generic/hijacked_elements.h"
 #include "biharmonic_elements.h"
-//#include "biharmonic_problem.h"
 #include "../meshes/hermite_element_quad_mesh.template.h"
 #include "../generic/SuperLU_preconditioner.h"
 #include "../generic/general_purpose_preconditioners.h"
@@ -52,8 +51,8 @@ namespace oomph
 #endif
      
      // size mesh pt correctly
-     Mesh_pt.resize(1);
-     Mesh_pt[0] = 0;
+     this->set_nmesh(1);
+     Bulk_element_mesh_pt = 0;
     }
    
    /// destructor - cleans up preconditioners and delete matrices
@@ -103,13 +102,13 @@ namespace oomph
    /// Hijacked<BiharmonicElement<2> > elements
    Mesh*& bulk_element_mesh_pt()
     {
-     return Mesh_pt[0];
+     return Bulk_element_mesh_pt;
     }
    
-//    private:
+    private:
 
-   unsigned N_element;
-   unsigned BC;
+//   unsigned N_element;
+//   unsigned BC;
 
    /// preconditioner type \n
    /// + 0 : exact \n
@@ -125,6 +124,9 @@ namespace oomph
    
    /// Preconditioner the diagonal block associated with hijacked elements
    Preconditioner* Hijacked_sub_block_preconditioner_pt;
+
+   /// the bulk element mesh pt
+   Mesh* Bulk_element_mesh_pt;
   };
  
  

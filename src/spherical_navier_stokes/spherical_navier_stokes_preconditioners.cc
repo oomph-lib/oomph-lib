@@ -54,6 +54,22 @@ namespace oomph
   // make sure any old data is deleted
   clean_up_memory();
 
+#ifdef PARANOID
+  // paranoid check that the navier stokes mesh pt has been set
+  if (Navier_stokes_mesh_pt == 0)
+   {
+    std::ostringstream error_message;
+    error_message << "The navier stokes elements mesh pointer must be set.\n"
+                  << "Use method set_navier_stokes_mesh(...)";
+    throw OomphLibError(error_message.str(),
+                     	"NavierStokesLSCPreconditioner::setup()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+
+  // set the mesh
+  this->set_mesh(0,problem_pt,Navier_stokes_mesh_pt);
+
   // Get blocks
   // ----------
 
@@ -80,7 +96,7 @@ namespace oomph
   // this preconditioner has two types of block:
   // type 0: velocity - corresponding to DOFs 0 to n-2
   // type 1: pressure - corresponding to DOF n-1
-  unsigned ndof_types = Mesh_pt[0]->element_pt(0)->ndof_types();
+  unsigned ndof_types = this->ndof_types_in_mesh(0);
   Vector<unsigned> dof_to_block_map(ndof_types);
   dof_to_block_map[ndof_types-1]=1;
   this->block_setup(problem_pt,matrix_pt,dof_to_block_map);
@@ -177,18 +193,7 @@ namespace oomph
   // if the P preconditioner has not been setup
   if (P_preconditioner_pt == 0)
    {
-#ifdef OOMPH_HAS_MPI
-    if (Distribution_pt->communicator_pt()->nproc() > 1)
-     {
-      P_preconditioner_pt = new SuperLUDistPreconditioner;
-     }
-    else
-     {
-      P_preconditioner_pt = new SuperLUPreconditioner;
-     }
-#else
     P_preconditioner_pt = new SuperLUPreconditioner;
-#endif
     Using_default_p_preconditioner = true;
    }
 
@@ -215,18 +220,7 @@ namespace oomph
   // if the F preconditioner has not been setup
   if (F_preconditioner_pt == 0)
    {
-#ifdef OOMPH_HAS_MPI
-    if (Distribution_pt->communicator_pt()->nproc() > 1)
-     {
-      F_preconditioner_pt = new SuperLUDistPreconditioner;
-     }
-    else
-     {
-      F_preconditioner_pt = new SuperLUPreconditioner;
-     }
-#else
     F_preconditioner_pt = new SuperLUPreconditioner;
-#endif
     Using_default_f_preconditioner = true;
    }
 
@@ -306,7 +300,7 @@ namespace oomph
   // if z is not setup then give it the same distribution
   if (!z.distribution_pt()->setup())
    {
-    z.rebuild(r.distribution_pt());
+    z.build(r.distribution_pt(),0.0);
    }
 
   // Step 1 - apply approximate Schur inverse to pressure unknowns (block 1)
@@ -357,7 +351,7 @@ namespace oomph
 
   // Now copy another_temp_vec (i.e. z_p) back into the global vector z.
   // Loop over all entries in the global results vector z:
-  temp_vec.rebuild(another_temp_vec.distribution_pt());
+  temp_vec.build(another_temp_vec.distribution_pt(),0.0);
   temp_vec -= another_temp_vec;
   return_block_vector(1,temp_vec,z);
 
@@ -482,7 +476,7 @@ namespace oomph
      }
 
     // find number of local elements
-    unsigned n_el = Mesh_pt[0]->nelement();
+    unsigned n_el = Navier_stokes_mesh_pt->nelement();
     
     // the diagonal velocity mass matrix contributions that have been
     // classified and should be sent to another processor
@@ -515,19 +509,19 @@ namespace oomph
      {
 
       // check that the element is not halo d
-      if (!Mesh_pt[0]->element_pt(e)->is_halo())
+      if (!Navier_stokes_mesh_pt->element_pt(e)->is_halo())
        {
         
         // find number of degrees of freedom in the element
         // (this is slightly too big because it includes the
         // pressure dofs but this doesn't matter)
-        unsigned el_dof = Mesh_pt[0]->element_pt(e)->ndof();
+        unsigned el_dof = Navier_stokes_mesh_pt->element_pt(e)->ndof();
         
         // allocate local storage for the element's contribution to the
         // velocity mass matrix diagonal
         Vector<double> el_vmm_diagonal(el_dof);
         dynamic_cast< SphericalNavierStokesEquations* >
-         ( Mesh_pt[0]->element_pt(e) )
+         ( Navier_stokes_mesh_pt->element_pt(e) )
          ->get_velocity_mass_matrix_diagonal(el_vmm_diagonal);
 
         // get the contribution for each dof
@@ -535,7 +529,8 @@ namespace oomph
          {
 
           //Get the equation number
-          unsigned eqn_number = Mesh_pt[0]->element_pt(e)->eqn_number(i);
+          unsigned eqn_number = Navier_stokes_mesh_pt
+           ->element_pt(e)->eqn_number(i);
 
           // if I have lookup information on this processor
           if (eqn_number >= first_lookup_row && 
@@ -977,7 +972,7 @@ namespace oomph
    {
 
     // find number of elements
-    unsigned n_el = Mesh_pt[0]->nelement();
+    unsigned n_el = Navier_stokes_mesh_pt->nelement();
     
     // get the contribution for each element
     for (unsigned e = 0; e < n_el; e++)
@@ -986,20 +981,21 @@ namespace oomph
       // find number of degrees of freedom in the element
       // (this is slightly too big because it includes the
       // pressure dofs but this doesn't matter)
-      unsigned el_dof = Mesh_pt[0]->element_pt(e)->ndof();
+      unsigned el_dof = Navier_stokes_mesh_pt->element_pt(e)->ndof();
 
       // allocate local storage for the element's contribution to the
       // velocity mass matrix diagonal
       Vector<double> el_vmm_diagonal(el_dof);
       dynamic_cast< SphericalNavierStokesEquations* >
-       ( Mesh_pt[0]->element_pt(e) )
+       ( Navier_stokes_mesh_pt->element_pt(e) )
        ->get_velocity_mass_matrix_diagonal(el_vmm_diagonal);
 
       // get the contribution for each dof
       for (unsigned i = 0; i < el_dof; i++)
        {
         //Get the equation number
-        unsigned eqn_number = Mesh_pt[0]->element_pt(e)->eqn_number(i);
+        unsigned eqn_number = Navier_stokes_mesh_pt
+         ->element_pt(e)->eqn_number(i);
         
         // bypass non velocity DOFs
         if ( this->block_number(eqn_number)==0 )
@@ -1032,8 +1028,8 @@ namespace oomph
   
   // build the matrix
   CRDoubleMatrix* m_pt = new CRDoubleMatrix(this->block_distribution_pt(0));
-  m_pt->rebuild_matrix_without_copy(nrow,nrow_local,m_values,m_column_index,
-                                    m_row_start);
+  m_pt->build_matrix_without_copy(nrow,nrow_local,m_values,m_column_index,
+                                  m_row_start);
   
   // return the matrix;
   return m_pt;   

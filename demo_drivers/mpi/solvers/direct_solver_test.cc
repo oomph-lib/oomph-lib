@@ -310,9 +310,10 @@ int main(int argc, char **argv)
   unsigned ndof = problem.ndof();
   LinearAlgebraDistribution global_dist(problem.communicator_pt(),ndof,false);
   CRDoubleMatrix A(&global_dist);
-  DoubleVector b(&global_dist);
-  DoubleVector x(&global_dist);
-  SuperLU_dist solver;
+  DoubleVector b(&global_dist,0.0);
+  DoubleVector x(&global_dist,0.0);
+  SuperLUSolver solver;
+  solver.set_solver_type(SuperLUSolver::Distributed);
   problem.get_jacobian(b,A);
   solver.doc_time() = true;
   solver.solve(&A,b,x);
@@ -336,35 +337,14 @@ int main(int argc, char **argv)
   LinearAlgebraDistribution distributed_dist(problem.communicator_pt(),
 					     ndof,true);
   CRDoubleMatrix A(&distributed_dist);
-  DoubleVector b(&distributed_dist);
-  DoubleVector x(&distributed_dist);
-  SuperLU_dist solver;
+  DoubleVector b(&distributed_dist,0.0);
+  DoubleVector x(&distributed_dist,0.0);
+  SuperLUSolver solver;
+  solver.set_solver_type(SuperLUSolver::Distributed);
   problem.get_jacobian(b,A);
   solver.doc_time() = true;
   solver.solve(&A,b,x);
   x.output("RESLT/SuperLU_dist_CRDoubleMatrix_distributed.dat");
- }
-
- // MATRIX BASED SOLVE / CCDoubleMatrix
- {
-  oomph_info 
-   << "///////////////////////////////////////////////////////////////////////"
-   << std::endl;
-  oomph_info << "TESTING: SuperLU matrix based solve w/ CCDoubleMatrix"
-             << std::endl;
-  oomph_info 
-   << "///////////////////////////////////////////////////////////////////////"
-   << std::endl << std::endl;
-  OneDPoissonProblem<QPoissonElement<1,4> >
-    problem(n_element,FishSolnOneDPoisson::source_function);
-  CCDoubleMatrix A;
-  DoubleVector b;
-  DoubleVector x;
-  SuperLU_dist solver;
-  problem.get_jacobian(b,A);
-  solver.doc_time() = true;
-  solver.solve(&A,b,x);
-  x.output("RESLT/SuperLU_dist_CCDoubleMatrix.dat");
  }
 
  // PROBLEM BASED SOLVE (global)
@@ -380,8 +360,9 @@ int main(int argc, char **argv)
   OneDPoissonProblem<QPoissonElement<1,4> >
     problem(n_element,FishSolnOneDPoisson::source_function);
   DoubleVector x;
-  SuperLU_dist solver;
-  solver.enable_global_solve();
+  SuperLUSolver solver;
+  solver.set_solver_type(SuperLUSolver::Distributed);
+  solver.use_global_solve_in_superlu_dist();
   problem.linear_solver_pt() = &solver;
   problem.newton_solve();
   doc_info.number()++;
@@ -402,8 +383,9 @@ int main(int argc, char **argv)
   OneDPoissonProblem<QPoissonElement<1,4> >
     problem(n_element,FishSolnOneDPoisson::source_function);
   DoubleVector x;
-  SuperLU_dist solver;
-  solver.enable_distributed_solve();
+  SuperLUSolver solver;
+  solver.set_solver_type(SuperLUSolver::Distributed);
+  solver.use_global_solve_in_superlu_dist();
   problem.linear_solver_pt() = &solver;
   problem.newton_solve();
   doc_info.number()++;

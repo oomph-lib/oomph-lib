@@ -88,6 +88,12 @@ public:
                         TimeStepper* time_stepper_pt=
                         &Mesh::Default_TimeStepper);
 
+ /// \short destructor
+ ~CollapsibleChannelMesh()
+  {
+   delete Domain_pt;
+  }
+
  /// Access function to GeomObject representing wall
  GeomObject*& wall_pt(){return Wall_pt;}
 

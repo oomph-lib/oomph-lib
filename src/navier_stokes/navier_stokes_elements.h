@@ -891,7 +891,7 @@ public:
  /// are sub-divided into: Velocity and pressure.
  unsigned ndof_types()
   {
-   return this->node_pt(0)->nvalue()+1;
+   return DIM+1;
   }
  
  /// \short Create a list of pairs for all unknowns in this element,
@@ -1247,7 +1247,7 @@ public:
  /// in this element are sub-divided into: Velocity and pressure.
  unsigned ndof_types()
   {
-   return this->node_pt(0)->nvalue();
+   return DIM+1;
   }
  
  /// \short Create a list of pairs for all unknowns in this element,

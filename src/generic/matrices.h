@@ -289,7 +289,6 @@ class DoubleMatrixBase
  /// \short Multiply the  transposed matrix by the vector x: soln=A^T x
  virtual void multiply_transpose(const DoubleVector &x,
                                  DoubleVector &soln)=0;
-  
 
  /// \short For every row, find the maximum absolute value of the
  /// entries in this row. Set all values that are less than alpha times
@@ -766,7 +765,7 @@ class CRMatrix : public SparseMatrix<T, CRMatrix<T> >
 
 
 //Forward definition for the superlu solver
-class SuperLU;
+class SuperLUSolver;
 
 
 //=============================================================================
@@ -808,35 +807,40 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
   }
 
  /// Destructor
- virtual ~CRDoubleMatrix()
-  {
-   this->clear();
-  }
+ virtual ~CRDoubleMatrix();
  
  /// \short build method: vector of values, vector of column indices,
  /// vector of row starts and number of rows and columns.
- void rebuild(const LinearAlgebraDistribution* distribution_pt,
+ void build(const LinearAlgebraDistribution* distribution_pt,
               const unsigned& ncol,
               const Vector<double>& value, 
               const Vector<int>& column_index,
               const Vector<int>& row_start);
  
  /// rebuild the matrix - assembles an empty matrix will a defined distribution
- void rebuild(const LinearAlgebraDistribution* distribution_pt);
+ void build(const LinearAlgebraDistribution* distribution_pt);
 
  /// \short keeps the existing distribution and just matrix that is stored
- void rebuild_matrix(const unsigned& ncol,
+ void build_matrix(const unsigned& ncol,
                      const Vector<double>& value,
                      const Vector<int>& column_index,
                      const Vector<int>& row_start);
 
  /// \short keeps the existing distribution and just matrix that is stored
  /// without copying the matrix data
- void rebuild_matrix_without_copy(const unsigned& ncol,
-                                  const unsigned& nnz,
-                                  double* value,
-                                  int* column_index,
-                                  int* row_start);
+ void build_matrix_without_copy(const unsigned& ncol,
+                                const unsigned& nnz,
+                                double* value,
+                                int* column_index,
+                                int* row_start);
+
+ /// The contents of the matrix are redistributed to match the new
+ /// distribution. In a non-MPI build this method does nothing. \n
+ /// \b NOTE 1: The current distribution and the new distribution must have
+ /// the same number of global rows.\n
+ /// \b NOTE 2: The current distribution and the new distribution must have
+ /// the same Communicator.
+ void redistribute(const LinearAlgebraDistribution* const& dist_pt);
 
  /// \short clear
  void clear();
@@ -982,6 +986,54 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
 /// is built using new and returned. The calling method is responsible for the 
 /// destruction of the new matrix.
  CRDoubleMatrix* return_global_matrix();
+
+ /// \short returns the inf-norm of this matrix
+ double inf_norm()
+  {
+#ifdef PARANOID
+   // paranoid check that the vector is setup
+   if (!Distribution_pt->setup())
+    {
+     std::ostringstream error_message;
+     error_message << "This vector must be setup."; 
+     throw OomphLibError(error_message.str(),
+                         "DoubleVector::norm()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   // compute the local norm
+   unsigned nrow_local = this->nrow_local();
+   double n = 0;
+   int* row_start = CR_matrix.row_start();
+   double* value = CR_matrix.value();
+   for (unsigned i = 0; i < nrow_local; i++)
+    {
+     double a = 0;
+     for (int j = row_start[i]; j < row_start[i+1]; j++)
+      {
+       a += fabs(value[j]);
+      }
+     n = std::max(n,a);
+    }
+
+   // if this vector is distributed and on multiple processors then gather
+#ifdef OOMPH_HAS_MPI
+   double n2 = n;
+   if (this->distributed() && Distribution_pt->communicator_pt()->nproc() > 1)
+    {
+     MPI_Allreduce(&n,&n2,1,MPI_DOUBLE,MPI_MAX,
+                   Distribution_pt->communicator_pt()->mpi_comm());
+    }
+   n = n2;
+#endif
+
+   // sqrt the norm
+   n = sqrt(n);
+
+   // and return
+   return n;
+  }
 
  private:
 

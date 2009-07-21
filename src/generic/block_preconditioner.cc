@@ -280,11 +280,13 @@ namespace oomph
      {
       block_pt = new CRDoubleMatrix(Block_distribution_pt[block_i]);
      }
-    block_pt->rebuild_matrix_without_copy(block_ncol,block_nnz,
+    block_pt->build_matrix_without_copy(block_ncol,block_nnz,
                                           temp_value,temp_column_index,
                                           temp_row_start);
  
 #ifdef PARANOID
+    // checks to see if block matrix has been set up correctly 
+    //   block_matrix_test(matrix_pt,block_i,block_j,block_pt);
     if (Run_block_matrix_test)
      {
       // checks to see if block matrix has been set up correctly 
@@ -578,7 +580,7 @@ namespace oomph
           
           // compute the displacements
           MPI_Aint displacements[2];
-          MPI_Address(values_recv, &displacements[0]);
+          MPI_Address(values_recv,&displacements[0]);
           MPI_Address(column_index_recv,&displacements[1]);
           displacements[1] -= displacements[0];
           displacements[0] -= displacements[0];
@@ -653,7 +655,7 @@ namespace oomph
      {
       block_pt = new CRDoubleMatrix(Block_distribution_pt[block_i]);
      }
-    block_pt->rebuild_matrix_without_copy(this->block_dimension(block_j),
+    block_pt->build_matrix_without_copy(this->block_dimension(block_j),
                                           local_block_nnz,
                                           values_recv,column_index_recv,
                                           row_start_recv);
@@ -873,9 +875,10 @@ namespace oomph
   DenseMatrix<CRDoubleMatrix*>& block_matrix_pt, CRDoubleMatrix*&
   preconditioner_matrix_pt)
  {
-#ifdef PARANOID
   // the number of blocks
   unsigned n_blocks = this->nblock_types();
+
+#ifdef PARANOID
 
   // paranoid check that block i is in this block preconditioner
   if (block_matrix_pt.nrow() != n_blocks || block_matrix_pt.ncol() != n_blocks)
@@ -891,6 +894,122 @@ namespace oomph
    }
 #endif
 
+  // determine the number of processors
+  unsigned nproc = Problem_pt->communicator_pt()->nproc();
+
+   // determine the number of nnzs
+   unsigned p_nnz = 0;
+  for (unsigned i = 0; i < Nblock_types; i++)
+   {
+    for (unsigned j = 0; j < Nblock_types; j++)
+     {
+      if (block_matrix_pt(i,j) !=0)
+       {
+        p_nnz += block_matrix_pt(i,j)->nnz();
+       }
+     }
+   }
+
+  // construct block offset
+  DenseMatrix<unsigned> col_offset(nproc,n_blocks,0);
+  unsigned off = 0;
+  for (unsigned p = 0; p < nproc; p++)
+   {
+    for (unsigned b = 0; b < n_blocks; b++)
+     {
+      col_offset(p,b) = off;
+      off += Block_distribution_pt[b]->nrow_local(p);
+     }
+   }
+
+  //  nrow local
+  unsigned p_nrow_local = 
+   this->preconditioner_matrix_distribution_pt()->nrow_local();
+
+  // storage for the new matrix
+  int* p_row_start = new int[p_nrow_local+1]; 
+  int* p_column_index = new int[p_nnz];
+  double* p_value = new double[p_nnz];
+
+  // initialise the zero-th entry
+  p_row_start[0] = 0;
+
+  // loop over the block rows
+  unsigned p_pt = 0;
+  unsigned r_pt = 0;
+  for (unsigned i = 0; i < Nblock_types; i++)
+   {
+    
+    // loop over the rows of the current block row
+    unsigned block_nrow = Block_distribution_pt[i]->nrow_local();
+    for (unsigned k = 0; k < block_nrow; k++)
+     {
+
+      // initialise p_row_start
+      p_row_start[r_pt+1] = p_row_start[r_pt];
+
+      // loop over the block columns
+      for (unsigned j = 0; j < Nblock_types; j++)
+       {
+        
+        // if block(i,j) pointer not null then
+        if (block_matrix_pt(i,j) != 0)
+         {
+          
+          // creates pointers for the elements in the current block
+          int* b_row_start = block_matrix_pt(i,j)->row_start();
+          int* b_column_index =block_matrix_pt(i,j)->column_index();
+          double* b_value = block_matrix_pt(i,j)->value();
+          
+          // 
+          for (int l = b_row_start[k]; l < b_row_start[k+1]; l++)
+           {
+
+            // if b_column_index[l] was a row index, what processor
+            // would it be on
+            unsigned p = 0;
+            int b_first_row = Block_distribution_pt[j]->first_row(0);
+            int b_nrow_local = Block_distribution_pt[j]->nrow_local(0);
+            while (b_column_index[l] < b_first_row || 
+                   b_column_index[l] >= b_nrow_local+b_first_row)
+             {
+              p++;
+              b_first_row = Block_distribution_pt[j]->first_row(p);
+              b_nrow_local = Block_distribution_pt[j]->nrow_local(p);
+             }
+
+            // determine the local equation number in the block j/processor p
+            // "column block"
+            unsigned eqn = b_column_index[l]-b_first_row;
+
+            // add to the preconditioner matrix
+            p_value[p_pt] = b_value[l];
+            p_column_index[p_pt] = col_offset(p,j)+eqn;
+            p_row_start[r_pt+1]++;
+            p_pt++;
+           }
+         }
+       }
+      
+      // increment the row pt
+      r_pt++;
+     }
+   }
+ 
+  // creates a new compressed column sparse matrix for the pointer for
+  // the current block 
+  if (preconditioner_matrix_pt == 0)
+   {
+    preconditioner_matrix_pt = 
+     new CRDoubleMatrix(this->preconditioner_matrix_distribution_pt());
+   }
+  unsigned p_nrow = this->preconditioner_matrix_distribution_pt()->nrow();
+  preconditioner_matrix_pt->build_matrix_without_copy(p_nrow,p_nnz,
+                                                        p_value,
+                                                        p_column_index, 
+                                                        p_row_start);   
+  
+/*
   // if + only one processor
   //    + more than one processor but matrix_pt is not distributed
   // then use the serial get_block method
@@ -987,6 +1106,9 @@ namespace oomph
    }
   else
    {
+
+
+
 #ifdef OOMPH_HAS_MPI
 
     // my rank
@@ -1511,6 +1633,7 @@ namespace oomph
      }
 #endif    
    }
+*/
  }
 }
 

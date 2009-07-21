@@ -63,31 +63,20 @@ namespace oomph
   
   // store the problem_pt
   Problem_pt = problem_pt;
-
-  // get the number of DOFs
-  unsigned ndof = Problem_pt->ndof();
   
   //Get oomph-lib Jacobian matrix and residual vector
   
   // record the start time
   double start_t = TimingHelpers::timer();
 
-  // set the distribution
-  bool distributed = !Assemble_serial_jacobian;
-  if (problem_pt->communicator_pt()->nproc() == 1)
-   {
-    distributed = false;
-   }
-  Distribution_pt->rebuild(Problem_pt->communicator_pt(),
-                           ndof,distributed);
-
   // create the residual
-  DoubleVector residual(Distribution_pt);
+  DoubleVector residual;
 
   // create the jacobian
-  CRDoubleMatrix* cr_matrix_pt = new CRDoubleMatrix(Distribution_pt);
+  CRDoubleMatrix* cr_matrix_pt = new CRDoubleMatrix;
   Oomph_matrix_pt = cr_matrix_pt;
   problem_pt->get_jacobian(residual,*cr_matrix_pt);
+  Distribution_pt->rebuild(residual.distribution_pt());
 
   // record the end time and compute the matrix setup time
   double end_t = TimingHelpers::timer();
@@ -101,18 +90,18 @@ namespace oomph
   // store the distribution of the solution vector
   if (!solution.distribution_setup())
     {
-      solution.rebuild(Distribution_pt);
+      solution.build(Distribution_pt,0.0);
     }
   LinearAlgebraDistribution solution_dist(solution.distribution_pt());
 
   // redistribute the distribution
-  solution.redistribute(*Distribution_pt);
+  solution.redistribute(Distribution_pt);
 
   // continue solving using matrix based solve function
   solve(Oomph_matrix_pt, residual, solution);
 
   // return to the original distribution
-  solution.redistribute(solution_dist);
+  solution.redistribute(&solution_dist);
 }
 
 
@@ -268,29 +257,32 @@ void TrilinosAztecOOSolver::solver_setup(DoubleMatrixBase* const& matrix_pt)
   dynamic_cast<TrilinosPreconditionerBase* >(Preconditioner_pt);
  if (trilinos_prec_pt == 0)
   {
-   // setup the preconditioner
-   // start of prec setup
-   double prec_setup_start_t = TimingHelpers::timer();
-   Preconditioner_pt->setup(Problem_pt,matrix_pt);
-   // start of prec setup
-   double prec_setup_finish_t = TimingHelpers::timer();
-   if (Doc_time)
+   if (Setup_preconditioner_before_solve)
     {
-     double t_prec_setup = prec_setup_finish_t - prec_setup_start_t;
-     oomph_info << "Time for preconditioner setup [sec]: "
-                << t_prec_setup << std::endl;
-    }
+     // setup the preconditioner
+     // start of prec setup
+     double prec_setup_start_t = TimingHelpers::timer();
+     Preconditioner_pt->setup(Problem_pt,matrix_pt);
+     // start of prec setup
+     double prec_setup_finish_t = TimingHelpers::timer();
+     if (Doc_time)
+      {
+       double t_prec_setup = prec_setup_finish_t - prec_setup_start_t;
+       oomph_info << "Time for preconditioner setup [sec]: "
+                  << t_prec_setup << std::endl;
+      }
 #ifdef PARANOID
-   if (*Preconditioner_pt->distribution_pt() != *Distribution_pt)
-    {
-     std::ostringstream error_message;
-     error_message << "The oomph-lib preconditioner and the solver must "
-                   << "have the same distribution";
-     throw OomphLibError(error_message.str(),
-                         "TrilinosAztecOOSolver::solver_setup()",
-                         OOMPH_EXCEPTION_LOCATION);
-    }
+     if (*Preconditioner_pt->distribution_pt() != *Distribution_pt)
+      {
+       std::ostringstream error_message;
+       error_message << "The oomph-lib preconditioner and the solver must "
+                     << "have the same distribution";
+       throw OomphLibError(error_message.str(),
+                           "TrilinosAztecOOSolver::solver_setup()",
+                           OOMPH_EXCEPTION_LOCATION);
+      }
 #endif
+    }
 
    // wrap the oomphlib preconditioner in the Epetra_Operator derived
    // OoomphLibPreconditionerEpetraOperator to allow it to be passed to the
@@ -378,24 +370,27 @@ void TrilinosAztecOOSolver::solver_setup(DoubleMatrixBase* const& matrix_pt)
  // preconditioner
  if (trilinos_prec_pt != 0)
   {
-
-   // start of prec setup
-   double prec_setup_start_t = TimingHelpers::timer();
-
-   // setup the preconditioner
-   trilinos_prec_pt->setup(Problem_pt,Oomph_matrix_pt,Epetra_matrix_pt);
-
-   // set the preconditioner
-   AztecOO_solver_pt->
-    SetPrecOperator(trilinos_prec_pt->epetra_operator_pt());
-   
-   // start of prec setup
-   double prec_setup_finish_t = TimingHelpers::timer();
-   if (Doc_time)
+   // only setup the preconditioner if required
+   if (Setup_preconditioner_before_solve)
     {
-     double t_prec_setup = prec_setup_finish_t - prec_setup_start_t;
-     oomph_info << "Time for preconditioner setup [sec]: "
-                << t_prec_setup << std::endl;
+     // start of prec setup
+     double prec_setup_start_t = TimingHelpers::timer();
+     
+     // setup the preconditioner
+     trilinos_prec_pt->setup(Problem_pt,matrix_pt,Epetra_matrix_pt);
+     
+     // set the preconditioner
+     AztecOO_solver_pt->
+      SetPrecOperator(trilinos_prec_pt->epetra_operator_pt());
+     
+     // start of prec setup
+     double prec_setup_finish_t = TimingHelpers::timer();
+     if (Doc_time)
+      {
+       double t_prec_setup = prec_setup_finish_t - prec_setup_start_t;
+       oomph_info << "Time for preconditioner setup [sec]: "
+                  << t_prec_setup << std::endl;
+      }
     }
 
    // delete the oomph-matrix if required
@@ -485,6 +480,10 @@ void TrilinosAztecOOSolver::resolve(const DoubleVector &rhs,
  solve_using_AztecOO(epetra_r_pt,epetra_z_pt);            
 
  // Copy result to z
+ if (!solution.distribution_setup())
+  {
+   solution.build(rhs.distribution_pt(),0.0);
+  }
  TrilinosHelpers::copy_to_oomphlib_vector(epetra_z_pt,solution);
 
  // clean up memory

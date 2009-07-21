@@ -36,6 +36,7 @@
 #endif
 
 #include "preconditioner.h"
+#include "iterative_linear_solver.h"
 #include "matrices.h"
 #include "problem.h"
 #include <algorithm>
@@ -379,7 +380,126 @@ class ILUZeroPreconditioner<CRDoubleMatrix> : public Preconditioner
  Vector<CompressedMatrixCoefficient> L_row_entry;
 };
 
+//=============================================================================
+/// \short A preconditioner for performing inner iteration preconditioner 
+/// solves. The template argument SOLVER specifies the inner iteration
+/// solver (which must be derived from IterativeLinearSolver) and the
+/// template argument PRECONDITIONER specifies the preconditioner for the 
+/// inner iteration iterative solver.\n
+/// Note: For no preconditioning use the IdentityPreconditioner.
+//=============================================================================
+template <class SOLVER, class PRECONDITIONER> 
+class InnerIterationPreconditioner : public Preconditioner
+{
+  public:
 
+ /// Constructor
+ InnerIterationPreconditioner()
+  {
+   // create the solver
+   Solver_pt = new SOLVER;
+
+   // create the preconditioner
+   Preconditioner_pt = new PRECONDITIONER;
+
+#ifdef PARANOID
+   // paranoid check that the solver is an iterative solver and 
+   // the preconditioner is a preconditioner
+   if (dynamic_cast<IterativeLinearSolver* >(Solver_pt) == 0)
+    {
+     throw OomphLibError(
+      "The template argument SOLVER must be of type IterativeLinearSolver",
+      "InnerIterationPreconditioner::InnerIterationPreconditioner()",
+      OOMPH_EXCEPTION_LOCATION);     
+    }
+   if (dynamic_cast<Preconditioner*>(Preconditioner_pt) == 0)
+    {
+     throw OomphLibError(
+      "The template argument PRECONDITIONER must be of type Preconditioner",
+      "InnerIterationPreconditioner::InnerIterationPreconditioner()",
+      OOMPH_EXCEPTION_LOCATION);     
+    }
+#endif
+
+   // ensure the solver does not re-setup the preconditioner
+   Solver_pt->setup_preconditioner_before_solve() = false;
+
+   // pass the preconditioner to the solver
+   Solver_pt->preconditioner_pt() = Preconditioner_pt;
+  }
+
+ // destructor
+ ~InnerIterationPreconditioner()
+  {
+   delete Solver_pt;
+   delete Preconditioner_pt;
+  }
+
+ // clean the memory
+ void clean_up_memory()
+  {
+   Preconditioner_pt->clean_up_memory();
+   Solver_pt->clean_up_memory();
+  }
+
+ /// \short Preconditioner setup method. Setup the preconditioner for the inner
+ /// iteration solver.
+ void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
+  {
+   
+   // set the distribution
+   DistributableLinearAlgebraObject* dist_pt = 
+    dynamic_cast<DistributableLinearAlgebraObject*>
+    (matrix_pt);
+   if (dist_pt != 0)
+    {
+     Distribution_pt->rebuild(dist_pt->distribution_pt());
+    }
+   else
+    {
+     Distribution_pt->rebuild(problem_pt->communicator_pt(),
+                              matrix_pt->nrow(),false);
+    }
+
+   // setup the inner iteration preconditioner
+   Preconditioner_pt->setup(problem_pt,matrix_pt);
+
+   // setup the solverready for resolve
+   unsigned max_iter = Solver_pt->max_iter();
+   Solver_pt->max_iter() = 1;
+   DoubleVector x(Distribution_pt,0.0);
+   DoubleVector y(x);
+   Solver_pt->enable_resolve();
+   Solver_pt->solve(matrix_pt,x,y);
+   Solver_pt->max_iter() = max_iter;
+  }
+ 
+ /// \short Preconditioner solve method. Performs the specified number
+ /// of Krylov iterations preconditioned with the specified preconditioner
+ void preconditioner_solve(const DoubleVector &r, DoubleVector &z)
+  {
+   Solver_pt->resolve(r,z);
+  }
+
+ /// Access to convergence tolerance of the inner iteration solver
+ double& tolerance() {return Solver_pt->tolerance();}
+ 
+ /// Access to max. number of iterations of the inner iteration solver
+ unsigned& max_iter() {return Solver_pt->max_iter();} 
+
+ ///
+ SOLVER* solver_pt() { return Solver_pt; }
+
+ /// 
+ PRECONDITIONER* preconditioner_pt() { return Preconditioner_pt; }
+
+  private:
+
+ /// pointer to the underlying solver
+ SOLVER* Solver_pt;
+
+ /// pointer to the underlying preconditioner
+ PRECONDITIONER* Preconditioner_pt;
+};
 }
-
 #endif

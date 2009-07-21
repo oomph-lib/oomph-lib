@@ -199,7 +199,7 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
        new  SimpleFSIPreconditioner<CRDoubleMatrix>;
       
       // Set Navier Stokes mesh:
-      prec_pt->navier_stokes_mesh_pt()=this->bulk_mesh_pt();
+      prec_pt->set_navier_stokes_mesh(this->bulk_mesh_pt());
       
       // Build a compound mesh that contains all solid elements:
       
@@ -216,7 +216,7 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
       Mesh* solid_mesh_pt = new Mesh(s_mesh_pt);
       
       // Set solid mesh:
-      prec_pt->wall_mesh_pt()=solid_mesh_pt;
+      prec_pt->set_wall_mesh(solid_mesh_pt);
             
       
       switch (solver_sub_flag)
@@ -291,7 +291,7 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
       FSIPreconditioner* prec_pt=new FSIPreconditioner;
 
       // Set Navier Stokes mesh:
-      prec_pt->navier_stokes_mesh_pt()=this->bulk_mesh_pt();
+      prec_pt->set_navier_stokes_mesh(this->bulk_mesh_pt());
       
       // Build a compound mesh that contains all solid elements:
       
@@ -310,7 +310,7 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
       Mesh* combined_solid_mesh_pt = new Mesh(s_mesh_pt);
 
       // Set solid mesh:
-      prec_pt->wall_mesh_pt()=combined_solid_mesh_pt;
+      prec_pt->set_wall_mesh(combined_solid_mesh_pt);
         
       // Set flags in the underlying Navier-Stokes preconditioner
       prec_pt->navier_stokes_preconditioner_pt()->p_matrix_using_scaling() = true;
@@ -410,7 +410,7 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
       FSIPreconditioner* prec_pt=new FSIPreconditioner;
 
       // Set Navier Stokes mesh:
-      prec_pt->navier_stokes_mesh_pt()=this->bulk_mesh_pt();
+      prec_pt->set_navier_stokes_mesh(this->bulk_mesh_pt());
       
       // Build a compound mesh that contains all solid elements:
       
@@ -429,7 +429,7 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
       Mesh* combined_solid_mesh_pt = new Mesh(s_mesh_pt);
 
       // Set solid mesh:
-      prec_pt->wall_mesh_pt()=combined_solid_mesh_pt;
+      prec_pt->set_wall_mesh(combined_solid_mesh_pt);
         
       // Set flags in the underlying Navier-Stokes preconditioner
       prec_pt->navier_stokes_preconditioner_pt()->p_matrix_using_scaling() = true;

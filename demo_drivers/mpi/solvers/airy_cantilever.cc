@@ -690,15 +690,13 @@ int main(int argc, char* argv[])
  solver_pt->doc_convergence_history() = true;
 
  // set the preconditioner
- Preconditioner* prec_pt = 0;
+ GeneralPurposeBlockPreconditioner<CRDoubleMatrix>* prec_pt = 0;
  switch (prec)
   {
   case 0:
    prec_pt = new BlockDiagonalPreconditioner<CRDoubleMatrix>;
    dynamic_cast<BlockDiagonalPreconditioner<CRDoubleMatrix>* >
     (prec_pt)->use_two_level_parallelisation() = false;
-   dynamic_cast<BlockDiagonalPreconditioner<CRDoubleMatrix>* >
-    (prec_pt)->add_mesh(problem.solid_mesh_pt());
 #ifdef HAVE_HYPRE
    dynamic_cast<BlockDiagonalPreconditioner<CRDoubleMatrix>* >
     (prec_pt)->set_subsidiary_preconditioner_function
@@ -709,8 +707,6 @@ int main(int argc, char* argv[])
    prec_pt = new BlockDiagonalPreconditioner<CRDoubleMatrix>;
    dynamic_cast<BlockDiagonalPreconditioner<CRDoubleMatrix>* >
     (prec_pt)->use_two_level_parallelisation() = true;
-   dynamic_cast<BlockDiagonalPreconditioner<CRDoubleMatrix>* >
-    (prec_pt)->add_mesh(problem.solid_mesh_pt());
 #ifdef HAVE_HYPRE
    dynamic_cast<BlockDiagonalPreconditioner<CRDoubleMatrix>* >
     (prec_pt)->set_subsidiary_preconditioner_function
@@ -721,8 +717,6 @@ int main(int argc, char* argv[])
    prec_pt = new BlockTriangularPreconditioner<CRDoubleMatrix>;
    dynamic_cast<BlockTriangularPreconditioner<CRDoubleMatrix>* >
     (prec_pt)->upper_triangular();
-   dynamic_cast<BlockTriangularPreconditioner<CRDoubleMatrix>* >
-    (prec_pt)->add_mesh(problem.solid_mesh_pt());
 #ifdef HAVE_HYPRE
    dynamic_cast<BlockTriangularPreconditioner<CRDoubleMatrix>* >
     (prec_pt)->set_subsidiary_preconditioner_function
@@ -733,8 +727,6 @@ int main(int argc, char* argv[])
    prec_pt = new BlockTriangularPreconditioner<CRDoubleMatrix>;
    dynamic_cast<BlockTriangularPreconditioner<CRDoubleMatrix>* >
     (prec_pt)->lower_triangular();   
-   dynamic_cast<BlockTriangularPreconditioner<CRDoubleMatrix>* >
-    (prec_pt)->add_mesh(problem.solid_mesh_pt());
 #ifdef HAVE_HYPRE
    dynamic_cast<BlockTriangularPreconditioner<CRDoubleMatrix>* >
     (prec_pt)->set_subsidiary_preconditioner_function
@@ -742,6 +734,15 @@ int main(int argc, char* argv[])
 #endif
    break;
   }
+
+ // set the mesh
+ prec_pt->add_mesh(problem.solid_mesh_pt());
+
+ // set the DOF to block map
+ Vector<unsigned> dof_to_block_map(4,0);
+ dof_to_block_map[1] = 1;
+ dof_to_block_map[3] = 1;
+ prec_pt->set_dof_to_block_map(dof_to_block_map);
 
  // solve
  problem.linear_solver_pt() = solver_pt;

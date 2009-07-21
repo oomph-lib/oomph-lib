@@ -74,7 +74,7 @@ void BiharmonicPreconditioner::setup(Problem* problem_pt,
 
  // paranoid check that teh bulk element mesh has been set
 #ifdef PARANOID
- if (Mesh_pt[0]==0)
+ if (Bulk_element_mesh_pt==0)
   {
    std::ostringstream error_message;
    error_message
@@ -85,18 +85,22 @@ void BiharmonicPreconditioner::setup(Problem* problem_pt,
   }
 #endif
 
+ // setup the mesh
+ this->set_mesh(0,problem_pt,Bulk_element_mesh_pt);
+
  //setup the blocks look up schemes
  this->block_setup(problem_pt,matrix_pt);
 
  // determine whether this preconditioner has 4 or 5 block types and set
  // Nblock_types if neccessary
- unsigned n_row = this->master_nrow();
- bool nblock_type_check = true;
- for (unsigned i = 0; i < n_row; i++)
-  {
-   if (this->block_number(i) == 4) { nblock_type_check = false; }
-  }
- if (nblock_type_check) { Nblock_types = 4; }
+// unsigned n_row = this->master_nrow();
+// bool nblock_type_check = true;
+// for (unsigned i = 0; i < n_row; i++)
+//  {
+//   if (this->block_number(i) == 4) { nblock_type_check = false; }
+//  }
+// if (nblock_type_check) { Nblock_types = 4; }
+//
 
  // Need to recast here -- input type is determined by specs in
  // base class.
@@ -193,7 +197,7 @@ void BiharmonicPreconditioner::setup(Problem* problem_pt,
   return_block_vector(3,block_z,z);
 
   // solve the hijacked sub block preconditioner if required
-  if (Nblock_types == 5)
+  if (this->nblock_types() == 5)
    {
     block_r.clear();
     block_z.clear();
@@ -482,7 +486,7 @@ void InexactSubBiharmonicPreconditioner::compute_inexact_schur_complement()
   unsigned n_element_x = 
    dynamic_cast<HermiteQuadMesh<Hijacked<BiharmonicElement<2> > >* >
    (dynamic_cast<BiharmonicPreconditioner* >
-    (Master_block_preconditioner_pt)->bulk_element_mesh_pt())
+    (this->master_block_preconditioner_pt())->bulk_element_mesh_pt())
    ->nelement_in_dim(0);
   
   // nnz in schur complement (initialised to zero)

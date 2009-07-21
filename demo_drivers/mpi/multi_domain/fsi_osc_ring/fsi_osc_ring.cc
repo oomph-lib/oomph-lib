@@ -158,6 +158,8 @@ public:
                 const double& eps_ampl, const double& pcos_initial,
                 const double& pcos_duration);
 
+ ~FSIRingProblem(){}
+
  /// Update after solve (empty)
  void actions_after_newton_solve() {}
 
@@ -778,12 +780,12 @@ void FSIRingProblem::dynamic_run()
  // Number of steps
  unsigned nstep=300;
 
- // Nontrivial command line input: validation: only do three steps
- if (CommandLineArgs::Argc>1)
-  {
+ // Nontrivial command line input: validation: only do two steps
+// if (CommandLineArgs::Argc>1)
+//  {
    nstep=1;
    cout << "Only doing nstep steps for validation: " << nstep << std::endl;
-  }
+//  }
 
  // Set initial timestep
  double dt=0.004; 
@@ -923,6 +925,9 @@ void FSIRingProblem::dynamic_run()
 //=====================================================================
 int main(int argc, char* argv[])
 {
+
+ std::cout << "test" << std::endl;
+
 #ifdef OOMPH_HAS_MPI
  MPI_Helpers::init(argc,argv);
 #endif
@@ -943,10 +948,14 @@ int main(int argc, char* argv[])
  double eps_ampl=0.0; // ADJUST
 
  //Set up the problem
- FSIRingProblem problem(nelem,eps_ampl,pcos_initial,pcos_duration);
+ FSIRingProblem* problem_pt 
+  = new FSIRingProblem(nelem,eps_ampl,pcos_initial,pcos_duration);
 
  // Do parameter study
- problem.dynamic_run();
+ problem_pt->dynamic_run();
+
+ // clean
+ delete problem_pt;
 
 #ifdef OOMPH_HAS_MPI
  MPI_Helpers::finalize();

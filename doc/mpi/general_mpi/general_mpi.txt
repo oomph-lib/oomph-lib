@@ -127,7 +127,7 @@ any additional concerns are discussed in the accompanying tutorials.
   the (third-party) linear solvers available from within \c oomph-lib
   varies greatly and their performance is also strongly dependent on
   the underlying hardware, <em> e.g.</em> the speed of your machine's 
-  parallel interconnects, etc.
+  interconnects, etc.
   \n\n
 - The MPI header file \c mpi.h is included in \c oomph-lib's
   generic header, so it is not necessary to include it in the
@@ -155,33 +155,29 @@ any additional concerns are discussed in the accompanying tutorials.
 <HR>
 
 \subsection solvers oomph-lib's parallel linear solvers
-
-- \c oomph-lib's default linear solver is 
-  <A HREF="http://crd.lbl.gov/~xiaoye/SuperLU">SuperLU</A>. 
+- \c oomph-lib's default linear solver is \c SuperLUSolver. This is a
+  wrapper to the 
+  <A HREF="http://crd.lbl.gov/~xiaoye/SuperLU">SuperLU /
+  SuperLU_DIST</A> projects. 
   If \c oomph-lib is built with MPI support and the executable is
-  run on multiple processors, \c SuperLU's parallel counterpart, 
-  \c SuperLU_dist, is used instead. 
+  run on multiple processors, \c SuperLU_DIST will be used by default,
+  otherwise \c SuperLU is used.
   \n\n
-- Of \c oomph-lib's own iterative linear solvers, only ***hierher RICHARD
-  to fill in details ***
-  is parallelised. We recommend using \c oomph-lib's  wrappers to the 
-  parallel Krylov subspace solvers from the 
-  <a href="https://computation.llnl.gov/casc/linear_solvers/sls_hypre.html">
-  Hypre</a> and <a href="http://trilinos.sandia.gov/">
-  Trilinos </a> libraries (see 
+- Of \c oomph-lib's own iterative linear solvers, only \c CG
+  is parallelised. We recommend using \c oomph-lib's  wrapper to the 
+  parallel Krylov subspace solvers from the
+  <a href="http://trilinos.sandia.gov/">
+  Trilinos </a> library (see 
   <a href="../../../the_distribution/html/index.html#external_dist"> 
   the \c oomph-lib installation page</a> for details on how to install
-  these) instead. The interfaces are identical to those
+  this) instead. The interfaces are identical to those
   used to call these solvers in serial; see 
   <a href="../../../linear_solvers/html/index.html"> the linear solver
   tutorial</a> for details.
   \n\n
 - \c oomph-lib's block preconditioning framework is fully 
-  parallelised ***hierher RICHARD: TRUE? *** and can be used in the 
-  same way as in a serial code. ***hierher RICHARD:
-  CAN/SHOULD WE SAY SOMETHING MORE ABOUT WHICH OF OUR PRECONDITIONERS ARE
-  PARALLELISED? ***
-.
+  parallelised and can be used in the same way as in a serial code.
+
 
 ########################################################################
 
@@ -228,7 +224,8 @@ processor must adapt its own copy of the entire mesh, even though it
 operates on a subset of the elements when assembling the Jacobian 
 matrix.
 
-In contrast, \c oomph-lib's domain decomposition procedures allow a \c Problem
+To address this problem, \c oomph-lib's domain decomposition
+procedures allow a \c Problem
 to be distributed over multiple processors so that each processor 
 holds a fraction of the \c Problem's elements, which 
 can lead to substantial reductions in memory usage per processor and
@@ -338,7 +335,6 @@ strategy adopted. For simplicity, we shall restrict the discussion
 to the 2D case and ignore various complications that arise with more 
 complicated mesh partitionings.
 
-@I w 0.75\textwidth decomposition "Sketch illustrating the phases of the parallel mesh adaptation procedure for a problem that is distributed over four processors. The columns illustrate the evolution of the mesh on each of the four processors. The colours of the objects indicate which processor is associated with them. "
 
  The initial distribution of a problem proceeds in two stages:
  
@@ -392,7 +388,8 @@ complicated mesh partitionings.
   independently assigns equation numbers for 
   its associated (non-halo) elements and nodes and the equation
   numbers are then synchronised between processors.
-.
+
+@I w 0.75\textwidth decomposition "Sketch illustrating the phases of the parallel mesh adaptation procedure for a problem that is distributed over four processors. The columns illustrate the evolution of the mesh on each of the four processors. The colours of the objects indicate which processor is associated with them. "
 
   Aside from the initial refinement process, 
   the functionality described above is implemented in a single
@@ -686,7 +683,37 @@ Turek and Hron's FSI benchmark problem </a>.
 <HR>
 <HR>
 
-\section problems Trouble-shooting and debugging
+\section mpidetails Further MPI Details
+
+- \c oomph-lib mirrors the MPI C bindings with the methods 
+  \c MPI_Helpers::init(...) and \c MPI_Helpers::finalize(); which
+  will call the methods \c MPI_Init(...) and \c MPI_Finalize()
+  respectively. In addition, these methods automatically create 
+  (and destroy) a new instance of \c MPI_Comm  with the same set of 
+  processes as \c MPI_COMM_WORLD but different communication context. 
+  This \c MPI_Comm instance is accessible through 
+  \c MPI_Helpers::Communicator_pt which
+  returns a pointer to an \c OomphCommunicator object.
+- An \c OomphCommunicator is \c oomph-lib's object oriented wrapper to an 
+  \c MPI_Comm.
+- Under normal operation, a user does not need to specify the
+  \c OomphCommunicator for any object -- this is all handled
+  automatically by oomph-lib. For example, on construction a \c
+  Problem will use the \c MPI_Helpers communicator, a \c LinearSolver 
+  will use the corresponding \c Problem communicator, and a 
+  \c Preconditioner will
+  use the corresponding \c IterativeLinearSolver communicator.
+  
+
+  
+
+########################################################################
+########################################################################
+
+<HR>
+<HR>
+
+\section problem Trouble-shooting and debugging
 
 \subsection checking_and_documenting Debugging and documenting the distribution
 

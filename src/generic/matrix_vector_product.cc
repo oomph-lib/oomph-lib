@@ -148,6 +148,7 @@ namespace oomph
                         "MatrixVectorProduct::multiply()",
                         OOMPH_EXCEPTION_LOCATION);
    }
+
   // Check to see if x.size() = ncol().
   if (*this->Column_distribution_pt != *x.distribution_pt())
    {
@@ -179,7 +180,7 @@ namespace oomph
   if (!y.distribution_setup())
    {
     // Resize and initialize the solution vector
-    y.rebuild(this->distribution_pt());
+    y.build(this->distribution_pt(),0.0);
    }
 
 #ifdef HAVE_TRILINOS
@@ -274,7 +275,7 @@ namespace oomph
   if (!y.distribution_setup())
    {
     // Resize and initialize the solution vector
-    y.rebuild(this->Column_distribution_pt);
+    y.build(this->Column_distribution_pt,0.0);
    }
 
 #ifdef HAVE_TRILINOS

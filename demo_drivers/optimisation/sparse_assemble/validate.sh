@@ -17,7 +17,7 @@ mkdir Validation
 cd Validation
 
 echo "Running validation of different assembly strategies"
-for n in 1 2 3 4
+for n in 1 2 3 4 5
  do
   ../sparse_assemble_test 10 10 $n 1 0 > OUTPUT_$n
   #UNIX sort with magic to do numerical sorting on the first column

@@ -527,8 +527,8 @@ void run_it(LinearSolver* linear_solver_pt)
  DoubleVector one;
  DoubleVector solution;
  problem.get_jacobian(residual,matrix);
- one.rebuild(residual.distribution_pt());
- other_rhs.rebuild(residual.distribution_pt());
+ one.build(residual.distribution_pt(),0.0);
+ other_rhs.build(residual.distribution_pt(),0.0);
  one.initialise(1.0);
  matrix.multiply(one,other_rhs);
  linear_solver_pt->enable_resolve();
@@ -653,7 +653,7 @@ int main(int argc, char *argv[])
  double tol=1.0e-12;
 
  // Pointer to linear solver
- LinearSolver* linear_solver_pt=new SuperLU;
+ LinearSolver* linear_solver_pt=new SuperLUSolver;
 
  // Pointer to iterative linear solver
  IterativeLinearSolver* it_linear_solver_pt=0;

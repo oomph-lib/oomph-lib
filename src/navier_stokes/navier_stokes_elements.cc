@@ -2325,46 +2325,45 @@ void QTaylorHoodElement<DIM>::get_dof_numbers_for_unknowns(
  std::list<std::pair<unsigned long,
  unsigned> >& block_lookup_list)
 {
- // number of nodes
- unsigned n_node = this->nnode();
- 
- // local eqn no for pressure unknown
-// unsigned p_index = this->p_nodal_index_nst();
- 
- // temporary pair (used to store block lookup prior to being added to list)
- std::pair<unsigned,unsigned> block_lookup;
- 
- // loop over the nodes
- for (unsigned n = 0; n < n_node; n++)
-  {
-   // find the number of values at this node
-   unsigned nv = this->node_pt(n)->nvalue();
+   // number of nodes
+   unsigned n_node = this->nnode();
    
-   //loop over these values
-   for (unsigned v = 0; v < nv; v++)
+   // local eqn no for pressure unknown
+// unsigned p_index = this->p_nodal_index_nst();
+   
+   // temporary pair (used to store block lookup prior to being added to list)
+   std::pair<unsigned,unsigned> block_lookup;
+   
+   // loop over the nodes
+   for (unsigned n = 0; n < n_node; n++)
     {
-     // determine local eqn number
-     int local_eqn_number = this->nodal_local_eqn(n, v);
-     
-     // ignore pinned values - far away degrees of freedom resulting 
-     // from hanging nodes can be ignored since these are be dealt
-     // with by the element containing their master nodes
-     if (local_eqn_number >= 0)
+     // find the number of values at this node
+     unsigned nv = this->required_nvalue(n); 
+
+     //loop over these values
+     for (unsigned v = 0; v < nv; v++)
       {
-       // store block lookup in temporary pair: Global equation number
-       // is the first entry in pair
-       block_lookup.first = this->eqn_number(local_eqn_number);
+       // determine local eqn number
+       int local_eqn_number = this->nodal_local_eqn(n, v);
        
-       // set block numbers: Block number is the second entry in pair
-        block_lookup.second = v;
-       
-       // add to list
-       block_lookup_list.push_front(block_lookup);
+       // ignore pinned values - far away degrees of freedom resulting 
+       // from hanging nodes can be ignored since these are be dealt
+       // with by the element containing their master nodes
+       if (local_eqn_number >= 0)
+        {
+         // store block lookup in temporary pair: Global equation number
+         // is the first entry in pair
+         block_lookup.first = this->eqn_number(local_eqn_number);
+         
+         // set block numbers: Block number is the second entry in pair
+         block_lookup.second = v;
+         
+         // add to list
+         block_lookup_list.push_front(block_lookup);
+        }
       }
     }
   }
-}
-
 
 
 //====================================================================

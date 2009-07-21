@@ -86,7 +86,10 @@ public:
                     PoissonEquations<1>::PoissonSourceFctPt source_fct_pt);
 
  /// Destructor (empty)
- ~OneDPoissonProblem(){}
+ ~OneDPoissonProblem()
+  {
+   delete mesh_pt();
+  }
 
  /// Update the problem specs before solve: (Re)set boundary conditions
  void actions_before_newton_solve();
@@ -119,6 +122,9 @@ OneDPoissonProblem<ELEMENT>::OneDPoissonProblem(const unsigned& n_element,
  PoissonEquations<1>::PoissonSourceFctPt source_fct_pt) : 
  Source_fct_pt(source_fct_pt)
 { 
+ Problem::Sparse_assembly_method = Perform_assembly_using_two_arrays;
+
+// Problem::Problem_is_nonlinear = false;
  // Set domain length 
  double L=1.0;
 

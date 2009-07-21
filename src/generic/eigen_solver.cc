@@ -46,7 +46,7 @@ namespace oomph
 //===============================================================
  ARPACK::ARPACK() : EigenSolver(), Spectrum(1), NArnoldi(30),
                     Small(true), Compute_eigenvectors(true)
- {Default_linear_solver_pt = Linear_solver_pt = new SuperLU;}
+ {Default_linear_solver_pt = Linear_solver_pt = new SuperLUSolver;}
 
 //===============================================================
 /// Destructor, delete the default linear solver
@@ -173,8 +173,8 @@ void ARPACK::solve_eigenproblem(Problem* const &problem_pt,
  problem_pt->get_eigenproblem_matrices(M,AsigmaM,sigmar);
 
  //Allocate storage for the vectors to be used in matrix vector products
- DoubleVector rhs(Distribution_pt);
- DoubleVector x(Distribution_pt);
+ DoubleVector rhs(Distribution_pt,0.0);
+ DoubleVector x(Distribution_pt,0.0);
  
 
  bool LOOP_FLAG=true;
@@ -375,7 +375,7 @@ void ARPACK::solve_eigenproblem(Problem* const &problem_pt,
     eigenvector.resize(nconv);
     for(int j=0;j<nconv;j++)
      {
-      eigenvector[j].rebuild(Distribution_pt);
+      eigenvector[j].build(Distribution_pt,0.0);
       for(int i=0;i<n;i++)
        {
         eigenvector[j][i] = z[0][j*n+i];
@@ -539,7 +539,7 @@ void ARPACK::solve_eigenproblem(Problem* const &problem_pt,
     std::complex<double>(sigmar + alpha_r[i]/beta[i],alpha_i[i]/beta[i]);
 
    //Resize the eigenvector  storage
-   eigenvector[i].rebuild(Distribution_pt);
+   eigenvector[i].build(Distribution_pt,0.0);
    //Load up the eigenvector (assume that it's real)
    for(int k = 0; k < n; ++k ) 
     { 

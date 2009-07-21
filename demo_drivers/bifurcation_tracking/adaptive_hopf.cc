@@ -1253,8 +1253,8 @@ int main()
  eigenvectors.resize(2);
  LinearAlgebraDistribution dist(problem.communicator_pt(),n_dof,false);
  //Rebuild the vector
- eigenvectors[0].rebuild(&dist);
- eigenvectors[1].rebuild(&dist);
+ eigenvectors[0].build(&dist,0.0);
+ eigenvectors[1].build(&dist,0.0);
  //eigenvectors[0].resize(n_dof);
  //eigenvectors[1].resize(n_dof);
 

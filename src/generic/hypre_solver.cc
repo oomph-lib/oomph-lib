@@ -167,7 +167,8 @@ namespace oomph
                         communicator_pt()->mpi_comm(), 
                         lower,upper, &hypre_ij_vector);
 #else
-   HYPRE_IJVectorCreate(MPI_COMM_WORLD,lower,upper, &hypre_ij_vector);
+   HYPRE_IJVectorCreate(MPI_COMM_WORLD,
+                        lower,upper, &hypre_ij_vector);
 #endif
    HYPRE_IJVectorSetObjectType(hypre_ij_vector, HYPRE_PARCSR);
    HYPRE_IJVectorInitialize(hypre_ij_vector);
@@ -222,7 +223,8 @@ namespace oomph
    HYPRE_IJVectorCreate(dist_pt->communicator_pt()->mpi_comm(), 
                         lower,upper, &hypre_ij_vector);
 #else
-   HYPRE_IJVectorCreate(MPI_COMM_WORLD,lower,upper, &hypre_ij_vector);
+   HYPRE_IJVectorCreate(MPI_COMM_WORLD,
+                        lower,upper, &hypre_ij_vector);
 #endif
    HYPRE_IJVectorSetObjectType(hypre_ij_vector, HYPRE_PARCSR);
    HYPRE_IJVectorInitialize(hypre_ij_vector);
@@ -495,7 +497,12 @@ namespace oomph
     // Euclid preconditioner
     else if (Internal_preconditioner==Euclid)
      {
+#ifdef OOMPH_HAS_MPI
+      HYPRE_EuclidCreate(Hypre_distribution_pt->communicator_pt()->mpi_comm(), 
+                         &Preconditioner);
+#else
       HYPRE_EuclidCreate(MPI_COMM_WORLD, &Preconditioner);
+#endif
 
       // set Euclid parameters using command line like array
       int n_args = 0;
@@ -579,7 +586,12 @@ namespace oomph
     // ParaSails preconditioner
     else if (Internal_preconditioner==ParaSails)
      {
+#ifdef OOMPH_HAS_MPI
+      HYPRE_ParaSailsCreate
+       (Hypre_distribution_pt->communicator_pt()->mpi_comm(), &Preconditioner);
+#else
       HYPRE_ParaSailsCreate(MPI_COMM_WORLD, &Preconditioner);
+#endif
       HYPRE_ParaSailsSetSym(Preconditioner, ParaSails_symmetry);
       HYPRE_ParaSailsSetParams(Preconditioner,
                                ParaSails_thresh,
@@ -672,7 +684,12 @@ namespace oomph
      {
       oomph_info << "Setting up Euclid, ";
      }
+#ifdef OOMPH_HAS_MPI
+    HYPRE_EuclidCreate(Hypre_distribution_pt->communicator_pt()->mpi_comm(), 
+                       &Solver);
+#else
     HYPRE_EuclidCreate(MPI_COMM_WORLD, &Solver);
+#endif
 
     // set Euclid parameters using command line like array
     int n_args = 0;
@@ -765,8 +782,12 @@ namespace oomph
      {
       oomph_info << "Setting up ParaSails, ";
      }
-
+#ifdef OOMPH_HAS_MPI
+    HYPRE_ParaSailsCreate(Hypre_distribution_pt->communicator_pt()->mpi_comm(),
+                          &Solver);
+#else
     HYPRE_ParaSailsCreate(MPI_COMM_WORLD, &Solver);
+#endif
     HYPRE_ParaSailsSetSym(Solver, ParaSails_symmetry);
     HYPRE_ParaSailsSetParams(Solver,
                              ParaSails_thresh,
@@ -788,7 +809,12 @@ namespace oomph
       oomph_info << "Setting up CG, ";
      }
 
+#ifdef OOMPH_HAS_MPI
+    HYPRE_ParCSRPCGCreate(Hypre_distribution_pt->communicator_pt()->mpi_comm(),
+                          &Solver);
+#else
     HYPRE_ParCSRPCGCreate(MPI_COMM_WORLD, &Solver);
+#endif
     HYPRE_PCGSetTol(Solver, Tolerance);
     HYPRE_PCGSetLogging(Solver, 0);
     HYPRE_PCGSetPrintLevel(Solver, Krylov_print_level);
@@ -857,7 +883,12 @@ namespace oomph
       oomph_info << "Setting up GMRES";
      }
     
-    HYPRE_ParCSRGMRESCreate(MPI_COMM_WORLD, &Solver);
+#ifdef OOMPH_HAS_MPI
+    HYPRE_ParCSRGMRESCreate
+     (Hypre_distribution_pt->communicator_pt()->mpi_comm(),&Solver);
+#else
+    HYPRE_ParCSRGMRESCreate(MPI_COMM_WORLD,&Solver);
+#endif
     HYPRE_GMRESSetTol(Solver, Tolerance);
     HYPRE_GMRESSetKDim(Solver, Max_iter);
     HYPRE_GMRESSetLogging(Solver, 0);
@@ -924,8 +955,12 @@ namespace oomph
      {
       oomph_info << "Setting up BiCGStab";
      }
-    
+#ifdef OOMPH_HAS_MPI
+    HYPRE_ParCSRBiCGSTABCreate
+     (Hypre_distribution_pt->communicator_pt()->mpi_comm(), &Solver);
+#else
     HYPRE_ParCSRBiCGSTABCreate(MPI_COMM_WORLD, &Solver);
+#endif
     HYPRE_BiCGSTABSetTol(Solver, Tolerance);
     HYPRE_BiCGSTABSetLogging(Solver, 0);
     HYPRE_BiCGSTABSetPrintLevel(Solver, Krylov_print_level);
@@ -1047,20 +1082,13 @@ namespace oomph
   HYPRE_IJVector solution_ij;
   HYPRE_ParVector solution_par;
 
-  // temporarily rebuild the solution vector so that is has the same
-  // distribution as this Hypre solver
-  //solution.rebuild(Hypre_distribution_pt);
-
   // set up rhs_values and vec_indices
   HypreHelpers::create_HYPRE_Vector(rhs,
                                     Hypre_distribution_pt,
                                     rhs_ij,
                                     rhs_par);
   
-  //Create solution vector using the RHS vector
-  //Ideally we should be able to create an empty HYPRE vector
-  HypreHelpers::create_HYPRE_Vector(rhs,
-                                    Hypre_distribution_pt,
+  HypreHelpers::create_HYPRE_Vector(Hypre_distribution_pt,
                                     solution_ij,
                                     solution_par);
   
@@ -1147,22 +1175,23 @@ namespace oomph
    {
     indices[i] = first_row + i;
    }
-
-   //Store the RHS distribution pointer, in case somebody has passed
-  //in the same vector as RHS and solution.
-  LinearAlgebraDistribution  rhs_dist = *rhs.distribution_pt();
-
-  //Now, make solution vector consistent with Hypre distribution
-  //and set all initial values to zero
-  solution.rebuild(Hypre_distribution_pt,0.0);
+  LinearAlgebraDistribution* soln_dist_pt;
+  if (solution.distribution_setup())
+   {
+    soln_dist_pt = new LinearAlgebraDistribution(solution.distribution_pt());
+   }
+  else
+   {
+    soln_dist_pt = new LinearAlgebraDistribution(rhs.distribution_pt());
+   }
+  solution.build(Hypre_distribution_pt,0.0);
   HYPRE_IJVectorGetValues(solution_ij, 
                           nrow_local, 
                           indices, 
                           solution.values_pt());
-  //Redistribute according to the original RHS distribution
-  solution.redistribute(rhs_dist);
-  //Clean up
+  solution.redistribute(soln_dist_pt);
   delete[] indices;
+  delete soln_dist_pt;
   
   // output any error message
   if (Hypre_error_messages)
@@ -1576,7 +1605,7 @@ namespace oomph
 #endif
    }
 
-  // call hypre_solve\r_setup
+  // call hypre_solver_setup
   hypre_solver_setup();
  }
 

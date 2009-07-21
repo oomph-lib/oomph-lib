@@ -437,13 +437,14 @@ int main()
    cpu_start=clock();
    
    // Build linear solver
-   linear_solver_pt = new SuperLU;
+   linear_solver_pt = new SuperLUSolver;
    
    /// Use compressed row storage
-   static_cast<SuperLU*>(linear_solver_pt)->compressed_row_flag()=true;
+   static_cast<SuperLUSolver*>(linear_solver_pt)
+    ->compressed_row_flag_for_superlu_serial()=true;
    
    /// Switch on full doc
-   static_cast<SuperLU*>(linear_solver_pt)->doc_stats()=true;
+   static_cast<SuperLUSolver*>(linear_solver_pt)->doc_stats()=true;
    
    // Choose result directory
    dir_name="RESLT_cr";
@@ -481,13 +482,14 @@ int main()
    cpu_start=clock();
    
    // Build linear solver
-   linear_solver_pt = new SuperLU;
+   linear_solver_pt = new SuperLUSolver;
    
    /// Use compressed row storage
-   static_cast<SuperLU*>(linear_solver_pt)->compressed_row_flag()=false;
+   static_cast<SuperLUSolver*>(linear_solver_pt)
+    ->compressed_row_flag_for_superlu_serial()=false;
    
    /// Switch on full doc
-   static_cast<SuperLU*>(linear_solver_pt)->doc_stats()=true;
+   static_cast<SuperLUSolver*>(linear_solver_pt)->doc_stats()=true;
 
    // Choose result directory
    dir_name="RESLT_cc";

@@ -291,6 +291,10 @@ void BoussinesqPreconditioner::setup(Problem* problem_pt,
   // Clean up any existing data
   this->clean_up_memory();
 
+  // set meshes
+  this->set_nmesh(1);
+  this->set_mesh(0,problem_pt,problem_pt->mesh_pt());
+
   // Get total number of dofs. hierher Offer option to pass in mesh! 
   unsigned n_dof=problem_pt->mesh_pt()->finite_element_pt(0)->dim()+2;
 
@@ -326,8 +330,8 @@ void BoussinesqPreconditioner::setup(Problem* problem_pt,
 
   // Setup the Navier Stokes preconditioner: Tell it about the
   // Navier Stokes mesh and set it up. hierher
-  Navier_stokes_preconditioner_pt->navier_stokes_mesh_pt() = 
-   problem_pt->mesh_pt(); 
+  Navier_stokes_preconditioner_pt->set_navier_stokes_mesh
+   (problem_pt->mesh_pt()); 
   Navier_stokes_preconditioner_pt->setup(problem_pt,matrix_pt);
   
   // Recast Jacobian matrix to CRDoubleMatrix
@@ -419,7 +423,7 @@ void BoussinesqPreconditioner::preconditioner_solve(const DoubleVector &r,
  // if z is not setup then give it the same distribution
  if (!z.distribution_pt()->setup())
   {
-   z.rebuild(r.distribution_pt());
+   z.build(r.distribution_pt(),0.0);
   }
 
  // Make copy of residual vector (to overcome const-ness
@@ -1227,7 +1231,11 @@ void compute_error(ostream &outfile,
     }
   } //End of function
 
-
+ ///
+ unsigned ndof_types() 
+  {
+   return DIM+2;
+  }
 
  
  /// \short Create a list of pairs for all unknowns in this element,

@@ -306,7 +306,7 @@ void LowStorageRungeKutta<4>::timestep(
    const unsigned n_dof= minv_res.nrow();
 
    //First time round resize k and initialise to zero
-   if(i==0) {k.rebuild(minv_res.distribution_pt());}
+   if(i==0) {k.build(minv_res.distribution_pt(),0.0);}
    //Now construct the next value of k
    for(unsigned n=0;n<n_dof;n++)
     {

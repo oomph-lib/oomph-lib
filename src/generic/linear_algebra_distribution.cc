@@ -62,12 +62,14 @@ namespace oomph
   
 #ifdef OOMPH_HAS_MPI
   // gather the First_row vector
-  MPI_Allgather(&Nrow_local[my_rank],1,MPI_UNSIGNED,
+  unsigned my_nrow_local = Nrow_local[my_rank];
+  MPI_Allgather(&my_nrow_local,1,MPI_UNSIGNED,
                 &Nrow_local[0],1,MPI_UNSIGNED,
                 Comm_pt->mpi_comm());
 
   // gather the Nrow_local vector
-  MPI_Allgather(&First_row[my_rank],1,MPI_UNSIGNED,
+  unsigned my_first_row = First_row[my_rank];
+  MPI_Allgather(&my_first_row,1,MPI_UNSIGNED,
                 &First_row[0],1,MPI_UNSIGNED,
                 Comm_pt->mpi_comm());    
 #endif
@@ -101,29 +103,36 @@ namespace oomph
 #ifdef PARANOID
   // paranoid check that the distribution works
 
+
   // check that none of the processors partition overlap
   for (int p = 0; p < nproc; p++)
    {
-    for (int pp = p+1; pp < nproc; pp++)
+    if (Nrow_local[p] > 0)
      {
-      if ((First_row[p] >= First_row[pp] &&
-           First_row[p] < First_row[pp] + Nrow_local[pp]) ||
-          (First_row[p] + Nrow_local[p] -1 >= First_row[pp] &&
-           First_row[p] + Nrow_local[p] -1 <
-           First_row[pp] + Nrow_local[pp]))
+      for (int pp = p+1; pp < nproc; pp++)
        {
-        std::ostringstream error_message;
-        error_message << "The distributed rows on processor " << p
-                      << " and processor " << pp << " overlap.\n"
-                      << "Processor " << p << " : first_row = "
-                      << First_row[p] << ", nrow = " 
-                      << Nrow_local[p] << ".\n"
-                      << "Processor " << pp << " : first_row = "
-                      << First_row[pp] << ", nrow = " 
-                      << Nrow_local[pp] << ".\n";
-        throw OomphLibWarning(error_message.str(),
-                              "LinearAlgebraDistribution::distribute(...)",
-                              OOMPH_EXCEPTION_LOCATION);
+        if (Nrow_local[pp] > 0)
+         {
+          if ((First_row[p] >= First_row[pp] &&
+               First_row[p] < First_row[pp] + Nrow_local[pp]) ||
+              (First_row[p] + Nrow_local[p] -1 >= First_row[pp] &&
+               First_row[p] + Nrow_local[p] -1 <
+               First_row[pp] + Nrow_local[pp]))
+           {
+            std::ostringstream error_message;
+            error_message << "The distributed rows on processor " << p
+                          << " and processor " << pp << " overlap.\n"
+                          << "Processor " << p << " : first_row = "
+                          << First_row[p] << ", nrow = " 
+                          << Nrow_local[p] << ".\n"
+                          << "Processor " << pp << " : first_row = "
+                          << First_row[pp] << ", nrow = " 
+                          << Nrow_local[pp] << ".\n";
+            throw OomphLibWarning(error_message.str(),
+                                  "LinearAlgebraDistribution::distribute(...)",
+                                  OOMPH_EXCEPTION_LOCATION);
+           }
+         }
        }
      }
    }

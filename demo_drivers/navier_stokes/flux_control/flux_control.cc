@@ -1180,20 +1180,23 @@ void CollapsibleChannelProblem<ELEMENT>::setup_outflow_flux_control_elements()
    // Build the corresponding flux control element
    NavierStokesFluxControlElement<ELEMENT>* flux_element_pt = new 
     NavierStokesFluxControlElement<ELEMENT>(bulk_elem_pt, face_index);
+//   flux_element_pt->dim() = 2;
 
    //Add the new element to its mesh
    Outflow_flux_control_sub_mesh_pt->add_element_pt(flux_element_pt);     
   }
-  
+ 
     
  // Build master element
  NetFluxControlElement* flux_control_el_pt = new NetFluxControlElement(
   Outflow_flux_control_sub_mesh_pt,
   &Prescribed_volume_flux);
+ 
 
  // Set the block id for the pressure unknown in this element for the 
  // preconditioning, in 2D the Navier-Stokes pressure is in block 2
  flux_control_el_pt->ndof_number_for_unknown() = 0;
+ flux_control_el_pt->dim() = 2;
 
  // Add NetFluxControlElement to its mesh
  Outflow_flux_control_master_mesh_pt->
@@ -1350,7 +1353,8 @@ void CollapsibleChannelProblem<ELEMENT>::setup_outflow_impedance_elements()
      // Build the corresponding flux control element
      NavierStokesFluxControlElement<ELEMENT>* flux_element_pt = new 
       NavierStokesFluxControlElement<ELEMENT>(bulk_elem_pt, face_index);
-     
+//     flux_element_pt->dim() = 2;
+
      //Add the new element to its mesh
      Outflow_flux_control_sub_mesh_pt->add_element_pt(flux_element_pt);     
     }
@@ -1381,7 +1385,8 @@ void CollapsibleChannelProblem<ELEMENT>::setup_outflow_impedance_elements()
    NetFluxControlElementForWomersleyPressureControl* flux_control_element
    = new NetFluxControlElementForWomersleyPressureControl
       (Outflow_flux_control_sub_mesh_pt, pressure_control_element);
-   
+   flux_control_element->dim() = 2;
+
    Outflow_impedance_master_mesh_pt->add_element_pt(flux_control_element);
   }
 }
@@ -1890,12 +1895,12 @@ int main(int argc, char *argv[])
       (fsi_preconditioner_pt->navier_stokes_preconditioner_pt());
 
      // Set solid mesh
-     fsi_preconditioner_pt->wall_mesh_pt()=
-      problem.outflow_impedance_master_mesh_pt();
+     fsi_preconditioner_pt->set_wall_mesh(
+      problem.outflow_impedance_master_mesh_pt());
 
      // Set fluid mesh
-     fsi_preconditioner_pt->navier_stokes_mesh_pt()=
-      problem.create_mesh_for_navier_stokes_preconditioner();
+     fsi_preconditioner_pt->set_navier_stokes_mesh(
+      problem.create_mesh_for_navier_stokes_preconditioner());
 
      // Pass the FSI preconditioner to the solver
      iterative_solver_pt->preconditioner_pt() = fsi_preconditioner_pt;
@@ -1906,16 +1911,16 @@ int main(int argc, char *argv[])
      ns_preconditioner_pt = new NavierStokesLSCPreconditioner;
 
      // Setup the fluid mesh
-     ns_preconditioner_pt->navier_stokes_mesh_pt()=
-      problem.create_mesh_for_navier_stokes_preconditioner();
+     ns_preconditioner_pt->set_navier_stokes_mesh(
+      problem.create_mesh_for_navier_stokes_preconditioner());
      
      // Pass the LSC preconditioner to the solver
      iterative_solver_pt->preconditioner_pt() = ns_preconditioner_pt;
     }
 
    // Settings for the LCS preconditioner
-   ns_preconditioner_pt->navier_stokes_mesh_pt()=
-    problem.create_mesh_for_navier_stokes_preconditioner();
+   ns_preconditioner_pt->set_navier_stokes_mesh(
+    problem.create_mesh_for_navier_stokes_preconditioner());
    ns_preconditioner_pt->doc_time() = true;
    
    // Set up the P sub block preconditioner

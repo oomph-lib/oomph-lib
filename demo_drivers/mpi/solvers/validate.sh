@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=26
+NUM_TESTS=25
 
 # Doc what we're using to run tests on two processors
 echo " " 
@@ -220,9 +220,6 @@ echo "SuperLU_dist matrix based solve w/ global CRDoubleMatrixSolver" >> validat
 echo "SuperLU_dist matrix based solve w/ dist CRDoubleMatrixSolver" >> validation.log
 ../../../../bin/fpdiff.py ../validata/direct_solver_matrix_solve_result.dat.gz  \
          RESLT/SuperLU_dist_CRDoubleMatrix_distributed.dat >> validation.log
-echo "SuperLU matrix based solve w/ CCDoubleMatrixSolver" >> validation.log
-../../../../bin/fpdiff.py ../validata/direct_solver_matrix_solve_result.dat.gz  \
-         RESLT/SuperLU_dist_CCDoubleMatrix.dat >> validation.log
 echo "SuperLU_dist global problem based solve" >> validation.log
 ../../../../bin/fpdiff.py ../validata/direct_solver_problem_solve_result.dat.gz  \
          RESLT/soln_direct_solver_1.dat >> validation.log

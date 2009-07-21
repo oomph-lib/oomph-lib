@@ -483,7 +483,7 @@ void DenseDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
    LinearAlgebraDistribution* dist_pt = 
     new LinearAlgebraDistribution(x.distribution_pt()->communicator_pt(),
                                   this->nrow(),false);
-   soln.rebuild(dist_pt);
+   soln.build(dist_pt,0.0);
    delete dist_pt;
   }
  soln.initialise(0.0);
@@ -574,7 +574,7 @@ void DenseDoubleMatrix::multiply_transpose(const DoubleVector &x,
    LinearAlgebraDistribution* dist_pt = 
     new LinearAlgebraDistribution(x.distribution_pt()->communicator_pt(),
                                   this->ncol(),false);
-   soln.rebuild(dist_pt);
+   soln.build(dist_pt,0.0);
    delete dist_pt;
   }
 
@@ -699,7 +699,7 @@ void DenseDoubleMatrix::multiply(const DenseDoubleMatrix &matrix_in,
 //========================================================================
 CCDoubleMatrix::CCDoubleMatrix() : CCMatrix<double>()
   {
-   Linear_solver_pt = Default_linear_solver_pt = new SuperLU;
+   Linear_solver_pt = Default_linear_solver_pt = new SuperLUSolver;
    Matrix_matrix_multiply_method = 2;
   }
   
@@ -717,7 +717,7 @@ CCDoubleMatrix::CCDoubleMatrix() : CCMatrix<double>()
                                 const unsigned long &m) :
   CCMatrix<double>(value,row_index,column_start,n,m)
   {
-   Linear_solver_pt = Default_linear_solver_pt = new SuperLU;
+   Linear_solver_pt = Default_linear_solver_pt = new SuperLUSolver;
    Matrix_matrix_multiply_method = 2;
   }
 
@@ -730,7 +730,7 @@ CCDoubleMatrix::CCDoubleMatrix() : CCMatrix<double>()
 //===================================================================
 void CCDoubleMatrix::ludecompose()
 {
- static_cast<SuperLU*>(Default_linear_solver_pt)->factorise(this);
+ static_cast<SuperLUSolver*>(Default_linear_solver_pt)->factorise(this);
 }
 
 //===================================================================
@@ -738,7 +738,7 @@ void CCDoubleMatrix::ludecompose()
 //===================================================================
 void CCDoubleMatrix::lubksub(DoubleVector &rhs)
 {
- static_cast<SuperLU*>(Default_linear_solver_pt)->backsub(rhs,rhs);
+ static_cast<SuperLUSolver*>(Default_linear_solver_pt)->backsub(rhs,rhs);
 }
 
 //===================================================================
@@ -813,7 +813,7 @@ void CCDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
    LinearAlgebraDistribution* dist_pt = 
     new LinearAlgebraDistribution(x.distribution_pt()->communicator_pt(),
                                   this->nrow(),false);
-   soln.rebuild(dist_pt);
+   soln.build(dist_pt,0.0);
    delete dist_pt;
   }
 
@@ -910,7 +910,7 @@ void CCDoubleMatrix::multiply_transpose(const DoubleVector &x,
    LinearAlgebraDistribution* dist_pt = 
     new LinearAlgebraDistribution(x.distribution_pt()->communicator_pt(),
                                   this->ncol(),false);
-   soln.rebuild(dist_pt);
+   soln.build(dist_pt,0.0);
    delete dist_pt;
   }
 
@@ -936,7 +936,7 @@ void CCDoubleMatrix::multiply_transpose(const DoubleVector &x,
 
 
 //===========================================================================
-/// Function to multiply this matrix by the CRDoubleMatrix matrix_in
+/// Function to multiply this matrix by the CCDoubleMatrix matrix_in
 /// The multiplication method used can be selected using the flag
 /// Matrix_matrix_multiply_method. By default Method 2 is used.
 /// Method 1: First runs through this matrix and matrix_in to find the storage
@@ -1351,8 +1351,11 @@ void CCDoubleMatrix::matrix_reduction(const double &alpha,
 //=============================================================================
 CRDoubleMatrix::CRDoubleMatrix()
   {
-    Linear_solver_pt = Default_linear_solver_pt  = 0;
-    Built = false;
+   // set the default solver
+   Linear_solver_pt = Default_linear_solver_pt = new SuperLUSolver;
+
+   // matrix not built
+   Built = false;
 
     // set the serial matrix-matrix multiply method
 #ifdef HAVE_TRILINOS
@@ -1370,7 +1373,12 @@ CRDoubleMatrix::CRDoubleMatrix(const LinearAlgebraDistribution*
                                distribution_pt)
   {
    Distribution_pt->rebuild(distribution_pt);
-   Built = false;    
+
+   // set the default solver
+   Linear_solver_pt = Default_linear_solver_pt = new SuperLUSolver;
+
+   // matrix not built
+   Built = false;
 
 // set the serial matrix-matrix multiply method
 #ifdef HAVE_TRILINOS
@@ -1399,31 +1407,7 @@ CRDoubleMatrix::CRDoubleMatrix(const LinearAlgebraDistribution* dist_pt,
  Distribution_pt->rebuild(dist_pt);
 
  // set the linear solver
-#ifdef OOMPH_HAS_MPI
- if (Distribution_pt->communicator_pt()->nproc() > 1 && 
-     Distribution_pt->distributed() == true)
-  {
-   if (Default_linear_solver_pt != 0)
-    {
-     delete Default_linear_solver_pt;
-    }
-   Default_linear_solver_pt = new SuperLU_dist;   
-  }
- else
-  {
-   if (Default_linear_solver_pt != 0)
-    {
-     delete Default_linear_solver_pt;
-    }
-   Default_linear_solver_pt = new SuperLU;
-  }
-#else
-   if (Default_linear_solver_pt != 0)
-    {
-     delete Default_linear_solver_pt;
-    }
-   Default_linear_solver_pt = new SuperLU;
-#endif
+ Linear_solver_pt = Default_linear_solver_pt = new SuperLUSolver;
 
  // set the serial matrix-matrix multiply method
 #ifdef HAVE_TRILINOS
@@ -1437,42 +1421,23 @@ CRDoubleMatrix::CRDoubleMatrix(const LinearAlgebraDistribution* dist_pt,
 }
 
 //=============================================================================
+/// Destructor
+//=============================================================================
+CRDoubleMatrix::~CRDoubleMatrix()
+{
+ this->clear();
+ delete Default_linear_solver_pt;
+ Default_linear_solver_pt = 0;
+}
+ 
+//=============================================================================
 /// rebuild the matrix - assembles an empty matrix with a defined distribution
 //=============================================================================
-void CRDoubleMatrix::rebuild(const LinearAlgebraDistribution* distribution_pt)
+void CRDoubleMatrix::build(const LinearAlgebraDistribution* distribution_pt)
 {
+ this->clear();
  Distribution_pt->rebuild(distribution_pt);
- CR_matrix.clean_up_memory();
- Built = false;
- 
- // set the linear solver
-#ifdef OOMPH_HAS_MPI
- if (Distribution_pt->communicator_pt()->nproc() > 1 && 
-     Distribution_pt->distributed() == true)
-  {
-   if (Default_linear_solver_pt != 0)
-    {
-     delete Default_linear_solver_pt;
-    }
-   Default_linear_solver_pt = new SuperLU_dist;   
-  }
- else
-  {
-   if (Default_linear_solver_pt != 0)
-    {
-     delete Default_linear_solver_pt;
-    }
-   Default_linear_solver_pt = new SuperLU;
-  }
-#else
- if (Default_linear_solver_pt != 0)
-  {
-   delete Default_linear_solver_pt;
-  }
- Default_linear_solver_pt = new SuperLU;
-#endif
 }
-
 
 //=============================================================================
 /// clean method
@@ -1482,8 +1447,7 @@ void CRDoubleMatrix::clear()
  Distribution_pt->clear();
  CR_matrix.clean_up_memory();
  Built = false;
- delete Default_linear_solver_pt;
- Default_linear_solver_pt = 0;
+ Linear_solver_pt->clean_up_memory();
 }
 
 //=============================================================================
@@ -1491,53 +1455,32 @@ void CRDoubleMatrix::clear()
 /// well as the vector of values, vector of column indices,vector of row 
 ///starts.
 //=============================================================================
-void CRDoubleMatrix::rebuild(const LinearAlgebraDistribution* distribution_pt,
-                             const unsigned& ncol,
-                             const Vector<double>& value, 
-                             const Vector<int>& column_index,
-                             const Vector<int>& row_start)
+void CRDoubleMatrix::build(const LinearAlgebraDistribution* distribution_pt,
+                           const unsigned& ncol,
+                           const Vector<double>& value, 
+                           const Vector<int>& column_index,
+                           const Vector<int>& row_start)
 {
+ // clear
+ this->clear();
+
  // store the Distribution
  Distribution_pt->rebuild(distribution_pt);
 
  // set the linear solver
-#ifdef OOMPH_HAS_MPI
- if (Distribution_pt->communicator_pt()->nproc() > 1 && 
-     Distribution_pt->distributed() == true)
-  {
-   if (Default_linear_solver_pt != 0)
-    {
-     delete Default_linear_solver_pt;
-    }
-   Default_linear_solver_pt = new SuperLU_dist;   
-  }
- else
-  {
-   if (Default_linear_solver_pt != 0)
-    {
-     delete Default_linear_solver_pt;
-    }
-   Default_linear_solver_pt = new SuperLU;
-  }
-#else
-   if (Default_linear_solver_pt != 0)
-    {
-     delete Default_linear_solver_pt;
-    }
-   Default_linear_solver_pt = new SuperLU;
-#endif
+ Default_linear_solver_pt = new SuperLUSolver;   
 
  // now build the matrix
- this->rebuild_matrix(ncol,value,column_index,row_start);
+ this->build_matrix(ncol,value,column_index,row_start);
 }
 
 //=============================================================================
 /// \short method to rebuild the matrix, but not the distribution
 //=============================================================================
-void CRDoubleMatrix::rebuild_matrix(const unsigned& ncol,
-                                    const Vector<double>& value,
-                                    const Vector<int>& column_index,
-                                    const Vector<int>& row_start)
+void CRDoubleMatrix::build_matrix(const unsigned& ncol,
+                                  const Vector<double>& value,
+                                  const Vector<int>& column_index,
+                                  const Vector<int>& row_start)
 {
  // call the underlying build method
  CR_matrix.clean_up_memory();
@@ -1551,11 +1494,11 @@ void CRDoubleMatrix::rebuild_matrix(const unsigned& ncol,
 //=============================================================================
 /// \short method to rebuild the matrix, but not the distribution
 //=============================================================================
-void CRDoubleMatrix::rebuild_matrix_without_copy(const unsigned& ncol,
-                                                 const unsigned& nnz,
-                                                 double* value,
-                                                 int* column_index,
-                                                 int* row_start)
+void CRDoubleMatrix::build_matrix_without_copy(const unsigned& ncol,
+                                               const unsigned& nnz,
+                                               double* value,
+                                               int* column_index,
+                                               int* row_start)
 {
  // call the underlying build method
  CR_matrix.clean_up_memory();
@@ -1585,18 +1528,8 @@ void CRDoubleMatrix::ludecompose()
 #endif
 
  // factorise using superlu or superlu dist if we oomph has mpi
-#ifdef OOMPH_HAS_MPI
- if (static_cast<SuperLU* >(Default_linear_solver_pt))
-  {
-#endif
-   static_cast<SuperLU*>(Default_linear_solver_pt)->factorise(this);
-#ifdef OOMPH_HAS_MPI
-  }
- else
-  {
-   static_cast<SuperLU_dist*>(Default_linear_solver_pt)->factorise(this);
-  }  
-#endif
+ static_cast<SuperLUSolver*>(Default_linear_solver_pt)->factorise(this);
+
 }
 
 //=============================================================================
@@ -1626,16 +1559,10 @@ void CRDoubleMatrix::lubksub(DoubleVector &rhs)
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
- if (static_cast<SuperLU* >(Default_linear_solver_pt))
-  {
-   DoubleVector rhs_copy(rhs);
-   static_cast<SuperLU*>(Default_linear_solver_pt)->backsub(rhs_copy,rhs);
-  }
- else
-  {
-   DoubleVector rhs_copy(rhs);
-   static_cast<SuperLU*>(Default_linear_solver_pt)->backsub(rhs_copy,rhs);
-  }  
+
+ // backsub
+ DoubleVector rhs_copy(rhs);
+ static_cast<SuperLUSolver*>(Default_linear_solver_pt)->backsub(rhs_copy,rhs);
 }
 
 //=============================================================================
@@ -1695,7 +1622,7 @@ void CRDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
  if (!soln.distribution_setup())
   {
    // Resize and initialize the solution vector
-   soln.rebuild(this->distribution_pt());
+   soln.build(this->distribution_pt(),0.0);
   }
 
  // if distributed and on more than one processor use trilinos
@@ -1788,7 +1715,7 @@ void CRDoubleMatrix::multiply_transpose(const DoubleVector &x,
    LinearAlgebraDistribution* dist_pt = 
     new LinearAlgebraDistribution(x.distribution_pt()->communicator_pt(),
                                   this->ncol(),this->distributed());
-   soln.rebuild(dist_pt);
+   soln.build(dist_pt,0.0);
    delete dist_pt;
   }
 
@@ -1893,7 +1820,7 @@ void CRDoubleMatrix::multiply(CRDoubleMatrix& matrix_in,
  // if the result has not been setup, then store the distribution
  if (!result.distribution_setup())
   {
-   result.rebuild(Distribution_pt);
+   result.build(Distribution_pt);
   }
    
  // short name for Serial_matrix_matrix_multiply_method
@@ -2191,7 +2118,7 @@ void CRDoubleMatrix::multiply(CRDoubleMatrix& matrix_in,
     }
    
    // build
-   result.rebuild_matrix_without_copy(M, Nnz, Value, Column_index, Row_start);
+   result.build_matrix_without_copy(M, Nnz, Value, Column_index, Row_start);
   }
   
  // else we have to use trilinos
@@ -2283,7 +2210,7 @@ void CRDoubleMatrix::matrix_reduction(const double &alpha,
  
  // Build the matrix from the compressed format
  dynamic_cast<CRDoubleMatrix&>(reduced_matrix).
-  rebuild_matrix(this->ncol(),B_value,B_column_index,B_row_start);
+  build_matrix(this->ncol(),B_value,B_column_index,B_row_start);
  }
 
 //=============================================================================
@@ -2387,7 +2314,7 @@ CRDoubleMatrix* CRDoubleMatrix::return_global_matrix()
  delete dist_pt;
 
  // pass data into matrix
- matrix_pt->rebuild_matrix_without_copy(this->ncol(),nnz_global,global_value,
+ matrix_pt->build_matrix_without_copy(this->ncol(),nnz_global,global_value,
                                         global_column_index,global_row_start);
 
  // clean up
@@ -2402,4 +2329,675 @@ CRDoubleMatrix* CRDoubleMatrix::return_global_matrix()
  return new CRDoubleMatrix(*this);
 #endif
 }
+
+ //============================================================================
+ /// The contents of the matrix are redistributed to match the new
+ /// distribution. In a non-MPI build this method does nothing. \n
+ /// \b NOTE 1: The current distribution and the new distribution must have
+ /// the same number of global rows.\n
+ /// \b NOTE 2: The current distribution and the new distribution must have
+ /// the same Communicator.
+ //============================================================================
+ void CRDoubleMatrix::redistribute(const LinearAlgebraDistribution* 
+                                 const& dist_pt)
+ {
+#ifdef OOMPH_HAS_MPI
+#ifdef PARANOID
+   // paranoid check that the nrows for both distributions is the 
+   // same
+   if (dist_pt->nrow() != Distribution_pt->nrow())
+    {
+     std::ostringstream error_message;    
+     error_message << "The number of global rows in the new distribution ("
+                   << dist_pt->nrow() << ") is not equal to the number"
+                   << " of global rows in the current distribution ("
+                   << Distribution_pt->nrow() << ").\n"; 
+     throw OomphLibError(error_message.str(),
+                         "CRDoubleMatrix::redistribute(...)",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   // paranoid check that the current distribution and the new distribution
+   // have the same Communicator
+   OomphCommunicator temp_comm(*dist_pt->communicator_pt());
+   if (!(temp_comm == *Distribution_pt->communicator_pt()))
+    {
+     std::ostringstream error_message;  
+     error_message << "The new distribution and the current distribution must "
+                   << "have the same communicator.";
+     throw OomphLibError(error_message.str(),
+                         "CRDoubleMatrix::redistribute(...)",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   // paranoid check that the matrix is build
+   if (!this->built())
+    {
+     std::ostringstream error_message;  
+     error_message << "The matrix must be build to be redistributed";
+     throw OomphLibError(error_message.str(),
+                         "CRDoubleMatrix::redistribute(...)",
+                         OOMPH_EXCEPTION_LOCATION);     
+    }
+#endif
+
+   // if the two distributions are not the same
+   // =========================================
+   if (!((*Distribution_pt) == *dist_pt))
+    {
+     
+     // current data
+     int* current_row_start = this->row_start();
+     int* current_column_index = this->column_index();
+     double* current_value = this->value();
+
+     // get the rank and the number of processors
+     int my_rank = Distribution_pt->communicator_pt()->my_rank();
+     int nproc = Distribution_pt->communicator_pt()->nproc();
+
+     // if both distributions are distributed
+     // =====================================
+     if (this->distributed() && dist_pt->distributed())
+      {
+
+       // new nrow_local and first_row data
+       Vector<unsigned> new_first_row(nproc);
+       Vector<unsigned> new_nrow_local(nproc);
+       Vector<unsigned> current_first_row(nproc);
+       Vector<unsigned> current_nrow_local(nproc);
+       for (int i = 0; i < nproc; i++)
+        {
+         new_first_row[i] = dist_pt->first_row(i);
+         new_nrow_local[i] = dist_pt->nrow_local(i);
+         current_first_row[i] = this->first_row(i);
+         current_nrow_local[i] = this->nrow_local(i);
+        }
+       
+       // compute which local rows are expected to be received from each 
+       // processor / sent to each processor
+       Vector<unsigned> first_row_for_proc(nproc,0);
+       Vector<unsigned> nrow_local_for_proc(nproc,0);
+       Vector<unsigned> first_row_from_proc(nproc,0);
+       Vector<unsigned> nrow_local_from_proc(nproc,0);
+
+       // for every processor compute first_row and nrow_local that will
+       // will sent and received by this processor
+       for (int p = 0; p < nproc; p++)
+        {
+         // start with data to be sent
+         if ((new_first_row[p] < (current_first_row[my_rank] +
+                                       current_nrow_local[my_rank])) &&
+             (current_first_row[my_rank] < (new_first_row[p] +
+                                                 new_nrow_local[p])))
+         {
+          first_row_for_proc[p] = 
+           std::max(current_first_row[my_rank],
+                    new_first_row[p]);
+          nrow_local_for_proc[p] = 
+           std::min((current_first_row[my_rank] +
+                     current_nrow_local[my_rank]),
+                    (new_first_row[p] +
+                     new_nrow_local[p])) - first_row_for_proc[p];
+         }
+         
+         // and data to be received
+         if ((new_first_row[my_rank] < (current_first_row[p] +
+                                                 current_nrow_local[p])) 
+             && (current_first_row[p] < (new_first_row[my_rank] +
+                                              new_nrow_local[my_rank])))
+         {
+          first_row_from_proc[p] = 
+           std::max(current_first_row[p],
+                    new_first_row[my_rank]);
+          nrow_local_from_proc[p] = 
+           std::min((current_first_row[p] +
+                     current_nrow_local[p]),
+                    (new_first_row[my_rank] +
+                     new_nrow_local[my_rank]))-first_row_from_proc[p];
+         }         
+        }
+
+       // determine how many nnzs to send to each processor
+       Vector<unsigned> nnz_for_proc(nproc,0);
+       for (int p = 0; p < nproc; p++)
+        {
+         if (nrow_local_for_proc[p] > 0)
+          {
+           nnz_for_proc[p] = (current_row_start[first_row_for_proc[p]-
+                                                current_first_row[my_rank]+
+                                                nrow_local_for_proc[p]]-
+                              current_row_start[first_row_for_proc[p]-
+                                                current_first_row[my_rank]]);
+          }
+        }
+
+       // next post non-blocking sends and recv for the nnzs
+       Vector<unsigned> nnz_from_proc(nproc,0);
+       Vector<MPI_Request> send_req;
+       Vector<MPI_Request> nnz_recv_req;
+       for (int p = 0; p < nproc; p++)
+        {
+         if (p != my_rank)
+          {
+           // send
+           if (nrow_local_for_proc[p] > 0)
+            {
+             MPI_Request req;
+             MPI_Isend(&nnz_for_proc[p],1,MPI_UNSIGNED,p,0,
+                       Distribution_pt->communicator_pt()->mpi_comm(),&req);
+             send_req.push_back(req);
+            }
+           
+           // recv
+           if (nrow_local_from_proc[p] > 0)
+            {
+             MPI_Request req;
+             MPI_Irecv(&nnz_from_proc[p],1,MPI_UNSIGNED,p,0,
+                       Distribution_pt->communicator_pt()->mpi_comm(),&req);
+             nnz_recv_req.push_back(req);
+            }
+          }
+         // "send to self"
+         else
+          {
+           nnz_from_proc[p] = nnz_for_proc[p];
+          }
+        }
+
+       // allocate new storage for the new row_start
+       int* new_row_start = new int[new_nrow_local[my_rank]+1];
+
+       // wait for recvs to complete
+       unsigned n_recv_req = nnz_recv_req.size();
+       if (n_recv_req > 0)
+        {
+         Vector<MPI_Status> recv_status(n_recv_req);
+         MPI_Waitall(n_recv_req,&nnz_recv_req[0],&recv_status[0]);
+        }
+       
+       // compute the nnz offset for each processor
+       unsigned next_row = 0;
+       unsigned nnz_count = 0;
+       Vector<unsigned> nnz_offset(nproc,0);
+       for (int p = 0; p < nproc; p++)
+        {
+         unsigned pp = 0;
+         while (new_first_row[pp] != next_row) { pp++; }
+         nnz_offset[pp] = nnz_count;
+         nnz_count+= nnz_from_proc[pp];
+         next_row += new_nrow_local[pp];
+        }
+
+       // allocate storage for the values and column indices
+       int* new_column_index = new int[nnz_count];
+       double* new_value = new double[nnz_count];
+
+       // post the sends and recvs for the matrix data
+       Vector<MPI_Request> recv_req;
+       MPI_Aint base_address;
+       MPI_Address(new_value,&base_address);
+       for (int p = 0; p < nproc; p++)
+        {
+         // communicated with other processors
+         if (p != my_rank)
+          {
+           // SEND
+           if (nrow_local_for_proc[p] > 0)
+            {
+             // array of datatypes
+             MPI_Datatype types[3];
+
+             // array of offsets
+             MPI_Aint offsets[3];
+
+             // array of lengths
+             int len[3];
+
+             // row start
+             unsigned first_row_to_send = first_row_for_proc[p] - 
+              current_first_row[my_rank];
+             MPI_Type_contiguous(nrow_local_for_proc[p],MPI_INT,
+                                 &types[0]);
+             MPI_Type_commit(&types[0]);
+             len[0] = 1;
+             MPI_Address(current_row_start+first_row_to_send,&offsets[0]);
+             offsets[0] -= base_address;
+
+             // values
+             unsigned first_coef_to_send 
+              = current_row_start[first_row_to_send];             
+             MPI_Type_contiguous(nnz_for_proc[p],MPI_DOUBLE,
+                                 &types[1]);
+             MPI_Type_commit(&types[1]);
+             len[1] = 1;
+             MPI_Address(current_value+first_coef_to_send,&offsets[1]);
+             offsets[1] -= base_address;
+
+             // column index
+             MPI_Type_contiguous(nnz_for_proc[p],MPI_DOUBLE,
+                                 &types[2]);
+             MPI_Type_commit(&types[2]);
+             len[2] = 1;
+             MPI_Address(current_column_index+first_coef_to_send,&offsets[2]);
+             offsets[2] -= base_address;
+
+             // build the combined datatype
+             MPI_Datatype send_type;
+             MPI_Type_struct(3,len,offsets,types,&send_type);
+             MPI_Type_commit(&send_type);
+             MPI_Type_free(&types[0]);
+             MPI_Type_free(&types[1]);
+             MPI_Type_free(&types[2]);
+
+             // and send
+             MPI_Request req;
+             MPI_Isend(new_value,1,send_type,p,1,
+                       Distribution_pt->communicator_pt()->mpi_comm(),&req);
+             send_req.push_back(req);
+             MPI_Type_free(&send_type);
+            }
+
+           // RECV
+           if (nrow_local_from_proc[p] > 0)
+            {
+             // array of datatypes
+             MPI_Datatype types[3];
+
+             // array of offsets
+             MPI_Aint offsets[3];
+
+             // array of lengths
+             int len[3];
+
+             // row start
+             unsigned first_row_to_recv = first_row_from_proc[p] - 
+              new_first_row[my_rank];
+             MPI_Type_contiguous(nrow_local_from_proc[p],MPI_INT,
+                                 &types[0]);
+             MPI_Type_commit(&types[0]);
+             len[0] = 1;
+             MPI_Address(new_row_start+first_row_to_recv,&offsets[0]);
+             offsets[0] -= base_address;
+
+             // values
+             unsigned first_coef_to_recv = nnz_offset[p];
+             MPI_Type_contiguous(nnz_from_proc[p],MPI_DOUBLE,
+                                 &types[1]);
+             MPI_Type_commit(&types[1]);
+             len[1] = 1;
+             MPI_Address(new_value+first_coef_to_recv,&offsets[1]);
+             offsets[1] -= base_address;
+
+             // column index
+             MPI_Type_contiguous(nnz_from_proc[p],MPI_INT,
+                                 &types[2]);
+             MPI_Type_commit(&types[2]);
+             len[2] = 1;
+             MPI_Address(new_column_index+first_coef_to_recv,&offsets[2]);
+             offsets[2] -= base_address;
+
+             // build the combined datatype
+             MPI_Datatype recv_type;
+             MPI_Type_struct(3,len,offsets,types,&recv_type);
+             MPI_Type_commit(&recv_type);
+             MPI_Type_free(&types[0]);
+             MPI_Type_free(&types[1]);
+             MPI_Type_free(&types[2]);
+
+             // and send
+             MPI_Request req;
+             MPI_Irecv(new_value,1,recv_type,p,1,
+                       Distribution_pt->communicator_pt()->mpi_comm(),&req);
+             recv_req.push_back(req);
+             MPI_Type_free(&recv_type);
+            }
+          }
+         // other wise transfer data internally 
+         else 
+          {
+           unsigned j = first_row_for_proc[my_rank] - 
+            current_first_row[my_rank];
+           unsigned k = first_row_from_proc[my_rank] - 
+            new_first_row[my_rank];
+           for (unsigned i = 0; i < nrow_local_for_proc[my_rank]; i++)
+            {
+             new_row_start[k+i] = current_row_start[j+i];
+            }
+           unsigned first_coef_to_send = current_row_start[j];
+           for (unsigned i = 0; i < nnz_for_proc[my_rank]; i++)
+            {
+             new_value[nnz_offset[p]+i]=current_value[first_coef_to_send+i];
+            new_column_index[nnz_offset[p]+i]
+             =current_column_index[first_coef_to_send+i];
+            }
+          }
+        }
+
+       // wait for all recvs to complete
+       n_recv_req = recv_req.size();
+       if (n_recv_req > 0)
+        {
+         Vector<MPI_Status> recv_status(n_recv_req);
+         MPI_Waitall(n_recv_req,&recv_req[0],&recv_status[0]);
+        }
+
+       // next we need to update the row starts
+       for (int p = 0; p < nproc; p++)
+        {
+         if (nrow_local_from_proc[p] > 0)
+          {
+           unsigned first_row = first_row_from_proc[p]-new_first_row[my_rank];
+           unsigned last_row = first_row + nrow_local_from_proc[p]-1;
+           int update = nnz_offset[p] - new_row_start[first_row];
+            for (unsigned i = first_row; i <= last_row; i++)
+            {
+             new_row_start[i]+=update;
+            }
+          }
+        }
+       new_row_start[dist_pt->nrow_local()] = nnz_count;
+
+       // wait for sends to complete
+       unsigned n_send_req = send_req.size();
+       if (n_recv_req > 0)
+        {
+         Vector<MPI_Status> send_status(n_recv_req);
+         MPI_Waitall(n_send_req,&send_req[0],&send_status[0]);
+        }
+       if (my_rank == 0)
+        {
+         CRDoubleMatrix* m_pt = this->return_global_matrix();
+         m_pt->sparse_indexed_output("m1.dat");
+        }
+
+       // 
+       this->build(dist_pt);
+       this->build_matrix_without_copy(dist_pt->nrow(),nnz_count,
+                                       new_value,new_column_index,
+                                       new_row_start);
+       if (my_rank == 0)
+        {
+         CRDoubleMatrix* m_pt = this->return_global_matrix();
+         m_pt->sparse_indexed_output("m2.dat");
+        }
+//       this->sparse_indexed_output(std::cout);
+       abort();
+      }
+     
+     // if this matrix is distributed but the new distributed matrix is global
+     // ======================================================================
+     else if (this->distributed() && !dist_pt->distributed())
+      {
+
+       // nnz 
+       int nnz = this->nnz();
+       
+       // nrow global
+       unsigned nrow = this->nrow();
+       
+       // cache nproc
+       int nproc = Distribution_pt->communicator_pt()->nproc();
+       
+       // get the nnzs on the other processors
+       int* dist_nnz_pt = new int[nproc];
+       MPI_Allgather(&nnz,1,MPI_INT,
+                     dist_nnz_pt,1,MPI_INT,
+                     Distribution_pt->communicator_pt()->mpi_comm());
+       
+       // create an int array of first rows and nrow local and 
+       // compute nnz global
+       int* dist_first_row = new int[nproc];
+       int* dist_nrow_local =  new int[nproc];
+       for (int p = 0; p < nproc; p++)
+        {
+         dist_first_row[p] = this->first_row(p);
+         dist_nrow_local[p] = this->nrow_local(p);
+        }
+       
+       // conpute the offset for the values and column index data
+       // compute the nnz offset for each processor
+       int next_row = 0;
+       unsigned nnz_count = 0;
+       Vector<unsigned> nnz_offset(nproc,0);
+       for (int p = 0; p < nproc; p++)
+        {
+         unsigned pp = 0;
+         while (dist_first_row[pp] != next_row) { pp++; }
+         nnz_offset[pp] = nnz_count;
+         nnz_count+=dist_nnz_pt[pp];
+         next_row+=dist_nrow_local[pp];
+        }
+       
+       // get pointers to the (current) distributed data
+       int* dist_row_start = this->row_start();
+       int* dist_column_index = this->column_index();
+       double* dist_value = this->value();
+       
+       // space for the global matrix
+       int* global_row_start = new int[nrow+1];
+       int* global_column_index = new int[nnz_count];
+       double* global_value = new double[nnz_count];
+
+       // post the sends and recvs for the matrix data
+       Vector<MPI_Request> recv_req;
+       Vector<MPI_Request> send_req;
+       MPI_Aint base_address;
+       MPI_Address(global_value,&base_address);
+
+       // SEND
+       if (dist_nrow_local[my_rank] > 0)
+        {
+         // types
+         MPI_Datatype types[3];
+         
+         // offsets
+         MPI_Aint offsets[3];
+
+         // lengths
+         int len[3];
+
+         // row start
+         MPI_Type_contiguous(dist_nrow_local[my_rank],MPI_INT,&types[0]);
+         MPI_Type_commit(&types[0]);
+         MPI_Address(dist_row_start,&offsets[0]);
+         offsets[0] -= base_address;
+         len[0] = 1;
+
+         // value
+         MPI_Type_contiguous(nnz,MPI_DOUBLE,&types[1]);
+         MPI_Type_commit(&types[1]);
+         MPI_Address(dist_value,&offsets[1]);
+         offsets[1] -= base_address;
+         len[1] = 1;
+
+         // column indices
+         MPI_Type_contiguous(nnz,MPI_INT,&types[2]);
+         MPI_Type_commit(&types[2]);
+         MPI_Address(dist_column_index,&offsets[2]);
+         offsets[2] -= base_address;
+         len[2] = 1;
+
+         // build the send type
+         MPI_Datatype send_type;
+         MPI_Type_struct(3,len,offsets,types,&send_type);
+         MPI_Type_commit(&send_type);
+         MPI_Type_free(&types[0]);
+         MPI_Type_free(&types[1]);
+         MPI_Type_free(&types[2]);
+         
+         // and send 
+         for (int p = 0; p < nproc; p++)
+          {
+           if (p != my_rank)
+            {
+             MPI_Request req;
+             MPI_Isend(global_value,1,send_type,p,1,
+                       Distribution_pt->communicator_pt()->mpi_comm(),&req);
+             send_req.push_back(req);
+            }
+          }
+         MPI_Type_free(&send_type);
+        }
+      
+       // RECV
+       for (int p = 0; p < nproc; p++)
+        {
+         // communicated with other processors
+         if (p != my_rank)
+          {
+           // RECV
+           if (dist_nrow_local[p] > 0)
+            {
+
+             // types
+             MPI_Datatype types[3];
+             
+             // offsets
+             MPI_Aint offsets[3];
+             
+             // lengths
+             int len[3];
+             
+             // row start
+             MPI_Type_contiguous(dist_nrow_local[p],MPI_INT,&types[0]);
+             MPI_Type_commit(&types[0]);
+             MPI_Address(global_row_start+dist_first_row[p],&offsets[0]);
+             offsets[0] -= base_address;
+             len[0] = 1;
+             
+             // value
+             MPI_Type_contiguous(dist_nnz_pt[p],MPI_DOUBLE,&types[1]);
+             MPI_Type_commit(&types[1]);
+             MPI_Address(global_value+nnz_offset[p],&offsets[1]);
+             offsets[1] -= base_address;
+             len[1] = 1;
+             
+             // column indices
+             MPI_Type_contiguous(dist_nnz_pt[p],MPI_INT,&types[2]);
+             MPI_Type_commit(&types[2]);
+             MPI_Address(global_column_index+nnz_offset[p],&offsets[2]);
+             offsets[2] -= base_address;
+             len[2] = 1;
+
+             // build the send type
+             MPI_Datatype recv_type;
+             MPI_Type_struct(3,len,offsets,types,&recv_type);
+             MPI_Type_commit(&recv_type);
+             MPI_Type_free(&types[0]);
+             MPI_Type_free(&types[1]);
+             MPI_Type_free(&types[2]);
+         
+             // and send 
+             MPI_Request req;
+             MPI_Irecv(global_value,1,recv_type,p,1,
+                       Distribution_pt->communicator_pt()->mpi_comm(),&req);
+             recv_req.push_back(req);
+            }
+          }
+         // otherwise send to self
+         else
+          {
+           unsigned nrow_local = dist_nrow_local[my_rank];
+           unsigned first_row = dist_first_row[my_rank];
+           for (unsigned i = 0; i < nrow_local; i++)
+            {
+             global_row_start[first_row+i]=dist_row_start[i];
+            }
+           unsigned offset = nnz_offset[my_rank];
+           for (int i = 0; i < nnz; i++)
+            {
+             global_value[offset+i]=dist_value[i];
+             global_column_index[offset+i]=dist_column_index[i];
+            }
+          }
+        }
+         
+       // wait for all recvs to complete
+       unsigned n_recv_req = recv_req.size();
+       if (n_recv_req > 0)
+        {
+         Vector<MPI_Status> recv_status(n_recv_req);
+         MPI_Waitall(n_recv_req,&recv_req[0],&recv_status[0]);
+        }
+
+       // finally the last row start
+       global_row_start[nrow] = nnz_count;
+       
+       // update the other row start
+       for (int p = 0; p < nproc; p++)
+        {
+         for (int i = 0; i < dist_nrow_local[p]; i++)
+          {
+           unsigned j = dist_first_row[p] + i;
+           global_row_start[j]+=nnz_offset[p];
+          }
+        }
+       
+       // wait for sends to complete
+       unsigned n_send_req = send_req.size();
+       if (n_recv_req > 0)
+        {
+         Vector<MPI_Status> send_status(n_recv_req);
+         MPI_Waitall(n_send_req,&send_req[0],&send_status[0]);
+        }
+
+       // rebuild the matrix
+       LinearAlgebraDistribution* dist_pt = new 
+        LinearAlgebraDistribution(Distribution_pt->communicator_pt(),
+                                  nrow,false);
+       this->build(dist_pt);
+       this->build_matrix_without_copy(dist_pt->nrow(),nnz_count,
+                                       global_value,global_column_index,
+                                       global_row_start);
+
+       // clean up
+       delete dist_first_row;
+       delete dist_nrow_local;
+       delete dist_nnz_pt;
+      }
+
+     // other the matrix is not distributed but it needs to be turned 
+     // into a distributed matrix
+     // =============================================================
+     else if (!this->distributed() && dist_pt->distributed())
+      {   
+
+       // cache the new nrow_local
+       unsigned nrow_local = dist_pt->nrow_local();
+       
+       // and first_row
+       unsigned first_row = dist_pt->first_row();
+
+       // get pointers to the (current) distributed data
+       int* global_row_start = this->row_start();
+       int* global_column_index = this->column_index();
+       double* global_value = this->value();
+
+       // determine the number of non zeros required by this processor
+       unsigned nnz = global_row_start[first_row+nrow_local] - 
+        global_row_start[first_row];
+
+       // allocate
+       int* dist_row_start = new int[nrow_local+1];
+       int* dist_column_index = new int[nnz];
+       double* dist_value = new double[nnz];
+       
+       // copy
+       int offset = global_row_start[first_row];
+       for (unsigned i = 0; i <= nrow_local; i++)
+        {
+         dist_row_start[i] = global_row_start[first_row+1]-offset;
+        }
+       for (unsigned i = 0; i < nnz; i++)
+        {
+         dist_column_index[i] = global_column_index[offset+i];
+         dist_value[i] = global_value[offset+i];
+        }
+
+       // rebuild
+       this->build(dist_pt);
+       this->build_matrix_without_copy(dist_pt->nrow(),nnz,dist_value,
+                                       dist_column_index,dist_row_start);
+      }
+    }
+#endif
+ }
 }

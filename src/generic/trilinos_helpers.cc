@@ -572,7 +572,7 @@ void multiply(CRDoubleMatrix &oomph_matrix,
  // setup the distribution
  if (!oomph_soln.distribution_pt()->setup())
   {
-   oomph_soln.rebuild(oomph_matrix.distribution_pt());
+   oomph_soln.build(oomph_matrix.distribution_pt(),0.0);
   }
 
  // create the communicator
@@ -746,7 +746,7 @@ void multiply(CRDoubleMatrix &matrix1,
  // setup the distribution
  if (!matrix_soln.distribution_pt()->setup())
   {
-   matrix_soln.rebuild(matrix1.distribution_pt());
+   matrix_soln.build(matrix1.distribution_pt());
   }
 
  // temporary fix
@@ -977,7 +977,7 @@ void multiply(CRDoubleMatrix &matrix1,
 #endif
 
  // Build the Oomph-lib solution matrix using build function
- matrix_soln.rebuild(matrix1.distribution_pt(),
+ matrix_soln.build(matrix1.distribution_pt(),
                      matrix2.ncol(),
                      value,
                      column_index,

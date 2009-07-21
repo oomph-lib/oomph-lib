@@ -138,6 +138,8 @@ class NetFluxControlElement : public virtual GeneralisedElement
    BrokenCopy::broken_assign("NetFluxControlElement");
   }
  
+ /// 
+ unsigned& dim() { return Dim; }
  
  /// \short Function to return a pointer to the Data object whose
  /// single value is the pressure applied by the
@@ -171,7 +173,7 @@ class NetFluxControlElement : public virtual GeneralisedElement
  /// containing navier stokes elements
  unsigned ndof_types()
   {
-   return Ndof_number_for_unknown+1;
+   return Dim+1;
   }
 
  /// \short The id number of the "block" to which the degree
@@ -263,6 +265,8 @@ private:
  /// containing navier stokes elements
  unsigned Ndof_number_for_unknown;
 
+ /// spatial dim of NS system
+ unsigned Dim;
 };
 
 
