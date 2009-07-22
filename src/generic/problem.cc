@@ -2677,7 +2677,7 @@ void Problem::sparse_assemble_row_or_column_compressed_with_maps(
  for(unsigned m=0;m<n_matrix;m++)
   {
    //Set the number of rows or columns
-   row_or_column_start[m] = new int[ndof];
+   row_or_column_start[m] = new int[ndof+1];
    //Counter for the total number of entries in the storage scheme
    unsigned long entry_count=0;
    row_or_column_start[m][0] = entry_count;

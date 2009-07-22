@@ -90,7 +90,10 @@ public:
  RectangularDrivenCavityProblem();
 
  /// Destructor (empty)
- ~RectangularDrivenCavityProblem(){}
+ ~RectangularDrivenCavityProblem()
+  {
+   delete Problem::mesh_pt();
+  }
 
  /// To be killed
  void sparse_assemble_row_or_column_compressed_test(
@@ -381,6 +384,9 @@ void RectangularDrivenCavityProblem<ELEMENT>::compare_assembly_strategies(
    matrix.sparse_indexed_output(matrix_file);
    matrix_file.close();
   }
+
+ // clean up
+ delete[] residuals[0];
 }
 
 

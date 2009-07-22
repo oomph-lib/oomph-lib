@@ -99,7 +99,6 @@ class OomphCommunicator
  ~OomphCommunicator()
   {
 #ifdef OOMPH_HAS_MPI
-   Owns_mpi_comm=false;
    if (Owns_mpi_comm)
     {
      MPI_Comm_free(&Comm);
