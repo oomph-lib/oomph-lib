@@ -3421,8 +3421,8 @@ void FiniteElement::locate_zeta(const Vector<double> &zeta,
        //Get the maximum residuals
        double maxres =
         std::abs(*std::max_element(dx.begin(),dx.end(),AbsCmp<double>()));
-       //If we have converged jump straight to the test at the end of the loop
 
+       //If we have converged jump straight to the test at the end of the loop
        if(maxres < Newton_tolerance)
         {
          keep_going=false;
@@ -3431,17 +3431,12 @@ void FiniteElement::locate_zeta(const Vector<double> &zeta,
       }
      while(keep_going);
 
-
-     //Test that the solution is within the element
-     for(unsigned i=0;i<ncoord;i++)
+     //Test whether the local coordinate are valid or not
+     bool valid=local_coord_is_valid(s,Rounding_tolerance);
+     if (!valid)
       {
-       // We're outside -- return the null pointer for the geom object
-       if((s[i] - s_max() >  Rounding_tolerance) ||
-          (s_min() - s[i] >  Rounding_tolerance))
-        {
-         geom_object_pt=0;
-         return;
-        }
+       geom_object_pt=0;
+       return;
       }
 
      // It is also possible now that it may not have converged "correctly", 
@@ -3455,13 +3450,7 @@ void FiniteElement::locate_zeta(const Vector<double> &zeta,
 
      //Otherwise the required point is located in "this" element:
      geom_object_pt = this;
-   
-     //If we're over the limit by less than the rounding error, adjust
-     for(unsigned i=0;i<ncoord;i++)
-      {
-       if(s[i] > s_max()) {s[i] = s_max();}
-       if(s[i] < s_min()) {s[i] = s_min();}
-      }
+
     }
 
 

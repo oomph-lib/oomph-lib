@@ -1357,8 +1357,31 @@ public:
    BrokenCopy::broken_assign("FiniteElement");
   }
 
- /// Get local coordinates of node j in the element; vector sets its own size
- /// (broken virtual)
+ ///Check whether the local coordinate are valid or not
+ virtual bool local_coord_is_valid(const Vector<double> &s)
+  {
+   throw OomphLibError(
+    "local_coord_is_valid is not implemented for this element\n",
+    "FiniteElement::local_coord_is_valid()",
+    OOMPH_EXCEPTION_LOCATION);
+   return true;
+  }
+ 
+ ///\short Check whether the local coordinate are valid or not, allowing for
+ /// a rounding tolerance. If the point is outside the element by less
+ /// than the tolerance, we move it back into the element. 
+ virtual bool local_coord_is_valid(Vector<double> &s, 
+                                   const double &rounding_tolerance)
+  {
+   throw OomphLibError(
+    "local_coord_is_valid is not implemented for this element\n",
+    "FiniteElement::local_coord_is_valid()",
+    OOMPH_EXCEPTION_LOCATION);
+   return true;
+  }
+
+ /// \short Get local coordinates of node j in the element; vector 
+ /// sets its own size (broken virtual)
  virtual void local_coordinate_of_node(const unsigned& j, Vector<double>& s)
   {
    throw OomphLibError(

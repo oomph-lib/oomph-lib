@@ -124,7 +124,7 @@ namespace oomph
     my_row_start[i] = row_start[i];
    }
   Ncol = matrix_pt->ncol();
-  Oomph_matrix_pt->rebuild_matrix_without_copy(Ncol,nnz,my_values_pt,
+  Oomph_matrix_pt->build_matrix_without_copy(Ncol,nnz,my_values_pt,
                                                my_column_indices,my_row_start);
   Ncol = matrix_pt->ncol();
 #endif

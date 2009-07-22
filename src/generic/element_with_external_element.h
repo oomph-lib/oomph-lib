@@ -54,7 +54,7 @@ namespace oomph
 /// are provided to calculate entries in the Jacobian from the data 
 /// of the external elements.
 //========================================================================
-class ElementWithExternalElement : public virtual FiniteElement
+class ElementWithExternalElement: public virtual FiniteElement
   {
     public:
 
@@ -208,6 +208,14 @@ class ElementWithExternalElement : public virtual FiniteElement
    /// external elements. 
    unsigned nexternal_interaction_geometric_data() const 
     {return Nexternal_interaction_geometric_data;}
+
+   /// Are we including external geometric data in the element's Jacobian
+   bool add_external_geometric_data()
+    {return Add_external_geometric_data;}
+
+   /// Are we including external data in the element's Jacobian
+   bool add_external_interaction_data()
+    {return Add_external_interaction_data;}
    
    /// \short Return vector of pointers to the geometric Data objects that 
    /// affect the interactions on the element. 
@@ -224,20 +232,35 @@ class ElementWithExternalElement : public virtual FiniteElement
      return temp_data;
     }
 
-   /// Do not include any external geometric data. For efficiency, 
-   /// this function should be
-   /// called if the external element does not move.
+   /// \short Do not include any external geometric data when computing
+   /// the element's Jacobian. This function should be
+   /// called if the external element does not move and/or if
+   /// the "source term" does not depend on spatial derivatives
+   /// of the field computed by the other element.
    void ignore_external_geometric_data() {Add_external_geometric_data = false;}
+
+   /// \short Do not include any external interaction data when computing
+   /// the element's Jacobian
+   void ignore_external_interaction_data() 
+    {Add_external_interaction_data = false;}
      
-   /// Do include external geometric data. This function should be set
-   /// to re-enable inclusion of external geometric data
-   void include_external_geometric_data() {Add_external_geometric_data = true;}
+   /// \short Do include external geometric data when computing
+   /// the element's Jacobian. This function should be called
+   /// to re-enable inclusion of external geometric data.
+   void include_external_geometric_data() 
+    {Add_external_geometric_data = true;}
+
+   /// \short Do include external geometric data when computing the element's
+   /// Jacobian This function should be called
+   /// to re-enable inclusion of external interaction data
+   void include_external_interaction_data() 
+    {Add_external_interaction_data = true;}
 
    /// \short Is the external geometric data taken into account when forming
    /// the Jacobian?
    bool external_geometric_data_is_included() const
    {return Add_external_geometric_data;}
-   
+
     protected:
 
    /// \short Overload the assign internal and external local equation

@@ -59,6 +59,7 @@ template<>
  class TElementShape<1,2>
  {
    public:
+
 //=======================================================================
 /// Return local coordinates of node j
 //=======================================================================
@@ -216,7 +217,6 @@ template<>
  class TElementShape<1,4>
  {
    public:
-
 //=======================================================================
 /// Return local coordinates of node j
 //=======================================================================
@@ -539,7 +539,6 @@ template<>
  class TElementShape<2,4>
  {
    public:
-
 //=======================================================================
 /// Return local coordinates of node j
 //=======================================================================
@@ -742,6 +741,88 @@ void d2shape_local(const Vector<double> &s,
    BrokenCopy::broken_assign("TElementBase");
   }
 
+
+
+ ///Check whether the local coordinates are valid or not
+ bool local_coord_is_valid(const Vector<double> &s) 
+  {
+
+   // Check coordinates
+   unsigned ncoord=dim();
+   double sum=0.0;   
+   for (unsigned i=0;i<ncoord;i++)
+    {
+     //Each local coordinate must be positive
+     if (s[i]<0.0)
+      {
+       return false;
+      }
+     sum+=s[i];
+    }
+   
+   //Sum must be less than 1
+   if (sum<=1.0)
+    {
+     return true;
+    }
+   
+   // We're outside...
+   return false;
+
+  }
+ 
+ /// \short Check whether the local coordinates are valid or not and
+ /// allow for rounding tolerance. If the local coordinate specifed
+ /// by s is "slightly" outside the element (as specified by
+ /// rounding_tolerance) we move the point back into the element. 
+ bool local_coord_is_valid(Vector<double> &s, 
+                           const double &rounding_tolerance)
+  {
+
+   // Check coordinates
+   unsigned ncoord=dim();
+   double sum=0.0;
+   for (unsigned i=0;i<ncoord;i++)
+    {
+     //We allow a slight rounding tolerance
+     //Each coordinate must be positive
+     if (s[i]<0.0)
+      {
+       if (fabs(s[i])<rounding_tolerance)
+        {
+         s[i]=0.0;
+        }
+       else
+        {
+         return false;
+        }
+      }
+     sum+=s[i];
+    }
+   
+   
+   //Sum must be less than 1
+   double excess=sum-1.0;
+   if (sum<=1.0)
+    {
+     return true;
+    }
+   else if ( (excess >= 0.0) && ( excess < rounding_tolerance) )
+    {
+     //In this case, we subtract 10% more than excess to refit
+     double sub = (1.1*excess)/3.0 ;
+     for (unsigned i=0;i<ncoord;i++)
+      {
+       s[i]-=sub;
+      }
+     return true;
+    }
+   
+   // We're genuinely outside the element -- bail out.
+   return false;
+
+  }
+ 
 };
 
 //=======================================================================

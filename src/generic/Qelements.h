@@ -26,7 +26,6 @@
 //LIC// 
 //LIC//====================================================================
 //Header functions for classes that define Qelements
-
 //Include guards to prevent multiple inclusion of the header
 #ifndef OOMPH_QELEMENT_HEADER
 #define OOMPH_QELEMENT_HEADER
@@ -81,7 +80,49 @@ class QElementBase : public virtual FiniteElement
    S_macro_ur_pt=0;
   }
 
- /// Set pointer to macro element also sets up storage for the
+ ///Check whether the local coordinate are valid or not 
+ bool local_coord_is_valid(const Vector<double> &s) 
+  {
+   unsigned ncoord = dim();
+   for(unsigned i=0;i<ncoord;i++)
+    {
+     // We're outside 
+     if((s[i] - s_max() >  0.0) ||
+        (s_min() - s[i] >  0.0))
+      {
+       return false;
+      }
+    }
+   return true;
+  }
+ 
+ /// \short Check whether the local coordinate are valid or not, allowing for
+ /// rounding tolerance. Nodal coordinate is adjusted to move the
+ /// point back into the element if it's outside the element
+ /// to within that tolerance
+ bool local_coord_is_valid(Vector<double> &s, 
+                           const double & rounding_tolerance)
+  {
+   unsigned ncoord = dim();
+   for(unsigned i=0;i<ncoord;i++)
+    {
+     // We're outside
+     if((s[i] - s_max() >  rounding_tolerance) ||
+        (s_min() - s[i] >  rounding_tolerance))
+      {
+       return false;
+      }
+     else
+      {
+       // Adjust to move it onto the boundary
+       if (s[i] > s_max() ) s[i] = s_max();
+       if (s[i] < s_min() ) s[i] = s_min();
+      }
+    }
+   return true;
+  }
+ 
+ /// \short Set pointer to macro element also sets up storage for the
  /// reference coordinates and initialises them
  virtual void set_macro_elem_pt(MacroElement* macro_elem_pt)
   {
