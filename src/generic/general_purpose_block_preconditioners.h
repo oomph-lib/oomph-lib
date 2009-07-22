@@ -304,14 +304,14 @@ namespace oomph
    // create the subsidiary preconditioners
    for (unsigned i=0;i<nblock_types;i++)
     {
-     if (Subsidiary_preconditioner_function_pt == 0)
+     if (this->Subsidiary_preconditioner_function_pt == 0)
       {
        Diagonal_block_preconditioner_pt[i] = new SuperLUPreconditioner;
       }
      else
       {
        Diagonal_block_preconditioner_pt[i] = 
-        (*Subsidiary_preconditioner_function_pt)();
+        (*(this->Subsidiary_preconditioner_function_pt))();
       }
     }
 
@@ -576,14 +576,14 @@ namespace oomph
     {
 
      // create the preconditioner
-     if (Subsidiary_preconditioner_function_pt == 0)
+     if (this->Subsidiary_preconditioner_function_pt == 0)
       {
        Diagonal_block_preconditioner_pt[i] = new SuperLUPreconditioner;
       }
      else
       {
        Diagonal_block_preconditioner_pt[i] = 
-        (*Subsidiary_preconditioner_function_pt)();
+        (*(this->Subsidiary_preconditioner_function_pt))();
       }
 
      // get the diagonal block
@@ -779,13 +779,13 @@ namespace oomph
     }
 
    // create the preconditioner
-   if (Subsidiary_preconditioner_function_pt == 0)
+   if (this->Subsidiary_preconditioner_function_pt == 0)
     {
      Preconditioner_pt = new SuperLUPreconditioner;
     }
    else
     {
-     Preconditioner_pt = (*Subsidiary_preconditioner_function_pt)();
+     Preconditioner_pt = (*(this->Subsidiary_preconditioner_function_pt))();
     }
    Preconditioner_pt->setup(problem_pt,exact_block_matrix_pt);
    

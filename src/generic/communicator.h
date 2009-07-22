@@ -280,6 +280,12 @@ class OomphCommunicator
    // Broadcast to everybody how many entries to expect
    MPI_Bcast(&n,1,MPI_INT,source,this->mpi_comm());
 
+   // Resize Vector everywhere else in preparation
+   if (this->my_rank()!=source)
+    {
+     x.resize(n);
+    }
+
    // Broadcast the Vector directly
    MPI_Bcast(&x[0],n,MPI_INT,source,this->mpi_comm());
   }
@@ -301,6 +307,12 @@ class OomphCommunicator
  
    // Broadcast to everybody how many entries to expect
    MPI_Bcast(&n,1,MPI_INT,source,this->mpi_comm());
+
+   // Resize Vector everywhere else in preparation
+   if (this->my_rank()!=source)
+    {
+     x.resize(n);
+    }
 
    // Broadcast the Vector directly
    MPI_Bcast(&x[0],n,MPI_DOUBLE,source,this->mpi_comm());

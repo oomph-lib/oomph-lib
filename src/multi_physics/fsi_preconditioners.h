@@ -528,7 +528,7 @@ public :
    // set the mesh pointers
    Navier_stokes_mesh_pt = 0;
    Wall_mesh_pt = 0;
-   set_nmesh(2);
+   this->set_nmesh(2);
 
    // Default setting: Retain fluid on solid
    Retain_solid_onto_fluid_terms=false;
