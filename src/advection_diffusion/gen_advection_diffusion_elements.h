@@ -392,6 +392,68 @@ public:
     }
   }
 
+ /// Get flux: \f$\mbox{flux}[i] = \mbox{d}u / \mbox{d}x_i \f$
+ void get_total_flux(const Vector<double>& s, 
+                     Vector<double>& total_flux) const
+  {
+   //Find out how many nodes there are in the element
+   const unsigned n_node = nnode();
+   
+   //Get the nodal index at which the unknown is stored
+   const unsigned u_nodal_index = u_index_cons_adv_diff();
+   
+   //Set up memory for the shape and test functions
+   Shape psi(n_node);
+   DShape dpsidx(n_node,DIM);
+ 
+   //Call the derivatives of the shape and test functions
+   dshape_eulerian(s,psi,dpsidx);
+   
+   //Storage for the Eulerian position
+   Vector<double> interpolated_x(DIM,0.0);
+   //Storage for the concentration
+   double interpolated_u = 0.0;
+   //Storage for the derivatives of the concentration
+   Vector<double> interpolated_dudx(DIM,0.0);
+
+    // Loop over nodes
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     //Get the value at the node
+     const double u_value = this->nodal_value(l,u_nodal_index);
+     interpolated_u += u_value*psi(l);
+     // Loop over directions
+     for(unsigned j=0;j<DIM;j++)
+      {
+       interpolated_x[j] += this->nodal_position(l,j)*psi(l);
+       interpolated_dudx[j] += u_value*dpsidx(l,j);
+      }
+    }
+
+   //Dummy integration point 
+   unsigned ipt=0;
+
+   //Get the conserved wind (non-divergence free)
+   Vector<double> conserved_wind(DIM);
+   get_conserved_wind_cons_adv_diff(ipt,s,interpolated_x,conserved_wind);
+
+   //Get diffusivity tensor
+   DenseMatrix<double> D(DIM,DIM);
+   get_diff_cons_adv_diff(ipt,s,interpolated_x,D);
+
+   //Calculate the total flux made up of the diffusive flux
+   //and the conserved wind
+   for(unsigned i=0;i<DIM;i++)
+    {                               
+     total_flux[i] = 0.0;
+     for(unsigned j=0;j<DIM;j++)
+      {
+       total_flux[i] +=  D(i,j)*interpolated_dudx[j];
+      }
+     total_flux[i] -= conserved_wind[i]*interpolated_u;
+    }
+  }
+
  
  /// Add the element's contribution to its residual vector (wrapper)
  void fill_in_contribution_to_residuals(Vector<double> &residuals)

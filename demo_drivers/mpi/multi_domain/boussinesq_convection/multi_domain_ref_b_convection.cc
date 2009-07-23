@@ -359,13 +359,15 @@ RefineableConvectionProblem()
  Multi_domain_functions::Nx_bin=30;
  Multi_domain_functions::Ny_bin=10;
 
- // Change the minimum and maximum bin coordinates and the percentage offset
+ // Change the minimum and maximum bin coordinates 
  // and avoid the computation of the bin boundaries "on the fly"
  Multi_domain_functions::Compute_extreme_bin_coordinates=false;
  Multi_domain_functions::X_min=0.0;
  Multi_domain_functions::X_max=3.0;
  Multi_domain_functions::Y_min=0.0;
  Multi_domain_functions::Y_max=1.0;
+
+ // Set the percentage offset to zero
  Multi_domain_functions::Percentage_offset=0.0;
 
  // Set the parameter that controls the number of sampling points

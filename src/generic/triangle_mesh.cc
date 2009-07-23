@@ -102,7 +102,7 @@ namespace TriangleBoundaryHelper
   Node* node2_pt() const {return Node2_pt;}
   
   /// Comparison operator
-  bool Edge::operator==(const Edge& other) const
+  bool operator==(const Edge& other) const
    {
     if ((Node1_pt==other.node1_pt())&&
         (Node2_pt==other.node2_pt()))
@@ -119,7 +119,7 @@ namespace TriangleBoundaryHelper
   
   
   /// Less-than operator
-  bool Edge::operator<(const Edge& other) const
+  bool operator<(const Edge& other) const
    {
     if (Node1_pt<other.node1_pt())
      {

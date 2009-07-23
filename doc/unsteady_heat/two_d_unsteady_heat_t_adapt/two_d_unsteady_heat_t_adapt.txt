@@ -172,9 +172,12 @@ which we will discuss below.
 
 \section constructor The problem constructor
 
-The  problem constructor is identical to that in the
-<A HREF="../../two_d_unsteady_heat/html/index.html">previous example.</A>
-
+The  problem constructor is almost identical to that in the
+<A HREF="../../two_d_unsteady_heat/html/index.html">previous
+example.</A> The only difference is that the boolean flag \c true is
+passed to the constructor of the \c BDF<2> timestepper, which means that
+a predictor step is computed for each timestep, see <a href="#back">
+background </a> for more details.
 
 <HR>
 <HR>
