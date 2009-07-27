@@ -821,6 +821,8 @@ TurekProblem(const double &length,
  // solves of these blocks.
 
 #ifdef HAVE_HYPRE
+//Only use HYPRE if we don't have MPI enabled
+#ifndef OOMPH_HAS_MPI
 
  // Create internal preconditioners used on Schur block
  Preconditioner* P_matrix_preconditioner_pt = new HyprePreconditioner;
@@ -840,6 +842,7 @@ TurekProblem(const double &length,
  // Shut up
  P_hypre_solver_pt->doc_time()=false;
 
+#endif
 #endif
 
  // Assign equation numbers
@@ -1081,11 +1084,6 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::doc_solution(
 //======================================================================
 int main(int argc, char* argv[])
 {
-
-#ifdef OOMPH_HAS_MPI
-  MPI_Helpers::init(argc,argv);
-#endif
-
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
 
@@ -1175,10 +1173,6 @@ int main(int argc, char* argv[])
  }
  
  trace_file.close(); 
-
-#ifdef OOMPH_HAS_MPI
- MPI_Helpers::finalize();
-#endif
 
 }//end of main
 

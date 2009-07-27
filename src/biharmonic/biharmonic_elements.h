@@ -135,6 +135,18 @@ public:
  }
  
 
+ /// Output at default number of plot points
+ void output(std::ostream &outfile)
+  {FiniteElement::output(outfile);}
+ 
+ /// C-style output 
+ void output(FILE* file_pt)
+  {FiniteElement::output(file_pt);}
+
+ /// C_style output at n_plot points
+ void output(FILE* file_pt, const unsigned &n_plot)
+  {FiniteElement::output(file_pt,n_plot);}
+
 
  /// output fluid velocity field
  void output_fluid_velocity(std::ostream &outfile, const unsigned &nplot)
@@ -210,7 +222,7 @@ public:
 
 
  /// output analytic solution
- virtual void output_fct(std::ostream &outfile,const unsigned &nplot, 
+ void output_fct(std::ostream &outfile,const unsigned &nplot, 
                  FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   { 
 
@@ -253,6 +265,15 @@ public:
  this->write_tecplot_zone_footer(outfile,nplot);
 
   }
+
+ /// \short Output exact solution specified via function pointer
+ /// at a given time and at a given number of plot points.
+ /// Function prints as many components as are returned in solution Vector.
+ /// Implement broken FiniteElement base class version
+ void output_fct(std::ostream &outfile, const unsigned &nplot, 
+                 const double& time,
+                 FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
+  {FiniteElement::output_fct(outfile,nplot,time,exact_soln_pt);}
  
  
  /// computes the error 
@@ -332,6 +353,16 @@ public:
  this->write_tecplot_zone_footer(outfile,3);
   }		
 
+
+
+ /// \short Plot the error when compared 
+ /// against a given time-dependent exact solution \f$ {\bf f}(t,{\bf x}) \f$.
+ /// Also calculates the norm of the error and that of the exact solution.
+ /// Call broken base-class version.
+ void compute_error(std::ostream &outfile, 
+                    FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
+                    const double& time, double& error, double& norm)
+  {FiniteElement::compute_error(outfile,exact_soln_pt,time,error,norm);}
  
  /// calculates interpolated u at s
  double interpolated_u_biharmonic(const Vector<double>& s)
@@ -519,29 +550,53 @@ public:
    return DIM*2;
   }
  
+
+ /// Output
+ void output(std::ostream &outfile)
+  {BiharmonicEquations<DIM>::output(outfile);}
  
  /// output wrapper
  void output(std::ostream &outfile, const unsigned &n_plot)
-  {
-   BiharmonicEquations<DIM>::output(outfile, n_plot);
-  }	
+  {BiharmonicEquations<DIM>::output(outfile, n_plot);}	
+ 
+ /// C-style output 
+ void output(FILE* file_pt)
+  {BiharmonicEquations<DIM>::output(file_pt);}
+
+ /// C_style output at n_plot points
+ void output(FILE* file_pt, const unsigned &n_plot)
+  {BiharmonicEquations<DIM>::output(file_pt,n_plot);}
+
  
  
  /// analytic solution wrapper
  void output_fct(std::ostream &outfile,const unsigned &nplot, 
                  FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
-  {
-   BiharmonicEquations<DIM>::output_fct(outfile, nplot, exact_soln_pt);
-  }
+  {BiharmonicEquations<DIM>::output_fct(outfile, nplot, exact_soln_pt);}
  
+
+/// Final override
+ void output_fct(std::ostream &outfile, const unsigned &nplot, 
+                 const double& time,
+                 FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt)
+  {BiharmonicEquations<DIM>::output_fct(outfile,nplot,time,exact_soln_pt);}
+
  
  /// computes error
- void compute_error(std::ostream &outfile,  FiniteElement::SteadyExactSolutionFctPt 
+ void compute_error(std::ostream &outfile,  
+                    FiniteElement::SteadyExactSolutionFctPt 
                     exact_soln_pt, double& error, double& norm)
-  {
-   BiharmonicEquations<DIM>::compute_error(outfile, exact_soln_pt, error, 
-                                           norm);
-  }		
+  {BiharmonicEquations<DIM>::compute_error(outfile, exact_soln_pt, error, 
+                                           norm);}
+
+ /// Call the equations-class overloaded unsteady error calculation
+ void compute_error(std::ostream &outfile, 
+                    FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
+                    const double& time, double& error, double& norm)
+  {BiharmonicEquations<DIM>::
+   compute_error(outfile,exact_soln_pt,time,error,norm);}
+
+		
 };
 
 

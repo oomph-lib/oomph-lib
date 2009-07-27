@@ -510,7 +510,7 @@ namespace oomph
    /// The methods block_number(...) and index_in_block(...) will only
    /// work for global indices between first_lookup_row() and 
    /// first_lookup_row()+nlookup_rows()
-   const unsigned first_lookup_row() 
+   unsigned first_lookup_row() 
     {
      if (Master_block_preconditioner_pt == 0)
       {
@@ -529,7 +529,7 @@ namespace oomph
    /// The methods block_number(...) and index_in_block(...) will only
    /// work for global indices between first_lookup_row() and 
    /// first_lookup_row()+nlookup_rows()
-   const unsigned nlookup_rows() 
+   unsigned nlookup_rows() 
     { 
      if (Master_block_preconditioner_pt == 0)
       {
@@ -585,7 +585,7 @@ namespace oomph
 
    /// \short returns true if this preconditioner is a subsidiary
    /// preconditioner
-   const bool is_subsidiary_block_preconditioner()
+   bool is_subsidiary_block_preconditioner()
     {
      if (Master_block_preconditioner_pt == 0)
       {
@@ -596,7 +596,7 @@ namespace oomph
 
    /// \short return true if this preconditioenr is the master block
    /// preconditioner
-   const bool is_master_block_preconditioner()
+   bool is_master_block_preconditioner()
     {
      if (Master_block_preconditioner_pt == 0)
       {

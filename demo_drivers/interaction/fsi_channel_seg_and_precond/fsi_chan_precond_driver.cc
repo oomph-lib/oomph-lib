@@ -447,30 +447,35 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
 
 
 #ifdef HAVE_HYPRE
-
-      // By default, the LSC Preconditioner uses SuperLU as
-      // an exact preconditioner (i.e. a solver) for the
-      // momentum and Schur complement blocks. 
-      // Can overwrite this by passing pointers to 
-      // other preconditioners that perform the (approximate)
-      // solves of these blocks.
-
-      // Create internal preconditioners used on Schur block
-      HyprePreconditioner* P_matrix_preconditioner_pt = 
-       new HyprePreconditioner;
-
-      // Set defaults parameters for use as preconditioner on Poisson-type 
-      // problem
-      Hypre_default_settings::set_defaults_for_2D_poisson_problem(
-       P_matrix_preconditioner_pt);
-
-      // Use Hypre for the Schur complement block
-      prec_pt->navier_stokes_preconditioner_pt()->
-       set_p_preconditioner(P_matrix_preconditioner_pt);
-
-      // Shut up
-      P_matrix_preconditioner_pt->doc_time()=false;
-
+//If we are using MPI, then only use HYPRE if it has been initialised
+#ifdef OOMPH_HAS_MPI
+      if(MPI_Helpers::MPI_has_been_initialised)
+#endif
+       {
+        
+        // By default, the LSC Preconditioner uses SuperLU as
+        // an exact preconditioner (i.e. a solver) for the
+        // momentum and Schur complement blocks. 
+        // Can overwrite this by passing pointers to 
+        // other preconditioners that perform the (approximate)
+        // solves of these blocks.
+        
+        // Create internal preconditioners used on Schur block
+        HyprePreconditioner* P_matrix_preconditioner_pt = 
+         new HyprePreconditioner;
+        
+        // Set defaults parameters for use as preconditioner on Poisson-type 
+        // problem
+        Hypre_default_settings::set_defaults_for_2D_poisson_problem(
+         P_matrix_preconditioner_pt);
+        
+        // Use Hypre for the Schur complement block
+        prec_pt->navier_stokes_preconditioner_pt()->
+         set_p_preconditioner(P_matrix_preconditioner_pt);
+        
+        // Shut up
+        P_matrix_preconditioner_pt->doc_time()=false;
+       }
 #endif
 
       switch (solver_sub_flag)
@@ -641,9 +646,9 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
 //=============================================================================
 int main(int argc, char* argv[])
 { 
-#ifdef OOMPH_HAS_MPI
-  MPI_Helpers::init(argc,argv);
-#endif
+//#ifdef OOMPH_HAS_MPI
+//  MPI_Helpers::init(argc,argv);
+//#endif
 
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
@@ -758,9 +763,9 @@ int main(int argc, char* argv[])
    problem.unsteady_run();
   }
  
-#ifdef OOMPH_HAS_MPI
- MPI_Helpers::finalize();
-#endif
+//#ifdef OOMPH_HAS_MPI
+// MPI_Helpers::finalize();
+//#endif
 
 
 }//end of main

@@ -294,6 +294,7 @@ public:
   LevenbergMarquardtFittingFunctionObject(5)
   {}
 
+
  /// \short Evaluate the fitting function for the current set
  /// of parameters
  double fitting_function(const double& x)
@@ -302,6 +303,15 @@ public:
     exp(Parameter[1]*x)*Parameter[2]*sin(Parameter[3]*x+Parameter[4]);
   }
                                  
+ /// \short Overload all interfaces of the fitting function, call the default
+ /// finite difference version
+ double fitting_function(const double &x,
+                         Vector<double> &dfit_dparam)
+  {
+   return 
+    LevenbergMarquardtFittingFunctionObject::fitting_function(x,dfit_dparam);
+  }
+
  /// Number of parameters in fitting function
  virtual unsigned nparameter()
   {

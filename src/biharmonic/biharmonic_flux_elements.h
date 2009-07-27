@@ -209,7 +209,7 @@ private:
 
  /// \short Calculate the Jacobian of the mapping between local and global
  /// coordinates at the position s for face elements
- double J_eulerian(const Vector<double> &s);
+ double J_eulerian(const Vector<double> &s) const;
 
  /// \short Add the element's contribution to its residual vector. Flux 
  /// elements only make contribution to the residual vector

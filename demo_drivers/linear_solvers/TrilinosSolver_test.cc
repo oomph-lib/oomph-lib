@@ -312,11 +312,6 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 //========================================================================
 int main(int argc, char **argv)
 {
-#ifdef OOMPH_HAS_MPI
-  MPI_Helpers::init(argc,argv);
-#endif
-
-
   // Note: there is a memory leak in trilinos itself as 
   // demonstrated by this bit of code!
   if (false)
@@ -701,11 +696,6 @@ int main(int argc, char **argv)
    // Pass pointer to preconditioner to oomph-lib IterativeLinearSolver
    linear_solver_pt->preconditioner_pt()=preconditioner_pt;
   }
-
-#ifdef OOMPH_HAS_MPI
-MPI_Helpers::finalize();
-#endif
-
 
 } //end of main
 

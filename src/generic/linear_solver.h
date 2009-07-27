@@ -332,6 +332,16 @@ class FD_LU : public DenseLU
             const DoubleVector &rhs,
             DoubleVector &result)
   {DenseLU::solve(matrix_pt,rhs,result);}
+
+ /// \short Linear-algebra-type solver: Takes pointer to a matrix
+ /// and rhs vector and returns the solution of the linear system
+ /// Call the broken base-class version. If you want this, please 
+ /// implement it
+ void solve(DoubleMatrixBase* const &matrix_pt,
+                    const Vector<double> &rhs,
+                    Vector<double> &result)
+  {LinearSolver::solve(matrix_pt,rhs,result);}
+
 };
 
 
@@ -436,6 +446,17 @@ class SuperLUSolver : public LinearSolver
  void solve(DoubleMatrixBase* const &matrix_pt,
             const DoubleVector &rhs,
             DoubleVector &result);
+
+
+ /// \short Linear-algebra-type solver: Takes pointer to a matrix
+ /// and rhs vector and returns the solution of the linear system
+ /// Call the broken base-class version. If you want this, please 
+ /// implement it
+ void solve(DoubleMatrixBase* const &matrix_pt,
+                    const Vector<double> &rhs,
+                    Vector<double> &result)
+  {LinearSolver::solve(matrix_pt,rhs,result);}
+
  
  /// \short Resolve the system defined by the last assembled jacobian
  /// and the specified rhs vector if resolve has been enabled.

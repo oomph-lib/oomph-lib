@@ -295,6 +295,9 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem(
    // Create internal preconditioners used on Schur block
    //-----------------------------------------------------
 #ifdef HAVE_HYPRE
+//Trap because HYPRE can't handle the case when 
+//OOMPH_HAS_MPI, but we run in serial
+#ifndef OOMPH_HAS_MPI
    if (use_hypre_for_pressure)
     {
      P_matrix_preconditioner_pt = new HyprePreconditioner;
@@ -311,7 +314,7 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem(
       doc_time()=false;
     }
 #endif    
-
+#endif
 
    // Create internal preconditioners used on momentum block
    //--------------------------------------------------------
@@ -320,6 +323,9 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem(
      F_matrix_preconditioner_pt = 
       new BlockDiagonalPreconditioner<CRDoubleMatrix>;
 #ifdef HAVE_HYPRE
+//Trap because HYPRE can't handle the case when 
+//OOMPH_HAS_MPI, but we run in serial
+#ifndef OOMPH_HAS_MPI
      if (use_hypre_for_momentum)
       {
        dynamic_cast<BlockDiagonalPreconditioner<CRDoubleMatrix>* >
@@ -327,12 +333,16 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem(
         (Hypre_Subsidiary_Preconditioner_Helper::set_hypre_preconditioner);
       }
 #endif
+#endif
        // Use Hypre for momentum block 
        Prec_pt->set_f_preconditioner(F_matrix_preconditioner_pt);
     }
    else
     {
 #ifdef HAVE_HYPRE
+//Trap because HYPRE can't handle the case when 
+//OOMPH_HAS_MPI, but we run in serial
+#ifndef OOMPH_HAS_MPI
      if (use_hypre_for_momentum)
       {
        F_matrix_preconditioner_pt = new HyprePreconditioner;
@@ -349,6 +359,7 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem(
        // Use Hypre for momentum block 
        Prec_pt->set_f_preconditioner(F_matrix_preconditioner_pt);
       }
+#endif
 #endif
     }
 
@@ -406,12 +417,6 @@ void RectangularDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 //=====================================================================
 int main(int argc, char **argv)
 {
-
-
-#ifdef OOMPH_HAS_MPI
- MPI_Helpers::init(argc,argv);
-#endif
-
 
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
@@ -630,12 +635,6 @@ int main(int argc, char **argv)
    
   } // end of QTaylorHoodElements
  
-#ifdef OOMPH_HAS_MPI
- MPI_Helpers::finalize();
-#endif
-
-
-
 } // end_of_main
 
 

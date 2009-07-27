@@ -629,10 +629,6 @@ void run_it(LinearSolver* linear_solver_pt)
 //========================================================================
 int main(int argc, char *argv[])
 {
-#ifdef OOMPH_HAS_MPI
- MPI_Helpers::init(argc,argv);
-#endif
-
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
 
@@ -817,7 +813,5 @@ int main(int argc, char *argv[])
    doit=false;
 
   }
-#ifdef OOMPH_HAS_MPI
- MPI_Helpers::finalize();
-#endif
+
 } //end of main

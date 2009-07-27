@@ -100,34 +100,41 @@ public :
    F_preconditioner_pt = 0;
 
 #ifdef HAVE_HYPRE
-  //Set up the internal preconditioners
-   P_preconditioner_pt = new HyprePreconditioner;
-   
-   // Set parameters for use as preconditioner on Poisson-type problem
-   Hypre_default_settings::set_defaults_for_3D_poisson_problem(
-    static_cast<HyprePreconditioner*>(P_preconditioner_pt));
-   
-   // Use Hypre for the Schur complement block
-   Navier_stokes_preconditioner_pt->
-    set_p_preconditioner(P_preconditioner_pt);
-   
-   F_preconditioner_pt = new HyprePreconditioner;
-   
-   // Set parameters for use as preconditioner in for momentum 
-   // block in Navier-Stokes problem
-   Hypre_default_settings::set_defaults_for_navier_stokes_momentum_block(
-    static_cast<HyprePreconditioner*>(F_preconditioner_pt));
-   
-   // Use Hypre for momentum block 
-   Navier_stokes_preconditioner_pt->
-    set_f_preconditioner(F_preconditioner_pt);
-
-   //Set the Temperature preconditioner to also use AMG
-   delete Temperature_preconditioner_pt;
-
-   Temperature_preconditioner_pt = new HyprePreconditioner;
-   Hypre_default_settings::set_defaults_for_navier_stokes_momentum_block(
-    static_cast<HyprePreconditioner*>(Temperature_preconditioner_pt)); 
+//If we have compiled with MPI, 
+//only use HYPRE if it's been initialised
+#ifdef OOMPH_HAS_MPI
+   if(MPI_Helpers::MPI_has_been_initialised)
+#endif
+    {
+     //Set up the internal preconditioners
+     P_preconditioner_pt = new HyprePreconditioner;
+     
+     // Set parameters for use as preconditioner on Poisson-type problem
+     Hypre_default_settings::set_defaults_for_3D_poisson_problem(
+      static_cast<HyprePreconditioner*>(P_preconditioner_pt));
+     
+     // Use Hypre for the Schur complement block
+     Navier_stokes_preconditioner_pt->
+      set_p_preconditioner(P_preconditioner_pt);
+     
+     F_preconditioner_pt = new HyprePreconditioner;
+     
+     // Set parameters for use as preconditioner in for momentum 
+     // block in Navier-Stokes problem
+     Hypre_default_settings::set_defaults_for_navier_stokes_momentum_block(
+      static_cast<HyprePreconditioner*>(F_preconditioner_pt));
+     
+     // Use Hypre for momentum block 
+     Navier_stokes_preconditioner_pt->
+      set_f_preconditioner(F_preconditioner_pt);
+     
+     //Set the Temperature preconditioner to also use AMG
+     delete Temperature_preconditioner_pt;
+     
+     Temperature_preconditioner_pt = new HyprePreconditioner;
+     Hypre_default_settings::set_defaults_for_navier_stokes_momentum_block(
+      static_cast<HyprePreconditioner*>(Temperature_preconditioner_pt)); 
+    }
 #endif
 
    // Preconditioner hasn't been set up yet.
@@ -1694,10 +1701,11 @@ void RefineableConvectionProblem<ELEMENT>::doc_solution()
 //====================================================================
 int main(int argc, char **argv)
 {
-#ifdef OOMPH_HAS_MPI
- // Set up MPI_Helpers
- MPI_Helpers::init(argc,argv);
-#endif
+ //Uncomment for a parallel version
+//#ifdef OOMPH_HAS_MPI
+// // Set up MPI_Helpers
+// MPI_Helpers::init(argc,argv);
+//#endif
 
  // Set the direction of gravity
  Global_Physical_Variables::Direction_of_gravity[0] = 0.0;
@@ -1714,10 +1722,10 @@ int main(int argc, char **argv)
  //Document the solution
  problem.doc_solution();
 
-#ifdef OOMPH_HAS_MPI 
- // finalize MPI
- MPI_Helpers::finalize();
-#endif
+//#ifdef OOMPH_HAS_MPI 
+// // finalize MPI
+// MPI_Helpers::finalize();
+//#endif
 } // end of main
 
 

@@ -1448,11 +1448,6 @@ unsteady_run(string directory_for_data, double nstep, bool validation_run)
  char filename[100];   
  sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
  trace_file.open(filename);
-
- // Set SuperLU_dist as solver if have MPI
-// #ifdef OOMPH_HAS_MPI
-//  problem.linear_solver_pt() = new SuperLU_dist;
-// #endif
  
  // Number of timesteps per period
  unsigned nsteps_per_period=40;
@@ -1530,7 +1525,8 @@ int main(int argc, char *argv[])
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
 
- #ifdef OOMPH_HAS_MPI
+ //Uncomment for parallel stuff
+ /*#ifdef OOMPH_HAS_MPI
  // Initialise MPI
  MPI_Helpers::init(argc,argv);
 
@@ -1550,7 +1546,7 @@ int main(int argc, char *argv[])
    oomph_info << "Number of processors: " 
               << MPI_Helpers::Nproc << "\n";
   }
-#endif
+  #endif */
 
  // Set default values
  string directory_for_data = "RESLT";
@@ -1703,10 +1699,10 @@ int main(int argc, char *argv[])
      oomph_info << "-amplitude <value>        Set amplitude to value\n";
      oomph_info << "-validation_run           Generate validation data for 1D Womersley\n";
     }
-#ifdef OOMPH_HAS_MPI 
-   // finalize MPI
-   MPI_Helpers::finalize();
-#endif
+//#ifdef OOMPH_HAS_MPI 
+//   // finalize MPI
+//  MPI_Helpers::finalize();
+//#endif
    return (0);
   }
 
@@ -1998,10 +1994,10 @@ int main(int argc, char *argv[])
  ns_preconditioner_pt=0;
  
 
-#ifdef OOMPH_HAS_MPI 
- // finalize MPI
- MPI_Helpers::finalize();
-#endif
+//#ifdef OOMPH_HAS_MPI 
+// // finalize MPI
+// MPI_Helpers::finalize();
+//#endif
  
 } //end of driver code
 

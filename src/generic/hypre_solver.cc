@@ -269,6 +269,24 @@ namespace oomph
     }
 #endif
 
+#ifdef OOMPH_HAS_MPI
+   //Trap the case when we have compiled with MPI,
+   //but are running in serial
+   if(!MPI_Helpers::MPI_has_been_initialised)
+    {
+     std::ostringstream error_stream;
+     error_stream << "Oomph-lib has been compiled with MPI support and "
+                  << "you are using HYPRE.\n"
+                  << 
+      "For this combination of flags, MPI must be initialised.\n"
+                  << "Call MPI_Helpers::init() in the "
+                  << "main() function of your driver code\n";
+     throw OomphLibError(error_stream.str(),
+                         "HypreHelpers::create_HYPRE_Matrix()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
    // find number of rows/columns
    const unsigned nrow = int(oomph_matrix->nrow());
 
@@ -304,19 +322,19 @@ namespace oomph
    unsigned upper = lower + dist_pt->nrow_local() - 1;
 
 #ifdef OOMPH_HAS_MPI
-   HYPRE_IJMatrixCreate(dist_pt->communicator_pt()->mpi_comm(),
-                        lower,
-                        upper,
-                        lower,
-                        upper,
-                        &hypre_ij_matrix);
+     HYPRE_IJMatrixCreate(dist_pt->communicator_pt()->mpi_comm(),
+                          lower,
+                          upper,
+                          lower,
+                          upper,
+                          &hypre_ij_matrix);
 #else
-   HYPRE_IJMatrixCreate(MPI_COMM_WORLD,
-                        lower,
-                        upper,
-                        lower,
-                        upper,
-                        &hypre_ij_matrix);
+     HYPRE_IJMatrixCreate(MPI_COMM_WORLD,
+                          lower,
+                          upper,
+                          lower,
+                          upper,
+                          &hypre_ij_matrix);
 #endif
    HYPRE_IJMatrixSetObjectType(hypre_ij_matrix, HYPRE_PARCSR);
    HYPRE_IJMatrixInitialize(hypre_ij_matrix);
@@ -506,7 +524,7 @@ namespace oomph
 
       // set Euclid parameters using command line like array
       int n_args = 0;
-      char* args[22];
+      const char* args[22];
 
       // first argument is empty string
       args[n_args++] = "";
@@ -578,7 +596,7 @@ namespace oomph
       // set next entry in array to null
       args[n_args] = 0;
 
-      HYPRE_EuclidSetParams(Preconditioner, n_args, args);
+      HYPRE_EuclidSetParams(Preconditioner, n_args, const_cast<char**>(args));
 
       Existing_preconditioner = Euclid;
      }
@@ -693,7 +711,7 @@ namespace oomph
 
     // set Euclid parameters using command line like array
     int n_args = 0;
-    char* args[20];
+    const char* args[20];
 
     // first argument is empty string
     args[n_args++] = "";
@@ -766,7 +784,7 @@ namespace oomph
     // set next entry in array to null
     args[n_args] = 0;
 
-    HYPRE_EuclidSetParams(Solver, n_args, args);
+    HYPRE_EuclidSetParams(Solver, n_args, const_cast<char**>(args));
 
     HYPRE_EuclidSetup(Solver,
                       Matrix_par,

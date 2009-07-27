@@ -14,7 +14,12 @@ direct_solver_test
 # Do we have the HYPRE library?
 #==============================
 if HAVE_HYPRE
-   check_PROGRAMS += HypreSolver_test 
+#Don't add this if we have MPI 
+#(HYPRE can't handle serial execution of MPI-enabled code)
+#=========================================================
+if !WANT_MPI
+check_PROGRAMS += HypreSolver_test 
+endif
 endif
 
 

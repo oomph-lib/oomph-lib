@@ -234,6 +234,30 @@ public:
 
  /// The solve function uses the block factorisation
  void solve(Problem* const &problem_pt, DoubleVector &result);
+ 
+ /// \short The linear-algebra-type solver does not make sense. 
+ /// The interface is deliberately broken
+ void solve(DoubleMatrixBase* const &matrix_pt,
+            const DoubleVector &rhs,
+            DoubleVector &result)
+  {
+   throw OomphLibError(
+    "Linear-algebra interface does not make sense for this linear solver\n",
+    "AugmentedBlockFoldLinearSolver::solve()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+
+ /// \short The linear-algebra-type solver does not make sense. 
+ /// The interface is deliberately broken
+ void solve(DoubleMatrixBase* const &matrix_pt,
+            const Vector<double> &rhs,
+            Vector<double> &result)
+  {
+   throw OomphLibError(
+    "Linear-algebra interface does not make sense for this linear solver\n",
+    "AugmentedBlockFoldLinearSolver::solve()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
 
  /// The resolve function also uses the block factorisation
  void resolve(const DoubleVector &rhs, DoubleVector &result);
@@ -383,6 +407,31 @@ public:
  /// The solve function uses the block factorisation
  void solve(Problem* const &problem_pt, DoubleVector &result);
 
+ /// \short The linear-algebra-type solver does not make sense. 
+ /// The interface is deliberately broken
+ void solve(DoubleMatrixBase* const &matrix_pt,
+            const DoubleVector &rhs,
+            DoubleVector &result)
+  {
+   throw OomphLibError(
+    "Linear-algebra interface does not make sense for this linear solver\n",
+    "BlockPitchForkLinearSolver::solve()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+
+ /// \short The linear-algebra-type solver does not make sense. 
+ /// The interface is deliberately broken
+ void solve(DoubleMatrixBase* const &matrix_pt,
+            const Vector<double> &rhs,
+            Vector<double> &result)
+  {
+   throw OomphLibError(
+    "Linear-algebra interface does not make sense for this linear solver\n",
+    "BlockPitchForkLinearSolver::solve()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+
+
  /// The resolve function also uses the block factorisation
  void resolve(const DoubleVector &rhs, DoubleVector  &result);
 
@@ -424,6 +473,31 @@ public:
 
  /// The solve function uses the block factorisation
  void solve(Problem* const &problem_pt, DoubleVector &result);
+
+  /// \short The linear-algebra-type solver does not make sense. 
+ /// The interface is deliberately broken
+ void solve(DoubleMatrixBase* const &matrix_pt,
+            const DoubleVector &rhs,
+            DoubleVector &result)
+  {
+   throw OomphLibError(
+    "Linear-algebra interface does not make sense for this linear solver\n",
+    "AugmentedBlockPitchForkLinearSolver::solve()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+
+ /// \short The linear-algebra-type solver does not make sense. 
+ /// The interface is deliberately broken
+ void solve(DoubleMatrixBase* const &matrix_pt,
+            const Vector<double> &rhs,
+            Vector<double> &result)
+  {
+   throw OomphLibError(
+    "Linear-algebra interface does not make sense for this linear solver\n",
+    "AugmentedBlockPitchForkLinearSolver::solve()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+
 
  /// The resolve function also uses the block factorisation
  void resolve(const DoubleVector &rhs, DoubleVector &result);
@@ -596,6 +670,31 @@ public:
 
  /// The solve function uses the block factorisation
  void solve(Problem* const &problem_pt, DoubleVector &result);
+
+  /// \short The linear-algebra-type solver does not make sense. 
+ /// The interface is deliberately broken
+ void solve(DoubleMatrixBase* const &matrix_pt,
+            const DoubleVector &rhs,
+            DoubleVector &result)
+  {
+   throw OomphLibError(
+    "Linear-algebra interface does not make sense for this linear solver\n",
+    "BlockHopfLinearSolver::solve()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+
+ /// \short The linear-algebra-type solver does not make sense. 
+ /// The interface is deliberately broken
+ void solve(DoubleMatrixBase* const &matrix_pt,
+            const Vector<double> &rhs,
+            Vector<double> &result)
+  {
+   throw OomphLibError(
+    "Linear-algebra interface does not make sense for this linear solver\n",
+    "BlockHopfLinearSolver::solve()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+
 
  /// The resolve function also uses the block factorisation
  void resolve(const DoubleVector &rhs, DoubleVector &result);

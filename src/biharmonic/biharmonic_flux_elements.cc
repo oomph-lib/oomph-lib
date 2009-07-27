@@ -76,7 +76,7 @@ BiharmonicFluxElement(FiniteElement* const &bulk_el_pt,
 /// The jacobian of the 1D face element is computed which is dt/ds_t 
 //=============================================================================
 template<>
-double BiharmonicFluxElement<2>::J_eulerian(const Vector<double> &s)
+double BiharmonicFluxElement<2>::J_eulerian(const Vector<double> &s) const
 {
 
  //Find the number of nodes

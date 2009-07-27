@@ -443,6 +443,16 @@ class BiCGStab : public IterativeLinearSolver
   //Call the helper function with no problem
   this->solve_helper(matrix_pt,rhs,solution,0);
  }
+
+ /// \short Linear-algebra-type solver: Takes pointer to a matrix
+ /// and rhs vector and returns the solution of the linear system
+ /// Call the broken base-class version. If you want this, please 
+ /// implement it
+ void solve(DoubleMatrixBase* const &matrix_pt,
+                    const Vector<double> &rhs,
+                    Vector<double> &result)
+  {LinearSolver::solve(matrix_pt,rhs,result);}
+
  
  
  /// \short Re-solve the system defined by the last assembled Jacobian
@@ -574,6 +584,17 @@ class GS : public IterativeLinearSolver
   this->solve_helper(matrix_pt,rhs,solution,0);
  }
  
+ 
+ /// \short Linear-algebra-type solver: Takes pointer to a matrix
+ /// and rhs vector and returns the solution of the linear system
+ /// Call the broken base-class version. If you want this, please 
+ /// implement it
+ void solve(DoubleMatrixBase* const &matrix_pt,
+                    const Vector<double> &rhs,
+                    Vector<double> &result)
+  {LinearSolver::solve(matrix_pt,rhs,result);}
+
+
  /// \short Re-solve the system defined by the last assembled Jacobian
  /// and the rhs vector specified here. Solution is returned in the
  /// vector result.
@@ -714,6 +735,16 @@ class GMRES : public IterativeLinearSolver
   this->solve_helper(matrix_pt,rhs,solution,0);
  }
  
+ 
+ /// \short Linear-algebra-type solver: Takes pointer to a matrix
+ /// and rhs vector and returns the solution of the linear system
+ /// Call the broken base-class version. If you want this, please 
+ /// implement it
+ void solve(DoubleMatrixBase* const &matrix_pt,
+                    const Vector<double> &rhs,
+                    Vector<double> &result)
+  {LinearSolver::solve(matrix_pt,rhs,result);}
+
  /// \short Re-solve the system defined by the last assembled Jacobian
  /// and the rhs vector specified here. Solution is returned in the
  /// vector result.

@@ -376,7 +376,7 @@ void TriangleMeshBase::setup_boundary_element_info(std::ostream &outfile)
    unsigned  bound=it->second.Boundary; 
    
    //If the edge has been visited only once
-   if ((edge_count[current_edge]==1) && (bound >= 0))
+   if(edge_count[current_edge]==1)
     {
      // Count the edges that are on the same element and on the same boundary
      face_count(static_cast<unsigned>(bound),it->second.FE_pt)=  

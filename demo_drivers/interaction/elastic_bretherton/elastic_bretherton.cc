@@ -346,7 +346,7 @@ protected:
 
  ///\short The local equation number for the external data associated
  /// with the unknown pressure gradient
- unsigned Delta_P_local_eqn;
+ int Delta_P_local_eqn;
 
  /// \short The index in the external data at which the Delta_p data is
  /// stored
@@ -1193,6 +1193,28 @@ public:
 
  /// Constructor: 
  AirwayReopeningProblem();
+
+ /// Destructor, clean up all allocated memory
+ ~AirwayReopeningProblem()
+  {
+   //Delete objects created in constructor in reverse order
+   delete Constraint_mesh_pt;
+   delete Bulk_mesh_pt;
+   //Delete objects associated with lower wall mesh
+   delete Global_Physical_Variables::Lower_wall_pt;
+   delete Lower_wall_mesh_pt;
+   delete Undeformed_lower_wall_geom_pt;
+   //Delete objects associated with upper wall mesh
+   delete Global_Physical_Variables::Upper_wall_pt;
+   delete Upper_wall_mesh_pt;
+   delete Undeformed_upper_wall_geom_pt;
+   
+   //Delete global data
+   delete Mesh_fraction_at_transition_pt;
+   delete Bubble_pressure_data_pt;
+  //Delete the linear solver, if allocated
+   if(Frontal_solver) {delete linear_solver_pt();}
+  }
 
  /// \short Overload the continuation actions because we're 
  /// continuing in Ca which does not affect the mesh

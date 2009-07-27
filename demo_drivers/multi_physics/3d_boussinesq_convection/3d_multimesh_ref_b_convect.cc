@@ -382,36 +382,41 @@ switch_to_iterative_linear_solver()
  linear_solver_pt() = iterative_linear_solver_pt;
 
 #ifdef HAVE_HYPRE
-
- // Need to create a SuperLUDistPreconditioner for the temperature ("solid")
- HyprePreconditioner* Temperature_prec_pt = new HyprePreconditioner;
- Hypre_default_settings::set_defaults_for_navier_stokes_momentum_block(
-  static_cast<HyprePreconditioner*>(Temperature_prec_pt)); 
- //SuperLUPreconditioner* Temperature_prec_pt =new SuperLUPreconditioner;
-  prec_pt->set_solid_preconditioner_pt(Temperature_prec_pt);
-  
- //Set up the internal preconditioners
-  Preconditioner* P_matrix_preconditioner_pt = new HyprePreconditioner;
-  
-  // Set parameters for use as preconditioner on Poisson-type problem
-  Hypre_default_settings::set_defaults_for_3D_poisson_problem(
-   static_cast<HyprePreconditioner*>(P_matrix_preconditioner_pt));
-  
-  // Use Hypre for the Schur complement block
-  prec_pt->navier_stokes_preconditioner_pt()->
-   set_p_preconditioner(P_matrix_preconditioner_pt);
-  
-  Preconditioner* F_matrix_preconditioner_pt = new HyprePreconditioner;
-  
-  // Set parameters for use as preconditioner in for momentum 
-  // block in Navier-Stokes problem
-  Hypre_default_settings::set_defaults_for_navier_stokes_momentum_block(
-   static_cast<HyprePreconditioner*>(F_matrix_preconditioner_pt));
-  
-  // Use Hypre for momentum block 
-  prec_pt->navier_stokes_preconditioner_pt()->
-   set_f_preconditioner(F_matrix_preconditioner_pt);
-#endif 
+//If compiled with MPI, only use HYPRE if MPI has been initialised
+#ifdef OOMPH_HAS_MPI
+ if(MPI_Helpers::MPI_has_been_initialised)
+#endif
+  {
+   // Need to create a SuperLUDistPreconditioner for the temperature ("solid")
+   HyprePreconditioner* Temperature_prec_pt = new HyprePreconditioner;
+   Hypre_default_settings::set_defaults_for_navier_stokes_momentum_block(
+    static_cast<HyprePreconditioner*>(Temperature_prec_pt)); 
+   //SuperLUPreconditioner* Temperature_prec_pt =new SuperLUPreconditioner;
+   prec_pt->set_solid_preconditioner_pt(Temperature_prec_pt);
+   
+   //Set up the internal preconditioners
+   Preconditioner* P_matrix_preconditioner_pt = new HyprePreconditioner;
+   
+   // Set parameters for use as preconditioner on Poisson-type problem
+   Hypre_default_settings::set_defaults_for_3D_poisson_problem(
+    static_cast<HyprePreconditioner*>(P_matrix_preconditioner_pt));
+   
+   // Use Hypre for the Schur complement block
+   prec_pt->navier_stokes_preconditioner_pt()->
+    set_p_preconditioner(P_matrix_preconditioner_pt);
+   
+   Preconditioner* F_matrix_preconditioner_pt = new HyprePreconditioner;
+   
+   // Set parameters for use as preconditioner in for momentum 
+   // block in Navier-Stokes problem
+   Hypre_default_settings::set_defaults_for_navier_stokes_momentum_block(
+    static_cast<HyprePreconditioner*>(F_matrix_preconditioner_pt));
+   
+   // Use Hypre for momentum block 
+   prec_pt->navier_stokes_preconditioner_pt()->
+    set_f_preconditioner(F_matrix_preconditioner_pt);
+  }
+#endif
 }
 
 //===================start_actions_before_newton_solve====================
@@ -585,11 +590,11 @@ int main(int argc, char **argv)
 {
 
 
-#ifdef OOMPH_HAS_MPI
- // Set up MPI_Helpers
- MPI_Helpers::init(argc,argv);
-#endif
-
+//Uncomment this to turn this into a parallel code
+//#ifdef OOMPH_HAS_MPI
+// // Set up MPI_Helpers
+// MPI_Helpers::init(argc,argv);
+// #endif
 
  // Set the direction of gravity
  Global_Physical_Variables::Direction_of_gravity[0] = 0.0;
@@ -615,10 +620,10 @@ int main(int argc, char **argv)
  problem.doc_solution();
 
 
-#ifdef OOMPH_HAS_MPI 
- // finalize MPI
- MPI_Helpers::finalize();
-#endif
+//#ifdef OOMPH_HAS_MPI 
+// // finalize MPI
+// MPI_Helpers::finalize();
+//#endif
 
 } // end of main
 

@@ -275,10 +275,6 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 //========================================================================
 int main(int argc, char **argv)
 {
-#ifdef OOMPH_HAS_MPI
- MPI_Helpers::init(argc,argv);
-#endif
-
  //Set up the problem
  //------------------
 
@@ -341,9 +337,6 @@ int main(int argc, char **argv)
    doc_info.number()++;
  
   }
-#ifdef OOMPH_HAS_MPI
- MPI_Helpers::finalize();
-#endif
 
 } //end of main
 

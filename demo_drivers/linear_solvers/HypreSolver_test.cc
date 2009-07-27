@@ -314,10 +314,6 @@ void PoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 //========================================================================
 int main(int argc, char **argv)
 {
-#ifdef OOMPH_HAS_MPI
- MPI_Helpers::init(argc,argv);
-#endif
-
  // Set the orientation of the "step" to 45 degrees
  TanhSolnForPoisson::TanPhi=1.0;
 
@@ -611,10 +607,6 @@ int main(int argc, char **argv)
  delete hypre_preconditioner_pt;
 
  conv_file.close();
-
-#ifdef OOMPH_HAS_MPI
- MPI_Helpers::finalize();
-#endif
 
 } //end of main
 

@@ -381,6 +381,14 @@ public:
  /// Number of nodes along each element edge
  unsigned nnode_1d() const {return NNODE_1D;}
 
+ /// C-style output 
+ void output(FILE* file_pt)
+  {FiniteElement::output(file_pt);}
+
+ /// C_style output at n_plot points
+ void output(FILE* file_pt, const unsigned &n_plot)
+  {FiniteElement::output(file_pt,n_plot);}
+
  /// Output 
  void output(std::ostream &outfile);
 
@@ -636,6 +644,14 @@ public:
  
  /// Number of nodes along each element edge
  unsigned nnode_1d() const {return NNODE_1D;}
+ 
+ /// C-style output 
+ void output(FILE* file_pt)
+  {FiniteElement::output(file_pt);}
+
+ /// C_style output at n_plot points
+ void output(FILE* file_pt, const unsigned &n_plot)
+  {FiniteElement::output(file_pt,n_plot);}
 
  /// Output 
  void output(std::ostream &outfile);
@@ -935,6 +951,14 @@ public:
  
  /// Number of nodes along each element edge
  unsigned nnode_1d() const {return NNODE_1D;}
+ 
+ /// C-style output 
+ void output(FILE* file_pt)
+  {FiniteElement::output(file_pt);}
+
+ /// C_style output at n_plot points
+ void output(FILE* file_pt, const unsigned &n_plot)
+  {FiniteElement::output(file_pt,n_plot);}
 
  /// Output 
  void output(std::ostream &outfile);

@@ -1535,7 +1535,8 @@ int main(int argc, char *argv[])
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
 
-#ifdef OOMPH_HAS_MPI
+ //Uncomment this lot if you want to turn this into a parallel code
+/*#ifdef OOMPH_HAS_MPI
  // Set up MPI_Helpers
  MPI_Helpers::init(argc,argv);
  
@@ -1556,6 +1557,7 @@ int main(int argc, char *argv[])
               << MPI_Helpers::Nproc << "\n";
   }
 #endif
+*/
 
  // Set default values
  string directory_for_data = "RESLT";

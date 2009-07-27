@@ -19,7 +19,7 @@ mkdir RESLT
 ../two_d_biharmonic > OUTPUT_two_d_biharmonic
 echo "done"
 echo " " >> validation.log
-echo "Rectangular driven cavity validation" >> validation.log
+echo "Two d biharmonic validation" >> validation.log
 echo "------------------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log

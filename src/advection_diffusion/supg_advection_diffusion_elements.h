@@ -166,6 +166,8 @@ public virtual QAdvectionDiffusionElement<DIM,NNODE_1D>
     }
   }
 
+
+
  /// \short Output function:
  /// x,y,u,w_x,w_y,tau_supg  or    x,y,z,u,w_x,w_y,w_z,tau_supg
  /// nplot points in each coordinate direction
@@ -214,6 +216,18 @@ public virtual QAdvectionDiffusionElement<DIM,NNODE_1D>
    this->write_tecplot_zone_footer(outfile,nplot);
 
   }
+
+ /// Output at default number of plot points
+ void output(std::ostream &outfile)
+  {FiniteElement::output(outfile);}
+
+ /// C-style output 
+ void output(FILE* file_pt)
+  {FiniteElement::output(file_pt);}
+
+ /// C_style output at n_plot points
+ void output(FILE* file_pt, const unsigned &n_plot)
+  {FiniteElement::output(file_pt,n_plot);}
 
 
 protected:

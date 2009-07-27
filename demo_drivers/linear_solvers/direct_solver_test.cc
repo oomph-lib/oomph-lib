@@ -274,10 +274,6 @@ void OneDPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc)
 //=============================================================================
 int main(int argc, char **argv)
 {
-#ifdef OOMPH_HAS_MPI
- MPI_Helpers::init(argc,argv);
-#endif
-
  //Number of elements
  unsigned n_element=40;
 
@@ -432,9 +428,6 @@ int main(int argc, char **argv)
   problem.zero_dofs();
  }
 
-#ifdef OOMPH_HAS_MPI
- MPI_Helpers::finalize();
-#endif
 } // end of main
 
 

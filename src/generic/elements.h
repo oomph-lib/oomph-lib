@@ -3724,7 +3724,6 @@ public:
                           const unsigned &i) const 
   {return FaceElement::zeta_nodal(n,k,i);}     
 
-
  /// Output nodal coordinates
  void output(std::ostream &outfile)
   {
@@ -3741,6 +3740,18 @@ public:
      outfile << std::endl;
     }     
   }
+
+ /// Output at n_plot points
+ void output(std::ostream &outfile, const unsigned &n_plot)
+  {FiniteElement::output(outfile,n_plot);}
+
+ /// C-style output 
+ void output(FILE* file_pt)
+  {FiniteElement::output(file_pt);}
+
+ /// C_style output at n_plot points
+ void output(FILE* file_pt, const unsigned &n_plot)
+  {FiniteElement::output(file_pt,n_plot);}
 
 }; 
 

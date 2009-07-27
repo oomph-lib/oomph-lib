@@ -368,10 +368,6 @@ public:
 //=============================================================================
 int main(int argc, char *argv[])
 {
-#ifdef OOMPH_HAS_MPI
-  MPI_Helpers::init(argc,argv);
-#endif
-
   // number of element
   unsigned n_element = 20;
   
@@ -455,8 +451,4 @@ int main(int argc, char *argv[])
     delete solver_pt;
     delete prec_pt;
   }
-
-#ifdef OOMPH_HAS_MPI
-  MPI_Helpers::finalize();
-#endif
 }
