@@ -5101,7 +5101,7 @@ void Problem::parallel_sparse_assemble
  // + n_eqn_from_proc
  Vector<MPI_Status> recv_nnz_stat(nproc-1);
  MPI_Waitall(nproc-1,&recv_nnz_reqs[0],&recv_nnz_stat[0]);
- Vector<unsigned> n_eqn_from_proc(nproc-1);
+ Vector<unsigned> n_eqn_from_proc(nproc);
  DenseMatrix<unsigned> nnz_from_proc(nproc,n_matrix);
  for (unsigned p = 0; p < nproc; p++)
   {

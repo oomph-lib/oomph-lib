@@ -184,7 +184,7 @@ namespace oomph
 
      // Flag to determine if velocity mass matrix diagonal Q^{-1}
      // is used for scaling.
-     P_matrix_using_scaling = false;
+     P_matrix_using_scaling = true;
 
      // set Doc_time to false
      Doc_time = false;
