@@ -278,7 +278,7 @@ is produced but the code execution continues).
 system of nonlinear algebraic equations arising from the
 discretisation of the problem. By default, the linear systems 
 that determine the corrections to the unknowns during the Newton
-iterations are solved with \c SuperLU, \c oomph-lib's default 
+iterations are solved with \c SuperLUSolver, \c oomph-lib's default 
 \c LinearSolver. Within this framework the two most computationally 
 expensive steps (both in terms of memory usage and CPU time) are the 
 assembly of the linear system (comprising the Jacobian matrix and 
@@ -305,7 +305,7 @@ unsigned Problem::Sparse_assembly_method
 in the \c Problem class. This flag can take any of the 
 values defined in the enumeration \c Problem::Assembly_method. 
 
-Each of the four different methods has its own advantages and 
+Each of the five different methods has its own advantages and 
 disadvantages in terms of speed and/or memory requirements. 
 By default, we use the "assembly using vectors of pairs"
 as it tends to be optimal in both respects --

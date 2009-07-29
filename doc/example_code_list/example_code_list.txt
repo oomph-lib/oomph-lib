@@ -192,6 +192,12 @@ An alternative solution for the previous problem, using multiple meshes.
 - General conventions:
   - In problems with multiple sub-meshes, \c Nodes retain 
     the boundary numbers of the mesh in which they were created.
+
+
+- <span style="color:red"><b>Note:</b> There is a 
+  <A HREF="../../mpi/two_d_poisson_flux_bc_adapt/html/index.html">
+  separate tutorial</a>
+  that discusses the parallelisation of this code.</span> 
 </TD>
 <TD>
 <CENTER>complete</CENTER>
@@ -292,7 +298,13 @@ conditions in problems with spatial adaptivity.
 - General conventions:
   - The \c Mesh::flush_element_and_node_storage() function: "Emptying"
     a mesh without deleting its constituent nodes and elements (they
-    might be shared with other meshes!). 
+    might be shared with other meshes!).
+
+
+- <span style="color:red"><b>Note:</b> There is a 
+  <A HREF="../../mpi/two_d_poisson_flux_bc_adapt/html/index.html">
+  separate tutorial</a>
+  that discusses the parallelisation of this code.</span> 
 <TD>
 <CENTER>complete</CENTER>
 </TD>
@@ -684,6 +696,7 @@ with Taylor-Hood and Crouzeix-Raviart elements.
 - The pressure representation in Taylor-Hood and Crouzeix-Raviart elements.
 - Pinning a pressure value in problems with Dirichlet boundary
   conditions for the velocity on all boundaries.      
+
 </TD>
 <TD>
 <CENTER>complete</CENTER>
@@ -705,6 +718,11 @@ pressure singularities.
 - Treatment of pressure degrees of freedom in Navier-Stokes 
   simulations with adaptive mesh refinement -- pinning "redundant"
   pressure degrees of freedom. \n\n
+
+- <span style="color:red"><b>Note:</b> There is a 
+  <A HREF="../../mpi/adaptive_driven_cavity/html/index.html">
+  separate tutorial</a>
+  that discusses the parallelisation of this code.</span>
 </TD>
 <TD>
 <CENTER>complete</CENTER>
@@ -1687,6 +1705,11 @@ fluid-structure interaction problem.
   \c MacroElement/Domain - based node-update procedures
   in fluid-structure interaction problems.
 .
+
+- <span style="color:red"><b>Note:</b> There is a 
+  <A HREF="../../mpi/fsi_channel_with_leaflet/html/index.html">
+  separate tutorial</a>
+  that discusses the parallelisation of this code.</span> 
 </TD>
 <TD>
 <CENTER>complete</CENTER>
@@ -1715,6 +1738,11 @@ earlier non-FSI example</A> lead to a much more efficient code.
 - The \c GeomObject::locate_zeta(...) function and its default
   implementation.
 .
+
+- <span style="color:red"><b>Note:</b> There is a 
+  <A HREF="../../mpi/fsi_channel_with_leaflet/html/index.html">
+  separate tutorial</a>
+  that discusses the parallelisation of this code.</span> 
 </TD>
 <TD>
 <CENTER>complete</CENTER>
@@ -1741,6 +1769,11 @@ interaction problems.
   history values for newly created nodes.
 - Updating the node-update data in refineable \c AlgebraicMeshes.
 .
+
+- <span style="color:red"><b>Note:</b> There is a 
+  <A HREF="../../mpi/fsi_channel_with_leaflet/html/index.html">
+  separate tutorial</a>
+  that discusses the parallelisation of this code.</span> 
 </TD>
 <TD>
 <CENTER>complete</CENTER>
@@ -1812,6 +1845,11 @@ by an elastic leaflet.
 - FSI problems with fully immersed beam structures (i.e. beams
   that are subjected to the fuid traction on both faces).
 - Another application of \c oomph-lib's \c FSIPreconditioner. 
+
+- <span style="color:red"><b>Note:</b> There is a 
+  <A HREF="../../mpi/fsi_channel_with_leaflet/html/index.html">
+  separate tutorial</a>
+  that discusses the parallelisation of this code.</span> 
 </TD>
 <TD>
 <CENTER>complete</CENTER>
@@ -1833,6 +1871,13 @@ We demonstrate how to discretise and solve this benchmark problem with
 - FSI problems with "proper" 2D solids (rather than beam or shell structures)
 - FSI problems with wall inertia.
 - Another application of \c oomph-lib's \c FSIPreconditioner. 
+
+
+- <span style="color:red"><b>Note:</b> There is a 
+  <A HREF="../../mpi/turek_flag/html/index.html">
+  separate tutorial</a> that discusses the parallelisation of this code
+  and shows to modify it to allow spatial adaptativity in the fluid 
+  and solid meshes.</span>
 </TD>
 <TD>
 <CENTER>complete</CENTER>
@@ -1985,6 +2030,12 @@ coupled to an energy equation.
   elements.
 - How to use the \c Problem::steady_newton_solve(...) function to find
   steady solutions of unsteady problems.
+
+
+- <span style="color:red"><b>Note:</b> There is a 
+  <A HREF="../../mpi/boussinesq_convection/html/index.html">
+  separate tutorial</a>
+  that discusses the parallelisation of this code.</span>
 </TD>
 <TD>
 <CENTER>complete</CENTER>
@@ -2010,6 +2061,36 @@ coupled to an energy equation.
   single-physics elements.
 - How to choose the "Z2 flux" for multi-physics elements that are both
   derived from the \c ElementWithZ2ErrorEstimator class.
+
+- <span style="color:red"><b>Note:</b> There is a 
+  <A HREF="../../mpi/boussinesq_convection/html/index.html">
+  separate tutorial</a>
+  that discusses the parallelisation of this code.</span>
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+#######################################################################
+<TR>
+<TD>
+<A HREF="../../multi_physics/multi_domain_ref_b_convect/html/index.html">
+<B>
+Solving multi-field problems with multi-domain discretisations.</B>
+</A>
+\n\n
+We demonstrate an alternative approach to the solution of multi-field
+problems, in which the governing PDEs are discretised in separate
+meshes and interact via "external elements".
+</TD>
+<TD>
+- How to discretise multi-field problems with multi-domain approaches.
+- The \c Multi_domain_functions namespace.
+
+- <span style="color:red"><b>Note:</b> There is a 
+  <A HREF="../../mpi/boussinesq_convection/html/index.html">
+  separate tutorial</a>
+  that discusses the parallelisation of this code.</span>
 </TD>
 <TD>
 <CENTER>complete</CENTER>
@@ -2338,6 +2419,11 @@ results to be displayed by
 
 <A NAME="parallel"><B>Parallel driver codes</B></A>
 
+Please consult the general 
+<A HREF="../../mpi/general_mpi/html/index.html">
+tutorial on <code>oomph-lib</code>'s parallel processing
+capabilities.</a>
+
 <CENTER>
 <TABLE>
 ######################################################################
@@ -2390,7 +2476,9 @@ We demonstrate the modifications required to distribute a problem
 involving \c FaceElements.
 </TD>
 <TD>
-- Actions before and after distribute
+- The actions before and after distribute functions and their use to 
+  strip off and re-attach \c FaceElements that are used to enforce
+  Neumann/flux boundary conditions.
 .
 </TD>
 <TD>
@@ -2406,7 +2494,8 @@ We demonstrate how to distribute a straightforward multi-physics
 problem where two domains interact.
 </TD>
 <TD>
-- Actions before and after distribute
+- More details on the \c Multi_domain_functions helper functions and 
+  their parallel implementation. 
 .
 </TD>
 <TD>
@@ -2418,12 +2507,15 @@ problem where two domains interact.
 <TD>
 <A HREF="../../mpi/fsi_channel_with_leaflet/html/index.html"><B>
 FSI problem: Channel with an elastic leaflet</B></A></a> \n\n
-We demonstrate how to distribute FSI problems involving shells and
-beams.
+We demonstrate how to distribute FSI problems that use algebraic
+update methods. 
 </TD>
 <TD>
-- Actions before and after distribute
-- Marking meshes whose elements need to be retained on all processors
+- How to distribute fluid-structure interaction problems in which 
+  algebraic node update methods are used to deform the fluid mesh 
+  in response to changes in the shape of the domain boundary
+- How to retain all elements in a mesh on all processors when the
+  problem is distributed.
 .
 </TD>
 <TD>
@@ -2439,8 +2531,12 @@ We demonstrate how to distribute a problem involving refineable 2D
 solid and fluid meshes that interact along interface boundaries.
 </TD>
 <TD>
-- Actions before and after distribute
-- Marking elements that need to be retained on all processors
+- How to "upgrade" 
+  <A HREF="../../interaction/turek_flag/html/index.html">
+  Turek & Hron's FSI benchmark problem</a> to allow
+  spatial adaptativity in the fluid and solid meshes.
+- How to retain selected elements on all processors when the
+  problem is distributed.
 .
 </TD>
 <TD>

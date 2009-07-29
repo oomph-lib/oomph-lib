@@ -763,8 +763,7 @@ void Mesh::read(std::ifstream &restart_file)
  //Loop over the nodes
  for(unsigned long n=0;n<n_node;n++)
   {     
-   /// Try to cast to elastic node \todo there's got to be a better way
-   /// but making Problem::mesh_pt() virtual doesn't do the right thing...
+   /// Try to cast to elastic node 
    SolidNode* el_node_pt=dynamic_cast<SolidNode*>(
     this->node_pt(n));
    if (el_node_pt!=0)
@@ -1446,7 +1445,6 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
          count_data++;
 
          // Now add the process IDs associated to the vector to be sent
-         // hierher: can we get away with only sending the highest process ID?
          std::set<unsigned> procs_set=processors_associated_with_data[nod_pt];
          for (std::set<unsigned>::iterator it=procs_set.begin();
               it!=procs_set.end();it++)
@@ -2402,52 +2400,54 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
                                          DocInfo& doc_info,
                                          const bool& report_stats)
 {
-#ifdef OOMPH_HAS_MPI
- // Flush any external element storage before performing the redistribution
- // (in particular, external halo nodes that are on mesh boundaries)
- this->flush_all_external_storage();
-#endif
 
- // Storage for number of processors and current processor
- int n_proc=comm_pt->nproc();
- int my_rank=comm_pt->my_rank();
-
- // Doc stats
- if (report_stats)
-  {
-   oomph_info << "Before pruning: Processor " << my_rank 
-              << " holds " << this->nelement() 
-              << " elements of which " << this->nroot_halo_element()
-              << " are root halo elements \n while " 
-              << this->nroot_haloed_element()
-              << " are root haloed elements" << std::endl;
-  }
-   
- // Declare all nodes as obsolete. We'll
- // change this setting for all nodes that must be retained
- // further down
- unsigned nnod=this->nnode();
- for (unsigned j=0;j<nnod;j++)
-  {
-   this->node_pt(j)->set_obsolete();
-  }
-
- // Backup pointers to elements in this mesh
- unsigned nelem=this->nelement();
- Vector<FiniteElement*> backed_up_el_pt(nelem);
- std::map<FiniteElement*,bool> keep_element;
- for (unsigned e=0;e<nelem;e++)
-  {
-   FiniteElement* el_pt=this->finite_element_pt(e);
-   backed_up_el_pt[e]=el_pt;
-  }
-
- // Get the min and max refinement level, and current refinement pattern
- unsigned min_ref=0;
- unsigned max_ref=0;
  RefineableMeshBase* ref_mesh_pt=dynamic_cast<RefineableMeshBase*>(this);
  if (ref_mesh_pt!=0)
   {
+
+#ifdef OOMPH_HAS_MPI
+   // Flush any external element storage before performing the redistribution
+   // (in particular, external halo nodes that are on mesh boundaries)
+   this->flush_all_external_storage();
+#endif
+   
+   // Storage for number of processors and current processor
+   int n_proc=comm_pt->nproc();
+   int my_rank=comm_pt->my_rank();
+   
+   // Doc stats
+   if (report_stats)
+    {
+     oomph_info << "Before pruning: Processor " << my_rank 
+                << " holds " << this->nelement() 
+                << " elements of which " << this->nroot_halo_element()
+                << " are root halo elements \n while " 
+                << this->nroot_haloed_element()
+                << " are root haloed elements" << std::endl;
+    }
+   
+   // Declare all nodes as obsolete. We'll
+   // change this setting for all nodes that must be retained
+   // further down
+   unsigned nnod=this->nnode();
+   for (unsigned j=0;j<nnod;j++)
+    {
+     this->node_pt(j)->set_obsolete();
+    }
+   
+   // Backup pointers to elements in this mesh
+   unsigned nelem=this->nelement();
+   Vector<FiniteElement*> backed_up_el_pt(nelem);
+   std::map<FiniteElement*,bool> keep_element;
+   for (unsigned e=0;e<nelem;e++)
+    {
+     FiniteElement* el_pt=this->finite_element_pt(e);
+     backed_up_el_pt[e]=el_pt;
+    }
+   
+   // Get the min and max refinement level, and current refinement pattern
+   unsigned min_ref=0;
+   unsigned max_ref=0;
    
    // Skip this first bit if you have no elements 
    if (nelem>0)
@@ -2732,7 +2732,7 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
    this->flush_element_and_node_storage();
 
    // Loop over all backed-up elements
-   unsigned nelem=backed_up_el_pt.size();
+   nelem=backed_up_el_pt.size();
    for (unsigned e=0;e<nelem;e++)
     {
      RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>
@@ -2863,7 +2863,7 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
       }
     }
 
-   // Classify nodes [hierher: is this call necessary any more?]
+   // Classify nodes 
    classify_halo_and_haloed_nodes(comm_pt,doc_info,report_stats);
    
    // Doc?
@@ -2874,327 +2874,7 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
     }
 
   }
-//  else
-//   {
-//    // Backup old mesh data
-//    //---------------------
-   
-//    // Backup pointers to elements in this mesh
-//    unsigned nelem=this->nelement();
-//    Vector<FiniteElement*> backed_up_el_pt(nelem);
-// // std::map<FiniteElement*,bool> keep_element;
-//    for (unsigned e=0;e<nelem;e++)
-//     {
-//      FiniteElement* el_pt=this->finite_element_pt(e);
-//      backed_up_el_pt[e]=el_pt;
 
-//      // Only retain non-halo elements
-//      if (!el_pt->is_halo())
-//       {
-//        keep_element[el_pt]=true;
-
-//        // Loop over the element's nodes and retain them too
-//        unsigned nnod=el_pt->nnode();
-//        for (unsigned j=0;j<nnod;j++)
-//         {
-//          el_pt->node_pt(j)->set_non_obsolete();
-//         }
-
-//       }
-// //      // If it's a halo check if it's been refined
-// //      else
-// //       {
-// //        // Is the element's tree representation a root, i.e. has
-// //        // the element not been refined?
-
-// //        // buffer for nonrefineable
-// //        if (dynamic_cast<RefineableElement*>(el_pt)->tree_pt()->
-// //            father_pt()!=0)
-// //         {
-// //          el_pt->output(some_file,5);
-// //         }
-// //       }
-//     }
-   
-
-//    // Now loop over all halo elements and check if they
-//    // have at least one node that's to be retained, i.e.
-//    // check if the halo element is directly connected
-//    // with the bulk of the mesh containing the non-halo elements.
-         
-//    // Temp map of vectors holding the pointers to the root halo elements
-//    std::map<unsigned, Vector<FiniteElement*> > tmp_root_halo_element_pt;
-
-//    // Temp map of vectors holding the pointers to the root haloed elements
-//    std::map<unsigned, Vector<FiniteElement*> > tmp_root_haloed_element_pt;
- 
-//    // Map to store if a halo element survives
-//    std::map<FiniteElement*,bool> halo_element_is_retained;
-
-// //    sprintf(filename,"%s/retained_halo_elements%i_on_proc%i.dat",
-// //            doc_info.directory().c_str(),
-// //            doc_info.number(),my_rank);
-// //    some_file.open(filename);
-
-  
-//    for (int domain=0;domain<n_proc;domain++)
-//     {
-//      // Get vector of halo elements by copy operation
-//      Vector<FiniteElement*> halo_elem_pt(this->halo_element_pt(domain));
-     
-//      // Loop over halo elements associated with this adjacent domain
-//      unsigned nelem=halo_elem_pt.size();
-//      for (unsigned e=0;e<nelem;e++)
-//       {
-//        // Get element
-//        FiniteElement* el_pt=halo_elem_pt[e];
-       
-//        // Again in here an element should only be kept if its refinement
-//        // level is the same as the minimum refinement level
-
-//        //Loop over nodes
-//        unsigned nnod=el_pt->nnode();
-//        for (unsigned j=0;j<nnod;j++)
-//         {
-//          Node* nod_pt=el_pt->node_pt(j);
-//          if (!nod_pt->is_obsolete())
-//           {
-//            // Keep element and add it to preliminary storage for
-//            // halo elements associated with current neighbouring domain
-//            keep_element[el_pt]=true;
-// //             el_pt->output(some_file,5);
-//            tmp_root_halo_element_pt[domain].push_back(el_pt);
-//            halo_element_is_retained[el_pt]=true;
-//            break;
-//           }
-//         }       
-//       }
-//     }
-  
-
-// //   some_file.close();
-
-
-//    // Make sure everybody finishes this part
-//    MPI_Barrier(comm_pt->mpi_comm());
-
-
-// //    sprintf(filename,"%s/retained_haloed_elements%i_on_proc%i.dat",
-// //            doc_info.directory().c_str(),
-// //            doc_info.number(),my_rank);
-// //    some_file.open(filename);
-
-
-//    // Now all processors have decided (independently) which of their
-//    // (to-be root) halo elements they wish to retain. Now we need to figure out
-//    // which of their elements are haloed and add them in the appropriate
-//    // order into the haloed element scheme. For this we exploit that
-//    // the halo and haloed elements are accessed in the same order on
-//    // all processors!
-   
-//    // Identify haloed elements on domain d
-//    for (int d=0;d<n_proc;d++)
-//     {
-//      // Loop over domains that halo this domain
-//      for (int dd=0;dd<n_proc;dd++)
-//       {       
-//        // Dont't talk to yourself
-//        if (d!=dd)
-//         {
-
-//          // If we're identifying my haloed elements:
-//          if (d==my_rank)
-//           {
-//            // Get vector all elements that are currently haloed by domain dd
-//            Vector<FiniteElement*> haloed_elem_pt(this->haloed_element_pt(dd));
-//            // Create a vector of ints to indicate if the halo element
-//            // on processor dd processor was kept
-//            unsigned nelem=haloed_elem_pt.size();
-//            Vector<int> halo_kept(nelem);
-           
-//            // Receive this vector from processor dd 
-//            if (nelem!=0)
-//             {
-//              MPI_Status status;
-//              MPI_Recv(&halo_kept[0],nelem,MPI_INT,dd,0,comm_pt->mpi_comm(),
-//                       &status);
-           
-//              // Classify haloed element accordingly
-//              for (unsigned e=0;e<nelem;e++)
-//               {
-//                FiniteElement* el_pt=haloed_elem_pt[e];
-//                if (halo_kept[e]==1)
-//                 {
-//                  // I am being haloed by processor dd
-//                  tmp_root_haloed_element_pt[dd].push_back(el_pt);
-// //               el_pt->output(some_file,5);
-//                 }
-//               }
-//             }
-//           }
-//          else
-//           {
-//            // If we're dealing with my halo elements:
-//            if (dd==my_rank)
-//             {
-//              // Find (current) halo elements on processor dd whose non-halo is 
-//              // on processor d
-//              Vector<FiniteElement*> halo_elem_pt(this->halo_element_pt(d));
-             
-//              // Create a vector of ints to indicate if the halo 
-//              // element was kept
-//              unsigned nelem=halo_elem_pt.size();
-//              Vector<int> halo_kept(nelem,0);
-//              for (unsigned e=0;e<nelem;e++)
-//               {
-//                FiniteElement* el_pt=halo_elem_pt[e];
-//                if (halo_element_is_retained[el_pt])
-//                 {
-//                  halo_kept[e]=1;
-//                 }
-//               }
-             
-//              // Now send this vector to processor d to tell it which of
-//              // the haloed elements (which are listed in the same order)
-//              // are to be retained as haloed elements.
-//              if (nelem!=0)
-//               {
-//                MPI_Send(&halo_kept[0],nelem,MPI_INT,d,0,comm_pt->mpi_comm());
-//               }
-//             }
-//           }
-//         }
-//       }
-//     }
- 
-// //   some_file.close();
-  
-//    // Backup pointers to nodes in this mesh
-//    nnod=this->nnode();
-//    Vector<Node*> backed_up_nod_pt(nnod);
-//    for (unsigned j=0;j<nnod;j++)
-//     {
-//      backed_up_nod_pt[j]=this->node_pt(j);
-//     }
-   
-//    // Flush the mesh storage
-//    this->flush_element_and_node_storage();
-   
-//    // Loop over all backed up elements
-//    nelem=backed_up_el_pt.size();
-//    for (unsigned e=0;e<nelem;e++)
-//     {
-//      FiniteElement* el_pt=backed_up_el_pt[e];
-//      if (keep_element[el_pt])
-//       {
-//        this->add_element_pt(el_pt);
-//       }
-//      else
-//       {
-//        delete el_pt;
-//       }
-//     }
-
-//    // Wipe the storage scheme for halo(ed) elements and then re-assign
-//    Root_haloed_element_pt.clear();
-//    Root_halo_element_pt.clear();     
-//    for (int domain=0;domain<n_proc;domain++)
-//     {
-     
-//      unsigned nelem=tmp_root_halo_element_pt[domain].size();
-//      for (unsigned e=0;e<nelem;e++)
-//       {
-//        Root_halo_element_pt[domain].push_back(
-//         tmp_root_halo_element_pt[domain][e]);
-//       }
-    
-//      nelem=tmp_root_haloed_element_pt[domain].size();
-//      for (unsigned e=0;e<nelem;e++)
-//       {
-//        Root_haloed_element_pt[domain].push_back(
-//         tmp_root_haloed_element_pt[domain][e]);
-//       }
-//     }
-   
-//    // Doc stats
-//    if (report_stats)
-//     {
-//      oomph_info << "AFTER:  Processor " << my_rank 
-//                 << " holds " << this->nelement() 
-//                 << " elements of which " << this->nroot_halo_element()
-//                 << " are root halo elements \n while " 
-//                 << this->nroot_haloed_element()
-//                 << " are root haloed elements" << std::endl;
-//     }
-   
-
-      
-//    // Loop over all retained elements and mark their nodes
-//    //-----------------------------------------------------
-//    // as to be retained too (some double counting going on here)
-//    //-----------------------------------------------------------
-//    nelem=this->nelement();
-//    for (unsigned e=0;e<nelem;e++)
-//     {
-//      FiniteElement* el_pt=this->finite_element_pt(e);
-     
-//      // Loop over nodes
-//      unsigned nnod=el_pt->nnode();
-//      for (unsigned j=0;j<nnod;j++)
-//       {
-//        Node* nod_pt=el_pt->node_pt(j);
-//        nod_pt->set_non_obsolete();
-//       }
-//     }
-   
-   
-//    // Complete rebuild of mesh by adding retained nodes
-//    // Note that they are added in the order in which they 
-//    // occured in the original mesh as this guarantees the
-//    // synchronisity between the serialised access to halo
-//    // and haloed nodes from different processors.
-//    nnod=backed_up_nod_pt.size();
-//    for (unsigned j=0;j<nnod;j++)
-//     {
-//      Node* nod_pt=backed_up_nod_pt[j];
-//      if(!nod_pt->is_obsolete())
-//       {
-//        // Not obsolete so add it back to the mesh
-//        this->add_node_pt(nod_pt);
-//       }
-//     }
-   
-//    // Prune and rebuild mesh
-//    //-----------------------
-   
-//    // Now remove the pruned nodes from the boundary lookup scheme
-//    this->prune_dead_nodes();
-    
-//    // And finally re-setup the boundary lookup scheme for elements
-//    this->setup_boundary_element_info();
-      
-//    // Re-setup tree forest if needed
-//    if (this->nelement()>0)
-//     {
-//      RefineableMeshBase* ref_mesh_pt=dynamic_cast<RefineableMeshBase*>(this);
-//      if (ref_mesh_pt!=0)
-//       {
-//        ref_mesh_pt->setup_tree_forest();
-//       }
-//     }
-   
-//    // Classify nodes [hierher: again, is this necessary?]
-//    classify_halo_and_haloed_nodes(comm_pt,doc_info,report_stats);
-   
-//    // Doc?
-//    //-----
-//    if (doc_info.doc_flag())
-//     {
-//      doc_mesh_distribution(comm_pt,doc_info);
-//     }
-
-//   } 
-   
 }
 
 

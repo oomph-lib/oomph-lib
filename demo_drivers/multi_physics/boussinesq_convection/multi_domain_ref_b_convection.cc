@@ -346,9 +346,6 @@ RefineableConvectionProblem()
  // Setup equation numbering scheme
  cout << "Number of equations: " << assign_eqn_numbers() << endl; 
 
- // Set this to higher than default (10)
- Problem::Max_newton_iterations=20;
-
 } // end of constructor
 
 

@@ -34,8 +34,8 @@ RESLT_EXACT_STEADY/soln1.dat RESLT_EXACT_STEADY/soln2.dat \
 RESLT_EXACT_STEADY/soln3.dat RESLT_EXACT_STEADY/trace.dat \
 > fsi_jacobian_approximation_steady.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py \
 ../validata/fsi_jacobian_approximation_steady.dat.gz  \
@@ -67,8 +67,8 @@ RESLT_EXACT_UNSTEADY/soln9.dat RESLT_EXACT_UNSTEADY/soln10.dat \
 RESLT_EXACT_UNSTEADY/trace.dat \
 > fsi_jacobian_approximation_unsteady.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py \
 ../validata/fsi_jacobian_approximation_unsteady.dat.gz  \

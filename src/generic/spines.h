@@ -68,7 +68,7 @@ class Spine
 public:
 
  /// \short Default constructor: Create the Spine and initialise its
- /// height to zero. \todo also need constructors with timestepper
+ /// height to zero.
  Spine()
   {
    Geom_data_pt.resize(1);

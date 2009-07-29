@@ -86,7 +86,6 @@ void RefineableMeshBase::get_refinement_pattern(
      // Element is part of the mesh at this refinement level
      // if it exists at this level OR if it exists at a lower level
      // and is a leaf
-     // hierher if ((level==l)||(level<l)&&(all_tree_nodes_pt[e]->is_leaf()))
      if ((level==l)||((level<l)&&(all_tree_nodes_pt[e]->is_leaf())))
       {
        // If element exsts at this level and is not a leaf it will

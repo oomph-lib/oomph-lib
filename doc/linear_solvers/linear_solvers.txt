@@ -22,8 +22,8 @@ bottom-up discussion of \c oomph-lib's data structure</a> , by default \c
 oomph-lib's Newton solver, \c Problem::newton_solve(...) solves
 the linear systems arising during the Newton iteration 
 with its default linear solver,
-<a href="../../the_data_structure/html/classoomph_1_1SuperLU.html"><CODE>
-SuperLU</CODE></a>, a wrapper to Demmel, Eistenstat, Gilbert, Li & 
+<a href="../../the_data_structure/html/classoomph_1_1SuperLUSolver.html"><CODE>
+SuperLUSolver</CODE></a>, a wrapper to Demmel, Eistenstat, Gilbert, Li & 
 Liu's sparse direct
 solver <A HREF="http://crd.lbl.gov/~xiaoye/SuperLU">SuperLU.</A> 
 
@@ -65,8 +65,8 @@ functions.
 
 - <B>Serial solvers: </B> \n\n
   - <B>Direct solvers:</B> \n\n
-     - <a href="../../the_data_structure/html/classoomph_1_1SuperLU.html">
-        <CODE>SuperLU</CODE></a>: \c oomph-lib's default linear
+     - <a href="../../the_data_structure/html/classoomph_1_1SuperLUSolver.html">
+        <CODE>SuperLUSolver</CODE></a>: \c oomph-lib's default linear
         solver, a wrapper to Demmel, Eistenstat, Gilbert, Li & 
         Liu's sparse direct solver 
         <A HREF="http://crd.lbl.gov/~xiaoye/SuperLU">SuperLU.</A> \n\n
@@ -124,14 +124,25 @@ functions.
      .
   .
 - <b>Parallel solvers:</b> \n\n
-  As of the current release (version 0.85) \c oomph-lib's parallel processing
-  capabilities are about 80% complete (?) and the following parallel solvers
-  (as well as many other parallel capabilities) are available 
-  and fully-functional, but you use them at your own risk. They are 
-  scheduled for "official" inclusion into the library (with
-  accompanying tutorials etc) for the next release. \n\n
   - <B>Direct solvers:</B> \n\n
-     - <a href="../../the_data_structure/html/classoomph_1_1SuperLU__dist.html"><CODE>SuperLU_dist</CODE></a>: \c oomph-lib's default parallel linear solver, a wrapper to Demmel, Eistenstat, Gilbert, Li & Liu's sparse direct solver <A HREF="http://crd.lbl.gov/~xiaoye/SuperLU">SuperLU.</A>  \n\n
+     - When \c oomph-lib is compiled with MPI support, its default
+       linear solver
+       <a href="../../the_data_structure/html/classoomph_1_1SuperLUSolver.html">
+       <CODE>SuperLUSolver</CODE></a> becomes a wrapper to Demmel, 
+       Eistenstat, Gilbert, Li & Liu's parallel sparse direct 
+       solver <A HREF="http://crd.lbl.gov/~xiaoye/SuperLU#superlu_dist">
+       SuperLU_DIST.</A> This behaviour
+       can be over-ruled with the member function
+       \code
+       SuperLUSolver::set_solver_type(...)
+       \endcode
+       whose argument must specify one of the three options listed 
+       in the enumeration 
+       \c SuperLUSolver::Type. This allows the serial
+       solver <A HREF="http://crd.lbl.gov/~xiaoye/SuperLU">
+       SuperLU</A> to be used even if \c oomph-lib is compiled with MPI
+       support. 
+       \n\n
      .
   - <B>Iterative solvers:</B> \n\n
      - <a href="../../the_data_structure/html/classoomph_1_1HypreSolver.html"><CODE>HypreSolver</CODE></a>: A wrapper to the high-performance linear solvers/preconditioners from the <a href="https://computation.llnl.gov/casc/linear_solvers/sls_hypre.html">Scalable Linear Solvers Project.</A> \n\n
@@ -216,7 +227,7 @@ by adding the lines
 to the \c Problem constructor.
 
 Of particular interest is the availability of an "exact preconditioner"  
-<a href="../../the_data_structure/html/classoomph_1_1SuperLU__Preconditioner.html"><CODE>SuperLU_Preconditioner</CODE></a>
+<a href="../../the_data_structure/html/classoomph_1_1SuperLUPreconditioner.html"><CODE>SuperLUPreconditioner</CODE></a>
 whose use guarantees the convergence of any iterative solver within
 a single iteration -- useful for code development.
 
@@ -231,7 +242,7 @@ linear solvers and preconditioners. We stress that these solvers are
 not necessarily implemented as \c oomph-lib \c IterativeLinearSolvers 
 since their interfaces for the specification of preconditioners, etc
 may differ from those employed by \c oomph-lib. Furthermore,
-unlike \c SuperLU and \c SuperLU_dist these solvers are not
+unlike \c SuperLUSolver these solvers are not
 distributed as part of \c oomph-lib so you have to build/install them
 separately before installing \c oomph-lib (\c oomph-lib's build 
 machinery can do this for you if you wish;

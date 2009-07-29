@@ -301,9 +301,7 @@ namespace oomph
  }
 
 //=======================================================================
-/// Assign the local hang eqn
-/// \todo explain restriction on continuously interpolated data (must be
-/// at front)
+/// Assign the local hang eqn. 
 //=======================================================================
  void RefineableElement::assign_hanging_local_eqn_numbers()
  {

@@ -113,7 +113,7 @@ published by Oxford University Press, 2006.
 \n\n
 
 In our implementation of the preconditioner, the linear systems
-can either be solved "exactly", using SuperLU (in its incarnation
+can either be solved "exactly", using \c SuperLU (in its incarnation
 as an exact preconditioner; this is the default) or by any 
 other \c Preconditioner (interpreted as an "inexact solver") 
 specified via the access functions
@@ -161,7 +161,7 @@ a few straightforward steps:
    provides the option to perform the linear solves involving
    the \f$ {\bf P} \f$ and  \f$ {\bf F} \f$ matrices with
    inexact solvers (i.e. other preconditioners), rather than
-   with the "exact preconditioner" \c SuperLU_Preconditioner. 
+   with the "exact preconditioner" \c SuperLUPreconditioner. 
    Since the matrix \f$ {\bf P} \f$
    has the character of a pressure Poisson matrix, it may be
    solved efficiently with algebraic multigrid (AMG) -- at least

@@ -156,15 +156,25 @@ problems after upgrading to a new version.
   and residual vector has been optimised, and problems can be 
   now distributed by domain decomposition techniques. 
   <a href="../../mpi/general_mpi/html/index.html">A new tutorial</a>
-  provides an overview of these capabilities.
+  and various <a href="../../example_code_list/html/index.html#parallel">
+  new demo driver codes</a> demo driver codes 
+  provide an overview of these capabilities.
   \n\n
 - Introduced \c ElementWithExternalElement as base class for 
   multi-physics elements in which elements in different meshes/
   domains interact via source/load functions (e.g. in 
   fluid-structure interaction or thermal convection problems).
+  See the new tutorials discussing the 
+  <a href="../../multi_physics/multi_domain_ref_b_convect/html/index.html">
+  serial</a> and
+  <a href="../../mpi/boussinesq_convection/html/index.html">parallel</a>
+  solution of multi-physics problems by multi-domain approaches.
   \n\n
 - Parallelised and optimised the \c MeshAsGeomObject class to use
   bin structures to accelerate the search in \c locate_zeta(...).
+  \n\n
+- \c FiniteElements are now \c GeomObjects within which their local
+  coordinates act as their intrinsic coordinates.
   \n\n
 - Completed the documentation of \c oomph-lib's solid
   mechanics (large-displacement elasticity) capabilities. We provide 
@@ -185,7 +195,13 @@ problems after upgrading to a new version.
   \n\n
 - Extended the \c Z2ErrorEstimator so that the elemental error estimate can be
   based on the maximum of various distinct fluxes -- useful for
-  multi-field problems such as Boussinesq convection.
+  multi-field problems such as Boussinesq convection. See the
+  <a href="../../multi_physics/refine_b_convect/html/index.html#comments">
+  tutorial</a> for details.
+  \n\n
+- Added a structured, domain-based mesh for the discretisation of 
+  tube-like domains. See the <a href="../../meshes/mesh_list/html/index.html">
+  list of structured meshes</a> for details. 
   \n\n
 - Significantly extended oomph-lib's bifurcation tracking routines
   (no tutorials yet, though).
@@ -244,6 +260,10 @@ problems after upgrading to a new version.
                                                  Vector<double> &result)
   \endcode
   \n\n
+- \c GeomObject::drdt(...) is now \c GeomObject::dposition_dt(...)
+  to make it consistent with all other functions of that type. hierher
+  yet to inroduct the underscore...
+  \n\n
 - \c FSI_functions::setup_fluid_load_info_for_solid_elements(...) now
   requires a pointer to the \c Problem to be specified as the first argument. 
   \n\n
@@ -252,8 +272,8 @@ problems after upgrading to a new version.
   processors and the rank of each processor should be obtained from 
   the appropriate \c OomphCommunicator.
   \n\n
-- Replaced \c MPI_Helpers::setup(...) with MPI_Helpers::init(...)
-  and added MPI_Helpers::finalize(). These should be called instead
+- Replaced \c MPI_Helpers::setup(...) with \c MPI_Helpers::init(...)
+  and added \c MPI_Helpers::finalize(). These should be called instead
   of MPI's own \c init() and \c finalize() functions. 
   \n\n
 - Introduced \c DoubleVector -- a distributable vector storing double
@@ -262,6 +282,22 @@ problems after upgrading to a new version.
 - Merged \c CRDoubleMatrix and \c DistributableCRDoubleMatrix 
   into \c CRDoubleMatrix. (Note: \c CRDoubleMatrix is the only 
   distributable matrix within \c oomph-lib.)
+  \n\n
+- Merged \c SuperLU and \c SuperLU_dist into \c SuperLUSolver.
+  If \c oomph-lib is compiled with MPI support, the parallel version
+  of the (exact) preconditioner is used automatically. This behaviour
+  can be over-ruled with the member function
+  \code
+  SuperLUSolver::set_solver_type(...)
+  \endcode
+  whose argument must be one of the three options listed in the enumeration 
+  \c SuperLUSolver::Type. This allows the serial version of the solver to be
+  used even if \c oomph-lib is compiled with MPI support.
+  \n\n
+- Merged \c SuperLUPreconditioner and \c SuperLUDistPreconditioner 
+  into \c SuperLUPreconditioner.
+  If \c oomph-lib is compiled with MPI support, the parallel version
+  of the solver is used automatically.
   \n\n
 - Updated all solvers/preconditioners to handle new \c CRDoubleMatrix and 
   \c DoubleVector.

@@ -390,7 +390,7 @@ void Z2ErrorEstimator::setup_patches
 
    } // end of loop over elements
 
-  // Cleanup // hierher
+  // Cleanup 
   typedef std::map<Node*,Vector<ElementWithZ2ErrorEstimator*>*>::iterator ITT;
   for (ITT it=aux_adjacent_elements_pt.begin();
        it!=aux_adjacent_elements_pt.end();it++)
@@ -684,12 +684,14 @@ void Z2ErrorEstimator::get_element_errors(OomphCommunicator* comm_pt,
                                           Vector<double>& elemental_error,
                                           DocInfo& doc_info)
  {
+
+
+#ifdef OOMPH_HAS_MPI
   // Storage for number of processors and current processor
   int n_proc=comm_pt->nproc();
   int my_rank=comm_pt->my_rank();
-
-#ifdef OOMPH_HAS_MPI
   MPI_Status status;
+
   // Initialise local values for all processes on mesh
   unsigned num_flux_terms_local=0;
   unsigned dim_local=0;
@@ -832,10 +834,12 @@ void Z2ErrorEstimator::get_element_errors(OomphCommunicator* comm_pt,
 
   // Default values for serial AND parallel distributed problem
   int itbegin=0;
-  int range=n_patch;
+
   int itend=n_patch;
 
 #ifdef OOMPH_HAS_MPI
+  int range=n_patch;
+
   // Work out values for parallel non-distributed problem
   if (!(mesh_pt->mesh_has_been_distributed()))
    {

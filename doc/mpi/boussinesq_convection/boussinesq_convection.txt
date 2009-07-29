@@ -25,7 +25,7 @@ are combined using a single element, the procedure required to distribute
 the problem is exactly the same as that described in the
 <a href="../../adaptive_driven_cavity/html/index.html">adaptive driven
 cavity tutorial</a>. We therefore omit a detailed discussion 
-of the changes to driver code but encourage you to compare
+of the changes to the driver code but encourage you to compare
 the serial driver codes,  
 
 <center>
@@ -79,8 +79,9 @@ The boundary conditions
 are such that a single pressure degree of freedom must be pinned after
 the adaptation. Once
 the problem has been distributed, pinning the first
-pressure freedom in the first element no longer works because the code
-will be exectued on each processor. The required modifications mirror
+pressure freedom in the first element no longer works because the
+first element will be different on  each processor. The required 
+modifications mirror
 those in the
 <a href="../../adaptive_driven_cavity/html/index.html">adaptive driven
 cavity problem</a> and ensure that the pressure is only pinned in the 
@@ -133,7 +134,7 @@ in multi-domain problems, in which the two interacting
 domains occupy the same physical space. The namespace also provides functions 
 that can be used for problems in which the interacting domains 
 meet at a lower-dimensional interface, <em> e.g.</em> 
-fluid-structure interaction.
+in fluid-structure interaction problems.
 The functions have a sensible default behaviour and can 
 be used as "block-box" routines. We provide a brief overview
 of their (serial and parallel) implementation, providing enough detail
@@ -152,19 +153,18 @@ void Multi_domain_functions::setup_multi_domain_interactions(
 \endcode
 
 sets up a two-way interaction between two domains of the same spatial
-dimension represented by \c first_mesh_pt: a mesh of elements of type
-\c ELEMENT_0 and \c second_mesh_pt: a mesh of elements of type \c
-ELEMENT_1; both \c ELEMENT_0 and \c ELEMENT_1 must inherit from \c
-ElementWithExternalElements.  The function loops over all the integration
+dimension represented by \c first_mesh_pt, a mesh of elements of type
+\c ELEMENT_0, and \c second_mesh_pt, a mesh of elements of type \c
+ELEMENT_1. Both \c ELEMENT_0 and \c ELEMENT_1 must inherit from \c
+ElementWithExternalElements.  The function loops over the integration
 points of all the elements
 in \c first_mesh_pt and establishes which "external element" 
 in \c second_mesh_pt
 covers the same spatial position as the integration point. 
 A pointer to this "external element" and the appropriate local
-coordinate are attached to the element in the \c first_mesh_pt using
-the storage allocated by 
-the \c ElementWithExternalElement base class.
-Once "external elements" have been found for all elements in \c
+coordinate are stored in the element in the \c first_mesh_pt, using
+the storage provided by the \c ElementWithExternalElement base class.
+Once the "external elements" have been found for all elements in \c
 first_mesh_pt, the procedure is repeated with the roles of the two meshes
 interchanged.
 
@@ -220,23 +220,18 @@ the function \c FSI_functions::setup_fluid_load_info_for_solid_elements(...).
 <HR>
 
 \subsection overview Overview of the implementation
-
-In all cases, the  setup of multi-domain interactions requires the
+The  setup of multi-domain interactions requires the
 identification of local coordinates within "external elements" 
 that occupy the same Eulerian position as the integration points of the
-\c ElementWithExternalElements with which they interact. In \c
-oomph-lib, \c GeomObjects are used to perform the identification. The
-meshes or mesh boundaries that occupy the same physical space must
-both be converted into \c GeomObjects <b> with the same parametrisation
-in intrinsic coordinates</b>. Initially, the helper functions
-convert the mesh containing the "external elements" 
+\c ElementWithExternalElements with which they interact. Initially, 
+the helper functions convert the mesh containing the "external elements" 
 into a \c MeshAsGeomObject --- a
 compound \c GeomObject in which the constituent finite elements act as
 sub-\c GeomObjects. Given the Eulerian coordinates of a 
 "target point", the function 
 \c MeshAsGeomObject::locate_zeta(...) is used
 to locate the "external element" (and the local
-coordinate within it) that contains the target point. The simplest
+coordinate within it) that contains the "target point". The simplest
 implementation of this function is to loop over all the elements in
 the mesh, calling \c FiniteElement::locate_zeta(...) until the
 required point is located. The function \c
@@ -249,7 +244,6 @@ converge or if the "target point" is found at a
 local coordinate that is outside the element, then the functions
 return values are set to indicate that the "target point" has not been
 found within the element.
- 
 
 One problem with the naive "loop over all the elements" approach is that
 in most cases, the candidate element will not contain the "target
@@ -262,7 +256,7 @@ located on the current processor. For these reasons,
 \c MeshAsGeomObject::locate_zeta(...) uses a bin-based search
 procedure described below. Conceptually, the algorithm still loops
 over all elements until it finds the one containing the "target
-point", the efficiency gains are achieved by choosing a sensible search
+point"; the efficiency gains are achieved by choosing a sensible search
 order so that the element containing the point is found quickly.
  
 <hr>
@@ -416,14 +410,15 @@ above is therefore modified as follows:
 
  The algorithm is based on the assumption that the majority of the
  pairs of interacting elements will be stored on the same processor, 
- which is the case when \c METIS is used to determine the
+ which is typically the case when \c METIS is used to determine the
  distribution. The algorithm also assumes that the external elements
  can usually be found by searching only in the bin containing the "target
- point", which is true provided that the bin structure is not too
+ point", which is true provided the bin structure is not too
  fine. The algorithm should always find the external elements even if
  these assumptions are not satisfied, but it may not be optimal in
  these situations.
 
+ 
 <HR>
 
 \subsection optim Optimising the setup of multi-domain interactions
@@ -431,8 +426,7 @@ It is possible to optimise the setup of the multi-domain interactions
 by changing the default parameters defined in the 
 \c Multi_domain_functions namespace. (\b Note: Because the
 parameters discussed below are defined in a global namespace, they
-have to be re-set manually to their defaults.)  *** hierher ANDY
-SHOULD WE PROVIDE A HELPER FUNCTION FOR THIS? ***
+have to be re-set manually to their defaults.) 
 - If the size of the domain is known, the extremal
   coordinates of the bin structure do not have to be (re-)computed 
   "on the fly". Hence if the user knows that a 2D mesh is contained
@@ -476,8 +470,8 @@ SHOULD WE PROVIDE A HELPER FUNCTION FOR THIS? ***
   structure itself remain acceptable. This is because in a sufficiently fine bin
   structure (where the number of bins greatly exceeds
   the number of sampling points), most of the bins will be empty.
-  When spiraling outwards from the bin that contains the target
-  point, the fact that a bin is empty can be detected very quickly,
+  When spiraling outwards from the bin that contains the "target
+  point", the fact that a bin is empty can be detected very quickly,
   and there is no need to perform any costly Newton iterations until we
   encounter the first non-empty bin. The bin that contains the 
   "external element" with the "target point" can therefore be 

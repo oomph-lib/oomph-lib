@@ -20,17 +20,17 @@ For
 straightforward problems, a single call to  \c Problem::distribute() 
 suffices.
 Furthermore, the majority of \c oomph-lib's
-multi-physics helper functions (<em> e.g.</em> automatic setup of the
-fluid load on solid elements in FSI problems; determination
+multi-physics helper functions (<em> e.g.</em> the automatic setup of the
+fluid load on solid elements in FSI problems; the determination
 of "source elements" in multi-field problems; etc) can be used in
 distributed problems. For less-straightforward problems, the user may 
 have to intervene in the distribution process and/or be aware of the
-consequences of distribution. Hence, the section \ref domain_decomposition
+consequences of the distribution. Hence, the section \ref domain_decomposition
 provides an overview of the underlying design used for problem
 distribution within \c oomph-lib. A number of 
-<a href="../../../example_code_list/html/index.html#distributed">demo
+<a href="../../../example_code_list/html/index.html#parallel">demo
 driver codes for distributed problems</a> are provided and
-any additional concerns are discussed in the accompanying tutorials.
+any additional issues are discussed in the accompanying tutorials.
 
 #########################################################################
 \n\n
@@ -57,7 +57,7 @@ any additional concerns are discussed in the accompanying tutorials.
   you should use \c CXX=mpic++, \c CC=mpicc, \c F77=mpif77 and \c LD=mpif77.
   \n\n
 - When \c oomph-lib is built with MPI support, the macro \c
-  OOMPH_HAS_MPI is defined, which is used to isolate parallel 
+  OOMPH_HAS_MPI is defined. It is used to isolate parallel 
   sections of code to ensure that the
   library can be used in serial and parallel: <em> e.g. </em>
   \n\n
@@ -156,7 +156,7 @@ any additional concerns are discussed in the accompanying tutorials.
 
 \subsection solvers oomph-lib's parallel linear solvers
 - \c oomph-lib's default linear solver is \c SuperLUSolver. This is a
-  wrapper to the 
+  wrapper to the direct linear solvers from the 
   <A HREF="http://crd.lbl.gov/~xiaoye/SuperLU">SuperLU /
   SuperLU_DIST</A> projects. 
   If \c oomph-lib is built with MPI support and the executable is
@@ -203,7 +203,7 @@ any additional concerns are discussed in the accompanying tutorials.
   \n\n
   \b NOTE: When using LAM, make sure your MPI demons are started
   before running the parallel self-tests, e.g. by using the \c lamboot 
-  command, otherwise they will fail. 
+  command, otherwise the self-tests will fail. 
 .
 
 ########################################################################
@@ -216,7 +216,7 @@ any additional concerns are discussed in the accompanying tutorials.
 \section domain_decomposition Distribution of problems by domain decomposition
 
 By default each processor stores the entire \c Problem object, which
-means that all data is available on all processors but the
+means that all data is available on all processors. As a result the
 size of the problem is limited by the smallest amount of memory
 available on any of the processors. In addition, the mesh adaptation 
 does not benefit from parallel processing because each 
@@ -282,7 +282,7 @@ allows the mesh adaptation to be performed in parallel.
   \until end_of_doc_solution
   \n 
   Without such a modification multiple processors will attempt to
-  write to the same file, leading to incomplete output if the file 
+  write to the same file, leading to incomplete output if/when the file 
   produced by one processor is overwritten by another. 
   By default, \c oomph-lib's mesh-based output functions do
   not include output from halo elements; this can be re-enabled or
@@ -341,13 +341,15 @@ complicated mesh partitionings.
 - <b>Initial refinement and partitioning</b>
   \n\n
   Each processor constructs the same \c Problem object, 
-  using a (typically very coarse) initial mesh; in the figure above,
+  using a (typically very coarse) initial mesh; in the figure below,
   the mesh contains a single four-node quad. Repeated
   calls to  \c Problem::refine_uniformly() should be made to increase the
   number of elements sufficiently for a sensible
   mesh partitioning --- for example, 
   there should be at least as many elements as
-  processors. By default, METIS is used to associate each element
+  processors. By default, 
+  <A HREF="http://www-users.cs.umn.edu/~karypis/metis/">METIS</A> 
+  is used to associate each element
   with a unique processor. Alternatively, user-defined distributions 
   may be specified via a vector that contains the processor number to be
   associated with each element. Nodes located in the interior of a
@@ -384,9 +386,8 @@ complicated mesh partitionings.
   are deleted and the mesh's boundary lookup-schemes (required to identify the
   nodes and elements located adjacent to domain boundaries) and
   neighbour information for adaptive refinement are re-generated. 
-  Finally, each processor 
-  independently assigns equation numbers for 
-  its associated (non-halo) elements and nodes and the equation
+  Finally, each processor  independently assigns equation numbers for 
+  its associated (non-halo) elements and nodes; the equation
   numbers are then synchronised between processors.
 
 @I w 0.75\textwidth decomposition "Sketch illustrating the phases of the parallel mesh adaptation procedure for a problem that is distributed over four processors. The columns illustrate the evolution of the mesh on each of the four processors. The colours of the objects indicate which processor is associated with them. "
@@ -449,7 +450,7 @@ during the initial problem
 Problem::prune_halo_elements_and_nodes()
 \endcode
 \n
-as illustrated in the figure above. 
+as illustrated in the figure. 
 If this is done 
   after every mesh adaptation \f$ e_{dist}\f$  increases significantly as 
   the refinement proceeds. However, the pruning of halo[ed] nodes and elements 
@@ -498,7 +499,7 @@ application of such boundary conditions in
 <a href="../../../poisson/two_d_poisson_flux_bc/html/index.html">
 Poisson</a> or
 <a href="../../../navier_stokes/rayleigh_traction_channel/html/index.html">
-Navier-Stokes</a> equations. \c FaceElements
+Navier-Stokes</a> equations. Since the \c FaceElements
 that apply the Neumann boundary conditions are attached
 to "bulk" elements that may disappear during mesh adaptation, 
 we generally recommend to store the (pointers to the) 
@@ -556,10 +557,8 @@ that store pointers to any "external" elements that take part
 in the interaction. These "external" elements are
 determined by helper functions such as 
  \c FSI_functions::setup_fluid_load_info_for_solid_elements(...) or
-\c Multi_domain_functions::setup_multi_domain_interactions(...), 
-both of which use the function \c
-Multi_domain_functions::locate_external_elements(...). The appropriate
-helper functions must be called in the function 
+\c Multi_domain_functions::setup_multi_domain_interactions(...). 
+The appropriate helper functions must be called in the function 
 \c Problem::actions_after_distribute() to ensure that the interactions
 are correctly setup once the problem has been distributed.
 
@@ -686,11 +685,11 @@ Turek and Hron's FSI benchmark problem </a>.
 \section mpidetails Further MPI Details
 
 - \c oomph-lib mirrors the MPI C bindings with the methods 
-  \c MPI_Helpers::init(...) and \c MPI_Helpers::finalize(); which
-  will call the methods \c MPI_Init(...) and \c MPI_Finalize()
+  \c MPI_Helpers::init(...) and \c MPI_Helpers::finalize(); 
+  they call the methods \c MPI_Init(...) and \c MPI_Finalize()
   respectively. In addition, these methods automatically create 
   (and destroy) a new instance of \c MPI_Comm  with the same set of 
-  processes as \c MPI_COMM_WORLD but different communication context. 
+  processes as \c MPI_COMM_WORLD but with a different communication context. 
   This \c MPI_Comm instance is accessible through 
   \c MPI_Helpers::Communicator_pt which
   returns a pointer to an \c OomphCommunicator object.
@@ -698,9 +697,9 @@ Turek and Hron's FSI benchmark problem </a>.
   \c MPI_Comm.
 - Under normal operation, a user does not need to specify the
   \c OomphCommunicator for any object -- this is all handled
-  automatically by oomph-lib. For example, on construction a \c
-  Problem will use the \c MPI_Helpers communicator, a \c LinearSolver 
-  will use the corresponding \c Problem communicator, and a 
+  automatically by \c oomph-lib. For example, on construction a \c
+  Problem will use the \c MPI_Helpers communicator; a \c LinearSolver 
+  will use the corresponding \c Problem communicator; and a 
   \c Preconditioner will
   use the corresponding \c IterativeLinearSolver communicator.
   
@@ -722,7 +721,7 @@ Once a problem has been distributed, the function
 Problem::check_halo_schemes()
 \endcode
 can be called to check that the halo lookup schemes for each mesh 
-are setup correctly.
+are set up correctly.
 
 Details about the mesh distribution can be generated by
 calling
@@ -792,1079 +791,8 @@ exectuable \c a.out, the command would be
 \code
 mpidbg -np 3 ./a.out 
 \endcode
-Once the command is issued an \c xterm window will be opened for each
+Once the command is issued, an \c xterm window will be opened for each
 processor, and if a crash occurs on any processor, the usual
 <a href="http://www.gnu.org/software/gdb/">gdb</a>
 commands (\c back, \c up, \c down, \c quit and so on) may be used
 within any of the \c xterm sessions where a crash has taken place.
-
-@@END@@
-
-
-The rest of this is the old version of the document
-
-\subsection old_document Old document
-
-Taking the 
-<a href="../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html">2D 
-Poisson equation with flux boundary conditions</a> as our example this
-time, we note that in this case the procedures we need to follow are
-identical to those already followed by \c
-Problem::actions_before_adapt() and \c Problem::actions_after_adapt()
-and consequently, all that is required in addition to distributing the
-problem as detailed above is the addition of
-
-\dontinclude two_d_poisson_flux_bc_adapt.cc
-\skipline Actions before distribute:
-\until }
-\skipline Actions after distribute:
-\until }
-
-to the problem constructor.
-
-For full sources of this driver code see
-<CENTER>
-<A HREF="../../../../demo_drivers/mpi/distribution/two_d_poisson_flux_bc_adapt/two_d_poisson_flux_bc_adapt.cc">
-demo_drivers/mpi/distribution/two_d_poisson_flux_bc_adapt/two_d_poisson_flux_bc_adapt.cc
-</A>
-</CENTER>
-
-########################################################################
-<HR>
-
-\subsubsection refineable_b_convection Refineable Boussinesq convection problem
-
-An interaction described in the previous section can take place between
-two meshes that occupy the same physical space; for example, a
-Boussinesq convection problem where there is an "interaction" between
-the advection-diffusion equation and the Navier--Stokes equations in
-the sense that each equation has a source term which depends upon 
-parameters that are obtained from the solution of the other equation.
-(The benefit of doing this, compared to combining the elements and
-using a single domain, is that a single error estimator can be used
-for each individual mesh of elements rather than some combined error 
-estimator which has to take into account all of the spatial variables
-in a combined element.)
-
-In the Boussinesq example, the "external" elements contain information requiredby the source terms in each set of equations:
-is the momentum equation with an additional buoyancy term dependent
-upon temperature, and
-is the advection-diffusion equation where the "wind" is given by the
-fluid velocity.  [See 
-<a href="../../../multi_physics/b_convection/html/index.html">the
-tutorial on Boussinesq convection</a> for
-further detail.]
-
-We therefore take the advection-diffusion and Navier--Stokes elements
-required for these sets of equations, and create new elements which
-also inherit from the class \c ElementWithExternalElement.  Within
-these new elements we overload the functions which provide these
-source terms so that they get the required information directly from 
-the "external" element.  In this instance, therefore, we overload \c
-get_body_force_nst(...) and \c get_wind_adv_diff(...) as follows:
-
-\dontinclude my_boussinesq_elements.h
-\skipline start_of_get_body_force_nst
-\until end of get_body_force_nst
-
-\skipline start_of_get_wind_adv_diff
-\until end of get_wind_adv_diff
-
-For example driver codes for the distributed Boussinesq problem using 
-both single- and multi-domain methods, see
-<CENTER>
-<A HREF="../../../../demo_drivers/mpi/multi_domain/boussinesq_convection">
-demo_drivers/mpi/multi_domain/boussinesq_convection
-</A>
-</CENTER>
-
-The same principle applies to any problem where two sets of
-equations "interact" within the same physical space: (1) call the \c
-set_sources(...) function to set up the interaction, and
-(2) ensure that the functions which provide the relevant source terms
-within these equations are overloaded to use the external elements
-which were set by the call to \c set_sources(...).
-
-\subsubsection fsi_examples FSI examples
-
-In most of the FSI examples in \c oomph-lib the solid mesh has a lower 
-dimension than the fluid mesh.  In these cases the modification
-required to make a serial driver code work in parallel is straightforward:
-when the solid mesh is turned into a \c MeshAsGeomObject, the user
-needs to ensure that all the elements within the solid mesh are kept
-available on every processor after a distribution has taken place.
-The partition will determine which processor these elements should
-initially be kept on; if the \c keep_all_elements_as_halos() flag for
-the solid mesh is set to true, then these elements become halo
-elements on every other processor involved.  This flag is set by
-passing in an optional boolean parameter to the \c MeshAsGeomObject
-constructor, e.g.:
-\code
-MeshAsGeomObject<1,2,FSIHermiteBeamElement>* wall_geom_object_pt= 
- new MeshAsGeomObject<1,2,FSIHermiteBeamElement>(Wall_mesh_pt);
-\endcode
-
-[Note: this will only work if the solid mesh used to create the
-\c MeshAsGeomObject is not refined in any way; see the \ref turek_flag
-example for how to deal with this scenario.]
-
-The \c actions_after_distribute() function, as with the \c
-actions_after_adapt() function, must reset anything that could have
-been changed by a modification of a mesh or its elements and nodes.
-In most cases this is simply achieved by calling \c
-actions_after_adapt() from \c actions_after_distribute() as in the
-earlier example (see \c actions_routines).
-
-A few further modifications to the order in which functions are called
-are also necessary: any auxiliary node update functions must be set
-\b after a call to \c setup_fluid_load_info_for_solid_elements() from 
-within \c actions_after_adapt() or \c actions_after_distribute().
-
-Examples of modified driver codes for FSI problems for a collapsible
-channel, an oscillating ring and a leaflet loaded from both sides by a
-fluid can be found in
-<CENTER>
-<A HREF="../../../../demo_drivers/mpi/multi_domain/">
-demo_drivers/mpi/multi_domain
-</A>
-</CENTER>
-
-########################################################################
-<HR>
-
-\subsubsection turek_flag Turek flag problem
-
-There are a few further complications involved if the solid and fluid
-mesh are of the same dimension, or if the solid mesh is itself
-refineable; as an example, we revisit 
-<A HREF="../../../interaction/turek_flag/html/index.html">Turek and Hron's FSI benchmark problem</a>.  
-This particular parallel driver has been modified further from the original
-serial version to allow the solid mesh to refine as well as the fluid
-mesh; we explain here the changes required within the 
-<a href="../../../interaction/turek_flag/html/index.html">original
-driver code</a> to allow for both refinement of the solid mesh and the
-distribution of the whole problem.
-
-Firstly, as with all problems involving meshes built from traction
-elements, \c actions_before_distribute() must ensure that such meshes
-are removed from the global mesh storage before the distribution takes
-place.  We must also ensure that the solid elements used to build
-these traction elements are kept on every processor.  This is achieved
-by looping over the traction meshes and setting the flag \c
-GeneralisedElement::must_be_kept_as_halo() for all their elements to
-true, giving the following:
-
-\dontinclude turek_flag.cc
-\skipline start_of_actions_before_distribute
-\until end of actions before distribute
-
-[Note: the traction meshes have not yet been deleted!  This is
-explained in more detail later...]
-
-In \c actions_after_distribute() we need to delete the traction
-elements and re-attach them to the newly distributed solid mesh.  This
-required an additional function to perform the deleting:
-
-\skipline start_of_delete_traction_elements
-\until end of delete traction elements
-
-to complement the already-exisiting \c create_fsi_traction_elements()
-function.  The \c actions_after_distribute therefore reads as follows:
-
-\dontinclude turek_flag.cc
-\skipline start_of_actions_after_distribute
-\until build of FSISolidTractionElements is complete
-
-Now that the traction meshes have been rebuilt, we create new
-\c MeshAsGeomObjects from them and tell the (algebraic) fluid mesh:
-
-\until set_tip_flag_pt
-
-As the sub-\c GeomObjects of these \c MeshAsGeomObjects may have changed, we
-must now call the \c update_node_update() function again for each
-node in the fluid mesh:
-
-\until }
-
-Now we add the traction meshes back to the problem and rebuild the
-global mesh:
-
-\until rebuild_global_mesh
-
-Finally, we can now re-set the fluid load on the solid elements for
-each of the relevant boundaries within the fluid mesh, and then re-set
-the auxiliary node update function:
-
-\until end of actions after distribute
-
-For the complete modified driver code, see
-<CENTER>
-<A HREF="../../../../demo_drivers/mpi/multi_domain/turek_flag/turek_flag.cc">
-demo_drivers/mpi/multi_domain/turek_flag/turek_flag.cc
-</A>
-</CENTER>
-
-########################################################################
-########################################################################
-
-<HR>
-
-\section problems Trouble-shooting
-
-- Debugging?
-- doc_mesh_distribution(...)
-
-
-
-
-
-
-########################################################################
-<HR>
-
-\subsection distribute_options Further user options
-
-The function
-\code
-Problem::distribute(...)
-\endcode
-
-can be called with various arguments:
-
-- No arguments
-- A boolean \c report_stats flag which outputs to the screen during a job.
-- A \c DocInfo object which allows output of the complete domain of
-and the mesh, elements and nodes on each processor
-- A vector of unsigned integers detailing the partition to be used
-(used during demo runs; this must be the same size as the number of
-elements that are to be distributed, ie. it must ignore any elements
-that may be removed in \c actions_before_distribute(), say)
-- Any combination of the above arguments (with the Vector always first, 
-and boolean always last)
-
-The function itself also returns a vector of unsigned integers detailing
-the partition that has actually been used during the distribution.
-
-\subsubsection prune_halo_elements Prune halo elements and nodes
-
-A call to the \c distribute() function sets up a halo-haloed lookup 
-scheme across boundaries between processors (see \ref
-distribute_details for more information); following this, any
-subsequent refinement will include these elements, and the element
-sons of halo elements automatically become halo themselves.  If a
-large amount of refinement takes place after the problem has been
-distributed, then layers of halo elements (and nodes) may become
-excessively wide. Therefore, another routine available to the user, 
-once distribution has taken place, is
-\code
-Problem::prune_halo_elements_and_nodes()
-\endcode
-This routine will reduce the number of halo(ed) elements and nodes 
-once refinement has taken place on a distributed problem.  It works
-by reducing the mesh (on each processor) to its highest uniform
-state of refinement and then removing any unnecessary halo elements and 
-nodes at that level of refinement, plus any sons of these
-elements at any subsequent level of refinement.  In the figure, (a)
-shows elements on processor 0 after a call to \c problem.distribute() 
-and its haloed elements with processor 1; (b) shows the result of a 
-uniform refinement, with all sons of haloed elements becoming haloed 
-elements; and (c) shows the result of a call to \c
-problem.prune_halo_elements_and_nodes(), which removes the unnecessary
-layer of halo elements created as a result of the uniform refinement.
-Note that, following a call to this function, the mesh(es) involved
-may no longer be unrefined below the previous highest level of uniform
-refinement.
-
-@I w 0.75\textwidth prune_halo "Example of pruning halo elements and nodes. "
-
-\subsubsection checking_and_documenting Debugging and documenting the distribution
-
-Once a problem has been distributed, an optional routine available to the
-user is
-\code
-Problem::check_halo_schemes()
-\endcode
-which ensures that the halo lookup schemes (see \ref distribute_details) 
-for each mesh are correct by checking information in halo elements
-against the information held in their non-halo counterparts on another 
-processor. This is a routine which only needs to be called if the user is
-suspicious of any errors occurring along boundaries between processor
-domains.  It can be called with a \c DocInfo flag which allows output of 
-halo(ed) elements and nodes between each possible pair of processors.
-
-A further output routine is also available for each (sub)mesh:
-\code
-Mesh::doc_mesh_distribution(DocInfo& doc_info);
-\endcode
-outputs the elements, nodes, halo(ed) elements, halo(ed) nodes, mesh, 
-boundary elements and boundary nodes on each processor.  This routine
-is automatically called when \c Problem::distribute() is called with a
-\c DocInfo object with \c doc_flag() set to true.
-
-########################################################################
-<HR>
-
-\subsection multi_domain Distributing a multi-domain problem
-
-For multiple domains, any interaction that may occur is set by the user
-within a driver code, for example, using the function
-\code
-FSI_functions::setup_fluid_load_for_solid_elements(...)
-\endcode
-in an FSI problem, or the function
-\code
-Multi_domain_functions::set_sources(...)
-\endcode 
-for a problem where two or more PDEs interact within the same physical
-space, using a single domain for each PDE. The distribution process
-for such problems typically requires further user intervention at the 
-driver code level to ensure that such interactions continue to work in
-parallel as they did in serial.
-
-The individual meshes involved in the problem are distributed in exactly
-the same way as a single-domain problem; therefore, each mesh will have
-its own halo-haloed lookup scheme for elements and nodes.  This is
-achieved by calling \c Mesh::distribute() for each mesh based upon the
-relevant part of the Vector of unsigned integers returned by \c
-Problem::partition_global_mesh().
-
-There are two major types of interaction which can take place;
-firstly, where two meshes occupy the same physical space but describe
-different PDEs which interact with each other in some way (via source
-terms in the equations, say), and secondly, where two domains interact
-along a boundary (e.g. an FSI problem).  The next two sections
-describe the processes required to ensure that such problems work when
-run in parallel.
-
-\subsubsection overlaying_meshes Overlaying meshes
-
-An interaction that takes place between two meshes occupying the same
-physical space is set up by calling the templated function
-\code
-template<class ELEMENT_0,class ELEMENT_1,unsigned EL_DIM_0,unsigned EL_DIM_1>
-void Multi_domain_functions::set_sources
- (Problem* problem_pt, 
-  Mesh* const &first_mesh_pt, Mesh* const &second_mesh_pt, 
-  const unsigned& first_interaction=0, 
-  const unsigned& second_interaction=0);
-\endcode 
-from within a problem constructor, after the global mesh has been
-built but before the equation numbers are assigned.  Subsequently,
-since the elements involved in the interaction (may) change once a 
-problem has been distributed, we also ensure that this
-function is called from the driver code in \c actions_after_distribute() 
-(and \c actions_after_adapt() if any of the meshes are refineable).
-
-The user must also ensure that each of \c ELEMENT_0 and \c ELEMENT_1 (the
-element types within \c first_mesh_pt and \c second_mesh_pt
-respectively, which are of dimension \c EL_DIM_0 and \c EL_DIM_1
-respectively) both inherit from the class \c
-ElementWithExternalElement (see \ref external_halo_elements).  The 
-optional interaction parameters may be used if the interaction in
-either direction is not the only interaction for either of the domains.
-
-- See the \ref refineable_b_convection section for an example
-
-\subsubsection meshes_with_boundary_interface Meshes which have a boundary interface
-
-Problems where the domains do not overlap but interact along a
-boundary already require the user to set the interaction up from
-within the driver code, for example via the function
-\code
-FSI_functions::setup_fluid_load_for_solid_elements(...)
-\endcode
-The majority of the functionality which allows this to be called in
-parallel is contained within this particular function and is
-explained later in this document (see \ref multi_domain_details).  
-The user is required to make a few modifications in order to allow a 
-problem involving a call to this function to work in parallel, in 
-addition to the modifications mentioned earlier for a single-domain 
-problem (see \ref how_to_distribute).
-
-- See the section on \ref fsi_examples for more details.
-
-- If the solid mesh has the same dimension as the fluid mesh, then the
-  processes involved are slightly more complex: see the \ref turek_flag
-  for an example.
-
-########################################################################
-<HR>
-
-\subsection distribute_details Further details of the distribute function
-
-This section gives further details on the actual procedure used to
-distribute a problem.  [Note: if \c distribute() is
-called for a single-processor job, the library prints a warning
-message and continues to the next stage without following any of the
-subsequent steps; if \c distribute() is called and there are more
-processors than elements in the global mesh then the library throws an
-error.]
-
-\subsubsection partitioning Partitioning the problem
-
-The first method that takes place in \c Problem::distribute(...) is a
-partition of all the elements in the global mesh (which is a combination
-of all submeshes), via the virtual function
-\code
-Problem::partition_global_mesh(...)
-\endcode
-which, in its basic form, uses 
-<a href="http://glaros.dtc.umn.edu/gkhome/views/metis">METIS</a> which
-assigns each elements to a processor. This function 
-returns a vector of unsigneds specifying which processor each 
-element has been assigned to - the element partition.
-
-If \c METIS returns a partition where no elements are assigned to a 
-particular processor (this can take place, particularly when the 
-number of processors is almost equal to the number of elements) then
-we deal with this scenario after the partition has been returned from
-\c METIS by ensuring that any processor that has no elements takes one 
-of the elements from the processor that has the most elements, until
-all processors have at least one element.
-
-\subsubsection distributing_meshes Distributing the meshes
-
-For each mesh involved, the vector of unsigneds returned from
-\c partition_global_mesh() is then passed on to the function
-\code
-Mesh::distribute(...)
-\endcode
-For multiple meshes, the Vector is split into sections for each
-submesh and then passed into the function.
-In \c Mesh::distribute(), we set up a halo-haloed lookup scheme for
-elements between processors that share element boundaries.  At the 
-start of the routine all processors hold the whole mesh, and each 
-processor retains from the elements within the mesh all those 
-indicated by the Vector of unsigned integers detailing the partition, 
-along with any elements which share nodes with these elements; such
-elements are called halo elements.  All halo elements have an equivalent 
-non-halo element on another processor, and these elements are called
-haloed elements.  Thus, each mesh has the function
-\code
-Mesh::halo_element_pt(const unsigned& iproc, const unsigned& j)
-\endcode
-which returns a pointer to the \c jth halo element in the lookup
-scheme between the current processor and process \c iproc, and also 
-the function
-\code
-Mesh::haloed_element_pt(const unsigned& iproc, const unsigned& j)
-\endcode
-which returns a pointer to the \c jth element haloed by the current
-process to the process \c iproc.
-
-@I w 0.75\textwidth halo_haloed "Example of halo lookup scheme on two processors. "
-
-Once the halo-to-haloed lookup scheme for elements is created, we mark
-all nodes (on both non-halo elements and halo elements) that need to
-be kept on each processor and remove any elements and nodes that
-remain unmarked on any process. Following this, we create a
-halo-haloed lookup scheme for nodes by calling the function
-\code
-Mesh::classify_halo_and_haloed_nodes(DocInfo& doc_info, 
-                                     const bool report_stats);
-\endcode
-In this routine, we loop over all nodes on elements associated with
-the current processor, and ensure that each nodes obtains a list of
-processor numbers, populated with the current processor number, and, 
-if it is also a halo element, the processor number relating to the
-equivalent haloed element.  Once each node in the problem has been 
-told the processors it is associated with, the highest-numbered of 
-these processors is set to be the one that is "in charge" of the node.
-Subsequently, any node on a processor that has a different
-processor in charge of it must become a halo node (and its equivalent
-haloed node is found in the node storage of the processor in charge).
-We also ensure that any internal Data associated with halo elements is
-itself halo.
-
-After the distribution has taken place, we need to ensure that
-after any mesh adaptation, the hanging status of equivalent halo-haloed
-nodes is the same; in particular, any haloed nodes that change status
-from hanging back to non-hanging may need to communicate this across
-to their equivalent halo node.  This is achieved by calling the
-routine
-\code
-RefineableMeshBase::synchronise_hanging_nodes(...)
-\endcode
-at the beginning of \c Problem::assign_eqn_numbers(...), which does
-exactly what it says - ensuring that any discrepancy in the hanging
-status between a halo-haloed node pair is removed.  In order to
-achieve this, we need a further storage scheme which
-detailed \b all the nodes shared between a pair of processors.  This was
-necessary because a hanging node's master node may be on a different
-(higher-numbered) processor to either of the processors involved in
-the hanging node's halo-haloed lookup scheme, and therefore would not
-be available via the halo-haloed lookup scheme.  However, such a
-master node will be included in the shared node storage scheme, and 
-this is where it is accessed from if it is required in order to alter 
-the hanging status of any halo node where there is a discrepancy.
-
-\subsubsection actions_routines Actions before and after distribute
-
-In certain problems, it is more straightforward to only distribute
-some of the meshes involved (particularly if some of the meshes are
-of a lower dimension than the main "bulk" mesh) and deal with the
-other meshes after the "main" distribution has taken place.  To
-facilitate this, the virtual functions
-\code
-Problem::actions_before_distribute()
-Problem::actions_after_distribute()
-\endcode
-are provided to allow the user to remove such meshes from the global
-mesh before a distribution takes place.  Such meshes are usually built
-from the bulk mesh within the specific driver code.
-
-\subsubsection further_routines Further parallel modifications
-
-Once the problem has been distributed, the equation numbers assigned to
-and data held by haloed elements and nodes need to be copied over
-to the equivalent halo elements and nodes on the other processor.
-The equation numbers are synchronised across all processors by calling
-\code
-Problem::synchronise_eqn_numbers()
-\endcode
-once all equation numbers have been assigned on each processor.
-This routine ensures that equation numbers assigned to non-halo
-objects (Internal Data, Nodes, SolidNodes) on each processor are
-distinct, and then copies the equation numbers of haloed objects to
-the equivalent halo objects using the helper function
-\code
-Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt);
-\endcode
-for each (sub)mesh involved in the problem.
-
-All values held (including history and position values) for each of 
-these haloed objects are synchronised with the equivalent halo objects 
-by calling
-\code
-Problem::synchronise_dofs(Mesh* &mesh_pt)
-\endcode
-for each (sub)mesh after any point where a solve takes place 
-within an iterative Newton solver loop.
-
-\subsubsection face_elements Problems involving FaceElements
-
-The minor modifications to allow a driver code where
-\c FaceElements are used to function in parallel are made within the
-build procedure for such meshes.  If, after a distribution has taken 
-place, a bulk element becomes a halo element, then
-any \c FaceElement which is "attached" to it in a consequent build is
-also turned into a halo element.  The user has to
-ensure that such "FaceMeshes" are re-built by re-calling the process
-from the \c actions_after_distribute() function; see \ref
-two_d_poisson_flux_bc_adapt for more details.
-
-########################################################################
-<HR>
-
-\subsection multi_domain_details Further details on multi-domain method
-
-\subsubsection external_halo_elements External elements
-
-Any element which requires information from an element in another
-"external" mesh must inherit from the base class \c
-ElementWithExternalElement.  Within this base class we store 
-a pointer to the "external" element at each integration point
-of the current element and a Vector of the external element's local
-coordinates at that integration point, ie:
-\code
-FiniteElement*& external_element_pt(const unsigned& interaction, const
-unsigned& ipt);
-\endcode
-\code
-Vector<double>& external_element_local_coord(const unsigned&
-interaction, const unsigned& ipt);
-\endcode
-where the unsigned parameter \c interaction denotes the interaction
-index (required in cases where an element has more than one element
-with which it interacts, e.g. an FSI problem where a solid element is
-affected by a fluid load on both its "front" and "back", see the 
-<a href="../../../interaction/fsi_channel_with_leaflet/html/index.html">FSI 
-channel with leaflet problem</a> for further details).
-
-Any interaction between meshes involves information from one element
-being passed into another element (for example, any solid element in an
-FSI problem needs to know its adjacent fluid element(s) in order to
-calculate the fluid load).  For a problem run on a single processor,
-this "external" element (from the "external" (sub)mesh) will (clearly!)
-always be available to the current element (on the current (sub)mesh).
-However, this may not always be the case for a problem using multiple
-processors - an "external" element may be on a different processor than
-the current element.  If this is the case, then another lookup scheme
-is introduced - the processor for the current element creates a copy
-("external halo") of the element based upon information communicated to
-it from the processor which contains the original ("external haloed")
-element.  All nodes on an external halo element become external halo
-nodes and have equivalent external haloed counterparts on the external
-haloed elements.  
-
-@I w 0.75\textwidth external_halo_elements "Example of external halo elements for the collapsible channel domain. "
-
-In this figure, we are considering the collapsible channel problem,
-where the external elements are those adjacent to the solid wall.  The
-\c distribute() function in this case placed the entire solid mesh
-onto processor 1 (indicated by the thick black line on the right half
-of the figure), along with the indicated fluid elements, with the
-remainder of the fluid elements on processor 0.  Since some of the
-required "adjacent" elements only exist on processor 0 (the elements
-indicated by thicker outlines on the left half of the figure), these
-must become external halo elements on processor 1 (externally haloed 
-elements from processor 0).  The remained of the required "adjacent" 
-elements already exist on processor 1 and therefore become external
-elements.
-
-This lookup scheme then functions in the same way as the halo-haloed
-lookup scheme during the assignment of equation numbers and the Newton
-solver.  We ensure that the equation numbers in each case are
-synchronised by calling the helper function
-\code
-Problem::copy_external_haloed_eqn_numbers_helper(Mesh* &mesh_pt);
-\endcode
-from within \c synchronise_eqn_numbers() for each (sub)mesh;
-subsequently, during any solve, we call
-\code
-Problem::synchronise_external_dofs(Mesh* &mesh_pt);
-\endcode
-immediately after any call to \c synchronise_dofs().
-
-\subsubsection locating_and_creating_external_elements Locating and creating external elements
-
-External (halo) elements are set by calling the function
-\code
-template<class ELEMENT,class EXT_ELEMENT,class GEOM_OBJECT,
- unsigned EL_DIM_LAG,unsigned EL_DIM_EUL>
- void set_external_storage(Problem* problem_pt,
-                           Mesh* const &mesh_pt,
-                           Mesh* const &external_mesh_pt,
-                           const unsigned& interaction_index=0,
-                           Mesh* const &external_face_mesh_pt=0);
-\endcode
-in the \c Multi_domain_functions namespace, either from within \c
-Multi_domain_functions::set_sources() for the case where meshes
-overlay, or from within \c
-FSI_functions::set_fluid_load_for_solid_elements() for FSI
-problems. The arguments of this function are a pointer to the Problem,
-then pointers to the current submesh, and the submesh in which the
-current submesh will locate its external elements.  The final two
-parameters are optional; the first can be set if there is more than one
-interaction between the specific meshes, and the second is set
-if a mesh of \c FaceElements is used to specify the interaction
-between two meshes along a boundary (as is the case in all FSI
-problems).  The templated parameters related
-directly to the submeshes involved: ELEMENTs must be in the current
-submesh (and inherit from ElementWithExternalElement), EXT_ELEMENTs
-must be in the external submesh, and the remaining templated
-parameters are those required to create a \c MeshAsGeomObject from the
-external submesh or the external face mesh (depending on the type of
-interaction)- a GEOM_OBJECT, and the Eulerian and Lagrangian
-dimensions of the external submesh used to create the
-\c MeshAsGeomObject.
-
-The \c set_external_storage() function is split up into several helper
-functions which follow the procedure required to locate, communicate
-and create external (halo) elements and nodes.  
-
-Firstly, a \c MeshAsGeomObject is created based upon the external (face)
-mesh.  Once this is set up, each processor in turn communicates the
-coordinates of the integration points of each of its elements in the
-current mesh to each of the other processors.  Once every processor
-holds the same set of coordinates, each coordinate in turn is located
-in the \c MeshAsGeomObject by calling the function
-\code
-MeshAsGeomObject::locate_zeta(const Vector<double>& zeta, 
-                              GeomObject*& sub_geom_object_pt, 
-                              Vector<double>& s)
-\endcode
-simultaneously on every processor.  This returns a \c GeomObject (which
-is a sub-\c GeomObject of the \c MeshAsGeomObject, i.e. the elements of the
-mesh) and a local coordinate.  If these objects are returned on the
-current processor then we are done; we set \c
-external_element_pt() to be the sub-geometric object, and \c 
-external_element_local_coord() to be the local coordinate.  If an
-object is returned on another processor, then we communicate the
-information required to create an exact copy of the object on the
-current processor; this will become an external halo element (and the
-original object an external haloed element).  Since MPI cannot deal
-with sending objects such as \c Elements or \c Nodes directly, this involves
-distilling the information required into a series of unsigned integers
-and doubles which are read back on the current processor and used to
-create new elements and nodes (and anything else that may be
-associated with these elements and nodes, e.g. if they are \c SolidNode,
-\c AlgebraicNode, etc.).
-
-The \c MeshAsGeomObject::locate_zeta() function uses a bin search
-method to locate the required element for the specified coordinate.
-The bin structure is set up when the \c MeshAsGeomObject is first
-created, and is a regular structure which is set to cover the
-whole of the \c MeshAsGeomObject based upon the underlying mesh's minimum
-and maximum coordinates in each dimension.  Each sub-object of the
-\c MeshAsGeomObject is then assigned to one or more of the bins based
-upon coordinates within the sub-object.  The locate procedure then
-takes the coordinate passed into it and works out which bin is the
-most likely candidate to contain the required sub-object containing
-this coordinate.  It visits all sub-objects within this bin: if it is
-successful (on any processor) then it returns the sub-object and the
-corresponding local coordinate; if not, then it follows the
-neighbouring bins in a spiralling pattern and visits all the
-sub-objects until it successfully finds the correct sub-object.  The
-number of bins in each dimension and the size of the bin structure in
-each dimension may be specified by the user at the driver code level
-using
-\code
-Multi_domain_functions::Setup_bins_again=true;
-\endcode
-along with, for example:
-\code
-Multi_domain_functions::Nx_bin=50;
-Multi_domain_functions::X_min=0.0;
-Multi_domain_functions::X_max=3.0;
-\endcode
-(and similarly for any other values along any other dimension).
-
-Once all external (halo) elements and nodes have been succesfully
-created between all pairs of processors it is still possible that
-there may be duplication between two sets of storage.  This is
-bypassed at the element level by ensuring that only non-halo elements
-may become external halo elements; however, the same is not possible
-for nodes.  We therefore use the function
-\code
-Multi_domain_functions::remove_duplicate_data(Mesh* const &mesh_pt);
-\endcode
-which ensures that any external halo-haloed nodes between a
-pair of processors do not have a duplicate in any other set of
-external halo-haloed nodes on another pair of processors.  This is
-achieved by assigning only the global equation numbers, synchronising,
-and then finding Data which have the same equation number assigned to
-them and ensuring that their pointers match.
-
-\subsubsection node_update Algebraic and macro node update
-
-In an FSI problem, the solid elements are affected by the fluid
-elements that are adjacent to them, but a fluid element may be
-affected by a solid element that is not adjacent (e.g. all elements
-within the collapsible section of the collapsible channel problem).  
-These fluid elements are affected in the sense that their 
-nodal coordinates are altered depending upon the motion of the solid 
-mesh and its elements.  Such nodal coordinates may be updated in two
-ways: (1) an algebraic node update: see the <a href="../../../interaction/fsi_collapsible_channel_algebraic/html/index.html">FSI
-collapsible channel example with algebraic node updates</a> or (2) a macro-element based node update: again
-see the <a href="../../../interaction/fsi_collapsible_channel/html/index.html">FSI
-collapsible channel example</a>.  These procedures
-continue to work in parallel problems due to the use of either the \c
-keep_all_elements_as_halos() flag on a solid mesh which is to become
-the \c MeshAsGeomObject that controls the node update procedure, or the
-\c must_be_kept_as_halo() flag which keeps all elements required to
-create any \c MeshAsGeomObject that controls the node update procedure.  In
-the second case, the fluid mesh (either an \c AlgebraicMesh or a
-\c MacroElementNodeUpdateMesh) must have access functions which allow the
-user to reset the MeshAsGeomObjects which control the node update
-after a distribution or an adaptation has taken place.
-
-
-########################################################################
-<HR>
-
-\subsection examples Examples of parallel driver codes
-
-The following examples illustrate the steps required to modify a
-serial driver code so that it works in parallel.  In general, all
-parallel drivers need to:
-
-- call \c MPI_Helpers::init(argc,argv) and \c MPI_Helpers::finalize()
-  at the beginning and end of \c main()
-- modify the output file from \c problem.doc_solution() to include the
-  current processor number to distinguish output from distinct
-  processors
-- call \c problem.distribute() at some point after the problem has
-  been constructed, but before any non-uniform refinement takes place
-
-\subsubsection adaptive_driven_cavity Adaptive driven cavity problem
-
-To show how this works in
-practice, we demonstrate how to modify the serial driver code for the
-<a href="../../../navier_stokes/adaptive_driven_cavity/html/index.html">
-adaptive driven cavity problem</a> to work in parallel.
-
-Firstly, we detail the changes required in the main driver code.  We
-first of all need to ensure that MPI is initialised and finalised;
-this is achieved by calling the functions
-\code
-MPI_Helpers::init(argc,argv)
-MPI_Helpers::finalize()
-\endcode
-at the beginning and end of the main body.  We then ensure that \c
-Problem::distribute() is called before any non-uniform adaptation 
-or solving takes place; so, for example, this driver code would
-change from
-
-\dontinclude adaptive_driven_cavity.cc
-\skipline Solve problem with Taylor Hood elements
-\until end of Taylor Hood elements
-
-to
-
-\dontinclude adaptive_driven_cavity_for_doc.cc
-\skipline Solve problem with Taylor Hood elements
-\until end of Taylor Hood elements
-
-with a similar change for the problem using Crouzeix-Raviart elements.
-
-In this particular driver code, the pressure is fixed to zero in the
-"first" element.  Since the "first" element on each
-processor will be different once the problem is distributed, we also
-modify \c Problem::actions_after_adapt() to only fix the pressure in
-what was the zeroth element in the non-distributed problem as follows:
-
-\dontinclude adaptive_driven_cavity_for_doc.cc
-\skipline After adaptation:
-\until end_of_actions_after_adapt
-
-This modification does not need to happen in the Problem constructor
-as the distribution occurs after the problem has been constructed.
-
-The fully modified parallel driver code can be found at
-<CENTER>
-<A HREF="../../../../demo_drivers/mpi/distribution/adaptive_driven_cavity/adaptive_driven_cavity.cc">
-demo_drivers/mpi/distribution/adaptive_driven_cavity/adaptive_driven_cavity.cc
-</A>
-</CENTER>
-
-[Note: This driver code, as with all parallel driver codes, uses the
-form of \c Problem::distribute() which reads in a file determining the
-partition of the elements if used in a validation run.]
-
-For further examples of how this works in practice for both 
-two-dimensional and three-dimensional single-domain problems, look in
-the directory
-<CENTER>
-<A HREF="../../../../demo_drivers/mpi/distribution/">
-demo_drivers/mpi/distribution/
-</A>
-</CENTER>
-
-########################################################################
-<HR>
-
-\subsubsection two_d_poisson_flux_bc_adapt 2D Poisson problem with flux boundary conditions
-
-Taking the 
-<a href="../../../poisson/two_d_poisson_flux_bc_adapt/html/index.html">2D 
-Poisson equation with flux boundary conditions</a> as our example this
-time, we note that in this case the procedures we need to follow are
-identical to those already followed by \c
-Problem::actions_before_adapt() and \c Problem::actions_after_adapt()
-and consequently, all that is required in addition to distributing the
-problem as detailed above is the addition of
-
-\dontinclude two_d_poisson_flux_bc_adapt.cc
-\skipline Actions before distribute:
-\until }
-\skipline Actions after distribute:
-\until }
-
-to the problem constructor.
-
-For full sources of this driver code see
-<CENTER>
-<A HREF="../../../../demo_drivers/mpi/distribution/two_d_poisson_flux_bc_adapt/two_d_poisson_flux_bc_adapt.cc">
-demo_drivers/mpi/distribution/two_d_poisson_flux_bc_adapt/two_d_poisson_flux_bc_adapt.cc
-</A>
-</CENTER>
-
-########################################################################
-<HR>
-
-\subsubsection refineable_b_convection Refineable Boussinesq convection problem
-
-An interaction described in the previous section can take place between
-two meshes that occupy the same physical space; for example, a
-Boussinesq convection problem where there is an "interaction" between
-the advection-diffusion equation and the Navier--Stokes equations in
-the sense that each equation has a source term which depends upon 
-parameters that are obtained from the solution of the other equation.
-(The benefit of doing this, compared to combining the elements and
-using a single domain, is that a single error estimator can be used
-for each individual mesh of elements rather than some combined error 
-estimator which has to take into account all of the spatial variables
-in a combined element.)
-
-In the Boussinesq example, the "external" elements contain information required
-by the source terms in each set of equations:
-<center>
-\f[ 
-\rho_{0} \left (\frac{\partial u^{*}_i}{\partial t^{*}} +
-u^{*}_j \frac{\partial u^{*}_i}{\partial x^{*}_j} \right) =
-- \frac{\partial p^{*}}{\partial x^{*}_i} +  \left[\rho_{0} -
-  \alpha\rho_{0}(\theta^{*}
- - \theta_{0})\right] G^{*}_i + \mu_{0}
-\frac{\partial }{\partial x^{*}_j} \left[
-\frac{\partial u^{*}_i}{\partial x^{*}_j} +
-\frac{\partial u^{*}_j}{\partial x^{*}_i} \right],
-\f]
-</center>
-is the momentum equation with an additional buoyancy term dependent
-upon temperature \f$ \theta^{*} \f$, and
-<center>
-\f[ 
-\frac{\partial \theta^{*}}{\partial t^{*}} +
-u^{*}_{j}\frac{\partial \theta^{*}}{\partial x^{*}_{j}} =
-\kappa\frac{\partial}{\partial x^{*}_{j}}\left(\frac{\partial
-\theta^{*}}{\partial
-x^{*}_{j}}\right),
-\f]
-</center>
-is the advection-diffusion equation where the "wind" is given by the
-fluid velocity \f$ u^{*}_j \f$.  [See 
-<a href="../../../multi_physics/b_convection/html/index.html">the
-tutorial on Boussinesq convection</a> for
-further detail.]
-
-We therefore take the advection-diffusion and Navier--Stokes elements
-required for these sets of equations, and create new elements which
-also inherit from the class \c ElementWithExternalElement.  Within
-these new elements we overload the functions which provide these
-source terms so that they get the required information directly from 
-the "external" element.  In this instance, therefore, we overload \c
-get_body_force_nst(...) and \c get_wind_adv_diff(...) as follows:
-
-\dontinclude my_boussinesq_elements.h
-\skipline start_of_get_body_force_nst
-\until end of get_body_force_nst
-
-\skipline start_of_get_wind_adv_diff
-\until end of get_wind_adv_diff
-
-For example driver codes for the distributed Boussinesq problem using 
-both single- and multi-domain methods, see
-<CENTER>
-<A HREF="../../../../demo_drivers/mpi/multi_domain/boussinesq_convection">
-demo_drivers/mpi/multi_domain/boussinesq_convection
-</A>
-</CENTER>
-
-The same principle applies to any problem where two sets of
-equations "interact" within the same physical space: (1) call the \c
-set_sources(...) function to set up the interaction, and
-(2) ensure that the functions which provide the relevant source terms
-within these equations are overloaded to use the external elements
-which were set by the call to \c set_sources(...).
-
-\subsubsection fsi_examples FSI examples
-
-In most of the FSI examples in \c oomph-lib the solid mesh has a lower 
-dimension than the fluid mesh.  In these cases the modification
-required to make a serial driver code work in parallel is straightforward:
-when the solid mesh is turned into a \c MeshAsGeomObject, the user
-needs to ensure that all the elements within the solid mesh are kept
-available on every processor after a distribution has taken place.
-The partition will determine which processor these elements should
-initially be kept on; if the \c keep_all_elements_as_halos() flag for
-the solid mesh is set to true, then these elements become halo
-elements on every other processor involved.  This flag is set by
-passing in an optional boolean parameter to the \c MeshAsGeomObject
-constructor, e.g.:
-\code
-MeshAsGeomObject<1,2,FSIHermiteBeamElement>* wall_geom_object_pt= 
- new MeshAsGeomObject<1,2,FSIHermiteBeamElement>(Wall_mesh_pt);
-\endcode
-
-[Note: this will only work if the solid mesh used to create the
-\c MeshAsGeomObject is not refined in any way; see the \ref turek_flag
-example for how to deal with this scenario.]
-
-The \c actions_after_distribute() function, as with the \c
-actions_after_adapt() function, must reset anything that could have
-been changed by a modification of a mesh or its elements and nodes.
-In most cases this is simply achieved by calling \c
-actions_after_adapt() from \c actions_after_distribute() as in the
-earlier example (see \c actions_routines).
-
-A few further modifications to the order in which functions are called
-are also necessary: any auxiliary node update functions must be set
-\b after a call to \c setup_fluid_load_info_for_solid_elements() from 
-within \c actions_after_adapt() or \c actions_after_distribute().
-
-Examples of modified driver codes for FSI problems for a collapsible
-channel, an oscillating ring and a leaflet loaded from both sides by a
-fluid can be found in
-<CENTER>
-<A HREF="../../../../demo_drivers/mpi/multi_domain/">
-demo_drivers/mpi/multi_domain
-</A>
-</CENTER>
-
-########################################################################
-<HR>
-
-\subsubsection turek_flag Turek flag problem
-
-There are a few further complications involved if the solid and fluid
-mesh are of the same dimension, or if the solid mesh is itself
-refineable; as an example, we revisit 
-<A HREF="../../../interaction/turek_flag/html/index.html">Turek and Hron's FSI benchmark problem</a>.  
-This particular parallel driver has been modified further from the original
-serial version to allow the solid mesh to refine as well as the fluid
-mesh; we explain here the changes required within the 
-<a href="../../../interaction/turek_flag/html/index.html">original
-driver code</a> to allow for both refinement of the solid mesh and the
-distribution of the whole problem.
-
-Firstly, as with all problems involving meshes built from traction
-elements, \c actions_before_distribute() must ensure that such meshes
-are removed from the global mesh storage before the distribution takes
-place.  We must also ensure that the solid elements used to build
-these traction elements are kept on every processor.  This is achieved
-by looping over the traction meshes and setting the flag \c
-GeneralisedElement::must_be_kept_as_halo() for all their elements to
-true, giving the following:
-
-\dontinclude turek_flag.cc
-\skipline start_of_actions_before_distribute
-\until end of actions before distribute
-
-[Note: the traction meshes have not yet been deleted!  This is
-explained in more detail later...]
-
-In \c actions_after_distribute() we need to delete the traction
-elements and re-attach them to the newly distributed solid mesh.  This
-required an additional function to perform the deleting:
-
-\skipline start_of_delete_traction_elements
-\until end of delete traction elements
-
-to complement the already-exisiting \c create_fsi_traction_elements()
-function.  The \c actions_after_distribute therefore reads as follows:
-
-\dontinclude turek_flag.cc
-\skipline start_of_actions_after_distribute
-\until build of FSISolidTractionElements is complete
-
-Now that the traction meshes have been rebuilt, we create new
-\c MeshAsGeomObjects from them and tell the (algebraic) fluid mesh:
-
-\until set_tip_flag_pt
-
-As the sub-\c GeomObjects of these \c MeshAsGeomObjects may have changed, we
-must now call the \c update_node_update() function again for each
-node in the fluid mesh:
-
-\until }
-
-Now we add the traction meshes back to the problem and rebuild the
-global mesh:
-
-\until rebuild_global_mesh
-
-Finally, we can now re-set the fluid load on the solid elements for
-each of the relevant boundaries within the fluid mesh, and then re-set
-the auxiliary node update function:
-
-\until end of actions after distribute
-
-For the complete modified driver code, see
-<CENTER>
-<A HREF="../../../../demo_drivers/mpi/multi_domain/turek_flag/turek_flag.cc">
-demo_drivers/mpi/multi_domain/turek_flag/turek_flag.cc
-</A>
-</CENTER>
-
-

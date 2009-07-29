@@ -359,7 +359,7 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
    
   // Redistribute the tmp_rhs vector with this distribution -- it's
   // now "global", as required for mumps
-  tmp_rhs.redistribute(global_distribution);
+  tmp_rhs.redistribute(&global_distribution);
   
   // Do the backsubsitution phase -- overwrites the tmp_rhs vector with the
   // solution
@@ -373,11 +373,11 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
   // non-distributed tmp_rhs vector to match
   if (result.distribution_setup()) 
    {
-    tmp_rhs.redistribute(*result.distribution_pt());
+    tmp_rhs.redistribute(result.distribution_pt());
    }
   else
    {
-    tmp_rhs.redistribute(*Distribution_pt);    
+    tmp_rhs.redistribute(Distribution_pt);    
    }
   
   // Now copy the tmp_rhs vector into the (matching) result
@@ -522,7 +522,7 @@ void MumpsSolver::solve(Problem* const &problem_pt, DoubleVector &result)
  t_start = TimingHelpers::timer();
  
  // Storage for the distributed residuals vector
- DoubleVector residuals(Distribution_pt);
+ DoubleVector residuals(Distribution_pt,0.0);
  
  // Get the sparse jacobian and residuals of the problem
  CRDoubleMatrix jacobian(Distribution_pt);

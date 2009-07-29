@@ -49,7 +49,7 @@ associated fields interact within a single element and we refer
 to this methodology as a \b multi-field approach.
 
 In this tutorial we describe a third approach to multi-physics
-problems, in which we solve the problem using two different elements 
+problems, in which we solve the problem using two different types of elements 
 on two different meshes (domains), each occupying the same 
 physical space.  Rather than interacting locally 
 within elements, the different physical processes interact 
@@ -129,7 +129,7 @@ identify the corresponding point in the "external element" by
 returning a pointer to the "external element" and the local coordinate 
 within it, respectively.
 The unsigned parameter \c interaction denotes the interaction
-index, required if an element interacts with more
+index, required to allow for cases where an element interacts with more
 than one "external element". This occurs, for instance, in double-diffusive
 convection problems (discussed in  <a
 href="../../../../demo_drivers/multi_physics/double_diffusive_convection/multimesh_dd_convection.cc">
@@ -356,7 +356,9 @@ We provide access functions to the Rayleigh number
 
 and, given that we are dealing with a refineable element, 
 make sure that the pointer to the Rayleigh number is passed to the
-"son" elements when the element is refined.
+"son" elements when the element is refined. Furthermore, if
+the external geometric data could safely be ignored in the "father"
+elements we assume that the same is true for the "sons":
 
 \until }
 
@@ -369,10 +371,10 @@ point, as computed by the "external element":
 \skipline  Overload get_body_force_nst
 \until end overloaded body force
 
-There is only one external interaction so that interaction index is
+There is only one external interaction so the interaction index is
 set to zero and the value of the temperature at the integration point
-is obtained by casting the external element to an \c
-AdvectionDiffusionElement and finding its interpolated field at the
+is obtained by casting the external element to an advection diffusion
+element and finding its interpolated field at the
 appropriate stored local coordinate. Once the temperature has been
 obtained, the
 code is identical to that in the multi-field
@@ -443,7 +445,7 @@ the "external element":
 
 Again, there is only one external interaction so the interaction index
 is set to zero and the external element
-must be cast to a \c NavierStokesElement so that the interpolated
+must be cast to a Navier-Stokes element so that the interpolated
 velocity field can be found. The code is similar to that in the
 multi-field \c BuoyantQCrouzeixRaviartElement's \c get_wind_adv_diff()
 function, which uses internal, rather than external, interaction.
@@ -480,7 +482,7 @@ The problem class is similar to that of the
 <a href="../../refine_b_convect/html/index.html">single-domain example
 </a> and many of the functions are the same. 
 There are now two meshes, however, one for the
-fluid elements and one for the advection-diffusion elements
+fluid elements and one for the advection-diffusion elements:
 
 \dontinclude multi_domain_ref_b_convection.cc
 \skipline Access function to the NST mesh

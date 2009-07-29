@@ -1388,6 +1388,11 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
     Dof_distribution_pt->rebuild(Communicator_pt,n_dof,false);
    }
 
+
+  // resize the sparse assemble with arrays previous allocation
+  Sparse_assemble_with_arrays_previous_allocation.resize(0);
+ 
+
   // and return the total number of DOFs
   return n_dof;
  }
@@ -4298,36 +4303,12 @@ void Problem::parallel_sparse_assemble
    my_eqns.push_back(i);
   }
 
- // Each processor assembles equations from each mesh... I have no idea
- // how this worked for any distributed FSI problem... assuming it did... ?
- // This current method won't pick up any halo equation numbers at all as the
- // global mesh doesn't store any halo objects at all; they are all stored
- // by the relevant submesh
 
+ // If there are no submeshes then only visit halo nodes (there are no
+ // external halo nodes)
  unsigned nmesh=nsub_mesh();
-
- // If there are no submeshes then the current method works fine
  if (nmesh==0)
   {
-   // hierher: I suspect that for a single-mesh problem there's no need
-   //          to look for any "external" eqn numbers (whether halo or not)
-
-//    // hang on, there are "local" external eqn numbers too
-//    unsigned n_ext_node=mesh_pt()->nexternal_node();
-//    for (unsigned j=0;j<n_ext_node;j++)
-//     {
-//      Node* ext_nod_pt=mesh_pt()->external_node_pt(j);
-//      unsigned nval=ext_nod_pt->nvalue();
-//      for (unsigned ival=0;ival<nval;ival++)
-//       {
-//        int eqn_num = ext_nod_pt->eqn_number(ival);
-//        if (eqn_num>=0)
-//         {
-//          my_eqns.push_back(eqn_num);
-//         }
-//       }
-//     }
-
    // then the halo equation numbers
    for (unsigned p = 0; p < nproc; p++)
     {
@@ -4363,100 +4344,9 @@ void Problem::parallel_sparse_assemble
         }
       }
     }
-
-//    // and finally the external halo equation numbers
-//    for (unsigned p = 0; p < nproc; p++)
-//     {
-//      if (p != my_rank)
-//       {       
-//        unsigned n_ext_halo_node=mesh_pt()->nexternal_halo_node(p);
-//        for (unsigned j=0;j<n_ext_halo_node;j++)
-//         {
-//          Node* ext_halo_node_pt = mesh_pt()->external_halo_node_pt(p,j);
-//          unsigned nval = ext_halo_node_pt->nvalue();
-//          for (unsigned ival=0;ival<nval;ival++)
-//           {
-//            int eqn_num = ext_halo_node_pt->eqn_number(ival);
-//            if (eqn_num>=0)
-//             {
-//              my_eqns.push_back(eqn_num);
-//             }
-//           }
-//          SolidNode* solid_node_pt=dynamic_cast<SolidNode*>(ext_halo_node_pt);
-//          if (solid_node_pt!=0)
-//           {
-//            unsigned nval=solid_node_pt->variable_position_pt()->nvalue();
-//            for (unsigned ival=0; ival<nval; ival++)
-//             {
-//              int eqn_num = 
-//               solid_node_pt->variable_position_pt()->eqn_number(ival);
-//              if (eqn_num>=0)
-//               {
-//                my_eqns.push_back(eqn_num);
-//               }
-//             }
-//           }
-//         }
-//       }
-//     }  
-
-//    // finally loop over the internal data in external halo elements
-//    for (unsigned p = 0; p < nproc; p++)
-//     {
-//      if (p!=my_rank)
-//       {
-//        unsigned n_ext_halo_element = mesh_pt()->nexternal_halo_element(p);
-//        for (unsigned j = 0; j < n_ext_halo_element; j++)
-//         {
-//          FiniteElement* ext_halo_element_pt = 
-//           mesh_pt()->external_halo_element_pt(p,j);
-//          unsigned ndata = ext_halo_element_pt->ninternal_data();
-//          for (unsigned i = 0; i < ndata; i++)
-//           {
-//            unsigned nvalue = 
-//             ext_halo_element_pt->internal_data_pt(i)->nvalue();
-//            for (unsigned k = 0; k < nvalue; k++)
-//             {
-//              int eqn_num 
-//               = ext_halo_element_pt->internal_data_pt(i)->eqn_number(k);
-//              if (eqn_num>=0)
-//               {
-//                my_eqns.push_back(eqn_num);
-//               }
-//             }
-//           }
-//         }
-//       }
-//     }
-
-//    // finally loop over the internal data in halo elements
-//    for (unsigned p = 0; p < nproc; p++)
-//     {
-//      if (p!=my_rank)
-//       {
-//        Vector<FiniteElement*> halo_element_pt = mesh_pt()->halo_element_pt(p);
-//        unsigned n_halo_element = halo_element_pt.size();
-//        for (unsigned j = 0; j < n_halo_element; j++)
-//         {
-//          unsigned ndata = halo_element_pt[j]->ninternal_data();
-//          for (unsigned i = 0; i < ndata; i++)
-//           {
-//            unsigned nvalue = halo_element_pt[j]->internal_data_pt(i)->nvalue();
-//            for (unsigned k = 0; k < nvalue; k++)
-//             {
-//              int eqn_num 
-//               = halo_element_pt[j]->internal_data_pt(i)->eqn_number(k);
-//              if (eqn_num>=0)
-//               {
-//                my_eqns.push_back(eqn_num);
-//               }
-//             }
-//           }
-//         }
-//       }
-//     }
   }
- else // there are submeshes
+ // there are submeshes, so also visit external halo nodes
+ else
   {
    // Loop over submeshes
    for (unsigned imesh=0;imesh<nmesh;imesh++)
@@ -8050,8 +7940,7 @@ void Problem::copy(Problem* orig_problem_pt)
    //Loop over the nodes
    for(unsigned long i=0;i<n_node;i++)
     {     
-     /// Try to cast to elastic node \todo there's got to be a better way
-     /// but making Problem::mesh_pt() virtual doesn't do the right thing...
+     // Try to cast to elastic node 
      SolidNode* el_node_pt=dynamic_cast<SolidNode*>(mesh_pt(m)->node_pt(i));
      if (el_node_pt!=0)
       {
@@ -11029,9 +10918,6 @@ long Problem::synchronise_eqn_numbers(const bool& assign_local_eqn_numbers)
  Dof_distribution_pt->rebuild(Communicator_pt,my_eqn_num_base,
                               my_n_eqn);
 
- // resize the sparse assemble with arrays previous allocation
- Sparse_assemble_with_arrays_previous_allocation.resize(0);
- 
  // and return the total number of equations in the problem
  return (long)Dof_distribution_pt->nrow();
 }

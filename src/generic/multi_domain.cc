@@ -1513,7 +1513,6 @@ namespace Multi_domain_functions
 #ifdef OOMPH_HAS_MPI
    // Storage for number of processors, current process and communicator
    OomphCommunicator* comm_pt=problem_pt->communicator_pt();
-   int n_proc=comm_pt->nproc();
 #endif
 
    // Extract the element dimensions from the first element of each mesh
@@ -1532,6 +1531,7 @@ namespace Multi_domain_functions
 
    // Need to do an Allreduce
 #ifdef OOMPH_HAS_MPI
+   int n_proc=comm_pt->nproc();
    if (n_proc > 1)
     {
      unsigned mesh_dim_reduce;

@@ -42,6 +42,7 @@ using namespace std;
 
 using namespace oomph;
 
+#include<fenv.h>
 
 
 
@@ -415,6 +416,11 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
  Ldown=ldown;
  Ly=ly;
 
+//  // hierher
+//  dynamic_cast<SuperLUSolver*>(linear_solver_pt())->set_solver_type(
+//   SuperLUSolver::Serial);
+
+
  // Overwrite maximum allowed residual to accomodate bad initial guesses
  Problem::Max_residuals=1000.0;
 
@@ -673,22 +679,26 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
  num_nod= bulk_mesh_pt()->nboundary_node(ibound);
  for (unsigned inod=0;inod<num_nod;inod++)
   {
-
-#ifdef MACRO_ELEMENT_NODE_UPDATE
-
-   static_cast<MacroElementNodeUpdateNode*>(
-    bulk_mesh_pt()->boundary_node_pt(ibound, inod))->
+   bulk_mesh_pt()->boundary_node_pt(ibound, inod)->
     set_auxiliary_node_update_fct_pt(
      FSI_functions::apply_no_slip_on_moving_wall);
 
-#else
+// hierher
+// #ifdef MACRO_ELEMENT_NODE_UPDATE
 
-   static_cast<AlgebraicNode*>(
-    bulk_mesh_pt()->boundary_node_pt(ibound, inod))->
-    set_auxiliary_node_update_fct_pt(
-     FSI_functions::apply_no_slip_on_moving_wall);
+//    static_cast<MacroElementNodeUpdateNode*>(
+//     bulk_mesh_pt()->boundary_node_pt(ibound, inod))->
+//     set_auxiliary_node_update_fct_pt(
+//      FSI_functions::apply_no_slip_on_moving_wall);
 
-#endif
+// #else
+
+//    static_cast<AlgebraicNode*>(
+//     bulk_mesh_pt()->boundary_node_pt(ibound, inod))->
+//     set_auxiliary_node_update_fct_pt(
+//      FSI_functions::apply_no_slip_on_moving_wall);
+
+// #endif
 
   }
   
@@ -958,22 +968,26 @@ void FSICollapsibleChannelProblem<ELEMENT>::actions_after_adapt()
  unsigned num_nod= bulk_mesh_pt()->nboundary_node(ibound);
  for (unsigned inod=0;inod<num_nod;inod++)
   {
-
-#ifdef MACRO_ELEMENT_NODE_UPDATE
-
-   static_cast<MacroElementNodeUpdateNode*>(
-    bulk_mesh_pt()->boundary_node_pt(ibound, inod))->
+   // hierher
+   bulk_mesh_pt()->boundary_node_pt(ibound, inod)->
     set_auxiliary_node_update_fct_pt(
      FSI_functions::apply_no_slip_on_moving_wall);
 
-#else
+// #ifdef MACRO_ELEMENT_NODE_UPDATE
 
-   static_cast<AlgebraicNode*>(
-    bulk_mesh_pt()->boundary_node_pt(ibound, inod))->
-    set_auxiliary_node_update_fct_pt(
-     FSI_functions::apply_no_slip_on_moving_wall);
+//    static_cast<MacroElementNodeUpdateNode*>(
+//     bulk_mesh_pt()->boundary_node_pt(ibound, inod))->
+//     set_auxiliary_node_update_fct_pt(
+//      FSI_functions::apply_no_slip_on_moving_wall);
 
-#endif
+// #else
+
+//    static_cast<AlgebraicNode*>(
+//     bulk_mesh_pt()->boundary_node_pt(ibound, inod))->
+//     set_auxiliary_node_update_fct_pt(
+//      FSI_functions::apply_no_slip_on_moving_wall);
+
+// #endif
 
   }
 
@@ -987,6 +1001,10 @@ void FSICollapsibleChannelProblem<ELEMENT>::actions_after_adapt()
 //=============================================================================
 int main(int argc, char* argv[])
 {
+
+feenableexcept(FE_INVALID | FE_DIVBYZERO); 
+
+
 #ifdef OOMPH_HAS_MPI
  MPI_Helpers::init(argc,argv);
 #endif
@@ -1113,6 +1131,7 @@ int main(int argc, char* argv[])
  // Set targets for spatial adaptivity
  problem.bulk_mesh_pt()->max_permitted_error()=1.0e-3;
  problem.bulk_mesh_pt()->min_permitted_error()=1.0e-5;
+
 
 #ifdef OOMPH_HAS_MPI
  // Distribute the problem

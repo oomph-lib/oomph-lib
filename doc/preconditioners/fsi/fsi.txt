@@ -335,12 +335,12 @@ a few straightforward steps:
    interaction problem described in  <a href="http://www.springerlink.com/content/m3r6318701g338g4/"> Heil,
    Hazel \& Boyle's (2008) paper </a> with a variety of solver/preconditioner
    combinations: \n\n
-   -# The direct solver, \c SuperLU.
+   -# The direct solver, \c SuperLUSolver.
       \n\n
    -# \c GMRES, with the three FSI preconditioners 
       \f$ {\cal P}_1, {\cal P}_2 \f$ or 
       \f$ {\cal P}_3 \f$, discussed above, using
-      various (sub-)solver combinations (\c SuperLU or (if available)
+      various (sub-)solver combinations (\c SuperLUSolver or (if available)
       \c Hypre) for the solution of linear (sub-)systems.
       \n\n
    -# GMRES with various "sanity-check" preconditioners:

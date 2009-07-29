@@ -33,8 +33,8 @@ echo "Navier Stokes flux control test: " >> validation.log
 cat  RESLT_flux_control/soln0.dat RESLT_flux_control/soln1.dat RESLT_flux_control/soln9.dat RESLT_flux_control/soln10.dat RESLT_flux_control/trace.dat \
 > flux_control.dat
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py \
 ../validata/flux_control.dat.gz  \

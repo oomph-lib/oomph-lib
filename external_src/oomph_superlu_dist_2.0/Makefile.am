@@ -10,7 +10,7 @@ sources =  \
  symbfact.c sp_ienv.c etree.c sp_colorder.c get_perm_c.c \
 	  mmd.c colamd.c comm.c memory.c util.c superlu_grid.c \
 	  pxerbla.c superlu_timer.c GetDiagU.c mc64ad.f mc21.f \
-          slamch.c dlangs.c dgsequ.c dlaqgs.c dutil.c \
+          dlangs.c dgsequ.c dlaqgs.c dutil.c \
 	  dmemory.c dsp_blas2.c dsp_blas3.c dmyblas2.c \
           dldperm.c ddistribute.c pdgstrf_irecv.c pdgstrs_Bglobal.c \
 	  pdgstrs1.c pdgssvx_ABglobal.c pdgsrfs_ABXglobal.c pdgsmv_AXglobal.c\
@@ -20,8 +20,8 @@ sources =  \
 # These files are included in superlu but are actually part of
 # lapack which can cause clashes with other packages that
 # also include them.
-#  xerbla.c  lsame.c dlamch.c  
-EXTRA_DIST =  xerbla.c.back  lsame.c.back dlamch.c.back  
+#  xerbla.c  lsame.c dlamch.c  slamch.c 
+EXTRA_DIST =  xerbla.c.back  lsame.c.back dlamch.c.back slamch.c.back 
 
 # Define the headers
 headers =  \

@@ -211,8 +211,8 @@ echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 
-if test "$1" = "no_python"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 echo "SuperLU_dist matrix based solve w/ global CRDoubleMatrixSolver" >> validation.log
 ../../../../bin/fpdiff.py ../validata/direct_solver_matrix_solve_result.dat.gz  \
