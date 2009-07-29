@@ -735,9 +735,12 @@ public:
  /// to be attached to.
  ImposeDisplacementByLagrangeMultiplierElement(
   FiniteElement* const &element_pt, 
-  const int &face_index) : 
+  const int &face_index, const unsigned &id=0) : 
  FaceGeometry<ELEMENT>(), FaceElement(), Boundary_shape_geom_object_pt(0)
-  { 
+  {   
+   //  set the Id
+   Id=id;
+
    // By default sparsify, i.e. check if the GeomObject that
    // defines the boundary contains sub-GeomObjects. If so,
    // only use their GeomData as the external Data that affects
@@ -780,16 +783,17 @@ public:
    //Build the face element
    element_pt->build_face_element(face_index,this);
 
-   // We need dim additional values (for the components of the
-   // Lagrange multiplier vector) at each of the element's nodes
-   unsigned n_node=this->nnode();
-   Vector<unsigned> nadditional_data_values(n_node);
-   for (unsigned j=0;j<n_node;j++)
-    {
-     nadditional_data_values[j]=element_pt->dim();
-    }
-   resize_nodes(nadditional_data_values); 
+    
+   // dimension of the bulk element
+   unsigned dim=element_pt->dim();
+ 
+   // we need dim additional values for each FaceElement node
+   Vector<unsigned> n_additional_values(nnode(), dim);
    
+   // add storage for lagrange multipliers and set the map containing 
+   // the position of the first entry of this face element's 
+   // additional values.
+   add_additional_values(n_additional_values,id);
   }
  
 
@@ -1028,13 +1032,21 @@ public:
      Vector<double> zeta(dim_el,0.0);
      for(unsigned j=0;j<n_node;j++) 
       {
+       // Cast to a boundary node
+       BoundaryNodeBase *bnod_pt = 
+        dynamic_cast<BoundaryNodeBase*>(node_pt(j));
+
+       // get the node pt
+         Node* nod_pt = node_pt(j);
+
        // higher dimensional quantities
        for(unsigned i=0;i<dim_el+1;i++)
         {
          x[i]+=nodal_position(j,i)*psi(j,0); // need to sort
                                              // this out properly
                                              // for generalised dofs
-         lambda[i]+=node_pt(j)->value(Nbulk_value[j]+i)*psi(j,0);
+         lambda[i]+=nod_pt->value
+          ((*bnod_pt->first_face_element_value_pt())[Id] +i)*psi(j,0);
         }
        //In-element quantities
        for(unsigned i=0;i<dim_el;i++)
@@ -1125,12 +1137,17 @@ protected:
      for(unsigned j=0;j<n_node;j++) 
       {
        Node* nod_pt=node_pt(j);
+       
+       // Cast to a boundary node
+       BoundaryNodeBase *bnod_pt = 
+        dynamic_cast<BoundaryNodeBase*>(node_pt(j));
 
        //Assemble higher-dimensional quantities
        for(unsigned i=0;i<dim_el+1;i++)
         {
          x[i]+=nodal_position(j,i)*psi(j);
-         lambda[i]+=nod_pt->value(Nbulk_value[j]+i)*psi(j);
+         lambda[i]+=nod_pt->value
+          ( (*bnod_pt->first_face_element_value_pt())[Id] +i)*psi(j);
          for(unsigned ii=0;ii<dim_el;ii++)
           {
            interpolated_a(ii,i) += 
@@ -1217,10 +1234,14 @@ protected:
          
          // Assemble residual for Lagrange multiplier:
         
-         // Local eqn number. Recall that the
-         // (additional) Lagrange multiplier values are stored
-         // after those that were created by the bulk elements:
-         int local_eqn=nodal_local_eqn(j,Nbulk_value[j]+i);
+         // Cast to a boundary node
+         BoundaryNodeBase *bnod_pt = 
+          dynamic_cast<BoundaryNodeBase*>(node_pt(j));
+
+         // Local eqn number:   
+         int local_eqn=nodal_local_eqn
+          (j, (*bnod_pt->first_face_element_value_pt())[Id]+i); 
+           
          if (local_eqn>=0)
           {
            residuals[local_eqn]+=(x[i]-r_prescribed[i])*psi(j)*W;
@@ -1257,8 +1278,13 @@ protected:
              // Loop over the nodes again for unknowns (only diagonal
              // contribution to direction!).
              for(unsigned jj=0;jj<n_node;jj++)
-              {     
-               int local_unknown=nodal_local_eqn(jj,Nbulk_value[jj]+i);
+              { 
+               // Cast to a boundary node
+               BoundaryNodeBase *bnode_pt = 
+                dynamic_cast<BoundaryNodeBase*>(node_pt(jj));
+
+               int local_unknown=nodal_local_eqn
+                (jj,(*bnode_pt->first_face_element_value_pt())[Id]+i);
                if (local_unknown>=0)
                 {
                  jacobian(local_eqn,local_unknown)+=psi(jj)*psi(j)*W;
@@ -1291,42 +1317,48 @@ protected:
  /// scheme has been set up.) 
  void get_dof_numbers_for_unknowns(
   std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
- {
-   
- // temporary pair (used to store block lookup prior to being added to list)
- std::pair<unsigned,unsigned> block_lookup;
- 
- // number of nodes
- const unsigned n_node = this->nnode();
+  {
+  
+   // temporary pair (used to store block lookup prior to being added to list)
+   std::pair<unsigned,unsigned> block_lookup;
+  
+   // number of nodes
+   const unsigned n_node = this->nnode();
 
- //Loop over directions
- unsigned dim_el = this->dim();
- for(unsigned i=0;i<dim_el+1;i++)
-   {     
+   //Loop over directions
+   unsigned dim_el = this->dim();
+   for(unsigned i=0;i<dim_el+1;i++)
+    {     
      //Loop over the nodes
      for(unsigned j=0;j<n_node;j++)
-       {          
+      {          
+       // Cast to a boundary node
+       BoundaryNodeBase *bnod_pt = 
+        dynamic_cast<BoundaryNodeBase*>(node_pt(j));
 	 
-         // Local eqn number. Recall that the
-         // (additional) Lagrange multiplier values are stored
-         // after those that were created by the bulk elements:
-         int local_eqn=nodal_local_eqn(j,Nbulk_value[j]+i);
-         if (local_eqn>=0)
-	   {
-	     // store block lookup in temporary pair: First entry in pair
-	     // is global equation number; second entry is block type
-	     block_lookup.first = this->eqn_number(local_eqn);
-	     block_lookup.second = i;
-	     
-	     // add to list
-	     block_lookup_list.push_front(block_lookup);
-	   }
-       }
-   }
- }
+       // Local eqn number:
+       int local_eqn=nodal_local_eqn
+        (j, (*bnod_pt->first_face_element_value_pt())[Id]+i);
+       if (local_eqn>=0)
+        {
+         // store block lookup in temporary pair: First entry in pair
+         // is global equation number; second entry is block type
+         block_lookup.first = this->eqn_number(local_eqn);
+         block_lookup.second = i;
+        
+         // add to list
+         block_lookup_list.push_front(block_lookup);
+        }
+      }
+    }
+  }
 
 
 private:
+
+ /// Lagrange Id
+ unsigned Id;
+
 
 #ifdef PARANOID
 

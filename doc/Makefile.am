@@ -37,8 +37,10 @@ paraview \
 preconditioners \
 to_be_written \
 young_laplace \
+vmtk \
 mpi \
 creating_doc
+
 
 include $(top_srcdir)/config/makefile_templates/doc
 

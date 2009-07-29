@@ -1,0 +1,1177 @@
+\mainpage Linking VMTK with oomph-lib 
+
+The <a href="http://www.vmtk.org/Main/HomePage">Vascular 
+Modeling Toolkit</a> is a collection of libraries 
+and tools for 3D reconstruction, geometric analysis, mesh 
+generation and surface data analysis for image-based modeling 
+of blood vessels.
+
+This tutorial demonstrates how to open your dataset in VMTK, navigate
+into a 3D volume, reconstruct the 3D surface of a vascular segment from
+CT or MR images, process a surface model to generate a mesh for CFD, 
+extract the surface mesh of the fluid domain with \c oomph-lib 
+and generate from it the vessel wall.
+
+Before starting, make sure you have VMTK installed on your machine 
+and you have your DICOM (Digital Imaging and Communications in Medicine) 
+images.
+
+For further information on VMTK, please refer to VMTK's 
+<a href="http://www.vmtk.org/Main/HomePage">home page</a>.
+
+
+
+
+
+<hr>
+<hr>
+
+\section vmtk Using VMTK: From the MR/CT images to the fluid mesh
+
+\subsection voi Volume of interest
+
+VMTK is capable of reading DICOM directories (typically with .dcm 
+file extension). You can open your dataset in VMTK and navigate in 
+the 3D volume with:
+\code
+ vmtkimagereader -f dicom -d dicom_directory --pipe vmtkimageviewer
+\endcode
+
+where \c dicom_directory is the path of your DICOM images directory.
+
+ 
+@I w 0.75\textwidth scan " "
+
+
+Once the viewer pops up, you can:
+
+ - Rotate the volume by left-clicking anywhere on the render window 
+(outside the image).
+ - Translate the volume by middle-clicking anywhere on the render
+ window (outside the image).
+ - Zoom the volume by right-clicking anywhere on the render window
+(outside the image).
+ - Probe the image planes (coordinates and graylevel) by left-clicking
+   on them.
+ - Move the image planes by middle-clicking on them.
+ - Change window-level by right-clicking on image planes.
+ - Quit the viewer by pressing \c q or \c e.
+
+
+You can extract a volume of interest (VOI) from a dataset with :
+
+\code
+ vmtkimagereader -f dicom -d dicom_directory --pipe vmtkimagevoiselector -ofile image_volume_voi.vti
+\endcode
+
+Where \c -ofile specifies the output file name.
+
+When the render window pops up, pressing \c i will activate the
+interactor. A yellowish cube will then appear which will be the tool
+used to select the VOI.
+
+@I w 0.75\textwidth voi_cube " "
+
+    - Translate the cube by middle-clicking on it.
+    - Resize the cube by left-clicking and dragging the little spheres 
+(handles) on the faces of the cube.
+    - Normal interaction with the image is still active, so you 
+can still navigate in the image as explained before. 
+
+@I w 0.75\textwidth voi_cube2 " "
+
+
+When satisfied with the VOI, press \c q or \c e. The new volume is
+displayed in the render window. 
+
+@I w 0.75\textwidth voi " "
+
+You can quit by pressing \c q or \c e, or you can define another VOI 
+by pressing \c i once again.
+
+
+<hr>
+<hr>
+
+
+
+\subsection surface The 3D surface reconstruction of a vascular segment
+
+VMTK is capable of generating an image based surface model from a \c vti
+image (obtained using the procedure explained in the
+section \ref voi above ) using the Level Set method and then
+extract the surface model using Marching Cubes.
+
+First, enter:
+\code
+vmtklevelsetsegmentation -ifile image_volume_voi.vti -ofile level_sets.vti
+\endcode
+
+@I w 0.75\textwidth voi_display " "
+
+When the VOI is displayed in a render window, press \c q or \c e to proceed.
+
+A message will appear on your terminal:
+
+\code
+ Please choose initialization type: (0: colliding fronts; 1: fast
+ marching; 2: threshold; 3: isosurface)
+\endcode
+
+This lets you choose the initialization method to create your
+deformable model. In this tutorial, we will only use
+the \c colliding \c fronts method, which is the most suitable for our
+examples. This initialization type consists of placing two seeds on
+the image. Two fronts will be propagated from the seeds (one front
+from each) with their speeds proportional to the image intensity. 
+The region where the two fronts cross (or collide), is then the 
+initial deformable model. An advantage to this method is that side 
+branches are ignored. For further information on the other
+initialization types, please refer to VMTK's 
+<a href="http://www.vmtk.org/Tutorials/ImageBasedModeling">tutorial page</a>.
+
+Now, enter \c 0 to initialize with \c colliding \c fronts. 
+
+A message will then appear on the terminal:
+\code
+ Please input lower threshold ('i' to activate image, 'n' for none):
+\endcode
+
+Wave propagation, used in the \c colliding \c fronts method, can be 
+restricted to a set of intensity levels above a lower threshold and
+below an upper threshold. Enter the lower threshold if you want to use
+one, otherwise enter \c n. Note that if you don't know what the right 
+threshold is, press \c i to activate the image and probe it, then quit 
+with \c q or \c e when probing is done.
+
+For our example there is no need for thresholds. Therefore enter \c n.
+
+The next message is:
+\code
+ Please input upper threshold ('i' to activate image, 'n' for none):
+\endcode
+
+We do the same as in the lower threshold...
+
+Next, this message appears:
+\code
+ Please place two seeds (click on the image while pressing Ctrl).
+\endcode
+
+The render window is now activated. According to the \c colliding \c
+fronts method, you have to place two seeds, typically a seed at each
+of the two extremities of a branch(Note that we need to initialize the
+model as close to the vessel wall as possible). Interact with the
+image planes to find where you want to place your first seed. When
+satisfied, left-click on the image while pressing \c Ctrl. A red sphere
+will then appear. 
+
+@I w 0.75\textwidth seed1 " "
+
+Repeat this procedure for the second seed as well. 
+Press \c q or \c e when done.
+
+@I w 0.75\textwidth seed2 " "
+
+Provided everything went OK, a translucent surface will appear in the
+render window between the two seeds. This is your initial deformable
+model. 
+
+@I w 0.75\textwidth deformable_model1 " "
+
+Press \c q or \c e to proceed. 
+
+Next, you will be prompted with:
+\code
+ Accept initialization? (y/n):
+\endcode
+
+If you are non satisfied with your initialization, enter \c n to perform
+it once again, otherwise enter \c y.
+
+The following message will now appear: 
+\code
+Please input parameters (type return to accept current values, 'e' to
+end, 'q' to quit):
+ NumberOfIterations(0) [PropagationScaling(1.0) CurvatureScaling(0.0) 
+AdvectionScaling(0.0)]:
+\endcode
+
+These parameters control the deformation of your Level Set:
+
+- Number of iterations is the number of deformation steps the model will
+perform.
+
+- Propagation scaling is the weight you assign to model inflation.
+
+- Curvature scaling is the weight you assign to model surface
+regularization (this will eventually make the model collapse and
+vanish if it is too large).
+
+- Advection scaling regulates the attraction of the surface of the 
+image gradient modulus ridges.
+
+From experience it is recommended that propagation and curvature
+should be set to \c 0.0, and advection to \c 1.0. The number of iterations 
+should be set large enough for the level set not to move anymore 
+(if the region isn't too big, try with \c 300). We encourage you to
+experiment yourself to see what happens.
+
+Therefore, enter:
+\code
+ 300 0 0 1
+\endcode
+
+The level set will then evolve until the maximum iterations are
+reached. Then, the render window will activate, displaying the final
+model.
+
+@I w 0.75\textwidth curvature0x0 " "
+
+To quit the render window press \c q or \c e as usual.
+
+You will then be asked:
+\code
+ Accept result? (y/n)
+\endcode
+
+If you are non satisfied with your final model, enter \c n to go back to
+the level set parameter question. Otherwise, enter \c y.
+
+Let's say we are non satisfied, therefore enter \c n. You will go back
+to:
+\code
+Please input parameters (type return to accept current values, 'e' to
+end, 'q' to quit):
+ NumberOfIterations(0) [PropagationScaling(1.0) CurvatureScaling(0.0) 
+AdvectionScaling(0.0)]:
+\endcode
+
+Try with a bigger Curvature scaling:
+\code
+ 300 0 0.5 1
+\endcode
+
+The surface regularization is therefore bigger :
+
+@I w 0.75\textwidth  curvature0x05 " "
+
+To quit the render window press \c q or \c e as usual.
+
+You will then be asked once again:
+\code
+ Accept result? (y/n)
+\endcode
+
+Let's say this time that we are satisfied, enter \c y .
+
+Next, you receive :
+\code
+Merge branch? (y/n)
+\endcode
+
+If you are satisfied with this final model, enter \c y and this branch 
+will be merged with the branches you segmented before. Otherwise,
+enter \c n and this branch will be discarded. (This is our first branch
+so enter \c y even though no merging is requested)
+
+The render window will activate, showing you the merged result. To quit 
+the render window press \c q or \c e as usual.
+
+
+Then you will be prompted with:
+\code
+Segment another branch? (y/n)
+\endcode
+
+If you want to segment another branch enter \c y, otherwise enter \c
+n.
+
+Let's segment another branch, enter \c y. You will go back to :
+\code
+ Please choose initialization type: (0: colliding fronts; 1: fast
+ marching; 2: threshold; 3: isosurface)
+\endcode
+
+The above procedure applies here as well. So you start with placing
+your two seeds :
+
+@I w 0.75\textwidth seed4 " "
+
+Your deformable model is :
+
+@I w 0.75\textwidth deformable_model2 " "
+
+Deform it as above, your final model is :
+
+@I w 0.75\textwidth curvature1x05 " "
+
+Then when you merge branches, the result is :
+
+@I w 0.75\textwidth merge_branches " "
+
+Continue until you segment all branches. In our case, we have three
+branches (we are extracting the surface model of an Iliac). The
+final result is:
+
+@I w 0.75\textwidth merge_branches2 " "
+
+
+Now you have a file named \c level_sets.vti which contains an image. 
+The zero level of this image is the surface you generated. Now we  
+extract a polygonal surface from it with :
+\code
+ vmtkmarchingcubes -ifile level_sets.vti -ofile model.vtp
+\endcode
+
+The final surface model is \c model.vtp which you can display with :
+\code
+vmtksurfacereader -ifile model.vtp --pipe vmtksurfaceviewer
+\endcode
+
+@I w 0.75\textwidth surfaceviewer1 " "
+
+@I w 0.75\textwidth surfaceviewer2 " "
+
+
+Note that you can add branches later on to \c level_sets.vti by simply doing: 
+\code
+ vmtklevelsetsegmentation -ifile image_volume_voi.vti -levelsetsfile level_sets.vti -ofile level_sets2.vti
+\endcode
+
+<hr>
+<hr>
+
+
+\subsection vmtk_mesh The mesh generation
+
+
+At this point, we have our surface model and we want to generate a 
+computational mesh. In most cases, the surface model has bumpy
+surfaces, especially if the image quality is not high and if we didn't
+use any curvature term in level set evolution. Since artificial
+bumps in the surface can result in spurious flow features and affect
+wall shear stress distributions, one may want to increase surface
+smoothness prior to building the mesh.
+
+You can do this in VMTK with :
+\code
+ vmtksurfacesmoothing -ifile model.vtp -passband 0.1 -iterations 30 -ofile model_sm.vtp
+\endcode
+
+There are two parameters controlling the amount of smoothing:
+passband, which is the cut-off spatial frequency of the low pass
+filter, and iterations, which is the number of smoothing passes. 
+
+For typical vessels, a passband of 0.1 and a number of iteration of 30
+should be OK. For example, for the surface model obtained in the
+section \ref surface above, the resulting surface is:
+
+@I w 0.75\textwidth smooth0130 " "
+
+Remember that we can dispalay the surfaces with :
+\code
+vmtksurfacereader -ifile model_sm.vtp --pipe vmtksurfaceviewer
+\endcode
+
+Smoothing with a passband of 0.01 turns this into:
+
+@I w 0.75\textwidth smooth00130 " "
+
+If you want more smoothing, you can increase the passband and/or the
+number of iterations. But, be careful not to kill surface features 
+by smoothing too much. Also, watch out the apex of bifurcations since
+its curvature may decrease resulting in a shallower apex and affecting 
+the simulated hemodynamics. For example, with a passband of \c 0.001 and
+a number of iterations of \c 100, the result is:
+
+@I w 0.75\textwidth smooth0001100 " "
+
+Once we have our smooth model ready, the next step is to open the
+inlets and outlets, as they are normally closed with a blobby
+appearance. We will now proceed by clipping the blobby endcaps with:
+
+\code
+vmtksurfaceclipper -ifile model_sm.vtp -ofile model_cl.vtp
+\endcode
+
+When the render window pops up, pressing \c i will activate the
+interactor. A cube will appear (as in \c vmtkimagevoiselector in the
+section \ref voi). Position the cube in such a way that the portion 
+of the surface you want to clip lies inside the cube.
+
+@I w 0.75\textwidth clip0 " "
+
+Press the space bar to proceed with clipping.
+
+@I w 0.75\textwidth clip1 " "
+
+Press i again if you want to clip another piece, or q if you want to
+quit.
+
+The final result should look like this:
+ 
+
+@I w 0.75\textwidth clip2 " "
+
+Note that it is possible to clip the endcaps using <a href="http://www.paraview.org/">Paraview</a> or automatically with
+VMTK. For more information, please refer to VMTK's 
+<a href="http://www.vmtk.org/Tutorials/SurfaceToMesh">tutorial page</a>.
+
+Finally, the command line to generate the mesh in VMTK is :
+\code
+vmtkmeshgenerator -ifile model_cl.vtp -ofile mesh.vtu -edgelength 0.5
+\endcode
+
+where the edgelength parameter expresses the nominal edge length of a 
+surface triangle, in physical units. Note that the surface remeshing
+may fail if you specify a big edge length or it can take forever 
+if you specify a very small one. We encourage you to experiment
+yourself to see what happens.
+
+
+<hr>
+<hr>
+\section linking Linking VMTK with oomph-lib 
+\subsection  oomph_mesh Creating an oomph-lib mesh based on output files generated by Tetgen
+
+VMTK exports the mesh for different solvers. The one we chose is the
+".xda" format (of <a href="http://libmesh.sourceforge.net/">LibMesh</a>). 
+To export the mesh in this format enter:
+
+\code
+ vmtkmeshwriter -ifile mesh.vtu -entityidsarray CellEntityIds -ofile iliac.xda
+\endcode
+
+\c oomph-lib provides a conversion code 
+\code 
+bin/create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh
+\endcode
+
+which uses the output mesh from VMTK in "*.xda" format to generate the
+surface mesh as a "fluid_*.poly" file, before using the open-source
+mesh generator <a href="http://tetgen.berlios.de/">TetGen</a> to
+generate a new mesh.
+
+You will be prompted with:
+\code 
+please enter the file name without the file extension '.xda':
+\endcode
+
+In our example, enter \c iliac .
+
+In order to solve solid-fluid interaction problems using \c oomph-lib
+on blood vessels exported by VMTK, the conversion code above
+also takes as input the wall tickness, generates the vessel wall 
+and export it as a "solid_*.poly" file. 
+
+So you will be asked :
+\code 
+In order to create the solid domain from the fluid one,
+please enter the wall tickness : 
+\endcode
+
+Two files are now generated : \c fluid_iliac.poly and which contains
+the fluid domain and \c solid_iliac.poly containing the solid one.
+
+The command line \c tetview \c fluid_iliac.poly displays the fluid
+surface using 
+<a href="http://tetgen.berlios.de/tetview.html">TetView</a> . The
+result is:
+
+@I w 0.75\textwidth fluid1 " "
+@I w 0.75\textwidth fluid2 " "
+
+The same command displays the solid surface (in this example, the wall
+tickness is \c 2mm) :
+
+@I w 0.75\textwidth solid1 " "
+@I w 0.75\textwidth solid2 " "
+<hr>
+
+As explained in <a href="http://www.maths.manchester.ac.uk/%7Emheil/version_tmp_doc_for_novak/doc/interaction/unstructured_three_d_fsi/html/index.html">another
+tutorial</a>, the consistant generation of surface coordinates
+requires that all faces with the same boundary id should be planar. 
+So the conversion code above also assigns to each planar face in the
+fluid surface and in the solid surface its own boundary ID. At the end
+of the output "*.poly" files, you can find the relation between the
+old boundary IDs and the new ones.
+
+For our Iliac example, the final resulting surfaces, displayed with 
+<a href="http://tetgen.berlios.de/tetview.html">TetView</a>, are:
+
+@I w 0.75\textwidth fluid_mult_ids "The fluid surface with multiple boundary IDs"
+@I w 0.75\textwidth solid_mult_ids "The solid surface for a wall tickness of \c 2mm with multiple boundary IDs "
+
+
+
+
+<hr>
+<hr>
+\subsection  fluid Flow through a rigid vessel
+The aim of this problem is to model a flow through the 3D rigid iliac 
+we obtained in the previous sections using VMTK. The flow is driven by 
+a prescribed pressure drop between the upstream and the two downstream 
+ends and we assume/impose parallel in- and outflow in the inlet and outlet
+cross-sections. The problem is the same as in an <a href="http://www.maths.manchester.ac.uk/%7Emheil/version_tmp_doc_for_novak/doc/navier_stokes/unstructured_three_d_fluid/html/index.html">other
+tutorial</a>. We will discuss here only the changes we made to the
+orginal driver code located in :
+<CENTER>
+<A HREF="../../../demo_drivers/navier_stokes/unstructured_three_d_fluid/">
+demo_drivers/navier_stokes/unstructured_three_d_fluid/
+</A>
+</CENTER>
+
+\subsubsection fluid_result Results
+
+The plot shown below illustrates the velocity vectors for a Reynolds 
+number of \f$ Re = 100 \f$ and a pressure drop \f$ \Delta P^* = P^*_{in} - P^*_{out}=1. \f$ 
+
+@I w 0.75\textwidth fluid "Flow through an iliac driven by a prescribed pressure drop of 1 with a Reynolds number of 100 "
+
+
+<HR>
+<HR>
+
+\subsubsection fluid_code The fluid problem code
+
+The existing member fonction of Problem  
+\c create_fluid_traction_elements() in the old code
+attaches \c NavierStokesTractionElements to the relevant faces. These
+elements are used to impose a pressure. In the new driver code we use
+the elements \c ImposeParallelOutflowElement that impose parallel outflow
+and also impose a pressure.
+
+Therefor, we replace the exisiting member function of the Problem class:
+\code 
+private:
+ /// Create fluid traction elements at inflow
+ void create_fluid_traction_elements();
+\endcode
+
+with :
+\code 
+private:
+ /// Create fluid lagrange elements.
+ void create_parall_outflow_lagrange_elements();
+\endcode
+
+We rename the Vector of FaceElement meshes, so we replace: 
+\code
+private:
+ /// Meshes of fluid traction elements that apply pressure at in/outflow
+ Vector<Mesh*> Fluid_traction_mesh_pt;
+\endcode
+
+with:
+\code
+private:
+ /// \short Meshes of FaceElements imposing parallel outflow and a pressure at 
+ /// in/outflow
+ Vector<Mesh*> Fluid_lagrange_mesh_pt;
+\endcode
+
+
+We need to create the new elements in the Problem class:
+\code
+// Create meshes of lagrange elements at inflow/outflow
+ //-----------------------------------------------------------
+ 
+ // Create the meshes
+ unsigned n=nfluid_traction_boundary();
+ Fluid_lagrange_mesh_pt.resize(n);
+ for (unsigned i=0;i<n;i++)
+  {
+   Fluid_lagrange_mesh_pt[i]=new Mesh;
+  } 
+ 
+ // Populate them with elements
+ create_parall_outflow_lagrange_elements();
+\endcode
+
+instead of :
+\code
+// Create meshes of fluid traction elements at inflow/outflow
+ //-----------------------------------------------------------
+ 
+ // Create the meshes
+ unsigned n=nfluid_traction_boundary();
+.
+.
+.
+ create_fluid_traction_elements();
+\endcode
+
+
+and of course replace :
+\code 
+template<class ELEMENT>
+void UnstructuredFluidProblem<ELEMENT>::create_fluid_traction_elements()
+{
+.
+.
+.
+}
+\endcode
+ with :
+\code 
+//============start_of_fluid_lagrange_elements==============================
+/// Create Lagrange  elements 
+//=======================================================================
+template<class ELEMENT>
+void UnstructuredFluidProblem<ELEMENT>::
+create_parall_outflow_lagrange_elements()
+{
+ // Counter for number of fluid traction meshes
+ unsigned count=0;
+
+ // Loop over inflow/outflow boundaries
+ for (unsigned in_out=0;in_out<2;in_out++)
+  {
+   // Loop over boundaries with fluid traction elements
+   unsigned n=nfluid_inflow_traction_boundary();
+   if (in_out==1) n=nfluid_outflow_traction_boundary();
+   for (unsigned i=0;i<n;i++)
+    {
+     // Get boundary ID
+     unsigned b=0;
+     if (in_out==0)
+      {
+       b=Inflow_boundary_id[i];
+      }
+     else
+      {
+       b=Outflow_boundary_id[i];
+      }
+     
+     // How many bulk elements are adjacent to boundary b?
+     unsigned n_element = Fluid_mesh_pt->nboundary_element(b);
+     
+     // Loop over the bulk elements adjacent to boundary b
+     for(unsigned e=0;e<n_element;e++)
+      {
+       // Get pointer to the bulk element that is adjacent to boundary b
+       ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
+        Fluid_mesh_pt->boundary_element_pt(b,e));
+       
+       //What is the index of the face of the element e along boundary b
+       int face_index = Fluid_mesh_pt->face_index_at_boundary(b,e);
+/endcode
+In \c oomph-lib we assign to each FaceElement an
+ ID. Here \c PARALL_FLOW_ID is a macro of an unsigned refering to this 
+FaceElement's ID. Note that we don't have to use the FaceElement's IDs in
+this example. For further information please on the FaceElement'IDs
+please refer to section \ref face_id.
+\code       
+       // Build the corresponding lagrange element
+       ImposeParallelOutflowElement<ELEMENT>* el_pt = new 
+        ImposeParallelOutflowElement<ELEMENT>(bulk_elem_pt,face_index,
+                                              PARALL_FLOW_ID);
+
+       // Add it to the mesh
+       Fluid_lagrange_mesh_pt[count]->add_element_pt(el_pt);
+       
+       // Set the pointer to the prescribed pressure
+       if (in_out==0)
+        {
+         el_pt->pressure_pt()= &Global_Parameters::P_in;
+        }
+       else
+        {
+         el_pt->pressure_pt()= &Global_Parameters::P_out;
+        }
+      }
+     // Bump up counter
+     count++;
+    }
+  }
+ 
+}  // end of create_parall_outflow_lagrange_elements
+\endcode
+
+We also need to change the inflow/outflow boundary Ids stored in the
+vectors \c Inflow_boundary_id and \c Outflow_boundary_id .
+
+In this demo problem, we don't need to assign to each planar face its
+own ID, so if you are using the original VMTK boundary IDs, you should
+have :
+\code
+ // Fluid mesh inflow boundaries
+ Inflow_boundary_id.resize(1);
+ Inflow_boundary_id[0]=1;
+
+ 
+ // Fluid mesh outflow boundaries
+ Outflow_boundary_id.resize(2);
+ Outflow_boundary_id[0]=2;
+ Outflow_boundary_id[1]=3;
+\endcode
+
+Finnaly, we have to pinn the Lagrange multipliers added by 
+\c ImposeParallelOutflowElements in nodes where we impose Dirichlet
+type conditions on the velocity. So we replace:
+\code
+ // Loop over all fluid mesh boundaries and pin velocities
+ // of nodes that haven't been dealt with yet
+ unsigned nbound=Fluid_mesh_pt->nboundary();
+ for(unsigned b=0;b<nbound;b++)
+  {
+  .
+  .
+  .
+  } // done no slip elsewhere 
+\endcode
+
+with :
+\code
+ // Apply BCs
+ //----------
+ unsigned nbound=Fluid_mesh_pt->nboundary();
+
+ // Vector indicates the boundaries where we have no slip
+ std::vector<bool> pinn_velocity(nbound, true);
+
+ // Loop over inflow/outflow boundaries
+ for (unsigned in_out=0;in_out<2;in_out++)
+  {
+   // Loop over in/outflow boundaries
+   n=nfluid_inflow_traction_boundary();
+   if (in_out==1) n=nfluid_outflow_traction_boundary();
+   for (unsigned i=0;i<n;i++)
+    {
+     // Get boundary ID
+     unsigned b=0;
+     if (in_out==0)
+      {
+       b=Inflow_boundary_id[i];
+      }
+     else
+      {
+       b=Outflow_boundary_id[i];
+      }
+     
+     pinn_velocity[b]=false;
+    }
+  }
+
+ // no slip on boundaries [0,214]
+ for(unsigned b=0;b<nbound;b++)
+  {
+   if(pinn_velocity[b])
+    {
+     unsigned num_nod=Fluid_mesh_pt->nboundary_node(b);
+     for (unsigned inod=0;inod<num_nod;inod++)
+      {
+       Node* nod_pt=Fluid_mesh_pt->boundary_node_pt(b,inod);
+
+       // Pin all velocities
+       nod_pt->pin(0); 
+       nod_pt->pin(1); 
+       nod_pt->pin(2); 
+       
+       // find which node is on in/outflow :
+       bool is_in_or_outflow_node=false;
+    
+       // Loop over inflow/outflow boundaries
+       for (unsigned in_out=0;in_out<2;in_out++)
+        {
+         // Loop over boundaries with fluid lagrange elements
+         n=nfluid_inflow_traction_boundary();
+         if (in_out==1) n=nfluid_outflow_traction_boundary();
+         for (unsigned i=0;i<n;i++)
+          {
+           // Get boundary ID
+           unsigned bb=0;
+           if (in_out==0)
+            {
+             bb=Inflow_boundary_id[i];
+            }
+           else
+            {
+             bb=Outflow_boundary_id[i];
+            }
+         
+           if(nod_pt->is_on_boundary(bb))
+            is_in_or_outflow_node=true;
+          }
+        }
+
+       if(is_in_or_outflow_node)
+        {
+         //Cast to a boundary node
+         BoundaryNodeBase *bnod_pt = 
+          dynamic_cast<BoundaryNodeBase*>
+          ( Fluid_mesh_pt->boundary_node_pt(b,inod) );
+
+         // Pin the lagrange multiplier components 
+         // in the out/in_flow boundaries
+         for (unsigned l=0;l<2;l++)
+          {
+           nod_pt->pin
+            ((*bnod_pt->first_face_element_value_pt())[PARALL_FLOW_ID] + l);
+          }
+        }
+      }
+    }
+  }
+\endcode
+
+As we impose parallel outflow using ImposeParallelOutflowElements, we
+should delete the code below from the existing one:
+\code
+// Map to indicate which boundary has been done
+ std::map<unsigned,bool> done; 
+  
+ // Loop over inflow/outflow boundaries to impose parallel flow
+ for (unsigned in_out=0;in_out<2;in_out++)
+  {
+   .
+   .
+   .
+  } // done in and outflow
+ \endcode
+
+
+
+
+
+<hr>
+<hr>
+\subsubsection source_fluid Source files
+ The driver code is in: \n\n
+<CENTER>
+<A HREF="../../../private/user_drivers/amine/unstructured_three_d_fluid.cc">
+/private/user_drivers/amine/
+</A>
+</CENTER>
+<hr>
+<hr>
+
+\subsection  solid Large deformations of an elastic vessel tube loaded by an internal pressure
+
+The aim of this problem is to model the deformation of the 3D elastic
+iliac we obtained in the previous sections using VMTK, loaded by an 
+internal pressure. The problem is the same as in an  
+<a href="http://www.maths.manchester.ac.uk/%7Emheil/version_tmp_doc_for_novak/doc/solid/unstructured_three_d_solid/html/index.html">other
+tutorial</a>. The only changes we made are in the boundary IDs. The
+orginal driver code is located in :
+<CENTER>
+<A HREF="../../../demo_drivers/solid/unstructured_three_d_solid/">
+demo_drivers/solid/unstructured_three_d_solid/
+</A>
+</CENTER>
+
+<hr>
+<hr>
+
+\subsubsection solid_result Results
+
+<hr>
+<hr>
+\subsubsection source_solid Source files
+The driver code is: \n\n
+<CENTER>
+<A HREF="../../../private/user_drivers/amine/unstructured_three_d_solid.cc">
+/private/user_drivers/amine/
+</A>
+</CENTER>
+<hr>
+<hr>
+
+\subsection  fsi Fluid-Solid interaction problem
+This problem combines the two single-physics problems above: 
+An applied pressure drop drives fluid through The elastic 3D iliac. 
+We solve this
+problem as a fully-coupled fluid-structure interaction problem in
+which the fluid provides the traction onto the solid whose deformation
+changes the fluid domain. 
+The problem is the same as in an <a href="http://www.maths.manchester.ac.uk/%7Emheil/version_tmp_doc_for_novak/doc/interaction/unstructured_three_d_fsi/html/index.html">other
+tutorial</a>. We will discuss here only the changes we made to the
+orginal driver code located in :
+<CENTER>
+<A HREF="../../../demo_drivers/interaction/unstructured_three_d_fsi/">
+demo_drivers/interaction/unstructured_three_d_fsi/
+</A>
+</CENTER>
+<hr>
+<hr>
+
+\subsubsection fsi_result Results
+
+
+
+<HR>
+<HR>
+
+\subsubsection face_id FaceElement'IDs
+
+When we had one \c FaceElement adding lagrange multiplier
+unknowns (and therefore resizing the Vector storing the unknown values
+in the nodes), we knew how to access the lagrange multipliers as they
+were the last values stored in the Vector of unknowns. But in this
+problem we are using two \c FaceElements, one to impose the 
+pressure and parallel outflow ( \c ImposeParallelOutflowElement) as in
+the problem \ref fluid, 
+the other ones to deform the fluid domain 
+(\c ImposeDisplacementByLagrangeMultiplierElement). To solve this, we
+assign to each FaceElement using Lagrange multipliers an ID, and we
+use the member function 
+\c BoundaryNodeBase::first_face_element_value_pt() that returns a
+pointer to a map, which indexed by the face element identifier gives
+the position of the first Lagrange multiplier value in the
+Vector of unknons stored in the Nodes.
+
+
+<HR>
+<HR>
+
+\subsubsection fsi_code The code
+As in the fluid problem, in the section \ref fluid above, we no longer
+apply pressure in the inlet and outlet cross-sections using 
+\c create_fluid_traction_elements(). So we replace
+it with \c  create_parall_outflow_lagrange_elements() as in the section \ref
+fluid_code .
+
+We also change the inflow and outflow boundary Ids assignement. Note
+that in this problem, we need to assign to each planar face each
+own ID. You can find at the end of the ".poly" files obtained in \ref
+linking the boundary IDs informations. For example, in our
+fluid_iliac.poly file we have :
+
+\code
+The new boundary ids are as follow:
+
+ Boundary 1 : from boundary id 0 until boudary id 214
+ Boundary 2 : from boundary id 215 until boudary id 236
+ Boundary 3 : from boundary id 237 until boudary id 241
+ Boundary 4 : from boundary id 242 until boudary id 247
+\endcode
+
+So the new boundary assignements in the driver code is:
+\code
+// Fluid mesh inflow boundaries
+ Inflow_boundary_id.resize(22);
+ for(unsigned i=0; i<22; i++)
+  {
+   Inflow_boundary_id[i]=215+i;
+  }
+ 
+ // Fluid mesh outflow boundaries
+ Outflow_boundary_id.resize(11);
+ for(unsigned i=0; i<11; i++)
+  {
+   Outflow_boundary_id[i]=237+i;
+  }
+
+ // The FSI boundaries :
+ Fluid_fsi_boundary_id.resize(215);
+ for(unsigned i=0; i<215; i++)
+  {
+   Fluid_fsi_boundary_id[i]=i;
+  }
+\endcode
+
+In solid_iliac.poly file we have :
+\code
+The new boundary ids are as follow:
+
+ the inner contour : from boundary id 0 until boudary id 214
+ the front inflow face : from boundary id 215 until boudary id 234
+ the left bifurication face : from boundary id 235 until boudary id 244
+ the right bifurication : from boundary id 245 until boudary id 256
+ the outer contour : from boundary id 257 until boudary id 471
+\endcode
+
+So in the new driver code we have:
+\code
+ /// IDs of solid mesh boundaries where displacements are pinned
+ Pinned_solid_boundary_id.resize(42);
+ for(unsigned i=0; i<42; i++)
+  {
+   Pinned_solid_boundary_id[i]=215+i;
+  }
+
+  // The solid and fluid fsi boundaries are numbered int he same way.
+
+ Solid_fsi_boundary_id.resize(215);
+ for(unsigned i=0; i<215; i++)
+  {
+   Solid_fsi_boundary_id[i]=i;
+  }
+\endcode
+
+In this new code, we are using two \c FaceElements : 
+\c ImposeParallelOutflowElement and 
+\c ImposeDisplacementByLagrangeMultiplierElement. Therefore, we have
+to assign to each \c FaceElement its own boundary ID as explained in
+\ref face_id (we
+created two different unsigned macros for the FaceElement IDs: 
+PARALL_FLOW_ID and LAGRANGE_DISP_ID) so we need to change the constructor of
+ImposeDisplacementByLagrangeMultiplierElement with: 
+
+\code
+      // Create new element
+      ImposeDisplacementByLagrangeMultiplierElement<FLUID_ELEMENT>* el_pt =
+      new  ImposeDisplacementByLagrangeMultiplierElement<FLUID_ELEMENT>(
+       bulk_elem_pt,face_index, LAGRANGE_DISP_ID);  
+\endcode
+
+The pinning process for the fluid mesh changes: We now access the
+Lagrange multiplier values by the member function 
+\c BoundaryNodeBase::first_face_element_value_pt() .We should also pin the
+new Lagrange mutlipliers added by the elements 
+\c ImposeParallelOutflowElement in nodes where we impose Dirichlet
+type conditions on the velocity. 
+Note that the pinning process in the solid mesh remains the same, we
+only need to replace the boundary conditions in the fluid mesh with:
+
+\code
+ // Apply BCs for fluid and Lagrange elements
+ //------------------------------------------
+ 
+ // Map to indicate which boundary has been done
+ std::map<unsigned,bool> done;
+ 
+ // Doc position of pinned pseudo solid nodes
+ std::ofstream pseudo_solid_bc_file("RESLT/pinned_pseudo_solid_nodes.dat");
+ 
+ // Loop over inflow/outflow boundaries to pin pseudo-solid displacements
+ for (unsigned in_out=0;in_out<2;in_out++)
+  {
+   // Loop over in/outflow boundaries
+   unsigned n=nfluid_inflow_traction_boundary();
+   if (in_out==1) n=nfluid_outflow_traction_boundary();
+   for (unsigned i=0;i<n;i++)
+    {
+
+     // Get boundary ID
+     unsigned b=0;
+     if (in_out==0)
+      {
+       b=Inflow_boundary_id[i];
+      }
+     else
+      {
+       b=Outflow_boundary_id[i];
+      }
+
+     // Number of nodes on that boundary
+     unsigned num_nod=Fluid_mesh_pt->nboundary_node(b);
+     for (unsigned inod=0;inod<num_nod;inod++)
+      {
+       // Get the node
+       SolidNode* nod_pt=Fluid_mesh_pt->boundary_node_pt(b,inod);
+       
+       // Pin the nodal (pseudo-solid) displacements
+       for(unsigned i=0;i<3;i++)
+        {         
+         nod_pt->pin_position(i);         
+         
+         // Doc it as pinned
+         pseudo_solid_bc_file << nod_pt->x(i) << " ";
+        }
+      }
+     
+     // Done!
+     done[b]=true;
+    }
+  }
+ 
+ // Close
+ pseudo_solid_bc_file.close();
+
+// Doc bcs for Lagrange multipliers
+ ofstream pinned_file("RESLT/pinned_lagrange_multiplier_nodes.dat");
+
+ // Loop over all fluid mesh boundaries and pin velocities
+ // of nodes that haven't been dealt with yet and the lagrange elements
+ unsigned nbound=Fluid_mesh_pt->nboundary();
+ for(unsigned b=0;b<nbound;b++)
+  {
+   // Has the boundary been done yet?
+   if (!done[b])
+    {
+     unsigned num_nod=Fluid_mesh_pt->nboundary_node(b);
+     for (unsigned inod=0;inod<num_nod;inod++)
+      {
+       
+       Node* nod_pt= Fluid_mesh_pt->boundary_node_pt(b,inod);
+      
+       // Pin all velocities
+       nod_pt->pin(0); 
+       nod_pt->pin(1); 
+       nod_pt->pin(2); 
+       
+       // find which node is on in/outflow :
+       bool is_in_or_outflow_node=false;
+    
+       // Loop over inflow/outflow boundaries
+       for (unsigned in_out=0;in_out<2;in_out++)
+        {
+         // Loop over boundaries with fluid lagrange elements
+         n=nfluid_inflow_traction_boundary();
+         if (in_out==1) n=nfluid_outflow_traction_boundary();
+         for (unsigned i=0;i<n;i++)
+          {
+           // Get boundary ID
+           unsigned bb=0;
+           if (in_out==0)
+            {
+             bb=Inflow_boundary_id[i];
+            }
+           else
+            {
+             bb=Outflow_boundary_id[i];
+            }
+         
+           if(nod_pt->is_on_boundary(bb))
+            is_in_or_outflow_node=true;
+          }
+        }
+
+       // Pin the lagrange multiplier components 
+       // in the out/in_flow boundaries
+       if(is_in_or_outflow_node)
+        {
+         //Cast to a boundary node
+         BoundaryNode<SolidNode> *bnod_pt = 
+          dynamic_cast<BoundaryNode<SolidNode>*>
+          ( Fluid_mesh_pt->boundary_node_pt(b,inod) );
+
+         //pin lagrange parallel flow elements
+         for (unsigned l=0;l<2;l++)
+          {
+           nod_pt->pin
+            ((*bnod_pt->first_face_element_value_pt())[PARALL_FLOW_ID] + l);
+          }
+
+         // Pin lagrange displacement elements
+         pinned_file << nod_pt->x(0) << " "
+                     << nod_pt->x(1) << " "
+                     << nod_pt->x(2) << endl;
+           
+         // loop over the lagrange displacement components
+         for (unsigned l=0;l<3;l++)
+          {
+           // Pin the lagrange displacement components      
+           nod_pt->pin
+            ((*bnod_pt->first_face_element_value_pt())[LAGRANGE_DISP_ID] + l);
+          }
+        }
+      }
+    }
+  }
+
+ // Done pinning lagrange nultipliers
+ pinned_file.close();
+\endcode
+
+<hr>
+<hr>
+\subsubsection source_fsi Source files
+The driver code is: \n\n
+<CENTER>
+<A HREF="../../../private/user_drivers/amine/unstructured_three_d_fsi.cc">
+/private/user_drivers/amine/
+</A>
+</CENTER>

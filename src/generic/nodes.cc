@@ -2103,6 +2103,10 @@ BoundaryNodeBase::~BoundaryNodeBase()
    //Set the pointer to null to be on the safe side
    Boundary_coordinates_pt=0;
   }
+
+ //Delete the map of face element's first value 
+ delete First_face_element_value_pt;
+ First_face_element_value_pt=0;
 }
 
 

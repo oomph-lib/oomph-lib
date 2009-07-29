@@ -1576,6 +1576,12 @@ public:
 class BoundaryNodeBase
 {
  private:
+ /// \short Pointer to a map,  
+ /// indexed by the face element identifier it returns
+ /// the position of the first face element value.
+ /// If the Node does not lie on a face element 
+ /// this map should never be queried.
+ std::map<unsigned, unsigned>* First_face_element_value_pt;
 
  /// \short Pointer to a map of pointers to 
  /// intrinsic boundary coordinates of the Node,
@@ -1610,9 +1616,16 @@ class BoundaryNodeBase
 
  public:
 
+ /// \short Returns pointer to the map giving
+ /// the position of the first face element value.
+ std::map<unsigned, unsigned>* &first_face_element_value_pt()
+  {
+   return First_face_element_value_pt;
+  }
+ 
  /// \short Default constructor, set the pointers to the storage to NULL
- BoundaryNodeBase() : Boundary_coordinates_pt(0), Boundaries_pt(0),
-  Copied_node_pt(0) {}
+ BoundaryNodeBase() :  First_face_element_value_pt(0), Boundary_coordinates_pt(0), 
+  Boundaries_pt(0), Copied_node_pt(0) {}
 
  /// \short Destructor, clean up any allocated storage for the boundaries
  ~BoundaryNodeBase();
@@ -1688,7 +1701,7 @@ template<class NODE_TYPE>
 class BoundaryNode: public NODE_TYPE, public BoundaryNodeBase
 {
   private:
- 
+
  /// \short Set pointers to the copied data used when we have periodic nodese
  void reset_copied_pointers()
   {
@@ -1802,7 +1815,7 @@ class BoundaryNode: public NODE_TYPE, public BoundaryNodeBase
     }
   }
 
-  /// Broken copy constructor
+ /// Broken copy constructor
  BoundaryNode(const BoundaryNode<NODE_TYPE>& node) 
   { 
    BrokenCopy::broken_copy("BouandryNode");

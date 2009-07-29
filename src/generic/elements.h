@@ -3273,6 +3273,66 @@ class FaceElement: public virtual FiniteElement
  // face!
  Vector<unsigned> Nbulk_value;
 
+ /// \short Helper function adding additional values for the unknowns
+ /// associated with the FaceElement. This function also sets the map 
+ /// containing the position of the first entry of this face element's
+ /// additional values.The inputs are the number of additional values 
+ /// and the face element's ID. Note the same number of additonal values
+ /// are allocated at ALL nodes.
+ void add_additional_values(const Vector<unsigned> &nadditional_values, 
+                            const unsigned &id)
+  { 
+   // How many nodes? 
+   unsigned n_node=nnode();
+     
+   // loop over the nodes
+   for (unsigned j=0;j<n_node;j++)
+    {
+     // Cast to a boundary node
+     BoundaryNodeBase *bnod_pt = 
+      dynamic_cast<BoundaryNodeBase*>(node_pt(j));
+ 
+     // create storage, if it doesn't already exist, for the map 
+     // that will contain the position of the first entry of 
+     // this face element's additional values, 
+     if(bnod_pt->first_face_element_value_pt()==0)
+      {
+       bnod_pt->first_face_element_value_pt()= 
+        new std::map<unsigned, unsigned>; 
+      }
+       
+     // get pointer to the map
+     std::map<unsigned, unsigned>* map_pt=
+      bnod_pt->first_face_element_value_pt();
+       
+     // we only resize the node values Vector if we haven't done it yet
+     std::map<unsigned, unsigned>::const_iterator p=map_pt->find(id);
+
+     if(p==map_pt->end())
+      {
+         
+       // get the node pt
+       Node* nod_pt = node_pt(j);
+
+       // how many values are stored in the node?
+       unsigned n_values= nod_pt->nvalue();
+         
+       // assign the face element id and the position of the 
+       //first entry to the boundary node
+       (*map_pt)[id]= n_values;
+         
+       //Read out the number of additional values
+       unsigned Nadditional = nadditional_values[j];
+
+       // resize the node vector of values
+       if( Nadditional > 0)
+        {
+         nod_pt->resize(n_values + Nadditional);
+        }
+      }
+    }
+  }
+
   public:
  
  /// Constructor: Initialise all appropriate member data
