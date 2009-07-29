@@ -26,7 +26,12 @@ endif
 # Do we have the TRILINOS library?
 #=================================
 if HAVE_TRILINOS
-   check_PROGRAMS += TrilinosSolver_test
+#Don't add this if we have MPI 
+#(TRILINOS can't handle serial execution of MPI-enabled code)
+#=========================================================
+if !WANT_MPI
+check_PROGRAMS += TrilinosSolver_test
+endif
 endif
 
 #----------------------------------------------------------------------

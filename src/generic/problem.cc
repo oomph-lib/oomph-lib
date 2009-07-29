@@ -474,8 +474,7 @@ namespace oomph
   unsigned objective=0;
 
   // Do the partitioning
-  METIS::partition_mesh(this->communicator_pt(),global_mesh_pt,
-                        n_proc,objective,element_domain);
+  METIS::partition_mesh(this,n_proc,objective,element_domain);
 
   // On very coarse meshes with larger numbers of processors, METIS 
   // occasionally returns an element_domain Vector for which a particular 

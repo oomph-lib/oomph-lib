@@ -373,7 +373,7 @@ public:
                            Vector<double>& v_cross)
   {
 #ifdef PARANOID
-  if ( (v1.size() != v2.size()) | v1.size()!=3 )
+  if ( (v1.size() != v2.size()) || (v1.size()!=3) )
    {
 
    throw OomphLibError("Vectors must be of dimension 3 for cross-product!",

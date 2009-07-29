@@ -305,14 +305,13 @@ public:
    // If there's just one entry -- check if it's the default dummy one
    if (Mesh_pt.size()==1)
     {
-     {
-      // Do we still have dummy default assignment stored as the one
-      // and only entry?
-      if (Default_it_mesh_pt->second==Dummy_mesh_pt)
-       {
-        kill_node_update_info(Dummy_node_update_fct_id);
-       }
-     }
+     if (Mesh_pt.begin()->second==Dummy_mesh_pt)
+      {
+       if (Default_it_mesh_pt->second==Dummy_mesh_pt)
+        {
+         kill_node_update_info(Dummy_node_update_fct_id);
+        }
+      }
     }
    
    // Now insert the actual info
@@ -343,14 +342,15 @@ public:
    // If there's just one entry -- check if it's the default dummy one
    if (Mesh_pt.size()==1)
     {
-     {
-      // Do we still have dummy default assignment stored as the one
-      // and only entry?
-      if (Default_it_mesh_pt->second==Dummy_mesh_pt)
-       {
-        kill_node_update_info(Dummy_node_update_fct_id);
-       }
-     }
+     // Do we still have dummy default assignment stored as the one
+     // and only entry?
+     if (Mesh_pt.begin()->second==Dummy_mesh_pt)
+      {
+       if (Default_it_mesh_pt->second==Dummy_mesh_pt)
+        {
+         kill_node_update_info(Dummy_node_update_fct_id);
+        }
+      }
     }
    
    // Now insert the actual info
@@ -647,6 +647,8 @@ class AlgebraicMesh : public virtual Mesh
    BrokenCopy::broken_assign("AlgebraicMesh");
   }
 
+ /// Surely a proper destructor is required... ?
+ ~AlgebraicMesh() {}
 
  /// Return a pointer to the n-th global AlgebraicNode
  //Can safely cast the nodes to AlgebraicNodes
@@ -908,7 +910,6 @@ class DummyAlgebraicMesh : public virtual AlgebraicMesh
   {
    BrokenCopy::broken_assign("DummyAlgebraicMesh");
   }
-
 
  /// \short Update the nodal position posn at time level t (t=0: present;
  /// t>0: previous). Do nothing

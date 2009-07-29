@@ -1510,9 +1510,11 @@ namespace Multi_domain_functions
  void get_dim_helper(Problem* problem_pt, Mesh* const &mesh_pt, 
                      Mesh* const &external_mesh_pt, unsigned& dim)
   {
+#ifdef OOMPH_HAS_MPI
    // Storage for number of processors, current process and communicator
    OomphCommunicator* comm_pt=problem_pt->communicator_pt();
    int n_proc=comm_pt->nproc();
+#endif
 
    // Extract the element dimensions from the first element of each mesh
    unsigned mesh_dim=0;

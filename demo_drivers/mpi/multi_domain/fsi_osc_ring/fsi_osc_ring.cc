@@ -926,8 +926,6 @@ void FSIRingProblem::dynamic_run()
 int main(int argc, char* argv[])
 {
 
- std::cout << "test" << std::endl;
-
 #ifdef OOMPH_HAS_MPI
  MPI_Helpers::init(argc,argv);
 #endif
@@ -936,7 +934,7 @@ int main(int argc, char* argv[])
  CommandLineArgs::setup(argc,argv);
  
  // Number of elements
- unsigned nelem = 13; 
+ unsigned nelem = 13;
 
  /// Perturbation pressure 
  double pcos_initial=1.0e-6; // ADJUST 
@@ -955,7 +953,7 @@ int main(int argc, char* argv[])
  problem_pt->dynamic_run();
 
  // clean
- delete problem_pt;
+// delete problem_pt;
 
 #ifdef OOMPH_HAS_MPI
  MPI_Helpers::finalize();

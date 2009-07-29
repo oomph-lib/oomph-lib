@@ -71,9 +71,8 @@ namespace oomph {
 #endif
      Epetra_comm_pt = 0;
      Epetra_col_map_pt = 0;
-#else
-     Oomph_matrix_pt = 0;
 #endif
+     Oomph_matrix_pt = 0;
      Column_distribution_pt = 0;
     }
 
@@ -117,10 +116,9 @@ namespace oomph {
      delete Epetra_col_map_pt;
      Epetra_comm_pt = 0;
      Epetra_col_map_pt = 0;
-#else
+#endif
      delete Oomph_matrix_pt;
      Oomph_matrix_pt = 0;
-#endif
      delete Column_distribution_pt;
      Column_distribution_pt = 0;
     }
@@ -147,6 +145,17 @@ namespace oomph {
     }
 
     private:
+
+   /// Helper function to setup for oomph-lib method
+   void setup_oomph_method_helper(CRDoubleMatrix* matrix_pt);
+
+#ifdef HAVE_TRILINOS
+   /// Helper function for multiply(...)
+   void multiply_helper(const DoubleVector& x, DoubleVector& y);
+
+   /// Helper function for multiply_transpose(...)
+   void multiply_transpose_helper(const DoubleVector& x, DoubleVector& y);
+#endif
 
 #ifdef HAVE_TRILINOS
    /// \short The Epetra version of the matrix
@@ -179,10 +188,10 @@ namespace oomph {
    Epetra_SerialComm* Epetra_comm_pt;
 #endif
 
-#else
+#endif
+
    /// \short an oomph-lib matrix
    CRDoubleMatrix* Oomph_matrix_pt;
-#endif
 
    /// \short The (assumed) distribution of: x if using multiply(...) or y
    /// if using multiply_transpose(...) where this is A x = y.
