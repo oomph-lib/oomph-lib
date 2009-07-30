@@ -65,7 +65,7 @@ class CRDoubleMatrix;
  /// distribution. Additionally every entry can be set (with argument v - 
  /// defaults to 0).
  DoubleVector(const LinearAlgebraDistribution* const &dist_pt, 
-              const double& v)
+              const double& v=0.0)
   : Values_pt(0), Internal_values(true)
   {
    this->build(dist_pt,v);
