@@ -82,14 +82,20 @@ class SuperLUPreconditioner : public Preconditioner
        rebuild((dynamic_cast<DistributableLinearAlgebraObject*>
                 (matrix_pt))->distribution_pt()->communicator_pt(),
                matrix_pt->nrow(),false);
+      solver.factorise(matrix_pt);
      }
     else
      {
-      Distribution_pt->rebuild(problem_pt->communicator_pt(),matrix_pt->nrow(),
-                               false);
+      std::ostringstream error_message_stream;                         
+      error_message_stream                                        
+       << "SuperLUPreconditioner can only be applied to matrices derived \n"
+       << "DistributableLinearAlgebraObject.\n"
+       << "You are most likely to be here because you are using the\n "
+       << "soon to be obsolete CCDoubleMatrix\n";
+      throw OomphLibError(error_message_stream.str(),     
+                          "SuperLUPreconditioner::setup()",             
+                         OOMPH_EXCEPTION_LOCATION);        
      }
-    solver.factorise(matrix_pt);
-    solver.distribution_pt()->rebuild(Distribution_pt);
    }
   
   /// \short Function applies SuperLU to vector r for (exact) preconditioning,

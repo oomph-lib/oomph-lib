@@ -1085,6 +1085,9 @@ void SuperLUSolver::factorise_distributed(DoubleMatrixBase* const &matrix_pt)
    // Get a cast pointer to the matrix
    CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
 
+   //Get the distribution from the matrix
+   Distribution_pt->rebuild(cr_matrix_pt->distribution_pt());
+
 #ifdef PARANOID
    // paranoid check that the matrix has been setup
    if (!cr_matrix_pt->built())
@@ -1286,7 +1289,7 @@ void SuperLUSolver::factorise_serial(DoubleMatrixBase* const &matrix_pt)
      error_message_stream                                        
       << "The matrix must not be distributed.";  
      throw OomphLibError(error_message_stream.str(),     
-                         "SuperLU::factorise()",             
+                         "SuperLUSolver::factorise()",             
                          OOMPH_EXCEPTION_LOCATION);        
     }
   }
