@@ -1771,7 +1771,7 @@ void CRDoubleMatrix::multiply_transpose(const DoubleVector &x,
 ///           fly' using a vector of vectors. Not particularly impressive
 ///           on the platforms we tried... \n
 /// Method 4: Trilinos Epetra Matrix Matrix multiply.\n
-/// Method 5: Trilinox Epetra Matrix Matrix Mulitply (ml based) \m
+/// Method 5: Trilinox Epetra Matrix Matrix Mulitply (ml based) \n
 /// If Trilinos is installed then Method 4 is employed by default, otherwise
 /// Method 2 is employed by default. \n
 /// In a distributed matrix, only Trilinos Epetra Matrix Matrix multiply

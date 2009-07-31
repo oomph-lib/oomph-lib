@@ -148,7 +148,7 @@ public:
      double error=0.0;
      for(unsigned i=0;i<ndim+1;i++)
       {
-       error+=abs(x[i]- x_bulk[i]);
+       error+=fabs(x[i]- x_bulk[i]);
       }
      if (error>max_legal_error)
       {
@@ -302,7 +302,7 @@ public:
      double error=0.0;
      for(unsigned i=0;i<ndim+1;i++)
       {
-       error+=abs(x[i]- x_bulk[i]);
+       error+=fabs(x[i]- x_bulk[i]);
       }
      if (error>max_legal_error)
       {
@@ -447,7 +447,7 @@ public:
      double error=0.0;
      for(unsigned i=0;i<ndim+1;i++)
       {
-       error+=abs(x[i]- x_bulk[i]);
+       error+=fabs(x[i]- x_bulk[i]);
       }
      if (error>max_legal_error)
       {

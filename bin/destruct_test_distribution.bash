@@ -55,13 +55,13 @@ for do_mpi in 0 1; do
         case "$do_paranoia" in
             
             "0")
-            paranoia=" ";;
+            paranoia=" -O6 ";;
             
             "1")
-            paranoia=" -DPARANOID ";;
+            paranoia=" -g -DPARANOID ";;
             
             "2")
-            paranoia=" -DPARANOID -DRANGE_CHECKING " ;;
+            paranoia=" -g -DPARANOID -DRANGE_CHECKING " ;;
             
         esac
         
@@ -91,7 +91,7 @@ for do_mpi in 0 1; do
             configure_options=$configure_options`echo $blas_lapack`" "
             configure_options=$configure_options`echo $ext_dist`" "
             configure_options=$configure_options`echo $mpi`" "
-            configure_options=$configure_options" CXXFLAGS=\"-O6 -Wall "`echo $paranoia`"\" CFLAGS=\"-O6\" FFLAGS=\"-O6\""
+            configure_options=$configure_options" CXXFLAGS=\"-Wall "`echo $paranoia`"\" CFLAGS=\"-O6\" FFLAGS=\"-O6\""
             if [ $do_mpi -eq 1 ]
                 then
                 configure_options=$configure_options" CXX=mpic++ CC=mpicc F77=mpif77 LD=mpif77"

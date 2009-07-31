@@ -370,14 +370,6 @@ int main(int argc, char* argv[])
   oomph_info << "---- Now solve TH after distribute ----" << std::endl;
 #endif
 
-
-// hierher
-//   // Build linear solver with SuperLU_dist
-//   problem.linear_solver_pt() = new SuperLU_dist;
-
-//   static_cast<SuperLU_dist*>(problem.linear_solver_pt())->
-//    enable_distributed_solve();
-
   // Solve the problem with adaptivity
   problem.newton_solve(max_adapt);
 
@@ -431,14 +423,6 @@ int main(int argc, char* argv[])
 
   oomph_info << "---- Now solve CR after distribute ----" << std::endl;
 #endif
-
-// hierher
-
-//   // Build linear solver with SuperLU_dist
-//   problem.linear_solver_pt() = new SuperLU_dist;
-
-//   static_cast<SuperLU_dist*>(problem.linear_solver_pt())->
-//    enable_distributed_solve();
 
   // Solve the problem with adaptivity
   problem.newton_solve(max_adapt);

@@ -454,15 +454,6 @@ void parallel_test(const unsigned& n_refine_first,
   // Set linear solver
   problem_pt->linear_solver_pt() = linear_solver_pt;
   linear_solver_pt->doc_time() = false;
-
-#else
-
-   // Build a linear solver: SuperLU_dist
-   problem_pt->linear_solver_pt() = new SuperLU_dist;
-   
-   // Choose distributed matrix storage
-   static_cast<SuperLU_dist*>(problem_pt->linear_solver_pt())->
-    enable_distributed_solve();
     
 #endif
 

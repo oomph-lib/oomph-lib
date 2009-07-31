@@ -314,15 +314,6 @@ int main(int argc, char **argv)
   QuarterCircleDrivenCavityProblem<RefineableQTaylorHoodElement<2> > 
    problem(&Global_Physical_Variables::zero_body_force);
 
-#ifdef OOMPH_HAS_MPI
-// hierher
-//   // Build a linear solver with SuperLU_dist
-//   problem.linear_solver_pt() = new SuperLU_dist;
-
-//   static_cast<SuperLU_dist*>(problem.linear_solver_pt())->
-//    enable_distributed_solve();
-#endif
-
   // output error estimates during solver
   error_doc_info.number()=0;
 
@@ -392,15 +383,6 @@ int main(int argc, char **argv)
   // using body force function
   QuarterCircleDrivenCavityProblem<RefineableQCrouzeixRaviartElement<2> >
    problem(&Global_Physical_Variables::body_force);
-
-#ifdef OOMPH_HAS_MPI
-// hierher
- //  // Build a linear solver with SuperLU_dist
-//   problem.linear_solver_pt() = new SuperLU_dist;
-
-//   static_cast<SuperLU_dist*>(problem.linear_solver_pt())->
-//    enable_distributed_solve();
-#endif
  
   // Initial solve
   problem.newton_solve();
