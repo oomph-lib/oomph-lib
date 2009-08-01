@@ -6,8 +6,9 @@ fsi_channel_with_leaflet \
 turek_flag \
 fsi_driven_cavity\
 fsi_channel_seg_and_precond \
+vmtk_fsi \
 unstructured_fsi \
 unstructured_three_d_fsi \
-elastic_bretherton
+elastic_bretherton 
 
 

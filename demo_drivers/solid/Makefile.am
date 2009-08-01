@@ -9,6 +9,7 @@ simple_shear \
 compressed_square \
 prescribed_displ_lagr_mult \
 pseudo_solid_collapsible_channel \
+vmtk_solid \
 unstructured_solid \
 unstructured_three_d_solid
 

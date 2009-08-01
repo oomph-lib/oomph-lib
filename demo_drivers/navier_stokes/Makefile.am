@@ -23,6 +23,7 @@ channel_with_leaflet \
 free_surface_rotation \
 three_d_static_cap \
 falling_jet \
+vmtk_fluid \
 unstructured_fluid \
 unstructured_three_d_fluid \
 flux_control

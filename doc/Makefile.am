@@ -37,7 +37,6 @@ paraview \
 preconditioners \
 to_be_written \
 young_laplace \
-vmtk \
 mpi \
 creating_doc
 

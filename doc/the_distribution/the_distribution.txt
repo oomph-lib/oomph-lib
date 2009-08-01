@@ -853,14 +853,13 @@ usual \c Makefile syntax. The executable may then be created by the usual
 make -f makefile.sample my_demo_code
 \endcode
 
-\b Note/Disclaimer: The sample \c Makefile generated during \c oomph-lib's 
+<a name="apple_linking">
+<b>Note/Disclaimer:</b></a> The sample \c Makefile generated during \c oomph-lib's 
 installation should work for most (if not all) linux machines, though it may
 require slight tweaks for Darwin (the BSD-derived UNIX core of Apple's
 OSX operating system). Problems are most 
-likely to arise from the \c SHARED_LIBRARY_FLAGS variable. Contact us 
-if you have any problems! We are keen to completely automate this
-feature but do not have access to a sufficiently wide range of
-operating systems to assess how bullet-proof our procedure is.
-  
-
+likely to arise from the \c SHARED_LIBRARY_FLAGS variable. 
+As mentioned in the comment in the sample \c Makefile, on such 
+machines the fragment <code>-Wl,--rpath -Wl,</code> should be deleted from the 
+\c SHARED_LIBRARY_FLAGS variable. 
 

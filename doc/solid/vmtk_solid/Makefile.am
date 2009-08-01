@@ -1,4 +1,4 @@
 include $(top_srcdir)/config/makefile_templates/doc
 
-docfile = vmtk
+docfile = vmtk_solid
 

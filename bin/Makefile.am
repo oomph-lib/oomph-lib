@@ -36,9 +36,12 @@ EXTRA_DIST=build_mesh_makefile.sh change_headers_to_links.sh fpdiff.py\
 fig2poly:
 	(cd ../demo_drivers/meshing/mesh_from_xfig_triangle; make install)
 
-#Cleanup -- Note: fig2poly comes from 
-#                 demo_drivers/meshing/mesh_from_xfig_triangle
+#Cleanup -- Note: - fig2poly comes from 
+#                   demo_drivers/meshing/mesh_from_xfig_triangle
+#                 - create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh
+#                   comes from demo_drivers/meshing/mesh_from_vmtk/
+
 clean-local:
-	rm -f *~ txt2h.sh fig2poly
+	rm -f *~ txt2h.sh fig2poly create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh
 distclean-local:
-	rm -f *~ txt2h.sh fig2poly
+	rm -f *~ txt2h.sh fig2poly create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh

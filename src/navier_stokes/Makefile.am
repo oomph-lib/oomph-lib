@@ -22,7 +22,8 @@ refineable_navier_stokes_elements.h  \
 Tnavier_stokes_elements.h \
 navier_stokes_preconditioners.h \
 navier_stokes_surface_power_elements.h \
-navier_stokes_flux_control_elements.h
+navier_stokes_flux_control_elements.h \
+impose_parallel_outflow_element.h
 
 # Template only files. These should be included in include directory
 # but should not be listed in combined header file

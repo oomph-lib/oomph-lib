@@ -10,6 +10,7 @@ with any problems.
   - \ref other_compilers \n\n
   - \ref cygwin \n\n
   - \ref apple \n\n
+  - \ref apple_link \n\n
   - \ref self_tests \n\n
   - \ref link \n\n
   - \ref missing_this \n\n 
@@ -178,6 +179,22 @@ http://trac.macosforge.org/projects/macports/wiki</A>
 For example: "sudo port install gnuplot" etc.
 .
 
+########################################################################
+<HR>
+
+
+\subsection apple_link The linking self-test fails under Apple's OSX
+
+As discussed in the 
+<a href="../../the_distribution/html/index.html#apple_linking">
+installation instructions,</a> Darwin (the BSD-derived UNIX core of 
+Apple's OSX operating system) requires a slight change to the 
+default procedure for linking against \c oomph-lib from
+outside its autotools framework. As a result, the linking self-test
+tends to fail on machines with this operating system. Instructions
+on how to fix this problem are provided in 
+<a href="../../the_distribution/html/index.html#apple_linking">
+installation instructions</a>.
 
 ########################################################################
 <HR>
