@@ -1,7 +1,8 @@
 
-
 # Scripts do not need to be installed
-noinst_SCRIPTS = txt2h.sh fig2poly
+noinst_SCRIPTS = txt2h.sh fig2poly 
+
+# Run this when checking
 
 # Instructions how  to build txt2h.sh from txt2h.sh.in
 txt2h.sh: txt2h.sh.in
@@ -30,7 +31,8 @@ EXTRA_DIST=build_mesh_makefile.sh change_headers_to_links.sh fpdiff.py\
            oomph-convert  oomph-convert.py makePvd \
            find_missing_doxygen_hooks.sh big_diff.bash \
            make_all_distributions.bash \
-           destruct_test_distribution.bash
+           destruct_test_distribution.bash \
+           minimal_mpi_test.cc
 
 
 fig2poly:
@@ -42,6 +44,6 @@ fig2poly:
 #                   comes from demo_drivers/meshing/mesh_from_vmtk/
 
 clean-local:
-	rm -f *~ txt2h.sh fig2poly create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh
+	rm -f *~ txt2h.sh fig2poly create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh minimal_mpi_test
 distclean-local:
-	rm -f *~ txt2h.sh fig2poly create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh
+	rm -f *~ txt2h.sh fig2poly create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh minimal_mpi_test

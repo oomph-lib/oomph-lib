@@ -266,7 +266,7 @@ public:
 
  /// \short j-th time-derivative on object at current time: 
  /// \f$ \frac{d^{j} r(\zeta)}{dt^j} \f$.
- virtual void dpositiondt(const Vector<double>& zeta, const unsigned& j, 
+ virtual void dposition_dt(const Vector<double>& zeta, const unsigned& j, 
                           Vector<double>& drdt)
   {
    //If the index is zero the return the position
@@ -278,11 +278,11 @@ public:
      std::ostringstream warning_stream;
      warning_stream    
       << "Using default (static) assignment " << j 
-      << "-th time derivative in GeomObject::dpositiondt(...) is zero\n" 
+      << "-th time derivative in GeomObject::dposition_dt(...) is zero\n" 
       << "Overload for your specific geometric object if this is not \n" 
       << "appropriate. \n";
      OomphLibWarning(warning_stream.str(),
-                     "GeomObject::dpositiondt()",
+                     "GeomObject::dposition_dt()",
                      OOMPH_EXCEPTION_LOCATION);
      
      unsigned n=drdt.size();

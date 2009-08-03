@@ -349,15 +349,6 @@ void FSIPreconditioner::setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
     this->get_block(1,0,cr_matrix_pt,Block_matrix_1_0_pt);
    }
   
-    if (problem_pt->communicator_pt()->my_rank()==0)
-     {
-      block_matrix_1_1_pt->sparse_indexed_output("t0.txt");
-     }
-    else
-     {
-      block_matrix_1_1_pt->sparse_indexed_output("t1.txt");
-     }
-
   // Setup the solid preconditioner (inexact solver)
   double t_start = TimingHelpers::timer();
   Solid_preconditioner_pt->setup(problem_pt,block_matrix_1_1_pt);

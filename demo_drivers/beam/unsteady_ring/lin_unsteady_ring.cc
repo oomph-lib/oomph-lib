@@ -300,8 +300,8 @@ void ElasticRingProblem<ELEMENT, TIMESTEPPER>::doc_solution(
    xi[0]=Length/double(nplot-1)*double(iplot);
     
    IC_pt->geom_object_pt()->position(xi,posn);
-   IC_pt->geom_object_pt()->dpositiondt(xi,1,veloc);
-   IC_pt->geom_object_pt()->dpositiondt(xi,2,accel);
+   IC_pt->geom_object_pt()->dposition_dt(xi,1,veloc);
+   IC_pt->geom_object_pt()->dposition_dt(xi,2,accel);
     
    some_file << posn[0] << " " << posn[1] << " "
              << xi[0] << " "

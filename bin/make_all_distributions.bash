@@ -89,17 +89,17 @@ echo " " >> replies.txt # hit return to start the build process
 # Build and test
 #------------------------------------------------------
 cd no_doc_no_validata
-../build_script.bash
+../build_script.bash &
 cd ..
 
 cd with_doc_no_validata
-../build_script.bash
+../build_script.bash &
 cd ..
 
 cd no_doc_with_validata
-../build_script.bash
+../build_script.bash &
 cd ..
 
 cd with_doc_with_validata
-../build_script.bash
+../build_script.bash &
 cd ..

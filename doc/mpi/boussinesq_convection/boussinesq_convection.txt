@@ -171,7 +171,7 @@ interchanged.
 The corresponding function 
 
 \code 
-template<class EXT_ELEMENT, unsigned EL_DIM>
+template<class EXT_ELEMENT>
 void Multi_domain_functions::setup_multi_domain_interaction(
                                        Problem* problem_pt,
                                        Mesh* const &mesh_pt,
@@ -187,28 +187,22 @@ calls to this function
 
 \code
      
- setup_multi_domain_interaction<ELEMENT_1,EL_DIM>
+ setup_multi_domain_interaction<ELEMENT_1>
       (problem_pt,first_mesh_pt,second_mesh_pt);
- setup_multi_domain_interaction<ELEMENT_0,EL_DIM>
+ setup_multi_domain_interaction<ELEMENT_0>
       (problem_pt,second_mesh_pt,first_mesh_pt);
   
 \endcode
-
-***hierher: ANDY WHY DO WE STILL HAVE THE DIMENSION AS A 
-TEMPLATE PARAMETER IN HERE???***
  
 Finally, the function 
 \code
-template<class EXT_ELEMENT, class FACE_ELEMENT_GEOM_OBJECT, unsigned EL_DIM>
+template<class EXT_ELEMENT, class FACE_ELEMENT_GEOM_OBJECT>
 void Multi_domain_functions:: setup_multi_domain_interaction(
                                        Problem* problem_pt,
                                        Mesh* const &mesh_pt,
                                        Mesh* const &external_mesh_pt,
                                        Mesh* const &external_face_mesh_pt);
 \endcode  
- 
-***hierher: AGAIN: ANDY WHY DO WE STILL HAVE THE DIMENSION AS A 
-TEMPLATE PARAMETER IN HERE???***
  
 may be used to set up multi-domain interactions for problems in which
 the interaction occurs across the boundaries of adjacent domains

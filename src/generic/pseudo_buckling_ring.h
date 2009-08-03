@@ -489,7 +489,7 @@ public:
 
  /// \short j-th time-derivative on object at current time: 
  /// \f$ \frac{d^{j} r(\zeta)}{dt^j} \f$.
- void dpositiondt(const Vector<double>& zeta, const unsigned& j, 
+ void dposition_dt(const Vector<double>& zeta, const unsigned& j, 
                   Vector<double>& drdt)
   {
    switch (j)
@@ -514,7 +514,7 @@ public:
      error_message << j << "th derivative not implemented\n";
      
      throw OomphLibError(error_message.str(),
-                         "PseudoBucklingRing::dpositiondt()",
+                         "PseudoBucklingRing::dposition_dt()",
                          OOMPH_EXCEPTION_LOCATION);
     }
   }

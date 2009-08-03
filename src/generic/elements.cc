@@ -4976,7 +4976,7 @@ void SolidFiniteElement::fill_in_generic_jacobian_for_solid_ic(
    // Get initial condition
    Vector<double> drdt_ic(nodal_dim);
    Solid_ic_pt->geom_object_pt()->
-    dpositiondt(xi,Solid_ic_pt->ic_time_deriv(),drdt_ic);
+    dposition_dt(xi,Solid_ic_pt->ic_time_deriv(),drdt_ic);
    
    // Weak form of assignment of initial guess
    

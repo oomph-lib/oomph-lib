@@ -511,7 +511,6 @@ echo "============================================================="
 echo " " 
 
 
-
 # Automatic run of self tests? 
 #-----------------------------
 echo " " 
@@ -555,6 +554,167 @@ else
   echo "in the top-level oomph-lib directory when the build process "
   echo "is complete."
   echo " "
+fi
+
+
+# If mpi self-tests are requested, check if we can compile
+#---------------------------------------------------------
+# and run a sample mpi code
+#---------------------------
+if test "$want_self_tests" = "y" -o "$want_self_tests" = "Y" ; then 
+    
+    mpi_run_command=`echo $configure_options | \
+        awk '{ \
+        start=match($0,"--with-mpi-self-tests"); \
+        if (start!=0) \
+        {  \
+        start+=23; rest=substr($0 ,start); \
+        end=match(rest,"\"")-1; \
+        } \
+        } \
+        END{if (start!=0) \
+        { \
+        print  substr(rest,1,end) \
+        } \
+        else \
+        { \
+        print "FAILED" \
+        } \
+        }'` 
+    
+    if test "$mpi_run_command" != "FAILED" 
+        then  
+        echo " "
+        echo "============================================================"
+        echo " "
+        echo "It appears that you want to excecute the mpi self-tests " 
+        echo "by executing the mpi codes with the run command:"
+        echo " " 
+        echo "       " $mpi_run_command
+        echo " "
+        echo "I'm now going to check if we can compile and run a basic"
+        echo "stand-alone mpi code."
+        echo " " 
+    # Extract c++ compilation command
+        cxx_compile_command=`echo $configure_options | \
+            awk '{ \
+            start=match($0,"CXX="); \
+            if (start!=0) \
+            {  \
+            start+=4; rest=substr($0 ,start); \
+            end=match(rest," ")-1; \
+            } \
+            } \
+            END{if (start!=0) \
+            { \
+            print  substr(rest,1,end) \
+            } \
+            else \
+            { \
+            print "FAILED cxx" \
+            } \
+            }'` 
+        
+        if test "$cxx_compile_command" != "FAILED cxx" 
+            then  
+            echo "OK, let's try to compile the basic mpi test"
+            echo "code with the compile command: " 
+            echo " "            
+            full_command=`echo $cxx_compile_command -o bin/minimal_mpi_test bin/minimal_mpi_test.cc` 
+            echo "      "$full_command 
+            echo " " 
+            rm -f bin/minimal_mpi_test
+            `echo $full_command` 
+            if [ ! -e bin/minimal_mpi_test ]; then
+                echo " " 
+                echo "================================================="
+                echo " "
+                echo "WARNING (ISSUED BY OOMPH-LIB):"
+                echo "------------------------------"
+                echo " "
+                echo "Compilation of bin/minimal_mpi_test.cc failed."
+                echo "Are you sure your c++ compiler can compile mpi code?"
+                echo " "
+                echo "Note: This does not necessarily indicate a problem. "
+                echo "      autogen.sh tries to extract the c++ compiler"
+                echo "      from the configure options assuming that it is"
+                echo "      specified in the form CXX=mpic++, say (no quotes,"
+                echo "      no spaces)."
+                echo " "
+                echo "I will continue regardless but you shouldn't be"
+                echo "surprised if large numbers of mpi self-test fail..."
+                echo " "
+                echo "================================================="
+                echo " "
+            else
+                echo "Done: Executable was produced -- that's good!"
+                echo " " 
+                echo "Now let's run the minimal mpi test to see if mpi is up and running:" 
+                echo "I'm going to run the code with the command: "
+                full_command=`echo $mpi_run_command ` 
+                full_command=$full_command" bin/minimal_mpi_test "
+                rm -f bin/minimal_mpi_test.out
+                echo " " 
+                echo "      " $full_command
+                echo " " 
+                `echo $full_command`  > bin/minimal_mpi_test.out
+                result=`grep 'This worked'  bin/minimal_mpi_test.out | wc | awk '{print $1}'`
+                if [ "$result" -ne "2" ]
+                    then
+                    echo " " 
+                    echo "================================================="
+                    echo " "
+                    echo "WARNING (ISSUED BY OOMPH-LIB):"
+                    echo "------------------------------"
+                    echo " "
+                    echo "The mpi test code bin/minimal_mpi_test was not run"
+                    echo "successfully." 
+                    echo " " 
+                    echo "You may want to check the following:" 
+                    echo "-- Are you sure your mpi demons have been started?"
+                    echo "   E.g. under lam you have to use the lamboot "
+                    echo "   command to get mpi up and running...."
+                    echo "-- Is the mpi run command you specified via "
+                    echo "   the --with-mpi-self-tests flag in the"
+                    echo "   configure options valid?"
+                    echo " "
+                    echo "I will continue regardless but you shouldn't be"
+                    echo "surprised if large numbers of mpi self-test fail..."
+                    echo " "
+                    echo "================================================="
+                    echo " "
+                else
+                    echo " " 
+                    echo "Done: mpi test code was executed succesfully. Good stuff."
+                fi
+            fi
+        else
+            echo " "
+            echo "================================================="
+            echo " "
+            echo "WARNING (ISSUED BY OOMPH-LIB):"
+            echo "------------------------------"
+            echo " "
+            echo "Sorry I got myself confused when parsing " 
+            echo "the configure options and could not find"
+            echo "the specification of the c++ mpi compiler"
+            echo "via the CXX flag. Please make sure this is"
+            echo "specified in configure/configure_optinios/current"
+            echo "in the form: CXX=mpic++, say, (no quotes, no spaces)."
+            echo " " 
+            echo "NOTE: This is not necessarily a problem, but will"
+            echo "keep me from checking if mpi is up and running"
+            echo "before starting the self-tests."
+            echo " "
+            echo "================================================="
+            echo " "        
+        fi
+        echo " "
+    else
+        echo " "
+        echo "No mpi self-tests were requested"
+        echo " "
+    fi  
 fi
 
 

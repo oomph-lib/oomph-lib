@@ -110,7 +110,7 @@ public:
  
  /// \short Parametrised j-th time-derivative on object at current time: 
  /// \f$ \frac{d^{j} r(\zeta)}{dt^j} \f$.
- void dpositiondt(const Vector<double>& xi, const unsigned& j, 
+ void dposition_dt(const Vector<double>& xi, const unsigned& j, 
                   Vector<double>& drdt)
   {
    switch (j)
@@ -135,7 +135,7 @@ public:
      error_message << j << "th derivative not implemented\n";
      
      throw OomphLibError(error_message.str(),
-                         "AxisymOscillatingDisk::dpositiondt()",
+                         "AxisymOscillatingDisk::dposition_dt()",
                          OOMPH_EXCEPTION_LOCATION);
     }
   }

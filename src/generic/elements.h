@@ -2031,7 +2031,7 @@ public:
  /// in its GeomObject incarnation: 
  /// \f$ \frac{d^{t} dr(zeta)}{d t^{t}} \f$. 
  /// Call the t-th time derivative of the FE-interpolated Eulerian coordinate 
- void dpositiondt(const Vector<double> &zeta, const unsigned &t,
+ void dposition_dt(const Vector<double> &zeta, const unsigned &t,
                   Vector<double>  &drdt)
   {this->interpolated_dxdt(zeta,t,drdt);}
    
