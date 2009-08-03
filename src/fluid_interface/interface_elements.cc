@@ -236,41 +236,56 @@ namespace oomph
     for(unsigned i=0;i<spatial_dim;++i) 
      {t_length += interpolated_t1[i]*interpolated_t1[i];}
     double W = std::sqrt(t_length)*this->integral_pt()->weight(ipt);
-    
-    //If we are overloading the contact angle
-    if(Contact_angle)
+
+    //Are we doing the weak form replacement
+    if(Contact_angle==2)
      {
-      
-      //Get the outer unit normal of the whole interface
+      //Get the outer unit normal of the entire interface
       dynamic_cast<FaceElement*>(parent_pt)->
        outer_unit_normal(s_parent,unit_normal);
-
+      
       //Calculate the wall normal
       wall_unit_normal(x,wall_normal);
       
-      //Find the dot product
+      //Find the dot product of the two
       double dot = 0.0;
       for(unsigned i=0;i<spatial_dim;i++) 
        {dot += unit_normal[i]*wall_normal[i];}
       
+      //Find the projection of the outer normal of the surface into the plane
+      Vector<double> binorm(spatial_dim);
+      for(unsigned i=0;i<spatial_dim;i++)
+       {binorm[i] = unit_normal[i] - dot*wall_normal[i];}
+
+      //Get the value of sigma from the parent
+      const double Sigma = dynamic_cast<FluidInterfaceElement*>(parent_pt)->
+       sigma(s_parent);
       
+      //Get the capillary number
+      const double Ca = ca();
       
-      //Loop over the test functions
+      //Get the contact angle
+      const double theta = contact_angle();
+      
+      // Add the contributions to the momentum equation
+      
+      // Loop over the shape functions
       for(unsigned l=0;l<n_node;l++)
        {
-        //Read out the kinematic equation number
-        int local_eqn = kinematic_local_eqn(l);
-        //If it's not a degree of freedom, set the residuals
-        //Note that because we have outer unit normals for the free surface
-        //and the wall, the cosine of the contact angle is equal to 
-        //MINUS the dot product
-        if(local_eqn >= 0)
+        //Loop over the velocity components
+        for(unsigned i=0;i<3;i++)
          {
-          residuals[local_eqn] += 
-           (cos(contact_angle()) + dot)*psi(l)*W; 
+          //Get the equation number for the momentum equation
+          int local_eqn =  this->nodal_local_eqn(l,i);
+          //If it's not a boundary condition
+          if(local_eqn >= 0 )
+           {
+            //Add the surface-tension contribution to the momentum equation
+            residuals[local_eqn] +=  (Sigma/Ca)*
+             (sin(theta)*wall_normal[i]
+              + cos(theta)*binorm[i])*psi(l)*W;
+           }
          }
-        //NOTE: The jacobian entries will be computed automatically
-        //by finite differences.
        }
      }
     //Otherwise add the line integral terms to the Momentum equations
@@ -282,11 +297,11 @@ namespace oomph
       this->outer_unit_normal(s_local,m);  
 
       //Get the value of sigma from the parent
-      double Sigma = dynamic_cast<FluidInterfaceElement*>(parent_pt)->
+      const double Sigma = dynamic_cast<FluidInterfaceElement*>(parent_pt)->
        sigma(s_parent);
       
       //Get the capillary number
-      double Ca = ca();
+      const double Ca = ca();
         
       // Add the contributions
 
@@ -306,9 +321,42 @@ namespace oomph
            }
          }
        }
+     } //End of the line integral terms
+    
+    
+    //If we are doing the strong form, then overload the kinematic equation
+    if(Contact_angle==1)
+     {
+      //Get the outer unit normal of the whole interface
+      dynamic_cast<FaceElement*>(parent_pt)->
+       outer_unit_normal(s_parent,unit_normal);
       
-     }
-
+      //Calculate the wall normal
+      wall_unit_normal(x,wall_normal);
+      
+      //Find the dot product
+      double dot = 0.0;
+      for(unsigned i=0;i<spatial_dim;i++) 
+       {dot += unit_normal[i]*wall_normal[i];}
+      
+      //Loop over the test functions
+      for(unsigned l=0;l<n_node;l++)
+       {
+        //Read out the kinematic equation number
+        int local_eqn = kinematic_local_eqn(l);
+        //If it's not a degree of freedom, set the residuals
+        //Note that because we have outer unit normals for the free surface
+        //and the wall, the cosine of the contact angle is equal to 
+        //MINUS the dot product
+        if(local_eqn >= 0)
+         {
+          residuals[local_eqn] += 
+           (cos(contact_angle()) + dot)*psi(l)*W; 
+         }
+        //NOTE: The jacobian entries will be computed automatically
+        //by finite differences.
+       }
+     } //End of strong form of contact angle condition
     
     //Call any additional residual contributinos
     add_additional_residual_contributions(

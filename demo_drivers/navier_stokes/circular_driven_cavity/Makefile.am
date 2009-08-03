@@ -35,26 +35,3 @@ circular_driven_cavity2_SOURCES = circular_driven_cavity2.cc validate.sh
 # we decide to use a solver that involves fortran sources.
 circular_driven_cavity2_LDADD = -L@libdir@ -lnavier_stokes -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
-
-# Include path for library headers: All library headers live in 
-# the include directory which we specify with -I
-INCLUDES = -I@includedir@
-
-# Only run self test if we have python for fpdiff.py
-#---------------------------------------------------
-if HAVE_PYTHON
-  # Test script
-  TESTS =  validate.sh
-else
-  # Just run the executables
-  TESTS = circular_driven_cavity
-endif
-
-
-# Distribute validation script and validation data
-EXTRA_DIST = validate.sh validata
-
-#Add in additional cleanup commands
-clean-local: 
-	rm -rf Validation
-	rm -rf *~
