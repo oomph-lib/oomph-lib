@@ -3334,18 +3334,18 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
                                 pow(z_shared-z_share,2));
              if (fabs(error)>max_error)
               {
-//              std::cout << "ZONE" << std::endl;
-//              std::cout << x_halo << " " 
+//              oomph_info << "ZONE" << std::endl;
+//              oomph_info << x_halo << " " 
 //                        << y_halo << " " 
 //                        << y_halo << " " 
 //                        << d << " " << dd 
 //                        << std::endl;
-//              std::cout << x_haloed << " " 
+//              oomph_info << x_haloed << " " 
 //                        << y_haloed << " " 
 //                        << y_haloed << " "
 //                        << d << " " << dd  
 //                        << std::endl;
-//              std::cout << std::endl;
+//              oomph_info << std::endl;
                max_error=fabs(error);       
               }
             }
@@ -3871,18 +3871,18 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
                                 pow(z_haloed-z_halo,2));
              if (fabs(error)>max_error)
               {
-//              std::cout << "ZONE" << std::endl;
-//              std::cout << x_halo << " " 
+//              oomph_info << "ZONE" << std::endl;
+//              oomph_info << x_halo << " " 
 //                        << y_halo << " " 
 //                        << y_halo << " " 
 //                        << d << " " << dd 
 //                        << std::endl;
-//              std::cout << x_haloed << " " 
+//              oomph_info << x_haloed << " " 
 //                        << y_haloed << " " 
 //                        << y_haloed << " "
 //                        << d << " " << dd  
 //                        << std::endl;
-//              std::cout << std::endl;
+//              oomph_info << std::endl;
                max_error=fabs(error);       
               }
             }

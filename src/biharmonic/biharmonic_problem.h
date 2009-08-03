@@ -95,11 +95,11 @@ public:
 #ifdef PARANOID
    if (0 == self_test()) 
     {
-     std::cout << "self test passed" << std::endl; 
+     oomph_info << "self test passed" << std::endl; 
     }
    else
     {
-     std::cout << "self test failed" << std::endl; 
+     oomph_info << "self test failed" << std::endl; 
     }
 #endif
   }
@@ -248,11 +248,11 @@ public:
 #ifdef PARANOID
    if (0 == self_test()) 
     {
-     std::cout << "self test passed" << std::endl; 
+     oomph_info << "self test passed" << std::endl; 
     }
    else
     {
-     std::cout << "self test failed" << std::endl; 
+     oomph_info << "self test failed" << std::endl; 
     }
 #endif
   }

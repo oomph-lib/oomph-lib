@@ -2718,7 +2718,7 @@ CRDoubleMatrix* CRDoubleMatrix::return_global_matrix()
          CRDoubleMatrix* m_pt = this->return_global_matrix();
          m_pt->sparse_indexed_output("m2.dat");
         }
-//       this->sparse_indexed_output(std::cout);
+//       this->sparse_indexed_output(oomph_info);
        abort();
       }
      

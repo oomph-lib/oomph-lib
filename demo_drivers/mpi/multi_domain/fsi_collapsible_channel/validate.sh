@@ -23,6 +23,8 @@ cp ../*partition.dat .
 
 echo "Running FSI collapsible channel problem (macro element node update) "
 mkdir RESLT
+
+
 $MPI_RUN_COMMAND ../fsi_collapsible_channel_macro_adapt validate > OUTPUT_fsi_collapsible_channel_macro_adapt
 echo "done"
 echo " " >> validation.log

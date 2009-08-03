@@ -1633,8 +1633,8 @@ void ClampedHermiteShellBoundaryConditionElement::
     }
    if (max_error>1.0e-14)
     {
-     std::cout << "Warning: Max. error between J_via_s J_via_ipt " 
-               << max_error << std::endl;
+     oomph_info << "Warning: Max. error between J_via_s J_via_ipt " 
+                << max_error << std::endl;
     }
   }
 }

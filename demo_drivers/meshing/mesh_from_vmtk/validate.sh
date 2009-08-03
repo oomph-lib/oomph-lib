@@ -43,6 +43,11 @@ else
     mesh_from_xda_result.dat  >> validation.log
 fi
 
+# Append output to global validation log file
+#--------------------------------------------
+cat validation.log >> ../../../../validation.log
+
+
 
 cd ..
 

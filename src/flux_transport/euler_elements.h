@@ -549,9 +549,9 @@ public virtual QSpectralElement<DIM-1,NNODE_1D>
     //Limit the pressures to zero if necessary, but keep the energy the
     //same
     if(p_int < 0) 
-     {std::cout << "Negative int pressure" << p_int << "\n"; p_int=0.0;}
+     {oomph_info << "Negative int pressure" << p_int << "\n"; p_int=0.0;}
     if(p_ext < 0) 
-     {std::cout << "Negative ext pressure " << p_ext << "\n"; p_ext=0.0;}
+     {oomph_info << "Negative ext pressure " << p_ext << "\n"; p_ext=0.0;}
 
     double H_int = (u_int[1] + p_int)/u_int[0];
     double H_ext = (u_ext[1] + p_ext)/u_ext[0];
@@ -585,7 +585,7 @@ public virtual QSpectralElement<DIM-1,NNODE_1D>
     arg *= (gamma - 1.0);
     //Get the local sound speed
     if(arg < 0.0) 
-     {std::cout << "Square of sound speed is negative!\n"; arg = 0.0;}
+     {oomph_info << "Square of sound speed is negative!\n"; arg = 0.0;}
     double a = sqrt(arg);
 
     //Calculate the normal average velocity

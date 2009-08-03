@@ -728,7 +728,7 @@ namespace oomph
        for (unsigned i = 0; i < Block_number_to_dof_number_lookup[b].size(); 
             i++)
         {
-         std::cout << " " << Block_number_to_dof_number_lookup[b][i];
+         oomph_info << " " << Block_number_to_dof_number_lookup[b][i];
         }
        oomph_info << std::endl;
       }

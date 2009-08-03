@@ -148,25 +148,25 @@ void DGFaceElement::report_info()
                                           face_x);
    
    //Let's compare
-   std::cout <<  "In Face                   In Neighbour\n";
+   oomph_info <<  "In Face                   In Neighbour\n";
    for(unsigned i=0;i<dim;i++)
     {
-     if(i==0) {std::cout << "(";}
-     else {std::cout << ", ";}
-     std::cout << std::setw(5) << std::left <<  x[i];
+     if(i==0) {oomph_info << "(";}
+     else {oomph_info << ", ";}
+     oomph_info << std::setw(5) << std::left <<  x[i];
     }
-   std::cout << ")";
+   oomph_info << ")";
    
-   std::cout << "                   ";
+   oomph_info << "                   ";
    
    for(unsigned i=0;i<dim;i++)
     {
-     if(i==0) {std::cout << "(";}
-     else {std::cout << ", ";}
-     std::cout << std::setw(5) << std::left << face_x[i];
+     if(i==0) {oomph_info << "(";}
+     else {oomph_info << ", ";}
+     oomph_info << std::setw(5) << std::left << face_x[i];
     }
-   std::cout << ")";
-   std::cout << std::endl;
+   oomph_info << ")";
+   oomph_info << std::endl;
   }
 }
 

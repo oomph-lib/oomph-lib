@@ -2,14 +2,14 @@
 
 The <a href="http://www.vmtk.org/Main/HomePage">Vascular 
 Modeling Toolkit</a> is a collection of libraries 
-and tools for 3D reconstruction, geometric analysis, mesh 
+and tools for the 3D reconstruction, geometric analysis, mesh 
 generation and surface data analysis for image-based modeling 
 of blood vessels.
 
 This tutorial demonstrates how to open your dataset in VMTK, navigate
 around a 3D volume, reconstruct the 3D surface of a vascular segment from
 CT or MR images, process a surface model to generate a mesh, and
-shows how to extract the surface mesh. Finally, we demonstrate
+how to extract the surface mesh. Finally, we demonstrate
 how to use \c oomph-lib's conversion code 
 \c create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh
 to generate fluid and solid meshes that allow the simulation of
@@ -31,6 +31,7 @@ For further information on VMTK, please refer to VMTK's
 <TABLE BORDER=1, WIDTH=500px>
 <TR>
 <TD bgcolor="cornsilk">
+\n\n
 <CENTER>
 <B>Ackowledgement:</B>
 </CENTER>
@@ -44,6 +45,31 @@ with Amine Massit (ENSTA, Paris).
 </CENTER>
 
 
+<CENTER>
+<TABLE BORDER=1, WIDTH=500px>
+<TR>
+<TD bgcolor="cornsilk">
+\n\n
+<CENTER>
+<B>Disclaimer:</B>
+</CENTER>
+\n\n
+The generation of high-quality computational meshes from medical
+images is a non-trivial task. The
+<a href="http://www.vmtk.org/Main/HomePage"> Vascular Modeling
+Toolkit</a>  greatly simplifies this task but
+it is important to remember that (intelligent) user input is required
+at various stages of the process. \n\n This tutorial does \b not provide
+any guidance on this aspect. We simply demonstrate \b how to generate
+meshes that can be used in \c oomph-lib - based  
+physiological flow (or fluid-structure interaction) simulations.
+If you smooth the vessels walls too much, you may lose essential
+features; if you smooth too little, the shape of the vessel wall
+may be polluted by imaging artefacts; etc. 
+</TD>
+</TR>
+</TABLE>
+</CENTER>
 
 <hr>
 <hr>
@@ -53,7 +79,7 @@ with Amine Massit (ENSTA, Paris).
 \subsection voi Volume of interest
 
 VMTK is capable of reading DICOM directories (which contain the files 
-with .dcm extension). You can open your dataset in VMTK and navigate in 
+with .dcm extension). You can open your dataset in VMTK and navigate around
 the 3D volume with:
 \code
  vmtkimagereader -f dicom -d dicom_directory --pipe vmtkimageviewer
@@ -88,7 +114,7 @@ You can extract a volume of interest (VOI) from a dataset with :
 vmtkimagevoiselector -ofile image_volume_voi.vti
 \endcode
 
-Where argument to the \c -ofile option specifies the output file name.
+where the argument to the \c -ofile option specifies the output file name.
 
 When the render window pops up, pressing \c i will activate the
 interactor. A yellowish cube will then appear which will be the tool
@@ -122,9 +148,9 @@ by pressing \c i once again.
 \subsection surface The 3D surface reconstruction of a vascular segment
 
 VMTK is capable of generating an image based surface model from a \c vti
-image (obtained using the procedure explained in the
-section \ref voi above ) using the Level Set method and then
-extract the surface model using Marching Cubes.
+file (obtained using the procedure explained in the
+section \ref voi above), using the Level Set method and then
+extract the surface model using a Marching Cubes algorithm.
 
 First, enter:
 \code
@@ -142,13 +168,13 @@ A message will appear on your terminal:
  marching; 2: threshold; 3: isosurface)
 \endcode
 
-This lets you choose the initialization method to create your
-deformable model. In this tutorial, we will only demonstrate
-the \c colliding \c fronts method. With this method two seeds are placed on
+This lets you choose the initialization method used to create the
+model of the blood vessel. In this tutorial, we will only demonstrate
+the \c colliding \c fronts method. In this method two seeds are placed on
 the image. Two fronts are then propagated from the seeds (one front
 from each) with their speeds proportional to the image intensity. 
 The region where the two fronts cross (or collide), defines the 
-initial deformable model, the initial representation of the vessel 
+"deformable model" -- the initial representation of the vessel 
 volume. For further information on the other
 initialization methods, please refer to VMTK's 
 <a href="http://www.vmtk.org/Tutorials/ImageBasedModeling">tutorial page</a>.
@@ -182,7 +208,7 @@ Next, this message appears:
 \endcode
 
 The render window is now activated. Place the two seeds, one 
-at each of the two ends of a branch. Interact with the
+at each of the two ends of a branch: Interact with the
 image planes to find where you want to place your first seed. When
 satisfied, left-click on the image while pressing \c Ctrl. A red sphere
 will then appear. 
@@ -249,14 +275,14 @@ Based on our limited experience, we recommended that propagation and curvature
 should be set to \c 0.0, and advection to \c 1.0. The number of iterations 
 should be set large enough for the level set not to move anymore 
 (if the region is not too big, try with \c 300). We encourage you to
-experiment with these parameters.
+experiment with these parameters yourself.
 
 Therefore, enter:
 \code
  300 0 0 1
 \endcode
 
-The level set will then evolve until the maximum iterations are
+The level set will then evolve until the maximum number of iterations is
 reached. Then the render window will activate, displaying the final
 model.
 
@@ -282,7 +308,7 @@ end, 'q' to quit):
 AdvectionScaling(0.0)]:
 \endcode
 
-Try with a bigger curvature scaling:
+Try again with a bigger curvature scaling:
 \code
  300 0 0.5 1
 \endcode
@@ -329,12 +355,12 @@ Let's segment another branch and enter \c y. You will go back to :
  marching; 2: threshold; 3: isosurface)
 \endcode
 
-The above procedure applies here as well. So you start with placing
+The above procedure applies here as well. So you start by placing
 your two seeds:
 
 @I w 0.75\textwidth seed4 " "
 
-Your deformable model is:
+This yields the following deformable model:
 
 @I w 0.75\textwidth deformable_model2 " "
 
@@ -459,8 +485,8 @@ The final result should look like this:
 @I w 0.75\textwidth clip2 " "
 
 Note that it is possible to clip the endcaps automatically with
-VMTK. For more information, please refer to VMTK's 
-<a href="http://www.vmtk.org/Tutorials/SurfaceToMesh">tutorial page</a>.
+VMTK. For more information, please refer to VMTK's own
+<a href="http://www.vmtk.org/Tutorials/SurfaceToMesh">tutorial pages</a>.
 
 
 <hr>
@@ -485,7 +511,7 @@ vmtksurfacewriter -ofile model_ex.vtp
 where the control parameters are:
 
 - \c adaptivelength (here set to 1) is a boolean flag. If set
-  to 1 the length of each flow extension is made proportional to the mean 
+  to 1, the length of each flow extension is made proportional to the mean 
   radius of the vessel
 
 - \c extensionratio (here set to 8) is the proportionality factor of
@@ -498,14 +524,13 @@ the length of each flow extension.
 - The flag \c -interactive was set to \c 0: This means that
   \c vmtkflowextensions will not prompt the user about what inlet or outlet 
   to extend, but it will perform the task on all the available open
-  boundaries.  \c -interactive \c 1 prompts the user about which
-  boundaries to extend through a graphical window.
+  boundaries. If you use  \c -interactive \c 1, VMTK prompts the user 
+  to specify which boundaries to extend through a graphical window.
 
 When the render window pops up, before pressing \c q, make sure you note
 the different ids of the inlets and outlets. For our example, we see
 in the figure below that we have one inlet with an id 0 and two
-outlets with the ids 1 and 2 (Note this choice is random as the
-inlets/outlets choice depends on the fluid flow directions).
+outlets with the ids 1 and 2.
 
 @I w 0.75\textwidth extension1 " "
 
@@ -542,7 +567,7 @@ The result is:
 
 \subsection vmtk_mesh The mesh generation
 
-Finally, we can generate our mesh using the command line in VMTK:
+Finally, we can generate our mesh using the command line:
 \code
 vmtkmeshgenerator -ifile model_ex.vtp -ofile mesh.vtu -edgelength 0.5
 \endcode
@@ -554,7 +579,7 @@ may fail if you specify a large edge length.
 
 <hr>
 <hr>
-\section  oomph_mesh Creating an oomph-lib mesh based on output files generated by Tetgen
+\section  oomph_mesh Creating an oomph-lib mesh based on output files generated by VMTK
 
 VMTK exports the mesh for different solvers. The one we chose is the
 ".xda" format (of <a href="http://libmesh.sourceforge.net/">LibMesh</a>). 
@@ -570,10 +595,10 @@ iliac.xda
 bin/create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh
 \endcode
 
-which uses the VMTK output mesh in "*.xda" format to generate the
-surface mesh as a "fluid_*.poly" file, that can be used to generate
-the fluid using the open-source
-mesh generator <a href="http://tetgen.berlios.de/">TetGen</a>.
+which uses the VMTK output mesh in "*.xda" format to generate a file 
+"fluid_*.poly" that can be used to generate the fluid mesh 
+using the open-source mesh generator 
+<a href="http://tetgen.berlios.de/">TetGen</a>.
 
 When executing the conversion code you will be prompted with:
 \code 
@@ -583,10 +608,11 @@ Please enter the file name without the file extension '.xda':
 In our example, enter \c iliac .
 
 To facilitate the simulatation of physiological fluid-structure 
-interaction problems in which the vessel walls are allowed to 
-deform elastically in response to the fluid traction, the conversion 
-code also generates a mesh for the 3D vessel wall (assumed to be of
-constant thickness) and exports it as a "solid_*.poly" file. 
+interaction problems in which the vessel walls deform elastically 
+in response to the fluid traction, the conversion 
+code also generates a file "solid_*.poly" that can be used to 
+to generate a mesh for the 3D vessel wall which is assumed to be of
+constant thickness.
 
 The conversion code therefore requests the wall thickness:
 
@@ -598,12 +624,12 @@ Please enter the (uniform) wall thickness:
 As explained in 
 <a href="../..//unstructured_three_d_fsi/html/index.html">another
 tutorial</a>, the consistent generation of surface coordinates in FSI problems
-requires that all faces with the same boundary id should be co-planar. 
+requires that all faces with the same boundary ID should be co-planar. 
 For this reason the conversion code provides the option to assign a distinct
 boundary ID to each surface triangle on the fluid-structure
-interaction boundary -- the IDs are consistent for the fluid and the
-solid meshes. The "*.poly" files generated by the conversion code list
-the relation between the old boundary IDs and the new ones at the end.
+interaction boundary and ensures the IDs are consistent for the fluid and the
+solid meshes. (The "*.poly" files generated by the conversion code list
+the relation between the old and boundary IDs at the end.)
 
 \code 
 Do you want to generate for each planar face its own ID?
@@ -633,14 +659,53 @@ displays the solid surface mesh (for a wall thickness of 2mm):
 
 @I w 0.75\textwidth solid1 " "
 @I w 0.75\textwidth solid2 " "
+
 <hr>
 
-If multiple boundary IDs are requested the surface meshes
+If multiple boundary IDs are requested, the surface meshes
 are:
 
-@I w 0.75\textwidth fluid_mult_ids "The fluid surface with multiple boundary IDs"
-@I w 0.75\textwidth solid_mult_ids "The solid surface with multiple boundary IDs for a wall thickness of \c 2mm"
+@I w 0.75\textwidth fluid_mult_ids "The fluid surface with multiple boundary IDs "
 
+@I w 0.75\textwidth solid_mult_ids "The solid surface with multiple boundary IDs for a wall thickness of 2mm "
+
+
+<HR>
+<HR>
+
+
+\section comm_and_ex Comments and Exercises
+
+- In its current form, the conversion code 
+  \n\n
+  <CENTER>
+  <a href="../../../../demo_drivers/meshing/mesh_from_vmtk/create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh.cc">create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh.cc</a>
+  </CENTER>
+  \n\n
+  is restricted to bifurcation-like geometries, and makes certain 
+  assumptions about the enumeration of the boundaries. It should 
+  be easy to modify for other geometries, however. 
+  <a href="../../../contact/html/index.html">Get in touch</a> if you 
+  need help with this (and feel free to share any improvements
+  with us).
+  \n\n
+- We provide three separate tutorials to demonstrate the use of
+  VMTK-based meshes in \c oomph-lib driver codes:
+  \n\n
+  - <a href="../../../solid/vmtk_solid/html/index.html">The inflation
+    of the arterial bifurcation by a constant pressure -- a pure solid
+    mechanics problem.</a>
+    \n\n
+  - <a href="../../../navier_stokes/vmtk_fluid/html/index.html">Steady
+    finite-Reynolds number flow through the (rigid) arterial bifurcation --
+    a pure fluid-mechanics mechanics problem.</a>
+    \n\n
+  - <a href="../../../interaction/vmtk_fsi/html/index.html">Steady 
+    finite-Reynolds-number flow through an elastic
+    arterial bifurcation -- a fluid-structrure interaction
+    problem.</a>
+  .
+.
 
 @@END@@
 

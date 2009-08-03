@@ -382,8 +382,8 @@ doc_solution(DocInfo& doc_info,
    some_file.close();
    
    // Doc L2 error and norm of solution
-   std::cout << "\nNorm of error   : " << sqrt(error) << std::endl; 
-   std::cout << "Norm of solution: " << sqrt(norm) << std::endl << std::endl;
+   oomph_info << "\nNorm of error   : " << sqrt(error) << std::endl; 
+   oomph_info << "Norm of solution: " << sqrt(norm) << std::endl << std::endl;
   }
 }
 
@@ -894,8 +894,8 @@ doc_solution(DocInfo& doc_info,
    some_file.close();
    
    // Doc L2 error and norm of solution
-   std::cout << "\nNorm of error   : " << sqrt(error) << std::endl; 
-   std::cout << "Norm of solution: " << sqrt(norm) << std::endl << std::endl;
+   oomph_info << "\nNorm of error   : " << sqrt(error) << std::endl; 
+   oomph_info << "Norm of solution: " << sqrt(norm) << std::endl << std::endl;
   }
 }
 

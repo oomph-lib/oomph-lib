@@ -6183,7 +6183,7 @@ void Problem::newton_solve()
      //Get the maximum residuals
      //maxres = std::abs(*std::max_element(dx.begin(),dx.end(),
      //                                    AbsCmp<double>()));
-     //std::cout << "Maxres correction " << maxres << "\n";
+     //oomph_info << "Maxres correction " << maxres << "\n";
 
      //Calculate the new residuals
      dx.clear();
