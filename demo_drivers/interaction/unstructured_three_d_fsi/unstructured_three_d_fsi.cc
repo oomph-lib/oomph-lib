@@ -220,12 +220,6 @@ public:
  /// Destructor (empty)
  ~UnstructuredFSIProblem(){}
 
- /// Update the problem specs before solve: empty
- void actions_before_newton_solve() {}
-
- /// Update the problem specs before solve: empty
- void actions_after_newton_solve() {}
-
  /// Doc the solution
  void doc_solution(DocInfo& doc_info);
  
@@ -248,46 +242,33 @@ private:
  /// \short Return total number of mesh boundaries that make up the inflow 
  /// boundary
  unsigned nfluid_inflow_traction_boundary()
-  {
-   return Inflow_boundary_id.size();
-  }
+  {return Inflow_boundary_id.size();}
 
  ///  \short Return total number of mesh boundaries that make up the outflow 
  /// boundary
  unsigned nfluid_outflow_traction_boundary()
-  {
-   return Outflow_boundary_id.size();
-  }
+  {return Outflow_boundary_id.size();}
 
  /// \short Return total number of mesh boundaries that make up the 
  /// in- and outflow boundaries where a traction has to be applied
  unsigned nfluid_traction_boundary()
-  {
-   return Inflow_boundary_id.size()+Outflow_boundary_id.size();
-  }
+  {return Inflow_boundary_id.size()+Outflow_boundary_id.size();}
 
  /// \short Return total number of mesh boundaries in the solid mesh that
  /// make up the FSI interface
  unsigned nsolid_fsi_boundary()
-  {
-   return Solid_fsi_boundary_id.size();
-  }
+  {return Solid_fsi_boundary_id.size();}
 
  /// \short Return total number of mesh boundaries in the fluid mesh that
  /// make up the FSI interface
  unsigned nfluid_fsi_boundary()
-  {
-   return Fluid_fsi_boundary_id.size();
-  }
+  {return Fluid_fsi_boundary_id.size();}
 
  /// \short Return total number of mesh boundaries in the solid mesh 
  /// where the position is pinned.
  unsigned npinned_solid_boundary()
-  {
-
-   return Pinned_solid_boundary_id.size();
-
-  } //end npinned_solid_boundary
+  {return Pinned_solid_boundary_id.size();} 
+  //end npinned_solid_boundary
 
 
  /// Bulk solid mesh
@@ -377,10 +358,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
  
  // Apply BCs for fluid
  //--------------------
- 
- // Map to indicate which boundary has been done
- std::map<unsigned,bool> done;
- 
+  
  // Doc position of pinned pseudo solid nodes
  std::ofstream pseudo_solid_bc_file("RESLT/pinned_pseudo_solid_nodes.dat");
  
@@ -425,9 +403,6 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
          pseudo_solid_bc_file << nod_pt->x(i) << " ";
         }
       }
-     
-     // Done!
-     done[b]=true;
     }
   }
  
@@ -436,23 +411,22 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
 
  // Loop over all fluid mesh boundaries and pin velocities
  // of nodes that haven't been dealt with yet
- unsigned nbound=Fluid_mesh_pt->nboundary();
- for(unsigned b=0;b<nbound;b++)
+ unsigned nbound=nfluid_fsi_boundary();//Fluid_mesh_pt->nboundary();
+ for(unsigned i=0;i<nbound;i++)
   {
-   // Has the boundary been done yet?
-   if (!done[b])
+   //Get the mesh boundary
+   unsigned b = Fluid_fsi_boundary_id[i];
+   
+   unsigned num_nod=Fluid_mesh_pt->nboundary_node(b);
+   for (unsigned inod=0;inod<num_nod;inod++)
     {
-     unsigned num_nod=Fluid_mesh_pt->nboundary_node(b);
-     for (unsigned inod=0;inod<num_nod;inod++)
-      {
-       // Get node
-       Node* nod_pt= Fluid_mesh_pt->boundary_node_pt(b,inod);
-       
-       // Pin all velocities
-       nod_pt->pin(0); 
-       nod_pt->pin(1); 
-       nod_pt->pin(2); 
-      }
+     // Get node
+     Node* nod_pt= Fluid_mesh_pt->boundary_node_pt(b,inod);
+     
+     // Pin all velocities
+     nod_pt->pin(0); 
+     nod_pt->pin(1); 
+     nod_pt->pin(2); 
     }
 
   } // done no slip on fsi boundary
@@ -477,7 +451,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
   } // end loop over elements
  
  
- // Create meshes of fluid traction elements at inflow/outflow
+ // Create (empty) meshes of fluid traction elements at inflow/outflow
  //-----------------------------------------------------------
  
  // Create the meshes
@@ -576,7 +550,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
 // Create FSI Traction elements
 //-----------------------------
  
-// Create meshes of FSI traction elements
+// Create (empty) meshes of FSI traction elements
  n=nsolid_fsi_boundary();
  Solid_fsi_traction_mesh_pt.resize(n);
  for (unsigned i=0;i<n;i++)
@@ -1033,9 +1007,6 @@ doc_solution(DocInfo& doc_info)
 //========================================================================
 int main(int argc, char **argv)
 {
- // Store command line arguments
- CommandLineArgs::setup(argc,argv);
-  
  // Label for output
  DocInfo doc_info;
  
@@ -1056,12 +1027,7 @@ int main(int argc, char **argv)
  doc_info.number()++;   
 
  // Parameter study
- unsigned nstep=3;
- if (CommandLineArgs::Argc==2)
-  {
-   std::cout << "Validation -- only doing two steps" << std::endl;
-   nstep=2;
-  } 
+ unsigned nstep=2;
 
  // Increment in FSI parameter
  double q_increment=5.0e-2;

@@ -6,20 +6,20 @@ and tools for the 3D reconstruction, geometric analysis, mesh
 generation and surface data analysis for image-based modeling 
 of blood vessels.
 
-This tutorial demonstrates how to open your dataset in VMTK, navigate
-around a 3D volume, reconstruct the 3D surface of a vascular segment from
-CT or MR images, process a surface model to generate a mesh, and
+This tutorial demonstrates how to open your dataset in VMTK; navigate
+around a 3D volume; reconstruct the 3D surface of a vascular segment from
+CT or MR images; process a surface model to generate a mesh; and
 how to extract the surface mesh. Finally, we demonstrate
 how to use \c oomph-lib's conversion code 
 \c create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh
 to generate fluid and solid meshes that allow the simulation of
 physiological fluid-structure interaction problems in which the
-(constant thickness) vessel wall deforms in reponse to the fluid
+(assumed constant thickness) vessel wall deforms in reponse to the fluid
 traction.
  
-Before starting, make sure you have VMTK installed on your machine 
-and you have your DICOM (Digital Imaging and Communications in Medicine) 
-images. Note that the tutorial describes the use of VMTK version 0.8.
+Before starting, make sure that you have VMTK installed on your machine 
+and that you have your DICOM (Digital Imaging and Communications in Medicine) 
+images. Note that this tutorial describes the use of VMTK version 0.8.
 
 For further information on VMTK, please refer to VMTK's 
 <a href="http://www.vmtk.org/Main/HomePage">home page</a>.
@@ -117,8 +117,8 @@ vmtkimagevoiselector -ofile image_volume_voi.vti
 where the argument to the \c -ofile option specifies the output file name.
 
 When the render window pops up, pressing \c i will activate the
-interactor. A yellowish cube will then appear which will be the tool
-used to select the VOI.
+"interactor": a yellowish cube will appear that is used to
+select the VOI.
 
 @I w 0.75\textwidth voi_cube " "
 
@@ -149,7 +149,7 @@ by pressing \c i once again.
 
 VMTK is capable of generating an image based surface model from a \c vti
 file (obtained using the procedure explained in the
-section \ref voi above), using the Level Set method and then
+section \ref voi above), using the Level Set method and can then
 extract the surface model using a Marching Cubes algorithm.
 
 First, enter:
@@ -187,10 +187,11 @@ A message will then appear on the terminal:
 \endcode
 
 Wave propagation, used in the \c colliding \c fronts method, can be 
-restricted to a set of intensity levels above a lower threshold and
-below an upper threshold. Enter the lower threshold if you want to use
-one, otherwise enter \c n. Note that if you don't know what the right 
-threshold is, press \c i to activate the image and probe it, then quit 
+restricted to a set of intensity levels between two thresholds.
+Enter the lower threshold, if you want to use
+one, otherwise enter \c n. Note that if you don't know the appropriate
+threshold value you can press \c i to activate the image 
+and probe it, then quit 
 with \c q or \c e when probing is done.
 
 For our example there is no need for thresholds. Therefore enter \c n.
@@ -208,8 +209,10 @@ Next, this message appears:
 \endcode
 
 The render window is now activated. Place the two seeds, one 
-at each of the two ends of a branch: Interact with the
-image planes to find where you want to place your first seed. When
+at each of the two ends of a branch (the geometry of the entire ROI 
+is created by "merging" the surfaces of individual branches).
+Interact with the image planes to find where you want to place your 
+first seed. When
 satisfied, left-click on the image while pressing \c Ctrl. A red sphere
 will then appear. 
 
@@ -355,8 +358,8 @@ Let's segment another branch and enter \c y. You will go back to :
  marching; 2: threshold; 3: isosurface)
 \endcode
 
-The above procedure applies here as well. So you start by placing
-your two seeds:
+Exactly the same procedure as described above can be used again.
+Start by placing your two seeds:
 
 @I w 0.75\textwidth seed4 " "
 
@@ -413,10 +416,10 @@ level_sets.vti -ofile level_sets2.vti
 At this point, we have our surface model and we want to generate a 
 computational mesh. In most cases, the surface model has bumpy
 surfaces, especially if the image quality is not high and if we didn't
-use the curvature term in the level set evolution. Since artificial
-bumps in the surface can result in spurious flow features and affect
-the wall shear stress distribution, one may want to increase surface
-smoothness prior to building the mesh.
+use the curvature term in the level set evolution. Artificial
+bumps in the surface can result in spurious flow features and will affect
+the wall shear stress distribution, so one may want to increase surface
+smoothness before building the mesh.
 
 You can do this in VMTK with :
 \code
@@ -447,7 +450,7 @@ If you want more smoothing, you can increase the passband and/or the
 number of iterations, but be careful not to remove all surface features 
 by smoothing too much. Also, watch the apex of bifurcations since
 its curvature may decrease resulting in a shallower apex, affecting 
-the simulated hemodynamics. For example, with a passband of \c 0.001 and
+the simulated haemodynamics. For example, with a passband of \c 0.001 and
 a number of iterations of \c 100, the result is:
 
 @I w 0.75\textwidth smooth0001100 " "
@@ -466,7 +469,7 @@ vmtksurfaceclipper -ifile model_sm.vtp -ofile model_cl.vtp
 \endcode
 
 When the render window pops up, pressing \c i will activate the
-interactor. A cube will appear (as in \c vmtkimagevoiselector in the
+"interactor". A cube will appear (as in \c vmtkimagevoiselector in the
 section \ref voi). Position the cube in such a way that the portion 
 of the surface you want to clip lies inside the cube.
 
@@ -498,8 +501,10 @@ VMTK provides the option to generate cylindrical extensions to the
 inlet and outlet cross-sections. These are typically used to
 ensure that in the numerical simulation, the boundary conditions 
 are applied at a reasonable distance from the region of interest
-and do not have a strong effect on the flow field. 
-VMTK is capable of adding the cylindrical extensions with:
+and do not have a strong effect on the flow field. Exactly what sort
+of boundary conditions to apply and where to apply them is, of course,
+a non-trivial problem. Nonetheless, the appropriate
+VMTK command to add the cylindrical extensions is:
 
 \code
 vmtksurfacereader -ifile model_cl.vtp --pipe vmtkcenterlines \
@@ -636,7 +641,11 @@ Do you want to generate for each planar face its own ID?
 Enter y or n: 
 \endcode
 
-Enter \c n. Two files are now generated : \c fluid_iliac.poly 
+For single-physics problem, however, it is much easier to assign a
+single boundary ID to each "physical" surface (<em> i.e. </em> 
+inlet, outlet, vessel boundary). Assuming that we are solving such a
+single-physics problem we enter \c n. 
+Two files are now generated : \c fluid_iliac.poly 
 which contains the fluid domain and \c solid_iliac.poly containing the 
 solid one.
 
@@ -646,7 +655,7 @@ display the surface meshes:
 \code 
 tetview fluid_iliac.poly
 \endcode  
-displays the fluid surface mesh
+displays the fluid surface mesh with its four boundaries 
 
 @I w 0.75\textwidth fluid1 " "
 @I w 0.75\textwidth fluid2 " "

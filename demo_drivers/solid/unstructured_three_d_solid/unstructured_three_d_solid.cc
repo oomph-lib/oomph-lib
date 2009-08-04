@@ -146,12 +146,6 @@ public:
  /// Destructor (empty)
  ~UnstructuredSolidProblem(){}
 
- /// Update the problem specs before solve: empty
- void actions_before_newton_solve() {}
-
- /// Update the problem specs before solve: empty
- void actions_after_newton_solve() {}
-
  /// Doc the solution
  void doc_solution(DocInfo& doc_info);
  

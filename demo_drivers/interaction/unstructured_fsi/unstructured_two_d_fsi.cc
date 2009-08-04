@@ -142,7 +142,6 @@ public:
      // Boundary 1 is lower boundary
      if (nod_pt->x(1)<0.15)
       {
-       this->convert_to_boundary_node(nod_pt);
        this->remove_boundary_node(0,nod_pt);
        this->add_boundary_node(1,nod_pt);
       }
@@ -150,7 +149,6 @@ public:
      // Boundary 2 is FSI interface
      if (Global_Parameters::is_on_fsi_boundary(nod_pt))
       {
-       this->convert_to_boundary_node(nod_pt);
        this->remove_boundary_node(0,nod_pt);
        this->add_boundary_node(2,nod_pt);
       }
@@ -212,7 +210,6 @@ public:
      // Boundary 1 is left (inflow) boundary
      if (nod_pt->x(0)<0.226)
       {
-       this->convert_to_boundary_node(nod_pt);
        this->remove_boundary_node(0,nod_pt);
        this->add_boundary_node(1,nod_pt);
 
@@ -224,7 +221,6 @@ public:
      // Boundary 2 is right (outflow) boundary
      if (nod_pt->x(0)>8.28)
       {
-       this->convert_to_boundary_node(nod_pt);
        this->remove_boundary_node(0,nod_pt);
        this->add_boundary_node(2,nod_pt);
 
@@ -237,7 +233,6 @@ public:
      // Boundary 3 is FSI boundary
      if (Global_Parameters::is_on_fsi_boundary(nod_pt))
       {
-       this->convert_to_boundary_node(nod_pt);
        this->remove_boundary_node(0,nod_pt);
        this->add_boundary_node(3,nod_pt);
        
@@ -291,12 +286,6 @@ public:
 
  /// Destructor (empty)
  ~UnstructuredFSIProblem(){}
-
- /// Update the after solve (empty)
- void actions_after_newton_solve(){}
-
- /// \short Update the problem specs before solve (empty)
- void actions_before_newton_solve(){}
 
  /// Access function for the fluid mesh
  FluidTriangleMesh<FLUID_ELEMENT>*& fluid_mesh_pt() 
@@ -426,11 +415,14 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
  // Apply fluid boundary conditions: Poiseuille at inflow
 
  // Find max. and min y-coordinate at inflow
- double y_min=1.0e20;
- double y_max=-1.0e20;
  unsigned ibound=1;
+ //Initialise both to the y-coordinate of the first boundary node
+ double y_min=fluid_mesh_pt()->boundary_node_pt(ibound,0)->x(1);;
+ double y_max=y_min;
+
+ //Loop over the rest of the boundary nodes
  unsigned num_nod= fluid_mesh_pt()->nboundary_node(ibound);
- for (unsigned inod=0;inod<num_nod;inod++)
+ for (unsigned inod=1;inod<num_nod;inod++)
   {
    double y=fluid_mesh_pt()->boundary_node_pt(ibound,inod)->x(1);
    if (y>y_max)
@@ -445,9 +437,10 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
  double y_mid=0.5*(y_min+y_max);
  
  // Loop over all boundaries
- for (unsigned ibound=0;ibound<fluid_mesh_pt()->nboundary();ibound++)
+ const unsigned n_boundary = fluid_mesh_pt()->nboundary();
+ for (unsigned ibound=0;ibound<n_boundary;ibound++)
   {
-   unsigned num_nod= fluid_mesh_pt()->nboundary_node(ibound);
+   const unsigned num_nod= fluid_mesh_pt()->nboundary_node(ibound);
    for (unsigned inod=0;inod<num_nod;inod++)
     {
      // Parabolic inflow at the left boundary (boundary 1)
@@ -510,10 +503,10 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
  // Create FSI Traction elements
  //-----------------------------
 
- // Now construct the traction element mesh
+ // Now construct the (empty) traction element mesh
  Traction_mesh_pt=new SolidMesh;
 
-  // Build the FSI traction elements
+  // Build the FSI traction elements and add them to the traction mesh
  create_fsi_traction_elements();
 
  // Create Lagrange multiplier mesh for boundary motion
@@ -553,7 +546,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
  FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
   (this,3,Fluid_mesh_pt,Traction_mesh_pt);
  
- // Close it
+ // Close the doc file
  FSI_functions::Doc_boundary_coordinate_file.close();
 
  // Sanity check: Doc boundary coordinates from solid side
