@@ -34,10 +34,6 @@ else
   TESTS = rayleigh_traction_channel
 endif
 
-
-# Distribute validation script and validation data
-EXTRA_DIST = validate.sh validata
-
 #Add in additional cleanup commands
 clean-local: 
 	rm -rf Validation *~

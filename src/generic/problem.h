@@ -1,11 +1,11 @@
-//LIC// ===================================================================
+//LIC// ====================================================================
 //LIC// This file forms part of oomph-lib, the object-oriented, 
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC//           Version 0.85. June 9, 2008.
+//LIC//           Version 0.90. August 3, 2009.
 //LIC// 
-//LIC// Copyright (C) 2006-2008 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2009 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -444,6 +444,14 @@ protected:
  /// \short Maximum possible increase of dt between time-steps in adaptive
  /// schemes
  double DTSF_max_increase;
+
+ /// \short If  Minimum_dt_but_still_proceed positive, then dt will not be 
+ /// reduced below this value during adaptive timestepping and the 
+ /// computation will continue with this value, accepting the larger 
+ /// errors that this will incur). Note: This option is disabled by default 
+ /// as this value is initialised to -1.0.
+ double Minimum_dt_but_still_proceed;
+
 
  //---------------------  Arc-length continuation paramaters
 

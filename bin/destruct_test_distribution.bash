@@ -8,12 +8,12 @@
 #------------------------------------------------------
 # Tar file that contains the distribution [Adjust]
 #------------------------------------------------------
-tar_file=oomph-lib-0.85.tar.gz
+tar_file=oomph-lib-0.90.tar.gz
 
 #-------------------------------------------------------------
 # Directory that contains the unpacked distribution  [Adjust]
 #-------------------------------------------------------------
-unpacked_dist_dir=oomph-lib-0.85
+unpacked_dist_dir=oomph-lib-0.90
 
 
 #------------------------------------------------------

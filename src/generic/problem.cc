@@ -3,9 +3,9 @@
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
-//LIC//           Version 0.85. June 9, 2008.
+//LIC//           Version 0.90. August 3, 2009.
 //LIC// 
-//LIC// Copyright (C) 2006-2008 Matthias Heil and Andrew Hazel
+//LIC// Copyright (C) 2006-2009 Matthias Heil and Andrew Hazel
 //LIC// 
 //LIC// This library is free software; you can redistribute it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
@@ -73,6 +73,7 @@ namespace oomph
   Mass_matrix_reuse_is_enabled(false), Mass_matrix_has_been_computed(false),
   Discontinuous_element_formulation(false),
   Minimum_dt(1.0e-12), Maximum_dt(1.0e12), DTSF_max_increase(4.0),
+  Minimum_dt_but_still_proceed(-1.0),
   Scale_arc_length(true), Desired_proportion_of_arc_length(0.5),
   Theta_squared(1.0), Sign_of_jacobian(0), Continuation_direction(1.0), 
   Parameter_derivative(1.0), Parameter_current(0.0),
@@ -7557,13 +7558,36 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
      //Calculate the scaling  factor
      DTSF = pow((epsilon/error),
                 (1.0/(1.0+time_stepper_pt()->order())));
-
+     
      oomph_info << "DTSF is  " << DTSF << std::endl;
      oomph_info << "Estimated timestepping error is " << error << std::endl;
-
+     
+     
+     // Threshold for rejecting timestep
+     double dtsf_threshold=0.8;
+     
+     // Impose lower bound on timestep (i.e. accept timestep
+     // even though tolerance isn't satisfied)
+     if(DTSF <= dtsf_threshold)
+      {
+       double new_timestep=dt_actual*DTSF;
+       
+       if (new_timestep<Minimum_dt_but_still_proceed)
+        {
+         oomph_info 
+          << "Warning: Adaptation of timestep to ensure satisfaction\n"
+          << "         of error bounds during adaptive timestepping\n"
+          << "         would lower dt below \n"
+          << "         Problem::Minimum_dt_but_still_proceed="
+          <<           Minimum_dt_but_still_proceed << "\n"
+          << "         ---> We're continuing with present timestep.\n";
+         DTSF=1.0;
+        }
+      }
+     
      //Now decide what to do based upon DTSF
      //If it's small reject the timestep
-     if(DTSF <= 0.8)
+     if(DTSF <= dtsf_threshold)
       {
        oomph_info << "TIMESTEP REJECTED" << std::endl;
        //Reject the timestep
