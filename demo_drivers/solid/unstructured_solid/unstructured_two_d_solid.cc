@@ -77,7 +77,6 @@ public:
      // Boundary 1 is lower boundary
      if (nod_pt->x(1)<0.15)
       {
-       this->convert_to_boundary_node(nod_pt);
        this->remove_boundary_node(0,nod_pt);
        this->add_boundary_node(1,nod_pt);
       }
@@ -85,7 +84,6 @@ public:
      // Boundary 2 is upper boundary
      if (nod_pt->x(1)>2.69)
       {
-       this->convert_to_boundary_node(nod_pt);
        this->remove_boundary_node(0,nod_pt);
        this->add_boundary_node(2,nod_pt);
       }
@@ -169,12 +167,6 @@ public:
 
  /// Destructor (empty)
  ~UnstructuredSolidProblem(){}
-
- /// Update the problem specs before solve: empty
- void actions_before_newton_solve() {}
-
- /// Update the problem specs before solve: empty
- void actions_after_newton_solve() {}
  
  /// Doc the solution
  void doc_solution(DocInfo& doc_info);

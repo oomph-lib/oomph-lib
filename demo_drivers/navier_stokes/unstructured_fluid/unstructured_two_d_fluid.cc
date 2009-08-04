@@ -76,8 +76,6 @@ public:
      // Boundary 1 is left (inflow) boundary
      if (nod_pt->x(0)<0.226)
       {
-       this->convert_to_boundary_node(nod_pt);
-
        // If it's not on the upper or lower channel walls remove it
        // from boundary 0
        if ((nod_pt->x(1)<4.08)&&(nod_pt->x(1)>0.113))
@@ -90,9 +88,6 @@ public:
      // Boundary 2 is right (outflow) boundary
      if (nod_pt->x(0)>8.28)
       {
-       this->convert_to_boundary_node(nod_pt);
-
-
        // If it's not on the upper or lower channel walls remove it
        // from boundary 0
        if ((nod_pt->x(1)<4.08)&&(nod_pt->x(1)>0.113))
@@ -153,12 +148,6 @@ public:
  
  /// Destructor (empty)
  ~UnstructuredFluidProblem(){}
-
- /// Update the after solve (empty)
- void actions_after_newton_solve(){}
-
- /// Update the problem specs before solve (empty) 
- void actions_before_newton_solve(){}
 
  /// Access function for the fluid mesh
  ElasticTriangleMesh<ELEMENT>*& fluid_mesh_pt() 
@@ -268,11 +257,13 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  //------------------------------------------------------
 
  // Find max. and min y-coordinate at inflow
- double y_min=1.0e20;
- double y_max=-1.0e20;
  unsigned ibound=1;
+ //Initialise y_min and y_max to y-coordinate of first node on boundary
+ double y_min=fluid_mesh_pt()->boundary_node_pt(ibound,0)->x(1);
+ double y_max=y_min;
+ //Loop over the rest of the nodes
  unsigned num_nod= fluid_mesh_pt()->nboundary_node(ibound);
- for (unsigned inod=0;inod<num_nod;inod++)
+ for (unsigned inod=1;inod<num_nod;inod++)
   {
    double y=fluid_mesh_pt()->boundary_node_pt(ibound,inod)->x(1);
    if (y>y_max)
