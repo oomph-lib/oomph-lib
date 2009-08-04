@@ -28,6 +28,11 @@ echo "Running 2D poisson problem with flux boundary conditions "
 mkdir RESLT
 mkdir RESLT_MESH
 
+
+# Wait for a bit to allow parallel file systems to realise
+# the existence of the new directory
+sleep 5
+
 $MPI_RUN_COMMAND ../two_d_poisson_flux_bc_adapt > OUTPUT_two_d_poisson_flux_bc_adapt
 echo "done"
 echo " " >> validation.log

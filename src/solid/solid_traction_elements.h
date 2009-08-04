@@ -1046,7 +1046,7 @@ public:
                                              // this out properly
                                              // for generalised dofs
          lambda[i]+=nod_pt->value
-          ((*bnod_pt->first_face_element_value_pt())[Id] +i)*psi(j,0);
+          (bnod_pt->index_of_first_value_assigned_by_face_element(Id) +i)*psi(j,0);
         }
        //In-element quantities
        for(unsigned i=0;i<dim_el;i++)
@@ -1147,7 +1147,7 @@ protected:
         {
          x[i]+=nodal_position(j,i)*psi(j);
          lambda[i]+=nod_pt->value
-          ( (*bnod_pt->first_face_element_value_pt())[Id] +i)*psi(j);
+          (bnod_pt->index_of_first_value_assigned_by_face_element(Id) +i)*psi(j);
          for(unsigned ii=0;ii<dim_el;ii++)
           {
            interpolated_a(ii,i) += 
@@ -1240,7 +1240,7 @@ protected:
 
          // Local eqn number:   
          int local_eqn=nodal_local_eqn
-          (j, (*bnod_pt->first_face_element_value_pt())[Id]+i); 
+          (j,bnod_pt->index_of_first_value_assigned_by_face_element(Id)+i); 
            
          if (local_eqn>=0)
           {
@@ -1284,7 +1284,7 @@ protected:
                 dynamic_cast<BoundaryNodeBase*>(node_pt(jj));
 
                int local_unknown=nodal_local_eqn
-                (jj,(*bnode_pt->first_face_element_value_pt())[Id]+i);
+                (jj,bnode_pt->index_of_first_value_assigned_by_face_element(Id)+i);
                if (local_unknown>=0)
                 {
                  jacobian(local_eqn,local_unknown)+=psi(jj)*psi(j)*W;
@@ -1338,7 +1338,7 @@ protected:
 	 
        // Local eqn number:
        int local_eqn=nodal_local_eqn
-        (j, (*bnod_pt->first_face_element_value_pt())[Id]+i);
+        (j,bnod_pt->index_of_first_value_assigned_by_face_element(Id)+i);
        if (local_eqn>=0)
         {
          // store block lookup in temporary pair: First entry in pair

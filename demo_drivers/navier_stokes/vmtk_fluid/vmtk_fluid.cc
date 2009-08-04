@@ -31,11 +31,6 @@
 #include "navier_stokes.h"
 #include "meshes/tetgen_mesh.h"
 
-// The problem dimension
-#define DIM 3
-
-//Lagrange Id
-#define PARALL_FLOW_ID 2
 
 using namespace std;
 using namespace oomph;
@@ -112,15 +107,15 @@ public:
 
 private:
  
- /// Create fluid lagrange elements.
- void create_parall_outflow_lagrange_elements();
+ /// Create Lagrange multiplier elements that enforce parallel outflow
+ void create_parallel_outflow_lagrange_elements();
 
  /// Bulk fluid mesh
  TetgenMesh<ELEMENT>* Fluid_mesh_pt;
 
  /// \short Meshes of FaceElements imposing parallel outflow 
- /// and a pressure at in/outflow
- Vector<Mesh*> Fluid_lagrange_mesh_pt;
+ /// and a pressure at the in/outflow
+ Vector<Mesh*> Parallel_outflow_lagrange_multiplier_mesh_pt;
 
  /// \short IDs of fluid mesh boundaries along which inflow boundary conditions
  /// are applied
@@ -169,23 +164,26 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  Outflow_boundary_id.resize(11);
  for(unsigned i=0; i<11; i++)
   {
+
    Outflow_boundary_id[i]=237+i;
-  }
+
+  } // done outflow boundaries
 
 
- // Create meshes of lagrange elements at inflow/outflow
- //-----------------------------------------------------------
+ // Create meshes of Lagrange multiplier elements at inflow/outflow
+ //----------------------------------------------------------------
+
  // Create the meshes
  unsigned n=nfluid_traction_boundary();
- Fluid_lagrange_mesh_pt.resize(n);
+ Parallel_outflow_lagrange_multiplier_mesh_pt.resize(n);
  for (unsigned i=0;i<n;i++)
   {
-   Fluid_lagrange_mesh_pt[i]=new Mesh;
+   Parallel_outflow_lagrange_multiplier_mesh_pt[i]=new Mesh;
   } 
  
  // Populate them with elements
- create_parall_outflow_lagrange_elements();
- // end of creating lagrange elements
+ create_parallel_outflow_lagrange_elements();
+
  
  // Combine the lot
  //----------------
@@ -199,7 +197,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  n=nfluid_traction_boundary();
  for (unsigned i=0;i<n;i++)
   { 
-   add_sub_mesh(Fluid_lagrange_mesh_pt[i]);
+   add_sub_mesh(Parallel_outflow_lagrange_multiplier_mesh_pt[i]);
   }
  
  // Build global mesh
@@ -210,9 +208,9 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  //----------
  unsigned nbound=Fluid_mesh_pt->nboundary();
 
- // Vector indicates the boundaries where we have no slip
- std::vector<bool> pinn_velocity(nbound, true);
-
+ // Vector indicating the boundaries where we have no slip
+ std::vector<bool> pin_velocity(nbound, true);
+ 
  // Loop over inflow/outflow boundaries
  for (unsigned in_out=0;in_out<2;in_out++)
   {
@@ -232,14 +230,16 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
        b=Outflow_boundary_id[i];
       }
      
-     pinn_velocity[b]=false;
+     pin_velocity[b]=false;
     }
-  }
 
- // no slip on boundaries [0,214]
+  } // done identification of boundaries where velocities are pinned
+
+
+ // Loop over all boundaries to apply no slip where required
  for(unsigned b=0;b<nbound;b++)
   {
-   if(pinn_velocity[b])
+   if(pin_velocity[b])
     {
      unsigned num_nod=Fluid_mesh_pt->nboundary_node(b);
      for (unsigned inod=0;inod<num_nod;inod++)
@@ -251,13 +251,12 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
        nod_pt->pin(1); 
        nod_pt->pin(2); 
        
-       // find which node is on in/outflow :
+       // Find out if the node is also located on an in- or outflow
+       // boundary
        bool is_in_or_outflow_node=false;
-    
-       // Loop over inflow/outflow boundaries
        for (unsigned in_out=0;in_out<2;in_out++)
         {
-         // Loop over boundaries with fluid lagrange elements
+         // Loop over boundaries with Lagrange multiplier elements
          n=nfluid_inflow_traction_boundary();
          if (in_out==1) n=nfluid_outflow_traction_boundary();
          for (unsigned i=0;i<n;i++)
@@ -272,25 +271,32 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
             {
              bb=Outflow_boundary_id[i];
             }
-         
+           
            if(nod_pt->is_on_boundary(bb))
-            is_in_or_outflow_node=true;
+            {
+             is_in_or_outflow_node=true;
+            }
           }
-        }
+        } // now we know if it's on the an in- or outflow boundary...
 
+
+       // If its on an in- or outflow boundary pin the Lagrange multipliers
        if(is_in_or_outflow_node)
         {
          //Cast to a boundary node
          BoundaryNodeBase *bnod_pt = 
           dynamic_cast<BoundaryNodeBase*>
-          ( Fluid_mesh_pt->boundary_node_pt(b,inod) );
-
+          (Fluid_mesh_pt->boundary_node_pt(b,inod) );
+         
+         // What's the index of the first Lagrange multiplier
+         // in the node's values? 
+         unsigned first_index=bnod_pt->index_of_first_value_assigned_by_face_element();
+         
          // Pin the lagrange multiplier components 
          // in the out/in_flow boundaries
          for (unsigned l=0;l<2;l++)
           {
-           nod_pt->pin
-            ((*bnod_pt->first_face_element_value_pt())[PARALL_FLOW_ID] + l);
+           nod_pt->pin(first_index+l);
           }
         }
       }
@@ -317,20 +323,20 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
 } // end constructor
 
 
-//============start_of_fluid_lagrange_elements==============================
-/// Create Lagrange  elements 
+//============start_of_lagrange_multiplier_elements======================
+/// Create Lagrange multiplier elements that impose parallel outflow
 //=======================================================================
 template<class ELEMENT>
 void UnstructuredFluidProblem<ELEMENT>::
-create_parall_outflow_lagrange_elements()
+create_parallel_outflow_lagrange_elements()
 {
- // Counter for number of fluid traction meshes
+ // Counter for number of Lagrange multiplier meshes
  unsigned count=0;
 
  // Loop over inflow/outflow boundaries
  for (unsigned in_out=0;in_out<2;in_out++)
   {
-   // Loop over boundaries with fluid traction elements
+   // Loop over boundaries with Lagrange multiplier elements
    unsigned n=nfluid_inflow_traction_boundary();
    if (in_out==1) n=nfluid_outflow_traction_boundary();
    for (unsigned i=0;i<n;i++)
@@ -361,11 +367,11 @@ create_parall_outflow_lagrange_elements()
        
        // Build the corresponding lagrange element
        ImposeParallelOutflowElement<ELEMENT>* el_pt = new 
-        ImposeParallelOutflowElement<ELEMENT>(bulk_elem_pt,face_index,
-                                              PARALL_FLOW_ID);
-
+        ImposeParallelOutflowElement<ELEMENT>(bulk_elem_pt,face_index);
+       
        // Add it to the mesh
-       Fluid_lagrange_mesh_pt[count]->add_element_pt(el_pt);
+       Parallel_outflow_lagrange_multiplier_mesh_pt[count]->
+        add_element_pt(el_pt);
        
        // Set the pointer to the prescribed pressure
        if (in_out==0)
@@ -381,7 +387,8 @@ create_parall_outflow_lagrange_elements()
      count++;
     }
   }
-}  // end of create_parall_outflow_lagrange_elements
+
+}  // done
 
 
 //========================================================================
@@ -435,12 +442,7 @@ int main(int argc, char **argv)
 
  // Parameter study
  double Re_increment=100.0;
- unsigned nstep=2;//4
- if (CommandLineArgs::Argc==2)
-  {
-   std::cout << "Validation -- only doing two steps" << std::endl;
-   nstep=2;
-  }
+ unsigned nstep=2;
  
  // Parameter study: Crank up the pressure drop along the vessel
  for (unsigned istep=0;istep<nstep;istep++)

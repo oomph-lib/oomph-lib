@@ -2105,8 +2105,8 @@ BoundaryNodeBase::~BoundaryNodeBase()
   }
 
  //Delete the map of face element's first value 
- delete First_face_element_value_pt;
- First_face_element_value_pt=0;
+ delete Index_of_first_value_assigned_by_face_element_pt;
+ Index_of_first_value_assigned_by_face_element_pt=0;
 }
 
 

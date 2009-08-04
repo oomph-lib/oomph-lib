@@ -23,6 +23,11 @@ cp ../*partition.dat .
 
 echo "Running Turek flag validation "
 mkdir RESLT_TUREK
+
+# Wait for a bit to allow parallel file systems to realise
+# the existence of the new directory
+sleep 5
+
 $MPI_RUN_COMMAND ../turek_flag > OUTPUT_turek_flag
 echo "done"
 echo " " >> validation.log

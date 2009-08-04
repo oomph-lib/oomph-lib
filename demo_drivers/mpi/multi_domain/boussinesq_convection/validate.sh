@@ -23,6 +23,11 @@ cp ../*partition.dat .
 
 echo "Running Boussinesq convection problem (multi-domain method, analytic, connected partitioning) "
 mkdir RESLT
+
+# Wait for a bit to allow parallel file systems to realise
+# the existence of the new directory
+sleep 5
+
 $MPI_RUN_COMMAND ../multi_domain_boussinesq_convection validate 2 > OUTPUT_multi_domain_boussinesq_convection_2
 echo "done"
 echo " " >> validation.log
@@ -55,6 +60,11 @@ rm -rf RESLT
 
 echo "Running Boussinesq convection problem (multi-domain method, analytic, one mesh per processor) "
 mkdir RESLT
+
+# Wait for a bit to allow parallel file systems to realise
+# the existence of the new directory
+sleep 5
+
 $MPI_RUN_COMMAND ../multi_domain_boussinesq_convection validate 1 > OUTPUT_multi_domain_boussinesq_convection
 echo "done"
 echo " " >> validation.log
@@ -85,6 +95,11 @@ mv RESLT RESLT_multi_domain_boussinesq_convection_analytic
 
 echo "Running Boussinesq convection problem (multi-domain method, FD) "
 mkdir RESLT_FD
+
+# Wait for a bit to allow parallel file systems to realise
+# the existence of the new directory
+sleep 5
+
 $MPI_RUN_COMMAND ../multi_domain_boussinesq_convection_fd validate 1 > OUTPUT_multi_domain_boussinesq_convection_fd
 echo "done"
 echo " " >> validation.log
@@ -119,6 +134,12 @@ mv RESLT_FD RESLT_multi_domain_boussinesq_convection_fd
 
 echo "Running refineable Boussinesq convection problem (dist. single domain) "
 mkdir RESLT_SINGLE
+
+
+# Wait for a bit to allow parallel file systems to realise
+# the existence of the new directory
+sleep 5
+
 $MPI_RUN_COMMAND ../refineable_b_convection validate > OUTPUT_refineable_b_convection
 echo "done"
 echo " " >> validation.log
@@ -149,6 +170,11 @@ mv RESLT_SINGLE RESLT_refineable_b_convection
 
 echo "Running refineable Boussinesq convection problem (multi-domain method) "
 mkdir RESLT_MULTI
+
+# Wait for a bit to allow parallel file systems to realise
+# the existence of the new directory
+sleep 5
+
 $MPI_RUN_COMMAND ../multi_domain_ref_b_convection validate > OUTPUT_multi_domain_ref_b_convection
 echo "done"
 echo " " >> validation.log

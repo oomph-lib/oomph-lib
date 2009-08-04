@@ -24,6 +24,11 @@ cp ../*partition.dat .
 # Validation for prescribed displacement problem with Lagrange multipliers
 #-------------------------------------------------------------------------
 mkdir RESLT
+
+# Wait for a bit to allow parallel file systems to realise
+# the existence of the new directory
+sleep 5
+
 echo "Running prescribed displ. problem with Lagrange multipliers "
 $MPI_RUN_COMMAND ../prescribed_displ_lagr_mult > OUTPUT_prescribed_displ_lagr_mult
 echo "done"

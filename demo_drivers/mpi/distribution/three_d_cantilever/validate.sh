@@ -32,6 +32,11 @@ mkdir RESLT_refine5
 mkdir RESLT_refine6
 mkdir RESLT_refine8
 mkdir RESLT_refine9
+
+# Wait for a bit to allow parallel file systems to realise
+# the existence of the new directory
+sleep 5
+
 $MPI_RUN_COMMAND ../three_d_cantilever_adapt > OUTPUT_three_d_cantilever_adapt
 echo "done"
 echo " " >> validation.log

@@ -16,8 +16,6 @@ rm -r -f Validation
 mkdir Validation
 
 cd Validation
-# hierher remove this!
-mkdir HALO_ERROR
 cp ../*partition.dat .
 
 # Validation for FSI channel with leaflet problem (algebraic node update)
@@ -25,6 +23,11 @@ cp ../*partition.dat .
 
 echo "Running FSI channel with leaflet (algebraic node update) validation "
 mkdir RESLT_FSI_LEAF
+
+# Wait for a bit to allow parallel file systems to realise
+# the existence of the new directory
+sleep 5
+
 $MPI_RUN_COMMAND ../fsi_channel_with_leaflet validate > OUTPUT_fsi_channel_with_leaflet
 echo "done"
 echo " " >> validation.log

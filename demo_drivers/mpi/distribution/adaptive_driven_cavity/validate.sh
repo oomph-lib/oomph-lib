@@ -26,6 +26,11 @@ cp ../*partition.dat .
 
 echo "Running adaptive rectangular driven cavity (TH & CR) validation "
 mkdir RESLT
+
+# Wait for a bit to allow parallel file systems to realise
+# the existence of the new directory
+sleep 5
+
 $MPI_RUN_COMMAND ../adaptive_driven_cavity validate > OUTPUT_adaptive_driven_cavity
 echo "done"
 echo " " >> validation.log

@@ -203,13 +203,41 @@ problems after upgrading to a new version.
   tube-like domains. See the <a href="../../meshes/mesh_list/html/index.html">
   list of structured meshes</a> for details. 
   \n\n
+- Developed a <a href="../../meshes/mesh_from_vmtk/html/index.html">
+  tutorial</a> that shows how to use the 
+  <a href="http://www.vmtk.org/Main/HomePage">Vascular 
+  Modeling Toolkit (VMTK)</a> to generate \c oomph-lib meshes
+  from medical images. The methodology is used in the following driver codes:
+  \n\n
+  - <a href="../../solid/vmtk_solid/html/index.html">The inflation of a 
+    blood vessel.</a>
+    \n\n
+  - <a href="../../navier_stokes/vmtk_fluid/html/index.html">
+    Finite Reynolds number flow through a (rigid) iliac bifurcation.</a>
+    \n\n
+  - <a href="../../interaction/vmtk_fsi/html/index.html">
+    Finite Reynolds number flow through an elastic iliac bifurcation.</a>
+  .
+  \n\n
+- Provided a new Lagrange-multiplier-based element, that allows the
+  imposition of parallel in- or outflow from boundaries that are not
+  aligned with coordinate planes. This is discussed in a
+  <a href="../../navier_stokes/vmtk_fluid/html/index.html">
+  separate tutorial.</a>
+  \n\n
+- Provided a new mechanism that allows multiple \c FaceElements to be
+  attached to same node, while providing the ability to distinguish
+  between different Lagrange multipliers stored at the same node. 
+  This is discussed
+  in a <a href="../../interaction/vmtk_fsi/html/index.html">
+  separate tutorial.</a>
+  \n\n
 - Significantly extended oomph-lib's bifurcation tracking routines
   (no tutorials yet, though).
   \n\n
 - Provided general framework and driver codes for discontinous
   Galerkin methods and explicit timesteppers (no tutorials yet, though).
   \n\n
-- 
 .
 
 

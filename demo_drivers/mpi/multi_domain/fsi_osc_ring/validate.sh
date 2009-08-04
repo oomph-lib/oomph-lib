@@ -23,6 +23,11 @@ cp ../*partition.dat .
 
 echo "Running FSI oscillating ring (algebraic node update) validation "
 mkdir RESLT
+
+# Wait for a bit to allow parallel file systems to realise
+# the existence of the new directory
+sleep 5
+
 $MPI_RUN_COMMAND ../fsi_osc_ring validate > OUTPUT_fsi_osc_ring
 echo "done"
 echo " " >> validation.log

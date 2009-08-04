@@ -3295,15 +3295,15 @@ class FaceElement: public virtual FiniteElement
      // create storage, if it doesn't already exist, for the map 
      // that will contain the position of the first entry of 
      // this face element's additional values, 
-     if(bnod_pt->first_face_element_value_pt()==0)
+     if(bnod_pt->index_of_first_value_assigned_by_face_element_pt()==0)
       {
-       bnod_pt->first_face_element_value_pt()= 
+       bnod_pt->index_of_first_value_assigned_by_face_element_pt()= 
         new std::map<unsigned, unsigned>; 
       }
        
      // get pointer to the map
      std::map<unsigned, unsigned>* map_pt=
-      bnod_pt->first_face_element_value_pt();
+      bnod_pt->index_of_first_value_assigned_by_face_element_pt();
        
      // we only resize the node values Vector if we haven't done it yet
      std::map<unsigned, unsigned>::const_iterator p=map_pt->find(id);

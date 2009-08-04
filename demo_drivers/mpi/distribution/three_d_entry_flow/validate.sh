@@ -26,6 +26,11 @@ cp ../*partition.dat .
 echo "Running 3D entry flow (TH & CR) validation "
 mkdir RESLT_TH
 mkdir RESLT_CR
+
+# Wait for a bit to allow parallel file systems to realise
+# the existence of the new directory
+sleep 5
+
 $MPI_RUN_COMMAND ../three_d_entry_flow validate > OUTPUT_three_d_entry_flow
 echo "done"
 echo " " >> validation.log

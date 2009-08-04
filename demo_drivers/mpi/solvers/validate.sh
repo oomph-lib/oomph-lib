@@ -22,6 +22,11 @@ cd Validation
 
 echo "Running rectangular driven cavity LSC precond validation "
 mkdir RESLT
+
+# Wait for a bit to allow parallel file systems to realise
+# the existence of the new directory
+sleep 5
+
 $MPI_RUN_COMMAND ../driven_cavity > OUTPUT_driven_cavity
 echo "done"
 echo " " >> validation.log

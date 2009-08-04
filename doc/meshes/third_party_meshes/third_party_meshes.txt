@@ -19,7 +19,7 @@ from the output of third-party unstructured mesh generators.
    resolved more accurately by using higher-order elements unless
    some post-processing is performed. \n\n
 -# The meshes have not been tested as extensively as \c oomph-lib's
-   structured meshes, described <A HREF="../../../mesh_list/html/index.html">
+   structured meshes, described <A HREF="../../mesh_list/html/index.html">
    elsewhere.</A> \n\n
 .  
 
@@ -93,6 +93,39 @@ TetgenMesh<ELEMENT>
 </TD>
 <TD>
 @I w 0.75\textwidth tetgen_mesh " "
+</TD>
+</TR>
+#####################################################################
+<TR>
+<TD>
+<A HREF="../../mesh_from_vmtk/html/index.html"><B>
+Generating meshes from medical scans with VMTK
+</B></A> \n\n
+- We provide the option to generate tetgen-based meshes
+  for physiological fluid-structure interaction problems, 
+  using the  <a href="http://www.vmtk.org/Main/HomePage">Vascular 
+  Modeling Toolkit (VMTK).</a>
+. 
+<B>Example driver codes and tutorials:</B> \n
+- We provide a <a href="../../mesh_from_vmtk/html/index.html">separate 
+  tutorial</a> that shows how to generate \c oomph-lib meshes
+  from medical images.
+- The methodology is used in the following driver codes:
+  \n\n
+  - <a href="../../../solid/vmtk_solid/html/index.html">The inflation of a 
+    blood vessel.</a>
+    \n\n
+  - <a href="../../../navier_stokes/vmtk_fluid/html/index.html">
+    Finite Reynolds number flow through a (rigid) iliac bifurcation.</a>
+    \n\n
+  - <a href="../../../interaction/vmtk_fsi/html/index.html">
+    Finite Reynolds number flow through an elastic iliac bifurcation.</a>
+    \n\n
+  .
+.
+</TD>
+<TD>
+@I w 0.75\textwidth iliac " "
 </TD>
 </TR>
 #####################################################################

@@ -24,6 +24,9 @@ cp ../*partition.dat .
 echo "Running FSI collapsible channel problem (macro element node update) "
 mkdir RESLT
 
+# Wait for a bit to allow parallel file systems to realise
+# the existence of the new directory
+sleep 5
 
 $MPI_RUN_COMMAND ../fsi_collapsible_channel_macro_adapt validate > OUTPUT_fsi_collapsible_channel_macro_adapt
 echo "done"
@@ -55,6 +58,11 @@ mv RESLT RESLT_fsi_collapsible_channel_macro_adapt_external
 
 echo "Running FSI collapsible channel problem (algebraic node update) "
 mkdir RESLT_ALG
+
+# Wait for a bit to allow parallel file systems to realise
+# the existence of the new directory
+sleep 5
+
 $MPI_RUN_COMMAND ../fsi_collapsible_channel_adapt validate > OUTPUT_fsi_collapsible_channel_adapt
 echo "done"
 echo " " >> validation.log

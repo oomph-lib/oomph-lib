@@ -28,6 +28,11 @@ echo "Running fish poisson validation "
 mkdir RESLT_select_refine
 mkdir RESLT_incremental2
 mkdir RESLT_fully_automatic
+
+# Wait for a bit to allow parallel file systems to realise
+# the existence of the new directory
+sleep 5
+
 $MPI_RUN_COMMAND ../fish_poisson > OUTPUT_fish_poisson
 echo "done"
 echo " " >> validation.log

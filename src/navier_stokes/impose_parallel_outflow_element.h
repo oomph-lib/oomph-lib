@@ -48,8 +48,9 @@ namespace oomph
   public virtual FaceElement
   {
    private :  
-    /// pointer to imposed pressure
-    double* Pressure_pt;
+
+   /// pointer to imposed pressure
+   double* Pressure_pt;
    
    /// Lagrange Id
    unsigned Id;
@@ -57,23 +58,10 @@ namespace oomph
 
     public:   
 
- /// \short The "global" intrinsic coordinate of the element when
- /// viewed as part of a geometric object should be given by
- /// the FaceElement representation, by default
- /// This final over-ride is required because both SolidFiniteElements 
- /// and FaceElements overload zeta_nodal
- double zeta_nodal(const unsigned &n, const unsigned &k,           
-                          const unsigned &i) const 
-  {return FaceElement::zeta_nodal(n,k,i);}     
-
-   ///  access function for the pressure
-   double* &pressure_pt() {return Pressure_pt;}
-
-
    /// \short Constructor takes a "bulk" element, the
    /// index that identifies which face the 
    /// ImposeParallelOutflowElement is supposed
-   /// to be attached to and the face element ID
+   /// to be attached to, and the face element ID
    ImposeParallelOutflowElement
     (FiniteElement* const &element_pt, 
      const int &face_index,const unsigned &id=0) :
@@ -123,10 +111,22 @@ namespace oomph
    ///Output function: x,y,[z],u,v,[w],p in tecplot format
    void output(std::ostream &outfile, const unsigned &nplot)
     {FiniteElement::output(outfile,nplot);}
+   
+   /// \short The "global" intrinsic coordinate of the element when
+   /// viewed as part of a geometric object should be given by
+   /// the FaceElement representation, by default
+   /// This final over-ride is required because both SolidFiniteElements 
+   /// and FaceElements overload zeta_nodal
+   double zeta_nodal(const unsigned &n, const unsigned &k,           
+                     const unsigned &i) const 
+   {return FaceElement::zeta_nodal(n,k,i);}     
+   
 
-
+   ///  Access function for the pressure
+   double* &pressure_pt() {return Pressure_pt;}
+   
     protected:
-
+   
    /// \short Helper function to compute the residuals and, if flag==1, the
    /// Jacobian
    void fill_in_generic_contribution_to_residuals_parall_lagr_multiplier(
@@ -199,7 +199,7 @@ namespace oomph
          for(unsigned l=0;l<dim_el;l++)
           {
            lambda[l]+=nod_pt->value
-            ( (*bnod_pt->first_face_element_value_pt())[Id] + l ) * psi(j);
+            (bnod_pt->index_of_first_value_assigned_by_face_element(Id) + l) * psi(j);
           }
         }
 
@@ -224,7 +224,7 @@ namespace oomph
            // Local eqn number for the l-th component of lamdba 
            //in the j-th element
            local_eqn=nodal_local_eqn
-            (j,(*bnod_pt->first_face_element_value_pt())[Id]+l); 
+            (j,bnod_pt->index_of_first_value_assigned_by_face_element(Id)+l); 
 
            if (local_eqn>=0) 
             {   
@@ -285,7 +285,7 @@ namespace oomph
                    // Local eqn number for the l-th component of lamdba
                    // in the jj-th element
                    local_unknown=nodal_local_eqn
-                    (jj, (*bnode_pt->first_face_element_value_pt())[Id] +l);
+                    (jj,bnode_pt->index_of_first_value_assigned_by_face_element(Id)+l);
                    if (local_unknown>=0)
                     {
                      jacobian(local_eqn,local_unknown)+=

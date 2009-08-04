@@ -987,6 +987,31 @@ unstructured 3D meshes for FSI problems.
 ######################################################################
 <TR>
 <TD>
+<A HREF="../../navier_stokes/vmtk_fluid/html/index.html">
+<B> Steady finite-Reynolds-number flow through an iliac bifurcation
+</B>
+</A>
+\n\n
+We show how to simulate physiological flow problems, using
+the  <a href="http://www.vmtk.org/Main/HomePage">Vascular 
+Modeling Toolkit (VMTK).</a>
+This is a "warm-up" problem for 
+<A HREF="../../interaction/vmtk_fsi/html/index.html"> 
+another tutorial</A> in which we consider the corresponding FSI 
+problems in which the vessel wall is elastic.
+</TD>
+<TD>
+- How to use \c ImposeParallelOutflowElements to enforce parallel 
+  in- and outflow from cross-sections that are not aligned with 
+  any coordinate planes.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
 <A HREF="../../navier_stokes/curved_pipe/html/index.html">
 <B>Adaptive simulation of flow at finite Reynolds number in a curved circular pipe
 </B>
@@ -1390,6 +1415,30 @@ unstructured 3D meshes for FSI problems.
 <TD>
 - How to solve 3D solid mechanics problems on unstructured 
   meshes. 
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
+<A HREF="../../solid/vmtk_solid/html/index.html">
+<B>Inflation of a blood vessel
+</B>
+</A>
+\n\n
+We show how to simulate physiological solid mechanics problems, using
+the  <a href="http://www.vmtk.org/Main/HomePage">Vascular 
+Modeling Toolkit (VMTK).</a>
+This is a "warm-up" problem for 
+<A HREF="../../interaction/vmtk_fsi/html/index.html"> 
+another tutorial</A> in which we consider the corresponding FSI 
+problems in which the vessel conveys (and is loaded by) a viscous
+fluid.
+</TD>
+<TD>
+- How to solve physiological solid mechanics problems.
 </TD>
 <TD>
 <CENTER>complete</CENTER>
@@ -1930,6 +1979,27 @@ meshes for 3D fluid-structure interaction problems.
 ######################################################################
 <TR>
 <TD>
+<A HREF="../../interaction/vmtk_fsi/html/index.html">
+<B>Finite-Reynolds-number flow through an elastic iliac bifurcation
+</B>
+</A>
+\n\n
+We show how to simulate physiological fluid-structure interaction 
+problems, using the  <a href="http://www.vmtk.org/Main/HomePage">Vascular 
+Modeling Toolkit (VMTK).</a>
+</TD>
+<TD>
+- How to attach multiple \c FaceElements to the same node --
+  distinguishing different Lagrange multipliers.
+- How to solve physiological fluid-structure interaction problems.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
 <A HREF="../../interaction/osc_ring_macro/html/index.html">
 <B>A simple fluid-structure interaction problem: Finite Reynolds
 number flow, driven by an oscillating ring.
@@ -2196,6 +2266,12 @@ We describe \c oomph-lib's wrappers to third-party
   unstructured tetrahedral mesh generator
   <A HREF="http://tetgen.berlios.de/index.html"><TT>TetGen.</TT></A>
   \n\n
+- We provide a <a href="../../meshes/mesh_from_vmtk/html/index.html">separate 
+  tutorial</a> that shows how to generate \c oomph-lib meshes
+  from medical images, using the 
+  <a href="http://www.vmtk.org/Main/HomePage">Vascular Modeling
+  Toolkit (VMTK).</a>
+  \n\n
 - <A HREF="../../meshes/mesh_from_geompack/html/index.html"><B>
   GeompackQuadMesh<ELEMENT>:</B></A> \n A Mesh based on the output from 
   Barry Joe's mesh generator 
@@ -2419,10 +2495,10 @@ results to be displayed by
 
 <A NAME="parallel"><B>Parallel driver codes</B></A>
 
-Please consult the general 
+Please consult the 
 <A HREF="../../mpi/general_mpi/html/index.html">
-tutorial on <code>oomph-lib</code>'s parallel processing
-capabilities.</a>
+<b>general tutorial on <code>oomph-lib</code>'s parallel processing
+capabilities.</b></a>
 
 <CENTER>
 <TABLE>
@@ -2451,7 +2527,7 @@ by the example code</B>
 <TD>
 <A NAME="distributed">
 <A HREF="../../mpi/adaptive_driven_cavity/html/index.html"><B>
-Adaptive driven cavity problem</B></A></a> \n\n
+Parallel solution of the adaptive driven cavity problem</B></A></a> \n\n
 We demonstrate how to distribute a straightforward single-physics
 problem.
 </TD>
@@ -2471,7 +2547,7 @@ problem.
 <TR>
 <TD>
 <A HREF="../../mpi/two_d_poisson_flux_bc_adapt/html/index.html"><B>
-2D Poisson problem with flux boundary conditions</B></A></a> \n\n
+Parallel solution of the 2D Poisson problem with flux boundary conditions</B></A></a> \n\n
 We demonstrate the modifications required to distribute a problem
 involving \c FaceElements.
 </TD>
@@ -2489,7 +2565,7 @@ involving \c FaceElements.
 <TR>
 <TD>
 <A HREF="../../mpi/boussinesq_convection/html/index.html"><B>
-Boussinesq convection problem</B></A></a> \n\n
+Parallel solution of the Boussinesq convection problem</B></A></a> \n\n
 We demonstrate how to distribute a straightforward multi-physics
 problem where two domains interact.
 </TD>
@@ -2506,7 +2582,7 @@ problem where two domains interact.
 <TR>
 <TD>
 <A HREF="../../mpi/fsi_channel_with_leaflet/html/index.html"><B>
-FSI problem: Channel with an elastic leaflet</B></A></a> \n\n
+Parallel solution of an FSI problem: Channel with an elastic leaflet</B></A></a> \n\n
 We demonstrate how to distribute FSI problems that use algebraic
 update methods. 
 </TD>
@@ -2526,7 +2602,7 @@ update methods.
 <TR>
 <TD>
 <A HREF="../../mpi/turek_flag/html/index.html"><B>
-Turek and Hron's FSI benchmark problem</B></A></a> \n\n
+Parallel solution of Turek and Hron's FSI benchmark problem</B></A></a> \n\n
 We demonstrate how to distribute a problem involving refineable 2D
 solid and fluid meshes that interact along interface boundaries.
 </TD>

@@ -1581,7 +1581,7 @@ class BoundaryNodeBase
  /// the position of the first face element value.
  /// If the Node does not lie on a face element 
  /// this map should never be queried.
- std::map<unsigned, unsigned>* First_face_element_value_pt;
+ std::map<unsigned, unsigned>* Index_of_first_value_assigned_by_face_element_pt;
 
  /// \short Pointer to a map of pointers to 
  /// intrinsic boundary coordinates of the Node,
@@ -1616,20 +1616,45 @@ class BoundaryNodeBase
 
  public:
 
- /// \short Returns pointer to the map giving
- /// the position of the first face element value.
- std::map<unsigned, unsigned>* &first_face_element_value_pt()
+
+ /// \short Return pointer to the map giving
+ /// the index of the first face element value.
+ std::map<unsigned, unsigned>* &index_of_first_value_assigned_by_face_element_pt()
   {
-   return First_face_element_value_pt;
+   return Index_of_first_value_assigned_by_face_element_pt;
+  }
+
+ /// \short Return the index of the first value associated with
+ /// the i-th face element value. If no argument is specified
+ /// we return the index associated with the first (and assumed to be only)
+ /// face element attached to this node. 
+ unsigned index_of_first_value_assigned_by_face_element(const unsigned& face_id=0) const
+  {
+#ifdef PARANOID
+   if (Index_of_first_value_assigned_by_face_element_pt==0)
+    {
+     std::ostringstream error_message;
+     error_message 
+      << "Index_of_first_value_assigned_by_face_element_pt==0;\n"
+      << "Pointer must be set via call to: \n\n"
+      << "  BoundaryNode::index_of_first_value_assigned_by_face_element_pt(), \n\n" 
+      << "typically from FaceElement::add_additional_values(...).";
+      throw OomphLibError(error_message.str(),
+                          "BoundaryNode::index_of_first_value_assigned_by_face_element()",
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+   return (*Index_of_first_value_assigned_by_face_element_pt)[face_id];
   }
  
  /// \short Default constructor, set the pointers to the storage to NULL
- BoundaryNodeBase() :  First_face_element_value_pt(0), Boundary_coordinates_pt(0), 
+  BoundaryNodeBase() :  Index_of_first_value_assigned_by_face_element_pt(0), 
+  Boundary_coordinates_pt(0), 
   Boundaries_pt(0), Copied_node_pt(0) {}
-
+ 
  /// \short Destructor, clean up any allocated storage for the boundaries
  ~BoundaryNodeBase();
-
+ 
  /// Broken copy constructor
  BoundaryNodeBase(const BoundaryNodeBase& boundary_node_base) 
   { BrokenCopy::broken_copy("BoundaryNodeBase");} 

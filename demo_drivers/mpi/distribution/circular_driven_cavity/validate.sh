@@ -24,6 +24,11 @@ cp ../*partition.dat .
 # Validation for circular driven cavity (TH and CR problems)
 #-----------------------------------------------------------
 mkdir RESLT
+
+# Wait for a bit to allow parallel file systems to realise
+# the existence of the new directory
+sleep 5
+
 echo "Running adaptive circular driven cavity (TH, CR problems) validation "
 $MPI_RUN_COMMAND ../circular_driven_cavity > OUTPUT_circular_driven_cavity
 echo "done"
