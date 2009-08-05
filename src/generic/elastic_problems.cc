@@ -549,7 +549,8 @@ void SolidICProblem::set_static_initial_condition(Problem* problem_pt,
    Problem_has_been_distributed=true;
   }
  // This (sub-)problem needs to know about the oomph communicator
- Communicator_pt=problem_pt->communicator_pt();
+ delete Communicator_pt;
+ Communicator_pt=new OomphCommunicator(problem_pt->communicator_pt());
 #endif
 
 
