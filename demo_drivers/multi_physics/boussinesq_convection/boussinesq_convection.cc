@@ -184,7 +184,7 @@ public:
   }
 
  ///\short Overload the index at which the temperature 
- ///variable is stored. We choose to store is after the fluid velocities.
+ ///variable is stored. We choose to store it after the fluid velocities.
  inline unsigned u_index_adv_diff() const {return DIM;}
   
  /// \short Validate against exact solution at given time

@@ -626,8 +626,12 @@ namespace oomph
    ///Loop over subobjects to decide which bin they belong in...
    unsigned n_sub=Sub_geom_object_pt.size();
 
-   oomph_info << "There are " << n_sub << " elements to be put into bins"
-              << std::endl << std::endl;
+   // Some stats
+   if (Multi_domain_functions::Doc_stats)
+    {
+     oomph_info << "There are " << n_sub << " element[s] to be put into bins"
+                << std::endl << std::endl;
+    }
 
    for (unsigned e=0;e<n_sub;e++)
     {

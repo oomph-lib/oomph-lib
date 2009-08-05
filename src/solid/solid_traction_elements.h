@@ -732,13 +732,19 @@ public:
 
  /// \short Constructor takes a "bulk" element and the 
  /// index that identifies which face the FaceElement is supposed
- /// to be attached to.
- ImposeDisplacementByLagrangeMultiplierElement(
+ /// to be attached to. The optional identifier can be used
+ /// to distinguish the additional nodal values created by 
+ /// this element from thos created by other FaceElements.
+  ImposeDisplacementByLagrangeMultiplierElement(
   FiniteElement* const &element_pt, 
-  const int &face_index, const unsigned &id=0) : 
- FaceGeometry<ELEMENT>(), FaceElement(), Boundary_shape_geom_object_pt(0)
+  const int &face_index, 
+  const unsigned &id=0) : 
+ FaceGeometry<ELEMENT>(), FaceElement()
+  , Boundary_shape_geom_object_pt(0)
   {   
-   //  set the Id
+
+   //  Store the ID of the FaceElement -- this is used to distinguish
+   // it from any others
    Id=id;
 
    // By default sparsify, i.e. check if the GeomObject that
@@ -783,14 +789,14 @@ public:
    //Build the face element
    element_pt->build_face_element(face_index,this);
 
-    
-   // dimension of the bulk element
+   // Dimension of the bulk element
    unsigned dim=element_pt->dim();
  
-   // we need dim additional values for each FaceElement node
+   // We need dim additional values for each FaceElement node
+   // to store the dim Lagrange multipliers.
    Vector<unsigned> n_additional_values(nnode(), dim);
    
-   // add storage for lagrange multipliers and set the map containing 
+   // Now add storage for Lagrange multipliers and set the map containing 
    // the position of the first entry of this face element's 
    // additional values.
    add_additional_values(n_additional_values,id);

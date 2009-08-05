@@ -131,7 +131,7 @@ fluid.
  There is a trivial steady-state solution that consists of a
  linearly-varying temperature field balanced by a quadratic pressure
  field:
- \f[ u_{1} = u_{2} = 0, \quad \theta = 0.5 - x, \quad p = P_{0} + 0.5
+ \f[ u_{1} = u_{2} = 0, \quad \theta = 0.5 - x_2, \quad p = P_{0} + 0.5
  \ Ra
  \ x_{2} \left(1 - x_{2}\right). \f]
  
@@ -197,7 +197,7 @@ implementation are discussed in the section \ref element below.)
 \until problem;
 
 We assign the boundary conditions at the time \f$ t=0 \f$ and
-initially performs a single steady solve to obtain the trivial
+initially perform a single steady solve to obtain the trivial
 (and temporally unstable) trivial solution; see the section 
 \ref comments for a more detailed discussion of the 
 \c Problem::steady_newton_solve() function.
@@ -349,7 +349,7 @@ by Newton's method via the two member functions
   the elemental Jacobian matrix, i.e. the derivatives of the elemental 
   residual vector with respect to its unknown nodal values (the
   temperatures). \n\n
-- Similarly, the  the \c QCrouzeixRaviartElement's member function
+- Similarly, the \c QCrouzeixRaviartElement's member function
   \c fill_in_contribution_to_residuals(...) computes the element's
   contribution to the global residual vector for a given 
   body force.  The body force is specified by its virtual member function 
@@ -371,7 +371,7 @@ equations into account: In the coupled problem
 the "wind" in the advection-diffusion equations is given by
 the Navier-Stokes velocities, while the body force
 in the Navier-Stokes equations is a function of the
-temperature. When implementing this interactions we 
+temperature. When implementing these interactions we 
 wish to recycle as much of the elements' existing functionality as 
 possible. This may be achieved by the following straightforward steps:
 -# Construct the combined multi-physics element by multiple inheritance. \n\n
@@ -408,7 +408,7 @@ That's all! Here is the implementation:
 \until virtual QCrouzeixRaviart
 
 The class contains a single new physical parameter, the Rayleigh number, as
-ususal referenced  by a pointer to a double precision datum,
+usual referenced  by a pointer to a double precision datum,
 \dontinclude boussinesq_convection.cc
 
 \skipline Rayleigh
