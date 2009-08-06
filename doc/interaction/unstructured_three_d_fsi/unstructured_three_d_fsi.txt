@@ -397,38 +397,6 @@ tetgen facets which were numbered 3 to 14 in the <code>*.poly</code>
 that describes the fluid mesh. 
 
 \until }
-
-Next, we apply the boundary conditons for the fluid mesh:
-We impose parallel in- and outflow at the in- and outflow
-boundaries and apply boundary conditions
-for the pseudo-elastic deformation of the fluid mesh. Since
-the in- and outflow cross-sections of the elastic tube are
-held in place, we pin the position of the fluid nodes
-in these cross-sections too. To facilitate debugging we 
-document the position of the fluid nodes whose 
-(pseudo-solid) displacements we suppressed.
-
-\until pseudo_solid_bc_file.close();
-
-Finally, we apply the no-slip condition on the fluid nodes
-that are located on the FSI boundary.
-
-\until done no slip on fsi boundary
-
-
-We complete the build of the fluid elements by specifying
-the Reynolds number and the constitutive equation for the 
-pseudo-solid equations; recall that we use the same constitutive 
-equation as used for the tube wall.
-
-\until }
-
-We create the fluid traction elements that impose
-the applied pressures in the in- and outflow cross-sections.
-
-\until create_fluid_traction_elements();
-
-
   
 
 Next, we create the solid mesh, using the files created
@@ -450,19 +418,11 @@ for further details of how the fluid and solid meshes are matched).
 
 \until }
 
+We create the fluid traction elements that impose
+the applied pressures in the in- and outflow cross-sections.
 
-We pin the positions of the nodes that are located at the
-ends of the elastic tube, and, just to be on the safe side,
-document their positions to allow for debugging and sanity-checking.
+\until create_fluid_traction_elements();
 
-\until bc_file.close();
-
-
-We complete the build of the solid elements by passing the pointer
-to the constitutive equation.
-
-
-\until }
 
 Next, we create the \c FaceElements that apply the fluid traction
 to the solid,
@@ -477,6 +437,61 @@ the fluid mesh to keep it aligned with the FSI boundary.
 We combine the various sub-meshes to a global mesh.
 
 \until build_global_mesh();
+
+
+Next, we apply the boundary conditions for the fluid mesh:
+We impose parallel in- and outflow at the in- and outflow
+boundaries and apply boundary conditions
+for the pseudo-elastic deformation of the fluid mesh. Since
+the in- and outflow cross-sections of the elastic tube are
+held in place, we pin the position of the fluid nodes
+in these cross-sections too. To facilitate debugging we 
+document the position of the fluid nodes whose 
+(pseudo-solid) displacements we suppressed.
+
+\until pseudo_solid_bc_file.close();
+
+We apply the no-slip condition on the fluid nodes
+that are located on the FSI boundary. In addition, we 
+apply boundary conditions for the Lagrange multipliers.
+We pin the Lagrange multipliers for nodes that are located on 
+the in- and outflow boundaries where the nodal positions are 
+pinned.  <a href="../../../solid/prescribed_displ_lagr_mult/html/index.html">
+Recall</a> that the Lagrange multipliers are additional degrees of
+freedom that are added to the "bulk" degrees of freedom that were
+originally created by the "bulk" element. 
+The storage for the 
+Lagrange multipliers is added to the Nodes by the FaceElements and
+the values at which the Lagrange multipliers are stored are found
+using the function \c index_of_first_value_assigned_by_face_element().
+The documentation of the position of
+the pinned Lagrange multiplier nodes in 
+\c RESLT/pinned_lagrange_multiplier_nodes.dat is here to
+facilitate the debugging of the code and is highly recommended.
+
+\until done no slip on fsi boundary
+
+We complete the build of the fluid elements by specifying
+the Reynolds number and the constitutive equation for the 
+pseudo-solid equations; recall that we use the same constitutive 
+equation as used for the tube wall.
+
+\until }
+
+
+We apply the "solid" boundary conditions by 
+pinning the positions of the nodes that are located at the
+ends of the elastic tube, and, just to be on the safe side,
+document their positions to allow for debugging and sanity-checking.
+
+\until bc_file.close();
+
+
+We complete the build of the solid elements by passing the pointer
+to the constitutive equation.
+
+
+\until }
 
 Finally, we set up the fluid-structure interaction by determining
 which "bulk" fluid elements are located next to the FSI traction elements
@@ -555,24 +570,10 @@ adjacent to the FSI interface and add them to their own mesh:
 
 \until add_element_pt
 
-Next we pass a pointer to the compound \c GeomObject that defines
+Finally, we pass a pointer to the compound \c GeomObject that defines
 the shape of the FSI interface and specify which boundary in the
 "bulk" fluid mesh the \c ImposeDisplacementByLagrangeMultiplierElement
 is attached to.
-
-\until set_boundary_shape
-
-Finally, we apply boundary conditions for the Lagrange multipliers.
-We pin the Lagrange multipliers for nodes that are located on 
-the in- and outflow boundaries where the nodal positions are 
-pinned.  (<a href="../../../solid/prescribed_displ_lagr_mult/html/index.html">
-Recall</a> that the Lagrange multipliers are additional degrees of
-freedom that are added to the "bulk" degrees of freedom that were
-originally created by the "bulk" element.) 
-The documentation of the position of
-the pinned Lagrange multiplier nodes in 
-\c RESLT/pinned_lagrange_multiplier_nodes.dat is here to
-facilitate the debugging of the code and is highly recommended.
 
 \until end of create_lagrange_multiplier_elements
 

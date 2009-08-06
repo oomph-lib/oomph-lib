@@ -38,6 +38,7 @@
 
 //Oomph-lib include
 #include "Vector.h"
+#include "oomph_utilities.h"
 
 #include <cmath>
 
@@ -47,7 +48,7 @@ namespace oomph
 //Let's put these things in a namespace
 namespace Orthpoly
 {
- const double pi = 4.0L*std::atan(1.0L);
+ const double pi = MathematicalConstants::Pi;
  const double eps = 1.0e-15;
  
  ///\short Calculates Legendre polynomial of degree p at x
