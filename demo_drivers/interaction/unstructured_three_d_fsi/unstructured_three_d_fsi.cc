@@ -541,7 +541,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
      nod_pt->pin(1); 
      nod_pt->pin(2); 
      
-     // find whether node is on in/outflow
+     // Find out whether node is also on in/outflow
      bool is_in_or_outflow_node=false;
      unsigned n=nfluid_inflow_traction_boundary();
      for (unsigned k=0;k<n;k++)
@@ -565,27 +565,28 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
         }
       }
 
-     // Pin the lagrange multiplier components
-     // on the out/in-flow boundaries
+     // Pin the Lagrange multipliers on the out/in-flow boundaries
      if (is_in_or_outflow_node)
       {
        //Cast to a boundary node
        BoundaryNode<SolidNode> *bnod_pt = 
         dynamic_cast<BoundaryNode<SolidNode>*>
         ( Fluid_mesh_pt->boundary_node_pt(b,inod) );
-       
-       // Pin lagrange displacement elements
-       pinned_file << nod_pt->x(0) << " "
-                   << nod_pt->x(1) << " "
-                   << nod_pt->x(2) << endl;
-       
-       // loop over the lagrange displacement components
+              
+       // Loop over the Lagrange multipliers
        for (unsigned l=0;l<3;l++)
         {
-         // Pin the lagrange displacement components      
+         // Pin the Lagrange multipliers that impose the displacement
+         // because the positon of the fluid nodes at the in/outflow
+         // is already determined. 
          nod_pt->pin
           (bnod_pt->index_of_first_value_assigned_by_face_element()+l);
         }
+
+       // Doc that we've pinned the Lagrange multipliers at this node
+       pinned_file << nod_pt->x(0) << " "
+                   << nod_pt->x(1) << " "
+                   << nod_pt->x(2) << endl;
       }
     }
    

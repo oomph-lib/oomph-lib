@@ -195,11 +195,15 @@ namespace oomph
          // get the node
          Node* nod_pt = node_pt(j);
 
+         // Get the index of the first nodal value associated with
+         // this FaceElement
+         unsigned first_index=
+          bnod_pt->index_of_first_value_assigned_by_face_element(Id);
+        
          //Assemble the Lagrange multiplier
          for(unsigned l=0;l<dim_el;l++)
           {
-           lambda[l]+=nod_pt->value
-            (bnod_pt->index_of_first_value_assigned_by_face_element(Id) + l) * psi(j);
+           lambda[l]+=nod_pt->value(first_index+l) * psi(j);
           }
         }
 
@@ -218,13 +222,17 @@ namespace oomph
          BoundaryNodeBase *bnod_pt = 
           dynamic_cast<BoundaryNodeBase*>(node_pt(j));
 
+         // Get the index of the first nodal value associated with
+         // this FaceElement
+         unsigned first_index=
+          bnod_pt->index_of_first_value_assigned_by_face_element(Id);
+        
          //loop over the lagrange multiplier components
          for(unsigned l=0;l<dim_el;l++) 
           { 
            // Local eqn number for the l-th component of lamdba 
            //in the j-th element
-           local_eqn=nodal_local_eqn
-            (j,bnod_pt->index_of_first_value_assigned_by_face_element(Id)+l); 
+           local_eqn=nodal_local_eqn(j,first_index+l); 
 
            if (local_eqn>=0) 
             {   
@@ -285,7 +293,8 @@ namespace oomph
                    // Local eqn number for the l-th component of lamdba
                    // in the jj-th element
                    local_unknown=nodal_local_eqn
-                    (jj,bnode_pt->index_of_first_value_assigned_by_face_element(Id)+l);
+                    (jj,bnode_pt->
+                     index_of_first_value_assigned_by_face_element(Id)+l);
                    if (local_unknown>=0)
                     {
                      jacobian(local_eqn,local_unknown)+=

@@ -94,31 +94,32 @@ clearly how this increases its flow-induced deformation.
 
 \section overview_implementation Overview of the implementation
 
-The use of an unstructured mesh 
-means that the design of an algebraic node update strategy, as
-described for 
+The use of unstructured meshes
+means that the design of an algebraic node update strategy for the 
+deforming fluid mesh, as described for 
 <a href="../../fsi_collapsible_channel_algebraic/html/index.html">
 fluid-structure interaction with structured meshes, </a> is (almost)
-impossible and somewhat defeats the point of using automatic mesh
-generation tools. The most efficient, but still general purpose, strategy is
-to update the nodal positions within the fluid mesh by treating the fluid
-domain as a pseudo-elastic solid. Having chosen our node-update
-strategy, the majority of the steps described below are the same as for
-fluid-structure-interaction problems on structured meshes. 
+impossible and would, in any case, defeat the point of using automatic mesh
+generation tools. A slightly less efficient, but easily and generally 
+applicable strategy is to update the nodal positions within the fluid mesh
+by treating the fluid domain as a pseudo-elastic solid. Apart from this
+change in the node-update strategy, the majority of the steps described 
+below are the same as for fluid-structure-interaction problems on 
+structured meshes. 
 
- One important assumption underlying the use of the automatic \c
- FSI_functions is that each boundary between fluid and solid
- meshes must be parametrised by boundary coordinates. Moreover, the
- boundary-coordinate representations <b> must </b> be the same in both
- the fluid and solid meshes. This use of a continuous-coordinate 
- representation of the boundaries means that the fluid and solid
- meshes do not need to match at the boundaries, see the section \ref
- non_matching. Once the appropriate boundaries have been specified,
- the boundary coordinates can be generated automatically see \ref
- boundary_coord. Unfortunately, different third-party mesh generators
- use different strategies to label mesh boundaries and a certain amount of
- "manual" boundary identification is often required after the mesh
- has been imported into \c oomph-lib. 
+ One important prerequisite for the use of the FSI helper functions
+in \c oomph-lib's \c FSI_functions namespace is that each boundary 
+at the FSI interface between the fluid and solid meshes must be 
+parametrised by boundary coordinates. Moreover, the
+boundary-coordinate representations in the fluid and
+solid meshes <b> must </b> be consistent. Once the appropriate 
+boundaries have been identified, \c oomph-lib's unstructured
+meshes allow the automatic (and consistent) generation of these 
+boundary coordinates; see \ref boundary_coord. Unfortunately,
+different third-party mesh generators use different strategies to 
+label mesh boundaries and a certain amount of "manual labour" tends
+be required to identify boundaries after the mesh has been imported 
+into \c oomph-lib. 
 
 Since the driver code, discussed in detail below, is somewhat lengthy
 (partly because of the large number of self-tests and diagnostics
@@ -484,7 +485,7 @@ relevant 2D "bulk" solid elements and attach the
 \skipline start_of_create_traction_elements
 \until new FSISolidTractionElement<SOLID_ELEMENT,2>(bulk_elem_pt,face_index);
 
-Next we add he newly-created \c FaceElement to the mesh of traction
+Next we add the newly-created \c FaceElement to the mesh of traction
 elements, specify which boundary of the bulk mesh it is attached to,
 and pass the FSI interaction parameter \f$ Q \f$ to the element. 
 
@@ -564,13 +565,15 @@ The function also writes the file
 check the integrity of the compound \c GeomObject  
 that represents the FSI interface of the solid: As \f$ \zeta \f$
 sweeps along the  range used to parametrise the
-boundary (\f$ \zeta_{min} \f$  and \f$ \zeta_{max} \f$ were
-determined above), the position vector \f$ {\bf R}(\zeta) \f$, returned
+boundary, the position vector \f$ {\bf R}(\zeta) \f$, returned
 by \c GeomObject::position(...) should follow the
 FSI interface.
 
 The implementation of the function is reasonably straightforward 
-so we omit its listing here, see the source code for details.
+so we omit its listing here, see the 
+<A HREF="../../../../demo_drivers/interaction/unstructured_fsi/unstructured_two_d_fsi.cc">source
+code</a> 
+for details.
 
 <HR>
 <HR>

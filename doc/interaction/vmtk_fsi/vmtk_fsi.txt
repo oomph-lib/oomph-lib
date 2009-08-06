@@ -1,6 +1,6 @@
 \mainpage Demo problem: Steady finite-Reynolds-number flow through an elastic iliac bifurcation   
 This tutorial demonstrates how to simulate physiological
-fluid-structure interaction problems, based on the medical imaging
+fluid-structure interaction problems, based on medical imaging
 data, processed with the <a href="http://www.vmtk.org/Main/HomePage">Vascular 
 Modeling Toolkit.</a> 
 
@@ -24,7 +24,7 @@ employ two different types of \c FaceElements, both of which
 introduce additional unknowns. When dealing with nodes that
 are attached to both types of \c FaceElements we must therefore be able 
 to determine which nodal values are associated with which \c FaceElement.
-Section \ref face below shows how this is done.
+The section \ref face below shows how this is done.
 
 
 <CENTER>
@@ -93,7 +93,7 @@ a problem. Feel free to skip the next section if you're not keen on theory.
 \section face How FaceElements introduce additional unknowns into a problem
 
 \c FaceElements are used widely throughout \c oomph-lib to apply 
-Neumann/flux-type boundary conditions on the faces of
+Neumann/flux/traction-type boundary conditions on the faces of
 higher-dimensional "bulk" elements. Examples include:
 - <a href="../../../poisson/two_d_poisson_flux_bc2/html/index.html">
   the application of a flux bounday condition in a Poisson problem;</a> 
@@ -120,12 +120,12 @@ that discusses
    mechanics problems</a>
 .
 In such problems, the Lagrange multipliers must be determined
-as part of the solution, and storage for associated discrete
+as part of the solution, and storage for the associated discrete
 unknowns is created at the nodes of the \c FaceElements.
 
  To explain the relevant details of the implementation we consider a 
 simple 2D Navier-Stokes problem discretised using nine-node Taylor-Hood
-elements (each vertex node stores two discrete velocities and
+elements (in these elements each vertex node stores two discrete velocities and
 one pressure; the other nodes store only two velocity degrees of
 freedom). We assume that boundaries 0 and 1 are subject to 
 boundary conditions imposed via \c FaceElements, and that
@@ -165,9 +165,9 @@ can be used to determine the number of nodal values at the \c
 FaceElement's \c j -th node created by the underlying 
 "bulk" element \e before the \c FaceElement was attached. 
 It is then easy to identify the additional nodal values associated 
-with the \c FaceElement in order to apply the boundary conditions.
-The methodology is illustrated in the application of boundary 
-conditions for the Lagrange multipliers in the 
+with the \c FaceElement in order to apply the boundary conditions
+for the Lagrange multipliers, say.
+The methodology is illustrated in the 
 <a href="../../../solid/prescribed_displ_lagr_mult/html/index.html#bcs_for_lagrange_multipliers">
 the solid mechanics problem referred to earlier.</a>
  
@@ -182,7 +182,7 @@ The next figure shows the degrees of freedom after the \c
 FaceElements on boundary 1 (shown in green) have also been attached.
 These \c FaceElements must create storage for their own
 two Lagrange multipliers, \f$ \lambda_x \f$ and 
-\f$ \lambda_y \f$. Thus, the corner node (attached
+\f$ \lambda_y \f$. Thus, the corner node (which is attached
 to both types of \c FaceElements) has four additional degrees of
 freedom after all the \c FaceElements have been created.
 
@@ -193,7 +193,7 @@ freedom after all the \c FaceElements have been created.
  
 The identification of the additional degrees of freedom via a simple
 offset from the degrees of freedom created by the "bulk" element
-is now longer possible. We therefore provide an alternative
+is now no longer possible. We therefore provide an alternative
 mechanism to access the relevant information from the nodes
 themselves via the function
 \code
@@ -210,9 +210,9 @@ attached to the same node, the above function can take an ID
 \code
 unsigned BoundaryNodeBase::index_of_first_value_assigned_by_face_element(const unsigned& id=0)
 \endcode
-The ID must be passed to the constructor of the specific 
-\c FaceElement. It can then be passed on to the \c Nodes
-when the number of values at the nodes is 
+The ID must be established by the user, typically when the 
+constructor of the specific \c FaceElement is called. It can then 
+be passed on to the \c Nodes when the number of values at the nodes is 
 adjusted to accomodate the additional values required by the
 \c FaceElement. 
 
@@ -264,89 +264,178 @@ of \c FaceElement, as in
 the solid mechanics problem referred to earlier.</a>
 If a problem does involve multiple \c FaceElements, the 
 user will be aware of this when writing the driver code and
-can then provide distinct IDs as and when required, see the 
-section \ref constructor below.
+can then provide distinct IDs as and when required; see the 
+section \ref face_elements_code below.
 
 
 
 <HR>
 <HR>
 
-\section driver_code The driver code
+\section driver_code The driver code for the FSI problem
 
- The driver code is almost identical to that in the tutorial describing 
+ The driver code for the flow through the elastic iliac is almost 
+identical to that in the 
 <a href="../../unstructured_three_d_fsi/html/index.html">
-three-dimensional fluid-structure-interaction on an unstructured
-mesh.</a>  In fact, the only differences relate to the facts that:
-- although topologically identical, the boundary numbering assigned by
-\c Tetgen is not the same for the two bifurcation geometries;
-- we are imposing a parallel-outflow condition rather than prescribing 
-  a traction at the two outflow boundaries.
+tutorial considering the same problem in a more simplistic
+geometry.</a> Comparing the two driver codes with
+
+\code
+sdiff demo_drivers/interaction/vmtk_fsi/vmtk_fsi.cc \
+      demo_drivers/interaction/unstructured_three_d_fsi/unstructured_three_d_fsi.cc
+\endcode 
+
+shows that the only differences relate to the facts that:
+- although the meshes for the two problems are topologically 
+  equivalent, the boundary numbers assigned by
+  \c Tetgen are different.
+  \n\n
+- we impose parallel flow in the vessel's in- and outflow
+  cross-sections which are not aligned with any of the Cartesian
+  coordinate planes. The parallel flow and the imposed pressure
+  drop are therefore enforced by attaching 
+  \c ImposeParallelOutflowElements, rather than
+  \c NavierStokesTractionElements to the in- and outflow boundaries.
+  We refer to the corresponding 
+  <a href="../../../navier_stokes/vmtk_fluid/html/index.html#parallel_flow">
+  single-physics fluids problem</a> for more details on this aspect.
+  \n\n
+- The problem involves two different types of \c FaceElements: 
+  \n\n
+  - \c ImposeParallelOutflowElements are used
+    to impose parallel flow at the in- and outflow cross-sections.
+    \n\n
+  - \c ImposeDisplacementByLagrangeMultiplerElements are used to
+    deform the boundary of the pseudo-solid fluid mesh 
+    to reflect the changes in the geometry of the 
+    vessel wall.
+    \n\n
+  .
+  Since both \c FaceElements introduce additional unknowns 
+  into the problem, we have to use the methodology described
+  <a href="#face">above</a> to distinguish between the two
+  types of Lagrange multipliers.
 .
 
-The \c SolidTetMesh and \c FluidTetMesh classes and 
-\c main() function are completely unchanged from the
-<a href="../../unstructured_three_d_fsi/html/index.html">
-previous tutorial.</a> 
+
+Once again, we shall discuss only those aspects of the code
+that are changed from the driver code
+discussed in the <a href="../../unstructured_three_d_fsi/html/index.html">
+previous tutorial.</a>
+
+<hr>
+
+\subsection namespace The namespace for global parameters
+
 As usual, global parameters are specified in a namespace, which now
-includes an \c enum to label the ID's of the two different
-\c FaceElements that share a common (line) boundary.
+includes an \c enum that specifies the IDs for the two different
+\c FaceElements.
+
 \dontinclude vmtk_fsi.cc
-\skipline Global_Parameters
+\skipline start_of_namespace
 \until end_of_namespace
 
-\section class The Problem class
+<hr>
 
-Once again, we shall
-discuss only the differences from the Problem class in the 
-<a href="../../unstructured_three_d_fsi/html/index.html">
-previous tutorial.</a> 
-
-\section constructor The Problem constructor
+\subsection constructor The Problem constructor
 
 The general structure of the problem constructor remains
-unchanged. There are trivial changes in the import of fluid and solid
-meshes to reflect the fact that the boundary numbering is different
-between the two bifurcation geometries. The only significant changes
-are in the imposition of boundary conditions on the fluid mesh in
-which the transverse velocities are <b> not </b> pinned on the
-outflow. In addition, the second set of Lagrange multipliers 
-associated with the
-parallel-outflow condition should be pinned on the boundary between the
-outlets and the arterial wall. As described above,
-we use the IDs assigned to the \c
-FaceElements on their construction, see \ref face_elements_code,  
-to determine the value indices of
-the Lagrange multipliers corresponding to each different \c FaceElement.
-\dontinclude vmtk_fsi.cc
-\skipline Doc bcs for Lagrange
-\until pinned_file.close()
+unchanged. There are a few trivial changes in the import of fluid and solid
+meshes to reflect the fact that the tetgen boundary numbers are different.
 
+When imposing the boundary conditions for the fluid mesh 
+we do <b> not </b> pin the transverse velocities at the in- and flow because
+the parallel flow is now imposed by Lagrange multiplier elements.
+Hence the only boundary conditions to be applied at the in- and
+outflow cross-sections is the pinning of the nodal positions.
+
+The only significant change arises in the application of the boundary
+conditions for the Lagrange multipliers. Recall that
+\c ImposeDisplacementByLagrangeMultiplierElements are used
+to deform the FSI boundary of the fluid mesh so that it
+stays in contact with the vessel wall. This constraint 
+must be applied along the entire FSI boundary, apart from 
+the lines along which it meets the in- and outflow boundaries
+where the position of the fluid nodes is already pinned. 
+Consequently, we pin the Lagrange multipliers along this part of
+the mesh. 
+
+   Similarly, the \c ImposeParallelOutflowElements ensure that the
+velocity in the in- and outflow cross-sections is orthogonal to 
+these cross-sections. This constraint  must be applied along the 
+entirety of the in- and outflow boundaries, apart from the 
+lines along which they meet the FSI interface where the fluid 
+velocity is already determined by the no-slip condition. 
+Consequently, we also pin the second set of Lagrange multipliers 
+along this part of the fluid mesh boundary. 
+
+ This achieved by the following loop over all the fluid nodes
+on the FSI boundary:
+\skipline // Loop over nodes on the FSI boundary in the fluid mes
+\until boundary_node_pt(b,inod);
+
+For each node we apply the no-slip condition on the wall by 
+pinning all three velocity components,
+
+\until pin(2);
+
+and determine if the node also happens to be located on the
+in- or outflow cross-sections:
+
+\until now we know if the node is 
+
+If it is, we pin the Lagrange multipliers associated
+with the \c ImposeParallelFlowElements, using
+the \c BoundaryNodeBase::index_of_first_value_assigned_by_face_element(...)
+function referred to <a href="#face">above</a>, and specifying 
+the appropriate ID.
  
+\until }
 
-\section face_elements_code Creating the FaceElements
+We repeat the same procedure for the Lagrange multipliers associated
+with the \c ImposeDisplacementByLagrangeMultiplierElements:
 
-The use of two different types of \c FaceElement each of which assigns
-additional storage means that we must use IDs to distinguish the
-two. The IDs are given names in a \c Global_Parameters::enum and must
-be passed to the \c FaceElements when the are constructed. 
+\until }
 
-The \c create_lagrange_multiplier_elements() function 
-is slightly modified so that the
-appropriate ID is passed to the 
-\c ImposeDisplacementByLagrangeMultiplierElement on construction.
-\dontinclude vmtk_fsi.cc
-\skipline ImposeDisplacement
-\until )
-In addition, the \c create_parallel_outflow_lagrange_element()
-function replaces the equivalent function
-\c create_fluid_traction_elements() and creates the 
-\c ImposeParallelOutflowElements passing the appropriate ID to the
-constructor and passing the desired pressures to the newly created 
-elements.
-\dontinclude vmtk_fsi.cc
-\skipline corresponding lagrange element
-\until end of element setup
+As usual we document the position of the nodes at which we pinned
+the Lagrange multipliers in a file to allow for an external sanity check.
+
+\until end of BC for fluid mesh
+
+The rest of the problem constructor is unchanged.
+
+<hr> 
+
+\subsection face_elements_code Creating the Lagrange multiplier elements
+The creation of the \c ImposeDisplacementByLagrangeMultiplierElements
+is virtually identical to that in the 
+<a href="../../unstructured_three_d_fsi/html/index.html">
+previous tutorial.</a>
+
+\skipline start_of_create_lagrange_multiplier_elements
+\until face_index_at_boundary(b,e);
+
+The only difference is that we pass the ID that identifies
+the type of the \c FaceElement to the constructor of the 
+\c ImposeDisplacementByLagrangeMultiplierElements:
+
+\until multiplier_id);
+
+The rest of the function is unchanged:
+
+\until end of create
+
+An equivalent procedure is adopted in the function 
+\c create_parallel_flow_lagrange_elements() which follows exactly 
+the same steps as in the corresponding 
+<a href="../../../navier_stokes/vmtk_fluid/html/index.html#parallel_flow">
+single-physics fluids problem</a>, apart from the fact that
+we pass the other enumerated ID to the constructor 
+of the \c ImposeParallelFlowElements. We therefore omit the listing
+of the function and refer to 
+<A HREF="../../../../demo_drivers/interaction/vmtk_fsi/vmtk_fsi.cc">
+the source code.</A>
+
 
 
 <HR>

@@ -6,7 +6,7 @@ cardiovascular fluid mechanics problems with \c oomph-lib. We showed in
 how to use <a href="http://www.vmtk.org/Main/HomePage">VMTK</a>
 together with \c oomph-lib's conversion code \n\n
 <CENTER>
-<a href="../../../../demo_drivers/meshing/mesh_from_vmtk/create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh.cc">create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh.cc</a>
+<a href="../../../../demo_drivers/meshing/mesh_from_vmtk/create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh.cc">demo_drivers/meshing/mesh_from_vmtk/create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh.cc</a>
 </CENTER>
 \n\n
 to generate unstructured fluid and solid meshes for the simulation 
@@ -279,20 +279,14 @@ The simulation presented above is obviously very crude and serves
 primarily as a proof of concept. However, it is straightforward
 to address most of the shortcomings and we encourage you to explore
 the following improvements:
-- Generate a finer fluid mesh, by processing ***hierher***
-  \n\n
-  <CENTER>
-  <a href="../../../../demo_drivers/meshing/mesh_from_vmtk/iliac_fine.xda">demo_drivers/meshing/mesh_from_vmtk/iliac_fine.xda</a>
-  </CENTER>
-  \n
-  with our conversion code 
-  \n\n
-  <CENTER>
-  <a href="../../../../demo_drivers/meshing/mesh_from_vmtk/create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh.cc">create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh.cc</a>
-  </CENTER>
-  \n\n
-  Remember that you will have to update the enumeration of the
-  domain boundaries in the driver code.
+- Generate a finer fluid mesh using the instructions 
+  in \c oomph-lib's 
+  <a href="../../../meshes/mesh_from_vmtk/html/index.html">VMTK
+  tutorial </a> We are hoping to make the image files
+  used in this tutorial available soon. Please 
+  <a href="../../../contact/html/index.html">contact us</a>
+  if you can't wait. Remember that you will have to update the 
+  enumeration of the domain boundaries if you change the mesh.
   \n\n
 - Attach "flow extensions" to the in- and outflow
   cross-sections, using the technique described in \c oomph-lib's

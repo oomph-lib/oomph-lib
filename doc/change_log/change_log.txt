@@ -289,11 +289,23 @@ problems after upgrading to a new version.
   \endcode
   \n\n
 - \c GeomObject::drdt(...) is now \c GeomObject::dposition_dt(...)
-  to make it consistent with all other functions of that type. hierher
-  yet to inroduct the underscore...
+  to make it consistent with all other functions of that type. 
   \n\n
 - \c FSI_functions::setup_fluid_load_info_for_solid_elements(...) now
   requires a pointer to the \c Problem to be specified as the first argument. 
+  \n\n
+- Specification of wall and fluid meshes in \c FSIPreconditioner
+  changed from read/write access functions 
+  \c FSIPreconditioner::navier_stokes_mesh_pt() and 
+  \c FSIPreconditioner::wall_mesh_pt() to
+  \c FSIPreconditioner::set_navier_stokes_mesh(...) and 
+  \c FSIPreconditioner::set_wall_mesh(...), respectively.
+  \n\n
+- Specification of fluid mesh in \c NavierStokesLSCPreconditioner
+  changed from read/write access function 
+  \c FSIPreconditioner::navier_stokes_mesh_pt()
+  to 
+  \c FSIPreconditioner::set_navier_stokes_mesh(...).
   \n\n
 - Removed all explicit references to \c MPI_COMM_WORLD and the parameters
   \c MPI_Helpers::Nproc \c MPI_Helpers::My_rank. The total number of

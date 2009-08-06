@@ -1043,8 +1043,13 @@ public:
         dynamic_cast<BoundaryNodeBase*>(node_pt(j));
 
        // get the node pt
-         Node* nod_pt = node_pt(j);
+       Node* nod_pt = node_pt(j);
 
+       // Get the index of the first nodal value associated with
+       // this FaceElement
+       unsigned first_index=
+        bnod_pt->index_of_first_value_assigned_by_face_element(Id);
+       
        // higher dimensional quantities
        for(unsigned i=0;i<dim_el+1;i++)
         {
@@ -1052,7 +1057,7 @@ public:
                                              // this out properly
                                              // for generalised dofs
          lambda[i]+=nod_pt->value
-          (bnod_pt->index_of_first_value_assigned_by_face_element(Id) +i)*psi(j,0);
+          (first_index+i)*psi(j,0);
         }
        //In-element quantities
        for(unsigned i=0;i<dim_el;i++)
@@ -1147,13 +1152,17 @@ protected:
        // Cast to a boundary node
        BoundaryNodeBase *bnod_pt = 
         dynamic_cast<BoundaryNodeBase*>(node_pt(j));
-
+       
+       // Get the index of the first nodal value associated with
+       // this FaceElement
+       unsigned first_index=
+        bnod_pt->index_of_first_value_assigned_by_face_element(Id);
+       
        //Assemble higher-dimensional quantities
        for(unsigned i=0;i<dim_el+1;i++)
         {
          x[i]+=nodal_position(j,i)*psi(j);
-         lambda[i]+=nod_pt->value
-          (bnod_pt->index_of_first_value_assigned_by_face_element(Id) +i)*psi(j);
+         lambda[i]+=nod_pt->value(first_index+i)*psi(j);
          for(unsigned ii=0;ii<dim_el;ii++)
           {
            interpolated_a(ii,i) += 
@@ -1290,7 +1299,8 @@ protected:
                 dynamic_cast<BoundaryNodeBase*>(node_pt(jj));
 
                int local_unknown=nodal_local_eqn
-                (jj,bnode_pt->index_of_first_value_assigned_by_face_element(Id)+i);
+                (jj,
+                 bnode_pt->index_of_first_value_assigned_by_face_element(Id)+i);
                if (local_unknown>=0)
                 {
                  jacobian(local_eqn,local_unknown)+=psi(jj)*psi(j)*W;

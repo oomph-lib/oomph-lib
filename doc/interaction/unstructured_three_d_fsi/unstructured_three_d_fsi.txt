@@ -463,13 +463,15 @@ originally created by the "bulk" element.
 The storage for the 
 Lagrange multipliers is added to the Nodes by the FaceElements and
 the values at which the Lagrange multipliers are stored are found
-using the function \c index_of_first_value_assigned_by_face_element().
+using the function 
+\c BoundaryNodeBase::index_of_first_value_assigned_by_face_element().
 The documentation of the position of
 the pinned Lagrange multiplier nodes in 
 \c RESLT/pinned_lagrange_multiplier_nodes.dat is here to
 facilitate the debugging of the code and is highly recommended.
 
-\until done no slip on fsi boundary
+
+\until pinned_file.close();
 
 We complete the build of the fluid elements by specifying
 the Reynolds number and the constitutive equation for the 
@@ -534,7 +536,7 @@ relevant 3D "bulk" solid elements and attach the
 \skipline start_of_create_fsi_traction_elements
 \until new FSISolidTractionElement<SOLID_ELEMENT,3>(bulk_elem_pt,face_index);
 
-Next we add he newly-created \c FaceElement to the mesh of traction
+Next we add the newly-created \c FaceElement to the mesh of traction
 elements, specify which boundary of the bulk mesh it is attached to,
 and pass the FSI interaction parameter \f$ Q \f$ to the element. 
 
@@ -582,7 +584,7 @@ is attached to.
 
 \section fluid_traction Attaching the fluid traction elements
 The helper function \c create_fluid_traction_elements() 
-attaches \c  NavierStokesTractionElement to the in- and outflow
+attaches \c  NavierStokesTractionElements to the in- and outflow
 cross-sections of the fluid mesh and thus imposes the
 prescribed pressure drop onto the fluid.
 
@@ -616,7 +618,7 @@ when setting up the fluid-structure interaction with
 \c FSI_functions::setup_fluid_load_info_for_solid_elements(...).
 The two parametrisations should be consistent; see
 \ref go_wrong for more details. The implementation is straightforward
-and is supressed for brevity, see the 
+and is supressed for brevity; see the 
 <a href=
 "../../../../demo_drivers/interaction/unstructured_three_d_fsi/unstructured_three_d_fsi.cc">
 source code </a> if you want to know
@@ -635,7 +637,7 @@ They key feature that allows the "automatic" coupling of the
 unstructured fluid and solid meshes is the (consistent!) generation 
 of the boundary coordinates  \f$ (\zeta_1,\zeta_2) \f$ along 
 the FSI interface. For reasons already mentioned, the procedure is more
-involved that in the equivalent two-dimensional problem.
+involved than in the equivalent two-dimensional problem.
 The implementation of this functionality in 
 \c TetgenMesh::setup_boundary_coordinates(...) exploits the 
 fact that

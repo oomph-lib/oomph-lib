@@ -206,8 +206,8 @@ public:
  /// Doc the solution
  void doc_solution(DocInfo& doc_info);
 
- /// Create fluid lagrange elements 
- void create_parall_outflow_lagrange_elements();
+ /// Create Lagrange multiplier elements that impose parallel flow
+ void create_parallel_flow_lagrange_elements();
 
  /// Create FSI traction elements
  void create_fsi_traction_elements();
@@ -263,8 +263,8 @@ private:
  /// Bulk fluid mesh
  FluidTetMesh<FLUID_ELEMENT>* Fluid_mesh_pt;
 
- /// Meshes of fluid traction elements that apply pressure at in/outflow
- Vector<Mesh*> Fluid_lagrange_mesh_pt;
+ /// Meshes of Lagrange multiplier elements that impose parallel flow
+ Vector<Mesh*> Parallel_flow_lagrange_multiplier_mesh_pt;
 
  /// Meshes of Lagrange multiplier elements
  Vector<SolidMesh*> Lagrange_multiplier_mesh_pt;
@@ -369,19 +369,19 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
 
 
 
- // Create (empty) meshes of lagrange elements at inflow/outflow
- //-----------------------------------------------------------
+ // Create (empty) meshes of lagrange multiplier elements at inflow/outflow
+ //------------------------------------------------------------------------
  
  // Create the meshes
  unsigned n=nfluid_traction_boundary();
- Fluid_lagrange_mesh_pt.resize(n);
+ Parallel_flow_lagrange_multiplier_mesh_pt.resize(n);
  for (unsigned i=0;i<n;i++)
   {
-   Fluid_lagrange_mesh_pt[i]=new Mesh;
+   Parallel_flow_lagrange_multiplier_mesh_pt[i]=new Mesh;
   } 
  
  // Populate them with elements
- create_parall_outflow_lagrange_elements();
+ create_parallel_flow_lagrange_elements();
 
 
 // Create FSI Traction elements
@@ -430,7 +430,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
  n=nfluid_traction_boundary();
  for (unsigned i=0;i<n;i++)
   { 
-   add_sub_mesh(Fluid_lagrange_mesh_pt[i]);
+   add_sub_mesh(Parallel_flow_lagrange_multiplier_mesh_pt[i]);
   }
  
  // The solid fsi traction meshes
@@ -453,8 +453,8 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
 
 
  
- // Apply BCs for fluid and Lagrange elements
- //------------------------------------------
+ // Apply BCs for fluid and Lagrange multiplier elements
+ //-----------------------------------------------------
   
  // Doc position of pinned pseudo solid nodes
  std::ofstream pseudo_solid_bc_file("RESLT/pinned_pseudo_solid_nodes.dat");
@@ -500,22 +500,20 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
  
  // Close
  pseudo_solid_bc_file.close();
-
+ 
 // Doc bcs for Lagrange multipliers
  ofstream pinned_file("RESLT/pinned_lagrange_multiplier_nodes.dat");
-
- // Loop over all fluid mesh boundaries and pin velocities
- // of nodes that haven't been dealt with yet and the lagrange elements
+ 
+ // Loop over nodes on the FSI boundary in the fluid mesh
  unsigned nbound=nfluid_fsi_boundary();
  for(unsigned i=0;i<nbound;i++)
   {
    //Get the mesh boundary
    unsigned b = Fluid_fsi_boundary_id[i];
-   
    unsigned num_nod=Fluid_mesh_pt->nboundary_node(b);
    for (unsigned inod=0;inod<num_nod;inod++)
     {
-     
+     // Get node
      Node* nod_pt= Fluid_mesh_pt->boundary_node_pt(b,inod);
      
      // Pin all velocities
@@ -523,7 +521,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
      nod_pt->pin(1); 
      nod_pt->pin(2); 
      
-     // find whether node is on in/outflow
+     // Find out whether node is also on in/outflow
      bool is_in_or_outflow_node=false;
      unsigned n=nfluid_inflow_traction_boundary();
      for (unsigned k=0;k<n;k++)
@@ -545,10 +543,10 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
            break;
           }
         }
-      }
+      } // ...now we know if the node is on an in- or outflow boundary
      
-     // Pin the lagrange multiplier components 
-     // in the out/in_flow boundaries
+     // Pin the Lagrange multipliers for the imposition of
+     // parallel flow if the nodes is also on the in/outflow boundaries
      if(is_in_or_outflow_node)
       {
        //Cast to a boundary node
@@ -556,33 +554,42 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
         dynamic_cast<BoundaryNode<SolidNode>*>
         ( Fluid_mesh_pt->boundary_node_pt(b,inod) );
        
-       //pin lagrange parallel flow elements
+       // Get the index of the first Lagrange multiplier
+       unsigned first_index=bnod_pt->
+        index_of_first_value_assigned_by_face_element(
+         Global_Parameters::Parallel_flow_lagrange_multiplier_id);
+
+       //Pin the Lagrange multipliers (as the velocity is already
+       //determined via the no slip condition on the fsi boundary
        for (unsigned l=0;l<2;l++)
         {
-         nod_pt->pin
-          (bnod_pt->index_of_first_value_assigned_by_face_element(
-           Global_Parameters::Parallel_flow_lagrange_multiplier_id)+l);
+         nod_pt->pin(first_index+l);
         }
+
        
-       // Pin lagrange displacement elements
+       // Get the first index of the second Lagrange multiplier 
+       first_index=bnod_pt->index_of_first_value_assigned_by_face_element(
+        Global_Parameters::FSI_interface_displacement_lagrange_multiplier_id);
+
+       // Loop over the Lagrange multipliers that deform the FSI boundary
+       // of the pseudo-solid fluid mesh.
+       for (unsigned l=0;l<3;l++)
+        {
+         // Pin the Lagrange multipliers that impose the displacement
+         // because the positon of the fluid nodes at the in/outflow
+         // is already determined. 
+         nod_pt->pin(first_index+l);
+        }
+
+       // Doc that we've pinned the Lagrange multipliers at this node
        pinned_file << nod_pt->x(0) << " "
                    << nod_pt->x(1) << " "
                    << nod_pt->x(2) << endl;
-       
-       // loop over the lagrange displacement components
-       for (unsigned l=0;l<3;l++)
-        {
-         // Pin the lagrange displacement components      
-         nod_pt->pin
-          (bnod_pt->index_of_first_value_assigned_by_face_element(
-           Global_Parameters::
-           FSI_interface_displacement_lagrange_multiplier_id)+l);
-        }
       }
     }
   } // end of BC for fluid mesh
 
- // Done pinning lagrange nultipliers
+ // Done pinning Lagrange nultipliers
  pinned_file.close();
   
  
@@ -789,14 +796,14 @@ create_lagrange_multiplier_elements()
 
 
 
-//============start_of_fluid_lagrange_elements==============================
-/// Create Lagrange  elements 
+//============start_of_create_parallel_flow_lagrange_elements============
+/// Create Lagrange multiplier elements  that impose parallel flow
 //=======================================================================
 template<class FLUID_ELEMENT,class SOLID_ELEMENT>
 void UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::
-create_parall_outflow_lagrange_elements()
+create_parallel_flow_lagrange_elements()
 {
- // Counter for number of fluid traction meshes
+ // Counter for number of Lagrange multiplier elements
  unsigned count=0;
 
  // Loop over inflow/outflow boundaries
@@ -831,15 +838,14 @@ create_parall_outflow_lagrange_elements()
        //What is the index of the face of the element e along boundary b
        int face_index = Fluid_mesh_pt->face_index_at_boundary(b,e);
        
-       // Build the corresponding lagrange element
+       // Build the corresponding Lagrange multiplier element
        ImposeParallelOutflowElement<FLUID_ELEMENT>* el_pt 
-        = new 
-        ImposeParallelOutflowElement<FLUID_ELEMENT>
+        = new ImposeParallelOutflowElement<FLUID_ELEMENT>
         (bulk_elem_pt, face_index, 
          Global_Parameters::Parallel_flow_lagrange_multiplier_id);
 
        // Add it to the mesh
-       Fluid_lagrange_mesh_pt[count]->add_element_pt(el_pt);
+       Parallel_flow_lagrange_multiplier_mesh_pt[count]->add_element_pt(el_pt);
        
        // Set the pointer to the prescribed pressure
        if (in_out==0)
@@ -857,7 +863,7 @@ create_parall_outflow_lagrange_elements()
     }
   }
  
-}  // end of create_parall_outflow_lagrange_elements
+}  // end of create_parallel_flow_lagrange_elements
 
 
 
@@ -992,8 +998,6 @@ doc_solution(DocInfo& doc_info)
 //========================================================================
 int main(int argc, char **argv)
 {
- // blabla check where this is first used. hierher
- GeneralisedElement::Suppress_warning_about_repeated_external_data=true;
  
  // Label for output
  DocInfo doc_info;
