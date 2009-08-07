@@ -19,18 +19,3 @@ rayleigh_traction_channel_SOURCES = rayleigh_traction_channel.cc validate.sh
 # we specify with -L. $(FLIBS) get included just in case
 # we decide to use a solver that involves fortran sources.
 rayleigh_traction_channel_LDADD = -L@libdir@ -lnavier_stokes -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
-
-# Include path for library headers: All library headers live in 
-# the include directory which we specify with -I
-INCLUDES = -I@includedir@
-
-# Only run self test if we have python for fpdiff.py
-#---------------------------------------------------
-if HAVE_PYTHON
-  # Test script
-  TESTS =  validate.sh
-else
-  # Just run the executables
-  TESTS = rayleigh_traction_channel
-endif
-

@@ -311,7 +311,7 @@ if test "$doc_size" = "y"; then
     echo " " >> size.html
     echo " " >> size.html
     echo "<TD align=\"center\">" >> size.html
-    echo "<a href=\"oomph-lib-0.85.tar.gz\">oomph-lib-0.85.tar.gz</A>" >> size.html
+    echo "<a href=\"oomph-lib-0.90.tar.gz\">oomph-lib-0.90.tar.gz</A>" >> size.html
     echo "</TD>" >> size.html
 
 

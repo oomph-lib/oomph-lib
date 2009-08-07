@@ -127,15 +127,28 @@ cat RESLT/convergence.dat > GMRES_convergence.dat
 cat RESLT/la_solve_convergence.dat > GMRES_la_solve_convergence.dat
 cat RESLT/resolve_error.dat RESLT/la_solve_error.dat > GMRES_solve_error.dat
 
-#Compare number of iterations against reference data and append
-../../../bin/compare_file_length_with_tolerance.bash GMRES_convergence.dat \
- ../validata/GMRES_convergence.dat $threshold_for_number_of_iterations \
- >>  validation.log
 
-#Compare number of iterations against reference data and append
-../../../bin/compare_file_length_with_tolerance.bash GMRES_la_solve_convergence.dat \
- ../validata/GMRES_la_solve_convergence.dat $threshold_for_number_of_iterations \
- >>  validation.log
+if test "$1" = "no_fpdiff"; then
+
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have validata" \
+        >> validation.log
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have validata" \
+        >> validation.log
+
+else
+
+    #Compare number of iterations against reference data and append
+    ../../../bin/compare_file_length_with_tolerance.bash GMRES_convergence.dat\
+    ../validata/GMRES_convergence.dat $threshold_for_number_of_iterations \
+    >>  validation.log
+
+    #Compare number of iterations against reference data and append
+    ../../../bin/compare_file_length_with_tolerance.bash \ 
+    GMRES_la_solve_convergence.dat \
+        ../validata/GMRES_la_solve_convergence.dat \
+        $threshold_for_number_of_iterations \
+        >>  validation.log
+fi
 
 
 if test "$1" = "no_fpdiff"; then
@@ -175,15 +188,31 @@ cat RESLT/convergence.dat > BiCGStab_convergence.dat
 cat RESLT/la_solve_convergence.dat > BiCGStab_la_solve_convergence.dat
 cat RESLT/resolve_error.dat RESLT/la_solve_error.dat > BiCGStab_solve_error.dat
 
-#Compare number of iterations against reference data and append
-../../../bin/compare_file_length_with_tolerance.bash BiCGStab_convergence.dat \
- ../validata/BiCGStab_convergence.dat $threshold_for_number_of_iterations \
- >>  validation.log
+if test "$1" = "no_fpdiff"; then
 
-#Compare number of iterations against reference data and append
-../../../bin/compare_file_length_with_tolerance.bash BiCGStab_la_solve_convergence.dat \
- ../validata/BiCGStab_la_solve_convergence.dat $threshold_for_number_of_iterations \
- >>  validation.log
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have validata" \
+        >> validation.log
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have validata" \
+        >> validation.log
+
+else
+
+    #Compare number of iterations against reference data and append
+    ../../../bin/compare_file_length_with_tolerance.bash \
+        BiCGStab_convergence.dat \
+        ../validata/BiCGStab_convergence.dat \
+        $threshold_for_number_of_iterations \
+        >>  validation.log
+
+    #Compare number of iterations against reference data and append
+    ../../../bin/compare_file_length_with_tolerance.bash \
+        BiCGStab_la_solve_convergence.dat \
+        ../validata/BiCGStab_la_solve_convergence.dat \
+        $threshold_for_number_of_iterations \
+        >>  validation.log
+
+fi 
+
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
@@ -225,17 +254,28 @@ cat RESLT/convergence.dat > CG_convergence.dat
 cat RESLT/la_solve_convergence.dat > CG_la_solve_convergence.dat
 cat RESLT/resolve_error.dat RESLT/la_solve_error.dat > CG_solve_error.dat
 
-#Compare number of iterations against reference data and append
-../../../bin/compare_file_length_with_tolerance.bash CG_convergence.dat \
- ../validata/CG_convergence.dat $threshold_for_number_of_iterations \
- >>  validation.log
+if test "$1" = "no_fpdiff"; then
 
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have validata" \
+        >> validation.log
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have validata" \
+        >> validation.log
 
-#Compare number of iterations against reference data and append
-../../../bin/compare_file_length_with_tolerance.bash CG_la_solve_convergence.dat \
- ../validata/CG_la_solve_convergence.dat $threshold_for_number_of_iterations \
- >>  validation.log
+else
 
+    #Compare number of iterations against reference data and append
+    ../../../bin/compare_file_length_with_tolerance.bash CG_convergence.dat \
+        ../validata/CG_convergence.dat $threshold_for_number_of_iterations \
+        >>  validation.log
+    
+    #Compare number of iterations against reference data and append
+    ../../../bin/compare_file_length_with_tolerance.bash \
+        CG_la_solve_convergence.dat \
+        ../validata/CG_la_solve_convergence.dat \
+        $threshold_for_number_of_iterations \
+        >>  validation.log
+
+fi
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
@@ -278,17 +318,30 @@ cat RESLT/la_solve_convergence.dat > GS_la_solve_convergence.dat
 cat RESLT/resolve_error.dat RESLT/la_solve_error.dat > GS_solve_error.dat
 
 
-#Compare number of iterations against reference data and append
-../../../bin/compare_file_length_with_tolerance.bash GS_convergence.dat \
- ../validata/GS_convergence.dat $threshold_for_number_of_iterations \
- >>  validation.log
+    
+if test "$1" = "no_fpdiff"; then
 
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have validata" \
+        >> validation.log
+    echo "dummy [OK] -- Can't run fpdiff.py because we don't have validata" \
+        >> validation.log
 
-#Compare number of iterations against reference data and append
-../../../bin/compare_file_length_with_tolerance.bash GS_la_solve_convergence.dat \
- ../validata/GS_la_solve_convergence.dat $threshold_for_number_of_iterations \
- >>  validation.log
+else
 
+    #Compare number of iterations against reference data and append
+    ../../../bin/compare_file_length_with_tolerance.bash GS_convergence.dat \
+        ../validata/GS_convergence.dat $threshold_for_number_of_iterations \
+        >>  validation.log
+    
+    
+    #Compare number of iterations against reference data and append
+    ../../../bin/compare_file_length_with_tolerance.bash \
+        GS_la_solve_convergence.dat \
+        ../validata/GS_la_solve_convergence.dat \
+        $threshold_for_number_of_iterations \
+        >>  validation.log
+
+fi
 
 
 if test "$1" = "no_fpdiff"; then
@@ -337,52 +390,52 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 echo "Solver/preconditioner combination 0" >> validation.log
-../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
+../../../bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
          RESLT/soln0.dat >> validation.log
 echo "Solver/preconditioner combination 1" >> validation.log
-../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
+../../../bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
          RESLT/soln1.dat >> validation.log
 echo "Solver/preconditioner combination 2" >> validation.log
-../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
+../../../bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
          RESLT/soln2.dat >> validation.log
 echo "Solver/preconditioner combination 3" >> validation.log
-../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
+../../../bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
          RESLT/soln3.dat >> validation.log
 echo "Solver/preconditioner combination 4" >> validation.log
-../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
+../../../bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
          RESLT/soln4.dat >> validation.log
 echo "Solver/preconditioner combination 5" >> validation.log
-../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
+../../../bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
          RESLT/soln5.dat >> validation.log
 echo "Solver/preconditioner combination 6" >> validation.log
-../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
+../../../bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
          RESLT/soln6.dat >> validation.log
 echo "Solver/preconditioner combination 7" >> validation.log
-../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
+../../../bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
          RESLT/soln7.dat >> validation.log
 echo "Solver/preconditioner combination 8" >> validation.log
-../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
+../../../bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
          RESLT/soln8.dat >> validation.log
 echo "Solver/preconditioner combination 9" >> validation.log
-../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
+../../../bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
          RESLT/soln9.dat >> validation.log
 echo "Solver/preconditioner combination 10" >> validation.log
-../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
+../../../bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
          RESLT/soln10.dat >> validation.log
 echo "Solver/preconditioner combination 11" >> validation.log
-../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
+../../../bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
          RESLT/soln11.dat >> validation.log
 echo "Solver/preconditioner combination 12" >> validation.log
-../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
+../../../bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
          RESLT/soln12.dat >> validation.log
 echo "Solver/preconditioner combination 13" >> validation.log
-../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
+../../../bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
          RESLT/soln13.dat >> validation.log
 echo "Solver/preconditioner combination 14" >> validation.log
-../../..//bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
+../../../bin/fpdiff.py ../validata/Trilinos_result.dat.gz  \
          RESLT/soln14.dat >> validation.log
 echo "Number of Newton iterations for Trilinos solves" >> validation.log
-../../..//bin/fpdiff.py ../validata/Trilinos_conv.dat.gz  \
+../../../bin/fpdiff.py ../validata/Trilinos_conv.dat.gz  \
          RESLT/conv.dat >> validation.log
 
 fi
@@ -565,24 +618,29 @@ echo " " >> validation.log
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 echo "DenseLU matrix based solve w/ DenseDoubleMatrix" >> validation.log
-../../..//bin/fpdiff.py ../validata/direct_solver_matrix_solve_result.dat.gz  \
+../../../bin/fpdiff.py ../validata/direct_solver_matrix_solve_result.dat.gz  \
          RESLT/DenseLU_DenseDoubleMatrix.dat >> validation.log
 echo "DenseLU problem based solve" >> validation.log
-../../..//bin/fpdiff.py ../validata/direct_solver_problem_solve_result.dat.gz  \
+../../../bin/fpdiff.py ../validata/direct_solver_problem_solve_result.dat.gz  \
          RESLT/soln0.dat >> validation.log
 echo "FD_LU problem based solve" >> validation.log
-../../..//bin/fpdiff.py ../validata/direct_solver_problem_solve_result.dat.gz  \
+../../../bin/fpdiff.py ../validata/direct_solver_problem_solve_result.dat.gz  \
          RESLT/soln1.dat >> validation.log
 echo "SuperLU matrix based solve w/ global CRDoubleMatrix" >> validation.log
-../../..//bin/fpdiff.py ../validata/direct_solver_matrix_solve_result.dat.gz  \
+../../../bin/fpdiff.py ../validata/direct_solver_matrix_solve_result.dat.gz  \
          RESLT/SuperLU_CRDoubleMatrix.dat >> validation.log
 echo "SuperLU matrix based solve w/ global CCDoubleMatrix" >> validation.log
-../../..//bin/fpdiff.py ../validata/direct_solver_matrix_solve_result.dat.gz  \
+../../../bin/fpdiff.py ../validata/direct_solver_matrix_solve_result.dat.gz  \
          RESLT/SuperLU_CCDoubleMatrix.dat >> validation.log
 echo "SuperLU problem based solve" >> validation.log
-../../..//bin/fpdiff.py ../validata/direct_solver_problem_solve_result.dat.gz  \
+../../../bin/fpdiff.py ../validata/direct_solver_problem_solve_result.dat.gz  \
          RESLT/soln2.dat >> validation.log
 fi
 

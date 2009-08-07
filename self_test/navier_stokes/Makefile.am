@@ -1,3 +1,6 @@
+#Include commands common to every Makefile.am that includes self tests
+include $(top_srcdir)/config/makefile_templates/demo_drivers
+
 # Name of executables
 check_PROGRAMS=circular_driven_cavity 
 
@@ -16,25 +19,3 @@ circular_driven_cavity_SOURCES = circular_driven_cavity_driver.cc validate.sh
 # we specify with -L. $(FLIBS) get included just in case
 # we decide to use a solver that involves fortran sources.
 circular_driven_cavity_LDADD = -L@libdir@ -lnavier_stokes -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
-
-# Include path for library headers: All library headers live in 
-# the include directory which we specify with -I
-INCLUDES = -I@includedir@
-
-# Only run self test if we have python for fpdiff.py
-#---------------------------------------------------
-if HAVE_PYTHON
-  # Test script
-  TESTS =  validate.sh
-else
-  # Just run the executables
-  TESTS = circular_driven_cavity
-endif
-
-
-# Distribute validation script and validation data
-EXTRA_DIST = validate.sh validata
-
-#Add in additional cleanup commands
-clean-local: 
-	rm -rf Validation
