@@ -34,6 +34,3 @@ else
   TESTS = rayleigh_traction_channel
 endif
 
-#Add in additional cleanup commands
-clean-local: 
-	rm -rf Validation *~

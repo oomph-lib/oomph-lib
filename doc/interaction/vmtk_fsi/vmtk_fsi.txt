@@ -278,7 +278,7 @@ section \ref face_elements_code below.
 identical to that in the 
 <a href="../../unstructured_three_d_fsi/html/index.html">
 tutorial considering the same problem in a more simplistic
-geometry.</a> Comparing the two driver codes with
+geometry.</a> Comparing the two driver codes using
 
 \code
 sdiff demo_drivers/interaction/vmtk_fsi/vmtk_fsi.cc \
@@ -290,8 +290,8 @@ shows that the only differences relate to the facts that:
   equivalent, the boundary numbers assigned by
   \c Tetgen are different.
   \n\n
-- we impose parallel flow in the vessel's in- and outflow
-  cross-sections which are not aligned with any of the Cartesian
+- we impose parallel flow at the vessel's in- and outflow
+  cross-sections, none of which are not aligned with any of the Cartesian
   coordinate planes. The parallel flow and the imposed pressure
   drop are therefore enforced by attaching 
   \c ImposeParallelOutflowElements, rather than
@@ -312,7 +312,7 @@ shows that the only differences relate to the facts that:
     \n\n
   .
   Since both \c FaceElements introduce additional unknowns 
-  into the problem, we have to use the methodology described
+  into the problem, we use the methodology described
   <a href="#face">above</a> to distinguish between the two
   types of Lagrange multipliers.
 .
@@ -344,9 +344,9 @@ unchanged. There are a few trivial changes in the import of fluid and solid
 meshes to reflect the fact that the tetgen boundary numbers are different.
 
 When imposing the boundary conditions for the fluid mesh 
-we do <b> not </b> pin the transverse velocities at the in- and flow because
+we do <b> not </b> pin the transverse velocities at the in- and outlets because
 the parallel flow is now imposed by Lagrange multiplier elements.
-Hence the only boundary conditions to be applied at the in- and
+Hence the only boundary condition to be applied at the in- and
 outflow cross-sections is the pinning of the nodal positions.
 
 The only significant change arises in the application of the boundary
@@ -357,7 +357,7 @@ stays in contact with the vessel wall. This constraint
 must be applied along the entire FSI boundary, apart from 
 the lines along which it meets the in- and outflow boundaries
 where the position of the fluid nodes is already pinned. 
-Consequently, we pin the Lagrange multipliers along this part of
+Consequently, we pin the Lagrange multipliers in this part of
 the mesh. 
 
    Similarly, the \c ImposeParallelOutflowElements ensure that the
@@ -369,8 +369,8 @@ velocity is already determined by the no-slip condition.
 Consequently, we also pin the second set of Lagrange multipliers 
 along this part of the fluid mesh boundary. 
 
- This achieved by the following loop over all the fluid nodes
-on the FSI boundary:
+ We loop over all the fluid nodes on the FSI boundary:
+
 \skipline // Loop over nodes on the FSI boundary in the fluid mes
 \until boundary_node_pt(b,inod);
 
@@ -379,7 +379,7 @@ pinning all three velocity components,
 
 \until pin(2);
 
-and determine if the node also happens to be located on the
+and determine whether the node also happens to be located on the
 in- or outflow cross-sections:
 
 \until now we know if the node is 
