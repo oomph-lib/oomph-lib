@@ -622,4 +622,11 @@ fi;
 #End the customisation procedure by regenerating the config files
 `pwd`/bin/regenerate_config_files.sh `pwd` 
 
+#...but replace the symbolic links by the files themselves
+mkdir tmp_junk
+find . -type l -exec cp {} tmp_junk \;
+find . -type l -exec rm -f {} \;
+mv tmp_junk/* .
+rm -rf tmp_junk
+
 
