@@ -63,7 +63,7 @@ cp ../`echo "oomph-lib-"$revision"_no_validata.tar.gz"`        with_doc_no_valid
 mkdir no_doc_with_validata
 cp ../`echo "oomph-lib-"$revision"_no_doc.tar.gz"`             no_doc_with_validata
 mkdir with_doc_with_validata
-cp ../`echo "oomph-lib-"$revision"_no_doc.tar.gz"`             with_doc_with_validata
+cp ../`echo "oomph-lib-"$revision".tar.gz"`             with_doc_with_validata
 
 #------------------------------------------------------
 # Create build script
