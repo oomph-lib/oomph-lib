@@ -138,13 +138,12 @@ if test "$1" = "no_fpdiff"; then
 else
 
     #Compare number of iterations against reference data and append
-    ../../../bin/compare_file_length_with_tolerance.bash GMRES_convergence.dat\
+    ../../../bin/compare_file_length_with_tolerance.bash GMRES_convergence.dat \
     ../validata/GMRES_convergence.dat $threshold_for_number_of_iterations \
     >>  validation.log
 
     #Compare number of iterations against reference data and append
-    ../../../bin/compare_file_length_with_tolerance.bash \ 
-    GMRES_la_solve_convergence.dat \
+    ../../../bin/compare_file_length_with_tolerance.bash GMRES_la_solve_convergence.dat \
         ../validata/GMRES_la_solve_convergence.dat \
         $threshold_for_number_of_iterations \
         >>  validation.log
