@@ -103,16 +103,25 @@ makefile.sample:
 # ALSO NOTE THAT THERE MUST NOT BE ANY WHITESPACE AFTER CONTINUATION "\"
 #
 #
-	echo -e "\t $(CXX) \044(AM_CPPFLAGS) -c demo_code.cc -o my_demo_code.o \\"   >> makefile.sample
-	echo -e "\t       -I\044(OOMPH-LIB_INCLUDE_DIR)  " >> makefile.sample
+
+#old	echo -e "\t $(CXX) \044(AM_CPPFLAGS) -c demo_code.cc -o my_demo_code.o \\"   >> makefile.sample
+	printf  "\t $(CXX) \044(AM_CPPFLAGS) -c demo_code.cc -o my_demo_code.o \\"   >> makefile.sample
+	echo ""   >> makefile.sample
+#old	echo -e "\t       -I\044(OOMPH-LIB_INCLUDE_DIR)  " >> makefile.sample
+	printf  "\t       -I\044(OOMPH-LIB_INCLUDE_DIR) \n " >> makefile.sample
 	echo " "  >> makefile.sample
 	echo "# Linking instructions: Just declare the target (i.e. the name of the executable)"  >> makefile.sample
 	echo "# and the dependencies (i.e. the object files created above). The rest "  >> makefile.sample
 	echo "# should not have to be changed. " >> makefile.sample
 	echo "my_demo_code: my_demo_code.o"  >> makefile.sample
-	echo -e "\t $(CXX) \044(SHARED_LIBRARY_FLAGS) \044< -o \044@ \\"   >> makefile.sample
-	echo -e "\t       -L\044(OOMPH-LIB_LIB_DIR) \044(EXTERNAL_DIST_LIBRARIES) \044(OOMPH-LIB_LIBS) \\" >> makefile.sample
-	echo -e "\t        \044(OOMPH-LIB_EXTERNAL_LIBS) \044(FLIBS)"  >> makefile.sample
+#old	echo -e "\t $(CXX) \044(SHARED_LIBRARY_FLAGS) \044< -o \044@ \\"   >> makefile.sample
+	printf  "\t $(CXX) \044(SHARED_LIBRARY_FLAGS) \044< -o \044@ \\"   >> makefile.sample	
+	echo ""   >> makefile.sample	
+#old	echo -e "\t       -L\044(OOMPH-LIB_LIB_DIR) \044(EXTERNAL_DIST_LIBRARIES) \044(OOMPH-LIB_LIBS) \\" >> makefile.sample
+	printf  "\t       -L\044(OOMPH-LIB_LIB_DIR) \044(EXTERNAL_DIST_LIBRARIES) \044(OOMPH-LIB_LIBS) \\" >> makefile.sample
+	echo ""   >> makefile.sample	
+#old	echo -e "\t        \044(OOMPH-LIB_EXTERNAL_LIBS) \044(FLIBS)"  >> makefile.sample
+	printf  "\t        \044(OOMPH-LIB_EXTERNAL_LIBS) \044(FLIBS) \n"  >> makefile.sample
 
 
 #-------------------------------------------------------------------------

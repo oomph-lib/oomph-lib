@@ -48,7 +48,7 @@ namespace oomph
 //Let's put these things in a namespace
 namespace Orthpoly
 {
- const double pi = MathematicalConstants::Pi;
+ const double pi = 4.0*std::atan(1.0);
  const double eps = 1.0e-15;
  
  ///\short Calculates Legendre polynomial of degree p at x

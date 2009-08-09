@@ -12,7 +12,8 @@
 INSTALL_DIRECTORY=`pwd`/trilinos_default_installation
 
 
-echo -e "\n\n "
+echo " "
+echo " "
 echo "CHECKING IF TRILINOS HAS TO BE INSTALLED"
 echo "========================================="
 echo " " 
@@ -20,12 +21,12 @@ echo " "
 # Check if tar file exists
 if [ -e  trilinos-9.0.2.tar.gz ]; then
 
-   echo -e "File trilinos-9.0.2.tar.gz exists in directory \n \n   `pwd`"
+   printf "File trilinos-9.0.2.tar.gz exists in directory \n \n   `pwd` \n"
 
 else
 
-   echo -e "File trilinos-9.0.2.tar.gz does not exist in directory \n \n    `pwd`"
-   echo -e "\n \n --> I am not building trilinos. \n \n "
+   printf "File trilinos-9.0.2.tar.gz does not exist in directory \n \n    `pwd` \n"
+   printf "\n \n --> I am not building trilinos. \n \n \n"
    exit
 
 fi
@@ -34,15 +35,15 @@ fi
 # Check if installed version of trilinos already exists
 if [ -e $INSTALL_DIRECTORY/include ]; then
 
-   echo -e "\n...but trilinos already appears to have been installed "
-   echo -e "because the directory  \n"
-   echo -e "      " $INSTALL_DIRECTORY"/include \n"
-   echo -e "already exists. I'm not installing trilinos again.\n\n"
+   printf "\n...but trilinos already appears to have been installed \n"
+   printf "because the directory  \n\n"
+   printf "      " $INSTALL_DIRECTORY"/include \n\n"
+   printf "already exists. I'm not installing trilinos again.\n\n\n"
    exit
 
 else
 
-  echo -e "\n\n ---> Installing trilinos in \n\n     " $INSTALL_DIRECTORY " \n\n"
+  printf "\n\n ---> Installing trilinos in \n\n     " $INSTALL_DIRECTORY " \n\n\n"
 
 fi
 

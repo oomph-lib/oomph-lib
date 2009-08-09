@@ -37,7 +37,9 @@ echo `cat $1 | sed 's/#.*$//' | sed '/^$/d' | tr '\012' ' '`
 #(no --)
 CheckOptions()
 {
- echo `echo -n $@ | sed 's/^/ /' | sed -n '/[ ].[^-].* --/p'`
+#old echo `echo -n $@ | sed 's/^/ /' | sed -n '/[ ].[^-].* --/p'`
+echo `echo $@ | sed 's/^/ /' | sed -n '/[ ].[^-].* --/p'`
+# echo `printf "$@" | sed 's/^/ /' | sed -n '/[ ].[^-].* --/p'`
 }
 
 #This little function echo's the usage information

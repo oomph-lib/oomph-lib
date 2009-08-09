@@ -36,19 +36,22 @@ echo "#-------------------------------------------------------"\
  >> $mesh_dir/mesh_names.aux
 echo " ">> $mesh_dir/mesh_names.aux
 
-sources=`for i in $mesh_stem; do echo -n $i.template.cc " "; done`
+#old sources=`for i in $mesh_stem; do echo -n $i.template.cc " "; done`
+sources=`for i in $mesh_stem; do printf "$i.template.cc "; done`
 echo "#Define the templated sources" >> $mesh_dir/mesh_names.aux
 echo "#----------------------------" >> $mesh_dir/mesh_names.aux
 echo "sources=" $sources >> $mesh_dir/mesh_names.aux
 echo " " >> $mesh_dir/mesh_names.aux
 
-templated_headers=`for i in $mesh_stem; do echo -n $i.template.h " "; done`
+#old templated_headers=`for i in $mesh_stem; do echo -n $i.template.h " "; done`
+templated_headers=`for i in $mesh_stem; do printf "$i.template.h "; done`
 echo "#Define the templated headers" >> $mesh_dir/mesh_names.aux
 echo "#----------------------------" >> $mesh_dir/mesh_names.aux
 echo "templated_headers=" $templated_headers >> $mesh_dir/mesh_names.aux
 echo " " >> $mesh_dir/mesh_names.aux
 
-headers=`for i in $mesh_stem; do echo -n $i.h " "; done`
+#old headers=`for i in $mesh_stem; do echo -n $i.h " "; done`
+headers=`for i in $mesh_stem; do printf "$i.h "; done`
 echo "#Define the combined header" >> $mesh_dir/mesh_names.aux
 echo "#--------------------------" >> $mesh_dir/mesh_names.aux
 echo "headers=" $headers >> $mesh_dir/mesh_names.aux
@@ -79,7 +82,9 @@ echo "# How to delete the combined mesh header files "\
 > $mesh_dir/mesh_clean.aux
 echo "#----------------------------------" >> $mesh_dir/mesh_clean.aux
 echo "clean-local:" >> $mesh_dir/mesh_clean.aux
-echo -n "	 rm -f " >> $mesh_dir/mesh_clean.aux
+#old echo -n "	 rm -f " >> $mesh_dir/mesh_clean.aux
+printf "	 rm -f " >> $mesh_dir/mesh_clean.aux
 for i in $mesh_stem; do
-  echo -n $i.h" meshes.h " >> $mesh_dir/mesh_clean.aux
+  #old echo -n $i.h" meshes.h " >> $mesh_dir/mesh_clean.aux
+ printf "$i.h meshes.h " >> $mesh_dir/mesh_clean.aux
 done

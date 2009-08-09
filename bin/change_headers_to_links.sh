@@ -17,6 +17,7 @@
 #---------------------------------------------------------------------------
 rm -f include_files.list.aux
 for h in `cat include_files.list`; do 
-    echo -n " " $1"/$h" >> include_files.list.aux " "
+#old    echo -n " " $1"/$h" >> include_files.list.aux " "
+    printf " $1/$h" >> include_files.list.aux " "
 done
 
