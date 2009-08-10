@@ -74,8 +74,15 @@
  in the end of the output '.poly' files. 
 **/
 //=============================================================================
-#include "generic.h"
-using namespace oomph;
+//#include "generic.h"
+//using namespace oomph;
+
+#include<iostream>
+#include<string>
+#include<fstream>
+#include<vector>
+#include<map>
+#include<cmath>
 
 void create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh( 
  const std::string& file_name,
@@ -112,7 +119,7 @@ void create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh(
 
 
  // storage for the global node numbers listed element-by-element
- Vector<unsigned> global_node(n_element*4);
+ std::vector<unsigned> global_node(n_element*4);
 
  unsigned k=0;
  for(unsigned i=0;i<n_element;i++)
@@ -126,9 +133,9 @@ void create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh(
  
 
  // Create storage for coordinates
- Vector<double> x_node(n_node);
- Vector<double> y_node(n_node);
- Vector<double> z_node(n_node);
+ std::vector<double> x_node(n_node);
+ std::vector<double> y_node(n_node);
+ std::vector<double> z_node(n_node);
  
  // get nodes coordinates
  for(unsigned i=0;i<n_node;i++)
@@ -154,12 +161,12 @@ void create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh(
  std::map<unsigned,unsigned> solid_outer_node_nmbr;
 
  // nfluid_face[i] will store the number of faces on boundary i+1
- Vector<unsigned> nfluid_face(4);
+ std::vector<unsigned> nfluid_face(4);
   
  // nsolid_linking_faces[i] will store the number of faces on boundary i+2
  // NB: we don't store the number of faces in boundaries 1 and 5 because 
  // they are the same as the number of fluid faces on boundary 1
- Vector<unsigned> nsolid_linking_faces(3); 
+ std::vector<unsigned> nsolid_linking_faces(3); 
  
  // number of nodes in the solid surface
  unsigned  n_solid_node=0;
@@ -176,17 +183,17 @@ void create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh(
  // Create storage for fluid faces informations :
  // fluid_faces[i][j] will store a vector containing the three node numbers 
  // of the j-th face in the (i+1)-th boundary
- Vector< Vector<Vector<unsigned> > > 
-  fluid_faces(4, Vector<Vector<unsigned> >(nbound_cond,Vector<unsigned>(3) ));
+ std::vector< std::vector<std::vector<unsigned> > > 
+  fluid_faces(4, std::vector<std::vector<unsigned> >(nbound_cond,std::vector<unsigned>(3) ));
 
  // Create storage for solid faces informations :
  // As the solid inner and outer faces come from the fluid surface, 
  // we only need to store solid face informations in boundary 2,3 and 4. 
  // solid_faces[i][j] will store a vector containing the three node numbers 
  // of the j-th face in the (i+2)-th boundary
- Vector< Vector<Vector<unsigned> > > 
-  solid_linking_faces(3, Vector<Vector<unsigned> >(nbound_cond,
-                                                   Vector<unsigned>(3) ));
+ std::vector< std::vector<std::vector<unsigned> > > 
+  solid_linking_faces(3, std::vector<std::vector<unsigned> >(nbound_cond,
+                                                   std::vector<unsigned>(3) ));
  
   // Create storage for boundary informations
  unsigned element_nmbr;
@@ -199,26 +206,20 @@ void create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh(
    infile>> side_nmbr ;
    infile>> bound_id ;
 
-#ifdef PARANOID
    if(bound_id!=1 && bound_id!=2 && bound_id!=3 && bound_id!=4 )
     {
-     std::ostringstream error_stream;
-     error_stream << "This function only takes xda type meshes with"
-                  <<" one inflow(boundary 2) and two outflow(boundary 3"
-                  <<" and 4), the countours must have the id 1. You have"
-                  <<" in your input file a boundary id : " << bound_id <<".\n"
-                  <<"Don't panic, there are only few things to change"
-                  <<"  in this well commented code, good luck ;)  \n";
-     
-     throw OomphLibError(error_stream.str(),
-                         "create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh",
-                         OOMPH_EXCEPTION_LOCATION);
+     std::cout << "This function only takes xda type meshes with"
+               << "one inflow(boundary 2) and two outflow(boundary 3"
+               << "and 4), the countours must have the id 1. You have"
+               << "in your input file a boundary id : " << bound_id <<".\n"
+               << "Don't panic, there are only few things to change"
+               << "in this well commented code, good luck ;)  \n";
+     abort();
     }
-#endif
         
    // get the side nodes numbers and normal_sign following the side numbering
    // conventions in '.xda' mesh files.
-   Vector<unsigned> side_node(3);
+   std::vector<unsigned> side_node(3);
    int  normal_sign=1;  
 
    switch(side_nmbr)
@@ -250,15 +251,15 @@ void create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh(
      break;
        
     default :
-     throw OomphLibError("unexcpected side number in your '.xda' input file\n",
-                         "create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh",
-                         OOMPH_EXCEPTION_LOCATION);
+     std::cout << "unexpected side number in your '.xda' input file\n"
+               <<"in create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh";
+     abort();
     }
       
    if(bound_id==1)
     {
      // Create storage for the normal vector to the face
-     Vector<double> normal(3,0.);
+     std::vector<double> normal(3,0.);
    
      // get the node's coordinates
      double x1=x_node[side_node[0] ]; 
@@ -402,8 +403,8 @@ void create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh(
    // loop over the faces
    for(unsigned iface=0; iface<nface; iface++)
     {
-     // get pointer to the Vector storing the three nodes
-     Vector<unsigned>* face_node=&(fluid_faces[i][iface]);
+     // get pointer to the vector storing the three nodes
+     std::vector<unsigned>* face_node=&(fluid_faces[i][iface]);
      // loop over the face's nodes
      for(unsigned ii=0; ii<3; ii++)
       {
@@ -445,8 +446,8 @@ void create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh(
  // loop over the faces
  for(unsigned iface=0; iface<nface; iface++)
   {
-   // get pointer to the Vector storing the three nodes
-   Vector<unsigned>* face_node=&(fluid_faces[0][iface]);
+   // get pointer to the vector storing the three nodes
+   std::vector<unsigned>* face_node=&(fluid_faces[0][iface]);
    // loop over the face's nodes
    for(unsigned ii=0; ii<3; ii++)
     {
@@ -519,13 +520,13 @@ void create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh(
      // We have three vertices
      fluid_output_stream << 3 <<  ' ' ;
        
-     // get pointer to the Vector storing the three nodes
-     Vector<unsigned>* face_node=&(fluid_faces[i][iface]);
+     // get pointer to the vector storing the three nodes
+     std::vector<unsigned>* face_node=&(fluid_faces[i][iface]);
 
      // This vector will store the nodes that are in both boundaries 1 and 
      // another one (2,3 or 4). We only store this nodes if we have in the
      // face two or more double boundary nodes.
-     Vector< unsigned> double_boundary_nod(3);
+     std::vector< unsigned> double_boundary_nod(3);
 
      // storage for the size of double_boundary_nod;
      unsigned n_double_boundary_nodes=0;
@@ -612,8 +613,8 @@ void create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh(
 
    for(unsigned iface=0; iface<nface; iface++)
     {
-     // get pointer to the Vector storing the three nodes
-     Vector<unsigned>* face_node;
+     // get pointer to the vector storing the three nodes
+     std::vector<unsigned>* face_node;
      if(i==0 || i==4) face_node=&(fluid_faces[0][iface]);
      // *[i-1] because *[k] stores informations for the (k+2)-th boundary
      else face_node=&(solid_linking_faces[i-1][iface]);
