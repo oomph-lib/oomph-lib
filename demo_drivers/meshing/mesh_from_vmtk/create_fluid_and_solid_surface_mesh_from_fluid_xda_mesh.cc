@@ -83,6 +83,7 @@
 #include<vector>
 #include<map>
 #include<cmath>
+#include<cstdlib>
 
 void create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh( 
  const std::string& file_name,
