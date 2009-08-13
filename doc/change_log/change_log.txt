@@ -160,22 +160,6 @@ problems after upgrading to a new version.
   new demo driver codes</a> demo driver codes 
   provide an overview of these capabilities.
   \n\n
-- Introduced \c ElementWithExternalElement as base class for 
-  multi-physics elements in which elements in different meshes/
-  domains interact via source/load functions (e.g. in 
-  fluid-structure interaction or thermal convection problems).
-  See the new tutorials discussing the 
-  <a href="../../multi_physics/multi_domain_ref_b_convect/html/index.html">
-  serial</a> and
-  <a href="../../mpi/boussinesq_convection/html/index.html">parallel</a>
-  solution of multi-physics problems by multi-domain approaches.
-  \n\n
-- Parallelised and optimised the \c MeshAsGeomObject class to use
-  bin structures to accelerate the search in \c locate_zeta(...).
-  \n\n
-- \c FiniteElements are now \c GeomObjects within which their local
-  coordinates act as their intrinsic coordinates.
-  \n\n
 - Completed the documentation of \c oomph-lib's solid
   mechanics (large-displacement elasticity) capabilities. We provide 
   an overview of the
@@ -185,23 +169,6 @@ problems after upgrading to a new version.
   tutorials</a> discussing the solution of steady and unsteady, 
   2D and 3D problems with compressible and incompressible
   materials on structured and unstructured meshes.
-  \n\n
-- Extended FSI capabilities so that such problems can be solved
-  on unstructured meshes. We provide new tutorials
-  that demonstrate this capability for 
-  <a href="../../interaction/unstructured_fsi/html/index.html">2D</a> and
-  <a href="../../interaction/unstructured_three_d_fsi/html/index.html">3D</a> 
-  problems.
-  \n\n
-- Extended the \c Z2ErrorEstimator so that the elemental error estimate can be
-  based on the maximum of various distinct fluxes -- useful for
-  multi-field problems such as Boussinesq convection. See the
-  <a href="../../multi_physics/refine_b_convect/html/index.html#comments">
-  tutorial</a> for details.
-  \n\n
-- Added a structured, domain-based mesh for the discretisation of 
-  tube-like domains. See the <a href="../../meshes/mesh_list/html/index.html">
-  list of structured meshes</a> for details. 
   \n\n
 - Developed a <a href="../../meshes/mesh_from_vmtk/html/index.html">
   tutorial</a> that shows how to use the 
@@ -218,6 +185,39 @@ problems after upgrading to a new version.
   - <a href="../../interaction/vmtk_fsi/html/index.html">
     Finite Reynolds number flow through an elastic iliac bifurcation.</a>
   .
+  \n\n
+- Extended FSI capabilities so that such problems can be solved
+  on unstructured meshes. We provide new tutorials
+  that demonstrate this capability for 
+  <a href="../../interaction/unstructured_fsi/html/index.html">2D</a> and
+  <a href="../../interaction/unstructured_three_d_fsi/html/index.html">3D</a> 
+  problems.
+  \n\n
+- Introduced \c ElementWithExternalElement as base class for 
+  multi-physics elements in which elements in different meshes/
+  domains interact via source/load functions (e.g. in 
+  fluid-structure interaction or thermal convection problems).
+  See the new tutorials discussing the 
+  <a href="../../multi_physics/multi_domain_ref_b_convect/html/index.html">
+  serial</a> and
+  <a href="../../mpi/boussinesq_convection/html/index.html">parallel</a>
+  solution of multi-physics problems by multi-domain approaches.
+  \n\n
+- Parallelised and optimised the \c MeshAsGeomObject class to use
+  bin structures to accelerate the search in \c locate_zeta(...).
+  \n\n
+- \c FiniteElements are now \c GeomObjects within which their local
+  coordinates act as their intrinsic coordinates.
+  \n\n
+- Extended the \c Z2ErrorEstimator so that the elemental error estimate can be
+  based on the maximum of various distinct fluxes -- useful for
+  multi-field problems such as Boussinesq convection. See the
+  <a href="../../multi_physics/refine_b_convect/html/index.html#comments">
+  tutorial</a> for details.
+  \n\n
+- Added a structured, domain-based mesh for the discretisation of 
+  tube-like domains. See the <a href="../../meshes/mesh_list/html/index.html">
+  list of structured meshes</a> for details. 
   \n\n
 - Provided a new Lagrange-multiplier-based element, that allows the
   imposition of parallel in- or outflow from boundaries that are not

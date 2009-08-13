@@ -304,11 +304,17 @@ our installation on the following platforms:
 - Gentoo Linux, using the gcc compiler suite
   (versions 3.3.4 and 4.1.2) and the intel compilers 
   (icpc, ifc and icc all at version 10).
-- cygwin (version 1.5.25-14), running under Windows XP (version 5.1),
-  using the gcc compiler suite (version 3.4.4).
-- Ubuntu (version 9.04) with gcc compilers (version 4.3.3)
+- Ubuntu (version 9.04) with gcc compilers (version 4.3.3). 
+  The tests included the MPI part of the library, 
+  which we compiled with <A HREF="http://www.lam-mpi.org/">lam</A>.
 - Apple Mac OSX 10.4.11 (Tiger) with gcc compilers (version 4.3.3)
 - Apple Mac OSX 10.5.8 (Leopard) with gcc compilers (version 4.3.3)
+- cygwin running under Windows XP, using the gcc compiler suite 
+  (version 3.4.4).
+- cygwin under Windows Vista Business
+  using the gcc compiler suite (version 3.4.4).
+- cygwin under Windows 7 Ultimate (evaluation copy, build 7100)
+  using the gcc compiler suite (version 3.4.4).
 .
 We welcome feedback on any problems that you encounter
 during your attempts to install \c oomph-lib on your machine.
@@ -337,7 +343,12 @@ The trick is to specify the \c using option in
 plot commands -- in this mode 
 <A HREF="http://www.gnuplot.info">gnuplot</A> 
 ignores tecplot's "ZONE" commands.
-
+<a href="http://www.mechanics.citg.tudelft.nl/~simone/"><B>Angelo 
+Simone</B></a> wrote python scripts that convert \c oomph-lib's
+output to the vtu format that can be read by 
+<a href="http://www.paraview.org/New/index.html">paraview</a>;
+see <a href="../paraview/html/index.html">the paraview tutorial</a>
+for details. 
 
 <HR>
 
@@ -360,10 +371,10 @@ the library (listed in reverse chronological order):
   works on parallelisation, in particular
   the problem distribution and the subsequent distributed mesh adaptation.
 - <a href="http://www.mechanics.citg.tudelft.nl/~simone/"><B>Angelo 
-  Simone</B></a> wrote python scripts that converts \c oomph-lib's
+  Simone</B></a> wrote python scripts that convert \c oomph-lib's
   output to the vtu format that can be read by 
   <a href="http://www.paraview.org/New/index.html">paraview</a>;
-  see <a href="../paraview/html/index.html">the new paraview tutorial</a>
+  see <a href="../paraview/html/index.html">the paraview tutorial</a>
   for details. 
 - \b Floraine \b Cordier developed the driver codes and tutorials for the 
   <a href="../interaction/fsi_channel_with_leaflet/html/index.html"> 
