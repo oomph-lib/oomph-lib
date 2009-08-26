@@ -399,6 +399,16 @@ public:
  /// re-setup the fsi lookup scheme
  void actions_after_distribute();
 
+ /// Actions before load balancing: Remove traction elements
+ void actions_before_load_balance();
+
+ /// Actions after load balancing: Add traction elements,
+ /// re-setup the fsi lookup scheme
+ void actions_after_load_balance();
+
+ /// Build the meshes for the problem
+ void build_mesh();
+
  /// Doc the solution
  void doc_solution(DocInfo& doc_info, ofstream& trace_file);
 
@@ -476,10 +486,74 @@ TurekProblem(const double &length,
  Max_newton_iterations=20;
  Max_residuals=1.0e4;
 
- // By default all processors contain the fluid control node
- I_have_the_fluid_control_node=true;
+ // Build the meshes for this problem
+ build_mesh();
+
+ // Setup FSI
+ //----------
  
- 
+ // Pass Strouhal number to the helper function that automatically applies
+ // the no-slip condition
+ FSI_functions::Strouhal_for_no_slip=Global_Parameters::St;
+
+ // If the solid is to be loaded by the fluid, then set up the interaction
+ // and specify the velocity of the fluid nodes based on the wall motion
+ if (!Global_Parameters::Ignore_fluid_loading)
+  {
+   // Only remove duplicates after the final call
+   Multi_domain_functions::Check_for_duplicates=false;
+
+   // Work out which fluid dofs affect the residuals of the wall elements:
+   // We pass the boundary between the fluid and solid meshes and 
+   // pointers to the meshes. The interaction boundary are boundaries 5,6,7
+   // of the 2D fluid mesh.
+   FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
+    (this,5,Fluid_mesh_pt,Traction_mesh_pt[0]);
+   
+   FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
+    (this,6,Fluid_mesh_pt,Traction_mesh_pt[2]);
+
+   // Now remove duplicates
+   Multi_domain_functions::Check_for_duplicates=true;
+
+   FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
+    (this,7,Fluid_mesh_pt,Traction_mesh_pt[1]); 
+
+   // The velocity of the fluid nodes on the wall (fluid mesh boundary 5,6,7)
+   // is set by the wall motion -- hence the no-slip condition must be
+   // re-applied whenever a node update is performed for these nodes. 
+   // Such tasks may be performed automatically by the auxiliary node update 
+   // function specified by a function pointer:
+   for(unsigned ibound=5;ibound<8;ibound++ )
+    { 
+     unsigned num_nod= Fluid_mesh_pt->nboundary_node(ibound);
+     for (unsigned inod=0;inod<num_nod;inod++)
+      {   
+       Fluid_mesh_pt->boundary_node_pt(ibound, inod)->
+        set_auxiliary_node_update_fct_pt(
+         FSI_functions::apply_no_slip_on_moving_wall);
+      }
+    } // done automatic application of no-slip
+  } // end of FSI setup
+
+ // Use SuperLU_dist as the solver
+ linear_solver_pt() = new SuperLUSolver;
+ static_cast<SuperLUSolver*>(linear_solver_pt())
+  ->set_solver_type(SuperLUSolver::Distributed);
+ static_cast<SuperLUSolver*>(linear_solver_pt())
+  ->use_distributed_solve_in_superlu_dist();
+
+ // Assign equation numbers
+ cout << assign_eqn_numbers() << std::endl; 
+
+}//end_of_constructor
+
+//=================start_of_build_mesh===================================
+/// Build meshes involved in problem
+//=======================================================================
+template <class FLUID_ELEMENT,class SOLID_ELEMENT> 
+void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::build_mesh()
+{
  // Build solid mesh
  //------------------
 
@@ -629,14 +703,16 @@ TurekProblem(const double &length,
    top_flag_pt,
    bottom_flag_pt,
    tip_flag_pt,
-   length, height, 
+   Domain_length, Domain_height, 
    l_x,Global_Parameters::H,
    Global_Parameters::Centre_x,
    Global_Parameters::Centre_y,
    Global_Parameters::Radius,
    fluid_time_stepper_pt);
  
-
+ // By default all processors contain the fluid control node
+ I_have_the_fluid_control_node=true;
+ 
  // I happen to have found out by inspection that
  // node 5 in the hand-coded fluid mesh is at the 
  // upstream tip of the cylinder
@@ -646,8 +722,6 @@ TurekProblem(const double &length,
            << Fluid_control_node_pt->x(0) << " " 
            << Fluid_control_node_pt->x(1) << " " << std::endl;
 
- // Back it up so we can check if the node still exists
- // once the problem has been distributed
  Fluid_control_x0=Fluid_control_node_pt->x(0);
  Fluid_control_x1=Fluid_control_node_pt->x(1);
 
@@ -662,11 +736,10 @@ TurekProblem(const double &length,
  // Build combined global mesh
  //---------------------------
 
- // Add Fluid mesh. Note: It's important that the fluid mesh is
- // added before the solid mesh!
+ // Add Fluid mesh
  add_sub_mesh(fluid_mesh_pt());
  
- // Now add the solid mesh to the problem's collection of submeshes
+ // Add Solid mesh to the problem's collection of submeshes
  add_sub_mesh(solid_mesh_pt());
 
  // Add traction sub-meshes
@@ -762,68 +835,7 @@ TurekProblem(const double &length,
    
   }//end_of_loop
 
-
-
- // Setup FSI
- //----------
- 
- // Pass Strouhal number to the helper function that automatically applies
- // the no-slip condition
- FSI_functions::Strouhal_for_no_slip=Global_Parameters::St;
-
- // If the solid is to be loaded by the fluid, then set up the interaction
- // and specify the velocity of the fluid nodes based on the wall motion
- if (!Global_Parameters::Ignore_fluid_loading)
-  {
-   // Only remove duplicates after the final call
-   Multi_domain_functions::Check_for_duplicates=false;
-
-   // Work out which fluid dofs affect the residuals of the wall elements:
-   // We pass the boundary between the fluid and solid meshes and 
-   // pointers to the meshes. The interaction boundary are boundaries 5,6,7
-   // of the 2D fluid mesh.
-   FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
-    (this,5,Fluid_mesh_pt,Traction_mesh_pt[0]);
-   
-   FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
-    (this,6,Fluid_mesh_pt,Traction_mesh_pt[2]);
-
-   // Now remove duplicates
-   Multi_domain_functions::Check_for_duplicates=true;
-
-   FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
-    (this,7,Fluid_mesh_pt,Traction_mesh_pt[1]); 
-
-   // The velocity of the fluid nodes on the wall (fluid mesh boundary 5,6,7)
-   // is set by the wall motion -- hence the no-slip condition must be
-   // re-applied whenever a node update is performed for these nodes. 
-   // Such tasks may be performed automatically by the auxiliary node update 
-   // function specified by a function pointer:
-   for(unsigned ibound=5;ibound<8;ibound++ )
-    { 
-     unsigned num_nod= Fluid_mesh_pt->nboundary_node(ibound);
-     for (unsigned inod=0;inod<num_nod;inod++)
-      {   
-       Fluid_mesh_pt->boundary_node_pt(ibound, inod)->
-        set_auxiliary_node_update_fct_pt(
-         FSI_functions::apply_no_slip_on_moving_wall);
-      }
-    } // done automatic application of no-slip
-  } // end of FSI setup
-
- // Use SuperLU_dist as the solver
- linear_solver_pt() = new SuperLUSolver;
- static_cast<SuperLUSolver*>(linear_solver_pt())
-  ->set_solver_type(SuperLUSolver::Distributed);
- static_cast<SuperLUSolver*>(linear_solver_pt())
-  ->use_distributed_solve_in_superlu_dist();
-
- // Assign equation numbers
- cout << assign_eqn_numbers() << std::endl; 
-
-}//end_of_constructor
-
-
+}//end_of_build_mesh
 
 //====start_of_actions_before_newton_convergence_check===================
 /// Update the (enslaved) fluid node positions following the
@@ -1198,7 +1210,224 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::actions_after_distribute()
  
 } // end of actions after distribute
 
+
+//==================start_of_actions_before_load_balance====================
+/// Actions before load_balance: Make sure that the bulk solid elements 
+/// attached to the FSISolidTractionElements are kept as halo elements.
+/// Unlike in most other parallel codes we DON'T delete the 
+/// FSISolidTractionElements here, though, because they need to 
+/// be around while the fluid mesh is adapted.
+//========================================================================
+template<class FLUID_ELEMENT,class SOLID_ELEMENT >
+void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::actions_before_load_balance()
+{
+ // The bulk elements attached to the traction elements need to be kept
+ // as halo elements
+
+ // There are 3 traction meshes
+ for (unsigned b=0;b<3;b++)
+  {
+   // Loop over elements in traction meshes
+   unsigned n_element=Traction_mesh_pt[b]->nelement();
+   for (unsigned e=0;e<n_element;e++)
+    {
+     FSISolidTractionElement<SOLID_ELEMENT,2>* traction_elem_pt=
+      dynamic_cast<FSISolidTractionElement<SOLID_ELEMENT,2>* >
+      (Traction_mesh_pt[b]->element_pt(e));
+
+     // Get the bulk element (which is a SOLID_ELEMENT)
+     SOLID_ELEMENT* solid_elem_pt = dynamic_cast<SOLID_ELEMENT*>
+      (traction_elem_pt->bulk_element_pt());
+
+     // Require bulk to be kept as a (possible) halo element
+     // Note: The traction element itself will "become" a halo element 
+     // when it is recreated after the distribution has taken place
+     solid_elem_pt->must_be_kept_as_halo()=true;
+    }
+  } // end of loop over meshes of fsi traction elements
  
+
+ // Flush all the submeshes out but keep the meshes of FSISolidTractionElements
+ // alive (i.e. don't delete them)
+ flush_sub_meshes();
+
+ // Add the fluid mesh and the solid mesh back again
+ // Remember that it's important that the fluid mesh is
+ // added before the solid mesh!
+ add_sub_mesh(fluid_mesh_pt());
+ add_sub_mesh(solid_mesh_pt());
+
+ // Rebuild global mesh
+ rebuild_global_mesh();
+
+} // end of actions before load_balance
+
+
+//==================start_of_actions_after_load_balance=====================
+///  Actions after load_balance: Re-setup FSI
+//========================================================================
+template<class FLUID_ELEMENT,class SOLID_ELEMENT >
+void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::actions_after_load_balance()
+{
+ // The solid mesh has now been distributed, so it now has halo elements
+ // on certain processors. The traction elements attached to these new
+ // halo elements need to be halo themselves, so we need to delete the
+ // old ones and re-attach new ones. Recall that FaceElements attached
+ // to bulk halo elements become halos themselves.
+ delete_fsi_traction_elements();
+
+ // (Re-)Build the FSI traction elements
+ create_fsi_traction_elements();
+
+ // Loop over traction elements, pass the FSI parameter and tell them 
+ // the boundary number in the bulk solid mesh -- this is required so 
+ // they can get access to the boundary coordinates!
+ for (unsigned bound=0;bound<3;bound++)
+  {
+   unsigned n_face_element = Traction_mesh_pt[bound]->nelement();
+   for(unsigned e=0;e<n_face_element;e++)
+    {
+     //Cast the element pointer and specify boundary number
+     FSISolidTractionElement<SOLID_ELEMENT,2>* elem_pt=
+     dynamic_cast<FSISolidTractionElement<SOLID_ELEMENT,2>*>
+      (Traction_mesh_pt[bound]->element_pt(e));
+
+     // Specify boundary number
+     elem_pt->set_boundary_number_in_bulk_mesh(bound);
+
+     // Function that specifies the load ratios
+     elem_pt->q_pt() = &Global_Parameters::Q;
+    
+    }
+  } // build of FSISolidTractionElements is complete
+
+
+ // Turn the three meshes of FSI traction elements into compound
+ // geometric objects (one Lagrangian, two Eulerian coordinates)
+ // that determine particular boundaries of the fluid mesh
+ MeshAsGeomObject<1,2,FSISolidTractionElement<SOLID_ELEMENT,2> >*
+  bottom_flag_pt=
+  new MeshAsGeomObject<1,2,FSISolidTractionElement<SOLID_ELEMENT,2> >
+  (Traction_mesh_pt[0]);
+ 
+ MeshAsGeomObject<1,2,FSISolidTractionElement<SOLID_ELEMENT,2> >* tip_flag_pt=
+  new MeshAsGeomObject<1,2,FSISolidTractionElement<SOLID_ELEMENT,2> >
+  (Traction_mesh_pt[1]);
+ 
+ MeshAsGeomObject<1,2,FSISolidTractionElement<SOLID_ELEMENT,2> >* top_flag_pt=
+  new MeshAsGeomObject<1,2,FSISolidTractionElement<SOLID_ELEMENT,2> >
+  (Traction_mesh_pt[2]);
+
+
+ // Delete the old MeshAsGeomObjects and tell the fluid mesh 
+ // about the new ones.
+ delete fluid_mesh_pt()->bottom_flag_pt();
+ fluid_mesh_pt()->set_bottom_flag_pt(bottom_flag_pt);
+ delete fluid_mesh_pt()->top_flag_pt();
+ fluid_mesh_pt()->set_top_flag_pt(top_flag_pt);
+ delete fluid_mesh_pt()->tip_flag_pt();
+ fluid_mesh_pt()->set_tip_flag_pt(tip_flag_pt);
+
+ // Call update_node_update for all the fluid mesh nodes, as the
+ // geometric objects representing the fluid mesh boundaries have changed
+ unsigned n_fluid_node=fluid_mesh_pt()->nnode();
+ for (unsigned n=0;n<n_fluid_node;n++)
+  {
+   // Get the (algebraic) node
+   AlgebraicNode* alg_nod_pt=dynamic_cast<AlgebraicNode*>
+    (fluid_mesh_pt()->node_pt(n));
+
+   // Call update_node_update for this node
+   fluid_mesh_pt()->update_node_update(alg_nod_pt);
+  }
+
+ // Add the traction meshes back to the problem
+ for (unsigned i=0;i<3;i++)
+  {
+   add_sub_mesh(traction_mesh_pt(i));
+  }
+
+ // Unpin all pressure dofs
+ RefineableNavierStokesEquations<2>::
+  unpin_all_pressure_dofs(fluid_mesh_pt()->element_pt());
+ 
+ // Pin redundant pressure dofs
+ RefineableNavierStokesEquations<2>::
+  pin_redundant_nodal_pressures(fluid_mesh_pt()->element_pt());
+
+ // Unpin all solid pressure dofs
+ PVDEquationsBase<2>::
+  unpin_all_solid_pressure_dofs(solid_mesh_pt()->element_pt());
+ 
+ // Pin the redundant solid pressures (if any)
+ PVDEquationsBase<2>::pin_redundant_nodal_solid_pressures(
+  solid_mesh_pt()->element_pt());
+
+ // Rebuild global mesh
+ rebuild_global_mesh();
+
+ // If the solid is to be loaded by the fluid, then set up the interaction
+ // and specify the velocity of the fluid nodes based on the wall motion
+ if (!Global_Parameters::Ignore_fluid_loading)
+  {
+   // Only remove duplicates after the final call
+   Multi_domain_functions::Check_for_duplicates=false;
+
+   // Re-setup the fluid load information for fsi solid traction elements
+   FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
+    (this,5,Fluid_mesh_pt,Traction_mesh_pt[0]); 
+
+   FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
+    (this,6,Fluid_mesh_pt,Traction_mesh_pt[2]); 
+
+   // Now remove duplicates
+   Multi_domain_functions::Check_for_duplicates=true;
+
+   FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
+    (this,7,Fluid_mesh_pt,Traction_mesh_pt[1]); 
+
+   // The velocity of the fluid nodes on the wall (fluid mesh boundary 5,6,7)
+   // is set by the wall motion -- hence the no-slip condition must be
+   // re-applied whenever a node update is performed for these nodes. 
+   // Such tasks may be performed automatically by the auxiliary node update 
+   // function specified by a function pointer:
+   for(unsigned ibound=5;ibound<8;ibound++ )
+    { 
+     unsigned num_nod= Fluid_mesh_pt->nboundary_node(ibound);
+     for (unsigned inod=0;inod<num_nod;inod++)
+      {   
+       Fluid_mesh_pt->boundary_node_pt(ibound, inod)->
+        set_auxiliary_node_update_fct_pt(
+         FSI_functions::apply_no_slip_on_moving_wall);
+      }
+    }
+
+  } // end of (re-)assignment of the auxiliary node update fct
+
+ // Re-set control nodes
+
+ // Loop over fluid nodes
+ unsigned n_fluid_nod=fluid_mesh_pt()->nnode();
+ for (unsigned j=0;j<n_fluid_nod;j++)
+  {
+   if ((fluid_mesh_pt()->node_pt(j)->x(0)==Fluid_control_x0) &&
+       (fluid_mesh_pt()->node_pt(j)->x(1)==Fluid_control_x1))
+    {
+     // The node still exists on this process...
+     I_have_the_fluid_control_node=true;
+     break;
+    }
+
+   // if the end has been reached then we've lost the control node
+   if (j==n_fluid_nod-1)
+    {
+     I_have_the_fluid_control_node=false;
+    }
+  }
+ 
+} // end of actions after load_balance
+
+
 //============start_of_create_traction_elements==============================
 /// Create FSI traction elements 
 //=======================================================================
@@ -1400,7 +1629,7 @@ int main(int argc, char* argv[])
  DocInfo doc_info;
  ofstream trace_file; 
  char filename[100];
- doc_info.set_directory("RESLT_TUREK");
+ doc_info.set_directory("RESLT_TUREK_LOAD_BALANCE");
  sprintf(filename,"%s/trace_on_proc%i.dat",doc_info.directory().c_str(),
          problem.communicator_pt()->my_rank());
  trace_file.open(filename);
@@ -1458,6 +1687,9 @@ int main(int argc, char* argv[])
   
    // Now distribute the (still uniformly refined) problem
    problem.distribute(in_element_partition,report_stats);
+
+   // This is a validation run, so use the default partition in load_balance()
+   problem.use_default_partition_in_load_balance()=true;
   }
  else
   {
@@ -1476,6 +1708,7 @@ int main(int argc, char* argv[])
  // Max number of adaptation for time-stepping
  unsigned max_adapt=1;
  
+ // Start of timestepping loop
  for(unsigned i=0;i<nstep;i++)
   { 
   // Solve the problem
@@ -1486,7 +1719,11 @@ int main(int argc, char* argv[])
   
   // Step number
   doc_info.number()++;
- }
+
+  // Load balance the problem
+  DocInfo load_doc_info;
+  problem.load_balance(load_doc_info,report_stats);
+  } // end of timestepping loop
  
  trace_file.close(); 
 

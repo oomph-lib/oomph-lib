@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=1
+NUM_TESTS=2
 
 # Doc what we're using to run tests on two processors
 echo " " 
@@ -45,6 +45,37 @@ if test "$1" = "no_fpdiff"; then
 else
 ../../../../../bin/fpdiff.py ../validata/turek_flag_external_results.dat.gz  \
          turek_flag_external_results.dat >> validation.log
+fi
+
+#---------------------------------------------------------------------
+
+# Validation for Turek flag problem (with load balancing)
+#-------------------------------------------------------------------------
+
+echo "Running Turek flag validation with load balancing"
+mkdir RESLT_TUREK_LOAD_BALANCE
+
+# Wait for a bit to allow parallel file systems to realise
+# the existence of the new directory
+sleep 5
+
+$MPI_RUN_COMMAND ../turek_flag_load_balance > OUTPUT_turek_flag_load_balance
+echo "done"
+echo " " >> validation.log
+echo "Turek flag validation" >> validation.log
+echo "------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT_TUREK_LOAD_BALANCE/soln1_on_proc0.dat RESLT_TUREK_LOAD_BALANCE/soln1_on_proc1.dat RESLT_TUREK_LOAD_BALANCE/soln2_on_proc0.dat RESLT_TUREK_LOAD_BALANCE/soln2_on_proc1.dat RESLT_TUREK_LOAD_BALANCE/solid_soln1_on_proc0.dat RESLT_TUREK_LOAD_BALANCE/solid_soln1_on_proc1.dat RESLT_TUREK_LOAD_BALANCE/solid_soln2_on_proc0.dat RESLT_TUREK_LOAD_BALANCE/solid_soln2_on_proc1.dat > turek_flag_load_balance_external_results.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../../bin/fpdiff.py ../validata/turek_flag_load_balance_external_results.dat.gz  \
+         turek_flag_load_balance_external_results.dat >> validation.log
 fi
 
 #---------------------------------------------------------------------

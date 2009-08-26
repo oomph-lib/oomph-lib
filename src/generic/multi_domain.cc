@@ -201,6 +201,15 @@ namespace Multi_domain_functions
    // and removes the duplication by overwriting any data point with an already
    // existing eqn number with the original data point which had the eqn no.
 
+   // Timing
+   double t_start=0.0; double t_local=0.0; double t_loop_start=0.0;
+   double t_loop_end=0.0; double t_end=0.0;
+
+   if (Doc_timings) 
+    {
+     t_start=TimingHelpers::timer();
+    }
+
    // Storage for existing global equation numbers for each node
    Vector<std::pair<Vector<int>,Node*> > existing_global_eqn_numbers;
 
@@ -297,6 +306,13 @@ namespace Multi_domain_functions
      // elements cannot be external elements
     }
 
+   if (Doc_timings) 
+    {
+     t_local=TimingHelpers::timer();
+     oomph_info << "CPU for storing eqn numbers on this process: "
+                << t_local-t_start << std::endl;
+    }
+
    // Now loop over the other processors from highest to lowest
    // (i.e. if there is a duplicate between these containers
    //  then this will use the node on the highest numbered processor)
@@ -307,6 +323,10 @@ namespace Multi_domain_functions
      // Don't have external halo elements with yourself!
      if (iproc!=my_rank)
       {
+       if (Doc_timings) 
+        {
+         t_loop_start=TimingHelpers::timer();
+        }
        // Loop over external halo elements with iproc for internal data
        // to remove the duplicates in the external halo element storage
        unsigned n_element=mesh_pt->nexternal_halo_element(iproc);
@@ -320,6 +340,7 @@ namespace Multi_domain_functions
          for (unsigned j=0;j<n_node;j++)
           {
            Node* nod_pt=ext_el_pt->node_pt(j);
+
            unsigned n_val=nod_pt->nvalue();
            Vector<int> nodal_eqn_numbers(n_val);
            for (unsigned i_val=0;i_val<n_val;i_val++)
@@ -626,7 +647,7 @@ namespace Multi_domain_functions
                 }
               } // end hanging loop over continous interpolated variables
             }
-          
+
           } // end loop over nodes on external halo elements
         
          // Reset any internal data to Is_unclassified as there
@@ -643,8 +664,23 @@ namespace Multi_domain_functions
             }
           }
         } // end loop over external halo elements
+
+       if (Doc_timings) 
+        {
+         t_loop_end=TimingHelpers::timer();
+         oomph_info << "CPU for loop with proc " << iproc << " is: "
+                    << t_loop_end-t_loop_start << std::endl;
+        }
+
       }
     } // end loop over processors
+
+   if (Doc_timings) 
+    {
+     t_end=TimingHelpers::timer();
+     oomph_info << "CPU for check_duplicates: "
+                << t_end-t_start << std::endl;
+    }
 
   }
 

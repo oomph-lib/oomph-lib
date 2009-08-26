@@ -1,0 +1,246 @@
+\mainpage Parallel adaptive driven cavity problem with load balancing
+
+This document concerns the parallel solution of the 
+<a href="../../../navier_stokes/adaptive_driven_cavity/html/index.html">adaptive
+driven cavity problem</a>, in particular the use of load
+balancing within the problem.  It is one of a
+<a href="../../../example_code_list/html/index.html#distributed">
+series 
+of tutorials</a>
+that discuss how to modify serial driver codes to distribute the
+\c Problem object across multiple processors.
+
+Most of the driver code is identical to the <a
+href="../../adaptive_driven_cavity/html/index.html">previous
+example</a> and we only discuss the changes required to perform load
+balancing on the problem. Please refer to
+<a href="../../../navier_stokes/adaptive_driven_cavity/html/index.html">
+this tutorial</a> and <a
+href="../../adaptive_driven_cavity/html/index.html">this tutorial</a>
+for a more detailed discussion of the problem and its serial and
+parallel implementation.
+
+This document gives a brief overview of the load balancing procedure,
+followed by the changes required to use it in the parallel driver code
+for the driven cavity problem.
+
+<HR>
+
+\section load_balance Load balancing
+
+Our method for initially distributing a problem requires every mesh
+within the problem to be uniformly refined.  This can clearly lead to
+an imbalance in the amount of elements on each processor on occasions
+where adaptive refinement is local to one area of the problem only.
+Thus, once a distributed mesh has been adaptively refined, we
+implement procedures designed to improve the balance of the number of
+elements on each processor - the "load" of the problem.
+
+As with other methods within \c oomph-lib, load balancing is
+implemented such that minimal intervention is required by the user.
+The function \c Problem::load_balance() must be called within a driver
+code \b after the problem has already been distributed.
+
+The load balancing method performs the following steps:
+-# Take the current (distributed) global mesh, and calculate a new
+   partition for each of the current elements.  This is done by
+   passing a connectivity graph of the global mesh's elements
+   into \c METIS.  This requires the connectivity of elements on each of
+   the current processors to be communicated onto the root processor;
+   the root processor is the only one that calls the external \c METIS
+   function which performs the partitioning.  The root processor then
+   communicates the required partition value back to each of the other
+   processors.
+   \n\n
+-# Following this, each of the root elements determines its partition
+   by a simple polling of all its leaf elements.  The partition value
+   used for the root element is that used by the majority of its
+   leaves.
+   \n\n
+-# At the same time as this, the refinement pattern for each root
+   element and all the values associated with its \c Data is stored.
+   \n\n
+-# The partition, refinement, and \c Data information for root
+   elements in the (global) mesh on each processor is communicated to 
+   global arrays available to all processors.  [hierher This may seem
+   costly, but I have not seen any examples so far where the
+   communication CPU time dominates any of the time spent in any of
+   the other areas of the \c load_balance() method.  If it is a
+   bottleneck in any problem in the future, the current method could
+   be improved by only sendinf the refinement and \c Data information
+   to the relevant processor, given the knowledge of the new partition.]
+   \n\n
+-# A new (global) mesh is built using the \c Problem::build_mesh()
+   function (see below).
+   \n\n
+-# The new (global) mesh is distributed according to the communicated
+   partition.
+   \n\n
+-# Once distributed, the new (global) mesh is refined on each processor
+   according to its section of the global refinement array.
+   \n\n
+-# Finally, the \c Data values from the old (global) mesh are copied
+   across into the new (global) mesh according to the correct section
+   of the global \c Data array for the current processor.
+   \n\n
+
+In order to use this method, the user must also provide the function \c
+Problem::build_mesh() in their driver code.  Within this function, the
+user must build \c every mesh used in the problem (including the
+global mesh in multi-domain problems), apply the
+appropriate boundary conditions, and complete the build of all
+elements in all submeshes.
+
+The functions \c Problem::actions_before_load_balance() and \c
+actions_after_load_balance() are also provided.  In general,
+the function \c actions_before_load_balance() performs much the same
+role as the function \c actions_before_distribute().  However, since
+the \c load_balance() method described above distributes the new
+(global) mesh and then immediately refines it, the \c
+actions_after_load_balance() routine must combine all aspects of the
+\c actions_after_distribute() and \c actions_after_adapt() functions.
+
+\b Note: If a driver code uses a preconditioner of some description, the
+function \c actions_after_load_balance() must ensure that the
+preconditioner is told that the meshes within the problem have been
+rebuilt; this is simply done by using the relevant preconditioner's \c
+set_mesh(..) function (or \c set_navier_stokes_mesh(..), \c
+set_wall_mesh(..), etc.).
+
+<HR>
+
+\section example An example: revisiting the adaptive driven cavity problem 
+
+In this section we outline the changes which must be made to the <a
+href="../../adaptive_driven_cavity/html/index.html">parallel version
+of the adaptive driven cavity problem</a> so that the problem can use
+the load balancing method described above.
+
+\subsection main_body The main body
+
+The only modification required in the main body of the code is the
+addition of a call to the \c load_balance() function.  In this
+instance, we perform two adaptive steps, load balance the problem, and
+then perform one further adaptive step; so the code block from the
+original driver code:
+
+\dontinclude adaptive_driven_cavity.cc
+\skipline Solve the problem with automatic adaptation
+\until max_adapt
+
+becomes
+
+\dontinclude adaptive_driven_cavity_load_balance.cc
+\skipline Solve the problem with automatic adaptation for two steps
+\until newton_solve(1)
+
+\subsection build_mesh The build_mesh() function
+
+We must supply the function \c Problem::build_mesh(), used in step 5
+of the load balancing method described above.  Thus we take all the
+relevant code, which previously lived in the problem's constructor,
+and create the following function, which (i) creates the mesh, (ii)
+applies the relevant boundary conditions, and (iii) completes the
+build of all the elements in the problem.
+
+\dontinclude adaptive_driven_cavity_load_balance.cc
+\skipline start_of_build_mesh
+\until end_of_build_mesh
+
+\subsection problem_constructor Changes to the problem constructor
+
+Since we have supplied the function \c build_mesh(), we modify the
+problem constructor accordingly:
+
+\dontinclude adaptive_driven_cavity_load_balance.cc
+\skipline start_of_constructor
+\until end_of_constructor
+
+\subsection problem_class Changes to the problem class
+
+As the load balancing method performs a distribution immediately
+followed by a refinement, we must supply an additional function, \c
+actions_after_load_balance().  In this example, this function is
+identical in content to the \c actions_after_adapt() routine, since
+there is no requirement for an \c actions_after_distribute() routine.
+
+\dontinclude adaptive_driven_cavity_load_balance.cc
+\skipline Actions after load balancing
+\until end_of_actions_after_load_balance
+
+<HR>
+
+\section customising_load_balance Customising the load balancing
+
+The actual driver code demonstrates some of the different options available 
+for the \c Problem::load_balance() function, selected by the presence or 
+absence of command line arguments, and the use of the function \c
+Problem::use_default_partition_in_load_balance() (default value \c
+false), which is required when the use of command-line arguments
+indicates a test run.
+
+\subsection default_partition Option I: Load balancing a problem based on a default partitioning of the elements
+
+If the function \c Problem::use_default_partition_in_load_balance() is
+set to \c true, then the load balancing method skips step 1 in the
+method described earlier (which uses \c METIS) and partitions the
+elements by splitting them equally across two processors.  [Note: all
+test runs use two processors; if you try to run a test case on more
+than two processors then it is likely to fail as the original
+partition, which is stored in a file, only contains partition
+information for a run using two processors.]
+
+\skipline Validation run
+\until #endif
+
+In this instance, we also pass in a DocInfo object which documents the
+new distribution of the (root) elements, and a boolean flag
+to report information to the screen during the load balancing procedure.
+
+\until end of Taylor Hood elements
+
+\subsection using_metis Option II: Using METIS to perform the partitioning
+
+If no command line arguments are specified, we simply call the \c
+load_balance() function with no arguments.  The following code is
+identical to the <a
+href="../../adaptive_driven_cavity/html/index.html">original parallel
+driver code</a> aside from the insertion of the \c load_balance()
+function.
+
+\dontinclude adaptive_driven_cavity_load_balance.cc
+\skipline Are there
+\until }
+
+<HR>
+
+The figure below demonstrates the advantages of the load balancing
+method.  The left hand panel shows the distribution of the mesh across
+four processors (indicated by the colours) after the final solution of
+the problem after three adaptive steps, without the use of any load
+balancing.  The right hand panel shows the distribution of the mesh
+across four processors if the load balancing method is used in between
+the second and third adaptive step.
+
+@I w 0.75\textwidth load_balance_partition "Plot illustrating the distribution of the mesh for the adaptive driven cavity problem, both without (left image) and with (right image) the use of the load balancing method"
+
+<HR>
+<HR>
+
+\section sources Source files for this tutorial
+
+The driver code from which this example is taken also solves the same
+distributed and load-balanced problem using Crouzeix-Raviart elements.  
+The fully modified parallel driver code can be found at
+
+<CENTER>
+<A HREF="../../../../demo_drivers/mpi/distribution/adaptive_driven_cavity/adaptive_driven_cavity_load_balance.cc">
+demo_drivers/mpi/distribution/adaptive_driven_cavity/adaptive_driven_cavity_load_balance.cc
+</A>
+</CENTER>
+
+
+
+
+
+

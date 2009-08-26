@@ -147,6 +147,23 @@ namespace METIS
 //                                  const unsigned& objective,
 //                                 Vector<unsigned>& element_domain);
 
+#ifdef OOMPH_HAS_MPI
+
+ /// \short Use METIS to assign each element in an already-distributed mesh
+ /// to a domain. On return, element_domain[ielem] contains the number
+ /// of the domain [0,1,...,ndomain-1] to which element ielem has been
+ /// assigned, on every processor involved in the Problem.
+ /// - objective=0: minimise edgecut.
+ /// - objective=1: minimise total communications volume.
+ /// .
+ /// The partioning is based on the nodal graph of the mesh by taking into
+ /// account which global equation numbers are affected by each element and
+ /// connecting elements which affect the same global equation number.
+  extern void partition_distributed_mesh
+   (Problem* problem_pt,const unsigned& objective,
+    Vector<unsigned>& element_domain_on_this_proc);
+
+#endif
 
 }
 

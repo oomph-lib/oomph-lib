@@ -62,6 +62,9 @@ namespace oomph
  //Forward definition for RefineableElement class
  class RefineableElement;
 
+ //Forward definition for FiniteElement class
+ class FiniteElement;
+
  //Forward definition for the GeneralisedElement class
  class GeneralisedElement;
 
@@ -335,6 +338,14 @@ namespace oomph
  /// during the assembly process must be re-load-balanced.
  /// (only used for non-distributed problems)
  bool Must_recompute_load_balance_for_assembly;
+
+ /// \short Map which stores the correspondence between a root element and
+ /// its element number within the global mesh at the point when it is 
+ /// distributed. NB a root element in this instance is one of the elements
+ /// in the uniformly-refined mesh at the point when Problem::distribute()
+ /// is called, since these elements become roots on each of the processors
+ /// involved in the distribution.
+ std::map<FiniteElement*,unsigned> Base_mesh_element_number; 
 
 #endif
 
@@ -819,6 +830,89 @@ protected:
  /// \b Note: The nodes boundary information refers to the
  /// boundary numbers within the submesh!
  void rebuild_global_mesh();
+
+#ifdef OOMPH_HAS_MPI
+
+ /// \short Function to build the Problem's base mesh; this must be supplied
+ /// by the user if they wish to use the load_balance() functionality,
+ /// which is only available to problems that have already been distributed.
+ /// If the problem has multiple meshes, each mesh must be built, added as
+ /// as a submesh, and a call to build_global_mesh() must be made.
+ virtual void build_mesh()
+  {
+   std::string error_message =
+    "You have likely reached this error from Problem::load_balance()\n";
+   error_message +=
+    "The build_mesh() function is problem-specific and must be supplied:\n";
+   error_message +=
+    "Please write your own in your Problem class, ensuring that\n";
+   error_message +=
+    "any (sub)meshes are built before calling Problem::build_global_mesh().\n";
+   
+   throw OomphLibError(error_message,
+                       "Problem::build_mesh(...)",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+
+ /// \short Balance the load of a (possibly non-uniform) mesh that has
+ /// already been distributed
+ void load_balance()
+  {
+   // Dummy DocInfo
+   DocInfo doc_info;
+   doc_info.doc_flag()=false;
+
+   // Don't report stats
+   bool report_stats=false;
+
+   load_balance(doc_info,report_stats);
+  }
+
+ /// \short Balance the load of a (possibly non-uniform) mesh that has
+ /// already been distributed
+ void load_balance(DocInfo& doc_info, const bool& report_stats);
+
+ /// \short Actions before load balancing
+ virtual void actions_before_load_balance() {}
+
+ /// \short Actions after load balancing
+ virtual void actions_after_load_balance() {}
+
+ /// \short Flag to use "default partition" during load balance.
+ /// Should only be set to true when run in validation mode.
+ bool Use_default_partition_in_load_balance;
+
+ /// \short Access function to flag to use default partition in load balance
+ bool& use_default_partition_in_load_balance()
+  {
+   return Use_default_partition_in_load_balance;
+  }
+
+ /// \short Load balance helper routine: work out the partition, refinement
+ /// pattern and values to copy into the new load-balanced mesh(es) 
+ /// for a root element based upon the partition assigned to its leaves
+ void work_out_partition_and_refinement_for_root_elements_helper
+  (Vector<unsigned>& element_domain_on_this_proc,
+   Vector<Vector<Vector<unsigned> > >& to_be_refined_on_each_root,
+   Vector<Vector<double> >& double_values_on_each_root,
+   Vector<Vector<unsigned> >& unsigned_values_on_each_root,
+   Vector<unsigned>& element_partition, unsigned& max_level_overall,
+   const bool& report_stats);
+
+ /// \short Load balance helper routine: refine each new base (sub)mesh 
+ /// based upon the elements to be refined within each tree at each root
+ /// on the current processor
+ void refine_distributed_base_mesh
+  (Vector<Vector<Vector<unsigned> > >& to_be_refined_on_each_root,
+   const unsigned& max_level_overall);
+
+ /// \short Load balance helper routine: copy stored information from old
+ /// mesh into the new load-balanced mesh
+ void copy_stored_values_into_new_mesh_helper
+  (Vector<Vector<double> >& double_values_on_each_root,
+   Vector<Vector<unsigned> >& unsigned_values_on_each_root);
+
+#endif
 
  /// Return a pointer to the linear solver object
  LinearSolver* &linear_solver_pt() {return Linear_solver_pt;}

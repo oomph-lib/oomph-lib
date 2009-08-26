@@ -530,6 +530,14 @@ void RefineableMeshBase::adapt(OomphCommunicator* comm_pt,
      }
     nunrefined()=0;
     nrefined()=0;
+
+#ifdef OOMPH_HAS_MPI
+    // Flush any external element storage - any interaction will still
+    // be set up on the fly again, so we need to get rid of old information.
+    // This particularly causes problems in multi-domain examples where
+    // we decide not to refine one of the meshes
+    this->flush_all_external_storage();
+#endif
    }
 
  }

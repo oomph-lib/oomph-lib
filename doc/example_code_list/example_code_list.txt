@@ -2552,6 +2552,25 @@ problem.
 ######################################################################
 <TR>
 <TD>
+<A HREF="../../mpi/adaptive_driven_cavity_load_balance/html/index.html"><B>
+Parallel solution of the adaptive driven cavity problem with load balancing</B></A></a> \n\n
+We demonstrate the modifications required to perform a load balancing
+step within the distributed adaptive driven cavity problem
+</TD>
+<TD>
+- Load balancing a problem
+- The build_mesh function
+- The use of a default partition when performing a test run
+- The actions before and after load balance functions
+.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
 <A HREF="../../mpi/two_d_poisson_flux_bc_adapt/html/index.html"><B>
 Parallel solution of the 2D Poisson problem with flux boundary conditions</B></A></a> \n\n
 We demonstrate the modifications required to distribute a problem
@@ -2619,6 +2638,9 @@ solid and fluid meshes that interact along interface boundaries.
   spatial adaptativity in the fluid and solid meshes.
 - How to retain selected elements on all processors when the
   problem is distributed.
+- How to implement load-balancing of a distributed multi-domain
+  problem, with particular reference to the actions before and after
+  load balance functions.
 .
 </TD>
 <TD>

@@ -8,9 +8,11 @@ This document provides an overview of
   <a href="../../../interaction/turek_flag/html/index.html">Turek &
   Hron's FSI benchmark problem</a> so that both the fluid and solid meshes
   can be adapted, 
+. 
+- how to distribute the problem across multiple processors,
 .
-and 
-- how to distribute the problem across multiple processors. 
+and
+- how to enable load balancing of the problem once it is distributed.
 .
 The document is part of a
 <a href="../../../example_code_list/html/index.html#distributed">
@@ -349,9 +351,42 @@ are refined and distributed independently:
 
 @I w 0.75\textwidth turek_partition_zoom "Distribution of the Turek \& Hron benchmark problem over four processors; zoomed in view near the `flag'. "
 
+<HR>
+<HR>
 
+\section load_balance Load balancing
 
+When employing load balancing in this problem,
+we modify the time-stepping loop to perform the procedure
+after each timestep:
 
+\dontinclude turek_flag_load_balance.cc
+\skipline Start of timestepping loop
+\until end of timestepping loop
+
+\subsection build_mesh The build_mesh() function
+
+The function \c Problem::build_mesh() must be supplied by the user if
+they wish to use the load balancing capability.  Thus, in this driver
+code, we move all the required code to build the entire global mesh
+into this function, and call it from within the problem constructor:
+
+\dontinclude turek_flag_load_balance.cc
+\skipline start_of_constructor
+\until end_of_constructor
+
+The \c build_mesh() function itself contains all the relevant code
+from within the previous parallel driver code's problem constructor.
+
+\subsection actions_functions Actions before and after load balancing 
+
+In this example, all that is required for the \c
+actions_after_load_balance() function is the
+addition of the unpin-repin procedure from the \c actions_after_adapt()
+function to the appropriate part of the \c actions_after_distribute()
+function, since all the other functionality is already identical.  The
+\c actions_before_load_balance() function is identical to the \c
+actions_before_distribute() function.
 
 <HR>
 <HR>
@@ -363,10 +398,16 @@ are refined and distributed independently:
 demo_drivers/mpi/multi_domain/turek_flag/
 </A>
 </CENTER>\n
-- The driver code is: \n\n
+- The main driver code is: \n\n
 <CENTER>
 <A HREF="../../../../demo_drivers/mpi/multi_domain/turek_flag/turek_flag.cc">
 demo_drivers/mpi/multi_domain/turek_flag/turek_flag.cc
+</A>
+</CENTER>
+- The driver code for the load balancing example is: \n\n
+<CENTER>
+<A HREF="../../../../demo_drivers/mpi/multi_domain/turek_flag/turek_flag_load_balance.cc">
+demo_drivers/mpi/multi_domain/turek_flag/turek_flag_load_balance.cc
 </A>
 </CENTER>
 .

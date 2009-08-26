@@ -6,7 +6,8 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 # Name of executable
 check_PROGRAMS= \
-turek_flag
+turek_flag \
+turek_flag_load_balance
 
 #----------------------------------------------------------------------
 
@@ -16,6 +17,17 @@ turek_flag_SOURCES = turek_flag.cc
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
 turek_flag_LDADD = \
+                -L@libdir@ -lsolid -lconstitutive -lnavier_stokes  \
+                -lmeshes -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
+
+#----------------------------------------------------------------------
+
+# Sources for executable
+turek_flag_load_balance_SOURCES = turek_flag_load_balance.cc
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+turek_flag_load_balance_LDADD = \
                 -L@libdir@ -lsolid -lconstitutive -lnavier_stokes  \
                 -lmeshes -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
