@@ -763,9 +763,9 @@ namespace oomph
            Vector<double> s_ext(el_dim);
 
            // Perform locate_zeta locally for this coordinate
-           bool called_from_multi_domain=true;
+           bool use_coordinate_as_initial_guess=true;
            mesh_geom_obj_pt->locate_zeta(x_global,sub_geom_obj_pt,s_ext,
-                                         called_from_multi_domain);
+                                         use_coordinate_as_initial_guess);
 
            // Has the required element been located?
            if (sub_geom_obj_pt!=0)
@@ -960,9 +960,9 @@ namespace oomph
        // Perform locate_zeta for these coordinates
        GeomObject *sub_geom_obj_pt;
        Vector<double> ss(el_dim);
-       bool called_from_multi_domain=true;
+       bool use_coordinate_as_initial_guess=true;
        mesh_geom_obj_pt->locate_zeta(x_global,sub_geom_obj_pt,ss,
-                                     called_from_multi_domain);
+                                     use_coordinate_as_initial_guess);
 
        // Did the locate method work?
        if (sub_geom_obj_pt!=0)

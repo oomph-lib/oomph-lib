@@ -40,7 +40,7 @@ namespace oomph
 /// are elements that coincide with the faces of
 /// higher-dimensional "bulk" elements. They are used on 
 /// boundaries where we would like to impose parallel outflow and 
-/// impose pressure.
+/// impose the pressure.
 //========================================================================
  template <class ELEMENT>
   class ImposeParallelOutflowElement :
@@ -49,7 +49,7 @@ namespace oomph
   {
    private :  
 
-   /// pointer to imposed pressure
+   /// pointer to imposed pressure -- if null then no pressure imposed.
    double* Pressure_pt;
    
    /// Lagrange Id
@@ -271,9 +271,12 @@ namespace oomph
            
            if (local_eqn>=0)
             {
-             // add the contribution of the imposed pressure
-             residuals[local_eqn]-= (*Pressure_pt)* norm_vec[i]*psi(j)*W; 
-              
+             // Add the contribution of the imposed pressure
+             if (Pressure_pt!=0)
+              {
+               residuals[local_eqn]-= (*Pressure_pt)* norm_vec[i]*psi(j)*W; 
+              }
+
              // Add lagrange multiplier contribution to the bulk equation
              for(unsigned l=0;l<dim_el;l++) 
               {

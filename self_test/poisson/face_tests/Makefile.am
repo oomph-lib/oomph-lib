@@ -69,21 +69,31 @@ t_faces_3d_SOURCES = t_faces_3d.cc
 t_faces_3d_LDADD = -L@libdir@ -lpoisson  \
 -lgeneric  $(EXTERNAL_LIBS) $(FLIBS)
 
+#----------------------------------------------------------------
+# The stuff below was introduced to speed up the compilation
+# but breaks when the library is compiled with paranoid
+# because the paranoid flag is not used in the compilation of
+# the drivers (which include headers) but it is used
+# when the library is built. FaceElements contain some
+# additional variables that are only used in paranoid mode
+# so the memory layout assumed by driver and library
+# clashes causing a nasty seg fault.
+#----------------------------------------------------------------
 
-#Automake doesn't have an easy way to make without optimisation
-#This is the automake generated option without CXX and CPP flags
-q_faces_2d.o : q_faces_2d.cc
-	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(AM_CXXFLAGS) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
-	mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+# #Automake doesn't have an easy way to make without optimisation
+# #This is the automake generated option without CXX and CPP flags
+# q_faces_2d.o : q_faces_2d.cc
+# 	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(AM_CXXFLAGS) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+# 	mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
 
-q_faces_3d.o : q_faces_3d.cc
-	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(AM_CXXFLAGS) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
-	mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+# q_faces_3d.o : q_faces_3d.cc
+# 	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(AM_CXXFLAGS) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+# 	mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
 
-t_faces_2d.o : t_faces_2d.cc
-	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(AM_CXXFLAGS) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
-	mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+# t_faces_2d.o : t_faces_2d.cc
+# 	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(AM_CXXFLAGS) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+# 	mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
 
-t_faces_3d.o : t_faces_3d.cc
-	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(AM_CXXFLAGS) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
-	mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+# t_faces_3d.o : t_faces_3d.cc
+# 	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(AM_CXXFLAGS) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+# 	mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po

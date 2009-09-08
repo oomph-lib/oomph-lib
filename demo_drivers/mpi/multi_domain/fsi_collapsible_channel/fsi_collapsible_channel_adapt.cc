@@ -1002,7 +1002,7 @@ void FSICollapsibleChannelProblem<ELEMENT>::actions_after_adapt()
 int main(int argc, char* argv[])
 {
 
-//feenableexcept(FE_INVALID | FE_DIVBYZERO); 
+ //feenableexcept(FE_INVALID | FE_DIVBYZERO); 
 
 
 #ifdef OOMPH_HAS_MPI

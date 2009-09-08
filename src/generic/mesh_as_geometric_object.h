@@ -174,7 +174,7 @@ public:
  void locate_zeta(const Vector<double>& zeta, 
                   GeomObject*& sub_geom_object_pt, 
                   Vector<double>& s,
-                  const bool &called_within_spiral=false);
+                  const bool& use_coordinate_as_initial_guess=false);
 
  /// \short Return the position as a function of the intrinsic coordinate zeta.
  /// This provides an (expensive!) default implementation in which

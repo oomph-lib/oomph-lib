@@ -103,6 +103,49 @@ public:
    BrokenCopy::broken_assign("QHermiteElement");
   }
  
+
+ ///Check whether the local coordinate are valid or not 
+ bool local_coord_is_valid(const Vector<double> &s) 
+ {
+  unsigned ncoord = dim();
+  for(unsigned i=0;i<ncoord;i++)
+   {
+    // We're outside 
+    if((s[i] - s_max() >  0.0) ||
+       (s_min() - s[i] >  0.0))
+     {
+      return false;
+     }
+   }
+  return true;
+ }
+ 
+ /// \short Check whether the local coordinate are valid or not, allowing for
+ /// rounding tolerance. Nodal coordinate is adjusted to move the
+ /// point back into the element if it's outside the element
+ /// to within that tolerance
+ bool local_coord_is_valid(Vector<double> &s, 
+                           const double & rounding_tolerance)
+ {
+  unsigned ncoord = dim();
+  for(unsigned i=0;i<ncoord;i++)
+   {
+    // We're outside
+    if((s[i] - s_max() >  rounding_tolerance) ||
+       (s_min() - s[i] >  rounding_tolerance))
+     {
+      return false;
+     }
+    else
+     {
+      // Adjust to move it onto the boundary
+      if (s[i] > s_max() ) s[i] = s_max();
+      if (s[i] < s_min() ) s[i] = s_min();
+     }
+   }
+  return true;
+ }
+ 
  /// Function to calculate the geometric shape functions at local coordinate s
  void shape(const Vector<double> &s, Shape &psi) const;
 

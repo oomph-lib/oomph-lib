@@ -44,6 +44,8 @@ echo 2 > /tmp/junk.txt
 make mydist < /tmp/junk.txt
 
 
+exit
+
 #------------------------------------------------------
 # Directory for destruct tests
 #------------------------------------------------------

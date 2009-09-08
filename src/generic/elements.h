@@ -3203,7 +3203,7 @@ private:
 //========================================================================
 class FaceElement: public virtual FiniteElement
 {
- /// Typedef for the function that translates the face coordinate
+ /// \short Typedef for the function that translates the face coordinate
  /// to the coordinate in the bulk element
  typedef void (*CoordinateMappingFctPt)(const Vector<double> &s,
                                        Vector<double> &s_bulk);

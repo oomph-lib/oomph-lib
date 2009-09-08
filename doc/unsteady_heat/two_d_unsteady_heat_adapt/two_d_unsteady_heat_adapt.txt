@@ -13,6 +13,7 @@ functions deal with adaptive meshes.
 
 For this purpose consider the following problem:
 
+
 <CENTER>
 <TABLE>
 <TR> 
@@ -67,16 +68,21 @@ t\right)]\big)- x_2\bigg)\bigg]
 \f]
 is the exact solution.
 
+
 The solution represents the "usual" tanh profile, whose steepness
 is controlled by the parameter \f$ \alpha \f$ so that for \f$ \alpha
 \gg 1 \f$ the solution approaches a step. The step is oriented
-at an angle \f$ \Phi \f$ against the \f$x_1-\f$axis and its position varies
+at an angle \f$ \Phi \f$ against the \f$ x_1-\f$ axis and its position varies
 periodically. The parameter \f$ \beta \f$ controls the amplitude
 of the step's lateral displacement, while \f$ \gamma \f$ determines the
-rate at which its position changes. For \f$ \gamma \gg 1\f$,
+rate at which its position changes. For \f$ \gamma \gg 1 \f$ ,
 the step remains stationary for most of the period and then
-translates rapidly parallel to the \f$x_1-\f$axis, making this a very 
+translates rapidly parallel to the \f$ x_1- \f$ axis, making this a very 
 challenging problem.
+
+
+
+
 
 The figure below shows a snapshot of the <A HREF="../figures/step_soln.avi">
 animated solution</A>, obtained from the spatially adaptive simulation
@@ -95,6 +101,8 @@ another animation of the solution</A>.
 
 <HR>
 <HR>
+
+
 
 \section spatial_adapt Background: Spatial adaptivity in time-dependent problems
 
@@ -129,7 +137,7 @@ The arguments to this function are as follows:
 . 
 Given these arguments, the unsteady Newton solver solves the
 non-linear system of spatially and temporally discretised equations 
-to advance the solution from time  \f$ t \f$ to \f$ t + dt \f$. 
+to advance the solution from time  \f$ t \f$ to \f$ t + dt \f$ . 
 Once the solution  at time \f$ t + dt \f$ has been obtained, 
 error estimates are computed for all elements. If any 
 elemental error estimates are outside the target range, the solution
@@ -170,7 +178,7 @@ issues arise:
    restriction because the time-integration procedure will only provide
    (temporally) accurate results if the timestep \c dt is so small that the
    solution at time \f$ t \f$ only differs slightly from that
-   at time  \f$ t + dt \f$. One level of mesh adaptation per timestep 
+   at time  \f$ t + dt \f$ . One level of mesh adaptation per timestep 
    should therefore be sufficient to adapt the mesh
    in response to these changes.
    \n\n 
@@ -482,7 +490,7 @@ The plots below show the time history of various parameters.
 - The upper graph  compares the solution at the control node 
   (red line) against the exact solution (green line). 
 - The middle graph shows the position of the step by plotting its
-  intercept with the \f$x_1-\f$axis as a function of time, and
+  intercept with the \f$ x_1- \f$ axis as a function of time, and
   the error of the solution. 
 - The lower graph illustrates the evolution of the adaptive spatial 
   refinement process: The green line illustrates the total number of 

@@ -1036,15 +1036,19 @@ namespace oomph
     offset+=el_hi-el_lo+1;
    }
       
-  // Gather timings on root processor:
-  unsigned n_e = Last_el_for_assembly[rank]-First_el_for_assembly[rank]+1;
-  double* el_ass_time = new double[n_e];
-  for (unsigned i = 0; i < n_e; i++)
+  // Make temporary c-style array to keep valgrind from complaining
+  // about us reading and writing to same vector in gatherv below
+  unsigned nel=elemental_assembly_time.size();
+  double* el_ass_time = new double[nel];
+  for (unsigned e=0;e<nel;e++)
    {
-    el_ass_time[i] = elemental_assembly_time[i];
+    el_ass_time[e]=elemental_assembly_time[e];
    }
+  
+  // Gather timings on root processor
+  unsigned nel_local =Last_el_for_assembly[rank]-First_el_for_assembly[rank]+1;
   MPI_Gatherv(
-   el_ass_time,n_e,MPI_DOUBLE,
+   &el_ass_time[First_el_for_assembly[rank]],nel_local,MPI_DOUBLE,
    &elemental_assembly_time[0],&receive_count[0],&displacement[0],
    MPI_DOUBLE,0,this->communicator_pt()->mpi_comm());
   delete[] el_ass_time;

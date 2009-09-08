@@ -33,7 +33,7 @@ if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/surf.dat.gz \
-    surf.dat  >> validation.log
+    surf.dat 0.5 1.0e-14  >> validation.log
 fi
 
 

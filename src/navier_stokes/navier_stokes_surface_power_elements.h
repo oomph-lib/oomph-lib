@@ -70,7 +70,17 @@ public:
    Dim = node_pt(0)->ndim();
  }
 
-
+  
+  /// \short The "global" intrinsic coordinate of the element when
+  /// viewed as part of a geometric object should be given by
+  /// the FaceElement representation, by default
+  /// This final over-ride is required for cases where the
+  /// FaceElement is a SolidFiniteElement because both SolidFiniteElements 
+  /// and FaceElements overload zeta_nodal.
+  double zeta_nodal(const unsigned &n, const unsigned &k,           
+                    const unsigned &i) const 
+  {return FaceElement::zeta_nodal(n,k,i);}     
+  
 
  /// \short Get integral of instantaneous rate of work done by 
  /// the traction that's exerted onto the fluid.

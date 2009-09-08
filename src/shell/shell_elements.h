@@ -580,11 +580,8 @@ class ClampedHermiteShellBoundaryConditionElement :
  
 public:
 
- /// \short Constructor, takes the pointer to the "bulk" element, the 
- /// index of the fixed local coordinate and its value represented
- /// by an integer (+/- 1), indicating that the face is located
- /// at the max. or min. value of the "fixed" local coordinate
- /// in the bulk element.
+ /// \short Constructor, takes the pointer to the "bulk" element and the 
+ /// face index.
  ClampedHermiteShellBoundaryConditionElement(
   FiniteElement* const &bulk_el_pt, const int &face_index);
  

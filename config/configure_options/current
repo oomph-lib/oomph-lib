@@ -88,20 +88,22 @@
 # finishing your changes. We specify the location of the blas,
 # lapack, hypre and trilinos libraries, the latter two assumed
 # to have been compiled with mpi support. 
+#
+#--enable-suppress-doc
 --enable-MPI
 --enable-symbolic-links-for-headers
---with-blacs=/home/mheil/local_gcc4.3.2/lib/blacs_with_copy
---with-scalapack=/home/mheil/local_gcc4.3.2/lib/scalapack/libscalapack.a
---with-pord=/home/mheil/local_gcc4.3.2/pord/lib/libpord.a 
---with-mumps=/home/mheil/local_gcc4.3.2/mumps
---with-blas=/home/mheil/local_gcc4.3.2/lib/blas/blas.a
---with-lapack=/home/mheil/local_gcc4.3.2/lib/lapack/lapack.a
---with-hypre=/home/mheil/local_gcc4.3.2/hypre-lam-mpi
---with-trilinos=/home/mheil/local_gcc4.3.2/trilinos-9.0.2-lam
+--with-blacs=/home/mheil/local/lib/blacs_with_copy
+--with-scalapack=/home/mheil/local/lib/scalapack/libscalapack.a
+--with-pord=/home/mheil/local/pord/lib/libpord.a 
+--with-mumps=/home/mheil/local/mumps
+--with-blas=/home/mheil/local/lib/blas/blas.a
+--with-lapack=/home/mheil/local/lib/lapack/lapack.a
+--with-hypre=/home/mheil/local/hypre_default_installation_mpi
+--with-trilinos=/home/mheil/local/trilinos_default_installation_mpi
 --with-mpi-self-tests="mpirun -np 2"
-CXXFLAGS="-g -Wall -DPARANOID -DRANGE_CHECKING"
-CFLAGS="-g -Wall"
-FFLAGS="-g -Wall"
+CXXFLAGS="-g -DPARANOID -Wall"
+CFLAGS="-g"
+FFLAGS="-g" 
 CXX=mpic++
 CC=mpicc
 F77=mpif77
