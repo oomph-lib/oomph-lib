@@ -45,6 +45,6 @@ fig2poly:
 #                   comes from demo_drivers/meshing/mesh_from_vmtk/
 
 clean-local:
-	rm -f *~ txt2h.sh fig2poly create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh minimal_mpi_test
+	rm -f *~ txt2h.sh fig2poly create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh minimal_mpi_test minimal_mpi_test.out
 distclean-local:
-	rm -f *~ txt2h.sh fig2poly create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh minimal_mpi_test
+	rm -f *~ txt2h.sh fig2poly create_fluid_and_solid_surface_mesh_from_fluid_xda_mesh minimal_mpi_test minimal_mpi_test.out

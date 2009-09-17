@@ -39,6 +39,7 @@
 #include "../generic/geom_objects.h"
 #include "../generic/fsi.h"
 #include "../generic/stored_shape_function_elements.h"
+#include "../generic/matrices.h"
 
 namespace oomph
 {
@@ -234,6 +235,13 @@ public:
 
  /// \short Get potential (strain) and kinetic energy of the element
  void get_energy(double& pot_en, double& kin_en);
+
+ 
+ /// Get strain and bending tensors
+ void get_strain_and_bend(const Vector<double>& s, 
+                          DenseDoubleMatrix& strain, 
+                          DenseDoubleMatrix& bend);
+
 
  /// \short Get integral of instantaneous rate of work done on 
  /// the wall due to the load returned by the virtual 

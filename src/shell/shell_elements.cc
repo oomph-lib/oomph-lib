@@ -144,6 +144,197 @@ void KirchhoffLoveShellEquations::get_normal(const Vector<double>& s,
 }
 
 
+//======================================================================
+/// Get strain and bending tensors
+//=====================================================================
+ void KirchhoffLoveShellEquations::get_strain_and_bend(
+  const Vector<double>& s, DenseDoubleMatrix& strain, DenseDoubleMatrix& bend)
+ {
+  //Set the dimension of the coordinates
+  const unsigned n_dim = 3;
+  
+  //Set the number of lagrangian coordinates
+  const unsigned n_lagrangian = 2;
+  
+  //Find out how many nodes there are
+  const unsigned n_node = nnode();
+  
+  //Find out how many positional dofs there are
+  const unsigned n_position_type = nnodal_position_type();
+  
+  //Set up memory for the shape functions
+  Shape psi(n_node,n_position_type);
+  DShape dpsidxi(n_node,n_position_type,n_lagrangian);
+  
+  //Could/Should we make this more general?
+  DShape d2psidxi(n_node,n_position_type,3);
+  
+  
+  //Call the derivatives of the shape functions:
+  // d2psidxi(i,0) = \f$ \partial^2 \psi_j / \partial^2 \xi_0^2 \f$ 
+  // d2psidxi(i,1) = \f$ \partial^2 \psi_j / \partial^2 \xi_1^2 \f$ 
+  // d2psidxi(i,2) = \f$ \partial^2 \psi_j/\partial \xi_0 \partial \xi_1 \f$
+  (void) d2shape_lagrangian(s,psi,dpsidxi,d2psidxi);
+     
+  //Calculate local values of lagrangian position and 
+  //the derivative of global position wrt lagrangian coordinates
+  Vector<double> interpolated_xi(2,0.0), interpolated_x(3,0.0);
+  Vector<double> accel(3,0.0);
+  DenseMatrix<double> interpolated_A(2,3);
+  DenseMatrix<double> interpolated_dAdxi(3);
+  
+  //Initialise to zero
+  for(unsigned i=0;i<n_dim;i++)
+   {
+    for(unsigned j=0;j<n_lagrangian;j++) {interpolated_A(j,i) = 0.0;}
+    for(unsigned j=0;j<3;j++) {interpolated_dAdxi(i,j) = 0.0;}
+   }
+  
+  //Calculate displacements and derivatives
+  for(unsigned l=0;l<n_node;l++) 
+   {
+    //Loop over positional dofs
+    for(unsigned k=0;k<n_position_type;k++)
+     {
+      //Loop over lagrangian coordinate directions
+      for(unsigned i=0;i<n_lagrangian;i++)
+       {interpolated_xi[i] += raw_lagrangian_position_gen(l,k,i)*psi(l,k);}
+      
+      //Loop over displacement components (deformed position)
+      for(unsigned i=0;i<n_dim;i++)
+       {
+        double x_value = raw_nodal_position_gen(l,k,i);
+        
+        //Calculate interpolated (deformed) position
+        interpolated_x[i] += x_value*psi(l,k);
+        
+        //Calculate the acceleration
+        accel[i] += raw_dnodal_position_gen_dt(2,l,k,i)*psi(l,k);
+        
+        //Loop over derivative directions
+        for(unsigned j=0;j<n_lagrangian;j++)
+         {                               
+          interpolated_A(j,i) += x_value*dpsidxi(l,k,j);
+         }
+        //Loop over the second derivative directions
+        for(unsigned j=0;j<3;j++)
+         {
+          interpolated_dAdxi(j,i) += x_value*d2psidxi(l,k,j);
+         }
+        
+       }
+     }
+   }
+  
+  //Get the values of the undeformed parameters
+  Vector<double> interpolated_R(3);
+  DenseMatrix<double> interpolated_a(2,3);
+  RankThreeTensor<double> dadxi(2,2,3);
+  
+  //Read out the undeformed position from the geometric object
+  Undeformed_midplane_pt->d2position(interpolated_xi,interpolated_R,
+                                     interpolated_a,dadxi);
+  
+  //Copy the values of the second derivatives into a slightly
+  //different data structure, where the mixed derivatives [0][1] and [1][0]
+  //are given by the single index [2]
+  DenseMatrix<double> interpolated_dadxi(3);
+  for(unsigned i=0;i<3;i++)
+   {
+    interpolated_dadxi(0,i) = dadxi(0,0,i);
+    interpolated_dadxi(1,i) = dadxi(1,1,i);
+    interpolated_dadxi(2,i) = dadxi(0,1,i);
+   }
+  
+  //Declare and calculate the undeformed and deformed metric tensor
+  double a[2][2], A[2][2], aup[2][2], Aup[2][2];
+  
+  //Assign values of A and gamma
+  for(unsigned al=0;al<2;al++)
+   {
+    for(unsigned be=0;be<2;be++)
+     {
+      //Initialise a(al,be) and A(al,be) to zero
+      a[al][be] = 0.0;
+      A[al][be] = 0.0;
+      //Now calculate the dot product
+      for(unsigned k=0;k<3;k++)
+       {
+        a[al][be] += interpolated_a(al,k)*interpolated_a(be,k);
+        A[al][be] += interpolated_A(al,k)*interpolated_A(be,k);
+       }
+      //Calculate strain tensor
+      strain(al,be) = 0.5*(A[al][be] - a[al][be]);
+     }
+   }
+  
+  //Calculate the contravariant metric tensor
+  double adet = calculate_contravariant(a,aup);
+  double Adet = calculate_contravariant(A,Aup);
+  
+  //Square roots are expensive, so let's do them once here
+  double sqrt_adet = sqrt(adet);
+  double sqrt_Adet = sqrt(Adet);
+  
+  //Calculate the normal Vectors
+  Vector<double> n(3), N(3);
+  n[0] = (interpolated_a(0,1)*interpolated_a(1,2) -
+          interpolated_a(0,2)*interpolated_a(1,1))/sqrt_adet;
+  n[1] = (interpolated_a(0,2)*interpolated_a(1,0) -
+          interpolated_a(0,0)*interpolated_a(1,2))/sqrt_adet;
+  n[2] = (interpolated_a(0,0)*interpolated_a(1,1) -
+          interpolated_a(0,1)*interpolated_a(1,0))/sqrt_adet;
+  N[0] = (interpolated_A(0,1)*interpolated_A(1,2) -
+          interpolated_A(0,2)*interpolated_A(1,1))/sqrt_Adet;
+  N[1] = (interpolated_A(0,2)*interpolated_A(1,0) -
+          interpolated_A(0,0)*interpolated_A(1,2))/sqrt_Adet;
+  N[2] = (interpolated_A(0,0)*interpolated_A(1,1) -
+          interpolated_A(0,1)*interpolated_A(1,0))/sqrt_Adet;
+  
+  
+  //Calculate the curvature tensors
+  double b[2][2], B[2][2];
+  
+  b[0][0] = n[0]*interpolated_dadxi(0,0)
+   + n[1]*interpolated_dadxi(0,1) 
+   + n[2]*interpolated_dadxi(0,2);
+  
+  //Off-diagonal terms are the same
+  b[0][1] =  b[1][0] = n[0]*interpolated_dadxi(2,0) 
+   + n[1]*interpolated_dadxi(2,1)
+   + n[2]*interpolated_dadxi(2,2);
+  
+  b[1][1] =  n[0]*interpolated_dadxi(1,0) 
+   + n[1]*interpolated_dadxi(1,1)
+   + n[2]*interpolated_dadxi(1,2);
+  
+  //Deformed curvature tensor
+  B[0][0] =  N[0]*interpolated_dAdxi(0,0) 
+   + N[1]*interpolated_dAdxi(0,1) 
+   + N[2]*interpolated_dAdxi(0,2);
+  
+  //Off-diagonal terms are the same
+  B[0][1] =  B[1][0] = N[0]*interpolated_dAdxi(2,0) 
+   + N[1]*interpolated_dAdxi(2,1)
+   + N[2]*interpolated_dAdxi(2,2);
+  
+  B[1][1] =  N[0]*interpolated_dAdxi(1,0) 
+   + N[1]*interpolated_dAdxi(1,1)
+   + N[2]*interpolated_dAdxi(1,2);
+  
+  //Set up the change of curvature tensor
+  for(unsigned i=0;i<2;i++)
+   { 
+    for(unsigned j=0;j<2;j++)
+     {
+      bend(i,j) = b[i][j] - B[i][j];
+     }
+   }
+  
+ }
+
+
+
 //====================================================================
 /// Return the residuals for the equations of KL shell theory
 //====================================================================

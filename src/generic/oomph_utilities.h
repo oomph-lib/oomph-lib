@@ -439,7 +439,6 @@ public:
    Directory_must_exist=false;
   }
 
-
  /// Output directory
  std::string directory() const {return Directory;}
 
@@ -452,12 +451,20 @@ public:
  /// Doc or no doc?
  bool& doc_flag() {return Doc_flag;}
 
+ /// Doc or no doc? Const version.
+ bool doc_flag() const {return Doc_flag;}
+
  /// Number used (e.g.) for labeling output files
  unsigned& number() {return Number;}
 
+ /// Number used (e.g.) for labeling output files. Const version.
+ unsigned number() const {return Number;}
 
  /// String used (e.g.) for labeling output files
  std::string& label() {return Label;}
+
+ /// String used (e.g.) for labeling output files. Const version.
+ std::string label() const {return Label;}
 
  /// \short What do to do if an output directory doesn't exist:
  /// If true, we terminate code execution by throwing an OomphLibError 

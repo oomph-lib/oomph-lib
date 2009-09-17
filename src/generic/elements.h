@@ -2790,6 +2790,11 @@ public:
  virtual void interpolated_xi(const Vector<double> &s, 
                               Vector<double>& xi) const;
 
+ /// \short Compute derivatives of FE-interpolated Lagrangian coordinates xi
+ /// with respect to local coordinates: dxids[i][j]=dxi_i/ds_j.
+ virtual void interpolated_dxids(const Vector<double> &s, 
+                                 DenseMatrix<double> &dxids) const;
+  
  /// \short Return the Jacobian of mapping from local to Lagrangian
  /// coordinates at local position s.  NOT YET IMPLEMENTED
  virtual void J_lagrangian(const Vector<double> &s) const

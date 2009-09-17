@@ -4742,6 +4742,56 @@ void FaceElement::get_local_coordinate_in_bulk(
  }
 
 
+
+
+
+//============================================================================
+/// Compute derivatives of FE-interpolated Lagrangian coordinates xi
+/// with respect to local coordinates: dxids[i][j]=dxi_i/ds_j
+//============================================================================
+void SolidFiniteElement::interpolated_dxids(const Vector<double> &s, 
+                                            DenseMatrix<double> &dxids) const
+{ 
+ //Find the number of nodes
+ const unsigned n_node = nnode();
+ 
+ //Find the number of lagrangian types from the first node
+ const unsigned n_lagrangian_type = nnodal_lagrangian_type();
+ 
+ // Dimension of the element =  number of local coordinates
+ unsigned el_dim=dim();
+ 
+ //Assign storage for the local shape function
+ Shape psi(n_node,n_lagrangian_type);
+ DShape dpsi(n_node,n_lagrangian_type,el_dim);
+ 
+ //Find the values of shape function and its derivs w.r.t. to local coords
+ dshape_local(s,psi,dpsi);
+ 
+ //Read out the number of lagrangian coordinates from the node
+ const unsigned n_lagrangian = lagrangian_dimension();
+ 
+ //Loop over the number of lagrangian and local coordinates 
+ for(unsigned i=0;i<n_lagrangian;i++)
+  {
+   for(unsigned j=0;j<el_dim;j++)
+    {
+     //Initialise component to zero
+     dxids(i,j) = 0.0;
+     
+     //Loop over the local nodes
+     for(unsigned l=0;l<n_node;l++) 
+      {
+       //Loop over the number of dofs
+       for(unsigned k=0;k<n_lagrangian_type;k++)
+        {
+         dxids(i,j) += lagrangian_position_gen(l,k,i)*dpsi(l,k,j);
+        }
+      }
+    }
+  }
+}
+
 //=======================================================================
 /// Add jacobian and residuals for consistent assignment of 
 /// initial "accelerations" in Newmark scheme. Jacobian is the mass matrix.
