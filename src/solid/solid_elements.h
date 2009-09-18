@@ -427,7 +427,11 @@ class PVDEquations : public PVDEquationsBase<DIM>
    
    /// Output: x,y,[z],xi0,xi1,[xi2],gamma
    void output(FILE* file_pt, const unsigned &n_plot);
-      
+
+
+   /// \short Output: x,y,[z],xi0,xi1,[xi2],gamma and the strain and stress
+   /// components
+   void extended_output(std::ostream &outfile, const unsigned &n_plot);
    
     protected:
    
@@ -1212,7 +1216,7 @@ template<unsigned DIM, unsigned NNODE_1D>
  /// C-style output function
  void output(FILE* file_pt, const unsigned &n_plot)
  {PVDEquations<DIM>::output(file_pt,n_plot);}
-  
+
 };
 
 
@@ -1265,6 +1269,192 @@ class FaceGeometry<FaceGeometry<TPVDElement<3,NNODE_1D> > > :
   public:
  /// Constructor must call the constructor of the underlying solid element
   FaceGeometry() : SolidTElement<1,NNODE_1D>() {}
+};
+
+
+
+//=======================================================================
+/// An Element that solves the solid mechanics equations in an
+/// (near) incompressible formulation
+/// with quadratic interpolation for velocities and positions and
+/// continous linear pressure interpolation. This is equivalent to the
+/// TTaylorHoodElement element for fluids.
+//=======================================================================
+template <unsigned DIM>
+class TPVDElementWithContinuousPressure : public virtual SolidTElement<DIM,3>,
+ public virtual PVDEquationsWithPressure<DIM>
+{
+  private:
+ 
+ /// Static array of ints to hold number of variables at node
+ static const unsigned Initial_Nvalue[];
+
+ /// \short Unpin all solid pressure dofs in the element 
+ void unpin_elemental_solid_pressure_dofs()
+  {
+   //find the index at which the pressure is stored
+   int p_index = this->solid_p_nodal_index();
+   unsigned n_node = this->nnode();
+   // loop over nodes
+   for(unsigned n=0;n<n_node;n++) 
+    {this->node_pt(n)->unpin(p_index);}
+  }
+ 
+  protected:
+
+ /// \short Static array of ints to hold conversion from pressure
+ /// node numbers to actual node numbers
+ static const unsigned Pconv[];
+ 
+ /// \short Overload the access function 
+ /// that is used to return local equation correpsonding to the i-th
+ /// solid pressure value
+ inline int solid_p_local_eqn(const unsigned &i)
+  {return this->nodal_local_eqn(Pconv[i],this->solid_p_nodal_index());}
+ 
+ /// Pressure shape functions at local coordinate s
+ inline void solid_pshape(const Vector<double> &s, Shape &psi) const;
+
+public:
+
+ /// Constructor
+ TPVDElementWithContinuousPressure() : SolidTElement<DIM,3>(), 
+  PVDEquationsWithPressure<DIM>() 
+  { }
+ 
+
+ /// Broken copy constructor
+ TPVDElementWithContinuousPressure(
+  const TPVDElementWithContinuousPressure<DIM>& dummy) 
+  { 
+   BrokenCopy::broken_copy("TPVDElementWithContinuousPressu");
+  } 
+ 
+ /// Broken assignment operator
+ void operator=(const TPVDElementWithContinuousPressure<DIM>&) 
+  {
+   BrokenCopy::broken_assign("TPVDElementWithContinuousPressure");
+  }
+
+ /// \short Set the value at which the solid pressure is stored in the nodes
+ inline int solid_p_nodal_index() const {return 0;}
+
+ /// \short Number of values (pinned or dofs) required at node n. Can
+ /// be overwritten for hanging node version
+ inline virtual unsigned required_nvalue(const unsigned &n) const
+  {return Initial_Nvalue[n];}
+
+ /// Return the l-th pressure value, make sure to use the hanging
+ /// representation if there is one!
+ double solid_p(const unsigned &l) 
+  {return this->nodal_value(Pconv[l],this->solid_p_nodal_index());}
+
+ /// Set the l-th solid pressure value to p_value
+ void set_solid_p(const unsigned &l, const double &p_value)
+  {this->node_pt(Pconv[l])->set_value(this->solid_p_nodal_index(),p_value);}
+
+ /// Return number of pressure values
+ unsigned npres_solid() const;
+
+ /// Fix the pressure dof l to be the value pvalue 
+ void fix_solid_pressure(const unsigned &l, const double &pvalue)
+  {
+   this->node_pt(Pconv[l])->pin(this->solid_p_nodal_index());
+   this->node_pt(Pconv[l])->set_value(this->solid_p_nodal_index(),pvalue);
+  }
+
+ /// Generic FiniteElement output function
+ void output(std::ostream &outfile) {FiniteElement::output(outfile);}
+
+ /// PVDEquationsWithPressure output function
+ void output(std::ostream &outfile, const unsigned &n_plot)
+  {PVDEquationsWithPressure<DIM>::output(outfile,n_plot);}
+
+
+ /// C-style generic FiniteElement output function
+ void output(FILE* file_pt) {FiniteElement::output(file_pt);}
+
+ /// C-style PVDEquationsWithPressure output function
+ void output(FILE* file_pt, const unsigned &n_plot)
+  {PVDEquationsWithPressure<DIM>::output(file_pt,n_plot);}
+
+
+};
+
+//Inline functions
+
+
+
+//==========================================================================
+/// 2D :
+/// Number of pressure values
+//==========================================================================
+template<>
+inline unsigned TPVDElementWithContinuousPressure<2>::npres_solid() const
+{return 3;}
+
+//==========================================================================
+/// 3D :
+/// Number of pressure values
+//==========================================================================
+template<>
+inline unsigned TPVDElementWithContinuousPressure<3>::npres_solid() const
+{return 4;}
+
+
+//==========================================================================
+/// 2D :
+/// Pressure shape functions
+//==========================================================================
+template<>
+inline void TPVDElementWithContinuousPressure<2>::solid_pshape(
+ const Vector<double> &s, Shape &psi) const
+{
+ psi[0] = s[0];
+ psi[1] = s[1];
+ psi[2] = 1.0-s[0]-s[1];
+}
+
+//==========================================================================
+/// 3D :
+/// Pressure shape functions
+//==========================================================================
+template<>
+inline void TPVDElementWithContinuousPressure<3>::solid_pshape(
+ const Vector<double> &s, Shape &psi) const
+{
+ psi[0] = s[0];
+ psi[1] = s[1];
+ psi[2] = s[2];
+ psi[3] = 1.0-s[0]-s[1]-s[2];
+}
+
+
+//=======================================================================
+/// Face geometry of the 2D Taylor_Hood elements
+//=======================================================================
+template<>
+class FaceGeometry<TPVDElementWithContinuousPressure<2> >:
+public virtual SolidTElement<1,3>
+{
+  public:
+
+  /// Constructor: Call constructor of base
+  FaceGeometry() : SolidTElement<1,3>() {}
+};
+
+//=======================================================================
+/// Face geometry of the 3D Taylor_Hood elements
+//=======================================================================
+template<>
+class FaceGeometry<TPVDElementWithContinuousPressure<3> >: 
+public virtual SolidTElement<2,3>
+{
+ 
+  public:
+
+ /// Constructor: Call constructor of base
+  FaceGeometry() : SolidTElement<2,3>() {}
 };
 
 

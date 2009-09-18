@@ -53,6 +53,87 @@ double AxisymmetricNavierStokesEquations::Default_Physical_Ratio_Value = 1.0;
 Vector<double> AxisymmetricNavierStokesEquations::
 Default_Gravity_vector(3,0.0);
 
+
+//================================================================
+/// Compute the diagonal of the velocity mass matrix
+//================================================================
+ void AxisymmetricNavierStokesEquations::
+ get_velocity_mass_matrix_diagonal(Vector<double> &mass_diag)
+ {
+  
+  // Resize and initialise
+  mass_diag.assign(ndof(), 0.0);
+  
+  // find out how many nodes there are
+  const unsigned n_node = nnode();
+  
+  // find number of coordinates
+  const unsigned n_value = 3;
+  
+  // find the indices at which the local velocities are stored
+  Vector<unsigned> u_nodal_index(n_value);
+  for(unsigned i=0; i<n_value; i++)
+   {
+    u_nodal_index[i] = this->u_index_axi_nst(i);
+   }
+  
+  //Set up memory for test functions
+  Shape test(n_node);
+  
+  //Number of integration points
+  unsigned n_intpt = integral_pt()->nweight();
+  
+  //Integer to store the local equations no
+  int local_eqn=0;
+  
+  //Loop over the integration points
+  for(unsigned ipt=0; ipt<n_intpt; ipt++)
+   {
+    
+    //Get the integral weight
+    double w = integral_pt()->weight(ipt);
+
+    //Get determinant of Jacobian of the mapping
+    double J = J_eulerian_at_knot(ipt);
+    
+    //Premultiply weights and Jacobian
+    double W = w*J;
+
+    //Get the velocity test functions - there is no explicit 
+    // function to give the test function so use shape
+    shape_at_knot(ipt,test);
+    
+    //Need to get the position to sort out the jacobian properly
+    double r = 0.0;
+    for(unsigned l=0;l<n_node;l++)
+     {
+      r += this->nodal_position(l,0)*test(l);
+     }
+
+    //Multiply by the geometric factor
+    W *= r;
+
+    //Loop over the veclocity test functions
+    for(unsigned l=0; l<n_node; l++)
+     {
+      //Loop over the velocity components
+      for(unsigned i=0; i<n_value; i++)
+       {
+        local_eqn = nodal_local_eqn(l,u_nodal_index[i]);
+
+        //If not a boundary condition
+        if(local_eqn >= 0)
+         {
+          //Add the contribution
+          mass_diag[local_eqn] += test[l]*test[l] * W;
+         } //End of if not boundary condition statement
+       } //End of loop over dimension
+     } //End of loop over test functions
+
+   }
+ }
+
+
 //======================================================================
 /// Validate against exact velocity solution at given time.
 /// Solution is provided via function pointer.
@@ -1400,6 +1481,80 @@ fill_in_generic_residual_contribution_axi_nst(Vector<double> &residuals,
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
+//=============================================================================
+/// Create a list of pairs for all unknowns in this element,
+/// so that the first entry in each pair contains the global equation
+/// number of the unknown, while the second one contains the number
+/// of the "block" that this unknown is associated with.
+/// (Function can obviously only be called if the equation numbering
+/// scheme has been set up.)
+//=============================================================================
+void AxisymmetricQCrouzeixRaviartElement::get_dof_numbers_for_unknowns(
+ std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
+{
+ // number of nodes
+ unsigned n_node = this->nnode();
+ 
+ // number of pressure values
+ unsigned n_press = this->npres_axi_nst();
+ 
+ // temporary pair (used to store block lookup prior to being added to list)
+ std::pair<unsigned,unsigned> block_lookup;
+ 
+ // pressure dof number (is this really OK?)
+ unsigned pressure_dof_number = 4;
+
+ // loop over the pressure values
+ for (unsigned n = 0; n < n_press; n++)
+  {
+   // determine local eqn number
+   int local_eqn_number = this->p_local_eqn(n);
+   
+   // ignore pinned values - far away degrees of freedom resulting 
+   // from hanging nodes can be ignored since these are be dealt
+   // with by the element containing their master nodes
+   if (local_eqn_number >= 0)
+    {
+     // store block lookup in temporary pair: First entry in pair
+     // is global equation number; second entry is block type
+     block_lookup.first = this->eqn_number(local_eqn_number);
+     block_lookup.second = pressure_dof_number;
+     
+     // add to list
+     block_lookup_list.push_front(block_lookup);
+    }
+  }
+ 
+ // loop over the nodes
+ for (unsigned n = 0; n < n_node; n++)
+  {
+   // find the number of values at this node
+   unsigned nv = this->node_pt(n)->nvalue();
+   
+   //loop over these values
+   for (unsigned v = 0; v < nv; v++)
+    {
+     // determine local eqn number
+     int local_eqn_number = this->nodal_local_eqn(n, v);
+     
+     // ignore pinned values
+     if (local_eqn_number >= 0)
+      {
+       // store block lookup in temporary pair: First entry in pair
+       // is global equation number; second entry is block type
+       block_lookup.first = this->eqn_number(local_eqn_number);
+       block_lookup.second = v;
+       
+       // add to list
+       block_lookup_list.push_front(block_lookup);
+       
+      }
+    }
+  }
+}
+
+
+
 ///Axisymmetric Crouzeix-Raviart elements
 //Set the data for the number of Variables at each node
 const unsigned AxisymmetricQCrouzeixRaviartElement::
@@ -1424,6 +1579,62 @@ void AxisymmetricQCrouzeixRaviartElement::get_traction(const Vector<double>& s,
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
+
+
+
+//============================================================================
+/// Create a list of pairs for all unknowns in this element,
+/// so the first entry in each pair contains the global equation
+/// number of the unknown, while the second one contains the number
+/// of the "block" that this unknown is associated with.
+/// (Function can obviously only be called if the equation numbering
+/// scheme has been set up.)
+//============================================================================
+void AxisymmetricQTaylorHoodElement::get_dof_numbers_for_unknowns(
+ std::list<std::pair<unsigned long,
+ unsigned> >& block_lookup_list)
+{
+ // number of nodes
+ unsigned n_node = this->nnode();
+ 
+ // local eqn no for pressure unknown
+ unsigned p_index = this->p_nodal_index_axi_nst();
+ 
+ // temporary pair (used to store block lookup prior to being added to list)
+ std::pair<unsigned,unsigned> block_lookup;
+ 
+ // loop over the nodes
+ for (unsigned n = 0; n < n_node; n++)
+  {
+   // find the number of values at this node
+   unsigned nv = this->node_pt(n)->nvalue();
+   
+   //loop over these values
+   for (unsigned v = 0; v < nv; v++)
+    {
+     // determine local eqn number
+     int local_eqn_number = this->nodal_local_eqn(n, v);
+     
+     // ignore pinned values - far away degrees of freedom resulting 
+     // from hanging nodes can be ignored since these are be dealt
+     // with by the element containing their master nodes
+     if (local_eqn_number >= 0)
+      {
+       // store block lookup in temporary pair: Global equation number
+       // is the first entry in pair
+       block_lookup.first = this->eqn_number(local_eqn_number);
+       
+       // set block numbers: Block number is the second entry in pair
+        block_lookup.second = v;
+       
+       // add to list
+       block_lookup_list.push_front(block_lookup);
+      }
+    }
+  }
+}
+
+
 
 //Axisymmetric Taylor--Hood
 //Set the data for the number of Variables at each node

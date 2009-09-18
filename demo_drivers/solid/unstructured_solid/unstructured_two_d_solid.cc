@@ -223,10 +223,9 @@ UnstructuredSolidProblem<ELEMENT>::UnstructuredSolidProblem()
    
    // Add to mesh
    Traction_mesh_pt->add_element_pt(el_pt);
-   
+ 
    //Set the traction function
    el_pt->traction_fct_pt() = Global_Physical_Variables::constant_pressure;
-   
   }  
  
  // Add sub meshes
@@ -331,42 +330,139 @@ void UnstructuredSolidProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 //========================================================================
 int main()
 {
-
  // Label for output
  DocInfo doc_info;
  
  // Output directory
  doc_info.set_directory("RESLT");
-
+ 
  // Create generalised Hookean constitutive equations
  Global_Physical_Variables::Constitutive_law_pt = 
   new GeneralisedHookean(&Global_Physical_Variables::Nu);
  
- //Set up the problem
- UnstructuredSolidProblem<TPVDElement<2,3> > problem;
- 
- //Output initial configuration
- problem.doc_solution(doc_info);
- doc_info.number()++;
-  
- // Parameter study
- Global_Physical_Variables::Gravity=2.0e-4;
- Global_Physical_Variables::P=0.0;
- double pressure_increment=-1.0e-4;
- 
- unsigned nstep=2; // 10;
- for (unsigned istep=0;istep<nstep;istep++)
-  {
-   // Solve the problem
-   problem.newton_solve();
-   
-   //Output solution
-   problem.doc_solution(doc_info);
-   doc_info.number()++;
+ {
+  std::cout << "Running with pure displacement formulation\n";
 
-   // Bump up suction
-   Global_Physical_Variables::P+=pressure_increment;
+  //Set up the problem
+  UnstructuredSolidProblem<TPVDElement<2,3> > problem;
+  
+  //Output initial configuration
+  problem.doc_solution(doc_info);
+  doc_info.number()++;
+  
+  // Parameter study
+  Global_Physical_Variables::Gravity=2.0e-4;
+  Global_Physical_Variables::P=0.0;
+  double pressure_increment=-1.0e-4;
+  
+  unsigned nstep=2; // 10;
+  for (unsigned istep=0;istep<nstep;istep++)
+   {
+    // Solve the problem
+    problem.newton_solve();
+    
+    //Output solution
+    problem.doc_solution(doc_info);
+    doc_info.number()++;
+    
+    // Bump up suction
+    Global_Physical_Variables::P+=pressure_increment;
+   }
+ } //end_displacement_formulation
+
+ //Repeat for displacement/pressure formulation 
+ {
+  std::cout << "Running with pressure/displacement formulation\n";
+
+  // Change output directory
+  doc_info.set_directory("RESLT_pres_disp");
+  //Reset doc_info number
+  doc_info.number() = 0;
+  
+  //Set up the problem
+  UnstructuredSolidProblem<TPVDElementWithContinuousPressure<2> > problem;
+  
+  //Output initial configuration
+  problem.doc_solution(doc_info);
+  doc_info.number()++;
+  
+  // Parameter study
+  Global_Physical_Variables::Gravity=2.0e-4;
+  Global_Physical_Variables::P=0.0;
+  double pressure_increment=-1.0e-4;
+  
+  unsigned nstep=2;
+  for (unsigned istep=0;istep<nstep;istep++)
+   {
+    // Solve the problem
+    problem.newton_solve();
+    
+    //Output solution
+    problem.doc_solution(doc_info);
+    doc_info.number()++;
+    
+    // Bump up suction
+    Global_Physical_Variables::P+=pressure_increment;
+   }
+ }
+
+
+ //Repeat for displacement/pressure formulation 
+ //enforcing incompressibility
+ {
+  std::cout << 
+   "Running with pressure/displacement formulation (incompressible) \n";
+
+  // Change output directory
+  doc_info.set_directory("RESLT_pres_disp_incomp");
+  //Reset doc_info number
+  doc_info.number() = 0;
+  
+  //Set up the problem
+  UnstructuredSolidProblem<TPVDElementWithContinuousPressure<2> > problem;
+  
+  //Loop over all elements and set incompressibility flag
+  {
+   const unsigned n_element = problem.mesh_pt()->nelement();
+   for(unsigned e=0;e<n_element;e++)
+    {
+     //Cast the element to the equation base of our 2D elastiticy elements
+     PVDEquationsWithPressure<2> *cast_el_pt =
+      dynamic_cast<PVDEquationsWithPressure<2>*>(
+       problem.mesh_pt()->element_pt(e));
+     
+     //If the cast was successful, it's a bulk element, 
+     //so set the incompressibilty flag
+     if(cast_el_pt) {cast_el_pt->incompressible() = true;}
+    }
   }
+
+
+  //Output initial configuration
+  problem.doc_solution(doc_info);
+  doc_info.number()++;
+  
+  // Parameter study
+  Global_Physical_Variables::Gravity=2.0e-4;
+  Global_Physical_Variables::P=0.0;
+  double pressure_increment=-1.0e-4;
+  
+  unsigned nstep=2;
+  for (unsigned istep=0;istep<nstep;istep++)
+   {
+    // Solve the problem
+    problem.newton_solve();
+    
+    //Output solution
+    problem.doc_solution(doc_info);
+    doc_info.number()++;
+    
+    // Bump up suction
+    Global_Physical_Variables::P+=pressure_increment;
+   }
+ }
+
+ 
 
 } // end main
 

@@ -509,6 +509,9 @@ public:
  void traction(const Vector<double>& s, const Vector<double>& N, 
                Vector<double>& traction);
 
+ /// Compute the diagonal of the velocity mass matrix
+ void get_velocity_mass_matrix_diagonal(Vector<double> &mass_diag);
+
  /// \short Output function: x,y,[z],u,v,[w],p
  /// in tecplot format. Default number of plot points
  void output(std::ostream &outfile)
@@ -753,6 +756,23 @@ public:
  void output(FILE* file_pt, const unsigned &n_plot)
   {AxisymmetricNavierStokesEquations::output(file_pt,n_plot);}
 
+ /// \short The number of "blocks" that degrees of freedom in this element
+ /// are sub-divided into: Velocity and pressure.
+ unsigned ndof_types()
+  {
+   return 4;
+  }
+ 
+ /// \short Create a list of pairs for all unknowns in this element,
+ /// so that the first entry in each pair contains the global equation
+ /// number of the unknown, while the second one contains the number
+ /// of the "block" that this unknown is associated with.
+ /// (Function can obviously only be called if the equation numbering
+ /// scheme has been set up.) Velocity=0; Pressure=1
+ void get_dof_numbers_for_unknowns(
+  std::list<std::pair<unsigned long,unsigned> >& block_lookup_list);
+
+
 };
 
 //Inline functions
@@ -951,6 +971,23 @@ public virtual AxisymmetricNavierStokesEquations
  /// Redirect output to NavierStokesEquations output
  void output(FILE* file_pt, const unsigned &n_plot)
   {AxisymmetricNavierStokesEquations::output(file_pt,n_plot);}
+
+ /// \short Returns the number of "blocks" that degrees of freedom
+ /// in this element are sub-divided into: Velocity and pressure.
+ unsigned ndof_types()
+  {
+   return 4;
+  }
+ 
+ /// \short Create a list of pairs for all unknowns in this element,
+ /// so that the first entry in each pair contains the global equation
+ /// number of the unknown, while the second one contains the number
+ /// of the "block" that this unknown is associated with.
+ /// (Function can obviously only be called if the equation numbering
+ /// scheme has been set up.) Velocity=0; Pressure=1
+ void get_dof_numbers_for_unknowns(
+  std::list<std::pair<unsigned long, unsigned> >& block_lookup_list);
+
 
 };
 

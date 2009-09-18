@@ -4,7 +4,9 @@
 
 # Define the sources
 sources =  \
-axisym_navier_stokes_elements.cc refineable_axisym_navier_stokes_elements.cc
+axisym_navier_stokes_elements.cc \
+refineable_axisym_navier_stokes_elements.cc \
+axisym_navier_stokes_preconditioners.cc
 
 # Include files which shouldn't be compiled
 incl_cc_files =
@@ -12,7 +14,8 @@ incl_cc_files =
 # Define the headers
 headers =  \
 axisym_navier_stokes_elements.h  \
-refineable_axisym_navier_stokes_elements.h
+refineable_axisym_navier_stokes_elements.h \
+axisym_navier_stokes_preconditioners.h
 
 # Template only files. These should be included in include directory
 # but should not be listed in combined header file

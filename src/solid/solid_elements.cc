@@ -636,7 +636,7 @@ void PVDEquations<DIM>::output(std::ostream &outfile, const unsigned &n_plot)
  Vector<double> x(DIM);
  Vector<double> xi(DIM);
  Vector<double> s(DIM);
- 
+
  // Tecplot header info
  outfile << this->tecplot_zone_string(n_plot);
  
@@ -666,7 +666,7 @@ void PVDEquations<DIM>::output(std::ostream &outfile, const unsigned &n_plot)
     {outfile << xi[i] << " ";} 
    
    // Output growth
-   outfile << gamma << " ";
+   outfile << gamma;
    outfile << std::endl;
   }
  
@@ -799,6 +799,81 @@ void PVDEquations<DIM>::output(FILE* file_pt, const unsigned &n_plot)
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
+
+
+//=======================================================================
+/// Output: x,y,[z],xi0,xi1,[xi2],gamma strain and stress components
+//=======================================================================
+template <unsigned DIM>
+void PVDEquations<DIM>::extended_output(std::ostream &outfile, 
+                                        const unsigned &n_plot)
+{
+ 
+ Vector<double> x(DIM);
+ Vector<double> xi(DIM);
+ Vector<double> s(DIM);
+ DenseMatrix<double> stress_or_strain(DIM,DIM);
+
+ // Tecplot header info
+ outfile << this->tecplot_zone_string(n_plot);
+ 
+ // Loop over plot points
+ unsigned num_plot_points=this->nplot_points(n_plot);
+ for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+  {
+   // Get local coordinates of plot point
+   this->get_s_plot(iplot,n_plot,s);
+   
+   // Get Eulerian and Lagrangian coordinates
+   this->interpolated_x(s,x);
+   this->interpolated_xi(s,xi);
+   
+   // Get isotropic growth
+   double gamma;
+   // Dummy integration point
+   unsigned ipt=0;
+   this->get_isotropic_growth(ipt,s,xi,gamma);
+   
+   //Output the x,y,..
+   for(unsigned i=0;i<DIM;i++) 
+    {outfile << x[i] << " ";}
+   
+   // Output xi0,xi1,..
+   for(unsigned i=0;i<DIM;i++) 
+    {outfile << xi[i] << " ";} 
+   
+   // Output growth
+   outfile << gamma << " ";
+
+   //get the strain
+   this->get_strain(s,stress_or_strain);
+   for(unsigned i=0;i<DIM;i++)
+    {
+     for(unsigned j=0;j<=i;j++)
+      {
+       outfile << stress_or_strain(j,i) << " " ;
+      }
+    }
+
+   //get the stress
+   this->get_stress(s,stress_or_strain);
+   for(unsigned i=0;i<DIM;i++)
+    {
+     for(unsigned j=0;j<=i;j++)
+      {
+       outfile << stress_or_strain(j,i) << " " ;
+      }
+    }
+
+
+   outfile << std::endl;
+  }
+ 
+
+ // Write tecplot footer (e.g. FE connectivity lists)
+ this->write_tecplot_zone_footer(outfile,n_plot);
+ outfile << std::endl;
+}
 
 
 //=======================================================================
@@ -1881,7 +1956,46 @@ void PVDEquationsWithPressure<DIM>::output(std::ostream &outfile,
  Vector<double> x(DIM);
  Vector<double> xi(DIM);
 
- switch(DIM)
+ // Tecplot header info
+ outfile << this->tecplot_zone_string(n_plot);
+ 
+ // Loop over plot points
+ unsigned num_plot_points=this->nplot_points(n_plot);
+ for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+  {
+   // Get local coordinates of plot point
+   this->get_s_plot(iplot,n_plot,s);
+   
+   // Get Eulerian and Lagrangian coordinates
+   this->interpolated_x(s,x);
+   this->interpolated_xi(s,xi);
+   
+   // Get isotropic growth
+   double gamma;
+   // Dummy integration point
+   unsigned ipt=0;
+   this->get_isotropic_growth(ipt,s,xi,gamma);
+   
+   //Output the x,y,..
+   for(unsigned i=0;i<DIM;i++) 
+    {outfile << x[i] << " ";}
+   
+   // Output xi0,xi1,..
+   for(unsigned i=0;i<DIM;i++) 
+    {outfile << xi[i] << " ";} 
+   
+   // Output growth
+   outfile << gamma << " ";
+   // Output pressure
+   outfile << interpolated_solid_p(s) << " ";
+   outfile << "\n";
+  }
+
+ // Write tecplot footer (e.g. FE connectivity lists)
+ this->write_tecplot_zone_footer(outfile,n_plot);
+ //outfile << std::endl;
+
+ /*switch(DIM)
   {
   case 2:
    //Tecplot header info 
@@ -1971,7 +2085,7 @@ void PVDEquationsWithPressure<DIM>::output(std::ostream &outfile,
      throw OomphLibError(error_message.str(),
                          "PVDEquationsWithPressure<DIM>::output()",
                          OOMPH_EXCEPTION_LOCATION);
-  }
+                         }*/
 }
 
 
@@ -2295,6 +2409,38 @@ const unsigned QPVDElementWithContinuousPressure<3>::Pconv[8] =
 {0,2,6,8,18,20,24,26};
 
 
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+
+//=======================================================================
+/// Data for the number of variables at each node
+//=======================================================================
+template<>
+const unsigned TPVDElementWithContinuousPressure<2>::
+Initial_Nvalue[6]={1,1,1,0,0,0};
+
+//=======================================================================
+/// Data for the pressure conversion array
+//=======================================================================
+template<>
+const unsigned TPVDElementWithContinuousPressure<2>::Pconv[3]={0,1,2};
+
+//=======================================================================
+/// Data for the number of variables at each node
+//=======================================================================
+template<>
+const unsigned TPVDElementWithContinuousPressure<3>::Initial_Nvalue[10]
+={1,1,1,1,0,0,0,0,0,0};
+
+//=======================================================================
+/// Data for the pressure conversion array
+//=======================================================================
+template<>
+const unsigned TPVDElementWithContinuousPressure<3>::Pconv[4]={0,1,2,3};
+
+
+
 //Instantiate the required elements
 template class QPVDElementWithPressure<2>;
 template class QPVDElementWithContinuousPressure<2>;
@@ -2308,5 +2454,7 @@ template class PVDEquationsBase<3>;
 template class PVDEquations<3>;
 template class PVDEquationsWithPressure<3>;
 
+template class TPVDElementWithContinuousPressure<2>;
+template class TPVDElementWithContinuousPressure<3>;
 
 }

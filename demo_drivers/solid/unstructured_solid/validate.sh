@@ -1,7 +1,7 @@
 #! /bin/sh
 
 #Set the number of tests to be checked
-NUM_TESTS=2
+NUM_TESTS=4
 
 # Setup validation directory
 #---------------------------
@@ -20,7 +20,7 @@ cd Validation
 # Get triangle files
 cp ../*fig.1.* .
 
-mkdir RESLT
+mkdir RESLT RESLT_pres_disp RESLT_pres_disp_incomp
 
 echo "Running 2D unstructured solid "
 ../unstructured_two_d_solid > OUTPUT_2D
@@ -35,6 +35,8 @@ echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/soln0.dat RESLT/soln1.dat RESLT/soln2.dat > result_two_d.dat
+cat RESLT_pres_disp/soln2.dat > 2d_pres_disp.dat
+cat RESLT_pres_disp_incomp/soln2.dat > 2d_pres_disp_inc.dat
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
@@ -42,9 +44,22 @@ else
 ../../../../bin/fpdiff.py ../validata/result_two_d.dat.gz \
     result_two_d.dat  >> validation.log
 fi
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/2d_pres_disp.dat.gz \
+    2d_pres_disp.dat  >> validation.log
+fi
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/2d_pres_disp_inc.dat.gz \
+    2d_pres_disp_inc.dat  >> validation.log
+fi
 
 mv RESLT RESLT_2d
-
+mv RESLT_pres_disp RESLT_2d_pres_disp
+mv RESLT_pres_disp_incomp RESLT_2d_pres_disp_incomp
 
 # Validation for 3D unstructured solid
 #-------------------------------------

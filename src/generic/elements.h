@@ -2533,6 +2533,22 @@ public:
  inline Data* geom_data_pt(const unsigned& j)
   {return static_cast<SolidNode*>(node_pt(j))->variable_position_pt();}
 
+ /// \short Specify Data that affects the geometry of the element 
+ /// by adding the position Data to the set that's passed in.
+ /// (This functionality is required in FSI problems; set is used to
+ /// avoid double counting). 
+ void identify_geometric_data(std::set<Data*> &geometric_data_pt) 
+  {
+   //Loop over the node update data and add to the set
+   const unsigned n_node=this->nnode();
+   for(unsigned n=0;n<n_node;n++)
+    {
+     geometric_data_pt.insert(dynamic_cast<SolidNode*>(this->node_pt(n))
+                              ->variable_position_pt());
+    }
+  }
+
+
  /// \short In a SolidFiniteElement, the "global" intrinsic coordinate
  /// of the element when viewed as part of a compound geometric
  /// object (a Mesh) is, by default, the Lagrangian coordinate
