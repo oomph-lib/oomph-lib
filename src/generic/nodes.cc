@@ -188,14 +188,14 @@ namespace oomph
  void Data::delete_value_storage()
  {
   //If we have nulled out the storage already return immediately
-  if((Value==0) && (Eqn_number_pt==0)) {return;}
+  if((Value==0) && (Eqn_number==0)) {return;}
   
   //Delete the double storage arrays at once (they were allocated at once)
-  delete[] Eqn_number_pt[0]; delete[] Value[0];
+  delete[] Value[0];
   //Delete the pointers to the arrays.
-  delete[] Value; delete[] Eqn_number_pt;
+  delete[] Value; delete[] Eqn_number;
   //Null out the pointers
-  Value = 0; Eqn_number_pt = 0;
+  Value = 0; Eqn_number = 0;
  }
  
 //================================================================
@@ -224,7 +224,7 @@ long Data::Is_constrained=-2;
 //================================================================
 /// Default constructor.
 //================================================================
- Data::Data() : Value(0), Eqn_number_pt(0), 
+ Data::Data() : Value(0), Eqn_number(0), 
                 Time_stepper_pt(Data::Default_static_time_stepper_pt),
                 Copy_of_data_pt(0),
                 Nvalue(0), Ncopies(0)
@@ -239,7 +239,7 @@ long Data::Is_constrained=-2;
 /// number of values, which are assumed to be free (not pinned)
 //================================================================
  Data::Data(const unsigned &initial_n_value) : 
-  Value(0), Eqn_number_pt(0),
+  Value(0), Eqn_number(0),
   Time_stepper_pt(Data::Default_static_time_stepper_pt),
   Copy_of_data_pt(0),
   Nvalue(initial_n_value),
@@ -254,12 +254,11 @@ long Data::Is_constrained=-2;
    //Allocate initial_n_value values in the value and equation number
    //storage schemes.
    Value = new double*[initial_n_value];
-   Eqn_number_pt = new long*[initial_n_value]; 
+   Eqn_number = new long[initial_n_value]; 
   
   //Allocate contiguous arrays of doubles and longs to
-  //hold the data values and equation numbers.
+  //hold the data values.
   double *values = new double[initial_n_value];
-  long   *eqn_numbers = new long[initial_n_value];
 
   //Set the pointers to the data values and equation numbers
   //and initialise the actual values.
@@ -269,10 +268,8 @@ long Data::Is_constrained=-2;
     Value[i] = &values[i];
     //Initialise the value to zero
     Value[i][0] = 0.0;
-    //Set the pointer to the equation number
-    Eqn_number_pt[i] = &eqn_numbers[i];
-    //Initialise the value to Is_unclassified
-    *Eqn_number_pt[i] = Is_unclassified;
+    //Initialise the equation number to Is_unclassified
+    Eqn_number[i] = Is_unclassified;
    }
  }
  }
@@ -286,7 +283,7 @@ Data::Data(TimeStepper* const &time_stepper_pt,
            const unsigned &initial_n_value,
            const bool &allocate_storage)
  : 
- Value(0), Eqn_number_pt(0), Time_stepper_pt(time_stepper_pt),
+ Value(0), Eqn_number(0), Time_stepper_pt(time_stepper_pt),
  Copy_of_data_pt(0),
  Nvalue(initial_n_value), 
  Ncopies(0)
@@ -299,7 +296,7 @@ Data::Data(TimeStepper* const &time_stepper_pt,
  if((allocate_storage) && (initial_n_value > 0))
   {
    //Allocate storage for initial_n_value equation numbers
-   Eqn_number_pt = new long*[initial_n_value];
+   Eqn_number = new long[initial_n_value];
    
    //Locally cache the number of time history values
    const unsigned n_tstorage = ntstorage();
@@ -310,8 +307,6 @@ Data::Data(TimeStepper* const &time_stepper_pt,
    
    //Allocate all the data values in one big array for data locality.
    double *values = new double[initial_n_value*n_tstorage];
-   //Allocate the equation numbers in one big array.
-   long *eqn_numbers = new long[initial_n_value];
 
    //Set the pointers to the data values and equation numbers
    for(unsigned i=0;i<initial_n_value;i++)
@@ -321,10 +316,8 @@ Data::Data(TimeStepper* const &time_stepper_pt,
      Value[i] = &values[i*n_tstorage];
      //Initialise all values to zero
      for(unsigned t=0;t<n_tstorage;t++) {Value[i][t] = 0.0;}
-     //Set the pointers to the equation number
-     Eqn_number_pt[i] = &eqn_numbers[i];
-     //Initialise the equation number to zero.
-     *Eqn_number_pt[i] = Is_unclassified;
+     //Initialise the equation number to be unclassified.
+     Eqn_number[i] = Is_unclassified;
     }
   }
 }
@@ -612,7 +605,7 @@ void Data::assign_eqn_numbers(unsigned long &global_number,
      if((!is_pinned(i)) && (!is_constrained(i))) 
       {
        //Assign the equation number and increment global equation number
-       *Eqn_number_pt[i] = global_number++;
+       Eqn_number[i] = global_number++;
        //Add pointer to global dof vector 
        dof_pt.push_back(value_pt(i));
       }
@@ -634,7 +627,7 @@ unsigned Data::self_test()
  for(unsigned i=0;i<eqn_number_range;i++)
   {
    //If the equation number has not been assigned, issue an error
-   if (*Eqn_number_pt[i]==Is_unclassified)
+   if (Eqn_number[i]==Is_unclassified)
     {
      passed=false;
      oomph_info 
@@ -682,16 +675,14 @@ void Data::resize(const unsigned &n_value)
  //N.B. We can't change timesteppers in this process
  const unsigned t_storage = ntstorage();
  
- //Create new sets of pointers of the appropriate size
+ //Create new sets of pointers of the appropriate (new) size
  double **value_new_pt = new double*[n_value_new];
- long **eqn_number_new_pt = new long*[n_value_new];
+ long *eqn_number_new = new long[n_value_new];
 
- //Create new arrays that are contiguous in memory
+ //Create new array of values that is contiguous in memory
  double *values = new double[n_value_new*t_storage];
- long *eqn_numbers  = new long[n_value_new];
 
- //Set the new pointers and copy the values over
- //from the old storage scheme
+ //Copy the old values over into the new storage scheme
  for(unsigned i=0;i<n_value_old;i++)
   {
    //Set pointer for the new values
@@ -699,23 +690,21 @@ void Data::resize(const unsigned &n_value)
    //Copy value
    for(unsigned t=0;t<t_storage;t++)
     {value_new_pt[i][t] = Value[i][t];}
-   //Set pointer for the new equation number
-   eqn_number_new_pt[i] = &eqn_numbers[i];
-   //Copy value 
-   *eqn_number_new_pt[i] = *Eqn_number_pt[i];
+
+   //Copy equation number
+   eqn_number_new[i] = Eqn_number[i];
   }
 
- //Loop over the new entries, set pointers and initialise them
+ //Loop over the new entries, set pointers and initialise data
  for(unsigned i=n_value_old;i<n_value_new;i++)
   {
    //Set the pointer
    value_new_pt[i] = &values[i*t_storage];
    //Initialise the new data values to zero
    for(unsigned t=0;t<t_storage;t++) {value_new_pt[i][t] = 0.0;}
-   //Set the pointer
-   eqn_number_new_pt[i] = &eqn_numbers[i];
-   //Initialise the value to Is_unclassified
-   *eqn_number_new_pt[i] = Is_unclassified;
+
+   //Initialise the equation number to Is_unclassified
+   eqn_number_new[i] = Is_unclassified;
   }
 
  //Set the number of new values
@@ -725,9 +714,8 @@ void Data::resize(const unsigned &n_value)
  if (n_value_old!=0) delete[] Value[0];
  delete[] Value;
  Value = value_new_pt;
- if (n_value_old!=0) delete[] Eqn_number_pt[0];
- delete[] Eqn_number_pt;
- Eqn_number_pt = eqn_number_new_pt;
+ delete[] Eqn_number;
+ Eqn_number = eqn_number_new;
 
  //Now update pointers in any copies of this data
  for(unsigned i=0;i<Ncopies;i++)
@@ -746,7 +734,7 @@ void HijackedData::reset_copied_pointers()
  Value = &Copied_data_pt->Value[Copied_index];
  
  //Copy the pointer to the equation number
- Eqn_number_pt = &Copied_data_pt->Eqn_number_pt[Copied_index];
+ Eqn_number = &Copied_data_pt->Eqn_number[Copied_index];
 }
 
 
@@ -756,7 +744,7 @@ void HijackedData::reset_copied_pointers()
 void HijackedData::clear_copied_pointers()
 {
  Copied_data_pt = 0;
- Value = 0; Eqn_number_pt = 0;
+ Value = 0; Eqn_number = 0;
 }
 
 //================================================================
@@ -791,7 +779,7 @@ HijackedData(const unsigned &copied_index, Data* const &data_pt) :
  //"slice" of the array
  Value = &data_pt->Value[copied_index];
  //Copy the pointer to the equation number
- Eqn_number_pt = &data_pt->Eqn_number_pt[copied_index];
+ Eqn_number = &data_pt->Eqn_number[copied_index];
  //Inform the original data that it has been copied
  data_pt->add_copy(this);
 }
@@ -824,7 +812,7 @@ void CopiedData::reset_copied_pointers()
  Value = Copied_data_pt->Value;
  
  //Copy the pointer to the equation numbers
- Eqn_number_pt = Copied_data_pt->Eqn_number_pt;
+ Eqn_number = Copied_data_pt->Eqn_number;
 }
 
 
@@ -834,7 +822,7 @@ void CopiedData::reset_copied_pointers()
 void CopiedData::clear_copied_pointers()
 {
  Copied_data_pt = 0;
- Value = 0; Eqn_number_pt = 0;
+ Value = 0; Eqn_number = 0;
 }
 
 //================================================================
@@ -863,7 +851,7 @@ CopiedData::CopiedData(Data* const &data_pt) :
  //Copy the pointer to the value. 
  Value = data_pt->Value;
  //Copy the pointer to the equation number
- Eqn_number_pt = data_pt->Eqn_number_pt;
+ Eqn_number = data_pt->Eqn_number;
  //Inform the original data that it has been copied
  data_pt->add_copy(this);
 }
@@ -2023,7 +2011,7 @@ void BoundaryNodeBase::make_nodes_periodic(
      nod_pt->delete_value_storage();
      //Now set the Value and Equation number pointers to be the same
      nod_pt->Value = copied_node_pt->Value;
-     nod_pt->Eqn_number_pt = copied_node_pt->Eqn_number_pt;
+     nod_pt->Eqn_number = copied_node_pt->Eqn_number;
      
      //Set the copied node pointer in the copy
      BoundaryNodeBase* cast_nod_pt = dynamic_cast<BoundaryNodeBase*>(nod_pt);
@@ -2070,7 +2058,7 @@ void BoundaryNodeBase::make_node_periodic(Node* const &node_pt,
  node_pt->delete_value_storage();
  //Now set the Value and Equation number pointers to be the same
  node_pt->Value = copied_node_pt->Value;
- node_pt->Eqn_number_pt = copied_node_pt->Eqn_number_pt;
+ node_pt->Eqn_number = copied_node_pt->Eqn_number;
 
  //Inform the node that it has been copied
  copied_node_pt->add_copy(node_pt);

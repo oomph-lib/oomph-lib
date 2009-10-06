@@ -110,9 +110,8 @@ class Data
  double **Value;
  
  /// \short C-style array of pointers to the (global) equation numbers 
- /// of the values. This is an array of pointers, rather than long's so that
- /// the values and their equation numbers can be copied/hijacked.
- long **Eqn_number_pt;
+ /// of the values. 
+ long *Eqn_number;
  
  /// \short Pointer to a Timestepper. 
  /// The inclusion of a Timestepper pointer in the Data class, ensures that
@@ -331,7 +330,7 @@ class Data
 #ifdef RANGE_CHECKING
    range_check(0,i);
 #endif
-   return Eqn_number_pt[i];
+   return &Eqn_number[i];
   }
 
  /// Return the equation number of the i-th stored variable.
@@ -340,7 +339,7 @@ class Data
 #ifdef RANGE_CHECKING
    range_check(0,i);
 #endif
-   return *Eqn_number_pt[i];
+   return Eqn_number[i];
   }
 
  /// \short Pin the i-th stored variable.
@@ -353,18 +352,18 @@ class Data
  void pin_all()
   {
    const unsigned n_value = Nvalue;
-   for(unsigned i=0;i<n_value;i++) {*Eqn_number_pt[i]=Is_pinned;}
+   for(unsigned i=0;i<n_value;i++) {Eqn_number[i]=Is_pinned;}
   }
 
  /// Unpin all the stored variables
  void unpin_all()
   {
    const unsigned n_value = Nvalue;
-   for(unsigned i=0;i<n_value;i++) {*Eqn_number_pt[i]=Is_unclassified;}
+   for(unsigned i=0;i<n_value;i++) {Eqn_number[i]=Is_unclassified;}
   }
 
  /// \short Test whether the i-th variable is pinned (1: true; 0: false).
- bool is_pinned(const unsigned &i) {return (*Eqn_number_pt[i]==Is_pinned);}
+ bool is_pinned(const unsigned &i) {return (Eqn_number[i]==Is_pinned);}
 
  /// \short Constrain the i-th stored variable when making hanging data
  /// If the data is already pinned leave it along, otherwise mark as
@@ -393,7 +392,7 @@ class Data
 
  /// \short Test whether the i-th variable is constrained (1: true; 0: false).
  bool is_constrained(const unsigned &i) 
-  {return (*Eqn_number_pt[i]==Is_constrained);}
+  {return (Eqn_number[i]==Is_constrained);}
 
 
  /// \short Self-test: Have all values been classified as pinned/unpinned?
@@ -472,7 +471,7 @@ class Data
      //necessary
      if(Copied_data_pt) {Copied_data_pt->remove_copy(this);}
      //Now null out the storage
-     Copied_data_pt=0; Value=0; Eqn_number_pt=0;
+     Copied_data_pt=0; Value=0; Eqn_number=0;
     }
 
    /// \short Return a boolean to indicate whether the data contains 
@@ -539,7 +538,7 @@ class Data
      //necessary
      if(Copied_data_pt) {Copied_data_pt->remove_copy(this);}
      //Now null out the storage
-     Copied_data_pt=0; Value=0; Eqn_number_pt=0;
+     Copied_data_pt=0; Value=0; Eqn_number=0;
     }
 
    /// \short Return a boolean to indicate whether the data contains 
@@ -1739,12 +1738,14 @@ class BoundaryNode: public NODE_TYPE, public BoundaryNodeBase
     }
 #endif
    this->Value = Copied_node_pt->Value;
-   this->Eqn_number_pt = Copied_node_pt->Eqn_number_pt;
-   //We don't yet need to worry about updating position pointers
+   this->Eqn_number = Copied_node_pt->Eqn_number;
+   //We won't ever need to worry about updating position pointers
+   //because periodic solid problems are handled using lagrange multipliers.
   }
 
- /// \short Clear pointers to the copied data used when we have periodic nodes
- /// Simply zero the pointers to the memory rather than deleting them
+ /// \short Clear pointers to the copied data used when we have periodic nodes.
+ /// The shallow (pointer) copy is turned into a deep copy by allocating
+ /// new data and copying the actual values across.
  void clear_copied_pointers()
   {
 #ifdef PARANOID
@@ -1755,9 +1756,40 @@ class BoundaryNode: public NODE_TYPE, public BoundaryNodeBase
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+
+   //Simply zeroing these will cause problems during unrefinement because the
+   //original could be deleted, but the "copy" remain.
+   //Instead we allocate new storage and copy values over from the original.
+   
+   //Get the number of values and time storage 
+   //(must be the same as the original)
+   const unsigned n_value = this->nvalue();
+   const unsigned n_tstorage = this->ntstorage();
+
+   //Allocate storage for equation numbers
+   this->Eqn_number = new long[n_value];
+   
+   //Allocate storage for the values
+   this->Value = new double*[n_value];
+
+   //Allocate all data values in one big array
+   double *values = new double[n_value*n_tstorage];
+
+   //Set the pointers to the data values and equation numbers
+   for(unsigned i=0;i<n_value;++i)
+    {
+     //Set the pointers
+     this->Value[i] = &values[i*n_tstorage];
+     //Initialise all the values to be those of the original data
+     for(unsigned t=0;t<n_tstorage;++t) 
+      {this->Value[i][t] = Copied_node_pt->value(t,i);}
+
+     //Copy over the values of the equation numbers
+     this->Eqn_number[i] = Copied_node_pt->eqn_number(i);
+    }
+
+   //The node is no longer a copy
    Copied_node_pt=0;
-   this->Value=0;
-   this->Eqn_number_pt=0;
   }
 
 
@@ -1836,7 +1868,7 @@ class BoundaryNode: public NODE_TYPE, public BoundaryNodeBase
      Copied_node_pt->remove_copy(this);
      Copied_node_pt=0;
      this->Value=0;
-     this->Eqn_number_pt=0;
+     this->Eqn_number=0;
     }
   }
 
