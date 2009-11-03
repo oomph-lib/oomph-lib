@@ -500,11 +500,19 @@ class ConstitutiveLaw
   void error_checking_in_input(const DenseMatrix<double> &g, 
                                const DenseMatrix<double> &G,
                                DenseMatrix<double> &sigma);
-  
+
   /// \short Calculate a contravariant tensor from a covariant tensor,
   /// and return the determinant of the covariant tensor.
   double calculate_contravariant(const DenseMatrix<double> &Gcov,
                                  DenseMatrix<double> &Gcontra);
+
+  /// \short Calculate the derivatives of the contravariant tensor
+  /// and the derivatives of the determinant of the covariant tensor
+  /// with respect to the components of the covariant tensor
+  void calculate_d_contravariant_dG(const DenseMatrix<double> &Gcov,
+                                    RankFourTensor<double> &dGcontra_dG,
+                                    DenseMatrix<double> &d_detG_dG);
+  
 
    public:
 
@@ -523,6 +531,23 @@ class ConstitutiveLaw
   virtual void calculate_second_piola_kirchhoff_stress(
    const DenseMatrix<double> &g, const DenseMatrix<double> &G, 
    DenseMatrix<double> &sigma)=0;
+
+  /// \short Calculate the derivatives of the contravariant 
+  /// 2nd Piola Kirchhoff stress tensor with respect to the deformed metric
+  /// tensor. Arguments are the 
+  /// covariant undeformed and deformed metric tensor, the current value of
+  /// the stress tensor and the 
+  /// rank four tensor in which to return the derivatives of the stress tensor
+  /// The default implementation uses finite differences, but can be
+  /// overloaded for constitutive laws in which an analytic formulation
+  /// is possible.
+  /// If the boolean flag symmetrize_tensor is false, only the 
+  /// "upper  triangular" entries of the tensor will be filled in. This is
+  /// a useful efficiency when using the derivatives in Jacobian calculations.
+  virtual void calculate_d_second_piola_kirchhoff_stress_dG(
+   const DenseMatrix<double> &g, const DenseMatrix<double> &G, 
+   const DenseMatrix<double> &sigma,
+   RankFourTensor<double> &d_sigma_dG,const bool &symmetrize_tensor=true);
 
 
   /// \short Calculate the deviatoric part 
@@ -546,6 +571,27 @@ class ConstitutiveLaw
      OOMPH_EXCEPTION_LOCATION);
    }
 
+  /// \short Calculate the derivatives of the contravariant
+  /// 2nd Piola Kirchhoff stress tensor \f$ \sigma^{ij}\f$.
+  /// with respect to the deformed metric tensor. 
+  /// Also return the derivatives of the determinant of the 
+  /// deformed metric tensor with respect to the deformed metric tensor.
+  /// This form is appropriate 
+  /// for truly-incompressible materials.
+  /// The default implementation uses finite differences for the 
+  /// derivatives that depend on the constitutive law, but not 
+  /// for the derivatives of the determinant, which are generic.
+  //// If the boolean flag symmetrize_tensor is false, only the 
+  /// "upper  triangular" entries of the tensor will be filled in. This is
+  /// a useful efficiency when using the derivatives in Jacobian calculations.
+  virtual void calculate_d_second_piola_kirchhoff_stress_dG(
+   const DenseMatrix<double> &g, const DenseMatrix<double> &G,
+   const DenseMatrix<double> &sigma,
+   const double &detG,    
+   const double &interpolated_solid_p,
+   RankFourTensor<double> &d_sigma_dG, 
+   DenseMatrix<double> &d_detG_dG,const bool &symmetrize_tensor=true);
+
 
   /// \short Calculate the deviatoric part of the contravariant 
   /// 2nd Piola Kirchoff stress tensor. Also return the contravariant
@@ -565,6 +611,27 @@ class ConstitutiveLaw
      "ConstitutiveLaw::calculate_second_piola_kichhoff_stress()",
      OOMPH_EXCEPTION_LOCATION);
    }
+
+  /// \short Calculate the derivatives of the contravariant 
+  /// 2nd Piola Kirchoff stress tensor with respect to the deformed metric 
+  /// tensor. Also return the derivatives of the generalised dilatation, 
+  /// \f$ d, \f$ with respect to the deformed metric tensor.
+  /// This form is appropriate
+  /// for near-incompressible materials.
+  /// The default implementation uses finite differences.
+  /// If the boolean flag symmetrize_tensor is false, only the 
+  /// "upper  triangular" entries of the tensor will be filled in. This is
+  /// a useful efficiency when using the derivatives in Jacobian calculations.
+  virtual void calculate_d_second_piola_kirchhoff_stress_dG(
+   const DenseMatrix<double> &g, const DenseMatrix<double> &G, 
+   const DenseMatrix<double> &sigma,
+   const double &gen_dil,
+   const double &inv_kappa,
+   const double &interpolated_solid_p,
+   RankFourTensor<double> &d_sigma_dG, 
+   DenseMatrix<double> &d_gen_dil_dG,
+   const bool &symmetrize_tensor=true);
+
 
   /// \short Pure virtual function in which the user must declare if the
   /// constitutive equation requires an incompressible formulation

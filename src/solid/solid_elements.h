@@ -350,7 +350,7 @@ class PVDEquations : public PVDEquationsBase<DIM>
    /// \short Return the 2nd Piola Kirchoff stress tensor, as calculated
    /// from the constitutive law at specified local coordinate
    void get_stress(const Vector<double> &s, DenseMatrix<double> &sigma);
-   
+
    /// \short Fill in the residuals for the solid equations (the discretised
    /// principle of virtual displacements)
    void fill_in_contribution_to_residuals(Vector<double> &residuals)
@@ -465,6 +465,37 @@ class PVDEquations : public PVDEquationsBase<DIM>
      this->Constitutive_law_pt
       ->calculate_second_piola_kirchhoff_stress(g,G,sigma);
     } 
+
+   /// \short Return the derivatives of the 2nd Piola Kirchhoff stress tensor, 
+   /// as calculated from the constitutive law: Pass metric tensors in the 
+   /// stress free and current configurations and the current value of the
+   /// the stress tensor.
+   inline void get_d_stress_dG_upper(const DenseMatrix<double> &g, 
+                                     const DenseMatrix<double> &G,
+                                     const DenseMatrix<double> &sigma,
+                                     RankFourTensor<double> &d_sigma_dG)
+    {
+#ifdef PARANOID
+     //If the pointer to the constitutive law hasn't been set, issue an error
+     if(this->Constitutive_law_pt==0)
+      {
+       //Write an error message
+       std::string error_message =
+        "Elements derived from PVDEquations must have a constitutive law:\n";
+       error_message +=
+        "set one using the constitutive_law_pt() member function";
+       //Throw the error
+       throw OomphLibError(error_message,
+                           "PVDEquations<DIM>::get_d_stress_dG()",
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+     //Only bother with the symmetric part by passing false as last entry
+     this->Constitutive_law_pt
+      ->calculate_d_second_piola_kirchhoff_stress_dG(g,G,sigma,d_sigma_dG,
+                                                     false);
+    } 
+
    
 
     private:
@@ -650,7 +681,8 @@ template<unsigned NNODE_1D>
      //Call the generic residuals function with flag set to 0
      //using a dummy matrix argument
      fill_in_generic_residual_contribution_pvd_with_pressure(
-      residuals,GeneralisedElement::Dummy_matrix,0);
+      residuals,GeneralisedElement::Dummy_matrix,
+      GeneralisedElement::Dummy_matrix,0);
     }
    
    /// \short Fill in contribution to Jacobian (either by FD or analytically,
@@ -681,7 +713,7 @@ template<unsigned NNODE_1D>
        // Call the generic routine with the flag set to 2: Computes residuals
        // and derivatives w.r.t. to pressure variables
        fill_in_generic_residual_contribution_pvd_with_pressure(
-        residuals,jacobian,2);
+        residuals,jacobian,GeneralisedElement::Dummy_matrix,2);
        
        // Call the finite difference routine for the deriatives w.r.t.
        // the positional variables
@@ -694,10 +726,71 @@ template<unsigned NNODE_1D>
        //Call the generic routine with the flag set to 1: Get residual
        // and fully analytical Jacobian
        fill_in_generic_residual_contribution_pvd_with_pressure(
-        residuals,jacobian,1);
+        residuals,jacobian,GeneralisedElement::Dummy_matrix,1);
+      }
+    }
+
+   /// \short Fill in contribution to Mass matrix and 
+   /// Jacobian (either by FD or analytically,
+   /// for the positional variables; control this via 
+   /// evaluate_jacobian_by_fd(). Note: Jacobian entries arising from
+   /// derivatives w.r.t. pressure terms are always computed analytically.
+   /// Note that the Jacobian is multiplied by minus one to 
+   /// ensure that the mass matrix is positive semi-definite.
+   void fill_in_contribution_to_jacobian_and_mass_matrix(
+    Vector<double> &residuals,
+    DenseMatrix<double> &jacobian,
+    DenseMatrix<double> &mass_matrix)
+    {
+
+     //Solve for the consistent acceleration in the Newmark scheme
+     //Note that this replaces solid entries only
+     if ((this->Solve_for_consistent_newmark_accel_flag)||
+         (this->Solid_ic_pt!=0))
+      {
+       std::string error_message ="Can't assign consistent Newmark history\n";
+       error_message += " values for solid element with pressure dofs\n";
+        
+       throw OomphLibError(
+        error_message,
+        "PVDEquationsWithPressure<DIM>::fill_in_contribution_to_jacobian()",
+        OOMPH_EXCEPTION_LOCATION);
+      }
+     
+     // FD
+     if (this->Evaluate_jacobian_by_fd)
+      {
+       // Call the generic routine with the flag set to 4: Computes residuals
+       // and derivatives w.r.t. to pressure variables
+       // and the mass matrix
+       fill_in_generic_residual_contribution_pvd_with_pressure(
+        residuals,jacobian,mass_matrix,4);
+       
+       // Call the finite difference routine for the deriatives w.r.t.
+       // the positional variables
+       this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
+      }
+     // Do it fully analytically
+     else
+      {
+       //Call the generic routine with the flag set to 3: Get residual
+       // and fully analytical Jacobian
+       fill_in_generic_residual_contribution_pvd_with_pressure(
+        residuals,jacobian,mass_matrix,3);
       }
 
+     //Multiply the residuals and jacobian by minus one
+     const unsigned n_dof = this->ndof();
+     for(unsigned i=0;i<n_dof;i++)
+      {
+       residuals[i] *= -1.0;
+       for(unsigned j=0;j<n_dof;j++)
+        {
+         jacobian(i,j) *= -1.0;
+        }
+      }
     }
+
    
    
    /// Return the interpolated_solid_pressure 
@@ -753,10 +846,11 @@ template<unsigned NNODE_1D>
    /// incompresible formulation. Also return the contravariant
    /// deformed metric tensor, the generalised dilatation, and the 
    /// inverse of the bulk modulus.
-   void get_stress(const DenseMatrix<double> &g, const DenseMatrix<double> &G, 
-                   DenseMatrix<double> &sigma_dev, 
-                   DenseMatrix<double> &Gcontra, 
-                   double &gen_dil, double &inv_kappa) 
+   inline void get_stress(const DenseMatrix<double> &g, 
+                          const DenseMatrix<double> &G, 
+                          DenseMatrix<double> &sigma_dev, 
+                          DenseMatrix<double> &Gcontra, 
+                          double &gen_dil, double &inv_kappa) 
     {
 #ifdef PARANOID
      //If the pointer to the constitutive law hasn't been set, issue an error
@@ -778,6 +872,46 @@ template<unsigned NNODE_1D>
       calculate_second_piola_kirchhoff_stress(g,G,sigma_dev,Gcontra,
                                               gen_dil,inv_kappa);
     }
+
+
+   /// \short Return the derivative of the 
+   /// deviatoric part of the 2nd Piola Kirchhoff stress 
+   /// tensor, as calculated from the constitutive law in the nearly 
+   /// incompresible formulation. Also return the derivative of the 
+   /// generalised dilatation.
+   inline void get_d_stress_dG_upper(const DenseMatrix<double> &g, 
+                                     const DenseMatrix<double> &G, 
+                                     const DenseMatrix<double> &sigma,
+                                     const double &gen_dil,                    
+                                     const double &inv_kappa,           
+                                     const double &interpolated_solid_p,
+                                     RankFourTensor<double> &d_sigma_dG,
+                                     DenseMatrix<double> &d_gen_dil_dG)
+
+    {
+#ifdef PARANOID
+     //If the pointer to the constitutive law hasn't been set, issue an error
+     if(this->Constitutive_law_pt == 0)
+      {
+       //Write an error message
+       std::string error_message =
+        "Elements derived from PVDEquationsWithPressure \n";
+       error_message += "must have a constitutive law:\n";
+       error_message +=
+        "set one using the constitutive_law_pt() member function";
+       //Throw the error
+       throw OomphLibError(error_message,
+                           "PVDEquationsWithPressure<DIM>::get_d_stress_dG()",
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+     //Only bother with the symmetric part by passing false as last entry
+     this->Constitutive_law_pt->
+      calculate_d_second_piola_kirchhoff_stress_dG(
+       g,G,sigma,gen_dil,inv_kappa,interpolated_solid_p,
+       d_sigma_dG,d_gen_dil_dG,false);
+    }
+
    
    /// Return the solid pressure shape functions
    virtual void solid_pshape(const Vector<double> &s, Shape &psi) const=0;
@@ -809,6 +943,7 @@ template<unsigned NNODE_1D>
    ///   in the Jacobian (all others need to be done by finite differencing.
    virtual void fill_in_generic_residual_contribution_pvd_with_pressure(
     Vector<double> &residuals, DenseMatrix<double> &jacobian,
+    DenseMatrix<double> &mass_matrix,
     const unsigned& flag);
    
    /// \short  Return the deviatoric part of the 2nd Piola Kirchhoff stress 
@@ -817,10 +952,11 @@ template<unsigned NNODE_1D>
    /// deformed metric tensor, and the 
    /// determinant of the deformed covariant metric tensor 
    /// (likely to be needed in the incompressibility constraint)
-   void get_stress(const DenseMatrix<double> &g, const DenseMatrix<double> &G,
-                   DenseMatrix<double> &sigma_dev, 
-                   DenseMatrix<double> &Gcontra, 
-                   double &detG)
+   inline void get_stress(const DenseMatrix<double> &g, 
+                          const DenseMatrix<double> &G,
+                          DenseMatrix<double> &sigma_dev, 
+                          DenseMatrix<double> &Gcontra, 
+                          double &detG)
     {
 #ifdef PARANOID
      //If the pointer to the constitutive law hasn't been set, issue an error
@@ -841,6 +977,42 @@ template<unsigned NNODE_1D>
      this->Constitutive_law_pt->
       calculate_second_piola_kirchhoff_stress(g,G,sigma_dev,Gcontra,detG);
     }
+
+   /// \short  Return the derivative of the 2nd Piola Kirchhoff stress 
+   /// tensor, as calculated from the constitutive law in the 
+   /// incompresible formulation. Also return 
+   /// derivative of the determinant of the deformed covariant metric tensor 
+   /// (likely to be needed in the incompressibility constraint)
+   inline void get_d_stress_dG_upper(const DenseMatrix<double> &g, 
+                                     const DenseMatrix<double> &G,
+                                     const DenseMatrix<double> &sigma,
+                                     const double &detG,                    
+                                     const double &interpolated_solid_p,
+                                     RankFourTensor<double> &d_sigma_dG,
+                                     DenseMatrix<double> &d_detG_dG)
+    {
+#ifdef PARANOID
+     //If the pointer to the constitutive law hasn't been set, issue an error
+     if(this->Constitutive_law_pt == 0)
+      {
+       //Write an error message
+       std::string error_message =
+        "Elements derived from PVDEquationsWithPressure \n";
+       error_message += "must have a constitutive law:\n";
+       error_message +=
+        "set one using the constitutive_law_pt() member function";
+       //Throw the error
+       throw OomphLibError(error_message,
+                           "PVDEquationsWithPressure<DIM>::get_d_stress_dG()",
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+     //Only bother with the symmetric part by passing false as last entry
+     this->Constitutive_law_pt->
+      calculate_d_second_piola_kirchhoff_stress_dG(
+       g,G,sigma,detG,interpolated_solid_p,d_sigma_dG,d_detG_dG,false);
+    }
+
    
   }; 
 

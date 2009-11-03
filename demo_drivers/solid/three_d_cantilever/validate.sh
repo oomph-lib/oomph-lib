@@ -15,6 +15,7 @@ cd Validation
 # and analytical/FD Jacobian without adaptation
 #----------------------------------------------
 
+mkdir RESLT
 mkdir RESLT_norefine0
 mkdir RESLT_norefine1
 mkdir RESLT_norefine2

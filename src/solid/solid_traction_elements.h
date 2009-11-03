@@ -1257,6 +1257,7 @@ protected:
          int local_eqn=nodal_local_eqn
           (j,bnod_pt->index_of_first_value_assigned_by_face_element(Id)+i); 
            
+
          if (local_eqn>=0)
           {
            residuals[local_eqn]+=(x[i]-r_prescribed[i])*psi(j)*W;

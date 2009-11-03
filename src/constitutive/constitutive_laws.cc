@@ -28,6 +28,7 @@
 //Non-inline functions for constitutive laws and strain-energy functions
 
 #include "constitutive_laws.h"
+#include "../generic/elements.h"
 
 namespace oomph
 {
@@ -202,6 +203,453 @@ calculate_contravariant( const DenseMatrix<double> &Gdown,
 
  //Return the determinant of the matrix
  return(det);
+}
+
+
+//===========================================================================
+/// The function to calculate the derivatives of the contravariant tensor
+/// and determinant of covariant tensor with respect to the components of
+/// the covariant tensor
+//===========================================================================
+void ConstitutiveLaw::
+calculate_d_contravariant_dG(const DenseMatrix<double> &Gdown,
+                             RankFourTensor<double> &d_Gup_dG,
+                             DenseMatrix<double> &d_detG_dG)
+{
+ //Find the dimension of the matrix
+ const unsigned dim = Gdown.ncol();
+
+ //If it's not square, I don't know what to do (yet)
+#ifdef PARANOID
+ if(!is_matrix_square(Gdown))
+  {
+   std::string error_message =
+    "Matrix passed to calculate_contravariant() is not square\n";
+    error_message += 
+     "non-square matrix inversion not implemented yet!\n";
+    
+    throw OomphLibError(error_message,
+                        "ConstitutiveLaw::calculate_d_contravariant_dG()",
+                        OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+ //Define the determinant of the matrix
+ double det=0.0;
+
+ //Now the inversion depends upon the dimension of the matrix
+ switch(dim)
+  {
+   //Zero dimensions
+  case 0:
+   throw OomphLibError(
+    "Zero dimensional matrix","ConstitutiveLaw::calculate_contravariant()",
+    OOMPH_EXCEPTION_LOCATION);
+   break;
+   
+   //One dimension
+  case 1:
+   //There is only one entry, so derivatives are easy
+   d_detG_dG(0,0) = 1.0;
+   d_Gup_dG(0,0,0,0) = -1.0/(Gdown(0,0)*Gdown(0,0));
+   break;
+
+   
+   //Two dimensions
+  case 2:
+   //Calculate the determinant
+   det = Gdown(0,0)*Gdown(1,1) - Gdown(0,1)*Gdown(1,0);
+
+   //Calculate the derivatives of the determinant
+   d_detG_dG(0,0) = Gdown(1,1);
+   //Need to use symmetry here
+   d_detG_dG(0,1) = d_detG_dG(1,0) = -2.0*Gdown(0,1);
+   d_detG_dG(1,1) = Gdown(0,0);
+
+   //Calculate the "upper triangular" derivatives of the contravariant tensor
+   {
+    const double det2 = det*det;
+    d_Gup_dG(0,0,0,0) = -Gdown(1,1)*d_detG_dG(0,0)/det2;
+    d_Gup_dG(0,0,0,1) = -Gdown(1,1)*d_detG_dG(0,1)/det2;
+    d_Gup_dG(0,0,1,1) = 1.0/det - Gdown(1,1)*d_detG_dG(1,1)/det2;
+    
+    d_Gup_dG(0,1,0,0) =  Gdown(0,1)*d_detG_dG(0,0)/det2;
+    d_Gup_dG(0,1,0,1) = -1.0/det + Gdown(0,1)*d_detG_dG(0,1)/det2;
+    d_Gup_dG(0,1,1,1) = Gdown(0,1)*d_detG_dG(1,1)/det2;
+    
+    d_Gup_dG(1,1,0,0) = 1.0/det - Gdown(0,0)*d_detG_dG(0,0)/det2;
+    d_Gup_dG(1,1,0,1) = -Gdown(0,0)*d_detG_dG(0,1)/det2;
+    d_Gup_dG(1,1,1,1) = -Gdown(0,0)*d_detG_dG(1,1)/det2;
+   }
+
+   //Calculate entries of the contravariant tensor (inverse)
+   //Gup(0,0) = Gdown(1,1)/det;
+   //Gup(0,1) = -Gdown(0,1)/det;
+   //Gup(1,0) = -Gdown(1,0)/det;
+   //Gup(1,1) = Gdown(0,0)/det;
+   break;
+
+   ///Three dimensions
+  case 3:
+   //This is not yet implemented
+   throw OomphLibError(
+    "Analytic derivatives of metric tensors not yet implemented in 3D\n",
+    "ConstitutiveLaw::calculate_d_contravariant_dG()",
+    OOMPH_EXCEPTION_LOCATION);
+
+   //Calculate the determinant of the matrix
+   det = Gdown(0,0)*Gdown(1,1)*Gdown(2,2) 
+    + Gdown(0,1)*Gdown(1,2)*Gdown(2,0)
+    + Gdown(0,2)*Gdown(1,0)*Gdown(2,1) 
+    - Gdown(0,0)*Gdown(1,2)*Gdown(2,1)
+    - Gdown(0,1)*Gdown(1,0)*Gdown(2,2) 
+    - Gdown(0,2)*Gdown(1,1)*Gdown(2,0);
+
+   //Calculate entries of the inverse matrix
+   // Gup(0,0) =  (Gdown(1,1)*Gdown(2,2) - Gdown(1,2)*Gdown(2,1))/det;
+   //Gup(0,1) = -(Gdown(0,1)*Gdown(2,2) - Gdown(0,2)*Gdown(2,1))/det;
+   //Gup(0,2) =  (Gdown(0,1)*Gdown(1,2) - Gdown(0,2)*Gdown(1,1))/det;
+   //Gup(1,0) = -(Gdown(1,0)*Gdown(2,2) - Gdown(1,2)*Gdown(2,0))/det;
+   //Gup(1,1) =  (Gdown(0,0)*Gdown(2,2) - Gdown(0,2)*Gdown(2,0))/det;
+   //Gup(1,2) = -(Gdown(0,0)*Gdown(1,2) - Gdown(0,2)*Gdown(1,0))/det;
+   //Gup(2,0) =  (Gdown(1,0)*Gdown(2,1) - Gdown(1,1)*Gdown(2,0))/det;
+   //Gup(2,1) = -(Gdown(0,0)*Gdown(2,1) - Gdown(0,1)*Gdown(2,0))/det;
+   //Gup(2,2) =  (Gdown(0,0)*Gdown(1,1) - Gdown(0,1)*Gdown(1,0))/det;
+   break;
+   
+  default:
+   throw OomphLibError("Dimension of matrix must be 0, 1,2 or 3\n",  
+                       "ConstitutiveLaw::calculate_d_contravariant_dG()",
+                       OOMPH_EXCEPTION_LOCATION);
+   break;
+  }
+
+}
+
+
+//=========================================================================
+/// \short Calculate the derivatives of the contravariant 
+/// 2nd Piola Kirchhoff stress tensor with respect to the deformed metric
+/// tensor. Arguments are the 
+/// covariant undeformed and deformed metric tensor and the 
+/// matrix in which to return the derivatives of the stress tensor
+/// The default implementation uses finite differences, but can be
+/// overloaded for constitutive laws in which an analytic formulation
+/// is possible.
+//==========================================================================
+void ConstitutiveLaw::calculate_d_second_piola_kirchhoff_stress_dG(
+ const DenseMatrix<double> &g, const DenseMatrix<double> &G, 
+ const DenseMatrix<double> &sigma,
+ RankFourTensor<double> &d_sigma_dG,
+ const bool &symmetrize_tensor)
+{
+ //Initial error checking
+#ifdef PARANOID
+ //Test that the matrices are of the same dimension 
+ if(!are_matrices_of_equal_dimensions(g,G))
+  {
+   throw OomphLibError(
+    "Matrices passed are not of equal dimension",
+    "ConstitutiveLaw::calculate_d_second_piola_kirchhoff_stress_dG()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+ //Find the dimension of the matrix (assuming that it's square)
+ const unsigned dim = G.ncol();
+
+ //Find the dimension
+ // FD step 
+ const double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
+ 
+ //Advanced metric tensor
+ DenseMatrix<double> G_pls(dim,dim);
+ DenseMatrix<double> sigma_pls(dim,dim);
+ 
+ //Copy across the original value
+ for(unsigned i=0;i<dim;i++)
+  {
+   for(unsigned j=0;j<dim;j++)
+    {
+     G_pls(i,j)=G(i,j);
+    }
+  }
+     
+ // Do FD -- only w.r.t. to upper indices, exploiting symmetry.
+ // NOTE: We exploit the symmetry of the stress and metric tensors
+ //       by incrementing G(i,j) and G(j,i) simultaenously and
+ //       only fill in the "upper" triangles without copying things
+ //       across the lower triangle. This is taken into account
+ //       in the solid mechanics codes.
+ for(unsigned i=0;i<dim;i++)
+  {
+   for(unsigned j=i;j<dim;j++) 
+    {
+     G_pls(i,j) += eps_fd;
+     G_pls(j,i) = G_pls(i,j);
+
+     // Get advanced stress
+     this->calculate_second_piola_kirchhoff_stress(g,G_pls,sigma_pls);
+     
+     for(unsigned ii=0;ii<dim;ii++)
+      {
+       for(unsigned jj=ii;jj<dim;jj++) 
+        {
+         d_sigma_dG(ii,jj,i,j)=(sigma_pls(ii,jj)-sigma(ii,jj))/eps_fd;
+        }   
+      }
+     
+     // Reset 
+     G_pls(i,j) = G(i,j);
+     G_pls(j,i) = G(j,i);
+    }
+  }
+
+ //If we are symmetrising the tensor, do so
+ if(symmetrize_tensor)
+  {
+   for(unsigned i=0;i<dim;i++)
+    {
+     for(unsigned j=0;j<i;j++) 
+      {
+       for(unsigned ii=0;ii<dim;ii++)
+        {
+         for(unsigned jj=0;jj<ii;jj++) 
+          {
+           d_sigma_dG(ii,jj,i,j)= d_sigma_dG(jj,ii,j,i);
+          }   
+        }
+      }
+    }
+  }
+}
+
+
+//=========================================================================
+/// \short Calculate the derivatives of the contravariant
+/// 2nd Piola Kirchhoff stress tensor \f$ \sigma^{ij}\f$.
+/// with respect to the deformed metric tensor. 
+/// Also return the derivatives of the determinant of the 
+/// deformed metric tensor with respect to the deformed metric tensor.
+/// This form is appropriate 
+/// for truly-incompressible materials.
+/// The default implementation uses finite differences for the 
+/// derivatives that depend on the constitutive law, but not 
+/// for the derivatives of the determinant, which are generic.
+//========================================================================  
+void ConstitutiveLaw::calculate_d_second_piola_kirchhoff_stress_dG(
+ const DenseMatrix<double> &g, const DenseMatrix<double> &G,
+ const DenseMatrix<double> &sigma,
+ const double &detG,
+ const double &interpolated_solid_p,
+ RankFourTensor<double> &d_sigma_dG, 
+ DenseMatrix<double> &d_detG_dG,
+ const bool &symmetrize_tensor)
+{
+ //Initial error checking
+#ifdef PARANOID
+ //Test that the matrices are of the same dimension 
+ if(!are_matrices_of_equal_dimensions(g,G))
+  {
+   throw OomphLibError(
+    "Matrices passed are not of equal dimension",
+    "ConstitutiveLaw::calculate_d_second_piola_kirchhoff_stress_dG()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+ 
+ //Find the dimension of the matrix (assuming that it's square)
+ const unsigned dim = G.ncol();
+ 
+ // FD step
+ const double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
+ 
+ //Advanced metric tensor etc.
+ DenseMatrix<double> G_pls(dim,dim);
+ DenseMatrix<double> sigma_dev_pls(dim,dim);
+ DenseMatrix<double> Gup_pls(dim,dim);
+ double detG_pls;
+ 
+ // Copy across
+ for (unsigned i=0;i<dim;i++)
+  {
+   for (unsigned j=0;j<dim;j++)
+    {
+     G_pls(i,j)=G(i,j);
+    }
+  }
+
+ // Do FD -- only w.r.t. to upper indices, exploiting symmetry.
+ // NOTE: We exploit the symmetry of the stress and metric tensors
+ //       by incrementing G(i,j) and G(j,i) simultaenously and
+ //       only fill in the "upper" triangles without copying things
+ //       across the lower triangle. This is taken into account
+ //       in the remaining code further below.
+ for(unsigned i=0;i<dim;i++)
+  {
+   for (unsigned j=i;j<dim;j++)
+    {
+     G_pls(i,j) += eps_fd;
+     G_pls(j,i) = G_pls(i,j);
+     
+     // Get advanced stress
+     this->calculate_second_piola_kirchhoff_stress(
+      g,G_pls,sigma_dev_pls,Gup_pls,detG_pls);
+
+
+     // Derivative of determinant of deformed metric tensor
+     d_detG_dG(i,j)=(detG_pls-detG)/eps_fd;
+     
+     // Derivatives of deviatoric stress and "upper" deformed metric
+     // tensor
+     for (unsigned ii=0;ii<dim;ii++)
+      {
+       for (unsigned jj=ii;jj<dim;jj++)
+        {
+         d_sigma_dG(ii,jj,i,j)=(
+          sigma_dev_pls(ii,jj)-interpolated_solid_p*Gup_pls(ii,jj)-
+          sigma(ii,jj))/eps_fd;
+        }  
+      }
+     
+     // Reset 
+     G_pls(i,j) = G(i,j);
+     G_pls(j,i) = G(j,i);
+    }
+  }
+
+ //If we are symmetrising the tensor, do so
+ if(symmetrize_tensor)
+  {
+   for(unsigned i=0;i<dim;i++)
+    {
+     for(unsigned j=0;j<i;j++) 
+      {
+       d_detG_dG(i,j) = d_detG_dG(j,i);
+       
+       for(unsigned ii=0;ii<dim;ii++)
+        {
+         for(unsigned jj=0;jj<ii;jj++) 
+          {
+           d_sigma_dG(ii,jj,i,j)= d_sigma_dG(jj,ii,j,i);
+          }   
+        }
+      }
+    }
+  }
+}
+
+
+//========================================================================
+/// \short Calculate the derivatives of the contravariant 
+/// 2nd Piola Kirchoff stress tensor with respect to the deformed metric 
+/// tensor. Also return the derivatives of the generalised dilatation, 
+/// \f$ d, \f$ with respect to the deformed metric tensor.
+/// This form is appropriate
+/// for near-incompressible materials.
+/// The default implementation uses finite differences.
+//=======================================================================
+void ConstitutiveLaw::calculate_d_second_piola_kirchhoff_stress_dG(
+ const DenseMatrix<double> &g, const DenseMatrix<double> &G, 
+ const DenseMatrix<double> &sigma,
+ const double &gen_dil, 
+ const double &inv_kappa,
+ const double &interpolated_solid_p,
+ RankFourTensor<double> &d_sigma_dG, 
+ DenseMatrix<double> &d_gen_dil_dG,
+ const bool &symmetrize_tensor)
+{
+ //Initial error checking
+#ifdef PARANOID
+ //Test that the matrices are of the same dimension 
+ if(!are_matrices_of_equal_dimensions(g,G))
+  {
+   throw OomphLibError(
+    "Matrices passed are not of equal dimension",
+    "ConstitutiveLaw::calculate_d_second_piola_kirchhoff_stress_dG()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+ 
+ //Find the dimension of the matrix (assuming that it's square)
+ const unsigned dim = G.ncol();
+ 
+ // FD step 
+ const double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
+ 
+ //Advanced metric tensor etc
+ DenseMatrix<double> G_pls(dim,dim);
+ DenseMatrix<double> sigma_dev_pls(dim,dim);
+ DenseMatrix<double> Gup_pls(dim,dim);
+ double gen_dil_pls;
+ double inv_kappa_pls;
+ 
+ // Copy across
+ for (unsigned i=0;i<dim;i++)
+  {
+   for (unsigned j=0;j<dim;j++)
+    {
+     G_pls(i,j)=G(i,j);
+    }
+  }
+ 
+ // Do FD -- only w.r.t. to upper indices, exploiting symmetry.
+ // NOTE: We exploit the symmetry of the stress and metric tensors
+ //       by incrementing G(i,j) and G(j,i) simultaenously and
+ //       only fill in the "upper" triangles without copying things
+ //       across the lower triangle. This is taken into account
+ //       in the remaining code further below.
+ for(unsigned i=0;i<dim;i++)
+  {
+   for (unsigned j=i;j<dim;j++)
+    {
+     G_pls(i,j) += eps_fd;
+     G_pls(j,i) = G_pls(i,j);
+     
+     // Get advanced stress
+     this->calculate_second_piola_kirchhoff_stress(
+      g,G_pls,sigma_dev_pls,Gup_pls,gen_dil_pls,inv_kappa_pls);
+
+     // Derivative of generalised dilatation
+     d_gen_dil_dG(i,j)=(gen_dil_pls-gen_dil)/eps_fd;
+     
+     // Derivatives of deviatoric stress and "upper" deformed metric
+     // tensor
+     for (unsigned ii=0;ii<dim;ii++)
+      {
+       for (unsigned jj=ii;jj<dim;jj++)
+        {
+         d_sigma_dG(ii,jj,i,j)=(
+          sigma_dev_pls(ii,jj)-interpolated_solid_p*Gup_pls(ii,jj)-
+          sigma(ii,jj))/eps_fd;
+        }        
+      }
+     
+     // Reset 
+     G_pls(i,j) = G(i,j); 
+     G_pls(j,i) = G(j,i); 
+    }
+  }
+ 
+ //If we are symmetrising the tensor, do so
+ if(symmetrize_tensor)
+  {
+   for(unsigned i=0;i<dim;i++)
+    {
+     for(unsigned j=0;j<i;j++) 
+      {
+       d_gen_dil_dG(i,j) = d_gen_dil_dG(j,i);
+       
+       for(unsigned ii=0;ii<dim;ii++)
+        {
+         for(unsigned jj=0;jj<ii;jj++) 
+          {
+           d_sigma_dG(ii,jj,i,j)= d_sigma_dG(jj,ii,j,i);
+          }   
+        }
+      }
+    }
+  }
 }
 
 

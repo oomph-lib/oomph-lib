@@ -279,6 +279,7 @@ public virtual PVDEquationsWithPressure<DIM>,
 /// flag=0: compute only residual vector
  void fill_in_generic_residual_contribution_pvd_with_pressure(
   Vector<double> &residuals, DenseMatrix<double> &jacobian, 
+  DenseMatrix<double> &mass_matrix,
   const unsigned& flag);
 
  /// No values are interpolated in this element (pure solid)

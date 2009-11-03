@@ -1633,7 +1633,7 @@ fill_in_generic_residual_contribution_spherical_nst(
    for(unsigned l=0;l<n_node;l++) 
     {
      //cache the shape functions
-     const double psi_ = psif(l);
+     double psi_ = psif(l);
      //Loop over the positions separately
      for(unsigned i=0;i<2;i++)
       {

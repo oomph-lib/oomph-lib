@@ -98,6 +98,24 @@ template<class BASIC, class SOLID>
    fill_in_shape_derivatives_by_fd(jacobian); 
   }
 
+ /// \short Final override for mass matrix function: contributions
+ /// are included from both the underlying element types
+ void fill_in_contribution_to_jacobian_and_mass_matrix(
+  Vector<double> &residuals,
+  DenseMatrix<double> &jacobian, DenseMatrix<double> &mass_matrix)
+  {
+   //Call the basic equations first
+   BASIC::fill_in_contribution_to_jacobian_and_mass_matrix(
+    residuals,jacobian,mass_matrix);
+   //Call the solid equations
+   SOLID::fill_in_contribution_to_jacobian_and_mass_matrix(
+    residuals,jacobian,mass_matrix);
+   
+   // Now fill in the off-diagonal entries (the shape derivatives),
+   fill_in_shape_derivatives_by_fd(jacobian); 
+  }
+
+
  /// \short Fill in the derivatives of the BASIC equations
  /// w.r.t. to the solid position dofs
  void fill_in_shape_derivatives_by_fd(DenseMatrix<double> &jacobian)
@@ -400,6 +418,24 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
    // Now fill in the off-diagonal entries (the shape derivatives),
    fill_in_shape_derivatives_by_fd(jacobian);   
   }
+
+ /// \short Final override for mass matrix function: contributions
+ /// are included from both the underlying element types
+ void fill_in_contribution_to_jacobian_and_mass_matrix(
+  Vector<double> &residuals,
+  DenseMatrix<double> &jacobian, DenseMatrix<double> &mass_matrix)
+  {
+   //Call the basic equations first
+   BASIC::fill_in_contribution_to_jacobian_and_mass_matrix(
+    residuals,jacobian,mass_matrix);
+   //Call the solid equations
+   SOLID::fill_in_contribution_to_jacobian_and_mass_matrix(
+    residuals,jacobian,mass_matrix);
+   
+   // Now fill in the off-diagonal entries (the shape derivatives),
+   fill_in_shape_derivatives_by_fd(jacobian); 
+  }
+
 
 
  /// \short Fill in the derivatives of the BASIC equations

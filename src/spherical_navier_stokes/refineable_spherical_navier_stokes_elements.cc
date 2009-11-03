@@ -147,7 +147,7 @@ int local_eqn=0, local_unknown=0;
    for(unsigned l=0;l<n_node;l++) 
     {
      //Cache the shape function
-     const double psi_ = psif(l);
+     double psi_ = psif(l);
      //Loop over positions separately
      for(unsigned i=0;i<2;i++)
       {

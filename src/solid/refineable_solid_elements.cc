@@ -61,20 +61,12 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
    get_residuals_for_solid_ic(residuals);
    return;
   }
- 
- // Storage for symmetric part of the Jacobian
- unsigned n_dof=jacobian.nrow();
- DenseMatrix<double> sym_jacobian(n_dof,n_dof,0.0);
- 
- // Storage of eqn numbers
- std::set<unsigned> temp_eqn_numbers;
- //temp_eqn_numbers.reserve(n_dof);
 
  //Find out how many nodes there are
- unsigned n_node = nnode();
+ const unsigned n_node = nnode();
 
  //Find out how many positional dofs there are
- unsigned n_position_type = this->nnodal_position_type();
+ const unsigned n_position_type = this->nnodal_position_type();
 
  //Integers to store local equation numbers
  int local_eqn=0;
@@ -84,7 +76,7 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
   
  // Time factor
  double time_factor=0.0;
- if (lambda_sq>0)
+ if(lambda_sq>0)
   {
    time_factor=this->node_pt(0)->position_time_stepper_pt()->weight(2,0);
   }
@@ -94,7 +86,7 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
  DShape dpsidxi(n_node,n_position_type,DIM);
 
  //Set the value of n_intpt -- the number of integration points
- unsigned n_intpt = integral_pt()->nweight();
+ const unsigned n_intpt = integral_pt()->nweight();
 
  //Set the vector to hold the local coordinates in the element
  Vector<double> s(DIM);
@@ -127,20 +119,21 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
      //Loop over positional dofs
      for(unsigned k=0;k<n_position_type;k++)
       {
+       double psi_ = psi(l,k);
        //Loop over displacement components (deformed position)
        for(unsigned i=0;i<DIM;i++)
         {
          //Calculate the Lagrangian coordinates and the accelerations
-         interpolated_xi[i] += lagrangian_position_gen(l,k,i)*psi(l,k);
+         interpolated_xi[i] += lagrangian_position_gen(l,k,i)*psi_;
 
          // Only compute accelerations if inertia is switched on
          // otherwise the timestepper might not be able to 
          // work out dx_gen_dt(2,...)
          if ((lambda_sq>0.0)&&(this->unsteady()))
           {
-           accel[i] += dnodal_position_gen_dt(2,l,k,i)*psi(l,k);
+           accel[i] += dnodal_position_gen_dt(2,l,k,i)*psi_;
           }
-
+         
          //Loop over derivative directions
          for(unsigned j=0;j<DIM;j++)
           {
@@ -154,7 +147,7 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
    //Get isotropic growth factor
    double gamma=1.0;
    this->get_isotropic_growth(ipt,s,interpolated_xi,gamma);
-
+   
    //Get body force at current time
    Vector<double> b(DIM);
    this->body_force(interpolated_xi,b);
@@ -211,7 +204,6 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
    
    // Stress derivative
    RankFourTensor<double> d_stress_dG(DIM,DIM,DIM,DIM,0.0);
-   
    // Derivative of metric tensor w.r.t. to nodal coords
    RankFiveTensor<double> d_G_dX(n_node,n_position_type,DIM,DIM,DIM,0.0);
    
@@ -242,52 +234,10 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
         }
       }
 
-     // FD step 
-     double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
-     
-     //Advanced metric tensor
-     DenseMatrix<double> G_pls(DIM,DIM);
-     DenseMatrix<double> sigma_pls(DIM,DIM);
-     
-     // Copy across
-     for (unsigned i=0;i<DIM;i++)
-      {
-       for (unsigned j=0;j<DIM;j++)
-        {
-         G_pls(i,j)=G(i,j);
-        }
-      }
-     
-     // Do FD -- only w.r.t. to upper indices, exploiting symmetry.
-     // NOTE: We exploit the symmetry of the stress and metric tensors
-     //       by incrementing G(i,j) and G(j,i) simultaenously and
-     //       only fill in the "upper" triangles without copying things
-     //       across the lower triangle. This is taken into account
-     //       in the remaining code further below.
-     for(unsigned i=0;i<DIM;i++)
-      {
-       for(unsigned j=i;j<DIM;j++) 
-        {
-         G_pls(i,j) += eps_fd;
-         G_pls(j,i) = G_pls(i,j);
-         
-         // Get advanced stress
-         this->get_stress(g,G_pls,sigma_pls);
-         
-         for (unsigned ii=0;ii<DIM;ii++)
-          {
-           for (unsigned jj=ii;jj<DIM;jj++) 
-            {
-             d_stress_dG(ii,jj,i,j)=(sigma_pls(ii,jj)-sigma(ii,jj))/eps_fd;
-            }   
-          }
-         
-         // Reset 
-         G_pls(i,j) = G(i,j);
-         G_pls(j,i) = G(j,i);
-
-        }
-      }
+     //Get the "upper triangular" 
+     //entries of the derivatives of the stress tensor with
+     //respect to G
+     this->get_d_stress_dG_upper(g,G,sigma,d_stress_dG);
     }
    
 
@@ -368,10 +318,7 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
            /*IF it's not a boundary condition*/
            if(local_eqn >= 0)
             {
-
-             // Record eqn number
-             if (ipt==0) temp_eqn_numbers.insert(local_eqn);
-             
+             //Initialise the contribution
              double sum=0.0;
              
              // Acceleration and body force
@@ -530,42 +477,43 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
                          
                          // Only upper triangle (no separate test for bc as
                          // local_eqn is already nonnegative)
-                         if (local_unknown >= local_eqn)
+                         if((i==ii) &&  (local_unknown >= local_eqn))
                           {
+                           //Initialise the contribution
                            double sum=0.0;
                            
-                           // Add diagonal terms
-                           if (i==ii)
+                           // Inertia term
+                           sum+=lambda_sq*time_factor*psi(ll,kk)*psi(l,k);
+                           
+                           // Stress term                       
+                           unsigned count4=offset4;
+                           for(unsigned a=0;a<DIM;a++)
                             {
-                             // Inertia term
-                             sum+=lambda_sq*time_factor*psi(ll,kk)*psi(l,k);
+                             //Cache term
+                             const double factor=
+                              dpsidxi.raw_direct_access(count4);// ll ,kk 
+                             ++count4;
                              
-                             // Stress term                       
-                             unsigned count4=offset4;
-                             for(unsigned a=0;a<DIM;a++)
+                             unsigned count5=offset5;
+                             for(unsigned b=0;b<DIM;b++) 
                               {
-                               //Cache term
-                               const double factor=
-                                dpsidxi.raw_direct_access(count4);// ll ,kk 
-                               ++count4;
-                               
-                               unsigned count5=offset5;
-                               for(unsigned b=0;b<DIM;b++) 
-                                {
-                                 sum+=sigma(a,b)*factor*
-                                  dpsidxi.raw_direct_access(count5); // l  ,k
-                                 ++count5;
-                                }
+                               sum+=sigma(a,b)*factor*
+                                dpsidxi.raw_direct_access(count5); // l  ,k
+                               ++count5;
                               }
                             }
-
-                           // Multiply by weight and add contribution
-                           sym_jacobian(local_eqn,local_unknown)+=
-                            sum*W*hang_weight*hhang_weight;
                            
-                          } // endif for upper half
-                         
-                         
+                           //Multiply by weights to form contribution
+                           double sym_entry =
+                            sum*W*hang_weight*hhang_weight;
+                           //Add contribution to jacobian
+                           jacobian(local_eqn,local_unknown)+= sym_entry;
+                           //Add to lower triangular entries
+                           if(local_eqn!=local_unknown)
+                            {
+                             jacobian(local_unknown,local_eqn)+= sym_entry;
+                            }
+                          }
                         } //End of if not boundary condition
                       }
                     }
@@ -580,37 +528,6 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
       } //End of loop over master nodes
     } //End of loop over nodes
   } //End of loop over integration points
-
- 
- // Fill in symmetric lower half
- if (flag==1)
-  {
-   for (std::set<unsigned>::iterator it=temp_eqn_numbers.begin();
-        it!=temp_eqn_numbers.end();it++)
-    {
-     unsigned local_eqn=(*it); 
-
-     for (std::set<unsigned>::iterator it2=temp_eqn_numbers.begin();
-          it2!=temp_eqn_numbers.end();it2++)
-      {
-       unsigned local_unknown=(*it2); 
-       
-       // Lower bit
-       if (local_unknown < local_eqn)
-        {
-         jacobian(local_eqn,local_unknown)+=
-          sym_jacobian(local_unknown,local_eqn);
-        }
-       // Upper bit and diagonal
-       else
-        {
-         jacobian(local_eqn,local_unknown)+=
-          sym_jacobian(local_eqn,local_unknown);
-        }
-      }
-    }
-  }
-
 }
  
 
@@ -622,12 +539,15 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
 /// flag=1: compute both, fully analytically
 /// flag=2: compute both, using FD for the derivatives w.r.t. to the
 ///         discrete displacment dofs.
+/// flag=3: compute residuals, jacobian (full analytic) and mass matrix
+/// flag=4: compute residuals, jacobian (FD for derivatives w.r.t. 
+///          displacements) and mass matrix
 //==========================================================================
 template<unsigned DIM>
 void RefineablePVDEquationsWithPressure<DIM>::
 fill_in_generic_residual_contribution_pvd_with_pressure(
  Vector<double> &residuals, DenseMatrix<double> &jacobian, 
- const unsigned& flag)
+ DenseMatrix<double> &mass_matrix, const unsigned& flag)
 {
 
 #ifdef PARANOID
@@ -651,24 +571,17 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
    return;
   }
 
- // Storage for symmetric part of the Jacobian
- unsigned n_dof=jacobian.nrow();
- DenseMatrix<double> sym_jacobian(n_dof,n_dof,0.0);
- 
- // Storage of eqn numbers
- std::set<unsigned> temp_eqn_numbers;
-
  //Find out how many nodes there are
- unsigned n_node = nnode();
+ const unsigned n_node = nnode();
 
  //Find out how many position types of dof there are
- unsigned n_position_type = this->nnodal_position_type();
+ const unsigned n_position_type = this->nnodal_position_type();
 
  //Find out how many pressure dofs there are
- unsigned n_solid_pres = this->npres_solid();
+ const unsigned n_solid_pres = this->npres_solid();
 
  //Find out the index of the solid dof
- int solid_p_index = this->solid_p_nodal_index();
+ const int solid_p_index = this->solid_p_nodal_index();
 
  //Local array of booleans that is true if the l-th pressure value is hanging
  //This is an optimization because it avoids repeated virtual function calls 
@@ -715,7 +628,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
  Shape psisp(n_solid_pres);
 
  //Set the value of n_intpt
- unsigned n_intpt = integral_pt()->nweight();
+ const unsigned n_intpt = integral_pt()->nweight();
 
  //Set the vector to hold the local coordinates in the element
  Vector<double> s(DIM);
@@ -750,18 +663,19 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
      //Loop over positional dofs
      for(unsigned k=0;k<n_position_type;k++)
       {
+       double psi_ = psi(l,k);
        //Loop over displacement components (deformed position)
        for(unsigned i=0;i<DIM;i++)
         {
          //Calculate the lagrangian coordinates and the accelerations
-         interpolated_xi[i] += lagrangian_position_gen(l,k,i)*psi(l,k);
+         interpolated_xi[i] += lagrangian_position_gen(l,k,i)*psi_;
 
          // Only compute accelerations if inertia is switched on
          // otherwise the timestepper might not be able to 
          // work out dx_gen_dt(2,...)
          if ((lambda_sq>0.0)&&(this->unsteady()))
           {
-           accel[i] += dnodal_position_gen_dt(2,l,k,i)*psi(l,k);
+           accel[i] += dnodal_position_gen_dt(2,l,k,i)*psi_;
           }
 
          //Loop over derivative directions
@@ -842,7 +756,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
       
    // Stress etc derivatives
    RankFourTensor<double> d_stress_dG(DIM,DIM,DIM,DIM,0.0);
-   RankFourTensor<double> d_Gup_dG(DIM,DIM,DIM,DIM,0.0);
+   //RankFourTensor<double> d_Gup_dG(DIM,DIM,DIM,DIM,0.0);
    DenseMatrix<double> d_detG_dG(DIM,DIM,0.0);
    DenseMatrix<double> d_gen_dil_dG(DIM,DIM,0.0);
 
@@ -850,7 +764,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
    RankFiveTensor<double> d_G_dX(n_node,n_position_type,DIM,DIM,DIM,0.0);
     
    // Get Jacobian too?
-   if (flag==1) 
+   if((flag==1)  || (flag==3))
     {
      // Derivative of metric tensor w.r.t. to discrete positional dofs
      // NOTE: Since G is symmetric we only compute the upper triangle
@@ -876,10 +790,8 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
         }
       }
     }
-
-
-
-
+   
+   
    // Incompressible: Compute the deviatoric part of the stress tensor, the
    // contravariant deformed metric tensor and the determinant
    // of the deformed covariant metric tensor.
@@ -897,70 +809,14 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
       }
 
      // Get Jacobian too?
-     if (flag==1)
+     if((flag==1) || (flag==3))
       {
-       // FD step
-       double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
-       
-       //Advanced metric tensor etc.
-       DenseMatrix<double> G_pls(DIM,DIM);
-       DenseMatrix<double> sigma_dev_pls(DIM,DIM);
-       DenseMatrix<double> sigma_pls(DIM,DIM);
-       DenseMatrix<double> Gup_pls(DIM,DIM);
-       double detG_pls;
-
-       // Copy across
-       for (unsigned i=0;i<DIM;i++)
-        {
-         for (unsigned j=0;j<DIM;j++)
-          {
-           G_pls(i,j)=G(i,j);
-          }
-        }
-       
-
-       // Do FD -- only w.r.t. to upper indices, exploiting symmetry.
-       // NOTE: We exploit the symmetry of the stress and metric tensors
-       //       by incrementing G(i,j) and G(j,i) simultaenously and
-       //       only fill in the "upper" triangles without copying things
-       //       across the lower triangle. This is taken into account
-       //       in the remaining code further below.
-       for(unsigned i=0;i<DIM;i++)
-        {
-         for (unsigned j=i;j<DIM;j++)
-          {
-           G_pls(i,j) += eps_fd;
-           G_pls(j,i) = G_pls(i,j);
-
-           // Get advanced stress
-           this->get_stress(g,G_pls,sigma_dev_pls,Gup_pls,detG_pls);
-           
-           // Derivative of determinant of deformed metric tensor
-           d_detG_dG(i,j)=(detG_pls-detG)/eps_fd;
-
-           // Derivatives of deviatoric stress and "upper" deformed metric
-           // tensor
-           for (unsigned ii=0;ii<DIM;ii++)
-            {
-             for (unsigned jj=ii;jj<DIM;jj++)
-              {
-               d_stress_dG(ii,jj,i,j)=(
-                sigma_dev_pls(ii,jj)-interpolated_solid_p*Gup_pls(ii,jj)-
-                sigma(ii,jj))/eps_fd;
-
-               d_Gup_dG(ii,jj,i,j)=(Gup_pls(ii,jj)-Gup(ii,jj))/eps_fd;
-              }  
-            }
-           
-           // Reset 
-           G_pls(i,j) = G(i,j);
-           G_pls(j,i) = G(j,i);
-
-          }
-        }
+       //Get the "upper triangular" entries of the 
+       //derivatives of the stress tensor with
+       //respect to G
+       this->get_d_stress_dG_upper(g,G,sigma,detG,interpolated_solid_p,
+                                   d_stress_dG,d_detG_dG);
       }
-     
-
     }
    // Nearly incompressible: Compute the deviatoric part of the 
    // stress tensor, the contravariant deformed metric tensor,
@@ -979,64 +835,14 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
       }
 
      // Get Jacobian too?
-     if (flag==1) 
+     if((flag==1)  || (flag==3))
       {
-       // FD step 
-       double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
-       
-       //Advanced metric tensor etc
-       DenseMatrix<double> G_pls(DIM,DIM);
-       DenseMatrix<double> sigma_dev_pls(DIM,DIM);
-       DenseMatrix<double> Gup_pls(DIM,DIM);
-       double gen_dil_pls;
-
-       // Copy across
-       for (unsigned i=0;i<DIM;i++)
-        {
-         for (unsigned j=0;j<DIM;j++)
-          {
-           G_pls(i,j)=G(i,j);
-          }
-        }
-
-       // Do FD -- only w.r.t. to upper indices, exploiting symmetry.
-       // NOTE: We exploit the symmetry of the stress and metric tensors
-       //       by incrementing G(i,j) and G(j,i) simultaenously and
-       //       only fill in the "upper" triangles without copying things
-       //       across the lower triangle. This is taken into account
-       //       in the remaining code further below.
-       for(unsigned i=0;i<DIM;i++)
-        {
-         for (unsigned j=i;j<DIM;j++)
-          {
-           G_pls(i,j) += eps_fd;
-           G_pls(j,i) = G_pls(i,j);
-
-           // Get advanced stress
-           this->get_stress(g,G_pls,sigma_dev_pls,Gup_pls,gen_dil_pls,inv_kappa);
-
-           // Derivative of generalised dilatation
-           d_gen_dil_dG(i,j)=(gen_dil_pls-gen_dil)/eps_fd;
-
-           // Derivatives of deviatoric stress and "upper" deformed metric
-           // tensor
-           for (unsigned ii=0;ii<DIM;ii++)
-            {
-             for (unsigned jj=ii;jj<DIM;jj++)
-              {
-               d_stress_dG(ii,jj,i,j)=(
-                sigma_dev_pls(ii,jj)-interpolated_solid_p*Gup_pls(ii,jj)-
-                sigma(ii,jj))/eps_fd;
-
-               d_Gup_dG(ii,jj,i,j)=(Gup_pls(ii,jj)-Gup(ii,jj))/eps_fd;
-              }        
-            }
-           
-           // Reset 
-           G_pls(i,j) = G(i,j); 
-           G_pls(j,i) = G(j,i); 
-          }
-        }
+       //Get the "upper triangular" entries of the derivatives 
+       //of the stress tensor with
+       //respect to G
+       this->get_d_stress_dG_upper(g,G,sigma,gen_dil,inv_kappa,
+                                   interpolated_solid_p,
+                                   d_stress_dG,d_gen_dil_dG);
       }
     }
 
@@ -1117,9 +923,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
            /*IF it's not a boundary condition*/
            if(local_eqn >= 0)
             {
-             // Record eqn number
-             if (ipt==0) temp_eqn_numbers.insert(local_eqn);
-             
+             //Initialise contribution to zero
              double sum=0.0;
              
              // Acceleration and body force
@@ -1138,9 +942,102 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
                 }
               }
              residuals[local_eqn] += W*sum*hang_weight;
-                          
+
+
+             //Get the mass matrix
+             //This involves another loop over the points 
+             //because the jacobian may NOT be being calculated analytically
+             //It could be made more efficient in th event that
+             //we eventually decide not (never) to 
+             //use finite differences.
+             if(flag > 2)
+              {
+               // Default setting for non-hanging node
+               unsigned nn_master=1;
+               double hhang_weight=1.0;
+               
+               //Loop over the nodes of the element again
+               for(unsigned ll=0;ll<n_node;ll++)
+                {
+                 //Get pointer to local node ll
+                 Node* llocal_node_pt = node_pt(ll);
+                 
+                 // Cache hang status
+                 bool iis_hanging=llocal_node_pt->is_hanging();
+                 
+                 //If the node is a hanging node
+                 if(iis_hanging)
+                  {      
+                   nn_master = llocal_node_pt->hanging_pt()->nmaster();
+                  }
+                 // Otherwise the node is its own master
+                 else
+                  {
+                   nn_master=1;
+                  }
+                 
+                 
+                 // Storage for local unknown numbers at node indexed by
+                 // type and direction
+                 DenseMatrix<int> position_local_unk_at_node(n_position_type,
+                                                             DIM);
+                 
+                 // Loop over the master nodes
+                 for(unsigned mm=0;mm<nn_master;mm++)
+                  {
+                   
+                   if (iis_hanging)
+                    {
+                     //Find the unknown numbers
+                     position_local_unk_at_node = 
+                      local_position_hang_eqn(
+                       llocal_node_pt->
+                       hanging_pt()->master_node_pt(mm));
+                     
+                     //Find the hanging node weight
+                     hhang_weight = llocal_node_pt->hanging_pt()->
+                      master_weight(mm);         
+                    }
+                   else
+                    {
+                     //Loop of types of dofs
+                     for(unsigned kk=0;kk<n_position_type;kk++)
+                      {
+                       //Loop over the displacement components
+                       for(unsigned ii=0;ii<DIM;ii++)
+                        {
+                         position_local_unk_at_node(kk,ii) = 
+                          position_local_eqn(ll,kk,ii);
+                        }
+                      }
+                     
+                     // Hang weight is one
+                     hhang_weight=1.0;
+                    }
+                   
+                   
+                   //Loop of types of dofs again
+                   for(unsigned kk=0;kk<n_position_type;kk++)
+                    {
+                     //Get the number of the unknown
+                     int local_unknown = position_local_unk_at_node(kk,i);
+                     
+                     /*IF it's not a boundary condition*/
+                     if(local_unknown >= 0)
+                      {
+                       mass_matrix(local_eqn,local_unknown) +=
+                        lambda_sq*psi(l,k)*psi(ll,kk)*hang_weight*
+                        hhang_weight*W;
+                      }
+                    }
+                  }
+                }
+              }
+ 
+
+             
              // Get Jacobian too?
-             if (flag==1)
+             if((flag==1) || (flag==3))
               {
                // Offset for faster access in general stress loop
                const unsigned offset1=d_G_dX.offset( l, k, i);
@@ -1278,40 +1175,43 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
                          
                          // Only upper triangle (no separate test for bc as
                          // local_eqn is already nonnegative)
-                         if (local_unknown >= local_eqn)
+                         if((i==ii) && (local_unknown >= local_eqn))
                           {
+                           //Initialise contribution
                            double sum=0.0;
                            
-                           // Add diagonal terms
-                           if (i==ii)
+                           // Inertia term
+                           sum+=lambda_sq*time_factor*psi(ll,kk)*psi(l,k);
+                           
+                           // Stress term                       
+                           unsigned count4=offset4;
+                           for(unsigned a=0;a<DIM;a++)
                             {
-                             // Inertia term
-                             sum+=lambda_sq*time_factor*psi(ll,kk)*psi(l,k);
+                             //Cache term
+                             const double factor=
+                              dpsidxi.raw_direct_access(count4);// ll ,kk 
+                             ++count4;
                              
-                             // Stress term                       
-                             unsigned count4=offset4;
-                             for(unsigned a=0;a<DIM;a++)
+                             unsigned count5=offset5;
+                             for(unsigned b=0;b<DIM;b++) 
                               {
-                               //Cache term
-                               const double factor=
-                                dpsidxi.raw_direct_access(count4);// ll ,kk 
-                               ++count4;
-                               
-                               unsigned count5=offset5;
-                               for(unsigned b=0;b<DIM;b++) 
-                                {
-                                 sum+=sigma(a,b)*factor*
-                                  dpsidxi.raw_direct_access(count5); // l  ,k
-                                 ++count5;
-                                }
+                               sum+=sigma(a,b)*factor*
+                                dpsidxi.raw_direct_access(count5); // l  ,k
+                               ++count5;
                               }
                             }
-                           // Multiply by weight and add contribution
-                           sym_jacobian(local_eqn,local_unknown)+=
-                            sum*W*hang_weight*hhang_weight;
                            
-                          } // endif for upper half
-                                                  
+                           // Multiply by weights to form contribution
+                           double sym_entry = 
+                            sum*W*hang_weight*hhang_weight;
+                           //Add contribution to jacobian
+                           jacobian(local_eqn,local_unknown)+= sym_entry;
+                           //Add to lower triangular entries
+                           if(local_eqn != local_unknown)
+                            {
+                             jacobian(local_unknown,local_eqn)+= sym_entry;
+                            }
+                          }
                         } //End of if not boundary condition
                       }
                     }
@@ -1394,7 +1294,6 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
    //Now loop over the pressure degrees of freedom
    for(unsigned l=0;l<n_solid_pres;l++)
     {
-     
      bool is_hanging=solid_pressure_dof_is_hanging[l];
      
      unsigned n_master=1;
@@ -1440,10 +1339,6 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
        // Pinned (unlikely, actually) or real dof?
        if(local_eqn >= 0)
         {
-
-         // Record eqn number
-         if (ipt==0) temp_eqn_numbers.insert(local_eqn);
-         
          //For true incompressibility we need to conserve volume
          //so the determinant of the deformed metric tensor
          //needs to be equal to that of the undeformed one, which
@@ -1454,7 +1349,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
             (detG - gamma)*psisp[l]*W*hang_weight;
            
            // Get Jacobian too?
-           if (flag==1) 
+           if((flag==1)  || (flag==3))
             {
              // Default setting for non-hanging node
              unsigned nn_master=1;
@@ -1575,7 +1470,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
             *psisp[l]*W*hang_weight;
            
            //Add in the jacobian terms
-           if (flag==1) 
+           if((flag==1)  || (flag==3))
             {
              // Default setting for non-hanging node
              unsigned nn_master=1;
@@ -1750,36 +1645,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
       } //End of loop over master nodes
     } //End of loop over pressure dofs
   } //End of loop over integration points
-
-
- // Fill in symmetric lower half
- if (flag==1)
-  {
-   for (std::set<unsigned>::iterator it=temp_eqn_numbers.begin();
-        it!=temp_eqn_numbers.end();it++)
-    {
-     unsigned local_eqn=(*it); 
-
-     for (std::set<unsigned>::iterator it2=temp_eqn_numbers.begin();
-          it2!=temp_eqn_numbers.end();it2++)
-      {
-       unsigned local_unknown=(*it2); 
-       
-       // Lower bit
-       if (local_unknown < local_eqn)
-        {
-         jacobian(local_eqn,local_unknown)+=
-          sym_jacobian(local_unknown,local_eqn);
-        }
-       // Upper bit and diagonal
-       else
-        {
-         jacobian(local_eqn,local_unknown)+=
-          sym_jacobian(local_eqn,local_unknown);
-        }
-      }
-    }
-  }
+ 
 }
 
 
