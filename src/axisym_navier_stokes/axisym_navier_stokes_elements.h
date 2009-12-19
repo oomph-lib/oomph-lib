@@ -209,7 +209,7 @@ namespace oomph
 /// \f] 
 /// are the Reynolds number, Strouhal number and Froude number
 /// respectively. \f$ R_\rho=\rho/\rho_{ref} \f$ and 
-/// \f$ R_\mu =\mu/\mu_{ref}\f$ represent the ratios
+/// \f$ R_\mu(T) =\mu(T)/\mu_{ref}\f$ represent the ratios
 /// of the fluid's density and its dynamic viscosity, relative to the
 /// density and viscosity values used to form the non-dimensional
 /// parameters (By default, \f$ R_\rho  = R_\mu = 1 \f$; other values
@@ -264,11 +264,13 @@ protected:
  Vector<double> *G_pt;
  
  /// Pointer to body force function
- void (*Body_force_fct_pt)(const double& time, const Vector<double> &x, 
+ void (*Body_force_fct_pt)(const double& time, 
+                           const Vector<double> &x, 
                            Vector<double> &result);
  
  /// Pointer to volumetric source function
- double (*Source_fct_pt)(const double& time, const Vector<double> &x);
+ double (*Source_fct_pt)(const double& time, 
+                         const Vector<double> &x);
 
  /// \short Boolean flag to indicate if ALE formulation is disabled when
  /// the time-derivatives are computed. Only set to true if you're sure
@@ -306,9 +308,11 @@ protected:
  virtual void pshape_axi_nst(const Vector<double> &s, Shape &psi, 
                              Shape &test) const=0;
 
- /// Calculate the body force at a given time and Eulerian position
- void get_body_force(const double& time, const unsigned& ipt,
-                     const Vector<double> &x, Vector<double> &result)
+ /// Calculate the body force fct at a given time and Eulerian position
+ void get_body_force(const double& time, 
+                     const unsigned& ipt,
+                     const Vector<double> &x, 
+                     Vector<double> &result)
   {
    //If the function pointer is zero return zero
    if(Body_force_fct_pt == 0)
@@ -325,7 +329,8 @@ protected:
 
  /// \short Calculate the source fct at given time and
  /// Eulerian position 
- double get_source_fct(const double& time, const unsigned& ipt,
+ double get_source_fct(const double& time, 
+                       const unsigned& ipt,
                        const Vector<double> &x)
   {
    //If the function pointer is zero return zero
@@ -339,17 +344,31 @@ protected:
      return (*Source_fct_pt)(time,x);
     }
   }
+
+ /// \short Calculate the viscosity ratio relative to the 
+ /// viscosity used in the definition of the Reynolds number
+ /// at given time and Eulerian position 
+ virtual void get_viscosity_ratio_axisym_nst(const unsigned& ipt,
+                                             const Vector<double> &s, 
+                                             const Vector<double> &x,
+                                             double &visc_ratio)
+  {
+   visc_ratio = *Viscosity_Ratio_pt; // hierher double check all this!
+  } 
  
  ///\short Compute the residuals for the Navier--Stokes equations; 
  /// flag=1(or 0): do (or don't) compute the Jacobian as well. 
- virtual void fill_in_generic_residual_contribution_axi_nst(
-  Vector<double> &residuals, DenseMatrix<double> &jacobian, 
-  DenseMatrix<double> &mass_matrix, unsigned flag);
+ virtual void fill_in_generic_residual_contribution_axi_nst(Vector<double> &residuals, 
+                                                            DenseMatrix<double> &jacobian, 
+                                                            DenseMatrix<double> &mass_matrix, 
+                                                            unsigned flag);
     
 public:
 
  /// \short Constructor: NULL the body force and source function
- AxisymmetricNavierStokesEquations() : Body_force_fct_pt(0), Source_fct_pt(0),
+ AxisymmetricNavierStokesEquations() : 
+  Body_force_fct_pt(0), 
+  Source_fct_pt(0),
   ALE_is_disabled(false)
   {
    //Set all the Physical parameter pointers to the default value zero
@@ -383,20 +402,6 @@ public:
  /// Pointer to product of Reynolds and Strouhal number (=Womersley number)
  double* &re_st_pt() {return ReSt_pt;}
 
- /// \short Viscosity ratio for element: Element's viscosity relative to the 
- /// viscosity used in the definition of the Reynolds number
- const double &viscosity_ratio() const {return *Viscosity_Ratio_pt;}
-
- /// Pointer to Viscosity Ratio
- double* &viscosity_ratio_pt() {return Viscosity_Ratio_pt;}
-
- /// \short Density ratio for element: Element's density relative to the 
- ///  viscosity used in the definition of the Reynolds number
- const double &density_ratio() const {return *Density_Ratio_pt;}
-
- /// Pointer to Density ratio
- double* &density_ratio_pt() {return Density_Ratio_pt;}
-
  /// Global inverse Froude number
  const double &re_invfr() const {return *ReInvFr_pt;}
 
@@ -415,13 +420,29 @@ public:
  /// Pointer to Vector of gravitational components
  Vector<double>* &g_pt() {return G_pt;}
 
+ /// \short Density ratio for element: Element's density relative to the 
+ ///  viscosity used in the definition of the Reynolds number
+ const double &density_ratio() const {return *Density_Ratio_pt;}
+
+ /// Pointer to Density ratio
+ double* &density_ratio_pt() {return Density_Ratio_pt;}
+
+ /// \short Viscosity ratio for element: Element's viscosity relative to the 
+ /// viscosity used in the definition of the Reynolds number
+ const double &viscosity_ratio() const {return *Viscosity_Ratio_pt;}
+
+ /// Pointer to Viscosity Ratio
+ double* &viscosity_ratio_pt() {return Viscosity_Ratio_pt;}
+
  /// Access function for the body-force pointer
- void (* &body_force_fct_pt())(const double& time, const Vector<double>& x, 
+ void (* &body_force_fct_pt())(const double& time, 
+                               const Vector<double>& x, 
                                Vector<double> & f) 
   {return Body_force_fct_pt;}
  
  ///Access function for the source-function pointer
- double (* &source_fct_pt())(const double& time, const Vector<double>& x)
+ double (* &source_fct_pt())(const double& time, 
+                             const Vector<double>& x)
   {return Source_fct_pt;}
  
  ///Function to return number of pressure degrees of freedom
@@ -506,7 +527,8 @@ public:
  
  /// \short Compute traction (on the viscous scale) at local coordinate s 
  /// for outer unit normal N
- void traction(const Vector<double>& s, const Vector<double>& N, 
+ void traction(const Vector<double>& s, 
+               const Vector<double>& N, 
                Vector<double>& traction);
 
  /// Compute the diagonal of the velocity mass matrix
@@ -540,19 +562,22 @@ public:
  /// \short Output function: x,y,[z],u,v,[w] in tecplot format.
  /// nplot points in each coordinate direction at timestep t
  /// (t=0: present; t>0: previous timestep)
- void output_veloc(std::ostream &outfile, const unsigned &nplot, 
+ void output_veloc(std::ostream &outfile, 
+                   const unsigned &nplot, 
                    const unsigned& t);
 
  /// \short Output exact solution specified via function pointer
  /// at a given number of plot points. Function prints as
  /// many components as are returned in solution Vector
- void output_fct(std::ostream &outfile, const unsigned &nplot, 
+ void output_fct(std::ostream &outfile, 
+                 const unsigned &nplot, 
                  FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
 
  /// \short Output exact solution specified via function pointer
  /// at a given time and at a given number of plot points.
  /// Function prints as many components as are returned in solution Vector.
- void output_fct(std::ostream &outfile, const unsigned &nplot, 
+ void output_fct(std::ostream &outfile, 
+                 const unsigned &nplot, 
                  const double& time,
                  FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt);
 
@@ -571,7 +596,8 @@ public:
  /// and L2 norm of velocity solution over element
  void compute_error(std::ostream &outfile,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
-                    double& error, double& norm);
+                    double& error, 
+                    double& norm);
 
  /// Compute the element's residual Vector
  void fill_in_contribution_to_residuals(Vector<double> &residuals)
@@ -595,13 +621,38 @@ public:
  
  /// Add the element's contribution to its residuals vector,
  /// jacobian matrix and mass matrix
- void fill_in_contribution_to_jacobian_and_mass_matrix(
-  Vector<double> &residuals, DenseMatrix<double> &jacobian, 
-  DenseMatrix<double> &mass_matrix)
+ void fill_in_contribution_to_jacobian_and_mass_matrix(Vector<double> &residuals, 
+                                                       DenseMatrix<double> &jacobian, 
+                                                       DenseMatrix<double> &mass_matrix)
   {
    //Call the generic routine with the flag set to 2
    fill_in_generic_residual_contribution_axi_nst(
     residuals,jacobian,mass_matrix,2);
+  }
+
+ /// Compute vector of FE interpolated velocity u at local coordinate s
+ void interpolated_u_axi_nst(const Vector<double> &s, 
+                             Vector<double>& veloc) const
+  {
+   //Find number of nodes
+   unsigned n_node = nnode();
+   //Local shape function
+   Shape psi(n_node);
+   //Find values of shape function
+   shape(s,psi);
+   
+   for (unsigned i=0;i<3;i++)
+    {
+     //Index at which the nodal value is stored
+     unsigned u_nodal_index = u_index_axi_nst(i);
+     //Initialise value of u
+     veloc[i] = 0.0;
+     //Loop over the local nodes and sum
+     for(unsigned l=0;l<n_node;l++) 
+      {
+       veloc[i] += nodal_value(l,u_nodal_index)*psi[l];
+      }
+    }
   }
 
  /// Return FE interpolated velocity u[i] at local coordinate s
@@ -860,7 +911,8 @@ public virtual QElement<1,3>
 };
 
 //=======================================================================
-/// Face geometry of face geometry of the Axisymmetric Crouzeix_Raviart elements
+/// Face geometry of face geometry of the Axisymmetric Crouzeix_Raviart 
+/// elements
 //=======================================================================
 template<>
 class FaceGeometry<FaceGeometry<AxisymmetricQCrouzeixRaviartElement> >: 

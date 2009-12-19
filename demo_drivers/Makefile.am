@@ -8,6 +8,7 @@ SUBDIRS = \
 poisson \
 unsteady_heat \
 advection_diffusion \
+steady_axisym_advection_diffusion \
 navier_stokes \
 axisym_navier_stokes \
 spherical_navier_stokes \

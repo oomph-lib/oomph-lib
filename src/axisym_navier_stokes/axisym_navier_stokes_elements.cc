@@ -47,7 +47,8 @@ double AxisymmetricNavierStokesEquations::
 Default_Physical_Constant_Value = 0.0;
 
 // Navier--Stokes equations static data
-double AxisymmetricNavierStokesEquations::Default_Physical_Ratio_Value = 1.0;
+double AxisymmetricNavierStokesEquations::
+Default_Physical_Ratio_Value = 1.0;
 
 /// Navier-Stokes equations default gravity vector
 Vector<double> AxisymmetricNavierStokesEquations::
@@ -906,7 +907,7 @@ fill_in_generic_residual_contribution_axi_nst(Vector<double> &residuals,
  double scaled_re_st = re_st()*density_ratio();
  double scaled_re_inv_fr = re_invfr()*density_ratio();
  double scaled_re_inv_ro = re_invro()*density_ratio();
- double visc_ratio = viscosity_ratio();
+ // double visc_ratio = viscosity_ratio();
  double dens_ratio = density_ratio();
  Vector<double> G = g();
 
@@ -993,6 +994,13 @@ fill_in_generic_residual_contribution_axi_nst(Vector<double> &residuals,
    
    //Get the user-defined source function
    double source = get_source_fct(time(),ipt,interpolated_x);
+
+   //Get the user-defined viscosity function
+   double visc_ratio; 
+   get_viscosity_ratio_axisym_nst(ipt,
+                                  s, 
+                                  interpolated_x,
+                                  visc_ratio);
 
    //r is the first position component
    double r = interpolated_x[0];
@@ -1598,7 +1606,7 @@ void AxisymmetricQTaylorHoodElement::get_dof_numbers_for_unknowns(
  unsigned n_node = this->nnode();
  
  // local eqn no for pressure unknown
- unsigned p_index = this->p_nodal_index_axi_nst();
+ // hierher not used unsigned p_index = this->p_nodal_index_axi_nst();
  
  // temporary pair (used to store block lookup prior to being added to list)
  std::pair<unsigned,unsigned> block_lookup;

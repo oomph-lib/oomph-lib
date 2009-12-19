@@ -102,7 +102,9 @@ double scaled_re  = re()*density_ratio();
 double scaled_re_st = re_st()*density_ratio();
 double scaled_re_inv_fr = re_invfr()*density_ratio();
 double scaled_re_inv_ro = re_invro()*density_ratio();
-double visc_ratio = viscosity_ratio();
+double visc_ratio = viscosity_ratio(); // hierher -- rewrite and
+                                       // make consistent with 
+                                       //non-refineable version
 double dens_ratio = density_ratio();
 Vector<double> G = g();
     
