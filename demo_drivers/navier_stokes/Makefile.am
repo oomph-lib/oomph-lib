@@ -7,6 +7,7 @@ single_layer_free_surface \
 two_layer_interface \
 three_d_free_surface \
 adaptive_interface \
+inclined_plane \
 bretherton \
 three_d_bretherton \
 static_cap \

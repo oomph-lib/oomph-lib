@@ -1166,6 +1166,7 @@ void RefineableRotatingCylinderProblem<ELEMENT>::finish_problem_setup()
   dynamic_cast<ElasticVolumeConstraintPointElement<ELEMENT>*>
   (mesh_pt()->element_pt(Nelement-1));
 
+   temp_pt->ca_pt() = &Ca;
    temp_pt->volume_pt() = &Volume;
    temp_pt->set_traded_pressure_data(global_data_pt(0));
    

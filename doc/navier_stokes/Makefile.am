@@ -7,6 +7,7 @@ curved_pipe \
 osc_ellipse \
 bretherton \
 single_layer \
+inclined_plane \
 two_layer_interface \
 adaptive_interface \
 static_single_layer \
