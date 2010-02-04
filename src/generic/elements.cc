@@ -466,7 +466,7 @@ DenseMatrix<double> GeneralisedElement::Dummy_matrix;
   clear_global_eqn_numbers();
   assign_all_generic_local_eqn_numbers();
   assign_additional_local_eqn_numbers();
- 
+
   //Check that no global equation numbers are repeated
 #ifdef PARANOID
   //Create a set

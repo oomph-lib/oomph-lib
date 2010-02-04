@@ -58,6 +58,7 @@ namespace oomph
 //===============================================================
  Problem::Problem() : 
   Mesh_pt(0), Time_pt(0), Explicit_time_stepper_pt(0), Saved_dof_pt(0), 
+  Default_set_initial_condition_called(false),
 #ifdef OOMPH_HAS_MPI
   Must_recompute_load_balance_for_assembly(true),
 #endif
@@ -7769,16 +7770,21 @@ double Problem::doubly_adaptive_unsteady_newton_solve(const double &dt_desired,
    // Reset the inital condition on refined meshes
    if (first) 
     {
+     // Reset default set_initial_condition has been called flag to false
+     Default_set_initial_condition_called = false;
+
      //Reset the initial conditions
      oomph_info << "Re-assigning initial condition at time=" 
                 << time_pt()->time()<< std::endl;
      set_initial_condition();
 
      // This is the first timestep so shifting
-     // has to be done following the assignment of initial conditions.
+     // has to be done following the assignment of initial conditions,
+     // providing the default set_initial_condition function has not
+     // been called.
      // In fact, unsteady_newton_solve(...) does that automatically.
      // We're changing the flag here to avoid warning messages.
-     shift=true;
+     if(!Default_set_initial_condition_called) { shift=true; }
     }
 
    // Now take the step again on the refined mesh, using the same
@@ -9960,7 +9966,8 @@ void Problem::unsteady_newton_solve(const double &dt,
  bool shift_it=shift;
 
  // Warning:
- if (first_timestep&&(!shift))
+ if (first_timestep && (!shift)
+     && (!Default_set_initial_condition_called))
   {
    shift_it=true;
    oomph_info 
@@ -10030,11 +10037,21 @@ void Problem::unsteady_newton_solve(const double &dt,
      //Reset the time
      time_pt()->time() = initial_time;
 
-     // Reset the inital condition on refined meshes
+     // Reset the inital condition on refined meshes. Note that because we
+     // have reset the global time to the initial time, the initial conditions
+     // are reset at time t=0 rather than at time t=dt
      if (first_timestep) 
       {
+       // Reset default set_initial_condition has been called flag to false
+       Default_set_initial_condition_called = false;
+
        oomph_info << "Re-setting initial condition " << std::endl;
        set_initial_condition();
+       
+       // If the default set_initial_condition function has been called,
+       // we must not shift the timevalues on the first timestep, as we
+       // will NOT be constantly re-assigning the initial condition
+       if(Default_set_initial_condition_called) { shift_it=false; }
       }
     }
 
@@ -10043,6 +10060,8 @@ void Problem::unsteady_newton_solve(const double &dt,
    //shift the timevalues, otherwise don't
    // Note: we need to shift if it's the first timestep because
    // we're constantly re-assigning the initial condition above!
+   // The only exception to this is if the default set_initial_condition
+   // function has been called, in which case we must NOT shift!
    if((isolve==0) || (first_timestep))
     {
      Problem::unsteady_newton_solve(dt,shift_it);

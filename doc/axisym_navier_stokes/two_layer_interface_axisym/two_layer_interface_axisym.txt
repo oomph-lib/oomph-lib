@@ -1,0 +1,482 @@
+\mainpage Demo problem: Relaxation oscillations of an interface between two viscous fluids in an axisymmetric domain
+
+In the <A HREF="../../../navier_stokes/single_layer_free_surface/html/index.html">previous example</A>
+we looked at a single fluid with a free surface in a two-dimensional
+planar domain. We subjected this free surface to some initial
+deformation before allowing it to relax to its equilibrium
+position. This initial deformation was chosen to be a cosine curve, which
+is an eigenmode of the system. Since only that single eigenmode was
+excited, therefore, the shape of the interface remained "in mode"
+throughout the simulation.
+
+In this example we will look at a simple extension to the system
+outlined above: the relaxation of an interface between two immiscible
+fluids. Futhermore, these fluids occupy a cylindrical domain, which is
+orientated such that its axis of symmetry is normal to the equilibrium
+position of the interface. We shall assume that this problem is
+axisymmetric, and will therefore solve the governing equations in a
+rectangular computational domain. These governing equations are the
+axisymmetric Navier-Stokes equations, which are discussed in detail in
+<A HREF="../../../axisym_navier_stokes/spin_up/html/index.html">another
+tutorial</A>.
+
+In general the two fluids in this problem can be of different
+densities and viscosities. PATRICKFLAG EXPAND
+
+PATRICKFLAG SOMETHING ABOUT WHY WE CHOOSE A BESSEL FUNCTION AS THE
+INTERFACE DEFORMATION?
+
+\section dynamic_BC_theory The dynamic boundary condition
+
+PATRICKFLAG THEORY OF DYNAMIC BC BETWEEN TWO FLUIDS
+
+<HR>
+<HR>
+
+\section implementation Implementation
+
+In the previous example we used one-dimensional interface elements on
+the free surface boundary to apply the kinematic and dynamic boundary
+conditions. These interface elements were "attached" to the appropriate
+faces of the (two-dimensional) bulk elements nearest the free
+surface. We apply a similar principle here, but as we now deal with
+two fluids we attach the interface elements to the top boundary of the
+lower fluid. Whereas before we fixed the pressure above the interface,
+the interface elements now take this `external pressure' to be the
+pressure computed in the top fluid at each node on the interface. This
+is done in the \c TwoLayerSpineMesh. We denote the lower fluid as
+fluid 1 and the upper fluid as fluid 2.
+
+<HR>
+<HR>
+
+\section example_problem The example problem
+
+We will illustrate the solution of the unsteady axisymmetric Navier-Stokes
+equations using the example of a distorted free surface, between two
+fluids, which is allowed to relax. The domain is symmetric about the
+line \f$ r=0 \f$, which corresponds to the axis of the cylindrical container.
+
+<CENTER>
+<TABLE>
+<TR> 
+<TD>
+\n
+<CENTER>
+<B>
+The unsteady axisymmetric Navier-Stokes equations under a distorted free-surface.</B>
+</CENTER> 
+\n
+Solve
+\f[
+R_\rho^{[\beta]} Re \left[
+ St \frac{\partial u_r^{[\beta]}}{\partial t}
+ + u_r^{[\beta]} \frac{\partial u_r^{[\beta]}}{\partial r}
+ - \frac{u_\theta^{[\beta]2}}{r}
+ + u_z^{[\beta]} \frac{\partial u_r^{[\beta]}}{\partial z}
+\right] = -\frac{\partial p^{[\beta]}}{\partial r}
+\f]
+\f[
++ R_\rho^{[\beta]} \frac{Re}{Fr} G_r
++ R_\mu^{[\beta]} \left[
+  \frac{\partial^2 u_r^{[\beta]}}{\partial r^2}
+  + \frac{1}{r}\frac{\partial u_r^{[\beta]}}{\partial r}
+  - \frac{u_r^{[\beta]}}{r^2}
+  + \frac{\partial^2 u_r^{[\beta]}}{\partial z^2}
+\right],
+\f]
+\f[
+R_\rho^{[\beta]} Re \left[
+  St \frac{\partial u_\theta^{[\beta]}}{\partial t}
+  + u_r^{[\beta]} \frac{\partial u_\theta^{[\beta]}}{\partial r}
+  + \frac{u_r^{[\beta]} u_\theta^{[\beta]}}{r}
+  + u_z \frac{\partial u_\theta^{[\beta]}}{\partial z}
+\right]
+\f]
+\f[
+= R_\rho^{[\beta]} \frac{Re}{Fr} G_\theta
++ R_\mu^{[\beta]} \left[
+  \frac{\partial^2 u_\theta^{[\beta]}}{\partial r^2}
+  + \frac{1}{r}\frac{\partial u_\theta^{[\beta]}}{\partial r}
+  - \frac{u_\theta^{[\beta]}}{r^2}
+  + \frac{\partial^2 u_\theta^{[\beta]}}{\partial z^2}
+\right],
+\f]
+\f[
+R_\rho^{[\beta]} Re \left[
+  St \frac{\partial u_z^{[\beta]}}{\partial t}
+  + u_r^{[\beta]} \frac{\partial u_z^{[\beta]}}{\partial r}
+  + u_z^{[\beta]} \frac{\partial u_z^{[\beta]}}{\partial z}
+\right] = -\frac{\partial p^{[\beta]}}{\partial z}
+\f]
+\f[
++ R_\rho^{[\beta]} \frac{Re}{Fr} G_z
++ R_\mu^{[\beta]} \left[
+  \frac{\partial^2 u_z^{[\beta]}}{\partial r^2}
+  + \frac{1}{r}\frac{\partial u_z^{[\beta]}}{\partial r}
+  + \frac{\partial^2 u_z^{[\beta]}}{\partial z^2}
+\right],
+\ \ \ \ \ \ \ \ \ \ @E[eqn:NSmom]@
+\f]
+and
+\f[
+\frac{\partial u_r^{[\beta]}}{\partial r}
++ \frac{u_r^{[\beta]}}{r}
++ \frac{\partial u_z^{[\beta]}}{\partial z} = 0,
+\ \ \ \ \ \ \ \ \ \ @E[eqn:NScont]@
+\f]
+with gravity acting in the negative \f$ z \f$ direction, in the
+domain \f$ D = \left\{r \in [0,R], z \in [0,H]
+\right\} \f$, where the lower fluid lies in the region defined such
+that \f$ z \in [0,h] \f$ and the upper fluid in the region defined such
+that \f$ z \in [h,L] \f$ (where \f$ z=h(r,t)\f$
+is a free surface), subject to the Dirichlet boundary conditions:
+\f[
+u_r^{[1]}=u_r^{[2]}=0 \ \ \ \ \ \ \ \ \ \ @E[eqn:BC1]@
+\f]
+on the left and right boundaries,
+\f[
+u_r^{[1]}=u_z^{[1]}=0 \ \ \ \ \ \ \ \ \ \ @E[eqn:BC2]@
+\f]
+on the bottom boundary and
+\f[
+u_r^{[2]}=u_z^{[2]}=0 \ \ \ \ \ \ \ \ \ \ @E[eqn:BC3]@
+\f]
+on the top boundary.
+
+We use \f$ \beta = 1,2 \f$ to indicate the lower and upper fluids
+respectively.
+
+The free-surface is defined by \f$\mathbf{P}\f$, which is subject
+to the kinematic condition:
+\f[
+\left(\mathbf{u}-\frac{\partial\mathbf{R}}{\partial t}\right)
+\cdot\mathbf{n}=0,
+\ \ \ \ \ \ \ \ \ \ @E[eqn:kinematicBC]@
+\f]
+and the dynamic condition:
+\f[
+\tau_{ij}^{[2]}n_j = \tau_{ij}^{[1]}n_j+\frac{1}{Ca}\kappa n_i,
+\ \ \ \ \ \ \ \ \ \ @E[eqn:dynamicBC]@
+\f]
+where the non-dimensional, symmetric stress tensor in fluid \f$ k \f$
+is defined as:
+\f[
+\tau_{rr}^{[\beta]} = -p^{[\beta]}
++ 2R_\mu^{[\beta]} \frac{\partial u_r^{[\beta]}}{\partial r},
+\qquad \tau_{\theta\theta}^{[\beta]} = -p^{[\beta]}
++ 2R_\mu^{[\beta]} \frac{u_r^{[\beta]}}{r},
+\f]
+\f[
+\tau_{zz}^{[\beta]} = -p^{[\beta]}
++ 2R_\mu^{[\beta]} \frac{\partial u_z^{[\beta]}}{\partial z},
+\qquad \tau_{rz}^{[\beta]} = R_\mu^{[\beta]}
+\left(\frac{\partial u_r^{[\beta]}}{\partial z} +
+  \frac{\partial u_z^{[\beta]}}{\partial r}\right),
+\f]
+\f[
+\tau_{\theta r}^{[\beta]} = R_\mu^{[\beta]} r \frac{\partial}{\partial
+    r}\left(\frac{u_{\theta}^{[\beta]}}{r}\right),
+  \qquad \tau_{\theta z}^{[\beta]} =
+  R_\mu^{[\beta]} \frac{\partial u_{\theta}^{[\beta]}}{\partial z}.
+\ \ \ \ \ \ \ \ \ \ @E[eqn:stresstensor]@
+\f]
+
+The initial deformation of the free surface is defined by:
+\f[
+\mathbf{P} = r \mathbf{e}_r + \left( 1.0 + \epsilon J_0(kr) \right)
+\mathbf{e}_z,
+\ \ \ \ \ \ \ \ \ \ @E[eqn:freesurfacedeformation]@
+\f]
+where \f$ \epsilon \f$ is a small parameter, \f$ k \f$ is PATRICKFLAG
+and \f$ J_0(kr) \f$ is a zeroth-order Bessel function of the first kind.
+</TD>
+</TR>
+</TABLE>  
+</CENTER>
+
+<HR>
+<HR>
+
+\section results Results
+
+Figure 1.1 below shows a contour plot of the pressure distribution
+taken from <A HREF="../figures/two_layer_interface_axisym.avi">this
+animation</A>. The results were produced using \c
+SpineElement<AxisymmetricQCrouzeixRaviartElement> elements
+with \f$ Re = Re \, St = Re/Fr = 5.0 \f$ and \f$ Ca = 0.01 \f$. We set
+\f$ R_{\rho} = R_{\mu} = 1.0 \f$ so that the two fluids have equal
+density and viscosity.
+
+@I w 0.75\textwidth two_layer_interface_axisym "PATRICKFLAG NEED CAPTION. "
+
+The <A HREF="../figures/two_layer_interface_axisym.avi">animation</A>
+shows the interface oscillating up and down until a
+steady equilibrium is reached. Figure 1.2 shows the time-trace of the
+height of the interface at the left-hand edge of the domain,
+corresponding to the axis of symmetry.
+
+@I w 0.75\textwidth two_layer_interface_axisym-time_trace "Time-trace
+of the height of the fluid interface at the left-hand edge of the
+domain (\f$ r = 0 \f$). "
+
+<HR>
+<HR>
+
+\section namespace Global parameters and functions
+
+For this problem, we use the dimensionless parameters \f$ Re \f$,
+\f$ Re\, St \f$, \f$ Re/Fr \f$ and \f$ Ca \f$. As usual, we define
+these quantities in a namespace:
+
+\dontinclude two_layer_interface_axisym.cc
+\skipline start_of_namespace
+\until double Ca
+
+We also include the viscosity ratio, \f$ R_{\mu} = \mu^{[2]}/\mu^{[1]}
+\f$, and the density ratio, \f$ R_{\rho} = \rho^{[2]}/\rho^{[1]}
+\f$. Since both of these ratios default to one, which is the case where both
+fluids have the same density and viscosity, it is not strictly
+necessary to define them here. As before, we create a
+vector \f$ G \f$ which will define the direction in which gravity
+acts.
+
+\skipline Ratio of viscosity
+\until End of namespace
+
+<HR>
+<HR>
+
+\section main The driver code
+
+We start by specifying the (non-dimensional) length of time we want to
+run the simulation for and the size of the timestep. Because all driver
+codes are run as part of \c oomph-lib's self-testing routines we allow
+the user to pass a command line argument to the executable which sets
+the maximum time to some lower value.
+
+\skipline start_of_main
+\until t_max = 0.01
+
+Next we specify the width of the domain and the number of elements in
+the \f$ r \f$ direction, as well as the heights and number of elements
+in the \f$ z \f$ direction of both fluid layers.
+
+\skipline Number of elements in radial
+\until double h2
+
+At this point we define the direction in which gravity acts;
+vertically downwards.
+
+\skipline Set direction of gravity
+\until G[1]
+
+Finally, we build the problem using the "spinified" version of \c
+AxisymmetricQCrouzeixRaviartElements and the \c BDF<2> timestepper,
+before calling \c
+unsteady_run(...). This function solves the system at each timestep
+using the \c Problem::unsteady_newton_solve(...) function before
+documenting the result.
+
+\skipline Set up the spine test problem
+\until End of main
+
+<HR>
+<HR>
+
+\section problem_class The problem class 
+The problem class largely follows that of the <A
+HREF="../../single_layer_free_surface/html/index.html#problem_class">single-layer
+example</A>, but with a few changes. We start by specifying the
+element and timestepper types as template parameters, where the
+timestepper is assumed to be a member of the \c BDF family. We then
+pass the number of elements and the dimensions of both fluid layers to
+the constructor.
+
+\dontinclude two_layer_interface_axisym.cc
+\skipline start_of_problem_class
+\until ~InterfaceProblem
+
+The next few functions take exactly the same form as those in the <A
+HREF="../../single_layer_free_surface/html/index.html#problem_class">single-layer
+example</A>, with the single exception that because in this geometry
+there are three velocity components (rather than two in the planar
+case), these must all be initialised in the \c
+set_initial_condition() function.
+
+\skipline Spine heights/lengths
+\until End of set_initial_condition
+
+We provide an access function to the specific mesh and define the
+post-processing function \c doc_solution(...), which will be used by
+the timestepping function \c unsteady_run(...).
+
+\skipline Access function for the specific mesh
+\until unsteady_run
+
+At the beginning of the simulation the free surface is deformed by a
+prescribed function (@R[eqn:freesurfacedeformation]@). To do this we
+create a function, \c deform_free_surface(...), which cycles through
+the \c Spines and changes their heights accordingly, before calling \c
+Mesh::node_update() to redistribute the \c SpineNodes such that they
+retain their fractional position along each \c Spine. It is a private
+member function since only \c Problem::unsteady_run(...) should call it.
+
+\skipline private
+\until End of deform_free_surface
+
+Whereas in the <A
+HREF="../../single_layer_free_surface/html/index.html#problem_class">single-layer
+example</A> we specified the external pressure explicitly, here the pressure
+field in both fluids is an unknown which will be solved for. Because
+only the pressure gradient appears in the Navier-Stokes equations,
+rather than the pressure itself, the pressure will only be defined up
+to an arbitrary constant. We therefore provide a function which allows
+us to fix a pressure degree of freedom in an arbitrary element to an
+arbitrary value.
+
+\skipline Fix pressure in element
+\until }
+
+As before, the problem class stores an output stream, in which we
+record the height of
+the interface at the domain edge, and the width of the domain, which
+is used by the function \c deform_free_surface(...) when defining the
+initial mesh deformation.
+
+\skipline Trace file
+\until End of problem class
+
+<HR>
+<HR>
+
+\section constructor The problem constructor
+
+The constructor starts by copying the width of the domain into the
+private member data of the problem class, before building the
+timestepper.
+
+\skipline start_of_constructor
+\until add_time_stepper_pt
+
+Next we build the mesh, as usual. The mesh we are using is the \c
+TwoLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>, which works in a very
+similar way to the single-layer mesh used in the <A
+HREF="../../single_layer_free_surface/html/index.html">previous example</A>, except
+that we have \c TwoLayerSpineMesh::nupper() bulk elements above the
+interface as well as the \c TwoLayerSpineMesh::nlower() bulk elements
+below it. The boolean argument in the mesh constructor,
+which is set to "false" here, indicates whether or not the domain is to
+be periodic in the radial direction.
+
+\skipline Build and assign mesh
+\until time_stepper_pt
+
+On the top and bottom solid boundaries (\f$ z = 0 \f$ and \f$ z = H
+\f$) we pin all three velocity components so that there is no penetration
+of the wall by the fluid or flow along it. On the left symmetry
+boundary (\f$ r = 0 \f$) we pin the radial and azimuthal components
+but leave the axial component unconstrained.
+
+Because we are treating the outer solid boundary (at \f$ r = R \f$) as
+a `slippery wall', we also leave the axial velocity component
+unconstrained on this boundary. The reason we use this particular
+boundary condition on this wall, rather than the standard no-slip
+condition, is discussed <A HREF="#comments">below</A>.
+
+\skipline -----
+\until End of loop over mesh boundaries
+
+Because we are only exciting an eigenmode in the radial direction, we
+would expect the azimuthal velocity components to remain zero
+everywhere (within machine precision). We therefore avoid including the
+unnecessary degrees of freedom associated with having the azimuthal
+velocity components as unknowns in the problem by pinning them
+everywhere. We then pin one pressure degree of freedom.
+
+\skipline Determine total number of nodes
+\until fix_pressure
+
+We loop over the bulk elements in the lower fluid and pass them
+pointers to the physical parameters. Note that we do not assign
+pointers for \f$R_\mu\f$ and \f$R_\rho\f$ since these take the default
+value in the lower fluid.
+
+\skipline -----
+\until End of loop over bulk elements in lower fluid
+
+We then repeat this procedure for the bulk elements in the upper
+fluid, but this time we do assign pointers for the viscosity and
+density ratios.
+
+\skipline Determine number of bulk elements in upper fluid
+\until End of loop over bulk elements in upper fluid
+
+Finally, we assign pointers to the Capillary number to each of the
+interface elements before setting up the equation numbering scheme.
+
+\skipline Determine number of 1D interface elements
+\until End of constructor
+
+<HR>
+<HR>
+
+PATRICKFLAG THIS IS WHERE I'M UP TO!
+
+\section doc Post-processing
+
+This function is identical to that in the <A
+HREF="../../single_layer_free_surface/html/index.html#doc">previous example</A>. We
+output the value of the current time to the screen, before recording
+the following parameters in the trace file:
+- the value of the continuous time,
+- the height of the spine at the left/right domain boundary, and
+- the contact angles (in degrees) of the free surface and the left and
+right domain boundaries.
+
+\skipline start_of_doc_solution
+\until actual_contact_angle_right
+
+We then output the computed solution, and include \c Tecplot instructions
+that generate a blue line in the top-left corner of the plot to
+indicate how time progresses during the simulation.
+
+\skipline ofstream
+\until End of doc_solution
+
+<HR>
+<HR>
+
+\section unsteady_run The timestepping loop
+
+This function is also identical to the equivalent function in the <A
+HREF="../../single_layer_free_surface/html/index.html#unsteady_run">previous example</A>. We
+begin by deforming the interface and then create a \c DocInfo object
+to store the output directory and the label for the output files.
+
+\skipline start_of_unsteady_run
+\until doc_info.number()=0
+
+We initialise the trace file and the timestep, before setting the initial
+conditions and documenting them.
+
+\skipline Open trace file
+\until doc_info.number()++
+
+Finally, we perform the actual timestepping loop. For
+each timestep the function \c unsteady_newton_solve(dt) is called and
+the solution documented.
+
+\skipline Timestepping loop
+\until End of unsteady_run
+
+<HR>
+<HR>
+
+\section comments Comments and Exercises
+-# Investigate why we do not solve this problem using Taylor-Hood
+   elements.
+
+
+
+

@@ -299,7 +299,7 @@ protected:
                                                           Shape &test, 
                                                           DShape &dtestdx) 
   const=0;
- 
+
  /// Compute the pressure shape functions at local coordinate s
  virtual void pshape_axi_nst(const Vector<double> &s, Shape &psi) const=0;
 
@@ -701,6 +701,38 @@ public:
    return(interpolated_p);
   }
 
+ /// Return FE interpolated derivatives of velocity component u[i]
+ /// w.r.t spatial coordinate direction x[j] at local coordinate s
+ double interpolated_dudx_axi_nst(const Vector<double> &s, 
+                                  const unsigned &i,
+                                  const unsigned &j) const
+  {
+   // Determine number of nodes
+   const unsigned n_node = nnode();
+
+   // Allocate storage for local shape function and its derivatives
+   // with respect to space
+   Shape psif(n_node);
+   DShape dpsifdx(n_node,2);
+
+   //Find values of shape function (ignore jacobian)
+   (void)this->dshape_eulerian(s,psif,dpsifdx);
+   
+   // Get the index at which the velocity is stored
+   const unsigned u_nodal_index = u_index_axi_nst(i);
+
+   // Initialise value of dudx
+   double interpolated_dudx = 0.0;
+
+   // Loop over the local nodes and sum
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     interpolated_dudx += nodal_value(l,u_nodal_index)*dpsifdx(l,j);
+    }
+   
+   return(interpolated_dudx);
+  }
+
 }; 
 
 //////////////////////////////////////////////////////////////////////////////
@@ -876,7 +908,6 @@ dshape_and_dtest_eulerian_at_knot_axi_nst(const unsigned &ipt, Shape &psi,
  return J;
 }
 
-
 //=======================================================================
 /// Pressure shape functions
 //=======================================================================
@@ -962,7 +993,7 @@ public virtual AxisymmetricNavierStokesEquations
                                                          DShape &dpsidx, 
                                                          Shape &test, 
                                                          DShape &dtestdx) const;
- 
+
  /// Pressure shape functions at local coordinate s
  inline void pshape_axi_nst(const Vector<double> &s, Shape &psi) const;
  

@@ -182,6 +182,10 @@ namespace oomph
  /// Pointer to vector for backup of dofs
  Vector<double>* Saved_dof_pt;
 
+ /// \short Has default set_initial_condition function been called?
+ /// Default: false
+ bool Default_set_initial_condition_called;
+ 
   protected:
  ///\short Vector of pointers to copies of the problem used in adaptive 
  ///bifurcation tracking problems (ALH: TEMPORARY HACK, WILL BE FIXED)
@@ -707,7 +711,15 @@ protected:
    OomphLibWarning(warn_message.str(),
                    "Problem::set_initial_condition()",
                    OOMPH_EXCEPTION_LOCATION);
-   
+
+   // Indicate that this function has been called. This flag is set so
+   // that the unsteady_newton_solve routine can be instructed whether
+   // or not to shift the history values. If set_initial_condition() has
+   // been overloaded than this (default) function won't be called, and
+   // so this flag will remain false (its default value). If 
+   // set_initial_condition() has not been overloaded then this function
+   // will be called and the flag set to true.
+   Default_set_initial_condition_called = true;
   }
 
  /// \short Function to calculate a global error norm, used in adaptive

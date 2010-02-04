@@ -15,9 +15,8 @@ mkdir Validation
 cd Validation
 
 echo "Running two layer interface Navier Stokes validation "
-mkdir RESLT_sym
-mkdir RESLT_pinned
-../two_layer lalala > OUTPUT_two_layer
+mkdir RESLT
+../two_layer_interface lalala > OUTPUT_two_layer_interface
 echo "done"
 echo " " >> validation.log
 echo "Two layer interface Navier Stokes validation" >> validation.log
@@ -27,15 +26,13 @@ echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat  RESLT_pinned/soln0.dat  RESLT_pinned/soln1.dat  \
-     RESLT_pinned/soln2.dat RESLT_sym/soln0.dat  \
-     RESLT_sym/soln1.dat  RESLT_sym/soln2.dat > two_layer_results.dat
+cat  RESLT/soln0.dat  RESLT/soln1.dat RESLT/soln2.dat > two_layer_interface_results.dat
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/two_layer_results.dat.gz  \
-         two_layer_results.dat >> validation.log
+../../../../bin/fpdiff.py ../validata/results.dat.gz  \
+         two_layer_interface_results.dat >> validation.log
 fi
 
 # Append log to main validation log

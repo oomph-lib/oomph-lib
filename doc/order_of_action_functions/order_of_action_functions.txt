@@ -28,6 +28,11 @@ be implemented in every specific Problem, though they may, of course,
 be implemented as empty functions. Other functions may be overloaded
 to provide more detailed control. 
 
+<HR>
+<HR>   
+   
+
+\section newton_solve Problem::newton_solve()
 The following table lists the main steps performed by \c oomph-lib's 
 Newton solver and indicates at which point the various "action" 
 functions are executed.
@@ -494,7 +499,7 @@ Poisson problem</A> for an example of its use.
 <HR>   
    
 
-\section opt Optimisation for linear problems. 
+\section opt Optimisation for linear problems
 Recall that, by default, \c oomph-lib regards all problems as
 nonlinear. Provided a good initial guess for the unknowns
 is available, the Newton solver will converge quadratically towards
@@ -514,5 +519,164 @@ bool Problem::Problem_is_nonlinear
 which is initialised to \c true in the constructor of the \c Problem 
 base class to \c false.
 
-<HR>   
+<HR>
+<HR>
 
+\section unsteady_newton_solve Problem::unsteady_newton_solve(...)
+The following table lists the main steps performed by \c oomph-lib's 
+unsteady Newton solver and indicates at which point the various "action" 
+functions are executed. The arguments passed to the function are the
+value of the timestep \c dt and a boolean flag \c shift_values which
+indicates whether or not history values are to be shifted.
+
+<TABLE>
+#########################################################
+<TR>
+#--------------------------------------------------------
+<TD>
+\f[
+\left. . \hspace{6cm} \right. 
+\f]
+</TD>
+#--------------------------------------------------------
+<TD>
+<B>SEQUENCE OF MATHEMATICAL STEPS</B>
+</TD>
+#--------------------------------------------------------
+<TD>
+<B>SEQUENCE OF FUNCTION CALLS / KEY CONTROL PARAMETERS</B>
+</TD>
+#--------------------------------------------------------
+</TR>
+#########################################################
+<TR>
+#--------------------------------------------------------
+<TD>
+<B>Step 1:</B> Perform actions before implicit timestep.
+</TD>
+#--------------------------------------------------------
+<TD>
+\f[
+\left. . \hspace{6cm} \right.
+\f]
+</TD>
+#--------------------------------------------------------
+<TD>
+\code 
+Problem::actions_before_implicit_timestep();
+\endcode
+</TD>
+#--------------------------------------------------------
+</TR>
+#########################################################
+<TR>
+#--------------------------------------------------------
+<TD>
+<B>Step 2:</B> Shift time values and dts, according to
+control flag.
+</TD>
+#--------------------------------------------------------
+<TD>
+\f[
+\left. . \hspace{6cm} \right.
+\f]
+</TD>
+#--------------------------------------------------------
+<TD>
+\code 
+if(shift_values) { shift_time_values(); }
+\endcode
+</TD>
+#--------------------------------------------------------
+</TR>
+#########################################################
+<TR>
+#--------------------------------------------------------
+<TD>
+<B>Step 3:</B> 
+Advance global time and set current value of dt.
+</TD>
+#--------------------------------------------------------
+<TD>
+\f[ t:=t+dt \f]
+</TD>
+#--------------------------------------------------------
+<TD>
+\code
+time_pt()->time()+=dt;
+time_pt()->dt()=dt;
+\endcode
+</TD>
+#--------------------------------------------------------
+</TR>
+#########################################################
+<TR>
+#--------------------------------------------------------
+<TD>
+<B>Step 4:</B> 
+Loop over all timesteppers and set weights.
+</TD>
+#--------------------------------------------------------
+<TD>
+\f[
+\left. . \hspace{6cm} \right.
+\f]
+</TD>
+#--------------------------------------------------------
+<TD>
+\code
+for(...)
+{
+ time_stepper_pt(i)->set_weights();
+}
+\endcode
+</TD>
+#--------------------------------------------------------
+</TR>
+#########################################################
+<TR>
+#--------------------------------------------------------
+<TD>
+<B>Step 5:</B>
+Solve the non-linear problem for this timestep with
+Newton's method.
+</TD>
+#--------------------------------------------------------
+<TD>
+\f[
+\left. . \hspace{6cm} \right.
+\f]
+</TD>
+#--------------------------------------------------------
+<TD>
+\code 
+Problem::newton_solve();
+\endcode
+</TD>
+#--------------------------------------------------------
+</TR>
+#########################################################
+<TR>
+#--------------------------------------------------------
+<TD>
+<B>Step 6:</B>
+Perform actions after implicit timestep.
+</TD>
+#--------------------------------------------------------
+<TD>
+\f[
+\left. . \hspace{6cm} \right.
+\f]
+</TD>
+#--------------------------------------------------------
+<TD>
+\code 
+Problem::actions_after_implicit_timestep();
+\endcode
+</TD>
+#--------------------------------------------------------
+</TR>
+#########################################################
+</TABLE>
+
+<HR>

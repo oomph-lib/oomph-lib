@@ -406,7 +406,7 @@ public:
   //Construct the first node and add it to the Mesh::Node_pt vector
   //Note: The FiniteElement::construct_boundary_node(j) function
   //builds the element's j-th local node, and provides the functionality
-  //that allows it to be located on a Mesh boundary, essentially this
+  //that allows it to be located on a Mesh boundary -- essentially this
   //involves allocating additional storage to the Node.
   //The function obtains the Node's
   //characteristics (e.g. its spatial dimension, the number of
@@ -416,7 +416,7 @@ public:
   //stores a pointer to the newly created Node in the element's own
   //Node_pt vector.
   //Finally, the function returns the pointer to the
-  //the newly created Node, so that it can be stored in the Mesh's Node_pt
+  //newly created Node, so that it can be stored in the Mesh's Node_pt
   //vector, as done here:
   Node_pt.push_back(finite_element_pt(0)->construct_boundary_node(0));
 
@@ -442,7 +442,7 @@ public:
     Element_pt[e] = new ELEMENT;
 
     //The first local node of the e-th element is the last local node
-    //of the the (e-1)-th element. We MUST NOT construct the node twice.
+    //of the (e-1)-th element. We MUST NOT construct the node twice.
     //Instead, we set the pointer in the e-th element to point to the
     //previously created node in the (e-1)-th element.
     finite_element_pt(e)->node_pt(0) = 
@@ -465,7 +465,7 @@ public:
   Element_pt[n_element-1] = new ELEMENT;
   
   //The first local node of the final element is the last local node
-  //of the the penultimate element. We MUST NOT construct the node twice.
+  //of the penultimate element. We MUST NOT construct the node twice.
   //Instead, we set the pointer in the final element to point to the
   //previously created node in the penultimate element.
   finite_element_pt(n_element-1)->node_pt(0) = 

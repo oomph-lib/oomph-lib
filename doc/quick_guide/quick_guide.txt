@@ -4,9 +4,9 @@ fundamental objects in \c oomph-lib. Assuming that you
 - have a basic understanding of the finite element method
 .
 and
-- are reasonably familiar with object-oriented programming in C++.
+- are reasonably familiar with object-oriented programming in C++,
 .
-The Quick Guide should enable you to solve basic PDE 
+the Quick Guide should enable you to solve basic PDE 
 problems using \c oomph-lib. You should also consult
 the extensive <A HREF="../../example_code_list/html/index.html">
 list of example codes</A> distributed with the library. 
@@ -124,8 +124,8 @@ objects that inherit from the generic \c Problem class. These
 specific \c Problem objects will vary considerably depending
 on the exact details of the problem being solved. 
 
-Only a few member functions \e must be implemented for each specific Problem 
-class:
+Only a few member functions \e must be implemented for each specific
+\c Problem class:
 - The problem constructor \code SomeSpecificProblem(...) \endcode
   \n
 - and the member functions
@@ -160,7 +160,7 @@ usually contains the following steps:
   generic implementation of this process, mesh constructors 
   use an argument-free constructor to
   create the elements. Thus, element constructors must not
-  have any arguments. (See the section \ref new_mesh, below for an 
+  have any arguments. (See the section `\ref new_mesh', below, for an 
   illustration of this process.) If an element requires any global parameters
   (such as pointers to physical parameters, function pointers 
   to source functions, etc.), these parameters should be passed to the
@@ -311,7 +311,7 @@ the application of boundary conditions in complex domains. Firstly,
 the function \c Mesh::set_nboundary(...) must be called to specify the
 number of mesh boundaries. In addition, the generic \c Mesh class 
 provides a function \c Mesh::add_boundary_node(i,node_pt), 
-which adds the \c Node pointed to by \c node_pt to the \c Mesh's \c i -th 
+which adds the \c Node pointed to by \c node_pt to the \c Mesh's i-th 
 boundary and constructs the required
 look-up schemes, including a reverse lookup scheme that informs all 
 \c Nodes which mesh boundaries (if any) they are located on. 
@@ -366,7 +366,7 @@ this geometry. However, there is a \c Mesh object,
  \c SimpleRectangularMesh, which provides a uniform 
 discretisation of a 2D rectangular domain \f$ x\in [0,L_x] \f$
 and \f$ y \in [0,L_y] \f$ with \f$ N_x \times N_y \f$
-quadrilateral elements. Since, the topology of the two domains
+quadrilateral elements. Since the topology of the two domains
 is identical, the annular mesh can be implemented in a few 
 lines of code:
 
@@ -1221,7 +1221,7 @@ RANGE_CHECKING compiler flag.
  In general, we set the equation number to -1 to indicate 
 that a nodal value is 
 pinned, i.e. prescribed by boundary conditions. This convention is used
-throughout \c oomph-lib, but the direct of use -1 as a (bad!) "magic number"
+throughout \c oomph-lib, but the direct use of -1 as a (bad!) "magic number"
 is generally avoided. Instead we refer to the static data member of 
 the \c Data class
 \code static long Data::Is_pinned \endcode
@@ -1414,7 +1414,7 @@ be given suitable modifiers. For instance,
 \code
 AdvectionDiffusionEquation::source_fct_adv_diff(...)
 \endcode
-is better name for a member function that returns the source function
+is a better name for a member function that returns the source function
 in the advection-diffusion equations than
 \code
 AdvectionDiffusionEquation::source_fct(...)
@@ -1428,7 +1428,7 @@ clashes of this type. Therefore, you should be able to combine any
 element with any other element in the library. If you find a counter-example 
  <A HREF="../../contact/html/index.html">let us know</A>, and
 we will rectify this in the next release. In the meantime
-exploit the fact the \c oomph-lib is an open source library: You can
+exploit the fact that \c oomph-lib is an open source library; you can
 change anything you want!
 
 \subsubsection index_fcts Rule 3: Nodal values should only be accessed indirectly via index functions that can be overloaded in derived multi-physics elements

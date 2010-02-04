@@ -999,6 +999,10 @@ void RefineableMeshBase::adapt_mesh(DocInfo& doc_info)
      all_nodes_file.open(fullname);  
    
      all_nodes_file << "ZONE \n"; 
+     
+     // Need to recompute the number of nodes since it may have
+     // changed during mesh refinement/unrefinement
+     n_node = this->nnode();
      for(unsigned long n=0;n<n_node;n++)
       {
        Node* nod_pt = this->node_pt(n);
@@ -1009,7 +1013,7 @@ void RefineableMeshBase::adapt_mesh(DocInfo& doc_info)
         }
        all_nodes_file << std::endl;
       }
-   
+     
      all_nodes_file.close();
 
 

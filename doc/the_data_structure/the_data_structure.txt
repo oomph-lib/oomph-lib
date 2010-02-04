@@ -40,7 +40,7 @@
 
  Consider the solution of a scalar PDE 
  (e.g. a Poisson equation) with certain boundary conditions. 
- The numerical solution of this problems requires the computation of 
+ The numerical solution of this problem requires the computation of 
  the function values (double precision numbers) at a finite number 
  of spatial positions (the \c Nodes). Typically, these values fall into two
  categories: those that are known \e a \e priori (i.e. are enforced by 
@@ -187,7 +187,7 @@
  - \b BoundaryNodes: \c Nodes "know" the domain/mesh boundaries on which 
    they are located. A \c Node can be located
    on none, one or multiple boundaries; the latter case arises if the
-   the \c Node is located on edges and corners of the mesh.    
+   \c Node is located on edges and corners of the mesh.    
    Storage of this information facilitates the automatic
    determination of boundary conditions for new \c Nodes that are
    created during mesh refinement.\n 
@@ -197,7 +197,7 @@
    \c BoundaryNode adds the
    required additional storage to the \c Node class and it follows that  
    all \c Nodes that
-   could lie on boundaries must be \c BoundaryNodes, see \ref meshes for
+   could lie on boundaries must be \c BoundaryNodes; see \ref meshes for
    further details.
  - \b SolidNodes: Many solid mechanics problems 
    are formulated in Lagrangian coordinates. 
@@ -323,7 +323,7 @@ structure which separates:
         SinglePhysicsOneElement::fill_in_contribution_to_residuals(residuals);
 
         //Add the second elemental contribution to the residuals vector   
-        SinglePhysicsTwoElement::fill_in_contribution_to_residausl(residuals); 
+        SinglePhysicsTwoElement::fill_in_contribution_to_residuals(residuals); 
        }
 
        [...]
@@ -658,7 +658,7 @@ structure which separates:
  
  \subsection meshes Meshes
 
- At its most basic level, a \c Mesh is simply a collections of elements
+ At its most basic level, a \c Mesh is simply a collection of elements
  and \c Nodes, accessed by the vectors of pointers, 
  \c Mesh::Element_pt and \c Mesh::Node_pt, respectively. To facilitate 
  the application of  boundary conditions, we also store vectors of
@@ -676,9 +676,9 @@ structure which separates:
  it is generally assumed that a \c Mesh contains only elements of a 
  single type and that this element type is passed to the \c Mesh 
  constructor as a template parameter. Problems that require 
- multiple element types, should use multiple meshes,
+ multiple element types should use multiple meshes,
  which are discussed in more detail below. It is possible to mix types
- of elements within a single \c Mesh, if desired; and this can
+ of elements within a single \c Mesh, if desired; this can
  be advantageous when the element types are very closely related, 
  for example "free surface" elements in a mesh of "Fluid" elements.
  
@@ -734,12 +734,12 @@ structure which separates:
 
  Now that the \c Mesh is assembled, we can set up the numbering scheme for 
  the unknowns that are associated with the \c Nodes and with the
- elements' `internal \c Data'. (For problems that 
- involve `external \c Data', i.e. \c Data that is not associated with 
+ elements' `internal \c Data '. (For problems that 
+ involve `external \c Data ', i.e. \c Data that is not associated with 
  \c Nodes and elements, a further step is required; see section \ref problems 
  below). 
  As discussed above, whenever a \c Data object is created (either 
- as part of a \c Node in the mesh or as 'internal \c Data' inside an 
+ as part of a \c Node in the mesh or as `internal \c Data ' inside an 
  element), its values are assumed to be free (i.e. not pinned).
  Before we can set up the equation numbering scheme, we must
  pin all those \c Data values that are prescribed by boundary
@@ -768,8 +768,8 @@ structure which separates:
       - If the value is free (i.e. not pinned), add the
         pointer to the value to the \c dof_pt vector.
  -# Loop over all elements.
-    - In every element, loop over the `internal \c Data'
-      - For every instance of `internal \c Data', loop over its values.
+    - In every element, loop over the `internal \c Data '
+      - For every instance of `internal \c Data ', loop over its values.
         - If the value is free (i.e. not pinned), add
           pointer to the value to the \c dof_pt vector.
         .
@@ -793,7 +793,7 @@ structure which separates:
    submeshes, see below).
  - A pointer to the (discrete) \c Time (see section on \ref timestepping).
  - A vector of pointers to (possibly multiple) \c TimeSteppers.
- - A vector that holds pointers to any `global \c Data', i.e. \c Data 
+ - A vector that holds pointers to any `global \c Data ', i.e. \c Data 
    that is not associated with elements or \c Nodes. 
  - A vector \c Dof_pt that stores the pointers to all the unknown 
    values (the degrees of freedom) in the problem. 
@@ -839,7 +839,7 @@ structure which separates:
  [The \c Mesh::self_test()
  function checks for duplicates in the \c Mesh::Node_pt vector.]
  
- \b Convention: Recall that (\c Boundary)Nodes are 'told' about the number
+ \b Convention: Recall that (\c Boundary)Nodes are `told' about the number
  of the boundary they live on when the (sub-)meshes are constructed.
  In the context of multiple meshes, this raises the question
  if this number should continue to refer to the boundary number within
@@ -1012,8 +1012,8 @@ structure which separates:
  those at the previous time level (where the solution is
  already known) with time levels `1', `2' etc. The function
  \code Time::time(t) \endcode
- therefore returns the 'current' value of the continuous time if t=0,
- the continous time before the previous timestep if t=1, etc.
+ therefore returns the `current' value of the continuous time if t=0,
+ the continuous time before the previous timestep if t=1, etc.
 
  \subsection basic_timestepping Basic Time-stepping
 
@@ -1045,7 +1045,7 @@ structure which separates:
       calculate these values. The function sets the weights of
       the time-stepping scheme such that the time derivatives are zero
       and a steady problem is solved, even when the \c Problem's
-      \c TimeStepper is not the dummy timestpper, \c Steady.
+      \c TimeStepper is not the dummy timestepper, \c Steady.
    -# Provide time histories for the values (pinned \e and free!),
       either by imposing an impulsive start or by setting history
       values according to some given time-dependence:
@@ -1088,7 +1088,8 @@ structure which separates:
  
  It is important to understand how the shifting of the timesteps
  (in preparation for the next timestep) is performed because certain default
- operations will not be appropriate for all elements/\c Problems. Recall that
+ operations will not be appropriate for all \c Elements/ \c
+ Problems. Recall that
  in time-dependent problems, \c Data::value_pt(i) points to the current
  (and, as yet, unknown) \c Data values, while \c Data::value_pt(t,i) for 
  t>0 points to the history values that the \c TimeStepper uses to
@@ -1174,7 +1175,7 @@ structure which separates:
 
  \subsection restarts Restarts
  Time-dependent simulations can consume a lot of computer time, and
- it is essential to be able restart simulations rather than having
+ it is essential to be able to restart simulations rather than having
  to re-do them from scratch if a computer crashes during the code
  execution. For this purpose 
  the \c Problem class provides the two member functions
@@ -1244,7 +1245,7 @@ structure which separates:
  \code Problem::set_initial_condition() \endcode
  establishes the interface to the function that sets
  all \c Data to their initial conditions. This function must be overloaded if
- nontrival initial conditions are to be applied (If mesh adaptations
+ nontrival initial conditions are to be applied. (If mesh adaptations
  are performed while the first timestep is computed, the initial 
  conditions on the adapted mesh can usually be represented more accurately
  by re-assigning them, rather than by interpolation from the 
@@ -1489,7 +1490,7 @@ structure which separates:
  the values at the hanging nodes -- because the values are constrained,
  they cannot be unknowns in the problem. When this function has been 
  executed for all elements in the mesh, the recursive
- eliminiation of hanging master nodes is performed by
+ elimination of hanging master nodes is performed by
  calling 
  \code RefineableMesh::complete_hanging_nodes(); \endcode
 
@@ -1578,7 +1579,7 @@ structure which separates:
    by a neighbouring element, etc. If a new \c Node needs to 
    be created, it is allocated with the element's 
    \c FiniteElement::construct_node(...) or 
-   \c FiniteElemetn::construct_boundary_node(...) functions. 
+   \c FiniteElement::construct_boundary_node(...) functions. 
    By default, the 
    current and previous positions
    of the new \c Nodes are determined via the father element's
@@ -1752,7 +1753,7 @@ structure which separates:
  broken virtual functions, so they only need to be overloaded if/when the
  functionality is actually required in a particular application.
 
- Typically, the shape of \c GeomObject s depends a certain number of
+ Typically, the shape of a \c GeomObject depends on a certain number of
  parameters (in the above examples, the radius \f$ R(t) \f$
  of the cylinder and the displacements of the shell element, respectively)
  which can be unknowns in the problem. We therefore store these parameters
@@ -1761,7 +1762,7 @@ structure which separates:
  \subsection MacroElements Domains and Macro Elements
  
  For the purposes of mesh generation, we represent curvilinear 
- domains by objects that are derived from the base class \c Domain. 
+ domains by objects that are derived from the base class \c Domain 
  and use \c GeomObjects to represent the curvilinear boundaries. 
  For instance, the \c QuarterCircleSectorDomain sketched
  in the figure below is bounded by the geometric object \c Ellipse 
@@ -1890,8 +1891,8 @@ structure which separates:
   Once a \c Mesh is associated with a \c Domain, the function
   \c Mesh::node_update() updates the nodal positions in response
   to a change in the shape of the \c GeomObjects that define the
-  \c Domain boundaries. [Note: This function update all nodal positions
-  first and then update the positions of the hanging nodes
+  \c Domain boundaries. [Note: This function updates all nodal positions
+  first and then updates the positions of the hanging nodes
   to subject them to the hanging node constraints.] 
   Alternative procedures for the update of the nodal positions in 
   response to changes in the domain boundary are implemented

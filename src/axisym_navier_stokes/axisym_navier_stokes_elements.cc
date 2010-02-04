@@ -908,7 +908,6 @@ fill_in_generic_residual_contribution_axi_nst(Vector<double> &residuals,
  double scaled_re_inv_fr = re_invfr()*density_ratio();
  double scaled_re_inv_ro = re_invro()*density_ratio();
  // double visc_ratio = viscosity_ratio();
- double dens_ratio = density_ratio();
  Vector<double> G = g();
 
  //Integers used to store the local equation and unknown numbers
@@ -1169,7 +1168,7 @@ fill_in_generic_residual_contribution_axi_nst(Vector<double> &residuals,
        //Add the user-defined body force terms
        //Remember to multiply by the density ratio!
        residuals[local_eqn] += 
-        r*dens_ratio*body_force[1]*testf[l]*W;
+        r*body_force[1]*testf[l]*W;
        
        //Add the gravitational body force term
        residuals[local_eqn] += r*scaled_re_inv_fr*testf[l]*G[1]*W;
@@ -1302,7 +1301,7 @@ fill_in_generic_residual_contribution_axi_nst(Vector<double> &residuals,
        //Add the user-defined body force terms
        //Remember to multiply by the density ratio!
        residuals[local_eqn] += 
-        r*dens_ratio*body_force[2]*testf[l]*W;
+        r*body_force[2]*testf[l]*W;
        
        //Add the gravitational body force term
        residuals[local_eqn] += r*scaled_re_inv_fr*testf[l]*G[2]*W;

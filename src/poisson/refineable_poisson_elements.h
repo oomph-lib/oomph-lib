@@ -86,7 +86,12 @@ class RefineablePoissonEquations : public virtual PoissonEquations<DIM>,
  void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
   {this->get_flux(s,flux);}
 
-
+ /// Get error against and norm of exact flux
+ void compute_exact_Z2_error(
+  std::ostream &outfile,
+  FiniteElement::SteadyExactSolutionFctPt exact_flux_pt,
+  double& error, double& norm);
+ 
 /// \short Get the function value u in Vector.
 /// Note: Given the generality of the interface (this function
 /// is usually called from black-box documentation or interpolation routines),

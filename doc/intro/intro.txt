@@ -187,7 +187,7 @@ at every point in \f$ D\f$,
 \f[ {\cal R}(x_i; u(x_i)) \equiv 0 \ \ \ \forall x_i \in D
 \mbox{\ \ \ \ and \ \ \ \ } 
 u|_{\partial D} = g. \f]
-The concept of a "weak" solutions is based on a slight relaxation of
+The concept of a "weak" solution is based on a slight relaxation of
 this criterion. A weak solution, \f$u_w(x_i), \f$ of problem P
 is any function that satisfies the essential boundary condition,
 \f[ u_w|_{\partial D} = g, \f]
@@ -221,9 +221,9 @@ impossibility of this in a
 1D example. First consider a candidate solution \f$ u_c(x)\f$ 
 which satisfies the essential boundary condition
 but does not satisfy the PDE anywhere, and that
-\f$ {\cal R}(x, u_c(x)) > 0 \f$  throughout the domain, as
+\f$ {\cal R}(x; u_c(x)) > 0 \f$  throughout the domain, as
 indicated in this sketch:
-@I w 0.75\textwidth weaksoln1 "Residual (blue) is nonzero (and positive) throughout the domain. A constant test function (red) is sufficient to show that the candidate solution is not a weak solution. "
+@I w 0.75\textwidth weaksoln1 "Residual (blue/solid) is nonzero (and positive) throughout the domain. A constant test function (red/dotted) is sufficient to show that the candidate solution is not a weak solution. "
 Could this
 candidate solution possibly qualify as a weak solution? No, using the
 trivial test function 
@@ -244,7 +244,7 @@ solution is such that the residual has different signs in \f$ D_1\f$  and
 solution qualify as
 a weak solution? Again the answer is no because
 we can choose a test function  that is nonzero in only one 
-of the two subdomains (e.g. the function shown by the blue/solid
+of the two subdomains (e.g. the function shown by the red/dotted
 line), which gives a nonzero weighted residual.
 
 It is clear that such a procedure may be used  to obtain a nonzero
@@ -861,7 +861,7 @@ problem P1 by Newton's method</B> </CENTER>
 - Correct the  initial guess via 
    \f[ U_j = U_j^{(0)} + \ \delta U_j \mbox{\ \  \ for $j=2,...,N-1.$} \f] 
   P1 is a linear problem, so \f$ U_j  \ (j=2,...,N-1) \f$
-  is the exact solution. For nonliner problems, we would
+  is the exact solution. For nonlinear problems, we would
   have to continue the \ref Newton iteration until the residuals
   \f$ r_k(U_2,...,U_{N-1})  \ (k=2,...,N-1) \f$ were sufficiently
   small.
@@ -923,7 +923,7 @@ problem P1 by Newton's method</B> </CENTER>
  </TABLE>
 
  The quality of the interpolation can also be improved by 
- using higher-order interpolation, but maintaing
+ using higher-order interpolation, but maintaining
 - the compact support for the global shape functions, so that
   \f$ \psi_j(x) \f$ is nonzero only in the vicinity of node
   \f$ j \f$, and
@@ -976,7 +976,7 @@ values. The equation numbers range from  2 to \f$N-1\f$,
 rather than from 1 to \f$N-2\f$ because we identified the unknowns by
 the node numbers. Although this is perfectly transparent in our
 simple 1D example, the book-keeping quickly
-becomes rather involved in more complicated problems. We, therefore, 
+becomes rather involved in more complicated problems. We therefore 
 treat node and equation numbers separately.
 [\b Note: We shall use
 the terms "equation number" and "number of the unknown" interchangeably;
@@ -1034,8 +1034,8 @@ in boxes):
  problem P1 </B> </CENTER> \n
  <B> Phase 1: Setup</B> 
  - Discretise the domain with \f$ N \f$ nodes which are located at
-   \f$ X_j, \ j=1,...,N.\f$ and choose the order of the global shape
- functions, \f$ \psi_j(x).\f$
+   \f$ X_j, \ j=1,...,N\f$, and choose the order of the global shape
+ functions \f$ \psi_j(x).\f$
  <TABLE BORDER="0" >
  <TR>
  <TD bgcolor="cornsilk">
@@ -1044,7 +1044,7 @@ in boxes):
    - If node j lies on the boundary: 
       - Assign its value according to the (known) boundary condition
         \f[ U_j = g(X_j) \f]
-      - Assign a negative equation number to reflects its "pinned" status:
+      - Assign a negative equation number to reflect its "pinned" status:
         \f[ {\cal E}(j) = -1 \f]
       .
    - Else: 
@@ -1133,7 +1133,7 @@ exploit the finite support of the global shape functions, which
 permits decomposition of the domain into elements. Each element
 consists of a given number of nodes that depends upon the order of
 local approximation within the element. In the case of linear
-interpolation each element consists of two nodes, see below
+interpolation each element consists of two nodes, as seen below:
 @I w 0.75\textwidth 1Dmesh "A 1D finite element mesh. "
  
 In the following three sections we shall develop an alternative, 
@@ -1462,7 +1462,7 @@ yet another lookup table, \f$ {\cal L}(j_{local},e)\f$,
 which stores the local equation number associated with the
 nodal value stored at local node \f$ j_{local}\f$ in element
 \f$e\f$. Again we
-set the equation number to -1 if the nodal values is pinned. 
+set the equation number to -1 if the nodal value is pinned. 
 The revised form of Algorithm @RA[P1_Newton4]@ is then given by
 (as before, only the sections that are highlighted have been changed):
 
@@ -2206,13 +2206,13 @@ fundamental objects:
   a static data member of the Node class that is, in fact, set to -1.
 - \b The \b Elements: Elements contain Nodes and, within an Element,
   Nodes are identified by their local node numbers.
-  Elements define their (local) shape functions, they compute
+  Elements define their (local) shape functions and compute
   the elemental residual vector and Jacobian matrix, using data 
   that is intrinsic to the Element. The entries in the Element's 
   residual vector and its Jacobian matrix are labelled by local 
   equation numbers, and each element stores a lookup scheme 
   for the correspondence between local and global equation numbers.
-- \b The \b Mesh: The Mesh consists of Elements and Nodes, The mesh 
+- \b The \b Mesh: The Mesh consists of Elements and Nodes. The mesh 
   generation process defines the nodal positions and establishes 
   the connectivity between the Nodes. Meshes typically have a number 
   of boundaries and the Mesh defines which Nodes are located on which 
@@ -2279,7 +2279,7 @@ a three-level inheritance structure:
  object-oriented 
  form because most steps involve operations that act exclusively 
  on the objects' member data. Such operations are 
- implemented as member functions of the appopriate objects.
+ implemented as member functions of the appropriate objects.
  
  The steps in  Algorithm @RA[P1_Newton6]@ that do not 
  fall into this category (the application of 
@@ -2310,7 +2310,7 @@ Poisson problems described above. The complete data structure
 implemented in \c oomph-lib contains numerous extensions to permit the
 solution of time-dependent problems, problems with many nodal values, 
 problems in deforming domains, adaptive mesh refinement and many
-other features. A complete description of the 
+other features. A complete description of 
 <a href="../../the_data_structure/html/index.html"> the data
 struture </a> is given elsewhere.
 
@@ -2369,7 +2369,7 @@ struture </a> is given elsewhere.
 <CENTER>
 <B>GeneralisedElement:</B>
 </CENTER>
-- Stores and provide access to:
+- Stores and provides access to:
   - the lookup scheme that stores the correspondence between
     local and global equation numbers.
 - Defines interfaces for the (virtual) functions that:
@@ -2402,19 +2402,19 @@ struture </a> is given elsewhere.
     to the local coordiantes [\b V3]
   - specify the number of nodal values that should be stored
     at each node, etc. [\b V4]
-- Defines and implements:
-  - functions to construct \c Nodes of the required spatial dimension,
+- Defines and implements functions that:
+  - construct \c Nodes of the required spatial dimension,
     with sufficient storage for the nodal values, etc. (This
     information is obtained by calls to the virtual functions [V4] 
     that are defined at this level but only implemented for specific,
     derived  elements).
-  - functions that calculate the mapping between local and 
+  - calculate the mapping between local and 
     global (Eulerian) coordinates,
     in terms of the abstract shape functions defined in the
     virtual functions [V3]
-  - functions that provide direct access to the nodal coordinates 
+  - provide direct access to the nodal coordinates 
     and the nodal values.
-  - functions that assign local equation numbers to the values 
+  - assign local equation numbers to the values 
     stored at the \c Nodes.
 </TD>
 </TR>
@@ -2530,7 +2530,7 @@ discrete constraints or boundary conditions.
   - (pointers to) its constituent \c Nodes.
   - (pointers to) the \c Nodes that are located on the \c Mesh
     boundaries.
-- Defines and implements functions that
+- Defines and implements functions that:
   - assign the global equation numbers for all nodal values.
   - execute the \c GeneralisedElement::assign_local_eqn_numbers()
     function for all constituent GeneralisedElements.
@@ -2545,7 +2545,7 @@ discrete constraints or boundary conditions.
 <CENTER>
 <B>Specific Mesh:</B> <BR>[derived from \b Mesh]
 </CENTER>
-- Defines and implements functions that
+- Defines and implements functions that:
   - create the Mesh. This is typically done in the Mesh constructor
     and involves the following tasks:
     - creating the \c Mesh's constituent \c Nodes and \c
@@ -2586,7 +2586,7 @@ discrete constraints or boundary conditions.
      Newton method.
   - a vector of (pointers to) the \c Problem's degrees of freedom 
     (= double precison numbers).
-- Defines and implements functions that
+- Defines and implements functions that:
   - set up  the global and local equation numbering schemes.
   - solve the (global) nonlinear system of equations, formally
     defined by the assembly of the \c GeneralisedElement's residual
@@ -2606,7 +2606,7 @@ discrete constraints or boundary conditions.
 <CENTER>
 <B>Specific Problem:</B> <BR>[derived from \b Problem]
 </CENTER>
-- Implements functions that
+- Implements functions that:
   - Set up the problem. This is usually done in the \c Problem
     constructor and involves the following tasks:
     - creation of the \c Mesh object
@@ -2615,7 +2615,7 @@ discrete constraints or boundary conditions.
       that need to be passed some global data, such as function pointers
       to source functions, etc.
     - setting up the equation numbering scheme. 
-- Defines and implements functions that
+- Defines and implements functions that:
   - perform parameter studies
   - perform the post-processing of the results.
 </TD>

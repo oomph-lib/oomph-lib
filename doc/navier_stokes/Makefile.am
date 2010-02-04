@@ -6,7 +6,7 @@ three_d_entry_flow \
 curved_pipe \
 osc_ellipse \
 bretherton \
-single_layer \
+single_layer_free_surface \
 inclined_plane \
 two_layer_interface \
 adaptive_interface \

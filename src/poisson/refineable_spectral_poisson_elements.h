@@ -36,8 +36,9 @@
 #endif
 
 
-//oomph-lib headers
+// oomph-lib headers
 #include "refineable_poisson_elements.h"
+#include "../generic/refineable_line_spectral_element.h"
 #include "../generic/refineable_quad_spectral_element.h"
 #include "../generic/refineable_brick_spectral_element.h"
 

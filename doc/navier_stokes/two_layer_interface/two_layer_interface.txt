@@ -1,7 +1,320 @@
 \mainpage Demo problem: Relaxation oscillations of an interface between two viscous fluids
 
-Detailed documentation to be written. Here's  the already fairly well documented driver code...
+In the <A HREF="../../single_layer_free_surface/html/index.html">previous example</A>
+we looked at a single fluid with a free surface, which was deformed
+initially and then allowed to relax. This example is very similar, but
+this time we will place an interface between two fluids.
 
-\include two_layer.cc
+<HR>
+<HR>
+
+\section implementation The implementation
+
+In the previous example we used 1D interface elements on the free
+surface boundary, which applied the kinematic and dynamic boundary
+conditions, and fixed the pressure above the interface (i.e. the
+external pressure). We apply a similar principle here, but as we now
+deal with two fluids we attach the interface elements to the top
+boundary of the lower fluid. The interface elements will now take the
+"external" pressure to be the pressure computed in the top fluid at each
+node on the interface. This is done in the \c TwoLayerSpineMesh. We
+denote the lower fluid as fluid 1 and the upper fluid as fluid 2.
+
+<HR>
+<HR>
+
+\section example_problem The example problem
+
+We will illustrate the solution of the unsteady 2D Navier-Stokes
+equations using the example of a distorted free surface, between two
+fluids, which is allowed to relax. The domain is periodic in the \f$ x
+\f$ direction.
+
+<CENTER>
+<TABLE>
+<TR> 
+<TD>
+\n
+<CENTER>
+<B>
+The 2D unsteady Navier-Stokes equations under a distorted free-surface.</B>
+</CENTER> 
+\n
+Solve
+\f[
+Re\left(St\frac{\partial u_i}{\partial t} +
+\ u_j\frac{\partial u_i}{\partial x_j}\right) =
+- \frac{\partial p}{\partial x_i} + \frac{Re}{Fr}G_i +
+\frac{\partial }{\partial x_j} \left[R_\mu
+\frac{\partial u_i}{\partial x_j} +  
+\frac{\partial u_j}{\partial x_i} \right],
+\ \ \ \ \ \ \ \ \ \ @E[eqn:NSmom]@
+\f]
+and
+\f[
+\frac{\partial u_i}{\partial x_i} = 0,
+\ \ \ \ \ \ \ \ \ \ @E[eqn:NScont]@
+\f]
+with gravity acting in the negative \f$ x_2 \f$ direction, in the
+periodic domain \f$ D = \left\{x_1 \in [0,L], x_2 \in [0,L]
+\right\} \f$, where the lower fluid lies in the region defined such
+that \f$ x_2 \in [0,h] \f$ and the upper fluid in the region defined such
+that \f$ x_2 \in [h,L] \f$ (where \f$ x_2=h(x_1,t)\f$
+is a free surface), subject to the Dirichlet boundary conditions:
+\f[
+u_1=0 \ \ \ \ \ \ \ \ \ \ @E[eqn:BC1]@
+\f]
+on all boundaries and
+\f[
+u_2=0 \ \ \ \ \ \ \ \ \ \ @E[eqn:BC2]@
+\f]
+on the top and bottom.
+
+The free-surface is defined by \f$\mathbf{R}\f$, which is subject
+to the kinematic condition:
+\f[
+\left(\mathbf{u}-\frac{\partial\mathbf{R}}{\partial t}\right)
+\cdot\mathbf{n}=0,
+\ \ \ \ \ \ \ \ \ \ @E[eqn:kinematicBC]@
+\f]
+and the dynamic condition:
+\f[
+\tau_{ij}^{[1]}n_j = \tau_{ij}^{[2]}n_j+\frac{1}{Ca}\kappa n_i,
+\ \ \ \ \ \ \ \ \ \ @E[eqn:dynamicBC]@
+\f]
+where the stress tensor in fluid \f$ k \f$ is defined as:
+\f[
+\tau_{ij}^{[k]} = -p\delta_{ij} + \left(\frac{\partial u_i}{\partial x_j}
++ \frac{\partial u_j}{\partial x_i}\right),
+\ \ \ \ \ \ \ \ \ \ @E[eqn:stresstensor]@
+\f]
+and is applied on the free-surface.
+
+The initial deformation of the free surface is defined by:
+\f[
+\mathbf{R} = \left(x_1,
+1.2 + \epsilon\cos\left(\frac{2N\pi x_1}{L}\right)\right),
+\ \ \ \ \ \ \ \ \ \ @E[eqn:freesurfacedeformation]@
+\f]
+where \f$ \epsilon \f$ is a small parameter, \f$ N \f$ is the number
+of cosine periods and \f$ L \f$ is the width of the domain.
+</TD>
+</TR>
+</TABLE>  
+</CENTER>
+
+<HR>
+<HR>
+
+\section results Results
+
+Figure 1.1 below shows a contour plot of the pressure distribution
+with superimposed streamlines, as well as "carpet plots" of the
+pressure and the two velocity components, taken from <A
+HREF="../figures/two_layer.avi">this animation</A>. The results
+were produced using \c SpineElement<CrozierRaviartElement<2>> elements
+with \f$ Re = Re \, St = Re/Fr = 5 \f$, \f$ Ca = 0.01 \f$ and \f$
+R_{\mu} = 1.0 \f$ for both fluids.
+
+@I w 0.75\textwidth two_layer "Velocity and pressure fields. "
+
+The animation shows the interface oscillating up and down until a
+steady equilibrium is reached. Figure 1.2 shows the time-trace of the
+height of the interface at the edge of the domain. Since the domain is
+periodic in \f$ x \f$, the left and right edges are equivalent.
+
+@I w 0.75\textwidth two_layer_trace "Time-trace of the height of the fluid interface at the edge of the domain. "
+
+<HR>
+<HR>
+
+\section namespace Global parameters and functions
+
+For this problem, we use the dimensionless parameters \f$ Re \f$,
+\f$ Re\, St \f$, \f$ Re/Fr \f$ and \f$ Ca \f$. In addition, we create a
+vector \f$ G \f$ which will define the direction in which gravity
+acts. As usual, we define these quantities in a namespace:
+
+\dontinclude two_layer_interface.cc
+\skipline start_of_namespace
+\until double Ca
+
+We also include the viscosity ratio, \f$ R_{\mu} = \mu^{[2]}/\mu^{[1]}
+\f$, and the density ratio, \f$ R_{\rho} = \rho^{[2]}/\rho^{[1]}
+\f$. We include both, even though we do not use a body force function
+in this example, and set them both to their default values purely to
+demonstrate their implementation.
+
+\skipline Ratio of viscosity
+\until End of namespace
+
+<HR>
+<HR>
+
+\section main The driver code
+
+We start by specifying the (non-dimensional) length of time we want to
+run the simulation for and the size of the timestep. Because all driver
+codes are run as part of \c oomph-lib's self-testing routines we allow
+the user to pass a command line argument to the executable which sets
+the maximum time to some lower value.
+
+\skipline start_of_main
+\until t_max = 0.02
+
+Next we specify the width of the domain and the number of elements in
+the \f$ x \f$ direction, as well as the heights and number of elements
+in the \f$ y \f$ direction of both fluid layers.
+
+\skipline Number of elements in x direction
+\until double h2
+
+At this point we define the direction in which gravity acts;
+vertically downwards.
+
+\skipline Set direction of gravity
+\until G[1]
+
+Finally, we build the problem using the "spinified" version of \c
+QCrouzeixRaviartElements and the \c BDF<2> timestepper, before calling \c
+unsteady_run(...). This function solves the system at each timestep
+using the \c Problem::unsteady_newton_solve(...) function before
+documenting the result.
+
+\skipline Set up the spine test problem
+\until End of main
+
+<HR>
+<HR>
+
+\section problem_class The problem class 
+This remains exactly as in the <A
+HREF="../../single_layer_free_surface/html/index.html#problem_class">single-layer example</A>,
+except that we include a function which allows us to fix a pressure
+degree of freedom. Additionally, we now use the \c
+TwoLayerSpineMesh<ELEMENT,SpineLineNavierStokesInterfaceElement<ELEMENT>>.
+
+\dontinclude two_layer_interface.cc
+\skipline start_of_problem_class
+\until End of problem class
+
+<HR>
+<HR>
+
+\section constructor The problem constructor
+
+The constructor starts by copying the width of the domain into the
+private member data of the problem class, before building the
+timestepper.
+
+\skipline start_of_constructor
+\until add_time_stepper_pt
+
+Next we build the mesh, as usual. The mesh we are using is the \c
+TwoLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>, which works in a very
+similar way to the single-layer mesh used in the <A
+HREF="../../single_layer_free_surface/html/index.html">previous example</A>, except
+that we have \c TwoLayerSpineMesh::nupper() bulk elements above the
+interface as well as the \c TwoLayerSpineMesh::nlower() bulk elements
+below it. As before, the boolean argument in the mesh constructor,
+which is set to "true" here, indicates whether or not the domain is to
+be periodic in \f$ x \f$.
+
+\skipline Build and assign mesh
+\until time_stepper_pt
+
+On the solid boundaries (\f$ y = 0.0 \f$ and \f$ y = 2.0 \f$) we pin
+both velocity components so that there is no penetration of the wall
+by the fluid or flow along it. On the left and right symmetry
+boundaries (\f$ x = 0.0 \f$ and \f$ x = 2.0 \f$) we pin the \f$ x \f$
+component of the velocity but leave the \f$ y \f$ component
+unconstrained.
+
+\skipline -----
+\until End of loop over mesh boundaries
+
+We then pin one pressure degree of freedom.
+
+\skipline Fix zeroth pressure
+\until fix_pressure
+
+We loop over the bulk elements in the lower fluid and pass them
+pointers to the physical parameters. Note that we do not assign
+pointers for \f$R_\mu\f$ and \f$R_\rho\f$ since these take the default
+value in the lower fluid.
+
+\skipline -----
+\until End of loop over bulk elements in lower fluid
+
+We then do the same for the bulk elements in the upper fluid, and this
+time we do assign pointers for the viscosity and density ratios.
+
+\skipline Determine number of bulk elements in upper fluid
+\until End of loop over bulk elements in upper fluid
+
+Finally, we assign pointers to the Capillary number to each of the
+interface elements before setting up the equation numbering scheme.
+
+\skipline Determine number of 1D interface elements
+\until End of constructor
+
+<HR>
+<HR>
+
+\section doc Post-processing
+
+This function is identical to that in the <A
+HREF="../../single_layer_free_surface/html/index.html#doc">previous example</A>. We
+output the value of the current time to the screen, before recording
+the following parameters in the trace file:
+- the value of the continuous time,
+- the height of the spine at the left/right domain boundary, and
+- the contact angles (in degrees) of the free surface and the left and
+right domain boundaries.
+
+\skipline start_of_doc_solution
+\until actual_contact_angle_right
+
+We then output the computed solution, and include \c Tecplot instructions
+that generate a blue line in the top-left corner of the plot to
+indicate how time progresses during the simulation.
+
+\skipline ofstream
+\until End of doc_solution
+
+<HR>
+<HR>
+
+\section unsteady_run The timestepping loop
+
+This function is also identical to the equivalent function in the <A
+HREF="../../single_layer_free_surface/html/index.html#unsteady_run">previous example</A>. We
+begin by deforming the interface and then create a \c DocInfo object
+to store the output directory and the label for the output files.
+
+\skipline start_of_unsteady_run
+\until doc_info.number()=0
+
+We initialise the trace file and the timestep, before setting the initial
+conditions and documenting them.
+
+\skipline Open trace file
+\until doc_info.number()++
+
+Finally, we perform the actual timestepping loop. For
+each timestep the function \c unsteady_newton_solve(dt) is called and
+the solution documented.
+
+\skipline Timestepping loop
+\until End of unsteady_run
+
+<HR>
+<HR>
+
+\section comments Comments and Exercises
+-# Investigate why we do not solve this problem using Taylor-Hood
+   elements.
+
+
 
 

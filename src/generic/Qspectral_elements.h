@@ -291,7 +291,7 @@ template<unsigned DIM, unsigned NNODE_1D>
 //=======================================================================
 template<unsigned NNODE_1D>
 class QSpectralElement<1,NNODE_1D> : public virtual SpectralElement,
- public virtual QElementBase
+ public virtual LineElementBase
 {
   private:
  
@@ -333,6 +333,35 @@ public:
 
  /// Max. value of local coordinate
  double s_max() const {return S_max;}
+
+ /// Number of vertex nodes in the element
+ unsigned nvertex_node() const
+  { return 2; }
+
+ /// Pointer to the j-th vertex node in the element
+ Node* vertex_node_pt(const unsigned &j) const
+  {
+   unsigned n_node_1d = nnode_1d();
+   Node* nod_pt;
+   switch(j)
+    {
+    case 0:
+     nod_pt = this->node_pt(0);
+     break;
+    case 1:
+     nod_pt = this->node_pt(n_node_1d-1);
+     break;
+    default:
+     std::ostringstream error_message;
+     error_message << "Vertex node number is " << j << 
+      " but must be from 0 to 1\n";
+
+     throw OomphLibError(error_message.str(),
+                         "QSpectralElement::vertex_node_pt()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   return nod_pt;
+  }
 
  /// Get local coordinates of node j in the element; vector sets its own size
  void local_coordinate_of_node(const unsigned& n, Vector<double>& s)
@@ -513,7 +542,7 @@ void QSpectralElement<1,NNODE_1D>::d2shape_local(const Vector<double> &s, Shape 
 //=======================================================================
 template<unsigned NNODE_1D>
 class QSpectralElement<2,NNODE_1D> : public virtual SpectralElement,
- public virtual QElementBase
+ public virtual QuadElementBase
 {
   private:
  
@@ -802,7 +831,7 @@ void QSpectralElement<2,NNODE_1D>::d2shape_local(const Vector<double> &s, Shape 
 //=======================================================================
 template<unsigned NNODE_1D>
 class QSpectralElement<3,NNODE_1D> : public virtual SpectralElement,
- public virtual QElementBase
+ public virtual BrickElementBase
 {
   private:
  

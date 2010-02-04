@@ -122,10 +122,10 @@ public:
 
  /// \short General node update function implements pure virtual function 
  /// defined in SpineMesh base class and performs specific node update
- /// actions:  along vertical spines
+ /// actions: along vertical spines
  virtual void spine_node_update(SpineNode* spine_node_pt)
   {
-   //Get fraction along the spine
+   // Get spine node's fraction along the spine
    double W = spine_node_pt->fraction();
    
    // Get local coordinates

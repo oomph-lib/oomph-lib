@@ -32,6 +32,7 @@ element_with_external_element.cc \
 eigen_solver.cc \
 triangle_scaffold_mesh.cc  geompack_scaffold_mesh.cc \
 tetgen_scaffold_mesh.cc simple_cubic_scaffold_tet_mesh.cc \
+line_mesh.cc binary_tree.cc refineable_line_element.cc \
 triangle_mesh.cc tet_mesh.cc \
 partitioning.cc communicator.cc linear_algebra_distribution.cc \
 double_vector.cc \
@@ -72,6 +73,7 @@ error_estimator.h \
 refineable_mesh.h \
 fsi.h octree.h  tree.h  \
 refineable_elements.h refineable_quad_element.h \
+refineable_line_spectral_element.h \
 refineable_quad_spectral_element.h \
 refineable_brick_spectral_element.h orthpoly.h \
 refineable_quad_mesh.h pseudosolid_node_update_elements.h \
@@ -82,6 +84,8 @@ eigen_solver.h \
 Telements.h \
 triangle_scaffold_mesh.h geompack_scaffold_mesh.h tetgen_scaffold_mesh.h \
 pseudo_buckling_ring.h simple_cubic_scaffold_tet_mesh.h \
+line_mesh.h binary_tree.h refineable_line_element.h \
+refineable_line_mesh.h \
 triangle_mesh.h tet_mesh.h \
 partitioning.h communicator.h linear_algebra_distribution.h double_vector.h \
 multi_domain.h element_with_external_element.h iterative_linear_solver.h \

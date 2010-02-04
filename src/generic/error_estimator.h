@@ -125,6 +125,22 @@ class ElementWithZ2ErrorEstimator : public virtual FiniteElement
  /// \short Z2 'flux' terms for Z2 error estimation
  virtual void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)=0;
 
+ /// \short Plot the error when compared against a given exact flux.
+ /// Also calculates the norm of the error and that of the exact flux.
+ virtual void compute_exact_Z2_error(
+  std::ostream &outfile,
+  FiniteElement::SteadyExactSolutionFctPt exact_flux_pt,
+  double& error, double& norm)
+  {
+   std::string error_message
+    = "compute_exact_Z2_error undefined for this element \n";
+   outfile << error_message;
+   
+   throw OomphLibError(error_message,
+                       "FiniteElement::compute_error()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+
  /// \short Return the compound flux index of each flux component
  /// The default (do nothing behaviour) will mean that all indices
  /// remain at the default value zero.

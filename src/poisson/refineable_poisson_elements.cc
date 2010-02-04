@@ -33,6 +33,108 @@ namespace oomph
 
 
 //========================================================================
+/// Validate against exact flux.
+/// Flux is provided via function pointer.
+/// Plot error at a given number of plot points.
+//========================================================================
+template <unsigned DIM>
+void RefineablePoissonEquations<DIM>::compute_exact_Z2_error(
+ std::ostream &outfile, 
+ FiniteElement::SteadyExactSolutionFctPt exact_flux_pt,
+ double& error, double& norm)
+{ 
+ // Initialise
+ error=0.0;
+ norm=0.0;
+ 
+ // Vector of local coordinates
+ Vector<double> s(DIM);
+ 
+ // Vector of global coordinates
+ Vector<double> x(DIM);
+ 
+ // Find out how many nodes there are in the element
+ const unsigned n_node = nnode();
+ 
+ // Allocate storage for shape functions
+ Shape psi(n_node);
+ 
+ // Set the value of n_intpt
+ const unsigned n_intpt = integral_pt()->nweight();
+  
+ // Tecplot
+ outfile << "ZONE" << std::endl;
+ 
+ // Exact flux Vector (size is DIM)
+ Vector<double> exact_flux(DIM);
+ 
+ // Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   
+   // Assign values of s
+   for(unsigned i=0;i<DIM;i++)
+    {
+     s[i] = integral_pt()->knot(ipt,i);
+    }
+   
+   // Get the integral weight
+   double w = integral_pt()->weight(ipt);
+   
+   // Get jacobian of mapping
+   double J = J_eulerian(s);
+   
+   // Premultiply the weights and the Jacobian
+   double W = w*J;
+   
+   // Get x position as Vector
+   interpolated_x(s,x);
+   
+   // Allocate storage for FE flux Vector
+   Vector<double> fe_flux(DIM);
+
+   // Get FE flux as Vector
+   get_Z2_flux(s,fe_flux);
+   
+   // Get exact flux at this point
+   (*exact_flux_pt)(x,exact_flux);
+   
+   // Output x,y,...
+   for(unsigned i=0;i<DIM;i++)
+    {
+     outfile << x[i] << " ";
+    }
+
+   // Output exact flux
+   for(unsigned i=0;i<DIM;i++)
+    {
+     outfile << exact_flux[i] << " ";
+    }
+
+   // Output error
+   for(unsigned i=0;i<DIM;i++)
+    {
+     outfile << exact_flux[i]-fe_flux[i] << " ";
+    }
+   outfile << std::endl;
+
+   // Add to RMS error:
+   double sum=0.0;
+   double sum2=0.0;
+   for(unsigned i=0;i<DIM;i++)
+    {
+     sum += (fe_flux[i]-exact_flux[i])*(fe_flux[i]-exact_flux[i]);
+     sum2 += exact_flux[i]*exact_flux[i];
+    }
+   error += sum*W;
+   norm += sum2*W;
+
+  } // End of loop over the integration points
+}
+
+
+
+//========================================================================
 /// Add element's contribution to the elemental 
 /// residual vector and/or Jacobian matrix.
 /// flag=1: compute both
@@ -474,6 +576,10 @@ void RefineablePoissonEquations<DIM>::get_dresidual_dnodal_coordinates(
 //====================================================================
 // Force build of templates
 //====================================================================
+template class RefineableQPoissonElement<1,2>;
+template class RefineableQPoissonElement<1,3>;
+template class RefineableQPoissonElement<1,4>;
+
 template class RefineableQPoissonElement<2,2>;
 template class RefineableQPoissonElement<2,3>;
 template class RefineableQPoissonElement<2,4>;

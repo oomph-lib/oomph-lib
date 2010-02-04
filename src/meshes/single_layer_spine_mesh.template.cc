@@ -85,7 +85,7 @@ SingleLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>::SingleLayerSpineMesh(
 {
  // We've called the "generic" constructor for the RectangularQuadMesh
  // which doesn't do much...
- 
+
  // Now build the mesh: 
  build_single_layer_mesh(time_stepper_pt);
 }
@@ -225,6 +225,7 @@ void SingleLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>::build_single_layer_mesh(
  // because it's the same as the first one...
  if (this->Xperiodic)
   {
+
    // Last spine is the same as first one...
    Spine* final_spine_pt=Spine_pt[0];  
 

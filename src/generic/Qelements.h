@@ -423,7 +423,7 @@ void get_x_and_xi(const Vector<double>& s,
 
 
 //=======================================================================
-///General QElement class
+/// General QElement class
 ///
 /// Empty, just establishes the template parameters
 //=======================================================================
@@ -432,13 +432,29 @@ template<unsigned DIM, unsigned NNODE_1D>
 {
 };
 
+//=======================================================================
+/// Base class for all line elements 
+//=======================================================================
+class LineElementBase : public virtual QElementBase
+{
+  public:
 
+ /// Constructor. Empty
+ LineElementBase() {}
+
+ /// \short Number of vertex nodes in the element
+ virtual unsigned nvertex_node() const=0;
+
+ /// \short Pointer to the j-th vertex node in the element
+ virtual Node* vertex_node_pt(const unsigned& j) const=0;
+
+};
 
 //=======================================================================
-///General QElement class specialised to one spatial dimension
+/// General QElement class specialised to one spatial dimension
 //=======================================================================
 template<unsigned NNODE_1D>
-class QElement<1,NNODE_1D> : public virtual QElementBase
+class QElement<1,NNODE_1D> : public virtual LineElementBase
 {
   private:
  
@@ -482,13 +498,62 @@ public:
    BrokenCopy::broken_assign("QElement");
   }
 
+ /// Calculate the geometric shape functions at local coordinate s
+ void shape(const Vector<double> &s, Shape &psi) const;
+
+ /// \short Compute the  geometric shape functions and 
+ /// derivatives w.r.t. local coordinates at local coordinate s
+ void dshape_local(const Vector<double> &s, Shape &psi, DShape &dpsids) 
+  const;
+
+ /// \short Compute the geometric shape functions, derivatives and
+ /// second derivatives w.r.t. local coordinates at local coordinate s \n
+ /// d2psids(i,0) = \f$ d^2 \psi_j / d s^2 \f$
+ void d2shape_local(const Vector<double> &s, Shape &psi, DShape &dpsids,
+                    DShape &d2psids) const;
+
+ /// \short Overload the template-free interface for the calculation of
+ /// inverse jacobian matrix. This is a one-dimensional element, so
+ /// use the 1D version.
+ double invert_jacobian_mapping(const DenseMatrix<double> &jacobian,
+                                DenseMatrix<double> &inverse_jacobian) const
+  {return FiniteElement::invert_jacobian<1>(jacobian,inverse_jacobian);}
+
  /// Min. value of local coordinate
  double s_min() const {return S_min;}
 
  /// Max. value of local coordinate
  double s_max() const {return S_max;}
 
-
+ /// \short Number of vertex nodes in the element
+ unsigned nvertex_node() const
+  {return 2;}
+ 
+ /// \short Pointer to the j-th vertex node in the element
+ Node* vertex_node_pt(const unsigned& j) const
+  {
+   unsigned n_node_1d=nnode_1d();
+   Node* nod_pt;
+   switch(j)
+    {
+    case 0:
+     nod_pt=node_pt(0);
+     break;
+    case 1:
+     nod_pt=node_pt(n_node_1d-1);
+     break;
+    default:
+     std::ostringstream error_message;
+     error_message << "Vertex node number is " << j << 
+      " but must be from 0 to 1\n";
+     
+     throw OomphLibError(error_message.str(),
+                         "QElement::vertex_node_pt()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   return nod_pt;
+  }
+ 
  /// Get local coordinates of node j in the element; vector sets its own size
  void local_coordinate_of_node(const unsigned& j, Vector<double>& s)
   {
@@ -515,27 +580,9 @@ public:
    return double(n1d)/double(NNODE_1D-1);
   }
 
- /// Calculate the geometric shape functions at local coordinate s
- void shape(const Vector<double> &s, Shape &psi) const;
+ /// Get the node at the specified local coordinate
+ Node* get_node_at_local_coordinate(const Vector<double> &s);
 
- /// \short Compute the  geometric shape functions and 
- /// derivatives w.r.t. local coordinates at local coordinate s
- void dshape_local(const Vector<double> &s, Shape &psi, DShape &dpsids) 
-  const;
-
- /// \short Compute the geometric shape functions, derivatives and
- /// second derivatives w.r.t. local coordinates at local coordinate s \n
- /// d2psids(i,0) = \f$ d^2 \psi_j / d s^2 \f$
- void d2shape_local(const Vector<double> &s, Shape &psi, DShape &dpsids,
-                    DShape &d2psids) const;
-
- /// \short Overload the template-free interface for the calculation of
- /// inverse jacobian matrix. This is a one-dimensional element, so
- /// use the 1D version.
- double invert_jacobian_mapping(const DenseMatrix<double> &jacobian,
-                                DenseMatrix<double> &inverse_jacobian) const
-  {return FiniteElement::invert_jacobian<1>(jacobian,inverse_jacobian);}
-  
  /// Number of nodes along each element edge
  unsigned nnode_1d() const {return NNODE_1D;}
 

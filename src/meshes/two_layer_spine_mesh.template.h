@@ -80,7 +80,26 @@ public:
                    const bool& periodic_in_x,
                    TimeStepper* time_stepper_pt=
                    &Mesh::Default_TimeStepper);
- 
+
+
+ /// \short Constructor: Pass number of elements in x-direction, number of
+ /// elements in y-direction in bottom and top layer, respectively,
+ /// axial length and height of top and bottom layers, a boolean
+ /// flag to make the mesh periodic in the x-direction, a boolean flag to
+ /// specify whether or not to call the "build_two_layer_mesh" function,
+ /// and pointer to timestepper (defaults to Steady timestepper)
+ TwoLayerSpineMesh(const unsigned &nx, 
+                   const unsigned &ny1,
+                   const unsigned &ny2, 
+                   const double &lx,
+                   const double &h1,
+                   const double &h2,
+                   const bool& periodic_in_x,
+                   const bool& build_mesh,
+                   TimeStepper* time_stepper_pt=
+                   &Mesh::Default_TimeStepper);
+
+
  /// Access functions for pointers to interface elements
  FiniteElement* &interface_element_pt(const unsigned long &i) 
   {return Interface_element_pt[i];}
@@ -211,50 +230,54 @@ protected:
 /// This creates a finer mesh around boundaries 0, 1 and 2 (bottom, 
 /// right and top) and also around the interface. This mesh was designed
 /// for use with the spin-up and spin-over problems in an axisymmetric 
-/// domain. Using the same spacing fractions in the both the upper and 
-/// lower fluids.
+/// domain. Uses different spacing fractions in the upper and lower
+/// fluids.
 //
-//                     Xfraction
-//      _______________________ 
-//     |                 |     |
-//     |                 |     |nya2
-//     |-----------------+-----|      1.0-Yfraction1
-//     |                 |     |
-//     |                 |     |
-//     |                 |     |nyb2
-//     |                 |     |
-//     |                 |     |
-//     |-----------------+-----|      1.0-Yfraction2
-//     |                 |     |nyc2
-//     |_________________|_____|   interface
-//     |                 |     |
-//     |                 |     |nyc1
-//     |-----------------+-----|      Yfraction2
-//     |                 |     |
-//     |                 |     |
-//     |                 |     |
-//     |                 |     |nyb1
-//     |                 |     |
-//     |                 |     |
-//     |                 |     |
-//     |-----------------+-----|      Yfraction1
-//     |                 |     |nya1
-//     |_________________|_____|
-//        nxa              nxb
+//                                   Xfraction
+//                      |---------------->
+//             _         _______________________      _ _    _ _
+//            /         |                 |     |      |      |
+//            |    nya2 |                 |     |     \|/     |
+//            |         |-----------------+-----| Y2fraction1 |
+//            |         |                 |     |             |
+//            |         |                 |     |             |
+//  Fluid 2 --|    nyb2 |                 |     |             |
+//            |         |                 |     |             |
+//            |         |                 |     |            \|/
+//            |         |-----------------+-----|      Y2fraction2
+//            |    nyc2 |                 |     |
+//            \_        |_________________|_____|
+//            /         |    INTERFACE    |     |
+//            |    nyc1 |                 |     |
+//            |         |-----------------+-----|      Y1fraction2
+//            |         |                 |     |            /|\.
+//            |         |                 |     |             |
+//            |         |                 |     |             |
+//  Fluid 1 --|    nyb1 |                 |     |             |
+//            |         |                 |     |             |
+//            |         |                 |     |             |
+//            |         |                 |     |             |
+//            |         |-----------------+-----| Y1fraction1 |
+//            |    nya1 |                 |     |     /|\     |
+//            \_        |_________________|_____|     _|_    _|_
+//                         nxa              nxb
 //
 //======================================================================
 template <class ELEMENT, class INTERFACE_ELEMENT >
 class Axisym2x6TwoLayerSpineMesh : 
 public virtual TwoLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>
 {
-private:
- //Data to hold the number of elements in each section of the mesh
- unsigned Nxa, Nxb, Nya1, Nyb1, Nyc1, Nya2, Nyb2, Nyc2;
- //Data that holds the fractions along the channel in which to introduce
- //the second zones
- double Xfraction, Yfraction1, Yfraction2;
 
-public:
+  private:
+
+ // Data to hold the number of elements in each section of the mesh
+ unsigned Nxa, Nxb, Nya1, Nyb1, Nyc1, Nya2, Nyb2, Nyc2;
+ 
+ // Data that holds the fractions along the channel in which to
+ // introduce the second zones
+ double Xfraction, Y1fraction1, Y1fraction2, Y2fraction1, Y2fraction2;
+
+  public:
 
  /// \short Simple constructor: nxa: number of elements in x direction
  /// in left region; nxb: number of elements in x direction in right 
@@ -268,24 +291,24 @@ public:
  /// interface for fluid 2; lx: length of mesh in the x direction; h1: 
  /// height of fluid 1; h2: height of fluid 2.
  /// Also pass pointer to timestepper (defaults to Static)
- Axisym2x6TwoLayerSpineMesh(const unsigned &nxa,
-                            const unsigned &nxb,
-                            const unsigned &nya1,
-                            const unsigned &nyb1,
-                            const unsigned &nyc1,
-                            const unsigned &nya2,
-                            const unsigned &nyb2,
-                            const unsigned &nyc2,
-                            const double &lx,
-                            const double &h1, 
-                            const double &h2,
-                            TimeStepper* time_stepper_pt=
-                            &Mesh::Default_TimeStepper);
+/*  Axisym2x6TwoLayerSpineMesh(const unsigned &nxa, */
+/*                             const unsigned &nxb, */
+/*                             const unsigned &nya1, */
+/*                             const unsigned &nyb1, */
+/*                             const unsigned &nyc1, */
+/*                             const unsigned &nya2, */
+/*                             const unsigned &nyb2, */
+/*                             const unsigned &nyc2, */
+/*                             const double &lx, */
+/*                             const double &h1,  */
+/*                             const double &h2, */
+/*                             TimeStepper* time_stepper_pt= */
+/*                             &Mesh::Default_TimeStepper); */
 
 
  /// \short Simple constructor: nxa: number of elements in x direction
  /// in left region; nxb: number of elements in x direction in right 
- /// region; Xfrac: the spacing fraction for nxl; nya1: number of 
+ /// region; x_frac: the spacing fraction for nxl; nya1: number of 
  /// elements in y direction in fluid 1 on the bottom boundary 0; nyb1:
  /// number of elements in y direction in the core region of fluid 1; 
  /// nyc1: number of elements in y direction in the region next to the
@@ -293,21 +316,24 @@ public:
  /// fluid 2 on the top boundary 2; nyb2: number of elements in y 
  /// direction in the core region of fluid 2; nyc2: number of elements 
  /// in y direction in the region next to the interface for fluid 2; 
- /// Yfrac1: the spacing fraction for nya; Yfrac2: the spacing fraction
- /// for nyb; lx: length of mesh in the x direction; h1: height of 
- /// fluid 1; h2: height of fluid 2.
+ /// y1_frac1: the spacing fraction for nya1; y1_frac2: the spacing
+ /// fraction for nyb1; y2_frac1: the spacing fraction for nya2;
+ /// y2_frac2: the spacing fraction for nyb2; lx: length of mesh in
+ /// the x direction; h1: height of fluid 1; h2: height of fluid 2.
  /// Also pass pointer to timestepper (defaults to Static)
  Axisym2x6TwoLayerSpineMesh(const unsigned &nxa,
                             const unsigned &nxb,
-                            const double &Xfrac,
+                            const double &x_frac,
                             const unsigned &nya1,
                             const unsigned &nyb1,
                             const unsigned &nyc1,
                             const unsigned &nya2,
                             const unsigned &nyb2,
                             const unsigned &nyc2,
-                            const double &Yfrac1,
-                            const double &Yfrac2,
+                            const double &y1_frac1,
+                            const double &y1_frac2,
+                            const double &y2_frac1,
+                            const double &y2_frac2,
                             const double &lx,
                             const double &h1,
                             const double &h2,
@@ -342,45 +368,54 @@ public:
 /// domain. Using the same spacing fractions in the both the upper and 
 /// lower fluids.
 //
-//      Xfraction1     Xfraction2
-//      _______________________ 
-//     |    |            |     |
-//     |    |            |     |nya2
-//     |----+------------+-----|      1.0-Yfraction1
-//     |    |            |     |
-//     |    |            |     |
-//     |    |            |     |nyb2
-//     |    |            |     |
-//     |    |            |     |
-//     |----+------------+-----|      1.0-Yfraction2
-//     |    |            |     |nyc2
-//     |____|____________|_____|   interface
-//     |    |            |     |
-//     |    |            |     |nyc1
-//     |----+------------+-----|      Yfraction2
-//     |    |            |     |
-//     |    |            |     |
-//     |    |            |     |
-//     |    |            |     |nyb1
-//     |    |            |     |
-//     |    |            |     |
-//     |    |            |     |
-//     |----+------------+-----|      Yfraction1
-//     |    |            |     |nya1
-//     |____|____________|_____|
-//      nxa     nxb        nxc
+//                                   Xfraction2
+//                      |---------------->
+//
+//                       Xfraction1
+//                      |---->
+//             _         _______________________      _ _    _ _
+//            /         |     |           |     |      |      |
+//            |    nya2 |     |           |     |     \|/     |
+//            |         |-----+-----------+-----| Y2fraction1 |
+//            |         |     |           |     |             |
+//            |         |     |           |     |             |
+//  Fluid 2 --|    nyb2 |     |           |     |             |
+//            |         |     |           |     |             |
+//            |         |     |           |     |            \|/
+//            |         |-----+-----------+-----|      Y2fraction2
+//            |    nyc2 |     |           |     |
+//            \_        |_____|___________|_____|
+//            /         |     | INTERFACE |     |
+//            |    nyc1 |     |           |     |
+//            |         |-----+-----------+-----|      Y1fraction2
+//            |         |     |           |     |            /|\.
+//            |         |     |           |     |             |
+//            |         |     |           |     |             |
+//  Fluid 1 --|    nyb1 |     |           |     |             |
+//            |         |     |           |     |             |
+//            |         |     |           |     |             |
+//            |         |     |           |     |             |
+//            |         |-----+-----------+-----| Y1fraction1 |
+//            |    nya1 |     |           |     |     /|\     |
+//            \_        |_____|___________|_____|     _|_    _|_
+//                        nxa      nxb      nxc
 //
 //======================================================================
 template <class ELEMENT, class INTERFACE_ELEMENT >
 class Axisym3x6TwoLayerSpineMesh : 
 public virtual TwoLayerSpineMesh<ELEMENT,INTERFACE_ELEMENT>
 {
-private:
- //Data to hold the number of elements in each section of the mesh
+
+  private:
+
+ // Data to hold the number of elements in each section of the mesh
  unsigned Nxa, Nxb, Nxc, Nya1, Nyb1, Nyc1, Nya2, Nyb2, Nyc2;
- //Data that holds the fractions along the channel in which to introduce
- //the second zones
- double Xfraction1, Xfraction2, Yfraction1, Yfraction2;
+
+ // Data that holds the fractions along the channel in which to
+ // introduce the second zones
+ double Xfraction1, Xfraction2;
+ double Y1fraction1, Y1fraction2;
+ double Y2fraction1, Y2fraction2;
 
 public:
 
@@ -397,20 +432,20 @@ public:
  /// the interface for fluid 2; lx: length of mesh in the x direction; 
  /// h1: the height of fluid 1; h2: the height of fluid 2.
  /// Also pass pointer to timestepper (defaults to Static)
- Axisym3x6TwoLayerSpineMesh(const unsigned &nxa,
-                            const unsigned &nxb,
-                            const unsigned &nxc,
-                            const unsigned &nya1,
-                            const unsigned &nyb1,
-                            const unsigned &nyc1,
-                            const unsigned &nya2,
-                            const unsigned &nyb2,
-                            const unsigned &nyc2,
-                            const double &lx,
-                            const double &h1,
-                            const double &h2,
-                            TimeStepper* time_stepper_pt=
-                            &Mesh::Default_TimeStepper);
+ /* Axisym3x6TwoLayerSpineMesh(const unsigned &nxa, */
+/*                             const unsigned &nxb, */
+/*                             const unsigned &nxc, */
+/*                             const unsigned &nya1, */
+/*                             const unsigned &nyb1, */
+/*                             const unsigned &nyc1, */
+/*                             const unsigned &nya2, */
+/*                             const unsigned &nyb2, */
+/*                             const unsigned &nyc2, */
+/*                             const double &lx, */
+/*                             const double &h1, */
+/*                             const double &h2, */
+/*                             TimeStepper* time_stepper_pt= */
+/*                             &Mesh::Default_TimeStepper); */
  
 
  /// \short Simple constructor: nxa: number of elements in x direction
@@ -431,16 +466,18 @@ public:
  Axisym3x6TwoLayerSpineMesh(const unsigned &nxa,
                             const unsigned &nxb,
                             const unsigned &nxc,
-                            const double &Xfrac1,
-                            const double &Xfrac2,
+                            const double &x_frac1,
+                            const double &x_frac2,
                             const unsigned &nya1,
                             const unsigned &nyb1,
                             const unsigned &nyc1,
                             const unsigned &nya2,
                             const unsigned &nyb2,
                             const unsigned &nyc2,
-                            const double &Yfrac1,
-                            const double &Yfrac2,
+                            const double &y1_frac1,
+                            const double &y1_frac2,
+                            const double &y2_frac1,
+                            const double &y2_frac2,
                             const double &lx,
                             const double &h1,
                             const double &h2,

@@ -139,7 +139,7 @@ public:
  QuadTree* quadtree_pt() 
   {return dynamic_cast<QuadTree*>(Tree_pt);}
 
- /// Pointer to octree representation of this element
+ /// Pointer to quadtree representation of this element
  QuadTree* quadtree_pt() const  {return dynamic_cast<QuadTree*>(Tree_pt);}
 
  /// \short Markup all hanging nodes & document the results in

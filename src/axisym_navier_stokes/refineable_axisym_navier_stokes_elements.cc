@@ -105,7 +105,6 @@ double scaled_re_inv_ro = re_invro()*density_ratio();
 double visc_ratio = viscosity_ratio(); // hierher -- rewrite and
                                        // make consistent with 
                                        //non-refineable version
-double dens_ratio = density_ratio();
 Vector<double> G = g();
     
 //Integers to store the local equation and unknown numbers
@@ -320,7 +319,7 @@ for(unsigned ipt=0;ipt<Nintpt;ipt++)
            //If it's not a boundary condition
            //Add the user-defined body force terms
            //Remember to multiply by the density ratio!
-           sum += r*dens_ratio*body_force[1]*testf[l]*W*hang_weight;
+           sum += r*body_force[1]*testf[l]*W*hang_weight;
                 
            //Add the gravitational body force term
            sum += r*scaled_re_inv_fr*testf[l]*G[1]*W*hang_weight;
@@ -367,7 +366,7 @@ for(unsigned ipt=0;ipt<Nintpt;ipt++)
           case 2:
            //Add the user-defined body force terms
            //Remember to multiply by the density ratio!
-           sum += r*dens_ratio*body_force[2]*testf[l]*W*hang_weight;
+           sum += r*body_force[2]*testf[l]*W*hang_weight;
                 
            //Add the gravitational body force term
            sum += r*scaled_re_inv_fr*testf[l]*G[2]*W*hang_weight;

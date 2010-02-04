@@ -34,6 +34,9 @@
 namespace oomph
 {
 
+////////////////////////////////////////////////////////////////
+//       1D Qelements
+////////////////////////////////////////////////////////////////
 
 //Assign the static dimension of each node
 template<unsigned NNODE_1D>
@@ -52,6 +55,58 @@ const double QElement<1,NNODE_1D>::S_max=1.0;
 //=======================================================================
 template<unsigned NNODE_1D>
 Gauss<1,NNODE_1D> QElement<1,NNODE_1D>::Default_integration_scheme;
+
+
+//==================================================================
+/// Return the node at the specified local coordinate
+//==================================================================
+template<unsigned NNODE_1D>
+Node* QElement<1,NNODE_1D>::
+get_node_at_local_coordinate(const Vector<double> &s)
+{
+ //Load the tolerance into a local variable
+ double tol = FiniteElement::Node_location_tolerance;
+ //There is one possible index.
+ Vector<int> index(1);
+
+ // Determine the index
+ // -------------------
+
+ // If we are at the lower limit, the index is zero
+ if(std::abs(s[0] + 1.0) < tol)
+  {
+   index[0] = 0;
+  }
+ // If we are at the upper limit, the index is the number of nodes minus 1
+ else if(std::abs(s[0] - 1.0) < tol)
+  {
+   index[0] = NNODE_1D-1;
+  }
+ // Otherwise, we have to calculate the index in general
+ else
+  {
+   // For uniformly spaced nodes the node number would be
+   double float_index = 0.5*(1.0 + s[0])*(NNODE_1D-1);
+   // Convert to an integer by taking the floor (rounding down) 
+   index[0] = static_cast<int>(std::floor(float_index));
+   // What is the excess. This should be safe because the
+   // we have rounded down
+   double excess = float_index - index[0];
+   // If the excess is bigger than our tolerance there is no node,
+   // return null
+   // Note that we test at both lower and upper ends.
+   if((excess > tol) && ((1.0 - excess) > tol))
+    {
+     return 0;
+    }
+   // If we are at the upper end (i.e. the system has actually rounded up)
+   // we need to add one to the index
+   if((1.0 - excess) <= tol) {index[0] += 1;}
+  }
+ // If we've got here we have a node, so let's return a pointer to it
+ return node_pt(index[0]);
+}
+
 
 //=======================================================================
 ///Shape function for specific QElement<1,..>

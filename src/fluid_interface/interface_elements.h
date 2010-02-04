@@ -48,7 +48,7 @@ namespace oomph
 /// The elemental dimensions will be one less than those of the
 /// surface elements, or two less than those of the original bulk elements.
 /// Thus in two-dimensional and axi-symmetric problems, they will be points,
-/// but in three-dimensional problems, they well be lines.
+/// but in three-dimensional problems, they will be lines.
 /// These edges may be in contact with a solid surface, in which case
 /// the normal to that surface must be provided.
 //=========================================================================
@@ -172,8 +172,8 @@ class FluidInterfaceEdgeElement : public virtual FaceElement
      {
       std::string error_message = "Contact angle not set\n";
       error_message += 
-       "Please use FluidInterfaceEdgeElement::set_contact_angle_left()\n";
-      
+       "Please use FluidInterfaceEdgeElement::set_contact_angle()\n";
+
       throw OomphLibError(error_message,
                           "FluidInterfaceEdgeElement::contact_angle()",
                           OOMPH_EXCEPTION_LOCATION);
@@ -635,7 +635,7 @@ public:
   {
    //Find out how many nodes there are
    unsigned n_node = nnode();
-   
+
    //Call the derivatives of the shape function
    Shape psif(n_node);
    DShape dpsifds(n_node,1);

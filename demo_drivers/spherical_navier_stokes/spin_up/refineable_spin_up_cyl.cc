@@ -150,6 +150,30 @@ public:
    fix_pressure(0,0,0.0);
   }
  
+ /// Set initial conditions: Set all nodal velocities to zero and
+ /// initialise the previous velocities to correspond to an impulsive
+ /// start
+ void set_initial_condition()
+  {
+   // Determine number of nodes in mesh
+   const unsigned n_node = mesh_pt()->nnode();
+
+   // Loop over all nodes in mesh
+   for(unsigned n=0;n<n_node;n++)
+    {
+     // Loop over the three velocity components
+     for(unsigned i=0;i<3;i++)
+      {
+       // Set velocity component i of node n to zero
+       mesh_pt()->node_pt(n)->set_value(i,0.0);
+      }
+    }
+
+   // Initialise the previous velocity values for timestepping
+   // corresponding to an impulsive start
+   assign_initial_values_impulsive();
+
+  } // End of set_initial_condition
  
  // Access function for the specific mesh
  RefineableQuarterCircleSectorMesh<ELEMENT>* mesh_pt() 
@@ -454,8 +478,8 @@ int main()
     // in the problem.
     problem.initialise_dt(dt);
  
-    // Set IC
-    problem.assign_initial_values_impulsive();
+    // Set initial conditions
+    problem.set_initial_condition();
     
     // Over-ride the maximum and minimum permitted errors
     problem.mesh_pt()->max_permitted_error() = 1.0e-2; //Default = 1.0e-3

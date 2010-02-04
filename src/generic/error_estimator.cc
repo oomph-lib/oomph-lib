@@ -57,10 +57,44 @@ void Z2ErrorEstimator::shape_rec(const Vector<double>& x,
    // 1D:
    //====
 
-   throw OomphLibError(
-    "Recovery shape functions haven't been implemented for 1D",
-    "Z2ErrorEstimator::shape_rec()",
-    OOMPH_EXCEPTION_LOCATION);
+   /// Find order of recovery shape functions
+   switch(recovery_order())
+   {
+    case 1:
+
+     // Complete linear polynomial in 1D:
+     psi_r[0]=1.0;
+     psi_r[1]=x[0];
+     break;
+
+    case 2:
+
+     // Complete quadratic polynomial in 1D:
+     psi_r[0]=1.0;
+     psi_r[1]=x[0];
+     psi_r[2]=x[0]*x[0];
+     break;
+
+    case 3:
+
+     // Complete cubic polynomial in 1D:
+     psi_r[0]=1.0;
+     psi_r[1]=x[0];
+     psi_r[2]=x[0]*x[0];
+     psi_r[3]=x[0]*x[0]*x[0];
+     break;
+
+    default:
+
+     error_stream 
+      << "Recovery shape functions for recovery order " 
+      << recovery_order() << " haven't yet been implemented for 2D" 
+      << std::endl;
+
+     throw OomphLibError(error_stream.str(),
+                         "Z2ErrorEstimator::shape_rec()",
+                         OOMPH_EXCEPTION_LOCATION);
+   }
    break;
 
   case 2:
@@ -547,7 +581,7 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
  unsigned num_recovery_terms;
 
 #ifdef PARANOID
- if ((dim!=2)&&(dim!=3))
+ if ((dim!=1)&&(dim!=2)&&(dim!=3))
   {
    std::string error_message =
     "THIS HASN'T BEEN USED/VALIDATED YET -- CHECK NUMBER OF RECOVERY TERMS!\n";

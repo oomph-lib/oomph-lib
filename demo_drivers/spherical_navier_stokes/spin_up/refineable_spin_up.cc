@@ -129,8 +129,10 @@ public:
  
  /// \short Update the problem specs before next timestep: 
  /// Set Dirichlet boundary conditions from exact solution.
- void actions_before_implicit_timestep() {set_boundary_conditions();}
-
+ void actions_before_implicit_timestep()
+  { 
+   set_boundary_conditions(); 
+  }
 
  /// After adaptation: Pin pressure again (the previously pinned
  /// value might have disappeared) and pin redudant pressure dofs.
@@ -150,7 +152,31 @@ public:
    // Now set the pressure in first element at 'node' 0 to 0.0
    fix_pressure(0,0,0.0);
   }
- 
+
+ /// Set initial conditions: Set all nodal velocities to zero and
+ /// initialise the previous velocities to correspond to an impulsive
+ /// start
+ void set_initial_condition()
+  {
+
+   // Determine number of nodes in mesh
+   const unsigned n_node = mesh_pt()->nnode();
+
+   // Loop over all nodes in mesh
+   for(unsigned n=0;n<n_node;n++)
+    {
+     // Loop over the three velocity components
+     for(unsigned i=0;i<3;i++)
+      {
+       // Set velocity component i of node n to zero
+       mesh_pt()->node_pt(n)->set_value(i,0.0);
+      }
+    }
+   // Initialise the previous velocity values for timestepping
+   // corresponding to an impulsive start
+   assign_initial_values_impulsive();
+   
+  } // End of set_initial_condition
  
  // Access function for the specific mesh
  RefineableRectangularQuadMesh<ELEMENT>* mesh_pt() 
@@ -293,6 +319,8 @@ RefineableSphericalSpinUpProblem<ELEMENT>::RefineableSphericalSpinUpProblem()
 template<class ELEMENT>
 void RefineableSphericalSpinUpProblem<ELEMENT>::set_boundary_conditions()
 {
+ cout << "Setting boundary conditions....." << endl;
+
  // Get current time
  double time=time_pt()->time();
  
@@ -479,8 +507,8 @@ int main()
     // in the problem.
     problem.initialise_dt(dt);
  
-    // Set IC
-    problem.assign_initial_values_impulsive();
+    // Set initial conditions
+    problem.set_initial_condition();
     
     // Over-ride the maximum and minimum permitted errors
     problem.mesh_pt()->max_permitted_error() = 1.0e-2; //Default = 1.0e-3
