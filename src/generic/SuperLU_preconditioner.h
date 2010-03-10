@@ -78,10 +78,11 @@ class SuperLUPreconditioner : public Preconditioner
                << std::endl;
     if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt) != 0)
      {
-      Distribution_pt->
-       rebuild((dynamic_cast<DistributableLinearAlgebraObject*>
+      LinearAlgebraDistribution dist
+       ((dynamic_cast<DistributableLinearAlgebraObject*>
                 (matrix_pt))->distribution_pt()->communicator_pt(),
                matrix_pt->nrow(),false);
+      this->build_distribution(dist);
       solver.factorise(matrix_pt);
      }
     else

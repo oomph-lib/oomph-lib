@@ -53,12 +53,6 @@ namespace oomph
      // Initialise pointers
      Epetra_preconditioner_pt=0;
      Epetra_matrix_pt=0;
-     Epetra_map_pt=0;
-     Epetra_col_map_pt=0;
-     Epetra_comm_pt=0;
-#ifdef OOMPH_HAS_MPI
-     Epetra_global_rows=0;
-#endif     
     }
    
    /// \short Destructor. 
@@ -77,24 +71,6 @@ namespace oomph
      // delete the epetra matrix
      delete Epetra_matrix_pt;    
      Epetra_matrix_pt = 0;
-
-     // delete the epetra matrix row map
-     delete Epetra_map_pt;    
-     Epetra_map_pt = 0;
-
-     // delete the epetra matrix col map
-     delete Epetra_col_map_pt;
-     Epetra_col_map_pt = 0;
-
-     // delete the epetra matrix row map
-     delete Epetra_comm_pt;    
-     Epetra_comm_pt = 0;
-     
-#ifdef OOMPH_HAS_MPI
-     // delete the vector of global rows
-     delete[] Epetra_global_rows;
-     Epetra_global_rows = 0;
-#endif
     }
    
    /// Broken copy constructor.
@@ -157,24 +133,6 @@ namespace oomph
    /// \short Pointer used to store the epetra matrix - only used when this 
    /// preconditioner is setup using the oomph-lib interface
    Epetra_CrsMatrix* Epetra_matrix_pt;
-
-   /// \short Pointer to store the row map of the Epetra_matrix
-   Epetra_Map* Epetra_map_pt;
-
-   /// \short point to store the column map of the the Epetra_matrix
-   Epetra_Map* Epetra_col_map_pt;
-
-#ifdef OOMPH_HAS_MPI
-   /// \short Global rows of the Epetra_matrix_pt - only used when this 
-   /// preconditioner is setup using the oomph-lib interface (and MPI)
-   int* Epetra_global_rows;
-
-   /// \short Epetra communicator object (MPI version)
-   Epetra_MpiComm* Epetra_comm_pt;
-#else
-   /// \short Epetra communicator object (serial version)
-   Epetra_SerialComm* Epetra_comm_pt;
-#endif
   };
 
 

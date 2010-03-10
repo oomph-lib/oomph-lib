@@ -165,9 +165,9 @@ void HSL_MA42::solve(Problem* const &problem_pt, DoubleVector &result)
  
  // Storage for recommendations for lenbuf so we can check how
  // close our factors are
- int lenbuf0_recommendation;
- int lenbuf1_recommendation;
- int lenbuf2_recommendation;
+ int lenbuf0_recommendation=0;
+ int lenbuf1_recommendation=0;
+ int lenbuf2_recommendation=0;
 
  // Provide storage
  int lenbuf[3];
@@ -189,8 +189,8 @@ void HSL_MA42::solve(Problem* const &problem_pt, DoubleVector &result)
 
  // Storage for recommendations for front size so we can check how
  // close our factors are
- double front0_recommendation;
- double front1_recommendation;
+ double front0_recommendation=0;
+ double front1_recommendation=0;
 
 
  // Flag to indicate if exact, required values for nfront are available

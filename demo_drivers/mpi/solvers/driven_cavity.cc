@@ -169,6 +169,22 @@ public:
  /// Doc the solution
  void doc_solution(DocInfo& doc_info);
 
+ /// 
+ void actions_before_adapt(){}
+
+ /// 
+ void actions_after_adapt(){
+  RefineableNavierStokesEquations<2>::
+   unpin_all_pressure_dofs(mesh_pt()->element_pt());
+  RefineableNavierStokesEquations<2>::
+   pin_redundant_nodal_pressures(mesh_pt()->element_pt());
+ }
+
+ /// 
+ void actions_before_distribute(){}
+
+ /// 
+ void actions_after_distribute(){}
 
 private:
 

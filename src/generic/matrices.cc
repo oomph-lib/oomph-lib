@@ -414,7 +414,8 @@ void DenseDoubleMatrix::eigenvalues_by_jacobi(Vector<double> & eigen_vals,
 //============================================================================
 ///  Multiply the matrix by the vector x: soln=Ax
 //============================================================================
-void DenseDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
+void DenseDoubleMatrix::multiply
+(const DoubleVector &x, DoubleVector &soln) const
 {
 #ifdef PARANOID
  // Check to see if x.size() = ncol().
@@ -440,7 +441,7 @@ void DenseDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
                        OOMPH_EXCEPTION_LOCATION);
   }
  // if soln is setup...
- if (soln.distribution_setup())
+ if (soln.built())
   {
    // check that soln is not distributed
    if (soln.distributed())
@@ -478,7 +479,7 @@ void DenseDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
 #endif
 
  // if soln is not setup then setup the distribution
- if (!soln.distribution_setup())
+ if (!soln.built())
   {
    LinearAlgebraDistribution* dist_pt = 
     new LinearAlgebraDistribution(x.distribution_pt()->communicator_pt(),
@@ -489,7 +490,7 @@ void DenseDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
  soln.initialise(0.0);
 
  // Multiply the matrix A, by the vector x 
- double* x_pt = x.values_pt();
+ const double* x_pt = x.values_pt();
  double* soln_pt = soln.values_pt();
  for (unsigned long i=0;i<N;i++)
   {
@@ -505,7 +506,7 @@ void DenseDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
 /// Multiply the transposed matrix by the vector x: soln=A^T x
 //=================================================================
 void DenseDoubleMatrix::multiply_transpose(const DoubleVector &x, 
-                                           DoubleVector &soln)
+                                           DoubleVector &soln) const
 {
 #ifdef PARANOID
  // Check to see if x.size() = ncol().
@@ -531,7 +532,7 @@ void DenseDoubleMatrix::multiply_transpose(const DoubleVector &x,
                        OOMPH_EXCEPTION_LOCATION);
   }
  // if soln is setup...
- if (soln.distribution_setup())
+ if (soln.built())
   {
    // check that soln is not distributed
    if (soln.distributed())
@@ -569,7 +570,7 @@ void DenseDoubleMatrix::multiply_transpose(const DoubleVector &x,
 #endif
 
  // if soln is not setup then setup the distribution
- if (!soln.distribution_setup())
+ if (!soln.built())
   {
    LinearAlgebraDistribution* dist_pt = 
     new LinearAlgebraDistribution(x.distribution_pt()->communicator_pt(),
@@ -583,7 +584,7 @@ void DenseDoubleMatrix::multiply_transpose(const DoubleVector &x,
 
  // Matrix vector product
  double* soln_pt = soln.values_pt();
- double* x_pt = x.values_pt();
+ const double* x_pt = x.values_pt();
  for (unsigned long i=0;i<N;i++)
   {  
    for (unsigned long j=0;j<M;j++)
@@ -744,7 +745,7 @@ void CCDoubleMatrix::lubksub(DoubleVector &rhs)
 //===================================================================
 ///  Multiply the matrix by the vector x
 //===================================================================
-void CCDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
+void CCDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln) const
 {
 #ifdef PARANOID
  // Check to see if x.size() = ncol().
@@ -770,7 +771,7 @@ void CCDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
                        OOMPH_EXCEPTION_LOCATION);
   }
  // if soln is setup...
- if (soln.distribution_setup())
+ if (soln.built())
   {
    // check that soln is not distributed
    if (soln.distributed())
@@ -808,7 +809,7 @@ void CCDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
 #endif
 
  // if soln is not setup then setup the distribution
- if (!soln.distribution_setup())
+ if (!soln.built())
   {
    LinearAlgebraDistribution* dist_pt = 
     new LinearAlgebraDistribution(x.distribution_pt()->communicator_pt(),
@@ -822,7 +823,7 @@ void CCDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
  
  // multiply
  double* soln_pt = soln.values_pt();
- double* x_pt = x.values_pt();
+ const double* x_pt = x.values_pt();
  for (unsigned long j=0;j<N;j++)
   {
    for (long k=Column_start[j];k<Column_start[j+1];k++)
@@ -841,7 +842,7 @@ void CCDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
 /// Multiply the  transposed matrix by the vector x: soln=A^T x
 //=================================================================
 void CCDoubleMatrix::multiply_transpose(const DoubleVector &x, 
-                                        DoubleVector &soln)
+                                        DoubleVector &soln) const
 {
 #ifdef PARANOID
  // Check to see if x.size() = ncol().
@@ -867,7 +868,7 @@ void CCDoubleMatrix::multiply_transpose(const DoubleVector &x,
                        OOMPH_EXCEPTION_LOCATION);
   }
  // if soln is setup...
- if (soln.distribution_setup())
+ if (soln.built())
   {
    // check that soln is not distributed
    if (soln.distributed())
@@ -905,7 +906,7 @@ void CCDoubleMatrix::multiply_transpose(const DoubleVector &x,
 #endif
 
  // if soln is not setup then setup the distribution
- if (!soln.distribution_setup())
+ if (!soln.built())
   {
    LinearAlgebraDistribution* dist_pt = 
     new LinearAlgebraDistribution(x.distribution_pt()->communicator_pt(),
@@ -919,7 +920,7 @@ void CCDoubleMatrix::multiply_transpose(const DoubleVector &x,
  
  // Matrix vector product
  double* soln_pt = soln.values_pt();
- double* x_pt = x.values_pt();
+ const double* x_pt = x.values_pt();
  for (unsigned long i=0;i<N;i++)
   {  
    
@@ -1366,13 +1367,60 @@ CRDoubleMatrix::CRDoubleMatrix()
   }
 
 //=============================================================================
+/// Copy constructor
+//=============================================================================
+CRDoubleMatrix::CRDoubleMatrix(const CRDoubleMatrix& other_matrix)
+{
+ // copy the distribution
+ this->build_distribution(other_matrix.distribution_pt());
+
+ // copy coefficients
+ const double* values_pt = other_matrix.value();
+ const int* column_indices = other_matrix.column_index();
+ const int* row_start = other_matrix.row_start();
+ unsigned nnz = other_matrix.nnz();
+ unsigned nrow = other_matrix.nrow();
+ double* my_values_pt = new double[nnz];
+ int* my_column_indices = new int[nnz];
+ int* my_row_start = new int[nrow+1];
+ for (unsigned i = 0; i < nnz; i++)
+  {
+   my_values_pt[i] = values_pt[i];
+  }
+ for (unsigned i = 0; i < nnz; i++)
+  {
+   my_column_indices[i] = column_indices[i];
+  }
+ for (unsigned i = 0; i <= nrow; i++)
+  {
+   my_row_start[i] = row_start[i];
+  }
+ this->build_without_copy(other_matrix.ncol(),nnz,my_values_pt,
+                          my_column_indices,my_row_start);
+
+ // set the default solver
+ Linear_solver_pt = Default_linear_solver_pt = new SuperLUSolver;
+ 
+ // matrix not built
+ Built = true;
+
+ // set the serial matrix-matrix multiply method
+#ifdef HAVE_TRILINOS
+ Serial_matrix_matrix_multiply_method = 2;
+#else
+ Serial_matrix_matrix_multiply_method = 2;
+#endif
+}
+
+
+//=============================================================================
 /// Constructor: just stores the distribution but does not build the
 /// matrix
 //=============================================================================
 CRDoubleMatrix::CRDoubleMatrix(const LinearAlgebraDistribution* 
                                distribution_pt)
   {
-   Distribution_pt->rebuild(distribution_pt);
+   this->build_distribution(distribution_pt);
 
    // set the default solver
    Linear_solver_pt = Default_linear_solver_pt = new SuperLUSolver;
@@ -1404,7 +1452,7 @@ CRDoubleMatrix::CRDoubleMatrix(const LinearAlgebraDistribution* dist_pt,
  CR_matrix.build(value,column_index,row_start,dist_pt->nrow_local(),ncol);
 
  // store the Distribution
- Distribution_pt->rebuild(dist_pt);
+ this->build_distribution(dist_pt);
 
  // set the linear solver
  Linear_solver_pt = Default_linear_solver_pt = new SuperLUSolver;
@@ -1436,7 +1484,7 @@ CRDoubleMatrix::~CRDoubleMatrix()
 void CRDoubleMatrix::build(const LinearAlgebraDistribution* distribution_pt)
 {
  this->clear();
- Distribution_pt->rebuild(distribution_pt);
+ this->build_distribution(distribution_pt);
 }
 
 //=============================================================================
@@ -1444,7 +1492,7 @@ void CRDoubleMatrix::build(const LinearAlgebraDistribution* distribution_pt)
 //=============================================================================
 void CRDoubleMatrix::clear() 
 {
- Distribution_pt->clear();
+ this->clear_distribution();
  CR_matrix.clean_up_memory();
  Built = false;
  Linear_solver_pt->clean_up_memory();
@@ -1465,27 +1513,27 @@ void CRDoubleMatrix::build(const LinearAlgebraDistribution* distribution_pt,
  this->clear();
 
  // store the Distribution
- Distribution_pt->rebuild(distribution_pt);
+ this->build_distribution(distribution_pt);
 
  // set the linear solver
  Default_linear_solver_pt = new SuperLUSolver;   
 
  // now build the matrix
- this->build_matrix(ncol,value,column_index,row_start);
+ this->build(ncol,value,column_index,row_start);
 }
 
 //=============================================================================
 /// \short method to rebuild the matrix, but not the distribution
 //=============================================================================
-void CRDoubleMatrix::build_matrix(const unsigned& ncol,
-                                  const Vector<double>& value,
-                                  const Vector<int>& column_index,
-                                  const Vector<int>& row_start)
+void CRDoubleMatrix::build(const unsigned& ncol,
+			   const Vector<double>& value,
+			   const Vector<int>& column_index,
+			   const Vector<int>& row_start)
 {
  // call the underlying build method
  CR_matrix.clean_up_memory();
  CR_matrix.build(value,column_index,row_start,
-                 Distribution_pt->nrow_local(),ncol);
+                 this->nrow_local(),ncol);
 
  // matrix has been build
  Built = true;
@@ -1494,16 +1542,16 @@ void CRDoubleMatrix::build_matrix(const unsigned& ncol,
 //=============================================================================
 /// \short method to rebuild the matrix, but not the distribution
 //=============================================================================
-void CRDoubleMatrix::build_matrix_without_copy(const unsigned& ncol,
-                                               const unsigned& nnz,
-                                               double* value,
-                                               int* column_index,
-                                               int* row_start)
+void CRDoubleMatrix::build_without_copy(const unsigned& ncol,
+					const unsigned& nnz,
+					double* value,
+					int* column_index,
+					int* row_start)
 {
  // call the underlying build method
  CR_matrix.clean_up_memory();
  CR_matrix.build_without_copy(value,column_index,row_start,nnz,
-                              Distribution_pt->nrow_local(),ncol);
+                              this->nrow_local(),ncol);
 
  // matrix has been build
  Built = true;
@@ -1539,7 +1587,7 @@ void CRDoubleMatrix::lubksub(DoubleVector &rhs)
 {
 #ifdef PARANOID
  // check that the rhs vector is setup
- if (!rhs.distribution_setup())
+ if (!rhs.built())
   {
    std::ostringstream error_message_stream;
    error_message_stream 
@@ -1549,7 +1597,7 @@ void CRDoubleMatrix::lubksub(DoubleVector &rhs)
                        OOMPH_EXCEPTION_LOCATION);
   }
  // check that the rhs vector has the same distribution as this matrix
- if (!(*Distribution_pt == *rhs.distribution_pt()))
+ if (!(*this->distribution_pt() == *rhs.distribution_pt()))
   {
    std::ostringstream error_message_stream;
    error_message_stream 
@@ -1568,7 +1616,7 @@ void CRDoubleMatrix::lubksub(DoubleVector &rhs)
 //=============================================================================
 ///  Multiply the matrix by the vector x
 //=============================================================================
-void CRDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
+void CRDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln) const
 {
 #ifdef PARANOID
  // check that this matrix is built
@@ -1582,7 +1630,7 @@ void CRDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
                        OOMPH_EXCEPTION_LOCATION);
   }
  // check that the distribution of x is setup
- if (!x.distribution_setup())
+ if (!x.built())
   {
  std::ostringstream error_message_stream;
    error_message_stream 
@@ -1603,9 +1651,9 @@ void CRDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
                        OOMPH_EXCEPTION_LOCATION);
   }
  // if the soln is distributed
- if (soln.distribution_setup())
+ if (soln.built())
   {
-   if (!(*soln.distribution_pt() == Distribution_pt))
+   if (!(*soln.distribution_pt() == *this->distribution_pt()))
     {
      std::ostringstream error_message_stream;
      error_message_stream 
@@ -1619,7 +1667,7 @@ void CRDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
 #endif
 
  // if soln is not setup then setup the distribution
- if (!soln.distribution_setup())
+ if (!soln.built())
   {
    // Resize and initialize the solution vector
    soln.build(this->distribution_pt(),0.0);
@@ -1632,7 +1680,7 @@ void CRDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
   {
 #ifdef HAVE_TRILINOS
  // This will only work if we have trilinos on board
- TrilinosHelpers::multiply(*this,x,soln);
+ TrilinosEpetraHelpers::multiply(this,x,soln);
 #else
    std::ostringstream error_message_stream;
    error_message_stream 
@@ -1650,7 +1698,7 @@ void CRDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
    const int* column_index = CR_matrix.column_index();
    const double* value = CR_matrix.value();
    double* soln_pt = soln.values_pt();
-   double* x_pt = x.values_pt();
+   const double* x_pt = x.values_pt();
    for (unsigned long i=0;i<n;i++)
     {  
      soln_pt[i] = 0.0;
@@ -1670,7 +1718,7 @@ void CRDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln)
 /// Multiply the  transposed matrix by the vector x: soln=A^T x
 //=================================================================
 void CRDoubleMatrix::multiply_transpose(const DoubleVector &x, 
-                                        DoubleVector &soln)
+                                        DoubleVector &soln) const
 {
 #ifdef PARANOID
  // check that this matrix is built
@@ -1684,7 +1732,7 @@ void CRDoubleMatrix::multiply_transpose(const DoubleVector &x,
                        OOMPH_EXCEPTION_LOCATION);
   }
  // Check to see if x.size() = ncol().
- if (!(*Distribution_pt == *x.distribution_pt()))
+ if (!(*this->distribution_pt() == *x.distribution_pt()))
   {
    std::ostringstream error_message_stream;
    error_message_stream 
@@ -1694,7 +1742,7 @@ void CRDoubleMatrix::multiply_transpose(const DoubleVector &x,
                        OOMPH_EXCEPTION_LOCATION);
   }
  // if soln is setup then it should have the same distribution as x
- if (soln.distribution_setup())
+ if (soln.built())
   {
    if (soln.distribution_pt()->nrow() != this->ncol())
     {
@@ -1710,7 +1758,7 @@ void CRDoubleMatrix::multiply_transpose(const DoubleVector &x,
 #endif
 
  // if soln is not setup then setup the distribution
- if (!soln.distribution_setup())
+ if (!soln.built())
   {
    LinearAlgebraDistribution* dist_pt = 
     new LinearAlgebraDistribution(x.distribution_pt()->communicator_pt(),
@@ -1724,7 +1772,7 @@ void CRDoubleMatrix::multiply_transpose(const DoubleVector &x,
   {
 #ifdef HAVE_TRILINOS
    // This will only work if we have trilinos on board
-   TrilinosHelpers::multiply(*this,x,soln);
+   TrilinosEpetraHelpers::multiply(this,x,soln);
 #else
      std::ostringstream error_message_stream;
      error_message_stream 
@@ -1742,7 +1790,7 @@ void CRDoubleMatrix::multiply_transpose(const DoubleVector &x,
    const int* column_index = CR_matrix.column_index();
    const double* value = CR_matrix.value();
    double* soln_pt = soln.values_pt();
-   double* x_pt = x.values_pt();
+   const double* x_pt = x.values_pt();
    // Matrix vector product
    for (unsigned long i=0;i<n;i++)
     {  
@@ -1777,8 +1825,8 @@ void CRDoubleMatrix::multiply_transpose(const DoubleVector &x,
 /// In a distributed matrix, only Trilinos Epetra Matrix Matrix multiply
 /// is available.
 //=============================================================================
-void CRDoubleMatrix::multiply(CRDoubleMatrix& matrix_in,
-                              CRDoubleMatrix& result)
+void CRDoubleMatrix::multiply(const CRDoubleMatrix& matrix_in,
+                              CRDoubleMatrix& result) const
 {
 #ifdef PARANOID
  // check that this matrix is built
@@ -1802,9 +1850,9 @@ void CRDoubleMatrix::multiply(CRDoubleMatrix& matrix_in,
                        OOMPH_EXCEPTION_LOCATION);
   }
  // if soln is setup then it should have the same distribution as x
- if (result.distribution_setup())
+ if (result.built())
   {
-   if (!(*result.distribution_pt() == *Distribution_pt))
+   if (!(*result.distribution_pt() == *this->distribution_pt()))
     {
      std::ostringstream error_message_stream;
      error_message_stream 
@@ -1818,9 +1866,9 @@ void CRDoubleMatrix::multiply(CRDoubleMatrix& matrix_in,
 #endif
 
  // if the result has not been setup, then store the distribution
- if (!result.distribution_setup())
+ if (!result.is_distribution_built())
   {
-   result.build(Distribution_pt);
+   result.build(this->distribution_pt());
   }
    
  // short name for Serial_matrix_matrix_multiply_method
@@ -2118,7 +2166,7 @@ void CRDoubleMatrix::multiply(CRDoubleMatrix& matrix_in,
     }
    
    // build
-   result.build_matrix_without_copy(M, Nnz, Value, Column_index, Row_start);
+   result.build_without_copy(M, Nnz, Value, Column_index, Row_start);
   }
   
  // else we have to use trilinos
@@ -2130,7 +2178,7 @@ void CRDoubleMatrix::multiply(CRDoubleMatrix& matrix_in,
       {
        use_ml = true;
       }
-     TrilinosHelpers::multiply(*this,matrix_in,result,use_ml);
+     TrilinosEpetraHelpers::multiply(*this,matrix_in,result,use_ml);
 #else
      std::ostringstream error_message;
      error_message << "Serial_matrix_matrix_multiply_method = "
@@ -2210,7 +2258,7 @@ void CRDoubleMatrix::matrix_reduction(const double &alpha,
  
  // Build the matrix from the compressed format
  dynamic_cast<CRDoubleMatrix&>(reduced_matrix).
-  build_matrix(this->ncol(),B_value,B_column_index,B_row_start);
+  build(this->ncol(),B_value,B_column_index,B_row_start);
  }
 
 //=============================================================================
@@ -2218,7 +2266,7 @@ void CRDoubleMatrix::matrix_reduction(const double &alpha,
 /// using new and returned. The calling method is responsible for the 
 /// destruction of the new matrix.
 //=============================================================================
-CRDoubleMatrix* CRDoubleMatrix::return_global_matrix()
+CRDoubleMatrix* CRDoubleMatrix::global_matrix() const
 {
 #ifdef OOMPH_HAS_MPI
  // if this matrix is not distributed then this method is redundant
@@ -2238,13 +2286,13 @@ CRDoubleMatrix* CRDoubleMatrix::return_global_matrix()
  unsigned nrow = this->nrow();
    
  // cache nproc
- int nproc = Distribution_pt->communicator_pt()->nproc();
+ int nproc = this->distribution_pt()->communicator_pt()->nproc();
 
  // get the nnzs on the other processors
  int* dist_nnz_pt = new int[nproc];
  MPI_Allgather(&nnz,1,MPI_INT,
                dist_nnz_pt,1,MPI_INT,
-               Distribution_pt->communicator_pt()->mpi_comm());
+               this->distribution_pt()->communicator_pt()->mpi_comm());
    
  // create a int vector of first rows and nrow local and compute nnz global
  int* dist_first_row = new int[nproc];
@@ -2266,9 +2314,11 @@ CRDoubleMatrix* CRDoubleMatrix::return_global_matrix()
   }
    
  // get pointers to the (current) distributed data
- int* dist_row_start = this->row_start();
- int* dist_column_index = this->column_index();
- double* dist_value = this->value();
+ // const_cast required because MPI requires non-const data when sending
+ // data
+ int* dist_row_start = const_cast<int*>(this->row_start());
+ int* dist_column_index = const_cast<int*>(this->column_index());
+ double* dist_value = const_cast<double*>(this->value());
    
  // space for the global matrix
  int* global_row_start = new int[nrow+1];
@@ -2278,17 +2328,17 @@ CRDoubleMatrix* CRDoubleMatrix::return_global_matrix()
  // get the row starts
  MPI_Allgatherv(dist_row_start,nrow_local,MPI_INT,
                 global_row_start,dist_nrow_local,dist_first_row,MPI_INT,
-                Distribution_pt->communicator_pt()->mpi_comm());
+                this->distribution_pt()->communicator_pt()->mpi_comm());
    
  // get the column indexes
  MPI_Allgatherv(dist_column_index,nnz,MPI_INT,
                 global_column_index,dist_nnz_pt,nnz_offset,MPI_INT,
-                Distribution_pt->communicator_pt()->mpi_comm());
+                this->distribution_pt()->communicator_pt()->mpi_comm());
  
  // get the values
  MPI_Allgatherv(dist_value,nnz,MPI_DOUBLE,
                 global_value,dist_nnz_pt,nnz_offset,MPI_DOUBLE,
-                Distribution_pt->communicator_pt()->mpi_comm());
+                this->distribution_pt()->communicator_pt()->mpi_comm());
    
  // finally the last row start
  global_row_start[nrow] = nnz_global;
@@ -2305,7 +2355,7 @@ CRDoubleMatrix* CRDoubleMatrix::return_global_matrix()
 
  // create the global distribution
  LinearAlgebraDistribution* dist_pt = new 
-  LinearAlgebraDistribution(Distribution_pt->communicator_pt(),nrow,false);
+  LinearAlgebraDistribution(this->distribution_pt()->communicator_pt(),nrow,false);
  
  // create the matrix
  CRDoubleMatrix* matrix_pt = new CRDoubleMatrix(dist_pt);
@@ -2314,8 +2364,8 @@ CRDoubleMatrix* CRDoubleMatrix::return_global_matrix()
  delete dist_pt;
 
  // pass data into matrix
- matrix_pt->build_matrix_without_copy(this->ncol(),nnz_global,global_value,
-                                        global_column_index,global_row_start);
+ matrix_pt->build_without_copy(this->ncol(),nnz_global,global_value,
+                               global_column_index,global_row_start);
 
  // clean up
  delete dist_first_row;
@@ -2339,19 +2389,19 @@ CRDoubleMatrix* CRDoubleMatrix::return_global_matrix()
  /// the same Communicator.
  //============================================================================
  void CRDoubleMatrix::redistribute(const LinearAlgebraDistribution* 
-                                 const& dist_pt)
+                                   const& dist_pt)
  {
 #ifdef OOMPH_HAS_MPI
 #ifdef PARANOID
    // paranoid check that the nrows for both distributions is the 
    // same
-   if (dist_pt->nrow() != Distribution_pt->nrow())
+   if (dist_pt->nrow() != this->distribution_pt()->nrow())
     {
      std::ostringstream error_message;    
      error_message << "The number of global rows in the new distribution ("
                    << dist_pt->nrow() << ") is not equal to the number"
                    << " of global rows in the current distribution ("
-                   << Distribution_pt->nrow() << ").\n"; 
+                   << this->distribution_pt()->nrow() << ").\n"; 
      throw OomphLibError(error_message.str(),
                          "CRDoubleMatrix::redistribute(...)",
                          OOMPH_EXCEPTION_LOCATION);
@@ -2359,7 +2409,7 @@ CRDoubleMatrix* CRDoubleMatrix::return_global_matrix()
    // paranoid check that the current distribution and the new distribution
    // have the same Communicator
    OomphCommunicator temp_comm(*dist_pt->communicator_pt());
-   if (!(temp_comm == *Distribution_pt->communicator_pt()))
+   if (!(temp_comm == *this->distribution_pt()->communicator_pt()))
     {
      std::ostringstream error_message;  
      error_message << "The new distribution and the current distribution must "
@@ -2381,7 +2431,7 @@ CRDoubleMatrix* CRDoubleMatrix::return_global_matrix()
 
    // if the two distributions are not the same
    // =========================================
-   if (!((*Distribution_pt) == *dist_pt))
+   if (!((*this->distribution_pt()) == *dist_pt))
     {
      
      // current data
@@ -2390,8 +2440,8 @@ CRDoubleMatrix* CRDoubleMatrix::return_global_matrix()
      double* current_value = this->value();
 
      // get the rank and the number of processors
-     int my_rank = Distribution_pt->communicator_pt()->my_rank();
-     int nproc = Distribution_pt->communicator_pt()->nproc();
+     int my_rank = this->distribution_pt()->communicator_pt()->my_rank();
+     int nproc = this->distribution_pt()->communicator_pt()->nproc();
 
      // if both distributions are distributed
      // =====================================
@@ -2482,7 +2532,7 @@ CRDoubleMatrix* CRDoubleMatrix::return_global_matrix()
             {
              MPI_Request req;
              MPI_Isend(&nnz_for_proc[p],1,MPI_UNSIGNED,p,0,
-                       Distribution_pt->communicator_pt()->mpi_comm(),&req);
+                       this->distribution_pt()->communicator_pt()->mpi_comm(),&req);
              send_req.push_back(req);
             }
            
@@ -2491,7 +2541,7 @@ CRDoubleMatrix* CRDoubleMatrix::return_global_matrix()
             {
              MPI_Request req;
              MPI_Irecv(&nnz_from_proc[p],1,MPI_UNSIGNED,p,0,
-                       Distribution_pt->communicator_pt()->mpi_comm(),&req);
+                       this->distribution_pt()->communicator_pt()->mpi_comm(),&req);
              nnz_recv_req.push_back(req);
             }
           }
@@ -2590,7 +2640,7 @@ CRDoubleMatrix* CRDoubleMatrix::return_global_matrix()
              // and send
              MPI_Request req;
              MPI_Isend(new_value,1,send_type,p,1,
-                       Distribution_pt->communicator_pt()->mpi_comm(),&req);
+                       this->distribution_pt()->communicator_pt()->mpi_comm(),&req);
              send_req.push_back(req);
              MPI_Type_free(&send_type);
             }
@@ -2645,7 +2695,7 @@ CRDoubleMatrix* CRDoubleMatrix::return_global_matrix()
              // and send
              MPI_Request req;
              MPI_Irecv(new_value,1,recv_type,p,1,
-                       Distribution_pt->communicator_pt()->mpi_comm(),&req);
+                       this->distribution_pt()->communicator_pt()->mpi_comm(),&req);
              recv_req.push_back(req);
              MPI_Type_free(&recv_type);
             }
@@ -2704,18 +2754,18 @@ CRDoubleMatrix* CRDoubleMatrix::return_global_matrix()
         }
        if (my_rank == 0)
         {
-         CRDoubleMatrix* m_pt = this->return_global_matrix();
+         CRDoubleMatrix* m_pt = this->global_matrix();
          m_pt->sparse_indexed_output("m1.dat");
         }
 
        // 
        this->build(dist_pt);
-       this->build_matrix_without_copy(dist_pt->nrow(),nnz_count,
-                                       new_value,new_column_index,
+       this->build_without_copy(dist_pt->nrow(),nnz_count,
+                                new_value,new_column_index,
                                        new_row_start);
        if (my_rank == 0)
         {
-         CRDoubleMatrix* m_pt = this->return_global_matrix();
+         CRDoubleMatrix* m_pt = this->global_matrix();
          m_pt->sparse_indexed_output("m2.dat");
         }
 //       this->sparse_indexed_output(oomph_info);
@@ -2734,13 +2784,13 @@ CRDoubleMatrix* CRDoubleMatrix::return_global_matrix()
        unsigned nrow = this->nrow();
        
        // cache nproc
-       int nproc = Distribution_pt->communicator_pt()->nproc();
+       int nproc = this->distribution_pt()->communicator_pt()->nproc();
        
        // get the nnzs on the other processors
        int* dist_nnz_pt = new int[nproc];
        MPI_Allgather(&nnz,1,MPI_INT,
                      dist_nnz_pt,1,MPI_INT,
-                     Distribution_pt->communicator_pt()->mpi_comm());
+                     this->distribution_pt()->communicator_pt()->mpi_comm());
        
        // create an int array of first rows and nrow local and 
        // compute nnz global
@@ -2830,7 +2880,7 @@ CRDoubleMatrix* CRDoubleMatrix::return_global_matrix()
             {
              MPI_Request req;
              MPI_Isend(global_value,1,send_type,p,1,
-                       Distribution_pt->communicator_pt()->mpi_comm(),&req);
+                       this->distribution_pt()->communicator_pt()->mpi_comm(),&req);
              send_req.push_back(req);
             }
           }
@@ -2888,8 +2938,9 @@ CRDoubleMatrix* CRDoubleMatrix::return_global_matrix()
              // and send 
              MPI_Request req;
              MPI_Irecv(global_value,1,recv_type,p,1,
-                       Distribution_pt->communicator_pt()->mpi_comm(),&req);
+                       this->distribution_pt()->communicator_pt()->mpi_comm(),&req);
              recv_req.push_back(req);
+             MPI_Type_free(&recv_type);
             }
           }
          // otherwise send to self
@@ -2941,17 +2992,18 @@ CRDoubleMatrix* CRDoubleMatrix::return_global_matrix()
 
        // rebuild the matrix
        LinearAlgebraDistribution* dist_pt = new 
-        LinearAlgebraDistribution(Distribution_pt->communicator_pt(),
+        LinearAlgebraDistribution(this->distribution_pt()->communicator_pt(),
                                   nrow,false);
        this->build(dist_pt);
-       this->build_matrix_without_copy(dist_pt->nrow(),nnz_count,
-                                       global_value,global_column_index,
-                                       global_row_start);
+       this->build_without_copy(dist_pt->nrow(),nnz_count,
+                                global_value,global_column_index,
+                                global_row_start);
 
        // clean up
-       delete dist_first_row;
-       delete dist_nrow_local;
-       delete dist_nnz_pt;
+       delete dist_pt;
+       delete[] dist_first_row;
+       delete[] dist_nrow_local;
+       delete[] dist_nnz_pt;
       }
 
      // other the matrix is not distributed but it needs to be turned 
@@ -2994,10 +3046,60 @@ CRDoubleMatrix* CRDoubleMatrix::return_global_matrix()
 
        // rebuild
        this->build(dist_pt);
-       this->build_matrix_without_copy(dist_pt->nrow(),nnz,dist_value,
-                                       dist_column_index,dist_row_start);
+       this->build_without_copy(dist_pt->nrow(),nnz,dist_value,
+                                dist_column_index,dist_row_start);
       }
     }
 #endif
  }
+
+//=============================================================================
+///  Multiply the matrix by the vector x
+//=============================================================================
+double CRDoubleMatrix::inf_norm() const
+  {
+#ifdef PARANOID
+   // paranoid check that the vector is setup
+   if (!this->is_distribution_built())
+    {
+     std::ostringstream error_message;
+     error_message << "This vector must be setup."; 
+     throw OomphLibError(error_message.str(),
+                         "DoubleVector::norm()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   // compute the local norm
+   unsigned nrow_local = this->nrow_local();
+   double n = 0;
+   const int* row_start = CR_matrix.row_start();
+   const double* value = CR_matrix.value();
+   for (unsigned i = 0; i < nrow_local; i++)
+    {
+     double a = 0;
+     for (int j = row_start[i]; j < row_start[i+1]; j++)
+      {
+       a += fabs(value[j]);
+      }
+     n = std::max(n,a);
+    }
+
+   // if this vector is distributed and on multiple processors then gather
+#ifdef OOMPH_HAS_MPI
+   double n2 = n;
+   if (this->distributed() && this->distribution_pt()->communicator_pt()->nproc() > 1)
+    {
+     MPI_Allreduce(&n,&n2,1,MPI_DOUBLE,MPI_MAX,
+                   this->distribution_pt()->communicator_pt()->mpi_comm());
+    }
+   n = n2;
+#endif
+
+   // sqrt the norm
+   n = sqrt(n);
+
+   // and return
+   return n;
+  }
 }

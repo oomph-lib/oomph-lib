@@ -61,16 +61,6 @@ namespace oomph {
      // null pointers
 #ifdef HAVE_TRILINOS
      Epetra_matrix_pt = 0;
-     Epetra_range_map_pt = 0;
-#ifdef OOMPH_HAS_MPI
-     Global_rows = 0;
-#endif
-     Epetra_domain_map_pt = 0;
-#ifdef OOMPH_HAS_MPI
-     Global_cols = 0;
-#endif
-     Epetra_comm_pt = 0;
-     Epetra_col_map_pt = 0;
 #endif
      Oomph_matrix_pt = 0;
      Column_distribution_pt = 0;
@@ -99,23 +89,7 @@ namespace oomph {
     {
 #ifdef HAVE_TRILINOS
      delete Epetra_matrix_pt;
-     delete Epetra_range_map_pt;
      Epetra_matrix_pt = 0;
-     Epetra_range_map_pt = 0;
-#ifdef OOMPH_HAS_MPI
-     delete[] Global_rows;
-     Global_rows = 0;
-#endif
-     delete Epetra_domain_map_pt;
-     Epetra_domain_map_pt = 0;
-#ifdef OOMPH_HAS_MPI
-     delete[] Global_cols;
-     Global_cols = 0;
-#endif
-     delete Epetra_comm_pt;
-     delete Epetra_col_map_pt;
-     Epetra_comm_pt = 0;
-     Epetra_col_map_pt = 0;
 #endif
      delete Oomph_matrix_pt;
      Oomph_matrix_pt = 0;
@@ -132,11 +106,11 @@ namespace oomph {
 
    /// \short Apply the operator to the vector x and return the result in 
    /// the vector y
-   void multiply(const DoubleVector& x, DoubleVector& y);
+   void multiply(const DoubleVector& x, DoubleVector& y) const;
 
    /// \short Apply the transpose of the operator to the vector x and return 
    /// the result in the vector y
-   void multiply_transpose(const DoubleVector& x, DoubleVector& y);
+   void multiply_transpose(const DoubleVector& x, DoubleVector& y) const;
 
    /// Access function to the number of columns.
    const unsigned& ncol() const 
@@ -146,49 +120,22 @@ namespace oomph {
 
     private:
 
-   /// Helper function to setup for oomph-lib method
-   void setup_oomph_method_helper(CRDoubleMatrix* matrix_pt);
-
 #ifdef HAVE_TRILINOS
    /// Helper function for multiply(...)
-   void multiply_helper(const DoubleVector& x, DoubleVector& y);
+   void trilinos_multiply_helper
+    (const DoubleVector& x, DoubleVector& y) const;
 
    /// Helper function for multiply_transpose(...)
-   void multiply_transpose_helper(const DoubleVector& x, DoubleVector& y);
-#endif
+   void trilinos_multiply_transpose_helper
+    (const DoubleVector& x, DoubleVector& y) const;
 
-#ifdef HAVE_TRILINOS
    /// \short The Epetra version of the matrix
    Epetra_CrsMatrix* Epetra_matrix_pt;
-
-   /// Epetra_Map for the rows of the matrix (equivalent to Distribution_pt)
-   Epetra_Map* Epetra_range_map_pt;
-
-#ifdef OOMPH_HAS_MPI   
-   /// List of global rows in the Epetra_range_map_pt
-   int* Global_rows;
 #endif
 
-   /// Epetra_map for the domain. (Equivalent to Column_distribution_pt)
-   Epetra_Map* Epetra_domain_map_pt;
-
-#ifdef OOMPH_HAS_MPI
-   /// List of global indices in the Epetra_domain_map_pt
-   int* Global_cols;
-#endif
-
-   /// An Epetra_map for the columns of the matrix
-   Epetra_Map* Epetra_col_map_pt;
-
-#ifdef OOMPH_HAS_MPI
-   /// Epetra communicator (mpi version)
-   Epetra_MpiComm* Epetra_comm_pt;
-#else
-   /// Epetra communicator (serial version)
-   Epetra_SerialComm* Epetra_comm_pt;
-#endif
-
-#endif
+   /// \short boolean indicating whether we are using trilinos to perform
+   /// matvec
+   bool Using_trilinos;
 
    /// \short an oomph-lib matrix
    CRDoubleMatrix* Oomph_matrix_pt;
@@ -197,7 +144,7 @@ namespace oomph {
    /// if using multiply_transpose(...) where this is A x = y.
    LinearAlgebraDistribution* Column_distribution_pt;
 
-   /// The number of columns (assuming not transposed)
+   /// number of columns of the matrix
    unsigned Ncol;
   };
 }

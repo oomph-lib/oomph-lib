@@ -565,11 +565,11 @@ namespace oomph
    /// \short access to thte distribution of the master preconditioner. If this
    /// preconditioner does not have a master preconditioner then the
    /// distribution of this preconditioner is returned
-   const LinearAlgebraDistribution* master_distribution_pt() const
+   const LinearAlgebraDistribution* const master_distribution_pt() const
     {
      if (Master_block_preconditioner_pt == 0)
       {
-       return this->Distribution_pt;
+       return this->distribution_pt();
       }
      else
       {
@@ -647,7 +647,7 @@ namespace oomph
     {
 
      // clear the Distributions
-     Distribution_pt->clear();
+     this->clear_distribution();
      unsigned nblock = Block_distribution_pt.size();
      for (unsigned b = 0; b < nblock; b++)
       {
@@ -906,13 +906,14 @@ namespace oomph
     }
 
    /// \short access function to the preconditioner matrix distribution pt
-   LinearAlgebraDistribution* preconditioner_matrix_distribution_pt()
+   const LinearAlgebraDistribution* const 
+    preconditioner_matrix_distribution_pt() const
     {
      if (Master_block_preconditioner_pt == 0)
       {
        return Preconditioner_matrix_distribution_pt;
       }
-     return Distribution_pt;
+     return this->distribution_pt();
     }
 
     private:
@@ -1172,22 +1173,23 @@ namespace oomph
      // assumed to be the same as the matrix if the matrix is distribuatable
      if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt))
       {
-       Distribution_pt->
-        rebuild(dynamic_cast<DistributableLinearAlgebraObject*>
-                (matrix_pt)->distribution_pt());
+       this->build_distribution
+        (dynamic_cast<DistributableLinearAlgebraObject*>
+         (matrix_pt)->distribution_pt());
       }
      else
       {
-       Distribution_pt->rebuild(problem_pt->communicator_pt(),
-                                matrix_pt->nrow(),false);
+       LinearAlgebraDistribution dist(problem_pt->communicator_pt(),
+                                      matrix_pt->nrow(),false);
+       this->build_distribution(dist);
       } 
      Nrow = matrix_pt->nrow();
 
      // boolean to indicate whether the matrix is acutally distributed
      // ie distributed and on more than one processor
      bool matrix_distributed = false;
-     if (Distribution_pt->distributed() && 
-         Distribution_pt->communicator_pt()->nproc() > 1)
+     if (this->distribution_pt()->distributed() && 
+         this->distribution_pt()->communicator_pt()->nproc() > 1)
       {
        matrix_distributed = true;
       }
@@ -1499,12 +1501,12 @@ namespace oomph
          first_dof_to_send[p] = 0;
          ndof_to_send[p] = 0;
          unsigned ptr = 0;
-         while (my_global_dofs[ptr] < required_rows(p,0) && ptr < my_ndof)
+         while (ptr < my_ndof && my_global_dofs[ptr] < required_rows(p,0)) 
           {
            ptr++;
           }
          first_dof_to_send[p] = ptr;
-         while (my_global_dofs[ptr] <= required_rows(p,1) && ptr < my_ndof)
+         while (ptr < my_ndof && my_global_dofs[ptr] <= required_rows(p,1))
           {
            ndof_to_send[p]++;
            ptr++;
@@ -1761,7 +1763,7 @@ namespace oomph
       {
 
        // set the Index_in_dof_block
-       unsigned nrow  = Distribution_pt->nrow();
+       unsigned nrow  = this->distribution_pt()->nrow();
        Index_in_dof_block.resize(nrow);
        Index_in_dof_block.initialise(0);
        for (unsigned i = 0; i < nrow; i++)
@@ -1783,8 +1785,8 @@ namespace oomph
         {
          my_nrows_in_dof_block[i] = 0;
         }
-       unsigned nrow_local = Distribution_pt->nrow_local();
-       unsigned first_row = Distribution_pt->first_row();
+       unsigned nrow_local = this->distribution_pt()->nrow_local();
+       unsigned first_row = this->distribution_pt()->first_row();
        for (unsigned i = 0; i < nrow_local; i++)
         {
          my_nrows_in_dof_block[Dof_number[first_row+i-Min_global_index]]++;
@@ -1836,14 +1838,14 @@ namespace oomph
            // first the sends
            unsigned first_row_send = 0;
            unsigned nrow_send = 0;
-           if ((required_rows(p,0) < (Distribution_pt->first_row() +
-                                      Distribution_pt->nrow_local())) &&
-               (Distribution_pt->first_row() <= required_rows(p,1)))
+           if ((required_rows(p,0) < (this->distribution_pt()->first_row() +
+                                      this->distribution_pt()->nrow_local())) &&
+               (this->distribution_pt()->first_row() <= required_rows(p,1)))
             {
-             first_row_send = std::max(Distribution_pt->first_row(),
+             first_row_send = std::max(this->distribution_pt()->first_row(),
                                        required_rows(p,0));
-             nrow_send = std::min((Distribution_pt->first_row() + 
-                                   Distribution_pt->nrow_local()),
+             nrow_send = std::min((this->distribution_pt()->first_row() + 
+                                   this->distribution_pt()->nrow_local()),
                                   required_rows(p,1)+1)
               - first_row_send;
             }
@@ -1859,14 +1861,16 @@ namespace oomph
            // and then the recvs
            unsigned first_row_recv = 0;
            unsigned nrow_recv = 0;
-           if ((required_rows(my_rank,0) < (Distribution_pt->first_row(p) +
-                                            Distribution_pt->nrow_local(p)))
-               && (Distribution_pt->first_row(p) <= required_rows(my_rank,1)))
+           if ((required_rows(my_rank,0) < 
+                (this->distribution_pt()->first_row(p) +
+                 this->distribution_pt()->nrow_local(p)))
+               && (this->distribution_pt()->first_row(p) <= 
+                   required_rows(my_rank,1)))
             {
-             first_row_recv = std::max(Distribution_pt->first_row(p),
+             first_row_recv = std::max(this->distribution_pt()->first_row(p),
                                        required_rows(my_rank,0));
-             nrow_recv = std::min(Distribution_pt->first_row(p) + 
-                                  Distribution_pt->nrow_local(p),
+             nrow_recv = std::min(this->distribution_pt()->first_row(p) + 
+                                  this->distribution_pt()->nrow_local(p),
                                   required_rows(my_rank,1)+1) - first_row_recv;
             }
 
@@ -2017,13 +2021,15 @@ namespace oomph
     {
      if (nproc == 1 || !distributed)
       {
-       Distribution_pt->rebuild(Problem_pt->communicator_pt(),Nrow,false);
+       LinearAlgebraDistribution dist(Problem_pt->communicator_pt(),Nrow,false);
+       this->build_distribution(dist);
       }
      else
       {
-       Distribution_pt->rebuild(Problem_pt->communicator_pt(),
-                                p_matrix_first_row,
-                                p_matrix_nrow_local,Nrow);
+       LinearAlgebraDistribution dist(Problem_pt->communicator_pt(),
+                                      p_matrix_first_row,
+                                      p_matrix_nrow_local,Nrow);
+       this->build_distribution(dist);
       }
     }
    else
@@ -2124,25 +2130,6 @@ namespace oomph
          // and increment the counter
          Nrows_to_send_for_get_block(b,block_p)++;
          Nrows_to_send_for_get_ordered[block_p]++;
-
-/*       // next compute the index a block ordered matrix / vector
-         unsigned l = j;
-         for (int k = 0; k < b; k++)
-          {
-           l += Block_distribution_pt[k]->nrow();
-          }
-
-         // and next the processor this global row should be sent to
-         unsigned ordered_p = 0;
-         while(!(Distribution_pt->first_row(ordered_p) <= l &&
-                 (Distribution_pt->first_row(ordered_p) +
-                  Distribution_pt->nrow_local(ordered_p) > l)))
-          {
-           ordered_p++;
-          }
-
-         // and increment the counter
-         Nrows_to_send_for_get_ordered[ordered_p]++;*/
         }
       }
 
@@ -2227,25 +2214,13 @@ namespace oomph
         }
        Rows_to_send_for_get_ordered[p] 
         = new int [Nrows_to_send_for_get_ordered[p]];
-/*
-       if (p != my_rank)
-        {
-         ordered_rows_to_send[p] 
-          = new int [Nrows_to_send_for_get_ordered[p]];
-        }
-       else
-        {
-         Rows_to_recv_for_get_ordered[p]
-          = new int [Nrows_to_send_for_get_ordered[p]];
-        }
-*/
       }
 
  
 
      // loop over my rows to allocate the nrows
      DenseMatrix<unsigned> ptr_block(Nblock_types,nproc,0);
-     Vector<unsigned> ptr_ordered(nproc,0);
+     Vector<unsigned> ptr_ordered(nproc,0); 
      for (unsigned i = 0; i < nrow_local; i++)
       {
        // the block number
@@ -2280,45 +2255,22 @@ namespace oomph
             = j - Block_distribution_pt[b]->first_row(block_p);
           }
          ptr_block(b,block_p)++;
+        }
+      }
 
-         // next block ordered
-         Rows_to_send_for_get_ordered[block_p][ptr_ordered[block_p]] = i;
-         ptr_ordered[block_p]++;
-
-/*
-         // next compute the index a block ordered matrix / vector
-         unsigned l = j;
-         for (int k = 0; k < b; k++)
+     // next block ordered
+     for (unsigned p = 0; p < nproc; ++p)
+      {
+       int pt = 0;
+       for (unsigned b = 0; b < Nblock_types; ++b)
+        {
+         
+         for (unsigned i = 0; i < Nrows_to_send_for_get_block(b,p); ++i)
           {
-           l += Block_distribution_pt[k]->nrow();
+           Rows_to_send_for_get_ordered[p][pt] = 
+            Rows_to_send_for_get_block(b,p)[i];
+           pt++;
           }
-
-         // and next the processor this global row should be sent to
-         unsigned ordered_p = 0;
-         while(!(Distribution_pt->first_row(ordered_p) <= l &&
-                 (Distribution_pt->first_row(ordered_p) +
-                  Distribution_pt->nrow_local(ordered_p) > l)))
-          {
-           ordered_p++;
-          }
-
-         // and store the row
-         Rows_to_send_for_get_ordered[ordered_p][ptr_ordered[ordered_p]] = i;
-         if (ordered_p != my_rank)
-          {
-           ordered_rows_to_send[ordered_p][ptr_ordered[ordered_p]] = 
-            l - Distribution_pt->first_row(ordered_p);
-          }
-         else
-          {
-           Rows_to_recv_for_get_ordered[ordered_p][ptr_ordered[ordered_p]] = 
-            l - Distribution_pt->first_row(ordered_p);
-          }
-         ptr_ordered[ordered_p]++;
-*/
-
-
-
         }
       }
 
@@ -2353,8 +2305,6 @@ namespace oomph
 
      // resize the storage for the incoming rows data
      Rows_to_recv_for_get_ordered.resize(nproc,0);
-     oomph_info << "Rows_to_recv_for_get_ordered.size() = "
-                << Rows_to_recv_for_get_ordered.size() << std::endl;
      for (unsigned p = 0; p < nproc; p++)
       {
        if (p != my_rank)
@@ -2388,16 +2338,6 @@ namespace oomph
              nrecv_for_rows[p]++;
             }
           }
-/*
-         if (Nrows_to_send_for_get_ordered[p] > 0)
-          {
-           nsend_for_rows[p]++;
-          }
-         if (Nrows_to_recv_for_get_ordered[p] > 0)
-          {
-           nrecv_for_rows[p]++;
-          }
-*/
         }
       }
 
@@ -2430,18 +2370,6 @@ namespace oomph
                send_ptr++;
               }
             }
-/*
-           if (Nrows_to_send_for_get_ordered[p] > 0)
-            {
-             MPI_Type_contiguous(Nrows_to_send_for_get_ordered[p],
-                                 MPI_INT,&send_types[send_ptr]);
-             MPI_Type_commit(&send_types[send_ptr]);
-             MPI_Address(ordered_rows_to_send[p],
-                         &send_displacements[send_ptr]);
-             send_displacements[send_ptr] -= base_displacement;
-             send_sz[send_ptr] = 1;
-            }
-*/
            MPI_Datatype final_send_type;
            MPI_Type_struct(nsend_for_rows[p],send_sz,send_displacements,
                            send_types,&final_send_type);
@@ -2478,18 +2406,6 @@ namespace oomph
                recv_ptr++;
               }
             }
-/*
-           if (Nrows_to_recv_for_get_ordered[p] > 0)
-            {
-             MPI_Type_contiguous(Nrows_to_recv_for_get_ordered[p],
-                                 MPI_INT,&recv_types[recv_ptr]);
-             MPI_Type_commit(&recv_types[recv_ptr]);
-             MPI_Address(Rows_to_recv_for_get_ordered[p],
-                         &recv_displacements[recv_ptr]);
-             recv_displacements[recv_ptr] -= base_displacement;
-             recv_sz[recv_ptr] = 1;
-            }
-*/
            MPI_Datatype final_recv_type;
            MPI_Type_struct(nrecv_for_rows[p],recv_sz,recv_displacements,
                            recv_types,&final_recv_type);
@@ -2522,16 +2438,11 @@ namespace oomph
      Rows_to_recv_for_get_ordered.resize(nproc);
      Rows_to_recv_for_get_ordered.initialise(0);
 
-    // construct block offset
-     DenseMatrix<unsigned> col_offset(nproc,Nblock_types,0);
-     unsigned off = 0;
-     for (unsigned p = 0; p < nproc; p++)
+     // construct block offset
+     Vector<int> vec_offset(Nblock_types);
+     for (unsigned b = 1; b < Nblock_types; ++b)
       {
-       for (unsigned b = 0; b < Nblock_types; b++)
-        {
-         col_offset(p,b) = off;
-         off += Block_distribution_pt[b]->nrow_local(p);
-        }
+       vec_offset[b]=vec_offset[b-1]+Block_distribution_pt[b]->nrow_local();
       }
 
      //
@@ -2545,7 +2456,7 @@ namespace oomph
          for (unsigned i = 0; i < Nrows_to_recv_for_get_block(b,p); i++)
           {
            Rows_to_recv_for_get_ordered[p][ptr_ordered[p]] = 
-            Rows_to_recv_for_get_block(b,p)[i]+col_offset(p,b);
+            Rows_to_recv_for_get_block(b,p)[i]+vec_offset[b];
            ptr_ordered[p]++;
           }
         }
@@ -2736,7 +2647,7 @@ namespace oomph
                                                       Vector<DoubleVector >& s)
   {
 #ifdef PARANOID
-   if (!v.distribution_pt()->setup())
+   if (!v.built())
     {
      std::ostringstream error_message;
      error_message << "The distribution of the global vector v must be setup.";
@@ -2762,15 +2673,15 @@ namespace oomph
    // if + only one processor
    //    + more than one processor but matrix_pt is not distributed
    // then use the serial get_block method
-   if (Distribution_pt->communicator_pt()->nproc() == 1 ||
-       !Distribution_pt->distributed())
+   if (this->distribution_pt()->communicator_pt()->nproc() == 1 ||
+       !this->distribution_pt()->distributed())
     {
 
      // Vector of vectors for each section of residual vector
      s.resize(nblock);
 
      // pointer to the data in v
-     double* v_pt = v.values_pt();
+     const double* v_pt = v.values_pt();
 
      // setup the block vector and then insert the data
      for (unsigned b = 0; b < nblock; b++)
@@ -2789,10 +2700,10 @@ namespace oomph
     {
 #ifdef OOMPH_HAS_MPI
      // my rank
-     unsigned my_rank = Distribution_pt->communicator_pt()->my_rank();
+     unsigned my_rank = this->distribution_pt()->communicator_pt()->my_rank();
 
      // the number of processors
-     unsigned nproc = Distribution_pt->communicator_pt()->nproc();
+     unsigned nproc = this->distribution_pt()->communicator_pt()->nproc();
 
      // build the vectors
      s.resize(nblock);
@@ -2878,8 +2789,9 @@ namespace oomph
 
            // send
            MPI_Request send_req;
-           MPI_Isend(v.values_pt(),1,type_send,p,0,
-                     Distribution_pt->communicator_pt()->mpi_comm(),&send_req);
+           MPI_Isend(const_cast<double*>(v.values_pt()),1,type_send,p,0,
+                     this->distribution_pt()->communicator_pt()->mpi_comm(),
+                     &send_req);
            MPI_Type_free(&type_send);
            for (int i = 0; i < nblock_send[p]; i++)
             {
@@ -2930,7 +2842,8 @@ namespace oomph
            // recv
            MPI_Request recv_req;
            MPI_Irecv(s[0].values_pt(),1,type_recv,p,0,
-                     Distribution_pt->communicator_pt()->mpi_comm(),&recv_req);
+                     this->distribution_pt()->communicator_pt()->mpi_comm(),
+                     &recv_req);
            MPI_Type_free(&type_recv);
            for (int i = 0; i < nblock_recv[p]; i++)
             {
@@ -2991,7 +2904,7 @@ namespace oomph
    unsigned nblock = this->nblock_types();
 
 #ifdef PARANOID
-   if (!v.distribution_pt()->setup())
+   if (!v.built())
     {
      std::ostringstream error_message;
      error_message << "The distribution of the global vector v must be setup.";
@@ -3011,7 +2924,7 @@ namespace oomph
     }
    for (unsigned b = 0; b < nblock; b++)
     {
-     if (!s[b].distribution_pt()->setup())
+     if (!s[b].built())
       {
        std::ostringstream error_message;
        error_message << "The distribution of the block vector " << b 
@@ -3037,13 +2950,13 @@ namespace oomph
    // if + only one processor
    //    + more than one processor but matrix_pt is not distributed
    // then use the serial get_block method
-   if (Distribution_pt->communicator_pt()->nproc() == 1 ||
-       !Distribution_pt->distributed())
+   if (this->distribution_pt()->communicator_pt()->nproc() == 1 ||
+       !this->distribution_pt()->distributed())
     {
      double* v_pt = v.values_pt();
      for (unsigned b = 0; b < nblock; b++)
       {
-       double* s_pt = s[b].values_pt();
+       const double* s_pt = s[b].values_pt();
        unsigned nrow = this->block_dimension(b);
        for (unsigned i = 0; i < nrow; i++)
         {
@@ -3057,10 +2970,10 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
 
      // my rank
-     unsigned my_rank = Distribution_pt->communicator_pt()->my_rank();
+     unsigned my_rank = this->distribution_pt()->communicator_pt()->my_rank();
 
      // the number of processors
-     unsigned nproc = Distribution_pt->communicator_pt()->nproc();
+     unsigned nproc = this->distribution_pt()->communicator_pt()->nproc();
 
      // determine the maximum number of rows to be sent or recv
      // and determine the number of blocks each processor will send and recv
@@ -3140,7 +3053,8 @@ namespace oomph
            // recv
            MPI_Request recv_req;
            MPI_Irecv(v.values_pt(),1,type_recv,p,0,
-                     Distribution_pt->communicator_pt()->mpi_comm(),&recv_req);
+                     this->distribution_pt()->communicator_pt()->mpi_comm(),
+                     &recv_req);
            MPI_Type_free(&type_recv);
            for (int i = 0; i < nblock_recv[p]; i++)
             {
@@ -3163,7 +3077,8 @@ namespace oomph
 
            // all displacements are computed relative to s[0] values
            MPI_Aint displacements_base;
-           MPI_Address(s[0].values_pt(),&displacements_base);
+           MPI_Address(const_cast<double*>(s[0].values_pt()),
+                       &displacements_base);
 
            // now build
            unsigned ptr = 0;
@@ -3175,7 +3090,8 @@ namespace oomph
                                 Rows_to_recv_for_get_block(b,p),MPI_DOUBLE,
                                 &block_send_types[ptr]);
                MPI_Type_commit(&block_send_types[ptr]);
-               MPI_Address(s[b].values_pt(),&displacements[ptr]);
+               MPI_Address(const_cast<double*>(s[b].values_pt()),
+                           &displacements[ptr]);
                displacements[ptr] -= displacements_base;
                lengths[ptr] = 1;
                ptr++;
@@ -3190,8 +3106,9 @@ namespace oomph
 
            // send
            MPI_Request send_req;
-           MPI_Isend(s[0].values_pt(),1,type_send,p,0,
-                     Distribution_pt->communicator_pt()->mpi_comm(),&send_req);
+           MPI_Isend(const_cast<double*>(s[0].values_pt()),1,type_send,p,0,
+                     this->distribution_pt()->communicator_pt()->mpi_comm(),
+                     &send_req);
            MPI_Type_free(&type_send);
            for (int i = 0; i < nblock_send[p]; i++)
             {
@@ -3264,7 +3181,7 @@ namespace oomph
                          "BlockPreconditioner::get_block_vector(...)",
                          OOMPH_EXCEPTION_LOCATION);
     }
-   if (!v.distribution_pt()->setup())
+   if (!v.built())
     {
      std::ostringstream error_message;
      error_message << "The distribution of the global vector v must be setup.";
@@ -3290,11 +3207,11 @@ namespace oomph
    // if + only one processor
    //    + more than one processor but matrix_pt is not distributed
    // then use the serial get_block method
-   if (Distribution_pt->communicator_pt()->nproc() == 1 ||
-       !Distribution_pt->distributed())
+   if (this->distribution_pt()->communicator_pt()->nproc() == 1 ||
+       !this->distribution_pt()->distributed())
     {
      double* w_pt = w.values_pt();
-     double* v_pt = v.values_pt();
+     const double* v_pt = v.values_pt();
      unsigned n_row = w.nrow();
      for (unsigned i = 0; i < n_row; i++)
       {
@@ -3307,10 +3224,10 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
 
      // my rank
-     unsigned my_rank = Distribution_pt->communicator_pt()->my_rank();
+     unsigned my_rank = this->distribution_pt()->communicator_pt()->my_rank();
 
      // the number of processors
-     unsigned nproc = Distribution_pt->communicator_pt()->nproc();
+     unsigned nproc = this->distribution_pt()->communicator_pt()->nproc();
 
      // determine the maximum number of rows to be sent or recv
      unsigned max_n_send_or_recv = 0;
@@ -3348,8 +3265,9 @@ namespace oomph
 
            // send
            MPI_Request send_req;
-           MPI_Isend(v.values_pt(),1,type_send,p,0,
-                     Distribution_pt->communicator_pt()->mpi_comm(),&send_req);
+           MPI_Isend(const_cast<double*>(v.values_pt()),1,type_send,p,0,
+                     this->distribution_pt()->communicator_pt()->mpi_comm(),
+                     &send_req);
            MPI_Type_free(&type_send);
            requests.push_back(send_req);
           }
@@ -3366,7 +3284,8 @@ namespace oomph
            // recv
            MPI_Request recv_req;
            MPI_Irecv(w.values_pt(),1,type_recv,p,0,
-                     Distribution_pt->communicator_pt()->mpi_comm(),&recv_req);
+                     this->distribution_pt()->communicator_pt()->mpi_comm(),
+                     &recv_req);
            MPI_Type_free(&type_recv);
            requests.push_back(recv_req);
           }
@@ -3434,7 +3353,7 @@ namespace oomph
                          "BlockPreconditioner::return_block_vector(...)",
                          OOMPH_EXCEPTION_LOCATION);
     }
-   if (!v.distribution_pt()->setup())
+   if (!v.built())
     {
      std::ostringstream error_message;
      error_message << "The distribution of the global vector v must be setup.";
@@ -3452,7 +3371,7 @@ namespace oomph
                          "BlockPreconditioner::return_block_vector(...)",
                          OOMPH_EXCEPTION_LOCATION);  
     }
-   if (!w.distribution_pt()->setup())
+   if (!w.built())
     {
      std::ostringstream error_message;
      error_message << "The distribution of the block vector w must be setup.";
@@ -3474,8 +3393,8 @@ namespace oomph
    // if + only one processor
    //    + more than one processor but matrix_pt is not distributed
    // then use the serial get_block method
-   if (Distribution_pt->communicator_pt()->nproc() == 1 ||
-       !Distribution_pt->distributed())
+   if (this->distribution_pt()->communicator_pt()->nproc() == 1 ||
+       !this->distribution_pt()->distributed())
     {
 
      // length of vector
@@ -3483,7 +3402,7 @@ namespace oomph
 
      // copy back from the block vector to the naturally ordered vector
      double* v_pt = v.values_pt();
-     double* w_pt = w.values_pt();
+     const double* w_pt = w.values_pt();
      for (unsigned i = 0; i < n_row; i++)
       {
        v_pt[this->Global_index[b][i]] = w_pt[i];
@@ -3495,10 +3414,10 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
 
      // my rank
-     unsigned my_rank = Distribution_pt->communicator_pt()->my_rank();
+     unsigned my_rank = this->distribution_pt()->communicator_pt()->my_rank();
 
      // the number of processors
-     unsigned nproc = Distribution_pt->communicator_pt()->nproc();
+     unsigned nproc = this->distribution_pt()->communicator_pt()->nproc();
 
      // determine the maximum number of rows to be sent or recv
      unsigned max_n_send_or_recv = 0;
@@ -3536,8 +3455,9 @@ namespace oomph
 
            // send
            MPI_Request send_req;
-           MPI_Isend(w.values_pt(),1,type_send,p,0,
-                     Distribution_pt->communicator_pt()->mpi_comm(),&send_req);
+           MPI_Isend(const_cast<double*>(w.values_pt()),1,type_send,p,0,
+                     this->distribution_pt()->communicator_pt()->mpi_comm(),
+                     &send_req);
            MPI_Type_free(&type_send);
            requests.push_back(send_req);
           }
@@ -3554,7 +3474,8 @@ namespace oomph
            // recv
            MPI_Request recv_req;
            MPI_Irecv(v.values_pt(),1,type_recv,p,0,
-                     Distribution_pt->communicator_pt()->mpi_comm(),&recv_req);
+                     this->distribution_pt()->communicator_pt()->mpi_comm(),
+                     &recv_req);
            MPI_Type_free(&type_recv);
            requests.push_back(recv_req);
           }
@@ -3604,7 +3525,7 @@ namespace oomph
                                           DoubleVector& w)
   {
 #ifdef PARANOID
-   if (!v.distribution_pt()->setup())
+   if (!v.built())
     {
      std::ostringstream error_message;
      error_message << "The distribution of the global vector v must be setup.";
@@ -3630,8 +3551,8 @@ namespace oomph
    // if + only one processor
    //    + more than one processor but matrix_pt is not distributed
    // then use the serial get_block method
-   if (Distribution_pt->communicator_pt()->nproc() == 1 ||
-       !Distribution_pt->distributed())
+   if (this->distribution_pt()->communicator_pt()->nproc() == 1 ||
+       !this->distribution_pt()->distributed())
     {
 
      // number of blocks
@@ -3640,7 +3561,7 @@ namespace oomph
      // copy to w
      unsigned block_offset = 0;
      double* w_pt = w.values_pt();
-     double* v_pt = v.values_pt();
+     const double* v_pt = v.values_pt();
      for (unsigned b = 0; b < nblock;b++)
       {
        unsigned block_nrow = this->block_dimension(b);
@@ -3657,10 +3578,10 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
 
      // my rank
-     unsigned my_rank = Distribution_pt->communicator_pt()->my_rank();
+     unsigned my_rank = this->distribution_pt()->communicator_pt()->my_rank();
 
      // the number of processors
-     unsigned nproc = Distribution_pt->communicator_pt()->nproc();
+     unsigned nproc = this->distribution_pt()->communicator_pt()->nproc();
 
      // determine the maximum number of rows to be sent or recv
      unsigned max_n_send_or_recv = 0;
@@ -3698,8 +3619,9 @@ namespace oomph
 
            // send
            MPI_Request send_req;
-           MPI_Isend(v.values_pt(),1,type_send,p,0,
-                     Distribution_pt->communicator_pt()->mpi_comm(),&send_req);
+           MPI_Isend(const_cast<double*>(v.values_pt()),1,type_send,p,0,
+                     this->distribution_pt()->communicator_pt()->mpi_comm(),
+                     &send_req);
            MPI_Type_free(&type_send);
            requests.push_back(send_req);
           }
@@ -3716,7 +3638,8 @@ namespace oomph
            // recv
            MPI_Request recv_req;
            MPI_Irecv(w.values_pt(),1,type_recv,p,0,
-                     Distribution_pt->communicator_pt()->mpi_comm(),&recv_req);
+                     this->distribution_pt()->communicator_pt()->mpi_comm(),
+                     &recv_req);
            MPI_Type_free(&type_recv);
            requests.push_back(recv_req);
           }
@@ -3770,7 +3693,7 @@ namespace oomph
                                              DoubleVector& v)
   {
 #ifdef PARANOID
-   if (!v.distribution_pt()->setup())
+   if (!v.built())
     {
      std::ostringstream error_message;
      error_message << "The distribution of the global vector v must be setup.";
@@ -3788,7 +3711,7 @@ namespace oomph
                          "BlockPreconditioner::return_block_vector(...)",
                          OOMPH_EXCEPTION_LOCATION);  
     }
-   if (!w.distribution_pt()->setup())
+   if (!w.built())
     {
      std::ostringstream error_message;
      error_message << "The distribution of the block vector w must be setup.";
@@ -3811,15 +3734,15 @@ namespace oomph
    // if + only one processor
    //    + more than one processor but matrix_pt is not distributed
    // then use the serial get_block method
-   if (Distribution_pt->communicator_pt()->nproc() == 1 ||
-       !Distribution_pt->distributed())
+   if (this->distribution_pt()->communicator_pt()->nproc() == 1 ||
+       !this->distribution_pt()->distributed())
     {    
      // number of blocks
      unsigned nblock = this->Nblock_types;
 
      // copy to w
      unsigned block_offset = 0;
-     double* w_pt = w.values_pt();
+     const double* w_pt = w.values_pt();
      double* v_pt = v.values_pt();
      for (unsigned b = 0; b < nblock;b++)
       {
@@ -3837,10 +3760,10 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
 
      // my rank
-     unsigned my_rank = Distribution_pt->communicator_pt()->my_rank();
+     unsigned my_rank = this->distribution_pt()->communicator_pt()->my_rank();
 
      // the number of processors
-     unsigned nproc = Distribution_pt->communicator_pt()->nproc();
+     unsigned nproc = this->distribution_pt()->communicator_pt()->nproc();
 
      // determine the maximum number of rows to be sent or recv
      unsigned max_n_send_or_recv = 0;
@@ -3878,8 +3801,9 @@ namespace oomph
 
            // send
            MPI_Request send_req;
-           MPI_Isend(w.values_pt(),1,type_send,p,0,
-                     Distribution_pt->communicator_pt()->mpi_comm(),&send_req);
+           MPI_Isend(const_cast<double*>(w.values_pt()),1,type_send,p,0,
+                     this->distribution_pt()->communicator_pt()->mpi_comm(),
+                     &send_req);
            MPI_Type_free(&type_send);
            requests.push_back(send_req);
           }
@@ -3896,7 +3820,7 @@ namespace oomph
            // recv
            MPI_Request recv_req;
            MPI_Irecv(v.values_pt(),1,type_recv,p,0,
-                     Distribution_pt->communicator_pt()->mpi_comm(),&recv_req);
+                     this->distribution_pt()->communicator_pt()->mpi_comm(),&recv_req);
            MPI_Type_free(&type_recv);
            requests.push_back(recv_req);
           }

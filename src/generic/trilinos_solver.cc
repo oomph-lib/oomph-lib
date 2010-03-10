@@ -76,7 +76,7 @@ namespace oomph
   CRDoubleMatrix* cr_matrix_pt = new CRDoubleMatrix;
   Oomph_matrix_pt = cr_matrix_pt;
   problem_pt->get_jacobian(residual,*cr_matrix_pt);
-  Distribution_pt->rebuild(residual.distribution_pt());
+  this->build_distribution(residual.distribution_pt());
 
   // record the end time and compute the matrix setup time
   double end_t = TimingHelpers::timer();
@@ -88,14 +88,14 @@ namespace oomph
    }
   
   // store the distribution of the solution vector
-  if (!solution.distribution_setup())
+  if (!solution.built())
     {
-      solution.build(Distribution_pt,0.0);
+     solution.build(this->distribution_pt(),0.0);
     }
   LinearAlgebraDistribution solution_dist(solution.distribution_pt());
 
   // redistribute the distribution
-  solution.redistribute(Distribution_pt);
+  solution.redistribute(this->distribution_pt());
 
   // continue solving using matrix based solve function
   solve(Oomph_matrix_pt, residual, solution);
@@ -169,7 +169,7 @@ void TrilinosAztecOOSolver::solve(DoubleMatrixBase* const& matrix_pt,
 
  // if the result vector is setup then check it is not distributed and has 
  // the same communicator as the rhs vector
- if (result.distribution_setup())
+ if (result.built())
   {
    if (!(*result.distribution_pt() == *rhs.distribution_pt()))
     {
@@ -187,21 +187,19 @@ void TrilinosAztecOOSolver::solve(DoubleMatrixBase* const& matrix_pt,
  // setup the solver
  solver_setup(matrix_pt);
 
- // set up trilinos vectors
- Epetra_Vector* epetra_r_pt;
- Epetra_Vector* epetra_z_pt;
-
  // create Epetra version of r
- TrilinosHelpers::create_epetra_vector(rhs,Epetra_map_pt,epetra_r_pt);
+ Epetra_Vector* epetra_r_pt = TrilinosEpetraHelpers::
+  create_distributed_epetra_vector(rhs);
 
  // create an empty Epetra vector for z
- TrilinosHelpers::create_epetra_vector(Epetra_map_pt,epetra_z_pt);
+ Epetra_Vector* epetra_z_pt = TrilinosEpetraHelpers::
+  create_distributed_epetra_vector(result);
 
  // solve the system
  solve_using_AztecOO(epetra_r_pt,epetra_z_pt);            
  
  // Copy result to z
- TrilinosHelpers::copy_to_oomphlib_vector(epetra_z_pt,result);
+ TrilinosEpetraHelpers::copy_to_oomphlib_vector(epetra_z_pt,result);
 
  // clean up memory
  delete epetra_r_pt;
@@ -247,7 +245,7 @@ void TrilinosAztecOOSolver::solver_setup(DoubleMatrixBase* const& matrix_pt)
 
  // store the distribution
  // distribution of preconditioner is same as matrix
- Distribution_pt->rebuild(cast_matrix_pt->distribution_pt());
+ this->build_distribution(cast_matrix_pt->distribution_pt());
 
  // create the new solver
  AztecOO_solver_pt = new AztecOO();
@@ -272,7 +270,7 @@ void TrilinosAztecOOSolver::solver_setup(DoubleMatrixBase* const& matrix_pt)
                   << t_prec_setup << std::endl;
       }
 #ifdef PARANOID
-     if (*Preconditioner_pt->distribution_pt() != *Distribution_pt)
+     if (*Preconditioner_pt->distribution_pt() != *this->distribution_pt())
       {
        std::ostringstream error_message;
        error_message << "The oomph-lib preconditioner and the solver must "
@@ -291,31 +289,10 @@ void TrilinosAztecOOSolver::solver_setup(DoubleMatrixBase* const& matrix_pt)
     new OomphLibPreconditionerEpetraOperator(Preconditioner_pt);
   }
 
-
- // assemble the map
-#ifdef OOMPH_HAS_MPI
- // MPI version
- Epetra_comm_pt = 
-  new Epetra_MpiComm(Distribution_pt->communicator_pt()->mpi_comm());
- TrilinosHelpers::create_epetra_map(Distribution_pt,
-                                    Epetra_comm_pt,
-                                    Epetra_map_pt,Epetra_global_rows);
-#else
- // Serial version
- Epetra_comm_pt = new Epetra_SerialComm;
- TrilinosHelpers::create_epetra_map(cast_matrix_pt->distribution_pt(),
-                                    Epetra_comm_pt,
-                                    Epetra_map_pt);
-#endif
-
- // create the matrices
+ // create the matrix
  double start_t_matrix = TimingHelpers::timer();
- Epetra_col_map_pt = new Epetra_Map(matrix_pt->ncol(),matrix_pt->ncol(),
-                                    0,*Epetra_comm_pt);
- TrilinosHelpers::create_epetra_matrix(matrix_pt,
-                                       Epetra_map_pt,
-                                       Epetra_col_map_pt,
-                                       Epetra_matrix_pt);   
+ Epetra_matrix_pt = TrilinosEpetraHelpers
+  ::create_distributed_epetra_matrix_for_aztecoo(cast_matrix_pt);
 
  // record the end time and compute the matrix setup time
  double end_t_matrix = TimingHelpers::timer();
@@ -466,25 +443,23 @@ void TrilinosAztecOOSolver::resolve(const DoubleVector &rhs,
   }
 #endif
 
- // set up trilinos vectors
- Epetra_Vector* epetra_r_pt=0;
- Epetra_Vector* epetra_z_pt=0;
-
  // create Epetra version of r
- TrilinosHelpers::create_epetra_vector(rhs,Epetra_map_pt,epetra_r_pt);
+ Epetra_Vector* epetra_r_pt = TrilinosEpetraHelpers::
+  create_distributed_epetra_vector(rhs);
 
  // create an empty Epetra vector for z
- TrilinosHelpers::create_epetra_vector(Epetra_map_pt,epetra_z_pt);
+ Epetra_Vector* epetra_z_pt = TrilinosEpetraHelpers::
+  create_distributed_epetra_vector(solution);
 
  // solve the system
  solve_using_AztecOO(epetra_r_pt,epetra_z_pt);            
 
  // Copy result to z
- if (!solution.distribution_setup())
+ if (!solution.is_distribution_built())
   {
    solution.build(rhs.distribution_pt(),0.0);
   }
- TrilinosHelpers::copy_to_oomphlib_vector(epetra_z_pt,solution);
+ TrilinosEpetraHelpers::copy_to_oomphlib_vector(epetra_z_pt,solution);
 
  // clean up memory
  delete epetra_r_pt;

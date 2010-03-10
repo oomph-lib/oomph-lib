@@ -384,7 +384,7 @@ switch_to_iterative_linear_solver()
 #ifdef HAVE_HYPRE
 //If compiled with MPI, only use HYPRE if MPI has been initialised
 #ifdef OOMPH_HAS_MPI
- if(MPI_Helpers::MPI_has_been_initialised)
+ if(MPI_Helpers::mpi_has_been_initialised())
 #endif
   {
    // Need to create a SuperLUDistPreconditioner for the temperature ("solid")

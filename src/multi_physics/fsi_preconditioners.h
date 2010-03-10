@@ -351,6 +351,9 @@ void FSIPreconditioner::setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
   
   // Setup the solid preconditioner (inexact solver)
   double t_start = TimingHelpers::timer();
+//  LinearAlgebraDistribution dist(this->distribution_pt()->communicator_pt(),
+//				 block_matrix_1_1_pt,false);
+//  block_matrix_1_1_pt->redistribute(&dist);				 
   Solid_preconditioner_pt->setup(problem_pt,block_matrix_1_1_pt);
   double t_end = TimingHelpers::timer();
   double setup_time= t_end-t_start;
@@ -399,7 +402,7 @@ void FSIPreconditioner::preconditioner_solve(const DoubleVector &r,
                                              DoubleVector &z)
 {
   // if z is not setup then give it the same distribution
-  if (!z.distribution_pt()->setup())
+  if (!z.built())
    {
     z.build(r.distribution_pt(),0.0);
    }
@@ -424,14 +427,15 @@ void FSIPreconditioner::preconditioner_solve(const DoubleVector &r,
    // Solve solid system by back-substitution
    // with LU-decomposed stiffness matrix   
 //   DoubleVector temp_solid_vec2(temp_solid_vec);
+   DoubleVector temp_solid_vec2;
    Solid_preconditioner_pt->preconditioner_solve(temp_solid_vec,
-                                                 temp_solid_vec);
-   this->return_block_vector(1,temp_solid_vec,z);
+                                                 temp_solid_vec2);
+   this->return_block_vector(1,temp_solid_vec2,z);
    
    // NOTE: temp_solid_vec now contains z_s = S^{-1} r_s
 
    // Multiply C_{us} by z_s
-   Block_matrix_0_1_pt->multiply(temp_solid_vec,temp_fluid_vec);
+   Block_matrix_0_1_pt->multiply(temp_solid_vec2,temp_fluid_vec);
    temp_solid_vec.clear();
       
    // Subtract from fluid residual vector for fluid solve
@@ -480,12 +484,13 @@ void FSIPreconditioner::preconditioner_solve(const DoubleVector &r,
       
    // Solve solid system by back-substitution
    // with LU-decomposed stiffness matrix   
+   DoubleVector temp_solid_vec2;
    Solid_preconditioner_pt->preconditioner_solve(temp_solid_vec,
-                                                 temp_solid_vec);
+                                                 temp_solid_vec2);
 
    // Now copy result_vec (i.e. z_s) back into the global vector z.
    // Loop over all entries in the global results vector z:
-   return_block_vector(1,temp_solid_vec,z);   
+   return_block_vector(1,temp_solid_vec2,z);   
   }
 }
 

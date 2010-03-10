@@ -1660,7 +1660,7 @@ int main(int argc, char *argv[])
  
  if (print_help)
   {
-   if (MPI_Helpers::My_rank==0)
+   if (MPI_Helpers::communicator_pt()->my_rank()==0)
     {
      oomph_info << "\n\nOption flags:\n";
      oomph_info << "-dir <n>                  Data saved to /RESLTn\n";

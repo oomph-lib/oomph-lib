@@ -79,7 +79,7 @@ void MatrixBasedDiagPreconditioner::setup(Problem* problem_pt,
     }
    
    // store the distribution
-   Distribution_pt->rebuild(dist_matrix_pt->distribution_pt());
+   this->build_distribution(dist_matrix_pt->distribution_pt());
   }
 
  // else it is not a distributable matrix
@@ -111,7 +111,8 @@ void MatrixBasedDiagPreconditioner::setup(Problem* problem_pt,
     }
 
    // create the distribution
-   Distribution_pt->rebuild(problem_pt->communicator_pt(),n_row,false);
+   LinearAlgebraDistribution dist(problem_pt->communicator_pt(),n_row,false);
+   this->build_distribution(dist);
   }
 }
 
@@ -123,7 +124,7 @@ void MatrixBasedDiagPreconditioner::setup(Problem* problem_pt,
   const DoubleVector &r,DoubleVector& z)
  {
 #ifdef PARANOID
-  if (*r.distribution_pt() != *Distribution_pt)
+  if (*r.distribution_pt() != *this->distribution_pt())
    {
     std::ostringstream error_message_stream;
     error_message_stream 
@@ -134,9 +135,9 @@ void MatrixBasedDiagPreconditioner::setup(Problem* problem_pt,
       "MatrixBasedDiagPreconditioner::preconditioner_solve()",
       OOMPH_EXCEPTION_LOCATION);
    }
-  if (z.distribution_setup())
+  if (z.built())
    {
-    if (*z.distribution_pt() != *Distribution_pt)
+    if (*z.distribution_pt() != *this->distribution_pt())
      {
       std::ostringstream error_message_stream;
       error_message_stream 
@@ -151,9 +152,9 @@ void MatrixBasedDiagPreconditioner::setup(Problem* problem_pt,
 #endif
 
  // if z has not been setup then rebuild it
- if (!z.distribution_setup())
+ if (!z.built())
   {
-   z.build(Distribution_pt,0.0);
+   z.build(this->distribution_pt(),0.0);
   }
 
  // apply the preconditioner
@@ -215,7 +216,8 @@ setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
   }
  
  // create the distribution
- Distribution_pt->rebuild(problem_pt->communicator_pt(),Nrow,false);
+ LinearAlgebraDistribution dist(problem_pt->communicator_pt(),Nrow,false);
+ this->build_distribution(dist);
 }
 
 //=============================================================================
@@ -267,7 +269,7 @@ setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
   }
 
  // store the distribution
- Distribution_pt->rebuild(cr_matrix_pt->distribution_pt());
+ this->build_distribution(cr_matrix_pt->distribution_pt());
 }
 
 
@@ -279,7 +281,7 @@ void MatrixBasedLumpedPreconditioner<MATRIX>::preconditioner_solve(
   const DoubleVector &r,DoubleVector &z)
 {
 #ifdef PARANOID
-  if (*r.distribution_pt() != *Distribution_pt)
+ if (*r.distribution_pt() != *this->distribution_pt())
    {
     std::ostringstream error_message_stream;
     error_message_stream 
@@ -290,9 +292,9 @@ void MatrixBasedLumpedPreconditioner<MATRIX>::preconditioner_solve(
       "MatrixBasedLumpedPreconditioner::preconditioner_solve()",
       OOMPH_EXCEPTION_LOCATION);
    }
-  if (z.distribution_setup())
+  if (z.built())
    {
-    if (*z.distribution_pt() != *Distribution_pt)
+    if (*z.distribution_pt() != *this->distribution_pt())
      {
       std::ostringstream error_message_stream;
       error_message_stream 
@@ -334,7 +336,8 @@ void ILUZeroPreconditioner<CCDoubleMatrix>::setup(Problem* problem_pt,
  int n_row=cc_matrix_pt->nrow();
  
  // set the distribution
- Distribution_pt->rebuild(problem_pt->communicator_pt(),n_row,false);
+ LinearAlgebraDistribution dist(problem_pt->communicator_pt(),n_row,false);
+ this->build_distribution(dist);
 
  // declares variables to store number of non zero entires in L and U
  int l_nz = 0; 
@@ -468,7 +471,7 @@ void ILUZeroPreconditioner<CRDoubleMatrix>::setup(Problem* problem_pt,
  if (cr_matrix_pt->distributed())
   {
    // get the global matrix
-   CRDoubleMatrix* global_matrix_pt = cr_matrix_pt->return_global_matrix();
+   CRDoubleMatrix* global_matrix_pt = cr_matrix_pt->global_matrix();
 
    // store at cr_matrix pointer
    cr_matrix_pt = global_matrix_pt;
@@ -478,7 +481,7 @@ void ILUZeroPreconditioner<CRDoubleMatrix>::setup(Problem* problem_pt,
   }
 
  // store the Distribution
- Distribution_pt->rebuild(cr_matrix_pt->distribution_pt());
+ this->build_distribution(cr_matrix_pt->distribution_pt());
 
  // number of rows in matrix
  int n_row=cr_matrix_pt->nrow();
@@ -603,7 +606,7 @@ void ILUZeroPreconditioner<CCDoubleMatrix>::preconditioner_solve(
 
  // store the distribution of z
  LinearAlgebraDistribution* z_dist = 0;
- if (z.distribution_setup())
+ if (z.built())
   {
    z_dist = new LinearAlgebraDistribution(z.distribution_pt());
   }
@@ -614,7 +617,7 @@ void ILUZeroPreconditioner<CCDoubleMatrix>::preconditioner_solve(
  // if z is distributed then change to global
  if (z.distributed())
   {
-   z.redistribute(Distribution_pt);
+   z.redistribute(this->distribution_pt());
   }
 
  // solve Ly=r (note L matrix is unit and diagonal is not stored)
@@ -660,7 +663,7 @@ void ILUZeroPreconditioner<CRDoubleMatrix>::preconditioner_solve(
  
  // store the distribution of z
  LinearAlgebraDistribution* z_dist = 0;
- if (z.distribution_setup())
+ if (z.built())
   {
    z_dist = new LinearAlgebraDistribution(z.distribution_pt());
   }
@@ -671,7 +674,7 @@ void ILUZeroPreconditioner<CRDoubleMatrix>::preconditioner_solve(
  // if z is distributed then change to global
  if (z.distributed())
   {
-   z.redistribute(Distribution_pt);
+   z.redistribute(this->distribution_pt());
   }
  
  // solve Ly=r (note L matrix is unit and diagonal is not stored)

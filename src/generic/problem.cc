@@ -104,9 +104,9 @@ namespace oomph
 
   // setup the communicator
 #ifdef OOMPH_HAS_MPI
-  if (MPI_Helpers::MPI_has_been_initialised)
+  if (MPI_Helpers::mpi_has_been_initialised())
    {
-    Communicator_pt = new OomphCommunicator(MPI_Helpers::Communicator_pt);
+    Communicator_pt = new OomphCommunicator(MPI_Helpers::communicator_pt());
    }
   else
    {
@@ -1438,7 +1438,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
   else
 #endif
    {
-    Dof_distribution_pt->rebuild(Communicator_pt,n_dof,false);
+    Dof_distribution_pt->build(Communicator_pt,n_dof,false);
    }
 
 
@@ -1614,7 +1614,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
  
   // start by setting the distribution of the residuals vector if it is not 
   // setup
-  if (!residuals.distribution_setup())
+  if (!residuals.built())
    {
     int n_dof=ndof();
     LinearAlgebraDistribution dist(Communicator_pt,n_dof,false);
@@ -1641,7 +1641,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
 
 
 #ifdef OOMPH_HAS_MPI
-  if (MPI_Helpers::MPI_has_been_initialised)
+  if (MPI_Helpers::mpi_has_been_initialised())
    {
     // Storage for the number of processors
     int n_proc=this->communicator_pt()->nproc();
@@ -1775,7 +1775,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
   // PARANOID checks : if the distribution of residuals is setup then it must
   // must not be distributed, have the right number of rows, and the same 
   // communicator as the problem
-  if (residuals.distribution_pt()->setup())
+  if (residuals.distribution_pt()->built())
    {
     if (residuals.distribution_pt()->distributed())
      {
@@ -1808,7 +1808,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
 #endif
 
   // set the residuals distribution if it is not setup
-  if (!residuals.distribution_pt()->setup())
+  if (!residuals.built())
    {
     LinearAlgebraDistribution dist(Communicator_pt,n_dof,false);
     residuals.build(&dist,0.0);
@@ -1902,8 +1902,8 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
 #ifdef PARANOID
   // PARANOID checks that the distribution of the jacobian matches that of the
   // residuals (if they are setup) and that they have the right number of rows
-  if (residuals.distribution_pt()->setup() && 
-      jacobian.distribution_pt()->setup())
+  if (residuals.distribution_pt()->built() && 
+      jacobian.distribution_pt()->built())
    {
     if (!(*residuals.distribution_pt() == *jacobian.distribution_pt()))
      {                                    
@@ -1924,8 +1924,8 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
                           OOMPH_EXCEPTION_LOCATION);              
      }                 
    }
-  else if (residuals.distribution_pt()->setup() != 
-           jacobian.distribution_pt()->setup())
+  else if (residuals.distribution_pt()->built() != 
+           jacobian.distribution_pt()->built())
    {
     std::ostringstream error_stream; 
     error_stream << "The distribution of the jacobian and residuals must "
@@ -1948,7 +1948,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
   // ELSE determine the distribution based on the 
   // distributed_matrix_distribution enum
   LinearAlgebraDistribution* dist_pt=0;
-  if (jacobian.distribution_pt()->setup())
+  if (jacobian.is_distribution_built())
    {
     dist_pt = new LinearAlgebraDistribution(jacobian.distribution_pt());
    }
@@ -2023,8 +2023,8 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
                                              res,
                                              compressed_row_flag);
     jacobian.build(dist_pt);
-    jacobian.build_matrix_without_copy(dist_pt->nrow(),nnz[0],
-                                       value[0],column_index[0],row_start[0]);
+    jacobian.build_without_copy(dist_pt->nrow(),nnz[0],
+                                value[0],column_index[0],row_start[0]);
     residuals.build(dist_pt,0.0);
     residuals.set_external_values(res[0],true);
 #ifdef OOMPH_HAS_MPI
@@ -2040,9 +2040,9 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
                                nnz,
                                res);
       jacobian.build(dist_pt);
-      jacobian.build_matrix_without_copy(dist_pt->nrow(),nnz[0],
-                                         value[0],column_index[0],
-                                         row_start[0]); 
+      jacobian.build_without_copy(dist_pt->nrow(),nnz[0],
+                                  value[0],column_index[0],
+                                  row_start[0]); 
       residuals.build(dist_pt,0.0);
       residuals.set_external_values(res[0],true);   
      }
@@ -2057,9 +2057,9 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
                                nnz,
                                res);
       jacobian.build(temp_dist_pt);
-      jacobian.build_matrix_without_copy(dist_pt->nrow(),nnz[0],
-                                         value[0],column_index[0],
-                                         row_start[0]); 
+      jacobian.build_without_copy(dist_pt->nrow(),nnz[0],
+                                  value[0],column_index[0],
+                                  row_start[0]); 
       jacobian.redistribute(dist_pt);
       residuals.build(temp_dist_pt,0.0);
       residuals.set_external_values(res[0],true);   
@@ -2102,7 +2102,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
   // PARANOID checks : if the distribution of residuals is setup then it must
   // must not be distributed, have the right number of rows, and the same 
   // communicator as the problem   
-  if (residuals.distribution_pt()->setup())
+  if (residuals.distribution_pt()->built())
    {                                                            
     if (residuals.distribution_pt()->distributed())  
      {                  
@@ -2156,7 +2156,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
   
   // get the distribution for the residuals
   LinearAlgebraDistribution* dist_pt;
-  if (!residuals.distribution_setup())
+  if (!residuals.built())
    {
     dist_pt 
      = new LinearAlgebraDistribution(Communicator_pt,this->ndof(),false);
@@ -5823,7 +5823,7 @@ void Problem::get_eigenproblem_matrices(CRDoubleMatrix &mass_matrix,
                                         const double &shift)
 {
 #ifdef PARANOID
- if (mass_matrix.distribution_setup())
+ if (mass_matrix.is_distribution_built())
   {
    if (mass_matrix.nrow() != this->ndof())
     {   
@@ -5845,7 +5845,7 @@ void Problem::get_eigenproblem_matrices(CRDoubleMatrix &mass_matrix,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
- if (main_matrix.distribution_setup())
+ if (main_matrix.is_distribution_built())
   {
    if (main_matrix.nrow() != this->ndof())
     {
@@ -5870,14 +5870,15 @@ void Problem::get_eigenproblem_matrices(CRDoubleMatrix &mass_matrix,
 #endif 
 
  // if the matrices are not setup then build them
- if (!main_matrix.distribution_setup() || !main_matrix.distribution_setup())
+ if (!main_matrix.is_distribution_built() || 
+     !mass_matrix.is_distribution_built())
   {
    LinearAlgebraDistribution dist(this->communicator_pt(),this->ndof(),false);
-   if (!main_matrix.distribution_setup())
+   if (!main_matrix.is_distribution_built())
     {
      main_matrix.build(&dist);
     }
-   if (!mass_matrix.distribution_setup())
+   if (!mass_matrix.is_distribution_built())
     {
      mass_matrix.build(&dist);
     }
@@ -5909,14 +5910,14 @@ void Problem::get_eigenproblem_matrices(CRDoubleMatrix &mass_matrix,
  unsigned long n_dof = ndof();
 
  //The main matrix is the first entry
- main_matrix.build_matrix_without_copy(n_dof,nnz[0],value[0],
-                                       column_or_row_index[0],
-                                       row_or_column_start[0]);
+ main_matrix.build_without_copy(n_dof,nnz[0],value[0],
+                                column_or_row_index[0],
+                                row_or_column_start[0]);
  //The mass matrix is the second entry
- mass_matrix.build_matrix_without_copy(n_dof,nnz[1],value[1],
-                                       column_or_row_index[1],
-                                       row_or_column_start[1]);   
-
+ mass_matrix.build_without_copy(n_dof,nnz[1],value[1],
+                                column_or_row_index[1],
+                                row_or_column_start[1]);   
+ 
  //Delete the eigenproblem handler
  delete Assembly_handler_pt;
  //Reset the assembly handler to the original handler
@@ -10290,7 +10291,8 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
 
  // Loop over all processors whose eqn numbers are to be updated
  for (int rank=0;rank<n_proc;rank++)
-  {   
+  {  
+ 
    // Prepare a vector of values
    Vector<double> values_on_other_proc;
    Vector<double> internal_values_on_other_proc;
@@ -10357,7 +10359,7 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
         }
 
       }
-          
+
      // Since nval may vary from node to node in the most general case,
      // the best way to send/receive here is to get the size of
      // the array before the array is sent, and send that first, so that
@@ -10430,6 +10432,7 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
        // Don't talk to yourself
        if (send_rank!=my_rank)
         {
+
          // How many of my nodes are halos whose non-halo counter
          // parts live on processor send_rank?
          unsigned nnod=mesh_pt->nhalo_node(send_rank);
@@ -11009,8 +11012,8 @@ long Problem::synchronise_eqn_numbers(const bool& assign_local_eqn_numbers)
   }
 
  // build the Dof distribution pt
- Dof_distribution_pt->rebuild(Communicator_pt,my_eqn_num_base,
-                              my_n_eqn);
+ Dof_distribution_pt->build(Communicator_pt,my_eqn_num_base,
+                            my_n_eqn);
 
  // and return the total number of equations in the problem
  return (long)Dof_distribution_pt->nrow();
@@ -11024,7 +11027,7 @@ long Problem::synchronise_eqn_numbers(const bool& assign_local_eqn_numbers)
 //===================================================================
 void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
 {
- MPI_Status status;
+// MPI_Status status;
 
  // Storage for number of processors and current processor
  int n_proc=this->communicator_pt()->nproc();
@@ -11076,6 +11079,8 @@ void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
      // The receiving process needs to know how many values it's getting
      // since it only descends into the loop over the nodes after
      // receiving the vector
+     std::cout << count << " " 
+               << eqn_numbers_on_other_proc.size() << std::endl;
      MPI_Send(&count,1,MPI_INT,rank,0,this->communicator_pt()->mpi_comm());
 
      if (count!=0)
@@ -11142,7 +11147,7 @@ void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
          // Receive the size of the vector of eqn numbers
          unsigned count=0;
          MPI_Recv(&count,1,MPI_INT,send_rank,0,
-                  this->communicator_pt()->mpi_comm(),&status);
+                  this->communicator_pt()->mpi_comm(),MPI_STATUS_IGNORE);
          
          if (count!=0)
           {
@@ -11151,7 +11156,7 @@ void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
          
            // Receive it
            MPI_Recv(&eqn_numbers_on_other_proc[0],count,MPI_INT,send_rank,
-                    1,this->communicator_pt()->mpi_comm(),&status);
+                    1,this->communicator_pt()->mpi_comm(),MPI_STATUS_IGNORE);
 
            // Copy into the equation numbers of the halo nodes
            // on the present processors
@@ -11192,7 +11197,7 @@ void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
          // Receive size of vector of internal data values
          unsigned count_intern=0;
          MPI_Recv(&count_intern,1,MPI_INT,send_rank,2,
-                  this->communicator_pt()->mpi_comm(),&status);
+                  this->communicator_pt()->mpi_comm(),MPI_STATUS_IGNORE);
 
          // Prepare and receive vector
          if (count_intern!=0)
@@ -11200,7 +11205,7 @@ void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
            internal_eqn_numbers_on_other_proc.resize(count_intern);
            MPI_Recv(&internal_eqn_numbers_on_other_proc[0],
                     count_intern,MPI_INT,send_rank,3,
-                    this->communicator_pt()->mpi_comm(),&status);
+                    this->communicator_pt()->mpi_comm(),MPI_STATUS_IGNORE);
 
            // reset array counter index to zero
            count_intern=0;
@@ -11221,15 +11226,11 @@ void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
                 }
               }
             }
-          }
-         
+          }    
         }
       }
     }
-
-  }
-
-
+  } // loop over ranks
 }
 
 //=======================================================================

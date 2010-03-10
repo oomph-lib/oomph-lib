@@ -138,7 +138,7 @@ class IdentityPreconditioner : public Preconditioner
     if (dist_matrix_pt != 0)
      {
       // store the distribution
-      Distribution_pt->rebuild(dist_matrix_pt->distribution_pt());
+      this->build_distribution(dist_matrix_pt->distribution_pt());
      }
     
     // else it is not a distributable matrix
@@ -148,7 +148,8 @@ class IdentityPreconditioner : public Preconditioner
       unsigned n_row=matrix_pt->nrow();
 
       // create the distribution
-      Distribution_pt->rebuild(problem_pt->communicator_pt(),n_row,false);
+      LinearAlgebraDistribution dist(problem_pt->communicator_pt(),n_row,false);
+      this->build_distribution(dist);
      }
    }
   
@@ -157,7 +158,7 @@ class IdentityPreconditioner : public Preconditioner
   virtual void preconditioner_solve(const DoubleVector&r, DoubleVector &z)
    {
 #ifdef PARANOID
-  if (*r.distribution_pt() != *Distribution_pt)
+    if (*r.distribution_pt() != *this->distribution_pt())
    {
     std::ostringstream error_message_stream;
     error_message_stream 
@@ -168,9 +169,9 @@ class IdentityPreconditioner : public Preconditioner
       "IdentityPreconditioner::preconditioner_solve()",
       OOMPH_EXCEPTION_LOCATION);
    }
-  if (z.distribution_setup())
+  if (z.built())
    {
-    if (*z.distribution_pt() != *Distribution_pt)
+    if (*z.distribution_pt() != *this->distribution_pt())
      {
       std::ostringstream error_message_stream;
       error_message_stream 

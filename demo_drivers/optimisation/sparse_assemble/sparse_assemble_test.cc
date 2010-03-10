@@ -372,7 +372,7 @@ void RectangularDrivenCavityProblem<ELEMENT>::compare_assembly_strategies(
  unsigned long n = ndof();
  LinearAlgebraDistribution dist(this->communicator_pt(),n,false);
  matrix.build(&dist);
- matrix.build_matrix_without_copy(n,nnz[0],value[0],col_index[0],row_start[0]);
+ matrix.build_without_copy(n,nnz[0],value[0],col_index[0],row_start[0]);
  
  /// Dump matrix?
  if (Global_Variables::Dump_matrices)

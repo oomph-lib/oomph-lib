@@ -143,21 +143,21 @@ void BiCGStab<MATRIX>::solve(Problem* const &problem_pt,
  if (dynamic_cast<DistributableLinearAlgebraObject*>(Matrix_pt))
   {
    // the solver has the same distribution as the matrix if possible
-   Distribution_pt->rebuild(dynamic_cast<DistributableLinearAlgebraObject*>
+   this->build_distribution(dynamic_cast<DistributableLinearAlgebraObject*>
                             (Matrix_pt)->distribution_pt());
   }
  else
   {
    // the solver has the same distribution as the RHS
-   Distribution_pt->rebuild(f.distribution_pt());
+   this->build_distribution(f.distribution_pt());
   }
 
  // Call linear algebra-style solver
- if (!(*result.distribution_pt() == *Distribution_pt))
+ if (!(*result.distribution_pt() == *this->distribution_pt()))
   {
    LinearAlgebraDistribution 
     temp_global_dist(result.distribution_pt());       
-   result.build(Distribution_pt,0.0);
+   result.build(this->distribution_pt(),0.0);
    this->solve_helper(Matrix_pt,f,result,problem_pt);
    result.redistribute(&temp_global_dist);
   }
@@ -192,7 +192,7 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
 {
 #ifdef PARANOID
  // check that the rhs vector is setup
- if (!rhs.distribution_pt()->setup())
+ if (!rhs.built())
   {
    std::ostringstream error_message_stream;
    error_message_stream 
@@ -258,7 +258,7 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
   }
  // if the result vector is setup then check it has the same distribution
  // as the rhs
- if (solution.distribution_setup())
+ if (solution.built())
   {
    if (!(*solution.distribution_pt() == *rhs.distribution_pt()))
     {
@@ -274,9 +274,9 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
 #endif
 
  // setup the solution if it is not
- if (!solution.distribution_pt()->setup())
+ if (!solution.distribution_pt()->built())
   {
-   solution.build(Distribution_pt,0.0);
+   solution.build(this->distribution_pt(),0.0);
   }
  // zero
  else
@@ -385,9 +385,9 @@ void BiCGStab<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
  double s_norm,r_norm;
  
  // Some vectors
- DoubleVector p(Distribution_pt,0.0),p_hat(Distribution_pt,0.0),
-  v(Distribution_pt,0.0),z(Distribution_pt,0.0),t(Distribution_pt,0.0),
-  s(Distribution_pt,0.0);
+ DoubleVector p(this->distribution_pt(),0.0),p_hat(this->distribution_pt(),0.0),
+  v(this->distribution_pt(),0.0),z(this->distribution_pt(),0.0),t(this->distribution_pt(),0.0),
+  s(this->distribution_pt(),0.0);
 
  // Loop over max. number of iterations
  for (unsigned iter=1;iter<=Max_iter;iter++)
@@ -628,7 +628,7 @@ void CG<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
 {
 #ifdef PARANOID
  // check that the rhs vector is setup
- if (!rhs.distribution_pt()->setup())
+ if (!rhs.built())
   {
    std::ostringstream error_message_stream;
    error_message_stream 
@@ -694,7 +694,7 @@ void CG<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
   }
  // if the result vector is setup then check it has the same distribution
  // as the rhs
- if (solution.distribution_setup())
+ if (solution.built())
   {
    if (!(*solution.distribution_pt() == *rhs.distribution_pt()))
     {
@@ -710,9 +710,9 @@ void CG<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
 #endif
 
  // setup the solution if it is not
- if (!solution.distribution_pt()->setup())
+ if (!solution.distribution_pt()->built())
   {
-   solution.build(Distribution_pt,0.0);
+   solution.build(this->distribution_pt(),0.0);
   }
  // zero
  else
@@ -732,7 +732,7 @@ void CG<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
  
  // Initialise: Zero initial guess so the initial residual is 
  // equal to the RHS
- DoubleVector x(Distribution_pt,0.0);
+ DoubleVector x(this->distribution_pt(),0.0);
  DoubleVector residual(rhs);
  double residual_norm = residual.norm();
  double rhs_norm=residual_norm;
@@ -813,8 +813,8 @@ void CG<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
 
  // Auxiliary vectors
 // Vector<double> z(n_dof),p(n_dof),jacobian_times_p(n_dof,0.0);
- DoubleVector z(Distribution_pt,0.0), p(Distribution_pt,0.0), 
-  jacobian_times_p(Distribution_pt,0.0);
+ DoubleVector z(this->distribution_pt(),0.0), p(this->distribution_pt(),0.0), 
+  jacobian_times_p(this->distribution_pt(),0.0);
  
  // Auxiliary values
  double alpha,beta,rz;
@@ -1002,27 +1002,27 @@ void CG<MATRIX>::solve(Problem* const &problem_pt, DoubleVector &result)
  if (dynamic_cast<DistributableLinearAlgebraObject*>(Matrix_pt))
   {
    // the solver has the same distribution as the matrix if possible
-   Distribution_pt->rebuild(dynamic_cast<DistributableLinearAlgebraObject*>
+   this->build_distribution(dynamic_cast<DistributableLinearAlgebraObject*>
                             (Matrix_pt)->distribution_pt());
   }
  else
   {
    // the solver has the same distribution as the RHS
-   Distribution_pt->rebuild(f.distribution_pt());
+   this->build_distribution(f.distribution_pt());
   }
 
  // if the result vector is not setup
- if (!result.distribution_pt()->setup())
+ if (!result.distribution_pt()->built())
    {
-     result.build(Distribution_pt,0.0);
+    result.build(this->distribution_pt(),0.0);
    }
 
  // Call linear algebra-style solver
- if (!(*result.distribution_pt() == *Distribution_pt))
+ if (!(*result.distribution_pt() == *this->distribution_pt()))
   {
    LinearAlgebraDistribution 
     temp_global_dist(result.distribution_pt());       
-   result.build(Distribution_pt,0.0);
+   result.build(this->distribution_pt(),0.0);
    this->solve_helper(Matrix_pt,f,result,problem_pt);
    result.redistribute(&temp_global_dist);
   }
@@ -1101,8 +1101,9 @@ void GS<MATRIX>::solve(Problem* const &problem_pt, DoubleVector &result)
  clean_up_memory();
 
  // setup the distribution
- Distribution_pt->rebuild(problem_pt->communicator_pt(),
-                          n_dof,false);
+ LinearAlgebraDistribution dist(problem_pt->communicator_pt(),
+                                n_dof,false);
+ this->build_distribution(dist);
 
  // Get Jacobian matrix in format specified by template parameter
  // and nonlinear residual vector
@@ -1112,8 +1113,8 @@ void GS<MATRIX>::solve(Problem* const &problem_pt, DoubleVector &result)
   {
    if (dynamic_cast<CRDoubleMatrix*>(Matrix_pt) != 0)
     {
-     dynamic_cast<CRDoubleMatrix* >(Matrix_pt)->build(Distribution_pt);
-     f.build(Distribution_pt,0.0);
+     dynamic_cast<CRDoubleMatrix* >(Matrix_pt)->build(this->distribution_pt());
+     f.build(this->distribution_pt(),0.0);
     }
   }
  problem_pt->get_jacobian(f,*Matrix_pt);  
@@ -1172,7 +1173,7 @@ void GS<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
     }
   }
  // PARANOID check that this rhs distribution is setup
- if (!rhs.distribution_pt()->setup())
+ if (!rhs.built())
   {
    std::ostringstream error_message_stream;                           
    error_message_stream                                        
@@ -1201,7 +1202,7 @@ void GS<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
   }
  // PARANOID check that if the result is setup it matches the distribution
  // of the rhs
- if (solution.distribution_pt()->setup())
+ if (solution.built())
   {
    if (!(*rhs.distribution_pt() == *solution.distribution_pt()))
     {
@@ -1217,9 +1218,9 @@ void GS<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
 #endif
 
  // setup the solution if it is not
- if (!solution.distribution_pt()->setup())
+ if (!solution.distribution_pt()->built())
   {
-   solution.build(Distribution_pt,0.0);
+   solution.build(this->distribution_pt(),0.0);
   }
  // zero
  else
@@ -1235,8 +1236,8 @@ void GS<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
  double t_start = TimingHelpers::timer();
 
  // Initial guess is zero so the residual is equal to the RHS
- DoubleVector x(Distribution_pt,0.0);
- DoubleVector local_residual(Distribution_pt,0.0);
+ DoubleVector x(this->distribution_pt(),0.0);
+ DoubleVector local_residual(this->distribution_pt(),0.0);
  for(unsigned i=0;i<n_dof;i++)
   {   
    local_residual[i]=rhs[i];
@@ -1265,7 +1266,7 @@ void GS<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
     }
   }
  
- DoubleVector current_residual(Distribution_pt,0.0);
+ DoubleVector current_residual(this->distribution_pt(),0.0);
  // Start of the main GS loop
  while((norm_res>Tolerance)&&(counter!=Max_iter))
   {
@@ -1407,8 +1408,9 @@ void GMRES<MATRIX>::solve(Problem* const &problem_pt, DoubleVector &result)
  clean_up_memory();
 
  // setup the distribution
- Distribution_pt->rebuild(problem_pt->communicator_pt(),
-                          n_dof,false);
+ LinearAlgebraDistribution dist(problem_pt->communicator_pt(),
+                                n_dof,false);
+ this->build_distribution(dist);
 
  // Get Jacobian matrix in format specified by template parameter
  // and nonlinear residual vector
@@ -1418,8 +1420,8 @@ void GMRES<MATRIX>::solve(Problem* const &problem_pt, DoubleVector &result)
   {
    if (dynamic_cast<CRDoubleMatrix*>(Matrix_pt) != 0)
     {
-     dynamic_cast<CRDoubleMatrix* >(Matrix_pt)->build(Distribution_pt);
-     f.build(Distribution_pt,0.0);
+     dynamic_cast<CRDoubleMatrix* >(Matrix_pt)->build(this->distribution_pt());
+     f.build(this->distribution_pt(),0.0);
     }
   }
  problem_pt->get_jacobian(f,*Matrix_pt);  
@@ -1483,7 +1485,7 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
     }
   }
  // PARANOID check that this rhs distribution is setup
- if (!rhs.distribution_pt()->setup())
+ if (!rhs.built())
   {
    std::ostringstream error_message_stream;                           
    error_message_stream                                        
@@ -1512,7 +1514,7 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
   }
  // PARANOID check that if the result is setup it matches the distribution
  // of the rhs
- if (solution.distribution_pt()->setup())
+ if (solution.built())
   {
    if (!(*rhs.distribution_pt() == *solution.distribution_pt()))
     {
@@ -1528,9 +1530,9 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
 #endif
 
  // setup the solution if it is not
- if (!solution.distribution_pt()->setup())
+ if (!solution.built())
   {
-   solution.build(Distribution_pt,0.0);
+   solution.build(this->distribution_pt(),0.0);
   }
  // zero
  else
@@ -1557,7 +1559,7 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
  Vector<double> s(Restart + 1,0);
  Vector<double> cs(Restart + 1);
  Vector<double> sn(Restart + 1);
- DoubleVector w(Distribution_pt,0.0);
+ DoubleVector w(this->distribution_pt(),0.0);
  
 
  // Setup preconditioner only if we're not re-solving
@@ -1594,7 +1596,7 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
   } 
 
  // solve b-Jx = Mr for r (assumes x = 0);
- DoubleVector r(Distribution_pt,0.0);
+ DoubleVector r(this->distribution_pt(),0.0);
  if(Preconditioner_LHS)
   {
    preconditioner_pt()->preconditioner_solve(rhs,r); 
@@ -1668,7 +1670,7 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
   {
 
    // set zeroth basis vector v[0] to r/beta
-   v[0].build(Distribution_pt,0.0);
+   v[0].build(this->distribution_pt(),0.0);
    double* v0_pt = v[0].values_pt();
    for (unsigned i = 0; i < n_dof; i++)
     {
@@ -1691,7 +1693,7 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
 
      // solve Jv[i] = Mw for w
      {
-      DoubleVector temp(Distribution_pt,0.0);
+      DoubleVector temp(this->distribution_pt(),0.0);
       if(Preconditioner_LHS)
        {
         // solve Jv[i] = Mw for w
@@ -1738,7 +1740,7 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
      }
     
      // 
-     v[iter_restart + 1].build(Distribution_pt,0.0);
+     v[iter_restart + 1].build(this->distribution_pt(),0.0);
      double* v_pt = v[iter_restart + 1].values_pt();
      for (unsigned i = 0; i < n_dof; i++)
       {
@@ -1818,10 +1820,10 @@ void GMRES<MATRIX>::solve_helper(DoubleMatrixBase* const &matrix_pt,
 
    // solve Mr = (b-Jx) for r
    {
-    DoubleVector temp(Distribution_pt,0.0);
+    DoubleVector temp(this->distribution_pt(),0.0);
     matrix_pt->multiply(solution,temp);
     double* temp_pt = temp.values_pt();
-    double* rhs_pt = rhs.values_pt();
+    const double* rhs_pt = rhs.values_pt();
     for (unsigned i = 0; i < n_dof; i++)
      {
       temp_pt[i] = rhs_pt[i] - temp_pt[i];

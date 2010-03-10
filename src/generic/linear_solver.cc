@@ -104,7 +104,7 @@ namespace oomph
 void DenseLU::clean_up_memory()
 {
  // delete the Distribution_pt
- Distribution_pt->clear();
+ this->clear_distribution();
 
  //Clean up the LU factor storage, if it has been allocated
  //N.B. we don't need to check the index storage as well.
@@ -292,7 +292,7 @@ void DenseLU::factorise(DoubleMatrixBase* const &matrix_pt)
 void DenseLU::backsub(const DoubleVector &rhs,
                       DoubleVector &result)
 {
- double* rhs_pt = rhs.values_pt();
+ const double* rhs_pt = rhs.values_pt();
  double* result_pt = result.values_pt();
  const unsigned long n = rhs.nrow();
 
@@ -448,7 +448,7 @@ void DenseLU::backsub(const Vector<double> &rhs,
   }
  // if the result vector is setup then check it is not distributed and has 
  // the same communicator as the rhs vector
- if (result.distribution_setup())
+ if (result.is_distribution_built())
   {
    if (!(*result.distribution_pt() == *rhs.distribution_pt()))
     {
@@ -463,44 +463,37 @@ void DenseLU::backsub(const Vector<double> &rhs,
   }   
 #endif
  
- if (!result.distribution_setup())
+ if (!result.is_distribution_built())
   {
    result.build(rhs.distribution_pt(),0.0);
   }
  
  // set the distribution
- if (Distribution_pt != 0)
-  {
-   Distribution_pt->rebuild(rhs.distribution_pt());
-  }
- else
-  {
-   Distribution_pt = new LinearAlgebraDistribution(rhs.distribution_pt());
-  }
+ this->build_distribution(rhs.distribution_pt());
  
-  // Time the solver 
-  double t_start = TimingHelpers::timer();
-
-  // factorise
-  factorise(matrix_pt);
-
+ // Time the solver 
+ double t_start = TimingHelpers::timer();
+ 
+ // factorise
+ factorise(matrix_pt);
+ 
   // backsubstitute
-  backsub(rhs,result);
-
-  //Doc time for solver
-  double t_end = TimingHelpers::timer();
-  
+ backsub(rhs,result);
+ 
+ //Doc time for solver
+ double t_end = TimingHelpers::timer();
+ 
   Solution_time = t_end-t_start;
   if(Doc_time)
    {
     oomph_info << std::endl << "CPU for solve with DenseLU   [sec]: " 
                << Solution_time << std::endl << std::endl;
    }
-
+  
   //If we are not resolving then delete storage
   if(!Enable_resolve) {clean_up_memory();}
 }
-
+ 
 //=============================================================================
 /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs
 /// vector and returns the solution of the linear system.
@@ -542,7 +535,7 @@ void FD_LU::solve(Problem* const &problem_pt, DoubleVector &result)
 #ifdef PARANOID
  // if the result vector is setup then check it is not distributed and has 
  // the same communicator as the rhs vector
- if (result.distribution_setup())
+ if (result.built())
   {
    if (result.distributed())
     {
@@ -672,9 +665,10 @@ void SuperLUSolver::solve(Problem* const &problem_pt, DoubleVector &result)
    unsigned n_dof = problem_pt->ndof();
 
    // set the distribution
-   Distribution_pt->rebuild(problem_pt->communicator_pt(),n_dof,
-                            !Dist_use_global_solver);
-   
+   LinearAlgebraDistribution dist(problem_pt->communicator_pt(),n_dof,
+                                  !Dist_use_global_solver);
+   this->build_distribution(dist);
+
    // Take a copy of Delete_matrix_data
    bool copy_of_Delete_matrix_data = Dist_delete_matrix_data;
  
@@ -688,10 +682,10 @@ void SuperLUSolver::solve(Problem* const &problem_pt, DoubleVector &result)
      double t_start = TimingHelpers::timer();
      
      // Storage for the residuals vector
-     DoubleVector residuals(Distribution_pt,0.0);
+     DoubleVector residuals(this->distribution_pt(),0.0);
      
      // Get the sparse jacobian and residuals of the problem
-     CRDoubleMatrix jacobian(Distribution_pt);
+     CRDoubleMatrix jacobian(this->distribution_pt());
      problem_pt->get_jacobian(residuals, jacobian);
      
      // Doc time for setup
@@ -706,11 +700,11 @@ void SuperLUSolver::solve(Problem* const &problem_pt, DoubleVector &result)
      //Now call the linear algebra solve, if desired
      if(!Suppress_solve) 
       {
-       if (!(*result.distribution_pt() == *Distribution_pt))
+       if (!(*result.distribution_pt() == *this->distribution_pt()))
         {
          LinearAlgebraDistribution 
           temp_global_dist(result.distribution_pt());       
-         result.build(Distribution_pt,0.0);
+         result.build(this->distribution_pt(),0.0);
          solve(&jacobian,residuals,result);
          result.redistribute(&temp_global_dist);
         }
@@ -760,11 +754,12 @@ void SuperLUSolver::solve(Problem* const &problem_pt, DoubleVector &result)
   {
  
    // set the solver distribution
-   Distribution_pt->rebuild(problem_pt->communicator_pt(),
-                            problem_pt->ndof(),false);
-   
+   LinearAlgebraDistribution dist(problem_pt->communicator_pt(),
+                                  problem_pt->ndof(),false);
+   this->build_distribution(dist);
+      
    //Allocate storage for the residuals vector
-   DoubleVector residuals(Distribution_pt,0.0);
+   DoubleVector residuals(dist,0.0);
    
    // Use the compressed row version?
    if(Serial_compressed_row_flag)
@@ -774,7 +769,7 @@ void SuperLUSolver::solve(Problem* const &problem_pt, DoubleVector &result)
      double t_start = TimingHelpers::timer();
      
      //Get the sparse jacobian and residuals of the problem
-     CRDoubleMatrix CR_jacobian(Distribution_pt);
+     CRDoubleMatrix CR_jacobian(this->distribution_pt());
      problem_pt->get_jacobian(residuals,CR_jacobian);
      
      // Doc time for setup
@@ -836,7 +831,7 @@ void SuperLUSolver::solve(DoubleMatrixBase* const &matrix_pt,
 
 #ifdef PARANOID
  // check that the rhs vector is setup
- if (!rhs.distribution_pt()->setup())
+ if (!rhs.built())
   {
    std::ostringstream error_message_stream;
    error_message_stream 
@@ -902,7 +897,7 @@ void SuperLUSolver::solve(DoubleMatrixBase* const &matrix_pt,
   }
  // if the result vector is setup then check it has the same distribution
  // as the rhs
- if (result.distribution_setup())
+ if (result.built())
   {
    if (!(*result.distribution_pt() == *rhs.distribution_pt()))
     {
@@ -921,13 +916,13 @@ void SuperLUSolver::solve(DoubleMatrixBase* const &matrix_pt,
  if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt))
   {
    // the solver has the same distribution as the matrix if possible
-   Distribution_pt->rebuild(dynamic_cast<DistributableLinearAlgebraObject*>
+   this->build_distribution(dynamic_cast<DistributableLinearAlgebraObject*>
                             (matrix_pt)->distribution_pt());
   }
  else
   {
    // the solver has the same distribution as the RHS
-   Distribution_pt->rebuild(rhs.distribution_pt());
+   this->build_distribution(rhs.distribution_pt());
   }
 
  //Factorise the matrix
@@ -996,7 +991,7 @@ void SuperLUSolver::factorise(DoubleMatrixBase* const &matrix_pt)
   }
  if (Solver_type == Distributed || 
      (Solver_type == Default && nproc > 1 && 
-      MPI_Helpers::MPI_has_been_initialised))
+      MPI_Helpers::mpi_has_been_initialised()))
   {
   
    // if the matrix is a distributed linear algebra object then use SuperLU
@@ -1045,7 +1040,7 @@ void SuperLUSolver::factorise_distributed(DoubleMatrixBase* const &matrix_pt)
 #endif
 
  // number of processors
- unsigned nproc = MPI_Helpers::Nproc;
+ unsigned nproc = MPI_Helpers::communicator_pt()->nproc();
  if(dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt) != 0)
   {
    nproc = dynamic_cast<DistributableLinearAlgebraObject*>
@@ -1086,7 +1081,7 @@ void SuperLUSolver::factorise_distributed(DoubleMatrixBase* const &matrix_pt)
    CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
 
    //Get the distribution from the matrix
-   Distribution_pt->rebuild(cr_matrix_pt->distribution_pt());
+   this->build_distribution(cr_matrix_pt->distribution_pt());
 
 #ifdef PARANOID
    // paranoid check that the matrix has been setup
@@ -1150,7 +1145,7 @@ void SuperLUSolver::factorise_distributed(DoubleMatrixBase* const &matrix_pt)
                                      first_row, Dist_value_pt, Dist_index_pt, 
                                      Dist_start_pt, 0, Dist_nprow, Dist_npcol, 
                                      doc,&Dist_solver_data_pt, &Dist_info,
-                                     Distribution_pt->
+                                     this->distribution_pt()->
                                      communicator_pt()->mpi_comm());
    
      // Record that data is stored
@@ -1188,7 +1183,7 @@ void SuperLUSolver::factorise_distributed(DoubleMatrixBase* const &matrix_pt)
                                 Dist_start_pt, 
                                 0, Dist_nprow, Dist_npcol, doc, 
                                 &Dist_solver_data_pt, &Dist_info,
-                                Distribution_pt
+                                this->distribution_pt()
                                 ->communicator_pt()->mpi_comm());
      
      // Record that data is stored
@@ -1251,7 +1246,8 @@ else if(dynamic_cast<CCDoubleMatrix*>(matrix_pt))
                               ndof, nnz, Dist_value_pt, Dist_index_pt, 
                               Dist_start_pt, 0, Dist_nprow, Dist_npcol, doc, 
                               &Dist_solver_data_pt, &Dist_info,
-                              Distribution_pt->communicator_pt()->mpi_comm());
+                              this->distribution_pt()
+                              ->communicator_pt()->mpi_comm());
    
    // Record that data is stored
    Dist_global_solve_data_allocated=true;
@@ -1376,7 +1372,8 @@ void SuperLUSolver::factorise_serial(DoubleMatrixBase* const &matrix_pt)
  Serial_sign_of_determinant_of_matrix =  superlu(&i, &n, &nnz,  0,
                                                  value, index, start,
                                                  0, &n,  &transpose, &doc,
-                                                 &Serial_f_factors, &Serial_info);
+                                                 &Serial_f_factors, 
+                                                 &Serial_info);
 
  //Set the number of degrees of freedom in the linear system
  Serial_n_dof = n;
@@ -1413,7 +1410,7 @@ void SuperLUSolver::backsub_distributed(const DoubleVector &rhs,
 {
 #ifdef PARANOID
  // check that the rhs vector is setup
- if (!rhs.distribution_pt()->setup())
+ if (!rhs.distribution_pt()->built())
   {
    std::ostringstream error_message_stream;
    error_message_stream 
@@ -1424,7 +1421,7 @@ void SuperLUSolver::backsub_distributed(const DoubleVector &rhs,
   }
  // check that the rhs distribution is the same as the distribution as this 
  // solver
- if (!(*rhs.distribution_pt() == *Distribution_pt))
+ if (!(*rhs.distribution_pt() == *this->distribution_pt()))
   {
    std::ostringstream error_message_stream;
    error_message_stream 
@@ -1436,7 +1433,7 @@ void SuperLUSolver::backsub_distributed(const DoubleVector &rhs,
  
  // if the result vector is setup then check it has the same distribution
  // as the rhs
- if (result.distribution_setup())
+ if (result.is_distribution_built())
   {
    if (!(*result.distribution_pt() == *rhs.distribution_pt()))
     {
@@ -1457,7 +1454,7 @@ void SuperLUSolver::backsub_distributed(const DoubleVector &rhs,
  Dist_info=0;
 
  // number of DOFs
- int ndof = Distribution_pt->nrow();
+ int ndof = this->distribution_pt()->nrow();
 
  // Copy the rhs values to result
  result = rhs;
@@ -1470,7 +1467,7 @@ void SuperLUSolver::backsub_distributed(const DoubleVector &rhs,
                                    result.values_pt(), Dist_nprow, 
                                    Dist_npcol, doc, 
                                    &Dist_solver_data_pt, &Dist_info,
-                                   Distribution_pt->
+                                   this->distribution_pt()->
                                    communicator_pt()->mpi_comm());
   }
  else if (Dist_global_solve_data_allocated)
@@ -1479,7 +1476,7 @@ void SuperLUSolver::backsub_distributed(const DoubleVector &rhs,
    superlu_dist_global_matrix(2, -1, ndof, 0, 0, 0, 0, result.values_pt(),
                               Dist_nprow, Dist_npcol, doc, 
                               &Dist_solver_data_pt, &Dist_info,
-                              Distribution_pt->communicator_pt()->mpi_comm());
+                              this->distribution_pt()->communicator_pt()->mpi_comm());
   }
  else
   {
@@ -1501,7 +1498,7 @@ void SuperLUSolver::backsub_serial(const DoubleVector &rhs,
 
 #ifdef PARANOID
  // PARANOID check that this rhs distribution is setup
- if (!rhs.distribution_pt()->setup())
+ if (!rhs.built())
   {
    std::ostringstream error_message_stream;                           
    error_message_stream                                        
@@ -1530,7 +1527,7 @@ void SuperLUSolver::backsub_serial(const DoubleVector &rhs,
   }
  // PARANOID check that if the result is setup it matches the distribution
  // of the rhs
- if (result.distribution_pt()->setup())
+ if (result.built())
   {
    if (!(*rhs.distribution_pt() == *result.distribution_pt()))
     {
@@ -1597,7 +1594,7 @@ void SuperLUSolver::clean_up_memory()
    Dist_info=0;
 
    // number of DOFs
-   int ndof = Distribution_pt->nrow();
+   int ndof = this->distribution_pt()->nrow();
    
    if (Dist_distributed_solve_data_allocated)
     {
@@ -1605,7 +1602,7 @@ void SuperLUSolver::clean_up_memory()
                                      Dist_nprow, Dist_npcol, doc, 
                                      &Dist_solver_data_pt, 
                                      &Dist_info,
-                                     Distribution_pt->communicator_pt()
+                                     this->distribution_pt()->communicator_pt()
                                      ->mpi_comm());
      Dist_distributed_solve_data_allocated = false;
     }
@@ -1614,7 +1611,7 @@ void SuperLUSolver::clean_up_memory()
      superlu_dist_global_matrix(3, -1, ndof, 0, 0, 0, 0, 0,
                                 Dist_nprow, Dist_npcol, doc, 
                                 &Dist_solver_data_pt, &Dist_info,
-                                Distribution_pt->communicator_pt()
+                                this->distribution_pt()->communicator_pt()
                                 ->mpi_comm());
      Dist_global_solve_data_allocated = false;
     }
@@ -1630,7 +1627,7 @@ void SuperLUSolver::clean_up_memory()
    Dist_start_pt=0;
 
    // and the distribution
-   Distribution_pt->clear();
+   this->clear_distribution();
   }
 #endif
 }

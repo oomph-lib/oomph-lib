@@ -114,7 +114,7 @@ namespace oomph
 #ifdef PARANOID
 #ifndef HYPRE_SEQUENTIAL
      // For the MPI version of Hypre, check MPI_Helpers::setup has been called
-     if (MPI_Helpers::MPI_has_been_initialised==false)
+     if (MPI_Helpers::mpi_has_been_initialised()==false)
       {
        std::ostringstream error_message;
        error_message << "When using the MPI version of Hypre please first\n"

@@ -103,7 +103,7 @@ public :
 //If we have compiled with MPI, 
 //only use HYPRE if it's been initialised
 #ifdef OOMPH_HAS_MPI
-   if(MPI_Helpers::MPI_has_been_initialised)
+   if(MPI_Helpers::mpi_has_been_initialised())
 #endif
     {
      //Set up the internal preconditioners
@@ -428,7 +428,7 @@ void BoussinesqPreconditioner::preconditioner_solve(const DoubleVector &r,
                                              DoubleVector &z)
 {
  // if z is not setup then give it the same distribution
- if (!z.distribution_pt()->setup())
+ if (!z.built())
   {
    z.build(r.distribution_pt(),0.0);
   }

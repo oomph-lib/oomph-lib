@@ -372,7 +372,7 @@ namespace oomph
    this->get_block_vectors(r,block_r);
   
    // if the solution vector is not setup then build it
-   if (!z.distribution_setup())
+   if (!z.built())
     {
      z.build(this->distribution_pt(),0.0);
     }

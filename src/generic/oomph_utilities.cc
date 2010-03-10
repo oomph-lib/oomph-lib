@@ -661,126 +661,78 @@ MPIOutputModifier oomph_mpi_output;
 
 #endif
 
-//=========================================================================
-/// Basic namespace for MPI helper data and functions; in serial
-/// just a basic version, containing default assignments for
-/// My_rank and Nproc (simulating the run on a single processor
-/// which is appropriate for the serial execution).
-/// Namespace extended by copy from mpi_helpers.h in mpi/mpi_src/mpi_generic
-//==========================================================================
-namespace MPI_Helpers
+//=============================================================================
+/// initialize mpi
+//=============================================================================
+void MPI_Helpers::init(int argc, char **argv)
 {
- /// Processor rank
- int My_rank=0;
- 
- /// Total number of processors
- int Nproc=1;
- 
- /// Has MPI been initialised? (default: no)
- bool MPI_has_been_initialised=false;
-
 #ifdef OOMPH_HAS_MPI
-
- /// the global communicator
- OomphCommunicator* Communicator_pt;
-
- /// initialize mpi
- void init(int argc, char **argv)
-  {
-    // call mpi int
-    MPI_Init(&argc,&argv);
-    MPI_has_been_initialised=true;
-
-    // create the oomph-lib communicator using MPI_Comm_dup.
-    // the communicator has the same group of processes but a new context
-    MPI_Comm oomph_comm_world;
-    MPI_Comm_dup(MPI_COMM_WORLD,&oomph_comm_world);
-
-    // create the oomph-lib communicator
-    // note: oomph_comm_world is deleted when the destructor of 
-    // Communicator_pt is called
-    Communicator_pt = new OomphCommunicator(oomph_comm_world,true);
-    
-    // Change MPI error handler so that error will return
-    // rather than aborting
-    MPI_Errhandler_set(oomph_comm_world, MPI_ERRORS_RETURN);
-    
-    // Use MPI output modifier: Each processor preceeds its output
-    // by its rank
-    oomph_mpi_output.communicator_pt() = Communicator_pt;
-    oomph_info.output_modifier_pt() = &oomph_mpi_output;
-
-    // LEGACY - until My_rank and Nproc are deleted
-    // store My_rank and Nproc
-    My_rank = Communicator_pt->my_rank();
-    Nproc = Communicator_pt->nproc();
-  }
-
- /// finalize mpi
- void finalize()
-  {
-    // delete the communicator
-    delete Communicator_pt;
-
-    // and call MPI_Finalize
-    MPI_Finalize();
-  }
+ // call mpi int
+ MPI_Init(&argc,&argv);
 
 
-
- /// LEGACY
- /// Setup the namespace
- void setup()
- {
-  std::ostringstream warning_stream;
-  warning_stream  <<"WARNING:\n\n"
-                  <<"The method MPI_Helpers::setup() has been replaced "
-                  <<"with:\n\n       MPI_Helpers::init(...)\n\n"
-                  <<"Notes:\n\n1. It is no longer necessary to call "
-                  <<"MPI_Init(...)\n   at the begining of main(...) "
-                  <<"because it is called\n   by MPI_Helpers::init(...)."
-                  <<"\n\n2. The use of MPI_COMM_WORLD should be replaced "
-                  <<"with:"
-                  <<"\n\n       MPI_Helpers::Communicator_pt->mpi_comm()"
-                  <<"\n\n   or (for example)\n\n"
-                  <<"       problem_pt->communicator_pt()->mpi_comm()\n\n"
-                  <<"3. Calls to MPI_Finalize() should be replaced with:"
-                  <<"\n\n       MPI_Helpers::finalize()\n";
-  ObsoleteCode::obsolete(warning_stream.str());
-
-  // Check that MPI_Init has been called and throw an error if it's not
-  int flag = 0;
-  MPI_Initialized(&flag);
-  if (!flag)
-   {
-    std::ostringstream error_message_stream;
-    error_message_stream << "MPI_Init must be called before using "
-                         << "MPI_Helpers::setup!!!\n";
-    throw OomphLibError(error_message_stream.str(),
-                        "MPI_Helpers::setup()",
-                        OOMPH_EXCEPTION_LOCATION);
-   }  
-
-  // Set the bool to say MPI has been initialised
-  // NB: make sure MPI_Init is called BEFORE MPI_Helpers::setup()
-  MPI_has_been_initialised=true;
-
-  Communicator_pt = new OomphCommunicator(MPI_COMM_WORLD,true);
-
-  // Figure out number of processes
-  MPI_Comm_size(MPI_COMM_WORLD,&Nproc);
-  
-  // Which processor am I?
-  MPI_Comm_rank(MPI_COMM_WORLD,&My_rank);
-
-  // Use MPI output modifier: Each processor preceeds its output
-  // by its rank
-  oomph_mpi_output.communicator_pt() = Communicator_pt;
-  oomph_info.output_modifier_pt() = &oomph_mpi_output;
-  
- }
-#endif // OOMPH_HAS_MPI
+ // create the oomph-lib communicator using MPI_Comm_dup.
+ // the communicator has the same group of processes but a new context
+ MPI_Comm oomph_comm_world;
+ MPI_Comm_dup(MPI_COMM_WORLD,&oomph_comm_world);
+ 
+ // create the oomph-lib communicator
+ // note: oomph_comm_world is deleted when the destructor of 
+ // Communicator_pt is called
+ Communicator_pt = new OomphCommunicator(oomph_comm_world,true);
+ 
+ // Change MPI error handler so that error will return
+ // rather than aborting
+ MPI_Errhandler_set(oomph_comm_world, MPI_ERRORS_RETURN);
+ 
+ // Use MPI output modifier: Each processor preceeds its output
+ // by its rank
+ oomph_mpi_output.communicator_pt() = Communicator_pt;
+ oomph_info.output_modifier_pt() = &oomph_mpi_output;
+#else
+ // create a serial communicator
+ Communicator_pt = new OomphCommunicator;
+#endif
+ MPI_has_been_initialised=true;
 }
+
+//=============================================================================
+/// finalize mpi
+//=============================================================================
+void MPI_Helpers::finalize()
+{
+ // delete the communicator
+ delete Communicator_pt;
+ 
+ // and call MPI_Finalize
+#ifdef OOMPH_HAS_MPI
+ MPI_Finalize();
+#endif
+}
+
+//=============================================================================
+/// access to the global oomph-lib communicator
+//=============================================================================
+const OomphCommunicator* const MPI_Helpers::communicator_pt()
+{
+#ifdef PARANOID
+ // check that this matrix is built
+ if (!MPI_has_been_initialised)
+  {
+   std::ostringstream error_message_stream;
+   error_message_stream 
+    << "MPI has not been initialised.\n Call MPI_Helpers::init(...)";
+   throw OomphLibError(error_message_stream.str(),
+                       "MPI_Helpers::communicator_pt()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+ return Communicator_pt;
+}
+
+bool MPI_Helpers::MPI_has_been_initialised = false;
+OomphCommunicator* MPI_Helpers::Communicator_pt = 0;
+
 
 //====================================================================
 /// Namespace for flagging up obsolete parts of the code

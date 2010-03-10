@@ -122,7 +122,7 @@ fill_in_generic_residual_contribution_adv_diff(Vector<double> &residuals,
 
    //Get wind
    //--------
-   Vector<double> wind(2);
+   Vector<double> wind(3);
    get_wind_axisym_adv_diff(ipt,s,interpolated_x,wind);
 
    //r is the first position component

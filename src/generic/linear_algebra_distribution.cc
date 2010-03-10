@@ -36,11 +36,11 @@ namespace oomph
  /// global_nrow as arguments. If global_nrow is not provided or equal to
  /// 0 then it is computed automatically
  //============================================================================
- void LinearAlgebraDistribution::rebuild(const OomphCommunicator* 
-                                         const comm_pt,
-                                         const unsigned& first_row, 
-                                         const unsigned& local_nrow,
-                                         const unsigned& global_nrow)
+ void LinearAlgebraDistribution::build(const OomphCommunicator* 
+				       const comm_pt,
+				       const unsigned& first_row, 
+				       const unsigned& local_nrow,
+				       const unsigned& global_nrow)
  {
   // copy the communicator
   delete Comm_pt;
@@ -164,10 +164,10 @@ namespace oomph
  /// global_nrow/n_proc, processor 1 holds the next 
  /// global_nrow/n_proc and so on...
  //============================================================================
- void LinearAlgebraDistribution::rebuild(const OomphCommunicator* 
-                                         const comm_pt,
-                                         const unsigned& global_nrow,
-                                         const bool& distribute)
+ void LinearAlgebraDistribution::build(const OomphCommunicator* 
+				       const comm_pt,
+				       const unsigned& global_nrow,
+				       const bool& distribute)
  {
   // copy the communicator
   delete Comm_pt;
@@ -217,8 +217,8 @@ namespace oomph
  //============================================================================
  /// helper method for the =assignment operator and copy constructor
  //============================================================================
- void LinearAlgebraDistribution::rebuild(const LinearAlgebraDistribution& 
-                                         new_dist)
+ void LinearAlgebraDistribution::build(const LinearAlgebraDistribution& 
+				       new_dist)
   {
 
    // delete the existing storage
@@ -275,7 +275,7 @@ namespace oomph
  /// operator==
  //============================================================================
  bool LinearAlgebraDistribution::operator==
- (const LinearAlgebraDistribution& other_dist)
+ (const LinearAlgebraDistribution& other_dist) const
   {   
 #ifdef OOMPH_HAS_MPI
    // compare the communcators
@@ -320,5 +320,21 @@ namespace oomph
    return false;
 #endif
   }
+
+ //=============================================================================
+ /// output operator
+ //=============================================================================
+ std::ostream& operator<<(std::ostream& stream, 
+                          LinearAlgebraDistribution dist)
+ {
+  stream << "nrow()=" << dist.nrow() 
+         << ", first_row()=" << dist.first_row()
+         << ", nrow_local()=" << dist.nrow_local()
+         << ", distributed()=" << dist.distributed()
+         << std::endl;
+  return stream;
+ }
+
+
 
 }//end of oomph namespace

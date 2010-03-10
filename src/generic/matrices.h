@@ -284,11 +284,11 @@ class DoubleMatrixBase
   }
 
  /// \short Multiply the matrix by the vector x: soln=Ax.
- virtual void multiply(const DoubleVector &x, DoubleVector &soln)=0;
+ virtual void multiply(const DoubleVector &x, DoubleVector &soln)const=0;
 
  /// \short Multiply the  transposed matrix by the vector x: soln=A^T x
  virtual void multiply_transpose(const DoubleVector &x,
-                                 DoubleVector &soln)=0;
+                                 DoubleVector &soln)const=0;
 
  /// \short For every row, find the maximum absolute value of the
  /// entries in this row. Set all values that are less than alpha times
@@ -795,10 +795,7 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
  CRDoubleMatrix(const LinearAlgebraDistribution* distribution_pt);
  
  /// Broken copy constructor
- CRDoubleMatrix(const CRDoubleMatrix& matrix) 
-  {
-   BrokenCopy::broken_copy("CRDoubleMatrix");
-  } 
+ CRDoubleMatrix(const CRDoubleMatrix& matrix); 
 
  /// Broken assignment operator
  void operator=(const CRDoubleMatrix&) 
@@ -821,18 +818,18 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
  void build(const LinearAlgebraDistribution* distribution_pt);
 
  /// \short keeps the existing distribution and just matrix that is stored
- void build_matrix(const unsigned& ncol,
-                     const Vector<double>& value,
-                     const Vector<int>& column_index,
-                     const Vector<int>& row_start);
-
+ void build(const unsigned& ncol,
+	    const Vector<double>& value,
+	    const Vector<int>& column_index,
+	    const Vector<int>& row_start);
+ 
  /// \short keeps the existing distribution and just matrix that is stored
  /// without copying the matrix data
- void build_matrix_without_copy(const unsigned& ncol,
-                                const unsigned& nnz,
-                                double* value,
-                                int* column_index,
-                                int* row_start);
+ void build_without_copy(const unsigned& ncol,
+			 const unsigned& nnz,
+			 double* value,
+			 int* column_index,
+			 int* row_start);
 
  /// The contents of the matrix are redistributed to match the new
  /// distribution. In a non-MPI build this method does nothing. \n
@@ -848,7 +845,7 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
  /// Return the number of rows of the matrix
  inline unsigned long nrow() const
   {
-   return Distribution_pt->nrow();
+    return DistributableLinearAlgebraObject::nrow();
   }
  
  /// Return the number of columns of the matrix
@@ -878,8 +875,8 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
  /// Overload the round-bracket access operator for read-only access. In a 
  /// distributed matrix i refers to the local row index. 
  inline const double& operator()(const unsigned long &i, 
-                                 const unsigned long &j) 
-  const {return CR_matrix.get_entry(i,j);}
+                                 const unsigned long &j) const 
+ {return CR_matrix.get_entry(i,j);}
  
  /// Access to C-style row_start array
  int* row_start() {return CR_matrix.row_start();}
@@ -910,13 +907,11 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
  virtual void lubksub(DoubleVector &rhs);
 
  /// \short Multiply the matrix by the vector x: soln=Ax
- void multiply(const DoubleVector& x, DoubleVector& soln);  
-
+ void multiply(const DoubleVector& x, DoubleVector& soln) const;  
 
  /// \short Multiply the  transposed matrix by the vector x: soln=A^T x
  void multiply_transpose(const DoubleVector& x,
-                         DoubleVector& soln);
-
+                         DoubleVector& soln) const;
 
  /// \short Function to multiply this matrix by the CRDoubleMatrix matrix_in.\n
  /// In a serial matrix, there are 4 methods available: \n
@@ -936,9 +931,8 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
  /// Method 2 is employed by default. \n
  /// In a distributed matrix, only Trilinos Epetra Matrix Matrix multiply
  /// is available.
- void multiply(CRDoubleMatrix& matrix_in, CRDoubleMatrix& result);
- 
-  
+ void multiply(const CRDoubleMatrix& matrix_in, CRDoubleMatrix& result) const;
+   
  /// \short For every row, find the maximum absolute value of the
  /// entries in this row. Set all values that are less than alpha times
  /// this maximum to zero and return the resulting matrix in
@@ -982,58 +976,13 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
  /// assembled.
  bool built() const { return Built; } 
 
-/// \short if this matrix is distributed then a the equivalent global matrix 
-/// is built using new and returned. The calling method is responsible for the 
-/// destruction of the new matrix.
- CRDoubleMatrix* return_global_matrix();
+ /// \short if this matrix is distributed then a the equivalent global matrix 
+ /// is built using new and returned. The calling method is responsible for the 
+ /// destruction of the new matrix.
+ CRDoubleMatrix* global_matrix() const;
 
  /// \short returns the inf-norm of this matrix
- double inf_norm()
-  {
-#ifdef PARANOID
-   // paranoid check that the vector is setup
-   if (!Distribution_pt->setup())
-    {
-     std::ostringstream error_message;
-     error_message << "This vector must be setup."; 
-     throw OomphLibError(error_message.str(),
-                         "DoubleVector::norm()",
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-   // compute the local norm
-   unsigned nrow_local = this->nrow_local();
-   double n = 0;
-   int* row_start = CR_matrix.row_start();
-   double* value = CR_matrix.value();
-   for (unsigned i = 0; i < nrow_local; i++)
-    {
-     double a = 0;
-     for (int j = row_start[i]; j < row_start[i+1]; j++)
-      {
-       a += fabs(value[j]);
-      }
-     n = std::max(n,a);
-    }
-
-   // if this vector is distributed and on multiple processors then gather
-#ifdef OOMPH_HAS_MPI
-   double n2 = n;
-   if (this->distributed() && Distribution_pt->communicator_pt()->nproc() > 1)
-    {
-     MPI_Allreduce(&n,&n2,1,MPI_DOUBLE,MPI_MAX,
-                   Distribution_pt->communicator_pt()->mpi_comm());
-    }
-   n = n2;
-#endif
-
-   // sqrt the norm
-   n = sqrt(n);
-
-   // and return
-   return n;
-  }
+ double inf_norm() const;
 
  private:
 
@@ -1137,11 +1086,11 @@ class DenseDoubleMatrix : public DoubleMatrixBase,
                             DenseMatrix<double> &eigen_vect) const;
  
  /// \short Multiply the matrix by the vector x: soln=Ax 
- void multiply(const DoubleVector &x, DoubleVector &soln);
+ void multiply(const DoubleVector &x, DoubleVector &soln) const;
  
  /// \short Multiply the  transposed matrix by the vector x: soln=A^T x
  void multiply_transpose(const DoubleVector &x,
-                         DoubleVector &soln);
+                         DoubleVector &soln) const;
 
  /// \short For every row, find the maximum absolute value of the
  /// entries in this row. Set all values that are less than alpha times
@@ -2454,12 +2403,11 @@ class CCDoubleMatrix : public DoubleMatrixBase,
  virtual void lubksub(DoubleVector &rhs);
 
  /// \short Multiply the matrix by the vector x: soln=Ax
- void multiply(const DoubleVector &x, DoubleVector &soln);
-
+ void multiply(const DoubleVector &x, DoubleVector &soln) const;
 
  /// \short Multiply the  transposed matrix by the vector x: soln=A^T x
  void multiply_transpose(const DoubleVector &x,
-                         DoubleVector &soln);
+                         DoubleVector &soln) const;
 
 
  /// \short Function to multiply this matrix by the CCDoubleMatrix matrix_in

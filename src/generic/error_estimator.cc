@@ -949,7 +949,7 @@ void Z2ErrorEstimator::get_element_errors(OomphCommunicator* comm_pt,
 #ifdef OOMPH_HAS_MPI
 
   if (!mesh_pt->mesh_has_been_distributed() 
-      && MPI_Helpers::MPI_has_been_initialised)
+      && MPI_Helpers::mpi_has_been_initialised())
    {
     // All local recovered fluxes have been calculated, so now share result
     for (int iproc=0;iproc<n_proc;iproc++)

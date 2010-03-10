@@ -590,39 +590,49 @@ class DenseMatrix;
 
 
 //======================================================================
-/// Basic namespace for MPI helper data and functions; this
-/// just basic version, containing default assignments for
-/// My_rank and Nproc (simulating the run a single processor
-/// which is appropriate for the serial execution).
-/// This namespace is extended by mpi_helpers.h in mpi/mpi_src/mpi_generic
+/// \short MPI_Helpers class contains static helper methods to support MPI 
+/// within oomph-lib. The methods init(...) and finalize() initaliaize and 
+/// finalize MPI in oomph-lib and manage the oomph-libs global communicator
+/// communicator_pt().\n
+/// NOTE: This class encapsulates static helper methods and instances of it 
+/// CANNOT be instantiated.
 //=====================================================================
-namespace MPI_Helpers
+class MPI_Helpers
 {
- /// Processor rank
- extern int My_rank;
- 
- /// Total number of processors
- extern int Nproc;
+
+  public:
+
+ /// \short initialise mpi (oomph-libs equivalent of MPI_Init(...)) \n
+ /// Initialises MPI and creates the global oomph-lib communicator.
+ static void init(int argc, char **argv);
+
+ /// finalize mpi (oomph-lib equivalent of MPI_Finalize()) \n
+ /// Deletes the global oomph-lib communicator and finalizes MPI.
+ static void finalize();
+
+ /// access to global communicator. This is the oomph-lib equivalent of
+ /// MPI_COMM_WORLD
+ static const OomphCommunicator* const communicator_pt();
+
+ /// return true if MPI has been initialised
+ static bool mpi_has_been_initialised() { return MPI_has_been_initialised; }
+
+  private:
+
+ /// \short private default constructor definition (to prevent instances of 
+ /// the class being instantiated)
+ MPI_Helpers();
+
+ /// \short private copy constructor definition (to prevent instances of 
+ /// the class being instantiated)
+ MPI_Helpers(const MPI_Helpers&);
 
  /// Bool set to true if MPI has been initialised
- extern bool MPI_has_been_initialised;
-
-#ifdef OOMPH_HAS_MPI
+ static bool MPI_has_been_initialised;
 
  /// the global communicator
- extern OomphCommunicator* Communicator_pt;
-
- /// initialise mpi
- void init(int argc, char **argv);
-
- /// finalize mpi
- void finalize();
-
- /// LEGACY - keep this for now?
- /// Setup MPI helpers
- void setup();
-#endif
-}
+ static OomphCommunicator* Communicator_pt;
+};
 
 
 //====================================================================

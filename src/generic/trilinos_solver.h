@@ -70,24 +70,14 @@ namespace oomph
     Preconditioner_label = "oomph-lib Preconditioner";
 
     // setup the Epetra_map
-#ifdef OOMPH_HAS_MPI
-    TrilinosHelpers::create_epetra_map(preconditioner_pt->distribution_pt(),
-                                       &Operator_comm,Operator_map_pt,
-                                       My_global_rows);
-#else
-    TrilinosHelpers::create_epetra_map(preconditioner_pt->distribution_pt(),
-                                       &Operator_comm,Operator_map_pt);
-#endif
+    Operator_map_pt = TrilinosEpetraHelpers::create_epetra_map
+     (Oomph_lib_preconditioner_pt->distribution_pt());
    }
 
   /// \short Destructor - deletes the Epetra_map and My_global_rows vector
   /// (if MPI)
   ~OomphLibPreconditionerEpetraOperator()
    {
-#ifdef OOMPH_HAS_MPI
-    delete[] My_global_rows;
-    My_global_rows = 0;
-#endif
     delete Operator_map_pt;
     Operator_map_pt = 0;
    }
@@ -96,7 +86,7 @@ namespace oomph
   OomphLibPreconditionerEpetraOperator
    (const OomphLibPreconditionerEpetraOperator&)
 #ifdef OOMPH_HAS_MPI
-   : Operator_comm(MPI_Helpers::Communicator_pt->mpi_comm()) 
+   : Operator_comm(MPI_Helpers::communicator_pt()->mpi_comm()) 
 #else
    : Operator_comm()
 #endif
@@ -284,12 +274,6 @@ namespace oomph
   /// of the residual and solution vector
   Epetra_Map* Operator_map_pt;
 
-#ifdef OOMPH_HAS_MPI
-  /// \short the global of the preconditioner associated with the processor,
-  /// for the trilinos Operator_map_pt
-  int* My_global_rows;
-#endif
-
   /// a label for the preconditioner ( for Epetra_Operator::Label() )
   std::string Preconditioner_label;
  };
@@ -327,14 +311,7 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
   // null the pts
   Problem_pt = 0;
   Epetra_matrix_pt = 0;
-  Epetra_map_pt = 0;
-  Epetra_col_map_pt = 0;
-  Epetra_comm_pt = 0;
-  Oomph_matrix_pt = 0;
   Epetra_preconditioner_pt = 0;
-#ifdef OOMPH_HAS_MPI
-  Epetra_global_rows = 0;
-#endif
 
   // set solver defaults
   Solver_type = GMRES;
@@ -379,34 +356,19 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
    delete Epetra_matrix_pt;
    Epetra_matrix_pt = 0;
 
-   // delete the Epetra_Map
-   delete Epetra_map_pt;
-   Epetra_map_pt = 0;
-
-   // delete the Epetra col map
-   delete Epetra_col_map_pt;
-   Epetra_col_map_pt = 0;
-
-   // delete the Epetra_Map
-   delete Epetra_comm_pt;
-   Epetra_comm_pt = 0;
-
-#ifdef OOMPH_HAS_MPI
-   // delete my global rows
-   delete[] Epetra_global_rows;
-   Epetra_global_rows = 0;
-#endif
-
    // delete the Epetra_Operator preconditioner (only if it is a wrapper to an 
    // oomphlib preconditioner in which case only the wrapper is deleted and 
    // not the actual preconditioner).
    // if the preconditioner is Trilinos preconditioner then the
    // Epetra_Operator is deleted when that preconditioner is deleted
-   if (dynamic_cast<OomphLibPreconditionerEpetraOperator*>
-       (Epetra_preconditioner_pt) != 0)
+   if (Epetra_preconditioner_pt != 0)
     {
-     delete Epetra_preconditioner_pt;
-     Epetra_preconditioner_pt = 0;
+     if (dynamic_cast<OomphLibPreconditionerEpetraOperator*>
+         (Epetra_preconditioner_pt) != 0)
+      {
+       delete Epetra_preconditioner_pt;
+       Epetra_preconditioner_pt = 0;
+      }
     }
 
    // don't delete the preconditioner but call its clean up memory method
@@ -537,19 +499,6 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
  /// \short A pointer to the Epetra_Operator for the preconditioner. This is 
  /// only used if the preconditioner NOT a Trilinos preconditioner.
  Epetra_Operator* Epetra_preconditioner_pt;
- 
- /// \short A pointer to the Epetra_Map object for this solver, which is the
- /// same as the matrix
- Epetra_Map* Epetra_map_pt;
-
- /// \short A pointer the the Epetra_Map column map for this solver
- Epetra_Map* Epetra_col_map_pt;
-
-#ifdef OOMPH_HAS_MPI
-   /// \short Global rows of the Epetra_matrix_pt - only used when this 
-   /// preconditioner is setup using the oomph-lib interface (and MPI)
-   int* Epetra_global_rows;
-#endif
 
  /// Oomph lib matrix pointer
  DoubleMatrixBase* Oomph_matrix_pt;
@@ -558,14 +507,6 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
  /// The problem_pt is stored here in a problem based solve for the
  /// preconditioner
  Problem* Problem_pt;
-
-#ifdef OOMPH_HAS_MPI
- /// \short Epetra communicator object (MPI version)
- Epetra_MpiComm* Epetra_comm_pt;
-#else
- /// \short Epetra communicator object (serial version)
- Epetra_SerialComm* Epetra_comm_pt;
-#endif
 
  /// if this solver is using an oomph-lib preconditioner then the vectors
  /// passed to preconditioner_solve(...) should be using the values in the

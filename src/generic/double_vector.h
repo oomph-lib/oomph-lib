@@ -56,9 +56,9 @@ class CRDoubleMatrix;
  
  public :                     
   
-  /// \short Constructor for a DoubleVector of size ZERO.
+  /// \short Constructor for an uninitialized DoubleVector
   DoubleVector()
-  : Values_pt(0), Internal_values(true)
+   : Values_pt(0), Internal_values(true), Built(false)
   {}
  
  /// \short Constructor. Assembles a DoubleVector with a prescribed
@@ -66,9 +66,19 @@ class CRDoubleMatrix;
  /// defaults to 0).
  DoubleVector(const LinearAlgebraDistribution* const &dist_pt, 
               const double& v=0.0)
-  : Values_pt(0), Internal_values(true)
+  : Values_pt(0), Internal_values(true), Built(false)
   {
    this->build(dist_pt,v);
+  }
+
+ /// \short Constructor. Assembles a DoubleVector with a prescribed
+ /// distribution. Additionally every entry can be set (with argument v - 
+ /// defaults to 0).
+ DoubleVector(const LinearAlgebraDistribution& dist, 
+              const double& v=0.0)
+  : Values_pt(0), Internal_values(true), Built(false)
+  {
+   this->build(dist,v);
   }
    
  /// Destructor - just calls this->clear() to delete the distribution and data
@@ -79,7 +89,7 @@ class CRDoubleMatrix;
  
  /// Copy constructor
  DoubleVector(const DoubleVector& new_vector)
-  : Values_pt(0), Internal_values(true)
+  : Values_pt(0), Internal_values(true), Built(false)
   {
    this->build(new_vector);
   }
@@ -95,8 +105,25 @@ class CRDoubleMatrix;
 
  /// \short Assembles a DoubleVector with distribution dist, if v is specified 
  /// each element is set to v, otherwise each element is set to 0.0
+ void build(const LinearAlgebraDistribution& dist, 
+            const double& v)
+ {
+  this->build(&dist,v);
+ }
+
+ /// \short Assembles a DoubleVector with distribution dist, if v is specified 
+ /// each element is set to v, otherwise each element is set to 0.0
  void build(const LinearAlgebraDistribution* const &dist_pt, 
             const double& v);
+
+ /// \short Assembles a DoubleVector with a distribution dist and coefficients
+ /// taken from the vector v.\n
+ /// Note. The vector v MUST be of length nrow()
+ void build(const LinearAlgebraDistribution& dist,
+            const Vector<double>& v)
+ {
+  this->build(&dist,v);
+ }
 
  /// \short Assembles a DoubleVector with a distribution dist and coefficients
  /// taken from the vector v.\n
@@ -119,8 +146,12 @@ class CRDoubleMatrix;
      delete[] Values_pt;
     }
    Values_pt = 0;
-   Distribution_pt->clear();
+   this->clear_distribution();
+   Built=false;
   }
+
+ // indicates whether this DoubleVector is built
+ bool built() const { return Built; }
 
  /// \short Allows are external data to be used by this vector. \n
  /// WARNING: The size of the external data must correspond to the 
@@ -138,7 +169,7 @@ class CRDoubleMatrix;
    this->clear();
 
    // Set the distribution
-   Distribution_pt->rebuild(dist_pt);
+   this->build_distribution(dist_pt);
 
    // set the external values
    set_external_values(external_values,delete_external_values);
@@ -157,7 +188,7 @@ class CRDoubleMatrix;
   {
 #ifdef PARANOID
    // check that this distribution is setup
-   if (!Distribution_pt->setup())
+   if (!this->is_distribution_built())
     {
     // if this vector does not own the double* values then it cannot be
     // distributed.
@@ -203,7 +234,7 @@ class CRDoubleMatrix;
  const double& operator[](int i) const;
 
  /// \short returns the maximum coefficient
- double max();
+ double max() const;
 
  /// access function to the underlying values
  double* values_pt()
@@ -212,7 +243,7 @@ class CRDoubleMatrix;
   }
 
  /// \short access function to the underlying values (const version)
- double* values_pt() const
+ const double* const values_pt() const
   {
    return Values_pt;
   }
@@ -231,13 +262,13 @@ class CRDoubleMatrix;
   }
 
  /// compute the 2 norm of this vector
- double dot(const DoubleVector& vec);
+ double dot(const DoubleVector& vec) const;
 
  /// compute the 2 norm of this vector 
- double norm();
+ double norm() const;
 
  /// compute the A-norm using the matrix at matrix_pt
- double norm(CRDoubleMatrix* matrix_pt);
+ double norm(const CRDoubleMatrix* matrix_pt) const;
 
  private :
  
@@ -247,6 +278,9 @@ class CRDoubleMatrix;
  /// \short Boolean flag to indicate whether the vector's data (values_pt) 
  /// is owned by this vector.
  bool Internal_values;
+
+ /// indicates that the vector has been built and is usable
+ bool Built;
 
 }; //end of DoubleVector                 
 } // end of oomph namespace

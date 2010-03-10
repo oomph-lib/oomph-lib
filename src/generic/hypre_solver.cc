@@ -182,7 +182,7 @@ namespace oomph
     {
      j = hypre_first_row;
     }
-   double* o_pt = oomph_vec.values_pt();
+   const double* o_pt = oomph_vec.values_pt();
    for (unsigned i=0; i<nrow_local; i++)
     {
      indices[i] = hypre_first_row + i;
@@ -272,7 +272,7 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
    //Trap the case when we have compiled with MPI,
    //but are running in serial
-   if(!MPI_Helpers::MPI_has_been_initialised)
+   if(!MPI_Helpers::mpi_has_been_initialised())
     {
      std::ostringstream error_stream;
      error_stream << "Oomph-lib has been compiled with MPI support and "
@@ -304,7 +304,7 @@ namespace oomph
    // build the distribution
    if (oomph_matrix->distribution_pt()->distributed())
     {
-     dist_pt->rebuild(oomph_matrix->distribution_pt());
+     dist_pt->build(oomph_matrix->distribution_pt());
     }
    else
     {
@@ -313,7 +313,7 @@ namespace oomph
       {
        distributed = false;
       }
-     dist_pt->rebuild
+     dist_pt->build
       (oomph_matrix->distribution_pt()->communicator_pt(),nrow,distributed);
     }
 
@@ -1194,7 +1194,7 @@ namespace oomph
     indices[i] = first_row + i;
    }
   LinearAlgebraDistribution* soln_dist_pt;
-  if (solution.distribution_setup())
+  if (solution.built())
    {
     soln_dist_pt = new LinearAlgebraDistribution(solution.distribution_pt());
    }
@@ -1363,7 +1363,7 @@ namespace oomph
   DoubleVector residual;
   CRDoubleMatrix* matrix = new CRDoubleMatrix;
   problem_pt->get_jacobian(residual,*matrix);
-  
+
   // Output times
   if(Doc_time)
    {
@@ -1434,12 +1434,12 @@ namespace oomph
   if (cr_matrix_pt)
    {
     // rebuild the distribution
-    Distribution_pt->rebuild(cr_matrix_pt->distribution_pt());
+    this->build_distribution(cr_matrix_pt->distribution_pt());
 
 #ifdef PARANOID
   // check that rhs has the same distribution as the matrix (now stored
   // in Distribution_pt)
-  if (*Distribution_pt != *rhs.distribution_pt())
+  if (*this->distribution_pt() != *rhs.distribution_pt())
    {
     std::ostringstream error_message;
     error_message << "The distribution of the rhs vector and the matrix "
@@ -1450,9 +1450,9 @@ namespace oomph
    }
   // if the solution is setup make sure it has the same distribution as
   // the matrix as well
-  if (solution.distribution_pt()->setup())
+  if (solution.built())
    {
-    if (*Distribution_pt != *solution.distribution_pt())
+    if (*this->distribution_pt() != *solution.distribution_pt())
      {
       std::ostringstream error_message;
       error_message << "The distribution of the solution vector is setup "
@@ -1515,7 +1515,7 @@ namespace oomph
    }
   // check that rhs has the same distribution as the matrix (now stored
   // in Distribution_pt)
-  if (*Distribution_pt != *rhs.distribution_pt())
+  if (*this->distribution_pt() != *rhs.distribution_pt())
    {
     std::ostringstream error_message;
     error_message << "The distribution of the rhs vector and the matrix "
@@ -1526,9 +1526,9 @@ namespace oomph
    }
   // if the solution is setup make sure it has the same distribution as
   // the matrix as well
-  if (solution.distribution_pt()->setup())
+  if (solution.built())
    {
-    if (*Distribution_pt != *solution.distribution_pt())
+    if (*this->distribution_pt() != *solution.distribution_pt())
      {
       std::ostringstream error_message;
       error_message << "The distribution of the solution vector is setup "
@@ -1607,7 +1607,7 @@ namespace oomph
   // If cast successful set things up for a serial solve
   if (cr_matrix_pt)
    {
-    Distribution_pt->rebuild(cr_matrix_pt->distribution_pt());
+    this->build_distribution(cr_matrix_pt->distribution_pt());
     hypre_matrix_setup(cr_matrix_pt);
    }
   else 
@@ -1647,7 +1647,7 @@ namespace oomph
    }
   // check that rhs has the same distribution as the matrix (now stored
   // in Distribution_pt)
-  if (*Distribution_pt != *r.distribution_pt())
+  if (*this->distribution_pt() != *r.distribution_pt())
    {
     std::ostringstream error_message;
     error_message << "The distribution of the rhs vector and the matrix "
@@ -1658,9 +1658,9 @@ namespace oomph
    }
   // if the solution is setup make sure it has the same distribution as
   // the matrix as well
-  if (z.distribution_pt()->setup())
+  if (z.built())
    {
-    if (*Distribution_pt != *z.distribution_pt())
+    if (*this->distribution_pt() != *z.distribution_pt())
      {
       std::ostringstream error_message;
       error_message << "The distribution of the solution vector is setup "

@@ -54,16 +54,16 @@ void TrilinosPreconditionerBase::setup(Problem* problem_pt,
 
 #ifdef PARANOID
  // check the matrix is square
-//` if ( matrix_pt->nrow() != matrix_pt->ncol() )
- {
-//  std::ostringstream error_message;
-//  error_message << "Preconditioners require a square matrix. "
-//                << "Matrix is " << matrix_pt->nrow()
-//                << " by " << matrix_pt->ncol() << std::endl;
-//  throw OomphLibError(error_message.str(),
-//                      "TrilinosPreconditionerBase::setup()",
-//                      OOMPH_EXCEPTION_LOCATION);
- }
+ if ( matrix_pt->nrow() != matrix_pt->ncol() )
+  {
+   std::ostringstream error_message;
+   error_message << "Preconditioners require a square matrix. "
+                 << "Matrix is " << matrix_pt->nrow()
+                 << " by " << matrix_pt->ncol() << std::endl;
+   throw OomphLibError(error_message.str(),
+                       "TrilinosPreconditionerBase::setup()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
 #endif
 
 
@@ -80,33 +80,12 @@ void TrilinosPreconditionerBase::setup(Problem* problem_pt,
 #endif
 
  // build the distribution of this preconditioner
- Distribution_pt->rebuild(cr_matrix_pt->distribution_pt());
- 
- // assemble the map
-#ifdef OOMPH_HAS_MPI
- // mpi version
- Epetra_comm_pt = 
-  new Epetra_MpiComm(Distribution_pt->communicator_pt()->mpi_comm());
- TrilinosHelpers::create_epetra_map(Distribution_pt,
-                                    Epetra_comm_pt,
-                                    Epetra_map_pt,Epetra_global_rows);
-
-#else
- // Serial Version
- Epetra_comm_pt = new Epetra_SerialComm;
- TrilinosHelpers::create_epetra_map(Distribution_pt,
-                                    Epetra_comm_pt,
-                                    Epetra_map_pt);
-#endif
+ this->build_distribution(cr_matrix_pt->distribution_pt());
  
  // create the matrices
- Epetra_col_map_pt = new Epetra_Map(matrix_pt->ncol(),matrix_pt->ncol(),
-                                    0,*Epetra_comm_pt);
- TrilinosHelpers::create_epetra_matrix(matrix_pt,
-                                       Epetra_map_pt,
-                                       Epetra_col_map_pt,
-                                       Epetra_matrix_pt);   
- 
+ Epetra_matrix_pt = TrilinosEpetraHelpers::create_distributed_epetra_matrix
+  (cr_matrix_pt,this->distribution_pt());
+
  // set up preconditioner
  setup_trilinos_preconditioner(problem_pt,matrix_pt,Epetra_matrix_pt);
 }
@@ -161,7 +140,7 @@ preconditioner_solve(const DoubleVector &r, DoubleVector &z)
                       OOMPH_EXCEPTION_LOCATION);
  }
 
- if (*Distribution_pt != r.distribution_pt())
+ if (*this->distribution_pt() != r.distribution_pt())
   {
    std::ostringstream error_message;
    error_message << "The rhs vector and the matrix must have the same "
@@ -172,22 +151,21 @@ preconditioner_solve(const DoubleVector &r, DoubleVector &z)
   }
 #endif
 
- // set up trilinos vectors
- Epetra_Vector* epetra_r_pt=0;
- Epetra_Vector* epetra_z_pt=0;
-
  // create Epetra version of r
- TrilinosHelpers::create_epetra_vector(r,Epetra_map_pt,epetra_r_pt);
+ Epetra_Vector* epetra_r_pt = 
+  TrilinosEpetraHelpers::create_distributed_epetra_vector(r);
 
  // create an empty Epetra vector for z
- TrilinosHelpers::create_epetra_vector(Epetra_map_pt,epetra_z_pt);
+ Epetra_Vector* epetra_z_pt = 
+  TrilinosEpetraHelpers::create_distributed_epetra_vector
+  (this->distribution_pt());
  
  // Apply preconditioner                                          
  Epetra_preconditioner_pt->ApplyInverse(*epetra_r_pt,*epetra_z_pt);
 
  // Copy result to z
- z.build(Distribution_pt,0.0);
- TrilinosHelpers::copy_to_oomphlib_vector(epetra_z_pt,z);
+ z.build(this->distribution_pt(),0.0);
+ TrilinosEpetraHelpers::copy_to_oomphlib_vector(epetra_z_pt,z);
 
  // clean up memory
  delete epetra_r_pt;

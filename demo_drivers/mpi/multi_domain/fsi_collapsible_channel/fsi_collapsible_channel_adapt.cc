@@ -417,8 +417,8 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
  Ly=ly;
 
 //  // hierher
-//  dynamic_cast<SuperLUSolver*>(linear_solver_pt())->set_solver_type(
-//   SuperLUSolver::Serial);
+ dynamic_cast<SuperLUSolver*>(linear_solver_pt())->set_solver_type(
+  SuperLUSolver::Serial);
 
 
  // Overwrite maximum allowed residual to accomodate bad initial guesses

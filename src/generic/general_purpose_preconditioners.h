@@ -453,12 +453,13 @@ class InnerIterationPreconditioner : public Preconditioner
     (matrix_pt);
    if (dist_pt != 0)
     {
-     Distribution_pt->rebuild(dist_pt->distribution_pt());
+     this->build_distribution(dist_pt->distribution_pt());
     }
    else
     {
-     Distribution_pt->rebuild(problem_pt->communicator_pt(),
-                              matrix_pt->nrow(),false);
+     LinearAlgebraDistribution dist(problem_pt->communicator_pt(),
+                                    matrix_pt->nrow(),false);
+     this->rebuild_distribution(dist);
     }
 
    // setup the inner iteration preconditioner

@@ -282,7 +282,7 @@ namespace oomph
      "SphericalNavierStokesLSCPreconditioner::preconditioner_solve()",
      OOMPH_EXCEPTION_LOCATION);
    }
-  if (z.distribution_setup())
+  if (z.built())
    {
     if (z.nrow() != r.nrow())
      {
@@ -298,7 +298,7 @@ namespace oomph
 #endif
 
   // if z is not setup then give it the same distribution
-  if (!z.distribution_pt()->setup())
+  if (!z.distribution_pt()->built())
    {
     z.build(r.distribution_pt(),0.0);
    }
@@ -1028,8 +1028,8 @@ namespace oomph
   
   // build the matrix
   CRDoubleMatrix* m_pt = new CRDoubleMatrix(this->block_distribution_pt(0));
-  m_pt->build_matrix_without_copy(nrow,nrow_local,m_values,m_column_index,
-                                  m_row_start);
+  m_pt->build_without_copy(nrow,nrow_local,m_values,m_column_index,
+                           m_row_start);
   
   // return the matrix;
   return m_pt;   

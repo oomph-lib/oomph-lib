@@ -291,13 +291,13 @@ class CG : public IterativeLinearSolver
    if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt))
     {
      // the solver has the same distribution as the matrix if possible
-     Distribution_pt->rebuild(dynamic_cast<DistributableLinearAlgebraObject*>
+     this->build_distribution(dynamic_cast<DistributableLinearAlgebraObject*>
                               (matrix_pt)->distribution_pt());
     }
    else
     {
      // the solver has the same distribution as the RHS
-     Distribution_pt->rebuild(rhs.distribution_pt());
+     this->build_distribution(rhs.distribution_pt());
     }
 
    //Call the helper function with no problem
@@ -431,13 +431,13 @@ class BiCGStab : public IterativeLinearSolver
  if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt))
   {
    // the solver has the same distribution as the matrix if possible
-   Distribution_pt->rebuild(dynamic_cast<DistributableLinearAlgebraObject*>
+   this->build_distribution(dynamic_cast<DistributableLinearAlgebraObject*>
                             (matrix_pt)->distribution_pt());
   }
  else
   {
    // the solver has the same distribution as the RHS
-   Distribution_pt->rebuild(rhs.distribution_pt());
+   this->build_distribution(rhs.distribution_pt());
   }
 
   //Call the helper function with no problem
@@ -568,7 +568,7 @@ class GS : public IterativeLinearSolver
             DoubleVector &solution)
  {
   // setup the distribution
-  Distribution_pt->rebuild(rhs.distribution_pt());
+  this->build_distribution(rhs.distribution_pt());
 
   // Store the matrix if required
   if ((Enable_resolve)&&(!Resolving))
@@ -719,7 +719,7 @@ class GMRES : public IterativeLinearSolver
             DoubleVector &solution)
  {
   // setup the distribution
-  Distribution_pt->rebuild(rhs.distribution_pt());
+  this->build_distribution(rhs.distribution_pt());
 
   // Store the matrix if required
   if ((Enable_resolve)&&(!Resolving))
@@ -826,7 +826,7 @@ class GMRES : public IterativeLinearSolver
    double* temp_pt = temp.values_pt();
    for (unsigned j = 0; j <= k; j++)
     {
-     double* vj_pt = v[j].values_pt();
+     const double* vj_pt = v[j].values_pt();
      for (unsigned i = 0; i < n_x; i++)
       {
        temp_pt[i] += vj_pt[i] * y[j];

@@ -162,19 +162,20 @@ void ARPACK::solve_eigenproblem(Problem* const &problem_pt,
 
  // TEMPORARY
  // only use non distributed matrice and vectors
- Distribution_pt->rebuild(problem_pt->communicator_pt(),n,false);
+ LinearAlgebraDistribution dist(problem_pt->communicator_pt(),n,false);
+ this->build_distribution(dist);
 
  //Before we get into the Arnoldi loop solve the shifted matrix problem
  //Allocated Row compressed matrices for the mass matrix and shifted main 
  //matrix
- CRDoubleMatrix M(Distribution_pt), AsigmaM(Distribution_pt);
+ CRDoubleMatrix M(this->distribution_pt()), AsigmaM(this->distribution_pt());
 
  //Assemble the matrices
  problem_pt->get_eigenproblem_matrices(M,AsigmaM,sigmar);
 
  //Allocate storage for the vectors to be used in matrix vector products
- DoubleVector rhs(Distribution_pt,0.0);
- DoubleVector x(Distribution_pt,0.0);
+ DoubleVector rhs(this->distribution_pt(),0.0);
+ DoubleVector x(this->distribution_pt(),0.0);
  
 
  bool LOOP_FLAG=true;
@@ -182,6 +183,7 @@ void ARPACK::solve_eigenproblem(Problem* const &problem_pt,
 
  //Enable resolves for the linear solver
  Linear_solver_pt->enable_resolve();
+ 
  //Do not report the time taken
  Linear_solver_pt->doc_time() = false;
 
@@ -375,7 +377,7 @@ void ARPACK::solve_eigenproblem(Problem* const &problem_pt,
     eigenvector.resize(nconv);
     for(int j=0;j<nconv;j++)
      {
-      eigenvector[j].build(Distribution_pt,0.0);
+      eigenvector[j].build(this->distribution_pt(),0.0);
       for(int i=0;i<n;i++)
        {
         eigenvector[j][i] = z[0][j*n+i];
@@ -462,13 +464,15 @@ void ARPACK::solve_eigenproblem(Problem* const &problem_pt,
 
  // TEMPORARY
  // only use non-distributed matrices and vectors
- Distribution_pt->rebuild(problem_pt->communicator_pt(),n,false);
+ LinearAlgebraDistribution dist(problem_pt->communicator_pt(),n,false);
+ this->build_distribution(dist);
 
  //Enclose in a separate scope so that memory is cleaned after assembly
  {
   //Allocated Row compressed matrices for the mass matrix and shifted main 
   //matrix
-  CRDoubleMatrix temp_M(Distribution_pt),temp_AsigmaM(Distribution_pt);
+  CRDoubleMatrix temp_M(this->distribution_pt()),
+   temp_AsigmaM(this->distribution_pt());
 
   //Assemble the matrices
   problem_pt->get_eigenproblem_matrices(temp_M,temp_AsigmaM,sigmar);
@@ -539,7 +543,7 @@ void ARPACK::solve_eigenproblem(Problem* const &problem_pt,
     std::complex<double>(sigmar + alpha_r[i]/beta[i],alpha_i[i]/beta[i]);
 
    //Resize the eigenvector  storage
-   eigenvector[i].build(Distribution_pt,0.0);
+   eigenvector[i].build(this->distribution_pt(),0.0);
    //Load up the eigenvector (assume that it's real)
    for(int k = 0; k < n; ++k ) 
     { 
