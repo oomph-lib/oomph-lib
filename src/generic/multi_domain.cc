@@ -201,15 +201,6 @@ namespace Multi_domain_functions
    // and removes the duplication by overwriting any data point with an already
    // existing eqn number with the original data point which had the eqn no.
 
-   // Timing
-   double t_start=0.0; double t_local=0.0; double t_loop_start=0.0;
-   double t_loop_end=0.0; double t_end=0.0;
-
-   if (Doc_timings) 
-    {
-     t_start=TimingHelpers::timer();
-    }
-
    // Storage for existing global equation numbers for each node
    Vector<std::pair<Vector<int>,Node*> > existing_global_eqn_numbers;
 
@@ -306,13 +297,6 @@ namespace Multi_domain_functions
      // elements cannot be external elements
     }
 
-   if (Doc_timings) 
-    {
-     t_local=TimingHelpers::timer();
-     oomph_info << "CPU for storing eqn numbers on this process: "
-                << t_local-t_start << std::endl;
-    }
-
    // Now loop over the other processors from highest to lowest
    // (i.e. if there is a duplicate between these containers
    //  then this will use the node on the highest numbered processor)
@@ -323,10 +307,6 @@ namespace Multi_domain_functions
      // Don't have external halo elements with yourself!
      if (iproc!=my_rank)
       {
-       if (Doc_timings) 
-        {
-         t_loop_start=TimingHelpers::timer();
-        }
        // Loop over external halo elements with iproc for internal data
        // to remove the duplicates in the external halo element storage
        unsigned n_element=mesh_pt->nexternal_halo_element(iproc);
@@ -340,7 +320,6 @@ namespace Multi_domain_functions
          for (unsigned j=0;j<n_node;j++)
           {
            Node* nod_pt=ext_el_pt->node_pt(j);
-
            unsigned n_val=nod_pt->nvalue();
            Vector<int> nodal_eqn_numbers(n_val);
            for (unsigned i_val=0;i_val<n_val;i_val++)
@@ -428,10 +407,10 @@ namespace Multi_domain_functions
                // If the number of values is different from the size of the 
                // vector then they are already different, so only test if 
                // the sizes are the same
-               if (n_val==(existing_global_eqn_numbers[i].first).size())
+               if (n_val_solid==(existing_global_eqn_numbers[i].first).size())
                 {
                  // Loop over values
-                 for (unsigned i_val=0;i_val<n_val;i_val++)
+                 for (unsigned i_val=0;i_val<n_val_solid;i_val++)
                   {
                    // Make sure it isn't a pinned dof already
                    if (solid_nodal_eqn_numbers[i_val]>=0)
@@ -467,7 +446,7 @@ namespace Multi_domain_functions
                // receive the correct global equation numbers during the
                // synchronisation process in 
                // Problem::copy_external_haloed_eqn_numbers_helper(...)   
-               for (unsigned i_val=0;i_val<n_val;i_val++)
+               for (unsigned i_val=0;i_val<n_val_solid;i_val++)
                 {
                  solid_nod_pt->variable_position_pt()->
                   eqn_number(i_val)=Data::Is_unclassified;
@@ -586,11 +565,11 @@ namespace Multi_domain_functions
                        // If the number of values is different from the size
                        // of the vector then they are already different,
                        // only test if the sizes are the same
-                       if (n_val==
+                       if (n_val_solid==
                            (existing_global_eqn_numbers[i].first).size())
                         {
                          // Loop over values
-                         for (unsigned i_val=0;i_val<n_val;i_val++)
+                         for (unsigned i_val=0;i_val<n_val_solid;i_val++)
                           {
                            // Make sure it isn't a pinned dof already
                            if (sld_master_nodal_eqn_numbers[i_val]>=0)
@@ -633,7 +612,7 @@ namespace Multi_domain_functions
                        // they receive the correct global equation numbers
                        // during the synchronisation process in 
                        // Problem::copy_external_haloed_eqn_numbers_helper(...)
-                       for (unsigned i_val=0;i_val<n_val;i_val++)
+                       for (unsigned i_val=0;i_val<n_val_solid;i_val++)
                         {
                          solid_master_nod_pt->variable_position_pt()->
                           eqn_number(i_val)=Data::Is_unclassified;
@@ -647,7 +626,7 @@ namespace Multi_domain_functions
                 }
               } // end hanging loop over continous interpolated variables
             }
-
+          
           } // end loop over nodes on external halo elements
         
          // Reset any internal data to Is_unclassified as there
@@ -664,23 +643,8 @@ namespace Multi_domain_functions
             }
           }
         } // end loop over external halo elements
-
-       if (Doc_timings) 
-        {
-         t_loop_end=TimingHelpers::timer();
-         oomph_info << "CPU for loop with proc " << iproc << " is: "
-                    << t_loop_end-t_loop_start << std::endl;
-        }
-
       }
     } // end loop over processors
-
-   if (Doc_timings) 
-    {
-     t_end=TimingHelpers::timer();
-     oomph_info << "CPU for check_duplicates: "
-                << t_end-t_start << std::endl;
-    }
 
   }
 
@@ -1095,6 +1059,13 @@ namespace Multi_domain_functions
                                             int& n_cont_inter_values,
                                             FiniteElement* f_el_pt)
   {
+   // Tell the halo copy of this node how many values there are
+   // [NB this may be different for nodes within the same element, e.g.
+   //  when using Lagrange multipliers]
+   unsigned n_val=nod_pt->nvalue();
+   Unsigned_values.push_back(n_val);
+   Count_unsigned_values++;
+
    unsigned n_dim=nod_pt->ndim();
    TimeStepper* time_stepper_pt=nod_pt->time_stepper_pt();
 
@@ -1218,8 +1189,8 @@ namespace Multi_domain_functions
    SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
    if (solid_nod_pt!=0)
     {
-     unsigned n_val=solid_nod_pt->variable_position_pt()->nvalue();
-     for (unsigned i_val=0;i_val<n_val;i_val++)
+     unsigned n_solid_val=solid_nod_pt->variable_position_pt()->nvalue();
+     for (unsigned i_val=0;i_val<n_solid_val;i_val++)
       {
        for (unsigned t=0;t<n_prev;t++)
         {
@@ -1231,9 +1202,6 @@ namespace Multi_domain_functions
     }
 
    // Finally copy info required for all node types
-
-   // Halo copy needs to know all the history values
-   unsigned n_val=nod_pt->nvalue();
    for (unsigned i_val=0;i_val<n_val;i_val++)
     {
      for (unsigned t=0;t<n_prev;t++)
@@ -1252,8 +1220,6 @@ namespace Multi_domain_functions
        Count_double_values++;
       }
     }
-
-
   }
 
 //=========start of get_required_master_nodal_information_helper==========

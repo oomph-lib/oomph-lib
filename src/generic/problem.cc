@@ -1230,13 +1230,17 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
 
      // The degrees of freedom must be synchronised 
      // before calling check_halo_schemes
-     synchronise_dofs(mesh_pt());
+//     synchronise_dofs(mesh_pt());
 
 #ifdef PARANOID
      // Check that the halo schemes are okay if all eqn numbers 
      // are being assigned
      if (assign_local_eqn_numbers)
       {
+       // The degrees of freedom must be synchronised 
+       // before calling check_halo_schemes
+       synchronise_dofs(mesh_pt());
+
        oomph_info << "Calling check_halo_schemes() from assign_eqn_numbers()"
                   << std::endl << std::endl;
        check_halo_schemes();
@@ -1286,10 +1290,9 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
 #else
        mesh_pt(imesh)->classify_halo_and_haloed_nodes(this->communicator_pt());
 #endif
-
        // Degrees of freedom must be synchronised before
        // calling check_halo_schemes
-       synchronise_dofs(mesh_pt(imesh));
+//       synchronise_dofs(mesh_pt(imesh));
       }
 
 #ifdef PARANOID
@@ -1297,6 +1300,13 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
      // are being assigned
      if (assign_local_eqn_numbers)
       {
+       // Degrees of freedom must be synchronised before
+       // calling check_halo_schemes
+       for (unsigned imesh=0;imesh<nmesh;imesh++)
+        {
+         synchronise_dofs(mesh_pt(imesh));
+        }
+
        oomph_info << "Calling check_halo_schemes() from assign_eqn_numbers()"
                   << std::endl << std::endl;
        check_halo_schemes();
@@ -1775,7 +1785,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
   // PARANOID checks : if the distribution of residuals is setup then it must
   // must not be distributed, have the right number of rows, and the same 
   // communicator as the problem
-  if (residuals.distribution_pt()->built())
+  if (residuals.built())
    {
     if (residuals.distribution_pt()->distributed())
      {
@@ -1902,8 +1912,8 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
 #ifdef PARANOID
   // PARANOID checks that the distribution of the jacobian matches that of the
   // residuals (if they are setup) and that they have the right number of rows
-  if (residuals.distribution_pt()->built() && 
-      jacobian.distribution_pt()->built())
+  if (residuals.built() && 
+      jacobian.is_distribution_built())
    {
     if (!(*residuals.distribution_pt() == *jacobian.distribution_pt()))
      {                                    
@@ -1924,8 +1934,8 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
                           OOMPH_EXCEPTION_LOCATION);              
      }                 
    }
-  else if (residuals.distribution_pt()->built() != 
-           jacobian.distribution_pt()->built())
+  else if (residuals.built() != 
+           jacobian.is_distribution_built())
    {
     std::ostringstream error_stream; 
     error_stream << "The distribution of the jacobian and residuals must "
@@ -2102,7 +2112,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
   // PARANOID checks : if the distribution of residuals is setup then it must
   // must not be distributed, have the right number of rows, and the same 
   // communicator as the problem   
-  if (residuals.distribution_pt()->built())
+  if (residuals.built())
    {                                                            
     if (residuals.distribution_pt()->distributed())  
      {                  
@@ -5917,7 +5927,7 @@ void Problem::get_eigenproblem_matrices(CRDoubleMatrix &mass_matrix,
  mass_matrix.build_without_copy(n_dof,nnz[1],value[1],
                                 column_or_row_index[1],
                                 row_or_column_start[1]);   
- 
+
  //Delete the eigenproblem handler
  delete Assembly_handler_pt;
  //Reset the assembly handler to the original handler
@@ -9519,18 +9529,15 @@ void Problem::refine_selected_elements(const unsigned& i_mesh,
    }
 
   // Refine single mesh if possible
-  if (mesh_pt(i_mesh)->nelement()>0)
+  if(RefineableMeshBase* mmesh_pt = 
+     dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
    {
-    if(RefineableMeshBase* mmesh_pt = 
-       dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
-     {
-      mmesh_pt->refine_selected_elements(elements_to_be_refined);
-     }
-    else
-     {
-      oomph_info << "Info/Warning: Mesh cannot be refined " 
-                 << std::endl;
-     }
+    mmesh_pt->refine_selected_elements(elements_to_be_refined);
+   }
+  else
+   {
+    oomph_info << "Info/Warning: Mesh cannot be refined " 
+               << std::endl;
    }
 
   if (n_mesh>1)
@@ -9573,18 +9580,15 @@ void Problem::refine_selected_elements(const unsigned& i_mesh,
   }
 
  // Refine single mesh if possible
- if (mesh_pt(i_mesh)->nelement()>0)
+ if(RefineableMeshBase* mmesh_pt = 
+    dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh))) 
   {
-   if(RefineableMeshBase* mmesh_pt = 
-      dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
-    {
-     mmesh_pt->refine_selected_elements(elements_to_be_refined_pt);
-    }
-   else
-    {
-     oomph_info << "Info/Warning: Mesh cannot be refined " 
-                << std::endl;
-    }
+   mmesh_pt->refine_selected_elements(elements_to_be_refined_pt);
+  }
+ else
+  {
+   oomph_info << "Info/Warning: Mesh cannot be refined " 
+              << std::endl;
   }
 
  if (n_mesh>1)
@@ -9617,18 +9621,15 @@ void Problem::refine_selected_elements(const Vector<Vector<unsigned> >&
   // Refine all submeshes if possible
   for (unsigned i_mesh=0; i_mesh<n_mesh; i_mesh++)
    {
-    if (mesh_pt(i_mesh)->nelement()>0)
+    if(RefineableMeshBase* mmesh_pt = 
+       dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
      {
-      if(RefineableMeshBase* mmesh_pt = 
-         dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
-       {
-        mmesh_pt->refine_selected_elements(elements_to_be_refined[i_mesh]);
-       }
-      else
-       {
-        oomph_info << "Info/Warning: Mesh cannot be refined " 
-                   << std::endl;
-       }
+      mmesh_pt->refine_selected_elements(elements_to_be_refined[i_mesh]);
+     }
+    else
+     {
+      oomph_info << "Info/Warning: Mesh cannot be refined " 
+                 << std::endl;
      }
    }
 
@@ -9660,18 +9661,15 @@ void Problem::refine_selected_elements(const
   // Refine all submeshes if possible
   for (unsigned i_mesh=0; i_mesh<n_mesh; i_mesh++)
    {
-    if (mesh_pt(i_mesh)->nelement()>0)
+    if(RefineableMeshBase* mmesh_pt = 
+       dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
      {
-      if(RefineableMeshBase* mmesh_pt = 
-         dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
-       {
-        mmesh_pt->refine_selected_elements(elements_to_be_refined_pt[i_mesh]);
-       }
-      else
-       {
-        oomph_info << "Info/Warning: Mesh cannot be refined " 
-                   << std::endl;
-       }
+      mmesh_pt->refine_selected_elements(elements_to_be_refined_pt[i_mesh]);
+     }
+    else
+     {
+      oomph_info << "Info/Warning: Mesh cannot be refined " 
+                 << std::endl;
      }
    }
 
@@ -9719,21 +9717,17 @@ void Problem::refine_uniformly(DocInfo& doc_info)
    // Loop over submeshes
    for (unsigned imesh=0;imesh<Nmesh;imesh++)
     {
-     // If the mesh has elements...
-     if (mesh_pt(imesh)->nelement()>0)
+     // Refine i-th submesh uniformly if possible
+     if (RefineableMeshBase* mmesh_pt =
+         dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
       {
-       // Refine i-th submesh uniformly if possible
-       if (RefineableMeshBase* mmesh_pt =
-           dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
-        {
-         mmesh_pt->refine_uniformly(doc_info);
-        }
-       else
-        {
-         oomph_info << "Info/Warning: Cannot refine mesh " << imesh 
-                    << std::endl;
-        } 
+       mmesh_pt->refine_uniformly(doc_info);
       }
+     else
+      {
+       oomph_info << "Info/Warning: Cannot refine mesh " << imesh 
+                  << std::endl;
+      } 
     }
    //Rebuild the global mesh
    rebuild_global_mesh();
@@ -9772,20 +9766,16 @@ void Problem::refine_uniformly(const unsigned& i_mesh,
   }
 #endif
 
- // If the mesh has elements...
- if (mesh_pt(i_mesh)->nelement()>0)
+ // Refine single mesh uniformly if possible
+ if(RefineableMeshBase* mmesh_pt = 
+    dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
   {
-   // Refine single mesh uniformly if possible
-   if(RefineableMeshBase* mmesh_pt = 
-      dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
-    {
-     mmesh_pt->refine_uniformly(doc_info);
-    }
-   else
-    {
-     oomph_info << "Info/Warning: Mesh cannot be refined uniformly " 
-                << std::endl;
-    }
+   mmesh_pt->refine_uniformly(doc_info);
+  }
+ else
+  {
+   oomph_info << "Info/Warning: Mesh cannot be refined uniformly " 
+              << std::endl;
   }
 
  //Rebuild the global mesh
@@ -9838,21 +9828,17 @@ unsigned Problem::unrefine_uniformly()
    // Loop over submeshes
    for (unsigned imesh=0;imesh<Nmesh;imesh++)
     {
-     // If the mesh has elements...
-     if (mesh_pt(imesh)->nelement()>0)
+     // Unrefine i-th submesh uniformly if possible
+     if (RefineableMeshBase* mmesh_pt=
+         dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
       {
-       // Unrefine i-th submesh uniformly if possible
-       if (RefineableMeshBase* mmesh_pt=
-           dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
-        {
-         success_flag+=mmesh_pt->unrefine_uniformly(this->communicator_pt());
-        }
-       else
-        {
-         oomph_info << "Info/Warning: Cannot unrefine mesh " << imesh 
-                    << std::endl;
-        } 
+       success_flag+=mmesh_pt->unrefine_uniformly(this->communicator_pt());
       }
+     else
+      {
+       oomph_info << "Info/Warning: Cannot unrefine mesh " << imesh 
+                  << std::endl;
+      } 
     }
    //Rebuild the global mesh
    rebuild_global_mesh();
@@ -9905,20 +9891,16 @@ unsigned Problem::unrefine_uniformly(const unsigned& i_mesh)
   }
 #endif
 
- // If the mesh has elements...
- if (mesh_pt(i_mesh)->nelement()>0)
+ // Unrefine single mesh uniformly if possible
+ if(RefineableMeshBase* mmesh_pt = 
+    dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
   {
-   // Unrefine single mesh uniformly if possible
-   if(RefineableMeshBase* mmesh_pt = 
-      dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
-    {
-     success_flag+=mmesh_pt->unrefine_uniformly(this->communicator_pt());
-    }
-   else
-    {
-     oomph_info << "Info/Warning: Mesh cannot be unrefined uniformly " 
-                << std::endl;
-    }
+   success_flag+=mmesh_pt->unrefine_uniformly(this->communicator_pt());
+  }
+ else
+  {
+   oomph_info << "Info/Warning: Mesh cannot be unrefined uniformly " 
+              << std::endl;
   }
 
  //Rebuild the global mesh
@@ -10291,8 +10273,7 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
 
  // Loop over all processors whose eqn numbers are to be updated
  for (int rank=0;rank<n_proc;rank++)
-  {  
- 
+  {   
    // Prepare a vector of values
    Vector<double> values_on_other_proc;
    Vector<double> internal_values_on_other_proc;
@@ -10359,7 +10340,7 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
         }
 
       }
-
+          
      // Since nval may vary from node to node in the most general case,
      // the best way to send/receive here is to get the size of
      // the array before the array is sent, and send that first, so that
@@ -10432,7 +10413,6 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
        // Don't talk to yourself
        if (send_rank!=my_rank)
         {
-
          // How many of my nodes are halos whose non-halo counter
          // parts live on processor send_rank?
          unsigned nnod=mesh_pt->nhalo_node(send_rank);
@@ -10446,7 +10426,7 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
           {
            // Prepare vector for receipt of values
            values_on_other_proc.resize(count);
-      
+
            // Receive 
            MPI_Recv(&values_on_other_proc[0],count,MPI_DOUBLE,send_rank,
                     1,this->communicator_pt()->mpi_comm(),&status);
@@ -11027,7 +11007,7 @@ long Problem::synchronise_eqn_numbers(const bool& assign_local_eqn_numbers)
 //===================================================================
 void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
 {
-// MPI_Status status;
+ MPI_Status status;
 
  // Storage for number of processors and current processor
  int n_proc=this->communicator_pt()->nproc();
@@ -11079,8 +11059,6 @@ void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
      // The receiving process needs to know how many values it's getting
      // since it only descends into the loop over the nodes after
      // receiving the vector
-     std::cout << count << " " 
-               << eqn_numbers_on_other_proc.size() << std::endl;
      MPI_Send(&count,1,MPI_INT,rank,0,this->communicator_pt()->mpi_comm());
 
      if (count!=0)
@@ -11147,7 +11125,7 @@ void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
          // Receive the size of the vector of eqn numbers
          unsigned count=0;
          MPI_Recv(&count,1,MPI_INT,send_rank,0,
-                  this->communicator_pt()->mpi_comm(),MPI_STATUS_IGNORE);
+                  this->communicator_pt()->mpi_comm(),&status);
          
          if (count!=0)
           {
@@ -11156,7 +11134,7 @@ void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
          
            // Receive it
            MPI_Recv(&eqn_numbers_on_other_proc[0],count,MPI_INT,send_rank,
-                    1,this->communicator_pt()->mpi_comm(),MPI_STATUS_IGNORE);
+                    1,this->communicator_pt()->mpi_comm(),&status);
 
            // Copy into the equation numbers of the halo nodes
            // on the present processors
@@ -11197,7 +11175,7 @@ void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
          // Receive size of vector of internal data values
          unsigned count_intern=0;
          MPI_Recv(&count_intern,1,MPI_INT,send_rank,2,
-                  this->communicator_pt()->mpi_comm(),MPI_STATUS_IGNORE);
+                  this->communicator_pt()->mpi_comm(),&status);
 
          // Prepare and receive vector
          if (count_intern!=0)
@@ -11205,7 +11183,7 @@ void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
            internal_eqn_numbers_on_other_proc.resize(count_intern);
            MPI_Recv(&internal_eqn_numbers_on_other_proc[0],
                     count_intern,MPI_INT,send_rank,3,
-                    this->communicator_pt()->mpi_comm(),MPI_STATUS_IGNORE);
+                    this->communicator_pt()->mpi_comm(),&status);
 
            // reset array counter index to zero
            count_intern=0;
@@ -11226,11 +11204,15 @@ void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
                 }
               }
             }
-          }    
+          }
+         
         }
       }
     }
-  } // loop over ranks
+
+  }
+
+
 }
 
 //=======================================================================

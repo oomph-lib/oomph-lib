@@ -1481,12 +1481,17 @@ template<class EXT_ELEMENT>
  (Node* &new_nod_pt, unsigned& loc_p, unsigned& node_index,
   EXT_ELEMENT* new_el_pt, Mesh* const &external_mesh_pt, Problem* problem_pt)
  {
+  // The first entry indicates the number of values at this new Node
+  // (which may be different across the same element e.g. Lagrange multipliers)
+  unsigned n_val=Unsigned_values[Count_unsigned_values];
+  Count_unsigned_values++;
+
   // Null TimeStepper for now
   TimeStepper* time_stepper_pt=0;
   // Default number of previous values to 1
   unsigned n_prev=1;
 
-  // The first entry in nodal_info indicates
+  // The next entry in Unsigned_values indicates
   // if a timestepper is required for this halo node
   if (Unsigned_values
       [Count_unsigned_values]==1)
@@ -1666,12 +1671,12 @@ template<class EXT_ELEMENT>
       geom_object_vector_pt);
    }
 
-  // Is the new node a SolidNode?
+  // Is the new node a SolidNode? 
   SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(new_nod_pt);
   if (solid_nod_pt!=0)
    {
-    unsigned n_val=solid_nod_pt->variable_position_pt()->nvalue();
-    for (unsigned i_val=0;i_val<n_val;i_val++)
+    unsigned n_solid_val=solid_nod_pt->variable_position_pt()->nvalue();
+    for (unsigned i_val=0;i_val<n_solid_val;i_val++)
      {
       for (unsigned t=0;t<n_prev;t++)
        {
@@ -1683,8 +1688,15 @@ template<class EXT_ELEMENT>
      }
    }
 
+  // If there are additional values, resize the node
+  unsigned n_new_val=new_nod_pt->nvalue();
+  if (n_val>n_new_val)
+   {
+    new_nod_pt->resize(n_val);
+   }
+
   // Get copied history values
-  unsigned n_val=new_nod_pt->nvalue();
+  //  unsigned n_val=new_nod_pt->nvalue();
   for (unsigned i_val=0;i_val<n_val;i_val++)
    {
     for (unsigned t=0;t<n_prev;t++)
@@ -1707,7 +1719,6 @@ template<class EXT_ELEMENT>
       Count_double_values++;
      }
    }
-
  }
 
 //======start of construct_new_external_halo_master_node_helper===========
@@ -2135,18 +2146,19 @@ template<class EXT_ELEMENT>
     external_mesh_pt->add_external_halo_node_pt(loc_p,new_master_nod_pt);
 
     // Copy across particular info required for SolidNode
+    // NOTE: Are there any problems with additional values for SolidNodes?
     SolidNode* solid_master_nod_pt=dynamic_cast<SolidNode*>(new_master_nod_pt);
-    unsigned n_val=solid_master_nod_pt->variable_position_pt()->nvalue();
-    for (unsigned i_val=0;i_val<n_val;i_val++)
+    unsigned n_solid_val=solid_master_nod_pt->variable_position_pt()->nvalue();
+    for (unsigned i_val=0;i_val<n_solid_val;i_val++)
      {
       for (unsigned t=0;t<n_prev;t++)
        {
         solid_master_nod_pt->variable_position_pt()->
          set_value(t,i_val,
                    Double_values[Count_double_values]);
+	Count_double_values++;
        }
      }
-
    }
   else // Just an ordinary node!
    {
@@ -2207,8 +2219,8 @@ template<class EXT_ELEMENT>
 
   // Remaining info received for all node types
   // Get copied history values
-  unsigned n_val=new_master_nod_pt->nvalue();
-  for (unsigned i_val=0;i_val<n_val;i_val++)
+  //  unsigned n_val=new_master_nod_pt->nvalue();
+  for (unsigned i_val=0;i_val<n_value;i_val++)
    {
     for (unsigned t=0;t<n_prev;t++)
      {
