@@ -33,7 +33,7 @@ if test "$1" = "no_python"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/one_d_poisson_adapt_results.dat.gz   \
-    one_d_poisson_adapt_results.dat  >> validation.log
+    one_d_poisson_adapt_results.dat  0.1 1.0e-12 >> validation.log
 fi
 
 # Append output to global validation log file

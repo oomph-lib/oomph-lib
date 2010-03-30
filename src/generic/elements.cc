@@ -27,11 +27,14 @@
 //LIC//====================================================================
 //Non-inline member functions for generic elements
 
+#include<float.h>
+
 //oomph-lib includes
 #include "elements.h"
 #include "timesteppers.h"
 #include "integral.h"
 #include "shape.h"
+#include "oomph_definitions.h"
 //#include "geom_objects.h"
 
 namespace oomph
@@ -982,84 +985,102 @@ namespace Locate_zeta_helpers
 /// \short Internal function used to check for singular or negative values
 /// of the determinant of the Jacobian of the mapping between local and 
 /// global or lagrangian coordinates. Negative jacobians are allowed if the 
-/// Accept_negative_jacobian flag is set to true
+/// Accept_negative_jacobian flag is set to true. 
 //========================================================================
  void FiniteElement::check_jacobian(const double &jacobian) const
  {
   //First check for a zero jacobian
   if(std::abs(jacobian) < 1.0e-16)
    {
-    throw OomphLibError(
-     "Determinant of Jacobian matrix is zero --- singular mapping!",
-     "FiniteElement::check_jacobian()",
-     OOMPH_EXCEPTION_LOCATION);
+    if (FiniteElement::Suppress_output_while_checking_for_inverted_elements)
+     {
+      throw OomphLibQuietException();
+     }
+    else
+     {
+      throw OomphLibError(
+       "Determinant of Jacobian matrix is zero --- singular mapping!",
+       "FiniteElement::check_jacobian()",
+       OOMPH_EXCEPTION_LOCATION);
+     }
    }
   //Now check for negative jacobians, if we're not allowing them (default)
   if((Accept_negative_jacobian==false) && (jacobian < 0.0))
    {
-    std::ostringstream error_stream;
-    error_stream << "Negative Jacobian in transform from "
-                 << "local to global coordinates"
-                 << std::endl 
-                 << "       You have an inverted coordinate system!" 
-                 << std::endl << std::endl;
-    error_stream << "Here are the nodal coordinates of the inverted element\n" 
-                 << "in the form \n\n       x,y[,z], hang_status\n\n" 
-                 << "where hang_status = 1 or 2 for non-hanging or hanging\n" 
-                 << "nodes respectively (useful for automatic sizing of\n" 
-                 << "tecplot markers to identify the hanging nodes). \n\n" ;
-    unsigned n_dim_nod=node_pt(0)->ndim();
-    unsigned n_nod=nnode();
-    unsigned hang_count=0;
-    for (unsigned j=0;j<n_nod;j++)
-     {
-      for (unsigned i=0;i<n_dim_nod;i++)
-       {
-        error_stream << node_pt(j)->x(i) << " ";
-       }
-      if (node_pt(j)->is_hanging())
-       {
-        error_stream << " 2";
-        hang_count++;
-       }
-      else
-       {
-        error_stream << " 1";
-       }
-      error_stream << std::endl;
-     }
-    error_stream << std::endl << std::endl;
-    if ((Macro_elem_pt!=0)&&(0!=hang_count))
-     {
-      error_stream 
-       << "NOTE: The inverted element is associated with a MacroElement\n"
-       << "       AND the element has hanging nodes! \n"
-       << "       If an element is thin and highly curved, the \n"
-       << "       constraints imposed by\n \n"
-       << "       (1) inter-element continuity (imposed by the hanging\n"
-       << "           node constraints) and \n\n"
-       << "       (2) the need to respect curvilinear domain boundaries\n"
-       << "           during mesh refinement (imposed by the element's\n"
-       << "           macro element mapping)\n\n"
-       << "       may be irreconcilable!  \n \n"
-       << "       You may have to re-design your base mesh to avoid \n"
-       << "       the creation of thin, highly curved elements during\n"
-       << "       the refinement process.\n"
-       << std::endl;
-     }
-    
-    error_stream << std::endl << std::endl
-                 << "If you believe that inverted elements do not cause any\n" 
-                 << "problems in your specific application you can \n " 
-                 << "suppress this test by: " << std::endl
-     << "  i) setting the (static) flag " 
-     << "FiniteElement::Accept_negative_jacobian to be true" << std::endl;
-    error_stream << " ii) switching OFF the PARANOID flag" 
-                 << std::endl << std::endl;
 
-    throw OomphLibError(error_stream.str(),
-                        "FiniteElement::check_jacobian()",
-                        OOMPH_EXCEPTION_LOCATION);
+    if (FiniteElement::Suppress_output_while_checking_for_inverted_elements)
+     {
+      throw OomphLibQuietException();
+     }
+    else
+     {
+      std::ostringstream error_stream;
+      error_stream 
+       << "Negative Jacobian in transform from "
+       << "local to global coordinates"
+       << std::endl 
+       << "       You have an inverted coordinate system!" 
+       << std::endl << std::endl;
+      error_stream 
+       << "Here are the nodal coordinates of the inverted element\n" 
+       << "in the form \n\n       x,y[,z], hang_status\n\n" 
+       << "where hang_status = 1 or 2 for non-hanging or hanging\n" 
+       << "nodes respectively (useful for automatic sizing of\n" 
+       << "tecplot markers to identify the hanging nodes). \n\n" ;
+      unsigned n_dim_nod=node_pt(0)->ndim();
+      unsigned n_nod=nnode();
+      unsigned hang_count=0;
+      for (unsigned j=0;j<n_nod;j++)
+       {
+        for (unsigned i=0;i<n_dim_nod;i++)
+         {
+          error_stream << node_pt(j)->x(i) << " ";
+         }
+        if (node_pt(j)->is_hanging())
+         {
+          error_stream << " 2";
+          hang_count++;
+         }
+        else
+         {
+          error_stream << " 1";
+         }
+        error_stream << std::endl;
+       }
+      error_stream << std::endl << std::endl;
+      if ((Macro_elem_pt!=0)&&(0!=hang_count))
+       {
+        error_stream 
+         << "NOTE: The inverted element is associated with a MacroElement\n"
+         << "       AND the element has hanging nodes! \n"
+         << "       If an element is thin and highly curved, the \n"
+         << "       constraints imposed by\n \n"
+         << "       (1) inter-element continuity (imposed by the hanging\n"
+         << "           node constraints) and \n\n"
+         << "       (2) the need to respect curvilinear domain boundaries\n"
+         << "           during mesh refinement (imposed by the element's\n"
+         << "           macro element mapping)\n\n"
+         << "       may be irreconcilable!  \n \n"
+         << "       You may have to re-design your base mesh to avoid \n"
+         << "       the creation of thin, highly curved elements during\n"
+         << "       the refinement process.\n"
+         << std::endl;
+       }
+      
+      error_stream 
+       << std::endl << std::endl
+       << "If you believe that inverted elements do not cause any\n" 
+       << "problems in your specific application you can \n " 
+       << "suppress this test by: " << std::endl
+       << "  i) setting the (static) flag " 
+       << "FiniteElement::Accept_negative_jacobian to be true" << std::endl;
+      error_stream << " ii) switching OFF the PARANOID flag" 
+                   << std::endl << std::endl;
+      
+      throw OomphLibError(error_stream.str(),
+                          "FiniteElement::check_jacobian()",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
    }
  }
 
@@ -1376,6 +1397,13 @@ assemble_local_to_eulerian_jacobian(const DShape &dpsids,
 /// false
 //======================================================================
  bool FiniteElement::Accept_negative_jacobian = false;
+
+
+//======================================================================
+///  Set default for static boolean to suppress output while checking 
+/// for inverted elements
+//======================================================================
+bool FiniteElement::Suppress_output_while_checking_for_inverted_elements=false;
 
 //========================================================================
 /// Static array that holds the number of rows in the second derivative
@@ -2735,6 +2763,7 @@ void FiniteElement::get_dresidual_dnodal_coordinates(
     double w = integral_pt()->weight(ipt);
     //Get the value of the Jacobian of the mapping to global coordinates
     double J = J_eulerian_at_knot(ipt);
+
     //Add the product to the sum
     sum += w*J;
    }
@@ -3134,7 +3163,7 @@ void FiniteElement::locate_zeta(const Vector<double> &zeta,
                                 GeomObject*& geom_object_pt, Vector<double> &s,
                                 const bool& use_coordinate_as_initial_guess)
     {
-     using namespace Locate_zeta_helpers;
+     //using namespace Locate_zeta_helpers;
 
      //Find the number of coordinates, the dimension of the element
      //This must be the same for the local and intrinsic global coordinate
@@ -3145,7 +3174,7 @@ void FiniteElement::locate_zeta(const Vector<double> &zeta,
      DenseDoubleMatrix jacobian(ncoord,ncoord,0.0);
 
      // Make a list of (equally-spaced) local coordinates inside the element
-     unsigned n_list=N_local_points; // see namespace Locate_zeta_helpers
+     unsigned n_list=Locate_zeta_helpers::N_local_points; 
      double list_space=(1.0/(double(n_list)-1.0))*(s_max()-s_min());
      Vector<Vector<double> > s_list;
 
@@ -3237,7 +3266,7 @@ void FiniteElement::locate_zeta(const Vector<double> &zeta,
      else
       {
        // Find the smallest residual from the list of coordinates made earlier
-       double my_min_resid=10e8;
+       double my_min_resid=DBL_MAX;
        Vector<double> s_local(ncoord);
        Vector<double> work_x(ncoord);
        Vector<double> work_dx(ncoord);
@@ -3283,7 +3312,7 @@ void FiniteElement::locate_zeta(const Vector<double> &zeta,
        count++;
 
        //Bail out if necessary (without an error for now...)
-       if(count > Max_newton_iterations)
+       if(count > Locate_zeta_helpers::Max_newton_iterations)
         {
          keep_going=false;
          continue;
@@ -3296,7 +3325,7 @@ void FiniteElement::locate_zeta(const Vector<double> &zeta,
           std::abs(*std::max_element(dx.begin(),dx.end(),AbsCmp<double>()));
 
          //If it's small enough exit
-         if(maxres < Newton_tolerance)
+         if(maxres < Locate_zeta_helpers::Newton_tolerance)
           {
            keep_going=false;
            continue;
@@ -3351,21 +3380,22 @@ void FiniteElement::locate_zeta(const Vector<double> &zeta,
          //Calculate the values of dxds
          DenseMatrix<double> interpolated_dxds(ncoord,ncoord,0.0);
 
-         //This implementation will only work for n_position_type=1
-         //since the function nodal_position_gen does not yet exist
-#ifdef PARANOID
-         if (n_position_type!=1)
-          {
-           std::ostringstream error_stream;
-           error_stream << "This implementation does not exist yet;\n"
-                        << "it currently uses raw_nodal_position_gen\n"
-                        << "which does not take hangingness into account\n"
-                        << "It will work if n_position_type=1\n";
-           throw OomphLibError(error_stream.str(),
-                               "FiniteElement::locate_zeta()",
-                               OOMPH_EXCEPTION_LOCATION);
-          }
-#endif
+// MH: No longer needed
+//          //This implementation will only work for n_position_type=1
+//          //since the function nodal_position_gen does not yet exist
+// #ifdef PARANOID
+//          if (n_position_type!=1)
+//           {
+//            std::ostringstream error_stream;
+//            error_stream << "This implementation does not exist yet;\n"
+//                         << "it currently uses raw_nodal_position_gen\n"
+//                         << "which does not take hangingness into account\n"
+//                         << "It will work if n_position_type=1\n";
+//            throw OomphLibError(error_stream.str(),
+//                                "FiniteElement::locate_zeta()",
+//                                OOMPH_EXCEPTION_LOCATION);
+//           }
+// #endif
 
          // Loop over the nodes
          for(unsigned l=0;l<n_node;l++)
@@ -3423,7 +3453,7 @@ void FiniteElement::locate_zeta(const Vector<double> &zeta,
         std::abs(*std::max_element(dx.begin(),dx.end(),AbsCmp<double>()));
 
        //If we have converged jump straight to the test at the end of the loop
-       if(maxres < Newton_tolerance)
+       if(maxres < Locate_zeta_helpers::Newton_tolerance)
         {
          keep_going=false;
          continue;
@@ -3432,7 +3462,8 @@ void FiniteElement::locate_zeta(const Vector<double> &zeta,
      while(keep_going);
 
      //Test whether the local coordinate are valid or not
-     bool valid=local_coord_is_valid(s,Rounding_tolerance);
+     bool valid=local_coord_is_valid(s,
+                                     Locate_zeta_helpers::Rounding_tolerance);
      if (!valid)
       {
        geom_object_pt=0;
@@ -3441,7 +3472,7 @@ void FiniteElement::locate_zeta(const Vector<double> &zeta,
 
      // It is also possible now that it may not have converged "correctly", 
      // i.e. count is greater than Max_newton_iterations
-     if (count > Max_newton_iterations)
+     if (count > Locate_zeta_helpers::Max_newton_iterations)
       {
        // Don't trust the current answer, return null
        geom_object_pt=0;

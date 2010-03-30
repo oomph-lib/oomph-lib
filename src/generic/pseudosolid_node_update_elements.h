@@ -36,6 +36,20 @@
 namespace oomph
 {
 
+
+//===========================================================================
+/// Helper namespace for pseudo-elastic elements
+//===========================================================================
+namespace PseudoSolidHelper
+{
+
+ /// \short Static variable to hold the default value for the pseudo-solid's
+ /// inertia parameter Lambda^2.
+ extern double Zero;
+
+}
+
+
 //==========================================================================
 /// A templated class that permits combination two different element types,
 /// for the solution of problems in deforming domains. The first template
@@ -49,8 +63,12 @@ template<class BASIC, class SOLID>
 {
   public: 
 
- ///Constructor, call the BASIC and SOLID elements' constructors
- PseudoSolidNodeUpdateElement() : BASIC(), SOLID() {}
+ /// \short Constructor, call the BASIC and SOLID elements' constructors and
+ /// set the "density" parameter for solid element to zero
+ PseudoSolidNodeUpdateElement() : BASIC(), SOLID()
+  {
+   SOLID::lambda_sq_pt()=&PseudoSolidHelper::Zero;
+  }
 
  /// \short The required number of values is the sum of the two
  unsigned required_nvalue(const unsigned &n) const
@@ -319,7 +337,6 @@ template<class BASIC, class SOLID>
     }
   }
 
-
 };
 
 ///Explicit definition of the face geometry of these elements
@@ -332,8 +349,6 @@ public virtual FaceGeometry<SOLID>
  /// \short Constuctor calls the constructor of the SolidQElement
  /// (Only the Intel compiler seems to need this!)
  FaceGeometry() : FaceGeometry<SOLID>() {}
-
-  protected:
 
 };
 
@@ -364,10 +379,15 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
 
   public: 
  
- ///Constructor, call the BASIC and SOLID elements' constructors
+ /// \short Constructor, call the BASIC and SOLID elements' constructors and
+ /// set the "density" parameter for solid element to zero
  RefineablePseudoSolidNodeUpdateElement() : 
   RefineableElement(),
-  BASIC(), SOLID(){} 
+   BASIC(), SOLID()
+   {
+    SOLID::lambda_sq_pt()=&PseudoSolidHelper::Zero;
+   }
+
 
  /// \short The required number of values is the sum of the two
  unsigned required_nvalue(const unsigned &n) const
@@ -640,18 +660,44 @@ class RefineablePseudoSolidNodeUpdateElement : public virtual BASIC,
  /// \short Specify Data that affects the geometry of the element
  /// by adding the position Data to the set that's passed in.
  /// (This functionality is required in FSI problems; set is used to
- /// avoid double counting).
+ /// avoid double counting). Refineable version includes hanging nodes
  void identify_geometric_data(std::set<Data*> &geometric_data_pt)
-  {
-   //Loop over the node update data and add to the set
-   const unsigned n_node=this->nnode();
-   for(unsigned j=0;j<n_node;j++)
-    {
-     geometric_data_pt.insert(dynamic_cast<SolidNode*>(this->node_pt(j))
-                              ->variable_position_pt());
-    }
-  }
-
+ {
+  //Loop over the node update data and add to the set
+  const unsigned n_node=this->nnode();
+  for(unsigned j=0;j<n_node;j++)
+   {
+    
+    //If the node is a hanging node
+    if(this->node_pt(j)->is_hanging())
+     {
+      //Find the local hang info object
+      HangInfo* hang_info_pt = this->node_pt(j)->hanging_pt();
+      
+      //Find the number of master nodes
+      unsigned n_master = hang_info_pt->nmaster();
+      
+      //Loop over the master nodes
+      for(unsigned m=0;m<n_master;m++)
+       {
+        //Get the m-th master node
+        Node* Master_node_pt = hang_info_pt->master_node_pt(m);
+        
+        // Add to set
+        geometric_data_pt.insert(
+         dynamic_cast<SolidNode*>(Master_node_pt)->variable_position_pt());
+       }
+     }
+    // Not hanging
+    else
+     {
+      // Add node itself to set
+      geometric_data_pt.insert(
+       dynamic_cast<SolidNode*>(this->node_pt(j))->variable_position_pt());
+     }
+   }
+ }
+ 
 
  
  /// \short Final override for the assign__additional_local_eqn_numbers():

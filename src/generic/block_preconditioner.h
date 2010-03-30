@@ -559,8 +559,8 @@ namespace oomph
      return Block_distribution_pt[b];
     }
 
-   /// \short access to the problem pt
-   const Problem* problem_pt() const { return Problem_pt; }
+   /// \short access to the problem pt (const version)
+   Problem* problem_pt() const { return Problem_pt; }
 
    /// \short access to thte distribution of the master preconditioner. If this
    /// preconditioner does not have a master preconditioner then the

@@ -47,7 +47,7 @@ namespace oomph
 //======================================================================
 ///A class for elements that allow the imposition of an applied traction
 ///to the Navier--Stokes equations 
-///The geometrical information can be read from the FaceGeometery<ELEMENT> 
+///The geometrical information can be read from the FaceGeometry<ELEMENT> 
 ///class and and thus, we can be generic enough without the need to have
 ///a separate equations class
 //======================================================================
@@ -62,10 +62,8 @@ private:
  void (*Traction_fct_pt)(const double& time, const Vector<double> &x, 
                        Vector<double> &result);
 
- ///The highest dimension of the problem 
- unsigned Dim;
-
 protected:
+
 
  /// \short The "global" intrinsic coordinate of the element when
  /// viewed as part of a geometric object should be given by
@@ -124,34 +122,39 @@ protected:
   DenseMatrix<double> &jacobian, 
   unsigned flag);
 
+ ///The highest dimension of the problem 
+ unsigned Dim;
 
 public:
 
  ///Constructor, which takes a "bulk" element and the value of the index
  ///and its limit
  NavierStokesTractionElement(FiniteElement* const &element_pt, 
-                             const int &face_index) : 
+                             const int &face_index,
+                             const bool& 
+                             called_from_refineable_constructor=false) : 
   FaceGeometry<ELEMENT>(), FaceElement()
   { 
 #ifdef PARANOID
- {
-  //Check that the element is not a refineable 3d element
-  ELEMENT* elem_pt = new ELEMENT;
-  //If it's three-d
-  if(elem_pt->dim()==3)
    {
-    //Is it refineable
-    if(dynamic_cast<RefineableElement*>(elem_pt))
+    //Check that the element is not a refineable 3d element
+    if (!called_from_refineable_constructor)
      {
-      //Issue a warning
-      OomphLibWarning(
-       "This flux element will not work correctly if nodes are hanging\n",
-       "NavierStokesTractionElement::Constructor",
-       OOMPH_EXCEPTION_LOCATION);
+      //If it's three-d
+      if(element_pt->dim()==3)
+       {
+        //Is it refineable
+        if(dynamic_cast<RefineableElement*>(element_pt))
+         {
+          //Issue a warning
+          OomphLibWarning(
+           "This flux element will not work correctly if nodes are hanging\n",
+           "NavierStokesTractionElement::Constructor",
+           OOMPH_EXCEPTION_LOCATION);
+         }
+       }
      }
    }
-  delete elem_pt;
- }
 #endif
 
    //Attach the geometrical information to the element. N.B. This function
@@ -287,6 +290,238 @@ fill_in_generic_residual_contribution_fluid_traction(
   }
  
 }
+
+
+
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+
+
+
+//======================================================================
+/// A class for elements that allow the imposition of an applied traction
+/// to the Navier--Stokes equations 
+/// The geometrical information can be read from the FaceGeometry<ELEMENT> 
+/// class and and thus, we can be generic enough without the need to have
+/// a separate equations class.
+///
+/// THIS IS THE REFINEABLE VERSION.
+//======================================================================
+template <class ELEMENT>
+class RefineableNavierStokesTractionElement : 
+public virtual NavierStokesTractionElement<ELEMENT>, 
+ public virtual NonRefineableElementWithHangingNodes
+{
+  public:
+ 
+ ///Constructor, which takes a "bulk" element and the face index
+ RefineableNavierStokesTractionElement(FiniteElement* const &element_pt, 
+                                          const int &face_index) : 
+  // we're calling this from the constructor of the refineable version.
+  NavierStokesTractionElement<ELEMENT>(element_pt, face_index,true)
+  {}
+  
+ /// Destructor should not delete anything
+ ~RefineableNavierStokesTractionElement() {}
+
+ 
+ /// \short Number of continuously interpolated values are the
+ /// same as those in the bulk element.
+ unsigned ncont_interpolated_values() const
+  {
+   return dynamic_cast<ELEMENT*>(this->bulk_element_pt())->
+    ncont_interpolated_values();
+  }
+
+ ///This function returns just the residuals
+ inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+  {
+   //Call the generic residuals function using a dummy matrix argument
+   refineable_fill_in_generic_residual_contribution_fluid_traction(
+    residuals,GeneralisedElement::Dummy_matrix,0);
+  }
+ 
+ ///\short This function returns the residuals and the Jacobian 
+ inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
+                                              DenseMatrix<double> &jacobian)
+  {
+   //Call the generic routine
+   refineable_fill_in_generic_residual_contribution_fluid_traction(residuals,
+                                                                   jacobian,1);
+  }
+  
+
+  protected:
+
+ ///\short This function returns the residuals for the 
+ /// traction function.
+ ///flag=1(or 0): do (or don't) compute the Jacobian as well. 
+ void refineable_fill_in_generic_residual_contribution_fluid_traction(
+  Vector<double> &residuals, 
+  DenseMatrix<double> &jacobian, 
+  unsigned flag);
+
+};
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+
+//============================================================================
+/// Function that returns the residuals for the imposed traction Navier_Stokes
+/// equations
+//============================================================================
+template<class ELEMENT>
+void RefineableNavierStokesTractionElement<ELEMENT>::
+refineable_fill_in_generic_residual_contribution_fluid_traction(
+ Vector<double> &residuals, 
+ DenseMatrix<double> &jacobian, 
+ unsigned flag)
+{
+
+ // Get the indices at which the velocity components are stored
+ unsigned u_nodal_index[this->Dim];
+ for(unsigned i=0;i<this->Dim;i++) 
+  {
+   u_nodal_index[i] = dynamic_cast<ELEMENT*>(
+    this->bulk_element_pt())->u_index_nst(i);
+  }
+ 
+ //Find out how many nodes there are
+ unsigned n_node = nnode();
+ 
+ //Set up memory for the shape and test functions
+ Shape psif(n_node), testf(n_node);
+ 
+ //Set the value of n_intpt
+ unsigned n_intpt = integral_pt()->nweight();
+ 
+ //Integers to store local equation numbers
+ int local_eqn=0;
+  
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   //Get the integral weight
+   double w = integral_pt()->weight(ipt);
+   
+   //Find the shape and test functions and return the Jacobian
+   //of the mapping
+   double J = this->shape_and_test_at_knot(ipt,psif,testf);
+   
+   //Premultiply the weights and the Jacobian
+   double W = w*J;
+   
+   //Need to find position to feed into Traction function
+   Vector<double> interpolated_x(this->Dim);
+   
+   //Initialise to zero
+   for(unsigned i=0;i<this->Dim;i++) {interpolated_x[i] = 0.0;}
+   
+   //Calculate velocities and derivatives
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     //Loop over velocity components
+     for(unsigned i=0;i<this->Dim;i++)
+      {
+       interpolated_x[i] += nodal_position(l,i)*psif[l];
+      }
+    }
+   
+   //Get the user-defined traction terms
+   Vector<double> traction(this->Dim);
+   get_traction(time(),interpolated_x,traction);
+   
+   //Now add to the appropriate equations
+   
+   //Number of master nodes and storage for the weight of the shape function
+   unsigned n_master=1; double hang_weight=1.0;
+   
+   //Pointer to hang info object
+   HangInfo* hang_info_pt=0;
+   
+   //Loop over the nodes for the test functions/equations
+   //----------------------------------------------------
+   for(unsigned l=0;l<n_node;l++)
+    {
+     //Local boolean to indicate whether the node is hanging
+     bool is_node_hanging = this->node_pt(l)->is_hanging();
+     
+     //If the node is hanging
+     if(is_node_hanging)
+      {
+       hang_info_pt = this->node_pt(l)->hanging_pt();
+       
+       //Read out number of master nodes from hanging data
+       n_master = hang_info_pt->nmaster();
+      }
+     //Otherwise the node is its own master
+     else
+      {
+       n_master = 1;
+      }
+     
+     //Loop over the master nodes
+     for(unsigned m=0;m<n_master;m++)
+      {
+       // Loop over velocity components for equations
+       for(unsigned i=0;i<this->Dim;i++)
+        {
+         //Get the equation number
+         //If the node is hanging
+         if(is_node_hanging)
+          {
+           //Get the equation number from the master node
+           local_eqn = this->local_hang_eqn(hang_info_pt->master_node_pt(m),
+                                            u_nodal_index[i]);
+           //Get the hang weight from the master node
+           hang_weight = hang_info_pt->master_weight(m);
+          }
+         //If the node is not hanging
+         else
+          {
+           // Local equation number
+           local_eqn = this->nodal_local_eqn(l,u_nodal_index[i]);
+           
+           // Node contributes with full weight
+           hang_weight = 1.0;
+          }
+         
+         //If it's not a boundary condition...
+         if(local_eqn>= 0)
+          {     
+           
+/*    //Loop over the test functions */
+/*    for(unsigned l=0;l<n_node;l++) */
+/*     { */
+/*      //Loop over the velocity components */
+/*      for(unsigned i=0;i<Dim;i++) */
+/*       { */
+/*        local_eqn = u_local_eqn(l,i); */
+/*        /\*IF it's not a boundary condition*\/ */
+/*        if(local_eqn >= 0) */
+/*         { */
+           
+           
+           
+           //Add the user-defined traction terms
+           residuals[local_eqn] += traction[i]*testf[l]*W*hang_weight;
+           
+           //Assuming the the traction DOES NOT depend upon velocities
+           //or pressures, the jacobian is always zero, so no jacobian
+           //terms are required
+          }
+        }
+      } //End of loop over dimension
+    } //End of loop over shape functions
+   
+  }
+}
+ 
 
 }
 

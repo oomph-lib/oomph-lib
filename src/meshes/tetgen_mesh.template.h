@@ -60,7 +60,6 @@ public:
    // Convert mesh from scaffold to actual mesh
    build_from_scaffold(time_stepper_pt);
 
-
    // Kill the scaffold
    delete Tmp_mesh_pt;
    Tmp_mesh_pt=0;
@@ -157,6 +156,23 @@ public:
                                  const bool& switch_normal,
                                  std::ofstream& outfile);
 
+ 
+ /// \short Snap boundaries specified by the IDs listed in boundary_id to
+ /// a quadratric surface, specified in the file 
+ /// quadratic_surface_file_name. This is usually used with vmtk-based
+ /// meshes for which oomph-lib's xda to poly conversion code produces the files
+ /// "quadratic_fsi_boundary.dat" and "quadratic_outer_solid_boundary.dat"
+ /// which specify the quadratic FSI boundary (for the fluid and the solid)
+ /// and the quadratic representation of the outer boundary of the solid. 
+ /// When used with these files, the flag switch_normal should be
+ /// set to true when calling the function for the outer boundary of the
+ /// solid. The DocInfo object can be used to label optional output
+ /// files. (Uses directory and label).
+ void snap_to_quadratic_surface(const Vector<unsigned>& boundary_id,
+                                const std::string& quadratic_surface_file_name,
+                                const bool& switch_normal,
+                                DocInfo& doc_info);
+ 
 
  /// \short Non-Delaunay split elements that have three faces on a boundary
  /// into sons. Timestepper species timestepper for new nodes; defaults

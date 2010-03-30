@@ -35,8 +35,7 @@ check_PROGRAMS += TrilinosSolver_test
 endif
 endif
 
-#----------------------------------------------------------------------
-
+#-------------------------------------------------------------------
 
 # Sources for executable
 driven_cavity_SOURCES = driven_cavity.cc
@@ -128,8 +127,6 @@ endif
 #===============================
 if HAVE_HYPRE
 
-#----------------------------------------------------------------------
-
 # Sources for executable
 HypreSolver_test_SOURCES = HypreSolver_test.cc
 
@@ -140,7 +137,6 @@ HypreSolver_test_LDADD = \
                 -lgeneric  \
                  $(EXTERNAL_LIBS) \
                  $(FLIBS)
-
 
 endif
 
@@ -153,3 +149,7 @@ INCLUDES =   -I@includedir@
 
 
 EXTRA_DIST+=time_driven_cavity.bash
+
+# Additional cleanup commands -- just in case there are serial versions
+# of the Trilinos and Hypre test codes hanging around...
+CLEANFILES=HypreSolver_test TrilinosSolver_test 

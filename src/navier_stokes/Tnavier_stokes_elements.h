@@ -438,12 +438,15 @@ class TTaylorHoodElement : public virtual TElement<DIM,3>,
                                                      Shape &test,
                                                      DShape &dtestdx) const;
  
- /// Pressure shape functions at local coordinate s
- inline void pshape_nst(const Vector<double> &s, Shape &psi) const;
 
- /// Pressure shape and test functions at local coordinte s
- inline void pshape_nst(const Vector<double> &s, Shape &psi, 
-                        Shape &test) const;
+ /// \short Compute the pressure shape and test functions and derivatives 
+ /// w.r.t. global coords at local coordinate s.
+ /// Return Jacobian of mapping between local and global coordinates.
+ virtual double dpshape_and_dptest_eulerian_nst(const Vector<double> &s, 
+                                                Shape &ppsi, 
+                                                DShape &dppsidx, 
+                                                Shape &ptest, 
+                                                DShape &dptestdx) const;
 
  /// Unpin all pressure dofs
  void unpin_all_nodal_pressure_dofs();
@@ -454,10 +457,6 @@ class TTaylorHoodElement : public virtual TElement<DIM,3>,
  ///  Unpin the proper nodal pressure dofs
  void unpin_proper_nodal_pressure_dofs();
 
- 
- /// Return the local equation numbers for the pressure values.
- inline int p_local_eqn(const unsigned &n)
-  {return this->nodal_local_eqn(Pconv[n],DIM);}
 
 public:
 
@@ -486,6 +485,14 @@ public:
  //bool pressure_dof_is_hanging(const unsigned& p_dof)
  // {return this->node_pt(Pconv[p_dof])->is_hanging(DIM);}
 
+
+ /// Pressure shape functions at local coordinate s
+ inline void pshape_nst(const Vector<double> &s, Shape &psi) const;
+
+ /// Pressure shape and test functions at local coordinte s
+ inline void pshape_nst(const Vector<double> &s, Shape &psi, 
+                        Shape &test) const;
+
  /// \short Which nodal value represents the pressure?
  unsigned p_index_nst() {return DIM;}
 
@@ -493,11 +500,18 @@ public:
  //Node* pressure_node_pt(const unsigned &n_p)
  //{return this->Node_pt[Pconv[n_p]];}
 
+ /// Return the local equation numbers for the pressure values.
+ inline int p_local_eqn(const unsigned &n)
+  {return this->nodal_local_eqn(Pconv[n],DIM);}
+
  /// \short Access function for the pressure values at local pressure
  /// node n_p (const version)
  double p_nst(const unsigned &n_p) const
   {return this->nodal_value(Pconv[n_p],DIM);}
  
+ /// \short Set the value at which the pressure is stored in the nodes
+ int p_nodal_index_nst() const {return static_cast<int>(DIM);}
+
  /// Return number of pressure values
  unsigned npres_nst() const;
 
@@ -507,6 +521,18 @@ public:
    this->node_pt(Pconv[p_dof])->pin(DIM);
    this->node_pt(Pconv[p_dof])->set_value(DIM,p_value);
   }
+
+
+ /// \short Build FaceElements that apply the Robin boundary condition
+ /// to the pressure advection diffusion problem required by 
+ /// Fp preconditioner
+ void build_fp_press_adv_diff_robin_bc_element(const unsigned& 
+                                               face_index)
+ {
+  this->Pressure_advection_diffusion_robin_element_pt.push_back(
+   new FpPressureAdvDiffRobinBCElement<TTaylorHoodElement<DIM> >(
+    this, face_index));
+ }
 
  /// \short Add to the set \c paired_load_data pairs containing
  /// - the pointer to a Data object
@@ -598,9 +624,10 @@ public:
   }
 };
 
+
+
+
 //Inline functions
-
-
 
 //==========================================================================
 /// 2D :
@@ -734,6 +761,131 @@ inline double TTaylorHoodElement<3>::dshape_and_dtest_eulerian_at_knot_nst(
 }
 
 
+
+//==========================================================================
+/// 2D :
+/// Pressure shape and test functions and derivs w.r.t. to Eulerian coords.
+/// Return Jacobian of mapping between local and global coordinates.
+//==========================================================================
+template<>
+ inline double TTaylorHoodElement<2>::dpshape_and_dptest_eulerian_nst(
+  const Vector<double> &s, 
+  Shape &ppsi, 
+  DShape &dppsidx, 
+  Shape &ptest, 
+  DShape &dptestdx) const
+ {
+  
+  ppsi[0] = s[0];
+  ppsi[1] = s[1];
+  ppsi[2] = 1.0-s[0]-s[1];
+  
+  dppsidx(0,0)=1.0;
+  dppsidx(0,1)=0.0;
+
+  dppsidx(1,0)=0.0;
+  dppsidx(1,1)=1.0;
+
+  dppsidx(2,0)=-1.0;
+  dppsidx(2,1)=-1.0;
+
+    // Allocate memory for the inverse 2x2 jacobian
+  DenseMatrix<double> inverse_jacobian(2);
+
+
+  //Get the values of the shape functions and their local derivatives
+  Shape psi(6);
+  DShape dpsi(6,2);
+  dshape_local(s,psi,dpsi);
+    
+  // Now calculate the inverse jacobian
+  const double det = local_to_eulerian_mapping(dpsi,inverse_jacobian);
+  
+  // Now set the values of the derivatives to be derivs w.r.t. to the
+  // Eulerian coordinates
+  transform_derivatives(inverse_jacobian,dppsidx);
+  
+  // Loop over the test functions and set them equal to the shape functions
+  for(unsigned i=0;i<3;i++)
+   {
+    ptest[i] = ppsi[i];
+    dptestdx(i,0) = dppsidx(i,0);
+    dptestdx(i,1) = dppsidx(i,1);
+   }
+  
+  // Return the determinant of the jacobian
+  return det;
+    
+ }
+
+
+//==========================================================================
+/// 3D :
+/// Pressure shape and test functions and derivs w.r.t. to Eulerian coords.
+/// Return Jacobian of mapping between local and global coordinates.
+//==========================================================================
+template<>
+ inline double TTaylorHoodElement<3>::dpshape_and_dptest_eulerian_nst(
+  const Vector<double> &s, 
+  Shape &ppsi, 
+  DShape &dppsidx, 
+  Shape &ptest, 
+  DShape &dptestdx) const
+ {
+ 
+  ppsi[0] = s[0];
+  ppsi[1] = s[1];
+  ppsi[2] = s[2];
+  ppsi[3] = 1.0-s[0]-s[1]-s[2];
+  
+  dppsidx(0,0)=1.0;
+  dppsidx(0,1)=0.0;
+  dppsidx(0,2)=0.0;
+
+  dppsidx(1,0)=0.0;
+  dppsidx(1,1)=1.0;
+  dppsidx(1,2)=0.0;
+
+  dppsidx(2,0)=0.0;
+  dppsidx(2,1)=0.0;
+  dppsidx(2,2)=1.0;
+
+  dppsidx(3,0)=-1.0;
+  dppsidx(3,1)=-1.0;
+  dppsidx(3,2)=-1.0;
+
+
+  //Get the values of the shape functions and their local derivatives
+  Shape psi(10);
+  DShape dpsi(10,3);
+  dshape_local(s,psi,dpsi);
+
+  // Allocate memory for the inverse 3x3 jacobian
+  DenseMatrix<double> inverse_jacobian(3);
+  
+  // Now calculate the inverse jacobian
+  const double det = local_to_eulerian_mapping(dpsi,inverse_jacobian);
+  
+  // Now set the values of the derivatives to be derivs w.r.t. to the
+  // Eulerian coordinates
+  transform_derivatives(inverse_jacobian,dppsidx);
+  
+  // Loop over the test functions and set them equal to the shape functions
+  for(unsigned i=0;i<4;i++)
+   {
+    ptest[i] = ppsi[i];
+    dptestdx(i,0) = dppsidx(i,0);
+    dptestdx(i,1) = dppsidx(i,1);
+    dptestdx(i,2) = dppsidx(i,2);
+   }
+  
+  // Return the determinant of the jacobian
+  return det;
+    
+ }
+
+
+
 //==========================================================================
 /// 2D :
 /// Pressure shape functions
@@ -796,12 +948,12 @@ inline void TTaylorHoodElement<3>::pshape_nst(const Vector<double> &s, Shape &ps
 /// Face geometry of the 2D Taylor_Hood elements
 //=======================================================================
 template<>
-class FaceGeometry<TTaylorHoodElement<2> >: public virtual QElement<1,3>
+class FaceGeometry<TTaylorHoodElement<2> >: public virtual TElement<1,3>
 {
   public:
 
   /// Constructor: Call constructor of base
-  FaceGeometry() : QElement<1,3>() {}
+  FaceGeometry() : TElement<1,3>() {}
 /*   { */
 /*    throw OomphLibWarning( */
 /*     "Careful: FaceGeometries for TTaylorHood have not been tested", */

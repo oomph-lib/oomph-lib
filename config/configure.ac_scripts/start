@@ -1306,15 +1306,19 @@ AC_SUBST(AM_CPPFLAGS)
 # These are the third-party libraries distributed with oomph-lib.
 # They are only used if the user hasn't specified his/her own
 # local version of these.
+external_libs='-loomph_hsl -loomph_superlu_3.0 -loomph_arpack '
 
-external_libs='-loomph_hsl -loomph_superlu_3.0 -loomph_metis_4.0 -loomph_arpack '
 
-# Include superlu_dist if compiled in parallel
+# Include superlu_dist and parallel metis if compiled in parallel
 if test x$want_mpi = xtrue; then
-  external_libs=`echo $external_libs "-loomph_superlu_dist_2.0"`
+  external_libs=`echo $external_libs "-loomph_parmetis_3.1.1 -loomph_superlu_dist_2.3"`
   echo "EXTERNAL LIBS (I-3): " $external_libs
 fi
 
+#Note: serial metis has to last
+external_libs=`echo $external_libs "-loomph_metis_4.0"`
+
+# hierher  external_libs=`echo $external_libs "-loomph_superlu_dist_2.0"`
 
 
 # Pord?
@@ -1370,7 +1374,8 @@ fi
 
 # Define "external" MPI libraries
 #--------------------------------
-EXTERNAL_MPI_LIBS='-loomph_superlu_dist_2.0'
+# hierher EXTERNAL_MPI_LIBS='-loomph_superlu_dist_2.0'
+EXTERNAL_MPI_LIBS='-loomph_parmetis_3.1.1 -loomph_superlu_dist_2.3'
 AC_SUBST(EXTERNAL_MPI_LIBS)
 
 

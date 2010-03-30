@@ -967,6 +967,191 @@ void RefineableElement::identify_field_data_for_interactions(
  }
 
 
+
+//========================================================================
+/// The number of geometric data affecting a 
+/// RefineableSolidFiniteElement is the positional Data of all
+/// non-hanging nodes plus the geometric Data of all distinct 
+/// master nodes. Recomputed on the fly.
+//========================================================================
+ unsigned RefineableSolidElement::ngeom_data() const
+ {
+
+  //Find the number of nodes
+  const unsigned n_node = nnode();
+  
+  // Temporary storage for unique position data
+  std::set<Data*> all_position_data_pt;
+  
+  //Now loop over all the nodes again to find the master nodes
+  //of any hanging nodes that have not yet been assigned
+  for(unsigned n=0;n<n_node;n++)
+   {
+    
+    //If the node is a hanging node
+    if(node_pt(n)->is_hanging())
+     {
+      //Find the local hang info object
+      HangInfo* hang_info_pt = node_pt(n)->hanging_pt();
+
+      //Find the number of master nodes
+      unsigned n_master = hang_info_pt->nmaster();
+
+      //Loop over the master nodes
+      for(unsigned m=0;m<n_master;m++)
+       {
+        //Get the m-th master node
+        Node* Master_node_pt = hang_info_pt->master_node_pt(m);
+        
+        // Add to set
+        all_position_data_pt.insert(
+         dynamic_cast<SolidNode*>(Master_node_pt)->variable_position_pt());
+       }
+     }
+    // Not hanging
+    else
+     {
+      // Add node itself to set
+      all_position_data_pt.insert(
+       dynamic_cast<SolidNode*>(node_pt(n))->variable_position_pt());         
+     }
+    
+   } //End of loop over nodes
+
+  // How many are there?
+  return all_position_data_pt.size();
+
+ }
+
+
+
+//========================================================================
+/// \short Return pointer to the j-th Data item that the object's 
+/// shape depends on: Positional data of non-hanging nodes and
+/// positional data of master nodes. Recomputed on the fly.
+//========================================================================
+ Data* RefineableSolidElement::geom_data_pt(const unsigned& j)
+ {
+  
+  //Find the number of nodes
+  const unsigned n_node = nnode();
+  
+  // Temporary storage for unique position data. Set and vector are
+  // required to ensure uniqueness in enumeration on different processors.
+  // Set checks uniqueness; Vector stores entries in predictable order.
+  std::set<Data*> all_position_data_pt;
+  Vector<Data*> all_position_data_vector_pt;
+
+  // Number of entries in set before possibly adding new entry
+  unsigned n_old=0;
+
+  //Now loop over all the nodes again to find the master nodes
+  //of any hanging nodes that have not yet been assigned
+  for(unsigned n=0;n<n_node;n++)
+   {
+    //If the node is a hanging node
+    if(node_pt(n)->is_hanging())
+     {
+      //Find the local hang info object
+      HangInfo* hang_info_pt = node_pt(n)->hanging_pt();
+
+      //Find the number of master nodes
+      unsigned n_master = hang_info_pt->nmaster();
+
+      //Loop over the master nodes
+      for(unsigned m=0;m<n_master;m++)
+       {
+        //Get the m-th master node
+        Node* Master_node_pt = hang_info_pt->master_node_pt(m);
+        
+        // Positional data
+        Data* pos_data_pt=
+         dynamic_cast<SolidNode*>(Master_node_pt)->variable_position_pt();
+        
+        // Add to set
+        n_old=all_position_data_pt.size();
+        all_position_data_pt.insert(pos_data_pt);
+
+        // New entry?
+        if (all_position_data_pt.size()>n_old)
+         {
+          all_position_data_vector_pt.push_back(pos_data_pt);
+         }
+       }
+     }
+    // Not hanging
+    else
+     {
+      // Add node itself to set
+      
+      // Positional data
+      Data* pos_data_pt=
+       dynamic_cast<SolidNode*>(node_pt(n))->variable_position_pt();
+
+      // Add to set
+      n_old=all_position_data_pt.size();
+      all_position_data_pt.insert(pos_data_pt);
+      
+      // New entry?
+      if (all_position_data_pt.size()>n_old)
+       {
+        all_position_data_vector_pt.push_back(pos_data_pt);
+       }
+     }
+    
+   } //End of loop over nodes
+  
+
+  // Return j-th entry
+  return all_position_data_vector_pt[j];
+
+ }
+
+
+//========================================================================
+/// \short Specify Data that affects the geometry of the element
+/// by adding the position Data to the set that's passed in.
+/// (This functionality is required in FSI problems; set is used to
+/// avoid double counting). Refineable version includes hanging nodes
+//========================================================================
+void RefineableSolidElement::identify_geometric_data(std::set<Data*>&
+                                                     geometric_data_pt)
+ {
+  //Loop over the node update data and add to the set
+  const unsigned n_node=this->nnode();
+  for(unsigned j=0;j<n_node;j++)
+   {
+    
+    //If the node is a hanging node
+    if(node_pt(j)->is_hanging())
+     {
+      //Find the local hang info object
+      HangInfo* hang_info_pt = node_pt(j)->hanging_pt();
+      
+      //Find the number of master nodes
+      unsigned n_master = hang_info_pt->nmaster();
+      
+      //Loop over the master nodes
+      for(unsigned m=0;m<n_master;m++)
+       {
+        //Get the m-th master node
+        Node* Master_node_pt = hang_info_pt->master_node_pt(m);
+        
+        // Add to set
+        geometric_data_pt.insert(
+         dynamic_cast<SolidNode*>(Master_node_pt)->variable_position_pt());
+       }
+     }
+    // Not hanging
+    else
+     {
+      // Add node itself to set
+      geometric_data_pt.insert(
+       dynamic_cast<SolidNode*>(node_pt(j))->variable_position_pt());         
+     }
+   }
+ }
+ 
 //========================================================================
 /// The standard equation numbering scheme for solid positions, 
 /// so that hanging Node information is included.
@@ -975,6 +1160,7 @@ void RefineableElement::identify_field_data_for_interactions(
  {
   //Find the number of nodes
   const unsigned n_node = nnode();
+
   //Check there are nodes!
   if(n_node > 0)
    {
@@ -1019,9 +1205,10 @@ void RefineableElement::identify_field_data_for_interactions(
           Node* Master_node_pt = hang_info_pt->master_node_pt(m);
          
           //If the local equation numbers associated with this master node
-          //have not already been assignsed, assign them
+          //have not already been assigned, assign them
           if(local_eqn_number_done[Master_node_pt]==false)
            {
+
             //Now we need to test whether the master node is actually
             //a local node, in which case its local equation numbers
             //will already have been assigned and stored in

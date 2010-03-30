@@ -1485,6 +1485,60 @@ void Node::set_hanging_pt(HangInfo* const &hang_pt, const int &i)
 }
 
 //=====================================================================
+/// Resize the node to allow it to store n_value unknowns
+//===================================================================== 
+void Node::resize(const unsigned &n_value)
+{
+
+ // Old number of values
+ unsigned old_nvalue=nvalue();
+ 
+ // Now deal with the hanging Data (if any)
+ HangInfo** backup_hanging_pt=0;
+ if (Hanging_pt!=0)
+  {
+   // Backup
+   backup_hanging_pt = new HangInfo*[old_nvalue+1];
+   
+   // Copy across existing ones
+   for(unsigned i=0;i<old_nvalue+1;i++)
+    {
+     backup_hanging_pt[i]=Hanging_pt[i];
+    }
+   
+   // Cleanup old one
+   delete[] Hanging_pt;
+   Hanging_pt=0; 
+  }
+
+ // Call the resize function for the underlying Data object
+ Data::resize(n_value);
+ 
+  
+ // Now deal with the hanging Data (if any)
+ if (backup_hanging_pt!=0)
+  {
+   // Loop over all values and geom hanging data
+   for (int i=-1;i<int(old_nvalue);i++)
+    {
+     set_hanging_pt(backup_hanging_pt[i+1],i);
+    }
+   
+   // By default use geometric hanging data for any new entries
+   for (int i=old_nvalue;i<int(n_value);i++)
+    {
+     set_hanging_pt(backup_hanging_pt[0],i);
+    }
+
+   delete [] backup_hanging_pt;
+  }
+
+}
+
+
+
+
+//=====================================================================
 /// Make the node periodic by copying values from node_pt. 
 /// Broken virtual (only implemented in BoundaryNodes)
 //===================================================================== 

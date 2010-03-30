@@ -27,6 +27,6 @@ falling_jet \
 vmtk_fluid \
 unstructured_fluid \
 unstructured_three_d_fluid \
-flux_control
-
+flux_control \
+schur_complement_preconditioner
 

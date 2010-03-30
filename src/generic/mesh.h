@@ -260,7 +260,27 @@ public:
 /// of the auxiliary mesh, it will also wipe out
 /// the nodes and elements, because it still "thinks"
 /// it's in charge of these...
- void flush_element_and_node_storage();
+ void flush_element_and_node_storage()
+ {
+  //Clear vectors of pointers to the nodes and elements
+  Node_pt.clear();
+  Element_pt.clear();
+ }
+
+/// \short Flush storage for elements (only) by emptying the
+/// vectors that store the pointers to them. This is
+/// useful if a particular mesh is only built to generate
+/// a small part of a bigger mesh. Once the elements and
+/// nodes have been created, they are typically copied
+/// into the new mesh and the auxiliary mesh can be
+/// deleted. However, if we simply call the destructor
+/// of the auxiliary mesh, it will also wipe out
+/// the nodes and elements, because it still "thinks"
+/// it's in charge of these...
+ void flush_element_storage()
+ {
+  Element_pt.clear();
+ }
 
  /// Return pointer to global node n
  Node* &node_pt(const unsigned long &n) {return Node_pt[n];}
@@ -415,6 +435,33 @@ public:
  /// \short Self-test: Check elements and nodes. Return 0 for OK
  unsigned self_test();
 
+
+ /// \short Check for inverted elements and report outcome
+ /// in boolean variable. This visits all elements at their
+ /// integration points and checks if the Jacobian of the 
+ /// mapping between local and global coordinates is positive --
+ /// using the same test that would be carried out (but only in PARANOID 
+ /// mode) during the assembly of the elements' Jacobian matrices.
+ /// Inverted elements are output in inverted_element_file (if the
+ /// stream is open).
+ void check_inverted_elements(bool& mesh_has_inverted_elements,
+                              std::ofstream& inverted_element_file);
+
+ 
+/// \short Check for inverted elements and report outcome
+ /// in boolean variable. This visits all elements at their
+ /// integration points and checks if the Jacobian of the 
+ /// mapping between local and global coordinates is positive --
+ /// using the same test that would be carried out (but only in PARANOID 
+ /// mode) during the assembly of the elements' Jacobian matrices.
+ void check_inverted_elements(bool& mesh_has_inverted_elements)
+ {
+  std::ofstream inverted_element_file;
+  check_inverted_elements(mesh_has_inverted_elements,
+                          inverted_element_file);
+ }
+
+ 
  /// \short Check for repeated nodes within a given spatial tolerance.
  /// Return (0/1) for (pass/fail). 
  unsigned check_for_repeated_nodes(const double& epsilon=1.0e-12)

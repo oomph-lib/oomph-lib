@@ -479,6 +479,12 @@ TriangleScaffoldMesh::TriangleScaffoldMesh(const std::string& node_file_name,
       {
        // Copy boundary id across
        Edge_boundary[e][0]=segment_boundary[i];
+
+       //Add to the boundary node look-up scheme
+       add_boundary_node(segment_boundary[i]-1,
+                         Node_pt[zeroth_glob_num-1]);
+       add_boundary_node(segment_boundary[i]-1,
+                         Node_pt[first_glob_num-1]);
       }
      // First edge
      if ( ( ( first_glob_num== first_node[i]) ||
@@ -488,6 +494,12 @@ TriangleScaffoldMesh::TriangleScaffoldMesh(const std::string& node_file_name,
       {
        // Copy boundary id across
        Edge_boundary[e][1]=segment_boundary[i];
+
+       //Add to the boundary node look-up scheme
+       add_boundary_node(segment_boundary[i]-1,
+                         Node_pt[second_glob_num-1]);
+       add_boundary_node(segment_boundary[i]-1,
+                         Node_pt[first_glob_num-1]);
       }
      // Second edge
      if ( ( (zeroth_glob_num==first_node[i]) ||
@@ -497,6 +509,12 @@ TriangleScaffoldMesh::TriangleScaffoldMesh(const std::string& node_file_name,
       {
        // Copy boundary id across
        Edge_boundary[e][2]=segment_boundary[i];
+
+       //Add to the boundary node look-up scheme
+       add_boundary_node(segment_boundary[i]-1,
+                         Node_pt[second_glob_num-1]);
+       add_boundary_node(segment_boundary[i]-1,
+                         Node_pt[zeroth_glob_num-1]);
       }
     }
   }
@@ -790,6 +808,12 @@ TriangleScaffoldMesh::TriangleScaffoldMesh(const std::string& node_file_name,
       {
        // Copy boundary id across
        Edge_boundary[e][0]=segment_boundary[i];
+
+       //Add to the boundary node look-up scheme
+       add_boundary_node(segment_boundary[i]-1,
+                         Node_pt[zeroth_glob_num-1]);
+       add_boundary_node(segment_boundary[i]-1,
+                         Node_pt[first_glob_num-1]);
       }
      // First edge
      if ( ( ( first_glob_num== first_node[i]) ||
@@ -799,6 +823,12 @@ TriangleScaffoldMesh::TriangleScaffoldMesh(const std::string& node_file_name,
       {
        // Copy boundary id across
        Edge_boundary[e][1]=segment_boundary[i];
+
+       //Add to the boundary node look-up scheme
+       add_boundary_node(segment_boundary[i]-1,
+                         Node_pt[second_glob_num-1]);
+       add_boundary_node(segment_boundary[i]-1,
+                         Node_pt[first_glob_num-1]);
       }
      // Second edge
      if ( ( (zeroth_glob_num==first_node[i]) ||
@@ -808,6 +838,12 @@ TriangleScaffoldMesh::TriangleScaffoldMesh(const std::string& node_file_name,
       {
        // Copy boundary id across
        Edge_boundary[e][2]=segment_boundary[i];
+
+       //Add to the boundary node look-up scheme
+       add_boundary_node(segment_boundary[i]-1,
+                         Node_pt[second_glob_num-1]);
+       add_boundary_node(segment_boundary[i]-1,
+                         Node_pt[zeroth_glob_num-1]);
       }
     }
   }

@@ -21,7 +21,7 @@ quad_mesh.cc \
 domain.cc   quadtree.cc \
 dg_elements.cc \
 error_estimator.cc   \
-refineable_elements.cc \
+refineable_elements.cc pseudosolid_node_update_elements.cc \
 refineable_quad_element.cc  refineable_mesh.cc \
 fsi.cc octree.cc tree.cc orthpoly.cc             \
 superlu.c superlu_complex.c refineable_brick_element.cc \
@@ -42,7 +42,7 @@ matrix_vector_product.cc
 #face_element_as_geometric_object.cc
 
 if HAVE_MUMPS
-sources+=mumps_fortran_solver.F mumps_solver.cc
+# hierher sources+=mumps_fortran_solver.F mumps_solver.cc
 endif
 
 if WANT_MPI
@@ -95,7 +95,7 @@ general_purpose_block_preconditioners.h SuperLU_preconditioner.h \
 matrix_vector_product.h 
 
 if HAVE_MUMPS
-headers+=mumps_solver.h 
+# hierher headers+=mumps_solver.h 
 endif
 
 if WANT_MPI

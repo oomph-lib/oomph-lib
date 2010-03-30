@@ -33,6 +33,17 @@
 namespace oomph
 {
 
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+
+
 /// Navier--Stokes equations static data
 template<unsigned DIM>
 Vector<double> NavierStokesEquations<DIM>::Gamma(DIM,1.0);
@@ -59,6 +70,129 @@ Vector<double> NavierStokesEquations<DIM>::Default_Gravity_vector(DIM,0.0);
 
 
 
+
+//===================================================================
+ /// Compute the diagonal of the velocity/pressure mass matrices.
+ /// If which one=0, both are computed, otherwise only the pressure 
+ /// (which_one=1) or the velocity mass matrix (which_one=2 -- the 
+ /// LSC version of the preconditioner only needs that one)
+//===================================================================
+ template<unsigned DIM>
+ void NavierStokesEquations<DIM>::
+ get_pressure_and_velocity_mass_matrix_diagonal(
+  Vector<double> &press_mass_diag, Vector<double> &veloc_mass_diag,
+  const unsigned& which_one)
+ {
+  // Resize and initialise
+  unsigned n_dof=ndof();
+
+  if ((which_one==0)||(which_one==1)) press_mass_diag.assign(n_dof,0.0);   
+  if ((which_one==0)||(which_one==2)) veloc_mass_diag.assign(n_dof,0.0);
+  
+  // find out how many nodes there are
+  unsigned n_node = nnode();
+  
+  // find number of spatial dimensions
+  unsigned n_dim = this->dim();
+  
+  // Local coordinates
+  Vector<double> s(n_dim);
+
+  // find the indices at which the local velocities are stored
+  Vector<unsigned> u_nodal_index(n_dim);
+  for(unsigned i=0; i<n_dim; i++)
+   {
+    u_nodal_index[i] = this->u_index_nst(i);
+   }
+
+  //Set up memory for veloc shape functions
+  Shape psi(n_node);
+  
+  //Find number of pressure dofs
+  unsigned n_pres = npres_nst();
+
+  // Pressure shape function
+  Shape psi_p(n_pres);
+  
+  //Number of integration points
+  unsigned n_intpt = integral_pt()->nweight();
+  
+  //Integer to store the local equations no
+  int local_eqn=0;
+  
+  //Loop over the integration points
+  for(unsigned ipt=0; ipt<n_intpt; ipt++)
+   {
+    
+    //Get the integral weight
+    double w = integral_pt()->weight(ipt);
+
+    //Get determinant of Jacobian of the mapping
+    double J = J_eulerian_at_knot(ipt);
+    
+    //Assign values of s
+    for(unsigned i=0;i<n_dim;i++)
+     {
+      s[i] = integral_pt()->knot(ipt,i);
+     }
+
+    //Premultiply weights and Jacobian
+    double W = w*J;
+
+
+
+    // Do we want the velocity one?
+    if ((which_one==0)||(which_one==2))
+     {
+      
+      //Get the velocity shape functions
+      shape_at_knot(ipt,psi);
+      
+      //Loop over the veclocity shape functions
+      for(unsigned l=0; l<n_node; l++)
+       {
+        //Loop over the velocity components
+        for(unsigned i=0; i<n_dim; i++)
+         {
+          local_eqn = nodal_local_eqn(l,u_nodal_index[i]);
+          
+          //If not a boundary condition
+          if(local_eqn >= 0)
+           {
+            //Add the contribution
+            veloc_mass_diag[local_eqn] += pow(psi[l],2) * W;
+           } 
+         }
+       } 
+     }
+    
+    // Do we want the pressure one?
+    if ((which_one==0)||(which_one==1))
+     {
+      //Get the pressure shape functions
+      pshape_nst(s,psi_p);
+      
+      //Loop over the veclocity shape functions
+      for(unsigned l=0; l<n_pres; l++)
+       {
+        // Get equation number
+        local_eqn = p_local_eqn(l);
+        
+        //If not a boundary condition
+        if(local_eqn >= 0)
+         {
+          //Add the contribution
+          press_mass_diag[local_eqn] += pow(psi_p[l],2) * W;
+         } 
+       }
+     }
+ 
+   }
+ }
+
+
+
+
 //================================================================
 /// Compute the diagonal of the velocity mass matrix
 //================================================================
@@ -67,6 +201,9 @@ Vector<double> NavierStokesEquations<DIM>::Default_Gravity_vector(DIM,0.0);
  get_velocity_mass_matrix_diagonal(Vector<double> &mass_diag)
  {
   
+  // hierher -- this is about to become obsolete with demise of
+  // stand-alone LSC preconditioner.
+
   // Resize and initialise
   mass_diag.assign(ndof(), 0.0);
   
@@ -1302,6 +1439,171 @@ double NavierStokesEquations<DIM>::pressure_integral() const
  return press_int;
 
 }
+
+
+//==============================================================
+/// Compute the residuals for the associated pressure advection 
+/// diffusion problem. Used by the Fp preconditioner.
+/// flag=1(or 0): do (or don't) compute the Jacobian as well. 
+//==============================================================
+template<unsigned DIM>
+void NavierStokesEquations<DIM>::
+fill_in_generic_pressure_advection_diffusion_contribution_nst(
+ Vector<double> &residuals, 
+ DenseMatrix<double> &jacobian, 
+ unsigned flag)
+{
+ // Return immediately if there are no dofs
+ if (ndof()==0) return;
+
+ //Find out how many nodes there are
+ unsigned n_node = nnode();
+ 
+ //Find out how many pressure dofs there are
+ unsigned n_pres = npres_nst();
+
+ //Find the indices at which the local velocities are stored
+ unsigned u_nodal_index[DIM];
+ for(unsigned i=0;i<DIM;i++) {u_nodal_index[i] = u_index_nst(i);}
+
+ //Set up memory for the velocity shape fcts
+ Shape psif(n_node);
+ DShape dpsidx(n_node,DIM);
+
+ //Set up memory for pressure shape and test functions
+ Shape psip(n_pres), testp(n_pres);
+ DShape dpsip(n_pres,DIM);
+ DShape dtestp(n_pres,DIM);
+
+ //Number of integration points
+ unsigned n_intpt = integral_pt()->nweight();
+   
+ //Set the Vector to hold local coordinates
+ Vector<double> s(DIM);
+
+ //Get Physical Variables from Element
+ //Reynolds number must be multiplied by the density ratio
+ double scaled_re = re()*density_ratio();
+ 
+ //Integers to store the local equations and unknowns
+ int local_eqn=0, local_unknown=0;
+
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   //Assign values of s
+   for(unsigned i=0;i<DIM;i++) s[i] = integral_pt()->knot(ipt,i);
+
+   //Get the integral weight
+   double w = integral_pt()->weight(ipt);
+   
+   // Call the derivatives of the veloc shape functions
+   // (Derivs not needed but they are free)
+   double J = this->dshape_eulerian_at_knot(ipt,psif,dpsidx);
+   
+   //Call the pressure shape and test functions
+   this->dpshape_and_dptest_eulerian_nst(s,psip,dpsip,testp,dtestp);
+   
+   //Premultiply the weights and the Jacobian
+   double W = w*J;
+   
+   //Calculate local values of the pressure and velocity components
+   //Allocate
+   Vector<double> interpolated_u(DIM,0.0);
+   Vector<double> interpolated_x(DIM,0.0);
+   Vector<double> interpolated_dpdx(DIM,0.0);
+   
+   //Calculate pressure gradient
+   for(unsigned l=0;l<n_pres;l++) 
+    {
+     for (unsigned i=0;i<DIM;i++)
+      {
+       interpolated_dpdx[i] += p_nst(l)*dpsip(l,i);
+      }
+    }
+
+   //Calculate velocities 
+
+   // Loop over nodes
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     //Loop over directions
+     for(unsigned i=0;i<DIM;i++)
+      {
+       //Get the nodal value
+       double u_value = raw_nodal_value(l,u_nodal_index[i]);
+       interpolated_u[i] += u_value*psif[l];
+       interpolated_x[i] += raw_nodal_position(l,i)*psif[l];
+      }
+    }
+
+   // Source function (for validaton only)
+   double source=0.0;
+   if (Press_adv_diff_source_fct_pt!=0)
+    {
+     source=Press_adv_diff_source_fct_pt(interpolated_x);
+    }
+
+   //Loop over the shape functions
+   for(unsigned l=0;l<n_pres;l++)
+    {
+     local_eqn = p_local_eqn(l);
+
+     //If not a boundary conditions
+     if(local_eqn >= 0)
+      {
+       residuals[local_eqn] -= source*testp[l]*W;
+       for(unsigned k=0;k<DIM;k++)
+        {
+         residuals[local_eqn] += interpolated_dpdx[k]*
+          (scaled_re*interpolated_u[k]*testp[l]+dtestp(l,k))*W;
+        }
+       
+       // Jacobian too?
+       if(flag)
+        {
+         //Loop over the shape functions
+         for(unsigned l2=0;l2<n_pres;l2++)
+          {
+           local_unknown = p_local_eqn(l2);
+           
+           //If not a boundary conditions
+           if(local_unknown >= 0)
+            {          
+             if ((int(eqn_number(local_eqn))!=Pinned_fp_pressure_eqn)&&
+                 (int(eqn_number(local_unknown))!=Pinned_fp_pressure_eqn))
+              {
+               for(unsigned k=0;k<DIM;k++)
+                {
+                 jacobian(local_eqn,local_unknown)+=dtestp(l2,k)*
+                  (scaled_re*interpolated_u[k]*testp[l]+dtestp(l,k))*W;
+                }
+              }
+             else
+              {
+               if ((int(eqn_number(local_eqn))==Pinned_fp_pressure_eqn)&&
+                    (int(eqn_number(local_unknown))==Pinned_fp_pressure_eqn))
+                {
+                 jacobian(local_eqn,local_unknown)=1.0;
+                }
+              }
+            }
+          } 
+        } /*End of Jacobian calculation*/
+      } //End of if not boundary condition
+    }//End of loop over l
+  }
+
+ // Now add boundary contributions from Robin BCs
+ unsigned nrobin=Pressure_advection_diffusion_robin_element_pt.size();
+ for (unsigned e=0;e<nrobin;e++)
+  {
+   Pressure_advection_diffusion_robin_element_pt[e]->
+    fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
+     residuals,jacobian,flag);
+  }
+}
+
 
 //==============================================================
 ///  Compute the residuals for the Navier--Stokes 

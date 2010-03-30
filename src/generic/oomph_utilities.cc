@@ -460,6 +460,9 @@ typedef void (*ResidualFctPt)(const Vector<double>&,
  /// Tolerance
  double Tol=1.0e-8;
 
+ /// Use steplength control do make globally convergent (default false)
+ bool Use_step_length_control=false; 
+
 /// \short Black-box FD Newton solver:
 /// Calling sequence for residual function is
 /// \code residual_fct(parameters,unknowns,residuals) \endcode
@@ -475,18 +478,39 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
  Vector<double> residuals(ndof);
  Vector<double> residuals_pls(ndof);
  Vector<double> dx(ndof);
-
+ Vector<double> gradient(ndof);
+ Vector<double> newton_direction(ndof);
+    
+ double half_residual_squared=0.0;
+ double max_step=0.0;
+ 
  // Newton iterations
  for (unsigned iloop=0;iloop<Max_iter;iloop++)
   {
    // Evaluate current residuals
    residual_fct(params,unknowns,residuals);
-
+   
+   // Get half of squared residual and find maximum step length
+   // for step length control
+   if (Use_step_length_control)
+    {
+     half_residual_squared=0.0;
+     double sum=0.0;
+     for (unsigned i=0;i<ndof;i++)
+      {
+       sum += sqrt(unknowns[i]);
+       half_residual_squared+=residuals[i]*residuals[i];
+      }
+     half_residual_squared*=0.5;
+     max_step=100.0*std::max(sqrt(sum),double(ndof));
+    }
+   
+   
    // Check max. residuals
    double max_res = std::abs(*std::max_element(residuals.begin(),
                                                residuals.end(),
                                                AbsCmp<double>()));
-
+   
    // Doc progress?
    if (Doc_Progress)
     {
@@ -502,19 +526,18 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
    // Converged?
    if (max_res<Tol) 
     {
-     //oomph_info << "Converged " << std::endl;
      return;
     }
-
+   
    // FD loop for Jacobian
    for (unsigned i=0;i<ndof;i++)
     {
      double backup=unknowns[i];
      unknowns[i]+=FD_step;
-  
+     
      // Evaluate advanced residuals
      residual_fct(params,unknowns,residuals_pls);
-
+     
      // Do FD
      for (unsigned j=0;j<ndof;j++)
       {
@@ -525,25 +548,204 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
      unknowns[i]=backup;
     }
    
-   // Solve (overwrites residuals)
-   jacobian.solve(residuals);
    
-   // Update:
-   for (unsigned i=0;i<ndof;i++)
+   // Get gradient
+   if (Use_step_length_control)
     {
-     unknowns[i]-=residuals[i];
+     for (unsigned i=0;i<ndof;i++)
+      {
+       double sum=0.0;
+       for (unsigned j=0;j<ndof;j++)
+        {
+         sum += jacobian(j,i)*residuals[j];
+        }
+       gradient[i]=sum;
+      }
+    }
+   
+   
+   // Solve 
+   jacobian.solve(residuals,newton_direction);
+   
+   // Update
+   if (Use_step_length_control)
+    {     
+     for (unsigned i=0;i<ndof;i++)
+      {
+       newton_direction[i]*=-1.0;
+      }
+     // Update with steplength control
+     Vector<double> unknowns_old(unknowns);
+     double half_residual_squared_old=half_residual_squared;
+     bool check;
+     line_search(unknowns_old,
+                 half_residual_squared_old,
+                 gradient,
+                 residual_fct, 
+                 params,
+                 newton_direction,
+                 unknowns,
+                 half_residual_squared,
+                 max_step,
+                 check);
+    }
+   else
+    {
+     // Direct Newton update:
+     for (unsigned i=0;i<ndof;i++)
+      {
+       unknowns[i]-=newton_direction[i];
+      }
     }
   }
+   
  
- // Failed to converge
- std::ostringstream error_stream;
- error_stream<< "Newton solver did not converge in " 
-             << Max_iter << " steps " << std::endl;
-
- throw OomphLibError(error_stream.str(),
-                     "black_box_fd_newton_solve()",
-                     OOMPH_EXCEPTION_LOCATION);
+   // Failed to converge
+   std::ostringstream error_stream;
+   error_stream<< "Newton solver did not converge in " 
+               << Max_iter << " steps " << std::endl;
+   
+   throw OomphLibError(error_stream.str(),
+                       "black_box_fd_newton_solve()",
+                       OOMPH_EXCEPTION_LOCATION);
 }
+
+
+
+
+
+
+
+
+
+//=======================================================================
+/// Line search helper for globally convergent Newton method
+//=======================================================================
+ void line_search(const Vector<double>& x_old, 
+                  const double half_residual_squared_old, 
+                  const Vector<double>& gradient, 
+                  ResidualFctPt residual_fct, 
+                  const Vector<double>& params,
+                  Vector<double>& newton_dir,
+                  Vector<double>& x, 
+                  double& half_residual_squared,
+                  const double stpmax,
+                  bool& check)
+ {
+  const double ALF=1.0e-4;
+  double TOLX=1.0e-16;
+  double f2=0.0;
+  double alam2=0.0;
+  double tmplam;
+  unsigned n=x_old.size();
+  check=false;
+  double sum=0.0;
+  for (unsigned i=0;i<n;i++)
+   {
+    sum += newton_dir[i]*newton_dir[i];
+   }
+  sum=sqrt(sum);
+  if (sum > stpmax)
+   {
+    for (unsigned i=0;i<n;i++)
+     {
+      newton_dir[i] *= stpmax/sum;
+     }
+   }
+  double slope=0.0;
+  for (unsigned i=0;i<n;i++)
+   {
+    slope += gradient[i]*newton_dir[i];
+   }
+  if (slope >= 0.0)
+   {
+    std::ostringstream error_stream;
+    error_stream << "Roundoff problem in lnsrch: slope=" << slope << "\n";
+    throw OomphLibError(error_stream.str(),
+                        "BlackBoxFDNewtonSolver::line_search()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  double test=0.0;
+  for (unsigned i=0;i<n;i++)
+   {
+    double temp=fabs(newton_dir[i])/std::max(fabs(x_old[i]),1.0);  
+    if (temp > test) test=temp;
+   }
+  double alamin=TOLX/test;
+  double alam=1.0;
+  for (;;) // hmmm
+   {
+    for (unsigned i=0;i<n;i++)
+     {
+      x[i]=x_old[i]+alam*newton_dir[i];
+     }
+    
+   // Evaluate current residuals
+    Vector<double> residuals(n);
+   residual_fct(params,x,residuals);
+    half_residual_squared=0.0;
+    for (unsigned i=0;i<n;i++)
+     {
+      half_residual_squared+=residuals[i]*residuals[i];
+     }
+    half_residual_squared*=0.5;
+
+    if (alam < alamin)
+     {
+      for (unsigned i=0;i<n;i++) x[i]=x_old[i];
+      check=true;
+      std::cout << "Warning: Line search converged on x only!\n";
+      return;
+     } 
+    else if (half_residual_squared <= half_residual_squared_old+ALF*alam*slope)
+     {
+      return;
+     }
+    else
+     {
+      if (alam == 1.0)
+       {
+        tmplam = -slope/(2.0*(half_residual_squared-
+                              half_residual_squared_old-slope));
+       }
+      else
+       {
+        double rhs1=half_residual_squared-half_residual_squared_old-alam*slope;
+        double rhs2=f2-half_residual_squared_old-alam2*slope;
+        double a=(rhs1/(alam*alam)-rhs2/(alam2*alam2))/(alam-alam2);
+        double b=(-alam2*rhs1/(alam*alam)+alam*rhs2/
+                  (alam2*alam2))/(alam-alam2);
+        if (a == 0.0)
+         {
+          tmplam = -slope/(2.0*b);
+         }
+        else
+         {
+          double disc=b*b-3.0*a*slope;
+          if (disc < 0.0)
+           { 
+            tmplam=0.5*alam;
+           }       
+          else if (b <= 0.0)
+           {
+            tmplam=(-b+sqrt(disc))/(3.0*a);
+           }
+          else
+           {
+            tmplam=-slope/(b+sqrt(disc));
+           }
+         }
+        if (tmplam>0.5*alam)
+         {
+          tmplam=0.5*alam;
+         }
+       }
+     }
+    alam2=alam;
+    f2 = half_residual_squared;
+    alam=std::max(tmplam,0.1*alam);
+   }
+ }
 }
 
 //======================================================================

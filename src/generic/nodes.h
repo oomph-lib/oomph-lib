@@ -1071,6 +1071,9 @@ public:
  /// Label node as non-hanging node by removing all hanging node data.
  void set_nonhanging();
 
+ /// \short Resize the number of equations
+ void resize(const unsigned &n_value);
+  
  /// \short Constrain the positions when the node is made hanging
  /// Empty virtual function that is overloaded in SolidNodes
  virtual void constrain_positions() {}

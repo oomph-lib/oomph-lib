@@ -312,10 +312,6 @@ namespace oomph
  /// for the Mesh in the argument
  void copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt);
 
- /// \short Set default first and last elements for parallel assembly
- /// of non-distributed problem.
- void set_default_first_and_last_element_for_assembly();
-
  /// \short Helper function to re-assign the first and last elements to be 
  /// assembled by each processor during parallel assembly for 
  /// non-distributed problem. On each processor the vector 
@@ -551,6 +547,9 @@ protected:
    return Dist_problem_matrix_distribution;
   }
 
+
+ // hierher PUBLIC DATA!?
+
  /// The distributed matrix distribution method
  /// \n 1 - Automatic - the Problem distribution is employed, unless any
  /// processor has number of rows equal to 110% of N/P, in which case
@@ -562,7 +561,7 @@ protected:
  /// possible. (very well load balanced)
  Distributed_problem_matrix_distribution Dist_problem_matrix_distribution;
 
- ///
+ /// hierher Richard what is this?
  unsigned Parallel_sparse_assemble_previous_allocation;
 
  /// Has the problem been distributed amongst multiple processors?
@@ -570,6 +569,32 @@ protected:
 
  /// access function to the problem has been distributed flag
  const bool distributed() const { return Problem_has_been_distributed; }
+
+ /// \short Set default first and last elements for parallel assembly
+ /// of non-distributed problem.
+ void set_default_first_and_last_element_for_assembly();
+
+ /// \short Manually set first and last elements for parallel assembly
+ /// of non-distributed problem.
+ void set_first_and_last_element_for_assembly(
+  Vector<unsigned>& first_el_for_assembly,
+  Vector<unsigned>& last_el_for_assembly)
+ {
+  First_el_for_assembly=first_el_for_assembly;
+  Last_el_for_assembly=last_el_for_assembly;
+ }
+
+
+ /// \short Get first and last elements for parallel assembly
+ /// of non-distributed problem.
+ void get_first_and_last_element_for_assembly(
+  Vector<unsigned>& first_el_for_assembly,
+  Vector<unsigned>& last_el_for_assembly) const
+ {
+  first_el_for_assembly=First_el_for_assembly;
+  last_el_for_assembly=Last_el_for_assembly;
+ }
+
 
   protected:
 

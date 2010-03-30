@@ -84,6 +84,10 @@ namespace Global_Physical_Variables
  /// Pseudo-solid Young's modulus
  double E=2.2;
 
+ // MH: No longer needed
+ /// Timescale ratio (density) for (pseudo-)solid
+ //double Lambda_sq=0.0;
+
 }
 
 //=====================================================================
@@ -608,6 +612,9 @@ public:
      ELEMENT *temp_pt = dynamic_cast<ELEMENT*>(this->mesh_pt()->element_pt(e));
      temp_pt->constitutive_law_pt() = 
       Global_Physical_Variables::Constitutive_law_pt;
+
+     // MH: No longer needed
+     //temp_pt->lambda_sq_pt() = &Global_Physical_Variables::Lambda_sq;
     }
 
    //Complete the rest of the build
@@ -640,6 +647,7 @@ public:
 //start of main
 int main(int argc, char **argv)
 {
+
  using namespace Global_Physical_Variables;
  
  //Set the constitutive law for the mesh deformation

@@ -174,28 +174,6 @@ class RefineableElement : public virtual FiniteElement
 
   protected:
  
- /// \short Access function that returns the local equation number for the
- /// hanging node variables (values stored at master nodes). The local
- /// equation number corresponds to the i-th unknown stored at the node
- /// addressed by node_pt
- inline int local_hang_eqn(Node* const &node_pt, const unsigned &i)
-  {
-#ifdef RANGE_CHECKING
-   if(i > ncont_interpolated_values())
-    {
-     std::ostringstream error_message;
-     error_message << "Range Error: Value " << i
-                   << " is not in the range (0,"
-                   << ncont_interpolated_values()-1 << ")";
-     throw OomphLibError(error_message.str(),
-                         "RefineableElement::local_hang_eqn()",
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
-
-   return Local_hang_eqn[i][node_pt];
-  }
-
 
  /// \short Assign the local equation numbers for hanging node variables
  void assign_hanging_local_eqn_numbers();
@@ -265,6 +243,29 @@ class RefineableElement : public virtual FiniteElement
      //Set the refinement level of the newly constructed son.
      son_pt[i]->set_refinement_level(son_refine_level);
     }
+  }
+
+
+ /// \short Access function that returns the local equation number for the
+ /// hanging node variables (values stored at master nodes). The local
+ /// equation number corresponds to the i-th unknown stored at the node
+ /// addressed by node_pt
+ inline int local_hang_eqn(Node* const &node_pt, const unsigned &i)
+  {
+#ifdef RANGE_CHECKING
+   if(i > ncont_interpolated_values())
+    {
+     std::ostringstream error_message;
+     error_message << "Range Error: Value " << i
+                   << " is not in the range (0,"
+                   << ncont_interpolated_values()-1 << ")";
+     throw OomphLibError(error_message.str(),
+                         "RefineableElement::local_hang_eqn()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   return Local_hang_eqn[i][node_pt];
   }
 
  /// \short Interface to function that builds the element: i.e. 
@@ -686,14 +687,6 @@ class RefineableSolidElement : public virtual RefineableElement,
  /// than the other...
  bool Use_undeformed_macro_element_for_new_lagrangian_coords;
  
- /// \short Access the local equation number of of hanging node variables
- /// associated with nodal positions. The function returns a dense
- /// matrix that contains all the local equation numbers corresponding to
- /// the positional degrees of freedom.
- DenseMatrix<int> &local_position_hang_eqn(Node* const &node_pt)
-  {return Local_position_hang_eqn[node_pt];}
-
-
  /// \short Assemble the jacobian matrix for the mapping from local
  /// to lagrangian coordinates, given the derivatives of the shape function
  /// Overload the standard version to use the hanging information for
@@ -736,28 +729,21 @@ void assemble_local_to_lagrangian_jacobian(
   }
 
  ///\short The number of geometric data affecting a 
- /// RefineableSolidFiniteElemnet is not
- ///the same as the number of nodes (one variable position data per node)
- inline unsigned ngeom_data() const 
-  {
-   throw OomphLibError(
-    "Geometric Data not yet set up for RefineableSolidNodes\n",
-    "RefineableSolidElement::ngeom_data()",
-    OOMPH_EXCEPTION_LOCATION);
-   return nnode();
-  }
+ /// RefineableSolidFiniteElement is the positional Data of all
+ /// non-hanging nodes plus the geometric Data of all distinct 
+ /// master nodes. Recomputed on the fly.
+ unsigned ngeom_data() const;
 
  /// \short Return pointer to the j-th Data item that the object's 
- /// shape depends on. (Redirects to the nodes' positional Data).
- inline Data* geom_data_pt(const unsigned& j)
-  {
-   throw OomphLibError(
-    "Geometric Data not yet set up for RefineableSolidNodes\n",
-    "RefineableSolidElement::geom_data_pt()",
-    OOMPH_EXCEPTION_LOCATION);
-   return static_cast<SolidNode*>(node_pt(j))->variable_position_pt();
-  }
- 
+ /// shape depends on: Positional data of non-hanging nodes and
+ /// positional data of master nodes. Recomputed on the fly.
+  Data* geom_data_pt(const unsigned& j);
+
+ /// \short Specify Data that affects the geometry of the element
+ /// by adding the position Data to the set that's passed in.
+ /// (This functionality is required in FSI problems; set is used to
+ /// avoid double counting). Refineable version includes hanging nodes
+  void identify_geometric_data(std::set<Data*> &geometric_data_pt);
 
  /// \short Compute element residual Vector and element Jacobian matrix
  /// corresponding to the solid positions. Overloaded version to take
@@ -765,12 +751,12 @@ void assemble_local_to_lagrangian_jacobian(
  void fill_in_jacobian_from_solid_position_by_fd(Vector<double> & residuals,
                                              DenseMatrix<double> &jacobian);
 
-
- /// \short Access fct to flag deciding if the Lagrangian coordinates of newly-created interior 
- /// SolidNodes are to be determined by the father element's undeformed 
- /// MacroElement representation (if it has one). Default: False as it means that, 
- /// following a refinement an element is no longer in equilbrium (as the Lagrangian
- /// coordinate is determined differently from the Eulerian one). However, basing
+ /// \short Access fct to flag deciding if the Lagrangian coordinates of 
+ /// newly-created interior SolidNodes are to be determined by the father 
+ /// element's undeformed MacroElement representation (if it has one). 
+ /// Default: False as it means that, following a refinement an element 
+ /// is no longer in equilbrium (as the Lagrangian coordinate is 
+ /// determined differently from the Eulerian one). However, basing
  /// the Lagrangian coordinates on the undeformed MacroElement can be
  /// more stable numerically and for steady problems it's not a big deal
  /// either way as the difference between the two formulations only matters
@@ -779,6 +765,13 @@ void assemble_local_to_lagrangian_jacobian(
  bool& use_undeformed_macro_element_for_new_lagrangian_coords()
   {return Use_undeformed_macro_element_for_new_lagrangian_coords;}
 
+
+ /// \short Access the local equation number of of hanging node variables
+ /// associated with nodal positions. The function returns a dense
+ /// matrix that contains all the local equation numbers corresponding to
+ /// the positional degrees of freedom.
+ DenseMatrix<int> &local_position_hang_eqn(Node* const &node_pt)
+  {return Local_position_hang_eqn[node_pt];}
 
  /// \short Further build: Pass the father's 
  /// Use_undeformed_macro_element_for_new_lagrangian_coords
@@ -792,8 +785,39 @@ void assemble_local_to_lagrangian_jacobian(
    
    RefineableElement::further_build();
   }
- 
+
 };
+
+
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+
+
+
+
+//=======================================================================
+/// A base class for SolidElements that can have hanging nodes
+/// but are not refineable as such. This class is usually used as a
+/// base class for FaceElements that are attached to refineable
+/// bulk elements (and stripped out before adapting the bulk
+/// mesh, so they don't participate in the refimenent process
+/// itself). We therefore simply break the pure virtual functions
+/// that don't make any sense for such elements
+//======================================================================
+class NonRefineableSolidElementWithHangingNodes : 
+public virtual NonRefineableElementWithHangingNodes,
+public virtual RefineableSolidElement
+{
+  
+};
+
+
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
 
 }
 

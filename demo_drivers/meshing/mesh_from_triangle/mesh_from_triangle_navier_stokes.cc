@@ -163,9 +163,9 @@ FlowPastBoxProblem<ELEMENT>::FlowPastBoxProblem(
    unsigned num_nod= mesh_pt()->nboundary_node(ibound);
    for (unsigned inod=0;inod<num_nod;inod++)
     {
-     // Pin horizontal velocity everywhere apart from outflow
+     // Pin horizontal velocity everywhere apart from pure outflow
      if ((ibound!=2))
-      {
+      {       
        mesh_pt()->boundary_node_pt(ibound,inod)->pin(0); 
       }
 

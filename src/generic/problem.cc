@@ -964,35 +964,38 @@ namespace oomph
 //================================================================
  void Problem::set_default_first_and_last_element_for_assembly()
  {
-  // Resize and make default assignments
-  int n_proc=this->communicator_pt()->nproc();
-  unsigned n_elements=Mesh_pt->nelement();    
-  First_el_for_assembly.resize(n_proc,0);
-  Last_el_for_assembly.resize(n_proc,n_elements-1);
-  
-  // In the absence of any better knowledge distribute work evenly 
-  // over elements
-  unsigned long range = 
-   static_cast<unsigned long>(double(n_elements)/double(n_proc));
-  for (int p=0;p<n_proc;p++)
+  if (!Problem_has_been_distributed)
    {
-    First_el_for_assembly[p] = p*range;
-    Last_el_for_assembly[p] = (p+1)*range-1;
-   }
-  
-  // Last one needs to incorporate any dangling elements
-  Last_el_for_assembly[n_proc-1] = n_elements-1;
- 
-  // Doc
-  if (n_proc>1)
-   {
-    oomph_info << "\nProblem is not distributed. Parallel assembly of "
-               << "Jacobian uses default partitioning: "<< std::endl;
+    // Resize and make default assignments
+    int n_proc=this->communicator_pt()->nproc();
+    unsigned n_elements=Mesh_pt->nelement();    
+    First_el_for_assembly.resize(n_proc,0);
+    Last_el_for_assembly.resize(n_proc,n_elements-1);
+    
+    // In the absence of any better knowledge distribute work evenly 
+    // over elements
+    unsigned long range = 
+     static_cast<unsigned long>(double(n_elements)/double(n_proc));
     for (int p=0;p<n_proc;p++)
      {
-      oomph_info << "Proc " << p << " assembles from element " 
-                 <<  First_el_for_assembly[p] << " to " 
-                 <<  Last_el_for_assembly[p] << " \n"; 
+      First_el_for_assembly[p] = p*range;
+      Last_el_for_assembly[p] = (p+1)*range-1;
+     }
+    
+    // Last one needs to incorporate any dangling elements
+    Last_el_for_assembly[n_proc-1] = n_elements-1;
+    
+    // Doc
+    if (n_proc>1)
+     {
+      oomph_info << "\nProblem is not distributed. Parallel assembly of "
+                 << "Jacobian uses default partitioning: "<< std::endl;
+      for (int p=0;p<n_proc;p++)
+       {
+        oomph_info << "Proc " << p << " assembles from element " 
+                   <<  First_el_for_assembly[p] << " to " 
+                   <<  Last_el_for_assembly[p] << " \n"; 
+       }
      }
    }
  }
@@ -1028,7 +1031,7 @@ namespace oomph
    {
     // Default distribution of labour
     unsigned el_lo = First_el_for_assembly[p];
-    unsigned el_hi = Last_el_for_assembly[p];;
+    unsigned el_hi = Last_el_for_assembly[p];
      
     // Number of timings to be sent and offset from start in
     // final vector
@@ -1315,11 +1318,11 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
 
     }
   }
-  // Re-distribution of elements over processors during assembly
-  // must be recomputed
-  else
-   {
-    if (n_proc>1)
+ // Re-distribution of elements over processors during assembly
+ // must be recomputed
+ else
+  {
+   if (n_proc>1)
      {
       // Force re-analysis of time spent on assembly each
       // elemental Jacobian
@@ -1533,6 +1536,9 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
   LinearAlgebraDistribution dist(this->communicator_pt(),n_dof,false);
   Mres.build(&dist,0.0);
  
+  //Locally cache pointer to assembly handler
+  AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
+
   //If we have discontinuous formulation
   if(Discontinuous_element_formulation)
    {
@@ -1545,11 +1551,16 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
       DGElement* const elem_pt =
        dynamic_cast<DGElement*>(Problem::mesh_pt()->element_pt(e));
      
-      const unsigned n_el_dofs = elem_pt->ndof();
+      // hierher
+      //const unsigned n_el_dofs = elem_pt->ndof();
+      const unsigned n_el_dofs = assembly_handler_pt->ndof(elem_pt);
+
+      
       elem_pt->get_inverse_mass_matrix_times_residuals(element_Mres);
      
       for(unsigned i=0;i<n_el_dofs;i++)
        {
+        // hierher assembly handler?
         Mres[elem_pt->eqn_number(i)] = element_Mres[i];
        }
      }
@@ -1650,6 +1661,11 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
    }
 
 
+
+  //Locally cache pointer to assembly handler
+  AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
+
+
 #ifdef OOMPH_HAS_MPI
   if (MPI_Helpers::mpi_has_been_initialised())
    {
@@ -1711,18 +1727,20 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
       if (!el_pt->is_halo())
        {
         //Find number of dofs in the element
-        const unsigned n_el_dofs = el_pt->ndof();
+        const unsigned n_el_dofs = assembly_handler_pt->ndof(el_pt);
+
      
         //Set up a Vector
         Vector<double> element_residuals(n_el_dofs);
      
         //Fill the array
-        el_pt->get_residuals(element_residuals);
+        assembly_handler_pt->get_residuals(el_pt,element_residuals);
 
         //Now loop over the dofs and assign values to global Vector
         for(unsigned l=0;l<n_el_dofs;l++)
          {
-          residuals_pt[el_pt->eqn_number(l)]+=element_residuals[l];
+          residuals_pt[assembly_handler_pt->eqn_number(el_pt,l)]+=
+           element_residuals[l];
          }
        }
      }
@@ -1741,10 +1759,6 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
   else // !MPI_Helpers::MPI_has_been_initialised
 #endif // OOMPH_HAS_MPI
    {
-
-    //Locally cache pointer to assembly handler
-    AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
-
     //Loop over all the elements
     unsigned long Element_pt_range = Mesh_pt->nelement();
     for(unsigned long e=0;e<Element_pt_range;e++)
@@ -4757,17 +4771,61 @@ void Problem::parallel_sparse_assemble
          {
           if (left == right)
            {
-            std::ostringstream error_stream;
-            error_stream
-             << "Internal Error: " 
-             << std::endl
-             << "Could not find global equation number "
-             << global_eqn_number << "in my_eqns vector of equation numbers.";
-            throw OomphLibError(
-             error_stream.str(),
-             "Problem::parallel_sparse_assemble()",
-             OOMPH_EXCEPTION_LOCATION);
-           }
+            // Check that the residuals associated with the 
+            // eqn number that can't be found are all zero
+            bool broken=false;
+            for(unsigned v=0;v<n_vector;v++)
+             {
+              if (el_residuals[v][i]!=0.0)
+               {
+                broken=true;
+                break;
+               }
+             }
+
+            // Now loop over the other index to check the entries
+            // in the appropriate row of the Jacobians are zero too
+            for(unsigned j=0;j<nvar;j++)
+             {
+              //Get the number of the unknown
+              unsigned unknown = assembly_handler_pt->eqn_number(elem_pt,j);
+              
+              //Loop over the matrices
+              //If it's compressed row storage, then our vector of maps
+              //is indexed by row (equation number)
+              for(unsigned m=0;m<n_matrix;m++)
+               {
+                //Get the value of the matrix at this point
+                double value = el_jacobian[m](i,j);
+                if (value!=0.0)
+                 {
+                  broken=true;
+                  break;
+                 }
+                if (broken) break;
+               }
+             }
+ 
+            if (broken)
+             {
+              std::ostringstream error_stream;
+              error_stream
+               << "Internal Error: " 
+               << std::endl
+               << "Could not find global equation number "
+               << global_eqn_number 
+               << " in my_eqns vector of equation numbers but\n"
+               << "at least one entry in the residual vector is nonzero.";
+              throw OomphLibError(
+               error_stream.str(),
+               "Problem::parallel_sparse_assemble()",
+               OOMPH_EXCEPTION_LOCATION);
+             }
+            else
+             {
+              break;
+             }
+           }           
           if (my_eqns[eqn_number] > global_eqn_number)
            {
             right = std::max(eqn_number-1,left);

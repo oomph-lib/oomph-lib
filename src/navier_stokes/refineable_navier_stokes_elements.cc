@@ -33,6 +33,545 @@ namespace oomph
 {
 
 
+
+
+
+
+
+//===================================================================
+/// Compute the diagonal of the velocity/pressure mass matrices.
+/// If which one=0, both are computed, otherwise only the pressure 
+/// (which_one=1) or the velocity mass matrix (which_one=2 -- the 
+/// LSC version of the preconditioner only needs that one)
+//===================================================================
+ template<unsigned DIM>
+ void RefineableNavierStokesEquations<DIM>::
+ get_pressure_and_velocity_mass_matrix_diagonal(
+  Vector<double> &press_mass_diag, Vector<double> &veloc_mass_diag,
+  const unsigned& which_one)
+ {
+  
+  // Resize and initialise
+  unsigned n_dof=ndof();
+
+  if ((which_one==0)||(which_one==1)) press_mass_diag.assign(n_dof,0.0);   
+  if ((which_one==0)||(which_one==2)) veloc_mass_diag.assign(n_dof,0.0);
+
+  //Pointers to hang info object
+  HangInfo *hang_info_pt=0;
+  
+  //Number of master nodes and weight for shape fcts
+  unsigned n_master=1;
+  double hang_weight=1.0;
+
+  // find out how many nodes there are
+  unsigned n_node = nnode();
+  
+  //Set up memory for veloc shape functions
+  Shape psi(n_node);
+  
+  //Find number of pressure dofs
+  unsigned n_pres = this->npres_nst();
+
+  // Pressure shape function
+  Shape psi_p(n_pres);
+
+  // Local coordinates
+  Vector<double> s(DIM);
+
+  // find the indices at which the local velocities are stored
+  Vector<unsigned> u_nodal_index(DIM);
+  for(unsigned i=0; i<DIM; i++)
+   {
+    u_nodal_index[i] = this->u_index_nst(i);
+   }
+  
+  // Which nodal value represents the pressure? (Negative if pressure
+  // is not based on nodal interpolation).
+  int p_index = this->p_nodal_index_nst();
+  
+  // Local array of booleans that are true if the l-th pressure value is
+  // hanging (avoid repeated virtual function calls)
+  bool pressure_dof_is_hanging[n_pres];
+
+  //If the pressure is stored at a node
+  if(p_index >= 0)
+   {
+    //Read out whether the pressure is hanging
+    for(unsigned l=0;l<n_pres;++l)
+     {
+      pressure_dof_is_hanging[l] = 
+       pressure_node_pt(l)->is_hanging(p_index);
+     }
+   }
+  //Otherwise the pressure is not stored at a node and so cannot hang
+  else
+   {
+    for(unsigned l=0;l<n_pres;++l)
+     {pressure_dof_is_hanging[l] = false;}
+   }
+  
+  
+  //Number of integration points
+  unsigned n_intpt = integral_pt()->nweight();
+  
+  //Integer to store the local equations no
+  int local_eqn=0;
+  
+  //Loop over the integration points
+  for(unsigned ipt=0; ipt<n_intpt; ipt++)
+   {
+    
+    //Get the integral weight
+    double w = integral_pt()->weight(ipt);
+
+    //Get determinant of Jacobian of the mapping
+    double J = J_eulerian_at_knot(ipt);
+    
+    //Assign values of s
+    for(unsigned i=0;i<DIM;i++)
+     {
+      s[i] = integral_pt()->knot(ipt,i);
+     }
+
+    //Premultiply weights and Jacobian
+    double W = w*J;
+
+
+
+    // Do we want the velocity one?
+    if ((which_one==0)||(which_one==2))
+     {
+      
+      //Get the velocity shape functions
+      shape_at_knot(ipt,psi);
+      
+      
+      //Number of master nodes and storage for the weight of the shape function
+      unsigned n_master=1; double hang_weight=1.0;
+      
+      //Loop over the nodes for the test functions/equations
+      //----------------------------------------------------
+      for(unsigned l=0;l<n_node;l++)
+       {
+        //Local boolean to indicate whether the node is hanging
+        bool is_node_hanging = node_pt(l)->is_hanging();
+        
+        //If the node is hanging
+        if(is_node_hanging)
+         {
+          hang_info_pt = node_pt(l)->hanging_pt();
+          
+          //Read out number of master nodes from hanging data
+          n_master = hang_info_pt->nmaster();
+         }
+        //Otherwise the node is its own master
+        else
+         {
+          n_master = 1;
+         }
+        
+        //Loop over the master nodes
+        for(unsigned m=0;m<n_master;m++)
+         {
+          // Loop over velocity components for equations
+          for(unsigned i=0;i<DIM;i++)
+           {
+            //Get the equation number
+            //If the node is hanging
+            if(is_node_hanging)
+             {
+              //Get the equation number from the master node
+              local_eqn = this->local_hang_eqn(hang_info_pt->master_node_pt(m),
+                                               u_nodal_index[i]);
+              //Get the hang weight from the master node
+              hang_weight = hang_info_pt->master_weight(m);
+             }
+            //If the node is not hanging
+            else
+             {
+              // Local equation number
+              local_eqn = this->nodal_local_eqn(l,u_nodal_index[i]);
+              
+              // Node contributes with full weight
+              hang_weight = 1.0;
+             }
+            
+            //If it's not a boundary condition...
+            if(local_eqn>= 0)
+             {
+              
+//       //Loop over the veclocity shape functions
+//       for(unsigned l=0; l<n_node; l++)
+//        {
+//         //Loop over the velocity components
+//         for(unsigned i=0; i<DIM; i++)
+//          {
+//           local_eqn = nodal_local_eqn(l,u_nodal_index[i]);
+          
+//           //If not a boundary condition
+//           if(local_eqn >= 0)
+//            {
+
+
+              
+              //Add the contribution
+              veloc_mass_diag[local_eqn] += pow(psi[l]*hang_weight,2)*W;
+             } 
+           }
+         }
+       } 
+     }
+    
+    // Do we want the pressure one?
+    if ((which_one==0)||(which_one==1))
+     {
+      //Get the pressure shape functions
+      this->pshape_nst(s,psi_p);
+      
+      //Loop over the pressure shape functions
+      for(unsigned l=0;l<n_pres;l++)
+       {
+        //If the pressure dof is hanging
+        if(pressure_dof_is_hanging[l])
+         {
+          // Pressure dof is hanging so it must be nodal-based
+          // Get the hang info object
+          hang_info_pt = this->pressure_node_pt(l)->hanging_pt(p_index);
+          
+          //Get the number of master nodes from the pressure node
+          n_master = hang_info_pt->nmaster();
+         }
+        //Otherwise the node is its own master
+        else
+         {
+          n_master = 1;
+         }
+        
+        //Loop over the master nodes
+        for(unsigned m=0;m<n_master;m++)
+         {
+          //Get the number of the unknown
+          //If the pressure dof is hanging
+          if(pressure_dof_is_hanging[l])
+           {
+            //Get the local equation from the master node
+            local_eqn = 
+             this->local_hang_eqn(hang_info_pt->master_node_pt(m),p_index);
+            //Get the weight for the node
+            hang_weight = hang_info_pt->master_weight(m);
+           }
+          else
+           {
+            local_eqn = this->p_local_eqn(l);
+            hang_weight = 1.0;
+           }
+          
+          //If the equation is not pinned
+          if(local_eqn >= 0)
+           {
+            
+//       //Loop over the veclocity shape functions
+//       for(unsigned l=0; l<n_pres; l++)
+//        {
+//         // Get equation number
+//         local_eqn = p_local_eqn(l);
+            
+//         //If not a boundary condition
+//         if(local_eqn >= 0)
+//          {
+            
+            
+            //Add the contribution
+            press_mass_diag[local_eqn] += pow(psi_p[l]*hang_weight,2) * W;
+           } 
+         }
+       }
+      
+     }
+   }
+ }
+
+
+
+//==============================================================
+/// Compute the residuals for the associated pressure advection 
+/// diffusion problem. Used by the Fp preconditioner.
+/// flag=1(or 0): do (or don't) compute the Jacobian as well. 
+//==============================================================
+template<unsigned DIM>
+ void RefineableNavierStokesEquations<DIM>::
+fill_in_generic_pressure_advection_diffusion_contribution_nst(
+ Vector<double> &residuals, 
+ DenseMatrix<double> &jacobian, 
+ unsigned flag)
+{
+ // Return immediately if there are no dofs
+ if (ndof()==0) return;
+
+ //Find out how many nodes there are
+ unsigned n_node = nnode();
+ 
+ //Find out how many pressure dofs there are
+ unsigned n_pres = this->npres_nst();
+
+ //Find the indices at which the local velocities are stored
+ unsigned u_nodal_index[DIM];
+ for(unsigned i=0;i<DIM;i++) {u_nodal_index[i] = this->u_index_nst(i);}
+
+
+// Which nodal value represents the pressure? (Negative if pressure
+// is not based on nodal interpolation).
+int p_index = this->p_nodal_index_nst();
+
+// Local array of booleans that are true if the l-th pressure value is
+// hanging (avoid repeated virtual function calls)
+ bool pressure_dof_is_hanging[n_pres];
+ //If the pressure is stored at a node
+ if(p_index >= 0)
+  {
+   //Read out whether the pressure is hanging
+   for(unsigned l=0;l<n_pres;++l)
+    {
+     pressure_dof_is_hanging[l] = 
+      pressure_node_pt(l)->is_hanging(p_index);
+    }
+  }
+ //Otherwise the pressure is not stored at a node and so cannot hang
+ else
+  {
+   assert(false); // pressure advection diffusion doesn't work for this one!
+   for(unsigned l=0;l<n_pres;++l)
+    {pressure_dof_is_hanging[l] = false;}
+  }
+ 
+ //Set up memory for the velocity shape fcts
+ Shape psif(n_node);
+ DShape dpsidx(n_node,DIM);
+
+ //Set up memory for pressure shape and test functions
+ Shape psip(n_pres), testp(n_pres);
+ DShape dpsip(n_pres,DIM);
+ DShape dtestp(n_pres,DIM);
+
+ //Number of integration points
+ unsigned n_intpt = integral_pt()->nweight();
+   
+ //Set the Vector to hold local coordinates
+ Vector<double> s(DIM);
+
+ //Get Physical Variables from Element
+ //Reynolds number must be multiplied by the density ratio
+ double scaled_re = this->re()*this->density_ratio();
+ 
+ //Integers to store the local equations and unknowns
+ int local_eqn=0, local_unknown=0;
+
+//Pointers to hang info objects
+ HangInfo *hang_info_pt=0, *hang_info2_pt=0;
+
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   //Assign values of s
+   for(unsigned i=0;i<DIM;i++) s[i] = integral_pt()->knot(ipt,i);
+
+   //Get the integral weight
+   double w = integral_pt()->weight(ipt);
+   
+   // Call the derivatives of the veloc shape functions
+   // (Derivs not needed but they are free)
+   double J = this->dshape_eulerian_at_knot(ipt,psif,dpsidx);
+   
+   //Call the pressure shape and test functions
+   this->dpshape_and_dptest_eulerian_nst(s,psip,dpsip,testp,dtestp);
+   
+   //Premultiply the weights and the Jacobian
+   double W = w*J;
+   
+   //Calculate local values of the pressure and velocity components
+   //Allocate
+   Vector<double> interpolated_u(DIM,0.0);
+   Vector<double> interpolated_x(DIM,0.0);
+   Vector<double> interpolated_dpdx(DIM,0.0);
+   
+   //Calculate pressure gradient
+   for(unsigned l=0;l<n_pres;l++) 
+    {
+     for (unsigned i=0;i<DIM;i++)
+      {
+       interpolated_dpdx[i] += this->p_nst(l)*dpsip(l,i);
+      }
+    }
+
+   //Calculate velocities 
+
+   // Loop over nodes
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     //Loop over directions
+     for(unsigned i=0;i<DIM;i++)
+      {
+       //Get the nodal value
+       double u_value = nodal_value(l,u_nodal_index[i]);
+       interpolated_u[i] += u_value*psif[l];
+       interpolated_x[i] += nodal_position(l,i)*psif[l];
+      }
+    }
+
+   // Source function (for validaton only)
+   double source=0.0;
+   if (this->Press_adv_diff_source_fct_pt!=0)
+    {
+     source=this->Press_adv_diff_source_fct_pt(interpolated_x);
+    }
+
+
+
+ //Number of master nodes and storage for the weight of the shape function
+ unsigned n_master=1; double hang_weight=1.0;
+
+
+ //Loop over the pressure shape functions
+ for(unsigned l=0;l<n_pres;l++)
+  {
+   //If the pressure dof is hanging
+   if(pressure_dof_is_hanging[l])
+    {
+     // Pressure dof is hanging so it must be nodal-based
+     // Get the hang info object
+     hang_info_pt = this->pressure_node_pt(l)->hanging_pt(p_index);
+
+     //Get the number of master nodes from the pressure node
+     n_master = hang_info_pt->nmaster();
+    }
+   //Otherwise the node is its own master
+   else
+    {
+     n_master = 1;
+    }
+   
+   //Loop over the master nodes
+   for(unsigned m=0;m<n_master;m++)
+    {
+     //Get the number of the unknown
+     //If the pressure dof is hanging
+     if(pressure_dof_is_hanging[l])
+      {
+       //Get the local equation from the master node
+       local_eqn = 
+        this->local_hang_eqn(hang_info_pt->master_node_pt(m),p_index);
+       //Get the weight for the node
+       hang_weight = hang_info_pt->master_weight(m);
+      }
+     else
+      {
+       local_eqn = this->p_local_eqn(l);
+       hang_weight = 1.0;
+      }
+
+     //If the equation is not pinned
+     if(local_eqn >= 0)
+      {
+       residuals[local_eqn] -= source*testp[l]*W*hang_weight;
+       for(unsigned k=0;k<DIM;k++)
+        {
+         residuals[local_eqn] += interpolated_dpdx[k]*
+          (scaled_re*interpolated_u[k]*testp[l]+dtestp(l,k))*W*hang_weight;
+        }
+       
+       // Jacobian too?
+       if(flag)
+        {
+         //Number of master nodes and weights
+         unsigned n_master2=1; double hang_weight2=1.0;
+
+         //Loop over the pressure shape functions
+         for(unsigned l2=0;l2<n_pres;l2++)
+          {
+           //If the pressure dof is hanging
+           if(pressure_dof_is_hanging[l2])
+            {
+             hang_info2_pt = 
+              this->pressure_node_pt(l2)->hanging_pt(p_index);
+             // Pressure dof is hanging so it must be nodal-based
+             //Get the number of master nodes from the pressure node
+             n_master2 =  hang_info2_pt->nmaster();
+            }
+           //Otherwise the node is its own master
+           else
+            {
+             n_master2 = 1;
+            }
+           
+           //Loop over the master nodes
+           for(unsigned m2=0;m2<n_master2;m2++)
+            {
+             //Get the number of the unknown
+             //If the pressure dof is hanging
+             if(pressure_dof_is_hanging[l2])
+              {
+               //Get the unknown from the master node
+               local_unknown = 
+                this->local_hang_eqn(hang_info2_pt->master_node_pt(m2),
+                                     p_index);
+               //Get the weight from the hanging object
+               hang_weight2 = hang_info2_pt->master_weight(m2);
+              }
+             else
+              {
+               local_unknown = this->p_local_eqn(l2);
+               hang_weight2 = 1.0;
+              }
+             
+             //If the unknown is not pinned
+             if(local_unknown >= 0)
+              {
+     
+               if ((int(eqn_number(local_eqn))!=
+                    this->Pinned_fp_pressure_eqn)&&
+                   (int(eqn_number(local_unknown))!=
+                    this->Pinned_fp_pressure_eqn))
+                {
+                 for(unsigned k=0;k<DIM;k++)
+                  {
+                   jacobian(local_eqn,local_unknown)+=dtestp(l2,k)*
+                    (scaled_re*interpolated_u[k]*testp[l]+dtestp(l,k))*
+                    W*hang_weight*hang_weight2;
+                  }
+                }
+               else
+                {
+                 if ((int(eqn_number(local_eqn))==
+                      this->Pinned_fp_pressure_eqn)&&
+                     (int(eqn_number(local_unknown))
+                      ==this->Pinned_fp_pressure_eqn))
+                  {
+                   jacobian(local_eqn,local_unknown)=1.0;
+                  }
+                }
+              }
+            }
+          }
+        } /*End of Jacobian calculation*/
+      } //End of if not boundary condition
+    }//End of loop over master nodes
+  }//End of loop over l
+  }//end of integration loop
+ 
+ // Now add boundary contributions from Robin BCs
+ unsigned nrobin=this->Pressure_advection_diffusion_robin_element_pt.size();
+ for (unsigned e=0;e<nrobin;e++)
+  {
+   this->Pressure_advection_diffusion_robin_element_pt[e]->
+    fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
+     residuals,jacobian,flag);
+  }
+}
+
+
+
+
 //========================================================================
 /// Add element's contribution to the elemental 
 /// residual vector and/or Jacobian matrix.

@@ -114,7 +114,7 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
     }
   }
  infile2.close();
-   
+    
  // Resize the Element vector
  Element_pt.resize(n_element);
 
@@ -230,7 +230,6 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
      infile3.close();
     } 
   }
-
 
  // Process face file to extract boundary faces
  //--------------------------------------------
@@ -404,6 +403,13 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
  unsigned second_glob_num=0;
  unsigned third_glob_num=0;
   
+ // Set up map relating nodes to global node numbers
+ std::map<Node*,unsigned> node_number;
+ for(unsigned i=0;i<n_node;i++)
+  {
+   node_number[Node_pt[i]]=i;
+  }
+
  // Loop over the elements
  for(unsigned e=0;e<n_element;e++)
   {
@@ -414,77 +420,17 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
     {
      Face_boundary[e][i]=0;
     }
-  
-   // Loop over all the nodes in the mesh to find out the
-   // global node numbers of the element's four nodes.
-   // Only search until all four have been found
-   unsigned found=0;
-   for(unsigned i=0;i<n_node;i++)
-    {
-     Node* nod_pt=Node_pt[i];
-      
-     // Is the 0th node in the element the same as the
-     // candidate node in the mesh?
-     if (finite_element_pt(e)->node_pt(0)==nod_pt)
-      {
-       // The global node number of the zero-th node in that element is
-       // (in tetgen's 1-based numbering!):
-       zeroth_glob_num=i+1; 
-       found++;
-      }
-      
-     // Is the 1st node in the element the same as the
-     // candidate node in the mesh?
-     if (finite_element_pt(e)->node_pt(1)==nod_pt)
-      {
-       // The global node number of the first node in that element is
-       // (in tetgen's 1-based numbering!):
-       first_glob_num=i+1; 
-       found++;
-      }
-      
-      
-     // Is the 2nd node in the element the same as the
-     // candidate node in the mesh?
-     if (finite_element_pt(e)->node_pt(2)==nod_pt)
-      {
-       // The global node number of the second node in that element is
-       // (in tetgen's 1-based numbering!):
-       second_glob_num=i+1; 
-       found++;
-      }
-
-     // Is the 3rd node in the element the same as the
-     // candidate node in the mesh?
-     if (finite_element_pt(e)->node_pt(3)==nod_pt)
-      {
-       // The global node number of the third node in that element is
-       // (in tetgen's 1-based numbering!):
-       third_glob_num=i+1; 
-       found++;
-      }
-      
-      
-     // We've found four -- bail out...
-     if (found==4) break;
-    }
-    
-   //If we haven't found all the nodes the complain
-   if(found < 4)
-    {
-     std::ostringstream error_stream;
-     error_stream << "Only found global node numbers of " 
-                  << found << " nodes in element " << e << std::endl; 
-     throw OomphLibError(error_stream.str(),
-                         "TetgenScaffoldMesh::TetgenScaffoldMesh()",
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-    
-
+   
+   // The global node numbers of the various nodes
+   // in tetgen's 1-based numbering:
+   zeroth_glob_num=node_number[finite_element_pt(e)->node_pt(0)]+1; 
+   first_glob_num =node_number[finite_element_pt(e)->node_pt(1)]+1; 
+   second_glob_num=node_number[finite_element_pt(e)->node_pt(2)]+1; 
+   third_glob_num =node_number[finite_element_pt(e)->node_pt(3)]+1; 
     
    // Now we know the global node numbers of the elements' four nodes
    // in tetgen's 1-based numbering. 
-    
+   
    // Loop over all the boundary faces and check if 
    // the face in the element coincide with it. If so,
    // copy the boundary id across.
@@ -506,56 +452,55 @@ TetgenScaffoldMesh::TetgenScaffoldMesh(const std::string& node_file_name,
       }
      
      // First face
-     if ( ( (zeroth_glob_num== first_node[i]) || 
-            (zeroth_glob_num==second_node[i]) ||
-            (zeroth_glob_num== third_node[i])    ) &&
-          ( ( first_glob_num== first_node[i]) || 
-            ( first_glob_num==second_node[i]) ||
-            ( first_glob_num== third_node[i])    ) &&
-          ( ( third_glob_num== first_node[i]) || 
-            ( third_glob_num==second_node[i]) ||
-            ( third_glob_num== third_node[i])    )       )
+     else if ( ( (zeroth_glob_num== first_node[i]) || 
+                 (zeroth_glob_num==second_node[i]) ||
+                 (zeroth_glob_num== third_node[i])    ) &&
+               ( ( first_glob_num== first_node[i]) || 
+                 ( first_glob_num==second_node[i]) ||
+                 ( first_glob_num== third_node[i])    ) &&
+               ( ( third_glob_num== first_node[i]) || 
+                 ( third_glob_num==second_node[i]) ||
+                 ( third_glob_num== third_node[i])    )       )
       {
        // Copy boundary id across
        Face_boundary[e][1]=face_boundary_id[i];
       }
-
+     
      // Second face
-     if ( ( (zeroth_glob_num== first_node[i]) || 
-            (zeroth_glob_num==second_node[i]) ||
-            (zeroth_glob_num== third_node[i])    ) &&
-          ( (second_glob_num== first_node[i]) || 
-            (second_glob_num==second_node[i]) ||
-            (second_glob_num== third_node[i])    ) &&
-          ( ( third_glob_num== first_node[i]) || 
-            ( third_glob_num==second_node[i]) ||
-            ( third_glob_num== third_node[i])    )       )
+     else if ( ( (zeroth_glob_num== first_node[i]) || 
+                 (zeroth_glob_num==second_node[i]) ||
+                 (zeroth_glob_num== third_node[i])    ) &&
+               ( (second_glob_num== first_node[i]) || 
+                 (second_glob_num==second_node[i]) ||
+                 (second_glob_num== third_node[i])    ) &&
+               ( ( third_glob_num== first_node[i]) || 
+                 ( third_glob_num==second_node[i]) ||
+                 ( third_glob_num== third_node[i])    )       )
       {
        // Copy boundary id across
        Face_boundary[e][2]=face_boundary_id[i];
       }
-
+     
      // Third face
-     if ( ( ( first_glob_num== first_node[i]) || 
-            ( first_glob_num==second_node[i]) ||
-            ( first_glob_num== third_node[i])    ) &&
-          ( (second_glob_num== first_node[i]) || 
-            (second_glob_num==second_node[i]) ||
-            (second_glob_num== third_node[i])    ) &&
-          ( ( third_glob_num== first_node[i]) || 
-            ( third_glob_num==second_node[i]) ||
-            ( third_glob_num== third_node[i])    )       )
+     else if ( ( ( first_glob_num== first_node[i]) || 
+                 ( first_glob_num==second_node[i]) ||
+                 ( first_glob_num== third_node[i])    ) &&
+               ( (second_glob_num== first_node[i]) || 
+                 (second_glob_num==second_node[i]) ||
+                 (second_glob_num== third_node[i])    ) &&
+               ( ( third_glob_num== first_node[i]) || 
+                 ( third_glob_num==second_node[i]) ||
+                 ( third_glob_num== third_node[i])    )       )
       {
        // Copy boundary id across
        Face_boundary[e][3]=face_boundary_id[i];
       }
 
-
-
+     
     } //end for i
   } // end for e
-
-
+ 
+ 
 } //end of constructor
    
 

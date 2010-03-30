@@ -45,6 +45,355 @@ namespace oomph
 
 
 //======================================================================
+/// Helper class for elements that impose Robin boundary conditions
+/// on pressure advection diffusion problem required by Fp preconditioner
+/// (class used to get around some templating issues)
+//======================================================================
+ class FpPressureAdvDiffRobinBCElementBase : public virtual FaceElement
+{
+  public:
+ 
+ /// Constructor
+ FpPressureAdvDiffRobinBCElementBase() {}
+ 
+ /// Empty virtual destructor
+ virtual ~FpPressureAdvDiffRobinBCElementBase(){}
+ 
+ /// \short This function returns the residuals for the 
+ /// traction function. flag=1 (or 0): do (or don't) compute the 
+ /// Jacobian as well. 
+ virtual void fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
+  Vector<double> &residuals, 
+  DenseMatrix<double> &jacobian, 
+  unsigned flag)=0;
+ 
+};
+
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+
+//======================================================================
+/// A class for elements that allow the imposition of Robin boundary
+/// conditions for the pressure advection diffusion problem in the
+/// Fp preconditioner.
+/// The geometrical information can be read from the FaceGeometry<ELEMENT> 
+/// class and and thus, we can be generic enough without the need to have
+/// a separate equations class
+//======================================================================
+template <class ELEMENT>
+class FpPressureAdvDiffRobinBCElement : public virtual FaceGeometry<ELEMENT>, 
+ public virtual FaceElement, 
+ public virtual FpPressureAdvDiffRobinBCElementBase 
+{
+ 
+  public:
+ 
+ ///Constructor, which takes a "bulk" element and the value of the index
+ ///and its limit. Optional boolean flag indicates if it's called
+ // refineable constructor.
+ FpPressureAdvDiffRobinBCElement(
+  FiniteElement* const &element_pt, 
+  const int &face_index,
+  const bool& called_from_refineable_constructor=false)
+  :   FaceGeometry<ELEMENT>(), FaceElement()
+  { 
+   
+#ifdef PARANOID
+   {
+    //Check that the element is not a refineable 3d element
+    if (!called_from_refineable_constructor)
+     {
+      ELEMENT* elem_pt = new ELEMENT;
+      //If it's three-d
+      if(elem_pt->dim()==3)
+       {
+        //Is it refineable
+        if(dynamic_cast<RefineableElement*>(elem_pt))
+         {
+          //Issue a warning
+          OomphLibWarning(
+           "This flux element will not work correctly if nodes are hanging\n",
+           "FpPressureAdvDiffRobinBCElement::Constructor",
+           OOMPH_EXCEPTION_LOCATION);
+         }
+       }
+      delete elem_pt;
+     }
+   }
+#endif
+   
+   //Attach the geometrical information to the element. N.B. This function
+   //also assigns nbulk_value from the required_nvalue of the bulk element
+   element_pt->build_face_element(face_index,this);
+
+  }
+
+ /// Empty destructor
+ ~FpPressureAdvDiffRobinBCElement() {}
+
+ /// \short This function returns the residuals for the 
+ /// traction function. flag=1 (or 0): do (or don't) compute the 
+ /// Jacobian as well. 
+ virtual void fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
+  Vector<double> &residuals, 
+  DenseMatrix<double> &jacobian, 
+  unsigned flag);
+ 
+
+ ///This function returns just the residuals
+ inline void fill_in_contribution_to_residuals(Vector<double> &residuals)
+  {
+   std::ostringstream error_message;
+   error_message 
+    << "fill_in_contribution_to_residuals() must not be called directly.\n"
+    << "since it uses the local equation numbering of the bulk element\n"
+    << "which calls the relevant helper function directly.\n";
+   throw OomphLibError(
+    error_message.str(),
+    "FpPressureAdvDiffRobinBCElement::fill_in_contribution_to_residuals()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+
+ ///This function returns the residuals and the jacobian
+ inline void fill_in_contribution_to_jacobian(Vector<double> &residuals,
+                                          DenseMatrix<double> &jacobian)
+  {
+   std::ostringstream error_message;
+   error_message 
+    << "fill_in_contribution_to_jacobian() must not be called directly.\n"
+    << "since it uses the local equation numbering of the bulk element\n"
+    << "which calls the relevant helper function directly.\n";
+   throw OomphLibError(
+    error_message.str(),
+    "FpPressureAdvDiffRobinBCElement::fill_in_contribution_to_jacobian()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+ 
+ ///Overload the output function
+ void output(std::ostream &outfile) {FiniteElement::output(outfile);}
+ 
+ ///Output function: x,y,[z],u,v,[w],p in tecplot format
+ void output(std::ostream &outfile, const unsigned &nplot)
+ {FiniteElement::output(outfile,nplot);}
+ 
+
+}; 
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+
+
+//============================================================================
+/// Get residuals and Jacobian of Robin boundary conditions in pressure
+/// advection diffusion problem in Fp preconditoner
+//============================================================================
+template<class ELEMENT>
+void FpPressureAdvDiffRobinBCElement<ELEMENT>::
+fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
+ Vector<double> &residuals, 
+ DenseMatrix<double> &jacobian, 
+ unsigned flag)
+{
+ //Storage for local coordinates in FaceElement and associted bulk element
+ unsigned my_dim=dim();
+ Vector<double> s(my_dim);
+ Vector<double> s_bulk(my_dim+1);
+ 
+ // Storage for outer unit normal
+ Vector<double> unit_normal(my_dim+1);
+ 
+ //Storage for veloc in bulk element
+ Vector<double> veloc(my_dim+1);
+ 
+ //Set the value of n_intpt
+ unsigned n_intpt = integral_pt()->nweight();
+ 
+ //Integers to store local equation numbers
+ int local_eqn=0;
+ int local_unknown=0;
+ 
+ // Get cast bulk element
+ ELEMENT* bulk_el_pt=dynamic_cast<ELEMENT*>(bulk_element_pt());
+ 
+ //Find out how many pressure dofs there are in the bulk element
+ unsigned n_pres = bulk_el_pt->npres_nst();
+ 
+ // Get the Reynolds number from the bulk element
+ double re = bulk_el_pt->re();
+ 
+ //Set up memory for pressure shape and test functions
+ Shape psip(n_pres), testp(n_pres);
+ 
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   //Get the integral weight
+   double w = integral_pt()->weight(ipt);
+   
+   //Assign values of local coordinate in FaceElement
+   for(unsigned i=0;i<my_dim;i++) s[i] = integral_pt()->knot(ipt,i);
+   
+   // Find corresponding coordinate in the the bulk element
+   s_bulk=local_coordinate_in_bulk(s);
+   
+   /// Get outer unit normal 
+   outer_unit_normal(ipt,unit_normal);
+   
+   // Get velocity in bulk element
+   bulk_el_pt->interpolated_u_nst(s_bulk,veloc);
+   
+   // Get normal component of veloc
+   double flux=0.0;
+   for (unsigned i=0;i<my_dim+1;i++)
+    {
+     flux+=veloc[i]*unit_normal[i];
+    }
+   
+   // Modify bc: If outflow (flux>0) apply Neumann condition instead
+   if (flux>0.0) flux=0.0;
+
+   // Get pressure
+   double interpolated_press=bulk_el_pt->interpolated_p_nst(s_bulk);
+   
+   //Call the pressure shape and test functions in bulk element
+   bulk_el_pt->pshape_nst(s_bulk,psip,testp);
+   
+   //Find the Jacobian of the mapping within the FaceElement
+   double J = J_eulerian(s);
+   
+   //Premultiply the weights and the Jacobian
+   double W = w*J;
+   
+   //Loop over the pressure shape functions in bulk
+   //(wasteful but they'll be zero on the boundary)
+   for(unsigned l=0;l<n_pres;l++)
+    {
+     local_eqn=bulk_el_pt->p_local_eqn(l);
+     
+     //If not a boundary conditions
+     if(local_eqn >= 0)
+      {
+       residuals[local_eqn] -= 
+        re*flux*interpolated_press*testp[l]*W;
+       
+       // Jacobian too?
+       if(flag)
+        {
+         //Loop over the shape functions in bulk
+         for(unsigned l2=0;l2<n_pres;l2++)
+          {
+           local_unknown = bulk_el_pt->p_local_eqn(l2);
+           
+           //If not a boundary conditions
+           if(local_unknown >= 0)
+            {             
+             jacobian(local_eqn,local_unknown)-= 
+              re*flux*psip[l2]*testp[l]*W;
+            }
+          }
+        } /*End of Jacobian calculation*/
+      } //End of if not boundary condition
+    }//End of loop over l
+  }
+ 
+}
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+//======================================================================
+/// Template-free base class for Navier-Stokes equations to avoid
+/// casting problems
+//======================================================================
+class TemplateFreeNavierStokesEquationsBase : virtual public FiniteElement
+{
+
+  public:
+
+ /// Constructor (empty)
+ TemplateFreeNavierStokesEquationsBase(){};
+
+ /// Virtual destructor (empty)
+ virtual ~TemplateFreeNavierStokesEquationsBase(){};
+
+ 
+ /// \short Compute the residuals for the associated pressure advection 
+ /// diffusion problem. Used by the Fp preconditioner.
+ virtual void fill_in_pressure_advection_diffusion_residuals(Vector<double>& 
+                                                             residuals)=0;
+ 
+ /// \short Compute the residuals and Jacobian for the associated 
+ /// pressure advection diffusion problem. Used by the Fp preconditioner.
+ virtual void fill_in_pressure_advection_diffusion_jacobian(
+  Vector<double>& residuals, DenseMatrix<double> &jacobian)=0;
+ 
+ /// \short Return the index at which the pressure is stored if it is
+ /// stored at the nodes. If not stored at the nodes this will return 
+ /// a negative number.
+ virtual int p_nodal_index_nst() const =0;
+ 
+ /// \short Access function for the local equation number information for
+ /// the pressure.
+ /// p_local_eqn[n] = local equation number or < 0 if pinned
+ virtual int p_local_eqn(const unsigned &n)=0;
+
+ /// \short Global eqn number of pressure dof that's pinned in pressure
+ /// adv diff problem
+ virtual int& pinned_fp_pressure_eqn()=0;
+
+
+ /// \short Pin all non-pressure dofs and backup eqn numbers of all Data
+ virtual void pin_all_non_pressure_dofs(std::map<Data*,std::vector<int> >& 
+                                        eqn_number_backup)=0;
+ 
+ /// \short Build FaceElements that apply the Robin boundary condition
+ /// to the pressure advection diffusion problem required by 
+ /// Fp preconditioner
+ virtual void build_fp_press_adv_diff_robin_bc_element(const unsigned& 
+                                                       face_index)=0;
+
+ /// \short Delete the FaceElements that apply the Robin boundary condition
+ /// to the pressure advection diffusion problem required by 
+ /// Fp preconditioner
+ virtual void delete_pressure_advection_diffusion_robin_elements()=0;
+
+
+ /// \short Compute the diagonal of the velocity/pressure mass matrices.
+ /// If which one=0, both are computed, otherwise only the pressure 
+ /// (which_one=1) or the velocity mass matrix (which_one=2 -- the 
+ /// LSC version of the preconditioner only needs that one)
+ virtual void get_pressure_and_velocity_mass_matrix_diagonal(
+  Vector<double> &press_mass_diag, Vector<double> &veloc_mass_diag,
+  const unsigned& which_one=0)=0;
+
+};
+
+ 
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+
+
+
+//======================================================================
 /// A class for elements that solve the cartesian Navier--Stokes equations,
 /// templated by the dimension DIM.
 /// This contains the generic maths -- any concrete implementation must 
@@ -69,7 +418,8 @@ namespace oomph
 /// class. 
 //======================================================================
 template <unsigned DIM>
-class NavierStokesEquations : public virtual FSIFluidElement
+ class NavierStokesEquations : public virtual FSIFluidElement,
+ public virtual TemplateFreeNavierStokesEquationsBase
 {
 
   public:
@@ -84,6 +434,13 @@ class NavierStokesEquations : public virtual FSIFluidElement
  /// x is a Vector!
  typedef double (*NavierStokesSourceFctPt)(const double& time,
                                            const Vector<double>& x);
+
+
+ /// \short Function pointer to source function fct(x) for the 
+ /// pressure advection diffusion equation (only used during
+ /// validation!). x is a Vector!
+ typedef double (*NavierStokesPressureAdvDiffSourceFctPt)(
+  const Vector<double>& x);
 
   private:
 
@@ -133,15 +490,23 @@ class NavierStokesEquations : public virtual FSIFluidElement
  /// Pointer to volumetric source function
  NavierStokesSourceFctPt Source_fct_pt;
 
+ /// \short Pointer to source function pressure advection diffusion equation
+ /// (only to be used during validation)
+ NavierStokesPressureAdvDiffSourceFctPt Press_adv_diff_source_fct_pt;
+
  /// \short Boolean flag to indicate if ALE formulation is disabled when
  /// time-derivatives are computed. Only set to true if you're sure
  /// that the mesh is stationary.
  bool ALE_is_disabled;
- 
- /// \short Access function for the local equation number information for
- /// the pressure.
- /// p_local_eqn[n] = local equation number or < 0 if pinned
- virtual int p_local_eqn(const unsigned &n)=0;
+
+ /// \short Storage for FaceElements that apply Robin BC for pressure adv diff
+ /// equation used in Fp preconditioner.
+ Vector<FpPressureAdvDiffRobinBCElementBase*> 
+  Pressure_advection_diffusion_robin_element_pt;
+
+ /// \short Global eqn number of pressure dof that's pinned in 
+ /// pressure advection diffusion problem (defaults to -1)
+ int Pinned_fp_pressure_eqn;
 
  /// \short Compute the shape functions and derivatives 
  /// w.r.t. global coords at local coordinate s.
@@ -160,14 +525,16 @@ class NavierStokesEquations : public virtual FSIFluidElement
                                                       Shape &test, 
                                                       DShape &dtestdx) const=0;
 
- /// Compute the pressure shape functions at local coordinate s
- virtual void pshape_nst(const Vector<double> &s, Shape &psi) const=0;
 
- /// \short Compute the pressure shape and test functions 
- /// at local coordinate s
- virtual void pshape_nst(const Vector<double> &s, Shape &psi, 
-                         Shape &test) const=0;
-
+ /// \short Compute the pressure shape and test functions and derivatives 
+ /// w.r.t. global coords at local coordinate s.
+ /// Return Jacobian of mapping between local and global coordinates.
+ virtual double dpshape_and_dptest_eulerian_nst(const Vector<double> &s, 
+                                                Shape &ppsi, 
+                                                DShape &dppsidx, 
+                                                Shape &ptest, 
+                                                DShape &dptestdx) const=0;
+  
 
  /// \short Calculate the body force at a given time and local and/or 
  /// Eulerian position. This function is virtual so that it can be 
@@ -286,25 +653,28 @@ class NavierStokesEquations : public virtual FSIFluidElement
   }
 
 
-
-
-
-
-
-
- ///\short Compute the residuals for the Navier--Stokes equations; 
- /// flag=1(or 0): do (or don't) compute the Jacobian as well. 
+ ///\short Compute the residuals for the Navier--Stokes equations.
+ /// Flag=1 (or 0): do (or don't) compute the Jacobian as well.
+ /// Flag=2: Fill in mass matrix too.
  virtual void fill_in_generic_residual_contribution_nst(
   Vector<double> &residuals, DenseMatrix<double> &jacobian, 
   DenseMatrix<double> &mass_matrix, unsigned flag);
 
+
+ /// \short Compute the residuals for the associated pressure advection 
+ /// diffusion problem. Used by the Fp preconditioner.
+ /// flag=1(or 0): do (or don't) compute the Jacobian as well. 
+ virtual void fill_in_generic_pressure_advection_diffusion_contribution_nst(
+  Vector<double> &residuals, DenseMatrix<double> &jacobian, unsigned flag);
+ 
     
 public:
 
  /// \short Constructor: NULL the body force and source function
  /// and make sure the ALE terms are included by default.
  NavierStokesEquations() : Body_force_fct_pt(0), Source_fct_pt(0),
-  ALE_is_disabled(false) 
+  Press_adv_diff_source_fct_pt(0), ALE_is_disabled(false), 
+  Pinned_fp_pressure_eqn(-1)
   {
    //Set all the Physical parameter pointers to the default value zero
    Re_pt = &Default_Physical_Constant_Value;
@@ -375,10 +745,33 @@ public:
 
  ///Access function for the source-function pointer. Const version
  NavierStokesSourceFctPt source_fct_pt() const {return Source_fct_pt;}
- 
+
+ /// \short Access function for the source-function pointer for pressure 
+ /// advection diffusion  (used for validation only). 
+ NavierStokesPressureAdvDiffSourceFctPt& source_fct_for_pressure_adv_diff()
+ {return Press_adv_diff_source_fct_pt;}
+
+ /// \short Access function for the source-function pointer for pressure 
+ /// advection diffusion  (used for validation only). Const version.
+ NavierStokesPressureAdvDiffSourceFctPt source_fct_for_pressure_adv_diff()
+  const
+ {return Press_adv_diff_source_fct_pt;}
+
+ /// \short Global eqn number of pressure dof that's pinned in pressure
+ /// adv diff problem
+ int& pinned_fp_pressure_eqn(){return Pinned_fp_pressure_eqn;}
+
  ///Function to return number of pressure degrees of freedom
  virtual unsigned npres_nst() const=0;
  
+ /// Compute the pressure shape functions at local coordinate s
+ virtual void pshape_nst(const Vector<double> &s, Shape &psi) const=0;
+
+ /// \short Compute the pressure shape and test functions 
+ /// at local coordinate s
+ virtual void pshape_nst(const Vector<double> &s, Shape &psi, 
+                         Shape &test) const=0;
+
  /// \short Velocity i at local node n. Uses suitably interpolated value 
  /// for hanging nodes. The use of u_index_nst() permits the use of this
  /// element as the basis for multi-physics elements. The default
@@ -505,8 +898,17 @@ public:
    get_traction(s,N,load);
   }
  
- /// Compute the diagonal of the velocity mass matrix
+ /// Compute the diagonal of the velocity mass matrix hierher obsolete
+ /// can go with LSC preconditioner itself.
  void get_velocity_mass_matrix_diagonal(Vector<double> &mass_diag);
+
+ /// \short Compute the diagonal of the velocity/pressure mass matrices.
+ /// If which one=0, both are computed, otherwise only the pressure 
+ /// (which_one=1) or the velocity mass matrix (which_one=2 -- the 
+ /// LSC version of the preconditioner only needs that one)
+ void get_pressure_and_velocity_mass_matrix_diagonal(
+  Vector<double> &press_mass_diag, Vector<double> &veloc_mass_diag,
+  const unsigned& which_one=0);
 
  /// \short Output function: x,y,[z],u,v,[w],p
  /// in tecplot format. Default number of plot points
@@ -609,7 +1011,7 @@ public:
                                          GeneralisedElement::Dummy_matrix,1);
   }
 
- /// Add the element's contribution to its residuals vector,
+ /// \short Add the element's contribution to its residuals vector,
  /// jacobian matrix and mass matrix
  void fill_in_contribution_to_jacobian_and_mass_matrix(
   Vector<double> &residuals, DenseMatrix<double> &jacobian, 
@@ -619,6 +1021,167 @@ public:
    fill_in_generic_residual_contribution_nst(residuals,jacobian,mass_matrix,2);
   }
 
+ 
+ /// \short Compute the residuals for the associated pressure advection 
+ /// diffusion problem. Used by the Fp preconditioner.
+ void fill_in_pressure_advection_diffusion_residuals(Vector<double>& residuals)
+ {
+  fill_in_generic_pressure_advection_diffusion_contribution_nst(
+   residuals,GeneralisedElement::Dummy_matrix,0);
+ }
+
+ /// \short Compute the residuals and Jacobian for the associated 
+ /// pressure advection diffusion problem. Used by the Fp preconditioner.
+ void fill_in_pressure_advection_diffusion_jacobian(
+  Vector<double>& residuals, DenseMatrix<double> &jacobian)
+ {
+  fill_in_generic_pressure_advection_diffusion_contribution_nst(
+   residuals,jacobian,1);
+ }
+
+ 
+ /// \short Pin all non-pressure dofs and backup eqn numbers
+ void pin_all_non_pressure_dofs(std::map<Data*,std::vector<int> >& 
+                                eqn_number_backup)
+ {
+  // Loop over internal data and pin the values (having established that
+  // pressure dofs aren't amongst those)
+  unsigned nint=this->ninternal_data();
+  for (unsigned j=0;j<nint;j++)
+   {
+    Data* data_pt=this->internal_data_pt(j);
+    if (eqn_number_backup[data_pt].size()==0)
+     {
+      unsigned nvalue=data_pt->nvalue();
+      eqn_number_backup[data_pt].resize(nvalue);
+      for (unsigned i=0;i<nvalue;i++)
+       {
+        // Backup
+        eqn_number_backup[data_pt][i]=data_pt->eqn_number(i);
+        
+        // Pin everything
+        data_pt->pin(i);
+       }
+     }
+   }
+  
+  // Now deal with nodal values
+  unsigned nnod=this->nnode();
+  for (unsigned j=0;j<nnod;j++)
+   {
+
+    Node* nod_pt=this->node_pt(j);
+    if (eqn_number_backup[nod_pt].size()==0)
+     {
+
+      unsigned nvalue=nod_pt->nvalue();
+      eqn_number_backup[nod_pt].resize(nvalue);
+      for (unsigned i=0;i<nvalue;i++)
+       {
+        // Pin everything apart from the nodal pressure 
+        // value
+        if (int(i)!=this->p_nodal_index_nst())
+         {
+          // Backup
+          eqn_number_backup[nod_pt][i]=nod_pt->eqn_number(i);
+          
+          // Pin
+          nod_pt->pin(i);
+         }
+        // Else it's a pressure value
+        else 
+         {
+          // Exclude non-nodal pressure based elements
+          if (this->p_nodal_index_nst()>=0)
+           {
+            // Backup
+            eqn_number_backup[nod_pt][i]=nod_pt->eqn_number(i);
+           }
+         }
+       }
+        
+      
+      // If it's a solid node deal with its positional data too
+      SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
+      if (solid_nod_pt!=0)
+       {
+        Data* solid_posn_data_pt=solid_nod_pt->variable_position_pt();
+        if (eqn_number_backup[solid_posn_data_pt].size()==0)
+         {
+          unsigned nvalue=solid_posn_data_pt->nvalue();
+          eqn_number_backup[solid_posn_data_pt].resize(nvalue);
+          for (unsigned i=0;i<nvalue;i++)
+           {
+            // Backup
+            eqn_number_backup[solid_posn_data_pt][i]=
+             solid_posn_data_pt->eqn_number(i);
+            
+            // Pin
+            solid_posn_data_pt->pin(i);
+           }
+         }
+       }
+     }
+   }
+ }
+ 
+
+ /// \short Build FaceElements that apply the Robin boundary condition
+ /// to the pressure advection diffusion problem required by 
+ /// Fp preconditioner
+ virtual void build_fp_press_adv_diff_robin_bc_element(const unsigned& 
+                                                       face_index)=0;
+
+ /// \short Output the FaceElements that apply the Robin boundary condition
+ /// to the pressure advection diffusion problem required by 
+ /// Fp preconditioner
+ void output_pressure_advection_diffusion_robin_elements(std::ostream &outfile)
+ {
+  unsigned nel=Pressure_advection_diffusion_robin_element_pt.size();
+  for (unsigned e=0;e<nel;e++)
+   {
+    FaceElement* face_el_pt=Pressure_advection_diffusion_robin_element_pt[e];
+    outfile << "ZONE" << std::endl;
+    Vector<double> unit_normal(DIM);
+    Vector<double> x(DIM);
+    Vector<double> s(DIM-1);
+    unsigned n=face_el_pt->integral_pt()->nweight();
+    for (unsigned ipt=0;ipt<n;ipt++)
+     {
+      std::cout<< "ipt " << ipt << " ";
+      for(unsigned i=0;i<DIM-1;i++) 
+       {
+        s[i]=face_el_pt->integral_pt()->knot(ipt,i);
+        std::cout << s[i] << " ";
+       }
+      std::cout<< std::endl;
+      face_el_pt->interpolated_x(s,x);
+      face_el_pt->outer_unit_normal(ipt,unit_normal);
+      for (unsigned i=0;i<DIM;i++)
+       {
+        outfile << x[i] << " ";
+       }
+      for (unsigned i=0;i<DIM;i++)
+       {
+        outfile << unit_normal[i] << " ";
+       }
+      outfile << std::endl;
+     }
+   }
+ }
+
+ /// \short Delete the FaceElements that apply the Robin boundary condition
+ /// to the pressure advection diffusion problem required by 
+ /// Fp preconditioner
+ void delete_pressure_advection_diffusion_robin_elements()
+ {
+  unsigned nel=Pressure_advection_diffusion_robin_element_pt.size();
+  for (unsigned e=0;e<nel;e++)
+   {
+    delete Pressure_advection_diffusion_robin_element_pt[e];
+   }
+  Pressure_advection_diffusion_robin_element_pt.clear();
+ }
 
  /// \short Compute derivatives of elemental residual vector with respect
  /// to nodal coordinates. Overwrites default implementation in 
@@ -783,7 +1346,8 @@ class QCrouzeixRaviartElement : public virtual QElement<DIM,3>,
  ///Return Jacobian of mapping between local and global coordinates.
  inline double dshape_and_dtest_eulerian_nst(const Vector<double> &s, 
                                              Shape &psi, 
-                                             DShape &dpsidx, Shape &test, 
+                                             DShape &dpsidx, 
+                                             Shape &test, 
                                              DShape &dtestdx) const;
 
  /// \short Velocity shape and test functions and their derivs 
@@ -795,17 +1359,17 @@ class QCrouzeixRaviartElement : public virtual QElement<DIM,3>,
                                                      Shape &test, 
                                                      DShape &dtestdx) const;
 
- /// Pressure shape functions at local coordinate s
- inline void pshape_nst(const Vector<double> &s, Shape &psi) const;
- 
- /// Pressure shape and test functions at local coordinte s
- inline void pshape_nst(const Vector<double> &s, Shape &psi, 
-                        Shape &test) const;
- 
- /// Return the local equation numbers for the pressure values.
- inline int p_local_eqn(const unsigned &n)
-  {return this->internal_local_eqn(P_nst_internal_index,n);}
 
+ 
+ /// \short Pressure shape and test functions and their derivs 
+ /// w.r.t. to global coords  at local coordinate s (taken from geometry)
+ /// Return Jacobian of mapping between local and global coordinates.
+ inline double dpshape_and_dptest_eulerian_nst(const Vector<double> &s, 
+                                             Shape &ppsi, 
+                                             DShape &dppsidx, 
+                                             Shape &ptest, 
+                                             DShape &dptestdx) const;
+ 
 public:
 
  /// Constructor, there are DIM+1 internal values (for the pressure)
@@ -820,6 +1384,13 @@ public:
  virtual unsigned required_nvalue(const unsigned &n) const;
 
  
+ /// Pressure shape functions at local coordinate s
+ inline void pshape_nst(const Vector<double> &s, Shape &psi) const;
+ 
+ /// Pressure shape and test functions at local coordinte s
+ inline void pshape_nst(const Vector<double> &s, Shape &psi, 
+                        Shape &test) const;
+ 
  /// \short Return the i-th pressure value
  /// (Discontinous pressure interpolation -- no need to cater for hanging 
  /// nodes). 
@@ -828,6 +1399,11 @@ public:
 
  /// Return number of pressure values
  unsigned npres_nst() const {return DIM+1;} 
+
+
+ /// Return the local equation numbers for the pressure values.
+ inline int p_local_eqn(const unsigned &n)
+  {return this->internal_local_eqn(P_nst_internal_index,n);}
  
  /// Pin p_dof-th pressure dof and set it to value specified by p_value.
  void fix_pressure(const unsigned &p_dof, const double &p_value)
@@ -835,6 +1411,18 @@ public:
    this->internal_data_pt(P_nst_internal_index)->pin(p_dof);
    this->internal_data_pt(P_nst_internal_index)->set_value(p_dof,p_value);
   }
+
+
+ /// \short Build FaceElements that apply the Robin boundary condition
+ /// to the pressure advection diffusion problem required by 
+ /// Fp preconditioner
+ void build_fp_press_adv_diff_robin_bc_element(const unsigned& 
+                                               face_index)
+ {
+  this->Pressure_advection_diffusion_robin_element_pt.push_back(
+   new FpPressureAdvDiffRobinBCElement<QCrouzeixRaviartElement<DIM> >(
+    this, face_index));
+ }
 
  /// \short  Add to the set \c paired_load_data pairs containing
  /// - the pointer to a Data object
@@ -977,6 +1565,7 @@ inline double QCrouzeixRaviartElement<2>::dshape_and_dtest_eulerian_at_knot_nst(
 {
  //Call the geometrical shape functions and derivatives  
  double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx);
+
  //Loop over the test functions and derivatives and set them equal to the
  //shape functions
  for(unsigned i=0;i<9;i++)
@@ -1034,12 +1623,74 @@ const
  psi[2] = s[1];
 }
 
-///Define the pressure shape and test functions
+
+
+//==========================================================================
+/// 2D :
+/// Pressure shape and test functions and derivs w.r.t. to Eulerian coords.
+/// Return Jacobian of mapping between local and global coordinates.
+//==========================================================================
 template<>
-inline void QCrouzeixRaviartElement<2>::pshape_nst(const Vector<double> &s, 
-                                                  Shape &psi, 
-Shape &test) const
-{
+ inline double QCrouzeixRaviartElement<2>::dpshape_and_dptest_eulerian_nst(
+  const Vector<double> &s, 
+  Shape &ppsi, 
+  DShape &dppsidx, 
+  Shape &ptest, 
+  DShape &dptestdx) const
+ {
+
+  // Initalise with shape fcts and derivs. w.r.t. to local coordinates
+  ppsi[0] = 1.0;
+  ppsi[1] = s[0];
+  ppsi[2] = s[1];
+
+  dppsidx(0,0) = 0.0;
+  dppsidx(1,0) = 1.0;
+  dppsidx(2,0) = 0.0;
+
+  dppsidx(0,1) = 0.0;
+  dppsidx(1,1) = 0.0;
+  dppsidx(2,1) = 1.0;
+
+
+  //Get the values of the shape functions and their local derivatives
+  Shape psi(9);
+  DShape dpsi(9,2);
+  dshape_local(s,psi,dpsi);
+
+  //Allocate memory for the inverse 2x2 jacobian
+  DenseMatrix<double> inverse_jacobian(2);
+
+  //Now calculate the inverse jacobian
+  const double det = local_to_eulerian_mapping(dpsi,inverse_jacobian);
+  
+  //Now set the values of the derivatives to be derivs w.r.t. to the
+  // Eulerian coordinates
+  transform_derivatives(inverse_jacobian,dppsidx);
+  
+  //Loop over the test functions and set them equal to the shape functions
+  for(unsigned i=0;i<3;i++)
+   {
+    ptest[i] = ppsi[i];
+    dptestdx(i,0) = dppsidx(i,0);
+    dptestdx(i,1) = dppsidx(i,1);
+   }
+
+  //Return the determinant of the jacobian
+  return det;
+
+ }
+
+
+//=======================================================================
+/// 2D :
+/// Ppressure shape and test functions
+//=======================================================================
+template<>
+ inline void QCrouzeixRaviartElement<2>::pshape_nst(const Vector<double> &s, 
+                                                    Shape &psi, 
+                                                    Shape &test) const
+ {
  //Call the pressure shape functions
  pshape_nst(s,psi);
  //Loop over the test functions and set them equal to the shape functions
@@ -1062,12 +1713,81 @@ const
  psi[3] = s[2];
 }
 
-///Define the pressure shape and test functions
+
+//==========================================================================
+/// 3D :
+/// Pressure shape and test functions and derivs w.r.t. to Eulerian coords.
+/// Return Jacobian of mapping between local and global coordinates.
+//==========================================================================
+template<>
+ inline double QCrouzeixRaviartElement<3>::dpshape_and_dptest_eulerian_nst(
+  const Vector<double> &s, 
+  Shape &ppsi, 
+  DShape &dppsidx, 
+  Shape &ptest, 
+  DShape &dptestdx) const
+ {
+
+  // Initalise with shape fcts and derivs. w.r.t. to local coordinates
+  ppsi[0] = 1.0;
+  ppsi[1] = s[0];
+  ppsi[2] = s[1];
+  ppsi[3] = s[2];
+
+  dppsidx(0,0) = 0.0;
+  dppsidx(1,0) = 1.0;
+  dppsidx(2,0) = 0.0;
+  dppsidx(3,0) = 0.0;
+
+  dppsidx(0,1) = 0.0;
+  dppsidx(1,1) = 0.0;
+  dppsidx(2,1) = 1.0;
+  dppsidx(3,1) = 0.0;
+
+  dppsidx(0,2) = 0.0;
+  dppsidx(1,2) = 0.0;
+  dppsidx(2,2) = 0.0;
+  dppsidx(3,2) = 1.0;
+
+
+  //Get the values of the shape functions and their local derivatives
+  Shape psi(27);
+  DShape dpsi(27,3);
+  dshape_local(s,psi,dpsi);
+
+  // Allocate memory for the inverse 3x3 jacobian
+  DenseMatrix<double> inverse_jacobian(3);
+
+  // Now calculate the inverse jacobian
+  const double det = local_to_eulerian_mapping(dpsi,inverse_jacobian);
+  
+  // Now set the values of the derivatives to be derivs w.r.t. to the
+  // Eulerian coordinates
+  transform_derivatives(inverse_jacobian,dppsidx);
+  
+  // Loop over the test functions and set them equal to the shape functions
+  for(unsigned i=0;i<4;i++)
+   {
+    ptest[i] = ppsi[i];
+    dptestdx(i,0) = dppsidx(i,0);
+    dptestdx(i,1) = dppsidx(i,1);
+    dptestdx(i,2) = dppsidx(i,2);
+   }
+
+  // Return the determinant of the jacobian
+  return det;
+
+ }
+
+//=======================================================================
+/// 3D :
+/// Ppressure shape and test functions
+//=======================================================================
 template<>
 inline void QCrouzeixRaviartElement<3>::pshape_nst(const Vector<double> &s, 
-                                                  Shape &psi, 
-Shape &test) const
-{
+                                                   Shape &psi, 
+                                                   Shape &test) const
+ {
  //Call the pressure shape functions
  pshape_nst(s,psi);
  //Loop over the test functions and set them equal to the shape functions
@@ -1163,18 +1883,18 @@ class QTaylorHoodElement : public virtual QElement<DIM,3>,
                                                      Shape &test, 
                                                      DShape &dtestdx) const;
 
- /// Pressure shape functions at local coordinate s
- inline void pshape_nst(const Vector<double> &s, Shape &psi) const;
 
- /// Pressure shape and test functions at local coordinte s
- inline void pshape_nst(const Vector<double> &s, Shape &psi, 
-                        Shape &test) const;
+
+ /// \short Pressure shape and test functions and their derivs 
+ /// w.r.t. to global coords  at local coordinate s (taken from geometry).
+ /// Return Jacobian of mapping between local and global coordinates.
+ inline double dpshape_and_dptest_eulerian_nst(const Vector<double> &s, 
+                                               Shape &ppsi, 
+                                               DShape &dppsidx, 
+                                               Shape &ptest, 
+                                               DShape &dptestdx) const;
  
- /// Return the local equation numbers for the pressure values.
- inline int p_local_eqn(const unsigned &n)
-  {return this->nodal_local_eqn(Pconv[n],p_nodal_index_nst());}
-
-public:
+  public:
 
  /// Constructor, no internal data points
  QTaylorHoodElement() : QElement<DIM,3>(),  NavierStokesEquations<DIM>() {}
@@ -1184,8 +1904,20 @@ public:
  inline virtual unsigned required_nvalue(const unsigned &n) const 
   {return Initial_Nvalue[n];}
 
+
+ /// Pressure shape functions at local coordinate s
+ inline void pshape_nst(const Vector<double> &s, Shape &psi) const;
+
+ /// Pressure shape and test functions at local coordinte s
+ inline void pshape_nst(const Vector<double> &s, Shape &psi, 
+                        Shape &test) const;
+ 
  /// \short Set the value at which the pressure is stored in the nodes
  int p_nodal_index_nst() const {return static_cast<int>(DIM);}
+
+ /// Return the local equation numbers for the pressure values.
+ inline int p_local_eqn(const unsigned &n)
+  {return this->nodal_local_eqn(Pconv[n],p_nodal_index_nst());}
 
  /// \short Access function for the pressure values at local pressure 
  /// node n_p (const version)
@@ -1202,6 +1934,19 @@ public:
    this->node_pt(Pconv[p_dof])->pin(this->p_nodal_index_nst());
    this->node_pt(Pconv[p_dof])->set_value(this->p_nodal_index_nst(),p_value);
   }
+
+
+
+ /// \short Build FaceElements that apply the Robin boundary condition
+ /// to the pressure advection diffusion problem required by 
+ /// Fp preconditioner
+ void build_fp_press_adv_diff_robin_bc_element(const unsigned& 
+                                               face_index)
+ {
+  this->Pressure_advection_diffusion_robin_element_pt.push_back(
+   new FpPressureAdvDiffRobinBCElement<QTaylorHoodElement<DIM> >(
+    this, face_index));
+ }
 
 
  /// \short  Add to the set \c paired_load_data pairs containing
@@ -1376,6 +2121,73 @@ inline double QTaylorHoodElement<3>::dshape_and_dtest_eulerian_at_knot_nst(
 
 //==========================================================================
 /// 2D :
+/// Pressure shape and test functions and derivs w.r.t. to Eulerian coords.
+/// Return Jacobian of mapping between local and global coordinates.
+//==========================================================================
+template<>
+ inline double QTaylorHoodElement<2>::dpshape_and_dptest_eulerian_nst(
+  const Vector<double> &s, 
+  Shape &ppsi, 
+  DShape &dppsidx, 
+  Shape &ptest, 
+  DShape &dptestdx) const
+ {
+  
+  //Local storage
+  double psi1[2], psi2[2];
+  double dpsi1[2],dpsi2[2];
+  
+  //Call the OneDimensional Shape functions
+  OneDimLagrange::shape<2>(s[0],psi1);
+  OneDimLagrange::shape<2>(s[1],psi2);
+  OneDimLagrange::dshape<2>(s[0],dpsi1);
+  OneDimLagrange::dshape<2>(s[1],dpsi2);
+  
+  //Now let's loop over the nodal points in the element
+  //s1 is the "x" coordinate, s2 the "y" 
+  for(unsigned i=0;i<2;i++)
+   {
+    for(unsigned j=0;j<2;j++)
+     {
+      /*Multiply the two 1D functions together to get the 2D function*/
+      ppsi[2*i+j] = psi2[i]*psi1[j];
+      dppsidx(2*i+j,0)= psi2[i]*dpsi1[j];
+      dppsidx(2*i+j,1)=dpsi2[i]* psi1[j];
+     }
+   }
+  
+
+  //Get the values of the shape functions and their local derivatives
+  Shape psi(9);
+  DShape dpsi(9,2);
+  dshape_local(s,psi,dpsi);
+  
+  // Allocate memory for the inverse 2x2 jacobian
+  DenseMatrix<double> inverse_jacobian(2);
+  
+  // Now calculate the inverse jacobian
+  const double det = local_to_eulerian_mapping(dpsi,inverse_jacobian);
+  
+  // Now set the values of the derivatives to be derivs w.r.t. to the
+  // Eulerian coordinates
+  transform_derivatives(inverse_jacobian,dppsidx);
+  
+  // Loop over the test functions and set them equal to the shape functions
+  for(unsigned i=0;i<4;i++)
+   {
+    ptest[i] = ppsi[i];
+    dptestdx(i,0) = dppsidx(i,0);
+    dptestdx(i,1) = dppsidx(i,1);
+   }
+  
+  // Return the determinant of the jacobian
+  return det;
+    
+ }
+
+
+//==========================================================================
+/// 2D :
 /// Pressure shape functions
 //==========================================================================
 template<>
@@ -1401,6 +2213,79 @@ const
   }
 }
 
+
+//==========================================================================
+/// 3D :
+/// Pressure shape and test functions and derivs w.r.t. to Eulerian coords.
+/// Return Jacobian of mapping between local and global coordinates.
+//==========================================================================
+template<>
+ inline double QTaylorHoodElement<3>::dpshape_and_dptest_eulerian_nst(
+  const Vector<double> &s, 
+  Shape &ppsi, 
+  DShape &dppsidx, 
+  Shape &ptest, 
+  DShape &dptestdx) const
+ {
+  //Local storage
+  double psi1[2], psi2[2], psi3[2];
+  double dpsi1[2],dpsi2[2],dpsi3[2];
+  
+  //Call the OneDimensional Shape functions
+  OneDimLagrange::shape<2>(s[0],psi1);
+  OneDimLagrange::shape<2>(s[1],psi2);
+  OneDimLagrange::shape<2>(s[2],psi3);
+  OneDimLagrange::dshape<2>(s[0],dpsi1);
+  OneDimLagrange::dshape<2>(s[1],dpsi2);
+  OneDimLagrange::dshape<2>(s[2],dpsi3);
+  
+  //Now let's loop over the nodal points in the element
+  //s0 is the "x" coordinate, s1 the "y", s2 is the "z"  
+  for(unsigned i=0;i<2;i++)
+   {
+    for(unsigned j=0;j<2;j++)
+     {
+      for(unsigned k=0;k<2;k++)
+       {
+        /*Multiply the three 1D functions together to get the 3D function*/
+        ppsi[4*i + 2*j + k] = psi3[i]*psi2[j]*psi1[k];
+        dppsidx(4*i + 2*j + k,0) =  psi3[i]   * psi2[j]    *dpsi1[k];
+        dppsidx(4*i + 2*j + k,1) =  psi3[i]   *dpsi2[j]    * psi1[k];
+        dppsidx(4*i + 2*j + k,2) = dpsi3[i]   * psi2[j]    * psi1[k];
+       }
+     }
+   }
+  
+
+  //Get the values of the shape functions and their local derivatives
+  Shape psi(27);
+  DShape dpsi(27,3);
+  dshape_local(s,psi,dpsi);
+
+  // Allocate memory for the inverse 3x3 jacobian
+  DenseMatrix<double> inverse_jacobian(3);
+  
+  // Now calculate the inverse jacobian
+  const double det = local_to_eulerian_mapping(dpsi,inverse_jacobian);
+  
+  // Now set the values of the derivatives to be derivs w.r.t. to the
+  // Eulerian coordinates
+  transform_derivatives(inverse_jacobian,dppsidx);
+  
+  // Loop over the test functions and set them equal to the shape functions
+  for(unsigned i=0;i<8;i++)
+   {
+    ptest[i] = ppsi[i];
+    dptestdx(i,0) = dppsidx(i,0);
+    dptestdx(i,1) = dppsidx(i,1);
+    dptestdx(i,2) = dppsidx(i,2);
+   }
+  
+  // Return the determinant of the jacobian
+  return det;
+
+}
+
 //==========================================================================
 /// 3D :
 /// Pressure shape functions
@@ -1412,6 +2297,7 @@ const
 {
  //Local storage
  double psi1[2], psi2[2], psi3[2];
+
  //Call the OneDimensional Shape functions
  OneDimLagrange::shape<2>(s[0],psi1);
  OneDimLagrange::shape<2>(s[1],psi2);

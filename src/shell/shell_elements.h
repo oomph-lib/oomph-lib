@@ -513,15 +513,17 @@ class FSIDiagHermiteShellElement : public virtual DiagHermiteShellElement,
    this->fill_in_jacobian_from_external_interaction_by_fd(jacobian);
   }
 
- /// \short Find the local coordinate s in this element
- /// that corresponds to the global "intrinsic" coordinate \f$ \zeta \f$
- /// (here identical to the Lagrangian coordinate \f$ \xi \f$).
- /// If the coordinate is contained within this element, the
- /// geom_object_pt points to "this" element; if the zeta coordinate
- /// is not contained in this element geom_object_pt=NULL.
- void locate_zeta(const Vector<double> &zeta,
-                  GeomObject* &geom_object_pt, Vector<double> &s,
-                  const bool& use_coordinate_as_initial_guess=false);
+
+//hierher
+/*  /// \short Find the local coordinate s in this element */
+/*  /// that corresponds to the global "intrinsic" coordinate \f$ \zeta \f$ */
+/*  /// (here identical to the Lagrangian coordinate \f$ \xi \f$). */
+/*  /// If the coordinate is contained within this element, the */
+/*  /// geom_object_pt points to "this" element; if the zeta coordinate */
+/*  /// is not contained in this element geom_object_pt=NULL. */
+/*  void locate_zeta(const Vector<double> &zeta, */
+/*                   GeomObject* &geom_object_pt, Vector<double> &s, */
+/*                   const bool& use_coordinate_as_initial_guess=false); */
 
 
 

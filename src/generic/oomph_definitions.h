@@ -60,6 +60,31 @@ namespace oomph
 //be used in erorr messages.
 #define OOMPH_EXCEPTION_LOCATION __FILE__ ":" OOMPH_TO_STRING(__LINE__)
 
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+///=====================================================================
+/// A class for handling oomph-lib run-time exceptions quietly.
+//======================================================================
+class OomphLibQuietException : public std::runtime_error
+{ 
+ public:
+ 
+ ///\short Constructor 
+ OomphLibQuietException();
+ 
+ ///The destructor cannot throw an exception (C++ STL standard) 
+ ~OomphLibQuietException() throw() {}
+};
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
 ///=====================================================================
 /// A Base class for oomph-lib run-time exception (error and warning) 
 /// handling.

@@ -38,6 +38,7 @@
 #include "problem.h"
 #include "elastic_problems.h"
 #include "refineable_mesh.h"
+#include "shape.h"
 
 namespace oomph
 {
@@ -445,24 +446,6 @@ void Mesh::reorder_nodes()
 
 }
 
-//========================================================
-/// Flush storage for elements and nodes by emptying the
-/// vectors that store the pointers to them. This is
-/// useful if a particular mesh is only built to generate
-/// a small part of a bigger mesh. Once the elements and
-/// nodes have been created, they are typically copied
-/// into the new mesh and the auxiliary mesh can be
-/// deleted. However, if we simply call the destructor
-/// of the auxiliary mesh, it will also wipe out
-/// the nodes and elements, because it still "thinks"
-/// it's in charge of these...
-//========================================================
-void Mesh::flush_element_and_node_storage()
-{
- //Clear vectors of pointers to the nodes and elements
- Node_pt.clear();
- Element_pt.clear();
-}
 
 //========================================================
 /// Virtual Destructor to clean up all memory
@@ -536,6 +519,19 @@ unsigned Mesh::self_test()
  // Check the mesh for repeated nodes (issues its own error message)
  if (0!=check_for_repeated_nodes()) passed=false;
 
+// hierher -- re-enable once problem with Hermite elements has been resolved.
+//  // Check if there are any inverted elements
+//  bool mesh_has_inverted_elements=false;
+//  check_inverted_elements(mesh_has_inverted_elements);
+//  if (mesh_has_inverted_elements)
+//   {
+//    passed=false;
+//    oomph_info << "\n ERROR: Mesh has inverted elements\n"
+//               << "     Run Mesh::check_inverted_elements(...) with"
+//               << "     with output stream to find out which elements are"
+//               << "     inverted.\n";
+//   }
+
  //Loop over the elements, check for duplicates and do self test
  std::set<GeneralisedElement*> element_set_pt;
  unsigned long Element_pt_range = Element_pt.size();
@@ -588,6 +584,107 @@ unsigned Mesh::self_test()
  else {return 1;}
 
 }
+
+
+
+//========================================================
+///  Check for inverted elements and report outcome
+ /// in boolean variable. This visits all elements at their
+ /// integration points and checks if the Jacobian of the 
+ /// mapping between local and global coordinates is positive --
+ /// using the same test that would be carried out (but only in PARANOID 
+ /// mode) during the assembly of the elements' Jacobian matrices.
+ /// Inverted elements are output in inverted_element_file (if the
+ /// stream is open).
+//========================================================
+ void Mesh::check_inverted_elements(bool& mesh_has_inverted_elements,
+                                    std::ofstream& inverted_element_file)
+ {
+  // Initialise flag
+  mesh_has_inverted_elements=false;
+  
+  // Suppress output while checking for inverted elements
+  bool backup=
+   FiniteElement::Suppress_output_while_checking_for_inverted_elements;
+  FiniteElement::Suppress_output_while_checking_for_inverted_elements=true;
+
+  // Loop over all elements
+  unsigned nelem=nelement();
+  for (unsigned e=0;e<nelem;e++)
+   {
+    FiniteElement* el_pt=finite_element_pt(e);
+    
+    // Only check for finite elements
+    if (el_pt!=0)
+     {
+      
+      //Find out number of nodes and local coordinates in the element
+      unsigned n_node = el_pt->nnode();
+      unsigned n_dim=el_pt->dim();
+      unsigned ndim_node=el_pt->nodal_dimension();
+
+      // Can't check Jacobian for elements in which nodal and elementa
+      // dimensions don't match
+      if (n_dim==ndim_node)
+       {
+        
+        //Set up memory for the shape and test function and local coord
+        Shape psi(n_node);
+        DShape dpsidx(n_node,n_dim);
+        Vector<double> s(n_dim);
+        
+        // Initialise element-level test
+        bool is_inverted=false;
+        
+        unsigned n_intpt=el_pt->integral_pt()->nweight();
+        for(unsigned ipt=0;ipt<n_intpt;ipt++)
+         {
+          // Local coordinates
+          for(unsigned i=0;i<n_dim;i++) 
+           {
+            s[i] = el_pt->integral_pt()->knot(ipt,i);
+           }
+          
+          double J=0;
+          try
+           {
+            //Call the derivatives of the shape functions and Jacobian
+            J=el_pt->dshape_eulerian(s,psi,dpsidx);
+            
+            // If code is compiled without PARANOID setting, the
+            // above call will simply return the negative Jacobian
+            // without failing, so we need to check manually
+#ifndef PARANOID
+            try
+             {
+              el_pt->check_jacobian(J);
+             }
+            catch(OomphLibQuietException& error)
+             {
+              is_inverted=true;
+             }
+#endif
+           }
+          catch(OomphLibQuietException& error)
+           {
+            is_inverted=true;
+           }
+         }
+        if (is_inverted)
+         {
+          mesh_has_inverted_elements=true;
+          if (inverted_element_file.is_open())
+           {
+            el_pt->output(inverted_element_file);
+           }
+         }
+       }
+     }
+   }
+  // Reset
+  FiniteElement::Suppress_output_while_checking_for_inverted_elements=backup;
+ }
+ 
 
 
 //========================================================

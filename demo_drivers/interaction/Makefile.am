@@ -7,8 +7,9 @@ turek_flag \
 fsi_driven_cavity\
 fsi_channel_seg_and_precond \
 vmtk_fsi \
+unsteady_vmtk_fsi \
 unstructured_fsi \
 unstructured_three_d_fsi \
-elastic_bretherton 
-
+elastic_bretherton \
+pseudo_solid_collapsible_tube
 

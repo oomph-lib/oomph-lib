@@ -80,8 +80,7 @@ class SuperLUPreconditioner : public Preconditioner
      {
       LinearAlgebraDistribution dist
        ((dynamic_cast<DistributableLinearAlgebraObject*>
-                (matrix_pt))->distribution_pt()->communicator_pt(),
-               matrix_pt->nrow(),false);
+                (matrix_pt))->distribution_pt());
       this->build_distribution(dist);
       solver.factorise(matrix_pt);
      }

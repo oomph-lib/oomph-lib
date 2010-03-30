@@ -386,6 +386,8 @@ private:
 //======================================================================
 namespace BlackBoxFDNewtonSolver
 {
+
+
 // Function pointer for function that specifies residuals: The arguments 
 // are: Parameters, unknowns, residuals
 typedef void (*ResidualFctPt)(const Vector<double>& parameters,
@@ -405,6 +407,9 @@ extern double FD_step;
 // Tolerance (maximum allowed value of an single residual at convergence) 
 extern double Tol;
 
+// Use steplength control do make globally convergent (default false)
+extern bool Use_step_length_control;
+
 // Black-box FD Newton solver:
 // Calling sequence for residual function is
 // \code residual_fct(parameters,unknowns,residuals) \endcode
@@ -413,6 +418,20 @@ extern double Tol;
 extern void black_box_fd_newton_solve(ResidualFctPt residual_fct,
                                       const Vector<double>& params, 
                                       Vector<double>& unknowns);
+
+
+// Line search helper for globally convergent Newton method
+extern void line_search(const Vector<double>& x_old, 
+                        const double half_residual_squared_old, 
+                        const Vector<double>& gradient, 
+                        ResidualFctPt residual_fct, 
+                        const Vector<double>& params,
+                        Vector<double>& newton_dir,
+                        Vector<double>& x, 
+                        double& half_residual_squared,
+                        const double stpmax,
+                        bool& check);
+
 }
 
 

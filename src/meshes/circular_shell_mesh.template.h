@@ -214,42 +214,4 @@ namespace oomph
 }
 
 
-
-
-// hierher kill 
-
-/* namespace oomph */
-/* { */
-
-/* //======================================================================== */
-/* /// A 2D solid mesh for (topologically) circular cylindrical shells. */
-/* /// The shell is represented by two Lagrangian coordinates that correspond */
-/* /// to z and theta in cylindrical polars. The required mesh is therefore a */
-/* /// 2D mesh and is therefore inherited from the generic RectangularQuadMesh */
-/* //======================================================================= */
-/* template <class ELEMENT> */
-/* class CircularCylindricalShellMesh :  */
-/*  public virtual RectangularQuadMesh<ELEMENT>, */
-/*  public virtual SolidMesh */
-/* { */
-/* public: */
-
-/*  ///Constructor for the mesh */
-/*  CircularCylindricalShellMesh(const unsigned &nx, */
-/*                               const unsigned &ny, */
-/*                               const double &lx, */
-/*                               const double &ly, */
-/*            TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper); */
- 
-/*  /// \short In all elastic problems, the nodes must be assigned an undeformed, */
-/*  /// or reference, position, corresponding to the stress-free state */
-/*  /// of the elastic body. This function assigns the undeformed position */
-/*  /// for the nodes on the elastic tube */
-/*  void assign_undeformed_positions(GeomObject* const &undeformed_midplane_pt); */
-
-/* }; */
-
-
-/* } */
-
 #endif

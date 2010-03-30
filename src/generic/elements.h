@@ -1003,11 +1003,6 @@ class FiniteElement : public virtual GeneralisedElement, public GeomObject
  /// via local coordinates
  static const double Node_location_tolerance;
  
- /// \short Internal function used to check for singular or negative
- /// Jacobians in the transform from local to global or Lagrangian
- /// coordinates.
- void check_jacobian(const double &jacobian) const;
-
 
   protected:
 
@@ -1333,6 +1328,10 @@ public:
  /// area = left-handed coordinate system).
  static bool Accept_negative_jacobian;
 
+ /// \short Static boolean to suppress output while checking 
+ /// for inverted elements
+ static bool Suppress_output_while_checking_for_inverted_elements;
+
  /// Constructor
  FiniteElement() : GeneralisedElement(), Integral_pt(0), 
   Node_pt(0), Nodal_local_eqn(0), Nnode(0),
@@ -1573,6 +1572,11 @@ public:
  /// coordinates at the ipt-th integration point
  virtual double J_eulerian_at_knot(const unsigned &ipt) const;
  
+ /// \short Helper function used to check for singular or negative
+ /// Jacobians in the transform from local to global or Lagrangian
+ /// coordinates.
+ void check_jacobian(const double &jacobian) const;
+
  /// \short Compute the geometric shape functions and also
  /// first derivatives w.r.t. global coordinates at local coordinate s;
  /// Returns Jacobian of mapping from global to local coordinates.
@@ -3535,7 +3539,7 @@ class FaceElement: public virtual FiniteElement
  void outer_unit_normal(const Vector<double> &s, 
                         Vector<double> &unit_normal) const;
  
- /// \short Computer outer unit normal at ipt-th integration point
+ /// \short Compute outer unit normal at ipt-th integration point
  void outer_unit_normal(const unsigned &ipt, 
                         Vector<double> &unit_normal) const;
 
@@ -3733,10 +3737,10 @@ class SolidFaceElement: public virtual FaceElement,
 
 
 
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
 
 
 //=======================================================================
@@ -3798,10 +3802,18 @@ public:
    element_pt->build_face_element(face_index,this);
   }
 
+
+ /// \short Constructor 
+ DummyFaceElement() : 
+  FaceGeometry<ELEMENT>(), FaceElement()
+  {  
+  }
+
+
   /// \short The "global" intrinsic coordinate of the element when
- /// viewed as part of a geometric object should be given by
- /// the FaceElement representation, by default
- double zeta_nodal(const unsigned &n, const unsigned &k,           
+  /// viewed as part of a geometric object should be given by
+  /// the FaceElement representation, by default
+  double zeta_nodal(const unsigned &n, const unsigned &k,           
                           const unsigned &i) const 
   {return FaceElement::zeta_nodal(n,k,i);}     
 
@@ -3835,6 +3847,89 @@ public:
   {FiniteElement::output(file_pt,n_plot);}
 
 }; 
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+//======================================================================
+/// Basic-ified FaceElement, without any of the functionality of
+/// of actual FaceElements -- it's just a  surface element of the
+/// same geometric type as the FaceGeometry associated with
+/// bulk element specified by the template parameter. The element
+/// can be used to represent boundaries without actually being 
+/// attached to a bulk element. Used mainly during unstructured
+/// mesh generation. 
+//======================================================================
+template <class ELEMENT>
+class FreeStandingFaceElement : public virtual FaceGeometry<ELEMENT>
+{
+
+public:
+ 
+ /// \short Constructor
+ FreeStandingFaceElement() : 
+  FaceGeometry<ELEMENT>(), Boundary_number_in_bulk_mesh(0)
+  {
+   
+   //Check whether things have been set
+#ifdef PARANOID
+   Boundary_number_in_bulk_mesh_has_been_set = false;
+#endif
+   
+  }
+
+ /// Access function for the boundary number in bulk mesh
+ inline const unsigned& boundary_number_in_bulk_mesh() const
+  {return Boundary_number_in_bulk_mesh;}
+ 
+ 
+ /// Set function for the boundary number in bulk mesh
+ inline void set_boundary_number_in_bulk_mesh(const unsigned& b) 
+  { 
+   Boundary_number_in_bulk_mesh=b;
+#ifdef PARANOID
+   Boundary_number_in_bulk_mesh_has_been_set=true;
+#endif
+  }
+
+ /// \short In a FaceElement, the "global" intrinsic coordinate
+ /// of the element along the boundary, when viewed as part of
+ /// a compound geometric object is specified using the
+ /// boundary coordinate defined by the mesh. 
+ /// Note: Boundary coordinates will have been set up when
+ /// creating the underlying mesh, and their values will have 
+ /// been stored at the nodes.
+ double zeta_nodal(const unsigned &n, const unsigned &k, const unsigned &i)
+  const
+  {
+   //Vector in which to hold the intrinsic coordinate
+   Vector<double> zeta(this->dim());
+
+   //Get the k-th generalised boundary coordinate at node n
+   this->node_pt(n)->get_coordinates_on_boundary(
+    Boundary_number_in_bulk_mesh,k,zeta);
+   
+   //Return the individual coordinate
+   return zeta[i];
+  }
+
+  protected:
+ 
+ /// The boundary number in the bulk mesh to which this element is attached
+ unsigned Boundary_number_in_bulk_mesh;
+ 
+#ifdef PARANOID
+ 
+ /// \short Has the Boundary_number_in_bulk_mesh been set? Only included if
+ /// compiled with PARANOID switched on.
+ bool Boundary_number_in_bulk_mesh_has_been_set;
+
+#endif
+
+}; 
+
 
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
