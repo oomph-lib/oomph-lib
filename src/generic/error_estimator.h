@@ -438,6 +438,193 @@ class Z2ErrorEstimator : public virtual ErrorEstimator
                     
 };
 
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+//========================================================================
+/// Dummy error estimator, allows manual specification of refinement 
+/// pattern by forcing refinement in regions defined by elements in 
+/// a reference mesh.
+//========================================================================
+  class DummyErrorEstimator : public virtual ErrorEstimator
+{
+
+  public:
+
+ /// \short Constructor. Provide mesh and number of the elements that define
+ /// the regions within which elements are to be refined subsequently.
+ /// Also specify the node number of a central node 
+ /// within elements -- it's used to determine if an element is
+ /// in the region where refinement is supposed to take place.
+ /// Optional boolean flag (defaulting to false) indicates that 
+ /// refinement decision is based on Lagrangian coordinates -- only 
+ /// applicable to solid meshes.
+ DummyErrorEstimator(Mesh* mesh_pt, 
+                    const Vector<unsigned>& elements_to_refine,
+                    const unsigned& central_node_number,
+                    const bool& use_lagrangian_coordinates=false) :
+  Use_lagrangian_coordinates(use_lagrangian_coordinates),
+  Central_node_number(central_node_number)
+  {
+#ifdef PARANOID
+   if (mesh_pt->mesh_has_been_distributed())
+    {
+     throw OomphLibError(
+      "Can't use this error estimator on distributed meshes!",
+      "Mesh::compute_error()",
+      OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   unsigned dim=mesh_pt->finite_element_pt(0)->node_pt(0)->ndim();
+   if (use_lagrangian_coordinates)
+    {
+     SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(
+      mesh_pt->finite_element_pt(0)->node_pt(0));
+     if (solid_nod_pt!=0)
+      {
+       dim=solid_nod_pt-> nlagrangian();
+      }
+    }
+   unsigned nregion=elements_to_refine.size();
+   Region_low_bound.resize(nregion);
+   Region_upp_bound.resize(nregion);
+   for (unsigned e=0;e<nregion;e++)
+    {
+     Region_low_bound[e].resize(dim,1.0e20);
+     Region_upp_bound[e].resize(dim,-1.0e20);
+     FiniteElement* el_pt=mesh_pt->finite_element_pt(elements_to_refine[e]);
+     unsigned nnod=el_pt->nnode();
+     for (unsigned j=0;j<nnod;j++)
+      {
+       Node* nod_pt=el_pt->node_pt(j);
+       for (unsigned i=0;i<dim;i++)
+        {
+         double x=nod_pt->x(i);
+         if (use_lagrangian_coordinates)
+          {
+           SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
+           if (solid_nod_pt!=0)
+            {
+             x=solid_nod_pt->xi(i);             
+            }
+          }
+         if (x<Region_low_bound[e][i]) 
+          {
+           Region_low_bound[e][i]=x;
+          }
+         if (x>Region_upp_bound[e][i]) 
+          {
+           Region_upp_bound[e][i]=x;
+          }
+        }
+      }
+    }
+  }
+
+
+ /// Broken copy constructor
+ DummyErrorEstimator(const DummyErrorEstimator&) 
+  { 
+   BrokenCopy::broken_copy("DummyErrorEstimator");
+  } 
+ 
+
+ /// Broken assignment operator
+ void operator=(const DummyErrorEstimator&) 
+  {
+   BrokenCopy::broken_assign("DummyErrorEstimator");
+  }
+
+
+ /// Empty virtual destructor
+ virtual ~DummyErrorEstimator() {}
+ 
+
+ /// \short Compute the elemental error measures for a given mesh
+ /// and store them in a vector. Doc errors etc.
+ virtual void get_element_errors(OomphCommunicator* comm_pt, Mesh*& mesh_pt, 
+                                 Vector<double>& elemental_error,
+                                 DocInfo& doc_info)
+  {
+#ifdef PARANOID
+   if (doc_info.doc_flag())
+    {
+     std::ostringstream warning_stream;
+     warning_stream 
+      << "No output defined in DummyErrorEstimator::get_element_errors()\n"
+      << "Ignoring doc_info flag.\n";
+     OomphLibWarning(warning_stream.str(),
+                     "DummyErrorEstimator::get_element_errors()",
+                     OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+   unsigned nregion=Region_low_bound.size();
+   unsigned nelem=mesh_pt->nelement();
+   for (unsigned e=0;e<nelem;e++)
+    {
+     elemental_error[e]=0.0;
+
+     // Check if element is in the regions to be refined
+     // (based on coords of its central node)
+     Node* nod_pt=mesh_pt->finite_element_pt(e)->node_pt(Central_node_number);
+     for (unsigned r=0;r<nregion;r++)
+      {
+       bool is_inside=true;
+       unsigned dim=Region_low_bound[r].size();
+       for (unsigned i=0;i<dim;i++)
+        {
+         double x=nod_pt->x(i);
+         if (Use_lagrangian_coordinates)
+          {
+           SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
+           if (solid_nod_pt!=0)
+            {
+             x=solid_nod_pt->xi(i);             
+            }
+          }
+         if (x<Region_low_bound[r][i]) 
+          {
+           is_inside=false;
+           break;
+          }
+         if (x>Region_upp_bound[r][i]) 
+          {
+           is_inside=false;
+           break;
+          }
+        }
+       if (is_inside)
+        {
+         elemental_error[e]=1.0;
+         break;
+        }
+      }
+    }
+  }
+
+private:
+
+ /// \short Use Lagrangian coordinates to decide which element is to be
+ /// refined
+ bool Use_lagrangian_coordinates;
+
+ /// \short Number of local node that is used to identify if an element
+ /// is located in the refinement region
+ unsigned Central_node_number;
+
+ /// Upper bounds for the coordinates of the refinement regions
+ Vector<Vector<double> > Region_upp_bound;
+
+ /// Lower bounds for the coordinates of the refinement regions
+ Vector<Vector<double> > Region_low_bound;
+
+};
+
+
 }
 
 #endif

@@ -391,6 +391,26 @@ void Mesh::node_update(const bool& update_all_solid_nodes)
    Node_pt[n]->perform_auxiliary_node_update_fct();
   }
 
+
+#ifdef OOMPH_HAS_MPI
+
+ // Loop over all external halo nodes with other processors
+ // and update them
+ for (std::map<unsigned, Vector<Node*> >::iterator it=
+       External_halo_node_pt.begin();it!=External_halo_node_pt.end();it++)
+  {
+   // Get vector of external halo nodes
+   Vector<Node*> ext_halo_node_pt=(*it).second;
+   unsigned nnod=ext_halo_node_pt.size();
+   for (unsigned j=0;j<nnod;j++)
+    {
+     ext_halo_node_pt[j]->node_update();
+    }
+  }
+
+#endif
+
+ 
 }
 
 

@@ -1148,13 +1148,10 @@ public:
     unsigned n=face_el_pt->integral_pt()->nweight();
     for (unsigned ipt=0;ipt<n;ipt++)
      {
-      std::cout<< "ipt " << ipt << " ";
       for(unsigned i=0;i<DIM-1;i++) 
        {
         s[i]=face_el_pt->integral_pt()->knot(ipt,i);
-        std::cout << s[i] << " ";
        }
-      std::cout<< std::endl;
       face_el_pt->interpolated_x(s,x);
       face_el_pt->outer_unit_normal(ipt,unit_normal);
       for (unsigned i=0;i<DIM;i++)

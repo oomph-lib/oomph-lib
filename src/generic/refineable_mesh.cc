@@ -513,8 +513,199 @@ void RefineableMeshBase::adapt(OomphCommunicator* comm_pt,
 
   if ((total_n_refine > 0) || (total_n_unrefine > max_keep_unrefined()))
    {
+
+
+    
+#ifdef PARANOID
+#ifdef OOMPH_HAS_MPI
+    
+    // Sanity check: Each processor checks if the enforced unrefinement of
+    // its haloed element is matched by enforced unrefinement of the
+    // corresponding halo elements on the other processors.
+    if (Mesh_has_been_distributed)
+     {
+      // Store number of processors and current process
+      MPI_Status status;
+      int n_proc=comm_pt->nproc();
+      int my_rank=comm_pt->my_rank();
+      
+      // Loop over all other domains/processors
+      for (int d=0;d<n_proc;d++)
+       {
+        // Don't talk to yourself
+        if (d!=my_rank)
+         {
+
+          {
+           // Get the vector of halo elements whose non-halo counterpart
+           // are on processor d
+           Vector<FiniteElement*> halo_elem_pt(this->halo_element_pt(d));
+           
+           // Create vector containing (0)1 to indicate that
+           // halo element is (not) to be unrefined
+           unsigned nhalo=halo_elem_pt.size();
+           Vector<int> halo_to_be_unrefined(nhalo,0);
+           for (unsigned e=0;e<nhalo;e++)
+            {
+             if (dynamic_cast<RefineableElement*>(halo_elem_pt[e])
+                 ->sons_to_be_unrefined())
+              {
+               halo_to_be_unrefined[e]=1;
+              }
+            }
+           
+           // Send it across
+           MPI_Send(&halo_to_be_unrefined[0],nhalo,MPI_INT,
+                    d,0,comm_pt->mpi_comm());
+          }
+
+          {
+           
+           // Get the vector of haloed elements on current processor
+           Vector<FiniteElement*> haloed_elem_pt(this->haloed_element_pt(d));
+           
+           // Ask processor d to send vector containing (0)1 for 
+           // halo element with current processor to be (not)unrefined
+           unsigned nhaloed=haloed_elem_pt.size();
+           Vector<int> halo_to_be_unrefined(nhaloed);
+           MPI_Recv(&halo_to_be_unrefined[0],nhaloed,MPI_INT,d,0,
+                    comm_pt->mpi_comm(),&status);
+           
+           // Check it
+           for (unsigned e=0;e<nhaloed;e++)
+            {
+//              if (halo_to_be_unrefined[e]==1)
+//               {
+//                std::cout 
+//                 << "Haloed element: " << e << " on proc " << my_rank << " \n"
+//                 << "wants to be unrefined\n";
+//               }
+//              else 
+//               {
+//                std::cout 
+//                 << "Haloed element: " << e << " on proc " << my_rank << " \n"
+//                 << "doesn't want to be unrefined\n";
+//               }
+
+             if ( ( (halo_to_be_unrefined[e]==0)&&
+                    (dynamic_cast<RefineableElement*>(haloed_elem_pt[e])->
+                     sons_to_be_unrefined()) ) ||
+                  ( (halo_to_be_unrefined[e]==1)&&
+                    (!dynamic_cast<RefineableElement*>(haloed_elem_pt[e])->
+                     sons_to_be_unrefined()) ) )
+              {
+               std::ostringstream error_message;
+               error_message 
+                << "Error in refinement: \n"
+                << "Haloed element: " << e << " on proc " << my_rank << " \n"
+                << "wants to be unrefined whereas its halo counterpart on\n"
+                << "proc " << d << " doesn't (or vice versa)...\n"
+                << "This is most likely because the error estimator\n"
+                << "has not assigned the same errors to halo and haloed\n"
+                << "elements -- it ought to!\n";
+               throw OomphLibError(error_message.str(),
+                                   "RefineableMeshBase::adapt_mesh",
+                                   OOMPH_EXCEPTION_LOCATION);
+              }
+            }
+           }        
+         }
+        
+       }
+
+
+
+      // Loop over all other domains/processors
+      for (int d=0;d<n_proc;d++)
+       {
+        // Don't talk to yourself
+        if (d!=my_rank)
+         {
+
+          {
+           // Get the vector of halo elements whose non-halo counterpart
+           // are on processor d
+           Vector<FiniteElement*> halo_elem_pt(this->halo_element_pt(d));
+           
+           // Create vector containing (0)1 to indicate that
+           // halo element is (not) to be refined
+           unsigned nhalo=halo_elem_pt.size();
+           Vector<int> halo_to_be_refined(nhalo,0);
+           for (unsigned e=0;e<nhalo;e++)
+            {
+             if (dynamic_cast<RefineableElement*>(halo_elem_pt[e])
+                 ->to_be_refined())
+              {
+               halo_to_be_refined[e]=1;
+              }
+            }
+           
+           // Send it across
+           MPI_Send(&halo_to_be_refined[0],nhalo,MPI_INT,
+                    d,0,comm_pt->mpi_comm());
+          }
+
+          {
+           
+           // Get the vector of haloed elements on current processor
+           Vector<FiniteElement*> haloed_elem_pt(this->haloed_element_pt(d));
+           
+           // Ask processor d to send vector containing (0)1 for 
+           // halo element with current processor to be (not)refined
+           unsigned nhaloed=haloed_elem_pt.size();
+           Vector<int> halo_to_be_refined(nhaloed);
+           MPI_Recv(&halo_to_be_refined[0],nhaloed,MPI_INT,d,0,
+                    comm_pt->mpi_comm(),&status);
+           
+           // Check it
+           for (unsigned e=0;e<nhaloed;e++)
+            {
+//              if (halo_to_be_refined[e]==1)
+//               {
+//                std::cout 
+//                 << "Haloed element: " << e << " on proc " << my_rank << " \n"
+//                 << "wants to be refined\n";
+//               }
+//              else 
+//               {
+//                std::cout 
+//                 << "Haloed element: " << e << " on proc " << my_rank << " \n"
+//                 << "doesn't want to be refined\n";
+//               }
+
+             if ( ( (halo_to_be_refined[e]==0)&&
+                    (dynamic_cast<RefineableElement*>(haloed_elem_pt[e])->
+                     to_be_refined()) ) ||
+                  ( (halo_to_be_refined[e]==1)&&
+                    (!dynamic_cast<RefineableElement*>(haloed_elem_pt[e])->
+                     to_be_refined()) ) )
+              {
+               std::ostringstream error_message;
+               error_message 
+                << "Error in refinement: \n"
+                << "Haloed element: " << e << " on proc " << my_rank << " \n"
+                << "wants to be refined whereas its halo counterpart on\n"
+                << "proc " << d << " doesn't (or vice versa)...\n"
+                << "This is most likely because the error estimator\n"
+                << "has not assigned the same errors to halo and haloed\n"
+                << "elements -- it ought to!\n";
+               throw OomphLibError(error_message.str(),
+                                   "RefineableMeshBase::adapt_mesh",
+                                   OOMPH_EXCEPTION_LOCATION);
+              }
+            }
+           }        
+         }
+        
+       }
+     }   
+#endif
+#endif
+    
+    
     //Perform the actual adaptation
     adapt_mesh(local_doc_info);
+
     //The number of refineable elements is still local to each process
     nunrefined()=n_unrefine;
     nrefined()=n_refine;
@@ -762,11 +953,16 @@ void RefineableMeshBase::adapt_mesh(DocInfo& doc_info)
     }
 
    // Unrefine all the selected elements: This needs to be
+   //-----------------------------------------------------
    // all elements, because the father elements are not actually leaves.
-   //--------------------------------
+   //-------------------------------------------------------------------
+
+   // Unrefine
    for (unsigned long e=0;e<Forest_pt->ntree();e++)
-    {Forest_pt->tree_pt(e)->traverse_all(&Tree::merge_sons_if_required,
-                                         mesh_pt);}
+    {
+     Forest_pt->tree_pt(e)->traverse_all(&Tree::merge_sons_if_required,
+                                         mesh_pt);
+    }
 
    // Add the newly created elements to mesh
    //---------------------------------------
@@ -2021,13 +2217,19 @@ void RefineableMeshBase::synchronise_hanging_nodes
 
          // Send the master weights
          MPI_Send(&count_weights,1,MPI_INT,d,2,comm_pt->mpi_comm());
-         MPI_Send(&hanging_master_weights[0],count_weights,MPI_DOUBLE,d,3,
-                  comm_pt->mpi_comm());
+         if (count_weights!=0)
+          {
+           MPI_Send(&hanging_master_weights[0],count_weights,MPI_DOUBLE,d,3,
+                    comm_pt->mpi_comm());
+          }
 
          // Send the vector showing where the discrepancies are
          MPI_Send(&count_haloed,1,MPI_INT,d,5,comm_pt->mpi_comm());
-         MPI_Send(&hanging_nodes[0],count_haloed,MPI_INT,
-                  d,4,comm_pt->mpi_comm());
+         if (count_haloed!=0)
+          {
+           MPI_Send(&hanging_nodes[0],count_haloed,MPI_INT,
+                    d,4,comm_pt->mpi_comm());
+          }
         }
      
       }
@@ -2065,16 +2267,22 @@ void RefineableMeshBase::synchronise_hanging_nodes
              MPI_Recv(&count_weights,1,MPI_INT,
                       dd,2,comm_pt->mpi_comm(),&status);
              hanging_master_weights.resize(count_weights);
-             MPI_Recv(&hanging_master_weights[0],count_weights,MPI_DOUBLE,dd,
-                      3,comm_pt->mpi_comm(),&status);
+             if (count_weights!=0)
+              {
+               MPI_Recv(&hanging_master_weights[0],count_weights,MPI_DOUBLE,dd,
+                        3,comm_pt->mpi_comm(),&status);
+              }
 
              // Receive the vector describing the position of discrepancies
              unsigned count_halo=0;
              MPI_Recv(&count_halo,1,MPI_INT,
                       dd,5,comm_pt->mpi_comm(),&status);
              hanging_nodes.resize(count_halo);
-             MPI_Recv(&hanging_nodes[0],count_halo,MPI_INT,dd,4,
-                      comm_pt->mpi_comm(),&status);
+             if (count_halo!=0)
+              {
+               MPI_Recv(&hanging_nodes[0],count_halo,MPI_INT,dd,4,
+                        comm_pt->mpi_comm(),&status);
+              }
 
              // Reset the master node and weight counters
              count_masters=0;

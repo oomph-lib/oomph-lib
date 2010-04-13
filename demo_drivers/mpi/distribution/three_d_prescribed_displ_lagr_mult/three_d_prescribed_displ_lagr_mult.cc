@@ -43,8 +43,6 @@ using namespace std;
 using namespace oomph;
 
 
-// #define NOREFINE
-
 //================================================================
 /// Function-type-object to compare finite elements based on
 /// the x and y coordinates of their first node
@@ -181,57 +179,6 @@ namespace Global_Physical_Variables
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 
-#ifdef NOREFINE
-
-//=========================================================================
-/// Simple cubic mesh upgraded to become a solid mesh
-//=========================================================================
-template<class ELEMENT>
-class ElasticCubicMesh : public virtual SimpleCubicMesh<ELEMENT>, 
-                         public virtual SolidMesh
-{
-
-public:
-
- /// \short Constructor: 
- ElasticCubicMesh(const unsigned &nx, const unsigned &ny, 
-                  const unsigned &nz,
-                  const double &a, const double &b, 
-                  const double &c,
-                  TimeStepper* time_stepper_pt = 
-                  &Mesh::Default_TimeStepper) :
-  SimpleCubicMesh<ELEMENT>(nx,ny,nz,0.0,a,0.0,b,0.0,c,time_stepper_pt),
-  SolidMesh()
-  {
-   
-   //Assign the initial lagrangian coordinates
-   set_lagrangian_nodal_coordinates();
-   
-   // Loop over boundary nodes on boundary 5 and setup boundary coordinates
-   {
-    unsigned b=5;
-    unsigned n_node = this->nboundary_node(b);
-    Vector<double> zeta(2);
-    for (unsigned j=0;j<n_node;j++)
-     {
-      Node* nod_pt=this->boundary_node_pt(b,j);
-      zeta[0]=nod_pt->x(0);
-      zeta[1]=nod_pt->x(1);
-      nod_pt->set_coordinates_on_boundary(b,zeta);
-     }
-    this->Boundary_coordinate_exists[b]=true;
-   }
-
-  }
-
- /// Empty Destructor
- virtual ~ElasticCubicMesh() { }
-
-};
-
-
-
-#else
 
 //=========================================================================
 /// Refineable cubic mesh upgraded to become a solid mesh
@@ -284,8 +231,6 @@ public:
 };
 
 
-#endif
-
 
 
 ///////////////////////////////////////////////////////////////////////
@@ -313,20 +258,15 @@ public:
  /// \short Update function (empty)
  void actions_before_newton_solve() {}
 
-#ifdef NOREFINE
-
- /// Access function for the solid mesh
- ElasticCubicMesh<ELEMENT>*& solid_mesh_pt() 
-  {return Solid_mesh_pt;} 
-
-#else
+ /// \short Before distribute: Flush face submesh
+ void actions_before_distribute();
+ 
+ /// \short After distribute: Rebuild face element submesh
+ void actions_after_distribute();
 
  /// Access function for the solid mesh
  RefineableElasticCubicMesh<ELEMENT>*& solid_mesh_pt() 
   {return Solid_mesh_pt;} 
-
-#endif
-
 
  /// Actions before adapt: Wipe the mesh of Lagrange multiplier elements
  void actions_before_adapt();
@@ -347,18 +287,8 @@ private:
  /// by Lagrange multiplilers
  void delete_lagrange_multiplier_elements();
 
-#ifdef NOREFINE
-
- /// Pointer to solid mesh
- ElasticCubicMesh<ELEMENT>* Solid_mesh_pt;
-
-#else
-
  /// Pointer to solid mesh
  RefineableElasticCubicMesh<ELEMENT>* Solid_mesh_pt;
-
-#endif
-
 
  /// Pointers to meshes of Lagrange multiplier elements
  SolidMesh* Lagrange_multiplier_mesh_pt;
@@ -400,26 +330,26 @@ PrescribedBoundaryDisplacementProblem()
  // Domain length in z-direction
  double l_z=1.0;
 
-
-#ifdef NOREFINE
-
- //Now create the mesh 
- solid_mesh_pt() = new ElasticCubicMesh<ELEMENT>(
-  n_x,n_y,n_z,l_x,l_y,l_z);
-
-#else
-
  //Now create the mesh 
  solid_mesh_pt() = new RefineableElasticCubicMesh<ELEMENT>(
   n_x,n_y,n_z,l_x,l_y,l_z);
+ 
+ 
+ // Setup fake error estimator: Refine one element on the outer
+ // and one on the inner surface of the wall
+ Vector<unsigned> elements_to_refine(2);
+ elements_to_refine[0]=9;
+ elements_to_refine[1]=16;
+ 
+ unsigned central_node_number=13;
+ bool use_lagrangian_coordinates=true;
+ solid_mesh_pt()->spatial_error_estimator_pt()=
+  new DummyErrorEstimator(solid_mesh_pt(),elements_to_refine,
+                          central_node_number,
+                          use_lagrangian_coordinates);
+}
 
- // Set error estimator
- solid_mesh_pt()->spatial_error_estimator_pt()=new Z2ErrorEstimator;
- solid_mesh_pt()->max_permitted_error()=0.02;
- solid_mesh_pt()->min_permitted_error()=0.001;
-
-#endif
-
+ 
  //Assign the physical properties to the elements before any refinement
  //Loop over the elements in the main mesh
  unsigned n_element =solid_mesh_pt()->nelement();
@@ -472,10 +402,54 @@ PrescribedBoundaryDisplacementProblem()
  // Setup equation numbering scheme
  cout << "Number of dofs: " << assign_eqn_numbers() << std::endl; 
 
- // Set output directory
- Doc_info.set_directory("RESLT");
+ // Use separate directory for output from each processor
+ std::stringstream dir_name;
+ dir_name << "RESLT_proc" << MPI_Helpers::communicator_pt()->my_rank();
+ Doc_info.set_directory(dir_name.str().c_str());
 
 } //end of constructor
+
+
+
+//=====================start_of_actions_before_distribute=================
+/// Actions before distribute: Wipe the mesh of elements that impose
+/// the prescribed boundary displacements
+//========================================================================
+template<class ELEMENT>
+void PrescribedBoundaryDisplacementProblem<ELEMENT>::actions_before_distribute()
+{
+ // Kill the  elements and wipe surface mesh
+ delete_lagrange_multiplier_elements();
+ 
+ // Rebuild the Problem's global mesh from its various sub-meshes
+ rebuild_global_mesh();
+
+}// end of actions_before_distribute
+
+
+
+//=====================start_of_actions_after_distribute==================
+///  Actions after distribute: Rebuild the mesh of elements that impose
+/// the prescribed boundary displacements
+//========================================================================
+template<class ELEMENT>
+void PrescribedBoundaryDisplacementProblem<ELEMENT>::actions_after_distribute()
+{
+ // Create the elements that impose the displacement constraint 
+ // and attach them to the bulk elements that are
+ // adjacent to boundary 5 
+ create_lagrange_multiplier_elements();
+ 
+ // Rebuild the Problem's global mesh from its various sub-meshes
+ rebuild_global_mesh();
+ 
+ // Pin the redundant solid pressures (if any)
+ PVDEquationsBase<3>::pin_redundant_nodal_solid_pressures(
+  solid_mesh_pt()->element_pt());
+ 
+
+
+}// end of actions_after_distribute
 
 
 //=====================start_of_actions_before_adapt======================
@@ -485,6 +459,7 @@ PrescribedBoundaryDisplacementProblem()
 template<class ELEMENT>
 void PrescribedBoundaryDisplacementProblem<ELEMENT>::actions_before_adapt()
 {
+
  // Kill the  elements and wipe surface mesh
  delete_lagrange_multiplier_elements();
  
@@ -540,50 +515,25 @@ create_lagrange_multiplier_elements()
    
    //Find the index of the face of element e along boundary b
    int face_index = solid_mesh_pt()->face_index_at_boundary(b,e);
-      
-#ifdef NOREFINE
-
-   // Create new element and add to mesh
-   Lagrange_multiplier_mesh_pt->add_element_pt(
-    new ImposeDisplacementByLagrangeMultiplierElement<ELEMENT>(
-     bulk_elem_pt,face_index));   
-   
-#else
 
    // Create new element and add to mesh
    Lagrange_multiplier_mesh_pt->add_element_pt(
     new RefineableImposeDisplacementByLagrangeMultiplierElement<ELEMENT>(
-     bulk_elem_pt,face_index));   
-
-#endif
-
-
+     bulk_elem_pt,face_index));
   }  
-
+ 
  
  // Loop over the elements in the Lagrange multiplier element mesh
  // for elements on the top boundary (boundary 5)
  n_element=Lagrange_multiplier_mesh_pt->nelement();
  for(unsigned i=0;i<n_element;i++)
   {
-
-#ifdef NOREFINE
-
-   //Cast to a Lagrange multiplier element
-   ImposeDisplacementByLagrangeMultiplierElement<ELEMENT> *el_pt = 
-    dynamic_cast<ImposeDisplacementByLagrangeMultiplierElement<ELEMENT>*>
-    (Lagrange_multiplier_mesh_pt->element_pt(i));
-
-#else
-
+   
    //Cast to a Lagrange multiplier element
    RefineableImposeDisplacementByLagrangeMultiplierElement<ELEMENT> *el_pt = 
     dynamic_cast<
     RefineableImposeDisplacementByLagrangeMultiplierElement<ELEMENT>*>
     (Lagrange_multiplier_mesh_pt->element_pt(i));
-
-#endif
-
 
    // Set the GeomObject that defines the boundary shape and
    // specify which bulk boundary we are attached to (needed to extract
@@ -683,10 +633,17 @@ void PrescribedBoundaryDisplacementProblem<ELEMENT>::doc_solution()
    el_pt.push_back(Lagrange_multiplier_mesh_pt->finite_element_pt(e));
   }
  std::sort(el_pt.begin(),el_pt.end(),FiniteElementComp());
+ unsigned written=0;
  for (unsigned e=0;e<nelem;e++)
   {
-   el_pt[e]->output(some_file);
+   if (!el_pt[e]->is_halo())
+    {
+     el_pt[e]->output(some_file);
+     written++;
+    }
   }
+ // Dummy line
+ if (written==0) some_file << "ZONE\n0 0 0 0 0 0 0 0 1\n"; 
  some_file.close();
 
  // Increment label for output files
@@ -701,29 +658,52 @@ void PrescribedBoundaryDisplacementProblem<ELEMENT>::doc_solution()
 //======================================================================
 int main(int argc, char **argv)
 {
+                                                
+#ifdef OOMPH_HAS_MPI                                                    
+   MPI_Helpers::init(argc,argv);                                          
+#endif         
+
 
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
  
-#ifdef NOREFINE
-
- //Set up the problem
- PrescribedBoundaryDisplacementProblem<QPVDElement<3,3> > problem;
-
-#else
-
  //Set up the problem
  PrescribedBoundaryDisplacementProblem<RefineableQPVDElement<3,3> > problem;
 
- //Refine according to a pattern
- Vector<unsigned> refine_pattern(2);
- refine_pattern[0] = problem.solid_mesh_pt()->nelement()-1; 
- refine_pattern[1] = problem.solid_mesh_pt()->nelement()-4; 
- problem.refine_selected_elements(0,refine_pattern);
- 
-#endif
 
- 
+ // Distribute problem
+
+ // Manufacture distribution so that domain is split in two
+ if (problem.communicator_pt()->nproc()==2)
+  {
+   unsigned nel=problem.mesh_pt()->nelement();
+   Vector<unsigned> element_partition(nel);
+   for (unsigned e=0;e<nel;e++)
+    {
+     if (problem.mesh_pt()->finite_element_pt(e)->node_pt(0)->x(1)<0.49)
+      {
+       element_partition[e]=0;
+      }
+     else
+      {
+       element_partition[e]=1;
+      }
+    }
+   bool report_stats=true;
+   problem.distribute(element_partition,report_stats);
+  }
+ else
+  {
+   // Distribute the problem with METIS
+   bool report_stats=true;
+   problem.distribute(report_stats);
+  }
+
+
+ // Adapt twice to produce doubly hanging nodes
+ problem.adapt();
+ problem.adapt();
+
  // Doc initial domain shape
  problem.doc_solution();
 
@@ -738,21 +718,9 @@ int main(int argc, char **argv)
   {
    // Increment imposed boundary displacement
    Global_Physical_Variables::Boundary_geom_object.ampl()+=0.02;
-
-#ifdef NOREFINE
-
+   
    // Solve the problem with Newton's method
    problem.newton_solve();
-
-#else
-
-   // Solve the problem with Newton's method, allowing
-   // up to max_adapt mesh adaptations after every solve.
-   unsigned max_adapt=1;
-   problem.newton_solve(max_adapt);
-
-#endif
-
    
    // Doc solution
    problem.doc_solution();
@@ -765,6 +733,11 @@ int main(int argc, char **argv)
    problem.solid_mesh_pt()->set_lagrangian_nodal_coordinates();
    
   }
+                                                         
+#ifdef OOMPH_HAS_MPI                                                    
+ MPI_Helpers::finalize();
+#endif         
+ 
  
 } //end of main
 

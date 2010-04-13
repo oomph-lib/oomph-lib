@@ -58,29 +58,165 @@ public:
 
  ///Constructor, which takes a "bulk" element and the value of the index
  ///and its limit
- NavierStokesSurfacePowerElement(FiniteElement* const &element_pt, 
-                                 const int &face_index) : 
-  FaceGeometry<ELEMENT>(), FaceElement()
+  NavierStokesSurfacePowerElement(FiniteElement* const &element_pt, 
+                                  const int &face_index) : 
+ FaceGeometry<ELEMENT>(), FaceElement()
   { 
    //Attach the geometrical information to the element. N.B. This function
    //also assigns nbulk_value from the required_nvalue of the bulk element
    element_pt->build_face_element(face_index,this);
- 
+   
    //Set the dimension from the dimension of the first node
    Dim = node_pt(0)->ndim();
- }
+  }
+ 
+ 
+ /// \short The "global" intrinsic coordinate of the element when
+ /// viewed as part of a geometric object should be given by
+ /// the FaceElement representation, by default
+ /// This final over-ride is required for cases where the
+ /// FaceElement is a SolidFiniteElement because both SolidFiniteElements 
+ /// and FaceElements overload zeta_nodal.
+ double zeta_nodal(const unsigned &n, const unsigned &k,           
+                   const unsigned &i) const 
+ {return FaceElement::zeta_nodal(n,k,i);}     
+ 
+ 
+ 
+ /// \short Get drag force (traction acting on fluid)
+ Vector<double> drag_force()
+  {
+   std::ofstream dummy_file;
+   return drag_force(dummy_file);
+  }
+ 
+ 
+ 
+ /// \short Get  drag force (traction acting on fluid)
+ /// Doc in outfile.
+ Vector<double> drag_force(std::ofstream& outfile)
+  {
+   
+   // Spatial dimension of element
+   unsigned ndim=dim();
+   
+   // Initialise
+   Vector<double> drag(ndim+1,0.0);
+   
+   //Vector of local coordinates in face element
+   Vector<double> s(ndim);
+   
+   // Vector for global Eulerian coordinates
+   Vector<double> x(ndim+1);
 
-  
-  /// \short The "global" intrinsic coordinate of the element when
-  /// viewed as part of a geometric object should be given by
-  /// the FaceElement representation, by default
-  /// This final over-ride is required for cases where the
-  /// FaceElement is a SolidFiniteElement because both SolidFiniteElements 
-  /// and FaceElements overload zeta_nodal.
-  double zeta_nodal(const unsigned &n, const unsigned &k,           
-                    const unsigned &i) const 
-  {return FaceElement::zeta_nodal(n,k,i);}     
-  
+   // Vector for local coordinates in bulk element
+   Vector<double> s_bulk(ndim+1);
+
+   //Set the value of n_intpt
+   unsigned n_intpt = integral_pt()->nweight();
+   
+
+   // Get pointer to assocated bulk element
+   ELEMENT* bulk_el_pt=dynamic_cast<ELEMENT*>(bulk_element_pt());
+
+   // Hacky: This is only appropriate for 3 point integration of
+   // 1D line elements
+   if (outfile.is_open()) outfile << "ZONE I=3" << std::endl;
+
+   // Loop over the integration points
+   for (unsigned ipt=0;ipt<n_intpt;ipt++)
+    {
+
+     //Assign values of s in FaceElement and local coordinates in bulk element
+     for(unsigned i=0;i<ndim;i++)
+      {
+       s[i] = integral_pt()->knot(ipt,i);
+      }
+
+     //Get the bulk coordinates
+     this->get_local_coordinate_in_bulk(s,s_bulk);
+
+     //Get the integral weight
+     double w = integral_pt()->weight(ipt);
+
+     // Get jacobian of mapping
+     double J=J_eulerian(s);
+
+     //Premultiply the weights and the Jacobian
+     double W = w*J;
+
+     // Get x position as Vector
+     interpolated_x(s,x);
+
+#ifdef PARANOID
+
+     // Get x position as Vector from bulk element
+     Vector<double> x_bulk(ndim+1);
+     bulk_el_pt->interpolated_x(s_bulk,x_bulk);
+
+     double max_legal_error=1.0e-5;
+     double error=0.0;
+     for(unsigned i=0;i<ndim+1;i++)
+      {
+       error+=fabs(x[i]- x_bulk[i]);
+      }
+     if (error>max_legal_error)
+      {
+       std::ostringstream error_stream;
+       error_stream << "difference in Eulerian posn from bulk and face: " 
+                    << error << " exceeds threshold " << max_legal_error 
+                    << std::endl;
+       throw OomphLibError(
+        error_stream.str(),
+        "NavierStokesSurfacePowerElement::get_drag()",
+        OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+     // Outer unit normal
+     Vector<double> normal(ndim+1);
+     outer_unit_normal(s,normal);
+
+     // Get velocity from bulk element
+     Vector<double> veloc(ndim+1);
+     bulk_el_pt->interpolated_u_nst(s_bulk,veloc);
+
+     // Get traction from bulk element
+     Vector<double> traction(ndim+1);
+     bulk_el_pt->get_traction(s_bulk,normal,traction);
+
+     // Integrate
+     for (unsigned i=0;i<ndim+1;i++)
+      {
+       drag[i]+=traction[i]*W;
+      }
+
+     if (outfile.is_open())
+      {
+       //Output x,y,...,
+       for(unsigned i=0;i<ndim+1;i++)
+        {
+         outfile << x[i] << " ";
+        }
+       
+       //Output traction
+       for(unsigned i=0;i<ndim+1;i++)
+        {
+         outfile << traction[i] << " ";
+        }
+
+       
+       //Output normal
+       for(unsigned i=0;i<ndim+1;i++)
+        {
+         outfile << normal[i] << " ";
+        }
+       
+       outfile << std::endl;
+      }
+    }   
+   return drag;
+  }
 
  /// \short Get integral of instantaneous rate of work done by 
  /// the traction that's exerted onto the fluid.

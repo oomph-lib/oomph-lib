@@ -231,8 +231,10 @@ public:
     
     // Output traction
     for(unsigned i=0;i<n_dim;i++) 
-     {outfile << traction[i] << " ";} 
-    
+     {
+      outfile << traction[i] << " ";
+     } 
+          
     // Output normal
     for(unsigned i=0;i<n_dim;i++) 
      {outfile << unit_normal[i] << " ";} 

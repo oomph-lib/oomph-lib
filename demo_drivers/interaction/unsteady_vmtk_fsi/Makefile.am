@@ -62,8 +62,7 @@ EXTRA_DIST += fluid_iliac_short_fine.1.ele   fluid_iliac_short_fine.1.node \
               long_coarse_iliac_quadratic_outer_solid_boundary.dat \
               solid_iliac_long_coarse.1.face \
               show_snap.mcr three_d_unstructured_fluid.mcr \
-              three_d_unstructured_solid.mcr get_files.bash
-
+              three_d_unstructured_solid.mcr
 
 
 SUBDIRS = vmtk_files

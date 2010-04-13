@@ -1231,10 +1231,6 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
      mesh_pt()->classify_halo_and_haloed_nodes(this->communicator_pt());
 #endif
 
-     // The degrees of freedom must be synchronised 
-     // before calling check_halo_schemes
-//     synchronise_dofs(mesh_pt());
-
 #ifdef PARANOID
      // Check that the halo schemes are okay if all eqn numbers 
      // are being assigned
@@ -1293,9 +1289,6 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
 #else
        mesh_pt(imesh)->classify_halo_and_haloed_nodes(this->communicator_pt());
 #endif
-       // Degrees of freedom must be synchronised before
-       // calling check_halo_schemes
-//       synchronise_dofs(mesh_pt(imesh));
       }
 
 #ifdef PARANOID
@@ -1551,7 +1544,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
       DGElement* const elem_pt =
        dynamic_cast<DGElement*>(Problem::mesh_pt()->element_pt(e));
      
-      // hierher
+      // hierher Andrew check this one too, please
       //const unsigned n_el_dofs = elem_pt->ndof();
       const unsigned n_el_dofs = assembly_handler_pt->ndof(elem_pt);
 
@@ -1560,7 +1553,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
      
       for(unsigned i=0;i<n_el_dofs;i++)
        {
-        // hierher assembly handler?
+        // hierher Andrew: assembly handler?
         Mres[elem_pt->eqn_number(i)] = element_Mres[i];
        }
      }

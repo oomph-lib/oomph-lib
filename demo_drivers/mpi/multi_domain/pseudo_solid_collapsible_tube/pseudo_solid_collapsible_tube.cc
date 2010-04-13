@@ -41,7 +41,6 @@
 using namespace std;
 using namespace oomph;
 
-//#define DISTRIBUTE
 
 //=========================================================================
 // the wall mesh
@@ -345,8 +344,6 @@ public:
  /// After adapt: Rebuild face element submeshes and re-setup FSI
  void actions_after_adapt();
 
-#ifdef DISTRIBUTE
-
  /// \short Before distribute: Flush face submeshes and keep all
  /// solid elements adjacent to the fluid as halos.
  void actions_before_distribute();
@@ -354,8 +351,6 @@ public:
  /// \short After distribute: Rebuild face element submeshes and re-setup
  /// FSI
  void actions_after_distribute();
-
-#endif
 
  /// Helper function to delete elements from a mesh
  void empty_mesh(Mesh* const &surface_mesh_pt);
@@ -1080,9 +1075,6 @@ void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT,SOLID_ELEMENT>
 } 
 
 
-#ifdef DISTRIBUTE
-
-
 //===========================================================================
 /// Retain all bulk solid elements adjacent to fluid mesh as halos
 /// then remove face-elements from problem.
@@ -1168,8 +1160,6 @@ void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT,SOLID_ELEMENT>
      FSI_functions::apply_no_slip_on_moving_wall);
   }
 } 
-
-#endif
 
 
 //============start_of_empty_mesh========================================
@@ -1469,8 +1459,6 @@ Global_Parameters::Constitutive_law_pseudo_elastic_pt =
  // Doc info
  DocInfo doc_info;
 
-#ifdef DISTRIBUTE
-
  // Use separate directory for output from each processor
  std::stringstream dir_name;
  dir_name << "RESLT_proc" << MPI_Helpers::communicator_pt()->my_rank();
@@ -1478,14 +1466,34 @@ Global_Parameters::Constitutive_law_pseudo_elastic_pt =
 
  // Distribute the problem
  oomph_info << "Problem is being distributed." << std::endl;
- problem.distribute(); 
- oomph_info << "Problem has been distributed." << std::endl;
- 
-#else
- 
- doc_info.set_directory("RESLT");
 
-#endif
+
+ // Validation: manufacture distribution so that domain is split in two in a 
+ // controllable way
+ if (CommandLineArgs::Argc!=1)  
+  {
+   unsigned nel=problem.mesh_pt()->nelement();
+   Vector<unsigned> element_partition(nel);
+   for (unsigned e=0;e<nel;e++)
+    {
+     if (problem.mesh_pt()->finite_element_pt(e)->node_pt(0)->x(2)<
+         0.5*Global_Parameters::L)
+      {
+       element_partition[e]=0;
+      }
+     else
+      {
+       element_partition[e]=1;
+      }
+    }
+   problem.distribute(element_partition);
+  }
+ // Use METIS to determine the partitioning
+ else
+  {
+   problem.distribute(); 
+  }
+ oomph_info << "Problem has been distributed." << std::endl;
 
  // Doc initial configuration
  problem.doc_solution(doc_info);
