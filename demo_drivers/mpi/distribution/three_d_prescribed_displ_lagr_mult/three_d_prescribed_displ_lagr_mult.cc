@@ -335,19 +335,16 @@ PrescribedBoundaryDisplacementProblem()
   n_x,n_y,n_z,l_x,l_y,l_z);
  
  
- // Setup fake error estimator: Refine one element on the outer
- // and one on the inner surface of the wall
- Vector<unsigned> elements_to_refine(2);
- elements_to_refine[0]=9;
- elements_to_refine[1]=16;
- 
+ // Setup fake error estimator: Refine one element on the outer wall
+ Vector<unsigned> elements_to_refine(1);
+ elements_to_refine[0]=5;
  unsigned central_node_number=13;
  bool use_lagrangian_coordinates=true;
  solid_mesh_pt()->spatial_error_estimator_pt()=
   new DummyErrorEstimator(solid_mesh_pt(),elements_to_refine,
                           central_node_number,
                           use_lagrangian_coordinates);
-}
+
 
  
  //Assign the physical properties to the elements before any refinement
