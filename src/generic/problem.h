@@ -191,6 +191,63 @@ namespace oomph
  ///bifurcation tracking problems (ALH: TEMPORARY HACK, WILL BE FIXED)
  Vector<Problem*> Copy_of_problem_pt;
 
+ /// \short Map used to determine whether the derivatives with respect to
+ /// a parameter should be finite differenced. The default is that
+ /// finite differences should be used
+ std::map<double*,bool> Calculate_dparameter_analytic;
+
+ /// \short Map used to determine whether the hessian products should be
+ /// computed using finite differences. The default is that finite differences
+ /// will be used
+ bool Calculate_hessian_products_analytic;
+
+  public:
+
+ /// \short Function to turn on analytic calculation of the parameter
+ /// derivatives in continuation and bifurcation detection problems
+ inline void set_analytic_dparameter(double* const &parameter_pt)
+  {Calculate_dparameter_analytic[parameter_pt] = true;}
+
+ /// \short Function to turn off analytic calculation of the parameter
+ /// derivatives in continuation and bifurcation detection problems
+ inline void unset_analytic_dparameter(double* const &parameter_pt)
+  {
+   //Find the iterator to the parameter 
+   std::map<double*,bool>::iterator it = 
+    Calculate_dparameter_analytic.find(parameter_pt);
+   //If the parameter has been found, erase it
+   if(it!=Calculate_dparameter_analytic.end()) 
+    {
+     Calculate_dparameter_analytic.erase(it);
+    }
+  }
+
+ /// \short Function to determine whether the parameter derivatives 
+ /// are calculated analytically
+ inline bool is_dparameter_calculated_analytically(double* const &parameter_pt)
+  {
+   //If the entry is found then the iterator returned from the find
+   //command will NOT be equal to the end and the expression will
+   //return true, otherwise it will return false
+   return (Calculate_dparameter_analytic.find(parameter_pt)!=
+           Calculate_dparameter_analytic.end());
+  }
+
+ /// \short Function to turn on analytic calculation of the parameter
+ /// derivatives in continuation and bifurcation detection problems
+ inline void set_analytic_hessian_products()
+  {Calculate_hessian_products_analytic = true;}
+ 
+ /// \short Function to turn off analytic calculation of the parameter
+ /// derivatives in continuation and bifurcation detection problems
+ void unset_analytic_hessian_products()
+  {Calculate_hessian_products_analytic = false;}
+
+ /// \short Function to determine whether the hessian products 
+ /// are calculated analytically
+ inline bool are_hessian_products_calculated_analytically()
+  {return Calculate_hessian_products_analytic;}
+
  /// \short Set all pinned values to zero.
  /// Used to set boundary conditions to be homogeneous in the copy
  /// of the problem  used in adaptive bifurcation tracking 
@@ -273,6 +330,12 @@ namespace oomph
  /// \short A function that performs the guts of the continuation
  /// derivative calculation in arc length continuation problems.
  void calculate_continuation_derivatives_helper(const DoubleVector &z);
+
+ /// \short A function that performs the guts of the continuation
+ /// derivative calculation in arc-length continuation problems using
+ /// finite differences
+ void calculate_continuation_derivatives_fd_helper(
+  double* const &parameter_pt);
 
  /// \short A function that is used to adapt a bifurcation-tracking
  /// problem, which requires separate interpolation of the 
@@ -514,6 +577,10 @@ protected:
  /// Boolean to indicate whether an arc-length step has been taken
  bool Arc_length_step_taken;
 
+ /// Boolean to specify which scheme to use to calculate the continuation
+ /// derivatievs
+ bool Use_finite_differences_for_continuation_derivatives;
+ 
 #ifdef OOMPH_HAS_MPI
 
   public:
@@ -687,6 +754,7 @@ protected:
 #endif
 
  /// \short Actions that are to be performed when the global parameter
+ /// addressed by parameter_pt
  /// has been changed in the function get_derivative_wrt_global_parameter()
  /// The default is to call actions_before_newton_solve(), 
  /// actions_before_newton_convergence_check() and 
@@ -695,7 +763,8 @@ protected:
  /// be overloaded in such cases. An example would be when a remesh is
  /// required in general, but the global parameter does not affect the mesh
  /// directly.
- virtual void actions_after_change_in_global_parameter()
+ virtual void actions_after_change_in_global_parameter(
+  double* const &parameter_pt)
   {
    //Default action should cover all possibilities
    actions_before_newton_solve();
@@ -1140,11 +1209,24 @@ protected:
  void get_derivative_wrt_global_parameter(double* const &parameter_pt,
                                           DoubleVector &result);
 
+ /// \short Return the product of the global hessian (derivative of Jacobian
+ /// matrix  with respect to all variables) with 
+ /// an eigenvector, Y, and any number of other specified vectors C
+ /// (d(J_{ij})/d u_{k}) Y_{j} C_{k}.
+ /// This function is used in assembling and solving the augmented systems
+ /// associated with bifurcation tracking.
+ /// The default implementation is to use finite differences at the global
+ /// level.
+ void get_hessian_vector_products(DoubleVector const &Y,
+                                  Vector<DoubleVector> const &C,
+                                  Vector<DoubleVector> &product);
+
+
  /// \short Get derivative of an element in the problem wrt a global parameter,
  /// used in continuation problems
- void get_derivative_wrt_global_parameter(double* const &parameter_pt,
-                                          GeneralisedElement* const &elem_pt,
-                                          Vector<double> &result);
+ //void get_derivative_wrt_global_parameter(double* const &parameter_pt,
+ //                                         GeneralisedElement* const &elem_pt,
+ //                                         Vector<double> &result);
 
  /// \short Solve an eigenproblem as assembled by EigenElements
  /// calculate n_eval eigenvalues and return the corresponding
@@ -1409,6 +1491,13 @@ protected:
  /// output from the newton_solve_continuation function. The derivatives
  /// are stored in the ContinuationParameters namespace.
  void calculate_continuation_derivatives(const DoubleVector &z);
+
+ /// \short A function to calculate the derivatives with respect to the 
+ /// arc-length required for continuation by finite differences, using
+ /// the previous values of the solution. The derivatives are stored in
+ /// the ContinuationParameters namespace.
+ void calculate_continuation_derivatives_fd(double* const &parameter_pt);
+
 
   public:
 

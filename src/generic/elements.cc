@@ -909,6 +909,205 @@ DenseMatrix<double> GeneralisedElement::Dummy_matrix;
     OOMPH_EXCEPTION_LOCATION);
  }
 
+
+ //=====================================================================
+ /// Add the elemental contribution to the derivatives of 
+ /// the residuals with respect to a parameter. This function should
+ /// NOT initialise any entries and must be called after the entries
+ /// have been initialised to zero
+ /// The default implementation is deliberately broken
+ //========================================================================
+ void GeneralisedElement::fill_in_contribution_to_dresiduals_dparameter(
+  double* const &parameter_pt, Vector<double> &dres_dparam)
+ {
+  std::string error_message =
+   "Empty fill_in_contribution_to_dresiduals_dparameter() has been ";
+  error_message += "called.\n";
+  error_message +=
+   "This function is called from the default implementations of\n";
+  error_message += "get_dresiduals_dparameter();\n";
+  error_message += 
+   "and must calculate the derivatives of the residuals vector with respect\n";
+  error_message += "to the passed parameter ";
+  error_message += "without initialising any values.\n\n";
+
+  error_message += 
+   "If you do not wish to use these defaults, you must overload\n";
+  error_message += 
+   "get_dresiduals_dparameter(), which must initialise the entries\n";
+  error_message +=
+   "of the returned vector to zero.\n";
+  
+  error_message += 
+   "This function is intended for use instead of the default (global) \n";
+  error_message += 
+   "finite-difference routine when analytic expressions are to be used\n";
+  error_message += "in continuation and bifurcation tracking problems.\n\n";
+  error_message += "This function is only called when the function\n";
+  error_message += 
+   "Problem::set_analytic_dparameter() has been called in the driver code\n";
+  
+  throw 
+   OomphLibError(
+    error_message,
+    "GeneralisedElement::fill_in_contribution_to_dresiduals_dparameter()",
+    OOMPH_EXCEPTION_LOCATION);
+ }
+
+ //======================================================================
+ /// Add the elemental contribution to the derivatives of 
+ /// the elemental Jacobian matrix 
+ /// and residuals with respect to a parameter. This function should
+ /// NOT initialise any entries and must be called after the entries
+ /// have been initialised to zero
+ /// The default implementation is to use finite differences to calculate 
+ /// the derivatives.
+ //========================================================================
+ void GeneralisedElement::fill_in_contribution_to_djacobian_dparameter(
+  double* const &parameter_pt,
+  Vector<double> &dres_dparam, 
+  DenseMatrix<double> &djac_dparam)
+ {
+  std::string error_message =
+   "Empty fill_in_contribution_to_djacobian_dparameter() has been ";
+  error_message += "called.\n";
+  error_message +=
+   "This function is called from the default implementations of\n";
+  error_message += "get_djacobian_dparameter();\n";
+  error_message += 
+   "and must calculate the derivatives of residuals vector and jacobian ";
+   error_message += "matrix\n";
+  error_message += "with respect to the passed parameter ";
+  error_message += "without initialising any values.\n\n";
+
+  error_message += 
+   "If you do not wish to use these defaults, you must overload\n";
+  error_message += 
+   "get_djacobian_dparameter(), which must initialise the entries\n";
+  error_message +=
+   "of the returned vector and matrix to zero.\n\n";
+  
+  error_message += 
+   "This function is intended for use instead of the default (global) \n";
+  error_message += 
+   "finite-difference routine when analytic expressions are to be used\n";
+  error_message += "in continuation and bifurcation tracking problems.\n\n";
+  error_message += "This function is only called when the function\n";
+  error_message += 
+   "Problem::set_analytic_dparameter() has been called in the driver code\n";
+
+  
+  throw 
+   OomphLibError(
+    error_message,
+    "GeneralisedElement::fill_in_contribution_to_djacobian_dparameter()",
+    OOMPH_EXCEPTION_LOCATION);
+ }
+
+
+ //=====================================================================
+ /// \short Add the elemental contribution to the derivative of the 
+ /// jacobian matrix,
+ /// mass matrix and the residuals vector with respect to a parameter. 
+ /// Note that
+ /// this function should NOT initialise any entries.
+ /// It must be called after the residuals vector and 
+ /// matrices have been initialised to zero. The default is deliberately
+ /// broken.
+ //=====================================================================
+ void GeneralisedElement::
+ fill_in_contribution_to_djacobian_and_dmass_matrix_dparameter(
+  double* const &parameter_pt,
+  Vector<double> &dres_dparam,
+  DenseMatrix<double> &djac_dparam, 
+  DenseMatrix<double> &dmass_matrix_dparam)
+ {
+  std::string error_message =
+   "Empty fill_in_contribution_to_djacobian_and_dmass_matrix_dparameter() has";
+  error_message += " been called.\n";
+  error_message +=
+   "This function is called from the default implementations of\n";
+  error_message += "get_djacobian_and_dmass_matrix_dparameter();\n";
+  error_message += 
+    "and must calculate the residuals vector and mass and jacobian matrices ";
+  error_message += "without initialising any of their entries.\n\n";
+  
+  error_message += 
+   "If you do not wish to use these defaults, you must overload\n";
+  error_message += 
+   "get_djacobian_and_dmass_matrix_dparameter(), which must initialise the\n";
+    error_message += 
+   "entries of the returned vector and  matrices to zero.\n";
+
+
+  error_message += 
+   "This function is intended for use instead of the default (global) \n";
+  error_message += 
+   "finite-difference routine when analytic expressions are to be used\n";
+  error_message += "in continuation and bifurcation tracking problems.\n\n";
+  error_message += "This function is only called when the function\n";
+  error_message += 
+   "Problem::set_analytic_dparameter() has been called in the driver code\n";
+
+  
+
+  throw 
+   OomphLibError(
+    error_message,
+    "GeneralisedElement::fill_in_contribution_to_djacobian_and_dmass_matrix_dparameter()",
+    OOMPH_EXCEPTION_LOCATION);
+ }
+
+
+
+ //========================================================================
+ /// Fill in contribution to the product of the Hessian 
+ /// (derivative of Jacobian with
+ /// respect to all variables) an eigenvector, Y, and 
+ /// other specified vectors, C
+ /// (d(J_{ij})/d u_{k}) Y_{j} C_{k}
+ /// At the moment the dof pointer is passed in to enable
+ /// easy calculation of finite difference default
+//==========================================================================
+ void GeneralisedElement::fill_in_contribution_to_hessian_vector_products(
+  Vector<double> const &Y,
+  DenseMatrix<double> const &C,
+  DenseMatrix<double> &product)
+ {
+  std::string error_message =
+   "Empty fill_in_contribution_to_hessian_vector_products() has been ";
+  error_message += "called.\n";
+  error_message +=
+   "This function is called from the default implementations of\n";
+  error_message += "get_hessian_vector_products(); ";
+  error_message += " and must calculate the products \n";
+  error_message += "of the hessian matrix with the (global) ";
+  error_message += "vectors Y and C\n";
+  error_message += "without initialising any values.\n\n";
+
+  error_message += 
+   "If you do not wish to use these defaults, you must overload\n";
+  error_message += 
+   "get_hessian_vector_products(), which must initialise the entries\n";
+  error_message +=
+   "of the returned vector to zero.\n\n";
+  
+  error_message += 
+   "This function is intended for use instead of the default (global) \n";
+  error_message += 
+   "finite-difference routine when analytic expressions are to be used.\n";
+  error_message += "This function is only called when the function\n";
+  error_message += 
+   "Problem::set_analytic_hessian_products() has been called in the driver code\n";
+  
+  throw 
+   OomphLibError(
+    error_message,
+    "GeneralisedElement::fill_in_contribution_to_hessian_vector_product()",
+    OOMPH_EXCEPTION_LOCATION);
+ }
+
+
 //==========================================================================
 /// Self-test: Have all internal values been classified as 
 /// pinned/unpinned? Return 0 if OK. 

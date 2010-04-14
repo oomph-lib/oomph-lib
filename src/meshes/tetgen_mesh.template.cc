@@ -669,7 +669,7 @@ void TetgenMesh<ELEMENT>::snap_to_quadratic_surface(
  
  // Prepare to doc nodes that couldn't be snapped 
  std::ofstream the_file_non_snapped;
- string non_snapped_filename="non_snapped_nodes_"+doc_info.label()+".dat";
+ std::string non_snapped_filename="non_snapped_nodes_"+doc_info.label()+".dat";
  
  // Read the number of nodes and elements (quadratic facets)
  std::ifstream infile(quadratic_surface_file_name.c_str(),std::ios_base::in);

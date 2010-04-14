@@ -807,6 +807,9 @@ void HijackedData::resize(const unsigned &n_value)
 //===============================================================
 void CopiedData::reset_copied_pointers()
 {
+ //Set the new number of values
+ Nvalue = Copied_data_pt->nvalue();
+
  //Copy the pointer to the value. This will give the appropriate
  //"slice" of the array
  Value = Copied_data_pt->Value;
@@ -830,7 +833,7 @@ void CopiedData::clear_copied_pointers()
 /// copied from another Data object. 
 //================================================================
 CopiedData::CopiedData(Data* const &data_pt) : 
- Data(data_pt->time_stepper_pt(),1,false),
+ Data(data_pt->time_stepper_pt(),data_pt->nvalue(),false),
  Copied_data_pt(data_pt)
 {
  //Don't allow copying of a copy

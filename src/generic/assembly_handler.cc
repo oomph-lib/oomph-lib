@@ -81,6 +81,47 @@ namespace oomph
   get_jacobian(elem_pt,vec[0],matrix[0]);
  }
 
+ //=======================================================================
+ /// \short Calculate the derivative of the residuals with respect to 
+ /// a parameter, by calling the elemental function
+ //======================================================================
+ void AssemblyHandler::get_dresiduals_dparameter(
+  GeneralisedElement* const &elem_pt,
+  double* const &parameter_pt,
+  Vector<double> &dres_dparam)
+ {
+  elem_pt->get_dresiduals_dparameter(parameter_pt,dres_dparam);
+ }
+
+
+ //=====================================================================
+ /// \short Calculate the derivative of the residuals and jacobian 
+ /// with respect to a parameter by calling the elemental function
+ //========================================================================
+ void AssemblyHandler::get_djacobian_dparameter(
+  GeneralisedElement* const &elem_pt,
+  double* const &parameter_pt,
+  Vector<double> &dres_dparam,
+  DenseMatrix<double> &djac_dparam)
+ {
+  elem_pt->get_djacobian_dparameter(parameter_pt,dres_dparam,djac_dparam);
+ }
+
+ /// \short Calculate the product of the Hessian (derivative of Jacobian with
+ /// respect to all variables) an eigenvector, Y, and 
+ /// other specified vectors, C
+ /// (d(J_{ij})/d u_{k}) Y_{j} C_{k}
+ /// At the moment the dof pointer is passed in to enable
+ /// easy calculation of finite difference default
+ void AssemblyHandler::get_hessian_vector_products(
+  GeneralisedElement* const &elem_pt,
+  Vector<double> const &Y,
+  DenseMatrix<double> const &C,
+  DenseMatrix<double> &product)
+ {
+  elem_pt->get_hessian_vector_products(Y,C,product);
+ }
+
 
  //=======================================================================
  /// Return the eigenfunction(s) associated with the bifurcation that
@@ -1149,6 +1190,122 @@ namespace oomph
     
    }
  }
+
+
+ 
+ //====================================================================
+ ///Formulate the derivatives of the augmented system with respect
+ ///to a parameter
+ //====================================================================
+ void FoldHandler::get_dresiduals_dparameter(
+  GeneralisedElement* const &elem_pt, 
+  double* const &parameter_pt,
+  Vector<double> &dres_dparam)
+ {
+  //Need to get raw residuals and jacobian
+  unsigned raw_ndof = elem_pt->ndof();
+
+  //Find out which system we are solving
+  switch(Solve_which_system)
+   {
+    //If we are solving the standard system
+   case Block_J:
+   {
+    //Get the basic residual derivatives
+    elem_pt->get_dresiduals_dparameter(parameter_pt,dres_dparam);
+   }
+   break;
+
+   //If we are solving the augmented-by-one system
+   case Block_augmented_J:
+   {
+    //Get the basic residual derivatives
+    elem_pt->get_dresiduals_dparameter(parameter_pt,dres_dparam);
+  
+    //Zero the final derivative
+    dres_dparam[raw_ndof] = 0.0;
+   }
+   break;
+
+   //If we are solving the full augmented system
+   case Full_augmented:
+   {
+    DenseMatrix<double> djac_dparam(raw_ndof);
+    //Get the basic residuals and jacobian derivatives initially
+    elem_pt->get_djacobian_dparameter(parameter_pt,dres_dparam,djac_dparam);
+    
+    //The normalisation equation does not depend on the parameter
+    dres_dparam[raw_ndof] = 0.0;
+    
+    //Now assemble the equations dJy/dparameter = 0
+    for(unsigned i=0;i<raw_ndof;i++)
+     {
+      dres_dparam[raw_ndof+1+i] = 0.0;
+      for(unsigned j=0;j<raw_ndof;j++)
+       {
+        dres_dparam[raw_ndof+1+i] += djac_dparam(i,j)*
+         Y[elem_pt->eqn_number(j)];
+       }
+     }
+   }
+   break;
+
+   default:
+    std::ostringstream error_stream;
+    error_stream << "The Solve_which_system flag can only take values 0, 1, 2"
+                 << " not " << Solve_which_system << "\n";
+    throw OomphLibError(error_stream.str(),
+                        "FoldHandler::get_dresiduals_dparameter()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+ }
+
+
+ //========================================================================
+ /// Overload the derivative of the residuals and jacobian 
+ /// with respect to a parameter so that it breaks because it should not
+ /// be required
+ //========================================================================
+ void FoldHandler::get_djacobian_dparameter(GeneralisedElement* const &elem_pt,
+                                            double* const &parameter_pt,
+                                            Vector<double> &dres_dparam,
+                                            DenseMatrix<double> &djac_dparam)
+ {
+  std::ostringstream error_stream;
+  error_stream << 
+   "This function has not been implemented because it is not required\n";
+  error_stream << "in standard problems.\n";
+  error_stream << 
+   "If you find that you need it, you will have to implement it!\n\n";
+
+  throw OomphLibError(error_stream.str(),
+                      "FoldHander::get_djacobian_dparameter()",
+                      OOMPH_EXCEPTION_LOCATION);
+ }
+
+
+ //=====================================================================
+ /// Overload the hessian vector product function so that
+ /// it breaks because it should not be required
+ //========================================================================
+ void FoldHandler::get_hessian_vector_products(
+  GeneralisedElement* const &elem_pt,
+  Vector<double> const &Y,
+  DenseMatrix<double> const &C,
+  DenseMatrix<double> &product)
+ {
+  std::ostringstream error_stream;
+  error_stream << 
+   "This function has not been implemented because it is not required\n";
+  error_stream << "in standard problems.\n";
+  error_stream << 
+   "If you find that you need it, you will have to implement it!\n\n";
+
+  throw OomphLibError(error_stream.str(),
+                      "FoldHander::get_hessian_vector_products()",
+                      OOMPH_EXCEPTION_LOCATION);
+ }
+
  
  //==========================================================================
  /// Return the eigenfunction(s) associated with the bifurcation that
@@ -1278,6 +1435,7 @@ namespace oomph
   if(B_pt!=0) {delete B_pt;}
   if(C_pt!=0) {delete C_pt;}
   if(D_pt!=0) {delete D_pt;}
+  if(dJy_dparam_pt!=0) {delete dJy_dparam_pt;}
  }
 
  //===================================================================
@@ -1300,39 +1458,61 @@ namespace oomph
    }
 #endif
 
+  //Find the number of dofs of the augmented system
+  const unsigned n_aug_dof = problem_pt->ndof();
+  
+  //Create the linear algebra distribution for the augmented solver
+  //Serial
+  LinearAlgebraDistribution aug_dist(problem_pt->communicator_pt(),n_aug_dof,
+                                     false);
+  this->build_distribution(aug_dist);
+
+  // if the result vector is not setup then rebuild with distribution = global
+  if(!result.built())
+   {
+    result.build(this->distribution_pt(),0.0);
+   }
+
   //Locally cache the pointer to the handler.
   PitchForkHandler* handler_pt =
    static_cast<PitchForkHandler*>(problem_pt->assembly_handler_pt());
 
   //Locally cache a pointer to the parameter
   double* const parameter_pt = handler_pt->Parameter_pt;
+  
+  //Firstly get the derivatives of the full augmented system with
+  //respect to the parameter
 
-  //Switch the handler to "block solver" mode
+  //Allocate storage for the derivatives of the residuals with respect 
+  //to the global parameter
+  DoubleVector dRdparam;
+  //Then get the appropriate derivatives
+  problem_pt->get_derivative_wrt_global_parameter(parameter_pt,dRdparam);
+  
+  //Switch the handler to "block solver" mode (sort out distribution)
   handler_pt->solve_block_system();
 
-  //We need to find out the number of dofs in the problem
+  //We need to find out the number of global dofs in the problem
   const unsigned n_dof = problem_pt->ndof();
   
   // create the linear algebra distribution for this solver
   // currently only global (non-distributed) distributions are allowed
   LinearAlgebraDistribution dist(problem_pt->communicator_pt(),n_dof,false);
   this->build_distribution(dist);
-  
-  // if the result vector is not setup then rebuild with distribution = global
-  if (!result.built())
-   {
-    result.build(this->distribution_pt(),0.0);
-   }
 
   //Allocate storage for B, C and D which can be used in the resolve
+  //and the derivatives of the jacobian/eigenvector product with
+  //respect to the parameter
   if(B_pt!=0) {delete B_pt;}
   B_pt = new DoubleVector(this->distribution_pt(),0.0);
   if(C_pt!=0) {delete C_pt;}
   C_pt = new DoubleVector(this->distribution_pt(),0.0);
   if(D_pt!=0) {delete D_pt;}
   D_pt = new DoubleVector(this->distribution_pt(),0.0);
+  if(dJy_dparam_pt!=0) {delete dJy_dparam_pt;}
+  dJy_dparam_pt = new DoubleVector(this->distribution_pt(),0.0);
   
-  //Temporary vector
+  //Temporary vector for the result (I shouldn't have to set this up)
   DoubleVector x1(this->distribution_pt(),0.0);
   
   //We are going to do resolves using the underlying linear solver
@@ -1340,46 +1520,16 @@ namespace oomph
   //Solve the first (standard) system Jx1 = R
   Linear_solver_pt->solve(problem_pt,x1);
 
-  //Get the symmetry vector from the handler
+  //Get the symmetry vector from the handler 
   DoubleVector psi(this->distribution_pt(),0.0);
   for(unsigned n=0;n<n_dof;++n)  {psi[n] = handler_pt->Psi[n];}
 
-  DoubleVector res(this->distribution_pt(),0.0), 
-   newres(this->distribution_pt(),0.0);
-  DoubleVector F(this->distribution_pt(),0.0);
+  //Temporary vector for the rhs that is dR/dparam (augmented distribution)
+  DoubleVector F(this->distribution_pt(),0.0);  //f.nrow local copied from dRdparam
+  for(unsigned n=0;n<n_dof;n++) {F[n] = dRdparam[n];}
+  //Fill in the rhs that is dJy/dparam  //dJy_dparam nrow local
+  for(unsigned n=0;n<n_dof;n++) {(*dJy_dparam_pt)[n] = dRdparam[n_dof+1+n];}
 
-
-  //Finite difference step
-  const double FD_step = 1.0e-8;
-  {
-   //Get the unpeturbed residuals
-   problem_pt->get_residuals(res);
-
-   //Peturb the unknown
-   const double parameter_back = *parameter_pt;
-   *parameter_pt += FD_step;
-     
-   //Not do any possible updates
-   problem_pt
-    ->actions_after_change_in_bifurcation_parameter();
-     
-   //Get the new (modified) residuals
-   problem_pt->get_residuals(newres);
-     
-   //The final column  is given by the difference
-   //between the residuals
-   for(unsigned n=0;n<n_dof;n++)
-    {
-     F[n] = (newres[n] - res[n])/FD_step;
-    }
-   
-   //Reset the global parameter
-   *parameter_pt = parameter_back;
-     
-   //Now do any possible updates
-   problem_pt
-    ->actions_after_change_in_bifurcation_parameter();
-  }
 
   //Now resolve to find c and d
   Linear_solver_pt->resolve(F,*C_pt);
@@ -1403,134 +1553,38 @@ namespace oomph
   double x2 = (psi_x1 - result[n_dof])/psi_c;
 
   //Now construct the vectors that multiply the jacobian terms
-  Vector<double> D(n_dof+1), X1(n_dof+1);
+  Vector<DoubleVector> D_and_X1(2);
+  D_and_X1[0].build(this->distribution_pt(),0.0);
+  D_and_X1[1].build(this->distribution_pt(),0.0);
+  //Fill in the appropriate terms
   for(unsigned n=0;n<n_dof;n++)
    {
     const double C_ = (*C_pt)[n];
-    D[n] = (*D_pt)[n] - Psi*C_;
-    X1[n] = x1[n] - x2*C_;
+    D_and_X1[0][n] = (*D_pt)[n] - Psi*C_;
+    D_and_X1[1][n] = x1[n] - x2*C_;
    }
-  //Finial terms that are used to peturb the parameter
-  D[n_dof] = Psi;
-  X1[n_dof] = x2;
 
-  //We can now construct our multipliers
-  //Prepare to scale
-  double dof_length=0.0, d_length=0.0, x1_length=0.0;
-  for(unsigned n=0;n<n_dof;n++)
-   {
-    if(std::abs(problem_pt->dof(n)) > dof_length) 
-     {dof_length = std::abs(problem_pt->dof(n));}
-   }
-  if(std::abs(*parameter_pt) > dof_length) 
-   {dof_length = std::abs(*parameter_pt);}
+  //Local storage for the result of the product terms
+  Vector<DoubleVector> Jprod_D_and_X1(2);
 
-  for(unsigned n=0;n<n_dof+1;n++)
-   {
-    if(std::abs(D[n]) > d_length) {d_length = std::abs(D[n]);}
-    if(std::abs(X1[n]) > x1_length) {x1_length = std::abs(X1[n]);}
-   }
+  //Local storage for the eigenvector (Eventually change this)
+  DoubleVector Y_local(this->distribution_pt(),0.0);
+  Y_local.initialise(handler_pt->Y);
   
-  double d_mult = dof_length/d_length;
-  double x1_mult = dof_length/x1_length;
-  d_mult += FD_step; x1_mult += FD_step;
-  d_mult *= FD_step; x1_mult *= FD_step;
-
-  //Local storage for the product terms
-  DoubleVector Jprod_D(this->distribution_pt(),0.0), 
-   Jprod_X1(this->distribution_pt(),0.0);
-  Vector<double> b(n_dof,0.0);
-
-  //Calculate the product of the jacobian matrices, etc
-  unsigned long n_element = problem_pt->mesh_pt()->nelement();
-  for(unsigned long e = 0;e<n_element;e++)
-   {
-    GeneralisedElement *elem_pt = problem_pt->mesh_pt()->element_pt(e);
-    //Loop over the ndofs in each element
-    unsigned n_var = handler_pt->ndof(elem_pt);
-    //Get the jacobian matrices
-    DenseMatrix<double> jac(n_var), jac_D(n_var), jac_X1(n_var);
-    //Get unperturbed jacobian
-    handler_pt->get_jacobian(elem_pt,b,jac);
-    
-    //Backup the dofs
-    Vector<double> dof_bac(n_var);
-    //Perturb the dofs
-    for(unsigned n=0;n<n_var;n++)
-     {
-      unsigned eqn_number = handler_pt->eqn_number(elem_pt,n);
-      dof_bac[n] = problem_pt->dof(eqn_number);
-      //Pertub by vector a
-      problem_pt->dof(eqn_number) += d_mult*D[eqn_number]; 
-     }
-
-    //Backup and peturb the parameter
-    double parameter_bac = *parameter_pt;
-    *parameter_pt += d_mult*D[n_dof];
-
-    problem_pt->actions_after_change_in_bifurcation_parameter();
-    
-    //Now get the new jacobian
-    handler_pt->get_jacobian(elem_pt,b,jac_D);
-    
-    //Perturb the dofs
-    for(unsigned n=0;n<n_var;n++)
-     {
-      unsigned eqn_number = handler_pt->eqn_number(elem_pt,n);
-      problem_pt->dof(eqn_number) = dof_bac[n];
-      //Pertub by vector a
-      problem_pt->dof(eqn_number) += x1_mult*X1[eqn_number]; 
-     }
-    
-    //Peturb the parameter
-    *parameter_pt = parameter_bac;
-    *parameter_pt += x1_mult*X1[n_dof];
-
-    problem_pt->actions_after_change_in_bifurcation_parameter();
-    
-    //Now get the new jacobian
-    handler_pt->get_jacobian(elem_pt,b,jac_X1);
-    
-    //Reset the dofs
-    for(unsigned n=0;n<n_var;n++)
-     {
-      unsigned eqn_number = handler_pt->eqn_number(elem_pt,n);
-      problem_pt->dof(eqn_number) = dof_bac[n];
-     }
-    
-    //Reset the parameter
-    *parameter_pt = parameter_bac;
-
-    problem_pt->actions_after_change_in_bifurcation_parameter();
-    
-    //OK, now work out the products
-    for(unsigned n=0;n<n_var;n++)
-     {
-      unsigned eqn_number = handler_pt->eqn_number(elem_pt,n);
-      double prod_d=0.0, prod_x1=0.0;
-      for(unsigned m=0;m<n_var;m++)
-       {
-        unsigned unknown = handler_pt->eqn_number(elem_pt,m);
-        prod_d += (jac_D(n,m) - jac(n,m))*
-         handler_pt->Y[unknown];
-        prod_x1 += (jac_X1(n,m) - jac(n,m))*
-         handler_pt->Y[unknown];
-       }
-      Jprod_D[eqn_number] += prod_d/d_mult;
-      Jprod_X1[eqn_number] += prod_x1/x1_mult;
-     }
-   }
+  //Get the products from the new problem function
+  problem_pt->get_hessian_vector_products(Y_local,D_and_X1,Jprod_D_and_X1);
 
   //OK, now we can formulate the next vectors 
   //(again assuming result contains residuals)
   for(unsigned n=0;n<n_dof;n++)
    {
-    F[n] = result[n_dof+1+n] - Jprod_X1[n];
-    Jprod_D[n] *= -1.0;
+    F[n] = result[n_dof+1+n] - Jprod_D_and_X1[1][n] - x2*dRdparam[n_dof+1+n];
+    Jprod_D_and_X1[0][n] *= -1.0;
+    Jprod_D_and_X1[0][n] -= Psi*dRdparam[n_dof+1+n];
    }
   
   //Linear solve to get B
-  Linear_solver_pt->resolve(Jprod_D,*B_pt);
+  Linear_solver_pt->resolve(Jprod_D_and_X1[0],*B_pt);
   //Liner solve to get x3
   DoubleVector x3(this->distribution_pt(),0.0);
   Linear_solver_pt->resolve(F,x3);
@@ -1573,6 +1627,7 @@ namespace oomph
      delete B_pt; B_pt=0;
      delete C_pt; C_pt=0;
      delete D_pt; D_pt=0;
+     delete dJy_dparam_pt; dJy_dparam_pt = 0;
     }
    //Otherwise also store the pointer to the problem
    else
@@ -1595,15 +1650,31 @@ namespace oomph
                         "BlockPitchForkLinearSolver::resolve()",
                         OOMPH_EXCEPTION_LOCATION);
    }
-  
-  //Get the pointer to the problem
+ 
+  //Cache pointer to the problem
   Problem* const problem_pt = Problem_pt;
+ 
+  //Find the number of dofs of the augmented system
+  const unsigned n_aug_dof = problem_pt->ndof();
+ 
+ //Create the linear algebra distribution for the augmented solver
+ //Serial
+ LinearAlgebraDistribution aug_dist(problem_pt->communicator_pt(),n_aug_dof,
+                                    false);
+ this->build_distribution(aug_dist);
+ 
+ // if the result vector is not setup then rebuild with distribution = global
+ if(!result.built())
+  {
+   result.build(this->distribution_pt(),0.0);
+  }
 
+  //Locally cache pointer to the handler
   PitchForkHandler* handler_pt =
    static_cast<PitchForkHandler*>(problem_pt->assembly_handler_pt());
 
   //Locally cache a pointer to the parameter
-  double* const parameter_pt = handler_pt->Parameter_pt;
+  //double* const parameter_pt = handler_pt->Parameter_pt;
   
   //Switch things to our block solver
   handler_pt->solve_block_system();
@@ -1616,10 +1687,10 @@ namespace oomph
   this->build_distribution(dist);
 
   // if the result vector is not setup then rebuild with distribution = global
-  if (!result.built())
-   {
-    result.build(this->distribution_pt(),0.0);
-   }
+  //if (!result.built())
+  // {
+  //  result.build(this->distribution_pt(),0.0);
+  // }
   
   //Setup storage
   DoubleVector x1(this->distribution_pt(),0.0), x3(this->distribution_pt(),0.0);
@@ -1658,106 +1729,32 @@ namespace oomph
   double x2 = (psi_x1 - rhs[n_dof])/psi_c;
 
   //Now construct the vectors that multiply the jacobian terms
-  Vector<double> X1(n_dof+1);
+  //Vector<double> X1(n_dof/*+1*/);
+  Vector<DoubleVector> X1(1);
+  X1[0].build(this->distribution_pt(),0.0);
+
   for(unsigned n=0;n<n_dof;n++)
    {
-    X1[n] = x1[n] - x2*(*C_pt)[n];
+    X1[0][n] = x1[n] - x2*(*C_pt)[n];
    }
-  //Finial terms that are used to peturb the parameter
-  X1[n_dof] = x2;
-
-  //We can now construct our multipliers
-  //Prepare to scale
-  double dof_length=0.0, x1_length=0.0;
-  for(unsigned n=0;n<n_dof;n++)
-   {
-    if(std::abs(problem_pt->dof(n)) > dof_length) 
-     {dof_length = std::abs(problem_pt->dof(n));}
-   }
-  if(std::abs(*parameter_pt) > dof_length) 
-   {dof_length = std::abs(*parameter_pt);}
-
-  for(unsigned n=0;n<n_dof+1;n++)
-   {
-    if(std::abs(X1[n]) > x1_length) {x1_length = std::abs(X1[n]);}
-   }
-
-  //Finite difference step
-  const double FD_step = 1.0e-8;
-  
-  double x1_mult = dof_length/x1_length;
-  x1_mult += FD_step;
-  x1_mult *= FD_step;
 
   //Local storage for the product terms
-  Vector<double> Jprod_X1(n_dof,0.0), b(n_dof,0.0);
   DoubleVector Mod_Jprod_X1(this->distribution_pt(),0.0);
 
+  //Local storage for the product term
+  Vector<DoubleVector> Jprod_X1(1);
+  DoubleVector Y_local(this->distribution_pt(),0.0);
+  Y_local.initialise(handler_pt->Y);
 
-  //Calculate the product of the jacobian matrices, etc
-  unsigned long n_element = problem_pt->mesh_pt()->nelement();
-  for(unsigned long e = 0;e<n_element;e++)
-   {
-    GeneralisedElement *elem_pt = problem_pt->mesh_pt()->element_pt(e);
-    //Loop over the ndofs in each element
-    unsigned n_var = handler_pt->ndof(elem_pt);
-    //Get the jacobian matrices
-    DenseMatrix<double> jac(n_var), jac_X1(n_var);
-    //Get unperturbed jacobian
-    handler_pt->get_jacobian(elem_pt,b,jac);
-    
-    //Backup the dofs
-    Vector<double> dof_bac(n_var);
-    //Perturb the dofs
-    for(unsigned n=0;n<n_var;n++)
-     {
-      unsigned eqn_number = handler_pt->eqn_number(elem_pt,n);
-      dof_bac[n] = problem_pt->dof(eqn_number);
-      //Pertub by vector a
-      problem_pt->dof(eqn_number) += x1_mult*X1[eqn_number]; 
-     }
-
-    //Backup and peturb the parameter
-    double parameter_bac = *parameter_pt;
-    *parameter_pt += x1_mult*X1[n_dof];
-
-    problem_pt->actions_after_change_in_bifurcation_parameter();
-    
-    //Now get the new jacobian
-    handler_pt->get_jacobian(elem_pt,b,jac_X1);
-        
-    //Reset the dofs
-    for(unsigned n=0;n<n_var;n++)
-     {
-      unsigned eqn_number = handler_pt->eqn_number(elem_pt,n);
-      problem_pt->dof(eqn_number) = dof_bac[n];
-     }
-    
-    //Reset the parameter
-    *parameter_pt = parameter_bac;
-    //Do anything that needs to be done
-    problem_pt->actions_after_change_in_bifurcation_parameter();
-    
-    //OK, now work out the products
-    for(unsigned n=0;n<n_var;n++)
-     {
-      unsigned eqn_number = handler_pt->eqn_number(elem_pt,n);
-      double prod_x1=0.0;
-      for(unsigned m=0;m<n_var;m++)
-       {
-        unsigned unknown = handler_pt->eqn_number(elem_pt,m);
-        prod_x1 += (jac_X1(n,m) - jac(n,m))*
-         handler_pt->Y[unknown];
-       }
-      Jprod_X1[eqn_number] += prod_x1/x1_mult;
-     }
-   }
+  //Get the product from the problem
+  problem_pt->get_hessian_vector_products(Y_local,X1,Jprod_X1);
 
   //OK, now we can formulate the next vectors 
   //(again assuming result contains residuals)
   for(unsigned n=0;n<n_dof;n++)
    {
-    Mod_Jprod_X1[n] = result[n_dof+1+n] - Jprod_X1[n];
+    Mod_Jprod_X1[n] = rhs[n_dof+1+n] - Jprod_X1[0][n] 
+     - x2*(*dJy_dparam_pt)[n];
    }
   
   //Liner solve to get x3
@@ -2228,6 +2225,7 @@ namespace oomph
   for(unsigned n=0;n<Ndof;n++)
    {
     Problem_pt->Dof_pt.push_back(&Y[n]);
+    //Psi[n] = symmetry_vector[n];
     Psi[n] = Y[n] = C[n] = symmetry_vector[n]/length;
    }
   //Add the slack parameter to the problem
@@ -2611,6 +2609,121 @@ namespace oomph
 
    }
  
+
+ 
+ //==============================================================
+ ///Get the derivatives of the residuals with respect to a parameter
+ //==============================================================
+ void PitchForkHandler::get_dresiduals_dparameter(
+  GeneralisedElement* const &elem_pt, double* const &parameter_pt,
+  Vector<double> &dres_dparam)
+ {
+  //Need to get raw residuals and jacobian
+  unsigned raw_ndof = elem_pt->ndof();
+
+  //Find out which system we are solving
+  switch(Solve_which_system)
+   {
+    //If we are solving the original system
+   case Block_J:
+   {
+    //get the basic residual derivatives
+    elem_pt->get_dresiduals_dparameter(parameter_pt,dres_dparam);
+    //Slack parameter term does not depened explicitly on the parameter
+    //so is not added
+   }
+   break;
+
+   //If we are solving the augmented-by-one system
+   case Block_augmented_J:
+   {
+    //Get the basic residual derivatives
+    elem_pt->get_dresiduals_dparameter(parameter_pt,dres_dparam);
+  
+    //Zero the final residuals derivative
+    dres_dparam[raw_ndof] = 0.0;
+
+    //Other terms must not depend on the parameter
+   }
+   break;
+
+   //Otherwise we are solving the fully augemented system
+   case Full_augmented:
+   {
+    DenseMatrix<double> djac_dparam(raw_ndof);
+    
+    //Get the basic residuals and jacobian derivatives
+    elem_pt->get_djacobian_dparameter(parameter_pt,dres_dparam,djac_dparam);
+    
+    //The "final" residual derivatives do not depend on the parameter
+    dres_dparam[raw_ndof] = 0.0;
+    dres_dparam[2*raw_ndof+1] = 0.0;
+    
+    //Now multiply to fill in the residuals associated
+    //with the null vector condition
+    for(unsigned i=0;i<raw_ndof;i++)
+     {
+      dres_dparam[raw_ndof+1+i] = 0.0;
+      for(unsigned j=0;j<raw_ndof;j++)
+       {
+        unsigned local_unknown = elem_pt->eqn_number(j); 
+        dres_dparam[raw_ndof+1+i] += djac_dparam(i,j)*Y[local_unknown];
+       }
+     }
+   }
+   break;
+
+   default:
+    std::ostringstream error_stream;
+    error_stream << "The Solve_which_system flag can only take values 0, 1, 2"
+                 << " not " << Solve_which_system << "\n";
+    throw OomphLibError(error_stream.str(),
+                        "PitchForkHandler::get_dresiduals_dparameter()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+
+ }
+
+
+
+ //========================================================================
+ /// Overload the derivative of the residuals and jacobian 
+ /// with respect to a parameter so that it breaks because it should not
+ /// be required
+ //========================================================================
+ void PitchForkHandler::get_djacobian_dparameter(
+  GeneralisedElement* const &elem_pt,
+  double* const &parameter_pt,
+  Vector<double> &dres_dparam,
+  DenseMatrix<double> &djac_dparam)
+ {
+  std::ostringstream error_stream;
+  error_stream << 
+   "This function has not been implemented because it is not required\n";
+  error_stream << "in standard problems.\n";
+  error_stream << 
+   "If you find that you need it, you will have to implement it!\n\n";
+
+  throw OomphLibError(error_stream.str(),
+                      "PitchForkHander::get_djacobian_dparameter()",
+                      OOMPH_EXCEPTION_LOCATION);
+ }
+
+
+ //=====================================================================
+ /// Overload the hessian vector product function so that
+ /// it calls the underlying element's hessian function.
+ //========================================================================
+ void PitchForkHandler::get_hessian_vector_products(
+  GeneralisedElement* const &elem_pt,
+  Vector<double> const &Y,
+  DenseMatrix<double> const &C,
+  DenseMatrix<double> &product)
+ {
+  elem_pt->get_hessian_vector_products(Y,C,product);
+ }
+
+
 
  //==========================================================================
  /// Return the eigenfunction(s) associated with the bifurcation that
@@ -3776,6 +3889,7 @@ namespace oomph
     //Initialise the pen-ultimate residual
     residuals[3*raw_ndof] = -1.0/
      (double)(Problem_pt->mesh_pt()->nelement());
+    residuals[3*raw_ndof+1] = 0.0;
     
     //Now multiply to fill in the residuals
     for(unsigned i=0;i<raw_ndof;i++)
@@ -3963,6 +4077,109 @@ namespace oomph
                         "HopfHander::get_residuals()",
                         OOMPH_EXCEPTION_LOCATION);
    }
+ }
+
+
+ 
+ //==================================================================
+ ///Get the derivatives of the augmented residuals with respect to 
+ ///a parameter
+ //=================================================================
+ void HopfHandler::get_dresiduals_dparameter(
+  GeneralisedElement* const &elem_pt,
+  double* const &parameter_pt,  Vector<double> &dres_dparam)
+ {
+  //Should only call get residuals for the full system
+  if(Solve_which_system==0)
+   {
+    //Need to get raw residuals and jacobian
+    unsigned raw_ndof = elem_pt->ndof();
+
+    DenseMatrix<double> djac_dparam(raw_ndof), dM_dparam(raw_ndof);
+    //Get the basic residuals, jacobian and mass matrix
+    elem_pt->get_djacobian_and_dmass_matrix_dparameter(
+     parameter_pt,dres_dparam,djac_dparam,dM_dparam);
+    
+    //Initialise the pen-ultimate residual, which does not
+    //depend on the parameter
+    dres_dparam[3*raw_ndof] = 0.0;
+    dres_dparam[3*raw_ndof+1] = 0.0;
+    
+   //Now multiply to fill in the residuals
+    for(unsigned i=0;i<raw_ndof;i++)
+     {
+      dres_dparam[raw_ndof+i] = 0.0;
+      dres_dparam[2*raw_ndof+i] = 0.0;
+      for(unsigned j=0;j<raw_ndof;j++)
+       {
+        unsigned global_unknown = elem_pt->eqn_number(j); 
+        //Real part
+        dres_dparam[raw_ndof+i] += 
+         djac_dparam(i,j)*Phi[global_unknown] + 
+         Omega*dM_dparam(i,j)*Psi[global_unknown];
+        //Imaginary part
+        dres_dparam[2*raw_ndof+i] += 
+         djac_dparam(i,j)*Psi[global_unknown] - 
+         Omega*dM_dparam(i,j)*Phi[global_unknown]; 
+       }
+     }
+   }
+  else
+   {
+    throw OomphLibError("Solve_which_system can only be 0",
+                        "HopfHander::get_dresiduals_dparameter()",
+                        OOMPH_EXCEPTION_LOCATION);
+    
+   }
+ }
+    
+
+
+
+ //========================================================================
+ /// Overload the derivative of the residuals and jacobian 
+ /// with respect to a parameter so that it breaks because it should not
+ /// be required
+ //========================================================================
+ void HopfHandler::get_djacobian_dparameter(
+  GeneralisedElement* const &elem_pt,
+  double* const &parameter_pt,
+  Vector<double> &dres_dparam,
+  DenseMatrix<double> &djac_dparam)
+ {
+  std::ostringstream error_stream;
+  error_stream << 
+   "This function has not been implemented because it is not required\n";
+  error_stream << "in standard problems.\n";
+  error_stream << 
+   "If you find that you need it, you will have to implement it!\n\n";
+
+  throw OomphLibError(error_stream.str(),
+                      "HopfHander::get_djacobian_dparameter()",
+                      OOMPH_EXCEPTION_LOCATION);
+ }
+
+
+ //=====================================================================
+ /// Overload the hessian vector product function so that
+ /// it breaks because it should not be required
+ //========================================================================
+ void HopfHandler::get_hessian_vector_products(
+  GeneralisedElement* const &elem_pt,
+  Vector<double> const &Y,
+  DenseMatrix<double> const &C,
+  DenseMatrix<double> &product)
+ {
+  std::ostringstream error_stream;
+  error_stream << 
+   "This function has not been implemented because it is not required\n";
+  error_stream << "in standard problems.\n";
+  error_stream << 
+   "If you find that you need it, you will have to implement it!\n\n";
+
+  throw OomphLibError(error_stream.str(),
+                      "HopfHander::get_hessian_vector_products()",
+                      OOMPH_EXCEPTION_LOCATION);
  }
 
 

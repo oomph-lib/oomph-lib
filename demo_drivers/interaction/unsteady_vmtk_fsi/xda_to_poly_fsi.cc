@@ -164,11 +164,11 @@ int main()
 
 
  // Read first line with node labels and count them
- string line;
+ std::string line;
  getline(infile,line);
- istringstream ostr(line);
- istream_iterator<string> it(ostr);
- istream_iterator<string> end;
+ std::istringstream ostr(line);
+ std::istream_iterator<std::string> it(ostr);
+ std::istream_iterator<std::string> end;
  unsigned nnod_el = 0;
  Vector<unsigned> first_node;
  while (it != end)
@@ -186,14 +186,14 @@ int main()
  unsigned k=0;
 
  // Copy across first nodes
- cout << "First nodes: " << std::endl;
+ std::cout << "First nodes: " << std::endl;
  for(unsigned j=0;j<nnod_el;j++)
   {
    global_node[k]=first_node[k];
-   cout << first_node[k] << " ";
+   std::cout << first_node[k] << " ";
    k++;
   }
- cout << std::endl;
+ std::cout << std::endl;
 
  // Read the other ones
  for(unsigned i=1;i<n_element;i++)

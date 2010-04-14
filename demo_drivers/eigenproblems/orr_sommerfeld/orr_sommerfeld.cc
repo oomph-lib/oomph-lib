@@ -875,7 +875,10 @@ OrrSommerfeldProblem<ELEMENT>::OrrSommerfeldProblem(const unsigned& n_element,
  //We don't need to pin the pressure, I'm not quite sure why
  //this is. I suspect that it's because by NOT integrating the 
  //pressure by parts in the x-momentum equation, I have lost that
- //freedom. Don't really understand though.
+ //freedom. Don't really understand though. The freedom has been lost
+ //because of the travelling-wave-type expansion of p which means that
+ //when differentiated with respect to x the absolute value of p
+ //matters!
  
  //mesh_pt()->element_pt(0)->internal_data_pt(0)->pin(0);
  //mesh_pt()->element_pt(0)->internal_data_pt(0)->pin(1);

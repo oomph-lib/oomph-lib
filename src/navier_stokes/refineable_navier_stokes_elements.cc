@@ -340,7 +340,12 @@ int p_index = this->p_nodal_index_nst();
  //Otherwise the pressure is not stored at a node and so cannot hang
  else
   {
-   assert(false); // pressure advection diffusion doesn't work for this one!
+   // pressure advection diffusion doesn't work for this one!
+   throw OomphLibError(
+    "Pressure advection diffusion does not work in this case\n",
+    "RefineableNavierStokesEquations<ELEMENT>::fill_in_generic_pressure_advection_diffusion_contribution_nst()",
+    OOMPH_EXCEPTION_LOCATION);
+
    for(unsigned l=0;l<n_pres;++l)
     {pressure_dof_is_hanging[l] = false;}
   }
@@ -1512,7 +1517,7 @@ void RefineableNavierStokesEquations<DIM>::get_dresidual_dnodal_coordinates(
                  sum -= tmp*interpolated_dudx(i,k)*testf[l];
                 }
                
-               // Multiply through by deriv of Jacobian and integration weight
+               // Multiply throsugh by deriv of Jacobian and integration weight
                dresidual_dnodal_coordinates(local_eqn,ii,jj)+=
                 sum*dJ_dX(ii,jj)*w*hang_weight;
              

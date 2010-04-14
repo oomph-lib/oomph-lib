@@ -1484,6 +1484,1084 @@ fill_in_generic_residual_contribution_axi_nst(Vector<double> &residuals,
  
 }
 
+//==============================================================
+///  Compute the residuals for the Navier--Stokes 
+///  equations; flag=1(or 0): do (or don't) compute the 
+///  Jacobian as well. 
+//==============================================================
+void AxisymmetricNavierStokesEquations::
+fill_in_generic_dresidual_contribution_axi_nst(
+ double* const &parameter_pt,
+ Vector<double> &dres_dparam, 
+ DenseMatrix<double> &djac_dparam, 
+ DenseMatrix<double> &dmass_matrix_dparam,
+ unsigned flag)
+{
+ //Die if the parameter is not the Reynolds number
+ if(parameter_pt!=this->re_pt())
+  {
+   std::ostringstream error_stream;
+   error_stream << 
+    "Cannot compute analytic jacobian for parameter addressed by " 
+                << parameter_pt << "\n";
+   error_stream << "Can only compute derivatives wrt Re ("
+                << Re_pt << ")\n";
+   throw OomphLibError(
+      error_stream.str(),
+      "AxisymmetricNavierStokesEquations::fill_in_generic_dresiduals_contribution()",
+      OOMPH_EXCEPTION_LOCATION);
+  }
+
+ //Which parameters are we differentiating with respect to
+ bool diff_re = false;
+ bool diff_re_st = false;
+ bool diff_re_inv_fr = false;
+ bool diff_re_inv_ro = false;
+
+ //Set the boolean flags according to the parameter pointer
+ if(parameter_pt==this->re_pt()) {diff_re = true;}
+ if(parameter_pt==this->re_st_pt()) {diff_re_st = true;}
+ if(parameter_pt==this->re_invfr_pt()) {diff_re_inv_fr = true;}
+ if(parameter_pt==this->re_invro_pt()) {diff_re_inv_ro = true;}
+
+
+ //Find out how many nodes there are
+ unsigned n_node = nnode();
+ 
+ //Find out how many pressure dofs there are
+ unsigned n_pres = npres_axi_nst();
+ 
+ //Get the nodal indices at which the velocity is stored
+ unsigned u_nodal_index[3];
+ for(unsigned i=0;i<3;++i) {u_nodal_index[i] = u_index_axi_nst(i);}
+
+ //Set up memory for the shape and test functions
+ //Note that there are only two dimensions, r and z in this problem
+ Shape psif(n_node), testf(n_node);
+ DShape dpsifdx(n_node,2), dtestfdx(n_node,2);
+   
+ //Set up memory for pressure shape and test functions
+ Shape psip(n_pres), testp(n_pres);
+
+ //Number of integration points
+ unsigned Nintpt = integral_pt()->nweight();
+   
+ //Set the Vector to hold local coordinates (two dimensions)
+ Vector<double> s(2);
+
+ //Get Physical Variables from Element
+ //Reynolds number must be multiplied by the density ratio
+ //double scaled_re = re()*density_ratio();
+ //double scaled_re_st = re_st()*density_ratio();
+ //double scaled_re_inv_fr = re_invfr()*density_ratio();
+ //double scaled_re_inv_ro = re_invro()*density_ratio();
+ double dens_ratio = this->density_ratio();
+ // double visc_ratio = viscosity_ratio();
+ Vector<double> G = g();
+
+ //Integers used to store the local equation and unknown numbers
+ int local_eqn=0, local_unknown=0;
+
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<Nintpt;ipt++)
+  {
+   //Assign values of s
+   for(unsigned i=0;i<2;i++) s[i] = integral_pt()->knot(ipt,i);
+   //Get the integral weight
+   double w = integral_pt()->weight(ipt);
+   
+   //Call the derivatives of the shape and test functions
+   double J = 
+    dshape_and_dtest_eulerian_at_knot_axi_nst(ipt,psif,dpsifdx,testf,dtestfdx);
+   
+   //Call the pressure shape and test functions
+   pshape_axi_nst(s,psip,testp);
+   
+   //Premultiply the weights and the Jacobian
+   double W = w*J;
+
+   //Allocate storage for the position and the derivative of the 
+   //mesh positions wrt time
+   Vector<double> interpolated_x(2,0.0);
+   Vector<double> mesh_velocity(2,0.0);
+   //Allocate storage for the pressure, velocity components and their
+   //time and spatial derivatives
+   double interpolated_p=0.0;
+   Vector<double> interpolated_u(3,0.0);
+   Vector<double> dudt(3,0.0);
+   DenseMatrix<double> interpolated_dudx(3,2,0.0);
+   
+   //Calculate pressure at integration point
+   for(unsigned l=0;l<n_pres;l++) {interpolated_p += p_axi_nst(l)*psip[l];}
+   
+   //Calculate velocities and derivatives at integration point
+
+   // Loop over nodes
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     //Cache the shape function
+     const double psif_ = psif(l);
+     //Loop over the two coordinate directions
+     for(unsigned i=0;i<2;i++)
+      {
+       interpolated_x[i] += this->raw_nodal_position(l,i)*psif_;
+      }
+       //mesh_velocity[i]  += dnodal_position_dt(l,i)*psif[l];
+
+     //Loop over the three velocity directions
+     for(unsigned i=0;i<3;i++)
+      {
+       //Get the u_value
+       const double u_value = this->raw_nodal_value(l,u_nodal_index[i]);
+       interpolated_u[i] += u_value*psif_;
+       dudt[i]+= du_dt_axi_nst(l,i)*psif_;
+       //Loop over derivative directions
+       for(unsigned j=0;j<2;j++)
+        {interpolated_dudx(i,j) += u_value*dpsifdx(l,j);}
+      }
+    }
+
+   //Get the mesh velocity if ALE is enabled
+   if(!ALE_is_disabled)
+    {
+     // Loop over nodes
+     for(unsigned l=0;l<n_node;l++) 
+      {
+       //Loop over the two coordinate directions
+       for(unsigned i=0;i<2;i++)
+        {
+         mesh_velocity[i]  += this->raw_dnodal_position_dt(l,i)*psif(l);
+        }
+      }
+    }
+       
+   
+   //Get the user-defined body force terms
+   //Vector<double> body_force(3);
+   //get_body_force(time(),ipt,interpolated_x,body_force);
+   
+   //Get the user-defined source function
+   //double source = get_source_fct(time(),ipt,interpolated_x);
+
+   //Get the user-defined viscosity function
+   double visc_ratio; 
+   get_viscosity_ratio_axisym_nst(ipt,
+                                  s, 
+                                  interpolated_x,
+                                  visc_ratio);
+
+   //r is the first position component
+   double r = interpolated_x[0];
+
+
+   //MOMENTUM EQUATIONS
+   //------------------
+   
+   //Loop over the test functions
+   for(unsigned l=0;l<n_node;l++)
+    {
+
+     //FIRST (RADIAL) MOMENTUM EQUATION
+     local_eqn = nodal_local_eqn(l,u_nodal_index[0]);
+     //If it's not a boundary condition
+     if(local_eqn >= 0)
+      {
+       //No user-defined body force terms
+       //dres_dparam[local_eqn] += 
+       // r*body_force[0]*testf[l]*W;
+
+       //Add the gravitational body force term if the reynolds number
+       //is equal to re_inv_fr
+       if(diff_re_inv_fr)
+        {
+         dres_dparam[local_eqn] += r*dens_ratio*testf[l]*G[0]*W;
+        }
+
+       //No pressure gradient term
+       //residuals[local_eqn]  += 
+       // interpolated_p*(testf[l] + r*dtestfdx(l,0))*W;
+       
+       //No in the stress tensor terms
+       //The viscosity ratio needs to go in here to ensure
+       //continuity of normal stress is satisfied even in flows
+       //with zero pressure gradient!
+       //residuals[local_eqn] -= visc_ratio*
+       // r*(1.0+Gamma[0])*interpolated_dudx(0,0)*dtestfdx(l,0)*W;
+       
+       //residuals[local_eqn] -= visc_ratio*r*
+       // (interpolated_dudx(0,1) + Gamma[0]*interpolated_dudx(1,0))*
+       // dtestfdx(l,1)*W;
+
+       //residuals[local_eqn] -= 
+       // visc_ratio*(1.0 + Gamma[0])*interpolated_u[0]*testf[l]*W/r;
+       
+       //Add in the inertial terms
+       //du/dt term
+       if(diff_re_st)
+        {
+         dres_dparam[local_eqn] -= dens_ratio*r*dudt[0]*testf[l]*W;
+        }
+
+       //Convective terms
+       if(diff_re)
+        {
+         dres_dparam[local_eqn] -= 
+          dens_ratio*(r*interpolated_u[0]*interpolated_dudx(0,0) 
+                    - interpolated_u[2]*interpolated_u[2] 
+                      + r*interpolated_u[1]*interpolated_dudx(0,1))*testf[l]*W;
+        }
+
+       //Mesh velocity terms
+       if(!ALE_is_disabled)
+        {
+         if(diff_re_st)
+          {
+           for(unsigned k=0;k<2;k++)
+            {
+             dres_dparam[local_eqn] += 
+              dens_ratio*r*mesh_velocity[k]*interpolated_dudx(0,k)*testf[l]*W;
+            }
+          }
+        }
+
+       //Add the Coriolis term
+       if(diff_re_inv_ro)
+        {
+         dres_dparam[local_eqn] += 
+          2.0*r*dens_ratio*interpolated_u[2]*testf[l]*W;
+        }
+
+       //CALCULATE THE JACOBIAN
+       if(flag)
+        {
+         //Loop over the velocity shape functions again
+         for(unsigned l2=0;l2<n_node;l2++)
+          { 
+           local_unknown = nodal_local_eqn(l2,u_nodal_index[0]);
+           //Radial velocity component
+           if(local_unknown >= 0)
+            {
+             if(flag==2)
+              {
+               if(diff_re_st)
+                {
+                 //Add the mass matrix
+                 dmass_matrix_dparam(local_eqn,local_unknown) +=
+                  dens_ratio*r*psif[l2]*testf[l]*W;
+                }
+              }
+
+             //Add contribution to the Jacobian matrix
+             //jacobian(local_eqn,local_unknown)
+             // -= visc_ratio*r*(1.0+Gamma[0])
+             //*dpsifdx(l2,0)*dtestfdx(l,0)*W;
+
+             //jacobian(local_eqn,local_unknown)
+             // -= visc_ratio*r*dpsifdx(l2,1)*dtestfdx(l,1)*W;
+       
+             //jacobian(local_eqn,local_unknown)
+             // -= visc_ratio*(1.0 + Gamma[0])*psif[l2]*testf[l]*W/r;
+       
+             //Add in the inertial terms
+             //du/dt term
+             if(diff_re_st)
+              {
+               djac_dparam(local_eqn,local_unknown) 
+                -= dens_ratio*r*node_pt(l2)->time_stepper_pt()->weight(1,0)*
+                psif[l2]*testf[l]*W;
+              }
+
+             //Convective terms
+             if(diff_re)
+              {
+               djac_dparam(local_eqn,local_unknown) -=
+                dens_ratio*(r*psif[l2]*interpolated_dudx(0,0) 
+                            + r*interpolated_u[0]*dpsifdx(l2,0)
+                  + r*interpolated_u[1]*dpsifdx(l2,1))*testf[l]*W;
+              }
+
+             //Mesh velocity terms
+             if(!ALE_is_disabled)
+              {
+               for(unsigned k=0;k<2;k++)
+                {
+                 if(diff_re_st)
+                  {
+                   djac_dparam(local_eqn,local_unknown) += 
+                    dens_ratio*r*mesh_velocity[k]*dpsifdx(l2,k)*testf[l]*W;
+                  }
+                }
+              }
+            }
+
+           //Axial velocity component
+           local_unknown = nodal_local_eqn(l2,u_nodal_index[1]);
+           if(local_unknown >= 0)
+            {
+             //jacobian(local_eqn,local_unknown) -=
+             // visc_ratio*r*Gamma[0]*dpsifdx(l2,0)*dtestfdx(l,1)*W;
+             
+             //Convective terms
+             if(diff_re)
+              {
+               djac_dparam(local_eqn,local_unknown) -= 
+                dens_ratio*r*psif[l2]*interpolated_dudx(0,1)*testf[l]*W;
+              }
+            }
+           
+           //Azimuthal velocity component
+           local_unknown = nodal_local_eqn(l2,u_nodal_index[2]);
+           if(local_unknown >= 0)
+            {
+             //Convective terms
+             if(diff_re)
+              {
+               djac_dparam(local_eqn,local_unknown) -= 
+                - dens_ratio*2.0*interpolated_u[2]*psif[l2]*testf[l]*W;
+              }
+             //Coriolis terms
+             if(diff_re_inv_ro)
+              {
+               djac_dparam(local_eqn,local_unknown) +=
+                2.0*r*dens_ratio*psif[l2]*testf[l]*W;
+              }
+            }
+          }
+         
+         /*Now loop over pressure shape functions*/
+         /*This is the contribution from pressure gradient*/
+         //for(unsigned l2=0;l2<n_pres;l2++)
+         // {
+         //  local_unknown = p_local_eqn(l2);
+         //  /*If we are at a non-zero degree of freedom in the entry*/
+         //  if(local_unknown >= 0)
+         //   {
+         //    jacobian(local_eqn,local_unknown)
+         //     += psip[l2]*(testf[l] + r*dtestfdx(l,0))*W;
+         //   }
+         // }
+        } /*End of Jacobian calculation*/
+       
+      } //End of if not boundary condition statement
+       
+     //SECOND (AXIAL) MOMENTUM EQUATION
+     local_eqn = nodal_local_eqn(l,u_nodal_index[1]);
+     //If it's not a boundary condition
+     if(local_eqn >= 0)
+      {
+       //Add the user-defined body force terms
+       //Remember to multiply by the density ratio!
+       //residuals[local_eqn] += 
+       // r*body_force[1]*testf[l]*W;
+       
+       //Add the gravitational body force term
+       if(diff_re_inv_fr)
+        {
+         dres_dparam[local_eqn] += r*dens_ratio*testf[l]*G[1]*W;
+        }
+       
+       //Add the pressure gradient term
+       //residuals[local_eqn]  += r*interpolated_p*dtestfdx(l,1)*W;
+       
+       //Add in the stress tensor terms
+       //The viscosity ratio needs to go in here to ensure
+       //continuity of normal stress is satisfied even in flows
+       //with zero pressure gradient!
+       //residuals[local_eqn] -= visc_ratio*
+       //  r*(interpolated_dudx(1,0) + Gamma[1]*interpolated_dudx(0,1))
+       // *dtestfdx(l,0)*W;
+       
+       //residuals[local_eqn] -= visc_ratio*r*
+       // (1.0 + Gamma[1])*interpolated_dudx(1,1)*dtestfdx(l,1)*W;
+       
+       //Add in the inertial terms
+       //du/dt term
+       if(diff_re_st)
+        {
+         dres_dparam[local_eqn] -= dens_ratio*r*dudt[1]*testf[l]*W;
+        }
+
+       //Convective terms
+       if(diff_re)
+        {
+         dres_dparam[local_eqn] -= 
+          dens_ratio*(r*interpolated_u[0]*interpolated_dudx(1,0) 
+                      + r*interpolated_u[1]*interpolated_dudx(1,1))*testf[l]*W;
+        }
+
+       //Mesh velocity terms
+       if(!ALE_is_disabled)
+        {
+         if(diff_re_st)
+          {
+           for(unsigned k=0;k<2;k++)
+            {
+             dres_dparam[local_eqn] += 
+            dens_ratio*r*mesh_velocity[k]*interpolated_dudx(1,k)*testf[l]*W;
+            }
+          }
+        }
+       
+       //CALCULATE THE JACOBIAN
+       if(flag)
+        {
+         //Loop over the velocity shape functions again
+         for(unsigned l2=0;l2<n_node;l2++)
+          { 
+           local_unknown = nodal_local_eqn(l2,u_nodal_index[0]);
+           //Radial velocity component
+           if(local_unknown >= 0)
+            {
+             //Add in the stress tensor terms
+             //The viscosity ratio needs to go in here to ensure
+             //continuity of normal stress is satisfied even in flows
+             //with zero pressure gradient!
+             //jacobian(local_eqn,local_unknown) -= 
+             //visc_ratio*r*Gamma[1]*dpsifdx(l2,1)*dtestfdx(l,0)*W;
+       
+             //Convective terms
+             if(diff_re)
+              {
+               djac_dparam(local_eqn,local_unknown) -= 
+                dens_ratio*r*psif[l2]*interpolated_dudx(1,0)*testf[l]*W;
+              }
+            }
+           
+           //Axial velocity component
+           local_unknown = nodal_local_eqn(l2,u_nodal_index[1]);
+           if(local_unknown >= 0)
+            {
+             if(flag==2)
+              {
+               if(diff_re_st)
+                {
+                 //Add the mass matrix
+                 dmass_matrix_dparam(local_eqn,local_unknown) +=
+                  dens_ratio*r*psif[l2]*testf[l]*W;
+                }
+              }
+
+
+             //Add in the stress tensor terms
+             //The viscosity ratio needs to go in here to ensure
+             //continuity of normal stress is satisfied even in flows
+             //with zero pressure gradient!
+             //jacobian(local_eqn,local_unknown) -= 
+             //visc_ratio*r*dpsifdx(l2,0)*dtestfdx(l,0)*W;
+       
+             //jacobian(local_eqn,local_unknown) -= 
+             // visc_ratio*r*(1.0 + Gamma[1])*dpsifdx(l2,1)*
+             // dtestfdx(l,1)*W;
+       
+             //Add in the inertial terms
+             //du/dt term
+             if(diff_re_st)
+              {
+               djac_dparam(local_eqn,local_unknown) -= 
+                dens_ratio*r*node_pt(l2)->time_stepper_pt()->weight(1,0)*
+                psif[l2]*testf[l]*W;
+              }
+
+             //Convective terms
+             if(diff_re)
+              {
+               djac_dparam(local_eqn,local_unknown) -= 
+                dens_ratio*(r*interpolated_u[0]*dpsifdx(l2,0) 
+                            + r*psif[l2]*interpolated_dudx(1,1)
+                            + r*interpolated_u[1]*dpsifdx(l2,1))*testf[l]*W;
+              }
+             
+             //Mesh velocity terms
+             if(!ALE_is_disabled)
+              {
+               for(unsigned k=0;k<2;k++)
+                {
+                 if(diff_re_st)
+                  {
+                   djac_dparam(local_eqn,local_unknown) += 
+                    dens_ratio*r*mesh_velocity[k]*dpsifdx(l2,k)*testf[l]*W;
+                  }
+                }
+              }
+            }
+           
+           //There are no azimithal terms in the axial momentum equation
+          } //End of loop over velocity shape functions
+
+        } /*End of Jacobian calculation*/
+       
+      } //End of AXIAL MOMENTUM EQUATION
+
+     //THIRD (AZIMUTHAL) MOMENTUM EQUATION
+     local_eqn = nodal_local_eqn(l,u_nodal_index[2]);
+     if(local_eqn >= 0)
+      {
+       //Add the user-defined body force terms
+       //Remember to multiply by the density ratio!
+       //residuals[local_eqn] += 
+       // r*body_force[2]*testf[l]*W;
+       
+       //Add the gravitational body force term
+       if(diff_re_inv_fr)
+        {
+         dres_dparam[local_eqn] += r*dens_ratio*testf[l]*G[2]*W;
+        }
+
+       //There is NO pressure gradient term
+       
+       //Add in the stress tensor terms
+       //The viscosity ratio needs to go in here to ensure
+       //continuity of normal stress is satisfied even in flows
+       //with zero pressure gradient!
+       //residuals[local_eqn] -= visc_ratio*
+       // (r*interpolated_dudx(2,0) - 
+       //  Gamma[0]*interpolated_u[2])*dtestfdx(l,0)*W;
+       
+       //residuals[local_eqn] -= visc_ratio*r*
+       // interpolated_dudx(2,1)*dtestfdx(l,1)*W;
+
+       //residuals[local_eqn] -= visc_ratio*
+       // ((interpolated_u[2]/r) - Gamma[0]*interpolated_dudx(2,0))*testf[l]*W;
+
+
+       //Add in the inertial terms
+       //du/dt term
+       if(diff_re_st)
+        {
+         dres_dparam[local_eqn] -= dens_ratio*r*dudt[2]*testf[l]*W;
+        }
+
+       //Convective terms
+       if(diff_re)
+        {
+         dres_dparam[local_eqn] -= 
+          dens_ratio*(r*interpolated_u[0]*interpolated_dudx(2,0)
+                      + interpolated_u[0]*interpolated_u[2]
+                      + r*interpolated_u[1]*interpolated_dudx(2,1))*testf[l]*W;
+        }
+
+       //Mesh velocity terms
+       if(!ALE_is_disabled)
+        {
+         if(diff_re_st)
+          {
+           for(unsigned k=0;k<2;k++)
+            {
+             dres_dparam[local_eqn] += 
+              dens_ratio*r*mesh_velocity[k]*interpolated_dudx(2,k)*testf[l]*W;
+            }
+          }
+        }
+
+       //Add the Coriolis term
+       if(diff_re_inv_ro)
+        {
+         dres_dparam[local_eqn] -= 
+          2.0*r*dens_ratio*interpolated_u[0]*testf[l]*W;
+        }
+       
+       //CALCULATE THE JACOBIAN
+       if(flag)
+        {
+         //Loop over the velocity shape functions again
+         for(unsigned l2=0;l2<n_node;l2++)
+          { 
+           //Radial velocity component
+           local_unknown = nodal_local_eqn(l2,u_nodal_index[0]);
+           if(local_unknown >= 0)
+            {
+             //Convective terms
+             if(diff_re)
+              {
+               djac_dparam(local_eqn,local_unknown) -= 
+                dens_ratio*(r*psif[l2]*interpolated_dudx(2,0)
+                          + psif[l2]*interpolated_u[2])*testf[l]*W;
+              }
+
+             //Coriolis term
+             if(diff_re_inv_ro)
+              {
+               djac_dparam(local_eqn,local_unknown) -=
+                2.0*r*dens_ratio*psif[l2]*testf[l]*W;
+              }
+            }
+
+           //Axial velocity component
+           local_unknown = nodal_local_eqn(l2,u_nodal_index[1]);
+           if(local_unknown >= 0)
+            {
+             //Convective terms
+             if(diff_re)
+              {
+               djac_dparam(local_eqn,local_unknown) -= 
+                dens_ratio*r*psif[l2]*interpolated_dudx(2,1)*testf[l]*W;
+              }
+            }
+
+           //Azimuthal velocity component
+           local_unknown = nodal_local_eqn(l2,u_nodal_index[2]);
+           if(local_unknown >= 0)
+            {
+             if(flag==2)
+              {
+               //Add the mass matrix
+               if(diff_re_st)
+                {
+                 dmass_matrix_dparam(local_eqn,local_unknown) +=
+                  dens_ratio*r*psif[l2]*testf[l]*W;
+                }
+              }
+
+             //Add in the stress tensor terms
+             //The viscosity ratio needs to go in here to ensure
+             //continuity of normal stress is satisfied even in flows
+             //with zero pressure gradient!
+             //jacobian(local_eqn,local_unknown) -= 
+             // visc_ratio*(r*dpsifdx(l2,0) - 
+             //                  Gamma[0]*psif[l2])*dtestfdx(l,0)*W;
+       
+             //jacobian(local_eqn,local_unknown) -= 
+             // visc_ratio*r*dpsifdx(l2,1)*dtestfdx(l,1)*W;
+
+             //jacobian(local_eqn,local_unknown) -= 
+             // visc_ratio*((psif[l2]/r) - Gamma[0]*dpsifdx(l2,0))
+             // *testf[l]*W;
+             
+             //Add in the inertial terms
+             //du/dt term
+             if(diff_re_st)
+              {
+               djac_dparam(local_eqn,local_unknown) -= 
+                dens_ratio*r*node_pt(l2)->time_stepper_pt()->weight(1,0)*
+                psif[l2]*testf[l]*W;
+              }
+
+             //Convective terms
+             if(diff_re)
+              {
+               djac_dparam(local_eqn,local_unknown) -= 
+                dens_ratio*(r*interpolated_u[0]*dpsifdx(l2,0)
+                            + interpolated_u[0]*psif[l2]
+                            + r*interpolated_u[1]*dpsifdx(l2,1))*testf[l]*W;
+              }
+             
+             //Mesh velocity terms
+             if(!ALE_is_disabled)
+              {
+               if(diff_re_st)
+                {
+                 for(unsigned k=0;k<2;k++)
+                  {
+                   djac_dparam(local_eqn,local_unknown) += 
+                    dens_ratio*r*mesh_velocity[k]*dpsifdx(l2,k)*testf[l]*W;
+                  }
+                }
+              }
+            }
+          }
+         
+         //There are no pressure terms
+        } //End of Jacobian
+       
+      } //End of AZIMUTHAL EQUATION
+
+    } //End of loop over shape functions
+      
+   
+   //CONTINUITY EQUATION NO PARAMETERS
+   //-------------------
+  }
+ 
+}
+
+//=========================================================================
+/// \short Compute the hessian tensor vector products required to
+/// perform continuation of bifurcations analytically
+//=========================================================================
+void AxisymmetricNavierStokesEquations::
+fill_in_contribution_to_hessian_vector_products(
+ Vector<double> const &Y,
+ DenseMatrix<double> const &C,
+ DenseMatrix<double> &product)
+{
+ //Find out how many nodes there are
+ unsigned n_node = nnode();
+ 
+ //Get the nodal indices at which the velocity is stored
+ unsigned u_nodal_index[3];
+ for(unsigned i=0;i<3;++i) {u_nodal_index[i] = u_index_axi_nst(i);}
+
+ //Set up memory for the shape and test functions
+ //Note that there are only two dimensions, r and z in this problem
+ Shape psif(n_node), testf(n_node);
+ DShape dpsifdx(n_node,2), dtestfdx(n_node,2);
+
+ //Number of integration points
+ unsigned Nintpt = integral_pt()->nweight();
+   
+ //Set the Vector to hold local coordinates (two dimensions)
+ Vector<double> s(2);
+
+ //Get Physical Variables from Element
+ //Reynolds number must be multiplied by the density ratio
+ double scaled_re = re()*density_ratio();
+ // double visc_ratio = viscosity_ratio();
+ Vector<double> G = g();
+
+ //Integers used to store the local equation and unknown numbers
+ int local_eqn=0, local_unknown=0, local_freedom=0;
+
+ //How may dofs are there
+ const unsigned n_dof = this->ndof();
+
+ //Create a local matrix eigenvector product contribution
+ DenseMatrix<double> jac_y(n_dof,n_dof,0.0);
+ 
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<Nintpt;ipt++)
+  {
+   //Assign values of s
+   for(unsigned i=0;i<2;i++) s[i] = integral_pt()->knot(ipt,i);
+   //Get the integral weight
+   double w = integral_pt()->weight(ipt);
+   
+   //Call the derivatives of the shape and test functions
+   double J = 
+    dshape_and_dtest_eulerian_at_knot_axi_nst(ipt,psif,dpsifdx,testf,dtestfdx);
+   
+   //Premultiply the weights and the Jacobian
+   double W = w*J;
+
+   //Allocate storage for the position and the derivative of the 
+   //mesh positions wrt time
+   Vector<double> interpolated_x(2,0.0);
+   //Vector<double> mesh_velocity(2,0.0);
+   //Allocate storage for the pressure, velocity components and their
+   //time and spatial derivatives
+   Vector<double> interpolated_u(3,0.0);
+   //Vector<double> dudt(3,0.0);
+   DenseMatrix<double> interpolated_dudx(3,2,0.0);
+   
+   //Calculate velocities and derivatives at integration point
+
+   // Loop over nodes
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     //Cache the shape function
+     const double psif_ = psif(l);
+     //Loop over the two coordinate directions
+     for(unsigned i=0;i<2;i++)
+      {
+       interpolated_x[i] += this->raw_nodal_position(l,i)*psif_;
+      }
+
+     //Loop over the three velocity directions
+     for(unsigned i=0;i<3;i++)
+      {
+       //Get the u_value
+       const double u_value = this->raw_nodal_value(l,u_nodal_index[i]);
+       interpolated_u[i] += u_value*psif_;
+       //dudt[i]+= du_dt_axi_nst(l,i)*psif_;
+       //Loop over derivative directions
+       for(unsigned j=0;j<2;j++)
+        {interpolated_dudx(i,j) += u_value*dpsifdx(l,j);}
+      }
+    }
+
+   //Get the mesh velocity if ALE is enabled
+   if(!ALE_is_disabled)
+    {
+     throw OomphLibError("Moving nodes not implemented\n",
+                         "AxiNavierStokes::fill_in_hessian\n",
+                                     OOMPH_EXCEPTION_LOCATION);
+    }
+
+   //r is the first position component
+   double r = interpolated_x[0];
+
+
+   //MOMENTUM EQUATIONS
+   //------------------
+   
+   //Loop over the test functions
+   for(unsigned l=0;l<n_node;l++)
+    {
+
+     //FIRST (RADIAL) MOMENTUM EQUATION
+     local_eqn = nodal_local_eqn(l,u_nodal_index[0]);
+     //If it's not a boundary condition
+     if(local_eqn >= 0)
+      {
+       //Loop over the velocity shape functions yet again
+       for(unsigned l3=0;l3<n_node;l3++)
+        {
+         //Derivative of jacobian terms with respect to radial velocity
+         local_freedom = nodal_local_eqn(l3,u_nodal_index[0]);
+         if(local_freedom >= 0)
+          {
+           //Storage for the sums
+           double temp = 0.0;
+
+           //Loop over the velocity shape functions again
+           for(unsigned l2=0;l2<n_node;l2++)
+            { 
+             local_unknown = nodal_local_eqn(l2,u_nodal_index[0]);
+             //Radial velocity component
+             if(local_unknown >= 0)
+              {
+               //Remains of convective terms
+               temp -=scaled_re*(r*psif[l2]*dpsifdx(l3,0)
+                                 + r*psif[l3]*dpsifdx(l2,0))*
+                Y[local_unknown]*testf[l]*W;
+              }
+             
+             //Axial velocity component
+             local_unknown = nodal_local_eqn(l2,u_nodal_index[1]);
+             if(local_unknown >= 0)
+              {
+               //Convective terms
+               temp -= 
+                scaled_re*r*psif[l2]*dpsifdx(l3,1)*Y[local_unknown]*testf[l]*W;
+              }
+            }
+           //Add the summed contribution to the product matrix
+           jac_y(local_eqn,local_freedom) += temp;
+          } //End of derivative wrt radial coordinate
+         
+         
+         //Derivative of jacobian terms with respect to axial velocity
+         local_freedom = nodal_local_eqn(l3,u_nodal_index[1]);
+         if(local_freedom >= 0)
+          {
+           double temp = 0.0;
+           
+           //Loop over the velocity shape functions again
+           for(unsigned l2=0;l2<n_node;l2++)
+            { 
+             local_unknown = nodal_local_eqn(l2,u_nodal_index[0]);
+             //Radial velocity component
+             if(local_unknown >= 0)
+              {
+               //Remains of convective terms
+               temp -= scaled_re*(r*psif[l3]*dpsifdx(l2,1))*
+                Y[local_unknown]*testf[l]*W;
+              }
+            }
+           //Add the summed contribution to the product matrix
+           jac_y(local_eqn,local_freedom) += temp;
+          } //End of derivative wrt axial coordinate
+
+         //Derivative of jacobian terms with respect to azimuthal velocity
+         local_freedom = nodal_local_eqn(l3,u_nodal_index[2]);
+         if(local_freedom >= 0)
+          {
+           double temp = 0.0;
+           
+           //Loop over the velocity shape functions again
+           for(unsigned l2=0;l2<n_node;l2++)
+            { 
+             //Azimuthal velocity component
+             local_unknown = nodal_local_eqn(l2,u_nodal_index[2]);
+             if(local_unknown >= 0)
+              {
+               //Convective terms
+               temp -= 
+                - scaled_re*2.0*psif[l3]*psif[l2]*Y[local_unknown]*testf[l]*W;
+              }
+            }
+           //Add the summed contibution 
+           jac_y(local_eqn,local_freedom) += temp;
+           
+          } //End of if not boundary condition statement
+        } //End of loop over freedoms
+      } //End of RADIAL MOMENTUM EQUATION
+
+       
+     //SECOND (AXIAL) MOMENTUM EQUATION
+     local_eqn = nodal_local_eqn(l,u_nodal_index[1]);
+     //If it's not a boundary condition
+     if(local_eqn >= 0)
+      {
+       //Loop over the velocity shape functions yet again
+       for(unsigned l3=0;l3<n_node;l3++)
+        {
+         //Derivative of jacobian terms with respect to radial velocity
+         local_freedom = nodal_local_eqn(l3,u_nodal_index[0]);
+         if(local_freedom >= 0)
+          {
+           double temp = 0.0;
+           
+           //Loop over the velocity shape functions again
+           for(unsigned l2=0;l2<n_node;l2++)
+            { 
+             //Axial velocity component
+             local_unknown = nodal_local_eqn(l2,u_nodal_index[1]);
+             if(local_unknown >= 0)
+              {
+               //Convective terms
+               temp -= 
+                scaled_re*(r*psif[l3]*dpsifdx(l2,0))*
+                Y[local_unknown]*testf[l]*W;
+              }
+            }
+           jac_y(local_eqn,local_freedom) += temp;
+           
+           //There are no azimithal terms in the axial momentum equation
+          } //End of loop over velocity shape functions
+
+
+         //Derivative of jacobian terms with respect to axial velocity
+         local_freedom = nodal_local_eqn(l3,u_nodal_index[1]);
+         if(local_freedom >= 0)
+          {
+           double temp = 0.0;
+           
+           //Loop over the velocity shape functions again
+           for(unsigned l2=0;l2<n_node;l2++)
+            { 
+             local_unknown = nodal_local_eqn(l2,u_nodal_index[0]);
+             //Radial velocity component
+             if(local_unknown >= 0)
+              {
+               //Convective terms
+               temp -= 
+                scaled_re*r*psif[l2]*dpsifdx(l3,0)*Y[local_unknown]*testf[l]*W;
+              }
+             
+             //Axial velocity component
+             local_unknown = nodal_local_eqn(l2,u_nodal_index[1]);
+             if(local_unknown >= 0)
+              {
+               //Convective terms
+               temp -= 
+              scaled_re*(
+               r*psif[l2]*dpsifdx(l3,1)
+                  + r*psif[l3]*dpsifdx(l2,1))*Y[local_unknown]*testf[l]*W;
+              }
+           
+             //There are no azimithal terms in the axial momentum equation
+            } //End of loop over velocity shape functions
+           
+           //Add summed contributiont to jacobian product matrix
+           jac_y(local_eqn,local_freedom) += temp;
+          }
+        } //End of loop over local freedoms
+
+      } //End of AXIAL MOMENTUM EQUATION
+     
+     //THIRD (AZIMUTHAL) MOMENTUM EQUATION
+     local_eqn = nodal_local_eqn(l,u_nodal_index[2]);
+     if(local_eqn >= 0)
+      {
+       //Loop over the velocity shape functions yet again
+       for(unsigned l3=0;l3<n_node;l3++)
+        {
+         //Derivative of jacobian terms with respect to radial velocity
+         local_freedom = nodal_local_eqn(l3,u_nodal_index[0]);
+         if(local_freedom >= 0)
+          {
+           double temp = 0.0;
+
+           //Loop over the velocity shape functions again
+           for(unsigned l2=0;l2<n_node;l2++)
+            { 
+             //Azimuthal velocity component
+             local_unknown = nodal_local_eqn(l2,u_nodal_index[2]);
+             if(local_unknown >= 0)
+              {
+               //Convective terms
+               temp -= 
+                scaled_re*(r*psif[l3]*dpsifdx(l2,0)
+                           + psif[l3]*psif[l2])*Y[local_unknown]*testf[l]*W;
+              }
+            }
+           //Add the summed contribution to the jacobian eigenvector sum
+           jac_y(local_eqn,local_freedom) += temp;
+          }
+         
+         //Derivative of jacobian terms with respect to axial velocity
+         local_freedom = nodal_local_eqn(l3,u_nodal_index[1]);
+         if(local_freedom >= 0)
+          {
+           double temp = 0.0;
+
+           //Loop over the velocity shape functions again
+           for(unsigned l2=0;l2<n_node;l2++)
+            { 
+             //Azimuthal velocity component
+             local_unknown = nodal_local_eqn(l2,u_nodal_index[2]);
+             if(local_unknown >= 0)
+              {
+               //Convective terms
+               temp  -= 
+                scaled_re*(r*psif[l3]*dpsifdx(l2,1))*
+                Y[local_unknown]*testf[l]*W;
+              }
+            }
+           //Add the summed contribution to the jacobian eigenvector sum
+           jac_y(local_eqn,local_freedom) += temp;
+          }
+
+         
+         //Derivative of jacobian terms with respect to azimuthal velocity
+         local_freedom = nodal_local_eqn(l3,u_nodal_index[2]);
+         if(local_freedom >= 0)
+          {
+           double temp = 0.0;
+           
+
+           //Loop over the velocity shape functions again
+           for(unsigned l2=0;l2<n_node;l2++)
+            { 
+             //Radial velocity component
+             local_unknown = nodal_local_eqn(l2,u_nodal_index[0]);
+             if(local_unknown >= 0)
+              {
+               //Convective terms
+               temp -= 
+                scaled_re*(r*psif[l2]*dpsifdx(l3,0)
+                  + psif[l2]*psif[l3])*Y[local_unknown]*testf[l]*W;
+              }
+             
+             //Axial velocity component
+             local_unknown = nodal_local_eqn(l2,u_nodal_index[1]);
+             if(local_unknown >= 0)
+              {
+               //Convective terms
+               temp -= 
+                scaled_re*r*psif[l2]*dpsifdx(l3,1)*Y[local_unknown]*testf[l]*W;
+              }
+            }
+           //Add the fully summed contribution
+           jac_y(local_eqn,local_freedom) += temp;
+          }
+        } //End of loop over freedoms
+
+         //There are no pressure terms
+      } //End of AZIMUTHAL EQUATION
+
+    } //End of loop over shape functions
+  }
+
+ //We have now assembled the matrix (d J_{ij} Y_j)/d u_{k}
+ //and simply need to sum over the vectors
+ const unsigned n_vec = C.nrow();
+ for(unsigned i=0;i<n_dof;i++)
+  {
+   for(unsigned k=0;k<n_dof;k++)
+    {
+     //Cache the value of the hessian y product
+     const double j_y = jac_y(i,k);
+     //Loop over the possible vectors
+     for(unsigned v=0;v<n_vec;v++)
+      {
+       product(v,i) += j_y*C(v,k);
+      }
+    }
+  }
+}
+
+
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
@@ -1509,7 +2587,7 @@ void AxisymmetricQCrouzeixRaviartElement::get_dof_numbers_for_unknowns(
  std::pair<unsigned,unsigned> block_lookup;
  
  // pressure dof number (is this really OK?)
- unsigned pressure_dof_number = 4;
+ unsigned pressure_dof_number = 3;
 
  // loop over the pressure values
  for (unsigned n = 0; n < n_press; n++)

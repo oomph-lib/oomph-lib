@@ -627,7 +627,12 @@ class SuperLUSolver : public LinearSolver
 
  // SuperLU Dist member data
  ///////////////////////////
+public:
+ /// \short Static flag that determines whether the warning about
+ /// incorrect distribution of RHSs will be printed or not
+ static bool Suppress_incorrect_rhs_distribution_warning_in_resolve;
 
+private:
  /// \short Flag that determines whether the MPIProblem based solve function 
  /// uses the global or distributed version of SuperLU_DIST 
  /// (default value is false).

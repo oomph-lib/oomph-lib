@@ -202,14 +202,48 @@ public virtual ElementWithZ2ErrorEstimator
   private:
  
  /// \short Add element's contribution to the elemental residual vector 
- /// and/or Jacobian matrix 
- /// flag=1: compute both
+ /// and/or Jacobian matrix and mass matrix 
+ /// flag=2: compute all
+ /// flag=1: compute both residual and Jacobian
  /// flag=0: compute only residual vector
  void fill_in_generic_residual_contribution_axi_nst(
   Vector<double> &residuals, 
   DenseMatrix<double> &jacobian, 
   DenseMatrix<double> &mass_matrix,
   unsigned flag);
+
+ /// \short Add element's contribution to the derivative of the 
+ /// elemental residual vector 
+ /// and/or Jacobian matrix and/or mass matrix
+ /// flag=2: compute all
+ /// flag=1: compute both residual and Jacobian
+ /// flag=0: compute only residual vector
+ void fill_in_generic_dresidual_contribution_axi_nst(
+  double* const &parameter_pt,
+  Vector<double> &dres_dparam, 
+  DenseMatrix<double> &djac_dparam, 
+  DenseMatrix<double> &dmass_matrix_dparam,
+  unsigned flag)
+  {
+   throw OomphLibError("Not yet implemented\n",
+                       "RefineableAxiNavierStokes::fill_in_generic_dresidual",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+
+ /// \short Compute the hessian tensor vector products required to
+ /// perform continuation of bifurcations analytically
+ void fill_in_contribution_to_hessian_vector_products(
+  Vector<double> const &Y,
+  DenseMatrix<double> const &C,
+  DenseMatrix<double> &product)
+  {
+   throw OomphLibError(
+    "Not yet implemented\n",
+    "RefineableAxiNavierStokes::fill_in_contribution_to_hessian_vector_products",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+
+
 
 };
 

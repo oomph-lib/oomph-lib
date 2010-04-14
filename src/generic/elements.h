@@ -513,6 +513,53 @@ class GeneralisedElement
   Vector<double> &residuals,
   DenseMatrix<double> &jacobian, DenseMatrix<double> &mass_matrix);
 
+ /// \short Add the elemental contribution to the derivatives of 
+ /// the residuals with respect to a parameter. This function should
+ /// NOT initialise any entries and must be called after the entries
+ /// have been initialised to zero
+ /// The default implementation is to use finite differences to calculate 
+ /// the derivatives.
+ virtual void fill_in_contribution_to_dresiduals_dparameter(
+  double* const &parameter_pt,
+  Vector<double> &dres_dparam);
+
+
+ /// \short Add the elemental contribution to the derivatives of 
+ /// the elemental Jacobian matrix 
+ /// and residuals with respect to a parameter. This function should
+ /// NOT initialise any entries and must be called after the entries
+ /// have been initialised to zero
+ /// The default implementation is to use finite differences to calculate 
+ /// the derivatives.
+ virtual void fill_in_contribution_to_djacobian_dparameter(
+  double* const &parameter_pt,
+  Vector<double> &dres_dparam, 
+  DenseMatrix<double> &djac_dparam);
+
+ /// \short Add the elemental contribution to the derivative of the
+ /// jacobian matrix,
+ /// mass matrix and the residuals vector with respect to the 
+ /// passed parameter. Note that
+ /// this function should NOT initialise any entries.
+ /// It must be called after the residuals vector and 
+ /// matrices have been initialised to zero. 
+ virtual void fill_in_contribution_to_djacobian_and_dmass_matrix_dparameter(
+  double* const &parameter_pt,
+  Vector<double> &dres_dparam,
+  DenseMatrix<double> &djac_dparam, 
+  DenseMatrix<double> &dmass_matrix_dparam);
+
+
+ /// \short Fill in contribution to the product of the Hessian 
+ /// (derivative of Jacobian with
+ /// respect to all variables) an eigenvector, Y, and 
+ /// other specified vectors, C
+ /// (d(J_{ij})/d u_{k}) Y_{j} C_{k}
+ virtual void fill_in_contribution_to_hessian_vector_products(
+  Vector<double> const &Y,
+  DenseMatrix<double> const &C,
+  DenseMatrix<double> &product);
+
 public:
 
  /// \short Constructor: Initialise all pointers and all values to zero
@@ -836,6 +883,69 @@ public:
    fill_in_contribution_to_jacobian_and_mass_matrix(residuals,jacobian,
                                                     mass_matrix);
   }
+
+
+ /// \short Calculate the derivatives of the residuals with respect to
+ /// a parameter
+ virtual void get_dresiduals_dparameter(double* const &parameter_pt,
+                                        Vector<double> &dres_dparam)
+  {
+   //Zero the dres_dparam vector
+   dres_dparam.initialise(0.0);
+   //Add the elemental contribution to the residuals vector
+   this->fill_in_contribution_to_dresiduals_dparameter(parameter_pt,
+                                                       dres_dparam);
+  }
+
+ /// \short Calculate the derivatives of the elemental Jacobian matrix 
+ /// and residuals with respect to a parameter
+ virtual void get_djacobian_dparameter(double* const &parameter_pt,
+                                       Vector<double> &dres_dparam, 
+                                       DenseMatrix<double> &djac_dparam) 
+  {
+   //Zero the residuals vector
+   dres_dparam.initialise(0.0);
+   //Zero the jacobian matrix
+   djac_dparam.initialise(0.0);
+   //Add the elemental contribution to the residuals vector
+   this->fill_in_contribution_to_djacobian_dparameter(parameter_pt,dres_dparam,
+                                                      djac_dparam);
+  }
+
+ /// \short Calculate the derivatives of the elemental Jacobian matrix 
+ /// mass matrix and residuals with respect to a parameter
+ virtual void get_djacobian_and_dmass_matrix_dparameter(
+  double* const &parameter_pt,
+  Vector<double> &dres_dparam, 
+  DenseMatrix<double> &djac_dparam,
+  DenseMatrix<double> &dmass_matrix_dparam) 
+  {
+   //Zero the residuals derivative vector
+   dres_dparam.initialise(0.0);
+   //Zero the jacobian derivative  matrix
+   djac_dparam.initialise(0.0);
+   //Zero the mass matrix derivative 
+   dmass_matrix_dparam.initialise(0.0);
+   //Add the elemental contribution to the residuals vector and matrices
+   this->fill_in_contribution_to_djacobian_and_dmass_matrix_dparameter(
+    parameter_pt,dres_dparam,djac_dparam,dmass_matrix_dparam);
+  }
+
+
+ /// \short Calculate the product of the Hessian (derivative of Jacobian with
+ /// respect to all variables) an eigenvector, Y, and 
+ /// other specified vectors, C
+ /// (d(J_{ij})/d u_{k}) Y_{j} C_{k}
+ virtual void get_hessian_vector_products(Vector<double> const &Y,
+                                          DenseMatrix<double> const &C,
+                                          DenseMatrix<double> &product)
+  {
+   //Initialise the product to zero
+   product.initialise(0.0);
+   ///Add the elemental contribution to the product
+   this->fill_in_contribution_to_hessian_vector_products(Y,C,product);
+  }
+ 
 
  /// \short Self-test: Have all internal values been classified as 
  /// pinned/unpinned? Return 0 if OK. 

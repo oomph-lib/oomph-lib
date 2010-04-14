@@ -50,7 +50,7 @@ namespace oomph
  class Problem;
  
 //=============================================================
-/// A class that is used to define the functions used to
+/// \short A class that is used to define the functions used to
 /// assemble the elemental contributions to the 
 /// residuals vector and Jacobian matrix that define
 /// the problem being solved. 
@@ -91,6 +91,30 @@ class AssemblyHandler
   GeneralisedElement* const &elem_pt,
   Vector<Vector<double> >&vec, Vector<DenseMatrix<double> > &matrix);
 
+ /// \short Calculate the derivative of the residuals with respect to 
+ /// a parameter
+ virtual void get_dresiduals_dparameter(GeneralisedElement* const &elem_pt,
+                                        double* const &parameter_pt,
+                                        Vector<double> &dres_dparam);
+
+ 
+ /// \short Calculate the derivative of the residuals and jacobian 
+ /// with respect to a parameter
+ virtual void get_djacobian_dparameter(GeneralisedElement* const &elem_pt,
+                                       double* const &parameter_pt,
+                                       Vector<double> &dres_dparam,
+                                       DenseMatrix<double> &djac_dparam);
+
+ /// \short Calculate the product of the Hessian (derivative of Jacobian with
+ /// respect to all variables) an eigenvector, Y, and 
+ /// other specified vectors, C
+ /// (d(J_{ij})/d u_{k}) Y_{j} C_{k}
+ virtual void get_hessian_vector_products(GeneralisedElement* const &elem_pt,
+                                          Vector<double> const &Y,
+                                          DenseMatrix<double> const &C,
+                                          DenseMatrix<double> &product);
+
+
  /// \short Return an unsigned integer to indicate whether the
  /// handler is a bifurcation tracking handler. The default
  /// is zero (not)
@@ -112,7 +136,7 @@ class AssemblyHandler
 
 
 //=============================================================
-/// A class that is used to define the functions used to
+/// \short A class that is used to define the functions used to
 /// assemble and invert the mass matrix when taking an explicit
 /// timestep. The idea is simply to replace the jacobian matrix
 /// with the mass matrix and then our standard linear solvers
@@ -158,7 +182,7 @@ class ExplicitTimeStepHandler : public AssemblyHandler
 
 
 //=============================================================
-/// A class that is used to define the functions used to
+/// \short A class that is used to define the functions used to
 /// assemble the elemental contributions to the 
 /// mass matrix and jacobian (stiffness) matrix that define
 /// a generalised eigenproblem.
@@ -202,6 +226,61 @@ class EigenProblemHandler : public AssemblyHandler
  ~EigenProblemHandler() {}
 
 };
+
+
+//==========================================================================
+/// \short A class that is used to define the functions used when assembling 
+/// the derivatives of the residuals with respect to a parameter.
+/// The idea is to replace get_residuals with get_dresiduals_dparameter with
+/// a particular parameter and assembly handler that are passed on
+/// assembly.
+//==========================================================================
+class ParameterDerivativeHandler : public AssemblyHandler
+{
+ ///The value of the parameter
+ double *Parameter_pt;
+
+ ///The original assembly handler
+ AssemblyHandler* Assembly_handler_pt;
+
+  public:
+
+ ///Store the original assembly handler and parameter
+ ParameterDerivativeHandler(AssemblyHandler* const &assembly_handler_pt,
+                            double* const &parameter_pt) : 
+  Parameter_pt(parameter_pt), Assembly_handler_pt(assembly_handler_pt) 
+  { }
+
+ ///Return the number of degrees of freedom in the element elem_pt
+ ///Pass through to the original assembly handler
+ unsigned ndof(GeneralisedElement* const &elem_pt)
+  {return Assembly_handler_pt->ndof(elem_pt);}
+ 
+ ///\short Return the global equation number of the local unknown ieqn_local
+ ///in elem_pt.Pass through to the original assembly handler
+ unsigned long eqn_number(GeneralisedElement* const &elem_pt,
+                                  const unsigned &ieqn_local)
+  {return Assembly_handler_pt->eqn_number(elem_pt,ieqn_local);}
+ 
+ ///\short Return the contribution to the residuals of the element elem_pt
+ /// by using the derivatives
+ void get_residuals(GeneralisedElement* const &elem_pt,
+                    Vector<double> &residuals)
+  {Assembly_handler_pt->get_dresiduals_dparameter(elem_pt,Parameter_pt,
+                                                  residuals);}
+
+
+ /// \short Calculate the elemental Jacobian matrix "d equation 
+ /// / d variable" for elem_pt. 
+ /// Overloaded to return the derivatives wrt the parameter
+ void get_jacobian(GeneralisedElement* const &elem_pt,
+                   Vector<double> &residuals, 
+                   DenseMatrix<double> &jacobian)
+  {Assembly_handler_pt->get_djacobian_dparameter(elem_pt,Parameter_pt,
+                                                 residuals,jacobian);}
+
+};
+
 
 
 
@@ -348,6 +427,26 @@ class FoldHandler : public AssemblyHandler
                     Vector<double> &residuals, 
                     DenseMatrix<double> &jacobian);
 
+  /// \short Overload the derivatives of the residuals with respect to 
+  /// a parameter to apply to the augmented system
+   void get_dresiduals_dparameter(GeneralisedElement* const &elem_pt,
+                                        double* const &parameter_pt,
+                                        Vector<double> &dres_dparam);
+
+   /// \short Overload the derivative of the residuals and jacobian 
+   /// with respect to a parameter so that it breaks
+   void get_djacobian_dparameter(GeneralisedElement* const &elem_pt,
+                                 double* const &parameter_pt,
+                                 Vector<double> &dres_dparam,
+                                 DenseMatrix<double> &djac_dparam);
+
+   /// \short Overload the hessian vector product function so that
+   /// it breaks
+   void get_hessian_vector_products(GeneralisedElement* const &elem_pt,
+                                    Vector<double> const &Y,
+                                    DenseMatrix<double> const &C,
+                                    DenseMatrix<double> &product);
+   
   ///\short Indicate that we are tracking a fold bifurcation by returning 1
   int bifurcation_type() const {return 1;}
 
@@ -394,12 +493,16 @@ class BlockPitchForkLinearSolver : public LinearSolver
  ///Pointer to the storage for the vector d
  DoubleVector *D_pt;
 
+ ///Pointer to the storage for the vector of derivatives with respect
+ ///to the bifurcation parameter
+ DoubleVector *dJy_dparam_pt;
+
 public:
  
  ///Constructor, inherits the original linear solver
  BlockPitchForkLinearSolver(LinearSolver* const linear_solver_pt)
   : Linear_solver_pt(linear_solver_pt), Problem_pt(0),
-   B_pt(0), C_pt(0), D_pt(0) {}
+   B_pt(0), C_pt(0), D_pt(0), dJy_dparam_pt(0) {}
  
  ///Destructor: clean up the allocated memory
  ~BlockPitchForkLinearSolver();
@@ -606,6 +709,27 @@ public:
                     Vector<double> &residuals, 
                     DenseMatrix<double> &jacobian);
 
+   /// \short Overload the derivatives of the residuals with respect to 
+  /// a parameter to apply to the augmented system
+   void get_dresiduals_dparameter(GeneralisedElement* const &elem_pt,
+                                        double* const &parameter_pt,
+                                        Vector<double> &dres_dparam);
+
+   /// \short Overload the derivative of the residuals and jacobian 
+   /// with respect to a parameter so that it breaks
+   void get_djacobian_dparameter(GeneralisedElement* const &elem_pt,
+                                 double* const &parameter_pt,
+                                 Vector<double> &dres_dparam,
+                                 DenseMatrix<double> &djac_dparam);
+
+   /// \short Overload the hessian vector product function so that
+   /// it breaks
+   void get_hessian_vector_products(GeneralisedElement* const &elem_pt,
+                                    Vector<double> const &Y,
+                                    DenseMatrix<double> const &C,
+                                    DenseMatrix<double> &product);
+
+
   ///\short Indicate that we are tracking a pitchfork 
   /// bifurcation by returning 2
   int bifurcation_type() const {return 2;}
@@ -795,7 +919,27 @@ class HopfHandler : public AssemblyHandler
                     Vector<double> &residuals, 
                     DenseMatrix<double> &jacobian);
 
-   ///\short Indicate that we are tracking a Hopf 
+  /// \short Overload the derivatives of the residuals with respect to 
+  /// a parameter to apply to the augmented system
+  void get_dresiduals_dparameter(GeneralisedElement* const &elem_pt,
+                                 double* const &parameter_pt,
+                                 Vector<double> &dres_dparam);
+  
+  /// \short Overload the derivative of the residuals and jacobian 
+  /// with respect to a parameter so that it breaks
+  void get_djacobian_dparameter(GeneralisedElement* const &elem_pt,
+                                double* const &parameter_pt,
+                                Vector<double> &dres_dparam,
+                                DenseMatrix<double> &djac_dparam);
+  
+  /// \short Overload the hessian vector product function so that
+  /// it breaks
+  void get_hessian_vector_products(GeneralisedElement* const &elem_pt,
+                                   Vector<double> const &Y,
+                                   DenseMatrix<double> const &C,
+                                   DenseMatrix<double> &product);
+  
+  ///\short Indicate that we are tracking a Hopf 
   /// bifurcation by returning 3
   int bifurcation_type() const {return 3;}
 

@@ -151,7 +151,12 @@ fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
  //Otherwise the pressure is not stored at a node and so cannot hang
  else
   {
-   assert(false); // pressure advection diffusion doesn't work for this one!
+   // pressure advection diffusion doesn't work for this one!
+   throw OomphLibError(
+    "Pressure advection diffusion does not work in this case\n",
+    "RefineableFpPressureAdvDiffRobinBCElement<ELEMENT>::fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc()",
+    OOMPH_EXCEPTION_LOCATION);
+
    for(unsigned l=0;l<n_pres;++l)
     {pressure_dof_is_hanging[l] = false;}
   }

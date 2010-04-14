@@ -1740,6 +1740,8 @@ class BoundaryNode: public NODE_TYPE, public BoundaryNodeBase
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+   //Set the number of values
+   this->Nvalue = Copied_node_pt->nvalue();
    this->Value = Copied_node_pt->Value;
    this->Eqn_number = Copied_node_pt->Eqn_number;
    //We won't ever need to worry about updating position pointers

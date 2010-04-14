@@ -357,11 +357,30 @@ protected:
   } 
  
  ///\short Compute the residuals for the Navier--Stokes equations; 
- /// flag=1(or 0): do (or don't) compute the Jacobian as well. 
- virtual void fill_in_generic_residual_contribution_axi_nst(Vector<double> &residuals, 
-                                                            DenseMatrix<double> &jacobian, 
-                                                            DenseMatrix<double> &mass_matrix, 
-                                                            unsigned flag);
+ /// flag=2 or 1 or 0: compute the Jacobian and/or mass matrix
+ /// as well. 
+ virtual void fill_in_generic_residual_contribution_axi_nst(
+  Vector<double> &residuals, 
+  DenseMatrix<double> &jacobian, 
+  DenseMatrix<double> &mass_matrix, 
+  unsigned flag);
+
+ ///\short Compute the derivative of residuals for the 
+ /// Navier--Stokes equations; with respect to a parameeter
+ /// flag=2 or 1 or 0: compute the Jacobian and/or mass matrix as well
+ virtual void fill_in_generic_dresidual_contribution_axi_nst(
+  double* const &parameter_pt,
+  Vector<double> &dres_dparam, 
+  DenseMatrix<double> &djac_dparam, 
+  DenseMatrix<double> &dmass_matrix_dparam, 
+  unsigned flag);
+
+ /// \short Compute the hessian tensor vector products required to
+ /// perform continuation of bifurcations analytically
+ void fill_in_contribution_to_hessian_vector_products(
+  Vector<double> const &Y,
+  DenseMatrix<double> const &C,
+  DenseMatrix<double> &product);
     
 public:
 
@@ -621,14 +640,53 @@ public:
  
  /// Add the element's contribution to its residuals vector,
  /// jacobian matrix and mass matrix
- void fill_in_contribution_to_jacobian_and_mass_matrix(Vector<double> &residuals, 
-                                                       DenseMatrix<double> &jacobian, 
-                                                       DenseMatrix<double> &mass_matrix)
+ void fill_in_contribution_to_jacobian_and_mass_matrix(
+  Vector<double> &residuals, 
+  DenseMatrix<double> &jacobian, 
+  DenseMatrix<double> &mass_matrix)
   {
    //Call the generic routine with the flag set to 2
    fill_in_generic_residual_contribution_axi_nst(
     residuals,jacobian,mass_matrix,2);
   }
+
+
+ /// Compute the element's residual Vector
+ void fill_in_contribution_to_dresiduals_dparameter(
+  double* const &parameter_pt,Vector<double> &dres_dparam)
+  {
+   //Call the generic residuals function with flag set to 0
+   //and using a dummy matrix argument
+   fill_in_generic_dresidual_contribution_axi_nst(parameter_pt,
+    dres_dparam,GeneralisedElement::Dummy_matrix,
+    GeneralisedElement::Dummy_matrix,0);
+  }
+
+ ///\short Compute the element's residual Vector and the jacobian matrix
+ /// Virtual function can be overloaded by hanging-node version
+ void fill_in_contribution_to_djacobian_dparameter(
+  double* const &parameter_pt,Vector<double> &dres_dparam,
+  DenseMatrix<double> &djac_dparam)
+  {
+   //Call the generic routine with the flag set to 1
+   fill_in_generic_dresidual_contribution_axi_nst(
+    parameter_pt,
+    dres_dparam,djac_dparam,GeneralisedElement::Dummy_matrix,1);
+  }
+ 
+ /// Add the element's contribution to its residuals vector,
+ /// jacobian matrix and mass matrix
+ void fill_in_contribution_to_djacobian_and_dmass_matrix_dparameter(
+  double* const &parameter_pt,
+  Vector<double> &dres_dparam, 
+  DenseMatrix<double> &djac_dparam, 
+  DenseMatrix<double> &dmass_matrix_dparam)
+  {
+   //Call the generic routine with the flag set to 2
+   fill_in_generic_dresidual_contribution_axi_nst(
+    parameter_pt,dres_dparam,djac_dparam,dmass_matrix_dparam,2);
+  }
+
 
  /// Compute vector of FE interpolated velocity u at local coordinate s
  void interpolated_u_axi_nst(const Vector<double> &s, 

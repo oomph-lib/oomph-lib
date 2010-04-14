@@ -88,7 +88,7 @@ int main(int argc, char* argv[])
   {
    std::cout << "Provide two (or no) input arguments, indicating stem of\n "
              << "tecplot boundary file" << std::endl;
-   assert(false);
+   std::assert(false);
   }
  
 

@@ -1911,7 +1911,42 @@ fill_in_generic_residual_contribution_nst(Vector<double> &residuals,
  
 }
 
+//==============================================================
+///  Compute the derivatives of the residuals for the Navier--Stokes 
+///  equations with respect to a parameter; 
+/// flag=2 or 1 or 0: do (or don't) compute the 
+///  Jacobian and mass matrix as well  
+//==============================================================
+template<unsigned DIM>
+void NavierStokesEquations<DIM>::
+fill_in_generic_dresidual_contribution_nst(
+ double* const &parameter_pt,
+ Vector<double> &dres_dparam, 
+ DenseMatrix<double> &djac_dparam, 
+ DenseMatrix<double> &dmass_matrix_dparam,
+ unsigned flag)
+{
+ throw OomphLibError("Not yet implemented\n",
+                     "NavierStokes::fill_in_generic_dresidual",
+                     OOMPH_EXCEPTION_LOCATION);
+}
 
+//==================================================================
+/// \short Compute the hessian tensor vector products required to
+/// perform continuation of bifurcations analytically
+//================================================================ 
+template<unsigned DIM>
+void NavierStokesEquations<DIM>::
+fill_in_contribution_to_hessian_vector_products(
+ Vector<double> const &Y,
+ DenseMatrix<double> const &C,
+ DenseMatrix<double> &product)
+{
+ throw OomphLibError(
+  "Not yet implemented\n",
+  "NavierStokes::fill_in_contribution_to_hessian_vector_products",
+  OOMPH_EXCEPTION_LOCATION);
+}
 
 
 //======================================================================

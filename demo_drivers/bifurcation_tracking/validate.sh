@@ -1,7 +1,7 @@
 #! /bin/sh
 
 #Set the number of tests to be checked
-NUM_TESTS=5
+NUM_TESTS=6
 
 # Setup validation directory
 #---------------------------
@@ -15,7 +15,7 @@ mkdir Validation
 
 cd Validation
 mkdir RESLT_fold RESLT_pitch RESLT_hopf RESLT_adaptive_pitch \
-      RESLT_adaptive_hopf
+      RESLT_adaptive_hopf RESLT_track_pitch
 
 echo "Running fold bifurcation validation "
 cd RESLT_fold
@@ -61,7 +61,7 @@ cat RESLT_pitch/trace.dat > pitch.dat
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../bin/fpdiff.py ../validata/pitch.dat.gz pitch.dat  >> validation.log
+../../../bin/fpdiff.py ../validata/pitch.dat.gz pitch.dat >> validation.log
 fi
 
 echo "Running hopf bifurcation validation "
@@ -87,6 +87,28 @@ else
     hopf.dat  0.6 1.0e-14  >> validation.log
 fi
 
+echo "Running pitchfork tracking validation "
+cd RESLT_track_pitch
+../../track_pitch > ../OUTPUT_track_pitch
+cd ..
+
+echo "done"
+echo " " >> validation.log
+echo "Pitchfork bifurcation tracking validation" >> validation.log
+echo "------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT_track_pitch/trace_pitch.dat > track_pitch.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../bin/fpdiff.py ../validata/track_pitch.dat.gz \
+    track_pitch.dat  0.1 3.0e-10  >> validation.log
+fi
 
 echo "Running adaptive pitchfork bifurcation validation "
 cd RESLT_adaptive_pitch

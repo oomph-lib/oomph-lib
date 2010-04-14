@@ -1400,6 +1400,13 @@ void SuperLUSolver::backsub(const DoubleVector &rhs,
 }
 
 #ifdef OOMPH_HAS_MPI
+//=========================================================================
+///Static warning to suppress warnings about incorrect distribution of
+///RHS vector. Default is false
+//=========================================================================
+bool SuperLUSolver::Suppress_incorrect_rhs_distribution_warning_in_resolve
+                  =false;
+
 //=============================================================================
 /// Do the backsubstitution for SuperLU solver. \n
 /// Note - this method performs no paranoid checks - these are all performed in
@@ -1419,18 +1426,37 @@ void SuperLUSolver::backsub_distributed(const DoubleVector &rhs,
                        "SuperLUSolver::resolve()",
                        OOMPH_EXCEPTION_LOCATION);
   }
+#endif
  // check that the rhs distribution is the same as the distribution as this 
- // solver
+ // solver. If not redistribute and issue a warning
  if (!(*rhs.distribution_pt() == *this->distribution_pt()))
   {
-   std::ostringstream error_message_stream;
-   error_message_stream 
-    << "The distribution of rhs vector must match the solver";
-   throw OomphLibError(error_message_stream.str(),
-                       "SuperLUSolver::resolve()",
-                       OOMPH_EXCEPTION_LOCATION);
+   if(!Suppress_incorrect_rhs_distribution_warning_in_resolve)
+    {
+     std::ostringstream warning_stream;
+     warning_stream 
+      << "The distribution of rhs vector does not match that ofthe solver.\n";
+     warning_stream
+      << "The rhs will be redistributed, which is likely to  be inefficient\n";
+     warning_stream
+      << "To remove this warning you can either:\n"
+      << "    i) Ensure that the rhs vector has the correct distribution\n"
+    << "       before calling the resolve() function\n"
+      << "or ii) Set the flag \n"
+      << " SuperLUSolver::Suppress_incorrect_rhs_distribution_warning_in_resolve\n"
+      << "       to be true\n\n";
+     
+     OomphLibWarning(warning_stream.str(),
+                     "SuperLUSolver::resolve()",
+                     OOMPH_EXCEPTION_LOCATION);
+    }
+
+   //Have to cast away const-ness (which tells us that we shouldn't really
+   //be doing this!)
+   const_cast<DoubleVector&>(rhs).redistribute(this->distribution_pt());
   }
  
+#ifdef PARANOID
  // if the result vector is setup then check it has the same distribution
  // as the rhs
  if (result.is_distribution_built())

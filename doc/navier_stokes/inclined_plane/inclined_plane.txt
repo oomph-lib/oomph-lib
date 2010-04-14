@@ -86,7 +86,12 @@ and downstream computational boundaries.
 We have chosen the last option, in which case the hydrostatic
  pressure gradient must be consistent with the external pressure. In
  other words, the pressure must be zero at the free surface
- (\f$y=0\f$).
+ (\f$y=0\f$). Changing the external pressure would correspond to
+ changing the film thickness, so the external pressure is directly
+ responsible for enforcing a specific volume constraint, unless 
+ \f$\alpha = \pi/2\f$. When \f$\alpha = \pi/2\f$ there is no variation in 
+  hydrostatic pressure through the film and its thickness is
+  not specified by the external pressure.
 
 <HR>
 <HR>
@@ -286,7 +291,8 @@ class.
 \section exercises Exercises
 -# Confirm that the steady solution agrees with the exact solution.
 -# Investigate what happens when the angle is varied. What happens
-when the angle is set to zero?
+when the angle is set to zero? What happens when the angle is set to
+\f$\pi/2\f$?
 -# What happens if the hydrostatic pressure boundary conditions are
 not applied?
 

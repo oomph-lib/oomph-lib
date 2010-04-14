@@ -2,7 +2,7 @@
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 # Name of executable
-check_PROGRAMS=fold hopf pitchfork adaptive_pitchfork adaptive_hopf
+check_PROGRAMS=fold hopf pitchfork track_pitch adaptive_pitchfork adaptive_hopf
 
 #----------------------------------------------------------------------
 
@@ -30,6 +30,14 @@ pitchfork_SOURCES = pitchfork.cc
 # $(FLIBS) is included in case the solver involves fortran sources
 pitchfork_LDADD = -L@libdir@ -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
+#---------------------------------------------------------------------
+
+# Sources for executable
+track_pitch_SOURCES = track_pitch.cc 
+# Required libraries
+# $(FLIBS) is included in case the solver involves fortran sources
+track_pitch_LDADD = -L@libdir@ -laxisym_navier_stokes -lgeneric \
+                           $(EXTERNAL_LIBS) $(FLIBS)
 #---------------------------------------------------------------------
 
 # Sources for executable

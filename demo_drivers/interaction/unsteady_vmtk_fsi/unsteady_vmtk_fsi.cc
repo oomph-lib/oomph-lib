@@ -938,9 +938,10 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
  // Check if it's been opened succesfully
  if (input_file_pt==0)
   {
-   oomph_info << "ERROR while trying to open boundary enumeration file " 
-              << std::endl;
-   assert(false);
+   throw OomphLibError(
+   	"ERROR while trying to open boundary enumeration file ",
+        "UnstructuredFSIProblem::UnstructuredFSIProblem()",
+	 OOMPH_EXCEPTION_LOCATION);
   }
    
  std::ifstream boundary_enumeration("boundary_enumeration.dat");

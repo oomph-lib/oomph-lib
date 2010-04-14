@@ -1,45 +1,60 @@
 #! /bin/sh
 
-
 #Set the number of tests to be checked
 NUM_TESTS=1
 
-
 # Setup validation directory
 #---------------------------
-touch Validation
-rm -r -f Validation
+rm -rf Validation
 mkdir Validation
+
+#######################################################################
 
 cd Validation
 
-echo "Running pseudo-solid collapsible tube validation "
+
+
+# Validation for buckling of clamped shell with arclength continuation
+#---------------------------------------------------------------------
+
 mkdir RESLT
-../pseudo_solid_collapsible_tube bla > OUTPUT
+cd RESLT
+
+echo "Running clamped_shell with arclength continuation validation  "
+$MPI_RUN_COMMAND ../../clamped_shell_with_arclength_cont > ../OUTPUT_clamped_shell_with_arclength_cont
+
 echo "done"
+cd ..
 echo " " >> validation.log
-echo "Pseudo-solid collapsible tube validation" >> validation.log
-echo "----------------------------------------" >> validation.log
+echo "Clamped shell buckling with arclength continuation validation" \
+ >> validation.log
+echo "(parallel continuation test)"
+echo "---------------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat RESLT/solid_soln3.dat  RESLT/solid_soln4.dat \
-    RESLT/fluid_soln3.dat  RESLT/fluid_soln4.dat > results.dat
-
+cat RESLT/final_shape.dat RESLT/trace.dat RESLT/trace_disp.dat > shell_with_arclength_cont_results.dat
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/results.dat.gz \
-    results.dat  0.1 2.0e-13 >> validation.log
+../../../../../bin/fpdiff.py ../validata/shell_with_arclength_cont_results.dat.gz \
+ shell_with_arclength_cont_results.dat 0.1 1.0e-9 >> validation.log
 fi
 
 
+mv RESLT RESLT_with_arclength
+
+
+
+
+# Append output to global validation log file
+#--------------------------------------------
+cat validation.log >> ../../../../../validation.log
 
 cd ..
-
 
 
 #######################################################################

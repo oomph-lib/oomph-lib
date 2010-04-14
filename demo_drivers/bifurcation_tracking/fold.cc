@@ -97,7 +97,7 @@ class GelfandBratuElement : public QElement<1,NNODE_1D>
 
  
  /// \short Calculate the elemental contributions to the global 
- /// residual vector for the weak form of the Poisson equation
+ /// residual vector for the weak form of the Gelfand-Bratu equation
  void fill_in_generic_residual_contribution(Vector<double> &residuals,
                                             DenseMatrix<double> &jacobian,
                                             unsigned flag)
@@ -186,6 +186,144 @@ class GelfandBratuElement : public QElement<1,NNODE_1D>
        }
      } //End of loop over the integration points
    } //End of function
+
+ /// Add the element's contribution to the derivatives of 
+ /// its residual vector with respect to a parameter (wrapper)
+ void fill_in_contribution_to_dresiduals_dparameter(
+  double* const &parameter_pt, Vector<double> &dres_dparam)
+  {
+   //Call the generic residuals function with flag set to 0
+   //using a dummy matrix argument
+   fill_in_generic_dresidual_contribution(
+    parameter_pt,dres_dparam,GeneralisedElement::Dummy_matrix,0);
+  }
+ 
+ /// Add the element's contribution to the derivaives of its 
+ /// residual vector and element Jacobian matrix with respect to a parameter
+ /// (wrapper)
+ void fill_in_contribution_to_djacobian_dparameter(
+  double* const &parameter_pt, Vector<double> &dres_dparam,
+  DenseMatrix<double> &djac_dparam)
+  {
+   //Call the generic routine with the flag set to 1
+   fill_in_generic_dresidual_contribution(parameter_pt,
+                                          dres_dparam,djac_dparam,1);
+  }
+
+ 
+ /// \short Calculate the elemental contributions to the derivatives of
+ /// the global residual vector and jacobian for the weak form of the 
+ /// Gelfand-Bratu equation with respect to the passed parameter.
+ void fill_in_generic_dresidual_contribution(
+  double* const &parameter_pt,
+  Vector<double> &dres_dparam,
+  DenseMatrix<double> &djac_dparam,
+  unsigned flag)
+  {
+   //There are only two parameters, if it's not either of them, then
+   //die
+   if((parameter_pt!=Lambda_pt) && (parameter_pt!=Mu_pt))
+    {
+     std::ostringstream error_stream;
+     error_stream << 
+      "Cannot compute analytic jacobian for parameter addressed by " 
+                  << parameter_pt << "\n";
+     error_stream << "Can only compute derivatives wrt lambda ("
+                  << Lambda_pt << ") or mu (" << Mu_pt << ")\n";
+     throw OomphLibError(
+      error_stream.str(),
+      "GelfandBratuElement::fill_in_generic_dresiduals_contribution()",
+      OOMPH_EXCEPTION_LOCATION);
+    }
+
+   //Find the number of nodes in the element
+   unsigned n_node = this->nnode();
+   
+   //Allocate memory for shape functions and their derivatives:
+   // There's one shape function for each node:
+   Shape psi(n_node);
+   // Each of the n_node shape functions has one derivative with 
+   // respect to the single local coordinate:
+   DShape dpsidx(n_node,1);
+   
+   //Get the value of the parameter
+   double lam = lambda();
+   double m = mu();
+
+    //Find the number of integration points in the underlying 
+    //geometric element's integration scheme 
+    unsigned n_intpt = this->integral_pt()->nweight();
+    //Loop over the integration points
+    for(unsigned ipt=0;ipt<n_intpt;ipt++)
+     {
+      //Set the value of the local coordinate to be the integration 
+      //scheme's knot point
+      //Find the weight of the integration scheme at this knot point
+      double w = this->integral_pt()->weight(ipt);
+      //Find the shape functions and their derivatives at the knot point. 
+      //This function is implemented in FiniteElement.
+      //It also returns the Jacobian of the mapping from local to 
+      //global coordinates.
+      double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx);
+      //Premultiply the weight and the Jacobian
+      double W = w*J;
+      
+      //Allocate storage for the value of the field variable u,
+      //its derivative and the global position at the knot point.
+      //Initialise them all to zero.
+      double interpolated_u=0.0, interpolated_dudx=0.0;
+      //Calculate the interpolated values by  looping over the shape 
+      //functions and summing the appropriate contributions
+      for(unsigned n=0;n<n_node;n++) 
+       {
+        double value = this->nodal_value(n,0);
+        interpolated_u += value*psi[n];
+        interpolated_dudx += value*dpsidx(n,0);
+       }
+   
+      //Get the derivative of the source function with respect to the 
+      //parameter
+      double source = exp(interpolated_u);
+
+      //If the parameter is lambda
+      if(parameter_pt==Lambda_pt) {source *= 2.0*lam;} 
+      //Only other possibility is mu 
+      else {source *= 2.0*m;}
+   
+      //ASSEMBLE THE DERIVATIVE OF THE RESIDUALS
+      
+      //Loop over the test functions (same as the shape functions
+      //since we're implementing an isoparametric element)
+      for(unsigned l=0;l<n_node;l++)
+       {
+        //Get the local equation number
+        //The variable is the first (only) value stored at the nodes
+        int local_eqn_number = this->nodal_local_eqn(l,0);
+        //If the equation is not a Dirichlet boundary condition
+        if(local_eqn_number >= 0)
+         {
+          //Add body force/source term here 
+          dres_dparam[local_eqn_number] -= source*psi[l]*W;
+
+          //If we are doing the jacobian terms
+          if(flag)
+           {
+            for(unsigned l2=0;l2<n_node;l2++)
+             {
+              int local_unknown = this->nodal_local_eqn(l2,0);
+              if(local_unknown >= 0)
+               {
+                djac_dparam(local_eqn_number,local_unknown) -=
+                 source*psi[l2]*psi[l]*W;
+               }
+             }
+           }
+         }
+       }
+     } //End of loop over the integration points
+   } //End of function
+
+
 
   //Define an output function for the element 
   void output(ostream &output) 
@@ -343,6 +481,11 @@ int main()
  //Set up the problem
  BratuProblem<GelfandBratuElement<3> > 
   problem(100);
+
+ //Compute derivatives with respect to parameters mu and lambda
+ //analytically
+ problem.set_analytic_dparameter(Global_Physical_Variables::Mu_pt);
+ problem.set_analytic_dparameter(Global_Physical_Variables::Lambda_pt);
  //Solve the problem
  problem.solve();
 }

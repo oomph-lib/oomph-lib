@@ -59,6 +59,7 @@ namespace oomph
  Problem::Problem() : 
   Mesh_pt(0), Time_pt(0), Explicit_time_stepper_pt(0), Saved_dof_pt(0), 
   Default_set_initial_condition_called(false),
+  Calculate_hessian_products_analytic(false),
 #ifdef OOMPH_HAS_MPI
   Must_recompute_load_balance_for_assembly(true),
 #endif
@@ -81,6 +82,7 @@ namespace oomph
   Ds_current(0.0), Desired_newton_iterations_ds(5), 
   Minimum_ds(1.0e-10), Bifurcation_detection(false), 
   First_jacobian_sign_change(false),Arc_length_step_taken(false),
+  Use_finite_differences_for_continuation_derivatives(false),
 #ifdef OOMPH_HAS_MPI
   Dist_problem_matrix_distribution(Uniform_matrix_distribution),
   Parallel_sparse_assemble_previous_allocation(0),
@@ -4781,7 +4783,7 @@ void Problem::parallel_sparse_assemble
             for(unsigned j=0;j<nvar;j++)
              {
               //Get the number of the unknown
-              unsigned unknown = assembly_handler_pt->eqn_number(elem_pt,j);
+              //unsigned unknown = assembly_handler_pt->eqn_number(elem_pt,j);
               
               //Loop over the matrices
               //If it's compressed row storage, then our vector of maps
@@ -5713,60 +5715,306 @@ void Problem::get_derivative_wrt_global_parameter(double* const &parameter_pt,
                    OOMPH_EXCEPTION_LOCATION);
   }
 #endif
+ 
+ //If we are doing the calculation analytically then call the appropriate
+ //handler and then calling get_residuals
+ if(is_dparameter_calculated_analytically(parameter_pt))
+  {
+   //Locally cache pointer to assembly handler
+   AssemblyHandler* const old_assembly_handler_pt = Assembly_handler_pt;
+   //Create a new assembly handler that replaces get_residuals by
+   //get_dresiduals_dparameter for each element
+   Assembly_handler_pt = new ParameterDerivativeHandler(
+    old_assembly_handler_pt,parameter_pt);
+   //Get the residuals, which will be dresiduals by dparameter
+   this->get_residuals(result);
+   //Delete the parameter derivative handler
+   delete Assembly_handler_pt;
+   //Reset the assembly handler to the original handler
+   Assembly_handler_pt = old_assembly_handler_pt;
+   
+   /*AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
+   //Loop over all the elements
+   unsigned long Element_pt_range = Mesh_pt->nelement();
+   for(unsigned long e=0;e<Element_pt_range;e++)
+    {
+     //Get the pointer to the element
+     GeneralisedElement* elem_pt = Mesh_pt->element_pt(e);
+     //Find number of dofs in the element
+     unsigned n_element_dofs = assembly_handler_pt->ndof(elem_pt); 
+     //Set up an array
+     Vector<double> element_residuals(n_element_dofs);
+     //Fill the array
+     assembly_handler_pt->get_dresiduals_dparameter(elem_pt,parameter_pt,
+                                                    element_residuals);
+     //Now loop over the dofs and assign values to global Vector
+     for(unsigned l=0;l<n_element_dofs;l++)
+      {
+       result[assembly_handler_pt->eqn_number(elem_pt,l)] 
+        += element_residuals[l];
+       }
+       }*/
 
- //Find the number of degrees of freedom in the problem
- const unsigned long n_dof = this->ndof();
+   //for(unsigned n=0;n<n_dof;n++) 
+   // {std::cout << "ANAL " << n << " " <<  result[n] << "\n";}
+  }
+ //Otherwise use the finite difference default
+ else
+  {
+   //Get the (global) residuals and store in the result vector
+   get_residuals(result);
+   
+   //Storage for the new residuals
+   DoubleVector newres;
+   
+   //Increase the global parameter
+   const double FD_step = 1.0e-8;
+   
+   //Store the current value of the parameter
+   double param_value = *parameter_pt;
+   
+   //Increase the parameter
+   *parameter_pt += FD_step;
+   
+   //Do any possible updates
+   actions_after_change_in_global_parameter(parameter_pt);
+   
+   //Get the new residuals
+   get_residuals(newres);
 
- // create the linear algebra distribution for this solver
+   //Find the number of local rows 
+   //(I think it's a global vector, so that should be fine)
+   const unsigned ndof_local = result.nrow_local();
+   
+   //Do the finite differencing in the local variables
+   for(unsigned long n=0;n<ndof_local;++n)
+    {
+     result[n] = (newres[n] - result[n])/FD_step;
+    }
+
+   //Reset the value of the parameter
+   *parameter_pt = param_value;
+   
+   //Do any possible updates
+   actions_after_change_in_global_parameter(parameter_pt);
+  }
+ //for(unsigned n=0;n<n_dof;n++) 
+ //   {std::cout << "FD " << n << " " <<  result[n] << "\n";}
+
+
+}
+
+
+//======================================================================
+/// Return the product of the global hessian (derivative of Jacobian
+/// matrix  with respect to all variables) with 
+/// an eigenvector, Y, and any number of other specified vectors C
+/// (d(J_{ij})/d u_{k}) Y_{j} C_{k}.
+/// This function is used in assembling and solving the augmented systems
+/// associated with bifurcation tracking.
+/// The default implementation is to use finite differences at the global
+/// level.
+//========================================================================
+void Problem::get_hessian_vector_products(DoubleVector const &Y,
+                                          Vector<DoubleVector> const &C,
+                                          Vector<DoubleVector> &product)
+{
+#ifdef OOMPH_HAS_MPI
+ 
+ if (Problem_has_been_distributed)
+  {
+   OomphLibWarning("This is unlikely to work with a distributed problem",
+                   "Problem::get_hessian_vector_products()",
+                   OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+ //How many vector products must we construct
+ const unsigned n_vec = C.size();
+
+ //Find the number of degrees of freedom in the system
+ const unsigned n_dof = this->ndof();
+ 
+ // Create the linear algebra distribution for this solver
  // currently only global (non-distributed) distributions are allowed
  LinearAlgebraDistribution* dist_pt = new 
   LinearAlgebraDistribution(Communicator_pt,n_dof,false);
-
- // rebuild the result
- result.build(dist_pt,0.0);
-
- //Initialise the result vector to zero 
- result.initialise(0.0);
-
- //Get the residuals and store in the result vector
- get_residuals(result);
-
- //Storage for the new residuals
- DoubleVector newres(dist_pt,0.0);
-  
- //Increase the global parameter
- const double FD_step = 1.0e-8;
  
- //Store the current value of the parameter
- double param_value = *parameter_pt;
-
- //Increase the parameter
- *parameter_pt += FD_step;
-
- //Do any possible updates
- actions_after_change_in_global_parameter();
-
- //Get the new residuals
- get_residuals(newres);
-
- //Do the finite differencing
- for(unsigned long n=0;n<n_dof;++n)
+ // Cache the assembly hander
+ AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
+ 
+ // Rebuild the results vectors and initialise to zero
+ for(unsigned i=0;i<n_vec;i++) 
   {
-   result[n] = (newres[n] - result[n])/FD_step;
+   product[i].build(dist_pt,0.0);
+   product[i].initialise(0.0);
   }
 
- //Reset the value of the parameter
- *parameter_pt = param_value;
+ //If we are doing the calculation analytically then call the appropriate
+ //handler
+ //A better way to do this is probably to hook into the get_residuals
+ //framework but with a different member function of the assembly
+ //handler
+ if(this->are_hessian_products_calculated_analytically())
+  {
+   //Loop over all the elements
+   unsigned long Element_pt_range = Mesh_pt->nelement();
+   for(unsigned long e=0;e<Element_pt_range;e++)
+    {
+     //Get the pointer to the element
+     GeneralisedElement* elem_pt = Mesh_pt->element_pt(e);
+     //Find number of dofs in the element
+     unsigned n_var = assembly_handler_pt->ndof(elem_pt); 
+     //Set up a matrix for the input and output
+     Vector<double> Y_local(n_var);
+     DenseMatrix<double> C_local(n_vec,n_var);
+     DenseMatrix<double> product_local(n_vec,n_var);
 
- //Do any possible updates
- actions_after_change_in_global_parameter();
+     //Translate the global input vectors into the local storage
+     //Probably horribly inefficient, but otherwise things get really messy
+     //at the elemental level
+     for(unsigned l=0;l<n_var;l++)
+      {
+       //Cache the global equation number
+       const unsigned long eqn_number = 
+        assembly_handler_pt->eqn_number(elem_pt,l);
+
+       Y_local[l] = Y[eqn_number];
+       for(unsigned i=0;i<n_vec;i++)
+        {
+         C_local(i,l) = C[i][eqn_number];
+        }
+      }
+     
+     //Fill the array
+     assembly_handler_pt->get_hessian_vector_products(elem_pt,Y_local,
+                                                      C_local,product_local);
+
+     //Assign the local results to the global vector
+     for(unsigned l=0;l<n_var;l++)
+      {
+       const unsigned long eqn_number = 
+        assembly_handler_pt->eqn_number(elem_pt,l);
+       
+       for(unsigned i=0;i<n_vec;i++)
+        {
+         product[i][eqn_number] += product_local(i,l);
+         //std::cout << "ANAL " << e << " " << i << " " 
+         //          << l << " " << product_local(i,l) << "\n";
+        }
+      }
+    }
+  }
+ //Otherwise calculate using finite differences by 
+ //perturbing the jacobian along a particular direction
+ else
+  {
+   //Cache the finite difference step
+   const double FD_step = 1.0e-8;
+   
+   //We can now construct our multipliers
+   //Prepare to scale
+   double dof_length=0.0;
+   Vector<double> C_length(n_vec,0.0);
+   
+   for(unsigned n=0;n<n_dof;n++)
+    {
+     if(std::abs(this->dof(n)) > dof_length) 
+      {dof_length = std::abs(this->dof(n));}
+    }
+   
+   for(unsigned i=0;i<n_vec;i++)
+    {
+     for(unsigned n=0;n<n_dof;n++)
+      {
+       if(std::abs(C[i][n]) > C_length[i]) {C_length[i] = std::abs(C[i][n]);}
+      }
+    }
+   
+   Vector<double> C_mult(n_vec,0.0);
+   for(unsigned i=0;i<n_vec;i++)
+    {
+     C_mult[i] = dof_length/C_length[i];
+     C_mult[i] += FD_step; 
+     C_mult[i] *= FD_step;
+    }
+   
+   
+   //Dummy vector to stand in the place of the residuals
+   Vector<double> dummy_res;
+   
+   //Calculate the product of the jacobian matrices, etc by looping over the
+   //elements
+   const unsigned long n_element = this->mesh_pt()->nelement();
+   for(unsigned long e = 0;e<n_element;e++)
+    {
+     GeneralisedElement *elem_pt = this->mesh_pt()->element_pt(e);
+     //Loop over the ndofs in each element
+     unsigned n_var = assembly_handler_pt->ndof(elem_pt);
+     //Resize the dummy residuals vector
+     dummy_res.resize(n_var);
+     //Allocate storage for the unperturbed jacobian matrix
+     DenseMatrix<double> jac(n_var);
+     //Get unperturbed jacobian
+     assembly_handler_pt->get_jacobian(elem_pt,dummy_res,jac);
+     
+     //Backup the dofs
+     Vector<double> dof_bac(n_var);
+     for(unsigned n=0;n<n_var;n++)
+      {
+       unsigned eqn_number = assembly_handler_pt->eqn_number(elem_pt,n);
+       dof_bac[n] = this->dof(eqn_number);
+      }
+     
+     //Now loop over all vectors C
+     for(unsigned i=0;i<n_vec;i++)
+      {
+       //Perturb the dofs by the appropriate vector
+       for(unsigned n=0;n<n_var;n++)
+        {
+         unsigned eqn_number = assembly_handler_pt->eqn_number(elem_pt,n);
+         //Peturb by vector C[i]
+         this->dof(eqn_number) += C_mult[i]*C[i][eqn_number]; 
+        }
+       
+       //Allocate storage for the perturbed jacobian
+       DenseMatrix<double> jac_C(n_var);
+       
+       //Now get the new jacobian
+       assembly_handler_pt->get_jacobian(elem_pt,dummy_res,jac_C);
+       
+       //Reset the dofs
+       for(unsigned n=0;n<n_var;n++)
+        {
+         unsigned eqn_number = assembly_handler_pt->eqn_number(elem_pt,n);
+         this->dof(eqn_number) = dof_bac[n];
+        }
+       
+       //Now work out the products
+       for(unsigned n=0;n<n_var;n++)
+        {
+         unsigned eqn_number = assembly_handler_pt->eqn_number(elem_pt,n);
+         double prod_c=0.0;
+         for(unsigned m=0;m<n_var;m++)
+          {
+           unsigned unknown = assembly_handler_pt->eqn_number(elem_pt,m);
+           prod_c += (jac_C(n,m) - jac(n,m))*Y[unknown];
+          }
+         //std::cout << "FD   " << e << " " << i << " " 
+         //          << n << " " << prod_c/C_mult[i] << "\n";
+         product[i][eqn_number] += prod_c/C_mult[i];
+        }
+      }
+    } //End of loop over elements
+  }
 }
+
 
 //================================================================
 /// \short Get derivative of an element in the problem wrt a global
 /// parameter, to be used in continuation problems
 //================================================================
-void Problem::get_derivative_wrt_global_parameter(
+/*void Problem::get_derivative_wrt_global_parameter(
  double* const &parameter_pt,
  GeneralisedElement* const &elem_pt,
  Vector<double> &result)
@@ -5819,7 +6067,7 @@ void Problem::get_derivative_wrt_global_parameter(
 
  //Now do any possible updates
  actions_after_change_in_global_parameter();
-}
+}*/
 
 //==================================================================
 /// Solve the eigenproblem
@@ -6483,9 +6731,10 @@ unsigned Problem::
 newton_solve_continuation(double* const &parameter_pt)
 {
  //Set up memory for z 
- unsigned long n_dofs = ndof();
- LinearAlgebraDistribution dist(Communicator_pt,n_dofs,false);
- DoubleVector z(&dist,0.0);
+ //unsigned long n_dofs = ndof();
+ //LinearAlgebraDistribution dist(Communicator_pt,n_dofs,false);
+ //DoubleVector z(&dist,0.0);
+ DoubleVector z;
  //Call the solver
  return newton_solve_continuation(parameter_pt,z);
 }
@@ -6505,13 +6754,17 @@ newton_solve_continuation(double* const &parameter_pt,
 {
 
  //Find the total number of dofs
- unsigned long n_dofs = ndof();
+ //unsigned long n_dofs = ndof();
+
+ //Find the local number of dofs
+ unsigned ndof_local = Dof_distribution_pt->nrow_local();
 
  // create the distribution (not distributed)
- LinearAlgebraDistribution dist(this->communicator_pt(),n_dofs,false);
+ //LinearAlgebraDistribution dist(this->communicator_pt(),n_dofs,false);
 
  //Assign memory for solutions of the equations
- DoubleVector y(&dist,0.0);
+ //DoubleVector y(&dist,0.0);
+ DoubleVector y;
 
  //Assign memory for the dot products of the uderivatives and y and z
  double uderiv_dot_y = 0.0, uderiv_dot_z = 0.0;
@@ -6565,7 +6818,7 @@ newton_solve_continuation(double* const &parameter_pt,
 #endif
 
      actions_before_newton_convergence_check();
-
+     y.clear();
      get_residuals(y);
      //Get maximum residuals, using our own abscmp function
      double maxres = y.max();
@@ -6573,11 +6826,25 @@ newton_solve_continuation(double* const &parameter_pt,
      //Assemble the residuals for the arc-length step
      arc_length_constraint_residual = 0.0; 
      //Add the variables
-     for(unsigned long l=0;l<n_dofs;l++)
+     for(unsigned long l=0;l<ndof_local;l++)
       {
        arc_length_constraint_residual +=
         Dof_derivatives[l]*(*Dof_pt[l] - Dofs_current[l]);
       }
+
+     //Now reduce if we have been distributed
+#ifdef OOMPH_HAS_MPI
+     double arc_length_cons_res2 = arc_length_constraint_residual;
+     if((Dof_distribution_pt->distributed()) &&
+        (Dof_distribution_pt->communicator_pt()->nproc() > 1))
+     {
+      MPI_Allreduce(&arc_length_constraint_residual,
+                    &arc_length_cons_res2,1,MPI_DOUBLE,MPI_SUM,
+                    Dof_distribution_pt->communicator_pt()->mpi_comm());
+     }
+     arc_length_constraint_residual = arc_length_cons_res2;
+#endif
+
      arc_length_constraint_residual *= Theta_squared;
      arc_length_constraint_residual += 
       Parameter_derivative*(*parameter_pt - Parameter_current) - Ds_current;
@@ -6589,6 +6856,10 @@ newton_solve_continuation(double* const &parameter_pt,
       }
 
      //Find the max
+     if (!Shut_up_in_newton_solve) 
+      {
+       oomph_info << "Initial Maximum residuals " << maxres << std::endl;
+      }
 
      //If we are below the Tolerance, then return immediately
      if(maxres < Newton_solver_tolerance) {LOOP_FLAG=0; count=0; continue;}
@@ -6601,6 +6872,7 @@ newton_solve_continuation(double* const &parameter_pt,
    if(dynamic_cast<BlockHopfLinearSolver*>(Linear_solver_pt))
     {
      //Get the vector dresiduals/dparameter
+     z.clear();
      get_derivative_wrt_global_parameter(parameter_pt,z);
      
      // Copy rhs vector into local storage so it doesn't get overwritten
@@ -6619,6 +6891,7 @@ newton_solve_continuation(double* const &parameter_pt,
      Linear_solver_pt->solve(this,y);
 
      //Get the vector dresiduals/dparameter
+     z.clear();
      get_derivative_wrt_global_parameter(parameter_pt,z);
      
      // Copy rhs vector into local storage so it doesn't get overwritten
@@ -6626,9 +6899,16 @@ newton_solve_continuation(double* const &parameter_pt,
      // which it's quite entitled to do!
      DoubleVector input_z(z);
      
+     //Redistribute the RHS to match the linear solver
+     //input_z.redistribute(Linear_solver_pt->distribution_pt());
+     //Do not clear z because we assume that it has dR/dparam
      //Now resolve the system with the new RHS
      Linear_solver_pt->resolve(input_z,z);
     }
+
+   //Redistribute the results into the natural distribution
+   y.redistribute(Dof_distribution_pt);
+   z.redistribute(Dof_distribution_pt);
   
    //Now we need to calculate dparam, for which we must calculate the 
    //dot product of the derivatives and y and z
@@ -6636,11 +6916,34 @@ newton_solve_continuation(double* const &parameter_pt,
    uderiv_dot_y = 0.0; uderiv_dot_z=0.0;
    //Now calculate the dot products of the derivative and the solutions
    //of the linear system
-   for(unsigned long l=0;l<n_dofs;l++) 
+   //Cache pointers to the data in the distributed vectors
+   double* const y_pt = y.values_pt();
+   double* const z_pt = z.values_pt();
+   for(unsigned long l=0;l<ndof_local;l++) 
     {
-     uderiv_dot_y += Dof_derivatives[l]*y[l];
-     uderiv_dot_z += Dof_derivatives[l]*z[l];
+     uderiv_dot_y += Dof_derivatives[l]*y_pt[l];
+     uderiv_dot_z += Dof_derivatives[l]*z_pt[l];
     }
+
+   //Now reduce if we have been distributed
+#ifdef OOMPH_HAS_MPI
+   //Create send and receive arrays of size two
+   double uderiv_dot[2]; double uderiv_dot2[2];
+   uderiv_dot[0]  = uderiv_dot_y; uderiv_dot[1]  = uderiv_dot_z;
+   uderiv_dot2[0] = uderiv_dot_y; uderiv_dot2[1] = uderiv_dot_z;
+   //Now reduce both together
+   if((Dof_distribution_pt->distributed()) &&
+      (Dof_distribution_pt->communicator_pt()->nproc() > 1))
+    {
+     MPI_Allreduce(uderiv_dot,
+                   uderiv_dot2,2,MPI_DOUBLE,MPI_SUM,
+                   Dof_distribution_pt->communicator_pt()->mpi_comm());
+    }
+   uderiv_dot_y = uderiv_dot2[0];
+   uderiv_dot_z = uderiv_dot2[1];
+#endif
+   
+   //Now scale the results
    uderiv_dot_y *= Theta_squared;
    uderiv_dot_z *= Theta_squared;
 
@@ -6659,9 +6962,9 @@ newton_solve_continuation(double* const &parameter_pt,
    *parameter_pt -= dparam;
        
    //Update the values of the other degrees of freedom
-   for(unsigned long l=0;l<n_dofs;l++) 
+   for(unsigned long l=0;l<ndof_local;l++) 
     {
-     *Dof_pt[l] -= y[l] - dparam*z[l];
+     *Dof_pt[l] -= y_pt[l] - dparam*z_pt[l];
     }
 
    //Calculate the new residuals
@@ -6690,6 +6993,7 @@ newton_solve_continuation(double* const &parameter_pt,
    actions_after_newton_step();
    actions_before_newton_convergence_check();
 
+   y.clear();
    get_residuals(y);
    
    //Get the maximum residuals
@@ -6698,11 +7002,25 @@ newton_solve_continuation(double* const &parameter_pt,
    //Assemble the residuals for the arc-length step
    arc_length_constraint_residual = 0.0; 
    //Add the variables
-   for(unsigned long l=0;l<n_dofs;l++)
+   for(unsigned long l=0;l<ndof_local;l++)
     {
      arc_length_constraint_residual +=
       Dof_derivatives[l]*(*Dof_pt[l] - Dofs_current[l]);
     }
+   
+   //Now reduce if we have been distributed
+#ifdef OOMPH_HAS_MPI
+   double arc_length_cons_res2 = arc_length_constraint_residual;
+     if((Dof_distribution_pt->distributed()) &&
+        (Dof_distribution_pt->communicator_pt()->nproc() > 1))
+      {
+       MPI_Allreduce(&arc_length_constraint_residual,
+                     &arc_length_cons_res2,1,MPI_DOUBLE,MPI_SUM,
+                     Dof_distribution_pt->communicator_pt()->mpi_comm());
+      }
+     arc_length_constraint_residual = arc_length_cons_res2;
+#endif
+     
    arc_length_constraint_residual *= Theta_squared;
    arc_length_constraint_residual +=
     Parameter_derivative*(*parameter_pt - Parameter_current) 
@@ -6714,6 +7032,12 @@ newton_solve_continuation(double* const &parameter_pt,
      maxres = std::abs(arc_length_constraint_residual);
     }
 
+   if (!Shut_up_in_newton_solve) 
+    {
+     oomph_info << "Continuation Step " << count << ":  Maximum residuals " 
+                << maxres << "\n";
+    }
+   
    //If we have converged jump straight to the test at the end of the loop
    if(maxres < Newton_solver_tolerance) {LOOP_FLAG=0; continue;} 
    
@@ -6760,7 +7084,7 @@ calculate_continuation_derivatives(double* const &parameter_pt)
  //Find the number of degrees of freedom in the problem
  const unsigned long n_dofs = ndof();
 
- // create the distribution
+ // create a non-distributed z vector 
  LinearAlgebraDistribution dist(Communicator_pt,n_dofs,false);
 
  //Assign memory for solutions of the equations
@@ -6773,7 +7097,6 @@ calculate_continuation_derivatives(double* const &parameter_pt)
   {
    //Get the vector dresiduals/dparameter
    get_derivative_wrt_global_parameter(parameter_pt,z);
-   
    
    // Copy rhs vector into local storage so it doesn't get overwritten
    // if the linear solver decides to initialise the solution vector, say,
@@ -6853,6 +7176,31 @@ void Problem::calculate_continuation_derivatives(const DoubleVector &z)
 }
 
 //=======================================================================
+/// A function to calculate the derivatives with respect to the arc-length
+/// required for continuation using finite differences.
+//===================================================================
+void Problem::calculate_continuation_derivatives_fd(
+ double* const &parameter_pt)
+{
+
+ //Calculate the continuation derivatives
+ calculate_continuation_derivatives_fd_helper(parameter_pt);
+
+ //Scale the value of theta if the control flag is set
+ if(Scale_arc_length)
+  {
+   Theta_squared *= (Parameter_derivative*Parameter_derivative/
+                     Desired_proportion_of_arc_length)*
+    ((1.0 - Desired_proportion_of_arc_length)/
+     (1.0 - Parameter_derivative*Parameter_derivative));
+
+   //Recalculate the continuation derivatives with the new scaled values
+   calculate_continuation_derivatives_fd_helper(parameter_pt);
+  }
+}
+
+
+//=======================================================================
 /// A private helper function to
 /// calculate the derivatives with respect to the arc-length
 /// required for continuation. The arguments is the solution of the 
@@ -6861,11 +7209,12 @@ void Problem::calculate_continuation_derivatives(const DoubleVector &z)
 /// output from the newton_solve_continuation function. The derivatives
 /// are stored in the ContinuationParameters namespace.
 //===================================================================
-void Problem::calculate_continuation_derivatives_helper(
- const DoubleVector &z)
+void Problem::calculate_continuation_derivatives_helper(const DoubleVector &z)
 {
  //Find the number of degrees of freedom in the problem
- unsigned long n_dofs = ndof();
+ //unsigned long n_dofs = ndof();
+ //Find the number of local dofs in the problem
+ const unsigned long ndof_local = Dof_distribution_pt->nrow_local();
 
  //Work out the continuation direction
  //The idea is that (du/ds)_{old} . (du/ds)_{new} >= 0 
@@ -6874,9 +7223,38 @@ void Problem::calculate_continuation_derivatives_helper(
  //so (du/ds)_{new} . (du/ds)_{old} 
  // = dlambda/ds [1 ; - z] . [ Parameter_derivative ; Dof_derivaives]
  // = dlambda/ds (Parameter_derivative - Dof_derivatives . z)
- Continuation_direction = Parameter_derivative;
- for(unsigned long l=0;l<n_dofs;l++) 
-  {Continuation_direction -= Dof_derivatives[l]*z[l];}
+
+ //Create a local copy of z that can be redistributed without breaking
+ //the constness of z
+ DoubleVector local_z(z);
+
+ //Redistribute z so that it has the (natural) dof distribution
+ local_z.redistribute(Dof_distribution_pt);
+
+ //Calculate the local contribution to the Continuation direction 
+ Continuation_direction = 0.0;
+ //Cache the pointer to z
+ double* const local_z_pt = local_z.values_pt();
+ for(unsigned long l=0;l<ndof_local;l++) 
+  {Continuation_direction -= Dof_derivatives[l]*local_z_pt[l];}
+ 
+ //Now reduce if we have been distributed
+#ifdef OOMPH_HAS_MPI
+ double cont_dir2 = Continuation_direction;
+ if((Dof_distribution_pt->distributed()) &&
+    (Dof_distribution_pt->communicator_pt()->nproc() > 1))
+  {
+   MPI_Allreduce(&Continuation_direction,
+                 &cont_dir2,1,MPI_DOUBLE,MPI_SUM,
+                 Dof_distribution_pt->communicator_pt()->mpi_comm());
+  }
+ Continuation_direction = cont_dir2;
+#endif
+
+ //Add parameter derivative
+ Continuation_direction += Parameter_derivative;
+ //for(unsigned long l=0;l<n_dofs;l++) 
+ // {Continuation_direction -= Dof_derivatives[l]*z[l];}
 
  //Calculate the magnitude of the du/ds Vector
 
@@ -6885,9 +7263,10 @@ void Problem::calculate_continuation_derivatives_helper(
  //Newton solve.
  
  //First calculate the magnitude of du/dparameter, chi
- double chi = 0.0; 
- for(unsigned long l=0;l<n_dofs;l++) {chi += z[l]*z[l];}
-                                                   
+ //double chi = 0.0; 
+ //for(unsigned long l=0;l<n_dofs;l++) {chi += z[l]*z[l];}
+ double chi = local_z.dot(local_z);
+                                                
  //Calculate the current derivative of the parameter wrt the arc-length
  Parameter_derivative = 1.0/sqrt(1.0 + Theta_squared*chi);
 
@@ -6898,14 +7277,65 @@ void Problem::calculate_continuation_derivatives_helper(
   {Parameter_derivative*= -1.0;}
 
  //Resize the derivatives array, if necessary
- if(Dof_derivatives.size() != n_dofs) {Dof_derivatives.resize(n_dofs,0.0);}
+ if(Dof_derivatives.size() != ndof_local) 
+  {Dof_derivatives.resize(ndof_local,0.0);}
  //Calculate the new derivatives wrt the arc-length
- for(unsigned long l=0;l<n_dofs;l++)
+ for(unsigned long l=0;l<ndof_local;l++)
   {
    //This comes from the formulation J u_dot + dr/dlambda  lambda_dot = 0
    //on the curve and then it follows that.
-   Dof_derivatives[l] = -Parameter_derivative*z[l];
+   Dof_derivatives[l] = -Parameter_derivative*local_z_pt[l];
   }
+}
+
+//=======================================================================
+/// A private helper function to
+/// calculate the derivatives with respect to the arc-length
+/// required for continuation using finite differences.
+//===================================================================
+void Problem::calculate_continuation_derivatives_fd_helper(
+double* const  &parameter_pt)
+{
+ //Find the number of values
+ //const unsigned long n_dofs = this->ndof();
+ //Find the number of local dofs in the problem
+ const unsigned long ndof_local =  Dof_distribution_pt->nrow_local();
+
+ //Temporary storage for the finite-difference approximation to the helper
+ Vector<double> z(ndof_local);
+ double length=0.0;
+ //Calculate the change in values and contribution to total length
+ for(unsigned long l=0;l<ndof_local;l++)
+  {
+   z[l] = (*Dof_pt[l] - Dofs_current[l])/Ds_current;
+   length += Theta_squared*z[l]*z[l];
+  }
+ 
+ //Reduce if parallel  
+#ifdef OOMPH_HAS_MPI
+ double length2 = length;
+ if((Dof_distribution_pt->distributed()) &&
+    (Dof_distribution_pt->communicator_pt()->nproc() > 1))
+  {
+   MPI_Allreduce(&length,
+                 &length2,1,MPI_DOUBLE,MPI_SUM,
+                 Dof_distribution_pt->communicator_pt()->mpi_comm());
+  }
+ length = length2;
+#endif
+
+ //Calculate change in parameter
+ double Z = (*parameter_pt - Parameter_current)/Ds_current;
+ length += Z*Z;
+ 
+ //Scale the approximations to the derivatives
+ length = sqrt(length);
+ for(unsigned long l=0;l<ndof_local;l++)
+  {
+   Dof_derivatives[l] = z[l]/length;
+  }
+ 
+ Parameter_derivative = Z/length;
 }
 
 
@@ -7108,16 +7538,23 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
  
  //----------SAVE THE INITIAL VALUES, IN CASE THE STEP FAILS-----------
  //Find total number of dofs
- unsigned long n_dofs = ndof();
+ //unsigned long n_dofs = ndof();
+
+ //Find the number of local dofs
+ unsigned ndof_local = Dof_distribution_pt->nrow_local();
+
  //Safety check, set up the array of Dof_derivatives, if necessary
- if(Dof_derivatives.size() != n_dofs) {Dof_derivatives.resize(n_dofs,0.0);}
+ //The distribution is the same as the (natural) distribution of the dofs
+ if(Dof_derivatives.size() != ndof_local) 
+  {Dof_derivatives.resize(ndof_local,0.0);}
  //Save the current value of the parameter
  Parameter_current = *parameter_pt;
 
  //Save the current values of the degrees of freedom 
- //Safety check, set up the array of Dof_derivatives, if necessary
- if(Dofs_current.size() != n_dofs) {Dofs_current.resize(n_dofs);}
- for(unsigned long l=0;l<n_dofs;l++) {Dofs_current[l] = *Dof_pt[l];}
+ //Safety check, set up the array of curren values, if necessary
+ //Again the distribution reflects the (natural) distribution of the dofs
+ if(Dofs_current.size() != ndof_local) {Dofs_current.resize(ndof_local);}
+ for(unsigned long l=0;l<ndof_local;l++) {Dofs_current[l] = *Dof_pt[l];}
  //Set the value of ds_current
  Ds_current = ds;
 
@@ -7126,8 +7563,10 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
  //Assign memory for solutions of the equations Jz = du/dparameter
  //This is needed here (outside the loop), so that we can save on 
  //one linear solve when calculating the derivatives wrt the arc-length
- LinearAlgebraDistribution dist(Communicator_pt,n_dofs,false);
- DoubleVector z(&dist,0.0);
+ DoubleVector z;
+ 
+ //LinearAlgebraDistribution dist(Communicator_pt,n_dofs,false);
+ //DoubleVector z(&dist,0.0);
 
  //Store sign of the Jacobian, used for bifurcation detection
  //If this is the first time that we are calling the arc-length solver,
@@ -7162,8 +7601,8 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
    STEP_REJECTED=false;
    //Set initial value of the parameter
    *parameter_pt += Parameter_derivative*Ds_current;
-   //Loop over the variables and set their initial values
-   for(unsigned long l=0;l<n_dofs;l++) 
+   //Loop over the (local) variables and set their initial values
+   for(unsigned long l=0;l<ndof_local;l++) 
     {
      *Dof_pt[l] += Dof_derivatives[l]*Ds_current;
     }
@@ -7196,7 +7635,7 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
        Ds_current *= (2.0/3.0);
        //Reset the dofs and parameter
        *parameter_pt = Parameter_current;
-       for(unsigned long l=0;l<n_dofs;l++) {*Dof_pt[l] = Dofs_current[l];}
+       for(unsigned long l=0;l<ndof_local;l++) {*Dof_pt[l] = Dofs_current[l];}
       }
     }
   }
@@ -7243,11 +7682,12 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
      //and the vectors of derivatives of the residuals wrt the global parameter
      //If this is small it is a bifurcation rather than a turning point.
      //Get the derivative wrt global parameter
-     DoubleVector dparam;
-     get_derivative_wrt_global_parameter(parameter_pt,dparam);
+     //DoubleVector dparam;
+     //get_derivative_wrt_global_parameter(parameter_pt,dparam);
      //Calculate the dot product
-     double dot=0.0;
-     for(unsigned long n=0;n<n_dofs;++n) {dot += dparam[n]*z[n];}
+     //double dot=0.0;
+     //for(unsigned long n=0;n<n_dofs;++n) {dot += dparam[n]*z[n];}
+     //z.dot(dparam);
 
      //Write the output message
      std::ostringstream message;
@@ -7256,9 +7696,9 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
              << std::endl;
      message << "BIFURCATION OR TURNING POINT DETECTED BETWEEN "
              << Parameter_current << " AND " << *parameter_pt << std::endl;
-     message << "APPROXIMATE DOT PRODUCT : " << dot << "," << std::endl;
-     message << "IF CLOSE TO ZERO WE HAVE A BIFURCATION; ";
-     message << "OTHERWISE A TURNING POINT" << std::endl;
+     //message << "APPROXIMATE DOT PRODUCT : " << dot << "," << std::endl;
+     //message << "IF CLOSE TO ZERO WE HAVE A BIFURCATION; ";
+     //message << "OTHERWISE A TURNING POINT" << std::endl;
      message << "-----------------------------------------------------------"
              << std::endl;
 
@@ -7274,7 +7714,15 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
    
    //Calculate the derivatives required for the next stage of continuation
    //In this we pass the last value of z (i.e. approximation)
-   calculate_continuation_derivatives(z); 
+   if(!Use_finite_differences_for_continuation_derivatives)
+    {
+     calculate_continuation_derivatives(z); 
+    }
+   //Or use finite differences
+   else
+    {
+     calculate_continuation_derivatives_fd(parameter_pt);
+    }
 
    //If it's the first step then the value of the next step should
    //be the change in parameter divided by the parameter derivative
@@ -7287,46 +7735,36 @@ double Problem::arc_length_step_solve(double* const &parameter_pt,
    //We have taken our first step
    Arc_length_step_taken = true;
   }
- //Otherwise calculate the continuation derivatives by solving the linear
- //system. We must do this to ensure that the derivatives are in sync
- //It could lead to problems near turning points when we should really be
- //solving an eigenproblem, but seems OK so far!
+ //If there has not been a newton step then we still need to estimate 
+ //the derivatives in the arc length direction
  else
   {
+   //Default is to calculate the continuation derivatives by solving the linear
+   //system. We must do this to ensure that the derivatives are in sync
+   //It could lead to problems near turning points when we should really be
+   //solving an eigenproblem, but seems OK so far!
 
    //Save the current sign of the jacobian
    int temp_sign=Sign_of_jacobian;
+
+
    //Calculate the continuation derivatives, which includes a solve
-   //of the linear system
-   calculate_continuation_derivatives(parameter_pt);
+   //of the linear system if not using finite differences
+   if(!Use_finite_differences_for_continuation_derivatives)
+    {
+     calculate_continuation_derivatives(parameter_pt);
+    }
+   //Otherwise use finite differences
+   else
+    {
+     calculate_continuation_derivatives_fd(parameter_pt);
+    }
 
    //Reset the sign of the jacobian, just in case the sign has changed when
    //solving the continuation derivatives. The sign change will be picked
    //up on the next continuation step.
    Sign_of_jacobian = temp_sign;
   }
-
- /*{
-   Vector<double> z(n_dofs);
-   //Cheeky tester
-   double length=0.0;
-   for(unsigned long l=0;l<n_dofs;l++)
-   {
-   z[l] = (*Dof_pt[l] - Dofs_current[l])/Ds_current;
-   length += Theta_squared*z[l]*z[l];
-   }
-
-   double Z = (*parameter_pt - Parameter_current)/Ds_current;
-   length += Z*Z;
-
-   length = sqrt(length);
-   for(unsigned long l=0;l<n_dofs;l++)
-   {
-   Dof_derivatives[l] = z[l]/length;
-   }
-  
-   Parameter_derivative = Z/length;
-   } */
 
  //If we are trying to find a bifurcation and the first sign change
  //has occured, use bisection
