@@ -211,90 +211,96 @@ namespace Multi_domain_functions
    unsigned n_element=mesh_pt->nexternal_element();
    for (unsigned e_ext=0;e_ext<n_element;e_ext++)
     {
-     FiniteElement* ext_el_pt=mesh_pt->external_element_pt(e_ext);
-     // Loop over nodes
-     unsigned n_node=ext_el_pt->nnode();
-     for (unsigned j=0;j<n_node;j++)
+     FiniteElement* ext_el_pt = 
+      dynamic_cast<FiniteElement*>(mesh_pt->external_element_pt(e_ext));
+     if(ext_el_pt!=0)
       {
-       Node* nod_pt=ext_el_pt->node_pt(j);
-       unsigned n_val=nod_pt->nvalue();
-       Vector<int> nodal_eqn_numbers(n_val);
-       for (unsigned i_val=0;i_val<n_val;i_val++)
+       // Loop over nodes
+       unsigned n_node=ext_el_pt->nnode();
+       for (unsigned j=0;j<n_node;j++)
         {
-         nodal_eqn_numbers[i_val]=nod_pt->eqn_number(i_val);
-        }
-
-       // All these nodes have unique equation numbers, so add all
-       existing_global_eqn_numbers.push_back
-        (make_pair(nodal_eqn_numbers,nod_pt));
-
-       // If it's a SolidNode then add its extra equation numbers
-       SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
-       if (solid_nod_pt!=0)
-        {
-         unsigned n_val_solid=solid_nod_pt->variable_position_pt()->nvalue();
-         Vector<int> solid_nodal_eqn_numbers(n_val_solid);
-         for (unsigned i_val=0;i_val<n_val_solid;i_val++)
+         Node* nod_pt=ext_el_pt->node_pt(j);
+         unsigned n_val=nod_pt->nvalue();
+         Vector<int> nodal_eqn_numbers(n_val);
+         for (unsigned i_val=0;i_val<n_val;i_val++)
           {
-           solid_nodal_eqn_numbers[i_val]=solid_nod_pt->
-            variable_position_pt()->eqn_number(i_val);
+           nodal_eqn_numbers[i_val]=nod_pt->eqn_number(i_val);
           }
-         // Add these equation numbers to the existing storage
+         
+         // All these nodes have unique equation numbers, so add all
          existing_global_eqn_numbers.push_back
-          (make_pair(solid_nodal_eqn_numbers,solid_nod_pt));
-        }
-
-       // Take into account master nodes too
-       if (dynamic_cast<RefineableElement*>(ext_el_pt)!=0)
-        {
-         int n_cont_int_values=dynamic_cast<RefineableElement*>
-          (ext_el_pt)->ncont_interpolated_values();
-         for (int i_cont=-1;i_cont<n_cont_int_values;i_cont++)
+          (make_pair(nodal_eqn_numbers,nod_pt));
+         
+         // If it's a SolidNode then add its extra equation numbers
+         SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
+         if (solid_nod_pt!=0)
           {
-           if (nod_pt->is_hanging(i_cont))
+           unsigned n_val_solid=solid_nod_pt->variable_position_pt()->nvalue();
+           Vector<int> solid_nodal_eqn_numbers(n_val_solid);
+           for (unsigned i_val=0;i_val<n_val_solid;i_val++)
             {
-             HangInfo* hang_pt=nod_pt->hanging_pt(i_cont);
-             unsigned n_master=hang_pt->nmaster();
-             for (unsigned m=0;m<n_master;m++)
+             solid_nodal_eqn_numbers[i_val]=solid_nod_pt->
+              variable_position_pt()->eqn_number(i_val);
+            }
+           // Add these equation numbers to the existing storage
+           existing_global_eqn_numbers.push_back
+            (make_pair(solid_nodal_eqn_numbers,solid_nod_pt));
+          }
+         
+         // Take into account master nodes too
+         if (dynamic_cast<RefineableElement*>(ext_el_pt)!=0)
+          {
+           int n_cont_int_values=dynamic_cast<RefineableElement*>
+            (ext_el_pt)->ncont_interpolated_values();
+           for (int i_cont=-1;i_cont<n_cont_int_values;i_cont++)
+            {
+             if (nod_pt->is_hanging(i_cont))
               {
-               Node* master_nod_pt=hang_pt->master_node_pt(m);
-               unsigned n_val=master_nod_pt->nvalue();
-               Vector<int> master_nodal_eqn_numbers(n_val);
-               for (unsigned i_val=0;i_val<n_val;i_val++)
+               HangInfo* hang_pt=nod_pt->hanging_pt(i_cont);
+               unsigned n_master=hang_pt->nmaster();
+               for (unsigned m=0;m<n_master;m++)
                 {
-                 master_nodal_eqn_numbers[i_val]=
-                  master_nod_pt->eqn_number(i_val);
-                }
-
-               // Add these equation numbers to the existing storage
-               existing_global_eqn_numbers.push_back
-                (make_pair(master_nodal_eqn_numbers,master_nod_pt));
-
-               // If this master is a SolidNode then add its extra eqn numbers
-               SolidNode* master_solid_nod_pt=dynamic_cast<SolidNode*>
-                (master_nod_pt);
-               if (master_solid_nod_pt!=0)
-                {
-                 unsigned n_val_mst_solid=master_solid_nod_pt->
-                  variable_position_pt()->nvalue();
-                 Vector<int> master_solid_nodal_eqn_numbers(n_val_mst_solid);
-                 for (unsigned i_val=0;i_val<n_val_mst_solid;i_val++)
+                 Node* master_nod_pt=hang_pt->master_node_pt(m);
+                 unsigned n_val=master_nod_pt->nvalue();
+                 Vector<int> master_nodal_eqn_numbers(n_val);
+                 for (unsigned i_val=0;i_val<n_val;i_val++)
                   {
-                   master_solid_nodal_eqn_numbers[i_val]=master_solid_nod_pt->
-                    variable_position_pt()->eqn_number(i_val);
+                   master_nodal_eqn_numbers[i_val]=
+                    master_nod_pt->eqn_number(i_val);
                   }
+                 
                  // Add these equation numbers to the existing storage
                  existing_global_eqn_numbers.push_back
-                  (make_pair(master_solid_nodal_eqn_numbers,
-                             master_solid_nod_pt));
+                  (make_pair(master_nodal_eqn_numbers,master_nod_pt));
+                 
+                 // If this master is a SolidNode then add its extra eqn numbers
+                 SolidNode* master_solid_nod_pt=dynamic_cast<SolidNode*>
+                  (master_nod_pt);
+                 if (master_solid_nod_pt!=0)
+                  {
+                   unsigned n_val_mst_solid=master_solid_nod_pt->
+                    variable_position_pt()->nvalue();
+                   Vector<int> master_solid_nodal_eqn_numbers(n_val_mst_solid);
+                   for (unsigned i_val=0;i_val<n_val_mst_solid;i_val++)
+                    {
+                     master_solid_nodal_eqn_numbers[i_val]=master_solid_nod_pt->
+                      variable_position_pt()->eqn_number(i_val);
+                    }
+                   // Add these equation numbers to the existing storage
+                   existing_global_eqn_numbers.push_back
+                    (make_pair(master_solid_nodal_eqn_numbers,
+                               master_solid_nod_pt));
+                  }
                 }
               }
             }
           }
         }
-      }
-     // Internal data equation numbers do not need to be added since halo
-     // elements cannot be external elements
+      } //End of FiniteElement data
+
+     // Internal data equation numbers do not need to be added since 
+     // internal data cannot be shared between distinct elements, so 
+     // internal data on locally-stored elements can never be halo.
     }
 
    // Now loop over the other processors from highest to lowest
@@ -312,92 +318,29 @@ namespace Multi_domain_functions
        unsigned n_element=mesh_pt->nexternal_halo_element(iproc);
        for (unsigned e_ext=0;e_ext<n_element;e_ext++)
         {
-         FiniteElement* ext_el_pt=mesh_pt->
+         GeneralisedElement* ext_el_pt=mesh_pt->
           external_halo_element_pt(iproc,e_ext);
 
-         // Loop over nodes
-         unsigned n_node=ext_el_pt->nnode();
-         for (unsigned j=0;j<n_node;j++)
+         FiniteElement* finite_ext_el_pt = 
+          dynamic_cast<FiniteElement*>(ext_el_pt);
+         
+         if(finite_ext_el_pt!=0)
           {
-           Node* nod_pt=ext_el_pt->node_pt(j);
-           unsigned n_val=nod_pt->nvalue();
-           Vector<int> nodal_eqn_numbers(n_val);
-           for (unsigned i_val=0;i_val<n_val;i_val++)
+           // Loop over nodes
+           unsigned n_node=finite_ext_el_pt->nnode();
+           for (unsigned j=0;j<n_node;j++)
             {
-             nodal_eqn_numbers[i_val]=nod_pt->eqn_number(i_val);
-
-            }
-           // Check for duplicates with the existing set of global eqn numbers
-
-           // Test to see if there is a duplicate with current
-           unsigned n_exist_eqn=existing_global_eqn_numbers.size();
-           bool is_a_duplicate=false;
-           // Loop over the existing global equation numbers
-           for (unsigned i=0;i<n_exist_eqn;i++)
-            {
-             // If the number of values is different from the size of the 
-             // vector then they are already different, so only test if 
-             // the sizes are the same
-             if (n_val==(existing_global_eqn_numbers[i].first).size())
-              {
-               // Loop over values
-               for (unsigned i_val=0;i_val<n_val;i_val++)
-                {
-                 // Make sure it isn't a pinned dof already
-                 if (nodal_eqn_numbers[i_val]>=0)
-                  {
-                   // Test it against the equivalent entry in existing...
-                   if (nodal_eqn_numbers[i_val]==
-                       (existing_global_eqn_numbers[i].first)[i_val])
-                    {
-                     is_a_duplicate=true;
-                     // It's a duplicate, so point the current node at the
-                     // other position instead!
-                     ext_el_pt->node_pt(j)=
-                      existing_global_eqn_numbers[i].second;
-                     break;
-                    }
-                  }
-                }
-              }
-             // Break out of the loop if we have already found a duplicate
-             if (is_a_duplicate)
-              {
-               break;
-              }
-            }
-
-           // If it's not a duplicate, add it to the existing storage
-           if (!is_a_duplicate)
-            {
-             existing_global_eqn_numbers.push_back
-              (make_pair(nodal_eqn_numbers,nod_pt));
-             // These external halo nodes need to be unclassified in order for
-             // them to be bypassed in assign_(local)_eqn_numbers; they
-             // receive the correct global equation numbers during the
-             // synchronisation process in 
-             // Problem::copy_external_haloed_eqn_numbers_helper(...)   
+             Node* nod_pt=finite_ext_el_pt->node_pt(j);
+             unsigned n_val=nod_pt->nvalue();
+             Vector<int> nodal_eqn_numbers(n_val);
              for (unsigned i_val=0;i_val<n_val;i_val++)
               {
-               nod_pt->eqn_number(i_val)=Data::Is_unclassified;
+               nodal_eqn_numbers[i_val]=nod_pt->eqn_number(i_val);
+               
               }
-            }
-
-           // Do the same for any SolidNodes
-           SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
-           if (solid_nod_pt!=0)
-            {
-             unsigned n_val_solid=solid_nod_pt->
-              variable_position_pt()->nvalue();
-             Vector<int> solid_nodal_eqn_numbers(n_val_solid);
-             for (unsigned i_val=0;i_val<n_val_solid;i_val++)
-              {
-               solid_nodal_eqn_numbers[i_val]=solid_nod_pt->
-                variable_position_pt()->eqn_number(i_val);
-              }
-
-             // Check for duplicate equation numbers
-
+             // Check for duplicates with the existing set of 
+             //global eqn numbers
+             
              // Test to see if there is a duplicate with current
              unsigned n_exist_eqn=existing_global_eqn_numbers.size();
              bool is_a_duplicate=false;
@@ -407,23 +350,23 @@ namespace Multi_domain_functions
                // If the number of values is different from the size of the 
                // vector then they are already different, so only test if 
                // the sizes are the same
-               if (n_val_solid==(existing_global_eqn_numbers[i].first).size())
+               if (n_val==(existing_global_eqn_numbers[i].first).size())
                 {
                  // Loop over values
-                 for (unsigned i_val=0;i_val<n_val_solid;i_val++)
+                 for (unsigned i_val=0;i_val<n_val;i_val++)
                   {
                    // Make sure it isn't a pinned dof already
-                   if (solid_nodal_eqn_numbers[i_val]>=0)
+                   if (nodal_eqn_numbers[i_val]>=0)
                     {
                      // Test it against the equivalent entry in existing...
-                     if (solid_nodal_eqn_numbers[i_val]==
+                     if (nodal_eqn_numbers[i_val]==
                          (existing_global_eqn_numbers[i].first)[i_val])
                       {
                        is_a_duplicate=true;
                        // It's a duplicate, so point the current node at the
                        // other position instead!
-                       solid_nod_pt=dynamic_cast<SolidNode*>
-                        (existing_global_eqn_numbers[i].second);
+                       finite_ext_el_pt->node_pt(j)=
+                        existing_global_eqn_numbers[i].second;
                        break;
                       }
                     }
@@ -435,127 +378,121 @@ namespace Multi_domain_functions
                  break;
                 }
               }
-
+             
              // If it's not a duplicate, add it to the existing storage
              if (!is_a_duplicate)
               {
                existing_global_eqn_numbers.push_back
-                (make_pair(solid_nodal_eqn_numbers,nod_pt));
-               // These external halo nodes need to be unclassified in order
-               // for them to be bypassed in assign_(local)_eqn_numbers; they
+                (make_pair(nodal_eqn_numbers,nod_pt));
+               // These external halo nodes need to be unclassified in 
+               // order for
+               // them to be bypassed in assign_(local)_eqn_numbers; they
                // receive the correct global equation numbers during the
                // synchronisation process in 
                // Problem::copy_external_haloed_eqn_numbers_helper(...)   
-               for (unsigned i_val=0;i_val<n_val_solid;i_val++)
+               for (unsigned i_val=0;i_val<n_val;i_val++)
                 {
-                 solid_nod_pt->variable_position_pt()->
-                  eqn_number(i_val)=Data::Is_unclassified;
+                 nod_pt->eqn_number(i_val)=Data::Is_unclassified;
                 }
               }
-
-            }
-
-           // Do the same for any master nodes
-           if (dynamic_cast<RefineableElement*>(ext_el_pt)!=0)
-            {
-             int n_cont_inter_values=dynamic_cast<RefineableElement*>
-              (ext_el_pt)->ncont_interpolated_values();
-             for (int i_cont=-1;i_cont<n_cont_inter_values;i_cont++)
+             
+             // Do the same for any SolidNodes
+             SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
+             if (solid_nod_pt!=0)
               {
-               if (nod_pt->is_hanging(i_cont))
+               unsigned n_val_solid=solid_nod_pt->
+                variable_position_pt()->nvalue();
+               Vector<int> solid_nodal_eqn_numbers(n_val_solid);
+               for (unsigned i_val=0;i_val<n_val_solid;i_val++)
                 {
-                 HangInfo* hang_pt=nod_pt->hanging_pt(i_cont);
-                 unsigned n_master=hang_pt->nmaster();
-                 for (unsigned m=0;m<n_master;m++)
+                 solid_nodal_eqn_numbers[i_val]=solid_nod_pt->
+                  variable_position_pt()->eqn_number(i_val);
+                }
+               
+               // Check for duplicate equation numbers
+               
+               // Test to see if there is a duplicate with current
+               unsigned n_exist_eqn=existing_global_eqn_numbers.size();
+               bool is_a_duplicate=false;
+               // Loop over the existing global equation numbers
+               for (unsigned i=0;i<n_exist_eqn;i++)
+                {
+                 // If the number of values is different from the size of the 
+                 // vector then they are already different, so only test if 
+                 // the sizes are the same
+                 if (n_val_solid==
+                     (existing_global_eqn_numbers[i].first).size())
                   {
-                   Node* master_nod_pt=hang_pt->master_node_pt(m);
-                   unsigned n_val=master_nod_pt->nvalue();
-                   Vector<int> master_nodal_eqn_numbers(n_val);
-                   for (unsigned i_val=0;i_val<n_val;i_val++)
+                   // Loop over values
+                   for (unsigned i_val=0;i_val<n_val_solid;i_val++)
                     {
-                     master_nodal_eqn_numbers[i_val]=
-                      master_nod_pt->eqn_number(i_val);
-                    }
-
-                   // Check for duplicate master eqn numbers
-
-                   // Test to see if there is a duplicate with current
-                   unsigned n_exist_eqn=existing_global_eqn_numbers.size();
-                   bool is_a_duplicate=false;
-                   // Loop over the existing global equation numbers
-                   for (unsigned i=0;i<n_exist_eqn;i++)
-                    {
-                     // If the number of values is different from the size
-                     // of the vector then they are already different,
-                     // only test if the sizes are the same
-                     if (n_val==
-                         (existing_global_eqn_numbers[i].first).size())
+                     // Make sure it isn't a pinned dof already
+                     if (solid_nodal_eqn_numbers[i_val]>=0)
                       {
-                       // Loop over values
-                       for (unsigned i_val=0;i_val<n_val;i_val++)
+                       // Test it against the equivalent entry in existing...
+                       if (solid_nodal_eqn_numbers[i_val]==
+                           (existing_global_eqn_numbers[i].first)[i_val])
                         {
-                         // Make sure it isn't a pinned dof already
-                         if (master_nodal_eqn_numbers[i_val]>=0)
-                          {
-                           // Test it against the equivalent existing entry
-                           if (master_nodal_eqn_numbers[i_val]==
-                               (existing_global_eqn_numbers[i].first)
-                               [i_val])
-                            {
-                             is_a_duplicate=true;
-                             // It's a duplicate, so point this node's
-                             // master at the original node instead!
-                             // Need the weight of the original node
-                             double m_weight=hang_pt->master_weight(m);
-                             // Set master
-                             ext_el_pt->node_pt(j)->hanging_pt(i_cont)
-                              ->set_master_node_pt
-                              (m,existing_global_eqn_numbers[i].second,
-                               m_weight);
-                             break;
-                            }
-                          }
+                         is_a_duplicate=true;
+                         // It's a duplicate, so point the current node at the
+                         // other position instead!
+                         solid_nod_pt=dynamic_cast<SolidNode*>
+                          (existing_global_eqn_numbers[i].second);
+                         break;
                         }
                       }
-                     // Break out of the loop if we have found a duplicate
-                     if (is_a_duplicate)
-                      {
-                       break;
-                      }
                     }
-
-                   // If it's not a duplicate, add it to the existing storage
-                   if (!is_a_duplicate)
+                  }
+                 // Break out of the loop if we have already found a duplicate
+                 if (is_a_duplicate)
+                  {
+                   break;
+                  }
+                }
+               
+               // If it's not a duplicate, add it to the existing storage
+               if (!is_a_duplicate)
+                {
+                 existing_global_eqn_numbers.push_back
+                  (make_pair(solid_nodal_eqn_numbers,nod_pt));
+                 // These external halo nodes need to be unclassified in order
+                 // for them to be bypassed in assign_(local)_eqn_numbers; they
+                 // receive the correct global equation numbers during the
+                 // synchronisation process in 
+                 // Problem::copy_external_haloed_eqn_numbers_helper(...)   
+                 for (unsigned i_val=0;i_val<n_val_solid;i_val++)
+                  {
+                   solid_nod_pt->variable_position_pt()->
+                    eqn_number(i_val)=Data::Is_unclassified;
+                  }
+                }
+               
+              }
+             
+             // Do the same for any master nodes
+             if (dynamic_cast<RefineableElement*>(ext_el_pt)!=0)
+              {
+               int n_cont_inter_values=dynamic_cast<RefineableElement*>
+                (ext_el_pt)->ncont_interpolated_values();
+               for (int i_cont=-1;i_cont<n_cont_inter_values;i_cont++)
+                {
+                 if (nod_pt->is_hanging(i_cont))
+                  {
+                   HangInfo* hang_pt=nod_pt->hanging_pt(i_cont);
+                   unsigned n_master=hang_pt->nmaster();
+                   for (unsigned m=0;m<n_master;m++)
                     {
-                     existing_global_eqn_numbers.push_back
-                      (make_pair(master_nodal_eqn_numbers,master_nod_pt));
-                     // These external halo nodes need to be unclassified in
-                     // order for them to be bypassed in assign_eqn_numbers;
-                     // they receive the correct global equation numbers during
-                     // the synchronisation process in
-                     // Problem::copy_external_haloed_eqn_numbers_helper(...)
+                     Node* master_nod_pt=hang_pt->master_node_pt(m);
+                     unsigned n_val=master_nod_pt->nvalue();
+                     Vector<int> master_nodal_eqn_numbers(n_val);
                      for (unsigned i_val=0;i_val<n_val;i_val++)
                       {
-                       master_nod_pt->eqn_number(i_val)=Data::Is_unclassified;
+                       master_nodal_eqn_numbers[i_val]=
+                        master_nod_pt->eqn_number(i_val);
                       }
-                    }
-           
-                   // Do the same again for SolidNodes
-                   SolidNode* solid_master_nod_pt=dynamic_cast<SolidNode*>
-                    (master_nod_pt);
-                   if (solid_master_nod_pt!=0)
-                    {
-                     unsigned n_val_solid=solid_master_nod_pt->
-                      variable_position_pt()->nvalue();
-                     Vector<int> sld_master_nodal_eqn_numbers(n_val_solid);
-                     for (unsigned i_val=0;i_val<n_val_solid;i_val++)
-                      {
-                       sld_master_nodal_eqn_numbers[i_val]=solid_master_nod_pt
-                        ->variable_position_pt()->eqn_number(i_val);
-                      }
-
+                     
                      // Check for duplicate master eqn numbers
-
+                     
                      // Test to see if there is a duplicate with current
                      unsigned n_exist_eqn=existing_global_eqn_numbers.size();
                      bool is_a_duplicate=false;
@@ -565,27 +502,27 @@ namespace Multi_domain_functions
                        // If the number of values is different from the size
                        // of the vector then they are already different,
                        // only test if the sizes are the same
-                       if (n_val_solid==
+                       if (n_val==
                            (existing_global_eqn_numbers[i].first).size())
                         {
                          // Loop over values
-                         for (unsigned i_val=0;i_val<n_val_solid;i_val++)
+                         for (unsigned i_val=0;i_val<n_val;i_val++)
                           {
                            // Make sure it isn't a pinned dof already
-                           if (sld_master_nodal_eqn_numbers[i_val]>=0)
+                           if (master_nodal_eqn_numbers[i_val]>=0)
                             {
                              // Test it against the equivalent existing entry
-                             if (sld_master_nodal_eqn_numbers[i_val]==
+                             if (master_nodal_eqn_numbers[i_val]==
                                  (existing_global_eqn_numbers[i].first)
                                  [i_val])
                               {
                                is_a_duplicate=true;
-                               // It's a duplicate, so point the current master
-                               // node at the original node instead!
+                               // It's a duplicate, so point this node's
+                               // master at the original node instead!
                                // Need the weight of the original node
                                double m_weight=hang_pt->master_weight(m);
                                // Set master
-                               ext_el_pt->node_pt(j)->hanging_pt(i_cont)
+                               finite_ext_el_pt->node_pt(j)->hanging_pt(i_cont)
                                 ->set_master_node_pt
                                 (m,existing_global_eqn_numbers[i].second,
                                  m_weight);
@@ -600,35 +537,121 @@ namespace Multi_domain_functions
                          break;
                         }
                       }
-
-                     // If it's not a duplicate then add it to existing storage
+                     
+                     // If it's not a duplicate, add it to the existing storage
                      if (!is_a_duplicate)
                       {
                        existing_global_eqn_numbers.push_back
-                        (make_pair(sld_master_nodal_eqn_numbers,
-                                   master_nod_pt));
+                        (make_pair(master_nodal_eqn_numbers,master_nod_pt));
                        // These external halo nodes need to be unclassified in
-                       // order for them to be bypassed in assign__eqn_numbers;
-                       // they receive the correct global equation numbers
-                       // during the synchronisation process in 
+                       // order for them to be bypassed in assign_eqn_numbers;
+                       // they receive the correct global equation numbers 
+                       // during
+                       // the synchronisation process in
                        // Problem::copy_external_haloed_eqn_numbers_helper(...)
-                       for (unsigned i_val=0;i_val<n_val_solid;i_val++)
+                       for (unsigned i_val=0;i_val<n_val;i_val++)
                         {
-                         solid_master_nod_pt->variable_position_pt()->
-                          eqn_number(i_val)=Data::Is_unclassified;
+                         master_nod_pt->eqn_number(i_val)
+                          =Data::Is_unclassified;
                         }
                       }
-
-
+                     
+                     // Do the same again for SolidNodes
+                     SolidNode* solid_master_nod_pt=dynamic_cast<SolidNode*>
+                      (master_nod_pt);
+                     if (solid_master_nod_pt!=0)
+                      {
+                       unsigned n_val_solid=solid_master_nod_pt->
+                        variable_position_pt()->nvalue();
+                       Vector<int> sld_master_nodal_eqn_numbers(n_val_solid);
+                       for (unsigned i_val=0;i_val<n_val_solid;i_val++)
+                        {
+                         sld_master_nodal_eqn_numbers[i_val]=solid_master_nod_pt
+                          ->variable_position_pt()->eqn_number(i_val);
+                        }
+                       
+                       // Check for duplicate master eqn numbers
+                       
+                       // Test to see if there is a duplicate with current
+                       unsigned n_exist_eqn=existing_global_eqn_numbers.size();
+                       bool is_a_duplicate=false;
+                       // Loop over the existing global equation numbers
+                       for (unsigned i=0;i<n_exist_eqn;i++)
+                        {
+                         // If the number of values is different from the size
+                         // of the vector then they are already different,
+                         // only test if the sizes are the same
+                         if (n_val_solid==
+                             (existing_global_eqn_numbers[i].first).size())
+                          {
+                           // Loop over values
+                           for (unsigned i_val=0;i_val<n_val_solid;i_val++)
+                            {
+                             // Make sure it isn't a pinned dof already
+                             if (sld_master_nodal_eqn_numbers[i_val]>=0)
+                              {
+                               // Test it against the equivalent existing entry
+                               if (sld_master_nodal_eqn_numbers[i_val]==
+                                   (existing_global_eqn_numbers[i].first)
+                                   [i_val])
+                                {
+                                 is_a_duplicate=true;
+                                 // It's a duplicate, 
+                                 // so point the current master
+                                 // node at the original node instead!
+                                 // Need the weight of the original node
+                                 double m_weight=hang_pt->master_weight(m);
+                                 // Set master
+                                 finite_ext_el_pt->node_pt(j)->
+                                  hanging_pt(i_cont)
+                                  ->set_master_node_pt
+                                  (m,existing_global_eqn_numbers[i].second,
+                                   m_weight);
+                                 break;
+                                }
+                              }
+                            }
+                          }
+                         // Break out of the loop if we have found a duplicate
+                         if (is_a_duplicate)
+                          {
+                           break;
+                          }
+                        }
+                       
+                       // If it's not a duplicate then 
+                       // add it to existing storage
+                       if (!is_a_duplicate)
+                        {
+                         existing_global_eqn_numbers.push_back
+                          (make_pair(sld_master_nodal_eqn_numbers,
+                                     master_nod_pt));
+                         // These external halo nodes need to be 
+                         // unclassified in
+                         // order for them to be bypassed in 
+                         // assign__eqn_numbers;
+                         // they receive the correct global equation numbers
+                         // during the synchronisation process in 
+                         // Problem::copy_external_haloed_eqn_numbers_helper(.)
+                         for (unsigned i_val=0;i_val<n_val_solid;i_val++)
+                          {
+                           solid_master_nod_pt->variable_position_pt()->
+                            eqn_number(i_val)=Data::Is_unclassified;
+                          }
+                        }
+                       
+                       
+                      }
+                     
                     }
-
                   }
-                }
-              } // end hanging loop over continous interpolated variables
-            }
-          
-          } // end loop over nodes on external halo elements
-        
+                } // end hanging loop over continous interpolated variables
+              }
+             
+            } // end loop over nodes on external halo elements
+           
+          } //End of check for finite element
+ 
          // Reset any internal data to Is_unclassified as there
          // cannot be any duplication (a halo element cannot be an 
          // external halo element)
@@ -916,12 +939,11 @@ namespace Multi_domain_functions
  void add_external_haloed_node_to_storage(int& iproc, Node* nod_pt,
                                           Problem* problem_pt,
                                           Mesh* const &external_mesh_pt,
-                                          int& n_cont_inter_values,
-                                          FiniteElement* f_el_pt)
+                                          int& n_cont_inter_values)
   {
    // Add the node if required
    add_external_haloed_node_helper(iproc,nod_pt,problem_pt,external_mesh_pt,
-                                   n_cont_inter_values,f_el_pt);
+                                   n_cont_inter_values);
 
    // Loop over continuously interpolated values and add masters
    for (int i_cont=-1;i_cont<n_cont_inter_values;i_cont++)
@@ -971,8 +993,7 @@ namespace Multi_domain_functions
  void add_external_haloed_node_helper(int& iproc, Node* nod_pt,
                                       Problem* problem_pt,
                                       Mesh* const &external_mesh_pt,
-                                      int& n_cont_inter_values,
-                                      FiniteElement* f_el_pt)
+                                      int& n_cont_inter_values)
   {
    // Attempt to add this node as an external haloed node
    unsigned n_ext_haloed_nod=external_mesh_pt->nexternal_haloed_node(iproc);
@@ -993,7 +1014,7 @@ namespace Multi_domain_functions
      // so that a halo copy can be made on the receiving process
      get_required_nodal_information_helper(iproc,nod_pt,
                                            problem_pt,external_mesh_pt,
-                                           n_cont_inter_values,f_el_pt);
+                                           n_cont_inter_values);
     }
    else // It was already added
     {
@@ -1048,6 +1069,9 @@ namespace Multi_domain_functions
     }
   }
 
+
+
+
 //========start of get_required_nodal_information_helper==================
 /// Helper function to get the required nodal information from an
 /// external haloed node so that a fully-functional external halo
@@ -1056,8 +1080,8 @@ namespace Multi_domain_functions
  void get_required_nodal_information_helper(int& iproc, Node* nod_pt,
                                             Problem* problem_pt,
                                             Mesh* const &external_mesh_pt,
-                                            int& n_cont_inter_values,
-                                            FiniteElement* f_el_pt)
+                                            int& n_cont_inter_values)//,
+  //FiniteElement* f_el_pt)
   {
    // Tell the halo copy of this node how many values there are
    // [NB this may be different for nodes within the same element, e.g.
@@ -1373,7 +1397,7 @@ namespace Multi_domain_functions
     {
      // Loop over current external haloed elements - has the element which
      // controls the node update for this node been added yet?
-     FiniteElement* macro_node_update_el_pt=
+     GeneralisedElement* macro_node_update_el_pt=
       macro_nod_pt->node_update_element_pt();
 
      unsigned n_ext_haloed_el=external_mesh_pt->
@@ -1387,7 +1411,11 @@ namespace Multi_domain_functions
       {
        Unsigned_values.push_back(1);
        Count_unsigned_values++;
-
+       
+       //Cast to a finite elemnet
+       FiniteElement* macro_node_update_finite_el_pt 
+        = dynamic_cast<FiniteElement*>(macro_node_update_el_pt);
+       
        // We're using macro elements to update...
        MacroElementNodeUpdateMesh* macro_mesh_pt=
         dynamic_cast<MacroElementNodeUpdateMesh*>(external_mesh_pt);
@@ -1395,9 +1423,10 @@ namespace Multi_domain_functions
         {
          Unsigned_values.push_back(1);
          Count_unsigned_values++;
-
+         
          // Need to send the macro element number in the mesh across
-         MacroElement* macro_el_pt=macro_node_update_el_pt->macro_elem_pt();
+         MacroElement* macro_el_pt= macro_node_update_finite_el_pt
+          ->macro_elem_pt();
          unsigned macro_el_num=macro_el_pt->macro_element_number();
          Unsigned_values.push_back(macro_el_num);
          Count_unsigned_values++;
@@ -1443,15 +1472,14 @@ namespace Multi_domain_functions
 
        // This element needs to be fully functioning on the other
        // process, so send all the information required to create it
-       unsigned n_node=macro_node_update_el_pt->nnode();
+       unsigned n_node=macro_node_update_finite_el_pt->nnode();
        for (unsigned j=0;j<n_node;j++)
         {
-         Node* new_nod_pt=macro_node_update_el_pt->node_pt(j);
+         Node* new_nod_pt=macro_node_update_finite_el_pt->node_pt(j);
          add_external_haloed_node_to_storage(iproc,new_nod_pt,
                                              problem_pt,
                                              external_mesh_pt,
-                                             n_cont_inter_values,
-                                             macro_node_update_el_pt);
+                                             n_cont_inter_values);
         }
       }
      else // The external haloed element already exists
@@ -1505,7 +1533,307 @@ namespace Multi_domain_functions
 
   }
 
+
+
+
+
+
+
+//=======start of add_external_halo_node_helper===========================
+/// Helper functiono to add external halo node that is not a master
+//========================================================================
+  void add_external_halo_node_helper
+  (Node* &new_nod_pt, Mesh* const &external_mesh_pt, unsigned& loc_p,
+   unsigned& node_index, FiniteElement* const &new_el_pt, 
+   int& n_cont_inter_values,
+   Problem* problem_pt)
+ {
+  // Given the node and the external mesh, and received information
+  // about them from process loc_p, construct them on the current process
+  if (Unsigned_values[Count_unsigned_values]==1)
+   {
+    // Increment counter
+    Count_unsigned_values++;
+    // Construct a new node based upon sent information
+    construct_new_external_halo_node_helper(new_nod_pt,loc_p,
+                                            node_index,new_el_pt,
+                                            external_mesh_pt,problem_pt);
+   }
+  else
+   {
+    // Increment counter (node already exists)
+    Count_unsigned_values++;
+    // Copy node from received location
+    new_nod_pt=external_mesh_pt->external_halo_node_pt
+     (loc_p,Unsigned_values[Count_unsigned_values]);
+    new_el_pt->node_pt(node_index)=new_nod_pt;
+    // Increment counter
+    Count_unsigned_values++;
+   }
+ }
+
+
+
+
+//========start of construct_new_external_halo_node_helper=================
+/// Helper function which constructs a new external halo node (on new element)
+/// with the required information sent from the haloed process
+//========================================================================
+ void construct_new_external_halo_node_helper
+ (Node* &new_nod_pt, unsigned& loc_p, unsigned& node_index,
+  FiniteElement* const &new_el_pt, 
+  Mesh* const &external_mesh_pt, Problem* problem_pt)
+ {
+  // The first entry indicates the number of values at this new Node
+  // (which may be different across the same element e.g. Lagrange multipliers)
+  unsigned n_val=Unsigned_values[Count_unsigned_values];
+  Count_unsigned_values++;
+
+  // Null TimeStepper for now
+  TimeStepper* time_stepper_pt=0;
+  // Default number of previous values to 1
+  unsigned n_prev=1;
+
+  // The next entry in Unsigned_values indicates
+  // if a timestepper is required for this halo node
+  if (Unsigned_values
+      [Count_unsigned_values]==1)
+   {
+    Count_unsigned_values++;
+    // Index
+    time_stepper_pt=problem_pt->time_stepper_pt
+     (Unsigned_values[Count_unsigned_values]);
+    Count_unsigned_values++;
+    // Check whether number of prev values is "sent" across
+    n_prev+=time_stepper_pt->nprev_values();
+   }
+  else
+   {
+    // No timestepper, increment counter
+    Count_unsigned_values++;
+   }
+
+  // If this node was on a boundary then it needs to
+  // be on the same boundary here
+  if (Unsigned_values[Count_unsigned_values]==1)
+   {
+    Count_unsigned_values++;
+
+    // Construct a new boundary node
+    if (time_stepper_pt!=0)
+     {
+      new_nod_pt=new_el_pt->construct_boundary_node
+       (node_index,time_stepper_pt);
+     }
+    else
+     {
+      new_nod_pt=new_el_pt->construct_boundary_node(node_index);
+     }
+
+    // How many boundaries on the external mesh?
+    unsigned n_bnd=external_mesh_pt->nboundary();
+    for (unsigned i_bnd=0;i_bnd<n_bnd;i_bnd++)
+     {
+      if (Unsigned_values
+          [Count_unsigned_values]==1)
+       {
+        // Add to current boundary; increment counter
+        external_mesh_pt->add_boundary_node(i_bnd,
+                                            new_nod_pt);
+        Count_unsigned_values++;
+       }
+      else
+       {
+        // Not on this boundary; increment counter
+        Count_unsigned_values++;
+       }
+     }
+   }
+  else
+   {
+    // Not on boundary, increment counter
+    Count_unsigned_values++;
+
+    // Construct an ordinary (non-boundary) node
+    if (time_stepper_pt!=0)
+     {
+      new_nod_pt=new_el_pt->construct_node
+       (node_index,time_stepper_pt);
+     }
+    else
+     {
+      new_nod_pt=new_el_pt->construct_node(node_index);
+     }
+   }
+
+  // Node constructed: add to external halo nodes
+  external_mesh_pt->add_external_halo_node_pt(loc_p,new_nod_pt);
+
+  // Is the new constructed node Algebraic?
+  AlgebraicNode* new_alg_nod_pt=dynamic_cast<AlgebraicNode*>
+   (new_nod_pt);
+
+  // If it is algebraic, its node update functions will
+  // not yet have been set up properly
+  if (new_alg_nod_pt!=0)
+   {
+    // The AlgebraicMesh is the external mesh
+    AlgebraicMesh* alg_mesh_pt=dynamic_cast<AlgebraicMesh*>
+     (external_mesh_pt);
+
+    /// The first entry of All_alg_nodal_info contains
+    /// the default node update id
+    /// e.g. for the quarter circle there are 
+    /// "Upper_left_box", "Lower right box" etc...
+    unsigned update_id=Unsigned_values
+     [Count_unsigned_values];
+    Count_unsigned_values++;
+
+    Vector<double> ref_value;
+
+    // The size of this vector is in the next entry
+    // of All_alg_nodal_info
+    unsigned n_ref_val=Unsigned_values
+     [Count_unsigned_values];
+    Count_unsigned_values++;
+
+    // The reference values themselves are in
+    // All_alg_ref_value
+    ref_value.resize(n_ref_val);
+    for (unsigned i_ref=0;i_ref<n_ref_val;i_ref++)
+     {
+      ref_value[i_ref]=Double_values
+       [Count_double_values];
+      Count_double_values++;
+     }
+
+    Vector<GeomObject*> geom_object_pt;
+    /// again we need the size of this vector as it varies
+    /// between meshes; we also need some indication
+    /// as to which geometric object should be used...
+
+    // The size of this vector is in the next entry
+    // of All_alg_nodal_info
+    unsigned n_geom_obj=Unsigned_values
+     [Count_unsigned_values];
+    Count_unsigned_values++;
+
+    // The remaining indices are in the rest of 
+    // All_alg_nodal_info
+    geom_object_pt.resize(n_geom_obj);
+    for (unsigned i_geom=0;i_geom<n_geom_obj;i_geom++)
+     {
+      unsigned geom_index=Unsigned_values
+       [Count_unsigned_values];
+      Count_unsigned_values++;
+      // This index indicates which of the AlgebraicMesh's
+      // stored geometric objects should be used
+      // (0 is a null pointer; everything else should have
+      //  been filled in by the specific Mesh).  If it
+      // hasn't been filled in then the update_node_update
+      // call should fix it
+      geom_object_pt[i_geom]=alg_mesh_pt->
+       geom_object_list_pt(geom_index);
+     }
+
+    /// For the received update_id, ref_value, geom_object
+    /// call add_node_update_info
+    new_alg_nod_pt->add_node_update_info
+     (update_id,alg_mesh_pt,geom_object_pt,ref_value);
+
+    /// Now call update_node_update
+    alg_mesh_pt->update_node_update(new_alg_nod_pt);
+   }
+
+  // Is the node a MacroElementNodeUpdateNode?
+  MacroElementNodeUpdateNode* macro_nod_pt=
+   dynamic_cast<MacroElementNodeUpdateNode*>(new_nod_pt);
+
+  if (macro_nod_pt!=0)
+   {
+    // Need to call set_node_update_info; this requires
+    // a Vector<GeomObject*> (taken from the mesh)
+    Vector<GeomObject*> geom_object_vector_pt;
+
+    // Access the required geom objects from the
+    // MacroElementNodeUpdateMesh
+    MacroElementNodeUpdateMesh* macro_mesh_pt=
+     dynamic_cast<MacroElementNodeUpdateMesh*>
+     (external_mesh_pt);
+    geom_object_vector_pt=
+     macro_mesh_pt->geom_object_vector_pt();
+
+    // Get local coordinate of node in new element
+    Vector<double> s_in_macro_node_update_element;
+    new_el_pt->local_coordinate_of_node
+     (node_index,s_in_macro_node_update_element);
+
+    // Set node update info for this node
+    macro_nod_pt->set_node_update_info
+     (new_el_pt,s_in_macro_node_update_element,
+      geom_object_vector_pt);
+   }
+
+  // Is the new node a SolidNode? 
+  SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(new_nod_pt);
+  if (solid_nod_pt!=0)
+   {
+    unsigned n_solid_val=solid_nod_pt->variable_position_pt()->nvalue();
+    for (unsigned i_val=0;i_val<n_solid_val;i_val++)
+     {
+      for (unsigned t=0;t<n_prev;t++)
+       {
+        solid_nod_pt->variable_position_pt()->
+         set_value(t,i_val,
+                   Double_values[Count_double_values]);
+        Count_double_values++;
+       }
+     }
+   }
+
+  // If there are additional values, resize the node
+  unsigned n_new_val=new_nod_pt->nvalue();
+  if (n_val>n_new_val)
+   {
+    new_nod_pt->resize(n_val);
+   }
+
+  // Get copied history values
+  //  unsigned n_val=new_nod_pt->nvalue();
+  for (unsigned i_val=0;i_val<n_val;i_val++)
+   {
+    for (unsigned t=0;t<n_prev;t++)
+     {
+      new_nod_pt->set_value(t,i_val,Double_values
+                            [Count_double_values]);
+      Count_double_values++;
+     }
+   }
+
+  // Get copied history values for positions
+  unsigned n_dim=new_nod_pt->ndim();
+  for (unsigned idim=0;idim<n_dim;idim++)
+   {
+    for (unsigned t=0;t<n_prev;t++)
+     {
+      // Copy to coordinate
+      new_nod_pt->x(t,idim)=Double_values
+       [Count_double_values];
+      Count_double_values++;
+     }
+   }
+ }
+
 #endif
+
+
+
+
+
+
+
+
+
 
  /// Helper function that returns the dimension of the elements within
  /// each of the specified meshes (and checks they are the same)

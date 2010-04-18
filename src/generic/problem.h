@@ -408,7 +408,7 @@ namespace oomph
  /// in the uniformly-refined mesh at the point when Problem::distribute()
  /// is called, since these elements become roots on each of the processors
  /// involved in the distribution.
- std::map<FiniteElement*,unsigned> Base_mesh_element_number; 
+ std::map<GeneralisedElement*,unsigned> Base_mesh_element_number; 
 
 #endif
 

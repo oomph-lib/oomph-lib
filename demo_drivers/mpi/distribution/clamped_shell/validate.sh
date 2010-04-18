@@ -35,7 +35,7 @@ echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat RESLT/final_shape.dat RESLT/trace.dat RESLT/trace_disp.dat > shell_with_arclength_cont_results.dat
+cat RESLT/final_shape_on_proc0.dat RESLT/final_shape_on_proc1.dat RESLT/trace_on_proc0.dat RESLT/trace_disp_on_proc0.dat > shell_with_arclength_cont_results.dat
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log

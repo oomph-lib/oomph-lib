@@ -1461,33 +1461,36 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
  for (int domain=0;domain<n_proc;domain++) 
   {   
    // Get vector of halo elements by copy operation
-   Vector<FiniteElement*> halo_elem_pt(this->halo_element_pt(domain));
+   Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(domain));
    
    // Loop over halo elements associated with this adjacent domain
    unsigned nelem=halo_elem_pt.size();
    for (unsigned e=0;e<nelem;e++)
     {
-     // Get element
-     FiniteElement* el_pt=halo_elem_pt[e];
-     
-     //Loop over nodes
-     unsigned nnod=el_pt->nnode();
-     for (unsigned j=0;j<nnod;j++)
+     // Get element only have nodes if a finite element
+     FiniteElement* finite_el_pt=dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
+     if(finite_el_pt!=0)
       {
-       Node* nod_pt=el_pt->node_pt(j);
-       // Associate node with this domain
-       processors_associated_with_data[nod_pt].insert(domain);
-
-       // Do the same if the node is solid
-       SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
-       if (solid_nod_pt!=0)
+       //Loop over nodes
+       unsigned nnod=finite_el_pt->nnode();
+       for (unsigned j=0;j<nnod;j++)
         {
-         processors_associated_with_data[solid_nod_pt->variable_position_pt()].
-          insert(domain);
+         Node* nod_pt=finite_el_pt->node_pt(j);
+         // Associate node with this domain
+         processors_associated_with_data[nod_pt].insert(domain);
+         
+         // Do the same if the node is solid
+         SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
+         if (solid_nod_pt!=0)
+          {
+           processors_associated_with_data[
+            solid_nod_pt->variable_position_pt()].insert(domain);
+          }
         }
       }
     }
   }
+
  
  
  // Loop over all [non-halo] elements and associate their nodes
@@ -1495,16 +1498,17 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
  unsigned nelem=this->nelement();
  for (unsigned e=0;e<nelem;e++)
   {
-   FiniteElement* el_pt=this->finite_element_pt(e);
+   FiniteElement* finite_el_pt=
+    dynamic_cast<FiniteElement*>(this->element_pt(e));
    
-   // Only visit non-halos
-   if (!el_pt->is_halo())
+   // Only visit non-halos and finite elements
+   if((finite_el_pt!=0)  && (!finite_el_pt->is_halo()))
     {
      // Loop over nodes
-     unsigned nnod=el_pt->nnode();
+     unsigned nnod=finite_el_pt->nnode();
      for (unsigned j=0;j<nnod;j++)
       {
-       Node* nod_pt=el_pt->node_pt(j);
+       Node* nod_pt=finite_el_pt->node_pt(j);
 
        // Associate this node with current processor
        processors_associated_with_data[nod_pt].insert(my_rank);
@@ -1538,8 +1542,8 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
      // Communicate the processors associated with data on haloed elements
 
      // Get haloed elements
-     Vector<FiniteElement*> haloed_elem_pt(this->haloed_element_pt(d));
-
+     Vector<GeneralisedElement*> haloed_elem_pt(this->haloed_element_pt(d));
+     
      // Initialise counter for this haloed layer
      unsigned count_data=0;
 
@@ -1547,27 +1551,32 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
      unsigned n_haloed_elem=haloed_elem_pt.size();
      for (unsigned e=0;e<n_haloed_elem;e++)
       {
-       FiniteElement* haloed_el_pt=haloed_elem_pt[e];
-       // Loop over nodes
-       unsigned n_node=haloed_el_pt->nnode();
-       for (unsigned j=0;j<n_node;j++)
+       //Only nodes in finite elements
+       FiniteElement* haloed_el_pt = 
+        dynamic_cast<FiniteElement*>(haloed_elem_pt[e]);
+       if(haloed_el_pt!=0)
         {
-         Node* nod_pt=haloed_el_pt->node_pt(j);
-
-         // Number of processors associated with this node
-         unsigned n_assoc=processors_associated_with_data[nod_pt].size();
-       
-         // This number needs to be sent
-         processors_associated_with_data_on_other_proc.push_back(n_assoc);
-         count_data++;
-
-         // Now add the process IDs associated to the vector to be sent
-         std::set<unsigned> procs_set=processors_associated_with_data[nod_pt];
-         for (std::set<unsigned>::iterator it=procs_set.begin();
-              it!=procs_set.end();it++)
+         // Loop over nodes
+         unsigned n_node=haloed_el_pt->nnode();
+         for (unsigned j=0;j<n_node;j++)
           {
-           processors_associated_with_data_on_other_proc.push_back(*it);
+           Node* nod_pt=haloed_el_pt->node_pt(j);
+           
+           // Number of processors associated with this node
+           unsigned n_assoc=processors_associated_with_data[nod_pt].size();
+           
+           // This number needs to be sent
+           processors_associated_with_data_on_other_proc.push_back(n_assoc);
            count_data++;
+           
+           // Now add the process IDs associated to the vector to be sent
+           std::set<unsigned> procs_set=processors_associated_with_data[nod_pt];
+           for (std::set<unsigned>::iterator it=procs_set.begin();
+                it!=procs_set.end();it++)
+            {
+             processors_associated_with_data_on_other_proc.push_back(*it);
+             count_data++;
+            }
           }
         }
       }
@@ -1588,7 +1597,7 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
        if (dd!=my_rank) // (my_rank=d)
         {
          // We will be looping over the halo elements with process dd
-         Vector<FiniteElement*> halo_elem_pt(this->halo_element_pt(dd));
+         Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(dd));
          unsigned n_halo_elem=halo_elem_pt.size();
 
          unsigned count_data=0;
@@ -1605,33 +1614,38 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
            count_data=0;
            for (unsigned e=0;e<n_halo_elem;e++)
             {
-             FiniteElement* halo_el_pt=halo_elem_pt[e];
-             unsigned n_node=halo_el_pt->nnode();
-             for (unsigned j=0;j<n_node;j++)
+             FiniteElement* halo_el_pt=
+              dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
+             if(halo_el_pt!=0)
               {
-               Node* nod_pt=halo_el_pt->node_pt(j);
-
-               // Get number of processors associated with data that was sent
-               unsigned n_assoc=
-                processors_associated_with_data_on_other_proc[count_data];
-               count_data++;
-
-               for (unsigned i_assoc=0;i_assoc<n_assoc;i_assoc++)
+               unsigned n_node=halo_el_pt->nnode();
+               for (unsigned j=0;j<n_node;j++)
                 {
-                 // Get the process ID
-                 unsigned sent_domain=
+                 Node* nod_pt=halo_el_pt->node_pt(j);
+                 
+                 // Get number of processors associated with data that was sent
+                 unsigned n_assoc=
                   processors_associated_with_data_on_other_proc[count_data];
                  count_data++;
-
-                 // Add it to this processor's list of IDs
-                 processors_associated_with_data[nod_pt].insert(sent_domain);
-
-                 // If the node is solid then add the ID to the solid data
-                 SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
-                 if (solid_nod_pt!=0)
+                 
+                 for (unsigned i_assoc=0;i_assoc<n_assoc;i_assoc++)
                   {
-                   processors_associated_with_data
-                    [solid_nod_pt->variable_position_pt()].insert(sent_domain);
+                   // Get the process ID
+                   unsigned sent_domain=
+                    processors_associated_with_data_on_other_proc[count_data];
+                   count_data++;
+                   
+                   // Add it to this processor's list of IDs
+                   processors_associated_with_data[nod_pt].insert(sent_domain);
+                   
+                   // If the node is solid then add the ID to the solid data
+                   SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
+                   if (solid_nod_pt!=0)
+                    {
+                     processors_associated_with_data
+                      [solid_nod_pt->variable_position_pt()].
+                      insert(sent_domain);
+                    }
                   }
                 }
               }
@@ -1698,7 +1712,7 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
  for (int domain=0;domain<n_proc;domain++) 
   {
    // Get vector of halo elements by copy operation
-   Vector<FiniteElement*> halo_elem_pt(this->halo_element_pt(domain));
+   Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(domain));
 
    // Loop over halo elements associated with this adjacent domain
    unsigned nelem=halo_elem_pt.size();
@@ -1706,50 +1720,55 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
    for (unsigned e=0;e<nelem;e++)
     {
      // Get element
-     FiniteElement* el_pt=halo_elem_pt[e];
+     GeneralisedElement* el_pt=halo_elem_pt[e];
 
-     //Loop over nodes
-     unsigned nnod=el_pt->nnode();
-     for (unsigned j=0;j<nnod;j++)
+     //Can if be cast to a finite element
+     FiniteElement* finite_el_pt=dynamic_cast<FiniteElement*>(el_pt);
+     if(finite_el_pt!=0)
       {
-       Node* nod_pt=el_pt->node_pt(j);
-       
-       // Have we done this node already?
-       if (!done[nod_pt])
+       //Loop over nodes
+       unsigned nnod=finite_el_pt->nnode();
+       for (unsigned j=0;j<nnod;j++)
         {
-         // Is the other processor/domain in charge of this node?
-         int proc_in_charge=processor_in_charge[nod_pt];
-
-         // To keep the order of the nodes consistent with that
-         // in the haloed node lookup scheme, only 
-         // allow it to be added when the current domain is in charge
-         if (proc_in_charge==int(domain))
+         Node* nod_pt=finite_el_pt->node_pt(j);
+         
+         // Have we done this node already?
+         if (!done[nod_pt])
           {
-           if (proc_in_charge!=my_rank)
+           // Is the other processor/domain in charge of this node?
+           int proc_in_charge=processor_in_charge[nod_pt];
+           
+           // To keep the order of the nodes consistent with that
+           // in the haloed node lookup scheme, only 
+           // allow it to be added when the current domain is in charge
+           if (proc_in_charge==int(domain))
             {
-             // Add it as being halo node whose non-halo counterpart
-             // is located on processor domain
-             this->add_halo_node_pt(proc_in_charge,nod_pt);
-
-             // The node itself needs to know it is a halo
-             nod_pt->is_halo()=true;
-
-             // If it's a SolidNode then the data associated with that
-             // must also be halo
-             SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
-             if (solid_nod_pt!=0)
+             if (proc_in_charge!=my_rank)
               {
-               solid_nod_pt->variable_position_pt()->is_halo()=true;
+               // Add it as being halo node whose non-halo counterpart
+               // is located on processor domain
+               this->add_halo_node_pt(proc_in_charge,nod_pt);
+               
+               // The node itself needs to know it is a halo
+               nod_pt->is_halo()=true;
+               
+               // If it's a SolidNode then the data associated with that
+               // must also be halo
+               SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
+               if (solid_nod_pt!=0)
+                {
+                 solid_nod_pt->variable_position_pt()->is_halo()=true;
+                }
+               
+               // We're done with this node
+               done[nod_pt]=true;
               }
-
-             // We're done with this node
-             done[nod_pt]=true;
             }
           }
-
         }
 
-      }
+      } //End of finite element case
+
      // Now make sure internal data on halo elements is also halo
      unsigned nintern_data = el_pt->ninternal_data();
      for (unsigned iintern=0;iintern<nintern_data;iintern++)
@@ -1769,7 +1788,7 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
    std::map<Node*,bool> node_done;
   
    // Get vector of haloed elements by copy operation
-   Vector<FiniteElement*> haloed_elem_pt(this->haloed_element_pt(domain));
+   Vector<GeneralisedElement*> haloed_elem_pt(this->haloed_element_pt(domain));
 
    // Loop over haloed elements associated with this adjacent domain
    unsigned nelem=haloed_elem_pt.size();
@@ -1777,29 +1796,34 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
    for (unsigned e=0;e<nelem;e++)
     {
      // Get element
-     FiniteElement* el_pt=haloed_elem_pt[e];
+     GeneralisedElement* el_pt=haloed_elem_pt[e];
 
-     //Loop over nodes
-     unsigned nnod=el_pt->nnode();
-     for (unsigned j=0;j<nnod;j++)
+     //Can it be cast to a finite element
+     FiniteElement* finite_el_pt=dynamic_cast<FiniteElement*>(el_pt);
+     if(finite_el_pt!=0)
       {
-       Node* nod_pt=el_pt->node_pt(j);
-       
-       // Have we done this node already?
-       if (!node_done[nod_pt])
+       //Loop over nodes
+       unsigned nnod=finite_el_pt->nnode();
+       for (unsigned j=0;j<nnod;j++)
         {
-         // Is the current processor/domain in charge of this node?
-         int proc_in_charge=processor_in_charge[nod_pt];
-
-         if (proc_in_charge==my_rank)
+         Node* nod_pt=finite_el_pt->node_pt(j);
+         
+         // Have we done this node already?
+         if (!node_done[nod_pt])
           {
-           // Add it as being haloed from specified domain
-           this->add_haloed_node_pt(domain,nod_pt);
-           // We're done with this node
-           node_done[nod_pt]=true;
+           // Is the current processor/domain in charge of this node?
+           int proc_in_charge=processor_in_charge[nod_pt];
+           
+           if (proc_in_charge==my_rank)
+            {
+             // Add it as being haloed from specified domain
+             this->add_haloed_node_pt(domain,nod_pt);
+             // We're done with this node
+             node_done[nod_pt]=true;
+            }
           }
+         
         }
-
       }
     }
   }
@@ -1981,8 +2005,14 @@ void Mesh::distribute(OomphCommunicator* comm_pt,
      // Doc
      for (unsigned e=0;e<nelem;e++)
       {
-       this->finite_element_pt(e)->
-        output(*domain_file[element_domain[e]],5);
+       //If we can't cast to a finite element, we can't output because
+       //there is no output function
+       FiniteElement* f_el_pt = 
+        dynamic_cast<FiniteElement*>(this->element_pt(e));
+       if(f_el_pt!=0)
+        {
+         f_el_pt->output(*domain_file[element_domain[e]],5);
+        }
       }
      
      for (int d=0;d<n_proc;d++)
@@ -2013,22 +2043,26 @@ void Mesh::distribute(OomphCommunicator* comm_pt,
  // Loop over elements
  for (unsigned e=0;e<nelem;e++)
   {
-   // Get element and its domain
-   FiniteElement* el_pt=this->finite_element_pt(e);
-   unsigned el_domain=element_domain[e];
-
-   // Associate nodes with highest numbered processor
-   unsigned nnod=el_pt->nnode();
-   for (unsigned j=0;j<nnod;j++)
+   // Get an element and its domain
+   FiniteElement* el_pt = dynamic_cast<FiniteElement*>(this->element_pt(e));
+   //Element will only have nodes if it is a finite element
+   if(el_pt!=0)
     {
-     Node* nod_pt=el_pt->node_pt(j); 
-
-     // processor in charge was initialised to 0 above
-     if (el_domain>processor_in_charge[nod_pt])
+     unsigned el_domain=element_domain[e];
+     
+     // Associate nodes with highest numbered processor
+     unsigned nnod=el_pt->nnode();
+     for (unsigned j=0;j<nnod;j++)
       {
-       processor_in_charge[nod_pt]=el_domain;
+       Node* nod_pt=el_pt->node_pt(j); 
+       
+       // processor in charge was initialised to 0 above
+       if (el_domain>processor_in_charge[nod_pt])
+        {
+         processor_in_charge[nod_pt]=el_domain;
+        }
+       processors_associated_with_data[nod_pt].insert(el_domain);
       }
-     processors_associated_with_data[nod_pt].insert(el_domain);
     }
   }
 
@@ -2077,10 +2111,10 @@ void Mesh::distribute(OomphCommunicator* comm_pt,
  //-------------------------------------
 
  // Backup pointers to elements in this mesh
- Vector<FiniteElement*> backed_up_el_pt(nelem);
+ Vector<GeneralisedElement*> backed_up_el_pt(nelem);
  for (unsigned e=0;e<nelem;e++)
   {
-   backed_up_el_pt[e]=this->finite_element_pt(e);
+   backed_up_el_pt[e]=this->element_pt(e);
   }
 
  // Backup pointers to nodes in this mesh
@@ -2118,7 +2152,7 @@ void Mesh::distribute(OomphCommunicator* comm_pt,
  // processors. Needed to figure out haloed lookup schemes:
  // When setting these up on any given processor we have to know
  // which elements will (have) become halo elements on other processors.
- Vector<Vector<Vector<FiniteElement*> > > tmp_root_halo_element_pt;
+ Vector<Vector<Vector<GeneralisedElement*> > > tmp_root_halo_element_pt;
  tmp_root_halo_element_pt.resize(n_proc);
  for (int i=0;i<n_proc;i++)
   {
@@ -2145,7 +2179,7 @@ void Mesh::distribute(OomphCommunicator* comm_pt,
      for (unsigned e=0;e<nelem;e++)
       {
        // Get element and its domain
-       FiniteElement* el_pt=backed_up_el_pt[e];
+       GeneralisedElement* el_pt=backed_up_el_pt[e];
        unsigned el_domain=element_domain[e];
      
        // If element is located on current processor add it back to the mesh
@@ -2158,43 +2192,65 @@ void Mesh::distribute(OomphCommunicator* comm_pt,
        // Otherwise we may still need it if it's a halo element:
        else
         {       
-         // Is one of the nodes associated with the current processor?
-         unsigned nnod=el_pt->nnode();
-         for (unsigned j=0;j<nnod;j++)
+         // If this current mesh has been told to keep all elements as halos,
+         // OR the element itself knows that it must be kept then
+         // keep it
+         if ((keep_all_elements_as_halos())
+             || (el_pt->must_be_kept_as_halo()))
           {
-           Node* nod_pt=el_pt->node_pt(j); 
-
-           // Keep element?
-           unsigned keep_it=false;
-           for (std::set<unsigned>::iterator 
-                 it=processors_associated_with_data[nod_pt].begin();
-                it!=processors_associated_with_data[nod_pt].end();
-                it++)
-            {
-             if (*it==unsigned(dummy_my_rank))
-              {
-               keep_it=true;
-               break;
-              }
-            }
-         
-           // Add a root halo element either if keep_it=true OR this 
-           // current mesh has been told to keep all elements as halos,
-           // OR the element itself knows that it must be kept
-           if ((keep_it) || (keep_all_elements_as_halos())
-               || (el_pt->must_be_kept_as_halo()))
-            {
-             // Add as root halo element whose non-halo counterpart is
-             // located on processor el_domain
-             tmp_root_halo_element_pt[dummy_my_rank][el_domain].
-              push_back(el_pt);
-             tmp_element_retained[dummy_my_rank][e]=true;
-             number_of_retained_elements[dummy_my_rank]++;
-             break;
-            }
+           // Add as root halo element whose non-halo counterpart is
+           // located on processor el_domain
+           tmp_root_halo_element_pt[dummy_my_rank][el_domain].
+            push_back(el_pt);
+           tmp_element_retained[dummy_my_rank][e]=true;
+           number_of_retained_elements[dummy_my_rank]++;
           }
-        }
-      }
+         //Otherwise 
+         // Is one of the nodes associated with the current processor?
+         else
+          {
+           //Can only have nodes if this is a finite element
+           FiniteElement* finite_el_pt = dynamic_cast<FiniteElement*>(el_pt);
+           //If the element is a finite element
+           if(finite_el_pt!=0)
+            {
+             unsigned n_node = finite_el_pt->nnode();
+             for (unsigned n=0;n<n_node;n++)
+              {
+               Node* nod_pt=finite_el_pt->node_pt(n); 
+               
+               // Keep element? (use stl find?)
+               unsigned keep_it=false;
+               for (std::set<unsigned>::iterator 
+                     it=processors_associated_with_data[nod_pt].begin();
+                    it!=processors_associated_with_data[nod_pt].end();
+                    it++)
+                {
+                 if (*it==unsigned(dummy_my_rank))
+                  {
+                   keep_it=true;
+                   //Break out of the loop over processors
+                   break;
+                  }
+                }
+               
+               // Add a root halo element either if keep_it=true 
+               if (keep_it)
+                {
+                 // Add as root halo element whose non-halo counterpart is
+                 // located on processor el_domain
+                 tmp_root_halo_element_pt[dummy_my_rank][el_domain].
+                  push_back(finite_el_pt);
+                 tmp_element_retained[dummy_my_rank][e]=true;
+                 number_of_retained_elements[dummy_my_rank]++;
+                 //Now break out of loop over nodes
+                 break;
+                }
+              } 
+            }  
+          } //End of testing for halo by virtue of shared nodes
+        } //End of halo element conditions
+      } //end of loop over elements
 
 
      // Now loop over all halo elements to check if any of their
@@ -2209,21 +2265,27 @@ void Mesh::distribute(OomphCommunicator* comm_pt,
        unsigned nelem=tmp_root_halo_element_pt[dummy_my_rank][d].size();     
        for (unsigned e=0;e<nelem;e++)
         {
-         FiniteElement* el_pt=tmp_root_halo_element_pt[dummy_my_rank][d][e];
+         //Can we cast it to a finite element
+         FiniteElement* finite_el_pt
+          =dynamic_cast<FiniteElement*>
+          (tmp_root_halo_element_pt[dummy_my_rank][d][e]);
        
-         // Loop over its nodes
-         unsigned nnod=el_pt->nnode();
-         for (unsigned j=0;j<nnod;j++)
+         if(finite_el_pt!=0)
           {
-           Node* nod_pt=el_pt->node_pt(j);
-           int proc_in_charge=processor_in_charge[nod_pt];
-           if (proc_in_charge>d) // too many halos if > changed to >=
+           // Loop over its nodes
+           unsigned nnod=finite_el_pt->nnode();
+           for (unsigned j=0;j<nnod;j++)
             {
-             higher_numbered_node[nod_pt]=true;
-            }
-           else
-            {
-             higher_numbered_node[nod_pt]=false;
+             Node* nod_pt=finite_el_pt->node_pt(j);
+             int proc_in_charge=processor_in_charge[nod_pt];
+             if (proc_in_charge>d) // too many halos if > changed to >=
+              {
+               higher_numbered_node[nod_pt]=true;
+              }
+             else
+              {
+               higher_numbered_node[nod_pt]=false;
+              }
             }
           }
         }
@@ -2233,37 +2295,41 @@ void Mesh::distribute(OomphCommunicator* comm_pt,
      nelem=backed_up_el_pt.size();
      for (unsigned e=0;e<nelem;e++)
       {
-       // Get element and its domain
-       FiniteElement* el_pt=backed_up_el_pt[e];
-       unsigned el_domain=element_domain[e];
-     
-       // By default, don't keep it
-       bool keep_it=false;
-     
-       // Check if it's already retained
-       if (!tmp_element_retained[dummy_my_rank][e])
+       //Only need to worry about finite elements
+       FiniteElement* finite_el_pt = 
+        dynamic_cast<FiniteElement*>(backed_up_el_pt[e]);
+       if(finite_el_pt!=0)
         {
-         // Loop over its nodes
-         unsigned nnod=el_pt->nnode();
-         for (unsigned j=0;j<nnod;j++)
+         unsigned el_domain=element_domain[e];
+         
+         // By default, don't keep it
+         bool keep_it=false;
+         
+         // Check if it's already retained
+         if (!tmp_element_retained[dummy_my_rank][e])
           {
-           Node* nod_pt=el_pt->node_pt(j);
-           if (higher_numbered_node[nod_pt]&&
-               (element_domain[e]==processor_in_charge[nod_pt]))
+           // Loop over its nodes
+           unsigned nnod=finite_el_pt->nnode();
+           for (unsigned j=0;j<nnod;j++)
             {
-             keep_it=true; 
-             break; // doesn't help if the break is removed
+             Node* nod_pt=finite_el_pt->node_pt(j);
+             if (higher_numbered_node[nod_pt]&&
+               (element_domain[e]==processor_in_charge[nod_pt]))
+              {
+               keep_it=true; 
+               break; // doesn't help if the break is removed
+              }
+            }
+           if (keep_it)
+            {
+             tmp_root_halo_element_pt[dummy_my_rank][el_domain].
+              push_back(finite_el_pt);
+             tmp_element_retained[dummy_my_rank][e]=true;
+             number_of_retained_elements[dummy_my_rank]++;
+             number_of_retained_halo_elements++; // need to count these
             }
           }
-         if (keep_it)
-          {
-           tmp_root_halo_element_pt[dummy_my_rank][el_domain].push_back(el_pt);
-           tmp_element_retained[dummy_my_rank][e]=true;
-           number_of_retained_elements[dummy_my_rank]++;
-           number_of_retained_halo_elements++; // need to count these
-          }
         }
-
       }
 
      if (report_stats)
@@ -2316,7 +2382,7 @@ void Mesh::distribute(OomphCommunicator* comm_pt,
  nelem=backed_up_el_pt.size();
  for (unsigned e=0;e<nelem;e++)
   {
-   FiniteElement* el_pt=backed_up_el_pt[e];
+   GeneralisedElement* el_pt=backed_up_el_pt[e];
    if (tmp_element_retained[my_rank][e])
     {
      this->add_element_pt(el_pt);
@@ -2375,7 +2441,7 @@ void Mesh::distribute(OomphCommunicator* comm_pt,
        for (unsigned e=0;e<nelem;e++)
         {
          // Get pointer to element
-         FiniteElement* el_pt=this->finite_element_pt(e);
+         GeneralisedElement* el_pt=this->element_pt(e);
          
          // Halo elements can't be haloed themselves
          if (!el_pt->is_halo())
@@ -2416,14 +2482,18 @@ void Mesh::distribute(OomphCommunicator* comm_pt,
  nelem=this->nelement();
  for (unsigned e=0;e<nelem;e++)
   {
-   FiniteElement* el_pt=this->finite_element_pt(e);
+   FiniteElement* f_el_pt= dynamic_cast<FiniteElement*>(this->element_pt(e));
 
-   // Loop over nodes
-   unsigned nnod=el_pt->nnode();
-   for (unsigned j=0;j<nnod;j++)
+   //If we have a finite element
+   if(f_el_pt!=0)
     {
-     Node* nod_pt=el_pt->node_pt(j);
-     nod_pt->set_non_obsolete();
+     // Loop over nodes
+     unsigned nnod=f_el_pt->nnode();
+     for (unsigned j=0;j<nnod;j++)
+      {
+       Node* nod_pt=f_el_pt->node_pt(j);
+       nod_pt->set_non_obsolete();
+      }
     }
   }
 
@@ -2552,14 +2622,15 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
      this->node_pt(j)->set_obsolete();
     }
    
-   // Backup pointers to elements in this mesh
+   // Backup pointers to elements in this mesh (they must be finite elements
+   // beacuse it's a refineable mesh)
    unsigned nelem=this->nelement();
    Vector<FiniteElement*> backed_up_el_pt(nelem);
    std::map<FiniteElement*,bool> keep_element;
    for (unsigned e=0;e<nelem;e++)
     {
-     FiniteElement* el_pt=this->finite_element_pt(e);
-     backed_up_el_pt[e]=el_pt;
+     //FiniteElement* el_pt=this->finite_element_pt(e);
+     backed_up_el_pt[e]=this->finite_element_pt(e);
     }
    
    // Get the min and max refinement level, and current refinement pattern
@@ -2645,7 +2716,7 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
    for (int domain=0;domain<n_proc;domain++)
     {
      // Get vector of halo elements with processor domain by copy operation
-     Vector<FiniteElement*> halo_elem_pt(this->halo_element_pt(domain));
+     Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(domain));
      
      // Loop over halo elements associated with this adjacent domain
      unsigned nelem=halo_elem_pt.size();
@@ -2718,7 +2789,8 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
          if (d==my_rank)
           {
            // Get vector all elements that are currently haloed by domain dd
-           Vector<FiniteElement*> haloed_elem_pt(this->haloed_element_pt(dd));
+           Vector<GeneralisedElement*> 
+            haloed_elem_pt(this->haloed_element_pt(dd));
            // Create a vector of ints to indicate if the halo element
            // on processor dd processor was kept
            unsigned nelem=haloed_elem_pt.size();
@@ -2787,7 +2859,8 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
             {
              // Find (current) halo elements on processor dd whose non-halo is 
              // on processor d
-             Vector<FiniteElement*> halo_elem_pt(this->halo_element_pt(d));
+             Vector<GeneralisedElement*> 
+              halo_elem_pt(this->halo_element_pt(d));
              
              // Create a vector of ints to indicate if the halo 
              // element was kept
@@ -3022,7 +3095,7 @@ void Mesh::get_efficiency_of_mesh_distribution(OomphCommunicator* comm_pt,
  unsigned count=0;
  for (int d=0;d<n_proc;d++)
   {
-   Vector<FiniteElement*> halo_elem_pt(halo_element_pt(d));
+   Vector<GeneralisedElement*> halo_elem_pt(halo_element_pt(d));
    count+=halo_elem_pt.size();
   }
 
@@ -3101,11 +3174,22 @@ void Mesh::doc_mesh_distribution(OomphCommunicator* comm_pt,DocInfo& doc_info)
  unsigned nelem=this->nelement();
  for (unsigned e=0;e<nelem;e++)
   {
-   FiniteElement* el_pt=this->finite_element_pt(e);
-
-   if (!el_pt->is_halo()) // output if non-halo
+   //Get the element
+   GeneralisedElement* el_pt = this->element_pt(e);
+   //Only output if not  a halo element
+   if(!el_pt->is_halo())
     {
-     el_pt->output(some_file,5);
+     FiniteElement* f_el_pt=dynamic_cast<FiniteElement*>(el_pt);
+     //Indicate a generalised element
+     if(f_el_pt==0)
+      {
+       some_file << "Generalised Element " << e << "\n";
+      }
+     else
+      // output if non-halo and a finite element
+      {
+       f_el_pt->output(some_file,5);
+      }
     }
   }
 
@@ -3119,7 +3203,7 @@ void Mesh::doc_mesh_distribution(OomphCommunicator* comm_pt,DocInfo& doc_info)
  for (int domain=0; domain<n_proc; domain++)
   {
    // Get vector of halo elements by copy operation
-   Vector<FiniteElement*> halo_elem_pt(this->halo_element_pt(domain));
+   Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(domain));
    unsigned nelem=halo_elem_pt.size();
 //   oomph_info
 //    << "Processor " << my_rank << " holds " << nelem 
@@ -3127,7 +3211,16 @@ void Mesh::doc_mesh_distribution(OomphCommunicator* comm_pt,DocInfo& doc_info)
 //    << domain << std::endl;
    for (unsigned e=0;e<nelem;e++)
     {
-     halo_elem_pt[e]->output(some_file,5);
+     FiniteElement* f_el_pt = dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
+     if(f_el_pt!=0)
+      {
+       f_el_pt->output(some_file,5);
+      }
+     //Indicate a generalised element
+     else
+      {
+       some_file << "Generalised Element " << e << "\n";
+      }
     }
   }
  some_file.close();
@@ -3141,7 +3234,7 @@ void Mesh::doc_mesh_distribution(OomphCommunicator* comm_pt,DocInfo& doc_info)
  for (int domain=0; domain<n_proc; domain++)
   {
    // Get vector of haloed elements by copy operation
-   Vector<FiniteElement*> haloed_elem_pt(this->haloed_element_pt(domain));
+   Vector<GeneralisedElement*> haloed_elem_pt(this->haloed_element_pt(domain));
    unsigned nelem=haloed_elem_pt.size();
 //   oomph_info
 //    << "Processor " << my_rank << " holds " << nelem
@@ -3149,7 +3242,18 @@ void Mesh::doc_mesh_distribution(OomphCommunicator* comm_pt,DocInfo& doc_info)
 //    << domain << std::endl;
    for (unsigned e=0;e<nelem;e++)
     {
-     haloed_elem_pt[e]->output(some_file,5);
+     //Is it a finite element
+     FiniteElement *finite_el_pt = dynamic_cast<FiniteElement*>
+      (haloed_elem_pt[e]);
+     if(finite_el_pt!=0)
+      {
+       finite_el_pt->output(some_file,5);
+      }
+     //Indicate a generalised element
+     else
+      {
+       some_file << "Generalised  Element " << e << "\n";
+      }
     }
   }
  some_file.close();
@@ -3353,19 +3457,28 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
      // (needed for tecplot)
      if ((nnod==0) && (nelement()!=0))
       {
-       unsigned ndim=finite_element_pt(0)->node_pt(0)->ndim();
-       if (ndim==2)
+       FiniteElement* f_el_pt = dynamic_cast<FiniteElement*>(element_pt(0));
+       //If it's a generalised element mesh dummy output
+       if(f_el_pt==0)
         {
-         shared_file   << " 1.0 1.1 " << std::endl;
+         shared_file << "0.0" << std::endl;
         }
        else
         {
-         shared_file   << " 1.0 1.1 1.1" << std::endl;
+         unsigned ndim=f_el_pt->node_pt(0)->ndim();
+         if (ndim==2)
+          {
+           shared_file   << " 1.0 1.1 " << std::endl;
+          }
+         else
+          {
+           shared_file   << " 1.0 1.1 1.1" << std::endl;
+          }
         }
       }
      shared_file.close(); 
     }
-
+     
   }
 
  // Check shared nodes lookup schemes
@@ -3536,24 +3649,29 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
      halo_file.open(filename);
      
      // Get vectors of halo/haloed elements by copy operation
-     Vector<FiniteElement*> 
-      halo_elem_pt(halo_element_pt(dd));
+     Vector<GeneralisedElement*> halo_elem_pt(halo_element_pt(dd));
      
      unsigned nelem=halo_elem_pt.size();
 
      for (unsigned e=0;e<nelem;e++)
       {
        halo_file << "ZONE " << std::endl;
-       unsigned nnod=halo_elem_pt[e]->nnode();
-       for (unsigned j=0;j<nnod;j++)
+       //Can I cast to a finite element
+       FiniteElement* finite_el_pt = 
+        dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
+       if(finite_el_pt!=0)
         {
-         Node* nod_pt=halo_elem_pt[e]->node_pt(j);
-         unsigned ndim=nod_pt->ndim();
-         for (unsigned i=0;i<ndim;i++)
+         unsigned nnod=finite_el_pt->nnode();
+         for (unsigned j=0;j<nnod;j++)
           {
-           halo_file << nod_pt->position(i) << " ";
+           Node* nod_pt=finite_el_pt->node_pt(j);
+           unsigned ndim=nod_pt->ndim();
+           for (unsigned i=0;i<ndim;i++)
+            {
+             halo_file << nod_pt->position(i) << " ";
+            }
+           halo_file << std::endl;
           }
-         halo_file << std::endl;
         }
       }
      halo_file.close(); 
@@ -3567,23 +3685,29 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
      haloed_file.open(filename);
      
      // Get vectors of halo/haloed elements by copy operation
-     Vector<FiniteElement*> 
+     Vector<GeneralisedElement*> 
       haloed_elem_pt(haloed_element_pt(d));
      
      unsigned nelem2=haloed_elem_pt.size(); 
      for (unsigned e=0;e<nelem2;e++)
       {
        haloed_file << "ZONE " << std::endl;
-       unsigned nnod2=haloed_elem_pt[e]->nnode();
-       for (unsigned j=0;j<nnod2;j++)
+       //Is it a finite element
+       FiniteElement* finite_el_pt = 
+        dynamic_cast<FiniteElement*>(haloed_elem_pt[e]);
+       if(finite_el_pt!=0)
         {
-         Node* nod_pt=haloed_elem_pt[e]->node_pt(j);
-         unsigned ndim=nod_pt->ndim();
-         for (unsigned i=0;i<ndim;i++)
+         unsigned nnod2=finite_el_pt->nnode();
+         for (unsigned j=0;j<nnod2;j++)
           {
-           haloed_file << nod_pt->position(i) << " ";
+           Node* nod_pt=finite_el_pt->node_pt(j);
+           unsigned ndim=nod_pt->ndim();
+           for (unsigned i=0;i<ndim;i++)
+            {
+             haloed_file << nod_pt->position(i) << " ";
+            }
+           haloed_file << std::endl;
           }
-         haloed_file << std::endl;
         }
       }
      haloed_file.close(); 
@@ -3607,7 +3731,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
        if (dd!=d)
         {
          // Get vectors of haloed elements by copy operation
-         Vector<FiniteElement*> 
+         Vector<GeneralisedElement*> 
           haloed_elem_pt(haloed_element_pt(dd));
          
          // How many of my elements are haloed elements whose halo
@@ -3643,102 +3767,113 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
             }
 
 
-           // Get strung-together elemental nodal positions 
-           // from other processor
-           unsigned nnod_per_el=finite_element_pt(0)->nnode();
-           unsigned nod_dim=finite_element_pt(0)->node_pt(0)->ndim();
-           Vector<double> other_nodal_positions
-            (nod_dim*nnod_per_el*nelem_halo);
-           Vector<int> other_nodal_hangings(nnod_per_el*nelem_halo);
-           MPI_Recv(&other_nodal_positions[0],nod_dim*nnod_per_el*nelem_halo,
-                    MPI_DOUBLE,dd,0,comm_pt->mpi_comm(),&status);
-           MPI_Recv(&other_nodal_hangings[0],nnod_per_el*nelem_halo,MPI_INT,dd,
-                    1,comm_pt->mpi_comm(),&status);
-
+           //We can only check nodal stuff for meshes of finite elements
+           if(dynamic_cast<FiniteElement*>(this->element_pt(0)))
+            {
+             // Get strung-together elemental nodal positions 
+             // from other processor
+             unsigned nnod_per_el=finite_element_pt(0)->nnode();
+             unsigned nod_dim=finite_element_pt(0)->node_pt(0)->ndim();
+             Vector<double> other_nodal_positions
+              (nod_dim*nnod_per_el*nelem_halo);
+             Vector<int> other_nodal_hangings(nnod_per_el*nelem_halo);
+             MPI_Recv(&other_nodal_positions[0],nod_dim*nnod_per_el*nelem_halo,
+                      MPI_DOUBLE,dd,0,comm_pt->mpi_comm(),&status);
+             MPI_Recv(&other_nodal_hangings[0],nnod_per_el*nelem_halo,
+                      MPI_INT,dd,
+                      1,comm_pt->mpi_comm(),&status);
+             
 //         oomph_info << "Received from process " << dd 
 //            << ", with size=" << nod_dim*nnod_per_el*nelem_halo << std::endl;
-         
-           sprintf(filename,"%s/error_haloed_check%i_%i.dat",
-                   doc_info.directory().c_str(),dd,my_rank);
-           haloed_file.open(filename);
-           sprintf(filename,"%s/error_halo_check%i_%i.dat",
-                   doc_info.directory().c_str(),dd,my_rank);
-           halo_file.open(filename);
-     
-           unsigned count=0;         
-           unsigned count_hanging=0;
-           for (int e=0;e<nelem_haloed;e++)
-            {   
-             for (unsigned j=0;j<nnod_per_el;j++)
+             
+             sprintf(filename,"%s/error_haloed_check%i_%i.dat",
+                     doc_info.directory().c_str(),dd,my_rank);
+             haloed_file.open(filename);
+             sprintf(filename,"%s/error_halo_check%i_%i.dat",
+                     doc_info.directory().c_str(),dd,my_rank);
+             halo_file.open(filename);
+             
+             unsigned count=0;         
+             unsigned count_hanging=0;
+             for (int e=0;e<nelem_haloed;e++)
               {
-               // Testing POSITIONS, not x location 
-               // (cf hanging nodes, nodes.h)
-               double x_haloed=haloed_elem_pt[e]->node_pt(j)->position(0);
-               double y_haloed=haloed_elem_pt[e]->node_pt(j)->position(1);
-               double z_haloed=0.0;
-               if (nod_dim==3)
+               FiniteElement* finite_el_pt = 
+                dynamic_cast<FiniteElement*>(haloed_elem_pt[e]);
+               
+               if(finite_el_pt!=0)
                 {
-                 z_haloed=haloed_elem_pt[e]->node_pt(j)->position(2);
-                }
-               double x_halo=other_nodal_positions[count];
-               count++;
-               double y_halo=other_nodal_positions[count];
-               count++;
-               int other_hanging=other_nodal_hangings[count_hanging];
-               count_hanging++;
-               double z_halo=0.0;
-               if (nod_dim==3)
-                {
-                 z_halo=other_nodal_positions[count];
-                 count++;
-                }
-               double error=sqrt( pow(x_haloed-x_halo,2)+ 
-                                  pow(y_haloed-y_halo,2)+
-                                  pow(z_haloed-z_halo,2));
-               if (fabs(error)>max_error) max_error=fabs(error);
-               if (fabs(error)>0.0)
-                {
-                 // Report error. NOTE: ERROR IS THROWN BELOW ONCE 
-                 // ALL THIS HAS BEEN PROCESSED.
-                 oomph_info
-                  << "Discrepancy between nodal coordinates of halo(ed)"
-                  << "element.  Error: " << error << std::endl;
-                 oomph_info
-                  << "Domain with non-halo (i.e. haloed) elem: " 
-                  << dd << std::endl;
-                 oomph_info
-                  << "Domain with    halo                elem: " << d
-                  << std::endl;
-                 oomph_info
-                  << "Current processor is " << my_rank 
-                  << std::endl
-                  << "Nodal positions: " << x_halo << " " << y_halo 
-                  << std::endl
-                  << "and haloed: " << x_haloed << " " << y_haloed << std::endl
-                  << "Node pointer: " << haloed_elem_pt[e]->node_pt(j)
-                  << std::endl;
+                 for (unsigned j=0;j<nnod_per_el;j++)
+                  {
+                   // Testing POSITIONS, not x location 
+                   // (cf hanging nodes, nodes.h)
+                   double x_haloed=finite_el_pt->node_pt(j)->position(0);
+                   double y_haloed=finite_el_pt->node_pt(j)->position(1);
+                   double z_haloed=0.0;
+                   if (nod_dim==3)
+                    {
+                     z_haloed=finite_el_pt->node_pt(j)->position(2);
+                    }
+                   double x_halo=other_nodal_positions[count];
+                   count++;
+                   double y_halo=other_nodal_positions[count];
+                   count++;
+                   int other_hanging=other_nodal_hangings[count_hanging];
+                   count_hanging++;
+                   double z_halo=0.0;
+                   if (nod_dim==3)
+                    {
+                     z_halo=other_nodal_positions[count];
+                     count++;
+                    }
+                   double error=sqrt( pow(x_haloed-x_halo,2)+ 
+                                      pow(y_haloed-y_halo,2)+
+                                      pow(z_haloed-z_halo,2));
+                   if (fabs(error)>max_error) max_error=fabs(error);
+                   if (fabs(error)>0.0)
+                    {
+                     // Report error. NOTE: ERROR IS THROWN BELOW ONCE 
+                     // ALL THIS HAS BEEN PROCESSED.
+                     oomph_info
+                      << "Discrepancy between nodal coordinates of halo(ed)"
+                      << "element.  Error: " << error << std::endl;
+                     oomph_info
+                      << "Domain with non-halo (i.e. haloed) elem: " 
+                      << dd << std::endl;
+                     oomph_info
+                      << "Domain with    halo                elem: " << d
+                      << std::endl;
+                     oomph_info
+                      << "Current processor is " << my_rank 
+                      << std::endl
+                      << "Nodal positions: " << x_halo << " " << y_halo 
+                      << std::endl
+                      << "and haloed: " << x_haloed << " " << y_haloed << std::endl
+                      << "Node pointer: " << finite_el_pt->node_pt(j)
+                      << std::endl;
 //               oomph_info << "Haloed: " << x_haloed << " " << y_haloed << " "
 //                          << error << " " << my_rank << " "
 //                          << dd << std::endl;
 //               oomph_info << "Halo: " << x_halo << " " << y_halo << " "
 //                          << error << " " << my_rank << " "
 //                          << dd << std::endl;
-                 haloed_file << x_haloed << " " << y_haloed << " "
-                             << error << " " << my_rank << " " 
-                             << dd << " "
-                             << haloed_elem_pt[e]->node_pt(j)->is_hanging() 
-                             << std::endl;
-                 halo_file << x_halo << " " << y_halo << " "
-                           << error << " " << my_rank << " " 
-                           << dd << " " 
-                           << other_hanging << std::endl; 
-                 // (communicated is_hanging value)
+                     haloed_file << x_haloed << " " << y_haloed << " "
+                                 << error << " " << my_rank << " " 
+                                 << dd << " "
+                                 << finite_el_pt->node_pt(j)->is_hanging() 
+                                 << std::endl;
+                     halo_file << x_halo << " " << y_halo << " "
+                               << error << " " << my_rank << " " 
+                               << dd << " " 
+                               << other_hanging << std::endl; 
+                     // (communicated is_hanging value)
+                    }
+                  } // j<nnod_per_el
                 }
-              } // j<nnod_per_el
-            } // e<nelem_haloed
+              } // e<nelem_haloed
 //         oomph_info << "Check count (receive)... " << count << std::endl;
-           haloed_file.close();
-           halo_file.close();  
+             haloed_file.close();
+             halo_file.close();  
+            }
           }
         }
       }
@@ -3749,59 +3884,67 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
     {
 
      // Get vectors of halo elements by copy operation
-     Vector<FiniteElement*> 
+     Vector<GeneralisedElement*> 
       halo_elem_pt(halo_element_pt(d));
      
      // How many of my elements are halo elements whose non-halo
      // counterpart is located on processor d?
      unsigned nelem_halo=halo_elem_pt.size();
-
+     
      if (nelem_halo!=0)
       {          
        // Send it across to the processor whose haloed nodes are being checked
        MPI_Send(&nelem_halo,1,MPI_INT,d,0,comm_pt->mpi_comm());
 
 
-       // Now string together the nodal positions of all halo nodes
-       unsigned nnod_per_el=finite_element_pt(0)->nnode();
-       unsigned nod_dim=finite_element_pt(0)->node_pt(0)->ndim();
-       Vector<double> nodal_positions(nod_dim*nnod_per_el*nelem_halo); 
-       Vector<int> nodal_hangings(nnod_per_el*nelem_halo);
-       unsigned count=0;
-       unsigned count_hanging=0;
-       for (unsigned e=0;e<nelem_halo;e++)
+       //Only bother if the mesh consists of finite elements
+       if(dynamic_cast<FiniteElement*>(this->element_pt(0)))
         {
-         FiniteElement* el_pt= halo_elem_pt[e];
-         for (unsigned j=0;j<nnod_per_el;j++)
+         // Now string together the nodal positions of all halo nodes
+         unsigned nnod_per_el=finite_element_pt(0)->nnode();
+         unsigned nod_dim=finite_element_pt(0)->node_pt(0)->ndim();
+         Vector<double> nodal_positions(nod_dim*nnod_per_el*nelem_halo); 
+         Vector<int> nodal_hangings(nnod_per_el*nelem_halo);
+         unsigned count=0;
+         unsigned count_hanging=0;
+         for (unsigned e=0;e<nelem_halo;e++)
           {
-           // Testing POSITIONS, not x location (cf hanging nodes, nodes.h)
-           nodal_positions[count]=el_pt->node_pt(j)->position(0);
-           count++;
-           nodal_positions[count]=el_pt->node_pt(j)->position(1);
-           count++;
-           if (el_pt->node_pt(j)->is_hanging())
+           FiniteElement* finite_el_pt = 
+            dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
+           if(finite_el_pt!=0)
             {
-             nodal_hangings[count_hanging]=1;
-            }
-           else
-            {
-             nodal_hangings[count_hanging]=0;
-            }
-           count_hanging++;
-           if (nod_dim==3)
-            {
-             nodal_positions[count]=el_pt->node_pt(j)->position(2);
-             count++;
+             for (unsigned j=0;j<nnod_per_el;j++)
+              {
+               // Testing POSITIONS, not x location (cf hanging nodes, nodes.h)
+               nodal_positions[count]=finite_el_pt->node_pt(j)->position(0);
+               count++;
+               nodal_positions[count]=finite_el_pt->node_pt(j)->position(1);
+               count++;
+               if (finite_el_pt->node_pt(j)->is_hanging())
+                {
+                 nodal_hangings[count_hanging]=1;
+                }
+               else
+                {
+                 nodal_hangings[count_hanging]=0;
+                }
+               count_hanging++;
+               if (nod_dim==3)
+                {
+                 nodal_positions[count]=finite_el_pt->node_pt(j)->position(2);
+                 count++;
+                }
+              }
             }
           }
+         // Send it across to the processor whose haloed elements are being 
+         // checked
+         
+         MPI_Send(&nodal_positions[0],nod_dim*nnod_per_el*nelem_halo,
+                  MPI_DOUBLE,d,0,comm_pt->mpi_comm());
+         MPI_Send(&nodal_hangings[0],nnod_per_el*nelem_halo,
+                  MPI_INT,d,1,comm_pt->mpi_comm());
         }
-       // Send it across to the processor whose haloed elements are being 
-       // checked
-
-       MPI_Send(&nodal_positions[0],nod_dim*nnod_per_el*nelem_halo,
-                MPI_DOUBLE,d,0,comm_pt->mpi_comm());
-       MPI_Send(&nodal_hangings[0],nnod_per_el*nelem_halo,
-                MPI_INT,d,1,comm_pt->mpi_comm());
       }
     }
   }
@@ -3853,14 +3996,23 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
      // (This will only work if there are elements on this processor...)
      if ((nnod==0) && (nelement()!=0))
       {
-       unsigned ndim=finite_element_pt(0)->node_pt(0)->ndim();
-       if (ndim==2)
+       FiniteElement* f_el_pt = dynamic_cast<FiniteElement*>(element_pt(0));
+       //If it's a generalised element mesh dummy output
+       if(f_el_pt==0)
         {
-         halo_file   << " 1.0 1.1 " << std::endl;
+         halo_file << "0.0" << std::endl;
         }
        else
         {
-         halo_file   << " 1.0 1.1 1.1" << std::endl;
+         unsigned ndim=f_el_pt->node_pt(0)->ndim();
+         if (ndim==2)
+          {
+           halo_file   << " 1.0 1.1 " << std::endl;
+          }
+         else
+          {
+           halo_file   << " 1.0 1.1 1.1" << std::endl;
+          }
         }
       }
      halo_file.close(); 
@@ -3890,20 +4042,29 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
      // (needed for tecplot)
      if ((nnod==0) && (nelement()!=0))
       {
-       unsigned ndim=finite_element_pt(0)->node_pt(0)->ndim();
-       if (ndim==2)
+       FiniteElement* f_el_pt = dynamic_cast<FiniteElement*>(element_pt(0));
+       //If it's a generalised element mesh dummy output
+       if(f_el_pt==0)
         {
-         halo_file   << " 1.0 1.1 " << std::endl;
+         haloed_file << "0.0" << std::endl;
         }
        else
         {
-         halo_file   << " 1.0 1.1 1.1" << std::endl;
+         unsigned ndim=f_el_pt->node_pt(0)->ndim();
+         if (ndim==2)
+          {
+           haloed_file   << " 1.0 1.1 " << std::endl;
+          }
+         else
+          {
+           haloed_file   << " 1.0 1.1 1.1" << std::endl;
+          }
         }
       }
      haloed_file.close(); 
     }
   }
-
+ 
  // Check halo/haloed nodes lookup schemes
  //---------------------------------------
  max_error=0.0;
@@ -4168,7 +4329,7 @@ void Mesh::flush_all_external_storage()
 //========================================================================
 /// \short Add external element to this Mesh.
 //========================================================================
-bool Mesh::add_external_element_pt(FiniteElement*& el_pt)
+bool Mesh::add_external_element_pt(GeneralisedElement*& el_pt)
 {
  // Only add the element to the external element storage if
  // it's not already there
@@ -4236,7 +4397,7 @@ bool Mesh::add_external_node_pt(Node*& nod_pt)
 /// If the element is already in the storage scheme then return its index
 //========================================================================
 unsigned Mesh::add_external_haloed_element_pt(const unsigned& p, 
-                                              FiniteElement*& el_pt)
+                                              GeneralisedElement*& el_pt)
 {
  // Loop over current storage
  unsigned n_extern_haloed=nexternal_haloed_element(p);

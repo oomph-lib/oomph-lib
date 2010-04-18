@@ -402,20 +402,21 @@ namespace oomph
          }
        }
 
+     
       // Setup the map between "root" element and number in global mesh
       // (currently used in the load_balance() routines)
-      unsigned n_element=mesh_pt()->nelement();
+      unsigned n_element=global_mesh_pt->nelement();
       for (unsigned e=0;e<n_element;e++)
        {
-        FiniteElement* el_pt=mesh_pt()->finite_element_pt(e);
-        Base_mesh_element_number[el_pt]=e;
+        //FiniteElement* el_pt=mesh_pt()->finite_element_pt(e);
+        Base_mesh_element_number[global_mesh_pt->element_pt(e)]=e;
        }
 
       // Distribute the (sub)meshes (i.e. sort out their halo lookup schemes)
       if (n_mesh==0)
        {
-        mesh_pt()->distribute(this->communicator_pt(),
-                              element_domain,doc_info,report_stats);
+        global_mesh_pt->distribute(this->communicator_pt(),
+                                   element_domain,doc_info,report_stats);
        }
       else // There are submeshes, "distribute" each one separately
        {
@@ -1194,6 +1195,37 @@ namespace oomph
 //================================================================
 unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
 {
+ //Check that the global mesh has been build
+#ifdef PARANOID
+ if(Mesh_pt==0)
+  {
+   std::ostringstream error_stream;
+   error_stream << 
+    "Global mesh does not exist, so equation numbers cannot be assigned.\n";
+   //Check for sub meshes
+   if(nsub_mesh()==0)
+    {
+     error_stream << "There aren't even any sub-meshes in the Problem.\n"
+                  << "You can set the global mesh directly by using\n"
+                  << "Problem::mesh_pt() = my_mesh_pt;\n"
+                  << "OR you can use Problem::add_sub_mesh(mesh_pt); "
+                  << "to add a sub mesh.\n";
+    }
+   else
+    {
+     error_stream << "There are " << nsub_mesh() << " sub-meshes.\n";
+    }
+   error_stream << 
+    "You need to call Problem::build_global_mesh() to create a global mesh\n"
+                << "from the sub-meshes.\n\n";
+
+   throw OomphLibError(error_stream.str(),
+                       "Problem::assign_eqn_numbers()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+    
+               
 
 #ifdef OOMPH_HAS_MPI
 
@@ -4520,7 +4552,7 @@ void Problem::parallel_sparse_assemble
           mesh_pt(imesh)->nexternal_halo_element(p);
          for (unsigned j = 0; j < n_ext_halo_element; j++)
           {
-           FiniteElement* ext_halo_element_pt = 
+           GeneralisedElement* ext_halo_element_pt = 
             mesh_pt(imesh)->external_halo_element_pt(p,j);
            unsigned ndata = ext_halo_element_pt->ninternal_data();
            for (unsigned i = 0; i < ndata; i++)
@@ -4546,7 +4578,7 @@ void Problem::parallel_sparse_assemble
       {
        if (p!=my_rank)
         {
-         Vector<FiniteElement*> halo_element_pt = 
+         Vector<GeneralisedElement*> halo_element_pt = 
           mesh_pt(imesh)->halo_element_pt(p);
          unsigned n_halo_element = halo_element_pt.size();
          for (unsigned j = 0; j < n_halo_element; j++)
@@ -6902,6 +6934,7 @@ newton_solve_continuation(double* const &parameter_pt,
      //Redistribute the RHS to match the linear solver
      //input_z.redistribute(Linear_solver_pt->distribution_pt());
      //Do not clear z because we assume that it has dR/dparam
+     z.clear();
      //Now resolve the system with the new RHS
      Linear_solver_pt->resolve(input_z,z);
     }
@@ -10845,7 +10878,8 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
       }
      
      // Now loop over haloed elements and prepare to send internal data
-     Vector<FiniteElement*> haloed_elem_pt=mesh_pt->haloed_element_pt(rank);
+     Vector<GeneralisedElement*> 
+      haloed_elem_pt=mesh_pt->haloed_element_pt(rank);
      unsigned nelem_haloed=haloed_elem_pt.size();
      unsigned count_intern=0;
 
@@ -10978,7 +11012,7 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
           }
 
          // Get number of halo elements whose non-halo is on process send_rank
-         Vector<FiniteElement*> halo_elem_pt=mesh_pt->
+         Vector<GeneralisedElement*> halo_elem_pt=mesh_pt->
           halo_element_pt(send_rank);
          unsigned nelem_halo=halo_elem_pt.size();
          
@@ -11559,7 +11593,8 @@ void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
 
      // now loop over haloed elements and prepare to send 
      // equation numbers for internal data
-     Vector<FiniteElement*> haloed_elem_pt=mesh_pt->haloed_element_pt(rank);
+     Vector<GeneralisedElement*> 
+      haloed_elem_pt=mesh_pt->haloed_element_pt(rank);
      unsigned nelem_haloed=haloed_elem_pt.size();
      unsigned count_intern=0;
 
@@ -11657,7 +11692,7 @@ void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
           }
 
          // Get number of halo elements whose non-halo is on process send_rank
-         Vector<FiniteElement*> halo_elem_pt=mesh_pt->
+         Vector<GeneralisedElement*> halo_elem_pt=mesh_pt->
           halo_element_pt(send_rank);
          unsigned nelem_halo=halo_elem_pt.size();
 

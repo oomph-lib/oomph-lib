@@ -325,15 +325,14 @@ namespace Multi_domain_functions
   void add_external_haloed_node_to_storage(int& iproc, Node* nod_pt,
                                            Problem* problem_pt,
                                            Mesh* const &external_mesh_pt,
-                                           int& n_cont_inter_values,
-                                           FiniteElement* f_el_pt);
+                                           int& n_cont_inter_values);
+
 
   /// \short Helper function to add external haloed node that is not a master
   void add_external_haloed_node_helper(int& iproc, Node* nod_pt,
                                        Problem* problem_pt,
                                        Mesh* const &external_mesh_pt,
-                                       int& n_cont_inter_values,
-                                       FiniteElement* f_el_pt);
+                                       int& n_cont_inter_values);
 
   /// \short Helper function to add external haloed node that is a master
   void add_external_haloed_master_node_helper(int& iproc,Node* master_nod_pt,
@@ -347,8 +346,7 @@ namespace Multi_domain_functions
   void get_required_nodal_information_helper(int& iproc, Node* nod_pt,
                                              Problem* problem_pt,
                                              Mesh* const &external_mesh_pt,
-                                             int& n_cont_inter_values,
-                                             FiniteElement* f_el_pt);
+                                             int& n_cont_inter_values);
 
   /// \short Helper function to get the required master nodal information from
   /// an external haloed master node so that a fully-functional external halo
@@ -366,17 +364,16 @@ namespace Multi_domain_functions
                                           Mesh* const &external_mesh_pt,
                                           unsigned& loc_p,
                                           unsigned& node_index,
-                                          EXT_ELEMENT* new_el_pt,
+                                          FiniteElement* const &new_el_pt,
                                           int& n_cont_inter_values,
                                           Problem* problem_pt);
 
   /// \short Helper function to add external halo node that is not a master
-  template<class EXT_ELEMENT>
    void add_external_halo_node_helper(Node* &new_nod_pt,
                                       Mesh* const &external_mesh_pt,
                                       unsigned& loc_p,
                                       unsigned& node_index,
-                                      EXT_ELEMENT* new_el_pt,
+                                      FiniteElement* const &new_el_pt,
                                       int& n_cont_inter_values,
                                       Problem* problem_pt);
 
@@ -386,18 +383,17 @@ namespace Multi_domain_functions
                                              Node* &new_nod_pt,
                                              Mesh* const &external_mesh_pt,
                                              unsigned& loc_p,
-                                             EXT_ELEMENT* new_el_pt,
                                              int& n_cont_inter_values,
                                              Problem* problem_pt);
 
 
   /// \short Helper function which constructs a new external halo node 
   /// (on an element) with the information sent from the haloed process
-  template<class EXT_ELEMENT>
    void construct_new_external_halo_node_helper(Node* &new_nod_pt,
                                                 unsigned& loc_p,
                                                 unsigned& node_index,
-                                                EXT_ELEMENT* new_el_pt,
+                                                FiniteElement* const 
+                                                &new_el_pt,
                                                 Mesh* const &external_mesh_pt,
                                                 Problem* problem_pt);
 
@@ -406,7 +402,7 @@ namespace Multi_domain_functions
   template<class EXT_ELEMENT>
    void construct_new_external_halo_master_node_helper
    (Node* &new_master_nod_pt,Node* &nod_pt,unsigned& loc_p,
-    EXT_ELEMENT* new_el_pt,Mesh* const &external_mesh_pt,Problem* problem_pt);
+    Mesh* const &external_mesh_pt,Problem* problem_pt);
 
 #endif
 

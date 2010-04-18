@@ -332,8 +332,8 @@ public:
 
 
  /// Overload Access function for the mesh
- ShellMesh<ELEMENT>* mesh_pt() 
-  {return dynamic_cast<ShellMesh<ELEMENT>*>(Problem::mesh_pt());}
+ ShellMesh<ELEMENT>* solid_mesh_pt() 
+  {return dynamic_cast<ShellMesh<ELEMENT>*>(this->Solid_mesh_pt);}
 
  /// Actions after solve empty
  void actions_after_newton_solve() {}
@@ -341,6 +341,43 @@ public:
  /// Actions before solve empty
  void actions_before_newton_solve() {}
  
+ /// \short Actions after problem distribution.
+ /// Need to reset the pointer to stored shape functions on all processors
+ void actions_after_distribute()
+  {
+   //If there are any solid elements calculate and store the 
+   //shape functions in the first element
+   unsigned n_solid_element = this->solid_mesh_pt()->nelement();
+
+   //Explicit pointer to first element in the mesh if there is one
+   ELEMENT* first_el_pt =0;
+   if(n_solid_element > 0) 
+    {
+     first_el_pt = 
+      dynamic_cast<ELEMENT*>(solid_mesh_pt()->element_pt(0));
+    }
+   
+   //Loop over all elements
+   for(unsigned e=0;e<n_solid_element;e++)
+    {
+     ELEMENT* el_pt = dynamic_cast<ELEMENT*>(solid_mesh_pt()->element_pt(e));
+     
+     //Pre-compute the second derivatives wrt Lagrangian coordinates
+     //for the first element only
+     if(e==0)
+      {
+       el_pt->pre_compute_d2shape_lagrangian_at_knots();
+      }
+     //Otherwise set the values to be the same as those in the first element
+     //this is OK because the Lagrangian mesh is uniform.
+       //
+       else
+        {
+         el_pt->set_dshape_lagrangian_stored_from_element(first_el_pt);
+        }
+    }
+  }
+
  //A self_test function
  void solve();
 
@@ -354,6 +391,12 @@ private:
 
  /// Second trace node
  Node* Trace_node2_pt;
+
+ /// Pointer to the solid mesh
+ Mesh* Solid_mesh_pt;
+
+ /// Pointer to the mesh that contains the displacement control element
+ Mesh* Displacement_control_mesh_pt;
 
 };
 
@@ -370,88 +413,88 @@ ShellProblem<ELEMENT>::ShellProblem(const unsigned &nx, const unsigned &ny,
  Undeformed_midplane_pt = new EllipticalTube(1.0,1.0);
 
  //Now create the mesh
- Problem::mesh_pt() = new ShellMesh<ELEMENT>(nx,ny,lx,ly); 
+ Solid_mesh_pt = new ShellMesh<ELEMENT>(nx,ny,lx,ly); 
 
  //Set the undeformed positions in the mesh
- mesh_pt()->assign_undeformed_positions(Undeformed_midplane_pt);
+ solid_mesh_pt()->assign_undeformed_positions(Undeformed_midplane_pt);
 
  //Reorder the elements, since I know what's best for them....
- mesh_pt()->element_reorder();
+ solid_mesh_pt()->element_reorder();
 
  //Apply boundary conditions to the ends of the tube
- unsigned n_ends = mesh_pt()->nboundary_node(1);
+ unsigned n_ends = solid_mesh_pt()->nboundary_node(1);
  //Loop over the node
  for(unsigned i=0;i<n_ends;i++)
   {
    //Pin in the axial direction (prevents rigid body motions)
-   mesh_pt()->boundary_node_pt(1,i)->pin_position(2);
-   mesh_pt()->boundary_node_pt(3,i)->pin_position(2);
+   solid_mesh_pt()->boundary_node_pt(1,i)->pin_position(2);
+   solid_mesh_pt()->boundary_node_pt(3,i)->pin_position(2);
    //Derived conditions
-   mesh_pt()->boundary_node_pt(1,i)->pin_position(2,2);
-   mesh_pt()->boundary_node_pt(3,i)->pin_position(2,2);
+   solid_mesh_pt()->boundary_node_pt(1,i)->pin_position(2,2);
+   solid_mesh_pt()->boundary_node_pt(3,i)->pin_position(2,2);
 
    //------------------CLAMPING CONDITIONS----------------------
    //------Pin positions in the transverse directions-----------
    // Comment these out to get the ring case
-   mesh_pt()->boundary_node_pt(1,i)->pin_position(0);
-   mesh_pt()->boundary_node_pt(3,i)->pin_position(0);
+   solid_mesh_pt()->boundary_node_pt(1,i)->pin_position(0);
+   solid_mesh_pt()->boundary_node_pt(3,i)->pin_position(0);
    //Derived conditions
-   mesh_pt()->boundary_node_pt(1,i)->pin_position(2,0);
-   mesh_pt()->boundary_node_pt(3,i)->pin_position(2,0);
+   solid_mesh_pt()->boundary_node_pt(1,i)->pin_position(2,0);
+   solid_mesh_pt()->boundary_node_pt(3,i)->pin_position(2,0);
 
-   mesh_pt()->boundary_node_pt(1,i)->pin_position(1);
-   mesh_pt()->boundary_node_pt(3,i)->pin_position(1);
+   solid_mesh_pt()->boundary_node_pt(1,i)->pin_position(1);
+   solid_mesh_pt()->boundary_node_pt(3,i)->pin_position(1);
    //Derived conditions
-   mesh_pt()->boundary_node_pt(1,i)->pin_position(2,1);
-   mesh_pt()->boundary_node_pt(3,i)->pin_position(2,1);
+   solid_mesh_pt()->boundary_node_pt(1,i)->pin_position(2,1);
+   solid_mesh_pt()->boundary_node_pt(3,i)->pin_position(2,1);
    //----------------------------------------------------------
 
    // Set the axial gradients of the transverse coordinates to be
    // zero --- need to be enforced for ring or tube buckling
    //Pin dx/dz and dy/dz
-   mesh_pt()->boundary_node_pt(1,i)->pin_position(1,0);
-   mesh_pt()->boundary_node_pt(1,i)->pin_position(1,1);
-   mesh_pt()->boundary_node_pt(3,i)->pin_position(1,0);
-   mesh_pt()->boundary_node_pt(3,i)->pin_position(1,1);
+   solid_mesh_pt()->boundary_node_pt(1,i)->pin_position(1,0);
+   solid_mesh_pt()->boundary_node_pt(1,i)->pin_position(1,1);
+   solid_mesh_pt()->boundary_node_pt(3,i)->pin_position(1,0);
+   solid_mesh_pt()->boundary_node_pt(3,i)->pin_position(1,1);
    //Derived conditions
-   mesh_pt()->boundary_node_pt(1,i)->pin_position(3,0);
-   mesh_pt()->boundary_node_pt(1,i)->pin_position(3,1);
-   mesh_pt()->boundary_node_pt(3,i)->pin_position(3,0);
-   mesh_pt()->boundary_node_pt(3,i)->pin_position(3,1);
+   solid_mesh_pt()->boundary_node_pt(1,i)->pin_position(3,0);
+   solid_mesh_pt()->boundary_node_pt(1,i)->pin_position(3,1);
+   solid_mesh_pt()->boundary_node_pt(3,i)->pin_position(3,0);
+   solid_mesh_pt()->boundary_node_pt(3,i)->pin_position(3,1);
  }
 
  //Now loop over the sides and apply symmetry conditions
- unsigned n_side = mesh_pt()->nboundary_node(0);
+ unsigned n_side = solid_mesh_pt()->nboundary_node(0);
  for(unsigned i=0;i<n_side;i++)
   {
    //At the side where theta is 0, pin in the y direction
-   mesh_pt()->boundary_node_pt(0,i)->pin_position(1);
+   solid_mesh_pt()->boundary_node_pt(0,i)->pin_position(1);
    //Derived condition
-   mesh_pt()->boundary_node_pt(0,i)->pin_position(1,1);
+   solid_mesh_pt()->boundary_node_pt(0,i)->pin_position(1,1);
    //Pin dx/dtheta and dz/dtheta
-   mesh_pt()->boundary_node_pt(0,i)->pin_position(2,0);
-   mesh_pt()->boundary_node_pt(0,i)->pin_position(2,2);
+   solid_mesh_pt()->boundary_node_pt(0,i)->pin_position(2,0);
+   solid_mesh_pt()->boundary_node_pt(0,i)->pin_position(2,2);
    //Pin the mixed derivative
-   mesh_pt()->boundary_node_pt(0,i)->pin_position(3,0);
-   mesh_pt()->boundary_node_pt(0,i)->pin_position(3,2);
+   solid_mesh_pt()->boundary_node_pt(0,i)->pin_position(3,0);
+   solid_mesh_pt()->boundary_node_pt(0,i)->pin_position(3,2);
 
    //At the side when theta is 0.5pi  pin in the x direction
-   mesh_pt()->boundary_node_pt(2,i)->pin_position(0);
+   solid_mesh_pt()->boundary_node_pt(2,i)->pin_position(0);
    //Derived condition
-   mesh_pt()->boundary_node_pt(2,i)->pin_position(1,0);
+   solid_mesh_pt()->boundary_node_pt(2,i)->pin_position(1,0);
    //Pin dy/dtheta and dz/dtheta
-   mesh_pt()->boundary_node_pt(2,i)->pin_position(2,1);
-   mesh_pt()->boundary_node_pt(2,i)->pin_position(2,2);
+   solid_mesh_pt()->boundary_node_pt(2,i)->pin_position(2,1);
+   solid_mesh_pt()->boundary_node_pt(2,i)->pin_position(2,2);
    //Pin the mixed derivative
-   mesh_pt()->boundary_node_pt(2,i)->pin_position(3,1);
-   mesh_pt()->boundary_node_pt(2,i)->pin_position(3,2);
+   solid_mesh_pt()->boundary_node_pt(2,i)->pin_position(3,1);
+   solid_mesh_pt()->boundary_node_pt(2,i)->pin_position(3,2);
 
    //Set an initial kick to make sure that we hop onto the
    //non-axisymmetric branch
    if((i>1) && (i<n_side-1))
     {
-     mesh_pt()->boundary_node_pt(0,i)->x(0) += 0.05;
-     mesh_pt()->boundary_node_pt(2,i)->x(1) -= 0.1;
+     solid_mesh_pt()->boundary_node_pt(0,i)->x(0) += 0.05;
+     solid_mesh_pt()->boundary_node_pt(2,i)->x(1) -= 0.1;
     }
   }
 
@@ -465,7 +508,7 @@ ShellProblem<ELEMENT>::ShellProblem(const unsigned &nx, const unsigned &ny,
 //  //Fix the displacement at the mid-point of the tube in the "vertical"
 //  //(y) direction.
 //  //Set the displacement control element (located halfway along the tube)
-// Disp_ctl_element_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(3*Ny-1));
+// Disp_ctl_element_pt = dynamic_cast<ELEMENT*>(solid_mesh_pt()->element_pt(3*Ny-1));
 //  //The midpoint of the tube is located exactly half-way along the element
 //  Vector<double> s(2);  s[0] = 1.0; s[1] = 0.0; //s[1] = 0.5
 //  //Fix the displacement at this point in the y (1) direction
@@ -478,7 +521,7 @@ ShellProblem<ELEMENT>::ShellProblem(const unsigned &nx, const unsigned &ny,
  // Choose element in which displacement control is applied: This
  // one is located halfway along the tube)
  SolidFiniteElement* controlled_element_pt=
-  dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(3*ny-1));
+  dynamic_cast<ELEMENT*>(solid_mesh_pt()->element_pt(3*ny-1));
  
  // Fix the displacement in the y (1) direction...
  unsigned controlled_direction=1;
@@ -505,9 +548,14 @@ ShellProblem<ELEMENT>::ShellProblem(const unsigned &nx, const unsigned &ny,
   displacement_control_load_pt();
  
  // Add the displacement-control element to the mesh
- mesh_pt()->add_element_pt(displ_control_el_pt); 
+ Displacement_control_mesh_pt = new Mesh;
+ Displacement_control_mesh_pt->add_element_pt(displ_control_el_pt); 
 
- 
+ //This mesh must be retained as halo on all processors
+#ifdef OOMPH_HAS_MPI
+ Displacement_control_mesh_pt->keep_all_elements_as_halos() = true;
+#endif
+
 
  // Complete build of shell elements
  //---------------------------------
@@ -516,13 +564,13 @@ ShellProblem<ELEMENT>::ShellProblem(const unsigned &nx, const unsigned &ny,
  unsigned n_element = nx*ny;
 
  //Explicit pointer to first element in the mesh
- ELEMENT* first_el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(0));
+ ELEMENT* first_el_pt = dynamic_cast<ELEMENT*>(solid_mesh_pt()->element_pt(0));
  
  //Loop over the elements 
  for(unsigned e=0;e<n_element;e++)
   {
    //Cast to a shell element
-   ELEMENT *el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
+   ELEMENT *el_pt = dynamic_cast<ELEMENT*>(solid_mesh_pt()->element_pt(e));
 
    //Set the load function
    el_pt->load_vector_fct_pt() = & Global_Physical_Variables::press_load;
@@ -539,9 +587,9 @@ ShellProblem<ELEMENT>::ShellProblem(const unsigned &nx, const unsigned &ny,
     {
      el_pt->pre_compute_d2shape_lagrangian_at_knots();
     }
-
    //Otherwise set the values to be the same as those in the first element
    //this is OK because the Lagrangian mesh is uniform.
+   //
    else
     {
      el_pt->set_dshape_lagrangian_stored_from_element(first_el_pt);
@@ -549,8 +597,14 @@ ShellProblem<ELEMENT>::ShellProblem(const unsigned &nx, const unsigned &ny,
   }
 
  //Set pointers to two trace nodes, used for output
- Trace_node_pt = mesh_pt()->finite_element_pt(2*ny-1)->node_pt(3);
- Trace_node2_pt = mesh_pt()->finite_element_pt(ny)->node_pt(1);
+ //in the middle of the shell so available on both processors!
+ Trace_node_pt = solid_mesh_pt()->finite_element_pt(2*ny-1)->node_pt(3);
+ Trace_node2_pt = solid_mesh_pt()->finite_element_pt(ny)->node_pt(1);
+
+ //Now add the two submeshes
+ this->add_sub_mesh(Solid_mesh_pt);
+ this->add_sub_mesh(Displacement_control_mesh_pt);
+ this->build_global_mesh();
 
  // Do equation numbering
  cout << std::endl;
@@ -577,7 +631,9 @@ void ShellProblem<ELEMENT>::solve()
  Max_newton_iterations = 40;
  
  //Open an output trace file
- ofstream trace("trace.dat");
+ char filename[100];
+ sprintf(filename,"trace_on_proc%i.dat",this->communicator_pt()->my_rank());
+ ofstream trace(filename);
 
  //Change in displacemenet
  double disp_incr = 0.05;
@@ -610,8 +666,10 @@ void ShellProblem<ELEMENT>::solve()
  trace.close();
  
  //Output the tube shape in the most strongly collapsed configuration
- ofstream file("final_shape.dat");
- mesh_pt()->output(file,5);
+ sprintf(filename,"final_shape_on_proc%i.dat",
+         this->communicator_pt()->my_rank());
+ ofstream file(filename);
+ solid_mesh_pt()->output(file,5);
  file.close();
 
 
@@ -643,7 +701,9 @@ void ShellProblem<ELEMENT>::solve()
  double ds = -0.5;
 
  //Open a different trace file
- trace.open("trace_disp.dat");
+ sprintf(filename,"trace_disp_on_proc%i.dat",
+         this->communicator_pt()->my_rank());
+ trace.open(filename);
  //Take fifteen continuation steps
  for(unsigned i=0;i<15;i++)
    {
@@ -684,6 +744,21 @@ int main(int argc, char* argv[])
  //Set up the problem
  ShellProblem<StorableShapeSolidElement<DiagHermiteShellElement> > 
   problem(5,5,L,L_phi);
+
+ //Let's just be crazy and distribut it
+#ifdef OOMPH_HAS_MPI
+ //Set up a dummy partition
+ unsigned n_element = problem.mesh_pt()->nelement();
+ Vector<unsigned> element_partition(n_element);
+ for(unsigned e=0;e<n_element/2;e++) {element_partition[e]=0;}
+ for(unsigned e=n_element/2;e<n_element;e++) {element_partition[e]=1;}
+
+ DocInfo mesh_doc_info;
+ bool report_stats=true;
+ mesh_doc_info.set_directory("RESLT_MESH");
+ problem.distribute(element_partition,mesh_doc_info,report_stats);
+ problem.check_halo_schemes(mesh_doc_info);
+#endif
 
  //Solve the problem
  problem.solve();

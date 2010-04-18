@@ -498,7 +498,7 @@ class MacroElementNodeUpdateMesh : public virtual Mesh
    // recalling the set_node_update_info for every halo element
    for (int iproc=0;iproc<n_proc;iproc++)
     {
-     Vector<FiniteElement*> halo_el_pt=halo_element_pt(iproc);
+     Vector<GeneralisedElement*> halo_el_pt=halo_element_pt(iproc);
      unsigned n_halo_el=halo_el_pt.size();
      for (unsigned e=0;e<n_halo_el;e++)
       {

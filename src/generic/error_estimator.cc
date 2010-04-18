@@ -1350,7 +1350,7 @@ void Z2ErrorEstimator::get_element_errors(OomphCommunicator* comm_pt,
       if (iproc!=my_rank) // Not current process, so send
        {
         //Get the haloed elements
-        Vector<FiniteElement*> haloed_elem_pt=
+        Vector<GeneralisedElement*> haloed_elem_pt=
          mesh_pt->haloed_element_pt(iproc);
         //Find the number of haloed elements
         int nelem_haloed=haloed_elem_pt.size();
@@ -1390,7 +1390,7 @@ void Z2ErrorEstimator::get_element_errors(OomphCommunicator* comm_pt,
          {
           if (iproc!=send_rank) // iproc=my_rank already!
            {
-            Vector<FiniteElement*> halo_elem_pt=mesh_pt->
+            Vector<GeneralisedElement*> halo_elem_pt=mesh_pt->
              halo_element_pt(send_rank);
             //Find number of halo elements
             int nelem_halo=halo_elem_pt.size();

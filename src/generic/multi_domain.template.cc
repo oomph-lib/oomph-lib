@@ -772,13 +772,13 @@ namespace oomph
             {
              // The required element has been located
              // The located coordinates have the same dimension as the bulk
-             FiniteElement* source_el_pt;
+             GeneralisedElement* source_el_pt;
              Vector<double> s_source(EL_DIM_EUL);
 
              // Is the bulk element the actual external element?
              if (!Use_bulk_element_as_external)
               {
-               // Use the object directly
+               // Use the object directly (it must be a finite element)
                source_el_pt=dynamic_cast<FiniteElement*>(sub_geom_obj_pt);
                s_source=s_ext;
               }
@@ -787,8 +787,7 @@ namespace oomph
                // Cast to a FaceElement and use the bulk element
                FaceElement* face_el_pt=
                 dynamic_cast<FaceElement*>(sub_geom_obj_pt);
-               source_el_pt=dynamic_cast<FiniteElement*>(face_el_pt->
-                                                         bulk_element_pt());
+               source_el_pt=face_el_pt->bulk_element_pt();
                // Translate the returned local coords into the bulk element
                face_el_pt->get_local_coordinate_in_bulk(s_ext,s_source);
               }
@@ -799,8 +798,13 @@ namespace oomph
              if (!source_el_pt->is_halo())
 #endif
               {
+               //Need to cast to a FiniteElement
+               FiniteElement* source_finite_el_pt = 
+                dynamic_cast<FiniteElement*>(source_el_pt);
+
                // Set the external element pointer and local coordinates
-               el_pt->external_element_pt(interaction_index,ipt)=source_el_pt;
+               el_pt->external_element_pt(interaction_index,ipt)
+                = source_finite_el_pt;
                el_pt->external_element_local_coord(interaction_index,ipt)
                 =s_source;
 
@@ -816,15 +820,17 @@ namespace oomph
                  added_external_element=
                   external_mesh_pt->add_external_element_pt(source_el_pt);
 
+
                  // If it was added then also try to add its nodes
                  if (added_external_element)
                   {
+
                    // Loop over the nodes of this external element
                    // and add (uniquely) as external nodes
-                   unsigned n_node=source_el_pt->nnode();
+                   unsigned n_node=source_finite_el_pt->nnode();
                    for (unsigned j=0; j<n_node; j++)
                     {
-                     Node* nod_pt=source_el_pt->node_pt(j);
+                     Node* nod_pt=source_finite_el_pt->node_pt(j);
 
                      bool added_external_node;
                      added_external_node=
@@ -967,8 +973,8 @@ namespace oomph
        // Did the locate method work?
        if (sub_geom_obj_pt!=0)
         {
-         // Get the source element - bulk or not?
-         FiniteElement *source_el_pt;
+         // Get the source element - bulk or not? (NO CHECKS)
+         GeneralisedElement *source_el_pt=0;
          if (!Use_bulk_element_as_external)
           {
            source_el_pt=dynamic_cast<FiniteElement*>(sub_geom_obj_pt);
@@ -1037,7 +1043,12 @@ namespace oomph
                Unsigned_values.push_back(1);
                Count_unsigned_values++;
 
-               MacroElement* macro_el_pt=source_el_pt->macro_elem_pt();
+               //Cast to finite element... this must work because it's
+               //a macroelement no update mesh
+               FiniteElement* source_finite_el_pt 
+                = dynamic_cast<FiniteElement*>(source_el_pt);
+
+               MacroElement* macro_el_pt=source_finite_el_pt->macro_elem_pt();
                // Send the macro element number across
                unsigned macro_el_num=macro_el_pt->macro_element_number();
                Unsigned_values.push_back(macro_el_num);
@@ -1079,11 +1090,28 @@ namespace oomph
                Count_unsigned_values++;
               }
 
+ 
+             //Cast to finite element... this must work because it's
+             //a macroelement no update mesh
+             FiniteElement* source_finite_el_pt 
+              = dynamic_cast<FiniteElement*>(source_el_pt);
+#ifdef PARANOID
+             if(source_finite_el_pt==0)
+              {
+               throw 
+                OomphLibError(
+                 "Unable to cast source function to finite element\n",
+               "Multi_domain_functions::locate_zeta_for-missing_coordinates()",
+                 OOMPH_EXCEPTION_LOCATION);
+              }
+#endif
+
+
              // Loop over the nodes of the new source element
-             unsigned n_node=source_el_pt->nnode();
+             unsigned n_node=source_finite_el_pt->nnode();
              for (unsigned j=0;j<n_node;j++)
               {
-               Node* nod_pt=source_el_pt->node_pt(j);
+               Node* nod_pt=source_finite_el_pt->node_pt(j);
 
                // Add the node to the storage; this routine
                // also takes care of any master nodes if the
@@ -1091,8 +1119,7 @@ namespace oomph
                add_external_haloed_node_to_storage(halo_copy_proc,nod_pt,
                                                    problem_pt,
                                                    external_mesh_pt,
-                                                   n_cont_inter_values,
-                                                   source_el_pt);
+                                                   n_cont_inter_values);
               }
             
             }
@@ -1230,14 +1257,14 @@ namespace oomph
               {
                // Create a new element from the communicated values
                // and coords from the process that located zeta
-               EXT_ELEMENT *new_el_pt= new EXT_ELEMENT;
-
-               // Add it to the external halo element storage
-               f_el_pt=dynamic_cast<FiniteElement*>(new_el_pt);
+               GeneralisedElement *new_el_pt= new EXT_ELEMENT;
 
                // Add external halo element to this mesh
                external_mesh_pt->
-                add_external_halo_element_pt(loc_p,f_el_pt);
+                add_external_halo_element_pt(loc_p, new_el_pt);
+ 
+               // Cast to the FE pointer
+               f_el_pt=dynamic_cast<FiniteElement*>(new_el_pt);
 
                // We need the number of interpolated values if Refineable
                int n_cont_inter_values;
@@ -1261,7 +1288,7 @@ namespace oomph
                   dynamic_cast<MacroElementNodeUpdateMesh*>
                   (external_mesh_pt);
                  unsigned macro_el_num=Unsigned_values[Count_unsigned_values];
-                 new_el_pt->set_macro_elem_pt
+                 f_el_pt->set_macro_elem_pt
                   (macro_mesh_pt->macro_domain_pt()->
                    macro_element_pt(macro_el_num));
                  Count_unsigned_values++;
@@ -1302,14 +1329,14 @@ namespace oomph
                 }
 
                // Now we add nodes to the new element
-               unsigned n_node=new_el_pt->nnode();
+               unsigned n_node=f_el_pt->nnode();
                for (unsigned j=0;j<n_node;j++)
                 {
                  Node* new_nod_pt=0;
 
                  // Call the add external halo node helper function
                  add_external_halo_node_to_storage<EXT_ELEMENT>
-                  (new_nod_pt,external_mesh_pt,loc_p,j,new_el_pt,
+                  (new_nod_pt,external_mesh_pt,loc_p,j,f_el_pt,
                    n_cont_inter_values,problem_pt);
                 }
               }
@@ -1321,10 +1348,20 @@ namespace oomph
                Count_unsigned_values++;
 
                // Use this index to get the element
-               f_el_pt=external_mesh_pt->
+               f_el_pt=dynamic_cast<FiniteElement*>(external_mesh_pt->
                 external_halo_element_pt
-                (loc_p,external_halo_el_index);
+                (loc_p,external_halo_el_index));
+
+               //If it's not a finite element die
+               if(f_el_pt==0)
+                {
+                 throw OomphLibError(
+                  "External halo element is not a FiniteElement\n",
+                  "Multi_domain_functions::create_external_halo_elements",
+                  OOMPH_EXCEPTION_LOCATION);
+                }
               }
+
              // The source element storage was initialised but
              // not filled earlier, so do it now
              // The located coordinates are required
@@ -1365,14 +1402,15 @@ namespace oomph
  template<class EXT_ELEMENT>
   void Multi_domain_functions::add_external_halo_node_to_storage
   (Node* &new_nod_pt, Mesh* const &external_mesh_pt, unsigned& loc_p,
-   unsigned& node_index, EXT_ELEMENT* new_el_pt, int& n_cont_inter_values,
+   unsigned& node_index, FiniteElement* const &new_el_pt, 
+   int& n_cont_inter_values,
    Problem* problem_pt)
   {
    // Add the external halo node if required
-   add_external_halo_node_helper<EXT_ELEMENT>
-    (new_nod_pt,external_mesh_pt,loc_p,node_index,new_el_pt,
-     n_cont_inter_values,problem_pt);
-
+   add_external_halo_node_helper(new_nod_pt,external_mesh_pt,loc_p,
+                                 node_index,new_el_pt,
+                                 n_cont_inter_values,problem_pt);
+   
    for (int i_cont=-1;i_cont<n_cont_inter_values;i_cont++)
     {
      if (Unsigned_values[Count_unsigned_values]==1)
@@ -1388,7 +1426,7 @@ namespace oomph
          Node* master_nod_pt=0;
          // Get the master node (creating and adding it if required)
          add_external_halo_master_node_helper<EXT_ELEMENT>
-          (master_nod_pt,new_nod_pt,external_mesh_pt,loc_p,new_el_pt,
+          (master_nod_pt,new_nod_pt,external_mesh_pt,loc_p,
            n_cont_inter_values,problem_pt);
 
          // Get the weight and set the HangInfo
@@ -1407,46 +1445,13 @@ namespace oomph
 
   }
 
-//=======start of add_external_halo_node_helper===========================
-/// Helper functiono to add external halo node that is not a master
-//========================================================================
-template<class EXT_ELEMENT>
- void Multi_domain_functions::add_external_halo_node_helper
-  (Node* &new_nod_pt, Mesh* const &external_mesh_pt, unsigned& loc_p,
-   unsigned& node_index, EXT_ELEMENT* new_el_pt, int& n_cont_inter_values,
-   Problem* problem_pt)
- {
-  // Given the node and the external mesh, and received information
-  // about them from process loc_p, construct them on the current process
-  if (Unsigned_values[Count_unsigned_values]==1)
-   {
-    // Increment counter
-    Count_unsigned_values++;
-    // Construct a new node based upon sent information
-    construct_new_external_halo_node_helper<EXT_ELEMENT>
-     (new_nod_pt,loc_p,node_index,new_el_pt,external_mesh_pt,problem_pt);
-   }
-  else
-   {
-    // Increment counter (node already exists)
-    Count_unsigned_values++;
-    // Copy node from received location
-    new_nod_pt=external_mesh_pt->external_halo_node_pt
-     (loc_p,Unsigned_values[Count_unsigned_values]);
-    new_el_pt->node_pt(node_index)=new_nod_pt;
-    // Increment counter
-    Count_unsigned_values++;
-   }
- }
-
 //========================================================================
 /// Helper function to add external halo node that is a master
 //========================================================================
 template<class EXT_ELEMENT>
  void Multi_domain_functions::add_external_halo_master_node_helper
   (Node* &new_master_nod_pt, Node* &new_nod_pt, Mesh* const &external_mesh_pt,
-   unsigned& loc_p, EXT_ELEMENT* new_el_pt, int& ncont_inter_values,
-   Problem* problem_pt)
+   unsigned& loc_p, int& ncont_inter_values,Problem* problem_pt)
  {
   // Given the node and the external mesh, and received information
   // about them from process loc_p, construct them on the current process
@@ -1456,8 +1461,7 @@ template<class EXT_ELEMENT>
     Count_unsigned_values++;
     // Construct a new node based upon sent information
     construct_new_external_halo_master_node_helper<EXT_ELEMENT>
-     (new_master_nod_pt,new_nod_pt,loc_p,new_el_pt,
-      external_mesh_pt,problem_pt);
+     (new_master_nod_pt,new_nod_pt,loc_p,external_mesh_pt,problem_pt);
    }
   else
    {
@@ -1471,256 +1475,6 @@ template<class EXT_ELEMENT>
    }
  }
 
-
-//========start of construct_new_external_halo_node_helper=================
-/// Helper function which constructs a new external halo node (on new element)
-/// with the required information sent from the haloed process
-//========================================================================
-template<class EXT_ELEMENT>
- void Multi_domain_functions::construct_new_external_halo_node_helper
- (Node* &new_nod_pt, unsigned& loc_p, unsigned& node_index,
-  EXT_ELEMENT* new_el_pt, Mesh* const &external_mesh_pt, Problem* problem_pt)
- {
-  // The first entry indicates the number of values at this new Node
-  // (which may be different across the same element e.g. Lagrange multipliers)
-  unsigned n_val=Unsigned_values[Count_unsigned_values];
-  Count_unsigned_values++;
-
-  // Null TimeStepper for now
-  TimeStepper* time_stepper_pt=0;
-  // Default number of previous values to 1
-  unsigned n_prev=1;
-
-  // The next entry in Unsigned_values indicates
-  // if a timestepper is required for this halo node
-  if (Unsigned_values
-      [Count_unsigned_values]==1)
-   {
-    Count_unsigned_values++;
-    // Index
-    time_stepper_pt=problem_pt->time_stepper_pt
-     (Unsigned_values[Count_unsigned_values]);
-    Count_unsigned_values++;
-    // Check whether number of prev values is "sent" across
-    n_prev+=time_stepper_pt->nprev_values();
-   }
-  else
-   {
-    // No timestepper, increment counter
-    Count_unsigned_values++;
-   }
-
-  // If this node was on a boundary then it needs to
-  // be on the same boundary here
-  if (Unsigned_values[Count_unsigned_values]==1)
-   {
-    Count_unsigned_values++;
-
-    // Construct a new boundary node
-    if (time_stepper_pt!=0)
-     {
-      new_nod_pt=new_el_pt->construct_boundary_node
-       (node_index,time_stepper_pt);
-     }
-    else
-     {
-      new_nod_pt=new_el_pt->construct_boundary_node(node_index);
-     }
-
-    // How many boundaries on the external mesh?
-    unsigned n_bnd=external_mesh_pt->nboundary();
-    for (unsigned i_bnd=0;i_bnd<n_bnd;i_bnd++)
-     {
-      if (Unsigned_values
-          [Count_unsigned_values]==1)
-       {
-        // Add to current boundary; increment counter
-        external_mesh_pt->add_boundary_node(i_bnd,
-                                            new_nod_pt);
-        Count_unsigned_values++;
-       }
-      else
-       {
-        // Not on this boundary; increment counter
-        Count_unsigned_values++;
-       }
-     }
-   }
-  else
-   {
-    // Not on boundary, increment counter
-    Count_unsigned_values++;
-
-    // Construct an ordinary (non-boundary) node
-    if (time_stepper_pt!=0)
-     {
-      new_nod_pt=new_el_pt->construct_node
-       (node_index,time_stepper_pt);
-     }
-    else
-     {
-      new_nod_pt=new_el_pt->construct_node(node_index);
-     }
-   }
-
-  // Node constructed: add to external halo nodes
-  external_mesh_pt->add_external_halo_node_pt(loc_p,new_nod_pt);
-
-  // Is the new constructed node Algebraic?
-  AlgebraicNode* new_alg_nod_pt=dynamic_cast<AlgebraicNode*>
-   (new_nod_pt);
-
-  // If it is algebraic, its node update functions will
-  // not yet have been set up properly
-  if (new_alg_nod_pt!=0)
-   {
-    // The AlgebraicMesh is the external mesh
-    AlgebraicMesh* alg_mesh_pt=dynamic_cast<AlgebraicMesh*>
-     (external_mesh_pt);
-
-    /// The first entry of All_alg_nodal_info contains
-    /// the default node update id
-    /// e.g. for the quarter circle there are 
-    /// "Upper_left_box", "Lower right box" etc...
-    unsigned update_id=Unsigned_values
-     [Count_unsigned_values];
-    Count_unsigned_values++;
-
-    Vector<double> ref_value;
-
-    // The size of this vector is in the next entry
-    // of All_alg_nodal_info
-    unsigned n_ref_val=Unsigned_values
-     [Count_unsigned_values];
-    Count_unsigned_values++;
-
-    // The reference values themselves are in
-    // All_alg_ref_value
-    ref_value.resize(n_ref_val);
-    for (unsigned i_ref=0;i_ref<n_ref_val;i_ref++)
-     {
-      ref_value[i_ref]=Double_values
-       [Count_double_values];
-      Count_double_values++;
-     }
-
-    Vector<GeomObject*> geom_object_pt;
-    /// again we need the size of this vector as it varies
-    /// between meshes; we also need some indication
-    /// as to which geometric object should be used...
-
-    // The size of this vector is in the next entry
-    // of All_alg_nodal_info
-    unsigned n_geom_obj=Unsigned_values
-     [Count_unsigned_values];
-    Count_unsigned_values++;
-
-    // The remaining indices are in the rest of 
-    // All_alg_nodal_info
-    geom_object_pt.resize(n_geom_obj);
-    for (unsigned i_geom=0;i_geom<n_geom_obj;i_geom++)
-     {
-      unsigned geom_index=Unsigned_values
-       [Count_unsigned_values];
-      Count_unsigned_values++;
-      // This index indicates which of the AlgebraicMesh's
-      // stored geometric objects should be used
-      // (0 is a null pointer; everything else should have
-      //  been filled in by the specific Mesh).  If it
-      // hasn't been filled in then the update_node_update
-      // call should fix it
-      geom_object_pt[i_geom]=alg_mesh_pt->
-       geom_object_list_pt(geom_index);
-     }
-
-    /// For the received update_id, ref_value, geom_object
-    /// call add_node_update_info
-    new_alg_nod_pt->add_node_update_info
-     (update_id,alg_mesh_pt,geom_object_pt,ref_value);
-
-    /// Now call update_node_update
-    alg_mesh_pt->update_node_update(new_alg_nod_pt);
-   }
-
-  // Is the node a MacroElementNodeUpdateNode?
-  MacroElementNodeUpdateNode* macro_nod_pt=
-   dynamic_cast<MacroElementNodeUpdateNode*>(new_nod_pt);
-
-  if (macro_nod_pt!=0)
-   {
-    // Need to call set_node_update_info; this requires
-    // a Vector<GeomObject*> (taken from the mesh)
-    Vector<GeomObject*> geom_object_vector_pt;
-
-    // Access the required geom objects from the
-    // MacroElementNodeUpdateMesh
-    MacroElementNodeUpdateMesh* macro_mesh_pt=
-     dynamic_cast<MacroElementNodeUpdateMesh*>
-     (external_mesh_pt);
-    geom_object_vector_pt=
-     macro_mesh_pt->geom_object_vector_pt();
-
-    // Get local coordinate of node in new element
-    Vector<double> s_in_macro_node_update_element;
-    new_el_pt->local_coordinate_of_node
-     (node_index,s_in_macro_node_update_element);
-
-    // Set node update info for this node
-    macro_nod_pt->set_node_update_info
-     (new_el_pt,s_in_macro_node_update_element,
-      geom_object_vector_pt);
-   }
-
-  // Is the new node a SolidNode? 
-  SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(new_nod_pt);
-  if (solid_nod_pt!=0)
-   {
-    unsigned n_solid_val=solid_nod_pt->variable_position_pt()->nvalue();
-    for (unsigned i_val=0;i_val<n_solid_val;i_val++)
-     {
-      for (unsigned t=0;t<n_prev;t++)
-       {
-        solid_nod_pt->variable_position_pt()->
-         set_value(t,i_val,
-                   Double_values[Count_double_values]);
-        Count_double_values++;
-       }
-     }
-   }
-
-  // If there are additional values, resize the node
-  unsigned n_new_val=new_nod_pt->nvalue();
-  if (n_val>n_new_val)
-   {
-    new_nod_pt->resize(n_val);
-   }
-
-  // Get copied history values
-  //  unsigned n_val=new_nod_pt->nvalue();
-  for (unsigned i_val=0;i_val<n_val;i_val++)
-   {
-    for (unsigned t=0;t<n_prev;t++)
-     {
-      new_nod_pt->set_value(t,i_val,Double_values
-                            [Count_double_values]);
-      Count_double_values++;
-     }
-   }
-
-  // Get copied history values for positions
-  unsigned n_dim=new_nod_pt->ndim();
-  for (unsigned idim=0;idim<n_dim;idim++)
-   {
-    for (unsigned t=0;t<n_prev;t++)
-     {
-      // Copy to coordinate
-      new_nod_pt->x(t,idim)=Double_values
-       [Count_double_values];
-      Count_double_values++;
-     }
-   }
- }
-
 //======start of construct_new_external_halo_master_node_helper===========
 /// Helper function which constructs a new external halo master node
 /// with the required information sent from the haloed process
@@ -1728,7 +1482,7 @@ template<class EXT_ELEMENT>
 template<class EXT_ELEMENT>
  void Multi_domain_functions::construct_new_external_halo_master_node_helper
  (Node* &new_master_nod_pt, Node* &nod_pt, unsigned& loc_p,
-  EXT_ELEMENT* new_el_pt, Mesh* const &external_mesh_pt, Problem* problem_pt)
+  Mesh* const &external_mesh_pt, Problem* problem_pt)
  {
   // First three sent numbers are dimension, position type and nvalue
   // (to be used in Node constructors)
@@ -1957,22 +1711,26 @@ template<class EXT_ELEMENT>
     external_mesh_pt->add_external_halo_node_pt(loc_p,new_master_nod_pt);
 
     // Create a new node update element for this master node if required
-    EXT_ELEMENT *new_node_update_el_pt;
+    FiniteElement *new_node_update_f_el_pt=0;
     if (Unsigned_values[Count_unsigned_values]==1)
      {
       Count_unsigned_values++;
-      new_node_update_el_pt=new EXT_ELEMENT;
+      GeneralisedElement* new_node_update_el_pt = new EXT_ELEMENT; 
 
-      FiniteElement *f_el_pt=
+      //Add external hal element to this mesh
+      external_mesh_pt->add_external_halo_element_pt(
+       loc_p,new_node_update_el_pt);
+
+      //Cast to finite element
+      new_node_update_f_el_pt = 
        dynamic_cast<FiniteElement*>(new_node_update_el_pt);
-      external_mesh_pt->add_external_halo_element_pt(loc_p,f_el_pt);
 
       // Need number of interpolated values if Refineable
       int n_cont_inter_values;
-      if (dynamic_cast<RefineableElement*>(new_node_update_el_pt)!=0)
+      if (dynamic_cast<RefineableElement*>(new_node_update_f_el_pt)!=0)
        {
         n_cont_inter_values=dynamic_cast<RefineableElement*>
-         (new_node_update_el_pt)->ncont_interpolated_values();
+         (new_node_update_f_el_pt)->ncont_interpolated_values();
        }
       else
        {
@@ -1990,14 +1748,14 @@ template<class EXT_ELEMENT>
          (external_mesh_pt);
         unsigned macro_el_num=
          Unsigned_values[Count_unsigned_values];
-        new_node_update_el_pt->set_macro_elem_pt
+        new_node_update_f_el_pt->set_macro_elem_pt
          (macro_mesh_pt->macro_domain_pt()->macro_element_pt(macro_el_num));
         Count_unsigned_values++;
 
         // we need to receive
         // the lower left and upper right coordinates of the macro
         QElementBase* q_el_pt=
-         dynamic_cast<QElementBase*>(new_node_update_el_pt);
+         dynamic_cast<QElementBase*>(new_node_update_f_el_pt);
         if (q_el_pt!=0)
          {
           unsigned el_dim=q_el_pt->dim();
@@ -2029,12 +1787,12 @@ template<class EXT_ELEMENT>
        }
 
 
-      unsigned n_node=new_node_update_el_pt->nnode();
+      unsigned n_node=new_node_update_f_el_pt->nnode();
       for (unsigned j=0;j<n_node;j++)
        {
         Node* new_nod_pt=0;
         add_external_halo_node_to_storage<EXT_ELEMENT>
-         (new_nod_pt,external_mesh_pt,loc_p,j,new_node_update_el_pt,
+         (new_nod_pt,external_mesh_pt,loc_p,j,new_node_update_f_el_pt,
           n_cont_inter_values,problem_pt);
        }
 
@@ -2042,9 +1800,9 @@ template<class EXT_ELEMENT>
     else // The node update element exists already
      {
       Count_unsigned_values++;
-      new_node_update_el_pt=dynamic_cast<EXT_ELEMENT*>
-       (external_mesh_pt->external_halo_element_pt
-        (loc_p,Unsigned_values[Count_unsigned_values]));
+      new_node_update_f_el_pt=dynamic_cast<FiniteElement*>(
+       external_mesh_pt->external_halo_element_pt
+       (loc_p,Unsigned_values[Count_unsigned_values]));
       Count_unsigned_values++;
      }
 
@@ -2066,14 +1824,14 @@ template<class EXT_ELEMENT>
     // Set all required information - node update element,
     // local coordinate in this element, and then set node update info
     macro_master_nod_pt->node_update_element_pt()=
-     new_node_update_el_pt;
+     new_node_update_f_el_pt;
 
     // Need to get the local node index of the macro_master_nod_pt
     unsigned local_node_index;
-    unsigned n_node=new_node_update_el_pt->nnode();
+    unsigned n_node=new_node_update_f_el_pt->nnode();
     for (unsigned j=0;j<n_node;j++)
      {
-      if (macro_master_nod_pt==new_node_update_el_pt->node_pt(j))
+      if (macro_master_nod_pt==new_node_update_f_el_pt->node_pt(j))
        {
         local_node_index=j;
         break;
@@ -2081,11 +1839,11 @@ template<class EXT_ELEMENT>
      }
 
     Vector<double> s_in_macro_node_update_element;
-    new_node_update_el_pt->local_coordinate_of_node
+    new_node_update_f_el_pt->local_coordinate_of_node
      (local_node_index,s_in_macro_node_update_element);
 
     macro_master_nod_pt->set_node_update_info
-     (new_node_update_el_pt,s_in_macro_node_update_element,
+     (new_node_update_f_el_pt,s_in_macro_node_update_element,
       geom_object_vector_pt);
    }
   else if (solid_nod_pt!=0)

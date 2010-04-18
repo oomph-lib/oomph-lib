@@ -539,7 +539,7 @@ void RefineableMeshBase::adapt(OomphCommunicator* comm_pt,
           {
            // Get the vector of halo elements whose non-halo counterpart
            // are on processor d
-           Vector<FiniteElement*> halo_elem_pt(this->halo_element_pt(d));
+           Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(d));
            
            // Create vector containing (0)1 to indicate that
            // halo element is (not) to be unrefined
@@ -562,7 +562,8 @@ void RefineableMeshBase::adapt(OomphCommunicator* comm_pt,
           {
            
            // Get the vector of haloed elements on current processor
-           Vector<FiniteElement*> haloed_elem_pt(this->haloed_element_pt(d));
+           Vector<GeneralisedElement*> 
+            haloed_elem_pt(this->haloed_element_pt(d));
            
            // Ask processor d to send vector containing (0)1 for 
            // halo element with current processor to be (not)unrefined
@@ -625,7 +626,7 @@ void RefineableMeshBase::adapt(OomphCommunicator* comm_pt,
           {
            // Get the vector of halo elements whose non-halo counterpart
            // are on processor d
-           Vector<FiniteElement*> halo_elem_pt(this->halo_element_pt(d));
+           Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(d));
            
            // Create vector containing (0)1 to indicate that
            // halo element is (not) to be refined
@@ -648,7 +649,8 @@ void RefineableMeshBase::adapt(OomphCommunicator* comm_pt,
           {
            
            // Get the vector of haloed elements on current processor
-           Vector<FiniteElement*> haloed_elem_pt(this->haloed_element_pt(d));
+           Vector<GeneralisedElement*> 
+            haloed_elem_pt(this->haloed_element_pt(d));
            
            // Ask processor d to send vector containing (0)1 for 
            // halo element with current processor to be (not)refined
@@ -1856,13 +1858,13 @@ void RefineableMeshBase::synchronise_hanging_nodes
    if (d<my_rank)
     {
      // Get the nodes from the halo elements first
-     Vector<FiniteElement*> halo_elem_pt(this->halo_element_pt(d));
+     Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(d));
      unsigned nhalo_elem=halo_elem_pt.size();
 
      for (unsigned e=0;e<nhalo_elem;e++)
       {
        // Get element
-       FiniteElement* el_pt=halo_elem_pt[e];
+       FiniteElement* el_pt=dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
        unsigned nnod=el_pt->nnode();
 
        // Loop over nodes
@@ -1882,13 +1884,13 @@ void RefineableMeshBase::synchronise_hanging_nodes
       } // end loop over elements
 
      // Now get any left over nodes on the haloed elements
-     Vector<FiniteElement*> haloed_elem_pt(this->haloed_element_pt(d));
+     Vector<GeneralisedElement*> haloed_elem_pt(this->haloed_element_pt(d));
      unsigned nhaloed_elem=haloed_elem_pt.size();
 
      for (unsigned e=0;e<nhaloed_elem;e++)
       {
        // Get element
-       FiniteElement* el_pt=haloed_elem_pt[e];
+       FiniteElement* el_pt=dynamic_cast<FiniteElement*>(haloed_elem_pt[e]);
        unsigned nnod=el_pt->nnode();
 
        // Loop over the nodes
@@ -1913,13 +1915,13 @@ void RefineableMeshBase::synchronise_hanging_nodes
    if (d>my_rank)
     {
      // Get the nodes from the haloed elements first
-     Vector<FiniteElement*> haloed_elem_pt(this->haloed_element_pt(d));
+     Vector<GeneralisedElement*> haloed_elem_pt(this->haloed_element_pt(d));
      unsigned nhaloed_elem=haloed_elem_pt.size();
 
      for (unsigned e=0;e<nhaloed_elem;e++)
       {
        // Get element
-       FiniteElement* el_pt=haloed_elem_pt[e];
+       FiniteElement* el_pt=dynamic_cast<FiniteElement*>(haloed_elem_pt[e]);
        unsigned nnod=el_pt->nnode();
 
        // Loop over nodes
@@ -1939,13 +1941,13 @@ void RefineableMeshBase::synchronise_hanging_nodes
       } // end loop over elements
 
      // Now get the nodes from any halo elements left over
-     Vector<FiniteElement*> halo_elem_pt(this->halo_element_pt(d));
+     Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(d));
      unsigned nhalo_elem=halo_elem_pt.size();
 
      for (unsigned e=0;e<nhalo_elem;e++)
       {
        // Get element
-       FiniteElement* el_pt=halo_elem_pt[e];
+       FiniteElement* el_pt=dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
        unsigned nnod=el_pt->nnode();
 
        // Loop over nodes
@@ -1987,7 +1989,7 @@ void RefineableMeshBase::synchronise_hanging_nodes
      if (d!=my_rank) // no halo with yourself!
       {
        // Get vector of haloed elements
-       Vector<FiniteElement*> haloed_elem_pt(this->haloed_element_pt(d));
+       Vector<GeneralisedElement*> haloed_elem_pt(this->haloed_element_pt(d));
        unsigned nhaloed_elem=haloed_elem_pt.size();
 
        // Storage for hanging status of each element's nodes
@@ -1999,7 +2001,7 @@ void RefineableMeshBase::synchronise_hanging_nodes
        for (unsigned e=0;e<nhaloed_elem;e++)
         {
          // Get element, loop over nodes
-         FiniteElement* el_pt=haloed_elem_pt[e];
+         FiniteElement* el_pt=dynamic_cast<FiniteElement*>(haloed_elem_pt[e]);
          unsigned n_node=el_pt->nnode();
 
          for (unsigned j=0;j<n_node;j++)
@@ -2038,7 +2040,7 @@ void RefineableMeshBase::synchronise_hanging_nodes
          if (dd!=d)
           {
            // Get vector of halo elements by copy operation
-           Vector<FiniteElement*> halo_elem_pt(this->halo_element_pt(dd));
+           Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(dd));
 
            // Storage for halo hanging status and counter
            Vector<int> nhalo_hanging;
@@ -2049,7 +2051,8 @@ void RefineableMeshBase::synchronise_hanging_nodes
            for (unsigned e=0;e<nelem;e++)
             {
              // Get element
-             FiniteElement* el_pt=halo_elem_pt[e];
+             FiniteElement* el_pt
+              =dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
      
              //Loop over nodes
              unsigned n_node=el_pt->nnode();
@@ -2106,7 +2109,7 @@ void RefineableMeshBase::synchronise_hanging_nodes
        Vector<double> hanging_master_weights;
 
        // Get vector of haloed elements
-       Vector<FiniteElement*> haloed_elem_pt(this->haloed_element_pt(d));
+       Vector<GeneralisedElement*> haloed_elem_pt(this->haloed_element_pt(d));
        unsigned nhaloed_elem=haloed_elem_pt.size();
 
        // Reset haloed counter
@@ -2115,7 +2118,7 @@ void RefineableMeshBase::synchronise_hanging_nodes
        // Loop over elements
        for (unsigned e=0;e<nhaloed_elem;e++)
         {
-         FiniteElement* el_pt=haloed_elem_pt[e];
+         FiniteElement* el_pt=dynamic_cast<FiniteElement*>(haloed_elem_pt[e]);
          unsigned n_node=el_pt->nnode();
 
          // Loop over nodes
@@ -2289,7 +2292,7 @@ void RefineableMeshBase::synchronise_hanging_nodes
              count_weights=0;
 
              // Get vector of halo elements by copy operation
-             Vector<FiniteElement*> 
+             Vector<GeneralisedElement*> 
               halo_elem_pt(this->halo_element_pt(dd));
 
              // Reset count for halo nodes on elements
@@ -2300,7 +2303,8 @@ void RefineableMeshBase::synchronise_hanging_nodes
              for (unsigned e=0;e<nelem;e++)
               {
                // Get element
-               FiniteElement* el_pt=halo_elem_pt[e];
+               FiniteElement* el_pt=
+                dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
      
                // Loop over nodes
                unsigned n_node=el_pt->nnode();

@@ -859,7 +859,8 @@ void doc_fsi(Mesh* fluid_mesh_pt,
       {
        internal_data_element_pt[
         fluid_mesh_pt->external_halo_element_pt(d,e)->internal_data_pt(k)]=
-        fluid_mesh_pt->external_halo_element_pt(d,e);
+        dynamic_cast<FiniteElement*>(
+         fluid_mesh_pt->external_halo_element_pt(d,e));
       }
     }
   }

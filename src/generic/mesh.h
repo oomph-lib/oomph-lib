@@ -96,10 +96,10 @@ class Mesh
 #ifdef OOMPH_HAS_MPI
 
  /// Map of vectors holding the pointers to the root halo elements
- std::map<unsigned, Vector<FiniteElement*> > Root_halo_element_pt;
+ std::map<unsigned, Vector<GeneralisedElement*> > Root_halo_element_pt;
 
  /// Map of vectors holding the pointers to the root haloed elements
- std::map<unsigned, Vector<FiniteElement*> > Root_haloed_element_pt;
+ std::map<unsigned, Vector<GeneralisedElement*> > Root_haloed_element_pt;
 
  /// Map of vectors holding the pointers to the halo nodes
  std::map<unsigned, Vector<Node*> > Halo_node_pt;
@@ -122,10 +122,10 @@ class Mesh
  /// The storage is wiped and rebuilt every time the mesh is refined.
 
  /// Map of vectors holding the pointers to the external halo elements
- std::map<unsigned, Vector<FiniteElement*> > External_halo_element_pt;
+ std::map<unsigned, Vector<GeneralisedElement*> > External_halo_element_pt;
 
  /// Map of vectors holding the pointers to the external haloed elements
- std::map<unsigned, Vector<FiniteElement*> > External_haloed_element_pt;
+ std::map<unsigned, Vector<GeneralisedElement*> > External_haloed_element_pt;
 
 #endif
 
@@ -133,7 +133,7 @@ class Mesh
  /// elements that are source elements for elements within an existing
  /// Mesh that are contained on a different Mesh but the same processor
  /// (obviously only important after distribution of the mesh has occurred)
- Vector<FiniteElement*> External_element_pt;
+ Vector<GeneralisedElement*> External_element_pt;
 
  /// Vector holding pointers to the external nodes on the external elements
  Vector<Node*> External_node_pt;
@@ -796,19 +796,19 @@ public:
 
  /// \short Return vector of halo elements in this Mesh 
  /// whose non-halo counterpart is held on processor p.
- Vector<FiniteElement*> halo_element_pt(const unsigned& p)
+ Vector<GeneralisedElement*> halo_element_pt(const unsigned& p)
   {
    // Prepare vector
-   Vector<FiniteElement*> el_pt;
+   Vector<GeneralisedElement*> vec_el_pt;
 
    // Loop over all root halo elements
    unsigned nelem=nroot_halo_element(p);
    for (unsigned e=0;e<nelem;e++)
     {
-     FiniteElement* fe_pt=root_halo_element_pt(p,e);
+     GeneralisedElement* el_pt=root_halo_element_pt(p,e);
 
      // Is it a refineable element?
-     RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(fe_pt);
+     RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(el_pt);
      if (ref_el_pt!=0)
       {
        // Vector of pointers to leaves in tree emanating from
@@ -821,33 +821,33 @@ public:
        unsigned nleaf=leaf_pt.size();
        for (unsigned l=0;l<nleaf;l++)
         {
-         el_pt.push_back(leaf_pt[l]->object_pt());
+         vec_el_pt.push_back(leaf_pt[l]->object_pt());
         }
       }
      else
       {
-       el_pt.push_back(fe_pt);
+       vec_el_pt.push_back(el_pt);
       }
     }
-   return el_pt;
+   return vec_el_pt;
   }
  
 
  /// \short Return vector of haloed elements in this Mesh 
  /// whose haloing counterpart is held on processor p.
- Vector<FiniteElement*> haloed_element_pt(const unsigned& p)
+ Vector<GeneralisedElement*> haloed_element_pt(const unsigned& p)
   {
    // Prepare vector
-   Vector<FiniteElement*> el_pt;
+   Vector<GeneralisedElement*> vec_el_pt;
    
    // Loop over all root haloed elements
    unsigned nelem=nroot_haloed_element(p);
    for (unsigned e=0;e<nelem;e++)
     {
-     FiniteElement* fe_pt=root_haloed_element_pt(p,e);
+     GeneralisedElement* el_pt=root_haloed_element_pt(p,e);
 
      // Is it a refineable element?
-     RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(fe_pt);
+     RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(el_pt);
      if (ref_el_pt!=0)
       {
        // Vector of pointers to leaves in tree emanating from
@@ -860,15 +860,15 @@ public:
        unsigned nleaf=leaf_pt.size();
        for (unsigned l=0;l<nleaf;l++)
         {
-         el_pt.push_back(leaf_pt[l]->object_pt());
+         vec_el_pt.push_back(leaf_pt[l]->object_pt());
         }
       }
      else
       {
-       el_pt.push_back(fe_pt);
+       vec_el_pt.push_back(el_pt);
       }
     }
-   return el_pt;
+   return vec_el_pt;
   }
 
 
@@ -876,7 +876,7 @@ public:
  unsigned nroot_halo_element()
   {
    unsigned n=0;
-   for (std::map<unsigned,Vector<FiniteElement*> >::iterator it=
+   for (std::map<unsigned,Vector<GeneralisedElement*> >::iterator it=
          Root_halo_element_pt.begin();it!=Root_halo_element_pt.end();it++)
     {
      n+=it->second.size();
@@ -894,7 +894,8 @@ public:
 
  /// \short Access fct to the e-th root halo element in this Mesh 
  /// whose non-halo counterpart is held on processor p.
- FiniteElement* root_halo_element_pt(const unsigned& p, const unsigned& e)
+ GeneralisedElement* &root_halo_element_pt(const unsigned& p, 
+                                           const unsigned& e)
   {
    return Root_halo_element_pt[p][e];
   }
@@ -902,7 +903,7 @@ public:
 
  /// \short Add root halo element whose non-halo counterpart is held 
  /// on processor p to this Mesh. 
- void add_root_halo_element_pt(const unsigned& p, FiniteElement*& el_pt)
+ void add_root_halo_element_pt(const unsigned& p, GeneralisedElement*& el_pt)
   {
    Root_halo_element_pt[p].push_back(el_pt);
    el_pt->is_halo()=true; 
@@ -947,7 +948,7 @@ public:
  unsigned nroot_haloed_element()
   {
    unsigned n=0;
-   for (std::map<unsigned,Vector<FiniteElement*> >::iterator it=
+   for (std::map<unsigned,Vector<GeneralisedElement*> >::iterator it=
          Root_haloed_element_pt.begin();it!=Root_haloed_element_pt.end();it++)
     {
      n+=it->second.size();
@@ -964,7 +965,8 @@ public:
 
  /// \short Access fct to the e-th root haloed element in this Mesh 
  /// whose non-halo counterpart is held on processor p.
- FiniteElement* root_haloed_element_pt(const unsigned& p, const unsigned& e)
+ GeneralisedElement* &root_haloed_element_pt(const unsigned& p, 
+                                            const unsigned& e)
   {
    return Root_haloed_element_pt[p][e];
   }
@@ -974,7 +976,7 @@ public:
  /// Note: This does not add the element to the storage scheme
  /// for elements as it's understood to naturally live on this
  /// processor anyway!
- void add_root_haloed_element_pt(const unsigned& p, FiniteElement*& el_pt)
+ void add_root_haloed_element_pt(const unsigned& p, GeneralisedElement*& el_pt)
   {
    Root_haloed_element_pt[p].push_back(el_pt);
   }
@@ -1088,7 +1090,7 @@ public:
  unsigned nexternal_halo_element()
   {
    unsigned n=0;
-   for (std::map<unsigned,Vector<FiniteElement*> >::iterator it=
+   for (std::map<unsigned,Vector<GeneralisedElement*> >::iterator it=
          External_halo_element_pt.begin();
         it!=External_halo_element_pt.end();it++)
     {
@@ -1106,14 +1108,16 @@ public:
 
  /// \short Access fct to the e-th external halo element in this Mesh 
  /// whose non-halo counterpart is held on processor p.
- FiniteElement* external_halo_element_pt(const unsigned& p, const unsigned& e)
+ GeneralisedElement* &external_halo_element_pt(const unsigned& p, 
+                                              const unsigned& e)
   {
    return External_halo_element_pt[p][e];
   }
 
  /// \short Add external halo element whose non-halo counterpart is held 
  /// on processor p to this Mesh. 
- void add_external_halo_element_pt(const unsigned& p, FiniteElement*& el_pt)
+ void add_external_halo_element_pt(const unsigned& p, 
+                                   GeneralisedElement*& el_pt)
   {
    External_halo_element_pt[p].push_back(el_pt);
   }
@@ -1122,7 +1126,7 @@ public:
  unsigned nexternal_haloed_element()
   {
    unsigned n=0;
-   for (std::map<unsigned,Vector<FiniteElement*> >::iterator it=
+   for (std::map<unsigned,Vector<GeneralisedElement*> >::iterator it=
          External_haloed_element_pt.begin();
         it!=External_haloed_element_pt.end();it++)
     {
@@ -1140,8 +1144,8 @@ public:
 
  /// \short Access fct to the e-th external haloed element in this Mesh 
  /// whose non-halo counterpart is held on processor p.
- FiniteElement* external_haloed_element_pt(const unsigned& p, 
-                                           const unsigned& e)
+ GeneralisedElement* &external_haloed_element_pt(const unsigned& p, 
+                                                 const unsigned& e)
   {
    return External_haloed_element_pt[p][e];
   }
@@ -1149,7 +1153,7 @@ public:
  /// \short Add external haloed element whose non-halo counterpart is held 
  /// on processor p to the storage scheme for haloed elements.
  unsigned add_external_haloed_element_pt(const unsigned& p, 
-                                         FiniteElement*& el_pt);
+                                         GeneralisedElement*& el_pt);
 
  /// \short Total number of external halo nodes in this Mesh
  unsigned nexternal_halo_node()
@@ -1237,13 +1241,13 @@ public:
   }
 
  /// \short Access fct to the e-th external element in this Mesh.
- FiniteElement* external_element_pt(const unsigned& e)
+ GeneralisedElement* &external_element_pt(const unsigned& e)
   {
    return External_element_pt[e];
   }
 
  /// \short Add external element to this Mesh.
- bool add_external_element_pt(FiniteElement*& el_pt);
+ bool add_external_element_pt(GeneralisedElement*& el_pt);
 
  /// External nodes are on the external elements
 
