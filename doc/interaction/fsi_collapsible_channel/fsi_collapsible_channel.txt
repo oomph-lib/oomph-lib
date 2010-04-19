@@ -359,23 +359,25 @@ of the <A HREF="../../macro_element_free_boundary_poisson/html/index.html">
 
 What remains to be done is to represent the wall (discretised
 by the \c SolidFiniteElements contained in the wall mesh) as a \c GeomObject.
-For this purpose, \c oomph-lib provides the triply-templated class 
+For this purpose, \c oomph-lib provides the class 
 
 \code 
-template<unsigned DIM_LAGRANGIAN, unsigned DIM_EULERIAN, class ELEMENT>
 class MeshAsGeomObject : public GeomObject
 \endcode 
 
 whose constructor takes a pointer to the \c Mesh that is to be
-represented as a \c GeomObject. The template parameters
-\c  DIM_LAGRANGIAN and \c DIM_EULERIAN
-specify the Lagrangian and Eulerian dimensions of the mesh,
-respectively. The template parameter \c ELEMENT specifies the
-element type which must be derived from the \c GeomObject class.
-In our collapsible channel problem, \c DIM_LAGRANGIAN=1 since the wall 
+represented as a \c GeomObject. The Lagrangian and Eulerian dimensions 
+of the mesh are taken to be the dimension of elements and the dimension
+of the nodes, respectively. The conversion from \c Mesh into \c
+GeomObject only makes sense if the element is derived from a 
+\c FiniteElement, itself a \c GeomObject, which has
+associated Lagrangian (local) and Eulerian coordinate systems.
+In our collapsible channel problem, the Lagrangian dimension is one 
+because the wall 
 is parametrised by a single intrinsic coordinate (the shape of the
 mesh's constituent elements is parametrised
-by a single local coordinate), and \c DIM_EULERIAN=2 since the nodes
+by a single local coordinate), and the Eulerian dimension is two 
+because the nodes
 in the wall mesh have two Eulerian coordinates. Assuming
 that \c Wall_mesh_pt stores a pointer to the wall mesh, the
 code
@@ -873,7 +875,7 @@ by the wall mesh's constituent elements) to be represented
 by single \c GeomObject. We create the required "compound" \c
 GeomObject using the \c MeshAsGeomObject class:
 
-\until new MeshAsGeomObject<1,2
+\until new MeshAsGeomObject
  
 This "compound" \c GeomObject can now be used to build the 
 fluid mesh, exactly as in  

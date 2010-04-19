@@ -270,7 +270,7 @@ private:
  Vector<SolidMesh*> Lagrange_multiplier_mesh_pt;
 
  /// GeomObject incarnations of the FSI boundary in the solid mesh
- Vector<MeshAsGeomObject<2,3,FSISolidTractionElement<SOLID_ELEMENT,3> >*>
+ Vector<MeshAsGeomObject*>
  Solid_fsi_boundary_pt;
 
  /// IDs of solid mesh boundaries where displacements are pinned
@@ -760,7 +760,7 @@ create_lagrange_multiplier_elements()
    
    // Create  GeomObject incarnation of fsi boundary in solid mesh
    Solid_fsi_boundary_pt[i]=
-    new MeshAsGeomObject<2,3,FSISolidTractionElement<SOLID_ELEMENT,3> >
+    new MeshAsGeomObject
     (Solid_fsi_traction_mesh_pt[i]);
    
    // How many bulk fluid elements are adjacent to boundary b?

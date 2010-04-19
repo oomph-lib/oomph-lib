@@ -413,7 +413,7 @@ private:
  SolidMesh* Solid_traction_mesh_pt;
 
  /// GeomObject incarnations of the FSI boundary in the solid mesh
- MeshAsGeomObject<2,3,RefineableFSISolidTractionElement<SOLID_ELEMENT,3> >*
+ MeshAsGeomObject*
  Solid_fsi_boundary_pt;
 
  /// \short Geometric Object defining the undeformed boundary of the
@@ -887,7 +887,7 @@ create_lagrange_multiplier_elements()
 
  // create the geom object for the wall
  Solid_fsi_boundary_pt=
-  new MeshAsGeomObject<2,3,RefineableFSISolidTractionElement<SOLID_ELEMENT,3> >
+  new MeshAsGeomObject
   (Solid_fsi_traction_mesh_pt);
 
  // How many bulk fluid elements are adjacent to boundary b?

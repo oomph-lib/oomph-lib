@@ -1120,10 +1120,7 @@ void BrethertonSpineMesh<ELEMENT,INTERFACE_ELEMENT>::reposition_spines(
  //Now make a single geometric object that represents the collection of 
  //geometric objects that form the boundary of the bulk mesh. Two
  //Eulerian coordinates, one intrinsic coordinate.
- MeshAsGeomObject<1,2,FaceElementAsGeomObject<ELEMENT> >* 
-  fs_geom_object_pt = 
-  new MeshAsGeomObject<1,2,FaceElementAsGeomObject<ELEMENT> >
-  (fs_mesh_pt);
+ MeshAsGeomObject* fs_geom_object_pt = new MeshAsGeomObject(fs_mesh_pt);
   
 
  // Length of deposited film region

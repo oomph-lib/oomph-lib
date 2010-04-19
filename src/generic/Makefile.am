@@ -27,6 +27,7 @@ fsi.cc octree.cc tree.cc orthpoly.cc             \
 superlu.c superlu_complex.c refineable_brick_element.cc \
 brick_mesh.cc spines.cc element_with_moving_nodes.cc \
 macro_element_node_update_element.cc \
+mesh_as_geometric_object.cc \
 multi_domain.cc \
 element_with_external_element.cc \
 eigen_solver.cc \
@@ -105,7 +106,7 @@ endif
 # Template-only files: Need to be included in include directory
 # but should not be listed in combined header file
 templates = \
-tree.template.cc mesh_as_geometric_object.template.cc multi_domain.template.cc
+tree.template.cc multi_domain.template.cc
 
 # Do we have the HYPRE library?
 if HAVE_HYPRE

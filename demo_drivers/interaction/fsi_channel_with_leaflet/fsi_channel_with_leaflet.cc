@@ -304,8 +304,8 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
 
  // Build a geometric object (one Lagrangian, two Eulerian coordinates)
  // from the wall mesh
- MeshAsGeomObject<1,2,FSIHermiteBeamElement>* wall_geom_object_pt=
-  new MeshAsGeomObject<1,2,FSIHermiteBeamElement>(Wall_mesh_pt); 
+ MeshAsGeomObject* wall_geom_object_pt=
+  new MeshAsGeomObject(Wall_mesh_pt); 
 
 //Build the mesh
  Fluid_mesh_pt =new RefineableAlgebraicChannelWithLeafletMesh<ELEMENT>(

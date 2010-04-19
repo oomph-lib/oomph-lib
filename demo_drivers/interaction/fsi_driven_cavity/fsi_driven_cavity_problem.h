@@ -273,7 +273,7 @@ protected :
 
  ///\short Pointer to geometric object (one Lagrangian, two Eulerian 
  /// coordinates) that will be built from the wall mesh
- MeshAsGeomObject<1,2,FSIHermiteBeamElement>* Wall_geom_object_pt;
+ MeshAsGeomObject* Wall_geom_object_pt;
 
 };//end of problem class
 
@@ -330,7 +330,7 @@ FSIDrivenCavityProblem<ELEMENT>::FSIDrivenCavityProblem(
  // Build a geometric object (one Lagrangian, two Eulerian coordinates)
  // from the wall mesh
  Wall_geom_object_pt=
-  new MeshAsGeomObject<1,2,FSIHermiteBeamElement>(Wall_mesh_pt); 
+  new MeshAsGeomObject(Wall_mesh_pt); 
 
  //Build bulk (fluid) mesh
  Bulk_mesh_pt =  new AlgebraicFSIDrivenCavityMesh<ELEMENT>

@@ -1680,8 +1680,8 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
  }
 
  //Create a geometric object that represents the wall geometry
- MeshAsGeomObject<1,2,FSIHermiteBeamElement>* upper_wall_element_pt = 
-  new MeshAsGeomObject<1,2,FSIHermiteBeamElement>(Upper_wall_mesh_pt);
+ MeshAsGeomObject* upper_wall_element_pt = 
+  new MeshAsGeomObject(Upper_wall_mesh_pt);
  
  // The underformed lower wall is a straight line at y = -1.0
  Undeformed_lower_wall_geom_pt = new StraightLine(-1.0);
@@ -1719,8 +1719,8 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
  }
 
  //Create a geometric object that represents the wall geometry
- MeshAsGeomObject<1,2,FSIHermiteBeamElement>* lower_wall_element_pt = 
-  new MeshAsGeomObject<1,2,FSIHermiteBeamElement>(Lower_wall_mesh_pt);
+ MeshAsGeomObject* lower_wall_element_pt = 
+  new MeshAsGeomObject(Lower_wall_mesh_pt);
  
  // Create wall geom objects
  //GeomObject* lower_wall_pt = new StraightLine(-1.0);

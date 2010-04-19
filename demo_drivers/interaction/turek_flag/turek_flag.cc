@@ -557,17 +557,17 @@ TurekProblem(const double &length,
  // Turn the three meshes of FSI traction elements into compound
  // geometric objects (one Lagrangian, two Eulerian coordinates)
  // that determine the boundary of the fluid mesh
- MeshAsGeomObject<1,2,FSISolidTractionElement<SOLID_ELEMENT,2> >*
+ MeshAsGeomObject*
   bottom_flag_pt=
-  new MeshAsGeomObject<1,2,FSISolidTractionElement<SOLID_ELEMENT,2> >
+  new MeshAsGeomObject
   (Traction_mesh_pt[0]);
  
- MeshAsGeomObject<1,2,FSISolidTractionElement<SOLID_ELEMENT,2> >* tip_flag_pt=
-  new MeshAsGeomObject<1,2,FSISolidTractionElement<SOLID_ELEMENT,2> >
+ MeshAsGeomObject* tip_flag_pt=
+  new MeshAsGeomObject
   (Traction_mesh_pt[1]);
  
- MeshAsGeomObject<1,2,FSISolidTractionElement<SOLID_ELEMENT,2> >* top_flag_pt=
-  new MeshAsGeomObject<1,2,FSISolidTractionElement<SOLID_ELEMENT,2> >
+ MeshAsGeomObject* top_flag_pt=
+  new MeshAsGeomObject
   (Traction_mesh_pt[2]);
 
 

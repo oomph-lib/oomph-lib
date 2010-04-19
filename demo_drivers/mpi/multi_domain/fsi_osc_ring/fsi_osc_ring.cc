@@ -555,8 +555,8 @@ FSIRingProblem::FSIRingProblem(const unsigned& N,
  
  //Create a geometric object that represents the wall geometry from the
  //wall mesh (one Lagrangian, two Eulerian coordinates).
- MeshAsGeomObject<1,2,SOLID_ELEMENT> *wall_mesh_as_geometric_object_pt
-  = new MeshAsGeomObject<1,2,SOLID_ELEMENT>(Wall_mesh_pt);
+ MeshAsGeomObject *wall_mesh_as_geometric_object_pt
+  = new MeshAsGeomObject(Wall_mesh_pt);
 
  // Build fluid mesh using the wall mesh as a geometric object
  Fluid_mesh_pt = new AlgebraicRefineableQuarterCircleSectorMesh<FLUID_ELEMENT >

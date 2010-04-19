@@ -465,7 +465,7 @@ public :
 
  ///\short Pointer to geometric object (one Lagrangian, two Eulerian 
  /// coordinates) that will be built from the wall mesh
- MeshAsGeomObject<1,2,FSIHermiteBeamElement>* Wall_geom_object_pt;
+ MeshAsGeomObject* Wall_geom_object_pt;
 
  /// Counter for Newton iterations
  unsigned Newton_iter;
@@ -554,7 +554,7 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
  // Build a geometric object (one Lagrangian, two Eulerian coordinates)
  // from the wall mesh
  Wall_geom_object_pt=
-  new MeshAsGeomObject<1,2,FSIHermiteBeamElement>(Wall_mesh_pt); 
+  new MeshAsGeomObject(Wall_mesh_pt); 
 
  // Get pointer to/local coordinate in wall geom object that contains 
  // control node -- adjusted for different values of Q, so that

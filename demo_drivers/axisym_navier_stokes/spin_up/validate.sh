@@ -41,7 +41,7 @@ else
 ../../../../bin/fpdiff.py ../validata/results_CR.dat.gz  \
          results_CR.dat 0.1 0.5e-09 >> validation.log
 ../../../../bin/fpdiff.py ../validata/results_TH.dat.gz  \
-         results_TH.dat 0.1 1.0e-10 >> validation.log
+         results_TH.dat 0.2 1.0e-10 >> validation.log
 fi
 
 # Append log to main validation log

@@ -35,23 +35,45 @@
 #include "mesh.h"
 #include "mesh_as_geometric_object.h"
 
-#include <stdio.h>
-
-
-#ifndef OOMPH_MESH_AS_GEOMETRIC_OBJECT_CC
-#define OOMPH_MESH_AS_GEOMETRIC_OBJECT_CC
-
+#include <cstdio>
 
 namespace oomph
 {
+//======================================================================
+// Namespace for global multi-domain functions that are used in
+// member function of MeshAsGeomObject
+//======================================================================
+namespace Multi_domain_functions
+ {
+  /// \short Number of bins in the first dimension in binning method in
+  /// setup_multi_domain_interaction(). Default value of 10.
+  extern unsigned Nx_bin;
+
+  /// \short Number of bins in the second dimension in binning method in
+  /// setup_multi_domain_interaction(). Default value of 10.
+  extern unsigned Ny_bin;
+
+  /// \short Number of bins in the third dimension in binning method in
+  /// setup_multi_domain_interaction(). Default value of 10.
+  extern unsigned Nz_bin;
+
+  /// \short (Measure of) the number of sampling points within the elements 
+  /// when populating the bin
+  extern unsigned Nsample_points;
+
+  /// \short Boolean to indicate whether to document basic info (to screen)
+  ///        during setup_multi_domain_interaction() routines
+  extern bool Doc_stats;
+}
 
 //========================================================================
-/// Helper function for constructor: Oass the pointer to the mesh, 
+/// Helper function for constructor: Pass the pointer to the mesh, 
 /// communicator and boolean
-///to specify whether to calculate coordinate extrema or not
+/// to specify whether to calculate coordinate extrema or not
+/// The dimensions for the GeomObject are read out from the elements and
+/// nodes of the mesh.
 //========================================================================
- template<unsigned DIM_LAGRANGIAN, unsigned DIM_EULERIAN, class ELEMENT>
- void MeshAsGeomObject<DIM_LAGRANGIAN,DIM_EULERIAN,ELEMENT>::construct_it
+ void MeshAsGeomObject::construct_it
  (Mesh* const &mesh_pt, OomphCommunicator* comm_pt,
   const bool& compute_extreme_bin_coords)
  {
@@ -59,6 +81,47 @@ namespace oomph
    // Set communicator
    Communicator_pt=comm_pt;
 #endif
+
+  //Storage for the Lagrangian and Eulerian dimension
+  int dim[2]={0,0};
+
+  //Set the Lagrangian dimension from the dimension of the first element
+  //if it exists (if not the Lagrangian dimension will be zero)
+  if(mesh_pt->nelement()!=0) 
+   {dim[0] = mesh_pt->finite_element_pt(0)->dim();}
+ 
+  //Read out the Eulerian dimension from the first node, if it exists.
+  //(if not the Eulerian dimension will be zero);
+  if(mesh_pt->nnode()!=0)
+   {dim[1] = mesh_pt->node_pt(0)->ndim();}
+
+  // Need to do an Allreduce to ensure that the dimension is consistent
+  // even when no elements are assigned to a certain processor
+#ifdef OOMPH_HAS_MPI
+  //Only a problem if the mesh has been distributed
+  if(mesh_pt->mesh_has_been_distributed())
+   {
+    //Need a non-null communicator
+    if(Communicator_pt!=0)
+     {
+      int n_proc=comm_pt->nproc();
+      if (n_proc > 1)
+       {
+        int dim_reduce[2];
+        MPI_Allreduce(&dim,&dim_reduce,2,MPI_INT,
+                      MPI_MAX,comm_pt->mpi_comm());
+        
+        dim[0] = dim_reduce[0]; 
+        dim[1] = dim_reduce[1];
+       }
+     }
+   }
+#endif
+
+   //Set the Lagrangian and Eulerian dimensions within this geometric object
+   this->set_nlagrangian_and_ndim(static_cast<unsigned>(dim[0]),
+                                  static_cast<unsigned>(dim[1]));
+
 
    // Create temporary storage for geometric Data (don't count 
    // Data twice!
@@ -71,15 +134,17 @@ namespace oomph
    for(unsigned e=0;e<n_sub_object;e++)
     {
 
-     // (Try to) cast to an ELEMENT:
-     Sub_geom_object_pt[e]=dynamic_cast<ELEMENT*>(mesh_pt->element_pt(e));
+     // (Try to) cast to a finite elemnet:
+     Sub_geom_object_pt[e]=
+      dynamic_cast<FiniteElement*>(mesh_pt->element_pt(e));
 
 #ifdef PARANOID
      if (Sub_geom_object_pt[e]==0)
       {
        std::ostringstream error_message;
-       error_message << "Unable to dynamic cast element: " << std::endl
-                     << "into an ELEMENT\n";
+       error_message 
+        << "Unable to dynamic cast element: " << std::endl
+        << "into a FiniteElement: GeomObject representation is not possible\n";
        throw OomphLibError(
         error_message.str(),
         "MeshAsGeomObject::MeshAsGeomObject(...)",
@@ -107,7 +172,8 @@ namespace oomph
     }
 
    // Set storage for minimum and maximum coordinates
-   Minmax_coords.resize(DIM_LAGRANGIAN*2);
+   const unsigned dim_lagrangian = this->nlagrangian();
+   Minmax_coords.resize(2*dim_lagrangian);
 
    // Get the default parameters for the number of bins in each 
    // dimension from the Multi_domain_functions namespace
@@ -126,10 +192,7 @@ namespace oomph
      // Create the bin structure
      create_bins_of_objects();
     }
-  }
-
-
-
+ }
 
 
 
@@ -142,8 +205,7 @@ namespace oomph
 /// time the sub-object's locate_zeta function is called, the coordinate
 /// argument "s" is used as the initial guess
 //========================================================================
- template<unsigned DIM_LAGRANGIAN, unsigned DIM_EULERIAN, class ELEMENT>
- void MeshAsGeomObject<DIM_LAGRANGIAN,DIM_EULERIAN,ELEMENT>::locate_zeta
+ void MeshAsGeomObject::locate_zeta
  (const Vector<double>& zeta,GeomObject*& sub_geom_object_pt,
   Vector<double>& s, const bool &called_within_spiral)
   {
@@ -151,9 +213,12 @@ namespace oomph
    // leaving we've failed!
    sub_geom_object_pt=0;
 
+   //Get the lagrangian dimension
+   const unsigned dim_lagrangian = this->nlagrangian();
+
    // Does the zeta coordinate lie within the current bin structure?
    // If not then modify Minmax_coords and re-populate the bin structure
-   if (DIM_LAGRANGIAN==1)
+   if(dim_lagrangian==1)
     {
      if (zeta[0]<Minmax_coords[0])
       {
@@ -166,7 +231,7 @@ namespace oomph
        create_bins_of_objects();
       }
     }
-   else if (DIM_LAGRANGIAN==2)
+   else if(dim_lagrangian==2)
     {
      if (zeta[0]<Minmax_coords[0])
       {
@@ -190,7 +255,7 @@ namespace oomph
        create_bins_of_objects();
       }
     }
-   else if (DIM_LAGRANGIAN==3)
+   else if (dim_lagrangian==3)
     {
      if (zeta[0]<Minmax_coords[0])
       {
@@ -229,7 +294,7 @@ namespace oomph
    unsigned bin_number=0;
    // Get the min and max coords of the bin structure, and find
    // the bin structure containing the current zeta cooordinate
-   if (DIM_LAGRANGIAN==1)
+   if (dim_lagrangian==1)
     {
      double x_min=Minmax_coords[0];
      double x_max=Minmax_coords[1];
@@ -237,7 +302,7 @@ namespace oomph
      bin_number=int(Nbin_x*((zeta[0]-x_min)/(x_max-x_min)));
      if (bin_number==Nbin_x) {bin_number=Nbin_x-1;}
     }
-   else if (DIM_LAGRANGIAN==2)
+   else if (dim_lagrangian==2)
     {
      double x_min=Minmax_coords[0];
      double x_max=Minmax_coords[1];
@@ -248,7 +313,7 @@ namespace oomph
       +Nbin_x*int(Nbin_y*((zeta[1]-y_min)/(y_max-y_min)));
      if (bin_number==Nbin_x*Nbin_y) {bin_number=Nbin_x*Nbin_y-1;}
     }
-   else if (DIM_LAGRANGIAN==3)
+   else if (dim_lagrangian==3)
     {
      double x_min=Minmax_coords[0];
      double x_max=Minmax_coords[1];
@@ -290,7 +355,7 @@ namespace oomph
          for (unsigned i_sam=0;i_sam<n_sample;i_sam++)
           {
            // Get the element
-           ELEMENT* el_pt=Bin_object_coord_pairs
+           FiniteElement* el_pt=Bin_object_coord_pairs
             [neighbour_bin[i_nbr]][i_sam].first;
 
            // Get the local coordinate
@@ -304,8 +369,9 @@ namespace oomph
                               use_coordinate_as_initial_guess);
 
 #ifdef OOMPH_HAS_MPI
-           // Dynamic cast the result to an ELEMENT
-           ELEMENT* test_el_pt=dynamic_cast<ELEMENT*>(sub_geom_object_pt);
+           // Dynamic cast the result to a FiniteElement
+           FiniteElement* test_el_pt=
+            dynamic_cast<FiniteElement*>(sub_geom_object_pt);
            if (test_el_pt!=0)
             {
              // We only want to exit if this is a non-halo element
@@ -313,7 +379,7 @@ namespace oomph
             }
 #endif
 
-           // If the ELEMENT is non-halo and has been located, exit
+           // If the FiniteElement is non-halo and has been located, exit
            if (sub_geom_object_pt!=0)
             {
              found_zeta=true;
@@ -337,11 +403,11 @@ namespace oomph
 
      // Loop over all levels... maximum of N*_bin
      unsigned n_level=Nbin_x;
-     if (DIM_LAGRANGIAN>=2)
+     if (dim_lagrangian>=2)
       {
        if (n_level < Nbin_y) { n_level=Nbin_y; }
       }
-     if (DIM_LAGRANGIAN==3)
+     if (dim_lagrangian==3)
       {
        if (n_level < Nbin_z) { n_level=Nbin_z; }
       }
@@ -368,7 +434,7 @@ namespace oomph
            for (unsigned i_sam=0;i_sam<n_sample;i_sam++)
             {
              // Get the element
-             ELEMENT* el_pt=Bin_object_coord_pairs
+             FiniteElement* el_pt=Bin_object_coord_pairs
               [neighbour_bin[i_nbr]][i_sam].first;
 
              // Get the local coordinate
@@ -413,8 +479,7 @@ namespace oomph
 //========================================================================
 ///Get the min and max coordinates for the mesh, in each dimension
 //========================================================================
- template<unsigned DIM_LAGRANGIAN, unsigned DIM_EULERIAN, class ELEMENT>
- void MeshAsGeomObject<DIM_LAGRANGIAN,DIM_EULERIAN,ELEMENT>::
+ void MeshAsGeomObject::
  get_min_and_max_coordinates(Mesh* const &mesh_pt)
   {
    // Storage locally (i.e. in parallel on each processor)
@@ -422,12 +487,15 @@ namespace oomph
    double y_min_local=DBL_MAX; double y_max_local=-DBL_MAX;
    double z_min_local=DBL_MAX; double z_max_local=-DBL_MAX;
 
+   //Get the lagrangian dimension
+   const unsigned dim_lagrangian = this->nlagrangian();
+
    // Loop over the elements of the mesh
    unsigned n_el=mesh_pt->nelement();
    for (unsigned e=0;e<n_el;e++)
     {
-     ELEMENT* el_pt=dynamic_cast<ELEMENT*>(mesh_pt->element_pt(e));
-
+     FiniteElement* el_pt= mesh_pt->finite_element_pt(e);
+   
      // Get the number of vertices (nplot=2 does the trick)
      unsigned n_plot=2;
      unsigned n_plot_points=el_pt->nplot_points(n_plot);
@@ -435,8 +503,8 @@ namespace oomph
      // Loop over the number of plot points
      for (unsigned i=0;i<n_plot_points;i++)
       {
-       Vector<double> el_local(DIM_LAGRANGIAN);
-       Vector<double> el_global(DIM_LAGRANGIAN);
+       Vector<double> el_local(dim_lagrangian);
+       Vector<double> el_global(dim_lagrangian);
 
        // Get the local s
        el_pt->get_s_plot(i,n_plot,el_local);
@@ -447,12 +515,12 @@ namespace oomph
        // Check the max and min in each direction
        if (el_global[0] < x_min_local) {x_min_local=el_global[0];}
        if (el_global[0] > x_max_local) {x_max_local=el_global[0];}
-       if (DIM_LAGRANGIAN>=2)
+       if (dim_lagrangian>=2)
         {
          if (el_global[1] < y_min_local) {y_min_local=el_global[1];}
          if (el_global[1] > y_max_local) {y_max_local=el_global[1];}
         }
-       if (DIM_LAGRANGIAN==3)
+       if (dim_lagrangian==3)
         {
          if (el_global[2] < z_min_local) {z_min_local=el_global[2];}
          if (el_global[2] > z_max_local) {z_max_local=el_global[2];}
@@ -476,14 +544,14 @@ namespace oomph
                        Communicator_pt->mpi_comm());
          MPI_Allreduce(&x_max_local,&x_max,1,MPI_DOUBLE,MPI_MAX,
                        Communicator_pt->mpi_comm());
-         if (DIM_LAGRANGIAN>=2)
+         if (dim_lagrangian>=2)
           {
            MPI_Allreduce(&y_min_local,&y_min,1,MPI_DOUBLE,MPI_MIN,
                          Communicator_pt->mpi_comm());
            MPI_Allreduce(&y_max_local,&y_max,1,MPI_DOUBLE,MPI_MAX,
                          Communicator_pt->mpi_comm());
           }
-         if (DIM_LAGRANGIAN==3)
+         if (dim_lagrangian==3)
           {
            MPI_Allreduce(&z_min_local,&z_min,1,MPI_DOUBLE,MPI_MIN,
                          Communicator_pt->mpi_comm());
@@ -508,12 +576,12 @@ namespace oomph
     {
      x_min=x_min_local;
      x_max=x_max_local;
-     if (DIM_LAGRANGIAN>=2)
+     if (dim_lagrangian>=2)
       {
        y_min=y_min_local;
        y_max=y_max_local;
       }
-     if (DIM_LAGRANGIAN==3)
+     if (dim_lagrangian==3)
       {
        z_min=z_min_local;
        z_max=z_max_local;
@@ -522,12 +590,12 @@ namespace oomph
 #else // If we're not using MPI then the mesh can't be distributed
    x_min=x_min_local;
    x_max=x_max_local;
-   if (DIM_LAGRANGIAN>=2)
+   if (dim_lagrangian>=2)
     {
      y_min=y_min_local;
      y_max=y_max_local;
     }
-   if (DIM_LAGRANGIAN==3)
+   if (dim_lagrangian==3)
     {
      z_min=z_min_local;
      z_max=z_max_local;
@@ -538,7 +606,7 @@ namespace oomph
    // meshes that may move around
    // There's no point in doing this for DIM_LAGRANGIAN==1
    double percentage_offset=5.0;
-   if (DIM_LAGRANGIAN>=2)
+   if (dim_lagrangian>=2)
     {
      double x_length=x_max-x_min;
      double y_length=y_max-y_min;
@@ -547,7 +615,7 @@ namespace oomph
      y_min=y_min-((percentage_offset/100.0)*y_length);
      y_max=y_max+((percentage_offset/100.0)*y_length);
     }
-   if (DIM_LAGRANGIAN==3)
+   if (dim_lagrangian==3)
     {
      double z_length=z_max-z_min;
      z_min=z_min-((percentage_offset/100.0)*z_length);
@@ -557,12 +625,12 @@ namespace oomph
    // Add these entries to the Minmax_coords vector
    Minmax_coords[0]=x_min;
    Minmax_coords[1]=x_max;
-   if (DIM_LAGRANGIAN>=2)
+   if (dim_lagrangian>=2)
     {
      Minmax_coords[2]=y_min;
      Minmax_coords[3]=y_max;
     }
-   if (DIM_LAGRANGIAN==3)
+   if (dim_lagrangian==3)
     {
      Minmax_coords[4]=z_min;
      Minmax_coords[5]=z_max;
@@ -573,33 +641,34 @@ namespace oomph
 //========================================================================
 ///Initialise the "bin" structure for locating coordinates
 //========================================================================
- template<unsigned DIM_LAGRANGIAN, unsigned DIM_EULERIAN, class ELEMENT>
- void MeshAsGeomObject<DIM_LAGRANGIAN,DIM_EULERIAN,ELEMENT>::
- create_bins_of_objects()
+ void MeshAsGeomObject::create_bins_of_objects()
   {
+   //Store the lagrangian dimension
+   const unsigned dim_lagrangian = this->nlagrangian();
+
    // Output message regarding bin structure setup if required
    if (Multi_domain_functions::Doc_stats)
     {
      oomph_info << "============================================" << std::endl;
      oomph_info << " MeshAsGeomObject: set up bin search with:" << std::endl;
      oomph_info << "   Nbin_x=" << Nbin_x << "  ";
-     if (DIM_LAGRANGIAN>=2)
+     if (dim_lagrangian>=2)
       {
        oomph_info << "Nbin_y=" << Nbin_y << "  ";
       }
-     if (DIM_LAGRANGIAN==3)
+     if (dim_lagrangian==3)
       {
        oomph_info << "Nbin_z=" << Nbin_z;
       }
      oomph_info << std::endl;
      oomph_info << "  Xminmax=" << Minmax_coords[0] << " " << Minmax_coords[1] 
                 << "  ";
-     if (DIM_LAGRANGIAN>=2)
+     if (dim_lagrangian>=2)
       {
        oomph_info << "Yminmax=" << Minmax_coords[2] << " " << Minmax_coords[3]
                   << "  ";
       }
-     if (DIM_LAGRANGIAN==3)
+     if (dim_lagrangian==3)
       {
        oomph_info << "Zminmax=" << Minmax_coords[4] << " " << Minmax_coords[5] 
                   << "  ";
@@ -613,11 +682,11 @@ namespace oomph
 
    ///The storage for these bins is of size Nbin_x*Nbin_y*Nbin_z
    unsigned ntotalbin=Nbin_x;
-   if (DIM_LAGRANGIAN==2)
+   if (dim_lagrangian==2)
     {
      ntotalbin=Nbin_x*Nbin_y;
     }
-   else if (DIM_LAGRANGIAN==3)
+   else if (dim_lagrangian==3)
     {
      ntotalbin=Nbin_x*Nbin_y*Nbin_z;
     }
@@ -636,7 +705,7 @@ namespace oomph
    for (unsigned e=0;e<n_sub;e++)
     {
      // Cast to the element (sub-object) first
-     ELEMENT* el_pt=dynamic_cast<ELEMENT*>(Sub_geom_object_pt[e]);
+     FiniteElement* el_pt=dynamic_cast<FiniteElement*>(Sub_geom_object_pt[e]);
 
      // Get specified number of points within the element
      unsigned n_plot_points=
@@ -645,8 +714,8 @@ namespace oomph
      for (unsigned i=0;i<n_plot_points;i++)
       {
        // Storage for local and global coordinates
-       Vector<double> local_coord(DIM_LAGRANGIAN,0.0);
-       Vector<double> global_coord(DIM_LAGRANGIAN,0.0);
+       Vector<double> local_coord(dim_lagrangian,0.0);
+       Vector<double> global_coord(dim_lagrangian,0.0);
 
        // Get local coordinate and interpolate to global
        el_pt->get_s_plot(i,Multi_domain_functions::Nsample_points,local_coord);
@@ -665,7 +734,7 @@ namespace oomph
        if (bin_number_x==Nbin_x) {bin_number_x=Nbin_x-1;}
 
        //Work out the bin number (in higher dimensions if required)
-       if (DIM_LAGRANGIAN==1)
+       if (dim_lagrangian==1)
         {
          bin_number=bin_number_x;
         }
@@ -679,12 +748,12 @@ namespace oomph
           int(Nbin_y*(global_coord[1]-y_min)/(y_max-y_min));
          if (bin_number_y==Nbin_y) {bin_number_y=Nbin_y-1;}
 
-         if (DIM_LAGRANGIAN==2)
+         if (dim_lagrangian==2)
           {
            // Total bin number
            bin_number=bin_number_x+(Nbin_x*bin_number_y);
           }
-         else if (DIM_LAGRANGIAN==3)
+         else if (dim_lagrangian==3)
           {
            double z_min=Minmax_coords[4];
            double z_max=Minmax_coords[5];
@@ -711,13 +780,13 @@ namespace oomph
 //========================================================================
 ///Calculate the bin numbers of all the neighbours to "bin" given the level
 //========================================================================
- template<unsigned DIM_LAGRANGIAN, unsigned DIM_EULERIAN, class ELEMENT>
- void MeshAsGeomObject<DIM_LAGRANGIAN,DIM_EULERIAN,ELEMENT>::
- get_neighbouring_bins_helper(const unsigned& bin, const unsigned& level,
-                              Vector<unsigned>& neighbour_bin)
+ void MeshAsGeomObject::get_neighbouring_bins_helper(
+  const unsigned& bin, const unsigned& level,
+  Vector<unsigned>& neighbour_bin)
   {
+   const unsigned dim_lagrangian = this->nlagrangian();
    // This will be different depending on the value of DIM_LAGRANGIAN
-   if (DIM_LAGRANGIAN==1)
+   if (dim_lagrangian==1)
     {
      // Single "loop" in one direction - always a vector of max size 2
      unsigned nbr_bin_left=bin-level;
@@ -734,7 +803,7 @@ namespace oomph
        neighbour_bin.push_back(nbr_bin);
       }
     }
-   else if (DIM_LAGRANGIAN==2)
+   else if (dim_lagrangian==2)
     {
      unsigned n_total_bin=Nbin_x*Nbin_y;
 
@@ -784,7 +853,7 @@ namespace oomph
       }
 
     }
-   else if (DIM_LAGRANGIAN==3)
+   else if (dim_lagrangian==3)
     {
      unsigned n_total_bin=Nbin_x*Nbin_y*Nbin_z;
 
@@ -851,5 +920,3 @@ namespace oomph
  
 
 }
-
-#endif

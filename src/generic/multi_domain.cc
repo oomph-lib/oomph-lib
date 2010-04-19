@@ -671,6 +671,10 @@ namespace Multi_domain_functions
 
   }
 
+
+
+
+
 //========================================================================
 /// Send the zeta coordinates from the current process to 
 /// the next process; receive from the previous process
@@ -1824,7 +1828,500 @@ namespace Multi_domain_functions
    }
  }
 
+ 
+ //=====================================================================
+ /// locate zeta for current set of missing coordinates
+ //=====================================================================
+  void locate_zeta_for_missing_coordinates
+  (int& iproc, Mesh* const &external_mesh_pt, Problem* problem_pt,
+   MeshAsGeomObject* &mesh_geom_obj_pt)
+  {
+   // Storage for number of processors, current process and communicator
+   OomphCommunicator* comm_pt=problem_pt->communicator_pt();
+   int n_proc=comm_pt->nproc();
+   int my_rank=comm_pt->my_rank();
+
+   // Reset counters and resize vectors to be sent
+   Count_double_values=0;
+   Count_unsigned_values=0;
+   Count_located_coord=0;
+   Double_values.resize(0);
+   Unsigned_values.resize(0);
+   Located_coord.resize(0);
+
+   Count_zetas=0;
+   Count_local_zeta_dim=0;
+   Count_local_zetas=0;
+   Local_zeta_dim.resize(0);
+   Local_zetas.resize(0);
+
+   Found_zeta.resize(Count_zeta_dim);
+   Located_element.resize(Count_zeta_dim);
+
+   // Loop over the Zeta_dim array...
+   for (unsigned i=0;i<Count_zeta_dim;i++)
+    {
+     unsigned el_dim=Zeta_dim[i];
+     if (el_dim==0)
+      {
+       // The coordinate was already located 
+       Found_zeta[i]=0; 
+       Located_element[i]=0;
+      }
+     else // It was not found yet, so try to find it on the current process
+      {
+       // Storage for global coordinates to be located
+       Vector<double> x_global(el_dim);
+       // Loop to fill in coordinates
+       for (unsigned ii=0;ii<el_dim;ii++)
+        {
+         x_global[ii]=Zetas[Count_zetas];
+         Count_zetas++;
+        }
+
+       // Perform locate_zeta for these coordinates
+       GeomObject *sub_geom_obj_pt;
+       Vector<double> ss(el_dim);
+       bool use_coordinate_as_initial_guess=true;
+       mesh_geom_obj_pt->locate_zeta(x_global,sub_geom_obj_pt,ss,
+                                     use_coordinate_as_initial_guess);
+
+       // Did the locate method work?
+       if (sub_geom_obj_pt!=0)
+        {
+         // Get the source element - bulk or not? (NO CHECKS)
+         GeneralisedElement *source_el_pt=0;
+         if (!Use_bulk_element_as_external)
+          {
+           source_el_pt=dynamic_cast<FiniteElement*>(sub_geom_obj_pt);
+          }
+         else
+          {
+           FaceElement *face_el_pt=dynamic_cast<FaceElement*>(sub_geom_obj_pt);
+           source_el_pt=dynamic_cast<FiniteElement*>(face_el_pt->
+                                                     bulk_element_pt());
+          }
+
+         // Check if the returned element is halo
+         if (!source_el_pt->is_halo())
+          {
+           // The correct non-halo element has been located; this will become
+           // an external haloed element on the current process, and an
+           // external halo copy needs to be created on the current process
+           // minus wherever we are in the "ring-loop"
+           int halo_copy_proc=my_rank-iproc;
+           // If iproc is bigger than my_rank then we've "gone through" nproc-1
+           if (my_rank<iproc) { halo_copy_proc=n_proc+halo_copy_proc; }
+
+           // So, we found zeta on the current processor
+           Found_zeta[i]=my_rank+1;
+           // This source element is an external halo on process halo_copy_proc
+           // but it should only be added to the storage if it hasn't
+           // been added already, and this information also needs to be
+           // communicated over to the other process
+
+           unsigned n_extern_haloed=external_mesh_pt->
+            nexternal_haloed_element(halo_copy_proc);
+           unsigned external_haloed_el_index;
+           external_haloed_el_index=
+            external_mesh_pt->add_external_haloed_element_pt(halo_copy_proc,
+                                                             source_el_pt);
+
+           // If it was added to the storage then the returned index
+           // will be the same as the (old) size of the storage
+           if (external_haloed_el_index==n_extern_haloed)
+            {
+             // Set index in Located_element to say it should be newly created
+             Located_element[i]=New;
+
+             // How many continuously interpolated values are there?
+             int n_cont_inter_values;
+             if (dynamic_cast<RefineableElement*>(source_el_pt)!=0)
+              {
+               n_cont_inter_values=dynamic_cast<RefineableElement*>
+                (source_el_pt)->ncont_interpolated_values();
+              }
+             else
+              {
+               n_cont_inter_values=-1;
+              }
+
+             // Since it is (externally) haloed from the current process,
+             // the info required to create a new element in the equivalent
+             // external halo layer on process halo_copy_proc needs to be 
+             // sent there
+
+             // If we're using macro elements to update...
+             MacroElementNodeUpdateMesh* macro_mesh_pt=
+              dynamic_cast<MacroElementNodeUpdateMesh*>(external_mesh_pt);
+             if (macro_mesh_pt!=0)
+              {
+               Unsigned_values.push_back(1);
+               Count_unsigned_values++;
+
+               //Cast to finite element... this must work because it's
+               //a macroelement no update mesh
+               FiniteElement* source_finite_el_pt 
+                = dynamic_cast<FiniteElement*>(source_el_pt);
+
+               MacroElement* macro_el_pt=source_finite_el_pt->macro_elem_pt();
+               // Send the macro element number across
+               unsigned macro_el_num=macro_el_pt->macro_element_number();
+               Unsigned_values.push_back(macro_el_num);
+               Count_unsigned_values++;
+
+               // we need to send
+               // the lower left and upper right coordinates of the macro
+               QElementBase* q_el_pt=dynamic_cast<QElementBase*>(source_el_pt);
+               if (q_el_pt!=0)
+                {
+                 // The macro element needs to be set first before
+                 // its lower left and upper right coordinates can be accessed
+                 // Now send the lower left and upper right coordinates
+                 unsigned el_dim=q_el_pt->dim();
+                 for (unsigned i_dim=0;i_dim<el_dim;i_dim++)
+                  {
+                   Double_values.push_back(q_el_pt->s_macro_ll(i_dim));
+                   Count_double_values++;
+                   Double_values.push_back(q_el_pt->s_macro_ur(i_dim));
+                   Count_double_values++;
+                  }
+                }
+               else // Throw an error
+                {
+                 std::ostringstream error_stream;
+                 error_stream << "You are using a MacroElement node update\n"
+                              << "in a case with non-QElements. This has not\n"
+                              << "yet been implemented.\n";
+                 throw OomphLibError
+                  (error_stream.str(),
+                   "Multi_domain_functions::simultaneous_locate_zeta()",
+                   OOMPH_EXCEPTION_LOCATION);
+                }
+
+              }
+             else // Not using macro elements to update
+              {
+               Unsigned_values.push_back(0);
+               Count_unsigned_values++;
+              }
+
+ 
+             //Cast to finite element... this must work because it's
+             //a macroelement no update mesh
+             FiniteElement* source_finite_el_pt 
+              = dynamic_cast<FiniteElement*>(source_el_pt);
+#ifdef PARANOID
+             if(source_finite_el_pt==0)
+              {
+               throw 
+                OomphLibError(
+                 "Unable to cast source function to finite element\n",
+               "Multi_domain_functions::locate_zeta_for-missing_coordinates()",
+                 OOMPH_EXCEPTION_LOCATION);
+              }
 #endif
+
+
+             // Loop over the nodes of the new source element
+             unsigned n_node=source_finite_el_pt->nnode();
+             for (unsigned j=0;j<n_node;j++)
+              {
+               Node* nod_pt=source_finite_el_pt->node_pt(j);
+
+               // Add the node to the storage; this routine
+               // also takes care of any master nodes if the
+               // node is hanging
+               add_external_haloed_node_to_storage(halo_copy_proc,nod_pt,
+                                                   problem_pt,
+                                                   external_mesh_pt,
+                                                   n_cont_inter_values);
+              }
+            
+            }
+           else // it has already been added, so tell the other process
+            {
+             // Set index to indicate an element has already been added
+             Located_element[i]=Exists;
+             Unsigned_values.push_back(external_haloed_el_index);
+             Count_unsigned_values++;
+            }
+
+           // The coordinates returned by locate_zeta are also needed
+           // in the setup of the source elements on the other process
+           if (!Use_bulk_element_as_external)
+            {
+             for (unsigned ii=0;ii<el_dim;ii++)
+              {
+               Located_coord.push_back(ss[ii]);
+               Count_located_coord++;
+              }
+            }
+           else // translate the coordinates to the bulk element
+            {
+             // The translation is from Lagrangian to Eulerian
+             FaceElement *face_el_pt=
+              dynamic_cast<FaceElement*>(sub_geom_obj_pt);
+             //Get the dimension of the BulkElement
+             unsigned bulk_el_dim = 
+              dynamic_cast<FiniteElement*>(source_el_pt)->dim();
+             Vector<double> s_trans(bulk_el_dim);
+             face_el_pt->get_local_coordinate_in_bulk(ss,s_trans);
+             for (unsigned ii=0;ii<bulk_el_dim;ii++)
+              {
+               Located_coord.push_back(s_trans[ii]);
+               Count_located_coord++;
+              }
+            }
+          }
+         else // halo, so search again until non-halo equivalent is located
+          {
+           // Add required information to arrays (as below)
+           for (unsigned ii=0;ii<el_dim;ii++)
+            {
+             Local_zetas.push_back(x_global[ii]);
+             Count_local_zetas++;
+            }
+           Local_zeta_dim.push_back(el_dim);
+           Count_local_zeta_dim++;
+           // It wasn't found here
+           Found_zeta[i]=0;
+           // Set index to indicate not found
+           Located_element[i]=Not_found;
+          }
+        }
+       else // not successful this time, so prepare for next process to try
+        {
+         // Add this global coordinate to the LOCAL zeta array
+         for (unsigned ii=0;ii<el_dim;ii++)
+          {
+           Local_zetas.push_back(x_global[ii]);
+           Count_local_zetas++;
+          }
+         // Add the element dimension to the LOCAL Zeta_dim array
+         Local_zeta_dim.push_back(el_dim);
+         Count_local_zeta_dim++;
+         // It wasn't found here
+         Found_zeta[i]=0;
+         // Set index to indicate not found
+         Located_element[i]=Not_found;
+        }
+      }
+
+    }
+
+  }
+
+
+#endif
+
+
+
+ //=====================================================================
+ /// locate zeta for current set of "local" coordinates
+ //=====================================================================
+  void locate_zeta_for_local_coordinates
+  (Mesh* const &mesh_pt, Mesh* const &external_mesh_pt,
+   MeshAsGeomObject* &mesh_geom_obj_pt,
+   const unsigned& interaction_index)
+  {
+   // Number of local elements
+   unsigned n_element=mesh_pt->nelement();
+
+   // Initialise counters and arrays
+   Local_zetas.resize(0);
+   Local_zeta_dim.resize(0);
+   Count_local_zetas=0;
+   Count_zetas=0;
+   Count_local_zeta_dim=0;
+   Count_zeta_dim=0;
+
+   // Loop over this processor's elements
+   for (unsigned e=0;e<n_element;e++)
+    {
+     ElementWithExternalElement *el_pt=
+      dynamic_cast<ElementWithExternalElement*>(mesh_pt->element_pt(e));
+#ifdef OOMPH_HAS_MPI
+     // Only visit non-halo elements
+     if (!el_pt->is_halo())
+#endif
+      {
+       // Find number of Gauss points and element dimension
+       unsigned n_intpt=el_pt->integral_pt()->nweight();
+       unsigned el_dim=el_pt->dim();
+       // Set storage for local and global coordinates
+       Vector<double> s_local(el_dim);
+       Vector<double> x_global(el_dim);
+
+       // Loop over integration points
+       for (unsigned ipt=0;ipt<n_intpt;ipt++)
+        {         
+         // Has this integration point been done yet?
+         if (External_element_located[e][ipt]==0)
+          {
+           // Get local coordinates
+           for (unsigned i=0;i<el_dim;i++)
+            {
+             s_local[i]=el_pt->integral_pt()->knot(ipt,i);
+            }
+           // Interpolate to global coordinates
+           el_pt->interpolated_zeta(s_local,x_global);
+
+           // Storage for geometric object and its local coordinates
+           GeomObject* sub_geom_obj_pt=0;
+           Vector<double> s_ext(el_dim);
+
+           // Perform locate_zeta locally for this coordinate
+           bool use_coordinate_as_initial_guess=true;
+           mesh_geom_obj_pt->locate_zeta(x_global,sub_geom_obj_pt,s_ext,
+                                         use_coordinate_as_initial_guess);
+
+           // Has the required element been located?
+           if (sub_geom_obj_pt!=0)
+            {
+             // The required element has been located
+             // The located coordinates have the same dimension as the bulk
+             GeneralisedElement* source_el_pt;
+             Vector<double> s_source(el_dim);
+
+             // Is the bulk element the actual external element?
+             if (!Use_bulk_element_as_external)
+              {
+               // Use the object directly (it must be a finite element)
+               source_el_pt=dynamic_cast<FiniteElement*>(sub_geom_obj_pt);
+               s_source=s_ext;
+              }
+             else
+              {
+               // Cast to a FaceElement and use the bulk element
+               FaceElement* face_el_pt=
+                dynamic_cast<FaceElement*>(sub_geom_obj_pt);
+               source_el_pt=face_el_pt->bulk_element_pt();
+               //Need to resize the located coordinates to have the same
+               //dimension as the bulk element
+               s_source.resize(dynamic_cast<FiniteElement*>
+                               (source_el_pt)->dim());
+               // Translate the returned local coords into the bulk element
+               face_el_pt->get_local_coordinate_in_bulk(s_ext,s_source);
+              }
+
+             // Check if it's a halo; if it is then the non-halo equivalent
+             // needs to be located from another processor
+#ifdef OOMPH_HAS_MPI
+             if (!source_el_pt->is_halo())
+#endif
+              {
+               //Need to cast to a FiniteElement
+               FiniteElement* source_finite_el_pt = 
+                dynamic_cast<FiniteElement*>(source_el_pt);
+
+               // Set the external element pointer and local coordinates
+               el_pt->external_element_pt(interaction_index,ipt)
+                = source_finite_el_pt;
+               el_pt->external_element_local_coord(interaction_index,ipt)
+                =s_source;
+
+               // Set the lookup array to 1/true 
+               External_element_located[e][ipt]=1;
+
+               // Has this been used as a source for this element already?
+               bool source_already_used=false;
+               if (!source_already_used)
+                {
+                 // Add to the external mesh's external element storage
+                 bool added_external_element;
+                 added_external_element=
+                  external_mesh_pt->add_external_element_pt(source_el_pt);
+
+
+                 // If it was added then also try to add its nodes
+                 if (added_external_element)
+                  {
+
+                   // Loop over the nodes of this external element
+                   // and add (uniquely) as external nodes
+                   unsigned n_node=source_finite_el_pt->nnode();
+                   for (unsigned j=0; j<n_node; j++)
+                    {
+                     Node* nod_pt=source_finite_el_pt->node_pt(j);
+
+                     bool added_external_node;
+                     added_external_node=
+                      external_mesh_pt->add_external_node_pt(nod_pt);
+
+                     // If the node was added then try to add any masters too
+                     if (added_external_node)
+                      {
+                       // Now do the same for any master nodes
+                       if (dynamic_cast<RefineableElement*>(source_el_pt)!=0)
+                        {
+                         int n_cont=dynamic_cast<RefineableElement*>
+                          (source_el_pt)->ncont_interpolated_values();
+                         for (int i_cont=-1;i_cont<n_cont;i_cont++)
+                          {
+                           // Is this a hanging node in this variable?
+                           if (nod_pt->is_hanging(i_cont))
+                            {
+                             HangInfo* hang_pt=nod_pt->
+                              hanging_pt(i_cont);
+                             // Loop over the master nodes
+                             unsigned n_master=hang_pt->nmaster();
+                             for (unsigned m=0; m<n_master; m++)
+                              {
+                               Node* master_nod_pt=
+                                hang_pt->master_node_pt(m);
+
+                               // Again this will only add if the node
+                               // is not in the storage already
+                               external_mesh_pt->
+                                add_external_node_pt(master_nod_pt);
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+#ifdef OOMPH_HAS_MPI
+             else // elements can only be halo if MPI is turned on
+              {
+               // Add required information to arrays
+               for (unsigned i=0;i<el_dim;i++)
+                {
+                 Local_zetas.push_back(x_global[i]);
+                 Count_local_zetas++;
+                }
+               Local_zeta_dim.push_back(el_dim);
+               Count_local_zeta_dim++;
+              }
+#endif
+            }
+           else
+            {
+             // If it has failed then add the required information to the
+             // arrays which need to be sent to the other processors so that
+             // they can perform the locate_zeta
+
+             // Add this global coordinate to the LOCAL zeta array
+             for (unsigned i=0;i<el_dim;i++)
+              {
+               Local_zetas.push_back(x_global[i]);
+               Count_local_zetas++;
+              }
+             // Add the element dimension to the LOCAL Zeta_dim array
+             Local_zeta_dim.push_back(el_dim);
+             Count_local_zeta_dim++;
+             // Need another array indicating the current element number
+             // for which the locate_zeta method did not work locally?
+            }
+          }
+        } // end loop over integration points
+      }
+    } // end loop over local elements
+
+  }
 
 
 

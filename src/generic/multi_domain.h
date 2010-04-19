@@ -274,8 +274,7 @@ namespace Multi_domain_functions
   
   /// \short Auxiliary function which is called from the two preceding
   /// functions 
-  template<class EXT_ELEMENT, class GEOM_OBJECT,
-   unsigned EL_DIM_LAG, unsigned EL_DIM_EUL>
+  template<class EXT_ELEMENT, class GEOM_OBJECT>
    void aux_setup_multi_domain_interaction(Problem* problem_pt,
                                            Mesh* const &mesh_pt,
                                            Mesh* const &external_mesh_pt,
@@ -290,10 +289,9 @@ namespace Multi_domain_functions
 #endif
   
   /// \short Helper function to locate "local" zeta coordinates
-  template<class GEOM_OBJECT,unsigned EL_DIM_LAG,unsigned EL_DIM_EUL>
    void locate_zeta_for_local_coordinates
    (Mesh* const &mesh_pt, Mesh* const &external_mesh_pt,
-    MeshAsGeomObject<EL_DIM_LAG,EL_DIM_EUL,GEOM_OBJECT >* &mesh_geom_obj_pt,
+    MeshAsGeomObject* &mesh_geom_obj_pt,
     const unsigned& interaction_index);
 
 #ifdef OOMPH_HAS_MPI
@@ -302,10 +300,9 @@ namespace Multi_domain_functions
   void send_and_receive_missing_zetas(Problem* problem_pt);
 
   /// \short Helper function to locate these "missing" zeta coordinates
-  template<class GEOM_OBJECT,unsigned EL_DIM_LAG,unsigned EL_DIM_EUL>
-   void locate_zeta_for_missing_coordinates
-   (int& iproc,Mesh* const &external_mesh_pt,Problem* problem_pt,
-    MeshAsGeomObject<EL_DIM_LAG,EL_DIM_EUL,GEOM_OBJECT >* &mesh_geom_obj_pt);
+  void locate_zeta_for_missing_coordinates(
+   int& iproc, Mesh* const &external_mesh_pt,Problem* problem_pt,
+    MeshAsGeomObject* &mesh_geom_obj_pt);
 
   /// \short Helper function to send back any located information
   void send_and_receive_located_info(int& iproc, Mesh* const &external_mesh_pt,
@@ -313,7 +310,7 @@ namespace Multi_domain_functions
 
   /// \short Helper function to create external (halo) elements on the loop 
   /// process based on the info received in send_and_received_located_info
-  template<class EXT_ELEMENT,unsigned EL_DIM_LAG,unsigned EL_DIM_EUL>
+  template<class EXT_ELEMENT>
    void create_external_halo_elements(int& iproc, Mesh* const &mesh_pt,
                                       Mesh* const &external_mesh_pt,
                                       Problem* problem_pt,

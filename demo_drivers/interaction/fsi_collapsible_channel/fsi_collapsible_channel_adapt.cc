@@ -430,8 +430,8 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
  
  // Build a geometric object (one Lagrangian, two Eulerian coordinates)
  // from the wall mesh
- MeshAsGeomObject<1,2,FSIHermiteBeamElement>* wall_geom_object_pt=
-  new MeshAsGeomObject<1,2,FSIHermiteBeamElement>(Wall_mesh_pt); 
+ MeshAsGeomObject* wall_geom_object_pt=
+  new MeshAsGeomObject(Wall_mesh_pt); 
 
 #ifdef MACRO_ELEMENT_NODE_UPDATE
 

@@ -327,7 +327,7 @@ private:
  SolidMesh* Traction_mesh_pt;
 
  /// GeomObject incarnation of fsi boundary in solid mesh
- MeshAsGeomObject<1,2,FSISolidTractionElement<SOLID_ELEMENT,2> >* 
+ MeshAsGeomObject* 
  Solid_fsi_boundary_pt;
 
 }; 
@@ -687,7 +687,7 @@ create_lagrange_multiplier_elements()
 
  // Create  GeomObject incarnation of fsi boundary in solid mesh
  Solid_fsi_boundary_pt=
-  new MeshAsGeomObject<1,2,FSISolidTractionElement<SOLID_ELEMENT,2> >
+  new MeshAsGeomObject
   (Traction_mesh_pt);
  
  // Lagrange multiplier elements are located on boundary 3 of the fluid mesh

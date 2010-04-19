@@ -421,7 +421,7 @@ private :
  OneDLagrangianMesh<FSIHermiteBeamElement>* Wall_mesh_pt; 
 
  /// Geometric object incarnation of the wall mesh
- MeshAsGeomObject<1,2,FSIHermiteBeamElement>* Wall_geom_object_pt;
+ MeshAsGeomObject* Wall_geom_object_pt;
 
  ///Pointer to the left control node
  Node* Left_node_pt;
@@ -492,7 +492,7 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
  // Build a geometric object (one Lagrangian, two Eulerian coordinates)
  // from the wall mesh
  Wall_geom_object_pt=
-  new MeshAsGeomObject<1,2,FSIHermiteBeamElement>(Wall_mesh_pt); 
+  new MeshAsGeomObject(Wall_mesh_pt); 
 
 
 

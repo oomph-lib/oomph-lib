@@ -48,21 +48,24 @@ namespace oomph
 
 //========================================================================
 /// This class provides a GeomObject representation of a given
-/// finite element mesh. The template parameters specify the
-/// Lagrangian and Eulerian coordinates of the mesh. 
+/// finite element mesh. The Lagrangian coordinate is taken to be the 
+/// dimension of the (first) element in the mesh and the Eulerian 
+/// coordinate is taken to be the dimension of the (first) node in 
+/// the mesh. If there are no elements or nodes the appropriate dimensions
+/// will be set to zero.
 /// The consitituent elements of the mesh must have their own
-/// GeomObject representations and they become sub-objects
+/// GeomObject representations, so they must be FiniteElements,
+///  and they become sub-objects
 /// in this compound GeomObject.
 //========================================================================
-template<unsigned DIM_LAGRANGIAN, unsigned DIM_EULERIAN, class ELEMENT>
 class MeshAsGeomObject : public GeomObject
 {
 
 private:
 
- /// \short  Helper function for constructor: Oass the pointer to the mesh, 
+ /// \short  Helper function for constructor: pass the pointer to the mesh, 
  /// communicator and boolean
- ///to specify whether to calculate coordinate extrema or not
+ /// to specify whether to calculate coordinate extrema or not
  void construct_it(Mesh* const &mesh_pt, OomphCommunicator* comm_pt,
                    const bool& compute_extreme_bin_coords);
 
@@ -70,10 +73,11 @@ private:
  Vector<Data*> Geom_data_pt;
 
  ///Internal storage for the elements that constitute the object
- Vector<ELEMENT*> Sub_geom_object_pt;
+ Vector<FiniteElement*> Sub_geom_object_pt;
 
  ///Storage for paired objects and coords in each bin 
- Vector<Vector<std::pair<ELEMENT*,Vector<double> > > > Bin_object_coord_pairs;
+ Vector<Vector<std::pair<FiniteElement*,Vector<double> > > > 
+  Bin_object_coord_pairs;
 
  ///Storage for min and max coordinates of the bin structure
  Vector<double> Minmax_coords;
@@ -99,8 +103,7 @@ public:
  
  
  ///\short Constructor, pass the pointer to the mesh
-  MeshAsGeomObject(Mesh* const &mesh_pt) :
- GeomObject(DIM_LAGRANGIAN,DIM_EULERIAN)
+  MeshAsGeomObject(Mesh* const &mesh_pt) : GeomObject()
   {
    OomphCommunicator* comm_pt=0;
    bool compute_extreme_bin_coords=true;
@@ -110,8 +113,7 @@ public:
 
  ///\short Constructor, pass the pointer to the mesh and communicator
   MeshAsGeomObject(Mesh* const &mesh_pt,
-                   OomphCommunicator* comm_pt) :
- GeomObject(DIM_LAGRANGIAN,DIM_EULERIAN)
+                   OomphCommunicator* comm_pt) : GeomObject()
   {
    bool compute_extreme_bin_coords=true;
    this->construct_it(mesh_pt,comm_pt,compute_extreme_bin_coords);
@@ -121,8 +123,7 @@ public:
  /// boolean to bypass the computation of the extreme coordinates
  ///of the bin used in the locate_zeta method
  MeshAsGeomObject(Mesh* const &mesh_pt,
-                  const bool& compute_extreme_bin_coords) :
- GeomObject(DIM_LAGRANGIAN,DIM_EULERIAN)
+                  const bool& compute_extreme_bin_coords) : GeomObject()
   {
    OomphCommunicator* comm_pt=0;
    this->construct_it(mesh_pt,comm_pt,compute_extreme_bin_coords);
@@ -134,8 +135,7 @@ public:
  ///of the bin used in the locate_zeta method
  MeshAsGeomObject(Mesh* const &mesh_pt,
                   OomphCommunicator* comm_pt,
-                  const bool& compute_extreme_bin_coords) :
- GeomObject(DIM_LAGRANGIAN,DIM_EULERIAN)
+                  const bool& compute_extreme_bin_coords) : GeomObject()
   {
    this->construct_it(mesh_pt,comm_pt,compute_extreme_bin_coords);
   }
@@ -199,7 +199,8 @@ public:
    // Storage for the GeomObject that contains the zeta coordinate
    // and the intrinsic coordinate within it.
    GeomObject* sub_geom_object_pt;
-   Vector<double> s(DIM_LAGRANGIAN);
+   const unsigned n_lagrangian = this->nlagrangian();
+   Vector<double> s(n_lagrangian);
 
    //Find the sub object containing zeta, and the local intrinsic coordinate
    //within it
@@ -208,7 +209,7 @@ public:
     {
      std::ostringstream error_message;
      error_message << "Cannot locate zeta ";
-     for(unsigned i=0;i<DIM_LAGRANGIAN;i++)
+     for(unsigned i=0;i<n_lagrangian;i++)
       {
        error_message << zeta[i] << " ";
       }
