@@ -28,7 +28,7 @@ cd ..
 echo " " >> validation.log
 echo "Clamped shell buckling with arclength continuation validation" \
  >> validation.log
-echo "(parallel continuation test)"
+echo "(parallel continuation test)" >> validation.log
 echo "---------------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log

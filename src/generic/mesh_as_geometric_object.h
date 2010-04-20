@@ -79,8 +79,11 @@ private:
  Vector<Vector<std::pair<FiniteElement*,Vector<double> > > > 
   Bin_object_coord_pairs;
 
- ///Storage for min and max coordinates of the bin structure
- Vector<double> Minmax_coords;
+ ///Storage for min coordinates in the mesh
+ Vector<double> Min_coords;
+
+ ///Storage for max coordinates in the mesh
+ Vector<double> Max_coords;
 
  ///Number of bins in x direction
  unsigned Nbin_x;
@@ -235,22 +238,22 @@ public:
  unsigned& current_spiral_level() {return Current_spiral_level;}
 
  ///Access function for min coordinate in x direction
- double& x_min() {return Minmax_coords[0];}
+ double& x_min() {return Min_coords[0];}
 
  ///Access function for max coordinate in x direction
- double& x_max() {return Minmax_coords[1];}
+ double& x_max() {return Max_coords[0];}
 
  ///Access function for min coordinate in y direction
- double& y_min() {return Minmax_coords[2];}
+ double& y_min() {return Min_coords[1];}
 
  ///Access function for max coordinate in y direction
- double& y_max() {return Minmax_coords[3];}
+ double& y_max() {return Max_coords[1];}
 
  ///Access function for min coordinate in z direction
- double& z_min() {return Minmax_coords[4];}
+ double& z_min() {return Min_coords[2];}
 
  ///Access function for max coordinate in z direction
- double& z_max() {return Minmax_coords[5];}
+ double& z_max() {return Max_coords[2];}
 
  ///Get the min and max coordinates for the mesh, in each dimension
  void get_min_and_max_coordinates(Mesh* const &mesh_pt);

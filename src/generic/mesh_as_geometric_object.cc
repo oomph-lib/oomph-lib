@@ -153,8 +153,8 @@ namespace Multi_domain_functions
 #endif
 
      // Add the geometric Data of each element into set
-     unsigned ngeom=Sub_geom_object_pt[e]->ngeom_data();
-     for (unsigned i=0;i<ngeom;i++)
+     unsigned ngeom_data=Sub_geom_object_pt[e]->ngeom_data();
+     for (unsigned i=0;i<ngeom_data;i++)
       {
        tmp_geom_data.insert(Sub_geom_object_pt[e]->geom_data_pt(i));
       }
@@ -173,7 +173,8 @@ namespace Multi_domain_functions
 
    // Set storage for minimum and maximum coordinates
    const unsigned dim_lagrangian = this->nlagrangian();
-   Minmax_coords.resize(2*dim_lagrangian);
+   Min_coords.resize(dim_lagrangian);
+   Max_coords.resize(dim_lagrangian);
 
    // Get the default parameters for the number of bins in each 
    // dimension from the Multi_domain_functions namespace
@@ -195,7 +196,6 @@ namespace Multi_domain_functions
  }
 
 
-
 //========================================================================
 /// \short Find the sub geometric object and local coordinate therein that
 /// corresponds to the intrinsic coordinate zeta. If sub_geom_object_pt=0
@@ -214,121 +214,53 @@ namespace Multi_domain_functions
    sub_geom_object_pt=0;
 
    //Get the lagrangian dimension
-   const unsigned dim_lagrangian = this->nlagrangian();
+   const unsigned n_lagrangian = this->nlagrangian();
 
    // Does the zeta coordinate lie within the current bin structure?
-   // If not then modify Minmax_coords and re-populate the bin structure
-   if(dim_lagrangian==1)
-    {
-     if (zeta[0]<Minmax_coords[0])
-      {
-       Minmax_coords[0]=zeta[0];
-       create_bins_of_objects();
-      }
-     else if (zeta[0]>Minmax_coords[1])
-      {
-       Minmax_coords[1]=zeta[0];
-       create_bins_of_objects();
-      }
-    }
-   else if(dim_lagrangian==2)
-    {
-     if (zeta[0]<Minmax_coords[0])
-      {
-       Minmax_coords[0]=zeta[0];
-       create_bins_of_objects();
-      }
-     else if (zeta[0]>Minmax_coords[1])
-      {
-       Minmax_coords[1]=zeta[0];
-       create_bins_of_objects();
-      }
-     // and in the second direction...
-     if (zeta[1]<Minmax_coords[2])
-      {
-       Minmax_coords[2]=zeta[1];
-       create_bins_of_objects();
-      }
-     else if (zeta[1]>Minmax_coords[3])
-      {
-       Minmax_coords[3]=zeta[1];
-       create_bins_of_objects();
-      }
-    }
-   else if (dim_lagrangian==3)
-    {
-     if (zeta[0]<Minmax_coords[0])
-      {
-       Minmax_coords[0]=zeta[0];
-       create_bins_of_objects();
-      }
-     else if (zeta[0]>Minmax_coords[1])
-      {
-       Minmax_coords[1]=zeta[0];
-       create_bins_of_objects();
-      }
-     // and in the second direction...
-     if (zeta[1]<Minmax_coords[2])
-      {
-       Minmax_coords[2]=zeta[1];
-       create_bins_of_objects();
-      }
-     else if (zeta[1]>Minmax_coords[3])
-      {
-       Minmax_coords[3]=zeta[1];
-       create_bins_of_objects();
-      }
-     // and in the third direction...
-     if (zeta[2]<Minmax_coords[4])
-      {
-       Minmax_coords[4]=zeta[2];
-       create_bins_of_objects();
-      }
-     else if (zeta[2]>Minmax_coords[5])
-      {
-       Minmax_coords[5]=zeta[2];
-       create_bins_of_objects();
-      }
-    }
+   // If not then modify Min/Max_coords and re-populate the bin structure
 
-   unsigned bin_number=0;
-   // Get the min and max coords of the bin structure, and find
+   //Boolean to indicate whether bin structure should be repopulated
+   bool recreate_bins = false;
+   //Loop over the lagrangian dimension
+   for(unsigned i=0;i<n_lagrangian;i++)
+    {
+     //If the i-th coordinate is less than the minimum
+     if(zeta[i] < Min_coords[i]) 
+      {
+       Min_coords[i] = zeta[i];
+       recreate_bins = true;
+      }
+     //Otherwise coordinate may be bigger than the maximum
+     else if(zeta[i] > Max_coords[i])
+      {
+       Max_coords[i] = zeta[i];
+       recreate_bins = true;
+      }
+    }
+   
+   //Recreate bins if necessary
+   if(recreate_bins==true) {create_bins_of_objects();}
+
+   // Use the min and max coords of the bin structure, to find
    // the bin structure containing the current zeta cooordinate
-   if (dim_lagrangian==1)
-    {
-     double x_min=Minmax_coords[0];
-     double x_max=Minmax_coords[1];
+   unsigned bin_number=0;
+   //Offset for rows/matrices in higher dimensions
+   unsigned multiplier=1;
+   unsigned Nbin[3]={Nbin_x,Nbin_y,Nbin_z};
 
-     bin_number=int(Nbin_x*((zeta[0]-x_min)/(x_max-x_min)));
-     if (bin_number==Nbin_x) {bin_number=Nbin_x-1;}
-    }
-   else if (dim_lagrangian==2)
+   // Loop over the dimension
+   for(unsigned i=0;i<n_lagrangian;i++)
     {
-     double x_min=Minmax_coords[0];
-     double x_max=Minmax_coords[1];
-     double y_min=Minmax_coords[2];
-     double y_max=Minmax_coords[3];
-
-     bin_number=int(Nbin_x*((zeta[0]-x_min)/(x_max-x_min)))
-      +Nbin_x*int(Nbin_y*((zeta[1]-y_min)/(y_max-y_min)));
-     if (bin_number==Nbin_x*Nbin_y) {bin_number=Nbin_x*Nbin_y-1;}
-    }
-   else if (dim_lagrangian==3)
-    {
-     double x_min=Minmax_coords[0];
-     double x_max=Minmax_coords[1];
-     double y_min=Minmax_coords[2];
-     double y_max=Minmax_coords[3];
-     double z_min=Minmax_coords[4];
-     double z_max=Minmax_coords[5];
-
-     bin_number=int(Nbin_x*((zeta[0]-x_min)/(x_max-x_min)))
-      +Nbin_x*int(Nbin_y*((zeta[1]-y_min)/(y_max-y_min)))
-      +Nbin_y*Nbin_x*int(Nbin_z*((zeta[2]-z_min)/(z_max-z_min)));
-     if (bin_number==Nbin_x*Nbin_y*Nbin_z) 
-      {
-       bin_number=Nbin_x*Nbin_y*Nbin_z-1;
-      }
+     //Find the bin number of the current coordinate
+     unsigned bin_number_i = 
+      int(Nbin[i]*((zeta[i]-Min_coords[i])/
+                   (Max_coords[i] - Min_coords[i])));
+     //Buffer the case when we are exactly on the edge
+     if(bin_number_i==Nbin[i]) {bin_number_i -= 1;}
+     //Now add to the bin number using the multiplier
+     bin_number += multiplier*bin_number_i;
+     //Increase the current row/matrix multiplier for the next loop
+     multiplier *= Nbin[i];
     }
 
    if (called_within_spiral)
@@ -402,16 +334,12 @@ namespace Multi_domain_functions
      // (i.e. the loop in multi_domain.h), so do the spiralling here
 
      // Loop over all levels... maximum of N*_bin
-     unsigned n_level=Nbin_x;
-     if (dim_lagrangian>=2)
+     unsigned n_level=Nbin[0];
+     for(unsigned i=1;i<n_lagrangian;i++)
       {
-       if (n_level < Nbin_y) { n_level=Nbin_y; }
+       if(n_level < Nbin[i]) {n_level = Nbin[i];}
       }
-     if (dim_lagrangian==3)
-      {
-       if (n_level < Nbin_z) { n_level=Nbin_z; }
-      }
-
+     
      // Set bool for finding zeta
      bool found_zeta=false;
      for (unsigned i_level=0;i_level<n_level;i_level++)
@@ -482,54 +410,54 @@ namespace Multi_domain_functions
  void MeshAsGeomObject::
  get_min_and_max_coordinates(Mesh* const &mesh_pt)
   {
-   // Storage locally (i.e. in parallel on each processor)
-   double x_min_local=DBL_MAX; double x_max_local=-DBL_MAX;
-   double y_min_local=DBL_MAX; double y_max_local=-DBL_MAX;
-   double z_min_local=DBL_MAX; double z_max_local=-DBL_MAX;
-
    //Get the lagrangian dimension
-   const unsigned dim_lagrangian = this->nlagrangian();
+   int n_lagrangian = this->nlagrangian();
 
+   // Storage locally (i.e. in parallel on each processor)
+   // for the minimum and maximum coordinates
+   double zeta_min_local[n_lagrangian]; double zeta_max_local[n_lagrangian];
+   for(int i=0;i<n_lagrangian;i++)
+    {zeta_min_local[i] = DBL_MAX; zeta_max_local[i] = -DBL_MAX;}
+   
    // Loop over the elements of the mesh
    unsigned n_el=mesh_pt->nelement();
    for (unsigned e=0;e<n_el;e++)
     {
-     FiniteElement* el_pt= mesh_pt->finite_element_pt(e);
+     FiniteElement* el_pt = mesh_pt->finite_element_pt(e);
    
      // Get the number of vertices (nplot=2 does the trick)
      unsigned n_plot=2;
      unsigned n_plot_points=el_pt->nplot_points(n_plot);
 
      // Loop over the number of plot points
-     for (unsigned i=0;i<n_plot_points;i++)
+     for (unsigned iplot=0;iplot<n_plot_points;iplot++)
       {
-       Vector<double> el_local(dim_lagrangian);
-       Vector<double> el_global(dim_lagrangian);
+       Vector<double> s_local(n_lagrangian);
+       Vector<double> zeta_global(n_lagrangian);
 
        // Get the local s
-       el_pt->get_s_plot(i,n_plot,el_local);
+       el_pt->get_s_plot(iplot,n_plot,s_local);
 
-       // Now interpolate to global coordinates
-       el_pt->interpolated_zeta(el_local,el_global);
+       // Now interpolate to global (Lagrangian) coordinates
+       el_pt->interpolated_zeta(s_local,zeta_global);
 
        // Check the max and min in each direction
-       if (el_global[0] < x_min_local) {x_min_local=el_global[0];}
-       if (el_global[0] > x_max_local) {x_max_local=el_global[0];}
-       if (dim_lagrangian>=2)
+       for(int i=0;i<n_lagrangian;i++)
         {
-         if (el_global[1] < y_min_local) {y_min_local=el_global[1];}
-         if (el_global[1] > y_max_local) {y_max_local=el_global[1];}
-        }
-       if (dim_lagrangian==3)
-        {
-         if (el_global[2] < z_min_local) {z_min_local=el_global[2];}
-         if (el_global[2] > z_max_local) {z_max_local=el_global[2];}
+         //Is the coordinate less than the minimum?
+         if(zeta_global[i] < zeta_min_local[i]) 
+          {zeta_min_local[i] = zeta_global[i];}
+         //Is the coordinate bigger than the maximum?
+         if(zeta_global[i] > zeta_max_local[i]) 
+          {zeta_max_local[i] = zeta_global[i];}
         }
       }
     }
 
    // Global extrema - in parallel, need to get max/min across all processors
-   double x_min=0.0, x_max=0.0, y_min=0.0, y_max=0.0, z_min=0.0, z_max=0.0;
+   double zeta_min[n_lagrangian]; double zeta_max[n_lagrangian];
+   for(int i=0;i<n_lagrangian;i++) {zeta_min[i] = 0.0; zeta_max[i] = 0.0;}
+
 #ifdef OOMPH_HAS_MPI
    // If the mesh has been distributed...
    if (mesh_pt->mesh_has_been_distributed())
@@ -540,24 +468,11 @@ namespace Multi_domain_functions
        int n_proc=Communicator_pt->nproc();
        if (n_proc>1)
         {
-         MPI_Allreduce(&x_min_local,&x_min,1,MPI_DOUBLE,MPI_MIN,
+         //Get the minima and maxima over all processors
+         MPI_Allreduce(zeta_min_local,zeta_min,n_lagrangian,MPI_DOUBLE,MPI_MIN,
                        Communicator_pt->mpi_comm());
-         MPI_Allreduce(&x_max_local,&x_max,1,MPI_DOUBLE,MPI_MAX,
+         MPI_Allreduce(zeta_max_local,zeta_max,n_lagrangian,MPI_DOUBLE,MPI_MAX,
                        Communicator_pt->mpi_comm());
-         if (dim_lagrangian>=2)
-          {
-           MPI_Allreduce(&y_min_local,&y_min,1,MPI_DOUBLE,MPI_MIN,
-                         Communicator_pt->mpi_comm());
-           MPI_Allreduce(&y_max_local,&y_max,1,MPI_DOUBLE,MPI_MAX,
-                         Communicator_pt->mpi_comm());
-          }
-         if (dim_lagrangian==3)
-          {
-           MPI_Allreduce(&z_min_local,&z_min,1,MPI_DOUBLE,MPI_MIN,
-                         Communicator_pt->mpi_comm());
-           MPI_Allreduce(&z_max_local,&z_max,1,MPI_DOUBLE,MPI_MAX,
-                         Communicator_pt->mpi_comm());
-          }
         }
       }
      else // Null communicator - throw an error
@@ -574,31 +489,17 @@ namespace Multi_domain_functions
    else // If the mesh hasn't been distributed then the 
         // max and min are the same on all processors
     {
-     x_min=x_min_local;
-     x_max=x_max_local;
-     if (dim_lagrangian>=2)
+     for(int i=0;i<n_lagrangian;i++) 
       {
-       y_min=y_min_local;
-       y_max=y_max_local;
-      }
-     if (dim_lagrangian==3)
-      {
-       z_min=z_min_local;
-       z_max=z_max_local;
+       zeta_min[i] = zeta_min_local[i];
+       zeta_max[i] = zeta_max_local[i];
       }
     }
 #else // If we're not using MPI then the mesh can't be distributed
-   x_min=x_min_local;
-   x_max=x_max_local;
-   if (dim_lagrangian>=2)
+   for(int i=0;i<n_lagrangian;i++) 
     {
-     y_min=y_min_local;
-     y_max=y_max_local;
-    }
-   if (dim_lagrangian==3)
-    {
-     z_min=z_min_local;
-     z_max=z_max_local;
+     zeta_min[i] = zeta_min_local[i];
+     zeta_max[i] = zeta_max_local[i];
     }
 #endif
 
@@ -606,36 +507,19 @@ namespace Multi_domain_functions
    // meshes that may move around
    // There's no point in doing this for DIM_LAGRANGIAN==1
    double percentage_offset=5.0;
-   if (dim_lagrangian>=2)
+   for(int i=0;i<n_lagrangian;i++)
     {
-     double x_length=x_max-x_min;
-     double y_length=y_max-y_min;
-     x_min=x_min-((percentage_offset/100.0)*x_length);
-     x_max=x_max+((percentage_offset/100.0)*x_length);
-     y_min=y_min-((percentage_offset/100.0)*y_length);
-     y_max=y_max+((percentage_offset/100.0)*y_length);
-    }
-   if (dim_lagrangian==3)
-    {
-     double z_length=z_max-z_min;
-     z_min=z_min-((percentage_offset/100.0)*z_length);
-     z_max=z_max+((percentage_offset/100.0)*z_length);
+     double length = zeta_max[i] - zeta_min[i];
+     zeta_min[i] -= ((percentage_offset/100.0)*length);
+     zeta_max[i] += ((percentage_offset/100.0)*length);
     }
 
-   // Add these entries to the Minmax_coords vector
-   Minmax_coords[0]=x_min;
-   Minmax_coords[1]=x_max;
-   if (dim_lagrangian>=2)
+   // Set the entries as the Min/Max_coords vector
+   for(int i=0;i<n_lagrangian;i++) 
     {
-     Minmax_coords[2]=y_min;
-     Minmax_coords[3]=y_max;
+     Min_coords[i] = zeta_min[i]; 
+     Max_coords[i] = zeta_max[i];
     }
-   if (dim_lagrangian==3)
-    {
-     Minmax_coords[4]=z_min;
-     Minmax_coords[5]=z_max;
-    }
-
   }
 
 //========================================================================
@@ -644,7 +528,7 @@ namespace Multi_domain_functions
  void MeshAsGeomObject::create_bins_of_objects()
   {
    //Store the lagrangian dimension
-   const unsigned dim_lagrangian = this->nlagrangian();
+   const unsigned n_lagrangian = this->nlagrangian();
 
    // Output message regarding bin structure setup if required
    if (Multi_domain_functions::Doc_stats)
@@ -652,25 +536,25 @@ namespace Multi_domain_functions
      oomph_info << "============================================" << std::endl;
      oomph_info << " MeshAsGeomObject: set up bin search with:" << std::endl;
      oomph_info << "   Nbin_x=" << Nbin_x << "  ";
-     if (dim_lagrangian>=2)
+     if (n_lagrangian>=2)
       {
        oomph_info << "Nbin_y=" << Nbin_y << "  ";
       }
-     if (dim_lagrangian==3)
+     if (n_lagrangian==3)
       {
        oomph_info << "Nbin_z=" << Nbin_z;
       }
      oomph_info << std::endl;
-     oomph_info << "  Xminmax=" << Minmax_coords[0] << " " << Minmax_coords[1] 
+     oomph_info << "  Xminmax=" << Min_coords[0] << " " << Max_coords[0] 
                 << "  ";
-     if (dim_lagrangian>=2)
+     if (n_lagrangian>=2)
       {
-       oomph_info << "Yminmax=" << Minmax_coords[2] << " " << Minmax_coords[3]
+       oomph_info << "Yminmax=" << Min_coords[1] << " " << Max_coords[1]
                   << "  ";
       }
-     if (dim_lagrangian==3)
+     if (n_lagrangian==3)
       {
-       oomph_info << "Zminmax=" << Minmax_coords[4] << " " << Minmax_coords[5] 
+       oomph_info << "Zminmax=" << Min_coords[2] << " " << Max_coords[2] 
                   << "  ";
       }
      oomph_info << std::endl;
@@ -680,19 +564,14 @@ namespace Multi_domain_functions
    /// Flush all objects out of the bin structure
    flush_bins_of_objects();
 
-   ///The storage for these bins is of size Nbin_x*Nbin_y*Nbin_z
-   unsigned ntotalbin=Nbin_x;
-   if (dim_lagrangian==2)
-    {
-     ntotalbin=Nbin_x*Nbin_y;
-    }
-   else if (dim_lagrangian==3)
-    {
-     ntotalbin=Nbin_x*Nbin_y*Nbin_z;
-    }
+   //The storage for these bins is the product of the 
+   //number of bins in all directions
+   unsigned Nbin[3] ={Nbin_x, Nbin_y, Nbin_z};
+   unsigned ntotalbin=Nbin[0];
+   for(unsigned i=1;i<n_lagrangian;i++) {ntotalbin *= Nbin[i];}
    Bin_object_coord_pairs.resize(ntotalbin);
 
-   ///Loop over subobjects to decide which bin they belong in...
+   ///Loop over subobjects (elements) to decide which bin they belong in...
    unsigned n_sub=Sub_geom_object_pt.size();
 
    // Some stats
@@ -711,64 +590,36 @@ namespace Multi_domain_functions
      unsigned n_plot_points=
       el_pt->nplot_points(Multi_domain_functions::Nsample_points);
 
-     for (unsigned i=0;i<n_plot_points;i++)
+     for (unsigned iplot=0;iplot<n_plot_points;iplot++)
       {
        // Storage for local and global coordinates
-       Vector<double> local_coord(dim_lagrangian,0.0);
-       Vector<double> global_coord(dim_lagrangian,0.0);
+       Vector<double> local_coord(n_lagrangian,0.0);
+       Vector<double> global_coord(n_lagrangian,0.0);
 
        // Get local coordinate and interpolate to global
-       el_pt->get_s_plot(i,Multi_domain_functions::Nsample_points,local_coord);
+       el_pt->get_s_plot(iplot,
+                         Multi_domain_functions::Nsample_points,local_coord);
        el_pt->interpolated_zeta(local_coord,global_coord);
 
        //Which bin are the global coordinates in?
        unsigned bin_number=0;
-
-       //Get max coordinates of bin structure in 1st dimension
-       double x_min=Minmax_coords[0];
-       double x_max=Minmax_coords[1];
-
-       //Work out bin number in this dimension
-       unsigned bin_number_x=int(Nbin_x*(global_coord[0]-x_min)/(x_max-x_min));
-       // Buffer the case where global_coord[0]==x_max
-       if (bin_number_x==Nbin_x) {bin_number_x=Nbin_x-1;}
-
-       //Work out the bin number (in higher dimensions if required)
-       if (dim_lagrangian==1)
+       unsigned multiplier=1;
+       // Loop over the dimension
+       for(unsigned i=0;i<n_lagrangian;i++)
         {
-         bin_number=bin_number_x;
+         unsigned bin_number_i = 
+          int(Nbin[i]*(
+               (global_coord[i] - Min_coords[i])/
+               (Max_coords[i] - Min_coords[i])));
+         //Buffer the case when the global coordinate is the maximum
+         //value
+         if(bin_number_i==Nbin[i]) {bin_number_i -= 1;}
+         //Add to the bin number
+         bin_number += multiplier*bin_number_i;
+         //Sort out the multiplier
+         multiplier *= Nbin[i];
         }
-       else // DIM_LAGRANGIAN=2,3
-        {
-         double y_min=Minmax_coords[2];
-         double y_max=Minmax_coords[3];
-
-         // Bin number along second dimension
-         unsigned bin_number_y=
-          int(Nbin_y*(global_coord[1]-y_min)/(y_max-y_min));
-         if (bin_number_y==Nbin_y) {bin_number_y=Nbin_y-1;}
-
-         if (dim_lagrangian==2)
-          {
-           // Total bin number
-           bin_number=bin_number_x+(Nbin_x*bin_number_y);
-          }
-         else if (dim_lagrangian==3)
-          {
-           double z_min=Minmax_coords[4];
-           double z_max=Minmax_coords[5];
-
-           // Bin number along third dimension
-           unsigned bin_number_z=
-            int(Nbin_z*(global_coord[2]-z_min)/(z_max-z_min));
-           if (bin_number_z==Nbin_z) {bin_number_z=Nbin_z-1;}
-
-           // Total bin number
-           bin_number=bin_number_x+(Nbin_x*bin_number_y)
-            +(Nbin_y*Nbin_x*bin_number_z);
-          }
-        }
-
+       
        //Add element-sample local coord pair to the calculated bin
        Bin_object_coord_pairs[bin_number].push_back
         (std::make_pair(el_pt,local_coord));
@@ -784,9 +635,10 @@ namespace Multi_domain_functions
   const unsigned& bin, const unsigned& level,
   Vector<unsigned>& neighbour_bin)
   {
-   const unsigned dim_lagrangian = this->nlagrangian();
-   // This will be different depending on the value of DIM_LAGRANGIAN
-   if (dim_lagrangian==1)
+   const unsigned n_lagrangian = this->nlagrangian();
+   // This will be different depending on the number of Lagrangian
+   // coordinates
+   if (n_lagrangian==1)
     {
      // Single "loop" in one direction - always a vector of max size 2
      unsigned nbr_bin_left=bin-level;
@@ -803,7 +655,7 @@ namespace Multi_domain_functions
        neighbour_bin.push_back(nbr_bin);
       }
     }
-   else if (dim_lagrangian==2)
+   else if (n_lagrangian==2)
     {
      unsigned n_total_bin=Nbin_x*Nbin_y;
 
@@ -851,9 +703,8 @@ namespace Multi_domain_functions
         }
 
       }
-
     }
-   else if (dim_lagrangian==3)
+   else if (n_lagrangian==3)
     {
      unsigned n_total_bin=Nbin_x*Nbin_y*Nbin_z;
 
