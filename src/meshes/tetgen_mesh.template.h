@@ -124,6 +124,22 @@ public:
   setup_boundary_coordinates(b,switch_normal,some_file);
  }
  
+ /// \short Setup boundary coordinate on boundary b which is
+ /// assumed to be planar. Boundary coordinates are the
+ /// x-y coordinates in the plane of that boundary with the
+ /// x-axis along the line from the (lexicographically)
+ /// "lower left" to the "upper right" node. The y axis
+ /// is obtained by taking the cross-product of the positive
+ /// x direction with the outer unit normal computed by
+ /// the face elements. 
+ void setup_boundary_coordinates(const unsigned& b, const bool& switch_normal)
+ {
+  // Dummy file
+  std::ofstream some_file;
+  
+  setup_boundary_coordinates(b,switch_normal,some_file);
+ }
+ 
 
  /// \short Setup boundary coordinate on boundary b which is
  /// assumed to be planar. Boundary coordinates are the
@@ -172,6 +188,28 @@ public:
                                 const std::string& quadratic_surface_file_name,
                                 const bool& switch_normal,
                                 DocInfo& doc_info);
+
+ /// \short Snap boundaries specified by the IDs listed in boundary_id to
+ /// a quadratric surface, specified in the file 
+ /// quadratic_surface_file_name. This is usually used with vmtk-based
+ /// meshes for which oomph-lib's xda to poly conversion code produces the files
+ /// "quadratic_fsi_boundary.dat" and "quadratic_outer_solid_boundary.dat"
+ /// which specify the quadratic FSI boundary (for the fluid and the solid)
+ /// and the quadratic representation of the outer boundary of the solid. 
+ /// When used with these files, the flag switch_normal should be
+ /// set to true when calling the function for the outer boundary of the
+ /// solid. 
+ void snap_to_quadratic_surface(const Vector<unsigned>& boundary_id,
+                                const std::string& quadratic_surface_file_name,
+                                const bool& switch_normal)
+ {
+  // Dummy doc info
+  DocInfo doc_info;
+  doc_info.doc_flag()=false;
+  snap_to_quadratic_surface(boundary_id,quadratic_surface_file_name,
+                            switch_normal,doc_info);
+  
+ }
  
 
  /// \short Non-Delaunay split elements that have three faces on a boundary
@@ -190,6 +228,110 @@ public:
  void build_from_scaffold(TimeStepper* time_stepper_pt);
  
 }; //end class
+
+
+
+
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+
+
+//==============start_mesh=================================================
+/// Tetgen-based mesh upgraded to become a solid mesh. Automatically
+/// enumerates all boundaries
+//=========================================================================
+template<class ELEMENT>
+class SolidTetMesh : public virtual TetgenMesh<ELEMENT>,
+                     public virtual SolidMesh 
+{
+ 
+public:
+ 
+ /// \short Constructor. Boundary coordinates are setup 
+ /// automatically.
+  SolidTetMesh(const std::string& node_file_name,
+               const std::string& element_file_name,
+               const std::string& face_file_name,
+               const bool& split_corner_elements,
+               TimeStepper* time_stepper_pt=
+               &Mesh::Default_TimeStepper) : 
+ TetgenMesh<ELEMENT>(node_file_name, element_file_name,
+                     face_file_name, split_corner_elements, 
+                     time_stepper_pt)
+  {
+   //Assign the Lagrangian coordinates
+   set_lagrangian_nodal_coordinates();
+   
+   // Find out elements next to boundary
+   setup_boundary_element_info();
+   
+   // Setup boundary coordinates for all boundaries without switching
+   // direction of normal
+   bool switch_normal=false;
+   unsigned nb=this->nboundary();
+   for (unsigned b=0;b<nb;b++) 
+    {
+     this->setup_boundary_coordinates(b,switch_normal);
+    }
+  }
+
+ /// \short Constructor. Boundary coordinates are setup 
+ /// automatically, with the orientation of the outer unit
+ /// normal determined by switch_normal.
+  SolidTetMesh(const std::string& node_file_name,
+               const std::string& element_file_name,
+               const std::string& face_file_name,
+               const bool& split_corner_elements,
+               const bool& switch_normal,
+               TimeStepper* time_stepper_pt=
+               &Mesh::Default_TimeStepper) : 
+ TetgenMesh<ELEMENT>(node_file_name, element_file_name,
+                     face_file_name, split_corner_elements, 
+                     time_stepper_pt)
+  {
+   //Assign the Lagrangian coordinates
+   set_lagrangian_nodal_coordinates();
+   
+   // Find out elements next to boundary
+   setup_boundary_element_info();
+   
+   // Setup boundary coordinates for all boundaries
+   unsigned nb=this->nboundary();
+   for (unsigned b=0;b<nb;b++) 
+    {
+     this->setup_boundary_coordinates(b,switch_normal);
+    }
+  }
+  
+  /// Scale all nodal coordinates by given factor hierher move into Mesh base 
+  /// class
+  void scale_mesh(const double& factor)
+  {
+   unsigned nnod=this->nnode();
+   unsigned dim=this->node_pt(0)->ndim();
+   for (unsigned j=0;j<nnod;j++)
+    {
+     Node* nod_pt=this->node_pt(j);
+     for (unsigned i=0;i<dim;i++)
+      {
+       nod_pt->x(i)*=factor;
+      }
+    }
+
+   //Assign the Lagrangian coordinates
+   set_lagrangian_nodal_coordinates();
+
+  }
+
+ /// Empty Destructor
+ virtual ~SolidTetMesh() { }
+
+};
+ 
+
+
+
 
 }
 

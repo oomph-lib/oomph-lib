@@ -1,10 +1,10 @@
 #!MC 1100
 
-$!VARSET |lostep|=1 
-$!VARSET |nstep|=440
+$!VARSET |lostep|=0
+$!VARSET |nstep|=160
 $!VARSET |dstep|=1
 
-$!VARSET |PNG|=1
+$!VARSET |PNG|=0
 $!VARSET |potential|=0
 
 $!NEWLAYOUT 

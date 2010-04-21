@@ -25,7 +25,7 @@ OptionRead()
 echo " "
 echo "================================================================="
 echo " "
-echo "I'm about to run self-tests." 
+echo "I'm about to run the self-tests." 
 echo " "
 echo "Note: The self-test suite involves a large number of separate  "
 echo "      test scripts in different directories. We will process all of "
@@ -44,14 +44,15 @@ echo "     it was passed succesfully! "
 echo " "
 echo "================================================================="
 echo " "
-echo " I will wipe the existing validation.log file."
-echo " "
-OptionPrompt " Is this OK? [y/n]"
-reply=`OptionRead`
-if test "$reply" != "y" -a "$reply" != "Y" ; then 
-   OptionPrompt "Terminating..."
-   exit
+if [ -e validation.log ]; then
+     echo " I will wipe the existing validation.log file."
+     echo " "
+     OptionPrompt " Is this OK? [y/n]"
+     reply=`OptionRead`
+     if test "$reply" != "y" -a "$reply" != "Y" ; then 
+         OptionPrompt "Terminating..."
+         exit
+     fi
+     rm -f validation.log
 fi
-rm -f validation.log
-
 exit 0

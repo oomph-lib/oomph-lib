@@ -47,14 +47,14 @@ using namespace oomph;
 /// Tetgen-based mesh upgraded to become a solid mesh
 //=========================================================================
 template<class ELEMENT>
-class SolidTetMesh : public virtual TetgenMesh<ELEMENT>, 
-                     public virtual SolidMesh 
+class MySolidTetMesh : public virtual TetgenMesh<ELEMENT>, 
+                       public virtual SolidMesh 
 {
  
 public:
  
  /// Constructor: 
- SolidTetMesh(const std::string& node_file_name,
+ MySolidTetMesh(const std::string& node_file_name,
                 const std::string& element_file_name,
                 const std::string& face_file_name,
                 TimeStepper* time_stepper_pt=
@@ -83,7 +83,7 @@ public:
   }
 
  /// Empty Destructor
- virtual ~SolidTetMesh() { }
+ virtual ~MySolidTetMesh() { }
 
 };
 
@@ -271,7 +271,7 @@ private:
 
 
  /// Bulk solid mesh
- SolidTetMesh<SOLID_ELEMENT>* Solid_mesh_pt;
+ MySolidTetMesh<SOLID_ELEMENT>* Solid_mesh_pt;
 
  /// Meshes of FSI traction elements
  Vector<SolidMesh*> Solid_fsi_traction_mesh_pt;
@@ -360,9 +360,9 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
  node_file_name="fsi_bifurcation_solid.1.node";
  element_file_name="fsi_bifurcation_solid.1.ele";
  face_file_name="fsi_bifurcation_solid.1.face";
- Solid_mesh_pt =  new SolidTetMesh<SOLID_ELEMENT>(node_file_name,
-                                                  element_file_name,
-                                                  face_file_name);
+ Solid_mesh_pt =  new MySolidTetMesh<SOLID_ELEMENT>(node_file_name,
+                                                    element_file_name,
+                                                    face_file_name);
  
  // The following corresponds to the boundaries as specified by
  // facets in the tetgen input:

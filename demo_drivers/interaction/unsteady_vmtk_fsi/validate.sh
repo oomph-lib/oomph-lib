@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=2
+NUM_TESTS=1
 
 # Setup validation directory
 #---------------------------
@@ -14,101 +14,39 @@ mkdir Validation
 #------------------------
 cd Validation
 
-echo "Running quadratic vmtk geometry test"
-
-# Get the mesh geometry
-ln -s ../fluid_iliac_short_fine.1.ele  fluid.1.ele  
-ln -s ../fluid_iliac_short_fine.1.face fluid.1.face
-ln -s ../fluid_iliac_short_fine.1.node fluid.1.node
-ln -s ../solid_iliac_short_fine.1.ele  solid.1.ele 
-ln -s ../solid_iliac_short_fine.1.face solid.1.face
-ln -s ../solid_iliac_short_fine.1.node solid.1.node
-ln -s ../short_fine_iliac_boundary_enumeration.dat boundary_enumeration.dat
-ln -s ../short_fine_iliac_quadratic_fsi_boundary.dat quadratic_fsi_boundary.dat
-ln -s ../short_fine_iliac_quadratic_outer_solid_boundary.dat quadratic_outer_solid_boundary.dat
-
+cp ../fluid.1.ele .
+cp ../fluid.1.face .
+cp ../fluid.1.node .
+cp ../fluid_quadratic_nodes.dat .
+cp ../solid.1.ele .
+cp ../solid.1.face .
+cp ../solid.1.node .
+cp ../solid_quadratic_nodes.dat .
+cp ../boundary_enumeration.dat .
 
 mkdir RESLT
 
-../unsteady_vmtk_fsi quadratic_test > OUTPUT_quadratic_test
+../unsteady_vmtk_fsi bla > OUTPUT
 echo "done"
 echo " " >> validation.log
-echo "vmtk FSI validation" >> validation.log
-echo "-------------------" >> validation.log
+echo "Unsteady vmtk FSI (quadratic FSI surface) validation" >> validation.log
+echo "----------------------------------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat RESLT/fluid_nodes0.dat   \
-    RESLT/solid_nodes0.dat   \
-    > quadratic_results.dat
+cat RESLT/fluid_soln0.dat  RESLT/fluid_soln2.dat   \
+    RESLT/solid_soln0.dat  RESLT/solid_soln2.dat   \
+    > results.dat
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-../../../../bin/fpdiff.py ../validata/quadratic_results.dat.gz  \
-         quadratic_results.dat 0.1 1.0e-11 >> validation.log
+../../../../bin/fpdiff.py ../validata/results.dat.gz  \
+         results.dat 0.1 1.0e-11 >> validation.log
 fi
 
-mv RESLT RESLT_quadratic_test
-rm  fluid.1.ele  
-rm  fluid.1.face
-rm  fluid.1.node
-rm  solid.1.ele 
-rm  solid.1.face
-rm  solid.1.node
-rm  boundary_enumeration.dat
-rm  quadratic_fsi_boundary.dat
-rm  quadratic_outer_solid_boundary.dat
-
-
-
-# Get the mesh geometry
-ln -s ../fluid_iliac_short_coarse.1.ele  fluid.1.ele  
-ln -s ../fluid_iliac_short_coarse.1.face fluid.1.face
-ln -s ../fluid_iliac_short_coarse.1.node fluid.1.node
-ln -s ../solid_iliac_short_coarse.1.ele  solid.1.ele 
-ln -s ../solid_iliac_short_coarse.1.face solid.1.face
-ln -s ../solid_iliac_short_coarse.1.node solid.1.node
-ln -s ../short_coarse_iliac_boundary_enumeration.dat boundary_enumeration.dat
-ln -s ../short_coarse_iliac_quadratic_fsi_boundary.dat quadratic_fsi_boundary.dat
-ln -s ../short_coarse_iliac_quadratic_outer_solid_boundary.dat quadratic_outer_solid_boundary.dat
-
-
-mkdir RESLT
-
-../unsteady_vmtk_fsi coarse_test > OUTPUT_coarse_test
-echo "done"
-echo " " >> validation.log
-echo "vmtk FSI validation" >> validation.log
-echo "-------------------" >> validation.log
-echo " " >> validation.log
-echo "Validation directory: " >> validation.log
-echo " " >> validation.log
-echo "  " `pwd` >> validation.log
-echo " " >> validation.log
-cat RESLT/fluid_soln0.dat  RESLT/fluid_soln3.dat   \
-    RESLT/solid_soln0.dat  RESLT/solid_soln3.dat   \
-    > coarse_results.dat
-
-if test "$1" = "no_fpdiff"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
-else
-../../../../bin/fpdiff.py ../validata/coarse_results.dat.gz  \
-         coarse_results.dat 0.1 1.0e-11 >> validation.log
-fi
-
-mv RESLT RESLT_coarse_test
-rm -f fluid.1.ele  
-rm -f fluid.1.face
-rm -f fluid.1.node
-rm -f solid.1.ele 
-rm -f solid.1.face
-rm -f solid.1.node
-rm -f boundary_enumeration.dat
-rm -f quadratic_fsi_boundary.dat
-rm -f quadratic_outer_solid_boundary.dat
 
 # Append log to main validation log
 cat validation.log >> ../../../../validation.log

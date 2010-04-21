@@ -533,7 +533,7 @@ if test "$want_self_tests" = "y" -o "$want_self_tests" = "Y" ; then
   echo "The results of the self-tests will be written to the"
   echo "file validation.log in the top-level oomph-lib directory."
   echo " "
-  if (test -e validation.log); then 
+  if [ -e validation.log ]; then 
     echo " " 
     OptionPrompt "The file validation.log exists. Is it OK to wipe it? [y/n -- default: n]"
     reply=`OptionRead`

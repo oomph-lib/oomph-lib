@@ -47,14 +47,14 @@ using namespace oomph;
 /// Tetgen-based mesh upgraded to become a solid mesh
 //=========================================================================
 template<class ELEMENT>
-class SolidTetMesh : public virtual TetgenMesh<ELEMENT>, 
-                     public virtual SolidMesh 
+class MySolidTetMesh : public virtual TetgenMesh<ELEMENT>, 
+                       public virtual SolidMesh 
 {
  
 public:
  
  /// Constructor: 
- SolidTetMesh(const std::string& node_file_name,
+ MySolidTetMesh(const std::string& node_file_name,
                 const std::string& element_file_name,
                 const std::string& face_file_name,
                 TimeStepper* time_stepper_pt=
@@ -83,7 +83,7 @@ public:
   }
 
  /// Empty Destructor
- virtual ~SolidTetMesh() { }
+ virtual ~MySolidTetMesh() { }
 
 };
 
@@ -97,19 +97,19 @@ public:
 /// Tetgen-based mesh upgraded to become a (pseudo-) solid mesh
 //=========================================================================
 template<class ELEMENT>
-class FluidTetMesh : public virtual TetgenMesh<ELEMENT>,
-                     public virtual SolidMesh 
+class MyFluidTetMesh : public virtual TetgenMesh<ELEMENT>,
+                       public virtual SolidMesh 
 {
  
 public:
  
  /// \short Constructor: 
- FluidTetMesh(const std::string& node_file_name,
-              const std::string& element_file_name,
-              const std::string& face_file_name,
-              const bool& split_corner_elements,
-              TimeStepper* time_stepper_pt=
-              &Mesh::Default_TimeStepper) : 
+ MyFluidTetMesh(const std::string& node_file_name,
+                const std::string& element_file_name,
+                const std::string& face_file_name,
+                const bool& split_corner_elements,
+                TimeStepper* time_stepper_pt=
+                &Mesh::Default_TimeStepper) : 
   TetgenMesh<ELEMENT>(node_file_name, element_file_name,
                       face_file_name, split_corner_elements, 
                       time_stepper_pt)
@@ -141,7 +141,7 @@ public:
   }
 
  /// Empty Destructor
- virtual ~FluidTetMesh() { }
+ virtual ~MyFluidTetMesh() { }
 
 };
  
@@ -255,13 +255,13 @@ private:
 
 
  /// Bulk solid mesh
- SolidTetMesh<SOLID_ELEMENT>* Solid_mesh_pt;
+ MySolidTetMesh<SOLID_ELEMENT>* Solid_mesh_pt;
 
  /// Meshes of FSI traction elements
  Vector<SolidMesh*> Solid_fsi_traction_mesh_pt;
 
  /// Bulk fluid mesh
- FluidTetMesh<FLUID_ELEMENT>* Fluid_mesh_pt;
+ MyFluidTetMesh<FLUID_ELEMENT>* Fluid_mesh_pt;
 
  /// Meshes of Lagrange multiplier elements that impose parallel flow
  Vector<Mesh*> Parallel_flow_lagrange_multiplier_mesh_pt;
@@ -308,10 +308,10 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
  string element_file_name="fluid_iliac.1.ele";
  string face_file_name="fluid_iliac.1.face";
  bool split_corner_elements=true;
- Fluid_mesh_pt =  new FluidTetMesh<FLUID_ELEMENT>(node_file_name,
-                                                  element_file_name,
-                                                  face_file_name,
-                                                  split_corner_elements);
+ Fluid_mesh_pt =  new MyFluidTetMesh<FLUID_ELEMENT>(node_file_name,
+                                                    element_file_name,
+                                                    face_file_name,
+                                                    split_corner_elements);
  
 
  // The following corresponds to the boundaries as specified by
@@ -345,9 +345,9 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
  node_file_name="solid_iliac.1.node";
  element_file_name="solid_iliac.1.ele";
  face_file_name="solid_iliac.1.face";
- Solid_mesh_pt =  new SolidTetMesh<SOLID_ELEMENT>(node_file_name,
-                                                  element_file_name,
-                                                  face_file_name);
+ Solid_mesh_pt =  new MySolidTetMesh<SOLID_ELEMENT>(node_file_name,
+                                                    element_file_name,
+                                                    face_file_name);
  
  // The following corresponds to the boundaries as specified by
  // facets in the Tetgen input:

@@ -4,21 +4,23 @@ $!NEWLAYOUT
 
 
 
+
 $!VarSet |is_open| = 0
 
-$!LOOP 1
+$!LOOP 2
 
-$!VarSet |field| = "solid_"
+$!VarSet |dir| = "RESLT_solid"
+$!VarSet |dir| = "RESLT_solid_with_poisson"
+$!VarSet |dir| = "RESLT_solid_with_linear_elasticity"
 
 $!IF |LOOP|==1
-   $!VarSet |field| = "fluid_"
+   $!VarSet |dir| = "RESLT_fluid"
+   $!VarSet |dir| = "RESLT_fluid_with_poisson"
+   $!VarSet |dir| = "RESLT_fluid_with_linear_elasticity"
 $!ENDIF
 
-$!VarSet |field| = ""
 
-
-
-$!READDATASET  '"|field|mesh_before_snap.dat" '
+$!READDATASET  '"|dir|/mesh_before_snap.dat" '
   READDATAOPTION = NEW
   RESETSTYLE = YES
   INCLUDETEXT = NO
@@ -59,7 +61,7 @@ $!ELSE
      $!EXPORTNEXTFRAME
 $!ENDIF
 
-$!READDATASET  '"|field|mesh_after_snap.dat" '
+$!READDATASET  '"|dir|/mesh_after_snap.dat" '
   READDATAOPTION = NEW
   RESETSTYLE = YES
   INCLUDETEXT = NO
@@ -90,7 +92,7 @@ $!REDRAWALL
 $!EXPORTNEXTFRAME
 
 
-$!READDATASET  '"|field|mesh_after_smooth.dat" '
+$!READDATASET  '"|dir|/mesh_after_smooth.dat" '
   READDATAOPTION = NEW
   RESETSTYLE = YES
   INCLUDETEXT = NO

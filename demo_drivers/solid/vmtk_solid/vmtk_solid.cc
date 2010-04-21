@@ -43,21 +43,21 @@ using namespace oomph;
 
 
 //=======================start_mesh========================================
-/// Triangle-based mesh upgraded to become a solid mesh
+/// Tetgen-based mesh upgraded to become a solid mesh
 //=========================================================================
 template<class ELEMENT>
-class SolidTetMesh : public virtual TetgenMesh<ELEMENT>, 
-                     public virtual SolidMesh 
+class MySolidTetMesh : public virtual TetgenMesh<ELEMENT>, 
+                       public virtual SolidMesh 
 {
  
 public:
  
  /// Constructor: 
- SolidTetMesh(const std::string& node_file_name,
-              const std::string& element_file_name,
-              const std::string& face_file_name,
-              TimeStepper* time_stepper_pt=
-              &Mesh::Default_TimeStepper) : 
+ MySolidTetMesh(const std::string& node_file_name,
+                const std::string& element_file_name,
+                const std::string& face_file_name,
+                TimeStepper* time_stepper_pt=
+                &Mesh::Default_TimeStepper) : 
   TetgenMesh<ELEMENT>(node_file_name, element_file_name,
                       face_file_name, time_stepper_pt)
   {
@@ -69,7 +69,7 @@ public:
   }
 
  /// Empty Destructor
- virtual ~SolidTetMesh() { }
+ virtual ~MySolidTetMesh() { }
 
 
 };
@@ -161,7 +161,7 @@ private:
  void create_traction_elements();
 
  /// Bulk solid mesh
- SolidTetMesh<ELEMENT>* Solid_mesh_pt;
+ MySolidTetMesh<ELEMENT>* Solid_mesh_pt;
 
  /// Meshes of traction elements
  Vector<SolidMesh*> Solid_traction_mesh_pt;
@@ -187,9 +187,9 @@ UnstructuredSolidProblem<ELEMENT>::UnstructuredSolidProblem()
  string node_file_name="solid_iliac.1.node";
  string element_file_name="solid_iliac.1.ele";
  string face_file_name="solid_iliac.1.face";
- Solid_mesh_pt =  new SolidTetMesh<ELEMENT>(node_file_name,
-                                            element_file_name,
-                                            face_file_name);
+ Solid_mesh_pt =  new MySolidTetMesh<ELEMENT>(node_file_name,
+                                              element_file_name,
+                                              face_file_name);
  
  // The following IDs corresponds to the boundary IDs specified in
  // the *.poly file from which tetgen generated the unstructured mesh.

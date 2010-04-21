@@ -3,7 +3,7 @@ mesh_from_triangle \
 mesh_from_geompack \
 mesh_from_tetgen \
 mesh_from_xfig_triangle \
-mesh_from_vmtk
-
+mesh_from_vmtk \
+quadratic_vmtk_tetgen
 
 

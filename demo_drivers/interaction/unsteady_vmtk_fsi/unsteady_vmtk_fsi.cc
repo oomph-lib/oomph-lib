@@ -43,616 +43,6 @@
 using namespace std;
 using namespace oomph;
 
-//===start_of_namespace=================================================
-/// Namespace for global parameters
-//======================================================================
-namespace Global_Parameters
-{
- 
- double Lambda = 0.7;
-
- double Mu = 1.0;
-
- /// The elasticity tensor
- IsotropicElasticityTensor E(Lambda,Mu);
-}
-
-// //////////////////////////////////////////////////////////////////
-// //////////////////////////////////////////////////////////////////
-// //////////////////////////////////////////////////////////////////
-
-
-//=======start_namespace==========================================
-/// hierher
-//================================================================
-namespace hierher_namespace
-{
-
- /// Poisson's ratio
- double Nu=0.0;
-
-
- /// Young's modulus
- double E=0.00001;
-
- /// Generalised Mooney Rivling coefficient
- double C1=0.01;
-
-
-
- StrainEnergyFunction* strain_energy_pt=new GeneralisedMooneyRivlin(&Nu,&C1,&E);
-
-
- /// Create constitutive law
- //ConstitutiveLaw* Constitutive_law_pt=new GeneralisedHookean(&Nu,&E);
- ConstitutiveLaw* Constitutive_law_pt=
-  new IsotropicStrainEnergyFunctionConstitutiveLaw(strain_energy_pt);
-
-}
-
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
-
-
-//====================================================================
-/// Auxiliary Problem to smooth a SolidMesh by adjusting the internal
-/// nodal positions by solving a LINEAR solid mechanics problem for the
-/// nodal displacements between the specified displacements of certain
-/// pinned nodes (usually located on boundaries). 
-/// hierher turn into functor?
-/// hierher specify faster Poisson solver?
-//====================================================================
-class LinearSmoothMeshProblem : public Problem
-{
-
-public:
-
- /// \short Constructor: Specify SolidMesh whose nodal positions are to 
- /// be adjusted, and set of nodes in that mesh whose position
- /// are to remain fixed.
- LinearSmoothMeshProblem(SolidMesh* orig_mesh_pt,
-                         std::set<Node*> pinned_nodes)
-  {
-   // Create new mesh and read out node/element numbers from old one
-   mesh_pt()=new Mesh;
-   unsigned nelem=orig_mesh_pt->nelement();
-   unsigned nnode=orig_mesh_pt->nnode();
-   
-   // Have we already created that node?
-   std::map<Node*,Node*> new_node;
-   
-   // Create new elements
-   for (unsigned e=0;e<nelem;e++)
-    {
-     
-     // Make/add new element
-     TLinearElasticityElement<3,3>* el_pt=new TLinearElasticityElement<3,3>;
-     mesh_pt()->add_element_pt(el_pt);
-     
-     //Set the Reynolds number, etc
-     el_pt->elasticity_tensor_pt() = &Global_Parameters::E;
-     
-     // Find corresponding original element
-     SolidFiniteElement* orig_elem_pt=
-      dynamic_cast<SolidFiniteElement*>(orig_mesh_pt->finite_element_pt(e));
-     unsigned nnod=orig_elem_pt->nnode();
-     
-     // Create nodes
-     for (unsigned j=0;j<nnod;j++)
-      {
-       // Does it not exist yet?
-       if (new_node[orig_elem_pt->node_pt(j)]==0)
-        {
-         Node* new_nod_pt=mesh_pt()->finite_element_pt(e)->construct_node(j);
-         new_node[orig_elem_pt->node_pt(j)]=new_nod_pt;
-         mesh_pt()->add_node_pt(new_nod_pt);
-         for (unsigned i=0;i<3;i++)
-          {
-           // Set new nodal position to be the old one in the
-           // SolidMesh (assumed to contain no inverted elements)
-           new_nod_pt->x(i)=
-            dynamic_cast<SolidNode*>(orig_elem_pt->node_pt(j))->xi(i);
-          }         
-        }
-       // It already exists -- copy across
-       else
-        {
-         mesh_pt()->finite_element_pt(e)->node_pt(j)=
-          new_node[orig_elem_pt->node_pt(j)];
-        }
-      }
-    }
-   
-   
-   mesh_pt()->output("old_mesh.dat");
-      
-   // Loop over pinned nodes -- pin their positions and assign updated nodal 
-   // positions
-   double scale=1.0;
-   for (std::set<Node*>::iterator it=pinned_nodes.begin();
-        it!=pinned_nodes.end();it++)
-    {
-     for (unsigned i=0;i<3;i++)
-      {
-       new_node[*it]->pin(i);
-       new_node[*it]->set_value(i,scale*
-                                (dynamic_cast<SolidNode*>(*it)->x(i)-
-                                 dynamic_cast<SolidNode*>(*it)->xi(i)));
-      }
-    }
-
-
-   mesh_pt()->output("new_mesh.dat");
-
-   oomph_info << "Number of equations for smoothing problem: " 
-              << assign_eqn_numbers() << std::endl;
-   
-   
-   // Solve
-   double backup=Problem::Newton_solver_tolerance;
-   //Newton_solver_tolerance=1.0e29;
-   newton_solve();
-   Problem::Newton_solver_tolerance=backup;
- 
-   mesh_pt()->output("linear_soln.dat");
-
-   // Loop over nodes and assign displacement difference
-   for (unsigned j=0;j<nnode;j++)
-    {
-     // Get nodes
-     SolidNode* orig_node_pt=orig_mesh_pt->node_pt(j);
-     Node* new_node_pt=new_node[orig_node_pt];
-     
-     // Assign displacement difference
-     for (unsigned i=0;i<3;i++)
-      {
-       orig_node_pt->x(i)=orig_node_pt->xi(i)+new_node_pt->value(i);
-      }
-    }     
-     
-   // Now re-assign undeformed position
-   orig_mesh_pt->set_lagrangian_nodal_coordinates();
-   
-   // Clean up -- mesh deletes nodes and elements
-   delete mesh_pt();
-  }
- 
- /// Destructor (empty)
- ~LinearSmoothMeshProblem(){}
-
-};
-
-
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
-
-
-//====================================================================
-/// Auxiliary Problem to smooth a SolidMesh by adjusting the internal
-/// nodal positions by solving a solid mechanics problem for the
-/// nodal displacements between the specified displacements of certain
-/// pinned nodes (usually located on boundaries). Assumptions is
-/// that the Lagrangian coordinates in the SolidMesh still reflect
-/// the original nodal positions before the boundary nodes were
-/// moved. 
-/// hierher turn into functor?
-/// hierher specify faster Poisson solver?
-//====================================================================
-class SmoothMeshProblem : public Problem
-{
-
-public:
-
- /// \short Constructor: Specify SolidMesh whose nodal positions are to 
- /// be adjusted, and set of nodes in that mesh whose position
- /// are to remain fixed.
- SmoothMeshProblem(SolidMesh* orig_mesh_pt,
-                   std::set<Node*> pinned_nodes)
-  {
-   // Create new mesh and read out node/element numbers from old one
-   mesh_pt()=new SolidMesh;
-   unsigned nelem=orig_mesh_pt->nelement();
-   unsigned nnode=orig_mesh_pt->nnode();
-   
-   // Have we already created that node?
-   std::map<SolidNode*,SolidNode*> new_node;
-   
-   // Create new elements
-   for (unsigned e=0;e<nelem;e++)
-    {
-     
-     // Make/add new element
-     TPVDElement<3,3>* el_pt=new TPVDElement<3,3>;
-     mesh_pt()->add_element_pt(el_pt);
-     
-     // Set the constitutive law   
-     el_pt->constitutive_law_pt() =
-      hierher_namespace::Constitutive_law_pt;
-     
-     // Find corresponding original element
-     SolidFiniteElement* orig_elem_pt=
-      dynamic_cast<SolidFiniteElement*>(orig_mesh_pt->finite_element_pt(e));
-     unsigned nnod=orig_elem_pt->nnode();
-     
-     // Create nodes
-     for (unsigned j=0;j<nnod;j++)
-      {
-       // Does it not exist yet?
-       if (new_node[dynamic_cast<SolidNode*>(orig_elem_pt->node_pt(j))]==0)
-        {
-         SolidNode* new_nod_pt=
-          dynamic_cast<SolidNode*>(mesh_pt()->finite_element_pt(e)->
-                                   construct_node(j));
-         new_node[dynamic_cast<SolidNode*>(orig_elem_pt->node_pt(j))]=
-          new_nod_pt;
-         mesh_pt()->add_node_pt(new_nod_pt);
-         for (unsigned i=0;i<3;i++)
-          {
-           // Set new nodal position to be the old one in the
-           // SolidMesh (assumed to contain no inverted elements)
-           new_nod_pt->x(i)=
-            dynamic_cast<SolidNode*>(orig_elem_pt->node_pt(j))->xi(i);
-          }         
-        }
-       // It already exists -- copy across
-       else
-        {
-         mesh_pt()->finite_element_pt(e)->node_pt(j)=
-          new_node[dynamic_cast<SolidNode*>(orig_elem_pt->node_pt(j))];
-        }
-      }
-    }
-   
-
-   mesh_pt()->output("old_mesh.dat");
-
-   // Now assign undeformed position
-   dynamic_cast<SolidMesh*>(mesh_pt())->set_lagrangian_nodal_coordinates();
-      
-   // Loop over pinned nodes -- pin their positions and assign updated nodal 
-   // positions
-   double scale=0.001;
-   for (std::set<Node*>::iterator it=pinned_nodes.begin();
-        it!=pinned_nodes.end();it++)
-    {
-     new_node[dynamic_cast<SolidNode*>(*it)]->pin_position(0);
-     new_node[dynamic_cast<SolidNode*>(*it)]->pin_position(1);
-     new_node[dynamic_cast<SolidNode*>(*it)]->pin_position(2);
-
-     new_node[dynamic_cast<SolidNode*>(*it)]->x(0)=
-      dynamic_cast<SolidNode*>(*it)->xi(0)+scale*
-      (dynamic_cast<SolidNode*>(*it)->x(0)-
-       dynamic_cast<SolidNode*>(*it)->xi(0));
-
-     new_node[dynamic_cast<SolidNode*>(*it)]->x(1)=
-      dynamic_cast<SolidNode*>(*it)->xi(1)+scale*
-      (dynamic_cast<SolidNode*>(*it)->x(1)-
-       dynamic_cast<SolidNode*>(*it)->xi(1));
-
-     new_node[dynamic_cast<SolidNode*>(*it)]->x(2)=
-      dynamic_cast<SolidNode*>(*it)->xi(2)+scale*
-      (dynamic_cast<SolidNode*>(*it)->x(2)-
-       dynamic_cast<SolidNode*>(*it)->xi(2));
-    }
-   
-
-   mesh_pt()->output("new_mesh.dat");
-
-
-   oomph_info << "Number of equations for smoothing problem: " 
-              << assign_eqn_numbers() << std::endl;
-   
-   
-   // Solve
-   double backup=Problem::Newton_solver_tolerance;
-   //Newton_solver_tolerance=1.0e29;
-   newton_solve();
-   Problem::Newton_solver_tolerance=backup;
- 
-
-   // Loop over nodes and assign displacement difference
-   for (unsigned j=0;j<nnode;j++)
-    {
-     // Get nodes
-     SolidNode* orig_node_pt=orig_mesh_pt->node_pt(j);
-     SolidNode* new_node_pt=new_node[orig_node_pt];
-     
-     // Assign displacement difference
-     for (unsigned i=0;i<3;i++)
-      {
-       orig_node_pt->x(i)=new_node_pt->x(i);
-      }
-    }     
-     
-   // Now re-assign undeformed position
-   orig_mesh_pt->set_lagrangian_nodal_coordinates();
-   
-   // Clean up -- mesh deletes nodes and elements
-   delete mesh_pt();
-  }
- 
- /// Destructor (empty)
- ~SmoothMeshProblem(){}
-
-};
-
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-
-
-//====================================================================
-/// Functor to smooth a SolidMesh by adjusting the internal
-/// nodal positions by solving a Poisson problem for the
-/// nodal displacements in the interior. The displacements of the specified
-/// pinned nodes (usually located on boundaries) remain fixed (their
-/// displacements are computed from the difference between their
-/// Lagrangian and Eulerian coordinates. The assumptions is
-/// that the Lagrangian coordinates in the SolidMesh still reflect
-/// the original nodal positions before the boundary nodes were
-/// moved. 
-/// hierher specify faster Poisson solver?
-//====================================================================
-template<class POISSON_ELEMENT>
-class PoissonSmoothMesh : public Problem
-{
-
-public:
-
- /// \short Functor: Specify SolidMesh whose nodal positions are to 
- /// be adjusted, and set of nodes in that mesh whose position
- /// are to remain fixed.
- void operator()(SolidMesh* orig_mesh_pt,
-                 std::set<Node*> pinned_nodes)  
-  {
-   // Create new mesh and read out node/element numbers from old one
-   mesh_pt()=new Mesh;
-   unsigned nelem=orig_mesh_pt->nelement();
-   unsigned nnode=orig_mesh_pt->nnode();
-
-   // Have we already created that node?
-   std::map<Node*,Node*> new_node;
-
-   // Create new elements
-   for (unsigned e=0;e<nelem;e++)
-    {
-     mesh_pt()->add_element_pt(new POISSON_ELEMENT);
-
-     // Find corresponding original element
-     SolidFiniteElement* orig_elem_pt=
-      dynamic_cast<SolidFiniteElement*>(orig_mesh_pt->finite_element_pt(e));
-     unsigned nnod=orig_elem_pt->nnode();
-
-     // Create nodes
-     for (unsigned j=0;j<nnod;j++)
-      {
-       // Does it not exist yet?
-       if (new_node[orig_elem_pt->node_pt(j)]==0)
-        {
-         Node* new_nod_pt=mesh_pt()->finite_element_pt(e)->construct_node(j);
-         new_node[orig_elem_pt->node_pt(j)]=new_nod_pt;
-         mesh_pt()->add_node_pt(new_nod_pt);
-         for (unsigned i=0;i<3;i++)
-          {
-           // Set new nodal position to be the old one in the
-           // SolidMesh (assumed to contain no inverted elements)
-           new_nod_pt->x(i)=
-            dynamic_cast<SolidNode*>(orig_elem_pt->node_pt(j))->xi(i);
-          }         
-        }
-       // It already exists -- copy across
-       else
-        {
-         mesh_pt()->finite_element_pt(e)->node_pt(j)=
-          new_node[orig_elem_pt->node_pt(j)];
-        }
-      }
-    }
-   
-
-   // Loop over pinned nodes
-   for (std::set<Node*>::iterator it=pinned_nodes.begin();
-        it!=pinned_nodes.end();it++)
-    {
-     new_node[*it]->pin(0);
-    }
-
-   oomph_info << "Number of equations for Poisson displacement smoothing: " 
-              << assign_eqn_numbers() << std::endl;
-
-   // Solve separate displacement problems
-   for (unsigned i=0;i<3;i++)
-    {
-     // Loop over nodes and assign displacement difference
-     for (unsigned j=0;j<nnode;j++)
-      {
-       // Get nodes
-       SolidNode* orig_node_pt=orig_mesh_pt->node_pt(j);
-       Node* new_node_pt=new_node[orig_node_pt];
-       
-       // Assign displacement difference
-       new_node_pt->set_value(0,orig_node_pt->x(i)-orig_node_pt->xi(i));
-      }
-
-     // Solve
-     newton_solve();
-     
-     // Loop over nodes and assign displacement difference
-     for (unsigned j=0;j<nnode;j++)
-      {
-       // Get nodes
-       SolidNode* orig_node_pt=orig_mesh_pt->node_pt(j);
-       Node* new_node_pt=new_node[orig_node_pt];
-       
-       // Assign displacement difference 
-       orig_node_pt->x(i)=orig_node_pt->xi(i)+new_node_pt->value(0);
-      }     
-    }
-
-   // Now re-assign undeformed position
-   orig_mesh_pt->set_lagrangian_nodal_coordinates();
-    
-   // Clean up -- mesh deletes nodes and elements
-   delete mesh_pt();
-   
-  }
- 
-};
-
-
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////
-
-
-
-//==========start_solid_mesh===============================================
-/// Tetgen-based mesh upgraded to become a solid mesh
-//=========================================================================
-template<class ELEMENT>
-class SolidTetMesh : public virtual TetgenMesh<ELEMENT>, 
-                     public virtual SolidMesh 
-{
- 
-public:
- 
- /// Constructor: 
- SolidTetMesh(const std::string& node_file_name,
-                const std::string& element_file_name,
-                const std::string& face_file_name,
-                TimeStepper* time_stepper_pt=
-                &Mesh::Default_TimeStepper) : 
-  TetgenMesh<ELEMENT>(node_file_name, element_file_name,
-                      face_file_name, time_stepper_pt)
-  {
-   //Assign the Lagrangian coordinates
-   set_lagrangian_nodal_coordinates();
-
-   // Find elements next to boundaries
-   setup_boundary_element_info();
-
-   // Setup boundary coordinates for all boundaries
-   char filename[100];
-   ofstream some_file;
-   unsigned nb=this->nboundary();
-   for (unsigned b=0;b<nb;b++)
-    {
-     sprintf(filename,"RESLT/solid_boundary_test%i.dat",b);
-     some_file.open(filename);
-     this->setup_boundary_coordinates(b,some_file);
-     some_file.close();
-    }
-
-  }
-
- /// Scale all nodal coordinates by given factor
- void scale_mesh(const double& factor)
-  {
-   unsigned nnod=this->nnode();
-   unsigned dim=this->node_pt(0)->ndim();
-   for (unsigned j=0;j<nnod;j++)
-    {
-     Node* nod_pt=this->node_pt(j);
-     for (unsigned i=0;i<dim;i++)
-      {
-       nod_pt->x(i)*=factor;
-      }
-    }
-
-   //Assign the Lagrangian coordinates
-   set_lagrangian_nodal_coordinates();
-  }
-
- /// Empty Destructor
- virtual ~SolidTetMesh() { }
-
-};
-
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-
-
-
-//==============start_fluid_mesh===========================================
-/// Tetgen-based mesh upgraded to become a (pseudo-) solid mesh
-//=========================================================================
-template<class ELEMENT>
-class FluidTetMesh : public virtual TetgenMesh<ELEMENT>,
-                     public virtual SolidMesh 
-{
- 
-public:
- 
- /// \short Constructor: 
- FluidTetMesh(const std::string& node_file_name,
-              const std::string& element_file_name,
-              const std::string& face_file_name,
-              const bool& split_corner_elements,
-              TimeStepper* time_stepper_pt=
-              &Mesh::Default_TimeStepper) : 
-  TetgenMesh<ELEMENT>(node_file_name, element_file_name,
-                      face_file_name, split_corner_elements, 
-                      time_stepper_pt)
-  {
-   //Assign the Lagrangian coordinates
-   set_lagrangian_nodal_coordinates();
-   
-   // Find out elements next to boundary
-   setup_boundary_element_info();
-
-   // Setup boundary coordinates for boundary.
-   // To be consistent with the boundary coordinates generated
-   // in the solid, we switch the direction of the normal.
-   // (Both meshes are generated from the same polygonal facets
-   // at the FSI interface).
-   bool switch_normal=true;
-
-   // Setup boundary coordinates for all boundaries
-   char filename[100];
-   ofstream some_file;
-   unsigned nb=this->nboundary();
-   for (unsigned b=0;b<nb;b++) 
-    {
-     sprintf(filename,"RESLT/fluid_boundary_test%i.dat",b);
-     some_file.open(filename);
-     this->setup_boundary_coordinates(b,switch_normal,some_file);
-     some_file.close();
-    }
-  }
-
-
- /// Scale all nodal coordinates by given factor
- void scale_mesh(const double& factor)
-  {
-   unsigned nnod=this->nnode();
-   unsigned dim=this->node_pt(0)->ndim();
-   for (unsigned j=0;j<nnod;j++)
-    {
-     Node* nod_pt=this->node_pt(j);
-     for (unsigned i=0;i<dim;i++)
-      {
-       nod_pt->x(i)*=factor;
-      }
-    }
-
-   //Assign the Lagrangian coordinates
-   set_lagrangian_nodal_coordinates();
-
-  }
-
- /// Empty Destructor
- virtual ~FluidTetMesh() { }
-
-};
- 
-
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////
-
 
 //=======start_of_namespace==========================================
 /// Global variables
@@ -860,7 +250,7 @@ private:
  Vector<SolidMesh*> Solid_fsi_traction_mesh_pt;
 
  /// Bulk fluid mesh
- FluidTetMesh<FLUID_ELEMENT>* Fluid_mesh_pt;
+ SolidTetMesh<FLUID_ELEMENT>* Fluid_mesh_pt;
 
  /// Mesh containing the FaceElements that monitor the inflow
  Mesh* Inflow_flux_monitor_mesh_pt;
@@ -878,8 +268,7 @@ private:
  Vector<SolidMesh*> Lagrange_multiplier_mesh_pt;
 
  /// GeomObject incarnations of the FSI boundary in the solid mesh
- Vector<MeshAsGeomObject*>
- Solid_fsi_boundary_pt;
+ Vector<MeshAsGeomObject*> Solid_fsi_boundary_pt;
 
  /// IDs of solid mesh boundaries where displacements are pinned
  Vector<unsigned> Pinned_solid_boundary_id;
@@ -938,14 +327,11 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
  // Check if it's been opened succesfully
  if (input_file_pt==0)
   {
-   throw OomphLibError(
-   	"ERROR while trying to open boundary enumeration file ",
-        "UnstructuredFSIProblem::UnstructuredFSIProblem()",
-	 OOMPH_EXCEPTION_LOCATION);
+   oomph_info << "ERROR while trying to open boundary enumeration file " 
+              << std::endl;
+   exit(1);
   }
-   
- std::ifstream boundary_enumeration("boundary_enumeration.dat");
-
+ 
  getline(*input_file_pt,input_string,' ');
  unsigned fluid_fsi_lo=atoi(input_string.c_str());
  getline(*input_file_pt,input_string,'#');
@@ -988,9 +374,7 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
  input_file_pt->ignore(80,'\n');
 
 
- boundary_enumeration.close();
-
- // Define fluid mesh and its distinguished boundaries
+  // Define fluid mesh and its distinguished boundaries
  //---------------------------------------------------
  
  //Create fluid bulk mesh, sub-dividing "corner" elements
@@ -998,12 +382,28 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
  string element_file_name="fluid.1.ele";
  string face_file_name="fluid.1.face";
  bool split_corner_elements=true;
- Fluid_mesh_pt =  new FluidTetMesh<FLUID_ELEMENT>(node_file_name,
+ bool switch_normal=true;
+ Fluid_mesh_pt =  new SolidTetMesh<FLUID_ELEMENT>(node_file_name,
                                                   element_file_name,
                                                   face_file_name,
                                                   split_corner_elements,
+                                                  switch_normal,
                                                   fluid_time_stepper_pt);
  
+ 
+ // Now update the nodal positions
+ ifstream node_file;
+ node_file.open("fluid_quadratic_nodes.dat");
+ unsigned nnod=Fluid_mesh_pt->nnode();
+ for (unsigned j=0;j<nnod;j++)    
+  {
+   Node* nod_pt=Fluid_mesh_pt->node_pt(j);
+   node_file >> nod_pt->x(0);
+   node_file >> nod_pt->x(1);
+   node_file >> nod_pt->x(2);
+  }
+ node_file.close();
+ Fluid_mesh_pt->set_lagrangian_nodal_coordinates();
 
  // The following corresponds to the boundaries as specified by
  // facets in the xda input:
@@ -1044,6 +444,20 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
                                                   face_file_name,
                                                   wall_time_stepper_pt);
  
+ 
+ // Now update the nodal positions
+ node_file.open("solid_quadratic_nodes.dat");
+ nnod=Solid_mesh_pt->nnode();
+ for (unsigned j=0;j<nnod;j++)    
+  {
+   Node* nod_pt=Solid_mesh_pt->node_pt(j);
+   node_file >> nod_pt->x(0);
+   node_file >> nod_pt->x(1);
+   node_file >> nod_pt->x(2);
+  }
+ node_file.close();
+ Solid_mesh_pt->set_lagrangian_nodal_coordinates();
+
  // The following corresponds to the boundaries as specified by
  // facets in the Tetgen input:
  
@@ -1071,225 +485,6 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
    Solid_outer_boundary_id[i]=solid_outer_lo+i;
   }
 
-
- // Map to quadratic?
- bool fluid_quadr=true;
- if (CommandLineArgs::Argc==2)
-  {
-   string arg=CommandLineArgs::Argv[1];
-   if (arg=="coarse_test")
-    {
-     oomph_info << "Not doing adjustment to quadratic geometry\n";
-     fluid_quadr=false;
-    }
-  }
-
- if (fluid_quadr)
-  {
-
-   // Snap curved fluid FSI boundaries onto quadratic surface
-   //--------------------------------------------------------
-
-   
-   // Check for inverted elements before quadratic trafo
-   bool mesh_has_inverted_elements;
-   std::ofstream inverted_fluid_elements;
-   Fluid_mesh_pt->output("fluid_mesh_before_snap.dat");
-   inverted_fluid_elements.open(
-    "inverted_fluid_elements_before_snap.dat");
-   Fluid_mesh_pt->check_inverted_elements(mesh_has_inverted_elements,
-                                          inverted_fluid_elements);  
-   inverted_fluid_elements.close(); 
-   cout << "Before quadratic snapping fluid mesh does ";
-   if (!mesh_has_inverted_elements) cout << "not ";
-   cout << "have inverted elements. \n";
-   
-
-   // Snap fluid FSI interface to quadratic surface
-   DocInfo doc_info;
-   doc_info.set_directory("RESLT");
-   doc_info.label()="fluid_fsi";
-   bool switch_normal=false;
-   Fluid_mesh_pt->snap_to_quadratic_surface(Fluid_fsi_boundary_id,
-                                            "quadratic_fsi_boundary.dat",
-                                            switch_normal,
-                                            doc_info);
-
-   // Doc
-   Fluid_mesh_pt->output("fluid_mesh_after_snap.dat");
-   inverted_fluid_elements.open(
-    "inverted_fluid_elements_after_snap.dat");
-   Fluid_mesh_pt->check_inverted_elements(mesh_has_inverted_elements,
-                                          inverted_fluid_elements);  
-   inverted_fluid_elements.close(); 
-   cout << "After quadratic snapping fluid mesh does ";
-   if (!mesh_has_inverted_elements) cout << "not ";
-   cout << "have inverted elements. \n";
-   
-   
-   // Now smooth nodal displacements by Poisson solves
-   
-   // Create set containing the nodes whose displacements are contrained
-   // (nodes on FSI boundary)
-   std::set<Node*> pinned_nodes;
-   unsigned nbound_pinned=nfluid_fsi_boundary();
-   for(unsigned i=0;i<nbound_pinned;i++)
-    {
-     //Get the mesh boundary
-     unsigned b = Fluid_fsi_boundary_id[i];
-     unsigned num_nod=Fluid_mesh_pt->nboundary_node(b);
-     for (unsigned inod=0;inod<num_nod;inod++)
-      {
-       // Get node
-       pinned_nodes.insert(Fluid_mesh_pt->boundary_node_pt(b,inod));
-      }
-    }
-      
-   // Smooth
-   bool use_poisson=false;
-   if (use_poisson)
-    {
-     PoissonSmoothMesh<TPoissonElement<3,3> >()(Fluid_mesh_pt,pinned_nodes);
-    }
-   else
-    {
-     LinearSmoothMeshProblem(Fluid_mesh_pt,pinned_nodes);
-    }
-
-   // Doc
-   Fluid_mesh_pt->output("fluid_mesh_after_poisson_smooth.dat");
-   inverted_fluid_elements.open(
-    "inverted_fluid_elements_after_poisson_smooth.dat");
-   Fluid_mesh_pt->check_inverted_elements(mesh_has_inverted_elements,
-                                          inverted_fluid_elements);   
-   inverted_fluid_elements.close();
-   cout << "After Poisson smoothing fluid mesh does ";
-   if (!mesh_has_inverted_elements) cout << "not ";
-   cout << "have inverted elements. \n";
-   
-  }
-
-
-
-
- // Map to quadratic?
- bool solid_quadr=true;
- if (CommandLineArgs::Argc==2)
-  {
-   string arg=CommandLineArgs::Argv[1];
-   if (arg=="coarse_test")
-    {
-     oomph_info << "Not doing adjustment to quadratic geometry\n";
-     solid_quadr=false;
-    }
-  }
- if (solid_quadr)
-  {
-   
-   
-   // Snap curved solid boundaries (fsi & outer boundary) onto quadratic surface
-   //---------------------------------------------------------------------------
-   
-   // Check for inverted elements before quadratic trafo
-   bool mesh_has_inverted_elements;
-   std::ofstream inverted_solid_elements;
-   Solid_mesh_pt->output("solid_mesh_before_snap.dat");
-   inverted_solid_elements.open(
-    "inverted_solid_elements_before_snap.dat");
-   Solid_mesh_pt->check_inverted_elements(mesh_has_inverted_elements,
-                                          inverted_solid_elements);  
-   inverted_solid_elements.close(); 
-   cout << "Before quadratic snapping solid mesh does ";
-   if (!mesh_has_inverted_elements) cout << "not ";
-   cout << "have inverted elements. \n";
-   
-   
-   // Snap solid FSI interface to quadratic surface
-   DocInfo doc_info;
-   doc_info.set_directory("RESLT");
-   doc_info.label()="solid_fsi";
-   bool switch_normal=false;
-   Solid_mesh_pt->snap_to_quadratic_surface(Solid_fsi_boundary_id,
-                                            "quadratic_fsi_boundary.dat",
-                                            switch_normal,
-                                            doc_info);
-   
-   // Snap outer solid interface to quadratic surface
-   doc_info.set_directory("RESLT");
-   doc_info.label()="solid_outer_boundary";
-   switch_normal=true;
-   Solid_mesh_pt->snap_to_quadratic_surface(
-    Solid_outer_boundary_id,
-    "quadratic_outer_solid_boundary.dat",
-    switch_normal,
-    doc_info);
-   
-
-   // Doc outcome of snapping
-   Solid_mesh_pt->output("solid_mesh_after_snap.dat");
-   inverted_solid_elements.open(
-    "inverted_solid_elements_after_snap.dat");
-   Solid_mesh_pt->check_inverted_elements(mesh_has_inverted_elements,
-                                          inverted_solid_elements);  
-   inverted_solid_elements.close(); 
-   cout << "After quadratic snapping solid mesh does ";
-   if (!mesh_has_inverted_elements) cout << "not ";
-   cout << "have inverted elements. \n";
-   
-   // Loop over nodes on the FSI boundary in the solid mesh
-   std::set<Node*> pinned_nodes;
-   unsigned nbound_pinned=nsolid_fsi_boundary();
-   for(unsigned i=0;i<nbound_pinned;i++)
-    {
-     //Get the mesh boundary
-     unsigned b = Solid_fsi_boundary_id[i];
-     unsigned num_nod=Solid_mesh_pt->nboundary_node(b);
-     for (unsigned inod=0;inod<num_nod;inod++)
-      {
-       // Get node
-       pinned_nodes.insert(Solid_mesh_pt->boundary_node_pt(b,inod));
-      }
-    }
-   
-   // Loop over nodes on outer boundary of solid mesh
-   nbound_pinned=Solid_outer_boundary_id.size();
-   for(unsigned i=0;i<nbound_pinned;i++)
-    {
-     //Get the mesh boundary
-     unsigned b = Solid_outer_boundary_id[i];
-     unsigned num_nod=Solid_mesh_pt->nboundary_node(b);
-     for (unsigned inod=0;inod<num_nod;inod++)
-      {
-       // Get node     
-       pinned_nodes.insert(Solid_mesh_pt->boundary_node_pt(b,inod));
-      }
-    }
-   
-
-   bool use_poisson=false;
-   if (use_poisson)
-    {
-     PoissonSmoothMesh<TPoissonElement<3,3> >()(Solid_mesh_pt,pinned_nodes);
-    }
-   else
-    {
-     LinearSmoothMeshProblem(Solid_mesh_pt,pinned_nodes);
-    }
-
-   
-   // Doc
-   Solid_mesh_pt->output("solid_mesh_after_poisson_smooth.dat");
-   inverted_solid_elements.open(
-    "inverted_solid_elements_after_poisson_smooth.dat");
-   Solid_mesh_pt->check_inverted_elements(mesh_has_inverted_elements,
-                                          inverted_solid_elements);   
-   inverted_solid_elements.close();
-   cout << "After Poisson smoothing solid mesh does ";
-   if (!mesh_has_inverted_elements) cout << "not ";
-   cout << "have inverted elements. \n";
-
-   
-  }
 
  // Scale 
  double factor=0.0666;
@@ -1759,8 +954,7 @@ create_lagrange_multiplier_elements()
    
    // Create  GeomObject incarnation of fsi boundary in solid mesh
    Solid_fsi_boundary_pt[i]=
-    new MeshAsGeomObject
-    (Solid_fsi_traction_mesh_pt[i]);
+    new MeshAsGeomObject(Solid_fsi_traction_mesh_pt[i]);
    
    // How many bulk fluid elements are adjacent to boundary b?
    unsigned n_element = Fluid_mesh_pt->nboundary_element(b);
@@ -2063,47 +1257,6 @@ doc_solution(DocInfo& doc_info)
  cout << "Volume flux at inflow: " << inflow_volume_flux << std::endl;
 
 
- // Output nodal positions (only) if test of quadratic snapping
- if (CommandLineArgs::Argc==2)
-  {
-   string arg=CommandLineArgs::Argv[1];
-   if (arg=="quadratic_test")
-    {
-     
-     sprintf(filename,"%s/solid_nodes%i.dat",doc_info.directory().c_str(),
-             doc_info.number());
-     some_file.open(filename);
-     unsigned nnod=Solid_mesh_pt->nnode();
-     for (unsigned j=0;j<nnod;j++)
-      {
-       some_file << Solid_mesh_pt->node_pt(j)->x(0) << " "
-                 << Solid_mesh_pt->node_pt(j)->x(1) << " "
-                 << Solid_mesh_pt->node_pt(j)->x(2) << std::endl;
-      }
-     some_file.close();
-
-     sprintf(filename,"%s/fluid_nodes%i.dat",doc_info.directory().c_str(),
-             doc_info.number());
-     some_file.open(filename);
-     nnod=Fluid_mesh_pt->nnode();
-     for (unsigned j=0;j<nnod;j++)
-      {
-       some_file << Fluid_mesh_pt->node_pt(j)->x(0) << " "
-                 << Fluid_mesh_pt->node_pt(j)->x(1) << " "
-                 << Fluid_mesh_pt->node_pt(j)->x(2) << std::endl;
-      }
-     some_file.close();
-    }
-  }
-
-
-
- // hierher Elements can still be inverted near boundary
- // even if they're non-inverted at the 3D Gauss points
- // thus code can die here when evaluating the fluid traction
- // Deal with this later...
- FiniteElement::Accept_negative_jacobian=false; 
-
 } // end_of_doc
 
 
@@ -2141,34 +1294,19 @@ int main(int argc, char **argv)
  problem.doc_solution(doc_info);
  doc_info.number()++;   
 
- // Stop if quadratic test
- if (CommandLineArgs::Argc==2)
-  {
-   string arg=CommandLineArgs::Argv[1];
-   cout << "Arg: " << arg << std::endl;
-   if (arg=="quadratic_test")
-    {
-     oomph_info << "Only testing the quadratic mapping; stopping now.\n";
-     exit(0);
-    }
-  }
-
  //Set value of dt
  double nsteps_per_period=40;
  double dt = Global_Parameters::Period/double(nsteps_per_period);
  problem.initialise_dt(dt);
 
  // Increment FSI parameter during steady runs
- unsigned nq=4;
+ unsigned nq=1; // hierher 4;
  if (CommandLineArgs::Argc==2)
   {
-   string arg=CommandLineArgs::Argv[1];
-   if (arg=="coarse_test")
-    {
-     oomph_info << "Smaller number of steps for test\n";
-     nq=1;
-    }
+   oomph_info << "Smaller number of steps for test\n";
+   nq=1;
   }
+
  double q_increment=2.0e-6;   
  for (unsigned iq=0;iq<nq;iq++)
   {
@@ -2194,15 +1332,12 @@ int main(int argc, char **argv)
  if (CommandLineArgs::Argc==2)
   {
    string arg=CommandLineArgs::Argv[1];
-   if (arg=="coarse_test")
-    {
-     oomph_info << "Smaller number of steps for test\n";
-     nstep=2;
-    }
+   oomph_info << "Smaller number of steps for test\n";
+   nstep=1;
   }
+
  for (unsigned istep=0;istep<nstep;istep++)
   {
-
    cout << "Unsteady solve...\n";
 
    // Solve the problem

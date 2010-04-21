@@ -634,6 +634,13 @@ void TetgenMesh<ELEMENT>::setup_boundary_coordinates(const unsigned& b,
  // Indicate that boundary coordinate has been set up
  Boundary_coordinate_exists[b]=true;
 
+ // Cleanup
+ unsigned n=face_el_pt.size();
+ for (unsigned e=0;e<n;e++)
+  {
+   delete face_el_pt[e];
+  }
+
 }
 
 
@@ -1124,6 +1131,13 @@ void TetgenMesh<ELEMENT>::snap_to_quadratic_surface(
   {
    delete face_el_pt[e];
    face_el_pt[e]=0;
+  }
+
+ // Kill boundary nodes
+ unsigned nn=nod_pt.size();
+ for (unsigned j=0;j<nn;j++)
+  {
+   delete nod_pt[j];
   }
 
 }

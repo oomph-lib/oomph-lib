@@ -1,7 +1,7 @@
 #!MC 1100
 
 $!VARSET |lostep|=0
-$!VARSET |nstep|=5
+$!VARSET |nstep|=163
 $!VARSET |dstep|=1
 
 $!VARSET |PNG|=0
@@ -212,6 +212,8 @@ $!GLOBALTHREED
 #    }
 #  TEXT = 'step:  |step|' 
 
+
+$!VIEW FIT
 
 $!DRAWGRAPHICS TRUE
 $!REDRAWALL
