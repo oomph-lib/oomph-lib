@@ -553,10 +553,15 @@ void RefineableMeshBase::adapt(OomphCommunicator* comm_pt,
                halo_to_be_unrefined[e]=1;
               }
             }
-           
-           // Send it across
-           MPI_Send(&halo_to_be_unrefined[0],nhalo,MPI_INT,
-                    d,0,comm_pt->mpi_comm());
+
+           //Trap the case when there are no halo elements
+           //so that we don't get a segfault in the MPI send
+           if(nhalo > 0)
+            {
+             // Send it across
+             MPI_Send(&halo_to_be_unrefined[0],nhalo,MPI_INT,
+                      d,0,comm_pt->mpi_comm());
+            }
           }
 
           {
@@ -569,9 +574,13 @@ void RefineableMeshBase::adapt(OomphCommunicator* comm_pt,
            // halo element with current processor to be (not)unrefined
            unsigned nhaloed=haloed_elem_pt.size();
            Vector<int> halo_to_be_unrefined(nhaloed);
-           MPI_Recv(&halo_to_be_unrefined[0],nhaloed,MPI_INT,d,0,
-                    comm_pt->mpi_comm(),&status);
-           
+           //Trap to catch the case that there are no haloed elements
+           if(nhaloed > 0)
+            {
+             MPI_Recv(&halo_to_be_unrefined[0],nhaloed,MPI_INT,d,0,
+                      comm_pt->mpi_comm(),&status);
+            }
+
            // Check it
            for (unsigned e=0;e<nhaloed;e++)
             {
@@ -642,8 +651,11 @@ void RefineableMeshBase::adapt(OomphCommunicator* comm_pt,
             }
            
            // Send it across
-           MPI_Send(&halo_to_be_refined[0],nhalo,MPI_INT,
-                    d,0,comm_pt->mpi_comm());
+           if(nhalo > 0)
+            {
+             MPI_Send(&halo_to_be_refined[0],nhalo,MPI_INT,
+                      d,0,comm_pt->mpi_comm());
+            }
           }
 
           {
@@ -656,9 +668,12 @@ void RefineableMeshBase::adapt(OomphCommunicator* comm_pt,
            // halo element with current processor to be (not)refined
            unsigned nhaloed=haloed_elem_pt.size();
            Vector<int> halo_to_be_refined(nhaloed);
-           MPI_Recv(&halo_to_be_refined[0],nhaloed,MPI_INT,d,0,
-                    comm_pt->mpi_comm(),&status);
-           
+           if(nhaloed > 0)
+            {
+             MPI_Recv(&halo_to_be_refined[0],nhaloed,MPI_INT,d,0,
+                      comm_pt->mpi_comm(),&status);
+            }
+
            // Check it
            for (unsigned e=0;e<nhaloed;e++)
             {

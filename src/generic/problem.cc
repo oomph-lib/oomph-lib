@@ -1182,6 +1182,9 @@ namespace oomph
      }
    }
 
+  // The equations assembled by this processor may have changed so 
+  // we must resize the sparse assemble with arrays previous allocation
+  Sparse_assemble_with_arrays_previous_allocation.resize(0);
  }
  
 #endif
@@ -4388,232 +4391,9 @@ void Problem::parallel_sparse_assemble
  Vector<unsigned > &nnz, 
  Vector<double* > &residuals)
 {
-
  // my rank and nproc
  unsigned my_rank = Communicator_pt->my_rank();
  unsigned nproc = Communicator_pt->nproc();
- 
- // start by assembling the sorted set of equations which this processor
- // contributes to
- //======================================================================
- Vector<unsigned> my_eqns;
- unsigned dof_first_row = Dof_distribution_pt->first_row();
- unsigned dof_nrow_local = Dof_distribution_pt->nrow_local();
- unsigned dof_last_row = dof_first_row + dof_nrow_local;
-
- // first the local eqn numbers
- for (unsigned i = dof_first_row; i < dof_last_row; i++)
-  {
-   my_eqns.push_back(i);
-  }
-
-
- // If there are no submeshes then only visit halo nodes (there are no
- // external halo nodes)
- unsigned nmesh=nsub_mesh();
- if (nmesh==0)
-  {
-   // then the halo equation numbers
-   for (unsigned p = 0; p < nproc; p++)
-    {
-     if (p != my_rank)
-      {       
-       unsigned n_halo_node=mesh_pt()->nhalo_node(p);
-       for (unsigned j=0;j<n_halo_node;j++)
-        {
-         Node* halo_node_pt=mesh_pt()->halo_node_pt(p,j);
-         unsigned nval=halo_node_pt->nvalue();
-         for (unsigned ival=0;ival<nval;ival++)
-          {
-           int eqn_num = halo_node_pt->eqn_number(ival);
-           if (eqn_num>=0)
-            {
-             my_eqns.push_back(eqn_num);
-            }
-          }
-         SolidNode* solid_node_pt=dynamic_cast<SolidNode*>(halo_node_pt);
-         if (solid_node_pt!=0)
-          {
-           unsigned nval=solid_node_pt->variable_position_pt()->nvalue();
-           for (unsigned ival=0; ival<nval; ival++)
-            {
-             int eqn_num = 
-              solid_node_pt->variable_position_pt()->eqn_number(ival);
-             if (eqn_num>=0)
-              {
-               my_eqns.push_back(eqn_num);
-              }
-            }
-          }
-        }
-      }
-    }
-  }
- // there are submeshes, so also visit external halo nodes
- else
-  {
-   // Loop over submeshes
-   for (unsigned imesh=0;imesh<nmesh;imesh++)
-    {
-     // There are "local" external eqn numbers
-     unsigned n_ext_node=mesh_pt(imesh)->nexternal_node();
-     for (unsigned j=0;j<n_ext_node;j++)
-      {
-       Node* ext_nod_pt=mesh_pt(imesh)->external_node_pt(j);
-       unsigned nval=ext_nod_pt->nvalue();
-       for (unsigned ival=0;ival<nval;ival++)
-        {
-         int eqn_num = ext_nod_pt->eqn_number(ival);
-         if (eqn_num>=0)
-          {
-           my_eqns.push_back(eqn_num);
-          }
-        }
-      }
-
-     // then the halo equation numbers
-     for (unsigned p = 0; p < nproc; p++)
-      {
-       if (p != my_rank)
-        {       
-         unsigned n_halo_node=mesh_pt(imesh)->nhalo_node(p);
-         for (unsigned j=0;j<n_halo_node;j++)
-          {
-           Node* halo_node_pt=mesh_pt(imesh)->halo_node_pt(p,j);
-           unsigned nval=halo_node_pt->nvalue();
-           for (unsigned ival=0;ival<nval;ival++)
-            {
-             int eqn_num = halo_node_pt->eqn_number(ival);
-             if (eqn_num>=0)
-              {
-               my_eqns.push_back(eqn_num);
-              }
-            }
-           SolidNode* solid_node_pt=dynamic_cast<SolidNode*>(halo_node_pt);
-           if (solid_node_pt!=0)
-            {
-             unsigned nval=solid_node_pt->variable_position_pt()->nvalue();
-             for (unsigned ival=0; ival<nval; ival++)
-              {
-               int eqn_num = 
-                solid_node_pt->variable_position_pt()->eqn_number(ival);
-               if (eqn_num>=0)
-                {
-                 my_eqns.push_back(eqn_num);
-                }
-              }
-            }
-          }
-        }
-      }
-
-     // and finally the external halo equation numbers
-     for (unsigned p = 0; p < nproc; p++)
-      {
-       if (p != my_rank)
-        {       
-         unsigned n_ext_halo_node=mesh_pt(imesh)->nexternal_halo_node(p);
-         for (unsigned j=0;j<n_ext_halo_node;j++)
-          {
-           Node* ext_halo_node_pt = mesh_pt(imesh)->external_halo_node_pt(p,j);
-           unsigned nval = ext_halo_node_pt->nvalue();
-           for (unsigned ival=0;ival<nval;ival++)
-            {
-             int eqn_num = ext_halo_node_pt->eqn_number(ival);
-             if (eqn_num>=0)
-              {
-               my_eqns.push_back(eqn_num);
-              }
-            }
-           SolidNode* solid_node_pt=dynamic_cast<SolidNode*>(ext_halo_node_pt);
-           if (solid_node_pt!=0)
-            {
-             unsigned nval=solid_node_pt->variable_position_pt()->nvalue();
-             for (unsigned ival=0; ival<nval; ival++)
-              {
-               int eqn_num = 
-                solid_node_pt->variable_position_pt()->eqn_number(ival);
-               if (eqn_num>=0)
-                {
-                 my_eqns.push_back(eqn_num);
-                }
-              }
-            }
-          }
-        }
-      }  
-
-     // finally loop over the internal data in external halo elements
-     for (unsigned p = 0; p < nproc; p++)
-      {
-       if (p!=my_rank)
-        {
-         unsigned n_ext_halo_element = 
-          mesh_pt(imesh)->nexternal_halo_element(p);
-         for (unsigned j = 0; j < n_ext_halo_element; j++)
-          {
-           GeneralisedElement* ext_halo_element_pt = 
-            mesh_pt(imesh)->external_halo_element_pt(p,j);
-           unsigned ndata = ext_halo_element_pt->ninternal_data();
-           for (unsigned i = 0; i < ndata; i++)
-            {
-             unsigned nvalue = 
-              ext_halo_element_pt->internal_data_pt(i)->nvalue();
-             for (unsigned k = 0; k < nvalue; k++)
-              {
-               int eqn_num 
-                = ext_halo_element_pt->internal_data_pt(i)->eqn_number(k);
-               if (eqn_num>=0)
-                {
-                 my_eqns.push_back(eqn_num);
-                }
-              }
-            }
-          }
-        }
-      }
-
-     // finally loop over the internal data in halo elements
-     for (unsigned p = 0; p < nproc; p++)
-      {
-       if (p!=my_rank)
-        {
-         Vector<GeneralisedElement*> halo_element_pt = 
-          mesh_pt(imesh)->halo_element_pt(p);
-         unsigned n_halo_element = halo_element_pt.size();
-         for (unsigned j = 0; j < n_halo_element; j++)
-          {
-           unsigned ndata = halo_element_pt[j]->ninternal_data();
-           for (unsigned i = 0; i < ndata; i++)
-            {
-             unsigned nvalue = 
-              halo_element_pt[j]->internal_data_pt(i)->nvalue();
-             for (unsigned k = 0; k < nvalue; k++)
-              {
-               int eqn_num 
-                = halo_element_pt[j]->internal_data_pt(i)->eqn_number(k);
-               if (eqn_num>=0)
-                {
-                 my_eqns.push_back(eqn_num);
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
- // and sort and remove duplicate entries
- std::sort(my_eqns.begin(),my_eqns.end());
- Vector<unsigned>::iterator it = std::unique(my_eqns.begin(),my_eqns.end());
- my_eqns.resize(it-my_eqns.begin());
-
- // number of equations
- unsigned my_n_eqn = my_eqns.size();
-
- // next we assemble the data into an array of arrays
- // =================================================
 
  //Total number of elements
  const unsigned long  n_elements = mesh_pt()->nelement();
@@ -4621,7 +4401,7 @@ void Problem::parallel_sparse_assemble
  // Default range of elements for distributed problems
  unsigned long el_lo=0;
  unsigned long el_hi=n_elements-1;
-   
+
  // Otherwise just loop over a fraction of the elements
  // (This will either have been initialised in
  // Problem::set_default_first_and_last_element_for_assembly() or
@@ -4633,7 +4413,7 @@ void Problem::parallel_sparse_assemble
    el_lo=First_el_for_assembly[my_rank];
    el_hi=Last_el_for_assembly[my_rank];
   }
-      
+
  //Find the number of vectors to be assembled
  const unsigned n_vector = residuals.size();
    
@@ -4677,6 +4457,55 @@ void Problem::parallel_sparse_assemble
   }
 #endif
 
+
+ // start by assembling the sorted set of equations to which this processor
+ // contributes. Essentially this is every global equation that features in
+ // all the non-halo elements. This may not be the same as the locally-stored
+ // dofs because some of the Nodes in non-halo elements may actually
+ // be halos.
+ //======================================================================
+ Vector<unsigned> my_eqns;
+ unsigned my_eqns_index=0;
+
+ //Loop over the elements
+ for(unsigned long e=el_lo;e<=el_hi;e++)
+  {
+   //Get the pointer to the element
+   GeneralisedElement* elem_pt = mesh_pt()->element_pt(e);
+   
+   //Ignore halo elements
+   if (!elem_pt->is_halo())
+    {
+     //Find number of degrees of freedom in the element
+     const unsigned nvar = assembly_handler_pt->ndof(elem_pt);
+     //Add the number of dofs to the current size of my_eqns
+     my_eqns.resize(my_eqns_index+nvar);
+
+      //Loop over the first index of local variables
+      for(unsigned i=0;i<nvar;i++)
+       {
+        //Get the local equation number
+        unsigned global_eqn_number 
+         = assembly_handler_pt->eqn_number(elem_pt,i);
+        //Add into the vector
+        my_eqns[my_eqns_index+i] = global_eqn_number;
+       }
+      //Update the number of elements in the vector
+      my_eqns_index += nvar;
+    }
+  }
+
+ //  now sort and remove duplicate entries in the vector
+ std::sort(my_eqns.begin(),my_eqns.end());
+ Vector<unsigned>::iterator it = std::unique(my_eqns.begin(),my_eqns.end());
+ my_eqns.resize(it-my_eqns.begin());
+
+ // number of equations
+ unsigned my_n_eqn = my_eqns.size();
+
+
+ // next we assemble the data into an array of arrays
+ // =================================================
 // The idea behind this sparse assembly routine is to use an array of
 // arrays for the entries in each complete matrix. And a second
 // array of arrays stores the global row (or column) indeces.
@@ -4987,23 +4816,27 @@ void Problem::parallel_sparse_assemble
  
  // determine the number of eqns to be sent to each processor
  Vector<unsigned> n_eqn_for_proc(nproc,0);
- Vector<unsigned> first_eqn_element_for_proc(nproc);
- unsigned current_p = target_dist_pt->rank_of_global_row(my_eqns[0]);
- first_eqn_element_for_proc[current_p] = 0;
- n_eqn_for_proc[current_p] = 1;
- for (unsigned i = 1; i < my_n_eqn; i++)
+ Vector<unsigned> first_eqn_element_for_proc(nproc,0);
+ //If no equations are assembled then we don't need to do any of this
+ if(my_n_eqn > 0)
   {
-   unsigned next_p = target_dist_pt->rank_of_global_row(my_eqns[i]);
-   if (next_p != current_p)
+   unsigned current_p = target_dist_pt->rank_of_global_row(my_eqns[0]);
+   first_eqn_element_for_proc[current_p] = 0;
+   n_eqn_for_proc[current_p] = 1;
+   for (unsigned i = 1; i < my_n_eqn; i++)
     {
-     current_p = next_p;
-     first_eqn_element_for_proc[current_p] = i;
+     unsigned next_p = target_dist_pt->rank_of_global_row(my_eqns[i]);
+     if (next_p != current_p)
+      {
+       current_p = next_p;
+       first_eqn_element_for_proc[current_p] = i;
+      }
+     n_eqn_for_proc[current_p]++;
     }
-   n_eqn_for_proc[current_p]++;
   }
 
  // determine the number of non-zeros to be sent to each processor for each 
- // matrix
+ // matrix (if n_eqn_for_proc[p]=0, then nothing will be assembled)
  DenseMatrix<unsigned> nnz_for_proc(nproc,n_matrix,0);
  for (unsigned p = 0; p < nproc; p++)
   {
@@ -5058,11 +4891,11 @@ void Problem::parallel_sparse_assemble
  // equation numbers
  for (unsigned p = 0; p < nproc; p++)
   {
-   unsigned first_eqn_element = first_eqn_element_for_proc[p];
-   unsigned first_row = target_dist_pt->first_row(p);
    unsigned n_eqns_p = n_eqn_for_proc[p];
    if (n_eqns_p > 0)
     {
+     unsigned first_eqn_element = first_eqn_element_for_proc[p];
+     unsigned first_row = target_dist_pt->first_row(p);
      eqns_for_proc[p] = new unsigned[n_eqns_p];
      for (unsigned i = 0; i < n_eqns_p; i++)
       {
