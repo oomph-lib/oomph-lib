@@ -625,10 +625,10 @@ void AxisymmetricNavierStokesEquations::traction(const Vector<double>& s,
                                    const Vector<double>& N, 
                                    Vector<double>& traction)
 {
- throw OomphLibError(
-  "Check the traction calculation for axisymmetric NSt",
-  "AxisymmetricNavierStokesEquations::traction()",
-  OOMPH_EXCEPTION_LOCATION);
+ //throw OomphLibError(
+ // "Check the traction calculation for axisymmetric NSt",
+ // "AxisymmetricNavierStokesEquations::traction()",
+ // OOMPH_EXCEPTION_LOCATION);
 
  // Get velocity gradients
  DenseMatrix<double> strainrate(3,3);
@@ -989,7 +989,7 @@ fill_in_generic_residual_contribution_axi_nst(Vector<double> &residuals,
    
    //Get the user-defined body force terms
    Vector<double> body_force(3);
-   get_body_force(time(),ipt,interpolated_x,body_force);
+   get_body_force_axi_nst(time(),ipt,s,interpolated_x,body_force);
    
    //Get the user-defined source function
    double source = get_source_fct(time(),ipt,interpolated_x);

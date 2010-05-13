@@ -309,10 +309,11 @@ protected:
                              Shape &test) const=0;
 
  /// Calculate the body force fct at a given time and Eulerian position
- void get_body_force(const double& time, 
-                     const unsigned& ipt,
-                     const Vector<double> &x, 
-                     Vector<double> &result)
+ void get_body_force_axi_nst(const double& time, 
+                             const unsigned& ipt,
+                             const Vector<double> &s,
+                             const Vector<double> &x, 
+                             Vector<double> &result)
   {
    //If the function pointer is zero return zero
    if(Body_force_fct_pt == 0)
@@ -737,6 +738,60 @@ public:
    
    return(interpolated_u);
   }
+
+ /// \short Compute the derivatives of the i-th component of 
+ /// velocity at point s with respect
+ /// to all data that can affect its value. In addition, return the global
+ /// equation numbers corresponding to the data. The function is virtual 
+ /// so that it can be overloaded in the refineable version
+ virtual void dinterpolated_u_axi_nst_ddata(
+  const Vector<double> &s,
+  const unsigned &i,
+  Vector<double> &du_ddata,
+  Vector<unsigned> &global_eqn_number)
+ {
+  //Find number of nodes
+  unsigned n_node = nnode();
+  //Local shape function
+  Shape psi(n_node);
+  //Find values of shape function
+  shape(s,psi);
+  
+  //Find the index at which the velocity component is stored
+  const unsigned u_nodal_index = u_index_axi_nst(i);
+  
+  //Find the number of dofs associated with interpolated u
+   unsigned n_u_dof=0;
+   for(unsigned l=0;l<n_node;l++)
+    {
+     int global_eqn = this->node_pt(l)->eqn_number(u_nodal_index);
+     //If it's positive add to the count
+     if(global_eqn >= 0) {++n_u_dof;}
+    }
+   
+   //Now resize the storage schemes
+   du_ddata.resize(n_u_dof,0.0);
+   global_eqn_number.resize(n_u_dof,0);
+   
+   //Loop over th nodes again and set the derivatives
+   unsigned count=0;
+   //Loop over the local nodes and sum
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     //Get the global equation number
+     int global_eqn = this->node_pt(l)->eqn_number(u_nodal_index);
+     if (global_eqn >= 0)
+      {
+       //Set the global equation number
+       global_eqn_number[count] = global_eqn;
+       //Set the derivative with respect to the unknown
+       du_ddata[count] = psi[l];
+       //Increase the counter
+       ++count;
+      }
+    }
+  }
+
 
  /// Return FE interpolated pressure at local coordinate s
  double interpolated_p_axi_nst(const Vector<double> &s) const

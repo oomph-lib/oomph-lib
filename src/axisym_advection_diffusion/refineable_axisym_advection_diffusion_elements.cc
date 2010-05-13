@@ -25,7 +25,7 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-#include "refineable_spherical_advection_diffusion_elements.h"
+#include "refineable_axisym_advection_diffusion_elements.h"
 
 namespace oomph
 {
@@ -37,8 +37,8 @@ namespace oomph
 /// This function overloads the standard version so that the possible
 /// presence of hanging nodes is taken into account.
 //=========================================================================
-void RefineableSphericalAdvectionDiffusionEquations::
-fill_in_generic_residual_contribution_spherical_adv_diff(
+void RefineableAxisymAdvectionDiffusionEquations::
+fill_in_generic_residual_contribution_axi_adv_diff(
  Vector<double> &residuals, 
  DenseMatrix<double> &jacobian, 
  DenseMatrix<double> 
@@ -50,7 +50,7 @@ fill_in_generic_residual_contribution_spherical_adv_diff(
 const unsigned n_node = nnode();
  
 //Get the nodal index at which the unknown is stored
- const unsigned u_nodal_index = this->u_index_spherical_adv_diff();
+ const unsigned u_nodal_index = this->u_index_axi_adv_diff();
 
 //Set up memory for the shape and test functions
  Shape psi(n_node), test(n_node);
@@ -90,7 +90,7 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
   
   //Call the derivatives of the shape and test functions
   double J = 
-   this->dshape_and_dtest_eulerian_at_knot_spherical_adv_diff(ipt,psi,dpsidx,
+   this->dshape_and_dtest_eulerian_at_knot_axi_adv_diff(ipt,psi,dpsidx,
                                                               test,dtestdx);
   
   //Premultiply the weights and the Jacobian
@@ -114,7 +114,7 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
     //Get the value at the node
     double u_value = this->nodal_value(l,u_nodal_index);
     interpolated_u += u_value*psi(l);
-    dudt += this->du_dt_spherical_adv_diff(l)*psi(l);
+    dudt += this->du_dt_axi_adv_diff(l)*psi(l);
     // Loop over directions
     for(unsigned j=0;j<2;j++)
      {
@@ -139,21 +139,16 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
   
   //Get body force
   double source;
-  this->get_source_spherical_adv_diff(ipt,interpolated_x,source);
+  this->get_source_axi_adv_diff(ipt,interpolated_x,source);
   
   
   //Get wind
   //--------
-  Vector<double> wind(2);
-  this->get_wind_spherical_adv_diff(ipt,s,interpolated_x,wind);
+  Vector<double> wind(3);
+  this->get_wind_axi_adv_diff(ipt,s,interpolated_x,wind);
   
   //r is the first position component
   double r = interpolated_x[0];
-  //theta is the second position component
-  double sin_th = sin(interpolated_x[1]);
-  //dS is the area weighting
-  double dS = r*r*sin_th;
-  
   
   // Assemble residuals and Jacobian
   //================================
@@ -206,16 +201,16 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
        {
         //Add du/dt and body force/source term here 
         residuals[local_eqn] -= 
-         (scaled_peclet_st*dudt + source)*dS*test(l)*W*hang_weight;
+         (scaled_peclet_st*dudt + source)*r*test(l)*W*hang_weight;
        
        //The Advection Diffusion bit itself
        residuals[local_eqn] -= 
         //radial terms
-        (dS*interpolated_dudx[0]*
+        (interpolated_dudx[0]*
          (scaled_peclet*wind[0]*test(l) + dtestdx(l,0)) +
          //azimuthal terms
-         (sin_th*interpolated_dudx[1]*
-          (r*scaled_peclet*wind[1]*test(l) + dtestdx(l,1))))*W*hang_weight;
+         (interpolated_dudx[1]*
+          (scaled_peclet*wind[1]*test(l) + dtestdx(l,1))))*r*W*hang_weight;
        
        // Calculate the Jacobian
        if(flag)
@@ -271,25 +266,24 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
                jacobian(local_eqn,local_unknown) 
                 -= scaled_peclet_st*test(l)*psi(l2)*
                 this->node_pt(l2)->time_stepper_pt()->weight(1,0)
-                *dS*W*hang_weight*hang_weight2;
+                *r*W*hang_weight*hang_weight2;
                
                //Add contribution to mass matrix
                if(flag==2)
                 {
                  mass_matrix(local_eqn,local_unknown) +=
-                  scaled_peclet_st*test(l)*psi(l2)*dS*
-                  W*hang_weight*hang_weight2;
+                  scaled_peclet_st*test(l)*psi(l2)*r*W*hang_weight*hang_weight2;
                 }
                
                //Add contribution to Elemental Matrix
                //Assemble Jacobian term
                jacobian(local_eqn,local_unknown) -= 
                 //radial terms
-                (dS*dpsidx(l2,0)*
+                (dpsidx(l2,0)*
                  (scaled_peclet*wind[0]*test(l) + dtestdx(l,0)) +
                  //azimuthal terms
-                 (sin_th*dpsidx(l2,1)*
-                  (r*scaled_peclet*wind[1]*test(l) + dtestdx(l,1))))*W*
+                 (dpsidx(l2,1)*
+                  (scaled_peclet*wind[1]*test(l) + dtestdx(l,1))))*r*W*
                 hang_weight*hang_weight2;
               }
             } //End of loop over master nodes
@@ -309,8 +303,8 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
 //====================================================================
 // Force build of templates
 //====================================================================
-template class RefineableQSphericalAdvectionDiffusionElement<2>;
-template class RefineableQSphericalAdvectionDiffusionElement<3>;
-template class RefineableQSphericalAdvectionDiffusionElement<4>;
+template class RefineableQAxisymAdvectionDiffusionElement<2>;
+template class RefineableQAxisymAdvectionDiffusionElement<3>;
+template class RefineableQAxisymAdvectionDiffusionElement<4>;
 
 }

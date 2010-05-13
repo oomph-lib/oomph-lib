@@ -6,5 +6,6 @@ marangoni_convection \
 insoluble_surfactant \
 soluble_surfactant \
 thermo \
-thermal_fibre
+thermal_fibre \
+axisym_heat_sphere
 
