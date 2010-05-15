@@ -2022,11 +2022,6 @@ namespace oomph
  void NavierStokesLSCPreconditioner::
  preconditioner_solve(const DoubleVector &r, DoubleVector &z)
  {
-
-  if (this->distribution_pt()->communicator_pt()->my_rank()==0)
-   {
-    std::cout << "iterate" << std::endl;
-   }
     
 #ifdef PARANOID
   if (Preconditioner_has_been_setup==false)

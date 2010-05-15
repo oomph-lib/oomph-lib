@@ -629,6 +629,34 @@ namespace Multi_domain_functions
   }
 
 //========================================================================
+/// Output bins
+//========================================================================
+ void MeshAsGeomObject::output_bins(std::ofstream& outfile)
+ {
+  unsigned nbin=Bin_object_coord_pairs.size();
+  for (unsigned b=0;b<nbin;b++)
+   {
+    unsigned nentry=Bin_object_coord_pairs[b].size();
+    for (unsigned e=0;e<nentry;e++)
+     {
+      FiniteElement* el_pt=Bin_object_coord_pairs[b][e].first;
+      Vector<double> s(Bin_object_coord_pairs[b][e].second);
+      unsigned dim=this->nlagrangian();
+      Vector<double> zeta(dim);
+      el_pt->interpolated_zeta(s,zeta);
+      for (unsigned i=0;i<dim;i++)
+       {
+        outfile << zeta[i] << " ";
+       }
+      outfile << b << std::endl;
+     }
+   }
+ }
+  
+
+
+
+//========================================================================
 ///Calculate the bin numbers of all the neighbours to "bin" given the level
 //========================================================================
  void MeshAsGeomObject::get_neighbouring_bins_helper(

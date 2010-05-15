@@ -218,6 +218,8 @@ namespace oomph
    int n_proc=problem_pt->communicator_pt()->nproc();
 #endif
 
+   unsigned all_count_zetas=0;
+
    // Timing
    double t_start=0.0; double t_end=0.0; double t_local=0.0;
    double t_set=0.0; double t_locate=0.0; double t_spiral_start=0.0;
@@ -271,7 +273,6 @@ namespace oomph
     }
 
    unsigned EL_DIM_LAG = mesh_geom_obj_pt->nlagrangian();
-   //unsigned EL_DIM_EUL = mesh_geom_obj_pt->ndim();
 
    if (!Compute_extreme_bin_coordinates)
     {
@@ -449,7 +450,7 @@ namespace oomph
      // broadcast...
 
      // local size of Zetas array
-     unsigned all_count_zetas=Count_local_zetas;
+     all_count_zetas=Count_local_zetas;
 #ifdef OOMPH_HAS_MPI
      // Only perform the reduction operation if there's more than one process
      if (problem_pt->communicator_pt()->nproc() > 1)
@@ -548,6 +549,7 @@ namespace oomph
      // Do we have any further locating to do?
      // Only perform the reduction operation if there's more than one process
      all_count_zetas=Count_local_zetas;
+
 #ifdef OOMPH_HAS_MPI
      if (problem_pt->communicator_pt()->nproc() > 1)
       {
@@ -562,6 +564,83 @@ namespace oomph
      if (all_count_zetas==0) { break; }
 
     } // end of "spirals" loop
+
+
+   // If we haven't found all zetas we're dead now...
+   if (all_count_zetas!=0)
+    {
+     std::ostringstream error_stream;
+     error_stream 
+      << "Multi_domain_functions::locate_zeta_for_local_coordinates()"
+      << "\nhas failed\n";
+     error_stream 
+      << "\n\nThis is most likely to arise because the two meshes\n"
+      << "that are to be matched don't overlap perfectly or\n"
+      << "because the elements are distorted and too small a \n"
+      << "number of sampling points has been used when setting\n"
+      << "up the bin structure.\n\n"
+      << "You should try to increase the value of \n"
+      << "Multi_domain_functions::Nsample_points from \n"
+      << "its current value of " 
+      << Multi_domain_functions::Nsample_points << "\n";
+
+     std::ofstream outfile;
+     outfile.open("missing_coords_mesh.dat");
+     mesh_pt->output(outfile);
+     outfile.close();
+     outfile.open("missing_coords_ext_mesh.dat");
+     external_mesh_pt->output(outfile);
+     outfile.close();
+     outfile.open("missing_coords_bin.dat");
+     mesh_geom_obj_pt->output_bins(outfile);
+     outfile.close();
+
+     outfile.open("missing_coords.dat");     
+     error_stream << "Failure at element/intpt:\n";
+     unsigned n=External_element_located.size();
+     for (unsigned e=0;e<n;e++)
+      {
+       unsigned n_intpt=External_element_located[e].size();
+       for (unsigned ipt=0;ipt<n_intpt;ipt++)
+        {
+         if (External_element_located[e][ipt]==0)
+          {
+
+           // Cast
+           ElementWithExternalElement *el_pt=
+            dynamic_cast<ElementWithExternalElement*>(mesh_pt->element_pt(e));
+
+           unsigned n_dim_el=el_pt->dim();
+           Vector<double> s(n_dim_el);
+           for (unsigned i=0;i<n_dim_el;i++)
+            {
+             s[i]=el_pt->integral_pt()->knot(ipt,i);
+            }
+           unsigned n_dim=el_pt->node_pt(0)->ndim();
+           Vector<double> x(n_dim);
+           el_pt->interpolated_x(s,x);
+           for (unsigned i=0;i<n_dim;i++)
+            {
+             error_stream << x[i] << " ";
+             outfile<< x[i] << " ";
+            }            
+           error_stream << std::endl;
+           outfile << std::endl;
+          }
+        }
+      }
+     outfile.close();
+
+     error_stream 
+      << "Mesh and external mesh documented in missing_coords_mesh.dat\n"
+      << "and missing_coords_ext_mesh.dat, respectively. Missing \n"
+      << "coordinates in missing_coords.dat\n";
+    throw OomphLibError
+     (error_stream.str(),
+      "Multi_domain_functions::locate_zeta_for_local_coordinates()",
+      OOMPH_EXCEPTION_LOCATION);
+    }               
+   
 
    // Doc timings if required
    if (Doc_timings)

@@ -2231,6 +2231,102 @@ void SolidTElement<3,NNODE_1D>::
 
 
 
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+
+
+//=======================================================================
+/// Face geometry for the TElement elements: The spatial 
+/// dimension of the face elements is one lower than that of the
+/// bulk element but they have the same number of points
+/// along their 1D edges.
+//=======================================================================
+template<unsigned DIM, unsigned NNODE_1D>
+class FaceGeometry<TElement<DIM,NNODE_1D> >: 
+ public virtual TElement<DIM-1,NNODE_1D>
+{
+
+  public:
+ 
+ /// \short Constructor: Call the constructor for the
+ /// appropriate lower-dimensional QElement
+ FaceGeometry() : TElement<DIM-1,NNODE_1D>() {}
+
+};
+
+
+
+//=======================================================================
+/// Face geometry for the 1D TElement elements: Point elements
+//=======================================================================
+template<unsigned NNODE_1D>
+class FaceGeometry<TElement<1,NNODE_1D> >: 
+ public virtual PointElement
+{
+
+  public:
+ 
+ /// \short Constructor: Call the constructor for the
+ /// appropriate lower-dimensional TElement
+ FaceGeometry() : PointElement() {}
+
+};
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+
+
+//=======================================================================
+/// Face geometry for the TElement elements: The spatial 
+/// dimension of the face elements is one lower than that of the
+/// bulk element but they have the same number of points
+/// along their 1D edges.
+//=======================================================================
+template<unsigned DIM, unsigned NNODE_1D>
+class FaceGeometry<SolidTElement<DIM,NNODE_1D> >: 
+ public virtual SolidTElement<DIM-1,NNODE_1D>
+{
+
+  public:
+ 
+ /// \short Constructor: Call the constructor for the
+ /// appropriate lower-dimensional QElement
+ FaceGeometry() : SolidTElement<DIM-1,NNODE_1D>() {}
+
+};
+
+
+
+//=======================================================================
+/// Face geometry for the 1D TElement elements: Point elements
+//=======================================================================
+template<unsigned NNODE_1D>
+class FaceGeometry<SolidTElement<1,NNODE_1D> >: 
+ public virtual SolidPointElement
+{
+
+  public:
+ 
+ /// \short Constructor: Call the constructor for the
+ /// appropriate lower-dimensional TElement
+ FaceGeometry() : SolidPointElement() {}
+
+};
+
 }
+
+
+
 
 #endif

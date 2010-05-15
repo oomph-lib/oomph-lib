@@ -2017,7 +2017,7 @@ namespace Multi_domain_functions
                throw 
                 OomphLibError(
                  "Unable to cast source function to finite element\n",
-               "Multi_domain_functions::locate_zeta_for-missing_coordinates()",
+               "Multi_domain_functions::locate_zeta_for_missing_coordinates()",
                  OOMPH_EXCEPTION_LOCATION);
               }
 #endif
@@ -2300,6 +2300,7 @@ namespace Multi_domain_functions
             }
            else
             {
+
              // If it has failed then add the required information to the
              // arrays which need to be sent to the other processors so that
              // they can perform the locate_zeta
@@ -2313,8 +2314,7 @@ namespace Multi_domain_functions
              // Add the element dimension to the LOCAL Zeta_dim array
              Local_zeta_dim.push_back(el_dim);
              Count_local_zeta_dim++;
-             // Need another array indicating the current element number
-             // for which the locate_zeta method did not work locally?
+
             }
           }
         } // end loop over integration points

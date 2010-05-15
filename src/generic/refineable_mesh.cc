@@ -1425,7 +1425,7 @@ void RefineableMeshBase::refine_base_mesh_as_in_reference_mesh(
 void RefineableMeshBase::refine_as_in_reference_mesh(
  RefineableMeshBase* const &ref_mesh_pt)
 {
- oomph_info << "WARNING : This haas not been checked comprehensively yet"
+ oomph_info << "WARNING : This has not been checked comprehensively yet"
            << std::endl
            << "Check it and remove this break " << std::endl;
  pause("Yes really pause");

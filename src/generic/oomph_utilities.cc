@@ -694,7 +694,7 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
      {
       for (unsigned i=0;i<n;i++) x[i]=x_old[i];
       check=true;
-      std::cout << "Warning: Line search converged on x only!\n";
+      oomph_info << "Warning: Line search converged on x only!\n";
       return;
      } 
     else if (half_residual_squared <= half_residual_squared_old+ALF*alam*slope)

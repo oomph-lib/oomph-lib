@@ -56,101 +56,6 @@ namespace TriangleBoundaryHelper
   
  };
  
-//===================================================
-/// Edge class
-//===================================================
- class Edge
- {
-  
- public:
-  
-  /// Constructor: Pass in the two vertex nodes
-  Edge(Node* node1_pt, Node* node2_pt)
-   {
-    if (node1_pt==node2_pt)
-     {
-#ifdef PARANOID
-      std::ostringstream error_stream;
-      error_stream << "Edge cannot have two identical vertex nodes\n";
-      throw OomphLibError(
-       error_stream.str(),
-       "TriangleMeshBase::setup_boundary_element_info()",
-       OOMPH_EXCEPTION_LOCATION);
-#endif
-     }
-    
-    
-    // Sort lexicographically
-    if (node1_pt>node2_pt)
-     {
-      Node1_pt=node1_pt;
-      Node2_pt=node2_pt;
-     }
-    else
-     {
-      Node1_pt=node2_pt;
-      Node2_pt=node1_pt;
-     }
-    
-   }
-  
-  
-  /// Access to the first vertex node
-  Node* node1_pt() const {return Node1_pt;}
-  
-  /// Access to the second vertex node
-  Node* node2_pt() const {return Node2_pt;}
-  
-  /// Comparison operator
-  bool operator==(const Edge& other) const
-   {
-    if ((Node1_pt==other.node1_pt())&&
-        (Node2_pt==other.node2_pt()))
-     
-     {
-       return true;
-     }
-    else
-     {
-      return false;
-     }
-   }
-  
-  
-  
-  /// Less-than operator
-  bool operator<(const Edge& other) const
-   {
-    if (Node1_pt<other.node1_pt())
-     {
-      return true;
-     }
-    else if (Node1_pt==other.node1_pt())
-     {
-      if (Node2_pt<other.node2_pt())
-       {
-        return true;
-       }
-      else
-       {
-        return false;
-       }
-     }    
-    else
-     {
-      return false;
-     }
-   }
-  
- private:
-  
-  /// First vertex node
-  Node* Node1_pt;
-  
-  /// Second vertex node
-  Node* Node2_pt;
- };
- 
 }
 
 //================================================================
@@ -194,10 +99,10 @@ void TriangleMeshBase::setup_boundary_element_info(std::ostream &outfile)
 
  // Data needed to deal with edges through the
  // interior of the domain
- std::map<TriangleBoundaryHelper::Edge,unsigned> edge_count;
- std::map<TriangleBoundaryHelper::Edge,TriangleBoundaryHelper::BCInfo> 
+ std::map<Edge,unsigned> edge_count;
+ std::map<Edge,TriangleBoundaryHelper::BCInfo> 
   edge_bcinfo;
- std::map<TriangleBoundaryHelper::Edge,TriangleBoundaryHelper::BCInfo>
+ std::map<Edge,TriangleBoundaryHelper::BCInfo>
   face_info;
  MapMatrixMixed<unsigned,FiniteElement*, int > face_count;
  Vector<unsigned> bonus(nbound);
@@ -232,7 +137,7 @@ void TriangleMeshBase::setup_boundary_element_info(std::ostream &outfile)
      if(boundaries_pt[1] && boundaries_pt[2])
       {
        // Create the corresponding edge
-       TriangleBoundaryHelper::Edge edge0(fe_pt->node_pt(1),fe_pt->node_pt(2));
+       Edge edge0(fe_pt->node_pt(1),fe_pt->node_pt(2));
 
        // Update infos about this edge
        TriangleBoundaryHelper::BCInfo info;      
@@ -268,7 +173,7 @@ void TriangleMeshBase::setup_boundary_element_info(std::ostream &outfile)
                               edge_boundary[1],edge_boundary[1].begin()));
 
        // Create the corresponding edge
-       TriangleBoundaryHelper::Edge edge1(fe_pt->node_pt(0),fe_pt->node_pt(2));
+       Edge edge1(fe_pt->node_pt(0),fe_pt->node_pt(2));
 
        // Update infos about this edge
        TriangleBoundaryHelper::BCInfo info;
@@ -300,7 +205,7 @@ void TriangleMeshBase::setup_boundary_element_info(std::ostream &outfile)
                               edge_boundary[2],edge_boundary[2].begin()));
 
        // Create the corresponding edge
-       TriangleBoundaryHelper::Edge edge2(fe_pt->node_pt(0),fe_pt->node_pt(1));
+       Edge edge2(fe_pt->node_pt(0),fe_pt->node_pt(1));
 
        // Update infos about this edge
        TriangleBoundaryHelper::BCInfo info;
@@ -366,13 +271,12 @@ void TriangleMeshBase::setup_boundary_element_info(std::ostream &outfile)
 
 
  // Loop over all edges that are located on a boundary
- typedef std::map<TriangleBoundaryHelper::Edge,
-  TriangleBoundaryHelper::BCInfo>::iterator ITE;
+ typedef std::map<Edge,TriangleBoundaryHelper::BCInfo>::iterator ITE;
  for (ITE it=edge_bcinfo.begin();
       it!=edge_bcinfo.end();
       it++)
   {
-   TriangleBoundaryHelper::Edge current_edge = it->first;
+   Edge current_edge = it->first;
    unsigned  bound=it->second.Boundary; 
    
    //If the edge has been visited only once

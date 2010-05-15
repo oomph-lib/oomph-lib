@@ -127,7 +127,7 @@ SimpleRectangularTriMesh<ELEMENT>::SimpleRectangularTriMesh(
  
  //Allocate memory for the corner node of the first element
  //(which is not created loop as all subsequent bottom corners already exist)
- Node_pt[node_count] = finite_element_pt(0)->construct_node(1);
+ Node_pt[node_count] = finite_element_pt(0)->construct_node(1,time_stepper_pt);
 
  //Set the pointer from the element
  finite_element_pt(0)->node_pt(1) = Node_pt[node_count];
@@ -168,19 +168,19 @@ SimpleRectangularTriMesh<ELEMENT>::SimpleRectangularTriMesh(
        if (i==0)
         {
          Node_pt[node_count+Nx+1] = finite_element_pt(element_count)->
-          construct_node(0);
+          construct_node(0,time_stepper_pt);
         }
 
        //If on bottom row, allocate the bottom right corner node
        if (j==0)
         {
          Node_pt[node_count+1] = finite_element_pt(element_count)->
-          construct_node(2);
+          construct_node(2,time_stepper_pt);
         }
 
        //Always need to allocate top right corner node
        Node_pt[node_count+Nx+2] = finite_element_pt(element_count+1)->
-        construct_node(1);
+        construct_node(1,time_stepper_pt);
 
        //Bottom left corner node is already allocated
        
@@ -254,13 +254,13 @@ SimpleRectangularTriMesh<ELEMENT>::SimpleRectangularTriMesh(
          if (j==0)
           {
            Node_pt[node_count] = finite_element_pt(element_count)->
-            construct_node(4);
+            construct_node(4,time_stepper_pt);
           }
          
          // Due to directions of iteration node at middle of top box edge 
          // (in next element) always needs allocating
          Node_pt[node_count+Nx] = finite_element_pt(element_count+1)->
-          construct_node(4);
+          construct_node(4,time_stepper_pt);
          
          // Set pointers to the top/bottom middle nodes
          // Bottom node
@@ -313,13 +313,13 @@ SimpleRectangularTriMesh<ELEMENT>::SimpleRectangularTriMesh(
          if (i==0)
           {
            Node_pt[node_count] = finite_element_pt(element_count)->
-            construct_node(3);
+            construct_node(3,time_stepper_pt);
           }
          
          // The mid node on the right hand side always needs constructing
          // within the bounds of the mesh
          Node_pt[node_count+1] = finite_element_pt(element_count+1)->
-          construct_node(3);
+          construct_node(3,time_stepper_pt);
 
          // Set pointers from the elements to new nodes
          finite_element_pt(element_count)->node_pt(3)=Node_pt[node_count];
@@ -362,7 +362,7 @@ SimpleRectangularTriMesh<ELEMENT>::SimpleRectangularTriMesh(
       {  
        // The middle node always needs constructing
        Node_pt[node_count] = finite_element_pt(element_count)->
-        construct_node(5);
+        construct_node(5,time_stepper_pt);
        
        // Set pointers from the elements to new nodes
        finite_element_pt(element_count)->node_pt(5)=Node_pt[node_count];
@@ -415,13 +415,13 @@ SimpleRectangularTriMesh<ELEMENT>::SimpleRectangularTriMesh(
          if (j==0)
           {
            Node_pt[node_count] = finite_element_pt(element_count)->
-            construct_node(5);
+            construct_node(5,time_stepper_pt);
           }
          
          // Due to directions of iteration node at middle left of top box edge 
          // (in next element) always needs allocating
          Node_pt[node_count+Nx] = finite_element_pt(element_count+1)->
-          construct_node(6);
+          construct_node(6,time_stepper_pt);
          
          // Set pointers to the top/bottom middle nodes
          // Bottom node
@@ -472,13 +472,13 @@ SimpleRectangularTriMesh<ELEMENT>::SimpleRectangularTriMesh(
          if (j==0)
           {
            Node_pt[node_count] = finite_element_pt(element_count)->
-            construct_node(6);
+            construct_node(6,time_stepper_pt);
           }
          
          // Due to directions of iteration node at middle left of top box edge 
          // (in next element) always needs allocating
          Node_pt[node_count+Nx] = finite_element_pt(element_count+1)->
-          construct_node(5);
+          construct_node(5,time_stepper_pt);
          
          // Set pointers to the top/bottom middle nodes
          // Bottom node
@@ -531,13 +531,13 @@ SimpleRectangularTriMesh<ELEMENT>::SimpleRectangularTriMesh(
          if (i==0)
           {
            Node_pt[node_count] = finite_element_pt(element_count)->
-            construct_node(4);
+            construct_node(4,time_stepper_pt);
           }
          
          // The mid node on the right hand side always needs constructing
          // within the bounds of the mesh
          Node_pt[node_count+1] = finite_element_pt(element_count+1)->
-          construct_node(3);
+          construct_node(3,time_stepper_pt);
          
          // Set pointers from the elements to new nodes
          finite_element_pt(element_count)->node_pt(4)=Node_pt[node_count];
@@ -586,13 +586,13 @@ SimpleRectangularTriMesh<ELEMENT>::SimpleRectangularTriMesh(
          if (i==0)
           {
            Node_pt[node_count] = finite_element_pt(element_count)->
-            construct_node(3);
+            construct_node(3,time_stepper_pt);
           }
          
          // The mid node on the right hand side always needs constructing
          // within the bounds of the mesh
          Node_pt[node_count+1] = finite_element_pt(element_count+1)->
-          construct_node(4);
+          construct_node(4,time_stepper_pt);
 
          // Set pointers from the elements to new nodes
          finite_element_pt(element_count)->node_pt(3)=Node_pt[node_count];
@@ -633,7 +633,7 @@ SimpleRectangularTriMesh<ELEMENT>::SimpleRectangularTriMesh(
       {  
        // The middle node always needs constructing
        Node_pt[node_count] = finite_element_pt(element_count)->
-        construct_node(9);
+        construct_node(9,time_stepper_pt);
        
        // Set pointers from the elements to new nodes
        finite_element_pt(element_count)->node_pt(9)=Node_pt[node_count];
@@ -664,7 +664,7 @@ SimpleRectangularTriMesh<ELEMENT>::SimpleRectangularTriMesh(
       {  
        // The node always needs constructing
        Node_pt[node_count] = finite_element_pt(element_count)->
-        construct_node(7);
+        construct_node(7,time_stepper_pt);
        
        // Set pointers from the elements to new nodes
        finite_element_pt(element_count)->node_pt(7)=Node_pt[node_count];
@@ -697,7 +697,7 @@ SimpleRectangularTriMesh<ELEMENT>::SimpleRectangularTriMesh(
       {  
        // The node always needs constructing
        Node_pt[node_count] = finite_element_pt(element_count)->
-        construct_node(8);
+        construct_node(8,time_stepper_pt);
        
        // Set pointers from the elements to new nodes
        finite_element_pt(element_count)->node_pt(8)=Node_pt[node_count];
@@ -727,7 +727,7 @@ SimpleRectangularTriMesh<ELEMENT>::SimpleRectangularTriMesh(
       {  
        // The middle node always needs constructing
        Node_pt[node_count] = finite_element_pt(element_count+1)->
-        construct_node(9);
+        construct_node(9,time_stepper_pt);
        
        // Set pointers from the elements to new nodes
        finite_element_pt(element_count+1)->node_pt(9)=Node_pt[node_count];

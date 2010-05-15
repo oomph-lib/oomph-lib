@@ -102,9 +102,6 @@ private:
 
 public:
  
-// using namespace Multi_domain_functions;
- 
- 
  ///\short Constructor, pass the pointer to the mesh
   MeshAsGeomObject(Mesh* const &mesh_pt) : GeomObject()
   {
@@ -270,6 +267,9 @@ public:
  ///Calculate the bin numbers of all the neighbours to "bin" given the level
  void get_neighbouring_bins_helper(const unsigned& bin, const unsigned& level,
                                    Vector<unsigned>& neighbour_bin);
+
+ /// Output bins
+ void output_bins(std::ofstream& outfile);
 
 };
 

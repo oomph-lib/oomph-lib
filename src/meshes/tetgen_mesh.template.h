@@ -303,26 +303,6 @@ public:
      this->setup_boundary_coordinates(b,switch_normal);
     }
   }
-  
-  /// Scale all nodal coordinates by given factor hierher move into Mesh base 
-  /// class
-  void scale_mesh(const double& factor)
-  {
-   unsigned nnod=this->nnode();
-   unsigned dim=this->node_pt(0)->ndim();
-   for (unsigned j=0;j<nnod;j++)
-    {
-     Node* nod_pt=this->node_pt(j);
-     for (unsigned i=0;i<dim;i++)
-      {
-       nod_pt->x(i)*=factor;
-      }
-    }
-
-   //Assign the Lagrangian coordinates
-   set_lagrangian_nodal_coordinates();
-
-  }
 
  /// Empty Destructor
  virtual ~SolidTetMesh() { }

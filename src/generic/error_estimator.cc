@@ -1497,8 +1497,16 @@ void Z2ErrorEstimator::get_element_errors(OomphCommunicator* comm_pt,
     Vector<double> normalised_compound_flux_error(n_compound_flux);
     for(int i=0;i<n_compound_flux;i++)
      {
-      normalised_compound_flux_error[i] = 
-       elemental_compound_flux_error(e,i) / flux_norm[i]; 
+      if (flux_norm[i]!=0.0)
+       {
+        normalised_compound_flux_error[i] = 
+         elemental_compound_flux_error(e,i) / flux_norm[i]; 
+       }
+      else
+       {
+        normalised_compound_flux_error[i] = 
+         elemental_compound_flux_error(e,i);
+       }
      }
     
     //calculate the combined error estimate

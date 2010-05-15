@@ -233,7 +233,88 @@ public:
  /// (Empty virtual function -- implement this for specific 
  /// Mesh classes)
  virtual void setup_boundary_element_info(std::ostream &outfile) {}
+  
+ /// \short Output boundary coordinates on boundary b -- template argument
+ /// specifies the bulk element type (needed to create FaceElement
+ /// of appropriate type on mesh boundary).
+ template<class BULK_ELEMENT>
+  void doc_boundary_coordinates(const unsigned& b, std::ofstream& the_file)
+  { 
+   // Get spatial dimension
+   unsigned dim=finite_element_pt(0)->node_pt(0)->ndim();
+   
+   // Loop over all elements on boundaries
+   unsigned nel=this->nboundary_element(b);
+   
+   // Loop over the bulk elements adjacent to boundary b
+   for(unsigned e=0;e<nel;e++)
+    {
+     // Get pointer to the bulk element that is adjacent to boundary b
+     FiniteElement* bulk_elem_pt = this->boundary_element_pt(b,e);
+     
+     //Find the index of the face of element e along boundary b
+     int face_index = this->face_index_at_boundary(b,e);
+     
+     // Create new face element 
+     DummyFaceElement<BULK_ELEMENT>* el_pt=
+      new DummyFaceElement<BULK_ELEMENT>(bulk_elem_pt,face_index);
+     
+     // Specify boundary id in bulk mesh (needed to extract 
+     // boundary coordinate)
+     el_pt->set_boundary_number_in_bulk_mesh(b); 
+     
+     // Doc boundary coordinate
+     Vector<double> s(dim-1);
+     Vector<double> zeta(dim-1);
+     Vector<double> x(dim);
+     unsigned n_plot=5;
+     the_file << el_pt->tecplot_zone_string(n_plot);
+     
+     // Loop over plot points
+     unsigned num_plot_points=el_pt->nplot_points(n_plot);
+     for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+      {         
+       // Get local coordinates of plot point
+       el_pt->get_s_plot(iplot,n_plot,s);         
+       el_pt->interpolated_zeta(s,zeta);
+       el_pt->interpolated_x(s,x);
+       for (unsigned i=0;i<dim;i++)
+        {
+         the_file << x[i] << " ";
+        }
+       for (unsigned i=0;i<(dim-1);i++)
+        {
+         the_file << zeta[i] << " ";
+        }
+       
+       the_file << std::endl;
+      }
+     el_pt->write_tecplot_zone_footer(the_file,n_plot);
+     
+     // Cleanup 
+     delete el_pt;
+    } 
+  }
+
+  
+ /// \short Scale all nodal coordinates by given factor. Virtual
+ /// so it can be overloaded in SolidMesh class where it also
+ /// re-assigns the Lagrangian coordinates.
+ virtual void scale_mesh(const double& factor)
+ {
+  unsigned nnod=this->nnode();
+  unsigned dim=this->node_pt(0)->ndim();
+  for (unsigned j=0;j<nnod;j++)
+   {
+    Node* nod_pt=this->node_pt(j);
+    for (unsigned i=0;i<dim;i++)
+     {
+      nod_pt->x(i)*=factor;
+     }
+   }
+ }
  
+
  /// Broken copy constructor
  Mesh(const Mesh& dummy) 
   { 
@@ -1404,6 +1485,16 @@ class SolidMesh : public virtual Mesh
  /// Eulerian ones
  void set_lagrangian_nodal_coordinates();
 
+
+ /// \short Scale all nodal coordinates by given factor and re-assign the
+ /// Lagrangian coordinates
+ void scale_mesh(const double& factor)
+ {
+  Mesh::scale_mesh(factor);
+  
+  //Re-assign the Lagrangian coordinates
+  set_lagrangian_nodal_coordinates();
+ }
  /// \short Static problem that can be used to assign initial conditions
  /// on a given  solid mesh (need to define this as a static problem 
  /// somewhere because deleting the problem would wipe out the mesh too!)
@@ -1413,6 +1504,108 @@ class SolidMesh : public virtual Mesh
 };
 
 
+
+
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+
+
+
+//===================================================
+/// Edge class
+//===================================================
+ class Edge
+ {
+  
+ public:
+  
+  /// Constructor: Pass in the two vertex nodes
+  Edge(Node* node1_pt, Node* node2_pt)
+   {
+    if (node1_pt==node2_pt)
+     {
+#ifdef PARANOID
+      std::ostringstream error_stream;
+      error_stream << "Edge cannot have two identical vertex nodes\n";
+      throw OomphLibError(
+       error_stream.str(),
+       "Edge::Edge()",
+       OOMPH_EXCEPTION_LOCATION);
+#endif
+     }
+    
+    
+    // Sort lexicographically based on pointer address of nodes
+    if (node1_pt>node2_pt)
+     {
+      Node1_pt=node1_pt;
+      Node2_pt=node2_pt;
+     }
+    else
+     {
+      Node1_pt=node2_pt;
+      Node2_pt=node1_pt;
+     }    
+   }
+  
+  
+  /// Access to the first vertex node
+  Node* node1_pt() const {return Node1_pt;}
+  
+  /// Access to the second vertex node
+  Node* node2_pt() const {return Node2_pt;}
+  
+  /// Comparison operator
+  bool operator==(const Edge& other) const
+   {
+    if ((Node1_pt==other.node1_pt())&&
+        (Node2_pt==other.node2_pt()))
+     
+     {
+       return true;
+     }
+    else
+     {
+      return false;
+     }
+   }
+  
+  
+  
+  /// Less-than operator
+  bool operator<(const Edge& other) const
+   {
+    if (Node1_pt<other.node1_pt())
+     {
+      return true;
+     }
+    else if (Node1_pt==other.node1_pt())
+     {
+      if (Node2_pt<other.node2_pt())
+       {
+        return true;
+       }
+      else
+       {
+        return false;
+       }
+     }    
+    else
+     {
+      return false;
+     }
+   }
+  
+ private:
+  
+  /// First vertex node
+  Node* Node1_pt;
+  
+  /// Second vertex node
+  Node* Node2_pt;
+ };
+ 
 
 
 

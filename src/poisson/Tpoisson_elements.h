@@ -247,7 +247,7 @@ class FaceGeometry<TPoissonElement<DIM,NNODE_1D> >:
   public:
  
  /// \short Constructor: Call the constructor for the
- /// appropriate lower-dimensional QElement
+ /// appropriate lower-dimensional TElement
  FaceGeometry() : TElement<DIM-1,NNODE_1D>() {}
 
 };

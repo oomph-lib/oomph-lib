@@ -659,17 +659,10 @@ void StorableShapeElementBase::shape_at_knot(const unsigned &ipt, Shape &psi)
  //If we are not storing the shape functions, calculate the values
  if(Shape_stored_pt==0)
   {
-#ifdef OOMPH_STORED_SHAPE_FUNCTIONS_VERBOSE
-   oomph_info << "computing" << std::endl;
-#endif
    FiniteElement::shape_at_knot(ipt,psi);
   }
  else
   {
-#ifdef OOMPH_STORED_SHAPE_FUNCTIONS_VERBOSE
-   oomph_info << "reading" << std::endl;
-   pause("done");
-#endif
    //Read out the stored shape functions
    //Note this will copy the values by pointer (fast)
    psi = (*Shape_stored_pt)[ipt];
@@ -688,17 +681,10 @@ dshape_local_at_knot(const unsigned &ipt, Shape &psi,
  //If we are not storing the first derivatives, calculate them
  if(DShape_local_stored_pt==0)
   {
-#ifdef OOMPH_STORED_SHAPE_FUNCTIONS_VERBOSE
-   oomph_info << "computing" << std::endl;
-#endif
    FiniteElement::dshape_local_at_knot(ipt,psi,dpsids);
   }
  else
   {
-#ifdef OOMPH_STORED_SHAPE_FUNCTIONS_VERBOSE
-   oomph_info << "reading" << std::endl;
-   pause("done");
-#endif
    //Read out the stored shape functions
    //Set the internal pointers in psi and dpsids
    psi = (*Shape_stored_pt)[ipt];
@@ -718,17 +704,10 @@ d2shape_local_at_knot(const unsigned &ipt, Shape &psi,
  //If we are not storing the second derivatives, calculate them on the fly
  if(D2Shape_local_stored_pt==0)
   {
-#ifdef OOMPH_STORED_SHAPE_FUNCTIONS_VERBOSE
-   oomph_info << "computing" << std::endl;
-#endif
    FiniteElement::d2shape_local_at_knot(ipt,psi,dpsids,d2psids);
   }
  else
   {
-#ifdef OOMPH_STORED_SHAPE_FUNCTIONS_VERBOSE
-   oomph_info << "reading" << std::endl;
-   pause("done");
-#endif
    //Read out the stored shape functions
    //Set the internal pointers in psi, dpsids, and d2psids
    psi = (*Shape_stored_pt)[ipt];
@@ -750,17 +729,10 @@ dshape_eulerian_at_knot(const unsigned &ipt, Shape &psi,
  //If we are not storing the values, return the calculated values
  if(DShape_eulerian_stored_pt==0)
   {
-#ifdef OOMPH_STORED_SHAPE_FUNCTIONS_VERBOSE
-   oomph_info << "computing" << std::endl;
-#endif
    return FiniteElement::dshape_eulerian_at_knot(ipt,psi,dpsidx);
   }
  else
   {
-#ifdef OOMPH_STORED_SHAPE_FUNCTIONS_VERBOSE
-   oomph_info << "reading" << std::endl;
-   pause("done");
-#endif
    //Set internal pointers in the shape functions.
    psi = (*Shape_stored_pt)[ipt];
    dpsidx = (*DShape_eulerian_stored_pt)[ipt];
@@ -782,17 +754,10 @@ d2shape_eulerian_at_knot(const unsigned &ipt, Shape &psi,
  //If we are not storing the values return the calculated values
  if(D2Shape_eulerian_stored_pt==0)
   {
-#ifdef OOMPH_STORED_SHAPE_FUNCTIONS_VERBOSE
-   oomph_info << "computing" << std::endl;
-#endif
    return FiniteElement::d2shape_eulerian_at_knot(ipt,psi,dpsidx,d2psidx);
   }
  else
   {
-#ifdef OOMPH_STORED_SHAPE_FUNCTIONS_VERBOSE
-   oomph_info << "reading" << std::endl;
-   pause("done");
-#endif
    //Set internal pointers in the shape functions
    psi = (*Shape_stored_pt)[ipt];
    dpsidx = (*DShape_eulerian_stored_pt)[ipt];
@@ -812,17 +777,10 @@ double StorableShapeElementBase::J_eulerian_at_knot(const unsigned &ipt) const
  //If we are not storing the values, return the calculated values
  if(Jacobian_eulerian_stored_pt==0)
   {
-#ifdef OOMPH_STORED_SHAPE_FUNCTIONS_VERBOSE
-   oomph_info << "computing" << std::endl;
-#endif
    return FiniteElement::J_eulerian_at_knot(ipt);
   }
  else
   {
-#ifdef OOMPH_STORED_SHAPE_FUNCTIONS_VERBOSE
-   oomph_info << "reading" << std::endl;
-   pause("done");
-#endif
    //Return the stored value of the jacobian
    return ((*Jacobian_eulerian_stored_pt)[ipt]);
   }
@@ -1144,17 +1102,10 @@ const
  //If we are not storing the values, return the calculated values
  if(DShape_lagrangian_stored_pt==0)
   {
-#ifdef OOMPH_STORED_SHAPE_FUNCTIONS_VERBOSE
-   oomph_info << "computing" << std::endl;
-#endif
    return SolidFiniteElement::dshape_lagrangian_at_knot(ipt,psi,dpsidxi);
   }
  else
   {
-#ifdef OOMPH_STORED_SHAPE_FUNCTIONS_VERBOSE
-   oomph_info << "reading" << std::endl;
-   pause("done");
-#endif
    //Set the internal pointers in the shape functions
    psi = shape_stored_pt(ipt);
    dpsidxi = (*DShape_lagrangian_stored_pt)[ipt];
@@ -1176,18 +1127,11 @@ d2shape_lagrangian_at_knot(const unsigned &ipt, Shape &psi,
  //If we are not storing the values return the calculated values
  if(D2Shape_lagrangian_stored_pt==0)
   {
-#ifdef OOMPH_STORED_SHAPE_FUNCTIONS_VERBOSE
-   oomph_info << "computing" << std::endl;
-#endif
    return 
     SolidFiniteElement::d2shape_lagrangian_at_knot(ipt,psi,dpsidxi,d2psidxi);
   }
  else
   {
-#ifdef OOMPH_STORED_SHAPE_FUNCTIONS_VERBOSE
-   oomph_info << "reading" << std::endl;
-   pause("done");
-#endif
    //Set the internal values of the pointers in the Shape objects
    psi = shape_stored_pt(ipt);
    dpsidxi = (*DShape_lagrangian_stored_pt)[ipt];
