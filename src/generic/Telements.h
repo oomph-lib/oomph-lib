@@ -42,6 +42,181 @@
 
 namespace oomph
 {
+
+
+
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+
+
+
+//===================================================
+/// Triangular Face class
+//===================================================
+ class TFace
+ {
+  
+ public:
+  
+  /// Constructor: Pass in the three vertex nodes
+  TFace(Node* node1_pt, Node* node2_pt, Node* node3_pt)
+   {
+    if ( (node1_pt==node2_pt) || (node2_pt==node3_pt) || (node1_pt==node3_pt) )
+     {
+#ifdef PARANOID
+      std::ostringstream error_stream;
+      error_stream << "TFace cannot have two identical vertex nodes\n";
+      throw OomphLibError(
+       error_stream.str(),
+       "TFace::TFace()",
+       OOMPH_EXCEPTION_LOCATION);
+#endif
+     }
+    
+    // Sort lexicographically based on pointer address of nodes
+    std::set<Node*> nodes;
+    nodes.insert(node1_pt);
+    nodes.insert(node2_pt);
+    nodes.insert(node3_pt);
+    std::set<Node*>::iterator it=nodes.begin();
+    Node1_pt=(*it);
+    it++;
+    Node2_pt=(*it);
+    it++;
+    Node3_pt=(*it);
+    it++;
+   }
+  
+  
+  /// Access to the first vertex node
+  Node* node1_pt() const {return Node1_pt;}
+  
+  /// Access to the second vertex node
+  Node* node2_pt() const {return Node2_pt;}
+  
+  /// Access to the third vertex node
+  Node* node3_pt() const {return Node3_pt;}
+  
+  /// Comparison operator
+  bool operator==(const TFace& other) const
+   {
+    if ((Node1_pt==other.node1_pt())&&
+        (Node2_pt==other.node2_pt())&&
+        (Node3_pt==other.node3_pt()))     
+     {
+       return true;
+     }
+    else
+     {
+      return false;
+     }
+   }
+  
+  
+  
+  /// Less-than operator
+  bool operator<(const TFace& other) const
+   {
+    if (Node1_pt<other.node1_pt())
+     {
+      return true;
+     }
+    else if (Node1_pt==other.node1_pt())
+     {
+      if (Node2_pt<other.node2_pt())
+       {
+        return true;
+       }
+      else if (Node2_pt==other.node2_pt())
+       {
+        if (Node3_pt<other.node3_pt())
+         {
+          return true;
+         }
+        else
+         {
+          return false;
+         }
+       }
+      else
+       {
+        return false;
+       }
+     }    
+    else
+     {
+      return false;
+     }
+   }
+
+
+  /// \short Test whether the face lies on a boundary. Relatively simple
+  /// test, based on all vertices lying on (some) boundary.
+  bool is_on_boundary()  const
+  {
+   return (Node1_pt->is_on_boundary() && 
+           Node2_pt->is_on_boundary() &&
+           Node3_pt->is_on_boundary() );
+  }
+  
+
+  /// \short Test whether the face is a boundary face, i.e. does it
+  /// connnect three boundary nodes?
+  bool is_boundary_face()  const
+  {
+   return ((dynamic_cast<BoundaryNodeBase*>(Node1_pt)!=0)&&
+           (dynamic_cast<BoundaryNodeBase*>(Node2_pt)!=0)&&
+           (dynamic_cast<BoundaryNodeBase*>(Node3_pt)!=0));
+  }
+  
+  /// \short Access to pointer to set of mesh boundaries that this 
+  /// face occupies; NULL if the node is not on any boundary.
+  /// Construct via set intersection of the boundary sets for the
+  /// associated vertex nodes
+  void get_boundaries_pt(std::set<unsigned>* &boundaries_pt) 
+   {
+    std::set<unsigned> set1;
+    std::set<unsigned>* set1_pt=&set1;
+    Node1_pt->get_boundaries_pt(set1_pt);
+    std::set<unsigned> set2;
+    std::set<unsigned>* set2_pt=&set2;
+    Node2_pt->get_boundaries_pt(set2_pt);
+    std::set<unsigned> set3;
+    std::set<unsigned>* set3_pt=&set3;
+    Node3_pt->get_boundaries_pt(set3_pt);
+    std::set<unsigned> aux_set;
+    set_intersection((*set1_pt).begin(),(*set1_pt).end(),
+                     (*set2_pt).begin(),(*set2_pt).end(),
+                     inserter(aux_set, aux_set.begin())); 
+    set_intersection(aux_set.begin(),aux_set.end(),
+                     (*set3_pt).begin(),(*set3_pt).end(),
+                     inserter((*boundaries_pt), (*boundaries_pt).begin())); 
+   }
+
+
+ private:
+  
+  /// First vertex node
+  Node* Node1_pt;
+  
+  /// Second vertex node
+  Node* Node2_pt;
+
+  /// Third vertex node
+  Node* Node3_pt;
+
+ };
+ 
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+
+
 //========================================================================
 /// A class for those member functions that must be fully specialised
 /// for the Telements. The fact that member functions of partially

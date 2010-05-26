@@ -40,9 +40,9 @@ namespace oomph
 
 
  //======================================================================
- /// \short Constructor: Pass name of xda file. Boolean specifies if all
+ /// \short Constructor: Pass name of xda file. Note that all
  /// boundary elements get their own ID -- this is required for
- /// FSI problems. In this case, the vector containing the oomph-lib
+ /// FSI problems. The vector containing the oomph-lib
  /// boundary IDs of all oomph-lib boundaries that collectively form
  /// a given boundary as specified in the xda input file can be
  /// obtained from the access function oomph_lib_boundary_ids(...). 
@@ -50,7 +50,6 @@ namespace oomph
  //======================================================================
  template <class ELEMENT>
  XdaTetMesh<ELEMENT>::XdaTetMesh(const std::string xda_file_name, 
-                                 const bool& use_separate_boundary_ids,
                                  TimeStepper* time_stepper_pt)
  {
   // Open and process xda input file
@@ -183,11 +182,8 @@ namespace oomph
 
     // Turn into zero-based oomph-lib mesh boundary id
     unsigned oomph_lib_bound_id=bound_id-1;
-    if (use_separate_boundary_ids)
-     {
-      oomph_lib_bound_id=count;
-      Boundary_id[bound_id].push_back(count);
-     }
+    oomph_lib_bound_id=count;
+    Boundary_id[bound_id].push_back(count);
 
     // Increment number of separate boundary faces
     count++;
@@ -314,6 +310,16 @@ namespace oomph
 
   // Figure out which elements are next to the boundaries.
   setup_boundary_element_info();
+
+
+  // Setup boundary coordinates 
+  unsigned nb=nboundary();
+  for (unsigned b=0;b<nb;b++)
+   {
+    bool switch_normal=false;
+    setup_boundary_coordinates(b,switch_normal); 
+   }
+  
  }
 
  

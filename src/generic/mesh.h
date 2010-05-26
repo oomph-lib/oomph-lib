@@ -1596,6 +1596,22 @@ class SolidMesh : public virtual Mesh
       return false;
      }
    }
+
+  /// \short Test whether the Edge lies on a boundary. Relatively simple
+  /// test, based on both vertices lying on (some) boundary.
+  bool is_on_boundary()  const
+  {
+   return (Node1_pt->is_on_boundary() && Node2_pt->is_on_boundary() );
+  }
+
+
+  /// \short Test whether the Edge is a boundary edge, i.e. does it
+  /// connnect two boundary nodes?
+  bool is_boundary_edge()  const
+  {
+   return ((dynamic_cast<BoundaryNodeBase*>(Node1_pt)!=0)&&
+           (dynamic_cast<BoundaryNodeBase*>(Node2_pt)!=0));
+  }
   
  private:
   

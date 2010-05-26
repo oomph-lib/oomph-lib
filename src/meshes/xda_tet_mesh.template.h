@@ -48,15 +48,14 @@ namespace oomph
 
    public:
   
-  /// \short Constructor: Pass name of xda file. Boolean specifies if all
-  /// boundary elements get their own ID -- this is required for
-  /// FSI problems. In this case, the vector containing the oomph-lib
+  /// \short Constructor: Pass name of xda file. Note that
+  /// all boundary elements get their own ID -- this is required for
+  /// FSI problems. In this case; the vector containing the oomph-lib
   /// boundary IDs of all oomph-lib boundaries that collectively form
   /// a given boundary as specified in the xda input file can be
   /// obtained from the access function oomph_lib_boundary_ids(...). 
   /// Timestepper defaults to steady pseudo-timestepper.
-  XdaTetMesh(const std::string xda_file_name, 
-             const bool& use_separate_boundary_ids,
+  XdaTetMesh(const std::string xda_file_name,
              TimeStepper* time_stepper_pt=
              &Mesh::Default_TimeStepper);
   
@@ -90,6 +89,13 @@ namespace oomph
                                   const bool& switch_normal,
                                   std::ofstream& outfile);
   
+  /// \short Access function to the number of distinct boundaries specified
+  /// in the original xda enumeration.
+  unsigned nxda_boundary()
+   {
+    return Boundary_id.size();
+   }
+
   /// \short Access functions to the Vector of oomph-lib boundary ids
   /// that make up boundary b in the original xda enumeration
   Vector<unsigned> oomph_lib_boundary_ids(const unsigned& xda_boundary_id)
@@ -103,7 +109,49 @@ namespace oomph
   /// the overall boundary specified in the xda file.
   Vector<Vector<unsigned> > Boundary_id;
 
-}; 
+ }; 
+ 
+ 
+ 
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+ 
+ 
+ 
+ //==========================================================================
+ /// Xda-based tet mesh upgraded to become a solid mesh.
+ //=========================================================================
+ template<class ELEMENT>
+  class SolidXdaTetMesh : public virtual XdaTetMesh<ELEMENT>,
+  public virtual SolidMesh 
+  {
+   
+    public:
+   
+    /// \short Constructor. Boundary coordinates are setup 
+    /// automatically.
+    SolidXdaTetMesh(const std::string xda_file_name,
+                    TimeStepper* time_stepper_pt=
+                    &Mesh::Default_TimeStepper) : 
+   XdaTetMesh<ELEMENT>(xda_file_name, time_stepper_pt)
+    {
+     //Assign the Lagrangian coordinates
+     set_lagrangian_nodal_coordinates();
+    }
+   
+   
+   /// Empty Destructor
+   virtual ~SolidXdaTetMesh() {}
+   
+  };
+ 
+
+
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
 
 
 }

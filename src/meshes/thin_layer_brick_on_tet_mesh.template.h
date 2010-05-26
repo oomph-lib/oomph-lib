@@ -30,6 +30,7 @@
 
 
 #include "../generic/brick_mesh.h"
+#include "../generic/refineable_brick_mesh.h"
 
 namespace oomph
 {
@@ -109,6 +110,186 @@ namespace oomph
   Vector<Vector<unsigned> > In_out_boundary_id;
 
  };
+
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+
+//========================================================================
+/// Refineable brick mesh layer built on top of a given tet mesh. Typically
+/// used in FSI problems where the tet mesh is the fluid mesh and this
+/// mesh acts as the solid mesh that surrounds the FSI interface.
+//========================================================================
+ template<class ELEMENT>
+  class RefineableThinLayerBrickOnTetMesh : 
+ public virtual ThinLayerBrickOnTetMesh<ELEMENT>,
+  public virtual RefineableBrickMesh<ELEMENT>
+  {
+ 
+   public:
+ 
+  /// \short Constructor: Specify (quadratic) tet mesh, boundary IDs of 
+  /// boundary on which the current mesh is to be erected (in an FSI context
+  /// this boundary tends to be the FSI boundary of the fluid mesh. Also 
+  /// specify the uniform thickness of layer, and the number of element layers. 
+  /// The vectors stored in in_out_boundary_ids contain the boundary
+  /// IDs of the other boundaries in the tet mesh. In an FSI context
+  /// these typically identify the in/outflow boundaries in the fluid
+  /// mesh. The boundary enumeration of the current mesh follows the
+  /// one of the underlying fluid mesh: The enumeration of the FSI boundary
+  /// matches (to enable the setup of the FSI matching); the "in/outflow"
+  /// faces in this mesh inherit the same enumeration as the in/outflow
+  /// faces in the underlying fluid mesh. Finally, the "outer" boundary
+  /// gets its own boundary ID. 
+  /// Timestepper defaults to steady pseudo-timestepper.
+  RefineableThinLayerBrickOnTetMesh(Mesh* tet_mesh_pt, 
+                                    const Vector<unsigned>& boundary_ids,
+                                    const double& h_thick,
+                                    const unsigned& nlayer,
+                                    const Vector<Vector<unsigned> >& 
+                                    in_out_boundary_id,
+                                    TimeStepper* time_stepper_pt=
+                                    &Mesh::Default_TimeStepper) :
+   ThinLayerBrickOnTetMesh<ELEMENT>(tet_mesh_pt, 
+                                    boundary_ids,
+                                    h_thick,
+                                    nlayer,
+                                    in_out_boundary_id,
+                                    time_stepper_pt)
+    {     
+     // Nodal positions etc. were created in constructor for
+     // nonrefineable mesh. Only need to setup quadtree forest
+     this->setup_octree_forest();
+    }
+   
+ };
+
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+
+//========================================================================
+/// Solid brick mesh layer built on top of a given tet mesh. Typically
+/// used in FSI problems where the tet mesh is the fluid mesh and this
+/// mesh acts as the solid mesh that surrounds the FSI interface.
+//========================================================================
+ template<class ELEMENT>
+  class SolidThinLayerBrickOnTetMesh : 
+ public virtual ThinLayerBrickOnTetMesh<ELEMENT>,
+  public virtual SolidMesh
+  {
+ 
+   public:
+ 
+  /// \short Constructor: Specify (quadratic) tet mesh, boundary IDs of 
+  /// boundary on which the current mesh is to be erected (in an FSI context
+  /// this boundary tends to be the FSI boundary of the fluid mesh. Also 
+  /// specify the uniform thickness of layer, and the number of element layers. 
+  /// The vectors stored in in_out_boundary_ids contain the boundary
+  /// IDs of the other boundaries in the tet mesh. In an FSI context
+  /// these typically identify the in/outflow boundaries in the fluid
+  /// mesh. The boundary enumeration of the current mesh follows the
+  /// one of the underlying fluid mesh: The enumeration of the FSI boundary
+  /// matches (to enable the setup of the FSI matching); the "in/outflow"
+  /// faces in this mesh inherit the same enumeration as the in/outflow
+  /// faces in the underlying fluid mesh. Finally, the "outer" boundary
+  /// gets its own boundary ID. 
+  /// Timestepper defaults to steady pseudo-timestepper.
+  SolidThinLayerBrickOnTetMesh(Mesh* tet_mesh_pt, 
+                               const Vector<unsigned>& boundary_ids,
+                               const double& h_thick,
+                               const unsigned& nlayer,
+                               const Vector<Vector<unsigned> >& 
+                               in_out_boundary_id,
+                               TimeStepper* time_stepper_pt=
+                               &Mesh::Default_TimeStepper) :
+   ThinLayerBrickOnTetMesh<ELEMENT>(tet_mesh_pt, 
+                                    boundary_ids,
+                                    h_thick,
+                                    nlayer,
+                                    in_out_boundary_id,
+                                    time_stepper_pt)
+    {  
+     // Make the current configuration the undeformed one by
+     // setting the nodal Lagrangian coordinates to their current
+     // Eulerian ones
+     set_lagrangian_nodal_coordinates();
+    }
+   
+ };
+
+
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+
+//========================================================================
+/// Refineable solid brick mesh layer built on top of a given tet mesh. 
+/// Typically used in FSI problems where the tet mesh is the fluid mesh and this
+/// mesh acts as the solid mesh that surrounds the FSI interface.
+//========================================================================
+ template<class ELEMENT>
+  class RefineableSolidThinLayerBrickOnTetMesh : 
+ public virtual ThinLayerBrickOnTetMesh<ELEMENT>,
+  public virtual RefineableBrickMesh<ELEMENT>,
+  public virtual SolidMesh
+  {
+   
+    public:
+ 
+  /// \short Constructor: Specify (quadratic) tet mesh, boundary IDs of 
+  /// boundary on which the current mesh is to be erected (in an FSI context
+  /// this boundary tends to be the FSI boundary of the fluid mesh. Also 
+  /// specify the uniform thickness of layer, and the number of element layers. 
+  /// The vectors stored in in_out_boundary_ids contain the boundary
+  /// IDs of the other boundaries in the tet mesh. In an FSI context
+  /// these typically identify the in/outflow boundaries in the fluid
+  /// mesh. The boundary enumeration of the current mesh follows the
+  /// one of the underlying fluid mesh: The enumeration of the FSI boundary
+  /// matches (to enable the setup of the FSI matching); the "in/outflow"
+  /// faces in this mesh inherit the same enumeration as the in/outflow
+  /// faces in the underlying fluid mesh. Finally, the "outer" boundary
+  /// gets its own boundary ID. 
+  /// Timestepper defaults to steady pseudo-timestepper.
+    RefineableSolidThinLayerBrickOnTetMesh(Mesh* tet_mesh_pt, 
+                                           const Vector<unsigned>& boundary_ids,
+                                           const double& h_thick,
+                                           const unsigned& nlayer,
+                                           const Vector<Vector<unsigned> >& 
+                                           in_out_boundary_id,
+                                           TimeStepper* time_stepper_pt=
+                                           &Mesh::Default_TimeStepper) :
+   ThinLayerBrickOnTetMesh<ELEMENT>(tet_mesh_pt, 
+                                    boundary_ids,
+                                    h_thick,
+                                    nlayer,
+                                    in_out_boundary_id,
+                                    time_stepper_pt)
+    {  
+     // Make the current configuration the undeformed one by
+     // setting the nodal Lagrangian coordinates to their current
+     // Eulerian ones
+     set_lagrangian_nodal_coordinates();
+
+     // Nodal positions etc. were created in constructor for
+     // nonrefineable mesh. Only need to setup quadtree forest
+     this->setup_octree_forest();
+    }
+   
+ };
+
 
 
 

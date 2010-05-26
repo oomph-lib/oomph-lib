@@ -31,6 +31,24 @@
 namespace oomph
 {
 
+//====================================================================
+/// Helper namespace for generation of brick from tet mesh
+//====================================================================
+namespace BrickFromTetMeshHelper
+{
+
+ /// Tolerance for mismatch during setup of boundary coordinates
+ double Face_position_tolerance=1.0e-12;
+
+}
+
+
+
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+
+
 //================================================================
 /// Setup lookup schemes which establish which elements are located
 /// next to which boundaries (Doc to outfile if it's open).
@@ -151,34 +169,18 @@ void BrickMeshBase::setup_boundary_element_info(std::ostream &outfile)
  // Now copy everything across into permanent arrays
  //-------------------------------------------------
 
-
  // Loop over boundaries
  //---------------------
  for (unsigned i=0;i<nbound;i++)
   {
-
-   // Number of elements on this boundary (currently stored in a set)
-   unsigned nel=set_of_boundary_element_pt[i].size();
-   
    // Loop over elements on given boundary
    typedef std::set<FiniteElement*>::iterator IT;
    for (IT it=set_of_boundary_element_pt[i].begin();
         it!=set_of_boundary_element_pt[i].end();
         it++)
     {
-     // Push back into permanent array
-     Boundary_element_pt[i].push_back(*it);
-    }
-   
-   // Allocate storage for the face identifiers
-   Face_index_at_boundary[i].resize(nel);
-   
-   // Loop over elements on this boundary
-   //-------------------------------------
-   for (unsigned e=0;e<nel;e++)
-    {
      // Recover pointer to element
-     FiniteElement* fe_pt=Boundary_element_pt[i][e];
+     FiniteElement* fe_pt=(*it);
      
      // Initialise count for boundary identiers (-3,-2,-1,1,2,3)
      std::map<int,unsigned> count;
@@ -199,15 +201,15 @@ void BrickMeshBase::setup_boundary_element_info(std::ostream &outfile)
       {
        count[(*boundary_identifier(i,fe_pt))[j] ]++;
       }
-
+     
      // Determine the correct boundary indicator by checking that it 
      // occurs four times (since four corner nodes of the element's boundary
      // need to be located on the domain boundary
      int indicator=-10;
-
+     
      //Check that we're finding exactly one boundary indicator
      bool found=false;
-
+     
      // Loop over coordinates
      for (int ii=0;ii<3;ii++)
       {
@@ -231,99 +233,65 @@ void BrickMeshBase::setup_boundary_element_info(std::ostream &outfile)
       }
      
      // Check if we've found one boundary
-     if (!found)
+     if (found)
       {
-       std::ostringstream error_stream;
-       error_stream
-        << "Failed to find a boundary identifier.\n\n" 
-        << "NOTE: This function is not implemented in full generality\n "
-        << "      and this error may be thrown erroneously:\n\n"
-        << "Cases where fewer than four vertex nodes of a brick element \n"
-        << "that has some nodes located on a mesh boundary are located \n"
-        << "on the same boundary MAY in fact arise legally, for instance \n"
-        << "if only an edge of an element is located on the mesh boundary.\n"
-        << "However, there is currently a problem, either with our code\n"
-        << "or with the intel compiler, in which this error also gets \n"
-        << "thrown when there ARE four vertex nodes on the same domain boundary!\n"
-        << "This problem seems to occur only with 3d brick meshes in which\n"
-        << "Nodes were initially created as \"ordinary\" Nodes and then\n"
-        << "converted to BoundaryNodes, using the \n"
-        << "Mesh::convert_to_boundary_node(...) function. \n\n"
-        << "There are currently two options:\n"
-        << " (1) If you have developed a new mesh in which this error is\n"
-        << "     thrown erroneously, rewrite this function: Elements should\n"
-        << "     only be added to the boundary element vector IF it has been\n"
-        << "     established that four of their vertex nodes are located on a mesh\n"
-        << "     boundary. We will implement this rewrite ourselves \n"
-        << "     once we have tracked down the problem (or established that \n"
-        << "     it is caused by the intel compiler -- wishful thinking?)\n"
-        << " (2) If you use one of oomph-lib's existing 3D meshes then \n"
-        << "     the error should not occur. In this case a workaround\n"
-        << "     is to avoid the conversion to boundary nodes, by\n"
-        << "     compiling the meshes (or indeed the entire library)\n "
-        << "     with the C++ compiler flag CONVERT_BOUNDARY_NODE_IS_BROKEN.\n"
-        << "     With this flag all Nodes in the affected meshes are created\n"
-        << "     as BoundaryNodes and the problem is avoided -- at the\n"
-        << "     expense of a slight additional memory overhead.\n";
-       throw OomphLibError(error_stream.str(),
-                           "BrickMeshBase::setup_boundary_element_info()",
-                           OOMPH_EXCEPTION_LOCATION);
+       
+       // Store element
+       Boundary_element_pt[i].push_back(*it);
+       
+       // Now convert boundary indicator into information required
+       // for FaceElements
+       switch (indicator)
+        {
+        case -3:
+         
+         // s_2 is fixed at -1.0:
+         Face_index_at_boundary[i].push_back(-3);
+         break;
+         
+        case -2:
+         
+         // s_1 is fixed at -1.0:
+         Face_index_at_boundary[i].push_back(-2);
+         break;
+         
+        case -1:
+         
+         // s_0 is fixed at -1.0:
+         Face_index_at_boundary[i].push_back(-1);
+         break;
+         
+         
+        case 1:
+         
+         // s_0 is fixed at 1.0:
+         Face_index_at_boundary[i].push_back(1);
+         break;
+         
+        case 2:
+         
+         // s_1 is fixed at 1.0:
+         Face_index_at_boundary[i].push_back(2);
+         break;
+         
+        case 3:
+         
+         // s_2 is fixed at 1.0:
+         Face_index_at_boundary[i].push_back(3);
+         break;
+         
+         
+        default:
+         
+         throw OomphLibError("Never get here",
+                             "BrickMeshBase::setup_boundary_element_info()",
+                             OOMPH_EXCEPTION_LOCATION);
+        }
+       
       }
-     
-
-     // Now convert boundary indicator into information required
-     // for FaceElements
-     switch (indicator)
-      {
-      case -3:
-   
-       // s_2 is fixed at -1.0:
-       Face_index_at_boundary[i][e] = -3;
-       break;
-      
-      case -2:
-   
-       // s_1 is fixed at -1.0:
-       Face_index_at_boundary[i][e] = -2;
-       break;
-       
-      case -1:
-       
-       // s_0 is fixed at -1.0:
-       Face_index_at_boundary[i][e] = -1;
-       break;
-       
-       
-      case 1:
-       
-       // s_0 is fixed at 1.0:
-       Face_index_at_boundary[i][e] = 1;
-       break;
-       
-      case 2:
-       
-       // s_1 is fixed at 1.0:
-       Face_index_at_boundary[i][e] = 2;
-       break;
-    
-      case 3:
-       
-       // s_2 is fixed at 1.0:
-       Face_index_at_boundary[i][e] = 3;
-       break;
-    
-   
-      default:
-
-       throw OomphLibError("Never get here",
-                           "BrickMeshBase::setup_boundary_element_info()",
-                           OOMPH_EXCEPTION_LOCATION);
-      }
-     
     }
   }
  
-
  // Doc?
  //-----
  if (doc)

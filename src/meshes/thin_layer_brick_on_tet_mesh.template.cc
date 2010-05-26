@@ -322,6 +322,10 @@ namespace oomph
     // Boundary number in "fluid" tet mesh
     unsigned b=boundary_ids[ib];
 
+
+    // We'll setup boundary coordinates for this one
+    Boundary_coordinate_exists[b]=true; 
+
     // Remember for future reference
     FSI_boundary_id.push_back(b);
 
@@ -408,6 +412,9 @@ namespace oomph
         //------------------------------------------------------
         unsigned j_local=0;
 
+        // Get normal sign
+        normal_sign=face_el_pt->normal_sign();
+
         // Get coordinates etc of point from face: Vertex nodes enumerated
         // first....
         Vector<double> s=s_face[translate(normal_sign,j)];
@@ -418,8 +425,6 @@ namespace oomph
         face_el_pt->interpolated_x(s,x);
         face_el_pt->outer_unit_normal(s,unit_normal);
          
-        // Get normal sign
-        normal_sign=face_el_pt->normal_sign();
 
         // Get node in the "fluid" mesh from face
         Node* fluid_node_pt=face_el_pt->node_pt(translate(normal_sign,j));

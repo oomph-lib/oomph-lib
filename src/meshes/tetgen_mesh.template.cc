@@ -262,7 +262,8 @@ void TetgenMesh<ELEMENT>::build_from_scaffold(TimeStepper* time_stepper_pt)
 
      // Do we need a boundary node?
      bool need_boundary_node=false;
-     // hierher Fine tune via intersection of boundary sets
+
+     // hierher At some point fine tune via intersection of boundary sets
      if (edge_node1_pt->is_on_boundary()&&edge_node2_pt->is_on_boundary())
       {
        need_boundary_node=true;
@@ -714,7 +715,6 @@ void TetgenMesh<ELEMENT>::snap_to_quadratic_surface(
  // Loop over quadratic face elements -- one for each facet
  for(unsigned e=0;e<nel;e++)
   {
-   // hierher clean up 
    face_el_pt.push_back(new FreeStandingFaceElement<ELEMENT>);   
   }
 
