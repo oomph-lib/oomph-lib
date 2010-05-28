@@ -209,6 +209,68 @@ public:
 
 };
 
+
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+//=====================================================================
+/// Refineable solid brick mesh built by brickifying an existing tet 
+/// mesh -- each tet gets split into four bricks. Can only be built with
+/// quadratic (27 node) elements.
+//=====================================================================
+template<class ELEMENT>
+class RefineableSolidBrickFromTetMesh : 
+ public virtual BrickFromTetMesh<ELEMENT>,
+  public virtual RefineableBrickMesh<ELEMENT>,
+  public SolidMesh
+   
+{
+ 
+public:
+ 
+ /// Constructor: Pass xda file name.
+ RefineableSolidBrickFromTetMesh(const std::string xda_file_name,
+                                 TimeStepper* time_stepper_pt=
+                                 &Mesh::Default_TimeStepper) :
+ BrickFromTetMesh<ELEMENT>(xda_file_name, time_stepper_pt) 
+  {
+   
+   // Make the current configuration the undeformed one by
+   // setting the nodal Lagrangian coordinates to their current
+   // Eulerian ones
+   set_lagrangian_nodal_coordinates();
+   
+   // Nodal positions etc. were created in constructor for
+   // nonrefineable mesh. Only need to setup quadtree forest
+   this->setup_octree_forest();
+  }
+
+ 
+ /// \short Constructor: Pass xda file name. This returns a pointer to the
+ /// internally built XdaTetMesh for external use. Note that YOU
+ /// are responsible for deleting this mesh.
+ RefineableSolidBrickFromTetMesh(const std::string xda_file_name,
+                                 XdaTetMesh<TElement<3,3> >*& xda_tet_mesh_pt,
+                                 TimeStepper* time_stepper_pt=
+                                 &Mesh::Default_TimeStepper) :
+ BrickFromTetMesh<ELEMENT>(xda_file_name, xda_tet_mesh_pt, time_stepper_pt) 
+  {
+   // Make the current configuration the undeformed one by
+   // setting the nodal Lagrangian coordinates to their current
+   // Eulerian ones
+   set_lagrangian_nodal_coordinates();
+   
+   // Nodal positions etc. were created in constructor for
+   // RectangularMesh<...>. Only need to setup quadtree forest
+   this->setup_octree_forest();
+  }
+
+};
+
 }
 
 #endif

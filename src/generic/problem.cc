@@ -989,17 +989,18 @@ namespace oomph
     Last_el_for_assembly[n_proc-1] = n_elements-1;
     
     // Doc
-    if (n_proc>1)
-     {
-      oomph_info << "\nProblem is not distributed. Parallel assembly of "
-                 << "Jacobian uses default partitioning: "<< std::endl;
-      for (int p=0;p<n_proc;p++)
-       {
-        oomph_info << "Proc " << p << " assembles from element " 
-                   <<  First_el_for_assembly[p] << " to " 
-                   <<  Last_el_for_assembly[p] << " \n"; 
-       }
-     }
+    // hierher: Re-enable doc?
+//     if (n_proc>1)
+//      {
+//       oomph_info << "\nProblem is not distributed. Parallel assembly of "
+//                  << "Jacobian uses default partitioning: "<< std::endl;
+//       for (int p=0;p<n_proc;p++)
+//        {
+//         oomph_info << "Proc " << p << " assembles from element " 
+//                    <<  First_el_for_assembly[p] << " to " 
+//                    <<  Last_el_for_assembly[p] << " \n"; 
+//        }
+//      }
    }
  }
  
