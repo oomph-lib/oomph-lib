@@ -787,7 +787,7 @@ void doc_fsi(Mesh* fluid_mesh_pt,
 { 
  
  std::ofstream some_file;
- char filename[100];
+ std::ostringstream filename;
  
  // Number of plot points
  unsigned npts;
@@ -804,9 +804,9 @@ void doc_fsi(Mesh* fluid_mesh_pt,
 
  // Output fluid solution/mesh
  //---------------------------
- sprintf(filename,"%s/fsi_doc_fluid_mesh%i.dat",doc_info.directory().c_str(),
-         doc_info.number());
- some_file.open(filename);
+ filename << doc_info.directory() << "/fsi_doc_fluid_mesh" 
+          << doc_info.number() << ".dat";
+ some_file.open(filename.str().c_str());
  fluid_mesh_pt->output(some_file,npts);
  some_file.close();
  
@@ -824,7 +824,6 @@ void doc_fsi(Mesh* fluid_mesh_pt,
    solid_node_pt[wall_mesh_pt->node_pt(j)->variable_position_pt()]=
     wall_mesh_pt->node_pt(j);
   }
-
 
 
  // Setup map that links the internal (pressure) Data of fluid elements with
@@ -873,10 +872,13 @@ void doc_fsi(Mesh* fluid_mesh_pt,
  unsigned nelem=wall_mesh_pt->nelement();
  for (unsigned e=0;e<nelem;e++)
   {
-   sprintf(filename,"%s/fsi_doc_wall_element%i-%i.dat",
-           doc_info.directory().c_str(),
-           doc_info.number(),e);
-   some_file.open(filename);
+   //Reset the string contents to be empty
+   filename.str("");
+   //Set the new filename
+   filename << doc_info.directory() 
+            << "/fsi_doc_wall_element" << doc_info.number() << "-"
+            << e << ".dat";
+   some_file.open(filename.str().c_str());
    
    // Get pointer to wall element
    FSIWallElement* el_pt=
@@ -1115,10 +1117,13 @@ void doc_fsi(Mesh* fluid_mesh_pt,
 
    unsigned ndim_eulerian=node_pt->ndim();
 
-   sprintf(filename,"%s/fsi_doc_fluid_element%i-%i.dat",
-           doc_info.directory().c_str(),
-           doc_info.number(),count);
-   some_file.open(filename);
+   //Cleart the filename
+   filename.str("");
+   filename << doc_info.directory()
+            << "/fsi_doc_fluid_element"
+            << doc_info.number() << "-"
+            << count << ".dat";
+   some_file.open(filename.str().c_str());
    some_file << "ZONE" << std::endl;
    for (unsigned i=0;i<ndim_eulerian;i++)
     {

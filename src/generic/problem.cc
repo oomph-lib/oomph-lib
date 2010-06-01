@@ -502,7 +502,7 @@ namespace oomph
   int n_proc=this->communicator_pt()->nproc();
   int rank=this->communicator_pt()->my_rank();
 
-  char filename[100];
+  std::ostringstream filename;
   std::ofstream some_file;
 
   // Doc the original mesh on proc 0
@@ -511,9 +511,9 @@ namespace oomph
    {
     if (rank==0)
      {
-      sprintf(filename,"%s/complete_mesh%i.dat",doc_info.directory().c_str(),
-              doc_info.number());
-      global_mesh_pt->output(filename,5);
+      filename << doc_info.directory() << "/complete_mesh"
+               << doc_info.number() << ".dat";
+      global_mesh_pt->output(filename.str().c_str(),5);
      }
    }
 
@@ -1664,132 +1664,105 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
   // Thirdly, the serial version (compiled by all, but only run when compiled
   // with MPI if MPI_Helpers::MPI_has_been_initialised=false
  
-  // start by setting the distribution of the residuals vector if it is not 
-  // setup
-  if (!residuals.built())
-   {
-    int n_dof=ndof();
-    LinearAlgebraDistribution dist(Communicator_pt,n_dof,false);
-    residuals.build(&dist,0.0);
-   }
-  // otherwise just zero the residuals
-  else
-   {
+  //Check that the residuals has the correct number of rows if it has been
+  //setup
 #ifdef PARANOID
-    // PARANOID check - if the residuals are distributed then this method
-    // cannot be used, a distributed residuals can only be assembled by
-    // get_jacobian(...) for CRDoubleMatrices
-    if (residuals.distributed())
+  if(residuals.built())
+   {
+    if(residuals.distribution_pt()->nrow() != this->ndof())
      {
-      throw OomphLibError
-       ("this method can only assemble a non-distributed residuals vector",
-        "Problem::get_residuals()",OOMPH_EXCEPTION_LOCATION);
+      std::ostringstream error_stream;
+      error_stream <<
+       "The distribution of the residuals vector does not have the correct\n"
+                   << 
+       "number of global rows\n";
+
+      throw OomphLibError(error_stream.str(),
+                          "Problem::get_residuals()",
+                          OOMPH_EXCEPTION_LOCATION);
      }
+   }
 #endif
 
-    // and zero
-    residuals.initialise(0.0);
+  //Find the number of rows
+  const unsigned nrow = this->ndof();
+  
+  // Determine the distribution for the residuals vector
+  // IF the vector has distribution setup then use that
+  // ELSE determine the distribution based on the 
+  // distributed_matrix_distribution enum
+  LinearAlgebraDistribution* dist_pt=0;
+  if (residuals.built())
+   {
+    dist_pt = new LinearAlgebraDistribution(residuals.distribution_pt());
    }
-
-
+  else
+   {
+#ifdef OOMPH_HAS_MPI
+    // if problem is only one one processor assemble non-distributed
+    // distribution
+    if (Communicator_pt->nproc() == 1)
+     {
+      dist_pt = new LinearAlgebraDistribution(Communicator_pt,nrow,false);
+     }
+    // if the problem is not distributed then assemble the jacobian with
+    // a uniform distributed distribution
+    else if (!Problem_has_been_distributed)
+     {
+      dist_pt = new LinearAlgebraDistribution(Communicator_pt,nrow,true);
+     }
+    // otherwise the problem is a distributed problem
+    else
+     {
+      switch (Dist_problem_matrix_distribution)
+       {
+       case Uniform_matrix_distribution:
+        dist_pt = new LinearAlgebraDistribution(Communicator_pt,nrow,true);
+        break;
+       case Problem_matrix_distribution:
+        dist_pt = new LinearAlgebraDistribution(Dof_distribution_pt);
+        break;
+       case Default_matrix_distribution:
+        LinearAlgebraDistribution* uniform_dist_pt = 
+         new LinearAlgebraDistribution(Communicator_pt,nrow,true);
+        bool use_problem_dist = true;
+        unsigned nproc = Communicator_pt->nproc();
+        for (unsigned p = 0; p < nproc; p++)
+         {
+          if ((double)Dof_distribution_pt->nrow_local(p) > 
+              ((double)uniform_dist_pt->nrow_local(p))*1.1)
+           {
+            use_problem_dist = false;
+           }
+         }
+        if (use_problem_dist)
+         {
+          dist_pt = new LinearAlgebraDistribution(Dof_distribution_pt);
+         }
+        else
+         {
+          dist_pt = new LinearAlgebraDistribution(uniform_dist_pt);
+         }
+        delete uniform_dist_pt;
+        break;
+       }
+     }
+#else
+    dist_pt = new LinearAlgebraDistribution(Communicator_pt,nrow,false);
+#endif
+   }
 
   //Locally cache pointer to assembly handler
   AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
 
+  //Build and zero the residuals
+  residuals.build(dist_pt,0.0);
 
+  //Serial (or one processor case)
 #ifdef OOMPH_HAS_MPI
-  if (MPI_Helpers::mpi_has_been_initialised())
+  if(this->communicator_pt()->nproc() == 1)
    {
-    // Storage for the number of processors
-    int n_proc=this->communicator_pt()->nproc();
- 
-    // cache the number of local rows
-    unsigned nrow = residuals.nrow();
-
-    // get a pointer to the underlying values
-    double* residuals_pt;
-    if (n_proc>1)
-     {
-      residuals_pt = new double[nrow];
-      for (unsigned i = 0; i < residuals.nrow(); i++)
-       {
-        residuals_pt[i] = 0.0;  
-       }
-     }
-    else
-     {
-      residuals_pt = residuals.values_pt();
-     }
-
-    // number of elements
-    int n_el=mesh_pt()->nelement();
- 
-    // Default assignments for distributed problem
-    unsigned j_lo=0;
-    unsigned j_hi=n_el;
- 
-    // Otherwise just loop over fractions of the elements
-    if (!Problem_has_been_distributed)
-     {
-      // Distribute work evenly
-      unsigned range=unsigned(double(n_el)/double(Communicator_pt->nproc()));
-      j_lo=Communicator_pt->my_rank()*range;
-      j_hi=(Communicator_pt->my_rank()+1)*range;
-    
-      // Last one needs to incorporate any dangling elements
-      if (Communicator_pt->my_rank() == Communicator_pt->nproc()-1)
-       {
-        j_hi=n_el;
-       }
-     }
-
-    // Assemble the partial residual vector: Note that this
-    // is a full-length vector but only contributions from 
-    // a sub-set of elements are filled in, other values
-    // are set to zero
- 
-    //Loop over all the elements for this processor
-    for(unsigned long e=j_lo;e<j_hi;e++)
-     {
-      // Get element
-      GeneralisedElement* el_pt=mesh_pt()->element_pt(e);
-   
-      // Is it a halo?
-      if (!el_pt->is_halo())
-       {
-        //Find number of dofs in the element
-        const unsigned n_el_dofs = assembly_handler_pt->ndof(el_pt);
-
-     
-        //Set up a Vector
-        Vector<double> element_residuals(n_el_dofs);
-     
-        //Fill the array
-        assembly_handler_pt->get_residuals(el_pt,element_residuals);
-
-        //Now loop over the dofs and assign values to global Vector
-        for(unsigned l=0;l<n_el_dofs;l++)
-         {
-          residuals_pt[assembly_handler_pt->eqn_number(el_pt,l)]+=
-           element_residuals[l];
-         }
-       }
-     }
- 
-    // Receive from the other processors and assemble if required
-    if (n_proc>1)
-     {
-      // clear and resize residuals
-      MPI_Allreduce(residuals_pt,residuals.values_pt(),nrow,
-                    MPI_DOUBLE,MPI_SUM,Communicator_pt->mpi_comm());
-      delete[] residuals_pt;
-     }
-   
-   
-   }
-  else // !MPI_Helpers::MPI_has_been_initialised
 #endif // OOMPH_HAS_MPI
-   {
     //Loop over all the elements
     unsigned long Element_pt_range = Mesh_pt->nelement();
     for(unsigned long e=0;e<Element_pt_range;e++)
@@ -1809,7 +1782,44 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
          += element_residuals[l];
        }
      }
+    //Otherwise parallel case
+#ifdef OOMPH_HAS_MPI
    }
+else
+ {
+  //Store the current assembly handler
+  AssemblyHandler* const old_assembly_handler_pt = Assembly_handler_pt;
+  //Create a new assembly handler that only assembles the residuals
+  Assembly_handler_pt = new ParallelResidualsHandler(old_assembly_handler_pt);
+
+  //Setup memory for parallel sparse assemble
+  //No matrix so all size zero
+  Vector<int*> column_index;
+  Vector<int* > row_start;
+  Vector<double* > value; 
+  Vector<unsigned> nnz;
+  //One set of residuals of sizer one
+  Vector<double*> res(1);
+
+  //Call the parallel sparse assemble, that should only assemble residuals
+  parallel_sparse_assemble(dist_pt,
+                           column_index,
+                           row_start,
+                           value,
+                           nnz,
+                           res);
+  //Fill in the residuals data
+  residuals.set_external_values(res[0],true);
+ 
+  //Delete new assembly handler
+  delete Assembly_handler_pt;
+  //Reset the assembly handler to the original
+  Assembly_handler_pt = old_assembly_handler_pt;
+ }
+#endif
+
+  //Delete the distribution
+  delete dist_pt;
  }
 
 //=============================================================================

@@ -757,10 +757,10 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
 void DocInfo::set_directory(const std::string& directory)
 {
  // Try to open a file in output directory
- char filename[100];
- sprintf(filename,"%s/.dummy_check.dat",directory.c_str());
+ std::ostringstream filename;
+ filename << directory << "/.dummy_check.dat";
  std::ofstream some_file;
- some_file.open(filename);
+ some_file.open(filename.str().c_str());
  if (!some_file.is_open())
   {
    //Construct the error message

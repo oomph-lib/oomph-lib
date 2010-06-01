@@ -5739,13 +5739,18 @@ void OcTreeForest::check_all_neighbours(DocInfo &doc_info)
   //If we are documenting, then do so
   if (doc_info.doc_flag())
    {
-    char fullname[100];
-    sprintf(fullname,"%s/neighbours%i.dat",doc_info.directory().c_str(),
-            doc_info.number());
-    neigh_file.open(fullname);
-    sprintf(fullname,"%s/neighbours%i.txt",doc_info.directory().c_str(),
-            doc_info.number());
-    neigh_txt_file.open(fullname);  
+    std::ostringstream fullname;
+    fullname << doc_info.directory() << "/neighbours"
+             << doc_info.number() << ".dat";
+    oomph_info << "opened " << fullname.str() << " to doc neighbours" 
+               << std::endl;
+    neigh_file.open(fullname.str().c_str());
+    fullname.str("");
+    fullname << doc_info.directory() << "/neighbours"
+             << doc_info.number() << ".txt";
+    oomph_info << "opened " << fullname.str() << " to doc neighbours" 
+               << std::endl;
+    neigh_txt_file.open(fullname.str().c_str());  
    }
   
   //Call the static member of OcTree function
@@ -5798,16 +5803,18 @@ void OcTreeForest::check_all_neighbours(DocInfo &doc_info)
   //If we are documenting, then do so
   if (doc_info.doc_flag())
    {
-    char fullname[100];
-    sprintf(fullname,"%s/edge_neighbours%i.dat",doc_info.directory().c_str(),
-            doc_info.number());
-    neigh_file.open(fullname);
-    sprintf(fullname,"%s/no_true_edge%i.dat",doc_info.directory().c_str(),
-            doc_info.number());
-    no_true_edge_file.open(fullname);
-    sprintf(fullname,"%s/edge_neighbours%i.txt",doc_info.directory().c_str(),
-            doc_info.number());
-    neigh_txt_file.open(fullname);  
+    std::ostringstream fullname;
+    fullname << doc_info.directory() << "/edge_neighbours"
+             << doc_info.number() << ".dat";
+    neigh_file.open(fullname.str().c_str());
+    fullname.str("");
+    fullname << doc_info.directory() << "/no_true_edge"
+             << doc_info.number() << ".dat";
+    no_true_edge_file.open(fullname.str().c_str());
+    fullname.str("");
+    fullname << doc_info.directory() << "/edge_neighbours"
+             << doc_info.number() << ".txt";
+    neigh_txt_file.open(fullname.str().c_str());  
    }
   
   //Call the static member of OcTree function
@@ -5873,25 +5880,30 @@ void OcTreeForest::open_hanging_node_files(DocInfo &doc_info,
  //If we are documenting the output, open the files
  if (doc_info.doc_flag())
   {
-   char fullname[100];
-   sprintf(fullname,"%s/hang_nodes_u%i.dat",doc_info.directory().c_str(),
-           doc_info.number());
-   output_stream[0]->open(fullname);
-   sprintf(fullname,"%s/hang_nodes_d%i.dat",doc_info.directory().c_str(),
-           doc_info.number());
-   output_stream[1]->open(fullname);  
-   sprintf(fullname,"%s/hang_nodes_l%i.dat",doc_info.directory().c_str(),
-           doc_info.number());
-   output_stream[2]->open(fullname);  
-   sprintf(fullname,"%s/hang_nodes_r%i.dat",doc_info.directory().c_str(),
-           doc_info.number());
-   output_stream[3]->open(fullname);  
-   sprintf(fullname,"%s/hang_nodes_b%i.dat",doc_info.directory().c_str(),
-           doc_info.number());
-   output_stream[4]->open(fullname);
-   sprintf(fullname,"%s/hang_nodes_f%i.dat",doc_info.directory().c_str(),
-           doc_info.number());
-   output_stream[5]->open(fullname);
+   std::ostringstream fullname;
+   fullname << doc_info.directory() << "/hang_nodes_u"
+            << doc_info.number() << ".dat";
+   output_stream[0]->open(fullname.str().c_str());
+   fullname.str("");
+   fullname << doc_info.directory() << "/hang_nodes_d"
+            << doc_info.number() << ".dat";
+   output_stream[1]->open(fullname.str().c_str());
+   fullname.str("");
+   fullname << doc_info.directory() << "/hang_nodes_l"
+            << doc_info.number() << ".dat";
+   output_stream[2]->open(fullname.str().c_str());
+   fullname.str("");
+   fullname << doc_info.directory() << "/hang_nodes_r"
+            << doc_info.number() << ".dat";
+   output_stream[3]->open(fullname.str().c_str());
+   fullname.str("");
+   fullname << doc_info.directory() << "/hang_nodes_b"
+            << doc_info.number() << ".dat";
+   output_stream[4]->open(fullname.str().c_str());
+   fullname.str("");
+   fullname << doc_info.directory() << "/hang_nodes_f"
+            << doc_info.number() << ".dat";
+   output_stream[5]->open(fullname.str().c_str());
   }
 }
 

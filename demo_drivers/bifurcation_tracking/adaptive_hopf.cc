@@ -995,7 +995,7 @@ protected:
 /// applications of boundary conditions in subsequent refinements
 //===================================================================
 template<class ELEMENT>
-class AdaptiveRectangleWithHoleMesh :
+class RefineableRectangleWithHoleMesh :
  public RectangleWithHoleMesh<ELEMENT>, public RefineableQuadMesh<ELEMENT>
 {
 public: 
@@ -1006,7 +1006,7 @@ public:
  /// \f$\zeta \in [0,2\pi]\f$ sweeps around the circumference
  /// in anticlockwise direction. Timestepper defaults to Steady
  /// default timestepper.
- AdaptiveRectangleWithHoleMesh(GeomObject* cylinder_pt, 
+ RefineableRectangleWithHoleMesh(GeomObject* cylinder_pt, 
                                const double &length, const double &height,
                                TimeStepper* time_stepper_pt=
                                &Mesh::Default_TimeStepper) :
@@ -1029,7 +1029,7 @@ public:
  
  
  /// \short Destructor: Empty
- virtual ~AdaptiveRectangleWithHoleMesh() {}
+ virtual ~RefineableRectangleWithHoleMesh() {}
  
 };
 
@@ -1150,9 +1150,9 @@ public:
   }
 
  /// Access function for the specific mesh
- AdaptiveRectangleWithHoleMesh<ELEMENT>* mesh_pt() 
+ RefineableRectangleWithHoleMesh<ELEMENT>* mesh_pt() 
   {
-   return dynamic_cast<AdaptiveRectangleWithHoleMesh<ELEMENT>*>
+   return dynamic_cast<RefineableRectangleWithHoleMesh<ELEMENT>*>
     (Problem::mesh_pt());
   }
 
@@ -1193,7 +1193,7 @@ FlowAroundCylinderProblem<ELEMENT>::FlowAroundCylinderProblem(
  
  // Build mesh
  Problem::mesh_pt()=
-  new AdaptiveRectangleWithHoleMesh<ELEMENT>(cylinder_pt,length,height);
+  new RefineableRectangleWithHoleMesh<ELEMENT>(cylinder_pt,length,height);
 
  // Set error estimator
  Z2ErrorEstimator* error_estimator_pt=new Z2ErrorEstimator;

@@ -153,7 +153,8 @@ void BiCGStab<MATRIX>::solve(Problem* const &problem_pt,
   }
 
  // Call linear algebra-style solver
- if (!(*result.distribution_pt() == *this->distribution_pt()))
+ if((result.built()) &&  
+    (!(*result.distribution_pt() == *this->distribution_pt())))
   {
    LinearAlgebraDistribution 
     temp_global_dist(result.distribution_pt());       
@@ -1440,8 +1441,24 @@ void GMRES<MATRIX>::solve(Problem* const &problem_pt, DoubleVector &result)
   }
 
  // Call linear algebra-style solver
- this->solve_helper(Matrix_pt,f,result,problem_pt);
-  
+ //If the result distribution is wrong, then redistribute
+ //before the solve and return to original distribution
+ //afterwards
+ if((result.built()) && 
+    (!(*result.distribution_pt() == *this->distribution_pt())))
+  {
+   LinearAlgebraDistribution 
+    temp_global_dist(result.distribution_pt());       
+   result.build(this->distribution_pt(),0.0);
+   this->solve_helper(Matrix_pt,f,result,problem_pt);
+   result.redistribute(&temp_global_dist);
+  }
+ //Otherwise just solve
+ else
+  {
+   this->solve_helper(Matrix_pt,f,result,problem_pt);
+  }
+
  // Kill matrix unless it's still required for resolve
  if (!Enable_resolve) clean_up_memory();
 

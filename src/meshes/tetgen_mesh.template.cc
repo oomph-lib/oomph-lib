@@ -673,7 +673,7 @@ void TetgenMesh<ELEMENT>::snap_to_quadratic_surface(
 {
 
  // Aux storage for processing input
- char dummy[100];
+ char dummy[101];
  
  // Prepare to doc nodes that couldn't be snapped 
  std::ofstream the_file_non_snapped;

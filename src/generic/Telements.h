@@ -1161,9 +1161,9 @@ public:
  /// nplot points in each "coordinate direction)
  std::string tecplot_zone_string(const unsigned& nplot)
  {
-  char header[100];
-  sprintf(header,"ZONE I=%i\n",nplot);
-  return header;
+  std::ostringstream header;
+  header << "ZONE I=" << nplot << "\n";
+  return header.str();
  }
  
  /// Return total number of plot points (when plotting 
@@ -1349,12 +1349,12 @@ public:
  /// nplot points in each "coordinate direction)
  std::string tecplot_zone_string(const unsigned& nplot)
  {
-  char header[100];
+  std::ostringstream header;
   unsigned nel=0;
   for (unsigned i=1;i<nplot;i++) {nel+=2*i-1;}  
-  sprintf(header,"ZONE N=%i, E=%i, F=FEPOINT, ET=TRIANGLE\n",
-          nplot_points(nplot),nel);
-  return header;
+  header << "ZONE N=" << nplot_points(nplot) << ", E=" 
+         << nel << ", F=FEPOINT, ET=TRIANGLE\n";
+  return header.str();
  }
 
  /// \short Add tecplot zone "footer" to output stream (when plotting 
@@ -2004,12 +2004,12 @@ public:
   /// nplot points in each "coordinate direction)
   std::string tecplot_zone_string(const unsigned& nplot)
   {
-   char header[100];
+   std::ostringstream header;
    unsigned nel=0;
    nel=(nplot-1)*(nplot-1)*(nplot-1);
-   sprintf(header,"ZONE N=%i, E=%i, F=FEPOINT, ET=TETRAHEDRON\n",
-           nplot_points(nplot),nel);
-   return header;
+   header << "ZONE N=" << nplot_points(nplot) << ", E="
+          << nel << ", F=FEPOINT, ET=TETRAHEDRON\n";
+   return header.str();
   }
   
   /// \short Add tecplot zone "footer" to output stream (when plotting

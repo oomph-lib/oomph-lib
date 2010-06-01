@@ -2,7 +2,7 @@
 #-----------------------
 # Define the sources
 sources =  \
-spherical_advection_diffusion_elements.cc \ 
+spherical_advection_diffusion_elements.cc \
 refineable_spherical_advection_diffusion_elements.cc 
 
 # Define the headers

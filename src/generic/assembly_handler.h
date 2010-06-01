@@ -228,6 +228,40 @@ class EigenProblemHandler : public AssemblyHandler
 };
 
 
+//=============================================================
+/// \short A class that is used to assemble the residuals in
+/// parallel by overloading the get_all_vectors_and_matrices,
+/// so that only the residuals are returned. This ensures that 
+/// the (moderately complex) distributed parallel assembly
+/// loops are only in one place.
+//===============================================================
+class ParallelResidualsHandler : public AssemblyHandler
+{
+ ///The original assembly handler
+ AssemblyHandler *Assembly_handler_pt;
+
+  public:
+
+ ///Constructor, set the original assembly handler
+ ParallelResidualsHandler(AssemblyHandler* const &assembly_handler_pt) :
+  Assembly_handler_pt(assembly_handler_pt) {} 
+ 
+ /// \short Calculate all desired vectors and matrices 
+ /// provided by the element elem_pt
+ /// This function calls only the get_residuals function associated
+ /// with the original assembly handler
+ void get_all_vectors_and_matrices(
+  GeneralisedElement* const &elem_pt,
+  Vector<Vector<double> >&vec, Vector<DenseMatrix<double> > &matrix)
+  {Assembly_handler_pt->get_residuals(elem_pt,vec[0]);}
+ 
+ /// \short Empty virtual destructor
+ ~ParallelResidualsHandler() {}
+
+};
+
+
+
 //==========================================================================
 /// \short A class that is used to define the functions used when assembling 
 /// the derivatives of the residuals with respect to a parameter.

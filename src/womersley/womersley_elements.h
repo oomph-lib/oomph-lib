@@ -1026,7 +1026,7 @@ doc_solution(DocInfo& doc_info,
 { 
 
  std::ofstream some_file;
- char filename[100];
+ std::ostringstream filename;
 
  // Number of plot points
  unsigned npts;
@@ -1035,9 +1035,10 @@ doc_solution(DocInfo& doc_info,
 
  // Output solution 
  //-----------------
- sprintf(filename,"%s/womersley_soln%i.dat",doc_info.directory().c_str(),
-         doc_info.number());
- some_file.open(filename);
+ filename << doc_info.directory() << "/womersley_soln"
+          << doc_info.number() << ".dat";
+
+ some_file.open(filename.str().c_str());
  mesh_pt()->output(some_file,npts);
  some_file.close();
 
@@ -1046,9 +1047,11 @@ doc_solution(DocInfo& doc_info,
  double flux=0.0;
 
  // Assemble contributions from elements and output 3D solution
- sprintf(filename,"%s/womersley_soln_3d_%i.dat",doc_info.directory().c_str(),
-         doc_info.number());
- some_file.open(filename);
+ filename.str("");
+ filename << doc_info.directory() << "/womersley_soln_3d_"
+          << doc_info.number() << ".dat";
+
+ some_file.open(filename.str().c_str());
  unsigned nelem=mesh_pt()->nelement();
  for (unsigned e=0;e<nelem;e++)
   {

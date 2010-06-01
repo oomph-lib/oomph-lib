@@ -1535,13 +1535,14 @@ void Z2ErrorEstimator::doc_flux(OomphCommunicator* comm_pt, Mesh* mesh_pt,
 {
  // Setup output files
  std::ofstream some_file,feflux_file;
- char filename[100];
- sprintf(filename,"%s/flux_rec%i_on_proc_%i.dat",doc_info.directory().c_str(),
-         doc_info.number(),comm_pt->my_rank());
- some_file.open(filename);
- sprintf(filename,"%s/flux_fe%i_on_proc_%i.dat",doc_info.directory().c_str(),
-         doc_info.number(),comm_pt->my_rank());
- feflux_file.open(filename);
+ std::ostringstream filename;
+ filename << doc_info.directory() << "/flux_rec" << doc_info.number() 
+          << "_on_proc_" << comm_pt->my_rank() << ".dat";
+ some_file.open(filename.str().c_str());
+ filename.str("");
+ filename << doc_info.directory() << "/flux_fe" << doc_info.number() 
+         << "_on_proc_" << comm_pt->my_rank() << ".dat";
+ feflux_file.open(filename.str().c_str());
 
  // Extract first element to determine spatial dimension
  FiniteElement* el_pt=mesh_pt->finite_element_pt(0);

@@ -309,11 +309,11 @@ protected:
                              Shape &test) const=0;
 
  /// Calculate the body force fct at a given time and Eulerian position
- void get_body_force_axi_nst(const double& time, 
-                             const unsigned& ipt,
-                             const Vector<double> &s,
-                             const Vector<double> &x, 
-                             Vector<double> &result)
+ virtual void get_body_force_axi_nst(const double& time, 
+                                     const unsigned& ipt,
+                                     const Vector<double> &s,
+                                     const Vector<double> &x, 
+                                     Vector<double> &result)
   {
    //If the function pointer is zero return zero
    if(Body_force_fct_pt == 0)

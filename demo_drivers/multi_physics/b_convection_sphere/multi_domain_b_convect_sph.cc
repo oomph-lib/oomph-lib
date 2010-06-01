@@ -48,16 +48,16 @@ namespace Global_Parameters
 {
 
  /// Reynolds number
- double Re = 0.0;
+ double Re = 1.0;
 
  /// Prandtl number
  double Pr = 0.73;
 
  /// Peclet number
- double Pe = Re*Pr;
+ double Pe = 1.0;
 
  /// Rayleigh number
- double Ra = 0.0;
+ double Ra = 10.0;
  
  /// Gravity
  Vector<double> G;
@@ -137,17 +137,18 @@ public:
         }
 
 
-       //No radial flow on side boundary
+       //No flow on side boundary
        if(ibound==1)
         {
          nst_mesh_pt()->boundary_node_pt(ibound,inod)->set_value(0,0.0);
+         nst_mesh_pt()->boundary_node_pt(ibound,inod)->set_value(1,0.0);
         }
 
-       //Plug flow on inlet and side boundary
+       //No flow on inlet
        if(ibound==0)
         {
          nst_mesh_pt()->boundary_node_pt(ibound,inod)->set_value(0,0.0);
-         nst_mesh_pt()->boundary_node_pt(ibound,inod)->set_value(1,1.0);
+         nst_mesh_pt()->boundary_node_pt(ibound,inod)->set_value(1,0.0);
         }
 
        //No slip on sphere
@@ -167,6 +168,11 @@ public:
       {
        //No concentration on inlet
        if(ibound==0)
+        {
+         adv_diff_mesh_pt()->boundary_node_pt(ibound,inod)->set_value(0,0.0);
+        }
+       //No concentration on side boundary
+       if(ibound==1)
         {
          adv_diff_mesh_pt()->boundary_node_pt(ibound,inod)->set_value(0,0.0);
         }
@@ -234,13 +240,13 @@ FlowAroundHalfCylinderProblem<NST_ELEMENT,AD_ELEMENT>::FlowAroundHalfCylinderPro
  Nst_mesh_pt =
   new RefineableHalfRectangleWithHoleMesh<NST_ELEMENT>(cylinder_pt,
                                                        radius,length,
-                                                       49.0,2,49.0,2,1.0,2);
+                                                       4.0,2,4.0,2,1.0,2);
  Adv_diff_mesh_pt =
   new RefineableHalfRectangleWithHoleMesh<AD_ELEMENT>(cylinder_pt,
                                                       radius,length,
-                                                      49.0,2,49.0,2,1.0,2);
-
-
+                                                      4.0,2,4.0,2,1.0,2);
+ 
+ 
  // Set error estimatora
  Nst_mesh_pt->spatial_error_estimator_pt()=new Z2ErrorEstimator;
  Adv_diff_mesh_pt->spatial_error_estimator_pt()=new Z2ErrorEstimator;
@@ -265,8 +271,8 @@ FlowAroundHalfCylinderProblem<NST_ELEMENT,AD_ELEMENT>::FlowAroundHalfCylinderPro
    unsigned num_nod= nst_mesh_pt()->nboundary_node(ibound);
    for (unsigned inod=0;inod<num_nod;inod++)
     {
-     //Pin boundary conditions on cylinder and inlet
-     if((ibound==0) || (ibound==4))
+     //Pin boundary conditions on cylinder side boundary and inlet
+     if((ibound==0) || (ibound==1) || (ibound==4))
       {
        nst_mesh_pt()->boundary_node_pt(ibound,inod)->pin(0);
        nst_mesh_pt()->boundary_node_pt(ibound,inod)->pin(1);
@@ -287,8 +293,8 @@ FlowAroundHalfCylinderProblem<NST_ELEMENT,AD_ELEMENT>::FlowAroundHalfCylinderPro
    unsigned num_nod= adv_diff_mesh_pt()->nboundary_node(ibound);
    for (unsigned inod=0;inod<num_nod;inod++)
     {
-     //Pin boundary conditions on cylinder and inlet
-     if((ibound==0) || (ibound==4))
+     //Pin boundary conditions on cylinder, side boundary  and inlet
+     if((ibound==0) || (ibound==1) || (ibound==4))
       {
        adv_diff_mesh_pt()->boundary_node_pt(ibound,inod)->pin(0);
       }
@@ -311,34 +317,34 @@ FlowAroundHalfCylinderProblem<NST_ELEMENT,AD_ELEMENT>::FlowAroundHalfCylinderPro
     // Set the Reynolds number (1/Pr in our non-dimensionalisation)
     el_pt->re_pt() = &Global_Parameters::Re;
     
-   // Set ReSt (also 1/Pr in our non-dimensionalisation)
-   el_pt->re_st_pt() = &Global_Parameters::Re;
-
-   // Set the Rayleigh number
-   el_pt->ra_pt() = &Global_Parameters::Ra;
-   
-   //Set Gravity vector
-   el_pt->g_pt() = &Global_Parameters::G;
-   
-   // We can ignore the external geometric data in the "external"
-   // advection diffusion element when computing the Jacobian matrix
-   // because the interaction does not involve spatial gradients of 
-   // the temperature (and also because the mesh isn't moving!)
-   el_pt->ignore_external_geometric_data();
+    // Set ReSt (also 1/Pr in our non-dimensionalisation)
+    el_pt->re_st_pt() = &Global_Parameters::Re;
+    
+    // Set the Rayleigh number
+    el_pt->ra_pt() = &Global_Parameters::Ra;
+    
+    //Set Gravity vector
+    el_pt->g_pt() = &Global_Parameters::G;
+    
+    // We can ignore the external geometric data in the "external"
+    // advection diffusion element when computing the Jacobian matrix
+    // because the interaction does not involve spatial gradients of 
+    // the temperature (and also because the mesh isn't moving!)
+    el_pt->ignore_external_geometric_data();
    }
-
+  
   unsigned n_ad_elem=adv_diff_mesh_pt()->nelement();
   for (unsigned e=0;e<n_ad_elem;e++)
    {
     AD_ELEMENT* el_pt = 
      dynamic_cast<AD_ELEMENT*>(adv_diff_mesh_pt()->element_pt(e));
-  
+    
     // Set the Peclet number
     el_pt->pe_pt() = &Global_Parameters::Pe;
     
     // Set the Peclet number multiplied by the Strouhal number
     el_pt->pe_st_pt() =&Global_Parameters::Pe;
-
+    
     // We can ignore the external geometric data in the "external"
     // Navier Stokes element when computing the Jacobian matrix
     // because the interaction does not involve spatial gradients of 
@@ -350,36 +356,36 @@ FlowAroundHalfCylinderProblem<NST_ELEMENT,AD_ELEMENT>::FlowAroundHalfCylinderPro
   add_sub_mesh(Nst_mesh_pt);
   add_sub_mesh(Adv_diff_mesh_pt);
   build_global_mesh();
+  
 
-
-   // Change default number of bins in each dimension
-   Multi_domain_functions::Nx_bin=500;
-   Multi_domain_functions::Ny_bin=1000;
-
-   // Don't compute extreme bin coordinates
-   Multi_domain_functions::Compute_extreme_bin_coordinates=false;
- 
-   // Specify extreme bin coordinates directly
-   Multi_domain_functions::X_min=0.0;
-   Multi_domain_functions::X_max=radius;
-   Multi_domain_functions::Y_min=0.0;
-   Multi_domain_functions::Y_max=length;
-
+  // Change default number of bins in each dimension
+  Multi_domain_functions::Nx_bin=500;
+  Multi_domain_functions::Ny_bin=1000;
+  
+  // Don't compute extreme bin coordinates
+  Multi_domain_functions::Compute_extreme_bin_coordinates=false;
+  
+  // Specify extreme bin coordinates directly
+  Multi_domain_functions::X_min=0.0;
+  Multi_domain_functions::X_max=radius;
+  Multi_domain_functions::Y_min=0.0;
+  Multi_domain_functions::Y_max=length;
+  
   
   // Set external elements for the multi-domain solution.
   Multi_domain_functions::
-  setup_multi_domain_interactions<NST_ELEMENT,AD_ELEMENT>
-  (this,nst_mesh_pt(),adv_diff_mesh_pt());
-
+   setup_multi_domain_interactions<NST_ELEMENT,AD_ELEMENT>
+   (this,nst_mesh_pt(),adv_diff_mesh_pt());
+  
   //Attach the boundary conditions to the mesh
   cout <<"Number of equations: " << assign_eqn_numbers() << endl; 
-
+  
   //Set swirl velocity to zero
   for(unsigned n=0;n<n_node;n++)
    {
     nst_mesh_pt()->node_pt(n)->set_value(2,0.0);
    }
-
+  
    //Plug flow everywhere
   for(unsigned ibound=0;ibound<5;++ibound)
     {
@@ -398,17 +404,18 @@ FlowAroundHalfCylinderProblem<NST_ELEMENT,AD_ELEMENT>::FlowAroundHalfCylinderPro
          nst_mesh_pt()->boundary_node_pt(ibound,inod)->set_value(0,0.0);
         }
 
-       //No radial flow on side boundary
+       //No flow on side boundary
        if(ibound==1)
         {
          nst_mesh_pt()->boundary_node_pt(ibound,inod)->set_value(0,0.0);
+         nst_mesh_pt()->boundary_node_pt(ibound,inod)->set_value(1,0.0);
         }
        
-       //Plug flow on inlet
+       //No flow on inlet
        if(ibound==0) 
         {
          nst_mesh_pt()->boundary_node_pt(ibound,inod)->set_value(0,0.0);
-         nst_mesh_pt()->boundary_node_pt(ibound,inod)->set_value(1,1.0);
+         nst_mesh_pt()->boundary_node_pt(ibound,inod)->set_value(1,0.0);
         }
 
        //No slip on sphere
@@ -460,9 +467,9 @@ int main()
  Global_Parameters::G[2] = 0.0;
  
  // radius and Length of domain
- double radius=50.0;
- double length=100.0;
- Global_Parameters::Sphere_centre_z = 50.0;
+ double radius=5.0;
+ double length=10.0;
+ Global_Parameters::Sphere_centre_z = 5.0;
 
 
  //Create a new ellipse object as the central cylinder
@@ -486,7 +493,7 @@ int main()
  // Output filename
  char filename[100];
  // Trace file
- std::ofstream trace("trace.dat");
+ //std::ofstream trace("trace.dat");
 
  //Step up in Reynolds number (and therefore Peclet number)
  for(unsigned i=0;i<2;i++)
@@ -494,21 +501,22 @@ int main()
    problem.newton_solve(max_adapt);
    
    //Open an output file
-   sprintf(filename,"vel_soln_Re%g.dat", Global_Parameters::Re);
+   sprintf(filename,"vel_soln_Re%g_Ra%g.dat", Global_Parameters::Re,
+           Global_Parameters::Ra);
    //Doc result
    ofstream outfile(filename);
    problem.nst_mesh_pt()->output(outfile,5);
    outfile.close();
    
-   sprintf(filename,"conc_soln_Re%g.dat", Global_Parameters::Re);
+   sprintf(filename,"conc_soln_Re%g_Ra%g.dat", Global_Parameters::Re,
+           Global_Parameters::Ra);
    outfile.open(filename);
    problem.adv_diff_mesh_pt()->output(outfile,5);
    outfile.close();
 
-   Global_Parameters::Re += 10.0;
-   Global_Parameters::Pe = Global_Parameters::Pr*Global_Parameters::Re;
+   Global_Parameters::Ra += 40.0;
   }
 
- trace.close();
+ //trace.close();
 }
 

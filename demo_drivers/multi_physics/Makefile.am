@@ -7,5 +7,6 @@ insoluble_surfactant \
 soluble_surfactant \
 thermo \
 thermal_fibre \
-axisym_heat_sphere
+axisym_heat_sphere \
+b_convection_sphere
 

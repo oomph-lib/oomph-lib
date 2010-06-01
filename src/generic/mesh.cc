@@ -1983,7 +1983,7 @@ void Mesh::distribute(OomphCommunicator* comm_pt,
  unsigned nelem=this->nelement();
  unsigned nnod=this->nnode();
 
- char filename[100];
+ std::ostringstream filename;
 
  // Doc the partitioning (only on processor 0) 
  //-------------------------------------------
@@ -1997,9 +1997,11 @@ void Mesh::distribute(OomphCommunicator* comm_pt,
       {
        // Note: doc_info.number() was set in Problem::distribute(...) to
        // reflect the submesh number
-       sprintf(filename,"%s/domain%i-%i.dat",doc_info.directory().c_str(),
-               d,doc_info.number());
-       domain_file[d]=new std::ofstream(filename);
+       //Clear the filename
+       filename.str("");
+       filename << doc_info.directory() << "/domain"
+                << d << "-" << doc_info.number() << ".dat";
+       domain_file[d]=new std::ofstream(filename.str().c_str());
       }
      
      // Doc
@@ -2078,9 +2080,11 @@ void Mesh::distribute(OomphCommunicator* comm_pt,
       {
        // Note: doc_info.number() was set in Problem::distribute(...) to
        // reflect the submesh number...
-       sprintf(filename,"%s/node%i-%i.dat",doc_info.directory().c_str(),
-               d,doc_info.number());
-       node_file[d]=new std::ofstream(filename);
+       //Clear the filename
+       filename.str("");
+       filename << doc_info.directory() << "/node"
+                << d << "-" << doc_info.number() << ".dat";
+       node_file[d]=new std::ofstream(filename.str().c_str());
       }
      
      // Doc
@@ -2355,22 +2359,22 @@ void Mesh::distribute(OomphCommunicator* comm_pt,
     } // end of loop over all "processors"; we've now established the
    // elements and the root halo elements for all processors
 
-   int total_number_of_retained_halo_elements=0;
+   //int total_number_of_retained_halo_elements=0;
    
    // Sum values over all processes 
    // - must be zero retained in order to continue
-   MPI_Allreduce(&number_of_retained_halo_elements, 
-                 &total_number_of_retained_halo_elements,1,MPI_INT,
-                 MPI_SUM,comm_pt->mpi_comm());
+   //MPI_Allreduce(&number_of_retained_halo_elements, 
+   //              &total_number_of_retained_halo_elements,1,MPI_INT,
+   //              MPI_SUM,comm_pt->mpi_comm());
 
    if (report_stats)
     {
      oomph_info << "Total number of extra halo elements retained: " 
-                << total_number_of_retained_halo_elements
+                << number_of_retained_halo_elements
                 << " in loop: " << myi << std::endl;
     }
 
-   if (total_number_of_retained_halo_elements==0) {elements_retained=false;} 
+   if (number_of_retained_halo_elements==0) {elements_retained=false;} 
    
    myi++;
 
@@ -3153,22 +3157,21 @@ void Mesh::doc_mesh_distribution(OomphCommunicator* comm_pt,DocInfo& doc_info)
  int my_rank=comm_pt->my_rank();
  int n_proc=comm_pt->nproc();
 
- char filename[100];
+ std::ostringstream filename;
  std::ofstream some_file;
 
  // Doc elements on this processor
- sprintf(filename,"%s/elements_on_proc%i_%i.dat",
-         doc_info.directory().c_str(),
-         my_rank,doc_info.number());
- some_file.open(filename);
+ filename << doc_info.directory() << "/elements_on_proc"
+          << my_rank << "_" << doc_info.number() << ".dat";
+ some_file.open(filename.str().c_str());
  this->output(some_file,5);
  some_file.close();
 
  // Doc non-halo elements on this processor
- sprintf(filename,"%s/non_halo_elements_on_proc%i_%i.dat",
-         doc_info.directory().c_str(),
-         my_rank,doc_info.number());
- some_file.open(filename);
+ filename.str("");
+ filename << doc_info.directory() << "/non_halo_elements_on_proc"
+          << my_rank << "_" << doc_info.number() << ".dat";
+ some_file.open(filename.str().c_str());
 
  // Get to elements on processor
  unsigned nelem=this->nelement();
@@ -3196,10 +3199,10 @@ void Mesh::doc_mesh_distribution(OomphCommunicator* comm_pt,DocInfo& doc_info)
  some_file.close();
  
  // Doc halo elements on this processor
- sprintf(filename,"%s/halo_elements_on_proc%i_%i.dat",
-         doc_info.directory().c_str(),
-         my_rank,doc_info.number());
- some_file.open(filename);
+ filename.str("");
+ filename << doc_info.directory() << "/halo_elements_on_proc"
+          << my_rank << "_" << doc_info.number() << ".dat";
+ some_file.open(filename.str().c_str());
  for (int domain=0; domain<n_proc; domain++)
   {
    // Get vector of halo elements by copy operation
@@ -3227,10 +3230,10 @@ void Mesh::doc_mesh_distribution(OomphCommunicator* comm_pt,DocInfo& doc_info)
  
  
  // Doc haloed elements on this processor
- sprintf(filename,"%s/haloed_elements_on_proc%i_%i.dat",
-         doc_info.directory().c_str(),
-         my_rank,doc_info.number());
- some_file.open(filename);
+ filename.str("");
+ filename << doc_info.directory() << "/haloed_elements_on_proc"
+          << my_rank << "_" << doc_info.number() << ".dat";
+ some_file.open(filename.str().c_str());
  for (int domain=0; domain<n_proc; domain++)
   {
    // Get vector of haloed elements by copy operation
@@ -3260,9 +3263,10 @@ void Mesh::doc_mesh_distribution(OomphCommunicator* comm_pt,DocInfo& doc_info)
  
  
  // Doc nodes on this processor
- sprintf(filename,"%s/nodes_on_proc%i_%i.dat",doc_info.directory().c_str(),
-         my_rank,doc_info.number());
- some_file.open(filename);
+ filename.str("");
+ filename << doc_info.directory() << "/nodes_on_proc"
+          << my_rank << "_" << doc_info.number() << ".dat";
+ some_file.open(filename.str().c_str());
  unsigned nnod=this->nnode();
  for (unsigned j=0;j<nnod;j++)
   {
@@ -3286,9 +3290,10 @@ void Mesh::doc_mesh_distribution(OomphCommunicator* comm_pt,DocInfo& doc_info)
  some_file.close();
  
  // Doc solid nodes on this processor
- sprintf(filename,"%s/solid_nodes_on_proc%i_%i.dat",
-         doc_info.directory().c_str(),my_rank,doc_info.number());
- some_file.open(filename);
+ filename.str("");
+ filename << doc_info.directory() << "/solid_nodes_on_proc"
+          << my_rank << "_" << doc_info.number() << ".dat";
+ some_file.open(filename.str().c_str());
  unsigned nsnod=this->nnode();
  for (unsigned j=0;j<nsnod;j++)
   {
@@ -3318,10 +3323,10 @@ void Mesh::doc_mesh_distribution(OomphCommunicator* comm_pt,DocInfo& doc_info)
  
  
  // Doc halo nodes on this processor
- sprintf(filename,"%s/halo_nodes_on_proc%i_%i.dat",
-         doc_info.directory().c_str(),
-         my_rank,doc_info.number());
- some_file.open(filename);
+ filename.str("");
+ filename << doc_info.directory() << "/halo_nodes_on_proc"
+          << my_rank << "_" << doc_info.number() << ".dat";
+ some_file.open(filename.str().c_str());
  for (int domain=0; domain<n_proc; domain++)
   {
    unsigned nnod=this->nhalo_node(domain);
@@ -3344,10 +3349,10 @@ void Mesh::doc_mesh_distribution(OomphCommunicator* comm_pt,DocInfo& doc_info)
  
  
  // Doc haloed nodes on this processor
- sprintf(filename,"%s/haloed_nodes_on_proc%i_%i.dat",
-         doc_info.directory().c_str(),
-         my_rank,doc_info.number());
- some_file.open(filename);
+ filename.str("");
+ filename << doc_info.directory() << "/haloed_nodes_on_proc"
+          << my_rank << "_" << doc_info.number() << ".dat";
+ some_file.open(filename.str().c_str());
  for (int domain=0; domain<n_proc; domain++)
   {
    unsigned nnod=this->nhaloed_node(domain);
@@ -3369,19 +3374,19 @@ void Mesh::doc_mesh_distribution(OomphCommunicator* comm_pt,DocInfo& doc_info)
  
  
  // Doc mesh
- sprintf(filename,"%s/mesh%i_%i.dat",
-         doc_info.directory().c_str(),
-         my_rank,doc_info.number());
- some_file.open(filename);
+ filename.str("");
+ filename << doc_info.directory() << "/mesh"
+          << my_rank << "_" << doc_info.number() << ".dat";
+ some_file.open(filename.str().c_str());
  this->output(some_file,5);
  some_file.close();
  
  
  // Doc boundary scheme
- sprintf(filename,"%s/boundaries%i_%i.dat",
-         doc_info.directory().c_str(),
-         my_rank,doc_info.number());
- some_file.open(filename);
+ filename.str("");
+ filename << doc_info.directory() << "/boundaries"
+          << my_rank << "_" << doc_info.number() << ".dat";
+ some_file.open(filename.str().c_str());
  this->output_boundaries(some_file);
  some_file.close();
  
@@ -3392,10 +3397,10 @@ void Mesh::doc_mesh_distribution(OomphCommunicator* comm_pt,DocInfo& doc_info)
  unsigned nbound=this->nboundary();
  for (unsigned b=0;b<nbound;b++)
   {
-   sprintf(filename,"%s/boundary_elements%i_%i_%i.dat",
-           doc_info.directory().c_str(),
-           my_rank,b,doc_info.number());
-   some_file.open(filename);
+   filename.str("");
+   filename << doc_info.directory() << "/boundary_elements"
+            << my_rank << "_" << b << "_" << doc_info.number() << ".dat";
+   some_file.open(filename.str().c_str());
    unsigned nelem=this->nboundary_element(b);
    for (unsigned e=0;e<nelem;e++)
     {
@@ -3418,7 +3423,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
  // function in the Problem class that calls this for each (sub)mesh.
 
  MPI_Status status;
- char filename[100];
+ std::ostringstream filename;
  std::ofstream shared_file;
  std::ofstream halo_file;
  std::ofstream haloed_file;
@@ -3437,9 +3442,10 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
    // Loop over domains for shared nodes
    for (int dd=0;dd<n_proc;dd++)
     {   
-     sprintf(filename,"%s/shared_node_check%i_%i.dat",
-             doc_info.directory().c_str(),my_rank,dd);
-     shared_file.open(filename);
+     filename.str("");
+     filename << doc_info.directory() << "/shared_node_check"
+              << my_rank << "_" << dd << ".dat";
+     shared_file.open(filename.str().c_str());
      shared_file << "ZONE " << std::endl;
      
      unsigned nnod=nshared_node(dd);
@@ -3644,9 +3650,11 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
    // Loop over domains for halo elements
    for (int dd=0;dd<n_proc;dd++)
     {
-     sprintf(filename,"%s/halo_element_check%i_%i_mesh_%i.dat",
-             doc_info.directory().c_str(),my_rank,dd,doc_info.number());
-     halo_file.open(filename);
+     filename.str("");
+     filename << doc_info.directory() << "/halo_element_check"
+              << my_rank << "_" << dd << "_mesh_" << doc_info.number()
+              << ".dat";
+     halo_file.open(filename.str().c_str());
      
      // Get vectors of halo/haloed elements by copy operation
      Vector<GeneralisedElement*> halo_elem_pt(halo_element_pt(dd));
@@ -3680,9 +3688,11 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
    // Loop over domains for halo elements
    for (int d=0;d<n_proc;d++)
     {
-     sprintf(filename,"%s/haloed_element_check%i_%i_mesh_%i.dat",
-             doc_info.directory().c_str(),d,my_rank,doc_info.number());
-     haloed_file.open(filename);
+     filename.str("");
+     filename << doc_info.directory() << "/haloed_element_check"
+              << d << "_" << my_rank << "_mesh_" << doc_info.number() 
+              << ".dat";
+     haloed_file.open(filename.str().c_str());
      
      // Get vectors of halo/haloed elements by copy operation
      Vector<GeneralisedElement*> 
@@ -3786,12 +3796,14 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
 //         oomph_info << "Received from process " << dd 
 //            << ", with size=" << nod_dim*nnod_per_el*nelem_halo << std::endl;
              
-             sprintf(filename,"%s/error_haloed_check%i_%i.dat",
-                     doc_info.directory().c_str(),dd,my_rank);
-             haloed_file.open(filename);
-             sprintf(filename,"%s/error_halo_check%i_%i.dat",
-                     doc_info.directory().c_str(),dd,my_rank);
-             halo_file.open(filename);
+             filename.str("");
+             filename << doc_info.directory() << "/error_haloed_check"
+                      << dd << "_" << my_rank << ".dat";
+             haloed_file.open(filename.str().c_str());
+             filename.str("");
+             filename << doc_info.directory() << "/error_halo_check"
+                      << dd << "_" << my_rank << ".dat";
+             halo_file.open(filename.str().c_str());
              
              unsigned count=0;         
              unsigned count_hanging=0;
@@ -3975,9 +3987,11 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
    // Loop over domains for halo nodes
    for (int dd=0;dd<n_proc;dd++)
     {   
-     sprintf(filename,"%s/halo_node_check%i_%i_mesh_%i.dat",
-             doc_info.directory().c_str(),my_rank,dd,doc_info.number());
-     halo_file.open(filename);
+     filename.str("");
+     filename << doc_info.directory() << "/halo_node_check"
+              << my_rank << "_" << dd << "_mesh_" << doc_info.number()
+              << ".dat";
+     halo_file.open(filename.str().c_str());
      halo_file << "ZONE " << std::endl;
      
      unsigned nnod=nhalo_node(dd);
@@ -4022,9 +4036,11 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
    // Loop over domains for haloed nodes
    for (int d=0;d<n_proc;d++)
     {
-     sprintf(filename,"%s/haloed_node_check%i_%i_mesh_%i.dat",
-             doc_info.directory().c_str(),d,my_rank,doc_info.number());
-     haloed_file.open(filename);
+     filename.str("");
+     filename << doc_info.directory() << "/haloed_node_check"
+              << d << "_" << my_rank << "_mesh_" << doc_info.number() 
+              << ".dat";
+     haloed_file.open(filename.str().c_str());
      haloed_file << "ZONE " << std::endl;
      
      unsigned nnod=nhaloed_node(d);

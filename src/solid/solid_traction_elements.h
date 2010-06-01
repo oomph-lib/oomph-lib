@@ -1376,6 +1376,33 @@ public:
    fill_in_jacobian_from_external_by_fd(residuals,jacobian);
   }
 
+
+ /// \short Fill in contribution to Mass matrix and 
+ /// Jacobian. There is no contributiont to mass matrix
+ /// so simply call the fill_in_contribution_to_jacobian term
+ /// Note that the Jacobian is multiplied by minus one to 
+ /// ensure that the mass matrix is positive semi-definite.
+ void fill_in_contribution_to_jacobian_and_mass_matrix(
+  Vector<double> &residuals,
+  DenseMatrix<double> &jacobian,
+  DenseMatrix<double> &mass_matrix)
+  {
+   //Just call the jacobian calculation
+   fill_in_contribution_to_jacobian(residuals,jacobian);
+   
+   //Multiply the residuals and jacobian by minus one
+   const unsigned n_dof = this->ndof();
+   for(unsigned i=0;i<n_dof;i++)
+    {
+     residuals[i] *= -1.0;
+     for(unsigned j=0;j<n_dof;j++)
+      {
+       jacobian(i,j) *= -1.0;
+      }
+    }
+  }
+
+
  
  /// \short Output function
  void output(std::ostream &outfile, const unsigned &n_plot)

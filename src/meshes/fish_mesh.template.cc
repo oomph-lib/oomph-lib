@@ -95,14 +95,12 @@ void FishMesh<ELEMENT>::build_mesh(TimeStepper* time_stepper_pt)
   {
    // Output the domain
    std::ofstream some_file;
-   char filename[100];
    
    // Number of plot points in each coordinate direction.
    unsigned npts=10;
    
    // Output domain
-   sprintf(filename,"fish_domain.dat");
-   some_file.open(filename);
+   some_file.open("fish_domain.dat");
    Domain_pt->output(some_file,npts);
    Domain_pt->output_macro_element_boundaries(some_file,npts);
    some_file.close();

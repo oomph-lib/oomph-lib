@@ -31,6 +31,7 @@
 
 #include<iterator>
 #include<algorithm>
+#include<string>
 
 #include "xda_tet_mesh.template.h"
 
@@ -59,7 +60,7 @@ namespace oomph
   unsigned n_bound_face;
  
   // Dummy storage to jump lines
-  char dummy[100];
+  char dummy[101];
     
   // Ignore file format
   infile.getline(dummy, 100);
@@ -91,11 +92,11 @@ namespace oomph
   Element_pt.resize(n_element);
 
   // Read first line with node labels and count them
-  string line;
-  getline(infile,line);
+  std::string line;
+  std::getline(infile,line);
   std::istringstream ostr(line);
-  std::istream_iterator<string> it(ostr);
-  std::istream_iterator<string> end;
+  std::istream_iterator<std::string> it(ostr);
+  std::istream_iterator<std::string> end;
   unsigned nnod_el = 0;
   Vector<unsigned> first_node;
   while (it != end)

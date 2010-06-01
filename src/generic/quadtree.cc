@@ -1175,15 +1175,18 @@ void QuadTreeForest::check_all_neighbours(DocInfo &doc_info)
  //If we are documenting the results, then open the files
  if (doc_info.doc_flag())
   {
-   char fullname[100];
-   sprintf(fullname,"%s/neighbours%i.dat",doc_info.directory().c_str(),
-           doc_info.number());
-   oomph_info << "opened " << fullname << " to doc neighbours" << std::endl;
-   neigh_file.open(fullname);
-   sprintf(fullname,"%s/neighbours%i.txt",doc_info.directory().c_str(),
-           doc_info.number());
-   oomph_info << "opened " << fullname << " to doc neighbours" << std::endl;
-   neigh_txt_file.open(fullname);  
+   std::ostringstream fullname;
+   fullname << doc_info.directory() << "/neighbours"
+            << doc_info.number() << ".dat";
+   oomph_info << "opened " << fullname.str() << " to doc neighbours" 
+              << std::endl;
+   neigh_file.open(fullname.str().c_str());
+   fullname.str("");
+   fullname << doc_info.directory() << "/neighbours"
+            << doc_info.number() << ".txt";
+   oomph_info << "opened " << fullname.str() << " to doc neighbours" 
+              << std::endl;
+   neigh_txt_file.open(fullname.str().c_str());  
   }
 
  //Call the standard documentation function
@@ -1243,19 +1246,22 @@ void QuadTreeForest::open_hanging_node_files(DocInfo &doc_info,
  //If we are documenting the output, open the files
  if (doc_info.doc_flag())
   {
-   char fullname[100];
-   sprintf(fullname,"%s/hang_nodes_s%i.dat",doc_info.directory().c_str(),
-           doc_info.number());
-   output_stream[0]->open(fullname);  
-   sprintf(fullname,"%s/hang_nodes_n%i.dat",doc_info.directory().c_str(),
-           doc_info.number());
-   output_stream[1]->open(fullname);  
-   sprintf(fullname,"%s/hang_nodes_w%i.dat",doc_info.directory().c_str(),
-           doc_info.number());
-   output_stream[2]->open(fullname);
-   sprintf(fullname,"%s/hang_nodes_e%i.dat",doc_info.directory().c_str(),
-           doc_info.number());
-   output_stream[3]->open(fullname);
+   std::ostringstream fullname;
+   fullname << doc_info.directory() << "/hang_nodes_s"
+            << doc_info.number() << ".dat";
+   output_stream[0]->open(fullname.str().c_str());  
+   fullname.str("");
+   fullname << doc_info.directory() << "/hang_nodes_n"
+            << doc_info.number() << ".dat";
+   output_stream[1]->open(fullname.str().c_str());  
+   fullname.str("");
+   fullname << doc_info.directory() << "/hang_nodes_w"
+            << doc_info.number() << ".dat";
+   output_stream[2]->open(fullname.str().c_str());
+   fullname.str("");
+   fullname << doc_info.directory() << "/hang_nodes_e"
+            << doc_info.number() << ".dat";
+   output_stream[3]->open(fullname.str().c_str());
   }
 }
 

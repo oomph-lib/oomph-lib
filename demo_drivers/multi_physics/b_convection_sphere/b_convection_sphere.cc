@@ -26,8 +26,7 @@
 //LIC// 
 //LIC//====================================================================
 
-//Flow past a heated sphere, numbers taken from 
-//Dennis et al JFM 60, pp 273--283
+//Convecting-heated sphere
 
 // Generic oomph-lib stuff
 #include "generic.h"
@@ -37,8 +36,6 @@
 
 // Navier Stokes
 #include "axisym_buoyant_navier_stokes.h"
-
-#include "assert.h"
 
 using namespace std;
 
@@ -52,16 +49,16 @@ using namespace oomph;
 namespace Global_Parameters
 {
  /// Reynolds number
- double Re = 0.0;
+ double Re = 1.0;
 
  /// Prandtl number
  double Pr = 0.73;
 
  /// Peclet number
- double Pe = Re*Pr;
+ double Pe = 1.0;
 
  /// Rayleigh number
- double Ra = 0.0;
+ double Ra = 10.0;
  
  /// Gravity
  Vector<double> G;
@@ -272,16 +269,18 @@ public:
          mesh_pt()->boundary_node_pt(ibound,inod)->set_value(0,0.0);
         }
 
-       //No radial flow on outlet
+       //No radial flow or concentration on outlet
        if(ibound==2) 
         {
          mesh_pt()->boundary_node_pt(ibound,inod)->set_value(0,0.0);
         }
 
-       //No radial flow on side boundary
+       //No flow and concentration on side boundary
        if(ibound==1)
         {
          mesh_pt()->boundary_node_pt(ibound,inod)->set_value(0,0.0);
+         mesh_pt()->boundary_node_pt(ibound,inod)->set_value(1,0.0);
+         mesh_pt()->boundary_node_pt(ibound,inod)->set_value(3,0.0);
         }
 
        //Plug flow and no concentration on inlet only
@@ -298,7 +297,7 @@ public:
         
 
          mesh_pt()->boundary_node_pt(ibound,inod)->set_value(0,0.0);
-         mesh_pt()->boundary_node_pt(ibound,inod)->set_value(1,1.0);
+         mesh_pt()->boundary_node_pt(ibound,inod)->set_value(1,0.0);
          mesh_pt()->boundary_node_pt(ibound,inod)->set_value(3,0.0);
         }
 
@@ -390,7 +389,7 @@ FlowAroundHalfCylinderProblem<ELEMENT>::FlowAroundHalfCylinderProblem(
  // Build mesh
  Problem::mesh_pt()=
   new RefineableHalfRectangleWithHoleMesh<ELEMENT>(cylinder_pt,radius,length,
-                                                 49.0,2,49.0,2,1.0,2);
+                                                 4.0,2,4.0,2,1.0,2);
 
  // Set error estimator
  Z2ErrorEstimator* error_estimator_pt=new Z2ErrorEstimator;
@@ -417,8 +416,8 @@ FlowAroundHalfCylinderProblem<ELEMENT>::FlowAroundHalfCylinderProblem(
    unsigned num_nod= mesh_pt()->nboundary_node(ibound);
    for (unsigned inod=0;inod<num_nod;inod++)
     {
-     //Pin boundary conditions on cylinder and inlet
-     if((ibound==0) || (ibound==4))
+     //Pin boundary conditions on cylinder, inlet and side
+     if((ibound==0) || (ibound==1) || (ibound==4))
       {
        mesh_pt()->boundary_node_pt(ibound,inod)->pin(0);
        mesh_pt()->boundary_node_pt(ibound,inod)->pin(1);
@@ -506,20 +505,23 @@ FlowAroundHalfCylinderProblem<ELEMENT>::FlowAroundHalfCylinderProblem(
         mesh_pt()->boundary_node_pt(ibound,inod)->set_value(0,0.0);
        }
       
-      //No radial flow on outlet
+      //No radial flow or concentration on outlet
       if(ibound==2) 
        {
         mesh_pt()->boundary_node_pt(ibound,inod)->set_value(0,0.0);
+        // mesh_pt()->boundary_node_pt(ibound,inod)->set_value(3,0.0);
        }
       
       //No radial flow on side boundary
       if(ibound==1)
        {
         mesh_pt()->boundary_node_pt(ibound,inod)->set_value(0,0.0);
+        mesh_pt()->boundary_node_pt(ibound,inod)->set_value(1,0.0);
+        mesh_pt()->boundary_node_pt(ibound,inod)->set_value(3,0.0);
        }
       
 
-      //Plug flow and zero concentration on inlet
+      //Zero flow and zero concentration on inlet 
       if(ibound==0)
        {
         //Specify the exact flow at inlet
@@ -532,7 +534,7 @@ FlowAroundHalfCylinderProblem<ELEMENT>::FlowAroundHalfCylinderProblem(
         mesh_pt()->boundary_node_pt(ibound,inod)->set_value(1,wind[1]);*/
 
         mesh_pt()->boundary_node_pt(ibound,inod)->set_value(0,0.0);
-        mesh_pt()->boundary_node_pt(ibound,inod)->set_value(1,1.0);
+        mesh_pt()->boundary_node_pt(ibound,inod)->set_value(1,0.0);
         mesh_pt()->boundary_node_pt(ibound,inod)->set_value(3,0.0);
        }
 
@@ -563,9 +565,9 @@ int main()
  Global_Parameters::G[2] = 0.0;
  
  // radius and Length of domain
- double radius=50.0;
- double length=100.0;
- Global_Parameters::Sphere_centre_z = 50.0;
+ double radius=5.0;
+ double length=10.0;
+ Global_Parameters::Sphere_centre_z = 5.0;
 
  //Create a new ellipse object as the central cylinder
  HalfEllipse* cylinder_pt = 
@@ -584,13 +586,14 @@ int main()
  // Trace file
  std::ofstream trace("trace.dat");
 
- //Step up in Reynolds number (and therefore Peclet number)
+ //Step up in the Rayleigh number
  for(unsigned i=0;i<2;i++)
   {
    problem.newton_solve(max_adapt);
 
    //Open an output file
-   sprintf(filename,"soln_Re%g.dat", Global_Parameters::Re);
+   sprintf(filename,"soln_Re%g_Ra%g.dat", Global_Parameters::Re,
+           Global_Parameters::Ra);
    //Doc result
    ofstream outfile(filename);
    problem.mesh_pt()->output(outfile,5);
@@ -604,8 +607,9 @@ int main()
          << " " << Global_Parameters::Pe << " " 
          << drag[0] << " " << drag[1] << " " << 2.0*nusselt << std::endl;
 
-   Global_Parameters::Re += 10.0;
-   Global_Parameters::Pe = Global_Parameters::Pr*Global_Parameters::Re;
+   //Global_Parameters::Re += 10.0;
+   //Global_Parameters::Pe = Global_Parameters::Pr*Global_Parameters::Re;
+   Global_Parameters::Ra += 40.0;
   }
 
  trace.close();

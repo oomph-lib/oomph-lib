@@ -618,9 +618,9 @@ public:
  /// nplot points in each "coordinate direction)
  std::string tecplot_zone_string(const unsigned& nplot)
  {
-  char header[100];
-  sprintf(header,"ZONE I=%i\n",nplot);
-  return header;
+  std::ostringstream header;
+  header << "ZONE I=" << nplot << "\n";
+  return header.str();
  }
 
  /// \short Return total number of plot points (when plotting 
@@ -849,9 +849,9 @@ public:
  /// nplot points in each "coordinate direction)
  std::string tecplot_zone_string(const unsigned& nplot)
   {
-   char header[100];
-   sprintf(header,"ZONE I=%i, J=%i\n",nplot,nplot);
-   return header;
+   std::ostringstream header;
+   header << "ZONE I=" << nplot << ", J=" << nplot << "\n";
+   return header.str();
   }
 
  /// Return total number of plot points (when plotting 
@@ -1101,9 +1101,10 @@ public:
  /// nplot points in each "coordinate direction)
  std::string tecplot_zone_string(const unsigned& nplot)
   {
-   char header[100];
-   sprintf(header,"ZONE I=%i, J=%i, K=%i\n",nplot,nplot,nplot);
-   return header;
+   std::ostringstream header;
+   header << "ZONE I=" << nplot << ", J=" << nplot << ", K=" 
+          << nplot << "\n";
+   return header.str();
   }
 
  /// Return total number of plot points (when plotting 

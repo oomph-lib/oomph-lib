@@ -1097,15 +1097,14 @@ namespace SolidHelpers
    // Output principal stress vectors at the centre of all elements
    std::ofstream pos_file;
    std::ofstream neg_file;
-   char filename[100];
-   sprintf(filename,"%s/pos_principal_stress%i.dat",
-           doc_info.directory().c_str(),
-           doc_info.number());
-   pos_file.open(filename);
-   sprintf(filename,"%s/neg_principal_stress%i.dat",
-           doc_info.directory().c_str(),
-           doc_info.number());
-   neg_file.open(filename);
+   std::ostringstream filename;
+   filename << doc_info.directory() << "/pos_principal_stress"
+            << doc_info.number() << ".dat";
+   pos_file.open(filename.str().c_str());
+   filename.str("");
+   filename << doc_info.directory() << "/neg_principal_stress"
+            << doc_info.direectory() << ".dat";
+   neg_file.open(filename.str().c_str());
    
    // Write dummy data in both so there's at lest one zone in each
    pos_file << 0.0 << " " << 0.0 << " " << 0.0 << " " << 0.0 << " " << std::endl;

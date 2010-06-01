@@ -501,7 +501,7 @@ namespace oomph
   void doc_solution(DocInfo& doc_info)
   { 
    std::ofstream some_file;
-   char filename[100];
+   std::ostringstream filename;
    
    // Number of plot points
    unsigned npts;
@@ -530,16 +530,17 @@ namespace oomph
     }
 
    // Output solution 
-   sprintf(filename,"%s/fp_soln%i.dat",doc_info.directory().c_str(),
-           doc_info.number());
-   some_file.open(filename);
+   filename << doc_info.directory() << "/fp_soln" << doc_info.number() 
+            << ".dat";
+   some_file.open(filename.str().c_str());
    some_file.precision(20);
    mesh_pt()->output(some_file,npts);
    some_file.close();
    
-   sprintf(filename,"%s/fp_exact_soln%i.dat",doc_info.directory().c_str(),
-           doc_info.number());
-   some_file.open(filename);
+   filename.str("");
+   filename << doc_info.directory() << "/fp_exact_soln" 
+            << doc_info.number() << ".dat";
+   some_file.open(filename.str().c_str());
    some_file.precision(20);
    mesh_pt()->output_fct(some_file,npts,
                          PressureAdvectionDiffusionValidation::get_exact_u); 

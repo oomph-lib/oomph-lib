@@ -327,10 +327,10 @@ template<>
 inline std::string QHermiteElement<1>::
 tecplot_zone_string(const unsigned& nplot)
   {
- char header[100];
- sprintf(header,"ZONE I=%i\n",nplot);
- return header;
-}
+   std::ostringstream header;
+   header << "ZONE I=" << nplot << "\n";
+   return header.str();
+  }
 
 //========================================================================
 /// Return total number of plot points (when plotting nplot points in each
@@ -370,11 +370,12 @@ inline void QHermiteElement<2>::get_s_plot(const unsigned& i, const
 /// each coordinate direction)
 //=======================================================================
 template<> 
-inline std::string QHermiteElement<2>::tecplot_zone_string(const unsigned& nplot)
+inline std::string QHermiteElement<2>::tecplot_zone_string(
+ const unsigned& nplot)
 {
- char header[100];
- sprintf(header,"ZONE I=%i, J=%i\n",nplot,nplot);
- return header;
+ std::ostringstream header;
+ header << "ZONE I=" << nplot << ", J=" << nplot << "\n";
+ return header.str();
 }
 
 //=======================================================================

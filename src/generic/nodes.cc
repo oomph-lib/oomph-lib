@@ -1528,7 +1528,7 @@ void Node::resize(const unsigned &n_value)
     }
    
    // By default use geometric hanging data for any new entries
-   for (int i=old_nvalue;i<int(n_value);i++)
+   for (int i=int(old_nvalue);i<int(n_value);i++)
     {
      set_hanging_pt(backup_hanging_pt[0],i);
     }

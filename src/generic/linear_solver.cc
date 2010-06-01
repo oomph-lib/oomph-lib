@@ -700,7 +700,12 @@ void SuperLUSolver::solve(Problem* const &problem_pt, DoubleVector &result)
      //Now call the linear algebra solve, if desired
      if(!Suppress_solve) 
       {
-       if (!(*result.distribution_pt() == *this->distribution_pt()))
+       //If the distribution of the result has been build and 
+       //does not match that of
+       //the solver then redistribute before the solve and return
+       //to the incoming distribution afterwards.
+       if((result.built()) && 
+          (!(*result.distribution_pt() == *this->distribution_pt())))
         {
          LinearAlgebraDistribution 
           temp_global_dist(result.distribution_pt());       
@@ -714,10 +719,11 @@ void SuperLUSolver::solve(Problem* const &problem_pt, DoubleVector &result)
         }
       }
     }
-   //Otherwise its the distributed solve version
+   //Otherwise its the global solve version
    else
     {
      // Storage for the residuals vector
+     // A non-distriubted residuals vector
      LinearAlgebraDistribution dist(problem_pt->communicator_pt(),
                                     problem_pt->ndof(),
                                     false);
@@ -739,14 +745,28 @@ void SuperLUSolver::solve(Problem* const &problem_pt, DoubleVector &result)
      //Now call the linear algebra solve, if desired
      if(!Suppress_solve) 
       {
-       solve(&jacobian,residuals,result);
+       //If the result distribution has been built and 
+       //does not match the global distribution
+       //the redistribute before the solve and then return to the 
+       //distributed version afterwards
+       if((result.built()) &&  (!(*result.distribution_pt() == dist)))
+        {
+         LinearAlgebraDistribution 
+          temp_global_dist(result.distribution_pt());       
+         result.build(&dist,0.0);
+         solve(&jacobian,residuals,result);
+         result.redistribute(&temp_global_dist);
+        }
+       else
+        {
+         solve(&jacobian,residuals,result);
+        }
       }
     }
-
    // Set Delete_matrix back to original value
    Dist_delete_matrix_data = copy_of_Delete_matrix_data;
   }
-
+   
  // OTHERWISE WE ARE USING SUPERLU (SERIAL)
  //////////////////////////////////////////
  else
@@ -783,7 +803,26 @@ void SuperLUSolver::solve(Problem* const &problem_pt, DoubleVector &result)
       }
      
      //Now call the linear algebra solve, if desired
-     if(!Suppress_solve) {solve(&CR_jacobian,residuals,result);}
+     if(!Suppress_solve) 
+      {
+       //If the result vector is built and distributed
+       //then need to redistribute into the same form as the
+       //RHS (non-distributed)
+       if((result.built()) &&
+          (!(*result.distribution_pt() == *this->distribution_pt())))
+        {
+         LinearAlgebraDistribution 
+          temp_global_dist(result.distribution_pt());       
+         result.build(this->distribution_pt(),0.0);
+         solve(&CR_jacobian,residuals,result);
+         result.redistribute(&temp_global_dist);
+        }
+       //Otherwise just solve
+       else
+        {
+         solve(&CR_jacobian,residuals,result);
+        }
+      }
     }
    //Otherwise its the compressed column version
    else
@@ -805,7 +844,25 @@ void SuperLUSolver::solve(Problem* const &problem_pt, DoubleVector &result)
       }
      
      //Now call the linear algebra solve, if desired
-     if(!Suppress_solve) {solve(&CC_jacobian,residuals,result);}
+     if(!Suppress_solve) 
+      {
+       //If the result vector is built and distributed
+       //then need to redistribute into the same form as the
+       //RHS
+       if((result.built()) && 
+          (!(*result.distribution_pt() == *this->distribution_pt())))
+        {
+         LinearAlgebraDistribution 
+          temp_global_dist(result.distribution_pt());       
+         result.build(this->distribution_pt(),0.0);
+         solve(&CC_jacobian,residuals,result);
+         result.redistribute(&temp_global_dist);
+        }
+       //Otherwise just solve
+       else
+        {
+         solve(&CC_jacobian,residuals,result);}
+      }
     }
    
    //Set the sign of the jacobian 

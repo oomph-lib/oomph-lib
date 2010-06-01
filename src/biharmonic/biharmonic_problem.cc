@@ -350,15 +350,14 @@ doc_solution(DocInfo& doc_info,
              FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
 {  
  std::ofstream some_file;
- char filename[100];
+ std::ostringstream filename;
  
  // Number of plot points: npts x npts
  unsigned npts=5;
 
  // Output solution 
- sprintf(filename,"%s/soln_%i.dat",doc_info.directory().c_str(),
-         doc_info.number());
- some_file.open(filename);
+ filename << doc_info.directory() << "/soln_" << doc_info.number() << ".dat";
+ some_file.open(filename.str().c_str());
  Bulk_element_mesh_pt->output(some_file,npts);
  some_file.close();
  
@@ -367,17 +366,19 @@ doc_solution(DocInfo& doc_info,
   {
 
    // Output exact solution
-   sprintf(filename,"%s/exact_soln_%i.dat",doc_info.directory().c_str(),
-           doc_info.number());
-   some_file.open(filename); 
+   filename.str("");
+   filename << doc_info.directory() << "/exact_soln_"
+            << doc_info.number() << ".dat";
+   some_file.open(filename.str().c_str()); 
    Bulk_element_mesh_pt->output_fct(some_file,npts, exact_soln_pt);
    some_file.close();
      
    // Doc error and return of the square of the L2 error
    double error,norm;
-   sprintf(filename,"%s/error_%i.dat",doc_info.directory().c_str(),
-           doc_info.number());
-   some_file.open(filename);
+   filename.str("");
+   filename << doc_info.directory() << "/error_" 
+            << doc_info.number() << ".dat";
+   some_file.open(filename.str().c_str());
    Bulk_element_mesh_pt->compute_error(some_file, exact_soln_pt, error, norm);
    some_file.close();
    
@@ -849,22 +850,23 @@ doc_solution(DocInfo& doc_info,
 {  
  // create an output stream
  std::ofstream some_file;
- char filename[100];
- 
+ std::ostringstream filename;
+
  // Number of plot points: npts x npts
  unsigned npts=5;
 
  // Output solution 
- sprintf(filename,"%s/soln_%s.dat",doc_info.directory().c_str(),
-         doc_info.label().c_str());
- some_file.open(filename);
+ filename << doc_info.directory() << "/soln_"
+          << doc_info.label() << ".dat";
+ some_file.open(filename.str().c_str());
  mesh_pt()->output(some_file,npts);
  some_file.close();
 
   // Output fluid velocity solution
- sprintf(filename,"%s/soln_velocity_%s.dat",doc_info.directory().c_str(),
-         doc_info.label().c_str());
- some_file.open(filename);
+ filename.str("");
+ filename << doc_info.directory() << "/soln_velocity_" 
+          << doc_info.label() << ".dat";
+ some_file.open(filename.str().c_str());
  unsigned n_element = mesh_pt()->nelement();
  for (unsigned i = 0; i < n_element-Npoint_element; i++)
   {
@@ -879,17 +881,19 @@ doc_solution(DocInfo& doc_info,
   {
 
    // Output exact solution
-   sprintf(filename,"%s/exact_soln_%s.dat",doc_info.directory().c_str(),
-           doc_info.label().c_str());
-   some_file.open(filename); 
+   filename.str("");
+   filename << doc_info.directory() << "/exact_soln_"
+            << doc_info.label() << ".dat";
+   some_file.open(filename.str().c_str()); 
    mesh_pt()->output_fct(some_file,npts, exact_soln_pt);
    some_file.close();
      
    // Doc error and return of the square of the L2 error
    double error,norm;
-   sprintf(filename,"%s/error_%s.dat",doc_info.directory().c_str(),
-           doc_info.label().c_str());
-   some_file.open(filename);
+   filename.str("");
+   filename << doc_info.directory() << "/error_"
+            << doc_info.label() << ".dat";
+   some_file.open(filename.str().c_str());
    mesh_pt()->compute_error(some_file, exact_soln_pt, error, norm);
    some_file.close();
    

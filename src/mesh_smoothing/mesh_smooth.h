@@ -474,24 +474,26 @@ public:
   if (!doc_info.doc_flag()) return;
   
   std::ofstream some_file;
-  char filename[100];
+  std::ostringstream filename;
   
   // Number of plot points
   unsigned npts;
   npts=5;
   
-  sprintf(filename,"%s/smoothing_soln%i.dat",doc_info.directory().c_str(),
-          doc_info.number());
-  some_file.open(filename);
+  filename << doc_info.directory() << "/smoothing_soln"
+           << doc_info.number() << ".dat";
+  
+  some_file.open(filename.str().c_str());
   Dummy_mesh_pt->output(some_file,npts);
   some_file.close();
   
   // Check for inverted elements 
   bool mesh_has_inverted_elements;
   std::ofstream inverted_fluid_elements;
-  sprintf(filename,"%s/inverted_elements_during_smoothing%i.dat",
-          doc_info.directory().c_str(),doc_info.number());
-  some_file.open(filename);
+  filename.str("");
+  filename << doc_info.directory() << "/inverted_elements_during_smoothing"
+           << doc_info.number() << ".dat";
+  some_file.open(filename.str().c_str());
   Dummy_mesh_pt->check_inverted_elements(mesh_has_inverted_elements,
                                          some_file);  
   some_file.close(); 

@@ -174,12 +174,6 @@ void RefineableMeshBase::refine_base_mesh(
 
    // Now do the actual mesh refinement
    adapt_mesh();
-   
-//    // Doc refinement hierarchy
-//    char filename[100];   
-//    sprintf(filename,"mesh%i.dat",l);
-//    string name=filename;
-//    output(name);
 
   }
 
@@ -869,13 +863,13 @@ void RefineableMeshBase::adapt_mesh(DocInfo& doc_info)
    Forest_pt->stick_leaves_into_vector(leaf_nodes_pt);
 
    //If we are documenting the output, create the filename
-   char fullname[100];
+   std::ostringstream fullname;
    std::ofstream new_nodes_file;
    if(doc_info.doc_flag())
     {
-     sprintf(fullname,"%s/new_nodes%i.dat",doc_info.directory().c_str(),
-             doc_info.number());
-     new_nodes_file.open(fullname);
+     fullname << doc_info.directory() << "/new_nodes" 
+              << doc_info.number() << ".dat";
+     new_nodes_file.open(fullname.str().c_str());
     }
 
    // Build all elements and store vector of pointers to new nodes
@@ -1165,9 +1159,10 @@ void RefineableMeshBase::adapt_mesh(DocInfo& doc_info)
 
      //Open the output file
      std::ofstream bcs_file;
-     sprintf(fullname,"%s/bcs%i.dat",doc_info.directory().c_str(),
-             doc_info.number());
-     bcs_file.open(fullname);  
+     fullname.str("");
+     fullname << doc_info.directory() << "/bcs" << doc_info.number()
+              << ".dat";
+     bcs_file.open(fullname.str().c_str());  
    
      // Loop over elements
      for(unsigned long e=0;e<num_tree_nodes;e++)
@@ -1207,9 +1202,10 @@ void RefineableMeshBase::adapt_mesh(DocInfo& doc_info)
      // Doc all nodes
      //---------------
      std::ofstream all_nodes_file;
-     sprintf(fullname,"%s/all_nodes%i.dat",doc_info.directory().c_str(),
-             doc_info.number());
-     all_nodes_file.open(fullname);  
+     fullname.str("");
+     fullname << doc_info.directory() << "/all_nodes"
+              << doc_info.number()  << ".dat";
+     all_nodes_file.open(fullname.str().c_str());  
    
      all_nodes_file << "ZONE \n"; 
      
@@ -1233,9 +1229,10 @@ void RefineableMeshBase::adapt_mesh(DocInfo& doc_info)
      // Doc all hanging nodes:
      //-----------------------
      std::ofstream some_file;
-     sprintf(fullname,"%s/all_hangnodes%i.dat",doc_info.directory().c_str(),
-             doc_info.number());
-     some_file.open(fullname);
+     fullname.str("");
+     fullname << doc_info.directory() << "/all_hangnodes"
+              << doc_info.number() << ".dat";
+     some_file.open(fullname.str().c_str());
      for(unsigned long n=0;n<n_node;n++)
       {
        Node* nod_pt=this->node_pt(n);
@@ -1260,9 +1257,11 @@ void RefineableMeshBase::adapt_mesh(DocInfo& doc_info)
 
      // Doc all hanging nodes and their masters 
      // View with QHangingNodesWithMasters.mcr
-     sprintf(fullname,"%s/geometric_hangnodes_withmasters%i.dat",
-             doc_info.directory().c_str(),doc_info.number());
-     some_file.open(fullname);
+     fullname.str("");
+     fullname << doc_info.directory() 
+              << "/geometric_hangnodes_withmasters" 
+              << doc_info.number() << ".dat";
+     some_file.open(fullname.str().c_str());
      for(unsigned long n=0;n<n_node;n++)
       {
        Node* nod_pt=this->node_pt(n);
@@ -1296,9 +1295,11 @@ void RefineableMeshBase::adapt_mesh(DocInfo& doc_info)
      // View with QHangingNodesWithMasters.mcr
      for(unsigned i=0;i<ncont_interpolated_values;i++)
       {
-       sprintf(fullname,"%s/nonstandard_hangnodes_withmasters%i_%i.dat",
-               doc_info.directory().c_str(),i,doc_info.number());
-       some_file.open(fullname);
+       fullname.str("");
+       fullname << doc_info.directory()
+                <<"/nonstandard_hangnodes_withmasters" << i << "_" 
+                << doc_info.number() << ".dat";
+       some_file.open(fullname.str().c_str());
        unsigned n_nod=this->nnode();
        for(unsigned long n=0;n<n_nod;n++)
         {
