@@ -292,8 +292,10 @@ public:
   {
    delete Fluid_time_stepper_pt;
    delete Wall_pt;
-   delete Wall_time_stepper_pt; 
+   delete Wall_time_stepper_pt;
+   delete Fluid_mesh_pt->spatial_error_estimator_pt();
    delete Fluid_mesh_pt;
+   delete Solid_mesh_pt->spatial_error_estimator_pt();
    delete Solid_mesh_pt;
    delete Solid_fsi_traction_mesh_pt;
    delete Lagrange_multiplier_mesh_pt;
@@ -554,6 +556,8 @@ PseudoElasticCollapsibleChannelProblem()
  
  // Create elements
  Lagrange_multiplier_mesh_pt = new SolidMesh;
+ //Initialise boundary_pt to zero
+ Solid_fsi_boundary_pt=0;
  create_lagrange_multiplier_elements();
 
  // Create solid traction elements for external pressure
@@ -743,9 +747,8 @@ PseudoElasticCollapsibleChannelProblem()
  // pointers to the meshes. 
    
  //Doc boundary coordinates in fluid
- char filename[100];
- sprintf(filename,"RESLT/fluid_boundary_coordinates.dat");
- FSI_functions::Doc_boundary_coordinate_file.open(filename);
+ FSI_functions::Doc_boundary_coordinate_file.open(
+ 	"RESLT/fluid_boundary_coordinates.dat");
  
  // Setup FSI: Pass ID of fluid FSI boundary and associated
  // mesh of solid fsi traction elements.
@@ -880,6 +883,9 @@ create_lagrange_multiplier_elements()
  unsigned b=3;
 
  // create the geom object for the wall
+ // delete existing object, if there is one
+ if(Solid_fsi_boundary_pt!=0)  {delete Solid_fsi_boundary_pt;}
+ //Now create the new object.
  Solid_fsi_boundary_pt=
   new MeshAsGeomObject(Solid_fsi_traction_mesh_pt);
 
@@ -1010,7 +1016,7 @@ void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT,SOLID_ELEMENT>
 
  // Rebuild the global mesh
  rebuild_global_mesh();
- 
+
  // Unpin all pressure dofs
  RefineableNavierStokesEquations<3>::
   unpin_all_pressure_dofs(Fluid_mesh_pt->element_pt());
@@ -1223,9 +1229,7 @@ doc_solid_boundary_coordinates()
 {
  
  //Doc boundary coordinates in fluid
- char filename[100];
- sprintf(filename,"RESLT/solid_boundary_coordinates.dat");
- std::ofstream the_file(filename);
+ std::ofstream the_file("RESLT/solid_boundary_coordinates.dat");
  
  // Loop over traction elements
  unsigned n_face_element = Solid_fsi_traction_mesh_pt->nelement();
@@ -1278,9 +1282,8 @@ template<class FLUID_ELEMENT, class SOLID_ELEMENT>
 void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT,SOLID_ELEMENT>::
 doc_solution(DocInfo& doc_info)
 { 
-
- ofstream some_file;
- char filename[100];
+ std::ofstream some_file;
+ std::ostringstream filename;
 
  // Number of plot points
  unsigned npts;
@@ -1288,62 +1291,68 @@ doc_solution(DocInfo& doc_info)
  
  // Output solid boundaries
  //------------------------
- sprintf(filename,"%s/solid_boundaries%i.dat",doc_info.directory().c_str(),
-         doc_info.number());
- some_file.open(filename);
+ filename << doc_info.directory() << "/solid_boundaries"
+          << doc_info.number() << ".dat";
+ some_file.open(filename.str().c_str());
  Solid_mesh_pt->output_boundaries(some_file);
  some_file.close();
  
  
  // Output solid solution
  //-----------------------
- sprintf(filename,"%s/solid_soln%i.dat",doc_info.directory().c_str(),
-         doc_info.number());
- some_file.open(filename);
+ filename.str("");
+ filename << doc_info.directory() << "/solid_soln"
+          << doc_info.number() << ".dat";
+ some_file.open(filename.str().c_str());
  Solid_mesh_pt->output(some_file,npts);
  some_file.close();
 
  
  // Output fluid boundaries
  //------------------------
- sprintf(filename,"%s/fluid_boundaries%i.dat",doc_info.directory().c_str(),
-         doc_info.number());
- some_file.open(filename);
+ filename.str("");
+ filename << doc_info.directory() << "/fluid_boundaries"
+          << doc_info.number() << ".dat";
+ some_file.open(filename.str().c_str());
  Fluid_mesh_pt->output_boundaries(some_file);
  some_file.close();
  
  
  // Output fluid solution
  //-----------------------
- sprintf(filename,"%s/fluid_soln%i.dat",doc_info.directory().c_str(),
-         doc_info.number());
- some_file.open(filename);
+ filename.str("");
+ filename << doc_info.directory() << "/fluid_soln"
+          << doc_info.number() << ".dat";
+ some_file.open(filename.str().c_str());
  Fluid_mesh_pt->output(some_file,npts);
  some_file.close();
   
    
  // Output fsi traction
  //--------------------
- sprintf(filename,"%s/fsi_traction%i.dat",doc_info.directory().c_str(),
-         doc_info.number());
- some_file.open(filename);
+ filename.str("");
+ filename << doc_info.directory() << "/fsi_traction"
+          << doc_info.number() << ".dat";
+ some_file.open(filename.str().c_str());
  Solid_fsi_traction_mesh_pt->output(some_file,npts);
  some_file.close();
 
  // Output fsi traction
  //--------------------
- sprintf(filename,"%s/solid_traction%i.dat",doc_info.directory().c_str(),
-         doc_info.number());
- some_file.open(filename);
+ filename.str("");
+ filename << doc_info.directory() << "/solid_traction"
+          << doc_info.number() << ".dat";
+ some_file.open(filename.str().c_str());
  Solid_traction_mesh_pt->output(some_file,npts);
  some_file.close();
 
 
  // Output Lagrange multipliers
  //----------------------------
- sprintf(filename,"%s/lagrange%i.dat",doc_info.directory().c_str(),
-         doc_info.number());
- some_file.open(filename);
+ filename.str("");
+ filename << doc_info.directory() << "/lagrange"
+          << doc_info.number() << ".dat";
+ some_file.open(filename.str().c_str());
  Lagrange_multiplier_mesh_pt->output(some_file,npts);
  some_file.close();
 
@@ -1458,9 +1467,9 @@ Global_Parameters::Constitutive_law_pseudo_elastic_pt =
  DocInfo doc_info;
 
  // Use separate directory for output from each processor
- std::stringstream dir_name;
+ std::ostringstream dir_name;
  dir_name << "RESLT_proc" << MPI_Helpers::communicator_pt()->my_rank();
- doc_info.set_directory(dir_name.str().c_str());
+ doc_info.set_directory(dir_name.str());
 
  // Distribute the problem
  oomph_info << "Problem is being distributed." << std::endl;

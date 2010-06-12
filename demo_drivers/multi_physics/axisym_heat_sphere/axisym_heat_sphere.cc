@@ -147,7 +147,7 @@ public:
    Vector<double> s_bulk(dim+1);
 
    //Get the outer unit normal
-   Vector<double> N(3,0.0);
+   Vector<double> N(2,0.0);
 
    //Need to find position 
    Vector<double> x(dim+1);
@@ -186,8 +186,11 @@ public:
      this->interpolated_x(s,x);
 
      //Get the normal
+     //Resize normal vector to 2 to stop complaints here
+     N.resize(2);
      this->outer_unit_normal(s,N);
-
+     //Need to resize to 3 to stop complaints here
+     N.resize(3,0.0);
      //Now get the traction from the bulk element
      bulk_elem_pt->get_traction(s_bulk,N,traction);
 

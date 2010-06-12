@@ -25,6 +25,7 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
+#include <algorithm>
 #include "map_matrix.h"
 #include "quad_mesh.h"
 
@@ -52,9 +53,10 @@ void QuadMeshBase::setup_boundary_element_info(std::ostream &outfile)
  Boundary_element_pt.resize(nbound);
  Face_index_at_boundary.resize(nbound);
  
- // Temporary vector of sets of pointers to elements on the boundaries: 
- Vector<std::set<FiniteElement*> > set_of_boundary_element_pt;
- set_of_boundary_element_pt.resize(nbound);
+ // Temporary vector of vectors to pointers to elements on the boundaries: 
+ // This is not a set to ensure UNIQUE ordering
+ Vector<Vector<FiniteElement*> > vector_of_boundary_element_pt;
+ vector_of_boundary_element_pt.resize(nbound);
  
  // Matrix map for working out the fixed local coord for elements on boundary
  MapMatrixMixed<unsigned,FiniteElement*,Vector<int>* > 
@@ -99,11 +101,20 @@ void QuadMeshBase::setup_boundary_element_info(std::ostream &outfile)
            for (std::set<unsigned>::iterator it=boundaries_pt->begin();
                 it != boundaries_pt->end();++it)
             {
-             // Add pointer to finite element to set for the appropriate 
-             // boundary -- storage in set makes sure we don't count elements
-             // multiple times
-             set_of_boundary_element_pt[*it].insert(fe_pt);
-             
+             // Add pointer to finite element to vector for the appropriate 
+             // boundary
+
+             // Does the pointer already exits in the vector
+             Vector<FiniteElement*>::iterator b_el_it =
+              std::find(vector_of_boundary_element_pt[*it].begin(),
+                        vector_of_boundary_element_pt[*it].end(),
+                        fe_pt);
+             //Only insert if we have not found it (i.e. got to the end)
+             if(b_el_it == vector_of_boundary_element_pt[*it].end())
+              {
+               vector_of_boundary_element_pt[*it].push_back(fe_pt);
+              }
+
              // For the current element/boundary combination, create
              // a vector that stores an indicator which element boundaries
              // the node is located (boundary_identifier=-/+1 for nodes
@@ -149,7 +160,7 @@ void QuadMeshBase::setup_boundary_element_info(std::ostream &outfile)
  // Now copy everything across into permanent arrays
  //-------------------------------------------------
 
- // Note: set_of_boundary_element_pt contains all elements
+ // Note: vector_of_boundary_element_pt contains all elements
  // that have (at least) one corner node on a boundary -- can't copy 
  // them across into Boundary_element_pt
  // yet because some of them might have only one node on the
@@ -160,8 +171,8 @@ void QuadMeshBase::setup_boundary_element_info(std::ostream &outfile)
  //---------------------
  for (unsigned i=0;i<nbound;i++)
   {
-   // Number of elements on this boundary (currently stored in a set)
-   unsigned nel=set_of_boundary_element_pt[i].size();
+   // Number of elements on this boundary
+   unsigned nel=vector_of_boundary_element_pt[i].size();
     
    // Allocate storage for the face identifiers
    Face_index_at_boundary[i].resize(nel);
@@ -169,9 +180,9 @@ void QuadMeshBase::setup_boundary_element_info(std::ostream &outfile)
    // Loop over elements that have at least one corner node on this boundary
    //-----------------------------------------------------------------------
    unsigned e_count=0;
-   typedef std::set<FiniteElement*>::iterator IT;
-   for (IT it=set_of_boundary_element_pt[i].begin();
-        it!=set_of_boundary_element_pt[i].end();
+   typedef Vector<FiniteElement*>::iterator IT;
+   for (IT it=vector_of_boundary_element_pt[i].begin();
+        it!=vector_of_boundary_element_pt[i].end();
         it++)
     {    
      // Recover pointer to element

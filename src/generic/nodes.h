@@ -239,24 +239,24 @@ class Data
  /// because we redefine value() in the Node class to interpolate
  /// the values for nodes that are hanging and so we cannot 
  /// return a reference to the value in this case.
- void set_value(const unsigned &i, const double &value)
+ void set_value(const unsigned &i, const double &value_)
   {
 #ifdef RANGE_CHECKING
    range_check(0,i);
 #endif
-   Value[i][0] = value;
+   Value[i][0] = value_;
   }
  
  /// \short Set the t-th history value of the i-th stored data value to 
  /// specified value.
  void set_value(const unsigned &t, 
                 const unsigned &i,
-                const double &value)
+                const double &value_)
   {
 #ifdef RANGE_CHECKING
    range_check(t,i);
 #endif
-   Value[i][t] = value;
+   Value[i][t] = value_;
   }
  
  /// \short Return i-th stored value. 
@@ -598,13 +598,13 @@ class HangInfo
   }
 
  /// Alternative constructor when the number of master nodes is known
- HangInfo(const unsigned &nmaster) : Nmaster(nmaster)
+ HangInfo(const unsigned &n_master) : Nmaster(n_master)
   {
 #ifdef LEAK_CHECK
    LeakCheckNames::HangInfo_build+=1;
 #endif
-   Master_nodes_pt = new Node*[nmaster];
-   Master_weights = new double[nmaster];
+   Master_nodes_pt = new Node*[n_master];
+   Master_weights = new double[n_master];
   }
 
  /// Delete the storage
@@ -850,7 +850,7 @@ public:
  virtual ~Node();
 
  /// Broken copy constructor
- Node(const Node& node) 
+ Node(const Node& node) : Data()
   { 
    BrokenCopy::broken_copy("Node");
   } 
@@ -1030,6 +1030,21 @@ public:
       OOMPH_EXCEPTION_LOCATION);
     }
 #endif
+#ifdef RANGE_CHECKING
+   //Range checking code.
+   //Need to make sure that this is an int otherwise the test
+   //fails when it shouldn't
+   const int n_value = static_cast<int>(this->nvalue());
+   if((i < -1) || (i > n_value) )
+    {
+     std::ostringstream error_message;
+     error_message << "Range Error: Value " << i
+                   << " is not in the range (-1," << n_value << ")";
+     throw OomphLibError(error_message.str(),
+                         "Node::is_hanging()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
    return Hanging_pt[i+1]; 
   }
 
@@ -1049,6 +1064,24 @@ public:
  /// Test whether the i-th value is hanging 
  bool is_hanging(const int &i) const
   {
+#ifdef RANGE_CHECKING
+   //Need to make sure that this is an int otherwise the test
+   //fails when it shouldn't
+   const int n_value = static_cast<int>(this->nvalue());
+   if((i < -1) || (i > n_value) )
+    {
+     std::cout << i << " " << n_value << " " 
+               << (i < -1) << " " 
+               << (i > n_value) << "\n";
+     std::ostringstream error_message;
+     error_message << "Range Error: Value " << i
+                   << " is not in the range (-1," << n_value << ")";
+     throw OomphLibError(error_message.str(),
+                         "Node::is_hanging()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif   
+
    //Test whether the node is geometrically hanging
    if(i==-1) {return is_hanging();}
    //Otherwise, is the i-th value hanging
@@ -1403,7 +1436,7 @@ public:
  virtual ~SolidNode();
 
  /// Broken copy constructor
- SolidNode(const SolidNode& solid_node) 
+ SolidNode(const SolidNode& solid_node) : Node()
   {
    BrokenCopy::broken_copy("SolidNode");
   } 

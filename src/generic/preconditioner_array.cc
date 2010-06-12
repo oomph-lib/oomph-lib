@@ -78,12 +78,8 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
    }
 
-  // clear and resize the storage of the PARANOID check distributions
-  unsigned n = Distribution_pt.size();
-  for (unsigned j = 0; j < n; j++)
-   {
-    delete Distribution_pt[j];
-   }
+  // Resize the storage of the PARANOID check distributions
+  // Already cleared by clean_up_memory call at top of function
   Distribution_pt.resize(Nprec);
 #endif
 

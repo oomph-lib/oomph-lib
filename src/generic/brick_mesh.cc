@@ -68,13 +68,15 @@ void BrickMeshBase::setup_boundary_element_info(std::ostream &outfile)
  Face_index_at_boundary.clear();
  Boundary_element_pt.resize(nbound);
  Face_index_at_boundary.resize(nbound);
- 
- // Temporary vector of sets of pointers to elements on the boundaries: 
- // set_of_boundary_element_pt[i] is the set of pointers to all
+
+
+ // Temporary vector of vectors of pointers to elements on the boundaries: 
+ // vector_of_boundary_element_pt[i] is the vector of pointers to all
  // elements that have nodes on boundary i. 
- Vector<std::set<FiniteElement*> > set_of_boundary_element_pt;
- set_of_boundary_element_pt.resize(nbound);
- 
+ // This is not a set to ensure UNIQUE ordering on every processor
+ Vector<Vector<FiniteElement*> > vector_of_boundary_element_pt;
+ vector_of_boundary_element_pt.resize(nbound);
+  
  // Matrix map for working out the fixed local coord for elements on boundary
  MapMatrixMixed<unsigned,FiniteElement*,Vector<int>* > 
   boundary_identifier;
@@ -121,10 +123,20 @@ void BrickMeshBase::setup_boundary_element_info(std::ostream &outfile)
              // What's the boundary?
              unsigned boundary_id=*it;
 
-             // Add pointer to finite element to set for the appropriate 
-             // boundary -- storage in set makes sure we don't count elements
-             // multiple times
-             set_of_boundary_element_pt[boundary_id].insert(fe_pt);
+             // Add pointer to finite element to vector for the appropriate 
+             // boundary 
+
+             // Does the pointer already exits in the vector
+             Vector<FiniteElement*>::iterator b_el_it =
+              std::find(vector_of_boundary_element_pt[*it].begin(),
+                        vector_of_boundary_element_pt[*it].end(),
+                        fe_pt);
+
+             //Only insert if we have not found it (i.e. got to the end)
+             if(b_el_it == vector_of_boundary_element_pt[*it].end())
+              {
+               vector_of_boundary_element_pt[*it].push_back(fe_pt);
+              }
              
              // For the current element/boundary combination, create
              // a vector that stores an indicator which element boundaries
@@ -174,9 +186,9 @@ void BrickMeshBase::setup_boundary_element_info(std::ostream &outfile)
  for (unsigned i=0;i<nbound;i++)
   {
    // Loop over elements on given boundary
-   typedef std::set<FiniteElement*>::iterator IT;
-   for (IT it=set_of_boundary_element_pt[i].begin();
-        it!=set_of_boundary_element_pt[i].end();
+   typedef Vector<FiniteElement*>::iterator IT;
+   for (IT it=vector_of_boundary_element_pt[i].begin();
+        it!=vector_of_boundary_element_pt[i].end();
         it++)
     {
      // Recover pointer to element

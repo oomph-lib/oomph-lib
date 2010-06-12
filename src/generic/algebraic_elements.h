@@ -41,6 +41,7 @@ namespace oomph
 // forward references
 class AlgebraicMesh;
 class AlgebraicElementBase;
+class DummyAlgebraicMesh;
 
 
 ///////////////////////////////////////////////////////////////////////
@@ -484,6 +485,9 @@ private:
  /// \short Default dummy mesh to point to for nodes for which no remesh
  ///  fct is defined
  static AlgebraicMesh* Dummy_mesh_pt;
+
+ /// \short Static Dummy mesh to which the pointer is addressed
+ static DummyAlgebraicMesh Dummy_mesh;
 
  /// \short Default dummy vector of geom objects to point to for nodes 
  /// for which no remesh fct is defined

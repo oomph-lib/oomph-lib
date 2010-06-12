@@ -294,7 +294,9 @@ public:
    delete Fluid_time_stepper_pt;
    delete Wall_pt;
    delete Wall_time_stepper_pt; 
+   delete Fluid_mesh_pt->spatial_error_estimator_pt();
    delete Fluid_mesh_pt;
+   delete Solid_mesh_pt->spatial_error_estimator_pt();
    delete Solid_mesh_pt;
    delete Solid_fsi_traction_mesh_pt;
    delete Lagrange_multiplier_mesh_pt;
@@ -560,6 +562,8 @@ PseudoElasticCollapsibleChannelProblem()
  
  // Create elements
  Lagrange_multiplier_mesh_pt = new SolidMesh;
+ //initialise pointer to solid boundary
+ Solid_fsi_boundary_pt=0;
  create_lagrange_multiplier_elements();
 
  // Create solid traction elements for external pressure
@@ -886,9 +890,10 @@ create_lagrange_multiplier_elements()
  unsigned b=3;
 
  // create the geom object for the wall
- Solid_fsi_boundary_pt=
-  new MeshAsGeomObject
-  (Solid_fsi_traction_mesh_pt);
+ //delete existing object, if it already exists
+ if(Solid_fsi_boundary_pt!=0) {delete Solid_fsi_boundary_pt;}
+ //Now create new object
+ Solid_fsi_boundary_pt= new MeshAsGeomObject(Solid_fsi_traction_mesh_pt);
 
  // How many bulk fluid elements are adjacent to boundary b?
  unsigned n_element = Fluid_mesh_pt->nboundary_element(b);
@@ -1446,11 +1451,6 @@ unsteady_run(DocInfo& doc_info)
 //========================================================================
 int main(int argc, char* argv[])                                        
 {       
-                                                                
-#ifdef OOMPH_HAS_MPI                                                    
-   MPI_Helpers::init(argc,argv);                                          
-#endif         
- 
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
 
@@ -1468,24 +1468,7 @@ Global_Parameters::Constitutive_law_pseudo_elastic_pt =
 
  // Doc info
  DocInfo doc_info;
-
-#ifdef DISTRIBUTE
-
- // Use separate directory for output from each processor
- std::stringstream dir_name;
- dir_name << "RESLT_proc" << MPI_Helpers::communicator_pt()->my_rank();
- doc_info.set_directory(dir_name.str().c_str());
-
- // Distribute the problem
- oomph_info << "Problem is being distributed." << std::endl;
- problem.distribute(); 
- oomph_info << "Problem has been distributed." << std::endl;
- 
-#else
- 
  doc_info.set_directory("RESLT");
-
-#endif
 
  // Doc initial configuration
  problem.doc_solution(doc_info);
@@ -1516,10 +1499,5 @@ Global_Parameters::Constitutive_law_pseudo_elastic_pt =
 
  // Unteady run
  problem.unsteady_run(doc_info);
-
-                                                         
-#ifdef OOMPH_HAS_MPI                                                    
- MPI_Helpers::finalize();
-#endif         
  
 } // end_of_main

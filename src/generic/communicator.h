@@ -164,9 +164,9 @@ class OomphCommunicator
     }
    else
     {
-     int nproc;
-     MPI_Comm_size(Comm,&nproc);
-     return nproc;
+     int n_proc=1;
+     MPI_Comm_size(Comm,&n_proc);
+     return n_proc;
     }
 #else
    return 1;
@@ -183,9 +183,9 @@ class OomphCommunicator
     }
    else
     {
-     int my_rank;
-     MPI_Comm_rank(Comm,&my_rank);
-     return my_rank;
+     int My_rank=0;
+     MPI_Comm_rank(Comm,&My_rank);
+     return My_rank;
     }
 #else
    return 0;
@@ -282,8 +282,8 @@ class OomphCommunicator
   }
  
 
- /// access function to the serial communicator flag
- const bool serial_communicator() const
+ /// Access function (read only) to the serial communicator flag
+ bool serial_communicator() const
   {
    return Serial_communicator;
   }
@@ -300,7 +300,7 @@ class OomphCommunicator
      n_long=x.size();
 
      // Convert to int
-     n=int(n_long);
+     n=static_cast<int>(n_long);
     }
  
    // Broadcast to everybody how many entries to expect
@@ -328,7 +328,7 @@ class OomphCommunicator
      n_long=x.size();
 
      // Convert to int
-     n=int(n_long);
+     n=static_cast<int>(n_long);
     }
  
    // Broadcast to everybody how many entries to expect

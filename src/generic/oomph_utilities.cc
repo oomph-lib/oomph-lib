@@ -232,7 +232,7 @@ void LevenbergMarquardtFitter::fit_it(
   }
 
  // "Workspace" for numerical recipes
- int ma=nparam; 
+ int ma = static_cast<int>(nparam); 
  DenseDoubleMatrix covar(ma,ma);
  DenseDoubleMatrix alpha(ma,ma);
 
@@ -754,11 +754,11 @@ void black_box_fd_newton_solve(ResidualFctPt residual_fct,
 /// issue a warning -- or, if directory_must_exist()==true,
 /// die by throwing and OomphLibError
 //======================================================================
-void DocInfo::set_directory(const std::string& directory)
+void DocInfo::set_directory(const std::string& directory_)
 {
  // Try to open a file in output directory
  std::ostringstream filename;
- filename << directory << "/.dummy_check.dat";
+ filename << directory_ << "/.dummy_check.dat";
  std::ofstream some_file;
  some_file.open(filename.str().c_str());
  if (!some_file.is_open())
@@ -766,7 +766,7 @@ void DocInfo::set_directory(const std::string& directory)
    //Construct the error message
    std::string error_message = "Problem opening output file.\n";
    error_message += "I suspect you haven't created the output directory ";
-   error_message += directory;
+   error_message += directory_;
    error_message += "\n";
    
    //Issue a warning if the directory does not have to exist
@@ -789,7 +789,7 @@ void DocInfo::set_directory(const std::string& directory)
  some_file << "exists. Can be deleted...." << std::endl;
  some_file.close();
  // Set directory
- Directory=directory;
+ Directory=directory_;
 }
 
 
@@ -915,7 +915,7 @@ void MPI_Helpers::finalize()
 //=============================================================================
 /// access to the global oomph-lib communicator
 //=============================================================================
-const OomphCommunicator* const MPI_Helpers::communicator_pt()
+OomphCommunicator* MPI_Helpers::communicator_pt()
 {
 #ifdef PARANOID
  // check that this matrix is built

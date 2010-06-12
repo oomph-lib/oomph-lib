@@ -279,11 +279,11 @@ long Data::Is_constrained=-2;
 /// number of values; and the additional storage required by the Timestepper.
 /// The values are assumed to be free (not pinned).
 //================================================================
-Data::Data(TimeStepper* const &time_stepper_pt, 
+Data::Data(TimeStepper* const &time_stepper_pt_, 
            const unsigned &initial_n_value,
            const bool &allocate_storage)
  : 
- Value(0), Eqn_number(0), Time_stepper_pt(time_stepper_pt),
+ Value(0), Eqn_number(0), Time_stepper_pt(time_stepper_pt_),
  Copy_of_data_pt(0),
  Nvalue(initial_n_value), 
  Ncopies(0)
@@ -474,7 +474,7 @@ void Data::read(std::ifstream& restart_file)
    // Ignore rest of line
    restart_file.ignore(80,'\n');
    // Check # of values:
-   const unsigned long check_ntvalues=atoi(input_string.c_str());
+   const unsigned check_ntvalues=atoi(input_string.c_str());
 
    // Dynamic run restarted from steady run
    if (check_ntvalues<time_steps_range)
@@ -902,13 +902,13 @@ void HangInfo::range_check(const unsigned &i) const
 /// Set the pointer to the i-th master node and its weight
 //=====================================================================
 void HangInfo::set_master_node_pt(const unsigned &i, 
-                                  Node* const &master_node_pt,
+                                  Node* const &master_node_pt_,
                                   const double &weight)
 {
 #ifdef RANGE_CHECKING
  range_check(i);
 #endif
- Master_nodes_pt[i] = master_node_pt;
+ Master_nodes_pt[i] = master_node_pt_;
  Master_weights[i] = weight;
 }
 
@@ -916,7 +916,7 @@ void HangInfo::set_master_node_pt(const unsigned &i,
 /// Add (pointer to) master node and corresponding weight to 
 /// the internally stored  (pointers to) master nodes and weights.
 //====================================================================
- void HangInfo::add_master_node_pt(Node* const &master_node_pt,
+ void HangInfo::add_master_node_pt(Node* const &master_node_pt_,
                                    const double &weight) 
 {
  //Find the present number of master nodes
@@ -932,7 +932,7 @@ void HangInfo::set_master_node_pt(const unsigned &i,
    new_master_weights[i] = Master_weights[i];
   }
  //Add the new values at the end
- new_master_nodes_pt[n_master] = master_node_pt;
+ new_master_nodes_pt[n_master] = master_node_pt_;
  new_master_weights[n_master] = weight;
    
  //Reset the pointers
@@ -1066,14 +1066,14 @@ Node::Node(const unsigned &n_dim,
 /// (e.g. 1 for Lagrange-type elements; 2 for 1D Hermite elements; 4 for 
 /// 2D Hermite elements)
 //========================================================================
-Node::Node(TimeStepper* const &time_stepper_pt, 
+Node::Node(TimeStepper* const &time_stepper_pt_, 
            const unsigned &n_dim, 
            const unsigned &n_position_type, 
            const unsigned &initial_n_value,
            const bool &allocate_x_position) 
- : Data(time_stepper_pt,initial_n_value),
+ : Data(time_stepper_pt_,initial_n_value),
    X_position(0),
-   Position_time_stepper_pt(time_stepper_pt), 
+   Position_time_stepper_pt(time_stepper_pt_), 
    Hanging_pt(0),
    Ndim(n_dim), Nposition_type(n_position_type), Aux_node_update_fct_pt(0)
 {
@@ -1432,7 +1432,7 @@ void Node::set_hanging_pt(HangInfo* const &hang_pt, const int &i)
   {
    Hanging_pt = new HangInfo*[n_hang];
    //Initialise all entries to zero
-   for(unsigned i=0;i<n_hang;i++) {Hanging_pt[i] = 0;}
+   for(unsigned n=0;n<n_hang;n++) {Hanging_pt[n] = 0;}
   }
  
  //Geometric hanging data
@@ -1521,8 +1521,37 @@ void Node::resize(const unsigned &n_value)
  // Now deal with the hanging Data (if any)
  if (backup_hanging_pt!=0)
   {
+   //The size of the new hanging point is the number of new values plus one.
+   const unsigned n_hang = n_value+1;
+   Hanging_pt = new HangInfo*[n_hang];
+   //Initialise all entries to zero
+   for(unsigned i=0;i<n_hang;i++) {Hanging_pt[i] = 0;}
+
+   //Restore the saved data
+   for(unsigned i=0;i<=old_nvalue;i++)
+    {
+     Hanging_pt[i] = backup_hanging_pt[i];
+    }
+
+   //Loop over the new values and set equal to the geometric hanging data
+   for(unsigned i=old_nvalue+1;i<n_hang;i++)
+    {
+     Hanging_pt[i] = Hanging_pt[0];
+     //and constrain if necessary
+     if(Hanging_pt[i]!=0) {constrain(i-1);}
+    }
+
+   //If necessary constrain 
+   //Positions
+   //if(Hanging_pt[0] != 0) {constrain_positions();}
+   //Values
+   //for(unsigned i=0;i<n_value;i++)
+   // {
+   //  if(Hanging_pt[i+1] != 0) {constrain(i);}
+   // }
+
    // Loop over all values and geom hanging data
-   for (int i=-1;i<int(old_nvalue);i++)
+   /*for (int i=-1;i<int(old_nvalue);i++)
     {
      set_hanging_pt(backup_hanging_pt[i+1],i);
     }
@@ -1531,7 +1560,7 @@ void Node::resize(const unsigned &n_value)
    for (int i=int(old_nvalue);i<int(n_value);i++)
     {
      set_hanging_pt(backup_hanging_pt[0],i);
-    }
+     }*/
 
    delete [] backup_hanging_pt;
   }
@@ -1795,16 +1824,16 @@ double Node::position(const unsigned &i) const
  else
   {
    // Initialise
-   double position=0.0;
+   double interpolated_position=0.0;
    
    // Add contribution from master nodes
    const unsigned n_master=hanging_pt()->nmaster();
    for (unsigned m=0;m<n_master;m++)
     {
-     position += hanging_pt()->master_node_pt(m)->x(i)*
+     interpolated_position += hanging_pt()->master_node_pt(m)->x(i)*
       hanging_pt()->master_weight(m);
     } 
-   posn=position;
+   posn=interpolated_position;
   }
  return posn;
 }
@@ -1824,17 +1853,17 @@ double Node::position(const unsigned &t, const unsigned &i) const
  else
   {
    // Initialise
-   double position=0.0;
+   double interpolated_position=0.0;
    
    // Add contribution from master nodes
    const unsigned n_master=hanging_pt()->nmaster();
    for (unsigned m=0;m<n_master;m++)
     {
-     position+=
+     interpolated_position+=
       hanging_pt()->master_node_pt(m)->x(t,i)*
       hanging_pt()->master_weight(m);
     }  
-   posn=position;
+   posn=interpolated_position;
   }
  
  return posn;
@@ -1854,17 +1883,17 @@ double Node::position_gen(const unsigned &k, const unsigned &i) const
  else
   {
    // Initialise
-   double position=0.0;
+   double interpolated_position=0.0;
    
    // Add contribution from master nodes
    const unsigned n_master=hanging_pt()->nmaster();
    for (unsigned m=0;m<n_master;m++)
     {
-     position+=
+     interpolated_position+=
       hanging_pt()->master_node_pt(m)->x_gen(k,i)*
       hanging_pt()->master_weight(m);
     } 
-   posn=position;
+   posn=interpolated_position;
   }
  return posn;
 }
@@ -1885,17 +1914,17 @@ double Node::position_gen(const unsigned &t, const unsigned &k,
  else
   {
    // Initialise
-   double position=0.0;
+   double interpolated_position=0.0;
    
    // Add contribution from master nodes
    const unsigned n_master=hanging_pt()->nmaster();
    for (unsigned m=0;m<n_master;m++)
     {
-     position+=
+     interpolated_position+=
       hanging_pt()->master_node_pt(m)->x_gen(t,k,i)*
       hanging_pt()->master_weight(m);
     }  
-   posn=position;
+   posn=interpolated_position;
   }
  
  return posn;
@@ -2008,8 +2037,8 @@ double  Node::dposition_gen_dt(const unsigned &j, const unsigned &k,
 void Node::output(std::ostream &outfile)
 {
  //Loop over the number of dimensions of the node
- const unsigned ndim = this->ndim();
- for (unsigned i=0;i<ndim;i++) {outfile << x(i) << " ";}  
+ const unsigned n_dim = this->ndim();
+ for (unsigned i=0;i<n_dim;i++) {outfile << x(i) << " ";}  
  outfile << std::endl;
 }
 
@@ -2512,20 +2541,20 @@ SolidNode::SolidNode(const unsigned &n_lagrangian,
 /// The Eulerian dimension of the Node is n_dim and we have n_position_type
 /// generalised Eulerian coordinates. 
 //========================================================================
-SolidNode::SolidNode(TimeStepper* const &time_stepper_pt,
+SolidNode::SolidNode(TimeStepper* const &time_stepper_pt_,
                      const unsigned &n_lagrangian,
                      const unsigned &n_lagrangian_type,
                      const unsigned &n_dim, 
                      const unsigned &n_position_type,
                      const unsigned &initial_n_value)
- : Node(time_stepper_pt,n_dim,n_position_type,initial_n_value,false),
+ : Node(time_stepper_pt_,n_dim,n_position_type,initial_n_value,false),
    Nlagrangian(n_lagrangian), Nlagrangian_type(n_lagrangian_type)
 {
  //Calculate the total storage required for positions
  const unsigned n_storage = n_dim*n_position_type;
 
  //Allocate a Data value to each element of the Vector
- Variable_position_pt = new Data(time_stepper_pt,n_storage);
+ Variable_position_pt = new Data(time_stepper_pt_,n_storage);
  //Set the pointer
  X_position = Variable_position_pt->Value;
 
@@ -2685,17 +2714,17 @@ double SolidNode::lagrangian_position(const unsigned &i) const
  else
   {
    // Initialise
-   double position=0.0;
+   double lagn_position=0.0;
    
    // Add contribution from master nodes
    const unsigned nmaster=hanging_pt()->nmaster();
    for (unsigned imaster=0;imaster<nmaster;imaster++)
     {
-     position+=
+     lagn_position+=
       static_cast<SolidNode*>(hanging_pt()->master_node_pt(imaster))->xi(i)*
       hanging_pt()->master_weight(imaster);
     } 
-   posn=position;
+   posn=lagn_position;
   }
  return posn;
 }
@@ -2715,18 +2744,18 @@ double SolidNode::lagrangian_position_gen(const unsigned &k,
  else
   {
    // Initialise
-   double position=0.0;
+   double lagn_position=0.0;
    
    // Add contribution from master nodes
    const unsigned nmaster=hanging_pt()->nmaster();
    for (unsigned imaster=0;imaster<nmaster;imaster++)
     {
-     position+=
+     lagn_position+=
       static_cast<SolidNode*>(hanging_pt()->master_node_pt(imaster))
       ->xi_gen(k,i)*
       hanging_pt()->master_weight(imaster);
     } 
-   posn=position;
+   posn=lagn_position;
   }
  return posn;
 }

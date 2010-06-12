@@ -72,47 +72,47 @@ class LinearAlgebraDistribution
   /// \short Constructor. Takes the first_row, nrow_local (both for this
   /// processor) and nrow as arguments. If nrow is not provided 
   /// or equal to 0 then it will be computed automatically
-  LinearAlgebraDistribution(const OomphCommunicator& comm,
-                            const unsigned& first_row, 
-                            const unsigned& nrow_local,
-                            const unsigned& nrow = 0)
+  LinearAlgebraDistribution(const OomphCommunicator &comm,
+                            const unsigned &first_row_, 
+                            const unsigned &n_row_local,
+                            const unsigned &n_row = 0)
   : Comm_pt(0)
   {
-    this->build(&comm,first_row,nrow_local,nrow);
+    this->build(&comm,first_row_,n_row_local,n_row);
   };
  
  /// \short Constructor. Takes the number of global rows and uniformly 
  /// distributes them over the processors if distributed = true (default),
  /// if distributed = false every row is duplicated on every processor
  LinearAlgebraDistribution(const OomphCommunicator& comm, 
-                           const unsigned& nrow,
-                           const bool& distributed = true)
+                           const unsigned &n_row,
+                           const bool &distributed_ = true)
   : Comm_pt(0)
   {
-    this->build(&comm,nrow,distributed);
+    this->build(&comm,n_row,distributed_);
   };
    
   /// \short Constructor. Takes the first_row, nrow_local (both for this
   /// processor) and nrow as arguments. If nrow is not provided 
   /// or equal to 0 then it will be computed automatically
   LinearAlgebraDistribution(const OomphCommunicator* const comm_pt,
-                            const unsigned& first_row, 
-                            const unsigned& nrow_local,
-                            const unsigned& nrow = 0)
+                            const unsigned &first_row_, 
+                            const unsigned &n_row_local,
+                            const unsigned &n_row = 0)
   : Comm_pt(0)
   {
-    this->build(comm_pt,first_row,nrow_local,nrow);
+    this->build(comm_pt,first_row_,n_row_local,n_row);
   };
  
  /// \short Constructor. Takes the number of global rows and uniformly 
  /// distributes them over the processors if distributed = true (default),
  /// if distributed = false every row is duplicated on every processor
  LinearAlgebraDistribution(const OomphCommunicator* const comm_pt, 
-                           const unsigned& nrow,
-                           const bool& distributed = true)
+                           const unsigned &n_row,
+                           const bool &distributed_ = true)
   : Comm_pt(0)
   {
-    this->build(comm_pt,nrow,distributed);
+    this->build(comm_pt,n_row,distributed_);
   };
 
  /// \short Copy Constructor.
@@ -350,7 +350,7 @@ class LinearAlgebraDistribution
   }
 
  /// const access to the communicator pointer
- const OomphCommunicator* const communicator_pt() const
+ OomphCommunicator* communicator_pt() const
   {
    return Comm_pt;
   }
@@ -391,7 +391,7 @@ class LinearAlgebraDistribution
        OOMPH_EXCEPTION_LOCATION);      
     }
 #endif
-   int local_i = global_i;
+   int local_i = static_cast<int>(global_i);
    int p = 0;
    while ((int)(local_i - (int)nrow_local(p)) >= 0)
     {
@@ -469,7 +469,7 @@ class LinearAlgebraDistribution
     }
    
    /// access to the LinearAlgebraDistribution
-   const LinearAlgebraDistribution* const distribution_pt()  const
+   LinearAlgebraDistribution* distribution_pt()  const
     {
      return Distribution_pt;
     }

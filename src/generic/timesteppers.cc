@@ -534,8 +534,8 @@ void  Newmark<NSTEPS>::assign_initial_data_values(Data* const & data_pt,
    // Value itself at current and previous times
    for (unsigned t=0;t<=NSTEPS;t++)
     {
-     double time=Time_pt->time(t);
-     data_pt->set_value(t,j,initial_value_fct[j](time)); 
+     double time_local=Time_pt->time(t);
+     data_pt->set_value(t,j,initial_value_fct[j](time_local)); 
     }  
 
    // Now, rather than assigning the values for veloc and accel
@@ -545,22 +545,22 @@ void  Newmark<NSTEPS>::assign_initial_data_values(Data* const & data_pt,
    // time are exact. 
 
    // Initial time: The value itself
-   double time=Time_pt->time();
-   double U = initial_value_fct[j](time);   
+   double time_=Time_pt->time();
+   double U = initial_value_fct[j](time_);   
      
    // Value itself at previous time
-   time=Time_pt->time(1);
-   double U0 = initial_value_fct[j](time);   
+   time_=Time_pt->time(1);
+   double U0 = initial_value_fct[j](time_);   
      
    // Veloc (time deriv) at present time -- this is what the
    // Newmark scheme should return!
-   time=Time_pt->time(0);
-   double Udot = initial_veloc_fct[j](time);   
+   time_=Time_pt->time(0);
+   double Udot = initial_veloc_fct[j](time_);   
      
    // Acccel (2nd time deriv) at present time -- this is what the
    // Newmark scheme should return!
-   time=Time_pt->time(0);
-   double Udotdot = initial_accel_fct[j](time);   
+   time_=Time_pt->time(0);
+   double Udotdot = initial_accel_fct[j](time_);   
 
    Vector<double> vect(2);
    vect[0]=Udotdot-Weight(2,0)*U-Weight(2,1)*U0;
@@ -617,8 +617,8 @@ void  Newmark<NSTEPS>::assign_initial_data_values(
    // Value itself at current and previous times
    for (unsigned t=0;t<=NSTEPS;t++)
     {
-     double time=Time_pt->time(t);
-     node_pt->set_value(t,j,initial_value_fct[j](time,x)); 
+     double time_local=Time_pt->time(t);
+     node_pt->set_value(t,j,initial_value_fct[j](time_local,x)); 
     }  
 
    // Now, rather than assigning the values for veloc and accel
@@ -628,22 +628,22 @@ void  Newmark<NSTEPS>::assign_initial_data_values(
    // time are exact. 
 
    // Initial time: The value itself
-   double time=Time_pt->time();
-   double U = initial_value_fct[j](time,x);   
+   double time_=Time_pt->time();
+   double U = initial_value_fct[j](time_,x);   
      
    // Value itself at previous time
-   time=Time_pt->time(1);
-   double U0 = initial_value_fct[j](time,x);   
+   time_=Time_pt->time(1);
+   double U0 = initial_value_fct[j](time_,x);   
      
    // Veloc (time deriv) at present time -- this is what the
    // Newmark scheme should return!
-   time=Time_pt->time(0);
-   double Udot = initial_veloc_fct[j](time,x);   
+   time_=Time_pt->time(0);
+   double Udot = initial_veloc_fct[j](time_,x);   
      
    // Acccel (2nd time deriv) at present time -- this is what the
    // Newmark scheme should return!
-   time=Time_pt->time(0);
-   double Udotdot = initial_accel_fct[j](time,x);   
+   time_=Time_pt->time(0);
+   double Udotdot = initial_accel_fct[j](time_,x);   
 
    Vector<double> vect(2);
    vect[0]=Udotdot-Weight(2,0)*U-Weight(2,1)*U0;

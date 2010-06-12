@@ -255,21 +255,21 @@ class DoubleMatrixBase
 
  /// \short Find the residual, i.e. r=b-Ax the residual
  virtual void residual(const DoubleVector &x, const DoubleVector &b, 
-                       DoubleVector &residual)
+                       DoubleVector &residual_)
   {
    // compute residual = Ax
-   this->multiply(x,residual);
+   this->multiply(x,residual_);
 
    // set residual to -residual (-Ax)
-   unsigned nrow_local = residual.nrow_local();
-   double* residual_pt = residual.values_pt();
+   unsigned nrow_local = residual_.nrow_local();
+   double* residual_pt = residual_.values_pt();
    for (unsigned i = 0; i < nrow_local; i++)
     {
      residual_pt[i] = -residual_pt[i];
     }
 
    // set residual = b + residuals
-   residual += b;
+   residual_ += b;
   }
  
  /// \short Find the maximum residual r=b-Ax -- generic version, can be 
@@ -600,15 +600,15 @@ class CRMatrix : public SparseMatrix<T, CRMatrix<T> >
  /// Number of nonzero entries is read
  /// off from value, so make sure the vector has been shrunk
  /// to its correct length.
- CRMatrix(const Vector<T>& value, const Vector<int>& column_index,
-          const Vector<int>& row_start, 
+ CRMatrix(const Vector<T>& value, const Vector<int>& column_index_,
+          const Vector<int>& row_start_, 
           const unsigned long &n,
           const unsigned long &m) :
   SparseMatrix<T, CRMatrix<T> >()
   {
    Column_index=0;
    Row_start=0;
-   build(value,column_index,row_start,n,m);
+   build(value,column_index_,row_start_,n,m);
   }
  
  /// \short Copy constructor
@@ -1037,7 +1037,8 @@ class DenseDoubleMatrix : public DoubleMatrixBase,
                    const double &initial_val);
 
  /// Broken copy constructor
- DenseDoubleMatrix(const DenseDoubleMatrix& matrix) 
+ DenseDoubleMatrix(const DenseDoubleMatrix& matrix) : 
+  DoubleMatrixBase(), DenseMatrix<double>()
   {
    BrokenCopy::broken_copy("DenseDoubleMatrix");
   } 
@@ -2176,14 +2177,14 @@ class CCMatrix : public SparseMatrix<T, CCMatrix<T> >
  /// for square matrices). Number of nonzero entries is read
  /// off from value, so make sure the vector has been shrunk
  /// to its correct length.
- CCMatrix(const Vector<T>& value, const Vector<int>& row_index,
-          const Vector<int>& column_start,
+ CCMatrix(const Vector<T>& value, const Vector<int>& row_index_,
+          const Vector<int>& column_start_,
           const unsigned long &n,
           const unsigned long &m) : SparseMatrix<T, CCMatrix<T> >()
   {
    Row_index=0;
    Column_start=0;
-   build(value,row_index,column_start,n,m);
+   build(value,row_index_,column_start_,n,m);
   }
 
  
@@ -2364,13 +2365,14 @@ class CCDoubleMatrix : public DoubleMatrixBase,
  /// off from value, so make sure the vector has been shrunk
  /// to its correct length.
  CCDoubleMatrix(const Vector<double>& value,
-                const Vector<int>& row_index,
-                const Vector<int>& column_start,
+                const Vector<int>& row_index_,
+                const Vector<int>& column_start_,
                 const unsigned long &n,
                 const unsigned long &m);
  
  /// Broken copy constructor
- CCDoubleMatrix(const CCDoubleMatrix& matrix) 
+ CCDoubleMatrix(const CCDoubleMatrix& matrix) : DoubleMatrixBase(),
+  CCMatrix<double>()
   {
    BrokenCopy::broken_copy("CCDoubleMatrix");
   } 
@@ -2686,7 +2688,7 @@ void DenseMatrix<T>::sparse_indexed_output(std::ostream &outfile)
  //Loop over the rows
  for(unsigned i=0;i<N;i++)
   {
-   //Loop over the columne
+   //Loop over the column
    for(unsigned j=0;j<M;j++)
     {
      if ((*this)(i,j)!=T(0))
@@ -2796,19 +2798,19 @@ void CCMatrix<T>::build_without_copy(T* value,
 //===================================================================
 template<class T>
 void CCMatrix<T>::build(const Vector<T>& value, 
-                        const Vector<int>& row_index,
-                        const Vector<int>& column_start, 
+                        const Vector<int>& row_index_,
+                        const Vector<int>& column_start_, 
                         const unsigned long &n,
                         const unsigned long &m)
 {
  
 #ifdef PARANOID
- if (value.size()!=row_index.size())
+ if (value.size()!=row_index_.size())
   {
    std::ostringstream error_message;
    error_message 
     << "length of value " << value.size() 
-    << " and row_index vectors " << row_index.size() <<" should match " 
+    << " and row_index vectors " << row_index_.size() <<" should match " 
     << std::endl;
 
    throw OomphLibError(error_message.str(),
@@ -2841,18 +2843,18 @@ void CCMatrix<T>::build(const Vector<T>& value,
  for (unsigned long i=0;i<this->Nnz;i++)
   {
    this->Value[i]=value[i];
-   this->Row_index[i]=row_index[i];
+   this->Row_index[i]=row_index_[i];
   }
  
  // Column start:
  //Find the size and aollcate
- unsigned long n_column_start = column_start.size();
+ unsigned long n_column_start = column_start_.size();
  this->Column_start = new int[n_column_start];
  
  // Assign:
  for (unsigned long i=0;i<n_column_start;i++)
   {
-   this->Column_start[i]=column_start[i];
+   this->Column_start[i]=column_start_[i];
   }
 }
 
@@ -2899,8 +2901,8 @@ void CRMatrix<T>::clean_up_memory()
 //=============================================================================
 template<class T>
 void CRMatrix<T>::build_without_copy(T* value,
-                                     int* column_index,
-                                     int* row_start,
+                                     int* column_index_,
+                                     int* row_start_,
                                      const unsigned long& nnz,
                                      const unsigned long& n,
                                      const unsigned long& m)
@@ -2923,10 +2925,10 @@ void CRMatrix<T>::build_without_copy(T* value,
  this->Value = value;
 
  // set Column_index
- this->Column_index = column_index;
+ this->Column_index = column_index_;
 
  // set Row_start
- this->Row_start = row_start;
+ this->Row_start = row_start_;
 }
 
 
@@ -2941,8 +2943,8 @@ void CRMatrix<T>::build_without_copy(T* value,
 //=================================================================
 template<class T>
 void CRMatrix<T>::build(const Vector<T>& value, 
-                        const Vector<int>& column_index,
-                        const Vector<int>& row_start,
+                        const Vector<int>& column_index_,
+                        const Vector<int>& row_start_,
                         const unsigned long &n,
                         const unsigned long &m)
 {
@@ -2970,18 +2972,18 @@ void CRMatrix<T>::build(const Vector<T>& value,
  for (unsigned long i=0;i<this->Nnz;i++)
   {
    this->Value[i]=value[i];
-   this->Column_index[i]=column_index[i];
+   this->Column_index[i]=column_index_[i];
   }
  
  // Row start:
  // Find the size and allocate
- unsigned long n_row_start = row_start.size();
+ unsigned long n_row_start = row_start_.size();
  this->Row_start = new int[n_row_start];
  
  // Assign:
  for (unsigned long i=0;i<n_row_start;i++)
   {
-   this->Row_start[i]=row_start[i];
+   this->Row_start[i]=row_start_[i];
   } 
 }
 

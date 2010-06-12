@@ -89,7 +89,8 @@ class CRDoubleMatrix;
  
  /// Copy constructor
  DoubleVector(const DoubleVector& new_vector)
-  : Values_pt(0), Internal_values(true), Built(false)
+  : DistributableLinearAlgebraObject(),
+  Values_pt(0), Internal_values(true), Built(false)
   {
    this->build(new_vector);
   }
@@ -237,16 +238,10 @@ class CRDoubleMatrix;
  double max() const;
 
  /// access function to the underlying values
- double* values_pt()
-  {
-   return Values_pt;
-  }
+ double* values_pt() {return Values_pt;}
 
  /// \short access function to the underlying values (const version)
- const double* const values_pt() const
-  {
-   return Values_pt;
-  }
+ double* values_pt() const {return Values_pt;}
 
  /// output the contents of the vector
  void output(std::ostream &outfile);

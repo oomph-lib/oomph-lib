@@ -96,25 +96,25 @@ class Time
 
  /// \short Resize the vector holding the number of previous timesteps
  /// and initialise the new values to zero.
- void resize(const unsigned &ndt) {Dt.resize(ndt,0.0);}
+ void resize(const unsigned &n_dt) {Dt.resize(n_dt,0.0);}
 
  /// \short Set all timesteps to the same value, dt.
- void initialise_dt(const double& dt)
+ void initialise_dt(const double& dt_)
   {
-   unsigned ndt=Dt.size();
-   for (unsigned i=0;i<ndt;i++) {Dt[i]=dt;}
+   unsigned n_dt=Dt.size();
+   for (unsigned i=0;i<n_dt;i++) {Dt[i]=dt_;}
   }
 
  /// \short Set the value of the timesteps to be equal to the values passed in 
  /// a vector 
- void initialise_dt(const Vector<double>& dt)
+ void initialise_dt(const Vector<double>& dt_)
   {
    //Assign the values from the vector
    //By using the size of the passed vector, we can handle the case when
    //the size of passed vector is smaller than that amount of storage allocated
    //in the object.
-   unsigned ndt=dt.size();
-   for (unsigned i=0;i<ndt;i++) {Dt[i]=dt[i];}
+   unsigned n_dt=dt_.size();
+   for (unsigned i=0;i<n_dt;i++) {Dt[i]=dt_[i];}
   }
 
  /// Destructor: Deallocate the memory allocated in the Object
@@ -137,10 +137,10 @@ class Time
  double time(const unsigned &t)
   {
    //Load the current value of the time
-   double time=*Time_pt;
+   double time_local = *Time_pt;
    //Loop over the t previous timesteps and subtract each dt
-   for (unsigned i=0;i<t;i++) {time-=Dt[i];}
-   return time;
+   for (unsigned i=0;i<t;i++) {time_local -= Dt[i];}
+   return time_local;
   }
 
  /// \short Update all stored values of dt by shifting each value along 
@@ -148,11 +148,11 @@ class Time
  /// new time level.
   void shift_dt()
   {
-   unsigned ndt=Dt.size();
+   unsigned n_dt=Dt.size();
    //Return straight away if there are no stored timesteps
-   if(ndt == 0) {return;}
+   if(n_dt == 0) {return;}
    //Start from the end of the array and shift every entry back by one
-   for (unsigned i=(ndt-1);i>0;i--) {Dt[i]=Dt[i-1];}
+   for (unsigned i=(n_dt-1);i>0;i--) {Dt[i]=Dt[i-1];}
   }
 
 };
@@ -591,12 +591,12 @@ public:
    for(unsigned t=0;t<n_time_value;t++)
     {
      // Get corresponding continous time
-     double time=Time_pt->time(t);
+     double time_local=Time_pt->time(t);
 
      //Loop over values
      for(unsigned j=0;j<n_value;j++)
       {
-       data_pt->set_value(t,j,initial_value_fct[j](time));
+       data_pt->set_value(t,j,initial_value_fct[j](time_local));
       }
     }
   }
@@ -1116,12 +1116,12 @@ class BDF : public TimeStepper
     {
 
      // Get corresponding continous time
-     double time=Time_pt->time(t);
+     double time_local=Time_pt->time(t);
 
      //Loop over values
      for(unsigned j=0;j<n_value;j++)
       {
-       data_pt->set_value(t,j,initial_value_fct[j](time));
+       data_pt->set_value(t,j,initial_value_fct[j](time_local));
       }
     }
   }

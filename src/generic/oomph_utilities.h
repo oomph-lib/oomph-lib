@@ -631,7 +631,7 @@ class MPI_Helpers
 
  /// access to global communicator. This is the oomph-lib equivalent of
  /// MPI_COMM_WORLD
- static const OomphCommunicator* const communicator_pt();
+ static OomphCommunicator* communicator_pt();
 
  /// return true if MPI has been initialised
  static bool mpi_has_been_initialised() { return MPI_has_been_initialised; }

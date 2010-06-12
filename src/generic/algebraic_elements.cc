@@ -201,11 +201,16 @@ double AlgebraicNode::Max_allowed_difference_between_node_update_fcts=1.0e-10;
 int AlgebraicNode::Dummy_node_update_fct_id=-100;
 
 
+//======================================================================
+///Set the dummy mesh
+//====================================================================
+DummyAlgebraicMesh AlgebraicNode::Dummy_mesh;
+
 //========================================================================
 /// Default dummy mesh to point to for nodes for which no remesh
 /// fct is defined
 //========================================================================
-AlgebraicMesh* AlgebraicNode::Dummy_mesh_pt=new DummyAlgebraicMesh;
+AlgebraicMesh* AlgebraicNode::Dummy_mesh_pt=&AlgebraicNode::Dummy_mesh;
 
 
 //========================================================================

@@ -147,6 +147,7 @@ namespace oomph
       {
        delete Distribution_pt[i];
       }
+     Distribution_pt.resize(0);
 #endif
     }
    

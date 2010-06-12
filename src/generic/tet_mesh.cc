@@ -64,9 +64,10 @@ void TetMeshBase::setup_boundary_element_info(std::ostream &outfile)
  Boundary_element_pt.resize(nbound);
  Face_index_at_boundary.resize(nbound);
  
- // Temporary vector of sets of pointers to elements on the boundaries: 
- Vector<std::set<FiniteElement*> > set_of_boundary_element_pt;
- set_of_boundary_element_pt.resize(nbound);
+ // Temporary vector of vectors of pointers to elements on the boundaries: 
+ // This is a vector to ensure UNIQUE ordering in all processors
+ Vector<Vector<FiniteElement*> > vector_of_boundary_element_pt;
+ vector_of_boundary_element_pt.resize(nbound);
  
  // Matrix map for working out the fixed face for elements on boundary
  MapMatrixMixed<unsigned,FiniteElement*, int > 
@@ -206,13 +207,28 @@ void TetMeshBase::setup_boundary_element_info(std::ostream &outfile)
        //If we have a boundary then add this to the appropriate set
        if(boundary >= 0)
         {
-         set_of_boundary_element_pt[static_cast<unsigned>(boundary)].
-          insert(fe_pt);
+
+         // Does the pointer already exits in the vector
+         Vector<FiniteElement*>::iterator b_el_it =
+          std::find(vector_of_boundary_element_pt[
+                     static_cast<unsigned>(boundary)].begin(),
+                    vector_of_boundary_element_pt[
+                     static_cast<unsigned>(boundary)].end(),
+                    fe_pt);
+         
+         //Only insert if we have not found it (i.e. got to the end)
+         if(b_el_it == vector_of_boundary_element_pt[
+             static_cast<unsigned>(boundary)].end())
+          {
+           vector_of_boundary_element_pt[static_cast<unsigned>(boundary)].
+            push_back(fe_pt);
+          }
+         
          //Also set the fixed face
          face_identifier(static_cast<unsigned>(boundary),fe_pt) = i;
         }
       }
-
+     
      //Now we set the pointers to the boundary sets to zero
      for(unsigned i=0;i<4;i++) {boundaries_pt[i] = 0;}
 
@@ -227,15 +243,15 @@ void TetMeshBase::setup_boundary_element_info(std::ostream &outfile)
  for (unsigned i=0;i<nbound;i++)
   {
    // Number of elements on this boundary (currently stored in a set)
-   unsigned nel=set_of_boundary_element_pt[i].size();
+   unsigned nel=vector_of_boundary_element_pt[i].size();
     
    // Allocate storage for the coordinate identifiers
    Face_index_at_boundary[i].resize(nel);
 
    unsigned e_count=0;
-   typedef std::set<FiniteElement*>::iterator IT;
-   for (IT it=set_of_boundary_element_pt[i].begin();
-        it!=set_of_boundary_element_pt[i].end();
+   typedef Vector<FiniteElement*>::iterator IT;
+   for (IT it=vector_of_boundary_element_pt[i].begin();
+        it!=vector_of_boundary_element_pt[i].end();
         it++)
     {    
      // Recover pointer to element

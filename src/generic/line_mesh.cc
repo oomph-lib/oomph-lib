@@ -26,10 +26,6 @@ namespace oomph
   Boundary_element_pt.resize(n_bound);
   Face_index_at_boundary.resize(n_bound);
   
-  // Temporary vector of sets of pointers to elements on the boundaries: 
-  Vector<std::set<FiniteElement*> > set_of_boundary_element_pt;
-  set_of_boundary_element_pt.resize(n_bound);
-  
   // Matrix map for working out the fixed local coord for elements on boundary
   MapMatrixMixed<unsigned,FiniteElement*,Vector<int>* > 
    boundary_identifier;
