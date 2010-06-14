@@ -238,7 +238,7 @@ namespace oomph
    /// \short returns the number of DOF types associated with this element. 
    unsigned ndof_types()
     {
-     return 2*DIM;
+     return DIM;
     }
  
    /// \short Create a list of pairs for all unknowns in this element,
@@ -248,12 +248,9 @@ namespace oomph
    /// (Function can obviously only be called if the equation numbering
    /// scheme has been set up.)\n
    /// E.g. in a 3D problem there are 6 types of DOF:\n
-   /// 0 - x displacement (without lagr mult traction)\n
-   /// 1 - y displacement (without lagr mult traction)\n
-   /// 2 - z displacement (without lagr mult traction)\n
-   /// 4 - x displacement (with lagr mult traction)\n
-   /// 5 - y displacement (with lagr mult traction)\n
-   /// 6 - z displacement (with lagr mult traction)\n
+   /// 0 - x displacement\n
+   /// 1 - y displacement\n
+   /// 2 - z displacement\n
    void get_dof_numbers_for_unknowns(
     std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
     {
@@ -273,11 +270,6 @@ namespace oomph
      //Loop over the nodes
      for(unsigned n=0;n<n_node;n++)
       {
-       unsigned offset = 0;
-       if (this->node_pt(n)->nvalue() != this->required_nvalue(n))
-        {
-         offset = DIM;
-        }
 
        //Loop over position dofs
        for(unsigned k=0;k<n_position_type;k++)
@@ -294,7 +286,7 @@ namespace oomph
              // store block lookup in temporary pair: First entry in pair
              // is global equation number; second entry is block type
              block_lookup.first = this->eqn_number(local_unknown);
-             block_lookup.second = offset+i;
+             block_lookup.second = i;
            
              // add to list
              block_lookup_list.push_front(block_lookup);

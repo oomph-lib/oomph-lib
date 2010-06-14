@@ -565,7 +565,7 @@ namespace oomph
    /// \short access to thte distribution of the master preconditioner. If this
    /// preconditioner does not have a master preconditioner then the
    /// distribution of this preconditioner is returned
-   const LinearAlgebraDistribution* const master_distribution_pt() const
+   const LinearAlgebraDistribution* master_distribution_pt() const
     {
      if (Master_block_preconditioner_pt == 0)
       {
@@ -906,7 +906,7 @@ namespace oomph
     }
 
    /// \short access function to the preconditioner matrix distribution pt
-   const LinearAlgebraDistribution* const 
+   const LinearAlgebraDistribution*  
     preconditioner_matrix_distribution_pt() const
     {
      if (Master_block_preconditioner_pt == 0)
@@ -2220,7 +2220,6 @@ namespace oomph
 
      // loop over my rows to allocate the nrows
      DenseMatrix<unsigned> ptr_block(Nblock_types,nproc,0);
-     Vector<unsigned> ptr_ordered(nproc,0); 
      for (unsigned i = 0; i < nrow_local; i++)
       {
        // the block number
@@ -2439,25 +2438,25 @@ namespace oomph
      Rows_to_recv_for_get_ordered.initialise(0);
 
      // construct block offset
-     Vector<int> vec_offset(Nblock_types);
+     Vector<int> vec_offset(Nblock_types,0);
      for (unsigned b = 1; b < Nblock_types; ++b)
       {
-       vec_offset[b]=vec_offset[b-1]+Block_distribution_pt[b]->nrow_local();
+       vec_offset[b]=vec_offset[b-1]+Block_distribution_pt[b-1]->nrow_local();
       }
 
      //
-     ptr_ordered.initialise(0);
      for (unsigned p = 0; p < nproc; p++)
       {
+       int pt = 0;
        Rows_to_recv_for_get_ordered[p]
         = new int[Nrows_to_recv_for_get_ordered[p]];
        for (unsigned b = 0; b < Nblock_types; b++)
         {
          for (unsigned i = 0; i < Nrows_to_recv_for_get_block(b,p); i++)
           {
-           Rows_to_recv_for_get_ordered[p][ptr_ordered[p]] = 
+           Rows_to_recv_for_get_ordered[p][pt] = 
             Rows_to_recv_for_get_block(b,p)[i]+vec_offset[b];
-           ptr_ordered[p]++;
+           pt++;
           }
         }
       }
@@ -2469,10 +2468,7 @@ namespace oomph
         {
          for (unsigned b = 0; b < Nblock_types; b++)
           {
-           if (Nrows_to_send_for_get_block(b,p) >= 0)
-            {
-             delete[] block_rows_to_send(b,p);
-            }
+	    delete[] block_rows_to_send(b,p);
           }
          if (Nrows_to_send_for_get_ordered[p] > 0)
           {

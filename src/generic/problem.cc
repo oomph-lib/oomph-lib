@@ -526,14 +526,22 @@ namespace oomph
   unsigned objective=0;
 
   // Do the partitioning
-  METIS::partition_mesh(this,n_proc,objective,element_domain);
+  unsigned nelem=0;
+  if (this->communicator_pt()->my_rank()==0)
+   {
+    METIS::partition_mesh(this,n_proc,objective,element_domain);
+    nelem=element_domain.size();
+   }
+  MPI_Bcast(&nelem,1,MPI_UNSIGNED,0,this->communicator_pt()->mpi_comm());
+  element_domain.resize(nelem);
+  MPI_Bcast(&element_domain[0],nelem,MPI_UNSIGNED,0,
+            this->communicator_pt()->mpi_comm());
 
   // On very coarse meshes with larger numbers of processors, METIS 
   // occasionally returns an element_domain Vector for which a particular 
   // processor has no elements affiliated to it; the following fixes this
 
   // Convert element_domain to integer storage
-  unsigned nelem=element_domain.size();
   Vector<int> int_element_domain(nelem);
   for (unsigned e=0;e<nelem;e++)
    {
@@ -1968,7 +1976,7 @@ else
   // PARANOID checks that the distribution of the jacobian matches that of the
   // residuals (if they are setup) and that they have the right number of rows
   if (residuals.built() && 
-      jacobian.is_distribution_built())
+      jacobian.distribution_built())
    {
     if (!(*residuals.distribution_pt() == *jacobian.distribution_pt()))
      {                                    
@@ -1990,7 +1998,7 @@ else
      }                 
    }
   else if (residuals.built() != 
-           jacobian.is_distribution_built())
+           jacobian.distribution_built())
    {
     std::ostringstream error_stream; 
     error_stream << "The distribution of the jacobian and residuals must "
@@ -2013,7 +2021,7 @@ else
   // ELSE determine the distribution based on the 
   // distributed_matrix_distribution enum
   LinearAlgebraDistribution* dist_pt=0;
-  if (jacobian.is_distribution_built())
+  if (jacobian.distribution_built())
    {
     dist_pt = new LinearAlgebraDistribution(jacobian.distribution_pt());
    }
@@ -6008,7 +6016,7 @@ void Problem::get_eigenproblem_matrices(CRDoubleMatrix &mass_matrix,
                                         const double &shift)
 {
 #ifdef PARANOID
- if (mass_matrix.is_distribution_built())
+ if (mass_matrix.distribution_built())
   {
    if (mass_matrix.nrow() != this->ndof())
     {   
@@ -6030,7 +6038,7 @@ void Problem::get_eigenproblem_matrices(CRDoubleMatrix &mass_matrix,
                          OOMPH_EXCEPTION_LOCATION);
     }
   }
- if (main_matrix.is_distribution_built())
+ if (main_matrix.distribution_built())
   {
    if (main_matrix.nrow() != this->ndof())
     {
@@ -6055,15 +6063,15 @@ void Problem::get_eigenproblem_matrices(CRDoubleMatrix &mass_matrix,
 #endif 
 
  // if the matrices are not setup then build them
- if (!main_matrix.is_distribution_built() || 
-     !mass_matrix.is_distribution_built())
+ if (!main_matrix.distribution_built() || 
+     !mass_matrix.distribution_built())
   {
    LinearAlgebraDistribution dist(this->communicator_pt(),this->ndof(),false);
-   if (!main_matrix.is_distribution_built())
+   if (!main_matrix.distribution_built())
     {
      main_matrix.build(&dist);
     }
-   if (!mass_matrix.is_distribution_built())
+   if (!mass_matrix.distribution_built())
     {
      mass_matrix.build(&dist);
     }

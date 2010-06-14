@@ -512,7 +512,7 @@ class LinearAlgebraDistribution
 
    /// if the communicator_pt is null then the distribution is not setup then
    /// false is returned, otherwise return true
-   bool is_distribution_built() const 
+   bool distribution_built() const 
     { 
      return Distribution_pt->built();
     }

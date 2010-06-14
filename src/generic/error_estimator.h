@@ -470,6 +470,7 @@ class Z2ErrorEstimator : public virtual ErrorEstimator
   Central_node_number(central_node_number)
   {
 #ifdef PARANOID
+#ifdef OOMPH_HAS_MPI
    if (mesh_pt->mesh_has_been_distributed())
     {
      throw OomphLibError(
@@ -477,6 +478,7 @@ class Z2ErrorEstimator : public virtual ErrorEstimator
       "Mesh::compute_error()",
       OOMPH_EXCEPTION_LOCATION);
     }
+#endif
 #endif
 
    unsigned dim=mesh_pt->finite_element_pt(0)->node_pt(0)->ndim();

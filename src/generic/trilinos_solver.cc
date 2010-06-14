@@ -184,6 +184,12 @@ void TrilinosAztecOOSolver::solve(DoubleMatrixBase* const& matrix_pt,
   }  
 #endif
 
+ // build the result if not built
+ if (!result.built())
+  {
+   result.build(rhs.distribution_pt(),0.0);
+  }
+
  // setup the solver
  solver_setup(matrix_pt);
 
@@ -386,7 +392,14 @@ void TrilinosAztecOOSolver::solver_setup(DoubleMatrixBase* const& matrix_pt)
   }
  
  // set solver options
- AztecOO_solver_pt->SetAztecOption(AZ_output, AZ_warnings);
+ if (Doc_time)
+  {
+   AztecOO_solver_pt->SetAztecOption(AZ_output, AZ_warnings);
+  }
+ else
+  {
+   AztecOO_solver_pt->SetAztecOption(AZ_output, AZ_none);
+  }
  AztecOO_solver_pt->SetAztecOption(AZ_kspace, Max_iter);
  
  // set solver type
@@ -441,7 +454,30 @@ void TrilinosAztecOOSolver::resolve(const DoubleVector &rhs,
                        "TrilinosAztecOOSolver::solve()",
                        OOMPH_EXCEPTION_LOCATION);
   }
+
+// if the result vector is setup then check it is not distributed and has 
+ // the same communicator as the rhs vector
+ if (solution.built())
+  {
+   if (!(*solution.distribution_pt() == *rhs.distribution_pt()))
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The result vector distribution has been setup; it must have the "
+      << "same distribution as the rhs vector.";
+     throw OomphLibError(error_message_stream.str(),
+                         "TrilinosAztecOOSolver::solve()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }  
 #endif
+
+ // build the result if not built
+ if (!solution.built())
+  {
+   solution.build(rhs.distribution_pt(),0.0);
+  }
+
 
  // create Epetra version of r
  Epetra_Vector* epetra_r_pt = TrilinosEpetraHelpers::
@@ -455,7 +491,7 @@ void TrilinosAztecOOSolver::resolve(const DoubleVector &rhs,
  solve_using_AztecOO(epetra_r_pt,epetra_z_pt);            
 
  // Copy result to z
- if (!solution.is_distribution_built())
+ if (!solution.distribution_built())
   {
    solution.build(rhs.distribution_pt(),0.0);
   }
@@ -507,11 +543,14 @@ void TrilinosAztecOOSolver::solve_using_AztecOO(Epetra_Vector* &rhs_pt,
 
 
  // output iterations and final norm
- Iterations = AztecOO_solver_pt->NumIters();
- double norm = AztecOO_solver_pt->TrueResidual();
- oomph_info << "Linear solver iterations    : "
-            << Iterations << std::endl;
- oomph_info << "Final Relative Residual Norm: " << norm << std::endl;
+  Iterations = AztecOO_solver_pt->NumIters();
+  if (Doc_time)
+   {
+    double norm = AztecOO_solver_pt->TrueResidual();
+    oomph_info << "Linear solver iterations    : "
+               << Iterations << std::endl;
+    oomph_info << "Final Relative Residual Norm: " << norm << std::endl;
+   }
 }
 
 

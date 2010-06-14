@@ -316,6 +316,9 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
   // set solver defaults
   Solver_type = GMRES;
   Tolerance = 10e-10;
+
+  // don't delete the matrix
+  Delete_matrix = false;
  }
 
  /// Destructor - delete the solver and the matrices

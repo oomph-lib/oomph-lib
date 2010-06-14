@@ -45,7 +45,7 @@ namespace oomph
      this->build(old_vector.distribution_pt(),0.0);
      
      // copy the data
-     if (this->is_distribution_built())
+     if (this->distribution_built())
       {
        unsigned nrow_local = this->nrow_local();
        const double* old_vector_values = old_vector.values_pt();
@@ -512,7 +512,7 @@ namespace oomph
   {
 #ifdef PARANOID
    // PARANOID check that this vector is setup
-   if (!this->is_distribution_built())
+   if (!this->distribution_built())
     {
      std::ostringstream error_message;
      error_message << "This vector must be setup."; 

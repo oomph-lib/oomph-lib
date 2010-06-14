@@ -8,7 +8,8 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 check_PROGRAMS= \
 driven_cavity \
 direct_solver_test \
-airy_cantilever
+airy_cantilever \
+fsi_channel_with_leaflet
 
 # Do we have the TRILINOS library?
 #=================================
@@ -52,6 +53,18 @@ airy_cantilever_SOURCES = airy_cantilever.cc
 # $(FLIBS) is included in case the  solver involves fortran sources.
 airy_cantilever_LDADD = -L@libdir@ -lsolid -lconstitutive \
                         -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
+
+#---------------------------------------------------------------------
+
+# Sources for first executable
+fsi_channel_with_leaflet_SOURCES = fsi_channel_with_leaflet.cc
+
+# Required libraries:
+# $(FLIBS) is included in case the solver involves fortran sources.
+fsi_channel_with_leaflet_LDADD = \
+ -L@libdir@ -lbeam -lnavier_stokes -lgeneric \
+                     $(EXTERNAL_LIBS) $(FLIBS)
+
 
 #-----------------------------------------------------------------------
 

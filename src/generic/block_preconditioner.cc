@@ -972,14 +972,14 @@ namespace oomph
             // if b_column_index[l] was a row index, what processor
             // would it be on
             unsigned p = 0;
-            int b_first_row = Block_distribution_pt[j]->first_row(0);
-            int b_nrow_local = Block_distribution_pt[j]->nrow_local(0);
+            int b_first_row = this->block_distribution_pt(j)->first_row(0);
+            int b_nrow_local = this->block_distribution_pt(j)->nrow_local(0);
             while (b_column_index[l] < b_first_row || 
                    b_column_index[l] >= b_nrow_local+b_first_row)
              {
               p++;
-              b_first_row = Block_distribution_pt[j]->first_row(p);
-              b_nrow_local = Block_distribution_pt[j]->nrow_local(p);
+              b_first_row = this->block_distribution_pt(j)->first_row(p);
+              b_nrow_local = this->block_distribution_pt(j)->nrow_local(p);
              }
 
             // determine the local equation number in the block j/processor p

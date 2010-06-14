@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=1
+NUM_TESTS=2
 
 
 # Setup validation directory
@@ -27,7 +27,27 @@ echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 cat RESLT/solid_soln3.dat  RESLT/solid_soln4.dat \
     RESLT/fluid_soln3.dat  RESLT/fluid_soln4.dat > results.dat
-
+echo "Running pseudo-solid collapsible tube preconditioner validation "
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/results.dat.gz \
+    results.dat  >> validation.log
+fi
+mv RESLT RESLT_WITHOUT_PREC
+mkdir RESLT
+../pseudo_solid_collapsible_tube bla bla > OUTPUT
+echo "done"
+echo " " >> validation.log
+echo "Pseudo-solid collapsible tube preconditioner validation" >> validation.log
+echo "-------------------------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT/solid_soln3.dat  RESLT/solid_soln4.dat \
+    RESLT/fluid_soln3.dat  RESLT/fluid_soln4.dat > results.dat
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
@@ -35,10 +55,13 @@ else
 ../../../../bin/fpdiff.py ../validata/results.dat.gz \
     results.dat  0.1 2.0e-13 >> validation.log
 fi
+mv RESLT RESLT_WITH_PREC
+
 
 
 #Append log to main validation log
 cat validation.log >> ../../../../validation.log
+
 
 cd ..
 

@@ -13,7 +13,7 @@ pseudo_solid_collapsible_tube_SOURCES = pseudo_solid_collapsible_tube.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
-pseudo_solid_collapsible_tube_LDADD = -L@libdir@ -lnavier_stokes -lsolid  -lconstitutive -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
+pseudo_solid_collapsible_tube_LDADD = -L@libdir@ -lmulti_physics -lnavier_stokes -lsolid  -lconstitutive -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
 
 #---------------------------------------------------------------------

@@ -189,7 +189,7 @@ class CRDoubleMatrix;
   {
 #ifdef PARANOID
    // check that this distribution is setup
-   if (!this->is_distribution_built())
+   if (!this->distribution_built())
     {
     // if this vector does not own the double* values then it cannot be
     // distributed.

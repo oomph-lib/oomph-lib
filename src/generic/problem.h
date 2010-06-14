@@ -614,10 +614,9 @@ protected:
    return Dist_problem_matrix_distribution;
   }
 
+  private:
 
- // hierher PUBLIC DATA!?
-
- /// The distributed matrix distribution method
+ /// \short The distributed matrix distribution method
  /// \n 1 - Automatic - the Problem distribution is employed, unless any
  /// processor has number of rows equal to 110% of N/P, in which case
  /// uniform distribution is employed.
@@ -628,11 +627,16 @@ protected:
  /// possible. (very well load balanced)
  Distributed_problem_matrix_distribution Dist_problem_matrix_distribution;
 
- /// hierher Richard what is this?
+ /// \short The amount of data allocated during the previous parallel sparse
+ /// assemble. Used to optimise the next call to parallel_sparse_assemble()
  unsigned Parallel_sparse_assemble_previous_allocation;
+
+  protected:
 
  /// Has the problem been distributed amongst multiple processors?
  bool Problem_has_been_distributed;
+
+  public:
 
  /// access function to the problem has been distributed flag
  const bool distributed() const { return Problem_has_been_distributed; }

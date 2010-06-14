@@ -81,7 +81,7 @@ mkdir RESLT
 ../three_d_fp bla > OUTPUT_three_d_fp
 echo "done"
 echo " " >> validation.log
-echo "2D Fp/PCD preconditioner test" >> validation.log
+echo "3D Fp/PCD preconditioner test" >> validation.log
 echo "-----------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log
@@ -109,7 +109,7 @@ echo "Results: " >> validation.log
 ../../../../bin/fpdiff.py ../validata/three_d_fp.dat.gz  \
          three_d_fp.dat 0.1 1.0e-9 >> validation.log
 
-echo "Iteration counts (allowing for 20% variation): " >> validation.log
+echo "Iteration counts (allowing for 50% variation): " >> validation.log
 echo " " >> validation.log
 echo "[Note: This test fails if  " >> validation.log
 echo " " >> validation.log
@@ -126,7 +126,7 @@ echo "       lines in the iter* files will match.] " >> validation.log
 
 
 ../../../../bin/fpdiff.py ../validata/iter_three_d.dat.gz  \
-         iter_three_d.dat 20.0 1.0E-10>> validation.log
+         iter_three_d.dat 50.0 1.0E-10>> validation.log
 
 fi
 

@@ -1866,7 +1866,7 @@ void CRDoubleMatrix::multiply(const CRDoubleMatrix& matrix_in,
 #endif
 
  // if the result has not been setup, then store the distribution
- if (!result.is_distribution_built())
+ if (!result.distribution_built())
   {
    result.build(this->distribution_pt());
   }
@@ -3060,7 +3060,7 @@ double CRDoubleMatrix::inf_norm() const
   {
 #ifdef PARANOID
    // paranoid check that the vector is setup
-   if (!this->is_distribution_built())
+   if (!this->distribution_built())
     {
      std::ostringstream error_message;
      error_message << "This vector must be setup."; 

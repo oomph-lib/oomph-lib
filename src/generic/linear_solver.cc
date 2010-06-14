@@ -448,7 +448,7 @@ void DenseLU::backsub(const Vector<double> &rhs,
   }
  // if the result vector is setup then check it is not distributed and has 
  // the same communicator as the rhs vector
- if (result.is_distribution_built())
+ if (result.distribution_built())
   {
    if (!(*result.distribution_pt() == *rhs.distribution_pt()))
     {
@@ -463,7 +463,7 @@ void DenseLU::backsub(const Vector<double> &rhs,
   }   
 #endif
  
- if (!result.is_distribution_built())
+ if (!result.distribution_built())
   {
    result.build(rhs.distribution_pt(),0.0);
   }
@@ -1516,7 +1516,7 @@ void SuperLUSolver::backsub_distributed(const DoubleVector &rhs,
 #ifdef PARANOID
  // if the result vector is setup then check it has the same distribution
  // as the rhs
- if (result.is_distribution_built())
+ if (result.distribution_built())
   {
    if (!(*result.distribution_pt() == *rhs.distribution_pt()))
     {

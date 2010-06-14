@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=25
+NUM_TESTS=27
 
 # Doc what we're using to run tests on two processors
 echo " " 
@@ -97,6 +97,34 @@ else
 ../../../../bin/fpdiff.py ../validata/airy_soln.dat.gz \
     RESLT/airy_soln3.dat 0.1 10e-6 >> validation.log
 fi
+
+# FSI Preconditioner
+#===================
+echo "Running FSI Preconditioner on Channel with Leaflet Problem"
+$MPI_RUN_COMMAND ../fsi_channel_with_leaflet > OUTPUT_fsi
+echo "done"
+echo ""
+echo " " >> validation.log
+echo "FSI Preconditioner Tests" >> validation.log
+echo "--------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/fsi_fluid_soln.dat.gz \
+    RESLT/fsi_fluid_soln0.dat 0.1 10e-8 >> validation.log
+fi
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/fsi_wall_soln.dat.gz \
+    RESLT/fsi_wall_soln0.dat 0.1 10e-6 >> validation.log
+fi
+
 
 # Trilinos test
 #==============

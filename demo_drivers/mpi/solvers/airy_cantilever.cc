@@ -44,24 +44,18 @@ namespace oomph
 
 
 #ifdef HAVE_HYPRE
-//=============================================================================
-/// helper method for the block diagonal F block preconditioner to allow 
-/// hypre to be used for as a subsidiary block preconditioner
-//=============================================================================
+//=hypre_helper=================================================================
+/// The function get_hypre_preconditioner() returns an instance of 
+/// HyprePreconditioner to be used as a subsidiary preconditioner in a
+/// GeneralPurposeBlockPreconditioner
+//==============================================================================
 namespace Hypre_Subsidiary_Preconditioner_Helper
 {
- Preconditioner* set_hypre_preconditioner()
+ Preconditioner* get_hypre_preconditioner()
  {
-  HyprePreconditioner* hypre_preconditioner_pt = new HyprePreconditioner;
-  hypre_preconditioner_pt->set_amg_iterations(2);
-  hypre_preconditioner_pt->amg_using_simple_smoothing();
-  hypre_preconditioner_pt->amg_simple_smoother() = 1;
-  hypre_preconditioner_pt->hypre_method() = HyprePreconditioner::BoomerAMG;
-  hypre_preconditioner_pt->amg_strength() = 0.25;
-  hypre_preconditioner_pt->amg_coarsening() = 0; 
-  return hypre_preconditioner_pt;;
+  return new HyprePreconditioner;
  }
-}
+} // end_of_hypre_helper
 #endif
 
 
@@ -679,74 +673,70 @@ int main(int argc, char* argv[])
  Global_Physical_Variables::P=1.0e-5; 
  Global_Physical_Variables::Gravity=0.0;
 
- // use trilinos gmres
+ // use trilinos gmres if available
 #ifdef HAVE_TRILINOS
  TrilinosAztecOOSolver* solver_pt = new TrilinosAztecOOSolver;
  solver_pt->solver_type() = TrilinosAztecOOSolver::GMRES;
 #else
  GMRES<CRDoubleMatrix>* solver_pt = new GMRES<CRDoubleMatrix>;
 #endif
+ problem.linear_solver_pt() = solver_pt;
  solver_pt->tolerance() = 10e-5;
  solver_pt->doc_convergence_history() = true;
 
- // set the preconditioner
+ // Pointer to general purpose block preconditioner base class
  GeneralPurposeBlockPreconditioner<CRDoubleMatrix>* prec_pt = 0;
+
+ // Choose the preconditioner type
  switch (prec)
   {
   case 0:
+
+   // Standard Block Diagonal
    prec_pt = new BlockDiagonalPreconditioner<CRDoubleMatrix>;
-   dynamic_cast<BlockDiagonalPreconditioner<CRDoubleMatrix>* >
-    (prec_pt)->use_two_level_parallelisation() = false;
-#ifdef HAVE_HYPRE
-   dynamic_cast<BlockDiagonalPreconditioner<CRDoubleMatrix>* >
-    (prec_pt)->set_subsidiary_preconditioner_function
-    (Hypre_Subsidiary_Preconditioner_Helper::set_hypre_preconditioner);
-#endif
    break;
   case 1:
+
+   // Two Level Block Diagonal
    prec_pt = new BlockDiagonalPreconditioner<CRDoubleMatrix>;
    dynamic_cast<BlockDiagonalPreconditioner<CRDoubleMatrix>* >
     (prec_pt)->use_two_level_parallelisation() = true;
-#ifdef HAVE_HYPRE
-   dynamic_cast<BlockDiagonalPreconditioner<CRDoubleMatrix>* >
-    (prec_pt)->set_subsidiary_preconditioner_function
-    (Hypre_Subsidiary_Preconditioner_Helper::set_hypre_preconditioner);
-#endif
    break;
   case 2:
+
+   // Block Upper Triangular
    prec_pt = new BlockTriangularPreconditioner<CRDoubleMatrix>;
    dynamic_cast<BlockTriangularPreconditioner<CRDoubleMatrix>* >
     (prec_pt)->upper_triangular();
-#ifdef HAVE_HYPRE
-   dynamic_cast<BlockTriangularPreconditioner<CRDoubleMatrix>* >
-    (prec_pt)->set_subsidiary_preconditioner_function
-    (Hypre_Subsidiary_Preconditioner_Helper::set_hypre_preconditioner);
-#endif
    break;
   case 3:
+
+   // Block Lower Triangular
    prec_pt = new BlockTriangularPreconditioner<CRDoubleMatrix>;
    dynamic_cast<BlockTriangularPreconditioner<CRDoubleMatrix>* >
-    (prec_pt)->lower_triangular();   
-#ifdef HAVE_HYPRE
-   dynamic_cast<BlockTriangularPreconditioner<CRDoubleMatrix>* >
-    (prec_pt)->set_subsidiary_preconditioner_function
-    (Hypre_Subsidiary_Preconditioner_Helper::set_hypre_preconditioner);
-#endif
+    (prec_pt)->lower_triangular();
    break;
   }
+
+#ifdef HAVE_HYPRE
+ // Specify Hypre as the subsidiary block preconditioner
+ prec_pt->set_subsidiary_preconditioner_function
+   (Hypre_Subsidiary_Preconditioner_Helper::get_hypre_preconditioner);
+#endif
 
  // set the mesh
  prec_pt->add_mesh(problem.solid_mesh_pt());
 
  // set the DOF to block map
- Vector<unsigned> dof_to_block_map(4,0);
+ Vector<unsigned> dof_to_block_map(2);
+ dof_to_block_map[0] = 0;
  dof_to_block_map[1] = 1;
- dof_to_block_map[3] = 1;
  prec_pt->set_dof_to_block_map(dof_to_block_map);
 
- // solve
- problem.linear_solver_pt() = solver_pt;
+ // pass the preconditioner to the solver
  solver_pt->preconditioner_pt() = prec_pt;
+
+ // solve the problem
  problem.newton_solve();
 
  // Doc solution

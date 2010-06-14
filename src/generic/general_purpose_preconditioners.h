@@ -459,7 +459,7 @@ class InnerIterationPreconditioner : public Preconditioner
     {
      LinearAlgebraDistribution dist(problem_pt->communicator_pt(),
                                     matrix_pt->nrow(),false);
-     this->rebuild_distribution(dist);
+     this->build_distribution(dist);
     }
 
    // setup the inner iteration preconditioner
@@ -468,7 +468,7 @@ class InnerIterationPreconditioner : public Preconditioner
    // setup the solverready for resolve
    unsigned max_iter = Solver_pt->max_iter();
    Solver_pt->max_iter() = 1;
-   DoubleVector x(Distribution_pt,0.0);
+   DoubleVector x(this->distribution_pt(),0.0);
    DoubleVector y(x);
    Solver_pt->enable_resolve();
    Solver_pt->solve(matrix_pt,x,y);

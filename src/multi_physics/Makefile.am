@@ -3,14 +3,16 @@
 #-----------------------
 
 # Define the sources
-sources = segregated_fsi_solver.cc
+sources = segregated_fsi_solver.cc pseudo_elastic_preconditioner.cc \
+pseudo_elastic_fsi_preconditioner.cc
 
 # Include files which shouldn't be compiled
 incl_cc_files =
 
 # Define the headers
 headers =  \
-fsi_preconditioners.h segregated_fsi_solver.h 
+fsi_preconditioners.h segregated_fsi_solver.h pseudo_elastic_preconditioner.h \
+pseudo_elastic_fsi_preconditioner.h
 
 # Template only files. These should be included in include directory
 # but should not be listed in combined header file
@@ -49,7 +51,7 @@ library_include_HEADERS=$(headers) $(incl_cc_files) $(templates)
 # Include path for library headers -- need to refer to include files
 # in their respective source directoriesas they will not have been 
 # installed yet! 
-#INCLUDES = -I$(top_srcdir)/src/generic
+INCLUDES = -I$(top_srcdir)/src/generic $(top_srcdir)/src/navier_stokes
 
 
 # Combined header file

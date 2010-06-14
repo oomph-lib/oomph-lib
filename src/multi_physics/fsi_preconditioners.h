@@ -78,10 +78,9 @@ public :
    // Preconditioner hasn't been set up yet.
    Preconditioner_has_been_setup=false;
 
-   // Null out pointers to additional block matrices not already
-   // stored in Navier Stokes block preconditioner
-   Block_matrix_0_1_pt=0;
-   Block_matrix_1_0_pt=0;
+   // Create the matrix vector product operators
+   Matrix_vector_product_0_1_pt = new MatrixVectorProduct;
+   Matrix_vector_product_1_0_pt = new MatrixVectorProduct;
 
    // set Doc_time to false
    Doc_time = false;
@@ -91,14 +90,15 @@ public :
  /// Destructor: Clean up.
  ~FSIPreconditioner()
   {
-   // Do what it says
-   clean_up_memory();
-
    //Delete the Navier-Stokes preconditioner (inexact solver)
    delete Navier_stokes_preconditioner_pt;
 
    //Delete the solid preconditioner (inexact solver)
    delete Solid_preconditioner_pt;
+
+   // delete the matrix vector product operators
+   delete Matrix_vector_product_0_1_pt;
+   delete Matrix_vector_product_1_0_pt;
   }
  
  
@@ -189,24 +189,6 @@ public :
 
 private:
 
- /// Clean up memory, delete the blocks allocated in setup
- void clean_up_memory()
-  {
-   if (Preconditioner_has_been_setup)
-    {
-     if (Retain_solid_onto_fluid_terms)
-      {
-       delete Block_matrix_0_1_pt;
-       Block_matrix_0_1_pt=0;
-      }
-     if (Retain_fluid_onto_solid_terms)
-      {
-       delete Block_matrix_1_0_pt;
-       Block_matrix_1_0_pt=0;
-      }
-    }
-  }
-
  /// Pointer the Navier Stokes preconditioner (inexact solver)
  NavierStokesLSCPreconditioner* Navier_stokes_preconditioner_pt;
 
@@ -214,10 +196,10 @@ private:
  Preconditioner* Solid_preconditioner_pt;
 
  /// Pointer to fluid/solid interaction matrix
- CRDoubleMatrix* Block_matrix_0_1_pt;
+ MatrixVectorProduct* Matrix_vector_product_0_1_pt;
 
  /// Pointer to solid/fluid solid interaction matrix
- CRDoubleMatrix* Block_matrix_1_0_pt;
+ MatrixVectorProduct* Matrix_vector_product_1_0_pt;
 
  /// Boolean indicating the preconditioner has been set up 
  bool Preconditioner_has_been_setup;
@@ -256,9 +238,7 @@ private:
 void FSIPreconditioner::setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
  {
 
-  // Clean up any existing data
-  this->clean_up_memory();
-
+  // check the meshes have been set
 #ifdef PARANOID
   if (Navier_stokes_mesh_pt==0)
    {
@@ -340,20 +320,23 @@ void FSIPreconditioner::setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
   // Solid on fluid terms (if needed)
   if (Retain_solid_onto_fluid_terms)
    {
-    this->get_block(0,1,cr_matrix_pt,Block_matrix_0_1_pt);
+    CRDoubleMatrix* block_matrix_0_1_pt=0;
+    this->get_block(0,1,cr_matrix_pt,block_matrix_0_1_pt);
+    Matrix_vector_product_0_1_pt->setup(block_matrix_0_1_pt);
+    delete block_matrix_0_1_pt;
    }
   
   // Fluid on solid terms (if needed)
   if (Retain_fluid_onto_solid_terms)
    {
-    this->get_block(1,0,cr_matrix_pt,Block_matrix_1_0_pt);
+    CRDoubleMatrix* block_matrix_1_0_pt=0;
+    this->get_block(1,0,cr_matrix_pt,block_matrix_1_0_pt);
+    Matrix_vector_product_1_0_pt->setup(block_matrix_1_0_pt);
+    delete block_matrix_1_0_pt;
    }
   
   // Setup the solid preconditioner (inexact solver)
   double t_start = TimingHelpers::timer();
-//  LinearAlgebraDistribution dist(this->distribution_pt()->communicator_pt(),
-//				 block_matrix_1_1_pt,false);
-//  block_matrix_1_1_pt->redistribute(&dist);				 
   Solid_preconditioner_pt->setup(problem_pt,block_matrix_1_1_pt);
   double t_end = TimingHelpers::timer();
   double setup_time= t_end-t_start;
@@ -366,26 +349,6 @@ void FSIPreconditioner::setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
   {
    oomph_info << "Solid sub-preconditioner setup time [sec]: "
               << setup_time << "\n";
-   
-   // Doc density of retained interaction block
-   if (Retain_solid_onto_fluid_terms)
-    {
-     oomph_info << "Fill level of solid on fluid blocks (C_us and C_ps): " <<
-      double(Block_matrix_0_1_pt->nnz())/
-      double(Block_matrix_0_1_pt->nrow()*
-             Block_matrix_0_1_pt->ncol())*100.0
-                << "%  " << std::endl;
-    }
-   
-   // Doc density of retained interaction block
-   if (Retain_fluid_onto_solid_terms)
-    {
-     oomph_info << "Fill level of fluid on solid blocks (C_su and C_sp): " <<
-      double(Block_matrix_1_0_pt->nnz())/
-      double(Block_matrix_1_0_pt->nrow()*
-             Block_matrix_1_0_pt->ncol())*100.0
-                << "%  " << std::endl;
-    }
   }
 
   // We're done (and we stored some data)
@@ -426,7 +389,6 @@ void FSIPreconditioner::preconditioner_solve(const DoubleVector &r,
     
    // Solve solid system by back-substitution
    // with LU-decomposed stiffness matrix   
-//   DoubleVector temp_solid_vec2(temp_solid_vec);
    DoubleVector temp_solid_vec2;
    Solid_preconditioner_pt->preconditioner_solve(temp_solid_vec,
                                                  temp_solid_vec2);
@@ -435,7 +397,7 @@ void FSIPreconditioner::preconditioner_solve(const DoubleVector &r,
    // NOTE: temp_solid_vec now contains z_s = S^{-1} r_s
 
    // Multiply C_{us} by z_s
-   Block_matrix_0_1_pt->multiply(temp_solid_vec2,temp_fluid_vec);
+   Matrix_vector_product_0_1_pt->multiply(temp_solid_vec2,temp_fluid_vec);
    temp_solid_vec.clear();
       
    // Subtract from fluid residual vector for fluid solve
@@ -476,7 +438,7 @@ void FSIPreconditioner::preconditioner_solve(const DoubleVector &r,
      DoubleVector aux_vec;
      
      // Multiply C_{su} by z_u
-     Block_matrix_1_0_pt->multiply(temp_fluid_vec, aux_vec);
+     Matrix_vector_product_1_0_pt->multiply(temp_fluid_vec, aux_vec);
      
      // ...and subtract from r_s:
      temp_solid_vec-=aux_vec;

@@ -32,6 +32,7 @@
 #include "solid.h"
 #include "constitutive.h"
 #include "navier_stokes.h"
+#include "multi_physics.h"
 
 // Get the mesh
 #include "meshes/simple_cubic_mesh.h"
@@ -42,6 +43,150 @@ using namespace std;
 using namespace oomph;
 
 //#define DISTRIBUTE
+
+namespace oomph {
+
+//==============================================================================
+/// Pseudo-Elastic Solid element class to overload the Block Preconditioner
+/// methods ndof_types() and get_dof_numbers_for_unknowns() to differentiate
+/// between DOFs subject to Lagrange multiplier and those that are not.
+//==============================================================================
+template <class ELEMENT>
+class PseudoElasticBulkElement : 
+ public virtual ELEMENT
+{
+
+public:
+
+ /// default constructor
+ PseudoElasticBulkElement() : ELEMENT() {}
+ 
+ /// \short returns the number of DOF types associated with this element. 
+ unsigned ndof_types()
+  {
+   return 2*ELEMENT::dim();
+  }
+ 
+ /// \short Create a list of pairs for all unknowns in this element,
+ /// so that the first entry in each pair contains the global equation
+ /// number of the unknown, while the second one contains the number
+ /// of the "DOF" that this unknown is associated with.
+ /// (Function can obviously only be called if the equation numbering
+ /// scheme has been set up.)\n
+ /// E.g. in a 3D problem there are 6 types of DOF:\n
+ /// 0 - x displacement (without lagr mult traction)\n
+ /// 1 - y displacement (without lagr mult traction)\n
+ /// 2 - z displacement (without lagr mult traction)\n
+ /// 4 - x displacement (with lagr mult traction)\n
+ /// 5 - y displacement (with lagr mult traction)\n
+ /// 6 - z displacement (with lagr mult traction)\n
+ void get_dof_numbers_for_unknowns(
+    std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
+  {
+   // temporary pair (used to store block lookup prior to being added to list
+   std::pair<unsigned,unsigned> block_lookup;
+   
+   // number of nodes
+   const unsigned n_node = this->nnode();
+   
+   //Get the number of position dofs and dimensions at the node
+   const unsigned n_position_type = ELEMENT::nnodal_position_type();
+   const unsigned nodal_dim = ELEMENT::nodal_dimension();
+   
+   //Integer storage for local unknown
+   int local_unknown=0;
+   
+   //Loop over the nodes
+   for(unsigned n=0;n<n_node;n++)
+    {
+     unsigned offset = 0;
+     if (this->node_pt(n)->nvalue() != this->required_nvalue(n))
+      {
+       offset = ELEMENT::dim();
+      }
+     
+     //Loop over position dofs
+     for(unsigned k=0;k<n_position_type;k++)
+      {
+       //Loop over dimension
+       for(unsigned i=0;i<nodal_dim;i++)
+        {
+         //If the variable is free
+         local_unknown = ELEMENT::position_local_eqn(n,k,i);
+         
+         // ignore pinned values
+         if (local_unknown >= 0)
+          {
+           // store block lookup in temporary pair: First entry in pair
+           // is global equation number; second entry is block type
+           block_lookup.first = this->eqn_number(local_unknown);
+           block_lookup.second = offset+i;
+           
+           // add to list
+           block_lookup_list.push_front(block_lookup);
+           
+          }
+        }
+      }
+    }
+  }
+};
+
+//===========start_face_geometry==============================================
+/// FaceGeometry of wrapped element is the same as the underlying element
+//============================================================================
+template<class ELEMENT>
+class FaceGeometry<PseudoElasticBulkElement<ELEMENT> > :
+ public virtual FaceGeometry<ELEMENT>
+{
+};
+
+
+}
+
+
+
+//=========================================================================
+/// Navier Stokes LSC Preconditioner Subsidiary Helper
+//=========================================================================
+namespace LSC_Preconditioner_Helper
+{
+ Preconditioner* set_hypre_preconditioner()
+ {
+  HyprePreconditioner* hypre_preconditioner_pt
+   = new HyprePreconditioner;
+  hypre_preconditioner_pt->set_amg_iterations(2);
+  hypre_preconditioner_pt->amg_using_simple_smoothing();
+  hypre_preconditioner_pt->amg_simple_smoother() = 0;
+  hypre_preconditioner_pt->hypre_method() = HyprePreconditioner::BoomerAMG;
+  hypre_preconditioner_pt->amg_strength() = 0.25;
+  hypre_preconditioner_pt->amg_coarsening() = 6;
+  hypre_preconditioner_pt->amg_damping() = 0.5;
+  hypre_preconditioner_pt->doc_time()=false;
+  return hypre_preconditioner_pt;
+ }
+}
+
+//=========================================================================
+/// Real Solid Preconditioner Subsidiary Helper
+//=========================================================================
+namespace Real_Solid_Preconditioner_Helper
+{
+ Preconditioner* get_preconditioner()
+ {
+  HyprePreconditioner* hypre_preconditioner_pt = new HyprePreconditioner;
+  hypre_preconditioner_pt->set_amg_iterations(2);
+  hypre_preconditioner_pt->amg_using_simple_smoothing();
+  hypre_preconditioner_pt->amg_simple_smoother() = 3;
+  hypre_preconditioner_pt->hypre_method() = HyprePreconditioner::BoomerAMG;
+  hypre_preconditioner_pt->amg_strength() = 0.25;
+  hypre_preconditioner_pt->amg_coarsening() = 6;
+  hypre_preconditioner_pt->doc_time()=false;
+  return hypre_preconditioner_pt;;
+ }
+}
+
+
 
 //=========================================================================
 // the wall mesh
@@ -1443,7 +1588,86 @@ unsteady_run(DocInfo& doc_info)
 }
 
 
+// typdef problem to shorten
+typedef PseudoElasticCollapsibleChannelProblem<
+ RefineablePseudoSolidNodeUpdateElement<RefineableQTaylorHoodElement<3>, 
+                                        PseudoElasticBulkElement<RefineableQPVDElement<3,3> > >,RefineableQPVDElement<3,3> > PseudoElasticFSIProblem;
 
+
+//==============================================================================
+/// helper method to return GMRES preconditioned with the pseudo-elastic 
+/// FSI preconditioner
+//==============================================================================
+void set_pseudo_elastic_fsi_solver(PseudoElasticFSIProblem& problem)
+{
+// setup the solver
+//#ifdef HAVE_TRILINOS
+// TrilinosAztecOOSolver* solver_pt = new
+//  TrilinosAztecOOSolver;
+// solver_pt->solver_type() = TrilinosAztecOOSolver::GMRES;
+//#else
+ GMRES<CRDoubleMatrix>* solver_pt = new GMRES<CRDoubleMatrix>;
+//#endif
+ solver_pt->tolerance()=1e-8;
+
+ // preconditioner
+ PseudoElasticFSIPreconditioner* prec_pt = new
+  PseudoElasticFSIPreconditioner(3);
+
+ // meshes
+ prec_pt->set_fluid_and_pseudo_elastic_mesh_pt(problem.fluid_mesh_pt());
+ prec_pt->set_solid_mesh_pt(problem.wall_mesh_pt());
+ prec_pt->set_lagrange_multiplier_mesh_pt(
+  problem.lagrange_multiplier_mesh_pt());
+
+/*
+ // inexact pseudo-solid preconditioning
+ prec_pt->pseudo_elastic_preconditioner_pt()->elastic_preconditioner_type()
+  = PseudoElasticPreconditioner::
+  Block_upper_triangular_preconditioner;
+ prec_pt->pseudo_elastic_preconditioner_pt()
+  ->set_elastic_subsidiary_preconditioner
+  (Pseudo_Elastic_Preconditioner_Subsidiary_Operator_Helper
+   ::get_elastic_preconditioner);
+ prec_pt->pseudo_elastic_preconditioner_pt()
+  ->set_lagrange_multiplier_subsidiary_preconditioner
+  (Pseudo_Elastic_Preconditioner_Subsidiary_Operator_Helper
+   ::get_lagrange_multiplier_preconditioner);
+ 
+ // inexact "real" solid preconditioning
+ BlockTriangularPreconditioner<CRDoubleMatrix>*
+  solid_prec_pt = new BlockTriangularPreconditioner<CRDoubleMatrix>;
+ solid_prec_pt->set_subsidiary_preconditioner_function
+  (Real_Solid_Preconditioner_Helper::get_preconditioner);
+
+ // inexact navier stokes preconditioning
+  NavierStokesSchurComplementPreconditioner*
+  ns_prec_pt = prec_pt->navier_stokes_schur_complement_preconditioner_pt();
+ prec_pt->use_navier_stokes_schur_complement_preconditioner()=true;
+
+ // ns momentum
+ BlockDiagonalPreconditioner<CRDoubleMatrix>*
+  f_prec_pt = new BlockDiagonalPreconditioner<CRDoubleMatrix>;
+ f_prec_pt->set_subsidiary_preconditioner_function
+  (LSC_Preconditioner_Helper::set_hypre_preconditioner);
+ ns_prec_pt->set_f_preconditioner(f_prec_pt);
+
+ // ns pressure poisson
+ HyprePreconditioner* p_prec_pt = new HyprePreconditioner;
+ p_prec_pt->set_amg_iterations(2);
+ p_prec_pt->amg_using_simple_smoothing();
+ p_prec_pt->amg_simple_smoother() = 3;
+ p_prec_pt->hypre_method() = HyprePreconditioner::BoomerAMG;
+ p_prec_pt->amg_strength() = 0.25;
+ p_prec_pt->amg_coarsening() = 6;
+ p_prec_pt->doc_time() = false;
+ ns_prec_pt->set_p_preconditioner(p_prec_pt);
+*/
+ 
+ // and pass prec to solver and solver to problem
+ solver_pt->preconditioner_pt() = prec_pt;
+ problem.linear_solver_pt() = solver_pt;
+}
 
 //========================= start_of_main=================================
 /// Demonstrate how to solve a 3D FSI problem with pseudo-solid
@@ -1462,9 +1686,7 @@ Global_Parameters::Constitutive_law_pseudo_elastic_pt =
   new GeneralisedHookean(&Global_Parameters::Nu_pseudo_elastic);
 
  //Set up the problem
- PseudoElasticCollapsibleChannelProblem<
-  RefineablePseudoSolidNodeUpdateElement<RefineableQTaylorHoodElement<3>, 
-  RefineableQPVDElement<3,3> >,RefineableQPVDElement<3,3> > problem; 
+ PseudoElasticFSIProblem problem; 
 
  // Doc info
  DocInfo doc_info;
@@ -1494,10 +1716,23 @@ Global_Parameters::Constitutive_law_pseudo_elastic_pt =
  problem.initialise_dt(dt);
  problem.set_initial_condition();
 
+  // set
+ if (CommandLineArgs::Argc>2) 
+  {
+   set_pseudo_elastic_fsi_solver(problem);
+  }
+
  // Steady run
  problem.steady_run(doc_info);
 
  // Unteady run
  problem.unsteady_run(doc_info);
- 
+
+ // clean up
+ if (CommandLineArgs::Argc>2) 
+  {
+   IterativeLinearSolver* solver_pt = dynamic_cast<IterativeLinearSolver*>(problem.linear_solver_pt());
+   delete solver_pt->preconditioner_pt();
+   delete solver_pt;
+  }
 } // end_of_main
