@@ -37,6 +37,7 @@ line_mesh.cc binary_tree.cc refineable_line_element.cc \
 triangle_mesh.cc tet_mesh.cc \
 partitioning.cc communicator.cc linear_algebra_distribution.cc \
 double_vector.cc \
+double_vector_with_halo.cc \
 iterative_linear_solver.cc \
 general_purpose_preconditioners.cc block_preconditioner.cc \
 matrix_vector_product.cc 
@@ -89,6 +90,7 @@ line_mesh.h binary_tree.h refineable_line_element.h \
 refineable_line_mesh.h \
 triangle_mesh.h tet_mesh.h \
 partitioning.h communicator.h linear_algebra_distribution.h double_vector.h \
+double_vector_with_halo.h \
 multi_domain.h element_with_external_element.h iterative_linear_solver.h \
 preconditioner.h \
 general_purpose_preconditioners.h block_preconditioner.h \

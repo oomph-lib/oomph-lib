@@ -1356,7 +1356,8 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
 #endif
 
     }
-  }
+  } //End of ditributed case
+
  // Re-distribution of elements over processors during assembly
  // must be recomputed
  else
@@ -1376,7 +1377,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
     // of non-distributed problem.
     set_default_first_and_last_element_for_assembly();
      
-   }
+  }
 
 #endif
 
@@ -4398,6 +4399,53 @@ void Problem::sparse_assemble_row_or_column_compressed_with_two_arrays(
 
 
 #ifdef OOMPH_HAS_MPI
+//=======================================================================
+///\short Helper method that returns the global equations to which
+///the elements in the range el_lo to el_hi contribute on this 
+///processor
+//=======================================================================
+void Problem::get_my_eqns(AssemblyHandler* const &assembly_handler_pt,
+                          const unsigned &el_lo, const unsigned &el_hi,
+                          Vector<unsigned> &my_eqns)
+{
+ //Index to keep track of the equations counted
+ unsigned my_eqns_index=0;
+ 
+ //Loop over the selection of elements
+ for(unsigned long e=el_lo;e<=el_hi;e++)
+  {
+   //Get the pointer to the element
+   GeneralisedElement* elem_pt = this->mesh_pt()->element_pt(e);
+   
+   //Ignore halo elements
+   if (!elem_pt->is_halo())
+    {
+     //Find number of degrees of freedom in the element
+     const unsigned nvar = assembly_handler_pt->ndof(elem_pt);
+     //Add the number of dofs to the current size of my_eqns
+     my_eqns.resize(my_eqns_index+nvar);
+     
+     //Loop over the first index of local variables
+     for(unsigned i=0;i<nvar;i++)
+      {
+       //Get the local equation number
+       unsigned global_eqn_number 
+        = assembly_handler_pt->eqn_number(elem_pt,i);
+       //Add into the vector
+       my_eqns[my_eqns_index+i] = global_eqn_number;
+      }
+     //Update the number of elements in the vector
+     my_eqns_index += nvar;
+    }
+  }
+ 
+ //  now sort and remove duplicate entries in the vector
+ std::sort(my_eqns.begin(),my_eqns.end());
+ Vector<unsigned>::iterator it = std::unique(my_eqns.begin(),my_eqns.end());
+ my_eqns.resize(it-my_eqns.begin());
+}
+
+
 //=============================================================================
 /// \short Helper method to assemble CRDoubleMatrices from distributed
 /// on multiple processors.
@@ -4484,7 +4532,9 @@ void Problem::parallel_sparse_assemble
  // be halos.
  //======================================================================
  Vector<unsigned> my_eqns;
- unsigned my_eqns_index=0;
+ this->get_my_eqns(assembly_handler_pt,el_lo,el_hi,my_eqns);
+
+ /*unsigned my_eqns_index=0;
 
  //Loop over the elements
  for(unsigned long e=el_lo;e<=el_hi;e++)
@@ -4517,7 +4567,7 @@ void Problem::parallel_sparse_assemble
  //  now sort and remove duplicate entries in the vector
  std::sort(my_eqns.begin(),my_eqns.end());
  Vector<unsigned>::iterator it = std::unique(my_eqns.begin(),my_eqns.end());
- my_eqns.resize(it-my_eqns.begin());
+ my_eqns.resize(it-my_eqns.begin());*/
 
  // number of equations
  unsigned my_n_eqn = my_eqns.size();
@@ -5645,6 +5695,8 @@ void Problem::get_derivative_wrt_global_parameter(double* const &parameter_pt,
  //Otherwise use the finite difference default
  else
   {
+   //Clear the result distribution
+   result.clear();
    //Get the (global) residuals and store in the result vector
    get_residuals(result);
    
@@ -6295,7 +6347,8 @@ void Problem::newton_solve()
       {
 #ifdef OOMPH_HAS_MPI
        // Synchronise the solution on different processors (on each submesh)
-       unsigned nmesh=nsub_mesh();
+       this->synchronise_all_dofs();
+       /*unsigned nmesh=nsub_mesh();
        if (nmesh==0)
         {
          synchronise_dofs(mesh_pt());
@@ -6311,7 +6364,7 @@ void Problem::newton_solve()
           {
            synchronise_external_dofs(mesh_pt(imesh));
           }
-        }
+          }*/
 #endif
 
        actions_before_newton_convergence_check();
@@ -6323,6 +6376,14 @@ void Problem::newton_solve()
 
        if (!Shut_up_in_newton_solve) 
         {
+         //Let's output the residuals
+         //unsigned n_row_local = dx.distribution_pt()->nrow_local();
+         //unsigned first_row = dx.distribution_pt()->first_row();
+         //for(unsigned n=0;n<n_row_local;n++)
+         // {
+         //  oomph_info << n + first_row << " " << dx[n] << "\n";
+         // }
+
          oomph_info << "Initial Maximum residuals " << maxres << std::endl;
         }
        if(maxres < Newton_solver_tolerance) {LOOP_FLAG=0; continue;}
@@ -6398,7 +6459,8 @@ void Problem::newton_solve()
 
 #ifdef OOMPH_HAS_MPI
    // Synchronise the solution on different processors (on each submesh)
-   unsigned nmesh=nsub_mesh();
+   this->synchronise_all_dofs();
+   /* unsigned nmesh=nsub_mesh();
    if (nmesh==0)
     {
      synchronise_dofs(mesh_pt());
@@ -6414,7 +6476,7 @@ void Problem::newton_solve()
       {
        synchronise_external_dofs(mesh_pt(imesh));
       }
-    }
+      }*/
 #endif
 
    // Do any updates that are required 
@@ -6682,6 +6744,8 @@ newton_solve_continuation(double* const &parameter_pt,
     {
 #ifdef OOMPH_HAS_MPI
      // Synchronise the solution on different processors (on each submesh)
+       this->synchronise_all_dofs();
+/*
      unsigned nmesh=nsub_mesh();
      if (nmesh==0)
       {
@@ -6698,7 +6762,7 @@ newton_solve_continuation(double* const &parameter_pt,
         {
          synchronise_external_dofs(mesh_pt(imesh));
         }
-      }
+        }*/
 #endif
 
      actions_before_newton_convergence_check();
@@ -6855,7 +6919,8 @@ newton_solve_continuation(double* const &parameter_pt,
    //Calculate the new residuals
 #ifdef OOMPH_HAS_MPI
    // Synchronise the solution on different processors (on each submesh)
-   unsigned nmesh=nsub_mesh();
+   this->synchronise_all_dofs();
+   /*unsigned nmesh=nsub_mesh();
    if (nmesh==0)
     {
      synchronise_dofs(mesh_pt());
@@ -6871,7 +6936,7 @@ newton_solve_continuation(double* const &parameter_pt,
       {
        synchronise_external_dofs(mesh_pt(imesh));
       }
-    }
+      }*/
 #endif
 
    // Do any updates that are required 
@@ -7305,13 +7370,14 @@ void Problem::activate_pitchfork_tracking(
  double* const &parameter_pt,
  const DoubleVector &symmetry_vector,const bool &block_solve)
 {
-
  //Reset the assembly handler to default
  reset_assembly_handler_to_default();
+
  //Set the new assembly handler. Note that the constructor actually
  //solves the original problem to get some initial conditions, but
  //this is OK because the RHS is always evaluated before assignment.
- Assembly_handler_pt = new PitchForkHandler(this,parameter_pt,
+ Assembly_handler_pt = new PitchForkHandler(this,this->assembly_handler_pt(),
+                                            parameter_pt,
                                             symmetry_vector);
 
  //If we are using a block solver, we must set the linear solver pointer
@@ -7931,7 +7997,8 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
 
 #ifdef OOMPH_HAS_MPI
          // Synchronise the solution on different processors (on each submesh)
-         unsigned nmesh=nsub_mesh();
+       this->synchronise_all_dofs();
+       /*  unsigned nmesh=nsub_mesh();
          if (nmesh==0)
           {
            synchronise_dofs(mesh_pt());
@@ -7947,7 +8014,7 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
             {
              synchronise_external_dofs(mesh_pt(imesh));
             }
-          }
+            }*/
 #endif
          //Call all "after" actions, e.g. to handle mesh updates
          actions_after_newton_step();
@@ -8038,7 +8105,8 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
 
 #ifdef OOMPH_HAS_MPI
        // Synchronise the solution on different processors (on each submesh)
-       unsigned nmesh=nsub_mesh();
+       this->synchronise_all_dofs();
+       /*   unsigned nmesh=nsub_mesh();
        if (nmesh==0)
         {
          synchronise_dofs(mesh_pt());
@@ -8054,7 +8122,7 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
           {
            synchronise_external_dofs(mesh_pt(imesh));
           }
-        }
+          }*/
 #endif
 
        //Call all "after" actions, e.g. to handle mesh updates
@@ -10599,6 +10667,33 @@ void Problem::flush_all_external_storage()
 
 #ifdef OOMPH_HAS_MPI
 
+//====================================================================
+/// Get all the halo data stored on this processor and store pointers
+/// to the data in a map, indexed by the gobal eqn number
+//====================================================================
+void Problem::get_all_halo_data(std::map<unsigned,double*> &map_of_halo_data)
+{
+ //Halo data is stored in the meshes, so kick the problem down to that
+ //level
+
+ //Find the number of meshes
+ unsigned n_mesh = this->nsub_mesh();
+ //If there are no submeshes it's only the main mesh
+ if(n_mesh==0)
+  {
+   mesh_pt()->get_all_halo_data(map_of_halo_data);
+  }
+ //Otherwise loop over all the submeshes
+ else
+  {
+   for(unsigned imesh=0;imesh<n_mesh;++imesh)
+    {
+     mesh_pt(imesh)->get_all_halo_data(map_of_halo_data);
+    }
+  }
+}
+
+
 //========================================================================
 /// Check the halo/haloed/shared node/element schemes.
 //========================================================================
@@ -10630,6 +10725,36 @@ void Problem::check_halo_schemes(DocInfo& doc_info)
 
 }
 
+
+//========================================================================
+/// Synchronise all dofs by calling the appropriate synchronisation 
+/// routines for all meshes and the assembly handler
+//========================================================================
+void Problem::synchronise_all_dofs()
+{
+ // Synchronise the solution on different processors (on each submesh)
+ unsigned nmesh=this->nsub_mesh();
+ if (nmesh==0)
+  {
+   this->synchronise_dofs(mesh_pt());
+  }
+ else
+  {
+   // Synchronise ALL halo(ed) dofs BEFORE external halo(ed) dofs
+   for (unsigned imesh=0; imesh<nmesh; imesh++)
+    {
+     this->synchronise_dofs(mesh_pt(imesh));
+    }
+   for (unsigned imesh=0; imesh<nmesh; imesh++)
+    {
+     this->synchronise_external_dofs(mesh_pt(imesh));
+    }
+  }
+
+ //Now perform any synchronisation required by the assembly handler
+ this->assembly_handler_pt()->synchronise();
+}
+ 
 
 
 //========================================================================

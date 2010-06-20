@@ -413,6 +413,10 @@ class Data
  
  /// Change (increase) the number of values that may be stored.
  virtual void resize(const unsigned &n_value);
+
+ /// \short Add pointers to all unpinned and unconstrained data to a map 
+ /// indexed by (global) equation number
+ virtual void add_value_pt_to_map(std::map<unsigned,double*> &map_of_value_pt);
  
 #ifdef OOMPH_HAS_MPI
 
@@ -1588,6 +1592,11 @@ public:
  void assign_eqn_numbers(unsigned long &global_number, 
                                  Vector<double *> &dof_pt);
 
+ ///\short Overload the function add_values_to_map so that it also adds
+ /// the variable position data
+ void add_value_pt_to_map(std::map<unsigned,double*> &map_of_value_pt);
+
+
  /// \short Overload node update function: Since the position 
  /// of SolidNodes is determined by unknowns, there's nothing
  /// to be done apart from performing the auxiliary node
@@ -2054,8 +2063,7 @@ class BoundaryNode: public NODE_TYPE, public BoundaryNodeBase
   }
 
  
-
-
+ 
 };
 
 

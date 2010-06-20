@@ -36,6 +36,7 @@
   #include <oomph-lib-config.h>
 #endif
 
+#include <map>
 #include <deque>
 #include <list>
 
@@ -816,6 +817,11 @@ public:
  /// added). 
  void assign_internal_eqn_numbers(unsigned long &global_number, 
                                   Vector<double *> &Dof_pt);
+
+ /// \short Add pointers to the internal data values to map indexed
+ /// by the global equation number.
+ void add_internal_value_pt_to_map(std::map<unsigned,double*> &
+                                   map_of_value_pt);
 
  /// \short Setup the arrays of local equation numbers for the element. 
  virtual void assign_local_eqn_numbers();

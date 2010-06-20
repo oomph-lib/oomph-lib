@@ -1853,6 +1853,97 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
 }
 
 
+//========================================================================
+/// Get all the halo data stored in the mesh and add pointers to
+/// the data to the map, indexed by global equation number
+//=========================================================================
+void Mesh::get_all_halo_data(std::map<unsigned,double*> &map_of_halo_data)
+{
+ 
+ //Loop over the map of Halo_nodes
+ for(std::map<unsigned,Vector<Node*> >::iterator it = Halo_node_pt.begin();
+     it!=Halo_node_pt.end();++it)
+  {
+   //Find the number of nodes
+   unsigned n_node = (it->second).size();
+   //Loop over them all
+   for(unsigned n=0;n<n_node;n++)
+    {
+     //Add the Node's values (including any solid values) to
+     //the map
+     (it->second)[n]->add_value_pt_to_map(map_of_halo_data);
+    }
+  } //End of loop over halo nodes
+
+ //Now loop over all the halo elements and add their internal data
+ //Loop over the map of Halo_nodes
+ for(std::map<unsigned,Vector<GeneralisedElement*> >::
+      iterator it = Root_halo_element_pt.begin();
+     it!=Root_halo_element_pt.end();++it)
+  {
+   //Find the number of root elements
+   unsigned n_element = (it->second).size();
+   for(unsigned e=0;e<n_element;e++)
+    {
+     GeneralisedElement* el_pt = (it->second)[e];
+     
+     // Is it a refineable element?
+     RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(el_pt);
+     if (ref_el_pt!=0)
+      {
+       // Vector of pointers to leaves in tree emanating from
+       // current root halo element
+       Vector<Tree*> leaf_pt;
+       ref_el_pt->tree_pt()->stick_leaves_into_vector(leaf_pt);
+       
+       // Loop over leaves and add their objects (the finite elements)
+       // to vector
+       unsigned nleaf=leaf_pt.size();
+       for (unsigned l=0;l<nleaf;l++)
+        {
+         leaf_pt[l]->object_pt()->
+          add_internal_value_pt_to_map(map_of_halo_data);
+        }
+      }
+     else
+      {
+       el_pt->add_internal_value_pt_to_map(map_of_halo_data);
+      }
+    }
+  }
+
+ ///Repeat for the external data
+ for(std::map<unsigned,Vector<Node*> >::iterator it = 
+      External_halo_node_pt.begin();
+     it!=External_halo_node_pt.end();++it)
+  {
+   //Find the number of nodes
+   unsigned n_node = (it->second).size();
+   //Loop over them all
+   for(unsigned n=0;n<n_node;n++)
+    {
+     //Add the Node's values (including any solid values) to
+     //the map
+     (it->second)[n]->add_value_pt_to_map(map_of_halo_data);
+    }
+  } //End of loop over halo nodes
+ 
+ //Now loop over all the halo elements and add their internal data
+ //Loop over the map of Halo_nodes
+ for(std::map<unsigned,Vector<GeneralisedElement*> >::
+      iterator it = External_halo_element_pt.begin();
+     it!=External_halo_element_pt.end();++it)
+  {
+   //Find the number of root elements
+   unsigned n_element = (it->second).size();
+   for(unsigned e=0;e<n_element;e++)
+    {
+     (it->second)[e]->add_internal_value_pt_to_map(map_of_halo_data);
+    }
+  }
+
+}
+
 
 
 
@@ -2091,9 +2182,12 @@ void Mesh::distribute(OomphCommunicator* comm_pt,
      for (unsigned j=0;j<nnod;j++)
       {
        Node* nod_pt=this->node_pt(j);
-       *node_file[processor_in_charge[nod_pt]]
-        << nod_pt->x(0) << " " 
-        << nod_pt->x(1) << std::endl;
+       const unsigned n_dim = nod_pt->ndim();
+       for(unsigned i=0;i<n_dim;i++)
+        {
+         *node_file[processor_in_charge[nod_pt]] << nod_pt->x(i) << " ";
+        }
+       *node_file[processor_in_charge[nod_pt]] << "\n";
       }
      for (int d=0;d<n_proc;d++)
       {
@@ -3392,21 +3486,24 @@ void Mesh::doc_mesh_distribution(OomphCommunicator* comm_pt,DocInfo& doc_info)
  
  
  // Doc elements next to boundaries scheme
- 
- // How many finite elements are adjacent to boundary b?
- unsigned nbound=this->nboundary();
- for (unsigned b=0;b<nbound;b++)
+ // if set up
+ if(Lookup_for_elements_next_boundary_is_setup)
   {
-   filename.str("");
-   filename << doc_info.directory() << "/boundary_elements"
-            << my_rank << "_" << b << "_" << doc_info.number() << ".dat";
-   some_file.open(filename.str().c_str());
-   unsigned nelem=this->nboundary_element(b);
-   for (unsigned e=0;e<nelem;e++)
+   // How many finite elements are adjacent to boundary b?
+   unsigned nbound=this->nboundary();
+   for (unsigned b=0;b<nbound;b++)
     {
-     this->boundary_element_pt(b,e)->output(some_file,5);
+     filename.str("");
+     filename << doc_info.directory() << "/boundary_elements"
+              << my_rank << "_" << b << "_" << doc_info.number() << ".dat";
+     some_file.open(filename.str().c_str());
+     unsigned nelem=this->nboundary_element(b);
+     for (unsigned e=0;e<nelem;e++)
+      {
+       this->boundary_element_pt(b,e)->output(some_file,5);
+      }
+     some_file.close();
     }
-   some_file.close();
   }
  
 }
@@ -3548,27 +3645,23 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
            unsigned count=0;
            for (int j=0;j<nnod_share;j++)
             {
-             double x_shared=shared_node_pt(dd,j)->position(0);
-             double y_shared=shared_node_pt(dd,j)->position(1);
-             double z_shared=0.0;
-             if (nod_dim==3)
+             Vector<double> x_shared(nod_dim);
+             for(unsigned i=0;i<nod_dim;i++)
               {
-               z_shared=shared_node_pt(dd,j)->position(2);
+               x_shared[i] = shared_node_pt(dd,j)->position(i);
               }
-             double x_share=other_nodal_positions[count];
-             count++;
-             double y_share=other_nodal_positions[count];
-             count++;
-             double z_share=0.0;
-             if (nod_dim==3)
+             Vector<double> x_share(nod_dim);
+             for(unsigned i=0;i<nod_dim;i++)
               {
-               z_share=other_nodal_positions[count];
+               x_share[i] = other_nodal_positions[count];
                count++;
               }
-             double error=sqrt( pow(x_shared-x_share,2)+
-                                pow(y_shared-y_share,2)+
-                                pow(z_shared-z_share,2));
-             if (fabs(error)>max_error)
+             double error=0.0;
+             for(unsigned i=0;i<nod_dim;i++) 
+              {error += (x_shared[i] - x_share[i])*(x_shared[i] - x_share[i]);}
+             error = sqrt(error);
+
+             if (error>max_error)
               {
 //              oomph_info << "ZONE" << std::endl;
 //              oomph_info << x_halo << " " 
@@ -3582,7 +3675,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
 //                        << d << " " << dd  
 //                        << std::endl;
 //              oomph_info << std::endl;
-               max_error=fabs(error);       
+               max_error= error;       
               }
             }
           }
@@ -3607,15 +3700,20 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
        unsigned count=0;
        for (int j=0;j<nnod_share;j++)
         {
-         nodal_positions[count]=shared_node_pt(d,j)->position(0);
-         count++;
-         nodal_positions[count]=shared_node_pt(d,j)->position(1);
-         count++;
-         if (nod_dim==3)
+         for(unsigned i=0;i<nod_dim;i++)
           {
-           nodal_positions[count]=shared_node_pt(d,j)->position(2);
+           nodal_positions[count]=shared_node_pt(d,j)->position(i);
            count++;
           }
+           //nodal_positions[count]=shared_node_pt(d,j)->position(0);
+           //count++;
+           //nodal_positions[count]=shared_node_pt(d,j)->position(1);
+           //count++;
+           //if (nod_dim==3)
+           // {
+           //nodal_positions[count]=shared_node_pt(d,j)->position(2);
+           // count++;
+           // }
         }
        // Send it across to the processor whose shared nodes are being checked
        MPI_Send(&nodal_positions[0],nod_dim*nnod_share,MPI_DOUBLE,d,0,
@@ -3722,7 +3820,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
       }
      haloed_file.close(); 
     }
-  }
+  } //end of if doc flag
 
  // Check halo/haloed element lookup schemes
  //-----------------------------------------
@@ -3792,19 +3890,20 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
              MPI_Recv(&other_nodal_hangings[0],nnod_per_el*nelem_halo,
                       MPI_INT,dd,
                       1,comm_pt->mpi_comm(),&status);
-             
-//         oomph_info << "Received from process " << dd 
-//            << ", with size=" << nod_dim*nnod_per_el*nelem_halo << std::endl;
-             
-             filename.str("");
-             filename << doc_info.directory() << "/error_haloed_check"
-                      << dd << "_" << my_rank << ".dat";
-             haloed_file.open(filename.str().c_str());
-             filename.str("");
-             filename << doc_info.directory() << "/error_halo_check"
-                      << dd << "_" << my_rank << ".dat";
-             halo_file.open(filename.str().c_str());
-             
+
+             //If documenting, open the output files
+             if(doc_info.doc_flag())
+              {
+               filename.str("");
+               filename << doc_info.directory() << "/error_haloed_check"
+                        << dd << "_" << my_rank << ".dat";
+               haloed_file.open(filename.str().c_str());
+               filename.str("");
+               filename << doc_info.directory() << "/error_halo_check"
+                        << dd << "_" << my_rank << ".dat";
+               halo_file.open(filename.str().c_str());
+              }
+
              unsigned count=0;         
              unsigned count_hanging=0;
              for (int e=0;e<nelem_haloed;e++)
@@ -3818,73 +3917,112 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
                   {
                    // Testing POSITIONS, not x location 
                    // (cf hanging nodes, nodes.h)
-                   double x_haloed=finite_el_pt->node_pt(j)->position(0);
-                   double y_haloed=finite_el_pt->node_pt(j)->position(1);
-                   double z_haloed=0.0;
-                   if (nod_dim==3)
+                   Vector<double> x_haloed(nod_dim);
+                   for(unsigned i=0;i<nod_dim;i++)
                     {
-                     z_haloed=finite_el_pt->node_pt(j)->position(2);
+                     x_haloed[i] = finite_el_pt->node_pt(j)->position(i);
                     }
-                   double x_halo=other_nodal_positions[count];
-                   count++;
-                   double y_halo=other_nodal_positions[count];
-                   count++;
+
+                   Vector<double> x_halo(nod_dim);
+                   for(unsigned i=0;i<nod_dim;i++)
+                    {
+                     x_halo[i] = other_nodal_positions[count];
+                     ++count;
+                    }
                    int other_hanging=other_nodal_hangings[count_hanging];
                    count_hanging++;
-                   double z_halo=0.0;
-                   if (nod_dim==3)
+
+                   double error =0.0;
+                   for(unsigned i=0;i<nod_dim;i++)
                     {
-                     z_halo=other_nodal_positions[count];
-                     count++;
+                     error += (x_haloed[i] - x_halo[i])*
+                      (x_haloed[i] - x_halo[i]);
                     }
-                   double error=sqrt( pow(x_haloed-x_halo,2)+ 
-                                      pow(y_haloed-y_halo,2)+
-                                      pow(z_haloed-z_halo,2));
-                   if (fabs(error)>max_error) max_error=fabs(error);
-                   if (fabs(error)>0.0)
+                   error = sqrt(error);
+
+                   if (error>max_error) {max_error=error;}
+                   if (error>0.0)
                     {
                      // Report error. NOTE: ERROR IS THROWN BELOW ONCE 
                      // ALL THIS HAS BEEN PROCESSED.
                      oomph_info
                       << "Discrepancy between nodal coordinates of halo(ed)"
-                      << "element.  Error: " << error << std::endl;
+                      << "element.\n  Error: " << error << "\n";
                      oomph_info
                       << "Domain with non-halo (i.e. haloed) elem: " 
-                      << dd << std::endl;
+                      << dd << "\n";
                      oomph_info
                       << "Domain with    halo                elem: " << d
-                      << std::endl;
-                     oomph_info
-                      << "Current processor is " << my_rank 
-                      << std::endl
-                      << "Nodal positions: " << x_halo << " " << y_halo 
-                      << std::endl
-                      << "and haloed: " << x_haloed << " " << y_haloed << std::endl
-                      << "Node pointer: " << finite_el_pt->node_pt(j)
-                      << std::endl;
-//               oomph_info << "Haloed: " << x_haloed << " " << y_haloed << " "
-//                          << error << " " << my_rank << " "
-//                          << dd << std::endl;
-//               oomph_info << "Halo: " << x_halo << " " << y_halo << " "
-//                          << error << " " << my_rank << " "
-//                          << dd << std::endl;
-                     haloed_file << x_haloed << " " << y_haloed << " "
-                                 << error << " " << my_rank << " " 
-                                 << dd << " "
-                                 << finite_el_pt->node_pt(j)->is_hanging() 
-                                 << std::endl;
-                     halo_file << x_halo << " " << y_halo << " "
-                               << error << " " << my_rank << " " 
-                               << dd << " " 
-                               << other_hanging << std::endl; 
-                     // (communicated is_hanging value)
+                      << "\n";
+                     switch(nod_dim)
+                      {
+                      case 1:
+                       oomph_info
+                        << "Current processor is " << my_rank 
+                        << "\n"
+                        << "Nodal positions: " << x_halo[0] << "\n"
+                        << "and haloed:      " << x_haloed[0] << "\n" 
+                        << "Node pointer: " << finite_el_pt->node_pt(j)
+                        << "\n";
+                       break;
+                      case 2:
+                       oomph_info
+                        << "Current processor is " << my_rank 
+                        << "\n"
+                        << "Nodal positions: " 
+                        << x_halo[0] << " " << x_halo[1] 
+                        << "\n"
+                        << "and haloed:      " << x_haloed[0] << " " 
+                        << x_haloed[1] << std::endl
+                        << "Node pointer: " << finite_el_pt->node_pt(j)
+                        << "\n";
+                       break;
+                      case 3:
+                       oomph_info
+                        << "Current processor is " << my_rank 
+                        << "\n"
+                        << "Nodal positions: " 
+                        << x_halo[0] << " " << x_halo[1] << " " << x_halo[2] 
+                        << "\n"
+                        << "and haloed:      " << x_haloed[0] << " " 
+                        << x_haloed[1] << " " << x_haloed[2] << std::endl
+                        << "Node pointer: " << finite_el_pt->node_pt(j)
+                        << "\n";
+                       break;
+                      default:
+                       throw OomphLibError(
+                        "Nodal dimension not equal to 1, 2 or 3\n",
+                        "Mesh::check_halo_schemes()",
+                        OOMPH_EXCEPTION_LOCATION);
+                      }
+
+                     //If documenting, write to output files
+                     if(doc_info.doc_flag())
+                      {
+                       for(unsigned i=0;i<nod_dim;i++)
+                        {
+                         haloed_file << x_haloed[i] << " ";
+                         halo_file << x_halo[i] << "  ";
+                        }
+                       haloed_file << error << " " << my_rank << " " 
+                                   << dd << " "
+                                   << finite_el_pt->node_pt(j)->is_hanging() 
+                                   << std::endl;
+                       halo_file << error << " " << my_rank << " " 
+                                 << dd << " " 
+                                 << other_hanging << std::endl; 
+                      }
                     }
                   } // j<nnod_per_el
                 }
               } // e<nelem_haloed
-//         oomph_info << "Check count (receive)... " << count << std::endl;
-             haloed_file.close();
-             halo_file.close();  
+             
+             //If documenting, close outptu files
+             if(doc_info.doc_flag())
+              {
+               haloed_file.close();
+               halo_file.close();  
+              }
             }
           }
         }
@@ -3928,10 +4066,11 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
              for (unsigned j=0;j<nnod_per_el;j++)
               {
                // Testing POSITIONS, not x location (cf hanging nodes, nodes.h)
-               nodal_positions[count]=finite_el_pt->node_pt(j)->position(0);
-               count++;
-               nodal_positions[count]=finite_el_pt->node_pt(j)->position(1);
-               count++;
+               for(unsigned i=0;i<nod_dim;i++)
+                {
+                 nodal_positions[count]=finite_el_pt->node_pt(j)->position(i);
+                 count++;
+                }
                if (finite_el_pt->node_pt(j)->is_hanging())
                 {
                  nodal_hangings[count_hanging]=1;
@@ -3941,11 +4080,6 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
                  nodal_hangings[count_hanging]=0;
                 }
                count_hanging++;
-               if (nod_dim==3)
-                {
-                 nodal_positions[count]=finite_el_pt->node_pt(j)->position(2);
-                 count++;
-                }
               }
             }
           }
@@ -4143,41 +4277,26 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
            unsigned count=0;
            for (int j=0;j<nnod_halo;j++)
             {
-             double x_haloed=haloed_node_pt(dd,j)->position(0);
-             double y_haloed=haloed_node_pt(dd,j)->position(1);
-             double z_haloed=0.0;
-             if (nod_dim==3)
+             Vector<double> x_haloed(nod_dim);
+             for(unsigned i=0;i<nod_dim;i++)
               {
-               z_haloed=haloed_node_pt(dd,j)->position(2);
+               x_haloed[i] = haloed_node_pt(dd,j)->position(i);
               }
-             double x_halo=other_nodal_positions[count];
-             count++;
-             double y_halo=other_nodal_positions[count];
-             count++;
-             double z_halo=0.0;
-             if (nod_dim==3)
+             Vector<double> x_halo(nod_dim);
+             for(unsigned i=0;i<nod_dim;i++)
               {
-               z_halo=other_nodal_positions[count];
+               x_halo[i]=other_nodal_positions[count];
                count++;
               }
-             double error=sqrt( pow(x_haloed-x_halo,2)+
-                                pow(y_haloed-y_halo,2)+
-                                pow(z_haloed-z_halo,2));
-             if (fabs(error)>max_error)
+             double error=0.0;
+             for(unsigned i=0;i<nod_dim;i++)
               {
-//              oomph_info << "ZONE" << std::endl;
-//              oomph_info << x_halo << " " 
-//                        << y_halo << " " 
-//                        << y_halo << " " 
-//                        << d << " " << dd 
-//                        << std::endl;
-//              oomph_info << x_haloed << " " 
-//                        << y_haloed << " " 
-//                        << y_haloed << " "
-//                        << d << " " << dd  
-//                        << std::endl;
-//              oomph_info << std::endl;
-               max_error=fabs(error);       
+               error += (x_haloed[i] - x_halo[i])*(x_haloed[i] - x_halo[i]);
+              }
+             error = sqrt(error);
+             if (error>max_error)
+              {
+               max_error=error;       
               }
             }
           }
@@ -4202,13 +4321,9 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
        unsigned count=0;
        for (int j=0;j<nnod_halo;j++)
         {
-         nodal_positions[count]=halo_node_pt(d,j)->position(0);
-         count++;
-         nodal_positions[count]=halo_node_pt(d,j)->position(1);
-         count++;
-         if (nod_dim==3)
+         for(unsigned i=0;i<nod_dim;i++)
           {
-           nodal_positions[count]=halo_node_pt(d,j)->position(2);
+           nodal_positions[count]=halo_node_pt(d,j)->position(i);
            count++;
           }
         }

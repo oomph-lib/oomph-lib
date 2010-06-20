@@ -40,6 +40,7 @@
 //OOMPH-LIB headers
 #include "matrices.h"
 #include "linear_solver.h"
+#include "double_vector_with_halo.h"
 
 namespace oomph
 {
@@ -128,6 +129,12 @@ class AssemblyHandler
  /// has been detected in bifurcation tracking problems
  virtual void get_eigenfunction(Vector<DoubleVector> &eigenfunction);
 
+#ifdef OOMPH_HAS_MPI
+
+ /// \short Function that is used to perform any synchronisation
+ /// required during the solution 
+ virtual void synchronise() {}
+#endif
 
  /// \short Empty virtual destructor
  virtual ~AssemblyHandler() {}
@@ -245,6 +252,33 @@ class ParallelResidualsHandler : public AssemblyHandler
  ///Constructor, set the original assembly handler
  ParallelResidualsHandler(AssemblyHandler* const &assembly_handler_pt) :
   Assembly_handler_pt(assembly_handler_pt) {} 
+ 
+ ///\short Use underlying assembly handler to return the number of 
+ /// degrees of freedom in the element elem_pt
+ unsigned ndof(GeneralisedElement* const &elem_pt)
+  {return Assembly_handler_pt->ndof(elem_pt);}
+ 
+ /// \short Use underlying AssemblyHandler to return the 
+ /// global equation number of the local unknown ieqn_local in elem_pt.
+ unsigned long eqn_number(GeneralisedElement* const &elem_pt,
+                          const unsigned &ieqn_local)
+  {return Assembly_handler_pt->eqn_number(elem_pt,ieqn_local);}
+ 
+ ///\short Use underlying AssemblyHandler to return 
+ /// the contribution to the residuals of the element elem_pt
+ void get_residuals(GeneralisedElement* const &elem_pt,
+                    Vector<double> &residuals)
+  {Assembly_handler_pt->get_residuals(elem_pt,residuals);}
+
+ 
+ /// \short Use underlying AssemblyHandler to 
+ /// Calculate the elemental Jacobian matrix "d equation 
+ /// / d variable" for elem_pt.
+ void get_jacobian(GeneralisedElement* const &elem_pt,
+                   Vector<double> &residuals, 
+                   DenseMatrix<double> &jacobian)
+  {Assembly_handler_pt->get_jacobian(elem_pt,residuals,jacobian);}
+
  
  /// \short Calculate all desired vectors and matrices 
  /// provided by the element elem_pt
@@ -686,37 +720,90 @@ public:
    ///Pointer to the problem
    Problem *Problem_pt;
 
+   ///Pointer to the underlying (original) assembly handler
+   AssemblyHandler *Assembly_handler_pt;
+
    /// \short Store the number of degrees of freedom in the non-augmented
    ///problem
    unsigned Ndof;
+
+   /// \short Store the original dof distribution
+   LinearAlgebraDistribution* Dof_distribution_pt;
+
+   /// \short The augmented distribution
+   LinearAlgebraDistribution* Augmented_dof_distribution_pt;
 
    /// \short A slack variable used to specify the amount of antisymmetry
    /// in the solution. 
   double Sigma;
 
+#ifdef OOMPH_HAS_MPI
+  /// \short Pointer to the halo scheme for the global vectors
+  DoubleVectorHaloScheme* Halo_scheme_pt;
+
+  /// \short Storage for the halo degrees of freedom (only required)
+  /// when accessing via the global equation number
+  Vector<double*> Halo_dof_pt;
+#endif
+
   /// \short Storage for the null vector
-  Vector<double> Y;
+  DoubleVectorWithHaloEntries Y;
 
   /// \short A constant vector that is specifies the symmetry being broken
-  Vector<double> Psi;
+  DoubleVectorWithHaloEntries Psi;
 
   /// \short A constant vector used to ensure that the null vector
   /// is not trivial
-  Vector<double> C;
+  DoubleVectorWithHaloEntries C;
 
   /// \short A vector that is used to determine how many elements
   /// contribute to a particular equation. It is used to ensure
   /// that the global system is correctly formulated. 
-  Vector<int> Count;
+  /// This should really be an integer, but its double so that
+  /// the distribution can be used
+  DoubleVectorWithHaloEntries Count;
+
+  /// \short A vector that is used to map the global equations to their
+  /// actual location in a distributed problem
+  Vector<unsigned> Global_eqn_number;
 
   /// \short Storage for the pointer to the parameter
   double *Parameter_pt;
 
+  // \short The total number of elements in the problem
+  unsigned Nelement;
+
+  /// \short Boolean to indicate whether the problem is distributed
+  bool Distributed;
+
+  /// \short Function that is used to return map the global equations
+  /// using the simplistic numbering scheme into the actual distributed
+  /// scheme
+  inline unsigned global_eqn_number(const unsigned &i)
+   {
+#ifdef OOMPH_HAS_MPI
+    //If the problem is distributed I have to do something
+    if(Distributed)
+     {
+      return Global_eqn_number[i];
+     }
+    //Otherwise it's just i
+    else
+#endif
+     {
+      return i;
+     }
+   }
+
+  /// \short Function that is used to return the pointer to the dof
+  /// either haloed or stored locally, index by global eqn
+  double* dof_pt(const unsigned &i);
 
  public:
 
   ///Constructor, initialise the systems
-  PitchForkHandler(Problem* const &problem_pt, 
+  PitchForkHandler(Problem* const &problem_pt,
+                   AssemblyHandler* const &assembly_handler_pt,
                    double* const &parameter_pt,
                    const DoubleVector &symmetry_vector);
   
@@ -776,6 +863,12 @@ public:
    /// \short Return the eigenfunction(s) associated with the bifurcation that
   /// has been detected in bifurcation tracking problems
   void get_eigenfunction(Vector<DoubleVector> &eigenfunction);
+
+#ifdef OOMPH_HAS_MPI
+ /// \short Function that is used to perform any synchronisation
+ /// required during the solution 
+  void synchronise(); 
+#endif
 
 
   /// \short Set to solve the augmented block system

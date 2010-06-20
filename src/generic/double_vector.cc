@@ -720,7 +720,7 @@ namespace oomph
 
    // compute the local norm
    unsigned nrow_local = this->nrow_local();
-   double n = 0;
+   double n = 0.0;
    const double* vec_values_pt = vec.values_pt();
    for (unsigned i = 0; i < nrow_local; i++)
     {

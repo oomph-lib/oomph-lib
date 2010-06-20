@@ -875,6 +875,10 @@ public:
    classify_halo_and_haloed_nodes(comm_pt,doc_info,report_stats);
   }
 
+ /// \short Get all the halo data stored in the mesh and add pointers to
+ /// the data to the map, indexed by global equation number
+ void get_all_halo_data(std::map<unsigned,double*> &map_of_halo_data);
+
  /// \short Return vector of halo elements in this Mesh 
  /// whose non-halo counterpart is held on processor p.
  Vector<GeneralisedElement*> halo_element_pt(const unsigned& p)

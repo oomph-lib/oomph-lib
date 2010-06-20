@@ -724,6 +724,28 @@ void Data::resize(const unsigned &n_value)
   }
 }
 
+//=======================================================================
+/// Add pointers to all unpinned and unconstrained data to a map 
+/// indexed by (global) equation number
+//=======================================================================
+void Data::add_value_pt_to_map(std::map<unsigned,double*> &map_of_value_pt)
+{
+ //How many values does it have
+ const unsigned n_value = this->nvalue();
+ //Find the global equation number
+ for(unsigned i=0;i<n_value;i++)
+  {
+   int global_eqn = this->eqn_number(i);
+   //If it is a degree of freedom, add it to the map
+   if(global_eqn >= 0)
+    {
+     map_of_value_pt[static_cast<unsigned>(global_eqn)] =  
+      this->value_pt(i);
+    }
+  }
+}
+
+
 //================================================================
 /// Reset the pointers to the copied data
 //===============================================================
@@ -2771,5 +2793,19 @@ void SolidNode::assign_eqn_numbers(unsigned long &global_number,
  //Then call standard Data assign_eqn_numbers 
  Data::assign_eqn_numbers(global_number,dof_pt);
 } 
+
+//================================================================
+/// Add pointers to all data values (including position data)
+/// to a map
+//================================================================
+void SolidNode::add_value_pt_to_map
+(std::map<unsigned,double*> &map_of_value_pt)
+{
+ //Add the position values first
+ Variable_position_pt->add_value_pt_to_map(map_of_value_pt);
+ //Then call standard Data values
+ Data::add_value_pt_to_map(map_of_value_pt);
+}
+
 
 }

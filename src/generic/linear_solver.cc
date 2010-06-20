@@ -1486,6 +1486,7 @@ void SuperLUSolver::backsub_distributed(const DoubleVector &rhs,
 #endif
  // check that the rhs distribution is the same as the distribution as this 
  // solver. If not redistribute and issue a warning
+ LinearAlgebraDistribution rhs_distribution(rhs.distribution_pt());
  if (!(*rhs.distribution_pt() == *this->distribution_pt()))
   {
    if(!Suppress_incorrect_rhs_distribution_warning_in_resolve)
@@ -1567,6 +1568,11 @@ void SuperLUSolver::backsub_distributed(const DoubleVector &rhs,
                        "SuperLUSolver::backsub()",
                        OOMPH_EXCEPTION_LOCATION);
   }
+
+ //Redistribute to original distribution
+ //Have to cast away const-ness (which tells us that we shouldn't really
+ //be doing this!)
+ const_cast<DoubleVector&>(rhs).redistribute(&rhs_distribution);
 }
 #endif
 

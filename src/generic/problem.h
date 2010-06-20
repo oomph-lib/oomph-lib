@@ -361,6 +361,13 @@ namespace oomph
 
 #ifdef OOMPH_HAS_MPI
 
+ ///\short Helper method that returns the (unique) global equations to which
+ ///the elements in the range el_lo to el_hi contribute on this 
+ ///processor using the given assembly_handler
+ void get_my_eqns(AssemblyHandler* const &assembly_handler_pt,
+                  const unsigned &el_lo, const unsigned &el_hi,
+                  Vector<unsigned> &my_eqns);
+
  /// \short Helper method to assemble CRDoubleMatrices from distributed
 /// on multiple processors.
  void parallel_sparse_assemble
@@ -1112,6 +1119,10 @@ protected:
  /// Data objects are not deleted!
  void flush_global_data() {Global_data_pt.resize(0);}
 
+ /// \short Return the pointer to the dof distribution (read-only)
+ LinearAlgebraDistribution* const &dof_distribution_pt() const 
+  {return Dof_distribution_pt;}
+
  /// Return the number of dofs
  unsigned long ndof() const 
   {return Dof_distribution_pt->nrow();}
@@ -1362,10 +1373,17 @@ protected:
 
 #ifdef OOMPH_HAS_MPI
 
+ /// \short Get pointers to all possible halo data indexed by global
+ /// equation number in a map.
+ void get_all_halo_data(std::map<unsigned,double*> &map_of_halo_data);
+
  /// \short Classify any non-classified nodes into halo/haloed and
  /// synchronise equation numbers. Return the total
  /// number of degrees of freedom in the overall problem
  long synchronise_eqn_numbers(const bool& assign_local_eqn_numbers=true);
+
+ /// \short Perform all required synchronisation in solvers
+ void synchronise_all_dofs();
 
  /// \short Synchronise the degrees of freedom by overwriting
  /// the haloed values with their non-halo counterparts held

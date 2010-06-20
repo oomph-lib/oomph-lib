@@ -456,6 +456,21 @@ DenseMatrix<double> GeneralisedElement::Dummy_matrix;
    {internal_data_pt(i)->assign_eqn_numbers(global_number,Dof_pt);}
  }
 
+ //==========================================================================
+ /// This function loops over the internal data of the element and add 
+ /// pointers to their unconstrained values to a map indexed by the global
+ /// equation number.
+ //==========================================================================
+ void GeneralisedElement:: add_internal_value_pt_to_map(
+  std::map<unsigned,double*> &map_of_value_pt)
+ {
+  //Loop over the internal data and add their data to the map
+  //The internal data are stored at the beginning of the Data_pt array
+  for(unsigned i=0;i<Ninternal_data;i++)
+   {internal_data_pt(i)->add_value_pt_to_map(map_of_value_pt);}
+ }
+
+
  //====================================================================
  /// Setup the arrays of local equation numbers for the element. 
  /// In general, this function should not need to be overloaded. Instead

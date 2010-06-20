@@ -91,12 +91,13 @@
 # to have been compiled with mpi support. Linking is done
 # with the lam mpi fortran compiler.
 #
+--enable-suppress-doc
 --enable-MPI
 --enable-symbolic-links-for-headers
 --with-mpi-self-tests="mpirun -np 2"
-CXXFLAGS="-g -Wall -DPARANOID"
-CFLAGS="-g"
-FFLAGS="-g"
+CXXFLAGS="-O6 -Wall"
+CFLAGS="-O6"
+FFLAGS="-O6"
 CXX=mpic++
 CC=mpicc
 F77=mpif77
