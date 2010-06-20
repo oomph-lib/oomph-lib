@@ -2303,8 +2303,10 @@ namespace oomph
   Ndof = Problem_pt->ndof();
   //Backup the distribution 
   Dof_distribution_pt  = Problem_pt->Dof_distribution_pt;
+#ifdef OOMPH_HAS_MPI 
   //Set the distribution flag
   Distributed = Problem_pt->distributed();
+#endif
 
   //Find the elements in the problem
   unsigned n_element = Problem_pt->mesh_pt()->nelement();
@@ -2344,8 +2346,10 @@ namespace oomph
   Y.build(Dof_distribution_pt);
   C.build(Dof_distribution_pt);
   Count.build(Dof_distribution_pt);
-  Count.build_halo_scheme(Halo_scheme_pt);
-
+#ifdef OOMPH_HAS_MPI
+ Count.build_halo_scheme(Halo_scheme_pt);
+#endif
+  
   //Sort out Psi
   //Psi.resize(Ndof);
   //Y.resize(Ndof);

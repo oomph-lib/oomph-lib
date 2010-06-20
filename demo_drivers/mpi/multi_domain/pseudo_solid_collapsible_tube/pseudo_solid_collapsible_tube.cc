@@ -1471,9 +1471,9 @@ Global_Parameters::Constitutive_law_pseudo_elastic_pt =
  dir_name << "RESLT_proc" << MPI_Helpers::communicator_pt()->my_rank();
  doc_info.set_directory(dir_name.str());
 
+#ifdef OOMPH_HAS_MPI
  // Distribute the problem
  oomph_info << "Problem is being distributed." << std::endl;
-
 
  // Validation: manufacture distribution so that domain is split in two in a 
  // controllable way
@@ -1501,7 +1501,7 @@ Global_Parameters::Constitutive_law_pseudo_elastic_pt =
    problem.distribute(); 
   }
  oomph_info << "Problem has been distributed." << std::endl;
-
+#endif
  // Doc initial configuration
  problem.doc_solution(doc_info);
  oomph_info << "Before manual refine: doc_info.number()=" 

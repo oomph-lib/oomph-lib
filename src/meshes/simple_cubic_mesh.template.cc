@@ -1917,9 +1917,9 @@ for(unsigned k=1;k<(Nz-1);k++)  // good loop for the diferent layers
 
  for(unsigned l3=1;l3<n_p;l3++)
   {
-//Set the corner node
+   //Set the corner node
    //Determine number of values at this node
-   unsigned local_node_num =  n_p*n_p*l3;
+   local_node_num =  n_p*n_p*l3;
 
  //Allocate memory for the node
    Node_pt[node_count] = 
@@ -2990,7 +2990,7 @@ for(unsigned l3=1;l3<(n_p-1);l3++)
 {
 //Set the corner nodes
  //Determine number of values at this node
- unsigned local_node_num =  n_p*n_p*l3;
+ local_node_num =  n_p*n_p*l3;
 
  //Allocate memory for the node
  Node_pt[node_count] = 

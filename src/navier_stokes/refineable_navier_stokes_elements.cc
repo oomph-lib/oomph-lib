@@ -1807,6 +1807,8 @@ void RefineableNavierStokesEquations<DIM>::get_dresidual_dnodal_coordinates(
 //====================================================================
 template class RefineableNavierStokesEquations<2>;
 template class RefineableNavierStokesEquations<3>;
-
-
+template class RefineableQTaylorHoodElement<2>;
+template class RefineableQTaylorHoodElement<3>;
+template class RefineableQCrouzeixRaviartElement<2>;
+template class RefineableQCrouzeixRaviartElement<3>;
 }

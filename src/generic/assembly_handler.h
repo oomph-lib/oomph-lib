@@ -773,8 +773,10 @@ public:
   // \short The total number of elements in the problem
   unsigned Nelement;
 
+#ifdef OOMPH_HAS_MPI
   /// \short Boolean to indicate whether the problem is distributed
   bool Distributed;
+#endif
 
   /// \short Function that is used to return map the global equations
   /// using the simplistic numbering scheme into the actual distributed
