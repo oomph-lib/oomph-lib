@@ -1455,41 +1455,28 @@ namespace oomph
  void BlockPitchForkLinearSolver:: solve(Problem* const &problem_pt, 
                                          DoubleVector &result)
  {
-  // if the result is setup then it should not be distributed
-//#ifdef PARANOID
-//  if (result.built())
-//   {
-//    if (result.distributed())
-//     {
-//      throw OomphLibError("The result vector must not be distributed",
-//                          "BlockPitchForkLinearSolver::solve()",
-//                          OOMPH_EXCEPTION_LOCATION);
-//     }
-//   }
-//#endif
-
-  //Find the number of dofs of the augmented system
-  const unsigned n_aug_dof = problem_pt->ndof();
-  
-  //Create the linear algebra distribution for the complete augmented solver
-  //Uniform distribution
-  LinearAlgebraDistribution aug_dist(problem_pt->communicator_pt(),n_aug_dof,
-                                     true);
-  this->build_distribution(aug_dist);
-
-  // if the result vector is not setup then rebuild with distribution = global
-  if(!result.built())
-   {
-    result.build(this->distribution_pt(),0.0);
-   }
-
-  //Store the distribution of the result
-  LinearAlgebraDistribution result_dist_pt(result.distribution_pt());
- 
   //Locally cache the pointer to the handler.
   PitchForkHandler* handler_pt =
    static_cast<PitchForkHandler*>(problem_pt->assembly_handler_pt());
+  
+  //Get the augmented distribution from the handler and use it as 
+  //the distribution of the linear solver
+  LinearAlgebraDistribution aug_dist = 
+   handler_pt->Augmented_dof_distribution_pt;
+  this->build_distribution(aug_dist);
 
+  // If the result vector is not setup then die
+  if(!result.built())
+   {
+    throw OomphLibError("Result vector must be built\n",
+                        "BlockPitchForkLinearSolver::solve()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+
+  //Store the distribution of the result, which is probably not in
+  //the natural distribution of the augmented solver
+  LinearAlgebraDistribution result_dist(result.distribution_pt());
+ 
   //Locally cache a pointer to the parameter
   double* const parameter_pt = handler_pt->Parameter_pt;
   
@@ -1497,27 +1484,17 @@ namespace oomph
   //respect to the parameter
 
   //Allocate storage for the derivatives of the residuals with respect 
-  //to the global parameter
+  //to the global parameter using the augmented distribution 
   DoubleVector dRdparam;
-  //Then get the appropriate derivatives
+  //Then get the appropriate derivatives which will come back in
+  //some distribution
   problem_pt->get_derivative_wrt_global_parameter(parameter_pt,dRdparam);
-  //Now redistribute into the Natural distribution of the augmented system
-  //Store the natural distribution of the augmented system
-  LinearAlgebraDistribution global_aug_dof_dist(
-   problem_pt->Dof_distribution_pt); 
-  dRdparam.redistribute(&global_aug_dof_dist);
-  
+  //Redistribute into the augmented distribution
+  dRdparam.redistribute(&aug_dist);
+
   //Switch the handler to "block solver" mode (sort out distribution)
   handler_pt->solve_block_system();
 
-  //We need to find out the number of global dofs in the problem
-  const unsigned n_dof = problem_pt->ndof();
-  
-  // create the linear algebra distribution for this solver
-  // currently only global (non-distributed) distributions are allowed
-  //LinearAlgebraDistribution dist(problem_pt->communicator_pt(),n_dof,false);
-  //this->build_distribution(dist);
-  
   //Temporary vector for the result (I shouldn't have to set this up)
   DoubleVector x1;
   
@@ -1535,39 +1512,44 @@ namespace oomph
   C_pt = new DoubleVector(Linear_solver_pt->distribution_pt(),0.0);
   if(D_pt!=0) {delete D_pt;}
   D_pt = new DoubleVector(Linear_solver_pt->distribution_pt(),0.0);
+  //Need this to be in the distribution of the dofs
   if(dJy_dparam_pt!=0) {delete dJy_dparam_pt;}
-  dJy_dparam_pt = new DoubleVector(Linear_solver_pt->distribution_pt(),0.0);
+  dJy_dparam_pt = new DoubleVector(handler_pt->Dof_distribution_pt,0.0);
 
-  //Get the symmetry vector from the handler 
-  DoubleVector psi(Linear_solver_pt->distribution_pt(),0.0);
-  //Find the number of local dofs and first row of the 
-  //linear algebra distribution of the un-augmented system
-  const unsigned n_dof_local = psi.nrow_local();
-  const unsigned first_row = psi.first_row();
-  for(unsigned n=0;n<n_dof_local;++n)  {psi[n] = handler_pt->Psi[n+first_row];}
+  //Get the symmetry vector from the handler should have the 
+  //Dof distribution
+  DoubleVector psi = handler_pt->Psi; 
 
   //Temporary vector for the rhs that is dR/dparam (augmented distribution)
-  DoubleVector F(Linear_solver_pt->distribution_pt(),0.0);  
+  //DoubleVector F(Linear_solver_pt->distribution_pt(),0.0);  
+  DoubleVector F(handler_pt->Dof_distribution_pt);
+  const unsigned n_dof_local = F.nrow_local();
+
   //f.nrow local copied from dRdparam
-  for(unsigned n=0;n<n_dof_local;n++) {F[n] = dRdparam[first_row + n];}
+  for(unsigned n=0;n<n_dof_local;n++) {F[n] = dRdparam[n];}
   //Fill in the rhs that is dJy/dparam  //dJy_dparam nrow local
+
+  //In standard cases the offset here will be one
+  unsigned offset=1;
+#ifdef OOMPH_HAS_MPI
+  //If we are distributed and not on the first processor
+  //then there is no offset and the eigenfunction is 
+  //directly after the standard dofs
+  int my_rank = problem_pt->communicator_pt()->my_rank();
+  if((problem_pt->distributed()) && (my_rank!=0)) {offset=0;}
+#endif
   for(unsigned n=0;n<n_dof_local;n++) 
-   {(*dJy_dparam_pt)[n] = dRdparam[n_dof + 1 + first_row + n];}
+   {(*dJy_dparam_pt)[n] = dRdparam[n_dof_local + offset + n];}
 
   //Now resolve to find c and d
+  //First, redistribute F and psi into the linear algebra distribution
+  F.redistribute(Linear_solver_pt->distribution_pt());
+  psi.redistribute(Linear_solver_pt->distribution_pt());
+
   Linear_solver_pt->resolve(F,*C_pt);
   Linear_solver_pt->resolve(psi,*D_pt);
 
   //We can now construct various dot products
-  //double psi_d = 0.0, psi_c = 0.0, psi_x1 = 0.0;
-  /*for(unsigned n=0;n<n_dof;n++) 
-   {
-    const double psi_ = psi[n];
-    psi_d += psi_*(*D_pt)[n]; 
-    psi_c += psi_*(*C_pt)[n];
-    psi_x1 += psi_*x1[n];
-    }*/
-
   double psi_d = psi.dot(*D_pt);
   double psi_c = psi.dot(*C_pt);
   double psi_x1 = psi.dot(x1);
@@ -1579,16 +1561,30 @@ namespace oomph
   //assumption is that result has been 
   //set to the current value of the residuals
   //First, redistribute into the Natural distribution of the augmented system
-  result.redistribute(&global_aug_dof_dist);
-  double x2 = (psi_x1 - result[n_dof])/psi_c;
-
+  result.redistribute(&aug_dist);
+  //The required parameter is that corresponding to the dof, which
+  //is only stored on the root processor
+  double parameter_residual = result[n_dof_local];
+#ifdef OOMPH_HAS_MPI
+  //Broadcast to all others, if we have a distributed problem
+  if(problem_pt->distributed())
+   {
+    MPI_Bcast(&parameter_residual,1,MPI_DOUBLE,0,
+              problem_pt->communicator_pt()->mpi_comm());
+   }
+#endif
+  //Now construct the value
+  double x2 = (psi_x1 - parameter_residual)/psi_c;
 
   //Now construct the vectors that multiply the jacobian terms
-  Vector<DoubleVector> D_and_X1(2);
+  Vector<DoubleVectorWithHaloEntries> D_and_X1(2);
   D_and_X1[0].build(Linear_solver_pt->distribution_pt(),0.0);
   D_and_X1[1].build(Linear_solver_pt->distribution_pt(),0.0);
   //Fill in the appropriate terms
-  for(unsigned n=0;n<n_dof_local;n++)
+  //Get the number of local dofs from the Linear_solver_pt distribution
+  const unsigned n_dof_local_linear_solver = 
+   Linear_solver_pt->distribution_pt()->nrow_local();
+  for(unsigned n=0;n<n_dof_local_linear_solver;n++)
    {
     const double C_ = (*C_pt)[n];
     D_and_X1[0][n] = (*D_pt)[n] - Psi*C_;
@@ -1596,50 +1592,67 @@ namespace oomph
    }
 
   //Local storage for the result of the product terms
-  Vector<DoubleVector> Jprod_D_and_X1(2);
+  Vector<DoubleVectorWithHaloEntries> Jprod_D_and_X1(2);
 
-  //Local storage for the eigenvector (Eventually change this)
-  DoubleVector Y_local = handler_pt->Y;
+  //Redistribute the inputs to have the Dof distribution pt
+  D_and_X1[0].redistribute(handler_pt->Dof_distribution_pt);
+  D_and_X1[1].redistribute(handler_pt->Dof_distribution_pt);
 
-  //Redistribute the inputs to be global
-  D_and_X1[0].redistribute(problem_pt->Dof_distribution_pt);
-  D_and_X1[1].redistribute(problem_pt->Dof_distribution_pt);
-  
+  //Set up the halo scheme
+#ifdef OOMPH_HAS_MPI
+  D_and_X1[0].build_halo_scheme(problem_pt->Halo_scheme_pt);
+  D_and_X1[1].build_halo_scheme(problem_pt->Halo_scheme_pt);
+#endif
+
   //Get the products from the new problem function
-  problem_pt->get_hessian_vector_products(Y_local,D_and_X1,Jprod_D_and_X1);
-  Jprod_D_and_X1[0].redistribute(Linear_solver_pt->distribution_pt());
-  Jprod_D_and_X1[1].redistribute(Linear_solver_pt->distribution_pt());
+  problem_pt->get_hessian_vector_products(
+   handler_pt->Y,D_and_X1,Jprod_D_and_X1);
 
   //OK, now we can formulate the next vectors 
   //(again assuming result contains residuals)
+  //Need to redistribute F to the dof distribution
+  //F.redistribute(handler_pt->Dof_distribution_pt);
+ DoubleVector G(handler_pt->Dof_distribution_pt);
+ 
   for(unsigned n=0;n<n_dof_local;n++)
    {
-    F[n] = result[n_dof+1+first_row+n] 
-     - Jprod_D_and_X1[1][n] - x2*dRdparam[n_dof+1+first_row+n];
+    G[n] = result[n_dof_local+offset+n] 
+     - Jprod_D_and_X1[1][n] - x2*dRdparam[n_dof_local+offset+n];
     Jprod_D_and_X1[0][n] *= -1.0;
-    Jprod_D_and_X1[0][n] -= Psi*dRdparam[n_dof+1+first_row+n];
+    Jprod_D_and_X1[0][n] -= Psi*dRdparam[n_dof_local+offset+n];
    }
-  
 
+
+  //Then redistribute back to the linear solver distribution
+  G.redistribute(Linear_solver_pt->distribution_pt());
+  Jprod_D_and_X1[0].redistribute(Linear_solver_pt->distribution_pt());
+  Jprod_D_and_X1[1].redistribute(Linear_solver_pt->distribution_pt());
+  
   //Linear solve to get B
   Linear_solver_pt->resolve(Jprod_D_and_X1[0],*B_pt);
   //Liner solve to get x3
   DoubleVector x3(Linear_solver_pt->distribution_pt(),0.0);
-  Linear_solver_pt->resolve(F,x3);
+  Linear_solver_pt->resolve(G,x3);
   
   //Construst a couple of additional products
-  /*double l_x3 = 0.0, l_b = 0.0;
-  for(unsigned n=0;n<n_dof;n++)
-   {
-    const double l_ = psi[n];
-    l_x3 += l_*x3[n];
-    l_b += l_*(*B_pt)[n];
-    }*/
   double l_x3 = psi.dot(x3);
   double l_b = psi.dot(*B_pt);
 
   //get the last intermediate variable
-  const double delta_sigma = (l_x3 - result[2*n_dof+1])/l_b;
+  //The required parameter is that corresponding to the dof, which
+  //is only stored on the root processor
+  double sigma_residual = result[2*(n_dof_local+offset)-1];
+#ifdef OOMPH_HAS_MPI
+  //Broadcast to all others, if we have a distributed problem
+  if(problem_pt->distributed())
+   {
+    MPI_Bcast(&sigma_residual,1,MPI_DOUBLE,0,
+              problem_pt->communicator_pt()->mpi_comm());
+   }
+#endif
+
+
+  const double delta_sigma = (l_x3 - sigma_residual)/l_b;
   const double delta_lambda = x2 - delta_sigma*Psi;
 
   //Need to do some more rearrangements here because result is global
@@ -1649,61 +1662,62 @@ namespace oomph
   DoubleVector res1(Linear_solver_pt->distribution_pt());
   DoubleVector res2(Linear_solver_pt->distribution_pt());
 
-  for(unsigned n=0;n<n_dof_local;n++)
+  for(unsigned n=0;n<n_dof_local_linear_solver;n++)
    {
     res1[n] = 
      x1[n] - delta_lambda*(*C_pt)[n] - delta_sigma*(*D_pt)[n];
     res2[n] = x3[n] - delta_sigma*(*B_pt)[n];
    }
 
-
-  //Now redistribute these globally  
-  res1.redistribute(problem_pt->Dof_distribution_pt);  
-  res2.redistribute(problem_pt->Dof_distribution_pt);
-
-  /*for(unsigned n=0;n<n_dof_local;n++)
-   {
-    result[n + first_row] = 
-     x1[n] - delta_lambda*(*C_pt)[n] - delta_sigma*(*D_pt)[n];
-    result[n_dof + 1+ n + first_row] = x3[n] - delta_sigma*(*B_pt)[n];
-    }*/
+  //Now redistribute these into the Dof distribution pointer
+  res1.redistribute(handler_pt->Dof_distribution_pt);  
+  res2.redistribute(handler_pt->Dof_distribution_pt);
   
-  //Now can copy over into results
-  for(unsigned n=0;n<n_dof;n++)
+  //Now can copy over into results into the result vector
+  for(unsigned n=0;n<n_dof_local;n++)
    {
     result[n] = res1[n];
-    result[n_dof + 1 + n] = res2[n];
+    result[n_dof_local + offset + n] = res2[n];
    }
 
-  result[n_dof] = delta_lambda;
-  result[2*n_dof+1] = delta_sigma;
+  //Add the final contributions to the residuals
+  //only on the root processor if we have a distributed problem
+#ifdef OOMPH_HAS_MPI
+  if((!problem_pt->distributed()) || (my_rank==0))
+#endif
+   {
+    result[n_dof_local] = delta_lambda;
+    result[2*n_dof_local+1] = delta_sigma;
+   }
+    
 
-  //The sign of the determinant is given by the sign of the product psi_c and l_b
+  //The sign of the determinant is given by the sign of 
+  //the product psi_c and l_b
   //NOT CHECKED YET!
-   problem_pt->sign_of_jacobian() = 
-    static_cast<int>(std::abs(psi_c*l_b)/(psi_c*l_b));
- 
-   //Redistribute the result into its incoming distribution
-   result.redistribute(&result_dist_pt);
-
-   //Switch things to our block solver
-   handler_pt->solve_full_system();
-
-   //If we are not storing things, clear the results
-   if(!Enable_resolve) 
-    {
-     //We no longer need to store the matrix
-     Linear_solver_pt->disable_resolve();
-     delete B_pt; B_pt=0;
-     delete C_pt; C_pt=0;
-     delete D_pt; D_pt=0;
-     delete dJy_dparam_pt; dJy_dparam_pt = 0;
-    }
-   //Otherwise also store the pointer to the problem
-   else
-    {
-     Problem_pt = problem_pt;
-    }
+  problem_pt->sign_of_jacobian() = 
+   static_cast<int>(std::abs(psi_c*l_b)/(psi_c*l_b));
+  
+  //Redistribute the result into its incoming distribution
+  result.redistribute(&result_dist);
+  
+  //Switch things to our block solver
+  handler_pt->solve_full_system();
+  
+  //If we are not storing things, clear the results
+  if(!Enable_resolve) 
+   {
+    //We no longer need to store the matrix
+    Linear_solver_pt->disable_resolve();
+    delete B_pt; B_pt=0;
+    delete C_pt; C_pt=0;
+    delete D_pt; D_pt=0;
+    delete dJy_dparam_pt; dJy_dparam_pt = 0;
+   }
+  //Otherwise also store the pointer to the problem
+  else
+   {
+    Problem_pt = problem_pt;
+   }
  }
 
 
@@ -1720,28 +1734,39 @@ namespace oomph
                         "BlockPitchForkLinearSolver::resolve()",
                         OOMPH_EXCEPTION_LOCATION);
    }
- 
+
+  
   //Cache pointer to the problem
   Problem* const problem_pt = Problem_pt;
- 
-  //Find the number of dofs of the augmented system
-  const unsigned n_aug_dof = problem_pt->ndof();
- 
- //Create the linear algebra distribution for the augmented solver
- //Serial
- LinearAlgebraDistribution aug_dist(problem_pt->communicator_pt(),n_aug_dof,
-                                    false);
- this->build_distribution(aug_dist);
- 
- // if the result vector is not setup then rebuild with distribution = global
- if(!result.built())
-  {
-   result.build(this->distribution_pt(),0.0);
-  }
 
   //Locally cache pointer to the handler
   PitchForkHandler* handler_pt =
    static_cast<PitchForkHandler*>(problem_pt->assembly_handler_pt());
+ 
+  //Get the augmented distribution from the handler
+  LinearAlgebraDistribution aug_dist = 
+   handler_pt->Augmented_dof_distribution_pt;
+  //this->build_distribution(aug_dist);
+
+  //Find the number of dofs of the augmented system
+  const unsigned n_aug_dof = problem_pt->ndof();
+
+  //Storage for the result distribution
+  LinearAlgebraDistribution result_dist;
+  
+  // if the result vector is not setup then rebuild with distribution 
+  // = natural distribution of augmented solver
+  if(!result.built())
+   {
+    result.build(&aug_dist,0.0);
+  }
+  //Otherwise store the incoming distribution and redistribute
+  else
+   {
+    result_dist.build(result.distribution_pt());
+    result.redistribute(&aug_dist);
+   }
+  
 
   //Locally cache a pointer to the parameter
   //double* const parameter_pt = handler_pt->Parameter_pt;
@@ -1749,12 +1774,12 @@ namespace oomph
   //Switch things to our block solver
   handler_pt->solve_block_system();
   //We need to find out the number of dofs
-  unsigned n_dof = problem_pt->ndof();
+  //unsigned n_dof = problem_pt->ndof();
 
   // create the linear algebra distribution for this solver
   // currently only global (non-distributed) distributions are allowed
-  LinearAlgebraDistribution dist(problem_pt->communicator_pt(),n_dof,false);
-  this->build_distribution(dist);
+  //LinearAlgebraDistribution dist(problem_pt->communicator_pt(),n_dof,false);
+  //this->build_distribution(dist);
 
   // if the result vector is not setup then rebuild with distribution = global
   //if (!result.built())
@@ -1762,95 +1787,165 @@ namespace oomph
   //  result.build(this->distribution_pt(),0.0);
   // }
   
-  //Setup storage
-  DoubleVector x1(this->distribution_pt(),0.0), x3(this->distribution_pt(),0.0);
-  
+
+  //Copy the rhs into local storage
+  DoubleVector rhs_local = rhs;
+  //and redistribute into the augmented distribution
+  rhs_local.redistribute(&aug_dist);
+
+  //Setup storage for output
+  DoubleVector x1(Linear_solver_pt->distribution_pt(),0.0);
+  DoubleVector x3(Linear_solver_pt->distribution_pt(),0.0);
+
+  //Create input for RHS with the natural distribution
+  DoubleVector input_x1(handler_pt->Dof_distribution_pt);
+  const unsigned n_dof_local = input_x1.nrow_local();
+
   //Set the values of the a vector
-  for(unsigned n=0;n<n_dof;n++) {x1[n] = rhs[n];}
+  for(unsigned n=0;n<n_dof_local;n++) {input_x1[n] = rhs_local[n];}
+  //Need to redistribute into the linear algebra distribution
+  input_x1.redistribute(Linear_solver_pt->distribution_pt());
   
+  //We want to resolve, of course
   Linear_solver_pt->enable_resolve();
-
-  // Copy rhs vector into local storage so it doesn't get overwritten
-  // if the linear solver decides to initialise the solution vector, say,
-  // which it's quite entitled to do!
-  DoubleVector input_x1(x1);
-
+  //Now solve for the first vector
   Linear_solver_pt->resolve(input_x1,x1);
 
   //Get the symmetry vector from the handler
-  Vector<double> psi(n_dof);
-  for(unsigned n=0;n<n_dof;++n)  {psi[n] = handler_pt->Psi[n];}
-
+  DoubleVector psi = handler_pt->Psi;
+  //redistribute local copy
+  psi.redistribute(Linear_solver_pt->distribution_pt());
 
   //We can now construct various dot products
-  double psi_d = 0.0, psi_c = 0.0, psi_x1 = 0.0;
-  for(unsigned n=0;n<n_dof;n++) 
-   {
-    const double psi_ = psi[n];
-    psi_d += psi_*(*D_pt)[n]; 
-    psi_c += psi_*(*C_pt)[n];
-    psi_x1 += psi_*x1[n];
-   }
+  double psi_d = psi.dot(*D_pt);
+  double psi_c = psi.dot(*C_pt);
+  double psi_x1 = psi.dot(x1);
+
   //Calculate another intermediate constant
   const double Psi = psi_d/psi_c;
 
   //Construct the second intermediate value, 
   //assumption is that rhs has been set to the current value of the residuals
-  double x2 = (psi_x1 - rhs[n_dof])/psi_c;
+  double parameter_residual = rhs_local[n_dof_local];
+#ifdef OOMPH_HAS_MPI
+  //Broadcast to all others, if we have a distributed problem
+  if(problem_pt->distributed())
+   {
+    MPI_Bcast(&parameter_residual,1,MPI_DOUBLE,0,
+              problem_pt->communicator_pt()->mpi_comm());
+   }
+#endif
+
+  double x2 = (psi_x1 - parameter_residual)/psi_c;
 
   //Now construct the vectors that multiply the jacobian terms
   //Vector<double> X1(n_dof/*+1*/);
-  Vector<DoubleVector> X1(1);
-  X1[0].build(this->distribution_pt(),0.0);
+  Vector<DoubleVectorWithHaloEntries> X1(1);
+  X1[0].build(Linear_solver_pt->distribution_pt(),0.0);
 
-  for(unsigned n=0;n<n_dof;n++)
+  const unsigned n_dof_local_linear_solver = 
+   Linear_solver_pt->distribution_pt()->nrow_local();
+  for(unsigned n=0;n<n_dof_local_linear_solver;n++)
    {
     X1[0][n] = x1[n] - x2*(*C_pt)[n];
    }
 
-  //Local storage for the product terms
-  DoubleVector Mod_Jprod_X1(this->distribution_pt(),0.0);
-
   //Local storage for the product term
-  Vector<DoubleVector> Jprod_X1(1);
-  DoubleVector Y_local = handler_pt->Y;
+  Vector<DoubleVectorWithHaloEntries> Jprod_X1(1);
+
+  //Redistribute the inputs to have the Dof distribution pt
+  X1[0].redistribute(handler_pt->Dof_distribution_pt);
+
+  //Set up the halo scheme
+#ifdef OOMPH_HAS_MPI
+  X1[0].build_halo_scheme(problem_pt->Halo_scheme_pt);
+#endif
 
   //Get the product from the problem
-  problem_pt->get_hessian_vector_products(Y_local,X1,Jprod_X1);
+  problem_pt->get_hessian_vector_products(handler_pt->Y,X1,Jprod_X1);
 
+  //In standard cases the offset here will be one
+  unsigned offset=1;
+#ifdef OOMPH_HAS_MPI
+  //If we are distributed and not on the first processor
+  //then there is no offset and the eigenfunction is 
+  //directly after the standard dofs
+  int my_rank = problem_pt->communicator_pt()->my_rank();
+  if((problem_pt->distributed()) && (my_rank!=0)) {offset=0;}
+#endif
+  
   //OK, now we can formulate the next vectors 
-  //(again assuming result contains residuals)
-  for(unsigned n=0;n<n_dof;n++)
+  //(again assuming result contains residuals) 
+  //Local storage for the product terms
+  DoubleVector Mod_Jprod_X1(handler_pt->Dof_distribution_pt,0.0);
+
+  for(unsigned n=0;n<n_dof_local;n++)
    {
-    Mod_Jprod_X1[n] = rhs[n_dof+1+n] - Jprod_X1[0][n] 
+    Mod_Jprod_X1[n] = rhs_local[n_dof_local+offset+n] - Jprod_X1[0][n] 
      - x2*(*dJy_dparam_pt)[n];
    }
   
+  //Redistribute back to the linear solver distribution
+  Mod_Jprod_X1.redistribute(Linear_solver_pt->distribution_pt());
+
   //Liner solve to get x3
   Linear_solver_pt->resolve(Mod_Jprod_X1,x3);
   
   //Construst a couple of additional products
-  double l_x3 = 0.0, l_b = 0.0;
-  for(unsigned n=0;n<n_dof;n++)
-   {
-    const double l_ = psi[n];
-    l_x3 += l_*x3[n];
-    l_b += l_*(*B_pt)[n];
-   }
+  double l_x3 = psi.dot(x3);
+  double l_b = psi.dot(*B_pt);
 
   //get the last intermediate variable
-  const double delta_sigma = (l_x3 - rhs[2*n_dof+1])/l_b;
-  const double delta_lambda = x2 - delta_sigma*Psi;
-
-  for(unsigned n=0;n<n_dof;n++)
+  //The required parameter is that corresponding to the dof, which
+  //is only stored on the root processor
+  double sigma_residual = rhs_local[2*(n_dof_local+offset)-1];
+#ifdef OOMPH_HAS_MPI
+  //Broadcast to all others, if we have a distributed problem
+  if(problem_pt->distributed())
    {
-    result[n] = x1[n] - delta_lambda*(*C_pt)[n] - delta_sigma*(*D_pt)[n];
-    result[n_dof+1+n] = x3[n] - delta_sigma*(*B_pt)[n];
+    MPI_Bcast(&sigma_residual,1,MPI_DOUBLE,0,
+              problem_pt->communicator_pt()->mpi_comm());
+   }
+#endif
+
+  //get the last intermediate variable
+  const double delta_sigma = (l_x3 - sigma_residual)/l_b;
+  const double delta_lambda = x2 - delta_sigma*Psi;
+  
+  //Create temporary DoubleVectors to hold the results
+  DoubleVector res1(Linear_solver_pt->distribution_pt());
+  DoubleVector res2(Linear_solver_pt->distribution_pt());
+
+  for(unsigned n=0;n<n_dof_local_linear_solver;n++)
+   {
+    res1[n] = x1[n] - delta_lambda*(*C_pt)[n] - delta_sigma*(*D_pt)[n];
+    res2[n] = x3[n] - delta_sigma*(*B_pt)[n];
+   }
+
+  //Now redistribute these into the Dof distribution pointer
+  res1.redistribute(handler_pt->Dof_distribution_pt);  
+  res2.redistribute(handler_pt->Dof_distribution_pt);
+  
+  //Now can copy over into results into the result vector
+  for(unsigned n=0;n<n_dof_local;n++)
+   {
+    result[n] = res1[n];
+    result[n_dof_local + offset + n] = res2[n];
    }
   
-  result[n_dof] = delta_lambda;
-  result[2*n_dof+1] = delta_sigma;
-
+  //Add the final contributions to the residuals
+  //only on the root processor if we have a distributed problem
+#ifdef OOMPH_HAS_MPI
+  if((!problem_pt->distributed()) || (my_rank==0))
+#endif
+   {
+    result[n_dof_local] = delta_lambda;
+    result[2*n_dof_local+1] = delta_sigma;
+   }
+  
+  //Redistribute the result into its incoming distribution (if it had one)
+  if(result_dist.built()) {result.redistribute(&result_dist);}
+  
   Linear_solver_pt->disable_resolve();
   
   //Switch things to our block solver
@@ -2244,44 +2339,6 @@ namespace oomph
  // Non-inline functions for the PitchForkHandler class
  //////////////////////////////////////////////////////////////////////
 
- ///===================================================================
- ///\short Return a pointer to the dof, indexed by global equation number
- /// either halo or not depending on whether the problem is distributed
- //====================================================================
- double* PitchForkHandler::dof_pt(const unsigned &i)
-   {
-#ifdef OOMPH_HAS_MPI
-    //If the problem is distributed I have to do something different
-    if(Distributed)
-     {
-      //Work out the local coordinate of the dof
-      //based on the original distribution 
-      const unsigned first_row_local = 
-       this->Dof_distribution_pt->first_row();
-      const unsigned n_row_local = 
-       this->Dof_distribution_pt->nrow_local();
-      
-      //If we are in range then just call the local value
-      if((i >= first_row_local) && (i < first_row_local + n_row_local))
-      {
-       return Problem_pt->Dof_pt[i-first_row_local];
-      }
-      //Otherwise the entry is not stored in the local processor
-      //and we must have haloed it
-      else
-       {
-        return Halo_dof_pt[Halo_scheme_pt->local_index(i)];
-       }
-     }
-    //Otherwise just return the dof
-    else
-#endif
-    {
-     return Problem_pt->Dof_pt[i];
-    }
-   }
-
-
  //==================================================================
  ///Constructor: Initialise the PitchForkHandler by setting intial
  ///guesses for Sigma, Y, specifying C and Psi and calculating count.
@@ -2313,30 +2370,9 @@ namespace oomph
 
 #ifdef OOMPH_HAS_MPI
 
-  //Work out the all global equations to which this processor
-  //contributes
-  Vector<unsigned> my_eqns;
-  Problem_pt->get_my_eqns(assembly_handler_pt,0,n_element-1,my_eqns);
-
-  //Build the halo scheme
-  Halo_scheme_pt = new DoubleVectorHaloScheme(Problem_pt->Dof_distribution_pt,
-                                               my_eqns);
-
-  //Find pointers to all the halo dofs
-  //There may be more of these than required by my_eqns
-  //(but should not be less)
-  std::map<unsigned,double*> halo_data_pt;
-  Problem_pt->get_all_halo_data(halo_data_pt);
-
-  //Now setup the Halo_dofs
-  Halo_scheme_pt->setup_halo_dofs(halo_data_pt,Halo_dof_pt);
-
-  //Did it work
-  //oomph_info << Halo_dof_pt.size() << "\n";
-  //for(unsigned n=0;n<Halo_dof_pt.size();n++)
-  // {
-  //  oomph_info << n << " " << *Halo_dof_pt[n] << "\n";
-  // }
+  //Work out all the global equations to which this processor
+  //contributes and store the halo data in the problem
+  Problem_pt->setup_dof_halo_scheme();
 
 #endif
 
@@ -2347,14 +2383,8 @@ namespace oomph
   C.build(Dof_distribution_pt);
   Count.build(Dof_distribution_pt);
 #ifdef OOMPH_HAS_MPI
- Count.build_halo_scheme(Halo_scheme_pt);
+  Count.build_halo_scheme(Problem_pt->Halo_scheme_pt);
 #endif
-  
-  //Sort out Psi
-  //Psi.resize(Ndof);
-  //Y.resize(Ndof);
-  //C.resize(Ndof);
-  //Count.resize(Ndof,0);
   
   //Loop over the elements and count the entries
   //and number of (non-halo) elements
@@ -2441,9 +2471,9 @@ namespace oomph
 
 #ifdef OOMPH_HAS_MPI
   //Set up the required halo schemes (which also synchronises)
-  Psi.build_halo_scheme(Halo_scheme_pt);
-  Y.build_halo_scheme(Halo_scheme_pt);
-  C.build_halo_scheme(Halo_scheme_pt);
+  Psi.build_halo_scheme(Problem_pt->Halo_scheme_pt);
+  Y.build_halo_scheme(Problem_pt->Halo_scheme_pt);
+  C.build_halo_scheme(Problem_pt->Halo_scheme_pt);
 
 
   if((!Distributed) || (my_rank==0))
@@ -2464,7 +2494,7 @@ namespace oomph
     Global_eqn_number.resize(2*Ndof+2);
     int n_proc = Problem_pt->communicator_pt()->nproc();
     unsigned global_eqn_count=0;
-    for(unsigned d=0;d<n_proc;d++)
+    for(int d=0;d<n_proc;d++)
      {
       //Find out the first row of the current processor
       if(my_rank==d) {augmented_first_row = global_eqn_count;}
@@ -2561,9 +2591,12 @@ namespace oomph
    }
 
   //Now return the problem to its original size
+  Problem_pt->Dof_pt.resize(this->Dof_distribution_pt->nrow_local());
+
   //Problem_pt->Dof_pt.resize(Ndof);
   //Problem_pt->Dof_distribution_pt->build(Problem_pt->communicator_pt(),
   //                                       Ndof,false);
+
   Problem_pt->Dof_distribution_pt = this->Dof_distribution_pt;
   //Remove all previous sparse storage used during Jacobian assembly
   Problem_pt->Sparse_assemble_with_arrays_previous_allocation.resize(0);
@@ -2607,30 +2640,55 @@ namespace oomph
  {
   //Get the raw value
   unsigned raw_ndof = elem_pt->ndof();
-  unsigned long global_eqn;
+  unsigned long global_eqn=0;
 
-  //The usual equations
-  if(ieqn_local < raw_ndof) 
+  //Which system are we solving
+  switch(Solve_which_system)
    {
-    global_eqn = this->global_eqn_number(elem_pt->eqn_number(ieqn_local));
-   }
-  //The bifurcation parameter equation
-  else if(ieqn_local == raw_ndof)
-   {
-    global_eqn = this->global_eqn_number(Ndof);
-   }
-  //If we are assembling the full system we also have
-  //The components of the null vector
-  else if(ieqn_local < (2*raw_ndof + 1))
-   {
-    global_eqn = this->global_eqn_number(
-     Ndof + 1 + elem_pt->eqn_number(ieqn_local - 1 - raw_ndof));
-   }
-  //The slack parameter
-  else
-   {
-    global_eqn = this->global_eqn_number(2*Ndof+1);
-   }
+    //In the block case, it's just the standard numbering
+   case Block_J:
+    global_eqn = elem_pt->eqn_number(ieqn_local);
+    break;
+
+    //Block augmented not done properly yet
+   case Block_augmented_J:
+    //Not done the distributed case
+#ifdef OOMPH_HAS_MPI
+    if(Distributed)
+     {
+      throw OomphLibError(
+       "Block Augmented solver not implemented for distributed case\n",
+       "PitchForkHandler::eqn_number()",
+       OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+
+    //Full case
+   case Full_augmented:
+    //The usual equations
+    if(ieqn_local < raw_ndof) 
+     {
+      global_eqn = this->global_eqn_number(elem_pt->eqn_number(ieqn_local));
+     }
+    //The bifurcation parameter equation
+    else if(ieqn_local == raw_ndof)
+     {
+      global_eqn = this->global_eqn_number(Ndof);
+     }
+    //If we are assembling the full system we also have
+    //The components of the null vector
+    else if(ieqn_local < (2*raw_ndof + 1))
+     {
+      global_eqn = this->global_eqn_number(
+       Ndof + 1 + elem_pt->eqn_number(ieqn_local - 1 - raw_ndof));
+     }
+    //The slack parameter
+    else
+     {
+      global_eqn = this->global_eqn_number(2*Ndof+1);
+     }
+    break;
+   } //End of switch
   return global_eqn;
  }
  
@@ -2679,7 +2737,7 @@ namespace oomph
        Count.global_value(local_eqn);
       //Final term that specifies the symmetry
       residuals[raw_ndof] += 
-       ((*this->dof_pt(local_eqn))*Psi.global_value(local_eqn))/
+       ((*Problem_pt->dof_pt(local_eqn))*Psi.global_value(local_eqn))/
        Count.global_value(local_eqn);
      }
    }
@@ -2715,7 +2773,7 @@ namespace oomph
       
       //Specify the symmetry
       residuals[raw_ndof] += 
-       ((*this->dof_pt(local_eqn))*Psi.global_value(local_eqn))/
+       ((*Problem_pt->dof_pt(local_eqn))*Psi.global_value(local_eqn))/
        Count.global_value(local_eqn);
       //Specify the normalisation
       residuals[2*raw_ndof+1] += (Y.global_value(local_eqn)*
@@ -2854,7 +2912,7 @@ namespace oomph
        {
         //Get the original (unaugmented) global equation number
         unsigned long global_eqn = Assembly_handler_pt->eqn_number(elem_pt,n);
-        double* unknown_pt = this->dof_pt(global_eqn);
+        double* unknown_pt = Problem_pt->dof_pt(global_eqn);
         double init = *unknown_pt;
         *unknown_pt += FD_step;
         
@@ -3038,11 +3096,11 @@ namespace oomph
  {
   //There is only one (real) null vector
   eigenfunction.resize(1);
-  LinearAlgebraDistribution dist(Problem_pt->communicator_pt(),Ndof,false);
   //Rebuild the vector
-  eigenfunction[0].build(&dist,0.0);
+  eigenfunction[0].build(this->Dof_distribution_pt,0.0);
   //Set the value to be the null vector
-  for(unsigned n=0;n<Ndof;n++)
+  const unsigned n_row_local = eigenfunction[0].nrow_local();
+  for(unsigned n=0;n<n_row_local;n++)
    {
     eigenfunction[0][n] = Y[n];
    }
@@ -3113,9 +3171,12 @@ namespace oomph
     if(Solve_which_system!=Block_J)
      {
       //Restrict the problem to the standard variables
-      Problem_pt->Dof_pt.resize(Ndof);
-      Problem_pt->Dof_distribution_pt->build(Problem_pt->communicator_pt(),
-                                             Ndof,false);
+      Problem_pt->Dof_pt.resize(this->Dof_distribution_pt->nrow_local());
+      Problem_pt->Dof_distribution_pt = this->Dof_distribution_pt;
+      
+      //Problem_pt->Dof_distribution_pt->build(Problem_pt->communicator_pt(),
+      //Ndof,false);
+
       //Remove all previous sparse storage used during Jacobian assembly
       Problem_pt->Sparse_assemble_with_arrays_previous_allocation.resize(0);
 
@@ -3132,21 +3193,44 @@ namespace oomph
     //Only do something if we are not solving the full system
     if(Solve_which_system!=Full_augmented)
      {
+#ifdef OOMPH_HAS_MPI
+      int my_rank = Problem_pt->communicator_pt()->my_rank();
+#endif
       //If we were solving the problem without any augementation
       //add the parameter again
       if(Solve_which_system==Block_J)
-       {Problem_pt->Dof_pt.push_back(Parameter_pt);}
-      
+       {
+#ifdef OOMPH_HAS_MPI
+
+        if((!Distributed) || (my_rank==0))
+#endif
+         {
+          Problem_pt->Dof_pt.push_back(Parameter_pt);
+         }
+       }
+
       //Always add the additional unknowns back into the problem
-      for(unsigned n=0;n<Ndof;n++)
+      const unsigned n_dof_local = Dof_distribution_pt->nrow_local();
+      for(unsigned n=0;n<n_dof_local;n++)
        {
         Problem_pt->Dof_pt.push_back(&Y[n]);
        }
-      Problem_pt->Dof_pt.push_back(&Sigma);
+      
+#ifdef OOMPH_HAS_MPI
+      if((!Distributed) || (my_rank==0))
+#endif
+       //Add the slack parameter to the problem on the first processor
+       //if distributed
+       {
+        Problem_pt->Dof_pt.push_back(&Sigma);
+       }
+
       
       // update the Dof distribution
-      Problem_pt->Dof_distribution_pt->build(Problem_pt->communicator_pt(),
-                                             Ndof*2+2,false);
+      Problem_pt->Dof_distribution_pt = 
+       this->Augmented_dof_distribution_pt;
+      //Problem_pt->Dof_distribution_pt->build(Problem_pt->communicator_pt(),
+      //                                       Ndof*2+2,false);
       //Remove all previous sparse storage used during Jacobian assembly
       Problem_pt->Sparse_assemble_with_arrays_previous_allocation.resize(0);
       

@@ -220,7 +220,7 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
  if (Doc_stats) mumps_switch_on_doc(Solver_ID_in_pool);
 
  // number of processors
- unsigned nproc = MPI_Helpers::Nproc;
+ unsigned nproc = this->distribution_pt()->communicator_pt()->nproc();
  if(dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt) != 0)
   {
    nproc = dynamic_cast<DistributableLinearAlgebraObject*>
@@ -344,7 +344,7 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
   if (Doc_stats) mumps_switch_on_doc(Solver_ID_in_pool);
 
   // number of DOFs
-  int ndof = Distribution_pt->nrow();
+  int ndof = this->distribution_pt()->nrow();
   
   // Make backup to avoid over-writing
   DoubleVector tmp_rhs;
@@ -355,7 +355,7 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
   
   // Make a global distribution (i.e. one that isn't distributed)
   LinearAlgebraDistribution global_distribution(
-   Distribution_pt->communicator_pt(),ndof,false);
+   this->distribution_pt()->communicator_pt(),ndof,false);
    
   // Redistribute the tmp_rhs vector with this distribution -- it's
   // now "global", as required for mumps
@@ -367,17 +367,17 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
   
   // Broadcast the result which is only held on root
   MPI_Bcast(&tmp_rhs[0],ndof,MPI_DOUBLE,0,
-            Distribution_pt->communicator_pt()->mpi_comm());
+            this->distribution_pt()->communicator_pt()->mpi_comm());
 
   // If the result vector is distributed, re-distribute the
   // non-distributed tmp_rhs vector to match
-  if (result.distribution_setup()) 
+  if (result.built()) 
    {
     tmp_rhs.redistribute(result.distribution_pt());
    }
   else
    {
-    tmp_rhs.redistribute(Distribution_pt);    
+    tmp_rhs.redistribute(this->distribution_pt());    
    }
   
   // Now copy the tmp_rhs vector into the (matching) result
@@ -458,8 +458,9 @@ void MumpsSolver::solve(DoubleMatrixBase* const &matrix_pt,
  // Setup the distribution of the solver to match that of the matrix
  if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt))
   {
-   Distribution_pt->rebuild(dynamic_cast<DistributableLinearAlgebraObject*>
-                            (matrix_pt)->distribution_pt());
+   this->distribution_pt()
+    ->build(dynamic_cast<DistributableLinearAlgebraObject*>
+            (matrix_pt)->distribution_pt());
   }
 
  //Factorise the matrix
@@ -472,7 +473,7 @@ void MumpsSolver::solve(DoubleMatrixBase* const &matrix_pt,
  double t_end = TimingHelpers::timer(); 
  Solution_time = t_end-t_start;
  
- if ((Doc_time) && (MPI_Helpers::My_rank==0))
+ if ((Doc_time) && (this->distribution_pt()->communicator_pt()->my_rank()==0))
   {
    
    oomph_info << std::endl 
@@ -510,7 +511,7 @@ void MumpsSolver::solve(Problem* const &problem_pt, DoubleVector &result)
  unsigned n_dof = problem_pt->ndof();
 
  // Set the distribution for the solver.
- Distribution_pt->rebuild(problem_pt->communicator_pt(),n_dof);
+ this->distribution_pt()->build(problem_pt->communicator_pt(),n_dof);
   
  // Take a copy of Delete_matrix_data
  bool copy_of_Delete_matrix_data = Delete_matrix_data;
@@ -522,16 +523,17 @@ void MumpsSolver::solve(Problem* const &problem_pt, DoubleVector &result)
  t_start = TimingHelpers::timer();
  
  // Storage for the distributed residuals vector
- DoubleVector residuals(Distribution_pt,0.0);
+ DoubleVector residuals(this->distribution_pt(),0.0);
  
  // Get the sparse jacobian and residuals of the problem
- CRDoubleMatrix jacobian(Distribution_pt);
+ CRDoubleMatrix jacobian(this->distribution_pt());
  problem_pt->get_jacobian(residuals, jacobian);
  
  // Doc time for setup
  double t_end = TimingHelpers::timer();
  Jacobian_setup_time = t_end-t_start;
- if ((Doc_time) && (MPI_Helpers::My_rank==0))
+ int my_rank = this->distribution_pt()->communicator_pt()->my_rank();
+ if ((Doc_time) && (my_rank==0))
   {
    oomph_info << "Time to set up CRDoubleMatrix Jacobian [sec]        : "
               << Jacobian_setup_time << std::endl;
@@ -550,11 +552,11 @@ void MumpsSolver::solve(Problem* const &problem_pt, DoubleVector &result)
  mumps_switch_off_doc(Solver_ID_in_pool);
 
  // Finalise/doc timings
- if ((Doc_time) && (MPI_Helpers::My_rank==0))
+ if ((Doc_time) && (my_rank==0))
   {
    double t_end = TimingHelpers::timer();
    oomph_info << std::endl << "Total time for MumpsSolver " << "(np=" 
-              << MPI_Helpers::Nproc << ",N=" << problem_pt->ndof()
+              << this->distribution_pt()->communicator_pt()->nproc() << ",N=" << problem_pt->ndof()
               <<") [sec] : " << t_end-t_start << std::endl << std::endl;
   }
  
@@ -625,7 +627,7 @@ void MumpsSolver::resolve(const DoubleVector &rhs, DoubleVector &result)
  // Switch off docing again
  mumps_switch_off_doc(Solver_ID_in_pool);
  
- if ((Doc_time) && (MPI_Helpers::My_rank==0))
+ if ((Doc_time) && (this->distribution_pt()->communicator_pt()->my_rank()==0))
   {
    oomph_info << "Time for MumpsSolver solve [sec]: "
               << t_end-t_start << std::endl;

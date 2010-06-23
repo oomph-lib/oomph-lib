@@ -62,6 +62,7 @@ namespace oomph
   Calculate_hessian_products_analytic(false),
 #ifdef OOMPH_HAS_MPI
   Must_recompute_load_balance_for_assembly(true),
+  Halo_scheme_pt(0),
 #endif
   Newton_solver_tolerance(1.0e-8), 
   Max_newton_iterations(10), Max_residuals(10.0),
@@ -169,6 +170,34 @@ namespace oomph
 
 
 #ifdef OOMPH_HAS_MPI
+
+ //==================================================================
+ /// Setup the halo scheme for the degrees of freedom
+ //==================================================================
+ void Problem::setup_dof_halo_scheme()
+ {
+  //Find the number of elements stored on this processor
+  const unsigned n_element = this->mesh_pt()->nelement();
+
+  //Work out the all global equations to which this processor
+  //contributes
+  Vector<unsigned> my_eqns;
+  this->get_my_eqns(this->Assembly_handler_pt,0,n_element-1,my_eqns);
+  
+  //Build the halo scheme, based on the equations to which this
+  //processor contributes
+  Halo_scheme_pt = 
+   new DoubleVectorHaloScheme(this->Dof_distribution_pt,my_eqns);
+
+  //Find pointers to all the halo dofs
+  //There may be more of these than required by my_eqns
+  //(but should not be less)
+  std::map<unsigned,double*> halo_data_pt;
+  this->get_all_halo_data(halo_data_pt);
+  
+  //Now setup the Halo_dofs
+  Halo_scheme_pt->setup_halo_dofs(halo_data_pt,this->Halo_dof_pt);
+ }
 
  //==================================================================
  /// Distribute the problem without doc; report stats if required
@@ -5639,17 +5668,6 @@ void Problem::get_fd_jacobian(DoubleVector &residuals,
 void Problem::get_derivative_wrt_global_parameter(double* const &parameter_pt,
                                                   DoubleVector &result)
 {
-
-#ifdef OOMPH_HAS_MPI
-
- if (Problem_has_been_distributed)
-  {
-   OomphLibWarning("This is unlikely to work with a distributed problem",
-                   "Problem::get_derivative_wrt_global_parameter()",
-                   OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
- 
  //If we are doing the calculation analytically then call the appropriate
  //handler and then calling get_residuals
  if(is_dparameter_calculated_analytically(parameter_pt))
@@ -5695,11 +5713,9 @@ void Problem::get_derivative_wrt_global_parameter(double* const &parameter_pt,
  //Otherwise use the finite difference default
  else
   {
-   //Clear the result distribution
-   result.clear();
    //Get the (global) residuals and store in the result vector
    get_residuals(result);
-   
+
    //Storage for the new residuals
    DoubleVector newres;
    
@@ -5723,7 +5739,7 @@ void Problem::get_derivative_wrt_global_parameter(double* const &parameter_pt,
    const unsigned ndof_local = result.nrow_local();
    
    //Do the finite differencing in the local variables
-   for(unsigned long n=0;n<ndof_local;++n)
+   for(unsigned n=0;n<ndof_local;++n)
     {
      result[n] = (newres[n] - result[n])/FD_step;
     }
@@ -5734,9 +5750,6 @@ void Problem::get_derivative_wrt_global_parameter(double* const &parameter_pt,
    //Do any possible updates
    actions_after_change_in_global_parameter(parameter_pt);
   }
- //for(unsigned n=0;n<n_dof;n++) 
- //   {std::cout << "FD " << n << " " <<  result[n] << "\n";}
-
 
 }
 
@@ -5751,40 +5764,39 @@ void Problem::get_derivative_wrt_global_parameter(double* const &parameter_pt,
 /// The default implementation is to use finite differences at the global
 /// level.
 //========================================================================
-void Problem::get_hessian_vector_products(DoubleVector const &Y,
-                                          Vector<DoubleVector> const &C,
-                                          Vector<DoubleVector> &product)
+void Problem::get_hessian_vector_products(
+ DoubleVectorWithHaloEntries const &Y,
+ Vector<DoubleVectorWithHaloEntries> const &C,
+ Vector<DoubleVectorWithHaloEntries> &product)
 {
-#ifdef OOMPH_HAS_MPI
- 
- if (Problem_has_been_distributed)
-  {
-   OomphLibWarning("This is unlikely to work with a distributed problem",
-                   "Problem::get_hessian_vector_products()",
-                   OOMPH_EXCEPTION_LOCATION);
-  }
-#endif
-
  //How many vector products must we construct
  const unsigned n_vec = C.size();
-
- //Find the number of degrees of freedom in the system
- const unsigned n_dof = this->ndof();
  
- // Create the linear algebra distribution for this solver
  // currently only global (non-distributed) distributions are allowed
- LinearAlgebraDistribution* dist_pt = new 
-  LinearAlgebraDistribution(Communicator_pt,n_dof,false);
+ //LinearAlgebraDistribution* dist_pt = new 
+ // LinearAlgebraDistribution(Communicator_pt,n_dof,false);
  
  // Cache the assembly hander
  AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
  
  // Rebuild the results vectors and initialise to zero
- for(unsigned i=0;i<n_vec;i++) 
+ // use the same distribution of the vector Y
+for(unsigned i=0;i<n_vec;i++) 
   {
-   product[i].build(dist_pt,0.0);
+   product[i].build(Y.distribution_pt(),0.0);
    product[i].initialise(0.0);
   }
+
+//Setup the halo schemes for the result
+#ifdef OOMPH_HAS_MPI
+ if(Problem_has_been_distributed) 
+  {
+   for(unsigned i=0;i<n_vec;i++)
+    {
+     product[i].build_halo_scheme(this->Halo_scheme_pt);
+    }
+  }
+#endif
 
  //If we are doing the calculation analytically then call the appropriate
  //handler
@@ -5799,46 +5811,54 @@ void Problem::get_hessian_vector_products(DoubleVector const &Y,
     {
      //Get the pointer to the element
      GeneralisedElement* elem_pt = Mesh_pt->element_pt(e);
-     //Find number of dofs in the element
-     unsigned n_var = assembly_handler_pt->ndof(elem_pt); 
-     //Set up a matrix for the input and output
-     Vector<double> Y_local(n_var);
-     DenseMatrix<double> C_local(n_vec,n_var);
-     DenseMatrix<double> product_local(n_vec,n_var);
-
-     //Translate the global input vectors into the local storage
-     //Probably horribly inefficient, but otherwise things get really messy
-     //at the elemental level
-     for(unsigned l=0;l<n_var;l++)
+//Do not loop over halo elements
+#ifdef OOMPH_HAS_MPI
+     if(!elem_pt->is_halo())
       {
-       //Cache the global equation number
-       const unsigned long eqn_number = 
-        assembly_handler_pt->eqn_number(elem_pt,l);
-
-       Y_local[l] = Y[eqn_number];
-       for(unsigned i=0;i<n_vec;i++)
-        {
-         C_local(i,l) = C[i][eqn_number];
-        }
-      }
-     
-     //Fill the array
-     assembly_handler_pt->get_hessian_vector_products(elem_pt,Y_local,
-                                                      C_local,product_local);
-
-     //Assign the local results to the global vector
-     for(unsigned l=0;l<n_var;l++)
-      {
-       const unsigned long eqn_number = 
-        assembly_handler_pt->eqn_number(elem_pt,l);
+#endif
+       //Find number of dofs in the element
+       unsigned n_var = assembly_handler_pt->ndof(elem_pt); 
+       //Set up a matrix for the input and output
+       Vector<double> Y_local(n_var);
+       DenseMatrix<double> C_local(n_vec,n_var);
+       DenseMatrix<double> product_local(n_vec,n_var);
        
-       for(unsigned i=0;i<n_vec;i++)
+       //Translate the global input vectors into the local storage
+       //Probably horribly inefficient, but otherwise things get really messy
+       //at the elemental level
+       for(unsigned l=0;l<n_var;l++)
         {
-         product[i][eqn_number] += product_local(i,l);
-         //std::cout << "ANAL " << e << " " << i << " " 
-         //          << l << " " << product_local(i,l) << "\n";
+         //Cache the global equation number
+         const unsigned long eqn_number = 
+          assembly_handler_pt->eqn_number(elem_pt,l);
+         
+         Y_local[l] = Y.global_value(eqn_number);
+         for(unsigned i=0;i<n_vec;i++)
+          {
+           C_local(i,l) = C[i].global_value(eqn_number);
+          }
         }
+       
+       //Fill the array
+       assembly_handler_pt->get_hessian_vector_products(elem_pt,Y_local,
+                                                        C_local,product_local);
+       
+       //Assign the local results to the global vector
+       for(unsigned l=0;l<n_var;l++)
+        {
+         const unsigned long eqn_number = 
+          assembly_handler_pt->eqn_number(elem_pt,l);
+         
+         for(unsigned i=0;i<n_vec;i++)
+          {
+           product[i].global_value(eqn_number) += product_local(i,l);
+           //std::cout << "ANAL " << e << " " << i << " " 
+           //          << l << " " << product_local(i,l) << "\n";
+          }
+        }
+#ifdef OOMPH_HAS_MPI
       }
+#endif
     }
   }
  //Otherwise calculate using finite differences by 
@@ -5849,24 +5869,47 @@ void Problem::get_hessian_vector_products(DoubleVector const &Y,
    const double FD_step = 1.0e-8;
    
    //We can now construct our multipliers
+   const unsigned n_dof_local = this->Dof_distribution_pt->nrow_local();
    //Prepare to scale
    double dof_length=0.0;
    Vector<double> C_length(n_vec,0.0);
    
-   for(unsigned n=0;n<n_dof;n++)
+   for(unsigned n=0;n<n_dof_local;n++)
     {
      if(std::abs(this->dof(n)) > dof_length) 
       {dof_length = std::abs(this->dof(n));}
     }
    
+   //C is assumed to have the same distribution as the dofs
    for(unsigned i=0;i<n_vec;i++)
     {
-     for(unsigned n=0;n<n_dof;n++)
+     for(unsigned n=0;n<n_dof_local;n++)
       {
        if(std::abs(C[i][n]) > C_length[i]) {C_length[i] = std::abs(C[i][n]);}
       }
     }
    
+   //Now broadcast the information, if distributed
+#ifdef OOMPH_HAS_MPI
+   if(Problem_has_been_distributed)
+    {
+     const unsigned n_length = n_vec+1;
+     double all_length[n_length];
+     all_length[0] = dof_length;
+     for(unsigned i=0;i<n_vec;i++) {all_length[i+1] = C_length[i];}
+
+     //Do the MPI call
+     double all_length_reduce[n_length];
+     MPI_Allreduce(all_length,all_length_reduce,n_length,MPI_DOUBLE,
+                   MPI_MAX,this->communicator_pt()->mpi_comm());
+
+     //Read out the information
+     dof_length = all_length_reduce[0];
+     for(unsigned i=0;i<n_vec;i++) {C_length[i] = all_length_reduce[i+1];}
+    }
+#endif
+
+   //Form the multipliers
    Vector<double> C_mult(n_vec,0.0);
    for(unsigned i=0;i<n_vec;i++)
     {
@@ -5885,6 +5928,11 @@ void Problem::get_hessian_vector_products(DoubleVector const &Y,
    for(unsigned long e = 0;e<n_element;e++)
     {
      GeneralisedElement *elem_pt = this->mesh_pt()->element_pt(e);
+     //Ignore halo's of course
+#ifdef OOMPH_HAS_MPI
+     if(!elem_pt->is_halo())
+      {
+#endif
      //Loop over the ndofs in each element
      unsigned n_var = assembly_handler_pt->ndof(elem_pt);
      //Resize the dummy residuals vector
@@ -5899,7 +5947,7 @@ void Problem::get_hessian_vector_products(DoubleVector const &Y,
      for(unsigned n=0;n<n_var;n++)
       {
        unsigned eqn_number = assembly_handler_pt->eqn_number(elem_pt,n);
-       dof_bac[n] = this->dof(eqn_number);
+       dof_bac[n] = *this->dof_pt(eqn_number);
       }
      
      //Now loop over all vectors C
@@ -5910,7 +5958,7 @@ void Problem::get_hessian_vector_products(DoubleVector const &Y,
         {
          unsigned eqn_number = assembly_handler_pt->eqn_number(elem_pt,n);
          //Peturb by vector C[i]
-         this->dof(eqn_number) += C_mult[i]*C[i][eqn_number]; 
+         *this->dof_pt(eqn_number) += C_mult[i]*C[i].global_value(eqn_number); 
         }
        
        //Allocate storage for the perturbed jacobian
@@ -5923,7 +5971,7 @@ void Problem::get_hessian_vector_products(DoubleVector const &Y,
        for(unsigned n=0;n<n_var;n++)
         {
          unsigned eqn_number = assembly_handler_pt->eqn_number(elem_pt,n);
-         this->dof(eqn_number) = dof_bac[n];
+         *this->dof_pt(eqn_number) = dof_bac[n];
         }
        
        //Now work out the products
@@ -5934,15 +5982,33 @@ void Problem::get_hessian_vector_products(DoubleVector const &Y,
          for(unsigned m=0;m<n_var;m++)
           {
            unsigned unknown = assembly_handler_pt->eqn_number(elem_pt,m);
-           prod_c += (jac_C(n,m) - jac(n,m))*Y[unknown];
+           prod_c += (jac_C(n,m) - jac(n,m))*Y.global_value(unknown);
           }
          //std::cout << "FD   " << e << " " << i << " " 
          //          << n << " " << prod_c/C_mult[i] << "\n";
-         product[i][eqn_number] += prod_c/C_mult[i];
+         product[i].global_value(eqn_number) += prod_c/C_mult[i];
         }
       }
+#ifdef OOMPH_HAS_MPI
+      }
+#endif
     } //End of loop over elements
   }
+ 
+ //If we have a distributed problem then gather all 
+ //values
+#ifdef OOMPH_HAS_MPI
+   if(Problem_has_been_distributed)
+    {
+     //Sum all values if distributed
+     for(unsigned i=0;i<n_vec;i++)
+      {
+       product[i].sum_all_halo_and_haloed_values();
+      }
+    }
+#endif
+
+
 }
 
 

@@ -129,6 +129,11 @@ void HSL_MA42::solve(Problem* const &problem_pt, DoubleVector &result)
  //Find the number of dofs (variables) and store for resolves
  N_dof = problem_pt->ndof();
 
+ //Build the distribution .. this is a serial solver
+ LinearAlgebraDistribution dist(problem_pt->communicator_pt(),
+                                N_dof,false); 
+ this->build_distribution(dist);
+
  //Cast the number of dofs into an integer for the HSL solver
  int n_dof = N_dof;
 
@@ -733,7 +738,7 @@ void HSL_MA42::solve(Problem* const &problem_pt, DoubleVector &result)
   } // end of loop over shuffling of workspace array sizes until it all
     // fits...
 
- 
+ result.build(&dist);
  //Now load the values back into result
  for(int i=0;i<n_dof;i++) result[i] = dx[0][i];
  

@@ -271,17 +271,17 @@ class MumpsPreconditioner : public Preconditioner
    
    if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt) != 0)
     {
-     Distribution_pt
-      ->rebuild(dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt)
-                ->distribution_pt());
+     this->distribution_pt()
+      ->build(dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt)
+              ->distribution_pt());
     }
    else
     {
-     Distribution_pt->rebuild(problem_pt->communicator_pt(),
-                              matrix_pt->nrow(),false);
+     this->distribution_pt()->build(problem_pt->communicator_pt(),
+                                    matrix_pt->nrow(),false);
     }
    Solver.doc_time() = false;
-   Solver.distribution_pt()->rebuild(Distribution_pt);
+   Solver.distribution_pt()->build(this->distribution_pt());
    Solver.factorise(matrix_pt);
     
   }

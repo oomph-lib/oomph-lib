@@ -715,7 +715,6 @@ exit(1);*/
  //Specify the symmetry the hard way
  //Need to consider the possibility of distribution, so
  //only work with local dofs
- unsigned n_dof = problem.ndof();
  unsigned n_dof_local = problem.dof_distribution_pt()->nrow_local();
  Vector<double> backup(n_dof_local);
   for(unsigned n=0;n<n_dof_local;n++)

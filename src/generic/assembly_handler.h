@@ -737,15 +737,6 @@ public:
    /// in the solution. 
   double Sigma;
 
-#ifdef OOMPH_HAS_MPI
-  /// \short Pointer to the halo scheme for the global vectors
-  DoubleVectorHaloScheme* Halo_scheme_pt;
-
-  /// \short Storage for the halo degrees of freedom (only required)
-  /// when accessing via the global equation number
-  Vector<double*> Halo_dof_pt;
-#endif
-
   /// \short Storage for the null vector
   DoubleVectorWithHaloEntries Y;
 
@@ -796,10 +787,6 @@ public:
       return i;
      }
    }
-
-  /// \short Function that is used to return the pointer to the dof
-  /// either haloed or stored locally, index by global eqn
-  double* dof_pt(const unsigned &i);
 
  public:
 

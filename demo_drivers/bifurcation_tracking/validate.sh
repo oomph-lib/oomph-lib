@@ -10,7 +10,7 @@ mkdir Validation
 
 #######################################################################
 
-# Validation for static disk compression
+# Validation for fold tracking 
 #---------------------------------------
 
 cd Validation

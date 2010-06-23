@@ -38,7 +38,7 @@ namespace oomph
  //=========================================================================== 
  DoubleVectorHaloScheme::DoubleVectorHaloScheme(
   LinearAlgebraDistribution* const &dist_pt,
-  const Vector<unsigned> &required_global_eqn)
+  const Vector<unsigned> &required_global_eqn) : Distribution_pt(dist_pt)
  {
 #ifdef OOMPH_HAS_MPI
   //Only bother to do anything if the vector is distributed

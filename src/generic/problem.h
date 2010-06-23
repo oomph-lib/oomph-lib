@@ -41,6 +41,7 @@
 #include "Vector.h"
 #include "matrices.h"
 #include "explicit_timesteppers.h"
+#include "double_vector_with_halo.h"
 #include <complex>
 #include <map>
 
@@ -423,6 +424,19 @@ protected:
 
  /// Vector of pointers to dofs
  Vector<double*> Dof_pt;
+
+#ifdef OOMPH_HAS_MPI
+ /// \short Pointer to the halo scheme for any global vectors
+ /// that have the Dof_distribution
+ DoubleVectorHaloScheme *Halo_scheme_pt;
+ 
+ /// \short Storage for the halo degrees of freedom (only required)
+ /// when accessing via the global equation number in distributed problems
+ Vector<double*> Halo_dof_pt;
+
+ /// \short Function that is used to setup the halo scheme
+ void setup_dof_halo_scheme();
+#endif
 
  //--------------------- Newton solver parameters
 
@@ -1170,6 +1184,42 @@ protected:
  /// \short Add lambda x incremenet_dofs[l] to the l-th dof
  void add_to_dofs(const double &lambda, const DoubleVector &increment_dofs);
 
+ /// \short Return a pointer to the dof, indexed by global equation number
+ /// which may be haloed or stored locally. If it is haloed, a local copy
+ /// must have been requested on this processor in the Halo_scheme_pt.
+ inline double* dof_pt(const unsigned &i)
+  {
+#ifdef OOMPH_HAS_MPI
+   //If the problem is distributed I have to do something different
+   if(Problem_has_been_distributed)
+    {
+     //Work out the local coordinate of the dof
+     //based on the original distribution stored in the Halo_scheme 
+     const unsigned first_row_local = 
+      Halo_scheme_pt->distribution_pt()->first_row();
+     const unsigned n_row_local = 
+      Halo_scheme_pt->distribution_pt()->nrow_local();
+     
+     //If we are in range then just call the local value
+     if((i >= first_row_local) && (i < first_row_local + n_row_local))
+      {
+       return this->Dof_pt[i-first_row_local];
+      }
+     //Otherwise the entry is not stored in the local processor
+     //and we must have haloed it
+     else
+      {
+       return Halo_dof_pt[Halo_scheme_pt->local_index(i)];
+      }
+    }
+   //Otherwise just return the dof
+   else
+#endif
+    {
+     return this->Dof_pt[i];
+    }
+  }
+ 
  /// \short i-th dof in the problem
  double& dof(const unsigned& i)
   {
@@ -1232,9 +1282,10 @@ protected:
  /// associated with bifurcation tracking.
  /// The default implementation is to use finite differences at the global
  /// level.
- void get_hessian_vector_products(DoubleVector const &Y,
-                                  Vector<DoubleVector> const &C,
-                                  Vector<DoubleVector> &product);
+ void get_hessian_vector_products(
+  DoubleVectorWithHaloEntries const &Y,
+  Vector<DoubleVectorWithHaloEntries> const &C,
+  Vector<DoubleVectorWithHaloEntries> &product);
 
 
  /// \short Get derivative of an element in the problem wrt a global parameter,

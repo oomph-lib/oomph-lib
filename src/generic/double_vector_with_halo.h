@@ -86,6 +86,9 @@ class DoubleVectorHaloScheme
  Vector<int> Halo_displacement;
  
 
+ /// \short Store the distribution that was used to setup the halo scheme
+ LinearAlgebraDistribution *Distribution_pt;
+
 public:
 
  ///\short Constructor that sets up the required information communicating
@@ -97,6 +100,10 @@ public:
 
  ///\short Return the number of halo values
  inline unsigned n_halo_values() const {return Local_index.size();}
+
+ ///\short Return the pointer to the distirbution used to setup
+ ///the halo information
+ inline LinearAlgebraDistribution* &distribution_pt() {return Distribution_pt;}
 
  ///\short Function that sets up a vector of pointers to halo 
  /// data, index using the scheme in Local_index
@@ -226,6 +233,21 @@ class DoubleVectorWithHaloEntries : public DoubleVector
      //and we must have haloed it
      else
       {
+#ifdef PARANOID
+       if(Halo_scheme_pt==0)
+        {
+         std::ostringstream error_stream;
+         error_stream << 
+          "Halo data requested, but no halo scheme has been setup\n" <<
+          "You should call this->build_halo_scheme(halo_scheme_pt).\n" <<
+          "You may wish to setup the scheme for the Problem using \n" <<
+          "Problem::setup_dof_halo_scheme()\n";
+         
+         throw OomphLibError(error_stream.str(),
+                             "DoubleVectorWithHaloEntries::global_value()",
+                             OOMPH_EXCEPTION_LOCATION);
+        }
+#endif
        return Halo_value[Halo_scheme_pt->local_index(i)];
       }
     }
@@ -237,6 +259,54 @@ class DoubleVectorWithHaloEntries : public DoubleVector
      return (*this)[i];
     }
   }
+
+ ///Direct access to the global entry (const version)
+ const double& global_value(const unsigned &i)  const
+  {
+   //Only need to worry about the distributed case if 
+   //we have compiled with MPI
+#ifdef OOMPH_HAS_MPI
+   if(this->distributed())
+    {
+     const unsigned first_row_local = this->first_row();
+     const unsigned n_row_local = this->nrow_local();
+     
+     //If we are in range then just call the local value
+     if((i >= first_row_local) && (i < first_row_local + n_row_local))
+      {
+       return (*this)[i-first_row_local];
+      }
+     //Otherwise the entry is not stored in the local processor
+     //and we must have haloed it
+     else
+      {
+#ifdef PARANOID
+       if(Halo_scheme_pt==0)
+        {
+         std::ostringstream error_stream;
+         error_stream << 
+          "Halo data requested, but no halo scheme has been setup\n" <<
+          "You should call this->build_halo_scheme(halo_scheme_pt).\n" <<
+          "You may wish to setup the scheme for the Problem using \n" <<
+          "Problem::setup_dof_halo_scheme()\n";
+         
+         throw OomphLibError(error_stream.str(),
+                             "DoubleVectorWithHaloEntries::global_value()",
+                             OOMPH_EXCEPTION_LOCATION);
+        }
+#endif
+       return Halo_value[Halo_scheme_pt->local_index(i)];
+      }
+    }
+   //If not distributed the global entry is
+   //the local entry
+   else
+#endif
+    {
+     return (*this)[i];
+    }
+  }
+
 
  ///Synchronise the halo data
  void synchronise();

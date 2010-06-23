@@ -44,7 +44,7 @@ matrix_vector_product.cc
 #face_element_as_geometric_object.cc
 
 if HAVE_MUMPS
-# hierher sources+=mumps_fortran_solver.F mumps_solver.cc
+sources+=mumps_fortran_solver.F mumps_solver.cc
 endif
 
 if WANT_MPI
@@ -98,7 +98,7 @@ general_purpose_block_preconditioners.h SuperLU_preconditioner.h \
 matrix_vector_product.h
 
 if HAVE_MUMPS
-# hierher headers+=mumps_solver.h 
+headers+=mumps_solver.h 
 endif
 
 if WANT_MPI
