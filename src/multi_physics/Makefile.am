@@ -51,7 +51,7 @@ library_include_HEADERS=$(headers) $(incl_cc_files) $(templates)
 # Include path for library headers -- need to refer to include files
 # in their respective source directoriesas they will not have been 
 # installed yet! 
-INCLUDES = -I$(top_srcdir)/src/generic $(top_srcdir)/src/navier_stokes
+INCLUDES = -I$(top_srcdir)/src/generic -I$(top_srcdir)/src/navier_stokes
 
 
 # Combined header file

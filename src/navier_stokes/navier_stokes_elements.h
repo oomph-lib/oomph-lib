@@ -209,7 +209,7 @@ fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
  unsigned flag)
 {
  //Storage for local coordinates in FaceElement and associted bulk element
- unsigned my_dim=dim();
+ unsigned my_dim=this->dim();
  Vector<double> s(my_dim);
  Vector<double> s_bulk(my_dim+1);
  
@@ -220,14 +220,14 @@ fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
  Vector<double> veloc(my_dim+1);
  
  //Set the value of n_intpt
- unsigned n_intpt = integral_pt()->nweight();
+ unsigned n_intpt = this->integral_pt()->nweight();
  
  //Integers to store local equation numbers
  int local_eqn=0;
  int local_unknown=0;
  
  // Get cast bulk element
- ELEMENT* bulk_el_pt=dynamic_cast<ELEMENT*>(bulk_element_pt());
+ ELEMENT* bulk_el_pt=dynamic_cast<ELEMENT*>(this->bulk_element_pt());
  
  //Find out how many pressure dofs there are in the bulk element
  unsigned n_pres = bulk_el_pt->npres_nst();
@@ -242,16 +242,16 @@ fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
  for(unsigned ipt=0;ipt<n_intpt;ipt++)
   {
    //Get the integral weight
-   double w = integral_pt()->weight(ipt);
+   double w = this->integral_pt()->weight(ipt);
    
    //Assign values of local coordinate in FaceElement
-   for(unsigned i=0;i<my_dim;i++) s[i] = integral_pt()->knot(ipt,i);
+   for(unsigned i=0;i<my_dim;i++) s[i] = this->integral_pt()->knot(ipt,i);
    
    // Find corresponding coordinate in the the bulk element
-   s_bulk=local_coordinate_in_bulk(s);
+   s_bulk=this->local_coordinate_in_bulk(s);
    
    /// Get outer unit normal 
-   outer_unit_normal(ipt,unit_normal);
+   this->outer_unit_normal(ipt,unit_normal);
    
    // Get velocity in bulk element
    bulk_el_pt->interpolated_u_nst(s_bulk,veloc);
@@ -273,7 +273,7 @@ fill_in_generic_residual_contribution_fp_press_adv_diff_robin_bc(
    bulk_el_pt->pshape_nst(s_bulk,psip,testp);
    
    //Find the Jacobian of the mapping within the FaceElement
-   double J = J_eulerian(s);
+   double J = this->J_eulerian(s);
    
    //Premultiply the weights and the Jacobian
    double W = w*J;
