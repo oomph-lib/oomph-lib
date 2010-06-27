@@ -1306,8 +1306,7 @@ AC_SUBST(AM_CPPFLAGS)
 # These are the third-party libraries distributed with oomph-lib.
 # They are only used if the user hasn't specified his/her own
 # local version of these.
-external_libs='-loomph_hsl -loomph_superlu_3.0 -loomph_arpack '
-
+external_libs='-loomph_triangle -loomph_hsl -loomph_superlu_3.0 -loomph_metis_4.0 -loomph_arpack '
 
 # Include superlu_dist and parallel metis if compiled in parallel
 if test x$want_mpi = xtrue; then

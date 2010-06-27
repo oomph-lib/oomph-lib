@@ -43,6 +43,798 @@
 namespace oomph
 {
 
+
+
+
+// Forward reference
+class TriangleMeshHolePolygon;
+
+//=========================================================================
+/// GeomObject representation of PolyLine segment that is attached to the
+/// a (rigid) moving TriangleMeshHolePolygon. This can be used to
+/// impose the displacement of a domain boundary via Lagrange
+/// multipliers. The intrinsic coordinate along the object is
+/// the arclength along the straight segment; it varies between
+/// 0 and zeta_max (accessible via a member function) where 
+/// 0 is located at the "lower left" vertex of the segment.
+/// The lower left vertex can be updated (when the object has
+/// rotated, say) by calling update_lower_left_vertex().
+//=========================================================================
+class PolyLineSegmentGeomObject : public virtual GeomObject
+{
+ 
+public:
+
+ /// \short Constructor:  Pass the coordinates of the "left" and  "right" 
+ /// of the segment(order is arbitrary -- they are re-numbered
+ /// internally anyway so that "left" is the "lower left" for uniqueness.
+ /// Also pass pointer to the associated
+ /// TriangleMeshHolePolygon which controls the motion of its centre of
+ /// gravity.
+ PolyLineSegmentGeomObject(const Vector<double>& r_left,
+                           const Vector<double>& r_right,
+                           TriangleMeshHolePolygon* polygon_pt) :
+  R_left(r_left), R_right(r_right), Polygon_pt(polygon_pt)
+  {
+   // Swap left and right?
+   if((R_left[1]>R_right[1])||
+      ( (R_left[1]==R_right[1]) && (R_left[0]>R_right[0]) ) )
+    {
+     Vector<double> tmp_coord(2);
+     tmp_coord=R_right;
+     R_right=R_left;
+     R_left=tmp_coord;
+    }
+   
+   // Zeta_max value
+   Zeta_max=sqrt((R_right[0]-R_left[0])*(R_right[0]-R_left[0])+
+                 (R_right[1]-R_left[1])*(R_right[1]-R_left[1]));
+   
+  }
+ 
+ /// \short Update lower left vertex for the current displacement/rotation of
+ /// the associated TriangleMeshHolePolygon 
+ void update_lower_left_vertex();
+ 
+ /// \short Compute the original position of the point located at coordinate
+ /// zeta along the GeomObject ("original" meaning: before a displacement
+ /// or rotation of the associated TriangleMeshHolePolygon is applied).
+ void interpolated_x_orig(const double& zeta,
+                          Vector<double>& x_orig) const
+  {
+   
+#ifdef PARANOID
+
+   // Condition if zeta is out of range
+   if((zeta<0.0)||(zeta>Zeta_max))
+    {  
+     std::ostringstream error_stream;
+     error_stream
+      << " The zeta value provided "<<zeta <<" is out of range. \n"
+      << " Segment with vertex "<< R_left[0] <<" " << R_left[1]
+      << " and " << R_right[0] << " " << R_right[1] <<std::endl
+      << " has zeta_min=0 and zeta_max="<<Zeta_max<<".\n"
+      <<std::endl;
+     throw OomphLibError(error_stream.str(),
+                         "PolyLineSegmentGeomObject::interpolated_x_orig()",
+                         OOMPH_EXCEPTION_LOCATION);          
+    }
+#endif
+   
+   // Interpolate the zeta value 
+   x_orig[0]=R_left[0]+(zeta/Zeta_max)*(R_right[0]-R_left[0]);
+   x_orig[1]=R_left[1]+(zeta/Zeta_max)*(R_right[1]-R_left[1]);
+  }
+ 
+ 
+ /// \short Position Vector at Lagrangian coordinate zeta. Based on 
+ /// original position of the point and the subsequent displacement
+ /// and rotation of the associated TriangleMeshHolePolygon.
+ void position(const Vector<double>& zeta, Vector<double>& r) const;
+ 
+ /// Output: x,y,zeta
+ void output(std::ostream &outfile)
+  {
+   Vector<double> zeta(1);
+   Vector<double> r(2);
+   unsigned nplot=5;
+   outfile << "ZONE\n";
+   for (unsigned i=0;i<nplot;i++)
+    {     
+     zeta[0]=Zeta_max*double(i)/double(nplot-1);
+     position(zeta,r);
+     outfile << r[0] << " " 
+             << r[1] << " " 
+             << zeta[0] << std::endl;
+    }
+  }
+
+ /// How many items of Data does the shape of the object depend on?
+ unsigned ngeom_data() const {return 1;}
+ 
+ /// \short Return pointer to the j-th Data item that the object's 
+ /// shape depends on 
+ Data* geom_data_pt(const unsigned& j);
+
+ /// Get zeta max value
+ double& zeta_max(){return Zeta_max;}
+ 
+ /// Right vertex
+ Vector<double>& r_right(){return R_right;}
+
+ /// Left vertex
+ Vector<double>& r_left(){return R_left;}
+
+private:
+
+ /// Zeta max value
+ double Zeta_max;
+
+ /// \short (Lower-)Left vertex in original configuration ("original" meaning 
+ /// before a displacement or rotation of the associated 
+ /// TriangleMeshHolePolygon is applied).
+ Vector<double> R_left;
+ 
+ /// \short (Lower-)Left vertex in original configuration ("original" meaning 
+ /// before a displacement or rotation of the associated 
+ /// TriangleMeshHolePolygon is applied).
+ Vector<double> R_right;
+ 
+ /// Pointer to the associated Polygon
+ TriangleMeshHolePolygon* Polygon_pt;
+
+}; // end of class
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+//=====================================================================
+/// Class defining a polyline for use in Triangle Mesh generation
+//=====================================================================
+class TriangleMeshPolyLine
+{
+ 
+public:
+ 
+ /// \short Constructor: Takes vectors of vertex coordinates in order
+ /// Also allows the optional specification of a boundary ID -- useful
+ /// in a mesh generation context. If not specified it defaults to zero.
+ /// Note: boundary id is stored with a -1 because of the different
+ /// enumeration between oomph_lib mesh and triangulateio object
+ TriangleMeshPolyLine(const Vector<Vector<double> >& vertex_coordinate,
+                      const unsigned &boundary_id=0) :
+  Vertex_coordinate(vertex_coordinate), Boundary_id(boundary_id-1)
+  {
+#ifdef PARANOID
+   unsigned nvert=Vertex_coordinate.size();
+   for (unsigned i=0;i<nvert;i++)
+    {
+     if (Vertex_coordinate[i].size()!=2)
+      {
+       std::ostringstream error_stream;
+       error_stream 
+        << "TriangleMeshPolyLine should only be used in 2D!\n"
+        << "Your Vector of coordinates, contains data for " 
+        << Vertex_coordinate[i].size() 
+        << "-dimensional coordinates." << std::endl;
+       throw OomphLibError(error_stream.str(),
+                           "TriangleMeshPolyLine::TriangleMeshPolyLine()",
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+    }
+#endif   
+  }
+ 
+ /// Number of vertices
+ unsigned nvertex() const {return Vertex_coordinate.size();}
+   
+ /// Number of segments
+ unsigned nsegment() const {return Vertex_coordinate.size()-1;}
+  
+ /// Boundary id
+ unsigned boundary_id() const {return Boundary_id;}
+  
+ /// Coordinate vector of i-th vertex (const version)
+ Vector<double> vertex_coordinate(const unsigned& i) const
+  {
+   return Vertex_coordinate[i];
+  }   
+
+ /// Coordinate vector of i-th vertex
+ Vector<double>& vertex_coordinate(const unsigned& i)
+  {
+   return Vertex_coordinate[i];
+  }
+  
+ /// Output the polyline -- close it if optional boolean flag is true
+ void output(std::ostream &outfile, const bool& close_it=false)
+  {
+   outfile <<"ZONE T=\"TriangleMeshPolyLine with boundary ID" 
+           << Boundary_id<<"\""<<std::endl;
+   unsigned nvert=Vertex_coordinate.size();
+   for(unsigned i=0;i<nvert;i++)
+    {
+     outfile << Vertex_coordinate[i][0] << " " 
+             << Vertex_coordinate[i][1] << std::endl;
+    }
+   if (close_it)
+    {
+     outfile << Vertex_coordinate[0][0] << " " 
+             << Vertex_coordinate[0][1] << std::endl;
+    }
+  }
+  
+private:
+  
+ /// Vector of Vector of vertex coordinates
+ Vector<Vector<double> > Vertex_coordinate;
+   
+ /// Boundary ID
+ unsigned Boundary_id;
+   
+};
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+
+/// \short Namespace that allows the specification of a tolerance 
+/// between vertices at the ends of polylines that are supposed
+/// to be at the same position.
+namespace ToleranceForVertexMismatchInPolygons
+{
+ 
+ /// \short Acceptable discrepancy for mismatch in vertex coordinates.
+ /// In paranoid mode, the code will die if the beginning/end of
+ /// two adjacent polylines differ by more than that. If the
+ /// discrepancy is smaller (but nonzero) one of the vertex coordinates
+ /// get adjusted to match perfectly; without paranoia the vertex
+ /// coordinates are taken as they come...
+ extern double Tolerable_error;
+
+}
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+//=====================================================================
+/// Class defining a (closed!) polygon for the Triangle mesh generation
+//=====================================================================
+class TriangleMeshPolygon
+{
+  
+public:
+  
+ /// \short Constructor: Specify vector of pointers to TriangleMeshPolyLines
+ /// that define the boundary of the segments of the polygon.
+ /// Each TriangleMeshPolyLine has its own boundary ID and can contain
+ /// multiple (straight-line) segments. If there is just a single
+ /// polyline, the first and last vertices should not coincide -- we 
+ /// will close the polygon for you! However, if there multiple
+ /// polylines their joint vertices must be specified in both
+ /// polylines (since the polylines may be used in isolation). 
+ TriangleMeshPolygon(const Vector<TriangleMeshPolyLine*>& 
+                     boundary_polyline_pt);
+   
+ /// Number of constituent polylines
+ unsigned npolyline(){return Boundary_polyline_pt.size();}
+  
+ /// Coordinate of i-th constituent polyline
+ TriangleMeshPolyLine* polyline_pt(const unsigned& i) const
+  {
+   return Boundary_polyline_pt[i];
+  }
+  
+ /// Total number of segments
+ unsigned nsegment()
+  {
+   unsigned npolyline=this->npolyline();
+   unsigned nseg=0;
+   for(unsigned j=0;j<npolyline;j++)
+    {
+     nseg += this->polyline_pt(j)->nsegment();      
+    }  
+   // If there's just one boundary poly line we have another segment
+   // connecting the last vertex to the first one
+   if(npolyline==1){nseg+=1;}
+
+   return nseg;
+  }
+  
+  
+ /// Return vector of boundary ids of associated polylines
+ Vector<unsigned> polygon_boundary_id()
+  {     
+   // Get the number of polylines
+   unsigned nline=npolyline();
+   Vector<unsigned> boundary_id(nline);
+    
+   // Loop over the polyline to get the id
+   for(unsigned iline=0;iline<nline;iline++)
+    {
+     boundary_id[iline]=Boundary_polyline_pt[iline]->boundary_id();
+    }
+   return boundary_id;
+  }
+   
+
+ /// Number of vertices
+ unsigned nvertex()
+  {
+   unsigned n_polyline=this->npolyline();
+   unsigned nvertices=0;
+   for(unsigned j=0;j<n_polyline;j++)
+    {
+     // Storing the number of the vertices
+     nvertices += this->polyline_pt(j)->nvertex()-1;
+    }
+   // If there's just one boundary. All the vertices should be counted   
+   if(n_polyline==1)
+    {
+     nvertices+=1;
+    }
+   return nvertices;
+  } 
+  
+ /// Pointer to i-th constituent polyline
+ TriangleMeshPolyLine* &polyline_pt(const unsigned& i)
+  {
+   return Boundary_polyline_pt[i];
+  }
+
+  
+ /// Output the constituent polylines
+ void output(std::ostream &outfile)
+  {
+   unsigned nbound=Boundary_polyline_pt.size();
+   bool close_it=false;
+   if (nbound==1) close_it=true;
+   for(unsigned j=0;j<nbound;j++)
+    {
+     Boundary_polyline_pt[j]->output(outfile,close_it);
+    }
+  }
+
+protected:
+   
+ /// Vector of pointers to constituent polylines
+ Vector<TriangleMeshPolyLine*> Boundary_polyline_pt;
+   
+};
+
+
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+
+
+
+//=====================================================================
+/// Class upgrading a TriangleMeshPolygon to a "hole" for use during 
+/// triangle mesh generation. For mesh generation purposes, the main (and only)
+/// addition to the base class is the provision of the coordinates
+/// of a hole inside the polygon. To faciliate the movement of the "hole"
+/// through the domain we also provide a Data object whose three values
+/// represent the x and y displacements of its centre of gravity and
+/// the polygon's rotation about its centre of gravity.
+/// If added to a mesh in the Problem (in its incarnation as a 
+/// GeneralisedElement) the displacement/rotation of the polygon
+/// is computed in response to (i) user-specifiable applied forces
+/// and a torque and (ii) the net drag (and assocated torque) from
+/// a mesh of elements that can exert a drag onto the polygon (typically
+/// Navier-Stokes FaceElements that apply a viscous drag to an 
+/// immersed body, represented by the polygon.)
+//=====================================================================
+class TriangleMeshHolePolygon : public virtual TriangleMeshPolygon,
+                                public virtual GeneralisedElement
+{
+ 
+public:
+
+ /// \short Function pointer to function that specifies 
+ /// external force
+ typedef void (*ExternalForceFctPt)(const double& time, 
+                                    Vector<double>& external_force);
+
+ /// \short Function pointer to function that specifies 
+ /// external torque
+ typedef void (*ExternalTorqueFctPt)(const double& time, 
+                                     double& external_torque);
+
+ 
+ /// \short Constructor: Specify coordinates of a point inside the hole
+ /// and a vector of pointers to TriangleMeshPolyLines
+ /// that define the boundary segments of the polygon.
+ /// Each TriangleMeshPolyLine has its own boundary ID and can contain
+ /// multiple (straight-line) segments. The optional final argument
+ /// is a pointer to a Data object whose three values represent 
+ /// the two displacements of and the rotation angle about the polygon's 
+ /// centre of mass.
+ TriangleMeshHolePolygon(const Vector<double>& hole_center,
+                         const Vector<TriangleMeshPolyLine*>& 
+                         boundary_polyline_pt,
+                         Data* centre_displacement_data_pt=0);
+ 
+ /// \short Destuctor: Cleanup if required
+ ~TriangleMeshHolePolygon() 
+  {
+   if (Must_clean_up)
+    {
+     delete Centre_displacement_data_pt->time_stepper_pt();
+     delete Centre_displacement_data_pt;
+    }
+  }
+ 
+ /// Access to "mass" (area) of polygon
+ double mass() {return Mass;}
+
+ /// Access to polar moment of inertia of polygon
+ double moment_of_inertia() {return Moment_of_inertia;}
+
+ // hierher provide lambda squared and use it
+
+ /// Get current centre of gravity
+ Vector<double> centre_of_gravity()
+  {
+   Vector<double> cog(2);
+   cog[0]=x_c_orig()+Centre_displacement_data_pt->value(0);
+   cog[1]=y_c_orig()+Centre_displacement_data_pt->value(1);
+   return cog;
+  }
+
+ /// Output position velocity and acceleration of centre of gravity
+ void output_centre_of_gravity(std::ostream& outfile)
+  {
+   // Get timestepper
+   TimeStepper* time_stepper_pt=
+    Centre_displacement_data_pt->time_stepper_pt();
+   
+   // Get first time derivatives of all displacement data
+   Vector<double> veloc(3);
+   time_stepper_pt->time_derivative(1,Centre_displacement_data_pt,
+                                    veloc);
+
+   // Get second time derivatives of all displacement data
+   Vector<double> accel(3);
+   time_stepper_pt->time_derivative(2,Centre_displacement_data_pt,
+                                    accel);
+
+   outfile << time_stepper_pt->time() << " "
+           << x_c_orig()+Centre_displacement_data_pt->value(0) << " "
+           << y_c_orig()+Centre_displacement_data_pt->value(1) << " "
+           << phi_c_orig()+Centre_displacement_data_pt->value(2) << " "
+           << veloc[0] << " " << veloc[1] << " " << veloc[2] << " "
+           << accel[0] << " " << accel[1] << " " << accel[2] << "\n";
+  }
+ 
+
+ /// Get residuals
+ void fill_in_contribution_to_residuals(Vector<double>& residuals)
+  {
+   // Dummy
+   DenseMatrix<double> jacobian;
+   bool flag=false;
+
+   // Get generic function
+   get_residuals_hole_polygon_generic(residuals,jacobian,flag);
+  }
+
+
+ /// Get residuals
+ void fill_in_contribution_to_jacobian(Vector<double>& residuals,
+                                       DenseMatrix<double>& jacobian)
+  {
+   // Get generic function
+   bool flag=true;
+   get_residuals_hole_polygon_generic(residuals,jacobian,flag);
+  }
+
+ 
+ /// \short Get force and torque from specified fct pointers and
+ /// drag mesh
+ void get_force_and_torque(const double& time,
+                           Vector<double>& force,
+                           double& torque)
+  {
+   // Get external force
+   if (External_force_fct_pt==0)
+    {
+     force[0]=0.0;
+     force[1]=0.0;
+    }
+   else
+    {
+     External_force_fct_pt(time,force);
+    }
+   
+   // Get external torque
+   if (External_torque_fct_pt==0)
+    {
+     torque=0.0;
+    }
+   else
+    {
+     External_torque_fct_pt(time,torque);
+    }
+   
+   // Add drag from any (fluid) mesh attached to surface of polygon     
+   Vector<double> element_drag_force(2);
+   Vector<double> element_drag_torque(1);
+   if (Drag_mesh_pt==0)
+    {
+     return;
+    }
+   else
+    {
+     unsigned nel=Drag_mesh_pt->nelement();
+     for (unsigned e=0;e<nel;e++)
+      {       
+       dynamic_cast<ElementWithDragFunction*>(Drag_mesh_pt->element_pt(e))->
+        get_drag_and_torque(element_drag_force,
+                            element_drag_torque);       
+       force[0]+=element_drag_force[0];
+       force[1]+=element_drag_force[1];
+       torque+=element_drag_torque[0];
+      }
+    }   
+  }
+
+ 
+ /// Coordinate of the point located in the hole 
+ Vector<double> hole_coordinate() const
+  {
+   return Hole_coordinate;
+  }
+   
+
+ /// \short Update the reference configuration by re-setting the original
+ /// position of the vertices to their current ones, re-set the 
+ /// original position of the centre of mass, and the displacements 
+ /// and rotations relative to it
+ void reset_reference_configuration();
+
+
+ /// \short Helper function: Given a point, originally located at 
+ /// x_orig subject it to the hole's displacement and rotation 
+ void get_updated_position(const Vector<double>& x_orig,
+                           Vector<double>& r) const
+  {
+   // The position of the point in the original configuration
+   double phi_orig=atan2((x_orig[1]-Y_c_orig),(x_orig[0]-X_c_orig));
+   double r_orig=sqrt((x_orig[0]-X_c_orig)*(x_orig[0]-X_c_orig)+
+                      (x_orig[1]-Y_c_orig)*(x_orig[1]-Y_c_orig));
+     
+   // Updated position vector
+   r[0] = X_c_orig+Centre_displacement_data_pt->value(0)+
+    r_orig*cos(phi_orig+Centre_displacement_data_pt->value(2));
+
+   r[1] = Y_c_orig+Centre_displacement_data_pt->value(1)+
+    r_orig*sin(phi_orig+Centre_displacement_data_pt->value(2));
+  }
+   
+
+
+ /// \short Get the Vector of Vectors of all PolyLineGeombjects: 
+ /// result[i][j] is pointer to j-th PolyLineGeombject on boundary i.
+ Vector<Vector<PolyLineSegmentGeomObject*> > boundary_geom_obj_pt()
+  {return Boundary_geom_obj_pt;}
+   
+
+
+ /// Output: x,y,zeta for constituent GeomObjects
+ void output_geom_object_representation(std::ostream &outfile)
+ {
+   unsigned nbound=Boundary_geom_obj_pt.size();
+   for (unsigned i=0;i<nbound;i++)
+    {
+     unsigned nseg=Boundary_geom_obj_pt[i].size();
+     for (unsigned j=0;j<nseg;j++)
+      {
+       Boundary_geom_obj_pt[i][j]->output(outfile);
+      }
+    }
+  }
+   
+
+ /// \short Access to  function pointer to function that specifies 
+ /// external force
+ ExternalForceFctPt& external_force_fct_pt()
+  {
+   return External_force_fct_pt;
+  }
+
+
+ /// \short Access to function pointer to function that specifies 
+ /// external torque
+ ExternalTorqueFctPt& external_torque_fct_pt()
+  {
+   return External_torque_fct_pt;
+  }
+
+
+ /// \short Access fct to mesh containing face elements that allow 
+ /// the computation of the drag on the polygon
+ Mesh*& drag_mesh_pt()
+  {
+   return Drag_mesh_pt;
+  }
+
+ /// X-coordinate of original centre of gravity
+ double x_c_orig() const {return X_c_orig;}
+   
+ /// Y-coordinate of original centre of gravity
+ double y_c_orig() const {return Y_c_orig;}
+   
+ /// Original rotation angle
+ double phi_c_orig() const {return Phi_c_orig;}
+   
+ /// \short Pointer to Data for centre of gravity displacement. 
+ /// Values: 0: x-displ; 1: y-displ; 2: rotation angle.
+ Data*& centre_displacement_data_pt()
+  {
+   return Centre_displacement_data_pt;
+  }
+ 
+ /// x-displacement of centre of mass
+ double& centre_x_displacement()
+  {
+   return *(Centre_displacement_data_pt->value_pt(0));
+  }
+   
+ /// y-displacement of centre of mass
+ double& centre_y_displacement()
+  {
+   return *(Centre_displacement_data_pt->value_pt(1));
+  }
+   
+ /// rotation of centre of mass
+ double& centre_rotation_angle()
+  {
+   return *(Centre_displacement_data_pt->value_pt(2));
+  }
+   
+
+private:
+ 
+ /// Get residuals and/or Jacobian
+ void get_residuals_hole_polygon_generic(Vector<double> &residuals,
+                                         DenseMatrix<double> &jacobian,
+                                         const bool& flag)
+  {   
+   // Get timestepper and time
+   TimeStepper* timestepper_pt=Centre_displacement_data_pt->time_stepper_pt();
+   double time=timestepper_pt->time();
+   
+   // Get second time derivatives of all displacement data
+   Vector<double> accel(3);
+   timestepper_pt->time_derivative(2,Centre_displacement_data_pt,
+                                   accel);
+   
+   // Get force and torque
+   Vector<double> external_force(2);
+   double external_torque;
+   get_force_and_torque(time,external_force,external_torque);
+   
+   // Newton's law
+   residuals[0]=Mass*accel[0]-external_force[0];
+   residuals[1]=Mass*accel[1]-external_force[1];
+   residuals[2]=Moment_of_inertia*accel[2]-external_torque;
+   
+   // Get Jacobian too?
+   if (flag)
+    {
+     jacobian(0,0)=Mass*timestepper_pt->weight(2,0);
+     jacobian(1,1)=Mass*timestepper_pt->weight(2,0);
+     jacobian(2,2)=Moment_of_inertia*timestepper_pt->weight(2,0);
+    }
+   
+  }
+
+  
+ /// Helper function to create the boundary geom objects -- one for 
+ /// each segment
+ void create_boundary_geom_objects(const Vector<TriangleMeshPolyLine*>& 
+                                   boundary_polyline_pt)
+ {   
+  // Initialize the vector of vertex
+  Vector<double> r_left(2);
+  Vector<double> r_right(2);
+
+   // Create storage
+   unsigned nboundary=boundary_polyline_pt.size();
+   Boundary_geom_obj_pt.resize(nboundary);
+     
+   // Loop over polylines
+   for (unsigned i=0;i<nboundary;i++)
+    {
+     // Loop over the segments to get the vertex coordinates
+     unsigned nseg=boundary_polyline_pt[i]->nsegment();
+     Boundary_geom_obj_pt[i].resize(nseg);
+     for(unsigned j=0;j<nseg;j++)
+      {
+       // Get the vertex coordinates
+       r_left =boundary_polyline_pt[i]->vertex_coordinate(j);
+       r_right=boundary_polyline_pt[i]->vertex_coordinate(j+1);
+       
+       // Build the PolyLineSegmentGeomObject
+       PolyLineSegmentGeomObject* geom_obj_pt = 
+        new PolyLineSegmentGeomObject(r_left,r_right,this);
+       
+       // Add the geom_obj to the vector
+       Boundary_geom_obj_pt[i][j]=geom_obj_pt;
+      }
+    }
+   
+   // If there's only a single (open!) polyline, close it
+   if (nboundary==1)
+    {
+     unsigned n_vertex=boundary_polyline_pt[0]->nvertex();
+     
+     // Get the vertex coordinates
+     r_left =boundary_polyline_pt[0]->vertex_coordinate(n_vertex-1);
+     r_right=boundary_polyline_pt[0]->vertex_coordinate(0);
+     
+     // Build the PolyLineSegmentGeomObject
+     PolyLineSegmentGeomObject* geom_obj_pt = 
+      new PolyLineSegmentGeomObject(r_left,r_right,this);
+     
+     // Add the geom_obj to the vector
+     Boundary_geom_obj_pt[0].push_back(geom_obj_pt);
+    }
+  }
+
+ /// Vector of vertex coordinates
+ Vector<double> Hole_coordinate;
+ 
+ /// Vector of Vectors of PolyLineSegmentGeomObject (one for each boundary)
+ Vector<Vector<PolyLineSegmentGeomObject*> > Boundary_geom_obj_pt;
+ 
+ /// \short Data for centre of gravity displacement. 
+ /// Values: 0: x-displ; 1: y-displ; 2: rotation angle.
+ Data* Centre_displacement_data_pt;
+ 
+ /// X-coordinate of initial centre of gravity
+ double X_c_orig;
+ 
+ /// Y-coordinate of initial centre of gravity
+ double Y_c_orig;
+
+ /// Original rotation angle 
+ double Phi_c_orig;
+
+ // Mass of polygon
+ double Mass;
+
+ /// Polar moment of inertia of polygon
+ double Moment_of_inertia;
+    
+ /// \short Function pointer to function that specifies 
+ /// external force
+ ExternalForceFctPt External_force_fct_pt;
+
+ /// \short Function pointer to function that specifies 
+ /// external torque
+ ExternalTorqueFctPt External_torque_fct_pt;
+
+ /// \short Mesh containing face elements that allow the computation of
+ /// the drag on the polygon
+ Mesh* Drag_mesh_pt;
+
+ /// \short Bool to remember if displacement data was created internally
+ /// so we have to tidy up...
+ bool Must_clean_up;
+
+};
+ 
+
+
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////

@@ -1,3 +1,4 @@
+
 # A few file definitions
 #-----------------------
 
@@ -98,6 +99,7 @@ general_purpose_block_preconditioners.h SuperLU_preconditioner.h \
 matrix_vector_product.h
 
 if HAVE_MUMPS
+
 headers+=mumps_solver.h 
 endif
 

@@ -111,14 +111,14 @@ namespace Global_Parameters
 /// Triangle-based mesh upgraded to become a solid mesh
 //=========================================================================
 template<class ELEMENT>
-class SolidTriangleMesh : public virtual TriangleMesh<ELEMENT>, 
+class MySolidTriangleMesh : public virtual TriangleMesh<ELEMENT>, 
                           public virtual SolidMesh 
 {
  
 public:
  
  /// Constructor: 
- SolidTriangleMesh(const std::string& node_file_name,
+ MySolidTriangleMesh(const std::string& node_file_name,
                      const std::string& element_file_name,
                      const std::string& poly_file_name,
                      TimeStepper* time_stepper_pt=
@@ -163,7 +163,7 @@ public:
   }
  
  /// Empty Destructor
- virtual ~SolidTriangleMesh() { }
+ virtual ~MySolidTriangleMesh() { }
 
 };
 
@@ -294,7 +294,7 @@ public:
   }
 
  /// Access function for the solid mesh
- SolidTriangleMesh<SOLID_ELEMENT>*& solid_mesh_pt() 
+ MySolidTriangleMesh<SOLID_ELEMENT>*& solid_mesh_pt() 
   {
    return Solid_mesh_pt;
   }
@@ -318,7 +318,7 @@ private:
  FluidTriangleMesh<FLUID_ELEMENT>* Fluid_mesh_pt;
 
  /// Solid mesh
- SolidTriangleMesh<SOLID_ELEMENT>* Solid_mesh_pt;
+ MySolidTriangleMesh<SOLID_ELEMENT>* Solid_mesh_pt;
 
  /// Pointers to mesh of Lagrange multiplier elements
  SolidMesh* Lagrange_multiplier_mesh_pt;
@@ -469,9 +469,9 @@ UnstructuredFSIProblem<FLUID_ELEMENT,SOLID_ELEMENT>::UnstructuredFSIProblem()
  string solid_node_file_name="solid.fig.1.node";
  string solid_element_file_name="solid.fig.1.ele";
  string solid_poly_file_name="solid.fig.1.poly"; 
- Solid_mesh_pt = new SolidTriangleMesh<SOLID_ELEMENT>(solid_node_file_name,
-                                                solid_element_file_name,
-                                                solid_poly_file_name);
+ Solid_mesh_pt = new MySolidTriangleMesh<SOLID_ELEMENT>(solid_node_file_name,
+                                                     solid_element_file_name,
+                                                     solid_poly_file_name);
 
  
  // Complete the build of all solid elements so they are fully functional

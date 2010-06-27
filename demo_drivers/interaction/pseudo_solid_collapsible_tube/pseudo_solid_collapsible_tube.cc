@@ -46,11 +46,11 @@ using namespace oomph;
 
 namespace oomph {
 
-//==============================================================================
+//============================================================================
 /// Pseudo-Elastic Solid element class to overload the Block Preconditioner
 /// methods ndof_types() and get_dof_numbers_for_unknowns() to differentiate
 /// between DOFs subject to Lagrange multiplier and those that are not.
-//==============================================================================
+//============================================================================
 template <class ELEMENT>
 class PseudoElasticBulkElement : 
  public virtual ELEMENT
@@ -132,6 +132,10 @@ public:
   }
 };
 
+
+
+
+
 //===========start_face_geometry==============================================
 /// FaceGeometry of wrapped element is the same as the underlying element
 //============================================================================
@@ -142,9 +146,10 @@ class FaceGeometry<PseudoElasticBulkElement<ELEMENT> > :
 };
 
 
+
 }
 
-
+#ifdef HAVE_HYPRE
 
 //=========================================================================
 /// Navier Stokes LSC Preconditioner Subsidiary Helper
@@ -167,6 +172,8 @@ namespace LSC_Preconditioner_Helper
  }
 }
 
+
+
 //=========================================================================
 /// Real Solid Preconditioner Subsidiary Helper
 //=========================================================================
@@ -186,6 +193,7 @@ namespace Real_Solid_Preconditioner_Helper
  }
 }
 
+#endif
 
 
 //=========================================================================

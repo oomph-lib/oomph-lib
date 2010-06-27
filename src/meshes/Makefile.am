@@ -82,6 +82,12 @@ library_includedir=$(includedir)/meshes
 #These are the header files that are to be placed in subdirectory
 library_include_HEADERS=$(headers_and_sources)
 
+# Required libraries 
+#-------------------
+# Include path for library headers -- need to refer to include files
+# in src as they will not have been installed yet! 
+INCLUDES = -I$(top_srcdir)/external_src 
+
 # Include instructions how to build the combined meshes
 # (generated automatically from mesh_names.list)
 include $(srcdir)/mesh_instructions.aux

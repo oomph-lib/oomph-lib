@@ -1,5 +1,5 @@
 # Subdirectories get built into individual libraries
-SUBDIRS = oomph_superlu_3.0 oomph_metis_4.0 oomph_hsl oomph_crbond_bessel oomph_arpack
+SUBDIRS = oomph_superlu_3.0 oomph_metis_4.0 oomph_hsl oomph_crbond_bessel oomph_arpack oomph_triangle
 
 
 # Check if blas is already available

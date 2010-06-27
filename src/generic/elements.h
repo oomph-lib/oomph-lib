@@ -3969,6 +3969,32 @@ public:
 ///////////////////////////////////////////////////////////////////////
 
 
+//=========================================================================
+/// Base class for elements that can specify a drag and torque
+/// (about the origin) -- typically used for immersed particle 
+/// computations.
+//=========================================================================
+class ElementWithDragFunction
+{
+
+public:
+ 
+ /// Empty constructor
+ ElementWithDragFunction(){}
+
+ /// \short Function that specifies the drag force and the torque about
+ /// the origin
+ virtual void get_drag_and_torque(Vector<double>& drag_force,
+                                  Vector<double>& drag_torque)=0;
+
+};
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
 //======================================================================
 /// Basic-ified FaceElement, without any of the functionality of
 /// of actual FaceElements -- it's just a  surface element of the
@@ -4050,7 +4076,6 @@ public:
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
-
 
 }
 

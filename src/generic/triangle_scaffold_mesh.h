@@ -34,43 +34,44 @@
 namespace oomph
 {
 
-
 //=====================================================================
 /// The Triangle data structure, modified from the triangle.h header
-/// supplied with triangle 1.6. by J. R. Schewchuk. 
+/// supplied with triangle 1.6. by J. R. Schewchuk. We need to define
+/// this here separately because we can't include a c header directly
+/// into C++ code!
 //=====================================================================
 struct triangulateio {
  ///Pointer to list of points x coordinate followed by y coordinate
- double *pointlist;                                         
+ double *pointlist;
  ///Pointer to list of point attributes
- double *pointattributelist;          
+ double *pointattributelist;
  ///Pointer to list of point markers
- int *pointmarkerlist;                                       
- int numberofpoints;                                           
- int numberofpointattributes;                                
+ int *pointmarkerlist;
+ int numberofpoints;
+ int numberofpointattributes;
 
- int *trianglelist;                                          
- double *triangleattributelist;                                
- double *trianglearealist;                                     
- int *neighborlist;                                          
- int numberoftriangles;                                      
- int numberofcorners;                                        
- int numberoftriangleattributes;                             
+ int *trianglelist;
+ double *triangleattributelist;
+ double *trianglearealist;
+ int *neighborlist;
+ int numberoftriangles;
+ int numberofcorners;
+ int numberoftriangleattributes;
  
- int *segmentlist;                                           
- int *segmentmarkerlist;                                     
- int numberofsegments;                                       
+ int *segmentlist;
+ int *segmentmarkerlist;
+ int numberofsegments;
  
- double *holelist;                       
- int numberofholes;                    
+ double *holelist;
+ int numberofholes;
  
- double *regionlist;                     
- int numberofregions;                  
+ double *regionlist;
+ int numberofregions;
  
- int *edgelist;                            
- int *edgemarkerlist;          
- double *normlist;               
- int numberofedges;            
+ int *edgelist;
+ int *edgemarkerlist;  // <---- contains boundary ID (offset by one)
+ double *normlist;
+ int numberofedges;
 };
 
 
@@ -84,15 +85,14 @@ class TriangleScaffoldMesh : public virtual Mesh
 public:
  
  /// Empty constructor
- TriangleScaffoldMesh() {}
+ TriangleScaffoldMesh() {} 
 
  /// \short Constructor: Pass the filenames of the triangle files
  TriangleScaffoldMesh(const std::string& node_file_name,
                       const std::string& element_file_name,
                       const std::string& poly_file_name);
  
-
- /// \short Constructir that takes a triangulate data structure
+ /// \short Constructor: Pass the triangulateio object
  TriangleScaffoldMesh(triangulateio &triangle_data); 
 
  /// Broken copy constructor
@@ -100,7 +100,6 @@ public:
   { 
    BrokenCopy::broken_copy("TriangleScaffoldMesh");
   } 
-
  
  /// Broken assignment operator
  void operator=(const TriangleScaffoldMesh&) 
@@ -122,6 +121,9 @@ public:
  /// \short Return the attribute of the element e
  double element_attribute(const unsigned &e) const
   {return Element_attribute[e];}
+ 
+ // Vectors of hole centre // hierher kill?
+ Vector<Vector<double> >& hole_centre(){return Hole_centre;}
 
 protected:
 
@@ -132,6 +134,8 @@ protected:
  /// \short Vector of double attributes for each element
  Vector<double> Element_attribute;
 
+ // Vectors of hole centre // hierher kill?
+ Vector<Vector<double> > Hole_centre;
 };
 
 }

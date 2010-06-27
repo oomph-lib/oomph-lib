@@ -126,14 +126,14 @@ $(srcdir)/stat.h:
 clean-local:                                           
 	if [ -L $(srcdir)/all_arpack_sources.f ] || ( [ -e $(srcdir)/all_arpack_sources.f ] && [ ! -s $(srcdir)/all_arpack_sources.f ] ); then \
 	     echo "Removing empty file or symbolic link to private_external_src/arpack/all_arpack_sources.f";\
-	     rm $(srcdir)/all_arpack_sources.f;\
+	     rm -f $(srcdir)/all_arpack_sources.f;\
 	fi;         	
 	if [ -L $(srcdir)/debug.h ] || ( [ -e $(srcdir)/debug.h ] && [ ! -s $(srcdir)/debug.h ] ); then \
 	     echo "Removing empty file or symbolic link to private_external_src/arpack/debug.h";\
-	     rm $(srcdir)/debug.h;\
+	     rm -f $(srcdir)/debug.h;\
 	fi;         	
 	if [ -L $(srcdir)/stat.h ] || ( [ -e $(srcdir)/stat.h ] && [ ! -s $(srcdir)/stat.h ] ); then \
 	     echo "Removing empty file or symbolic link to private_external_src/arpack/stat.h";\
-	     rm $(srcdir)/stat.h;\
+	     rm -f $(srcdir)/stat.h;\
 	fi;         	
-	rm $(libname).h
+	rm -f $(libname).h

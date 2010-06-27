@@ -345,6 +345,18 @@ class Z2ErrorEstimator : public virtual ErrorEstimator
   
   /// Empty virtual destructor
   virtual ~Z2ErrorEstimator(){}
+
+  /// \short Compute the elemental error measures for a given mesh
+  /// and store them in a vector.  
+ void get_element_errors(OomphCommunicator* comm_pt, Mesh*& mesh_pt, 
+                         Vector<double>& elemental_error)
+  {
+   // Create dummy doc info object and switch off output
+   DocInfo doc_info;
+   doc_info.doc_flag()=false;
+   // Forward call to version with doc.
+   get_element_errors(comm_pt,mesh_pt,elemental_error,doc_info);
+  }
   
   /// \short Compute the elemental error measures for a given mesh
   /// and store them in a vector.  
