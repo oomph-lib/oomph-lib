@@ -421,7 +421,7 @@ void MumpsSolver::solve(DoubleMatrixBase* const &matrix_pt,
 
 #ifdef PARANOID
  // check that the rhs vector is setup
- if (!rhs.distribution_pt()->setup())
+ if (!rhs.distribution_pt()->built())
   {
    std::ostringstream error_message_stream;
    error_message_stream 
@@ -572,7 +572,7 @@ void MumpsSolver::resolve(const DoubleVector &rhs, DoubleVector &result)
 {
 #ifdef PARANOID
  // check that the rhs vector is setup
- if (!rhs.distribution_pt()->setup())
+ if (!rhs.distribution_pt()->built())
   {
    std::ostringstream error_message_stream;
    error_message_stream 
@@ -583,7 +583,7 @@ void MumpsSolver::resolve(const DoubleVector &rhs, DoubleVector &result)
   }
  // check that the rhs distribution is the same as the distribution as this 
  // solver
- if (!(*rhs.distribution_pt() == *Distribution_pt))
+ if (!(*rhs.distribution_pt() == *distribution_pt()))
   {
    std::ostringstream error_message_stream;
    error_message_stream 
@@ -593,9 +593,9 @@ void MumpsSolver::resolve(const DoubleVector &rhs, DoubleVector &result)
                        OOMPH_EXCEPTION_LOCATION);
   }
  
- // if the result vector is setup then check it has the same distribution
+ // if the result vector is distributed then check it has the same distribution
  // as the rhs
- if (result.distribution_setup())
+ if (result.distributed())
   {
    if (!(*result.distribution_pt() == *rhs.distribution_pt()))
     {

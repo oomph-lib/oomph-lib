@@ -350,7 +350,7 @@ namespace oomph
     // Dummy for hole number
     unsigned dummy_hole;
     // Loop over the holes to get centre coords
-    for(unsigned ihole;ihole<nhole;ihole++)
+    for(unsigned ihole=0;ihole<nhole;ihole++)
      {
       Hole_centre[ihole].resize(2);
       

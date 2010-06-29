@@ -3982,6 +3982,9 @@ public:
  /// Empty constructor
  ElementWithDragFunction(){}
 
+ /// Empty virtual destructor
+ virtual ~ElementWithDragFunction(){}
+
  /// \short Function that specifies the drag force and the torque about
  /// the origin
  virtual void get_drag_and_torque(Vector<double>& drag_force,

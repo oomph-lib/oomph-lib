@@ -186,8 +186,8 @@ TriangleMeshPolygon::TriangleMeshPolygon(const Vector<TriangleMeshPolyLine*>&
       }
     }
 #endif
-     
-    }
+   
+  }
    
 
 

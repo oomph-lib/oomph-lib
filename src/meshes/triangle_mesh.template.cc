@@ -1423,11 +1423,11 @@ namespace oomph
     // Odd values represent the y coordinate
     if (count_point%2==0)
      {
-      x_coord[count_point*0.5] = triangle_in.pointlist[count_point];
+      x_coord[count_point/2] = triangle_in.pointlist[count_point];
      }
     else
      {
-      y_coord[(count_point-1)*0.5] = triangle_in.pointlist[count_point];
+      y_coord[(count_point-1)/2] = triangle_in.pointlist[count_point];
      }
    }
 
