@@ -202,7 +202,7 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
  // Loop over all elements
  for (unsigned e=0;e<nelem;e++)
   {
-   FiniteElement* el_pt=mesh_pt->finite_element_pt(e);
+   GeneralisedElement* el_pt=mesh_pt->element_pt(e);
 
    // Add all global eqn numbers
    unsigned ndof=el_pt->ndof();
@@ -549,7 +549,7 @@ void METIS::partition_distributed_mesh
  unsigned count_non_halo=0;
  for (unsigned e=0; e<n_elem; e++)
   {
-   FiniteElement* el_pt=mesh_pt->finite_element_pt(e);
+   GeneralisedElement* el_pt=mesh_pt->element_pt(e);
    if (!el_pt->is_halo())
     {
      // Get global equation numbers
@@ -605,7 +605,7 @@ void METIS::partition_distributed_mesh
 
  for (unsigned e=0;e<n_elem;e++)
   {
-   FiniteElement* el_pt=mesh_pt->finite_element_pt(e);   
+   GeneralisedElement* el_pt=mesh_pt->element_pt(e);   
    if (!el_pt->is_halo())
     {
      // Loop over eqn numbers for this element and add to vector

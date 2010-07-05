@@ -57,10 +57,10 @@ namespace oomph
  ThinLayerBrickOnTetMesh<ELEMENT>::ThinLayerBrickOnTetMesh(
   Mesh* tet_mesh_pt, 
   const Vector<unsigned>& boundary_ids,
-  const double& h_thick,
+  ThicknessFctPt thickness_fct_pt,
   const unsigned& nlayer,
   const Vector<Vector<unsigned> >& in_out_boundary_id,
-  TimeStepper* time_stepper_pt)
+  TimeStepper* time_stepper_pt) : Thickness_fct_pt(thickness_fct_pt)
  {
   
   // Figure out if the tet mesh is a solid mesh
@@ -1607,13 +1607,17 @@ namespace oomph
      }
    
     Node* base_node_pt=(*it).first;
+    Vector<double> base_pos(3);
+    base_node_pt->position(base_pos);
+    double h_thick;
+    Thickness_fct_pt(base_pos,h_thick);     
     Vector<Node*> layer_node_pt=connected_node_pt[base_node_pt];
     unsigned n=layer_node_pt.size();
     for (unsigned j=0;j<n;j++)
      {
       for (unsigned i=0;i<3;i++)
        {             
-        layer_node_pt[j]->x(i)=base_node_pt->x(i)+
+        layer_node_pt[j]->x(i)=base_pos[i]+
          h_thick*double(j+1)/double(n)*unit_normal[i];
        }
      }

@@ -55,9 +55,9 @@ namespace oomph {
  /// 0 - x displacement (without lagr mult traction)\n
  /// 1 - y displacement (without lagr mult traction)\n
  /// 2 - z displacement (without lagr mult traction)\n
- /// 4 - x displacement (with lagr mult traction)\n
- /// 5 - y displacement (with lagr mult traction)\n
- /// 6 - z displacement (with lagr mult traction)\n
+ /// 3 - x displacement (with lagr mult traction)\n
+ /// 4 - y displacement (with lagr mult traction)\n
+ /// 5 - z displacement (with lagr mult traction)\n
  //============================================================================
  class PseudoElasticFSIPreconditioner : 
   public BlockPreconditioner<CRDoubleMatrix>

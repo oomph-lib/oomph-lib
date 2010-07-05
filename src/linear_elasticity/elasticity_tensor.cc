@@ -33,27 +33,27 @@ namespace oomph
  ///\short Translation scheme that takes account of the symmetries of the 
  ///tensor. The independent coefficients are related to the coefficients of
  ///the elasticity tensor as follows:
- /**\f[\begin{array}{cc}    0 & C_{1111} \\
-                            1 & C_{1112} \\
-                            2 & C_{1122} \\
-                            3 & C_{1212} \\
-                            4 & C_{1222} \\
-                            5 & C_{2222} \\
-                            6 & C_{1113} \\
-                            7 & C_{1123} \\
-                            8 & C_{1133} \\
-                            9 & C_{1213} \\
-                            10 & C_{1223} \\
-                            11 & C_{1233} \\
-                            12 & C_{1313} \\
-                            13 & C_{1322} \\ 
-                            14 & C_{1323} \\
-                            15 & C_{1333} \\
-                            16 & C_{2223} \\
-                            17 & C_{2233} \\
-                            18 & C_{2323} \\
-                            19 & C_{2333} \\
-                            20 & C_{3333} 
+ /**\f[\begin{array}{cc}    0 & E_{1111} \\
+                            1 & E_{1112} \\
+                            2 & E_{1122} \\
+                            3 & E_{1212} \\
+                            4 & E_{1222} \\
+                            5 & E_{2222} \\
+                            6 & E_{1113} \\
+                            7 & E_{1123} \\
+                            8 & E_{1133} \\
+                            9 & E_{1213} \\
+                            10 & E_{1223} \\
+                            11 & E_{1233} \\
+                            12 & E_{1313} \\
+                            13 & E_{1322} \\ 
+                            14 & E_{1323} \\
+                            15 & E_{1333} \\
+                            16 & E_{2223} \\
+                            17 & E_{2233} \\
+                            18 & E_{2323} \\
+                            19 & E_{2333} \\
+                            20 & E_{3333} 
                             \end{array}\f] **/
  const unsigned ElasticityTensor::Index[3][3][3][3] = 
  {

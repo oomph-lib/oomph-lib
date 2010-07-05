@@ -46,6 +46,10 @@ namespace oomph
  
    public:
  
+  /// \short Function pointer to function that specifies the wall thickness
+  /// as a fct of the coordinates of the inner surface
+  typedef void (*ThicknessFctPt)(const Vector<double>& x, double& h_thick);
+  
   /// \short Constructor: Specify (quadratic) tet mesh, boundary IDs of 
   /// boundary on which the current mesh is to be erected (in an FSI context
   /// this boundary tends to be the FSI boundary of the fluid mesh. Also 
@@ -62,7 +66,7 @@ namespace oomph
   /// Timestepper defaults to steady pseudo-timestepper.
   ThinLayerBrickOnTetMesh(Mesh* tet_mesh_pt, 
                           const Vector<unsigned>& boundary_ids,
-                          const double& h_thick,
+                          ThicknessFctPt thickness_fct_pt,
                           const unsigned& nlayer,
                           const Vector<Vector<unsigned> >& in_out_boundary_id,
                           TimeStepper* time_stepper_pt=
@@ -109,6 +113,9 @@ namespace oomph
   /// mesh boundaries that make up the specified in/outflow boundaries
   Vector<Vector<unsigned> > In_out_boundary_id;
 
+  /// hierher
+  ThicknessFctPt Thickness_fct_pt;
+
  };
 
 
@@ -132,6 +139,10 @@ namespace oomph
  
    public:
  
+  /// \short Function pointer to function that specifies the wall thickness
+  /// as a fct of the coordinates of the inner surface
+  typedef void (*ThicknessFctPt)(const Vector<double>& x, double& h_thick);
+  
   /// \short Constructor: Specify (quadratic) tet mesh, boundary IDs of 
   /// boundary on which the current mesh is to be erected (in an FSI context
   /// this boundary tends to be the FSI boundary of the fluid mesh. Also 
@@ -146,17 +157,18 @@ namespace oomph
   /// faces in the underlying fluid mesh. Finally, the "outer" boundary
   /// gets its own boundary ID. 
   /// Timestepper defaults to steady pseudo-timestepper.
-  RefineableThinLayerBrickOnTetMesh(Mesh* tet_mesh_pt, 
-                                    const Vector<unsigned>& boundary_ids,
-                                    const double& h_thick,
-                                    const unsigned& nlayer,
-                                    const Vector<Vector<unsigned> >& 
-                                    in_out_boundary_id,
-                                    TimeStepper* time_stepper_pt=
-                                    &Mesh::Default_TimeStepper) :
+  RefineableThinLayerBrickOnTetMesh(
+   Mesh* tet_mesh_pt, 
+   const Vector<unsigned>& boundary_ids,
+   ThicknessFctPt thickness_fct_pt,
+   const unsigned& nlayer,
+   const Vector<Vector<unsigned> >& 
+   in_out_boundary_id,
+   TimeStepper* time_stepper_pt=
+   &Mesh::Default_TimeStepper) :
    ThinLayerBrickOnTetMesh<ELEMENT>(tet_mesh_pt, 
                                     boundary_ids,
-                                    h_thick,
+                                    thickness_fct_pt,
                                     nlayer,
                                     in_out_boundary_id,
                                     time_stepper_pt)
@@ -189,6 +201,10 @@ namespace oomph
  
    public:
  
+  /// \short Function pointer to function that specifies the wall thickness
+  /// as a fct of the coordinates of the inner surface
+  typedef void (*ThicknessFctPt)(const Vector<double>& x, double& h_thick);
+  
   /// \short Constructor: Specify (quadratic) tet mesh, boundary IDs of 
   /// boundary on which the current mesh is to be erected (in an FSI context
   /// this boundary tends to be the FSI boundary of the fluid mesh. Also 
@@ -205,7 +221,7 @@ namespace oomph
   /// Timestepper defaults to steady pseudo-timestepper.
   SolidThinLayerBrickOnTetMesh(Mesh* tet_mesh_pt, 
                                const Vector<unsigned>& boundary_ids,
-                               const double& h_thick,
+                               ThicknessFctPt thickness_fct_pt,
                                const unsigned& nlayer,
                                const Vector<Vector<unsigned> >& 
                                in_out_boundary_id,
@@ -213,7 +229,7 @@ namespace oomph
                                &Mesh::Default_TimeStepper) :
    ThinLayerBrickOnTetMesh<ELEMENT>(tet_mesh_pt, 
                                     boundary_ids,
-                                    h_thick,
+                                    thickness_fct_pt,
                                     nlayer,
                                     in_out_boundary_id,
                                     time_stepper_pt)
@@ -249,6 +265,10 @@ namespace oomph
    
     public:
  
+  /// \short Function pointer to function that specifies the wall thickness
+  /// as a fct of the coordinates of the inner surface
+  typedef void (*ThicknessFctPt)(const Vector<double>& x, double& h_thick);
+  
   /// \short Constructor: Specify (quadratic) tet mesh, boundary IDs of 
   /// boundary on which the current mesh is to be erected (in an FSI context
   /// this boundary tends to be the FSI boundary of the fluid mesh. Also 
@@ -265,7 +285,7 @@ namespace oomph
   /// Timestepper defaults to steady pseudo-timestepper.
     RefineableSolidThinLayerBrickOnTetMesh(Mesh* tet_mesh_pt, 
                                            const Vector<unsigned>& boundary_ids,
-                                           const double& h_thick,
+                                           ThicknessFctPt thickness_fct_pt,
                                            const unsigned& nlayer,
                                            const Vector<Vector<unsigned> >& 
                                            in_out_boundary_id,
@@ -273,7 +293,7 @@ namespace oomph
                                            &Mesh::Default_TimeStepper) :
    ThinLayerBrickOnTetMesh<ELEMENT>(tet_mesh_pt, 
                                     boundary_ids,
-                                    h_thick,
+                                    thickness_fct_pt,
                                     nlayer,
                                     in_out_boundary_id,
                                     time_stepper_pt)

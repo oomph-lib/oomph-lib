@@ -181,6 +181,9 @@ public:
 
    //Call the generic FD jacobian calculation
    FaceGeometry<ELEMENT>::fill_in_jacobian_from_solid_position_by_fd(jacobian);
+   
+   //Derivs w.r.t. to any external data (e.g. during displacement control)
+   this->fill_in_jacobian_from_external_by_fd(residuals,jacobian);
    }
 
  /// \short Output function
@@ -506,6 +509,9 @@ public virtual SolidTractionElement<ELEMENT>,
    // Jacobian only contains derivatives w.r.t. to positions which we
    // evaluate by finite differencing
    FaceGeometry<ELEMENT>::fill_in_jacobian_from_solid_position_by_fd(jacobian);
+
+   //Derivs w.r.t. to any external data (e.g. during displacement control)
+   this->fill_in_jacobian_from_external_by_fd(residuals,jacobian);
   }
   
 
@@ -1749,6 +1755,7 @@ protected:
    return this->dim()+1;
   };
  
+
  /// \short Create a list of pairs for all unknowns in this element,
  /// so that the first entry in each pair contains the global equation
  /// number of the unknown, while the second one contains the number

@@ -48,5 +48,7 @@ template class TLinearElasticityElement<2,4>;
 
 template class TLinearElasticityElement<3,2>;
 template class TLinearElasticityElement<3,3>;
+// no integration scheme for this one yet...
+// template class TLinearElasticityElement<3,4>;
 
 }

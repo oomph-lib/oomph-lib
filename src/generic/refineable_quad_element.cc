@@ -875,8 +875,14 @@ void RefineableQElement<2>::build(Mesh*& mesh_pt,
                //Case when there are no boundaries, we are in big trouble
                if(boundaries.size() == 0)
                 {
+                 std::ostringstream error_stream;
+                 error_stream    
+                  << "Periodic node is not on a boundary...\n"
+                  << "Coordinates: " 
+                  << created_node_pt->x(0) << " "
+                  << created_node_pt->x(1) << "\n";
                  throw OomphLibError(
-                  "Periodic node is not on a boundary...\n",
+                  error_stream.str(),
                   "RefineableQElement<2>::build()",
                   OOMPH_EXCEPTION_LOCATION);
                 }

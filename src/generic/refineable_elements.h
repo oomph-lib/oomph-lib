@@ -417,7 +417,7 @@ class RefineableElement : public virtual FiniteElement
 
 
   /// \short Max. allowed discrepancy in element integrity check
- static double max_integrity_tolerance()
+ static double& max_integrity_tolerance()
   { return Max_integrity_tolerance;}
 
   /// \short The purpose of this function is to identify all possible

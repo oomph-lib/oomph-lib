@@ -48,22 +48,14 @@ namespace oomph
 namespace Helper_namespace_for_mesh_smoothing
 {
 
- /// First Lame parameter (for smoothing by linear elasticity)
- double Lambda = 0.7;
-
- /// Second Lame parameter (for smoothing by linear elasticity)
- double Mu = 1.0;
-
- /// The elasticity tensor  (for smoothing by linear elasticity)
- IsotropicElasticityTensor Isotropic_elasticity_tensor(Lambda,Mu);
-
-
-
- /// Poisson's ratio  (for smoothing by nonlinear elasticity)
+ /// Poisson's ratio  (for smoothing by linear or nonlinear elasticity)
  double Nu=0.3;
 
- /// Young's modulus (for smoothing by nonlinear elasticity)
+ /// Young's modulus (for smoothing by linear or nonlinear elasticity)
  double E=1.0;
+
+ /// The elasticity tensor  (for smoothing by linear elasticity)
+ IsotropicElasticityTensor Isotropic_elasticity_tensor(Nu); 
 
  /// Create constitutive law (for smoothing by nonlinear elasticity)
  ConstitutiveLaw* Constitutive_law_pt=new GeneralisedHookean(&Nu,&E);

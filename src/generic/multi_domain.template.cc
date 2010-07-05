@@ -233,25 +233,25 @@ namespace oomph
      t_start=TimingHelpers::timer();
     }
 
-#ifdef OOMPH_HAS_MPI
-   // Print a warning for the case where the external mesh is solid and 
-   // the problem has been distributed - this has not yet been tested
-   if (problem_pt->problem_has_been_distributed())
-    {
-     SolidMesh* solid_mesh_pt=dynamic_cast<SolidMesh*>(external_mesh_pt);
-     if (solid_mesh_pt!=0)
-      {
-       std::ostringstream warning_stream;
-       warning_stream << "Multi-domain method has not been comprehensively "
-                      << "tested for \n distributed problems where the "
-                      << "external mesh is a SolidMesh." << std::endl;
-       OomphLibWarning(
-        warning_stream.str(),
-        "Multi_domain_functions::aux_setup_multi_domain_interaction(...)",
-        OOMPH_EXCEPTION_LOCATION);
-      }
-    }
-#endif
+// #ifdef OOMPH_HAS_MPI
+//    // Print a warning for the case where the external mesh is solid and 
+//    // the problem has been distributed - this has not yet been tested
+//    if (problem_pt->problem_has_been_distributed())
+//     {
+//      SolidMesh* solid_mesh_pt=dynamic_cast<SolidMesh*>(external_mesh_pt);
+//      if (solid_mesh_pt!=0)
+//       {
+//        std::ostringstream warning_stream;
+//        warning_stream << "Multi-domain method has not been comprehensively "
+//                       << "tested for \n distributed problems where the "
+//                       << "external mesh is a SolidMesh." << std::endl;
+//        OomphLibWarning(
+//         warning_stream.str(),
+//         "Multi_domain_functions::aux_setup_multi_domain_interaction(...)",
+//         OOMPH_EXCEPTION_LOCATION);
+//       }
+//     }
+// #endif
 
    // Geometric object used to represent the external (face) mesh
    MeshAsGeomObject* mesh_geom_obj_pt=0;

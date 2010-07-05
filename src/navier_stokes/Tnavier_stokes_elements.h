@@ -595,9 +595,9 @@ public:
    // loop over the nodes
    for (unsigned n = 0; n < n_node; n++)
     {
-     // find the number of values at this node
-     unsigned nv = this->node_pt(n)->nvalue(); 
-
+     // find the number of Navier Stokes values at this node
+     unsigned nv = this->required_nvalue(n); 
+     
      //loop over these values
      for (unsigned v = 0; v < nv; v++)
       {

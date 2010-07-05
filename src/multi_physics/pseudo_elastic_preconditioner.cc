@@ -63,9 +63,14 @@ namespace oomph
     <TrilinosAztecOOSolver,MatrixBasedDiagPreconditioner>* prec_pt = 
     new InnerIterationPreconditioner
     <TrilinosAztecOOSolver,MatrixBasedDiagPreconditioner>;
-   prec_pt->max_iter() = 4;
-   prec_pt->solver_pt()->solver_type() = 
-    TrilinosAztecOOSolver::CG;
+   // Note: This makes CG a proper "inner iteration" for
+   // which GMRES (may) no longer converge. We should really
+   // use FGMRES or GMRESR for this. However, here the solver
+   // is so good that it'll converge very quickly anyway
+   // so there isn't much to be gained by limiting the number
+   // of iterations...
+   // prec_pt->max_iter() = 4;
+   prec_pt->solver_pt()->solver_type() = TrilinosAztecOOSolver::CG;
    prec_pt->solver_pt()->doc_time()=false;
    return prec_pt;
   }

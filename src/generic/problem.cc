@@ -1283,7 +1283,9 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
    unsigned nmesh=nsub_mesh();
 
 #ifdef PARANOID
-   bool report_stats=true;
+   // hierher possibly re-enable for serious debugging but it
+   // creates too much output during normal runs
+   bool report_stats=false;
 #endif
    if (nmesh==0)
     {

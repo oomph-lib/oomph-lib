@@ -51,12 +51,16 @@ namespace Global_Parameters
 
  double Mu = 1.0;
 
+ double E_young=Mu*(3.0*Lambda+2.0*Mu)/(Lambda+Mu);
+
+ double Nu=Lambda/(2.0*(Lambda+Mu));
+
  double Lx = 1.0;
 
  double Ly = 5.0;
 
  /// The elasticity tensor
- IsotropicElasticityTensor E(Lambda,Mu);
+ IsotropicElasticityTensor  E(Nu,E_young); //E(Lambda,Mu);
 
  /// The exact solution for infinite depth case
  void exact_solution(const Vector<double> &x,
@@ -160,6 +164,9 @@ PeriodicLoadProblem<ELEMENT>::PeriodicLoadProblem
     Bulk_mesh_pt->boundary_node_pt(1,n)
      ->make_periodic(Bulk_mesh_pt->boundary_node_pt(3,n));
    }
+
+  // hierher: cowboy stuff -- this won't work for general numbers
+  // of elements!
 
   //Setup the periodic neighbour information of the TreeRoots
   //Element 0 is next to Element 1

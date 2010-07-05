@@ -806,6 +806,25 @@ namespace CommandLineArgs
  /// Arguments themselves
  char** Argv;
 
+ /// Map to indicate an input flag as having been set
+ std::map<std::string,bool> Specified_command_line_flag;
+
+ /// Map to associate an input flag with a double -- specified via pointer
+ std::map<std::string,std::pair<bool,double*> > 
+ Specified_command_line_double_pt;
+
+ /// Map to associate an input flag with an int -- specified via pointer
+ std::map<std::string,std::pair<bool,int*> > 
+ Specified_command_line_int_pt;
+
+ /// Map to associate an input flag with an unsigned -- specified via pointer
+ std::map<std::string,std::pair<bool,unsigned*> > 
+ Specified_command_line_unsigned_pt;
+
+ /// Map to associate an input flag with a string -- specified via pointer
+ std::map<std::string,std::pair<bool,std::string*> > 
+ Specified_command_line_string_pt;
+
  /// Set values
  void setup(int argc, char** argv)
  {
@@ -819,10 +838,355 @@ namespace CommandLineArgs
   oomph_info << "You are running the program: " 
             << CommandLineArgs::Argv[0] << std::endl;
   oomph_info << "with the following command line args: " << std::endl;
+  std::stringstream str;
   for (int i=1;i<CommandLineArgs::Argc;i++)
    {
-    oomph_info << CommandLineArgs::Argv[i] << std::endl;
+    str << CommandLineArgs::Argv[i] << " ";
    }
+  oomph_info << str.str() << std::endl;
+ }
+
+
+ /// Specify possible argument-free command line flag
+ void specify_command_line_flag(const std::string& command_line_flag)
+ {
+  Specified_command_line_flag[command_line_flag]=false;
+ }
+
+ /// \short Specify possible command line flag that specifies a double, accessed
+ /// via pointer
+ void specify_command_line_flag(const std::string& command_line_flag,
+                                double* arg_pt)
+ {
+  Specified_command_line_double_pt[command_line_flag]=
+   std::make_pair(false,arg_pt);
+ }
+
+ /// \short Specify possible command line flag that specifies an int, accessed
+ /// via pointer
+ void specify_command_line_flag(const std::string& command_line_flag,
+                                int* arg_pt)
+ {
+  Specified_command_line_int_pt[command_line_flag]=
+   std::make_pair(false,arg_pt);
+ }
+
+ /// \short Specify possible command line flag that specifies an unsigned, 
+ /// accessed via pointer
+ void specify_command_line_flag(const std::string& command_line_flag,
+                                unsigned* arg_pt)
+ {
+  Specified_command_line_unsigned_pt[command_line_flag]=
+   std::make_pair(false,arg_pt);
+ }
+
+ /// \short Specify possible command line flag that specifies a string, 
+ /// accessed via pointer
+ void specify_command_line_flag(const std::string& command_line_flag,
+                                string* arg_pt)
+ {
+  Specified_command_line_string_pt[command_line_flag]=
+   std::make_pair(false,arg_pt);
+ }
+
+
+ /// \short Check if command line flag has been set (value will have been
+ /// assigned directly
+ bool command_line_flag_has_been_set(const std::string& flag)
+ {
+  for (std::map<std::string,bool>::iterator it=
+        Specified_command_line_flag.begin();
+       it!=Specified_command_line_flag.end();it++)
+   {
+    if ((*it).first==flag) return (*it).second;
+   }
+  for (std::map<std::string,std::pair<bool,double*> >::iterator it=
+        Specified_command_line_double_pt.begin();
+       it!=Specified_command_line_double_pt.end();it++)
+   {
+    if ((*it).first==flag) return ((*it).second).first;
+   }
+  for (std::map<std::string,std::pair<bool,int*> >::iterator it=
+        Specified_command_line_int_pt.begin();
+       it!=Specified_command_line_int_pt.end();it++)
+   {
+    if ((*it).first==flag) return ((*it).second).first;
+   }
+  for (std::map<std::string,std::pair<bool,unsigned*> >::iterator it=
+        Specified_command_line_unsigned_pt.begin();
+       it!=Specified_command_line_unsigned_pt.end();it++)
+   {
+    if ((*it).first==flag) return ((*it).second).first;
+   }
+  for (std::map<std::string,std::pair<bool,std::string*> >::iterator it=
+        Specified_command_line_string_pt.begin();
+       it!=Specified_command_line_string_pt.end();it++)
+   {
+    if ((*it).first==flag) return ((*it).second).first;
+   }
+  return false;
+ }
+
+ /// Document specified command line flags
+ void doc_specified_flags()
+ {
+  oomph_info << std::endl;
+  oomph_info << "Specified (and recognised) command line flags:\n" ;
+  oomph_info << "----------------------------------------------\n";
+  for (std::map<std::string,bool>::iterator it=
+        Specified_command_line_flag.begin();
+       it!=Specified_command_line_flag.end();it++)
+   {
+    if ((*it).second) oomph_info << (*it).first << std::endl;
+   }
+  for (std::map<std::string,std::pair<bool,double*> >::iterator it=
+        Specified_command_line_double_pt.begin();
+       it!=Specified_command_line_double_pt.end();it++)
+   {
+    if (((*it).second).first) oomph_info << (*it).first << " " 
+                                         << *(((*it).second).second) 
+                                         << std::endl;
+   }
+  for (std::map<std::string,std::pair<bool,int*> >::iterator it=
+        Specified_command_line_int_pt.begin();
+       it!=Specified_command_line_int_pt.end();it++)
+   {
+    if (((*it).second).first) oomph_info << (*it).first << " " 
+                                         << *(((*it).second).second) 
+                                         << std::endl;
+   }
+  for (std::map<std::string,std::pair<bool,unsigned*> >::iterator it=
+        Specified_command_line_unsigned_pt.begin();
+       it!=Specified_command_line_unsigned_pt.end();it++)
+   {
+    if (((*it).second).first) oomph_info << (*it).first << " " 
+                                         << *(((*it).second).second)
+                                         << std::endl;
+   }
+  for (std::map<std::string,std::pair<bool,std::string*> >::iterator it=
+        Specified_command_line_string_pt.begin();
+       it!=Specified_command_line_string_pt.end();it++)
+   {
+    if (((*it).second).first) oomph_info << (*it).first << " " 
+                                         << *(((*it).second).second)
+                                         << std::endl;
+   }
+  oomph_info << std::endl;
+ }
+
+
+ /// Document available command line flags
+ void doc_available_flags()
+ {
+  oomph_info << std::endl;
+  oomph_info << "Available command line flags:\n" ;
+  oomph_info << "-----------------------------\n";
+  for (std::map<std::string,bool>::iterator it=
+        Specified_command_line_flag.begin();
+       it!=Specified_command_line_flag.end();it++)
+   {
+    oomph_info << (*it).first << std::endl;
+   }
+  for (std::map<std::string,std::pair<bool,double*> >::iterator it=
+        Specified_command_line_double_pt.begin();
+       it!=Specified_command_line_double_pt.end();it++)
+   {
+    oomph_info << (*it).first << " <double> " << std::endl;
+   }
+  for (std::map<std::string,std::pair<bool,int*> >::iterator it=
+        Specified_command_line_int_pt.begin();
+       it!=Specified_command_line_int_pt.end();it++)
+   {
+    oomph_info << (*it).first << " <int> " << std::endl;
+   }
+  for (std::map<std::string,std::pair<bool,unsigned*> >::iterator it=
+        Specified_command_line_unsigned_pt.begin();
+       it!=Specified_command_line_unsigned_pt.end();it++)
+   {
+    oomph_info << (*it).first << " <unsigned> " << std::endl;
+   }
+  for (std::map<std::string,std::pair<bool,std::string*> >::iterator it=
+        Specified_command_line_string_pt.begin();
+       it!=Specified_command_line_string_pt.end();it++)
+   {
+    oomph_info << (*it).first << " <string> " << std::endl;
+   }
+  oomph_info << std::endl;
+ }
+
+
+
+ /// Helper function to check if command line index is legal
+ void check_arg_index(const int& argc,const int& arg_index)
+ {
+  if (arg_index>=argc)
+   {    
+    output();
+    doc_available_flags();
+    std::stringstream error_stream;
+    error_stream << "Tried to read more command line arguments than\n"
+                 << "specified. This tends to happen if a required argument\n"
+                 << "to a command line flag was omitted, e.g. by running \n\n"
+                 << "     ./a.out -some_double \n\n rather than\n\n"
+                 << "     ./a.out -some_double 1.23 \n\n"
+                 << "To aid the debugging I've output the available\n"
+                 << "command line arguments above.\n";
+    throw OomphLibError(
+     error_stream.str(),
+     "check_arg_index()",
+     OOMPH_EXCEPTION_LOCATION);
+   }
+ }
+
+
+
+ /// \short Parse command line, check for recognised flags and assign 
+ /// associated values
+ void parse_and_assign(int argc, char *argv[])
+ {
+
+  //Keep looping over command line arguments
+  int arg_index = 1;
+  while (arg_index < argc)
+   {
+
+    bool found_match=false;
+
+    if ( (strcmp(argv[arg_index], "-help") == 0 ) ||
+         (strcmp(argv[arg_index], "--help")== 0 ) )
+     {
+      oomph_info << "NOTE: You entered --help or -help on the commmand line\n";
+      oomph_info << "so I'm going to tell you about this code's\n";
+      oomph_info << "available command line flags and then return.\n";
+      doc_available_flags();
+
+#ifdef OOMPH_HAS_MPI
+      int flag;
+      MPI_Initialized(&flag);
+      if (flag!=0) MPI_Helpers::finalize();
+#endif
+      oomph_info << "Shutting down...\n";
+      exit(0);
+
+     }
+   
+
+    //Check if the flag has been previously specified as a simple argument free
+    //command line argument 
+    for (std::map<std::string,bool>::iterator it=
+          Specified_command_line_flag.begin();
+         it!=Specified_command_line_flag.end();it++)
+     {
+      if ((*it).first==argv[arg_index])
+       {
+        Specified_command_line_flag[argv[arg_index]]=true;
+        found_match=true;      
+        break;
+       }
+     }
+     
+    if (!found_match)
+     {      
+      //Check if the flag has been previously specified as a 
+      //command line argument that specifies (and is followed by) a double
+      for (std::map<std::string,std::pair<bool,double*> >::iterator it=
+            Specified_command_line_double_pt.begin();
+           it!=Specified_command_line_double_pt.end();it++)
+       {
+        if ((*it).first==argv[arg_index])
+         {
+          //Next command line argument specifies the double. Set it via
+          //the pointer
+          arg_index++;
+          check_arg_index(argc,arg_index);
+          ((*it).second).first=true;
+          *(((*it).second).second)=atof(argv[arg_index]);
+          found_match=true;      
+          break;
+         }
+       }
+     }
+
+
+    if (!found_match)
+     {      
+      //Check if the flag has been previously specified as a 
+      //command line argument that specifies (and is followed by) an int
+      for (std::map<std::string,std::pair<bool,int*> >::iterator it=
+            Specified_command_line_int_pt.begin();
+           it!=Specified_command_line_int_pt.end();it++)
+       {
+        if ((*it).first==argv[arg_index])
+         {
+          //Next command line argument specifies the int. Set it via
+          //the pointer
+          arg_index++;
+          check_arg_index(argc,arg_index);
+          ((*it).second).first=true;
+          *(((*it).second).second)=atoi(argv[arg_index]);
+          found_match=true;      
+          break;
+         }
+       }
+     }
+
+
+    if (!found_match)
+     {      
+      //Check if the flag has been previously specified as a 
+      //command line argument that specifies (and is followed by) an unsigned
+      for (std::map<std::string,std::pair<bool,unsigned*> >::iterator it=
+            Specified_command_line_unsigned_pt.begin();
+           it!=Specified_command_line_unsigned_pt.end();it++)
+       {
+        if ((*it).first==argv[arg_index])
+         {
+          //Next command line argument specifies the unsigned. Set it via
+          //the pointer
+          arg_index++;
+          check_arg_index(argc,arg_index);
+          ((*it).second).first=true;
+          *(((*it).second).second)=unsigned(atoi(argv[arg_index]));
+          found_match=true;      
+          break;
+         }
+       }
+     }
+
+
+    if (!found_match)
+     {      
+      //Check if the flag has been previously specified as a 
+      //command line argument that specifies (and is followed by) a string
+      for (std::map<std::string,std::pair<bool,std::string*> >::iterator it=
+            Specified_command_line_string_pt.begin();
+           it!=Specified_command_line_string_pt.end();it++)
+       {
+        if ((*it).first==argv[arg_index])
+         {
+          //Next command line argument specifies the string. Set it via
+          //the pointer
+          arg_index++;
+          check_arg_index(argc,arg_index);
+          ((*it).second).first=true;
+          *(((*it).second).second)=argv[arg_index];
+          found_match=true;      
+          break;
+         }
+       }
+     }
+
+    arg_index++;
+   }
+ }
+
+
+
+ /// \short Parse previously specified command line, check for 
+ /// recognised flags and assign associated values
+ void parse_and_assign()
+ {
+  parse_and_assign(Argc,Argv);
  }
 
 }

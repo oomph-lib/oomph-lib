@@ -1667,7 +1667,8 @@ void set_pseudo_elastic_fsi_solver(PseudoElasticFSIProblem& problem)
  p_prec_pt->amg_simple_smoother() = 3;
  p_prec_pt->hypre_method() = HyprePreconditioner::BoomerAMG;
  p_prec_pt->amg_strength() = 0.25;
- p_prec_pt->amg_coarsening() = 6;
+ // Use 6 for parallel (Falgout) or 3 (Ruge Stuben)or serial
+ p_prec_pt->amg_coarsening() = 6; 
  p_prec_pt->doc_time() = false;
  ns_prec_pt->set_p_preconditioner(p_prec_pt);
 */

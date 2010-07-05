@@ -460,9 +460,13 @@ class ElementWithExternalElement: public virtual FiniteElement
          std::ostringstream error_stream;
          error_stream
           << "Storage for the external elements has not been allocated.\n"
-          << "initialise_external_element_storage() must be called\n"
-          << "followed by a function that calls set_external_storage()\n";
-         
+          << "initialise_external_element_storage() must be called.\n"
+          << "This tends to be done automatically during the multi-domain\n"
+          << "setup procedures -- you're most likely to get this error\n"
+          << "because you have not specified the number of interactions\n"
+          << "that your ElementWithExternalElement is involved in.\n"
+          << "You ought to specify this with a call to\n\n"
+          << "     ElementWithExternalElement::set_ninteraction(...)\n\n";
          throw OomphLibError(
           error_stream.str(),
           "ElementWithExternalElement::check_storage_allocated()",

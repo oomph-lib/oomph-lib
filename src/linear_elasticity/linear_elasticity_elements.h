@@ -25,7 +25,7 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-//Header file for general solid mechanics elements
+//Header file for general linear elasticity elements
 
 //Include guards to prevent multiple inclusion of the header
 #ifndef OOMPH_LINEAR_ELASTICITY_ELEMENTS_HEADER
@@ -46,12 +46,12 @@
 namespace oomph
 {
 //=======================================================================
-/// A base class for elements that solve the equations of linaer 
-/// solid mechanics, 
-/// based on the principle of virtual displacements in Cartesian coordinates.
+/// A base class for elements that solve the equations of linear 
+/// elasticity in Cartesian coordinates.
 /// Combines a few generic functions that are shared by 
 /// LinearElasticityEquations
-/// and LinearElasticityEquationsWithPressure.
+/// and LinearElasticityEquationsWithPressure (hierher: The latter
+/// don't exist yet but will be written as soon as somebody needs them...)
 //=======================================================================
  template <unsigned DIM>
   class LinearElasticityEquationsBase : public virtual FiniteElement
@@ -62,7 +62,7 @@ namespace oomph
    /// component is stored. The default value, i, is appropriate for
    /// single-physics problems.
    virtual inline unsigned u_index_linear_elasticity(const unsigned i) const
-    {return i;}
+   {return i;}
    
    /// Compute vector of FE interpolated displacement u at local coordinate s
    void interpolated_u_linear_elasticity(const Vector<double> &s, 
@@ -71,8 +71,10 @@ namespace oomph
     {
      //Find number of nodes
      unsigned n_node = nnode();
+
      //Local shape function
      Shape psi(n_node);
+     
      //Find values of shape function
      shape(s,psi);
      
@@ -80,8 +82,10 @@ namespace oomph
       {
        //Index at which the nodal value is stored
        unsigned u_nodal_index = u_index_linear_elasticity(i);
+
        //Initialise value of u
        disp[i] = 0.0;
+
        //Loop over the local nodes and sum
        for(unsigned l=0;l<n_node;l++) 
         {
@@ -96,8 +100,10 @@ namespace oomph
     {
      //Find number of nodes
      unsigned n_node = nnode();
+
      //Local shape function
      Shape psi(n_node);
+
      //Find values of shape function
      shape(s,psi);
      
@@ -106,6 +112,7 @@ namespace oomph
      
      //Initialise value of u
      double interpolated_u = 0.0;
+
      //Loop over the local nodes and sum
      for(unsigned l=0;l<n_node;l++) 
       {
@@ -125,21 +132,21 @@ namespace oomph
    
    /// \short Constructor: Set null pointers for constitutive law and for
    /// isotropic growth function. Set physical parameter values to 
-   /// default values, switch off inertia and set body force to zero.
-   LinearElasticityEquationsBase() : Elasticity_tensor_pt(0),
-    Lambda_sq_pt(&Default_lambda_sq_value), Unsteady(false),
+   /// default values, switch on inertia and set body force to zero.
+    LinearElasticityEquationsBase() : Elasticity_tensor_pt(0),
+    Lambda_sq_pt(&Default_lambda_sq_value), Unsteady(true),
     Body_force_fct_pt(0) {}
    
    /// Return the pointer to the elasticity_tensor
    ElasticityTensor* &elasticity_tensor_pt() {return Elasticity_tensor_pt;}
-
-   /// Access function to get the elasticity tensor
+   
+   /// Access function to the entries in the elasticity tensor
    inline double E(const unsigned &i,const unsigned &j,
-                   const unsigned &k, const unsigned &l)
-    {
-     return (*Elasticity_tensor_pt)(i,j,k,l);
-    }
-
+                   const unsigned &k, const unsigned &l) const
+   {
+    return (*Elasticity_tensor_pt)(i,j,k,l);
+   }
+   
    ///Access function for timescale ratio (nondim density)
    const double& lambda_sq() const {return *Lambda_sq_pt;}
    
@@ -160,7 +167,7 @@ namespace oomph
    
    ///Pin the element's redundant solid pressures (needed for refinement)
    virtual void pin_elemental_redundant_nodal_solid_pressures() {}
-    
+   
    /// \short  Loop over all elements in Vector (which typically contains
    /// all the elements in a refineable solid mesh) and pin the nodal solid 
    /// pressure  degrees of freedom that are not being used. Function uses 
@@ -170,80 +177,70 @@ namespace oomph
    /// .
    /// which is empty by default and should be implemented for
    /// elements with nodal solid pressure degrees of freedom  
-   /// (e.g. solid elements with continuous pressure interpolation.)
+   /// (e.g. linear elasticity elements with continuous pressure interpolation.)
    static void pin_redundant_nodal_solid_pressures(
     const Vector<GeneralisedElement*>& element_pt)
-    {
-     // Loop over all elements and call the function that pins their
-     // unused nodal solid pressure data
-     unsigned n_element = element_pt.size();
-     for(unsigned e=0;e<n_element;e++)
-      {
-       dynamic_cast<LinearElasticityEquationsBase<DIM>*>(element_pt[e])->
-        pin_elemental_redundant_nodal_solid_pressures();
-      }
-    }
-
+   {
+    // Loop over all elements and call the function that pins their
+    // unused nodal solid pressure data
+    unsigned n_element = element_pt.size();
+    for(unsigned e=0;e<n_element;e++)
+     {
+      dynamic_cast<LinearElasticityEquationsBase<DIM>*>(element_pt[e])->
+       pin_elemental_redundant_nodal_solid_pressures();
+     }
+   }
    
    /// \short Return the Cauchy stress tensor, as calculated
    /// from the elasticity tensor at specified local coordinate
-   /// (needed by \c get_principal_stress(...), so I'm afraid I will
-   /// have to insist that you implement it...
-   //virtual void get_stress(const Vector<double> &s, 
-   //                        DenseMatrix<double> &sigma)=0;
+   /// Virtual so separaete versions can (and must!) be provided
+   /// for displacement and pressure-displacement formulations.
+   virtual void get_stress(const Vector<double> &s, 
+                           DenseMatrix<double> &sigma) const=0;
    
    /// \short Return the strain tensor
    void get_strain(const Vector<double> &s, DenseMatrix<double> &strain) const;
-      
    
-   /// \short Compute principal stress vectors and (scalar) principal stresses
-   /// at specified local coordinate. \c  principal_stress_vector(i,j)
-   /// is the j-th component of the i-th principal stress vector.
-   //void get_principal_stress(const Vector<double> &s,
-   //                          DenseMatrix<double>& principal_stress_vector,
-   //                          Vector<double>& principal_stress);
-   
-   
-   /// \short Evaluate body force at Lagrangian coordinate xi at present time
+   /// \short Evaluate body force at Eulerian coordinate x at present time
    /// (returns zero vector if no body force function pointer has been set)
-   inline void body_force(const Vector<double>& xi, 
+   inline void body_force(const Vector<double>& x, 
                           Vector<double>& b) const
-    {
-     //If no function has been set, return zero vector
-     if(Body_force_fct_pt==0)
-      {
-       // Get spatial dimension of element
-       unsigned n=dim();
-       for (unsigned i=0;i<n;i++)
-        {
-         b[i] = 0.0;
-        }
-      }
-     else
-      {
-       // Get body force
-       if (time_pt()!=0)
-        {
-         (*Body_force_fct_pt)(time_pt()->time(),xi,b);
-        }
-       else
-        {
-         (*Body_force_fct_pt)(0.0,xi,b);
-        }
-      }
-    }
-
-
-
-
+   {
+    //If no function has been set, return zero vector
+    if(Body_force_fct_pt==0)
+     {
+      // Get spatial dimension of element
+      unsigned n=dim();
+      for (unsigned i=0;i<n;i++)
+       {
+        b[i] = 0.0;
+       }
+     }
+    else
+     {
+      // Get body force
+      if (time_pt()!=0)
+       {
+        (*Body_force_fct_pt)(time_pt()->time(),x,b);
+       }
+      else
+       {
+        (*Body_force_fct_pt)(0.0,x,b);
+       }
+     }
+   }
+   
+   
+   
+   
    /// \short The number of "blocks" that degrees of freedom in this element
    /// are sub-divided into: for now lump them all into one block.
    /// Can be adjusted later
    unsigned nblock_types()
-    {
-     return 1;
-    }
- 
+   {
+    return 1;
+   }
+   
    /// \short Create a list of pairs for all unknowns in this element,
    /// so that the first entry in each pair contains the global equation
    /// number of the unknown, while the second one contains the number
@@ -252,63 +249,55 @@ namespace oomph
    /// scheme has been set up.) 
    void get_dof_numbers_for_unknowns(
     std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
-    {
-/*
-     // temporary pair (used to store block lookup prior to being added 
-     // to list)
-     std::pair<unsigned long,unsigned> block_lookup;
+   {
+
+    // temporary pair (used to store block lookup prior to being added 
+    // to list)
+    std::pair<unsigned long,unsigned> block_lookup;
+    
+    // number of nodes
+    const unsigned n_node = this->nnode();
+    
+    //Integer storage for local unknown
+    int local_unknown=0;
+    
+    //Loop over the nodes
+    for(unsigned n=0;n<n_node;n++)
+     {
+      //Loop over dimension
+      for(unsigned i=0;i<DIM;i++)
+       {
+        //If the variable is free
+        local_unknown = nodal_local_eqn(n,i);
+        
+        // ignore pinned values
+        if (local_unknown >= 0)
+         {
+          // store block lookup in temporary pair: First entry in pair
+          // is global equation number; second entry is block type
+          block_lookup.first = this->eqn_number(local_unknown);
+          block_lookup.second = 0;
+          
+          // add to list
+          block_lookup_list.push_front(block_lookup);
+          
+         }
+       }
+     }
+   }
    
-     // number of nodes
-     const unsigned n_node = this->nnode();
    
-     //Get the number of position dofs and dimensions at the node
-     const unsigned n_position_type = nnodal_position_type();
-     const unsigned nodal_dim = nodal_dimension();
-   
-     //Integer storage for local unknown
-     int local_unknown=0;
-   
-     //Loop over the nodes
-     for(unsigned n=0;n<n_node;n++)
-      {
-       //Loop over position dofs
-       for(unsigned k=0;k<n_position_type;k++)
-        {
-         //Loop over dimension
-         for(unsigned i=0;i<nodal_dim;i++)
-          {
-           //If the variable is free
-           local_unknown = position_local_eqn(n,k,i);
-         
-           // ignore pinned values
-           if (local_unknown >= 0)
-            {
-             // store block lookup in temporary pair: First entry in pair
-             // is global equation number; second entry is block type
-             block_lookup.first = this->eqn_number(local_unknown);
-             block_lookup.second = 0;
-           
-             // add to list
-             block_lookup_list.push_front(block_lookup);
-           
-            }
-          }
-        }
-        }*/
-    }
-      
-   
-  protected:
+    protected:
    
    /// Pointer to the elasticity tensor
    ElasticityTensor *Elasticity_tensor_pt;
-
+   
    /// Timescale ratio (non-dim. density)
    double* Lambda_sq_pt;
    
    /// Flag that switches inertia on/off
    bool Unsteady;
-
+   
    /// Pointer to body force function
    BodyForceFctPt Body_force_fct_pt;
    
@@ -318,9 +307,14 @@ namespace oomph
   };
  
  
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
 //=======================================================================
-/// A class for elements that solve the equations of solid mechanics, based
-/// on the principle of virtual displacements in cartesian coordinates.
+/// A class for elements that solve the equations of linear elasticity
+/// in cartesian coordinates.
 //=======================================================================
  template <unsigned DIM>
   class LinearElasticityEquations : public LinearElasticityEquationsBase<DIM>
@@ -329,61 +323,77 @@ namespace oomph
    
    /// \short  Constructor
    LinearElasticityEquations() {}
-
+   
+   /// Number of values required at node n.
    unsigned required_nvalue(const unsigned &n) const {return DIM;}
    
    /// \short Return the residuals for the solid equations (the discretised
    /// principle of virtual displacements)
    void fill_in_contribution_to_residuals(Vector<double> &residuals)
-    {
-     fill_in_generic_contribution_to_residuals_linear_elasticity(
-      residuals,GeneralisedElement::Dummy_matrix,0);
-    }
-
- 
-   virtual void fill_in_generic_contribution_to_residuals_linear_elasticity(
-    Vector<double> &residuals,DenseMatrix<double> &jacobian,unsigned flag);
+   {
+    fill_in_generic_contribution_to_residuals_linear_elasticity(
+     residuals,GeneralisedElement::Dummy_matrix,0);
+   }
+   
    
    /// The jacobian is calculated by finite differences by default,
    /// We need only to take finite differences w.r.t. positional variables
    /// For this element
    void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                          DenseMatrix<double> &jacobian)
-    {
-     //Add the contribution to the residuals
-     this->fill_in_generic_contribution_to_residuals_linear_elasticity(
-      residuals,jacobian,1);
-    }
+   {
+    //Add the contribution to the residuals
+    this->fill_in_generic_contribution_to_residuals_linear_elasticity(
+     residuals,jacobian,1);
+   }
+   
+   /// \short Return the Cauchy stress tensor, as calculated
+   /// from the elasticity tensor at specified local coordinate
+   void get_stress(const Vector<double> &s, 
+                   DenseMatrix<double> &sigma) const;
    
    
-   /// Output: x,y,[z],xi0,xi1,[xi2],gamma
+   /// Output: x,y,[z],u,v,[w]
    void output(std::ostream &outfile) 
-    {
-     unsigned n_plot=5;
-     output(outfile,n_plot);
-    }
+   {
+    unsigned n_plot=5;
+    output(outfile,n_plot);
+   }
    
-   /// Output: x,y,[z],xi0,xi1,[xi2],gamma
+   /// Output: x,y,[z],u,v,[w]
    void output(std::ostream &outfile, const unsigned &n_plot);
    
    
-   /// C-style output: x,y,[z],xi0,xi1,[xi2],gamma
+   /// C-style output: x,y,[z],u,v,[w]
    void output(FILE* file_pt) 
-    {
-     unsigned n_plot=5;
-     output(file_pt,n_plot);
-    }
+   {
+    unsigned n_plot=5;
+    output(file_pt,n_plot);
+   }
    
-   /// Output: x,y,[z],xi0,xi1,[xi2],gamma
+   /// Output: x,y,[z],u,v,[w]
    void output(FILE* file_pt, const unsigned &n_plot);
    
+   
+    private:
+
+
+   /// \short Private helper function to compute residuals and (if requested
+   /// via flag) also the Jacobian matrix.
+   virtual void fill_in_generic_contribution_to_residuals_linear_elasticity(
+    Vector<double> &residuals,DenseMatrix<double> &jacobian,unsigned flag);
+      
   }; 
 
 
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
 //===========================================================================
-/// An Element that solves the solid mechanics equations, based on
-/// the principle of virtual displacements in Cartesian coordinates,
-/// using SolidQElements for the interpolation of the variable positions. 
+/// An Element that solves the equations of linear elasticity 
+/// in Cartesian coordinates, using QElements for the geometry
 //============================================================================
  template<unsigned DIM, unsigned NNODE_1D>
   class QLinearElasticityElement : public virtual QElement<DIM,NNODE_1D>,
@@ -391,40 +401,40 @@ namespace oomph
   {
     public:
    
-   /// Constructor, there are no internal data points
-   QLinearElasticityElement() : QElement<DIM,NNODE_1D>(), 
+   /// Constructor
+    QLinearElasticityElement() : QElement<DIM,NNODE_1D>(), 
     LinearElasticityEquations<DIM>() { }
    
    /// Output function
    void output(std::ostream &outfile) 
-    {LinearElasticityEquations<DIM>::output(outfile);}
+   {LinearElasticityEquations<DIM>::output(outfile);}
    
    /// Output function
    void output(std::ostream &outfile, const unsigned &n_plot)
-    {LinearElasticityEquations<DIM>::output(outfile,n_plot);}
+   {LinearElasticityEquations<DIM>::output(outfile,n_plot);}
    
    
    /// C-style output function
    void output(FILE* file_pt) 
-    {LinearElasticityEquations<DIM>::output(file_pt);}
+   {LinearElasticityEquations<DIM>::output(file_pt);}
    
    /// C-style output function
    void output(FILE* file_pt, const unsigned &n_plot)
-    {LinearElasticityEquations<DIM>::output(file_pt,n_plot);}
+   {LinearElasticityEquations<DIM>::output(file_pt,n_plot);}
    
   };
-
+ 
 
 //============================================================================
 /// FaceGeometry of a linear 2D QLinearElasticityElement element
 //============================================================================
  template<>
   class FaceGeometry<QLinearElasticityElement<2,2> > :
-  public virtual QElement<1,2>
+ public virtual QElement<1,2>
   {
     public:
    /// Constructor must call the constructor of the underlying solid element
-   FaceGeometry() : QElement<1,2>() {}
+    FaceGeometry() : QElement<1,2>() {}
   };
  
  
@@ -434,11 +444,11 @@ namespace oomph
 //============================================================================
  template<>
   class FaceGeometry<QLinearElasticityElement<2,3> > :
-  public virtual QElement<1,3>
+ public virtual QElement<1,3>
   {
     public:
-   /// Constructor must call the constructor of the underlying solid element
-   FaceGeometry() : QElement<1,3>() {}
+   /// Constructor must call the constructor of the underlying element
+    FaceGeometry() : QElement<1,3>() {}
   };
  
  
@@ -451,759 +461,48 @@ namespace oomph
   public virtual QElement<1,4>
   {
     public:
-   /// Constructor must call the constructor of the underlying solidelement
-   FaceGeometry() : QElement<1,4>() {}
+   /// Constructor must call the constructor of the underlying element
+    FaceGeometry() : QElement<1,4>() {}
   };
- 
- 
+  
+  
 //============================================================================
 /// FaceGeometry of a linear 3D QLinearElasticityElement element
 //============================================================================
- template<>
-  class FaceGeometry<QLinearElasticityElement<3,2> > :
+  template<>
+   class FaceGeometry<QLinearElasticityElement<3,2> > :
   public virtual QElement<2,2>
-  {
-    public:
-   /// Constructor must call the constructor of the underlying solid element
-   FaceGeometry() : QElement<2,2>() {}
-  };
-
+   {
+     public:
+    /// Constructor must call the constructor of the underlying element
+     FaceGeometry() : QElement<2,2>() {}
+   };
+  
 //============================================================================
 /// FaceGeometry of a quadratic 3D QLinearElasticityElement element
 //============================================================================
- template<>
-  class FaceGeometry<QLinearElasticityElement<3,3> > :
+  template<>
+   class FaceGeometry<QLinearElasticityElement<3,3> > :
   public virtual QElement<2,3>
-  {
-    public:
-   /// Constructor must call the constructor of the underlying solid element
-   FaceGeometry() : QElement<2,3>() {}
-  };
-
-
+   {
+     public:
+    /// Constructor must call the constructor of the underlying element
+     FaceGeometry() : QElement<2,3>() {}
+   };
+  
+  
 //============================================================================
 /// FaceGeometry of a cubic 3D QLinearElasticityElement element
 //============================================================================
- template<>
-  class FaceGeometry<QLinearElasticityElement<3,4> > :
+  template<>
+   class FaceGeometry<QLinearElasticityElement<3,4> > :
   public virtual QElement<2,4>
-  {
-    public:
-   /// Constructor must call the constructor of the underlying solid element
-   FaceGeometry() : QElement<2,4>() {}
-  };
+   {
+     public:
+    /// Constructor must call the constructor of the underlying element
+     FaceGeometry() : QElement<2,4>() {}
+   };
 
-/*
-//===========================================================================
-/// An Element that solves the principle of virtual diplacements 
-/// using Hermite interpolation for the variable positions.
-//============================================================================
- template<unsigned DIM>
-  class HermiteLinearElasticityElement : public virtual SolidQHermiteElement<DIM>, 
-  public virtual LinearElasticityEquations<DIM>
-  {
-   
-    public:
-   
-   /// Constructor, there are no internal data points
-   HermiteLinearElasticityElement() : SolidQHermiteElement<DIM>(), 
-    LinearElasticityEquations<DIM>() { }
-   
-   /// SolidQHermiteElement output function
-   void output(std::ostream &outfile)
-    {SolidQHermiteElement<DIM>::output(outfile);}
-   
-   /// SolidQHermiteElement output function
-   void output(std::ostream &outfile, const unsigned &n_plot)
-    {SolidQHermiteElement<DIM>::output(outfile,n_plot);}
-   
-   /// C-style SolidQHermiteElement output function
-   void output(FILE* file_pt) {SolidQHermiteElement<DIM>::output(file_pt);}
-   
-   /// C-style SolidQHermiteElement output function
-   void output(FILE* file_pt, const unsigned &n_plot)
-    {SolidQHermiteElement<DIM>::output(file_pt,n_plot);}
-   
-    };*/
-
-/*
-
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-
-
-
-//=========================================================================
-/// A class for elements that solve the equations of solid mechanics,
-/// based on the principle of virtual displacements, with a 
-/// contitutive equation that involves a pressure. This 
-/// formulation is required in the case of incompressible materials, in
-/// which the additional constraint that volume must be conserved is applied.
-/// In this case, the Incompressible flag must be set to true. If the 
-/// Incompressible flag is not set to true, we use the nearly-incompressible
-/// formulation of the constitutive equations.
-//============================================================================
- template <unsigned DIM>
-  class LinearElasticityEquationsWithPressure : public LinearElasticityEquationsBase<DIM>
-  {
-    private:
-   
-   /// \short Static "magic" number that indicates that the solid pressure
-   /// is not stored at a node
-   static int Solid_pressure_not_stored_at_node;
-   
-    public:
-   
-   /// Constructor, by default the element is NOT incompressible.
-   LinearElasticityEquationsWithPressure() : Incompressible(false) {}
-   
-   
-   /// \short Return the 2nd Piola Kirchoff stress tensor, as calculated
-   /// from the constitutive law at specified local coordinate
-   void get_stress(const Vector<double> &s, DenseMatrix<double> &sigma);
-   
-   /// Return the boolean incompressible
-   bool &incompressible() {return Incompressible;}
-   
-   /// Return the number of solid pressure degrees of freedom
-   virtual unsigned nsolid_pres() const=0;
-   
-   /// Return the lth solid pressure
-   virtual double solid_p(const unsigned &l)=0;
-   
-   /// Set the lth solid pressure to p_value
-   virtual void set_solid_p(const unsigned &l, const double &p_value)=0;
-   
-   /// \short Return the index at which the solid pressure is stored if it
-   /// is stored at the nodes. If not stored at the nodes this will return
-   /// a negative number.
-   virtual int solid_p_nodal_index() const 
-    {return Solid_pressure_not_stored_at_node;}
-
-   /// Return the residuals
-   void fill_in_contribution_to_residuals(Vector<double> &residuals)
-    {
-     //Call the generic residuals function with flag set to 0
-     //using a dummy matrix argument
-     fill_in_generic_residual_contribution_pvd_with_pressure(
-      residuals,GeneralisedElement::Dummy_matrix,0);
-    }
-   
-   /// \short Compute the residuals and the Jacobian. 
-   /// Note: Jacobian is computed
-   /// in two steps: The derivatives of the residuals w.r.t. to the solid
-   /// pressure dofs are done analytically; the derivatives w.r.t. to
-   /// the nodes' positional variables are done by finite differencing,
-   /// using SolidFiniteElement::get_jacobian(...).
-   void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                         DenseMatrix<double> &jacobian)
-    {
-     //Call the generic routine with the flag set to 1
-     fill_in_generic_residual_contribution_pvd_with_pressure(
-      residuals,jacobian,1);
-     
-     //Solve for the consistent acceleration in the Newmark scheme
-     //Note that this replaces solid entries only
-     if(this->Solve_for_consistent_newmark_accel_flag)
-      {
-       this->fill_in_jacobian_for_newmark_accel(jacobian);
-       return;
-      }
-     
-     //Call the finite difference routine for the deriatives w.r.t.
-     // the positional variables
-     this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
-    }
-   
-   
-   /// Return the interpolated_solid_pressure 
-   double interpolated_solid_p(const Vector<double> &s) 
-    {
-     //Find number of nodes
-     unsigned Nsolid_pres = nsolid_pres();
-     //Local shape function
-     Shape psisp(Nsolid_pres);
-     //Find values of shape function
-     solid_pshape(s,psisp);
-     
-     //Initialise value of solid_p
-     double interpolated_solid_p = 0.0;
-     //Loop over the local nodes and sum
-     for(unsigned l=0;l<Nsolid_pres;l++) 
-      {interpolated_solid_p += solid_p(l)*psisp[l];}
-     
-     return(interpolated_solid_p);
-    }
-   
-   /// Output: x,y,[z],xi0,xi1,[xi2],p,gamma
-   void output(std::ostream &outfile) 
-    {
-     unsigned n_plot=5;
-     output(outfile,n_plot);
-    }
-   
-   /// Output: x,y,[z],xi0,xi1,[xi2],p,gamma
-   void output(std::ostream &outfile, const unsigned &n_plot);
-   
-   
-   /// C-style output: x,y,[z],xi0,xi1,[xi2],p,gamma
-   void output(FILE* file_pt) 
-    {
-     unsigned n_plot=5;
-     output(file_pt,n_plot);
-    }
-   
-   /// C-style output: x,y,[z],xi0,xi1,[xi2],p,gamma
-   void output(FILE* file_pt, const unsigned &n_plot);
-   
-   
-    protected:
-   
-   /// \short Access function that returns local eqn number 
-   /// information for the solid pressure
-   virtual int solid_p_local_eqn(const unsigned &i)=0;
-  
-   /// \short Return the deviatoric part of the 2nd Piola Kirchhoff stress 
-   /// tensor, as calculated from the constitutive law in the nearly 
-   /// incompresible formulation. Also return the contravariant
-   /// deformed metric tensor, the generalised dilatation, and the 
-   /// inverse of the bulk modulus.
-   void get_stress(const DenseMatrix<double> &g, const DenseMatrix<double> &G, 
-                   DenseMatrix<double> &sigma_dev, 
-                   DenseMatrix<double> &Gcontra, 
-                   double &gen_dil, double &inv_kappa) 
-    {
-#ifdef PARANOID
-     //If the pointer to the constitutive law hasn't been set, issue an error
-     if(this->Constitutive_law_pt == 0)
-      {
-       //Write an error message
-       std::string error_message =
-        "Elements derived from LinearElasticityEquationsWithPressure \n";
-       error_message += "must have a constitutive law:\n";
-       error_message +=
-        "set one using the constitutive_law_pt() member function";
-       //Throw the error
-       throw OomphLibError(error_message,
-                           "LinearElasticityEquationsWithPressure<DIM>::get_stress()",
-                           OOMPH_EXCEPTION_LOCATION);
-      }
-#endif
-     this->Constitutive_law_pt->
-      calculate_second_piola_kirchhoff_stress(g,G,sigma_dev,Gcontra,
-                                              gen_dil,inv_kappa);
-    }
-   
-   /// Return the solid pressure shape functions
-   virtual void solid_pshape(const Vector<double> &s, Shape &psi) const=0;
-   
-   /// Return the stored solid shape functions at the knots
-   void solid_pshape_at_knot(const unsigned &ipt, Shape &psi) const
-    {
-     //Find the dimension of the element
-     unsigned Dim = this->dim();
-     //Storage for local coordinates of the integration point
-     Vector<double> s(Dim);
-     //Set the local coordinates
-     for(unsigned i=0;i<Dim;i++) {s[i] = this->integral_pt()->knot(ipt,i);}
-     //Get the shape function
-     solid_pshape(s,psi);
-    }
-   
-    protected:
-   
-   /// Boolean to determine whether the solid is incompressible or not
-   bool Incompressible;
-   
-   /// \short Returns the residuals for the discretised principle of
-   /// virtual displacements,
-   /// formulated in the incompressible/near-incompressible case.
-   /// If flag==1, also compute the pressure-related entries
-   /// in the Jacobian (all others need to be done by finite differencing.
-   virtual void fill_in_generic_residual_contribution_pvd_with_pressure(
-    Vector<double> &residuals, DenseMatrix<double> &jacobian,
-    unsigned flag);
-   
-   /// \short  Return the deviatoric part of the 2nd Piola Kirchhoff stress 
-   /// tensor, as calculated from the constitutive law in the 
-   /// incompresible formulation. Also return the contravariant
-   /// deformed metric tensor, and the 
-   /// determinant of the deformed covariant metric tensor 
-   /// (likely to be needed in the incompressibility constraint)
-   void get_stress(const DenseMatrix<double> &g, const DenseMatrix<double> &G,
-                   DenseMatrix<double> &sigma_dev, 
-                   DenseMatrix<double> &Gcontra, 
-                   double &detG)
-    {
-#ifdef PARANOID
-     //If the pointer to the constitutive law hasn't been set, issue an error
-     if(this->Constitutive_law_pt == 0)
-      {
-       //Write an error message
-       std::string error_message =
-        "Elements derived from LinearElasticityEquationsWithPressure \n";
-       error_message += "must have a constitutive law:\n";
-       error_message +=
-        "set one using the constitutive_law_pt() member function";
-       //Throw the error
-       throw OomphLibError(error_message,
-                           "LinearElasticityEquationsWithPressure<DIM>::get_stress()",
-                           OOMPH_EXCEPTION_LOCATION);
-      }
-#endif
-     this->Constitutive_law_pt->
-      calculate_second_piola_kirchhoff_stress(g,G,sigma_dev,Gcontra,detG);
-    }
-   
-  }; 
-
-
-
-//////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////
-
-
-
-
-//===========================================================================
-/// An Element that solves the equations of solid mechanics, using the
-/// principle of virtual displacements, with quadratic interpolation
-/// for the positions and a discontinuous linear solid pressure. This is
-/// analogous to the QCrouzeixRaviartElement element for fluids.
-//============================================================================
-template<unsigned DIM>
-class QLinearElasticityElementWithPressure : public virtual SolidQElement<DIM,3>, 
-                                public virtual LinearElasticityEquationsWithPressure<DIM>
-{
-
-  protected:
-
- /// \short Internal index that indicates at which internal data value the
- /// solid presure is stored
- unsigned P_solid_internal_index;
- 
- /// \short Overload the access function 
- /// that is used to return local equation correpsonding to the i-th
- /// solid pressure value
- inline int solid_p_local_eqn(const unsigned &i)
-  {return this->internal_local_eqn(P_solid_internal_index,i);}
- 
- /// Return the pressure shape functions
- inline void solid_pshape(const Vector<double> &s, Shape &psi) const;
- 
-  public:
- 
- /// \short There is internal solid data so we can't use the automatic
- /// assignment of consistent initial conditions for time-dependent problems.
- bool has_internal_solid_data() {return true;}
-
- /// Constructor, there are DIM+1 internal data points
- QLinearElasticityElementWithPressure() : SolidQElement<DIM,3>(), 
-  LinearElasticityEquationsWithPressure<DIM>() 
-  {
-   //Allocate and add one Internal data object that stores DIM+1 pressure
-   //values
-   P_solid_internal_index = this->add_internal_data(new Data(DIM+1));
- }
- 
- /// Return the lth pressure value
- double solid_p(const unsigned &l) 
-  {return this->internal_data_pt(P_solid_internal_index)->value(l);}
- 
- /// Set the l-th pressure value to p_value
- void set_solid_p(const unsigned &l, const double &p_value)
-  {this->internal_data_pt(P_solid_internal_index)->set_value(l,p_value);}
-
- /// Return number of pressure values
- unsigned nsolid_pres() const {return DIM+1;} 
- 
- /// Fix the pressure dof l to be the value pvalue
- void fix_solid_pressure(const unsigned &l, const double &pvalue)
-  {
-   this->internal_data_pt(P_solid_internal_index)->pin(l);
-   this->internal_data_pt(P_solid_internal_index)->set_value(l,pvalue);
-  }
-
- /// Generic FiniteElement output function
- void output(std::ostream &outfile) {FiniteElement::output(outfile);}
-
- /// LinearElasticityEquationsWithPressure output function
- void output(std::ostream &outfile, const unsigned &n_plot)
-  {LinearElasticityEquationsWithPressure<DIM>::output(outfile,n_plot);}
-
- 
- /// C-style Generic FiniteElement output function
- void output(FILE* file_pt) {FiniteElement::output(file_pt);}
-
- /// C-style LinearElasticityEquationsWithPressure output function
- void output(FILE* file_pt, const unsigned &n_plot)
-  {LinearElasticityEquationsWithPressure<DIM>::output(file_pt,n_plot);}
-
-};
- 
-
-//=====================================================================
-/// Pressure shape functions for 2D QLinearElasticityElementWithPressure elements
-//=====================================================================
-template<>
-inline void  QLinearElasticityElementWithPressure<2>::solid_pshape(const Vector<double> &s, 
-                                                      Shape &psi) const
-{
- psi[0] = 1.0;
- psi[1] = s[0];
- psi[2] = s[1];
-}
-
-
-//=====================================================================
-/// Pressure shape functions for 3D QLinearElasticityElementWithPressure elements
-//=====================================================================
-template<>
-inline void  QLinearElasticityElementWithPressure<3>::solid_pshape(const Vector<double> &s, 
-                                                      Shape &psi) const
-{
- psi[0] = 1.0;
- psi[1] = s[0];
- psi[2] = s[1];
- psi[3] = s[2];
-}
-
-
-
-//======================================================================
-/// FaceGeometry of 2D QLinearElasticityElementWithPressure
-//======================================================================
-template<>
-class FaceGeometry<QLinearElasticityElementWithPressure<2> >: 
-public virtual SolidQElement<1,3>
-{
-  public:
- /// Constructor must call constructor of underlying solid element
- FaceGeometry() : SolidQElement<1,3>() {}
-};
-
-
-//======================================================================
-/// FaceGeometry of FaceGeometry of 2D QLinearElasticityElementWithPressure
-//======================================================================
-template<>
-class FaceGeometry<FaceGeometry<QLinearElasticityElementWithPressure<2> > >: 
-public virtual PointElement
-{
-  public:
- /// Constructor must call constructor of underlying solid element
- FaceGeometry() : PointElement() {}
-};
-
-
-///////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////
-
-
-
-
-//===========================================================================
-/// An Element that solves the equations of solid mechanics, based on 
-/// the discretised principle of virtual displacements, using quadratic 
-/// interpolation
-/// for the positions and continuous linear solid pressure. This is analagous
-/// to the QTaylorHoodElement fluid element.
-//============================================================================
-template<unsigned DIM>
-class QLinearElasticityElementWithContinuousPressure : public virtual SolidQElement<DIM,3>,
-                     public virtual LinearElasticityEquationsWithPressure<DIM>
-{
-  private:
- 
- /// Static array of ints to hold number of solid pressure values at each node
- static const unsigned Initial_Nvalue[];
-
-protected:
- 
- /// \short Static array of ints to hold conversion from pressure node
- /// numbers to actual node numbers
- static const unsigned Pconv[];
-
- /// \short Overload the access function 
- /// that is used to return local equation correpsonding to the i-th
- /// solid pressure value
- inline int solid_p_local_eqn(const unsigned &i)
-  {return this->nodal_local_eqn(Pconv[i],this->solid_p_nodal_index());}
-
- /// Return the pressure shape functions
- inline void solid_pshape(const Vector<double> &s, Shape &psi) const;
- 
-public:
-
- /// Constructor
- QLinearElasticityElementWithContinuousPressure() : SolidQElement<DIM,3>(), 
-  LinearElasticityEquationsWithPressure<DIM>() 
-  { }
-
- /// \short Set the value at which the solid pressure is stored in the nodes
- inline int solid_p_nodal_index() const {return 0;}
-
- /// \short Number of values (pinned or dofs) required at node n. Can
- /// be overwritten for hanging node version
- inline virtual unsigned required_nvalue(const unsigned &n) const 
-  {return Initial_Nvalue[n];}
-
- /// Return the l-th pressure value, make sure to use the hanging
- /// representation if there is one!
- double solid_p(const unsigned &l) 
-  {return this->nodal_value(Pconv[l],this->solid_p_nodal_index());}
-
- /// Set the l-th solid pressure value to p_value
- void set_solid_p(const unsigned &l, const double &p_value)
-  {this->node_pt(Pconv[l])->set_value(this->solid_p_nodal_index(),p_value);}
-
- /// Return number of pressure values
- unsigned nsolid_pres() const 
-  {return static_cast<unsigned>(pow(2.0,static_cast<int>(DIM)));} 
-
- /// Fix the pressure dof l to be the value pvalue 
- void fix_solid_pressure(const unsigned &l, const double &pvalue)
-  {
-   this->node_pt(Pconv[l])->pin(this->solid_p_nodal_index());
-   this->node_pt(Pconv[l])->set_value(this->solid_p_nodal_index(),pvalue);
-  }
-
- /// Generic FiniteElement output function
- void output(std::ostream &outfile) {FiniteElement::output(outfile);}
-
- /// LinearElasticityEquationsWithPressure output function
- void output(std::ostream &outfile, const unsigned &n_plot)
-  {LinearElasticityEquationsWithPressure<DIM>::output(outfile,n_plot);}
-
-
- /// C-style generic FiniteElement output function
- void output(FILE* file_pt) {FiniteElement::output(file_pt);}
-
- /// C-style LinearElasticityEquationsWithPressure output function
- void output(FILE* file_pt, const unsigned &n_plot)
-  {LinearElasticityEquationsWithPressure<DIM>::output(file_pt,n_plot);}
-
-};
-
-
-//===============================================================
-/// Pressure shape functions for 2D QLinearElasticityElementWithContinuousPressure
-/// elements
-//===============================================================
-template<>
-inline void  QLinearElasticityElementWithContinuousPressure<2>::solid_pshape(
- const Vector<double> &s, Shape &psi) const
-{
- //Local storage
- double psi1[2], psi2[2];
- //Call the OneDimensional Shape functions
- OneDimLagrange::shape<2>(s[0],psi1);
- OneDimLagrange::shape<2>(s[1],psi2);
-
- //Now let's loop over the nodal points in the element
- //s1 is the "x" coordinate, s2 the "y" 
- for(unsigned i=0;i<2;i++)
-  {
-   for(unsigned j=0;j<2;j++)
-    {
-     //Multiply the two 1D functions together to get the 2D function
-     psi[2*i + j] = psi2[i]*psi1[j];
-    }
-  }
-}
-
-//===============================================================
-/// Pressure shape functions for 3D QLinearElasticityElementWithContinuousPressure
-/// elements
-//===============================================================
-template<>
-inline void  QLinearElasticityElementWithContinuousPressure<3>::solid_pshape(
- const Vector<double> &s, Shape &psi) const
-{
- //Local storage
- double psi1[2], psi2[2], psi3[2];
- //Call the OneDimensional Shape functions
- OneDimLagrange::shape<2>(s[0],psi1);
- OneDimLagrange::shape<2>(s[1],psi2);
- OneDimLagrange::shape<2>(s[2],psi3);
-
- //Now let's loop over the nodal points in the element
- //s1 is the "x" coordinate, s2 the "y" 
- for(unsigned i=0;i<2;i++)
-  {
-   for(unsigned j=0;j<2;j++)
-    {
-     for(unsigned k=0;k<2;k++)
-      {
-       //Multiply the two 1D functions together to get the 3D function
-       psi[4*i + 2*j + k] = psi3[i]*psi2[j]*psi1[k];
-      }
-    }
-  }
-}
-
-
-
-
-//===============================================================
-/// FaceGeometry for 2D QLinearElasticityElementWithContinuousPressure element
-//===============================================================
-template<>
-class FaceGeometry<QLinearElasticityElementWithContinuousPressure<2> >: 
-public virtual SolidQElement<1,3>
-{
-  public:
- /// Constructor must call constructor of the underlying Solid element
- FaceGeometry() : SolidQElement<1,3>() {}
-};
-
-
-
-//===============================================================
-/// FaceGeometry of FaceGeometry 
-/// for 2D QLinearElasticityElementWithContinuousPressure element
-//===============================================================
-template<>
-class FaceGeometry<FaceGeometry<QLinearElasticityElementWithContinuousPressure<2> > >: 
-public virtual PointElement
-{
-  public:
- /// Constructor must call constructor of the underlying Point element
- FaceGeometry() : PointElement() {}
-};
-
-
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-
-
-//====================================================================
-/// Namespace for solid mechanics helper functions
-//====================================================================
-namespace SolidHelpers
-{
-
- /// \short Document the principal stresses in a 2D SolidMesh 
- /// pointed to by \c mesh_pt, in the directory specified
- /// by the DocInfo object, in a format that can be processed with 
- /// tecplot macro.
- template<class ELEMENT>
- void doc_2D_principal_stress(DocInfo& doc_info, SolidMesh* mesh_pt)
-  {
-   // Output principal stress vectors at the centre of all elements
-   std::ofstream pos_file;
-   std::ofstream neg_file;
-   std::ostringstream filename;
-   filename << doc_info.directory() << "/pos_principal_stress"
-            << doc_info.number() << ".dat";
-   pos_file.open(filename.str().c_str());
-   filename.str("");
-   filename << doc_info.directory() << "/neg_principal_stress"
-            << doc_info.direectory() << ".dat";
-   neg_file.open(filename.str().c_str());
-   
-   // Write dummy data in both so there's at lest one zone in each
-   pos_file << 0.0 << " " << 0.0 << " " << 0.0 << " " << 0.0 << " " << std::endl;
-   neg_file << 0.0 << " " << 0.0 << " " << 0.0 << " " << 0.0 << " " << std::endl;
-   
-   
-   Vector<double> s(2);
-   Vector<double> x(2);
-   s[0]=0.0;
-   s[1]=0.0;
-   unsigned n_solid_element=mesh_pt->nelement();
-   for (unsigned e=0;e<n_solid_element;e++)
-    {
-     ELEMENT* el_pt=dynamic_cast<ELEMENT*>(mesh_pt->element_pt(e));
-     
-     // Get principal stress
-     DenseMatrix<double> principal_stress_vector(2);
-     Vector<double> principal_stress(2);
-     el_pt->get_principal_stress(s,principal_stress_vector,principal_stress);
-     
-     // Get position of centre of element
-     el_pt->interpolated_x(s,x);
-     
-     // compute vectors at 45 degree for nearly hydrostatic pressure state
-     DenseMatrix<double> rot(2);
-     
-     bool hydrostat=false;
-     
-     // Max. relative difference between principal stresses
-     // required to classify stress state as non-hydrostatic: 1%
-     double dev_max=1.0e-2;
-     if (principal_stress[0]!=0.0)
-      {
-       if (std::abs((principal_stress[0]-principal_stress[1])/
-                    principal_stress[0])<dev_max)
-        {
-         hydrostat=true;
-         double Cos=cos(0.25*3.14159);
-         double Sin=sin(0.25*3.14159);
-         rot(0,0) =
-          Cos*principal_stress_vector(0,0) - Sin*principal_stress_vector(0,1);
-         rot(0,1) =
-          Sin*principal_stress_vector(0,0) + Cos*principal_stress_vector(0,1);
-         rot(1,0) =
-          Cos*principal_stress_vector(1,0) - Sin*principal_stress_vector(1,1);
-         rot(1,1) =
-          Sin*principal_stress_vector(1,0) + Cos*principal_stress_vector(1,1);
-        }
-      }
-     
-     // Loop over two principal stresses:
-     for (unsigned i=0;i<2;i++)
-      {
-       if (principal_stress[i]>0.0)
-        {
-         pos_file << x[0] << " " << x[1] << " " 
-                  << principal_stress_vector(i,0) << " "
-                  << principal_stress_vector(i,1) << std::endl;
-         pos_file << x[0] << " " << x[1] << " " 
-                  << -principal_stress_vector(i,0) << " "
-                  << -principal_stress_vector(i,1) << std::endl;
-         if (hydrostat)
-          {
-           pos_file << x[0] << " " << x[1] << " " 
-                    << rot(i,0) << " "
-                    << rot(i,1) << std::endl;
-           pos_file << x[0] << " " << x[1] << " " 
-                    << -rot(i,0) << " "
-                    << -rot(i,1) << std::endl;
-          }
-        }
-       else
-        {
-         neg_file << x[0] << " " << x[1] << " " 
-                  << principal_stress_vector(i,0) << " "
-                  << principal_stress_vector(i,1) << std::endl;
-         neg_file << x[0] << " " << x[1] << " " 
-                  << -principal_stress_vector(i,0) << " "
-                  << -principal_stress_vector(i,1) << std::endl;
-         if (hydrostat)
-          {
-           neg_file << x[0] << " " << x[1] << " " 
-                    << rot(i,0) << " "
-                    << rot(i,1) << std::endl;
-           neg_file << x[0] << " " << x[1] << " " 
-                    << -rot(i,0) << " "
-                    << -rot(i,1) << std::endl;
-          }
-        }
-      }
-    }
-   
-   pos_file.close();
-   neg_file.close();
-   
-  }
- 
-};
-*/
 }
 
 #endif

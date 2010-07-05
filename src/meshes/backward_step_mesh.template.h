@@ -35,7 +35,7 @@
 #endif
 
 //OOMPH-LIB headers
-#include "simple_rectangular_quadmesh.template.h"
+#include "rectangular_quadmesh.template.h"
 #include "../generic/refineable_quad_mesh.h"
 
 namespace oomph
@@ -47,7 +47,7 @@ namespace oomph
 //=================================================================
  template<class ELEMENT>
   class BackwardStepQuadMesh : 
- public virtual SimpleRectangularQuadMesh<ELEMENT>
+ public virtual RectangularQuadMesh<ELEMENT>
   { 
    
     public: 
@@ -66,7 +66,7 @@ namespace oomph
                         const double &ly,
                         TimeStepper* time_stepper_pt=
                         &Mesh::Default_TimeStepper) :
-   SimpleRectangularQuadMesh<ELEMENT>(nx,ny,lx,ly,time_stepper_pt)
+   RectangularQuadMesh<ELEMENT>(nx,ny,lx,ly,time_stepper_pt)
     {     
      // Do the actual build
      build_mesh(nx,ny,nx_cut_out,ny_cut_out,lx,ly);
@@ -118,7 +118,7 @@ namespace oomph
                                    const double &ly,
                                    TimeStepper* time_stepper_pt=
                                    &Mesh::Default_TimeStepper) :
-   SimpleRectangularQuadMesh<ELEMENT>(nx,ny,lx,ly,time_stepper_pt),
+   RectangularQuadMesh<ELEMENT>(nx,ny,lx,ly,time_stepper_pt),
     BackwardStepQuadMesh<ELEMENT>(nx,ny,nx_cut_out,ny_cut_out,
                                   lx,ly,time_stepper_pt)
      {  

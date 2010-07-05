@@ -25,7 +25,7 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-//Header file for TPoisson elements
+//Header file for Tri/Tet linear elasticity elements
 #ifndef OOMPH_TLINEAR_ELASTICITY_ELEMENTS_HEADER
 #define OOMPH_TLINEAR_ELASTICITY_ELEMENTS_HEADER
 
@@ -61,19 +61,19 @@ namespace oomph
 /// element edge. Inherits from TElement and LinearElasticityEquations
 //======================================================================
 template <unsigned DIM, unsigned NNODE_1D>
-class TLinearElasticityElement : public TElement<DIM,NNODE_1D>, 
-                        public LinearElasticityEquations<DIM>
-{
- 
- public:
- 
- ///\short  Constructor: Call constructors for TElement and 
- /// LinearElasticity equations
- TLinearElasticityElement() : TElement<DIM,NNODE_1D>(), 
-  LinearElasticityEquations<DIM>() { }
-
-
- /// Broken copy constructor
+ class TLinearElasticityElement : public TElement<DIM,NNODE_1D>, 
+ public LinearElasticityEquations<DIM>
+ {
+  
+   public:
+  
+  ///\short  Constructor: Call constructors for TElement and 
+  /// LinearElasticity equations
+   TLinearElasticityElement() : TElement<DIM,NNODE_1D>(), 
+   LinearElasticityEquations<DIM>() { }
+  
+  
+  /// Broken copy constructor
  TLinearElasticityElement(const TLinearElasticityElement<DIM,NNODE_1D>& dummy) 
   { 
    BrokenCopy::broken_copy("TLinearElasticityElement");
@@ -84,58 +84,27 @@ class TLinearElasticityElement : public TElement<DIM,NNODE_1D>,
   {
    BrokenCopy::broken_assign("TLinearElasticityElement");
   }
-
+ 
  /// \short Output function:  
- ///  x,y,u   or    x,y,z,u
  void output(std::ostream &outfile)
-  {
-   LinearElasticityEquations<DIM>::output(outfile);
+ {
+  LinearElasticityEquations<DIM>::output(outfile);
   }
 
  ///  \short Output function:  
- ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
  void output(std::ostream &outfile, const unsigned &nplot)
   {
-   //Vector of local coordinates
-   Vector<double> s(DIM);
-   
-   Vector<double> x(DIM);
-   Vector<double> u(DIM);
-
-   // Tecplot header info
-   outfile << this->tecplot_zone_string(nplot);
-   
-   // Loop over plot points
-   unsigned num_plot_points=this->nplot_points(nplot);
-   for (unsigned iplot=0;iplot<num_plot_points;iplot++)
-    {
-     
-     // Get local coordinates of plot point
-     this->get_s_plot(iplot,nplot,s);
-     this->interpolated_x(s,x);
-     this->interpolated_u_linear_elasticity(s,u);
-     
-
-     for(unsigned i=0;i<DIM;i++) {outfile << x[i] << " ";}
-     for(unsigned i=0;i<DIM;i++) {outfile << u[i] << " ";}
-     outfile << "\n";
-    }
-
-
-   // Write tecplot footer (e.g. FE connectivity lists)
-   this->write_tecplot_zone_footer(outfile,nplot);
+   LinearElasticityEquations<DIM>::output(outfile,nplot);
   }
 
 
  /// \short C-style output function:  
- ///  x,y,u   or    x,y,z,u
  void output(FILE* file_pt)
   {
    LinearElasticityEquations<DIM>::output(file_pt);
   }
 
  ///  \short C-style output function:  
- ///   x,y,u   or    x,y,z,u at n_plot^DIM plot points
  void output(FILE* file_pt, const unsigned &n_plot)
   {
    LinearElasticityEquations<DIM>::output(file_pt,n_plot);
