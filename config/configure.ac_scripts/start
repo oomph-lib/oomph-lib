@@ -379,7 +379,7 @@ AM_CONDITIONAL(HAVE_PYTHON, test x$have_python = xtrue)
 
 # Do we have validata?
 #---------------------
-AC_CHECK_FILES(demo_drivers/poisson/one_d_poisson/validata/one_d_poisson_results.dat.gz,
+AC_CHECK_FILES(demo_drivers/poisson/two_d_poisson_flux_bc_adapt/validata/results.dat.gz,
                echo "Found validata"; have_validata=true, 
                echo "Not found validata"; have_validata=false)
 
@@ -387,7 +387,7 @@ if test x$have_validata = xfalse; then \
   echo " "; \
   echo "================================================================="; \
   echo "This distribution does not seem to have validata"; \
-  echo "(based on existence of demo_drivers/poisson/one_d_poisson/validata/one_d_poisson_results.dat.gz)"; \
+  echo "(based on existence of demo_drivers/poisson/two_d_poisson_flux_bc_adapt/validata/results.dat.gz)"; \
   echo "---> Will not be able to check the accuracy of "; \
   echo "     the self tests with bin/fpdiff.py :( "; \
   echo " "; \
@@ -395,7 +395,7 @@ if test x$have_validata = xfalse; then \
   echo " "; \
 else \
   echo "This distribution does seem to have validata."; \
-  echo "(based on existence of demo_drivers/poisson/one_d_poisson/validata)"; \
+  echo "(based on existence of demo_drivers/poisson/two_d_poisson_flux_bc_adapt/validata/results.dat.gz)"; \
 fi
 AM_CONDITIONAL(HAVE_VALIDATA, test x$have_validata = xtrue)
 

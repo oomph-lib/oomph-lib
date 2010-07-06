@@ -120,7 +120,7 @@ fi
 # Update makefiles
 $cop Makefile.am backed_up_stripped_out_files/Makefile.am.top_level 
 $cop $home_dir/config/stripped_down_files/Makefile.am.top_level Makefile.am
-$cop bin/Makefile.am backed_up_stripped_out_files/Makfile.am.bin
+$cop bin/Makefile.am backed_up_stripped_out_files/Makefile.am.bin
 $cop $home_dir/config/stripped_down_files/Makefile.am.bin bin/Makefile.am
 
 
@@ -144,7 +144,7 @@ $del doc
 echo "Wiping most of self_test"
 cd self_test
 mv analyse_self_tests ../tmp_analyse_self_tests
-$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makfile.am.self_test
+$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makefile.am.self_test
 $del *
 mv ../tmp_analyse_self_tests analyse_self_test
 $cop $home_dir/config/stripped_down_files/Makefile.am.self_test Makefile.am
@@ -162,7 +162,8 @@ cd demo_drivers
 #-------------------------------------------
 mv poisson ../tmp_poisson
 mv mpi ../tmp_mpi
-$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makfile.am.demo_drivers$del *
+$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makefile.am.demo_drivers
+$del *
 mv ../tmp_poisson poisson
 mv ../tmp_mpi mpi
 $cop $home_dir/config/stripped_down_files/Makefile.am.demo_drivers Makefile.am
@@ -172,7 +173,7 @@ $cop $home_dir/config/stripped_down_files/Makefile.am.demo_drivers Makefile.am
 #-----------------------------------------------------------------
 cd poisson
 mv two_d_poisson_flux_bc_adapt ../tmp_two_d_poisson_flux_bc_adapt
-$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makfile.am.demo_drivers.poisson
+$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makefile.am.demo_drivers.poisson
 $del *
 mv ../tmp_two_d_poisson_flux_bc_adapt two_d_poisson_flux_bc_adapt 
 $cop $home_dir/config/stripped_down_files/Makefile.am.demo_drivers.poisson Makefile.am
@@ -183,14 +184,14 @@ cd ..
 #-------------------------------------------------------------
 cd mpi
 mv distribution ../tmp_distribution
-$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makfile.am.demo_drivers.mpi
+$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makefile.am.demo_drivers.mpi
 $del *
 mv ../tmp_distribution distribution
 $cop $home_dir/config/stripped_down_files/Makefile.am.demo_drivers.mpi Makefile.am
 
 cd distribution
 mv two_d_poisson_flux_bc_adapt ../tmp_two_d_poisson_flux_bc_adapt
-$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makfile.am.demo_drivers.mpi.distribution
+$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makefile.am.demo_drivers.mpi.distribution
 $del * 
 mv ../tmp_two_d_poisson_flux_bc_adapt two_d_poisson_flux_bc_adapt
 $cop $home_dir/config/stripped_down_files/Makefile.am.demo_drivers.mpi.distribution Makefile.am
@@ -208,7 +209,7 @@ echo "Wiping most of src"
 mv generic ../tmp_generic
 mv poisson ../tmp_poisson
 mv meshes ../tmp_meshes
-$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makfile.am.src
+$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makefile.am.src
 $del *
 mv ../tmp_generic generic
 mv ../tmp_poisson poisson
@@ -241,13 +242,15 @@ echo "Updating configure scripts"
 cd $home_dir
 cd config/configure.ac_scripts
 
-
+touch private.dir_list
 $cop private.dir_list $home_dir/backed_up_stripped_out_files/private.dir_list 
 $cop $home_dir/config/stripped_down_files/private.dir_list .
 
+touch private_user_drivers.dir_list
 $cop private_user_drivers.dir_list $home_dir/backed_up_stripped_out_files/private_user_drivers.dir_list 
 $cop $home_dir/config/stripped_down_files/private_user_drivers.dir_list .
 
+touch private_user_src.dir_list
 $cop private_user_src.dir_list $home_dir/backed_up_stripped_out_files/private_user_src.dir_list 
 $cop $home_dir/config/stripped_down_files/private_user_src.dir_list .
 
