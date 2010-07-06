@@ -8,6 +8,18 @@
 home_dir=`pwd`
 
 
+
+
+# Fake delete/copy commands
+del="echo Deleting:  `ls -d`"
+cop="echo I would overwrite these files: `ls -d`"
+
+# Real delete/copy commands
+del="rm -rf "
+cop="cp "
+
+
+
 #====================================================================
 # A few helper functions
 #====================================================================
@@ -102,14 +114,6 @@ else
 fi
 
 
-# Fake delete/copy commands
-del="echo Deleting:  `ls -d`"
-cop="echo I would overwrite these files: `ls -d`"
-
-# Real delete/copy commands
-del="rm -rf "
-cop="cp "
-
 # Generic top level stuff
 #========================
 
@@ -140,9 +144,9 @@ $del doc
 echo "Wiping most of self_test"
 cd self_test
 mv analyse_self_tests ../tmp_analyse_self_tests
+$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makfile.am.self_test
 $del *
 mv ../tmp_analyse_self_tests analyse_self_test
-$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makfile.am.self_test
 $cop $home_dir/config/stripped_down_files/Makefile.am.self_test Makefile.am
 
 
@@ -158,10 +162,9 @@ cd demo_drivers
 #-------------------------------------------
 mv poisson ../tmp_poisson
 mv mpi ../tmp_mpi
-$del *
+$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makfile.am.demo_drivers$del *
 mv ../tmp_poisson poisson
 mv ../tmp_mpi mpi
-$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makfile.am.demo_drivers
 $cop $home_dir/config/stripped_down_files/Makefile.am.demo_drivers Makefile.am
 
 
@@ -169,9 +172,9 @@ $cop $home_dir/config/stripped_down_files/Makefile.am.demo_drivers Makefile.am
 #-----------------------------------------------------------------
 cd poisson
 mv two_d_poisson_flux_bc_adapt ../tmp_two_d_poisson_flux_bc_adapt
+$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makfile.am.demo_drivers.poisson
 $del *
 mv ../tmp_two_d_poisson_flux_bc_adapt two_d_poisson_flux_bc_adapt 
-$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makfile.am.demo_drivers.poisson
 $cop $home_dir/config/stripped_down_files/Makefile.am.demo_drivers.poisson Makefile.am
 cd ..
 
@@ -180,16 +183,16 @@ cd ..
 #-------------------------------------------------------------
 cd mpi
 mv distribution ../tmp_distribution
+$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makfile.am.demo_drivers.mpi
 $del *
 mv ../tmp_distribution distribution
-$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makfile.am.demo_drivers.mpi
 $cop $home_dir/config/stripped_down_files/Makefile.am.demo_drivers.mpi Makefile.am
 
 cd distribution
 mv two_d_poisson_flux_bc_adapt ../tmp_two_d_poisson_flux_bc_adapt
+$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makfile.am.demo_drivers.mpi.distribution
 $del * 
 mv ../tmp_two_d_poisson_flux_bc_adapt two_d_poisson_flux_bc_adapt
-$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makfile.am.demo_drivers.mpi.distribution
 $cop $home_dir/config/stripped_down_files/Makefile.am.demo_drivers.mpi.distribution Makefile.am
 
 
@@ -205,11 +208,11 @@ echo "Wiping most of src"
 mv generic ../tmp_generic
 mv poisson ../tmp_poisson
 mv meshes ../tmp_meshes
+$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makfile.am.src
 $del *
 mv ../tmp_generic generic
 mv ../tmp_poisson poisson
 mv ../tmp_meshes  meshes
-$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makfile.am.src
 $cop $home_dir/config/stripped_down_files/Makefile.am.src Makefile.am
 
 
