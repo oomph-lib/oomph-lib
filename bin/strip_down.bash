@@ -45,6 +45,41 @@ echo " Do you want to strip down this distribution [y/n -- default: n]"
 reply=`OptionRead`
 if test "$reply" != "y" -a "$reply" != "Y" ; then 
     echo "Not doing it..."
+    echo " " 
+    echo " "
+    if [ -e backed_up_stripped_out_files ]
+    then
+        echo " "
+        echo "Old configure files appear to be available at "
+        echo " "
+        echo "        backed_up_stripped_out_files "
+        echo " "
+        echo "Do you want to recover these overwritten files  [y/n -- default: n]"
+        echo " "
+        reply=`OptionRead`
+        if test "$reply" != "y" -a "$reply" != "Y" ; then 
+            echo "Not doing it..."
+            exit 0
+        else
+          $cop backed_up_stripped_out_files/Makefile.am.top_level $home_dir/Makefile.am 
+          $cop backed_up_stripped_out_files/Makefile.am.bin $home_dir/bin/Makefile.am 
+          $cop backed_up_stripped_out_files/Makefile.am.self_test $home_dir/self_test/Makefile.am 
+          $cop backed_up_stripped_out_files/Makefile.am.demo_drivers $home_dir/demo_drivers/Makefile.am 
+          $cop backed_up_stripped_out_files/Makefile.am.demo_drivers.poisson $home_dir/demo_drivers/poisson/Makefile.am 
+          $cop backed_up_stripped_out_files/Makefile.am.demo_drivers.mpi $home_dir/demo_drivers/mpi/Makefile.am 
+          $cop backed_up_stripped_out_files/Makefile.am.demo_drivers.mpi.distribution $home_dir/demo_drivers/mpi/distribution/Makefile.am 
+          $cop backed_up_stripped_out_files/Makefile.am.src $home_dir/src/Makefile.am 
+          $cop backed_up_stripped_out_files/mesh_names.list $home_dir/src/meshes
+          $cop backed_up_stripped_out_files/Makefile.am.meshes $home_dir/src/meshes/Makefile.am
+          $cop backed_up_stripped_out_files/private.dir_list $home_dir/config/configure.ac_scripts
+          $cop backed_up_stripped_out_files/private_user_src.dir_list $home_dir/config/configure.ac_scripts
+          $cop backed_up_stripped_out_files/private_user_drivers.dir_list $home_dir/config/configure.ac_scripts
+          $cop backed_up_stripped_out_files/user_src.dir_list $home_dir/config/configure.ac_scripts
+          $cop backed_up_stripped_out_files/user_drivers.dir_list $home_dir/config/configure.ac_scripts
+          $cop backed_up_stripped_out_files/core.dir_list $home_dir/config/configure.ac_scripts
+          $cop backed_up_stripped_out_files/doc.dir_list $home_dir/config/configure.ac_scripts
+        fi          
+    fi
     exit 0
 else
     echo "Doing it..."

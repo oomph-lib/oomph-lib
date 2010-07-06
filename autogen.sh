@@ -331,7 +331,7 @@ if test "$doc_size" = "y"; then
     # Indicate if we have validata available
     #---------------------------------------
     echo "<TD align=\"center\">" >> size.html
-    if (test -e demo_drivers/poisson/one_d_poisson/validata/one_d_poisson_results.dat.gz); then 
+    if (test -e demo_drivers/poisson/two_d_poisson_flux_bc_adapt/validata/results.dat.gz); then 
       echo "yes" >> size.html
     else 
       echo "no" >> size.html
