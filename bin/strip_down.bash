@@ -116,7 +116,7 @@ cop="cp "
 # Update makefiles
 $cop Makefile.am backed_up_stripped_out_files/Makefile.am.top_level 
 $cop $home_dir/config/stripped_down_files/Makefile.am.top_level Makefile.am
-$cop Makefile.am backed_up_stripped_out_files/Makfile.am.bin
+$cop bin/Makefile.am backed_up_stripped_out_files/Makfile.am.bin
 $cop $home_dir/config/stripped_down_files/Makefile.am.bin bin/Makefile.am
 
 
@@ -142,7 +142,7 @@ cd self_test
 mv analyse_self_tests ../tmp_analyse_self_tests
 $del *
 mv ../tmp_analyse_self_tests analyse_self_test
-$cop Makefile.am backed_up_stripped_out_files/Makfile.am.self_test
+$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makfile.am.self_test
 $cop $home_dir/config/stripped_down_files/Makefile.am.self_test Makefile.am
 
 
@@ -161,7 +161,7 @@ mv mpi ../tmp_mpi
 $del *
 mv ../tmp_poisson poisson
 mv ../tmp_mpi mpi
-$cop Makefile.am backed_up_stripped_out_files/Makfile.am.demo_drivers
+$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makfile.am.demo_drivers
 $cop $home_dir/config/stripped_down_files/Makefile.am.demo_drivers Makefile.am
 
 
@@ -171,7 +171,7 @@ cd poisson
 mv two_d_poisson_flux_bc_adapt ../tmp_two_d_poisson_flux_bc_adapt
 $del *
 mv ../tmp_two_d_poisson_flux_bc_adapt two_d_poisson_flux_bc_adapt 
-$cop Makefile.am backed_up_stripped_out_files/Makfile.am.demo_drivers.poisson
+$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makfile.am.demo_drivers.poisson
 $cop $home_dir/config/stripped_down_files/Makefile.am.demo_drivers.poisson Makefile.am
 cd ..
 
@@ -182,14 +182,14 @@ cd mpi
 mv distribution ../tmp_distribution
 $del *
 mv ../tmp_distribution distribution
-$cop Makefile.am backed_up_stripped_out_files/Makfile.am.demo_drivers.mpi
+$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makfile.am.demo_drivers.mpi
 $cop $home_dir/config/stripped_down_files/Makefile.am.demo_drivers.mpi Makefile.am
 
 cd distribution
 mv two_d_poisson_flux_bc_adapt ../tmp_two_d_poisson_flux_bc_adapt
 $del * 
 mv ../tmp_two_d_poisson_flux_bc_adapt two_d_poisson_flux_bc_adapt
-$cop Makefile.am backed_up_stripped_out_files/Makfile.am.demo_drivers.mpi.distribution
+$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makfile.am.demo_drivers.mpi.distribution
 $cop $home_dir/config/stripped_down_files/Makefile.am.demo_drivers.mpi.distribution Makefile.am
 
 
@@ -209,7 +209,7 @@ $del *
 mv ../tmp_generic generic
 mv ../tmp_poisson poisson
 mv ../tmp_meshes  meshes
-$cop Makefile.am backed_up_stripped_out_files/Makfile.am.src
+$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makfile.am.src
 $cop $home_dir/config/stripped_down_files/Makefile.am.src Makefile.am
 
 
@@ -222,9 +222,9 @@ cp rectangular_quadmesh.template.cc simple_rectangular_quadmesh.template.cc ../t
 $del *.h *.cc
 mv ../tmp_meshes/* .
 rmdir ../tmp_meshes
-$cop mesh_names.list backed_up_stripped_out_files/mesh_names.list
+$cop mesh_names.list $home_dir/backed_up_stripped_out_files/mesh_names.list
 $cop $home_dir/config/stripped_down_files/mesh_names.list .
-$cop Makefile.am backed_up_stripped_out_files/Makefile.am.meshes
+$cop Makefile.am $home_dir/backed_up_stripped_out_files/Makefile.am.meshes
 $cop $home_dir/config/stripped_down_files/Makefile.am.meshes Makefile.am
 
 
@@ -239,25 +239,25 @@ cd $home_dir
 cd config/configure.ac_scripts
 
 
-$cop private.dir_list backed_up_stripped_out_files/private.dir_list 
+$cop private.dir_list $home_dir/backed_up_stripped_out_files/private.dir_list 
 $cop $home_dir/config/stripped_down_files/private.dir_list .
 
-$cop private_user_drivers.dir_list backed_up_stripped_out_files/private_user_drivers.dir_list 
+$cop private_user_drivers.dir_list $home_dir/backed_up_stripped_out_files/private_user_drivers.dir_list 
 $cop $home_dir/config/stripped_down_files/private_user_drivers.dir_list .
 
-$cop private_user_src.dir_list backed_up_stripped_out_files/private_user_src.dir_list 
+$cop private_user_src.dir_list $home_dir/backed_up_stripped_out_files/private_user_src.dir_list 
 $cop $home_dir/config/stripped_down_files/private_user_src.dir_list .
 
-$cop user_drivers.dir_list backed_up_stripped_out_files/user_drivers.dir_list 
+$cop user_drivers.dir_list $home_dir/backed_up_stripped_out_files/user_drivers.dir_list 
 $cop $home_dir/config/stripped_down_files/user_drivers.dir_list .
 
-$cop user_src.dir_list backed_up_stripped_out_files/user_src.dir_list 
+$cop user_src.dir_list $home_dir/backed_up_stripped_out_files/user_src.dir_list 
 $cop $home_dir/config/stripped_down_files/user_src.dir_list .
 
-$cop core.dir_list backed_up_stripped_out_files/core.dir_list 
+$cop core.dir_list $home_dir/backed_up_stripped_out_files/core.dir_list 
 $cop $home_dir/config/stripped_down_files/core.dir_list .
 
-$cop doc.dir_list backed_up_stripped_out_files/doc.dir_list 
+$cop doc.dir_list $home_dir/backed_up_stripped_out_files/doc.dir_list 
 $cop $home_dir/config/stripped_down_files/doc.dir_list .
 
 
