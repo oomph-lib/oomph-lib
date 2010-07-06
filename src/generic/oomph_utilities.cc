@@ -30,6 +30,7 @@
 #include "matrices.h"
 #include <algorithm>
 #include <limits.h>
+#include <cstring>
 
 #ifdef OOMPH_HAS_MPI
 #include "mpi.h"
@@ -883,7 +884,7 @@ namespace CommandLineArgs
  /// \short Specify possible command line flag that specifies a string, 
  /// accessed via pointer
  void specify_command_line_flag(const std::string& command_line_flag,
-                                string* arg_pt)
+                                std::string* arg_pt)
  {
   Specified_command_line_string_pt[command_line_flag]=
    std::make_pair(false,arg_pt);
