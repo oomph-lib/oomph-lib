@@ -35,7 +35,7 @@
 #include "integral.h"
 #include "shape.h"
 #include "oomph_definitions.h"
-//#include "geom_objects.h"
+#include "element_with_external_element.h"
 
 namespace oomph
 {
@@ -487,38 +487,221 @@ DenseMatrix<double> GeneralisedElement::Dummy_matrix;
 
   //Check that no global equation numbers are repeated
 #ifdef PARANOID
-  //Create a set
+
+  std::ostringstream error_stream;
+
+  //Loop over the array of equation numbers and add to set to assess
+  //uniqueness
+  std::map<unsigned,bool> is_repeated;
   std::set<unsigned long> set_of_global_eqn_numbers;
-  //Loop over the array of equation numbers and add to the set
+  unsigned old_ndof=0;
   for(unsigned n=0;n<Ndof;++n) 
    {
     set_of_global_eqn_numbers.insert(Eqn_number[n]);
+    if (set_of_global_eqn_numbers.size()==old_ndof)
+     {
+      error_stream << "Repeated global eqn: " << Eqn_number[n] << std::endl;
+      is_repeated[Eqn_number[n]]=true;
+     }
+    old_ndof=set_of_global_eqn_numbers.size();
    }
-
+  
   //If the sizes do not match we have a repeat, throw an error
   if(set_of_global_eqn_numbers.size() != Ndof)
    {
-    std::ostringstream error_stream;
-    error_stream << "Repeated global equation numbers: " << std::endl;
-    error_stream << "Local : Global " << std::endl;
+    error_stream << "Element is ";
+    if (!is_halo()) error_stream << "not ";
+    error_stream << "a halo element\n\n";
+    error_stream << "\nLocal/lobal equation numbers: " << std::endl;
     for(unsigned n=0;n<Ndof;++n)
      {
       error_stream << "  " << n << "        " << Eqn_number[n] << std::endl;
      }
-
+    
     // It's helpful for debugging purposes to output more about this element
     error_stream << std::endl << " element address is " << this << std::endl;
+    
+    // Check if the repeated dofs are among the internal Data values
+    unsigned nint=this->ninternal_data();
+    error_stream << "Number of internal data " << nint << std::endl;
+    for (unsigned i=0;i<nint;i++)
+     {
+      Data* data_pt=this->internal_data_pt(i);
+      unsigned nval=data_pt->nvalue();
+      for (unsigned j=0;j<nval;j++)
+       {
+        int eqn_no=data_pt->eqn_number(j);
+        error_stream << "Internal dof: " << eqn_no << std::endl;
+        if (is_repeated[unsigned(eqn_no)])
+         {
+          error_stream << "Repeated internal dof: " << eqn_no << std::endl;
+         }
+       }
+     }
+    
+    // Check if the repeated dofs are among the external Data values
+    unsigned next=this->nexternal_data();
+    error_stream << "Number of external data " << next << std::endl;
+    for (unsigned i=0;i<next;i++)
+     {
+      Data* data_pt=this->external_data_pt(i);
+      unsigned nval=data_pt->nvalue();
+      for (unsigned j=0;j<nval;j++)
+       {
+        int eqn_no=data_pt->eqn_number(j);
+        error_stream << "External dof: " << eqn_no << std::endl;
+        if (is_repeated[unsigned(eqn_no)])
+         {
+          error_stream << "Repeated external dof: " << eqn_no;            
+          Node* nod_pt=dynamic_cast<Node*>(data_pt);
+          if (nod_pt!=0)
+           {
+            error_stream << " (is a node at: ";
+            unsigned ndim=nod_pt->ndim();
+            for (unsigned ii=0;ii<ndim;ii++)
+             {
+              error_stream << nod_pt->x(i) << " ";
+             }
+           }
+          error_stream << ")\n";
+         }
+       }
+     }
+    
+    
+    // If it's an element with external element check the associated
+    // Data
+    ElementWithExternalElement* e_el_pt=
+     dynamic_cast<ElementWithExternalElement*>(this);
+    if (e_el_pt!=0)
+     {
+      // Check if the repeated dofs are among the external Data values
+      {
+       unsigned next=e_el_pt->nexternal_interaction_field_data();
+       error_stream << "Number of external element data " << next << std::endl;
+       Vector<Data*> data_pt(e_el_pt->external_interaction_field_data_pt());
+       for (unsigned i=0;i<next;i++)
+        {
+         unsigned nval=data_pt[i]->nvalue();
+         for (unsigned j=0;j<nval;j++)
+          {
+           int eqn_no=data_pt[i]->eqn_number(j);
+           error_stream << "External element dof: " << eqn_no << std::endl;
+           if (is_repeated[unsigned(eqn_no)])
+            {
+             error_stream << "Repeated external element dof: " 
+                          << eqn_no;            
+             Node* nod_pt=dynamic_cast<Node*>(data_pt[i]);
+             if (nod_pt!=0)
+              {
+               error_stream << " (is a node at: ";
+               unsigned ndim=nod_pt->ndim();
+               for (unsigned ii=0;ii<ndim;ii++)
+                {
+                 error_stream << nod_pt->x(ii) << " ";
+                }
+              }
+             error_stream << ")\n";
+            }
+          }
+        }
+      }
+       
+      
+      // Check if the repeated dofs are among the external geom Data values
+      {
+       unsigned next=e_el_pt->nexternal_interaction_geometric_data();
+       error_stream << "Number of external element geom data " 
+                    << next << std::endl;
+       Vector<Data*> data_pt(e_el_pt->
+                             external_interaction_geometric_data_pt());
+       for (unsigned i=0;i<next;i++)
+        {
+         unsigned nval=data_pt[i]->nvalue();
+         for (unsigned j=0;j<nval;j++)
+          {
+           int eqn_no=data_pt[i]->eqn_number(j);
+           error_stream << "External element geometric dof: " 
+                        << eqn_no << std::endl;
+           if (is_repeated[unsigned(eqn_no)])
+            {
+             error_stream << "Repeated external element geometric dof: " 
+                          << eqn_no << " " 
+                          << data_pt[i]->value(j);            
+             Node* nod_pt=dynamic_cast<Node*>(data_pt[i]);
+             if (nod_pt!=0)
+              {
+               error_stream << " (is a node at: ";
+               unsigned ndim=nod_pt->ndim();
+               for (unsigned ii=0;ii<ndim;ii++)
+                {
+                 error_stream << nod_pt->x(i) << " ";
+                }
+               error_stream << ")";
+              }
+             error_stream << "\n";
+            }
+          }
+        }
+      }
+
+     }
 
     // If it's a FiniteElement then output its nodes
     FiniteElement* f_el_pt=dynamic_cast<FiniteElement*>(this);
-
     if (f_el_pt!=0)
      {
       unsigned n_node=f_el_pt->nnode();
-      unsigned n_dim=f_el_pt->dim();
       for (unsigned n=0;n<n_node;n++)
        {
         Node* nod_pt=f_el_pt->node_pt(n);
+        unsigned nval=nod_pt->nvalue();
+        for (unsigned j=0;j<nval;j++)
+         {
+          int eqn_no=nod_pt->eqn_number(j);
+          error_stream << "Node " << n 
+                       << ": Nodal dof: " 
+                       << eqn_no;
+          if (eqn_no>=0)
+           {
+            if (is_repeated[unsigned(eqn_no)])
+             {
+              error_stream << "Node " << n 
+                           << ": Repeated nodal dof: " 
+                           << eqn_no;
+              if (j>=f_el_pt->required_nvalue(n))
+               {
+                error_stream << " (resized)";
+               }
+              error_stream << std::endl;
+             }
+           }
+         }       
+        SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
+        if (solid_nod_pt!=0)
+         {
+          Data* data_pt=solid_nod_pt->variable_position_pt();
+          unsigned nval=data_pt->nvalue();
+          for (unsigned j=0;j<nval;j++)
+           {
+            int eqn_no=data_pt->eqn_number(j);
+            error_stream <<  "Node " << n << ": Positional dof: " 
+                         << eqn_no << std::endl;
+            if (is_repeated[unsigned(eqn_no)])
+             {
+              error_stream << "Repeated positional dof: " 
+                           << eqn_no << " " << data_pt->value(j) << std::endl;
+             }
+           }
+         }        
+       }
+      
+      // Output nodal coordinates of element
+      n_node=f_el_pt->nnode();
+      for (unsigned n=0;n<n_node;n++)
+       {
+        Node* nod_pt=f_el_pt->node_pt(n);
+        unsigned n_dim=nod_pt->ndim();
         error_stream << "Node " << n << " at ( ";
         for (unsigned i=0;i<n_dim;i++)
          {
@@ -526,6 +709,7 @@ DenseMatrix<double> GeneralisedElement::Dummy_matrix;
          }
         error_stream << ")" << std::endl;
        }
+
      }
 
 
@@ -4789,7 +4973,6 @@ void FaceElement::get_local_coordinate_in_bulk(
     //Now add our global equations numbers to the internal element storage
     add_global_eqn_numbers(global_eqn_number_queue);
    } //End of the case when there are nodes
-  
  }
 
 

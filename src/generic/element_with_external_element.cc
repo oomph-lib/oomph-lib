@@ -301,8 +301,19 @@ assign_external_interaction_data_local_eqn_numbers()
       {
        paired_field_data.erase(std::make_pair(nod_pt,i));
       }
-    } 
-   
+     SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
+     if (solid_nod_pt!=0)
+      {
+       Data* pos_data_pt=solid_nod_pt->variable_position_pt();
+       //Find the number of positional values stored at the node
+       const unsigned n_value = pos_data_pt->nvalue();
+       //Loop over values and erase all pairs from the set
+       for(unsigned i=0;i<n_value;i++)
+        {
+         paired_field_data.erase(std::make_pair(pos_data_pt,i));
+        }
+      }
+    }
    
    //Now allocate storage for the external field data
    //associated indices and local equation numbers
@@ -325,7 +336,7 @@ assign_external_interaction_data_local_eqn_numbers()
       ++count;
      }
    }
-   
+  
 
    //Only bother to add geometric data if we're told to
    if(Add_external_geometric_data)
@@ -357,6 +368,29 @@ assign_external_interaction_data_local_eqn_numbers()
      for(unsigned j=0;j<n_external;j++)
       {
        external_geometric_data_pt.erase(external_data_pt(j));
+      }
+   
+     //Loop over all the nodes of present element to avoid double counting
+     const unsigned n_node = this->nnode();
+     for(unsigned n=0;n<n_node;n++)
+      {
+       Node* const nod_pt = this->node_pt(n);
+       external_geometric_data_pt.erase(nod_pt);
+
+       SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
+       if (solid_nod_pt!=0)
+        {
+         Data* pos_data_pt=solid_nod_pt->variable_position_pt();
+//          std::ostringstream junk;
+//          junk << "Erasing ";
+//          unsigned nval=pos_data_pt->nvalue();
+//          for (unsigned i=0;i<nval;i++)
+//           {
+//            junk << pos_data_pt->eqn_number(i) << " ";
+//           }
+//          oomph_info << junk.str() << std::endl;
+         external_geometric_data_pt.erase(pos_data_pt);
+        }
       }
     
      
@@ -427,9 +461,17 @@ assign_external_interaction_data_local_eqn_numbers()
       External_interaction_field_data_pt[i]->
       eqn_number(External_interaction_field_data_index[i]);
 
-     //If the GLOBAL equation number is positive (a free variable)
+     //If the GLOBAL equation number is positive (i.e. not pinned)
      if(eqn_number >= 0)
       {
+//        std::ostringstream junk;
+//        junk << "Adding global eqn " << eqn_number << " (";
+//        if (!(External_interaction_field_data_pt[i]->is_halo())) 
+//         {
+//          junk << "not";
+//         }
+//        oomph_info << junk.str() << " halo" << std::endl;
+
        //Add the GLOBAL equation number to the local queue
        global_eqn_number_queue.push_back(eqn_number);
        //Add the local equation number to the local scheme
