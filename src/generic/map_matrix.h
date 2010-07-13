@@ -34,6 +34,11 @@
   #include <oomph-lib-config.h>
 #endif
 
+
+#ifdef OOMPH_HAS_MPI
+#include "mpi.h"
+#endif
+
 #include<map>
 
 //oomph-lib headers

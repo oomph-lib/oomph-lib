@@ -35,6 +35,10 @@
   #include <oomph-lib-config.h>
 #endif
 
+#ifdef OOMPH_HAS_MPI
+#include "mpi.h"
+#endif
+
 //OOMPH-LIB headers
 #include "tree.h"
 #include "matrices.h"

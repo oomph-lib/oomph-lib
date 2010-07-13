@@ -28,6 +28,11 @@
 //Driver for a simple 2D Poisson problem with flux boundary conditions
 //uses two separate meshes for bulk and surface mesh
 
+
+#ifdef OOMPH_HAS_MPI
+#include "mpi.h"
+#endif
+
 //Generic routines
 #include "generic.h"
 

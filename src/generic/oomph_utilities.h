@@ -36,6 +36,12 @@
   #include <oomph-lib-config.h>
 #endif
 
+
+#ifdef OOMPH_HAS_MPI
+//mpi headers
+#include "mpi.h"
+#endif
+
 //Standard libray headers
 #include<string>
 #include<sstream>
@@ -44,16 +50,12 @@
 #include<map>
 
 
+
 //oomph-lib headers
 #include "Vector.h"
 #include "oomph_definitions.h"
 #include "communicator.h"
 
-
-#ifdef OOMPH_HAS_MPI
-//mpi headers
-#include "mpi.h"
-#endif
 
 
 namespace oomph

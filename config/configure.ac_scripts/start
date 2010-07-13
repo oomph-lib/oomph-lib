@@ -210,7 +210,20 @@ AC_FUNC_MALLOC
 #...........................................................................
 
 
+# Cray hack: Static C++ libraries
+#--------------------------------
+AC_ARG_ENABLE(static-cxx-libs, 
+              [  --enable-static-cxx-libs Pass -all-static to CXX when used as linker (needed when using gnu complier on Crays)],
+        [want_static_cxx_libs=true],
+        [want_static_cxx_libs=false])       
 
+if test x$want_static_cxx_libs = xtrue; then 
+        AC_SUBST([CXXLD], ['$(CXX) -all-static']) 
+        echo "Using -all-static flag for CXX linker"
+else 
+        AC_SUBST([CXXLD], ['$(CXX)']) 
+        echo "Not using -all-static flag for CXX linker"
+fi
 
 
 
@@ -732,7 +745,10 @@ check_for_blas=false
 
 AC_ARG_WITH(blas,
 [  --with-blas[=ABSOLUTE_PATH] use blas library specified via ABSOLUTE PATH
-                               e.g. /usr/local/lib/blas.a],[
+                               e.g. /usr/local/lib/blas.a 
+                               or specify "auto" (without quotation marks!) 
+                               if the library is specified automatically 
+                               by your compiler/linker],[
   if test "$withval" != "no" -a "$withval" != "yes"; then
     check_for_blas=true
     BLAS_LIB=$withval
@@ -753,11 +769,17 @@ if test -e $BLAS_LIB; then \
     # Make the variable available to all Makefile.am-s
     AC_SUBST(BLAS_LIB)
 else \
-    have_blas=false; \
-    echo "Did NOT find the blas library"; \
-    echo " "; \
-    echo "   "  $BLAS_LIB ; \
-    echo " "; \
+   if test "$BLAS_LIB" == "auto"; then
+       have_blas=true; \
+       echo "Will assume that blas library is specified automatically by"; \
+       echo "compiler/linker."; \
+    else \
+       have_blas=false; \
+       echo "Did NOT find the blas library"; \
+       echo " "; \
+       echo "   "  $BLAS_LIB ; \
+       echo " "; \
+    fi; \
 fi; \
 else \
     echo "No blas library specified"; \ 
@@ -787,7 +809,10 @@ check_for_lapack=false
 
 AC_ARG_WITH(lapack,
 [  --with-lapack[=ABSOLUTE_PATH] use lapack library specified via ABSOLUTE PATH
-                               e.g. /usr/local/lib/lapack.a],[
+                               e.g. /usr/local/lib/lapack.a 
+                               or specify "auto" (without quotation marks!) 
+                               if the library is specified automatically 
+                               by your compiler/linker],[
   if test "$withval" != "no" -a "$withval" != "yes"; then
     check_for_lapack=true
     LAPACK_LIB=$withval
@@ -808,11 +833,17 @@ if test -e $LAPACK_LIB; then \
     # Make the variable available to all Makefile.am-s
     AC_SUBST(LAPACK_LIB)
 else \
-    have_lapack=false; \
-    echo "Did NOT find the lapack library"; \
-    echo " "; \
-    echo "   "  $LAPACK_LIB ; \
-    echo " "; \
+   if test "$LAPACK_LIB" == "auto"; then
+       have_lapack=true; \
+       echo "Will assume that lapack library is specified automatically by"; \
+       echo "compiler/linker."; \
+    else \
+       have_lapack=false; \
+       echo "Did NOT find the lapack library"; \
+       echo " "; \
+       echo "   "  $LAPACK_LIB ; \
+       echo " "; \
+    fi \
 fi; \
 else \
     echo "No lapack library specified"; \ 
@@ -1352,7 +1383,12 @@ if test x$have_lapack = xfalse; then
   external_libs=`echo $external_libs " -loomph_lapack -loomph_flapack"`
   echo "EXTERNAL LIBS (I-2): " $external_libs
 else 
-  external_libs=`echo $external_libs " $LAPACK_LIB"`
+  if test "$LAPACK_LIB" != "auto"; then 
+      external_libs=`echo $external_libs " $LAPACK_LIB"`
+  else
+      echo "Omitting specification of lapack library -- assumed to be"
+      echo "provided automatically by compiler/linker..."
+  fi  
   echo "EXTERNAL LIBS (II-2): " $external_libs
 fi
 
@@ -1363,7 +1399,12 @@ if test x$have_blas = xfalse; then
   external_libs=`echo $external_libs " -loomph_blas"`
   echo "EXTERNAL LIBS (I): " $external_libs
 else 
-  external_libs=`echo $external_libs " $BLAS_LIB"`
+  if test "$BLAS_LIB" != "auto"; then
+      external_libs=`echo $external_libs " $BLAS_LIB"`
+  else
+      echo "Omitting specification of blas library -- assumed to be"
+      echo "provided automatically by compiler/linker..."
+  fi
   echo "EXTERNAL LIBS (II): " $external_libs
 fi
 

@@ -38,6 +38,9 @@
   #include <oomph-lib-config.h>
 #endif
 
+#ifdef OOMPH_HAS_MPI
+#include "mpi.h"
+#endif
 
 //oomph-lib headers
 #include "Vector.h"

@@ -26,11 +26,13 @@
 //LIC// 
 //LIC//====================================================================
 //Non-inline member functions for general mesh classes
-#include<algorithm>
 
 #ifdef OOMPH_HAS_MPI
 #include "mpi.h"
 #endif
+
+#include<algorithm>
+
 
 //oomph-lib headers
 #include "oomph_utilities.h"

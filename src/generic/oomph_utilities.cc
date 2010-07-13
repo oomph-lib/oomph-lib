@@ -25,6 +25,10 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
+#ifdef OOMPH_HAS_MPI
+#include "mpi.h"
+#endif
+
 #include "oomph_utilities.h"
 #include "Vector.h"
 #include "matrices.h"
@@ -32,9 +36,6 @@
 #include <limits.h>
 #include <cstring>
 
-#ifdef OOMPH_HAS_MPI
-#include "mpi.h"
-#endif
 
 namespace oomph
 {

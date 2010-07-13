@@ -27,6 +27,11 @@
 //LIC//====================================================================
 //Interface to HSL frontal solver (fortran)
 
+
+#ifdef OOMPH_HAS_MPI
+#include "mpi.h"
+#endif
+
 //oomph-lib headers
 #include "cfortran.h"
 #include "frontal.h"

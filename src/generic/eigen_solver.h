@@ -36,6 +36,10 @@
  #include <oomph-lib-config.h>
 #endif
 
+#ifdef OOMPH_HAS_MPI
+#include "mpi.h"
+#endif
+
 #include <complex>
 #include "Vector.h"
 #include "complex_matrices.h"

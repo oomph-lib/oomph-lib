@@ -37,6 +37,10 @@
 #include <oomph-lib-config.h>
 #endif
 
+#ifdef OOMPH_HAS_MPI
+#include "mpi.h"
+#endif
+
 //oomph-lib headers
 #include "Vector.h"
 #include "oomph_utilities.h"
@@ -45,10 +49,6 @@
 
 #ifdef HAVE_TRILINOS
 #include "trilinos_helpers.h"
-#endif
-
-#ifdef OOMPH_HAS_MPI
-#include "mpi.h"
 #endif
 
 namespace oomph

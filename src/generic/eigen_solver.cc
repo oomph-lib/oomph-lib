@@ -27,6 +27,10 @@
 //LIC//====================================================================
 //Non-inline functions for the eigensolvers
 
+#ifdef OOMPH_HAS_MPI
+#include "mpi.h"
+#endif
+
 //Include cfortran.h and the header for the FORTRAN ARPACK routines
 #include "cfortran.h"
 #include "arpack.h"

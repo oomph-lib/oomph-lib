@@ -33,16 +33,19 @@
   #include <oomph-lib-config.h>
 #endif
 
-// General headers
-#include "../../src/generic/Vector.h"
-#include "communicator.h"
-#include "oomph_utilities.h"
-#include <ostream>
-
 // MPI headers
 #ifdef OOMPH_HAS_MPI
 #include "mpi.h"
 #endif
+
+#include <ostream>
+
+// General headers
+#include "../../src/generic/Vector.h"
+#include "communicator.h"
+#include "oomph_utilities.h"
+
+
 
 namespace oomph{
 

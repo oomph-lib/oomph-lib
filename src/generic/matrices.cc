@@ -27,6 +27,10 @@
 //LIC//====================================================================
 //Non-inline member functions for the matrix classes
 
+#ifdef OOMPH_HAS_MPI
+#include "mpi.h"
+#endif
+
 #include<set> 
 #include<map> 
 
@@ -34,9 +38,6 @@
 #include "matrices.h"
 #include "linear_solver.h"
 
-#ifdef OOMPH_HAS_MPI
-#include "mpi.h"
-#endif
 
 namespace oomph
 {

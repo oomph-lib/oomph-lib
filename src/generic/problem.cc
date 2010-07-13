@@ -25,12 +25,13 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-#include<list>
-#include<algorithm>
 
 #ifdef OOMPH_HAS_MPI
 #include "mpi.h"
 #endif
+
+#include<list>
+#include<algorithm>
 
 #include "oomph_utilities.h"
 #include "problem.h"

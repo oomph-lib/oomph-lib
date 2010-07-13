@@ -37,6 +37,10 @@
 #include <oomph-lib-config.h>
 #endif
 
+#ifdef OOMPH_HAS_MPI
+#include "mpi.h"
+#endif
+
 //Of course we need the complex type
 #include <complex>
 

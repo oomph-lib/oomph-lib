@@ -26,6 +26,7 @@
 //LIC// 
 //LIC//====================================================================
 // Functions for OomphCommunicator
+
 // MPI headers
 #ifdef OOMPH_HAS_MPI
 #include "mpi.h"
