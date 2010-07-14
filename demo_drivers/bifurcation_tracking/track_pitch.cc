@@ -18,7 +18,7 @@ using namespace std;
 
 using namespace oomph;
 
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
 //=============================================================================
 /// helper method for the block diagonal F block preconditioner to allow 
 /// hypre to be used for as a subsidiary block preconditioner
@@ -307,7 +307,7 @@ RotatingProblem<ELEMENT>::RotatingProblem
 //  //Set the linear solver
 //  this->linear_solver_pt() = iterative_linear_solver_pt;
 
-/*#ifdef HAVE_HYPRE
+/*#ifdef OOMPH_HAS_HYPRE
 //Trap because HYPRE can't handle the case when OOMPH_HAS_MPI, but we
 //run in serial
 #ifndef OOMPH_HAS_MPI
@@ -330,7 +330,7 @@ RotatingProblem<ELEMENT>::RotatingProblem
 */ 
 //Preconditioner* F_matrix_preconditioner_pt = 
 //  new BlockDiagonalPreconditioner<CRDoubleMatrix>;
-/*#ifdef HAVE_HYPRE
+/*#ifdef OOMPH_HAS_HYPRE
 //Trap because HYPRE can't handle the case when 
 //OOMPH_HAS_MPI, but we run in serial
 #ifndef OOMPH_HAS_MPI

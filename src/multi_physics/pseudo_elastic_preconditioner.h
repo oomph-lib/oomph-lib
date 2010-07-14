@@ -34,11 +34,11 @@
 #include "../generic/preconditioner.h"
 #include "../generic/SuperLU_preconditioner.h"
 #include "../generic/matrix_vector_product.h"
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
 #include "../generic/hypre_solver.h"
 #endif
 #include "../generic/general_purpose_preconditioners.h"
-#ifdef HAVE_TRILINOS
+#ifdef OOMPH_HAS_TRILINOS
 #include "../generic/trilinos_solver.h"
 #endif
 namespace oomph
@@ -50,13 +50,13 @@ namespace oomph
  //=============================================================================
  namespace Pseudo_Elastic_Preconditioner_Subsidiary_Operator_Helper
  {
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
   /// \short AMG w/ GS smoothing for the augmented elastic subsidiary linear
   /// systems
   Preconditioner* get_elastic_preconditioner();
 #endif
   
-#ifdef HAVE_TRILINOS
+#ifdef OOMPH_HAS_TRILINOS
   /// \short CG with diagonal preconditioner for the lagrange multiplier
   /// subsidiary linear systems.
   Preconditioner* get_lagrange_multiplier_preconditioner();

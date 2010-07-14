@@ -99,7 +99,7 @@ public :
    P_preconditioner_pt = 0;
    F_preconditioner_pt = 0;
 
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
 //If we have compiled with MPI, 
 //only use HYPRE if it's been initialised
 #ifdef OOMPH_HAS_MPI

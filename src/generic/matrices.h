@@ -47,7 +47,7 @@
 #include "linear_algebra_distribution.h"
 #include "double_vector.h"
 
-#ifdef HAVE_TRILINOS
+#ifdef OOMPH_HAS_TRILINOS
 #include "trilinos_helpers.h"
 #endif
 

@@ -14,7 +14,7 @@ direct_solver_test
 
 # Do we have the HYPRE library?
 #==============================
-if HAVE_HYPRE
+if OOMPH_HAS_HYPRE
 #Don't add this if we have MPI 
 #(HYPRE can't handle serial execution of MPI-enabled code)
 #=========================================================
@@ -26,7 +26,7 @@ endif
 
 # Do we have the TRILINOS library?
 #=================================
-if HAVE_TRILINOS
+if OOMPH_HAS_TRILINOS
 #Don't add this if we have MPI 
 #(TRILINOS can't handle serial execution of MPI-enabled code)
 #=========================================================
@@ -102,7 +102,7 @@ direct_solver_test_LDADD = \
 
 # Do we have the TRILINOS library?
 #=================================
-if HAVE_TRILINOS
+if OOMPH_HAS_TRILINOS
 
 # Sources the executable depends on:
 TrilinosSolver_test_SOURCES = TrilinosSolver_test.cc
@@ -125,7 +125,7 @@ endif
 
 # Do we have the HYPRE library?
 #===============================
-if HAVE_HYPRE
+if OOMPH_HAS_HYPRE
 
 # Sources for executable
 HypreSolver_test_SOURCES = HypreSolver_test.cc

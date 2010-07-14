@@ -38,7 +38,7 @@
 namespace oomph
 {
 
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
 //=============================================================================
 // defaults settings for the Hypre solver (AMG) when used as the approximate
 // linear solver for the Schur complement (non-compound) linear subsidiary 
@@ -421,7 +421,7 @@ void InexactSubBiharmonicPreconditioner::setup
   // create the preconditioner for the S00 Schur complement linear system
   if (Use_amg)
    {
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
     // Use Hypre Boomer AMG
     S_00_preconditioner_pt = new HyprePreconditioner;
     Biharmonic_schur_complement_Hypre_defaults::

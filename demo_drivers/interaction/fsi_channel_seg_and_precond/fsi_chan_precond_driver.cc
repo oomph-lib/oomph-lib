@@ -446,7 +446,7 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
        }
 
 
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
 //If we are using MPI, then only use HYPRE if it has been initialised
 #ifdef OOMPH_HAS_MPI
       if(MPI_Helpers::mpi_has_been_initialised())

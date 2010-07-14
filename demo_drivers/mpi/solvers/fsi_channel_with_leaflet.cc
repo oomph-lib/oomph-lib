@@ -924,7 +924,7 @@ int main(int argc, char* argv[])
           htot,nleft,nright,ny1,ny2,x_0); 
 
  // Create the solver. 
-#ifdef HAVE_TRILINOS
+#ifdef OOMPH_HAS_TRILINOS
  TrilinosAztecOOSolver* solver_pt = new TrilinosAztecOOSolver;
  solver_pt->solver_type() = TrilinosAztecOOSolver::GMRES;
 #else

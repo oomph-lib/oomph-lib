@@ -29,11 +29,6 @@
 #define OOMPH_BRICK_FROM_TET_MESH_TEMPLATE_CC
 
 
-#include<iterator>
-#include<algorithm>
-
-#include "../generic/mesh.h"
-#include "../generic/tet_mesh.h"
 #include "brick_from_tet_mesh.template.h"
 
 namespace oomph

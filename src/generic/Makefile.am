@@ -113,7 +113,7 @@ templates = \
 tree.template.cc multi_domain.template.cc
 
 # Do we have the HYPRE library?
-if HAVE_HYPRE
+if OOMPH_HAS_HYPRE
 
    # Add the hypre sources
    sources += hypre_solver.cc
@@ -125,7 +125,7 @@ if HAVE_HYPRE
 endif
 
 # Do we have the TRILINOS library?
-if HAVE_TRILINOS
+if OOMPH_HAS_TRILINOS
 
    # Add the trilinos sources
    sources += trilinos_helpers.cc trilinos_preconditioners.cc \

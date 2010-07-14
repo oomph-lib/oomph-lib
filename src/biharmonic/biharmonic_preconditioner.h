@@ -43,7 +43,7 @@
 #include "../generic/SuperLU_preconditioner.h"
 #include "../generic/general_purpose_preconditioners.h"
 
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
 #include "../generic/hypre_solver.h"
 #endif
 
@@ -71,7 +71,7 @@ namespace oomph
      
      // by default we use the inexact biharmonic preconditioner
      // and if possible use Hypre preconditioner
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
      Preconditioner_type = 2;
 #else
      Preconditioner_type = 1;

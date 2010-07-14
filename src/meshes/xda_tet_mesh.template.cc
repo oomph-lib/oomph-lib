@@ -29,9 +29,6 @@
 #define OOMPH_XDA_TET_MESH_TEMPLATE_CC
 
 
-#include<iterator>
-#include<algorithm>
-#include<string>
 
 #include "xda_tet_mesh.template.h"
 

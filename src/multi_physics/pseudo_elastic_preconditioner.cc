@@ -37,7 +37,7 @@ namespace oomph
  //=============================================================================
  namespace Pseudo_Elastic_Preconditioner_Subsidiary_Operator_Helper
  {
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
   /// \short AMG w/ GS smoothing for the augmented elastic subsidiary linear
   /// systems
   Preconditioner* get_elastic_preconditioner()
@@ -54,7 +54,7 @@ namespace oomph
   }
 #endif
   
-#ifdef HAVE_TRILINOS
+#ifdef OOMPH_HAS_TRILINOS
   /// \short CG with diagonal preconditioner for the lagrange multiplier
   /// subsidiary linear systems.
   Preconditioner* get_lagrange_multiplier_preconditioner()

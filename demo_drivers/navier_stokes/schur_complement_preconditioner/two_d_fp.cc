@@ -45,7 +45,7 @@ using namespace oomph;
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
 
 //=============================================================================
 /// helper method for the block diagonal F block preconditioner to allow 
@@ -300,7 +300,7 @@ FpTestProblem::FpTestProblem(
  P_matrix_preconditioner_pt=0;
  if (use_hypre_for_pressure)
   {
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
 
    // Create preconditioner
    P_matrix_preconditioner_pt = new HyprePreconditioner;
@@ -330,7 +330,7 @@ FpTestProblem::FpTestProblem(
    // Use Hypre as block preconditioner
    if (use_hypre_for_pressure)
     {
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
      dynamic_cast<BlockDiagonalPreconditioner<CRDoubleMatrix>* >
       (F_matrix_preconditioner_pt)->set_subsidiary_preconditioner_function
       (Hypre_Subsidiary_Preconditioner_Helper::set_hypre_preconditioner);
@@ -528,7 +528,7 @@ FpTestProblem::FpTestProblem(
  // Setup equation numbering scheme
  oomph_info <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
 
-#ifdef HAVE_TRILINOS
+#ifdef OOMPH_HAS_TRILINOS
 
  // Build iterative linear solver
  oomph_info << "Using Trilinos GMRES\n"; 

@@ -149,7 +149,7 @@ class FaceGeometry<PseudoElasticBulkElement<ELEMENT> > :
 
 }
 
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
 
 //=========================================================================
 /// Navier Stokes LSC Preconditioner Subsidiary Helper
@@ -1609,7 +1609,7 @@ typedef PseudoElasticCollapsibleChannelProblem<
 void set_pseudo_elastic_fsi_solver(PseudoElasticFSIProblem& problem)
 {
 // setup the solver
-//#ifdef HAVE_TRILINOS
+//#ifdef OOMPH_HAS_TRILINOS
 // TrilinosAztecOOSolver* solver_pt = new
 //  TrilinosAztecOOSolver;
 // solver_pt->solver_type() = TrilinosAztecOOSolver::GMRES;

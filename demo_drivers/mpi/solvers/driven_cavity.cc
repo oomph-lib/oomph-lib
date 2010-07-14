@@ -56,7 +56,7 @@ namespace Global_Physical_Variables
 ////////////////////////////////////////////////////////////////////////
 
 
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
 //=============================================================================
 /// helper method for the block diagonal F block preconditioner to allow 
 /// hypre to be used for as a subsidiary block preconditioner
@@ -308,7 +308,7 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem(
    
    // Create internal preconditioners used on Schur block
    //-----------------------------------------------------
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
    if (use_hypre_for_pressure)
     {
      P_matrix_preconditioner_pt = new HyprePreconditioner;
@@ -333,7 +333,7 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem(
     {
      F_matrix_preconditioner_pt = 
       new BlockDiagonalPreconditioner<CRDoubleMatrix>;
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
      if (use_hypre_for_momentum)
       {
        dynamic_cast<BlockDiagonalPreconditioner<CRDoubleMatrix>* >
@@ -346,7 +346,7 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem(
     }
    else
     {
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
      if (use_hypre_for_momentum)
       {
        F_matrix_preconditioner_pt = new HyprePreconditioner;

@@ -820,7 +820,7 @@ TurekProblem(const double &length,
  // other preconditioners that perform the (approximate)
  // solves of these blocks.
 
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
 //Only use HYPRE if we don't have MPI enabled
 #ifndef OOMPH_HAS_MPI
 

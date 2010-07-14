@@ -1745,7 +1745,7 @@ int main(int argc, char *argv[])
    oomph_info << "Using GMRES solver\n";
    if (p_solver==0)
     {
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
      oomph_info << "Using BoomerAMG on P matrix\n";
 #else
      oomph_info 
@@ -1754,7 +1754,7 @@ int main(int argc, char *argv[])
     }
    else if (p_solver==1)
     {
-#ifdef HAVE_TRILINOS
+#ifdef OOMPH_HAS_TRILINOS
      oomph_info << "Using ML SA-AMG on P matrix\n";
 #else
      oomph_info 
@@ -1767,7 +1767,7 @@ int main(int argc, char *argv[])
     }
    if (f_solver==0)
     {
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
      oomph_info << "Using BoomerAMG on F matrix\n"
                 << "smoother: " << f_bamg_smoother
                 << "\ndamping: " << f_bamg_damping
@@ -1780,7 +1780,7 @@ int main(int argc, char *argv[])
     }
    else if (f_solver==1)
     {
-#ifdef HAVE_TRILINOS
+#ifdef OOMPH_HAS_TRILINOS
      oomph_info << "Using ML SA-AMG on F matrix ";
      if (f_ml_settings==0)
       {
@@ -1919,10 +1919,10 @@ int main(int argc, char *argv[])
    ns_preconditioner_pt->doc_time() = true;
    
    // Set up the P sub block preconditioner
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
    if (p_solver==0)
     {
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
      p_preconditioner_pt = new HyprePreconditioner;
      HyprePreconditioner* hypre_preconditioner_pt = 
       static_cast<HyprePreconditioner*>(p_preconditioner_pt);
@@ -1933,10 +1933,10 @@ int main(int argc, char *argv[])
     }
 #endif
 
-#ifdef HAVE_TRILINOS
+#ifdef OOMPH_HAS_TRILINOS
    if (p_solver==1)
     {
-#ifdef HAVE_TRILINOS
+#ifdef OOMPH_HAS_TRILINOS
      p_preconditioner_pt = new TrilinosMLPreconditioner;
      ns_preconditioner_pt->set_p_preconditioner(p_preconditioner_pt);
 #endif
@@ -1944,10 +1944,10 @@ int main(int argc, char *argv[])
 #endif
     
    // Set up the F sub block precondioner
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
    if (f_solver==0)
     {
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
      f_preconditioner_pt = new HyprePreconditioner;
      HyprePreconditioner* hypre_preconditioner_pt = 
       static_cast<HyprePreconditioner*>(f_preconditioner_pt);
@@ -1962,10 +1962,10 @@ int main(int argc, char *argv[])
    }
 #endif
 
-#ifdef HAVE_TRILINOS    
+#ifdef OOMPH_HAS_TRILINOS    
    if (f_solver==1)
     {
-#ifdef HAVE_TRILINOS
+#ifdef OOMPH_HAS_TRILINOS
      f_preconditioner_pt = new TrilinosMLPreconditioner;
      TrilinosMLPreconditioner* trilinos_preconditioner_pt = 
       static_cast<TrilinosMLPreconditioner*>(f_preconditioner_pt);

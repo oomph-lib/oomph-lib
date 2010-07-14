@@ -1111,13 +1111,13 @@ if test x$have_hypre = xfalse; then
 else \
   external_dist_libraries=`echo $external_dist_libraries " -lHYPRE"` ; \
   external_dist_libraries_lib=`echo $external_dist_libraries_lib "-L"$HYPRE_LIB` ; \
-  external_dist_libraries_include=`echo $external_dist_libraries_include "-I"$HYPRE_INCLUDE -DHAVE_HYPRE` ; \
+  external_dist_libraries_include=`echo $external_dist_libraries_include "-I"$HYPRE_INCLUDE -DOOMPH_HAS_HYPRE` ; \
 fi
 
 
 
 #Tell everybody about it...
-AM_CONDITIONAL(HAVE_HYPRE, test x$have_hypre = xtrue)
+AM_CONDITIONAL(OOMPH_HAS_HYPRE, test x$have_hypre = xtrue)
 
 # Make thes variables available to all Makefile.am-s
 AC_SUBST(HYPRE_LIB)
@@ -1144,7 +1144,10 @@ check_for_trilinos=false
 AC_ARG_WITH(trilinos,
 [  --with-trilinos[=DIR] use trilinos library in directory DIR
                           i.e. library is in DIR/lib
-                          and include files are in DIR/include],[
+                          and include files are in DIR/include
+                          or specify "auto" (without quotation marks!) 
+                          if the library is specified automatically 
+                          by your compiler/linker],[
   if test "$withval" != "no" -a "$withval" != "yes"; then
     check_for_trilinos=true
     TRILINOS_DIR=$withval
@@ -1164,24 +1167,36 @@ if test -d $TRILINOS_LIB; then \
     echo "   "  $TRILINOS_LIB ; \
     echo " "; \
 else \
-    have_trilinos=false; \
-    echo "Did NOT find the trilinos libraries in"; \
-    echo " "; \
-    echo "   "  $TRILINOS_LIB ; \
-    echo " "; \
+   if test "$TRILINOS_DIR" == "auto"; then \
+       have_trilinos=true; \
+       echo "Will assume that trilinos library is specified automatically by"; \
+       echo "compiler/linker."; \
+   else \
+       have_trilinos=false; \
+       echo "Did NOT find the trilinos libraries in"; \
+       echo " "; \
+       echo "   "  $TRILINOS_LIB ; \
+       echo " "; \
+   fi;\
 fi; \
 if test -d $TRILINOS_INCLUDE; then \
     have_trilinos=true; \
-    echo "Found the trilinos include files in"; \
+          echo "Found the trilinos include files in"; \
     echo " "; \
     echo "   "  $TRILINOS_INCLUDE ; \
     echo " "; \
 else \
-    have_trilinos=false; \
-    echo "Did NOT find the trilinos include files in"; \
-    echo " "; \
-    echo "   "  $TRILINOS_INCLUDE ; \
-    echo " "; \
+   if test "$TRILINOS_DIR" == "auto"; then \
+       have_trilinos=true; \
+       echo "Will assume that trilinos library is specified automatically by"; \
+       echo "compiler/linker."; \
+    else \
+       have_trilinos=false; \
+       echo "Did NOT find the trilinos include files in"; \
+       echo " "; \
+       echo "   "  $TRILINOS_INCLUDE ; \
+       echo " "; \
+   fi;\
 fi; \
 else \
     echo "No trilinos library directory specified"; \ 
@@ -1211,14 +1226,21 @@ if test x$have_trilinos = xfalse; then
   TRILINOS_LIB='' ; \
   TRILINOS_INCLUDE='' ;\
 else \
-  external_dist_libraries=`echo $external_dist_libraries " -lml -lifpack -lamesos -lanasazi -laztecoo -lepetraext -ltriutils -lepetra -lteuchos"` ; \
-  external_dist_libraries_lib=`echo $external_dist_libraries_lib "-L"$TRILINOS_LIB` ; \
-  external_dist_libraries_include=`echo $external_dist_libraries_include "-I"$TRILINOS_INCLUDE -DHAVE_TRILINOS` ; \
+  if test "$TRILINOS_DIR" == "auto"; then \
+    TRILINOS_LIB='' ; \
+    TRILINOS_INCLUDE='' ;\
+    external_dist_libraries_include=`echo $external_dist_libraries_include " -DOOMPH_HAS_TRILINOS"` ; \
+  else \
+    external_dist_libraries=`echo $external_dist_libraries " -lml -lifpack -lamesos -lanasazi -laztecoo -lepetraext -ltriutils -lepetra -lteuchos"` ; \
+    external_dist_libraries_lib=`echo $external_dist_libraries_lib "-L"$TRILINOS_LIB` ; \
+    external_dist_libraries_include=`echo $external_dist_libraries_include "-I"$TRILINOS_INCLUDE -DOOMPH_HAS_TRILINOS` ; \
+  fi
 fi
 
+echo "gone past hierher"
 
 #Tell everybody about it...
-AM_CONDITIONAL(HAVE_TRILINOS, test x$have_trilinos = xtrue)
+AM_CONDITIONAL(OOMPH_HAS_TRILINOS, test x$have_trilinos = xtrue)
 
 # Make thes variables available to all Makefile.am-s
 AC_SUBST(TRILINOS_LIB)

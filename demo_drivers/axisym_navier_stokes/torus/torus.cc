@@ -103,7 +103,7 @@ private:
 };
 
 
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
 //=============================================================================
 /// helper method for the block diagonal F block preconditioner to allow 
 /// hypre to be used for as a subsidiary block preconditioner
@@ -247,7 +247,7 @@ TorusProblem<ELEMENT>::TorusProblem(const unsigned &max_refinement_level,
  this->linear_solver_pt() = iterative_linear_solver_pt;
 
  //Precondition the pressure block with AMG if we have Hypre
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
 //Trap because HYPRE can't handle the case when OOMPH_HAS_MPI, but we
 //run in serial
 #ifndef OOMPH_HAS_MPI
@@ -273,7 +273,7 @@ Preconditioner* F_matrix_preconditioner_pt =
   new BlockDiagonalPreconditioner<CRDoubleMatrix>;
 
 //Use AMG on the momentum blocks if we have Hypre 
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
 //Trap because HYPRE can't handle the case when 
 //OOMPH_HAS_MPI, but we run in serial
 #ifndef OOMPH_HAS_MPI

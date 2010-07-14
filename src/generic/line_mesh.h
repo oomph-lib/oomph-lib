@@ -8,6 +8,12 @@
   #include <oomph-lib-config.h>
 #endif
 
+
+#ifdef OOMPH_HAS_MPI
+//mpi headers
+#include "mpi.h"
+#endif
+
 // oomph-lib includes
 #include "Vector.h"
 #include "nodes.h"

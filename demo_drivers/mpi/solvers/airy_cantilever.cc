@@ -43,7 +43,7 @@ namespace oomph
 {
 
 
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
 //=hypre_helper=================================================================
 /// The function get_hypre_preconditioner() returns an instance of 
 /// HyprePreconditioner to be used as a subsidiary preconditioner in a
@@ -674,7 +674,7 @@ int main(int argc, char* argv[])
  Global_Physical_Variables::Gravity=0.0;
 
  // use trilinos gmres if available
-#ifdef HAVE_TRILINOS
+#ifdef OOMPH_HAS_TRILINOS
  TrilinosAztecOOSolver* solver_pt = new TrilinosAztecOOSolver;
  solver_pt->solver_type() = TrilinosAztecOOSolver::GMRES;
 #else
@@ -718,7 +718,7 @@ int main(int argc, char* argv[])
    break;
   }
 
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
  // Specify Hypre as the subsidiary block preconditioner
  prec_pt->set_subsidiary_preconditioner_function
    (Hypre_Subsidiary_Preconditioner_Helper::get_hypre_preconditioner);

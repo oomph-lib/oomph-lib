@@ -381,7 +381,7 @@ switch_to_iterative_linear_solver()
  // Set linear solver
  linear_solver_pt() = iterative_linear_solver_pt;
 
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
 //If compiled with MPI, only use HYPRE if MPI has been initialised
 #ifdef OOMPH_HAS_MPI
  if(MPI_Helpers::mpi_has_been_initialised())

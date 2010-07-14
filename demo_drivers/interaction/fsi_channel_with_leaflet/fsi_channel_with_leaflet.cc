@@ -524,7 +524,7 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
    // solves of these blocks
 
   
-#ifdef HAVE_HYPRE
+#ifdef OOMPH_HAS_HYPRE
 
    // Create internal preconditioner used on Schur block
    //---------------------------------------------------

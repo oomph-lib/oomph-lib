@@ -13,7 +13,7 @@ fsi_channel_with_leaflet
 
 # Do we have the TRILINOS library?
 #=================================
-if HAVE_TRILINOS
+if OOMPH_HAS_TRILINOS
    check_PROGRAMS += TrilinosSolver_test
 endif
 
@@ -70,7 +70,7 @@ fsi_channel_with_leaflet_LDADD = \
 
 # Do we have the TRILINOS library?
 #=================================
-if HAVE_TRILINOS
+if OOMPH_HAS_TRILINOS
 
 # Sources the executable depends on:
 TrilinosSolver_test_SOURCES = TrilinosSolver_test.cc

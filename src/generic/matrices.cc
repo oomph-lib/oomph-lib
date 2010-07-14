@@ -1360,7 +1360,7 @@ CRDoubleMatrix::CRDoubleMatrix()
    Built = false;
 
     // set the serial matrix-matrix multiply method
-#ifdef HAVE_TRILINOS
+#ifdef OOMPH_HAS_TRILINOS
     Serial_matrix_matrix_multiply_method = 2;
 #else
     Serial_matrix_matrix_multiply_method = 2;
@@ -1406,7 +1406,7 @@ CRDoubleMatrix::CRDoubleMatrix(const CRDoubleMatrix& other_matrix)
  Built = true;
 
  // set the serial matrix-matrix multiply method
-#ifdef HAVE_TRILINOS
+#ifdef OOMPH_HAS_TRILINOS
  Serial_matrix_matrix_multiply_method = 2;
 #else
  Serial_matrix_matrix_multiply_method = 2;
@@ -1430,7 +1430,7 @@ CRDoubleMatrix::CRDoubleMatrix(const LinearAlgebraDistribution*
    Built = false;
 
 // set the serial matrix-matrix multiply method
-#ifdef HAVE_TRILINOS
+#ifdef OOMPH_HAS_TRILINOS
     Serial_matrix_matrix_multiply_method = 2;
 #else
     Serial_matrix_matrix_multiply_method = 2;
@@ -1459,7 +1459,7 @@ CRDoubleMatrix::CRDoubleMatrix(const LinearAlgebraDistribution* dist_pt,
  Linear_solver_pt = Default_linear_solver_pt = new SuperLUSolver;
 
  // set the serial matrix-matrix multiply method
-#ifdef HAVE_TRILINOS
+#ifdef OOMPH_HAS_TRILINOS
  Serial_matrix_matrix_multiply_method = 2;
 #else
  Serial_matrix_matrix_multiply_method = 2;
@@ -1679,7 +1679,7 @@ void CRDoubleMatrix::multiply(const DoubleVector &x, DoubleVector &soln) const
  if (this->distributed() && 
      this->distribution_pt()->communicator_pt()->nproc() > 1)
   {
-#ifdef HAVE_TRILINOS
+#ifdef OOMPH_HAS_TRILINOS
  // This will only work if we have trilinos on board
  TrilinosEpetraHelpers::multiply(this,x,soln);
 #else
@@ -1771,7 +1771,7 @@ void CRDoubleMatrix::multiply_transpose(const DoubleVector &x,
  if (this->distributed() && 
      this->distribution_pt()->communicator_pt()->nproc() > 1)
   {
-#ifdef HAVE_TRILINOS
+#ifdef OOMPH_HAS_TRILINOS
    // This will only work if we have trilinos on board
    TrilinosEpetraHelpers::multiply(this,x,soln);
 #else
@@ -2173,7 +2173,7 @@ void CRDoubleMatrix::multiply(const CRDoubleMatrix& matrix_in,
  // else we have to use trilinos
  else
   {
-#ifdef HAVE_TRILINOS
+#ifdef OOMPH_HAS_TRILINOS
      bool use_ml = false;
      if (method == 5)
       {
