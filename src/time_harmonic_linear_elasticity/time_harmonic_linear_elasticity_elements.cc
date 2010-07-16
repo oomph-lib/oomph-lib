@@ -28,16 +28,16 @@
 // Non-inline functions for elements that solve the equations of linear
 // elasticity in cartesian coordinates
 
-#include "linear_elasticity_elements.h"
+#include "time_harmonic_linear_elasticity_elements.h"
 
 
 namespace oomph
 {
 
 
-/// Static default value for timescale ratio (1.0 -- for natural scaling) 
-template <unsigned DIM>
-double LinearElasticityEquationsBase<DIM>::Default_lambda_sq_value=1.0;
+/// Static default value for frequency (1.0 -- for natural scaling) 
+ template <unsigned DIM>
+ double TimeHarmonicLinearElasticityEquationsBase<DIM>::Default_omega_value=1.0;
 
 
 //////////////////////////////////////////////////////////////////
@@ -48,8 +48,9 @@ double LinearElasticityEquationsBase<DIM>::Default_lambda_sq_value=1.0;
 /// Compute the strain tensor at local coordinate s
 //======================================================================
  template<unsigned DIM>
- void LinearElasticityEquationsBase<DIM>::get_strain(const Vector<double> &s,
-                                                     DenseMatrix<double> &strain) const
+ void TimeHarmonicLinearElasticityEquationsBase<DIM>::get_strain(
+  const Vector<double> &s,
+  DenseMatrix<std::complex<double> >& strain) const
  {
 #ifdef PARANOID
   if ((strain.ncol()!=DIM)||(strain.nrow()!=DIM))
@@ -59,29 +60,32 @@ double LinearElasticityEquationsBase<DIM>::Default_lambda_sq_value=1.0;
                   << strain.nrow() << ", but dimension of the equations is " 
                   << DIM << std::endl;
     throw OomphLibError(error_message.str(),
-                        "LinearElasticityEquationsBase<DIM>::get_strain()",
+                        "TimeHarmonicLinearElasticityEquationsBase<DIM>::get_strain()",
                         OOMPH_EXCEPTION_LOCATION);
    }
-
+  
   //Find out how many position types there are
   unsigned n_position_type = this->nnodal_position_type();
   
   if(n_position_type != 1)
    {
     throw OomphLibError(
-     "LinearElasticity is not yet implemented for more than one position type",
-     "LinearElasticityEquationsBase<DIM>::get_strain()",
+     "TimeHarmonicLinearElasticity is not yet implemented for more than one position type",
+     "TimeHarmonicLinearElasticityEquationsBase<DIM>::get_strain()",
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif
   
-
+  
   //Find out how many nodes there are in the element
   unsigned n_node = nnode();
-    
+  
   //Find the indices at which the local velocities are stored
-  unsigned u_nodal_index[DIM];
-  for(unsigned i=0;i<DIM;i++) {u_nodal_index[i] = u_index_linear_elasticity(i);}
+  std::complex<unsigned> u_nodal_index[DIM];
+  for(unsigned i=0;i<DIM;i++) 
+   {
+    u_nodal_index[i] = u_index_time_harmonic_linear_elasticity(i);
+   }
   
   //Set up memory for the shape and derivative functions
   Shape psi(n_node);
@@ -91,11 +95,8 @@ double LinearElasticityEquationsBase<DIM>::Default_lambda_sq_value=1.0;
   (void) dshape_eulerian(s,psi,dpsidx);
   
   //Calculate interpolated values of the derivative of global position
-  DenseMatrix<double> interpolated_dudx(DIM,DIM,0.0);
-  
-  //Storage for Eulerian coordinates (initialised to zero)
-  // only needed when growth comes back in 
-  // Vector<double> interpolated_x(DIM,0.0);
+  DenseMatrix<std::complex<double> > 
+   interpolated_dudx(DIM,DIM,std::complex<double>(0.0,0.0));
   
   //Loop over nodes
   for(unsigned l=0;l<n_node;l++) 
@@ -103,19 +104,17 @@ double LinearElasticityEquationsBase<DIM>::Default_lambda_sq_value=1.0;
     //Loop over velocity components
     for(unsigned i=0;i<DIM;i++)
      {
-      //Calculate the Eulerian coordinates
-      // only needed when growth comes back in 
-      // hierherinterpolated_x[i] += this->nodal_position(l,i)*psi(l);
-      
       //Get the nodal value
-      const double u_value = this->nodal_value(l,u_nodal_index[i]);
-
+      const std::complex<double> u_value= 
+       std::complex<double>(this->nodal_value(l,u_nodal_index[i].real()),
+                            this->nodal_value(l,u_nodal_index[i].imag()));
+      
       //Loop over derivative directions
       for(unsigned j=0;j<DIM;j++)
        {                               
         interpolated_dudx(i,j) += u_value*dpsidx(l,j);
        }
-    }
+     }
    }
   
   ///Now fill in the entries of the strain tensor
@@ -155,9 +154,9 @@ double LinearElasticityEquationsBase<DIM>::Default_lambda_sq_value=1.0;
 /// displacement formulation.
 //======================================================================
 template<unsigned DIM>
-void LinearElasticityEquations<DIM>::get_stress(const Vector<double> &s,
-                                                DenseMatrix<double> &stress)
- const
+void TimeHarmonicLinearElasticityEquations<DIM>::
+get_stress(const Vector<double> &s,
+           DenseMatrix<std::complex<double> >&stress) const
 {
 #ifdef PARANOID
  if ((stress.ncol()!=DIM)||(stress.nrow()!=DIM))
@@ -167,13 +166,13 @@ void LinearElasticityEquations<DIM>::get_stress(const Vector<double> &s,
                  << stress.nrow() << ", but dimension of the equations is " 
                  << DIM << std::endl;
    throw OomphLibError(error_message.str(),
-                       "LinearElasticityEquationsBase<DIM>::get_stress()",
+                       "TimeHarmonicLinearElasticityEquationsBase<DIM>::get_stress()",
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
  
  // Get strain
- DenseMatrix<double> strain(DIM,DIM);
+ DenseMatrix<std::complex<double> > strain(DIM,DIM);
  this->get_strain(s,strain);
  
  // Now fill in the entries of the stress tensor without exploiting
@@ -201,8 +200,8 @@ void LinearElasticityEquations<DIM>::get_stress(const Vector<double> &s,
 /// cartesian coordinates. Flag indicates if we want Jacobian too.
 //=======================================================================
  template <unsigned DIM>
- void LinearElasticityEquations<DIM>::
- fill_in_generic_contribution_to_residuals_linear_elasticity(
+ void TimeHarmonicLinearElasticityEquations<DIM>::
+ fill_in_generic_contribution_to_residuals_time_harmonic_linear_elasticity(
   Vector<double> &residuals, DenseMatrix<double> &jacobian,unsigned flag)
  {
   //Find out how many nodes there are
@@ -215,8 +214,8 @@ void LinearElasticityEquations<DIM>::get_stress(const Vector<double> &s,
   if(n_position_type != 1)
    {
     throw OomphLibError(
-     "LinearElasticity is not yet implemented for more than one position type",
-     "LinearElasticityEquationsBase<DIM>::fill_in_generic_contribution_to_residuals_lin_elast()",
+     "TimeHarmonicLinearElasticity is not yet implemented for more than one position type",
+     "TimeHarmonicLinearElasticityEquationsBase<DIM>::fill_in_generic_contribution_to_residuals_lin_elast()",
      OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -225,19 +224,21 @@ void LinearElasticityEquations<DIM>::get_stress(const Vector<double> &s,
    {
     throw OomphLibError(
      "No elasticity tensor set.",
-     "LinearElasticityEquationsBase<DIM>::fill_in_generic_contribution_to_residuals_lin_elast()",
+     "TimeHarmonicLinearElasticityEquationsBase<DIM>::fill_in_generic_contribution_to_residuals_lin_elast()",
      OOMPH_EXCEPTION_LOCATION);
    }
 #endif
   
   //Find the indices at which the local velocities are stored
-  unsigned u_nodal_index[DIM];
+  std::complex<unsigned> u_nodal_index[DIM];
   for(unsigned i=0;i<DIM;i++) 
-   {u_nodal_index[i] = this->u_index_linear_elasticity(i);}
+   {
+    u_nodal_index[i] = this->u_index_time_harmonic_linear_elasticity(i);
+   }
   
-  // hierher get time dependence back in
-  // Timescale ratio (non-dim density)
-  //double Lambda_sq = this->lambda_sq();
+
+  // Square of non-dimensional frequency
+  const double omega_sq = this->omega()*this->omega();
   
   //Set up memory for the shape functions
   Shape psi(n_node);
@@ -256,7 +257,10 @@ void LinearElasticityEquations<DIM>::get_stress(const Vector<double> &s,
   for(unsigned ipt=0;ipt<n_intpt;ipt++)
    {
     //Assign the values of s
-    for(unsigned i=0;i<DIM;++i) {s[i] = this->integral_pt()->knot(ipt,i);}
+    for(unsigned i=0;i<DIM;++i) 
+     {
+      s[i] = this->integral_pt()->knot(ipt,i);
+     }
     
     //Get the integral weight
     double w = this->integral_pt()->weight(ipt);
@@ -266,17 +270,17 @@ void LinearElasticityEquations<DIM>::get_stress(const Vector<double> &s,
     
     //Storage for Eulerian coordinates (initialised to zero)
     Vector<double> interpolated_x(DIM,0.0);
-    
+
+    // Displacement
+    Vector<std::complex<double> >
+     interpolated_u(DIM,std::complex<double>(0.0,0.0));
+
     //Calculate interpolated values of the derivative of global position
     //wrt lagrangian coordinates
-    DenseMatrix<double> interpolated_dudx(DIM,DIM,0.0);
+    DenseMatrix<std::complex<double> > 
+     interpolated_dudx(DIM,DIM,std::complex<double>(0.0,0.0));
     
-    // hierher
-    // Setup memory for accelerations (initialised to zero)
-    //Vector<double> accel(DIM,0.0);
-    
-    
-    //Calculate displacements and derivatives and lagrangian coordinates
+    //Calculate displacements and derivatives 
     for(unsigned l=0;l<n_node;l++)
      {
       //Loop over displacement components (deformed position)
@@ -285,18 +289,15 @@ void LinearElasticityEquations<DIM>::get_stress(const Vector<double> &s,
         //Calculate the Lagrangian coordinates and the accelerations
         interpolated_x[i] += this->raw_nodal_position(l,i)*psi(l);
         
-        // hierher
-        // Only compute accelerations if inertia is switched on
-        // otherwise the timestepper might not be able to 
-        // work out dx_gen_dt(2,...)
-        //if (this->unsteady())
-        // {
-        //  accel[i] += this->dnodal_position_dt(2,l,i)*psi(l);
-        // }
         
         //Get the nodal displacements
-        const double u_value = this->raw_nodal_value(l,u_nodal_index[i]);
+        const std::complex<double> u_value 
+         =  std::complex<double>(
+          this->raw_nodal_value(l,u_nodal_index[i].real()),
+          this->raw_nodal_value(l,u_nodal_index[i].imag()));
         
+        interpolated_u[i]+=u_value*psi(l);
+
         //Loop over derivative directions
         for(unsigned j=0;j<DIM;j++)
          {
@@ -306,7 +307,7 @@ void LinearElasticityEquations<DIM>::get_stress(const Vector<double> &s,
      }
     
     //Get body force at current time
-    Vector<double> b(DIM);
+    Vector<std::complex<double> > b(DIM);
     this->body_force(interpolated_x,b);
     
     //Premultiply the weights and the Jacobian
@@ -320,15 +321,15 @@ void LinearElasticityEquations<DIM>::get_stress(const Vector<double> &s,
       //Loop over the displacement components
       for(unsigned a=0;a<DIM;a++)
        {
-        //Get the equation number
-        local_eqn = this->nodal_local_eqn(l,u_nodal_index[a]);
+        //Get the REAL equation number
+        local_eqn = this->nodal_local_eqn(l,u_nodal_index[a].real());
+        
         /*IF it's not a boundary condition*/
         if(local_eqn >= 0)
          {
           // Acceleration and body force
           residuals[local_eqn] += 
-           // hierher
-           (/*Lambda_sq*accel[a]*/-b[a])*psi(l)*W;
+           (-omega_sq*interpolated_u[a].real()-b[a].real())*psi(l)*W;
           
           // Stress term
           for(unsigned b=0;b<DIM;b++)
@@ -339,7 +340,7 @@ void LinearElasticityEquations<DIM>::get_stress(const Vector<double> &s,
                {
                 //Add the stress terms to the residuals
                 residuals[local_eqn] +=
-                 this->E(a,b,c,d)*interpolated_dudx(c,d)*dpsidx(l,b)*W;
+                 this->E(a,b,c,d)*interpolated_dudx(c,d).real()*dpsidx(l,b)*W;
                }
              }
            }
@@ -353,10 +354,18 @@ void LinearElasticityEquations<DIM>::get_stress(const Vector<double> &s,
               //Loop over the displacement components again
               for(unsigned c=0;c<DIM;c++)
                {
-                local_unknown = this->nodal_local_eqn(l2,u_nodal_index[c]);
+                local_unknown=this->nodal_local_eqn(l2,u_nodal_index[c].real());
                 //If it's not pinned
                 if(local_unknown >= 0)
                  {
+                  // Inertial term
+                  if (a==c)
+                   {
+                    jacobian(local_eqn,local_unknown) -=
+                     omega_sq*psi(l)*psi(l2)*W;
+                   }
+
+                  // Stress term 
                   for(unsigned b=0;b<DIM;b++)
                    {
                     for(unsigned d=0;d<DIM;d++)
@@ -367,86 +376,146 @@ void LinearElasticityEquations<DIM>::get_stress(const Vector<double> &s,
                      }
                    }
                  } //End of if not boundary condition
-                
                }
              }
            } //End of jacobian calculation
           
-         } //End of if not boundary condition
+         } //End of if not boundary condition for real eqn
+
+
+
+        //Get the IMAG equation number
+        local_eqn = this->nodal_local_eqn(l,u_nodal_index[a].imag());
+        
+        /*IF it's not a boundary condition*/
+        if(local_eqn >= 0)
+         {
+          // Acceleration and body force
+          residuals[local_eqn] += 
+           (-omega_sq*interpolated_u[a].imag()-b[a].imag())*psi(l)*W;
+          
+          // Stress term
+          for(unsigned b=0;b<DIM;b++)
+           {
+            for(unsigned c=0;c<DIM;c++)
+             {
+              for(unsigned d=0;d<DIM;d++)
+               {
+                //Add the stress terms to the residuals
+                residuals[local_eqn] +=
+                 this->E(a,b,c,d)*interpolated_dudx(c,d).imag()*dpsidx(l,b)*W;
+               }
+             }
+           }
+          
+          //Jacobian entries
+          if(flag)
+           {
+            //Loop over the displacement basis functions again
+            for(unsigned l2=0;l2<n_node;l2++)
+             {
+              //Loop over the displacement components again
+              for(unsigned c=0;c<DIM;c++)
+               {
+                local_unknown=this->nodal_local_eqn(l2,u_nodal_index[c].imag());
+                //If it's not pinned
+                if(local_unknown >= 0)
+                 {
+                  // Inertial term
+                  if (a==c)
+                   {
+                    jacobian(local_eqn,local_unknown) -=
+                     omega_sq*psi(l)*psi(l2)*W;
+                   }
+
+                  // Stress term 
+                  for(unsigned b=0;b<DIM;b++)
+                   {
+                    for(unsigned d=0;d<DIM;d++)
+                     {
+                      //Add the contribution to the Jacobian matrix
+                      jacobian(local_eqn,local_unknown) +=
+                       this->E(a,b,c,d)*dpsidx(l2,d)*dpsidx(l,b)*W;
+                     }
+                   }
+                 } //End of if not boundary condition
+               }
+             }
+           } //End of jacobian calculation
+          
+         } //End of if not boundary condition for imag eqn
+
        } //End of loop over coordinate directions
      } //End of loop over shape functions
    } //End of loop over integration points
   
  }
 
-
-
-
-
 //=======================================================================
-/// Output exact solution x,y,[z],u,v,[w]
+/// Output exact solution x,y,[z],u_r,v_r,[w_r],u_i,v_i,[w_i]
 //=======================================================================
  template <unsigned DIM>
- void LinearElasticityEquations<DIM>::output_fct(std::ostream &outfile, 
-                                                 const unsigned &nplot, 
-                  FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
-{
- //Vector of local coordinates
- Vector<double> s(DIM);
+ void TimeHarmonicLinearElasticityEquations<DIM>::output_fct(
+  std::ostream &outfile, 
+  const unsigned &nplot, 
+  FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
+ {
+  //Vector of local coordinates
+  Vector<double> s(DIM);
+  
+  // Vector for coordintes
+  Vector<double> x(DIM);
+  
+  // Tecplot header info
+  outfile << this->tecplot_zone_string(nplot);
+  
+  // Exact solution Vector 
+  Vector<double> exact_soln(2*DIM);
+  
+  // Loop over plot points
+  unsigned num_plot_points=this->nplot_points(nplot);
+  for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+   {
+    
+    // Get local coordinates of plot point
+    this->get_s_plot(iplot,nplot,s);
+    
+    // Get x position as Vector
+    this->interpolated_x(s,x);
+    
+    // Get exact solution at this point
+    (*exact_soln_pt)(x,exact_soln);
+    
+    //Output x,y,...,u_exact,...
+    for(unsigned i=0;i<DIM;i++)
+     {
+      outfile << x[i] << " ";
+     }
+    for(unsigned i=0;i<2*DIM;i++)
+     {
+      outfile << exact_soln[i] << " ";
+     }
+    outfile << std::endl;  
+   }
+  
+  // Write tecplot footer (e.g. FE connectivity lists)
+  this->write_tecplot_zone_footer(outfile,nplot);
+  
+ }
  
- // Vector for coordintes
- Vector<double> x(DIM);
- 
- // Tecplot header info
- outfile << this->tecplot_zone_string(nplot);
- 
- // Exact solution Vector 
- Vector<double> exact_soln(DIM);
- 
- // Loop over plot points
- unsigned num_plot_points=this->nplot_points(nplot);
- for (unsigned iplot=0;iplot<num_plot_points;iplot++)
-  {
-   
-   // Get local coordinates of plot point
-   this->get_s_plot(iplot,nplot,s);
-   
-   // Get x position as Vector
-   this->interpolated_x(s,x);
-   
-   // Get exact solution at this point
-   (*exact_soln_pt)(x,exact_soln);
-   
-   //Output x,y,...,u_exact,...
-   for(unsigned i=0;i<DIM;i++)
-    {
-     outfile << x[i] << " ";
-    }
-   for(unsigned i=0;i<DIM;i++)
-    {
-     outfile << exact_soln[i] << " ";
-    }
-   outfile << std::endl;  
-  }
- 
- // Write tecplot footer (e.g. FE connectivity lists)
- this->write_tecplot_zone_footer(outfile,nplot);
-
-}
-
 
 
 //=======================================================================
 /// Output: x,y,[z],u,v,[w]
 //=======================================================================
  template <unsigned DIM>
- void LinearElasticityEquations<DIM>::output(std::ostream &outfile, 
+ void TimeHarmonicLinearElasticityEquations<DIM>::output(std::ostream &outfile, 
                                              const unsigned &nplot)
  {
   //Set output Vector
   Vector<double> s(DIM);
   Vector<double> x(DIM);
-  Vector<double> u(DIM);
+  Vector<std::complex<double> > u(DIM);
   
   // Tecplot header info
   outfile << this->tecplot_zone_string(nplot);
@@ -461,7 +530,7 @@ void LinearElasticityEquations<DIM>::get_stress(const Vector<double> &s,
     
     // Get Eulerian coordinates and displacements
     this->interpolated_x(s,x);
-    this->interpolated_u_linear_elasticity(s,u);
+    this->interpolated_u_time_harmonic_linear_elasticity(s,u);
     
     //Output the x,y,..
     for(unsigned i=0;i<DIM;i++) 
@@ -469,7 +538,11 @@ void LinearElasticityEquations<DIM>::get_stress(const Vector<double> &s,
 
     // Output u,v,..
     for(unsigned i=0;i<DIM;i++) 
-     {outfile << u[i] << " ";} 
+     {outfile << u[i].real() << " ";} 
+
+    // Output u,v,..
+    for(unsigned i=0;i<DIM;i++) 
+     {outfile << u[i].imag() << " ";} 
     
     outfile << std::endl;
    }
@@ -485,7 +558,7 @@ void LinearElasticityEquations<DIM>::get_stress(const Vector<double> &s,
 /// C-style output: x,y,[z],u,v,[w]
 //=======================================================================
 template <unsigned DIM>
-void LinearElasticityEquations<DIM>::output(FILE* file_pt, 
+void TimeHarmonicLinearElasticityEquations<DIM>::output(FILE* file_pt, 
                                             const unsigned &nplot)
 {
  //Vector of local coordinates
@@ -510,7 +583,13 @@ void LinearElasticityEquations<DIM>::output(FILE* file_pt,
    // Displacement
    for(unsigned i=0;i<DIM;i++) 
     {
-     fprintf(file_pt,"%g ",this->interpolated_u_linear_elasticity(s,i));
+     fprintf(file_pt,"%g ",
+             this->interpolated_u_time_harmonic_linear_elasticity(s,i).real());
+    }
+   for(unsigned i=0;i<DIM;i++) 
+    {
+     fprintf(file_pt,"%g ",
+             this->interpolated_u_time_harmonic_linear_elasticity(s,i).imag());
     }
   }
  fprintf(file_pt,"\n");
@@ -523,12 +602,12 @@ void LinearElasticityEquations<DIM>::output(FILE* file_pt,
 
 
 //Instantiate the required elements
-template class LinearElasticityEquationsBase<2>;
-template class LinearElasticityEquations<2>;
+template class TimeHarmonicLinearElasticityEquationsBase<2>;
+template class TimeHarmonicLinearElasticityEquations<2>;
 
-template class QLinearElasticityElement<3,3>;
-template class LinearElasticityEquationsBase<3>;
-template class LinearElasticityEquations<3>;
+template class QTimeHarmonicLinearElasticityElement<3,3>;
+template class TimeHarmonicLinearElasticityEquationsBase<3>;
+template class TimeHarmonicLinearElasticityEquations<3>;
 
 
 

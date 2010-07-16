@@ -41,104 +41,113 @@
 #include "../generic/Qelements.h"
 #include "../generic/mesh.h"
 #include "../generic/hermite_elements.h"
-#include "./elasticity_tensor.h"
+#include "./time_harmonic_elasticity_tensor.h"
 
 namespace oomph
 {
 //=======================================================================
-/// A base class for elements that solve the equations of linear 
+/// A base class for elements that solve the equations of time-harmonic linear 
 /// elasticity in Cartesian coordinates.
 /// Combines a few generic functions that are shared by 
-/// LinearElasticityEquations
-/// and LinearElasticityEquationsWithPressure (hierher: The latter
+/// TimeHarmonicLinearElasticityEquations
+/// and TimeHarmonicLinearElasticityEquationsWithPressure (hierher: The latter
 /// don't exist yet but will be written as soon as somebody needs them...)
 //=======================================================================
  template <unsigned DIM>
-  class LinearElasticityEquationsBase : public virtual FiniteElement
+  class TimeHarmonicLinearElasticityEquationsBase : public virtual FiniteElement
   {
     public:
    
-   /// \short Return the index at which the i-th unknown displacement 
-   /// component is stored. The default value, i, is appropriate for
-   /// single-physics problems.
-   virtual inline unsigned u_index_linear_elasticity(const unsigned i) const
-   {return i;}
+   /// \short Return the index at which the i-th real or imag unknown 
+   /// displacement component is stored. The default value is appropriate for
+   /// single-physics problems: 
+   virtual inline std::complex<unsigned> 
+    u_index_time_harmonic_linear_elasticity(const unsigned i) const
+    {
+     return std::complex<unsigned>(i,i+DIM);
+    }
    
    /// Compute vector of FE interpolated displacement u at local coordinate s
-   void interpolated_u_linear_elasticity(const Vector<double> &s, 
-                                         Vector<double>& disp) 
+   void interpolated_u_time_harmonic_linear_elasticity(
+    const Vector<double> &s, 
+    Vector<std::complex<double> >& disp) 
     const
-    {
-     //Find number of nodes
-     unsigned n_node = nnode();
-
-     //Local shape function
-     Shape psi(n_node);
-     
-     //Find values of shape function
-     shape(s,psi);
-     
-     for (unsigned i=0;i<DIM;i++)
-      {
-       //Index at which the nodal value is stored
-       unsigned u_nodal_index = u_index_linear_elasticity(i);
-
-       //Initialise value of u
-       disp[i] = 0.0;
-
-       //Loop over the local nodes and sum
-       for(unsigned l=0;l<n_node;l++) 
-        {
-         disp[i] += nodal_value(l,u_nodal_index)*psi[l];
-        }
-      }
-    }
-
+   {
+    //Find number of nodes
+    unsigned n_node = nnode();
+    
+    //Local shape function
+    Shape psi(n_node);
+    
+    //Find values of shape function
+    shape(s,psi);
+    
+    for (unsigned i=0;i<DIM;i++)
+     {
+      //Index at which the nodal value is stored
+      std::complex<unsigned> u_nodal_index = 
+       u_index_time_harmonic_linear_elasticity(i);
+      
+      //Initialise value of u
+      disp[i] = std::complex<double>(0.0,0.0);
+      
+      //Loop over the local nodes and sum
+      for(unsigned l=0;l<n_node;l++) 
+       {
+        disp[i].real() += nodal_value(l,u_nodal_index.real())*psi[l];
+        disp[i].imag() += nodal_value(l,u_nodal_index.imag())*psi[l];
+       }
+     }
+   }
+   
    /// Return FE interpolated displacement u[i] at local coordinate s
-   double interpolated_u_linear_elasticity(const Vector<double> &s, 
-                                           const unsigned &i) const
+   std::complex<double> interpolated_u_time_harmonic_linear_elasticity(
+    const Vector<double> &s, 
+    const unsigned &i) const
     {
      //Find number of nodes
      unsigned n_node = nnode();
-
+     
      //Local shape function
      Shape psi(n_node);
-
+     
      //Find values of shape function
      shape(s,psi);
      
      //Get nodal index at which i-th velocity is stored
-     unsigned u_nodal_index = u_index_linear_elasticity(i);
+     std::complex<unsigned> u_nodal_index = 
+      u_index_time_harmonic_linear_elasticity(i);
      
      //Initialise value of u
-     double interpolated_u = 0.0;
-
+     std::complex<double> interpolated_u = std::complex<double>(0.0,0.0);
+     
      //Loop over the local nodes and sum
      for(unsigned l=0;l<n_node;l++) 
       {
-       interpolated_u += nodal_value(l,u_nodal_index)*psi[l];
+       interpolated_u.real() += nodal_value(l,u_nodal_index.real())*psi[l];
+       interpolated_u.imag() += nodal_value(l,u_nodal_index.imag())*psi[l];
       }
      
      return(interpolated_u);
     }
-
-
+   
+   
    /// \short Function pointer to function that specifies the body force
    /// as a function of the Cartesian coordinates and time FCT(t,x,b) -- 
    /// x and b are  Vectors! 
    typedef void (*BodyForceFctPt)(const double& t,
                                   const Vector<double>& x,
-                                  Vector<double>& b);
+                                  Vector<std::complex<double> >& b);
    
    /// \short Constructor: Set null pointers for constitutive law and for
    /// isotropic growth function. Set physical parameter values to 
-   /// default values, switch on inertia and set body force to zero.
-    LinearElasticityEquationsBase() : Elasticity_tensor_pt(0),
-    Lambda_sq_pt(&Default_lambda_sq_value), Unsteady(true),
-    Body_force_fct_pt(0) {}
+   /// default values, and set body force to zero.
+    TimeHarmonicLinearElasticityEquationsBase() : Elasticity_tensor_pt(0),
+    Omega_pt(&Default_omega_value), Body_force_fct_pt(0) {}
    
    /// Return the pointer to the elasticity_tensor
-   ElasticityTensor* &elasticity_tensor_pt() {return Elasticity_tensor_pt;}
+   TimeHarmonicElasticityTensor* &elasticity_tensor_pt()
+    {return Elasticity_tensor_pt;}
    
    /// Access function to the entries in the elasticity tensor
    inline double E(const unsigned &i,const unsigned &j,
@@ -147,11 +156,11 @@ namespace oomph
     return (*Elasticity_tensor_pt)(i,j,k,l);
    }
    
-   ///Access function for timescale ratio (nondim density)
-   const double& lambda_sq() const {return *Lambda_sq_pt;}
+   ///Access function for non-dim frequency
+   const double& omega() const {return *Omega_pt;}
    
-   /// Access function for pointer to timescale ratio (nondim density)
-   double* &lambda_sq_pt() {return Lambda_sq_pt;}
+   /// Access function for non-dim frequency
+   double* &omega_pt() {return Omega_pt;}
    
    /// Access function: Pointer to body force function
    BodyForceFctPt& body_force_fct_pt() {return Body_force_fct_pt;}
@@ -159,52 +168,21 @@ namespace oomph
    /// Access function: Pointer to body force function (const version)
    BodyForceFctPt body_force_fct_pt() const {return Body_force_fct_pt;}
    
-   ///Access function to flag that switches inertia on/off
-   bool& unsteady() {return Unsteady;}
-   
-   ///Access function to flag that switches inertia on/off (const version)
-   bool unsteady() const {return Unsteady;}
-   
-   ///Pin the element's redundant solid pressures (needed for refinement)
-   virtual void pin_elemental_redundant_nodal_solid_pressures() {}
-   
-   /// \short  Loop over all elements in Vector (which typically contains
-   /// all the elements in a refineable solid mesh) and pin the nodal solid 
-   /// pressure  degrees of freedom that are not being used. Function uses 
-   /// the member function
-   /// - \c LinearElasticityEquationsBase<DIM>::
-   ///      pin_elemental_redundant_nodal_pressure_dofs()
-   /// .
-   /// which is empty by default and should be implemented for
-   /// elements with nodal solid pressure degrees of freedom  
-   /// (e.g. linear elasticity elements with continuous pressure interpolation.)
-   static void pin_redundant_nodal_solid_pressures(
-    const Vector<GeneralisedElement*>& element_pt)
-   {
-    // Loop over all elements and call the function that pins their
-    // unused nodal solid pressure data
-    unsigned n_element = element_pt.size();
-    for(unsigned e=0;e<n_element;e++)
-     {
-      dynamic_cast<LinearElasticityEquationsBase<DIM>*>(element_pt[e])->
-       pin_elemental_redundant_nodal_solid_pressures();
-     }
-   }
-   
    /// \short Return the Cauchy stress tensor, as calculated
    /// from the elasticity tensor at specified local coordinate
    /// Virtual so separaete versions can (and must!) be provided
    /// for displacement and pressure-displacement formulations.
    virtual void get_stress(const Vector<double> &s, 
-                           DenseMatrix<double> &sigma) const=0;
+                           DenseMatrix<std::complex<double> > &sigma) const=0;
    
    /// \short Return the strain tensor
-   void get_strain(const Vector<double> &s, DenseMatrix<double> &strain) const;
+   void get_strain(const Vector<double> &s, 
+                   DenseMatrix<std::complex<double> >&strain) const;
    
    /// \short Evaluate body force at Eulerian coordinate x at present time
    /// (returns zero vector if no body force function pointer has been set)
    inline void body_force(const Vector<double>& x, 
-                          Vector<double>& b) const
+                          Vector<std::complex<double> >& b) const
    {
     //If no function has been set, return zero vector
     if(Body_force_fct_pt==0)
@@ -213,7 +191,7 @@ namespace oomph
       unsigned n=dim();
       for (unsigned i=0;i<n;i++)
        {
-        b[i] = 0.0;
+        b[i] = std::complex<double>(0.0,0.0);
        }
      }
     else
@@ -229,9 +207,6 @@ namespace oomph
        }
      }
    }
-   
-   
-   
    
    /// \short The number of "blocks" that degrees of freedom in this element
    /// are sub-divided into: for now lump them all into one block.
@@ -264,8 +239,8 @@ namespace oomph
     //Loop over the nodes
     for(unsigned n=0;n<n_node;n++)
      {
-      //Loop over dimension
-      for(unsigned i=0;i<DIM;i++)
+      //Loop over dimension (real and imag)
+      for(unsigned i=0;i<2*DIM;i++)
        {
         //If the variable is free
         local_unknown = nodal_local_eqn(n,i);
@@ -290,19 +265,16 @@ namespace oomph
     protected:
    
    /// Pointer to the elasticity tensor
-   ElasticityTensor *Elasticity_tensor_pt;
+   TimeHarmonicElasticityTensor *Elasticity_tensor_pt;
    
-   /// Timescale ratio (non-dim. density)
-   double* Lambda_sq_pt;
-   
-   /// Flag that switches inertia on/off
-   bool Unsteady;
-   
+   /// Nondim frequency
+   double* Omega_pt;
+
    /// Pointer to body force function
    BodyForceFctPt Body_force_fct_pt;
    
-   /// Static default value for timescale ratio (1.0 -- for natural scaling) 
-   static double Default_lambda_sq_value;
+   /// Static default value for frequency (1.0 -- for natural scaling) 
+   static double Default_omega_value;
    
   };
  
@@ -317,21 +289,22 @@ namespace oomph
 /// in cartesian coordinates.
 //=======================================================================
  template <unsigned DIM>
-  class LinearElasticityEquations : public LinearElasticityEquationsBase<DIM>
+  class TimeHarmonicLinearElasticityEquations : 
+  public TimeHarmonicLinearElasticityEquationsBase<DIM>
   {
     public:
    
    /// \short  Constructor
-   LinearElasticityEquations() {}
+   TimeHarmonicLinearElasticityEquations() {}
    
    /// Number of values required at node n.
-   unsigned required_nvalue(const unsigned &n) const {return DIM;}
+   unsigned required_nvalue(const unsigned &n) const {return 2*DIM;}
    
    /// \short Return the residuals for the solid equations (the discretised
    /// principle of virtual displacements)
    void fill_in_contribution_to_residuals(Vector<double> &residuals)
    {
-    fill_in_generic_contribution_to_residuals_linear_elasticity(
+    fill_in_generic_contribution_to_residuals_time_harmonic_linear_elasticity(
      residuals,GeneralisedElement::Dummy_matrix,0);
    }
    
@@ -343,53 +316,51 @@ namespace oomph
                                          DenseMatrix<double> &jacobian)
    {
     //Add the contribution to the residuals
-    this->fill_in_generic_contribution_to_residuals_linear_elasticity(
+    this->fill_in_generic_contribution_to_residuals_time_harmonic_linear_elasticity(
      residuals,jacobian,1);
    }
    
    /// \short Return the Cauchy stress tensor, as calculated
    /// from the elasticity tensor at specified local coordinate
    void get_stress(const Vector<double> &s, 
-                   DenseMatrix<double> &sigma) const;
-
-
-   ///Output exact solution x,y,[z],u,v,[w]
+                   DenseMatrix<std::complex<double> >&sigma) const;
+   
+   ///Output exact solution x,y,[z],u_r,v_r,[w_r],u_i,v_i,[w_i]
    void output_fct(std::ostream &outfile, 
                    const unsigned &nplot, 
                    FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
    
-   /// Output: x,y,[z],u,v,[w]
+   /// Output: x,y,[z],u_r,v_r,[w_r],u_i,v_i,[w_i]
    void output(std::ostream &outfile) 
    {
     unsigned n_plot=5;
     output(outfile,n_plot);
    }
    
-   /// Output: x,y,[z],u,v,[w]
+   /// Output: x,y,[z],u_r,v_r,[w_r],u_i,v_i,[w_i]
    void output(std::ostream &outfile, const unsigned &n_plot);
    
    
-   /// C-style output: x,y,[z],u,v,[w]
+   /// C-style output: x,y,[z],u_r,v_r,[w_r],u_i,v_i,[w_i]
    void output(FILE* file_pt) 
    {
     unsigned n_plot=5;
     output(file_pt,n_plot);
    }
    
-   /// Output: x,y,[z],u,v,[w]
+   /// Output: x,y,[z],u_r,v_r,[w_r],u_i,v_i,[w_i]
    void output(FILE* file_pt, const unsigned &n_plot);
    
    
     private:
-
-
+   
    /// \short Private helper function to compute residuals and (if requested
    /// via flag) also the Jacobian matrix.
-   virtual void fill_in_generic_contribution_to_residuals_linear_elasticity(
+   virtual void fill_in_generic_contribution_to_residuals_time_harmonic_linear_elasticity(
     Vector<double> &residuals,DenseMatrix<double> &jacobian,unsigned flag);
-      
+   
   }; 
-
+ 
 
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -401,48 +372,40 @@ namespace oomph
 /// in Cartesian coordinates, using QElements for the geometry
 //============================================================================
  template<unsigned DIM, unsigned NNODE_1D>
-  class QLinearElasticityElement : public virtual QElement<DIM,NNODE_1D>,
-  public virtual LinearElasticityEquations<DIM>
+  class QTimeHarmonicLinearElasticityElement : public virtual QElement<DIM,NNODE_1D>,
+  public virtual TimeHarmonicLinearElasticityEquations<DIM>
   {
     public:
    
    /// Constructor
-    QLinearElasticityElement() : QElement<DIM,NNODE_1D>(), 
-    LinearElasticityEquations<DIM>() { }
-   
-   ///Output exact solution x,y,[z],u,v,[w]
-   void output_fct(std::ostream &outfile, 
-                   const unsigned &nplot, 
-                   FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
-   {
-    LinearElasticityEquations<DIM>::output_fct(outfile,nplot,exact_soln_pt);
-   }
+    QTimeHarmonicLinearElasticityElement() : QElement<DIM,NNODE_1D>(), 
+    TimeHarmonicLinearElasticityEquations<DIM>() { }
    
    /// Output function
    void output(std::ostream &outfile) 
-   {LinearElasticityEquations<DIM>::output(outfile);}
+   {TimeHarmonicLinearElasticityEquations<DIM>::output(outfile);}
    
    /// Output function
    void output(std::ostream &outfile, const unsigned &n_plot)
-   {LinearElasticityEquations<DIM>::output(outfile,n_plot);}
+   {TimeHarmonicLinearElasticityEquations<DIM>::output(outfile,n_plot);}
    
    
    /// C-style output function
    void output(FILE* file_pt) 
-   {LinearElasticityEquations<DIM>::output(file_pt);}
+   {TimeHarmonicLinearElasticityEquations<DIM>::output(file_pt);}
    
    /// C-style output function
    void output(FILE* file_pt, const unsigned &n_plot)
-   {LinearElasticityEquations<DIM>::output(file_pt,n_plot);}
+   {TimeHarmonicLinearElasticityEquations<DIM>::output(file_pt,n_plot);}
    
   };
  
 
 //============================================================================
-/// FaceGeometry of a linear 2D QLinearElasticityElement element
+/// FaceGeometry of a linear 2D QTimeHarmonicLinearElasticityElement element
 //============================================================================
  template<>
-  class FaceGeometry<QLinearElasticityElement<2,2> > :
+  class FaceGeometry<QTimeHarmonicLinearElasticityElement<2,2> > :
  public virtual QElement<1,2>
   {
     public:
@@ -453,10 +416,10 @@ namespace oomph
  
  
 //============================================================================
-/// FaceGeometry of a quadratic 2D QLinearElasticityElement element
+/// FaceGeometry of a quadratic 2D QTimeHarmonicLinearElasticityElement element
 //============================================================================
  template<>
-  class FaceGeometry<QLinearElasticityElement<2,3> > :
+  class FaceGeometry<QTimeHarmonicLinearElasticityElement<2,3> > :
  public virtual QElement<1,3>
   {
     public:
@@ -467,10 +430,10 @@ namespace oomph
  
  
 //============================================================================
-/// FaceGeometry of a cubic 2D QLinearElasticityElement element
+/// FaceGeometry of a cubic 2D QTimeHarmonicLinearElasticityElement element
 //============================================================================
  template<>
-  class FaceGeometry<QLinearElasticityElement<2,4> > :
+  class FaceGeometry<QTimeHarmonicLinearElasticityElement<2,4> > :
   public virtual QElement<1,4>
   {
     public:
@@ -480,10 +443,10 @@ namespace oomph
   
   
 //============================================================================
-/// FaceGeometry of a linear 3D QLinearElasticityElement element
+/// FaceGeometry of a linear 3D QTimeHarmonicLinearElasticityElement element
 //============================================================================
   template<>
-   class FaceGeometry<QLinearElasticityElement<3,2> > :
+   class FaceGeometry<QTimeHarmonicLinearElasticityElement<3,2> > :
   public virtual QElement<2,2>
    {
      public:
@@ -492,10 +455,10 @@ namespace oomph
    };
   
 //============================================================================
-/// FaceGeometry of a quadratic 3D QLinearElasticityElement element
+/// FaceGeometry of a quadratic 3D QTimeHarmonicLinearElasticityElement element
 //============================================================================
   template<>
-   class FaceGeometry<QLinearElasticityElement<3,3> > :
+   class FaceGeometry<QTimeHarmonicLinearElasticityElement<3,3> > :
   public virtual QElement<2,3>
    {
      public:
@@ -505,10 +468,10 @@ namespace oomph
   
   
 //============================================================================
-/// FaceGeometry of a cubic 3D QLinearElasticityElement element
+/// FaceGeometry of a cubic 3D QTimeHarmonicLinearElasticityElement element
 //============================================================================
   template<>
-   class FaceGeometry<QLinearElasticityElement<3,4> > :
+   class FaceGeometry<QTimeHarmonicLinearElasticityElement<3,4> > :
   public virtual QElement<2,4>
    {
      public:
