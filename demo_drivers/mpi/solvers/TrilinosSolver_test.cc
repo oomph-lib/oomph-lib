@@ -27,6 +27,10 @@
 //LIC//====================================================================
 //Driver using simple 2D poisson problem
 
+#ifdef OOMPH_HAS_MPI
+#include "mpi.h"
+#endif
+
 //Generic routines
 #include "generic.h"
 

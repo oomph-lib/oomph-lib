@@ -855,10 +855,109 @@ AM_CONDITIONAL(ALREADY_HAVE_LAPACK, test x$have_lapack = xtrue)
 
 
 
-
 #................................................................
 #................................................................
 
+
+
+#----------------------------------------------------------------
+# Allow automatic specification of metis by compiler/linker
+# (e.g. for Hector)
+#----------------------------------------------------------------
+have_metis=false
+AC_ARG_ENABLE(suppress-oomph-metis, 
+              [  --enable-suppress-oomph-metis Supress building of oomph-lib's
+                                 own copy of metis. The library
+                                 is then assumed to be provided automatically
+                                 by the compiler/linker.],
+        [have_metis=true],
+        [have_metis=false])       
+
+if test x$have_metis = xtrue; then 
+        echo "Assuming that metis is provided automatically by compiler/linker"
+else 
+        echo "Building/using oomph-lib's own copy of metis"
+fi
+
+#Tell everybody about it...
+AM_CONDITIONAL(ALREADY_HAVE_METIS, test x$have_metis = xtrue)
+
+
+
+#----------------------------------------------------------------
+# Allow automatic specification of parmetis by compiler/linker
+# (e.g. for Hector)
+#----------------------------------------------------------------
+have_parmetis=false
+AC_ARG_ENABLE(suppress-oomph-parmetis, 
+              [  --enable-suppress-oomph-parmetis Supress building of oomph-lib's
+                                 own copy of parmetis. The library
+                                 is then assumed to be provided automatically
+                                 by the compiler/linker.],
+        [have_parmetis=true],
+        [have_parmetis=false])       
+
+if test x$have_parmetis = xtrue; then 
+        echo "Assuming that parmetis is provided automatically by compiler/linker"
+else 
+        echo "Building/using oomph-lib's own copy of parmetis"
+fi
+
+#Tell everybody about it...
+AM_CONDITIONAL(ALREADY_HAVE_PARMETIS, test x$have_parmetis = xtrue)
+
+
+#----------------------------------------------------------------
+# Allow automatic specification of superlu by compiler/linker
+# (e.g. for Hector)
+#----------------------------------------------------------------
+have_superlu=false
+AC_ARG_ENABLE(suppress-oomph-superlu, 
+              [  --enable-suppress-oomph-superlu Supress building of oomph-lib's
+                                 own copy of serial SuperLU. The library
+                                 is then assumed to be provided automatically
+                                 by the compiler/linker.],
+        [have_superlu=true],
+        [have_superlu=false])       
+
+if test x$have_superlu = xtrue; then 
+        echo "Assuming that SuperLU is provided automatically by compiler/linker"
+else 
+        echo "Building/using oomph-lib's own copy of SuperLU"
+fi
+
+#Tell everybody about it...
+AM_CONDITIONAL(ALREADY_HAVE_SUPERLU, test x$have_superlu = xtrue)
+
+#----------------------------------------------------------------
+# Allow automatic specification of superlu_dist by compiler/linker
+# (e.g. for Hector)
+#----------------------------------------------------------------
+have_superlu_dist=false
+AC_ARG_ENABLE(suppress-oomph-superlu_dist, 
+              [  --enable-suppress-oomph-superlu_dist Supress building of oomph-lib's
+                                 own copy of serial SuperLU_dist. The library
+                                 is then assumed to be provided automatically
+                                 by the compiler/linker.],
+        [have_superlu_dist=true],
+        [have_superlu_dist=false])       
+
+if test x$have_superlu_dist = xtrue; then 
+        echo "Assuming that SuperLU_dist is provided automatically by compiler/linker"
+else 
+        echo "Building/using oomph-lib's own copy of SuperLU_dist"
+fi
+
+
+#Tell everybody about it...
+AM_CONDITIONAL(ALREADY_HAVE_SUPERLU_DIST, test x$have_superlu_dist = xtrue)
+
+
+
+
+
+#................................................................
+#................................................................
 
 
 #---------------------------------------------------
@@ -930,7 +1029,12 @@ check_for_blacs=false
 
 AC_ARG_WITH(blacs,
 [  --with-blacs[=ABSOLUTE_PATH] ABSOLUTE PATH to blacs libraries
-                               e.g. /usr/local/lib/ ],[
+                               e.g. /usr/local/lib/ 
+                               This specified directory must contain
+                               the files blacs.a blacsF77.a and blacs_copy.a
+                               where blacs_copy.a is a copy of (or 
+                               symbolic link to) blacs.a -- needed to
+                               deal with some linking problems in mumps.],[
   if test "$withval" != "no" -a "$withval" != "yes"; then
     check_for_blacs=true
     BLACS_LIB=$withval
@@ -1042,7 +1146,10 @@ check_for_hypre=false
 AC_ARG_WITH(hypre,
 [  --with-hypre[=DIR] use hypre library in directory DIR
                           i.e. library is in DIR/lib
-                          and include files are in DIR/include],[
+                          and include files are in DIR/include
+                          or specify "auto" (without quotation marks!) 
+                          if the library is specified automatically 
+                          by your compiler/linker],[
   if test "$withval" != "no" -a "$withval" != "yes"; then
     check_for_hypre=true
     HYPRE_DIR=$withval
@@ -1063,11 +1170,17 @@ if test -d $HYPRE_LIB; then \
     echo "   "  $HYPRE_LIB ; \
     echo " "; \
 else \
-    have_hypre=false; \
-    echo "Did NOT find the hypre libraries in"; \
-    echo " "; \
-    echo "   "  $HYPRE_LIB ; \
-    echo " "; \
+   if test "$HYPRE_DIR" == "auto"; then \
+       have_hypre=true; \
+       echo "Will assume that hypre library is specified automatically by"; \
+       echo "compiler/linker."; \
+   else \
+       have_hypre=false; \
+       echo "Did NOT find the hypre libraries in"; \
+       echo " "; \
+       echo "   "  $HYPRE_LIB ; \
+       echo " "; \
+   fi;\
 fi; \
 if test -d $HYPRE_INCLUDE; then \
     have_hypre=true; \
@@ -1076,11 +1189,17 @@ if test -d $HYPRE_INCLUDE; then \
     echo "   "  $HYPRE_INCLUDE ; \
     echo " "; \
 else \
-    have_hypre=false; \
-    echo "Did NOT find the hypre include files in"; \
-    echo " "; \
-    echo "   "  $HYPRE_INCLUDE ; \
-    echo " "; \
+   if test "$HYPRE_DIR" == "auto"; then \
+       have_hypre=true; \
+       echo "Will assume that hypre library is specified automatically by"; \
+       echo "compiler/linker."; \
+    else \
+      have_hypre=false; \
+      echo "Did NOT find the hypre include files in"; \
+      echo " "; \
+      echo "   "  $HYPRE_INCLUDE ; \
+      echo " "; \
+    fi; \
 fi; \
 else \
     echo "No hypre library directory specified"; \ 
@@ -1109,9 +1228,15 @@ if test x$have_hypre = xfalse; then
   HYPRE_LIB='' ; \
   HYPRE_INCLUDE='' ;\
 else \
-  external_dist_libraries=`echo $external_dist_libraries " -lHYPRE"` ; \
-  external_dist_libraries_lib=`echo $external_dist_libraries_lib "-L"$HYPRE_LIB` ; \
-  external_dist_libraries_include=`echo $external_dist_libraries_include "-I"$HYPRE_INCLUDE -DOOMPH_HAS_HYPRE` ; \
+  if test "$HYPRE_DIR" == "auto"; then \
+    HYPRE_LIB='' ; \
+    HYPRE_INCLUDE='' ;\
+    external_dist_libraries_include=`echo $external_dist_libraries_include " -DOOMPH_HAS_HYPRE"` ; \
+  else \
+    external_dist_libraries=`echo $external_dist_libraries " -lHYPRE"` ; \
+    external_dist_libraries_lib=`echo $external_dist_libraries_lib "-L"$HYPRE_LIB` ; \
+    external_dist_libraries_include=`echo $external_dist_libraries_include "-I"$HYPRE_INCLUDE -DOOMPH_HAS_HYPRE` ; \
+  fi 
 fi
 
 
@@ -1237,8 +1362,6 @@ else \
   fi
 fi
 
-echo "gone past hierher"
-
 #Tell everybody about it...
 AM_CONDITIONAL(OOMPH_HAS_TRILINOS, test x$have_trilinos = xtrue)
 
@@ -1267,7 +1390,10 @@ check_for_mumps=false
 AC_ARG_WITH(mumps,
 [  --with-mumps[=DIR] use mumps library in directory DIR
                           i.e. library is in DIR/lib
-                          and include files are in DIR/include],[
+                          and include files are in DIR/include
+                          or specify "auto" (without quotation marks!) 
+                          if the library is specified automatically 
+                          by your compiler/linker],[
   if test "$withval" != "no" -a "$withval" != "yes"; then
     check_for_mumps=true
     MUMPS_DIR=$withval
@@ -1287,11 +1413,17 @@ if test -d $MUMPS_LIB; then \
     echo "   "  $MUMPS_LIB ; \
     echo " "; \
 else \
-    have_mumps=false; \
-    echo "Did NOT find the mumps libraries in"; \
-    echo " "; \
-    echo "   "  $MUMPS_LIB ; \
-    echo " "; \
+   if test "$MUMPS_DIR" == "auto"; then \
+       have_mumps=true; \
+       echo "Will assume that mumps library is specified automatically by"; \
+       echo "compiler/linker."; \
+   else \
+      have_mumps=false; \
+      echo "Did NOT find the mumps libraries in"; \
+      echo " "; \
+      echo "   "  $MUMPS_LIB ; \
+      echo " "; \
+   fi; \
 fi; \
 if test -d $MUMPS_INCLUDE; then \
     have_mumps=true; \
@@ -1300,11 +1432,17 @@ if test -d $MUMPS_INCLUDE; then \
     echo "   "  $MUMPS_INCLUDE ; \
     echo " "; \
 else \
-    have_mumps=false; \
-    echo "Did NOT find the mumps include files in"; \
-    echo " "; \
-    echo "   "  $MUMPS_INCLUDE ; \
-    echo " "; \
+   if test "$MUMPS_DIR" == "auto"; then \
+       have_mumps=true; \
+       echo "Will assume that mumps library is specified automatically by"; \
+       echo "compiler/linker."; \
+    else \
+       have_mumps=false; \
+       echo "Did NOT find the mumps include files in"; \
+       echo " "; \
+       echo "   "  $MUMPS_INCLUDE ; \
+       echo " "; \
+    fi; \
 fi; \
 else \
     echo "No mumps library directory specified"; \ 
@@ -1320,14 +1458,20 @@ if test x$have_mumps = xfalse; then
   MUMPS_LIB='' ; \
   MUMPS_INCLUDE='' ;\
 else \
-  external_dist_libraries=`echo $external_dist_libraries " -ldmumps -lmumps_common "` ; \
-  external_dist_libraries_lib=`echo $external_dist_libraries_lib "-L"$MUMPS_LIB` ; \
-  external_dist_libraries_include=`echo $external_dist_libraries_include "-I"$MUMPS_INCLUDE -DHAVE_MUMPS` ; \
+  if test "$MUMPS_DIR" == "auto"; then \
+    MUMPS_LIB='' ; \
+    MUMPS_INCLUDE='' ;\
+    external_dist_libraries_include=`echo $external_dist_libraries_include " -DOOMPH_HAS_MUMPS"` ; \
+  else \
+    external_dist_libraries=`echo $external_dist_libraries " -ldmumps -lmumps_common "` ; \
+    external_dist_libraries_lib=`echo $external_dist_libraries_lib "-L"$MUMPS_LIB` ; \
+    external_dist_libraries_include=`echo $external_dist_libraries_include "-I"$MUMPS_INCLUDE -DOOMPH_HAS_MUMPS` ; \
+  fi
 fi
 
 
 #Tell everybody about it...
-AM_CONDITIONAL(HAVE_MUMPS, test x$have_mumps = xtrue)
+AM_CONDITIONAL(OOMPH_HAS_MUMPS, test x$have_mumps = xtrue)
 
 # Make thes variables available to all Makefile.am-s
 AC_SUBST(MUMPS_LIB)
@@ -1359,51 +1503,71 @@ AC_SUBST(AM_CPPFLAGS)
 # These are the third-party libraries distributed with oomph-lib.
 # They are only used if the user hasn't specified his/her own
 # local version of these.
-external_libs='-loomph_triangle -loomph_hsl -loomph_superlu_3.0 -loomph_metis_4.0 -loomph_arpack '
+external_libs='-loomph_triangle -loomph_hsl -loomph_arpack '
+
+
+# SuperLU?
+if test x$have_superlu = xfalse; then  
+  external_libs=`echo $external_libs " -loomph_superlu_3.0"`
+else 
+  echo "Omitting specification of superlu library -- assumed to be"
+  echo "provided automatically by compiler/linker..."
+fi
+
+
 
 # Include superlu_dist and parallel metis if compiled in parallel
 if test x$want_mpi = xtrue; then
-  external_libs=`echo $external_libs "-loomph_parmetis_3.1.1 -loomph_superlu_dist_2.3"`
-  echo "EXTERNAL LIBS (I-3): " $external_libs
+
+  # parmetis?
+  if test x$have_parmetis = xfalse; then  
+    external_libs=`echo $external_libs " -loomph_parmetis_3.1.1"`
+  else 
+    echo "Omitting specification of parmetis library -- assumed to be"
+    echo "provided automatically by compiler/linker..."
+  fi
+
+  # SuperLU_dist?
+  if test x$have_superlu_dist = xfalse; then  
+    external_libs=`echo $external_libs " -loomph_superlu_dist_2.3"`
+  else 
+    echo "Omitting specification of superlu_dist library -- assumed to be"
+    echo "provided automatically by compiler/linker..."
+  fi
 fi
 
-#Note: serial metis has to last
-external_libs=`echo $external_libs "-loomph_metis_4.0"`
 
-# hierher  external_libs=`echo $external_libs "-loomph_superlu_dist_2.0"`
+#Note: serial metis has to go last
+if test x$have_metis = xfalse; then  
+  external_libs=`echo $external_libs " -loomph_metis_4.0"`
+else 
+  echo "Omitting specification of metis library -- assumed to be"
+  echo "provided automatically by compiler/linker..."
+fi
 
 
 # Pord?
-echo "ALREADY_HAVE_PORD: " $have_pord 
 if test x$have_pord = xtrue; then  
   external_libs=`echo " $PORD_LIB " $external_libs `
-  echo "EXTERNAL LIBS (pord): " $external_libs
 fi
 
 
 
 # Blacs with copy?
-echo "ALREADY_HAVE_BLACS: " $have_blacs 
 if test x$have_blacs = xtrue; then  
   external_libs=`echo  " $BLACS_LIB/blacs.a $BLACS_LIB/blacsF77.a  $BLACS_LIB/blacs_copy.a" $external_libs`
-  echo "EXTERNAL LIBS (blacs): " $external_libs
 fi
 
 
 # Scalapack?
-echo "ALREADY_HAVE_SCALAPACK: " $have_scalapack 
 if test x$have_scalapack = xtrue; then  
   external_libs=`echo " $SCALAPACK_LIB " $external_libs `
-  echo "EXTERNAL LIBS (scapapack): " $external_libs
 fi
 
 
-
 # Lapack?
-echo "ALREADY_HAVE LAPACK: " $have_lapack 
 if test x$have_lapack = xfalse; then  
   external_libs=`echo $external_libs " -loomph_lapack -loomph_flapack"`
-  echo "EXTERNAL LIBS (I-2): " $external_libs
 else 
   if test "$LAPACK_LIB" != "auto"; then 
       external_libs=`echo $external_libs " $LAPACK_LIB"`
@@ -1411,15 +1575,12 @@ else
       echo "Omitting specification of lapack library -- assumed to be"
       echo "provided automatically by compiler/linker..."
   fi  
-  echo "EXTERNAL LIBS (II-2): " $external_libs
 fi
 
 
 # Blas?
-echo "ALREADY_HAVE BLAS: " $have_blas 
 if test x$have_blas = xfalse; then  
   external_libs=`echo $external_libs " -loomph_blas"`
-  echo "EXTERNAL LIBS (I): " $external_libs
 else 
   if test "$BLAS_LIB" != "auto"; then
       external_libs=`echo $external_libs " $BLAS_LIB"`
@@ -1427,18 +1588,8 @@ else
       echo "Omitting specification of blas library -- assumed to be"
       echo "provided automatically by compiler/linker..."
   fi
-  echo "EXTERNAL LIBS (II): " $external_libs
 fi
 
-
-
-
-
-# Define "external" MPI libraries
-#--------------------------------
-# hierher EXTERNAL_MPI_LIBS='-loomph_superlu_dist_2.0'
-EXTERNAL_MPI_LIBS='-loomph_parmetis_3.1.1 -loomph_superlu_dist_2.3'
-AC_SUBST(EXTERNAL_MPI_LIBS)
 
 
 

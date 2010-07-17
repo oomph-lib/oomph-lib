@@ -27,6 +27,12 @@
 //LIC//====================================================================
 //Interface to MUMPS solver (fortran)
 
+
+#ifdef OOMPH_HAS_MPI
+#include "mpi.h"
+#endif
+
+
 #include<iostream>
 #include<vector>
 

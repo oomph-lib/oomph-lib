@@ -27,6 +27,10 @@
 //LIC//====================================================================
 //Driver for 2D rectangular driven cavity
 
+#ifdef OOMPH_HAS_MPI
+#include "mpi.h"
+#endif
+
 //Generic includes
 #include "generic.h"
 #include "navier_stokes.h"
