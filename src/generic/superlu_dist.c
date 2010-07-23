@@ -26,7 +26,19 @@
  *----------------------------------------------------------------
  */
 #include <math.h>
+#ifdef USING_OOMPH_SUPERLU_DIST
 #include "oomph_superlu_dist_2.3.h"
+#else
+#include<superlu_defs.h> 
+#include<superlu_ddefs.h> 
+#include<Cnames.h> 
+#include<machines.h> 
+#include<psymbfact.h> 
+#include<supermatrix.h> 
+#include<old_colamd.h> 
+#include<util_dist.h> 
+#endif
+
 
 
 /* ================================================= */

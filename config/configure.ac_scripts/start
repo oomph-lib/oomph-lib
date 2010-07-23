@@ -924,6 +924,7 @@ if test x$have_superlu = xtrue; then
         echo "Assuming that SuperLU is provided automatically by compiler/linker"
 else 
         echo "Building/using oomph-lib's own copy of SuperLU"
+        accumulated_cpp_flags=`echo $accumulated_cpp_flags " -DUSING_OOMPH_SUPERLU"`; \
 fi
 
 #Tell everybody about it...
@@ -946,6 +947,7 @@ if test x$have_superlu_dist = xtrue; then
         echo "Assuming that SuperLU_dist is provided automatically by compiler/linker"
 else 
         echo "Building/using oomph-lib's own copy of SuperLU_dist"
+        accumulated_cpp_flags=`echo $accumulated_cpp_flags " -DUSING_OOMPH_SUPERLU_DIST"`; \
 fi
 
 
