@@ -8067,23 +8067,6 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
 #ifdef OOMPH_HAS_MPI
          // Synchronise the solution on different processors (on each submesh)
        this->synchronise_all_dofs();
-       /*  unsigned nmesh=nsub_mesh();
-         if (nmesh==0)
-          {
-           synchronise_dofs(mesh_pt());
-          }
-         else
-          {
-           // Synchronise ALL halo(ed) dofs BEFORE external halo(ed) dofs
-           for (unsigned imesh=0; imesh<nmesh; imesh++)
-            {
-             synchronise_dofs(mesh_pt(imesh));
-            }
-           for (unsigned imesh=0; imesh<nmesh; imesh++)
-            {
-             synchronise_external_dofs(mesh_pt(imesh));
-            }
-            }*/
 #endif
          //Call all "after" actions, e.g. to handle mesh updates
          actions_after_newton_step();
@@ -8175,23 +8158,6 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
 #ifdef OOMPH_HAS_MPI
        // Synchronise the solution on different processors (on each submesh)
        this->synchronise_all_dofs();
-       /*   unsigned nmesh=nsub_mesh();
-       if (nmesh==0)
-        {
-         synchronise_dofs(mesh_pt());
-        }
-       else
-        {
-          // Synchronise ALL halo(ed) dofs BEFORE external halo(ed) dofs
-         for (unsigned imesh=0; imesh<nmesh; imesh++)
-          {
-           synchronise_dofs(mesh_pt(imesh));
-          }
-         for (unsigned imesh=0; imesh<nmesh; imesh++)
-          {
-           synchronise_external_dofs(mesh_pt(imesh));
-          }
-          }*/
 #endif
 
        //Call all "after" actions, e.g. to handle mesh updates

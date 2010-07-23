@@ -435,7 +435,7 @@ namespace oomph
          {
           // Create new node
           Node* new_node_pt=new_el_pt[j][0]->
-           construct_boundary_node(j_local,time_stepper_pt); 
+           construct_boundary_node(j_local,time_stepper_pt);  // hierher leak?
           Node_pt.push_back(new_node_pt);
 
           //...and remember it
@@ -1246,8 +1246,8 @@ namespace oomph
         normals[new_node_pt].push_back(unit_normal);
           
         // Create other nodes in bottom layer
-        new_nod_pt=
-         new_el_pt[j][0]->construct_node(j_local+9,time_stepper_pt);
+        new_nod_pt= // hierher leak?
+         new_el_pt[j][0]->construct_node(j_local+9,time_stepper_pt); 
         connected_node_pt[new_node_pt].push_back(new_nod_pt);
         Node_pt.push_back(new_nod_pt);
 

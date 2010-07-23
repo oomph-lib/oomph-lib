@@ -372,7 +372,7 @@ namespace oomph
                            matrix_vals+local_start);
 
    // assemble matrix
-   HYPRE_IJMatrixAssemble(hypre_ij_matrix);
+   HYPRE_IJMatrixAssemble(hypre_ij_matrix); // hierher leak?
    HYPRE_IJMatrixGetObject(hypre_ij_matrix, (void **) &hypre_par_matrix);
 
    // tidy up memory

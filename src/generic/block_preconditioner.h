@@ -2342,7 +2342,7 @@ namespace oomph
            Rows_to_recv_for_get_block(b,p)
             = new int[Nrows_to_recv_for_get_block(b,p)];
           }
-         Rows_to_recv_for_get_ordered[p] 
+         Rows_to_recv_for_get_ordered[p] // -- hierher leak?
           = new int [Nrows_to_recv_for_get_ordered[p]];
         }
       }

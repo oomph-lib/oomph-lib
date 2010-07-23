@@ -87,7 +87,7 @@ namespace oomph {
      // using LSC preconditioner for NS
      Navier_stokes_preconditioner_pt = new SuperLUPreconditioner;
      Navier_stokes_schur_complement_preconditioner_pt 
-      = new NavierStokesSchurComplementPreconditioner;
+      = new NavierStokesSchurComplementPreconditioner; 
 
      // set defaults
      Using_default_solid_preconditioner = true;
@@ -103,7 +103,7 @@ namespace oomph {
     }
 
    // destructor
-   ~PseudoElasticFSIPreconditioner()
+   virtual ~PseudoElasticFSIPreconditioner()
     {
      // clean the memory
      this->clean_up_memory();

@@ -1,4 +1,5 @@
 SUBDIRS = \
+restart \
 adaptive_driven_cavity \
 circular_driven_cavity \
 fish_poisson \

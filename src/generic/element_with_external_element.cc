@@ -320,7 +320,7 @@ assign_external_interaction_data_local_eqn_numbers()
    const unsigned n_external_interaction_field_data = paired_field_data.size();
    Nexternal_interaction_field_data = n_external_interaction_field_data;
    External_interaction_field_data_pt = 
-    new Data*[n_external_interaction_field_data];
+    new Data*[n_external_interaction_field_data]; 
    External_interaction_field_data_index = 
     new unsigned[n_external_interaction_field_data];
 

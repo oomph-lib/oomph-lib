@@ -19,6 +19,7 @@ quick_guide \
 poisson \
 unsteady_heat \
 linear_wave \
+helmholtz \
 navier_stokes \
 axisym_navier_stokes \
 advection_diffusion \
