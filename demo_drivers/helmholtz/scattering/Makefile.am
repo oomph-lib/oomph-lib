@@ -7,7 +7,7 @@ check_PROGRAMS=scattering  adaptive_scattering
 #--------------------------------------
 
 # Sources for executable
-adaptive_scattering_SOURCES = scattering.cc helmholtz_bc_elements.h validate.sh
+adaptive_scattering_SOURCES = scattering.cc validate.sh
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
@@ -21,7 +21,7 @@ adaptive_scattering_CXXFLAGS = -DADAPTIVE
 
 
 # Sources for executable
-scattering_SOURCES = scattering.cc helmholtz_bc_elements.h validate.sh
+scattering_SOURCES = scattering.cc validate.sh
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.

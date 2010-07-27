@@ -17,7 +17,7 @@ cd Validation
 
 echo "Running adaptive scattering validation. Dirichlet-to-Neumann BC"
 mkdir RESLT
-../adaptive_scattering 0 > OUTPUT_adapt_0
+../adaptive_scattering --case 0 > OUTPUT_adapt_0
 echo "done"
 echo " " >> validation.log
 echo "Scattering validation (Dirichlet-to-Neumann BC)" >> validation.log
@@ -42,7 +42,7 @@ mv RESLT RESLT_adapt_0
 
 echo "Running adaptive scattering validation. first order abc"
 mkdir RESLT
-../adaptive_scattering 1 > OUTPUT_adapt_1
+../adaptive_scattering --case 1 > OUTPUT_adapt_1
 echo "done"
 echo " " >> validation.log
 echo "Scattering validation (first order ABC)" >> validation.log
@@ -68,7 +68,7 @@ mv RESLT RESLT_adapt_1
 
 echo "Running adaptive scattering validation. second order abc"
 mkdir RESLT
-../adaptive_scattering 2 > OUTPUT_adapt_2
+../adaptive_scattering --case 2 > OUTPUT_adapt_2
 echo "done"
 echo " " >> validation.log
 echo "Scattering validation (second order ABC)" >> validation.log
@@ -93,7 +93,7 @@ mv RESLT RESLT_adapt_2
 
 echo "Running adaptive scattering validation. third order abc"
 mkdir RESLT
-../adaptive_scattering 3 > OUTPUT_adapt_3
+../adaptive_scattering --case 3 > OUTPUT_adapt_3
 echo "done"
 echo " " >> validation.log
 echo "Scattering validation (third order ABC)" >> validation.log
@@ -119,7 +119,7 @@ mv RESLT RESLT_adapt_3
 
 echo "Running  scattering validation. Dirichlet-to-Neumann BC"
 mkdir RESLT
-../scattering 0 > OUTPUT_0
+../scattering --case 0 > OUTPUT_0
 echo "done"
 echo " " >> validation.log
 echo "Scattering  (Dirichlet-to-Neumann BC)" >> validation.log
@@ -144,7 +144,7 @@ mv RESLT RESLT_0
 
 echo "Running  scattering validation. first order abc"
 mkdir RESLT
-../scattering 1 > OUTPUT_1
+../scattering --case 1 > OUTPUT_1
 echo "done"
 echo " " >> validation.log
 echo "Scattering validation (first order ABC)" >> validation.log
@@ -170,7 +170,7 @@ mv RESLT RESLT_1
 
 echo "Running  scattering validation. second order abc"
 mkdir RESLT
-../scattering 2 > OUTPUT_2
+../scattering --case 2 > OUTPUT_2
 echo "done"
 echo " " >> validation.log
 echo "Scattering validation (second order ABC)" >> validation.log
@@ -195,7 +195,7 @@ mv RESLT RESLT_2
 
 echo "Running  scattering validation. third order abc"
 mkdir RESLT
-../scattering 3 > OUTPUT_3
+../scattering --case 3 > OUTPUT_3
 echo "done"
 echo " " >> validation.log
 echo "Scattering validation (third order ABC)" >> validation.log

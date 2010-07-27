@@ -236,7 +236,7 @@ class Data
  /// A base Data object can never be a copy so the default implementation
  /// always returns false.
  virtual bool is_a_copy(const unsigned &i) const {return false;}
-
+ 
  /// \short Set the i-th stored data value to specified value.
  /// The only reason that we require an explicit set function is
  /// because we redefine value() in the Node class to interpolate
@@ -926,6 +926,14 @@ public:
  /// \short Return the i-th component of j-th derivative of nodal position: 
  /// d^jx/dt^j.
  double dx_dt(const unsigned &j, const unsigned &i) const;
+ 
+ /// \short Return pointer to copied node (null if the
+ /// current node is not a copy -- always the case here; it's overloaded
+ /// for boundary nodes)
+ virtual Node* copied_node_pt() const 
+ {
+  return 0;
+ }
 
  ///Return whether any position coordinate has been copied (always false)
  virtual bool position_is_a_copy() const {return false;}
@@ -1774,7 +1782,7 @@ class BoundaryNode: public NODE_TYPE, public BoundaryNodeBase
 {
   private:
 
- /// \short Set pointers to the copied data used when we have periodic nodese
+ /// \short Set pointers to the copied data used when we have periodic nodes
  void reset_copied_pointers()
   {
 #ifdef PARANOID
@@ -2011,6 +2019,14 @@ class BoundaryNode: public NODE_TYPE, public BoundaryNodeBase
  /// If the node is periodic all values are copies
  bool is_a_copy(const unsigned &i) const 
   {if(Copied_node_pt) {return true;} else{return false;}}
+
+
+ /// \short Return pointer to copied node (null if the
+ /// current node is not a copy)
+ Node* copied_node_pt() const 
+  {
+   return Copied_node_pt;
+  }
 
   /// \short Overload the equation assignment operation
  void assign_eqn_numbers(unsigned long &global_ndof, 

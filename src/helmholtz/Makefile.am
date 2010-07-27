@@ -15,7 +15,8 @@ incl_cc_files =
 headers =  \
 helmholtz_elements.h helmholtz_flux_elements.h  \
 refineable_helmholtz_elements.h  \
-Thelmholtz_elements.h
+Thelmholtz_elements.h \
+helmholtz_bc_elements.h
 
 # Define name of library 
 libname = helmholtz

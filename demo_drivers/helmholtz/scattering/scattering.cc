@@ -1,4 +1,5 @@
-//LIC// //LIC// This file forms part of oomph-lib, the object-oriented, 
+//LIC//======================================================================
+///LIC// This file forms part of oomph-lib, the object-oriented, 
 //LIC// multi-physics finite-element library, available 
 //LIC// at http://www.oomph-lib.org.
 //LIC// 
@@ -24,35 +25,31 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//
+//LIC//======================================================================
 //Driver for a specific  2D Helmholtz problem with flux boundary conditions
 //uses two separate meshes for bulk and surface mesh
 
 #include<fenv.h>
 
+
+#include "math.h"
+#include <complex>
+
+
 //Generic routines
 #include "generic.h"
 
-
 // The Helmholtz equations
 #include "helmholtz.h"
-
-// BC elements hierher move into src/helmholtz
-#include "helmholtz_bc_elements.h"
 
 // The mesh
 #include "annular_meshes.h"
 
 // Get the Bessel functions
 #include "oomph_crbond_bessel.h"
-#include "math.h"
-#include <complex>
+
 using namespace oomph;
 using namespace std;
-
-
-//#define ADAPTIVE
-//#undef ADAPTIVE
-
 
 
 
@@ -67,15 +64,15 @@ using namespace std;
 namespace GlobalParameters
 {
  /// \short parameter for the Helmholtz equation
- double K_squared=10.0; // hierher 1.0;
+ double K_squared=10.0; 
  
- /// \short nbr of terms used in the computation 
+ /// \short Number of terms used in the computation 
  ///of the exact solution
- int N_fourier=10;
+ unsigned N_fourier=10;
  
- /// \short Flag to choose the exact infinite BC
+ /// \short Flag to choose the Dirichlet to Neumann BC
  /// or ABC BC
- bool exact_BC=false;
+ bool DtN_BC=false;
 
  /// \short Flag to choose wich order to use
  // in the ABCs BC: 1 for ABC 1st order...
@@ -84,11 +81,10 @@ namespace GlobalParameters
  /// Radius of outer boundary (must be a circle!)
  double Outer_radius=1.5;
 
- // define I for complex
- complex<double> I(0.0,1.0);
+ /// Imaginary unit 
+ std::complex<double> I(0.0,1.0);
  
- 
- /// Exact solution as a Vector for scattered field 
+ /// \short Exact solution as a Vector for scattered field 
  /// from cylinder of radius 1
  void get_exact_u(const Vector<double>& x, Vector<double>& u)
  {
@@ -101,30 +97,39 @@ namespace GlobalParameters
   // introduce the point where the Bessel fcts
   // will be evaluated
   double rr=sqrt(K_squared)*r;  
-  int n=N_fourier+2;
  
-  //initialise the bessel fcts
+  // Provide storage for Bessel/Hankel functions
   complex <double > u_ex(0.0,0.0);
-  Vector<double>jn_r(n), yn_r(n),jnp_r(n), ynp_r(n);
-  Vector<double>jn_a(n),yn_a(n),jnp_a(n), ynp_a(n);
-  Vector<complex<double> > h_r(n),h_a(n),hp_r(n), hp_a(n);
-  
-  CRBond_Bessel::bessjyna(n,sqrt(K_squared),n,&jn_a[0],&yn_a[0],
+  Vector<double> jn(N_fourier+1), yn(N_fourier+1),
+   jnp(N_fourier+1), ynp(N_fourier+1);
+  Vector<double> jn_a(N_fourier+1),yn_a(N_fourier+1),
+   jnp_a(N_fourier+1), ynp_a(N_fourier+1);
+  Vector<complex<double> > h(N_fourier+1),h_a(N_fourier+1),
+   hp(N_fourier+1), hp_a(N_fourier+1);
+  int n_actual=0;
+  CRBond_Bessel::bessjyna(N_fourier,sqrt(K_squared),n_actual,
+                          &jn_a[0],&yn_a[0],
                           &jnp_a[0],&ynp_a[0]); 
-  Hankel_functions_for_Helmholtz_problem:: Hankel_first(n,rr,h_r,hp_r);
-  Hankel_functions_for_Helmholtz_problem::Hankel_first(n,sqrt(K_squared),h_a,hp_a);
+
+
+
+  // Hankel at actual radius
+  Hankel_functions_for_Helmholtz_problem::Hankel_first(N_fourier,rr,h,hp);
+
+  // Hankel at inner (unit) radius
+  Hankel_functions_for_Helmholtz_problem::Hankel_first(N_fourier
+                                                       ,sqrt(K_squared),
+                                                       h_a,hp_a);
   
-  // compute the sum: 
-  //separate the computation of the negative and positive terms
-  // positive terms 
-  for (unsigned i=0;i<unsigned(N_fourier);i++)
+  // compute the sum: Separate the computation of the negative 
+  // and positive terms
+  for (unsigned i=0;i<N_fourier;i++)
    {
-    u_ex-=pow(I,i)*h_r[i]*((jnp_a[i])/hp_a[i])*pow(exp(I*theta),i);
+    u_ex-=pow(I,i)*h[i]*((jnp_a[i])/hp_a[i])*pow(exp(I*theta),i);
    }
-  // negative terms
-  for (unsigned i=1;i<unsigned(N_fourier);i++)
+  for (unsigned i=1;i<N_fourier;i++)
    {
-    u_ex-=pow(I,i)*h_r[i]*((jnp_a[i])/hp_a[i])*pow(exp(-I*theta),i);
+    u_ex-=pow(I,i)*h[i]*((jnp_a[i])/hp_a[i])*pow(exp(-I*theta),i);
    }
   
   // Get the real & imaginary part of the result
@@ -135,13 +140,13 @@ namespace GlobalParameters
  
 
 
- /// Prescribed incoming flux computed using the expression
+ /// \short Prescribed incoming flux computed using the expression
  /// of the incoming wave
  void prescribed_incoming_flux(const Vector<double>& x, 
                       complex<double>&  flux)
  {
   
-  // introduce the polar coordinate
+  // introduce polar coordinates
   double r;
   r=sqrt(x[0]*x[0]+x[1]*x[1]);
   double theta;
@@ -150,26 +155,37 @@ namespace GlobalParameters
   // introduce the point where the Bessel fcts
   // will be evaluated
   double rr=sqrt(K_squared)*r;  
-  int n=N_fourier+2;
   
-  //initialise the bessel fct
-  complex <double> fluxx(0.0,0.0);
-  Vector<double>jn_r(n), yn_r(n),jnp_r(n), ynp_r(n);
- 
-  CRBond_Bessel::bessjyna(n,rr,n,&jn_r[0],&yn_r[0],
-                          &jnp_r[0],&ynp_r[0]);
+  // Provide storage for Bessel/Hankel functions
+  complex<double> fluxx(0.0,0.0);
+  Vector<double>jn(N_fourier+1), yn(N_fourier+1),
+   jnp(N_fourier+1), ynp(N_fourier+1);
+  int n_actual=0;
+  CRBond_Bessel::bessjyna(N_fourier,rr,n_actual,&jn[0],&yn[0],
+                          &jnp[0],&ynp[0]);
   
-  // compute the sum: 
-  //separate the computation of the negative and positive terms
-  // positive terms 
-  for (unsigned i=0;i<unsigned(N_fourier);i++)
+#ifdef PARANOID
+  if (n_actual!=int(N_fourier))
    {
-    fluxx+=pow(I,i)*(sqrt(K_squared))*pow(exp(I*theta),i)*jnp_r[i];
+    std::ostringstream error_stream; 
+    error_stream << "CRBond_Bessel::bessjyna() only computed "
+                 << n_actual << " rather than " << N_fourier 
+                 << " Bessel functions.\n";    
+    throw OomphLibError(error_stream.str(),
+                        "GlobalParameters::prescribed_incoming_flux()",
+                        OOMPH_EXCEPTION_LOCATION);
    }
-  // negative terms
-  for (unsigned i=1;i<unsigned(N_fourier);i++)
+#endif
+  
+  // Compute the sum: Separate the computation of the negative and 
+  // positive terms
+  for (unsigned i=0;i<N_fourier;i++)
    {
-    fluxx+=pow(I,i)*(sqrt(K_squared))*pow(exp(-I*theta),i)*jnp_r[i];
+    fluxx+=pow(I,i)*(sqrt(K_squared))*pow(exp(I*theta),i)*jnp[i];
+   }
+  for (unsigned i=1;i<N_fourier;i++)
+   {
+    fluxx+=pow(I,i)*(sqrt(K_squared))*pow(exp(-I*theta),i)*jnp[i];
    }
   flux=fluxx;
  }
@@ -212,10 +228,10 @@ public:
  
  /// Recompute gamma integral before checking Newton residuals
  void actions_before_newton_convergence_check()
-   {
-      if (GlobalParameters::exact_BC)
-      {Helmholtz_outer_boundary_mesh_pt->setup_gamma();}
-   }
+  {
+   if (GlobalParameters::DtN_BC)
+    {Helmholtz_outer_boundary_mesh_pt->setup_gamma();}
+  }
  
  /// Actions before adapt: Wipe the mesh of prescribed flux elements
  void actions_before_adapt();
@@ -223,26 +239,27 @@ public:
  /// Actions after adapt: Rebuild the mesh of prescribed flux elements
  void actions_after_adapt();
  
- /// \short Create Sommerfeld BC elements on boundary b of the Mesh pointed
+ /// \short Create BC elements on boundary b of the Mesh pointed
  /// to by bulk_mesh_pt and add them to the appropriate Mesh 
- void create_outer_flux_elements(const unsigned &b, Mesh* const &bulk_mesh_pt,
-                                 Mesh* const & helmholtz_outer_boundary_mesh_pt);
-
+ void create_outer_bc_elements(
+  const unsigned &b, Mesh* const &bulk_mesh_pt,
+  Mesh* const & helmholtz_outer_boundary_mesh_pt);
+ 
  /// \short Create Helmholtz flux elements on boundary b of the Mesh pointed
  /// to by bulk_mesh_pt and add them to the appropriate Mesh 
  void create_flux_elements(const unsigned &b, Mesh* const &bulk_mesh_pt,
-                            Mesh* const & helmholtz_inner_boundary_mesh_pt);
+                           Mesh* const & helmholtz_inner_boundary_mesh_pt);
  
  
- /// \short Delete boundary flux elements and wipe the surface mesh
- void delete_flux_elements( Mesh* const & boundary_mesh_pt);
+ /// \short Delete boundary face elements and wipe the surface mesh
+ void delete_face_elements( Mesh* const & boundary_mesh_pt);
  
  /// \short Set pointer to prescribed-flux function for all
  /// elements in the surface mesh
  void set_prescribed_incoming_flux_pt();
 
- /// \short Set pointer  to the "sommerfeld" mesh
- void set_sommerfeld_mesh();
+ /// \short Set up elements on outer boundary
+ void setup_outer_boundary();
 
  
 #ifdef ADAPTIVE
@@ -258,11 +275,10 @@ public:
 #endif
 
  
- /// Pointer to mesh containing 
- /// the Helmholtz outer boundary condition elements
- HelmholtzOuterBoundaryMesh<ELEMENT>* Helmholtz_outer_boundary_mesh_pt;
+ /// \short Pointer to mesh containing the DtN elements
+ HelmholtzDtNMesh<ELEMENT>* Helmholtz_outer_boundary_mesh_pt;
  
- /// Pointer to the mesh containing 
+ /// \short Pointer to the mesh containing 
  /// the Helmholtz inner boundary condition elements 
  Mesh* Helmholtz_inner_boundary_mesh_pt;
 
@@ -296,8 +312,8 @@ ScatteringProblem()
  // Set outer radius
  GlobalParameters::Outer_radius=a+h;
 
- // periodic?
- bool periodic=false; // hierher true, combine with frac
+ // Mesh is periodic
+ bool periodic=true; 
  
  // full circle
  double azimuthal_fraction=1.0;
@@ -324,16 +340,13 @@ ScatteringProblem()
  
 #endif
 
-
-
-
-/// Pointer to mesh containing the Helmholtz outer boundary condition
- /// elements. Specify outer radius
- Helmholtz_outer_boundary_mesh_pt = 
-  new HelmholtzOuterBoundaryMesh<ELEMENT>(a+h,nfourier);
+ // Pointer to mesh containing the Helmholtz outer boundary condition
+ // elements. Specify outer radius and number of Fourier terms to be
+ // used in gamma integral
+ Helmholtz_outer_boundary_mesh_pt = new HelmholtzDtNMesh<ELEMENT>(a+h,nfourier);
  
-/// Pointer to mesh containing the Helmholtz inner boundary condition
- /// elements. Specify outer radius
+ // Pointer to mesh containing the Helmholtz inner boundary condition
+ // elements. Specify outer radius
  Helmholtz_inner_boundary_mesh_pt = new Mesh;
 
  
@@ -341,9 +354,9 @@ ScatteringProblem()
  // adjacent to the inner boundary , but add them to a separate mesh.
  create_flux_elements(0,Bulk_mesh_pt,Helmholtz_inner_boundary_mesh_pt);
 
- // Create Sommerfeld-flux elements from all elements that are 
+ // Create outer boundary elements from all elements that are 
  // adjacent to the outer boundary , but add them to a separate mesh.
- create_outer_flux_elements(2,Bulk_mesh_pt,Helmholtz_outer_boundary_mesh_pt);
+ create_outer_bc_elements(2,Bulk_mesh_pt,Helmholtz_outer_boundary_mesh_pt);
 
  // Add the several  sub meshes to the problem
  add_sub_mesh(Bulk_mesh_pt);
@@ -368,8 +381,8 @@ ScatteringProblem()
    el_pt->k_squared_pt() = &GlobalParameters::K_squared;
   }
  
- // Set pointer to Sommerfeld mesh
- set_sommerfeld_mesh();
+ // Set up elements on outer boundary
+ setup_outer_boundary();
  
  // Set pointer to prescribed flux function for flux elements
  set_prescribed_incoming_flux_pt();
@@ -388,8 +401,9 @@ template<class ELEMENT>
 void ScatteringProblem<ELEMENT>::actions_before_adapt()
 { 
  // Kill the flux elements and wipe the boundary meshs
- delete_flux_elements(Helmholtz_outer_boundary_mesh_pt);
- delete_flux_elements(Helmholtz_inner_boundary_mesh_pt);
+ delete_face_elements(Helmholtz_outer_boundary_mesh_pt);
+ delete_face_elements(Helmholtz_inner_boundary_mesh_pt);
+
  // Rebuild the Problem's global mesh from its various sub-meshes
  rebuild_global_mesh();
 
@@ -403,18 +417,17 @@ template<class ELEMENT>
 void ScatteringProblem<ELEMENT>::actions_after_adapt()
 {
 
- // Create prescribed-flux elements and Sommerfeld-flux elements 
+ // Create prescribed-flux elements and BC elements 
  // from all elements that are adjacent to the boundaries and add them to 
- //Helmholtz_boundary_meshs
- create_outer_flux_elements(2,Bulk_mesh_pt,Helmholtz_outer_boundary_mesh_pt);
+ // Helmholtz_boundary_meshes
+ create_outer_bc_elements(2,Bulk_mesh_pt,Helmholtz_outer_boundary_mesh_pt);
  create_flux_elements(0,Bulk_mesh_pt,Helmholtz_inner_boundary_mesh_pt);
  
  // Rebuild the Problem's global mesh from its various sub-meshes
  rebuild_global_mesh();
  
- // Set pointer to prescribed flux function and Sommerfeld-flux function
- // for flux elements
- set_sommerfeld_mesh();
+ // Set pointer to prescribed flux function and DtN mesh
+ setup_outer_boundary();
  set_prescribed_incoming_flux_pt(); 
  
 #ifdef ADAPTIVE
@@ -431,20 +444,19 @@ void ScatteringProblem<ELEMENT>::actions_after_adapt()
 }// end of actions_after_adapt
 
 
-//==================start_of_set_sommerfeld_mesh ========================
-/// set_sommerfeld_mesh:Set pointer to the mesh that contains all 
-// the boundary condition elements on this boundary 
+//==================start_of_setup_outer_boundary=========================
+/// Set pointers for elements on outer boundary
 //========================================================================
 template<class ELEMENT>
-void ScatteringProblem<ELEMENT>::set_sommerfeld_mesh()
+void ScatteringProblem<ELEMENT>::setup_outer_boundary()
 { 
- // Loop over the flux elements to pass pointer to Sommerfeld
+ // Loop over the flux elements to pass pointer to DtN
  // BC for the outer boundary
  unsigned n_element=Helmholtz_outer_boundary_mesh_pt->nelement();
  for(unsigned e=0;e<n_element;e++)
   {
    // if you use DtN exact BC
-   if (GlobalParameters::exact_BC)
+   if (GlobalParameters::DtN_BC)
     {
      // Upcast from GeneralisedElement to Helmholtz flux element
      HelmholtzDtNBoundaryElement<ELEMENT> *el_pt = 
@@ -469,20 +481,18 @@ void ScatteringProblem<ELEMENT>::set_sommerfeld_mesh()
      
      // Set pointer to outer radius of artificial boundary
      el_pt->outer_radius_pt()=&GlobalParameters::Outer_radius;
-
+     
      // Set pointer to wavenumber squared
      el_pt->k_squared_pt()=&GlobalParameters::K_squared;
 
-
      // Set order of absorbing boundary condition
      el_pt->abc_order_pt()=&GlobalParameters::ABC_order;
-
     }    
   }
 }
 
 
-//==================start_of_set_prescribed_incoming_flux_pt======================
+//==================start_of_set_prescribed_incoming_flux_pt==============
 /// Set pointer to prescribed incoming-flux function for all
 /// elements in the inner boundary
 //========================================================================
@@ -564,11 +574,11 @@ void ScatteringProblem<ELEMENT>::doc_solution(DocInfo&
  
 } // end of doc
 
- //============start_of_create_flux_elements==================================
- /// Create Helmholtz inner Flux Elements on the b-th boundary of 
- /// the Mesh object pointed to by bulk_mesh_pt and add the elements 
- /// to the Mesh object  pointed to by helmholtz_inner_boundary_mesh_p
- //============================================================================
+//============start_of_create_flux_elements==================================
+/// Create Helmholtz inner Flux Elements on the b-th boundary of 
+/// the Mesh object pointed to by bulk_mesh_pt and add the elements 
+/// to the Mesh object  pointed to by helmholtz_inner_boundary_mesh_pt
+//============================================================================
 template<class ELEMENT>
 void ScatteringProblem<ELEMENT>::
 create_flux_elements(const unsigned &b, Mesh* const &bulk_mesh_pt,
@@ -600,15 +610,15 @@ create_flux_elements(const unsigned &b, Mesh* const &bulk_mesh_pt,
 
 
 
-//============start_of_create_outer_flux_elements============================
-/// Create outer Flux boundary Elements on the b-th boundary of 
+//============start_of_create_outer_bc_elements==============================
+/// Create outer BC elements on the b-th boundary of 
 /// the Mesh object pointed to by bulk_mesh_pt and add the elements 
 /// to the Mesh object pointed to by helmholtz_outer_boundary_mesh_pt .
 //===========================================================================
 template<class ELEMENT>
 void ScatteringProblem<ELEMENT>::
-create_outer_flux_elements(const unsigned &b, Mesh* const &bulk_mesh_pt,
-                           Mesh* const & helmholtz_outer_boundary_mesh_pt)
+create_outer_bc_elements(const unsigned &b, Mesh* const &bulk_mesh_pt,
+                         Mesh* const & helmholtz_outer_boundary_mesh_pt)
 {
  // How many bulk elements are adjacent to boundary b?
  unsigned n_element = bulk_mesh_pt->nboundary_element(b);
@@ -626,7 +636,7 @@ create_outer_flux_elements(const unsigned &b, Mesh* const &bulk_mesh_pt,
    // Build the corresponding outer flux element
    
    // if you use DtN exact BC
-   if (GlobalParameters::exact_BC)
+   if (GlobalParameters::DtN_BC)
     {
      HelmholtzDtNBoundaryElement<ELEMENT>* flux_element_pt = new 
       HelmholtzDtNBoundaryElement<ELEMENT>(bulk_elem_pt,face_index);
@@ -644,15 +654,15 @@ create_outer_flux_elements(const unsigned &b, Mesh* const &bulk_mesh_pt,
      helmholtz_outer_boundary_mesh_pt->add_element_pt(flux_element_pt);
     }
   } //end of loop over bulk elements adjacent to boundary b
-} // end of create_outer_flux_elements
+} // end of create_outer_bc_elements
 
 
-//============start_of_delete_flux_elements================
-/// Delete Helmholtz Flux Elements and wipe the boundary mesh
+//============start_of_delete_face_elements================
+/// Delete face lements and wipe the boundary mesh
 //==========================================================
 template<class ELEMENT>
 void ScatteringProblem<ELEMENT>::
-delete_flux_elements(Mesh* const & boundary_mesh_pt)
+delete_face_elements(Mesh* const & boundary_mesh_pt)
 {
  // How many surface elements are in the surface mesh
  unsigned n_element = boundary_mesh_pt->nelement();
@@ -667,7 +677,7 @@ delete_flux_elements(Mesh* const & boundary_mesh_pt)
  // Wipe the mesh
  boundary_mesh_pt->flush_element_and_node_storage();
  
-} // end of delete_outer_flux_elements
+} // end of delete_outer_face_elements
 
 
 
@@ -687,20 +697,20 @@ int main(int argc, char **argv)
  // Define case to be run
  unsigned i_case=0;
 
- if (CommandLineArgs::Argc==2)
-  {
-   i_case=atoi(CommandLineArgs::Argv[1]);
-  }
+//  if (CommandLineArgs::Argc==2)
+//   {
+//    i_case=atoi(CommandLineArgs::Argv[1]);
+//   }
  
- cout << "icase " << i_case << std::endl;
+//  cout << "icase " << i_case << std::endl;
 
-//  CommandLineArgs::specify_command_line_flag("--case",&i_case);
+ CommandLineArgs::specify_command_line_flag("--case",&i_case);
 
-//  // Parse command line
-//  CommandLineArgs::parse_and_assign(); 
+ // Parse command line
+ CommandLineArgs::parse_and_assign(); 
 
-//  // Doc what has actually been specified on the command line
-//  CommandLineArgs::doc_specified_flags();
+ // Doc what has actually been specified on the command line
+ CommandLineArgs::doc_specified_flags();
 
 
  // Now set flags accordingly
@@ -708,21 +718,21 @@ int main(int argc, char **argv)
   {
 
   case 0:
-   GlobalParameters::exact_BC=true;
+   GlobalParameters::DtN_BC=true;
    break;
 
   case 1:
-   GlobalParameters::exact_BC=false;
+   GlobalParameters::DtN_BC=false;
    GlobalParameters::ABC_order=1;
    break;
 
   case 2:
-   GlobalParameters::exact_BC=false;
+   GlobalParameters::DtN_BC=false;
    GlobalParameters::ABC_order=2;
    break;
 
   case 3:
-   GlobalParameters::exact_BC=false;
+   GlobalParameters::DtN_BC=false;
    GlobalParameters::ABC_order=3;
    break;
 
@@ -762,21 +772,11 @@ int main(int argc, char **argv)
  doc_info.number()=0;
  
 
- // Update gamma
- problem.actions_before_newton_convergence_check();
-
-
 #ifdef ADAPTIVE
 
  // Max. number of adaptations
  unsigned max_adapt=1;
  
-#endif
-
-
-
-#ifdef ADAPTIVE
-
    // Solve the problem with Newton's method, allowing
    // up to max_adapt mesh adaptations after every solve.
    problem.newton_solve(max_adapt);
