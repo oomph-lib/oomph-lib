@@ -63,7 +63,7 @@ using namespace std;
 //=====================================================================
 namespace GlobalParameters
 {
- /// \short parameter for the Helmholtz equation
+ /// \short the wave number squared
  double K_squared=10.0; 
  
  /// \short Number of terms used in the computation 
@@ -76,7 +76,7 @@ namespace GlobalParameters
 
  /// \short Flag to choose wich order to use
  // in the ABCs BC: 1 for ABC 1st order...
- unsigned ABC_order=2;
+ unsigned ABC_order=3;
 
  /// Radius of outer boundary (must be a circle!)
  double Outer_radius=1.5;
@@ -136,7 +136,7 @@ namespace GlobalParameters
   u[0]=real(u_ex);
   u[1]=imag(u_ex);
   
- }
+ }// end of get_exact_u
  
 
 
@@ -188,8 +188,8 @@ namespace GlobalParameters
     fluxx+=pow(I,i)*(sqrt(K_squared))*pow(exp(-I*theta),i)*jnp[i];
    }
   flux=fluxx;
- }
 
+ }// end of prescribed_incoming_flux 
 } // end of namespace
 
 
@@ -232,7 +232,7 @@ public:
    if (GlobalParameters::DtN_BC)
     {Helmholtz_outer_boundary_mesh_pt->setup_gamma();}
   }
- 
+
  /// Actions before adapt: Wipe the mesh of prescribed flux elements
  void actions_before_adapt();
  
@@ -392,7 +392,6 @@ ScatteringProblem()
 
 } // end of constructor
 
-
 //=====================start_of_actions_before_adapt======================
 /// Actions before adapt: Wipe the mesh of face elements
 //========================================================================
@@ -525,6 +524,24 @@ template<class ELEMENT>
 void ScatteringProblem<ELEMENT>::doc_solution(DocInfo& 
                                               doc_info) 
 { 
+ // Output the power on the outer_domain
+ //-----------------
+ double power=0.0;
+//check_out the power_expression
+//Get the number of element 
+ unsigned nn_element=Helmholtz_outer_boundary_mesh_pt->nelement();
+ 
+ // loop over the element to store reference values
+ for(unsigned e=0;e<nn_element;e++)
+  {
+   HelmholtzBCElementBase<ELEMENT> *el_pt = 
+    dynamic_cast< HelmholtzBCElementBase<ELEMENT>*>(
+     Helmholtz_outer_boundary_mesh_pt->element_pt(e)); 
+   power += el_pt->global_power_contribution();
+  }
+ cout <<"power-------------- " << power << std::endl; 
+ 
+
 #ifdef ADAPTIVE
 // Doc refinement levels in bulk mesh
  unsigned min_refinement_level;
@@ -534,7 +551,7 @@ void ScatteringProblem<ELEMENT>::doc_solution(DocInfo&
  cout << "Ultimate min/max. refinement levels in bulk mesh : " 
       << min_refinement_level << " " 
       << max_refinement_level << std::endl;
-#endif 
+#endif  
 
  ofstream some_file;
  char filename[100];
@@ -689,20 +706,18 @@ int main(int argc, char **argv)
 {
  feenableexcept(FE_INVALID | FE_DIVBYZERO | FE_OVERFLOW | FE_UNDERFLOW);
  
-
-
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
 
  // Define case to be run
  unsigned i_case=0;
 
-//  if (CommandLineArgs::Argc==2)
-//   {
-//    i_case=atoi(CommandLineArgs::Argv[1]);
-//   }
+ if (CommandLineArgs::Argc==2)
+  {
+   i_case=atoi(CommandLineArgs::Argv[1]);
+  }
  
-//  cout << "icase " << i_case << std::endl;
+ cout << "icase " << i_case << std::endl;
 
  CommandLineArgs::specify_command_line_flag("--case",&i_case);
 
@@ -738,7 +753,6 @@ int main(int argc, char **argv)
 
   }
 
-   
 
  //Set up the problem
  //------------------

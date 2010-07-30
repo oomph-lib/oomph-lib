@@ -181,6 +181,120 @@ template <class ELEMENT>
   virtual inline unsigned dim() const 
   {return Dim;}
   
+  //Compute the power
+  /// compute the element contribution to the real power
+  double& global_power_contribution()
+   {   
+    // define the imaginary number
+    const std::complex<double> I(0.0,1.0);
+    
+    // pointer to the corresponding bulk element
+    ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(this->bulk_element_pt()); 
+    
+    // Number of nodes in bulk element
+    unsigned nnode_bulk=bulk_elem_pt->nnode();
+    const unsigned n_node_local = nnode();
+    
+    //get the dim of the bulk and local nodes
+    const unsigned bulk_dim= bulk_elem_pt->dim();    
+    const unsigned local_dim= this->dim();
+    
+    //Set up memory for the shape and test functions
+    Shape psi(n_node_local);
+    
+    //Set up memory for the shape functions
+    Shape psi_bulk(nnode_bulk);
+    DShape dpsi_bulk_dx(nnode_bulk,bulk_dim);
+    
+    //Set up memory for the outer unit normal
+    Vector< double > unit_normal(bulk_dim);    
+    
+    //Set the value of n_intpt
+    const unsigned n_intpt = integral_pt()->nweight();
+    
+    //Set the Vector to hold local coordinates
+    Vector<double> s(local_dim-1);
+    double power=0.0;    
+    
+    //Loop over the integration points
+    //--------------------------------
+    for(unsigned ipt=0;ipt<n_intpt;ipt++)
+     { 
+      //Assign values of s
+      for(unsigned i=0;i<(local_dim-1);i++)
+       {
+        s[i] = integral_pt()->knot(ipt,i);
+       }
+      //get the outer_unit_ext vector      
+      this->outer_unit_normal(s,unit_normal); 
+      
+      //Get the integral weight
+      double w = integral_pt()->weight(ipt);
+      
+      // Get jacobian of mapping
+      double J=J_eulerian(s);
+      
+      //Premultiply the weights and the Jacobian
+      double W = w*J;
+      
+      // Get local coordinates in bulk element by copy construction
+      Vector<double> s_bulk(local_coordinate_in_bulk(s));
+      
+      //Call the derivatives of the shape  functions
+      //in the bulk -- must do this via s because this point
+      //is not an integration point the bulk element!
+      (void)bulk_elem_pt->dshape_eulerian(s_bulk,psi_bulk,dpsi_bulk_dx);
+      this->shape(s,psi);
+      
+      // Derivs of Eulerian coordinates w.r.t. local coordinates
+      std::complex<double>  dphi_dr(0.0,0.0);
+      Vector<std::complex <double> > interpolated_dphidx(bulk_dim);
+      std::complex<double> interpolated_phi(0.0,0.0);
+      
+      //Calculate function value and derivatives:
+      //-----------------------------------------
+      // Loop over nodes
+      for(unsigned l=0;l<nnode_bulk;l++) 
+       {
+        //Get the nodal value of the helmholtz unknown
+        double phi_value_real =bulk_elem_pt->nodal_value(
+         l,bulk_elem_pt->u_index_helmholtz().real());
+        double phi_value_imag =bulk_elem_pt->nodal_value(
+         l,bulk_elem_pt->u_index_helmholtz().imag());
+        
+        //Loop over directions
+        for(unsigned i=0;i<bulk_dim;i++)
+         {
+          interpolated_dphidx[i].real()+= phi_value_real*dpsi_bulk_dx(l,i);
+          interpolated_dphidx[i].imag()+= phi_value_imag*dpsi_bulk_dx(l,i); 
+         }
+       } // End of loop over the bulk_nodes
+      
+      for(unsigned l=0;l<n_node_local;l++) 
+       {
+        //Get the nodal value of the helmholtz unknown
+        double phi_value_real = raw_nodal_value(l,u_index_helmholtz().real());
+        double phi_value_imag = raw_nodal_value(l,u_index_helmholtz().imag());
+        
+        interpolated_phi.real() += phi_value_real*psi(l);
+        interpolated_phi.imag() += phi_value_imag*psi(l);
+       }
+      
+      //define dphi_dr 
+      for(unsigned i=0;i<bulk_dim;i++)
+       {
+        dphi_dr.real()+=interpolated_dphidx[i].real()*unit_normal[i];
+        dphi_dr.imag()+=interpolated_dphidx[i].imag()*unit_normal[i];      
+       }
+      // calculate the integral
+      //-----------------------
+      // compute the element contribution to gamma
+      power +=(interpolated_phi.real()*dphi_dr.imag()-interpolated_phi.imag()*dphi_dr.real())*W*M_PI;
+     }  
+    
+    return  power;
+   }
+  
    protected:
   
   /// \short Function to compute the shape and test functions and to return 
@@ -490,6 +604,7 @@ class HelmholtzAbsorbingBCElement : public  HelmholtzBCElementBase<ELEMENT>
     // use ABC first order approximation
     if (*ABC_order_pt==1)
      {
+      //Now add to the appropriate equations:use second order approximation
       //Loop over the test functions
       for(unsigned l=0;l<n_node;l++)
        {
@@ -498,64 +613,64 @@ class HelmholtzAbsorbingBCElement : public  HelmholtzBCElementBase<ELEMENT>
         local_eqn_imag = this->nodal_local_eqn
          (l,this->U_index_helmholtz.imag());
         
-        // first, calculate the contrubution of the real part
-        //-----------------------       
+        // first, calculate the real part contrubution 
+        //-----------------------    
         //IF it's not a boundary condition
         if(local_eqn_real >= 0)
-         {   
-          //Add the first order terms to the residuals
+         {
+          //Add the second order terms:compute manually real and imag part
           
           residuals[local_eqn_real] +=
            (k*interpolated_u.imag()+(0.5/R)
             *interpolated_u.real())*test[l]*W;
-           
+     
           // Calculate the jacobian
           //-----------------------
           if(flag)
            {
             //Loop over the velocity shape functions again
             for(unsigned l2=0;l2<n_node;l2++)
-             {
+             {     
               local_unknown_real = this->nodal_local_eqn(
                l2,this->U_index_helmholtz.real());
               local_unknown_imag = this->nodal_local_eqn(
                l2,this->U_index_helmholtz.imag());
-               
               //If at a non-zero degree of freedom add in the entry
               if(local_unknown_real >= 0)
                {
-                // Add the first order terms contribution
                 jacobian(local_eqn_real,local_unknown_real)
-                 +=(0.5/R)*psi[l2]*test[l]*W;
+                 +=(0.5/R)*psi[l2]*test[l]*W;  
                }
+              
+              //If at a non-zero degree of freedom add in the entry
               if(local_unknown_imag >= 0)
-               {      
-                // Add the first order terms contribution
+               {
                 jacobian(local_eqn_real,local_unknown_imag)
-                 +=k*psi[l2]*test[l]*W;
-               }       
-             }//End of loop over the nodes l2
-           } // End of flag
-         }  // End of loop over local_eqn_real 
-         
-         
-        // second, calculate the contrubution of the imag part
-        //-----------------------       
+                 +=           k   *psi[l2]*test[l]*W;
+           
+               }  
+             }
+           }
+         }// end of local_eqn_real
+        
+        // second, calculate the imag part contrubution 
+        //-----------------------  
         //IF it's not a boundary condition
         if(local_eqn_imag >= 0)
-         {   
-          //Add the first order terms to the residuals   
+         {
+          //Add the second order terms contibution to the residual
           residuals[local_eqn_imag] +=
            (-k*interpolated_u.real()+(0.5/R)
             *interpolated_u.imag())*test[l]*W;
-           
+         
+       
           // Calculate the jacobian
           //-----------------------
           if(flag)
            {
             //Loop over the velocity shape functions again
             for(unsigned l2=0;l2<n_node;l2++)
-             {
+             {     
               local_unknown_real = this->nodal_local_eqn(
                l2,this->U_index_helmholtz.real());
               local_unknown_imag = this->nodal_local_eqn(
@@ -563,22 +678,22 @@ class HelmholtzAbsorbingBCElement : public  HelmholtzBCElementBase<ELEMENT>
               //If at a non-zero degree of freedom add in the entry
               if(local_unknown_real >= 0)
                {
-                // Add the first order terms contribution
                 jacobian(local_eqn_imag,local_unknown_real)
-                 +=(-k)*psi[l2]*test[l]*W;
-               }
+                 +=    (-k)     *psi[l2]*test[l]*W;
+               }     
+              
+              //If at a non-zero degree of freedom add in the entry
               if(local_unknown_imag >= 0)
-               {                      
-                // Add the first order terms contribution
-                jacobian(local_eqn_imag,local_unknown_real)
+               {
+                jacobian(local_eqn_imag,local_unknown_imag)
                  +=(0.5/R)*psi[l2]*test[l]*W; 
-               }
-             } //End of loop over the nodes l2
-           } // End of flag
-         } // End of loop over local_eqn_imag
-       } //End of loop over the nodes
-     }  
-     
+               }   
+             }
+           }
+         }
+       }// End of loop over the nodes   
+     }
+    
     //:use second order approximation
     if(*ABC_order_pt==2) 
      {
