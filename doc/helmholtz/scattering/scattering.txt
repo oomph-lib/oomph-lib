@@ -1,7 +1,7 @@
 \mainpage Example problem: The Helmholtz equation -- scattering problems
 
 
-This document discusses the finite-element-based solution of the 
+In this document we discuss the finite-element-based solution of the 
 Helmholtz equation which describes time-harmonic wave propagation 
 problems. We start by  reviewing the relevant theory and then 
 present the solution of a simple model problem -- scattering of a
@@ -14,10 +14,11 @@ planar wave from a circular cylinder.
 <TD bgcolor="cornsilk">
 <CENTER>
 <B>Ackowledgement:</B>
-</CENTER>
+\n\n
 This tutorial and the associated driver codes were developed jointly
 with Tarak Kharrat (EnstaParisTech, Paris).
-\n\n
+</CENTER>
+\n
 </TD>
 </TR>
 </TABLE>
@@ -54,23 +55,192 @@ k = \frac{\omega}{c}
 is the wave number. Like other elliptic PDEs the Helmholtz equations
 admits Dirichlet, Neumann (flux) and Robin boundary conditions.
 
-Here we shall consider the specific example of the scattering 
-of an acoustic wave from a sound-hard obstacle ("the scatterer"). 
+If the equation is solved in an infinite domain (e.g in scattering
+problems) the solution must satisfy the so-called
+<a href="http://en.wikipedia.org/wiki/Sommerfeld_radiation_condition">
+Sommerfeld radiation condition</a> which in 2D has the form
+\f[
+\lim_{r\to \infty} \sqrt{r} \left(\frac{\partial u}{\partial r} - iku
+\right) =0. 
+\f]
+Mathematically, this conditions is required to ensure the uniqueness
+of the solution (and hence the well-posedness of the problem).
+In a physical context, such as a scattering problem, the condition 
+ensures that scattering of an incoming wave only produces outgoing not 
+incoming waves from infinity.
 
+<HR>
+<HR>
+
+\section discr Discretisation by finite elements
+The discretisation of the Helmholtz equation itself requires a trivial
+modification of \c oomph-lib's Poisson elements -- we simply add
+the term  \f$ k^2 u \f$ to the residual. Since most practical applications
+of the Helmholtz equation involve complex-valued solutions, we provide 
+separate storage for the real and imaginary parts of the solution -- 
+each \c Node therefore stores two unknowns values. By default,
+the real and imaginary parts are stored as values 0 and 1,
+respecively; see \ref numbering for details.
+
+The application of Dirichlet and Neumann boundary conditions is equally
+straightforward and follows the pattern employed for the solution
+of the Poisson equation: 
+- Dirichlet conditions are imposed by pinning the relevant nodal
+  values and setting them to the appropriate prescribed values. 
+  \n\n
+- Neumann (flux) boundary conditions are imposed via 
+  \c FaceElements (here the \c ***HelmholtzFluxElements***). 
+   <a href="../../../poisson/two_d_poisson_flux_bc/html/index.html">
+  As usual</a> we attach these to the faces of the "bulk" elements
+  that are subject to the Neumann boundary conditions.
+.
+
+The imposition of the Sommerfeld radiation condition for problems in
+infinite domains is slightly more complicated. In the following 
+discussion we will restrict ourselves to two dimensions and assume 
+that the infinite domain is truncated at a circular artificial
+boundary \f$ \Gamma \f$ of radius \f$ R. \f$ [This assumption is also 
+made in the implementation of \c oomph-lib's \c FaceElements
+that allow the (approximate) imposition of the Sommerfeld radiation
+condition. The existing elements can easily be modified to other 
+situations but this has not been done yet -- any volunteers?]
+All methods exploit the fact that the relevant solution of the 
+Helmholtz equation can be written in polar coordinates as
+\f[
+u(r,\varphi) = \sum_{n=-\infty}^{+\infty} A_n \ H_n^{(1)}(k\varphi)  
+\ e^{i n \varphi}, \ \ \ \ \ \ \ @E[polar_soln]@
+\f]
+where the \f$A_n \f$ are suitable coefficients and
+\f$ H_n^{(1)}(\varphi) \f$ is the \f$ n \f$-th-order 
+Hankel function of the first kind.
+
+
+<HR>
+
+\subsection ABCs The Approximate/absorbing boundary conditions (ABCs)
+It is possible to derive approximate versions of the Sommerfeld
+radiation condition in which the normal derivative of the
+solution on the artificial boundary is related to its
+value, and its tangential derivatives. Such boundary
+conditions (sometimes referred to as approximate or absorbing 
+boundary conditions -- ABCs) are typically dervied from asymptotic expansions
+of the solution at large distances from the origin and become
+more accurate the larger the radius \f$ R \f$ of the artificial boundary
+\f$ \Gamma \f$ is. Higher accuracy can therefore only be achieved 
+by increasing the size of the computational domain, with an 
+associated increase in computational cost.
+
+ \c oomph-lib provides an implementation of the following three 
+boundary conditions (all taken from the paper ****, in which the authors
+compare the accuracy of these and many other approximate boundary
+conditions).
+
+- <b>Feng's first order ABC:</b>
+\f[
+ \frac {\partial u}{\partial n}-iku
+\right =0   \mbox{\ \ \  \ \  on\ }\Gamma  
+\f] 
+- <b>Feng's second order ABC:</b>
+\f[
+ \frac{\partial u}{\partial n}-\bigg[ik-\frac
+ {1}{2R}+\frac{i}{8kR^{2}}\bigg(1+4 \frac {\partial^{2}}{\partial
+ \varphi^{2}}\bigg)\bigg]u
+\right =0  \mbox{\ \ \  \ \  on\ }\Gamma  
+\f]
+- <b>Feng's third order ABC:</b>
+\f[
+ \frac {\partial u}{\partial n}-\bigg[ik-\frac
+ {1}{2R}+\frac{1}{8k^{2}R^{2}}\bigg(ik+ \frac {1}{R}\bigg)
+ \bigg(1+4 \frac {\partial^{2}}{\partial \varphi^{2}}\bigg)\bigg]u
+\right =0   \mbox{\ \ \  \ \  on\ }\Gamma  
+\f]
+.
+All three boundary conditions are implemented in the class
+\c HelmholtzAbsorbingBCElement, a \c FaceElement that is
+templated by the type of the "bulk" Helmholtz element. 
+The order of the approximation can be set via the member function
+\c HelmholtzAbsorbingBCElement::abc_order(). All three boundary
+conditons are local (relating the function to its normal derivative)
+and do therefore not change the sparsity of the resulting finite
+element equations.
+
+<HR>
+
+\subsection DtN The Dirichlet-to-Neumann mapping (DtN)
+Using (@R[polar_soln]@), it is easy to show (see, e.g., 
+**** pp. ***) that the normal (radial) derivative,
+\f$ \partial u / \partial n =  \partial u / \partial r, \f$
+on the artifical boundary \f$ \Gamma \f$ is given by
+\f[
+ \frac {\partial u}{\partial r}\bigg|_{r=R} =
+ \frac {\partial u}{\partial n}\bigg|_{r=R} =
+ \gamma (u) \ \ \ \ \ \ \ @E[gamma_bc]@   
+\f]
+where 
+\f[
+\gamma (u) = \frac {k}{2 \pi} \sum_{n=-\infty}^{+\infty} 
+\frac {H_n^{(1)^{'}}(kR)}{H_n^{(1)}(kR)} \quad 
+\int_0^{2\pi}u(R,\varphi^{'}) \ e^{in(\varphi-\varphi^{'})}
+\,d\varphi^{'}.  
+ \ \ \ \ \ \ \ @E[gamma]@   
+\f]
+Equation (@R[gamma_bc]@) again provides a condition on the
+normal derivative of the solution along the artificial boundary 
+and is implemented in the \c HelmholtzDtNBoundaryElement class, 
+a \c FaceElement, templated by the type of the "bulk" Helmholtz 
+element. Since \f$ \gamma \f$ depends on the solution everywhere 
+along the artificial boundary (see (@R[gamma]@)), the application of the 
+boundary condition (@R[gamma_bc]@) introduces a non-local coupling
+between all the degrees of freedom along the artificial boundary.
+This is handled by classifying the unknowns that affect \f$ \gamma \f$ 
+but are not associated with the element's own nodes as external \c Data. 
+
+To facilitate the setup of the interaction between the 
+\c HelmholtzDtNBoundaryElements, \c oomph-lib provides the
+class \c HelmholtzDtNMesh which provides storage for 
+(the pointers to) the  \c HelmholtzDtNBoundaryElements 
+that discretise the artificial boundary. The 
+member function \c HelmholtzDtNMesh::setup_gamma() pre-computes the 
+\f$ \gamma \f$ values required for the imposition of (@R[gamma_bc]@).
+The radius \f$ R \f$ of the artificial boundary and the (finite) number of
+(Fourier) terms used in the sum in (@R[gamma]@) are specified
+as arguments to the constructor of the \c HelmholtzDtNMesh.
+\n\n 
+<b>NOTE:</b> Since \f$ gamma \f$  depends on the solution, 
+it must be recomputed whenever the unknowns are updated during
+the Newton iteration. This is best done by adding a call to
+\c HelmholtzDtNMesh::setup_gamma() to 
+\c Problem::actions_before_newton_convergence_check().
+[If Helmholtz's equation is solved in isolation (or within
+a coupled, but linear problem), Newton's method will converge 
+in one iteration. In such cases the unnecessary recomputation of 
+\f$ gamma \f$ after the one-and-only Newton iteration can be 
+suppressed by setting \c Problem::Problem_is_nonlinear to 
+\c false. ****]
+
+<HR>
+<HR>
+
+\section scattering A specific example: Scattering of an acoustic wave from a sound-hard obstacle
+We will now demonstrate the methodology for a specific example:
+the scattering of sound waves in an acoustic medium 
+of density \f$ \rho  \f$ and bulk modulus \f$ \rho \f$.
+Assume that an incoming sound wave impacts a rigid, impermeable
+obstacle as shown in this sketch,
 
 @I w 0.6\textwidth scattering "Scattering of an incoming wave from a sound-hard obstacle -- the scatterer. "
 
+we wish to find the scattered wave field that emanates from the body.
 
-We define \f$ \Phi(x,y,t) \f$ as the displacement potential 
-so that the time-dependent displacement of a fluid particle in
-the acoustic medium is given by
+For this purpose we denote the time-dependent displacement
+of the fluid particle in the acoustic medium by 
+\f$ {\bf u}(x,y,t) \f$ and introduce a displacement
+potential \f$ \Phi(x,y,t) \f$ such that
 \f[
 {\bf u} = \nabla \Phi.
 \f]
 It is easy to show that \f$ \Phi \f$ satisfies the linear wave
-equation (@R[lin_wave]@) with wave speed \f$ c = \sqrt{B/\rho}\f$, where
-\f$ B \f$ and \f$ \rho \f$ are the bulk modulus and density of the
-acoustic medium, respectively.
+equation (@R[lin_wave]@) with wave speed \f$ c = \sqrt{B/\rho}\f$.
 
 Since the surface \f$ \partial D_{bound}\f$ of the scatterer is
 impenetrable, the normal displacement of the fluid has to vanish
@@ -81,16 +251,16 @@ displacement potential becomes
 \ \ \ \ \ \ \ \ \ \ \ \ \  @E[non_pen_bc]@
 \f]
 Assuming that the incoming wave (already satisfying (@R[lin_wave]@))
-is described by a (known) displacement potential
+is described by a (known) displacement potential of the form
 \f[
-\Phi_{inc}(x,y,t) = \phi_{inc}(x,y) \  e^{-i \omega t}
+\Phi_{inc}(x,y,t) = \phi_{inc}(x,y) \  e^{-i \omega t},
 \f]
 we write the total potential as
 \f[
-\Phi(x,y,t) = \left( \phi_{inc}(x,y) + u(x,y) \right) \ e^{-i \omega t}
+\Phi(x,y,t) = \bigg( \phi_{inc}(x,y) + u(x,y) \bigg) \ e^{-i \omega t},
 \f]
 where \f$ u(x,y) \  e^{-i \omega t} \f$ represents the displacement potential 
-associated with the scattered field which satsifies (@R[helmholtz]@). 
+associated with the scattered field which must satsify (@R[helmholtz]@). 
 The boundary condition (@R[non_pen_bc]@) then becomes a Neumann 
 (flux) boundary condition for the scattered field,
 \f[
@@ -98,137 +268,55 @@ The boundary condition (@R[non_pen_bc]@) then becomes a Neumann
 - \left. \frac{\partial \phi_{inc}}{\partial n}\right|_{\partial D_{bound}}.
 \ \ \ \ \ \ \ \ \ \ \ \ \  @E[non_pen_bc_for_scattered]@
 \f]
-The scattered field is also subject to the 
-<a href="http://en.wikipedia.org/wiki/Sommerfeld_radiation_condition">
-Sommerfeld radiation condition</a> which in 2D has the form
-\f[
-\lim_{r\to \infty} \sqrt{r} \left(\frac{\partial u}{\partial r} - iku
-\right) =0. 
-\f]
-This condition ensures that scattering only produces outgoing not incoming
-waves from infinity and guarantee that the problem has a unique
-solution and,more generally, that the problem is well-posed.
 
-Assuming that the incident wave has the following expansion
+
+For the special case of the incoming wave being a planar wave,
+propagating along the x-axis, the incoming field can be written as
 \f[
- \left  u^{inc}(r, \theta)  
-\right= \sum_{n=-\infty}^{+\infty} i^n  J_n(kr) e^{in\theta} 
+ \left  \phi^{inc}(r, \varphi)  
+\right= \sum_{n=-\infty}^{+\infty} i^n  J_n(kr) e^{in\varphi} 
 \f]
-where \f$ J_n \f$ denotes the Bessel function of the first kind
-of order m. The exact solution is then given by the series
+where \f$ J_n \f$ is the Bessel function of the first kind
+of order \f$ n \f$. The exact solution is then given by the series
 \f[
- \left u^{ex}(r,\theta) 
+ \left u^{ex}(r,\varphi) 
 \right= -\sum_{n=-\infty}^{+\infty} i^n \frac
-{H^{'}_{n}(ka)}{J^{'}_{n}(ka)}  H_n(kr) e^{in\theta} 
+{H^{'}_{n}(ka)}{J^{'}_{n}(ka)}  H_n(kr) e^{in\varphi} 
 \f]
 where \f$ H_n \f$ denotes the Hankel function of the first kind
-of order n and the prime denotes differentiation with respect to argument.
+of order \f$ n \f$ and the prime denotes differentiation with respect 
+to argument.
 
-In order to developp numerical methods to solve the above problem,
-it's necessary to truncate the infinite exterior. Successful
-reformulation of the exterior problem into a problem on a
-bounded domain hinges on the selection of an appropriate artificial
-boundary condition on the truncationsurface to replace the Sommerfeld 
-radiation condition.
+<HR>
+<HR>
 
-Different kind of truncation surfaces can be considered,but, for
-simple domain (such as circle in our case) the natural choice is to consider
-a circular truncation surface  for wich the exact {\emDirichlet-to-Neumann}
-boundary condition is known. On the other hand, some approximation of 
-the Sommerfeld radiation condition was also developed and can be implemented.
+\section results Results
+The figure below shows an animation of the displacement potential
+\f$ \Re(u(x,y,t)) \f$ for scattering from a unit disk (\f$ a=1 \f$) 
+for a wavenumber of \f$ k=1 \f$ over one period of the oscillation. 
+The simulation was performed in an annular computational domain, 
+bounded by the outer surface the unit disk) and an artificial 
+outer boundary of radius \f$ R=1.5. \f$ The Sommerfeld radiation
+condition was imposed with the DtN mapping and the simulation
+was performed with spatial adaptivity (note the non-uniform 
+refinement).
 
-\section bc Boundary conditions for a finite domain
-
-This document discusses two kinds of 'adaptation' of the the
-Sommerfeld radiation condition. The first one, the exact 
-{\emDirichlet-to-Neumann} (DtN) boundary condition can be implemented
-for simple truncation surfaces (such as circles).This accuracy of the 
-DtN boundary condition is not ralated to the size
-of the artificial truncation domain (which is the weak point of the
-ABCs). However, the exact condition is given in an infinite series 
-which must necessarily be truncated in any actual computation, 
-and doing so introduces error.
-In addition, the exact boundary is non-local which, upon
-discretization by a  Finite-element, results in the filling of dense 
-blocks in an otherwise sparse system of linear equations.
-
-In this problem, we restrict our attention to local approximate
-boundary conditions (ABCs) that preserve the sparsity and symmetry of
-the problem. In particular, we consider the conditions suggested by Feng.
+The "carpet plot" compares the exact (green) and computed (red)
+solutions for the dislacement potential. The colours in the contour 
+plot at the bottom of the figure provide an alternative
+visualisation of the magnitude of the scattered field. 
 
 
 <HR>
 <HR>
 
-\subsection DtN The exact Dirichlet-to-Neumann boundary conditions (DtN)
-
-The equivalent Sommerfeld radiation condition is giving by the
-following expression ( evaluated on the fictitious circular boundary 
-\f$ \Gamma  \f$ that encloses the scatterer).
-\f[
- \left \frac {\partial u}{\partial \rho}|_{\rho=a} + \gamma (u)
-\right  =0.   
-\f]
-where 
-\f[
- \left \gamma (u)
-\right =- \frac {k}{2 \pi} \sum_{n=-\infty}^{+\infty} \frac {H_n^{(1)^{'}}(ka)}{H_n^{(1)}(ka)} \quad 
-\int_0^{2\pi}u(a,\varphi^{'}) e^{in(\varphi-\varphi^{'})} \,d\varphi^{'}  
-\f]
-in which \f$ H_n^{(1)} \f$ denotes the \textit nth-order \em
-Hankel  functions of the first kind and \textit 'a'  is the radius of 
-\f$ \Gamma \f$ .
-
-The accuracy of the DtN boundary condition is not ralated to the size
-of the artificial truncation domain (the value of the outer radius) 
-
-<HR>
-<HR>
-
-\subsection ABCs The Approximate boundary conditions (ABCs)
-
-Feng derived his conditions by truncating an asymptotic expansion 
-of the exact Direchlet-to-Neumann(DtN) map. His first order is given by
-\f[
- \left \frac {\partial u}{\partial n}-iku
-\right =0   \ \ \  on\ \Gamma  
-\f] 
-His second order is
-\f[
- \left \frac {\partial u}{\partial n}-[ik-\frac
- {1}{2R}+\frac{i}{8kR^{2}}(1+4 \frac {\partial^{2}}{\partial
- \theta^{2}})]u
-\right =0   \  \ \ \   on\ \Gamma  
-\f]
-Feng's third order is 
-\f[
- \left \frac {\partial u}{\partial n}-[ik-\frac
- {1}{2R}+\frac{1}{8k^{2}R^{2}}(ik+ \frac {1}{R})(1+4 \frac
- {\partial^{2}}{\partial \theta^{2}})]u
-\right =0   \  \ \ \   on\ \Gamma  
-\f]
- 
-These two kinds of 'new-infinte' boundary conditions are related to
-two differents kind of elements (populating the outer_boundary mesh)
-and are implemented in
- <a
- href="../../../helmholtz/scattering/html/helmholtz__bc__elements_8h-source.html">
-Helmholtz_bc_elements</a> 
-
-\section impl Implementation
-
-We shall now discuss the solution of the above problem with
-\c oomph-lib.
-
-
-<HR>
-<HR>
+\section num_soln The numerical solution
 
 \subsection namespace The global namespace
 
 As usual, we define the problem parameters in a global namespace.
-The key parameter is the wave number squared (key parameter of the
-Helmholtz equation). The other parameters are provided to allow users
+The main physical parameter is the (square of the) wave number 
+\f$ k^2 \f$. The remaining parameters  
 to swith between Dtn and Feng's boundary conditions and to define the
 domain specifities.
 
@@ -444,7 +532,8 @@ in the plotting or error checking routines,
 
 
 \section comm_ex Comments and Exercises
-
+\subsection numbering The enumeration of the unknowns
+bla
 
 
 \section sources Source files for this tutorial
