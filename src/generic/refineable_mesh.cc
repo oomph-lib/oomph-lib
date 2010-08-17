@@ -47,7 +47,7 @@ namespace oomph
 /// \c to_be_refined[level].size() elements identified by the
 /// element numbers contained in \c vector to_be_refined[level][...]
 //========================================================================
-void RefineableMeshBase::get_refinement_pattern(
+void TreeBasedRefineableMeshBase::get_refinement_pattern(
  Vector<Vector<unsigned> >& to_be_refined)
 {
  // Extract *all* elements from current (fully refined) mesh.
@@ -110,7 +110,7 @@ void RefineableMeshBase::get_refinement_pattern(
 /// the refinement pattern (used in Mesh::redistribute or whatever it's
 /// going to be called (RefineableMeshBase::reduce_halo_layers or something)
 //========================================================================
-void RefineableMeshBase::get_elements_at_refinement_level(
+void TreeBasedRefineableMeshBase::get_elements_at_refinement_level(
  unsigned& refinement_level,
  Vector<RefineableElement*>& level_elements)
 {
@@ -136,27 +136,22 @@ void RefineableMeshBase::get_elements_at_refinement_level(
 /// Refine original, unrefined mesh according to specified refinement 
 /// pattern (relative to original, unrefined mesh).
 //========================================================================
-void RefineableMeshBase::refine_base_mesh(
- Vector<Vector<unsigned> >& to_be_refined)
+void TreeBasedRefineableMeshBase::refine_base_mesh(OomphCommunicator* comm_pt,
+                                                   Vector<Vector<unsigned> >& 
+                                                   to_be_refined)
 {
 
-
-#ifdef PARANOID
- // Sanity check: Mesh has to be unrefined
+ // Get mesh back to unrefined state
  unsigned my_max,my_min;
  get_refinement_levels(my_min,my_max);
- if (my_max!=0)
+ for (unsigned i=0;i<my_max;i++)
   {
-   std::string error_message =
-    "Can only refine according to another meshes' refinement\n";
-   error_message += "structure if mesh itself is still completely unrefined ";
-
-   throw OomphLibError(error_message,
-                       "RefineableMeshBase::refine_base_mesh()",
-                       OOMPH_EXCEPTION_LOCATION);
+   unrefine_uniformly(comm_pt); 
+   {
+    unsigned my_max,my_min;
+    get_refinement_levels(my_min,my_max);
+   }
   }
-#endif
-   
 
  // Max refinement level:
  unsigned max_level=to_be_refined.size();
@@ -185,7 +180,8 @@ void RefineableMeshBase::refine_base_mesh(
 //========================================================================
 /// Refine base mesh according to refinement pattern in restart file
 //========================================================================
-void RefineableMeshBase::refine(std::ifstream& restart_file)
+void TreeBasedRefineableMeshBase::refine(OomphCommunicator* comm_pt,
+                                std::ifstream& restart_file)
 {
  // Assign storage for refinement pattern
  Vector<Vector<unsigned> > to_be_refined;
@@ -194,7 +190,7 @@ void RefineableMeshBase::refine(std::ifstream& restart_file)
  read_refinement(restart_file,to_be_refined);
 
  // Refine
- refine_base_mesh(to_be_refined);
+ refine_base_mesh(comm_pt,to_be_refined);
 
 }
 
@@ -203,7 +199,7 @@ void RefineableMeshBase::refine(std::ifstream& restart_file)
 /// Dump refinement pattern to allow for rebuild
 ///
 //========================================================================
-void RefineableMeshBase::dump_refinement(std::ostream &outfile)
+void TreeBasedRefineableMeshBase::dump_refinement(std::ostream &outfile)
 {
  // Assign storage for refinement pattern
  Vector<Vector<unsigned> > to_be_refined;
@@ -236,7 +232,7 @@ void RefineableMeshBase::dump_refinement(std::ostream &outfile)
 /// Read refinement pattern to allow for rebuild
 ///
 //========================================================================
-void RefineableMeshBase::read_refinement(
+void TreeBasedRefineableMeshBase::read_refinement(
  std::ifstream& restart_file, Vector<Vector<unsigned> >& to_be_refined)
 {
 
@@ -295,14 +291,12 @@ void RefineableMeshBase::read_refinement(
 /// - Store # of refined/unrefined elements.
 /// - Doc refinement process (if required)
 //========================================================================
-void RefineableMeshBase::adapt(OomphCommunicator* comm_pt,
-                               Vector<double>& elemental_error)
+void TreeBasedRefineableMeshBase::adapt(OomphCommunicator* comm_pt,
+                                        const Vector<double>& elemental_error)
  {
-
-  //using namespace QuadTreeNames;
-
   //Set the refinement tolerance to be the max permissible error
   double refine_tol=max_permitted_error();
+
   //Set the unrefinement tolerance to be the min permissible error 
   double unrefine_tol=min_permitted_error();
 
@@ -323,7 +317,7 @@ void RefineableMeshBase::adapt(OomphCommunicator* comm_pt,
                  << "this beautiful code!" << std::endl;
     
     throw OomphLibError(error_stream.str(),
-                        "RefineableMeshBase::adapt()",
+                        "TreeBasedRefineableMeshBase::adapt()",
                         OOMPH_EXCEPTION_LOCATION);
    }
 
@@ -412,6 +406,13 @@ void RefineableMeshBase::adapt(OomphCommunicator* comm_pt,
     RefineableElement* el_pt = 
      dynamic_cast<RefineableElement*>(this->element_pt(e));
     
+    // hierher: This is a bit naughty... We want to put the
+    // first son in charge -- the statement below assumes (correctly) that the
+    // enumeration of all (!) trees starts with son types.
+    // This is correct for oc and quadtrees but will bite us if we
+    // ever introduce other trees if/when we accidentally break this 
+    // tacit assumption. Not sure what to do about it for
+    // now other than leaving it hierher-ed...
     if (el_pt->tree_pt()->son_type()==OcTreeNames::LDB)
      {
       // Do all sons want to be unrefined?
@@ -434,7 +435,7 @@ void RefineableMeshBase::adapt(OomphCommunicator* comm_pt,
        {
         el_pt->tree_pt()->father_pt()->object_pt()->
          select_sons_for_unrefinement();
-        n_unrefine += n_sons; // n_unrefine++;
+        n_unrefine += n_sons; 
        }
       //Otherwise mark the sons as not to be touched
       else
@@ -580,19 +581,6 @@ void RefineableMeshBase::adapt(OomphCommunicator* comm_pt,
            // Check it
            for (unsigned e=0;e<nhaloed;e++)
             {
-//              if (halo_to_be_unrefined[e]==1)
-//               {
-//                std::cout 
-//                 << "Haloed element: " << e << " on proc " << my_rank << " \n"
-//                 << "wants to be unrefined\n";
-//               }
-//              else 
-//               {
-//                std::cout 
-//                 << "Haloed element: " << e << " on proc " << my_rank << " \n"
-//                 << "doesn't want to be unrefined\n";
-//               }
-
              if ( ( (halo_to_be_unrefined[e]==0)&&
                     (dynamic_cast<RefineableElement*>(haloed_elem_pt[e])->
                      sons_to_be_unrefined()) ) ||
@@ -610,7 +598,7 @@ void RefineableMeshBase::adapt(OomphCommunicator* comm_pt,
                 << "has not assigned the same errors to halo and haloed\n"
                 << "elements -- it ought to!\n";
                throw OomphLibError(error_message.str(),
-                                   "RefineableMeshBase::adapt_mesh",
+                                   "TreeBasedRefineableMeshBase::adapt_mesh",
                                    OOMPH_EXCEPTION_LOCATION);
               }
             }
@@ -673,19 +661,6 @@ void RefineableMeshBase::adapt(OomphCommunicator* comm_pt,
            // Check it
            for (unsigned e=0;e<nhaloed;e++)
             {
-//              if (halo_to_be_refined[e]==1)
-//               {
-//                std::cout 
-//                 << "Haloed element: " << e << " on proc " << my_rank << " \n"
-//                 << "wants to be refined\n";
-//               }
-//              else 
-//               {
-//                std::cout 
-//                 << "Haloed element: " << e << " on proc " << my_rank << " \n"
-//                 << "doesn't want to be refined\n";
-//               }
-
              if ( ( (halo_to_be_refined[e]==0)&&
                     (dynamic_cast<RefineableElement*>(haloed_elem_pt[e])->
                      to_be_refined()) ) ||
@@ -703,7 +678,7 @@ void RefineableMeshBase::adapt(OomphCommunicator* comm_pt,
                 << "has not assigned the same errors to halo and haloed\n"
                 << "elements -- it ought to!\n";
                throw OomphLibError(error_message.str(),
-                                   "RefineableMeshBase::adapt_mesh",
+                                   "TreeBasedRefineableMeshBase::adapt_mesh",
                                    OOMPH_EXCEPTION_LOCATION);
               }
             }
@@ -720,8 +695,8 @@ void RefineableMeshBase::adapt(OomphCommunicator* comm_pt,
     adapt_mesh(local_doc_info);
 
     //The number of refineable elements is still local to each process
-    nunrefined()=n_unrefine;
-    nrefined()=n_refine;
+    Nunrefined=n_unrefine;
+    Nrefined=n_refine;
    }
   //If not worthwhile, say so
   else
@@ -732,8 +707,8 @@ void RefineableMeshBase::adapt(OomphCommunicator* comm_pt,
        << "\n Not enough benefit in adapting mesh. " 
        << std::endl << std::endl;
      }
-    nunrefined()=0;
-    nrefined()=0;
+    Nunrefined=0;
+    Nrefined=0;
 
 #ifdef OOMPH_HAS_MPI
     // Flush any external element storage - any interaction will still
@@ -749,7 +724,7 @@ void RefineableMeshBase::adapt(OomphCommunicator* comm_pt,
 //========================================================================
 /// Get max/min refinement level
 //========================================================================
-void RefineableMeshBase:: 
+void TreeBasedRefineableMeshBase:: 
 get_refinement_levels(unsigned& min_refinement_level,
                       unsigned& max_refinement_level)
 { 
@@ -838,7 +813,7 @@ get_refinement_levels(unsigned& min_refinement_level,
 ///   - QuadTreeNeighbours.mcr
 ///   .
 //=================================================================
-void RefineableMeshBase::adapt_mesh(DocInfo& doc_info)
+void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
 {
 #ifdef OOMPH_HAS_MPI
  // Flush any external element storage before performing the adaptation
@@ -1106,7 +1081,7 @@ void RefineableMeshBase::adapt_mesh(DocInfo& doc_info)
      error_stream << "Doced problem mesh in ProblemMesh.dat" << std::endl;
 
      throw OomphLibError(error_stream.str(),
-                         "RefineableMeshBase::adapt_mesh()",
+                         "TreeBasedRefineableMeshBase::adapt_mesh()",
                          OOMPH_EXCEPTION_LOCATION);
     }
    else
@@ -1345,7 +1320,7 @@ void RefineableMeshBase::adapt_mesh(DocInfo& doc_info)
 //========================================================================
 /// Refine mesh uniformly
 //========================================================================
-void RefineableMeshBase::refine_uniformly(DocInfo& doc_info)
+void TreeBasedRefineableMeshBase::refine_uniformly(DocInfo& doc_info)
 { 
  //Select all elements for refinement
  unsigned long Nelement=this->nelement();
@@ -1365,7 +1340,7 @@ void RefineableMeshBase::refine_uniformly(DocInfo& doc_info)
 /// Refine mesh by splitting the elements identified
 /// by their numbers.
 //========================================================================
-void RefineableMeshBase::refine_selected_elements(
+void TreeBasedRefineableMeshBase::refine_selected_elements(
  const Vector<unsigned>& elements_to_be_refined)
 { 
  //Select elements for refinement
@@ -1386,7 +1361,7 @@ void RefineableMeshBase::refine_selected_elements(
 /// Refine mesh by splitting the elements identified
 /// by their pointers
 //========================================================================
-void RefineableMeshBase::refine_selected_elements(
+void TreeBasedRefineableMeshBase::refine_selected_elements(
  const Vector<RefineableElement*>& elements_to_be_refined_pt)
 { 
  //Select elements for refinement
@@ -1406,8 +1381,8 @@ void RefineableMeshBase::refine_selected_elements(
 /// Refine to same degree as the reference mesh.
 ///
 //========================================================================
-void RefineableMeshBase::refine_base_mesh_as_in_reference_mesh(
- RefineableMeshBase* const &ref_mesh_pt)
+void TreeBasedRefineableMeshBase::refine_base_mesh_as_in_reference_mesh(
+ OomphCommunicator* comm_pt, TreeBasedRefineableMeshBase* const &ref_mesh_pt)
 {
  // Assign storage for refinement pattern
  Vector<Vector<unsigned> > to_be_refined;
@@ -1416,7 +1391,7 @@ void RefineableMeshBase::refine_base_mesh_as_in_reference_mesh(
  ref_mesh_pt->get_refinement_pattern(to_be_refined);
 
  // Refine mesh according to given refinement pattern
- refine_base_mesh(to_be_refined);
+ refine_base_mesh(comm_pt,to_be_refined);
 }
 
 //========================================================================
@@ -1425,8 +1400,8 @@ void RefineableMeshBase::refine_base_mesh_as_in_reference_mesh(
 /// hierarchies. If the meshes are too different and the conversion
 /// cannot be performed, the code dies (provided PARANOID is enabled).
 //========================================================================
-void RefineableMeshBase::refine_as_in_reference_mesh(
- RefineableMeshBase* const &ref_mesh_pt)
+void TreeBasedRefineableMeshBase::refine_as_in_reference_mesh(
+ TreeBasedRefineableMeshBase* const &ref_mesh_pt)
 {
  oomph_info << "WARNING : This has not been checked comprehensively yet"
            << std::endl
@@ -1450,7 +1425,7 @@ void RefineableMeshBase::refine_as_in_reference_mesh(
     << "max. refinement levels: "<< ref_max << " " << my_max << std::endl;
 
    throw OomphLibError(error_stream.str(),
-                       "RefineableMeshBase::refine_as_in_reference_mesh()",
+                       "TreeBasedRefineableMeshBase::refine_as_in_reference_mesh()",
                        OOMPH_EXCEPTION_LOCATION);
   }
 #endif
@@ -1616,7 +1591,7 @@ void RefineableMeshBase::refine_as_in_reference_mesh(
  
      throw OomphLibError(
       "Bailing out. Doced refined_mesh.dat finer_mesh.dat\n",
-      "RefineableMeshBase::refine_as_in_reference_mesh()",
+      "TreeBasedRefineableMeshBase::refine_as_in_reference_mesh()",
       OOMPH_EXCEPTION_LOCATION);
     }
 
@@ -1630,7 +1605,7 @@ void RefineableMeshBase::refine_as_in_reference_mesh(
 /// 1 for failure (if unrefinement has reached the coarsest permitted
 /// level)
 //========================================================================
-unsigned RefineableMeshBase::unrefine_uniformly(OomphCommunicator* comm_pt)
+unsigned TreeBasedRefineableMeshBase::unrefine_uniformly(OomphCommunicator* comm_pt)
 { 
 
  // We can't just select all elements for unrefinement
@@ -1682,7 +1657,7 @@ unsigned RefineableMeshBase::unrefine_uniformly(OomphCommunicator* comm_pt)
 /// This is done recursively, so if a node is not hanging, 
 /// the node is regarded as its own master node which has weight 1.0.
 //==================================================================
-void RefineableMeshBase::
+void TreeBasedRefineableMeshBase::
 complete_hanging_nodes_recursively(Node*& nod_pt,
                                    Vector<Node*>& master_nodes,
                                    Vector<double>& hang_weights,
@@ -1740,7 +1715,7 @@ complete_hanging_nodes_recursively(Node*& nod_pt,
 /// Need to translate this into a scheme where all
 /// hanging  nodes only depend on non-hanging nodes...
 //==================================================================
-void RefineableMeshBase::
+void TreeBasedRefineableMeshBase::
 complete_hanging_nodes(const int& ncont_interpolated_values)
  {
   //Number of nodes in mesh
@@ -1845,7 +1820,7 @@ complete_hanging_nodes(const int& ncont_interpolated_values)
 /// Deal with nodes that are hanging on one process but not another
 /// (i.e. the hanging status of the haloed and halo layers disagrees)
 //========================================================================
-void RefineableMeshBase::synchronise_hanging_nodes
+void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
 (OomphCommunicator* comm_pt, const unsigned& ncont_interpolated_values)
 {
  // This synchronisation necessarily takes place before the classification 
@@ -2196,7 +2171,7 @@ void RefineableMeshBase::synchronise_hanging_nodes
                              << std::endl;
                throw OomphLibError(
                 error_stream.str(),
-                "RefineableMeshBase::synchronise_hanging_nodes(...)",
+                "TreeBasedRefineableMeshBase::synchronise_hanging_nodes(...)",
                 OOMPH_EXCEPTION_LOCATION);
               }
 #endif

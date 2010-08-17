@@ -28,5 +28,6 @@ vmtk_fluid \
 unstructured_fluid \
 unstructured_three_d_fluid \
 flux_control \
-schur_complement_preconditioner
+schur_complement_preconditioner \
+unstructured_adaptive_ALE
 

@@ -42,10 +42,6 @@
 // Get the Bessel functions
 #include "oomph_crbond_bessel.h"
 
-// oomph-lib ncludes
-// hierher re-enable #include "../generic/Qelements.h"
-
-
 
 namespace oomph
 {
@@ -62,7 +58,7 @@ namespace oomph
 /// Namespace to provide Hankel function of the first kind
 /// and various orders -- needed for Helmholtz computations.
 //====================================================================
-namespace Hankel_functions_for_Helmholtz_problem
+namespace Hankel_functions_for_helmholtz_problem
 {
 
 //====================================================================
@@ -86,7 +82,7 @@ namespace Hankel_functions_for_Helmholtz_problem
                  << n_actual << " rather than " << n
                  << " Bessel functions.\n";    
     throw OomphLibError(error_stream.str(),
-                        "Hankel_functions_for_Helmholtz_problem::Hankel_first",
+                        "Hankel_functions_for_helmholtz_problem::Hankel_first",
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
@@ -181,127 +177,287 @@ template <class ELEMENT>
   virtual inline unsigned dim() const 
   {return Dim;}
   
-  //Compute the power
-  /// compute the element contribution to the real power
-  double& global_power_contribution()
-   {   
-    // define the imaginary number
-    const std::complex<double> I(0.0,1.0);
-    
-    // pointer to the corresponding bulk element
-    ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(this->bulk_element_pt()); 
-    
-    // Number of nodes in bulk element
-    unsigned nnode_bulk=bulk_elem_pt->nnode();
-    const unsigned n_node_local = nnode();
-    
-    //get the dim of the bulk and local nodes
-    const unsigned bulk_dim= bulk_elem_pt->dim();    
-    const unsigned local_dim= this->dim();
-    
-    //Set up memory for the shape and test functions
-    Shape psi(n_node_local);
-    
-    //Set up memory for the shape functions
-    Shape psi_bulk(nnode_bulk);
-    DShape dpsi_bulk_dx(nnode_bulk,bulk_dim);
-    
-    //Set up memory for the outer unit normal
-    Vector< double > unit_normal(bulk_dim);    
-    
-    //Set the value of n_intpt
-    const unsigned n_intpt = integral_pt()->nweight();
-    
-    //Set the Vector to hold local coordinates
-    Vector<double> s(local_dim-1);
-    double power=0.0;    
-    
-    //Loop over the integration points
-    //--------------------------------
-    for(unsigned ipt=0;ipt<n_intpt;ipt++)
-     { 
-      //Assign values of s
-      for(unsigned i=0;i<(local_dim-1);i++)
-       {
-        s[i] = integral_pt()->knot(ipt,i);
-       }
-      //get the outer_unit_ext vector      
-      this->outer_unit_normal(s,unit_normal); 
-      
-      //Get the integral weight
-      double w = integral_pt()->weight(ipt);
-      
-      // Get jacobian of mapping
-      double J=J_eulerian(s);
-      
-      //Premultiply the weights and the Jacobian
-      double W = w*J;
-      
-      // Get local coordinates in bulk element by copy construction
-      Vector<double> s_bulk(local_coordinate_in_bulk(s));
-      
-      //Call the derivatives of the shape  functions
-      //in the bulk -- must do this via s because this point
-      //is not an integration point the bulk element!
-      (void)bulk_elem_pt->dshape_eulerian(s_bulk,psi_bulk,dpsi_bulk_dx);
-      this->shape(s,psi);
-      
-      // Derivs of Eulerian coordinates w.r.t. local coordinates
-      std::complex<double>  dphi_dr(0.0,0.0);
-      Vector<std::complex <double> > interpolated_dphidx(bulk_dim);
-      std::complex<double> interpolated_phi(0.0,0.0);
-      
-      //Calculate function value and derivatives:
-      //-----------------------------------------
-      // Loop over nodes
-      for(unsigned l=0;l<nnode_bulk;l++) 
-       {
-        //Get the nodal value of the helmholtz unknown
-        double phi_value_real =bulk_elem_pt->nodal_value(
-         l,bulk_elem_pt->u_index_helmholtz().real());
-        double phi_value_imag =bulk_elem_pt->nodal_value(
-         l,bulk_elem_pt->u_index_helmholtz().imag());
-        
-        //Loop over directions
-        for(unsigned i=0;i<bulk_dim;i++)
-         {
-          interpolated_dphidx[i].real()+= phi_value_real*dpsi_bulk_dx(l,i);
-          interpolated_dphidx[i].imag()+= phi_value_imag*dpsi_bulk_dx(l,i); 
-         }
-       } // End of loop over the bulk_nodes
-      
-      for(unsigned l=0;l<n_node_local;l++) 
-       {
-        //Get the nodal value of the helmholtz unknown
-        double phi_value_real = raw_nodal_value(l,u_index_helmholtz().real());
-        double phi_value_imag = raw_nodal_value(l,u_index_helmholtz().imag());
-        
-        interpolated_phi.real() += phi_value_real*psi(l);
-        interpolated_phi.imag() += phi_value_imag*psi(l);
-       }
-      
-      //define dphi_dr 
-      for(unsigned i=0;i<bulk_dim;i++)
-       {
-        dphi_dr.real()+=interpolated_dphidx[i].real()*unit_normal[i];
-        dphi_dr.imag()+=interpolated_dphidx[i].imag()*unit_normal[i];      
-       }
-      // calculate the integral
-      //-----------------------
-      // compute the element contribution to gamma
-      power +=(interpolated_phi.real()*dphi_dr.imag()-interpolated_phi.imag()*dphi_dr.real())*W*M_PI;
-     }  
-    
-    return  power;
+  /// \short Compute the element's contribution to the time-averaged 
+  /// radiated power over the artificial boundary
+  double global_power_contribution()
+  {   
+   // Dummy output file
+   std::ofstream outfile;
+   return global_power_contribution(outfile);
+  }
+  
+  /// \short Compute the element's contribution to the time-averaged 
+  /// radiated power over the artificial boundary. Also output the
+  /// power density as a fct of the polar angle in the specified 
+  ///output file if it's open.
+  double global_power_contribution(std::ofstream& outfile)
+  {   
+   // define the imaginary unit
+   const std::complex<double> I(0.0,1.0);
+   
+   // pointer to the corresponding bulk element
+   ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(this->bulk_element_pt()); 
+   
+   // Number of nodes in bulk element
+   unsigned nnode_bulk=bulk_elem_pt->nnode();
+   const unsigned n_node_local = nnode();
+   
+   //get the dim of the bulk and local nodes
+   const unsigned bulk_dim= bulk_elem_pt->dim();    
+   const unsigned local_dim= this->dim();
+   
+   //Set up memory for the shape and test functions
+   Shape psi(n_node_local);
+   
+   //Set up memory for the shape functions
+   Shape psi_bulk(nnode_bulk);
+   DShape dpsi_bulk_dx(nnode_bulk,bulk_dim);
+   
+   //Set up memory for the outer unit normal
+   Vector< double > unit_normal(bulk_dim);    
+   
+   //Set the value of n_intpt
+   const unsigned n_intpt = integral_pt()->nweight();
+   
+   //Set the Vector to hold local coordinates
+   Vector<double> s(local_dim-1);
+   double power=0.0;    
+   
+   // Output?
+   if (outfile.is_open())
+    {
+     outfile << "ZONE\n";
+    }
+
+   //Loop over the integration points
+   //--------------------------------
+   for(unsigned ipt=0;ipt<n_intpt;ipt++)
+    { 
+     //Assign values of s
+     for(unsigned i=0;i<(local_dim-1);i++)
+      {
+       s[i] = integral_pt()->knot(ipt,i);
+      }
+     //get the outer_unit_ext vector      
+     this->outer_unit_normal(s,unit_normal); 
+     
+     //Get the integral weight
+     double w = integral_pt()->weight(ipt);
+     
+     // Get jacobian of mapping
+     double J=J_eulerian(s);
+     
+     //Premultiply the weights and the Jacobian
+     double W = w*J;
+     
+     // Get local coordinates in bulk element by copy construction
+     Vector<double> s_bulk(local_coordinate_in_bulk(s));
+     
+     //Call the derivatives of the shape  functions
+     //in the bulk -- must do this via s because this point
+     //is not an integration point the bulk element!
+     (void)bulk_elem_pt->dshape_eulerian(s_bulk,psi_bulk,dpsi_bulk_dx);
+     this->shape(s,psi);
+     
+     // Derivs of Eulerian coordinates w.r.t. local coordinates
+     std::complex<double>  dphi_dr(0.0,0.0);
+     Vector<std::complex <double> > interpolated_dphidx(bulk_dim);
+     std::complex<double> interpolated_phi(0.0,0.0);
+     Vector<double> x(bulk_dim);
+
+     //Calculate function value and derivatives:
+     //-----------------------------------------
+     // Loop over nodes
+     for(unsigned l=0;l<nnode_bulk;l++) 
+      {
+       //Get the nodal value of the helmholtz unknown
+       double phi_value_real =bulk_elem_pt->nodal_value(
+        l,bulk_elem_pt->u_index_helmholtz().real());
+       double phi_value_imag =bulk_elem_pt->nodal_value(
+        l,bulk_elem_pt->u_index_helmholtz().imag());
+              
+       //Loop over directions
+       for(unsigned i=0;i<bulk_dim;i++)
+        {
+         interpolated_dphidx[i].real()+= phi_value_real*dpsi_bulk_dx(l,i);
+         interpolated_dphidx[i].imag()+= phi_value_imag*dpsi_bulk_dx(l,i); 
+        }
+      } // End of loop over the bulk_nodes
+     
+     for(unsigned l=0;l<n_node_local;l++) 
+      {
+       //Get the nodal value of the helmholtz unknown
+       double phi_value_real = raw_nodal_value(l,u_index_helmholtz().real());
+       double phi_value_imag = raw_nodal_value(l,u_index_helmholtz().imag());
+       
+       interpolated_phi.real() += phi_value_real*psi(l);
+       interpolated_phi.imag() += phi_value_imag*psi(l);
+      }
+     
+     //define dphi_dr 
+     for(unsigned i=0;i<bulk_dim;i++)
+      {
+       dphi_dr.real()+=interpolated_dphidx[i].real()*unit_normal[i];
+       dphi_dr.imag()+=interpolated_dphidx[i].imag()*unit_normal[i];      
+      }
+
+     // Power density
+     double integrand=0.5*
+      (interpolated_phi.real()*dphi_dr.imag()-
+       interpolated_phi.imag()*dphi_dr.real());
+     
+     // Output?
+     if (outfile.is_open())
+      {
+       interpolated_x(s,x);
+       double phi=atan2(x[1],x[0]);
+       outfile << x[0] << " "
+               << x[1] << " "
+               << phi << " "
+               << integrand << "\n";
+      }
+
+     // ...add to integral
+     power+=integrand*W;
+    }  
+   
+   return  power;
+  }
+
+
+
+  /// \short Compute element's contribution to Fourier components of the
+  /// solution -- length of vector indicates number of terms to be computed. 
+  void compute_contribution_to_fourier_components(
+   Vector<std::complex<double> >& a_coeff_pos,
+   Vector<std::complex<double> >& a_coeff_neg)
+  {
+
+#ifdef PARANOID
+   if (a_coeff_pos.size()!=a_coeff_neg.size())
+   {
+    std::ostringstream error_stream; 
+    error_stream << "a_coeff_pos and a_coeff_neg must have "
+                 << "the same size. \n";
+    throw OomphLibError(
+     error_stream.str(),
+     "HelmholtzBCElementBase::compute_contribution_to_fourier_components",
+     OOMPH_EXCEPTION_LOCATION);
    }
+#endif
+
+   // define the imaginary number
+   const std::complex<double> I(0.0,1.0);
+   
+   // Make integration scheme hierher: Make this variable!
+   GaussLobattoLegendre<1,10>* local_integral_pt=
+    new GaussLobattoLegendre<1,10>;
+   
+   //Find out how many nodes there are
+   const unsigned n_node = this->nnode();
+   
+   //Set up memory for the shape  functions
+   Shape psi(n_node); 
+   DShape dpsi(n_node,1);
+   
+   //Set the value of n_intpt
+   const unsigned n_intpt=local_integral_pt->nweight();
+   
+   //Set the Vector to hold local coordinates
+   Vector<double> s(this->Dim-1);
+   
+   // Initialise
+   unsigned n=a_coeff_pos.size();
+   for (unsigned i=0;i<n;i++)
+    {
+     a_coeff_pos[i]=std::complex<double>(0.0,0.0);
+     a_coeff_neg[i]=std::complex<double>(0.0,0.0);
+    }
+   
+   //Loop over the integration points
+   //--------------------------------
+  for(unsigned ipt=0;ipt<n_intpt;ipt++)
+   {
+    //Assign values of s
+    for(unsigned i=0;i<(this->Dim-1);i++) 
+     {
+      s[i]=local_integral_pt->knot(ipt,i);
+     }
+    
+    //Get the integral weight
+    double w=local_integral_pt->weight(ipt);
+    
+    // Get the shape functions
+    this->dshape_local(s,psi,dpsi);
+    
+    // Eulerian coordinates at Gauss point
+    Vector<double> interpolated_x(this->Dim,0.0);
+    
+    // Derivs of Eulerian coordinates w.r.t. local coordinates
+    Vector<double> interpolated_dxds(this->Dim);
+    std::complex<double> interpolated_u(0.0,0.0);
+    
+    // Assemble x and its derivs
+    for(unsigned l=0;l<n_node;l++) 
+     {
+      //Loop over directions
+      for(unsigned i=0;i<this->Dim;i++)
+       {
+        interpolated_x[i]+=this->nodal_position(l,i)*psi[l];
+        interpolated_dxds[i]+=this->nodal_position(l,i)*dpsi(l,0);
+       }
+      
+      //Get the nodal value of the helmholtz unknown
+      double u_value_real =this->raw_nodal_value(
+       l,this->U_index_helmholtz.real());
+      double u_value_imag =this->raw_nodal_value(
+       l,this->U_index_helmholtz.imag());
+      
+      interpolated_u.real() += u_value_real*psi(l);         
+      interpolated_u.imag() += u_value_imag*psi(l);    
+      
+     } // End of loop over the nodes
+    
+    // calculate the integral
+    //-----------------------
+
+    // Get polar angle
+    double phi=atan2(interpolated_x[1],interpolated_x[0]);
+
+    //define dphi_ds=(-yx'+y'x)/(x^2+y^2)
+    double denom =(interpolated_x[0]*interpolated_x[0])+
+     (interpolated_x[1]*interpolated_x[1]);
+    double nom =-interpolated_dxds[1]*interpolated_x[0]+
+     interpolated_dxds[0]*interpolated_x[1];
+    double dphi_ds=nom/denom;
+    
+    // Positive coefficients 
+    for (unsigned i=0;i<n;i++)
+     {
+      a_coeff_pos[i]+=interpolated_u*exp(-I*phi*double(i))*dphi_ds*w;
+     }
+    // Negative coefficients 
+    for (unsigned i=1;i<n;i++)
+     {
+      a_coeff_neg[i]+=interpolated_u*exp(I*phi*double(i))*dphi_ds*w;
+     }
+    
+   }//End of loop over integration points    
+  
+  // Kill integration scheme (hierher make pool)
+  delete local_integral_pt;
+  
+  }
+  
+
+
   
    protected:
   
   /// \short Function to compute the shape and test functions and to return 
   /// the Jacobian of mapping between local and global (Eulerian)
   /// coordinates
-  inline double test_only(const Vector<double> &s, Shape &test)
-  const
+  inline double test_only(const Vector<double> &s, Shape &test) const
   {
    //Get the shape functions
    shape(s,test);
@@ -376,6 +532,12 @@ template<class ELEMENT>
  /// \short Compute and store the gamma integral at all integration
  /// points of the constituent elements.
  void setup_gamma();
+
+
+ /// \short Compute Fourier components of the solution -- length of
+ /// vector indicates number of terms to be computed. 
+ void compute_fourier_components(Vector<std::complex<double> >& a_coeff_pos,
+                                 Vector<std::complex<double> >& a_coeff_neg);
  
  /// \short Gamma integral evaluated at Gauss points 
  /// for specified element
@@ -400,7 +562,7 @@ template<class ELEMENT>
  
  /// \short Number of Fourier terms used in the computation of the
  /// gamma integral
- unsigned & nfourier () 
+ unsigned& nfourier () 
  {                                          
   return Nfourier ;
  }
@@ -1081,6 +1243,7 @@ class HelmholtzDtNBoundaryElement : public  HelmholtzBCElementBase<ELEMENT>
      //of the mapping between local and global (Eulerian)
      // coordinates
      double J = this->test_only(s,test);
+     
      //Premultiply the weights and the Jacobian
      double W = w*J;
      
@@ -1244,8 +1407,6 @@ class HelmholtzDtNBoundaryElement : public  HelmholtzBCElementBase<ELEMENT>
 
 
 
-
-
 //===========start_compute_gamma_contribution==================
 /// \short compute the contribution of the element 
 /// to the Gamma integral and its derivates w.r.t 
@@ -1391,7 +1552,7 @@ template<class ELEMENT>
 //===========================================================================
 namespace ToleranceForHelmholtzOuterBoundary
 {
- /// \short Tolerance to within radius of points on DtN boundary
+ /// \short Relative tolerance to within radius of points on DtN boundary
  /// are allowed to deviate from specified value
  extern double Tol;
 
@@ -1404,7 +1565,7 @@ namespace ToleranceForHelmholtzOuterBoundary
 //===========================================================================
 namespace ToleranceForHelmholtzOuterBoundary
 {
- /// \short Tolerance to within radius of points on DtN boundary
+ /// \short Relative tolerance to within radius of points on DtN boundary
  /// are allowed to deviate from specified value
  double Tol=1.0e-3;
 
@@ -1413,6 +1574,65 @@ namespace ToleranceForHelmholtzOuterBoundary
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
+
+
+///================================================================
+ /// \short Compute Fourier components of the solution -- length of
+ /// vector indicates number of terms to be computed. 
+///================================================================
+template<class ELEMENT>
+void HelmholtzDtNMesh<ELEMENT>::compute_fourier_components(
+ Vector<std::complex<double> >& a_coeff_pos,
+ Vector<std::complex<double> >& a_coeff_neg)
+{
+ 
+#ifdef PARANOID
+   if (a_coeff_pos.size()!=a_coeff_neg.size())
+   {
+    std::ostringstream error_stream; 
+    error_stream << "a_coeff_pos and a_coeff_neg must have "
+                 << "the same size. \n";
+    throw OomphLibError(
+     error_stream.str(),
+     "HelmholtzDtNMesh::compute_fourier_components(...)",
+     OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+ 
+ // Initialise
+ unsigned n=a_coeff_pos.size();
+ Vector<std::complex<double> > el_a_coeff_pos(n);
+ Vector<std::complex<double> > el_a_coeff_neg(n);
+ for (unsigned i=0;i<n;i++)
+  {
+   a_coeff_pos[i]=std::complex<double>(0.0,0.0);
+   a_coeff_neg[i]=std::complex<double>(0.0,0.0);
+  }
+ 
+ //Loop over elements e
+ unsigned nel=this->nelement();
+ for (unsigned e=0;e<nel;e++)
+  {
+   // Get a pointer to element   
+   HelmholtzBCElementBase<ELEMENT>* el_pt=
+    dynamic_cast<HelmholtzBCElementBase<ELEMENT>*>(this->element_pt(e));    
+   
+   // Compute contribution
+   el_pt->compute_contribution_to_fourier_components(el_a_coeff_pos,
+                                                     el_a_coeff_neg);
+   
+   // Add to coefficients
+   for (unsigned i=0;i<n;i++)
+    {
+     a_coeff_pos[i]+=el_a_coeff_pos[i];
+     a_coeff_neg[i]+=el_a_coeff_neg[i];
+    }
+  }
+
+}
+ 
+
+
 
 ///================================================================
 /// Compute and store the gamma integral and derivates 
@@ -1444,13 +1664,22 @@ void HelmholtzDtNMesh<ELEMENT>::setup_gamma()
       double r=sqrt(x[0]*x[0]+x[1]*x[1]); 
       
       // Check
-      if(abs(r-this->Outer_radius)>ToleranceForHelmholtzOuterBoundary::Tol)
+      if (Outer_radius==0.0)
+       {
+        throw OomphLibError(
+         "Outer radius for DtN BC must not be zero!",
+         "HelmholtzDtNMesh::setup_gamma()",
+         OOMPH_EXCEPTION_LOCATION);
+       }
+      
+      if(abs((r-this->Outer_radius)/Outer_radius)
+         >ToleranceForHelmholtzOuterBoundary::Tol)
        { 
         std::ostringstream error_stream; 
         error_stream << "Node at " << x[0] << " " << x[1] 
                      << " has radius " << r << " which does not "
                      << " agree with \nspecified outer radius "
-                     << this->Outer_radius << " within tolerance " 
+                     << this->Outer_radius << " within relative tolerance " 
                      << ToleranceForHelmholtzOuterBoundary::Tol 
                      << ".\nYou can adjust the tolerance via\n"
                      << "ToleranceForHelmholtzOuterBoundary::Tol\n" 
@@ -1473,12 +1702,12 @@ void HelmholtzDtNMesh<ELEMENT>::setup_gamma()
  double k=sqrt(*(el_pt->k_squared_pt()));  
  
  // Precompute factors in sum
- Vector<std::complex<double> > h2_a(Nfourier), h2p_a(Nfourier),q(Nfourier);
- Hankel_functions_for_Helmholtz_problem::
-  Hankel_first(Nfourier,Outer_radius*k,h2_a,h2p_a);
+ Vector<std::complex<double> > h_a(Nfourier), hp_a(Nfourier),q(Nfourier);
+ Hankel_functions_for_helmholtz_problem::
+  Hankel_first(Nfourier,Outer_radius*k,h_a,hp_a);
  for (unsigned i=0;i<Nfourier;i++)
   {
-   q[i]=(k/(M_PI*2.0))*(h2p_a[i]/h2_a[i]);  
+   q[i]=(k/(2.0*MathematicalConstants::Pi))*(hp_a[i]/h_a[i]);  
   } 
  
  //first loop over elements e

@@ -1092,8 +1092,7 @@ template<class EXT_ELEMENT>
 
   // The first entry in nodal_info indicates
   // the timestepper required for this halo node
-  if (Unsigned_values
-      [Count_unsigned_values]==1)
+  if (Unsigned_values[Count_unsigned_values]==1)
    {
     Count_unsigned_values++;
     // Index minus one!
@@ -1101,7 +1100,7 @@ template<class EXT_ELEMENT>
      (Unsigned_values[Count_unsigned_values]);
     Count_unsigned_values++;
     // Check whether number of prev values is "sent" across
-    n_prev+=time_stepper_pt->nprev_values();
+    n_prev=time_stepper_pt->ntstorage(); 
    }
   else
    {

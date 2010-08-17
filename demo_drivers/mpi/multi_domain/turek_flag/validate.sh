@@ -18,34 +18,7 @@ mkdir Validation
 cd Validation
 cp ../*partition.dat .
 
-# Validation for Turek flag problem (parallel, with refineable solid mesh)
-#-------------------------------------------------------------------------
 
-echo "Running Turek flag validation "
-mkdir RESLT_TUREK
-
-# Wait for a bit to allow parallel file systems to realise
-# the existence of the new directory
-sleep 5
-
-$MPI_RUN_COMMAND ../turek_flag > OUTPUT_turek_flag
-echo "done"
-echo " " >> validation.log
-echo "Turek flag validation" >> validation.log
-echo "------------------------------------" >> validation.log
-echo " " >> validation.log
-echo "Validation directory: " >> validation.log
-echo " " >> validation.log
-echo "  " `pwd` >> validation.log
-echo " " >> validation.log
-cat RESLT_TUREK/soln1_on_proc0.dat RESLT_TUREK/soln1_on_proc1.dat RESLT_TUREK/soln2_on_proc0.dat RESLT_TUREK/soln2_on_proc1.dat RESLT_TUREK/solid_soln1_on_proc0.dat RESLT_TUREK/solid_soln1_on_proc1.dat RESLT_TUREK/solid_soln2_on_proc0.dat RESLT_TUREK/solid_soln2_on_proc1.dat > turek_flag_external_results.dat
-
-if test "$1" = "no_fpdiff"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
-else
-../../../../../bin/fpdiff.py ../validata/turek_flag_external_results.dat.gz  \
-         turek_flag_external_results.dat 0.5 1.0e-14 >> validation.log
-fi
 
 #---------------------------------------------------------------------
 
@@ -80,8 +53,40 @@ fi
 
 #---------------------------------------------------------------------
 
+
+# Validation for Turek flag problem (parallel, with refineable solid mesh)
+#-------------------------------------------------------------------------
+
+echo "Running Turek flag validation "
+mkdir RESLT_TUREK
+
+# Wait for a bit to allow parallel file systems to realise
+# the existence of the new directory
+sleep 5
+
+$MPI_RUN_COMMAND ../turek_flag > OUTPUT_turek_flag
+echo "done"
+echo " " >> validation.log
+echo "Turek flag validation" >> validation.log
+echo "------------------------------------" >> validation.log
+echo " " >> validation.log
+echo "Validation directory: " >> validation.log
+echo " " >> validation.log
+echo "  " `pwd` >> validation.log
+echo " " >> validation.log
+cat RESLT_TUREK/soln1_on_proc0.dat RESLT_TUREK/soln1_on_proc1.dat RESLT_TUREK/soln2_on_proc0.dat RESLT_TUREK/soln2_on_proc1.dat RESLT_TUREK/solid_soln1_on_proc0.dat RESLT_TUREK/solid_soln1_on_proc1.dat RESLT_TUREK/solid_soln2_on_proc0.dat RESLT_TUREK/solid_soln2_on_proc1.dat > turek_flag_external_results.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../../bin/fpdiff.py ../validata/turek_flag_external_results.dat.gz  \
+         turek_flag_external_results.dat 0.5 1.0e-14 >> validation.log
+fi
+
 # Append log to main validation log
 cat validation.log >> ../../../../../validation.log
+
+#---------------------------------------------------------------------
 
 cd ..
 

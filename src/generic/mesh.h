@@ -40,6 +40,10 @@
 #include "mpi.h"
 #endif
 
+#include<float.h>
+#include <list>
+#include <typeinfo>
+
 //oomph-lib headers
 #include "Vector.h"
 #include "nodes.h"
@@ -47,8 +51,6 @@
 #include "timesteppers.h"
 #include "matrices.h"
 #include "refineable_elements.h"
-#include <list>
-#include <typeinfo>
 
 namespace oomph
 {
@@ -68,15 +70,14 @@ class Mesh
  /// Problem is a friend
  friend class Problem;
 
- private:
+ 
+ protected:
 
  /// \short Vector of Vector of pointers to nodes on the boundaries: 
  /// Boundary_node_pt(b,n). Note that this is private to force
  /// the use of the add_boundary_node() function, which ensures
  /// that the reverse look-up schemes for the nodes are set up.
  Vector<Vector<Node*> > Boundary_node_pt;
-
- protected:
 
  /// Flag to indicate that the lookup schemes for elements that are adjacent
  /// to the boundaries has been set up.
@@ -517,6 +518,22 @@ public:
 
  /// \short Self-test: Check elements and nodes. Return 0 for OK
  unsigned self_test();
+
+
+ /// \short Determine max and min area for all FiniteElements in the mesh
+ /// (non-FiniteElements are ignored)
+ void max_and_min_area(double& max_area, double& min_area)
+ {
+  max_area=0.0;
+  min_area=DBL_MAX;
+  unsigned nel=nelement();
+  for (unsigned e=0;e<nel;e++)
+   {
+    max_area=std::max(max_area,
+                      finite_element_pt(e)->size());
+    min_area=std::min(min_area,
+                      finite_element_pt(e)->size());   }
+ }
 
 
  /// \short Check for inverted elements and report outcome
@@ -962,6 +979,19 @@ public:
       }
     }
    return vec_el_pt;
+  }
+
+ /// \short Total number of non-halo elements in this mesh (Costly call computes
+ /// result on the fly)
+ unsigned nnon_halo_element()
+  {
+   unsigned count=0;
+   unsigned n=nelement();
+   for (unsigned e=0;e<n;e++)
+    {
+     if (!(element_pt(e)->is_halo())) count++;
+    }
+   return count;
   }
 
 

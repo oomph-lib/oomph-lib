@@ -472,7 +472,7 @@ namespace oomph
 
    /// \short return the index in the block corresponding to a global block 
    /// number i_dof
-   int index_in_block(const unsigned i_dof) const
+   int index_in_block(const unsigned& i_dof) const
     {
 
      // the index in the dof block

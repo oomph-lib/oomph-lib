@@ -225,15 +225,19 @@ TriangleMeshHolePolygon::TriangleMeshHolePolygon(
      
    // I've created it so I have to tidy up too!
    Must_clean_up=true;
+
+   // Centre displacement is internal Data for this element
+   add_internal_data(Centre_displacement_data_pt);
+   
   }
  // Data created externally, so somebody else will clean up
  else
   {
    Must_clean_up=false;
-  }
 
- // Centre displacement is internal Data for this element
- add_internal_data(Centre_displacement_data_pt);
+   // Centre displacement is external Data for this element
+   add_external_data(Centre_displacement_data_pt);
+  }
 
  // Build the polyline geom objects
  create_boundary_geom_objects(boundary_polyline_pt); 

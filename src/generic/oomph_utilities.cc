@@ -1284,7 +1284,6 @@ void MPI_Helpers::finalize()
 OomphCommunicator* MPI_Helpers::communicator_pt()
 {
 #ifdef PARANOID
- // check that this matrix is built
  if (!MPI_has_been_initialised)
   {
    std::ostringstream error_message_stream;

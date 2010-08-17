@@ -25,7 +25,11 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-//Driver for doubly adaptive 2D unsteady heat problem in moving domain
+// Driver for doubly adaptive 2D unsteady heat problem in moving domain
+// with restart and load balancing
+
+#include <fenv.h> 
+
 
 //Generic routines
 #include "generic.h"
@@ -122,12 +126,18 @@ protected:
 ////////////////////////////////////////////////////////////////////////
 
 
-//======start_of_TanhSolnForUnsteadyHeat==============================
+//======start_of_GlobalParameters==============================
 /// Namespace for exact solution of unsteady heat equation 
 /// with sharp step 
 //====================================================================
-namespace TanhSolnForUnsteadyHeat
+namespace GlobalParameters
 {
+
+ /// Name of restart file
+ std::string Restart_file="";
+
+ /// Name of file specifying the partitioning of the problem
+ std::string Partitioning_file="";
 
  /// Parameter for steepness of step
  double Alpha;
@@ -202,7 +212,7 @@ MathematicalConstants::Pi*time)))-Y)),2.0))*Alpha*TanPhi*NX+(1.0-pow(tanh(
 time)))-Y)),2.0))*Alpha*NY;
  }
 
-} // end of TanhSolnForUnsteadyHeat
+} // end of GlobalParameters
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -226,6 +236,10 @@ public:
  /// Destructor: Close trace file
  ~RefineableUnsteadyHeatProblem();
 
+ /// \short Build meshes (helper fct accessed from constructor and
+ /// from the load balancing routines)
+ void build_mesh();
+
  /// Update the problem specs after solve (empty)
  void actions_after_newton_solve(){}
 
@@ -240,23 +254,27 @@ public:
  void actions_before_implicit_timestep();
  
  /// Actions before adapt: Wipe the mesh of prescribed flux elements
- void actions_before_adapt();
+ void actions_before_adapt()
+  {
+   generic_actions_before();
+  }
  
  /// Actions after adapt: Rebuild the mesh of prescribed flux elements
- void actions_after_adapt();
+ void actions_after_adapt()
+  {
+   generic_actions_after();
+  }
 
  /// Actions before distribute: Wipe the mesh of prescribed flux elements
  void actions_before_distribute()
   {
-   // Quick and dirty...
-   actions_before_adapt();
+   generic_actions_before();
   }
- 
+
  /// Actions after distribute: Rebuild the mesh of prescribed flux elements
  void actions_after_distribute()
   {
-   // Quick and dirty...
-   actions_after_adapt();
+   generic_actions_after();
   }
 
  /// Global error norm for adaptive time-stepping
@@ -265,6 +283,9 @@ public:
  /// \short Set initial condition (incl previous timesteps) according
  /// to specified function. 
  void set_initial_condition();
+
+ /// \short Restart
+ void restart();
 
  /// \short Create UnsteadyHeat flux elements on boundary b of the Mesh pointed
  /// to by bulk_mesh_pt and add them to the Mesh object pointed to by 
@@ -277,6 +298,9 @@ public:
 
  /// Doc the solution
  void doc_solution();
+
+ /// Return DocInfo object
+ DocInfo& doc_info(){return Doc_info;}
 
  /// \short Dump problem data to allow for later restart
  void dump_it(ofstream& dump_file);
@@ -301,6 +325,13 @@ public:
  double& next_dt(){return Next_dt;}
 
 private:
+
+ /// Actions before adapt/distribute: Wipe the mesh of prescribed flux elements
+ void generic_actions_before();
+ 
+ /// \short Actions after adapt/distribute: Rebuild the mesh of prescribed 
+ /// flux elements
+ void generic_actions_after();
 
  /// Doc info object
  DocInfo Doc_info;
@@ -366,16 +397,16 @@ RefineableUnsteadyHeatProblem<ELEMENT>::RefineableUnsteadyHeatProblem(
  // ----------------------------------
 
  // Steepness of step
- TanhSolnForUnsteadyHeat::Alpha=10.0;
+ GlobalParameters::Alpha=10.0;
 
  // Orientation of step
- TanhSolnForUnsteadyHeat::TanPhi=1.0;
+ GlobalParameters::TanPhi=1.0;
 
  // Amplitude for movement of step
- TanhSolnForUnsteadyHeat::Beta=0.3; 
+ GlobalParameters::Beta=0.3; 
 
  // Parameter for time-dependence of step movement
- TanhSolnForUnsteadyHeat::Gamma=5.0;
+ GlobalParameters::Gamma=5.0;
 
  // Setup mesh
  //-----------
@@ -397,6 +428,35 @@ RefineableUnsteadyHeatProblem<ELEMENT>::RefineableUnsteadyHeatProblem(
  // Create GeomObject
  Boundary_pt=new MyEllipse(a,b,a_hat,b_hat,period,Problem::time_pt()); 
 
+ // Now build the mesh
+ build_mesh();
+
+ // Do equation numbering
+ cout <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
+
+} // end of constructor
+
+
+//======start_of_destructor===============================================
+/// Destructor: Close trace file
+//========================================================================
+template<class ELEMENT>
+RefineableUnsteadyHeatProblem<ELEMENT>::~RefineableUnsteadyHeatProblem()
+{ 
+
+ // Close trace file
+ Trace_file.close();
+ 
+} // end of destructor
+
+
+//========start_of_buil_mesh==============================================
+/// Build mesh function
+//========================================================================
+template<class ELEMENT>
+void RefineableUnsteadyHeatProblem<ELEMENT>::build_mesh()
+{ 
+
  // Start and end coordinates of curvilinear domain boundary on ellipse
  double xi_lo=0.0;
  double xi_hi=MathematicalConstants::Pi/2.0;
@@ -407,6 +467,17 @@ RefineableUnsteadyHeatProblem<ELEMENT>::RefineableUnsteadyHeatProblem(
  double fract_mid=0.5;
  Bulk_mesh_pt = new RefineableQuarterCircleSectorMesh<ELEMENT>(
   Boundary_pt,xi_lo,fract_mid,xi_hi,time_stepper_pt());
+
+ // hierher FLAG UP IN TUTORIAL: Mesh is completely rebuilt in here
+ // so target errors etc need to be reassigned
+
+ // Set targets for spatial adaptivity
+ Bulk_mesh_pt->max_permitted_error()=0.001;
+ Bulk_mesh_pt->min_permitted_error()=0.0001;
+
+ // hierher need to to this in build_mesh()
+ Bulk_mesh_pt->refine_uniformly();
+ Bulk_mesh_pt->refine_uniformly();
 
  // Create the surface mesh as an empty mesh
  Surface_mesh_pt=new Mesh;
@@ -419,7 +490,7 @@ RefineableUnsteadyHeatProblem<ELEMENT>::RefineableUnsteadyHeatProblem(
  // Add the two sub meshes to the problem
  add_sub_mesh(Bulk_mesh_pt);
  add_sub_mesh(Surface_mesh_pt);
-
+ 
  // Combine all submeshes into a single global Mesh
  build_global_mesh();
 
@@ -451,6 +522,9 @@ RefineableUnsteadyHeatProblem<ELEMENT>::RefineableUnsteadyHeatProblem(
  unsigned nnod=el0_pt->nnode();
  Doc_node_pt=el0_pt->node_pt(nnod-1);
 
+ // In parallel make sure that we retain this element on all processors
+ // so the node remains accessible for post-processing
+ el0_pt->must_be_kept_as_halo();
 
  // Complete the build of all elements so they are fully functional
  //----------------------------------------------------------------
@@ -472,6 +546,7 @@ RefineableUnsteadyHeatProblem<ELEMENT>::RefineableUnsteadyHeatProblem(
    el_pt->time_pt()=time_pt();
   }
 
+
  // Loop over the flux elements to pass pointer to prescribed flux function
  n_element=Surface_mesh_pt->nelement();
  for(unsigned e=0;e<n_element;e++)
@@ -483,30 +558,13 @@ RefineableUnsteadyHeatProblem<ELEMENT>::RefineableUnsteadyHeatProblem(
 
    // Set the pointer to the prescribed flux function
    el_pt->flux_fct_pt() = 
-    &TanhSolnForUnsteadyHeat::prescribed_flux_on_fixed_y_boundary;
+    &GlobalParameters::prescribed_flux_on_fixed_y_boundary;
 
    // Set pointer to continous time
    el_pt->time_pt()=time_pt();
   }
 
- // Do equation numbering
- cout <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
-
-} // end of constructor
-
-
-//======start_of_destructor===============================================
-/// Destructor: Close trace file
-//========================================================================
-template<class ELEMENT>
-RefineableUnsteadyHeatProblem<ELEMENT>::~RefineableUnsteadyHeatProblem()
-{ 
- // Close trace file on root only
- if (communicator_pt()->my_rank()==0)
-  {
-   Trace_file.close();
-  }
-} // end of destructor
+} // end of build_mesh
 
 
 //=========start of actions_before_implicit_timestep======================
@@ -538,7 +596,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::actions_before_implicit_timestep()
        Vector<double> x(2);
        x[0]=nod_pt->x(0);
        x[1]=nod_pt->x(1);
-       TanhSolnForUnsteadyHeat::get_exact_u(time,x,u);
+       GlobalParameters::get_exact_u(time,x,u);
        nod_pt->set_value(0,u);
       }
     }
@@ -546,11 +604,12 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::actions_before_implicit_timestep()
 } // end of actions_before_implicit_timestep
 
 
-//=========start_of_actions_before_adapt==================================
-/// Actions before adapt: Wipe the mesh of prescribed flux elements
+//=======start_of_generic_actions_before==================================
+/// Actions before adapt/distribute: Wipe the mesh of prescribed flux 
+/// elements
 //========================================================================
 template<class ELEMENT>
-void RefineableUnsteadyHeatProblem<ELEMENT>::actions_before_adapt()
+void RefineableUnsteadyHeatProblem<ELEMENT>::generic_actions_before()
 {
 
  // Kill the flux elements and wipe surface mesh
@@ -559,15 +618,17 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::actions_before_adapt()
  // Rebuild the global mesh. 
  rebuild_global_mesh();
 
-} // end of actions_before_adapt
+} // end of generic_actions_before
 
 
-//==========start_of_actions_after_adapt==================================
-/// Actions after adapt: Rebuild the mesh of prescribed flux elements
-//========================================================================
+//==========start_of_generic_actions_after==================================
+/// Actions after adapt/distribute: Rebuild the mesh of prescribed flux
+/// elements
+//==========================================================================
 template<class ELEMENT>
-void RefineableUnsteadyHeatProblem<ELEMENT>::actions_after_adapt()
+void RefineableUnsteadyHeatProblem<ELEMENT>::generic_actions_after()
 {
+
  // Create prescribed-flux elements from all elements that are 
  // adjacent to boundary 0 and add them to surface mesh
  create_flux_elements(0,Bulk_mesh_pt,Surface_mesh_pt);
@@ -586,12 +647,13 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::actions_after_adapt()
    
    // Set the pointer to the prescribed flux function
    el_pt->flux_fct_pt() = 
-    &TanhSolnForUnsteadyHeat::prescribed_flux_on_fixed_y_boundary;
+    &GlobalParameters::prescribed_flux_on_fixed_y_boundary;
    
    // Set pointer to continous time
    el_pt->time_pt()=time_pt();
   }
-} // end of actions_after_adapt
+
+} // end of generic_actions_after
 
 
 //======================start_of_set_initial_condition====================
@@ -602,59 +664,115 @@ template<class ELEMENT>
 void RefineableUnsteadyHeatProblem<ELEMENT>::set_initial_condition()
 { 
 
+ // Choose initial timestep
+ double dt0=0.005;
+
+ // Initialise timestep -- also sets the weights for all timesteppers
+ // in the problem.
+ initialise_dt(dt0);
+ 
+ // Use this as the first "suggested" timestep
+ Next_dt=dt0;
+ 
+ // Backup time in global timestepper
+ double backed_up_time=time_pt()->time();
+ 
+ // Past history for velocities must be established for t=time0-deltat, ...
+ // Then provide current values (at t=time0) which will also form
+ // the initial guess for first solve at t=time0+deltat
+ 
+ // Vector of exact solution value
+ Vector<double> soln(1);
+ Vector<double> x(2);
+ 
+ //Find number of nodes in mesh
+ unsigned num_nod = Bulk_mesh_pt->nnode();
+ 
+ // Get continuous times at previous timesteps
+ int nprev_steps=time_stepper_pt()->nprev_values();
+ Vector<double> prev_time(nprev_steps+1);
+ for (int itime=nprev_steps;itime>=0;itime--)
+  {
+   prev_time[itime]=time_pt()->time(unsigned(itime));
+  }
+ 
+ // Loop over current & previous timesteps (in outer loop because
+ // the mesh also moves!)
+ for (int itime=nprev_steps;itime>=0;itime--)
+  {
+   double time=prev_time[itime];
+   
+   // Set global time (because this is how the geometric object refers 
+   // to continous time 
+   time_pt()->time()=time;
+   
+   cout << "setting IC at time =" << time << std::endl;
+   
+   // Update the mesh for this value of the continuous time
+   // (The wall object reads the continous time from the same
+   // global time object)
+   Bulk_mesh_pt->node_update(); 
+   
+   // Loop over the nodes to set initial guess everywhere
+   for (unsigned jnod=0;jnod<num_nod;jnod++)
+    {
+     // Get nodal coordinates
+     x[0]=Bulk_mesh_pt->node_pt(jnod)->x(0);
+     x[1]=Bulk_mesh_pt->node_pt(jnod)->x(1);
+     
+     // Get intial solution
+     GlobalParameters::get_exact_u(time,x,soln);
+     
+     // Assign solution
+     Bulk_mesh_pt->node_pt(jnod)->set_value(itime,0,soln[0]);
+     
+     // Loop over coordinate directions
+     for (unsigned i=0;i<2;i++)
+      {
+       Bulk_mesh_pt->node_pt(jnod)->x(itime,i)=x[i];
+      }
+    } 
+  }
+ 
+ // Reset backed up time for global timestepper
+ time_pt()->time()=backed_up_time;
+
+} // end of set_initial_condition
+
+
+//======================start_of_restart==================================
+/// Restart
+//========================================================================
+template<class ELEMENT>
+void RefineableUnsteadyHeatProblem<ELEMENT>::restart()
+{ 
+
  // Pointer to restart file
  ifstream* restart_file_pt=0;
 
- // Restart?
- //---------
- // Restart file specified via command line [all programs have at least
- // a single command line argument: their name. Ignore this here.]
- if ((CommandLineArgs::Argc==1)||(CommandLineArgs::Argc==2))
+ // Open restart file from stem
+ char filename[100];
+ sprintf(filename,"%s_on_proc%i.dat",GlobalParameters::Restart_file.c_str(),
+         this->communicator_pt()->my_rank());
+ restart_file_pt= new ifstream(filename,ios_base::in);
+ if (restart_file_pt!=0)
   {
-   cout << "No restart -- setting IC from exact solution" << std::endl;
+   oomph_info << "Have opened " << filename << 
+    " for restart. " << std::endl;
   }
- else if (CommandLineArgs::Argc==3)
-  {
-   // Open restart file from stem
-   char filename[100];
-   sprintf(filename,"%s_on_proc%i.dat",CommandLineArgs::Argv[1],
-           this->communicator_pt()->my_rank());
-   restart_file_pt= new ifstream(filename,ios_base::in);
-   if (restart_file_pt!=0)
-    {
-     oomph_info << "Have opened " << filename << 
-      " for restart. " << std::endl;
-    }
-   else
-    {
-     std::ostringstream error_stream;
-     error_stream
-      << "ERROR while trying to open " << filename
-      << " for restart." << std::endl;
-     
-     throw OomphLibError(
-      error_stream.str(),
-      "RefineableUnsteadyHeatProblem::set_initial_condition()",
-      OOMPH_EXCEPTION_LOCATION);
-    }
-  }
- // More than one command line argument?
- else 
+ else
   {
    std::ostringstream error_stream;
-   error_stream << "Can only specify one input file\n"
-                << "You specified the following command line arguments:\n";
-
+   error_stream
+    << "ERROR while trying to open " << filename
+    << " for restart." << std::endl;
+   
    throw OomphLibError(
     error_stream.str(),
     "RefineableUnsteadyHeatProblem::set_initial_condition()",
     OOMPH_EXCEPTION_LOCATION);
-                       
-   
-   //REWRITE THIS
-   CommandLineArgs::output();
   }
- 
+
  
  // Read restart data:
  //-------------------
@@ -664,85 +782,8 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::set_initial_condition()
    // was from an unsteady run
    restart(*restart_file_pt);
   }
- // Assign initial condition from exact solution
- //---------------------------------------------
- else
-  {
-   // Choose initial timestep
-   double dt0=0.005;
 
-   // Initialise timestep -- also sets the weights for all timesteppers
-   // in the problem.
-   initialise_dt(dt0);
-
-   // Use this as the first "suggested" timestep
-   Next_dt=dt0;
-
-   // Backup time in global timestepper
-   double backed_up_time=time_pt()->time();
-   
-   // Past history for velocities must be established for t=time0-deltat, ...
-   // Then provide current values (at t=time0) which will also form
-   // the initial guess for first solve at t=time0+deltat
-   
-   // Vector of exact solution value
-   Vector<double> soln(1);
-   Vector<double> x(2);
-   
-   //Find number of nodes in mesh
-   unsigned num_nod = Bulk_mesh_pt->nnode();
-   
-   // Get continuous times at previous timesteps
-   int nprev_steps=time_stepper_pt()->nprev_values();
-   Vector<double> prev_time(nprev_steps+1);
-   for (int itime=nprev_steps;itime>=0;itime--)
-    {
-     prev_time[itime]=time_pt()->time(unsigned(itime));
-    }
-   
-   // Loop over current & previous timesteps (in outer loop because
-   // the mesh also moves!)
-   for (int itime=nprev_steps;itime>=0;itime--)
-    {
-     double time=prev_time[itime];
-     
-     // Set global time (because this is how the geometric object refers 
-     // to continous time 
-     time_pt()->time()=time;
-     
-     cout << "setting IC at time =" << time << std::endl;
-     
-     // Update the mesh for this value of the continuous time
-     // (The wall object reads the continous time from the same
-     // global time object)
-     Bulk_mesh_pt->node_update(); 
-     
-     // Loop over the nodes to set initial guess everywhere
-     for (unsigned jnod=0;jnod<num_nod;jnod++)
-      {
-       // Get nodal coordinates
-       x[0]=Bulk_mesh_pt->node_pt(jnod)->x(0);
-       x[1]=Bulk_mesh_pt->node_pt(jnod)->x(1);
-       
-       // Get intial solution
-       TanhSolnForUnsteadyHeat::get_exact_u(time,x,soln);
-       
-       // Assign solution
-       Bulk_mesh_pt->node_pt(jnod)->set_value(itime,0,soln[0]);
-       
-       // Loop over coordinate directions
-       for (unsigned i=0;i<2;i++)
-        {
-         Bulk_mesh_pt->node_pt(jnod)->x(itime,i)=x[i];
-        }
-      } 
-    }
-   
-   // Reset backed up time for global timestepper
-   time_pt()->time()=backed_up_time;
-  }
-
-} // end of set_initial_condition
+} // end of restart
 
 
 
@@ -761,7 +802,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::write_trace_file_header()
    Trace_file.open(filename);
    
    Trace_file << "VARIABLES=\"time t\","
-            << "\"u<SUB>FE</SUB>\","
+              << "\"u<SUB>FE</SUB>\","
               << "\"u<SUB>exact</SUB>\","
               << "\"A\","
               << "\"dt\","
@@ -806,7 +847,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution()
 
  cout << std::endl;
  cout << "=================================================" << std::endl;
- cout << "Docing solution for t=" << time_pt()->time() << std::endl;
+ cout << "Docing solution " << Doc_info.number() << " for t=" << time_pt()->time() << std::endl;
  cout << "=================================================" << std::endl;
 
  // Output solution 
@@ -844,7 +885,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution()
          Doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  Bulk_mesh_pt->output_fct(some_file,npts,time_pt()->time(),
-                       TanhSolnForUnsteadyHeat::get_exact_u); 
+                       GlobalParameters::get_exact_u); 
 
  // Write dummy zones
  some_file << "ZONE I=2,J=2" << std::endl;
@@ -859,7 +900,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution()
  some_file << "1.3 1.3 1.2" << std::endl;
 
  some_file.close();
-
+ 
 
  // Doc error
  //----------
@@ -869,7 +910,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution()
          Doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  Bulk_mesh_pt->compute_error(some_file,
-                          TanhSolnForUnsteadyHeat::get_exact_u,
+                          GlobalParameters::get_exact_u,
                           time_pt()->time(),
                           error,norm); 
  some_file.close();
@@ -892,10 +933,19 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution()
  //-----------------------
  oomph_info << "error: " << global_stuff[0] << std::endl; 
  oomph_info << "norm : " << global_stuff[1] << std::endl << std::endl;
-
-
-
-
+ 
+ // Get global error norm (on all processors as it involves comms)
+ double temp_error_norm=global_temporal_error_norm();
+ 
+ // Gather refinement stats
+ Vector<int> ref_stats(3);
+ ref_stats[0]=Bulk_mesh_pt->nnon_halo_element();
+ ref_stats[1]=Bulk_mesh_pt->nrefined();
+ ref_stats[2]=Bulk_mesh_pt->nunrefined();
+ Vector<int> global_ref_stats(3);
+ MPI_Allreduce(&ref_stats[0],&global_ref_stats[0],3,MPI_INT,MPI_SUM,
+               communicator_pt()->mpi_comm());
+ 
  // Write trace file on root only
  if (Communicator_pt->my_rank()==0)
   {
@@ -903,7 +953,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution()
    x[0]=Doc_node_pt->x(0);
    x[1]=Doc_node_pt->x(1);
    double u_exact;
-   TanhSolnForUnsteadyHeat::get_exact_u(time_pt()->time(),x,u_exact);
+   GlobalParameters::get_exact_u(time_pt()->time(),x,u_exact);
    Vector<double > xi_wall(1);
    Vector<double > r_wall(2);
    xi_wall[0]=0.0;
@@ -913,12 +963,12 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution()
               << " " << u_exact
               << " " << r_wall[0]
               << " " << time_pt()->dt()
-              << " " << global_temporal_error_norm() 
-              << " " << TanhSolnForUnsteadyHeat::step_position(time_pt()->
+              << " " << temp_error_norm
+              << " " << GlobalParameters::step_position(time_pt()->
                                                                time())
-              << " " << Bulk_mesh_pt->nelement() 
-              << " " << Bulk_mesh_pt->nrefined()
-              << " " << Bulk_mesh_pt->nunrefined() 
+              << " " << global_ref_stats[0] 
+              << " " << global_ref_stats[1]
+              << " " << global_ref_stats[2] 
               << " " << error 
               << " " << norm << std::endl;
    
@@ -927,7 +977,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution()
    sprintf(filename,"%s/Wall%i.dat",Doc_info.directory().c_str(),
            Doc_info.number());
    some_file.open(filename);
- 
+   
    unsigned nplot=100;
    for (unsigned iplot=0;iplot<nplot;iplot++)
     {
@@ -943,12 +993,12 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution()
  sprintf(filename,"%s/restart%i_on_proc%i.dat",Doc_info.directory().c_str(),
          Doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
+ some_file.precision(20); // hierher exercise
  dump_it(some_file);
  some_file.close();
 
  // Increment number of doc
  Doc_info.number()++;
-
 
 } // end of doc_solution
 
@@ -965,7 +1015,7 @@ create_flux_elements(const unsigned& b, Mesh* const &bulk_mesh_pt,
 {
  // How many bulk elements are adjacent to boundary b?
  unsigned n_element = bulk_mesh_pt->nboundary_element(b);
-
+ 
  // Loop over the bulk elements adjacent to boundary b?
  for(unsigned e=0;e<n_element;e++)
   {
@@ -1029,10 +1079,10 @@ double RefineableUnsteadyHeatProblem<ELEMENT>::global_temporal_error_norm()
  
  // Loop over the nodes and calculate the estimated error in the values
  // for non-haloes
+ int count=0;
  for(unsigned i=0;i<n_node;i++)
   {
    Node* nod_pt=Bulk_mesh_pt->node_pt(i);
-   
    if (!(nod_pt->is_halo()))
     {
      // Get error in solution: Difference between predicted and actual
@@ -1042,11 +1092,12 @@ double RefineableUnsteadyHeatProblem<ELEMENT>::global_temporal_error_norm()
      
      //Add the square of the individual error to the global error
      global_error += error*error;
+     count++;
     }
   }
  
  // Accumulate
- int n_node_local=n_node;
+ int n_node_local=count;
  int n_node_total=0;
  MPI_Allreduce(&n_node_local,&n_node_total,1,MPI_INT,MPI_SUM,
                communicator_pt()->mpi_comm());
@@ -1059,6 +1110,8 @@ double RefineableUnsteadyHeatProblem<ELEMENT>::global_temporal_error_norm()
  global_error_total /= double(n_node_total);
  
  // Return square root...
+ oomph_info << "Total error " << n_node_total << " " 
+            <<  sqrt(global_error_total) << std::endl;
  return sqrt(global_error_total);
  
 #else
@@ -1145,18 +1198,19 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::restart(ifstream& restart_file)
 } // end of restart
 
 
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
 
 //======start_of_main=====================================================
 /// Demonstrate how to solve an unsteady heat problem in deformable domain
-/// with mesh adaptation. Command line arguments specify 
-/// the name of the restart file. 
+/// with mesh adaptation.  
 //========================================================================
 int main(int argc, char* argv[])
 {
+
+ feenableexcept(FE_INVALID | FE_DIVBYZERO | FE_OVERFLOW );// | FE_UNDERFLOW);
 
 #ifdef OOMPH_HAS_MPI
  MPI_Helpers::init(argc,argv);
@@ -1165,17 +1219,31 @@ int main(int argc, char* argv[])
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
 
- // Specify duration of the simulation
- double t_max=0.04; // 2.0;
+ // Define possible command line arguments and parse the ones that
+ // were actually specified
+ 
+ // Name of restart file
+ CommandLineArgs::specify_command_line_flag("--restart_file",
+                                            &GlobalParameters::Restart_file);
+ 
+ // Name of file that specifies the problem partitioning
+ CommandLineArgs::specify_command_line_flag("--partitioning_file",
+                                            &GlobalParameters::Partitioning_file); 
 
- // Build problem: Pass pointer to source function and initial timestep
+ // Name of file that specifies the problem partitioning
+ CommandLineArgs::specify_command_line_flag("--validation_run");
+ 
+ // Parse command line
+ CommandLineArgs::parse_and_assign(); 
+ 
+ // Doc what has actually been specified on the command line
+ CommandLineArgs::doc_specified_flags();
+
+
+  // Build problem: Pass pointer to source function and initial timestep
  RefineableUnsteadyHeatProblem<RefineableQUnsteadyHeatElement<2,3> >
-  problem(&TanhSolnForUnsteadyHeat::get_source);
+  problem(&GlobalParameters::get_source);
    
- // Set targets for spatial adaptivity
- problem.bulk_mesh_pt()->max_permitted_error()=0.001;
- problem.bulk_mesh_pt()->min_permitted_error()=0.0001;
-
  // First timestep?
  bool first=true;
  
@@ -1183,31 +1251,36 @@ int main(int argc, char* argv[])
  // of adaptations at first timestep as the initial conditions
  // can be reset "exactly" from without any interpolation error.
  unsigned max_adapt=10; 
- 
- // Set IC
+
+ // Set IC from analytical soln
  problem.set_initial_condition();
-
- // Initial timestep: Use the one used when setting up the initial
- // condition or the "suggested next dt" from the restarted run
- double dt=problem.next_dt();
-
- cout << "Doing first timestep with dt: " << dt << std::endl;
-
-
-
-//-----
-
+ 
+ // If restart: The first step isn't really the first step,
+ // i.e. initial condition should not be re-set when 
+ // adaptive refinement has been performed. Also, limit
+ // the max. number of refinements per timestep to the
+ // normal value straightaway.
+ if (CommandLineArgs::command_line_flag_has_been_set("--restart_file"))
+  {
+   first=false;
+   max_adapt=1;
+  }
+ 
  // Create storage for partitioning
  const unsigned n_element=problem.mesh_pt()->nelement();
  Vector<unsigned> element_partition(n_element);
  
- //No command line arguments -- simply distribute problem and
+ // No partitioning specified -- simply distribute problem and
  // record distribution in file to allow restart
- if (CommandLineArgs::Argc==1)
+ if (!CommandLineArgs::command_line_flag_has_been_set("--partitioning_file"))
   {
+   
+   oomph_info << "Distributing problem with METIS \n"
+              << "Documenting partitioning in RESLT/partitioning.dat.\n";
+   
    // Distribute
    element_partition=problem.distribute();
-
+   
    // Write partition to disk
    std::ofstream output_file;
    char filename[100];
@@ -1217,33 +1290,20 @@ int main(int argc, char* argv[])
     {
      output_file << element_partition[e] << std::endl;
     }
+   output_file.close();
   }
- // Read in partitioning from disk using the specified file (during
- // self test)
- else if (CommandLineArgs::Argc==2)
+ // Read in partitioning from disk using the specified file
+ else 
   {
-   // Read in partitioning from disk: Name of partitioning file specified
-   // as second command line argument
-   std::ifstream input_file;
-   input_file.open(CommandLineArgs::Argv[1]);
-   std::string input_string;
-   for (unsigned e=0;e<n_element;e++)
-    {
-     getline(input_file,input_string,'\n');
-     element_partition[e]=atoi(input_string.c_str());
-    }
    
-   // Now perform the distribution 
-   problem.distribute(element_partition);
-  }
- // Read in partitioning from disk using the specified file (during
- // restart)
- else if (CommandLineArgs::Argc==3)
-  {
+   oomph_info << "Distributing problem with partitioning \n"
+              << "specified in: " << GlobalParameters::Partitioning_file 
+              << std::endl;
+   
    // Read in partitioning from disk: Name of partitioning file specified
-   // as second command line argument
+   // as command line argument
    std::ifstream input_file;
-   input_file.open(CommandLineArgs::Argv[2]);
+   input_file.open(GlobalParameters::Partitioning_file.c_str());
    std::string input_string;
    for (unsigned e=0;e<n_element;e++)
     {
@@ -1255,55 +1315,98 @@ int main(int argc, char* argv[])
    problem.distribute(element_partition);
   }
 
-
-//-----
-
- // If restart: The first step isn't really the first step,
- // i.e. initial condition should not be re-set when 
- // adaptive refinement has been performed. Also, limit
- // the max. number of refinements per timestep to the
- // normal value straightaway.
- if (CommandLineArgs::Argc==3)
+ // Restart file specified via command line 
+ if (CommandLineArgs::command_line_flag_has_been_set("--restart_file"))
   {
-   first=false;
-   max_adapt=1;
+   problem.restart();
   }
- // If no restart, refine mesh uniformly before we get started
- else
-  {
-   problem.refine_uniformly();
-   problem.refine_uniformly();
-  }
-
+ 
+ // Initial timestep: Use the one used when setting up the initial
+ // condition or the "suggested next dt" from the restarted run
+ double dt=problem.next_dt();
+ 
  // Write header for trace file
  problem.write_trace_file_header();
  
- // Timestepping loop
- while (problem.time_pt()->time()<t_max)
-  {
-   // Take timestep with temporal and spatial adaptivity
-   double dt_new=
-   problem.doubly_adaptive_unsteady_newton_solve(dt,problem.epsilon_t(),
-                                                 max_adapt,first);
-   cout << "Suggested new dt: " << dt_new << std::endl;
-   dt=dt_new;
-   
-   // Store for restart
-   problem.next_dt()=dt_new;
-
-   // Now we've done the first timestep -- don't re-set the IC
-   // in subsequent steps
-   first=false;
-   
-   // Reduce the number of spatial adaptations to one per 
-   // timestep -- too scared that the interpolation error will 
-   // wipe out any further gains...
-   max_adapt=1;
-   
-   //Output solution
-   problem.doc_solution();
-
-  }
+ DocInfo mesh_doc_info;
+ mesh_doc_info.set_directory("RESLT");
  
+ // Initial step number, following restart
+ unsigned step0=problem.doc_info().number();
+
+ // Timestepping loop
+ unsigned ncycle=1; // hierher 20; 
+ if (CommandLineArgs::command_line_flag_has_been_set("--validation_run"))
+  {
+   // Only do a single cycle for self test
+   ncycle=1;
+
+   // Fake but repeatable load balancing for self-test
+   problem.use_default_partition_in_load_balance()=true;
+  }
+ for (unsigned i_cycle=0;i_cycle<ncycle;i_cycle++)
+  {
+   unsigned max_step=10; 
+   for (unsigned i=step0;i<max_step;i++)
+    {
+     // Take timestep with temporal and spatial adaptivity
+     double dt_new=
+      problem.doubly_adaptive_unsteady_newton_solve(dt,problem.epsilon_t(),
+                                                    max_adapt,first);
+     cout << "Suggested new dt: " << dt_new << std::endl;
+     dt=dt_new;
+     
+     // Store for restart
+     problem.next_dt()=dt;
+     
+     // Now we've done the first timestep -- don't re-set the IC
+     // in subsequent steps
+     first=false;
+     
+     // Reduce the number of spatial adaptations to one per 
+     // timestep -- too scared that the interpolation error will 
+     // wipe out any further gains...
+     max_adapt=1;
+     
+     //Output solution
+     problem.doc_solution();
+     
+     // Load balance?
+     if (i==5) 
+      {
+       cout << "\n\n\n LOAD BALANCING \n\n\n";
+       
+       // Load balance
+       element_partition=problem.load_balance(); 
+       
+       // Write partition to disk
+       std::ofstream output_file;
+       char filename[100];
+       sprintf(filename,"RESLT/load_balanced_partitioning.dat");
+       output_file.open(filename);
+       for (unsigned e=0;e<n_element;e++)
+        {
+         output_file << element_partition[e] << std::endl;
+        }
+       output_file.close();
+       
+       // Output problem after load balance
+       unsigned backup_number=problem.doc_info().number();
+       problem.doc_info().set_directory("RESLT_after_load_balance");
+       problem.doc_solution();
+       problem.doc_info().number()=backup_number;
+       problem.doc_info().set_directory("RESLT");
+
+
+       cout << "\n\n\n DONE LOAD BALANCING \n\n\n";
+      }
+    }
+   // Done one cycle, now just continue
+   step0=0;
+  }
+
+#ifdef OOMPH_HAS_MPI
+ MPI_Helpers::finalize();
+#endif
 
 }; // end of main

@@ -120,16 +120,16 @@ namespace Multi_domain_functions
   bool Compute_extreme_bin_coordinates=true;
 
   /// \short Number of bins in the first dimension in binning method in
-  /// setup_multi_domain_interaction(). Default value of 10.
-  unsigned Nx_bin=10;
+  /// setup_multi_domain_interaction(). 
+  unsigned Nx_bin=1000;
 
   /// \short Number of bins in the second dimension in binning method in
-  /// setup_multi_domain_interaction(). Default value of 10.
-  unsigned Ny_bin=10;
+  /// setup_multi_domain_interaction(). 
+  unsigned Ny_bin=1000;
 
   /// \short Number of bins in the third dimension in binning method in
-  /// setup_multi_domain_interaction(). Default value of 10.
-  unsigned Nz_bin=10;
+  /// setup_multi_domain_interaction(). 
+  unsigned Nz_bin=1000;
 
   /// \short (Measure of) the number of sampling points within the elements 
   /// when populating the bin
@@ -1130,7 +1130,7 @@ namespace Multi_domain_functions
    if (time_stepper_pt!=0)
     {
      // Add number of history values to n_prev
-     n_prev+=time_stepper_pt->nprev_values();
+     n_prev=time_stepper_pt->ntstorage(); 
     }
 
    // Is the node on any boundaries?
@@ -1314,7 +1314,7 @@ namespace Multi_domain_functions
    if (time_stepper_pt!=0)
     {
      // Add number of history values to n_prev
-     n_prev+=time_stepper_pt->nprev_values();
+     n_prev=time_stepper_pt->ntstorage();
     }
 
    // Is the node on any boundaries?
@@ -1600,8 +1600,7 @@ namespace Multi_domain_functions
 
   // The next entry in Unsigned_values indicates
   // if a timestepper is required for this halo node
-  if (Unsigned_values
-      [Count_unsigned_values]==1)
+  if (Unsigned_values[Count_unsigned_values]==1)
    {
     Count_unsigned_values++;
     // Index
@@ -1609,7 +1608,7 @@ namespace Multi_domain_functions
      (Unsigned_values[Count_unsigned_values]);
     Count_unsigned_values++;
     // Check whether number of prev values is "sent" across
-    n_prev+=time_stepper_pt->nprev_values();
+    n_prev=time_stepper_pt->ntstorage(); 
    }
   else
    {

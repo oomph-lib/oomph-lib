@@ -305,8 +305,8 @@ namespace oomph
     if (n_mesh==0)
      {
       // Check refinement levels 
-      if (RefineableMeshBase* mmesh_pt = 
-          dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
+      if (TreeBasedRefineableMeshBase* mmesh_pt = 
+          dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(0)))
        {
         unsigned min_ref_level=0;
         unsigned max_ref_level=0;
@@ -324,8 +324,8 @@ namespace oomph
        {
         // Check refinement levels for each mesh individually
         // (one mesh is allowed to be "more uniformly refined" than another)
-        if (RefineableMeshBase* mmesh_pt = 
-            dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
+        if (TreeBasedRefineableMeshBase* mmesh_pt = 
+            dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(i_mesh)))
          {
           unsigned min_ref_level=0;
           unsigned max_ref_level=0;
@@ -1291,8 +1291,8 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
    if (nmesh==0)
     {
      // Cast to a refineable mesh and call synchronisation routine
-     if(RefineableMeshBase* mmesh_pt = 
-        dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
+     if(TreeBasedRefineableMeshBase* mmesh_pt = 
+        dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(0)))
       {
        unsigned ncont_interpolated_values=dynamic_cast<RefineableElement*>
            (mmesh_pt->element_pt(0))->ncont_interpolated_values();
@@ -1335,8 +1335,8 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
      for (unsigned imesh=0;imesh<nmesh;imesh++)
       {
        // Cast to a refineable mesh and call synchronisation routine
-       if(RefineableMeshBase* mmesh_pt = 
-          dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
+       if(TreeBasedRefineableMeshBase* mmesh_pt = 
+          dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(imesh)))
          {
           unsigned n_int_values=0;
           // Ensure the mesh has elements on this processor
@@ -4497,7 +4497,28 @@ void Problem::parallel_sparse_assemble
  //Total number of elements
  const unsigned long  n_elements = mesh_pt()->nelement();
    
- // Default range of elements for distributed problems
+#ifdef PARANOID
+ // No elements? This is usually a sign that the problem distribution has
+ // led to one processor not having any elements. Usually
+ // a sign of something having gone wrong but we'd
+ // rather not have to deal with the aftermath here...
+ if (n_elements==0)
+  {
+   std::ostringstream error_stream;
+   error_stream
+    << "Processsor "  << my_rank
+    << " has no elements. \n"
+    << "This is usually a sign that the problem distribution \n"
+    << "or the load balancing have gone wrong.";
+   throw OomphLibError(
+    error_stream.str(),
+    "Problem::parallel_sparse_assemble()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+
+ // Default range of elements for distributed problems. 
  unsigned long el_lo=0;
  unsigned long el_hi=n_elements-1;
 
@@ -4565,41 +4586,6 @@ void Problem::parallel_sparse_assemble
  //======================================================================
  Vector<unsigned> my_eqns;
  this->get_my_eqns(assembly_handler_pt,el_lo,el_hi,my_eqns);
-
- /*unsigned my_eqns_index=0;
-
- //Loop over the elements
- for(unsigned long e=el_lo;e<=el_hi;e++)
-  {
-   //Get the pointer to the element
-   GeneralisedElement* elem_pt = mesh_pt()->element_pt(e);
-   
-   //Ignore halo elements
-   if (!elem_pt->is_halo())
-    {
-     //Find number of degrees of freedom in the element
-     const unsigned nvar = assembly_handler_pt->ndof(elem_pt);
-     //Add the number of dofs to the current size of my_eqns
-     my_eqns.resize(my_eqns_index+nvar);
-
-      //Loop over the first index of local variables
-      for(unsigned i=0;i<nvar;i++)
-       {
-        //Get the local equation number
-        unsigned global_eqn_number 
-         = assembly_handler_pt->eqn_number(elem_pt,i);
-        //Add into the vector
-        my_eqns[my_eqns_index+i] = global_eqn_number;
-       }
-      //Update the number of elements in the vector
-      my_eqns_index += nvar;
-    }
-  }
-
- //  now sort and remove duplicate entries in the vector
- std::sort(my_eqns.begin(),my_eqns.end());
- Vector<unsigned>::iterator it = std::unique(my_eqns.begin(),my_eqns.end());
- my_eqns.resize(it-my_eqns.begin());*/
 
  // number of equations
  unsigned my_n_eqn = my_eqns.size();
@@ -7969,12 +7955,16 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
 {
  //First, we need to backup the existing dofs, in case the timestep is 
  //rejected 
- //Find total number of dofs
- unsigned long n_dofs = ndof();
+
+ //Find total number of dofs on current processor
+ unsigned n_dof_local = dof_distribution_pt()->nrow_local();
+
  //Now set up a Vector to hold current values
- Vector<double> dofs_current(n_dofs);
+ Vector<double> dofs_current(n_dof_local);
+
  //Load values into dofs_current
- for(unsigned i=0;i<n_dofs;i++) dofs_current[i] = *Dof_pt[i];
+ for(unsigned i=0;i<n_dof_local;i++) dofs_current[i] = dof(i);
+
  //Store the time
  double time_current = time_pt()->time();
 
@@ -8062,7 +8052,7 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
          //Reset the time
          time_pt()->time() = time_current;
          //Reload the dofs
-         for(unsigned i=0;i<n_dofs;i++) *Dof_pt[i] = dofs_current[i];
+         for(unsigned i=0;i<n_dof_local;i++) dof(i) = dofs_current[i];
 
 #ifdef OOMPH_HAS_MPI
          // Synchronise the solution on different processors (on each submesh)
@@ -8153,7 +8143,7 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
        //Reset the time
        time_pt()->time() = time_current;
        //Reload the dofs
-       for(unsigned i=0;i<n_dofs;i++) *Dof_pt[i] = dofs_current[i];
+       for(unsigned i=0;i<n_dof_local;i++) dof(i) = dofs_current[i];
 
 #ifdef OOMPH_HAS_MPI
        // Synchronise the solution on different processors (on each submesh)
@@ -8240,9 +8230,28 @@ double Problem::doubly_adaptive_unsteady_newton_solve(const double &dt_desired,
  unsigned n_unrefined=0;
  adapt(n_refined,n_unrefined); 
  
+ // Check if mesh has been adapted on other processors
+ Vector<int> total_ref_count(2);
+ total_ref_count[0]=n_refined;
+ total_ref_count[1]=n_unrefined;
+
+
+#ifdef OOMPH_HAS_MPI
+ if (Problem_has_been_distributed)
+  {
+   // Sum n_refine across all processors
+   Vector<int> ref_count(2);
+   ref_count[0]=n_refined;
+   ref_count[1]=n_unrefined;
+   MPI_Allreduce(&ref_count[0],&total_ref_count[0],2,MPI_INT,MPI_SUM,
+                 communicator_pt()->mpi_comm());
+  }
+#endif
+
+
  // Re-solve the problem if the adaptation has changed anything
- if ((n_refined  !=0)||
-     (n_unrefined!=0))
+ if ((total_ref_count[0]!=0)||
+     (total_ref_count[1]!=0))
   {
    oomph_info << "Mesh was adapted --> we'll re-solve for current timestep." 
               << std::endl;
@@ -8627,8 +8636,8 @@ void Problem::dump(std::ofstream& dump_file)
  if(n_mesh==0)
   {
    // Dump single mesh refinement pattern (if mesh is refineable)
-   if(RefineableMeshBase* mmesh_pt = 
-      dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
+   if(TreeBasedRefineableMeshBase* mmesh_pt = 
+      dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(0)))
     { 
      mmesh_pt->dump_refinement(dump_file);
     }
@@ -8642,8 +8651,8 @@ void Problem::dump(std::ofstream& dump_file)
    for (unsigned imesh=0;imesh<n_mesh;imesh++)
     {
      // Dump single mesh refinement pattern (if mesh is refineable)
-     if(RefineableMeshBase* mmesh_pt =
-        dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
+     if(TreeBasedRefineableMeshBase* mmesh_pt =
+        dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(imesh)))
       {
        mmesh_pt->dump_refinement(dump_file);
       }
@@ -8717,8 +8726,8 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
  if(n_mesh==0)
   {
    // Refine single mesh (if it's refineable)
-   if(RefineableMeshBase* mmesh_pt =
-      dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
+   if(TreeBasedRefineableMeshBase* mmesh_pt =
+      dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(0)))
     { 
      // When we get in here the problem has been constructed
      // by the constructor and the mesh is its original unrefined
@@ -8727,7 +8736,7 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
      // specified file and performs refinements until the mesh has
      // reached the same level of refinement as the mesh that existed
      // when the problem was dumped to disk.
-     mmesh_pt->refine(restart_file);
+     mmesh_pt->refine(this->communicator_pt(),restart_file);
     }
   }
  
@@ -8739,8 +8748,8 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
    for (unsigned imesh=0;imesh<n_mesh;imesh++)
     {
      // Refine single mesh (if its refineable)
-     if(RefineableMeshBase* mmesh_pt
-        =dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
+     if(TreeBasedRefineableMeshBase* mmesh_pt
+        =dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(imesh)))
       {
        // When we get in here the problem has been constructed
        // by the constructor and the mesh is its original unrefined
@@ -8749,7 +8758,7 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
        // the specified file and performs refinements until the mesh has
        // reached the same level of refinement as the mesh that existed
        // when the problem was dumped to disk.
-       mmesh_pt->refine(restart_file);
+       mmesh_pt->refine(this->communicator_pt(),restart_file);
       }
     } // End of loop over submeshes
 
@@ -9029,17 +9038,19 @@ void Problem::bifurcation_adapt_helper(
      if(N_mesh==0)
       {
        //Can we refine the mesh
-       if(RefineableMeshBase* mmesh_pt =
-          dynamic_cast<RefineableMeshBase*>(Copy_of_problem_pt[c]->mesh_pt(0)))
+       if(TreeBasedRefineableMeshBase* mmesh_pt =
+          dynamic_cast<TreeBasedRefineableMeshBase*>(
+           Copy_of_problem_pt[c]->mesh_pt(0)))
         {
          //Is the adapt flag set
          if(mmesh_pt->adapt_flag())
           {
            //Now get the original problem's mesh if it's refineable
-           if(RefineableMeshBase* original_mesh_pt
-              = dynamic_cast<RefineableMeshBase*>(this->mesh_pt(0)))
+           if(TreeBasedRefineableMeshBase* original_mesh_pt
+              = dynamic_cast<TreeBasedRefineableMeshBase*>(this->mesh_pt(0)))
            {
-            mmesh_pt->refine_base_mesh_as_in_reference_mesh(original_mesh_pt);
+            mmesh_pt->refine_base_mesh_as_in_reference_mesh(
+             this->communicator_pt(),original_mesh_pt);
            }
            else
             {
@@ -9067,19 +9078,20 @@ void Problem::bifurcation_adapt_helper(
        for(unsigned m=0;m<N_mesh;m++)
         {
          //Can we refine the submesh
-         if(RefineableMeshBase* mmesh_pt =
-            dynamic_cast<RefineableMeshBase*>(
+         if(TreeBasedRefineableMeshBase* mmesh_pt =
+            dynamic_cast<TreeBasedRefineableMeshBase*>(
              Copy_of_problem_pt[c]->mesh_pt(m)))
           {
            //Is the adapt flag set
            if(mmesh_pt->adapt_flag())
             {
              //Now get the original problem's mesh
-             if(RefineableMeshBase* original_mesh_pt
-                = dynamic_cast<RefineableMeshBase*>(this->mesh_pt(m)))
+             if(TreeBasedRefineableMeshBase* original_mesh_pt
+                = dynamic_cast<TreeBasedRefineableMeshBase*>(this->mesh_pt(m)))
               {
                mmesh_pt->
-                refine_base_mesh_as_in_reference_mesh(original_mesh_pt);
+                refine_base_mesh_as_in_reference_mesh(
+                 this->communicator_pt(),original_mesh_pt);
               }
              else
               {
@@ -9366,8 +9378,8 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
        mmesh_pt->adapt(this->communicator_pt(),elemental_error);
         
        // Add to counters
-       n_refined+=mmesh_pt->nrefined();
-       n_unrefined+=mmesh_pt->nunrefined();
+       n_refined+=mmesh_pt->nrefined(); 
+       n_unrefined+=mmesh_pt->nunrefined(); 
 
       }
      else
@@ -9447,8 +9459,8 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
          mmesh_pt->adapt(this->communicator_pt(),elemental_error); 
   
          // Add to counters
-         n_refined+=mmesh_pt->nrefined();
-         n_unrefined+=mmesh_pt->nunrefined();
+         n_refined+=mmesh_pt->nrefined(); 
+         n_unrefined+=mmesh_pt->nunrefined(); 
 
         }
        else
@@ -9899,8 +9911,8 @@ void Problem::refine_selected_elements(const Vector<unsigned>&
  if (Nmesh==0)
   {
    // Refine single mesh if possible
-   if(RefineableMeshBase* mmesh_pt = 
-      dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
+   if(TreeBasedRefineableMeshBase* mmesh_pt = 
+      dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(0)))
     {
      mmesh_pt->refine_selected_elements(elements_to_be_refined);
     }
@@ -9948,8 +9960,8 @@ void Problem::refine_selected_elements(const Vector<RefineableElement*>&
  if (Nmesh==0)
   {
    // Refine single mesh if possible
-   if(RefineableMeshBase* mmesh_pt = 
-      dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
+   if(TreeBasedRefineableMeshBase* mmesh_pt = 
+      dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(0)))
     {
      mmesh_pt->refine_selected_elements(elements_to_be_refined_pt);
     }
@@ -10006,8 +10018,8 @@ void Problem::refine_selected_elements(const unsigned& i_mesh,
    }
 
   // Refine single mesh if possible
-  if(RefineableMeshBase* mmesh_pt = 
-     dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
+  if(TreeBasedRefineableMeshBase* mmesh_pt = 
+     dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(i_mesh)))
    {
     mmesh_pt->refine_selected_elements(elements_to_be_refined);
    }
@@ -10057,8 +10069,8 @@ void Problem::refine_selected_elements(const unsigned& i_mesh,
   }
 
  // Refine single mesh if possible
- if(RefineableMeshBase* mmesh_pt = 
-    dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh))) 
+ if(TreeBasedRefineableMeshBase* mmesh_pt = 
+    dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(i_mesh))) 
   {
    mmesh_pt->refine_selected_elements(elements_to_be_refined_pt);
   }
@@ -10098,8 +10110,8 @@ void Problem::refine_selected_elements(const Vector<Vector<unsigned> >&
   // Refine all submeshes if possible
   for (unsigned i_mesh=0; i_mesh<n_mesh; i_mesh++)
    {
-    if(RefineableMeshBase* mmesh_pt = 
-       dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
+    if(TreeBasedRefineableMeshBase* mmesh_pt = 
+       dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(i_mesh)))
      {
       mmesh_pt->refine_selected_elements(elements_to_be_refined[i_mesh]);
      }
@@ -10138,8 +10150,8 @@ void Problem::refine_selected_elements(const
   // Refine all submeshes if possible
   for (unsigned i_mesh=0; i_mesh<n_mesh; i_mesh++)
    {
-    if(RefineableMeshBase* mmesh_pt = 
-       dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh)))
+    if(TreeBasedRefineableMeshBase* mmesh_pt = 
+       dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(i_mesh)))
      {
       mmesh_pt->refine_selected_elements(elements_to_be_refined_pt[i_mesh]);
      }
@@ -10830,7 +10842,7 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
        unsigned n_prev=1;
        if (haloed_nod_pt->time_stepper_pt()!=0)
         {
-         n_prev+=haloed_nod_pt->time_stepper_pt()->nprev_values();
+         n_prev=haloed_nod_pt->time_stepper_pt()->ntstorage(); 
         }
 
        unsigned nval=haloed_nod_pt->nvalue();
@@ -10908,7 +10920,7 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
          unsigned n_prev=1;
          if (int_data_pt->time_stepper_pt()!=0)
           {
-           n_prev+=int_data_pt->time_stepper_pt()->nprev_values();
+           n_prev=int_data_pt->time_stepper_pt()->ntstorage(); 
           }
 
          unsigned nval=int_data_pt->nvalue();
@@ -10978,7 +10990,7 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
              unsigned n_prev=1;
              if (halo_nod_pt->time_stepper_pt()!=0)
               {
-               n_prev+=halo_nod_pt->time_stepper_pt()->nprev_values();
+               n_prev=halo_nod_pt->time_stepper_pt()->ntstorage();
               }
 
              unsigned nval=halo_nod_pt->nvalue();
@@ -11055,7 +11067,7 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
                unsigned n_prev=1;
                if (int_data_pt->time_stepper_pt()!=0)
                 {
-                 n_prev+=int_data_pt->time_stepper_pt()->nprev_values();
+                 n_prev=int_data_pt->time_stepper_pt()->ntstorage();
                 }
 
                unsigned nval=int_data_pt->nvalue();
@@ -11116,7 +11128,7 @@ void Problem::synchronise_external_dofs(Mesh* &mesh_pt)
        unsigned n_prev=1;
        if (ext_haloed_nod_pt->time_stepper_pt()!=0)
         {
-         n_prev+=ext_haloed_nod_pt->time_stepper_pt()->nprev_values();
+         n_prev=ext_haloed_nod_pt->time_stepper_pt()->ntstorage();
         }
 
        // Synchronise nodal values
@@ -11193,7 +11205,7 @@ void Problem::synchronise_external_dofs(Mesh* &mesh_pt)
          unsigned n_prev=1;
          if (int_data_pt->time_stepper_pt()!=0)
           {
-           n_prev+=int_data_pt->time_stepper_pt()->nprev_values();
+           n_prev=int_data_pt->time_stepper_pt()->ntstorage(); 
           }
 
          unsigned nval=int_data_pt->nvalue();
@@ -11258,7 +11270,7 @@ void Problem::synchronise_external_dofs(Mesh* &mesh_pt)
              unsigned n_prev=1;
              if (ext_halo_nod_pt->time_stepper_pt()!=0)
               {
-               n_prev+=ext_halo_nod_pt->time_stepper_pt()->nprev_values();
+               n_prev=ext_halo_nod_pt->time_stepper_pt()->ntstorage();
               }
 
              // Synchronise values
@@ -11337,7 +11349,7 @@ void Problem::synchronise_external_dofs(Mesh* &mesh_pt)
                unsigned n_prev=1;
                if (int_data_pt->time_stepper_pt()!=0)
                 {
-                 n_prev+=int_data_pt->time_stepper_pt()->nprev_values();
+                 n_prev=int_data_pt->time_stepper_pt()->ntstorage(); 
                 }
 
                unsigned nval=int_data_pt->nvalue();
@@ -11975,16 +11987,30 @@ void Problem::copy_external_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
 
 }
 
+
+
 //==========================================================================
-/// Balance the load of a (possibly non-uniform) distributed mesh
+/// Balance the load of a (possibly non-uniform) mesh that has
+/// already been distributed, by redistributing elements over the processors. 
+/// Produce explicit stats of load balancing
+/// process if boolean is set to true and doc various bits of data
+/// (mainly for debugging in directory specified by DocInfo object.
+/// Returns the new partitioning 
+/// of the elements in the mesh produced by Problem::build_mesh(). 
+/// This can be used in restarts, say.
 //==========================================================================
-void Problem::load_balance(DocInfo& doc_info,const bool& report_stats)
+Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
+                                       const bool& report_stats)
 {
  // Number of processes
  unsigned n_proc=this->communicator_pt()->nproc();
 
+ // Partitioning for elements in "root mesh" -- default:
+ // everybody's on the root processor.
+ Vector<unsigned> actual_element_partition(mesh_pt()->nelement(),0);
+
  // Don't do anything if this is a single-process job
- if (n_proc==1) // single-process job - don't do anything
+ if (n_proc==1) 
   {
    if (report_stats)
     {
@@ -11996,7 +12022,8 @@ void Problem::load_balance(DocInfo& doc_info,const bool& report_stats)
                      OOMPH_EXCEPTION_LOCATION);
     }
   }
- else
+ // Multiple processors
+ else 
   {
    // This will only work if the problem has already been distributed
    if (!Problem_has_been_distributed)
@@ -12004,23 +12031,23 @@ void Problem::load_balance(DocInfo& doc_info,const bool& report_stats)
      // Throw an error
      std::ostringstream error_stream;
      error_stream << "You have called Problem::load_balance()\n"
-                  << "on a non-distributed problem.\n"  
-                  << "This is not currently supported."
+                  << "on a non-distributed problem. This doesn't\n"  
+                  << "make sense -- go distribute your problem first."
                   << std::endl;
      throw OomphLibError(error_stream.str(),
                          "Problem::load_balance()",
                          OOMPH_EXCEPTION_LOCATION);
     }
-
+   
    // Timing
    double t_start=0.0; double t_metis=0.0; double t_partition=0.0; 
    double t_distribute=0.0; double t_refine=0.0; double t_copy_solution=0.0;
-
+   
    if (report_stats)
     {
      t_start=TimingHelpers::timer();
     }
-
+   
    // Store the old mesh(es)
    Vector<Mesh*> old_mesh_pt;
    unsigned n_mesh=nsub_mesh();
@@ -12035,50 +12062,29 @@ void Problem::load_balance(DocInfo& doc_info,const bool& report_stats)
        old_mesh_pt.push_back(mesh_pt(i_mesh));
       }
     }
-
+   
    // Partition the global mesh in its current state
    Vector<unsigned> element_domain_on_this_proc;
 
-   if (Use_default_partition_in_load_balance)
+   // Metis does not always produce repeatable results which is
+   // a disaster for validation runs -- this bypasses metis and
+   // comes up with a stupid but repeatable partioning.
+   if (Use_default_partition_in_load_balance)   
     {
-     // Check we are in validation mode: must only have two processors
-     if (n_proc!=2)
-      {
-       // Throw an error
-       std::ostringstream error_stream;
-       error_stream << "You have set Use_default_partition_in_load_balance\n"
-                    << "to true, but are not running using two processors.\n"  
-                    << "This is not currently supported."
-                    << std::endl;
-       throw OomphLibError(error_stream.str(),
-                           "Problem::load_balance()",
-                           OOMPH_EXCEPTION_LOCATION);
-      }
-
-     // Each individual mesh should be partitioned
      if (n_mesh==0)
       {
        unsigned n_element=mesh_pt()->nelement();
        element_domain_on_this_proc.resize(n_element);
        for (unsigned e=0;e<n_element;e++)
         {
-         // Simple partition: give the first half of the elements to
-         // processor 0 and the rest to processor 1
-         if (e<(n_element/2))
-          {
-           element_domain_on_this_proc[e]=0;
-          }
-         else
-          {
-           element_domain_on_this_proc[e]=1;
-          }
-         // This will result in a somewhat bizarre partition as the mesh
-         // is currently distributed...
+         // Simple repeatable partition: Equidistribute elements on each
+         // processor
+         element_domain_on_this_proc[e]=unsigned(double(e)/double(n_element)*
+                                                 double(n_proc));
         }
       }
      else
       {
-       // Partition is the size of the total number of elements (on this proc)
        unsigned n_el_total=mesh_pt()->nelement();
        element_domain_on_this_proc.resize(n_el_total);
        unsigned total_els_so_far=0;
@@ -12087,55 +12093,75 @@ void Problem::load_balance(DocInfo& doc_info,const bool& report_stats)
          unsigned n_element=mesh_pt(i_mesh)->nelement();
          for (unsigned e=0;e<n_element;e++)
           {
-           // Simple partition: give the first half of the elements to
-           // processor 0 and the rest to processor 1
-           if (e<(n_element/2))
-            {
-             element_domain_on_this_proc[e+total_els_so_far]=0;
-            }
-           else
-            {
-             element_domain_on_this_proc[e+total_els_so_far]=1;
-            }
+           // Simple repeatable partition: Equidistribute elements on each
+           // processor
+           element_domain_on_this_proc[e+total_els_so_far]=
+            unsigned(double(e+total_els_so_far)/double(n_el_total)*
+                     double(n_proc));
           }
-         // Add the number of elements in this mesh to the total
          total_els_so_far+=n_element;
         }
       }
-
+     
     }
    else
     {
      // Use METIS to perform the partitioning
-     unsigned objective=0; //1;
+     unsigned objective=0; 
      METIS::partition_distributed_mesh(this,objective,
                                        element_domain_on_this_proc);
     }
-
-   // Any actions before load balancing
-   actions_before_load_balance();
-
-   // Work out the partitioning and refinement pattern for root elements
-   // and the double and unsigned values required to copy the solution across
-   // into the new mesh
-   Vector<Vector<Vector<unsigned> > > to_be_refined_on_each_root;
-   Vector<Vector<double> > double_values_on_each_root;
-   Vector<Vector<unsigned> > unsigned_values_on_each_root;
-   Vector<unsigned> element_partition;
-   unsigned max_level_overall=0;
 
    if (report_stats)
     {
      t_metis=TimingHelpers::timer();
     }
+   
+   // Load balancing is equivalent to distribution so call the
+   // appropriate "actions before"
+   actions_before_distribute();
+
+   // Over strategy: Each processor loops over all its non-halo
+   // (leaf) elements and associates each with its root. While
+   // doing this we accumulate all the double and unsigned data
+   // (in the order encountered) that must be sent when the entire
+   // tree rooted at a given root is to be sent to another processor.
+   // This is quite wasteful in terms of storage (nodes tend to
+   // encountered/stored repeatedly but this was all that Andy had time
+   // for before the end of his project -- I'm annotating the
+   // logic to facilitate a much leaner re-implementation. 
+   // (the basic idea is correct!)
+
+   // Storage for refinement pattern: 
+   // hierher? to_be_refined_on_each_root[root_id][refinement_level]
+   Vector<Vector<Vector<unsigned> > > to_be_refined_on_each_root;
+
+   // Storage for doubles encountered when looping (in order)
+   // through all the elements associated with given root
+   Vector<Vector<double> > double_values_on_each_root;
+
+   // Storage for unsigneds encountered when looping (in order)
+   // through all the elements associated with given root
+   Vector<Vector<unsigned> > unsigned_values_on_each_root;
+
+   // Ultimate target partition for each element in (global) mesh
+   // when it's been rebuilt by build_mesh()
+   Vector<unsigned> element_partition;
+
+   // Maximum overall refinement level
+   unsigned max_level_overall=0;
 
    // Call helper function to calculate partitioning and refinement;
-   // also store double and unsigned values required to copy solution
+   // also accumulate double and unsigned values required to copy solution
    // from old mesh(es) to new mesh(es)
    work_out_partition_and_refinement_for_root_elements_helper
-    (element_domain_on_this_proc, to_be_refined_on_each_root,
-     double_values_on_each_root, unsigned_values_on_each_root,
-     element_partition, max_level_overall, report_stats);
+    (element_domain_on_this_proc, 
+     to_be_refined_on_each_root,
+     double_values_on_each_root, 
+     unsigned_values_on_each_root,
+     element_partition, 
+     max_level_overall, 
+     report_stats);
 
    if (report_stats) 
     {
@@ -12158,20 +12184,22 @@ void Problem::load_balance(DocInfo& doc_info,const bool& report_stats)
      mesh_pt()=0;
      flush_sub_meshes();
     }
-
-   // Build the new mesh(es)
+   
+   // (Re-)build the new mesh(es) -- this must get the problem into the
+   // state it was in when it was first distributed!
    build_mesh();
-
-   // Distribute the mesh(es) based on the "root element partition"
-
-   // Firstly we must call actions_before_distribute()
+   
+   // Perform any actions before distribution but now for the new mesh!
    actions_before_distribute();
-
+   
+   // Distribute the mesh(es) based on the distribution of their 
+   // "root element" determined earlier
+   
    // Prepare vector of vectors for submesh element partitions
    Vector<Vector<unsigned> > submesh_element_partition(n_mesh);
-  
-   n_mesh=nsub_mesh();
+   
    // The submeshes, if they exist, need to know their own element domains
+   n_mesh=nsub_mesh();
    if (n_mesh!=0)
     {
      unsigned count=0;
@@ -12186,15 +12214,33 @@ void Problem::load_balance(DocInfo& doc_info,const bool& report_stats)
         }
       }
     }
-
+   
    // Setup the map between "root" element and number in global mesh again
    unsigned n_element=mesh_pt()->nelement();
    for (unsigned e=0;e<n_element;e++)
     {
-     FiniteElement* el_pt=mesh_pt()->finite_element_pt(e);
+     GeneralisedElement* el_pt=mesh_pt()->element_pt(e);
      Base_mesh_element_number[el_pt]=e;
     }
-
+   
+   // Storage for the number of face elements in the base mesh -- 
+   // element is identified by number of bulk element and face index
+   // so we can reconstruct it if and when the FaceElements have been wiped
+   // in actions_before_distribute()
+   std::map<unsigned, std::map<int,unsigned> > face_element_number;
+   for (unsigned e=0;e<n_element;e++)
+    {
+     FaceElement* face_el_pt=
+      dynamic_cast<FaceElement*>(mesh_pt()->finite_element_pt(e));
+     if (face_el_pt!=0)
+      {       
+       FiniteElement* bulk_elem_pt=face_el_pt->bulk_element_pt();
+       unsigned e_bulk=Base_mesh_element_number[bulk_elem_pt];
+       int face_index=face_el_pt->face_index();       
+       face_element_number[e_bulk][face_index]=e;
+      }
+    }
+   
    // Distribute the (sub)meshes (i.e. sort out their halo lookup schemes)
    if (n_mesh==0)
     {
@@ -12219,7 +12265,78 @@ void Problem::load_balance(DocInfo& doc_info,const bool& report_stats)
      // Rebuild the global mesh
      rebuild_global_mesh();
     }
+   
 
+   // Now document actual distribution of elements in the order in which
+   // they appear in the non-distributed base mesh: Reconstruct
+   // from the non-halo elements that are still alive on each processor.
+   // This slightly convoluted procedure is required because
+   // element_partition above still includes FaceElements at a refined
+   // level.
+   Vector<int> local_actual_element_partition(n_element,0);
+   Vector<int> int_actual_element_partition(n_element,-1);
+   
+   // Loop over non-halo elements
+   unsigned my_rank=this->communicator_pt()->my_rank();
+   unsigned nel=mesh_pt()->nelement();
+   for (unsigned e=0;e<nel;e++)
+    {
+     // hierher check FE/GeneralisedElement everywhere!
+     GeneralisedElement* el_pt=mesh_pt()->element_pt(e);
+     if (!(el_pt->is_halo()))
+      {
+       FaceElement* face_el_pt=dynamic_cast<FaceElement*>(el_pt);
+       if (face_el_pt!=0)
+        {
+         // [If face element is non-halo associated bulk is also nonhalo]
+         FiniteElement* bulk_elem_pt=face_el_pt->bulk_element_pt();
+         unsigned e_bulk=Base_mesh_element_number[bulk_elem_pt];
+         int face_index=face_el_pt->face_index();       
+         local_actual_element_partition[
+          face_element_number[e_bulk][face_index]]=my_rank;
+        }
+       else
+        {
+         local_actual_element_partition[
+          Base_mesh_element_number[el_pt]]=my_rank;
+        }
+      }
+    }
+
+   // Now collate by summing entries (remember they were initialised
+   // to zero -- clever!). This stores the actual element partition
+   // for each entry in a vector. If there are any "-1"s left in
+   // in the result, we've made a mistake...
+   MPI_Allreduce(&local_actual_element_partition[0],
+                 &int_actual_element_partition[0],n_element,
+                 MPI_INT,MPI_SUM,
+                 this->communicator_pt()->mpi_comm());
+   
+   
+   // Copy acoss into unsigned storage
+   for (unsigned e=0;e<n_element;e++)
+    {
+#ifdef PARANOID
+     if (int_actual_element_partition[e]==-1)
+      {       
+       std::ostringstream error_stream;
+       error_stream 
+        << "Trouble: Negative partition number, most likely to be caused\n"
+        << "         by problems with flushed/re-attached FaceElement\n"
+        << "         meshes...\n";
+       throw OomphLibError(
+        error_stream.str(),
+        "Problem::load_balance()",
+        OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+     actual_element_partition[e]=int_actual_element_partition[e];
+    }
+   
+   // Clean up 
+   local_actual_element_partition.clear();
+   int_actual_element_partition.clear();
+   
    // Reset refinement level of all RefineableElements back to zero
    if (n_mesh==0)
     {
@@ -12228,7 +12345,7 @@ void Problem::load_balance(DocInfo& doc_info,const bool& report_stats)
       {
        RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>
         (mesh_pt()->element_pt(e));
-
+       
        if (ref_el_pt!=0)
         {
          ref_el_pt->set_refinement_level(0);
@@ -12252,9 +12369,6 @@ void Problem::load_balance(DocInfo& doc_info,const bool& report_stats)
         }
       }
     }
-
-   // There is no need to call actions_after_distribute() as
-   // this should be covered by the user in actions_after_load_balance()
 
    if (report_stats) 
     {
@@ -12286,17 +12400,28 @@ void Problem::load_balance(DocInfo& doc_info,const bool& report_stats)
                 << t_copy_solution-t_start << std::endl;
     }
 
-   // Perform any actions after the load balance procedure
-   actions_after_load_balance();
+
+   // Do actions after distribution
+   actions_after_distribute();
 
    // Re-assign equation numbers
    assign_eqn_numbers();
   }
+
+ oomph_info << "Number of elements on this processor: "
+            << mesh_pt()->nelement() << std::endl;
+
+ // Return the element partitioning for mesh produced by build_mesh().
+ // (useful for restarts etc.)
+ return actual_element_partition;
+
 }
 
 //==========================================================================
 /// \short Load balance helper routine: work out the partition and refinement
-/// pattern for a root element based upon the partition assigned to its leaves
+/// pattern for all root elements based upon the partition assigned 
+/// to its leaves and collect all doubles and unsignes that need to 
+/// communicates if tree moves to a different processor
 //==========================================================================
 void Problem::work_out_partition_and_refinement_for_root_elements_helper
 (Vector<unsigned>& element_domain_on_this_proc,
@@ -12306,160 +12431,180 @@ void Problem::work_out_partition_and_refinement_for_root_elements_helper
  Vector<unsigned>& element_partition, unsigned& max_level_overall,
  const bool& report_stats)
 {
+
+ oomph_info << "\n\n===================================================\n\n"
+            << "Warning: load balancing routines currently accumulate\n"
+            << "          all data on root processor and then send it\n"
+            << "          out again -- scope for enormous improvements!\n\n"
+            << "          The heuristics for distributing roots via polling\n"
+            << "          its leaf nodes is also unlikely to be optimal.\n"
+            << "          We should probably use METIS to distribute the\n"
+            << "          roots directly, taking all their interactions into\n"
+            << "          account.\n"
+            << "\n\n===================================================\n\n";
+
  // Communicator, number of processors and number of elements
  OomphCommunicator* comm_pt=this->communicator_pt();
  unsigned n_proc=comm_pt->nproc();
  unsigned n_elem=mesh_pt()->nelement();
 
- // Associate every root element with the majority partition over all leaves
- std::set<FiniteElement*> roots_on_this_proc;
- std::map<FiniteElement*,Vector<unsigned> > leaf_partition_for_root;
+ // Store a vector for each root that stores the desired partition
+ // for each leaf // hierher don't store vector of desired partitions
+ // but vector where each entry stores the votes cast for given processor
+ std::map<GeneralisedElement*,Vector<unsigned> > leaf_partition_for_root;
 
- // Create maps for double (history) values and unsigned values
- // on each leaf which need to be "sent" to the new mesh
- std::map<FiniteElement*,Vector<double> > double_values_on_leaves_of_root;
- std::map<FiniteElement*,Vector<unsigned> > unsigned_values_on_leaves_of_root;
+ // Create maps for double values and unsigned values
+ // on each leaf which need to be "sent" to the new mesh -- all labeled
+ // by root element
+ std::map<GeneralisedElement*,Vector<double> > double_values_on_leaves_of_root;
+ std::map<GeneralisedElement*,Vector<unsigned> > 
+  unsigned_values_on_leaves_of_root;
 
- // Loop over elements on current processor
+ // Loop over non-halo elements on current processor
  unsigned count_non_halo_el=0;
  for (unsigned e=0;e<n_elem;e++)
   {
-   FiniteElement* el_pt=mesh_pt()->finite_element_pt(e);
-   // Only non-halo elements
+   GeneralisedElement* el_pt=mesh_pt()->element_pt(e);
    if (!el_pt->is_halo())
     {
      // Get values on this leaf
      Vector<unsigned> unsigned_values_on_this_leaf;
-     unsigned count_unsigned_values_on_this_leaf=0;
+     unsigned count_unsigned_values_on_this_leaf=0; //hierher reserve/kill
      Vector<double> double_values_on_this_leaf;
-     unsigned count_double_values_on_this_leaf=0;
+     unsigned count_double_values_on_this_leaf=0;  //hierher reserve/kill
 
-     unsigned n_node=el_pt->nnode();
-     for (unsigned j=0;j<n_node;j++)
+     // Start with nodes (only FE)     
+     FiniteElement* fe_pt=dynamic_cast<FiniteElement*>(el_pt);
+     if (fe_pt!=0)
       {
-       Node* nod_pt=el_pt->node_pt(j);
-
-       // Number of history values
-       unsigned n_prev=1;
-       if (nod_pt->time_stepper_pt()!=0)
+       unsigned n_node=fe_pt->nnode();
+       for (unsigned j=0;j<n_node;j++)
         {
-         n_prev+=nod_pt->time_stepper_pt()->nprev_values();
-        }
-       unsigned_values_on_this_leaf.push_back(n_prev);
-       count_unsigned_values_on_this_leaf++;
-
-       // History values
-       unsigned n_val=nod_pt->nvalue();
-       for (unsigned i_val=0;i_val<n_val;i_val++)
-        {
-         for (unsigned t=0;t<n_prev;t++)
+         // hierher check done
+         Node* nod_pt=fe_pt->node_pt(j);
+         
+         // Number of history values
+         unsigned n_prev=1;
+         if (nod_pt->time_stepper_pt()!=0)
           {
-           double_values_on_this_leaf.push_back(nod_pt->value(t,i_val));
-           count_double_values_on_this_leaf++;
+           n_prev=nod_pt->time_stepper_pt()->ntstorage();
           }
-        }
-
-       // History positions
-       unsigned n_dim=nod_pt->ndim();
-       for (unsigned i_dim=0;i_dim<n_dim;i_dim++)
-        {
-         for (unsigned t=0;t<n_prev;t++)
-          {
-           double_values_on_this_leaf.push_back(nod_pt->x(t,i_dim));
-           count_double_values_on_this_leaf++;
-          }
-        }
-
-       // Solid history values
-       SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
-       if (solid_nod_pt!=0)
-        {
-         unsigned n_val=solid_nod_pt->variable_position_pt()->nvalue();
+         unsigned_values_on_this_leaf.push_back(n_prev);
+         count_unsigned_values_on_this_leaf++;
+         
+         // History values
+         unsigned n_val=nod_pt->nvalue();
          for (unsigned i_val=0;i_val<n_val;i_val++)
           {
            for (unsigned t=0;t<n_prev;t++)
             {
-             double_values_on_this_leaf.
-              push_back(solid_nod_pt->variable_position_pt()->value(t,i_val));
+             double_values_on_this_leaf.push_back(nod_pt->value(t,i_val));
              count_double_values_on_this_leaf++;
+            }
+          }
+         
+         // History positions
+         unsigned n_dim=nod_pt->ndim();
+         for (unsigned i_dim=0;i_dim<n_dim;i_dim++)
+          {
+           for (unsigned t=0;t<n_prev;t++)
+            {
+             double_values_on_this_leaf.push_back(nod_pt->x(t,i_dim));
+             count_double_values_on_this_leaf++;
+            }
+          }
+         
+         // Solid history values
+         SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
+         if (solid_nod_pt!=0)
+          {
+           unsigned n_val=solid_nod_pt->variable_position_pt()->nvalue();
+           for (unsigned i_val=0;i_val<n_val;i_val++)
+            {
+             for (unsigned t=0;t<n_prev;t++)
+              {
+               double_values_on_this_leaf.
+                push_back(solid_nod_pt->variable_position_pt()->value(t,i_val));
+               count_double_values_on_this_leaf++;
+              }
             }
           }
         }
       }
 
-     // Internal data values
+     // Internal data values (on all elements)
      unsigned n_int_data=el_pt->ninternal_data();
      for (unsigned i=0;i<n_int_data;i++)
       {
+       // hierher check done
        Data* int_data_pt=el_pt->internal_data_pt(i);
-
+       
        unsigned n_prev=1;
        if (int_data_pt->time_stepper_pt()!=0)
         {
-         n_prev+=int_data_pt->time_stepper_pt()->nprev_values();
+         n_prev=int_data_pt->time_stepper_pt()->ntstorage();
         }
        unsigned_values_on_this_leaf.push_back(n_prev);
-       count_unsigned_values_on_this_leaf++;
-
+       count_unsigned_values_on_this_leaf++; // hierher reserve/kill
+       
        unsigned n_val=int_data_pt->nvalue();
        for (unsigned i_val=0;i_val<n_val;i_val++)
         {
          for (unsigned t=0;t<n_prev;t++)
           {
            double_values_on_this_leaf.push_back(int_data_pt->value(t,i_val));
-           count_double_values_on_this_leaf++;
+           count_double_values_on_this_leaf++; // hierher reserve/kill
           }
         }
       }
 
-     // Get domain of leaf
+
+     // Now associated data with root element
+     //--------------------------------------
+
+     // Get target domain for this leaf element
      unsigned el_domain=element_domain_on_this_proc[count_non_halo_el];
      count_non_halo_el++;
-
-     // Add domain to the list for the root element of the current element
-
-     // If the element is Refineable, get the root
+     
+     // Get the root element (element itself if it's not refineable
+     GeneralisedElement* root_el_pt=el_pt;
      RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(el_pt);
      if (ref_el_pt!=0)
       {
-       leaf_partition_for_root[ref_el_pt->root_element_pt()].
-        push_back(el_domain);
-       roots_on_this_proc.insert(ref_el_pt->root_element_pt());
-       // Add unsigned and double values to the map
-       for (unsigned i=0;i<count_unsigned_values_on_this_leaf;i++)
-        {
-         unsigned_values_on_leaves_of_root[ref_el_pt->root_element_pt()]
-          .push_back(unsigned_values_on_this_leaf[i]);
-        }
-       for (unsigned i=0;i<count_double_values_on_this_leaf;i++)
-        {
-         double_values_on_leaves_of_root[ref_el_pt->root_element_pt()]
-          .push_back(double_values_on_this_leaf[i]);
-        }
+       root_el_pt=ref_el_pt->root_element_pt();
       }
-     // Otherwise just add the element itself
-     else
+
+     // Now store all the relevant data for this root
+
+     // Current element wants to live on el_domain 
+     // (hierher change to count directly)
+     leaf_partition_for_root[root_el_pt].push_back(el_domain);
+
+     // Add unsigned and double values to the map
+     for (unsigned i=0;i<count_unsigned_values_on_this_leaf;i++)
       {
-       leaf_partition_for_root[el_pt].push_back(el_domain);
-       roots_on_this_proc.insert(el_pt);
-       // Add unsigned and double values to the map
-       for (unsigned i=0;i<count_unsigned_values_on_this_leaf;i++)
-        {
-         unsigned_values_on_leaves_of_root[el_pt]
-          .push_back(unsigned_values_on_this_leaf[i]);
-        }
-       for (unsigned i=0;i<count_double_values_on_this_leaf;i++)
-        {
-         double_values_on_leaves_of_root[el_pt]
-          .push_back(double_values_on_this_leaf[i]);
-        }
+       unsigned_values_on_leaves_of_root[root_el_pt]
+        .push_back(unsigned_values_on_this_leaf[i]);
+      }
+     for (unsigned i=0;i<count_double_values_on_this_leaf;i++)
+      {
+       double_values_on_leaves_of_root[root_el_pt]
+        .push_back(double_values_on_this_leaf[i]);
       }
     }
   }
 
+
+//-----------------hierher-------------------- 
+
+ // Done loop over all leaves while accumulating data associated 
+ // with each root. Now determine the target destination for each
+ // root
+ 
+ // How many roots do we have?
  unsigned n_roots_on_this_proc=leaf_partition_for_root.size();
 
- // Storage for base mesh number for root and new domain for the root
+ // hierher Storage for base mesh number for root and new domain for the root
  Vector<unsigned> base_mesh_element_number_on_this_proc;
  Vector<unsigned> new_domain_for_root_on_this_proc;
  Vector<unsigned> number_of_double_values_on_this_proc;
@@ -12467,31 +12612,34 @@ void Problem::work_out_partition_and_refinement_for_root_elements_helper
 
  // Storage for refinement information in this current "old" mesh
  Vector<unsigned> refinement_info;
- unsigned count_refinement_info=0;
+ unsigned count_refinement_info=0; // hierher 
 
  // Storage for values in the "old" mesh
  Vector<double> double_values_on_this_proc;
- unsigned count_double_values_on_this_proc=0;
+ unsigned count_double_values_on_this_proc=0; // hierher
  Vector<unsigned> unsigned_values_on_this_proc;
- unsigned count_unsigned_values_on_this_proc=0;
+ unsigned count_unsigned_values_on_this_proc=0; // hierher
 
  // Max refinement level on this process
  unsigned max_level_on_this_proc=0;
 
  // Loop over roots
- for (std::set<FiniteElement*>::iterator it=roots_on_this_proc.begin();
-      it!=roots_on_this_proc.end(); it++)
+ for (std::map<GeneralisedElement*,Vector<unsigned> >::iterator it=
+       leaf_partition_for_root.begin();it!=leaf_partition_for_root.end();it++) 
   {
+
+   // Poll to find partition desired by most leaf elements associated
+   // with root
+
    // Get the root element
-   FiniteElement* el_pt=*it;
-
+   GeneralisedElement* el_pt=(*it).first;
+   
    // Get the list of partitions associated with leaves
-   Vector<unsigned> leaf_partition_on_this_root=
-    leaf_partition_for_root[el_pt];
-
+   Vector<unsigned> leaf_partition_on_this_root=leaf_partition_for_root[el_pt];
    unsigned n_leaves=leaf_partition_on_this_root.size();
+
+   // Count how many leaves want to end up on a given partition
    Vector<unsigned> count_domain(n_proc,0);
-   // Find out which domain has the majority amongst these leaves
    for (unsigned i=0;i<n_leaves;i++)
     {
      count_domain[leaf_partition_on_this_root[i]]++;
@@ -12569,15 +12717,13 @@ void Problem::work_out_partition_and_refinement_for_root_elements_helper
                MPI_INT,MPI_MAX,comm_pt->mpi_comm());
 
  // Loop over roots
- for (std::set<FiniteElement*>::iterator it=roots_on_this_proc.begin();
-      it!=roots_on_this_proc.end(); it++)
+ for (std::map<GeneralisedElement*,Vector<unsigned> >::iterator it=
+       leaf_partition_for_root.begin();it!=leaf_partition_for_root.end();it++)  
   {
    // Get the root element
-   RefineableElement* el_pt=dynamic_cast<RefineableElement*>(*it);
-
+   RefineableElement* el_pt=dynamic_cast<RefineableElement*>((*it).first);
    if (el_pt!=0)
-    {
-
+    {     
      // Get all the nodes associated with this root element
      Vector<Tree*> all_tree_nodes_pt;
      el_pt->tree_pt()->stick_all_tree_nodes_into_vector(all_tree_nodes_pt);
@@ -12759,6 +12905,56 @@ void Problem::work_out_partition_and_refinement_for_root_elements_helper
                 &unsigned_values[0],&n_unsigned_values_on_each_proc[0],
                 &unsigned_values_index[0],MPI_INT,comm_pt->mpi_comm());
 
+
+
+
+ // Now check that every processor has at least one root
+ // If not, help yourself to a root from the most heavily loaded one
+ bool every_body_has_one=false;
+ while (!every_body_has_one)
+  {
+   // Loop over roots
+   Vector<unsigned> count_roots_on_proc(n_proc);
+   Vector<unsigned> last_root_on_proc(n_proc);
+   for (unsigned root=0;root<n_roots;root++)
+    {
+     count_roots_on_proc[new_domain_for_root[root]]++;
+     last_root_on_proc[new_domain_for_root[root]]=root;
+    }
+   unsigned empty_proc=0;
+   unsigned fullest_proc=0;
+   unsigned nroots_on_fullest_proc=0;
+   every_body_has_one=true;
+   for (unsigned p=0;p<n_proc;p++)
+    {
+     if (count_roots_on_proc[p]==0)
+      {
+       every_body_has_one=false;      
+       empty_proc=p;
+       oomph_info << "Processor " << p << " is empty.\n ";
+      }
+     if (count_roots_on_proc[p]>nroots_on_fullest_proc)
+      {
+       fullest_proc=p;
+       nroots_on_fullest_proc=count_roots_on_proc[p];
+      }
+    }
+   // Adjust
+   if (!every_body_has_one)
+    {
+     oomph_info << "Processor " << fullest_proc 
+                << " is fullest with  " << nroots_on_fullest_proc 
+                << " roots \n";
+     oomph_info << "Old new domain:  " 
+                << new_domain_for_root[last_root_on_proc[fullest_proc]] 
+                << std::endl;     
+     new_domain_for_root[last_root_on_proc[fullest_proc]]=empty_proc;
+     oomph_info << "New new domain:  " 
+                << new_domain_for_root[last_root_on_proc[fullest_proc]] 
+                << std::endl;     
+    }
+  }
+
  // Sort this into base number order everywhere ready to distribute
  element_partition.resize(n_roots);
 
@@ -12929,11 +13125,12 @@ void Problem::refine_distributed_base_mesh
     }
 
    // Now try to do the refinement
-   RefineableMeshBase* ref_mesh_pt=
-    dynamic_cast<RefineableMeshBase*>(mesh_pt());
+   TreeBasedRefineableMeshBase* ref_mesh_pt=
+    dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt());
    if (ref_mesh_pt!=0)
     {
-     ref_mesh_pt->refine_base_mesh(to_be_refined_on_this_proc);
+     ref_mesh_pt->refine_base_mesh(this->communicator_pt(),
+                                   to_be_refined_on_this_proc);
     }
   }
  else
@@ -12986,11 +13183,12 @@ void Problem::refine_distributed_base_mesh
       }
 
      // Now try to do the refinement
-     RefineableMeshBase* ref_mesh_pt=
-      dynamic_cast<RefineableMeshBase*>(mesh_pt(i_mesh));
+     TreeBasedRefineableMeshBase* ref_mesh_pt=
+      dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(i_mesh));
      if (ref_mesh_pt!=0)
       {
-       ref_mesh_pt->refine_base_mesh(to_be_refined_on_this_proc);
+       ref_mesh_pt->refine_base_mesh(this->communicator_pt(),
+                                     to_be_refined_on_this_proc);
       }
 
     }

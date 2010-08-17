@@ -69,30 +69,33 @@ class TimeHarmonicElasticityTensor
 
 
   ///\short Helper range checking function
+  /// (Note that this only captures over-runs in 3D but
+  /// errors are likely to be caught in evaluation of the
+  /// stress and strain tensors anyway...)
   void range_check(const unsigned &i, const unsigned &j,
                    const unsigned &k, const unsigned &l) const
    {
-    if((i >= 2) || (j >= 2) || (k>= 2) || (l>=2))
+    if((i > 2) || (j > 2) || (k> 2) || (l>2))
      {
       std::ostringstream error_message;
-      if(i >= 2)
+      if(i > 2)
        {
         error_message << "Range Error : Index 1 " << i 
                       << " is not in the range (0,2)";
        }
-      if(j >= 2)
+      if(j > 2)
        {
         error_message << "Range Error : Index 2 " << j 
                       << " is not in the range (0,2)";
        }
 
-      if(k >= 2)
+      if(k > 2)
        {
         error_message << "Range Error : Index 2 " << k 
                       << " is not in the range (0,2)";
        }
 
-      if(l >= 2)
+      if(l > 2)
        {
         error_message << "Range Error : Index 4 " << l 
                       << " is not in the range (0,2)";

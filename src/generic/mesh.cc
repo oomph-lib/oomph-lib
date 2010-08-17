@@ -2642,7 +2642,8 @@ void Mesh::distribute(OomphCommunicator* comm_pt,
  // Re-setup tree forest if needed
  if (this->nelement()>0)
   {
-   RefineableMeshBase* ref_mesh_pt=dynamic_cast<RefineableMeshBase*>(this);
+   TreeBasedRefineableMeshBase* ref_mesh_pt=
+    dynamic_cast<TreeBasedRefineableMeshBase*>(this);
    if (ref_mesh_pt!=0)
     {
      ref_mesh_pt->setup_tree_forest();
@@ -2688,10 +2689,11 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
                                          const bool& report_stats)
 {
 
- RefineableMeshBase* ref_mesh_pt=dynamic_cast<RefineableMeshBase*>(this);
+ TreeBasedRefineableMeshBase* ref_mesh_pt=
+  dynamic_cast<TreeBasedRefineableMeshBase*>(this);
  if (ref_mesh_pt!=0)
   {
-
+   
 #ifdef OOMPH_HAS_MPI
    // Flush any external element storage before performing the redistribution
    // (in particular, external halo nodes that are on mesh boundaries)
@@ -3146,7 +3148,8 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
    // Re-setup tree forest if needed
    if (this->nelement()>0)
     {
-     RefineableMeshBase* ref_mesh_pt=dynamic_cast<RefineableMeshBase*>(this);
+     TreeBasedRefineableMeshBase* ref_mesh_pt=
+      dynamic_cast<TreeBasedRefineableMeshBase*>(this);
      if (ref_mesh_pt!=0)
       {
        ref_mesh_pt->setup_tree_forest();
@@ -3964,7 +3967,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
                         << "\n"
                         << "Nodal positions: " << x_halo[0] << "\n"
                         << "and haloed:      " << x_haloed[0] << "\n" 
-                        << "Node pointer: " << finite_el_pt->node_pt(j)
+                        //<< "Node pointer: " << finite_el_pt->node_pt(j)
                         << "\n";
                        break;
                       case 2:
@@ -3976,7 +3979,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
                         << "\n"
                         << "and haloed:      " << x_haloed[0] << " " 
                         << x_haloed[1] << std::endl
-                        << "Node pointer: " << finite_el_pt->node_pt(j)
+                        //<< "Node pointer: " << finite_el_pt->node_pt(j)
                         << "\n";
                        break;
                       case 3:
@@ -3988,7 +3991,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
                         << "\n"
                         << "and haloed:      " << x_haloed[0] << " " 
                         << x_haloed[1] << " " << x_haloed[2] << std::endl
-                        << "Node pointer: " << finite_el_pt->node_pt(j)
+                        //<< "Node pointer: " << finite_el_pt->node_pt(j)
                         << "\n";
                        break;
                       default:
@@ -4019,7 +4022,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
                 }
               } // e<nelem_haloed
              
-             //If documenting, close outptu files
+             //If documenting, close output files
              if(doc_info.doc_flag())
               {
                haloed_file.close();

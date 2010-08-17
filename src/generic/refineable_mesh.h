@@ -67,30 +67,18 @@ public:
    Min_error = 0.0;
    Max_error = 0.0;
     
-   // Max/min refinement levels
-   Max_refinement_level=5;
-   Min_refinement_level=0;
- 
-   // Stats
-   Nrefined=0;
-   Nunrefined=0;
-      
    // Do I adapt or not?
    Adapt_flag=true;
  
    // Where do I write the documatation of the refinement process?
    Doc_info_pt=0;
 
-   // Number of elements where the refinement is over-ruled
-   Nrefinement_overruled = 0;
-
    // If only a few elements are scheduled for unrefinement, don't bother
    // By default unrefine all
    Max_keep_unrefined=0;
-   
-   // Initialise the forest pointer to NULL
-   Forest_pt = 0;
 
+   // Number of elements where the refinement is over-ruled
+   Nrefinement_overruled = 0;
   };
 
 
@@ -109,31 +97,32 @@ public:
  /// Empty Destructor: 
  virtual ~RefineableMeshBase()
   {
-   //Kill the forest if there is one
-   if(Forest_pt!=0)
-    {
-     delete Forest_pt;
-     Forest_pt=0;
-    }
   }
 
- /// Set up the tree forest associated with the Mesh (if any)
- virtual void setup_tree_forest()=0;
+ ///  Access fct for number of elements that were refined
+ unsigned nrefined() {return Nrefined;}
+ 
+ /// Access fct for  number of elements that were unrefined
+ unsigned nunrefined() {return Nunrefined;}
 
- /// Return pointer to the Forest represenation of the mesh
- TreeForest* forest_pt(){return Forest_pt;}
+ /// \short Number of elements that would have liked to be refined further 
+ /// but can't because they've reached the max. refinement level
+ unsigned& nrefinement_overruled(){return Nrefinement_overruled;}
 
-
+ /// \short Max. number of elements that we allow to remain unrefined
+ /// if no other mesh adaptation is required (to avoid 
+ /// mesh-adaptations that would only unrefine a few elements
+ /// and then force a new solve -- this can't be worth our while!)
+ unsigned& max_keep_unrefined(){return Max_keep_unrefined;}
+ 
  /// Doc the targets for mesh adaptation
- void doc_adaptivity_targets(std::ostream &outfile)
+ virtual void doc_adaptivity_targets(std::ostream &outfile)
   {
    outfile << std::endl;
    outfile << "Targets for mesh adaptation: " << std::endl;
    outfile << "---------------------------- " << std::endl;
    outfile << "Target for max. error: " << Max_permitted_error << std::endl;
    outfile << "Target for min. error: " << Min_permitted_error << std::endl;
-   outfile << "Min. refinement level: " << Min_refinement_level << std::endl;
-   outfile << "Max. refinement level: " << Max_refinement_level << std::endl;
    outfile << "Don't unrefine if less than " << Max_keep_unrefined 
            << " elements need unrefinement." << std::endl;
    outfile << std::endl;
@@ -167,12 +156,6 @@ public:
  /// \short Access fct for max. actual error in present solution (i.e. before
  /// re-solve on adapted mesh)
  double& max_error() {return Max_error;}
-
- ///  Access fct for number of elements that were refined
- unsigned& nrefined() {return Nrefined;}
- 
- /// Access fct for  number of elements that were unrefined
- unsigned& nunrefined() {return Nunrefined;}
  
  ///  Access fct for pointer to DocInfo
  DocInfo*& doc_info_pt() {return Doc_info_pt;}
@@ -186,33 +169,182 @@ public:
    return *Doc_info_pt;
   }
  
+ /// \short Adapt mesh: Refine elements whose error is lager than err_max
+ /// and (try to) unrefine those whose error is smaller than err_min
+ virtual void adapt(OomphCommunicator* comm_pt,
+                    const Vector<double>& elemental_error)=0;
+
+ /// Refine mesh uniformly and doc process
+ virtual void refine_uniformly(DocInfo& doc_info)=0;
+ 
+ /// Refine mesh uniformly
+ virtual void refine_uniformly()
+  {
+   DocInfo doc_info;
+   doc_info.directory()="";
+   doc_info.doc_flag()=false;
+   refine_uniformly(doc_info);
+  }
+
+
+ /// \short Unrefine mesh uniformly: Return 0 for success,
+ /// 1 for failure (if unrefinement has reached the coarsest permitted
+ /// level)
+ virtual unsigned unrefine_uniformly(OomphCommunicator* comm_pt)=0;
+
+
+protected:
+ 
+ /// \short Pointer to spatial error estimator
+ ErrorEstimator* Spatial_error_estimator_pt;
+
+ /// Max. error (i.e. split elements if their error is larger)
+ double Max_permitted_error;
+ 
+ /// Min. error (i.e. (try to) merge elements if their error is smaller)
+ double Min_permitted_error;
+ 
+ /// Min.actual error
+ double Min_error;
+ 
+ /// Max. actual error 
+ double Max_error;
+ 
+ /// Stats: Number of elements that were refined
+ unsigned Nrefined;
+
+ /// Stats: Number of elements that were unrefined
+ unsigned Nunrefined;
+
+  /// Flag that requests adaptation
+ bool Adapt_flag;
+
+ /// Pointer to DocInfo
+ DocInfo* Doc_info_pt;
+
+ /// \short Max. number of elements that can remain unrefined
+ /// if no other mesh adaptation is required (to avoid 
+ /// mesh-adaptations that would only unrefine a few elements
+ /// and then force a new solve -- this can't be worth our while!)
+ unsigned Max_keep_unrefined;
+ 
+ /// \short Number of elements that would like to be refined further but can't
+ /// because they've reached the max. refinement level
+ unsigned Nrefinement_overruled;
+
+};
+
+
+
+
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
+
+
+//=======================================================================
+/// Base class for tree-based refineable meshes. 
+//=======================================================================
+class TreeBasedRefineableMeshBase : public virtual RefineableMeshBase
+{
+public:
+
+
+ /// Constructor 
+ TreeBasedRefineableMeshBase()
+  {
+   // Max/min refinement levels
+   Max_refinement_level=5;
+   Min_refinement_level=0;
+ 
+   // Stats
+   Nrefined=0;
+   Nunrefined=0;
+
+   // Where do I write the documatation of the refinement process?
+   Doc_info_pt=0;
+   
+   // Initialise the forest pointer to NULL
+   Forest_pt = 0;
+  }
+
+
+ /// Broken copy constructor
+ TreeBasedRefineableMeshBase(const TreeBasedRefineableMeshBase& dummy) 
+  { 
+   BrokenCopy::broken_copy("TreeBasedRefineableMeshBase");
+  } 
+ 
+ /// Broken assignment operator
+ void operator=(const TreeBasedRefineableMeshBase&) 
+  {
+   BrokenCopy::broken_assign("TreeBasedRefineableMeshBase");
+  }
+
+ /// Empty Destructor: 
+ virtual ~TreeBasedRefineableMeshBase()
+  {
+   //Kill the forest if there is one
+   if(Forest_pt!=0)
+    {
+     delete Forest_pt;
+     Forest_pt=0;
+    }
+  }
+
+ /// \short Adapt mesh: Refine elements whose error is lager than err_max
+ /// and (try to) unrefine those whose error is smaller than err_min
+ void adapt(OomphCommunicator* comm_pt,
+            const Vector<double>& elemental_error);
+
+ /// Refine mesh uniformly and doc process
+ void refine_uniformly(DocInfo& doc_info);
+ 
+ /// Refine mesh uniformly
+ void refine_uniformly()
+ {
+  RefineableMeshBase::refine_uniformly();
+ }
+ 
+ /// \short Unrefine mesh uniformly: Return 0 for success,
+ /// 1 for failure (if unrefinement has reached the coarsest permitted
+ /// level)
+ unsigned unrefine_uniformly(OomphCommunicator* comm_pt);
+
+ /// Set up the tree forest associated with the Mesh (if any)
+ virtual void setup_tree_forest()=0;
+
+ /// Return pointer to the Forest represenation of the mesh
+ TreeForest* forest_pt(){return Forest_pt;}
+
+
+ /// Doc the targets for mesh adaptation
+ void doc_adaptivity_targets(std::ostream &outfile)
+  {
+   outfile << std::endl;
+   outfile << "Targets for mesh adaptation: " << std::endl;
+   outfile << "---------------------------- " << std::endl;
+   outfile << "Target for max. error: " << Max_permitted_error << std::endl;
+   outfile << "Target for min. error: " << Min_permitted_error << std::endl;
+   outfile << "Min. refinement level: " << Min_refinement_level << std::endl;
+   outfile << "Max. refinement level: " << Max_refinement_level << std::endl;
+   outfile << "Don't unrefine if less than " << Max_keep_unrefined 
+           << " elements need unrefinement." << std::endl;
+   outfile << std::endl;
+  }
+ 
  /// Access fct for max. permissible refinement level (relative to base mesh)
  unsigned& max_refinement_level() {return Max_refinement_level;}
  
  /// Access fct for min. permissible refinement level (relative to base mesh)
  unsigned& min_refinement_level() {return Min_refinement_level;}
  
- /// \short Number of elements that would have liked to be refined further 
- /// but can't because they've reached the max. refinement level
- unsigned& nrefinement_overruled(){return Nrefinement_overruled;}
- 
- 
- /// \short Max. number of elements that we allow to remain unrefined
- /// if no other mesh adaptation is required (to avoid 
- /// mesh-adaptations that would only unrefine a few elements
- /// and then force a new solve -- this can't be worth our while!)
- unsigned& max_keep_unrefined(){return Max_keep_unrefined;}
- 
- /// \short Adapt mesh: Refine elements whose error is lager than err_max
- /// and (try to) unrefine those whose error is smaller than err_min
- virtual void adapt(OomphCommunicator* comm_pt,
-                    Vector<double>& elemental_error);
-
- /// \short Perform the actual mesh adaptation, documenting the progress in
- /// the directory specified in DocInfo object.
+ /// \short Perform the actual tree-based mesh adaptation, 
+ /// documenting the progress in the directory specified in DocInfo object.
  virtual void adapt_mesh(DocInfo& doc_info);
 
- /// \short Perform the actual mesh adaptation. A simple wrapper to 
+ /// \short Perform the actual tree-based mesh adaptation. A simple wrapper to 
  /// call the function without documentation.
  virtual void adapt_mesh()
   {
@@ -224,17 +356,6 @@ public:
    adapt_mesh(doc_info);
   }
 
- /// Refine mesh uniformly and doc process
- virtual void refine_uniformly(DocInfo& doc_info);
- 
- /// Refine mesh uniformly
- virtual void refine_uniformly()
-  {
-   DocInfo doc_info;
-   doc_info.directory()="";
-   doc_info.doc_flag()=false;
-   refine_uniformly(doc_info);
-  }
 
  /// \short Refine mesh by splitting the elements identified
  /// by their numbers.
@@ -250,20 +371,14 @@ public:
  /// Refine base mesh to same degree as reference mesh (relative
  /// to original unrefined mesh).
  virtual void refine_base_mesh_as_in_reference_mesh(
-  RefineableMeshBase* const &ref_mesh_pt);
+  OomphCommunicator* comm_pt, TreeBasedRefineableMeshBase* const &ref_mesh_pt);
 
  /// \short Refine mesh once so that its topology etc becomes that of the 
  /// (finer!) reference mesh -- if possible! Useful for meshes in multigrid 
  /// hierarchies. If the meshes are too different and the conversion
  /// cannot be performed, the code dies (provided PARANOID is enabled).
- virtual void refine_as_in_reference_mesh(RefineableMeshBase* 
+ virtual void refine_as_in_reference_mesh(TreeBasedRefineableMeshBase* 
                                           const &ref_mesh_pt);
-
- /// \short Unrefine mesh uniformly: Return 0 for success,
- /// 1 for failure (if unrefinement has reached the coarsest permitted
- /// level)
- virtual unsigned unrefine_uniformly(OomphCommunicator* comm_pt);
-
 
  /// Get max/min refinement levels in mesh
  virtual void get_refinement_levels(unsigned& min_refinement_level,
@@ -285,10 +400,12 @@ public:
                                      to_be_refined);
 
  /// Refine base mesh according to specified refinement pattern
- virtual void refine_base_mesh(Vector<Vector<unsigned> >& to_be_refined);
+ void refine_base_mesh(OomphCommunicator* comm_pt,
+                       Vector<Vector<unsigned> >& to_be_refined);
 
  /// Refine mesh according to refinement pattern in restart file
- virtual void refine(std::ifstream& restart_file);
+ virtual void refine(OomphCommunicator* comm_pt,
+                     std::ifstream& restart_file);
 
  /// Dump refinement pattern to allow for rebuild
  virtual void dump_refinement(std::ostream &outfile);
@@ -319,21 +436,6 @@ protected:
                                          Vector<Node*>& master_nodes,
                                          Vector<double>& hang_weights,
                                          const int &ival);
-
- /// \short Pointer to spatial error estimator
- ErrorEstimator* Spatial_error_estimator_pt;
-
- /// Max. error (i.e. split elements if their error is larger)
- double Max_permitted_error;
- 
- /// Min. error (i.e. (try to) merge elements if their error is smaller)
- double Min_permitted_error;
- 
- /// Min.actual error
- double Min_error;
- 
- /// Max. actual error 
- double Max_error;
  
  /// Max. permissible refinement level (relative to base mesh)
  unsigned Max_refinement_level;
@@ -341,32 +443,16 @@ protected:
  /// Min. permissible refinement level (relative to base mesh)
  unsigned Min_refinement_level;
 
- /// Stats: Number of elements that were refined
- unsigned Nrefined;
-
- /// Stats: Number of elements that were unrefined
- unsigned Nunrefined;
-
- /// Flag that requests adaptation
- bool Adapt_flag;
-
- /// Pointer to DocInfo
- DocInfo* Doc_info_pt;
-
- /// \short Number of elements that would like to be refined further but can't
- /// because they've reached the max. refinement level
- unsigned Nrefinement_overruled;
-
- /// \short Max. number of elements that can remain unrefined
- /// if no other mesh adaptation is required (to avoid 
- /// mesh-adaptations that would only unrefine a few elements
- /// and then force a new solve -- this can't be worth our while!)
- unsigned Max_keep_unrefined;
-
  /// Forest representation of the mesh
  TreeForest* Forest_pt;
 
 };
+
+
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
 
 //=======================================================================
 /// Templated base class for refineable meshes. The use of the template
@@ -375,10 +461,10 @@ protected:
 /// the function split_elements_if_required() to make use of the template
 /// parameter.
 /// All refineable meshes should inherit directly from 
-///  RefineableMesh<ELEMENT>
+/// TreeBasedRefineableMesh<ELEMENT>
 //=======================================================================
 template <class ELEMENT>
-class RefineableMesh : public RefineableMeshBase
+class TreeBasedRefineableMesh : public TreeBasedRefineableMeshBase
  {
    private:
    
@@ -401,16 +487,16 @@ class RefineableMesh : public RefineableMeshBase
    public:
 
   ///Constructor, call the constructor of the base class
-  RefineableMesh() : RefineableMeshBase() { }
+  TreeBasedRefineableMesh() : TreeBasedRefineableMeshBase() { }
   
   /// Broken copy constructor
-  RefineableMesh(const RefineableMesh& dummy) 
+  TreeBasedRefineableMesh(const TreeBasedRefineableMesh& dummy) 
    { 
-    BrokenCopy::broken_copy("RefineableMesh");
+    BrokenCopy::broken_copy("TreeBasedRefineableMesh");
    } 
   
   ///Empty virtual destructor
-  virtual ~RefineableMesh() { }
+  virtual ~TreeBasedRefineableMesh() { }
 
  };
 

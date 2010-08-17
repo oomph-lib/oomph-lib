@@ -134,7 +134,7 @@ public:
  void doc_solution(DocInfo& doc_info);
 
  /// Pointer to the bulk mesh
- RefineableMeshBase* Bulk_mesh_pt;
+ TreeBasedRefineableMeshBase* Bulk_mesh_pt;
 
  /// Pointer to the mesh of traction elements
  Mesh* Surface_mesh_pt;

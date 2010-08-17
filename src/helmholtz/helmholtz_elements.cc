@@ -287,7 +287,53 @@ void  HelmholtzEquations<DIM>::output(std::ostream &outfile,
 
 }
  
-// hierher
+
+
+
+//======================================================================
+/// Output function for real part of full time-dependent solution
+///
+///  u = Re( (u_r +i u_i) exp(-i omega t)
+///
+/// at phase angle omega t = phi.
+///
+///   x,y,u   or    x,y,z,u
+///
+/// Output at nplot points in each coordinate direction
+//======================================================================
+template <unsigned DIM>
+void  HelmholtzEquations<DIM>::output_real(std::ostream &outfile, 
+                                           const double& phi,
+                                           const unsigned &nplot)
+{
+ 
+ //Vector of local coordinates
+ Vector<double> s(DIM);
+ 
+ // Tecplot header info
+ outfile << tecplot_zone_string(nplot);
+ 
+ // Loop over plot points
+ unsigned num_plot_points=nplot_points(nplot);
+ for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+  {
+   
+   // Get local coordinates of plot point
+   get_s_plot(iplot,nplot,s);
+   std::complex<double> u(interpolated_u_helmholtz(s));
+   for(unsigned i=0;i<DIM;i++) 
+    {
+     outfile << interpolated_x(s,i) << " ";
+    }
+   outfile << u.real()*cos(phi)+u.imag()*sin(phi) << std::endl;   
+   
+  }
+
+ // Write tecplot footer (e.g. FE connectivity lists)
+ write_tecplot_zone_footer(outfile,nplot);
+
+}
+ 
  
 //======================================================================
 /// C-style output function:
@@ -379,6 +425,64 @@ void HelmholtzEquations<DIM>::output_fct(std::ostream &outfile,
      outfile << x[i] << " ";
     }
    outfile << exact_soln[0] << " " <<  exact_soln[1] << std::endl;  
+  }
+ 
+ // Write tecplot footer (e.g. FE connectivity lists)
+ write_tecplot_zone_footer(outfile,nplot);
+}
+
+
+
+//======================================================================
+/// Output function for real part of full time-dependent fct
+///
+///  u = Re( (u_r +i u_i) exp(-i omega t)
+///
+/// at phase angle omega t = phi.
+///
+///   x,y,u   or    x,y,z,u
+///
+/// Output at nplot points in each coordinate direction
+//======================================================================
+template <unsigned DIM>
+void HelmholtzEquations<DIM>::output_real_fct(
+ std::ostream &outfile, 
+ const double& phi,
+ const unsigned &nplot, 
+ FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
+{
+ //Vector of local coordinates
+ Vector<double> s(DIM);
+  
+  // Vector for coordintes
+  Vector<double> x(DIM);
+  
+ // Tecplot header info
+ outfile << tecplot_zone_string(nplot);
+ 
+ // Exact solution Vector 
+ Vector<double> exact_soln(2);
+ 
+ // Loop over plot points
+ unsigned num_plot_points=nplot_points(nplot);
+ for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+  {
+   
+   // Get local coordinates of plot point
+   get_s_plot(iplot,nplot,s);
+   
+   // Get x position as Vector
+   interpolated_x(s,x);
+   
+   // Get exact solution at this point
+   (*exact_soln_pt)(x,exact_soln);
+   
+   //Output x,y,...,u_exact
+   for(unsigned i=0;i<DIM;i++)
+    {
+     outfile << x[i] << " ";
+    }
+   outfile << exact_soln[0]*cos(phi)+ exact_soln[1]*sin(phi) << std::endl;  
   }
  
  // Write tecplot footer (e.g. FE connectivity lists)

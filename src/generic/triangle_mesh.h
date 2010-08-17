@@ -470,6 +470,17 @@ public:
      delete Centre_displacement_data_pt->time_stepper_pt();
      delete Centre_displacement_data_pt;
     }
+
+   // Loop over polylines
+   unsigned nboundary=Boundary_geom_obj_pt.size();
+   for (unsigned i=0;i<nboundary;i++)
+    {
+     unsigned nseg=Boundary_geom_obj_pt[i].size();
+     for(unsigned j=0;j<nseg;j++)
+      {
+       delete Boundary_geom_obj_pt[i][j];
+      }
+    }
   }
  
  /// Access to "mass" (area) of polygon

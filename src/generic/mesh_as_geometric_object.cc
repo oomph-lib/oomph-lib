@@ -179,11 +179,20 @@ namespace Multi_domain_functions
    // Get the default parameters for the number of bins in each 
    // dimension from the Multi_domain_functions namespace
    
-   // Parameters are at Nx_bin, Ny_bin, Nz_bin
-   Nbin_x=Multi_domain_functions::Nx_bin;
-   Nbin_y=Multi_domain_functions::Ny_bin;
-   Nbin_z=Multi_domain_functions::Nz_bin;
-   
+   // If the mesh has only one element there's no need for big bin structure
+   if (n_sub_object==1)
+    {
+     Nbin_x=1;
+     Nbin_y=1;
+     Nbin_z=1;
+    }
+   else
+    {
+     Nbin_x=Multi_domain_functions::Nx_bin;
+     Nbin_y=Multi_domain_functions::Ny_bin;
+     Nbin_z=Multi_domain_functions::Nz_bin;
+    }
+
    // Are we computing the extreme bin coordinates here?
    if (compute_extreme_bin_coords)
     {

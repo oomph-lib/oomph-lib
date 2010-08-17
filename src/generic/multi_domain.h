@@ -136,15 +136,15 @@ namespace Multi_domain_functions
   extern bool Compute_extreme_bin_coordinates;
 
   /// \short Number of bins in the first dimension in binning method in
-  /// setup_multi_domain_interaction(). Default value of 10.
+  /// setup_multi_domain_interaction().
   extern unsigned Nx_bin;
 
   /// \short Number of bins in the second dimension in binning method in
-  /// setup_multi_domain_interaction(). Default value of 10.
+  /// setup_multi_domain_interaction().
   extern unsigned Ny_bin;
 
   /// \short Number of bins in the third dimension in binning method in
-  /// setup_multi_domain_interaction(). Default value of 10.
+  /// setup_multi_domain_interaction().
   extern unsigned Nz_bin;
 
   /// \short (Measure of) the number of sampling points within the elements 

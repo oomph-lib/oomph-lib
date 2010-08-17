@@ -39,6 +39,7 @@
 //OOMPH-LIB headers 
 #include "../generic/Telements.h"
 #include "navier_stokes_elements.h"
+#include "../generic/error_estimator.h"
 
 namespace oomph
 {
@@ -408,7 +409,9 @@ namespace oomph
 //=======================================================================
 template <unsigned DIM>
 class TTaylorHoodElement : public virtual TElement<DIM,3>,
- public virtual NavierStokesEquations<DIM>
+ public virtual NavierStokesEquations<DIM>,
+ public virtual ElementWithZ2ErrorEstimator
+
 {
   private:
  
@@ -569,13 +572,76 @@ public:
  /// Redirect output to NavierStokesEquations output
  void output(FILE* file_pt, const unsigned &n_plot)
   {NavierStokesEquations<DIM>::output(file_pt,n_plot);}
-
+ 
+ /// \short Order of recovery shape functions for Z2 error estimation:
+ /// Same order as shape functions.
+ unsigned nrecovery_order() {return 2;}
+ 
+ /// \short Number of vertex nodes in the element
+ unsigned nvertex_node() const
+ {return DIM+1;}
+ 
+ /// \short Pointer to the j-th vertex node in the element
+ Node* vertex_node_pt(const unsigned& j) const
+ {return node_pt(j);}
+ 
+ 
+ /// Number of 'flux' terms for Z2 error estimation 
+ unsigned num_Z2_flux_terms()
+ {
+  // DIM diagonal strain rates, DIM(DIM -1) /2 off diagonal rates
+  return DIM + (DIM*(DIM-1))/2;
+ }
+ 
+ /// \short Get 'flux' for Z2 error recovery:   Upper triangular entries
+ /// in strain rate tensor.
+ void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
+ {
+#ifdef PARANOID
+  unsigned num_entries=DIM+(DIM*(DIM-1))/2;
+  if (flux.size() < num_entries)
+   {
+    std::ostringstream error_message;
+    error_message << "The flux vector has the wrong number of entries, " 
+                  << flux.size() << ", whereas it should be at least " 
+                  << num_entries << std::endl;
+    throw OomphLibError(error_message.str(),
+                        "RefineableNavierStokesEquations::get_Z2_flux()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  
+  // Get strain rate matrix
+  DenseMatrix<double> strainrate(DIM);
+  this->strain_rate(s,strainrate);
+  
+  // Pack into flux Vector
+  unsigned icount=0;
+  
+  // Start with diagonal terms
+  for(unsigned i=0;i<DIM;i++)
+   {
+    flux[icount]=strainrate(i,i);
+    icount++;
+   }
+  
+  //Off diagonals row by row
+  for(unsigned i=0;i<DIM;i++)
+   {
+    for(unsigned j=i+1;j<DIM;j++)
+     {
+      flux[icount]=strainrate(i,j);
+      icount++;
+     }
+   }
+ }
+ 
  /// \short The number of "blocks" that degrees of freedom in this element
  /// are sub-divided into: Velocity and pressure.
  unsigned ndof_types()
-  {
-   return DIM+1;
-  }
+ {
+  return DIM+1;
+ }
  
  /// \short Create a list of pairs for all unknowns in this element,
  /// so that the first entry in each pair contains the global equation

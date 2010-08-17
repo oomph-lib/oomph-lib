@@ -2715,15 +2715,12 @@ namespace oomph
         Node* new_node_pt=0;
         if (face0.is_boundary_face())
          {
-          std::cout << "Building node 20 in element 2 as boundary node: "; 
           new_node_pt=el_pt->construct_boundary_node(j,time_stepper_pt);
          }
         else
          {
-          std::cout << "Building node 20 in element 2 as non-boundary node: "; 
           new_node_pt=el_pt->construct_node(j,time_stepper_pt);
          }
-        std::cout << new_node_pt << std::endl;
         tet_face_node_pt[face0]=new_node_pt; 
         Node_pt.push_back(new_node_pt);
         Vector<double> s(3);

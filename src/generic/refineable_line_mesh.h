@@ -19,7 +19,7 @@ namespace oomph
  /// BinaryTreeForest representation of the initial (coarse) mesh.
  //===========================================================================
  template <class ELEMENT>
-  class RefineableLineMesh : public virtual RefineableMesh<ELEMENT>, 
+  class RefineableLineMesh : public virtual TreeBasedRefineableMesh<ELEMENT>, 
   public virtual LineMeshBase
   {
    

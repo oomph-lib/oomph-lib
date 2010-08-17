@@ -138,40 +138,9 @@ public:
  /// Build the mesh
  void build_mesh();
 
- /// Actions after load balancing: unpin pressures, pin redundant dofs
- void actions_after_load_balance()
-  {
-   // Unpin all pressure dofs
-   RefineableNavierStokesEquations<2>::
-    unpin_all_pressure_dofs(mesh_pt()->element_pt());
-    
-    // Pin redundant pressure dofs
-   RefineableNavierStokesEquations<2>::
-    pin_redundant_nodal_pressures(mesh_pt()->element_pt());
-   
-   // Now set the first pressure dof in the first element to 0.0
-
-   // Loop over all elements
-   const unsigned n_element=mesh_pt()->nelement();
-   for (unsigned e=0;e<n_element;e++)
-    {
-     // If the lower left node of this element is (0,0), then fix the 
-     // pressure dof in this element to zero
-     if (mesh_pt()->finite_element_pt(e)->node_pt(0)->x(0)==0.0 && 
-         mesh_pt()->finite_element_pt(e)->node_pt(0)->x(1)==0.0) // 2d problem
-      {
-       oomph_info << "I'm fixing the pressure " << std::endl;
-       // Fix the pressure in element e at pdof=0 to 0.0
-       unsigned pdof=0;
-       fix_pressure(e,pdof,0.0);
-      }
-    }
-  } // end_of_actions_after_load_balance
- 
  /// Doc the solution
  void doc_solution(DocInfo& doc_info);
- 
- 
+  
 private:
 
  ///Fix pressure in element e at pressure dof pdof and set to pvalue

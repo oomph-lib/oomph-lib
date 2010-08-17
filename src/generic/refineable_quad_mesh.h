@@ -37,7 +37,7 @@ namespace oomph
 
 //=======================================================================
 /// Intermediate mesh class that implements the mesh adaptation functions
-/// specified in the RefineableMesh class for meshes that contain the
+/// specified in the TreeBasedRefineableMesh class for meshes that contain the
 /// refineable variant of QElement s [The class ELEMENT provided
 /// as the template parameter must be of type 
 /// RefineableQElement<2>].
@@ -47,7 +47,7 @@ namespace oomph
 /// provide a QuadTreeForest representation of the initial (coarse) mesh.
 //=======================================================================
 template <class ELEMENT>
-class RefineableQuadMesh : public virtual RefineableMesh<ELEMENT>, 
+class RefineableQuadMesh : public virtual TreeBasedRefineableMesh<ELEMENT>, 
 public virtual QuadMeshBase
 {
 

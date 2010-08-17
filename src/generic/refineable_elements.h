@@ -437,15 +437,6 @@ class RefineableElement : public virtual FiniteElement
    assign_hanging_local_eqn_numbers();
   }
 
- /// Setup the local equation numbering schemes:
- /*virtual inline void assign_all_generic_local_eqn_numbers()
-  {
-   //Call the standard FiniteElement local numbering scheme
-   FiniteElement::assign_all_generic_local_eqn_numbers();
-   //Set up the generic hanging-node-based look-up schemes
-   assign_hanging_local_eqn_numbers();
-  }*/
-
  /// \short Pointer to the root element in refinement hierarchy (must be 
  /// implemented in specific elements that do refinement via
  /// tree-like refinement structure. Here we provide a default

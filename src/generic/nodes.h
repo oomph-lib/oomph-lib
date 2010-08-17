@@ -1085,9 +1085,9 @@ public:
    const int n_value = static_cast<int>(this->nvalue());
    if((i < -1) || (i > n_value) )
     {
-     std::cout << i << " " << n_value << " " 
-               << (i < -1) << " " 
-               << (i > n_value) << "\n";
+/*      oomph_info << i << " " << n_value << " "  */
+/*                << (i < -1) << " "  */
+/*                << (i > n_value) << "\n"; */
      std::ostringstream error_message;
      error_message << "Range Error: Value " << i
                    << " is not in the range (-1," << n_value << ")";

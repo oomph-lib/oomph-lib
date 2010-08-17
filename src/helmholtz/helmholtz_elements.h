@@ -124,6 +124,14 @@ public:
  /// x,y,z,u_re,u_im at  n_plot^DIM plot points
  void output(std::ostream &outfile, const unsigned &n_plot);
 
+ /// \short Output function for real part of full time-dependent solution
+ /// u = Re( (u_r +i u_i) exp(-i omega t)
+ /// at phase angle omega t = phi.
+ /// x,y,u   or    x,y,z,u at n_plot plot points in each coordinate
+ /// direction
+ void output_real(std::ostream &outfile, const double& phi,
+                  const unsigned &n_plot);
+
  /// C_style output with default number of plot points
  void output(FILE* file_pt)
   {
@@ -153,6 +161,18 @@ public:
     OOMPH_EXCEPTION_LOCATION);
   }
 
+
+
+ /// \short Output function for real part of full time-dependent fct
+ /// u = Re( (u_r +i u_i) exp(-i omega t)
+ /// at phase angle omega t = phi.
+ /// x,y,u   or    x,y,z,u at n_plot plot points in each coordinate
+ /// direction
+ void output_real_fct(std::ostream &outfile, 
+                      const double& phi,
+                      const unsigned &n_plot, 
+                      FiniteElement::SteadyExactSolutionFctPt exact_soln_pt);
+ 
 
  /// Get error against and norm of exact solution
  void compute_error(std::ostream &outfile, 
@@ -247,7 +267,8 @@ public:
   }
 
  
- /// Add the element's contribution to its residual vector and 
+
+ /// \short Add the element's contribution to its residual vector and
  /// element Jacobian matrix (wrapper)
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                    DenseMatrix<double> &jacobian)
@@ -388,6 +409,15 @@ private:
  void output(std::ostream &outfile, const unsigned &n_plot)
   {HelmholtzEquations<DIM>::output(outfile,n_plot);}
 
+ /// \short Output function for real part of full time-dependent solution
+ /// u = Re( (u_r +i u_i) exp(-i omega t)
+ /// at phase angle omega t = phi.
+ /// x,y,u   or    x,y,z,u at n_plot plot points in each coordinate
+ /// direction
+ void output_real(std::ostream &outfile, const double& phi,
+                  const unsigned &n_plot)
+ {HelmholtzEquations<DIM>::output_real(outfile,phi,n_plot);}
+
 
  /// \short C-style output function:  
  ///  x,y,u   or    x,y,z,u
@@ -407,6 +437,19 @@ private:
                  FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
   {HelmholtzEquations<DIM>::output_fct(outfile,n_plot,exact_soln_pt);}
 
+
+ /// \short Output function for real part of full time-dependent fct
+ /// u = Re( (u_r +i u_i) exp(-i omega t)
+ /// at phase angle omega t = phi.
+ /// x,y,u   or    x,y,z,u at n_plot plot points in each coordinate
+ /// direction
+ void output_real_fct(std::ostream &outfile, 
+                      const double& phi,
+                      const unsigned &n_plot, 
+                      FiniteElement::SteadyExactSolutionFctPt exact_soln_pt)
+ {
+  HelmholtzEquations<DIM>::output_real_fct(outfile,phi,n_plot,exact_soln_pt);
+ }
 
 
  /// \short Output function for a time-dependent exact solution.

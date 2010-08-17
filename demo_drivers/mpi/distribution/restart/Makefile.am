@@ -2,28 +2,19 @@
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 # Name of executables that should run during the self-test
-check_PROGRAMS=two_d_unsteady_heat_t_adapt \
-               two_d_unsteady_heat_2adapt
+check_PROGRAMS=two_d_unsteady_heat_2adapt_load_balance
 
 #----------------------------------------------
 
 # Sources for executable
-two_d_unsteady_heat_t_adapt_SOURCES = two_d_unsteady_heat_t_adapt.cc
+two_d_unsteady_heat_2adapt_load_balance_SOURCES = two_d_unsteady_heat_2adapt_load_balance.cc
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
-two_d_unsteady_heat_t_adapt_LDADD = -L@libdir@ -lunsteady_heat -lgeneric \
+two_d_unsteady_heat_2adapt_load_balance_LDADD = -L@libdir@ -lunsteady_heat -lgeneric \
 				    $(EXTERNAL_LIBS) $(FLIBS)
 
 #----------------------------------------------
 
-# Sources for executable
-two_d_unsteady_heat_2adapt_SOURCES = two_d_unsteady_heat_2adapt.cc
-
-# Required libraries:
-# $(FLIBS) is included in case the solver involves fortran sources.
-two_d_unsteady_heat_2adapt_LDADD = -L@libdir@ -lunsteady_heat -lgeneric \
-				    $(EXTERNAL_LIBS) $(FLIBS)
-#----------------------------------------------
-
-EXTRA_DIST+=partitioning.dat
+EXTRA_DIST+=doubly_adaptive_partitioning_load_balance.dat \
+            load_balance.mcr  show_dist.mcr

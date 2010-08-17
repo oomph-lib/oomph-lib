@@ -31,6 +31,8 @@
 
 #include "triangle_mesh.template.h"
 #include "../generic/map_matrix.h"
+#include "../generic/multi_domain.h"
+#include "../generic/projection.h"
 
 
 #include <iostream>
@@ -58,7 +60,7 @@ namespace oomph
   // node position in the update_triangulateio function
   std::map<Node*,unsigned> old_global_number;
   
-  // Store the triangulateio node id 
+  // Store the TriangulateIO node id 
   for(unsigned inod=0;inod<nnode_scaffold;inod++)
    {
     Node* old_node_pt=Tmp_mesh_pt->node_pt(inod);
@@ -532,6 +534,10 @@ namespace oomph
      }  
    }             
  }
+
+
+
+   
  
 //======================================================================
 /// Setup boundary coordinate on boundary b. Doc Faces
@@ -736,17 +742,21 @@ namespace oomph
         x_left=x_right;
         y_left=y_right;
          
-        // Get lexicographically bottom left node
+        // Get lexicographically bottom left node but only 
+        // use vertex nodes as candidates
         all_nodes_pt.insert(nod_pt);
-        if (nod_pt->x(1)<bottom_left_node_pt->x(1))
+        if (j==(nnod-1))
          {
-          bottom_left_node_pt=nod_pt;
-         }
-        else if (nod_pt->x(1)==bottom_left_node_pt->x(1))
-         {
-          if (nod_pt->x(0)<bottom_left_node_pt->x(0))            
+          if (nod_pt->x(1)<bottom_left_node_pt->x(1))
            {
             bottom_left_node_pt=nod_pt;
+           }
+          else if (nod_pt->x(1)==bottom_left_node_pt->x(1))
+           {
+            if (nod_pt->x(0)<bottom_left_node_pt->x(0))            
+             {
+              bottom_left_node_pt=nod_pt;
+             }
            }
          }
        }
@@ -762,8 +772,6 @@ namespace oomph
      {    
       Node* nod_pt=(*it);
       nod_pt->get_coordinates_on_boundary(b,zeta);
-
-      // hierher Check way the self-test failed here!
       zeta[0]-=zeta_ref;
       if (zeta[0]<0.0)
        {
@@ -785,124 +793,21 @@ namespace oomph
   Boundary_coordinate_exists[b]=true;
  
  }
-//======================================================================
-/// Clear the Triangulateio object
-//======================================================================
- template <class ELEMENT>
- void TriangleMesh<ELEMENT>::clear_triangulateio()
- {
-       
-  // triangulateio object clear
-  // Commentary starting with "/*" has been kept
-  // from the original triangulate function 
-  // (external_src/oomph_triangle/triangle.h or tricall.c)
-
-  // Clear the point,attribute and marker list 
-  free(Triangulateio.pointlist); 
-  Triangulateio.numberofpoints = 0;
-  free(Triangulateio.pointattributelist);
-  free(Triangulateio.pointmarkerlist); 
-  Triangulateio.numberofpointattributes = 0;
-
-  // Clear the triangle, attribute,neighbor and area list 
-  free(Triangulateio.trianglelist);    
-  free(Triangulateio.triangleattributelist);
-  free(Triangulateio.trianglearealist);
-  free(Triangulateio.neighborlist);
-  Triangulateio.numberoftriangles = 0; 
-  Triangulateio.numberofcorners = 0;
-  Triangulateio.numberoftriangleattributes = 0;
-
-  // Clear the segment and marker list 
-  free(Triangulateio.segmentlist);
-  free(Triangulateio.segmentmarkerlist);
-
-  // Clear edge list 
-  free(Triangulateio.holelist);
-
-  // Clear edge, maerke and norm list 
-  free(Triangulateio.edgelist);
-  free(Triangulateio.edgemarkerlist);
-  free(Triangulateio.normlist);
-  Triangulateio.numberofedges = 0;
-  
-  // Clear region list 
-  free(Triangulateio.regionlist);
-  Triangulateio.numberofedges = 0;
-  Triangulateio.numberofregions = 0;
-
-  // Do we need to clear the Triangulateio itself as well?
-  // Delete the Triangulateio
-  // free(Triangulateio);
- }
 
 //======================================================================
-/// Initialize the triagulateio structure
-//======================================================================
- template <class ELEMENT>
- void TriangleMesh<ELEMENT>::initialize_triangulateio(
-  triangulateio &triangle_out)
- {
-       
-  // triangulateio object initialization
-  // Commentary starting with "/*" has been kept
-  // from the original triangulate function 
-  // (external_src/oomph_triangle/triangle.h or tricall.c)
-
-  // Initialize the point list 
-  /* Not needed if -N switch used */
-  triangle_out.pointlist = (double *) NULL; 
-  triangle_out.numberofpoints = 0;
-  triangle_out.pointattributelist = (double *) NULL;  
-  triangle_out.numberofpointattributes = 0;
-
-  /* Not needed if -N or -B switch used */
-  triangle_out.pointmarkerlist = (int *) NULL; 
-
-  // Initialize the triangle list 
-  /* Not needed if -E switch used */
-  triangle_out.trianglelist = (int *) NULL;    
-  
-  /* Not needed if -E switch used or number of triangle attributes is zero:*/
-  triangle_out.triangleattributelist = (double *) NULL;
-  triangle_out.trianglearealist = (double *) NULL;
-  triangle_out.numberoftriangles = 0; 
-  triangle_out.numberofcorners = 0;
-  triangle_out.numberoftriangleattributes = 0;
-
-  // Initialize the segment list 
-  /* Needed only if segments are output (-p or -c) and -P not used:*/
-  triangle_out.segmentlist = (int *) NULL;
-  
-  /* Needed only if segments are output (-p or -c) and -P and -B not used: */
-  triangle_out.segmentmarkerlist = (int *) NULL;
-  
-  // Initialize edge list 
-  triangle_out.edgelist = (int *) NULL;
-  triangle_out.edgemarkerlist = (int *) NULL;
-  triangle_out.numberofedges = 0;
-  
-  // Initialize region list 
-  triangle_out.regionlist = (double *) NULL;
-  triangle_out.numberofedges = 0;
-  triangle_out.numberofregions = 0;
- }
-
-//======================================================================
-/// Build TriangleMeshPolygon and TriangleMeshHolePolygon
-/// to triangulateio object
+/// Create TriangulateIO object from TriangleMeshPolygon and 
+/// TriangleMeshHolePolygon
 //======================================================================
  template <class ELEMENT>
  void TriangleMesh<ELEMENT>::build_triangulateio(
   TriangleMeshPolygon* &outer_boundary_pt,
   Vector<TriangleMeshHolePolygon*> &inner_hole_pt,
-  triangulateio &triangle_in)
+  TriangulateIO& triangulate_io)
  {
-
-  // triangle_in initialization
-  this->initialize_triangulateio(triangle_in);
+  // triangulate_io initialization
+  TriangleHelper::initialise_triangulateio(triangulate_io);
    
-  // Build the triangulateio in object
+  // Build the TriangulateIO in object
 
   // Get number of polyline
   unsigned n_boundline=0;
@@ -973,16 +878,16 @@ namespace oomph
 
   // Store the global number of vertices and segments
   // in the list. They are supposed to be the same!!
-  triangle_in.numberofpoints=n_globalvertices;
-  triangle_in.numberofsegments=n_globalvertices;
+  triangulate_io.numberofpoints=n_globalvertices;
+  triangulate_io.numberofsegments=n_globalvertices;
       
-  // Prepearing the triangulateio objects to store the values     
-  triangle_in.pointlist = 
-   (double *) malloc(triangle_in.numberofpoints * 2 * sizeof(double));
-  triangle_in.segmentlist = 
-   (int *) malloc(triangle_in.numberofsegments * 2 * sizeof(int));
-  triangle_in.segmentmarkerlist = 
-   (int *) malloc(triangle_in.numberofsegments * sizeof(int));
+  // Prepearing the TriangulateIO objects to store the values     
+  triangulate_io.pointlist = 
+   (double *) malloc(triangulate_io.numberofpoints * 2 * sizeof(double));
+  triangulate_io.segmentlist = 
+   (int *) malloc(triangulate_io.numberofsegments * 2 * sizeof(int));
+  triangulate_io.segmentmarkerlist = 
+   (int *) malloc(triangulate_io.numberofsegments * sizeof(int));
 
   // Initialisation sub_bound counter
   unsigned count_sub_bound=1;     
@@ -1015,10 +920,10 @@ namespace oomph
         count_vertices++)
      {
 
-      triangle_in.pointlist[count_tri]= outer_boundary_pt->polyline_pt
+      triangulate_io.pointlist[count_tri]= outer_boundary_pt->polyline_pt
        (count_seg)
        ->vertex_coordinate(count_vertices)[0];
-      triangle_in.pointlist[count_tri+1]= outer_boundary_pt->
+      triangulate_io.pointlist[count_tri+1]= outer_boundary_pt->
        polyline_pt(count_seg)->vertex_coordinate(count_vertices)[1];
 
       // Store the segment values
@@ -1026,22 +931,22 @@ namespace oomph
       if(count_seg==(n_boundline-1) && 
          count_vertices==(n_polylinevertices-1))
        {
-        triangle_in.segmentlist[count_tri]=edge_segment;
-        triangle_in.segmentlist[count_tri+1]=1;
+        triangulate_io.segmentlist[count_tri]=edge_segment;
+        triangulate_io.segmentlist[count_tri+1]=1;
        }
       else
        {
-        triangle_in.segmentlist[count_tri]=edge_segment;
-        triangle_in.segmentlist[count_tri+1]=edge_segment+1;
+        triangulate_io.segmentlist[count_tri]=edge_segment;
+        triangulate_io.segmentlist[count_tri+1]=edge_segment+1;
         edge_segment++;
        }
 
       // Store the marker list of the segments
       // The count_sub_bound is used, instead of the idpolyline
-      triangle_in.segmentmarkerlist[count_tri/2]=count_sub_bound;
+      triangulate_io.segmentmarkerlist[count_tri/2]=count_sub_bound;
       
       // -1 because of the different enumeration between oomph_lib mesh
-      // and the triangulateio structure!
+      // and the TriangulateIO structure!
             
       // Build the vector os sub boundary id for the boundary "idpolyline"
       sub_bound_id[count_bound_segment]=count_sub_bound-1;
@@ -1064,7 +969,6 @@ namespace oomph
   // Storing all the values in the list
   for(unsigned count_hole=0;count_hole<n_holes;count_hole++)
    {
-
     // Store the value of the first starting counting node for the hole
     // The hole's boundary doesn't share node with the external polygon
     edge_segment++;
@@ -1097,10 +1001,10 @@ namespace oomph
       for(unsigned count_vertices=0;count_vertices<n_polylinevertices;
           count_vertices++)
        {
-        triangle_in.pointlist[count_tri]= inner_hole_pt[count_hole]->
+        triangulate_io.pointlist[count_tri]= inner_hole_pt[count_hole]->
          polyline_pt(count_seg)->
          vertex_coordinate(count_vertices)[0];
-        triangle_in.pointlist[count_tri+1]= inner_hole_pt[count_hole]->
+        triangulate_io.pointlist[count_tri+1]= inner_hole_pt[count_hole]->
          polyline_pt(count_seg)->
          vertex_coordinate(count_vertices)[1];
 
@@ -1109,22 +1013,22 @@ namespace oomph
         if(count_seg==(n_holepolyline-1) && 
            count_vertices==(n_polylinevertices-1))
          {
-          triangle_in.segmentlist[count_tri]=edge_segment;
-          triangle_in.segmentlist[count_tri+1]=hole_vertex_start;
+          triangulate_io.segmentlist[count_tri]=edge_segment;
+          triangulate_io.segmentlist[count_tri+1]=hole_vertex_start;
          }
         else
          {
-          triangle_in.segmentlist[count_tri]=edge_segment;
-          triangle_in.segmentlist[count_tri+1]=edge_segment+1;
+          triangulate_io.segmentlist[count_tri]=edge_segment;
+          triangulate_io.segmentlist[count_tri+1]=edge_segment+1;
           edge_segment++;
          }
 
         // Store the marker list of the segments
         // Check if the boundary id has been provided
-        triangle_in.segmentmarkerlist[count_tri/2]=count_sub_bound; 
+        triangulate_io.segmentmarkerlist[count_tri/2]=count_sub_bound; 
         
         // -1 because of the different enumeration between oomph_lib mesh
-        // and the triangulateio structure!
+        // and the TriangulateIO structure!
         // Build the vector of sub boundary id for the boundary "idpolyline"
         sub_bound_id[count_bound_segment]=count_sub_bound-1;
         
@@ -1146,7 +1050,7 @@ namespace oomph
   if(n_boundglobalseg!=n_globalvertices)
    {
     std::ostringstream error_stream;
-    error_stream  << "Error building triangulateio object\n"
+    error_stream  << "Error building TriangulateIO object\n"
                   << "Please, check TriangleMeshPolyLine and\n"
                   << "TriangleMeshPolygon provided"
                   <<std::endl;      
@@ -1156,28 +1060,27 @@ namespace oomph
    }
      
   // Storing the hole center coordinates
-  triangle_in.numberofholes = n_holes;
-  triangle_in.holelist =
-   (double*) malloc(triangle_in.numberofholes * 2 * sizeof(double));
+  triangulate_io.numberofholes = n_holes;
+  triangulate_io.holelist =
+   (double*) malloc(triangulate_io.numberofholes * 2 * sizeof(double));
 
   for(unsigned count_hole=0;count_hole<n_holes*2;count_hole+=2)
    {
-    triangle_in.holelist[count_hole] = inner_hole_pt[count_hole/2]->
+    triangulate_io.holelist[count_hole] = inner_hole_pt[count_hole/2]->
      hole_coordinate()[0];
-    triangle_in.holelist[count_hole+1] = inner_hole_pt[count_hole/2]->
+    triangulate_io.holelist[count_hole+1] = inner_hole_pt[count_hole/2]->
      hole_coordinate()[1];
    }
 
-  // triangulateio in object built
  }
 
 //========================================================================
-/// Create triangulateio object via the .poly file
+/// Create TriangulateIO object via the .poly file
 //========================================================================
  template <class ELEMENT>
  void TriangleMesh<ELEMENT>::build_triangulateio(
   const std::string& poly_file_name,
-  triangulateio &triangle_data)
+  TriangulateIO& triangulate_io)
  {
  
   // Process poly file
@@ -1191,7 +1094,7 @@ namespace oomph
    }
   
   // Initialize triangulateio structure
-  initialize_triangulateio(triangle_data);
+  TriangleHelper::initialise_triangulateio(triangulate_io);
   
   // Ignore the first line with structure description
   poly_file.ignore(80,'\n');
@@ -1199,11 +1102,11 @@ namespace oomph
   // Read and store number of nodes
   unsigned invertices;
   poly_file>>invertices;
-  triangle_data.numberofpoints=invertices; 
+  triangulate_io.numberofpoints=invertices; 
 
   // Initialisation of the point list
-  triangle_data.pointlist = 
-   (double *) malloc(triangle_data.numberofpoints * 2 * sizeof(double));
+  triangulate_io.pointlist = 
+   (double *) malloc(triangulate_io.numberofpoints * 2 * sizeof(double));
 
   // Read and store spatial dimension of nodes
   unsigned mesh_dim;
@@ -1227,13 +1130,13 @@ namespace oomph
   unsigned nextras;
   poly_file>> nextras;
 
-  triangle_data.numberofpointattributes = 0;
-  triangle_data.pointattributelist = (double *) NULL;
+  triangulate_io.numberofpointattributes = 0;
+  triangulate_io.pointattributelist = (double *) NULL;
    
   // Read and check the flag for boundary markers
   unsigned nodemarkers;
   poly_file>>nodemarkers;
-  triangle_data.pointmarkerlist = (int *) NULL;
+  triangulate_io.pointmarkerlist = (int *) NULL;
 
 #ifdef PARANOID
    // Reading the .poly with the oomph.lib we need
@@ -1265,8 +1168,8 @@ namespace oomph
   for(unsigned count=0;count<invertices;count++)
    {
     poly_file>>dummy_value;
-    poly_file>>triangle_data.pointlist[count_point];
-    poly_file>>triangle_data.pointlist[count_point+1];
+    poly_file>>triangulate_io.pointlist[count_point];
+    poly_file>>triangulate_io.pointlist[count_point+1];
     if(nextras!=0 || nodemarkers!=0)
      {
       for(unsigned j=0;j<nextras;j++)
@@ -1326,11 +1229,11 @@ namespace oomph
    }
 #endif
 
-  triangle_data.numberofsegments = inelements;
-  triangle_data.segmentlist = 
-   (int *) malloc(triangle_data.numberofsegments * 2 * sizeof(int));
-  triangle_data.segmentmarkerlist = 
-   (int *) malloc(triangle_data.numberofsegments * sizeof(int));
+  triangulate_io.numberofsegments = inelements;
+  triangulate_io.segmentlist = 
+   (int *) malloc(triangulate_io.numberofsegments * 2 * sizeof(int));
+  triangulate_io.segmentmarkerlist = 
+   (int *) malloc(triangulate_io.numberofsegments * sizeof(int));
  
   
   // Initialisation sub_bound counter
@@ -1340,11 +1243,11 @@ namespace oomph
   for(unsigned i=0;i<2*inelements;i+=2)
    {
     poly_file>>dummy_seg;
-    poly_file>>triangle_data.segmentlist[i];
-    poly_file>>triangle_data.segmentlist[i+1];
+    poly_file>>triangulate_io.segmentlist[i];
+    poly_file>>triangulate_io.segmentlist[i+1];
     if(segment_markers!=0)
      {
-      poly_file>>triangle_data.segmentmarkerlist[i/2];
+      poly_file>>triangulate_io.segmentmarkerlist[i/2];
      } 
  
     //Skip line with commentary
@@ -1361,54 +1264,56 @@ namespace oomph
     unsigned nhole;
     poly_file>>nhole;
  
-    triangle_data.numberofholes = nhole;
-    triangle_data.holelist = 
-     (double *) malloc(triangle_data.numberofholes * 2 * sizeof(double));
+    triangulate_io.numberofholes = nhole;
+    triangulate_io.holelist = 
+     (double *) malloc(triangulate_io.numberofholes * 2 * sizeof(double));
 
     // Loop over the holes to get centre coords and store value onto the 
-    // triangulateio object
+    // TriangulateIO object
     for(unsigned i=0;i<2*nhole;i+=2)
      {
       poly_file>>dummy_hole;
-      poly_file>>triangle_data.holelist[i];
-      poly_file>>triangle_data.holelist[i+1];
+      poly_file>>triangulate_io.holelist[i];
+      poly_file>>triangulate_io.holelist[i+1];
      }
    }  
  }
 
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
 //========================================================================
-/// Build a new triangulateio object, copying the previous triangulateio
-/// and updating the maximum area for each element, driven by the
-/// estimate computed
+/// Build a new TriangulateIO object based on target areas specified
 //========================================================================
  template <class ELEMENT>
- void TriangleMesh<ELEMENT>::refine_triangulateio(
-  struct triangulateio &triangle_in,
-  Vector<double> &error_elem,
-  const double &error_target,
-  struct triangulateio &triangle_refine)
+ void RefineableTriangleMesh<ELEMENT>::refine_triangulateio(
+  TriangulateIO& triangulate_io,
+  const Vector<double>& target_area,
+  struct TriangulateIO& triangle_refine)
  {
   
-  //  Initialize triangulateio structure
-  this->initialize_triangulateio(triangle_refine);
+  //  Initialize 
+  TriangleHelper::initialise_triangulateio(triangle_refine);
 
   // Store the global number of vertices and segments
   // in the list  
-  unsigned n_points = triangle_in.numberofpoints;
+  unsigned n_points = triangulate_io.numberofpoints;
   triangle_refine.numberofpoints=n_points;
   
-  unsigned n_segments=triangle_in.numberofsegments;
+  unsigned n_segments=triangulate_io.numberofsegments;
   triangle_refine.numberofsegments=n_segments;
       
-  // Initialization of the triangulateio objects to store the values     
+  // Initialization of the TriangulateIO objects to store the values     
   triangle_refine.pointlist = 
-   (double *) malloc(triangle_in.numberofpoints * 2 * sizeof(double));
+   (double *) malloc(triangulate_io.numberofpoints * 2 * sizeof(double));
   triangle_refine.pointmarkerlist = 
-   (int *) malloc(triangle_in.numberofpoints * sizeof(int));
+   (int *) malloc(triangulate_io.numberofpoints * sizeof(int));
   triangle_refine.segmentlist = 
-   (int *) malloc(triangle_in.numberofsegments * 2 * sizeof(int));
+   (int *) malloc(triangulate_io.numberofsegments * 2 * sizeof(int));
   triangle_refine.segmentmarkerlist = 
-   (int *) malloc(triangle_in.numberofsegments * sizeof(int));
+   (int *) malloc(triangulate_io.numberofsegments * sizeof(int));
      
   // Storing the point's coordinates in the list
   // and in two vectors with x and y coordinates
@@ -1417,17 +1322,18 @@ namespace oomph
   
   for(unsigned count_point=0;count_point<n_points*2;count_point++)
    {
-    triangle_refine.pointlist[count_point]=triangle_in.pointlist[count_point];
+    triangle_refine.pointlist[count_point]=
+     triangulate_io.pointlist[count_point];
     
     // Even vaules represent the x coordinate
     // Odd values represent the y coordinate
     if (count_point%2==0)
      {
-      x_coord[count_point/2] = triangle_in.pointlist[count_point];
+      x_coord[count_point/2] = triangulate_io.pointlist[count_point];
      }
     else
      {
-      y_coord[(count_point-1)/2] = triangle_in.pointlist[count_point];
+      y_coord[(count_point-1)/2] = triangulate_io.pointlist[count_point];
      }
    }
 
@@ -1435,135 +1341,88 @@ namespace oomph
   for(unsigned count_marker=0;count_marker<n_points;count_marker++)
    {
     triangle_refine.pointmarkerlist[count_marker]=
-     triangle_in.pointmarkerlist[count_marker];
+     triangulate_io.pointmarkerlist[count_marker];
    }
 
   // Storing the segment's edges in the list
   for(unsigned count_seg=0;count_seg<n_segments*2;count_seg++)
    {
-    triangle_refine.segmentlist[count_seg]=triangle_in.segmentlist[count_seg];
+    triangle_refine.segmentlist[count_seg]=
+     triangulate_io.segmentlist[count_seg];
    }
 
   // Store the segment's markers in the list
   for(unsigned count_markers=0;count_markers<n_segments;count_markers++)
    {
     triangle_refine.segmentmarkerlist[count_markers]=
-     triangle_in.segmentmarkerlist[count_markers];
+     triangulate_io.segmentmarkerlist[count_markers];
    }
 
   // Store the hole's center coordinates
-  unsigned n_holes = triangle_in.numberofholes;
+  unsigned n_holes = triangulate_io.numberofholes;
   triangle_refine.numberofholes = n_holes;
 
   triangle_refine.holelist =
-   (double*) malloc(triangle_in.numberofholes * 2 * sizeof(double));
+   (double*) malloc(triangulate_io.numberofholes * 2 * sizeof(double));
 
   // Loop over the holes to get centre coords  
   for(unsigned count_hole=0;count_hole<n_holes*2;count_hole++)
    {
-    triangle_refine.holelist[count_hole] = triangle_in.holelist[count_hole];
+    triangle_refine.holelist[count_hole] = triangulate_io.holelist[count_hole];
    }
   
   // Store the triangles values  
-  unsigned n_triangles = triangle_in.numberoftriangles;
+  unsigned n_triangles = triangulate_io.numberoftriangles;
   triangle_refine.numberoftriangles = n_triangles;
   
-  unsigned n_corners = triangle_in.numberofcorners;
+#ifdef PARANOID
+  if (n_triangles!=target_area.size())
+   {
+    std::stringstream err;
+    err << "Number of triangles in triangulate_io="
+        << n_triangles << " doesn't match\n"
+        << "size of target area vector ("
+        << target_area.size() << ")\n";
+    throw OomphLibError(
+     err.str(),
+     "RefineableTriangleMesh::refine_triangulateio(",
+     OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+
+  unsigned n_corners = triangulate_io.numberofcorners;
   triangle_refine.numberofcorners = n_corners;
   
   triangle_refine.trianglelist = 
-   (int *) malloc(triangle_in.numberoftriangles * 3 * sizeof(int)); 
+   (int *) malloc(triangulate_io.numberoftriangles * 3 * sizeof(int)); 
  
-  // Store the triangle's corners in the list
-  // Fill in the vector of the element's area list
-  Vector<double> elem_area(n_triangles);
-   
+  // Store the triangle's corners in the list and get element sizes
   for(unsigned count_tri=0;count_tri<n_triangles*3;count_tri++)
    {
     triangle_refine.trianglelist[count_tri]=
-     triangle_in.trianglelist[count_tri];
-
-    // In order to refine the meshing we need to know the area value 
-    // of each element (triangle). The area value is obtained by the formula:
-    // area = |(Ax(By-Cy)+Bx(Cy-Ay)+Cx(Ay-By))/2|
-    
-    // We compute one element at a time, hence every 3 list's values
-    if (count_tri%3==0)
-     {
-      unsigned count_tri_a = triangle_in.trianglelist[count_tri];
-      double ax= x_coord[count_tri_a-1];
-      double ay= y_coord[count_tri_a-1];
-      
-      unsigned count_tri_b = triangle_in.trianglelist[count_tri+1];
-      double bx= x_coord[count_tri_b-1];
-      double by= y_coord[count_tri_b-1];
-      
-      unsigned count_tri_c = triangle_in.trianglelist[count_tri+2];
-      double cx= x_coord[count_tri_c-1];
-      double cy= y_coord[count_tri_c-1];
-
-      // Area value
-      elem_area[count_tri/3] = (ax*(by-cy)+bx*(cy-ay)+cx*(ay-by))*0.5;
-      
-     }
+     triangulate_io.trianglelist[count_tri];
    }
 
   // Store the triangle's area in the list
-  // This list give the refine criteria. Area parameter
-  // is the maximum area of the index triangle 
   triangle_refine.trianglearealist = 
-   (double *) malloc(triangle_in.numberoftriangles * sizeof(double)); 
- 
-  // The new area value is computed according to
-  // the error estimate of each element
-  double area = 0.0;
-  double no_refine = -1;
-
+   (double *) malloc(triangulate_io.numberoftriangles * sizeof(double)); 
   for(unsigned count_area=0;count_area<n_triangles;count_area++)
    {
-    // Initialize error ratio
-    double error_ratio=0;
-    
-    // Find the best element's area value  
-    // according to its error estimate
-    if(error_elem[count_area]!=0.0)
-     {
-      error_ratio=error_target/error_elem[count_area];
-     }
-    else
-     {
-      error_ratio=Max_error_ratio;
-     }
-    
-    // Condition to save a segmation fault for error_ratio
-    // values over the double range
-    if(error_ratio>=Min_error_ratio && error_ratio<=Max_error_ratio )
-     {
-      // With unrefinement        
-      area = abs(elem_area[count_area]*error_ratio); 
-      triangle_refine.trianglearealist[count_area]=area;
-     }
-    else
-     {
-      // Triangulateio function doesn't refine if the 
-      // are value is -1
-      triangle_refine.trianglearealist[count_area]=no_refine;
-     }
+    triangle_refine.trianglearealist[count_area]=target_area[count_area];
    }
-  
-  // triangulateio in object built
  }
+
+
 //==============================================================
-/// Write a Triangulateio_object file of the triangulateio object
+/// Write a Triangulateio_object file of the TriangulateIO object
 /// String s is add to assign a different value for
 /// input and/or output structure.
 /// The function give the same result of the "report" function
 /// included in the tricall.c, esternal_src.
 //==============================================================
  template <class ELEMENT>
- void TriangleMesh<ELEMENT>::write_triangulateio(
-  struct triangulateio &triangle, 
-  std::string &s)
+ void TriangleMesh<ELEMENT>::write_triangulateio(TriangulateIO& triangle, 
+                                                 std::string &s)
  {
 
   std::ofstream outfile;
@@ -1741,5 +1600,368 @@ namespace oomph
   outfile.close();
  }
 
+
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+
+//======================================================================
+/// Adapt problem based on specified elemental error estimates
+//======================================================================
+ template <class ELEMENT>
+ void RefineableTriangleMesh<ELEMENT>::adapt(OomphCommunicator* comm_pt,
+                                             const Vector<double>& elem_error)
+ {    
+  // Get the current TriangulateIO object
+  TriangulateIO tmp_triangulateio=this->triangulateio_representation();
+  
+  // Get refinement targets
+  Vector<double> target_area(elem_error.size());
+  double min_angle=compute_area_target(tmp_triangulateio,
+                                       elem_error,
+                                       target_area);
+  // Get maximum target area
+  unsigned n=target_area.size();
+  double max_area=0.0;
+  double min_area=DBL_MAX;
+  for (unsigned e=0;e<n;e++)
+   {
+    if (target_area[e]>max_area) max_area=target_area[e];
+    if (target_area[e]<min_area) min_area=target_area[e];
+   }
+  
+  oomph_info << "Maximum target area: " << max_area << std::endl;
+  oomph_info << "Minimum target area: " << min_area << std::endl;
+  oomph_info << "Number of elements to be refined " 
+             << this->Nrefined << std::endl;
+  oomph_info << "Number of elements to be unrefined "
+             << this->Nunrefined << std::endl;
+  oomph_info << "Min angle "<< min_angle << std::endl;
+
+  this->max_and_min_area(max_area, min_area);
+  oomph_info << "Max/min area in original mesh: " 
+             << max_area  << " "
+             << min_area << std::endl;    
+
+  // Should we bother to adapt?
+  if ( (Nrefined > 0) || (Nunrefined > max_keep_unrefined()) ||
+       (min_angle < min_permitted_angle()) )
+   {
+
+    if (! ( (Nrefined > 0) || (Nunrefined > max_keep_unrefined()) ) )
+     {
+      oomph_info 
+       << "Mesh regeneration triggered by min angle criterion\n";
+     }
+
+
+    // Update the holes' reference configuration (vertices and position
+    // of the point in the hole)
+    unsigned nhole=this->Inner_hole_pt.size();
+    Vector<Vector<double> > hole_centre_coord(nhole);
+    for(unsigned ihole=0;ihole<nhole;ihole++)
+     {
+      // Reset inner hole reference configuration
+      this->Inner_hole_pt[ihole]->reset_reference_configuration();
+      
+      // Initialize Vector hole_coordinates
+      hole_centre_coord[ihole].resize(2);
+      
+      // Get the vector of hole coordinates
+      hole_centre_coord[ihole]=this->Inner_hole_pt[ihole]->hole_coordinate();
+     }
+    
+    // Update the TriangulateIO structure according to the new nodes elastic 
+    // displacement.
+    this->update_triangulateio(hole_centre_coord);
+    
+    // Get the updated TriangulateIO object
+    tmp_triangulateio=this->triangulateio_representation();
+    
+
+    // Are we dealing with a solid mesh?
+    SolidMesh* solid_mesh_pt=dynamic_cast<SolidMesh*>(this);
+
+    // Build temporary uniform background mesh
+    //----------------------------------------
+    // with area set by maximum required area
+    //---------------------------------------
+    RefineableTriangleMesh<ELEMENT>* tmp_new_mesh_pt=0;
+    if (solid_mesh_pt==0)
+     {
+      tmp_new_mesh_pt=new RefineableSolidTriangleMesh<ELEMENT>
+       (this->Outer_boundary_pt,
+        this->Inner_hole_pt,
+        max_area,
+        this->Time_stepper_pt);
+     }
+    else
+     {
+      tmp_new_mesh_pt=new RefineableTriangleMesh<ELEMENT>
+       (this->Outer_boundary_pt,
+        this->Inner_hole_pt,
+        max_area,
+        this->Time_stepper_pt);
+     }
+
+    // Get the TriangulateIO object associated with that mesh
+    TriangulateIO tmp_new_triangulateio=
+     tmp_new_mesh_pt->triangulateio_representation();
+    
+#ifdef PARANOID
+    if (this->Problem_pt==0) 
+     {
+      throw OomphLibError("Problem pointer must be set with problem_pt()",
+                          "TriangleMesh::adapt()",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+
+    RefineableTriangleMesh<ELEMENT>* new_mesh_pt=0;
+
+    // Map storing target areas for elements in temporary 
+    // TriangulateIO mesh
+    std::map<GeneralisedElement*,double> target_area_map;
+
+    // Now start iterating to refine mesh recursively
+    //-----------------------------------------------
+    bool done=false;
+    unsigned iter=0;
+    while (!done)
+     {
+      
+      // "Project" target areas from current mesh onto uniform
+      //------------------------------------------------------
+      // background mesh
+      //----------------
+      
+      // Temporarily switch on projection capabilities to allow
+      // storage of pointer to external element.
+      // Need to do this for both meshes to ensure that 
+      // matching is done based on Eulerian coordinates for both
+      // (in case we're dealing with solid meshes where the
+      // locate_zeta would otherwise use the Lagrangian coordintes).
+      unsigned nelem=this->nelement();
+      for (unsigned e=0;e<nelem;e++)
+       {
+        dynamic_cast<ELEMENT*>(this->element_pt(e))->enable_projection();
+       }
+      unsigned nelem2=tmp_new_mesh_pt->nelement();
+      for (unsigned e=0;e<nelem2;e++)
+       {
+        dynamic_cast<ELEMENT*>(tmp_new_mesh_pt->element_pt(e))->
+         enable_projection();
+       }
+
+      // Set up multi domain interactions so we can figure out
+      // which element in the intermediate uniform mesh is co-located
+      // with given element in current mesh (which is to be refined)
+      Multi_domain_functions::setup_multi_domain_interaction
+       <ELEMENT>(this->Problem_pt,this,tmp_new_mesh_pt);
+      
+      target_area_map.clear();
+      for (unsigned e=0;e<nelem;e++)
+       {
+        ELEMENT* el_pt=dynamic_cast<ELEMENT*>(this->element_pt(e));
+        unsigned nint=el_pt->integral_pt()->nweight();
+        for (unsigned ipt=0;ipt<nint;ipt++)
+         {
+          GeneralisedElement* ext_el_pt=el_pt->external_element_pt(0,ipt);
+
+          // Use max. rather than min area of any element overlapping the
+          // the current element, otherwise we get a rapid outward diffusion
+          // of small elements
+          target_area_map[ext_el_pt]=std::max(target_area_map[ext_el_pt],
+                                              target_area[e]);
+         }
+
+        // Switch off projection capability          
+        dynamic_cast<ELEMENT*>(this->element_pt(e))->disable_projection();
+       }
+      for (unsigned e=0;e<nelem2;e++)
+       {
+        dynamic_cast<ELEMENT*>(tmp_new_mesh_pt->element_pt(e))->
+         disable_projection();
+       }      
+
+      // Now copy into target area for temporary mesh but limit to
+      // the equivalent of one sub-division per iteration
+      done=true;
+      unsigned nel_new=tmp_new_mesh_pt->nelement();
+      Vector<double> new_target_area(nel_new);
+      for (unsigned e=0;e<nel_new;e++)
+       {
+        // No target area found for this element -- keep its size
+        // by setting target area to -1 for triangle
+        double new_area=target_area_map[tmp_new_mesh_pt->element_pt(e)];
+        if (new_area<=0.0) 
+         {
+          new_target_area[e]=-1.0; 
+         }
+        else 
+         {
+          // Limit target area to the equivalent of uniform
+          // refinement during this stage of the iteration
+          new_target_area[e]=new_area;
+          if (new_target_area[e]<
+              tmp_new_mesh_pt->finite_element_pt(e)->size()/3.0)
+           {
+            new_target_area[e]=
+             tmp_new_mesh_pt->finite_element_pt(e)->size()/3.0;
+            
+            // We'll need to give it another go later
+            done=false;
+           }
+         }
+       }
+      
+      
+
+      // Now create the new mesh from TriangulateIO structure
+      //-----------------------------------------------------
+      // associated with uniform background mesh and the
+      //------------------------------------------------
+      // associated target element sizes.
+      //---------------------------------
+      
+      // Solid mesh?
+      if (solid_mesh_pt!=0)
+       {
+        new_mesh_pt=new RefineableSolidTriangleMesh<ELEMENT>
+         (new_target_area,
+          tmp_new_triangulateio,
+          this->Time_stepper_pt);
+       }      
+      // No solid mesh
+      else
+       { 
+        new_mesh_pt=new RefineableTriangleMesh<ELEMENT>
+         (new_target_area,
+          tmp_new_triangulateio,
+          this->Time_stepper_pt);
+       }    
+      
+      
+      // Not done: get ready for another iteration
+      iter++;
+      delete tmp_new_mesh_pt;
+      if (!done)
+       {
+        tmp_new_mesh_pt=new_mesh_pt;
+        tmp_new_triangulateio=new_mesh_pt->triangulateio_representation();
+       }
+      
+     } // end of iteration
+    
+    
+    // Project current solution onto new mesh
+    //---------------------------------------
+    ProjectionProblem<ELEMENT>* project_problem_pt=
+     new ProjectionProblem<ELEMENT>;
+    project_problem_pt->mesh_pt()=new_mesh_pt;
+    project_problem_pt->project(this);
+    
+    //Flush the old mesh 
+    unsigned nnod=nnode();
+    for(unsigned j=nnod;j>0;j--)  
+     { 
+      delete Node_pt[j-1];  
+      Node_pt[j-1] = 0; 
+     } 
+    unsigned nel=nelement(); 
+    for(unsigned e=nel;e>0;e--)  
+     { 
+      delete Element_pt[e-1];  
+      Element_pt[e-1] = 0; 
+     } 
+    
+    // Now copy back to current mesh
+    //------------------------------
+    nnod=new_mesh_pt->nnode();
+    Node_pt.resize(nnod);
+    nel=new_mesh_pt->nelement();
+    Element_pt.resize(nel);  
+    for(unsigned j=0;j<nnod;j++)
+     { 
+      Node_pt[j] = new_mesh_pt->node_pt(j);
+     } 
+    for(unsigned e=0;e<nel;e++)
+     { 
+      Element_pt[e] = new_mesh_pt->element_pt(e);
+     } 
+    
+    //Copy the boundary schemes
+    unsigned nbound=new_mesh_pt->nboundary();
+    Boundary_element_pt.resize(nbound);
+    Face_index_at_boundary.resize(nbound);
+    Boundary_node_pt.resize(nbound);
+    for (unsigned b=0;b<nbound;b++)
+     {
+      unsigned nel=new_mesh_pt->nboundary_element(b);
+      Boundary_element_pt[b].resize(nel);
+      Face_index_at_boundary[b].resize(nel);
+      for (unsigned e=0;e<nel;e++)
+       {
+        Boundary_element_pt[b][e]=new_mesh_pt->boundary_element_pt(b,e);
+        Face_index_at_boundary[b][e]=new_mesh_pt->face_index_at_boundary(b,e);
+       }
+      unsigned nnod=new_mesh_pt->nboundary_node(b);
+      Boundary_node_pt[b].resize(nnod);
+      for (unsigned j=0;j<nnod;j++)
+       {
+        Boundary_node_pt[b][j]=new_mesh_pt->boundary_node_pt(b,j);
+       }
+     }
+    
+    // Copy the IDs of the vertex nodes
+    this->Oomph_vertex_nodes_id=new_mesh_pt->oomph_vertex_nodes_id();
+    
+    // Copy TriangulateIO representation
+    TriangleHelper::clear_triangulateio(this->Triangulateio);
+    bool quiet=true;
+    this->Triangulateio=
+     TriangleHelper::deep_copy_of_triangulateio_representation(
+      new_mesh_pt->triangulateio_representation(),quiet);
+    
+    // Flush the mesh
+    new_mesh_pt->flush_element_and_node_storage();
+    
+    // Delete the mesh and the problem
+    delete new_mesh_pt;
+    delete project_problem_pt;
+
+    // Solid mesh?
+    if (solid_mesh_pt!=0)
+     {
+      // Warning
+      std::stringstream error_message;
+      error_message 
+       << "Lagrangian coordinates are currently not projected but are\n"
+       << "are re-set during adaptation. This is not appropriate for\n"
+       << "real solid mechanics problems!\n";
+      OomphLibWarning(error_message.str(),
+                      "RefineableTriangleMesh::adapt()",
+                      OOMPH_EXCEPTION_LOCATION);
+      
+      // Reset Lagrangian coordinates
+      dynamic_cast<SolidMesh*>(this)->set_lagrangian_nodal_coordinates();
+     }
+    
+    double max_area;
+    double min_area;
+    this->max_and_min_area(max_area, min_area);
+    oomph_info << "Max/min area in adapted mesh: " 
+               << max_area  << " "
+               << min_area << std::endl;    
+   }
+  else
+   {
+    oomph_info << "Not enough benefit in adaptation.\n";
+    Nrefined=0;
+    Nunrefined=0;
+   }
+ }
+
+ 
 }
 #endif

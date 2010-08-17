@@ -107,22 +107,22 @@ public:
 
  /// Output function -- forward to broken version in FiniteElement
  /// until somebody decides what exactly they want to plot here...
- void output(std::ostream &outfile) {FiniteElement::output(outfile);}
+ void output(std::ostream &outfile) {FaceGeometry<ELEMENT>::output(outfile);}
 
  /// \short Output function -- forward to broken version in FiniteElement
  /// until somebody decides what exactly they want to plot here...
  void output(std::ostream &outfile, const unsigned &n_plot)
-  {FiniteElement::output(outfile,n_plot);}
+  {FaceGeometry<ELEMENT>::output(outfile,n_plot);}
 
  /// C-style output function -- forward to broken version in FiniteElement
  /// until somebody decides what exactly they want to plot here...
- void output(FILE* file_pt) {FiniteElement::output(file_pt);}
+ void output(FILE* file_pt) {FaceGeometry<ELEMENT>::output(file_pt);}
 
  /// \short C-style output function -- forward to broken version in 
  /// FiniteElement until somebody decides what exactly they want to plot 
  /// here...
  void output(FILE* file_pt, const unsigned &n_plot)
-  {FiniteElement::output(file_pt,n_plot);}
+  {FaceGeometry<ELEMENT>::output(file_pt,n_plot);}
 
 protected:
  

@@ -128,10 +128,10 @@ namespace GlobalParameters
 #endif
 
   // Evaluate Hankel at actual radius
-  Hankel_functions_for_Helmholtz_problem::Hankel_first(N_fourier,rr,h,hp);
+  Hankel_functions_for_helmholtz_problem::Hankel_first(N_fourier,rr,h,hp);
 
   // Evaluate Hankel at inner (unit) radius
-  Hankel_functions_for_Helmholtz_problem::Hankel_first(N_fourier
+  Hankel_functions_for_helmholtz_problem::Hankel_first(N_fourier
                                                        ,sqrt(K_squared),
                                                        h_a,hp_a);
   
@@ -220,7 +220,7 @@ namespace GlobalParameters
 
 
 //========= start_of_problem_class=====================================
-/// Problem class to compute scattering of planar wave off unit disk
+/// Problem class to compute scattering of planar wave from unit disk
 //=====================================================================
 template<class ELEMENT> 
 class ScatteringProblem : public Problem
@@ -345,6 +345,10 @@ ScatteringProblem()
  // Create/set error estimator
  Bulk_mesh_pt->spatial_error_estimator_pt()=new Z2ErrorEstimator;
  
+ // Choose error tolerances to force some uniform refinement
+ Bulk_mesh_pt->min_permitted_error()=0.004;
+ Bulk_mesh_pt->max_permitted_error()=0.01;
+
 #else
  
  // Build "bulk" mesh
@@ -522,10 +526,21 @@ template<class ELEMENT>
 void ScatteringProblem<ELEMENT>::doc_solution(DocInfo& 
                                               doc_info) 
 { 
- // Output the power on the outer_domain
- //-------------------------------------
 
- //Accumulate total radiated radiated 
+ ofstream some_file,some_file2;
+ char filename[100];
+ 
+ // Number of plot points
+ unsigned npts;
+ npts=5; 
+
+ // Compute/output the radiated power
+ //----------------------------------
+ sprintf(filename,"%s/power%i.dat",doc_info.directory().c_str(),
+         doc_info.number());
+ some_file.open(filename);
+
+ // Accumulate contribution from elements
  double power=0.0;
  unsigned nn_element=Helmholtz_outer_boundary_mesh_pt->nelement(); 
  for(unsigned e=0;e<nn_element;e++)
@@ -533,17 +548,10 @@ void ScatteringProblem<ELEMENT>::doc_solution(DocInfo&
    HelmholtzBCElementBase<ELEMENT> *el_pt = 
     dynamic_cast< HelmholtzBCElementBase<ELEMENT>*>(
      Helmholtz_outer_boundary_mesh_pt->element_pt(e)); 
-   power += el_pt->global_power_contribution();
+   power += el_pt->global_power_contribution(some_file);
   }
- oomph_info << "Total radiated power " << power << std::endl; 
- 
-
- ofstream some_file;
- char filename[100];
- 
- // Number of plot points
- unsigned npts;
- npts=5; 
+ some_file.close();
+ oomph_info << "Total radiated power: " << power << std::endl; 
 
  // Output solution 
  //-----------------
@@ -573,6 +581,34 @@ void ScatteringProblem<ELEMENT>::doc_solution(DocInfo&
  oomph_info << "\nNorm of error   : " << sqrt(error) << std::endl; 
  oomph_info << "Norm of solution: " << sqrt(norm) << std::endl << std::endl;
  
+
+ // Do animation of Helmholtz solution
+ //-----------------------------------
+ unsigned nstep=40;
+ for (unsigned i=0;i<nstep;i++)
+  {
+   sprintf(filename,"%s/helmholtz_animation%i_frame%i.dat",
+           doc_info.directory().c_str(),
+           doc_info.number(),i);
+   some_file.open(filename);
+   sprintf(filename,"%s/exact_helmholtz_animation%i_frame%i.dat",
+           doc_info.directory().c_str(),
+           doc_info.number(),i);
+   some_file2.open(filename);
+   double phi=2.0*MathematicalConstants::Pi*double(i)/double(nstep-1);
+   unsigned nelem=Bulk_mesh_pt->nelement();
+   for (unsigned e=0;e<nelem;e++)
+    {
+     ELEMENT* el_pt=dynamic_cast<ELEMENT*>(
+      Bulk_mesh_pt->element_pt(e));
+     el_pt->output_real(some_file,phi,npts);    
+     el_pt->output_real_fct(some_file2,phi,npts,
+                            GlobalParameters::get_exact_u); 
+    }
+   some_file.close();
+   some_file2.close();
+  }
+
 } // end of doc
 
 //============start_of_create_flux_elements==================================
@@ -677,12 +713,11 @@ delete_face_elements(Mesh* const & boundary_mesh_pt)
 
 
 //==========start_of_main=================================================
-/// Solve 2D Helmholtz problem for scattering of a planar wave off a 
+/// Solve 2D Helmholtz problem for scattering of a planar wave from a 
 /// unit disk 
 //========================================================================
 int main(int argc, char **argv)
 {
- feenableexcept(FE_INVALID | FE_DIVBYZERO | FE_OVERFLOW | FE_UNDERFLOW);
  
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);

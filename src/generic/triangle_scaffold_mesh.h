@@ -51,16 +51,19 @@ namespace oomph
 /// this here separately because we can't include a c header directly
 /// into C++ code!
 //=====================================================================
-struct triangulateio {
+struct TriangulateIO 
+{
  ///Pointer to list of points x coordinate followed by y coordinate
  double *pointlist;
+
  ///Pointer to list of point attributes
  double *pointattributelist;
+
  ///Pointer to list of point markers
  int *pointmarkerlist;
  int numberofpoints;
  int numberofpointattributes;
-
+ 
  int *trianglelist;
  double *triangleattributelist;
  double *trianglearealist;
@@ -83,7 +86,48 @@ struct triangulateio {
  int *edgemarkerlist;  // <---- contains boundary ID (offset by one)
  double *normlist;
  int numberofedges;
+
 };
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+//==================================================================
+/// Helper namespace for triangle meshes
+//==================================================================
+namespace TriangleHelper
+{
+
+ /// Clear TriangulateIO structure
+ extern void clear_triangulateio(TriangulateIO& triangulate_io,
+                                 const bool& clear_hole_data=true);
+
+ /// Initialise TriangulateIO structure
+ extern void initialise_triangulateio(TriangulateIO& triangle_io);
+
+ /// \short Make (partial) deep copy of TriangulateIO object. We only copy
+ /// those items we need within oomph-lib's adaptation procedures.
+ /// Warnings are issued if triangulate_io contains data that is not
+ /// not copied, unless quiet=true;
+ extern TriangulateIO deep_copy_of_triangulateio_representation(
+  TriangulateIO& triangle_io, const bool& quiet=false);
+}
+
+
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
+
 
 
 //=====================================================================
@@ -103,8 +147,8 @@ public:
                       const std::string& element_file_name,
                       const std::string& poly_file_name);
  
- /// \short Constructor: Pass the triangulateio object
- TriangleScaffoldMesh(triangulateio &triangle_data); 
+ /// \short Constructor: Pass the TriangulateIO object
+ TriangleScaffoldMesh(TriangulateIO& triangle_data); 
 
  /// Broken copy constructor
  TriangleScaffoldMesh(const TriangleScaffoldMesh&) 
@@ -132,11 +176,11 @@ public:
  /// \short Return the attribute of the element e
  double element_attribute(const unsigned &e) const
   {return Element_attribute[e];}
- 
- // Vectors of hole centre // hierher kill?
- Vector<Vector<double> >& hole_centre(){return Hole_centre;}
 
-protected:
+ /// Vectors of hole centre coordinates
+ Vector<Vector<double> >& hole_centre(){return Hole_centre;}
+ 
+ protected: 
 
  /// \short Vector of vectors containing the boundary ids of the
  /// elements' edges
@@ -145,9 +189,10 @@ protected:
  /// \short Vector of double attributes for each element
  Vector<double> Element_attribute;
 
- // Vectors of hole centre // hierher kill?
+ /// Vectors of hole centre coordinates
  Vector<Vector<double> > Hole_centre;
-};
+
+ };
 
 }
 

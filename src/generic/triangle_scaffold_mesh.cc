@@ -31,6 +31,267 @@
 namespace oomph
 {
 
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+//==================================================================
+/// Helper namespace for triangle meshes
+//==================================================================
+namespace TriangleHelper
+{
+ /// Clear TriangulateIO structure
+ void clear_triangulateio(TriangulateIO& triangulate_io,
+                          const bool& clear_hole_data)
+ {    
+  // Clear the point,attribute and marker list 
+  free(triangulate_io.pointlist); 
+  free(triangulate_io.pointattributelist);
+  free(triangulate_io.pointmarkerlist); 
+  triangulate_io.numberofpoints = 0;
+  triangulate_io.numberofpointattributes = 0;
+
+  // Clear the triangle, attribute,neighbor and area list 
+  free(triangulate_io.trianglelist);    
+  free(triangulate_io.triangleattributelist);
+  free(triangulate_io.trianglearealist);
+  free(triangulate_io.neighborlist);
+  triangulate_io.numberoftriangles = 0; 
+  triangulate_io.numberofcorners = 0;
+  triangulate_io.numberoftriangleattributes = 0;
+
+  // Clear the segment and marker list 
+  free(triangulate_io.segmentlist);
+  free(triangulate_io.segmentmarkerlist);
+  triangulate_io.numberofsegments = 0;
+
+  // Clear hole list
+  if (clear_hole_data) free(triangulate_io.holelist);
+  triangulate_io.numberofholes = 0;
+
+  // Clear region list 
+  free(triangulate_io.regionlist);
+  triangulate_io.numberofregions = 0;
+
+  // Clear edge, marker and norm list 
+  free(triangulate_io.edgelist);
+  free(triangulate_io.edgemarkerlist);
+  free(triangulate_io.normlist);
+  triangulate_io.numberofedges = 0;
+
+  // Now null it all out again 
+  initialise_triangulateio(triangulate_io);
+ }
+
+
+ /// Initialise TriangulateIO structure
+ void initialise_triangulateio(TriangulateIO& triangle_io)
+ {
+  // Initialize the point list 
+  triangle_io.pointlist = (double *) NULL; 
+  triangle_io.pointattributelist = (double *) NULL;  
+  triangle_io.pointmarkerlist = (int *) NULL; 
+  triangle_io.numberofpoints = 0;
+  triangle_io.numberofpointattributes = 0;
+
+  // Initialize the triangle list 
+  triangle_io.trianglelist = (int *) NULL;    
+  triangle_io.triangleattributelist = (double *) NULL;
+  triangle_io.trianglearealist = (double *) NULL;
+  triangle_io.neighborlist = (int *) NULL;
+  triangle_io.numberoftriangles = 0; 
+  triangle_io.numberofcorners = 0;
+  triangle_io.numberoftriangleattributes = 0;
+
+  // Initialize the segment list 
+  triangle_io.segmentlist = (int *) NULL;
+  triangle_io.segmentmarkerlist = (int *) NULL;
+  triangle_io.numberofsegments = 0;
+  
+  // Initialise hole list
+  triangle_io.holelist = (double *) NULL;
+  triangle_io.numberofholes = 0;
+
+  // Initialize region list 
+  triangle_io.regionlist = (double *) NULL;
+  triangle_io.numberofregions = 0;
+
+  // Initialize edge list 
+  triangle_io.edgelist = (int *) NULL;
+  triangle_io.edgemarkerlist = (int *) NULL;
+  triangle_io.normlist = (double *) NULL;
+  triangle_io.numberofedges = 0;
+  
+
+ }
+
+
+ /// \short Make (partial) deep copy of TriangulateIO object. We only copy
+ /// those items we need within oomph-lib's adaptation procedures.
+ /// Warnings are issued if triangulate_io contains data that is not
+ /// not copied, unless quiet=true;
+ TriangulateIO deep_copy_of_triangulateio_representation(
+  TriangulateIO& triangle_io, const bool& quiet)
+ {
+  // Create the struct
+  TriangulateIO triangle_out;
+  
+  // Initialise
+  initialise_triangulateio(triangle_out);
+
+  // Point data
+  triangle_out.numberofpoints = triangle_io.numberofpoints;
+  triangle_out.pointlist = (double *) 
+   malloc(triangle_out.numberofpoints * 2 * sizeof(double));
+  for (int j=0;j<triangle_out.numberofpoints*2;j++)
+   {
+    triangle_out.pointlist[j]=triangle_io.pointlist[j];
+   }
+  
+  triangle_out.pointmarkerlist = 
+   (int *) malloc(triangle_out.numberofpoints * sizeof(int));
+  for (int j=0;j<triangle_out.numberofpoints;j++)
+   {
+    triangle_out.pointmarkerlist[j]=triangle_io.pointmarkerlist[j];
+   }
+  
+  // Warn about laziness...
+  if (!quiet)
+   {
+    if ((triangle_io.pointattributelist!=0)||
+        (triangle_io.numberofpointattributes!=0))
+     {
+      OomphLibWarning(
+       "Point attributes are not currently copied across",
+       "TriangleHelper::deep_copy_of_triangulateio_representation",
+       OOMPH_EXCEPTION_LOCATION);  
+     }
+   }
+
+
+  // Triangle data
+  triangle_out.numberoftriangles=triangle_io.numberoftriangles;
+  triangle_out.trianglelist = 
+   (int *) malloc(triangle_out.numberoftriangles * 3 * sizeof(int)); 
+  for (int j=0;j<triangle_out.numberoftriangles*3;j++)
+   {
+    triangle_out.trianglelist[j]=triangle_io.trianglelist[j];
+   }
+
+
+  
+  // Warn about laziness...
+  if (!quiet)
+   {
+    if ((triangle_io.triangleattributelist!=0)||
+        (triangle_io.numberoftriangleattributes!=0))
+     {
+      OomphLibWarning(
+       "Triangle attributes are not currently copied across",
+       "TriangleHelper::deep_copy_of_triangulateio_representation",
+       OOMPH_EXCEPTION_LOCATION);  
+     }
+
+    if ((triangle_io.trianglearealist!=0))
+     {
+      OomphLibWarning(
+       "Triangle areas are not currently copied across",
+       "TriangleHelper::deep_copy_of_triangulateio_representation",
+       OOMPH_EXCEPTION_LOCATION);  
+     }
+    
+    if ((triangle_io.neighborlist!=0))
+     {
+      OomphLibWarning(
+       "Triangle neighbours are not currently copied across",
+       "TriangleHelper::deep_copy_of_triangulateio_representation",
+       OOMPH_EXCEPTION_LOCATION);  
+     }
+   }
+  
+  
+  triangle_out.numberofcorners=triangle_io.numberofcorners;
+
+  // Segment data
+  triangle_out.numberofsegments=triangle_io.numberofsegments;
+  triangle_out.segmentlist = 
+   (int *) malloc(triangle_out.numberofsegments * 2 * sizeof(int));
+  for (int j=0;j<triangle_out.numberofsegments*2;j++)
+   {
+    triangle_out.segmentlist[j]=triangle_io.segmentlist[j];
+   }
+  triangle_out.segmentmarkerlist = 
+   (int *) malloc(triangle_out.numberofsegments * sizeof(int));
+  for (int j=0;j<triangle_out.numberofsegments;j++)
+   {
+    triangle_out.segmentmarkerlist[j]=triangle_io.segmentmarkerlist[j];
+   }
+  
+  
+  // Hole data
+  triangle_out.numberofholes=triangle_io.numberofholes;
+  triangle_out.holelist =
+   (double*) malloc(triangle_out.numberofholes * 2 * sizeof(double));
+  for (int j=0;j<triangle_out.numberofholes*2;j++)
+   {
+    triangle_out.holelist[j]=triangle_io.holelist[j];
+   }
+  
+  
+  // Warn about laziness...
+  if (!quiet)
+   {
+    if ((triangle_io.regionlist!=0)||
+        (triangle_io.numberofregions!=0))
+     {
+      OomphLibWarning(
+       "Regions are not currently copied across",
+       "TriangleHelper::deep_copy_of_triangulateio_representation",
+       OOMPH_EXCEPTION_LOCATION);  
+     }
+    
+    if ((triangle_io.edgelist!=0)||
+        (triangle_io.numberofedges!=0))
+     {
+      OomphLibWarning(
+       "Edges are not currently copied across",
+       "TriangleHelper::deep_copy_of_triangulateio_representation",
+       OOMPH_EXCEPTION_LOCATION);  
+     } 
+
+    if ((triangle_io.edgemarkerlist!=0))
+     {
+      OomphLibWarning(
+       "Edge markers are not currently copied across",
+       "TriangleHelper::deep_copy_of_triangulateio_representation",
+       OOMPH_EXCEPTION_LOCATION);  
+     } 
+    
+    if ((triangle_io.normlist!=0))
+     {
+      OomphLibWarning(
+       "Normals are not currently copied across",
+       "TriangleHelper::deep_copy_of_triangulateio_representation",
+       OOMPH_EXCEPTION_LOCATION);  
+     } 
+   }
+
+  // Give it back!
+  return triangle_out;
+  
+ }
+
+}
+
+
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
+
+
 //=====================================================================
 /// \short Constructor: Pass the filenames of the triangle files
 //=====================================================================
@@ -339,7 +600,6 @@ namespace oomph
     poly_file >> segment_boundary[i];
    } 
   
-  // Appunto Check this function
   // Extract hole center information
   unsigned nhole=0;
   poly_file>>nhole;
@@ -551,7 +811,7 @@ namespace oomph
 /// \short Constructor: Pass a data structure obtained from the triangulate
 /// function
 //=====================================================================
- TriangleScaffoldMesh::TriangleScaffoldMesh(triangulateio &triangle_data)
+ TriangleScaffoldMesh::TriangleScaffoldMesh(TriangulateIO& triangle_data)
  {
 
   
@@ -676,7 +936,6 @@ namespace oomph
      static_cast<unsigned>(triangle_data.segmentmarkerlist[i]);
    } 
 
-  // Appunto Check this function
   // Extract hole center information
   unsigned nhole=triangle_data.numberofholes;
   if(nhole!=0)

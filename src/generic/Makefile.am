@@ -96,7 +96,7 @@ multi_domain.h element_with_external_element.h iterative_linear_solver.h \
 preconditioner.h \
 general_purpose_preconditioners.h block_preconditioner.h \
 general_purpose_block_preconditioners.h SuperLU_preconditioner.h \
-matrix_vector_product.h
+matrix_vector_product.h projection.h
 
 if OOMPH_HAS_MUMPS
 

@@ -45,6 +45,7 @@ fill_in_generic_residual_contribution_helmholtz(Vector<double> &residuals,
                                               DenseMatrix<double> &jacobian, 
                                               const unsigned& flag)
 {
+
 //Find out how many nodes there are in the element
 unsigned n_node = nnode();
 
@@ -79,8 +80,8 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
  // Position and gradient
  std::complex<double> interpolated_u(0.0,0.0);
  Vector<double> interpolated_x(DIM,0.0);
- Vector< std::complex<double> > interpolated_dudx(DIM);
-
+ Vector<std::complex<double> > interpolated_dudx(DIM);
+ 
  //Calculate function value and derivatives:
  //-----------------------------------------
  
@@ -93,18 +94,18 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
      interpolated_x[j] += nodal_position(l,j)*psi(l);
     }
    //Get the nodal value of the helmholtz unknown
-     double u_value_real = raw_nodal_value(l,this->u_index_helmholtz().real());
-     double u_value_imag = raw_nodal_value(l,this->u_index_helmholtz().imag());
-     
-     interpolated_u.real() += u_value_real*psi(l);
-     interpolated_u.imag() += u_value_imag*psi(l);
-     
-     // Loop over directions
-     for(unsigned j=0;j<DIM;j++)
-      {
-       interpolated_dudx[j].real() += u_value_real*dpsidx(l,j);
-       interpolated_dudx[j].imag() += u_value_imag*dpsidx(l,j);
-      } 
+   double u_value_real = nodal_value(l,this->u_index_helmholtz().real());
+   double u_value_imag = nodal_value(l,this->u_index_helmholtz().imag());
+   
+   interpolated_u.real() += u_value_real*psi(l);
+   interpolated_u.imag() += u_value_imag*psi(l);
+   
+   // Loop over directions
+   for(unsigned j=0;j<DIM;j++)
+    {
+     interpolated_dudx[j].real() += u_value_real*dpsidx(l,j);
+     interpolated_dudx[j].imag() += u_value_imag*dpsidx(l,j);
+    } 
   }
  
  //Get body force
@@ -158,7 +159,7 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
        //The local equation number comes from the node itself
        local_eqn_real=this->nodal_local_eqn(l,this->u_index_helmholtz().real());
        local_eqn_imag=this->nodal_local_eqn(l,this->u_index_helmholtz().imag());
-
+       
        //The hang weight is one
        hang_weight = 1.0;
       }

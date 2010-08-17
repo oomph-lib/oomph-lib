@@ -641,6 +641,25 @@ protected:
 
   private:
 
+
+ /// \short Load balance helper routine: work out the partition, refinement
+ /// pattern and values to copy into the new load-balanced mesh(es) 
+ /// for a root element based upon the partition assigned to its leaves
+ void work_out_partition_and_refinement_for_root_elements_helper
+  (Vector<unsigned>& element_domain_on_this_proc,
+   Vector<Vector<Vector<unsigned> > >& to_be_refined_on_each_root,
+   Vector<Vector<double> >& double_values_on_each_root,
+   Vector<Vector<unsigned> >& unsigned_values_on_each_root,
+   Vector<unsigned>& element_partition, unsigned& max_level_overall,
+   const bool& report_stats);
+ 
+ /// \short Load balance helper routine: copy stored information from old
+ /// mesh into the new load-balanced mesh
+ void copy_stored_values_into_new_mesh_helper
+  (Vector<Vector<double> >& double_values_on_each_root,
+   Vector<Vector<unsigned> >& unsigned_values_on_each_root);
+
+
  /// \short The distributed matrix distribution method
  /// \n 1 - Automatic - the Problem distribution is employed, unless any
  /// processor has number of rows equal to 110% of N/P, in which case
@@ -973,6 +992,9 @@ protected:
  /// which is only available to problems that have already been distributed.
  /// If the problem has multiple meshes, each mesh must be built, added as
  /// as a submesh, and a call to build_global_mesh() must be made.
+ /// On return from this function all meshes must have been refined
+ /// to the same level that they were in the when Problem::distribute()
+ /// was first called.
  virtual void build_mesh()
   {
    std::string error_message =
@@ -989,9 +1011,13 @@ protected:
                        OOMPH_EXCEPTION_LOCATION);
   }
 
+
  /// \short Balance the load of a (possibly non-uniform) mesh that has
- /// already been distributed
- void load_balance()
+ /// already been distributed by redistributing elements over
+ /// processors. Returns the new partitioning of the elements in the 
+ /// mesh produced by Problem::build_mesh(). This can be used
+ /// in restarts, say.
+ Vector<unsigned> load_balance()
   {
    // Dummy DocInfo
    DocInfo doc_info;
@@ -1000,18 +1026,33 @@ protected:
    // Don't report stats
    bool report_stats=false;
 
-   load_balance(doc_info,report_stats);
+   return load_balance(doc_info,report_stats);
   }
 
  /// \short Balance the load of a (possibly non-uniform) mesh that has
- /// already been distributed
- void load_balance(DocInfo& doc_info, const bool& report_stats);
+ /// already been distributed by redistributing elements over processors.
+ /// Produce explicit stats of load balancing
+ /// process if boolean is set to true. Returns the new partitioning 
+ /// of the elements in the mesh produced by Problem::build_mesh(). 
+ /// This can be used in restarts, say.
+ Vector<unsigned> load_balance(const bool& report_stats)
+  {
+   // Dummy DocInfo
+   DocInfo doc_info;
+   doc_info.doc_flag()=false;
 
- /// \short Actions before load balancing
- virtual void actions_before_load_balance() {}
+   return load_balance(doc_info,report_stats);
+  }
 
- /// \short Actions after load balancing
- virtual void actions_after_load_balance() {}
+ /// \short Balance the load of a (possibly non-uniform) mesh that has
+ /// already been distributed by redistributing elements over the processors. 
+ /// Produce explicit stats of load balancing
+ /// process if boolean is set to true and doc various bits of data
+ /// (mainly for debugging in directory specified by DocInfo object.
+ /// Returns the new partitioning 
+ /// of the elements in the mesh produced by Problem::build_mesh(). 
+ /// This can be used in restarts, say.
+ Vector<unsigned> load_balance(DocInfo& doc_info, const bool& report_stats);
 
  /// \short Flag to use "default partition" during load balance.
  /// Should only be set to true when run in validation mode.
@@ -1023,29 +1064,12 @@ protected:
    return Use_default_partition_in_load_balance;
   }
 
- /// \short Load balance helper routine: work out the partition, refinement
- /// pattern and values to copy into the new load-balanced mesh(es) 
- /// for a root element based upon the partition assigned to its leaves
- void work_out_partition_and_refinement_for_root_elements_helper
-  (Vector<unsigned>& element_domain_on_this_proc,
-   Vector<Vector<Vector<unsigned> > >& to_be_refined_on_each_root,
-   Vector<Vector<double> >& double_values_on_each_root,
-   Vector<Vector<unsigned> >& unsigned_values_on_each_root,
-   Vector<unsigned>& element_partition, unsigned& max_level_overall,
-   const bool& report_stats);
-
  /// \short Load balance helper routine: refine each new base (sub)mesh 
  /// based upon the elements to be refined within each tree at each root
  /// on the current processor
  void refine_distributed_base_mesh
   (Vector<Vector<Vector<unsigned> > >& to_be_refined_on_each_root,
    const unsigned& max_level_overall);
-
- /// \short Load balance helper routine: copy stored information from old
- /// mesh into the new load-balanced mesh
- void copy_stored_values_into_new_mesh_helper
-  (Vector<Vector<double> >& double_values_on_each_root,
-   Vector<Vector<unsigned> >& unsigned_values_on_each_root);
 
 #endif
 
