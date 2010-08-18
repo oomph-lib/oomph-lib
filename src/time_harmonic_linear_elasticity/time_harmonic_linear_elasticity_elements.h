@@ -37,6 +37,10 @@
 #endif
 
 
+#ifdef OOMPH_HAS_MPI
+#include "mpi.h"
+#endif
+
 #include<complex>
 
 
