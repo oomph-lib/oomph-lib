@@ -766,8 +766,10 @@ public:
      // Reset elemental errors and norms
      el_norm=0.0;
      el_error=0.0;
+#ifdef OOMPH_HAS_MPI
      //Compute error for each non-halo element
      if (!(el_pt->is_halo()))
+#endif
       {
        el_pt->compute_error(outfile,exact_soln_pt,time,el_error,el_norm);
       }
@@ -805,7 +807,9 @@ public:
      el_norm=0.0;
      el_error=0.0;
      //Calculate the elemental errors for each non-halo element
+#ifdef OOMPH_HAS_MPI
      if (!(el_pt->is_halo()))
+#endif
       {
        el_pt->compute_error(outfile,exact_soln_pt,el_error,el_norm);
       }

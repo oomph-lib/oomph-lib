@@ -1,6 +1,6 @@
 #!MC 1120
 $!VARSET |lostep|=0
-$!VARSET |nstep|=120
+$!VARSET |nstep|=8
 $!VARSET |dstep|=1
 
 $!VARSET |n_proc|=5
@@ -8,10 +8,7 @@ $!VARSET |n_proc|=5
 $!VARSET |postfix|=".plt"
 $!VARSET |postfix|=".dat"
 $!VARSET |PNG|=0
-$!VARSET |dir|="RESLT"
-
-#"Validation/RESLT_doubly_adaptive_load_balanced_for_restart"
-#RESLT" # _for_restart"
+$!VARSET |dir|="RESLT_LOAD_BALANCE"
 
 
 $!NEWLAYOUT 
@@ -43,8 +40,8 @@ $!FIELDLAYERS SHOWMESH = NO
 $!FIELDMAP [1-|NUMZONES|]  EDGELAYER{COLOR = RED}
 $!FIELDMAP [1-|NUMZONES|]  EDGELAYER{LINETHICKNESS = 0.4}
 
-$!THREEDAXIS AXISMODE = XYDEPENDENT
-$!GLOBALTHREED AXISSCALEFACT{Z = 0.3}
+#$!THREEDAXIS AXISMODE = XYDEPENDENT
+#$!GLOBALTHREED AXISSCALEFACT{Z = 0.3}
 $!FIELDLAYERS SHOWSHADE = YES
 
 
@@ -52,9 +49,10 @@ $!VARSET |n_proc_minus_one|=(|n_proc|-1)
 $!LOOP |n_proc_minus_one|
 
 
-$!VARSET |first_box|=(|NUMZONES|-1)
-$!VARSET |last_box|=|NUMZONES|
-$!ACTIVEFIELDMAPS -= [|first_box|-|last_box|]
+#hierher $!VARSET |first_box|=(|NUMZONES|-1)
+#$!VARSET |last_box|=|NUMZONES|
+#$!ACTIVEFIELDMAPS -= [|first_box|-|last_box|]
+
 $!VARSET |first_proc_1|=(|NUMZONES|+1)
 
 $!READDATASET  '"|dir|/soln|step|_on_proc|LOOP|.dat" '
@@ -66,7 +64,8 @@ $!READDATASET  '"|dir|/soln|step|_on_proc|LOOP|.dat" '
   INITIALPLOTTYPE = CARTESIAN3D
   VARNAMELIST = '"V1" "V2" "V3"'
 
-$!VARSET |last_proc_1|=(|NUMZONES|-2)
+#$!VARSET |last_proc_1|=(|NUMZONES|-2)
+$!VARSET |last_proc_1|=(|NUMZONES|)
 
 
 $!IF |LOOP|==1
@@ -81,7 +80,7 @@ $!ENDIF
 $!IF |LOOP|==4
   $!FIELDMAP [|first_proc_1|-|last_proc_1|]  EDGELAYER{COLOR = CYAN}  
 $!ENDIF
-$!IF |LOOP|==5
+$!IF |LOOP|==4
   $!FIELDMAP [|first_proc_1|-|last_proc_1|]  EDGELAYER{COLOR = PURPLE}  
 $!ENDIF
 
@@ -113,66 +112,6 @@ $!ATTACHTEXT
 
 
 
-#################################
-
-$!VARSET |first_proc_0|=(|NUMZONES|+1)
-
-
-$!READDATASET  '"|dir|/exact_soln|step|_on_proc0.dat" '
-  READDATAOPTION = APPEND
-  RESETSTYLE = NO
-  INCLUDECUSTOMLABELS = NO
-  VARLOADMODE = BYNAME
-  ASSIGNSTRANDIDS = YES
-  INITIALPLOTTYPE = CARTESIAN3D
-  VARNAMELIST = '"V1" "V2" "V3"'
-
-$!VARSET |last_proc_0|=(|NUMZONES|-2)
-
-$!ACTIVEFIELDMAPS += [|first_proc_0|-|last_proc_0|]
-$!FIELDMAP [|first_proc_0|-|last_proc_0|]  EDGELAYER{COLOR = GREEN}
-$!FIELDMAP [|first_proc_0|-|last_proc_0|]  EDGELAYER{LINETHICKNESS = 0.1}
-
-$!VARSET |first_box|=(|NUMZONES|-1)
-$!VARSET |last_box|=|NUMZONES|
-$!ACTIVEFIELDMAPS -= [|first_box|-|last_box|]
-
-$!VARSET |first_proc_1|=(|NUMZONES|+1)
-
-
-$!LOOP |n_proc_minus_one|
-
-$!READDATASET  '"|dir|/exact_soln|step|_on_proc|LOOP|.dat" '
-  READDATAOPTION = APPEND
-  RESETSTYLE = NO
-  INCLUDECUSTOMLABELS = NO
-  VARLOADMODE = BYNAME
-  ASSIGNSTRANDIDS = YES
-  INITIALPLOTTYPE = CARTESIAN3D
-  VARNAMELIST = '"V1" "V2" "V3"'
-
-$!VARSET |last_proc_1|=|NUMZONES|
-
-$!ACTIVEFIELDMAPS += [|first_proc_1|-|last_proc_1|]
-$!FIELDMAP [|first_proc_1|-|last_proc_1|]  EDGELAYER{COLOR = GREEN}
-$!FIELDMAP [|first_proc_1|-|last_proc_1|]  EDGELAYER{LINETHICKNESS = 0.1}
-
-
-$!VARSET |first_box|=(|NUMZONES|-1)
-$!VARSET |last_box|=|NUMZONES|
-$!ACTIVEFIELDMAPS -= [|first_box|-|last_box|]
-
-$!VARSET |first_proc_1|=(|NUMZONES|+1)
-
-
-$!ENDLOOP
-
-$!FIELDLAYERS USETRANSLUCENCY = YES
-$!FIELDMAP [1-|NUMZONES|]  EFFECTS{SURFACETRANSLUCENCY = 80}
-
-
-##################################################
-
 
 $!REDRAWALL 
 $!THREEDVIEW 
@@ -188,6 +127,8 @@ $!THREEDVIEW
 $!VIEW PUSH
 
 $!VIEW FIT
+$!PLOTTYPE = CARTESIAN2D
+
 
 
 ###################################################

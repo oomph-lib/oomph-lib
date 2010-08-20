@@ -83,6 +83,9 @@ namespace oomph
   /// Trace file
   ofstream Trace_file;
 
+  /// File to document the norm of the solution (for validation purposes)
+  ofstream Norm_file;
+
  } // end_of_namespace
  
 
@@ -143,7 +146,7 @@ namespace oomph
               const unsigned &nplot)
    {
     
-    // Assign dimention value
+    // Assign dimension 
     unsigned el_dim=2;
     
     // Vector of local coordinates
@@ -281,6 +284,75 @@ namespace oomph
     
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile,nplot); 
+   }
+
+
+  /// Get square of L2 norm of velocity 
+  double square_of_l2_norm()
+   {
+
+    // Assign dimension 
+    unsigned el_dim=2; 
+    // Initalise
+    double sum=0.0;
+    
+    //Find out how many nodes there are
+    unsigned n_node = nnode();
+    
+    //Find the indices at which the local velocities are stored
+    unsigned u_nodal_index[el_dim];
+    for(unsigned i=0;i<el_dim;i++) {u_nodal_index[i] = u_index_nst(i);}
+    
+    //Set up memory for the velocity shape fcts
+    Shape psif(n_node);
+    DShape dpsidx(n_node,el_dim);
+    
+    //Number of integration points
+    unsigned n_intpt = integral_pt()->nweight();
+    
+    //Set the Vector to hold local coordinates
+    Vector<double> s(el_dim);
+    
+    //Loop over the integration points
+    for(unsigned ipt=0;ipt<n_intpt;ipt++)
+     {
+      //Assign values of s
+      for(unsigned i=0;i<el_dim;i++) s[i] = integral_pt()->knot(ipt,i);
+      
+      //Get the integral weight
+      double w = integral_pt()->weight(ipt);
+      
+      // Call the derivatives of the veloc shape functions
+      // (Derivs not needed but they are free)
+      double J = this->dshape_eulerian_at_knot(ipt,psif,dpsidx);
+      
+      //Premultiply the weights and the Jacobian
+      double W = w*J;
+      
+      //Calculate velocities 
+      Vector<double> interpolated_u(el_dim,0.0);      
+      
+      // Loop over nodes
+      for(unsigned l=0;l<n_node;l++) 
+       {
+        //Loop over directions
+        for(unsigned i=0;i<el_dim;i++)
+         {
+          //Get the nodal value
+          double u_value = raw_nodal_value(l,u_nodal_index[i]);
+          interpolated_u[i] += u_value*psif[l];
+         }
+       }
+
+      //Assemble square of L2 norm
+      for(unsigned i=0;i<el_dim;i++)
+       {
+        sum+=interpolated_u[i]*interpolated_u[i]*W;
+       }           
+     }
+
+    return sum;
+
    }
 
  };
@@ -1434,6 +1506,9 @@ void UnstructuredFluidProblem<ELEMENT>::doc_solution(
  const bool& project)
 { 
 
+ oomph_info << "Docing step: " << Problem_Parameter::Doc_info.number()
+            << std::endl;
+
  ofstream some_file;
  char filename[100];
 
@@ -1461,6 +1536,19 @@ void UnstructuredFluidProblem<ELEMENT>::doc_solution(
            Problem_Parameter::Doc_info.number()-1);
   }
 
+
+ // Assemble square of L2 norm 
+ double square_of_l2_norm=0.0;
+ unsigned nel=Fluid_mesh_pt->nelement();
+ for (unsigned e=0;e<nel;e++)
+  {
+   square_of_l2_norm+=
+    dynamic_cast<ELEMENT*>(this->Fluid_mesh_pt->element_pt(e))->
+    square_of_l2_norm();
+  }
+ Problem_Parameter::Norm_file << sqrt(square_of_l2_norm) << "\n";
+ 
+
  some_file.open(filename);
  some_file << dynamic_cast<ELEMENT*>(this->Fluid_mesh_pt->element_pt(0))
   ->variable_identifier();
@@ -1486,6 +1574,7 @@ void UnstructuredFluidProblem<ELEMENT>::doc_solution(
   << min_area << " "
   << max_err << " "
   << min_err << " "
+  << sqrt(square_of_l2_norm) << " "
   << std::endl;
 
  // Increment the doc_info number
@@ -1546,6 +1635,10 @@ int main()
  // Open trace file
  Problem_Parameter::Trace_file.open("RESLT/trace.dat");
  
+ // Open norm file
+ Problem_Parameter::Norm_file.open("RESLT/norm.dat");
+ 
+
  // Create problem in initial configuration
  UnstructuredFluidProblem<ProjectableTaylorHoodElement<MyTaylorHoodElement> > 
   problem;  

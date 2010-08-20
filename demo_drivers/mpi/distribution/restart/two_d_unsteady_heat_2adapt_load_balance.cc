@@ -847,7 +847,8 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution()
 
  cout << std::endl;
  cout << "=================================================" << std::endl;
- cout << "Docing solution " << Doc_info.number() << " for t=" << time_pt()->time() << std::endl;
+ cout << "Docing solution " << Doc_info.number() << " for t=" 
+      << time_pt()->time() << std::endl;
  cout << "=================================================" << std::endl;
 
  // Output solution 
@@ -1227,8 +1228,15 @@ int main(int argc, char* argv[])
                                             &GlobalParameters::Restart_file);
  
  // Name of file that specifies the problem partitioning
- CommandLineArgs::specify_command_line_flag("--partitioning_file",
-                                            &GlobalParameters::Partitioning_file); 
+ CommandLineArgs::specify_command_line_flag(
+  "--partitioning_file",
+  &GlobalParameters::Partitioning_file); 
+
+
+ // Max number of load adaptation cycles
+ unsigned ncycle=20; // hierher 
+ CommandLineArgs::specify_command_line_flag("--ncycle",
+                                            &ncycle); 
 
  // Name of file that specifies the problem partitioning
  CommandLineArgs::specify_command_line_flag("--validation_run");
@@ -1335,7 +1343,6 @@ int main(int argc, char* argv[])
  unsigned step0=problem.doc_info().number();
 
  // Timestepping loop
- unsigned ncycle=1; // hierher 20; 
  if (CommandLineArgs::command_line_flag_has_been_set("--validation_run"))
   {
    // Only do a single cycle for self test
@@ -1346,7 +1353,7 @@ int main(int argc, char* argv[])
   }
  for (unsigned i_cycle=0;i_cycle<ncycle;i_cycle++)
   {
-   unsigned max_step=10; 
+   unsigned max_step=10;
    for (unsigned i=step0;i<max_step;i++)
     {
      // Take timestep with temporal and spatial adaptivity
@@ -1384,7 +1391,8 @@ int main(int argc, char* argv[])
        char filename[100];
        sprintf(filename,"RESLT/load_balanced_partitioning.dat");
        output_file.open(filename);
-       for (unsigned e=0;e<n_element;e++)
+       unsigned nel=element_partition.size();
+       for (unsigned e=0;e<nel;e++)
         {
          output_file << element_partition[e] << std::endl;
         }

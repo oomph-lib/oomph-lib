@@ -35,14 +35,15 @@ sleep 5
 $MPI_RUN_COMMAND ../turek_flag_load_balance > OUTPUT_turek_flag_load_balance
 echo "done"
 echo " " >> validation.log
-echo "Turek flag validation" >> validation.log
-echo "------------------------------------" >> validation.log
+echo "Turek flag with load balancing validation" >> validation.log
+echo "-----------------------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat RESLT_TUREK_LOAD_BALANCE/soln1_on_proc0.dat RESLT_TUREK_LOAD_BALANCE/soln1_on_proc1.dat RESLT_TUREK_LOAD_BALANCE/soln2_on_proc0.dat RESLT_TUREK_LOAD_BALANCE/soln2_on_proc1.dat RESLT_TUREK_LOAD_BALANCE/solid_soln1_on_proc0.dat RESLT_TUREK_LOAD_BALANCE/solid_soln1_on_proc1.dat RESLT_TUREK_LOAD_BALANCE/solid_soln2_on_proc0.dat RESLT_TUREK_LOAD_BALANCE/solid_soln2_on_proc1.dat > turek_flag_load_balance_external_results.dat
+sleep 10
+cat RESLT_TUREK_LOAD_BALANCE/soln1_on_proc0.dat RESLT_TUREK_LOAD_BALANCE/soln1_on_proc1.dat RESLT_TUREK_LOAD_BALANCE/soln2_on_proc0.dat RESLT_TUREK_LOAD_BALANCE/soln2_on_proc1.dat RESLT_TUREK_LOAD_BALANCE/solid_soln1_on_proc0.dat RESLT_TUREK_LOAD_BALANCE/solid_soln1_on_proc1.dat RESLT_TUREK_LOAD_BALANCE/solid_soln2_on_proc0.dat RESLT_TUREK_LOAD_BALANCE/solid_soln2_on_proc1.dat metis_input_for_validation.dat > turek_flag_load_balance_external_results.dat
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
@@ -74,6 +75,7 @@ echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
+sleep 10
 cat RESLT_TUREK/soln1_on_proc0.dat RESLT_TUREK/soln1_on_proc1.dat RESLT_TUREK/soln2_on_proc0.dat RESLT_TUREK/soln2_on_proc1.dat RESLT_TUREK/solid_soln1_on_proc0.dat RESLT_TUREK/solid_soln1_on_proc1.dat RESLT_TUREK/solid_soln2_on_proc0.dat RESLT_TUREK/solid_soln2_on_proc1.dat > turek_flag_external_results.dat
 
 if test "$1" = "no_fpdiff"; then

@@ -266,6 +266,8 @@ void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  mesh_pt()->output(some_file,npts);
  some_file.close();
  
+ doc_info.number()++;
+
 } // end_of_doc_solution
 
 
@@ -326,11 +328,24 @@ int main(int argc, char **argv)
 
 #endif
 
+    // Doc initial mesh
+    problem.doc_solution(doc_info);
+
     // Solve the problem with automatic adaptation for two steps
     problem.newton_solve(2);
 
+    //Output solution
+    oomph_info << "Outputting before load balance: " << doc_info.number() 
+               << std::endl;
+    problem.doc_solution(doc_info);
+
     // Balance the load of the problem
     problem.load_balance();
+
+    //Output solution
+    oomph_info << "Outputting after load balance: " << doc_info.number() 
+               << std::endl;
+    problem.doc_solution(doc_info);
 
     // Solve the problem again with automatic adaptation for one further step
     problem.newton_solve(1);
@@ -389,7 +404,6 @@ int main(int argc, char **argv)
 
 #ifdef OOMPH_HAS_MPI
 
-    mesh_doc_info.number()=1;
     problem.mesh_pt()->doc_mesh_distribution(problem.communicator_pt(),
                                              mesh_doc_info);
 #endif
@@ -415,18 +429,28 @@ int main(int argc, char **argv)
     problem.check_halo_schemes(doc_info);
 #endif
 
+    // Doc initial mesh
+    problem.doc_solution(doc_info);
+
     // Solve the problem with automatic adaptation for two steps
     problem.newton_solve(2);
+
+    //Output solution
+    oomph_info << "Outputting before load balance: " << doc_info.number() 
+               << std::endl;
+    problem.doc_solution(doc_info);
 
     // Balance the load of the problem
     problem.load_balance();
 
+    //Output solution
+    oomph_info << "Outputting after load balance: " << doc_info.number() 
+               << std::endl;
+    problem.doc_solution(doc_info);
+
     // Solve the problem again with automatic adaptation for one further step
     problem.newton_solve(1);
   
-    // Step number
-    doc_info.number()=1;
-   
     //Output solution
     problem.doc_solution(doc_info);
    } // end of no command-line arguments
@@ -471,9 +495,6 @@ int main(int argc, char **argv)
     // Solve the problem again with automatic adaptation for one further step
     problem.newton_solve(1);
   
-    // change doc_info number
-    doc_info.number()=1;
-
     //Output solution
     problem.doc_solution(doc_info);
 

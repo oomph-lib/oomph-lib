@@ -152,19 +152,33 @@ namespace METIS
 
 #ifdef OOMPH_HAS_MPI
 
- /// \short Use METIS to assign each element in an already-distributed mesh
- /// to a domain. On return, element_domain[ielem] contains the number
- /// of the domain [0,1,...,ndomain-1] to which element ielem has been
- /// assigned, on every processor involved in the Problem.
- /// - objective=0: minimise edgecut.
- /// - objective=1: minimise total communications volume.
- /// .
- /// The partioning is based on the nodal graph of the mesh by taking into
- /// account which global equation numbers are affected by each element and
- /// connecting elements which affect the same global equation number.
+
+  /// \short Use METIS to assign each element in an already-distributed mesh
+  /// to a domain. On return, element_domain_on_this_proc[e] contains the number
+  /// of the domain [0,1,...,ndomain-1] to which non-halo element e on THE
+  /// CURRENT PROCESSOR ONLY has been assigned. The order of the non-halo
+  /// elements is the same as in the Problem's mesh, with the halo
+  /// elements being skipped.
+  /// \n
+  /// Objective:
+  /// - objective=0: minimise edgecut.
+  /// - objective=1: minimise total communications volume.
+  /// .
+  /// The partioning is based on the dof graph of the complete mesh by 
+  /// taking into 
+  /// account which global equation numbers are affected by each element and
+  /// connecting elements which affect the same global equation number.
+  /// Partitioning is done such that all elements associated with the 
+  /// same tree root move together. Non-refineable elements are
+  /// treated as their own root elements. If the optional boolean
+  /// flag is set to true (it defaults to false) each processor
+  /// assigns a dumb-but-repeatable equidistribution of its non-halo
+  /// elements over the domains and outputs the input that would have
+  /// gone into METIS in the file metis_input_for_validation.dat
   extern void partition_distributed_mesh
    (Problem* problem_pt,const unsigned& objective,
-    Vector<unsigned>& element_domain_on_this_proc);
+    Vector<unsigned>& element_domain_on_this_proc,
+    const bool& bypass_metis=false);
 
 #endif
 

@@ -509,9 +509,11 @@ DenseMatrix<double> GeneralisedElement::Dummy_matrix;
   //If the sizes do not match we have a repeat, throw an error
   if(set_of_global_eqn_numbers.size() != Ndof)
    {
+#ifdef OOMPH_HAS_MPI
     error_stream << "Element is ";
     if (!is_halo()) error_stream << "not ";
     error_stream << "a halo element\n\n";
+#endif
     error_stream << "\nLocal/lobal equation numbers: " << std::endl;
     for(unsigned n=0;n<Ndof;++n)
      {

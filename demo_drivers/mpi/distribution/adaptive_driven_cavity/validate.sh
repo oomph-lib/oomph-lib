@@ -25,7 +25,8 @@ cp ../*partition.dat .
 #------------------------------------------------
 
 echo "Running adaptive rectangular driven cavity (TH & CR) validation "
-mkdir RESLT
+mkdir RESLT_CR_MESH  RESLT RESLT_TH_MESH
+
 
 # Wait for a bit to allow parallel file systems to realise
 # the existence of the new directory
@@ -56,6 +57,8 @@ else
 fi
 
 mv RESLT RESLT_adaptive_driven_cavity
+mv RESLT_TH_MESH  RESLT_TH_MESH_adaptive_driven_cavity
+mv RESLT_CR_MESH  RESLT_CR_MESH_adaptive_driven_cavity
 
 #----------------------------------------------------------------------
 
@@ -63,7 +66,7 @@ mv RESLT RESLT_adaptive_driven_cavity
 #--------------------------------------------------------------------
 
 echo "Running adaptive rectangular driven cavity (TH & CR) validation with load balancing"
-mkdir RESLT_LOAD_BALANCE
+mkdir RESLT_LOAD_BALANCE RESLT_CR_MESH RESLT_TH_MESH
 
 # Wait for a bit to allow parallel file systems to realise
 # the existence of the new directory
@@ -82,6 +85,7 @@ echo " " >> validation.log
 cat RESLT_LOAD_BALANCE/soln0_on_proc0.dat RESLT_LOAD_BALANCE/soln0_on_proc1.dat \
     > adaptive_cavity_load_balance_TH_results.dat
 cat RESLT_LOAD_BALANCE/soln1_on_proc0.dat RESLT_LOAD_BALANCE/soln1_on_proc1.dat \
+metis_input_for_validation.dat \
     > adaptive_cavity_load_balance_CR_results.dat
 
 if test "$1" = "no_fpdiff"; then
@@ -93,7 +97,10 @@ else
          adaptive_cavity_load_balance_CR_results.dat >> validation.log
 fi
 
+
 mv RESLT_LOAD_BALANCE RESLT_adaptive_driven_cavity_load_balance
+mv RESLT_TH_MESH  RESLT_TH_MESH_adaptive_driven_cavity_load_balance
+mv RESLT_CR_MESH  RESLT_CR_MESH_adaptive_driven_cavity_load_balance
 
 #----------------------------------------------------------------------
 

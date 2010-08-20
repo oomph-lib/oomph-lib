@@ -12005,10 +12005,9 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
  // Number of processes
  unsigned n_proc=this->communicator_pt()->nproc();
 
- // Partitioning for elements in "root mesh" -- default:
- // everybody's on the root processor.
- Vector<unsigned> actual_element_partition(mesh_pt()->nelement(),0);
-
+ // Storage for partitioning of elements in "root mesh"
+ Vector<unsigned> actual_element_partition;
+ 
  // Don't do anything if this is a single-process job
  if (n_proc==1) 
   {
@@ -12070,39 +12069,13 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
    // a disaster for validation runs -- this bypasses metis and
    // comes up with a stupid but repeatable partioning.
    if (Use_default_partition_in_load_balance)   
-    {
-     if (n_mesh==0)
-      {
-       unsigned n_element=mesh_pt()->nelement();
-       element_domain_on_this_proc.resize(n_element);
-       for (unsigned e=0;e<n_element;e++)
-        {
-         // Simple repeatable partition: Equidistribute elements on each
-         // processor
-         element_domain_on_this_proc[e]=unsigned(double(e)/double(n_element)*
-                                                 double(n_proc));
-        }
-      }
-     else
-      {
-       unsigned n_el_total=mesh_pt()->nelement();
-       element_domain_on_this_proc.resize(n_el_total);
-       unsigned total_els_so_far=0;
-       for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
-        {
-         unsigned n_element=mesh_pt(i_mesh)->nelement();
-         for (unsigned e=0;e<n_element;e++)
-          {
-           // Simple repeatable partition: Equidistribute elements on each
-           // processor
-           element_domain_on_this_proc[e+total_els_so_far]=
-            unsigned(double(e+total_els_so_far)/double(n_el_total)*
-                     double(n_proc));
-          }
-         total_els_so_far+=n_element;
-        }
-      }
-     
+    {     
+     // Bypass METIS to perform the partitioning
+     unsigned objective=0; 
+     bool bypass_metis=true;
+     METIS::partition_distributed_mesh(this,objective,
+                                       element_domain_on_this_proc,
+                                       bypass_metis);
     }
    else
     {
@@ -12121,7 +12094,7 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
    // appropriate "actions before"
    actions_before_distribute();
 
-   // Over strategy: Each processor loops over all its non-halo
+   // Overall strategy: Each processor loops over all its non-halo
    // (leaf) elements and associates each with its root. While
    // doing this we accumulate all the double and unsigned data
    // (in the order encountered) that must be sent when the entire
@@ -12312,8 +12285,8 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
                  MPI_INT,MPI_SUM,
                  this->communicator_pt()->mpi_comm());
    
-   
-   // Copy acoss into unsigned storage
+     // Allocate partitioning for elements in "root mesh"
+   actual_element_partition.resize(n_element);
    for (unsigned e=0;e<n_element;e++)
     {
 #ifdef PARANOID
@@ -12408,8 +12381,11 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
    assign_eqn_numbers();
   }
 
- oomph_info << "Number of elements on this processor: "
+ oomph_info << "Total number of elements on this processor: "
             << mesh_pt()->nelement() << std::endl;
+
+ oomph_info << "Number of non-halo elements on this processor: "
+            << mesh_pt()->nnon_halo_element() << std::endl;
 
  // Return the element partitioning for mesh produced by build_mesh().
  // (useful for restarts etc.)
@@ -12436,11 +12412,6 @@ void Problem::work_out_partition_and_refinement_for_root_elements_helper
             << "Warning: load balancing routines currently accumulate\n"
             << "          all data on root processor and then send it\n"
             << "          out again -- scope for enormous improvements!\n\n"
-            << "          The heuristics for distributing roots via polling\n"
-            << "          its leaf nodes is also unlikely to be optimal.\n"
-            << "          We should probably use METIS to distribute the\n"
-            << "          roots directly, taking all their interactions into\n"
-            << "          account.\n"
             << "\n\n===================================================\n\n";
 
  // Communicator, number of processors and number of elements

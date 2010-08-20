@@ -46,12 +46,15 @@ cat RESLT/soln9_on_proc0.dat  RESLT/soln9_on_proc1.dat  \
     >> result_doubly_adaptive_load_balanced.dat
 mv RESLT RESLT_doubly_adaptive_load_balanced_restarted
 
+sleep 5
 mkdir RESLT
+sleep 20
 $MPI_RUN_COMMAND ../two_d_unsteady_heat_2adapt_load_balance --validation_run --restart_file RESLT_doubly_adaptive_load_balanced_for_restart/restart7 --partitioning_file RESLT_doubly_adaptive_load_balanced_for_restart/load_balanced_partitioning.dat > OUTPUT_doubly_adaptive_load_balanced_restarted_from_load_balanced
 echo "done restarted run from load balanced solution"
 
 sleep 5
 cat RESLT/soln9_on_proc0.dat  RESLT/soln9_on_proc1.dat  \
+    metis_input_for_validation.dat \
     >> result_doubly_adaptive_load_balanced.dat
 mv RESLT RESLT_doubly_adaptive_load_balanced_restarted_from_load_balanced
 
