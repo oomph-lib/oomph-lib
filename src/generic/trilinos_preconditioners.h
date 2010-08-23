@@ -262,6 +262,8 @@ namespace oomph
      ILU_fill_level = 0;
      ILUT_fill_level = 1.0;
      Overlap = 0;
+     Absolute_threshold = 0.0;
+     Relative_threshold = 1.0;
     }
 
    /// Destructor -- empty, cleanup is done in base class
@@ -298,6 +300,12 @@ namespace oomph
    /// Access function for ILUT_fill_level
    double& ilut_fill_level() {return ILUT_fill_level;}
 
+   /// Access function for the absolute threshold
+   double& absolute_threshold() {return Absolute_threshold;}
+
+   /// Access function for the relative threshold
+   double& relative_threshold() {return Relative_threshold;}
+
     protected:
 
    /// \short Function to set up an IFPACK preconditioner. It is assumed
@@ -317,6 +325,12 @@ namespace oomph
 
    /// Value of overlap level - used in parallel ILU
    int Overlap;
+
+   /// Value of absolute threshold, used to peturb diagonal
+   double Absolute_threshold;
+
+   /// Value of relative threshold, used to pertub diagonal
+   double Relative_threshold;
 
   };
 }

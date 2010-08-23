@@ -215,12 +215,15 @@ setup_trilinos_preconditioner(Problem* problem_pt,
  Teuchos::ParameterList ifpack_parameters;
  ifpack_parameters.set("fact: level-of-fill", ILU_fill_level);
  ifpack_parameters.set("fact: ilut level-of-fill", ILUT_fill_level);
+ ifpack_parameters.set("fact: absolute threshold", Absolute_threshold);
+ ifpack_parameters.set("fact: relative threshold", Relative_threshold);
 
  // create the preconditioner
  Ifpack ifpack_factory;
  Ifpack_Preconditioner* tmp_pt= ifpack_factory.Create(Preconditioner_type,
                                                       epetra_matrix_pt,
                                                       Overlap);
+
  tmp_pt->SetParameters(ifpack_parameters);
  tmp_pt->Initialize();
  tmp_pt->Compute();
