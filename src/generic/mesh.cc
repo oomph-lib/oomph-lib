@@ -2230,145 +2230,133 @@ void Mesh::distribute(OomphCommunicator* comm_pt,
  // Flush any storage of external elements and nodes
  this->flush_all_external_storage();
 
- // Now loop over the (backed up) elements and identify the ones
- //--------------------------------------------------------------
- // that must be retained. 
- //-----------------------
+ // Boolean to indicate which element is to be retained 
+ std::vector<bool> element_retained(nelem,false);
 
- // Boolean to indicate which element is to be retained on 
- // which processor. This is needed because elements have
- // to be added into the various halo/haloed lookup schemes in the
- // same order and we base this on the order in which
- // they were in the original mesh.
- Vector<std::vector<bool> > tmp_element_retained;
- tmp_element_retained.resize(n_proc);
- nelem=backed_up_el_pt.size();
- for (int i=0;i<n_proc;i++)
+ // Storage for element numbers of root halo elements that will be
+ // retained on current processor: root_halo_element[p][j]
+ // stores the element number (in the order in which the elements are stored
+ // in backed_up_el_pt) of the j-th root halo element with processor
+ // p. 
+ Vector<Vector<int> > root_halo_element(n_proc);
+
+ // Dummy entry to make sure we always have something to send
+ for (int p=0;p<n_proc;p++)
   {
-   tmp_element_retained[i].resize(nelem,false);
+   root_halo_element[p].push_back(-1);
   }
  
- // Temporary storage for root halo elements on the various
- // processors. Needed to figure out haloed lookup schemes:
- // When setting these up on any given processor we have to know
- // which elements will (have) become halo elements on other processors.
- Vector<Vector<Vector<GeneralisedElement*> > > tmp_root_halo_element_pt;
- tmp_root_halo_element_pt.resize(n_proc);
- for (int i=0;i<n_proc;i++)
-  {
-   tmp_root_halo_element_pt[i].resize(n_proc);
-  }
-
  // Determine which elements are going to end up on which processor
  //----------------------------------------------------------------
-
+ 
  // This procedure needs to be repeated to catch elements which may
  // be missed the first time round but which contain nodes from this process
-
- unsigned elements_retained=true;
+ 
+ double t_start=clock();
+ 
+ bool elements_retained=true;
  int myi=1;
  while (elements_retained) 
   {
-   Vector<unsigned> number_of_retained_elements(n_proc,0);
-   int number_of_retained_halo_elements=0; // not dependent on dummy_my_rank
-
-   for (int dummy_my_rank=0;dummy_my_rank<n_proc;dummy_my_rank++)
+   unsigned number_of_retained_elements=0;
+   int number_of_retained_halo_elements=0;
+   
+   // Loop over all backed up elements
+   nelem=backed_up_el_pt.size();
+   for (unsigned e=0;e<nelem;e++)
     {
-     // Loop over all backed up elements
-     nelem=backed_up_el_pt.size();
-     for (unsigned e=0;e<nelem;e++)
-      {
-       // Get element and its domain
-       GeneralisedElement* el_pt=backed_up_el_pt[e];
-       unsigned el_domain=element_domain[e];
+     // Get element and its domain
+     GeneralisedElement* el_pt=backed_up_el_pt[e];
+     unsigned el_domain=element_domain[e];
      
-       // If element is located on current processor add it back to the mesh
-       if (el_domain==unsigned(dummy_my_rank))
+     // If element is located on current processor add it back to the mesh
+     if (el_domain==unsigned(my_rank))
+      {
+       // Add element to current processor 
+       element_retained[e]=true;
+       number_of_retained_elements++;
+      }
+     // Otherwise we may still need it if it's a halo element:
+     else
+      {       
+       // If this current mesh has been told to keep all elements as halos,
+       // OR the element itself knows that it must be kept then
+       // keep it
+       if ((keep_all_elements_as_halos())
+           || (el_pt->must_be_kept_as_halo()))
         {
-         // Add element to current processor 
-         tmp_element_retained[dummy_my_rank][e]=true;
-         number_of_retained_elements[dummy_my_rank]++;
+         // Add as root halo element whose non-halo counterpart is
+         // located on processor el_domain
+         root_halo_element[el_domain].push_back(e); 
+         element_retained[e]=true;
+         number_of_retained_elements++;
         }
-       // Otherwise we may still need it if it's a halo element:
+       //Otherwise: Is one of the nodes associated with the current processor?
        else
-        {       
-         // If this current mesh has been told to keep all elements as halos,
-         // OR the element itself knows that it must be kept then
-         // keep it
-         if ((keep_all_elements_as_halos())
-             || (el_pt->must_be_kept_as_halo()))
+        {
+         //Can only have nodes if this is a finite element
+         FiniteElement* finite_el_pt = dynamic_cast<FiniteElement*>(el_pt);
+         if(finite_el_pt!=0)
           {
-           // Add as root halo element whose non-halo counterpart is
-           // located on processor el_domain
-           tmp_root_halo_element_pt[dummy_my_rank][el_domain].
-            push_back(el_pt);
-           tmp_element_retained[dummy_my_rank][e]=true;
-           number_of_retained_elements[dummy_my_rank]++;
-          }
-         //Otherwise 
-         // Is one of the nodes associated with the current processor?
-         else
-          {
-           //Can only have nodes if this is a finite element
-           FiniteElement* finite_el_pt = dynamic_cast<FiniteElement*>(el_pt);
-           //If the element is a finite element
-           if(finite_el_pt!=0)
+           unsigned n_node = finite_el_pt->nnode();
+           for (unsigned n=0;n<n_node;n++)
             {
-             unsigned n_node = finite_el_pt->nnode();
-             for (unsigned n=0;n<n_node;n++)
+             Node* nod_pt=finite_el_pt->node_pt(n); 
+             
+             // Keep element? (use stl find?)
+             unsigned keep_it=false;
+             for (std::set<unsigned>::iterator 
+                   it=processors_associated_with_data[nod_pt].begin();
+                  it!=processors_associated_with_data[nod_pt].end();
+                  it++)
               {
-               Node* nod_pt=finite_el_pt->node_pt(n); 
-               
-               // Keep element? (use stl find?)
-               unsigned keep_it=false;
-               for (std::set<unsigned>::iterator 
-                     it=processors_associated_with_data[nod_pt].begin();
-                    it!=processors_associated_with_data[nod_pt].end();
-                    it++)
+               if (*it==unsigned(my_rank))
                 {
-                 if (*it==unsigned(dummy_my_rank))
-                  {
-                   keep_it=true;
-                   //Break out of the loop over processors
-                   break;
-                  }
-                }
-               
-               // Add a root halo element either if keep_it=true 
-               if (keep_it)
-                {
-                 // Add as root halo element whose non-halo counterpart is
-                 // located on processor el_domain
-                 tmp_root_halo_element_pt[dummy_my_rank][el_domain].
-                  push_back(finite_el_pt);
-                 tmp_element_retained[dummy_my_rank][e]=true;
-                 number_of_retained_elements[dummy_my_rank]++;
-                 //Now break out of loop over nodes
+                 keep_it=true;
+                 //Break out of the loop over processors
                  break;
                 }
-              } 
-            }  
-          } //End of testing for halo by virtue of shared nodes
-        } //End of halo element conditions
-      } //end of loop over elements
+              }
+             
+             // Add a root halo element either if keep_it=true 
+             if (keep_it)
+              {
+               // Add as root halo element whose non-halo counterpart is
+               // located on processor el_domain
+               if (!element_retained[e])
+                {
+                 root_halo_element[el_domain].push_back(e); 
+                 element_retained[e]=true;
+                 number_of_retained_elements++;
+                }
+               //Now break out of loop over nodes
+               break;
+              }
+            } 
+          }  
+        } //End of testing for halo by virtue of shared nodes
+      }//End of halo element conditions
+    } //end of loop over elements
 
-
-     // Now loop over all halo elements to check if any of their
-     // nodes are located on a higher-numbered processor.
-     // The elements associated with these must be added as halo elements, too
-     std::map<Node*,bool> higher_numbered_node;
-         
-     // Loop over all domains
-     for (int d=0;d<n_proc;d++)
-      {  
-       // Loop over root halo elements 
-       unsigned nelem=tmp_root_halo_element_pt[dummy_my_rank][d].size();     
-       for (unsigned e=0;e<nelem;e++)
+   
+   // Now loop over all halo elements to check if any of their
+   // nodes are located on a higher-numbered processor.
+   // The elements associated with these must be added as halo elements, too
+   std::map<Node*,bool> higher_numbered_node;
+   
+   // Loop over all domains
+   for (int d=0;d<n_proc;d++)
+    {  
+     // Loop over root halo elements 
+     unsigned nelem=root_halo_element[d].size();     
+     for (unsigned e=0;e<nelem;e++)
+      {
+       int number=root_halo_element[d][e];
+       if (number>=0)
         {
          //Can we cast it to a finite element
          FiniteElement* finite_el_pt
-          =dynamic_cast<FiniteElement*>
-          (tmp_root_halo_element_pt[dummy_my_rank][d][e]);
+          =dynamic_cast<FiniteElement*>(backed_up_el_pt[number]);
        
          if(finite_el_pt!=0)
           {
@@ -2390,92 +2378,85 @@ void Mesh::distribute(OomphCommunicator* comm_pt,
           }
         }
       }
+    }
 
-     // Now loop over all the original elements again
-     nelem=backed_up_el_pt.size();
-     for (unsigned e=0;e<nelem;e++)
+   // Now loop over all the original elements again
+   nelem=backed_up_el_pt.size();
+   for (unsigned e=0;e<nelem;e++)
+    {
+     //Only need to worry about finite elements
+     FiniteElement* finite_el_pt = 
+      dynamic_cast<FiniteElement*>(backed_up_el_pt[e]);
+     if(finite_el_pt!=0)
       {
-       //Only need to worry about finite elements
-       FiniteElement* finite_el_pt = 
-        dynamic_cast<FiniteElement*>(backed_up_el_pt[e]);
-       if(finite_el_pt!=0)
+       unsigned el_domain=element_domain[e];
+       
+       // By default, don't keep it
+       bool keep_it=false;
+       
+       // Check if it's already retained
+       if (!element_retained[e])
         {
-         unsigned el_domain=element_domain[e];
-         
-         // By default, don't keep it
-         bool keep_it=false;
-         
-         // Check if it's already retained
-         if (!tmp_element_retained[dummy_my_rank][e])
+         // Loop over its nodes
+         unsigned nnod=finite_el_pt->nnode();
+         for (unsigned j=0;j<nnod;j++)
           {
-           // Loop over its nodes
-           unsigned nnod=finite_el_pt->nnode();
-           for (unsigned j=0;j<nnod;j++)
-            {
-             Node* nod_pt=finite_el_pt->node_pt(j);
-             if (higher_numbered_node[nod_pt]&&
+           Node* nod_pt=finite_el_pt->node_pt(j);
+           if (higher_numbered_node[nod_pt]&&
                (element_domain[e]==processor_in_charge[nod_pt]))
-              {
-               keep_it=true; 
-               break; // doesn't help if the break is removed
-              }
-            }
-           if (keep_it)
             {
-             tmp_root_halo_element_pt[dummy_my_rank][el_domain].
-              push_back(finite_el_pt);
-             tmp_element_retained[dummy_my_rank][e]=true;
-             number_of_retained_elements[dummy_my_rank]++;
-             number_of_retained_halo_elements++; // need to count these
+             keep_it=true; 
+             break; // doesn't help if the break is removed
             }
+          }
+         if (keep_it)
+          {
+           root_halo_element[el_domain].push_back(e); 
+           element_retained[e]=true;
+           number_of_retained_elements++;
+           number_of_retained_halo_elements++; 
           }
         }
       }
-
-     if (report_stats)
-      {
-       // Check number of retained halo elements on this process
-       if (number_of_retained_elements[dummy_my_rank]!=0)
-        {
-         oomph_info << "Percentage of extra halo elements retained: "
-                    << 100.0*double(number_of_retained_halo_elements)/
-          double(number_of_retained_elements[dummy_my_rank])
-                    << " on process " << dummy_my_rank 
-                    << " in loop number " << myi << std::endl;
-        }
-       else // Dummy output in case a process has no retained elements
-            // (relevant in some multi-mesh problems)
-        {
-         oomph_info << "Percentage of extra halo elements retained: "
-                    << 0.0 << " on process " << dummy_my_rank
-                    << " in loop number " << myi << std::endl;
-        }
-      }
-
-    } // end of loop over all "processors"; we've now established the
-   // elements and the root halo elements for all processors
-
-   //int total_number_of_retained_halo_elements=0;
+    }
    
-   // Sum values over all processes 
-   // - must be zero retained in order to continue
-   //MPI_Allreduce(&number_of_retained_halo_elements, 
-   //              &total_number_of_retained_halo_elements,1,MPI_INT,
-   //              MPI_SUM,comm_pt->mpi_comm());
-
+   if (report_stats)
+    {
+     // Check number of retained halo elements on this process
+     if (number_of_retained_elements!=0)
+      {
+       oomph_info << "Percentage of extra halo elements retained: "
+                  << 100.0*double(number_of_retained_halo_elements)/
+        double(number_of_retained_elements)
+                  << " in loop number " << myi << std::endl;
+      }
+     else // Dummy output in case a process has no retained elements
+      // (relevant in some multi-mesh problems)
+      {
+       oomph_info << "Percentage of extra halo elements retained: "
+                  << 0.0 << " in loop number " << myi << std::endl;
+      }
+    }
+   
    if (report_stats)
     {
      oomph_info << "Total number of extra halo elements retained: " 
                 << number_of_retained_halo_elements
                 << " in loop: " << myi << std::endl;
     }
-
+   
    if (number_of_retained_halo_elements==0) {elements_retained=false;} 
    
    myi++;
-
+   
   } // end of while(elements_retained)
-
+ 
+ 
+ double elapsed_time=double(clock()-t_start)/CLOCKS_PER_SEC; 
+ oomph_info << "hierher remove this output once it scales Time for while loop: " 
+            << elapsed_time << std::endl;
+ 
+ 
  // Copy the elements associated with the actual
  // current processor into its own permanent storage.
  // Do it in the order in which the elements appeared originally
@@ -2483,7 +2464,7 @@ void Mesh::distribute(OomphCommunicator* comm_pt,
  for (unsigned e=0;e<nelem;e++)
   {
    GeneralisedElement* el_pt=backed_up_el_pt[e];
-   if (tmp_element_retained[my_rank][e])
+   if (element_retained[e])
     {
      this->add_element_pt(el_pt);
     }
@@ -2507,60 +2488,128 @@ void Mesh::distribute(OomphCommunicator* comm_pt,
  // added in the same order below
  for (int d=0;d<n_proc;d++)
   {  
-   nelem=tmp_root_halo_element_pt[my_rank][d].size();
+   nelem=root_halo_element[d].size();
    for (unsigned e=0;e<nelem;e++)
     {
-     this->add_root_halo_element_pt(d,
-      tmp_root_halo_element_pt[my_rank][d][e]);
+     int number=root_halo_element[d][e];
+     if (number>=0)
+      {
+       this->add_root_halo_element_pt(d,backed_up_el_pt[number]);
+      }
     }
   }
   
-//  elapsed_time=double(clock()-t_start)/CLOCKS_PER_SEC; t_start=clock();
-//  oomph_info << "....done " << elapsed_time << std::endl;
 
-//  oomph_info << "Determine root haloed elements....";
+ // Now get root haloed elements: root_haloed_element[p][j] stores
+ // the element number (in the order in which the elements are stored
+ // in backedup_el_pt) of the j-th rooted halo element with processor
+ // p. On proc my_proc this the same as root_haloed_element[my_proc][j]
+ // on processor p, so get the information by gatherv operations.
+ Vector<Vector<unsigned> > root_haloed_element(n_proc);
+
+ // Find out number of root halo elements with each other proc
+ Vector<int> nhalo(n_proc,0);
+ Vector<int> nhaloed(n_proc,0);
+ for (int p=0;p<n_proc;p++)
+  {
+   nhalo[p]=root_halo_element[p].size();
+  }
+ 
+ // Each processor sends number of halo elements it has with processor
+ // p to processor p where this information is stored in nhaloed[...]
+ for (int p=0;p<n_proc;p++)
+  {
+   // Gather the p-th entries in nhalo from every processor on 
+   // processor p and store them in nhaloed consecutively
+   // starting at beginning
+   MPI_Gather(&nhalo[p], 1, MPI_INT,
+              &nhaloed[0], 1, MPI_INT,
+              p,comm_pt->mpi_comm());
+  }
+ 
+ // In the big sequence of concatenated root halo elements (enumerated 
+ // individually on the various processors) where do the root halo 
+ // elements from a given processor start? Also figure out how many
+ // root haloed elements there are in total by summing up their numbers
+ Vector<int> start_index(n_proc,0);
+ unsigned total_number_of_root_haloed_elements=0; 
+ for (int i_proc=0; i_proc<n_proc; i_proc++)
+  {
+   total_number_of_root_haloed_elements+=nhaloed[i_proc];
+   if (i_proc!=0)
+    {
+     start_index[i_proc]=total_number_of_root_haloed_elements-
+      nhaloed[i_proc];
+    }
+   else
+    {
+     start_index[0]=0;
+    }
+  }
+ 
+ // Storage for all root haloed elements from the various processors, one
+ // after the other, with some padding from negative entries to avoid
+ // zero length vectors
+ Vector<int> all_root_haloed_element(total_number_of_root_haloed_elements,
+                                     0);
+ 
+ // Now send the ids of the relevant elements via gatherv
+ for (int p=0;p<n_proc;p++)
+  {
+   // Gather the p-th entries in nhalo from every processor on 
+   // processor p and store them in nhaloed consecutively
+   // starting at beginning
+   MPI_Gatherv(&root_halo_element[p][0], // pointer to first entry in vector
+                                         // to be gathered on processor p
+               nhalo[p], // Number of entries to be sent
+               MPI_INT,
+               &all_root_haloed_element[0], // Target -- this will store
+                                            // the element numbers of 
+                                            // all root haloed elements
+                                            // received from other processors
+                                            // in order
+               &nhaloed[0], // Pointer to the vector containing the lengths
+                            // of the vectors received from elsewhere
+               &start_index[0], // "offset" for storage of vector received
+                                // from various processors in the global 
+                                // concatenated vector 
+               MPI_INT,
+               p, // processor that gathers the information
+               comm_pt->mpi_comm());
+  }
+ 
+ 
 
  // Determine root haloed elements
  //-------------------------------
 
  // Loop over all other processors
+ unsigned count=0;
  for (int d=0;d<n_proc;d++)
   {
-   if (d!=my_rank)
+   // Loop over root haloed elements with specified processor
+   unsigned n=nhaloed[d];
+   for (unsigned e=0;e<n;e++)
     {
-     // Loop over root halo elements that are held on that processor
-     unsigned nelem_other=tmp_root_halo_element_pt[d][my_rank].size();
-     for (unsigned e2=0;e2<nelem_other;e2++)
+     int number=all_root_haloed_element[count];
+     count++;
+     // Ignore padded -1s that were only inserted to avoid
+     // zero sized vectors
+     if (number>=0)
       {
-       // Loop over all elements on current processor.
-       // We loop over these in the inner loop) to ensure that they are 
-       // added to the haloed lookup scheme in the same
-       // order in which elements were added to the
-       // corresponding halo lookup scheme.
-       nelem=this->nelement();
-       for (unsigned e=0;e<nelem;e++)
+       // Get pointer to element
+       GeneralisedElement* el_pt=backed_up_el_pt[number];
+       
+       // Halo elements can't be haloed themselves
+       if (!el_pt->is_halo())
         {
-         // Get pointer to element
-         GeneralisedElement* el_pt=this->element_pt(e);
-         
-         // Halo elements can't be haloed themselves
-         if (!el_pt->is_halo())
-          {
-           if (el_pt==tmp_root_halo_element_pt[d][my_rank][e2])
-            {
-             // Current element is haloed by other processor
-             this->add_root_haloed_element_pt(d,el_pt);
-             break;
-            }
-          }  
-        }
+         // Current element is haloed by other processor
+         this->add_root_haloed_element_pt(d,el_pt);
+        }  
       }
     }
   }
-
-//  elapsed_time=double(clock()-t_start)/CLOCKS_PER_SEC; t_start=clock();
-//  oomph_info << "....done " << elapsed_time << std::endl;
-
+ 
 
  // Doc stats
  if (report_stats)
@@ -2573,7 +2622,6 @@ void Mesh::distribute(OomphCommunicator* comm_pt,
               << " are root haloed elements" << std::endl;
   }
 
-//  oomph_info << "Retain nodes....";
  
  // Loop over all retained elements and mark their nodes
  //-----------------------------------------------------
@@ -2614,30 +2662,14 @@ void Mesh::distribute(OomphCommunicator* comm_pt,
     }
   }
 
-//  elapsed_time=double(clock()-t_start)/CLOCKS_PER_SEC; t_start=clock();
-//  oomph_info << "....done " << elapsed_time << std::endl;
-
-
  // Prune and rebuild mesh
  //-----------------------
-
-//  oomph_info << "Pruning dead nodes...";
 
  // Now remove the pruned nodes from the boundary lookup scheme
  this->prune_dead_nodes();
 
-//  elapsed_time=double(clock()-t_start)/CLOCKS_PER_SEC; t_start=clock();
-//  oomph_info << "....done " << elapsed_time << std::endl;
-
-//  oomph_info << "Setup boundary info....";
-
  // And finally re-setup the boundary lookup scheme for elements
  this->setup_boundary_element_info();
-
-//  elapsed_time=double(clock()-t_start)/CLOCKS_PER_SEC; t_start=clock();
-//  oomph_info << "....done " << elapsed_time << std::endl;
-
-//  oomph_info << "Recreate forest....";
 
  // Re-setup tree forest if needed
  if (this->nelement()>0)
@@ -2650,16 +2682,9 @@ void Mesh::distribute(OomphCommunicator* comm_pt,
     }
   }
 
-//  elapsed_time=double(clock()-t_start)/CLOCKS_PER_SEC; t_start=clock();
-//  oomph_info << "....done " << elapsed_time << std::endl;
-
-//  oomph_info << "Classify nodes....";
-
  // Classify nodes 
  classify_halo_and_haloed_nodes(comm_pt,doc_info,report_stats);
 
-//  elapsed_time=double(clock()-t_start)/CLOCKS_PER_SEC; t_start=clock();
-//  oomph_info << "....done " << elapsed_time << std::endl;
 
  // Mesh has now been distributed 
  // (required for Z2ErrorEstimator::get_element_errors)
