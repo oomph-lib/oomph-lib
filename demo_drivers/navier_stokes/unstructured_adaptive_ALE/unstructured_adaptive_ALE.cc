@@ -51,10 +51,10 @@ namespace oomph
  namespace Problem_Parameter
  {    
   /// Block velocity
-  double Block_x_velocity=1.0;
+  double Block_x_velocity=0.5;
   
   /// Block velocity
-  double Block_y_velocity=0.0;
+  double Block_y_velocity=0.3;
 
   /// Block velocity
   double Block_rotation_velocity=1.0;
@@ -68,7 +68,7 @@ namespace oomph
   DocInfo Doc_info;
   
   /// Reynolds number
-  double Re=0.1; 
+  double Re=50.0;
 
   /// Pseudo-solid Poisson ratio
   double Nu=0.3;
@@ -688,44 +688,61 @@ public:
  /// \short Update before implicit timestep: Move hole boundary
  void actions_before_implicit_timestep()
   {
+   double time=this->time_pt()->time();
+   double ampl=0.5*(exp(-10.0*time*time)-
+                    cos(2.0*MathematicalConstants::Pi*time));
+
    // Assign the x increment of the holes using velocity and timestep 
    double dx=Problem_Parameter::
-    Block_x_velocity*this->time_pt()->dt(); 
+    Block_x_velocity*ampl*this->time_pt()->dt(); 
    
    // Assign the y increment of the hole using velocity and timestep 
    double dy=Problem_Parameter::
-    Block_y_velocity*this->time_pt()->dt(); 
-   
+    Block_y_velocity*ampl*this->time_pt()->dt(); 
+
    // Assign the rotation of the hole using velocity and timestep 
+   double ampl2=1.0-exp(-10.0*time*time);
    double drotation=Problem_Parameter::
-    Block_rotation_velocity*this->time_pt()->dt(); 
+    Block_rotation_velocity*ampl2*this->time_pt()->dt(); 
       
    // Update the geom object position   
    unsigned nhole=this->inner_hole_pt().size();
    for(unsigned ihole=0;ihole<nhole;ihole++)
     {
+     double old_x=
+      Problem_Parameter::Centre_displacement_data_pt[ihole]->value(0);     
+     double old_y=
+      Problem_Parameter::Centre_displacement_data_pt[ihole]->value(1);
+     double old_angle=
+      Problem_Parameter::Centre_displacement_data_pt[ihole]->value(2);
+
+     
      // Update values 
-     double old_value=
-      Problem_Parameter::Centre_displacement_data_pt[ihole]->value(0);
      Problem_Parameter::Centre_displacement_data_pt[ihole]->
-      set_value(0,old_value+dx);
-
-     old_value=Problem_Parameter::Centre_displacement_data_pt[ihole]->value(1);
-    Problem_Parameter::Centre_displacement_data_pt[ihole]->
-     set_value(1,old_value+dy);
-
-
-    // Rotate one hole clockwise the other anti-clockwise
-     old_value=Problem_Parameter::Centre_displacement_data_pt[ihole]->value(2);
+      set_value(1,old_y+dy);
+     
+     // Rotate one hole clockwise the other anti-clockwise
      if(ihole==0)
       {
        Problem_Parameter::Centre_displacement_data_pt[ihole]->
-        set_value(2,old_value+drotation);
+        set_value(0,old_x-dx);
+
+       Problem_Parameter::Centre_displacement_data_pt[ihole]->
+        set_value(1,old_y+dy);
+       
+       Problem_Parameter::Centre_displacement_data_pt[ihole]->
+        set_value(2,old_angle+drotation);
       }
      else
       {
        Problem_Parameter::Centre_displacement_data_pt[ihole]->
-        set_value(2,old_value-drotation);
+        set_value(0,old_x+dx);
+
+       Problem_Parameter::Centre_displacement_data_pt[ihole]->
+        set_value(1,old_y-dy);
+       
+       Problem_Parameter::Centre_displacement_data_pt[ihole]->
+        set_value(2,old_angle-drotation);
       }
     }
   }
@@ -983,7 +1000,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  bound_seg[0][0]=0.0;
  bound_seg[0][1]=0.0;
  bound_seg[1][0]=0.0;
- bound_seg[1][1]=5.0;
+ bound_seg[1][1]=1.0;
  
  // Specify 1st boundary id
  unsigned bound_id = 1;
@@ -993,9 +1010,9 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  
  // Second boundary segment
  bound_seg[0][0]=0.0;
- bound_seg[0][1]=5.0;
- bound_seg[1][0]=12.0;
- bound_seg[1][1]=5.0;
+ bound_seg[0][1]=1.0;
+ bound_seg[1][0]=2.0;
+ bound_seg[1][1]=1.0;
 
  // Specify 2nd boundary id
  bound_id = 2;
@@ -1004,9 +1021,9 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  boundary_segment_pt[1] = new TriangleMeshPolyLine(bound_seg,bound_id);
 
  // Third boundary segment
- bound_seg[0][0]=12.0;
- bound_seg[0][1]=5.0;
- bound_seg[1][0]=12.0;
+ bound_seg[0][0]=2.0;
+ bound_seg[0][1]=1.0;
+ bound_seg[1][0]=2.0;
  bound_seg[1][1]=0.0;
 
  // Specify 3rd boundary id
@@ -1016,7 +1033,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  boundary_segment_pt[2] = new TriangleMeshPolyLine(bound_seg,bound_id);
 
  // Fourth boundary segment
- bound_seg[0][0]=12.0;
+ bound_seg[0][0]=2.0;
  bound_seg[0][1]=0.0;
  bound_seg[1][0]=0.0;
  bound_seg[1][1]=0.0;
@@ -1054,14 +1071,14 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
    Problem_Parameter::Centre_displacement_data_pt[ihole]->pin(1);
    Problem_Parameter::Centre_displacement_data_pt[ihole]->pin(2);
   }
-
-
+ 
+ 
  // Build first hole
  //-----------------
- double x_center = 3.0;
- double y_center = 2.5;
- double A = 0.7;
- double B = 1.3;
+ double x_center = 1.3;
+ double y_center = 0.5;
+ double A = 0.1;
+ double B = 0.25;
  Ellipse * egg_hole_pt = new Ellipse(A,B);
  
  // Define the vector of angle value to build the hole
@@ -1131,14 +1148,12 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
   hole_center,hole_segment_pt,
   Problem_Parameter::Centre_displacement_data_pt[0]);
  
- 
-
  // Build the second hole
  //----------------------
- x_center = 6.0;
- y_center = 2.5;
- A = 0.5;
- B = 1.5;
+ x_center = 0.5;
+ y_center = 0.6;
+ A = 0.1;
+ B = 0.2;
  delete egg_hole_pt;
  egg_hole_pt = new Ellipse(A,B);
  
@@ -1197,12 +1212,11 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
   hole_center,hole_segment_pt,
   Problem_Parameter::Centre_displacement_data_pt[1]);
  
-
  // Now build the mesh, based on the boundaries specified by
  //---------------------------------------------------------
  // polygons just created
  //----------------------
- double uniform_element_area=1.0;
+ double uniform_element_area=0.2;
  Fluid_mesh_pt = 
   new RefineableSolidTriangleMesh<ELEMENT>(Outer_boundary_polyline_pt, 
                                            Inner_hole_pt,
@@ -1215,11 +1229,17 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
 
 
  // Set targets for spatial adaptivity
- Fluid_mesh_pt->max_permitted_error()=0.01; //0.01;
- Fluid_mesh_pt->min_permitted_error()=0.0001; //0.0001;
- Fluid_mesh_pt->max_element_size()=1.0;
- Fluid_mesh_pt->min_element_size()=0.01;
-   
+ Fluid_mesh_pt->max_permitted_error()=0.005;
+ Fluid_mesh_pt->min_permitted_error()=0.001; 
+ Fluid_mesh_pt->max_element_size()=0.2;
+ Fluid_mesh_pt->min_element_size()=0.001; 
+
+ // Use coarser mesh during validation
+ if (CommandLineArgs::command_line_flag_has_been_set("--validation"))
+  {
+   Fluid_mesh_pt->min_element_size()=0.01; 
+  }
+
  // Set the problem pointer
  Fluid_mesh_pt->problem_pt()=this;
    
@@ -1623,10 +1643,24 @@ void UnstructuredFluidProblem<ELEMENT>::compute_error_estimate(double& max_err,
 //============================================================
 ///Driver code for moving block problem
 //============================================================
-int main()
-{  
+int main(int argc, char **argv)
+{
+ // feenableexcept(FE_INVALID | FE_DIVBYZERO | FE_OVERFLOW | FE_UNDERFLOW);
 
-// feenableexcept(FE_INVALID | FE_DIVBYZERO | FE_OVERFLOW | FE_UNDERFLOW);
+ // Store command line arguments
+ CommandLineArgs::setup(argc,argv);
+
+ // Define possible command line arguments and parse the ones that
+ // were actually specified
+ 
+ // Validation?
+ CommandLineArgs::specify_command_line_flag("--validation");
+
+ // Parse command line
+ CommandLineArgs::parse_and_assign(); 
+ 
+ // Doc what has actually been specified on the command line
+ CommandLineArgs::doc_specified_flags();
 
  // Create generalised Hookean constitutive equations
  Problem_Parameter::Constitutive_law_pt = 
@@ -1644,7 +1678,7 @@ int main()
   problem;  
  
  // Initialise timestepper
- double dt=0.01;
+ double dt=0.025;
  problem.initialise_dt(dt);
  
  // Perform impulsive start
@@ -1663,7 +1697,12 @@ int main()
   }
 
  // Now do a couple of adaptations
- unsigned ncycle=2;
+ unsigned ncycle=100;
+ if (CommandLineArgs::command_line_flag_has_been_set("--validation"))
+  {
+   ncycle=1;
+   oomph_info << "Only doing one cycle during validation\n";
+  }
  for (unsigned j=0;j<ncycle;j++)
   {       
    // Adapt

@@ -9,4 +9,5 @@ prescribed_displ_lagr_mult \
 three_d_entry_flow \
 three_d_cantilever \
 three_d_prescribed_displ_lagr_mult \
-clamped_shell
+clamped_shell \
+bifurcation_tracking

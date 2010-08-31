@@ -282,6 +282,7 @@ RotatingProblem<ELEMENT>::RotatingProblem
  const unsigned &Nz1, const unsigned &Nz2) :
  Re(0.0), Length(12.0) //Initialise value of Re to zero
 {
+
  //Set the Central Node
  Central_node = 2*Nr1;
 
@@ -525,8 +526,15 @@ void RotatingProblem<ELEMENT>::solve_system()
  for(unsigned l=0;l<1;l++)
   {
    Re += 25.0;
-   steady_newton_solve();
-   
+   try
+    {
+     steady_newton_solve();
+    }
+   catch (OomphLibError &error)
+    {
+     cout << "Caught solver error -- continuing regardless \n.";
+    }
+
    //Output to the trace file
    if(this->communicator_pt()->my_rank()==0)
     {
@@ -633,7 +641,16 @@ void RotatingProblem<ELEMENT>::solve_system()
    
  //Let's try to find the pitchfork
  activate_pitchfork_tracking(&Re,symm);
- steady_newton_solve();
+ try
+  {
+   steady_newton_solve();
+  }
+ catch (OomphLibError &error)
+  {
+   cout << "Caught solver error -- continuing regardless \n.";
+  }
+ 
+
  
  //Pitchfork found at
  oomph_info << "Pitchfork found at "
@@ -651,8 +668,15 @@ void RotatingProblem<ELEMENT>::solve_system()
  Vector<DoubleVector> efn;
  this->assembly_handler_pt()->get_eigenfunction(efn);
  activate_pitchfork_tracking(&Re,efn[0]);
-
- steady_newton_solve();
+ try
+  {
+   steady_newton_solve();   
+  }
+ catch (OomphLibError &error)
+  {
+   cout << "Caught solver error -- continuing regardless \n.";
+  }
+ 
  oomph_info << "Pitchfork found at "
             << Re << " " << std::endl;
  if(communicator_pt()->my_rank()==0)

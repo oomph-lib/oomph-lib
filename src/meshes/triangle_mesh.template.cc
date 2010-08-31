@@ -1612,13 +1612,9 @@ namespace oomph
  void RefineableTriangleMesh<ELEMENT>::adapt(OomphCommunicator* comm_pt,
                                              const Vector<double>& elem_error)
  {    
-  // Get the current TriangulateIO object
-  TriangulateIO tmp_triangulateio=this->triangulateio_representation();
-  
   // Get refinement targets
   Vector<double> target_area(elem_error.size());
-  double min_angle=compute_area_target(tmp_triangulateio,
-                                       elem_error,
+  double min_angle=compute_area_target(elem_error,
                                        target_area);
   // Get maximum target area
   unsigned n=target_area.size();
@@ -1638,10 +1634,11 @@ namespace oomph
              << this->Nunrefined << std::endl;
   oomph_info << "Min angle "<< min_angle << std::endl;
 
-  this->max_and_min_area(max_area, min_area);
+  double orig_max_area, orig_min_area;
+  this->max_and_min_area(orig_max_area, orig_min_area);
   oomph_info << "Max/min area in original mesh: " 
-             << max_area  << " "
-             << min_area << std::endl;    
+             << orig_max_area  << " "
+             << orig_min_area << std::endl;    
 
   // Should we bother to adapt?
   if ( (Nrefined > 0) || (Nunrefined > max_keep_unrefined()) ||
@@ -1676,8 +1673,7 @@ namespace oomph
     this->update_triangulateio(hole_centre_coord);
     
     // Get the updated TriangulateIO object
-    tmp_triangulateio=this->triangulateio_representation();
-    
+    TriangulateIO tmp_triangulateio=this->triangulateio_representation();
 
     // Are we dealing with a solid mesh?
     SolidMesh* solid_mesh_pt=dynamic_cast<SolidMesh*>(this);
@@ -1704,6 +1700,12 @@ namespace oomph
         this->Time_stepper_pt);
      }
 
+//     oomph_info << "Built background mesh with area: " << max_area << std::endl;
+//     tmp_new_mesh_pt->output("background_mesh.dat");
+//     this->output("actual_mesh_before_adapt.dat");
+
+//     pause("done");
+
     // Get the TriangulateIO object associated with that mesh
     TriangulateIO tmp_new_triangulateio=
      tmp_new_mesh_pt->triangulateio_representation();
@@ -1722,6 +1724,14 @@ namespace oomph
     // Map storing target areas for elements in temporary 
     // TriangulateIO mesh
     std::map<GeneralisedElement*,double> target_area_map;
+
+
+    //////////////////////////////////////////////////////////////
+    // NOTE: Repeated setup of multidomain interaction could
+    // be avoided by setting up a sufficiently fine bin
+    // for the original mesh and reading out the target
+    // area information from there
+    //////////////////////////////////////////////////////////////
 
     // Now start iterating to refine mesh recursively
     //-----------------------------------------------

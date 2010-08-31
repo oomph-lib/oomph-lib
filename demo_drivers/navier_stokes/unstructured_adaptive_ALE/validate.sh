@@ -17,7 +17,7 @@ cd Validation
 echo "Running 2D unstructured adaptive Navier Stokes ALE validation "
 mkdir RESLT
 
-../unstructured_adaptive_ALE > OUTPUT
+../unstructured_adaptive_ALE --validation > OUTPUT
 echo "done"
 echo " " >> validation.log
 echo "2D unstructured adaptive Navier Stokes ALE validation" >> validation.log

@@ -692,112 +692,83 @@ template<class ELEMENT>
 
    /// \short Compute target area based on the element's error and the
    /// error target; return minimum angle (in degrees)
-   double compute_area_target(TriangulateIO &triangulate_io,
-                              const Vector<double> &elem_error,
+   double compute_area_target(const Vector<double> &elem_error,
                               Vector<double> &target_area)
    {
     double min_angle=DBL_MAX;
     unsigned count_unrefined=0;
     unsigned count_refined=0;
     this->Nrefinement_overruled=0;
-
-    // Store the point coordinates in the list
-    // and in two vectors with x and y coordinates
-    unsigned n_points = triangulate_io.numberofpoints;
-    Vector<double> x_coord (n_points);
-    Vector<double> y_coord (n_points);
-    for(unsigned j=0;j<n_points*2;j++)
-     {      
-      // Even vaules represent the x coordinate
-      // Odd values represent the y coordinate
-      if (j%2==0)
-       {
-        x_coord[j/2] = triangulate_io.pointlist[j];
-       }
-      else
-       {
-        y_coord[(j-1)/2] = triangulate_io.pointlist[j];
-       }
-     }
     
-    // Get element sizes
-    unsigned n_triangles = triangulate_io.numberoftriangles;
-    Vector<double> elem_area(n_triangles);
-    for(unsigned j=0;j<n_triangles*3;j++)
+    unsigned nel=this->nelement();
+    for (unsigned e=0;e<nel;e++)
      {
-      // In order to refine the meshing we need to know the area value 
-      // of each element (triangle). The area value is obtained by the formula:
-      // area = |(Ax(By-Cy)+Bx(Cy-Ay)+Cx(Ay-By))/2|
       
-      // We compute one element at a time, hence every 3 list's values
-      if (j%3==0)
+      // Get element
+      FiniteElement* el_pt=this->finite_element_pt(e);
+      
+      // Area 
+      double area=el_pt->size();
+
+
+      // Min angle based on vertex coordinates
+      // (vertices are enumerated first)
+      double ax=el_pt->node_pt(0)->x(0);
+      double ay=el_pt->node_pt(0)->x(1);
+        
+      double bx=el_pt->node_pt(1)->x(0);
+      double by=el_pt->node_pt(1)->x(1);
+        
+      double cx=el_pt->node_pt(2)->x(0);
+      double cy=el_pt->node_pt(2)->x(1);
+        
+      // Min angle
+      double angle0=
+       acos(((ax-cx)*(bx-cx)+(ay-cy)*(by-cy))/
+            (sqrt((ax-cx)*(ax-cx)+(ay-cy)*(ay-cy))*
+             sqrt((bx-cx)*(bx-cx)+(by-cy)*(by-cy))))*
+       180.0/MathematicalConstants::Pi;
+      min_angle=std::min(min_angle,angle0);
+        
+      double angle1=
+       acos(((ax-bx)*(cx-bx)+(ay-by)*(cy-by))/
+            (sqrt((ax-bx)*(ax-bx)+(ay-by)*(ay-by))*
+             sqrt((cx-bx)*(cx-bx)+(cy-by)*(cy-by))))*
+       180.0/MathematicalConstants::Pi;
+      min_angle=std::min(min_angle,angle1);
+        
+      double angle2=180.0-angle0-angle1;
+      min_angle=std::min(min_angle,angle2);
+        
+      // Mimick refinement in tree-based procedure: Target areas
+      // for elements that exceed permitted error is 1/3 of their
+      // current area, corresponding to a uniform sub-division.
+      if (elem_error[e]>max_permitted_error())
        {
-        // element number
-        unsigned e=j/3;
-        
-        unsigned j_a = triangulate_io.trianglelist[j];
-        double ax= x_coord[j_a-1];
-        double ay= y_coord[j_a-1];
-        
-        unsigned j_b = triangulate_io.trianglelist[j+1];
-        double bx= x_coord[j_b-1];
-        double by= y_coord[j_b-1];
-        
-        unsigned j_c = triangulate_io.trianglelist[j+2];
-        double cx= x_coord[j_c-1];
-        double cy= y_coord[j_c-1];
-        
-        // Area 
-        double area = (ax*(by-cy)+bx*(cy-ay)+cx*(ay-by))*0.5;
-
-        // Min angle
-        double angle0=
-         acos(((ax-cx)*(bx-cx)+(ay-cy)*(by-cy))/
-              (sqrt((ax-cx)*(ax-cx)+(ay-cy)*(ay-cy))*
-               sqrt((bx-cx)*(bx-cx)+(by-cy)*(by-cy))))*
-         180.0/MathematicalConstants::Pi;
-        min_angle=std::min(min_angle,angle0);
-
-        double angle1=
-         acos(((ax-bx)*(cx-bx)+(ay-by)*(cy-by))/
-              (sqrt((ax-bx)*(ax-bx)+(ay-by)*(ay-by))*
-               sqrt((cx-bx)*(cx-bx)+(cy-by)*(cy-by))))*
-         180.0/MathematicalConstants::Pi;
-        min_angle=std::min(min_angle,angle1);
-
-        double angle2=180.0-angle0-angle1;
-        min_angle=std::min(min_angle,angle2);
-        
-        // Mimick refinement in tree-based procedure: Target areas
-        // for elements that exceed permitted error is 1/3 of their
-        // current area, corresponding to a uniform sub-division.
-        if (elem_error[e]>max_permitted_error())
+        target_area[e]=std::max(area/3.0,Min_element_size);
+        if (target_area[e]!=Min_element_size)
          {
-          target_area[e]=std::max(area/3.0,Min_element_size);
-          if (target_area[e]!=Min_element_size)
-           {
-            count_refined++;
-           }
-          else
-           {
-            this->Nrefinement_overruled++;
-           }
-         }
-        else if (elem_error[e]<min_permitted_error())
-         {
-          target_area[e]=std::min(3.0*area,Max_element_size);
-          if (target_area[e]!=Max_element_size)
-           {
-            count_unrefined++;
-           }
+          count_refined++;
          }
         else
          {
-          // Leave it alone
-          target_area[e] = std::max(area,Min_element_size); 
+          this->Nrefinement_overruled++;
          }
-       }      
-     }
+       }
+      else if (elem_error[e]<min_permitted_error())
+       {
+        target_area[e]=std::min(3.0*area,Max_element_size);
+        if (target_area[e]!=Max_element_size)
+         {
+          count_unrefined++;
+         }
+       }
+      else
+       {
+        // Leave it alone
+        target_area[e] = std::max(area,Min_element_size); 
+       }
+     }      
     
     // Tell everybody
     this->Nrefined=count_refined;
