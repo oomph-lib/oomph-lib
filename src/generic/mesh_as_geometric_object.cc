@@ -179,6 +179,9 @@ namespace Multi_domain_functions
    // Get the default parameters for the number of bins in each 
    // dimension from the Multi_domain_functions namespace
    
+
+//   oomph_info << "hierher Number of sub-objects: " << n_sub_object << "\n";
+
    // If the mesh has only one element there's no need for big bin structure
    if (n_sub_object==1)
     {

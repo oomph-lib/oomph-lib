@@ -154,6 +154,7 @@ namespace oomph
  setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
  {
 
+
   //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   // NOTE: In the interest of minimising memory usage, several containers
   //       are recycled, therefore their content/meaning changes
@@ -187,6 +188,7 @@ namespace oomph
   // shout if that can't be done.
   CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
 
+
 #ifdef PARANOID
   if (cr_matrix_pt==0)
    {
@@ -199,6 +201,17 @@ namespace oomph
                         OOMPH_EXCEPTION_LOCATION);
    }
 #endif
+
+
+//   {
+//    std::stringstream junk;
+//    junk << "j_matrix" << problem_pt->communicator_pt()->my_rank()
+//         << ".dat";
+//    oomph_info << "About to output " << junk.str() << std::endl;
+//    cr_matrix_pt->sparse_indexed_output_with_offset(junk.str());
+//    oomph_info << "Done output of " << junk.str() << std::endl;
+//   }
+
 
   // Set up block look up schemes (done automatically in the
   // BlockPreconditioner base class, based on the information 
@@ -454,6 +467,13 @@ namespace oomph
 
   // Setup the preconditioner for the Pressure matrix
   double t_p_prec_start = TimingHelpers::timer();
+//   {
+//    std::stringstream junk;
+//    junk << "p_matrix" << this->problem_pt()->communicator_pt()->my_rank()
+//         << ".dat";
+//    p_matrix_pt->sparse_indexed_output_with_offset(junk.str());
+//    oomph_info << "Done output of " << junk.str() << std::endl;
+//   }
   P_preconditioner_pt->setup(problem_pt, p_matrix_pt);
   delete p_matrix_pt;
   p_matrix_pt=0;

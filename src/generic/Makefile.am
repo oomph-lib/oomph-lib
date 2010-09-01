@@ -45,7 +45,7 @@ matrix_vector_product.cc
 #face_element_as_geometric_object.cc
 
 if OOMPH_HAS_MUMPS
-sources+=mumps_fortran_solver.F mumps_solver.cc
+sources+=mumps_fortran_solver.F mumps_solver.cc new_mumps_solver.cc
 endif
 
 if WANT_MPI
@@ -100,7 +100,7 @@ matrix_vector_product.h projection.h
 
 if OOMPH_HAS_MUMPS
 
-headers+=mumps_solver.h 
+headers+=mumps_solver.h new_mumps_solver.h 
 endif
 
 if WANT_MPI

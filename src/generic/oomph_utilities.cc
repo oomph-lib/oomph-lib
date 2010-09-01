@@ -1230,19 +1230,33 @@ MPIOutputModifier oomph_mpi_output;
 #endif
 
 //=============================================================================
-/// initialize mpi
+/// Initialize mpi. If optional boolean flag is set to false, we use
+/// MPI_COMM_WORLD itself as oomph-lib's communicator. Defaults to true.
 //=============================================================================
-void MPI_Helpers::init(int argc, char **argv)
+ void MPI_Helpers::init(int argc, char **argv, 
+                        const bool& make_duplicate_of_mpi_comm_world)
 {
 #ifdef OOMPH_HAS_MPI
  // call mpi int
  MPI_Init(&argc,&argv);
 
 
- // create the oomph-lib communicator using MPI_Comm_dup.
+ // By default, create the oomph-lib communicator using MPI_Comm_dup so that
  // the communicator has the same group of processes but a new context
- MPI_Comm oomph_comm_world;
- MPI_Comm_dup(MPI_COMM_WORLD,&oomph_comm_world);
+ MPI_Comm oomph_comm_world=MPI_COMM_WORLD;
+ if (make_duplicate_of_mpi_comm_world)
+  {
+   MPI_Comm_dup(MPI_COMM_WORLD,&oomph_comm_world); 
+  }
+
+ if (MPI_COMM_WORLD!=oomph_comm_world)
+  {
+   oomph_info << "Oomph-lib communiator is a duplicate of MPI_COMM_WORLD\n";
+  }
+ else
+  {
+   oomph_info << "Oomph-lib communiator is MPI_COMM_WORLD\n";
+  }
  
  // create the oomph-lib communicator
  // note: oomph_comm_world is deleted when the destructor of 

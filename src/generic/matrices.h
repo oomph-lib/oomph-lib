@@ -872,6 +872,32 @@ class CRDoubleMatrix : public Matrix<double, CRDoubleMatrix >,
     some_file.close();
    }
 
+
+  /// \short Indexed output function to print a matrix to a
+  /// file as i,j,a(i,j) for a(i,j)!=0 only. Specify filename.
+  /// This uses acual global row numbers.
+  void sparse_indexed_output_with_offset(std::string filename)
+   {
+    
+    // Get offset
+    unsigned first_row=distribution_pt()->first_row();
+
+    // Open file
+    std::ofstream some_file;
+    some_file.open(filename.c_str());
+    unsigned n=nrow_local();
+    for (unsigned long i=0;i<n;i++)
+     {
+      for (long j=row_start()[i];j<row_start()[i+1];j++)
+       {
+        some_file << first_row+i << " " << column_index()[j] << " "
+                  << value()[j]
+                  << std::endl;
+       }
+     }
+    some_file.close();
+   }
+
  /// Overload the round-bracket access operator for read-only access. In a 
  /// distributed matrix i refers to the local row index. 
  inline const double& operator()(const unsigned long &i, 

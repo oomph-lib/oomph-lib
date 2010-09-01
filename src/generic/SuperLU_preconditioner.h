@@ -46,8 +46,8 @@ class SuperLUPreconditioner : public Preconditioner
  /// Constructor.
  SuperLUPreconditioner()
   {
-   solver.doc_stats() = false;
-   solver.doc_time() = false;
+   Solver.doc_stats() = false;
+   Solver.doc_time() = false;
   }
  
  /// Destructor.
@@ -82,7 +82,7 @@ class SuperLUPreconditioner : public Preconditioner
        ((dynamic_cast<DistributableLinearAlgebraObject*>
                 (matrix_pt))->distribution_pt());
       this->build_distribution(dist);
-      solver.factorise(matrix_pt);
+      Solver.factorise(matrix_pt);
      }
     else
      {
@@ -103,7 +103,7 @@ class SuperLUPreconditioner : public Preconditioner
   void preconditioner_solve(const DoubleVector&r,
                             DoubleVector &z)
    {
-    solver.resolve(r, z);
+    Solver.resolve(r, z);
    }
   
 
@@ -111,13 +111,13 @@ class SuperLUPreconditioner : public Preconditioner
   /// SuperLU in its LinearSolver incarnation.
   virtual void clean_up_memory()
    {
-    solver.clean_up_memory();
+    Solver.clean_up_memory();
    }
 
   private:
 
-  /// \short the superLU solver emplyed by this preconditioner
-  SuperLUSolver solver;
+  /// \short the SuperLU solver emplyed by this preconditioner
+  SuperLUSolver Solver;
 };
 
 }

@@ -220,7 +220,9 @@ void superlu_dist_distributed_matrix(int opt_flag, int allow_permutations,
      options->RowPerm=NATURAL; 
     } 
 
-   
+/*    printf("\n\n\nSWITCHING OFF EQUILIBRATION\n\n\n"); */
+/*    options->Equil=NO; */
+
    /* Iterative refinement (essential as far as I can tell).*/
    /* Can be "NO" or "DOUBLE"*/
    options->IterRefine = DOUBLE;

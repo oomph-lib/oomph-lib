@@ -1039,8 +1039,22 @@ public:
 #ifdef PARANOID
    if(Hanging_pt==0)
     {
+     std::ostringstream error_message;
+     error_message 
+      << "Vector of pointers to hanging data is not setup yet\n"
+#ifdef OOMPH_HAS_MPI
+      << "I'm on processor " <<
+      MPI_Helpers::communicator_pt()->my_rank() << "\n"
+#endif
+     << "Coordinates: \n";
+     
+     unsigned n_dim=ndim();
+     for (unsigned i=0;i<n_dim;i++)
+      {
+       error_message << this->x(i) << " ";
+      }
      throw OomphLibError(
-      "Vector of pointers to hanging data is not setup yet\n",
+      error_message.str(),
       "Node::hanging_pt()",
       OOMPH_EXCEPTION_LOCATION);
     }

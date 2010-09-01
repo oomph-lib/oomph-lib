@@ -324,10 +324,7 @@ class FD_LU : public DenseLU
  void solve(Problem* const &problem_pt, DoubleVector &result);
 
  /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs 
- /// vector and returns the solution of the linear system. Problem pointer 
- /// defaults to NULL and can be omitted in linear-algebra-type solves in 
- /// which the preconditioner doesn't (mustn't!) require a pointer to an
- /// associated Problem. (broken virtual)
+ /// vector and returns the solution of the linear system. 
  void solve(DoubleMatrixBase* const &matrix_pt,
             const DoubleVector &rhs,
             DoubleVector &result)
@@ -438,9 +435,8 @@ class SuperLUSolver : public LinearSolver
  void solve(Problem* const &problem_pt, DoubleVector &result);
 
  /// \short Linear-algebra-type solver: Takes pointer to a matrix and rhs 
- /// vector and returns the solution of the linear system. Problem pointer 
- /// defaults to NULL and can be omitted. The function returns the global 
- /// result Vector.
+ /// vector and returns the solution of the linear system.
+ /// The function returns the global result Vector.
  /// Note: if Delete_matrix_data is true the function 
  /// matrix_pt->clean_up_memory() will be used to wipe the matrix data.
  void solve(DoubleMatrixBase* const &matrix_pt,
@@ -448,14 +444,14 @@ class SuperLUSolver : public LinearSolver
             DoubleVector &result);
 
 
- /// \short Linear-algebra-type solver: Takes pointer to a matrix
- /// and rhs vector and returns the solution of the linear system
- /// Call the broken base-class version. If you want this, please 
- /// implement it
- void solve(DoubleMatrixBase* const &matrix_pt,
-                    const Vector<double> &rhs,
-                    Vector<double> &result)
-  {LinearSolver::solve(matrix_pt,rhs,result);}
+/*  /// \short Linear-algebra-type solver: Takes pointer to a matrix */
+/*  /// and rhs vector and returns the solution of the linear system */
+/*  /// Call the broken base-class version. If you want this, please  */
+/*  /// implement it */
+/*  void solve(DoubleMatrixBase* const &matrix_pt, */
+/*                     const Vector<double> &rhs, */
+/*                     Vector<double> &result) */
+/*   {LinearSolver::solve(matrix_pt,rhs,result);} */
 
  
  /// \short Resolve the system defined by the last assembled jacobian

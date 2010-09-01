@@ -2453,8 +2453,8 @@ void Mesh::distribute(OomphCommunicator* comm_pt,
  
  
  double elapsed_time=double(clock()-t_start)/CLOCKS_PER_SEC; 
- oomph_info << "hierher remove this output once it scales Time for while loop: " 
-            << elapsed_time << std::endl;
+//  oomph_info << "Time for while loop: " 
+//             << elapsed_time << std::endl;
  
  
  // Copy the elements associated with the actual
