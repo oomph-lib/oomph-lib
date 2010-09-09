@@ -1028,7 +1028,7 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
       {
        outfile << adjacency_vector[i] << std::endl;
       }
-     for (unsigned e=0;e<total_number_of_root_elements+1;e++)
+     for (unsigned e=0;e<total_number_of_root_elements;e++)
       {
        outfile << vwgt[e] << std::endl;
       }

@@ -154,6 +154,8 @@ namespace oomph
  setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt)
  {
 
+  // For debugging...
+  bool doc_block_matrices=false;
 
   //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   // NOTE: In the interest of minimising memory usage, several containers
@@ -203,14 +205,15 @@ namespace oomph
 #endif
 
 
-//   {
-//    std::stringstream junk;
-//    junk << "j_matrix" << problem_pt->communicator_pt()->my_rank()
-//         << ".dat";
-//    oomph_info << "About to output " << junk.str() << std::endl;
-//    cr_matrix_pt->sparse_indexed_output_with_offset(junk.str());
-//    oomph_info << "Done output of " << junk.str() << std::endl;
-//   }
+  if (doc_block_matrices)
+   {
+    std::stringstream junk;
+    junk << "j_matrix" << problem_pt->communicator_pt()->my_rank()
+         << ".dat";
+    oomph_info << "About to output " << junk.str() << std::endl;
+    cr_matrix_pt->sparse_indexed_output_with_offset(junk.str());
+    oomph_info << "Done output of " << junk.str() << std::endl;
+   }
 
 
   // Set up block look up schemes (done automatically in the
@@ -262,6 +265,16 @@ namespace oomph
     oomph_info << "Time to get B [sec]: "
                << get_B_time << "\n";
    }
+
+
+  if (doc_block_matrices)
+   {
+    std::stringstream junk;
+    junk << "b_matrix" << this->problem_pt()->communicator_pt()->my_rank()
+         << ".dat";
+    b_pt->sparse_indexed_output_with_offset(junk.str());
+    oomph_info << "Done output of " << junk.str() << std::endl;
+   }
   
   
   // get the inverse velocity and pressure mass matrices
@@ -294,6 +307,19 @@ namespace oomph
                << ivmm_assembly_time << "\n";
    }
   
+
+
+  if (doc_block_matrices)
+   {
+    std::stringstream junk;
+    junk << "inv_v_mass_matrix" 
+         << this->problem_pt()->communicator_pt()->my_rank()
+         << ".dat";
+    inv_v_mass_pt->sparse_indexed_output_with_offset(junk.str());
+    oomph_info << "Done output of " << junk.str() << std::endl;
+   }
+  
+  
   // Get gradient matrix Bt
   CRDoubleMatrix* bt_pt = 0;
   double t_get_Bt_start = TimingHelpers::timer();
@@ -305,6 +331,17 @@ namespace oomph
     oomph_info << "Time to get Bt [sec]: "
                << t_get_Bt_time << std::endl;
    }
+  
+
+  if (doc_block_matrices)   
+   {
+    std::stringstream junk;
+    junk << "bt_matrix" << this->problem_pt()->communicator_pt()->my_rank()
+         << ".dat";
+    bt_pt->sparse_indexed_output_with_offset(junk.str());
+    oomph_info << "Done output of " << junk.str() << std::endl;
+   }
+  
   
   // Build pressure Poisson matrix 
   CRDoubleMatrix* p_matrix_pt = new CRDoubleMatrix;
@@ -467,13 +504,16 @@ namespace oomph
 
   // Setup the preconditioner for the Pressure matrix
   double t_p_prec_start = TimingHelpers::timer();
-//   {
-//    std::stringstream junk;
-//    junk << "p_matrix" << this->problem_pt()->communicator_pt()->my_rank()
-//         << ".dat";
-//    p_matrix_pt->sparse_indexed_output_with_offset(junk.str());
-//    oomph_info << "Done output of " << junk.str() << std::endl;
-//   }
+
+  if (doc_block_matrices)
+   {
+    std::stringstream junk;
+    junk << "p_matrix" << this->problem_pt()->communicator_pt()->my_rank()
+         << ".dat";
+    p_matrix_pt->sparse_indexed_output_with_offset(junk.str());
+    oomph_info << "Done output of " << junk.str() << std::endl;
+   }
+  
   P_preconditioner_pt->setup(problem_pt, p_matrix_pt);
   delete p_matrix_pt;
   p_matrix_pt=0;
