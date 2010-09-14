@@ -160,7 +160,7 @@ mv RESLT RESLT_barrel
 
 # Validation for adaptive T-junction menisus
 #-------------------------------------------
-echo "Running adpative T-junction meniscus validation "
+echo "Running adaptive T-junction meniscus validation "
 mkdir RESLT
 
 ../refineable_t_junction > OUTPUT_t_junction

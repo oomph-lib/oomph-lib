@@ -745,6 +745,148 @@ void Data::add_value_pt_to_map(std::map<unsigned,double*> &map_of_value_pt)
   }
 }
 
+#ifdef OOMPH_HAS_MPI
+//==================================================================
+/// Add all data and time history values to a vector that will be
+/// used when communicating data between processors. The function is
+/// virtual so that it can be overloaded by Nodes and SolidNodes to
+/// add the additional data present in those objects.
+//==================================================================
+void Data::add_values_to_vector(Vector<double> &vector_of_values)
+{
+ //Find the number of stored values
+ const unsigned n_value = this->nvalue();
+ //If no values are stored then return immediately
+ if(n_value==0) {return;}
+
+ //Find the number of stored time data
+ const unsigned n_tstorage = this->ntstorage();
+
+
+ //Resize the vector to accommodate the new data
+ const unsigned n_current_value = vector_of_values.size();
+ vector_of_values.resize(n_current_value + n_tstorage*n_value);
+
+ //Now add the data to the vector
+ unsigned index = n_current_value;
+ //Pointer to the first entry in the data array
+ double* data_pt = Value[0];
+ //Loop over values
+ for(unsigned i=0;i<n_value;i++)
+  {
+   //Loop over time histories
+   for(unsigned t=0;t<n_tstorage;t++)
+    {
+     //Add the data to the vector
+     vector_of_values[index] = *data_pt;
+     //Increment the counter and the pointer
+     ++index;
+     ++data_pt;
+    }
+  }
+}
+
+//==================================================================
+/// Read all data and time history values from a vector that will be
+/// used when communicating data between processors. The function is
+/// virtual so that it can be overloaded by Nodes and SolidNodes to
+/// read the additional data present in those objects. The unsigned
+/// index is used to indicate the start position for reading in
+/// the vector and will be set the end of the data that has been 
+/// read in on return.
+//==================================================================
+void Data::read_values_from_vector(const Vector<double> &vector_of_values,
+                                   unsigned &index)
+{
+ //Find the number of stored values
+ const unsigned n_value = this->nvalue();
+ //If no values are stored, return immediately
+ if(n_value==0) {return;}
+
+ //Find the number of stored time data
+ const unsigned n_tstorage = this->ntstorage();
+
+
+ //Pointer to the first entry in the data array
+ double* data_pt = Value[0];
+ //Loop over values
+ for(unsigned i=0;i<n_value;i++)
+  {
+   //Loop over time histories
+   for(unsigned t=0;t<n_tstorage;t++)
+    {
+     //Read the data from the vector
+     *data_pt = vector_of_values[index];
+     //Increment the counter and the pointer
+     ++index;
+     ++data_pt;
+    }
+  }
+}
+
+//==================================================================
+/// Add all equation numbers to the vector. The function is virtual 
+/// so that it can be overloaded by SolidNodes to add the additional
+/// equation numbers associated with the solid dofs in those objects.
+//==================================================================
+void Data::add_eqn_numbers_to_vector(Vector<long> &vector_of_eqn_numbers)
+{
+ //Find the number of stored values
+ const unsigned n_value = this->nvalue();
+ //If no values are stored then return immediately
+ if(n_value==0) {return;}
+
+ //Resize the vector to accommodate the new data
+ const unsigned n_current_value = vector_of_eqn_numbers.size();
+ vector_of_eqn_numbers.resize(n_current_value + n_value);
+
+ //Now add the data to the vector
+ unsigned index = n_current_value;
+ //Pointer to the first entry in the equation number array
+ long* eqn_number_pt = Eqn_number;
+ //Loop over values
+ for(unsigned i=0;i<n_value;i++)
+  {
+   //Add the data to the vector
+   vector_of_eqn_numbers[index] = *eqn_number_pt;
+   //Increment the counter and the pointer
+   ++index;
+   ++eqn_number_pt;
+  }
+}
+
+//==================================================================
+/// Read all equation numbers from the vector. The function is virtual 
+/// so that it can be overloaded by SolidNodes to add the additional
+/// equation numbers associated with the solid dofs in those objects.
+/// The unsigned
+/// index is used to indicate the start position for reading in
+/// the vector and will be set the end of the data that has been 
+/// read in on return.
+//==================================================================
+void Data::read_eqn_numbers_from_vector(
+ const Vector<long> &vector_of_eqn_numbers, unsigned &index)
+{
+ //Find the number of stored values
+ const unsigned n_value = this->nvalue();
+ //If no values are stored then return immediately
+ if(n_value==0) {return;}
+
+ //Pointer to the first entry in the equation number array
+ long* eqn_number_pt = Eqn_number;
+ //Loop over values
+ for(unsigned i=0;i<n_value;i++)
+  {
+   //Read the data from the vector
+   *eqn_number_pt = vector_of_eqn_numbers[index];
+   //Increment the counter and the pointer
+   ++index;
+   ++eqn_number_pt;
+  }
+}
+
+#endif
+
 
 //================================================================
 /// Reset the pointers to the copied data
@@ -2065,6 +2207,86 @@ void Node::output(std::ostream &outfile)
 }
 
 
+
+#ifdef OOMPH_HAS_MPI
+//==================================================================
+/// Add position data and time-history values to the vector after the
+/// addition of the "standard" data stored at the node
+//==================================================================
+void Node::add_values_to_vector(Vector<double> &vector_of_values)
+{
+ //Firstly add the value data to the vector
+ Data::add_values_to_vector(vector_of_values);
+ 
+ //Now add the additional position data to the vector
+
+  //Find the number of stored time data for the position
+ const unsigned n_tstorage = this->position_time_stepper_pt()->ntstorage();
+ //Find the total amount of storage required for the position variables
+ const unsigned n_storage = this->ndim()*this->nposition_type();
+
+ //Resize the vector to accommodate the new data
+ const unsigned n_current_value = vector_of_values.size();
+ vector_of_values.resize(n_current_value + n_tstorage*n_storage);
+ 
+ //Now add the data to the vector
+ unsigned index = n_current_value;
+ //Pointer to the first entry in the data array
+ double* data_pt = X_position[0];
+ //Loop over values
+ for(unsigned i=0;i<n_storage;i++)
+  {
+   //Loop over time histories
+   for(unsigned t=0;t<n_tstorage;t++)
+    {
+     //Add the position data to the vector
+     vector_of_values[index] = *data_pt;
+     //Increment the counter and the pointer
+     ++index;
+     ++data_pt;
+    }
+  }
+}
+
+//==================================================================
+/// Read the position data and its time histories from the vector 
+/// after reading the "standard" data.
+//==================================================================
+void Node::read_values_from_vector(const Vector<double> &vector_of_values,
+                                   unsigned &index)
+{
+ //Read the standard nodal data
+ Data::read_values_from_vector(vector_of_values,index);
+
+
+ //Now read the additional position data to the vector
+ 
+ //Find the number of stored time data for the position
+ const unsigned n_tstorage = this->position_time_stepper_pt()->ntstorage();
+ //Find the total amount of storage required for the position variables
+ const unsigned n_storage = this->ndim()*this->nposition_type();
+
+ //Pointer to the first entry in the data array
+ double* data_pt = X_position[0];
+ //Loop over values
+ for(unsigned i=0;i<n_storage;i++)
+  {
+   //Loop over time histories
+   for(unsigned t=0;t<n_tstorage;t++)
+    {
+     //Read the position data from the vector
+     *data_pt = vector_of_values[index];
+     //Increment the counter and the pointer
+     ++index;
+     ++data_pt;
+    }
+  }
+}
+
+#endif
+
+
+
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 //Functions for the BoundaryNodeBase class
@@ -2806,6 +3028,100 @@ void SolidNode::add_value_pt_to_map
  //Then call standard Data values
  Data::add_value_pt_to_map(map_of_value_pt);
 }
+
+
+#ifdef OOMPH_HAS_MPI
+//==================================================================
+/// Add Lagrangian coordinates to the vector after positional data
+/// and "standard" data
+//==================================================================
+void SolidNode::add_values_to_vector(Vector<double> &vector_of_values)
+{
+ //Firstly add the position and value data to the vector
+ Node::add_values_to_vector(vector_of_values);
+ 
+ //Now add the additional Lagrangian data to the vector
+
+ //Find the total amount of storage required for the Lagrangian variables
+ const unsigned n_lagrangian_storage = 
+  this->nlagrangian()*this->nlagrangian_type();
+
+ //Resize the vector to accommodate the new data
+ const unsigned n_current_value = vector_of_values.size();
+ vector_of_values.resize(n_current_value + n_lagrangian_storage);
+ 
+ //Now add the data to the vector
+ unsigned index = n_current_value;
+ //Pointer to the first entry in the data array
+ double* data_pt = Xi_position;
+ //Loop over values
+ for(unsigned i=0;i<n_lagrangian_storage;i++)
+  {
+   //Add the position data to the vector
+   vector_of_values[index] = *data_pt;
+   //Increment the counter and the pointer
+   ++index;
+   ++data_pt;
+  }
+}
+
+//==================================================================
+/// Read the lagrangian coordinates in from the vector after
+/// reading in the positional and "standard" data.
+//==================================================================
+void SolidNode::read_values_from_vector(const Vector<double> &vector_of_values,
+                                        unsigned &index)
+{
+ //Read the standard nodal data and positions
+ Node::read_values_from_vector(vector_of_values,index);
+
+ //Now read the additional Lagrangian data to the vector
+ 
+ //Find the total amount of storage required for the Lagrangian variables
+ const unsigned n_lagrangian_storage = 
+  this->nlagrangian()*this->nlagrangian_type();
+
+ //Pointer to the first entry in the data array
+ double* data_pt = Xi_position;
+ //Loop over values
+ for(unsigned i=0;i<n_lagrangian_storage;i++)
+  {
+   //Read the position data from the vector
+   *data_pt = vector_of_values[index];
+   //Increment the counter and the pointer
+   ++index;
+   ++data_pt;
+  }
+}
+
+//==================================================================
+/// Add equations numbers associated with the node position
+/// to the vector after the standard nodal equation numbers
+//==================================================================
+void SolidNode::add_eqn_numbers_to_vector(Vector<long> &vector_of_eqn_numbers)
+{
+ //Firstly add the standard equation numbers
+ Data::add_eqn_numbers_to_vector(vector_of_eqn_numbers);
+ //Now add the equation numbers associated with the positional data
+ Variable_position_pt->add_eqn_numbers_to_vector(vector_of_eqn_numbers);
+}
+
+//=======================================================================
+/// Read the equation numbers associated with the node position
+/// from the vector after reading in the standard nodal equaiton numbers
+//=======================================================================
+void SolidNode::read_eqn_numbers_from_vector(
+ const Vector<long> &vector_of_eqn_numbers,
+ unsigned &index)
+{
+ //Read the standard nodal data and positions
+ Data::read_eqn_numbers_from_vector(vector_of_eqn_numbers,index);
+ //Now add the equation numbers associated with the positional data
+ Variable_position_pt->
+  read_eqn_numbers_from_vector(vector_of_eqn_numbers,index);
+}
+
+#endif
 
 
 }

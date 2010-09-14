@@ -1558,7 +1558,12 @@ protected:
   /// Problem::newton_solve(). Defaults to false.
   bool Shut_up_in_newton_solve;
 
+
   protected:
+
+   /// \short Boolean to indicate whether a Newton step should be taken
+  /// even if the initial residuals are below the required tolerance
+  bool Always_take_one_newton_step;
 
  /// \short Perform a basic arc-length continuation step using Newton's
  /// method. Returns number of Newton steps taken.

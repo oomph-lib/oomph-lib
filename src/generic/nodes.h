@@ -429,6 +429,28 @@ class Data
    return Is_halo;
   } 
 
+ /// \short Add all data and time history values to the vector in 
+ /// the internal storage order
+ virtual void add_values_to_vector(Vector<double> &vector_of_values);
+
+ /// \short Read all data and time history values from the vector
+ /// starting from index. On return the index will be
+ /// set to the value at the end of the data that has been read in
+ virtual void read_values_from_vector(const Vector<double> & vector_of_values, 
+                                      unsigned &index);
+
+
+ /// \short Add all equation numbers to the vector in 
+ /// the internal storage order
+ virtual void add_eqn_numbers_to_vector(Vector<long> &vector_of_eqn_numbers);
+
+ /// \short Read all equation numbers from the vector
+ /// starting from index. On return the index will be
+ /// set to the value at the end of the data that has been read in
+ virtual void read_eqn_numbers_from_vector(
+  const Vector<long> & vector_of_eqn_numbers, unsigned &index);
+
+
 #endif
 
 };
@@ -1391,6 +1413,23 @@ public:
  ///Output nodal position
  void output(std::ostream &outfile); 
 
+
+#ifdef OOMPH_HAS_MPI
+
+ /// \short Add all data and time history values to the vector.
+ /// Overloaded to add the position information as well.
+ void add_values_to_vector(Vector<double> &vector_of_values);
+
+ /// \short Read all data and time history values from the vector
+ /// starting from index. On return the index will be
+ /// set the value at the end of the data that has been read in
+ /// Overload to also read the position information.
+ void read_values_from_vector(const Vector<double> & vector_of_values, 
+                              unsigned &index);
+ 
+#endif
+
+
 };
 
 //=====================================================================
@@ -1620,6 +1659,35 @@ public:
  ///\short Overload the function add_values_to_map so that it also adds
  /// the variable position data
  void add_value_pt_to_map(std::map<unsigned,double*> &map_of_value_pt);
+
+#ifdef OOMPH_HAS_MPI
+
+ /// \short Add all data, position and time history values to the vector
+ /// Overload to add the Lagrangian coordinates to the vector
+ void add_values_to_vector(Vector<double> &vector_of_values);
+
+ /// \short Read all data and time history values from the vector
+ /// starting from index. On return the index will be
+ /// set the value at the end of the data that has been read in
+ /// Overload to add the position information and Lagrangian coordinates
+ void read_values_from_vector(const Vector<double> & vector_of_values, 
+                              unsigned &index);
+
+
+ /// \short Add all equation numbers to the vector in 
+ /// the internal storage order. Overload to add equation numbers
+ /// associated with the positional dofs
+ void add_eqn_numbers_to_vector(Vector<long> &vector_of_eqn_numbers);
+
+ /// \short Read all equation numbers from the vector
+ /// starting from index. On return the index will be
+ /// set to the value at the end of the data that has been read in
+ /// Overload to include the equation numbrs associated with the 
+ /// positional dofs
+ void read_eqn_numbers_from_vector(
+  const Vector<long> & vector_of_eqn_numbers, unsigned &index);
+
+#endif
 
 
  /// \short Overload node update function: Since the position 

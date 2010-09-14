@@ -295,7 +295,7 @@ RotatingProblem<ELEMENT>::RotatingProblem
   new CylinderMesh<ELEMENT>(Nr1,Nr2,Nz1,Nz2,Length);
 
  //dynamic_cast<SuperLUSolver*>(this->linear_solver_pt())
- // ->set_solver_type(SuperLUSolver::Serial);
+ //->set_solver_type(SuperLUSolver::Serial);
 
 //  NewMumpsSolver* solver_pt=new NewMumpsSolver;
 //  this->linear_solver_pt() = solver_pt;

@@ -385,8 +385,9 @@ class PVDEquations : public PVDEquationsBase<DIM>
      // Use FD 
      if ((this->Evaluate_jacobian_by_fd)) 
       {
-       //Add the contribution to the residuals
-       this->fill_in_contribution_to_residuals(residuals);
+       //Add the contribution to the residuals from this element
+       this->fill_in_generic_contribution_to_residuals_pvd(
+        residuals,GeneralisedElement::Dummy_matrix,0);
        
        //Get the solid entries in the jacobian using finite differences
        this->fill_in_jacobian_from_solid_position_by_fd(jacobian);

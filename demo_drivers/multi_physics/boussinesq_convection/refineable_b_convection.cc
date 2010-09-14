@@ -966,6 +966,9 @@ RefineableConvectionProblem() : Imperfect(false)
    // Set the Peclet number
    el_pt->pe_pt() = &Global_Physical_Variables::Peclet;
 
+   // Set the Peclet Strouhal number
+   el_pt->pe_st_pt() = &Global_Physical_Variables::Peclet;
+
    // Set the Reynolds number (1/Pr in our non-dimensionalisation)
    el_pt->re_pt() = &Global_Physical_Variables::Inverse_Prandtl;
 

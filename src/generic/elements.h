@@ -823,6 +823,30 @@ public:
  void add_internal_value_pt_to_map(std::map<unsigned,double*> &
                                    map_of_value_pt);
 
+#ifdef OOMPH_HAS_MPI
+ /// \short Add all internal data and time history values to the vector in 
+ /// the internal storage order
+ void add_internal_data_values_to_vector(Vector<double> &vector_of_values);
+
+ /// \short Read all internal data and time history values from the vector
+ /// starting from index. On return the index will be
+ /// set to the value at the end of the data that has been read in
+ void read_internal_data_values_from_vector(
+  const Vector<double> & vector_of_values, unsigned &index);
+
+ /// \short Add all equation numbers associated with internal data 
+ /// to the vector in the internal storage order
+ void add_internal_eqn_numbers_to_vector(Vector<long> &vector_of_eqn_numbers);
+
+ /// \short Read all equation numbers associated with internal data
+ /// from the vector
+ /// starting from index. On return the index will be
+ /// set to the value at the end of the data that has been read in
+ void read_internal_eqn_numbers_from_vector(
+  const Vector<long> & vector_of_eqn_numbers, unsigned &index);
+ 
+#endif
+
  /// \short Setup the arrays of local equation numbers for the element. 
  virtual void assign_local_eqn_numbers();
  

@@ -144,7 +144,7 @@ namespace oomph
    //Again this can go directly into Haloed storage
    int receive_data_count=0;
    Haloed_displacement.resize(n_proc);
-   for(unsigned d=0;d<n_proc;d++)
+   for(int d=0;d<n_proc;d++)
    {
     //The displacement is the amount of data received so far
     Haloed_displacement[d]=receive_data_count;
@@ -170,7 +170,7 @@ namespace oomph
    
    //Loop over all the entries in the map
    unsigned receive_haloed_count=0;
-   for(unsigned d=0;d<n_proc;d++)
+   for(int d=0;d<n_proc;d++)
    {
     //Pointer to the map entry
     std::map<unsigned,Vector<unsigned> >::iterator it
