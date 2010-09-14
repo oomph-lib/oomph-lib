@@ -10747,7 +10747,11 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
 { 
  // Local storage for number of processors and current processor
  const int n_proc=this->communicator_pt()->nproc();
+ //If only one processor then return
+ if(n_proc==1) {return;}
  const int my_rank=this->communicator_pt()->my_rank();
+
+
 
  // Storage for number of data to be sent to each processor
  Vector<int> send_n(n_proc,0);
@@ -10871,6 +10875,8 @@ void Problem::synchronise_external_dofs(Mesh* &mesh_pt)
 { 
  // Storage for number of processors and current processor
  int n_proc=this->communicator_pt()->nproc();
+ //If only one processor then return
+ if(n_proc==1) {return;}
  int my_rank=this->communicator_pt()->my_rank();
  
  // Storage for number of data to be sent to each processor
@@ -11168,6 +11174,8 @@ void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
 {
  // Storage for number of processors and current processor
  int n_proc=this->communicator_pt()->nproc();
+ //If only one processor then return
+ if(n_proc==1) {return;}
  int my_rank=this->communicator_pt()->my_rank();
 
  // Storage for number of data to be sent to each processor
@@ -11294,6 +11302,8 @@ void Problem::copy_external_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
 {
  // Storage for number of processors and current processor
  int n_proc=this->communicator_pt()->nproc();
+ //If only one processor then return
+ if(n_proc==1) {return;}
  int my_rank=this->communicator_pt()->my_rank();
 
  // Storage for number of data to be sent to each processor
