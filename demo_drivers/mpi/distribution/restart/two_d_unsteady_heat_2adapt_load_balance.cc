@@ -769,7 +769,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::restart()
    
    throw OomphLibError(
     error_stream.str(),
-    "RefineableUnsteadyHeatProblem::set_initial_condition()",
+    "RefineableUnsteadyHeatProblem::restart()",
     OOMPH_EXCEPTION_LOCATION);
   }
 

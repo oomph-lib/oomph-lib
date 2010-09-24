@@ -1,11 +1,11 @@
-\mainpage (Distributed) General Purpose Block Preconditioners 
+\mainpage (Distributed) General-Purpose Block Preconditioners 
 
-In this document we will demonstrate how to use the general purpose block
+In this document we will demonstrate how to use the general-purpose block
 preconditioners implemented in \c oomph-lib. This tutorial follows from the 
  <a
  href="../../../mpi/distributed_block_preconditioners/html/index.html">
 (Distributed) Block Preconditioners</A> tutorial, which provides
- an overview of \c oomph-libs block preconditioning framework. 
+ an overview of \c oomph-lib's generic block preconditioning framework. 
 
 
 We use the \c Problem described in the <a
@@ -17,13 +17,13 @@ Bending of a Cantilever Beam</A>  tutorial to illustrate the key concepts.
 In this section we define the four (distributed) general purpose block
 preconditioning methodologies. To recap, all \c oomph-lib problems are
 solved in a Newton iteration which requires the repeated solution of
-linear algebra problems of the form
+linear systems of the form
 \f[
 J\delta {\bf x}=-{\bf r}
 \f]
-where \f$J\f$ is the Jacobian matrix, \f$\bf \delta r\f$ is the vector of residuals and
-\f$\bf x\f$ is the Newton correction. We divide the DOFs in the two-dimensional cantilever problem into two
-subsets for the \f$x\f$ and \f$y\f$ displacements.
+where \f$J\f$ is the Jacobian matrix, \f$\bf r\f$ is the vector of residuals and
+\f$\bf \delta x\f$ is the Newton correction. We divide the DOFs in the two-dimensional cantilever problem into two
+subsets corresponding to the \f$x\f$ and \f$y\f$ nodal positions.
 
 \f[
 \left[
@@ -31,7 +31,7 @@ subsets for the \f$x\f$ and \f$y\f$ displacements.
 J_{xx}&J_{xy}\\
 J_{yx}&J_{yy}
 \end{array}
-\right]
+\right].
 \left[
 \begin{array}{c}
 \bf \delta x \\
@@ -55,14 +55,14 @@ linear system to
 P^{-1}J\;{\bf \delta x}=-P^{-1}{\bf r}
 \f]
 
-to accelerate the convergence of Krylov subspace iterative methods
+with the aim of accelerating the convergence of Krylov subspace iterative methods
 such as GMRES or CG. The application of the preconditioner requires the solution of
 
 \f[
 P{\bf z}={\bf w}
 \f]
 
-for \f$\bf z\f$.
+for \f$\bf z\f$ at each Krylov iteration.
 
 \subsection block_diagonal Block Diagonal Preconditioning
 
@@ -74,23 +74,22 @@ P_{BD}=\left[
 J_{xx}&\\
 &J_{yy}
 \end{array}
-\right],
+\right].
 \f]
 
 the application of this preconditioner requires the solution of the
 subsidiary systems \f$J_{xx}\f$ and \f$J_{yy}\f$.
 
-\subsection two_level_block_diagonal Block Diagonal Preconditioning
-with Two-Level Parallelisation
+\subsection two_level_block_diagonal Block Diagonal Preconditioning with Two-Level Parallelisation
 
 The two-subsidiary systems in the block diagonal
 preconditioner (involving \f$J_{xx}\f$ and \f$J_{yy}\f$) can be solved
-in any order. In ap arallel computation we can either solve the two
+in any order. In parallel computation we can either solve the two
 systems one after the other using the full set of processes for the
 solution of each linear system. An alternative is to solve all the 
 subsidiary systems simultaneously, using only a
 subset of processes for each system. We refer to this technique as
-two-level parallelisation and this is particularly useful if the
+two-level parallelisation and note that this approach is particularly useful if the
 linear solvers do not have good parallel scaling properties.
 
 \subsection upper_block_triangular Upper Block Triangular Preconditioning
@@ -113,7 +112,7 @@ the block below the diagonal (\f$J_{yx}\f$) has been dropped. In addition to the
 
 \subsection lower_block_triangular Lower Block Triangular Preconditioning
 
-Similarly we can define a lower triangular block preconditioner.
+Similarly we can define a lower triangular block preconditioner
 
 \f[
 P_{BLT}=\left[
@@ -121,17 +120,17 @@ P_{BLT}=\left[
 J_{xx}&\\
 J_{yx}&J_{yy}
 \end{array}
-\right]
+\right].
 \f]
 
 
 \section application Application
 
 
-In this section we demonstrate the use of \c oomph-libs general purpose
-block preconditioners. All general purpose block preconditioners
-derive from the base class \c GeneralPurposeBlockPreconditioner (which
-itself derives from the \c BlockPreconditioner class).
+In this section we demonstrate the use of \c oomph-lib's general-purpose
+block preconditioners. All general-purpose block preconditioners
+are derived from the base class \c GeneralPurposeBlockPreconditioner (which
+is itself derived from the \c BlockPreconditioner class).
 
 By default all general purpose block preconditioners use \c SuperLUPreconditioner as
 the preconditioner for the subsidiary systems (\f$J_{xx}\f$ and
@@ -145,7 +144,7 @@ SuperLUPreconditioner is a
   solver. Often we seek to replace this direct solver preconditioning
   with an inexact solver to make the preconditioner more efficient. To use an alternative subsidiary preconditioner we must
   define a function to return new instances of the chosen type of
-  preconditioner. For example
+  preconditioner (inexact solver). For example
 \dontinclude airy_cantilever.cc
 \skipline hypre_helper
 \until end_of_hypre_helper
@@ -170,7 +169,7 @@ Given an instance of the problem,
 \skipline Set up the problem
 \until CantileverProblem<MySolidElement<RefineableQPVDElement<2,3> > > problem;
 
-we specify GMRES as the linear solver. If available we use the \c
+we specify GMRES as the linear solver. If available, we use the \c
 TrilinosAztecOOSolver wrapper to the <a
 href="http://trilinos.sandia.gov/packages/aztecoo/"><code>Trilinos
 AztecOO</code></a> implementation of GMRES. (This is the only
@@ -193,9 +192,9 @@ We introduced four general purpose block preconditioning methodologies in the
 \dontinclude airy_cantilever.cc
 \skipline Standard Block Diagonal
 \until prec_pt = new BlockDiagonalPreconditioner<CRDoubleMatrix>;
-- \b Enabling \b Two \b Level \b Block \b Diagonal \b Preconditioning. By default
+- \b Enabling \b Two-\b Level \b Block \b Diagonal \b Preconditioning. By default
   two-level preconditioning is disabled and hence \c
-  use_two_level_parallelisation() must be set \c true.
+  use_two_level_parallelisation() must be set to \c true.
   Once this is done, each subsidiary system will be solved on an (as near to) equal size
   subset of processes.
 \dontinclude airy_cantilever.cc
@@ -216,7 +215,7 @@ to the method \c lower_triangular().
 \until (prec_pt)->lower_triangular();
 
 
-Having chosen a preconditioner structure the next stage is to choose
+Having chosen a preconditioner structure, the next stage is to choose
 the preconditioner for the subsidiary systems (\f$J_{xx}\f$ and
 \f$J_{yy}\f$ in the \ref introduction ). By default this is \c
 SuperLUPreconditioner, but we wish to use \c HyprePreconditioner so we
@@ -235,9 +234,9 @@ The same subsidiary preconditioner is used for all subsidiary
 
 As discussed in the <a href="../../../mpi/distributed_block_preconditioners/html/index.html">
 (Distributed) Block Preconditioners</A>
- tutorial the classification of the DOFs
+ tutorial, the classification of the DOFs
 is implemented at an elemental level so we pass a pointer to the mesh
-containing the elements to the preconditioner. This problem infact
+containing the elements to the preconditioner. This problem in fact
 contains two meshes containing the bulk elements and the traction
 elements. All the DOFs are classified by the bulk elements and
 therefore we do not need to pass the traction element mesh to the block preconditioner.
@@ -263,7 +262,7 @@ each DOF type corresponds to a different block type if a DOF to block
 map is not specified, but presented nonetheless to illustrate how to
 specify a DOF to block map.)
 
-Finally we pass the preconditioner to the solver
+Finally, we pass the preconditioner to the solver
 
 \dontinclude airy_cantilever.cc
 \skipline pass the preconditioner to the solver
@@ -274,6 +273,8 @@ and solve the problem.
 \dontinclude airy_cantilever.cc
 \skipline solve the problem
 \until problem.newton_solve();
+
+\section Parallelisation
 
 Given that \c BlockPreconditioner, \c
 TrilinosAztecOOSolver, \c SuperLUPreconditioner, \c

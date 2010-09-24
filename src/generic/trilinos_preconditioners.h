@@ -203,7 +203,7 @@ namespace oomph
     }
 
    /// Function to set Smoother_damping
-   void set_smoother_damping(int smoother_damping) 
+   void set_smoother_damping(double smoother_damping) 
     {
      ML_parameters.set("smoother: damping factor", smoother_damping);
     }

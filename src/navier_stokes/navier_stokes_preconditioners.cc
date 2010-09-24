@@ -270,7 +270,7 @@ namespace oomph
   if (doc_block_matrices)
    {
     std::stringstream junk;
-    junk << "b_matrix" << this->problem_pt()->communicator_pt()->my_rank()
+    junk << "b_matrix" << problem_pt->communicator_pt()->my_rank()
          << ".dat";
     b_pt->sparse_indexed_output_with_offset(junk.str());
     oomph_info << "Done output of " << junk.str() << std::endl;
@@ -313,7 +313,7 @@ namespace oomph
    {
     std::stringstream junk;
     junk << "inv_v_mass_matrix" 
-         << this->problem_pt()->communicator_pt()->my_rank()
+         << problem_pt->communicator_pt()->my_rank()
          << ".dat";
     inv_v_mass_pt->sparse_indexed_output_with_offset(junk.str());
     oomph_info << "Done output of " << junk.str() << std::endl;
@@ -336,7 +336,7 @@ namespace oomph
   if (doc_block_matrices)   
    {
     std::stringstream junk;
-    junk << "bt_matrix" << this->problem_pt()->communicator_pt()->my_rank()
+    junk << "bt_matrix" << problem_pt->communicator_pt()->my_rank()
          << ".dat";
     bt_pt->sparse_indexed_output_with_offset(junk.str());
     oomph_info << "Done output of " << junk.str() << std::endl;
@@ -508,7 +508,7 @@ namespace oomph
   if (doc_block_matrices)
    {
     std::stringstream junk;
-    junk << "p_matrix" << this->problem_pt()->communicator_pt()->my_rank()
+    junk << "p_matrix" << problem_pt->communicator_pt()->my_rank()
          << ".dat";
     p_matrix_pt->sparse_indexed_output_with_offset(junk.str());
     oomph_info << "Done output of " << junk.str() << std::endl;
@@ -791,7 +791,7 @@ namespace oomph
   double* v_values = new double[v_nrow_local];
   for (unsigned i = 0; i < v_nrow_local; i++)
    {
-    v_values[i] = 0;
+    v_values[i] = 0.0;
    }
 
   // Equivalent information for pressure mass matrix (only needed for 
@@ -811,14 +811,12 @@ namespace oomph
     p_values = new double[p_nrow_local];
     for (unsigned i = 0; i < p_nrow_local; i++)
      {
-      p_values[i] = 0;
+      p_values[i] = 0.0;
      }
    }
 
-#ifdef OOMPH_HAS_MPI
   // store the problem pt
   const Problem* problem_pt = this->problem_pt();
-#endif  
 
   // if the problem is distributed
   bool distributed = false;
@@ -837,16 +835,16 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
 
     // the number of processors
-    unsigned nproc = this->problem_pt()->communicator_pt()->nproc();
+    unsigned nproc = problem_pt->communicator_pt()->nproc();
 
     // and my rank
-    unsigned my_rank = this->problem_pt()->communicator_pt()->my_rank();
+    unsigned my_rank = problem_pt->communicator_pt()->my_rank();
 
     // determine the rows for which we have lookup rows
 
-    // if the problem is NOT distributed then we only classify global equation
+    // if the problem is NOT distributed then we only classify global equations
     // on this processor to avoid duplication (as every processor holds 
-    // elvery element)
+    // every element)
     unsigned first_lookup_row = 0; 
     unsigned last_lookup_row = 0;
     if (!problem_pt->distributed())
@@ -877,20 +875,16 @@ namespace oomph
       
       // Local working variables: Default to velocity
       unsigned v_or_p_first_row=v_first_row;
-      //unsigned v_or_p_nrow_local=v_nrow_local;
-      //unsigned v_or_p_nrow=v_nrow;
       double* v_or_p_values=v_values;
       // Switch to pressure
       if (block_index==1)
        {
         v_or_p_first_row=p_first_row;
-        //v_or_p_nrow_local=p_nrow_local;
-        //v_or_p_nrow=p_nrow;
         v_or_p_values=p_values;
        }
     
 
-      // the diagonal velocity mass matrix contributions that have been
+      // the diagonal mass matrix contributions that have been
       // classified and should be sent to another processor
       Vector<double>* classified_contributions_send 
        = new Vector<double>[nproc];
@@ -899,7 +893,7 @@ namespace oomph
       Vector<unsigned>* classified_indices_send
        = new Vector<unsigned>[nproc];
       
-      // the maitrix contributions that cannot be classified by this processor
+      // the matrix contributions that cannot be classified by this processor
       // and therefore must be sent to another for classification
       Vector<double>* unclassified_contributions_send
        = new Vector<double>[nproc];
@@ -916,14 +910,17 @@ namespace oomph
       for (unsigned e = 0; e < n_el; e++)
        {
         
-        // check that the element is not halo d
-        if (!Navier_stokes_mesh_pt->element_pt(e)->is_halo())
+        // Get element
+        GeneralisedElement* el_pt=Navier_stokes_mesh_pt->element_pt(e);
+
+        // check that the element is not halo
+        if (!el_pt->is_halo())
          {
           
           // find number of degrees of freedom in the element
           // (this is slightly too big because it includes the
           // pressure dofs but this doesn't matter)
-          unsigned el_dof = Navier_stokes_mesh_pt->element_pt(e)->ndof();
+          unsigned el_dof = el_pt->ndof();
           
           // Allocate local storage for the element's contribution to the
           // mass matrix diagonal
@@ -933,8 +930,7 @@ namespace oomph
           unsigned which_one=2;
           if (block_index==1) which_one=1;
 
-          dynamic_cast<TemplateFreeNavierStokesEquationsBase*>(
-           Navier_stokes_mesh_pt->element_pt(e))->
+          dynamic_cast<TemplateFreeNavierStokesEquationsBase*>(el_pt)->
            get_pressure_and_velocity_mass_matrix_diagonal( 
             el_pmm_diagonal,el_vmm_diagonal,which_one);
           
@@ -943,8 +939,7 @@ namespace oomph
            {
             
             //Get the equation number
-            unsigned eqn_number = Navier_stokes_mesh_pt
-             ->element_pt(e)->eqn_number(i);
+            unsigned eqn_number = el_pt->eqn_number(i);
             
             // if I have lookup information on this processor
             if ((eqn_number >= first_lookup_row) && 
@@ -961,10 +956,9 @@ namespace oomph
                 // determine which processor requires the block index
                 for (unsigned p = 0; p < nproc; p++)
                  {
-                  if (index >= velocity_or_press_dist_pt->first_row(p) &&
-                      (index < 
-                       (velocity_or_press_dist_pt->first_row(p)
-                        +velocity_or_press_dist_pt->nrow_local(p))))
+                  if ( (index >= velocity_or_press_dist_pt->first_row(p)) &&
+                       (index < (velocity_or_press_dist_pt->first_row(p)
+                                 +velocity_or_press_dist_pt->nrow_local(p)) ) )
                    {
                     
                     // if it is required by this processor then add the 
@@ -1001,40 +995,39 @@ namespace oomph
                    }
                  }
                }
+             }
+            // if we do not have the lookup information on this processor
+            // then we send the mass matrix contribution to a processor
+            // which we know to have the lookup information
+            // the assumption: the processor for which the master block
+            // preconditioner distribution will definitely hold the lookup
+            // data for eqn_number (although others may)
+            else if (problem_pt->distributed())
+             {
               
-              // if we do not have the lookup information on this processor
-              // then we send the mass matrix contribution to a processor
-              // which we know does have the lookup information
-              // the assumption: the processor for which the master block
-              // preconditioner distribution will definitely hold the lookup
-              // data for eqn_number (although others may)
-              else if (problem_pt->distributed())
+              // determine which processor requires the block index
+              unsigned p = 0;
+              while (!(eqn_number >=master_distribution_pt->first_row(p) &&
+                       (eqn_number<(master_distribution_pt->first_row(p)
+                                    +master_distribution_pt->nrow_local(p)))))
                {
-                
-                // determine which processor requires the block index
-                unsigned p = 0;
-                while (!(eqn_number >=master_distribution_pt->first_row(p) &&
-                         (eqn_number<(master_distribution_pt->first_row(p)
-                                     +master_distribution_pt->nrow_local(p)))))
-                 {
-                  p++;
-                 }
-                
-                // store the data
-                if (block_index==0)
-                 {
-                  unclassified_contributions_send[p]
-                   .push_back(el_vmm_diagonal[i]);
-                  unclassified_indices_send[p].push_back(eqn_number);
-                 }
-                else if (block_index==1)
-                 {
-                  unclassified_contributions_send[p]
-                   .push_back(el_pmm_diagonal[i]);
-                  unclassified_indices_send[p].push_back(eqn_number);
-                 }
-                
+                p++;
                }
+              
+              // store the data
+              if (block_index==0)
+               {
+                unclassified_contributions_send[p]
+                 .push_back(el_vmm_diagonal[i]);
+                unclassified_indices_send[p].push_back(eqn_number);
+               }
+              else if (block_index==1)
+               {
+                unclassified_contributions_send[p]
+                 .push_back(el_pmm_diagonal[i]);
+                unclassified_indices_send[p].push_back(eqn_number);
+               }
+              
              }
            }
          }
@@ -1063,7 +1056,7 @@ namespace oomph
       unsigned* n_unclassified_recv = new unsigned[nproc];
       MPI_Alltoall(n_unclassified_send,1,MPI_UNSIGNED,
                    n_unclassified_recv,1,MPI_UNSIGNED,
-                   this->problem_pt()->communicator_pt()->mpi_comm());
+                   problem_pt->communicator_pt()->mpi_comm());
       
       //the base displacement for the sends
       MPI_Aint base_displacement;
@@ -1205,12 +1198,11 @@ namespace oomph
              {
                 
                 
-              if (index >= velocity_or_press_dist_pt->first_row(pp) && 
-                  (index < 
-                   (velocity_or_press_dist_pt->first_row(pp)          
-                    +velocity_or_press_dist_pt->nrow_local(pp))))     
+              if ( (index >= velocity_or_press_dist_pt->first_row(pp)) && 
+                   (index < (velocity_or_press_dist_pt->first_row(pp)          
+                             +velocity_or_press_dist_pt->nrow_local(pp)) ) )
                {
-                  
+                
                 //if it is required by this processor then add the 
                 //contribution
                 if (pp == my_rank)
@@ -1257,11 +1249,11 @@ namespace oomph
          }
        }
         
-      //then all-to-all com number of classified to be sent / recv
+      //then all-to-all number of classified to be sent / recv
       unsigned* n_classified_recv = new unsigned[nproc];
       MPI_Alltoall(n_classified_send,1,MPI_UNSIGNED,
                    n_classified_recv,1,MPI_UNSIGNED,
-                   this->problem_pt()->communicator_pt()->mpi_comm());
+                   problem_pt->communicator_pt()->mpi_comm());
         
       //allocate storage for the data to be received
       //and post the sends and recvs
@@ -1446,27 +1438,29 @@ namespace oomph
     // get the contribution for each element
     for (unsigned e = 0; e < n_el; e++)
      {
+
+      // Get element
+      GeneralisedElement* el_pt=Navier_stokes_mesh_pt->element_pt(e);
+      
       // find number of degrees of freedom in the element
       // (this is slightly too big because it includes the
       // pressure dofs but this doesn't matter)
-      unsigned el_dof = Navier_stokes_mesh_pt->element_pt(e)->ndof();
-
+      unsigned el_dof = el_pt->ndof();
+      
       // allocate local storage for the element's contribution to the
       // pressure and velocity mass matrix diagonal
       Vector<double> el_vmm_diagonal(el_dof);
       Vector<double> el_pmm_diagonal(el_dof);
       
-      dynamic_cast<TemplateFreeNavierStokesEquationsBase*>(
-       Navier_stokes_mesh_pt->element_pt(e))->
+      dynamic_cast<TemplateFreeNavierStokesEquationsBase*>(el_pt)->
        get_pressure_and_velocity_mass_matrix_diagonal( 
         el_pmm_diagonal,el_vmm_diagonal,which_one);
-
+      
       // Get the contribution for each dof
       for (unsigned i = 0; i < el_dof; i++)
        {
         //Get the equation number
-        unsigned eqn_number = Navier_stokes_mesh_pt
-         ->element_pt(e)->eqn_number(i);
+        unsigned eqn_number = el_pt->eqn_number(i);
         
         // Get the velocity dofs
         if (this->block_number(eqn_number)==0)
@@ -1476,7 +1470,7 @@ namespace oomph
           
           // if it is required on this processor
           if ((index >= v_first_row) &&
-              (index < v_first_row + v_nrow_local))
+              (index < (v_first_row + v_nrow_local) ) )
            {
             v_values[index-v_first_row] += el_vmm_diagonal[i];
            }
@@ -1491,7 +1485,7 @@ namespace oomph
             
             // if it is required on this processor
             if ((index >= p_first_row)&&
-                (index < p_first_row + p_nrow_local))
+                (index < (p_first_row + p_nrow_local)) )
              {
               p_values[index-p_first_row] += el_pmm_diagonal[i];
              }
@@ -1500,20 +1494,25 @@ namespace oomph
        } 
      }
    }
-
+  
   // Create column index and row start for velocity mass matrix
   int* v_column_index = new int[v_nrow_local]; 
   int* v_row_start = new int[v_nrow_local+1];
   for (unsigned i = 0; i < v_nrow_local; i++)
    {
-    if (v_values[i]!=0.0)
+#ifdef PARANOID
+    if (v_values[i]==0.0)
      {
-      v_values[i] = 1.0/v_values[i];   
+      std::ostringstream error_message;
+      error_message << "Zero entry in diagonal of velocity mass matrix\n"
+                    << "Index: " << i << std::endl;
+      throw OomphLibError(
+       error_message.str(),
+       "NavierStokesSchurComplementPreconditioner::assemble_inv_press_and_veloc_mass_matrix_diagonal()",
+       OOMPH_EXCEPTION_LOCATION);
      }
-    else
-     {
-      v_values[i] = 0.0;
-     }
+#endif
+    v_values[i] = 1.0/v_values[i];   
     v_column_index[i] = v_first_row + i;
     v_row_start[i] = i;
    }
@@ -1533,14 +1532,21 @@ namespace oomph
     int* p_row_start = new int[p_nrow_local+1];
     for (unsigned i = 0; i < p_nrow_local; i++)
      {
-      if (p_values[i]!=0.0)
+      
+#ifdef PARANOID
+      if (p_values[i]==0.0)
        {
-        p_values[i] = 1.0/p_values[i];
+        std::ostringstream error_message;
+        error_message << "Zero entry in diagonal of pressure mass matrix\n"
+                      << "Index: " << i << std::endl;
+        throw OomphLibError(
+         error_message.str(),
+         "NavierStokesSchurComplementPreconditioner::assemble_inv_press_and_veloc_mass_matrix_diagonal()",
+         OOMPH_EXCEPTION_LOCATION);
        }
-      else
-       {
-        p_values[i] = 0.0;
-       }
+#endif
+      p_values[i] = 1.0/p_values[i];
+      
       p_column_index[i] = p_first_row + i;
       p_row_start[i] = i;
      }
@@ -2460,7 +2466,7 @@ namespace oomph
        }
      }
     
-    // then all-to-all com number of unclassified to be sent / recv
+    // then all-to-all number of unclassified to be sent / recv
     unsigned* n_unclassified_recv = new unsigned[nproc];
     MPI_Alltoall(n_unclassified_send,1,MPI_UNSIGNED,
                  n_unclassified_recv,1,MPI_UNSIGNED,

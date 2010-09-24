@@ -5,16 +5,16 @@ In this document we discuss \c oomph-libs block preconditioning
 framework. We describe the functionality of the framework by discussing the 
 implementation of the FSI preconditioner described in the <a
 href="../../../preconditioners/fsi/html/index.html">FSI Preconditioner
-Tutorial</A>. The aim of the block preconditioning framework is to provide a simple environment to facilitate the implementation of distributed block preconditioners which in particular allows existing (block) preconditioners to be reused in new block preconditioners. For example, in the FSI preconditioner (considered in this document) we recycle existing single physics preconditioners for the fluid and solid subsidiary problems.
+Tutorial</A>. The aim of the block preconditioning framework is to provide a simple environment to facilitate the implementation of distributed block preconditioners which in particular allows existing (block) preconditioners to be reused to create in hierarchical fashion new block preconditioners for multi-physics problems. For example, in the FSI preconditioner (considered in this document) we reuse existing single-physics preconditioners for the fluid and solid subsidiary problems.
 
 
 Throughout this document we use the <a
 href="../../../interaction/fsi_channel_with_leaflet/html/index.html">FSI channel with leaflet problem</A> to illustrate the key concepts.
 
 
-\section theory Theory
+\section theory Theoretical Background
 
-In \c oomph-lib, all problems are solved within a Newton iteration,
+In \c oomph-lib, all problems are solved by Newton's method,
 which requires the repeated solution of linear systems of the form
 
 \f[
@@ -29,17 +29,19 @@ linear system to
 P^{-1}J\;{\bf \delta x}=-P^{-1}{\bf r}
 \f]
 
-to accelerate the convergence of Krylov subspace iterative methods
+introduced with the aim of accelerating the convergence of Krylov subspace iterative methods
 such as GMRES or CG. The application of the preconditioner requires the solution of
 
 \f[
 P{\bf z}={\bf y}
 \f]
 
-for \f$\bf z\f$.
+for \f$\bf z\f$ at each Krylov iteration.
 
-FSI problems involve fluid (velocities and pressures from the 
-Navier Stokes equations) and solid (the nodal positions in the solid domain) degrees of freedom (DOFs). We begin by reordering the linear system to group together the two types of DOF 
+Block preconditioning requires special enumeration schemes for the unknowns (equivalent to reordering the linear systems) where all the unknowns corresponding to each type of DOF are grouped together and enumerated consecutively. This leads to a natural block structure of the linear systems.
+
+For instance, FSI problems involve fluid (velocities and pressures from the 
+Navier-Stokes equations) and solid (the nodal positions in the solid domain) degrees of freedom (DOFs). We begin by reordering the linear system to group together the two types of DOF 
 
 \f[
 \left[ 
@@ -65,13 +67,12 @@ C_{sf}&S
 \f]
 
 where \f$\bf f\f$ and \f$\bf s\f$ denote the fluid and solid DOFs, \f$F\f$
-is the Navier Stokes Jacobian (representing the derivatives of the discretised fluid equations with respect to the fluid DOFs), \f$S\f$ is the solid Jacobian, and the
+is the Navier-Stokes Jacobian (representing the derivatives of the discretised fluid equations with respect to the fluid DOFs), \f$S\f$ is the solid Jacobian, and the
 blocks \f$C_{fs}\f$ and \f$C_{sf}\f$ arise from the interaction
 between fluid and solid equations.
 
 The Navier Stokes Jacobian \f$F\f$ has its own block
-structure. Decomposing the fluid DOFs into velocity and pressure DOFs
-so that 
+structure. Decomposing the fluid DOFs into velocity and pressure DOFs so that
 
 \f[
 {\bf f}=
@@ -83,7 +84,7 @@ so that
 \right],
 \f]
 
-\f$F\f$ is given by
+we obtain the well known saddlepoint structure of \f$F\f$
 
 \f[
 F=
@@ -101,7 +102,7 @@ href="../../../preconditioners/lsc_navier_stokes/html/index.html">Navier
 Stokes Preconditioner Tutorial</A>). 
 
 This FSI preconditioner 
-is best considered as a block triangular preconditioner. In this tutorial, we
+takes the form of a block triangular preconditioner. In this tutorial, we
 only consider the lower block triangular version 
 \f[
 P_{FSI}=
@@ -112,7 +113,7 @@ C_{sf}&S
 \end{array}
 \right]
 \f]
-obtained by dropping the \f$C_{fs}\f$ block from the Jacobian.
+obtained by omitting the \f$C_{fs}\f$ block from the Jacobian.
 
 The application of the preconditioner requires the solution of the linear system
 
@@ -138,7 +139,7 @@ C_{sf}&S
 \right].
 \f]
 
-However for preconditioning purposes this system does not have to be solved exactly. We therefore replace the solution of the linear systems involving the diagonal blocks (representing the single physics fluid and solid Jacobians \f$F\f$ and \f$S\f$) by existing preconditioners (interpreted as inexact solvers). Formally we write this as
+However, for preconditioning purposes this system does not have to be solved exactly. We therefore replace the solution of the linear systems involving the diagonal blocks (representing the single-physics fluid and solid Jacobians \f$F\f$ and \f$S\f$) by existing preconditioners (interpreted as inexact solvers). Formally, we write this as
 
 \f[
 \left[
@@ -166,10 +167,10 @@ where \f$\tilde F\f$ is the fluid preconditioner and \f$\tilde S\f$ is
 the solid preconditioner. We refer to \f$\tilde F\f$ and \f$\tilde
 S\f$ as subisidiary preconditioners. 
 
-There are four steps in the application of the preconditioner.
+The application of the preconditioner can be accomplished in four distinct steps:
 
 -# Apply the fluid preconditioner \f$\tilde F\f$ to the fluid DOFs of the RHS vector \f$\bf y_f\f$ and store the result in the fluid solution \f${\bf z_f}=\tilde F^{-1}{\bf y_f}\f$.
--# Multiply the fluid-onto-solid matrix \f$C_{sf}\f$ with the fluid solution \f$\bf z_f\f$ and store the result in the temporary vector \f${\bf w}=C_{sf}\bf z_f\f$.
+-# Multiply the fluid-solid coupling matrix \f$C_{sf}\f$ with the fluid solution \f$\bf z_f\f$ and store the result in the temporary vector \f${\bf w}=C_{sf}\bf z_f\f$.
 -# Subtract \f$\bf w\f$ from the solid DOFs of the RHS vector \f$\bf y_s\f$ and store the result in the temporary \f$\bf w\f$ to complete the action of the \f$C_{sf}\f$ matrix vector product, \f${\bf w}={\bf y_s}-{\bf w}\f$.
 -# Apply the solid preconditioner \f$\tilde S\f$ to the temporary \f$\bf w\f$ to compute the solid solution \f${\bf z_s}=\tilde S^{-1}{\bf w}\f$.
 
@@ -203,7 +204,7 @@ example). For instance our two-dimensional FSI channel with leaflet problem has 
 - \c RefineableQTaylorHoodElement<2> are the fluid elements. They have three types of DOF; \f$x\f$-velocity DOFs are labelled \c 0, \f$y\f$-velocity DOFs are labelled \c 1 and
   the pressure DOFs are labelled \c 2.
 - \c FSIHermiteBeamElement are the wall elements and have one type of
-  DOF labelled \c 0.
+  DOF (the nodal position) labelled \c 0.
 
 \subsection dof_types_and_block_types DOF Types and Block Types
 
@@ -225,7 +226,7 @@ typically they would have been classified by bulk elements.
 
 \subsection subsidiary_preconditioners Master and Subsidiary Preconditioners
 
-The FSI preconditioner requires the application of single physics
+The FSI preconditioner requires the application of single-physics
 preconditioners \f$\tilde F\f$ and \f$\tilde S\f$ for the fluid and
 solid constituitive single physics problems. We refer to these
 preconditioners as subsidiary preconditioners. \c Oomph-lib's block preconditioning framework facilitates the the reuse
@@ -247,26 +248,25 @@ to the solve the solid subisidiary system with the \c
 SuperLUPreconditioner direct solver.
 
 It is important to note that we do not need to consider the block structure of 
-subsidiary block preconditioners when developing this (or any other)
-preconditioner.
+subsidiary block preconditioners when developing master preconditioners.
 
 
 \section using_the_preconditioner Using The Preconditioner
 
 We begin our discussion of the implementation details by demonstrating how to use the
-preconditioner (implemented in the class \cSimpleFSIPreconditioner) in an actual driver code.
+preconditioner (implemented in the class \c SimpleFSIPreconditioner) in an actual driver code.
 
 \dontinclude fsi_channel_with_leaflet.cc
 \skipline  start_of_main
 \until {
 
-Given an instance of the FSI channel with leaflet problem:
+Given an instance of the FSI channel with leaflet problem
 
 \dontinclude fsi_channel_with_leaflet.cc
 \skipline  //Build the problem
 \until htot,nleft,nright,ny1,ny2,x_0); 
 
-the next step is to construct the solver and preconditioner combination. We specify the GMRES iterative solver, and if available use the distributed version implemented in \c TrilinosAztecOOSolver.
+the next step is to construct the solver and preconditioner combination. We specify the GMRES iterative solver, and, if available, use the distributed version implemented in \c TrilinosAztecOOSolver.
 
 \dontinclude fsi_channel_with_leaflet.cc
 \skipline // Create the solver
@@ -278,7 +278,7 @@ the fluid and solid components. To allow the block preconditioning
 framework to differentiate between the two types of element, we store
 the different element types in seperate meshes. In this context meshes
 are simply containers for elements. These two meshes are then passed to
-the preconditioner. Finally the preconditioner is passed to the 
+the preconditioner. Finally, the preconditioner is passed to the 
 solver.
 
 
@@ -286,7 +286,7 @@ solver.
 \skipline // Create the preconditioner
 \until solver_pt->preconditioner_pt() = preconditioner_pt;
 
-The problem can now be solved in the normal \c oomph-lib way:
+The problem can now be solved in the normal \c oomph-lib fashion:
 
 \dontinclude fsi_channel_with_leaflet.cc
 \skipline // Set up doc info
@@ -294,26 +294,26 @@ The problem can now be solved in the normal \c oomph-lib way:
 
 
 
-\section implementing_the_fsi_preconditioner Implementing the FSI Preconditioner
+\section implementing_the_fsi_preconditioner The Implementation of the FSI Preconditioner
 
 Finally we discuss the implementation of the FSI preconditioner within
-\c oomph-lib's block preconditioning framework. In particular we will address three fundamental tasks:
+\c oomph-lib's block preconditioning framework. In particular, we will address three fundamental tasks:
 
 - How to identify and classify the DOFs in the underlying \c Problem.
-- How to extract subsidiary matrices from the full Jacobian.
+- How to extract subsidiary matrix blocks from the full Jacobian.
 - How to recycle existing preconditioning operators within new preconditioners.
 
 
 We implement the FSI preconditioner in the
-class \c SimpleFSIPreconditioner. This inherits
-from the base class \c BlockPreconditioner which contains the generic functionality required for common block preconditioning operations.
+class \c SimpleFSIPreconditioner. This class inherits
+from the base class \c BlockPreconditioner which provides the generic functionality required for common block preconditioning operations.
 
 
 \dontinclude fsi_channel_with_leaflet.cc
 \skipline start_of_simple_fsi_preconditioner
 \until public virtual BlockPreconditioner<CRDoubleMatrix>
 
-This preconditioner requires five private member data elements; the
+This preconditioner requires five private member data elements: the
 fluid (\f$\tilde F\f$) and solid (\f$\tilde S\f$) subsidiary preconditioners, the subsidiary matrix-vector-product (\f$C_{sf}\f$)
 operator, and pointers to the fluid and solid meshes.
 
@@ -351,10 +351,10 @@ separate mesh. We (arbitrarily) choose the fluid mesh to be
 mesh \c 0 and the solid mesh to be mesh \c 1. The preconditioner therefore
 has four DOF types enumerated in mesh order:
 
-- \c 0 fluid \f$x\f$ velocity
-- \c 1 fluid \f$y\f$ velocity
-- \c 2 fluid pressure
-- \c 3 solid
+- \c 0 fluid \f$x\f$ velocity (DOF type 0 in mesh 0)
+- \c 1 fluid \f$y\f$ velocity (DOF type 1 in mesh 0)
+- \c 2 fluid pressure (DOF type 2 in mesh 0)
+- \c 3 solid (DOF type 0 in mesh 1)
 
 Passing the meshes to \c BlockPreconditioner gives the framework access to the
 meshes and allows the preconditioner writer access to the 
@@ -391,9 +391,8 @@ subsidiary preconditioner:
 \skipline First the solid preconditioner
 \until delete solid_matrix_pt;
 
-The fluid subsidiary preconditioner (\f$\tilde F\f$) is less simple -- this is
-because we use a block preconditioner as a subsidiary
-preconditioner. A subsidiary block preconditioner requires access to
+Dealing with the fluid subsidiary preconditioner (\f$\tilde F\f$) is slightly more complicated -- this is
+because a fluid subsidiary preconditioner is a block preconditioner itself. A subsidiary block preconditioner requires access to
 the data structures in its master block preconditioner and the subset of
 master preconditioner DOF types that it operates on.
 
@@ -401,7 +400,7 @@ This is done in two steps:
 
 -# First we must turn the \c NavierStokesLSCPreconditioner into a subsidiary 
 block preconditioner. We assemble a list a fluid DOF types in this
-preconditioner, and pass this list to the Navier Stokes preconditioner
+preconditioner, and pass this list to the Navier-Stokes preconditioner
 to indicate that
 DOF type \c i in the (master) FSI preconditioner is DOF type \c i in
 the (subsidiary) fluid preconditioner (for \c i \c = \c 0, \c 1, \c 2)
@@ -411,7 +410,7 @@ result of choosing the fluid mesh to be mesh \c 0; in general the index of \c ns
 \skipline Next the fluid preconditioner
 \until turn_into_subsidiary_block_preconditioner(this,ns_dof_list);
 -# Now we set up the \c NavierStokesLSCPreconditioner.
-We pass the Navier Stokes mesh to the the
+We pass the Navier-Stokes mesh to the the
 subsidiary preconditioner and set up the operator. Note that the
 pointer to the full FSI Jacobian is passed to the subsidiary block
 preconditioner. This allows the subsidiary preconditioner to extract
@@ -441,8 +440,8 @@ Next we consider the \c preconditioner_solve(...) method which applies the actio
 
 In this section we follow the four steps outlined at the end of the \ref theory section.
 
-The first step is to apply the Navier Stokes preconditioner \f$\tilde
-F\f$ to the fluid elements of \c y. Since \f$\tilde F\f$ is a 
+The first step is to apply the Navier-Stokes preconditioner \f$\tilde
+F\f$ to the fluid elements \c y_f of \c y. Since \f$\tilde F\f$ is a 
 subisidiary block preconditioner  we apply it to the full-length
  \c y and \c z vectors which contain both the fluid and solid unknowns. The block preconditioner infrastructure utilised 
 within the \c NavierStokesLSCPreconditioner will ensure that the 
@@ -452,12 +451,12 @@ preconditioner only operates on fluid DOFs.
 \skipline Fluid Subsidiary Preconditioner
 \until Navier_stokes_preconditioner_pt->preconditioner_solve(y,z);
 
-The fluid elements of the vector \c z will now have been updated to
-contain the action of the LSC preconditioner on the fluid elements of
+The fluid elements \c z_f of the vector \c z will now have been updated to
+contain the action of the LSC preconditioner on the fluid elements \c y_f of
 the vector \c y.
 
 
-To apply the fluid-onto-solid matrix vector product \f$C_{sf}\f$, we must first
+To apply the fluid-solid coupling matrix vector product \f$C_{sf}\f$, we must first
 copy the fluid elements from \c z into another vector \c z_f. We then apply
 the matrix-vector product operator to  \c z_f and store the result in a
 vector \c w. Finally, we subtract \c w from the solid residuals \c y_s and store the

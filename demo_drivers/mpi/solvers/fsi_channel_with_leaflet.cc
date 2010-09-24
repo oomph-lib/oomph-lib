@@ -676,7 +676,7 @@ public :
    Solid_preconditioner_pt = new SuperLUPreconditioner;
 
    // Create the matrix-vector product operator
-   Fluid_onto_solid_matvec_pt = new MatrixVectorProduct;
+   Fluid_solid_coupling_matvec_pt = new MatrixVectorProduct;
   }// end_of_constructor
  
  
@@ -690,7 +690,7 @@ public :
    delete Solid_preconditioner_pt;
 
    // Delete the matrix vector product operator
-   delete Fluid_onto_solid_matvec_pt;
+   delete Fluid_solid_coupling_matvec_pt;
   }//end_of_destructor
  
  
@@ -736,7 +736,7 @@ private:
  Preconditioner* Solid_preconditioner_pt;
 
  /// Pointer to the fluid onto solid matrix vector product.
- MatrixVectorProduct* Fluid_onto_solid_matvec_pt;
+ MatrixVectorProduct* Fluid_solid_coupling_matvec_pt;
 
  /// Pointer to the navier stokes mesh.
  Mesh* Navier_stokes_mesh_pt;
@@ -834,7 +834,7 @@ void SimpleFSIPreconditioner::setup(Problem* problem_pt,
   this->get_block(1,0,cr_matrix_pt,fluid_onto_solid_matrix_pt);
 
   // And setup the matrix vector product operator
-  Fluid_onto_solid_matvec_pt->setup(fluid_onto_solid_matrix_pt);
+  Fluid_solid_coupling_matvec_pt->setup(fluid_onto_solid_matrix_pt);
   delete fluid_onto_solid_matrix_pt;
  }
 
@@ -864,7 +864,7 @@ void SimpleFSIPreconditioner::preconditioner_solve(const DoubleVector &y,
 
  // Apply the matrix vector product to z_f and store the results in w
  DoubleVector w;
- Fluid_onto_solid_matvec_pt->multiply(z_f,w);
+ Fluid_solid_coupling_matvec_pt->multiply(z_f,w);
 
  // The vector y_s contains the solid residuals
  DoubleVector y_s;
