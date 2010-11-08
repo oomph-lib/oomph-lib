@@ -26,7 +26,7 @@ mkdir RESLT
 
 # Wait for a bit to allow parallel file systems to realise
 # the existence of the new directory
-sleep 5
+sleep 15
 
 $MPI_RUN_COMMAND ../multi_domain_boussinesq_convection validate 2 > OUTPUT_multi_domain_boussinesq_convection_2
 echo "done"
@@ -63,7 +63,9 @@ mkdir RESLT
 
 # Wait for a bit to allow parallel file systems to realise
 # the existence of the new directory
-sleep 5
+sleep 15
+
+ls -l RESLT
 
 $MPI_RUN_COMMAND ../multi_domain_boussinesq_convection validate 1 > OUTPUT_multi_domain_boussinesq_convection
 echo "done"
@@ -98,7 +100,7 @@ mkdir RESLT_FD
 
 # Wait for a bit to allow parallel file systems to realise
 # the existence of the new directory
-sleep 5
+sleep 15
 
 $MPI_RUN_COMMAND ../multi_domain_boussinesq_convection_fd validate 1 > OUTPUT_multi_domain_boussinesq_convection_fd
 echo "done"

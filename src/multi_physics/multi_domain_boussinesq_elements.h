@@ -29,181 +29,194 @@
 //and advection diffusion elements via a multi domain approach, 
 //giving Boussinesq convection
 
+#ifndef OOMPH_MULTI_DOMAIN_BOUSSINESQ_ELEMENTS_HEADER
+#define OOMPH_MULTI_DOMAIN_BOUSSINESQ_ELEMENTS_HEADER
+
 //Oomph-lib headers, we require the generic, advection-diffusion
 //and navier-stokes elements.
 #include "generic.h"
 #include "advection_diffusion.h"
 #include "navier_stokes.h"
 
-// Use the oomph and std namespaces 
-using namespace oomph;
-using namespace std;
 
 
+namespace oomph
+{
+
+//=============================================================
+/// Namespace for default parameters in multi-domain Boussinesq
+//=============================================================
+ namespace MultiDomainBoussinesqHelper
+ {
+
+  /// Default value for physical constants
+  double Default_Physical_Constant_Value=0.0;
+
+ }
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
 
 
 //======================nst_bous_class=================================
-/// Build a RefineableQCrouzeixRaviart element that inherits from 
+/// Build a refineable Navier Stokes element that inherits from 
 /// ElementWithExternalElement so that it can "communicate" with 
 /// an advection diffusion element that provides the temperature
 /// in the body force term.
 //=====================================================================
-template<unsigned DIM>
-class RefineableQCrouzeixRaviartBoussinesqElement : 
- public virtual RefineableQCrouzeixRaviartElement<DIM>,
- public virtual ElementWithExternalElement
+template<class NST_ELEMENT, class AD_ELEMENT>
+class RefineableNavierStokesBoussinesqElement : public virtual NST_ELEMENT,
+public virtual ElementWithExternalElement
 {
-
-public: 
-
+ 
+  public: 
+ 
  /// \short Constructor: call the underlying constructors and 
  /// initialise the pointer to the Rayleigh number to point
  /// to the default value of 0.0.
- RefineableQCrouzeixRaviartBoussinesqElement() : 
-  RefineableQCrouzeixRaviartElement<DIM>(),
-  ElementWithExternalElement()
+ RefineableNavierStokesBoussinesqElement() : 
+  NST_ELEMENT(), ElementWithExternalElement()
   {
-   Ra_pt = &Default_Physical_Constant_Value;
-
+   Ra_pt = &MultiDomainBoussinesqHelper::Default_Physical_Constant_Value;
+   
    //There is one interaction: The effect of the advection-diffusion
    //element onto the buoyancy term
    this->set_ninteraction(1);
   } 
-
- ///Access function for the Rayleigh number (const version)
- const double &ra() const {return *Ra_pt;}
-
- ///Access function for the pointer to the Rayleigh number
- double* &ra_pt() {return Ra_pt;}
-
- /// \short Call the underlying single-physics element's further_build()
- /// functions and make sure that the pointer to the Rayleigh number
- /// is passed to the sons. Also make sure that if the external geometric
- /// Data was ignored in the father it's also ignored in the sons
- void further_build()
+  
+  ///Access function for the Rayleigh number (const version)
+  const double &ra() const {return *Ra_pt;}
+  
+  ///Access function for the pointer to the Rayleigh number
+  double* &ra_pt() {return Ra_pt;}
+  
+  /// \short Call the underlying single-physics element's further_build()
+  /// functions and make sure that the pointer to the Rayleigh number
+  /// is passed to the sons. Also make sure that if the external geometric
+  /// Data was ignored in the father it's also ignored in the sons
+  void further_build()
   {
-   RefineableQCrouzeixRaviartElement<DIM>::further_build();
-
+   NST_ELEMENT::further_build();
+   
    //Cast the pointer to the father element to the specific
    //element type
-   RefineableQCrouzeixRaviartBoussinesqElement<DIM>* 
+   RefineableNavierStokesBoussinesqElement<NST_ELEMENT,AD_ELEMENT>* 
     cast_father_element_pt
-    = dynamic_cast<RefineableQCrouzeixRaviartBoussinesqElement<DIM>*>(
+    = dynamic_cast<RefineableNavierStokesBoussinesqElement
+    <NST_ELEMENT,AD_ELEMENT>*>(
      this->father_element_pt());
-
+   
    //Set the pointer to the Rayleigh number to be the same as that in
    //the father
    this->Ra_pt = cast_father_element_pt->ra_pt();
-
+   
    // Retain ignorance about external geometric data...
    if (!cast_father_element_pt->external_geometric_data_is_included())
     {
      this->ignore_external_geometric_data();
     }
-
-  }
-
- /// \short Overload get_body_force_nst() to return the temperature-dependent
- /// buoyancy force, using the temperature computed by the 
- /// "external" advection diffusion element associated with 
- /// integration point \c ipt.
- void get_body_force_nst(const double& time, const unsigned& ipt, 
-                         const Vector<double> &s, const Vector<double> &x, 
-                         Vector<double> &body_force)
- {
-
-  // Set interaction index -- there's only one interaction...
-  const unsigned interaction=0;
-  
-  // Get a pointer to the external element that computes the
-  // the temperature -- we know it's an advection diffusion element.
-  const AdvectionDiffusionEquations<DIM>* adv_diff_el_pt=
-   dynamic_cast<AdvectionDiffusionEquations<DIM>*>(
-    external_element_pt(interaction,ipt));
-  
-  // Get the temperature interpolated from the external element
-  const double interpolated_t =adv_diff_el_pt->
-   interpolated_u_adv_diff(external_element_local_coord(interaction,ipt));
-  
-  // Get vector that indicates the direction of gravity from
-  // the Navier-Stokes equations
-  Vector<double> gravity(NavierStokesEquations<DIM>::g());
-  
-  // Set the temperature-dependent body force:
-  for (unsigned i=0;i<DIM;i++)
-   {
-    body_force[i] = -gravity[i]*interpolated_t*ra();
-   }
-
- } // end overloaded body force
-
-
- /// \short Compute the element's residual vector and the Jacobian matrix.
- void fill_in_contribution_to_jacobian(Vector<double> &residuals,
-                                       DenseMatrix<double> &jacobian)
- {
-
-   //Get the analytical contribution from the basic Navier-Stokes element
-   RefineableQCrouzeixRaviartElement<DIM>::
-    fill_in_contribution_to_jacobian(residuals,jacobian);
    
-#ifdef USE_FD_FOR_DERIVATIVES_WRT_EXTERNAL_DATA
+  }
+  
+  /// \short Overload get_body_force_nst() to return the temperature-dependent
+  /// buoyancy force, using the temperature computed by the 
+  /// "external" advection diffusion element associated with 
+  /// integration point \c ipt.
+  void get_body_force_nst(const double& time, const unsigned& ipt, 
+                          const Vector<double> &s, const Vector<double> &x, 
+                          Vector<double> &body_force)
+  {   
+   // Set interaction index -- there's only one interaction...
+   const unsigned interaction=0;
+   
+   // Get a pointer to the external element that computes the
+   // the temperature -- we know it's an advection diffusion element.
+   const AD_ELEMENT* adv_diff_el_pt=
+    dynamic_cast<AD_ELEMENT*>(
+     external_element_pt(interaction,ipt));
+   
+   // Get the temperature interpolated from the external element
+   const double interpolated_t =adv_diff_el_pt->
+    interpolated_u_adv_diff(external_element_local_coord(interaction,ipt));
+   
+   // Get vector that indicates the direction of gravity from
+   // the Navier-Stokes equations
+   Vector<double> gravity(NST_ELEMENT::g());
+   
+   // Set the temperature-dependent body force:
+   const unsigned n_dim=this->dim();
+   for (unsigned i=0;i<n_dim;i++)
+    {
+     body_force[i] = -gravity[i]*interpolated_t*ra();
+    }
+   
+  } // end overloaded body force
+  
+  
+ /// \short Compute the element's residual vector and the Jacobian matrix.
+  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
+                                        DenseMatrix<double> &jacobian)
+  {
+   
+   //Get the analytical contribution from the basic Navier-Stokes element
+   NST_ELEMENT::fill_in_contribution_to_jacobian(residuals,jacobian);
+   
+#ifdef USE_FD_FOR_DERIVATIVES_WRT_EXTERNAL_DATA_IN_MULTI_DOMAIN_BOUSSINESQ
 
    //Get the off-diagonal terms by finite differencing
    this->fill_in_jacobian_from_external_interaction_by_fd(residuals,jacobian);
-
+   
 #else
-
+   
    //Get the off-diagonal terms analytically
    this->fill_in_off_diagonal_block_analytic(residuals,jacobian);
-
+   
 #endif
-
+   
   }
-
-
-
- /// Add the element's contribution to its residuals vector,
- /// jacobian matrix and mass matrix
- void fill_in_contribution_to_jacobian_and_mass_matrix(
-  Vector<double> &residuals, DenseMatrix<double> &jacobian, 
-  DenseMatrix<double> &mass_matrix)
+  
+  
+  
+  /// Add the element's contribution to its residuals vector,
+  /// jacobian matrix and mass matrix
+  void fill_in_contribution_to_jacobian_and_mass_matrix(
+   Vector<double> &residuals, DenseMatrix<double> &jacobian, 
+   DenseMatrix<double> &mass_matrix)
   {
    //Call the standard (Broken) function
    //which will prevent these elements from being used
    //in eigenproblems until replaced.
    FiniteElement::fill_in_contribution_to_jacobian_and_mass_matrix(
-     residuals,jacobian,mass_matrix);
+    residuals,jacobian,mass_matrix);
   }
-
-
+  
+  
  /// \short Fill in the derivatives of the body force with respect to the
  /// external unknowns
- void get_dbody_force_nst_dexternal_element_data(
-  const unsigned& ipt, 
-  DenseMatrix<double> &result, Vector<unsigned> &global_eqn_number);
-
-
- /// \short Compute the contribution of the external
- /// degrees of freedom (temperatures) on the Navier-Stokes equations
- void fill_in_off_diagonal_block_analytic(Vector<double> &residuals,
-                                          DenseMatrix<double> &jacobian)
+  void get_dbody_force_nst_dexternal_element_data(
+   const unsigned& ipt, 
+   DenseMatrix<double> &result, Vector<unsigned> &global_eqn_number);
+  
+  
+  /// \short Compute the contribution of the external
+  /// degrees of freedom (temperatures) on the Navier-Stokes equations
+  void fill_in_off_diagonal_block_analytic(Vector<double> &residuals,
+                                           DenseMatrix<double> &jacobian)
   {
    //Local storage for the index in the nodes at which the
-   //Navier-Stokes velocities are stored (we know that this should be 0,1,2)
-   unsigned u_nodal_nst[DIM];
-   for(unsigned i=0;i<DIM;i++) 
+   //Navier-Stokes velocities are stored (we know that this 
+   // should be 0,1,2)
+   const unsigned n_dim=this->dim();
+   unsigned u_nodal_nst[n_dim];
+   for(unsigned i=0;i<n_dim;i++) 
     {u_nodal_nst[i] = this->u_index_nst(i);}
-
+   
    //Find out how many nodes there are
    const unsigned n_node = this->nnode();
    
    //Set up memory for the shape and test functions and their derivatives
    Shape psif(n_node), testf(n_node);
-   DShape dpsifdx(n_node,DIM), dtestfdx(n_node,DIM);
+   DShape dpsifdx(n_node,n_dim), dtestfdx(n_node,n_dim);
    
    //Number of integration points
    const unsigned n_intpt = this->integral_pt()->nweight();
@@ -213,7 +226,7 @@ public:
    
    // Local storage for pointers to hang_info objects
    HangInfo *hang_info_pt=0;   
-
+   
    //Loop over the integration points
    for(unsigned ipt=0;ipt<n_intpt;ipt++)
     {
@@ -288,7 +301,7 @@ public:
          
          
          //Loop over the velocity components in the Navier--Stokes equtions
-         for(unsigned i=0;i<DIM;i++)
+         for(unsigned i=0;i<n_dim;i++)
           {
            //Get the equation number
            if(is_node_hanging)
@@ -327,16 +340,25 @@ public:
     }
   } 
 
-
-private:
-
+ /// Classify dof numbers as in underlying element
+ void get_dof_numbers_for_unknowns(std::list<std::pair<unsigned long, 
+                                   unsigned> >& block_lookup_list)
+ {
+  // Call the underlying function
+  NST_ELEMENT::get_dof_numbers_for_unknowns(block_lookup_list);
+ }
+ 
+ /// Get number of dof types from underlying element
+ unsigned ndof_types()
+ {
+  return NST_ELEMENT::ndof_types();
+ }
+ 
+  private:
+ 
  /// Pointer to a private data member, the Rayleigh number
  double* Ra_pt;
-
- /// The static default value of the Rayleigh number
- static double Default_Physical_Constant_Value;
-
-
+  
 };
 
 
@@ -353,22 +375,20 @@ private:
 /// ElementWithExternalElement so that it can "communicate" with the 
 /// a NavierStokesElement that provides its wind.
 //=====================================================================
-template<unsigned DIM>
-class RefineableQAdvectionDiffusionBoussinesqElement : 
- public virtual RefineableQAdvectionDiffusionElement<DIM,3>,
- public virtual ElementWithExternalElement
+template<class AD_ELEMENT, class NST_ELEMENT>
+class RefineableAdvectionDiffusionBoussinesqElement : 
+public virtual AD_ELEMENT, public virtual ElementWithExternalElement
 {
 
 public:
 
  /// \short Constructor: call the underlying constructors
- RefineableQAdvectionDiffusionBoussinesqElement() : 
-  RefineableQAdvectionDiffusionElement<DIM,3>(), ElementWithExternalElement()
+ RefineableAdvectionDiffusionBoussinesqElement() : 
+  AD_ELEMENT(), ElementWithExternalElement() 
   { 
    //There is one interaction
    this->set_ninteraction(1);
   }
-
 
 
   //-----------------------------------------------------------
@@ -385,7 +405,8 @@ public:
   void output(ostream &outfile, const unsigned &nplot)
   {
    //vector of local coordinates
-   Vector<double> s(DIM);
+   unsigned n_dim=this->dim();
+   Vector<double> s(n_dim);
    
    // Tecplot header info
    outfile << this->tecplot_zone_string(nplot);
@@ -398,11 +419,11 @@ public:
      this->get_s_plot(iplot,nplot,s);
      
      // Output the position of the plot point
-     for(unsigned i=0;i<DIM;i++)
+     for(unsigned i=0;i<n_dim;i++)
       {outfile << this->interpolated_x(s,i) << " ";}
      
      // Output the temperature (the advected variable) at the plot point
-     outfile << this->interpolated_u_adv_diff(s) << std::endl;
+     outfile << AD_ELEMENT::interpolated_u_adv_diff(s) << std::endl;
     }
    outfile << std::endl;
    
@@ -435,8 +456,7 @@ public:
   unsigned interaction=0;
   
   // Dynamic cast "external" element to Navier Stokes element
-  NavierStokesEquations<DIM>* nst_el_pt=
-   dynamic_cast<NavierStokesEquations<DIM>*>
+  NST_ELEMENT* nst_el_pt= dynamic_cast<NST_ELEMENT*>
    (external_element_pt(interaction,ipt));
   
   //Wind is given by the velocity in the Navier Stokes element
@@ -445,28 +465,27 @@ public:
   
  }  //end of get_wind_adv_diff
  
-
+ 
  ///\short Compute the element's residual vector and the Jacobian matrix.
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                        DenseMatrix<double> &jacobian)
-  {
-   //Get the contribution from the basic Navier--Stokes element
-   RefineableQAdvectionDiffusionElement<DIM,3>::
-    fill_in_contribution_to_jacobian(residuals,jacobian);
-   
-#ifdef USE_FD_FOR_DERIVATIVES_WRT_EXTERNAL_DATA
-
-   //Get the off-diagonal terms by finite differencing
-   this->fill_in_jacobian_from_external_interaction_by_fd(residuals,jacobian);
-
+ {
+  //Get the contribution from the basic advection diffusion element
+  AD_ELEMENT::fill_in_contribution_to_jacobian(residuals,jacobian);
+  
+#ifdef USE_FD_FOR_DERIVATIVES_WRT_EXTERNAL_DATA_IN_MULTI_DOMAIN_BOUSSINESQ
+  
+  //Get the off-diagonal terms by finite differencing
+  this->fill_in_jacobian_from_external_interaction_by_fd(residuals,jacobian);
+  
 #else
-
-   //Get the off-diagonal terms analytically
-   this->fill_in_off_diagonal_block_analytic(residuals,jacobian);
-
+  
+  //Get the off-diagonal terms analytically
+  this->fill_in_off_diagonal_block_analytic(residuals,jacobian);
+  
 #endif
-
-  }
+  
+ }
 
 
  /// \short Overload the function that must return all field data involved
@@ -476,20 +495,20 @@ public:
  void identify_all_field_data_for_external_interaction(
   Vector<std::set<FiniteElement*> > const &external_elements_pt,
   std::set<std::pair<Data*,unsigned> > &paired_interaction_data);
-
+ 
  /// \short Add the element's contribution to its residuals vector,
  /// jacobian matrix and mass matrix
  void fill_in_contribution_to_jacobian_and_mass_matrix(
   Vector<double> &residuals, DenseMatrix<double> &jacobian, 
   DenseMatrix<double> &mass_matrix)
-  {
-   //Call the standard (Broken) function
-   //which will prevent these elements from being used
-   //in eigenproblems until replaced.
-   FiniteElement::fill_in_contribution_to_jacobian_and_mass_matrix(
-     residuals,jacobian,mass_matrix);
-  }
-
+ {
+  //Call the standard (Broken) function
+  //which will prevent these elements from being used
+  //in eigenproblems until replaced.
+  FiniteElement::fill_in_contribution_to_jacobian_and_mass_matrix(
+   residuals,jacobian,mass_matrix);
+ }
+ 
  
  /// \short Fill in the derivatives of the wind with respect to the
  /// external unknowns
@@ -501,8 +520,7 @@ public:
   unsigned interaction=0;
   
   // Dynamic cast "other" element to correct type
-  RefineableQCrouzeixRaviartBoussinesqElement<DIM>* source_el_pt=
-   dynamic_cast<RefineableQCrouzeixRaviartBoussinesqElement<DIM>*>
+  NST_ELEMENT* source_el_pt=dynamic_cast<NST_ELEMENT*>
    (external_element_pt(interaction,ipt));
   
   // Get the external element's derivatives of the velocity with respect
@@ -512,30 +530,33 @@ public:
    external_element_local_coord(interaction,ipt),i,result,
    global_eqn_number);
  } 
-
+ 
  
  /// \short Compute the contribution of the external
  /// degrees of freedom (velocities) on the advection-diffusion equations
  void fill_in_off_diagonal_block_analytic(Vector<double> &residuals,
                                           DenseMatrix<double> &jacobian)
-  {
-   //Local storage for the index in the nodes at which the temperature 
-   //is stored
-   const unsigned u_nodal_adv_diff = this->u_index_adv_diff();
+ {
+  //Local storage for the index in the nodes at which the temperature 
+  //is stored
+  const unsigned u_nodal_adv_diff = this->u_index_adv_diff();
+  
+  //Find out how many nodes there are
+  const unsigned n_node = this->nnode();
+  
+  // Spatial dimension
+  const unsigned n_dim=this->dim();
 
-   //Find out how many nodes there are
-   const unsigned n_node = this->nnode();
-   
-   //Set up memory for the shape and test functions and their derivatives
-   Shape psi(n_node), test(n_node);
-   DShape dpsidx(n_node,DIM), dtestdx(n_node,DIM);
-   
-   //Number of integration points
-   const unsigned n_intpt = this->integral_pt()->nweight();
-   
-   //Integers to store the local equations and unknowns
-   int local_eqn=0, local_unknown=0;
-   
+  //Set up memory for the shape and test functions and their derivatives
+  Shape psi(n_node), test(n_node);
+  DShape dpsidx(n_node,n_dim), dtestdx(n_node,n_dim);
+  
+  //Number of integration points
+  const unsigned n_intpt = this->integral_pt()->nweight();
+  
+  //Integers to store the local equations and unknowns
+  int local_eqn=0, local_unknown=0;
+  
    // Local storage for pointers to hang_info objects
    HangInfo *hang_info_pt=0;   
 
@@ -557,12 +578,12 @@ public:
      double W = w*J;
      
      //Calculate local values of the derivatives of the solution
-     Vector<double> interpolated_dudx(DIM,0.0);
+     Vector<double> interpolated_dudx(n_dim,0.0);
      // Loop over nodes
      for(unsigned l=0;l<n_node;l++) 
       {
        // Loop over directions
-       for(unsigned j=0;j<DIM;j++)
+       for(unsigned j=0;j<n_dim;j++)
         {
          interpolated_dudx[j] += 
           this->nodal_value(l,u_nodal_adv_diff)*dpsidx(l,j);
@@ -572,19 +593,20 @@ public:
      //Get the derivatives of the wind wrt the unknowns
      //of the external element
      Vector<double> dwind_dexternal_element_data;
+
      //Vector of global equation number corresponding to the external
      //element's data
      Vector<unsigned> global_eqn_number_of_external_element_data;
 
      //Loop over the wind directions
-     for(unsigned i2=0;i2<DIM;i2++)
+     for(unsigned i2=0;i2<n_dim;i2++)
       {
        //Get the appropriate derivatives
        this->get_dwind_adv_diff_dexternal_element_data(
         ipt,i2,dwind_dexternal_element_data,
         global_eqn_number_of_external_element_data);
        
-
+       
        //Find out how many external data there are
        const unsigned n_external_element_data = 
         global_eqn_number_of_external_element_data.size();
@@ -665,6 +687,54 @@ public:
     }
   }
 
+ /// Classify dofs for use in block preconditioner
+ void get_dof_numbers_for_unknowns(std::list<std::pair<unsigned long, 
+                                   unsigned> >& block_lookup_list)
+ {
+  // number of nodes
+  unsigned n_node = this->nnode();
+  
+  // temporary pair (used to store block lookup prior to being added to list)
+  std::pair<unsigned,unsigned> block_lookup;
+  
+  // loop over the nodes
+  for (unsigned n = 0; n < n_node; n++)
+   {
+    // find the number of values at this node
+    unsigned nv = this->node_pt(n)->nvalue();
+    
+    //loop over these values
+    for (unsigned v = 0; v < nv; v++)
+     {
+      // determine local eqn number
+      int local_eqn_number = this->nodal_local_eqn(n, v);
+      
+      // ignore pinned values - far away degrees of freedom resulting 
+      // from hanging nodes can be ignored since these are be dealt
+      // with by the element containing their master nodes
+      if (local_eqn_number >= 0)
+       {
+        // store block lookup in temporary pair: Global equation number
+        // is the first entry in pair
+        block_lookup.first = this->eqn_number(local_eqn_number);
+        
+        // set block numbers: Block number is the second entry in pair
+        block_lookup.second = 0;
+        
+        // add to list
+        block_lookup_list.push_front(block_lookup);
+       }
+     }
+   }
+ }
+ 
+
+ /// Specify number of dof types for use in block preconditioner
+ unsigned ndof_types()
+ {
+  return 1;
+ }
+ 
 };
 
 
@@ -680,25 +750,25 @@ public:
 /// Only the velocity dofs in the Navier Stokes element affect the
 /// interaction with the current element. 
 //=======================================================================
-template<unsigned DIM>
-void RefineableQAdvectionDiffusionBoussinesqElement<DIM>::
+template<class AD_ELEMENT, class NST_ELEMENT>
+void RefineableAdvectionDiffusionBoussinesqElement<AD_ELEMENT,NST_ELEMENT>::
 identify_all_field_data_for_external_interaction(
  Vector<std::set<FiniteElement*> > const &external_elements_pt,
  std::set<std::pair<Data*,unsigned> > &paired_interaction_data)
-{
- //There's only one interaction
- const unsigned interaction = 0;
- 
- // Loop over each Navier Stokes element in the set of external elements that
- // affect the current element
- for(std::set<FiniteElement*>::iterator it=
-      external_elements_pt[interaction].begin();
-     it != external_elements_pt[interaction].end(); it++)
-  {
-   
-   //Cast the external element to a fluid element
-   NavierStokesEquations<DIM>* external_fluid_el_pt =
-    dynamic_cast<NavierStokesEquations<DIM>*>(*it);
+ {
+  //There's only one interaction
+  const unsigned interaction = 0;
+  
+  // Loop over each Navier Stokes element in the set of external elements that
+  // affect the current element
+  for(std::set<FiniteElement*>::iterator it=
+       external_elements_pt[interaction].begin();
+      it != external_elements_pt[interaction].end(); it++)
+   {
+    
+    //Cast the external element to a fluid element
+    NST_ELEMENT* external_fluid_el_pt =
+     dynamic_cast<NST_ELEMENT*>(*it);
    
    // Loop over the nodes
    unsigned nnod=external_fluid_el_pt->nnode();
@@ -708,7 +778,8 @@ identify_all_field_data_for_external_interaction(
      Data* veloc_data_pt=external_fluid_el_pt->node_pt(j);
      
      // Get all velocity dofs
-     for (unsigned i=0;i<DIM;i++)
+     const unsigned n_dim=this->dim();
+     for (unsigned i=0;i<n_dim;i++)
       {
        // Which value corresponds to the i-th velocity?
        unsigned val=external_fluid_el_pt->u_index_nst(i);
@@ -727,86 +798,14 @@ identify_all_field_data_for_external_interaction(
 /////////////////////////////////////////////////////////////////////////
 
 
-//==========start_of_get_dbody_force=========== ===========================
-/// Fill in the derivatives of the body force with respect to the external
-/// unknowns in the Navier--Stokes equations
-//=========================================================================
-template<unsigned DIM>
-void RefineableQCrouzeixRaviartBoussinesqElement<DIM>::
-get_dbody_force_nst_dexternal_element_data(const unsigned &ipt,
-                                           DenseMatrix<double> &result,
-                                           Vector<unsigned> &global_eqn_number)
-{
- // The interaction index is 0 in this case
- unsigned interaction=0;
- 
- // Dynamic cast "other" element to correct type
- RefineableQAdvectionDiffusionBoussinesqElement<DIM>* source_el_pt=
-  dynamic_cast<RefineableQAdvectionDiffusionBoussinesqElement<DIM>*>
-  (external_element_pt(interaction,ipt));
- 
- // Get vector that indicates the direction of gravity from
- // the Navier-Stokes equations
- Vector<double> gravity(NavierStokesEquations<DIM>::g());
- 
- // Get the external element's derivatives
- Vector<double> du_adv_diff_ddata;
- source_el_pt->dinterpolated_u_adv_diff_ddata(
-  external_element_local_coord(interaction,ipt),du_adv_diff_ddata,
-  global_eqn_number);
-  
- //Find the number of external data
- unsigned n_external_element_data = du_adv_diff_ddata.size();
- //Set the size of the matrix to be returned
- result.resize(DIM,n_external_element_data);
-
- // Temperature-dependent body force:
- for (unsigned i=0;i<DIM;i++)
-  {
-   //Loop over the external data
-   for(unsigned n=0;n<n_external_element_data;n++)
-    {
-     result(i,n) = -gravity[i]*du_adv_diff_ddata[n]*ra();
-    }
-  }
-
-} // end_of_get_dbody_force
-
-
-
-/////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////
-
-
-
-
-//=========================================================================
-/// Set the default physical value for the Rayleigh number to be zero 
-/// in 2D and 3D
-//=========================================================================
-template<>
-double RefineableQCrouzeixRaviartBoussinesqElement<2>::Default_Physical_Constant_Value=0.0;
-
-template<>
-double RefineableQCrouzeixRaviartBoussinesqElement<3>::Default_Physical_Constant_Value=0.0;
-
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////
-
-
-
-
 //======================class definitions==============================
-/// Build QCrouzeixRaviartElementWithExternalElement that inherits from 
+/// Build NavierStokesBoussinesqElement that inherits from 
 /// ElementWithExternalElement so that it can "communicate" 
-/// with QAdvectionDiffusionElementWithExternalElement
+/// with AdvectionDiffusionElementWithExternalElement
 //=====================================================================
-template<unsigned DIM>
-class QCrouzeixRaviartElementWithExternalElement : 
- public virtual QCrouzeixRaviartElement<DIM>,
- public virtual ElementWithExternalElement
+template<class NST_ELEMENT, class AD_ELEMENT>
+class NavierStokesBoussinesqElement : 
+ public virtual NST_ELEMENT, public virtual ElementWithExternalElement
 {
 
 private:
@@ -814,26 +813,22 @@ private:
  /// Pointer to a private data member, the Rayleigh number
  double* Ra_pt;
 
- /// The static default value of the Rayleigh number
- static double Default_Physical_Constant_Value;
-
 public: 
-
+ 
  /// \short Constructor: call the underlying constructors and 
  /// initialise the pointer to the Rayleigh number to point
  /// to the default value of 0.0.
- QCrouzeixRaviartElementWithExternalElement() : QCrouzeixRaviartElement<DIM>(),
-                           ElementWithExternalElement()
+ NavierStokesBoussinesqElement() : NST_ELEMENT(), ElementWithExternalElement()
   {
-   Ra_pt = &Default_Physical_Constant_Value;
-
+   Ra_pt = &MultiDomainBoussinesqHelper::Default_Physical_Constant_Value;
+   
    //There is only one interaction
    this->set_ninteraction(1);
   } 
-
+  
  ///Access function for the Rayleigh number (const version)
  const double &ra() const {return *Ra_pt;}
-
+ 
  ///Access function for the pointer to the Rayleigh number
  double* &ra_pt() {return Ra_pt;}
 
@@ -855,7 +850,7 @@ public:
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                    DenseMatrix<double> &jacobian)
   {
-#ifdef USE_FD_JACOBIAN
+#ifdef USE_FD_JACOBIAN_NST_IN_MULTI_DOMAIN_BOUSSINESQ
 
    // This function computes the Jacobian by finite-differencing
    ElementWithExternalElement::
@@ -864,8 +859,7 @@ public:
 #else
 
    //Get the contribution from the basic Navier--Stokes element
-   QCrouzeixRaviartElement<DIM>::
-    fill_in_contribution_to_jacobian(residuals,jacobian);
+   NST_ELEMENT::fill_in_contribution_to_jacobian(residuals,jacobian);
 
    //Get the off-diagonal terms analytically
    this->fill_in_off_diagonal_block_analytic(residuals,jacobian);
@@ -893,8 +887,9 @@ public:
   {
    //Local storage for the index in the nodes at which the
    //Navier-Stokes velocities are stored (we know that this should be 0,1,2)
-   unsigned u_nodal_nst[DIM];
-   for(unsigned i=0;i<DIM;i++) 
+   const unsigned n_dim=this->dim();
+   Vector<unsigned> u_nodal_nst(n_dim);
+   for(unsigned i=0;i<n_dim;i++) 
     {u_nodal_nst[i] = this->u_index_nst(i);}
 
    //Find out how many nodes there are
@@ -902,7 +897,7 @@ public:
    
    //Set up memory for the shape and test functions and their derivatives
    Shape psif(n_node), testf(n_node);
-   DShape dpsifdx(n_node,DIM), dtestfdx(n_node,DIM);
+   DShape dpsifdx(n_node,n_dim), dtestfdx(n_node,n_dim);
    
    //Number of integration points
    const unsigned n_intpt = this->integral_pt()->nweight();
@@ -951,7 +946,7 @@ public:
        //body-force term)
        
        //Loop over the velocity components in the Navier--Stokes equtions
-       for(unsigned i=0;i<DIM;i++)
+       for(unsigned i=0;i<n_dim;i++)
         {
          //If it's not a boundary condition
          local_eqn = this->nodal_local_eqn(l,u_nodal_nst[i]);
@@ -980,28 +975,66 @@ public:
 
 };
 
+
+//============================================================
+/// Overload get_body_force_nst to get the temperature "body force"
+/// from the "source" AdvectionDiffusion element via current integration point
+//========================================================
+template<class NST_ELEMENT, class AD_ELEMENT>
+void NavierStokesBoussinesqElement<NST_ELEMENT,AD_ELEMENT>::
+get_body_force_nst(const double& time, 
+                   const unsigned& ipt,
+                   const Vector<double> &s,
+                   const Vector<double> &x,
+                   Vector<double> &result)
+{
+ // The interaction index is 0 in this case
+ unsigned interaction=0;
+
+ // Get the temperature interpolated from the external element
+ const double interpolated_t =
+  dynamic_cast<AD_ELEMENT*>(
+   external_element_pt(interaction,ipt))->
+  interpolated_u_adv_diff(external_element_local_coord(interaction,ipt));
+
+ // Get vector that indicates the direction of gravity from
+ // the Navier-Stokes equations
+ Vector<double> gravity(NST_ELEMENT::g());
+   
+ // Temperature-dependent body force:
+ const unsigned n_dim=this->dim();
+ for (unsigned i=0;i<n_dim;i++)
+  {
+   result[i] = -gravity[i]*interpolated_t*ra();
+  }
+}
+
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+
 //======================class definitions==============================
-/// Build QAdvectionDiffusionElementWithExternalElement that inherits from 
+/// Build AdvectionDiffusionBoussinesqElement that inherits from 
 /// ElementWithExternalElement so that it can "communicate" with the 
-/// QCrouzeixRaviartElementWithExternalElement
+/// Navier Stokes element
 //=====================================================================
-template<unsigned DIM>
-class QAdvectionDiffusionElementWithExternalElement : 
- public virtual QAdvectionDiffusionElement<DIM,3>,
- public virtual ElementWithExternalElement
+template<class AD_ELEMENT, class NST_ELEMENT>
+class AdvectionDiffusionBoussinesqElement : 
+ public virtual AD_ELEMENT, public virtual ElementWithExternalElement
 {
 
 public:
 
  /// \short Constructor: call the underlying constructors
- QAdvectionDiffusionElementWithExternalElement() : 
-  QAdvectionDiffusionElement<DIM,3>(),
+ AdvectionDiffusionBoussinesqElement() :  AD_ELEMENT(), 
   ElementWithExternalElement()
-  { 
-   //There is only one interaction
-   this->set_ninteraction(1);
-  } 
-
+   { 
+    //There is only one interaction
+    this->set_ninteraction(1);
+   } 
+  
  /// \short Overload the wind function in the advection-diffusion equations.
  /// This provides the coupling from the Navier--Stokes equations to the
  /// advection-diffusion equations because the wind is the fluid velocity,
@@ -1023,8 +1056,11 @@ public:
  // Start of output function
   void output(ostream &outfile, const unsigned &nplot)
   {
+   // Element dimension
+   const unsigned n_dim=this->dim();
+
    //vector of local coordinates
-   Vector<double> s(DIM);
+   Vector<double> s(n_dim);
    
    // Tecplot header info
    outfile << this->tecplot_zone_string(nplot);
@@ -1037,11 +1073,11 @@ public:
      this->get_s_plot(iplot,nplot,s);
      
      // Output the position of the plot point
-     for(unsigned i=0;i<DIM;i++)
+     for(unsigned i=0;i<n_dim;i++)
       {outfile << this->interpolated_x(s,i) << " ";}
      
      // Output the temperature (the advected variable) at the plot point
-     outfile << this->interpolated_u_adv_diff(s) << std::endl;
+     outfile << AD_ELEMENT::interpolated_u_adv_diff(s) << std::endl;
     }
    outfile << std::endl;
    
@@ -1076,7 +1112,7 @@ public:
  void fill_in_contribution_to_jacobian(Vector<double> &residuals,
                                    DenseMatrix<double> &jacobian)
   {
-#ifdef USE_FD_JACOBIAN
+#ifdef USE_FD_JACOBIAN_IN_MULTI_DOMAIN_BOUSSINESQ
 
    // This function computes the Jacobian by finite-differencing
    ElementWithExternalElement::
@@ -1085,8 +1121,8 @@ public:
 #else
 
    //Get the contribution from the basic advection-diffusion element
-   QAdvectionDiffusionElement<DIM,3>::
-    fill_in_contribution_to_jacobian(residuals,jacobian);
+   AD_ELEMENT::fill_in_contribution_to_jacobian(residuals,jacobian);
+
    //Get the off-diagonal terms analytically
    this->fill_in_off_diagonal_block_analytic(residuals,jacobian);
 
@@ -1118,9 +1154,12 @@ public:
    //Find out how many nodes there are
    const unsigned n_node = this->nnode();
    
+   // Element dimension
+   const unsigned n_dim=this->dim();
+   
    //Set up memory for the shape and test functions and their derivatives
    Shape psi(n_node), test(n_node);
-   DShape dpsidx(n_node,DIM), dtestdx(n_node,DIM);
+   DShape dpsidx(n_node,n_dim), dtestdx(n_node,n_dim);
    
    //Number of integration points
    const unsigned n_intpt = this->integral_pt()->nweight();
@@ -1146,12 +1185,12 @@ public:
      double W = w*J;
      
      //Calculate local values of the derivatives of the solution
-     Vector<double> interpolated_dudx(DIM,0.0);
+     Vector<double> interpolated_dudx(n_dim,0.0);
      // Loop over nodes
      for(unsigned l=0;l<n_node;l++) 
       {
        // Loop over directions
-       for(unsigned j=0;j<DIM;j++)
+       for(unsigned j=0;j<n_dim;j++)
         {
          interpolated_dudx[j] += 
           this->raw_nodal_value(l,u_nodal_adv_diff)*dpsidx(l,j);
@@ -1168,7 +1207,7 @@ public:
 
 
      //Loop over the wind directions
-     for(unsigned i2=0;i2<DIM;i2++)
+     for(unsigned i2=0;i2<n_dim;i2++)
       {
        //Get the appropriate derivatives
        this->get_dwind_adv_diff_dexternal_element_data(
@@ -1213,82 +1252,6 @@ public:
 
 };
 
-//============================================================
-/// Overload get_body_force_nst to get the temperature "body force"
-/// from the "source" AdvectionDiffusion element via current integration point
-//========================================================
-template<unsigned DIM>
-void QCrouzeixRaviartElementWithExternalElement<DIM>::
-get_body_force_nst(const double& time, 
-                   const unsigned& ipt,
-                   const Vector<double> &s,
-                   const Vector<double> &x,
-                   Vector<double> &result)
-{
- // The interaction index is 0 in this case
- unsigned interaction=0;
-
-// Get the temperature interpolated from the external element
- const double interpolated_t =
-  dynamic_cast<AdvectionDiffusionEquations<DIM>*>(
-   external_element_pt(interaction,ipt))->
-  interpolated_u_adv_diff(external_element_local_coord(interaction,ipt));
-
- // Get vector that indicates the direction of gravity from
- // the Navier-Stokes equations
- Vector<double> gravity(NavierStokesEquations<DIM>::g());
-   
- // Temperature-dependent body force:
- for (unsigned i=0;i<DIM;i++)
-  {
-   result[i] = -gravity[i]*interpolated_t*ra();
-  }
-}
-
-
-//=========================================================================
-/// Fill in the derivatives of the body force with respect to the external
-/// unknowns in the Navier--Stokes equations
-//=========================================================================
-template<unsigned DIM>
-void QCrouzeixRaviartElementWithExternalElement<DIM>::
-get_dbody_force_nst_dexternal_element_data(const unsigned &ipt,
-                                           DenseMatrix<double> &result,
-                                           Vector<unsigned> &global_eqn_number)
-{
- // The interaction index is 0 in this case
- unsigned interaction=0;
- 
- // Dynamic cast "other" element to correct type
- QAdvectionDiffusionElementWithExternalElement<DIM>* source_el_pt=
-  dynamic_cast<QAdvectionDiffusionElementWithExternalElement<DIM>*>
-  (external_element_pt(interaction,ipt));
- 
- // Get vector that indicates the direction of gravity from
- // the Navier-Stokes equations
- Vector<double> gravity(NavierStokesEquations<DIM>::g());
- 
- // Get the external element's derivatives
- Vector<double> du_adv_diff_ddata;
- source_el_pt->dinterpolated_u_adv_diff_ddata(
-  external_element_local_coord(interaction,ipt),du_adv_diff_ddata,
-  global_eqn_number);
-  
- //Find the number of external data
- unsigned n_external_element_data = du_adv_diff_ddata.size();
- //Set the size of the matrix to be returned
- result.resize(DIM,n_external_element_data);
-
- // Temperature-dependent body force:
- for (unsigned i=0;i<DIM;i++)
-  {
-   //Loop over the external data
-   for(unsigned n=0;n<n_external_element_data;n++)
-    {
-     result(i,n) = -gravity[i]*du_adv_diff_ddata[n]*ra();
-    }
-  }
-}
 
 
 //==========================================================================
@@ -1297,8 +1260,9 @@ get_dbody_force_nst_dexternal_element_data(const unsigned &ipt,
 /// advection-diffusion equations because the wind is the fluid velocity,
 /// obtained from the source elements in the other mesh
 //==========================================================================
-template<unsigned DIM>
-void QAdvectionDiffusionElementWithExternalElement<DIM>::get_wind_adv_diff
+template<class AD_ELEMENT, class NST_ELEMENT>
+void AdvectionDiffusionBoussinesqElement<AD_ELEMENT,NST_ELEMENT>::
+ get_wind_adv_diff
 (const unsigned& ipt,const Vector<double> &s,const Vector<double>& x, 
  Vector<double>& wind) const
 {
@@ -1306,9 +1270,8 @@ void QAdvectionDiffusionElementWithExternalElement<DIM>::get_wind_adv_diff
  unsigned interaction=0;
 
  // Dynamic cast "other" element to correct type
- QCrouzeixRaviartElementWithExternalElement<DIM>* source_el_pt=
-  dynamic_cast<QCrouzeixRaviartElementWithExternalElement<DIM>*>
-  (external_element_pt(interaction,ipt));
+ NST_ELEMENT* source_el_pt=
+  dynamic_cast<NST_ELEMENT*>(external_element_pt(interaction,ipt));
 
  //The wind function is simply the velocity at the points of the "other" el
  source_el_pt->interpolated_u_nst
@@ -1319,8 +1282,8 @@ void QAdvectionDiffusionElementWithExternalElement<DIM>::get_wind_adv_diff
 /// Fill in the derivatives of the wind with respect to the external
 /// unknowns in the advection-diffusion equations
 //=========================================================================
-template<unsigned DIM>
-void QAdvectionDiffusionElementWithExternalElement<DIM>::
+template<class AD_ELEMENT, class NST_ELEMENT>
+void AdvectionDiffusionBoussinesqElement<AD_ELEMENT,NST_ELEMENT>::
 get_dwind_adv_diff_dexternal_element_data(const unsigned &ipt,
                                           const unsigned &i,
                                           Vector<double> &result,
@@ -1330,10 +1293,9 @@ get_dwind_adv_diff_dexternal_element_data(const unsigned &ipt,
  unsigned interaction=0;
  
  // Dynamic cast "other" element to correct type
- QCrouzeixRaviartElementWithExternalElement<DIM>* source_el_pt=
-  dynamic_cast<QCrouzeixRaviartElementWithExternalElement<DIM>*>
-  (external_element_pt(interaction,ipt));
-  
+ NST_ELEMENT* source_el_pt=
+  dynamic_cast<NST_ELEMENT*>(external_element_pt(interaction,ipt));
+ 
  // Get the external element's derivatives of the velocity with respect
  // to the data. The wind is just the Navier--Stokes velocity, so this
  // is all that's required
@@ -1342,10 +1304,124 @@ get_dwind_adv_diff_dexternal_element_data(const unsigned &ipt,
   global_eqn_number);
 }
 
-
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
 
 //=========================================================================
-/// Set the default physical value to be zero
+/// Fill in the derivatives of the body force with respect to the external
+/// unknowns in the Navier--Stokes equations
 //=========================================================================
-template<>
-double QCrouzeixRaviartElementWithExternalElement<2>::Default_Physical_Constant_Value=0.0;
+template<class NST_ELEMENT, class AD_ELEMENT>
+void NavierStokesBoussinesqElement<NST_ELEMENT,AD_ELEMENT>::
+get_dbody_force_nst_dexternal_element_data(const unsigned &ipt,
+                                           DenseMatrix<double> &result,
+                                           Vector<unsigned> &global_eqn_number)
+{
+ // Get vector that indicates the direction of gravity from
+ // the Navier-Stokes equations
+ Vector<double> gravity(NST_ELEMENT::g());
+ 
+ // The interaction index is 0 in this case
+ unsigned interaction=0;
+ 
+ // Get the external element's derivatives
+ Vector<double> du_adv_diff_ddata;
+ 
+ // Dynamic cast "other" element to correct type
+ AD_ELEMENT* source_el_pt=
+  dynamic_cast<AD_ELEMENT*>(external_element_pt(interaction,ipt));
+#ifdef PARANOID
+ if (source_el_pt==0)
+  {
+   throw OomphLibError(
+    "External element could not be cast to AD_ELEMENT\n",
+    "NavierStokesBoussinesqElement::get_dbody_force_nst_dexternal_element_data",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+ // Get derivatives
+ source_el_pt->dinterpolated_u_adv_diff_ddata(
+  external_element_local_coord(interaction,ipt),du_adv_diff_ddata,
+  global_eqn_number);
+ 
+ //Find the number of external data
+ unsigned n_external_element_data = du_adv_diff_ddata.size();
+ 
+ //Set the size of the matrix to be returned
+ const unsigned n_dim=this->dim();
+ result.resize(n_dim,n_external_element_data);
+
+ // Temperature-dependent body force:
+ for (unsigned i=0;i<n_dim;i++)
+  {
+   //Loop over the external data
+   for(unsigned n=0;n<n_external_element_data;n++)
+    {
+     result(i,n) = -gravity[i]*du_adv_diff_ddata[n]*ra();
+    }
+  }
+}
+
+
+//==========start_of_get_dbody_force=========== ===========================
+/// Fill in the derivatives of the body force with respect to the external
+/// unknowns in the Navier--Stokes equations
+//=========================================================================
+template<class NST_ELEMENT, class AD_ELEMENT>
+void RefineableNavierStokesBoussinesqElement<NST_ELEMENT,AD_ELEMENT>::
+get_dbody_force_nst_dexternal_element_data(const unsigned &ipt,
+                                           DenseMatrix<double> &result,
+                                           Vector<unsigned> &global_eqn_number)
+{
+ // Get vector that indicates the direction of gravity from
+ // the Navier-Stokes equations
+ Vector<double> gravity(NST_ELEMENT::g());
+ 
+ // The interaction index is 0 in this case
+ unsigned interaction=0;
+ 
+ // Get the external element's derivatives
+ Vector<double> du_adv_diff_ddata;
+ 
+ // Dynamic cast "other" element to correct type
+ AD_ELEMENT* source_el_pt=
+  dynamic_cast<AD_ELEMENT*>(external_element_pt(interaction,ipt));
+#ifdef PARANOID
+ if (source_el_pt==0)
+  {
+   throw OomphLibError(
+    "External element could not be cast to AD_ELEMENT\n",
+    "RefineableNavierStokesBoussinesqElement::get_dbody_force_nst_dexternal_element_data",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+ // Get derivatives
+ source_el_pt->dinterpolated_u_adv_diff_ddata(
+  external_element_local_coord(interaction,ipt),du_adv_diff_ddata,
+  global_eqn_number);
+ 
+ //Find the number of external data
+ unsigned n_external_element_data = du_adv_diff_ddata.size();
+ 
+ //Set the size of the matrix to be returned
+ const unsigned n_dim=this->dim();
+ result.resize(n_dim,n_external_element_data);
+
+ // Temperature-dependent body force:
+ for (unsigned i=0;i<n_dim;i++)
+  {
+   //Loop over the external data
+   for(unsigned n=0;n<n_external_element_data;n++)
+    {
+     result(i,n) = -gravity[i]*du_adv_diff_ddata[n]*ra();
+    }
+  }
+ 
+} // end_of_get_dbody_force
+
+}
+
+#endif

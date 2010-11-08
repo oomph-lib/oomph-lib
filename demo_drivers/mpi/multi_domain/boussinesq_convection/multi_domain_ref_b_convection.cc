@@ -28,10 +28,14 @@
 //Driver for a multi-physics problem that couples a Navier--Stokes
 //mesh to an advection diffusion mesh, giving Boussinesq convection
 
-//Oomph-lib headers and derived elements are in a separate header file
-#include "../../../multi_physics/boussinesq_convection/multi_domain_boussinesq_elements.h"
+//Oomph-lib headers, we require the generic, advection-diffusion,
+//and navier-stokes elements.
+#include "generic.h"
+#include "advection_diffusion.h"
+#include "navier_stokes.h"
+#include "multi_physics.h"
 
-// Both meshes are the standard rectangular quadmesh
+/// Both meshes are the standard rectangular quadmesh
 #include "meshes/rectangular_quadmesh.h"
 
 // Use the oomph and std namespaces 
@@ -510,12 +514,17 @@ int main(int argc, char **argv)
  // Set the direction of gravity
  Global_Physical_Variables::Direction_of_gravity[0] = 0.0;
  Global_Physical_Variables::Direction_of_gravity[1] = -1.0;
-
+ 
  // Create the problem with 2D nine-node refineable elements.
  RefineableConvectionProblem<
-  RefineableQCrouzeixRaviartBoussinesqElement<2>,
-  RefineableQAdvectionDiffusionBoussinesqElement<2> > problem;
- 
+ RefineableNavierStokesBoussinesqElement<
+ RefineableQCrouzeixRaviartElement<2>,
+  RefineableQAdvectionDiffusionElement<2,3> > ,
+  RefineableAdvectionDiffusionBoussinesqElement<
+  RefineableQAdvectionDiffusionElement<2,3>,
+  RefineableQCrouzeixRaviartElement<2> >
+  > problem;
+
  // Apply a perturbation to the upper boundary condition to
  // force the solution into the symmetry-broken state.
  problem.use_imperfection() = true;

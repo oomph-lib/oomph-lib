@@ -208,6 +208,10 @@ namespace oomph
 
   public:
 
+ // hierher needed (?) during load balancing -- this is still subject
+ // to a sanity check and can hopefully be removed/renamed
+ virtual void attach_and_detach_face_elements_with_new_dofs(){}
+
  /// \short Function to turn on analytic calculation of the parameter
  /// derivatives in continuation and bifurcation detection problems
  inline void set_analytic_dparameter(double* const &parameter_pt)
@@ -998,14 +1002,13 @@ protected:
  virtual void build_mesh()
   {
    std::string error_message =
-    "You have likely reached this error from Problem::load_balance()\n";
+    "You are likely to have reached this error from Problem::load_balance()\n";
    error_message +=
     "The build_mesh() function is problem-specific and must be supplied:\n";
    error_message +=
     "Please write your own in your Problem class, ensuring that\n";
    error_message +=
     "any (sub)meshes are built before calling Problem::build_global_mesh().\n";
-   
    throw OomphLibError(error_message,
                        "Problem::build_mesh(...)",
                        OOMPH_EXCEPTION_LOCATION);

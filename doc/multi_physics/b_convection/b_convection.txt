@@ -403,20 +403,20 @@ possible. This may be achieved by the following straightforward steps:
 .
 That's all! Here is the implementation:
 
-\dontinclude boussinesq_convection.cc
+\dontinclude boussinesq_elements.h
 \skipline class definition
 \until virtual QCrouzeixRaviart
 
 The class contains a single new physical parameter, the Rayleigh number, as
 usual referenced  by a pointer to a double precision datum,
-\dontinclude boussinesq_convection.cc
 
+\dontinclude boussinesq_elements.h
 \skipline Rayleigh
 \until Ra_pt
 
 with suitable access functions.
 
-\dontinclude boussinesq_convection.cc
+\dontinclude boussinesq_elements.h
 \skipline Access
 \until ra_pt
 
@@ -425,7 +425,7 @@ The constructor calls the constructors of the component classes
 the value of the Rayleigh number to zero, via a static default
 parameter value.
 
-\dontinclude boussinesq_convection.cc
+\dontinclude boussinesq_elements.h
 \skipline Constructor
 \until } 
 
@@ -434,7 +434,7 @@ because the new element will store \c DIM+1 unknowns at each node: \c
 DIM fluid velocity components and the value of the temperature,
 as shown in the sketch above.
 
-\dontinclude boussinesq_convection.cc
+\dontinclude boussinesq_elements.h
 \skipline The required
 \until QCrouzeix 
 
@@ -457,7 +457,7 @@ class to read out the position (index) at which the advected variable
 (the temperature) is stored. That function is now overloaded in our 
 multi-physics element:
 
-\dontinclude boussinesq_convection.cc
+\dontinclude boussinesq_elements.h
 \skipline Overload the index
 \until }
 
@@ -469,11 +469,11 @@ achieved by overloading the two functions \c get_wind_adv_diff(), used
 in the advection-diffusion equations and \c get_body_force_nst(), used in
 the Navier--Stokes equations
  
-\dontinclude boussinesq_convection.cc
+\dontinclude boussinesq_elements.h
 \skipline Overload the wind
 \until }
 
-\dontinclude boussinesq_convection.cc
+\dontinclude boussinesq_elements.h
 \skipline Overload the body force
 \until }
 
@@ -481,7 +481,7 @@ The elemental residual vector is composed of the residuals from the
 two single-physics elements and we simply call the underlying
 functions for each element in turn.
 
-\dontinclude boussinesq_convection.cc
+\dontinclude boussinesq_elements.h
 \skipline Calculate the element
 \until }
 
@@ -490,13 +490,14 @@ the element's combined residual vector, using the
 default implementation of the \c fill_in_contribution_to_jacobian(...)
 function in the \c FiniteElement base class:
 
-\dontinclude boussinesq_convection.cc
+\dontinclude boussinesq_elements.h
 \skipline Compute the element's residual vector and the Jacobian matrix
 \until }
 
 Finally, we overload the output function to print the fluid
 velocities, the fluid pressure and the temperature.
-\dontinclude boussinesq_convection.cc
+
+\dontinclude boussinesq_elements.h
 \skipline Start of output function
 \until End of output function
 
@@ -682,7 +683,7 @@ velocities, the fluid pressure and the temperature.
 ../../../../
 demo_drivers/multi_physics/boussinesq_convection/
 ">
-demo_drivers/multi_phsyics/boussinesq_convection/
+demo_drivers/multi_physics/boussinesq_convection/
 </A>
 </CENTER>\n
 - The driver code is: \n\n
@@ -693,6 +694,12 @@ demo_drivers/multi_physics/boussinesq_convection/boussinesq_convection.cc
 ">
 demo_drivers/multi_physics/boussinesq_convection/boussinesq_convection.cc
 </A>
+</CENTER>
+\n
+- The source code for the elements is in: \n\n
+<CENTER>
+<A HREF="../../../../src/multi_physics/boussinesq_elements.h">
+src/multi_physics/boussinesq_elements.h</A>
 </CENTER>
 .
 

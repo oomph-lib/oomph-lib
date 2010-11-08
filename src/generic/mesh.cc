@@ -2252,7 +2252,7 @@ void Mesh::distribute(OomphCommunicator* comm_pt,
  // This procedure needs to be repeated to catch elements which may
  // be missed the first time round but which contain nodes from this process
  
- double t_start=clock();
+ //double t_start=clock();
  
  bool elements_retained=true;
  int myi=1;
@@ -2452,7 +2452,7 @@ void Mesh::distribute(OomphCommunicator* comm_pt,
   } // end of while(elements_retained)
  
  
- double elapsed_time=double(clock()-t_start)/CLOCKS_PER_SEC; 
+// double elapsed_time=double(clock()-t_start)/CLOCKS_PER_SEC; 
 //  oomph_info << "Time for while loop: " 
 //             << elapsed_time << std::endl;
  
@@ -3971,13 +3971,15 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
                    error = sqrt(error);
 
                    if (error>max_error) {max_error=error;}
-                   if (error>0.0)
+                   double tol=1.0e-12;
+                   if (error>tol)
                     {
                      // Report error. NOTE: ERROR IS THROWN BELOW ONCE 
                      // ALL THIS HAS BEEN PROCESSED.
                      oomph_info
                       << "Discrepancy between nodal coordinates of halo(ed)"
-                      << "element.\n  Error: " << error << "\n";
+                      << "element larger than tolerance (" << tol
+                      <<")\n  Error: " << error << "\n";
                      oomph_info
                       << "Domain with non-halo (i.e. haloed) elem: " 
                       << dd << "\n";

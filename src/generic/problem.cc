@@ -11668,7 +11668,6 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
      rebuild_global_mesh();
     }
    
-
    // Now document actual distribution of elements in the order in which
    // they appear in the non-distributed base mesh: Reconstruct
    // from the non-halo elements that are still alive on each processor.
@@ -11789,6 +11788,34 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
                 << t_refine-t_distribute << std::endl;
     }
 
+
+
+   // hierher This is subtle: We've currently stripped out the
+   // face elements because they can't be refined. Any data
+   // they introduce is stored at the (resized) nodes in the bulk
+   // (btw: unless they have internal data in which case we're
+   // screwed anyway) and is therefore moved to the new mesh
+   // automatically (even if it's not actually used by anyone
+   // until the (new) face elements are re-attached by the
+   // call to actions_after_distribute() below). The trouble is
+   // that, following the refinement, the newly created bulk nodes
+   // that will soon support a not-yet-attached face element
+   // have not yet been resized, so the number of values doesn't
+   // match that in the original mesh (from which the values
+   // are extracted before load balancing). This empty virtual
+   // fct allows the user to resize all nodes by attaching and
+   // immediately detaching face elements that introduce new 
+   // nodal values. So far so good -- the trouble is how to make sure
+   // the user knows about this function and that he/she has
+   // to overload it? (Remember that nobody reads tutorials
+   // and the name doesn't follow the usual self-explanatory 
+   // actions_before/after pattern. Note: calling both 
+   // actions_after_distribute() and actions_before_distribute() here 
+   // is not only potentially expensive but won't always work because
+   // it may do other things that we don't want to happen here
+   // (The load-balanced Turek flag certainly breaks if we try!)
+   attach_and_detach_face_elements_with_new_dofs();
+
    // Copy the stored values in each root from the old mesh into the new mesh
    copy_stored_values_into_new_mesh_helper(double_values_on_each_root,
                                            unsigned_values_on_each_root);
@@ -11801,7 +11828,6 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
      oomph_info << "CPU for load balancing: "
                 << t_copy_solution-t_start << std::endl;
     }
-
 
    // Do actions after distribution
    actions_after_distribute();
@@ -11883,6 +11909,8 @@ void Problem::work_out_partition_and_refinement_for_root_elements_helper
          // hierher check done
          Node* nod_pt=fe_pt->node_pt(j);
          
+         //hierher todo: rename this to n_hist!
+
          // Number of history values
          unsigned n_prev=1;
          if (nod_pt->time_stepper_pt()!=0)
@@ -11891,9 +11919,15 @@ void Problem::work_out_partition_and_refinement_for_root_elements_helper
           }
          unsigned_values_on_this_leaf.push_back(n_prev);
          count_unsigned_values_on_this_leaf++;
+
+         // hierher todo: don't actually need the unsigneds
+         // (unless we're in paranoid mode) as things should
+         // match automatically.
          
          // History values
          unsigned n_val=nod_pt->nvalue();
+         unsigned_values_on_this_leaf.push_back(n_val);
+         count_unsigned_values_on_this_leaf++;
          for (unsigned i_val=0;i_val<n_val;i_val++)
           {
            for (unsigned t=0;t<n_prev;t++)
@@ -11903,6 +11937,8 @@ void Problem::work_out_partition_and_refinement_for_root_elements_helper
             }
           }
          
+         // hierher positional timestepper instead!
+
          // History positions
          unsigned n_dim=nod_pt->ndim();
          for (unsigned i_dim=0;i_dim<n_dim;i_dim++)
@@ -11914,6 +11950,8 @@ void Problem::work_out_partition_and_refinement_for_root_elements_helper
             }
           }
          
+         // hierher use the timestepper of the variable position data instead
+
          // Solid history values
          SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
          if (solid_nod_pt!=0)
@@ -12380,6 +12418,7 @@ void Problem::work_out_partition_and_refinement_for_root_elements_helper
    element_partition[el_no]=new_domain_for_root[ee];
 
    // How many double values are there on this root?
+   // hierher oh my god! resize and allocate directly!
    unsigned n_doubles=number_of_double_values[ee];
    for (unsigned n=0;n<n_doubles;n++)
     {
@@ -12655,13 +12694,46 @@ void Problem::copy_stored_values_into_new_mesh_helper
            for (unsigned j=0;j<n_node;j++)
             {
              Node* nod_pt=ref_el_pt->node_pt(j);
+
              // Number of history values
              unsigned n_prev=unsigned_values_on_each_root[el_no]
               [count_unsigned_values_on_this_root];
              count_unsigned_values_on_this_root++;
 
+             // Number of actual history values
+             unsigned n_prev_actual=1;
+             if (nod_pt->time_stepper_pt()!=0)
+              {
+               n_prev_actual=nod_pt->time_stepper_pt()->ntstorage();
+              }
+
              // History values
-             unsigned n_val=nod_pt->nvalue();
+             unsigned n_val=unsigned_values_on_each_root[el_no]
+              [count_unsigned_values_on_this_root];
+             count_unsigned_values_on_this_root++;
+
+
+             // hierher This and all the other unsigneds are actually
+             // only needed for sanity checking in paranoid mode.
+             unsigned n_val_actual=nod_pt->nvalue();
+
+#ifdef PARANOID
+             if (n_val!=n_val_actual)
+              {
+               std::ostringstream error_message;
+               error_message << "nval: " << n_val << " " 
+                            << n_val_actual<< std::endl 
+                             << "Error nval!=n_val_actual at "
+                             << nod_pt->x(0) << " "
+                             << nod_pt->x(1) << " "
+                             << nod_pt->x(2) << "\n ";
+               throw OomphLibError(
+                error_message.str(),
+                "Problem::copy_stored_values_into_new_mesh_helper()",
+                OOMPH_EXCEPTION_LOCATION);
+              }
+#endif
+
              for (unsigned i_val=0;i_val<n_val;i_val++)
               {
                for (unsigned t=0;t<n_prev;t++)

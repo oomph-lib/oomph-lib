@@ -156,7 +156,7 @@ version of the problem</a> we create the refineable element
 \c RefineableQCrouzeixRaviartElement and 
 \c RefineableQAdvectionDiffusionElement:
 
-\dontinclude refineable_b_convection.cc
+\dontinclude boussinesq_elements.h
 \skipline start_element_class
 \until {
 
@@ -197,7 +197,7 @@ overloaded to return all the flux terms associated with
 both the velocity and temperature
 fields, with the velocity field terms stored first. 
 
-\dontinclude refineable_b_convection.cc
+\dontinclude boussinesq_elements.h
 \skipline The recovery order is that of
 \until end of get_Z2_flux
 
@@ -212,7 +212,7 @@ which returns a vector of the same length as the number of flux
 components, containing the index of the compound flux to which
 the flux component contributes.
 
-\dontinclude refineable_b_convection.cc
+\dontinclude boussinesq_elements.h
 \skipline The number of compound fluxes
 \until end of get_Z2_compound_flux_indices
 
@@ -230,17 +230,17 @@ see \ref comments for a more detailed discussion of this aspect.
 The vertex nodes are defined by the underlying geometric element, but
 require a final overload to prevent ambiguities:
 
-\dontinclude refineable_b_convection.cc
+\dontinclude boussinesq_elements.h
 \skipline Number of vertex nodes
 \until }
 
-\dontinclude refineable_b_convection.cc
+\dontinclude boussinesq_elements.h
 \skipline Pointer to the j-th
 \until }
 
 The number of continuously interpolated values is \c DIM \c + \c 1:
 \c DIM velocity components and one temperature.
-\dontinclude refineable_b_convection.cc
+\dontinclude boussinesq_elements.h
 \skipline ncont_interpolated_values
 \until }
 
@@ -248,7 +248,7 @@ The two versions of the \c get_interpolated_values(...) function
 must return the continuously interpolated variables at a 
 specified position within the element:
 
-\dontinclude refineable_b_convection.cc
+\dontinclude boussinesq_elements.h
 \skipline Get the continuously interpolated
 \until end of get_interpolated_values
 
@@ -256,7 +256,7 @@ Finally, the setup and build functions must call the build functions of the
 two constituent elements. In addition, the pointer to the Rayleigh number
 must be passed to the sons after refinement.
 
-\dontinclude refineable_b_convection.cc
+\dontinclude boussinesq_elements.h
 \skipline The additional hanging
 \until end of further build
 
@@ -334,7 +334,7 @@ must be passed to the sons after refinement.
 - The source files for this tutorial are located in the directory:\n\n
 <CENTER>
 <A HREF="../../../../demo_drivers/multi_physics/boussinesq_convection/">
-demo_drivers/multi_phsyics/boussinesq_convection/
+demo_drivers/multi_physics/boussinesq_convection/
 </A>
 </CENTER>\n
 - The driver code is: \n\n
@@ -342,6 +342,12 @@ demo_drivers/multi_phsyics/boussinesq_convection/
 <A HREF="../../../../demo_drivers/multi_physics/boussinesq_convection/boussinesq_convection.cc">
 demo_drivers/multi_physics/boussinesq_convection/boussinesq_convection.cc
 </A>
+</CENTER>
+\n
+- The source code for the elements is in: \n\n
+<CENTER>
+<A HREF="../../../../src/multi_physics/boussinesq_elements.h">
+src/multi_physics/boussinesq_elements.h</A>
 </CENTER>
 .
 

@@ -328,18 +328,19 @@ Boussinesq convection problem.
 \subsection nst Upgrading the Navier-Stokes element to an ElementWithExternalElement 
 
 
-We use multiple inheritance to upgrade the existing
-\c RefineableQCrouzeixRaviartElement to a 
-\c RefineableQCrouzeixRaviartBoussinesqElement
+We use multiple inheritance to upgrade an existing refineable 
+Navier-Stokes element to a \c RefineableNavierStokesBoussinesqElement
 in which the temperature that affects the body force is given by
-an "external" advection-diffusion element. 
+an "external" advection-diffusion element. To facilitate code reuse
+we employ templating to specify the types of the Navier-Stokes and
+advection diffusion elements. 
 
 \dontinclude multi_domain_boussinesq_elements.h
 \skipline nst_bous_class
 \until
 {
 
-
+ 
 The constructor calls the constructors of the underlying elements, 
 initialises the pointer to the Rayleigh number (stored as private
 member data in the class) and sets the number of interactions to one,
@@ -375,11 +376,11 @@ set to zero and the value of the temperature at the integration point
 is obtained by casting the external element to an advection diffusion
 element and finding its interpolated field at the
 appropriate stored local coordinate. Once the temperature has been
-obtained, the
-code is identical to that in the multi-field
-\c BuoyantQCrouzeixRaviartElement. In that case, however, the
-temperature can be found from a member function because the
-interaction is internal to the element.
+obtained, the code is identical to that discussed in the
+ <a href="../../b_convection/html/index.html">tutorial for 
+the corresponding multi-field implementation</a>; in that
+implementation the temperature could be found from a member function 
+because the interaction is internal to the element.
 
 Finally, we have to compute the element's Jacobian matrix. 
 The easiest (although potentially inefficient) 
@@ -387,7 +388,7 @@ way to do this is to recycle the
 analytical computation of the derivatives of the Navier-Stokes 
 residuals with respect to the fluid degrees of
 freedom, as implemented in  
-\c RefineableQCrouzeixRaviartElement::fill_in_contribution_to_jacobian(...),
+\c NST_ELEMENT::fill_in_contribution_to_jacobian(...),
 
 \dontinclude multi_domain_boussinesq_elements.h
 \skipline Compute the element's residual vector and 
@@ -405,8 +406,9 @@ that computes the required entries in the Jacobian analytically:
 \until }
 
 
-(The driver code illustrates both approaches and employs
-the macro  \c USE_FD_FOR_DERIVATIVES_WRT_EXTERNAL_DATA
+(The code illustrates both approaches and employs
+the macro  \c 
+USE_FD_FOR_DERIVATIVES_WRT_EXTERNAL_DATA_IN_MULTI_DOMAIN_BOUSSINESQ
 to choose which one to use.)
 
 We
@@ -445,9 +447,10 @@ the "external element":
 Again, there is only one external interaction so the interaction index
 is set to zero and the external element
 must be cast to a Navier-Stokes element so that the interpolated
-velocity field can be found. The code is similar to that in the
-multi-field \c BuoyantQCrouzeixRaviartElement's \c get_wind_adv_diff()
-function, which uses internal, rather than external, interaction.
+velocity field can be found. The code is similar to that used in the
+<a href="../../b_convection/html/index.html">
+multi-field implementation</a>, which uses internal, rather than external, 
+interaction.
 
 The element's Jacobian matrix can be computed by the
 same methods discussed for the Navier-Stokes elements:
@@ -763,6 +766,11 @@ demo_drivers/multi_physics/boussinesq_convection/multi_domain_boussinesq_convect
 ">
 demo_drivers/multi_physics/boussinesq_convection/multi_domain_boussinesq_convection.cc
 </A>
+</CENTER>\n
+- The source code for the elements is in: \n\n
+<CENTER>
+<A HREF="../../../../src/multi_physics/multi_domain_boussinesq_elements.h">
+src/multi_physics/multi_domain_boussinesq_elements.h</A>
 </CENTER>
 .
 

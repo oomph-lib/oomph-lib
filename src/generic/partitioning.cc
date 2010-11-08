@@ -1141,15 +1141,21 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
   }
 
 
-// hierher
-//#ifdef PARANOID
- //if (count_non_halo!=number_of_non_halo_elements)
- {
-  oomph_info << "Non-halo counts don't match: "
-             << count_non_halo << " " << number_of_non_halo_elements
-             << std::endl;
- }
-//#endif
+
+#ifdef PARANOID
+ if (count_non_halo!=number_of_non_halo_elements)
+  {
+   std::ostringstream error_stream;
+   error_stream
+    << "Non-halo counts don't match: "
+    << count_non_halo << " " << number_of_non_halo_elements
+    << std::endl;
+   
+   throw OomphLibError(error_stream.str(),
+                       "METIS::partition_distributed_mesh()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
 
  // End timer
  cpu_end=clock();

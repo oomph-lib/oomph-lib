@@ -12,7 +12,9 @@ incl_cc_files =
 # Define the headers
 headers =  \
 fsi_preconditioners.h segregated_fsi_solver.h pseudo_elastic_preconditioner.h \
-pseudo_elastic_fsi_preconditioner.h
+pseudo_elastic_fsi_preconditioner.h multi_domain_boussinesq_elements.h \
+boussinesq_elements.h
+# old_multi_domain_boussinesq_elements.h 
 
 # Template only files. These should be included in include directory
 # but should not be listed in combined header file

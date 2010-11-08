@@ -28,14 +28,15 @@
 //Driver for a multi-physics problem that couples a Navier--Stokes
 //mesh to an advection diffusion mesh, giving Boussinesq convection
 
-//Oomph-lib headers and derived elements are in a separate header file
-#include "multi_domain_boussinesq_elements.h"
+//#define USE_FD_JACOBIAN_NST_hierher
+
 
 //Oomph-lib headers, we require the generic, advection-diffusion,
 //and navier-stokes elements.
 #include "generic.h"
 #include "advection_diffusion.h"
 #include "navier_stokes.h"
+#include "multi_physics.h"
 
 // Both meshes are the standard rectangular quadmesh
 #include "meshes/rectangular_quadmesh.h"
@@ -438,10 +439,27 @@ int main(int argc, char **argv)
  Global_Physical_Variables::Direction_of_gravity[0] = 0.0;
  Global_Physical_Variables::Direction_of_gravity[1] = -1.0;
 
+#define NEW
+//#undef NEW
+#ifdef NEW
+
  //Construct our problem
- ConvectionProblem<QCrouzeixRaviartElementWithExternalElement<2>,
-  QAdvectionDiffusionElementWithExternalElement<2> > 
+ ConvectionProblem<
+ NavierStokesBoussinesqElement<QCrouzeixRaviartElement<2>,
+                               QAdvectionDiffusionElement<2,3> > ,
+  AdvectionDiffusionBoussinesqElement<QAdvectionDiffusionElement<2,3>,
+                                      QCrouzeixRaviartElement<2> >
+  > 
   problem;
+
+#else
+
+//Construct our problem
+ConvectionProblem<QCrouzeixRaviartBoussinesqElement<2>,
+ QAdvectionDiffusionBoussinesqElement<2> > 
+ problem;
+
+#endif
 
  // Apply the boundary condition at time zero
  problem.set_boundary_conditions(0.0);

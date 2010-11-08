@@ -55,7 +55,7 @@ multi_domain_boussinesq_convection_fd_LDADD = \
                 -L@libdir@ -ladvection_diffusion -lnavier_stokes  \
                 -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
 
-multi_domain_boussinesq_convection_fd_CXXFLAGS = -DUSE_FD_JACOBIAN
+multi_domain_boussinesq_convection_fd_CXXFLAGS = -DUSE_FD_JACOBIAN_NST_IN_MULTI_DOMAIN_BOUSSINESQ
 
 #----------------------------------------------------------------------
 

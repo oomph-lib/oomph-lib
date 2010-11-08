@@ -70,8 +70,7 @@ multi_domain_boussinesq_convection_LDADD = \
 
 # Sources for executable
 multi_domain_ref_b_convection_SOURCES = \
- multi_domain_ref_b_convection.cc \
- multi_domain_boussinesq_elements.h
+ multi_domain_ref_b_convection.cc 
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
@@ -84,11 +83,10 @@ multi_domain_ref_b_convection_LDADD = \
 
 # Sources for executable
 multi_domain_ref_b_convection_fd_for_external_data_SOURCES = \
- multi_domain_ref_b_convection.cc \
- multi_domain_boussinesq_elements.h
+ multi_domain_ref_b_convection.cc 
 
 multi_domain_ref_b_convection_fd_for_external_data_CXXFLAGS = \
--DUSE_FD_FOR_DERIVATIVES_WRT_EXTERNAL_DATA
+-DUSE_FD_FOR_DERIVATIVES_WRT_EXTERNAL_DATA_IN_MULTI_DOMAIN_BOUSSINESQ
 
 # Required libraries:
 # $(FLIBS) is included in case the solver involves fortran sources.
