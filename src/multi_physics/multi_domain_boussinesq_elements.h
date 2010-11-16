@@ -402,7 +402,7 @@ public:
   /// \short Output function:
   ///  Output x, y, theta at Nplot^DIM plot points
  // Start of output function
-  void output(ostream &outfile, const unsigned &nplot)
+  void output(std::ostream &outfile, const unsigned &nplot)
   {
    //vector of local coordinates
    unsigned n_dim=this->dim();
@@ -434,7 +434,7 @@ public:
 
 
  ///  Overload the standard output function with the broken default
- void output(ostream &outfile) {FiniteElement::output(outfile);}
+  void output(std::ostream &outfile) {FiniteElement::output(outfile);}
 
  /// \short C-style output function: Broken default
  void output(FILE* file_pt)
@@ -1054,7 +1054,7 @@ public:
   /// \short Output function:
   ///  Output x, y, theta at Nplot^DIM plot points
  // Start of output function
-  void output(ostream &outfile, const unsigned &nplot)
+ void output(std::ostream &outfile, const unsigned &nplot)
   {
    // Element dimension
    const unsigned n_dim=this->dim();
@@ -1088,7 +1088,7 @@ public:
 
 
  ///  Overload the standard output function with the broken default
- void output(ostream &outfile) {FiniteElement::output(outfile);}
+ void output(std::ostream &outfile) {FiniteElement::output(outfile);}
 
  /// \short C-style output function: Broken default
  void output(FILE* file_pt)

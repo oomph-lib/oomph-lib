@@ -121,12 +121,12 @@ public:
 
 
  ///  Overload the standard output function with the broken default
- void output(ostream &outfile) {FiniteElement::output(outfile);}
+ void output(std::ostream &outfile) {FiniteElement::output(outfile);}
 
  /// \short Output function:  
  ///  Output x, y, u, v, p, theta at Nplot^DIM plot points
  // Start of output function
- void output(ostream &outfile, const unsigned &nplot)
+ void output(std::ostream &outfile, const unsigned &nplot)
   {
    //vector of local coordinates
    Vector<double> s(DIM);
@@ -171,7 +171,7 @@ public:
   {FiniteElement::output(file_pt,n_plot);}
 
  /// \short Output function for an exact solution: Broken default
- void output_fct(ostream &outfile, const unsigned &Nplot,
+ void output_fct(std::ostream &outfile, const unsigned &Nplot,
                  FiniteElement::SteadyExactSolutionFctPt 
                  exact_soln_pt)
   {FiniteElement::output_fct(outfile,Nplot,exact_soln_pt);}
@@ -179,7 +179,7 @@ public:
 
  /// \short Output function for a time-dependent exact solution:
  /// Broken default.
- void output_fct(ostream &outfile, const unsigned &Nplot,
+ void output_fct(std::ostream &outfile, const unsigned &Nplot,
                  const double& time,
                  FiniteElement::UnsteadyExactSolutionFctPt 
                  exact_soln_pt)
@@ -197,7 +197,7 @@ public:
  /// Plot at a given number of plot points and compute L2 error
  /// and L2 norm of velocity solution over element
  /// Call the broken default
- void compute_error(ostream &outfile,
+ void compute_error(std::ostream &outfile,
                     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
                     const double& time,
                     double& error, double& norm)
@@ -209,7 +209,7 @@ public:
  /// Plot at a given number of plot points and compute L2 error
  /// and L2 norm of velocity solution over element
  /// Call the broken default
- void compute_error(ostream &outfile,
+ void compute_error(std::ostream &outfile,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
                     double& error, double& norm)
   {FiniteElement::compute_error(outfile,exact_soln_pt,error,norm);}
@@ -731,12 +731,12 @@ public:
 
 
  ///  Overload the standard output function with the broken default
- void output(ostream &outfile)
+ void output(std::ostream &outfile)
   {FiniteElement::output(outfile);}
 
  /// \short Output function:  
  ///  x,y,u   or    x,y,z,u at Nplot^DIM plot points
- void output(ostream &outfile, const unsigned &nplot)
+ void output(std::ostream &outfile, const unsigned &nplot)
   {
    //vector of local coordinates
    Vector<double> s(DIM);
@@ -781,7 +781,7 @@ public:
   {FiniteElement::output(file_pt,n_plot);}
 
  /// \short Output function for an exact solution: Broken default
- void output_fct(ostream &outfile, const unsigned &Nplot,
+ void output_fct(std::ostream &outfile, const unsigned &Nplot,
                  FiniteElement::SteadyExactSolutionFctPt 
                  exact_soln_pt)
   {FiniteElement::output_fct(outfile,Nplot,exact_soln_pt);}
@@ -789,7 +789,7 @@ public:
 
  /// \short Output function for a time-dependent exact solution.
  /// Broken default
- void output_fct(ostream &outfile, const unsigned &Nplot,
+ void output_fct(std::ostream &outfile, const unsigned &Nplot,
                  const double& time,
                  FiniteElement::UnsteadyExactSolutionFctPt 
                  exact_soln_pt)
@@ -990,7 +990,7 @@ public:
  /// Plot at a given number of plot points and compute L2 error
  /// and L2 norm of velocity solution over element
  /// Overload to broken default
- void compute_error(ostream &outfile,
+ void compute_error(std::ostream &outfile,
                     FiniteElement::UnsteadyExactSolutionFctPt exact_soln_pt,
                     const double& time,
                     double& error, double& norm)
@@ -1002,7 +1002,7 @@ public:
  /// Plot at a given number of plot points and compute L2 error
  /// and L2 norm of velocity solution over element
  /// Overload to broken default.
-void compute_error(ostream &outfile,
+ void compute_error(std::ostream &outfile,
                     FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
                     double& error, double& norm)
   {FiniteElement::
