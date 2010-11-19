@@ -10,7 +10,8 @@ unstructured_adaptive_ALE_SOURCES = unstructured_adaptive_ALE.cc
 # Required libraries: 
 # $(FLIBS) is included in case the solver involves fortran sources.
 unstructured_adaptive_ALE_LDADD = -L@libdir@ \
-                       -lsolid -lconstitutive -lnavier_stokes -lgeneric \
+                       -lsolid -lconstitutive -lnavier_stokes -lrigid_body \
+                      -lgeneric \
                        $(EXTERNAL_LIBS) $(FLIBS)
 
 EXTRA_DIST+=big_moving_block.mcr  check_navier_stokes_projection.mcr  \

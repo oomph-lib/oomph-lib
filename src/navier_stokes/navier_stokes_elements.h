@@ -2689,6 +2689,19 @@ public virtual QElement<1,3>
  };
 
 
+//=======================================================================
+/// Face geometry of the Face Geometry for element is the same as 
+/// that for the underlying wrapped element
+//=======================================================================
+ template<class ELEMENT>
+ class FaceGeometry<FaceGeometry<ProjectableTaylorHoodElement<ELEMENT> > >
+  : public virtual FaceGeometry<FaceGeometry<ELEMENT> >
+ {
+ public:
+  FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT> >() {}
+ };
+
+
 }
 
 #endif

@@ -33,13 +33,15 @@
 #include "../generic/map_matrix.h"
 #include "../generic/multi_domain.h"
 #include "../generic/projection.h"
-
+#include "../generic/face_element_as_geometric_object.h"
+#include "../rigid_body/rigid_body_elements.h"
 
 #include <iostream>
 using namespace std;
 
 namespace oomph
 {
+
 
 //======================================================================
 /// Build with the help of the scaffold mesh coming  
@@ -689,6 +691,12 @@ namespace oomph
     FiniteElement* first_el_pt=*ordered_el_pt.begin();
     Node* first_node_pt=first_el_pt->node_pt(0);
     if (is_inverted[first_el_pt]) first_node_pt=first_el_pt->node_pt(nnod-1);  
+
+    //Last node
+    FiniteElement* last_el_pt = ordered_el_pt.back();
+    Node* last_node_pt = last_el_pt->node_pt(nnod-1);
+    if (is_inverted[last_el_pt]) last_node_pt=last_el_pt->node_pt(0);  
+
      
     // Coordinates of left node
     double x_left=first_node_pt->x(0);
@@ -703,7 +711,6 @@ namespace oomph
     // Lexicographically bottom left node
     std::set<Node*> all_nodes_pt;
     all_nodes_pt.insert(first_node_pt);
-    Node* bottom_left_node_pt=first_node_pt;
 
     // Now loop over nodes in order
     for (std::list<FiniteElement*>::iterator it=ordered_el_pt.begin();
@@ -745,50 +752,176 @@ namespace oomph
         // Get lexicographically bottom left node but only 
         // use vertex nodes as candidates
         all_nodes_pt.insert(nod_pt);
-        if (j==(nnod-1))
+       }
+     }
+
+    //The nodes have been assigned arc-length coordinates
+    //from one end or the other of the connected segement.
+
+    //If the boundary has a geometric object representation then
+    //scale the coordinates to match those of the geometric object
+    GeomObject* const geom_object_pt = this->boundary_geom_object_pt(b);
+    if(geom_object_pt!=0)
+     {
+      oomph_info << "A geometric_object is set up for boundary " << b << "\n";
+      Vector<double> bound_coord_limits = this->boundary_coordinate_limits(b);
+      
+      //Get the position of the ends of the geometric object
+      Vector<double> zeta(1);
+      Vector<double> first_geom_object_location(2);
+      Vector<double> last_geom_object_location(2);
+      zeta[0] = bound_coord_limits[0];
+      geom_object_pt->position(zeta,first_geom_object_location);
+      zeta[0] = bound_coord_limits[1];
+      geom_object_pt->position(zeta,last_geom_object_location);
+
+      //Calculate the errors in position between the first and last nodes
+      //and the endpoints of the geometric object
+      double error=0.0;
+      double tmp_error = 0.0;
+      for(unsigned i=0;i<2;i++)
+       {
+        const double dist =
+         first_geom_object_location[i] - first_node_pt->x(i); 
+        tmp_error += dist*dist;
+       }
+      error += sqrt(tmp_error);
+      tmp_error=0.0;
+      for(unsigned i=0;i<2;i++)
+       {
+        const double dist  =
+         last_geom_object_location[i] - last_node_pt->x(i);
+        tmp_error += dist*dist;
+       }
+      error += sqrt(tmp_error);
+      
+      //Calculate the errors in position between the first and last nodes
+      //and the endpoints of the geometric object if reversed
+      double rev_error=0.0;
+      tmp_error = 0.0;
+      for(unsigned i=0;i<2;i++)
+       {
+        const double dist  =
+         first_geom_object_location[i] - last_node_pt->x(i);
+        tmp_error += dist*dist;
+       }
+      rev_error += sqrt(tmp_error);
+      tmp_error=0.0;
+      for(unsigned i=0;i<2;i++)
+       {
+        const double dist  =
+         last_geom_object_location[i] - first_node_pt->x(i);
+        tmp_error += dist*dist;
+       }
+      rev_error += sqrt(tmp_error);
+      
+      //If the (normal) error is small than reversed then we have the 
+      //coordinate direction correct.
+      //If not then we must reverse it
+      if(error < rev_error)
+       {
+        oomph_info << "Coordinates are aligned\n";
+       }
+      else if(error > rev_error)
+       {
+        oomph_info << "Coordinates are reversed\n";
+        //Reverse the boundary coordinates
+        double temp = bound_coord_limits[0];
+        bound_coord_limits[0] = bound_coord_limits[1];
+        bound_coord_limits[1] = temp;
+       }
+      else
+       {
+        std::ostringstream error_stream;
+        error_stream << "Something very strange has happened.\n" << 
+         "The error between the endpoints of the geometric object\n" <<
+         "and the first and last nodes on the boundary is the same\n" <<
+         "irrespective of the direction of the coordinate.\n" << 
+         "This probably means that things are way off.\n" << 
+         "The errors are " << error  << " and " << rev_error << "\n";
+        throw OomphLibError(error_stream.str(),
+                            "TriangleMesh::setup_boundary_coordinates()",
+                            OOMPH_EXCEPTION_LOCATION);
+       }
+
+      //Get the total arclength of the edge
+      last_node_pt->get_coordinates_on_boundary(b,zeta);
+      double zeta_old_range = zeta[0]; 
+      double zeta_new_range = bound_coord_limits[1] - bound_coord_limits[0];
+
+      //Now scale the coordinates accordingly
+      for (std::set<Node*>::iterator it=all_nodes_pt.begin();
+           it!=all_nodes_pt.end();it++)
+       {    
+        Node* nod_pt=(*it);
+        nod_pt->get_coordinates_on_boundary(b,zeta);
+        zeta[0] = bound_coord_limits[0] + 
+         (zeta_new_range/zeta_old_range)*zeta[0];
+        nod_pt->set_coordinates_on_boundary(b,zeta);
+       }
+     }
+    else
+     {
+      oomph_info << "No geometric object for boundary " << b << "\n";
+      
+      
+      //Only use end points of the whole segment and pick the bottom left
+      //node
+      Node* bottom_left_node_pt=first_node_pt;
+      if (last_node_pt->x(1)<bottom_left_node_pt->x(1))
+       {
+        bottom_left_node_pt=last_node_pt;
+       }
+      else if (last_node_pt->x(1)==bottom_left_node_pt->x(1))
+       {
+        if (last_node_pt->x(0)<bottom_left_node_pt->x(0))            
          {
-          if (nod_pt->x(1)<bottom_left_node_pt->x(1))
-           {
-            bottom_left_node_pt=nod_pt;
-           }
-          else if (nod_pt->x(1)==bottom_left_node_pt->x(1))
-           {
-            if (nod_pt->x(0)<bottom_left_node_pt->x(0))            
-             {
-              bottom_left_node_pt=nod_pt;
-             }
-           }
+          bottom_left_node_pt=last_node_pt;
          }
        }
-     }
-
-    // Now adjust boundary coordinate so that the bottom left node
-    // has a boundary coordinate of zero and that zeta increases
-    // away from that point
-    bottom_left_node_pt->get_coordinates_on_boundary(b,zeta);
-    double zeta_ref=zeta[0];
-    for (std::set<Node*>::iterator it=all_nodes_pt.begin();
-         it!=all_nodes_pt.end();it++)
-     {    
-      Node* nod_pt=(*it);
-      nod_pt->get_coordinates_on_boundary(b,zeta);
-      zeta[0]-=zeta_ref;
-      if (zeta[0]<0.0)
-       {
-        zeta[0]=abs(zeta[0]);
+      
+      
+      // Now adjust boundary coordinate so that the bottom left node
+      // has a boundary coordinate of zero and that zeta increases
+      // away from that point
+      bottom_left_node_pt->get_coordinates_on_boundary(b,zeta);
+      double zeta_ref = zeta[0];
+      double zeta_max = 0.0;
+      for (std::set<Node*>::iterator it=all_nodes_pt.begin();
+           it!=all_nodes_pt.end();it++)
+       {    
+        Node* nod_pt=(*it);
+        nod_pt->get_coordinates_on_boundary(b,zeta);
+        zeta[0]-=zeta_ref;
+        //If direction is reversed, then take absolute value
+        if(zeta[0] < 0.0)
+         {
+          zeta[0] = std::abs(zeta[0]);
+         }
+        if(zeta[0] > zeta_max) {zeta_max = zeta[0];}
+        nod_pt->set_coordinates_on_boundary(b,zeta);
        }
-      nod_pt->set_coordinates_on_boundary(b,zeta);
-     }
 
+      //Scale all surface coordinates by the max
+      for (std::set<Node*>::iterator it=all_nodes_pt.begin();
+           it!=all_nodes_pt.end();it++)
+       {    
+        Node* nod_pt=(*it);
+        nod_pt->get_coordinates_on_boundary(b,zeta);
+        zeta[0] /= zeta_max;
+        nod_pt->set_coordinates_on_boundary(b,zeta);
+       }
+     }
+      
     // Cleanup
     for(unsigned e=0;e<nel;e++)
      {
       delete face_el_pt[e];
       face_el_pt[e]=0;
      }  
- 
+    
    }
-
+  
   // Indicate that boundary coordinate has been set up
   Boundary_coordinate_exists[b]=true;
  
@@ -943,7 +1076,7 @@ namespace oomph
 
       // Store the marker list of the segments
       // The count_sub_bound is used, instead of the idpolyline
-      triangulate_io.segmentmarkerlist[count_tri/2]=count_sub_bound;
+      triangulate_io.segmentmarkerlist[count_tri/2]= count_sub_bound;
       
       // -1 because of the different enumeration between oomph_lib mesh
       // and the TriangulateIO structure!
@@ -957,7 +1090,7 @@ namespace oomph
       count_tri+=2;
       n_boundglobalseg++;
      }
-    
+
     // Add sub boundary vector to the map
     Sub_boundary_id[idpolyline]=sub_bound_id;
    }
@@ -995,7 +1128,8 @@ namespace oomph
       unsigned count_bound_segment=0;
       
       // Initialize the vector of sub boundary
-      Vector<unsigned>sub_bound_id(n_polylinevertices);
+      //Vector<unsigned>sub_bound_id(n_polylinevertices);
+      Vector<unsigned>sub_bound_id(1);
 
       // Store the coordinates for each points
       for(unsigned count_vertices=0;count_vertices<n_polylinevertices;
@@ -1025,12 +1159,13 @@ namespace oomph
 
         // Store the marker list of the segments
         // Check if the boundary id has been provided
-        triangulate_io.segmentmarkerlist[count_tri/2]=count_sub_bound; 
+        triangulate_io.segmentmarkerlist[count_tri/2]= idpolyline+1;
+       //count_sub_bound; 
         
         // -1 because of the different enumeration between oomph_lib mesh
         // and the TriangulateIO structure!
         // Build the vector of sub boundary id for the boundary "idpolyline"
-        sub_bound_id[count_bound_segment]=count_sub_bound-1;
+        //sub_bound_id[count_bound_segment]=count_sub_bound-1;
         
         // Increment counter
         count_bound_segment++;
@@ -1038,6 +1173,10 @@ namespace oomph
         count_tri+=2;
         n_boundglobalseg++;
        }
+
+      
+      //Make the polyline id the single id assigned by the "user"
+      sub_bound_id[0] = idpolyline;
       
       // Add sub boundary vector to the map
       Sub_boundary_id[idpolyline]=sub_bound_id;
@@ -1652,29 +1791,28 @@ namespace oomph
      }
 
 
-    // Update the holes' reference configuration (vertices and position
-    // of the point in the hole)
+    //Generate a new 1D mesh representation of the inner hole boundaries
     unsigned nhole=this->Inner_hole_pt.size();
     Vector<Vector<double> > hole_centre_coord(nhole);
-    for(unsigned ihole=0;ihole<nhole;ihole++)
-     {
-      // Reset inner hole reference configuration
-      this->Inner_hole_pt[ihole]->reset_reference_configuration();
-      
-      // Initialize Vector hole_coordinates
-      hole_centre_coord[ihole].resize(2);
-      
-      // Get the vector of hole coordinates
-      hole_centre_coord[ihole]=this->Inner_hole_pt[ihole]->hole_coordinate();
-     }
-    
-    // Update the TriangulateIO structure according to the new nodes elastic 
-    // displacement.
-    this->update_triangulateio(hole_centre_coord);
+    this->surface_remesh_for_inner_hole_boundaries(hole_centre_coord);
+    // Update the TriangulateIO structure according
+    //this->update_triangulateio(hole_centre_coord);
     
     // Get the updated TriangulateIO object
-    TriangulateIO tmp_triangulateio=this->triangulateio_representation();
+    //TriangulateIO tmp_triangulateio=this->triangulateio_representation();
 
+    //If there is not a geometric object associated with the boundary
+    //the reset the boundary coordinates so that the lengths are consistent
+    //in the new mesh and the old mesh.
+    const  unsigned n_boundary = this->nboundary();
+    for(unsigned b=0;b<n_boundary;++b)
+     {
+      if(this->boundary_geom_object_pt(b)==0)
+       {
+        this->setup_boundary_coordinates(b);
+       }
+     }
+    
     // Are we dealing with a solid mesh?
     SolidMesh* solid_mesh_pt=dynamic_cast<SolidMesh*>(this);
 
@@ -1863,6 +2001,37 @@ namespace oomph
       
      } // end of iteration
     
+    //Pass the boundary  geometric objects to the new mesh 
+    //and reset the boundary coordinates if there is
+    //a geometric object associated with the boundary
+    new_mesh_pt->boundary_geom_object_pt() = 
+     this->boundary_geom_object_pt();
+    new_mesh_pt->boundary_coordinate_limits() = 
+     this->boundary_coordinate_limits();
+    for (unsigned b=0;b<n_boundary;b++)
+     {
+      if(new_mesh_pt->boundary_geom_object_pt(b)!=0)
+       {
+        new_mesh_pt->setup_boundary_coordinates(b);
+       }
+     }
+    
+    //Output the mesh before any snapping takes place
+    //new_mesh_pt->output("pre_mesh_nodes_snapped.dat");
+    
+    //Move the nodes on the new boundary onto the 
+    //old curvilinear boundary
+    //If the boundary is straight this will do precisely nothing
+    //but will be somewhat inefficient
+    for(unsigned b=0;b<n_boundary;b++)
+     {
+      this->snap_nodes_onto_boundary(new_mesh_pt,b);
+     }
+    
+    //Output the mesh after the snapping has taken place
+    //new_mesh_pt->output("mesh_nodes_snapped.dat");
+
+
     
     // Project current solution onto new mesh
     //---------------------------------------
@@ -1970,6 +2139,710 @@ namespace oomph
     Nrefined=0;
     Nunrefined=0;
    }
+ }
+
+
+//======================================================================
+/// Update the PSLG that define the inner boundaries of the mesh.
+///
+//======================================================================
+ template <class ELEMENT>
+ void RefineableTriangleMesh<ELEMENT>::
+ surface_remesh_for_inner_hole_boundaries(Vector<Vector<double> >
+                                          &hole_centre_coord)
+ {
+  unsigned n_hole = hole_centre_coord.size();
+  for(unsigned ihole=0;ihole<n_hole;ihole++)
+   {
+    //Can I cast it
+    RigidBodyTriangleMeshHolePolygon* poly_pt
+     = dynamic_cast<RigidBodyTriangleMeshHolePolygon*>
+     (this->Inner_hole_pt[ihole]);
+
+    //If it's a polygon, this is easy!
+    if(poly_pt!=0)
+     {
+      poly_pt->reset_reference_configuration();
+      
+      // Initialize Vector hole_coordinates
+      hole_centre_coord[ihole].resize(2);
+      
+      // Get the vector of hole coordinates
+      hole_centre_coord[ihole]=this->Inner_hole_pt[ihole]->hole_coordinate();
+     }
+    //Otherwise we have to work much harder
+    else
+     {
+      Vector<double> vertex_coord(3);
+      Vector<double> bound_left(1);
+      Vector<double> bound_right(1);
+
+      //Loop over the number of polylines
+      unsigned n_polyline = this->Inner_hole_pt[ihole]->npolyline();
+      Vector<TriangleMeshPolyLine*> hole_segment_pt(n_polyline);
+      for(unsigned p=0;p<n_polyline;p++)
+       {
+        //Set of coordinates that will be placed on the boundary
+        std::set<Vector<double> > vertex_nodes;
+        
+        //Get the boundary id of each polyline
+        unsigned bound = 
+         this->Inner_hole_pt[ihole]->polyline_pt(p)->boundary_id();
+        
+        // Create a face mesh adjacent to the fluid mesh's b-th boundary. 
+        // The face mesh consists of FaceElements that may also be 
+        // interpreted as GeomObjects
+        Mesh* face_mesh_pt = new Mesh;
+        this->template build_face_mesh
+         <ELEMENT,FaceElementAsGeomObject>(bound, face_mesh_pt);
+        
+        // Loop over these new face elements and tell them the boundary number
+        // from the bulk fluid mesh -- this is required to they can
+        // get access to the boundary coordinates!
+        unsigned n_face_element = face_mesh_pt->nelement();
+        for(unsigned e=0;e<n_face_element;e++)
+         {
+          //Cast the element pointer to the correct thing!
+           FaceElementAsGeomObject<ELEMENT>* el_pt=
+            dynamic_cast<FaceElementAsGeomObject<ELEMENT>*>
+            (face_mesh_pt->element_pt(e));
+           
+           // Set bulk boundary number
+           el_pt->set_boundary_number_in_bulk_mesh(bound);
+         }
+      
+        // Now sort the elements based on the boundary coordinates.
+        // This may allow a faster implementation of the locate_zeta
+        // function for the MeshAsGeomObject representation of this
+        // mesh, but also creates a unique ordering of the elements
+        //std::sort(face_mesh_pt->element_pt().begin(),
+        //          face_mesh_pt->element_pt().end(),
+        //          FSI_functions::CompareBoundaryCoordinate<ELEMENT>());
+        
+        
+        //Now we have the face mesh loop over the face elements and 
+        //print out the end points
+        for(unsigned e=0;e<n_face_element;++e)
+         {
+          unsigned n_node = face_mesh_pt->finite_element_pt(e)->nnode();
+          FiniteElement* el_pt = face_mesh_pt->finite_element_pt(e);
+          
+          //Add the left-hand node to the list
+          el_pt->node_pt(0)
+           ->get_coordinates_on_boundary(bound,bound_left);
+          vertex_coord[0] = bound_left[0];
+          for(unsigned i=0;i<2;i++)
+           {
+            vertex_coord[i+1] = el_pt->node_pt(0)->x(i);
+           }
+          
+          vertex_nodes.insert(vertex_coord);
+          
+          //Add the right-hand nodes to the list
+          el_pt->node_pt(n_node-1)
+           ->get_coordinates_on_boundary(bound,bound_right);
+          vertex_coord[0] = bound_right[0];
+          for(unsigned i=0;i<2;i++)
+           {
+            vertex_coord[i+1] = el_pt->node_pt(n_node-1)->x(i);
+           }
+          
+          vertex_nodes.insert(vertex_coord);
+          
+          //Worry about bulk refinement here?
+         }
+        
+        //Delete the allocated memory for theface mesh
+        face_mesh_pt->flush_element_and_node_storage();
+        delete face_mesh_pt;
+
+        //Turn the set into a vector
+        //Firstly trim any elements below a minimum size
+        {
+         double min_length = 0.01;
+         std::set<Vector<double> > ::iterator it = vertex_nodes.begin();
+         //Get the location of the "leftmost" (first) vertex
+         Vector<double> left_vertex = *it;
+         for(++it;it!=--vertex_nodes.end();++it)
+          {
+           //What is the actual length between the "left" vertex
+           //and the current vertex
+           double length = 0.0;
+           for(unsigned i=0;i<2;i++)
+            {
+             length += pow(((*it)[i+1] - left_vertex[i+1]),2.0);
+            }
+           //If smaller than minimum delete the current vertex
+           //Need to be careful when deleting entries in a set that
+           //is being iterated over.
+           if(sqrt(length) < min_length)
+            {
+             //Say so
+             oomph_info << "Surface element too small: ";
+             oomph_info << "Removing node at " << (*it)[1] << " " << (*it)[2]
+                        << "\n";
+             //Store the current value of the iterator
+             std::set<Vector<double> >::iterator tmp_it = it;
+             //Go back to the previous entry with the loop iterator
+             --it;
+             //Erase the offending entry
+             vertex_nodes.erase(tmp_it);
+            }
+           //Otherwise, the "left" vertex becomes the current vertex
+           else
+            {
+             left_vertex = *it;
+            }
+          }
+        }
+        
+        unsigned n_poly_vertex = vertex_nodes.size();
+        Vector<Vector<double> > vector_vertex_node(n_poly_vertex);
+        unsigned count=0;
+        for(std::set<Vector<double> >::iterator it = vertex_nodes.begin();
+            it!=vertex_nodes.end();++it)
+         {
+          vector_vertex_node[count].resize(2);
+          vector_vertex_node[count][0] = (*it)[1];
+          vector_vertex_node[count][1] = (*it)[2];
+          ++count;
+         }
+        
+        
+        //Check whether the segments are continguous (first vertex of this
+        //segment is equal to last vertex of previous segment).
+        //If not, we should reverse the order of the current segment.
+        //This check only applies for segments other than the first.
+        if(p > 0)
+         {
+          //Final end point of previous line
+          Vector<double> final_vertex_of_previous_segment;
+          unsigned n_prev_vertex = 
+           this->Inner_hole_pt[ihole]->polyline_pt(p-1)->nvertex();
+           //hole_segment_pt[p-1]->nvertex();
+          final_vertex_of_previous_segment = 
+           //hole_segment_pt[p-1]->vertex_coordinate(n_prev_vertex-1);
+           this->Inner_hole_pt[ihole]->polyline_pt(p-1)->
+           vertex_coordinate(n_prev_vertex-1);
+
+          //Find the error between the final vertex of the previous
+          //line and the first vertex of the current line
+          double error = 0.0;
+          for(unsigned i=0;i<2;i++)
+           {
+            const double dist =
+             final_vertex_of_previous_segment[i] - 
+             (*vector_vertex_node.begin())[i];
+            error += dist*dist;
+           }
+          error = sqrt(error);
+          
+          //If the error is bigger than the tolerance then
+          //we probably need to reverse, but better check
+          if(error > ToleranceForVertexMismatchInPolygons::Tolerable_error)
+           {
+            //Find the error between the final vertex of the previous
+            //line and the first vertex of the current line
+            double rev_error = 0.0;
+            for(unsigned i=0;i<2;i++)
+             {
+              const double dist =
+               final_vertex_of_previous_segment[i] - 
+               (*--vector_vertex_node.end())[i];
+              rev_error += dist*dist;
+             }
+            rev_error = sqrt(rev_error);
+            
+            if(rev_error > 
+               ToleranceForVertexMismatchInPolygons::Tolerable_error)
+             {
+              std::ostringstream error_stream;
+              error_stream << 
+               "The distance between the first node of the current\n" << 
+               "line segment and either and of the previous line segment\n"
+                           <<
+               "is bigger than the desired tolerance " <<
+               ToleranceForVertexMismatchInPolygons::Tolerable_error << ".\n"
+                           << 
+               "This suggests that the polylines defining the polygonal\n" <<
+               "representation of the hole are not properly ordered.\n" <<
+               "This should have failed when first trying to construct the\n"
+                           << "polygon.\n";
+              throw OomphLibError(error_stream.str(),
+                                  "TriangleMesh::adapt()",
+                                  OOMPH_EXCEPTION_LOCATION);
+             }
+            
+            //Reverse the current vector to line up with the previous one
+            std::reverse(vector_vertex_node.begin(),vector_vertex_node.end());
+           }
+         }
+        
+        //Now update the polyline according to the new vertices
+        //Need offset because of stupid triangle
+        delete this->Inner_hole_pt[ihole]->polyline_pt(p);
+        this->Inner_hole_pt[ihole]->polyline_pt(p) = 
+         //hole_segment_pt[p] =
+         new TriangleMeshPolyLine(vector_vertex_node,bound+1);
+       }
+      //Now delete the hole and make a new one
+      //Vector<double> hole_centre = 
+      // this->Inner_hole_pt[ihole]->hole_coordinate();
+      //delete this->Inner_hole_pt[ihole];
+      //this->Inner_hole_pt[ihole] = 
+      // new TriangleMeshHolePolygon(hole_centre,hole_segment_pt);
+      
+      vertex_coord.resize(2);
+      // Initialize Vector hole_coordinates
+      hole_centre_coord[ihole].resize(2);
+      
+      //Hole centre will be found by averaging the position of 
+      //all vertex nodes
+      hole_centre_coord[ihole][0] = 0.0;
+      hole_centre_coord[ihole][1] = 0.0;
+      
+      for(unsigned p=0;p<n_polyline;p++)
+       {
+        Vector<double> poly_ave(2,0.0);
+        //How many vertices are there in the segment
+        unsigned n_vertex =
+         this->Inner_hole_pt[ihole]->polyline_pt(p)->nvertex();
+        for(unsigned v=0;v<n_vertex;v++)
+         {
+          vertex_coord = 
+           this->Inner_hole_pt[ihole]->polyline_pt(p)->vertex_coordinate(v);
+          for(unsigned i=0;i<2;i++)
+           {
+            //vertex_coord[i] = this->Hole_vertex_nodes_pt[ihole][p][v]->x(i);
+            
+            poly_ave[i] += vertex_coord[i];
+           }
+          //this->Inner_hole_pt[ihole]->polyline_pt(p)->vertex_coordinate(v)
+          // = vertex_coord;
+         }
+        
+        //Add the average polyline coordinate to the hole centre
+        for(unsigned i=0;i<2;i++)
+         {
+          hole_centre_coord[ihole][i] += poly_ave[i]/n_vertex;
+         }
+       }
+      
+      //Now average out the hole centre
+      for(unsigned i=0;i<2;i++)
+       {
+        hole_centre_coord[ihole][i] /= n_polyline;
+       }
+      
+      //Set the new hole centre 
+      this->Inner_hole_pt[ihole]->hole_coordinate() =
+       hole_centre_coord[ihole];
+     }
+   }
+ }
+
+//======================================================================
+/// Move the boundary nodes onto the boundary defined by the old mesh
+///
+//======================================================================
+ template <class ELEMENT>
+ void RefineableTriangleMesh<ELEMENT>:: snap_nodes_onto_boundary(
+  RefineableTriangleMesh<ELEMENT>* &new_mesh_pt, const unsigned &b)
+ {
+  //Firstly we set the boundary coordinates of the new nodes
+  //In case the mapping between the geometric object's intrinsic coordiante
+  //and the arc-length coordinate is nonlinear. This is only an approximation, 
+  //but it will ensure that the nodes that were input to triangle will
+  //retain exactly the same boundary coordinates and then linear interpolation
+  //is used between those values for any newly created nodes.
+
+  //Create a vector of existing boundary nodes with their boundary
+  //coordinate as the first entry so that we can use standard sort algorithms
+  Vector<double> node_coord(3);
+  Vector<double> b_coord(1);
+  const unsigned n_boundary_node = this->nboundary_node(b);
+  Vector<Vector<double> > old_boundary_node(n_boundary_node);
+  for(unsigned n=0;n<n_boundary_node;n++)
+   {
+    Node* nod_pt = this->boundary_node_pt(b,n);
+    nod_pt->get_coordinates_on_boundary(b,b_coord);
+    node_coord[0] = b_coord[0];
+    node_coord[1] = nod_pt->x(0);
+    node_coord[2] = nod_pt->x(1);
+    old_boundary_node[n] = node_coord;
+   }
+  
+  //Sort the vector
+  std::sort(old_boundary_node.begin(),old_boundary_node.end());
+
+  //Set up an equivalent ordered vector for the new nodes, based on the
+  //current coordinate which is the scaled arc-length.
+  //Also provide storage for the original node index,
+  //the mapped coordinate and a flag to indicate whether the mapped
+  //coordinate has been assigned.
+  const unsigned n_new_boundary_node = new_mesh_pt->nboundary_node(b);
+  Vector<Vector<double> > new_boundary_node(n_new_boundary_node);
+  //There will be six data associated with each node
+  node_coord.resize(6,0.0);
+  for(unsigned n=0;n<n_new_boundary_node;n++)
+   {
+    Node* nod_pt = new_mesh_pt->boundary_node_pt(b,n);
+    nod_pt->get_coordinates_on_boundary(b,b_coord);
+    node_coord[0] = b_coord[0];
+    node_coord[1] = nod_pt->x(0);
+    node_coord[2] = nod_pt->x(1);
+    node_coord[3] = n;
+    new_boundary_node[n] = node_coord;
+   }
+
+  //Sort the new boundary nodes based on their arc-length coordinate
+  std::sort(new_boundary_node.begin(),new_boundary_node.end());
+
+  //Let's check whether the coordinate has been reversed, which 
+  //could happen for free surface type problems in which the boundary
+  //coordinate is allocated based on the lower-left coordinate of the boundary
+  //at the point when the mesh is first constructed
+  /*{
+   double error=0.0;
+   double tmp_error = 0.0;
+   for(unsigned i=0;i<2;i++)
+    {
+     const double dist =
+      new_boundary_node[0][i+1] - old_boundary_node[0][i+1]; 
+     tmp_error += dist*dist;
+    }
+   error += sqrt(tmp_error);
+   tmp_error=0.0;
+   for(unsigned i=0;i<2;i++)
+    {
+     const double dist  =
+      new_boundary_node[n_new_boundary_node-1][i+1] - 
+      old_boundary_node[n_boundary_node-1][i+1];
+     tmp_error += dist*dist;
+    }
+   error += sqrt(tmp_error);
+   
+   //Calculate the errors in position between the first and last nodes
+   //and the endpoints of the geometric object if reversed
+   double rev_error=0.0;
+   tmp_error = 0.0;
+   for(unsigned i=0;i<2;i++)
+    {
+     const double dist  =
+      new_boundary_node[n_new_boundary_node-1][i+1] 
+      - old_boundary_node[0][i+1]; 
+     tmp_error += dist*dist;
+       }
+      rev_error += sqrt(tmp_error);
+      tmp_error=0.0;
+      for(unsigned i=0;i<2;i++)
+       {
+        const double dist  =
+         new_boundary_node[0][i+1] 
+         - old_boundary_node[n_boundary_node-1][i+1]; 
+        tmp_error += dist*dist;
+       }
+      rev_error += sqrt(tmp_error);
+      
+      //If the (normal) error is small than reversed then we have the 
+      //coordinate direction correct.
+      //If not then we must reverse it
+      if(error < rev_error)
+       {
+        oomph_info << "Snap Coordinates are aligned\n";
+       }
+      else if(error > rev_error)
+       {
+        oomph_info << "Snap Coordinates are reversed\n";
+        //Reverse the new boundary coordinates, which run from 0 to 1
+        for(unsigned n=0;n<n_new_boundary_node;++n)
+         {
+          new_boundary_node[n][0] = 1.0 -
+           new_boundary_node[n][0];
+         }
+        //Reverse the order
+        std::reverse(new_boundary_node.begin(),new_boundary_node.end());
+        //Resort based on the new boundary coordinates
+        //std::sort(new_boundary_node.begin(),new_boundary_node.end());
+       }
+      else
+       {
+        std::ostringstream error_stream;
+        error_stream << "Something very strange has happened.\n" << 
+         "The error between the endpoints of the old and new boundaries\n" <<
+         "is the same " <<
+         "irrespective of the direction of the coordinate.\n" << 
+         "This probably means that things are way off.\n" << 
+         "The errors are " << error  << " and " << rev_error << "\n";
+        throw OomphLibError(error_stream.str(),
+                            "TriangleMesh::snap_node_onto_boundary()",
+                            OOMPH_EXCEPTION_LOCATION);
+       }
+       }*/
+  
+  //We now have two sets of nodes ordered by a coordinate that acts in the
+  //same direction and has the same limits.
+
+  //What do we have
+  /*std::cout.precision(20);
+  for(unsigned n=0;n<n_boundary_node;++n)
+   {
+    std::cout << old_boundary_node[n][0] << " "
+              << old_boundary_node[n][1] << " "
+              << old_boundary_node[n][2] << "\n";
+   }
+  
+  for(unsigned n=0;n<n_new_boundary_node;++n)
+   {
+    std::cout << new_boundary_node[n][0] << " "
+              << new_boundary_node[n][1] << " "
+              << new_boundary_node[n][2] << "\n";
+              }*/
+
+
+  //Loop over the vector of new nodes and allocate exactly the same coordinate
+  //as the old nodes at points of coincidence
+  unsigned old_index = 0;
+  for(unsigned n=0;n<n_new_boundary_node;++n)
+   {
+    //Loop over the set of old nodes and if the x and y coordinates
+    //coincide with the new node copy accross the new boundary coordinate
+    for(unsigned m=old_index;m<n_boundary_node;++m)
+     {
+      if(
+       (std::abs(old_boundary_node[m][1] - new_boundary_node[n][1]) < 1.0e-14)
+       && 
+       (std::abs(old_boundary_node[m][2] - new_boundary_node[n][2]) < 1.0e-14))
+       {
+        //Store the boundary coordinate from the old mesh
+        new_boundary_node[n][4] = old_boundary_node[m][0];
+        //Say that it has been stored
+        new_boundary_node[n][5] = 1.0;
+        //For efficiency, we can start the iteration from here next time round
+        //because both vectors are ordered
+        old_index = m;
+        break;
+       }
+     }
+   }
+
+  //Check that the end-points have new boundary coordinates allocated
+#ifdef PARANOID
+  if((new_boundary_node[0][5]==0.0) || 
+     (new_boundary_node[n_new_boundary_node-1][5] == 0.0))
+   {
+    std::ostringstream error_stream;
+    error_stream << 
+     "New boundary coordinates not found for the first and/or last nodes\n"
+                 << 
+     "on the boundary " << b 
+                 << 
+     ". This should not happen because these limits should have been setup\n"
+                 <<
+     "in the constructor\n";
+    throw OomphLibError(error_stream.str(),
+                        "RefineableTriangleMesh::snap_nodes_onto_boundary()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  
+  //Now loop over the interior nodes again and 
+  //use linear interpolation to fill in any unassigned coordiantes
+  for(unsigned n=1;n<n_new_boundary_node-1;++n)
+   {
+    //If the new boundary coordinate has NOT been allocated
+    if(new_boundary_node[n][5]==0.0)
+     {
+      //We assume that the previous nodal value has been assigned
+      //and read out the old and new boundary coordinates
+      double zeta_old_low = new_boundary_node[n-1][0];
+      double zeta_new_low = new_boundary_node[n-1][4];
+      
+      //Loop over the nodes above the current node until 
+      //we find the next one that has been allocated
+      for(unsigned m=n+1;m<n_new_boundary_node;++m)
+       {
+        if(new_boundary_node[m][5]==1.0)
+         {
+          //Read out the old boundary coordinate
+          double zeta_old_high = new_boundary_node[m][0];
+          double zeta_new_high = new_boundary_node[m][4];
+          //Use linear interpolation to assign the new boundary coordinate
+          double frac = (new_boundary_node[n][0] - zeta_old_low)/
+           (zeta_old_high - zeta_old_low);
+          new_boundary_node[n][4] = zeta_new_low 
+           + frac*(zeta_new_high - zeta_new_low);
+          new_boundary_node[n][5] = 1.0;
+          break;
+         }
+       }
+     }
+   }
+
+  //Loop over all the nodes and set the new boundary coordinate
+  for(unsigned n=0;n<n_new_boundary_node;++n)
+   {
+    if(new_boundary_node[n][5]==0)
+     {
+      throw OomphLibError(
+       "New boundary coordinate not assigned\n",
+       "RefineableTriangleMesh::snap_nodes_onto_boundary()",
+       OOMPH_EXCEPTION_LOCATION);
+     }
+
+    //get the old coordinate
+    new_mesh_pt->boundary_node_pt(
+     b,static_cast<unsigned>(new_boundary_node[n][3]))
+     ->get_coordinates_on_boundary(b,b_coord);
+    //Set the new coordinate
+    b_coord[0] = new_boundary_node[n][4];
+    new_mesh_pt->boundary_node_pt(
+     b,static_cast<unsigned>(new_boundary_node[n][3]))
+     ->set_coordinates_on_boundary(b,b_coord);
+   }
+
+  //Now that the coordinates have been set up we can do the snapping
+
+  // Create a face mesh adjacent to the fluid mesh's b-th boundary. 
+  // The face mesh consists of FaceElements that may also be 
+  // interpreted as GeomObjects
+  Mesh* face_mesh_pt = new Mesh;
+  this->template build_face_mesh
+   <ELEMENT,FaceElementAsGeomObject>(b, face_mesh_pt);
+    
+  // Loop over these new face elements and tell them the boundary number
+  // from the bulk fluid mesh -- this is required to they can
+  // get access to the boundary coordinates!
+  unsigned n_face_element = face_mesh_pt->nelement();
+  for(unsigned e=0;e<n_face_element;e++)
+   {
+    //Cast the element pointer to the correct thing!
+    FaceElementAsGeomObject<ELEMENT>* el_pt=
+     dynamic_cast<FaceElementAsGeomObject<ELEMENT>*>
+     (face_mesh_pt->element_pt(e));
+    
+    // Set bulk boundary number
+    el_pt->set_boundary_number_in_bulk_mesh(b);
+   }   
+  
+  //Now make the mesh as geometric object
+  MeshAsGeomObject* mesh_geom_obj_pt = new MeshAsGeomObject(face_mesh_pt);
+    
+  //Now assign the new nodes positions based on the old meshes
+  //potentially curvilinear boundary (its geom object incarnation)
+  Vector<double> new_x(2);
+  for(unsigned n=0;n<n_new_boundary_node;n++)
+   {
+    //Get the boundary coordinate of all new nodes
+    Node* const nod_pt = new_mesh_pt->boundary_node_pt(b,n);
+    nod_pt->get_coordinates_on_boundary(b,b_coord);
+    //Let's find boundary coordinates of the new node
+    mesh_geom_obj_pt->position(b_coord,new_x);
+    //Snap to the boundary
+    for(unsigned i=0;i<2;i++)
+     {
+      nod_pt->x(i) = new_x[i];
+     }
+   }
+
+  //Delete the allocated memory for the geometric object and face mesh
+  delete mesh_geom_obj_pt;
+  face_mesh_pt->flush_element_and_node_storage();
+  delete face_mesh_pt;
+  
+  //Fix up the elements adjacent to the boundary
+  //This should definitely become a triangular element member function
+  //Loop over elements 
+  unsigned n_bound_el = new_mesh_pt->nboundary_element(b);
+  for(unsigned e=0;e<n_bound_el;e++)
+   {
+    FiniteElement* el_pt = new_mesh_pt->boundary_element_pt(b,e);
+    
+    //Which side is the boundary side
+    
+    //Side between 0 and 1
+    if(el_pt->node_pt(3)->is_on_boundary(b))
+     {
+      //Make sure that the node I'm about to move is NOT on
+      //a boundary
+      if(!el_pt->node_pt(5)->is_on_boundary())
+       {
+        //Reset the internal nodes
+        for(unsigned i=0;i<2;i++)
+         {
+          el_pt->node_pt(5)->x(i) = 
+           0.5*(el_pt->node_pt(0)->x(i) + el_pt->node_pt(2)->x(i));
+         }
+       }
+      //Make sure that the node I'm about to move is NOT on
+      //a boundary
+      if(!el_pt->node_pt(4)->is_on_boundary())
+       {
+        //Reset the internal nodes
+        for(unsigned i=0;i<2;i++)
+         {
+          el_pt->node_pt(4)->x(i) = 
+           0.5*(el_pt->node_pt(1)->x(i) + el_pt->node_pt(2)->x(i));
+         }
+       }
+     }
+    
+    //Side between 1 and 2
+    if(el_pt->node_pt(4)->is_on_boundary(b))
+     {
+      //Make sure that the node I'm about to move is NOT on
+      //a boundary
+      if(!el_pt->node_pt(5)->is_on_boundary())
+       {
+        //Reset the internal nodes
+        for(unsigned i=0;i<2;i++)
+         {
+          el_pt->node_pt(5)->x(i) = 
+           0.5*(el_pt->node_pt(0)->x(i) + el_pt->node_pt(2)->x(i));
+         }
+       }
+      //Make sure that the node I'm about to move is NOT on
+      //a boundary
+      if(!el_pt->node_pt(3)->is_on_boundary())
+       {
+        //Reset the internal nodes
+        for(unsigned i=0;i<2;i++)
+         {
+          el_pt->node_pt(3)->x(i) = 
+           0.5*(el_pt->node_pt(0)->x(i) + el_pt->node_pt(1)->x(i));
+         }
+       }
+     }
+    
+    //Side between 0 and 2
+    if(el_pt->node_pt(5)->is_on_boundary(b))
+     {
+      //Make sure that the node I'm about to move is NOT on
+      //a boundary
+      if(!el_pt->node_pt(4)->is_on_boundary())
+       {
+        //Reset the internal nodes
+        for(unsigned i=0;i<2;i++)
+         {
+          el_pt->node_pt(4)->x(i) = 
+           0.5*(el_pt->node_pt(1)->x(i) + el_pt->node_pt(2)->x(i));
+         }
+       }
+      //Make sure that the node I'm about to move is NOT on
+      //a boundary
+      if(!el_pt->node_pt(3)->is_on_boundary())
+       {
+        //Reset the internal nodes
+        for(unsigned i=0;i<2;i++)
+         {
+          el_pt->node_pt(3)->x(i) = 
+           0.5*(el_pt->node_pt(0)->x(i) + el_pt->node_pt(1)->x(i));
+         }
+       }
+     }
+   }
+
+
  }
 
  

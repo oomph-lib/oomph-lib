@@ -1028,6 +1028,8 @@ class FaceGeometry<TTaylorHoodElement<2> >: public virtual TElement<1,3>
 /*   } */
 };
 
+
+
 //=======================================================================
 /// Face geometry of the 3D Taylor_Hood elements
 //=======================================================================
@@ -1046,6 +1048,32 @@ class FaceGeometry<TTaylorHoodElement<3> >: public virtual TElement<2,3>
 /*     OOMPH_EXCEPTION_LOCATION); */
 /*   } */
 };
+
+
+
+//=======================================================================
+/// Face geometry of the FaceGeometry of the 2D TaylorHood elements
+//=======================================================================
+template<>
+class FaceGeometry<FaceGeometry<TTaylorHoodElement<2> > >: 
+public virtual PointElement
+{
+  public:
+ FaceGeometry() : PointElement() {}
+};
+
+
+//=======================================================================
+/// Face geometry of the FaceGeometry of the 3D Crouzeix_Raviart elements
+//=======================================================================
+template<>
+class FaceGeometry<FaceGeometry<TTaylorHoodElement<3> > >: 
+public virtual TElement<1,3>
+{
+  public:
+ FaceGeometry() : TElement<1,3>() {}
+};
+
 
 }
 

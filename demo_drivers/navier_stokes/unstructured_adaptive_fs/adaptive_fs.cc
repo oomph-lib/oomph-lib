@@ -35,10 +35,13 @@
 #include "navier_stokes.h"
 #include "solid.h"
 #include "constitutive.h"
-#include "rigid_body.h"
 
 // The mesh
+//#include "my_triangle_mesh.template.h"
+//#include "my_triangle_mesh.template.cc"
 #include "meshes/triangle_mesh.h"
+
+#include "fix_vol_int_elastic_elements.h"
 
 using namespace std;
 using namespace oomph;
@@ -51,32 +54,33 @@ namespace oomph
 //==================================================
  namespace Problem_Parameter
  {    
-  /// Block velocity
-  double Block_x_velocity=0.5;
-  
-  /// Block velocity
-  double Block_y_velocity=0.3;
-
-  /// Block velocity
-  double Block_rotation_velocity=1.0;
- 
-  /// Vector of Data object containing the three values (x-displacement,
-  /// y-displacement and rotation angle) for the polygons' centreline
-  /// motion.
-  Vector<Data*> Centre_displacement_data_pt;
-  
   /// Doc info
   DocInfo Doc_info;
   
   /// Reynolds number
-  double Re=50.0;
+  double Re=0.0;
+
+  /// Capillary number
+  double Ca = 10.0;
 
   /// Pseudo-solid Poisson ratio
   double Nu=0.3;
 
+  /// Initial radius of bubble
+  double Radius = 0.25;
+
+  /// Volume of the interface
+  double Volume = 4.0*atan(1.0)*Radius*Radius;
+
+  /// Scaling for velocity
+  double Alpha = 0.0;
+
   /// \short Pseudo solid "density" -- set to zero because we don't want
   /// inertia in the node update!
   double Lambda_sq=0.0;
+
+  /// \short Length of the tube
+  double Length = 3.0;
 
   /// Constitutive law used to determine the mesh deformation
   ConstitutiveLaw *Constitutive_law_pt=0;
@@ -285,7 +289,7 @@ namespace oomph
     
     // Write tecplot footer (e.g. FE connectivity lists)
     write_tecplot_zone_footer(outfile,nplot); 
-   }
+    }
 
 
   /// Get square of L2 norm of velocity 
@@ -374,6 +378,26 @@ namespace oomph
   FaceGeometry() : SolidTElement<1,3>() {}
  };
 
+
+//=======================================================================
+/// Face geometry of Face geometry for element is the same 
+/// as that for the underlying
+/// wrapped element
+//=======================================================================
+ template<>
+ class FaceGeometry<FaceGeometry<MyTaylorHoodElement> >
+  : public virtual SolidPointElement 
+ {
+ public:
+  FaceGeometry() : SolidPointElement() {}
+ };
+
+
+
+// ////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////////////
+
 } //End of namespace extension
 
 
@@ -403,12 +427,6 @@ public:
   {
    // Fluid timestepper
    delete this->time_stepper_pt(0);
-   
-   // Kill hole displacement data
-   for(unsigned ihole=0;ihole<2;ihole++)
-    {
-     delete Problem_Parameter::Centre_displacement_data_pt[ihole];
-    }
 
    // Kill data associated with outer boundary
    unsigned n=Outer_boundary_polyline_pt->npolyline();
@@ -420,7 +438,8 @@ public:
 
 
    //Kill data associated with inner holes
-   for(unsigned ihole=0;ihole<2;ihole++)
+   unsigned n_hole = Inner_hole_pt.size();
+   for(unsigned ihole=0;ihole<n_hole;ihole++)
     {
      unsigned n=Inner_hole_pt[ihole]->npolyline();
      for (unsigned j=0;j<n;j++)
@@ -431,8 +450,8 @@ public:
     }
    
    // Flush Lagrange multiplier mesh
-   delete_lagrange_multiplier_elements();
-   delete Lagrange_multiplier_mesh_pt;
+   delete_free_surface_elements();
+   delete Free_surface_mesh_pt;
 
    // Delete error estimator
    delete Fluid_mesh_pt->spatial_error_estimator_pt();
@@ -440,16 +459,23 @@ public:
    // Delete fluid mesh
    delete Fluid_mesh_pt;
 
+   // Delete the volume constraint mesh
+   delete Volume_constraint_mesh_pt;
+
+   // Delete the global pressure bubble data
+   delete Bubble_pressure_data_pt;
+
    // Kill const eqn
    delete Problem_Parameter::Constitutive_law_pt;
 
   }
  
+
  /// Actions before adapt: Wipe the mesh of Lagrange multiplier elements
  void actions_before_adapt()
   {
    // Kill the  elements and wipe surface mesh
-   delete_lagrange_multiplier_elements();
+   delete_free_surface_elements();
    
    // Rebuild the Problem's global mesh from its various sub-meshes
    this->rebuild_global_mesh();
@@ -461,7 +487,7 @@ public:
  void actions_after_adapt()
   {
    // Create the elements that impose the displacement constraint 
-   create_lagrange_multiplier_elements();
+   create_free_surface_elements();
    
    // Rebuild the Problem's global mesh from its various sub-meshes
    this->rebuild_global_mesh();
@@ -472,80 +498,21 @@ public:
    complete_problem_setup();
 
    // Output solution after adaptation/projection
-   bool doc_projection=true;
-   doc_solution("new mesh with projected solution",doc_projection);
+   //bool doc_projection=true;
+   //doc_solution("new mesh with projected solution",doc_projection);
    
   }// end of actions_after_adapt
 
 
  /// \short Update before implicit timestep: Move hole boundary
- void actions_before_implicit_timestep()
-  {
-   double time=this->time_pt()->time();
-   double ampl=0.5*(exp(-10.0*time*time)-
-                    cos(2.0*MathematicalConstants::Pi*time));
+ void actions_before_implicit_timestep() { }
 
-   // Assign the x increment of the holes using velocity and timestep 
-   double dx=Problem_Parameter::
-    Block_x_velocity*ampl*this->time_pt()->dt(); 
-   
-   // Assign the y increment of the hole using velocity and timestep 
-   double dy=Problem_Parameter::
-    Block_y_velocity*ampl*this->time_pt()->dt(); 
-
-   // Assign the rotation of the hole using velocity and timestep 
-   double ampl2=1.0-exp(-10.0*time*time);
-   double drotation=Problem_Parameter::
-    Block_rotation_velocity*ampl2*this->time_pt()->dt(); 
-      
-   // Update the geom object position   
-   unsigned nhole=this->inner_hole_pt().size();
-   for(unsigned ihole=0;ihole<nhole;ihole++)
-    {
-     double old_x=
-      Problem_Parameter::Centre_displacement_data_pt[ihole]->value(0);     
-     double old_y=
-      Problem_Parameter::Centre_displacement_data_pt[ihole]->value(1);
-     double old_angle=
-      Problem_Parameter::Centre_displacement_data_pt[ihole]->value(2);
-
-     
-     // Update values 
-     Problem_Parameter::Centre_displacement_data_pt[ihole]->
-      set_value(1,old_y+dy);
-     
-     // Rotate one hole clockwise the other anti-clockwise
-     if(ihole==0)
-      {
-       Problem_Parameter::Centre_displacement_data_pt[ihole]->
-        set_value(0,old_x-dx);
-
-       Problem_Parameter::Centre_displacement_data_pt[ihole]->
-        set_value(1,old_y+dy);
-       
-       Problem_Parameter::Centre_displacement_data_pt[ihole]->
-        set_value(2,old_angle+drotation);
-      }
-     else
-      {
-       Problem_Parameter::Centre_displacement_data_pt[ihole]->
-        set_value(0,old_x+dx);
-
-       Problem_Parameter::Centre_displacement_data_pt[ihole]->
-        set_value(1,old_y-dy);
-       
-       Problem_Parameter::Centre_displacement_data_pt[ihole]->
-        set_value(2,old_angle-drotation);
-      }
-    }
-  }
- 
  /// \short Re-apply the no slip condition (imposed indirectly via enslaved
  /// velocities)
  void actions_before_newton_convergence_check()
   {
    // Update mesh -- this applies the auxiliary node update function
-   Fluid_mesh_pt->node_update();
+   //Fluid_mesh_pt->node_update();
   }
  
  /// Update the after solve (empty)
@@ -560,9 +527,53 @@ public:
  /// computation of drag vector
  void complete_problem_setup()
   {   
+   // Get the sub-boundary IDs of the various boundaries
+   map<unsigned,Vector<unsigned> > sub_boundary_id=
+    Fluid_mesh_pt->sub_boundary_id(); 
+   
+   // Get the hole boundary and sub-boundary id
+   unsigned nhole=Inner_hole_pt.size();
+     
+   // Map storing hole sub boundary id
+   map<unsigned,bool> is_on_hole_sub_bound;
+   
+   // Map storing hole boundary id
+   map<unsigned,bool> is_on_hole_bound;
+
+   // Loop over the holes and fill in the boundary and sub boundary id vector
+   for(unsigned ihole=0;ihole<nhole;ihole++)
+    {
+     // Get the hole boundary id vector
+     Vector<unsigned> hole_bound_id=this->Inner_hole_pt[ihole]->
+      polygon_boundary_id();
+    
+     // Get the number of boundary
+     unsigned nbound=hole_bound_id.size();
+     
+     // Fill in the map of boundary and sub boundary
+     for(unsigned ibound=0;ibound<nbound;ibound++)
+      {
+       // Get the boundary id
+       unsigned bound_id=hole_bound_id[ibound];
+       
+       // Fill in the map of boundary
+       is_on_hole_bound[bound_id]=true;
+       
+       // Get the number of subbound for each boundary
+       unsigned nsub_bound=sub_boundary_id[bound_id].size();
+       for(unsigned isub_bound=0;isub_bound<nsub_bound;isub_bound++)
+        {
+         // Get the sub bound id and store in the map
+         unsigned sub_bound_id=sub_boundary_id[bound_id][isub_bound];
+         is_on_hole_sub_bound[sub_bound_id]=true;
+        }
+      }
+    }
+   
    // Set the boundary conditions for fluid problem: All nodes are
    // free by default -- just pin the ones that have Dirichlet conditions
    // here. 
+   bool First_solid = false;
    unsigned nbound=Fluid_mesh_pt->nboundary();
    for(unsigned ibound=0;ibound<nbound;ibound++)
     {
@@ -572,30 +583,41 @@ public:
        // Get node
        Node* nod_pt=Fluid_mesh_pt->boundary_node_pt(ibound,inod);
        
-       // Pin everywhere apart from in/outflow (boundaries 0 and 2)
-       // where we only impose parallel flow)
-       if ((ibound!=0)&&(ibound!=2))
+       //Pin both velocities on inflow (0) and side boundaries (1 and 3)
+       if((ibound==0) || (ibound==1) || (ibound==3))
         {
          nod_pt->pin(0);
+         nod_pt->pin(1);
         }
-       nod_pt->pin(1);
        
+       //If it's the outflow pin only the vertical velocity
+       if(ibound==2) {nod_pt->pin(1);}
+
        // Pin pseudo-solid positions apart from hole boundary we want to move
        SolidNode* solid_node_pt = dynamic_cast<SolidNode*>(nod_pt);
        
        // Unpin the position of all the nodes on hole boundaries
        // since they will be moved using Lagrange Multiplier
-       if(ibound > 3)
+       if(is_on_hole_sub_bound[ibound])
         {
-         solid_node_pt->unpin_position(0);
-         solid_node_pt->unpin_position(1);
+         //Pin a single node horizontally
+         if((First_solid==false) && (Problem_Parameter::Alpha==0.0))
+          {
+           solid_node_pt->pin_position(0);
+           First_solid=true;
+          }
+         else
+          {
+           solid_node_pt->unpin_position(0);
+           solid_node_pt->unpin_position(1);
+          }
          
          // Assign auxiliary node update fct if we're dealing with a 
          // hole boundary
-         nod_pt->set_auxiliary_node_update_fct_pt(
-          FSI_functions::apply_no_slip_on_moving_wall); 
+         //nod_pt->set_auxiliary_node_update_fct_pt(
+         // FSI_functions::apply_no_slip_on_moving_wall); 
         }
-       else
+        else
         {
          solid_node_pt->pin_position(0);
          solid_node_pt->pin_position(1);
@@ -630,31 +652,53 @@ public:
    // Re-apply Dirichlet boundary conditions (projection ignores
    // boundary conditions!)
    
-   // Zero velocity and history values of velocity on walls 
-   // (boundaries 1 and 3)
+   // Set velocity and history values of velocity on walls and inlet 
+   // (boundaries 0, 1 and 3)
    nbound=this->Fluid_mesh_pt->nboundary();
-   for(unsigned ibound=1;ibound<4;ibound=ibound+2)
+   for(unsigned ibound=0;ibound<4;++ibound)
     {
-     unsigned num_nod=this->Fluid_mesh_pt->nboundary_node(ibound);
-     for (unsigned inod=0;inod<num_nod;inod++)
+     //Don't set anything on the outlet
+     if(ibound!=2)
       {
-       // Get node
-       Node* nod_pt=this->Fluid_mesh_pt->boundary_node_pt(ibound,inod);
-       
-       // Get number of previous (history) values
-       unsigned n_prev=nod_pt->time_stepper_pt()->nprev_values();
-       
-       // Zero all current and previous veloc values
-       for (unsigned t=0;t<=n_prev;t++)
+       unsigned num_nod=this->Fluid_mesh_pt->nboundary_node(ibound);
+       for (unsigned inod=0;inod<num_nod;inod++)
         {
-         nod_pt->set_value(t,0,0.0);
-         nod_pt->set_value(t,1,0.0);
+         // Get node
+         Node* nod_pt=this->Fluid_mesh_pt->boundary_node_pt(ibound,inod);
+         
+         // Get number of previous (history) values
+         unsigned n_prev=nod_pt->time_stepper_pt()->nprev_values();
+         
+         // Zero all current and previous veloc values
+         for (unsigned t=0;t<=n_prev;t++)
+          {
+           nod_pt->set_value(t,0,0.0); 
+           nod_pt->set_value(t,1,0.0);
+          }
         }
-
       }
-    } 
+    }
+
+   this->set_boundary_velocity();
   }
- 
+
+ ///Set the boundary velocity
+ void set_boundary_velocity()
+  {
+   unsigned ibound=0;
+   unsigned num_nod=this->Fluid_mesh_pt->nboundary_node(ibound);
+   for (unsigned inod=0;inod<num_nod;inod++)
+    {
+     // Get node
+     Node* nod_pt=this->Fluid_mesh_pt->boundary_node_pt(ibound,inod);
+     
+     //Now set the boundary velocity
+     double y = nod_pt->x(1);
+     nod_pt->set_value(0,Problem_Parameter::Alpha*y*(1-y));
+    }
+  }
+
+     
  /// Doc the solution
  void doc_solution(const std::string& comment="", const bool& project=false);
  
@@ -663,7 +707,7 @@ public:
                              double& min_err);
   
  /// Sanity check: Doc boundary coordinates from mesh and GeomObject
- void doc_boundary_coordinates();
+ //void doc_boundary_coordinates();
  
  /// Get the TriangleMeshHolePolygon objects
  Vector<TriangleMeshHolePolygon*>& inner_hole_pt()
@@ -674,30 +718,33 @@ private:
 
  /// \short Create elements that enforce prescribed boundary motion
  /// for the pseudo-solid fluid mesh by Lagrange multipliers
- void create_lagrange_multiplier_elements();
+ void create_free_surface_elements();
 
  /// \short Delete elements that impose the prescribed boundary displacement
  /// and wipe the associated mesh
- void delete_lagrange_multiplier_elements()
+ void delete_free_surface_elements()
   {
    // How many surface elements are in the surface mesh
-   unsigned n_element = Lagrange_multiplier_mesh_pt->nelement();
+   unsigned n_element = Free_surface_mesh_pt->nelement();
    
    // Loop over the surface elements
    for(unsigned e=0;e<n_element;e++)
     {
      // Kill surface element
-     delete Lagrange_multiplier_mesh_pt->element_pt(e);
+     delete Free_surface_mesh_pt->element_pt(e);
     }
    
    // Wipe the mesh
-   Lagrange_multiplier_mesh_pt->flush_element_and_node_storage();
+   Free_surface_mesh_pt->flush_element_and_node_storage();
    
-  } // end of delete_lagrange_multiplier_elements
+  } // end of delete_free_surface_elements
  
  /// Pointers to mesh of Lagrange multiplier elements
- SolidMesh* Lagrange_multiplier_mesh_pt;
+ Mesh* Free_surface_mesh_pt;
  
+ /// Pointer to mesh containing single volume constraing
+ Mesh* Volume_constraint_mesh_pt;
+
  /// Pointers to Fluid_mesh
  RefineableSolidTriangleMesh<ELEMENT>* Fluid_mesh_pt;
  
@@ -706,7 +753,9 @@ private:
 
  /// Triangle mesh polygon for outer boundary 
  TriangleMeshPolygon* Outer_boundary_polyline_pt; 
-
+ 
+ /// Pointer to a global bubble pressure datum
+ Data* Bubble_pressure_data_pt;
 
 }; // end_of_problem_class
 
@@ -719,7 +768,7 @@ template<class ELEMENT>
 UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
 { 
  // Allow for rough startup
- this->Problem::Max_residuals=1000.0;
+ //this->Problem::Max_residuals=1000.0;
 
  // Output directory
  Problem_Parameter::Doc_info.set_directory("RESLT");
@@ -732,7 +781,16 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  // Define the boundaries: Polyline with 4 different
  // boundaries for the outer boundary and 2 internal holes, 
  // egg shaped, with 2 boundaries each
+
+ double Length = 3.0; //10.0
  
+ // Set the global pressure data
+ Bubble_pressure_data_pt =  new Data(1);
+ this->add_global_data(Bubble_pressure_data_pt);
+ //Provide a reasonable initial guess
+ Bubble_pressure_data_pt->set_value(0,
+  Problem_Parameter::Ca/Problem_Parameter::Radius);
+
  // Build the boundary segments for outer boundary, consisting of
  //--------------------------------------------------------------
  // four separeate polyline segments
@@ -761,7 +819,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  // Second boundary segment
  bound_seg[0][0]=0.0;
  bound_seg[0][1]=1.0;
- bound_seg[1][0]=2.0;
+ bound_seg[1][0]=Problem_Parameter::Length;
  bound_seg[1][1]=1.0;
 
  // Specify 2nd boundary id
@@ -771,9 +829,9 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  boundary_segment_pt[1] = new TriangleMeshPolyLine(bound_seg,bound_id);
 
  // Third boundary segment
- bound_seg[0][0]=2.0;
+ bound_seg[0][0]=Problem_Parameter::Length;
  bound_seg[0][1]=1.0;
- bound_seg[1][0]=2.0;
+ bound_seg[1][0]=Problem_Parameter::Length;
  bound_seg[1][1]=0.0;
 
  // Specify 3rd boundary id
@@ -783,7 +841,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  boundary_segment_pt[2] = new TriangleMeshPolyLine(bound_seg,bound_id);
 
  // Fourth boundary segment
- bound_seg[0][0]=2.0;
+ bound_seg[0][0]=Problem_Parameter::Length;
  bound_seg[0][1]=0.0;
  bound_seg[1][0]=0.0;
  bound_seg[1][1]=0.0;
@@ -798,37 +856,18 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  Outer_boundary_polyline_pt = new TriangleMeshPolygon(boundary_segment_pt);
 
 
-
-
  // Now deal with the moving holes
  //-------------------------------
 
- // We have two holes
- Inner_hole_pt.resize(2);
- 
- // Create Data objects that contains the three values (x-displacement,
- // y-displacement and rotation angle) for the two polygons' centreline
- // motion.
- Problem_Parameter::Centre_displacement_data_pt.resize(2);
- for(unsigned ihole=0;ihole<2;ihole++)
-  {
-   // Create time-dependent Data with three values
-   Problem_Parameter::Centre_displacement_data_pt[ihole]=
-    new Data(this->time_stepper_pt(),3);
-   
-   // For now pin all three values
-   Problem_Parameter::Centre_displacement_data_pt[ihole]->pin(0);
-   Problem_Parameter::Centre_displacement_data_pt[ihole]->pin(1);
-   Problem_Parameter::Centre_displacement_data_pt[ihole]->pin(2);
-  }
- 
+ // We have one holes
+ Inner_hole_pt.resize(1);
  
  // Build first hole
  //-----------------
- double x_center = 1.3;
+ double x_center = 0.5*Problem_Parameter::Length;
  double y_center = 0.5;
- double A = 0.1;
- double B = 0.25;
+ double A = Problem_Parameter::Radius;
+ double B = Problem_Parameter::Radius;
  Ellipse * egg_hole_pt = new Ellipse(A,B);
  
  // Define the vector of angle value to build the hole
@@ -838,7 +877,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  Vector<double> coord(2);
  
  // Number of points defining hole
- unsigned ppoints = 8; 
+ unsigned ppoints = 16; //8 
  double unit_zeta = MathematicalConstants::Pi/double(ppoints-1);
  
  // This hole is bounded by two distinct boundaries, each
@@ -894,73 +933,8 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  
  // Fill in the vector of holes. Specify data that define centre's
  // displacement
- Inner_hole_pt[0] = new RigidBodyTriangleMeshHolePolygon(
-  hole_center,hole_segment_pt,this->time_stepper_pt(),
-  Problem_Parameter::Centre_displacement_data_pt[0]);
- 
- // Build the second hole
- //----------------------
- x_center = 0.5;
- y_center = 0.6;
- A = 0.1;
- B = 0.2;
- delete egg_hole_pt;
- egg_hole_pt = new Ellipse(A,B);
- 
- // Number of points defining the hole
- ppoints = 8;
- unit_zeta = MathematicalConstants::Pi/double(ppoints-1);
-
- // Create points on the boundary
- for(unsigned ipoint=0; ipoint<ppoints;ipoint++)
-  {
-   // Resize the vector 
-   bound_hole[ipoint].resize(2);
-   
-   // Get the coordinates
-   zeta[0]=unit_zeta*double(ipoint);
-   egg_hole_pt->position(zeta,coord);
-   bound_hole[ipoint][0]=coord[0]+x_center;
-   bound_hole[ipoint][1]=coord[1]+y_center;
-  }
- 
- // Specify the hole boundary id
- hole_id=7;
- 
- // Build the 1st hole polyline
- hole_segment_pt[0] = new TriangleMeshPolyLine(bound_hole,hole_id);
- 
- // Create points on second boundary
- for(unsigned ipoint=0; ipoint<ppoints;ipoint++)
-  {
-   // Resize the vector 
-   bound_hole[ipoint].resize(2);
-   
-   // Get the coordinates
-   zeta[0]=(unit_zeta*double(ipoint))+MathematicalConstants::Pi;
-   egg_hole_pt->position(zeta,coord);
-   bound_hole[ipoint][0]=coord[0]+x_center;
-   bound_hole[ipoint][1]=coord[1]+y_center;
-  }
- 
- // Inner hole center coordinates
- hole_center[0]=x_center;
- hole_center[1]=y_center;
- 
- // Clean up
- delete egg_hole_pt;
-
- // Specify the hole boundary id
- hole_id=8;
-
- // Build the 2nd hole polyline
- hole_segment_pt[1] = new TriangleMeshPolyLine(bound_hole,hole_id);
- 
- // Fill in the second hole. Specify data that define centre's
- // displacement
- Inner_hole_pt[1] = new RigidBodyTriangleMeshHolePolygon(
-  hole_center,hole_segment_pt,this->time_stepper_pt(),
-  Problem_Parameter::Centre_displacement_data_pt[1]);
+ Inner_hole_pt[0] = new TriangleMeshHolePolygon(
+  hole_center,hole_segment_pt);
  
  // Now build the mesh, based on the boundaries specified by
  //---------------------------------------------------------
@@ -1002,27 +976,42 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  // computation of drag vector
  complete_problem_setup();
  
- // Create Lagrange multiplier mesh for boundary motion
+ // Create Free surface elements 
  //----------------------------------------------------
  // Construct the mesh of elements that enforce prescribed boundary motion
  // of pseudo-solid fluid mesh by Lagrange multipliers
- Lagrange_multiplier_mesh_pt=new SolidMesh;
- create_lagrange_multiplier_elements();
+ Free_surface_mesh_pt=new Mesh;
+ create_free_surface_elements();
  
+
+ //Create volume constraint element
+ Volume_constraint_mesh_pt = new Mesh;
+ Volume_constraint_mesh_pt->add_element_pt(new ElasticVolumeConstraintElement);
+ dynamic_cast<ElasticVolumeConstraintElement*>(
+  Volume_constraint_mesh_pt->element_pt(0))
+  ->set_traded_pressure_data(this->global_data_pt(0));
+ dynamic_cast<ElasticVolumeConstraintElement*>(
+  Volume_constraint_mesh_pt->element_pt(0))
+  ->volume_pt() = &Problem_Parameter::Volume;
+
+
  // Combine meshes
  //---------------
  
  // Add Fluid_mesh_pt sub meshes
  this->add_sub_mesh(Fluid_mesh_pt);
 
- // Add Lagrange_multiplier sub meshes
- this->add_sub_mesh(this->Lagrange_multiplier_mesh_pt);
+ // Add Free_surface sub meshes
+ this->add_sub_mesh(this->Free_surface_mesh_pt);
  
+ // Add volume constraint sub mesh
+ this->add_sub_mesh(this->Volume_constraint_mesh_pt);
+
  // Build global mesh
  this->build_global_mesh();
   
  // Sanity check: Doc boundary coordinates from mesh and GeomObject
- doc_boundary_coordinates();
+ //doc_boundary_coordinates();
   
  // Setup equation numbering scheme
  cout <<"Number of equations: " << this->assign_eqn_numbers() << std::endl;
@@ -1036,7 +1025,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
 /// Doc boundary coordinates in mesh and plot GeomObject representation
 /// of inner boundary.
 //=======================================================================
-template<class ELEMENT>
+/*template<class ELEMENT>
 void UnstructuredFluidProblem<ELEMENT>::doc_boundary_coordinates()
 {
 
@@ -1057,21 +1046,21 @@ void UnstructuredFluidProblem<ELEMENT>::doc_boundary_coordinates()
  Vector<double> r(2);
  r[0]=0;
  r[1]=0;
+
    
- // Loop over the boundaries of the fluid mesh and print out geometric
- // objects associated with each
+ // Get the boundary geometric objects associated with the fluid mesh
  unsigned n_boundary = Fluid_mesh_pt->nboundary();
  for(unsigned b=0;b<n_boundary;b++)
   {
-   //Get geometric object for b-th bounday
-   GeomObject* boundary_geom_obj_pt = 
-    Fluid_mesh_pt->boundary_geom_object_pt(b);
+   //A vector of geometric objects
+   GeomObject* boundary_geom_obj_pt = 0;
+   Fluid_mesh_pt->boundary_geom_object_pt(b);
    
    //Only bother to do anything if there is a geometric object
    if(boundary_geom_obj_pt!=0)
     {
      // Zone label 
-     some_file << "ZONE T=boundary" << b << std::endl;
+     some_file <<"ZONE T=boundary"<<b<<std::endl;
      
      //Get the coordinate limits
      Vector<double> zeta_limits = 
@@ -1085,6 +1074,7 @@ void UnstructuredFluidProblem<ELEMENT>::doc_boundary_coordinates()
       {
        // Get coordinate
        zeta[0] = zeta_limits[0] + i*zeta_inc;
+       //Get the position
        boundary_geom_obj_pt->position(zeta,r);
        
        // Print it
@@ -1093,31 +1083,31 @@ void UnstructuredFluidProblem<ELEMENT>::doc_boundary_coordinates()
     }
   }
  some_file.close();
- 
- // Doc boundary coordinates using Lagrange_multiplier_mesh_pt
+
+ // Doc boundary coordinates using Free_surface_mesh_pt
  std::ofstream the_file("RESLT/inner_hole_boundary_from_mesh.dat");
- 
+
  // Initialise max/min boundary coordinate
  double zeta_min= DBL_MAX;
  double zeta_max=-DBL_MAX;
 
- // Loop over Lagrange_multiplier elements
- unsigned n_face_element = this->Lagrange_multiplier_mesh_pt->nelement();
+ // Loop over Free_surface elements
+ unsigned n_face_element = this->Free_surface_mesh_pt->nelement();
  
  for(unsigned e=0;e<n_face_element;e++)
   {
    
    //Cast the element pointer
-   ImposeDisplacementByLagrangeMultiplierElement<ELEMENT>* el_pt=
-    dynamic_cast< ImposeDisplacementByLagrangeMultiplierElement<ELEMENT>*>
-    (Lagrange_multiplier_mesh_pt->element_pt(e));
-   
+   FixedVolumeElasticLineFluidInterfaceElement<ELEMENT>* el_pt=
+    dynamic_cast<FixedVolumeElasticLineFluidInterfaceElement<ELEMENT>*>
+    (Free_surface_mesh_pt->element_pt(e));
+
    // Doc boundary coordinate
    Vector<double> s(1);
    Vector<double> zeta(1);
    Vector<double> x(2);
    unsigned n_plot=5;
-   
+
    the_file << el_pt->tecplot_zone_string(n_plot);
    
    // Loop over plot points
@@ -1137,97 +1127,64 @@ void UnstructuredFluidProblem<ELEMENT>::doc_boundary_coordinates()
      // Update max/min boundary coordinate
      if (zeta[0]<zeta_min) zeta_min=zeta[0];
      if (zeta[0]>zeta_max) zeta_max=zeta[0];
-     
+
      the_file << std::endl;
     }
   }
  // Close doc file
  the_file.close();
  
- 
+  
 } //end doc_solid_zeta
+*/
 
-//============start_of_create_lagrange_multiplier_elements===============
+//============start_of_create_free_surface_elements===============
 /// Create elements that impose the prescribed boundary displacement
 /// for the pseudo-solid fluid mesh
 //=======================================================================
 template<class ELEMENT>
-void UnstructuredFluidProblem<ELEMENT>::create_lagrange_multiplier_elements()
-{
- // The idea is to apply Lagrange multipliers to the boundaries in the mesh
- // that have associated geometric objects
- 
- //Find the number of boundaries
- unsigned n_boundary = Fluid_mesh_pt->nboundary();
- 
- // Loop over the boundaries
- for(unsigned b=0;b<n_boundary;b++)
+void UnstructuredFluidProblem<ELEMENT>::create_free_surface_elements()
+{ 
+ //Loop over the free surface boundaries
+ for(unsigned b=4;b<6;b++)
   {
-   //Get the geometric object associated with the boundary
-   GeomObject* boundary_geom_obj_pt = 
-    Fluid_mesh_pt->boundary_geom_object_pt(b);
-
-   //Only bother to do anything if there is a geometric object
-   if(boundary_geom_obj_pt!=0)
+   // How many bulk fluid elements are adjacent to boundary b?
+   unsigned n_element = Fluid_mesh_pt->nboundary_element(b);
+   
+   // Loop over the bulk fluid elements adjacent to boundary b?
+   for(unsigned e=0;e<n_element;e++)
     {
-     // How many bulk fluid elements are adjacent to boundary b?
-     unsigned n_element = Fluid_mesh_pt->nboundary_element(b);
+     // Get pointer to the bulk fluid element that is 
+     // adjacent to boundary b
+     ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
+      Fluid_mesh_pt->boundary_element_pt(b,e));
      
-     // Loop over the bulk fluid elements adjacent to boundary b
-     for(unsigned e=0;e<n_element;e++)
-      {
-       // Get pointer to the bulk fluid element that is 
-       // adjacent to boundary b
-       ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
-        Fluid_mesh_pt->boundary_element_pt(b,e));
-       
-       //Find the index of the face of element e along boundary b
-       int face_index = Fluid_mesh_pt->face_index_at_boundary(b,e);
-       
-       // Create new element. Note that we use different Lagrange
-       // multiplier fields for each distinct boundary (here indicated
-       // by b.
-       ImposeDisplacementByLagrangeMultiplierElement<ELEMENT>* el_pt =
-        new ImposeDisplacementByLagrangeMultiplierElement<ELEMENT>(
-         bulk_elem_pt,face_index,b);   
-       
-       // Add it to the mesh
-       Lagrange_multiplier_mesh_pt->add_element_pt(el_pt);
-       
-       // Set the GeomObject that defines the boundary shape and set
-       // which bulk boundary we are attached to (needed to extract
-       // the boundary coordinate from the bulk nodes)
-       el_pt->set_boundary_shape_geom_object_pt(
-        boundary_geom_obj_pt,b);
-       
-       // Loop over the nodes to pin Lagrange multiplier
-       unsigned nnod=el_pt->nnode();
-       for(unsigned j=0;j<nnod;j++)
-        {
-         Node* nod_pt = el_pt->node_pt(j);
-
-         // How many nodal values were used by the "bulk" element
-         // that originally created this node?
-         unsigned n_bulk_value=el_pt->nbulk_value(j);
-         
-         // Pin two of the four Lagrange multipliers at vertices
-         // This is not totally robust, but will work in this application
-         unsigned nval=nod_pt->nvalue();
-         if (nval==7)
-          {
-           for (unsigned i=0;i<2;i++) 
-            { 
-             // Pin lagrangian multipliers
-             nod_pt->pin(n_bulk_value+2+i);
-            }
-          }
-        }
-      } // end loop over the element
-    }  //End of case if there is a geometric object
-  } //End of loop over boundaries
- 
+     //Find the index of the face of element e along boundary b
+     int face_index = Fluid_mesh_pt->face_index_at_boundary(b,e);
+     
+     // Create new element. Note that we use different Lagrange
+     // multiplier fields for each distinct boundary (here indicated
+     // by b.
+     FixedVolumeElasticLineFluidInterfaceElement<ELEMENT>* el_pt =
+      new FixedVolumeElasticLineFluidInterfaceElement<ELEMENT>(
+       bulk_elem_pt,face_index);   
+     
+     // Add it to the mesh
+     Free_surface_mesh_pt->add_element_pt(el_pt);
+     
+     //Add the appropriate boundary number
+     el_pt->set_boundary_number_in_bulk_mesh(b);
+     
+     //Specify the capillary number
+     el_pt->ca_pt() = &Problem_Parameter::Ca;
+     //Specify the external pressure
+     el_pt->set_external_pressure_data(this->global_data_pt(0));
+     //Set the traded pressure
+     el_pt->set_traded_pressure_data(this->global_data_pt(0));
+    } // end loop over the element
+  }
 }
-// end of create_lagrange_multiplier_elements
+// end of create_free_surface_elements
 
 
 //==start_of_doc_solution=================================================
@@ -1279,7 +1236,7 @@ void UnstructuredFluidProblem<ELEMENT>::doc_solution(
     dynamic_cast<ELEMENT*>(this->Fluid_mesh_pt->element_pt(e))->
     square_of_l2_norm();
   }
- Problem_Parameter::Norm_file << sqrt(square_of_l2_norm) << "\n";
+ Problem_Parameter::Norm_file << sqrt(square_of_l2_norm) << std::endl;
  
 
  some_file.open(filename);
@@ -1358,6 +1315,9 @@ void UnstructuredFluidProblem<ELEMENT>::compute_error_estimate(double& max_err,
 //============================================================
 int main(int argc, char **argv)
 {
+ Multi_domain_functions::Nx_bin = 40;
+ Multi_domain_functions::Ny_bin = 10;
+
  // feenableexcept(FE_INVALID | FE_DIVBYZERO | FE_OVERFLOW | FE_UNDERFLOW);
 
  // Store command line arguments
@@ -1389,7 +1349,12 @@ int main(int argc, char **argv)
  // Create problem in initial configuration
  UnstructuredFluidProblem<ProjectableTaylorHoodElement<MyTaylorHoodElement> > 
   problem;  
- 
+
+ problem.steady_newton_solve(1);
+ problem.doc_solution();
+
+ //FiniteElement::Accept_negative_jacobian=true;
+
  // Initialise timestepper
  double dt=0.025;
  problem.initialise_dt(dt);
@@ -1400,8 +1365,11 @@ int main(int argc, char **argv)
  // Output initial conditions
  problem.doc_solution();
 
- // Solve problem a few times on given mesh
- unsigned nstep=3;
+ Problem_Parameter::Alpha = 1.0;
+ problem.complete_problem_setup();
+
+ // Solve problem once on given mesh
+ unsigned nstep=1;
  for (unsigned i=0;i<nstep;i++)
   {
    // Solve the problem
@@ -1410,13 +1378,15 @@ int main(int argc, char **argv)
   }
 
  // Now do a couple of adaptations
- unsigned ncycle=100;
+ nstep = 2;
+ unsigned ncycle=1000;
  if (CommandLineArgs::command_line_flag_has_been_set("--validation"))
   {
    ncycle=1;
    oomph_info << "Only doing one cycle during validation\n";
   }
- for (unsigned j=0;j<ncycle;j++)
+
+ for(unsigned j=0;j<ncycle;j++)
   {       
    // Adapt
    problem.adapt();

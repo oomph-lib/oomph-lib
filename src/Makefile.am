@@ -5,7 +5,7 @@ constitutive solid axisym_spherical_solid beam shell multi_physics \
 womersley advection_diffusion_reaction spherical_advection_diffusion \
 axisym_advection_diffusion biharmonic \
 flux_transport young_laplace steady_axisym_advection_diffusion \
-mesh_smoothing helmholtz time_harmonic_linear_elasticity 
+mesh_smoothing helmholtz time_harmonic_linear_elasticity rigid_body
 
 
 
