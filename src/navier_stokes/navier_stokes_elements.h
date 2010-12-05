@@ -1577,97 +1577,32 @@ public:
 //Inline functions
 
 //=======================================================================
-/// 2D
 /// Derivatives of the shape functions and test functions w.r.t. to global
 /// (Eulerian) coordinates. Return Jacobian of mapping between
 /// local and global coordinates.
 //=======================================================================
-template<>
-inline double QCrouzeixRaviartElement<2>::dshape_and_dtest_eulerian_nst(
+template<unsigned DIM>
+inline double QCrouzeixRaviartElement<DIM>::dshape_and_dtest_eulerian_nst(
  const Vector<double> &s, Shape &psi, 
  DShape &dpsidx, Shape &test, 
  DShape &dtestdx) const
 {
  //Call the geometrical shape functions and derivatives  
  double J = this->dshape_eulerian(s,psi,dpsidx);
- //Loop over the test functions and derivatives and set them equal to the
- //shape functions
- for(unsigned i=0;i<9;i++)
-  {
-   test[i] = psi[i]; 
-   dtestdx(i,0) = dpsidx(i,0);
-   dtestdx(i,1) = dpsidx(i,1);
-  }
+ //The test functions are equal to the shape functions
+ test = psi;
+ dtestdx = dpsidx;
  //Return the jacobian
  return J;
 }
 
-
 //=======================================================================
-/// 3D
 /// Derivatives of the shape functions and test functions w.r.t. to global
 /// (Eulerian) coordinates. Return Jacobian of mapping between
 /// local and global coordinates.
 //=======================================================================
-template<>
-inline double QCrouzeixRaviartElement<3>::dshape_and_dtest_eulerian_nst(
-                                  const Vector<double> &s, Shape &psi, 
-                                  DShape &dpsidx, Shape &test, 
-                                  DShape &dtestdx) const
-{
- //Call the geometrical shape functions and derivatives  
- double J = this->dshape_eulerian(s,psi,dpsidx);
- //Loop over the test functions and derivatives and set them equal to the
- //shape functions
- for(unsigned i=0;i<27;i++)
-  {
-   test[i] = psi[i]; 
-   dtestdx(i,0) = dpsidx(i,0);
-   dtestdx(i,1) = dpsidx(i,1);
-   dtestdx(i,2) = dpsidx(i,2);
-  }
- //Return the jacobian
- return J;
-}
-
-
-
-//=======================================================================
-/// 2D
-/// Derivatives of the shape functions and test functions w.r.t. to global
-/// (Eulerian) coordinates. Return Jacobian of mapping between
-/// local and global coordinates.
-//=======================================================================
-template<>
-inline double QCrouzeixRaviartElement<2>::dshape_and_dtest_eulerian_at_knot_nst(
- const unsigned &ipt, Shape &psi, 
- DShape &dpsidx, Shape &test, 
- DShape &dtestdx) const
-{
- //Call the geometrical shape functions and derivatives  
- double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx);
-
- //Loop over the test functions and derivatives and set them equal to the
- //shape functions
- for(unsigned i=0;i<9;i++)
-  {
-   test[i] = psi[i]; 
-   dtestdx(i,0) = dpsidx(i,0);
-   dtestdx(i,1) = dpsidx(i,1);
-  }
- //Return the jacobian
- return J;
-}
-
-
-//=======================================================================
-/// 3D
-/// Derivatives of the shape functions and test functions w.r.t. to global
-/// (Eulerian) coordinates. Return Jacobian of mapping between
-/// local and global coordinates.
-//=======================================================================
-template<>
-inline double QCrouzeixRaviartElement<3>::
+template<unsigned DIM>
+inline double QCrouzeixRaviartElement<DIM>::
 dshape_and_dtest_eulerian_at_knot_nst(
  const unsigned &ipt, Shape &psi, 
  DShape &dpsidx, Shape &test, 
@@ -1675,19 +1610,12 @@ dshape_and_dtest_eulerian_at_knot_nst(
 {
  //Call the geometrical shape functions and derivatives  
  double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx);
- //Loop over the test functions and derivatives and set them equal to the
- //shape functions
- for(unsigned i=0;i<27;i++)
-  {
-   test[i] = psi[i]; 
-   dtestdx(i,0) = dpsidx(i,0);
-   dtestdx(i,1) = dpsidx(i,1);
-   dtestdx(i,2) = dpsidx(i,2);
-  }
+ //The test functions are equal to the shape functions
+ test = psi;
+ dtestdx = dpsidx;
  //Return the jacobian
  return J;
 }
-
 
 
 //=======================================================================
@@ -1749,13 +1677,9 @@ template<>
   // Eulerian coordinates
   transform_derivatives(inverse_jacobian,dppsidx);
   
-  //Loop over the test functions and set them equal to the shape functions
-  for(unsigned i=0;i<3;i++)
-   {
-    ptest[i] = ppsi[i];
-    dptestdx(i,0) = dppsidx(i,0);
-    dptestdx(i,1) = dppsidx(i,1);
-   }
+  //The test functions are equal to the shape functions
+  ptest = ppsi;
+  dptestdx = dppsidx;
 
   //Return the determinant of the jacobian
   return det;
@@ -1764,18 +1688,18 @@ template<>
 
 
 //=======================================================================
-/// 2D :
 /// Ppressure shape and test functions
 //=======================================================================
-template<>
- inline void QCrouzeixRaviartElement<2>::pshape_nst(const Vector<double> &s, 
-                                                    Shape &psi, 
-                                                    Shape &test) const
- {
+template<unsigned DIM>
+ inline void QCrouzeixRaviartElement<DIM>::
+pshape_nst(const Vector<double> &s, 
+           Shape &psi, 
+           Shape &test) const
+{
  //Call the pressure shape functions
- pshape_nst(s,psi);
- //Loop over the test functions and set them equal to the shape functions
- for(unsigned i=0;i<3;i++) test[i] = psi[i];
+ this->pshape_nst(s,psi);
+ //Test functions are equal to shape functions
+ test = psi;
 }
 
 
@@ -1846,34 +1770,14 @@ template<>
   // Eulerian coordinates
   transform_derivatives(inverse_jacobian,dppsidx);
   
-  // Loop over the test functions and set them equal to the shape functions
-  for(unsigned i=0;i<4;i++)
-   {
-    ptest[i] = ppsi[i];
-    dptestdx(i,0) = dppsidx(i,0);
-    dptestdx(i,1) = dppsidx(i,1);
-    dptestdx(i,2) = dppsidx(i,2);
-   }
-
+  //The test functions are equal to the shape functions
+  ptest = ppsi;
+  dptestdx = dppsidx;
+  
   // Return the determinant of the jacobian
   return det;
 
  }
-
-//=======================================================================
-/// 3D :
-/// Ppressure shape and test functions
-//=======================================================================
-template<>
-inline void QCrouzeixRaviartElement<3>::pshape_nst(const Vector<double> &s, 
-                                                   Shape &psi, 
-                                                   Shape &test) const
- {
- //Call the pressure shape functions
- pshape_nst(s,psi);
- //Loop over the test functions and set them equal to the shape functions
- for(unsigned i=0;i<4;i++) test[i] = psi[i];
-}
 
 
 //=======================================================================
@@ -2091,110 +1995,46 @@ class QTaylorHoodElement : public virtual QElement<DIM,3>,
 //Inline functions
 
 //==========================================================================
-/// 2D : 
 /// Derivatives of the shape functions and test functions w.r.t to
 /// global (Eulerian) coordinates. Return Jacobian of mapping between
 /// local and global coordinates.
 //==========================================================================
-template<>
-inline double QTaylorHoodElement<2>::dshape_and_dtest_eulerian_nst(
-                                              const Vector<double> &s,
-                                              Shape &psi, 
-                                              DShape &dpsidx, Shape &test, 
-                                              DShape &dtestdx) const
+template<unsigned DIM>
+inline double QTaylorHoodElement<DIM>::dshape_and_dtest_eulerian_nst(
+ const Vector<double> &s,
+ Shape &psi, 
+ DShape &dpsidx, Shape &test, 
+ DShape &dtestdx) const
 {
  //Call the geometrical shape functions and derivatives  
  double J = this->dshape_eulerian(s,psi,dpsidx);
- //Loop over the test functions and derivatives and set them equal to the
- //shape functions
- for(unsigned i=0;i<9;i++)
-  {
-   test[i] = psi[i]; 
-   dtestdx(i,0) = dpsidx(i,0);
-   dtestdx(i,1) = dpsidx(i,1);
-  }
+ 
+ //The test functions are equal to the shape functions
+ test = psi;
+ dtestdx = dpsidx;
+
  //Return the jacobian
  return J;
 }
 
 
 //==========================================================================
-/// 3D : 
 /// Derivatives of the shape functions and test functions w.r.t to
 /// global (Eulerian) coordinates. Return Jacobian of mapping between
 /// local and global coordinates.
 //==========================================================================
-template<>
-inline double QTaylorHoodElement<3>::dshape_and_dtest_eulerian_nst(
-                                              const Vector<double> &s,
-                                              Shape &psi, 
-                                              DShape &dpsidx, Shape &test, 
-                                              DShape &dtestdx) const
-{
- //Call the geometrical shape functions and derivatives  
- double J = this->dshape_eulerian(s,psi,dpsidx);
- //Loop over the test functions and derivatives and set them equal to the
- //shape functions
- for(unsigned i=0;i<27;i++)
-  {
-   test[i] = psi[i]; 
-   dtestdx(i,0) = dpsidx(i,0);
-   dtestdx(i,1) = dpsidx(i,1);
-   dtestdx(i,2) = dpsidx(i,2);
-  }
- //Return the jacobian
- return J;
-}
-
-
-//==========================================================================
-/// 2D : 
-/// Derivatives of the shape functions and test functions w.r.t to
-/// global (Eulerian) coordinates. Return Jacobian of mapping between
-/// local and global coordinates.
-//==========================================================================
-template<>
-inline double QTaylorHoodElement<2>::dshape_and_dtest_eulerian_at_knot_nst(
+template<unsigned DIM>
+inline double QTaylorHoodElement<DIM>::dshape_and_dtest_eulerian_at_knot_nst(
  const unsigned &ipt,Shape &psi, DShape &dpsidx, Shape &test, 
  DShape &dtestdx) const
 {
  //Call the geometrical shape functions and derivatives  
  double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx);
- //Loop over the test functions and derivatives and set them equal to the
- //shape functions
- for(unsigned i=0;i<9;i++)
-  {
-   test[i] = psi[i]; 
-   dtestdx(i,0) = dpsidx(i,0);
-   dtestdx(i,1) = dpsidx(i,1);
-  }
- //Return the jacobian
- return J;
-}
 
+ //The test functions are equal to the shape functions
+ test = psi;
+ dtestdx = dpsidx;
 
-//==========================================================================
-/// 3D : 
-/// Derivatives of the shape functions and test functions w.r.t to
-/// global (Eulerian) coordinates. Return Jacobian of mapping between
-/// local and global coordinates.
-//==========================================================================
-template<>
-inline double QTaylorHoodElement<3>::dshape_and_dtest_eulerian_at_knot_nst(
- const unsigned &ipt,Shape &psi, DShape &dpsidx, Shape &test, 
- DShape &dtestdx) const
-{
- //Call the geometrical shape functions and derivatives  
- double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx);
- //Loop over the test functions and derivatives and set them equal to the
- //shape functions
- for(unsigned i=0;i<27;i++)
-  {
-   test[i] = psi[i]; 
-   dtestdx(i,0) = dpsidx(i,0);
-   dtestdx(i,1) = dpsidx(i,1);
-   dtestdx(i,2) = dpsidx(i,2);
-  }
  //Return the jacobian
  return J;
 }
@@ -2252,15 +2092,11 @@ template<>
   // Now set the values of the derivatives to be derivs w.r.t. to the
   // Eulerian coordinates
   transform_derivatives(inverse_jacobian,dppsidx);
-  
-  // Loop over the test functions and set them equal to the shape functions
-  for(unsigned i=0;i<4;i++)
-   {
-    ptest[i] = ppsi[i];
-    dptestdx(i,0) = dppsidx(i,0);
-    dptestdx(i,1) = dppsidx(i,1);
-   }
-  
+
+  //The test functions are equal to the shape functions
+  ptest = ppsi;
+  dptestdx = dppsidx;
+    
   // Return the determinant of the jacobian
   return det;
     
@@ -2353,14 +2189,9 @@ template<>
   // Eulerian coordinates
   transform_derivatives(inverse_jacobian,dppsidx);
   
-  // Loop over the test functions and set them equal to the shape functions
-  for(unsigned i=0;i<8;i++)
-   {
-    ptest[i] = ppsi[i];
-    dptestdx(i,0) = dppsidx(i,0);
-    dptestdx(i,1) = dppsidx(i,1);
-    dptestdx(i,2) = dppsidx(i,2);
-   }
+  //The test functions are equal to the shape functions
+  ptest = ppsi;
+  dptestdx = dppsidx;
   
   // Return the determinant of the jacobian
   return det;
@@ -2401,36 +2232,18 @@ const
 
 
 //==========================================================================
-/// 2D :
 /// Pressure shape and test functions
 //==========================================================================
-template<>
-inline void QTaylorHoodElement<2>::pshape_nst(const Vector<double> &s, 
-                                              Shape &psi, 
-                                              Shape &test) const
+template<unsigned DIM>
+inline void QTaylorHoodElement<DIM>::pshape_nst(const Vector<double> &s, 
+                                                Shape &psi, 
+                                                Shape &test) const
 {
  //Call the pressure shape functions
- pshape_nst(s,psi);
- //Loop over the test functions and set them equal to the shape functions
- for(unsigned i=0;i<4;i++) test[i] = psi[i];
+ this->pshape_nst(s,psi);
+ //Test functions are shape functions
+ test = psi;
 }
-
-
-//==========================================================================
-/// 3D :
-/// Pressure shape and test functions
-//==========================================================================
-template<>
-inline void QTaylorHoodElement<3>::pshape_nst(const Vector<double> &s, 
-                                              Shape &psi, 
-                                              Shape &test) const
-{
- //Call the pressure shape functions
- pshape_nst(s,psi);
- //Loop over the test functions and set them equal to the shape functions
- for(unsigned i=0;i<8;i++) test[i] = psi[i];
-}
-
 
 
 //=======================================================================

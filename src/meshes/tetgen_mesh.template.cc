@@ -192,12 +192,29 @@ void TetgenMesh<ELEMENT>::build_from_scaffold(TimeStepper* time_stepper_pt)
  MapMatrix<Node*,Node*> central_edge_node_pt;
  Node* edge_node1_pt=0;
  Node* edge_node2_pt=0;
+ 
+ // Map storing the mid point of a face; face identified by
+ // set of pointers to vertex nodes in scaffold mesh
+ std::map<std::set<Node*>,Node*> central_face_node_pt;
+ std::set<Node*> face_nodes_pt;
+
+ //Mapping of Tetgen faces to face nodes in the enriched element
+ unsigned face_map[4] = {1,0,2,3};
 
  // Loop over all elements
  for (unsigned e=0;e<nelem;e++)
   {
-   // Loop over the new nodes in the element and create them.
-   for(unsigned j=4;j<nnode;j++)
+   //For standard quadratic elements all nodes are edge nodes
+   unsigned n_vertex_and_edge_node = nnode;
+   //If we have enriched elements, there are only 10 vertex and edge nodes
+   if(nnode==15)
+    {
+     //There are only 10 vertex and edge nodes
+     n_vertex_and_edge_node = 10;
+    }
+
+   // Loop over the new (edge) nodes in the element and create them.
+   for(unsigned j=4;j<n_vertex_and_edge_node;j++)
     {
      
      // Figure out edge nodes
@@ -252,7 +269,7 @@ void TetgenMesh<ELEMENT>::build_from_scaffold(TimeStepper* time_stepper_pt)
        //Error       
       default:
 
-       throw OomphLibError("More than ten nodes in Tet Element",
+       throw OomphLibError("More than ten edge nodes in Tet Element",
                            "TetgenMesh::build_from_scaffold()",
                            OOMPH_EXCEPTION_LOCATION);
       }
@@ -311,6 +328,130 @@ void TetgenMesh<ELEMENT>::build_from_scaffold(TimeStepper* time_stepper_pt)
       }
 
     } // end of loop over new nodes
+
+   //Need to sort out the face nodes
+   if(nnode==15)
+    {
+     // Loop over the new (face) nodes in the element and create them.
+     for(unsigned j=10;j<14;j++)
+      {
+       //Empty the set of face nodes
+       face_nodes_pt.clear();
+       // Figure out face nodes
+       switch(j)
+        {
+         
+         // Node 10 is between nodes 0 and 1 and 3
+        case 10:
+         
+         face_nodes_pt.insert(Tmp_mesh_pt->finite_element_pt(e)->node_pt(0));
+         face_nodes_pt.insert(Tmp_mesh_pt->finite_element_pt(e)->node_pt(1));
+         face_nodes_pt.insert(Tmp_mesh_pt->finite_element_pt(e)->node_pt(3));
+         break;
+         
+         // Node 11 is between nodes 0 and 1 and 2
+        case 11:
+         
+         face_nodes_pt.insert(Tmp_mesh_pt->finite_element_pt(e)->node_pt(0));
+         face_nodes_pt.insert(Tmp_mesh_pt->finite_element_pt(e)->node_pt(1));
+         face_nodes_pt.insert(Tmp_mesh_pt->finite_element_pt(e)->node_pt(2));
+         break;
+         
+         // Node 12 is between nodes 0 and 2 and 3
+        case 12:
+         
+         face_nodes_pt.insert(Tmp_mesh_pt->finite_element_pt(e)->node_pt(0));
+         face_nodes_pt.insert(Tmp_mesh_pt->finite_element_pt(e)->node_pt(2));
+         face_nodes_pt.insert(Tmp_mesh_pt->finite_element_pt(e)->node_pt(3));
+         break;
+         
+         // Node 13 is between nodes 1 and 2 and 3
+        case 13:
+         
+         face_nodes_pt.insert(Tmp_mesh_pt->finite_element_pt(e)->node_pt(1));
+         face_nodes_pt.insert(Tmp_mesh_pt->finite_element_pt(e)->node_pt(2));
+         face_nodes_pt.insert(Tmp_mesh_pt->finite_element_pt(e)->node_pt(3));
+         break;
+         
+         
+         //Error       
+        default:
+         
+         throw OomphLibError("More than four face nodes in Tet Element",
+                             "TetgenMesh::build_from_scaffold()",
+                             OOMPH_EXCEPTION_LOCATION);
+        }
+       
+       // Do we need a boundary node?
+       bool need_boundary_node=false;
+
+       //Work it out from the face boundary
+       boundary_id = Tmp_mesh_pt->face_boundary(e,face_map[j-10]);
+       //If it's non-zero then we do need to create a boundary node
+       if(boundary_id!=0) {need_boundary_node=true;}
+       
+       // Do we need a new node?
+       if (central_face_node_pt[face_nodes_pt]==0)
+        {       
+         Node* new_node_pt=0;
+         
+         // Create a new  boundary node       
+         if (need_boundary_node)
+          {
+           new_node_pt=finite_element_pt(e)->
+            construct_boundary_node(j,time_stepper_pt);
+           //Add it to the boundary
+           add_boundary_node(boundary_id-1,new_node_pt);
+          }
+         // Create new normal node
+         else
+          {
+           new_node_pt=finite_element_pt(e)->
+            construct_node(j,time_stepper_pt);
+          }
+         Node_pt.push_back(new_node_pt);
+       
+       // Now indicate existence of newly created mideside node in map 
+       central_face_node_pt[face_nodes_pt]=new_node_pt;
+       
+       // What are the node's local coordinates?
+       finite_element_pt(e)->local_coordinate_of_node(j,s);
+       
+       // Find the coordinates of the new node from the existing
+       // and fully-functional element in the scaffold mesh
+       for(unsigned i=0;i<dim;i++)
+        {
+         new_node_pt->x(i)=
+          Tmp_mesh_pt->finite_element_pt(e)->interpolated_x(s,i);
+        }
+        }
+       else
+        {
+         // Set pointer to the existing node
+         finite_element_pt(e)->node_pt(j)=
+          central_face_node_pt[face_nodes_pt];
+        }
+      } //End of loop over face nodes
+
+     
+     //Construct the element's central node, which is not on a boundary
+     {
+      Node* new_node_pt=
+       finite_element_pt(e)->construct_node(14,time_stepper_pt);
+      Node_pt.push_back(new_node_pt);
+      
+      // What are the node's local coordinates?
+      finite_element_pt(e)->local_coordinate_of_node(14,s);
+      // Find the coordinates of the new node from the existing
+      // and fully-functional element in the scaffold mesh
+      for(unsigned i=0;i<dim;i++)
+       {
+        new_node_pt->x(i)=
+         Tmp_mesh_pt->finite_element_pt(e)->interpolated_x(s,i);
+       }
+     }
+    } //End of enriched case
+ 
   } //end of loop over elements
    
  
@@ -1161,7 +1302,9 @@ void TetgenMesh<ELEMENT>::split_elements_in_corners(
  
  // Find out how many nodes we have along each element edge
  unsigned nnode_1d=finite_element_pt(0)->nnode_1d();
- 
+ // Find out the total number of nodes
+ unsigned nnode = this->finite_element_pt(0)->nnode();
+
  // At the moment we're only able to deal with nnode_1d=2 or 3.
  if ((nnode_1d!=2)&&(nnode_1d!=3))
   {
@@ -1243,6 +1386,12 @@ void TetgenMesh<ELEMENT>::split_elements_in_corners(
      Node* node2_pt=0;
      Node* node3_pt=0;
      Node* node4_pt=0;
+     Node* node5_pt=0;
+     Node* node6_pt=0;
+     Node* node7_pt=0;
+     Node* node8_pt=0;
+     Node* node9_pt=0;
+     Node* node10_pt=0;
 
      // Create first new element      
      FiniteElement* el1_pt=new ELEMENT;
@@ -1258,8 +1407,24 @@ void TetgenMesh<ELEMENT>::split_elements_in_corners(
        el1_pt->node_pt(9)=el_pt->node_pt(9);
       }
 
-     // Create new nodes
-     node0_pt=el1_pt->construct_boundary_node(2,time_stepper_pt);
+     // Create new nodes 
+     // If we have an enriched element then don't need to construct centroid
+     // node
+     if(nnode==15)
+      {
+       node0_pt = el_pt->node_pt(14);
+       el1_pt->node_pt(2) = node0_pt;
+       node5_pt = el1_pt->construct_node(11,time_stepper_pt);
+       node6_pt = el1_pt->construct_node(13,time_stepper_pt);
+       node9_pt = el1_pt->construct_node(12,time_stepper_pt);
+       //Copy others over
+       el1_pt->node_pt(10) = el_pt->node_pt(10);
+      }
+     //If not enriched we do
+     else
+      {
+       node0_pt=el1_pt->construct_node(2,time_stepper_pt);
+      }
      if (nnode_1d==3)
       {
        node1_pt=el1_pt->construct_boundary_node(5,time_stepper_pt); 
@@ -1295,7 +1460,16 @@ void TetgenMesh<ELEMENT>::split_elements_in_corners(
        el2_pt->node_pt(6)=node1_pt;
        el2_pt->node_pt(9)=node2_pt;
       }
-     
+
+     //Copy and constuct other nodes for enriched elements
+     if(nnode==15)
+      {
+       el2_pt->node_pt(10) = node5_pt;
+       el2_pt->node_pt(11) = el_pt->node_pt(11);
+       node8_pt = el2_pt->construct_node(12,time_stepper_pt);
+       node10_pt = el2_pt->construct_node(13,time_stepper_pt);
+      }
+
      // Create third new element
      FiniteElement* el3_pt=new ELEMENT;
      
@@ -1319,6 +1493,14 @@ void TetgenMesh<ELEMENT>::split_elements_in_corners(
        el3_pt->node_pt(6)=node4_pt;
       }
      
+      //Copy and constuct other nodes for enriched elements
+     if(nnode==15)
+      {
+       el3_pt->node_pt(10) = node6_pt;
+       el3_pt->node_pt(11) = node10_pt;
+       node7_pt = el3_pt->construct_node(12,time_stepper_pt);
+       el3_pt->node_pt(13) = el_pt->node_pt(13);
+      }
      
      
      // Create fourth new element
@@ -1343,6 +1525,15 @@ void TetgenMesh<ELEMENT>::split_elements_in_corners(
        el4_pt->node_pt(7)=node3_pt;
        el4_pt->node_pt(9)=node4_pt;
       }
+     
+     //Copy all other nodes
+     if(nnode==15)
+      {
+       el4_pt->node_pt(10) = node9_pt;
+       el4_pt->node_pt(11) = node8_pt;
+       el4_pt->node_pt(12) = el_pt->node_pt(12);
+       el4_pt->node_pt(13) = node7_pt;;
+      }
 
 
      // Add new elements and nodes
@@ -1351,21 +1542,34 @@ void TetgenMesh<ELEMENT>::split_elements_in_corners(
      new_el_pt.push_back(el3_pt);
      new_el_pt.push_back(el4_pt);
        
-     this->add_node_pt(node0_pt);
+     if(nnode!=15)
+      {
+       this->add_node_pt(node0_pt);
+      }
      this->add_node_pt(node1_pt);
      this->add_node_pt(node2_pt);
      this->add_node_pt(node3_pt);
      this->add_node_pt(node4_pt);
-
+     if(nnode==15)
+      {
+       this->add_node_pt(node5_pt);
+       this->add_node_pt(node6_pt);
+       this->add_node_pt(node7_pt);
+       this->add_node_pt(node8_pt);
+       this->add_node_pt(node9_pt);
+      }
 
      // Set nodal positions
      for (unsigned i=0;i<3;i++)
       {
-       node0_pt->x(i)=0.25*(el_pt->node_pt(0)->x(i)+
-                            el_pt->node_pt(1)->x(i)+
-                            el_pt->node_pt(2)->x(i)+
-                            el_pt->node_pt(3)->x(i));
-
+       //Only bother to set centroid if does not already exist
+       if(nnode!=15)
+        {
+         node0_pt->x(i)=0.25*(el_pt->node_pt(0)->x(i)+
+                              el_pt->node_pt(1)->x(i)+
+                              el_pt->node_pt(2)->x(i)+
+                              el_pt->node_pt(3)->x(i));
+        }
 
        if (nnode_1d==3)
         {
@@ -1375,14 +1579,125 @@ void TetgenMesh<ELEMENT>::split_elements_in_corners(
          node4_pt->x(i)=0.5*(el_pt->node_pt(3)->x(i)+node0_pt->x(i));
         }
       }
+     
 
-//      ofstream junk("junk.dat");
-//      el_pt->output(junk);
-//      el1_pt->output(junk);
-//      el2_pt->output(junk);
-//      el3_pt->output(junk);
-//      el4_pt->output(junk);
-//      junk.close();
+     //Construct the four interior nodes if needed
+     //and add to the list
+     if(nnode==15)
+      {
+       //Set the positions of the newly created mid-face nodes
+       //New Node 5 lies in the plane between original nodes 0 1 centroid
+       for(unsigned i=0;i<3;++i)
+        {
+         node5_pt->x(i) = 
+          (el_pt->node_pt(0)->x(i) + el_pt->node_pt(1)->x(i) 
+           + el_pt->node_pt(14)->x(i))/3.0;
+        }
+
+       //New Node 6 lies in the plane between original nodes 1 3 centroid
+       for(unsigned i=0;i<3;++i)
+        {
+         node6_pt->x(i) = 
+          (el_pt->node_pt(1)->x(i) + el_pt->node_pt(3)->x(i) 
+           + el_pt->node_pt(14)->x(i))/3.0;
+        }
+
+       //New Node 7 lies in the plane between original nodes 2 3 centroid
+       for(unsigned i=0;i<3;++i)
+        {
+         node7_pt->x(i) = 
+          (el_pt->node_pt(2)->x(i) + el_pt->node_pt(3)->x(i) 
+           + el_pt->node_pt(14)->x(i))/3.0;
+        }
+
+       //New Node 8 lies in the plane between original nodes 0 2 centroid
+       for(unsigned i=0;i<3;++i)
+        {
+         node8_pt->x(i) = 
+          (el_pt->node_pt(0)->x(i) + el_pt->node_pt(2)->x(i) 
+           + el_pt->node_pt(14)->x(i))/3.0;
+        }
+       
+       //New Node 9 lies in the plane between original nodes 0 3 centroid
+       for(unsigned i=0;i<3;++i)
+        {
+         node9_pt->x(i) = 
+          (el_pt->node_pt(0)->x(i) + el_pt->node_pt(3)->x(i) 
+           + el_pt->node_pt(14)->x(i))/3.0;
+        }
+       
+       //New Node 10 lies in the plane between original nodes 1 2 centroid
+       for(unsigned i=0;i<3;++i)
+        {
+         node10_pt->x(i) = 
+          (el_pt->node_pt(1)->x(i) + el_pt->node_pt(2)->x(i) 
+           + el_pt->node_pt(14)->x(i))/3.0;
+        }
+       
+       //Now create the new centroid nodes
+       
+       //First element
+       Node* temp_nod_pt = el1_pt->construct_node(14,time_stepper_pt);
+       for(unsigned i=0;i<3;++i)
+        {
+         double av_pos = 0.0;
+         for(unsigned j=0;j<4;j++)
+          {
+           av_pos += el1_pt->node_pt(j)->x(i);
+          }
+         
+         temp_nod_pt->x(i) = 0.25*av_pos;
+        }
+       
+       this->add_node_pt(temp_nod_pt);
+       
+       //Second element
+       temp_nod_pt = el2_pt->construct_node(14,time_stepper_pt);
+       for(unsigned i=0;i<3;++i)
+        {
+         double av_pos = 0.0;
+         for(unsigned j=0;j<4;j++)
+          {
+           av_pos += el2_pt->node_pt(j)->x(i);
+          }
+         temp_nod_pt->x(i) = 0.25*av_pos;
+        }
+       this->add_node_pt(temp_nod_pt);
+
+       //Third element
+       temp_nod_pt = el3_pt->construct_node(14,time_stepper_pt);
+       for(unsigned i=0;i<3;++i)
+        {
+         double av_pos = 0.0;
+         for(unsigned j=0;j<4;j++)
+          {
+           av_pos += el3_pt->node_pt(j)->x(i);
+          }
+         temp_nod_pt->x(i) = 0.25*av_pos;
+        }
+       this->add_node_pt(temp_nod_pt);
+
+       //Fourth element
+       temp_nod_pt = el4_pt->construct_node(14,time_stepper_pt);
+       for(unsigned i=0;i<3;++i)
+        {
+         double av_pos = 0.0;
+         for(unsigned j=0;j<4;j++)
+          {
+           av_pos += el4_pt->node_pt(j)->x(i);
+          }
+         temp_nod_pt->x(i) = 0.25*av_pos;
+        }
+       this->add_node_pt(temp_nod_pt);
+      }
+
+      std::ofstream junk("junk.dat");
+      el_pt->output(junk);
+      el1_pt->output(junk);
+      el2_pt->output(junk);
+      el3_pt->output(junk);
+      el4_pt->output(junk);
+      junk.close();
  
      // Kill old element
      delete el_pt;

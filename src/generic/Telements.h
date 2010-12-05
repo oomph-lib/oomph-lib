@@ -374,7 +374,7 @@ template<>
 
 
 //=======================================================================
-/// Second derivatives of shape functions for specific TElement<2,3>:
+/// Second derivatives of shape functions for specific TElement<1,3>:
 /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
 //=======================================================================
   void d2shape_local(const Vector<double> &s, 
@@ -894,6 +894,204 @@ void d2shape_local(const Vector<double> &s,
 };
 
 
+
+//========================================================================
+/// A class for those member functions that must be fully specialised
+/// for Telements that are enriched by bubbble functions. 
+/// The fact that member functions of partially
+/// specialised classes cannot necessarily be fully specialised 
+/// means that we must either fully specialise every class, or use this
+/// base class to fully specialize only those functions that are required.
+//========================================================================
+template<unsigned DIM, unsigned NNODE_1D>
+ class TBubbleEnrichedElementShape { };
+
+
+///////////////////////////////////////////////////////////////////////
+/// Specific Enriched TElementShape inline functions
+//////////////////////////////////////////////////////////////////////
+
+//===============================================================
+///Standard quadratic shape functions enriched by the addition
+///of a cubic bubble, which consists of adding a single node
+///at the centroid
+//=============================================================
+template<>
+ class TBubbleEnrichedElementShape<2,3>
+ {
+   public:
+
+  //=====================================================================
+  /// Return the number of nodes required for enrichement
+  //====================================================================
+  unsigned n_enriched_nodes() {return 1;}
+  
+//=======================================================================
+/// Return local coordinates of node j
+//=======================================================================
+  void local_coordinate_of_node(const unsigned& j,
+                                Vector<double>& s)
+   {
+    switch (j)
+     {
+     case 0:
+      s[0]=1.0;
+      s[1]=0.0;
+      break;
+      
+     case 1:
+      s[0]=0.0;
+      s[1]=1.0;
+      break;
+      
+     case 2:
+      s[0]=0.0;
+      s[1]=0.0;
+      break;
+      
+     case 3:
+      s[0]=0.5;
+      s[1]=0.5;
+      break;
+      
+     case 4:
+      s[0]=0.0;
+      s[1]=0.5;
+      break;
+      
+     case 5:
+      s[0]=0.5;
+      s[1]=0.0;
+      break;
+     
+      //Add the centroid as the enriched node
+     case 6:
+      s[0] = 1.0/3.0;
+      s[1] = 1.0/3.0;
+      break;
+      
+     default:
+      std::ostringstream error_message;
+      error_message << 
+       "Element only has seven nodes; called with node number " 
+                    << j << std::endl;
+      
+      throw OomphLibError(error_message.str(),
+                          "TEnrichedElement::local_coordinate_of_node()",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+   }
+
+
+//=======================================================================
+/// Shape function for specific TBubbleEnrichedElement<2,3>
+//=======================================================================
+  void shape(const Vector<double> &s, Shape &psi) const
+{
+ // Reconstruct the third area coordinate
+ const double s_2=1.0-s[0]-s[1];
+
+ //Calculate the enrichment function
+ const double cubic_bubble = s[0]*s[1]*s_2;
+ //The appropriate amount of the cubic bubble function is 
+ //added/subtracted to each original quadratic shape function to ensure that
+ //it is zero at the centroid (1/3,1/3).
+
+ // note that s[2] needs replacing by s_2 everywhere since only 
+ // two independent variables s[0],s[1] and s_2 is expressed in terms of those
+ // later.
+ psi[0] = 2.0*s[0]*(s[0]-0.5) + 3.0*cubic_bubble;
+ psi[1] = 2.0*s[1]*(s[1]-0.5) + 3.0*cubic_bubble;
+ psi[2] = 2.0*s_2 *(s_2 -0.5) + 3.0*cubic_bubble;
+ psi[3] = 4.0*s[0]*s[1] - 12.0*cubic_bubble;
+ psi[4] = 4.0*s[1]*s_2  - 12.0*cubic_bubble;
+ psi[5] = 4.0*s_2*s[0]  - 12.0*cubic_bubble;
+ //The bubble function scaled to have magnitude one at (1/3,1/3)
+ psi[6] = 27.0*cubic_bubble;
+}
+
+
+//=======================================================================
+/// Derivatives of shape functions for specific TBubbleElement<2,3>
+//=======================================================================
+  void dshape_local(const Vector<double> &s,
+                    Shape &psi, DShape &dpsids) const
+   {
+ //ALH: Don't know why object qualifier is needed
+ this->shape(s, psi);
+ 
+ //Calculate derivatives of bubble functions
+ const double d_bubble_ds0 = s[1]*(1.0 - s[1] - 2.0*s[0]);
+ const double d_bubble_ds1 = s[0]*(1.0 - s[0] - 2.0*s[1]);
+
+ //Add the appropriate derivatives to the shape functions
+ dpsids(0,0) = 4.0*s[0]-1.0 + 3.0*d_bubble_ds0;
+ dpsids(0,1) = 0.0 + 3.0*d_bubble_ds1;
+ dpsids(1,0) = 0.0 + 3.0*d_bubble_ds0;
+ dpsids(1,1) = 4.0*s[1]-1.0 + 3.0*d_bubble_ds1;
+ dpsids(2,0) = 2.0*(2.0*s[0]-1.5+2.0*s[1]) + 3.0*d_bubble_ds0;
+ dpsids(2,1) = 2.0*(2.0*s[0]-1.5+2.0*s[1]) + 3.0*d_bubble_ds1;
+ dpsids(3,0) = 4.0*s[1] - 12.0*d_bubble_ds0;
+ dpsids(3,1) = 4.0*s[0] - 12.0*d_bubble_ds1;
+ dpsids(4,0) = -4.0*s[1] - 12.0*d_bubble_ds0;
+ dpsids(4,1) = 4.0*(1.0-s[0]-2.0*s[1]) - 12.0*d_bubble_ds1;
+ dpsids(5,0) = 4.0*(1.0-2.0*s[0]-s[1]) - 12.0*d_bubble_ds0;
+ dpsids(5,1) = -4.0*s[0] - 12.0*d_bubble_ds1;
+ dpsids(6,0) = 27.0*d_bubble_ds0;
+ dpsids(6,1) = 27.0*d_bubble_ds1;
+}
+
+
+//=======================================================================
+/// Second derivatives of shape functions for specific 
+/// TBubbleElement<2,3>:
+/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
+/// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
+/// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ \n
+//=======================================================================
+  void d2shape_local(const Vector<double> &s, 
+                     Shape &psi, 
+                     DShape &dpsids, 
+                     DShape &d2psids) const
+   {
+    //ALH: Don't know why object qualifier is needed
+    this->dshape_local(s, psi,dpsids);
+    
+    //Calculate derivatives of bubble functions
+    const double d2_bubble_ds0 = -2.0*s[1];
+    const double d2_bubble_ds1 = -2.0*s[0];
+    const double d2_bubble_ds2 = 1.0 - 2.0*s[0] - 2.0*s[1];
+
+    d2psids(0,0) = 4.0 + 3.0*d2_bubble_ds0;
+    d2psids(0,1) = 0.0 + 3.0*d2_bubble_ds1;
+    d2psids(0,2) = 0.0 + 3.0*d2_bubble_ds2;
+    
+    d2psids(1,0) = 0.0 + 3.0*d2_bubble_ds0;
+    d2psids(1,1) = 4.0 + 3.0*d2_bubble_ds1;
+    d2psids(1,2) = 0.0 + 3.0*d2_bubble_ds2;
+    
+    d2psids(2,0) = 4.0 + 3.0*d2_bubble_ds0;
+    d2psids(2,1) = 4.0 + 3.0*d2_bubble_ds1;
+    d2psids(2,2) = 4.0 + 3.0*d2_bubble_ds2;
+
+    d2psids(3,0) = 0.0 - 12.0*d2_bubble_ds0;
+    d2psids(3,1) = 0.0 - 12.0*d2_bubble_ds1;
+    d2psids(3,2) = 4.0 - 12.0*d2_bubble_ds2;
+    
+    d2psids(4,0) = 0.0 - 12.0*d2_bubble_ds0;
+    d2psids(4,1) = -8.0 - 12.0*d2_bubble_ds1;
+    d2psids(4,2) = -4.0 - 12.0*d2_bubble_ds2;
+    
+    d2psids(5,0) = -8.0 - 12.0*d2_bubble_ds0;
+    d2psids(5,1) = 0.0 - 12.0*d2_bubble_ds1;
+    d2psids(5,2) = -4.0 - 12.0*d2_bubble_ds2;
+
+    d2psids(6,0) = 27.0*d2_bubble_ds0;
+    d2psids(6,1) = 27.0*d2_bubble_ds1;
+    d2psids(6,2) = 27.0*d2_bubble_ds2;
+   }
+  
+ };
 
 //========================================================================
 /// Empty base class for Telements (created so that 
@@ -1826,6 +2024,696 @@ void d2shape_local(const Vector<double> &s,
 
 };
 
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+//====================================================================
+///Standard quadratic shape functions enriched by the addition of 
+///three cubic "face" bubbles and quartic "volume" bubble, 
+///which consists of adding a node at the centroid of
+///each face and a single node at the centroid
+///of the tetrahedron
+//=========================================================================
+
+//=======================================================================
+/// Return local coordinates of node j
+//=======================================================================
+template<>
+ class TBubbleEnrichedElementShape<3,3>
+ {
+   public:
+  
+  unsigned n_enriched_nodes() {return 5;}
+
+  void local_coordinate_of_node(const unsigned& j,
+                                Vector<double>& s)
+{
+ switch (j)
+  {
+  case 0:
+   s[0]=1.0;
+   s[1]=0.0;
+   s[2]=0.0;
+   break;
+
+  case 1:
+   s[0]=0.0;
+   s[1]=1.0;
+   s[2]=0.0;
+   break;
+
+  case 2:
+   s[0]=0.0;
+   s[1]=0.0;
+   s[2]=1.0;
+   break;
+
+  case 3:
+   s[0]=0.0;
+   s[1]=0.0;
+   s[2]=0.0;
+   break;
+
+  case 4:
+   s[0]=0.5;
+   s[1]=0.5;
+   s[2]=0.0;
+   break;
+
+  case 5:
+   s[0]=0.5;
+   s[1]=0.0;
+   s[2]=0.5;
+   break;
+
+  case 6:
+   s[0]=0.5;
+   s[1]=0.0;
+   s[2]=0.0;
+   break;
+
+  case 7:
+   s[0]=0.0;
+   s[1]=0.5;
+   s[2]=0.5;
+   break;
+
+  case 8:
+   s[0]=0.0;
+   s[1]=0.0;
+   s[2]=0.5;
+   break;
+
+  case 9:
+   s[0]=0.0;
+   s[1]=0.5;
+   s[2]=0.0;
+   break;
+
+   //Node at centroid of face spanned by nodes 0, 1, 3
+  case 10:
+   s[0]=1.0/3.0;
+   s[1]=1.0/3.0;
+   s[2]=0.0;
+   break;
+
+   //Node at centroid of face spanned by nodes 0, 1, 2
+  case 11:
+   s[0]=1.0/3.0;
+   s[1]=1.0/3.0;
+   s[2]=1.0/3.0;
+   break;
+
+   //Node at centroid of face spanned by nodes 0, 2, 3
+  case 12:
+   s[0]=1.0/3.0;
+   s[1]=0.0;
+   s[2]=1.0/3.0;
+   break;
+   
+   //Node at centroid of face spannd by nodes 1, 2, 3
+  case 13:
+   s[0]=0.0;
+   s[1]=1.0/3.0;
+   s[2]=1.0/3.0;
+   break;
+   
+   //Node at centroid of volume
+  case 14:
+   s[0] = 0.25;
+   s[1] = 0.25;
+   s[2] = 0.25;
+   break;
+
+
+  default:
+   std::ostringstream error_message;
+   error_message << "Element only has fifteen nodes; called with node number " 
+                 << j << std::endl;
+   
+   throw OomphLibError(error_message.str(),
+                       "TElement::local_coordinate_of_node()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+}
+
+
+
+//=======================================================================
+/// Shape function for specific TBubbleEnrichedElement<3,3>
+//=======================================================================
+void shape(const Vector<double> &s, Shape &psi) const
+ {
+  //Constructe the fourth volume coordinate
+  const double s3=1.0-s[0]-s[1]-s[2];
+  //calculate the enrichment functions
+  const double quartic_bubble = s[0]*s[1]*s[2]*s3;
+  const double cubic_bubble012 = s[0]*s[1]*s[2];
+  const double cubic_bubble013 = s[0]*s[1]*s3;
+  const double cubic_bubble023 = s[0]*s[2]*s3;
+  const double cubic_bubble123 = s[1]*s[2]*s3;
+
+  //The appropriate "amount" of cubic and quartic bubble functions are
+  //added/subtracted
+  //to each original quadratic shape function to ensure that the new 
+  //shape function is zero at the centroid (0.25,0.25,0.25)
+  //and at the face centroids
+  psi[0] = (2.0*s[0]-1.0)*s[0]   
+   + 3.0*(cubic_bubble012 + cubic_bubble013 + cubic_bubble023)
+   - 4.0*quartic_bubble;
+  psi[1] = (2.0*s[1]-1.0)*s[1]   
+   + 3.0*(cubic_bubble012 + cubic_bubble013 + cubic_bubble123)
+   - 4.0*quartic_bubble;
+  psi[2] = (2.0*s[2]-1.0)*s[2]   
+   + 3.0*(cubic_bubble012 + cubic_bubble023 + cubic_bubble123)
+   - 4.0*quartic_bubble;
+  psi[3] = (2.0*s3-1.0)*s3       
+   + 3.0*(cubic_bubble013 + cubic_bubble023 + cubic_bubble123)
+   -4.0*quartic_bubble;
+  psi[4] = 4.0*s[0]*s[1] 
+   - 12.0*(cubic_bubble012 + cubic_bubble013)
+   + 32.0*quartic_bubble;
+  psi[5] = 4.0*s[0]*s[2] 
+   - 12.0*(cubic_bubble012 + cubic_bubble023)
+   + 32.0*quartic_bubble;
+  psi[6] = 4.0*s[0]*s3   
+   - 12.0*(cubic_bubble013 + cubic_bubble023)
+   + 32.0*quartic_bubble;
+  psi[7] = 4.0*s[1]*s[2] 
+   - 12.0*(cubic_bubble012 + cubic_bubble123)
+   + 32.0*quartic_bubble;
+  psi[8] = 4.0*s[2]*s3   
+   - 12.0*(cubic_bubble023 + cubic_bubble123)
+   + 32.0*quartic_bubble;
+  psi[9] = 4.0*s[1]*s3   
+   - 12.0*(cubic_bubble013 + cubic_bubble123)
+   + 32.0*quartic_bubble;
+  //Add the bubble function on the face spanned by 0 1 3
+  psi[10] = 27.0*cubic_bubble013 - 108.0*quartic_bubble;
+  //Add the bubble function on the face spanned by 0 1 2
+  psi[11] = 27.0*cubic_bubble012 - 108.0*quartic_bubble;
+  //Add the bubble function on the face spanned by 0 2 3
+  psi[12] = 27.0*cubic_bubble023 - 108.0*quartic_bubble;
+  //Add the bubble function on the face spanned by 1 2 3
+  psi[13] = 27.0*cubic_bubble123 - 108.0*quartic_bubble;
+  //Add the volume bubble function, scaled to have value one
+  psi[14] = 256.0*quartic_bubble;
+}
+
+
+//=======================================================================
+/// Derivatives of shape functions for specific TElement<3,3>
+//=======================================================================
+void dshape_local(const Vector<double> &s,
+                  Shape &psi, DShape &dpsids) const
+{
+ //ALH: Don't know why object qualifier is needed
+ this->shape(s, psi);
+
+ //Define s3 the fourth volume coordinate
+ const double s3=1.0-s[0]-s[1]-s[2]; 
+
+ //Calculate derivatives of the bubble function
+ const double d_quartic_bubble_ds0 = s[1]*s[2]*(1.0 - s[1] - s[2] - 2.0*s[0]);
+ const double d_quartic_bubble_ds1 = s[0]*s[2]*(1.0 - s[0] - s[2] - 2.0*s[1]);
+ const double d_quartic_bubble_ds2 = s[0]*s[1]*(1.0 - s[0] - s[1] - 2.0*s[2]);
+
+ const double d_cubic_bubble012_ds0 = s[1]*s[2];
+ const double d_cubic_bubble012_ds1 = s[0]*s[2];
+ const double d_cubic_bubble012_ds2 = s[0]*s[1];
+
+ const double d_cubic_bubble013_ds0 = s[1]*(s3 - s[0]);
+ const double d_cubic_bubble013_ds1 = s[0]*(s3 - s[1]);
+ const double d_cubic_bubble013_ds2 = -s[0]*s[1];
+
+ const double d_cubic_bubble023_ds0 = s[2]*(s3 - s[0]);
+ const double d_cubic_bubble023_ds1 = -s[0]*s[2]; 
+ const double d_cubic_bubble023_ds2 = s[0]*(s3 - s[2]);
+
+ const double d_cubic_bubble123_ds0 = -s[1]*s[2];
+ const double d_cubic_bubble123_ds1 = s[2]*(s3 - s[1]);
+ const double d_cubic_bubble123_ds2 = s[1]*(s3 - s[2]);
+
+
+ //Add the appropriate dervatives of the bubble function to the
+ //shape function derivatives
+ dpsids(0,0) = 4.0*s[0]-1.0 
+  + 3.0*(d_cubic_bubble012_ds0 + d_cubic_bubble013_ds0 + d_cubic_bubble023_ds0)
+  - 4.0*d_quartic_bubble_ds0;
+ dpsids(0,1) = 0.0          
+  + 3.0*(d_cubic_bubble012_ds1 + d_cubic_bubble013_ds1 + d_cubic_bubble023_ds1)
+   - 4.0*d_quartic_bubble_ds1;
+ dpsids(0,2) = 0.0          
+  + 3.0*(d_cubic_bubble012_ds2 + d_cubic_bubble013_ds2 + d_cubic_bubble023_ds2)
+  - 4.0*d_quartic_bubble_ds2;
+
+ dpsids(1,0) = 0.0          
+  + 3.0*(d_cubic_bubble012_ds0 + d_cubic_bubble013_ds0 + d_cubic_bubble123_ds0)
+  - 4.0*d_quartic_bubble_ds0;
+ dpsids(1,1) = 4.0*s[1]-1.0 
+  + 3.0*(d_cubic_bubble012_ds1 + d_cubic_bubble013_ds1 + d_cubic_bubble123_ds1)
+  - 4.0*d_quartic_bubble_ds1;
+ dpsids(1,2) = 0.0          
+  + 3.0*(d_cubic_bubble012_ds2 + d_cubic_bubble013_ds2 + d_cubic_bubble123_ds2)
+  - 4.0*d_quartic_bubble_ds2;
+
+ dpsids(2,0) = 0.0          
+  + 3.0*(d_cubic_bubble012_ds0 + d_cubic_bubble023_ds0 + d_cubic_bubble123_ds0)
+  - 4.0*d_quartic_bubble_ds0;
+ dpsids(2,1) = 0.0          
+  + 3.0*(d_cubic_bubble012_ds1 + d_cubic_bubble023_ds1 + d_cubic_bubble123_ds1)
+  - 4.0*d_quartic_bubble_ds1;
+ dpsids(2,2) = 4.0*s[2]-1.0 
+  + 3.0*(d_cubic_bubble012_ds2 + d_cubic_bubble023_ds2 + d_cubic_bubble123_ds2)
+  - 4.0*d_quartic_bubble_ds2;
+
+ dpsids(3,0) = -4.0*s3+1.0   
+  + 3.0*(d_cubic_bubble013_ds0 + d_cubic_bubble023_ds0 + d_cubic_bubble123_ds0)
+  -4.0*d_quartic_bubble_ds0;
+ dpsids(3,1) = -4.0*s3+1.0 
+  + 3.0*(d_cubic_bubble013_ds1 + d_cubic_bubble023_ds1 + d_cubic_bubble123_ds1)
+  -4.0*d_quartic_bubble_ds1;
+ dpsids(3,2) = -4.0*s3+1.0   
+  + 3.0*(d_cubic_bubble013_ds2 + d_cubic_bubble023_ds2 + d_cubic_bubble123_ds2)
+  -4.0*d_quartic_bubble_ds2;
+
+ dpsids(4,0) = 4.0*s[1]  
+  - 12.0*(d_cubic_bubble012_ds0 + d_cubic_bubble013_ds0)
+   + 32.0*d_quartic_bubble_ds0;
+ dpsids(4,1) = 4.0*s[0]  
+  - 12.0*(d_cubic_bubble012_ds1 + d_cubic_bubble013_ds1)
+   + 32.0*d_quartic_bubble_ds1;
+ dpsids(4,2) = 0.0       
+  - 12.0*(d_cubic_bubble012_ds2 + d_cubic_bubble013_ds2)
+  + 32.0*d_quartic_bubble_ds2;
+
+ dpsids(5,0) = 4.0*s[2]    
+  - 12.0*(d_cubic_bubble012_ds0 + d_cubic_bubble023_ds0)
+  + 32.0*d_quartic_bubble_ds0;
+ dpsids(5,1) = 0.0       
+  - 12.0*(d_cubic_bubble012_ds1 + d_cubic_bubble023_ds1)
+  + 32.0*d_quartic_bubble_ds1;
+ dpsids(5,2) = 4.0*s[0]  
+  - 12.0*(d_cubic_bubble012_ds2 + d_cubic_bubble023_ds2)
+  + 32.0*d_quartic_bubble_ds2;
+ 
+ dpsids(6,0) = 4.0*(s3-s[0]) 
+  - 12.0*(d_cubic_bubble013_ds0 + d_cubic_bubble023_ds0)
+   + 32.0*d_quartic_bubble_ds0;
+ dpsids(6,1) = -4.0*s[0]     
+  - 12.0*(d_cubic_bubble013_ds1 + d_cubic_bubble023_ds1)
+   + 32.0*d_quartic_bubble_ds1;
+ dpsids(6,2) = -4.0*s[0]     
+  - 12.0*(d_cubic_bubble013_ds2 + d_cubic_bubble023_ds2)
+   + 32.0*d_quartic_bubble_ds2;
+
+ dpsids(7,0) = 0.0            
+  - 12.0*(d_cubic_bubble012_ds0 + d_cubic_bubble123_ds0)
+  + 32.0*d_quartic_bubble_ds0;
+ dpsids(7,1) = 4.0*s[2]       
+  - 12.0*(d_cubic_bubble012_ds1 + d_cubic_bubble123_ds1)
+  + 32.0*d_quartic_bubble_ds1;
+ dpsids(7,2) = 4.0*s[1]       
+  - 12.0*(d_cubic_bubble012_ds2 + d_cubic_bubble123_ds2)
+  + 32.0*d_quartic_bubble_ds2;
+
+ dpsids(8,0) = -4.0*s[2]     
+  - 12.0*(d_cubic_bubble023_ds0 + d_cubic_bubble123_ds0)
+  + 32.0*d_quartic_bubble_ds0;
+ dpsids(8,1) = -4.0*s[2]     
+  - 12.0*(d_cubic_bubble023_ds1 + d_cubic_bubble123_ds1)
+  + 32.0*d_quartic_bubble_ds1;
+ dpsids(8,2) = 4.0*(s3-s[2]) 
+  - 12.0*(d_cubic_bubble023_ds2 + d_cubic_bubble123_ds2)
+  + 32.0*d_quartic_bubble_ds2;
+
+ dpsids(9,0) = -4.0*s[1]     
+  - 12.0*(d_cubic_bubble013_ds0 + d_cubic_bubble123_ds0)
+  + 32.0*d_quartic_bubble_ds0;
+ dpsids(9,1) = 4.0*(s3-s[1])  
+  - 12.0*(d_cubic_bubble013_ds1 + d_cubic_bubble123_ds1)
+  + 32.0*d_quartic_bubble_ds1;
+ dpsids(9,2) = -4.0*s[1]     
+  - 12.0*(d_cubic_bubble013_ds2 + d_cubic_bubble123_ds2)
+  + 32.0*d_quartic_bubble_ds2;
+
+ //Add the bubble function on the face spanned by 0 1 3
+ dpsids(10,0) = 27.0*d_cubic_bubble013_ds0 - 108.0*d_quartic_bubble_ds0;
+ dpsids(10,1) = 27.0*d_cubic_bubble013_ds1 - 108.0*d_quartic_bubble_ds1;
+ dpsids(10,2) = 27.0*d_cubic_bubble013_ds2 - 108.0*d_quartic_bubble_ds2;
+
+ //Add the bubble function on the face spanned by 0 1 2
+ dpsids(11,0) = 27.0*d_cubic_bubble012_ds0 - 108.0*d_quartic_bubble_ds0;
+ dpsids(11,1) = 27.0*d_cubic_bubble012_ds1 - 108.0*d_quartic_bubble_ds1;
+ dpsids(11,2) = 27.0*d_cubic_bubble012_ds2 - 108.0*d_quartic_bubble_ds2;
+
+ //Add the bubble function on the face spanned by 0 2 3
+ dpsids(12,0) = 27.0*d_cubic_bubble023_ds0 - 108.0*d_quartic_bubble_ds0;
+ dpsids(12,1) = 27.0*d_cubic_bubble023_ds1 - 108.0*d_quartic_bubble_ds1;
+ dpsids(12,2) = 27.0*d_cubic_bubble023_ds2 - 108.0*d_quartic_bubble_ds2;
+
+ //Add the bubble function on the face spanned by 1 2 3
+ dpsids(13,0) = 27.0*d_cubic_bubble123_ds0 - 108.0*d_quartic_bubble_ds0;
+ dpsids(13,1) = 27.0*d_cubic_bubble123_ds1 - 108.0*d_quartic_bubble_ds1;
+ dpsids(13,2) = 27.0*d_cubic_bubble123_ds2 - 108.0*d_quartic_bubble_ds2;
+
+ //Add the volumetric bubble function derivatives
+ dpsids(14,0) = 256.0*d_quartic_bubble_ds0;
+ dpsids(14,1) = 256.0*d_quartic_bubble_ds1;
+ dpsids(14,2) = 256.0*d_quartic_bubble_ds2;
+}
+
+
+//=======================================================================
+/// Second derivatives of shape functions for specific TElement<3,3>:\n
+/// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
+/// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
+/// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_2^2 \f$ \n
+/// d2psids(i,3) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ \n
+/// d2psids(i,4) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_2 \f$ \n
+/// d2psids(i,5) = \f$ \partial^2 \psi_j / \partial s_1 \partial s_2 \f$ \n
+//=======================================================================
+void d2shape_local(const Vector<double> &s,
+                                         Shape &psi,
+                                         DShape &dpsids,
+                                         DShape &d2psids) const
+{
+ //ALH: Don't know why object qualifier is needed
+ this->dshape_local(s, psi,dpsids);
+
+ // Define s3
+ const double s3=1.0-s[0]-s[1]-s[2]; 
+
+ //Calculate second derivatives of the bubble functions
+ //(.,3) for mixed derivative s[0]-s[1]
+ //(.,4) for mixed derivative s[0]-s[2]
+ //(.,5) for mixed derivative s[1]-s[2]
+
+
+ const double d2_quartic_bubble_ds0 = -2.0*s[1]*s[2];
+ const double d2_quartic_bubble_ds1 = -2.0*s[0]*s[2];
+ const double d2_quartic_bubble_ds2 = -2.0*s[0]*s[1];
+ const double d2_quartic_bubble_ds3 = s[2]*(1.0 - 2.0*s[0] - 2.0*s[1] - s[2]);
+ const double d2_quartic_bubble_ds4 = s[1]*(1.0 - 2.0*s[0] - 2.0*s[2] - s[1]);
+ const double d2_quartic_bubble_ds5 = s[0]*(1.0 - 2.0*s[1] - 2.0*s[2] - s[0]);
+
+ const double d2_cubic_bubble012_ds0 = 0.0;
+ const double d2_cubic_bubble012_ds1 = 0.0;
+ const double d2_cubic_bubble012_ds2 = 0.0;
+ const double d2_cubic_bubble012_ds3 = s[2];
+ const double d2_cubic_bubble012_ds4 = s[1];
+ const double d2_cubic_bubble012_ds5 = s[0];
+
+ const double d2_cubic_bubble013_ds0 = -2.0*s[1];
+ const double d2_cubic_bubble013_ds1 = -2.0*s[0];
+ const double d2_cubic_bubble013_ds2 = 0.0;
+ const double d2_cubic_bubble013_ds3 = s3 - s[0] - s[1];
+ const double d2_cubic_bubble013_ds4 = -s[1];
+ const double d2_cubic_bubble013_ds5 = -s[0];
+
+ const double d2_cubic_bubble023_ds0 = -2.0*s[2];
+ const double d2_cubic_bubble023_ds1 = 0.0;
+ const double d2_cubic_bubble023_ds2 = -2.0*s[0];
+ const double d2_cubic_bubble023_ds3 = -s[2];
+ const double d2_cubic_bubble023_ds4 = s3 - s[0] - s[2];
+ const double d2_cubic_bubble023_ds5 = -s[0];
+
+ const double d2_cubic_bubble123_ds0 = 0.0;
+ const double d2_cubic_bubble123_ds1 = -2.0*s[2];
+ const double d2_cubic_bubble123_ds2 = -2.0*s[1];
+ const double d2_cubic_bubble123_ds3 = -s[2];
+ const double d2_cubic_bubble123_ds4 = -s[1];
+ const double d2_cubic_bubble123_ds5 = s3 - s[1] - s[2];
+
+
+ d2psids(0,0) = 4.0 
+  + 3.0*(d2_cubic_bubble012_ds0 + d2_cubic_bubble013_ds0 
+         + d2_cubic_bubble023_ds0)
+  - 4.0*d2_quartic_bubble_ds0;
+ d2psids(0,1) = 0.0 
+  + 3.0*(d2_cubic_bubble012_ds1 + d2_cubic_bubble013_ds1 
+         + d2_cubic_bubble023_ds1)
+  - 4.0*d2_quartic_bubble_ds1;
+ d2psids(0,2) = 0.0 
+  + 3.0*(d2_cubic_bubble012_ds2 + d2_cubic_bubble013_ds2 
+         + d2_cubic_bubble023_ds2)
+  - 4.0*d2_quartic_bubble_ds2;
+ d2psids(0,3) = 0.0 
+  + 3.0*(d2_cubic_bubble012_ds3 + d2_cubic_bubble013_ds3 
+         + d2_cubic_bubble023_ds3)
+  - 4.0*d2_quartic_bubble_ds3;
+ d2psids(0,4) = 0.0 
+  + 3.0*(d2_cubic_bubble012_ds4 + d2_cubic_bubble013_ds4 
+         + d2_cubic_bubble023_ds4)
+  - 4.0*d2_quartic_bubble_ds4;
+ d2psids(0,5) = 0.0 
+  + 3.0*(d2_cubic_bubble012_ds5 + d2_cubic_bubble013_ds5 
+         + d2_cubic_bubble023_ds5)
+  - 4.0*d2_quartic_bubble_ds5;
+ 
+ 
+ d2psids(1,0) = 0.0 
+  + 3.0*(d2_cubic_bubble012_ds0 + d2_cubic_bubble013_ds0 
+         + d2_cubic_bubble123_ds0)
+  - 4.0*d2_quartic_bubble_ds0;
+ d2psids(1,1) = 4.0 
+  + 3.0*(d2_cubic_bubble012_ds1 + d2_cubic_bubble013_ds1 
+         + d2_cubic_bubble123_ds1)
+  - 4.0*d2_quartic_bubble_ds1;
+  d2psids(1,2) = 0.0 
+   + 3.0*(d2_cubic_bubble012_ds2 + d2_cubic_bubble013_ds2 
+          + d2_cubic_bubble123_ds2)
+   - 4.0*d2_quartic_bubble_ds2;
+  d2psids(1,3) = 0.0 
+   + 3.0*(d2_cubic_bubble012_ds3 + d2_cubic_bubble013_ds3 
+          + d2_cubic_bubble123_ds3)
+   - 4.0*d2_quartic_bubble_ds3;
+  d2psids(1,4) = 0.0 
+   + 3.0*(d2_cubic_bubble012_ds4 + d2_cubic_bubble013_ds4 
+          + d2_cubic_bubble123_ds4)
+   - 4.0*d2_quartic_bubble_ds4;
+  d2psids(1,5) = 0.0 
+   + 3.0*(d2_cubic_bubble012_ds5 + d2_cubic_bubble013_ds5 
+          + d2_cubic_bubble123_ds5)
+   - 4.0*d2_quartic_bubble_ds5;
+
+
+  d2psids(2,0) = 0.0 
+   + 3.0*(d2_cubic_bubble012_ds0 + d2_cubic_bubble023_ds0 
+          + d2_cubic_bubble123_ds0)
+   - 4.0*d2_quartic_bubble_ds0;
+  d2psids(2,1) = 0.0 
+  + 3.0*(d2_cubic_bubble012_ds1 + d2_cubic_bubble023_ds1 
+         + d2_cubic_bubble123_ds1)
+   - 4.0*d2_quartic_bubble_ds1;
+  d2psids(2,2) = 4.0 
+   + 3.0*(d2_cubic_bubble012_ds2 + d2_cubic_bubble023_ds2 
+         + d2_cubic_bubble123_ds2)
+   - 4.0*d2_quartic_bubble_ds2;
+  d2psids(2,3) = 0.0 
+   + 3.0*(d2_cubic_bubble012_ds3 + d2_cubic_bubble023_ds3 
+          + d2_cubic_bubble123_ds3)
+   - 4.0*d2_quartic_bubble_ds3;
+  d2psids(2,4) = 0.0 
+   + 3.0*(d2_cubic_bubble012_ds4 + d2_cubic_bubble023_ds4 
+          + d2_cubic_bubble123_ds4)
+   - 4.0*d2_quartic_bubble_ds4;
+  d2psids(2,5) = 0.0 
+   + 3.0*(d2_cubic_bubble012_ds5 + d2_cubic_bubble023_ds5 
+          + d2_cubic_bubble123_ds5)
+   - 4.0*d2_quartic_bubble_ds5;
+  
+
+  d2psids(3,0) = 4.0 
+   + 3.0*(d2_cubic_bubble013_ds0 + d2_cubic_bubble023_ds0 
+          + d2_cubic_bubble123_ds0)
+   -4.0*d2_quartic_bubble_ds0;
+  d2psids(3,1) = 4.0 
+   + 3.0*(d2_cubic_bubble013_ds1 + d2_cubic_bubble023_ds1 
+          + d2_cubic_bubble123_ds1)
+   -4.0*d2_quartic_bubble_ds1;
+  d2psids(3,2) = 4.0 
+   + 3.0*(d2_cubic_bubble013_ds2 + d2_cubic_bubble023_ds2 
+          + d2_cubic_bubble123_ds2)
+   -4.0*d2_quartic_bubble_ds2;
+  d2psids(3,3) = 4.0 
+   + 3.0*(d2_cubic_bubble013_ds3 + d2_cubic_bubble023_ds3 
+          + d2_cubic_bubble123_ds3)
+   -4.0*d2_quartic_bubble_ds3;
+  d2psids(3,4) = 4.0 
+   + 3.0*(d2_cubic_bubble013_ds4 + d2_cubic_bubble023_ds4 
+          + d2_cubic_bubble123_ds4)
+   -4.0*d2_quartic_bubble_ds4;
+  d2psids(3,5) = 4.0 
+   + 3.0*(d2_cubic_bubble013_ds5 + d2_cubic_bubble023_ds5 
+          + d2_cubic_bubble123_ds5)
+   -4.0*d2_quartic_bubble_ds5;
+  
+
+ d2psids(4,0) = 0.0 
+  - 12.0*(d2_cubic_bubble012_ds0 + d2_cubic_bubble013_ds0)
+  + 32.0*d2_quartic_bubble_ds0;
+ d2psids(4,1) = 0.0 
+  - 12.0*(d2_cubic_bubble012_ds1 + d2_cubic_bubble013_ds1)
+  + 32.0*d2_quartic_bubble_ds1;
+ d2psids(4,2) = 0.0 
+  - 12.0*(d2_cubic_bubble012_ds2 + d2_cubic_bubble013_ds2)
+  + 32.0*d2_quartic_bubble_ds2;
+ d2psids(4,3) = 4.0 
+  - 12.0*(d2_cubic_bubble012_ds3 + d2_cubic_bubble013_ds3)
+  + 32.0*d2_quartic_bubble_ds3;
+ d2psids(4,4) = 0.0 
+  - 12.0*(d2_cubic_bubble012_ds4 + d2_cubic_bubble013_ds4)
+  + 32.0*d2_quartic_bubble_ds4;
+ d2psids(4,5) = 0.0 
+  - 12.0*(d2_cubic_bubble012_ds5 + d2_cubic_bubble013_ds5)
+  + 32.0*d2_quartic_bubble_ds5;
+
+
+ d2psids(5,0) = 0.0 
+  - 12.0*(d2_cubic_bubble012_ds0 + d2_cubic_bubble023_ds0)
+  + 32.0*d2_quartic_bubble_ds0;
+ d2psids(5,1) = 0.0 
+  - 12.0*(d2_cubic_bubble012_ds1 + d2_cubic_bubble023_ds1)
+  + 32.0*d2_quartic_bubble_ds1;
+ d2psids(5,2) = 0.0 
+  - 12.0*(d2_cubic_bubble012_ds2 + d2_cubic_bubble023_ds2)
+  + 32.0*d2_quartic_bubble_ds2;
+ d2psids(5,3) = 0.0 
+  - 12.0*(d2_cubic_bubble012_ds3 + d2_cubic_bubble023_ds3)
+  + 32.0*d2_quartic_bubble_ds3;
+ d2psids(5,4) = 4.0 
+  - 12.0*(d2_cubic_bubble012_ds4 + d2_cubic_bubble023_ds4)
+  + 32.0*d2_quartic_bubble_ds4;
+ d2psids(5,5) = 0.0 
+  - 12.0*(d2_cubic_bubble012_ds5 + d2_cubic_bubble023_ds5)
+  + 32.0*d2_quartic_bubble_ds5;
+
+
+ d2psids(6,0) =-8.0  
+ - 12.0*(d2_cubic_bubble013_ds0 + d2_cubic_bubble023_ds0)
+  + 32.0*d2_quartic_bubble_ds0;
+ d2psids(6,1) = 0.0  
+ - 12.0*(d2_cubic_bubble013_ds1 + d2_cubic_bubble023_ds1)
+  + 32.0*d2_quartic_bubble_ds1;
+ d2psids(6,2) = 0.0  
+  - 12.0*(d2_cubic_bubble013_ds2 + d2_cubic_bubble023_ds2)
+  + 32.0*d2_quartic_bubble_ds2;
+ d2psids(6,3) = -4.0 
+  - 12.0*(d2_cubic_bubble013_ds3 + d2_cubic_bubble023_ds3)
+  + 32.0*d2_quartic_bubble_ds3;
+ d2psids(6,4) = -4.0 
+  - 12.0*(d2_cubic_bubble013_ds4 + d2_cubic_bubble023_ds4)
+  + 32.0*d2_quartic_bubble_ds4;
+ d2psids(6,5) = 0.0   
+  - 12.0*(d2_cubic_bubble013_ds5 + d2_cubic_bubble023_ds5)
+   + 32.0*d2_quartic_bubble_ds5;
+
+ d2psids(7,0) = 0.0 
+  - 12.0*(d2_cubic_bubble012_ds0 + d2_cubic_bubble123_ds0)
+  + 32.0*d2_quartic_bubble_ds0;
+ d2psids(7,1) = 0.0 
+  - 12.0*(d2_cubic_bubble012_ds1 + d2_cubic_bubble123_ds1)
+  + 32.0*d2_quartic_bubble_ds1;
+ d2psids(7,2) = 0.0 
+  - 12.0*(d2_cubic_bubble012_ds2 + d2_cubic_bubble123_ds2)
+  + 32.0*d2_quartic_bubble_ds2;
+ d2psids(7,3) = 0.0 
+  - 12.0*(d2_cubic_bubble012_ds3 + d2_cubic_bubble123_ds3)
+  + 32.0*d2_quartic_bubble_ds3;
+ d2psids(7,4) = 0.0 
+  - 12.0*(d2_cubic_bubble012_ds4 + d2_cubic_bubble123_ds4)
+  + 32.0*d2_quartic_bubble_ds4;
+ d2psids(7,5) = 4.0 
+  - 12.0*(d2_cubic_bubble012_ds5 + d2_cubic_bubble123_ds5)
+  + 32.0*d2_quartic_bubble_ds5;
+ 
+ d2psids(8,0) = 0.0  
+  - 12.0*(d2_cubic_bubble023_ds0 + d2_cubic_bubble123_ds0)
+  + 32.0*d2_quartic_bubble_ds0;
+ d2psids(8,1) = 0.0  
+  - 12.0*(d2_cubic_bubble023_ds1 + d2_cubic_bubble123_ds1)
+  + 32.0*d2_quartic_bubble_ds1;
+ d2psids(8,2) = -8.0 
+  - 12.0*(d2_cubic_bubble023_ds2 + d2_cubic_bubble123_ds2)
+  + 32.0*d2_quartic_bubble_ds2;
+ d2psids(8,3) = 0.0  
+  - 12.0*(d2_cubic_bubble023_ds3 + d2_cubic_bubble123_ds3)
+  + 32.0*d2_quartic_bubble_ds3;
+ d2psids(8,4) = -4.0 
+  - 12.0*(d2_cubic_bubble023_ds4 + d2_cubic_bubble123_ds4)
+  + 32.0*d2_quartic_bubble_ds4;
+ d2psids(8,5) = -4.0 
+  - 12.0*(d2_cubic_bubble023_ds5 + d2_cubic_bubble123_ds5)
+  + 32.0*d2_quartic_bubble_ds5;
+
+ d2psids(9,0) = 0.0  
+  - 12.0*(d2_cubic_bubble013_ds0 + d2_cubic_bubble123_ds0)
+  + 32.0*d2_quartic_bubble_ds0;
+ d2psids(9,1) = -8.0 
+  - 12.0*(d2_cubic_bubble013_ds1 + d2_cubic_bubble123_ds1)
+  + 32.0*d2_quartic_bubble_ds1;
+ d2psids(9,2) = 0.0  
+  - 12.0*(d2_cubic_bubble013_ds2 + d2_cubic_bubble123_ds2)
+  + 32.0*d2_quartic_bubble_ds3;
+ d2psids(9,3) = -4.0 
+  - 12.0*(d2_cubic_bubble013_ds3 + d2_cubic_bubble123_ds3)
+  + 32.0*d2_quartic_bubble_ds3;
+ d2psids(9,4) = 0.0  
+  - 12.0*(d2_cubic_bubble013_ds4 + d2_cubic_bubble123_ds4)
+  + 32.0*d2_quartic_bubble_ds4;
+ d2psids(9,5) = -4.0 
+  - 12.0*(d2_cubic_bubble013_ds5 + d2_cubic_bubble123_ds5)
+  + 32.0*d2_quartic_bubble_ds5;
+
+ //Add the bubble function on the face spanned by 0 1 3
+ d2psids(10,0) = 27.0*d2_cubic_bubble013_ds0 - 108.0*d2_quartic_bubble_ds0;
+ d2psids(10,1) = 27.0*d2_cubic_bubble013_ds1 - 108.0*d2_quartic_bubble_ds1;
+ d2psids(10,2) = 27.0*d2_cubic_bubble013_ds2 - 108.0*d2_quartic_bubble_ds2;
+ d2psids(10,3) = 27.0*d2_cubic_bubble013_ds3 - 108.0*d2_quartic_bubble_ds3;
+ d2psids(10,4) = 27.0*d2_cubic_bubble013_ds4 - 108.0*d2_quartic_bubble_ds4;
+ d2psids(10,5) = 27.0*d2_cubic_bubble013_ds5 - 108.0*d2_quartic_bubble_ds5;
+
+ //Add the bubble function on the face spanned by 0 1 2
+ d2psids(11,0) = 27.0*d2_cubic_bubble012_ds0 - 108.0*d2_quartic_bubble_ds0;
+ d2psids(11,1) = 27.0*d2_cubic_bubble012_ds1 - 108.0*d2_quartic_bubble_ds1;
+ d2psids(11,2) = 27.0*d2_cubic_bubble012_ds2 - 108.0*d2_quartic_bubble_ds2;
+ d2psids(11,3) = 27.0*d2_cubic_bubble012_ds3 - 108.0*d2_quartic_bubble_ds3;
+ d2psids(11,4) = 27.0*d2_cubic_bubble012_ds4 - 108.0*d2_quartic_bubble_ds4;
+ d2psids(11,5) = 27.0*d2_cubic_bubble012_ds5 - 108.0*d2_quartic_bubble_ds5;
+
+ //Add the bubble function on the face spanned by 0 2 3
+ d2psids(12,0) = 27.0*d2_cubic_bubble023_ds0 - 108.0*d2_quartic_bubble_ds0;
+ d2psids(12,1) = 27.0*d2_cubic_bubble023_ds1 - 108.0*d2_quartic_bubble_ds1;
+ d2psids(12,2) = 27.0*d2_cubic_bubble023_ds2 - 108.0*d2_quartic_bubble_ds2;
+ d2psids(12,3) = 27.0*d2_cubic_bubble023_ds3 - 108.0*d2_quartic_bubble_ds3;
+ d2psids(12,4) = 27.0*d2_cubic_bubble023_ds4 - 108.0*d2_quartic_bubble_ds4;
+ d2psids(12,5) = 27.0*d2_cubic_bubble023_ds5 - 108.0*d2_quartic_bubble_ds5;
+
+ //Add the bubble function on the face spanned by 1 2 3
+ d2psids(13,0) = 27.0*d2_cubic_bubble123_ds0 - 108.0*d2_quartic_bubble_ds0;
+ d2psids(13,1) = 27.0*d2_cubic_bubble123_ds1 - 108.0*d2_quartic_bubble_ds1;
+ d2psids(13,2) = 27.0*d2_cubic_bubble123_ds2 - 108.0*d2_quartic_bubble_ds2;
+ d2psids(13,3) = 27.0*d2_cubic_bubble123_ds3 - 108.0*d2_quartic_bubble_ds3;
+ d2psids(13,4) = 27.0*d2_cubic_bubble123_ds4 - 108.0*d2_quartic_bubble_ds4;
+ d2psids(13,5) = 27.0*d2_cubic_bubble123_ds5 - 108.0*d2_quartic_bubble_ds5;
+
+ //Add the volumetric bubble function derivatives
+ d2psids(14,0) = 256.0*d2_quartic_bubble_ds0;
+ d2psids(14,1) = 256.0*d2_quartic_bubble_ds1;
+ d2psids(14,2) = 256.0*d2_quartic_bubble_ds2;
+ d2psids(14,3) = 256.0*d2_quartic_bubble_ds3;
+ d2psids(14,4) = 256.0*d2_quartic_bubble_ds4;
+ d2psids(14,5) = 256.0*d2_quartic_bubble_ds5;
+}
+
+
+};
+
+
+
+
 //=======================================================================
 /// General TElement class specialised to three spatial dimensions (tet)
 /// Ordering of nodes inverted from Zienkiewizc sketches: When looking into the
@@ -2150,6 +3038,97 @@ public:
 ///////////////////////////////////////////////////////////////////////
 
 
+
+//=======================================================================
+/// TElement class for which the shape functions have been enriched
+/// by a single bubble function of the next order
+///
+/// Empty, just establishes the template parameters
+//=======================================================================
+template<unsigned DIM, unsigned NNODE_1D>
+class TBubbleEnrichedElement
+{
+};			 
+
+
+//=======================================================================
+/// Enriched TElement class specialised to two spatial dimensions
+/// and three nodes per side (quadratic element)
+/// Ordering of nodes as in Zienkiwizc sketches: vertex nodes
+/// 0 - 1 - 2 anticlockwise. Midside nodes filled in progressing
+/// along the consecutive edges. Central node(s) come(s) last.
+/// The idea is that we inherit from the existing TElement<2,3>, add
+/// the single extra node at the centroid and 
+/// overload the shape functions to be those corresponding to the
+/// enriched element.
+//=======================================================================
+template<unsigned DIM>
+class TBubbleEnrichedElement<DIM,3> : public virtual TElement<DIM,3>, 
+ public TBubbleEnrichedElementShape<DIM,3>
+{
+  private:
+ 
+ //Static storage for central node
+ static const unsigned CentralNodeOnFace[DIM+1];
+
+public:
+
+ ///Constructor
+ TBubbleEnrichedElement() : TElement<DIM,3>(), 
+  TBubbleEnrichedElementShape<DIM,3>()
+  {
+   //Add the additional enrichment nodes
+   unsigned n_node = this->nnode();
+   this->set_n_node(n_node+
+                    TBubbleEnrichedElementShape<DIM,3>::n_enriched_nodes());
+  }
+
+ /// Broken copy constructor
+ TBubbleEnrichedElement(const TBubbleEnrichedElement&) 
+  { 
+   BrokenCopy::broken_copy("TBubbleEnrichedElement");
+  } 
+ 
+ /// Broken assignment operator
+ void operator=(const TBubbleEnrichedElement&) 
+  {
+   BrokenCopy::broken_assign("TBubbleEnrichedElement");
+  }
+
+ /// Destructor
+ ~TBubbleEnrichedElement() {}
+ 
+ /// Calculate the geometric shape functions at local coordinate s
+ inline void shape(const Vector<double> &s, Shape &psi) const
+  {TBubbleEnrichedElementShape<DIM,3>::shape(s,psi);}
+ 
+ /// \short Compute the  geometric shape functions and 
+ /// derivatives w.r.t. local coordinates at local coordinate s
+ inline void dshape_local(const Vector<double> &s, Shape &psi, 
+                          DShape &dpsids) const
+  {TBubbleEnrichedElementShape<DIM,3>::dshape_local(s,psi,dpsids);}
+
+ 
+ /// \short Computer the geometric shape functions, derivatives and
+ /// second derivatives w.r.t local coordinates at local coordinate s \n
+ /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
+ /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
+ /// d2psids(i,2) = \f$ \partial^2 \psi_j / \partial s_0 \partial s_1 \f$ \n
+ inline void d2shape_local(const Vector<double> &s, Shape &psi, 
+                           DShape &dpsids, DShape &d2psids) const
+  {TBubbleEnrichedElementShape<DIM,3>::d2shape_local(s,psi,dpsids,d2psids);}
+ 
+ /// Return local coordinates of node j
+ inline void local_coordinate_of_node(const unsigned& j,Vector<double>& s)
+  {TBubbleEnrichedElementShape<DIM,3>::local_coordinate_of_node(j,s);}
+
+ /// \short Build the lower-dimensional FaceElement 
+ void build_face_element(const int &face_index,
+                         FaceElement* face_element_pt);
+
+};
+
+
 //========================================================================
 /// Base class for Solid Telements 
 //========================================================================
@@ -2415,7 +3394,53 @@ void SolidTElement<3,NNODE_1D>::
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
 
+//=======================================================================
+/// SolidTBubbleEnrichedElement elements are the enriched version 
+/// of the SolidTElements. They will simply inherit from the appropriate
+/// SolidTElement and TBubblEnrichedElement.
+/// They are the basis for solid mechanics elements.
+//=======================================================================
+template <unsigned DIM, unsigned NNODE_1D> 
+class SolidTBubbleEnrichedElement
+{};
 
+//===================================================================
+///Specify the SolidTBubbleEnrichedElement corresponding to the 
+///quadratic triangle
+//===================================================================
+template<unsigned DIM>
+class SolidTBubbleEnrichedElement<DIM,3>  : 
+public virtual SolidTElement<DIM,3>,
+public virtual TBubbleEnrichedElement<DIM,3>
+{
+
+public:
+
+ ///Constructor
+ SolidTBubbleEnrichedElement() : SolidTElement<DIM,3>(), 
+  TBubbleEnrichedElement<DIM,3>() {}
+
+ /// Broken copy constructor
+ SolidTBubbleEnrichedElement(const SolidTBubbleEnrichedElement&) 
+  { 
+   BrokenCopy::broken_copy("SolidTBubbleEnrichedElement");
+  } 
+ 
+ /// Broken assignment operator
+ void operator=(const SolidTBubbleEnrichedElement&) 
+  {
+   BrokenCopy::broken_assign("SolidTBubbleEnrichedElement");
+  }
+
+ /// Destructor
+ ~SolidTBubbleEnrichedElement() {}
+
+ /// \short Build the lower-dimensional FaceElement 
+ /// Need to put in a final override here
+ void build_face_element(const int &face_index,
+                         FaceElement* face_element_pt);
+
+};
 
 
 //=======================================================================
@@ -2457,6 +3482,52 @@ class FaceGeometry<TElement<1,NNODE_1D> >:
 
 
 
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+//=======================================================================
+/// Face geometry for the 2D TBubbleEnrichedElement elements is exactly
+/// the same as for the corresponding TElement. The spatial 
+/// dimension of the face elements is one lower than that of the
+/// bulk element but they have the same number of points
+/// along their 1D edges.
+//=======================================================================
+template<unsigned NNODE_1D>
+class FaceGeometry<TBubbleEnrichedElement<2,NNODE_1D> >: 
+ public virtual TElement<1,NNODE_1D>
+{
+
+  public:
+ 
+ /// \short Constructor: Call the constructor for the
+ /// appropriate lower-dimensional QElement
+ FaceGeometry() : TElement<1,NNODE_1D>() {}
+
+};
+
+
+//=======================================================================
+/// Face geometry for the 3D TBubbleEnrichedElement elements is the 
+/// 2D TBubbleEnrichedElement. The spatial 
+/// dimension of the face elements is one lower than that of the
+/// bulk element but they have the same number of points
+/// along their 1D edges.
+//=======================================================================
+template<unsigned NNODE_1D>
+class FaceGeometry<TBubbleEnrichedElement<3,NNODE_1D> >: 
+ public virtual TBubbleEnrichedElement<2,NNODE_1D>
+{
+
+  public:
+ 
+ /// \short Constructor: Call the constructor for the
+ /// appropriate lower-dimensional QElement
+ FaceGeometry() : TBubbleEnrichedElement<2,NNODE_1D>() {}
+
+};
 
 
 ///////////////////////////////////////////////////////////////////////
@@ -2500,6 +3571,54 @@ class FaceGeometry<SolidTElement<1,NNODE_1D> >:
  /// \short Constructor: Call the constructor for the
  /// appropriate lower-dimensional TElement
  FaceGeometry() : SolidPointElement() {}
+
+};
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+//=======================================================================
+/// Face geometry for the 2D SolidTBubbleEnrichedElement elements is exactly
+/// the same as for the corresponding 2D SolidTElement. The spatial 
+/// dimension of the face elements is one lower than that of the
+/// bulk element but they have the same number of points
+/// along their 1D edges.
+//=======================================================================
+template<unsigned NNODE_1D>
+class FaceGeometry<SolidTBubbleEnrichedElement<2,NNODE_1D> >: 
+ public virtual SolidTElement<1,NNODE_1D>
+{
+
+  public:
+ 
+ /// \short Constructor: Call the constructor for the
+ /// appropriate lower-dimensional QElement
+ FaceGeometry() : SolidTElement<1,NNODE_1D>() {}
+
+};
+
+
+
+//=======================================================================
+/// Face geometry for the 3D SolidTBubbleEnrichedElement elements is
+/// the 2D SolidTBubbleEnrichedElement. The spatial 
+/// dimension of the face elements is one lower than that of the
+/// bulk element but they have the same number of points
+/// along their 1D edges.
+//=======================================================================
+template<unsigned NNODE_1D>
+class FaceGeometry<SolidTBubbleEnrichedElement<3,NNODE_1D> >: 
+ public virtual SolidTBubbleEnrichedElement<2,NNODE_1D>
+{
+
+  public:
+ 
+ /// \short Constructor: Call the constructor for the
+ /// appropriate lower-dimensional QElement
+ FaceGeometry() : SolidTBubbleEnrichedElement<2,NNODE_1D>() {}
 
 };
 

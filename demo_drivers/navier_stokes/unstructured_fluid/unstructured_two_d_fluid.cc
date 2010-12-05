@@ -37,9 +37,11 @@
 // The mesh
 #include "meshes/triangle_mesh.h"
 
+
 using namespace std;
 
 using namespace oomph; 
+
 
 //===========start_mesh====================================================
 /// Triangle-based mesh upgraded to become a (pseudo-) solid mesh
@@ -327,7 +329,6 @@ void UnstructuredFluidProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  some_file.open(filename);
  fluid_mesh_pt()->output(some_file,npts);
  some_file.close();
-
 }
  
 
@@ -353,43 +354,89 @@ int main()
  // Label for output
  DocInfo doc_info;
  
- // Set output directory
- doc_info.set_directory("RESLT");
- 
- // Step number
- doc_info.number()=0;
-
  //Set the constitutive law for the pseudo-elasticity
  Global_Physical_Variables::Constitutive_law_pt = 
   new GeneralisedHookean(&Global_Physical_Variables::Nu);
 
+ //Taylor--Hood formulation
+ {
+  // Set output directory
+  doc_info.set_directory("RESLT_TH");
+  
+  // Step number
+  doc_info.number()=0;
+  
+  // Build the problem with TTaylorHoodElements
+  UnstructuredFluidProblem<PseudoSolidNodeUpdateElement<
+   TTaylorHoodElement<2>, 
+   TPVDElement<2,3> > > problem;
+  
+  // Output boundaries 
+  problem.fluid_mesh_pt()->output_boundaries("RESLT_TH/boundaries.dat");
+  
+  // Outpt the initial guess for the solution
+  problem.doc_solution(doc_info);
+  doc_info.number()++;
+  
+  // Parameter study
+  double re_increment=5.0;
+  unsigned nstep=2; // 10;
+  for (unsigned i=0;i<nstep;i++)
+   {
+    // Solve the problem
+    problem.newton_solve();
+    
+    // Output the solution
+    problem.doc_solution(doc_info);
+    doc_info.number()++;
+    
+    // Bump up Re
+    Global_Physical_Variables::Re+=re_increment;
+   }
+ }
+
+
+ //Crouzeix--Raviart formulation
+ {
+ // Set output directory
+ doc_info.set_directory("RESLT_CR");
+ 
+ // Step number
+ doc_info.number()=0;
+
+ // Reset Reynolds number
+ Global_Physical_Variables::Re = 0.0;
+ 
  // Build the problem with TTaylorHoodElements
- UnstructuredFluidProblem<PseudoSolidNodeUpdateElement<TTaylorHoodElement<2>, 
-  TPVDElement<2,3> > > problem;
+ UnstructuredFluidProblem<PseudoSolidNodeUpdateElement<
+  TCrouzeixRaviartElement<2>, 
+  TPVDBubbleEnrichedElement<2,3> > > problem;
  
  // Output boundaries 
- problem.fluid_mesh_pt()->output_boundaries("RESLT/boundaries.dat");
- 
- // Outpt the initial guess for the solution
- problem.doc_solution(doc_info);
- doc_info.number()++;
- 
- // Parameter study
- double re_increment=5.0;
- unsigned nstep=2; // 10;
- for (unsigned i=0;i<nstep;i++)
-  {
-   // Solve the problem
-   problem.newton_solve();
-   
-   // Output the solution
-   problem.doc_solution(doc_info);
-   doc_info.number()++;
+  problem.fluid_mesh_pt()->output_boundaries("RESLT_CR/boundaries.dat");
+  
+  // Outpt the initial guess for the solution
+  problem.doc_solution(doc_info);
+  doc_info.number()++;
+  
+  // Parameter study
+  double re_increment=5.0;
+  unsigned nstep=2; // 10;
+  for (unsigned i=0;i<nstep;i++)
+   {
+    // Solve the problem
+    problem.newton_solve();
+    
+    // Output the solution
+    problem.doc_solution(doc_info);
+    doc_info.number()++;
+    
+    // Bump up Re
+    Global_Physical_Variables::Re+=re_increment;
+   }
+ }
 
-   // Bump up Re
-   Global_Physical_Variables::Re+=re_increment;
-  }
- 
+
 } // end_of_main
 
 

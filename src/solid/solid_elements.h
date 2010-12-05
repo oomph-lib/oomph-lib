@@ -1437,6 +1437,100 @@ class FaceGeometry<FaceGeometry<TPVDElement<3,NNODE_1D> > > :
 };
 
 
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+//===========================================================================
+/// An Element that solves the solid mechanics equations, based on
+/// the principle of virtual displacements in Cartesian coordinates,
+/// using SolidTBubbleEnrichedElements for the interpolation of the 
+/// variable positions. These elements are typically required when using
+/// pseudo-elasticity to move internal mesh nodes and TCrouzeixRaviartFluid
+/// elements.
+//============================================================================
+template<unsigned DIM, unsigned NNODE_1D>
+ class TPVDBubbleEnrichedElement : 
+public virtual SolidTBubbleEnrichedElement<DIM,NNODE_1D>,
+ public virtual PVDEquations<DIM>
+{
+  public:
+ 
+ /// Constructor, there are no internal data points
+  TPVDBubbleEnrichedElement() : 
+   SolidTBubbleEnrichedElement<DIM,NNODE_1D>(), PVDEquations<DIM>() { }
+ 
+ /// Output function
+ void output(std::ostream &outfile) {PVDEquations<DIM>::output(outfile);}
+ 
+ /// Output function
+ void output(std::ostream &outfile, const unsigned &n_plot)
+  {PVDEquations<DIM>::output(outfile,n_plot);}
+ 
+ 
+ /// C-style output function
+ void output(FILE* file_pt) {PVDEquations<DIM>::output(file_pt);}
+ 
+ /// C-style output function
+ void output(FILE* file_pt, const unsigned &n_plot)
+ {PVDEquations<DIM>::output(file_pt,n_plot);}
+
+};
+
+
+//============================================================================
+/// FaceGeometry of a 2D TPVDBubbleEnrichedElement element
+//============================================================================
+template<unsigned NNODE_1D>
+class FaceGeometry<TPVDBubbleEnrichedElement<2,NNODE_1D> > :
+ public virtual SolidTElement<1,NNODE_1D>
+{
+  public:
+ /// Constructor must call the constructor of the underlying solid element
+  FaceGeometry() : SolidTElement<1,NNODE_1D>() {}
+};
+ 
+
+//==============================================================
+/// FaceGeometry of the FaceGeometry of the 2D TPVDBubbleEnrichedElement 
+//==============================================================
+template<unsigned NNODE_1D>
+class FaceGeometry<FaceGeometry<TPVDBubbleEnrichedElement<2,NNODE_1D> > >:
+public virtual PointElement
+{
+  public:
+ //Make sure that we call the constructor of the SolidQElement
+ //Only the Intel compiler seems to need this!
+  FaceGeometry() : PointElement() {}
+};
+
+
+//============================================================================
+/// FaceGeometry of a 3D TPVDBubbleEnrichedElement element
+//============================================================================
+template<unsigned NNODE_1D>
+class FaceGeometry<TPVDBubbleEnrichedElement<3,NNODE_1D> > :
+ public virtual SolidTBubbleEnrichedElement<2,NNODE_1D>
+{
+  public:
+ /// Constructor must call the constructor of the underlying solid element
+  FaceGeometry() : SolidTBubbleEnrichedElement<2,NNODE_1D>() {}
+};
+ 
+//============================================================================
+/// FaceGeometry of FaceGeometry of a 3D TPVDElement element
+//============================================================================
+template<unsigned NNODE_1D>
+class FaceGeometry<FaceGeometry<TPVDBubbleEnrichedElement<3,NNODE_1D> > > :
+ public virtual SolidTElement<1,NNODE_1D>
+{
+  public:
+ /// Constructor must call the constructor of the underlying solid element
+  FaceGeometry() : SolidTElement<1,NNODE_1D>() {}
+};
+
+
+
 
 //=======================================================================
 /// An Element that solves the solid mechanics equations in an

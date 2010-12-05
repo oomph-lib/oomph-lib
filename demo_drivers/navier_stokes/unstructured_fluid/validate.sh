@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=1
+NUM_TESTS=2
 
 # Setup validation directory
 #---------------------------
@@ -19,7 +19,7 @@ echo "Running 2D unstructured Navier Stokes validation "
 # Get triangle files
 cp ../fluid.fig.1.* .
 
-mkdir RESLT
+mkdir RESLT_CR RESLT_TH
 
 ../unstructured_two_d_fluid > OUTPUT
 echo "done"
@@ -31,14 +31,27 @@ echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat  RESLT/soln0.dat  RESLT/soln1.dat RESLT/soln2.dat > results.dat
+
+echo "Taylor Hood" >> validation.log
+cat  RESLT_TH/soln0.dat  RESLT_TH/soln1.dat RESLT_TH/soln2.dat > results_TH.dat
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
 ../../../../bin/fpdiff.py ../validata/results.dat.gz  \
-         results.dat >> validation.log
+         results_TH.dat >> validation.log
 fi
+
+echo "Crouzeix Raviart" >> validation.log
+cat  RESLT_CR/soln0.dat  RESLT_CR/soln1.dat RESLT_CR/soln2.dat > results_CR.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py ../validata/results_CR.dat.gz  \
+         results_CR.dat >> validation.log
+fi
+
 
 # Append log to main validation log
 cat validation.log >> ../../../../validation.log

@@ -1172,16 +1172,19 @@ class FiniteElement : public virtual GeneralisedElement, public GeomObject
  /// the storage for pointers to the Node objects.
  void set_n_node(const unsigned &n)
   {
-   //This can only be done once, in a Node constructor
-#ifdef PARANOID
-   if(Node_pt) 
-    {
-     throw OomphLibError(
-      "You can only set the number of nodes in an element once",
-      "FiniteElement::set_n_node()",
-      OOMPH_EXCEPTION_LOCATION);
-    }
-#endif
+   //This should only be done once, in a Node constructor
+//#ifdef PARANOID
+   //if(Node_pt) 
+   // {
+   //  OomphLibWarning(
+   //   "You are resetting the number of nodes in an element -- Be careful",
+   //   "FiniteElement::set_n_node()",
+   //   OOMPH_EXCEPTION_LOCATION);
+   // }
+//#endif
+   //Delete any previous storage to avoid memory leaks
+   //This will only happen in very special cases
+   delete[] Node_pt;
    //Set the number of nodes
    Nnode = n;
    //Allocate the storage

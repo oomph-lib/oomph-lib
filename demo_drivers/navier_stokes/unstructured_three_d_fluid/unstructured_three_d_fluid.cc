@@ -126,7 +126,7 @@ public:
    return Inflow_boundary_id.size()+Outflow_boundary_id.size();
   }
 
-private:
+ //private:
 
  /// Create fluid traction elements at inflow
  void create_fluid_traction_elements();
@@ -416,16 +416,6 @@ int main(int argc, char **argv)
  // Label for output
  DocInfo doc_info;
  
- // Output directory
- doc_info.set_directory("RESLT");
-  
- //Set up the problem
- UnstructuredFluidProblem<TTaylorHoodElement<3> > problem;
- 
- //Output initial guess
- problem.doc_solution(doc_info);
- doc_info.number()++;   
-
  // Parameter study
  double Re_increment=100.0;
  unsigned nstep=4;
@@ -435,20 +425,68 @@ int main(int argc, char **argv)
    nstep=2;
   }
  
- // Parameter study: Crank up the pressure drop along the vessel
- for (unsigned istep=0;istep<nstep;istep++)
-  {
-   // Solve the problem
-   problem.newton_solve();
-   
-   //Output solution
-   problem.doc_solution(doc_info);
-   doc_info.number()++;
+ 
+ //Taylor--Hood
+ {
+  // Output directory
+  doc_info.set_directory("RESLT_TH");
+  
+  //Set up the problem
+  UnstructuredFluidProblem<TTaylorHoodElement<3> > problem;
+  
+  //Output initial guess
+  problem.doc_solution(doc_info);
+  doc_info.number()++;   
+  
+  // Parameter study: Crank up the pressure drop along the vessel
+  for (unsigned istep=0;istep<nstep;istep++)
+   {
+    // Solve the problem
+    problem.newton_solve();
+    
+    //Output solution
+    problem.doc_solution(doc_info);
+    doc_info.number()++;
+    
+    // Bump up Reynolds number (equivalent to increasing the imposed pressure
+    // drop)
+    Global_Parameters::Re+=Re_increment;   
+   }
+ }
 
-   // Bump up Reynolds number (equivalent to increasing the imposed pressure
-   // drop)
-   Global_Parameters::Re+=Re_increment;   
-  }
+ //Crouzeix Raviart
+ {
+  //Reset to default Reynolds number
+  Global_Parameters::Re = 100.0;
+
+  //Reset doc info number
+  doc_info.number()=0;   
+
+  // Output directory
+  doc_info.set_directory("RESLT_CR");
+  
+  //Set up the problem
+  UnstructuredFluidProblem<TCrouzeixRaviartElement<3> > problem;
+
+  //Output initial guess
+  problem.doc_solution(doc_info);
+  doc_info.number()++;   
+  
+  // Parameter study: Crank up the pressure drop along the vessel
+  for (unsigned istep=0;istep<nstep;istep++)
+   {
+    // Solve the problem
+    problem.newton_solve();
+    
+    //Output solution
+    problem.doc_solution(doc_info);
+    doc_info.number()++;
+    
+    // Bump up Reynolds number (equivalent to increasing the imposed pressure
+    // drop)
+    Global_Parameters::Re+=Re_increment;   
+   }
+ }
  
 } // end_of_main
 

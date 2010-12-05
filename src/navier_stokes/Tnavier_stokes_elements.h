@@ -53,348 +53,524 @@ namespace oomph
 //////////////////////////////////////////////////////////////////////////////
 
 
-/* //========================================================================== */
-/* ///TCrouzeix_Raviart elements are Navier--Stokes elements with quadratic */
-/* ///interpolation for velocities and positions, but a discontinuous linear */
-/* ///pressure interpolation */
-/* //========================================================================== */
-/* template <unsigned DIM> */
-/* class TCrouzeixRaviartElement : public virtual TElement<DIM,3>,  */
-/*  public virtual NavierStokesEquations<DIM> */
-/* { */
-/*   private: */
+//==========================================================================
+///TCrouzeix_Raviart elements are Navier--Stokes elements with quadratic
+///interpolation for velocities and positions enriched by a single cubic
+///bubble function, but a discontinuous linear
+///pressure interpolation
+//==========================================================================
+template <unsigned DIM>
+class TCrouzeixRaviartElement : public virtual TBubbleEnrichedElement<DIM,3>,
+ public virtual NavierStokesEquations<DIM>
+{
+private:
 
-/*  /// Static array of ints to hold required number of variables at nodes */
-/*  static const unsigned Initial_Nvalue[]; */
+ /// Internal index that indicates at which internal datum the pressure is
+ /// stored
+ unsigned P_nst_internal_index;
+
+ protected:
  
-/*   protected: */
+ /// \short Velocity shape and test functions and their derivs
+ /// w.r.t. to global coords  at local coordinate s (taken from geometry)
+ ///Return Jacobian of mapping between local and global coordinates.
+ inline double dshape_and_dtest_eulerian_nst(const Vector<double> &s, 
+                                             Shape &psi,
+                                             DShape &dpsidx, Shape &test,
+                                             DShape &dtestdx) const;
  
-/*  /// \short Velocity shape and test functions and their derivs  */
-/*  /// w.r.t. to global coords  at local coordinate s (taken from geometry) */
-/*  ///Return Jacobian of mapping between local and global coordinates. */
-/*  inline double dshape_and_dtest_eulerian_nst(const Vector<double> &s, 
-    Shape &psi,  */
-/*                                          DShape &dpsidx, Shape &test,  */
-/*                                          DShape &dtestdx) const; */
+ /// \short Velocity shape and test functions and their derivs
+ /// w.r.t. to global coords at ipt-th integation point (taken from geometry)
+ ///Return Jacobian of mapping between local and global coordinates.
+ inline double dshape_and_dtest_eulerian_at_knot_nst(const unsigned &ipt,
+                                                 Shape &psi,
+                                                 DShape &dpsidx, Shape &test,
+                                                 DShape &dtestdx) const;
 
-/*  /// \short Velocity shape and test functions and their derivs  */
-/*  /// w.r.t. to global coords at ipt-th integation point (taken from geometry) */
-/*  ///Return Jacobian of mapping between local and global coordinates. */
-/*  inline double dshape_and_dtest_eulerian_at_knot_nst(const unsigned &ipt,  */
-/*                                                  Shape &psi,  */
-/*                                                  DShape &dpsidx, Shape &test,  */
-/*                                                  DShape &dtestdx) const; */
-
-/*  /// Pressure shape functions at local coordinate s */
-/*  inline void pshape_nst(const Vector<double> &s, Shape &psi) const; */
-
-/*  /// Pressure shape and test functions at local coordinte s */
-/*  inline void pshape_nst(const Vector<double> &s, Shape &psi, Shape &test) const; */
-
-/*  /// Unpin all internal pressure dofs */
-/*  void unpin_all_internal_pressure_dofs(); */
-
-/*  /// Return the local equation numbers for the pressure values. */
-/*  inline int p_local_eqn(const unsigned &n) */
-/*   {return this->internal_local_eqn(n,0);} */
-
-/* public: */
-
-/*  /// Constructor, there are DIM+1 internal values (for the pressure) */
-/*  TCrouzeixRaviartElement() : TElement<DIM,3>(), NavierStokesEquations<DIM>() */
-/*   { */
-/*    //Allocate and add DIM+1 Internal data objects, each storing one */
-/*    //unknown (the pressure) */
-/*    for(unsigned i=0;i<DIM+1;i++) {this->add_internal_data(new Data(1));} */
-/*   } */
+ /// \short Pressure shape and test functions and their derivs 
+ /// w.r.t. to global coords  at local coordinate s (taken from geometry)
+ /// Return Jacobian of mapping between local and global coordinates.
+ inline double dpshape_and_dptest_eulerian_nst(const Vector<double> &s, 
+                                               Shape &ppsi, 
+                                               DShape &dppsidx, 
+                                               Shape &ptest, 
+                                               DShape &dptestdx) const;
  
-/*  /// \short Number of values (pinned or dofs) required at local node n.  */
-/*  virtual unsigned required_nvalue(const unsigned &n) const; */
+public:
 
+ /// Pressure shape functions at local coordinate s
+ inline void pshape_nst(const Vector<double> &s, Shape &psi) const;
+
+ /// Pressure shape and test functions at local coordinte s
+ inline void pshape_nst(const Vector<double> &s, Shape &psi, Shape &test) 
+  const;
+
+ /// Unpin all internal pressure dofs
+ void unpin_all_internal_pressure_dofs();
+
+ /// Return the local equation numbers for the pressure values.
+ inline int p_local_eqn(const unsigned &n)
+  {return this->internal_local_eqn(P_nst_internal_index,n);}
  
-/*  /// \short Return the pressure values at internal dof i_internal */
-/*  /// (Discontinous pressure interpolation -- no need to cater for hanging  */
-/*  /// nodes).  */
-/*  double p(const unsigned &i_internal) const */
-/*   {return *(this->internal_data_pt(i_internal)->value_pt(0));} */
+public:
+ 
+ /// Constructor, there are DIM+1 internal values (for the pressure)
+ TCrouzeixRaviartElement() : TBubbleEnrichedElement<DIM,3>(), 
+                             NavierStokesEquations<DIM>()
+  {
+   //Allocate and a single internal datum with DIM+1 entries for the
+   //pressure
+   P_nst_internal_index = this->add_internal_data(new Data(DIM+1));
+  }
 
-/*  /// Return number of pressure values */
-/*  unsigned npres() const {return DIM+1;}  */
+ /// Broken copy constructor
+ TCrouzeixRaviartElement(const TCrouzeixRaviartElement<DIM>& dummy) 
+  { 
+   BrokenCopy::broken_copy("TCrouzeixRaviartElement");
+  } 
+ 
+ /// Broken assignment operator
+ void operator=(const TCrouzeixRaviartElement<DIM>&) 
+  {
+   BrokenCopy::broken_assign("TCrouzeixRaviartElement");
+  }
 
 
-/*  /// \short Set the integers that are used to label velocities and pressures */
-/*  /// to the data structures stored at the nodes or in internal data. The */
-/*  /// arguments are an Vector of DIM integers representing the velocity  */
-/*  /// components and an integer to represent the fluid pressure. */
-/*  void pass_fluid_variable_identifiers(const Vector<int>& u, const int &p) */
-/*   { */
-/*    //Get the number of nodes */
-/*    unsigned n_node = FiniteElement::nnode(); */
-/*    //Loop over the nodes */
-/*    for(unsigned l=0;l<n_node;l++) */
-/*     { */
-/*      //Loop over the dimensions */
-/*      for(unsigned i=0;i<DIM;i++) */
-/*       { */
-/*        //The type u[i] is stored at data position i */
-/*        this->Node_pt[l]->set_identifier(i,u[i]); */
-/*       } */
-/*     } */
+ /// \short Number of values (pinned or dofs) required at local node n.
+ inline virtual unsigned required_nvalue(const unsigned &n) const
+  {return DIM;}
+  
+ 
+ /// \short Return the pressure values at internal dof i_internal
+ /// (Discontinous pressure interpolation -- no need to cater for hanging
+ /// nodes).
+ double p_nst(const unsigned &i) const
+  {return this->internal_data_pt(P_nst_internal_index)->value(i);}
+
+ /// Return number of pressure values
+ unsigned npres_nst() const {return DIM+1;}
+
+ /// Pin p_dof-th pressure dof and set it to value specified by p_value.
+ void fix_pressure(const unsigned &p_dof, const double &p_value)
+  {
+   this->internal_data_pt(P_nst_internal_index)->pin(p_dof);
+   this->internal_data_pt(P_nst_internal_index)->set_value(p_dof, p_value);
+  }
+
+ /// \short Build FaceElements that apply the Robin boundary condition
+ /// to the pressure advection diffusion problem required by 
+ /// Fp preconditioner
+ void build_fp_press_adv_diff_robin_bc_element(const unsigned& 
+                                               face_index)
+  {
+  this->Pressure_advection_diffusion_robin_element_pt.push_back(
+   new FpPressureAdvDiffRobinBCElement<TCrouzeixRaviartElement<DIM> >(
+    this, face_index));
+  }
+ 
+ /// \short Add to the set paired_load_data
+ /// pairs of pointers to data objects and unsignedegers that
+ /// index the values in the data object that affect the load (traction),
+ /// as specified in the get_load() function.
+ void identify_load_data(std::set<std::pair<Data*,unsigned> > 
+                         &paired_load_data);
+
+ /// \short  Add to the set \c paired_pressure_data pairs 
+ /// containing
+ /// - the pointer to a Data object
+ /// and
+ /// - the index of the value in that Data object
+ /// .
+ /// for all pressure values that affect the
+ /// load computed in the \c get_load(...) function.
+ void identify_pressure_data(
+  std::set<std::pair<Data*,unsigned> > &paired_pressure_data);
+
+ /// Redirect output to NavierStokesEquations output
+ void output(std::ostream &outfile) 
+  {NavierStokesEquations<DIM>::output(outfile);}
+ 
+ /// Redirect output to NavierStokesEquations output
+ void output(std::ostream &outfile, const unsigned &nplot)
+  {NavierStokesEquations<DIM>::output(outfile,nplot);}
+ 
+ /// Redirect output to NavierStokesEquations output
+ void output(FILE* file_pt) {NavierStokesEquations<DIM>::output(file_pt);}
+ 
+ /// Redirect output to NavierStokesEquations output
+ void output(FILE* file_pt, const unsigned &n_plot)
+  {NavierStokesEquations<DIM>::output(file_pt,n_plot);}
+ 
+ 
+ /// \short Full output function:
+ /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation
+ /// in tecplot format. Default number of plot points
+ void full_output(std::ostream &outfile)
+  {NavierStokesEquations<DIM>::full_output(outfile);}
+
+ /// \short Full output function:
+ /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation
+ /// in tecplot format. nplot points in each coordinate direction
+ void full_output(std::ostream &outfile, const unsigned &nplot)
+  {NavierStokesEquations<DIM>::full_output(outfile,nplot);}
+
+/// \short The number of "blocks" that degrees of freedom in this element
+ /// are sub-divided into: Velocity and pressure.
+ unsigned ndof_types()
+  {
+   return DIM+1;
+  }
+ 
+ /// \short Create a list of pairs for all unknowns in this element,
+ /// so that the first entry in each pair contains the global equation
+ /// number of the unknown, while the second one contains the number
+ /// of the "block" that this unknown is associated with.
+ /// (Function can obviously only be called if the equation numbering
+ /// scheme has been set up.) Velocity=0; Pressure=1
+ void get_dof_numbers_for_unknowns(
+  std::list<std::pair<unsigned long,unsigned> >& dof_lookup_list);
+
+
+};
+
+//Inline functions
+
+//=======================================================================
+/// Derivatives of the shape functions and test functions w.r.t. to global
+/// (Eulerian) coordinates. Return Jacobian of mapping between
+/// local and global coordinates.
+//=======================================================================
+template<unsigned DIM>
+inline double TCrouzeixRaviartElement<DIM>::dshape_and_dtest_eulerian_nst(
+ const Vector<double> &s, Shape &psi,
+ DShape &dpsidx, Shape &test,
+ DShape &dtestdx) const
+{
+ //Call the geometrical shape functions and derivatives
+ double J = this->dshape_eulerian(s,psi,dpsidx);
+ //The test functions are equal to the shape functions
+ test = psi;
+ dtestdx = dpsidx;
+ //Return the jacobian
+ return J;
+}
+
+
+//=======================================================================
+/// Derivatives of the shape functions and test functions w.r.t. to global
+/// (Eulerian) coordinates. Return Jacobian of mapping between
+/// local and global coordinates.
+//=======================================================================
+template<unsigned DIM>
+inline double TCrouzeixRaviartElement<DIM>::
+dshape_and_dtest_eulerian_at_knot_nst(
+ const unsigned &ipt, Shape &psi,
+ DShape &dpsidx, Shape &test,
+ DShape &dtestdx) const
+{
+ //Call the geometrical shape functions and derivatives
+ double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx);
+ //The test functions are the shape functions
+ test = psi;
+ dtestdx = dpsidx;
+ //Return the jacobian
+ return J;
+}
+
+
+//=======================================================================
+/// 2D :
+/// Pressure shape functions
+//=======================================================================
+template<>
+inline void TCrouzeixRaviartElement<2>::pshape_nst(const Vector<double> &s,
+                                                   Shape &psi) const
+{
+ psi[0] = 1.0;
+ psi[1] = s[0];
+ psi[2] = s[1];
+}
+
+//=======================================================================
+/// Pressure shape and test functions
+//=======================================================================
+template<>
+inline void TCrouzeixRaviartElement<2>::pshape_nst(const Vector<double> &s,
+                                                   Shape &psi,
+                                                   Shape &test) const
+{
+ //Call the pressure shape functions
+ this->pshape_nst(s,psi);
+ //The test functions are the shape functions
+ test = psi;
+}
+
+
+//=======================================================================
+/// 3D :
+/// Pressure shape functions
+//=======================================================================
+template<>
+inline void TCrouzeixRaviartElement<3>::pshape_nst(const Vector<double> &s,
+                                                   Shape &psi)
+const
+{
+ psi[0] = 1.0;
+ psi[1] = s[0];
+ psi[2] = s[1];
+ psi[3] = s[2];
+}
+
+
+//=======================================================================
+/// Pressure shape and test functions
+//=======================================================================
+template<>
+inline void TCrouzeixRaviartElement<3>::pshape_nst(const Vector<double> &s,
+                                                   Shape &psi,
+                                                   Shape &test) const
+{
+ //Call the pressure shape functions
+ this->pshape_nst(s,psi);
+ //The test functions are the shape functions
+ test = psi;
+}
+
+
+//==========================================================================
+/// 2D :
+/// Pressure shape and test functions and derivs w.r.t. to Eulerian coords.
+/// Return Jacobian of mapping between local and global coordinates.
+//==========================================================================
+template<>
+ inline double TCrouzeixRaviartElement<2>::dpshape_and_dptest_eulerian_nst(
+  const Vector<double> &s, 
+  Shape &ppsi, 
+  DShape &dppsidx, 
+  Shape &ptest, 
+  DShape &dptestdx) const
+ {
+
+  // Initalise with shape fcts and derivs. w.r.t. to local coordinates
+  ppsi[0] = 1.0;
+  ppsi[1] = s[0];
+  ppsi[2] = s[1];
+
+  dppsidx(0,0) = 0.0;
+  dppsidx(1,0) = 1.0;
+  dppsidx(2,0) = 0.0;
+
+  dppsidx(0,1) = 0.0;
+  dppsidx(1,1) = 0.0;
+  dppsidx(2,1) = 1.0;
+
+
+  //Get the values of the shape functions and their local derivatives
+  Shape psi(7);
+  DShape dpsi(7,2);
+  dshape_local(s,psi,dpsi);
+
+  //Allocate memory for the inverse 2x2 jacobian
+  DenseMatrix<double> inverse_jacobian(2);
+
+  //Now calculate the inverse jacobian
+  const double det = local_to_eulerian_mapping(dpsi,inverse_jacobian);
+  
+  //Now set the values of the derivatives to be derivs w.r.t. to the
+  // Eulerian coordinates
+  transform_derivatives(inverse_jacobian,dppsidx);
+  
+  //The test functions are equal to the shape functions
+  ptest = ppsi;
+  dptestdx = dppsidx;
+  
+  //Return the determinant of the jacobian
+  return det;
+ }
+
+
+
+//==========================================================================
+/// 3D :
+/// Pressure shape and test functions and derivs w.r.t. to Eulerian coords.
+/// Return Jacobian of mapping between local and global coordinates.
+//==========================================================================
+template<>
+ inline double TCrouzeixRaviartElement<3>::dpshape_and_dptest_eulerian_nst(
+  const Vector<double> &s, 
+  Shape &ppsi, 
+  DShape &dppsidx, 
+  Shape &ptest, 
+  DShape &dptestdx) const
+ {
+
+  // Initalise with shape fcts and derivs. w.r.t. to local coordinates
+  ppsi[0] = 1.0;
+  ppsi[1] = s[0];
+  ppsi[2] = s[1];
+  ppsi[3] = s[2];
+
+  dppsidx(0,0) = 0.0;
+  dppsidx(1,0) = 1.0;
+  dppsidx(2,0) = 0.0;
+  dppsidx(3,0) = 0.0;
+
+  dppsidx(0,1) = 0.0;
+  dppsidx(1,1) = 0.0;
+  dppsidx(2,1) = 1.0;
+  dppsidx(3,1) = 0.0;
+
+  dppsidx(0,2) = 0.0;
+  dppsidx(1,2) = 0.0;
+  dppsidx(2,2) = 0.0;
+  dppsidx(3,2) = 1.0;
+
+
+  //Get the values of the shape functions and their local derivatives
+  Shape psi(11);
+  DShape dpsi(11,3);
+  dshape_local(s,psi,dpsi);
+
+  // Allocate memory for the inverse 3x3 jacobian
+  DenseMatrix<double> inverse_jacobian(3);
+
+  // Now calculate the inverse jacobian
+  const double det = local_to_eulerian_mapping(dpsi,inverse_jacobian);
+  
+  // Now set the values of the derivatives to be derivs w.r.t. to the
+  // Eulerian coordinates
+  transform_derivatives(inverse_jacobian,dppsidx);
+  
+  //The test functions are equal to the shape functions
+  ptest = ppsi;
+  dptestdx = dppsidx;
+  
+  // Return the determinant of the jacobian
+  return det;
+
+ }
+
+
+//=======================================================================
+/// Face geometry of the 2D Crouzeix_Raviart elements
+//=======================================================================
+template<>
+class FaceGeometry<TCrouzeixRaviartElement<2> >: public virtual TElement<1,3>
+{
+public:
+ FaceGeometry() : TElement<1,3>() {}
+};
+
+//=======================================================================
+/// Face geometry of the 3D Crouzeix_Raviart elements
+//=======================================================================
+template<>
+class FaceGeometry<TCrouzeixRaviartElement<3> >: 
+public virtual TBubbleEnrichedElement<2,3>
+{
+ 
+  public:
+ FaceGeometry() : TBubbleEnrichedElement<2,3>() {}
+};
+
+
+//=======================================================================
+/// Face geometry of the FaceGeometry of the 2D CrouzeixRaviart elements
+//=======================================================================
+template<>
+class FaceGeometry<FaceGeometry<TCrouzeixRaviartElement<2> > >: 
+public virtual PointElement
+{
+  public:
+ FaceGeometry() : PointElement() {}
+};
+
+
+//=======================================================================
+/// Face geometry of the FaceGeometry of the 3D Crouzeix_Raviart elements
+//=======================================================================
+template<>
+class FaceGeometry<FaceGeometry<TCrouzeixRaviartElement<3> > >: 
+public virtual TElement<1,3>
+{
+  public:
+ FaceGeometry() : TElement<1,3>() {}
+};
+
+
+
+//=============================================================================
+/// Create a list of pairs for all unknowns in this element,
+/// so that the first entry in each pair contains the global equation
+/// number of the unknown, while the second one contains the number
+/// of the DOF that this unknown is associated with.
+/// (Function can obviously only be called if the equation numbering
+/// scheme has been set up.)
+//=============================================================================
+template<unsigned DIM>
+void TCrouzeixRaviartElement<DIM>::get_dof_numbers_for_unknowns(
+ std::list<std::pair<unsigned long,unsigned> >& block_lookup_list)
+{
+ // number of nodes
+ unsigned n_node = this->nnode();
+ 
+ // number of pressure values
+ unsigned n_press = this->npres_nst();
+ 
+ // temporary pair (used to store block lookup prior to being added to list)
+ std::pair<unsigned,unsigned> block_lookup;
+ 
+ // pressure dof number
+ unsigned pressure_dof_number = DIM;
+
+ // loop over the pressure values
+ for (unsigned n = 0; n < n_press; n++)
+  {
+   // determine local eqn number
+   int local_eqn_number = this->p_local_eqn(n);
+   
+   // ignore pinned values - far away degrees of freedom resulting 
+   // from hanging nodes can be ignored since these are be dealt
+   // with by the element containing their master nodes
+   if (local_eqn_number >= 0)
+    {
+     // store block lookup in temporary pair: First entry in pair
+     // is global equation number; second entry is block type
+     block_lookup.first = this->eqn_number(local_eqn_number);
+     block_lookup.second = pressure_dof_number;
      
-/*    //Get the number of pressure dofs */
-/*    unsigned n_pres = npres(); */
-/*    //Loop over the internal dofs */
-/*    for(unsigned l=0;l<n_pres;l++) */
-/*     { */
-/*      //The pressure is the first entry in each internal dof */
-/*      this->internal_data_pt(l)->set_identifier(0,p); */
-/*     } */
-/*   } */
+     // add to list
+     block_lookup_list.push_front(block_lookup);
+    }
+  }
  
-/*  /// Pin p_dof-th pressure dof and set it to value specified by p_value. */
-/*  void fix_pressure(const unsigned &p_dof, const double &p_value) */
-/*   { */
-/*    this->internal_data_pt(p_dof)->pin(0); */
-/*    *(this->internal_data_pt(p_dof)->value_pt(0)) = p_value; */
-/*   } */
-
-/*  /// \short Add to the set paired_load_data */
-/*  /// pairs of pointers to data objects and unsignedegers that */
-/*  /// index the values in the data object that affect the load (traction),  */
-/*  /// as specified in the get_load() function.  */
-/*  void identify_load_data(set<pair<Data*,unsigned> > &paired_load_data); */
-
-/*  /// Redirect output to NavierStokesEquations output */
-/*  void output(std::ostream &outfile) {NavierStokesEquations<DIM>::output(outfile);} */
-
-/*  /// Redirect output to NavierStokesEquations output */
-/*  void output(std::ostream &outfile, const unsigned &nplot) */
-/*   {NavierStokesEquations<DIM>::output(outfile,nplot);} */
-
-/*  /// Redirect output to NavierStokesEquations output */
-/*  void output(FILE* file_pt) {NavierStokesEquations<DIM>::output(file_pt);} */
-
-/*  /// Redirect output to NavierStokesEquations output */
-/*  void output(FILE* file_pt, const unsigned &n_plot) */
-/*   {NavierStokesEquations<DIM>::output(file_pt,n_plot);} */
-
-
-/*  /// \short Full output function:  */
-/*  /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation */
-/*  /// in tecplot format. Default number of plot points */
-/*  void full_output(std::ostream &outfile) */
-/*   {NavierStokesEquations<DIM>::full_output(outfile);} */
-
-/*  /// \short Full output function:  */
-/*  /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation */
-/*  /// in tecplot format. nplot points in each coordinate direction */
-/*  void full_output(std::ostream &outfile, const unsigned &nplot) */
-/*   {NavierStokesEquations<DIM>::full_output(outfile,nplot);} */
-
-/* }; */
-
-/* //Inline functions */
-
-/* //======================================================================= */
-/* /// 2D */
-/* /// Derivatives of the shape functions and test functions w.r.t. to global */
-/* /// (Eulerian) coordinates. Return Jacobian of mapping between */
-/* /// local and global coordinates. */
-/* //======================================================================= */
-/* template<> */
-/* inline double TCrouzeixRaviartElement<2>::dshape_and_dtest_eulerian( */
-/*                                   const Vector<double> &s, Shape &psi,  */
-/*                                   DShape &dpsidx, Shape &test,  */
-/*                                   DShape &dtestdx) const */
-/* { */
-/*  //Call the geometrical shape functions and derivatives   */
-/*  double J = this->dshape_eulerian(s,psi,dpsidx); */
-/*  //Loop over the test functions and derivatives and set them equal to the */
-/*  //shape functions */
-/*  for(unsigned i=0;i<6;i++) */
-/*   { */
-/*    test[i] = psi[i];  */
-/*    dtestdx(i,0) = dpsidx(i,0); */
-/*    dtestdx(i,1) = dpsidx(i,1); */
-/*   } */
-/*  //Return the jacobian */
-/*  return J; */
-/* } */
-
-
-/* //======================================================================= */
-/* /// 3D */
-/* /// Derivatives of the shape functions and test functions w.r.t. to global */
-/* /// (Eulerian) coordinates. Return Jacobian of mapping between */
-/* /// local and global coordinates. */
-/* //======================================================================= */
-/* template<> */
-/* inline double TCrouzeixRaviartElement<3>::dshape_and_dtest_eulerian( */
-/*                                   const Vector<double> &s, Shape &psi,  */
-/*                                   DShape &dpsidx, Shape &test,  */
-/*                                   DShape &dtestdx) const */
-/* { */
-/*  //Call the geometrical shape functions and derivatives   */
-/*  double J = this->dshape_eulerian(s,psi,dpsidx); */
-/*  //Loop over the test functions and derivatives and set them equal to the */
-/*  //shape functions */
-/*  for(unsigned i=0;i<10;i++) */
-/*   { */
-/*    test[i] = psi[i];  */
-/*    dtestdx(i,0) = dpsidx(i,0); */
-/*    dtestdx(i,1) = dpsidx(i,1); */
-/*    dtestdx(i,2) = dpsidx(i,2); */
-/*   } */
-/*  //Return the jacobian */
-/*  return J; */
-/* } */
-
-
-
-/* //======================================================================= */
-/* /// 2D */
-/* /// Derivatives of the shape functions and test functions w.r.t. to global */
-/* /// (Eulerian) coordinates. Return Jacobian of mapping between */
-/* /// local and global coordinates. */
-/* //======================================================================= */
-/* template<> */
-/* inline double TCrouzeixRaviartElement<2>::dshape_and_dtest_eulerian_at_knot( */
-/*                                               const unsigned &ipt, Shape &psi,  */
-/*                                               DShape &dpsidx, Shape &test,  */
-/*                                               DShape &dtestdx) const */
-/* { */
-/*  //Call the geometrical shape functions and derivatives   */
-/*  double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx); */
-/*  //Loop over the test functions and derivatives and set them equal to the */
-/*  //shape functions */
-/*  for(unsigned i=0;i<6;i++) */
-/*   { */
-/*    test[i] = psi[i];  */
-/*    dtestdx(i,0) = dpsidx(i,0); */
-/*    dtestdx(i,1) = dpsidx(i,1); */
-/*   } */
-/*  //Return the jacobian */
-/*  return J; */
-/* } */
-
-
-/* //======================================================================= */
-/* /// 3D */
-/* /// Derivatives of the shape functions and test functions w.r.t. to global */
-/* /// (Eulerian) coordinates. Return Jacobian of mapping between */
-/* /// local and global coordinates. */
-/* //======================================================================= */
-/* template<> */
-/* inline double TCrouzeixRaviartElement<3>::dshape_and_dtest_eulerian_at_knot( */
-/*                                               const unsigned &ipt, Shape &psi,  */
-/*                                               DShape &dpsidx, Shape &test,  */
-/*                                               DShape &dtestdx) const */
-/* { */
-/*  //Call the geometrical shape functions and derivatives   */
-/*  double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx); */
-/*  //Loop over the test functions and derivatives and set them equal to the */
-/*  //shape functions */
-/*  for(unsigned i=0;i<10;i++) */
-/*   { */
-/*    test[i] = psi[i];  */
-/*    dtestdx(i,0) = dpsidx(i,0); */
-/*    dtestdx(i,1) = dpsidx(i,1); */
-/*    dtestdx(i,2) = dpsidx(i,2); */
-/*   } */
-/*  //Return the jacobian */
-/*  return J; */
-/* } */
-
-
-
-/* //======================================================================= */
-/* /// 2D : */
-/* /// Pressure shape functions */
-/* //======================================================================= */
-/* template<> */
-/* inline void TCrouzeixRaviartElement<2>::pshape(const Vector<double> &s,  */
-/*                                               Shape &psi) const */
-/* { */
-/*  psi[0] = 1.0; */
-/*  psi[1] = s[0]; */
-/*  psi[2] = s[1]; */
-/* } */
-
-/* //======================================================================= */
-/* /// Pressure shape and test functions */
-/* //======================================================================= */
-/* template<> */
-/* inline void TCrouzeixRaviartElement<2>::pshape(const Vector<double> &s,  */
-/*                                               Shape &psi,  */
-/*                                               Shape &test) const */
-/* { */
-/*  //Call the pressure shape functions */
-/*  pshape(s,psi); */
-/*  //Loop over the test functions and set them equal to the shape functions */
-/*  for(unsigned i=0;i<3;i++) test[i] = psi[i]; */
-/* } */
-
-
-/* //======================================================================= */
-/* /// 3D : */
-/* /// Pressure shape functions */
-/* //======================================================================= */
-/* template<> */
-/* inline void TCrouzeixRaviartElement<3>::pshape(const Vector<double> &s, */
-/*                                               Shape &psi) */
-/* const */
-/* { */
-/*  psi[0] = 1.0; */
-/*  psi[1] = s[0]; */
-/*  psi[2] = s[1]; */
-/*  psi[3] = s[2]; */
-/* } */
-
-
-/* //======================================================================= */
-/* /// Pressure shape and test functions */
-/* //======================================================================= */
-/* template<> */
-/* inline void TCrouzeixRaviartElement<3>::pshape(const Vector<double> &s, */
-/*                                               Shape &psi,  */
-/*                                               Shape &test) const */
-/* { */
-/*  //Call the pressure shape functions */
-/*  pshape(s,psi); */
-/*  //Loop over the test functions and set them equal to the shape functions */
-/*  for(unsigned i=0;i<4;i++) test[i] = psi[i]; */
-/* } */
-
-
-/* //======================================================================= */
-/* /// Face geometry of the 2D Crouzeix_Raviart elements */
-/* //======================================================================= */
-/* template<> */
-/* class FaceGeometry<TCrouzeixRaviartElement<2> >: public virtual QElement<1,3> */
-/* { */
-/*   public: */
-/*  FaceGeometry() : QElement<1,3>() */
-/*   { */
-/*    oomph_info << "Careful: FaceGeometries for TCrouzeixRaviart have not been tested" */
-/*         << std::endl; */
-/*   } */
-/* }; */
-
-/* //======================================================================= */
-/* /// Face geometry of the 3D Crouzeix_Raviart elements */
-/* //======================================================================= */
-/* template<> */
-/* class FaceGeometry<TCrouzeixRaviartElement<3> >: public virtual TElement<2,3> */
-/* { */
- 
-/*   public: */
-/*  FaceGeometry() : TElement<2,3>() */
-/*   { */
-/*    oomph_info << "Careful: FaceGeometries for TCrouzeixRaviart have not been tested" */
-/*         << std::endl; */
-/*   } */
-/* }; */
-
+ // loop over the nodes
+ for (unsigned n = 0; n < n_node; n++)
+  {
+   // find the number of values at this node
+   unsigned nv = this->node_pt(n)->nvalue();
+   
+   //loop over these values
+   for (unsigned v = 0; v < nv; v++)
+    {
+     // determine local eqn number
+     int local_eqn_number = this->nodal_local_eqn(n, v);
+     
+     // ignore pinned values
+     if (local_eqn_number >= 0)
+      {
+       // store block lookup in temporary pair: First entry in pair
+       // is global equation number; second entry is block type
+       block_lookup.first = this->eqn_number(local_eqn_number);
+       block_lookup.second = v;
+       
+       // add to list
+       block_lookup_list.push_front(block_lookup);
+       
+      }
+    }
+  }
+}
 
 ////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////
@@ -723,8 +899,8 @@ inline unsigned TTaylorHoodElement<3>::npres_nst() const
 /// global (Eulerian) coordinates. Return Jacobian of mapping between
 /// local and global coordinates.
 //==========================================================================
-template<>
-inline double TTaylorHoodElement<2>::dshape_and_dtest_eulerian_nst(
+template<unsigned DIM>
+inline double TTaylorHoodElement<DIM>::dshape_and_dtest_eulerian_nst(
                                               const Vector<double> &s,
                                               Shape &psi,
                                               DShape &dpsidx, Shape &test,
@@ -732,101 +908,32 @@ inline double TTaylorHoodElement<2>::dshape_and_dtest_eulerian_nst(
 {
  //Call the geometrical shape functions and derivatives
  double J = this->dshape_eulerian(s,psi,dpsidx);
- //Loop over the test functions and derivatives and set them equal to the
- //shape functions
- for(unsigned i=0;i<6;i++)
-  {
-   test[i] = psi[i];
-   dtestdx(i,0) = dpsidx(i,0);
-   dtestdx(i,1) = dpsidx(i,1);
-  }
+ //Test functions are the shape functions
+ test = psi;
+ dtestdx = dpsidx;
  //Return the jacobian
  return J;
 }
 
 
 //==========================================================================
-/// 3D :
 /// Derivatives of the shape functions and test functions w.r.t to
 /// global (Eulerian) coordinates. Return Jacobian of mapping between
 /// local and global coordinates.
 //==========================================================================
-template<>
-inline double TTaylorHoodElement<3>::dshape_and_dtest_eulerian_nst(
-                                              const Vector<double> &s,
-                                              Shape &psi,
-                                              DShape &dpsidx, Shape &test,
-                                              DShape &dtestdx) const
-{
- //Call the geometrical shape functions and derivatives
- double J = this->dshape_eulerian(s,psi,dpsidx);
- //Loop over the test functions and derivatives and set them equal to the
- //shape functions
- for(unsigned i=0;i<10;i++)
-  {
-   test[i] = psi[i];
-   dtestdx(i,0) = dpsidx(i,0);
-   dtestdx(i,1) = dpsidx(i,1);
-   dtestdx(i,2) = dpsidx(i,2);
-  }
- //Return the jacobian
- return J;
-}
-
-
-//==========================================================================
-/// 2D :
-/// Derivatives of the shape functions and test functions w.r.t to
-/// global (Eulerian) coordinates. Return Jacobian of mapping between
-/// local and global coordinates.
-//==========================================================================
-template<>
-inline double TTaylorHoodElement<2>::dshape_and_dtest_eulerian_at_knot_nst(
+template<unsigned DIM>
+inline double TTaylorHoodElement<DIM>::dshape_and_dtest_eulerian_at_knot_nst(
  const unsigned &ipt,Shape &psi, DShape &dpsidx, Shape &test,
  DShape &dtestdx) const
 {
  //Call the geometrical shape functions and derivatives
  double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx);
- //Loop over the test functions and derivatives and set them equal to the
- //shape functions
- for(unsigned i=0;i<6;i++)
-  {
-   test[i] = psi[i];
-   dtestdx(i,0) = dpsidx(i,0);
-   dtestdx(i,1) = dpsidx(i,1);
-  }
+ //Test functions are the shape functions
+ test = psi;
+ dtestdx = dpsidx;
  //Return the jacobian
  return J;
 }
-
-
-//==========================================================================
-/// 3D :
-/// Derivatives of the shape functions and test functions w.r.t to
-/// global (Eulerian) coordinates. Return Jacobian of mapping between
-/// local and global coordinates.
-//==========================================================================
-template<>
-inline double TTaylorHoodElement<3>::dshape_and_dtest_eulerian_at_knot_nst(
- const unsigned &ipt,Shape &psi, DShape &dpsidx, Shape &test,
- DShape &dtestdx) const
-{
- //Call the geometrical shape functions and derivatives
- double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx);
- //Loop over the test functions and derivatives and set them equal to the
- //shape functions
- for(unsigned i=0;i<10;i++)
-  {
-   test[i] = psi[i];
-   dtestdx(i,0) = dpsidx(i,0);
-   dtestdx(i,1) = dpsidx(i,1);
-   dtestdx(i,2) = dpsidx(i,2);
-  }
- //Return the jacobian
- return J;
-}
-
-
 
 //==========================================================================
 /// 2D :
@@ -870,14 +977,10 @@ template<>
   // Now set the values of the derivatives to be derivs w.r.t. to the
   // Eulerian coordinates
   transform_derivatives(inverse_jacobian,dppsidx);
-  
-  // Loop over the test functions and set them equal to the shape functions
-  for(unsigned i=0;i<3;i++)
-   {
-    ptest[i] = ppsi[i];
-    dptestdx(i,0) = dppsidx(i,0);
-    dptestdx(i,1) = dppsidx(i,1);
-   }
+
+  //Test functions are shape functions
+  ptest = ppsi;
+  dptestdx = dppsidx;
   
   // Return the determinant of the jacobian
   return det;
@@ -935,15 +1038,10 @@ template<>
   // Now set the values of the derivatives to be derivs w.r.t. to the
   // Eulerian coordinates
   transform_derivatives(inverse_jacobian,dppsidx);
-  
-  // Loop over the test functions and set them equal to the shape functions
-  for(unsigned i=0;i<4;i++)
-   {
-    ptest[i] = ppsi[i];
-    dptestdx(i,0) = dppsidx(i,0);
-    dptestdx(i,1) = dppsidx(i,1);
-    dptestdx(i,2) = dppsidx(i,2);
-   }
+
+  //Test functions are shape functions
+  ptest = ppsi;
+  dptestdx = dppsidx;
   
   // Return the determinant of the jacobian
   return det;
@@ -981,32 +1079,17 @@ const
 
 
 //==========================================================================
-/// 2D :
 /// Pressure shape and test functions
 //==========================================================================
-template<>
-inline void TTaylorHoodElement<2>::pshape_nst(const Vector<double> &s, Shape &psi,
-                                           Shape &test) const
+template<unsigned DIM>
+inline void TTaylorHoodElement<DIM>::pshape_nst(const Vector<double> &s, 
+                                                Shape &psi,
+                                                Shape &test) const
 {
  //Call the pressure shape functions
- pshape_nst(s,psi);
- //Loop over the test functions and set them equal to the shape functions
- for(unsigned i=0;i<3;i++) test[i] = psi[i];
-}
-
-
-//==========================================================================
-/// 3D :
-/// Pressure shape and test functions
-//==========================================================================
-template<>
-inline void TTaylorHoodElement<3>::pshape_nst(const Vector<double> &s, Shape &psi,
-                                           Shape &test) const
-{
- //Call the pressure shape functions
- pshape_nst(s,psi);
- //Loop over the test functions and set them equal to the shape functions
- for(unsigned i=0;i<4;i++) test[i] = psi[i];
+ this->pshape_nst(s,psi);
+ //Test functions are shape functions
+ test = psi;
 }
 
 
@@ -1020,12 +1103,6 @@ class FaceGeometry<TTaylorHoodElement<2> >: public virtual TElement<1,3>
 
   /// Constructor: Call constructor of base
   FaceGeometry() : TElement<1,3>() {}
-/*   { */
-/*    throw OomphLibWarning( */
-/*     "Careful: FaceGeometries for TTaylorHood have not been tested", */
-/*     "FaceGeometry::FaceGeometry()", */
-/*     OOMPH_EXCEPTION_LOCATION); */
-/*   } */
 };
 
 
@@ -1041,12 +1118,6 @@ class FaceGeometry<TTaylorHoodElement<3> >: public virtual TElement<2,3>
 
  /// Constructor: Call constructor of base
   FaceGeometry() : TElement<2,3>() {}
-/*   { */
-/*    throw OomphLibWarning( */
-/*     "Careful: FaceGeometries for TTaylorHood have not been tested", */
-/*     "FaceGeometry::FaceGeometry()", */
-/*     OOMPH_EXCEPTION_LOCATION); */
-/*   } */
 };
 
 

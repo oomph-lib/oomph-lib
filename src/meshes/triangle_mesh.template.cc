@@ -390,12 +390,27 @@ namespace oomph
     MapMatrix<Node*,Node*> central_edge_node_pt;
     Node* edge_node1_pt=0;
     Node* edge_node2_pt=0;
-   
+    
     // Loop over elements
     for (unsigned e=0;e<nelem;e++)
      {
+      //For standard quadratic elements, all nodes are edge nodes
+      unsigned n_edge_node = nnode;
+      //If we have enriched elements, we need to treat the central
+      //node slightly differently
+      if(nnode==7) 
+       {
+        // Pointer to the element's central node. This 
+        // definitely gets added because it cannot be
+        // duplicated.
+        Node* node_pt=finite_element_pt(e)->node_pt(6);
+        Node_pt.push_back(node_pt);
+        //There are only n-1 edge nodes
+        n_edge_node -= 1;
+       }
+
       // Loop over new local nodes
-      for(unsigned j=3;j<nnode;j++)
+      for(unsigned j=3;j<n_edge_node;j++)
        {
         // Pointer to the element's local node
         Node* node_pt=finite_element_pt(e)->node_pt(j);
@@ -425,7 +440,7 @@ namespace oomph
 
          default:
           //Error
-          throw OomphLibError("More than six nodes in TriangleMesh",
+          throw OomphLibError("More than six or seven nodes in TriangleMesh",
                               "TriangleMesh::build_from_scaffold()",
                               OOMPH_EXCEPTION_LOCATION);
          }

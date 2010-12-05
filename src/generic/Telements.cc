@@ -1070,6 +1070,109 @@ const unsigned TElement<3,3>::NodeOnFace[4][6] =
 }
 
 
+//===================================================================
+//Central node on the face of the TBubbleEnrichedelement<2,3>
+//===================================================================
+template<>
+const unsigned TBubbleEnrichedElement<2,3>::CentralNodeOnFace[3] = {4,5,3};
+
+
+//================================================================
+///The face element for is the same in the two-dimesional case
+//================================================================
+template<>
+void TBubbleEnrichedElement<2,3>::build_face_element(
+ const int &face_index,FaceElement* face_element_pt)
+{TElement<2,3>::build_face_element(face_index,face_element_pt);}
+
+
+//===================================================================
+//Central node on the face of the TBubbleEnrichedelement<3,3>
+//===================================================================
+template<>
+const unsigned TBubbleEnrichedElement<3,3>::CentralNodeOnFace[4] = 
+{13,12,10,11};
+
+
+
+//=======================================================================
+/// Function to setup geometrical information for lower-dimensional 
+/// FaceElements (which are of type TBubbleEnrichedElement<2,3>).
+//=======================================================================
+ template<>
+ void TBubbleEnrichedElement<3,3>::build_face_element(
+  const int &face_index,
+  FaceElement* face_element_pt)
+{
+ //Call the standard unenriched build function
+ TElement<3,3>::build_face_element(face_index,face_element_pt);
+
+ //Set the enriched number of total face nodes
+ const unsigned n_face_nodes = 7;
+ 
+ // Resize storage for the number of values originally stored
+ // at the face element's nodes.
+ face_element_pt->nbulk_value_resize(n_face_nodes);
+
+ // Resize storage for the bulk node numbers corresponding to
+ // the nodes of the face
+ face_element_pt->bulk_node_number_resize(n_face_nodes);
+
+ //So the faces are
+ // 0 : s_0 fixed
+ // 1 : s_1 fixed
+ // 2 : s_2 fixed
+ // 3 : sloping face
+ 
+ //Copy central node across
+ unsigned bulk_number = CentralNodeOnFace[face_index];
+ face_element_pt->node_pt(n_face_nodes-1)=node_pt(bulk_number);
+ face_element_pt->bulk_node_number(n_face_nodes-1) = bulk_number;
+ //set the number of values originally stored at this node
+ face_element_pt->nbulk_value(n_face_nodes-1) = required_nvalue(bulk_number);
+}
+
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+
+//===========================================================
+/// Final override for
+/// function to setup geometrical information for lower-dimensional 
+/// FaceElements (which are of type SolidTBubbleEnrichedElement<1,3>).
+//===========================================================
+template<>
+void SolidTBubbleEnrichedElement<2,3>::
+build_face_element(const int &face_index, FaceElement *face_element_pt)
+{
+ //Build the standard non-solid FaceElement
+ TBubbleEnrichedElement<2,3>::
+  build_face_element(face_index,face_element_pt);
+ 
+ //Set the Lagrangian dimension from the first node of the present element
+ dynamic_cast<SolidFiniteElement*>(face_element_pt)->
+  set_lagrangian_dimension(static_cast<SolidNode*>(node_pt(0))->nlagrangian());
+}
+
+
+//===========================================================
+/// Final override for
+/// function to setup geometrical information for lower-dimensional 
+/// FaceElements (which are of type SolidTBubbleEnrichedElement<2,3>).
+//===========================================================
+template<>
+void SolidTBubbleEnrichedElement<3,3>::
+build_face_element(const int &face_index, FaceElement *face_element_pt)
+{
+ //Build the standard non-solid FaceElement
+ TBubbleEnrichedElement<3,3>::
+  build_face_element(face_index,face_element_pt);
+ 
+ //Set the Lagrangian dimension from the first node of the present element
+ dynamic_cast<SolidFiniteElement*>(face_element_pt)->
+  set_lagrangian_dimension(static_cast<SolidNode*>(node_pt(0))->nlagrangian());
+}
+
 
 
 
@@ -1084,5 +1187,8 @@ template class TElement<2,3>;
 template class TElement<2,4>;
 template class TElement<3,2>;
 template class TElement<3,3>;
-
+template class TBubbleEnrichedElement<2,3>;
+template class TBubbleEnrichedElement<3,3>;
+template class SolidTBubbleEnrichedElement<2,3>;
+template class SolidTBubbleEnrichedElement<3,3>;
 }

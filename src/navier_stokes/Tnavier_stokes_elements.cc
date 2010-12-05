@@ -38,74 +38,85 @@ namespace oomph
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
-// ///2D T Crouzeix-Raviart elements
-// //Set the data for the number of Variables at each node
-// template<>
-// const unsigned TCrouzeixRaviartElement<2>::Initial_Nvalue[6]
-// ={2,2,2,2,2,2};
 
-// ///3D Crouzeix-Raviart elements
-// //Set the data for the number of Variables at each node
-// template<>
-// const unsigned TCrouzeixRaviartElement<3>::Initial_Nvalue[10]
-// ={3,3,3,3,3, 3,3,3,3,3};
+//========================================================================
+/// Unpin all internal pressure dofs.
+//========================================================================
+ template<unsigned DIM>
+ void TCrouzeixRaviartElement<DIM>::unpin_all_internal_pressure_dofs()
+ {
+  unsigned n_pres = this->npres_nst();
+  // loop over pressure dofs
+  for(unsigned l=0;l<n_pres;l++)
+   {
+    // unpin internal pressure
+    this->internal_data_pt(P_nst_internal_index)->unpin(l);
+   }
+ }
 
 
-// //========================================================================
-// /// Unpin all internal pressure dofs.
-// //========================================================================
-// template<unsigned DIM>
-// void TCrouzeixRaviartElement<DIM>::unpin_all_internal_pressure_dofs()
-// {
-//  unsigned n_pres = this->npres();
-//  // loop over pressure dofs
-//  for(unsigned l=0;l<n_pres;l++)
-//   {
-//    // unpin internal pressure
-//    this->internal_data_pt(l)->unpin(0);
-//   }
-// }
+//=========================================================================
+///  Add to the set \c paired_load_data pairs containing
+/// - the pointer to a Data object
+/// and
+/// - the index of the value in that Data object
+/// .
+/// for all values (pressures, velocities) that affect the
+/// load computed in the \c get_load(...) function.
+//=========================================================================
+template<unsigned DIM>
+void TCrouzeixRaviartElement<DIM>::
+identify_load_data(std::set<std::pair<Data*,unsigned> > &paired_load_data)
+{
+ //Find the index at which the velocity is stored
+ unsigned u_index[DIM];
+ for(unsigned i=0;i<DIM;i++) {u_index[i] = this->u_index_nst(i);}
+ 
+ //Loop over the nodes
+ unsigned n_node = this->nnode();
+ for(unsigned n=0;n<n_node;n++)
+  {
+   //Loop over the velocity components and add pointer to their data
+   //and indices to the vectors
+   for(unsigned i=0;i<DIM;i++)
+    {
+     paired_load_data.insert(std::make_pair(this->node_pt(n),u_index[i]));
+    }
+  }
+ 
+ // Identify the pressure data
+ identify_pressure_data(paired_load_data);
+}
 
-// //========================================================================
-// /// Number of values (pinned or dofs) required at node n.
-// //========================================================================
-// template<unsigned DIM>
-// unsigned TCrouzeixRaviartElement<DIM>::required_nvalue(const unsigned 
-//                                                    int &n) const
-//  {return Initial_Nvalue[n];}
 
-// //=========================================================================
-// /// Add pointers to Data and indices of the values
-// /// that affect the potential load (traction) applied
-// /// to the SolidElements to the set paired_load_data
-// //=========================================================================
-// template<unsigned DIM>
-// void TCrouzeixRaviartElement<DIM>::
-// identify_load_data(set<pair<Data*,unsigned> > &paired_load_data)
-// {
-//  //Loop over the nodes
-//  unsigned n_node = this->nnode();
-//  for(unsigned n=0;n<n_node;n++)
-//   {
-//    //Loop over the velocity components and add pointer to their data
-//    //and indices to the vectors
-//    for(unsigned i=0;i<DIM;i++)
-//     {
-//      paired_load_data.insert(make_pair(this->node_pt(n),i));
-//     }
-//   }
+//=========================================================================
+///  Add to the set \c paired_pressue_data pairs containing
+/// - the pointer to a Data object
+/// and
+/// - the index of the value in that Data object
+/// .
+/// for all pressures values that affect the
+/// load computed in the \c get_load(...) function.
+//=========================================================================
+template<unsigned DIM>
+void TCrouzeixRaviartElement<DIM>::
+identify_pressure_data(std::set<std::pair<Data*,unsigned> > 
+                       &paired_pressure_data)
+{
+ //Loop over the internal data
+ unsigned n_internal = this->ninternal_data();
+ for(unsigned l=0;l<n_internal;l++)
+  {
+   unsigned nval=this->internal_data_pt(l)->nvalue();
+   //Add internal data
+   for (unsigned j=0;j<nval;j++)
+    {
+     paired_pressure_data.insert(std::make_pair(this->internal_data_pt(l),j));
+    }
+  }
+}      
 
-//  //Loop over the internal data
-//  unsigned n_internal = this->ninternal_data();
-//  for(unsigned l=0;l<n_internal;l++)
-//   {
-//    //The first entry in each internal data is the pressure, which
-//    //affects the traction
-//    paired_load_data.insert(make_pair(this->internal_data_pt(l),0));
-//   }
-// }
 
-      
 
 
 ///////////////////////////////////////////////////////////////////////////
@@ -243,12 +254,10 @@ identify_pressure_data(std::set<std::pair<Data*,unsigned> > &paired_load_data)
 //====================================================================
 //// Force build of templates
 //====================================================================
-//template class TCrouzeixRaviartElement<2>;
+template class TCrouzeixRaviartElement<2>;
 template class TTaylorHoodElement<2>;
 
-//template class TCrouzeixRaviartElement<3>;
+template class TCrouzeixRaviartElement<3>;
 template class TTaylorHoodElement<3>;
-
-
 
 }
