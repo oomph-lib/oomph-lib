@@ -209,8 +209,7 @@ public:
    //If no source function has been set, return zero
    if(Source_fct_pt==0) 
     {
-     source.real() = 0.0;
-     source.imag() = 0.0;
+     source = std::complex<double>(0.0,0.0);
     }
    else
     {
@@ -236,22 +235,23 @@ public:
    dshape_eulerian(s,psi,dpsidx);
      
    //Initialise to zero
+   const std::complex<double> zero(0.0,0.0);
    for(unsigned j=0;j<DIM;j++)
     {
-     flux[j].real() = 0.0;
-     flux[j].imag() = 0.0; 
+     flux[j] = zero;
     }
    
    // Loop over nodes
    for(unsigned l=0;l<n_node;l++)
     {
+     //Cache the complex value of the unknown
+     const std::complex<double> u_value(
+      this->nodal_value(l,u_index_helmholtz().real()),
+      this->nodal_value(l,u_index_helmholtz().imag()));
      //Loop over derivative directions
      for(unsigned j=0;j<DIM;j++)
       {
-       flux[j].real()+=
-        this->nodal_value(l,u_index_helmholtz().real())*dpsidx(l,j);
-       flux[j].imag()+=
-        this->nodal_value(l,u_index_helmholtz().imag())*dpsidx(l,j); 
+       flux[j] += u_value*dpsidx(l,j);
       }
     }
   }
@@ -293,7 +293,7 @@ public:
    shape(s,psi);
 
    //Initialise value of u
-  std::complex<double> interpolated_u(0.0,0.0);
+   std::complex<double> interpolated_u(0.0,0.0);
 
    //Get the index at which the helmholtz unknown is stored
    const unsigned u_nodal_index_real = u_index_helmholtz().real();
@@ -302,8 +302,12 @@ public:
    //Loop over the local nodes and sum
    for(unsigned l=0;l<n_node;l++) 
     {
-     interpolated_u.real() += this->nodal_value(l,u_nodal_index_real)*psi[l];
-     interpolated_u.imag() += this->nodal_value(l,u_nodal_index_imag)*psi[l];
+     //Make a temporary complex number from the stored data
+     const std::complex<double> u_value(
+      this->nodal_value(l,u_nodal_index_real),
+      this->nodal_value(l,u_nodal_index_imag));
+     //Add to the interpolated value
+     interpolated_u += u_value*psi[l];
     }     
    return interpolated_u;
   }

@@ -192,9 +192,6 @@ template <class ELEMENT>
   ///output file if it's open.
   double global_power_contribution(std::ofstream& outfile)
   {   
-   // define the imaginary unit
-   const std::complex<double> I(0.0,1.0);
-   
    // pointer to the corresponding bulk element
    ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(this->bulk_element_pt()); 
    
@@ -271,34 +268,31 @@ template <class ELEMENT>
      for(unsigned l=0;l<nnode_bulk;l++) 
       {
        //Get the nodal value of the helmholtz unknown
-       double phi_value_real =bulk_elem_pt->nodal_value(
-        l,bulk_elem_pt->u_index_helmholtz().real());
-       double phi_value_imag =bulk_elem_pt->nodal_value(
-        l,bulk_elem_pt->u_index_helmholtz().imag());
+       const std::complex<double> phi_value(
+        bulk_elem_pt->nodal_value(l,bulk_elem_pt->u_index_helmholtz().real()),
+        bulk_elem_pt->nodal_value(l,bulk_elem_pt->u_index_helmholtz().imag()));
               
        //Loop over directions
        for(unsigned i=0;i<bulk_dim;i++)
         {
-         interpolated_dphidx[i].real()+= phi_value_real*dpsi_bulk_dx(l,i);
-         interpolated_dphidx[i].imag()+= phi_value_imag*dpsi_bulk_dx(l,i); 
+         interpolated_dphidx[i] += phi_value*dpsi_bulk_dx(l,i);
         }
       } // End of loop over the bulk_nodes
      
      for(unsigned l=0;l<n_node_local;l++) 
       {
        //Get the nodal value of the helmholtz unknown
-       double phi_value_real = raw_nodal_value(l,u_index_helmholtz().real());
-       double phi_value_imag = raw_nodal_value(l,u_index_helmholtz().imag());
+       const std::complex<double> phi_value(
+        raw_nodal_value(l,u_index_helmholtz().real()),
+        raw_nodal_value(l,u_index_helmholtz().imag()));
        
-       interpolated_phi.real() += phi_value_real*psi(l);
-       interpolated_phi.imag() += phi_value_imag*psi(l);
+       interpolated_phi += phi_value*psi(l);
       }
      
      //define dphi_dr 
      for(unsigned i=0;i<bulk_dim;i++)
       {
-       dphi_dr.real()+=interpolated_dphidx[i].real()*unit_normal[i];
-       dphi_dr.imag()+=interpolated_dphidx[i].imag()*unit_normal[i];      
+       dphi_dr += interpolated_dphidx[i]*unit_normal[i];
       }
 
      // Power density
@@ -408,14 +402,12 @@ template <class ELEMENT>
        }
       
       //Get the nodal value of the helmholtz unknown
-      double u_value_real =this->raw_nodal_value(
-       l,this->U_index_helmholtz.real());
-      double u_value_imag =this->raw_nodal_value(
-       l,this->U_index_helmholtz.imag());
-      
-      interpolated_u.real() += u_value_real*psi(l);         
-      interpolated_u.imag() += u_value_imag*psi(l);    
-      
+      const std::complex<double> u_value(
+       this->raw_nodal_value(l,this->U_index_helmholtz.real()),
+       this->raw_nodal_value(l,this->U_index_helmholtz.imag()));
+
+      //Add to the interpolated value
+      interpolated_u += u_value*psi(l);         
      } // End of loop over the nodes
     
     // calculate the integral
@@ -746,16 +738,13 @@ class HelmholtzAbsorbingBCElement : public  HelmholtzBCElementBase<ELEMENT>
      {    
       // Loop over real and imag part
       //Get the nodal value of the helmholtz unknown
-      double u_value_real = this->raw_nodal_value(
-       l,this->U_index_helmholtz.real());
-      double u_value_imag = this->raw_nodal_value(
-       l,this->U_index_helmholtz.imag());
-      
-      interpolated_u.real() += u_value_real*psi[l];
-      interpolated_u.imag() += u_value_imag*psi[l];
-      
-      du_dS.real() += u_value_real*dpsi_ds(l,0)*inv_J;   
-      du_dS.imag() += u_value_imag*dpsi_ds(l,0)*inv_J;    
+      const std::complex<double> u_value(
+       this->raw_nodal_value(l,this->U_index_helmholtz.real()),
+       this->raw_nodal_value(l,this->U_index_helmholtz.imag()));
+
+      interpolated_u += u_value*psi[l];
+
+      du_dS += u_value*dpsi_ds(l,0)*inv_J;
       
       // Get the value of dtest_dS
       dtest_dS(l,0)=dtest_ds(l,0)*inv_J;
@@ -1483,14 +1472,11 @@ template<class ELEMENT>
        }
       
       //Get the nodal value of the helmholtz unknown
-      double u_value_real =this->raw_nodal_value(
-       l,this->U_index_helmholtz.real());
-      double u_value_imag =this->raw_nodal_value(
-       l,this->U_index_helmholtz.imag());
-      
-      interpolated_u.real() += u_value_real*psi(l);         
-      interpolated_u.imag() += u_value_imag*psi(l);    
-      
+      std::complex<double> u_value(
+       this->raw_nodal_value(l,this->U_index_helmholtz.real()),
+       this->raw_nodal_value(l,this->U_index_helmholtz.imag()));
+
+      interpolated_u += u_value*psi(l);
      } // End of loop over the nodes
     
     // calculate the integral
@@ -1511,7 +1497,7 @@ template<class ELEMENT>
     // compute the contribution to each node to the map   
     for(unsigned l=0;l<n_node;l++) 
      {
-      std::complex<double> factor=std::complex<double>(1.0,0.0);
+      std::complex<double> factor(1.0,0.0);
       
       // Add the contribution of the real local data
       local_unknown_real = this->nodal_local_eqn(
@@ -1891,8 +1877,7 @@ template<class ELEMENT>
   
   //Set up U_index_helmholtz. Initialise to zero, which probably won't change
   //in most cases, oh well, the price we pay for generality
-   U_index_helmholtz.real()=0;
-   U_index_helmholtz.imag()=1;
+  U_index_helmholtz = std::complex<unsigned>(0,1);
 
    //Cast to the appropriate HelmholtzEquation so that we can
    //find the index at which the variable is stored
@@ -1925,8 +1910,7 @@ template<class ELEMENT>
      else
       {  
        //Read the index from the (cast) bulk element
-       U_index_helmholtz.real() = eqn_pt->u_index_helmholtz().real();
-       U_index_helmholtz.imag() = eqn_pt->u_index_helmholtz().imag();    
+       U_index_helmholtz = eqn_pt->u_index_helmholtz();
       }
     }
     break;
@@ -1954,8 +1938,7 @@ template<class ELEMENT>
      else
       {
        //Read the index from the (cast) bulk element
-       U_index_helmholtz.real() = eqn_pt->u_index_helmholtz().real();
-       U_index_helmholtz.imag() = eqn_pt->u_index_helmholtz().imag();    
+       U_index_helmholtz = eqn_pt->u_index_helmholtz();
       }   
     }
     
@@ -1984,8 +1967,7 @@ template<class ELEMENT>
      else 
       {
        //Read the index from the (cast) bulk element
-       U_index_helmholtz.real() = eqn_pt->u_index_helmholtz().real();
-       U_index_helmholtz.imag() = eqn_pt->u_index_helmholtz().imag();  
+       U_index_helmholtz = eqn_pt->u_index_helmholtz();
       }
     }
     break;

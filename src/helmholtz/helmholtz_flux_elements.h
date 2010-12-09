@@ -194,8 +194,7 @@ protected:
    //If the function pointer is zero return zero
    if(Flux_fct_pt == 0)
     {
-     flux.real()=0.0;
-     flux.imag()=0.0;
+     flux = std::complex<double>(0.0,0.0);
     }
    //Otherwise call the function
    else
@@ -280,8 +279,7 @@ HelmholtzFluxElement(FiniteElement* const &bulk_el_pt,
 
    //Set up U_index_helmholtz. Initialise to zero, which probably won't change
    //in most cases, oh well, the price we pay for generality
-   U_index_helmholtz.real()=0;
-   U_index_helmholtz.imag()=1;
+   U_index_helmholtz = std::complex<unsigned>(0,1);
 
    //Cast to the appropriate HelmholtzEquation so that we can
    //find the index at which the variable is stored
@@ -314,8 +312,7 @@ HelmholtzFluxElement(FiniteElement* const &bulk_el_pt,
      else
       {  
        //Read the index from the (cast) bulk element
-       U_index_helmholtz.real() = eqn_pt->u_index_helmholtz().real();
-       U_index_helmholtz.imag() = eqn_pt->u_index_helmholtz().imag();    
+       U_index_helmholtz = eqn_pt->u_index_helmholtz();
       }
     }
     break;
@@ -343,8 +340,7 @@ HelmholtzFluxElement(FiniteElement* const &bulk_el_pt,
      else
       {
        //Read the index from the (cast) bulk element
-       U_index_helmholtz.real() = eqn_pt->u_index_helmholtz().real();
-       U_index_helmholtz.imag() = eqn_pt->u_index_helmholtz().imag();    
+       U_index_helmholtz = eqn_pt->u_index_helmholtz();
       }   
     }
     
@@ -373,8 +369,7 @@ HelmholtzFluxElement(FiniteElement* const &bulk_el_pt,
      else 
       {
        //Read the index from the (cast) bulk element
-       U_index_helmholtz.real() = eqn_pt->u_index_helmholtz().real();
-       U_index_helmholtz.imag() = eqn_pt->u_index_helmholtz().imag();  
+       U_index_helmholtz = eqn_pt->u_index_helmholtz();
       }
     }
     break;

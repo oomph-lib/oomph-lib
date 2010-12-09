@@ -101,8 +101,11 @@ namespace oomph
       //Loop over the local nodes and sum
       for(unsigned l=0;l<n_node;l++) 
        {
-        disp[i].real() += nodal_value(l,u_nodal_index.real())*psi[l];
-        disp[i].imag() += nodal_value(l,u_nodal_index.imag())*psi[l];
+        const std::complex<double> u_value(
+         nodal_value(l,u_nodal_index.real()),
+         nodal_value(l,u_nodal_index.imag()));
+        
+        disp[i] += u_value*psi[l];
        }
      }
    }
@@ -126,13 +129,16 @@ namespace oomph
       u_index_time_harmonic_linear_elasticity(i);
      
      //Initialise value of u
-     std::complex<double> interpolated_u = std::complex<double>(0.0,0.0);
+     std::complex<double> interpolated_u(0.0,0.0);
      
      //Loop over the local nodes and sum
      for(unsigned l=0;l<n_node;l++) 
       {
-       interpolated_u.real() += nodal_value(l,u_nodal_index.real())*psi[l];
-       interpolated_u.imag() += nodal_value(l,u_nodal_index.imag())*psi[l];
+       const std::complex<double> u_value(
+        nodal_value(l,u_nodal_index.real()),
+        nodal_value(l,u_nodal_index.imag()));
+ 
+       interpolated_u += u_value*psi[l];
       }
      
      return(interpolated_u);

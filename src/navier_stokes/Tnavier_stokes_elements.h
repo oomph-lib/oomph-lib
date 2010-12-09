@@ -61,15 +61,16 @@ namespace oomph
 //==========================================================================
 template <unsigned DIM>
 class TCrouzeixRaviartElement : public virtual TBubbleEnrichedElement<DIM,3>,
- public virtual NavierStokesEquations<DIM>
+ public virtual NavierStokesEquations<DIM>,
+ public virtual ElementWithZ2ErrorEstimator
 {
-private:
+ protected:
+
 
  /// Internal index that indicates at which internal datum the pressure is
  /// stored
  unsigned P_nst_internal_index;
 
- protected:
  
  /// \short Velocity shape and test functions and their derivs
  /// w.r.t. to global coords  at local coordinate s (taken from geometry)
@@ -201,6 +202,70 @@ public:
  void output(FILE* file_pt, const unsigned &n_plot)
   {NavierStokesEquations<DIM>::output(file_pt,n_plot);}
  
+
+ /// \short Order of recovery shape functions for Z2 error estimation:
+ /// Same order as unenriched shape functions.
+ unsigned nrecovery_order() {return 2;}
+ 
+ /// \short Number of vertex nodes in the element
+ unsigned nvertex_node() const
+ {return DIM+1;}
+ 
+ /// \short Pointer to the j-th vertex node in the element
+ Node* vertex_node_pt(const unsigned& j) const
+ {return node_pt(j);}
+  
+ /// Number of 'flux' terms for Z2 error estimation 
+ unsigned num_Z2_flux_terms()
+  {
+   // DIM diagonal strain rates, DIM(DIM -1) /2 off diagonal rates
+   return DIM + (DIM*(DIM-1))/2;
+  }
+ 
+ /// \short Get 'flux' for Z2 error recovery:   Upper triangular entries
+ /// in strain rate tensor.
+ void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
+  {
+#ifdef PARANOID
+  unsigned num_entries=DIM+(DIM*(DIM-1))/2;
+  if (flux.size() < num_entries)
+   {
+    std::ostringstream error_message;
+    error_message << "The flux vector has the wrong number of entries, " 
+                  << flux.size() << ", whereas it should be at least " 
+                  << num_entries << std::endl;
+    throw OomphLibError(error_message.str(),
+                        "RefineableNavierStokesEquations::get_Z2_flux()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  
+  // Get strain rate matrix
+  DenseMatrix<double> strainrate(DIM);
+  this->strain_rate(s,strainrate);
+  
+  // Pack into flux Vector
+  unsigned icount=0;
+  
+  // Start with diagonal terms
+  for(unsigned i=0;i<DIM;i++)
+   {
+    flux[icount]=strainrate(i,i);
+    icount++;
+   }
+  
+  //Off diagonals row by row
+  for(unsigned i=0;i<DIM;i++)
+   {
+    for(unsigned j=i+1;j<DIM;j++)
+     {
+      flux[icount]=strainrate(i,j);
+      icount++;
+     }
+   }
+ }
+ 
+
  
  /// \short Full output function:
  /// x,y,[z],u,v,[w],p,du/dt,dv/dt,[dw/dt],dissipation

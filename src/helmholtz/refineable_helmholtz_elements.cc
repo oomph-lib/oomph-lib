@@ -94,17 +94,16 @@ for(unsigned ipt=0;ipt<n_intpt;ipt++)
      interpolated_x[j] += nodal_position(l,j)*psi(l);
     }
    //Get the nodal value of the helmholtz unknown
-   double u_value_real = nodal_value(l,this->u_index_helmholtz().real());
-   double u_value_imag = nodal_value(l,this->u_index_helmholtz().imag());
-   
-   interpolated_u.real() += u_value_real*psi(l);
-   interpolated_u.imag() += u_value_imag*psi(l);
+   const std::complex<double> u_value(
+    nodal_value(l,this->u_index_helmholtz().real()),
+    nodal_value(l,this->u_index_helmholtz().imag()));
+   //Add to the interpolated value
+   interpolated_u += u_value*psi(l);
    
    // Loop over directions
    for(unsigned j=0;j<DIM;j++)
     {
-     interpolated_dudx[j].real() += u_value_real*dpsidx(l,j);
-     interpolated_dudx[j].imag() += u_value_imag*dpsidx(l,j);
+     interpolated_dudx[j] += u_value*dpsidx(l,j);
     } 
   }
  
