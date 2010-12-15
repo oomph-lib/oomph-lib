@@ -4393,9 +4393,6 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
 //========================================================================
 void Mesh::flush_all_external_storage()
 {
- // Clear the local storage for elements and nodes
- External_element_pt.clear();
- External_node_pt.clear();
 
 #ifdef OOMPH_HAS_MPI
  // Storage for number of processors - use size of external halo node array
@@ -4488,61 +4485,6 @@ void Mesh::flush_all_external_storage()
 #endif
 }
 
-
-//========================================================================
-/// \short Add external element to this Mesh.
-//========================================================================
-bool Mesh::add_external_element_pt(GeneralisedElement*& el_pt)
-{
- // Only add the element to the external element storage if
- // it's not already there
- bool already_external_element=false;
- unsigned n_ext_el=nexternal_element();
- for (unsigned e_ext=0;e_ext<n_ext_el;e_ext++)
-  {
-   if (el_pt==External_element_pt[e_ext])
-    {
-     already_external_element=true;
-     break;
-    }
-  }
- if (!already_external_element)
-  {
-   External_element_pt.push_back(el_pt);
-   return true;
-  }
- else
-  {
-   return false;
-  }
-}
-
-//========================================================================
-/// \short Add external node to this Mesh.
-//========================================================================
-bool Mesh::add_external_node_pt(Node*& nod_pt)
-{
- // Only add the node if it's not already there
- bool node_is_external=false;
- unsigned n_ext_nod=nexternal_node();
- for (unsigned j_ext=0;j_ext<n_ext_nod;j_ext++)
-  {
-   if (nod_pt==External_node_pt[j_ext])
-    {
-     node_is_external=true;
-     break;
-    }
-  }
- if (!node_is_external)
-  {
-   External_node_pt.push_back(nod_pt);
-   return true;
-  }
- else
-  {
-   return false;
-  }
-}
 
 #ifdef OOMPH_HAS_MPI
 

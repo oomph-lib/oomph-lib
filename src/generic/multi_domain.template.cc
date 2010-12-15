@@ -681,9 +681,8 @@ namespace oomph
                 << external_mesh_pt->nexternal_halo_element()
                 << " external halo elements, "
                 << external_mesh_pt->nexternal_haloed_element()
-                << " external haloed elements," << std::endl << "and "
-                << external_mesh_pt->nexternal_element()
-                << " external elements (on this processor)." << std::endl;
+                << " external haloed elements" 
+                << std::endl;
 
      // How many external nodes does each submesh have now?
      oomph_info << "------------------------------------------" << std::endl;
@@ -692,9 +691,8 @@ namespace oomph
                 << external_mesh_pt->nexternal_halo_node()
                 << " external halo nodes, "
                 << external_mesh_pt->nexternal_haloed_node()
-                << " external haloed nodes," << std::endl << "and "
-                << external_mesh_pt->nexternal_node()
-                << " external nodes (already on this processor)." << std::endl;
+                << " external haloed nodes" 
+                << std::endl;
      oomph_info << "------------------------------------------" << std::endl;
     }
 

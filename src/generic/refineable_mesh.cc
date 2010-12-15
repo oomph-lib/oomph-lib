@@ -349,7 +349,8 @@ void TreeBasedRefineableMeshBase::adapt(OomphCommunicator* comm_pt,
      {
       // ... and its refinement level is less than the maximum desired level
       //mark is to be refined
-      if(el_pt->refinement_level() < max_refinement_level())
+      if ((el_pt->refinement_is_enabled())&&
+          (el_pt->refinement_level() < max_refinement_level()))
        {
         el_pt->select_for_refinement();
         n_refine++;

@@ -109,6 +109,9 @@ class RefineableElement : public virtual FiniteElement
  /// Flag for refinement
  bool To_be_refined;
  
+ /// Flag to indicate suppression of any refinement
+ bool Refinement_is_enabled;
+ 
  /// Flag for unrefinement
  bool Sons_to_be_unrefined;
 
@@ -190,9 +193,9 @@ class RefineableElement : public virtual FiniteElement
  /// \short Constructor, calls the FiniteElement constructor and initialises
  /// the member data
  RefineableElement() : FiniteElement(), Tree_pt(0), Refine_level(0),
-  To_be_refined(false), Sons_to_be_unrefined(false), Number(-1),
+  To_be_refined(false), Refinement_is_enabled(true),
+  Sons_to_be_unrefined(false), Number(-1),
   Local_hang_eqn(0) {}
-
 
  /// Destructor, delete the allocated storage
  /// for the hanging equations
@@ -219,6 +222,16 @@ class RefineableElement : public virtual FiniteElement
  /// \short Set the number of sons that can be constructed by the element
  /// The default is none
  virtual unsigned required_nsons() const {return 0;}
+
+
+ /// Flag to indicate suppression of any refinement
+ bool refinement_is_enabled(){return Refinement_is_enabled;}
+
+ /// Suppress of any refinement for this element 
+ void disable_refinement(){Refinement_is_enabled=false;}
+
+ /// Emnable refinement for this element 
+ void enable_refinement(){Refinement_is_enabled=true;}
 
  /// \short Split the element into the  number of sons to be
  /// constructed and return a 

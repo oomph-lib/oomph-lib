@@ -1071,7 +1071,7 @@ namespace CommandLineArgs
       exit(0);
 
      }
-   
+
 
     //Check if the flag has been previously specified as a simple argument free
     //command line argument 
@@ -1177,6 +1177,29 @@ namespace CommandLineArgs
          }
        }
      }
+
+
+    // Oh dear, we still haven't found the argument in the list.
+    // Maybe it was specified wrongly -- issue warning.
+    if (!found_match)
+     {      
+
+      //Construct the error message
+      std::string error_message = "Command line argument\n\n";
+      error_message += argv[arg_index];
+      error_message += "\n\nwas is not recognised. This may be legal\n";
+      error_message += "but seems sufficiently suspicious to flag up.\n";
+      error_message += "If it should have been recognised, make sure you\n";
+      error_message += "used the right number of \"-\" signs...\n";
+
+      //Create an Oomph Lib warning
+      OomphLibWarning(error_message,
+                      "CommandLineArgs::parse_and_assign()",
+                      OOMPH_EXCEPTION_LOCATION);
+      
+     }
+
+
 
     arg_index++;
    }

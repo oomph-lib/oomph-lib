@@ -204,22 +204,25 @@ namespace Multi_domain_functions
    // Storage for existing global equation numbers for each node
    Vector<std::pair<Vector<int>,Node*> > existing_global_eqn_numbers;
 
-   // Add all the global eqn numbers for external elements and nodes
-   // that are stored locally first
-
-   // Loop over external elements
-   unsigned n_element=mesh_pt->nexternal_element();
-   for (unsigned e_ext=0;e_ext<n_element;e_ext++)
+   // Doc timings if required
+   double t_start=0.0;
+   if (Doc_timings)
     {
-     FiniteElement* ext_el_pt = 
-      dynamic_cast<FiniteElement*>(mesh_pt->external_element_pt(e_ext));
-     if(ext_el_pt!=0)
+     t_start=TimingHelpers::timer();
+    }
+
+   // Loop over existing "normal" elements in mesh
+   unsigned n_element=mesh_pt->nelement();
+   for (unsigned e=0;e<n_element;e++)
+    {
+     FiniteElement* el_pt = mesh_pt->finite_element_pt(e);
+     if (el_pt!=0)
       {
        // Loop over nodes
-       unsigned n_node=ext_el_pt->nnode();
+       unsigned n_node=el_pt->nnode();
        for (unsigned j=0;j<n_node;j++)
         {
-         Node* nod_pt=ext_el_pt->node_pt(j);
+         Node* nod_pt=el_pt->node_pt(j);
          unsigned n_val=nod_pt->nvalue();
          Vector<int> nodal_eqn_numbers(n_val);
          for (unsigned i_val=0;i_val<n_val;i_val++)
@@ -248,10 +251,10 @@ namespace Multi_domain_functions
           }
          
          // Take into account master nodes too
-         if (dynamic_cast<RefineableElement*>(ext_el_pt)!=0)
+         if (dynamic_cast<RefineableElement*>(el_pt)!=0)
           {
            int n_cont_int_values=dynamic_cast<RefineableElement*>
-            (ext_el_pt)->ncont_interpolated_values();
+            (el_pt)->ncont_interpolated_values();
            for (int i_cont=-1;i_cont<n_cont_int_values;i_cont++)
             {
              if (nod_pt->is_hanging(i_cont))
@@ -273,7 +276,8 @@ namespace Multi_domain_functions
                  existing_global_eqn_numbers.push_back
                   (make_pair(master_nodal_eqn_numbers,master_nod_pt));
                  
-                 // If this master is a SolidNode then add its extra eqn numbers
+                 // If this master is a SolidNode then add its extra 
+                 // eqn numbers
                  SolidNode* master_solid_nod_pt=dynamic_cast<SolidNode*>
                   (master_nod_pt);
                  if (master_solid_nod_pt!=0)
@@ -283,7 +287,8 @@ namespace Multi_domain_functions
                    Vector<int> master_solid_nodal_eqn_numbers(n_val_mst_solid);
                    for (unsigned i_val=0;i_val<n_val_mst_solid;i_val++)
                     {
-                     master_solid_nodal_eqn_numbers[i_val]=master_solid_nod_pt->
+                     master_solid_nodal_eqn_numbers[i_val]=
+                      master_solid_nod_pt->
                       variable_position_pt()->eqn_number(i_val);
                     }
                    // Add these equation numbers to the existing storage
@@ -302,6 +307,17 @@ namespace Multi_domain_functions
      // internal data cannot be shared between distinct elements, so 
      // internal data on locally-stored elements can never be halo.
     }
+   
+
+   // Doc timings if required
+   if (Doc_timings)
+    {
+     double t_locate=TimingHelpers::timer();
+     oomph_info 
+      <<"CPU for assembly of existing global eqns in remove_duplicate_data(): "
+      << t_locate-t_start << std::endl;
+    }
+
 
    // Now loop over the other processors from highest to lowest
    // (i.e. if there is a duplicate between these containers
@@ -566,7 +582,8 @@ namespace Multi_domain_functions
                        Vector<int> sld_master_nodal_eqn_numbers(n_val_solid);
                        for (unsigned i_val=0;i_val<n_val_solid;i_val++)
                         {
-                         sld_master_nodal_eqn_numbers[i_val]=solid_master_nod_pt
+                         sld_master_nodal_eqn_numbers[i_val]=
+                          solid_master_nod_pt
                           ->variable_position_pt()->eqn_number(i_val);
                         }
                        
@@ -1914,6 +1931,7 @@ namespace Multi_domain_functions
 
            // So, we found zeta on the current processor
            Found_zeta[i]=my_rank+1;
+
            // This source element is an external halo on process halo_copy_proc
            // but it should only be added to the storage if it hasn't
            // been added already, and this information also needs to be
@@ -2196,10 +2214,12 @@ namespace Multi_domain_functions
                FaceElement* face_el_pt=
                 dynamic_cast<FaceElement*>(sub_geom_obj_pt);
                source_el_pt=face_el_pt->bulk_element_pt();
+
                //Need to resize the located coordinates to have the same
                //dimension as the bulk element
                s_source.resize(dynamic_cast<FiniteElement*>
                                (source_el_pt)->dim());
+
                // Translate the returned local coords into the bulk element
                face_el_pt->get_local_coordinate_in_bulk(s_ext,s_source);
               }
@@ -2222,66 +2242,6 @@ namespace Multi_domain_functions
 
                // Set the lookup array to 1/true 
                External_element_located[e][ipt]=1;
-
-               // Has this been used as a source for this element already?
-               bool source_already_used=false;
-               if (!source_already_used)
-                {
-                 // Add to the external mesh's external element storage
-                 bool added_external_element;
-                 added_external_element=
-                  external_mesh_pt->add_external_element_pt(source_el_pt);
-
-
-                 // If it was added then also try to add its nodes
-                 if (added_external_element)
-                  {
-
-                   // Loop over the nodes of this external element
-                   // and add (uniquely) as external nodes
-                   unsigned n_node=source_finite_el_pt->nnode();
-                   for (unsigned j=0; j<n_node; j++)
-                    {
-                     Node* nod_pt=source_finite_el_pt->node_pt(j);
-
-                     bool added_external_node;
-                     added_external_node=
-                      external_mesh_pt->add_external_node_pt(nod_pt);
-
-                     // If the node was added then try to add any masters too
-                     if (added_external_node)
-                      {
-                       // Now do the same for any master nodes
-                       if (dynamic_cast<RefineableElement*>(source_el_pt)!=0)
-                        {
-                         int n_cont=dynamic_cast<RefineableElement*>
-                          (source_el_pt)->ncont_interpolated_values();
-                         for (int i_cont=-1;i_cont<n_cont;i_cont++)
-                          {
-                           // Is this a hanging node in this variable?
-                           if (nod_pt->is_hanging(i_cont))
-                            {
-                             HangInfo* hang_pt=nod_pt->
-                              hanging_pt(i_cont);
-                             // Loop over the master nodes
-                             unsigned n_master=hang_pt->nmaster();
-                             for (unsigned m=0; m<n_master; m++)
-                              {
-                               Node* master_nod_pt=
-                                hang_pt->master_node_pt(m);
-
-                               // Again this will only add if the node
-                               // is not in the storage already
-                               external_mesh_pt->
-                                add_external_node_pt(master_nod_pt);
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
               }
 #ifdef OOMPH_HAS_MPI
              else // elements can only be halo if MPI is turned on

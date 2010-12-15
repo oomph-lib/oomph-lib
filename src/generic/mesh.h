@@ -132,15 +132,6 @@ class Mesh
 
 #endif
 
- /// Vector holding the pointers to the external elements, which are the
- /// elements that are source elements for elements within an existing
- /// Mesh that are contained on a different Mesh but the same processor
- /// (obviously only important after distribution of the mesh has occurred)
- Vector<GeneralisedElement*> External_element_pt;
-
- /// Vector holding pointers to the external nodes on the external elements
- Vector<Node*> External_node_pt;
-
 #ifdef OOMPH_HAS_MPI
 
  /// External halo(ed) nodes are on the external halo(ed) elements
@@ -1358,44 +1349,8 @@ public:
 
 #endif 
 
- /// External elements are "source" non-halo elements which are
- /// on the same process as the element for which they are the source
-
- /// \short Number of external elements for this Mesh
- unsigned nexternal_element()
-  {
-   return External_element_pt.size();
-  }
-
- /// \short Access fct to the e-th external element in this Mesh.
- GeneralisedElement* &external_element_pt(const unsigned& e)
-  {
-   return External_element_pt[e];
-  }
-
- /// \short Add external element to this Mesh.
- bool add_external_element_pt(GeneralisedElement*& el_pt);
-
- /// External nodes are on the external elements
-
- /// \short Number of external nodes for this Mesh
- unsigned nexternal_node()
-  {
-   return External_node_pt.size();
-  }
-
- /// \short Access fct to the j-th external node in this Mesh.
- Node* external_node_pt(const unsigned& j)
-  {
-   return External_node_pt[j];
-  }
-
- /// \short Add external node to this Mesh.
- bool add_external_node_pt(Node*& nod_pt);
-
  /// \short Wipe the storage for all externally-based elements
  void flush_all_external_storage();
-
 
 };
 
