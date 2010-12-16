@@ -34,37 +34,11 @@
 //oomph-lib headers
 #include "mesh.h"
 #include "mesh_as_geometric_object.h"
-
+#include "multi_domain.h"
 #include <cstdio>
 
 namespace oomph
 {
-//======================================================================
-// Namespace for global multi-domain functions that are used in
-// member function of MeshAsGeomObject
-//======================================================================
-namespace Multi_domain_functions
- {
-  /// \short Number of bins in the first dimension in binning method in
-  /// setup_multi_domain_interaction(). Default value of 10.
-  extern unsigned Nx_bin;
-
-  /// \short Number of bins in the second dimension in binning method in
-  /// setup_multi_domain_interaction(). Default value of 10.
-  extern unsigned Ny_bin;
-
-  /// \short Number of bins in the third dimension in binning method in
-  /// setup_multi_domain_interaction(). Default value of 10.
-  extern unsigned Nz_bin;
-
-  /// \short (Measure of) the number of sampling points within the elements 
-  /// when populating the bin
-  extern unsigned Nsample_points;
-
-  /// \short Boolean to indicate whether to document basic info (to screen)
-  ///        during setup_multi_domain_interaction() routines
-  extern bool Doc_stats;
-}
 
 //========================================================================
 /// Helper function for constructor: Pass the pointer to the mesh, 
@@ -178,9 +152,6 @@ namespace Multi_domain_functions
 
    // Get the default parameters for the number of bins in each 
    // dimension from the Multi_domain_functions namespace
-   
-
-//   oomph_info << "hierher Number of sub-objects: " << n_sub_object << "\n";
 
    // If the mesh has only one element there's no need for big bin structure
    if (n_sub_object==1)
@@ -205,6 +176,7 @@ namespace Multi_domain_functions
      // Create the bin structure
      create_bins_of_objects();
     }
+    
  }
 
 
@@ -213,11 +185,11 @@ namespace Multi_domain_functions
 /// corresponds to the intrinsic coordinate zeta. If sub_geom_object_pt=0
 /// on return from this function, none of the constituent sub-objects 
 /// contain the required coordinate.
-/// Setting the optional bool argument to true means that each
-/// time the sub-object's locate_zeta function is called, the coordinate
-/// argument "s" is used as the initial guess
+/// Setting the final bool argument to true means that we only search
+/// for matching element within a a certain number of "spirals" within
+/// the bin structure.
 //========================================================================
- void MeshAsGeomObject::locate_zeta
+ void MeshAsGeomObject::spiraling_locate_zeta
  (const Vector<double>& zeta,GeomObject*& sub_geom_object_pt,
   Vector<double>& s, const bool &called_within_spiral)
   {
@@ -277,12 +249,16 @@ namespace Multi_domain_functions
 
    if (called_within_spiral)
     {
-     // Current "spiral" level
-     unsigned i_level=current_spiral_level();
-
-     // Call helper function to find the neighbouring bins at this level
+     // Loop over spirals that are to be visited in one go
      Vector<unsigned> neighbour_bin;
-     get_neighbouring_bins_helper(bin_number,i_level,neighbour_bin);
+     for (unsigned i_level=current_min_spiral_level();
+          i_level<=current_max_spiral_level();i_level++)
+      {
+       // Call helper function to find the neighbouring bins at this level
+       get_neighbouring_bins_helper(bin_number,i_level,neighbour_bin);
+      }
+
+     // Total number of bins to be visited
      unsigned n_nbr_bin=neighbour_bin.size();
 
      // Set bool for finding zeta

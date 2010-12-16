@@ -147,6 +147,9 @@ namespace Multi_domain_functions
   /// setup_multi_domain_interaction().
   extern unsigned Nz_bin;
 
+  /// Number of spirals to be searched in one go
+  extern unsigned N_spiral_chunk;
+
   /// \short (Measure of) the number of sampling points within the elements 
   /// when populating the bin
   extern unsigned Nsample_points;
@@ -156,7 +159,7 @@ namespace Multi_domain_functions
   /// MeshAsGeomObject::locate_zeta(...). 
   /// These can be set by user if they know their mesh's extreme coordinates
   /// (or the MeshAsGeomObject calculates these values by default based
-  ///  upon the mesh itself; see MeshAsGeomObject::get_max_and_min_coords(...))
+  /// upon the mesh itself; see MeshAsGeomObject::get_max_and_min_coords(...))
   /// They default to "incorrect" values initially.
 
   /// \short Minimum coordinate in first dimension

@@ -396,6 +396,8 @@ class FSIHermiteBeamElement : public virtual HermiteBeamElement,
  /// If the coordinate is contained within this element, the
  /// geom_object_pt points to "this" element; if the zeta coordinate
  /// is not contained in this element geom_object_pt=NULL.
+ /// By default don't use any value passed in to the local coordinate s
+ /// as the initial guess in the Newton method
  void locate_zeta(const Vector<double> &zeta,
                   GeomObject* &geom_object_pt, Vector<double> &s,
                   const bool& use_coordinate_as_initial_guess=false);

@@ -1233,7 +1233,7 @@ void HermiteBeamElement::output(FILE* file_pt)
 /// as a GeomObject). For this element, zeta is equal to the Lagrangian 
 /// coordinate xi. If the required zeta is located within this
 /// element, geom_object_pt points to "this" element. If zeta
-/// is not located within the element it is set to NULL.
+/// is not located within the element it is set to NULL. 
 //======================================================================
 void FSIHermiteBeamElement::locate_zeta(const Vector<double> &zeta,
                                         GeomObject* &geom_object_pt, 

@@ -3613,13 +3613,13 @@ void FiniteElement::get_dresidual_dnodal_coordinates(
 /// If zeta cannot be located in this element, geom_object_pt is set
 /// to NULL. If zeta is located in this element, we return its "this"
 /// pointer.
+/// Setting the optional bool argument to true means that the coordinate
+/// argument "s" is used as the initial guess. (Default is false).
 //=========================================================================
 void FiniteElement::locate_zeta(const Vector<double> &zeta,
                                 GeomObject*& geom_object_pt, Vector<double> &s,
                                 const bool& use_coordinate_as_initial_guess)
     {
-     //using namespace Locate_zeta_helpers;
-
      //Find the number of coordinates, the dimension of the element
      //This must be the same for the local and intrinsic global coordinate
      unsigned ncoord = this->dim();

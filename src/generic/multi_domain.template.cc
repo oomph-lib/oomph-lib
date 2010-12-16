@@ -233,25 +233,6 @@ namespace oomph
      t_start=TimingHelpers::timer();
     }
 
-// #ifdef OOMPH_HAS_MPI
-//    // Print a warning for the case where the external mesh is solid and 
-//    // the problem has been distributed - this has not yet been tested
-//    if (problem_pt->problem_has_been_distributed())
-//     {
-//      SolidMesh* solid_mesh_pt=dynamic_cast<SolidMesh*>(external_mesh_pt);
-//      if (solid_mesh_pt!=0)
-//       {
-//        std::ostringstream warning_stream;
-//        warning_stream << "Multi-domain method has not been comprehensively "
-//                       << "tested for \n distributed problems where the "
-//                       << "external mesh is a SolidMesh." << std::endl;
-//        OomphLibWarning(
-//         warning_stream.str(),
-//         "Multi_domain_functions::aux_setup_multi_domain_interaction(...)",
-//         OOMPH_EXCEPTION_LOCATION);
-//       }
-//     }
-// #endif
 
    // Geometric object used to represent the external (face) mesh
    MeshAsGeomObject* mesh_geom_obj_pt=0;
@@ -397,17 +378,19 @@ namespace oomph
    Vector<double> coords_located_elsewhere(n_max_level,0.0);
    unsigned max_level_reached=1;
 
+   // Initialise spiral levels
+   mesh_geom_obj_pt->current_min_spiral_level()=0;
+   mesh_geom_obj_pt->current_max_spiral_level()=N_spiral_chunk-1;
+
    // Loop over "spirals/levels" away from the current position
-   for (unsigned i_level=0;i_level<n_max_level;i_level++)
+   unsigned i_level=0;
+   while (mesh_geom_obj_pt->current_max_spiral_level()<n_max_level)
     {
      // Record time at start of spiral loop
      if (Doc_timings) 
       {
        t_spiral_start=TimingHelpers::timer();
       }
-
-     // Tell MeshAsGeomObject the current spiral level
-     mesh_geom_obj_pt->current_spiral_level()=i_level;
 
      // Perform locate_zeta locally first!
      locate_zeta_for_local_coordinates(mesh_pt,external_mesh_pt,
@@ -563,6 +546,12 @@ namespace oomph
      /// If all_count_zetas is now zero then break out of the spirals loop
      if (all_count_zetas==0) { break; }
 
+
+     // Bump up spiral levels
+     i_level++;
+     mesh_geom_obj_pt->current_min_spiral_level()+=N_spiral_chunk;
+     mesh_geom_obj_pt->current_max_spiral_level()+=N_spiral_chunk;
+     
     } // end of "spirals" loop
 
 

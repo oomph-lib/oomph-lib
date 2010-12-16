@@ -131,6 +131,9 @@ namespace Multi_domain_functions
   /// setup_multi_domain_interaction(). 
   unsigned Nz_bin=1000;
 
+  /// Number of spirals to be searched in one go
+  unsigned N_spiral_chunk=1;
+
   /// \short (Measure of) the number of sampling points within the elements 
   /// when populating the bin
   unsigned Nsample_points=5;
@@ -1846,7 +1849,7 @@ namespace Multi_domain_functions
 
  
  //=====================================================================
- /// locate zeta for current set of missing coordinates
+ /// Locate zeta for current set of missing coordinates
  //=====================================================================
   void locate_zeta_for_missing_coordinates
   (int& iproc, Mesh* const &external_mesh_pt, Problem* problem_pt,
@@ -1898,9 +1901,9 @@ namespace Multi_domain_functions
        // Perform locate_zeta for these coordinates
        GeomObject *sub_geom_obj_pt;
        Vector<double> ss(el_dim);
-       bool use_coordinate_as_initial_guess=true;
-       mesh_geom_obj_pt->locate_zeta(x_global,sub_geom_obj_pt,ss,
-                                     use_coordinate_as_initial_guess);
+       bool called_within_spiral=true;
+       mesh_geom_obj_pt->spiraling_locate_zeta(x_global,sub_geom_obj_pt,ss,
+                                               called_within_spiral);
 
        // Did the locate method work?
        if (sub_geom_obj_pt!=0)
@@ -2012,7 +2015,7 @@ namespace Multi_domain_functions
                               << "yet been implemented.\n";
                  throw OomphLibError
                   (error_stream.str(),
-                   "Multi_domain_functions::simultaneous_locate_zeta()",
+                   "Multi_domain_functions::locate_zeta_for_missing_coordinates()",
                    OOMPH_EXCEPTION_LOCATION);
                 }
 
@@ -2189,9 +2192,10 @@ namespace Multi_domain_functions
            Vector<double> s_ext(el_dim);
 
            // Perform locate_zeta locally for this coordinate
-           bool use_coordinate_as_initial_guess=true;
-           mesh_geom_obj_pt->locate_zeta(x_global,sub_geom_obj_pt,s_ext,
-                                         use_coordinate_as_initial_guess);
+           bool called_within_spiral=true;
+           mesh_geom_obj_pt->spiraling_locate_zeta(x_global,
+                                                   sub_geom_obj_pt,s_ext,
+                                                   called_within_spiral);
 
            // Has the required element been located?
            if (sub_geom_obj_pt!=0)

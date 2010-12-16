@@ -94,8 +94,11 @@ private:
  ///Number of bins in z direction
  unsigned Nbin_z;
 
- ///Current spiralling level
- unsigned Current_spiral_level;
+ ///Current min. spiralling level
+ unsigned Current_min_spiral_level;
+
+ ///Current max. spiralling level
+ unsigned Current_max_spiral_level;
 
  ///Communicator
  OomphCommunicator* Communicator_pt;
@@ -167,14 +170,44 @@ public:
  /// \short Find the sub geometric object and local coordinate therein that
  /// corresponds to the intrinsic coordinate zeta. If sub_geom_object_pt=0
  /// on return from this function, none of the constituent sub-objects 
- /// contain the required coordinate.
- /// Setting the optional bool argument to true means that each
+ /// contain the required coordinate. Following from the general
+ /// interface to this function in GeomObjects,
+ /// setting the optional bool argument to true means that each
  /// time the sub-object's locate_zeta function is called, the coordinate
- /// argument "s" is used as the initial guess
+ /// argument "s" is used as the initial guess. However, this doesn't
+ /// make sense here and the argument is ignored (though a warning
+ /// is issued when the code is compiled in PARANOID setting)
  void locate_zeta(const Vector<double>& zeta, 
                   GeomObject*& sub_geom_object_pt, 
                   Vector<double>& s,
-                  const bool& use_coordinate_as_initial_guess=false);
+                  const bool& use_coordinate_as_initial_guess=false)
+ {
+#ifdef PARANOID
+  if (use_coordinate_as_initial_guess)
+   {
+    OomphLibWarning(
+     "Ignoring the use_coordinate_as_initial_guess argument.",
+     "MeshAsGeomObject::locate_zeta()",
+     OOMPH_EXCEPTION_LOCATION);  
+   }
+#endif
+   
+  // Call locate zeta with spiraling switched off
+  bool called_within_spiral=false;
+  spiraling_locate_zeta(zeta,sub_geom_object_pt,s,called_within_spiral);
+ }
+
+/// \short Find the sub geometric object and local coordinate therein that
+/// corresponds to the intrinsic coordinate zeta. If sub_geom_object_pt=0
+/// on return from this function, none of the constituent sub-objects 
+/// contain the required coordinate.
+/// Setting the final bool argument to true means that we only search
+/// for matching element within a a certain number of "spirals" within
+/// the bin structure.
+ void spiraling_locate_zeta(const Vector<double>& zeta,
+                            GeomObject*& sub_geom_object_pt,
+                            Vector<double>& s, 
+                            const bool &called_within_spiral);
 
  /// \short Return the position as a function of the intrinsic coordinate zeta.
  /// This provides an (expensive!) default implementation in which
@@ -231,8 +264,11 @@ public:
                        OOMPH_EXCEPTION_LOCATION);
   }
 
- ///Access function to current spiral level
- unsigned& current_spiral_level() {return Current_spiral_level;}
+ ///Access function to current min. spiral level
+ unsigned& current_min_spiral_level() {return Current_min_spiral_level;}
+
+ ///Access function to current max. spiral level
+ unsigned& current_max_spiral_level() {return Current_max_spiral_level;}
 
  ///Access function for min coordinate in x direction
  double& x_min() {return Min_coords[0];}
