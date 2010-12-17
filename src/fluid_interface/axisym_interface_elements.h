@@ -224,6 +224,14 @@ public AxisymmetricFluidInterfaceElement
   }
 
   public:
+
+ /// \short The "global" intrinsic coordinate of the element when
+ /// viewed as part of a geometric object should be given by
+ /// the FaceElement representation, by default
+ double zeta_nodal(const unsigned &n, const unsigned &k,           
+                          const unsigned &i) const 
+  {return FaceElement::zeta_nodal(n,k,i);}   
+
  /// Constructor, pass the bulk element
  ElasticAxisymmetricFluidInterfaceElement(
   FiniteElement* const &element_pt, 

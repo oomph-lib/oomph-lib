@@ -72,7 +72,7 @@ namespace TriangleHelper
   triangulate_io.numberofholes = 0;
 
   // Clear region list 
-  free(triangulate_io.regionlist);
+  if(clear_hole_data) {free(triangulate_io.regionlist);}
   triangulate_io.numberofregions = 0;
 
   // Clear edge, marker and norm list 
@@ -181,18 +181,32 @@ namespace TriangleHelper
    }
 
 
+  //Copy over the triangle attribute data
+  triangle_out.numberoftriangleattributes =
+   triangle_io.numberoftriangleattributes;
+  triangle_out.triangleattributelist =
+   (double *) malloc(triangle_out.numberoftriangles * 
+                     triangle_out.numberoftriangleattributes * sizeof(double));
+  for(int j=0;
+      j<(triangle_out.numberoftriangles*
+         triangle_out.numberoftriangleattributes);++j)
+   {
+    triangle_out.triangleattributelist[j] = 
+     triangle_io.triangleattributelist[j];
+   }
+
   
   // Warn about laziness...
   if (!quiet)
    {
-    if ((triangle_io.triangleattributelist!=0)||
+    /* if ((triangle_io.triangleattributelist!=0)||
         (triangle_io.numberoftriangleattributes!=0))
      {
       OomphLibWarning(
        "Triangle attributes are not currently copied across",
        "TriangleHelper::deep_copy_of_triangulateio_representation",
        OOMPH_EXCEPTION_LOCATION);  
-     }
+       }*/
 
     if ((triangle_io.trianglearealist!=0))
      {
@@ -229,6 +243,15 @@ namespace TriangleHelper
     triangle_out.segmentmarkerlist[j]=triangle_io.segmentmarkerlist[j];
    }
   
+
+  //Region data
+  triangle_out.numberofregions=triangle_io.numberofregions;
+  triangle_out.regionlist =
+   (double*) malloc(triangle_out.numberofregions * 4 * sizeof(double));
+  for(int j=0;j<triangle_out.numberofregions*4;++j)
+   {
+    triangle_out.regionlist[j] = triangle_io.regionlist[j];
+   }
   
   // Hole data
   triangle_out.numberofholes=triangle_io.numberofholes;
@@ -243,14 +266,14 @@ namespace TriangleHelper
   // Warn about laziness...
   if (!quiet)
    {
-    if ((triangle_io.regionlist!=0)||
+    /* if ((triangle_io.regionlist!=0)||
         (triangle_io.numberofregions!=0))
      {
       OomphLibWarning(
        "Regions are not currently copied across",
        "TriangleHelper::deep_copy_of_triangulateio_representation",
        OOMPH_EXCEPTION_LOCATION);  
-     }
+       }*/
     
     if ((triangle_io.edgelist!=0)||
         (triangle_io.numberofedges!=0))

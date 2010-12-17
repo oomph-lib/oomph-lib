@@ -38,6 +38,7 @@
 //OOMPH-LIB headers 
 #include "../generic/Qelements.h"
 #include "../generic/fsi.h"
+#include "../generic/projection.h"
 
 namespace oomph
 {
@@ -455,9 +456,9 @@ public:
  double* &viscosity_ratio_pt() {return Viscosity_Ratio_pt;}
 
  /// Access function for the body-force pointer
- void (* &body_force_fct_pt())(const double& time, 
-                               const Vector<double>& x, 
-                               Vector<double> & f) 
+ void (* &axi_nst_body_force_fct_pt())(const double& time, 
+                                       const Vector<double>& x, 
+                                       Vector<double> & f) 
   {return Body_force_fct_pt;}
  
  ///Access function for the source-function pointer
@@ -738,6 +739,35 @@ public:
    
    return(interpolated_u);
   }
+
+
+ /// Return FE interpolated velocity u[i] at local coordinate s
+ // at time level t (t=0: present, t>0: history)
+ double interpolated_u_axi_nst(const unsigned &t,
+                               const Vector<double> &s, 
+                               const unsigned &i) const
+  {
+   //Find number of nodes
+   unsigned n_node = nnode();
+   //Local shape function
+   Shape psi(n_node);
+   //Find values of shape function
+   shape(s,psi);
+   
+   //Get the index at which the velocity is stored
+   unsigned u_nodal_index = u_index_axi_nst(i);
+
+   //Initialise value of u
+   double interpolated_u = 0.0;
+   //Loop over the local nodes and sum
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     interpolated_u += nodal_value(t,l,u_nodal_index)*psi[l];
+    }
+   
+   return(interpolated_u);
+  }
+
 
  /// \short Compute the derivatives of the i-th component of 
  /// velocity at point s with respect
@@ -1296,6 +1326,416 @@ public virtual PointElement
   public:
  FaceGeometry() : PointElement() {}
 };
+
+
+//==========================================================
+/// Axisymmetric Taylor Hood upgraded to become projectable
+//==========================================================
+template<class TAYLOR_HOOD_ELEMENT>
+class ProjectableAxisymmetricTaylorHoodElement : 
+public virtual ProjectableElement<TAYLOR_HOOD_ELEMENT>
+ {
+
+ public:
+
+  /// \short Specify the values associated with field fld. 
+  /// The information is returned in a vector of pairs which comprise 
+  /// the Data object and the value within it, that correspond to field fld. 
+  /// In the underlying Taylor Hood elements the fld-th velocities are stored
+  /// at the fld-th value of the nodes; the pressures (the dim-th 
+  /// field) are the dim-th values at the vertex nodes etc. 
+  Vector<std::pair<Data*,unsigned> > data_values_of_field(const unsigned& fld)
+   {   
+    // Create the vector
+    Vector<std::pair<Data*,unsigned> > data_values;
+   
+    // Velocities dofs
+    if (fld<3)
+     {
+      // Loop over all nodes
+      unsigned nnod=this->nnode();
+      for (unsigned j=0;j<nnod;j++)
+       {
+        // Add the data value associated with the velocity components
+        data_values.push_back(std::make_pair(this->node_pt(j),fld));
+       }
+     }
+    // Pressure
+    else
+     {
+      // Loop over all vertex nodes
+      unsigned Pconv_size=3;
+      for (unsigned j=0;j<Pconv_size;j++)
+       {
+        // Add the data value associated with the pressure components
+        unsigned vertex_index=this->Pconv[j];
+        data_values.push_back(std::make_pair(this->node_pt(vertex_index),fld));
+       }
+     }
+
+    // Return the vector
+    return data_values;
+
+   }
+
+  /// \short Number of fields to be projected: dim+1, corresponding to 
+  /// velocity components and  pressure
+  unsigned nfields_for_projection()
+   {
+    return 4;
+   }
+ 
+  /// \short Number of history values to be stored for fld-th field. Whatever
+  /// the timestepper has set up for the velocity components and
+  /// none for the pressure field.
+  unsigned nhistory_values_for_projection(const unsigned &fld)
+   {
+    if (fld==3)
+     {
+      //pressure doesn't have history values
+      return 1; 
+     }
+    else 
+     {
+      return this->node_pt(0)->ntstorage();
+     }
+   }
+
+  ///\short Number of positional history values
+  unsigned nhistory_values_for_coordinate_projection()
+   {
+    return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
+   }
+ 
+  /// \short Return Jacobian of mapping and shape functions of field fld
+  /// at local coordinate s
+  double jacobian_and_shape_of_field(const unsigned &fld, 
+                                     const Vector<double> &s, 
+                                     Shape &psi)
+   {
+    unsigned n_dim=this->dim();
+    unsigned n_node=this->nnode();
+   
+    if (fld==3) 
+     {
+      //We are dealing with the pressure
+      this->pshape_axi_nst(s,psi);
+     
+      Shape psif(n_node),testf(n_node); 
+      DShape dpsifdx(n_node,n_dim), dtestfdx(n_node,n_dim);
+     
+      //Domain Shape
+      double J=this->dshape_and_dtest_eulerian_axi_nst(s,psif,dpsifdx,
+                                                       testf,dtestfdx);    
+      return J;
+     }
+    else 
+     {
+      Shape testf(n_node); 
+      DShape dpsifdx(n_node,n_dim), dtestfdx(n_node,n_dim);
+     
+      //Domain Shape
+      double J=this->dshape_and_dtest_eulerian_axi_nst(s,psi,dpsifdx,
+                                                       testf,dtestfdx);
+      return J;
+     }
+   }
+
+
+
+  /// \short Return interpolated field fld at local coordinate s, at time level
+  /// t (t=0: present; t>0: history values)
+  double get_field(const unsigned &t, 
+                   const unsigned &fld,
+                   const Vector<double>& s)
+   {
+    unsigned n_node=this->nnode();
+   
+    //If fld=3, we deal with the pressure
+    if (fld==3)
+     {
+      return this->interpolated_p_axi_nst(s);
+     }
+    // Velocity
+    else
+     {
+      //Find the index at which the variable is stored
+      unsigned u_nodal_index = this->u_index_axi_nst(fld);
+     
+      //Local shape function
+      Shape psi(n_node);
+     
+      //Find values of shape function
+      this->shape(s,psi);
+     
+      //Initialise value of u
+      double interpolated_u = 0.0;
+     
+      //Sum over the local nodes at that time
+      for(unsigned l=0;l<n_node;l++) 
+       {
+        interpolated_u += this->nodal_value(t,l,u_nodal_index)*psi[l];
+       }
+      return interpolated_u;     
+     }
+   }
+
+
+
+  ///Return number of values in field fld
+  unsigned nvalue_of_field(const unsigned &fld)
+   {
+    if (fld==3)
+     {
+      return this->npres_axi_nst();
+     }
+    else
+     {
+      return this->nnode();
+     }
+   }
+
+ 
+  ///Return local equation number of value j in field fld.
+  int local_equation(const unsigned &fld,
+                     const unsigned &j)
+   {
+    if (fld==3) 
+     {
+      return this->p_local_eqn(j);
+     }
+    else
+     {
+      const unsigned u_nodal_index = this->u_index_axi_nst(fld);
+      return this->nodal_local_eqn(j,u_nodal_index);
+     }
+   }
+  
+ };
+
+
+//=======================================================================
+/// Face geometry for element is the same as that for the underlying
+/// wrapped element
+//=======================================================================
+ template<class ELEMENT>
+ class FaceGeometry<ProjectableAxisymmetricTaylorHoodElement<ELEMENT> > 
+  : public virtual FaceGeometry<ELEMENT>
+ {
+ public:
+  FaceGeometry() : FaceGeometry<ELEMENT>() {}
+ };
+
+
+//=======================================================================
+/// Face geometry of the Face Geometry for element is the same as 
+/// that for the underlying wrapped element
+//=======================================================================
+ template<class ELEMENT>
+ class FaceGeometry<FaceGeometry<ProjectableAxisymmetricTaylorHoodElement<ELEMENT> > >
+  : public virtual FaceGeometry<FaceGeometry<ELEMENT> >
+ {
+ public:
+  FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT> >() {}
+ };
+
+
+//==========================================================
+/// Crouzeix Raviart upgraded to become projectable
+//==========================================================
+ template<class CROUZEIX_RAVIART_ELEMENT>
+ class ProjectableAxisymmetricCrouzeixRaviartElement : 
+  public virtual ProjectableElement<CROUZEIX_RAVIART_ELEMENT>
+ {
+
+ public:
+
+  /// \short Specify the values associated with field fld. 
+  /// The information is returned in a vector of pairs which comprise 
+  /// the Data object and the value within it, that correspond to field fld. 
+  /// In the underlying Crouzeix Raviart elements the 
+  /// fld-th velocities are stored
+  /// at the fld-th value of the nodes; the pressures are stored internally
+  Vector<std::pair<Data*,unsigned> > data_values_of_field(const unsigned& fld)
+   {   
+    // Create the vector
+    Vector<std::pair<Data*,unsigned> > data_values;
+   
+    // Velocities dofs
+    if (fld < 3)
+     {
+      // Loop over all nodes
+      const unsigned n_node=this->nnode();
+      for (unsigned n=0;n<n_node;n++)
+       {
+        // Add the data value associated with the velocity components
+        data_values.push_back(std::make_pair(this->node_pt(n),fld));
+       }
+     }
+    // Pressure
+    else
+     {
+      //Need to push back the internal data
+      const unsigned n_press = this->npres_axi_nst();
+      //Loop over all pressure values
+      for(unsigned j=0;j<n_press;j++)
+       {
+        data_values.push_back(
+         std::make_pair(
+          this->internal_data_pt(this->P_axi_nst_internal_index),j));
+       }
+     }
+
+    // Return the vector
+    return data_values;
+   }
+
+  /// \short Number of fields to be projected: dim+1, corresponding to 
+  /// velocity components and  pressure
+  unsigned nfields_for_projection()
+   {
+    return 4;
+   }
+ 
+  /// \short Number of history values to be stored for fld-th field. Whatever
+  /// the timestepper has set up for the velocity components and
+  /// none for the pressure field.
+  unsigned nhistory_values_for_projection(const unsigned &fld)
+   {
+    if (fld==3)
+     {
+      //pressure doesn't have history values
+      return 1; 
+     }
+    else 
+     {
+      return this->node_pt(0)->ntstorage();
+     }
+   }
+
+  ///\short Number of positional history values
+  unsigned nhistory_values_for_coordinate_projection()
+   {
+    return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
+   }
+ 
+  /// \short Return Jacobian of mapping and shape functions of field fld
+  /// at local coordinate s
+  double jacobian_and_shape_of_field(const unsigned &fld, 
+                                     const Vector<double> &s, 
+                                     Shape &psi)
+   {
+    unsigned n_dim=this->dim();
+    unsigned n_node=this->nnode();
+   
+    if (fld==3) 
+     {
+      //We are dealing with the pressure
+      this->pshape_axi_nst(s,psi);
+     
+      Shape psif(n_node),testf(n_node); 
+      DShape dpsifdx(n_node,n_dim), dtestfdx(n_node,n_dim);
+     
+      //Domain Shape
+      double J=this->dshape_and_dtest_eulerian_axi_nst(s,psif,dpsifdx,
+                                                       testf,dtestfdx);    
+      return J;
+     }
+    else 
+     {
+      Shape testf(n_node); 
+      DShape dpsifdx(n_node,n_dim), dtestfdx(n_node,n_dim);
+     
+      //Domain Shape
+      double J=this->dshape_and_dtest_eulerian_axi_nst(s,psi,dpsifdx,
+                                                       testf,dtestfdx);
+      return J;
+     }
+   }
+
+
+
+  /// \short Return interpolated field fld at local coordinate s, at time level
+  /// t (t=0: present; t>0: history values)
+  double get_field(const unsigned &t, 
+                   const unsigned &fld,
+                   const Vector<double>& s)
+   {
+    //unsigned n_dim =this->dim(); 
+    //unsigned n_node=this->nnode();
+   
+    //If fld=n_dim, we deal with the pressure
+    if (fld==3)
+     {
+      return this->interpolated_p_axi_nst(s);
+     }
+    // Velocity
+    else
+     {
+      return this->interpolated_u_axi_nst(t,s,fld);
+     }
+   }
+
+
+  ///Return number of values in field fld
+  unsigned nvalue_of_field(const unsigned &fld)
+   {
+    if (fld==3)
+     {
+      return this->npres_axi_nst();
+     }
+    else
+     {
+      return this->nnode();
+     }
+   }
+
+ 
+  ///Return local equation number of value j in field fld.
+  int local_equation(const unsigned &fld,
+                     const unsigned &j)
+   {
+    if (fld==3) 
+     {
+      return this->p_local_eqn(j);
+     }
+    else
+     {
+      const unsigned u_nodal_index = this->u_index_axi_nst(fld);
+      return this->nodal_local_eqn(j,u_nodal_index);
+     }
+   }
+  
+ };
+
+
+//=======================================================================
+/// Face geometry for element is the same as that for the underlying
+/// wrapped element
+//=======================================================================
+ template<class ELEMENT>
+ class FaceGeometry<ProjectableAxisymmetricCrouzeixRaviartElement<ELEMENT> > 
+  : public virtual FaceGeometry<ELEMENT>
+ {
+ public:
+  FaceGeometry() : FaceGeometry<ELEMENT>() {}
+ };
+
+
+//=======================================================================
+/// Face geometry of the Face Geometry for element is the same as 
+/// that for the underlying wrapped element
+//=======================================================================
+ template<class ELEMENT>
+ class FaceGeometry<FaceGeometry<
+  ProjectableAxisymmetricCrouzeixRaviartElement<ELEMENT> > >
+  : public virtual FaceGeometry<FaceGeometry<ELEMENT> >
+ {
+ public:
+  FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT> >() {}
+ };
+
+
 
 
 }

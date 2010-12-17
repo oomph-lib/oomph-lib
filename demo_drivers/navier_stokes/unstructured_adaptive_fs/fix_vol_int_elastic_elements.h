@@ -161,6 +161,19 @@ class ElasticVolumeConstraintElement : public GeneralisedElement
       this->add_external_data(traded_pressure_data_pt);
   }
 
+ /// \short Unset the traded pressure data
+ void unset_traded_pressure_data()
+  {
+   //If we've actually set some
+   if(Ptraded_data_pt!=0)
+    {
+     this->flush_external_data(Ptraded_data_pt);
+     Ptraded_data_pt = 0;
+     External_data_number_of_traded_pressure=0;
+    }
+  }
+
+
 }; 
 
 
@@ -281,6 +294,19 @@ public ElasticLineFluidInterfaceElement<ELEMENT>
    External_data_number_of_traded_pressure =
     this->add_external_data(traded_pressure_data_pt);
   }
+
+ /// \short Unset the traded pressure data
+ void unset_traded_pressure_data()
+  {
+   //If we've actually set some
+   if(Ptraded_data_pt!=0)
+    {
+     this->flush_external_data(Ptraded_data_pt);
+     Ptraded_data_pt = 0;
+     External_data_number_of_traded_pressure=0;
+    }
+  }
+
 
  ///Overload make edge element to do nothing
  FluidInterfaceEdgeElement* make_edge_element(const int &face_index)

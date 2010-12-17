@@ -41,8 +41,14 @@ using namespace std;
 
 namespace oomph
 {
-
-
+ //============================================================
+ /// Static empty vector for use as a default argument
+ /// to to constructor, which will specify that all 
+ /// "holes" remain unfilled by detfault
+ //============================================================
+ template<class ELEMENT>
+ std::set<unsigned> TriangleMesh<ELEMENT>::Empty_fill_index;
+ 
 //======================================================================
 /// Build with the help of the scaffold mesh coming  
 /// from the triangle mesh generator Triangle.
@@ -82,7 +88,15 @@ namespace oomph
   set_nboundary(nbound);
   Boundary_element_pt.resize(nbound);
   Face_index_at_boundary.resize(nbound);
-   
+
+  //If we have different regions, then resize the region
+  //information
+  if(use_attributes)
+   {
+    Boundary_region_element_pt.resize(nbound);
+    Face_index_region_at_boundary.resize(nbound);
+   }
+
   // Loop over elements in scaffold mesh, visit their nodes
   for (unsigned e=0;e<nelem;e++)
    {
@@ -305,6 +319,18 @@ namespace oomph
         //Need to put a shift in here because of an inconsistent naming 
         //convention between triangle and face elements
         Face_index_at_boundary[boundary_id-1].push_back((j+2)%3);
+
+        //If using regions set up the boundary information
+        if(use_attributes)
+         {
+          //Element adjacent to boundary
+          Boundary_region_element_pt[boundary_id-1]
+           [Tmp_mesh_pt->element_attribute(e)].push_back(elem_pt);
+          //Need to put a shift in here because of an inconsistent naming 
+          //convention between triangle and face elements
+          Face_index_region_at_boundary[boundary_id-1]
+           [Tmp_mesh_pt->element_attribute(e)].push_back((j+2)%3);
+         }
        }
      }
      
@@ -358,6 +384,34 @@ namespace oomph
           // Nodes coincide
           if(sqrt((c-a)*(c-a)+(d-b)*(d-b))<tolerance)
            {
+            //If the node is on a boundary                    
+            //Need to remove the node from the boundary list in the mesh
+            //before deletion  
+            if(node_pt->is_on_boundary()) 
+             {     
+              std::set<unsigned>* boundaries_pt;                            
+              //Find the boundaries on which the nodes live                   
+              node_pt->get_boundaries_pt(boundaries_pt);     
+
+              //Now copy the boundary indices into local storage because the
+              //set will change as the node is removed from the boundaries 
+              const unsigned size = boundaries_pt->size();       
+              unsigned boundary_index[size];                     
+              unsigned counter=0;                        
+              for(std::set<unsigned>::iterator it = boundaries_pt->begin();
+                  it != boundaries_pt->end();++it)         
+               {        
+                boundary_index[counter] = *it;              
+                ++counter;                               
+               }      
+              
+              //Loop over these boundaries and remove the node from them
+              for(unsigned i=0;i<size;i++)               
+               {                                             
+                this->remove_boundary_node(boundary_index[i],node_pt);    
+               }   
+             }
+
             // Delete local node in element...
             delete finite_element_pt(e)->node_pt(j);
             // ... and reset pointer to the existing node
@@ -454,9 +508,37 @@ namespace oomph
          }    
         else
          {
+          //If the node is on a boundary                    
+          //Need to remove the node from the boundary list in the mesh
+          //before deletion  
+          if(node_pt->is_on_boundary()) 
+           {     
+            std::set<unsigned>* boundaries_pt;                            
+            //Find the boundaries on which the nodes live                   
+            node_pt->get_boundaries_pt(boundaries_pt);     
+            
+            //Now copy the boundary indices into local storage because the
+            //set will change as the node is removed from the boundaries 
+            const unsigned size = boundaries_pt->size();       
+            unsigned boundary_index[size];                     
+            unsigned counter=0;                        
+            for(std::set<unsigned>::iterator it = boundaries_pt->begin();
+                it != boundaries_pt->end();++it)         
+             {        
+              boundary_index[counter] = *it;              
+              ++counter;                               
+             }      
+            
+            //Loop over these boundaries and remove the node from them
+            for(unsigned i=0;i<size;i++)               
+             {                                             
+              this->remove_boundary_node(boundary_index[i],node_pt);    
+             }   
+           }
+          
           // Delete local node in element...
           delete finite_element_pt(e)->node_pt(j);
-         
+          
           // ... and reset pointer to the existing node
           finite_element_pt(e)->node_pt(j)=
            central_edge_node_pt(edge_node1_pt,edge_node2_pt);
@@ -535,6 +617,7 @@ namespace oomph
          }
         else
          {
+
           // Delete local node in element...
           delete finite_element_pt(e)->node_pt(j);
           delete finite_element_pt(e)->node_pt(j+1);
@@ -568,45 +651,81 @@ namespace oomph
  {
   // Temporary storage for face elements
   Vector<FiniteElement*> face_el_pt;
- 
-  // Loop over all elements on boundaries
-  unsigned nel=this->nboundary_element(b);
-  if (nel>0)
+  // Temporary storage for number of elements adjacent to the boundary
+  unsigned nel = 0;
+
+  //If there is more than one region then only use 
+  //boundary coordinates from the bulk side (region 0)
+  if(this->nregion() > 1)
    {
+    // Loop over all elements on boundaries from region 0
+    nel=this->nboundary_element_in_region(b,0);
+    // Loop over the bulk elements adjacent to boundary b
+    for(unsigned e=0;e<nel;e++)
+     {
+      // Get pointer to the bulk element that is adjacent to boundary b
+      // in region 0
+      FiniteElement* bulk_elem_pt = 
+       this->boundary_element_pt_in_region(b,0,e);
+      
+      //Find the index of the face of element e along boundary b
+      // in region 0
+      int face_index = this->face_index_at_boundary_in_region(b,0,e);
+      
+      // Create new face element 
+      face_el_pt.push_back(new DummyFaceElement<ELEMENT>(
+                            bulk_elem_pt,face_index));   
+      
+      // Output faces?
+      if (outfile.is_open()) 
+       {
+        face_el_pt[face_el_pt.size()-1]->output(outfile); 
+       }
+     }
+   }
+  //Otherwise it's just the normal boundary functions
+  else
+   {
+    // Loop over all elements on boundaries
+    nel=this->nboundary_element(b);
     // Loop over the bulk elements adjacent to boundary b
     for(unsigned e=0;e<nel;e++)
      {
       // Get pointer to the bulk element that is adjacent to boundary b
       FiniteElement* bulk_elem_pt = this->boundary_element_pt(b,e);
-       
+      
       //Find the index of the face of element e along boundary b
       int face_index = this->face_index_at_boundary(b,e);
-       
+      
       // Create new face element 
       face_el_pt.push_back(new DummyFaceElement<ELEMENT>(
                             bulk_elem_pt,face_index));   
-
+      
       // Output faces?
       if (outfile.is_open()) 
        {
         face_el_pt[face_el_pt.size()-1]->output(outfile); 
        }
      }  
-     
+   }
+
+  //Only bother to do anything else, if there are elements
+  if(nel > 0)
+   {
     // Put first element into ordered list
     std::list<FiniteElement*> ordered_el_pt;
     FiniteElement* el_pt=face_el_pt[0];
     ordered_el_pt.push_back(el_pt);
-   
+    
     // Count elements that have been done
     unsigned count_done=0;
-
+    
     // Keep track of who's done
     std::map<FiniteElement*,bool> done_el;
-     
+    
     // Keep track of which element is inverted
     std::map<FiniteElement*,bool> is_inverted;
-
+    
     // Number of nodes
     unsigned nnod=el_pt->nnode();
 
@@ -950,6 +1069,7 @@ namespace oomph
  void TriangleMesh<ELEMENT>::build_triangulateio(
   TriangleMeshPolygon* &outer_boundary_pt,
   Vector<TriangleMeshHolePolygon*> &inner_hole_pt,
+  std::set<unsigned> &fill_index,
   TriangulateIO& triangulate_io)
  {
   // triangulate_io initialization
@@ -1045,7 +1165,8 @@ namespace oomph
    {
 
     // Storing the number of the vertices
-    n_polylinevertices = outer_boundary_pt->polyline_pt(count_seg)->nvertex()-1;
+    n_polylinevertices = 
+     outer_boundary_pt->polyline_pt(count_seg)->nvertex()-1;
 
     // If there's just one boundary. All the vertices have to be counted   
     if(n_boundline==1)
@@ -1090,9 +1211,13 @@ namespace oomph
        }
 
       // Store the marker list of the segments
-      // The count_sub_bound is used, instead of the idpolyline
-      triangulate_io.segmentmarkerlist[count_tri/2]= count_sub_bound;
-      
+      // The count_sub_bound is used, instead of the idpolyline 
+      triangulate_io.segmentmarkerlist[count_tri/2]= //count_sub_bound;
+       //Need to add one because something very strange goes on!
+       idpolyline+1;
+
+      //std::cout << "Checker " << count_sub_bound << " " 
+      //          << idpolyline << "\n";
       // -1 because of the different enumeration between oomph_lib mesh
       // and the TriangulateIO structure!
             
@@ -1212,18 +1337,52 @@ namespace oomph
                         "TriangleMeshBoundary::TriangleMeshBoundary()",
                         OOMPH_EXCEPTION_LOCATION);
    }
-     
+
+
+  //Find the number of filled holes
+  unsigned n_filled = fill_index.size();
+
+  //Fill in the internal regions if needed
+  if(n_filled > 0)
+   {
+    triangulate_io.numberofregions = n_filled;
+    triangulate_io.regionlist = 
+     (double*) malloc(triangulate_io.numberofregions * 4 * sizeof(double));
+    
+    //Use the "filled" hole centre coordinate to define the region
+    //And the attribute will be indexed from 2
+    unsigned region_count = 1;
+    //Loop over the filled regions
+    for(std::set<unsigned>::iterator it = fill_index.begin();
+        it!=fill_index.end();++it)
+     {
+      triangulate_io.regionlist[4*region_count-4] = 
+       inner_hole_pt[*it]->hole_coordinate()[0];
+      triangulate_io.regionlist[4*region_count-3] = 
+       inner_hole_pt[*it]->hole_coordinate()[1];
+      triangulate_io.regionlist[4*region_count-2] = 
+       static_cast<double>(region_count);
+      triangulate_io.regionlist[4*region_count-1] = 0.0;
+      //Increase the number of regions
+      ++region_count;
+     }
+   }
+ 
   // Storing the hole center coordinates
-  triangulate_io.numberofholes = n_holes;
+  triangulate_io.numberofholes = n_holes - n_filled;
   triangulate_io.holelist =
    (double*) malloc(triangulate_io.numberofholes * 2 * sizeof(double));
 
   for(unsigned count_hole=0;count_hole<n_holes*2;count_hole+=2)
    {
-    triangulate_io.holelist[count_hole] = inner_hole_pt[count_hole/2]->
-     hole_coordinate()[0];
-    triangulate_io.holelist[count_hole+1] = inner_hole_pt[count_hole/2]->
-     hole_coordinate()[1];
+    //Only add the hole, if it is not filled in
+    if(fill_index.find(count_hole)==fill_index.end())
+     {
+      triangulate_io.holelist[count_hole] = inner_hole_pt[count_hole/2]->
+       hole_coordinate()[0];
+      triangulate_io.holelist[count_hole+1] = inner_hole_pt[count_hole/2]->
+       hole_coordinate()[1];
+     }
    }
 
  }
@@ -1564,6 +1723,23 @@ namespace oomph
    {
     triangle_refine.trianglearealist[count_area]=target_area[count_area];
    }
+
+  // Store the triangles attributes in the list
+  triangle_refine.numberoftriangleattributes = 
+   triangulate_io.numberoftriangleattributes;
+
+  triangle_refine.triangleattributelist =
+   (double *) malloc(
+    triangulate_io.numberoftriangles * 
+    triangulate_io.numberoftriangleattributes * sizeof(double));
+  for(unsigned count_attribute=0;
+      count_attribute<(n_triangles*triangulate_io.numberoftriangleattributes);
+      count_attribute++)
+   {
+    triangle_refine.triangleattributelist[count_attribute] =
+     triangulate_io.triangleattributelist[count_attribute];
+   }
+
  }
 
 
@@ -1810,6 +1986,10 @@ namespace oomph
     unsigned nhole=this->Inner_hole_pt.size();
     Vector<Vector<double> > hole_centre_coord(nhole);
     this->surface_remesh_for_inner_hole_boundaries(hole_centre_coord);
+
+    //Update the representation of the outer boundary
+    this->surface_remesh_for_outer_boundary();
+
     // Update the TriangulateIO structure according
     //this->update_triangulateio(hole_centre_coord);
     
@@ -1827,7 +2007,10 @@ namespace oomph
         this->setup_boundary_coordinates(b);
        }
      }
+
+    //Let's look at the input
     
+
     // Are we dealing with a solid mesh?
     SolidMesh* solid_mesh_pt=dynamic_cast<SolidMesh*>(this);
 
@@ -1836,13 +2019,15 @@ namespace oomph
     // with area set by maximum required area
     //---------------------------------------
     RefineableTriangleMesh<ELEMENT>* tmp_new_mesh_pt=0;
-    if (solid_mesh_pt==0)
+    if (solid_mesh_pt!=0)
      {
       tmp_new_mesh_pt=new RefineableSolidTriangleMesh<ELEMENT>
        (this->Outer_boundary_pt,
         this->Inner_hole_pt,
         max_area,
-        this->Time_stepper_pt);
+        this->Time_stepper_pt,
+        this->Fill_index,
+        this->Use_attributes);
      }
     else
      {
@@ -1850,8 +2035,12 @@ namespace oomph
        (this->Outer_boundary_pt,
         this->Inner_hole_pt,
         max_area,
-        this->Time_stepper_pt);
+        this->Time_stepper_pt,
+        this->Fill_index,
+        this->Use_attributes);
      }
+
+
 
 //     oomph_info << "Built background mesh with area: " << max_area << std::endl;
 //     tmp_new_mesh_pt->output("background_mesh.dat");
@@ -1919,6 +2108,14 @@ namespace oomph
       // Set up multi domain interactions so we can figure out
       // which element in the intermediate uniform mesh is co-located
       // with given element in current mesh (which is to be refined)
+
+      // This may fail if there is still a discrepancy between curvilinear
+      // and PSLG boundaries.
+      // The correct thing to do is to catch the error and use the points
+      // of failure to determine how to refine the appropriate boundary's
+      // PSLG representation and then regenerate the entire mesh.
+      // This WILL be done, but not just yet. For now increase the 
+      // discretisation manually!
       Multi_domain_functions::setup_multi_domain_interaction
        <ELEMENT>(this->Problem_pt,this,tmp_new_mesh_pt);
       
@@ -1993,7 +2190,8 @@ namespace oomph
         new_mesh_pt=new RefineableSolidTriangleMesh<ELEMENT>
          (new_target_area,
           tmp_new_triangulateio,
-          this->Time_stepper_pt);
+          this->Time_stepper_pt,
+          this->Use_attributes);
        }      
       // No solid mesh
       else
@@ -2001,7 +2199,8 @@ namespace oomph
         new_mesh_pt=new RefineableTriangleMesh<ELEMENT>
          (new_target_area,
           tmp_new_triangulateio,
-          this->Time_stepper_pt);
+          this->Time_stepper_pt,
+          this->Use_attributes);
        }    
       
       
@@ -2032,7 +2231,7 @@ namespace oomph
      }
     
     //Output the mesh before any snapping takes place
-    //new_mesh_pt->output("pre_mesh_nodes_snapped.dat");
+    new_mesh_pt->output("pre_mesh_nodes_snapped.dat");
     
     //Move the nodes on the new boundary onto the 
     //old curvilinear boundary
@@ -2044,7 +2243,7 @@ namespace oomph
      }
     
     //Output the mesh after the snapping has taken place
-    //new_mesh_pt->output("mesh_nodes_snapped.dat");
+    new_mesh_pt->output("mesh_nodes_snapped.dat");
 
 
     
@@ -2106,7 +2305,62 @@ namespace oomph
         Boundary_node_pt[b][j]=new_mesh_pt->boundary_node_pt(b,j);
        }
      }
-    
+
+    //Also copy over the new boundary and region information
+    unsigned n_region = new_mesh_pt->nregion();
+    //Only bother if we have regions
+    if(n_region > 1)
+     {
+      //Deal with the region information first
+      this->Region_element_pt.resize(n_region);
+      this->Region_attribute.resize(n_region);
+      for(unsigned r=0;r<n_region;r++)
+       {
+        this->Region_attribute[r] = new_mesh_pt->region_attribute(r);
+        //Find the number of elements in the region
+        unsigned n_region_element = new_mesh_pt->nregion_element(r);
+        this->Region_element_pt[r].resize(n_region_element);
+        for(unsigned e=0;e<n_region_element;e++)
+         {
+          this->Region_element_pt[r][e] = new_mesh_pt->region_element_pt(r,e);
+         }
+       }
+
+      //Now the boundary region information
+      this->Boundary_region_element_pt.resize(nbound);
+      this->Face_index_region_at_boundary.resize(nbound);
+      
+      //Now loop over the boundaries
+      for(unsigned b=0;b<nbound;++b)
+       {
+        //Loop over the regions
+        for(unsigned r=0;r<n_region;++r)
+         {
+          unsigned n_boundary_el_in_region = 
+           new_mesh_pt->nboundary_element_in_region(b,r);
+          
+          if(n_boundary_el_in_region > 0)
+           {
+            //Allocate storage in the map
+            this->Boundary_region_element_pt[b][r].
+             resize(n_boundary_el_in_region);
+            this->Face_index_region_at_boundary[b][r].
+             resize(n_boundary_el_in_region);
+
+            //Copy over the information
+            for(unsigned e=0;e<n_boundary_el_in_region;++e)
+             {
+              this->Boundary_region_element_pt[b][r][e]
+               = new_mesh_pt->boundary_element_pt_in_region(b,r,e);
+              this->Face_index_region_at_boundary[b][r][e] 
+               = new_mesh_pt->face_index_at_boundary_in_region(b,r,e);
+             }
+           }
+         }
+       } //End of loop over boundaries
+
+     } //End of case when more than one region
+   
     // Copy the IDs of the vertex nodes
     this->Oomph_vertex_nodes_id=new_mesh_pt->oomph_vertex_nodes_id();
     
@@ -2156,6 +2410,219 @@ namespace oomph
    }
  }
 
+ //======================================================================
+ /// Helper function that updates the input polygon's PSLG
+ /// by using the end-points of elements from FaceMesh(es) that are
+ /// constructed for the boundaries associated with the segments of the
+ /// polygon.
+ //======================================================================
+ template<class ELEMENT>
+ void RefineableTriangleMesh<ELEMENT>::
+ update_polygon_using_face_mesh(TriangleMeshPolygon* polygon_pt)
+ {
+  Vector<double> vertex_coord(3);
+  Vector<double> bound_left(1);
+  Vector<double> bound_right(1);
+  
+  //Loop over the number of polylines
+  unsigned n_polyline = polygon_pt->npolyline();
+     for(unsigned p=0;p<n_polyline;p++)
+      {
+       //Set of coordinates that will be placed on the boundary
+       std::set<Vector<double> > vertex_nodes;
+       
+       //Get the boundary id of each polyline
+       unsigned bound = 
+        polygon_pt->polyline_pt(p)->boundary_id();
+       
+       // Create a face mesh adjacent to the fluid mesh's b-th boundary. 
+       // The face mesh consists of FaceElements that may also be 
+       // interpreted as GeomObjects
+       Mesh* face_mesh_pt = new Mesh;
+       this->template build_face_mesh
+        <ELEMENT,FaceElementAsGeomObject>(bound, face_mesh_pt);
+       
+       // Loop over these new face elements and tell them the boundary number
+       // from the bulk fluid mesh -- this is required to they can
+       // get access to the boundary coordinates!
+       unsigned n_face_element = face_mesh_pt->nelement();
+       for(unsigned e=0;e<n_face_element;e++)
+        {
+         //Cast the element pointer to the correct thing!
+         FaceElementAsGeomObject<ELEMENT>* el_pt=
+          dynamic_cast<FaceElementAsGeomObject<ELEMENT>*>
+          (face_mesh_pt->element_pt(e));
+         
+         // Set bulk boundary number
+         el_pt->set_boundary_number_in_bulk_mesh(bound);
+        }
+       
+       //Now we have the face mesh loop over the face elements and 
+       //print out the end points
+       for(unsigned e=0;e<n_face_element;++e)
+        {
+         unsigned n_node = face_mesh_pt->finite_element_pt(e)->nnode();
+         FiniteElement* el_pt = face_mesh_pt->finite_element_pt(e);
+         
+         //Add the left-hand node to the list
+         el_pt->node_pt(0)
+          ->get_coordinates_on_boundary(bound,bound_left);
+         vertex_coord[0] = bound_left[0];
+         for(unsigned i=0;i<2;i++)
+          {
+           vertex_coord[i+1] = el_pt->node_pt(0)->x(i);
+          }
+         
+         vertex_nodes.insert(vertex_coord);
+         
+         //Add the right-hand nodes to the list
+         el_pt->node_pt(n_node-1)
+          ->get_coordinates_on_boundary(bound,bound_right);
+         vertex_coord[0] = bound_right[0];
+         for(unsigned i=0;i<2;i++)
+          {
+           vertex_coord[i+1] = el_pt->node_pt(n_node-1)->x(i);
+          }
+         
+         vertex_nodes.insert(vertex_coord);
+         
+         //Worry about bulk refinement here?
+        }
+        
+       //Delete the allocated memory for theface mesh
+       face_mesh_pt->flush_element_and_node_storage();
+       delete face_mesh_pt;
+       
+       //Turn the set into a vector
+       //Firstly trim any elements below a minimum size
+       {
+        double min_length = 0.01;
+        std::set<Vector<double> > ::iterator it = vertex_nodes.begin();
+        //Get the location of the "leftmost" (first) vertex
+        //Don't go to the final vertex
+        Vector<double> left_vertex = *it;
+        for(++it;it!=--vertex_nodes.end();++it)
+         {
+          //What is the actual length between the "left" vertex
+          //and the current vertex
+          double length = 0.0;
+          for(unsigned i=0;i<2;i++)
+           {
+            length += pow(((*it)[i+1] - left_vertex[i+1]),2.0);
+           }
+          //If smaller than minimum delete the current vertex
+          //Need to be careful when deleting entries in a set that
+          //is being iterated over.
+          if(sqrt(length) < min_length)
+           {
+            //Say so
+            oomph_info << "Surface element too small: ";
+            oomph_info << "Removing node at " << (*it)[1] << " " << (*it)[2]
+                       << "\n";
+            //Store the current value of the iterator
+            std::set<Vector<double> >::iterator tmp_it = it;
+            //Go back to the previous entry with the loop iterator
+            --it;
+            //Erase the offending entry
+            vertex_nodes.erase(tmp_it);
+           }
+          //Otherwise, the "left" vertex becomes the current vertex
+          else
+           {
+            left_vertex = *it;
+           }
+         }
+       }
+        
+       unsigned n_poly_vertex = vertex_nodes.size();
+       Vector<Vector<double> > vector_vertex_node(n_poly_vertex);
+       unsigned count=0;
+       for(std::set<Vector<double> >::iterator it = vertex_nodes.begin();
+           it!=vertex_nodes.end();++it)
+        {
+         vector_vertex_node[count].resize(2);
+         vector_vertex_node[count][0] = (*it)[1];
+         vector_vertex_node[count][1] = (*it)[2];
+         ++count;
+        }
+       
+       
+       //Check whether the segments are continguous (first vertex of this
+       //segment is equal to last vertex of previous segment).
+       //If not, we should reverse the order of the current segment.
+       //This check only applies for segments other than the first.
+       if(p > 0)
+        {
+         //Final end point of previous line
+         Vector<double> final_vertex_of_previous_segment;
+         unsigned n_prev_vertex = 
+          polygon_pt->polyline_pt(p-1)->nvertex();
+         final_vertex_of_previous_segment = 
+          polygon_pt->polyline_pt(p-1)->
+          vertex_coordinate(n_prev_vertex-1);
+         
+         //Find the error between the final vertex of the previous
+         //line and the first vertex of the current line
+         double error = 0.0;
+         for(unsigned i=0;i<2;i++)
+          {
+           const double dist =
+            final_vertex_of_previous_segment[i] - 
+            (*vector_vertex_node.begin())[i];
+           error += dist*dist;
+          }
+         error = sqrt(error);
+         
+         //If the error is bigger than the tolerance then
+         //we probably need to reverse, but better check
+         if(error > ToleranceForVertexMismatchInPolygons::Tolerable_error)
+          {
+           //Find the error between the final vertex of the previous
+           //line and the first vertex of the current line
+           double rev_error = 0.0;
+           for(unsigned i=0;i<2;i++)
+            {
+             const double dist =
+              final_vertex_of_previous_segment[i] - 
+              (*--vector_vertex_node.end())[i];
+             rev_error += dist*dist;
+            }
+           rev_error = sqrt(rev_error);
+           
+           if(rev_error > 
+              ToleranceForVertexMismatchInPolygons::Tolerable_error)
+            {
+             std::ostringstream error_stream;
+             error_stream << 
+              "The distance between the first node of the current\n" << 
+              "line segment and either and of the previous line segment\n"
+                          <<
+              "is bigger than the desired tolerance " <<
+              ToleranceForVertexMismatchInPolygons::Tolerable_error << ".\n"
+                          << 
+              "This suggests that the polylines defining the polygonal\n" <<
+              "representation of the hole are not properly ordered.\n" <<
+              "This should have failed when first trying to construct the\n"
+                          << "polygon.\n";
+             throw OomphLibError(error_stream.str(),
+                                 "TriangleMesh::adapt()",
+                                 OOMPH_EXCEPTION_LOCATION);
+            }
+           
+           //Reverse the current vector to line up with the previous one
+           std::reverse(vector_vertex_node.begin(),vector_vertex_node.end());
+          }
+        }
+       
+       //Now update the polyline according to the new vertices
+       //Need offset because of stupid triangle
+       delete polygon_pt->polyline_pt(p);
+       polygon_pt->polyline_pt(p) = 
+        new TriangleMeshPolyLine(vector_vertex_node,bound+1);
+      }
+    }
+
+
 
 //======================================================================
 /// Update the PSLG that define the inner boundaries of the mesh.
@@ -2188,7 +2655,7 @@ namespace oomph
     //Otherwise we have to work much harder
     else
      {
-      Vector<double> vertex_coord(3);
+      /*Vector<double> vertex_coord(3);
       Vector<double> bound_left(1);
       Vector<double> bound_right(1);
 
@@ -2406,6 +2873,15 @@ namespace oomph
       //delete this->Inner_hole_pt[ihole];
       //this->Inner_hole_pt[ihole] = 
       // new TriangleMeshHolePolygon(hole_centre,hole_segment_pt);
+ 
+      */
+
+      //Update the polygon associated with the ihole-th hole
+      this->update_polygon_using_face_mesh(this->Inner_hole_pt[ihole]);
+
+      //Now sort out the hole coordinates
+      Vector<double> vertex_coord;
+      unsigned n_polyline = this->Inner_hole_pt[ihole]->npolyline();
       
       vertex_coord.resize(2);
       // Initialize Vector hole_coordinates
@@ -2455,6 +2931,25 @@ namespace oomph
      }
    }
  }
+
+
+//======================================================================
+/// Update the PSLG that define the outer boundary of the mesh.
+///
+//======================================================================
+ template <class ELEMENT>
+ void RefineableTriangleMesh<ELEMENT>::
+ surface_remesh_for_outer_boundary()
+ {
+  //Only if there is a geometric object associated with the first boundary
+  // (HACK)
+  if(this->boundary_geom_object_pt(0)!=0)
+   {
+    //Update the polygon associated with the outer boundary
+    this->update_polygon_using_face_mesh(this->Outer_boundary_pt);
+   }
+ }
+
 
 //======================================================================
 /// Move the boundary nodes onto the boundary defined by the old mesh
@@ -2655,11 +3150,32 @@ namespace oomph
      ". This should not happen because these limits should have been setup\n"
                  <<
      "in the constructor\n";
-    throw OomphLibError(error_stream.str(),
-                        "RefineableTriangleMesh::snap_nodes_onto_boundary()",
-                        OOMPH_EXCEPTION_LOCATION);
+    error_stream << 
+     "The distance between the new and old nodes is probably outside\n"
+                 << 
+     "our tolerance.\n";
+    error_stream.precision(20);
+    error_stream << "Old boundaries: \n";
+    error_stream << 
+     old_boundary_node[0][1] << " " << old_boundary_node[0][2] 
+                 << " : " <<
+     old_boundary_node[n_boundary_node-1][1] << " "  <<
+     old_boundary_node[n_boundary_node-1][2] << "\n";
+    error_stream << "New boundaries: \n" <<
+     new_boundary_node[0][1] << " " << new_boundary_node[0][2] << " : " <<
+     new_boundary_node[n_new_boundary_node-1][1] << " "  <<
+     new_boundary_node[n_new_boundary_node-1][2] << "\n";
+    
+    OomphLibWarning(error_stream.str(),
+                    "RefineableTriangleMesh::snap_nodes_onto_boundary()",
+                    OOMPH_EXCEPTION_LOCATION);
    }
 #endif
+
+  //The end points should have been transferred over from the constructor
+  //so we'll add them in exactly
+  new_boundary_node[0][5] = 1.0;
+  new_boundary_node[n_new_boundary_node-1][5] = 1.0;
   
   //Now loop over the interior nodes again and 
   //use linear interpolation to fill in any unassigned coordiantes

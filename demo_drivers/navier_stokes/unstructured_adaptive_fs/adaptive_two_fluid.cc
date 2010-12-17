@@ -61,7 +61,7 @@ namespace oomph
   double Re=0.0;
 
   /// Capillary number
-  double Ca = 10.0;
+  double Ca = 1.0;
 
   /// Pseudo-solid Poisson ratio
   double Nu=0.3;
@@ -470,6 +470,49 @@ public:
 
   }
  
+ /// Change the boundary conditions to remove the volume constraint
+ void remove_volume_constraint()
+  {
+   //Unhijack the data in the internal element
+   dynamic_cast<ELEMENT*>(Fluid_mesh_pt->region_element_pt(1,0))
+    ->unhijack_all_data();
+   //Also need to unset the traded pressure data
+   const unsigned n_interface_element = Free_surface_mesh_pt->nelement();
+   for(unsigned e=0;e<n_interface_element;e++)
+    {
+     FixedVolumeElasticLineFluidInterfaceElement<ELEMENT>* el_pt = 
+      dynamic_cast<FixedVolumeElasticLineFluidInterfaceElement<ELEMENT>*>
+      (Free_surface_mesh_pt->element_pt(e));
+     
+     //Set the traded pressure data
+     el_pt->unset_traded_pressure_data();
+    }
+
+   //Flush the global data from the problem
+   this->flush_global_data();
+   Bubble_pressure_data_pt=0;
+
+   //Delete the volume constraint element and Mesh
+   delete Volume_constraint_mesh_pt->element_pt(0);
+   //flush everything
+   Volume_constraint_mesh_pt->flush_element_and_node_storage();
+   delete Volume_constraint_mesh_pt;
+   Volume_constraint_mesh_pt=0;
+
+   //Remove the sub meshes
+   this->flush_sub_meshes();
+    // Add Fluid_mesh_pt sub meshes
+   this->add_sub_mesh(Fluid_mesh_pt);
+    // Add Free_surface sub meshes
+   this->add_sub_mesh(this->Free_surface_mesh_pt);
+   //Rebuild the global mesh
+   this->rebuild_global_mesh();
+   
+   //Renumber the equations
+   std::cout << "Removed volume constraint to obtain "
+             << this->assign_eqn_numbers() << " new equation numbers\n";
+  }
+
 
  /// Actions before adapt: Wipe the mesh of Lagrange multiplier elements
  void actions_before_adapt()
@@ -477,6 +520,17 @@ public:
    // Kill the  elements and wipe surface mesh
    delete_free_surface_elements();
    
+   //Also need to remove the global data because it will be destroyed 
+   //in the refinement
+   this->flush_global_data();
+
+   //Remove the traded pressure data from the volume constraint element
+   if(Volume_constraint_mesh_pt!=0)
+    {
+     Volume_constraint_mesh_pt->element_pt(0)
+      ->flush_external_data(Bubble_pressure_data_pt);
+    }
+
    // Rebuild the Problem's global mesh from its various sub-meshes
    this->rebuild_global_mesh();
   
@@ -486,6 +540,23 @@ public:
  /// Actions after adapt: Rebuild the mesh of Lagrange multiplier elements
  void actions_after_adapt()
   {
+   //Only bother to set this if we have a volume constraint mesh
+   if(Volume_constraint_mesh_pt!=0)
+    {
+     // Set the global pressure data by hijacking one of the pressure values
+     // from inside the droplet
+     Bubble_pressure_data_pt =  
+      dynamic_cast<ELEMENT*>(Fluid_mesh_pt->region_element_pt(1,0))
+      ->hijack_internal_value(0,0);
+     this->add_global_data(Bubble_pressure_data_pt);
+     
+     
+     //Reset the traded pressure in the volume constraint element
+     dynamic_cast<ElasticVolumeConstraintElement*>(
+      Volume_constraint_mesh_pt->element_pt(0))
+      ->set_traded_pressure_data(this->global_data_pt(0));
+    }
+
    // Create the elements that impose the displacement constraint 
    create_free_surface_elements();
    
@@ -784,13 +855,6 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
 
  double Length = 3.0; //10.0
  
- // Set the global pressure data
- Bubble_pressure_data_pt =  new Data(1);
- this->add_global_data(Bubble_pressure_data_pt);
- //Provide a reasonable initial guess
- Bubble_pressure_data_pt->set_value(0,
-  Problem_Parameter::Ca/Problem_Parameter::Radius);
-
  // Build the boundary segments for outer boundary, consisting of
  //--------------------------------------------------------------
  // four separeate polyline segments
@@ -940,12 +1004,16 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  //---------------------------------------------------------
  // polygons just created
  //----------------------
+ //Create a sit to indicate that the hole should be filled
+ std::set<unsigned> fill_index;
+ fill_index.insert(0);
  double uniform_element_area=0.2;
  Fluid_mesh_pt = 
   new RefineableSolidTriangleMesh<ELEMENT>(Outer_boundary_polyline_pt, 
                                            Inner_hole_pt,
                                            uniform_element_area,
-                                           this->time_stepper_pt());
+                                           this->time_stepper_pt(),
+                                           fill_index);
  
  // Set error estimator for bulk mesh
  Z2ErrorEstimator* error_estimator_pt=new Z2ErrorEstimator;
@@ -966,7 +1034,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
 
  // Set the problem pointer
  Fluid_mesh_pt->problem_pt()=this;
-   
+
  // Output boundary and mesh
  this->Fluid_mesh_pt->output_boundaries("boundaries.dat");
  this->Fluid_mesh_pt->output("mesh.dat");
@@ -975,14 +1043,25 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  // complete the build of all elements, attach power elements that allow
  // computation of drag vector
  complete_problem_setup();
- 
+
  // Create Free surface elements 
  //----------------------------------------------------
+
+ // Set the global pressure data by hijacking one of the pressure values
+ // from inside the droplet
+ Bubble_pressure_data_pt =  
+  dynamic_cast<ELEMENT*>(Fluid_mesh_pt->region_element_pt(1,0))
+  ->hijack_internal_value(0,0);
+ this->add_global_data(Bubble_pressure_data_pt);
+ //Provide a reasonable initial guess
+ Bubble_pressure_data_pt->
+ set_value(0,Problem_Parameter::Ca/Problem_Parameter::Radius);
+
  // Construct the mesh of elements that enforce prescribed boundary motion
  // of pseudo-solid fluid mesh by Lagrange multipliers
  Free_surface_mesh_pt=new Mesh;
  create_free_surface_elements();
- 
+
 
  //Create volume constraint element
  Volume_constraint_mesh_pt = new Mesh;
@@ -993,7 +1072,6 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  dynamic_cast<ElasticVolumeConstraintElement*>(
   Volume_constraint_mesh_pt->element_pt(0))
   ->volume_pt() = &Problem_Parameter::Volume;
-
 
  // Combine meshes
  //---------------
@@ -1149,7 +1227,7 @@ void UnstructuredFluidProblem<ELEMENT>::create_free_surface_elements()
  for(unsigned b=4;b<6;b++)
   {
    // How many bulk fluid elements are adjacent to boundary b?
-   unsigned n_element = Fluid_mesh_pt->nboundary_element(b);
+   unsigned n_element = Fluid_mesh_pt->nboundary_element_in_region(b,0);
    
    // Loop over the bulk fluid elements adjacent to boundary b?
    for(unsigned e=0;e<n_element;e++)
@@ -1157,16 +1235,16 @@ void UnstructuredFluidProblem<ELEMENT>::create_free_surface_elements()
      // Get pointer to the bulk fluid element that is 
      // adjacent to boundary b
      ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
-      Fluid_mesh_pt->boundary_element_pt(b,e));
+      Fluid_mesh_pt->boundary_element_pt_in_region(b,0,e));
      
      //Find the index of the face of element e along boundary b
-     int face_index = Fluid_mesh_pt->face_index_at_boundary(b,e);
-     
+     int face_index = Fluid_mesh_pt->face_index_at_boundary_in_region(b,0,e);
+
      // Create new element. Note that we use different Lagrange
      // multiplier fields for each distinct boundary (here indicated
      // by b.
      FixedVolumeElasticLineFluidInterfaceElement<ELEMENT>* el_pt =
-      new FixedVolumeElasticLineFluidInterfaceElement<ELEMENT>(
+                     new FixedVolumeElasticLineFluidInterfaceElement<ELEMENT>(
        bulk_elem_pt,face_index);   
      
      // Add it to the mesh
@@ -1177,10 +1255,15 @@ void UnstructuredFluidProblem<ELEMENT>::create_free_surface_elements()
      
      //Specify the capillary number
      el_pt->ca_pt() = &Problem_Parameter::Ca;
+   
      //Specify the external pressure
-     el_pt->set_external_pressure_data(this->global_data_pt(0));
-     //Set the traded pressure
-     el_pt->set_traded_pressure_data(this->global_data_pt(0));
+     //el_pt->set_external_pressure_data(this->global_data_pt(0));
+
+     //Set the traded pressure (only if required)
+     if(Volume_constraint_mesh_pt!=0)
+      {
+       el_pt->set_traded_pressure_data(this->global_data_pt(0));
+      }
     } // end loop over the element
   }
 }
@@ -1347,14 +1430,16 @@ int main(int argc, char **argv)
  
 
  // Create problem in initial configuration
- UnstructuredFluidProblem<ProjectableCrouzeixRaviartElement<
-  MyCrouzeixRaviartElement> > 
+ UnstructuredFluidProblem<Hijacked<ProjectableCrouzeixRaviartElement<
+  MyCrouzeixRaviartElement> > >
   problem;  
 
  problem.steady_newton_solve(1);
  problem.doc_solution();
 
- //FiniteElement::Accept_negative_jacobian=true;
+ //Now change the problem because we no longer
+ //need to enforce the volume constraint
+ problem.remove_volume_constraint();
 
  // Initialise timestepper
  double dt=0.025;
@@ -1362,6 +1447,9 @@ int main(int argc, char **argv)
  
  // Perform impulsive start
  problem.assign_initial_values_impulsive();
+
+ //Let's increase the capillary number
+ //Problem_Parameter::Ca = 10.0;
 
  // Output initial conditions
  problem.doc_solution();

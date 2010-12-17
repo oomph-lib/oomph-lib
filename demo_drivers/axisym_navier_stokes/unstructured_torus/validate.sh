@@ -2,7 +2,8 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=2
+NUM_TESTS=1
+
 
 # Setup validation directory
 #---------------------------
@@ -10,57 +11,32 @@ touch Validation
 rm -r -f Validation
 mkdir Validation
 
-# Validation for unstructured fluid
-#----------------------------------
+# Validation for adaptive spin up
+#--------------------------------
 cd Validation
 
-echo "Running 2D unstructured adaptive free surface validation" 
+echo "Running unstructured torus validation "
 mkdir RESLT
-
-../adaptive_fs --validation > OUTPUT_fs
+cd RESLT
+../../unstructured_torus > ../OUTPUT
+cd ..
 echo "done"
 echo " " >> validation.log
-echo "2D unstructured adaptive free surface validation" >> validation.log
-echo "-----------------------------------------------------" >> validation.log
+echo "Unstructured Torus validation" >> validation.log
+echo "------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat RESLT/soln4.dat RESLT/norm.dat > results_fs.dat
+cat RESLT/soln_Re1000_t0.02.dat RESLT/time_trace.dat > torus.dat
 
 if test "$1" = "no_fpdiff"; then
-    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-    ../../../../bin/fpdiff.py ../validata/results_fs.dat.gz  \
-        results_fs.dat >> validation.log
+../../../../bin/fpdiff.py ../validata/torus.dat.gz  \
+         torus.dat 0.1 1.0e-12 >> validation.log
 fi
-
-mv RESLT RESLT_fs
-
-echo "Running 2D unstructured adaptive interface validation" 
-mkdir RESLT
-
-../adaptive_two_fluid --validation > OUTPUT_int
-echo "done"
-echo " " >> validation.log
-echo "2D unstructured adaptive interface validation" >> validation.log
-echo "-----------------------------------------------------" >> validation.log
-echo " " >> validation.log
-echo "Validation directory: " >> validation.log
-echo " " >> validation.log
-echo "  " `pwd` >> validation.log
-echo " " >> validation.log
-cat RESLT/soln4.dat RESLT/norm.dat > results_int.dat
-
-if test "$1" = "no_fpdiff"; then
-    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
-else
-    ../../../../bin/fpdiff.py ../validata/results_int.dat.gz  \
-        results_int.dat >> validation.log
-fi
-
-mv RESLT RESLT_int
 
 # Append log to main validation log
 cat validation.log >> ../../../../validation.log
@@ -111,3 +87,4 @@ else
    echo " "
   fi
 fi
+

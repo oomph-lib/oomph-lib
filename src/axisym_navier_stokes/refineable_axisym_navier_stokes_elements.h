@@ -155,7 +155,8 @@ public virtual ElementWithZ2ErrorEstimator
    this->G_pt = cast_father_element_pt->g_pt();
    
    //Set pointer to body force function
-   this->Body_force_fct_pt = cast_father_element_pt->body_force_fct_pt();
+   this->Body_force_fct_pt = 
+    cast_father_element_pt->axi_nst_body_force_fct_pt();
  
    //Set pointer to volumetric source function
    this->Source_fct_pt = cast_father_element_pt->source_fct_pt();
