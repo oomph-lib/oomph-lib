@@ -213,6 +213,7 @@ namespace oomph
   (Problem* problem_pt, Mesh* const &mesh_pt, Mesh* const &external_mesh_pt,
    const unsigned& interaction_index, Mesh* const &external_face_mesh_pt)
   {
+
 #ifdef OOMPH_HAS_MPI
    // Storage for number of processors
    int n_proc=problem_pt->communicator_pt()->nproc();
@@ -224,7 +225,9 @@ namespace oomph
    double t_start=0.0; double t_end=0.0; double t_local=0.0;
    double t_set=0.0; double t_locate=0.0; double t_spiral_start=0.0;
 #ifdef OOMPH_HAS_MPI
-   double t_loop_start=0.0; double t_sendrecv=0.0; double t_missing=0.0;
+   double t_loop_start=0.0; 
+   double t_sendrecv=0.0; 
+   double t_missing=0.0;
    double t_send_info=0.0; double t_create_halo=0.0;
 #endif
 
@@ -232,7 +235,6 @@ namespace oomph
     {
      t_start=TimingHelpers::timer();
     }
-
 
    // Geometric object used to represent the external (face) mesh
    MeshAsGeomObject* mesh_geom_obj_pt=0;
@@ -423,8 +425,10 @@ namespace oomph
      if (Doc_timings) 
       {
        t_local=TimingHelpers::timer();
-       oomph_info << "CPU for local location of zeta coordinate: "
-                  << t_local-t_spiral_start << std::endl;
+       oomph_info 
+        << "CPU for local location of zeta coordinate [spiral level "
+        << i_level << "]: "
+        << t_local-t_spiral_start << std::endl;
       }
 
      // Now test whether anything needs to be broadcast elsewhere
@@ -432,8 +436,9 @@ namespace oomph
      // If there are, then the zetas for these failures need to be
      // broadcast...
 
-     // local size of Zetas array
+     // Local size of Zetas array
      all_count_zetas=Count_local_zetas;
+
 #ifdef OOMPH_HAS_MPI
      // Only perform the reduction operation if there's more than one process
      if (problem_pt->communicator_pt()->nproc() > 1)
@@ -446,10 +451,28 @@ namespace oomph
      // and the problem is distributed, we need to locate elsewhere
      if ((all_count_zetas!=0) && (problem_pt->problem_has_been_distributed()))
       {
+       // Timings
+       double t_sendrecv_min= DBL_MAX; 
+       double t_sendrecv_max=-DBL_MAX; 
+       double t_sendrecv_tot=0.0; 
+
+       double t_missing_min= DBL_MAX; 
+       double t_missing_max=-DBL_MAX; 
+       double t_missing_tot=0.0; 
+
+       double t_send_info_min= DBL_MAX; 
+       double t_send_info_max=-DBL_MAX; 
+       double t_send_info_tot=0.0; 
+
+       double t_create_halo_min= DBL_MAX; 
+       double t_create_halo_max=-DBL_MAX; 
+       double t_create_halo_tot=0.0; 
+
        // Loop over (number of processes - 1) starting from 1
        // - this number is the "distance" from the current process to the
        // process for which it is attempting to locate an element for the
        // current set of zeta coordinates
+       unsigned ring_count=0;
        for (int iproc=1;iproc<n_proc;iproc++)
         {
          // Record time at start of loop
@@ -464,9 +487,13 @@ namespace oomph
 
          if (Doc_timings) 
           {
+           ring_count++;
            t_sendrecv=TimingHelpers::timer();
-           oomph_info << "CPU for send/recv of remaining zeta coordinates: "
-                      << t_sendrecv-t_loop_start << std::endl;
+           t_sendrecv_max=std::max(t_sendrecv_max,t_sendrecv-t_loop_start);
+           t_sendrecv_min=std::min(t_sendrecv_min,t_sendrecv-t_loop_start);
+           t_sendrecv_tot+=(t_sendrecv-t_loop_start);
+//            oomph_info << "CPU for send/recv of remaining zeta coordinates : "
+//                        << t_sendrecv-t_loop_start << std::endl;
           }
 
          // Perform the locate_zeta for the new set of zetas on this process
@@ -476,8 +503,11 @@ namespace oomph
          if (Doc_timings) 
           {
            t_missing=TimingHelpers::timer();
-           oomph_info << "CPU for location of missing zeta coordinates: "
-                      << t_missing-t_sendrecv << std::endl;
+           t_missing_max=std::max(t_missing_max,t_missing-t_sendrecv);
+           t_missing_min=std::min(t_missing_min,t_missing-t_sendrecv);
+           t_missing_tot+=(t_missing-t_sendrecv);
+//            oomph_info << "CPU for location of missing zeta coordinates    : "
+//                       << t_missing-t_sendrecv << std::endl;
           }
 
          // Send any located coordinates back to the correct process, and 
@@ -487,8 +517,11 @@ namespace oomph
          if (Doc_timings) 
           {
            t_send_info=TimingHelpers::timer();
-           oomph_info << "CPU for send/recv of new element info: "
-                      << t_send_info-t_missing << std::endl;
+           t_send_info_max=std::max(t_send_info_max,t_send_info-t_missing);
+           t_send_info_min=std::min(t_send_info_min,t_send_info-t_missing);
+           t_send_info_tot+=(t_send_info-t_missing);
+//            oomph_info << "CPU for send/recv of new element info           : "
+//                       << t_send_info-t_missing << std::endl;
           }
 
          // Create any located external halo elements on the current process
@@ -498,10 +531,70 @@ namespace oomph
          if (Doc_timings) 
           {
            t_create_halo=TimingHelpers::timer();
-           oomph_info << "CPU for local creation of external halo objects: "
-                      << t_create_halo-t_send_info << std::endl;
+           t_create_halo_max=std::max(t_create_halo_max,
+                                      t_create_halo-t_send_info);
+           t_create_halo_min=std::min(t_create_halo_min,
+                                      t_create_halo-t_send_info);
+           t_create_halo_tot+=(t_create_halo-t_send_info);
+//            oomph_info << "CPU for local creation of external halo objects : "
+//                       << t_create_halo-t_send_info << std::endl;
           }
+
+
+         // Do we have any further locating to do?
+         // Only perform the reduction operation if there's more than 
+         // one process
+         all_count_zetas=Count_local_zetas;
+         
+#ifdef OOMPH_HAS_MPI
+         if (problem_pt->communicator_pt()->nproc() > 1)
+          {
+           MPI_Allreduce(&Count_local_zetas,&all_count_zetas,1,MPI_INT,MPI_SUM,
+                         problem_pt->communicator_pt()->mpi_comm());
+          }
+#endif
+         
+         // If all_count_zetas is now zero then break out of the spirals loop
+         oomph_info 
+          << "Number of unlocated integration points in stage " << iproc
+          << " of ring communication " << all_count_zetas << std::endl;
+         if (all_count_zetas==0) 
+          {
+           //oomph_info << "bailing out\n";     // hierher      
+           break;
+          }
+         //oomph_info << "keeping going\n";     // hierher
         }
+
+
+       // Doc timings
+       if (Doc_timings)
+        {
+         oomph_info << "Ring-based search continued until iteration " 
+                    << ring_count << " out of a maximum of" 
+                    << problem_pt->communicator_pt()->nproc() << "\n";
+         oomph_info << "Total, av, max, min CPU for send/recv of remaining zeta coordinates: "
+                    << t_sendrecv_tot << " "
+                    << t_sendrecv_tot/double(ring_count) << " "
+                    << t_sendrecv_max << " " 
+                    << t_sendrecv_min << "\n";
+         oomph_info << "Total, av, max, min CPU for location of missing zeta coordinates   : "
+                    << t_missing_tot << " "
+                    << t_missing_tot/double(ring_count) << " "
+                    << t_missing_max << " " 
+                    << t_missing_min << "\n";
+         oomph_info << "Total, av, max, min CPU for send/recv of new element info          : "
+                    << t_send_info_tot << " "
+                    << t_send_info_tot/double(ring_count) << " "
+                    << t_send_info_max << " " 
+                    << t_send_info_min << "\n";
+         oomph_info << "Total, av, max, min CPU for local creation of external halo objects: "
+                    << t_create_halo_tot << " "
+                    << t_create_halo_tot/double(ring_count) << " "
+                    << t_create_halo_max << " " 
+                    << t_create_halo_min << "\n";
+        }
+
       } // end if (all_count_zetas!=0)
 #endif
 
@@ -543,6 +636,7 @@ namespace oomph
 
      // Specify max level reached for later loop
      max_level_reached=i_level+1;
+     
      /// If all_count_zetas is now zero then break out of the spirals loop
      if (all_count_zetas==0) { break; }
 

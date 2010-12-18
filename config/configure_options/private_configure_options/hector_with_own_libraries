@@ -80,21 +80,21 @@
 #              other libraries.
 #=====================================================================
 #
---enable-suppress-oomph-metis
---enable-suppress-oomph-parmetis
---enable-suppress-oomph-superlu
---enable-suppress-oomph-superlu_dist
---with-mumps=auto
---with-blas=auto
---with-lapack=auto
---with-trilinos=auto
---with-hypre=auto
+#--enable-suppress-oomph-metis
+#--enable-suppress-oomph-parmetis
+#--enable-suppress-oomph-superlu
+#--enable-suppress-oomph-superlu_dist
+#--with-mumps=auto
+--with-blas=/home/e173/e173/mheil/local/gnu/lib/blas/blas.a
+--with-lapack=/home/e173/e173/mheil/local/gnu/lib/lapack/lapack.a
+--with-trilinos=/home/e173/e173/mheil/local/gnu/trilinos_default_installation
+--with-hypre=/home/e173/e173/mheil/local/gnu/hypre_default_installation
 --enable-MPI
 --enable-suppress-doc
 --enable-suppress-demo
 --enable-symbolic-links-for-headers
 --enable-static-cxx-libs
-CXXFLAGS="-O3 -Wall"
+CXXFLAGS="-O3 -DMPICH_IGNORE_CXX_SEEK"
 CFLAGS="-O3"
 FFLAGS="-O3"
 CXX=CC

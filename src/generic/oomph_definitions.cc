@@ -35,6 +35,22 @@ namespace oomph
 
 
 
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+///=====================================================================
+/// Namespace to control level of comprehensive timings
+//======================================================================
+ namespace Global_timings
+  {
+   /// \short Global boolean to switch on comprehensive timing -- can 
+   /// probably be declared const false when development on hector
+   /// is complete
+   bool Doc_comprehensive_timings=false;
+  };
+
 
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
@@ -122,6 +138,43 @@ std::ostream *OomphLibWarning::Stream_pt = &std::cout;
 /// Default output width for OomphLibWarnings (70)
 //=======================================================================
 unsigned OomphLibWarning::Output_width = 70;
+
+
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+//=======================================================================
+/// Namespace containing a vector of strings that can be used to
+/// to store global output modifiers. This is global data
+/// and you use it at your own risk!
+/// hierher probably better stuck into a static class to hide the vector.
+//=======================================================================
+namespace Global_string_for_annotation
+{
+
+ /// \short Return the i-th string or "" if the relevant string hasn't
+ /// been defined
+ std::string string(const unsigned& i)
+ {
+  if (i<String.size())
+   {
+    return String[i];
+   }
+  else
+   {
+    return "";
+   }
+ }
+
+ /// \short Storage for strings that may be used for global annotations.
+ /// This is global data and you use it at your own risk!
+ std::vector<std::string> String;
+
+}
 
 
 ////////////////////////////////////////////////////////////////////////////

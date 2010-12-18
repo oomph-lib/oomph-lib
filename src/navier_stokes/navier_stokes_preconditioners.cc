@@ -2088,7 +2088,7 @@ namespace oomph
  void NavierStokesLSCPreconditioner::
  preconditioner_solve(const DoubleVector &r, DoubleVector &z)
  {
-    
+
 #ifdef PARANOID
   if (Preconditioner_has_been_setup==false)
    {
@@ -2114,6 +2114,10 @@ namespace oomph
    }
 #endif
 
+  double t_start_overall = TimingHelpers::timer();
+  double t_start = TimingHelpers::timer();
+  double t_end=0;
+
   // if z is not setup then give it the same distribution
   if (!z.built())
    {
@@ -2131,6 +2135,15 @@ namespace oomph
   // Loop over all entries in the global vector (this one
   // includes velocity and pressure dofs in some random fashion)
   this->get_block_vector(1,r,temp_vec);
+
+
+  if(Doc_time)
+   {
+    t_end=TimingHelpers::timer();
+    oomph_info << "LSC prec solve: Time for get block vector: "
+               << t_end-t_start << std::endl;
+    t_start=TimingHelpers::timer();
+   }
 
   // NOTE: The vector temp_vec now contains the vector r_p.
 
@@ -2151,6 +2164,17 @@ namespace oomph
   // use some Preconditioner's preconditioner_solve function
   P_preconditioner_pt->preconditioner_solve(temp_vec, another_temp_vec);
 
+
+  if(Doc_time)
+   {
+    t_end=TimingHelpers::timer();
+    oomph_info << "LSC prec solve: First P solve [nrow="
+               << P_preconditioner_pt->nrow() << "]: "
+               << t_end-t_start << std::endl;
+    t_start=TimingHelpers::timer();
+   }
+
+
   // NOTE: The vector another_temp_vec now contains the vector P^{-1} r_p
 
   // Multiply another_temp_vec by matrix E and stick the result into temp_vec
@@ -2168,11 +2192,31 @@ namespace oomph
     QBt_mat_vec_pt->multiply_transpose(another_temp_vec, temp_vec);
    }
 
+
+  if(Doc_time)
+   {
+    t_end=TimingHelpers::timer();
+    oomph_info << "LSC prec solve: E matrix vector product: "
+               << t_end-t_start << std::endl;
+    t_start=TimingHelpers::timer();
+   }
+
   // NOTE: The vector temp_vec now contains E P^{-1} r_p
 
   // Solve second pressure Poisson system using preconditioner_solve
   another_temp_vec.clear();
   P_preconditioner_pt->preconditioner_solve(temp_vec, another_temp_vec);
+
+
+  if(Doc_time)
+   {
+    t_end=TimingHelpers::timer();
+    oomph_info << "LSC prec solve: Second P solve [nrow="
+               << P_preconditioner_pt->nrow() << "]: "
+               << t_end-t_start << std::endl;
+    t_start=TimingHelpers::timer();
+   }
+
 
   // NOTE: The vector another_temp_vec now contains  z_p = P^{-1} E P^{-1} r_p
   //       as required (apart from the sign which we'll fix in the
@@ -2193,6 +2237,15 @@ namespace oomph
   // result in temp_vec (vector resizes itself).
   temp_vec.clear();
   Bt_mat_vec_pt->multiply(another_temp_vec, temp_vec);
+
+
+  if(Doc_time)
+   {
+    t_end=TimingHelpers::timer();
+    oomph_info << "LSC prec solve: G matrix vector product: "
+               << t_end-t_start << std::endl;
+    t_start=TimingHelpers::timer();
+   }
 
   // NOTE: temp_vec now contains -G z_p
 
@@ -2233,6 +2286,17 @@ namespace oomph
     F_preconditioner_pt->preconditioner_solve(another_temp_vec, temp_vec);
     return_block_vector(0,temp_vec,z);
    }
+
+  if(Doc_time)
+   {
+    t_end=TimingHelpers::timer();
+    oomph_info << "LSC prec solve: F solve [nrow="
+               << P_preconditioner_pt->nrow() << "]: "
+               << t_end-t_start << std::endl;
+    oomph_info << "LSC prec solve: Overall "
+               << t_end-t_start_overall << std::endl;
+   }
+
  }
 
 

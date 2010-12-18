@@ -830,9 +830,24 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
    // Pointer to mesh needs to be passed to some functions
    Mesh* mesh_pt=this;
  
+   double t_start = 0.0;
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     t_start=TimingHelpers::timer();
+    }
+
    // Do refinement(=splitting) of elements that have been selected
    // This function encapsulates the template parameter
    this->split_elements_if_required();
+
+
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     double t_end = TimingHelpers::timer();
+     oomph_info << "Time for split_elements_if_required: " 
+                << t_end-t_start << std::endl;
+     t_start = TimingHelpers::timer();
+    }
 
    // Now elements have been created -- build all the leaves
    //-------------------------------------------------------
@@ -860,6 +875,16 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
     {
      leaf_nodes_pt[e]->object_pt()
       ->build(mesh_pt,new_node_pt,was_already_built,new_nodes_file);
+    }
+
+
+   double t_end=0.0;
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     t_end = TimingHelpers::timer();
+     oomph_info << "Time for building new elements: " 
+                << t_end-t_start << std::endl;
+     t_start = TimingHelpers::timer();
     }
 
    //Close the new nodes files, if it was opened
@@ -941,6 +966,14 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
      nod_pt->set_obsolete();
     }
 
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     t_end = TimingHelpers::timer();
+     oomph_info << "Time for sorting out initial hanging status: " 
+                << t_end-t_start << std::endl;
+     t_start = TimingHelpers::timer();
+    }
+
    // Unrefine all the selected elements: This needs to be
    //-----------------------------------------------------
    // all elements, because the father elements are not actually leaves.
@@ -951,6 +984,14 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
     {
      Forest_pt->tree_pt(e)->traverse_all(&Tree::merge_sons_if_required,
                                          mesh_pt);
+    }
+
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     t_end = TimingHelpers::timer();
+     oomph_info << "Time for unrefinement: " 
+                << t_end-t_start << std::endl;
+     t_start = TimingHelpers::timer();
     }
 
    // Add the newly created elements to mesh
@@ -984,6 +1025,15 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
       {
        this_el_pt->node_pt(n)->set_non_obsolete();
       }
+    }
+
+
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     t_end = TimingHelpers::timer();
+     oomph_info << "Time for adding elements to mesh: " 
+                << t_end-t_start << std::endl;
+     t_start = TimingHelpers::timer();
     }
 
    // Cannot delete nodes that are still marked as obsolete
@@ -1022,11 +1072,22 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
    complete_hanging_nodes(ncont_interpolated_values);
 
    /// Update the boundary element info -- this can be a costly procedure
-   /// and for this reason the mesh writer might have decided not to set up this
-   /// scheme. If so, we won't change this and suppress its creation...
+   /// and for this reason the mesh writer might have decided not to 
+   /// set up this scheme. If so, we won't change this and suppress 
+   /// its creation...
    if (Lookup_for_elements_next_boundary_is_setup)
     {
      this->setup_boundary_element_info(); 
+    }
+
+
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     t_end = TimingHelpers::timer();
+     oomph_info
+      <<"Time for actual hanging node setup and boundary element info: " 
+      << t_end-t_start << std::endl;
+     t_start = TimingHelpers::timer();
     }
 
 #ifdef PARANOID
@@ -1089,8 +1150,9 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
     {
      oomph_info << "Mesh refined: Max. error in integrity check: " 
                 << max_error << " is OK" << std::endl;
-     oomph_info << "i.e. less than RefineableElement::max_integrity_tolerance()="
-                << RefineableElement::max_integrity_tolerance() << std::endl;
+     oomph_info 
+      << "i.e. less than RefineableElement::max_integrity_tolerance()="
+      << RefineableElement::max_integrity_tolerance() << std::endl;
     }
  
 #endif
@@ -1109,12 +1171,28 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
    //Now we can prune the dead nodes from the mesh.
    this->prune_dead_nodes();
 
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     t_end = TimingHelpers::timer();
+     oomph_info << "Time for deactivating objects and pruning nodes: " 
+                << t_end-t_start << std::endl;
+     t_start = TimingHelpers::timer();
+    }
+
    // Finally: Reorder the nodes within the mesh's node vector
    // to establish a standard ordering regardless of the sequence
    // of mesh refinements -- this is required to allow dump/restart
    // on refined meshes
    this->reorder_nodes();
   
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     t_end = TimingHelpers::timer();
+     oomph_info << "Time for reordering nodes: " 
+                << t_end-t_start << std::endl;
+     t_start = TimingHelpers::timer();
+    }
+
    // Final doc
    //-----------
    if (doc_info.doc_flag())
@@ -1839,6 +1917,12 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
  // is on an element which is in a lookup scheme between two higher-numbered
  // processors)
 
+ double t_start = 0.0;
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_start=TimingHelpers::timer();
+  }
+
  // Need to clear the shared node scheme first
  Shared_node_pt.clear();
 
@@ -1964,6 +2048,16 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
     
   } // end loop over processes
 
+
+ double t_end=0.0;
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_end = TimingHelpers::timer();
+   oomph_info << "Time for identification of shared nodes: " 
+              << t_end-t_start << std::endl;
+  }
+
+
  // Now we are in a position to synchronise the hanging status
  // of nodes on halo/haloed elements
 
@@ -1976,7 +2070,13 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
 
  // Loop over the hanging status for each interpolated variable
  for (int icont=-1; icont<ncont_inter_values; icont++)
-  { 
+  { //-- hierher 
+
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     t_start = TimingHelpers::timer();
+    }
+   
    // Loop over processes
    for (int d=0; d<n_proc; d++)
     {
@@ -2077,12 +2177,20 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
       }
     }
 
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     t_end = TimingHelpers::timer();
+     oomph_info << "Time for first all-to-all: " 
+                << t_end-t_start << std::endl;
+     t_start = TimingHelpers::timer();
+    }
+   
 // Now compare equivalent halo and haloed vectors to find discrepancies.
 // It is possible that a master node may not be on either process involved
 // in the halo-haloed scheme; to work round this, we use the shared_node
 // storage scheme, which stores all nodes that are on each pair of processors
 // in the same order on each of the two processors
-
+   
    for (int d=0; d<n_proc; d++)
     {
      // No halo with yourself
@@ -2347,6 +2455,13 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
         } 
       }
     } // end loop over all processors
+
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     t_end = TimingHelpers::timer();
+     oomph_info << "Time for second all-to-all: " 
+                << t_end-t_start << std::endl;
+    }
 
   } // end loop over interpolated values
 

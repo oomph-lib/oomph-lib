@@ -43,6 +43,7 @@
 #include<stdexcept>
 #include<iostream>
 #include<string>
+#include<vector>
 
 
 namespace oomph
@@ -60,6 +61,26 @@ namespace oomph
 //be used in erorr messages.
 #define OOMPH_EXCEPTION_LOCATION __FILE__ ":" OOMPH_TO_STRING(__LINE__)
 
+
+
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+///=====================================================================
+/// Namespace to control level of comprehensive timings
+//======================================================================
+ namespace Global_timings
+  {
+   /// \short Global boolean to switch on comprehensive timing -- can 
+   /// probably be declared const false when development on hector
+   /// is complete
+   extern bool Doc_comprehensive_timings;
+   
+  };
 
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
@@ -254,6 +275,29 @@ public:
  extern OutputModifier default_output_modifier;
 
 
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+//=======================================================================
+/// Namespace containing a vector of strings that can be used to
+/// to store global output modifiers. This is global data
+/// and you use it at your own risk!
+//=======================================================================
+namespace Global_string_for_annotation
+{
+
+ /// \short Return the i-th string or "" if the relevant string hasn't
+ /// been defined
+ extern std::string string(const unsigned& i);
+
+ /// \short Storage for strings that may be used for global annotations.
+ /// This is global data and you use it at your own risk!
+ extern std::vector<std::string> String;
+}
 
 
 ////////////////////////////////////////////////////////////////////////

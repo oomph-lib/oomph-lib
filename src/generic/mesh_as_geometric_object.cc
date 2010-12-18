@@ -35,6 +35,7 @@
 #include "mesh.h"
 #include "mesh_as_geometric_object.h"
 #include "multi_domain.h"
+
 #include <cstdio>
 
 namespace oomph
@@ -172,11 +173,25 @@ namespace oomph
     {
      // Find the maximum and minimum coordinates for the mesh
      get_min_and_max_coordinates(mesh_pt);
-
-     // Create the bin structure
-     create_bins_of_objects();
     }
-    
+   else
+    {
+     Min_coords[0] = Multi_domain_functions::X_min;
+     Max_coords[0] = Multi_domain_functions::X_max;
+     if (nlagrangian()>1)
+      {
+       Min_coords[1] = Multi_domain_functions::Y_min;
+       Max_coords[1] = Multi_domain_functions::Y_max;
+       if (nlagrangian()>2)
+        {
+         Min_coords[2] = Multi_domain_functions::Z_min;
+         Max_coords[2] = Multi_domain_functions::Z_max;
+        }
+      }
+    }
+
+   // Create the bin structure
+   create_bins_of_objects();
  }
 
 
@@ -599,11 +614,14 @@ namespace oomph
           int(Nbin[i]*(
                (global_coord[i] - Min_coords[i])/
                (Max_coords[i] - Min_coords[i])));
+
          //Buffer the case when the global coordinate is the maximum
          //value
          if(bin_number_i==Nbin[i]) {bin_number_i -= 1;}
+
          //Add to the bin number
          bin_number += multiplier*bin_number_i;
+
          //Sort out the multiplier
          multiplier *= Nbin[i];
         }

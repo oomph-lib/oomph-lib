@@ -201,9 +201,18 @@ void TrilinosAztecOOSolver::solve(DoubleMatrixBase* const& matrix_pt,
  Epetra_Vector* epetra_z_pt = TrilinosEpetraHelpers::
   create_distributed_epetra_vector(result);
 
+ double start_t_trilinos = TimingHelpers::timer();
+
  // solve the system
  solve_using_AztecOO(epetra_r_pt,epetra_z_pt);            
- 
+
+ double end_t_trilinos = TimingHelpers::timer();
+ if (this->doc_time())
+ {
+  oomph_info << "Time for trilinos solve itself                 : "
+             << end_t_trilinos-start_t_trilinos
+             << "s" << std::endl;
+ } 
  // Copy result to z
  TrilinosEpetraHelpers::copy_to_oomphlib_vector(epetra_z_pt,result);
 
@@ -224,7 +233,7 @@ void TrilinosAztecOOSolver::solve(DoubleMatrixBase* const& matrix_pt,
  // output timings and info
  if (this->doc_time())
  {
-  oomph_info << "Time for solve                        : "
+  oomph_info << "Time for complete trilinos solve                  : "
              << Linear_solver_solution_time
              << "s" << std::endl;
  } 
@@ -296,9 +305,15 @@ void TrilinosAztecOOSolver::solver_setup(DoubleMatrixBase* const& matrix_pt)
   }
 
  // create the matrix
+ // hierher: The matrix created here does not always work with oomph-lib's
+ // enumeration. Richard has written an alternative, 
+ // create_distributed_epetra_matrix_for_aztecoo() which gets the entries
+ // in the required order but totally and utterly kills trilinos' parallel
+ // performance. 
  double start_t_matrix = TimingHelpers::timer();
  Epetra_matrix_pt = TrilinosEpetraHelpers
-  ::create_distributed_epetra_matrix_for_aztecoo(cast_matrix_pt);
+  ::create_distributed_epetra_matrix(cast_matrix_pt,
+                                     cast_matrix_pt->distribution_pt());
 
  // record the end time and compute the matrix setup time
  double end_t_matrix = TimingHelpers::timer();

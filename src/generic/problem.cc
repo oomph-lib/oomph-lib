@@ -70,6 +70,7 @@ namespace oomph
   Jacobian_reuse_is_enabled(false), Jacobian_has_been_computed(false),
   Problem_is_nonlinear(true),
   Pause_at_end_of_sparse_assembly(false),
+  Doc_time_in_distribute(false),
   Sparse_assembly_method(Perform_assembly_using_vectors_of_pairs), 
   Sparse_assemble_with_arrays_initial_allocation(400),
   Sparse_assemble_with_arrays_allocation_increment(150),
@@ -372,6 +373,12 @@ namespace oomph
                             OOMPH_EXCEPTION_LOCATION);
        }
 
+      double t_start = 0;
+      if (Doc_time_in_distribute)
+       {
+        t_start=TimingHelpers::timer();
+       }
+
       // Need to partition the global mesh before distributing
       Mesh* global_mesh_pt = mesh_pt();
 
@@ -407,8 +414,27 @@ namespace oomph
       // Set the returned vector
       Element_partition=element_domain;
 
+      double t_end = 0.0;
+      if (Doc_time_in_distribute)
+       {
+        t_end=TimingHelpers::timer();
+        oomph_info << "Time for partitioning of global mesh: " 
+                   << t_end-t_start << std::endl;
+        t_start = TimingHelpers::timer();
+       }
+
       // Partitioning complete; call actions before distribute
       actions_before_distribute();
+
+      if (Doc_time_in_distribute)
+       {
+        t_end = TimingHelpers::timer();
+        oomph_info << "Time for actions before distribute: " 
+                   << t_end-t_start << std::endl;
+       }
+
+      // This next bit is cheap -- omit timing
+      // t_start = TimingHelpers::timer();
 
       // Number of submeshes (NB: some may have been deleted in
       //                          actions_after_distribute())
@@ -433,7 +459,15 @@ namespace oomph
          }
        }
 
-     
+//       t_end = TimingHelpers::timer();
+//       oomph_info << "Time for stuff: " 
+//                  << t_end-t_start << std::endl;
+
+      if (Doc_time_in_distribute)
+       {
+        t_start = TimingHelpers::timer();
+       }
+
       // Setup the map between "root" element and number in global mesh
       // (currently used in the load_balance() routines)
       unsigned n_element=global_mesh_pt->nelement();
@@ -467,11 +501,29 @@ namespace oomph
         // Rebuild the global mesh
         rebuild_global_mesh();
        }
+
+      if (Doc_time_in_distribute)
+       {      
+        t_end = TimingHelpers::timer();
+        oomph_info << "Time for mesh-level distribution: " 
+                   << t_end-t_start << std::endl;
+        t_start = TimingHelpers::timer();
+       }
+
       // Now the problem has been distributed
       Problem_has_been_distributed=true;
 
       // Call actions after distribute
       actions_after_distribute();
+
+      if (Doc_time_in_distribute)
+       {
+        t_end = TimingHelpers::timer();
+        oomph_info << "Time for actions after distribute: " 
+                   << t_end-t_start << std::endl;
+        t_start = TimingHelpers::timer();
+       }
+
 
       // Reset refinement level of all RefineableElements back to zero
       if (n_mesh==0)
@@ -506,9 +558,27 @@ namespace oomph
          }
        }
 
+      // this is cheap -- omit timing
+//       if (Doc_time_in_distribute)
+//        {
+//         t_end = TimingHelpers::timer();
+//         oomph_info << "Time for resetting refinement level: " 
+//                    << t_end-t_start << std::endl;
+        
+//         t_start = TimingHelpers::timer();
+//        }
+
       // Re-assign the equation numbers (incl synchronisation if reqd)
       oomph_info << "Number of equations: " << assign_eqn_numbers()
                  << std::endl;
+
+
+      if (Doc_time_in_distribute)
+       {
+        t_end = TimingHelpers::timer();
+        oomph_info << "Time for re-assigning eqn numbers (in distribute): " 
+                   << t_end-t_start << std::endl;
+       }
 
      } // end if to check for uniformly refined mesh(es)
 
@@ -1291,6 +1361,13 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
 #endif
    if (nmesh==0)
     {
+
+     double t_start = 0.0;
+     if (Global_timings::Doc_comprehensive_timings)
+      {
+       t_start=TimingHelpers::timer();
+      }
+
      // Cast to a refineable mesh and call synchronisation routine
      if(TreeBasedRefineableMeshBase* mmesh_pt = 
         dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(0)))
@@ -1302,6 +1379,16 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
                                            ncont_interpolated_values);
       }
 
+     double t_end = 0.0;
+     if (Global_timings::Doc_comprehensive_timings)
+      {
+       t_end=TimingHelpers::timer();
+       oomph_info 
+        << "Time for synchronise_hanging_nodes in assign_eqn_numbers: " 
+        << t_end-t_start << std::endl;
+       t_start = TimingHelpers::timer();
+      }
+
      // Now classify all the halo and haloed nodes
 #ifdef PARANOID 
      mesh_pt()->
@@ -1309,6 +1396,14 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
 #else
      mesh_pt()->classify_halo_and_haloed_nodes(this->communicator_pt());
 #endif
+
+     if (Global_timings::Doc_comprehensive_timings)
+      {
+       t_end = TimingHelpers::timer();
+       oomph_info 
+        << "Time for classify_halo_and_haloed_nodes in assign_eqn_numbers: " 
+        << t_end-t_start << std::endl;
+      }
 
 #ifdef PARANOID
      // Check that the halo schemes are okay if all eqn numbers 
@@ -1319,8 +1414,12 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
        // before calling check_halo_schemes
        synchronise_dofs(mesh_pt());
 
-       oomph_info << "Calling check_halo_schemes() from assign_eqn_numbers()"
-                  << std::endl << std::endl;
+       if (Global_timings::Doc_comprehensive_timings)
+        {
+         oomph_info << "Calling check_halo_schemes() from assign_eqn_numbers()"
+                    << std::endl << std::endl;
+        }
+
        check_halo_schemes();
       }
 #endif
@@ -1328,6 +1427,12 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
     }
    else // nmesh!=0
     {
+     double t_start = 0.0;
+     if (Global_timings::Doc_comprehensive_timings)
+      {
+       t_start=TimingHelpers::timer();
+      }
+
      // Check the synchronicity of hanging nodes for a refineable mesh
      // - In a multi-physics case this should be called for every mesh
      // - It is also possible that a single mesh contains different elements 
@@ -1359,6 +1464,16 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
          }
       }
 
+     double t_end = 0.0;
+     if (Global_timings::Doc_comprehensive_timings)
+      {
+       t_end=TimingHelpers::timer();
+       oomph_info 
+        << "Time for synchronise_hanging_nodes in assign_eqn_numbers: " 
+        << t_end-t_start << std::endl;
+       t_start = TimingHelpers::timer();
+      }
+
      // Now classify all halo/haloed nodes on each mesh in turn
      for (unsigned imesh=0;imesh<nmesh;imesh++)
       {
@@ -1368,6 +1483,14 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
 #else
        mesh_pt(imesh)->classify_halo_and_haloed_nodes(this->communicator_pt());
 #endif
+      }
+
+     if (Global_timings::Doc_comprehensive_timings)
+      {
+       t_end = TimingHelpers::timer();
+       oomph_info 
+        << "Time for classify_halo_and_haloed_nodes in assign_eqn_numbers: " 
+        << t_end-t_start << std::endl;
       }
 
 #ifdef PARANOID
@@ -1414,6 +1537,12 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
 
 #endif
 
+ double t_start = 0.0;
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_start=TimingHelpers::timer();
+  }
+
   //(Re)-set the dof pointer to zero length because entries are 
   //pushed back onto it -- if it's not reset here then we get into
   //trouble during mesh refinement when we reassign all dofs
@@ -1450,6 +1579,16 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
   }
 #endif
 
+
+ double t_end = 0.0;
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_end = TimingHelpers::timer();
+   oomph_info 
+    << "Time for complete setup of dependencies in assign_eqn_numbers: " 
+    << t_end-t_start << std::endl;
+  }
+
  //Now set equation numbers for the global Data
  unsigned Nglobal_data = nglobal_data();
  for(unsigned i=0;i<Nglobal_data;i++)
@@ -1468,6 +1607,11 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
                        OOMPH_EXCEPTION_LOCATION);
   }
    
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_start = TimingHelpers::timer();
+  }
+
  // Loop over the submeshes: Note we need to call the submeshes' own
  // assign_*_eqn_number() otherwise we miss additional functionality
  // that is implemented (e.g.) in SolidMeshes!
@@ -1505,6 +1649,15 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
   }
 
 
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_end = TimingHelpers::timer();
+   oomph_info 
+    << "Time for assign_local_eqn_numbers in assign_eqn_numbers: " 
+    << t_end-t_start << std::endl;
+   t_start = TimingHelpers::timer();
+  }
+
 #ifdef OOMPH_HAS_MPI
   // reset previous allocation
   Parallel_sparse_assemble_previous_allocation = 0;
@@ -1527,7 +1680,15 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
     Dof_distribution_pt->build(Communicator_pt,n_dof,false);
    }
 
-
+  
+  if (Global_timings::Doc_comprehensive_timings)
+   {
+    t_end = TimingHelpers::timer();
+    oomph_info 
+     << "Time for synchronise_eqn_numbers in assign_eqn_numbers: " 
+     << t_end-t_start << std::endl;
+   }
+  
   // resize the sparse assemble with arrays previous allocation
   Sparse_assemble_with_arrays_previous_allocation.resize(0);
  
@@ -10114,7 +10275,23 @@ void Problem::refine_selected_elements(const
 //========================================================================
 void Problem::refine_uniformly(DocInfo& doc_info)
 {
+
+ double t_start = 0.0;
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_start=TimingHelpers::timer();
+  }
+
  actions_before_adapt();
+
+ double t_end = 0.0;
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_end = TimingHelpers::timer();
+   oomph_info << "Time for actions before adapt: " 
+              << t_end-t_start << std::endl;
+   t_start = TimingHelpers::timer();
+  }
 
  // Number of submeshes?
  unsigned Nmesh=nsub_mesh();
@@ -10156,12 +10333,37 @@ void Problem::refine_uniformly(DocInfo& doc_info)
    rebuild_global_mesh();
   }
 
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_end = TimingHelpers::timer();
+   oomph_info << "Time for mesh-level refine_uniformly: " 
+              << t_end-t_start << std::endl;
+   t_start = TimingHelpers::timer();
+  }
+
  //Any actions after the adaptation phase
  actions_after_adapt();
+
+
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_end = TimingHelpers::timer();
+   oomph_info << "Time for actions before adapt: " 
+              << t_end-t_start << std::endl;
+   t_start = TimingHelpers::timer();
+  }
 
  //Do equation numbering
  oomph_info <<"Number of equations: " 
             << assign_eqn_numbers() << std::endl; 
+
+
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_end = TimingHelpers::timer();
+   oomph_info << "Time for eqn numbering in refine_uniformly: " 
+              << t_end-t_start << std::endl;
+  }
 
 }
 
@@ -11004,6 +11206,22 @@ long Problem::synchronise_eqn_numbers(const bool& assign_local_eqn_numbers)
  // number of processors
  unsigned nproc = Communicator_pt->nproc();
 
+//  // Time alternative communication
+//  Vector<unsigned> n_eqn(nproc);
+//  {
+//   double t_start = TimingHelpers::timer();
+
+//   // Gather numbers of equations (enumerated independently on all procs)
+//   MPI_Allgather(&my_n_eqn,1,MPI_UNSIGNED,&n_eqn[0],
+//                 1,MPI_INT,Communicator_pt->mpi_comm());
+  
+//   double t_end = TimingHelpers::timer();
+//   oomph_info << "Time for allgather-based exchange of eqn numbers: " 
+//              << t_end-t_start << std::endl;
+//  }
+
+ double t_start = TimingHelpers::timer();
+
  // send my_n_eqn to with rank greater than my_rank
  unsigned n_send = nproc-my_rank-1;
  Vector<MPI_Request> send_req(n_send);
@@ -11021,12 +11239,23 @@ long Problem::synchronise_eqn_numbers(const bool& assign_local_eqn_numbers)
             Communicator_pt->mpi_comm(),MPI_STATUS_IGNORE);
   }
 
+ double t_end = TimingHelpers::timer();
+ oomph_info << "Time for send and receive stuff: " 
+            << t_end-t_start << std::endl;
+ t_start = TimingHelpers::timer();
+ 
  // determine the number of equation on processors with rank
  // less than my_rank
  unsigned my_eqn_num_base = 0;
  for (unsigned p = 0; p < my_rank; p++)
   {
    my_eqn_num_base += n_eqn_on_proc[p];
+//   if (n_eqn_on_proc[p]!=n_eqn[p])
+//     {
+//      std::cout << "proc " << my_rank << "clash in eqn numbers: "
+//                << p << " " << n_eqn_on_proc[p] << " " << n_eqn[p]
+//                << std::endl;
+//     }
   }
 
  // Loop over all internal data (on elements) and bump up their
@@ -11099,6 +11328,12 @@ long Problem::synchronise_eqn_numbers(const bool& assign_local_eqn_numbers)
     }
   }
 
+ t_end = TimingHelpers::timer();
+ oomph_info << "Time for bumping: " 
+            << t_end-t_start << std::endl;
+ t_start = TimingHelpers::timer();
+
+
  // The following copies the halo(ed) eqn numbers, and therefore
  // needs to be called at a submesh level as the halo(ed) structure
  // is only visible at the submesh level
@@ -11119,11 +11354,22 @@ long Problem::synchronise_eqn_numbers(const bool& assign_local_eqn_numbers)
     }
   }
 
+
+ t_end = TimingHelpers::timer();
+ oomph_info << "Time for copy_haloed_eqn_numbers_helper: " 
+            << t_end-t_start << std::endl;
+ t_start = TimingHelpers::timer();
+
  // Also copy external haloed equation numbers
  for (unsigned i=0;i<nmesh;i++)
   {
    copy_external_haloed_eqn_numbers_helper(mesh_pt(i));
   }
+
+ t_end = TimingHelpers::timer();
+ oomph_info << "Time for copy_external_haloed_eqn_numbers_helper: " 
+            << t_end-t_start << std::endl;
+ t_start = TimingHelpers::timer();
 
  // Now the global equation numbers have been updated.
  //---------------------------------------------------
@@ -11149,12 +11395,25 @@ long Problem::synchronise_eqn_numbers(const bool& assign_local_eqn_numbers)
     }
   }
 
+
+ t_end = TimingHelpers::timer();
+ oomph_info << "Time for assign_local_eqn_numbers in sync: " 
+            << t_end-t_start << std::endl;
+ t_start = TimingHelpers::timer();
+
  // wait for the sends to complete
  if (n_send > 0)
   {
    Vector<MPI_Status> send_status(n_send);
    MPI_Waitall(n_send,&send_req[0],&send_status[0]);
   }
+
+
+ t_end = TimingHelpers::timer();
+ oomph_info << "Time for waitall: " 
+            << t_end-t_start << std::endl;
+ t_start = TimingHelpers::timer();
+
 
  // build the Dof distribution pt
  Dof_distribution_pt->build(Communicator_pt,my_eqn_num_base,
@@ -11290,6 +11549,8 @@ void Problem::copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
     }
   } //End of loop over processors
 }
+
+
 
 
 //=======================================================================

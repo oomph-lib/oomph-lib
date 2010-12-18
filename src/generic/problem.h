@@ -192,6 +192,7 @@ namespace oomph
  bool Default_set_initial_condition_called;
  
   protected:
+
  ///\short Vector of pointers to copies of the problem used in adaptive 
  ///bifurcation tracking problems (ALH: TEMPORARY HACK, WILL BE FIXED)
  Vector<Problem*> Copy_of_problem_pt;
@@ -477,6 +478,10 @@ protected:
  /// during sparse assemble process to assess peak memory 
  /// usage. Initialised to false (obviously!)
  bool Pause_at_end_of_sparse_assembly;
+
+ /// \short Protected boolean flag to provide comprehensive timimings
+ /// during problem distribution. Initialised to false.
+ bool Doc_time_in_distribute;
 
  /// \short Flag to determine which sparse assembly method to use
  /// By default we use assembly by vectors of pairs.

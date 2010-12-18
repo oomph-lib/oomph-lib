@@ -1656,6 +1656,7 @@ namespace oomph
                         "HypreInterface::hypre_solve()",
                         OOMPH_EXCEPTION_LOCATION);
    }
+
   // if the solution is setup make sure it has the same distribution as
   // the matrix as well
   if (z.built())
@@ -1674,7 +1675,7 @@ namespace oomph
 #endif
 
   // Switch off any timings for the solve
-  Output_info = false;
+  // hierher Output_info = false;
   
   // perform hypre_solve
   hypre_solve(r,z);

@@ -116,7 +116,10 @@ bool NewMumpsSolver::Suppress_incorrect_rhs_distribution_warning_in_resolve
   Mumps_struc_pt->icntl[2]=-1;
   
   //Only show error messages and stats
-  Mumps_struc_pt->icntl[3]=2;
+  Mumps_struc_pt->icntl[3]=2;// 4 for full doc; creates huge amount of output
+  
+  //Write matrix
+  // sprintf(Mumps_struc_pt->write_problem,"/work/e173/e173/mheil/matrix");
   
   // Assembled matrix (rather than element-by_element)
   Mumps_struc_pt->icntl[4]=0;
@@ -180,6 +183,9 @@ NewMumpsSolver::~NewMumpsSolver()
 void NewMumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
 {
 
+
+ // Initialise timer
+ double t_start = TimingHelpers::timer(); 
 
  // set the distribution
  DistributableLinearAlgebraObject* dist_matrix_pt=
@@ -256,14 +262,6 @@ void NewMumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
   {
    nproc = dist_matrix_pt->distribution_pt()->communicator_pt()->nproc();
   }
-
-// hierher
-//  unsigned nproc = this->distribution_pt()->communicator_pt()->nproc();
-//  if(dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt) != 0)
-//   {
-//    nproc = dynamic_cast<DistributableLinearAlgebraObject*>
-//     (matrix_pt)->distribution_pt()->communicator_pt()->nproc();
-//   }
    
  // Is it a CRDoubleMatrix?
  CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
@@ -282,6 +280,8 @@ void NewMumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
    // if the matrix is distributed then set up solver
    if ((nproc==1)||(cr_matrix_pt->distributed()))
     {
+     double t_start_copy = TimingHelpers::timer(); 
+
      // Find the number of rows and non-zero entries in the matrix
      const int nnz_loc = int(cr_matrix_pt->nnz());
      const int n = matrix_pt->nrow();
@@ -326,6 +326,16 @@ void NewMumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
        cr_matrix_pt->clear();
       }
 
+     if ((Doc_time) && 
+         (this->distribution_pt()->communicator_pt()->my_rank()==0))
+      {   
+       double t_end_copy = TimingHelpers::timer(); 
+       oomph_info 
+        << std::endl 
+        << "Time for copying matrix into NewMumpsSolver data structure [sec]       : "
+        << t_end_copy-t_start_copy << std::endl << std::endl;
+      }
+     
      // Call mumps factorisation
      //-------------------------
 
@@ -340,9 +350,23 @@ void NewMumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
      Mumps_struc_pt->jcn_loc=&Jcn_loc[0];
      Mumps_struc_pt->a_loc=&A_loc[0];
 
+     double t_start_analyse = TimingHelpers::timer(); 
+
      // Do analysis
      Mumps_struc_pt->job = 1;
      dmumps_c(Mumps_struc_pt);
+
+
+     if ((Doc_time) && 
+         (this->distribution_pt()->communicator_pt()->my_rank()==0))
+      {   
+       double t_end_analyse = TimingHelpers::timer(); 
+       oomph_info 
+        << std::endl 
+        << "Time for mumps analysis stage in NewMumpsSolver [sec]       : "
+        << t_end_analyse-t_start_analyse << std::endl << std::endl;
+      }
+     
 
      int my_rank=this->distribution_pt()->communicator_pt()->my_rank();
 
@@ -353,6 +377,8 @@ void NewMumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
                   << Mumps_struc_pt->infog[25] << std::endl;
       }
       
+     double t_start_factor = TimingHelpers::timer(); 
+
       // Loop until successfully factorised
       bool factorised=false;
       while (!factorised)
@@ -392,6 +418,17 @@ void NewMumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
           oomph_info << "Successfully completed factorisation in mumps\n";
          }
        }
+
+
+      if ((Doc_time) && 
+          (this->distribution_pt()->communicator_pt()->my_rank()==0))
+       {   
+        double t_end_factor = TimingHelpers::timer(); 
+        oomph_info 
+         << std::endl 
+         << "Time for actual mumps factorisation in NewMumpsSolver [sec]       : "
+         << t_end_factor-t_start_factor<< std::endl << std::endl;
+       }
     }
    // else the CRDoubleMatrix is not distributed
    else
@@ -417,6 +454,15 @@ void NewMumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
   }
 
 
+ if ((Doc_time) && (this->distribution_pt()->communicator_pt()->my_rank()==0))
+  {
+   
+   double t_end = TimingHelpers::timer(); 
+   oomph_info << std::endl 
+              << "Time for NewMumpsSolver factorisation [sec]       : "
+              << t_end-t_start << std::endl << std::endl;
+  }
+
  // Switch off docing again by setting output stream for global info on 
  // to negative number
  Mumps_struc_pt->icntl[2]=-1;
@@ -431,7 +477,9 @@ void NewMumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
  void NewMumpsSolver::backsub(const DoubleVector &rhs,
                               DoubleVector &result)
  {
-  
+
+  double t_start = TimingHelpers::timer(); 
+
 #ifdef PARANOID
   if (!Suppress_warning_about_MPI_COMM_WORLD)
    {
@@ -585,6 +633,14 @@ void NewMumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
   // Now copy the tmp_rhs vector into the (matching) result
   result = tmp_rhs;
   
+ if ((Doc_time) && (this->distribution_pt()->communicator_pt()->my_rank()==0))
+  {   
+   double t_end = TimingHelpers::timer(); 
+   oomph_info << std::endl 
+              << "Time for NewMumpsSolver backsub [sec]       : "
+              << t_end-t_start << std::endl << std::endl;
+  }
+
   // Switch off docing again by setting output stream for global info on 
   // to negative number
   Mumps_struc_pt->icntl[2]=-1;
@@ -742,15 +798,6 @@ void NewMumpsSolver::solve(DoubleMatrixBase* const &matrix_pt,
    this->build_distribution(rhs.distribution_pt());
   }
  
-// hierher
-//  // Setup the distribution of the solver to match that of the matrix
-//  if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt))
-//   {
-//    this->distribution_pt()
-//     ->build(dynamic_cast<DistributableLinearAlgebraObject*>
-//             (matrix_pt)->distribution_pt());
-//   }
-
  // Factorise the matrix
  factorise(matrix_pt);
  

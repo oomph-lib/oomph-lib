@@ -199,8 +199,7 @@ namespace oomph
     // compute first row
     for (int p=0;p<nproc;p++)
      {                                          
-      First_row[p] = unsigned(double(p*global_nrow)/ 
-                              double(nproc));                  
+      First_row[p] = unsigned((double(p)/double(nproc))*double(global_nrow)); 
      }             
     
     // compute local nrow
