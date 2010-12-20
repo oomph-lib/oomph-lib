@@ -1237,14 +1237,19 @@ namespace oomph
      Dof_number.resize(nlookup_rows);
      Index_in_dof_block.resize(nlookup_rows);
 
+#ifdef OOMPH_HAS_MPI
      // Check size of these (possibly enormous) arrays
-     unsigned max_nlookup_rows=0;
-     MPI_Allreduce(&nlookup_rows,&max_nlookup_rows,1,
-                   MPI_UNSIGNED,MPI_MAX,
-                   problem_pt->communicator_pt()->mpi_comm());
+     unsigned max_nlookup_rows=nlookup_rows;
+     if (problem_pt->communicator_pt()->nproc()>1)
+      {
+       MPI_Allreduce(&nlookup_rows,&max_nlookup_rows,1,
+                     MPI_UNSIGNED,MPI_MAX,
+                     problem_pt->communicator_pt()->mpi_comm());
+      }
      oomph_info << "Max. number of nlookup_rows on any processor: "
                 << max_nlookup_rows << std::endl;
-     
+#endif     
+
      // Set Mesh_pt to the Problem' Mesh if nobody has made any
      // other assigment
      if (Nmesh==0)
