@@ -9393,8 +9393,16 @@ void Problem::bifurcation_adapt_doc_errors(const unsigned &bifurcation_type)
 //======================================================================
 void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
 {
+
+ double t_start_total = 0.0;
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_start_total=TimingHelpers::timer();
+  }
+
  //Get the bifurcation type
  int bifurcation_type = this->Assembly_handler_pt->bifurcation_type();
+
  //If we are tracking a bifurcation then call the bifurcation adapt function
  if(bifurcation_type!=0)
   {
@@ -9407,8 +9415,23 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
  oomph_info << "Adapting problem:" << std::endl;
  oomph_info << "=================" << std::endl;
 
+ double t_start = 0.0;
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_start=TimingHelpers::timer();
+  }
+
  //Call the actions before adaptation
  actions_before_adapt();
+
+ double t_end = 0.0;
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_end = TimingHelpers::timer();
+   oomph_info << "Time for actions before adapt: " 
+              << t_end-t_start << std::endl;
+   t_start = TimingHelpers::timer();
+  }
 
  // Initialise counters
  n_refined=0;
@@ -9576,12 +9599,41 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
 
   } 
 
+
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_end = TimingHelpers::timer();
+   oomph_info << "Time for actual adaptation: " 
+              << t_end-t_start << std::endl;
+   t_start = TimingHelpers::timer();
+  }
+
  //Any actions after adapt
  actions_after_adapt();
+
+
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_end = TimingHelpers::timer();
+   oomph_info << "Time for actions after adapt: " 
+              << t_end-t_start << std::endl;
+   t_start = TimingHelpers::timer();
+  }
 
  //Attach the boundary conditions to the mesh
  oomph_info <<"\nNumber of equations: " << assign_eqn_numbers() 
             << std::endl<< std::endl; 
+
+
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_end = TimingHelpers::timer();
+   oomph_info << "Time for re-assigning eqn numbers after adapt: " 
+              << t_end-t_start << std::endl;
+   oomph_info << "Total time for adapt: " 
+              << t_end-t_start_total << std::endl;
+  }
+
 
 }
 

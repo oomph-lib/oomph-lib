@@ -319,11 +319,13 @@ namespace oomph
      mesh_geom_obj_pt->create_bins_of_objects();
     }
 
+   double t_setup_lookups=0.0;
    if (Doc_timings) 
     {
      t_set=TimingHelpers::timer();
      oomph_info << "CPU for bin creation: "
                 << t_set-t_start << std::endl;
+     t_setup_lookups=TimingHelpers::timer();
     }
 
    // Total number of integration points
@@ -356,6 +358,16 @@ namespace oomph
         }
       }
     }
+
+
+   if (Doc_timings) 
+    {
+     double t=TimingHelpers::timer();
+     oomph_info 
+      << "CPU for setup of lookup schemes for located elements/coords: "
+      << t_setup_lookups-t << std::endl;
+    }
+
 
    /// Loop over "spirals" from here instead; increment the "level"
    /// and pass it in to the relevant locate_* functions
@@ -729,8 +741,9 @@ namespace oomph
    if (Doc_timings)
     {
      t_locate=TimingHelpers::timer();
-     oomph_info << "CPU for location and creation of all external elements: "
-                << t_locate-t_start << std::endl;
+     oomph_info 
+      << "Total CPU for location and creation of all external elements: "
+      << t_locate-t_start << std::endl;
     }
 
    // Delete the geometric object representing the mesh
@@ -819,6 +832,15 @@ namespace oomph
    // NB this only needs to be called in parallel
    if (Check_for_duplicates)
     {
+
+
+     // Doc timings if required
+     double tt=0.0;
+     if (Doc_timings)
+      {
+       tt=TimingHelpers::timer();
+      }
+
      // Only necessary to do this on a multi-processor job
      if (n_proc!=1)
       {
@@ -832,9 +854,28 @@ namespace oomph
          problem_pt->assign_eqn_numbers(false);
         }
 
+       // Doc timings if required
+       if (Doc_timings)
+        {
+          oomph_info 
+           << "Total CPU for assign_eqn_numbers before remove_duplicate_data: "
+           << TimingHelpers::timer()-tt << std::endl;
+          tt=TimingHelpers::timer();
+         }
+
+
        // Must remove duplicates from both meshes in a two-way interaction
        remove_duplicate_data(problem_pt,external_mesh_pt);
        remove_duplicate_data(problem_pt,mesh_pt);
+
+       // Doc timings if required
+       if (Doc_timings)
+        {
+          oomph_info 
+           << "Total CPU for remove_duplicate_data: "
+           << TimingHelpers::timer()-tt << std::endl;
+          tt=TimingHelpers::timer();
+        }
       }
     }
 #endif
@@ -843,7 +884,7 @@ namespace oomph
    if (Doc_timings)
     {
      t_end=TimingHelpers::timer();
-     oomph_info << "CPU for setup_multi_domain_interaction: "
+     oomph_info << "CPU for (one way) aux_setup_multi_domain_interaction: "
                 << t_end-t_start << std::endl;
     }
 
