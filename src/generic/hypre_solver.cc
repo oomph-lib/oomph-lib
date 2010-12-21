@@ -1675,7 +1675,7 @@ namespace oomph
 #endif
 
   // Switch off any timings for the solve
-  // hierher Output_info = false;
+  Output_info = false;
   
   // perform hypre_solve
   hypre_solve(r,z);

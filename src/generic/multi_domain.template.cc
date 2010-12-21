@@ -567,9 +567,9 @@ namespace oomph
 #endif
          
          // If all_count_zetas is now zero then break out of the spirals loop
-         oomph_info 
-          << "Number of unlocated integration points in stage " << iproc
-          << " of ring communication " << all_count_zetas << std::endl;
+//          oomph_info 
+//           << "Number of unlocated integration points in stage " << iproc
+//           << " of ring communication " << all_count_zetas << std::endl;
          if (all_count_zetas==0) 
           {
            //oomph_info << "bailing out\n";     // hierher      

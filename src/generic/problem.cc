@@ -11291,11 +11291,15 @@ long Problem::synchronise_eqn_numbers(const bool& assign_local_eqn_numbers)
             Communicator_pt->mpi_comm(),MPI_STATUS_IGNORE);
   }
 
- double t_end = TimingHelpers::timer();
- oomph_info << "Time for send and receive stuff: " 
-            << t_end-t_start << std::endl;
- t_start = TimingHelpers::timer();
- 
+ double t_end = 0.0;
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_end=TimingHelpers::timer();
+   oomph_info << "Time for send and receive stuff: " 
+              << t_end-t_start << std::endl;
+   t_start = TimingHelpers::timer();
+  }
+
  // determine the number of equation on processors with rank
  // less than my_rank
  unsigned my_eqn_num_base = 0;
@@ -11380,11 +11384,14 @@ long Problem::synchronise_eqn_numbers(const bool& assign_local_eqn_numbers)
     }
   }
 
- t_end = TimingHelpers::timer();
- oomph_info << "Time for bumping: " 
-            << t_end-t_start << std::endl;
- t_start = TimingHelpers::timer();
 
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_end = TimingHelpers::timer();
+   oomph_info << "Time for bumping: " 
+              << t_end-t_start << std::endl;
+   t_start = TimingHelpers::timer();
+  }
 
  // The following copies the halo(ed) eqn numbers, and therefore
  // needs to be called at a submesh level as the halo(ed) structure
@@ -11407,10 +11414,13 @@ long Problem::synchronise_eqn_numbers(const bool& assign_local_eqn_numbers)
   }
 
 
- t_end = TimingHelpers::timer();
- oomph_info << "Time for copy_haloed_eqn_numbers_helper: " 
-            << t_end-t_start << std::endl;
- t_start = TimingHelpers::timer();
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_end = TimingHelpers::timer();
+   oomph_info << "Time for copy_haloed_eqn_numbers_helper: " 
+              << t_end-t_start << std::endl;
+   t_start = TimingHelpers::timer();
+  }
 
  // Also copy external haloed equation numbers
  for (unsigned i=0;i<nmesh;i++)
@@ -11418,10 +11428,14 @@ long Problem::synchronise_eqn_numbers(const bool& assign_local_eqn_numbers)
    copy_external_haloed_eqn_numbers_helper(mesh_pt(i));
   }
 
- t_end = TimingHelpers::timer();
- oomph_info << "Time for copy_external_haloed_eqn_numbers_helper: " 
-            << t_end-t_start << std::endl;
- t_start = TimingHelpers::timer();
+
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_end = TimingHelpers::timer();
+   oomph_info << "Time for copy_external_haloed_eqn_numbers_helper: " 
+              << t_end-t_start << std::endl;
+   t_start = TimingHelpers::timer();
+  }
 
  // Now the global equation numbers have been updated.
  //---------------------------------------------------
@@ -11447,11 +11461,13 @@ long Problem::synchronise_eqn_numbers(const bool& assign_local_eqn_numbers)
     }
   }
 
-
- t_end = TimingHelpers::timer();
- oomph_info << "Time for assign_local_eqn_numbers in sync: " 
-            << t_end-t_start << std::endl;
- t_start = TimingHelpers::timer();
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_end = TimingHelpers::timer();
+   oomph_info << "Time for assign_local_eqn_numbers in sync: " 
+              << t_end-t_start << std::endl;
+   t_start = TimingHelpers::timer();
+  }
 
  // wait for the sends to complete
  if (n_send > 0)
@@ -11460,12 +11476,13 @@ long Problem::synchronise_eqn_numbers(const bool& assign_local_eqn_numbers)
    MPI_Waitall(n_send,&send_req[0],&send_status[0]);
   }
 
-
- t_end = TimingHelpers::timer();
- oomph_info << "Time for waitall: " 
-            << t_end-t_start << std::endl;
- t_start = TimingHelpers::timer();
-
+ if (Global_timings::Doc_comprehensive_timings)
+  {
+   t_end = TimingHelpers::timer();
+   oomph_info << "Time for waitall: " 
+              << t_end-t_start << std::endl;
+   t_start = TimingHelpers::timer();
+  }
 
  // build the Dof distribution pt
  Dof_distribution_pt->build(Communicator_pt,my_eqn_num_base,
