@@ -1383,6 +1383,18 @@ int main(int argc, char* argv[])
       {
        cout << "\n\n\n LOAD BALANCING \n\n\n";
        
+       // Output problem before load balance
+       {
+        unsigned backup_number=problem.doc_info().number();
+        problem.doc_info().number()--;
+        oomph_info << "Outptting before load balance " 
+                   << problem.doc_info().number() << std::endl;
+        problem.doc_info().set_directory("RESLT_after_load_balance");
+        problem.doc_solution();
+        problem.doc_info().number()=backup_number;
+        problem.doc_info().set_directory("RESLT");
+       }
+
        // Load balance
        element_partition=problem.load_balance(); 
        

@@ -193,6 +193,10 @@ public:
    actions_after_adapt();
   }
 
+ /// Helper function to build mesh (needed during load balancing and
+ /// also used by constructor)
+ void build_mesh();
+
  /// Doc the solution
  void doc_solution();
 
@@ -223,6 +227,26 @@ private:
 //====================================================================== 
 template<class ELEMENT>
 PrescribedBoundaryDisplacementProblem<ELEMENT>::PrescribedBoundaryDisplacementProblem() 
+{
+ // Create the mesh
+ build_mesh();
+
+ // Setup equation numbering scheme
+ cout << "Number of dofs: " << assign_eqn_numbers() << std::endl; 
+
+ // Set output directory
+ Doc_info.set_directory("RESLT");
+
+} //end of constructor
+
+
+
+//===========start_of_build_mesh======================================== 
+/// Helper function to build mesh. Required during load balancing and
+/// also called from problem constructor.
+//====================================================================== 
+template<class ELEMENT>
+void PrescribedBoundaryDisplacementProblem<ELEMENT>::build_mesh()
 {
 
  // Create the mesh
@@ -274,7 +298,7 @@ PrescribedBoundaryDisplacementProblem<ELEMENT>::PrescribedBoundaryDisplacementPr
 
  // Build combined "global" mesh
  build_global_mesh();
- 
+
  // Pin nodal positions on all boundaries apart from the top one (2) 
  for (unsigned b=0;b<4;b++)
   {
@@ -294,14 +318,8 @@ PrescribedBoundaryDisplacementProblem<ELEMENT>::PrescribedBoundaryDisplacementPr
  // Pin the redundant solid pressures (if any)
  PVDEquationsBase<2>::pin_redundant_nodal_solid_pressures(
   solid_mesh_pt()->element_pt());
-
- // Setup equation numbering scheme
- cout << "Number of dofs: " << assign_eqn_numbers() << std::endl; 
-
- // Set output directory
- Doc_info.set_directory("RESLT");
-
-} //end of constructor
+ 
+} //end of build mesh function
 
 
 //=====================start_of_actions_before_adapt======================
@@ -455,6 +473,7 @@ void PrescribedBoundaryDisplacementProblem<ELEMENT>::doc_solution()
  // Number of plot points
  unsigned n_plot = 5; 
 
+ oomph_info << "Outputting for step: " << Doc_info.number() << "\n";
 
  // Output shape of deformed body
  //------------------------------
@@ -501,10 +520,34 @@ int main(int argc, char* argv[])
  MPI_Helpers::init(argc,argv);
 #endif
  
+
+ // Store command line arguments
+ CommandLineArgs::setup(argc,argv);
+
+ // Define possible command line arguments and parse the ones that
+ // were actually specified
+ 
+ // Validation run?
+ CommandLineArgs::specify_command_line_flag("--validation");
+ 
+ // Parse command line
+ CommandLineArgs::parse_and_assign(); 
+ 
+ // Doc what has actually been specified on the command line
+ CommandLineArgs::doc_specified_flags();
+
  //Set up the problem
  PrescribedBoundaryDisplacementProblem<RefineableQPVDElement<2,3> > problem;
 
+ // Validation run
+ if (CommandLineArgs::command_line_flag_has_been_set("--validation"))
+  {
+   // Fake but repeatable load balancing for self-test
+   problem.use_default_partition_in_load_balance()=true;
+  }
+
 #ifdef OOMPH_HAS_MPI
+
  // Distribute the problem
  DocInfo mesh_doc_info;
  mesh_doc_info.set_directory("RESLT_MESH");
@@ -532,6 +575,7 @@ int main(int argc, char* argv[])
  bool report_stats=false;
  problem.distribute(element_partition,mesh_doc_info,report_stats);
  problem.check_halo_schemes(mesh_doc_info);
+
 #endif
  
  // Doc initial domain shape
@@ -562,6 +606,25 @@ int main(int argc, char* argv[])
    problem.solid_mesh_pt()->set_lagrangian_nodal_coordinates();
    
   }
+
+ oomph_info << "Load balancing \n";
+
+ // Load balance and re-solve without further adaptation
+ problem.load_balance();
+ problem.newton_solve();
+ 
+ // Doc solution
+ problem.doc_solution();
+
+
+ // Increment imposed boundary displacement yet again...
+ Global_Physical_Variables::Boundary_geom_object.ampl()+=0.1;
+
+ // ...and re-solve for a final time
+ problem.newton_solve();
+ 
+ // Doc solution
+ problem.doc_solution();
  
 #ifdef OOMPH_HAS_MPI
  MPI_Helpers::finalize();

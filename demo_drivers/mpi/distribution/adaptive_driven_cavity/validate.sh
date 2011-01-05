@@ -4,6 +4,11 @@
 #Set the number of tests to be checked
 NUM_TESTS=4
 
+#MPI_RUN_COMMAND=`echo $MPI_RUN_COMMAND --output-filename output `
+#echo $MPI_RUN_COMMAND
+
+
+
 # Doc what we're using to run tests on two processors
 echo " " 
 echo "Running mpi tests with mpi run command: " $MPI_RUN_COMMAND

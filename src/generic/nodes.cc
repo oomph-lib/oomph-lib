@@ -756,12 +756,12 @@ void Data::add_values_to_vector(Vector<double> &vector_of_values)
 {
  //Find the number of stored values
  const unsigned n_value = this->nvalue();
+
  //If no values are stored then return immediately
  if(n_value==0) {return;}
 
  //Find the number of stored time data
  const unsigned n_tstorage = this->ntstorage();
-
 
  //Resize the vector to accommodate the new data
  const unsigned n_current_value = vector_of_values.size();
@@ -769,8 +769,10 @@ void Data::add_values_to_vector(Vector<double> &vector_of_values)
 
  //Now add the data to the vector
  unsigned index = n_current_value;
+
  //Pointer to the first entry in the data array
  double* data_pt = Value[0];
+
  //Loop over values
  for(unsigned i=0;i<n_value;i++)
   {
@@ -779,6 +781,7 @@ void Data::add_values_to_vector(Vector<double> &vector_of_values)
     {
      //Add the data to the vector
      vector_of_values[index] = *data_pt;
+
      //Increment the counter and the pointer
      ++index;
      ++data_pt;
@@ -806,9 +809,9 @@ void Data::read_values_from_vector(const Vector<double> &vector_of_values,
  //Find the number of stored time data
  const unsigned n_tstorage = this->ntstorage();
 
-
  //Pointer to the first entry in the data array
  double* data_pt = Value[0];
+
  //Loop over values
  for(unsigned i=0;i<n_value;i++)
   {
@@ -2222,6 +2225,7 @@ void Node::add_values_to_vector(Vector<double> &vector_of_values)
 
   //Find the number of stored time data for the position
  const unsigned n_tstorage = this->position_time_stepper_pt()->ntstorage();
+
  //Find the total amount of storage required for the position variables
  const unsigned n_storage = this->ndim()*this->nposition_type();
 
@@ -2231,8 +2235,10 @@ void Node::add_values_to_vector(Vector<double> &vector_of_values)
  
  //Now add the data to the vector
  unsigned index = n_current_value;
+
  //Pointer to the first entry in the data array
  double* data_pt = X_position[0];
+
  //Loop over values
  for(unsigned i=0;i<n_storage;i++)
   {
@@ -2258,12 +2264,12 @@ void Node::read_values_from_vector(const Vector<double> &vector_of_values,
  //Read the standard nodal data
  Data::read_values_from_vector(vector_of_values,index);
 
-
- //Now read the additional position data to the vector
+  //Now read the additional position data to the vector
  
  //Find the number of stored time data for the position
  const unsigned n_tstorage = this->position_time_stepper_pt()->ntstorage();
- //Find the total amount of storage required for the position variables
+ 
+//Find the total amount of storage required for the position variables
  const unsigned n_storage = this->ndim()*this->nposition_type();
 
  //Pointer to the first entry in the data array

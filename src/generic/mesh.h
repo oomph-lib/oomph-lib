@@ -337,9 +337,8 @@ public:
 /// it's in charge of these...
  void flush_element_and_node_storage()
  {
-  //Clear vectors of pointers to the nodes and elements
-  Node_pt.clear();
-  Element_pt.clear();
+  flush_element_storage();
+  flush_node_storage();
  }
 
 /// \short Flush storage for elements (only) by emptying the
@@ -355,6 +354,13 @@ public:
  void flush_element_storage()
  {
   Element_pt.clear();
+ }
+
+/// \short Flush storage for nodes (only) by emptying the
+/// vectors that store the pointers to them.
+ void flush_node_storage()
+ {
+  Node_pt.clear();
  }
 
  /// Return pointer to global node n

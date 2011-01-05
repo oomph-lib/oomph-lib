@@ -3460,7 +3460,7 @@ class FaceElement: public virtual FiniteElement
      BoundaryNodeBase *bnod_pt = 
       dynamic_cast<BoundaryNodeBase*>(node_pt(j));
  
-     // create storage, if it doesn't already exist, for the map 
+     // Create storage, if it doesn't already exist, for the map 
      // that will contain the position of the first entry of 
      // this face element's additional values, 
      if(bnod_pt->index_of_first_value_assigned_by_face_element_pt()==0)
@@ -3469,11 +3469,11 @@ class FaceElement: public virtual FiniteElement
         new std::map<unsigned, unsigned>; 
       }
        
-     // get pointer to the map
+     // Get pointer to the map
      std::map<unsigned, unsigned>* map_pt=
       bnod_pt->index_of_first_value_assigned_by_face_element_pt();
        
-     // we only resize the node values Vector if we haven't done it yet
+     // We only resize the node values Vector if we haven't done it yet
      std::map<unsigned, unsigned>::const_iterator p=map_pt->find(id);
 
      if(p==map_pt->end())
@@ -3490,12 +3490,12 @@ class FaceElement: public virtual FiniteElement
        (*map_pt)[id]= n_values;
          
        //Read out the number of additional values
-       unsigned Nadditional = nadditional_values[j];
+       unsigned n_additional = nadditional_values[j];
 
        // resize the node vector of values
-       if( Nadditional > 0)
+       if( n_additional > 0)
         {
-         nod_pt->resize(n_values + Nadditional);
+         nod_pt->resize(n_values + n_additional);
         }
       }
     }

@@ -471,10 +471,12 @@ namespace oomph
       // Setup the map between "root" element and number in global mesh
       // (currently used in the load_balance() routines)
       unsigned n_element=global_mesh_pt->nelement();
+      Base_mesh_element_pt.resize(n_element);
       for (unsigned e=0;e<n_element;e++)
        {
-        //FiniteElement* el_pt=mesh_pt()->finite_element_pt(e);
-        Base_mesh_element_number[global_mesh_pt->element_pt(e)]=e;
+        GeneralisedElement* el_pt=global_mesh_pt->element_pt(e);
+        Base_mesh_element_number[el_pt]=e;
+        Base_mesh_element_pt[e]=el_pt;
        }
 
       // Distribute the (sub)meshes (i.e. sort out their halo lookup schemes)
@@ -10995,22 +10997,25 @@ void Problem::synchronise_all_dofs()
 //========================================================================
 ///  Synchronise the degrees of freedom by overwriting
 /// the haloed values with their non-halo counterparts held
-/// on other processors. This works on the (sub)mesh argument
+/// on other processors. This works on the (sub)mesh specified by
+/// the argument
 //========================================================================
 void Problem::synchronise_dofs(Mesh* &mesh_pt)
 { 
  // Local storage for number of processors and current processor
  const int n_proc=this->communicator_pt()->nproc();
+
  //If only one processor then return
  if(n_proc==1) {return;}
+
  const int my_rank=this->communicator_pt()->my_rank();
-
-
 
  // Storage for number of data to be sent to each processor
  Vector<int> send_n(n_proc,0);
+
  // Storage for all values to be sent to all processors
  Vector<double> send_data;
+
  // Start location within send_data for data to be sent to each processor 
  Vector<int> send_displacement(n_proc,0);
 
@@ -11030,8 +11035,7 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
      for (unsigned n=0;n<n_nod;n++)
       {
        //Add the data for each haloed node to the vector
-       mesh_pt->haloed_node_pt(rank,n)->
-        add_values_to_vector(send_data);
+       mesh_pt->haloed_node_pt(rank,n)->add_values_to_vector(send_data);
       }
      
      // Now loop over haloed elements and prepare to add their 
@@ -11099,7 +11103,7 @@ void Problem::synchronise_dofs(Mesh* &mesh_pt)
      // parts live on processor send_rank?
      unsigned n_nod=mesh_pt->nhalo_node(send_rank);
      for (unsigned n=0;n<n_nod;n++)
-      {
+      {       
        //Read in values for each halo node
        mesh_pt->halo_node_pt(send_rank,n)->
         read_values_from_vector(receive_data,count);
@@ -11749,23 +11753,27 @@ void Problem::copy_external_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
 
 
 //==========================================================================
-/// Balance the load of a (possibly non-uniform) mesh that has
-/// already been distributed, by redistributing elements over the processors. 
-/// Produce explicit stats of load balancing
-/// process if boolean is set to true and doc various bits of data
-/// (mainly for debugging in directory specified by DocInfo object.
-/// Returns the new partitioning 
-/// of the elements in the mesh produced by Problem::build_mesh(). 
-/// This can be used in restarts, say.
+/// Balance the load of a (possibly non-uniformly refined) problem that has
+/// already been distributed, by re-distributing elements over the processors. 
+/// Produce explicit stats of load balancing process if boolean, report_stats,
+/// is set to true and doc various bits of data (mainly for debugging) 
+/// in directory specified by DocInfo object.  Returns the new partitioning 
+/// of the elements in the base mesh produced by Problem::build_mesh(), so that
+/// the e-th entry in the vector returned by this function contains the
+/// target domain of the e-th element in that mesh before it's being 
+/// distributed. This information can be used in restarts, say.
 //==========================================================================
 Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
                                        const bool& report_stats)
 {
- // Number of processes
- unsigned n_proc=this->communicator_pt()->nproc();
 
- // Storage for partitioning of elements in "root mesh"
+ // Storage for actual distribution of elements in the order in which
+ // they appear in the non-distributed base mesh. This information
+ // is to be returned by this function.
  Vector<unsigned> actual_element_partition;
+ 
+ // Number of processes
+ const unsigned n_proc=this->communicator_pt()->nproc();
  
  // Don't do anything if this is a single-process job
  if (n_proc==1) 
@@ -11797,7 +11805,7 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
                          OOMPH_EXCEPTION_LOCATION);
     }
    
-   // Timing
+   // Timings
    double t_start=0.0; double t_metis=0.0; double t_partition=0.0; 
    double t_distribute=0.0; double t_refine=0.0; double t_copy_solution=0.0;
    
@@ -11806,7 +11814,11 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
      t_start=TimingHelpers::timer();
     }
    
-   // Store the old mesh(es)
+
+   // Store pointers to the old mesh(es) so we retain a handle
+   //---------------------------------------------------------
+   // to them for deletion
+   //---------------------
    Vector<Mesh*> old_mesh_pt;
    unsigned n_mesh=nsub_mesh();
    if (n_mesh==0)
@@ -11821,8 +11833,16 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
       }
     }
    
+
    // Partition the global mesh in its current state
-   Vector<unsigned> element_domain_on_this_proc;
+   //-----------------------------------------------
+
+   // target_domain_for_local_non_halo_element[e] contains the number
+   // of the domain [0,1,...,nproc-1] to which non-halo element e on THE
+   // CURRENT PROCESSOR ONLY has been assigned. The order of the non-halo
+   // elements is the same as in the Problem's mesh, with the halo
+   // elements being skipped.
+   Vector<unsigned> target_domain_for_local_non_halo_element;
 
    // Metis does not always produce repeatable results which is
    // a disaster for validation runs -- this bypasses metis and
@@ -11833,7 +11853,7 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
      unsigned objective=0; 
      bool bypass_metis=true;
      METIS::partition_distributed_mesh(this,objective,
-                                       element_domain_on_this_proc,
+                                       target_domain_for_local_non_halo_element,
                                        bypass_metis);
     }
    else
@@ -11841,7 +11861,7 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
      // Use METIS to perform the partitioning
      unsigned objective=0; 
      METIS::partition_distributed_mesh(this,objective,
-                                       element_domain_on_this_proc);
+                                       target_domain_for_local_non_halo_element);
     }
 
    if (report_stats)
@@ -11850,59 +11870,75 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
     }
    
    // Load balancing is equivalent to distribution so call the
-   // appropriate "actions before"
+   // appropriate "actions before". NOTE: This acts on the 
+   // current, refined, distributed, etc. problem object
+   // before it's being wiped. This step is therefore not 
+   // a duplicate of the call below, which acts on the
+   // new, not-yet refined, distributed etc. problem!
    actions_before_distribute();
 
-   // Overall strategy: Each processor loops over all its non-halo
-   // (leaf) elements and associates each with its root. While
-   // doing this we accumulate all the double and unsigned data
-   // (in the order encountered) that must be sent when the entire
-   // tree rooted at a given root is to be sent to another processor.
-   // This is quite wasteful in terms of storage (nodes tend to
-   // encountered/stored repeatedly but this was all that Andy had time
-   // for before the end of his project -- I'm annotating the
-   // logic to facilitate a much leaner re-implementation. 
-   // (the basic idea is correct!)
 
-   // Storage for refinement pattern: 
-   // hierher? to_be_refined_on_each_root[root_id][refinement_level]
-   Vector<Vector<Vector<unsigned> > > to_be_refined_on_each_root;
+   // Extract data to be sent to various processors after the
+   //--------------------------------------------------------
+   // problem has been rebuilt/re-distributed
+   //----------------------------------------
 
-   // Storage for doubles encountered when looping (in order)
-   // through all the elements associated with given root
-   Vector<Vector<double> > double_values_on_each_root;
+   // Storage for number of data to be sent to each processor
+   Vector<int> send_n(n_proc,0);
 
-   // Storage for unsigneds encountered when looping (in order)
-   // through all the elements associated with given root
-   Vector<Vector<unsigned> > unsigned_values_on_each_root;
+   // Storage for all values to be sent to all processors
+   Vector<double> send_data;
 
-   // Ultimate target partition for each element in (global) mesh
-   // when it's been rebuilt by build_mesh()
-   Vector<unsigned> element_partition;
+   // Start location within send_data for data to be sent to each processor 
+   Vector<int> send_displacement(n_proc,0);
 
-   // Maximum overall refinement level
-   unsigned max_level_overall=0;
+   // Old and new domains for each base element (available for all, for
+   // convenience)
+   Vector<unsigned> old_domain_for_base_element;
+   Vector<unsigned> new_domain_for_base_element;
 
-   // Call helper function to calculate partitioning and refinement;
-   // also accumulate double and unsigned values required to copy solution
-   // from old mesh(es) to new mesh(es)
-   work_out_partition_and_refinement_for_root_elements_helper
-    (element_domain_on_this_proc, 
-     to_be_refined_on_each_root,
-     double_values_on_each_root, 
-     unsigned_values_on_each_root,
-     element_partition, 
-     max_level_overall, 
-     report_stats);
+   // Flat-packed refinement info, labeled by id of locally 
+   // available root elements
+   std::map<unsigned, Vector<unsigned> > flat_packed_refinement_info_for_root;
 
+   // Max. level of refinement
+   unsigned max_refinement_level_overall=0;
+
+   // Extract data from current problem
+   // sorted into data to be sent to various processors after 
+   // rebuilding the meshes in a load-balanced form
+   get_data_to_be_sent_during_load_balancing
+    (target_domain_for_local_non_halo_element, 
+     send_n, 
+     send_data,
+     send_displacement, 
+     old_domain_for_base_element,
+     new_domain_for_base_element,
+     max_refinement_level_overall);
+   
+   // Extract flat-packed refinement pattern
+   get_flat_packed_refinement_pattern_for_load_balancing(
+    old_domain_for_base_element,
+    new_domain_for_base_element,
+    max_refinement_level_overall,
+    flat_packed_refinement_info_for_root);
+   
    if (report_stats) 
     {
      t_partition=TimingHelpers::timer();
      oomph_info << "CPU for partition calculation for roots: "
                 << t_partition-t_metis << std::endl;
     }
+   
 
-   // Flush and delete submeshes; null the global mesh
+   // Flush and delete old submeshes and null the global mesh
+   //--------------------------------------------------------
+   // and rebuild the new (not yet distributed, refined etc.) mesh
+   //-------------------------------------------------------------
+   // that will be distributed in the new, improved way determined
+   //-------------------------------------------------------------
+   // by METIS
+   //---------
    if (n_mesh==0)
     {
      delete old_mesh_pt[0];
@@ -11921,17 +11957,23 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
    // state it was in when it was first distributed!
    build_mesh();
    
-   // Perform any actions before distribution but now for the new mesh!
+   // Perform any actions before distribution but now for the new mesh
+   // NOTE: This does NOT replicate the actions_before_distribute()
+   // call made above for the previous mesh!
    actions_before_distribute();
    
-   // Distribute the mesh(es) based on the distribution of their 
-   // "root element" determined earlier
-   
-   // Prepare vector of vectors for submesh element partitions
-   Vector<Vector<unsigned> > submesh_element_partition(n_mesh);
-   
-   // The submeshes, if they exist, need to know their own element domains
+
+
+   // Do some book-keeping
+   //---------------------
+
+   // Re-assign number of submeshes -- when this was first
+   // set, the problem may have had face meshes that have now
+   // disappeared.
    n_mesh=nsub_mesh();
+
+   // The submeshes, if they exist, need to know their own element domains
+   Vector<Vector<unsigned> > submesh_element_partition(n_mesh);
    if (n_mesh!=0)
     {
      unsigned count=0;
@@ -11941,7 +11983,8 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
        submesh_element_partition[i_mesh].resize(nsub_elem);
        for (unsigned e=0; e<nsub_elem; e++)
         {
-         submesh_element_partition[i_mesh][e]=element_partition[count];
+         submesh_element_partition[i_mesh][e]=
+          new_domain_for_base_element[count];
          count++;
         }
       }
@@ -11949,16 +11992,25 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
    
    // Setup the map between "root" element and number in global mesh again
    unsigned n_element=mesh_pt()->nelement();
+   Base_mesh_element_pt.resize(n_element);
    for (unsigned e=0;e<n_element;e++)
     {
      GeneralisedElement* el_pt=mesh_pt()->element_pt(e);
      Base_mesh_element_number[el_pt]=e;
+     Base_mesh_element_pt[e]=el_pt;
     }
    
    // Storage for the number of face elements in the base mesh -- 
    // element is identified by number of bulk element and face index
    // so we can reconstruct it if and when the FaceElements have been wiped
-   // in actions_before_distribute()
+   // in actions_before_distribute().
+   // NOTE: Not really clear (any more) why this is required. Typically
+   //       FaceElements get wiped in actions_before_distribute() so
+   //       at this point there shouldn't be any of them left. 
+   //       This is certainly the case in all our currently existing
+   //       test codes. However, I'm too scared to take this out
+   //       in case it does matter (we're not insisting that FaceElements
+   //       are always removed in actions_before_distribute()...).
    std::map<unsigned, std::map<int,unsigned> > face_element_number;
    for (unsigned e=0;e<n_element;e++)
     {
@@ -11966,6 +12018,14 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
       dynamic_cast<FaceElement*>(mesh_pt()->finite_element_pt(e));
      if (face_el_pt!=0)
       {       
+#ifdef PARANOID
+       std::stringstream info;
+       info << "================================================\n";
+       info << "INFO: I've come across a FaceElement while \n";
+       info <<"       load-balancing a problem. \n";
+       info << "================================================\n";
+       oomph_info << info.str() << std::endl;
+#endif
        FiniteElement* bulk_elem_pt=face_el_pt->bulk_element_pt();
        unsigned e_bulk=Base_mesh_element_number[bulk_elem_pt];
        int face_index=face_el_pt->face_index();       
@@ -11973,11 +12033,13 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
       }
     }
    
-   // Distribute the (sub)meshes (i.e. sort out their halo lookup schemes)
+
+   // Distribute the (sub)meshes
+   //---------------------------
    if (n_mesh==0)
     {
      mesh_pt()->distribute(this->communicator_pt(),
-                           element_partition,doc_info,report_stats);
+                           new_domain_for_base_element,doc_info,report_stats);
     }
    else // There are submeshes, "distribute" each one separately
     {
@@ -11998,12 +12060,21 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
      rebuild_global_mesh();
     }
    
-   // Now document actual distribution of elements in the order in which
-   // they appear in the non-distributed base mesh: Reconstruct
-   // from the non-halo elements that are still alive on each processor.
-   // This slightly convoluted procedure is required because
+
+
+   // Now record actual distribution of elements in the order in which
+   //-----------------------------------------------------------------
+   // they appear in the non-distributed base mesh. This information
+   //----------------------------------------------------------------
+   // is to be returned by this function.
+   //------------------------------------
+  
+   // Distribution is reconstructed from the non-halo elements that are 
+   // still alive on each processor.
+   // (This slightly convoluted procedure is required because
    // element_partition above still includes FaceElements at a refined
-   // level.
+   // level. NOTE: Again not sure if the acrobatics associated with
+   // possible FaceElements is still required in this form; see above.
    Vector<int> local_actual_element_partition(n_element,0);
    Vector<int> int_actual_element_partition(n_element,-1);
    
@@ -12012,7 +12083,6 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
    unsigned nel=mesh_pt()->nelement();
    for (unsigned e=0;e<nel;e++)
     {
-     // hierher check FE/GeneralisedElement everywhere!
      GeneralisedElement* el_pt=mesh_pt()->element_pt(e);
      if (!(el_pt->is_halo()))
       {
@@ -12042,9 +12112,13 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
                  &int_actual_element_partition[0],n_element,
                  MPI_INT,MPI_SUM,
                  this->communicator_pt()->mpi_comm());
-   
-     // Allocate partitioning for elements in "root mesh"
+
+
+   // (Recall that n_element refers to the total number of elements
+   // in the mesh before distribution)
    actual_element_partition.resize(n_element);
+  
+   // Copy across, with optional error check
    for (unsigned e=0;e<n_element;e++)
     {
 #ifdef PARANOID
@@ -12068,7 +12142,9 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
    local_actual_element_partition.clear();
    int_actual_element_partition.clear();
    
+
    // Reset refinement level of all RefineableElements back to zero
+   //--------------------------------------------------------------
    if (n_mesh==0)
     {
      unsigned n_el=mesh_pt()->nelement();
@@ -12079,6 +12155,17 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
        
        if (ref_el_pt!=0)
         {
+#ifdef PARANOID
+         if (ref_el_pt->tree_pt()->level()!=0)
+          {
+           std::stringstream info;
+           info << "================================================\n";
+           info << "INFO: I've come across an element with nonzero \n";
+           info <<"       refinement level. \n";
+           info << "================================================\n";
+           oomph_info << info.str() << std::endl;
+          }
+#endif
          ref_el_pt->set_refinement_level(0);
         }
       }
@@ -12095,6 +12182,17 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
 
          if (ref_el_pt!=0)
           {
+#ifdef PARANOID
+           if (ref_el_pt->tree_pt()->level()!=0)
+            {
+             std::stringstream info;
+             info << "================================================\n";
+             info << "INFO: I've come across an element with nonzero \n";
+             info <<"       refinement level. \n";
+             info << "================================================\n";
+             oomph_info << info.str() << std::endl;
+            }
+#endif
            ref_el_pt->set_refinement_level(0);
           }
         }
@@ -12108,8 +12206,33 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
                 << t_distribute-t_partition << std::endl;
     }
 
-   // Refine each mesh based upon the refinement information at each root
-   refine_distributed_base_mesh(to_be_refined_on_each_root,max_level_overall);
+
+   // Send refinement info to other processors
+   //-----------------------------------------
+   
+   // Storage for refinement pattern:  Given ID of root element, 
+   // root_element_id, and current refinement level, level, the e-th entry in 
+   // refinement_info_for_root_elements[root_element_id][level][e] is equal 
+   // to 2 if the e-th element (using the enumeration when the mesh has been
+   // refined to the level-th level) is to be refined during the next 
+   // refinement; it's 1 if it's not to be refined.
+   Vector<Vector<Vector<unsigned> > > refinement_info_for_root_elements;
+
+
+   // Send refinement information between processors, using flat-packed
+   // information accumulated earlier
+   send_refinement_info_helper(old_domain_for_base_element,
+                               new_domain_for_base_element,
+                               max_refinement_level_overall,
+                               flat_packed_refinement_info_for_root,
+                               refinement_info_for_root_elements);
+
+   
+
+   // Refine each mesh based upon refinement information stored for each root
+   //------------------------------------------------------------------------
+   refine_distributed_base_mesh(refinement_info_for_root_elements,
+                                max_refinement_level_overall);
 
    if (report_stats) 
     {
@@ -12120,35 +12243,10 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
 
 
 
-   // hierher This is subtle: We've currently stripped out the
-   // face elements because they can't be refined. Any data
-   // they introduce is stored at the (resized) nodes in the bulk
-   // (btw: unless they have internal data in which case we're
-   // screwed anyway) and is therefore moved to the new mesh
-   // automatically (even if it's not actually used by anyone
-   // until the (new) face elements are re-attached by the
-   // call to actions_after_distribute() below). The trouble is
-   // that, following the refinement, the newly created bulk nodes
-   // that will soon support a not-yet-attached face element
-   // have not yet been resized, so the number of values doesn't
-   // match that in the original mesh (from which the values
-   // are extracted before load balancing). This empty virtual
-   // fct allows the user to resize all nodes by attaching and
-   // immediately detaching face elements that introduce new 
-   // nodal values. So far so good -- the trouble is how to make sure
-   // the user knows about this function and that he/she has
-   // to overload it? (Remember that nobody reads tutorials
-   // and the name doesn't follow the usual self-explanatory 
-   // actions_before/after pattern. Note: calling both 
-   // actions_after_distribute() and actions_before_distribute() here 
-   // is not only potentially expensive but won't always work because
-   // it may do other things that we don't want to happen here
-   // (The load-balanced Turek flag certainly breaks if we try!)
-   attach_and_detach_face_elements_with_new_dofs();
-
-   // Copy the stored values in each root from the old mesh into the new mesh
-   copy_stored_values_into_new_mesh_helper(double_values_on_each_root,
-                                           unsigned_values_on_each_root);
+   // Send the stored values in each root from the old mesh into the new mesh
+   //------------------------------------------------------------------------
+   send_data_to_be_sent_during_load_balancing(send_n, send_data,
+                                              send_displacement);
 
    if (report_stats) 
     {
@@ -12159,18 +12257,22 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
                 << t_copy_solution-t_start << std::endl;
     }
 
+
    // Do actions after distribution
    actions_after_distribute();
-
+   
    // Re-assign equation numbers
    assign_eqn_numbers();
   }
 
- oomph_info << "Total number of elements on this processor: "
-            << mesh_pt()->nelement() << std::endl;
-
- oomph_info << "Number of non-halo elements on this processor: "
-            << mesh_pt()->nnon_halo_element() << std::endl;
+ if (report_stats)
+  {
+   oomph_info << "Total number of elements on this processor: "
+              << mesh_pt()->nelement() << std::endl;
+   
+   oomph_info << "Number of non-halo elements on this processor: "
+              << mesh_pt()->nnon_halo_element() << std::endl;
+  }
 
  // Return the element partitioning for mesh produced by build_mesh().
  // (useful for restarts etc.)
@@ -12178,1053 +12280,877 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
 
 }
 
+
 //==========================================================================
-/// \short Load balance helper routine: work out the partition and refinement
-/// pattern for all root elements based upon the partition assigned 
-/// to its leaves and collect all doubles and unsignes that need to 
-/// communicates if tree moves to a different processor
+/// Send refinement information between processors
 //==========================================================================
-void Problem::work_out_partition_and_refinement_for_root_elements_helper
-(Vector<unsigned>& element_domain_on_this_proc,
- Vector<Vector<Vector<unsigned> > >& to_be_refined_on_each_root,
- Vector<Vector<double> >& double_values_on_each_root,
- Vector<Vector<unsigned> >& unsigned_values_on_each_root,
- Vector<unsigned>& element_partition, unsigned& max_level_overall,
- const bool& report_stats)
+void Problem::send_refinement_info_helper(
+ Vector<unsigned>& old_domain_for_base_element,
+ Vector<unsigned>& new_domain_for_base_element,
+ const unsigned& max_refinement_level_overall,
+ std::map<unsigned, Vector<unsigned> >& flat_packed_refinement_info_for_root,
+ Vector<Vector<Vector<unsigned> > >& refinement_info_for_root_elements)
 {
+ // Number of processes etc.
+ const int n_proc=this->communicator_pt()->nproc();
+ const int my_rank=this->communicator_pt()->my_rank();
 
- oomph_info << "\n\n===================================================\n\n"
-            << "Warning: load balancing routines currently accumulate\n"
-            << "          all data on root processor and then send it\n"
-            << "          out again -- scope for enormous improvements!\n\n"
-            << "\n\n===================================================\n\n";
-
- // Communicator, number of processors and number of elements
- OomphCommunicator* comm_pt=this->communicator_pt();
- unsigned n_proc=comm_pt->nproc();
- unsigned n_elem=mesh_pt()->nelement();
-
- // Store a vector for each root that stores the desired partition
- // for each leaf // hierher don't store vector of desired partitions
- // but vector where each entry stores the votes cast for given processor
- std::map<GeneralisedElement*,Vector<unsigned> > leaf_partition_for_root;
-
- // Create maps for double values and unsigned values
- // on each leaf which need to be "sent" to the new mesh -- all labeled
- // by root element
- std::map<GeneralisedElement*,Vector<double> > double_values_on_leaves_of_root;
- std::map<GeneralisedElement*,Vector<unsigned> > 
-  unsigned_values_on_leaves_of_root;
-
- // Loop over non-halo elements on current processor
- unsigned count_non_halo_el=0;
- for (unsigned e=0;e<n_elem;e++)
-  {
-   GeneralisedElement* el_pt=mesh_pt()->element_pt(e);
-   if (!el_pt->is_halo())
-    {
-     // Get values on this leaf
-     Vector<unsigned> unsigned_values_on_this_leaf;
-     unsigned count_unsigned_values_on_this_leaf=0; //hierher reserve/kill
-     Vector<double> double_values_on_this_leaf;
-     unsigned count_double_values_on_this_leaf=0;  //hierher reserve/kill
-
-     // Start with nodes (only FE)     
-     FiniteElement* fe_pt=dynamic_cast<FiniteElement*>(el_pt);
-     if (fe_pt!=0)
-      {
-       unsigned n_node=fe_pt->nnode();
-       for (unsigned j=0;j<n_node;j++)
-        {
-         // hierher check done
-         Node* nod_pt=fe_pt->node_pt(j);
-         
-         //hierher todo: rename this to n_hist!
-
-         // Number of history values
-         unsigned n_prev=1;
-         if (nod_pt->time_stepper_pt()!=0)
-          {
-           n_prev=nod_pt->time_stepper_pt()->ntstorage();
-          }
-         unsigned_values_on_this_leaf.push_back(n_prev);
-         count_unsigned_values_on_this_leaf++;
-
-         // hierher todo: don't actually need the unsigneds
-         // (unless we're in paranoid mode) as things should
-         // match automatically.
-         
-         // History values
-         unsigned n_val=nod_pt->nvalue();
-         unsigned_values_on_this_leaf.push_back(n_val);
-         count_unsigned_values_on_this_leaf++;
-         for (unsigned i_val=0;i_val<n_val;i_val++)
-          {
-           for (unsigned t=0;t<n_prev;t++)
-            {
-             double_values_on_this_leaf.push_back(nod_pt->value(t,i_val));
-             count_double_values_on_this_leaf++;
-            }
-          }
-         
-         // hierher positional timestepper instead!
-
-         // History positions
-         unsigned n_dim=nod_pt->ndim();
-         for (unsigned i_dim=0;i_dim<n_dim;i_dim++)
-          {
-           for (unsigned t=0;t<n_prev;t++)
-            {
-             double_values_on_this_leaf.push_back(nod_pt->x(t,i_dim));
-             count_double_values_on_this_leaf++;
-            }
-          }
-         
-         // hierher use the timestepper of the variable position data instead
-
-         // Solid history values
-         SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
-         if (solid_nod_pt!=0)
-          {
-           unsigned n_val=solid_nod_pt->variable_position_pt()->nvalue();
-           for (unsigned i_val=0;i_val<n_val;i_val++)
-            {
-             for (unsigned t=0;t<n_prev;t++)
-              {
-               double_values_on_this_leaf.
-                push_back(solid_nod_pt->variable_position_pt()->value(t,i_val));
-               count_double_values_on_this_leaf++;
-              }
-            }
-          }
-        }
-      }
-
-     // Internal data values (on all elements)
-     unsigned n_int_data=el_pt->ninternal_data();
-     for (unsigned i=0;i<n_int_data;i++)
-      {
-       // hierher check done
-       Data* int_data_pt=el_pt->internal_data_pt(i);
-       
-       unsigned n_prev=1;
-       if (int_data_pt->time_stepper_pt()!=0)
-        {
-         n_prev=int_data_pt->time_stepper_pt()->ntstorage();
-        }
-       unsigned_values_on_this_leaf.push_back(n_prev);
-       count_unsigned_values_on_this_leaf++; // hierher reserve/kill
-       
-       unsigned n_val=int_data_pt->nvalue();
-       for (unsigned i_val=0;i_val<n_val;i_val++)
-        {
-         for (unsigned t=0;t<n_prev;t++)
-          {
-           double_values_on_this_leaf.push_back(int_data_pt->value(t,i_val));
-           count_double_values_on_this_leaf++; // hierher reserve/kill
-          }
-        }
-      }
-
-
-     // Now associated data with root element
-     //--------------------------------------
-
-     // Get target domain for this leaf element
-     unsigned el_domain=element_domain_on_this_proc[count_non_halo_el];
-     count_non_halo_el++;
-     
-     // Get the root element (element itself if it's not refineable
-     GeneralisedElement* root_el_pt=el_pt;
-     RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(el_pt);
-     if (ref_el_pt!=0)
-      {
-       root_el_pt=ref_el_pt->root_element_pt();
-      }
-
-     // Now store all the relevant data for this root
-
-     // Current element wants to live on el_domain 
-     // (hierher change to count directly)
-     leaf_partition_for_root[root_el_pt].push_back(el_domain);
-
-     // Add unsigned and double values to the map
-     for (unsigned i=0;i<count_unsigned_values_on_this_leaf;i++)
-      {
-       unsigned_values_on_leaves_of_root[root_el_pt]
-        .push_back(unsigned_values_on_this_leaf[i]);
-      }
-     for (unsigned i=0;i<count_double_values_on_this_leaf;i++)
-      {
-       double_values_on_leaves_of_root[root_el_pt]
-        .push_back(double_values_on_this_leaf[i]);
-      }
-    }
-  }
-
-
-//-----------------hierher-------------------- 
-
- // Done loop over all leaves while accumulating data associated 
- // with each root. Now determine the target destination for each
- // root
+ // Make space
+ unsigned n_base_element=old_domain_for_base_element.size();
+ refinement_info_for_root_elements.resize(n_base_element);
  
- // How many roots do we have?
- unsigned n_roots_on_this_proc=leaf_partition_for_root.size();
+ // Make space for list of domains that the refinement info
+ // is to be forwarded to
+ std::map<unsigned,Vector<unsigned> > halo_domain_of_haloed_base_element;
 
- // hierher Storage for base mesh number for root and new domain for the root
- Vector<unsigned> base_mesh_element_number_on_this_proc;
- Vector<unsigned> new_domain_for_root_on_this_proc;
- Vector<unsigned> number_of_double_values_on_this_proc;
- Vector<unsigned> number_of_unsigned_values_on_this_proc;
+ // Find out haloed elements in new, redistributed problem
+ //-------------------------------------------------------
 
- // Storage for refinement information in this current "old" mesh
- Vector<unsigned> refinement_info;
- unsigned count_refinement_info=0; // hierher 
+ // halo_domains[e][j] = j-th halo domain associated with (haloed) element e
+ std::map<unsigned,Vector<unsigned> > halo_domains;
 
- // Storage for values in the "old" mesh
- Vector<double> double_values_on_this_proc;
- unsigned count_double_values_on_this_proc=0; // hierher
- Vector<unsigned> unsigned_values_on_this_proc;
- unsigned count_unsigned_values_on_this_proc=0; // hierher
-
- // Max refinement level on this process
- unsigned max_level_on_this_proc=0;
-
- // Loop over roots
- for (std::map<GeneralisedElement*,Vector<unsigned> >::iterator it=
-       leaf_partition_for_root.begin();it!=leaf_partition_for_root.end();it++) 
+ // Loop over sub meshes
+ unsigned n_sub_mesh=nsub_mesh(); 
+ unsigned max_mesh=std::max(n_sub_mesh,unsigned(1));
+ for (unsigned i_mesh=0;i_mesh<max_mesh;i_mesh++)
   {
-
-   // Poll to find partition desired by most leaf elements associated
-   // with root
-
-   // Get the root element
-   GeneralisedElement* el_pt=(*it).first;
-   
-   // Get the list of partitions associated with leaves
-   Vector<unsigned> leaf_partition_on_this_root=leaf_partition_for_root[el_pt];
-   unsigned n_leaves=leaf_partition_on_this_root.size();
-
-   // Count how many leaves want to end up on a given partition
-   Vector<unsigned> count_domain(n_proc,0);
-   for (unsigned i=0;i<n_leaves;i++)
+   // Choose the right mesh
+   Mesh* my_mesh_pt=0;
+   if (n_sub_mesh==0)
     {
-     count_domain[leaf_partition_on_this_root[i]]++;
-    }
-
-   unsigned max_count=0;
-   unsigned max_domain=0;
-   for (unsigned i_proc=0;i_proc<n_proc;i_proc++)
-    {
-     if (count_domain[i_proc] > max_count)
-      {
-       max_count=count_domain[i_proc];
-       max_domain=i_proc;
-      }
-    }
-
-   // Store information to send
-   base_mesh_element_number_on_this_proc.push_back
-    (Base_mesh_element_number[el_pt]);
-   new_domain_for_root_on_this_proc.push_back(max_domain);
-
-   // Get the double and unsigned values for this root
-   unsigned n_double_values=double_values_on_leaves_of_root[el_pt].size();
-   for (unsigned i=0;i<n_double_values;i++)
-    {
-     double_values_on_this_proc.
-      push_back(double_values_on_leaves_of_root[el_pt][i]);
-     count_double_values_on_this_proc++;
-    }
-
-   number_of_double_values_on_this_proc.push_back(n_double_values);
-
-   unsigned n_unsigned_values=unsigned_values_on_leaves_of_root[el_pt].size();
-   for (unsigned i=0;i<n_unsigned_values;i++)
-    {
-     unsigned_values_on_this_proc.
-      push_back(unsigned_values_on_leaves_of_root[el_pt][i]);
-     count_unsigned_values_on_this_proc++;
-    }
-
-   number_of_unsigned_values_on_this_proc.push_back(n_unsigned_values);
-
-   // We also need to store the refinement information for each root, if
-   // the root is refineable
-   RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(el_pt);
-   
-   if (ref_el_pt!=0)
-    {
-     // Get all the nodes associated with this root element
-     Vector<Tree*> all_tree_nodes_pt;
-     ref_el_pt->tree_pt()->stick_all_tree_nodes_into_vector(all_tree_nodes_pt);
-
-     unsigned n_tree_nodes=all_tree_nodes_pt.size();
-
-     // Get max level for these nodes
-     unsigned max_level=0;
-     for (unsigned ii=0;ii<n_tree_nodes;ii++)
-      {
-       // Get the level
-       unsigned level=all_tree_nodes_pt[ii]->level();
-       if (level>max_level) { max_level=level; }
-      }
-
-     if (max_level>max_level_on_this_proc) 
-      { 
-       max_level_on_this_proc=max_level;
-      }
-
-    }
-  } // end loop over roots
-
- // Allreduce to work out max level across all processors
- max_level_overall=0;
- MPI_Allreduce(&max_level_on_this_proc,&max_level_overall,1,
-               MPI_INT,MPI_MAX,comm_pt->mpi_comm());
-
- // Loop over roots
- for (std::map<GeneralisedElement*,Vector<unsigned> >::iterator it=
-       leaf_partition_for_root.begin();it!=leaf_partition_for_root.end();it++)  
-  {
-   // Get the root element
-   RefineableElement* el_pt=dynamic_cast<RefineableElement*>((*it).first);
-   if (el_pt!=0)
-    {     
-     // Get all the nodes associated with this root element
-     Vector<Tree*> all_tree_nodes_pt;
-     el_pt->tree_pt()->stick_all_tree_nodes_into_vector(all_tree_nodes_pt);
-
-     unsigned n_tree_nodes=all_tree_nodes_pt.size();
-
-     // Tell the "new root" the number of tree nodes
-     refinement_info.push_back(n_tree_nodes);
-     count_refinement_info++;
-
-     // Loop over all levels
-     for (unsigned l=0;l<max_level_overall;l++)
-      {
-       // Loop over all tree nodes
-       for (unsigned e=0;e<n_tree_nodes;e++)
-        {
-         // What's the level of this tree node?
-         unsigned level=all_tree_nodes_pt[e]->level();
-
-         // Element exists at this refinement level of the mesh
-         // if it's at this level or it's at a lower level and a leaf
-         if ((level==l) || ((level<l) && (all_tree_nodes_pt[e]->is_leaf())))
-          {
-           refinement_info.push_back(1);
-           count_refinement_info++;
-           // If it's at this level, and not a leaf, then it will 
-           // need to be refined in the new mesh
-           if ((level==l) && (!all_tree_nodes_pt[e]->is_leaf()))
-            {
-             refinement_info.push_back(1);
-             count_refinement_info++;
-            }
-           else
-            {
-             refinement_info.push_back(0);
-             count_refinement_info++;
-            }
-          }
-         else // not at this level
-          {
-           refinement_info.push_back(0);
-           count_refinement_info++;
-          }
-        }
-      }
+     my_mesh_pt=mesh_pt();
     }
    else
     {
-     // The element is not refineable - stick a zero in refinement_info
-     refinement_info.push_back(0);
-     count_refinement_info++;
+     my_mesh_pt=mesh_pt(i_mesh);
+    }
+
+   // Loop over processors to find haloed elements -- need to
+   // send their refinement patterns processors that hold their 
+   // halo counterparts!
+   for (int p=0;p<n_proc;p++)
+    {
+     Vector<GeneralisedElement*> haloed_elem_pt=
+      my_mesh_pt->haloed_element_pt(p);
+     unsigned nhaloed=haloed_elem_pt.size();
+     for (unsigned h=0;h<nhaloed;h++)
+      {
+       // This element must send its refinement information to processor p
+       halo_domains[Base_mesh_element_number[haloed_elem_pt[h]]].push_back(p);
+      }
     }
   }
 
- // How do we ensure that the order in which the elements are built in the
- // new mesh is the same as in the old mesh?
+ // Accumulate relevant flat-packed refinement data to be sent to
+ //--------------------------------------------------------------
+ // various processors
+ //-------------------
 
- // - each root element (i.e. each element when the mesh is distributed)
- //   needs to store its number in the old "base mesh" that existed on
- //   every processor.  This is called just after actions_before_distribute().
-
- // Communicate number of roots from each process to all processes
- unsigned n_roots=0;
-
- MPI_Allreduce(&n_roots_on_this_proc,&n_roots,1,
-               MPI_INT,MPI_SUM,comm_pt->mpi_comm());
+ // Map to accumulate unsigned data to be sent to each processor
+ // (map for sparsity)
+ std::map<unsigned, Vector<unsigned> > data_for_proc;
  
- // Communicate refinement information
- unsigned n_ref_info=0;
- MPI_Allreduce(&count_refinement_info,&n_ref_info,1,
-               MPI_INT,MPI_SUM,comm_pt->mpi_comm());
+ // Number of base elements to be sent to specified domain
+ Vector<unsigned> nbase_elements_for_proc(n_proc,0);
 
- Vector<int> n_roots_on_each_proc(n_proc,0);
- Vector<int> start_roots_index(n_proc,0);
+ // Total number of entries in send vector
+ unsigned count=0;
 
- MPI_Allgather(&n_roots_on_this_proc,1,MPI_INT,&n_roots_on_each_proc[0],
-               1,MPI_INT,comm_pt->mpi_comm());
-
- Vector<int> n_ref_info_on_each_proc(n_proc,0);
- Vector<int> start_ref_info_index(n_proc,0);
-
- MPI_Allgather(&count_refinement_info,1,MPI_INT,&n_ref_info_on_each_proc[0],
-               1,MPI_INT,comm_pt->mpi_comm());
-
- // Communicate all the double and unsigned values in order to transfer
- // the solution from the old mesh(es) into the new mesh(es)
- Vector<int> n_double_values_on_each_proc(n_proc,0);
- Vector<int> double_values_index(n_proc,0);
-
- MPI_Allgather(&count_double_values_on_this_proc,1,MPI_INT,
-               &n_double_values_on_each_proc[0],1,MPI_INT,comm_pt->mpi_comm());
-
- Vector<int> n_unsigned_values_on_each_proc(n_proc,0);
- Vector<int> unsigned_values_index(n_proc,0);
-
- MPI_Allgather(&count_unsigned_values_on_this_proc,1,MPI_INT,
-               &n_unsigned_values_on_each_proc[0],1,MPI_INT,
-               comm_pt->mpi_comm());
-
- // Work out the totals for each set of information, and the indices required
- // for MPI_Allgatherv(...) calls
- unsigned total_roots=0; 
- unsigned total_ref_info=0;
- unsigned total_double_values=0;
- unsigned total_unsigned_values=0;
- for (unsigned i_proc=0; i_proc<n_proc; i_proc++)
+ // Loop over all base elements
+ //----------------------------
+ for (unsigned e=0;e<n_base_element;e++)
   {
-   // Total number of each type of information
-   total_roots+=n_roots_on_each_proc[i_proc];
-   total_ref_info+=n_ref_info_on_each_proc[i_proc];
-   total_double_values+=n_double_values_on_each_proc[i_proc];
-   total_unsigned_values+=n_unsigned_values_on_each_proc[i_proc];
 
-   if (i_proc!=0)
+   // Is it one of mine (i.e. was it a non-halo element on this
+   //----------------------------------------------------------
+   // processor before re-distribution, and do I therefore hold
+   //----------------------------------------------------------
+   // refinement information for it)?
+   //--------------------------------
+   if (int(old_domain_for_base_element[e])==my_rank)
     {
-     // Index value for each type of information
-     start_roots_index[i_proc]=total_roots-n_roots_on_each_proc[i_proc];
-     start_ref_info_index[i_proc]=
-      total_ref_info-n_ref_info_on_each_proc[i_proc];
-     double_values_index[i_proc]=
-      total_double_values-n_double_values_on_each_proc[i_proc];
-     unsigned_values_index[i_proc]=
-      total_unsigned_values-n_unsigned_values_on_each_proc[i_proc];
-    }
-   else
-    {
-     start_roots_index[0]=0;
-     start_ref_info_index[0]=0;
-     double_values_index[0]=0;
-     unsigned_values_index[0]=0;
-    }
+     // Where does it go?
+     unsigned new_domain=new_domain_for_base_element[e];
 
-  }
-
- // Storage for information from all root elements
- Vector<unsigned> new_domain_for_root(n_roots);
- Vector<unsigned> base_mesh_element_number(n_roots);
- Vector<unsigned> ref_info(total_ref_info);
- Vector<unsigned> number_of_double_values(n_roots);
- Vector<unsigned> number_of_unsigned_values(n_roots);
- Vector<double> double_values(total_double_values);
- Vector<unsigned> unsigned_values(total_unsigned_values);
-
- // Communicate base number of each root to all processes
- MPI_Allgatherv(&base_mesh_element_number_on_this_proc[0],n_roots_on_this_proc,
-                MPI_INT,&base_mesh_element_number[0],&n_roots_on_each_proc[0],
-                &start_roots_index[0],MPI_INT,comm_pt->mpi_comm());
-
- // Communicate new domain for each root to all processes
- MPI_Allgatherv(&new_domain_for_root_on_this_proc[0],n_roots_on_this_proc,
-                MPI_INT,&new_domain_for_root[0],&n_roots_on_each_proc[0],
-                &start_roots_index[0],MPI_INT,comm_pt->mpi_comm());
-
- // Communicate ref info for each root to all processes
- MPI_Allgatherv(&refinement_info[0],count_refinement_info,
-                MPI_INT,&ref_info[0],&n_ref_info_on_each_proc[0],
-                &start_ref_info_index[0],MPI_INT,comm_pt->mpi_comm());
-
- // Communicate number of doubles for each root to all processes
- MPI_Allgatherv(&number_of_double_values_on_this_proc[0],n_roots_on_this_proc,
-                MPI_INT,&number_of_double_values[0],&n_roots_on_each_proc[0],
-                &start_roots_index[0],MPI_INT,comm_pt->mpi_comm());
-
- // Communicate number of unsigneds for each root to all processes
- MPI_Allgatherv(&number_of_unsigned_values_on_this_proc[0],
-                n_roots_on_this_proc,MPI_INT,
-                &number_of_unsigned_values[0],&n_roots_on_each_proc[0],
-                &start_roots_index[0],MPI_INT,comm_pt->mpi_comm());
-
- // Communicate double values for each root to all processes
- MPI_Allgatherv(&double_values_on_this_proc[0],
-                count_double_values_on_this_proc,MPI_DOUBLE,
-                &double_values[0],&n_double_values_on_each_proc[0],
-                &double_values_index[0],MPI_DOUBLE,comm_pt->mpi_comm());
-
- // Communicate unsigned values for each root to all processes
- MPI_Allgatherv(&unsigned_values_on_this_proc[0],
-                count_unsigned_values_on_this_proc,MPI_INT,
-                &unsigned_values[0],&n_unsigned_values_on_each_proc[0],
-                &unsigned_values_index[0],MPI_INT,comm_pt->mpi_comm());
-
-
-
-
- // Now check that every processor has at least one root
- // If not, help yourself to a root from the most heavily loaded one
- bool every_body_has_one=false;
- while (!every_body_has_one)
-  {
-   // Loop over roots
-   Vector<unsigned> count_roots_on_proc(n_proc);
-   Vector<unsigned> last_root_on_proc(n_proc);
-   for (unsigned root=0;root<n_roots;root++)
-    {
-     count_roots_on_proc[new_domain_for_root[root]]++;
-     last_root_on_proc[new_domain_for_root[root]]=root;
-    }
-   unsigned empty_proc=0;
-   unsigned fullest_proc=0;
-   unsigned nroots_on_fullest_proc=0;
-   every_body_has_one=true;
-   for (unsigned p=0;p<n_proc;p++)
-    {
-     if (count_roots_on_proc[p]==0)
-      {
-       every_body_has_one=false;      
-       empty_proc=p;
-       oomph_info << "Processor " << p << " is empty.\n ";
-      }
-     if (count_roots_on_proc[p]>nroots_on_fullest_proc)
-      {
-       fullest_proc=p;
-       nroots_on_fullest_proc=count_roots_on_proc[p];
-      }
-    }
-   // Adjust
-   if (!every_body_has_one)
-    {
-     oomph_info << "Processor " << fullest_proc 
-                << " is fullest with  " << nroots_on_fullest_proc 
-                << " roots \n";
-     oomph_info << "Old new domain:  " 
-                << new_domain_for_root[last_root_on_proc[fullest_proc]] 
-                << std::endl;     
-     new_domain_for_root[last_root_on_proc[fullest_proc]]=empty_proc;
-     oomph_info << "New new domain:  " 
-                << new_domain_for_root[last_root_on_proc[fullest_proc]] 
-                << std::endl;     
-    }
-  }
-
- // Sort this into base number order everywhere ready to distribute
- element_partition.resize(n_roots);
-
- // Prepare vector for refinement pattern on each root
- to_be_refined_on_each_root.resize(n_roots);
-
- // Vectors for doubles and unsigneds on each root
- double_values_on_each_root.resize(n_roots);
- unsigned_values_on_each_root.resize(n_roots);
-
- // Counters
- unsigned count_ref_info=0;
- unsigned count_double_values=0;
- unsigned count_unsigned_values=0;
-
- // Loop over roots
- for (unsigned ee=0;ee<n_roots;ee++)
-  {
-   // Get the element number in the base mesh
-   unsigned el_no=base_mesh_element_number[ee];
-
-   // Pass this into the partition for distribution
-   element_partition[el_no]=new_domain_for_root[ee];
-
-   // How many double values are there on this root?
-   // hierher oh my god! resize and allocate directly!
-   unsigned n_doubles=number_of_double_values[ee];
-   for (unsigned n=0;n<n_doubles;n++)
-    {
-     double_values_on_each_root[el_no].
-      push_back(double_values[count_double_values]);
-     count_double_values++;
-    }
-
-   // How many unsigned values are there on this root?
-   unsigned n_unsigneds=number_of_unsigned_values[ee];
-   for (unsigned n=0;n<n_unsigneds;n++)
-    {
-     unsigned_values_on_each_root[el_no].
-      push_back(unsigned_values[count_unsigned_values]);
-     count_unsigned_values++;
-    }
-
-   // Work out "to_be_refined" prior to distributing, and then
-   // after distributing, get it back using the base mesh element number
-
-   // Storage for refinement pattern on each root
-   to_be_refined_on_each_root[el_no].resize(max_level_overall);
-
-   unsigned n_tree_nodes=ref_info[count_ref_info];
-   count_ref_info++;
-
-   // Loop over levels and number of nodes
-   for (unsigned l=0; l<max_level_overall; l++)
-    {
-     for (unsigned e=0; e<n_tree_nodes; e++)
-      {
-       if (ref_info[count_ref_info]==1)
+     // Keep counting 
+     nbase_elements_for_proc[new_domain]++;
+       
+     // If it stays local, deal with it here
+     if (int(new_domain)==my_rank)
+      {       
+       // Record on which other procs/domains the refinement info for
+       // this element is required because it's haloed.
+       unsigned nhalo=halo_domains[e].size();
+       halo_domain_of_haloed_base_element[e].resize(nhalo);
+       for (unsigned j=0;j<nhalo;j++)
         {
-         count_ref_info++;
-         // Element exists at this level
-
-         if (ref_info[count_ref_info]==1)
-          {
-           // Element should be refined
-           to_be_refined_on_each_root[el_no][l].push_back(2);
-           count_ref_info++;
-          }
-         else
-          {
-           // Element should not be refined
-           to_be_refined_on_each_root[el_no][l].push_back(1);
-           count_ref_info++;
-          }
+         halo_domain_of_haloed_base_element[e][j]=halo_domains[e][j];
         }
-       else
-        {
-         // Element does not exist at this level
-         to_be_refined_on_each_root[el_no][l].push_back(0);
-         count_ref_info++;
-        }
-      }
-    }
-  }
 
- // Output stats
- if (report_stats)
-  {
-   // Count the number of root elements on each processor
-   Vector<unsigned> count_partition(n_proc,0);
-   for (unsigned ee=0;ee<n_roots;ee++)
-    {
-     for (unsigned i_proc=0; i_proc<n_proc; i_proc++)
-      {
-       if (i_proc==element_partition[ee])
-        {
-         count_partition[i_proc]++;
-        }
-      }
-    }
-
-   // Loop over processors to output this information
-   for (unsigned i_proc=0; i_proc<n_proc; i_proc++)
-    {
-     oomph_info << "After load balancing, proc " << i_proc << " will have " 
-                << count_partition[i_proc] << " root elements" << std::endl;
-    }
-  }
-
-}
-
-//==========================================================================
-/// \short Load balance helper routine: refine each base (sub)mesh based upon
-/// the elements to be refined within each tree at each root
-//==========================================================================
-void Problem::refine_distributed_base_mesh
-(Vector<Vector<Vector<unsigned> > >& to_be_refined_on_each_root,
- const unsigned& max_level_overall)
-{
- // Refine the new base mesh based upon the refinement pattern of the
- // mesh when the load_balance(...) routines were called
-
- // Each process needs to work out its own Vector of elements (numbers) 
- // to be refined
- unsigned n_mesh=nsub_mesh();
-
- // If there are no submeshes
- if (n_mesh==0)
-  {
-   unsigned n_el_on_this_proc=mesh_pt()->nelement();
-   Vector<Vector<unsigned> > to_be_refined_on_this_proc(max_level_overall);
- 
-   // Count, at each level, the elements to be refined 
-   Vector<unsigned> el_count_on_this_proc(max_level_overall);
-   for (unsigned l=0;l<max_level_overall;l++)
-    {
-     // Initialise counter
-     el_count_on_this_proc[l]=0;
-    }
-
-   // Loop over levels where refinement is taking place
-   for (unsigned l=0;l<max_level_overall;l++)
-    {
-     // Loop over roots
-     for (unsigned e=0;e<n_el_on_this_proc;e++)
-      {
-       // Get the element
-       FiniteElement* el_pt=mesh_pt()->finite_element_pt(e);
-       unsigned el_no=Base_mesh_element_number[el_pt];
-
-       if (l<to_be_refined_on_each_root[el_no].size())
-        {
-         unsigned n_nodes=to_be_refined_on_each_root[el_no][l].size();
-         for (unsigned n=0;n<n_nodes;n++)
-          {
-           if (to_be_refined_on_each_root[el_no][l][n]==2)
-            {
-             // Refine this "tree node"
-             to_be_refined_on_this_proc[l].push_back(el_count_on_this_proc[l]);
-             el_count_on_this_proc[l]++;
-            }
-           else if (to_be_refined_on_each_root[el_no][l][n]==1)
-            {
-             el_count_on_this_proc[l]++;
-            }
-          }
-        }
-      }
-    }
-
-   // Now try to do the refinement
-   TreeBasedRefineableMeshBase* ref_mesh_pt=
-    dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt());
-   if (ref_mesh_pt!=0)
-    {
-     ref_mesh_pt->refine_base_mesh(this->communicator_pt(),
-                                   to_be_refined_on_this_proc);
-    }
-  }
- else
-  // There are submeshes
-  {
-   for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
-    {
-     // Number of elements in this mesh on this processor
-     unsigned n_el_on_this_proc=mesh_pt(i_mesh)->nelement();
-
-     Vector<Vector<unsigned> > to_be_refined_on_this_proc(max_level_overall);
- 
-     // Count, at each level, the elements to be refined 
-     Vector<unsigned> el_count_on_this_proc(max_level_overall);
-     for (unsigned l=0;l<max_level_overall;l++)
-      {
-       // Initialise counter
-       el_count_on_this_proc[l]=0;
-      }
-
-     // Loop over levels where refinement is taking place
-     for (unsigned l=0;l<max_level_overall;l++)
-      {
-       // Loop over roots
-       for (unsigned e=0;e<n_el_on_this_proc;e++)
-        {
-         // Get the element
-         FiniteElement* el_pt=mesh_pt(i_mesh)->finite_element_pt(e);
-         unsigned el_no=Base_mesh_element_number[el_pt];
-
-         if (l<to_be_refined_on_each_root[el_no].size())
-          {
-           unsigned n_nodes=to_be_refined_on_each_root[el_no][l].size();
-           for (unsigned n=0;n<n_nodes;n++)
-            {
-             if (to_be_refined_on_each_root[el_no][l][n]==2)
-              {
-               // Refine this "tree node"
-               to_be_refined_on_this_proc[l].
-                push_back(el_count_on_this_proc[l]);
-               el_count_on_this_proc[l]++;
-              }
-             else if (to_be_refined_on_each_root[el_no][l][n]==1)
-              {
-               el_count_on_this_proc[l]++;
-              }
-            }
-          }
-        }
-      }
-
-     // Now try to do the refinement
-     TreeBasedRefineableMeshBase* ref_mesh_pt=
-      dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(i_mesh));
-     if (ref_mesh_pt!=0)
-      {
-       ref_mesh_pt->refine_base_mesh(this->communicator_pt(),
-                                     to_be_refined_on_this_proc);
-      }
-
-    }
-
-   // Rebuild the global mesh
-   rebuild_global_mesh();
-
-  }
-
-}
-
-//==========================================================================
-/// \short Load balance helper routine: copy stored information from old
-/// mesh into the new mesh
-//==========================================================================
-void Problem::copy_stored_values_into_new_mesh_helper
-(Vector<Vector<double> >& double_values_on_each_root,
- Vector<Vector<unsigned> >& unsigned_values_on_each_root)
-{
- // Map to store whether the root element has been visited yet
- std::map<RefineableElement*,bool> root_el_done;
-
- // Loop over all elements
- unsigned n_el=mesh_pt()->nelement();
- for (unsigned e=0;e<n_el;e++)
-  {
-   // Get element
-   FiniteElement* el_pt=mesh_pt()->finite_element_pt(e);;
-
-   // Only bother with non-halo elements... !
-   if (!el_pt->is_halo())
-    {
-     // Set counters
-     unsigned count_double_values_on_this_root=0;
-     unsigned count_unsigned_values_on_this_root=0;
-
-     // Is this element refineable?
-     RefineableElement* rref_el_pt=dynamic_cast<RefineableElement*>(el_pt);
-
-     if (rref_el_pt!=0)
-      {
-       // Get the root element
-       RefineableElement* root_el_pt=rref_el_pt->root_element_pt();
-
-       // Has this root been visited yet?
-       if (!root_el_done[root_el_pt])
-        {
-         // Get the element number in the base mesh
-         unsigned el_no=Base_mesh_element_number[root_el_pt];
-
-         // Traverse all leaves, copying in values
-         Vector<Tree*> all_leaf_nodes_pt;
-         root_el_pt->tree_pt()->stick_leaves_into_vector(all_leaf_nodes_pt);
-
-         // Loop over leaves
-         unsigned n_leaf=all_leaf_nodes_pt.size();
-         for (unsigned i_leaf=0;i_leaf<n_leaf;i_leaf++)
-          {
-           // Get element object at leaf
-           RefineableElement* ref_el_pt=all_leaf_nodes_pt[i_leaf]->object_pt();
-
-           // Loop over nodes
-           unsigned n_node=ref_el_pt->nnode();
-           for (unsigned j=0;j<n_node;j++)
-            {
-             Node* nod_pt=ref_el_pt->node_pt(j);
-
-             // Number of history values
-             unsigned n_prev=unsigned_values_on_each_root[el_no]
-              [count_unsigned_values_on_this_root];
-             count_unsigned_values_on_this_root++;
-
-             // Number of actual history values
-             unsigned n_prev_actual=1;
-             if (nod_pt->time_stepper_pt()!=0)
-              {
-               n_prev_actual=nod_pt->time_stepper_pt()->ntstorage();
-              }
-
-             // History values
-             unsigned n_val=unsigned_values_on_each_root[el_no]
-              [count_unsigned_values_on_this_root];
-             count_unsigned_values_on_this_root++;
-
-
-             // hierher This and all the other unsigneds are actually
-             // only needed for sanity checking in paranoid mode.
-             unsigned n_val_actual=nod_pt->nvalue();
-
+       // Provide storage for refinement pattern
+       refinement_info_for_root_elements[e].
+        resize(max_refinement_level_overall);
+       
 #ifdef PARANOID
-             if (n_val!=n_val_actual)
-              {
-               std::ostringstream error_message;
-               error_message << "nval: " << n_val << " " 
-                            << n_val_actual<< std::endl 
-                             << "Error nval!=n_val_actual at "
-                             << nod_pt->x(0) << " "
-                             << nod_pt->x(1) << " "
-                             << nod_pt->x(2) << "\n ";
-               throw OomphLibError(
-                error_message.str(),
-                "Problem::copy_stored_values_into_new_mesh_helper()",
-                OOMPH_EXCEPTION_LOCATION);
-              }
+       // Get number of additional data sent for check
+       unsigned n_additional_data=
+        flat_packed_refinement_info_for_root[e].size();
 #endif
 
-             for (unsigned i_val=0;i_val<n_val;i_val++)
-              {
-               for (unsigned t=0;t<n_prev;t++)
-                {
-                 nod_pt->set_value(t,i_val,
-                                   double_values_on_each_root[el_no]
-                                   [count_double_values_on_this_root]);
-                 count_double_values_on_this_root++;
-                }
-              }
+       // Get number of tree nodes
+       unsigned n_tree_nodes=flat_packed_refinement_info_for_root[e][0];
 
-             // History positions
-             unsigned n_dim=nod_pt->ndim();
-             for (unsigned i_dim=0;i_dim<n_dim;i_dim++)
-              {
-               for (unsigned t=0;t<n_prev;t++)
-                {
-                 nod_pt->x(t,i_dim)=
-                  double_values_on_each_root[el_no]
-                  [count_double_values_on_this_root];
-                 count_double_values_on_this_root++;
-                }
-              }
-
-             // Solid history values
-             SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
-             if (solid_nod_pt!=0)
-              {
-               unsigned n_val=solid_nod_pt->variable_position_pt()->nvalue();
-               for (unsigned i_val=0;i_val<n_val;i_val++)
-                {
-                 for (unsigned t=0;t<n_prev;t++)
-                  {
-                   solid_nod_pt->variable_position_pt()->set_value
-                    (t,i_val,double_values_on_each_root[el_no]
-                     [count_double_values_on_this_root]);
-                   count_double_values_on_this_root++;
-                  }
-                }
-              }
-            } // end loop over nodes
-
-           // Loop over internal data
-           unsigned n_int_data=ref_el_pt->ninternal_data();
-           for (unsigned i=0;i<n_int_data;i++)
+       // Counter for entries to be processed locally
+       unsigned local_count=1; // (have already processed zero-th entry)
+       
+       // Loop over levels and number of nodes in tree
+       for (unsigned level=0; level<max_refinement_level_overall; level++)
+        {
+         for (unsigned ee=0; ee<n_tree_nodes; ee++)
+          {
+           // Element exists at this level           
+           if (flat_packed_refinement_info_for_root[e][local_count]==1)
             {
-             Data* int_data_pt=ref_el_pt->internal_data_pt(i);
+             local_count++;
 
-             // Number of history values
-             unsigned n_prev=unsigned_values_on_each_root[el_no]
-              [count_unsigned_values_on_this_root];
-             count_unsigned_values_on_this_root++;
-
-             // History values
-             unsigned n_val=int_data_pt->nvalue();
-             for (unsigned i_val=0;i_val<n_val;i_val++)
+             // Element should be refined
+             if (flat_packed_refinement_info_for_root[e][local_count]==1)
               {
-               for (unsigned t=0;t<n_prev;t++)
-                {
-                 int_data_pt->set_value(t,i_val,
-                                        double_values_on_each_root[el_no]
-                                        [count_double_values_on_this_root]);
-                 count_double_values_on_this_root++;
-                }
+               refinement_info_for_root_elements[e][level].push_back(2);
+               local_count++;
               }
-            } // end loop over internal data
-
-          } // end loop over leaf elements
-
-         // This root element has now been dealt with
-         root_el_done[root_el_pt]=true;
+             // Element should not be refined
+             else
+              {
+               refinement_info_for_root_elements[e][level].push_back(1);
+               local_count++;
+              }
+            }
+           // Element does not exist at this level
+           else
+            {
+             refinement_info_for_root_elements[e][level].push_back(0);
+             local_count++;
+            }
+          }
         }
 
+#ifdef PARANOID
+       if (n_additional_data!=local_count)
+        {
+         std::stringstream error_message;
+         error_message << "Number of additional data: " <<  n_additional_data 
+                       << " doesn't match that actually send: " << local_count
+                       << std::endl;
+         throw OomphLibError(error_message.str(),
+                             "Problem::send_refinement_info_helper",
+                             OOMPH_EXCEPTION_LOCATION); 
+        }
+#endif
+
       }
+     // Element in question is not one of mine so prepare for sending
+     //--------------------------------------------------------------
      else
       {
-       // Not refineable, so only this element requires copying
+       // Make space 
+       unsigned current_size=data_for_proc[new_domain].size();
+       unsigned n_additional_data=flat_packed_refinement_info_for_root[e].
+        size();
+       data_for_proc[new_domain].reserve(current_size+n_additional_data+2);
+       
+       // Keep counting
+       count+=n_additional_data+2;
+       
+       // Add base element number
+       data_for_proc[new_domain].push_back(e);
+       
+#ifdef PARANOID
+       // Add number of flat-packed instructions to follow
+       data_for_proc[new_domain].push_back(n_additional_data);
+#endif
 
-       // Get the base mesh element number
-       unsigned el_no=Base_mesh_element_number[el_pt];
-
-       // Loop over nodes
-       unsigned n_node=el_pt->nnode();
-       for (unsigned j=0;j<n_node;j++)
+       // Add flat packed refinement data
+       for (unsigned j=0;j<n_additional_data;j++)
         {
-         Node* nod_pt=el_pt->node_pt(j);
-         // Number of history values
-         unsigned n_prev=unsigned_values_on_each_root[el_no]
-          [count_unsigned_values_on_this_root];
-         count_unsigned_values_on_this_root++;
-
-         // History values
-         unsigned n_val=nod_pt->nvalue();
-         for (unsigned i_val=0;i_val<n_val;i_val++)
-          {
-           for (unsigned t=0;t<n_prev;t++)
-            {
-             nod_pt->set_value(t,i_val,
-                               double_values_on_each_root[el_no]
-                               [count_double_values_on_this_root]);
-             count_double_values_on_this_root++;
-            }
-          }
-
-         // History positions
-         unsigned n_dim=nod_pt->ndim();
-         for (unsigned i_dim=0;i_dim<n_dim;i_dim++)
-          {
-           for (unsigned t=0;t<n_prev;t++)
-            {
-             nod_pt->x(t,i_dim)=double_values_on_each_root[el_no]
-              [count_double_values_on_this_root];
-             count_double_values_on_this_root++;
-            }
-          }
-
-         // Solid history values
-         SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
-         if (solid_nod_pt!=0)
-          {
-           unsigned n_val=solid_nod_pt->variable_position_pt()->nvalue();
-           for (unsigned i_val=0;i_val<n_val;i_val++)
-            {
-             for (unsigned t=0;t<n_prev;t++)
-              {
-               solid_nod_pt->variable_position_pt()->set_value
-                (t,i_val,double_values_on_each_root[el_no]
-                 [count_double_values_on_this_root]);
-               count_double_values_on_this_root++;
-              }
-            }
-          }
-        }
-
-       // Loop over internal data
-       unsigned n_int_data=el_pt->ninternal_data();
-       for (unsigned i=0;i<n_int_data;i++)
-        {
-         Data* int_data_pt=el_pt->internal_data_pt(i);
-
-         // Number of history values
-         unsigned n_prev=unsigned_values_on_each_root[el_no]
-          [count_unsigned_values_on_this_root];
-         count_unsigned_values_on_this_root++;
-
-         // History values
-         unsigned n_val=int_data_pt->nvalue();
-         for (unsigned i_val=0;i_val<n_val;i_val++)
-          {
-           for (unsigned t=0;t<n_prev;t++)
-            {
-             int_data_pt->set_value(t,i_val,
-                                    double_values_on_each_root[el_no]
-                                    [count_double_values_on_this_root]);
-             count_double_values_on_this_root++;
-            }
-          }
-        }
+         data_for_proc[new_domain].push_back(
+          flat_packed_refinement_info_for_root[e][j]);
+        }  
       }
     }
-  } // end loop over elements
+  }
+
+
+ // Now do the actual send/receive
+ //-------------------------------
+
+ // Storage for number of data to be sent to each processor
+ Vector<int> send_n(n_proc,0);
+
+ // Storage for all values to be sent to all processors
+ Vector<unsigned> send_data;
+ send_data.reserve(count);
+
+ // Start location within send_data for data to be sent to each processor 
+ Vector<int> send_displacement(n_proc,0);
+
+ // Loop over all processors
+ for(int rank=0;rank<n_proc;rank++)
+  {  
+   //Set the offset for the current processor
+   send_displacement[rank] = send_data.size();
+
+   //Don't bother to do anything if the processor in the loop is the 
+   //current processor
+   if(rank!=my_rank)
+    {
+     // Record how many base elements are to be sent
+     send_data.push_back(nbase_elements_for_proc[rank]);
+
+     // Add data
+     unsigned n_data=data_for_proc[rank].size();
+     for (unsigned j=0;j<n_data;j++)
+      {
+       send_data.push_back(data_for_proc[rank][j]);
+      }
+    }
+   
+   //Find the number of data added to the vector
+   send_n[rank] = send_data.size() - send_displacement[rank];
+  }
+    
+ //Storage for the number of data to be received from each processor
+ Vector<int> receive_n(n_proc,0);
+ 
+ //Now send numbers of data to be sent between all processors
+ MPI_Alltoall(&send_n[0],1,MPI_INT,&receive_n[0],1,MPI_INT,
+              this->communicator_pt()->mpi_comm());
+
+ //We now prepare the data to be received
+ //by working out the displacements from the received data
+ Vector<int> receive_displacement(n_proc,0);
+ int receive_data_count=0;
+ for(int rank=0;rank<n_proc;++rank)
+  {
+   //Displacement is number of data received so far
+   receive_displacement[rank] = receive_data_count;
+   receive_data_count += receive_n[rank];
+  }
+ 
+ //Now resize the receive buffer for all data from all processors
+ //Make sure that it has a size of at least one
+ if(receive_data_count==0) {++receive_data_count;}
+ Vector<unsigned> receive_data(receive_data_count);
+ 
+ //Make sure that the send buffer has size at least one
+ //so that we don't get a segmentation fault
+ if(send_data.size()==0) {send_data.resize(1);}
+ 
+ //Now send the data between all the processors
+ MPI_Alltoallv(&send_data[0],&send_n[0],&send_displacement[0],
+               MPI_UNSIGNED,
+               &receive_data[0],&receive_n[0],
+               &receive_displacement[0],
+               MPI_UNSIGNED,
+               this->communicator_pt()->mpi_comm());
+
+
+
+ //Now use the received data to update 
+ //-----------------------------------
+ for (int send_rank=0;send_rank<n_proc;send_rank++)
+  {
+   //Don't bother to do anything for the processor corresponding to the
+   //current processor or if no data were received from this processor
+   if((send_rank != my_rank) && (receive_n[send_rank] != 0))
+    {
+     //Counter for the data within the large array
+     unsigned count=receive_displacement[send_rank];
+
+     // Loop over base elements
+     unsigned nbase_element=receive_data[count];
+     count++;
+     for (unsigned b=0;b<nbase_element;b++)
+      {
+       //  Get base element number
+       unsigned base_element_number=receive_data[count];
+       count++;
+       
+       // Record on which other procs/domains the refinement info for
+       // this element is required because it's haloed.
+       unsigned nhalo=halo_domains[base_element_number].size();
+       halo_domain_of_haloed_base_element[base_element_number].resize(nhalo);
+       for (unsigned j=0;j<nhalo;j++)
+        {
+         halo_domain_of_haloed_base_element[base_element_number][j]=
+          halo_domains[base_element_number][j];
+        }
+
+       // Provide storage for refinement pattern
+       refinement_info_for_root_elements[base_element_number].
+        resize(max_refinement_level_overall);
+       
+       // Get number of flat-packed instructions to follow
+       // (only used for check)
+#ifdef PARANOID
+       unsigned n_additional_data=receive_data[count];
+       count++;
+
+       // Counter for number of additional data (validation only)
+       unsigned check_count=0;
+#endif
+
+
+       // Get number of tree nodes
+       unsigned n_tree_nodes=receive_data[count];
+       count++;
+
+#ifdef PARANOID
+       check_count++;
+#endif
+
+       // Loop over levels and number of nodes in tree
+       for (unsigned level=0; level<max_refinement_level_overall; level++)
+        {
+         for (unsigned e=0; e<n_tree_nodes; e++)
+          {
+           // Element exists at this level           
+           if (receive_data[count]==1)
+            {
+             count++;
+
+#ifdef PARANOID
+             check_count++;
+#endif
+
+             // Element should be refined
+             if (receive_data[count]==1)
+              {
+               refinement_info_for_root_elements[base_element_number][level].
+                push_back(2);
+               count++;
+
+#ifdef PARANOID
+               check_count++;
+#endif
+              }
+             // Element should not be refined
+             else
+              {
+               refinement_info_for_root_elements[base_element_number][level].
+                push_back(1);
+               count++;
+
+#ifdef PARANOID
+               check_count++;
+#endif
+              }
+            }
+           // Element does not exist at this level
+           else
+            {
+             refinement_info_for_root_elements[base_element_number][level].
+              push_back(0);
+             count++;
+
+#ifdef PARANOID
+             check_count++;
+#endif
+            }
+          }
+        }
+
+#ifdef PARANOID
+       if ( n_additional_data!=check_count)
+        {
+         std::stringstream error_message;
+         error_message << "Number of additional data: " <<  n_additional_data 
+                       << " doesn't match that actually send: " << check_count
+                       << std::endl;
+         throw OomphLibError(error_message.str(),
+                             "Problem::send_refinement_info_helper",
+                             OOMPH_EXCEPTION_LOCATION); 
+        }
+#endif
+      }
+    }
+  }
+
+
+
+ // Now send the fully assembled refinement info to halo elements
+ //---------------------------------------------------------------
+ {
+  
+  // Accumulate data to be sent
+  //---------------------------
+
+  // Map to accumulate data to be sent to other procs
+  // (map for sparsity)
+  std::map<unsigned, Vector<unsigned> > data_for_proc;
+  
+  // Number of base elements to be sent to specified domain
+  Vector<unsigned> nbase_elements_for_proc(n_proc,0);
+  
+  // Loop over all haloed root elements and find out which
+  // processors they have haloes on
+  for (std::map<unsigned,Vector<unsigned> >::iterator it=
+        halo_domain_of_haloed_base_element.begin();
+       it!=halo_domain_of_haloed_base_element.end();it++)
+   {
+    // Get base element number 
+    unsigned base_element_number=(*it).first;
+    
+    // Loop over target domains
+    Vector<unsigned> domains=(*it).second;
+    unsigned nd=domains.size();    
+    for (unsigned jd=0;jd<nd;jd++)
+     {
+      // Actual number of domain
+      unsigned d=domains[jd];
+      
+      // Keep counting number of base elemements for domain
+      nbase_elements_for_proc[d]++;
+      
+      // Write base element number
+      data_for_proc[d].push_back(base_element_number);
+      
+      // Write refinement info in flat-packed form
+      for (unsigned level=0;level<max_refinement_level_overall;level++)
+       {
+        // Number of entries at each level
+        unsigned n=
+         refinement_info_for_root_elements[base_element_number][level].size();
+        data_for_proc[d].push_back(n);
+        for (unsigned j=0;j<n;j++)
+         {
+          data_for_proc[d].push_back(
+           refinement_info_for_root_elements[base_element_number][level][j]);
+         }
+       }
+     }
+   }
+
+
+  // Do the actual send
+  //-------------------
+
+  // Storage for number of data to be sent to each processor
+  Vector<int> send_n(n_proc,0);
+  
+  // Storage for all values to be sent to all processors
+  Vector<unsigned> send_data;
+  send_data.reserve(count);
+  
+  // Start location within send_data for data to be sent to each processor 
+  Vector<int> send_displacement(n_proc,0);
+  
+  // Loop over all processors
+  for(int rank=0;rank<n_proc;rank++)
+   {  
+    //Set the offset for the current processor
+    send_displacement[rank] = send_data.size();
+    
+    //Don't bother to do anything if the processor in the loop is the 
+    //current processor
+    if(rank!=my_rank)
+     {
+      // Record how many base elements are to be sent
+      send_data.push_back(nbase_elements_for_proc[rank]);
+      
+      // Add data
+      unsigned n_data=data_for_proc[rank].size();
+      for (unsigned j=0;j<n_data;j++)
+       {
+        send_data.push_back(data_for_proc[rank][j]);
+       }
+     }    
+    //Find the number of data added to the vector
+    send_n[rank] = send_data.size() - send_displacement[rank];
+   }
+  
+  //Storage for the number of data to be received from each processor
+  Vector<int> receive_n(n_proc,0);
+  
+  //Now send numbers of data to be sent between all processors
+  MPI_Alltoall(&send_n[0],1,MPI_INT,&receive_n[0],1,MPI_INT,
+               this->communicator_pt()->mpi_comm());
+  
+  //We now prepare the data to be received
+  //by working out the displacements from the received data
+  Vector<int> receive_displacement(n_proc,0);
+  int receive_data_count=0;
+  for(int rank=0;rank<n_proc;++rank)
+   {
+    //Displacement is number of data received so far
+    receive_displacement[rank] = receive_data_count;
+    receive_data_count += receive_n[rank];
+   }
+  
+  //Now resize the receive buffer for all data from all processors
+  //Make sure that it has a size of at least one
+  if(receive_data_count==0) {++receive_data_count;}
+  Vector<unsigned> receive_data(receive_data_count);
+  
+  //Make sure that the send buffer has size at least one
+  //so that we don't get a segmentation fault
+  if(send_data.size()==0) {send_data.resize(1);}
+  
+  //Now send the data between all the processors
+  MPI_Alltoallv(&send_data[0],&send_n[0],&send_displacement[0],
+                MPI_UNSIGNED,
+                &receive_data[0],&receive_n[0],
+                &receive_displacement[0],
+                MPI_UNSIGNED,
+                this->communicator_pt()->mpi_comm());
+  
+    
+  
+  //Now use the received data 
+  //------------------------
+  for (int send_rank=0;send_rank<n_proc;send_rank++)
+   {    
+    //Don't bother to do anything for the processor corresponding to the
+    //current processor or if no data were received from this processor
+    if((send_rank != my_rank) && (receive_n[send_rank] != 0))
+     {
+      //Counter for the data within the large array
+      unsigned count=receive_displacement[send_rank];
+      
+      // Read number of base elements
+      unsigned nbase_element=receive_data[count];
+      count++;
+      
+      for (unsigned e=0;e<nbase_element;e++)
+       {
+        // Read base element number
+        unsigned base_element_number=receive_data[count];
+        count++;
+        
+        // Provide storage for refinement pattern
+        refinement_info_for_root_elements[base_element_number].
+         resize(max_refinement_level_overall);
+        
+        // Read refinement info in flat-packed form
+        for (unsigned level=0;level<max_refinement_level_overall;level++)
+         {
+          // Read number of entries at each level
+          unsigned n=receive_data[count];
+          count++;
+          
+          // Read entries
+          for (unsigned j=0;j<n;j++)
+           {
+            refinement_info_for_root_elements[base_element_number][level].
+             push_back(
+              receive_data[count]);
+            count++;
+           }
+         }
+       }
+     }
+   }
+ }
+ 
+}
+
+
+
+
+
+
+
+//==========================================================================
+/// Load balance helper routine: Send data to other
+/// processors during load balancing.
+/// - send_n: Input, number of data to be sent to each processor
+/// - send_data: Input, storage for all values to be sent to all processors
+/// - send_displacement: Input, start location within send_data for data to 
+///   be sent to each processor 
+//==========================================================================
+void Problem::send_data_to_be_sent_during_load_balancing(
+ Vector<int>& send_n, 
+ Vector<double>& send_data,
+ Vector<int>& send_displacement)
+{
+ 
+ // Communicator info
+ OomphCommunicator* comm_pt=this->communicator_pt();
+ const int n_proc=comm_pt->nproc();
+  
+ //Storage for the number of data to be received from each processor
+ Vector<int> receive_n(n_proc,0);
+ 
+ //Now send numbers of data to be sent between all processors
+ MPI_Alltoall(&send_n[0],1,MPI_INT,&receive_n[0],1,MPI_INT,
+              this->communicator_pt()->mpi_comm());
+ 
+ //We now prepare the data to be received
+ //by working out the displacements from the received data
+ Vector<int> receive_displacement(n_proc,0);
+ int receive_data_count=0;
+ for(int rank=0;rank<n_proc;++rank)
+  {
+   //Displacement is number of data received so far
+   receive_displacement[rank] = receive_data_count;
+   receive_data_count += receive_n[rank];
+  }
+ 
+ //Now resize the receive buffer for all data from all processors
+ //Make sure that it has a size of at least one
+ if(receive_data_count==0) {++receive_data_count;}
+ Vector<double> receive_data(receive_data_count);
+ 
+ //Make sure that the send buffer has size at least one
+ //so that we don't get a segmentation fault
+ if(send_data.size()==0) {send_data.resize(1);}
+ 
+ //Now send the data between all the processors
+ MPI_Alltoallv(&send_data[0],&send_n[0],&send_displacement[0],
+               MPI_DOUBLE,
+               &receive_data[0],&receive_n[0],
+               &receive_displacement[0],
+               MPI_DOUBLE,
+               this->communicator_pt()->mpi_comm());
+
+ unsigned el_count=0;
+ 
+ // Only do each node once
+ Vector<std::map<Node*,bool> >node_done(n_proc);
+
+ //Now use the received data to update the halo nodes
+ for (int send_rank=0;send_rank<n_proc;send_rank++)
+  {
+   //Don't bother to do anything if no data were received from this processor
+   // NOTE: We do have to loop over our own processor number to process
+   //       the data locally.
+   if (receive_n[send_rank] != 0)
+    {
+     //Counter for the data within the large array
+     unsigned count=receive_displacement[send_rank];
+
+     // How many batches are there for current rank
+     unsigned nbatch=unsigned(receive_data[count]);
+     count++;
+
+     // Loop over batches (containing leaves associated with root elements)
+     for (unsigned b=0;b<nbatch;b++)
+      {              
+
+       // How many elements were received for this batch? 
+       unsigned nel=unsigned(receive_data[count]);
+       count++;
+       
+       // Get the unique base/root element number of this batch 
+       // in unrefined mesh
+       unsigned base_el_no=unsigned(receive_data[count]);
+       count++;
+       
+       // Get pointer to base/root element from reverse lookup scheme
+       GeneralisedElement* root_el_pt=Base_mesh_element_pt[base_el_no];
+       
+       // Vector for pointers to associated elements in batch
+       Vector<GeneralisedElement*> batch_el_pt;
+       
+       // Is it a refineable element?
+       RefineableElement* ref_root_el_pt=
+        dynamic_cast<RefineableElement*>(root_el_pt);       
+       if (ref_root_el_pt!=0)
+        {
+         // Get all leaves associated with this base/root element
+         Vector<Tree*> all_leaf_nodes_pt;
+         ref_root_el_pt->tree_pt()->stick_leaves_into_vector(all_leaf_nodes_pt);
+         
+         // How many leaves are there?
+         unsigned n_leaf=all_leaf_nodes_pt.size();
+         
+#ifdef PARANOID
+         if (n_leaf!=nel)
+          {
+           std::ostringstream error_message;
+           error_message 
+            << "Number of leaves: " << n_leaf << " " 
+            << " doesn't match number of elements sent in batch: "
+            << nel << "\n";
+           throw OomphLibError(
+            error_message.str(),
+            "Problem::send_data_to_be_sent_during_load_balancing()",
+            OOMPH_EXCEPTION_LOCATION);
+          }
+#endif
+         
+         // Loop over batch of elements associated with this base/root element
+         batch_el_pt.resize(n_leaf);
+         for (unsigned e=0;e<n_leaf;e++)
+          {
+           batch_el_pt[e]=all_leaf_nodes_pt[e]->object_pt();
+          }
+        }
+       // Not refineable -- the batch contains just the root element itself
+       else
+        {
+#ifdef PARANOID
+         if (1!=nel)
+          {
+           std::ostringstream error_message;
+           error_message 
+            << "Non-refineable root element should only be associated with"
+            << " one element but nel=" << nel << "\n";
+           throw OomphLibError(
+            error_message.str(),
+            "Problem::send_data_to_be_sent_during_load_balancing()",
+            OOMPH_EXCEPTION_LOCATION);
+          }
+#endif
+         batch_el_pt.push_back(root_el_pt);
+        }
+       
+       // Now loop  over all elements in batch
+       for (unsigned e=0;e<nel;e++)
+        {
+         GeneralisedElement* el_pt=batch_el_pt[e];
+         el_count++;
+
+         // FE?
+         FiniteElement* fe_pt=dynamic_cast<FiniteElement*>(el_pt);
+         if (fe_pt!=0)
+          {
+           // Loop over nodes
+           unsigned nnod=fe_pt->nnode();
+           for (unsigned j=0;j<nnod;j++)
+            {
+             Node* nod_pt=fe_pt->node_pt(j);
+             if (!node_done[send_rank][nod_pt])
+             {
+              node_done[send_rank][nod_pt]=true;
+
+
+              // Read number of values (as double) to allow for resizing
+              // before read (req'd in case we store data that
+              // got introduced by attaching FaceElements to bulk)
+              unsigned nval=unsigned(receive_data[count]);
+              count++;
+ 
+#ifdef PARANOID
+              // Does the size match?
+              if (nval<nod_pt->nvalue())
+               {
+                std::ostringstream error_message;
+                error_message 
+                 << "Node has more values, namely " << nod_pt->nvalue()
+                 << ", than we're about to receive, namely " << nval 
+                 << ". Something's wrong!\n";
+                throw OomphLibError(
+                 error_message.str(),
+                 "Problem::send_data_to_be_sent_during_load_balancing()",
+                 OOMPH_EXCEPTION_LOCATION);
+               }
+#endif
+              
+
+#ifdef PARANOID 
+              // Check if it's been sent as a boundary node
+               unsigned is_boundary_node=unsigned(receive_data[count]);
+               count++;
+#endif
+
+              // Check if it's actually a boundary node
+               BoundaryNodeBase *bnod_pt = 
+                dynamic_cast<BoundaryNodeBase*>(nod_pt);
+               if (bnod_pt!=0)
+                {
+
+#ifdef PARANOID
+                 // Check if local and received status are consistent
+                 if (is_boundary_node!=1)
+                  {
+                   std::ostringstream error_message;
+                   error_message 
+                    << "Local node is boundary node but information sent is\n"
+                    << "for non-boundary node\n";
+                   throw OomphLibError(
+                    error_message.str(),
+                    "Problem::send_data_to_be_sent_during_load_balancing()",
+                    OOMPH_EXCEPTION_LOCATION);
+                  }
+#endif
+
+                 // Do we entries in the map?
+                 unsigned n_entry=unsigned(receive_data[count]);
+                 count++;                             
+                 if (n_entry>0)
+                  {
+                   // Create storage, if it doesn't already exist, for the map 
+                   // that will contain the position of the first entry of 
+                   // this face element's additional values, 
+                   if(bnod_pt->
+                      index_of_first_value_assigned_by_face_element_pt()==0)
+                    {
+                     bnod_pt->
+                      index_of_first_value_assigned_by_face_element_pt()= 
+                      new std::map<unsigned, unsigned>; 
+                    }
+                                
+                   // Get pointer to the map of indices associated with
+                   // additional values created by face elements
+                   std::map<unsigned, unsigned>* map_pt=
+                    bnod_pt->index_of_first_value_assigned_by_face_element_pt();
+                   
+                   // Loop over number of entries in map
+                   for (unsigned i=0;i<n_entry;i++)
+                    {
+                     // Read out pairs...
+                     unsigned first=unsigned(receive_data[count]);
+                     count++;
+                     unsigned second=unsigned(receive_data[count]);
+                     count++;
+                     
+                     // ...and assign
+                     (*map_pt)[first]=second;
+                    }
+                  }
+                }
+#ifdef PARANOID
+               // Not a boundary node
+               else
+                {
+
+                 // Check if local and received status are consistent
+                 if (is_boundary_node!=0)
+                  {
+                   std::ostringstream error_message;
+                   error_message 
+                    << "Local node is not a boundary node but information \n"
+                    << "sent is for boundary node.\n";
+                   throw OomphLibError(
+                    error_message.str(),
+                    "Problem::send_data_to_be_sent_during_load_balancing()",
+                    OOMPH_EXCEPTION_LOCATION);
+                  }
+                }
+#endif
+
+              // Do we have to resize? This can happen if node was
+              // resized (due to a FaceElement that hasn't been attached
+              // yet here) when the send data was written. If so make space
+              // for the data here
+              if (nval>nod_pt->nvalue())
+               {
+                nod_pt->resize(nval);
+               }
+
+              // Now read the actual values
+              nod_pt->read_values_from_vector(receive_data,count);
+             }
+            }
+          }
+
+         // Now add internal data 
+         el_pt->read_internal_data_values_from_vector(receive_data,count);
+        }
+      }     
+    }
+  }
 
  // Now that this is done, we need to synchronise dofs to get
  // the halo element and node values correct
@@ -13245,7 +13171,703 @@ void Problem::copy_stored_values_into_new_mesh_helper
 }
 
 
+
+
+//==========================================================================
+/// Load balance helper routine: Get data to be sent to other
+/// processors during load balancing and other information about
+/// re-distribution.
+/// - target_domain_for_local_non_halo_element: Input, generated by METIS.
+///   target_domain_for_local_non_halo_element[e] contains the number
+///   of the domain [0,1,...,nproc-1] to which non-halo element e on THE
+///   CURRENT PROCESSOR ONLY has been assigned. The order of the non-halo
+///   elements is the same as in the Problem's mesh, with the halo
+///   elements being skipped.
+/// - send_n: Output, number of data to be sent to each processor
+/// - send_data: Output, storage for all values to be sent to all processors
+/// - send_displacement: Output, start location within send_data for data to 
+///   be sent to each processor 
+/// - max_refinement_level_overall: Output, max. refinement level of any 
+///   element
+//==========================================================================
+void Problem::get_data_to_be_sent_during_load_balancing(
+ const Vector<unsigned>& target_domain_for_local_non_halo_element,
+ Vector<int>& send_n, 
+ Vector<double>& send_data,
+ Vector<int>& send_displacement, 
+ Vector<unsigned>& old_domain_for_base_element,
+ Vector<unsigned>& new_domain_for_base_element,
+ unsigned& max_refinement_level_overall)
+{
+
+ // Communicator info
+ OomphCommunicator* comm_pt=this->communicator_pt();
+ const int n_proc=comm_pt->nproc();
+ const int my_rank=this->communicator_pt()->my_rank();
+
+ //------------------------------------------------------------------------
+ // Overall strategy: Loop over all elements, identify their corresponding
+ // root elements and move all associated leaves together, collecting
+ // the leaves in batches.
+ //------------------------------------------------------------------------
+
+ // Map to store whether the root element has been visited yet
+ std::map<RefineableElement*,bool> root_el_done;
+
+#ifdef PARANOID
+
+ // Map for checking if all elements associated with same root
+ // have the same target processor 
+ std::map<RefineableElement*,unsigned> target_plus_one_for_root;
+
 #endif
 
+ // Storage for maximum refinement level
+ unsigned max_refinement_level=0;
+
+ // Storage for (vector of) elements associated with target domain
+ // (stored in map for sparsity): element_for_processor[d][e] is pointer
+ // to e-th element that's supposed to move onto processor (domain) d.
+ std::map<unsigned,Vector<GeneralisedElement*> > element_for_processor;
+ 
+ // Storage for the number of elements in a specified batch of leaf 
+ // elements, all of which are associated with the same root/base element: 
+ // nelement_batch_for_processor[d][j] is the number of (leaf) 
+ // elements (all associated with the same root) to be moved together to
+ // domain/processor d, in the j-th batch of elements.
+ std::map<unsigned,Vector<unsigned> > nelement_batch_for_processor;
+ 
+ // Storage for the unique number of the root element (in the unrefined
+ // base mesh) whose leaves are moved together in a batch:
+ // base_element_for_element_batch_for_processo[d][j] is the number of
+ // unique number of the root element (in the unrefined
+ // base mesh) of all leaf elements (associated with that root), 
+ // to be moved together to domain/processor d, in the j-th batch of elements.
+ std::map<unsigned,Vector<unsigned> > 
+  base_element_for_element_batch_for_processor;
+ 
+ // Record old and new domains for non-halo root elements (will be
+ // communicated globally). Initialise to -1 so we can use max
+ // to extract the right one via MPI_Allreduce.
+ // NOTE: We communicate these globally to facilitate distribution
+ //       of refinement pattern. While the data itself can be 
+ //       sent point-to-point for non-halo elements,
+ //       mesh refinement information also needs to be sent for
+ //       halo elements which aren't known yet.
+ unsigned n_base_element=Base_mesh_element_pt.size();
+ Vector<int> old_domain_for_base_element_local(n_base_element,-1);
+ Vector<int> new_domain_for_base_element_local(n_base_element,-1);
+
+
+ // Loop over all non-halo elements on current processor and identify roots
+ // -------------------------------------------------------------------
+ // All leaf elements in associated tree (must!) get moved together
+ //----------------------------------------------------------------
+ unsigned count_non_halo_el=0;
+ unsigned n_elem=mesh_pt()->nelement();
+ for (unsigned e=0;e<n_elem;e++)
+  {
+   GeneralisedElement* el_pt=mesh_pt()->element_pt(e);
+   if (!el_pt->is_halo())
+    {
+
+     // New non-halo: Where is this element supposed to go to?
+     //-------------------------------------------------------
+     unsigned target_domain=
+      target_domain_for_local_non_halo_element[count_non_halo_el];
+     
+     // Bump up counter for non-halo elements
+     count_non_halo_el++;
+    
+
+     // Is it a root element? (It is, trivially, if it's not refineable)
+     //------------------------------------------------------------------
+     RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(el_pt);
+     if (ref_el_pt==0)
+      {
+       // Not refineable so add element itself
+       element_for_processor[target_domain].push_back(el_pt);
+
+       // Number of elements associated with this root/base element (just the
+       // element itself)
+       nelement_batch_for_processor[target_domain].push_back(1);
+
+       // This is the unique base/root element number in unrefined mesh
+       unsigned element_number_in_base_mesh=Base_mesh_element_number[el_pt];
+       base_element_for_element_batch_for_processor[target_domain].
+        push_back(element_number_in_base_mesh);
+
+       /// Where do I come from, where do I go to?
+       old_domain_for_base_element_local[element_number_in_base_mesh]=
+        my_rank;
+       new_domain_for_base_element_local[element_number_in_base_mesh]=
+        target_domain;
+      }
+     // It's not a root element so we package its leaves into a batch
+     //--------------------------------------------------------------
+     // of elements
+     //------------
+     else
+      {
+       // Get the root element
+       RefineableElement* root_el_pt=ref_el_pt->root_element_pt();
+       
+       // Has this root been visited yet?
+       if (!root_el_done[root_el_pt])
+        {
+         // Now we've done it
+         root_el_done[root_el_pt]=true;
+
+         // Unique number of root element in base mesh
+         unsigned element_number_in_base_mesh=
+          Base_mesh_element_number[root_el_pt];
+         
+         /// Where do I come from, where do I go to?
+         old_domain_for_base_element_local[element_number_in_base_mesh]=
+          my_rank;
+         new_domain_for_base_element_local[element_number_in_base_mesh]=
+          target_domain;
+         
+#ifdef PARANOID
+         // Store target domain associated with this root element
+         // (offset by one) to allow checking that all elements
+         // with the same root move to the same processor
+         target_plus_one_for_root[root_el_pt]=target_domain+1;
+#endif
+         
+         // Package all leaves into batch of elements
+         Vector<Tree*> all_leaf_nodes_pt;
+         root_el_pt->tree_pt()->stick_leaves_into_vector(all_leaf_nodes_pt);
+
+         // Number of leaves
+         unsigned n_leaf=all_leaf_nodes_pt.size();
+         
+         // Number of elements associated with this root/base element (all 
+         // the leaves)
+         nelement_batch_for_processor[target_domain].push_back(n_leaf);
+         
+         // Store the unique base/root element number in unrefined mesh
+         base_element_for_element_batch_for_processor[target_domain].
+          push_back(element_number_in_base_mesh);
+
+         // Loop over leaves
+         for (unsigned i_leaf=0;i_leaf<n_leaf;i_leaf++)
+          {
+           // Add element object at leaf
+           RefineableElement* leaf_el_pt=all_leaf_nodes_pt[i_leaf]->object_pt();
+           element_for_processor[target_domain].push_back(leaf_el_pt);
+
+           // Monitor/update maximum refinement level
+           unsigned level=all_leaf_nodes_pt[i_leaf]->level();
+           if (level>max_refinement_level)
+            {
+             max_refinement_level=level;
+            }
+          }
+         
+        }
+#ifdef PARANOID
+       // Root element has already been visited
+       else
+        {
+         // We don't have to do anything with this element since it's
+         // already been processed earlier, but check that it's scheduled
+         // to go onto the same processor as its root.
+         if ((target_plus_one_for_root[root_el_pt]-1)!=target_domain)
+          {           
+           std::ostringstream error_message;
+           error_message 
+            << "All elements associated with same root must have same target. "
+            << "during load balancing\n";
+           throw OomphLibError(
+            error_message.str(),
+            "Problem::get_data_to_be_sent_during_load_balancing()",
+            OOMPH_EXCEPTION_LOCATION);
+          }
+        }
+#endif
+      }
+    }
+  }        
+
+
+
+ // Determine max. refinement level and origin/destination scheme
+ // -------------------------------------------------------------
+ // for all root/base elements
+ // --------------------------
+
+ // Allreduce to work out max max refinement level across all processors
+ max_refinement_level_overall=0;
+ MPI_Allreduce(&max_refinement_level,&max_refinement_level_overall,1,
+               MPI_UNSIGNED,MPI_MAX,comm_pt->mpi_comm());
+
+ 
+ // Allreduce to tell everybody about the original and new domains
+ // for root elements
+ Vector<int> tmp_old_domain_for_base_element(n_base_element);
+ MPI_Allreduce(&old_domain_for_base_element_local[0],
+               &tmp_old_domain_for_base_element[0],n_base_element,
+               MPI_INT,MPI_MAX,comm_pt->mpi_comm());
+ Vector<int> tmp_new_domain_for_base_element(n_base_element);
+ MPI_Allreduce(&new_domain_for_base_element_local[0],
+               &tmp_new_domain_for_base_element[0],n_base_element,
+               MPI_INT,MPI_MAX,comm_pt->mpi_comm());
+ 
+
+ // Copy across (after optional sanity check)
+ old_domain_for_base_element.resize(n_base_element);
+ new_domain_for_base_element.resize(n_base_element);
+ for(unsigned j=0;j<n_base_element;j++)
+  {
+#ifdef PARANOID
+   if (tmp_old_domain_for_base_element[j]==-1)
+    {           
+     std::ostringstream error_message;
+     error_message 
+      << "Old domain for base element " << j << " does not\n"
+      << "appear to have been assigned by any processor\n";
+     throw OomphLibError(
+      error_message.str(),
+      "Problem::get_data_to_be_sent_during_load_balancing()",
+      OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+   old_domain_for_base_element[j]=tmp_old_domain_for_base_element[j];
+#ifdef PARANOID
+   if (tmp_new_domain_for_base_element[j]==-1)
+    {           
+     std::ostringstream error_message;
+     error_message 
+      << "New domain for base element " << j << " does not\n"
+      << "appear to have been assigned by any processor\n";
+     throw OomphLibError(
+      error_message.str(),
+      "Problem::get_data_to_be_sent_during_load_balancing()",
+      OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+   new_domain_for_base_element[j]=tmp_new_domain_for_base_element[j];
+  }
+
+
+
+
+ // Loop over all processors and accumulate data to be sent
+ //--------------------------------------------------------
+ send_data.clear();
+
+ // Only do each node once (per processor!)
+ Vector<std::map<Node*,bool> > node_done(n_proc);
+
+ // Loop over all processors. NOTE: We include current processor
+ // since we have to refine local elements too -- store their data
+ // in same data structure as the one used for off-processor elements.
+ for(int rank=0;rank<n_proc;rank++)
+  {  
+   //Set the offset for the current processor
+   send_displacement[rank] = send_data.size();
+   
+#ifdef PARANOID
+   // Check that total number of elements processed matches those
+   // in individual batches
+   unsigned total_nel=element_for_processor[rank].size();   
+#endif
+     
+     // Counter for number of elements
+     unsigned el_count=0;
+     
+     // How many baches are there for current rank?
+     unsigned nbatch=nelement_batch_for_processor[rank].size();
+     
+     // Add to vector of doubles to save on number of comms
+     send_data.push_back(double(nbatch));
+
+     // Loop over batches of elemnts associated with same root
+     for (unsigned b=0;b<nbatch;b++)
+      {              
+       // How many elements are to be sent in this batch?
+       unsigned nel=nelement_batch_for_processor[rank][b];
+       
+       // Get the unique number of the root element in unrefined mesh for 
+       // all the elements in this batch
+       unsigned base_el_no=
+        base_element_for_element_batch_for_processor[rank][b];
+       
+       // Add unsigneds to send data to minimise number of 
+       // communications
+       send_data.push_back(double(nel));
+       send_data.push_back(double(base_el_no));
+
+       // Loop over batch of elements
+       for (unsigned e=0;e<nel;e++)
+        {
+         // Get element
+         GeneralisedElement* el_pt=element_for_processor[rank][el_count];
+         
+         // FE?
+         FiniteElement* fe_pt=dynamic_cast<FiniteElement*>(el_pt);
+         if (fe_pt!=0)
+          {
+           // Loop over nodes
+           unsigned nnod=fe_pt->nnode();           
+           for (unsigned j=0;j<nnod;j++)
+            {
+             Node* nod_pt=fe_pt->node_pt(j);
+             
+             // Reconstruct the nodal values/position from the node's 
+             // possible hanging node representation to be on the safe side
+             unsigned n_value=nod_pt->nvalue();   
+             unsigned nt=nod_pt->ntstorage();
+             Vector<double> values(n_value);
+             unsigned n_dim=nod_pt->ndim();
+             Vector<double> position(n_dim);
+             
+             // Loop over all history values
+             for(unsigned t=0;t<nt;t++)
+              {
+               nod_pt->value(t,values);
+               for(unsigned i=0;i<n_value;i++) 
+                {
+                 nod_pt->set_value(t,i,values[i]);
+                }
+               nod_pt->position(t,position);
+               for(unsigned i=0;i<n_dim;i++) 
+                {
+                 nod_pt->x(t,i)=position[i];
+                }
+              }
+             
+             
+             // Has the node already been done for current rank?
+             if (!node_done[rank][nod_pt])
+              {
+               // Now it has been done
+               node_done[rank][nod_pt]=true;
+
+               // Store number of values (as double) to allow for resizing
+               // before read (req'd in case we store data that
+               // got introduced by attaching FaceElements to bulk)
+               send_data.push_back(double(n_value));
+
+               // Check if it's a boundary node
+               BoundaryNodeBase *bnod_pt = 
+                dynamic_cast<BoundaryNodeBase*>(nod_pt);
+
+               // Not a boundary node
+               if (bnod_pt==0)
+                {
+#ifdef PARANOID
+                 // Record status for checking
+                 send_data.push_back(double(0));
+#endif
+                }
+               // Yes it's a boundary node
+               else
+                {
+#ifdef PARANOID
+                 // Record status for checking
+                 send_data.push_back(double(1));
+#endif    
+                 // Get pointer to the map of indices associated with
+                 // additional values created by face elements
+                 std::map<unsigned, unsigned>* map_pt=
+                  bnod_pt->index_of_first_value_assigned_by_face_element_pt();
+                 
+                 // No additional values created
+                 if (map_pt==0)
+                  {
+                   send_data.push_back(double(0));
+                  }
+                 // Created additional values
+                 else
+                  {
+                   // How many?
+                   send_data.push_back(double(map_pt->size()));
+                   
+                   // Loop over entries in map and add to send data
+                   for (std::map<unsigned, unsigned>::iterator p=
+                         map_pt->begin();
+                        p!=map_pt->end();p++)
+                    {
+                     send_data.push_back(double((*p).first));
+                     send_data.push_back(double((*p).second));
+                    }
+                  }
+                }
+
+               // Add the actual values
+               nod_pt->add_values_to_vector(send_data);
+              }
+            }
+          }
+         
+         // Now add internal data 
+         el_pt->add_internal_data_values_to_vector(send_data);
+         
+         // Bump up counter in long vector of elements
+         el_count++;
+        }
+
+      }
+     
+     
+#ifdef PARANOID
+     // Check that total number of elements matches the total of those
+     // in batches
+     if (total_nel!=el_count)
+      {     
+       std::ostringstream error_message;
+       error_message 
+        << "total_nel: " << total_nel << " " 
+        << " doesn't match total number of elements sent in batch: "
+        << el_count << "\n";
+       throw OomphLibError(
+        error_message.str(),
+        "Problem::get_data_to_be_sent_during_load_balancing()",
+        OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+     
+     //Find the number of data added to the vector
+     send_n[rank] = send_data.size() - send_displacement[rank];
+  }
+}
+
+
+
+
+//==========================================================================
+/// Get flat-packed refinement pattern for each root element in current
+/// mesh (labeled by unique number of root element in unrefined base mesh).
+/// The vector stored for each root element contains the following
+/// information: 
+/// - First entry: Number of tree nodes (not just leaves!) in refinement
+///   tree emanating from this root [Zero if root element is not refineable]
+/// - Loop over all refinement levels
+///   - Loop over all tree nodes (not just leaves!)
+///     - If associated element exists when the mesh has been refined to 
+///       this level (either because it has been refined to this level or 
+///       because it's less refined): 1
+///       - If the element is to be refined: 1; else: 0
+///     - else (element doesn't exist when mesh is refined to this level 
+///       (because it's more refined): 0
+///     .
+///   .
+/// .
+//==========================================================================
+void Problem::get_flat_packed_refinement_pattern_for_load_balancing(
+ const Vector<unsigned>& old_domain_for_base_element,
+ const Vector<unsigned>& new_domain_for_base_element,
+ const unsigned& max_refinement_level_overall,
+ std::map<unsigned, Vector<unsigned> >& flat_packed_refinement_info_for_root)
+{
+ 
+ // Map to store whether the root element has been visited yet
+ std::map<RefineableElement*,bool> root_el_done;
+ 
+ // Loop over all elements
+ unsigned n_elem=mesh_pt()->nelement();
+  for (unsigned e=0;e<n_elem;e++)
+  {
+   // Get pointer to element
+   GeneralisedElement* el_pt=mesh_pt()->element_pt(e);
+
+   // Ignore halos
+   if (!el_pt->is_halo())
+    {
+     // Is it refineable? No!
+     RefineableElement* ref_el_pt=dynamic_cast<RefineableElement*>(el_pt);
+     if (ref_el_pt==0)
+      {
+       // The element is not refineable - stick a zero in refinement_info
+       // indicating that there are no tree nodes following
+       flat_packed_refinement_info_for_root[Base_mesh_element_number[el_pt]].
+        push_back(0);
+      }
+     // Refineable
+     else
+      {
+       // Get the root element
+       RefineableElement* root_el_pt=ref_el_pt->root_element_pt();
+       
+       // Has this root been visited yet?
+       if (!root_el_done[root_el_pt])
+        {         
+         // Get unique number of root element in base mesh
+         unsigned root_element_number=Base_mesh_element_number[root_el_pt];
+
+         // Get all the nodes associated with this root element
+         Vector<Tree*> all_tree_nodes_pt;
+         root_el_pt->tree_pt()->
+          stick_all_tree_nodes_into_vector(all_tree_nodes_pt);         
+
+         // How many tree nodes are there?
+         unsigned n_tree_nodes=all_tree_nodes_pt.size();         
+         flat_packed_refinement_info_for_root[root_element_number].
+          push_back(n_tree_nodes);
+
+         // Loop over all levels
+         for (unsigned current_level=0;
+              current_level<max_refinement_level_overall;
+              current_level++)
+          {
+           // Loop over all tree nodes
+           for (unsigned e=0;e<n_tree_nodes;e++)
+            {
+             // What's the level of this tree node?
+             unsigned level=all_tree_nodes_pt[e]->level();
+             
+             // Element exists at this refinement level of the mesh
+             // if it's at this level or it's at a lower level and a leaf
+             if ((level==current_level) || 
+                 ((level<current_level) && (all_tree_nodes_pt[e]->is_leaf())))
+              {
+               flat_packed_refinement_info_for_root[root_element_number].
+                push_back(1);
+
+               // If it's at this level, and not a leaf, then it will 
+               // need to be refined in the new mesh
+               if ((level==current_level) && (!all_tree_nodes_pt[e]->is_leaf()))
+                {
+                 flat_packed_refinement_info_for_root[root_element_number].
+                  push_back(1);
+                }
+               // Element exists at this level and is a leaf so it doesn't
+               // have to be refined
+               else
+                {
+                 flat_packed_refinement_info_for_root[root_element_number].
+                  push_back(0);
+                }
+              }
+             // Element does not exist at this level so it doesn't have
+             // to be refined
+             else
+              {
+               flat_packed_refinement_info_for_root[root_element_number].
+                push_back(0);
+              }
+            }
+          }
+         // Now we've done it
+         root_el_done[root_el_pt]=true;
+        }
+      }
+    }
+  } 
+}
+
+
+//==========================================================================
+/// Load balance helper routine:  Function performs max_level_overall 
+/// successive refinements of the problem's mesh(es) using the following
+/// procdure: Given ID of root element, root_element_id, and current 
+/// refinement level, level, the e-th entry in 
+/// refinement_info_for_root_elements[root_element_id][level][e] is equal 
+/// to 2 if the e-th element (using the enumeration when the mesh has been
+/// refined to the level-th level) is to be refined during the next 
+/// refinement; it's 1 if it's not to be refined. 
+//==========================================================================
+void Problem::refine_distributed_base_mesh
+(Vector<Vector<Vector<unsigned> > >& refinement_info_for_root_elements,
+ const unsigned& max_level_overall)
+{
+ // Loop over sub meshes
+ unsigned n_sub_mesh=nsub_mesh(); 
+ unsigned max_mesh=std::max(n_sub_mesh,unsigned(1));
+ for (unsigned i_mesh=0;i_mesh<max_mesh;i_mesh++)
+  {
+   // Choose the right mesh
+   Mesh* my_mesh_pt=0;
+   if (n_sub_mesh==0)
+    {
+     my_mesh_pt=mesh_pt();
+    }
+   else
+    {
+     my_mesh_pt=mesh_pt(i_mesh);
+    }
+
+   // Number of elements on this processor -- currently all elements
+   // are "base" elements since the mesh hasn't been refined.
+   unsigned n_el_on_this_proc=my_mesh_pt->nelement();
+
+   // Storage for actual refinement pattern:
+   // to_be_refined_on_this_proc[level][e] contains the element number
+   // of the e-th element that is to refined at the level-th refinement level 
+   Vector<Vector<unsigned> > to_be_refined_on_this_proc(max_level_overall);
+ 
+   // Count, at each level, the total number of elements in the mesh
+   // (we can accumulate this because we know that elements are
+   // enumerated tree by tree).
+   Vector<unsigned> el_count_on_this_proc(max_level_overall,0);
+
+   // Loop over levels where refinement is taking place
+   for (unsigned level=0;level<max_level_overall;level++)
+    {
+     // Loop over roots = unrefined elements on this processor in order.
+     // Note that this loops over the trees in unique order
+     for (unsigned e=0;e<n_el_on_this_proc;e++)
+      {
+       // Get the (root) element
+       FiniteElement* el_pt=my_mesh_pt->finite_element_pt(e);
+       
+       // What is its unique number in the base mesh
+       unsigned root_el_no=Base_mesh_element_number[el_pt];
+
+       // Number of refinements to be performed starting from current
+       // root element
+       unsigned n_refinements=
+        refinement_info_for_root_elements[root_el_no].size();
+
+       // Perform refinement?
+       if (level<n_refinements) 
+        {
+         // Loop over elements at this level
+         unsigned n_el=
+          refinement_info_for_root_elements[root_el_no][level].size();
+         for (unsigned ee=0;ee<n_el;ee++)
+          {
+           // Refinement code 2: Element is to be refined at this
+           // level
+           if (refinement_info_for_root_elements[root_el_no][level][ee]==2)
+            {
+             to_be_refined_on_this_proc[level].
+              push_back(el_count_on_this_proc[level]);
+             el_count_on_this_proc[level]++;
+            }
+           // Refinement code 1: Element should not be refined at this
+           // level -- keep going
+           else if (refinement_info_for_root_elements[root_el_no][level][ee]==1)
+            {
+             el_count_on_this_proc[level]++;
+            }
+          }
+        }
+      }
+    }
+
+   // Now do the actual refinement
+   TreeBasedRefineableMeshBase* ref_mesh_pt=
+    dynamic_cast<TreeBasedRefineableMeshBase*>(my_mesh_pt);
+   if (ref_mesh_pt!=0)
+    {
+     ref_mesh_pt->refine_base_mesh(this->communicator_pt(),
+                                   to_be_refined_on_this_proc);
+    }
+  }
+ 
+ // Rebuild global mesh after refinement
+ if (n_sub_mesh!=0)
+  {
+   // Rebuild the global mesh
+   rebuild_global_mesh();
+  }
+}
+
+
+
+#endif
 
 }

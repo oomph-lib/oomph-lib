@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=1
+NUM_TESTS=2
 
 # Doc what we're using to run tests on two processors
 echo " " 
@@ -30,16 +30,17 @@ mkdir RESLT
 sleep 5
 
 echo "Running prescribed displ. problem with Lagrange multipliers "
-$MPI_RUN_COMMAND ../prescribed_displ_lagr_mult > OUTPUT_prescribed_displ_lagr_mult
+$MPI_RUN_COMMAND ../prescribed_displ_lagr_mult --validation > OUTPUT_prescribed_displ_lagr_mult
 echo "done"
 echo " " >> validation.log
 echo "Prescribed displ. with Lagrange multipliers validation" >> validation.log
-echo "------------------------------------" >> validation.log
+echo "------------------------------------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
+
 cat RESLT/soln0_on_proc0.dat RESLT/soln1_on_proc1.dat RESLT/soln2_on_proc0.dat \
     RESLT/lagr0_on_proc1.dat RESLT/lagr1_on_proc0.dat RESLT/lagr2_on_proc1.dat \
     > prescribed_displ_lagr_mult_results.dat
@@ -49,6 +50,20 @@ if test "$1" = "no_fpdiff"; then
 else
 ../../../../../bin/fpdiff.py ../validata/prescribed_displ_lagr_mult_results.dat.gz  \
          prescribed_displ_lagr_mult_results.dat >> validation.log
+fi
+
+
+cat RESLT/soln3_on_proc0.dat RESLT/soln3_on_proc1.dat \
+    RESLT/soln4_on_proc0.dat RESLT/soln4_on_proc1.dat \
+    RESLT/lagr3_on_proc0.dat RESLT/lagr3_on_proc1.dat  \
+    RESLT/lagr4_on_proc0.dat RESLT/lagr4_on_proc1.dat  \
+    > prescribed_displ_lagr_mult_results_load_balanced.dat
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../../bin/fpdiff.py ../validata/prescribed_displ_lagr_mult_results_load_balanced.dat.gz  \
+         prescribed_displ_lagr_mult_results_load_balanced.dat >> validation.log
 fi
 
 mv RESLT RESLT_prescribed_displ_lagr_mult

@@ -1,18 +1,14 @@
 #!MC 1120
 $!VARSET |lostep|=0
-$!VARSET |nstep|=120
+$!VARSET |nstep|=19
 $!VARSET |dstep|=1
 
-$!VARSET |n_proc|=5
+$!VARSET |n_proc|=2
 
 $!VARSET |postfix|=".plt"
 $!VARSET |postfix|=".dat"
 $!VARSET |PNG|=0
-$!VARSET |dir|="RESLT"
-
-#"Validation/RESLT_doubly_adaptive_load_balanced_for_restart"
-#RESLT" # _for_restart"
-
+$!VARSET |dir|="np2/RESLT"
 
 $!NEWLAYOUT 
 $!IF |PNG|==0

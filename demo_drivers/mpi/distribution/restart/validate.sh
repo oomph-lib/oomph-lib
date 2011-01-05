@@ -5,6 +5,9 @@
 NUM_TESTS=1
 
 
+#MPI_RUN_COMMAND=`echo $MPI_RUN_COMMAND --output-filename output `
+#echo $MPI_RUN_COMMAND
+
 # Setup validation directory
 #---------------------------
 touch Validation
@@ -36,6 +39,8 @@ cat RESLT/soln0_on_proc0.dat  RESLT/soln0_on_proc1.dat  \
     RESLT/soln9_on_proc0.dat  RESLT/soln9_on_proc1.dat  \
     > result_doubly_adaptive_load_balanced.dat
 mv RESLT RESLT_doubly_adaptive_load_balanced_for_restart
+
+#exit
 
 mkdir RESLT
 $MPI_RUN_COMMAND ../two_d_unsteady_heat_2adapt_load_balance --validation_run --restart_file RESLT_doubly_adaptive_load_balanced_for_restart/restart3 --partitioning_file RESLT_doubly_adaptive_load_balanced_for_restart/partitioning.dat > OUTPUT_doubly_adaptive_load_balanced_restarted
