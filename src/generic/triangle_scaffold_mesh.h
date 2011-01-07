@@ -120,6 +120,11 @@ namespace TriangleHelper
  /// not copied, unless quiet=true;
  extern TriangulateIO deep_copy_of_triangulateio_representation(
   TriangulateIO& triangle_io, const bool& quiet=false);
+
+ /// \short Write the triangulateio data to disk as a poly file,
+ /// mainly used for debugging
+ extern void write_triangulateio_to_polyfile(TriangulateIO &triangle_io,
+                                             std::ostream &poly_file);
 }
 
 

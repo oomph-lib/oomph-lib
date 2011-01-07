@@ -2637,7 +2637,6 @@ public virtual QElement<1,3>
                    const Vector<double>& s)
    {
     unsigned n_dim =this->dim(); 
-    unsigned n_node=this->nnode();
    
     //If fld=n_dim, we deal with the pressure
     if (fld==n_dim)

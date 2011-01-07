@@ -16,7 +16,6 @@ cd Validation
 
 echo "Running 2D unstructured adaptive free surface validation" 
 mkdir RESLT
-
 ../adaptive_fs --validation > OUTPUT_fs
 echo "done"
 echo " " >> validation.log
@@ -27,13 +26,13 @@ echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat RESLT/soln4.dat RESLT/norm.dat > results_fs.dat
+cat RESLT/norm.dat > results_fs.dat
 
 if test "$1" = "no_fpdiff"; then
     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
     ../../../../bin/fpdiff.py ../validata/results_fs.dat.gz  \
-        results_fs.dat >> validation.log
+        results_fs.dat 0.1 1.0e-10 >> validation.log
 fi
 
 mv RESLT RESLT_fs
@@ -51,13 +50,13 @@ echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat RESLT/soln4.dat RESLT/norm.dat > results_int.dat
+cat RESLT/norm.dat > results_int.dat
 
 if test "$1" = "no_fpdiff"; then
     echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
     ../../../../bin/fpdiff.py ../validata/results_int.dat.gz  \
-        results_int.dat >> validation.log
+        results_int.dat 0.1 5.0e-9 >> validation.log
 fi
 
 mv RESLT RESLT_int

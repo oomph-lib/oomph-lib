@@ -788,7 +788,32 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
 void AxisymmetricFluidInterfaceElement::
 output(std::ostream &outfile, const unsigned &n_plot)
 {
- //Set output Vector
+ //Vector of local coordinates
+ Vector<double> s(1);
+ 
+ // Tecplot header info
+ outfile << tecplot_zone_string(n_plot);
+ 
+ // Loop over plot points
+ unsigned num_plot_points=nplot_points(n_plot);
+ for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+  {
+   // Get local coordinates of plot point
+   get_s_plot(iplot,n_plot,s);
+
+   for(unsigned i=0;i<2;i++) outfile << this->interpolated_x(s,i) << " ";
+   for(unsigned i=0;i<3;i++) outfile << interpolated_u(s,i) << " ";      
+   //Output a dummy pressure
+   outfile << 0.0 << std::endl;
+  }
+
+ // Write tecplot footer (e.g. FE connectivity lists)
+ write_tecplot_zone_footer(outfile,n_plot);
+
+ //Output a final blank line
+ outfile << std::endl;
+
+ /*//Set output Vector
  Vector<double> s(1);
  
  //Tecplot header info 
@@ -805,7 +830,7 @@ output(std::ostream &outfile, const unsigned &n_plot)
    //Output a dummy pressure
    outfile << 0.0 << std::endl;
   }
- outfile << std::endl;
+  outfile << std::endl;*/
 }
 
 

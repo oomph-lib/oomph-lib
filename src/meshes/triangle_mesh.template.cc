@@ -325,11 +325,13 @@ namespace oomph
          {
           //Element adjacent to boundary
           Boundary_region_element_pt[boundary_id-1]
-           [Tmp_mesh_pt->element_attribute(e)].push_back(elem_pt);
+           [static_cast<unsigned>(Tmp_mesh_pt->element_attribute(e))].
+           push_back(elem_pt);
           //Need to put a shift in here because of an inconsistent naming 
           //convention between triangle and face elements
           Face_index_region_at_boundary[boundary_id-1]
-           [Tmp_mesh_pt->element_attribute(e)].push_back((j+2)%3);
+           [static_cast<unsigned>(Tmp_mesh_pt->element_attribute(e))].
+           push_back((j+2)%3);
          }
        }
      }
@@ -2499,8 +2501,9 @@ namespace oomph
         double min_length = 0.01;
         std::set<Vector<double> > ::iterator it = vertex_nodes.begin();
         //Get the location of the "leftmost" (first) vertex
-        //Don't go to the final vertex
         Vector<double> left_vertex = *it;
+        //Loop over all other vertices starting from the first+1
+        //and stopping before the final vertex
         for(++it;it!=--vertex_nodes.end();++it)
          {
           //What is the actual length between the "left" vertex
@@ -2531,6 +2534,35 @@ namespace oomph
            {
             left_vertex = *it;
            }
+         }
+
+        //If the final element is too small then remove the interior node
+        //Get the last node
+        it = --vertex_nodes.end();
+        Vector<double> right_vertex = *it;
+        //Now decrease iterator
+        --it;
+        
+        //What is the actual length between the "right" vertex
+        //and the current vertex
+        double length = 0.0;
+        for(unsigned i=0;i<2;i++)
+         {
+          length += pow(((*it)[i+1] - right_vertex[i+1]),2.0);
+         }
+        //If smaller than minimum delete the current vertex
+        //Need to be careful when deleting entries in a set that
+        //is being iterated over.
+        if(sqrt(length) < min_length)
+         {
+          //Say so
+          oomph_info << "Surface element too small: ";
+          oomph_info << "Removing node at " << (*it)[1] << " " << (*it)[2]
+                     << "\n";
+          //Store the current value of the iterator
+          std::set<Vector<double> >::iterator tmp_it = it;
+          //Erase the offending entry
+          vertex_nodes.erase(tmp_it);
          }
        }
         
@@ -3003,6 +3035,10 @@ namespace oomph
     node_coord[2] = nod_pt->x(1);
     node_coord[3] = n;
     new_boundary_node[n] = node_coord;
+
+    //Let me see,
+    //std::cout << n << " " << node_coord[0] << " " << node_coord[1] 
+    //          << " " << node_coord[2] << " " << nod_pt << "\n";
    }
 
   //Sort the new boundary nodes based on their arc-length coordinate
@@ -3109,7 +3145,6 @@ namespace oomph
               << new_boundary_node[n][2] << "\n";
               }*/
 
-
   //Loop over the vector of new nodes and allocate exactly the same coordinate
   //as the old nodes at points of coincidence
   unsigned old_index = 0;
@@ -3172,10 +3207,18 @@ namespace oomph
    }
 #endif
 
-  //The end points should have been transferred over from the constructor
-  //so we'll add them in exactly
+  //The end points should always be present, so we
+  //can (and must) always add them in exactly
+  new_boundary_node[0][4] = new_boundary_node[0][0];
+  new_boundary_node[n_new_boundary_node-1][4] = 
   new_boundary_node[0][5] = 1.0;
+  
+  new_boundary_node[n_new_boundary_node-1][4] =
+   new_boundary_node[n_new_boundary_node-1][0];
   new_boundary_node[n_new_boundary_node-1][5] = 1.0;
+
+  //Create a list of boundary nodes that must be moved
+  std::list<unsigned> nodes_to_be_snapped;
   
   //Now loop over the interior nodes again and 
   //use linear interpolation to fill in any unassigned coordiantes
@@ -3184,6 +3227,10 @@ namespace oomph
     //If the new boundary coordinate has NOT been allocated
     if(new_boundary_node[n][5]==0.0)
      {
+      //Add its (unsorted) node number to the list
+      nodes_to_be_snapped.push_back(
+       static_cast<unsigned>(new_boundary_node[n][3]));
+       
       //We assume that the previous nodal value has been assigned
       //and read out the old and new boundary coordinates
       double zeta_old_low = new_boundary_node[n-1][0];
@@ -3262,14 +3309,19 @@ namespace oomph
   //Now assign the new nodes positions based on the old meshes
   //potentially curvilinear boundary (its geom object incarnation)
   Vector<double> new_x(2);
-  for(unsigned n=0;n<n_new_boundary_node;n++)
+  //for(unsigned n=0;n<n_new_boundary_node;n++)
+  //Loop over the nodes that need to be snapped
+  for(std::list<unsigned>::iterator it=nodes_to_be_snapped.begin();
+      it!=nodes_to_be_snapped.end();++it)
    {
+    //Read out the boundary node number
+    unsigned n = *it;
     //Get the boundary coordinate of all new nodes
     Node* const nod_pt = new_mesh_pt->boundary_node_pt(b,n);
     nod_pt->get_coordinates_on_boundary(b,b_coord);
     //Let's find boundary coordinates of the new node
     mesh_geom_obj_pt->position(b_coord,new_x);
-    //Snap to the boundary
+    //Now snap to the boundary
     for(unsigned i=0;i<2;i++)
      {
       nod_pt->x(i) = new_x[i];

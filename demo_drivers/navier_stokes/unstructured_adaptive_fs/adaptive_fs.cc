@@ -573,7 +573,7 @@ public:
    // Set the boundary conditions for fluid problem: All nodes are
    // free by default -- just pin the ones that have Dirichlet conditions
    // here. 
-   bool First_solid = false;
+   //bool First_solid = false;
    unsigned nbound=Fluid_mesh_pt->nboundary();
    for(unsigned ibound=0;ibound<nbound;ibound++)
     {
@@ -601,12 +601,12 @@ public:
        if(is_on_hole_sub_bound[ibound])
         {
          //Pin a single node horizontally
-         if((First_solid==false) && (Problem_Parameter::Alpha==0.0))
-          {
-           solid_node_pt->pin_position(0);
-           First_solid=true;
-          }
-         else
+         //  if((First_solid==false) && (Problem_Parameter::Alpha==0.0))
+         // {
+         //  solid_node_pt->pin_position(0);
+         //  First_solid=true;
+         // }
+         //else
           {
            solid_node_pt->unpin_position(0);
            solid_node_pt->unpin_position(1);

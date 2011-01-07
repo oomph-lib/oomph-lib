@@ -123,8 +123,6 @@ namespace TriangleHelper
   triangle_io.edgemarkerlist = (int *) NULL;
   triangle_io.normlist = (double *) NULL;
   triangle_io.numberofedges = 0;
-  
-
  }
 
 
@@ -306,6 +304,95 @@ namespace TriangleHelper
   
  }
 
+ /// \short Write the triangulateio data to disk as a poly file,
+ /// mainly used for debugging
+ void write_triangulateio_to_polyfile(TriangulateIO &triangle_io,
+                                      std::ostream &poly_file)
+ {
+  //Up the precision dramatiacally
+  poly_file.precision(20);
+
+  //Output the number of points and their attributes
+  //Store the number of attributes
+  const int n_attr = triangle_io.numberofpointattributes;
+  poly_file << triangle_io.numberofpoints << "  " << 2 << " " 
+            << n_attr << " " ;
+  //Determine whether there are point markers
+  bool point_markers=true;
+  if(triangle_io.pointmarkerlist==NULL) {point_markers=false;}
+  //Indicate this in the file
+  poly_file << point_markers << "\n";
+  
+  //Now output the point data
+  poly_file << "#Points\n";
+  for(int n=0;n<triangle_io.numberofpoints;++n)
+   {
+    //Output the point number and x and y coordinates
+    poly_file << n+1 << " " 
+              << triangle_io.pointlist[2*n] << " "
+              << triangle_io.pointlist[2*n+1] << " ";
+    //Output any attributes
+    for(int i=0;i<n_attr;++i)
+     {
+      poly_file << triangle_io.pointattributelist[n_attr*n+i] << " ";
+     }
+    //Output the boundary marker
+    if(point_markers)
+     {
+      poly_file << triangle_io.pointmarkerlist[n] << " ";
+     }
+    poly_file << "\n";
+   }
+
+  //Now move onto the segments
+  poly_file << "#Lines\n";
+  poly_file << triangle_io.numberofsegments << " ";
+  //Determine whether there are segment markers
+  bool seg_markers=true;
+  if(triangle_io.segmentmarkerlist==NULL) {seg_markers=false;}
+  //Output this info in the file
+  poly_file << seg_markers << "\n";
+
+  //Now output the segment data
+  for(int n=0;n<triangle_io.numberofsegments;++n)
+   {
+    poly_file << n+1 << " "  
+              << triangle_io.segmentlist[2*n] << " "
+              << triangle_io.segmentlist[2*n+1] << " ";
+    //If there is a boundary marker output
+    if(seg_markers)
+     {
+      poly_file << triangle_io.segmentmarkerlist[n] << " ";
+     }
+    poly_file << "\n";
+   }
+
+  //Now output the number of holes
+  poly_file << "#No holes\n";
+  poly_file << triangle_io.numberofholes << "\n";
+  //Output the hole data
+  for(int h=0;h<triangle_io.numberofholes;++h)
+   {
+    poly_file << h+1 << " " 
+              << triangle_io.holelist[2*h] << " "
+              << triangle_io.holelist[2*h+1] << "\n";
+   }
+
+  //Now output the number of regions
+  poly_file << "#Assignment of attributes to regions\n";
+  poly_file << triangle_io.numberofregions << "\n";
+  
+  //Loop over the regions
+  for(int r=0;r<triangle_io.numberofregions;++r)
+   {
+    poly_file << r+1 << " ";
+    for(unsigned i=0;i<4;i++)
+     {
+      poly_file << triangle_io.regionlist[4*r+i] << " ";
+     }
+    poly_file << "\n";
+   }
+ }
 }
 
 

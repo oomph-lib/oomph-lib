@@ -16,10 +16,8 @@ mkdir Validation
 cd Validation
 
 echo "Running unstructured torus validation "
-mkdir RESLT
-cd RESLT
-../../unstructured_torus > ../OUTPUT
-cd ..
+mkdir RESLT_TH RESLT_CR
+../unstructured_torus > ./OUTPUT
 echo "done"
 echo " " >> validation.log
 echo "Unstructured Torus validation" >> validation.log
@@ -29,7 +27,7 @@ echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat RESLT/soln_Re1000_t0.02.dat RESLT/time_trace.dat > torus.dat
+cat RESLT_TH/time_trace.dat RESLT_CR/time_trace.dat > torus.dat
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log

@@ -526,6 +526,29 @@ namespace oomph
      {
       this->setup_boundary_coordinates(b);
      }
+
+    //Excatly map the outer boundary onto the geometric object
+    //This may be overwritten later in the driver
+    for(unsigned s=0;s<n_outer_seg;s++)
+     {
+      Vector<double> b_coord(1);
+      Vector<double> new_x(2);
+      const unsigned n_boundary_node = this->nboundary_node(s);
+      for(unsigned n=0;n<n_boundary_node;++n)
+       {
+        //Can do this from the standard boundary_node interfaces 
+        //because there is only one
+        //region that neighbours the outer boundary
+        Node* const nod_pt = this->boundary_node_pt(s,n);
+        nod_pt->get_coordinates_on_boundary(s,b_coord);
+        //Get the position according to the underlying geometric object
+        outer_geom_object_pt->position(b_coord,new_x);
+        for(unsigned i=0;i<2;i++)
+         {
+          nod_pt->x(i) = new_x[i];
+         }
+       }
+     }
    }
 
   
@@ -558,7 +581,7 @@ namespace oomph
     
     // Input string for triangle
     std::stringstream input_string_stream;
-    input_string_stream<<"-pc-a" << element_area << "q30";
+    input_string_stream<<"-p-a" << element_area << "q30";
     
     // Convert to a *char required by the triangulate function
      char triswitches[100];
@@ -924,7 +947,7 @@ namespace oomph
                         inner_hole_pt,
                         fill_index,
                         triangulate_io);
-    
+
     // Sub_boundary_id vector is generated using this constructor only
     // set the boolean to true
     Sub_boundary_id_exists=true;
@@ -937,7 +960,7 @@ namespace oomph
     
     // Input string for triangle
     std::stringstream input_string_stream;
-    input_string_stream<<"-pcA-a" << element_area << "q30";
+    input_string_stream<<"-pA-a" << element_area << "q30";
     
     // Convert the Input string in *char required by the triangulate function
      char triswitches[100];
@@ -1154,7 +1177,7 @@ template<class ELEMENT>
 
      // Input string for triangle
      std::stringstream input_string_stream;
-     input_string_stream<<"-pcq30-ra"; 
+     input_string_stream<<"-pq30-ra"; 
      
      // Convert to a *char required by the triangulate function
      char triswitches[100];

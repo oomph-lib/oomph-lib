@@ -644,7 +644,7 @@ public:
    // Set the boundary conditions for fluid problem: All nodes are
    // free by default -- just pin the ones that have Dirichlet conditions
    // here. 
-   bool First_solid = false;
+   //bool First_solid = false;
    unsigned nbound=Fluid_mesh_pt->nboundary();
    for(unsigned ibound=0;ibound<nbound;ibound++)
     {
@@ -672,12 +672,12 @@ public:
        if(is_on_hole_sub_bound[ibound])
         {
          //Pin a single node horizontally
-         if((First_solid==false) && (Problem_Parameter::Alpha==0.0))
-          {
-           solid_node_pt->pin_position(0);
-           First_solid=true;
-          }
-         else
+         // if((First_solid==false) && (Problem_Parameter::Alpha==0.0))
+         // {
+         //  solid_node_pt->pin_position(0);
+         //  First_solid=true;
+         // }
+         //else
           {
            solid_node_pt->unpin_position(0);
            solid_node_pt->unpin_position(1);
@@ -1057,12 +1057,6 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  Bubble_pressure_data_pt->
  set_value(0,Problem_Parameter::Ca/Problem_Parameter::Radius);
 
- // Construct the mesh of elements that enforce prescribed boundary motion
- // of pseudo-solid fluid mesh by Lagrange multipliers
- Free_surface_mesh_pt=new Mesh;
- create_free_surface_elements();
-
-
  //Create volume constraint element
  Volume_constraint_mesh_pt = new Mesh;
  Volume_constraint_mesh_pt->add_element_pt(new ElasticVolumeConstraintElement);
@@ -1072,6 +1066,12 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  dynamic_cast<ElasticVolumeConstraintElement*>(
   Volume_constraint_mesh_pt->element_pt(0))
   ->volume_pt() = &Problem_Parameter::Volume;
+
+ // Construct the mesh of elements that represent the interface
+ // This must be done after the creation of the volume constraint mesh to 
+ // ensure that the traded pressure gets added correctly
+ Free_surface_mesh_pt=new Mesh;
+ create_free_surface_elements();
 
  // Combine meshes
  //---------------

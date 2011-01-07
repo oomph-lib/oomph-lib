@@ -103,6 +103,117 @@ private:
 };
 
 
+namespace oomph
+{
+
+//==============================================================
+/// Overload Element to allow calculation of the flux
+//==============================================================
+template<class ELEMENT>
+class MyAxisymmetricFluidElement : public ELEMENT
+ {
+ public:
+
+  /// Empty constructor
+  MyAxisymmetricFluidElement(){ }
+
+  /// Get square of L2 norm of velocity components
+  /// and add to the entries in the vector norm
+  double square_of_l2_norm()
+   {
+    //Initialise the sum to zero
+    double sum = 0.0;
+    
+    //Find out how many nodes there are
+    const unsigned n_node = this->nnode();
+    
+    //Find the indices at which the local velocities are stored
+    unsigned u_nodal_index[3];
+    for(unsigned i=0;i<3;i++) {u_nodal_index[i] = this->u_index_axi_nst(i);}
+    
+    //Set up memory for the velocity shape fcts
+    Shape psif(n_node);
+    DShape dpsidx(n_node,2);
+    
+    //Number of integration points
+    const unsigned n_intpt = this->integral_pt()->nweight();
+    
+    //Set the Vector to hold local coordinates
+    Vector<double> s(2);
+    
+    //Loop over the integration points
+    for(unsigned ipt=0;ipt<n_intpt;ipt++)
+     {
+      //Assign values of s
+      for(unsigned i=0;i<2;i++) s[i] = this->integral_pt()->knot(ipt,i);
+      
+      //Get the integral weight
+      double w = this->integral_pt()->weight(ipt);
+      
+      // Call the derivatives of the veloc shape functions
+      // (Derivs not needed but they are free)
+      double J = this->dshape_eulerian_at_knot(ipt,psif,dpsidx);
+
+
+      // Calculate position
+      Vector<double> interpolated_x(2,0.0);
+      //Calculate velocities 
+      Vector<double> interpolated_u(3,0.0);      
+      
+      // Loop over nodes
+      for(unsigned l=0;l<n_node;l++) 
+       {
+        const double psif_ = psif[l];
+
+        //Loop over physical coordinates
+        for(unsigned i=0;i<2;i++)
+         {
+          interpolated_x[i] += this->raw_nodal_position(l,i)*psif_;
+         }
+
+        //Loop over velocity components
+        for(unsigned i=0;i<3;i++)
+         {
+          interpolated_u[i] += this->raw_nodal_value(l,u_nodal_index[i])*psif_;
+         }
+       }
+
+      
+      //Premultiply the weights and the Jacobian
+      double W = interpolated_x[0]*w*J;
+
+      //Assemble square of L2 norm
+      for(unsigned i=0;i<3;i++)
+       {
+        sum +=interpolated_u[i]*interpolated_u[i]*W;
+       }           
+     }
+
+    return sum;
+   }
+
+ };
+
+
+//=======================================================================
+/// Face geometry for element is the same as that for the underlying
+/// wrapped element
+//=======================================================================
+ template<class ELEMENT>
+ class FaceGeometry<MyAxisymmetricFluidElement<ELEMENT> >
+  : public virtual FaceGeometry<ELEMENT> 
+ {
+ public:
+  FaceGeometry() : FaceGeometry<ELEMENT>() {}
+ };
+
+
+} //End of namespace extension
+
+
+
+
+
 #ifdef OOMPH_HAS_HYPRE
 //=============================================================================
 /// helper method for the block diagonal F block preconditioner to allow 
@@ -131,6 +242,41 @@ public:
               const double &min_error_target, 
               const double &max_error_target);
 
+ /// \short Calculate the square of the l2 norm
+ double calculate_square_of_l2_norm()
+  {
+   //Initialise
+   double sum = 0.0;
+
+   //Now loop over all elements and add the contributions to the 
+   //components of the norm
+   const unsigned n_element = this->mesh_pt()->nelement();
+   for(unsigned e=0;e<n_element;e++)
+    {
+     sum += dynamic_cast<ELEMENT*>(this->mesh_pt()->element_pt(e))
+      ->square_of_l2_norm();
+    }
+   return sum;
+  }
+
+
+ /// \short Calculate the cross-sectional area of the domain
+ double calculate_area()
+  {
+   //Initialise
+   double sum = 0.0;
+
+   //Now loop over all elements and add the contributions to the 
+   //components of the norm
+   const unsigned n_element = this->mesh_pt()->nelement();
+   for(unsigned e=0;e<n_element;e++)
+    {
+     sum += this->mesh_pt()->finite_element_pt(e)->size();
+    }
+   return sum;
+  }
+
+
 /// Set the initial conditions: all nodes have zero velocity
 void set_initial_condition() 
   {
@@ -148,7 +294,8 @@ void set_initial_condition()
  void set_boundary_conditions(const double &time);
 
  /// Function that is used to run the parameter study
- void solve_system(const double &dt, const unsigned &nstep);
+ void solve_system(const double &dt, const unsigned &nstep,
+                   const std::string &directory);
  
  /// Return a pointer to the specific mesh used
  RefineableTriangleMesh<ELEMENT>* mesh_pt() 
@@ -434,12 +581,16 @@ void UnstructuredTorusProblem<ELEMENT>::set_boundary_conditions(
 //==========================================================================
 template<class ELEMENT>
 void UnstructuredTorusProblem<ELEMENT>::solve_system(const double &dt, 
-                                         const unsigned &nstep)
+                                                     const unsigned &nstep,
+                                                     const std::string 
+                                                     &directory)
 {
  using namespace Global_Physical_Variables;
 
  //Open a trace file
- ofstream trace("time_trace.dat");
+ std::stringstream trace_name;
+ trace_name << directory << "/time_trace.dat";
+ ofstream trace(trace_name.str().c_str());
 
  //Define a string that we can set to be the name of the output file
  char filename[100];
@@ -452,11 +603,12 @@ void UnstructuredTorusProblem<ELEMENT>::solve_system(const double &dt,
  //Set an impulsive start from rest
  assign_initial_values_impulsive(dt);
 
+ //Calculate the l2 norm
+ double l2_norm = calculate_square_of_l2_norm();
+ double area = calculate_area();
+
  //Output intital data
- trace << time() << " " << mesh_pt()->boundary_node_pt(0,0)->value(2) 
-       << " " << mesh_pt()->node_pt(0)->value(0) 
-       << " " << mesh_pt()->node_pt(0)->value(1) 
-       << " " << mesh_pt()->node_pt(0)->value(2) << std::endl;
+ trace << time() << " " << area << " " << l2_norm << std::endl;
 
  //Increase the maximum value of the residuals to get
  //past the first few steps
@@ -465,14 +617,16 @@ void UnstructuredTorusProblem<ELEMENT>::solve_system(const double &dt,
  //Now perform the first timestep with 2 steps of refinement
  unsteady_newton_solve(dt,2,true);
 
- trace << time() << " " << mesh_pt()->boundary_node_pt(0,0)->value(2) 
-       << " " << mesh_pt()->node_pt(0)->value(0) 
-       << " " << mesh_pt()->node_pt(0)->value(1) 
-       << " " << mesh_pt()->node_pt(0)->value(2) << std::endl;
+ //Calculate the l2 norm and area
+ l2_norm = calculate_square_of_l2_norm();
+ area = calculate_area();
+
+ //Output intital data
+ trace << time() << " " << area << " " << l2_norm << std::endl;
  
  //Output data after the first timestep
  //Create the filename, including the array index
- sprintf(filename,"soln_Re%g_t%g.dat",Re,time());
+ sprintf(filename,"%s/soln_Re%g_t%g.dat",directory.c_str(),Re,time());
  //Actually, write the data
  file.open(filename);
  mesh_pt()->output(file,5);
@@ -483,15 +637,17 @@ void UnstructuredTorusProblem<ELEMENT>::solve_system(const double &dt,
   {
    //Solve the problem
    unsteady_newton_solve(dt,1,false);
- 
-   trace << time() << " " << mesh_pt()->boundary_node_pt(0,0)->value(2) 
-         << " " << mesh_pt()->node_pt(0)->value(0) 
-         << " " << mesh_pt()->node_pt(0)->value(1) 
-         << " " << mesh_pt()->node_pt(0)->value(2) << std::endl;
-  
+   
+   //Calculate the l2 norm and area
+   l2_norm = calculate_square_of_l2_norm();
+   area = calculate_area();
+   
+   //Output intital data
+   trace << time() << " " << area << " " << l2_norm << std::endl;
+   
    //Output data at each step
    //Create the filename, including the array index
-   sprintf(filename,"soln_Re%g_t%g.dat",Re,time());
+   sprintf(filename,"%s/soln_Re%g_t%g.dat",directory.c_str(),Re,time());
    //Actually, write the data
    file.open(filename);
    mesh_pt()->output(file,5);
@@ -516,16 +672,29 @@ int main()
  //times that isn't really necessary.
  double max_error = 1.0e-3;
  double min_error = 1.0e-5;
- UnstructuredTorusProblem<ProjectableAxisymmetricTaylorHoodElement<
-  AxisymmetricTTaylorHoodElement> > problem(
-  min_error,max_error);
 
- //Refine uniformly once
- //problem.refine_uniformly();
+ {
+  UnstructuredTorusProblem<MyAxisymmetricFluidElement<
+   ProjectableAxisymmetricTaylorHoodElement<
+   AxisymmetricTTaylorHoodElement> > >  problem(
+    min_error,max_error);
+  
+  //Now timestep
+  problem.solve_system(0.01,2,"RESLT_TH");
+ }
 
- //Now timestep
- problem.solve_system(0.01,2);
-}
+{
+  UnstructuredTorusProblem<MyAxisymmetricFluidElement<
+   ProjectableAxisymmetricCrouzeixRaviartElement<
+   AxisymmetricTCrouzeixRaviartElement> > >  problem(
+    min_error,max_error);
+  
+  //Now timestep
+  problem.solve_system(0.01,2,"RESLT_CR");
+ }
+
+
+ }
 
 
 
