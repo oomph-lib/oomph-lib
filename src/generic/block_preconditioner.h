@@ -1563,6 +1563,8 @@ namespace oomph
            // send
            if (ndof_to_send[p] > 0)
             {
+             // hierher: sample for continuguous sends.
+
              // the datatypes, displacements, lengths for the two datatypes
              MPI_Datatype types[2];
              MPI_Aint displacements[2];

@@ -173,6 +173,9 @@ namespace oomph
     {
      // Find the maximum and minimum coordinates for the mesh
      get_min_and_max_coordinates(mesh_pt);
+
+     // Create the bin structure
+     create_bins_of_objects();
     }
    else
     {
@@ -189,9 +192,6 @@ namespace oomph
         }
       }
     }
-
-   // Create the bin structure
-   create_bins_of_objects();
  }
 
 

@@ -44,76 +44,82 @@ namespace oomph
 //======================================================================
 namespace Multi_domain_functions
  {
-  // Lookup scheme for whether an element's integration point
-  // has had an external element assigned to it
+
+
+  // Workspace for locate zeta methods
+  //----------------------------------
+
+  /// \short Dimension of zeta tuples (set by get_dim_helper) -- needed
+  /// because we store the scalar coordinates in flat-packed form.
+  unsigned Dim;
+
+  /// \short Lookup scheme for whether a local element's integration point
+  /// has had an external element assigned to it -- essentially boolean.
+  /// External_element_located[e][ipt] = {0,1} if external element
+  /// for ipt-th integration in local element e {has not, has} been found.
+  /// Used locally to ensure that we're not searching for the same
+  /// elements over and over again when we go around the spirals.
   Vector<Vector<unsigned> > External_element_located;
-
-  // List of all Vectors used by the external storage routines 
   
-  /// \short Vector of (local) coordinates at integration points of
-  /// elements on current processor
-  Vector<double> Local_zetas;
+  /// \short Vector of flat-packed zeta coordinates for which the external
+  /// element could not be found during current local search. These
+  /// will be sent to the next processor in the ring-like parallel search.
+  /// The zeta coordinates come in groups of Dim (scalar) coordinates.
+  Vector<double> Flat_packed_zetas_not_found_locally;
 
-  /// \short Vector of (local) coordinates at integration points of
-  /// elements received from elsewhere
-  Vector<double> Zetas;
+  /// \short Vector of flat-packed zeta coordinates for which the external
+  /// element could not be found on another processor and for which
+  /// we're currently searching here. Whatever can't be found here,
+  /// gets written into Flat_packed_zetas_not_found_locally and then
+  /// passed on to the next processor during the ring-like parallel search.
+  /// The zeta coordinates come in  groups of Dim (scalar) coordinates.
+  Vector<double> Received_flat_packed_zetas_to_be_found;
 
-  /// \short Vector of the dimension of the element on current processor
-  Vector<unsigned> Local_zeta_dim;
+  /// \short Proc_id_plus_one_of_external_element[i] contains the 
+  /// processor id (plus one) of the processor
+  /// on which the i-th zeta coordinate tuple received from elsewhere 
+  /// (in the order in which these are stored in 
+  /// Received_flat_packed_zetas_to_be_found) was located; it's zero if
+  /// it wasn't found during the current stage of the ring-like parallel
+  /// search.
+  Vector<int> Proc_id_plus_one_of_external_element;
 
-  /// \short Vector of the dimension of the element received from elsewhere
-  Vector<unsigned> Zeta_dim;
+  /// \short Vector to indicate (to another processor) whether a
+  /// located element (that will have to represented as an external
+  /// halo element on that processor) should be newly created on that 
+  /// processor (2), already exists on that processor (1), or
+  /// is not on the current processor either (0).
+  Vector<unsigned> Located_element_status;
 
-  /// \short Vector to indicate locally which processor a coordinate 
-  /// has been located on
-  Vector<int> Found_zeta;
+  /// \short Vector of flat-packed local coordinates for zeta tuples
+  /// that have been located
+  Vector<double> Flat_packed_located_coordinates;
 
-  /// \short Vector of local coordinates within any elements found
-  /// locally by current processor
-  Vector<Vector<double> > Found_ss;
+  /// \short Vector of flat-packed doubles to be communicated with
+  /// other processors
+  Vector<double> Flat_packed_doubles;
 
-  /// \short Vector to indicate (on another process) whether a
-  /// located element should be newly created (2), already exists (1), or
-  /// is not on the current process at all (0)
-  Vector<unsigned> Located_element;
+  /// \short Counter used when processing vector of flat-packed 
+  /// doubles -- this is really "private" data, declared here
+  /// to avoid having to pass it (and the associated array)
+  /// between the various helper functions
+  unsigned Counter_for_flat_packed_doubles;
 
-  /// \short Vector of the local coordinates for each entry in Located_element
-  Vector<double> Located_coord;
+  /// \short Vector of flat-packed unsigneds to be communicated with
+  /// other processors -- this is really "private" data, declared here
+  /// to avoid having to pass the array between the various helper 
+  /// functions
+  Vector<unsigned> Flat_packed_unsigneds;
 
-  /// \short Vector for current processor which indicates when an external
-  /// halo element (and subsequent nodes) should be created
-  Vector<unsigned> Located_zetas;
+  /// \short Counter used when processing vector of flat-packed 
+  /// unsigneds -- this is really "private" data, declared here
+  /// to avoid having to pass it (and the associated array)
+  /// between the various helper functions
+  unsigned Counter_for_flat_packed_unsigneds;
 
-  /// \short Vector of doubles to be sent from another processor
-  Vector<double> Double_values;
 
-  /// \short Vector of unsigneds to be sent from another processor
-  Vector<unsigned> Unsigned_values;
-
-  // Counters for each of the above arrays
-
-  /// \short Double_values
-  unsigned Count_double_values;
-
-  /// \short Unsigned_values
-  unsigned Count_unsigned_values;
-
-  /// \short Located_coord
-  unsigned Count_located_coord;
-
-  /// \short Local_zeta_dim
-  unsigned Count_local_zeta_dim;
-
-  /// \short Zeta_dim
-  unsigned Count_zeta_dim;
-
-  /// \short Local_zetas
-  unsigned Count_local_zetas;
- 
-  /// \short Zetas
-  unsigned Count_zetas;
-
-  /// Default parameters for the binning method
+  // Default parameters for the binning method
+  //------------------------------------------
 
   /// \short Bool to tell the MeshAsGeomObject whether to calculate
   /// the extreme coordinates of the bin structure
@@ -167,6 +173,10 @@ namespace Multi_domain_functions
   /// Default value of 0.05.
   double Percentage_offset=0.05;
 
+
+  // Other parameters
+  //-----------------
+
   /// \short Boolean to indicate when to use the bulk element as the
   /// external element.  Defaults to false, you must have set up FaceElements
   /// properly first in order for it to work
@@ -190,6 +200,7 @@ namespace Multi_domain_functions
   bool Check_for_duplicates=true;
 
   // Functions for location method in multi-domain problems 
+
 
   //======================================================================
   /// Function which removes duplicate data that exist because
@@ -716,66 +727,43 @@ namespace Multi_domain_functions
    if (send_to_proc==n_proc) { send_to_proc=0; }
    if (recv_from_proc<0) { recv_from_proc=n_proc-1; }
 
-   // Copy the "local" arrays in order to send to required process
-   Count_zeta_dim=Count_local_zeta_dim;
-   Zeta_dim.resize(Count_zeta_dim);
-   for (unsigned i=0;i<Count_zeta_dim;i++)
-    {
-     Zeta_dim[i]=Local_zeta_dim[i];
-    }
-   Count_zetas=Count_local_zetas;
-   Zetas.resize(Count_zetas);
-   for (unsigned i=0;i<Count_zetas;i++)
-    {
-     Zetas[i]=Local_zetas[i];
-    }
+   // Send the number  of flat-packed zetas that we couldn't find
+   // locally to the next processor
+   int n_missing_local_zetas=Flat_packed_zetas_not_found_locally.size();
+   MPI_Isend(&n_missing_local_zetas,1,MPI_INT,send_to_proc,4,
+             comm_pt->mpi_comm(),&request);
 
-   // Send "local" values to next processor up
-   MPI_Isend(&Count_local_zeta_dim,1,MPI_INT,
-            send_to_proc,1,comm_pt->mpi_comm(),&request);
-   // Receive from previous processor
-   MPI_Recv(&Count_zeta_dim,1,MPI_INT,recv_from_proc,
-            1,comm_pt->mpi_comm(),&status);
-   MPI_Wait(&request,MPI_STATUS_IGNORE);
-
-   // Now do the Zeta_dim array
-   if (Count_local_zeta_dim!=0)
-    {
-     MPI_Isend(&Local_zeta_dim[0],Count_local_zeta_dim,MPI_INT,
-              send_to_proc,3,comm_pt->mpi_comm(),&request);
-    }
-   if (Count_zeta_dim!=0)
-    {
-     Zeta_dim.resize(Count_zeta_dim);
-     MPI_Recv(&Zeta_dim[0],Count_zeta_dim,MPI_INT,recv_from_proc,3,
-              comm_pt->mpi_comm(),&status);
-     MPI_Wait(&request,MPI_STATUS_IGNORE);
-    }
-
-   // Now do the Zetas array
-   MPI_Isend(&Count_local_zetas,1,MPI_INT,send_to_proc,4,comm_pt->mpi_comm(),
-             &request);
-   MPI_Recv(&Count_zetas,1,MPI_INT,recv_from_proc,
+   // Receive the number of flat-packed zetas that couldn't be found
+   // on the "previous" processor
+   int count_zetas=0;
+   MPI_Recv(&count_zetas,1,MPI_INT,recv_from_proc,
             4,comm_pt->mpi_comm(),&status);
 
    MPI_Wait(&request,MPI_STATUS_IGNORE);
 
-   if (Count_local_zetas!=0)
+
+   // Send the vector of flat-packed zetas that we couldn't find
+   // locally to the next processor
+   if (n_missing_local_zetas!=0)
     {           
-     MPI_Isend(&Local_zetas[0],Count_local_zetas,MPI_DOUBLE,
-              send_to_proc,5,comm_pt->mpi_comm(),&request);
+     MPI_Isend(&Flat_packed_zetas_not_found_locally[0],
+               n_missing_local_zetas,MPI_DOUBLE,
+               send_to_proc,5,comm_pt->mpi_comm(),&request);
     }
-   if (Count_zetas!=0)
+   
+   // Receive the vector of flat-packed zetas that couldn't be found
+   // on the "previous" processor
+   if (count_zetas!=0)
     {       
-     Zetas.resize(Count_zetas);
-     MPI_Recv(&Zetas[0],Count_zetas,MPI_DOUBLE,recv_from_proc,5,
+     Received_flat_packed_zetas_to_be_found.resize(count_zetas);
+     MPI_Recv(&Received_flat_packed_zetas_to_be_found[0],
+              count_zetas,MPI_DOUBLE,recv_from_proc,5,
               comm_pt->mpi_comm(),&status);
      MPI_Wait(&request,MPI_STATUS_IGNORE);
     }
-
-   // Now we should have the Zetas and Zeta_dim arrays set up correctly
+   
+   // Now we should have the Zeta arrays set up correctly
    // for the next round of locations
-
   }
 
 //========start of send_and_receive_located_info==========================
@@ -798,7 +786,8 @@ namespace Multi_domain_functions
    Vector<double> received_double_values;
    Vector<unsigned> received_unsigned_values;
    Vector<double> received_located_coord;
-   Vector<int> received_found_zeta;
+   Vector<int> received_proc_id_plus_one_of_external_element;
+   Vector<unsigned> received_located_element_status;
 
    // Communicate the located information back to the original process
    int orig_send_proc=my_rank-iproc;
@@ -806,59 +795,56 @@ namespace Multi_domain_functions
    int orig_recv_proc=my_rank+iproc;
    if ((my_rank+iproc)>=n_proc) { orig_recv_proc=orig_recv_proc-n_proc; }
 
-   // Store all this processor's Count_* variables to use in sends
-   unsigned send_count_double_values=Count_double_values;
-   unsigned send_count_zeta_dim=Count_zeta_dim;
-   unsigned send_count_located_coord=Count_located_coord;
-   unsigned send_count_unsigned_values=Count_unsigned_values;
+
 
    // Send the double values associated with external halos
+   //------------------------------------------------------
+   unsigned send_count_double_values=Flat_packed_doubles.size(); 
    MPI_Isend(&send_count_double_values,1,MPI_INT,
             orig_send_proc,1,comm_pt->mpi_comm(),&request);
-   MPI_Recv(&Count_double_values,1,MPI_INT,
+   int receive_count_double_values=0;
+   MPI_Recv(&receive_count_double_values,1,MPI_INT,
             orig_recv_proc,1,comm_pt->mpi_comm(),&status);
    MPI_Wait(&request,MPI_STATUS_IGNORE);
 
    if (send_count_double_values!=0)
     {
-     MPI_Isend(&Double_values[0],send_count_double_values,MPI_DOUBLE,
+     MPI_Isend(&Flat_packed_doubles[0],send_count_double_values,MPI_DOUBLE,
               orig_send_proc,2,comm_pt->mpi_comm(),&request);
     }
-
-   // Receive the double values from the correct processor
-   if (Count_double_values!=0)
+   if (receive_count_double_values!=0)
     {
-     received_double_values.resize(Count_double_values);
-     MPI_Recv(&received_double_values[0],Count_double_values,
+     received_double_values.resize(receive_count_double_values);
+     MPI_Recv(&received_double_values[0],receive_count_double_values,
               MPI_DOUBLE,orig_recv_proc,2,comm_pt->mpi_comm(),&status);
     }
-
    if (send_count_double_values!=0)
     {
      MPI_Wait(&request,MPI_STATUS_IGNORE);
     }
 
    // Now send unsigned values associated with external halos
+   //---------------------------------------------------------
+   unsigned send_count_unsigned_values=Flat_packed_unsigneds.size(); 
    MPI_Isend(&send_count_unsigned_values,1,MPI_INT,
             orig_send_proc,14,comm_pt->mpi_comm(),&request);
 
-   MPI_Recv(&Count_unsigned_values,1,MPI_INT,orig_recv_proc,14,
+   int receive_count_unsigned_values=0;
+   MPI_Recv(&receive_count_unsigned_values,1,MPI_INT,orig_recv_proc,14,
             comm_pt->mpi_comm(),&status);
 
    MPI_Wait(&request,MPI_STATUS_IGNORE);
 
    if (send_count_unsigned_values!=0)
     {     
-     MPI_Isend(&Unsigned_values[0],send_count_unsigned_values,MPI_INT,
+     MPI_Isend(&Flat_packed_unsigneds[0],send_count_unsigned_values,MPI_INT,
               orig_send_proc,15,comm_pt->mpi_comm(),&request);
     }
-
-   // Receive the unsigned values from the correct processor
-   if (Count_unsigned_values!=0)
+   if (receive_count_unsigned_values!=0)
     {
-     received_unsigned_values.resize(Count_unsigned_values);
-     MPI_Recv(&received_unsigned_values[0],Count_unsigned_values,MPI_INT,
-              orig_recv_proc,15,comm_pt->mpi_comm(),&status);
+     received_unsigned_values.resize(receive_count_unsigned_values);
+     MPI_Recv(&received_unsigned_values[0],receive_count_unsigned_values,
+              MPI_INT,orig_recv_proc,15,comm_pt->mpi_comm(),&status);
     }
 
    if (send_count_unsigned_values!=0)
@@ -866,63 +852,74 @@ namespace Multi_domain_functions
      MPI_Wait(&request,MPI_STATUS_IGNORE);
     }
 
-   // Send and received the Located_element and Found_zeta arrays
-   MPI_Isend(&send_count_zeta_dim,1,MPI_INT,orig_send_proc,
-            20,comm_pt->mpi_comm(),&request);
-   MPI_Recv(&Count_zeta_dim,1,MPI_INT,orig_recv_proc,
+   // Send and receive the Located_element_status
+   //--------------------------------------------
+   int send_count=Received_flat_packed_zetas_to_be_found.size()/Dim;
+   MPI_Isend(&send_count,1,MPI_INT,orig_send_proc,
+             20,comm_pt->mpi_comm(),&request);
+   int receive_count=0;
+   MPI_Recv(&receive_count,1,MPI_INT,orig_recv_proc,
             20,comm_pt->mpi_comm(),&status);
    MPI_Wait(&request,MPI_STATUS_IGNORE);
-
-   if (send_count_zeta_dim!=0)
+   
+   if (send_count!=0)
     {
-     MPI_Isend(&Located_element[0],send_count_zeta_dim,MPI_INT,
-              orig_send_proc,3,comm_pt->mpi_comm(),&request);
+     MPI_Isend(&Located_element_status[0],send_count,MPI_INT,
+               orig_send_proc,3,comm_pt->mpi_comm(),&request);
     }
-   if (Count_zeta_dim!=0)
+   
+   if (receive_count!=0)
     {
-     Located_zetas.resize(Count_zeta_dim);
-     MPI_Recv(&Located_zetas[0],Count_zeta_dim,MPI_INT,orig_recv_proc,3,
+     received_located_element_status.resize(receive_count);
+     MPI_Recv(&received_located_element_status[0],receive_count,
+              MPI_INT,orig_recv_proc,3,
               comm_pt->mpi_comm(),&status);
     }
-   if (send_count_zeta_dim!=0)
+   if (send_count!=0)
     {
      MPI_Wait(&request,MPI_STATUS_IGNORE);
     }
-
-
-   if (send_count_zeta_dim!=0)
+   
+   // Send and receive Proc_id_plus_one_of_external_element array
+   //------------------------------------------------------------
+   if (send_count!=0)
     {
-     MPI_Isend(&Found_zeta[0],send_count_zeta_dim,MPI_INT,
+     MPI_Isend(&Proc_id_plus_one_of_external_element[0],send_count,MPI_INT,
               orig_send_proc,13,comm_pt->mpi_comm(),&request);
     }
-   if (Count_zeta_dim!=0)
+   if (receive_count!=0)
     {
-     received_found_zeta.resize(Count_zeta_dim);
-     MPI_Recv(&received_found_zeta[0],Count_zeta_dim,MPI_INT,orig_recv_proc,13,
+     received_proc_id_plus_one_of_external_element.resize(receive_count);
+     MPI_Recv(&received_proc_id_plus_one_of_external_element[0],
+              receive_count,MPI_INT,orig_recv_proc,13,
               comm_pt->mpi_comm(),&status);
     }
-   if (send_count_zeta_dim!=0)
+   if (send_count!=0)
     {
      MPI_Wait(&request,MPI_STATUS_IGNORE);
     }
 
-
-   // And finally the Located_coord array
+   
+   // And finally the Flat_packed_located_coordinates array
+   //------------------------------------------------------
+   unsigned send_count_located_coord=Flat_packed_located_coordinates.size();
    MPI_Isend(&send_count_located_coord,1,MPI_INT,
             orig_send_proc,4,comm_pt->mpi_comm(),&request);
-   MPI_Recv(&Count_located_coord,1,MPI_INT,orig_recv_proc,4,
+   int receive_count_located_coord=0;
+   MPI_Recv(&receive_count_located_coord,1,MPI_INT,orig_recv_proc,4,
             comm_pt->mpi_comm(),&status);
    MPI_Wait(&request,MPI_STATUS_IGNORE);
 
    if (send_count_located_coord!=0)
     {     
-     MPI_Isend(&Located_coord[0],send_count_located_coord,MPI_DOUBLE,
-              orig_send_proc,5,comm_pt->mpi_comm(),&request);
+     MPI_Isend(&Flat_packed_located_coordinates[0],
+               send_count_located_coord,MPI_DOUBLE,
+               orig_send_proc,5,comm_pt->mpi_comm(),&request);
     }
-   if (Count_located_coord!=0)
+   if (receive_count_located_coord!=0)
     {
-     received_located_coord.resize(Count_located_coord);
-     MPI_Recv(&received_located_coord[0],Count_located_coord,MPI_DOUBLE,
+     received_located_coord.resize(receive_count_located_coord);
+     MPI_Recv(&received_located_coord[0],receive_count_located_coord,MPI_DOUBLE,
               orig_recv_proc,5,comm_pt->mpi_comm(),&status);
     }
    if (send_count_located_coord!=0)
@@ -930,30 +927,38 @@ namespace Multi_domain_functions
      MPI_Wait(&request,MPI_STATUS_IGNORE);
     }
 
-   // Fill in local arrays again: double and unsigned values
-   Double_values.resize(Count_double_values);
-   for (unsigned ii=0;ii<Count_double_values;ii++)
-    {
-     Double_values[ii]=received_double_values[ii];
-    }
-   Unsigned_values.resize(Count_unsigned_values);
-   for (unsigned ii=0;ii<Count_unsigned_values;ii++)
-    {
-     Unsigned_values[ii]=received_unsigned_values[ii];
-    }
 
-   // Found_zeta and Located_coord
-   Found_zeta.resize(Count_zeta_dim);
-   for (unsigned ii=0;ii<Count_zeta_dim;ii++)
-    {
-     Found_zeta[ii]=received_found_zeta[ii];
-    }
-   Located_coord.resize(Count_located_coord);
-   for (unsigned ii=0;ii<Count_located_coord;ii++)
-    {
-     Located_coord[ii]=received_located_coord[ii];
-    }
 
+   // Copy across into original containers -- these can now
+   //------------------------------------------------------
+   // be processed by create_external_halo_elements() to generate
+   //------------------------------------------------------------
+   // external halo elements
+   //------------------------
+   Flat_packed_doubles.resize(receive_count_double_values);
+   for (int ii=0;ii<receive_count_double_values;ii++)
+    {
+     Flat_packed_doubles[ii]=received_double_values[ii];
+    }
+   Flat_packed_unsigneds.resize(receive_count_unsigned_values);
+   for (int ii=0;ii<receive_count_unsigned_values;ii++)
+    {
+     Flat_packed_unsigneds[ii]=received_unsigned_values[ii];
+    }
+   Proc_id_plus_one_of_external_element.resize(receive_count);
+   Located_element_status.resize(receive_count);
+   for (int ii=0;ii<receive_count;ii++)
+    {
+     Proc_id_plus_one_of_external_element[ii]=
+      received_proc_id_plus_one_of_external_element[ii];
+     Located_element_status[ii]=received_located_element_status[ii];
+    }
+   Flat_packed_located_coordinates.resize(receive_count_located_coord);
+   for (int ii=0;ii<receive_count_located_coord;ii++)
+    {
+     Flat_packed_located_coordinates[ii]=received_located_coord[ii];
+    }
+   
   }
 
 
@@ -976,16 +981,15 @@ namespace Multi_domain_functions
       {
        // Indicate that this node is a hanging node so the other
        // process knows to create HangInfo and masters, etc.
-       Unsigned_values.push_back(1);
-       Count_unsigned_values++;
+       Flat_packed_unsigneds.push_back(1);
+
        // If this is a hanging node then add all its masters as
        // external halo nodes if they have not yet been added
        HangInfo* hang_pt=nod_pt->hanging_pt(i_cont);
        // Loop over masters
        unsigned n_master=hang_pt->nmaster();
        // Indicate number of master nodes to add on other process
-       Unsigned_values.push_back(n_master);
-       Count_unsigned_values++;
+       Flat_packed_unsigneds.push_back(n_master);
        for (unsigned m=0;m<n_master;m++)
         {
          Node* master_nod_pt=hang_pt->master_node_pt(m);
@@ -997,15 +1001,13 @@ namespace Multi_domain_functions
                                                 n_cont_inter_values);
 
          // Indicate the weight of this master
-         Double_values.push_back(hang_pt->master_weight(m));
-         Count_double_values++;
+         Flat_packed_doubles.push_back(hang_pt->master_weight(m));
         }
       }
      else
       {
        // Indicate that it's not a hanging node in this variable
-       Unsigned_values.push_back(0);
-       Count_unsigned_values++;
+       Flat_packed_unsigneds.push_back(0);
       }
     } // end loop over continously interpolated values
 
@@ -1030,8 +1032,7 @@ namespace Multi_domain_functions
     {
      // Indicate that this node needs to be constructed on
      // the other process
-     Unsigned_values.push_back(1);
-     Count_unsigned_values++;
+     Flat_packed_unsigneds.push_back(1);
 
      // This helper function gets all the required information for the 
      // specified node and stores it into MPI-sendable information
@@ -1042,12 +1043,10 @@ namespace Multi_domain_functions
     }
    else // It was already added
     {
-     Unsigned_values.push_back(0);
-     Count_unsigned_values++;
+     Flat_packed_unsigneds.push_back(0);
      // This node is already an external haloed node, so tell
      // the other process its index in the equivalent external halo storage
-     Unsigned_values.push_back(external_haloed_node_index);
-     Count_unsigned_values++;
+     Flat_packed_unsigneds.push_back(external_haloed_node_index);
     }
   }
 
@@ -1071,8 +1070,7 @@ namespace Multi_domain_functions
     {
      // Indicate that this node needs to be constructed on
      // the other process
-     Unsigned_values.push_back(1);
-     Count_unsigned_values++;
+     Flat_packed_unsigneds.push_back(1);
 
      // This gets all the required information for the specified
      // master node and stores it into MPI-sendable information
@@ -1084,12 +1082,11 @@ namespace Multi_domain_functions
     }
    else // It was already added
     {
-     Unsigned_values.push_back(0);
-     Count_unsigned_values++;
+     Flat_packed_unsigneds.push_back(0);
+
      // This node is already an external haloed node, so tell
      // the other process its index in the equivalent external halo storage
-     Unsigned_values.push_back(external_haloed_node_index);
-     Count_unsigned_values++;
+     Flat_packed_unsigneds.push_back(external_haloed_node_index);
     }
   }
 
@@ -1104,15 +1101,13 @@ namespace Multi_domain_functions
  void get_required_nodal_information_helper(int& iproc, Node* nod_pt,
                                             Problem* problem_pt,
                                             Mesh* const &external_mesh_pt,
-                                            int& n_cont_inter_values)//,
-  //FiniteElement* f_el_pt)
+                                            int& n_cont_inter_values)
   {
    // Tell the halo copy of this node how many values there are
    // [NB this may be different for nodes within the same element, e.g.
    //  when using Lagrange multipliers]
    unsigned n_val=nod_pt->nvalue();
-   Unsigned_values.push_back(n_val);
-   Count_unsigned_values++;
+   Flat_packed_unsigneds.push_back(n_val);
 
    unsigned n_dim=nod_pt->ndim();
    TimeStepper* time_stepper_pt=nod_pt->time_stepper_pt();
@@ -1134,15 +1129,12 @@ namespace Multi_domain_functions
 
    if (found_timestepper)
     {
-     Unsigned_values.push_back(1);
-     Count_unsigned_values++;
-     Unsigned_values.push_back(time_stepper_index);
-     Count_unsigned_values++;
+     Flat_packed_unsigneds.push_back(1);
+     Flat_packed_unsigneds.push_back(time_stepper_index);
     }
    else
     {
-     Unsigned_values.push_back(0);
-     Count_unsigned_values++;
+     Flat_packed_unsigneds.push_back(0);
     }
 
    // Default number of previous values to 1
@@ -1156,8 +1148,7 @@ namespace Multi_domain_functions
    // Is the node on any boundaries?
    if (nod_pt->is_on_boundary())
     {
-     Unsigned_values.push_back(1);
-     Count_unsigned_values++;
+     Flat_packed_unsigneds.push_back(1);
      // Loop over the boundaries of the external mesh
      unsigned n_bnd=external_mesh_pt->nboundary();
      for (unsigned i_bnd=0;i_bnd<n_bnd;i_bnd++)
@@ -1165,21 +1156,18 @@ namespace Multi_domain_functions
        // Which boundaries (could be more than one) is it on?
        if (nod_pt->is_on_boundary(i_bnd))
         {
-         Unsigned_values.push_back(1);
-         Count_unsigned_values++;
+         Flat_packed_unsigneds.push_back(1);
         }
        else
         {
-         Unsigned_values.push_back(0);
-         Count_unsigned_values++;
+         Flat_packed_unsigneds.push_back(0);
         }
       }
     }
    else
     {
      // Not on any boundary
-     Unsigned_values.push_back(0);
-     Count_unsigned_values++;
+     Flat_packed_unsigneds.push_back(0);
     }
 
    // Is the Node algebraic?  If so, send its ref values and
@@ -1194,23 +1182,19 @@ namespace Multi_domain_functions
 
      // Get default node update function ID
      unsigned update_id=alg_nod_pt->node_update_fct_id();
-     Unsigned_values.push_back(update_id);
-     Count_unsigned_values++;
+     Flat_packed_unsigneds.push_back(update_id);
 
      // Get reference values at default...
      unsigned n_ref_val=alg_nod_pt->nref_value();
-     Unsigned_values.push_back(n_ref_val);
-     Count_unsigned_values++;
+     Flat_packed_unsigneds.push_back(n_ref_val);
      for (unsigned i_ref_val=0;i_ref_val<n_ref_val;i_ref_val++)
       {
-       Double_values.push_back(alg_nod_pt->ref_value(i_ref_val));
-       Count_double_values++;
+       Flat_packed_doubles.push_back(alg_nod_pt->ref_value(i_ref_val));
       }
 
      // Access geometric objects at default...
      unsigned n_geom_obj=alg_nod_pt->ngeom_object();
-     Unsigned_values.push_back(n_geom_obj);
-     Count_unsigned_values++;
+     Flat_packed_unsigneds.push_back(n_geom_obj);
      for (unsigned i_geom=0;i_geom<n_geom_obj;i_geom++)
       {
        GeomObject* geom_obj_pt=alg_nod_pt->geom_object_pt(i_geom);
@@ -1225,8 +1209,7 @@ namespace Multi_domain_functions
            found_geom_object=i_list;
           }
         }
-       Unsigned_values.push_back(found_geom_object);
-       Count_unsigned_values++;
+       Flat_packed_unsigneds.push_back(found_geom_object);
       }
     }
 
@@ -1242,9 +1225,8 @@ namespace Multi_domain_functions
       {
        for (unsigned t=0;t<n_prev;t++)
         {
-         Double_values.push_back(solid_nod_pt->variable_position_pt()->
+         Flat_packed_doubles.push_back(solid_nod_pt->variable_position_pt()->
                           value(t,i_val));
-         Count_double_values++;
         }
       }
     }
@@ -1254,8 +1236,7 @@ namespace Multi_domain_functions
     {
      for (unsigned t=0;t<n_prev;t++)
       {
-       Double_values.push_back(nod_pt->value(t,i_val));
-       Count_double_values++;
+       Flat_packed_doubles.push_back(nod_pt->value(t,i_val));
       }
     }
 
@@ -1264,8 +1245,7 @@ namespace Multi_domain_functions
     {
      for (unsigned t=0;t<n_prev;t++)
       {
-       Double_values.push_back(nod_pt->x(t,idim));
-       Count_double_values++;
+       Flat_packed_doubles.push_back(nod_pt->x(t,idim));
       }
     }
   }
@@ -1280,21 +1260,16 @@ namespace Multi_domain_functions
   Mesh* const &external_mesh_pt, int& n_cont_inter_values)
   {
    // Need to send over dimension, position type and number of values
-   Unsigned_values.push_back(master_nod_pt->ndim());
-   Count_unsigned_values++;
-   Unsigned_values.push_back(master_nod_pt->nposition_type());
-   Count_unsigned_values++;
-   Unsigned_values.push_back(master_nod_pt->nvalue());
-   Count_unsigned_values++;
+   Flat_packed_unsigneds.push_back(master_nod_pt->ndim());
+   Flat_packed_unsigneds.push_back(master_nod_pt->nposition_type());
+   Flat_packed_unsigneds.push_back(master_nod_pt->nvalue());
    
    // If it's a solid node, also need to send lagrangian dim and type
    SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(master_nod_pt);
    if (solid_nod_pt!=0)
     {
-     Unsigned_values.push_back(solid_nod_pt->nlagrangian());
-     Count_unsigned_values++;
-     Unsigned_values.push_back(solid_nod_pt->nlagrangian_type());
-     Count_unsigned_values++;
+     Flat_packed_unsigneds.push_back(solid_nod_pt->nlagrangian());
+     Flat_packed_unsigneds.push_back(solid_nod_pt->nlagrangian_type());
     }
 
    unsigned n_dim=master_nod_pt->ndim();
@@ -1318,15 +1293,12 @@ namespace Multi_domain_functions
 
    if (found_timestepper)
     {
-     Unsigned_values.push_back(1);
-     Count_unsigned_values++;
-     Unsigned_values.push_back(time_stepper_index);
-     Count_unsigned_values++;
+     Flat_packed_unsigneds.push_back(1);
+     Flat_packed_unsigneds.push_back(time_stepper_index);
     }
    else
     {
-     Unsigned_values.push_back(0);
-     Count_unsigned_values++;
+     Flat_packed_unsigneds.push_back(0);
     }
 
    // Default number of previous values to 1
@@ -1340,8 +1312,7 @@ namespace Multi_domain_functions
    // Is the node on any boundaries?
    if (master_nod_pt->is_on_boundary())
     {
-     Unsigned_values.push_back(1);
-     Count_unsigned_values++;
+     Flat_packed_unsigneds.push_back(1);
      // Loop over the boundaries of the external mesh
      unsigned n_bnd=external_mesh_pt->nboundary();
      for (unsigned i_bnd=0;i_bnd<n_bnd;i_bnd++)
@@ -1349,21 +1320,18 @@ namespace Multi_domain_functions
        // Which boundaries (could be more than one) is it on?
        if (master_nod_pt->is_on_boundary(i_bnd))
         {
-         Unsigned_values.push_back(1);
-         Count_unsigned_values++;
+         Flat_packed_unsigneds.push_back(1);
         }
        else
         {
-         Unsigned_values.push_back(0);
-         Count_unsigned_values++;
+         Flat_packed_unsigneds.push_back(0);
         }
       }
     }
    else
     {
      // Not on any boundary
-     Unsigned_values.push_back(0);
-     Count_unsigned_values++;
+     Flat_packed_unsigneds.push_back(0);
     }
 
    // Is the Node algebraic?  If so, send its ref values and
@@ -1378,23 +1346,19 @@ namespace Multi_domain_functions
 
      // Get default node update function ID
      unsigned update_id=alg_nod_pt->node_update_fct_id();
-     Unsigned_values.push_back(update_id);
-     Count_unsigned_values++;
+     Flat_packed_unsigneds.push_back(update_id);
 
      // Get reference values at default...
      unsigned n_ref_val=alg_nod_pt->nref_value();
-     Unsigned_values.push_back(n_ref_val);
-     Count_unsigned_values++;
+     Flat_packed_unsigneds.push_back(n_ref_val);
      for (unsigned i_ref_val=0;i_ref_val<n_ref_val;i_ref_val++)
       {
-       Double_values.push_back(alg_nod_pt->ref_value(i_ref_val));
-       Count_double_values++;
+       Flat_packed_doubles.push_back(alg_nod_pt->ref_value(i_ref_val));
       }
 
      // Access geometric objects at default...
      unsigned n_geom_obj=alg_nod_pt->ngeom_object();
-     Unsigned_values.push_back(n_geom_obj);
-     Count_unsigned_values++;
+     Flat_packed_unsigneds.push_back(n_geom_obj);
      for (unsigned i_geom=0;i_geom<n_geom_obj;i_geom++)
       {
        GeomObject* geom_obj_pt=alg_nod_pt->geom_object_pt(i_geom);
@@ -1409,8 +1373,7 @@ namespace Multi_domain_functions
            found_geom_object=i_list;
           }
         }
-       Unsigned_values.push_back(found_geom_object);
-       Count_unsigned_values++;
+       Flat_packed_unsigneds.push_back(found_geom_object);
       }
     } // end AlgebraicNode check
 
@@ -1433,8 +1396,7 @@ namespace Multi_domain_functions
      // If it wasn't already added, we need to create a halo copy
      if (external_haloed_el_index==n_ext_haloed_el)
       {
-       Unsigned_values.push_back(1);
-       Count_unsigned_values++;
+       Flat_packed_unsigneds.push_back(1);
        
        //Cast to a finite elemnet
        FiniteElement* macro_node_update_finite_el_pt 
@@ -1445,15 +1407,13 @@ namespace Multi_domain_functions
         dynamic_cast<MacroElementNodeUpdateMesh*>(external_mesh_pt);
        if (macro_mesh_pt!=0)
         {
-         Unsigned_values.push_back(1);
-         Count_unsigned_values++;
+         Flat_packed_unsigneds.push_back(1);
          
          // Need to send the macro element number in the mesh across
          MacroElement* macro_el_pt= macro_node_update_finite_el_pt
           ->macro_elem_pt();
          unsigned macro_el_num=macro_el_pt->macro_element_number();
-         Unsigned_values.push_back(macro_el_num);
-         Count_unsigned_values++;
+         Flat_packed_unsigneds.push_back(macro_el_num);
 
          // Also need to send
          // the lower left and upper right coordinates of the macro element
@@ -1467,10 +1427,8 @@ namespace Multi_domain_functions
            unsigned el_dim=q_el_pt->dim();
            for (unsigned i_dim=0;i_dim<el_dim;i_dim++)
             {
-             Double_values.push_back(q_el_pt->s_macro_ll(i_dim));
-             Count_double_values++;
-             Double_values.push_back(q_el_pt->s_macro_ur(i_dim));
-             Count_double_values++;
+             Flat_packed_doubles.push_back(q_el_pt->s_macro_ll(i_dim));
+             Flat_packed_doubles.push_back(q_el_pt->s_macro_ur(i_dim));
             }
           }
          else // Throw an error
@@ -1490,8 +1448,7 @@ namespace Multi_domain_functions
             // already inside a loop over macro elements, so this
             // should never get here... an error should be thrown I suppose
         {
-         Unsigned_values.push_back(0);
-         Count_unsigned_values++;
+         Flat_packed_unsigneds.push_back(0);
         }
 
        // This element needs to be fully functioning on the other
@@ -1508,11 +1465,8 @@ namespace Multi_domain_functions
       }
      else // The external haloed element already exists
       {
-       Unsigned_values.push_back(0);
-       Count_unsigned_values++;
-
-       Unsigned_values.push_back(external_haloed_el_index);
-       Count_unsigned_values++;
+       Flat_packed_unsigneds.push_back(0);
+       Flat_packed_unsigneds.push_back(external_haloed_el_index);
       }
 
     } // end of MacroElementNodeUpdateNode check 
@@ -1525,9 +1479,8 @@ namespace Multi_domain_functions
       {
        for (unsigned t=0;t<n_prev;t++)
         {
-         Double_values.push_back(solid_nod_pt->variable_position_pt()->
+         Flat_packed_doubles.push_back(solid_nod_pt->variable_position_pt()->
                           value(t,i_val));
-         Count_double_values++;
         }
       }
     }
@@ -1540,8 +1493,7 @@ namespace Multi_domain_functions
     {
      for (unsigned t=0;t<n_prev;t++)
       {
-       Double_values.push_back(master_nod_pt->value(t,i_val));
-       Count_double_values++;
+       Flat_packed_doubles.push_back(master_nod_pt->value(t,i_val));
       }
     }
 
@@ -1550,8 +1502,7 @@ namespace Multi_domain_functions
     {
      for (unsigned t=0;t<n_prev;t++)
       {
-       Double_values.push_back(master_nod_pt->x(t,idim));
-       Count_double_values++;
+       Flat_packed_doubles.push_back(master_nod_pt->x(t,idim));
       }
     }
 
@@ -1574,10 +1525,11 @@ namespace Multi_domain_functions
  {
   // Given the node and the external mesh, and received information
   // about them from process loc_p, construct them on the current process
-  if (Unsigned_values[Count_unsigned_values]==1)
+  if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]==1)
    {
     // Increment counter
-    Count_unsigned_values++;
+    Counter_for_flat_packed_unsigneds++;
+
     // Construct a new node based upon sent information
     construct_new_external_halo_node_helper(new_nod_pt,loc_p,
                                             node_index,new_el_pt,
@@ -1586,13 +1538,14 @@ namespace Multi_domain_functions
   else
    {
     // Increment counter (node already exists)
-    Count_unsigned_values++;
+    Counter_for_flat_packed_unsigneds++;
+
     // Copy node from received location
     new_nod_pt=external_mesh_pt->external_halo_node_pt
-     (loc_p,Unsigned_values[Count_unsigned_values]);
+     (loc_p,Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]);
     new_el_pt->node_pt(node_index)=new_nod_pt;
     // Increment counter
-    Count_unsigned_values++;
+    Counter_for_flat_packed_unsigneds++;
    }
  }
 
@@ -1610,37 +1563,37 @@ namespace Multi_domain_functions
  {
   // The first entry indicates the number of values at this new Node
   // (which may be different across the same element e.g. Lagrange multipliers)
-  unsigned n_val=Unsigned_values[Count_unsigned_values];
-  Count_unsigned_values++;
+  unsigned n_val=Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds];
+  Counter_for_flat_packed_unsigneds++;
 
   // Null TimeStepper for now
   TimeStepper* time_stepper_pt=0;
   // Default number of previous values to 1
   unsigned n_prev=1;
 
-  // The next entry in Unsigned_values indicates
+  // The next entry in Flat_packed_unsigneds indicates
   // if a timestepper is required for this halo node
-  if (Unsigned_values[Count_unsigned_values]==1)
+  if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]==1)
    {
-    Count_unsigned_values++;
+    Counter_for_flat_packed_unsigneds++;
     // Index
     time_stepper_pt=problem_pt->time_stepper_pt
-     (Unsigned_values[Count_unsigned_values]);
-    Count_unsigned_values++;
+     (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]);
+    Counter_for_flat_packed_unsigneds++;
     // Check whether number of prev values is "sent" across
     n_prev=time_stepper_pt->ntstorage(); 
    }
   else
    {
     // No timestepper, increment counter
-    Count_unsigned_values++;
+    Counter_for_flat_packed_unsigneds++;
    }
 
   // If this node was on a boundary then it needs to
   // be on the same boundary here
-  if (Unsigned_values[Count_unsigned_values]==1)
+  if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]==1)
    {
-    Count_unsigned_values++;
+    Counter_for_flat_packed_unsigneds++;
 
     // Construct a new boundary node
     if (time_stepper_pt!=0)
@@ -1657,25 +1610,25 @@ namespace Multi_domain_functions
     unsigned n_bnd=external_mesh_pt->nboundary();
     for (unsigned i_bnd=0;i_bnd<n_bnd;i_bnd++)
      {
-      if (Unsigned_values
-          [Count_unsigned_values]==1)
+      if (Flat_packed_unsigneds
+          [Counter_for_flat_packed_unsigneds]==1)
        {
         // Add to current boundary; increment counter
         external_mesh_pt->add_boundary_node(i_bnd,
                                             new_nod_pt);
-        Count_unsigned_values++;
+        Counter_for_flat_packed_unsigneds++;
        }
       else
        {
         // Not on this boundary; increment counter
-        Count_unsigned_values++;
+        Counter_for_flat_packed_unsigneds++;
        }
      }
    }
   else
    {
     // Not on boundary, increment counter
-    Count_unsigned_values++;
+    Counter_for_flat_packed_unsigneds++;
 
     // Construct an ordinary (non-boundary) node
     if (time_stepper_pt!=0)
@@ -1708,26 +1661,26 @@ namespace Multi_domain_functions
     /// the default node update id
     /// e.g. for the quarter circle there are 
     /// "Upper_left_box", "Lower right box" etc...
-    unsigned update_id=Unsigned_values
-     [Count_unsigned_values];
-    Count_unsigned_values++;
+    unsigned update_id=Flat_packed_unsigneds
+     [Counter_for_flat_packed_unsigneds];
+    Counter_for_flat_packed_unsigneds++;
 
     Vector<double> ref_value;
 
     // The size of this vector is in the next entry
     // of All_alg_nodal_info
-    unsigned n_ref_val=Unsigned_values
-     [Count_unsigned_values];
-    Count_unsigned_values++;
+    unsigned n_ref_val=Flat_packed_unsigneds
+     [Counter_for_flat_packed_unsigneds];
+    Counter_for_flat_packed_unsigneds++;
 
     // The reference values themselves are in
     // All_alg_ref_value
     ref_value.resize(n_ref_val);
     for (unsigned i_ref=0;i_ref<n_ref_val;i_ref++)
      {
-      ref_value[i_ref]=Double_values
-       [Count_double_values];
-      Count_double_values++;
+      ref_value[i_ref]=Flat_packed_doubles
+       [Counter_for_flat_packed_doubles];
+      Counter_for_flat_packed_doubles++;
      }
 
     Vector<GeomObject*> geom_object_pt;
@@ -1737,18 +1690,18 @@ namespace Multi_domain_functions
 
     // The size of this vector is in the next entry
     // of All_alg_nodal_info
-    unsigned n_geom_obj=Unsigned_values
-     [Count_unsigned_values];
-    Count_unsigned_values++;
+    unsigned n_geom_obj=Flat_packed_unsigneds
+     [Counter_for_flat_packed_unsigneds];
+    Counter_for_flat_packed_unsigneds++;
 
     // The remaining indices are in the rest of 
     // All_alg_nodal_info
     geom_object_pt.resize(n_geom_obj);
     for (unsigned i_geom=0;i_geom<n_geom_obj;i_geom++)
      {
-      unsigned geom_index=Unsigned_values
-       [Count_unsigned_values];
-      Count_unsigned_values++;
+      unsigned geom_index=Flat_packed_unsigneds
+       [Counter_for_flat_packed_unsigneds];
+      Counter_for_flat_packed_unsigneds++;
       // This index indicates which of the AlgebraicMesh's
       // stored geometric objects should be used
       // (0 is a null pointer; everything else should have
@@ -1808,8 +1761,8 @@ namespace Multi_domain_functions
        {
         solid_nod_pt->variable_position_pt()->
          set_value(t,i_val,
-                   Double_values[Count_double_values]);
-        Count_double_values++;
+                   Flat_packed_doubles[Counter_for_flat_packed_doubles]);
+        Counter_for_flat_packed_doubles++;
        }
      }
    }
@@ -1827,9 +1780,9 @@ namespace Multi_domain_functions
    {
     for (unsigned t=0;t<n_prev;t++)
      {
-      new_nod_pt->set_value(t,i_val,Double_values
-                            [Count_double_values]);
-      Count_double_values++;
+      new_nod_pt->set_value(t,i_val,Flat_packed_doubles
+                            [Counter_for_flat_packed_doubles]);
+      Counter_for_flat_packed_doubles++;
      }
    }
 
@@ -1840,9 +1793,9 @@ namespace Multi_domain_functions
     for (unsigned t=0;t<n_prev;t++)
      {
       // Copy to coordinate
-      new_nod_pt->x(t,idim)=Double_values
-       [Count_double_values];
-      Count_double_values++;
+      new_nod_pt->x(t,idim)=Flat_packed_doubles
+       [Counter_for_flat_packed_doubles];
+      Counter_for_flat_packed_doubles++;
      }
    }
  }
@@ -1860,278 +1813,261 @@ namespace Multi_domain_functions
    int n_proc=comm_pt->nproc();
    int my_rank=comm_pt->my_rank();
 
-   // Reset counters and resize vectors to be sent
-   Count_double_values=0;
-   Count_unsigned_values=0;
-   Count_located_coord=0;
-   Double_values.resize(0);
-   Unsigned_values.resize(0);
-   Located_coord.resize(0);
+   // Resize vectors containing data to be setn
+   Flat_packed_doubles.resize(0);
+   Flat_packed_unsigneds.resize(0);
+   Flat_packed_located_coordinates.resize(0);
 
-   Count_zetas=0;
-   Count_local_zeta_dim=0;
-   Count_local_zetas=0;
-   Local_zeta_dim.resize(0);
-   Local_zetas.resize(0);
+   // Flush storage for zetas not found locally (when
+   // processing the zeta coordinates received from "previous"
+   // processor)
+   Flat_packed_zetas_not_found_locally.resize(0);
+   
+   // Number of zeta tuples to be dealt with
+   unsigned n_zeta=Received_flat_packed_zetas_to_be_found.size()/Dim;
+   
+   // Create storage for the processor id (plus one) on which
+   // the zetas stored in Flat_packed_zetas_not_found_locally[...]
+   // were located 
+   Proc_id_plus_one_of_external_element.resize(n_zeta);
 
-   Found_zeta.resize(Count_zeta_dim);
-   Located_element.resize(Count_zeta_dim);
+   // Create storage for the status of the (external halo) element associated
+   // the zetas stored in Flat_packed_zetas_not_found_locally[...].
+   // It either hasn't been found, already exists on the processor
+   // that needs it, or needs to be newly created.
+   Located_element_status.resize(n_zeta);
 
-   // Loop over the Zeta_dim array...
-   for (unsigned i=0;i<Count_zeta_dim;i++)
+   // Counter for flat-packed array of external zeta coordinates
+   unsigned count=0;
+
+   // Loop over the zeta tuples that we received from elsewhere and
+   // are trying to find here
+   for (unsigned i=0;i<n_zeta;i++)
     {
-     unsigned el_dim=Zeta_dim[i];
-     if (el_dim==0)
+     // Storage for global coordinates to be located
+     Vector<double> x_global(Dim);
+     
+     // Loop to fill in coordinates
+     for (unsigned ii=0;ii<Dim;ii++)
       {
-       // The coordinate was already located 
-       Found_zeta[i]=0; 
-       Located_element[i]=0;
+       x_global[ii]=Received_flat_packed_zetas_to_be_found[count];
+       count++;
       }
-     else // It was not found yet, so try to find it on the current process
+     
+     // Perform locate_zeta for these coordinates
+     GeomObject *sub_geom_obj_pt;
+     Vector<double> ss(Dim);
+     bool called_within_spiral=true;
+     mesh_geom_obj_pt->spiraling_locate_zeta(x_global,sub_geom_obj_pt,ss,
+                                             called_within_spiral);
+     
+     // Did the locate method work?
+     if (sub_geom_obj_pt!=0)
       {
-       // Storage for global coordinates to be located
-       Vector<double> x_global(el_dim);
-       // Loop to fill in coordinates
-       for (unsigned ii=0;ii<el_dim;ii++)
+       // Get the source element - bulk or not?
+       GeneralisedElement *source_el_pt=0;
+       if (!Use_bulk_element_as_external)
         {
-         x_global[ii]=Zetas[Count_zetas];
-         Count_zetas++;
+         source_el_pt=dynamic_cast<FiniteElement*>(sub_geom_obj_pt);
         }
-
-       // Perform locate_zeta for these coordinates
-       GeomObject *sub_geom_obj_pt;
-       Vector<double> ss(el_dim);
-       bool called_within_spiral=true;
-       mesh_geom_obj_pt->spiraling_locate_zeta(x_global,sub_geom_obj_pt,ss,
-                                               called_within_spiral);
-
-       // Did the locate method work?
-       if (sub_geom_obj_pt!=0)
+       else
         {
-         // Get the source element - bulk or not? (NO CHECKS)
-         GeneralisedElement *source_el_pt=0;
-         if (!Use_bulk_element_as_external)
+         FaceElement *face_el_pt=dynamic_cast<FaceElement*>(sub_geom_obj_pt);
+         source_el_pt=dynamic_cast<FiniteElement*>(face_el_pt->
+                                                   bulk_element_pt());
+        }
+        
+       // Check if the returned element is halo
+       if (!source_el_pt->is_halo())
+        {
+         // The correct non-halo element has been located; this will become
+         // an external haloed element on the current process, and an
+         // external halo copy needs to be created on the current process
+         // minus wherever we are in the "ring-loop"
+         int halo_copy_proc=my_rank-iproc;
+         // If iproc is bigger than my_rank then we've "gone through" nproc-1
+         if (my_rank<iproc) { halo_copy_proc=n_proc+halo_copy_proc; }
+          
+         // So, we found zeta on the current processor
+         Proc_id_plus_one_of_external_element[i]=my_rank+1;
+          
+         // This source element is an external halo on process halo_copy_proc
+         // but it should only be added to the storage if it hasn't
+         // been added already, and this information also needs to be
+         // communicated over to the other process
+          
+         unsigned n_extern_haloed=external_mesh_pt->
+          nexternal_haloed_element(halo_copy_proc);
+         unsigned external_haloed_el_index=
+          external_mesh_pt->add_external_haloed_element_pt(halo_copy_proc,
+                                                           source_el_pt);
+          
+         // If it was added to the storage then the returned index
+         // will be the same as the (old) size of the storage
+         if (external_haloed_el_index==n_extern_haloed)
           {
-           source_el_pt=dynamic_cast<FiniteElement*>(sub_geom_obj_pt);
-          }
-         else
-          {
-           FaceElement *face_el_pt=dynamic_cast<FaceElement*>(sub_geom_obj_pt);
-           source_el_pt=dynamic_cast<FiniteElement*>(face_el_pt->
-                                                     bulk_element_pt());
-          }
-
-         // Check if the returned element is halo
-         if (!source_el_pt->is_halo())
-          {
-           // The correct non-halo element has been located; this will become
-           // an external haloed element on the current process, and an
-           // external halo copy needs to be created on the current process
-           // minus wherever we are in the "ring-loop"
-           int halo_copy_proc=my_rank-iproc;
-           // If iproc is bigger than my_rank then we've "gone through" nproc-1
-           if (my_rank<iproc) { halo_copy_proc=n_proc+halo_copy_proc; }
-
-           // So, we found zeta on the current processor
-           Found_zeta[i]=my_rank+1;
-
-           // This source element is an external halo on process halo_copy_proc
-           // but it should only be added to the storage if it hasn't
-           // been added already, and this information also needs to be
-           // communicated over to the other process
-
-           unsigned n_extern_haloed=external_mesh_pt->
-            nexternal_haloed_element(halo_copy_proc);
-           unsigned external_haloed_el_index;
-           external_haloed_el_index=
-            external_mesh_pt->add_external_haloed_element_pt(halo_copy_proc,
-                                                             source_el_pt);
-
-           // If it was added to the storage then the returned index
-           // will be the same as the (old) size of the storage
-           if (external_haloed_el_index==n_extern_haloed)
+           // Set Located_element_status to say it 
+           // should be newly created
+           Located_element_status[i]=New;
+            
+           // How many continuously interpolated values are there?
+           int n_cont_inter_values=-1;
+           if (dynamic_cast<RefineableElement*>(source_el_pt)!=0)
             {
-             // Set index in Located_element to say it should be newly created
-             Located_element[i]=New;
-
-             // How many continuously interpolated values are there?
-             int n_cont_inter_values;
-             if (dynamic_cast<RefineableElement*>(source_el_pt)!=0)
-              {
-               n_cont_inter_values=dynamic_cast<RefineableElement*>
-                (source_el_pt)->ncont_interpolated_values();
-              }
-             else
-              {
-               n_cont_inter_values=-1;
-              }
-
-             // Since it is (externally) haloed from the current process,
-             // the info required to create a new element in the equivalent
-             // external halo layer on process halo_copy_proc needs to be 
-             // sent there
-
-             // If we're using macro elements to update...
-             MacroElementNodeUpdateMesh* macro_mesh_pt=
-              dynamic_cast<MacroElementNodeUpdateMesh*>(external_mesh_pt);
-             if (macro_mesh_pt!=0)
-              {
-               Unsigned_values.push_back(1);
-               Count_unsigned_values++;
-
-               //Cast to finite element... this must work because it's
-               //a macroelement no update mesh
-               FiniteElement* source_finite_el_pt 
-                = dynamic_cast<FiniteElement*>(source_el_pt);
-
-               MacroElement* macro_el_pt=source_finite_el_pt->macro_elem_pt();
-               // Send the macro element number across
-               unsigned macro_el_num=macro_el_pt->macro_element_number();
-               Unsigned_values.push_back(macro_el_num);
-               Count_unsigned_values++;
-
-               // we need to send
-               // the lower left and upper right coordinates of the macro
-               QElementBase* q_el_pt=dynamic_cast<QElementBase*>(source_el_pt);
-               if (q_el_pt!=0)
-                {
-                 // The macro element needs to be set first before
-                 // its lower left and upper right coordinates can be accessed
-                 // Now send the lower left and upper right coordinates
-                 unsigned el_dim=q_el_pt->dim();
-                 for (unsigned i_dim=0;i_dim<el_dim;i_dim++)
-                  {
-                   Double_values.push_back(q_el_pt->s_macro_ll(i_dim));
-                   Count_double_values++;
-                   Double_values.push_back(q_el_pt->s_macro_ur(i_dim));
-                   Count_double_values++;
-                  }
-                }
-               else // Throw an error
-                {
-                 std::ostringstream error_stream;
-                 error_stream << "You are using a MacroElement node update\n"
-                              << "in a case with non-QElements. This has not\n"
-                              << "yet been implemented.\n";
-                 throw OomphLibError
-                  (error_stream.str(),
-                   "Multi_domain_functions::locate_zeta_for_missing_coordinates()",
-                   OOMPH_EXCEPTION_LOCATION);
-                }
-
-              }
-             else // Not using macro elements to update
-              {
-               Unsigned_values.push_back(0);
-               Count_unsigned_values++;
-              }
-
- 
+             n_cont_inter_values=dynamic_cast<RefineableElement*>
+              (source_el_pt)->ncont_interpolated_values();
+            }
+            
+           // Since it is (externally) haloed from the current process,
+           // the info required to create a new element in the equivalent
+           // external halo layer on process halo_copy_proc needs to be 
+           // sent there
+            
+           // If we're using macro elements to update...
+           MacroElementNodeUpdateMesh* macro_mesh_pt=
+            dynamic_cast<MacroElementNodeUpdateMesh*>(external_mesh_pt);
+           if (macro_mesh_pt!=0)
+            {
+             Flat_packed_unsigneds.push_back(1);
+              
              //Cast to finite element... this must work because it's
              //a macroelement no update mesh
              FiniteElement* source_finite_el_pt 
               = dynamic_cast<FiniteElement*>(source_el_pt);
-#ifdef PARANOID
-             if(source_finite_el_pt==0)
+              
+             MacroElement* macro_el_pt=source_finite_el_pt->macro_elem_pt();
+             // Send the macro element number across
+             unsigned macro_el_num=macro_el_pt->macro_element_number();
+             Flat_packed_unsigneds.push_back(macro_el_num);
+              
+             // we need to send
+             // the lower left and upper right coordinates of the macro
+             QElementBase* q_el_pt=dynamic_cast<QElementBase*>(source_el_pt);
+             if (q_el_pt!=0)
               {
-               throw 
-                OomphLibError(
-                 "Unable to cast source function to finite element\n",
-               "Multi_domain_functions::locate_zeta_for_missing_coordinates()",
+               // The macro element needs to be set first before
+               // its lower left and upper right coordinates can be accessed
+               // Now send the lower left and upper right coordinates
+               unsigned el_dim=q_el_pt->dim();
+               for (unsigned i_dim=0;i_dim<el_dim;i_dim++)
+                {
+                 Flat_packed_doubles.push_back(q_el_pt->s_macro_ll(i_dim));
+                 Flat_packed_doubles.push_back(q_el_pt->s_macro_ur(i_dim));
+                }
+              }
+             else // Throw an error
+              {
+               std::ostringstream error_stream;
+               error_stream << "You are using a MacroElement node update\n"
+                            << "in a case with non-QElements. This has not\n"
+                            << "yet been implemented.\n";
+               throw OomphLibError
+                (error_stream.str(),
+                 "Multi_domain_functions::locate_zeta_for_missing_coordinates()",
                  OOMPH_EXCEPTION_LOCATION);
               }
-#endif
-
-
-             // Loop over the nodes of the new source element
-             unsigned n_node=source_finite_el_pt->nnode();
-             for (unsigned j=0;j<n_node;j++)
-              {
-               Node* nod_pt=source_finite_el_pt->node_pt(j);
-
-               // Add the node to the storage; this routine
-               // also takes care of any master nodes if the
-               // node is hanging
-               add_external_haloed_node_to_storage(halo_copy_proc,nod_pt,
-                                                   problem_pt,
-                                                   external_mesh_pt,
-                                                   n_cont_inter_values);
-              }
+              
+            }
+           else // Not using macro elements to update
+            {
+             Flat_packed_unsigneds.push_back(0);
+            }
             
-            }
-           else // it has already been added, so tell the other process
+            
+           //Cast to finite element... this must work because it's
+           //a macroelement no update mesh
+           FiniteElement* source_finite_el_pt 
+            = dynamic_cast<FiniteElement*>(source_el_pt);
+#ifdef PARANOID
+           if(source_finite_el_pt==0)
             {
-             // Set index to indicate an element has already been added
-             Located_element[i]=Exists;
-             Unsigned_values.push_back(external_haloed_el_index);
-             Count_unsigned_values++;
+             throw 
+              OomphLibError(
+               "Unable to cast source function to finite element\n",
+               "Multi_domain_functions::locate_zeta_for_missing_coordinates()",
+               OOMPH_EXCEPTION_LOCATION);
             }
-
-           // The coordinates returned by locate_zeta are also needed
-           // in the setup of the source elements on the other process
-           if (!Use_bulk_element_as_external)
+#endif
+            
+            
+           // Loop over the nodes of the new source element
+           unsigned n_node=source_finite_el_pt->nnode();
+           for (unsigned j=0;j<n_node;j++)
             {
-             for (unsigned ii=0;ii<el_dim;ii++)
-              {
-               Located_coord.push_back(ss[ii]);
-               Count_located_coord++;
-              }
-            }
-           else // translate the coordinates to the bulk element
+             Node* nod_pt=source_finite_el_pt->node_pt(j);
+              
+             // Add the node to the storage; this routine
+             // also takes care of any master nodes if the
+             // node is hanging
+             add_external_haloed_node_to_storage(halo_copy_proc,nod_pt,
+                                                 problem_pt,
+                                                 external_mesh_pt,
+                                                 n_cont_inter_values);
+            }            
+          }
+         else // it has already been added, so tell the other process
+          {
+           // Set Located_element_status to indicate an element has 
+           // already been added
+           Located_element_status[i]=Exists;
+           Flat_packed_unsigneds.push_back(external_haloed_el_index);
+          }
+          
+         // The coordinates returned by locate_zeta are also needed
+         // in the setup of the source elements on the other process
+         if (!Use_bulk_element_as_external)
+          {
+           for (unsigned ii=0;ii<Dim;ii++)
             {
-             // The translation is from Lagrangian to Eulerian
-             FaceElement *face_el_pt=
-              dynamic_cast<FaceElement*>(sub_geom_obj_pt);
-             //Get the dimension of the BulkElement
-             unsigned bulk_el_dim = 
-              dynamic_cast<FiniteElement*>(source_el_pt)->dim();
-             Vector<double> s_trans(bulk_el_dim);
-             face_el_pt->get_local_coordinate_in_bulk(ss,s_trans);
-             for (unsigned ii=0;ii<bulk_el_dim;ii++)
-              {
-               Located_coord.push_back(s_trans[ii]);
-               Count_located_coord++;
-              }
+             Flat_packed_located_coordinates.push_back(ss[ii]);
             }
           }
-         else // halo, so search again until non-halo equivalent is located
+         else // translate the coordinates to the bulk element
           {
-           // Add required information to arrays (as below)
-           for (unsigned ii=0;ii<el_dim;ii++)
+           // The translation is from Lagrangian to Eulerian
+           FaceElement *face_el_pt=
+            dynamic_cast<FaceElement*>(sub_geom_obj_pt);
+           //Get the dimension of the BulkElement
+           unsigned bulk_el_dim = 
+            dynamic_cast<FiniteElement*>(source_el_pt)->dim();
+           Vector<double> s_trans(bulk_el_dim);
+           face_el_pt->get_local_coordinate_in_bulk(ss,s_trans);
+           for (unsigned ii=0;ii<bulk_el_dim;ii++)
             {
-             Local_zetas.push_back(x_global[ii]);
-             Count_local_zetas++;
+             Flat_packed_located_coordinates.push_back(s_trans[ii]);
             }
-           Local_zeta_dim.push_back(el_dim);
-           Count_local_zeta_dim++;
-           // It wasn't found here
-           Found_zeta[i]=0;
-           // Set index to indicate not found
-           Located_element[i]=Not_found;
           }
         }
-       else // not successful this time, so prepare for next process to try
+       else // halo, so search again until non-halo equivalent is located
         {
-         // Add this global coordinate to the LOCAL zeta array
-         for (unsigned ii=0;ii<el_dim;ii++)
+         // Add required information to arrays (as below)
+         for (unsigned ii=0;ii<Dim;ii++)
           {
-           Local_zetas.push_back(x_global[ii]);
-           Count_local_zetas++;
+           Flat_packed_zetas_not_found_locally.push_back(x_global[ii]);
           }
-         // Add the element dimension to the LOCAL Zeta_dim array
-         Local_zeta_dim.push_back(el_dim);
-         Count_local_zeta_dim++;
          // It wasn't found here
-         Found_zeta[i]=0;
-         // Set index to indicate not found
-         Located_element[i]=Not_found;
+         Proc_id_plus_one_of_external_element[i]=0;
+
+         // Set Located_element_status to indicate not found
+         Located_element_status[i]=Not_found;
         }
       }
+     else // not successful this time, so prepare for next process to try
+      {
+       // Add this global coordinate to the LOCAL zeta array
+       for (unsigned ii=0;ii<Dim;ii++)
+        {
+         Flat_packed_zetas_not_found_locally.push_back(x_global[ii]);
+        }
+       // It wasn't found here
+       Proc_id_plus_one_of_external_element[i]=0;
 
+       // Set Located_element_status to indicate not found
+       Located_element_status[i]=Not_found;
+      }
     }
-
+     
   }
-
 
 #endif
 
@@ -2148,13 +2084,8 @@ namespace Multi_domain_functions
    // Number of local elements
    unsigned n_element=mesh_pt->nelement();
 
-   // Initialise counters and arrays
-   Local_zetas.resize(0);
-   Local_zeta_dim.resize(0);
-   Count_local_zetas=0;
-   Count_zetas=0;
-   Count_local_zeta_dim=0;
-   Count_zeta_dim=0;
+   // Flush storage for zetas not found locally 
+   Flat_packed_zetas_not_found_locally.resize(0);
 
    // Loop over this processor's elements
    for (unsigned e=0;e<n_element;e++)
@@ -2253,52 +2184,40 @@ namespace Multi_domain_functions
                // Add required information to arrays
                for (unsigned i=0;i<el_dim;i++)
                 {
-                 Local_zetas.push_back(x_global[i]);
-                 Count_local_zetas++;
+                 Flat_packed_zetas_not_found_locally.push_back(x_global[i]);
                 }
-               Local_zeta_dim.push_back(el_dim);
-               Count_local_zeta_dim++;
               }
 #endif
             }
            else
             {
-
              // If it has failed then add the required information to the
              // arrays which need to be sent to the other processors so that
              // they can perform the locate_zeta
-
+             
              // Add this global coordinate to the LOCAL zeta array
              for (unsigned i=0;i<el_dim;i++)
               {
-               Local_zetas.push_back(x_global[i]);
-               Count_local_zetas++;
+               Flat_packed_zetas_not_found_locally.push_back(x_global[i]);
               }
-             // Add the element dimension to the LOCAL Zeta_dim array
-             Local_zeta_dim.push_back(el_dim);
-             Count_local_zeta_dim++;
-
             }
           }
         } // end loop over integration points
       }
     } // end loop over local elements
-
+   
   }
 
 
 
 
-
-
-
-
-
-
- /// Helper function that returns the dimension of the elements within
- /// each of the specified meshes (and checks they are the same)
+//=====================================================================
+/// Helper function that computes the dimension of the elements within
+/// each of the specified meshes (and checks they are the same).
+/// Stores result in Dim.
+//=====================================================================
  void get_dim_helper(Problem* problem_pt, Mesh* const &mesh_pt, 
-                     Mesh* const &external_mesh_pt, unsigned& dim)
+                     Mesh* const &external_mesh_pt)
   {
 #ifdef OOMPH_HAS_MPI
    // Storage for number of processors, current process and communicator
@@ -2352,30 +2271,24 @@ namespace Multi_domain_functions
        OOMPH_EXCEPTION_LOCATION);
     }
 
-   // Set returned dimension
-   dim=mesh_dim;
+   // Set dimension
+   Dim=mesh_dim;
  }
 
+
+ //=================================================================
  /// Helper function that clears all the information used
  /// during the external storage creation
+ //=================================================================
  void clean_up()
   {
-   // Clear every vector associated with the external storage creation
-   Local_zetas.clear();
-   Zetas.clear();
-   Local_zeta_dim.clear();
-   Zeta_dim.clear();
-
-   Found_zeta.clear();
-   Found_ss.clear();
-
-   Located_element.clear();
-   Located_zetas.clear();
-   Located_coord.clear();
-
-   Double_values.clear();
-   Unsigned_values.clear();
-
+   Flat_packed_zetas_not_found_locally.clear();
+   Received_flat_packed_zetas_to_be_found.clear();
+   Proc_id_plus_one_of_external_element.clear();
+   Located_element_status.clear();
+   Flat_packed_located_coordinates.clear();
+   Flat_packed_doubles.clear();
+   Flat_packed_unsigneds.clear();
    External_element_located.clear();
   }
 

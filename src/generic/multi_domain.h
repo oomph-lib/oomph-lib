@@ -57,79 +57,80 @@ namespace oomph
 //======================================================================
 namespace Multi_domain_functions
  {
-  // Lookup scheme for whether an element's integration point
-  // has had an external element assigned to it
+
+  /// \short Dimension of zeta tuples (set by get_dim_helper) -- needed
+  /// because we store the scalar coordinates in flat-packed form.
+  extern unsigned Dim;
+
+  /// \short Lookup scheme for whether a local element's integration point
+  /// has had an external element assigned to it -- essentially boolean.
+  /// External_element_located[e][ipt] = {0,1} if external element
+  /// for ipt-th integration in local element e {has not, has} been found.
+  /// Used locally to ensure that we're not searching for the same
+  /// elements over and over again when we go around the spirals.
   extern Vector<Vector<unsigned> > External_element_located;
-
-  // List of all Vectors used by the external storage routines 
   
-  /// \short Vector of (local) coordinates at integration points of
-  /// elements on current processor
-  extern Vector<double> Local_zetas;
+  /// \short Vector of flat-packed zeta coordinates for which the external
+  /// element could not be found during current local search. These
+  /// will be sent to the next processor in the ring-like parallel search.
+  /// The zeta coordinates come in groups of Dim (scalar) coordinates.
+  extern Vector<double> Flat_packed_zetas_not_found_locally;
 
-  /// \short Vector of (local) coordinates at integration points of
-  /// elements received from elsewhere
-  extern Vector<double> Zetas;
+  /// \short Vector of flat-packed zeta coordinates for which the external
+  /// element could not be found on another processor and for which
+  /// we're currently searching here. Whatever can't be found here,
+  /// gets written into Flat_packed_zetas_not_found_locally and then
+  /// passed on to the next processor during the ring-like parallel search.
+  /// The zeta coordinates come in  groups of Dim (scalar) coordinates.
+  extern Vector<double> Received_flat_packed_zetas_to_be_found;
 
-  /// \short Vector of the dimension of the element on current processor
-  extern Vector<unsigned> Local_zeta_dim;
+  /// \short Proc_id_plus_one_of_external_element[i] contains the 
+  /// processor id (plus one) of the processor
+  /// on which the i-th zeta coordinate tuple received from elsewhere 
+  /// (in the order in which these are stored in 
+  /// Received_flat_packed_zetas_to_be_found) was located; it's zero if
+  /// it wasn't found during the current stage of the ring-like parallel
+  /// search.
+  extern Vector<int> Proc_id_plus_one_of_external_element;
 
-  /// \short Vector of the dimension of the element received from elsewhere
-  extern Vector<unsigned> Zeta_dim;
+  /// \short Vector to indicate (to another processor) whether a
+  /// located element (that will have to represented as an external
+  /// halo element on that processor) should be newly created on that 
+  /// processor (2), already exists on that processor (1), or
+  /// is not on the current processor either (0).
+  extern Vector<unsigned> Located_element_status;
 
-  /// \short Vector to indicate locally which processor a coordinate 
-  /// has been located on
-  extern Vector<int> Found_zeta;
+  /// \short Vector of flat-packed local coordinates for zeta tuples
+  /// that have been located
+  extern Vector<double> Flat_packed_located_coordinates;
 
-  /// \short Vector of local coordinates within any elements found
-  /// locally by current processor
-  extern Vector<Vector<double> > Found_ss;
+  /// \short Vector of flat-packed doubles to be communicated with
+  /// other processors
+  extern Vector<double> Flat_packed_doubles;
 
-  /// \short Vector to indicate (on another process) whether a
-  /// located element should be newly created (New), already exists (Exists), 
-  /// or is not on the current process at all (Not_found)
-  extern Vector<unsigned> Located_element;
+  /// \short Counter used when processing vector of flat-packed 
+  /// doubles -- this is really "private" data, declared here
+  /// to avoid having to pass it (and the associated array)
+  /// between the various helper functions
+  extern unsigned Counter_for_flat_packed_doubles;
 
-  /// \short Vector of the local coordinates for each entry in Located_element
-  extern Vector<double> Located_coord;
+  /// \short Vector of flat-packed unsigneds to be communicated with
+  /// other processors -- this is really "private" data, declared here
+  /// to avoid having to pass the array between the various helper 
+  /// functions
+  extern Vector<unsigned> Flat_packed_unsigneds;
 
-  /// \short Vector for current processor which indicates when an external
-  /// halo element (and subsequent nodes) should be created
-  extern Vector<unsigned> Located_zetas;
+  /// \short Counter used when processing vector of flat-packed 
+  /// unsigneds -- this is really "private" data, declared here
+  /// to avoid having to pass it (and the associated array)
+  /// between the various helper functions
+  extern unsigned Counter_for_flat_packed_unsigneds;
 
-  /// \short Vector of doubles to be sent from another processor
-  extern Vector<double> Double_values;
+  /// \short Enumerators for element status in location procedure
+  enum{ New, Exists, Not_found};
 
-  /// \short Vector of unsigneds to be sent from another processor
-  extern Vector<unsigned> Unsigned_values;
-
-  // Counters for each of the above arrays
-
-  /// \short Double_values
-  extern unsigned Count_double_values;
-
-  /// \short Unsigned_values
-  extern unsigned Count_unsigned_values;
-
-  /// \short Located_coord
-  extern unsigned Count_located_coord;
-
-  /// \short Local_zeta_dim
-  extern unsigned Count_local_zeta_dim;
-
-  /// \short Zeta_dim
-  extern unsigned Count_zeta_dim;
-
-  /// \short Local_zetas
-  extern unsigned Count_local_zetas;
- 
-  /// \short Zetas
-  extern unsigned Count_zetas;
-
-  /// \short Enumerators for location procedure
-  enum { New, Exists, Not_found };
-
-  /// Default parameters for binning method to be passed to MeshAsGeomObject
+  // Default parameters for the binning method
+  //------------------------------------------
 
   /// \short Bool to tell the MeshAsGeomObject whether to calculate
   /// the extreme coordinates of the bin structure
@@ -406,12 +407,13 @@ namespace Multi_domain_functions
 
 #endif
 
-  /// Helper function that returns the dimension of the elements within
+  /// \short Helper function that computes the dimension of the elements within
   /// each of the specified meshes (and checks they are the same)
+  /// Stores result in Dim.
   void get_dim_helper(Problem* problem_pt, Mesh* const &mesh_pt, 
-                      Mesh* const &external_mesh_pt, unsigned& dim);
+                      Mesh* const &external_mesh_pt);
 
-  /// Helper function that clears all the intermediate information used
+  /// \short Helper function that clears all the intermediate information used
   /// during the external storage creation at the end of the procedure
   void clean_up();
 
