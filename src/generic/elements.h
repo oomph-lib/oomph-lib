@@ -1301,7 +1301,76 @@ class FiniteElement : public virtual GeneralisedElement, public GeomObject
  virtual double local_to_eulerian_mapping_diagonal(
   const DShape &dpsids,DenseMatrix<double> &jacobian,
   DenseMatrix<double> &inverse_jacobian) const;
-  
+
+ /// \short A template-free interface that calculates the derivative of the
+ /// jacobian of a mapping with respect to the nodal coordinates X_ij.
+ /// To do this it requires the jacobian matrix and the derivatives of the
+ /// shape functions w.r.t. the local coordinates. By default the function
+ /// will use the dimension of the element to call the correct
+ /// dJ_eulerian_dnodal_coordinates_templated_helper(..) function. This
+ /// should be overloaded for efficiency (removal of a switch statement)
+ /// in specific elements.
+ virtual void dJ_eulerian_dnodal_coordinates(
+  const DenseMatrix<double> &jacobian,const DShape &dpsids,
+  DenseMatrix<double> &djacobian_dX) const;
+ 
+ /// \short Calculate the derivative of the jacobian of a mapping with
+ /// respect to the nodal coordinates X_ij using the jacobian matrix
+ /// and the derivatives of the shape functions w.r.t. the local
+ /// coordinates. This function is templated by the dimension of the
+ /// element.
+ template<unsigned DIM>
+  void dJ_eulerian_dnodal_coordinates_templated_helper(
+   const DenseMatrix<double> &jacobian,const DShape &dpsids,
+   DenseMatrix<double> &djacobian_dX) const;
+
+ /// \short A template-free interface that calculates the derivative w.r.t.
+ /// the nodal coordinates \f$ X_{pq} \f$ of the derivative of the shape
+ /// functions \f$ \psi_j \f$ w.r.t. the global eulerian coordinates
+ /// \f$ x_i \f$. I.e. this function calculates
+ /// \f[
+ /// \frac{\partial}{\partial X_{pq}}
+ /// \left( \frac{\partial \psi_j}{\partial x_i} \right).
+ /// \f]
+ /// To do this it requires the determinant of the jacobian mapping, its
+ /// derivative w.r.t. the nodal coordinates \f$ X_{pq} \f$, the inverse
+ /// jacobian and the derivatives of the shape functions w.r.t. the local
+ /// coordinates. The result is returned as a tensor of rank four.
+ /// \n\n Numbering: \n
+ /// d_dpsidx_dX(p,q,j,i) = \f$ \frac{\partial}{\partial X_{pq}}
+ /// \left( \frac{\partial \psi_j}{\partial x_i} \right) \f$ \n
+ /// By default the function will use the dimension of the element to call
+ /// the correct d_dshape_eulerian_dnodal_coordinates_templated_helper(..)
+ /// function. This should be overloaded for efficiency (removal of a
+ /// switch statement) in specific elements.
+ virtual void d_dshape_eulerian_dnodal_coordinates(
+  const double &det_jacobian,
+  const DenseMatrix<double> &jacobian,
+  const DenseMatrix<double> &djacobian_dX,
+  const DenseMatrix<double> &inverse_jacobian,
+  const DShape &dpsids,
+  RankFourTensor<double> &d_dpsidx_dX) const;
+ 
+ /// \short Calculate the derivative w.r.t. the nodal coordinates
+ /// \f$ X_{pq} \f$ of the derivative of the shape functions w.r.t. the
+ /// global eulerian coordinates \f$ x_i \f$, using the determinant of
+ /// the jacobian mapping, its derivative w.r.t. the nodal coordinates
+ /// \f$ X_{pq} \f$, the inverse jacobian and the derivatives of the
+ /// shape functions w.r.t. the local coordinates. The result is returned
+ /// as a tensor of rank four.
+ /// \n\n Numbering: \n
+ /// d_dpsidx_dX(p,q,j,i) = \f$ \frac{\partial}{\partial X_{pq}}
+ /// \left( \frac{\partial \psi_j}{\partial x_i} \right) \f$ \n
+ /// This function is templated by the dimension of the element.
+ template<unsigned DIM>
+  void d_dshape_eulerian_dnodal_coordinates_templated_helper(
+   const double &det_jacobian,
+   const DenseMatrix<double> &jacobian,
+   const DenseMatrix<double> &djacobian_dX,
+   const DenseMatrix<double> &inverse_jacobian,
+   const DShape &dpsids,
+   RankFourTensor<double> &d_dpsidx_dX) const;
+
  /// \short Convert derivative w.r.t.local coordinates to derivatives
  /// w.r.t the coordinates used to assemble the inverse_jacobian passed
  /// in the mapping. On entry, dbasis must contain the basis function 
@@ -1683,7 +1752,7 @@ public:
   {
    throw OomphLibError(
     "d2shape_local() is not implemented for this element\n",
-    "FiniteElement::dshape_local()",
+    "FiniteElement::d2shape_local()",
     OOMPH_EXCEPTION_LOCATION);
   }
 
@@ -1730,7 +1799,16 @@ public:
  /// derivatives w.r.t. global coordinates at the ipt-th integration point.
  virtual double dshape_eulerian_at_knot(const unsigned &ipt, Shape &psi,
                                         DShape &dpsidx) const;
- 
+
+ /// \short Compute the geometric shape functions (psi) and first derivatives
+ /// w.r.t. global coordinates (dpsidx) at the ipt-th integration point.
+ /// Return the determinant of the jacobian of the mapping (detJ).
+ /// Additionally calculate the derivatives of both "detJ" and "dpsidx"
+ /// w.r.t. the nodal coordinates.
+ virtual double dshape_eulerian_at_knot(
+  const unsigned &ipt,Shape &psi,DShape &dpsi,
+  DenseMatrix<double> &djacobian_dX,RankFourTensor<double> &d_dpsidx_dX) const;
+
  /// \short Compute the geometric shape functions and also first
  /// and second derivatives w.r.t. global coordinates at local coordinate s;
  /// Returns Jacobian of mapping from global to local coordinates.

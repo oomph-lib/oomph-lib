@@ -340,7 +340,13 @@ public virtual ElementWithZ2ErrorEstimator
     }
   }
 
- 
+ /// \short Compute derivatives of elemental residual vector with respect to
+ /// nodal coordinates. This function computes these terms analytically and
+ /// overwrites the default implementation in the FiniteElement base class.
+ /// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
+ virtual void get_dresidual_dnodal_coordinates(RankThreeTensor<double>&
+                                               dresidual_dnodal_coordinates);
+
   private:
  
  /// \short Add element's contribution to the elemental residual vector 

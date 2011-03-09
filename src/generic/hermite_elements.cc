@@ -39,15 +39,6 @@ namespace oomph
 //       1D Hermite elements
 ////////////////////////////////////////////////////////////////
 
-/// Min value of local coordinate
-template<> 
-const double QHermiteElement<1>::S_min=-1.0;
-
-
-/// Max. value of local coordinate
-template<>
-const double QHermiteElement<1>::S_max=1.0;
-
 //=======================================================================
 /// Assign the static Default_integration_scheme
 //=======================================================================
@@ -383,15 +374,6 @@ void QHermiteElement<1>::build_face_element(const int &face_index,
 ////////////////////////////////////////////////////////////////
 //       2D Hermite elements
 ////////////////////////////////////////////////////////////////
-
-/// Min value of local coordinate
-template<>
-const double QHermiteElement<2>::S_min=-1.0;
-
-
-/// Max. value of local coordinate
-template<>
-const double QHermiteElement<2>::S_max=1.0;
 
 
 //=======================================================================

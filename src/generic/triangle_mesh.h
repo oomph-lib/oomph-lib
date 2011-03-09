@@ -42,6 +42,112 @@
 
 namespace oomph
 {
+
+//=====================================================================
+/// The Triangle data structure, modified from the triangle.h header
+/// supplied with triangle 1.6. by J. R. Schewchuk. We need to define
+/// this here separately because we can't include a c header directly
+/// into C++ code!
+//=====================================================================
+struct TriangulateIO 
+{
+ ///Pointer to list of points x coordinate followed by y coordinate
+ double *pointlist;
+
+ ///Pointer to list of point attributes
+ double *pointattributelist;
+
+ ///Pointer to list of point markers
+ int *pointmarkerlist;
+ int numberofpoints;
+ int numberofpointattributes;
+ 
+ int *trianglelist;
+ double *triangleattributelist;
+ double *trianglearealist;
+ int *neighborlist;
+ int numberoftriangles;
+ int numberofcorners;
+ int numberoftriangleattributes;
+ 
+ int *segmentlist;
+ int *segmentmarkerlist;
+ int numberofsegments;
+ 
+ double *holelist;
+ int numberofholes;
+ 
+ double *regionlist;
+ int numberofregions;
+ 
+ int *edgelist;
+ int *edgemarkerlist;  // <---- contains boundary ID (offset by one)
+ double *normlist;
+ int numberofedges;
+
+};
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+//==================================================================
+/// Helper namespace for triangle meshes
+//==================================================================
+namespace TriangleHelper
+{
+ /// Clear TriangulateIO structure
+ extern void clear_triangulateio(TriangulateIO& triangulate_io,
+                                 const bool& clear_hole_data=true);
+
+ /// Initialise TriangulateIO structure
+ extern void initialise_triangulateio(TriangulateIO& triangle_io);
+
+ /// \short Make (partial) deep copy of TriangulateIO object. We only copy
+ /// those items we need within oomph-lib's adaptation procedures.
+ /// Warnings are issued if triangulate_io contains data that is not
+ /// not copied, unless quiet=true;
+ extern TriangulateIO deep_copy_of_triangulateio_representation(
+  TriangulateIO& triangle_io, const bool& quiet=false);
+
+ /// \short Write the triangulateio data to disk as a poly file,
+ /// mainly used for debugging
+ extern void write_triangulateio_to_polyfile(TriangulateIO &triangle_io,
+                                             std::ostream &poly_file);
+
+
+ /// \short Create a triangulateio data file from ele node and poly
+ /// files.
+ extern void create_triangulateio_from_polyfiles(
+  const std::string& node_file_name,
+  const std::string& element_file_name,
+  const std::string& poly_file_name, TriangulateIO &triangle_io);
+  
+
+ /// \short Dump the triangulatio data into a dump file
+ extern void dump_triangulateio(TriangulateIO &triangle_io,
+                                std::ostream &dump_file);
+
+ /// \short Read the triangulateio data from a dump file
+ extern void read_triangulateio(std::istream &dump_fil,
+                                TriangulateIO &triangulate_io);
+}
+
+
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
+
+
 //=====================================================================
 /// Class defining a polyline for use in Triangle Mesh generation
 //=====================================================================
@@ -329,8 +435,12 @@ class TriangleMeshBase : public virtual Mesh
 
 public:
 
- /// Constructor (empty)
- TriangleMeshBase() {}
+ /// Constructor 
+ TriangleMeshBase() 
+  {
+   //Initialise the TriangulateIO Data structure
+   TriangleHelper::initialise_triangulateio(Triangulateio);
+  }
 
  /// Broken copy constructor
  TriangleMeshBase(const TriangleMeshBase& node) 
@@ -345,7 +455,11 @@ public:
   }
  
  /// Destructor (empty)
- virtual ~TriangleMeshBase(){}
+ virtual ~TriangleMeshBase()
+  {
+   //Clear the triangulate data structure 
+   TriangleHelper::clear_triangulateio(Triangulateio);
+  }
 
  /// Setup lookup schemes which establish whic elements are located
  /// next to mesh's boundaries (wrapper to suppress doc).
@@ -359,6 +473,52 @@ public:
  /// next to mesh's boundaries. Doc in outfile (if it's open).
  void setup_boundary_element_info(std::ostream &outfile);
 
+ /// Access to the triangulateio representation of the mesh
+ TriangulateIO& triangulateio_representation() {return Triangulateio;}
+ 
+ /// \short Helper function. Write a TriangulateIO object file with all the 
+ /// triangulateio fields. String s is add to assign a different value for
+ /// the input and/or output structure
+ void write_triangulateio(TriangulateIO& triangulate_io, std::string& s);
+ 
+ /// \short Helper function. Clean up the memory associated with the
+ /// TriangulateIO object. This should really only be used to save
+ /// memory in extremely tight situations.
+ void clear_triangulateio()
+  {TriangleHelper::clear_triangulateio(Triangulateio);}
+
+ /// \short Dump the triangulateio structure to a dump file
+ void dump_triangulateio(std::ostream &dump_file)
+  {TriangleHelper::dump_triangulateio(Triangulateio,dump_file);}
+
+ /// \short Regenerate the mesh from a dumped triangulateio file
+ void remesh_from_triangulateio(std::istream &restart_file)
+  {
+   //Clear the existing triangulate io
+   TriangleHelper::clear_triangulateio(Triangulateio);
+   //Read the data into the file
+   TriangleHelper::read_triangulateio(restart_file,Triangulateio);
+   //Now remesh from the new data structure
+   this->remesh_from_internal_triangulateio();
+  }
+
+ ///Virtual function that is used for specific remeshing from the triangulateio
+ virtual void remesh_from_internal_triangulateio() 
+  {
+   std::ostringstream error_stream;
+   error_stream << "Empty default remesh function called.\n";
+   error_stream << "This should be overloaded in a specific TriangleMesh\n";
+   throw OomphLibError(error_stream.str(),
+                       "TriangleBaseMesh::remesh_from_triangulateio()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+
+  protected:
+
+ ///\short TriangulateIO representation of the mesh
+ TriangulateIO Triangulateio;
+ 
+ 
 };
 
 

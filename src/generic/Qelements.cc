@@ -7,7 +7,7 @@
 //LIC// 
 //LIC// Copyright (C) 2006-2009 Matthias Heil and Andrew Hazel
 //LIC// 
-//LIC// This library is free software; you can redistribute it and/or
+//LIC// This library is free software; you can redistribte it and/or
 //LIC// modify it under the terms of the GNU Lesser General Public
 //LIC// License as published by the Free Software Foundation; either
 //LIC// version 2.1 of the License, or (at your option) any later version.
@@ -37,18 +37,6 @@ namespace oomph
 ////////////////////////////////////////////////////////////////
 //       1D Qelements
 ////////////////////////////////////////////////////////////////
-
-//Assign the static dimension of each node
-template<unsigned NNODE_1D>
-const unsigned QElement<1,NNODE_1D>::Every_node_ndim=1;
-
- /// Assign min value of local coordinate
-template<unsigned NNODE_1D>
-const double QElement<1,NNODE_1D>::S_min=-1.0;
-
- /// Assign max. value of local coordinate
-template<unsigned NNODE_1D>
-const double QElement<1,NNODE_1D>::S_max=1.0;
 
 //=======================================================================
 /// Assign the static Default_integration_scheme
@@ -410,18 +398,6 @@ void QElement<1,NNODE_1D>::build_face_element(const int &face_index,
 ////////////////////////////////////////////////////////////////
 //       2D Qelements
 ////////////////////////////////////////////////////////////////
-
-/// Assign min value of local coordinate
-template<unsigned NNODE_1D>
-const double QElement<2,NNODE_1D>::S_min=-1.0;
-
-/// Assign max. value of local coordinate
-template<unsigned NNODE_1D>
-const double QElement<2,NNODE_1D>::S_max=1.0;
-
-//Assign the static dimension of each node
-template<unsigned NNODE_1D>
-const unsigned QElement<2,NNODE_1D>::Every_node_ndim=2;
 
 /// Assign the spatial integration scheme
 template<unsigned NNODE_1D>
@@ -897,20 +873,6 @@ void QElement<2,NNODE_1D>::build_face_element(const int &face_index,
 ////////////////////////////////////////////////////////////////
 //       3D Qelements
 ////////////////////////////////////////////////////////////////
-
-
-/// Assign min value of local coordinate
-template<unsigned NNODE_1D>
-const double QElement<3,NNODE_1D>::S_min=-1.0;
-
-/// Assign max. value of local coordinate
-template<unsigned NNODE_1D>
-const double QElement<3,NNODE_1D>::S_max=1.0;
-
-//Assign the static dimension of each node
-template<unsigned NNODE_1D>
-const unsigned QElement<3,NNODE_1D>::Every_node_ndim=3;
-
 
 /// Assign the spatial integration scheme
 template<unsigned NNODE_1D>

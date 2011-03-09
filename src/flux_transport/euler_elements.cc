@@ -32,10 +32,18 @@
 namespace oomph
 {
  //===========================================================
- /// Set the default value of Gamma to be 1.4
+ /// Set the default value of Gamma to be 1.4 in all three
+ /// dimension specialisations. This form seems to be required for
+ /// gcc 4.4.4, rather than a more general templated version.
  //===========================================================
- template<unsigned DIM>
- double EulerEquations<DIM>::Default_Gamma_Value=1.4;
+ template<>
+ double EulerEquations<1>::Default_Gamma_Value=1.4;
+ template<>
+ double EulerEquations<2>::Default_Gamma_Value=1.4;
+ template<>
+ double EulerEquations<3>::Default_Gamma_Value=1.4;
+
+
 
  //======================================================
  ///Calculate the pressure value from the unknowns

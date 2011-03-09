@@ -36,6 +36,994 @@ namespace oomph
 {
 
 
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+
+//==================================================================
+/// Helper namespace for triangle meshes
+//==================================================================
+namespace TriangleHelper
+{
+ /// Clear TriangulateIO structure
+ void clear_triangulateio(TriangulateIO& triangulate_io,
+                          const bool& clear_hole_data)
+ {    
+  // Clear the point,attribute and marker list 
+  free(triangulate_io.pointlist); 
+  free(triangulate_io.pointattributelist);
+  free(triangulate_io.pointmarkerlist); 
+  triangulate_io.numberofpoints = 0;
+  triangulate_io.numberofpointattributes = 0;
+
+  // Clear the triangle, attribute,neighbor and area list 
+  free(triangulate_io.trianglelist);    
+  free(triangulate_io.triangleattributelist);
+  free(triangulate_io.trianglearealist);
+  free(triangulate_io.neighborlist);
+  triangulate_io.numberoftriangles = 0; 
+  triangulate_io.numberofcorners = 0;
+  triangulate_io.numberoftriangleattributes = 0;
+
+  // Clear the segment and marker list 
+  free(triangulate_io.segmentlist);
+  free(triangulate_io.segmentmarkerlist);
+  triangulate_io.numberofsegments = 0;
+
+  // Clear hole list
+  if (clear_hole_data) free(triangulate_io.holelist);
+  triangulate_io.numberofholes = 0;
+
+  // Clear region list 
+  if(clear_hole_data) {free(triangulate_io.regionlist);}
+  triangulate_io.numberofregions = 0;
+
+  // Clear edge, marker and norm list 
+  free(triangulate_io.edgelist);
+  free(triangulate_io.edgemarkerlist);
+  free(triangulate_io.normlist);
+  triangulate_io.numberofedges = 0;
+
+  // Now null it all out again 
+  initialise_triangulateio(triangulate_io);
+ }
+
+
+ /// Initialise TriangulateIO structure
+ void initialise_triangulateio(TriangulateIO& triangle_io)
+ {
+  // Initialize the point list 
+  triangle_io.pointlist = (double *) NULL; 
+  triangle_io.pointattributelist = (double *) NULL;  
+  triangle_io.pointmarkerlist = (int *) NULL; 
+  triangle_io.numberofpoints = 0;
+  triangle_io.numberofpointattributes = 0;
+
+  // Initialize the triangle list 
+  triangle_io.trianglelist = (int *) NULL;    
+  triangle_io.triangleattributelist = (double *) NULL;
+  triangle_io.trianglearealist = (double *) NULL;
+  triangle_io.neighborlist = (int *) NULL;
+  triangle_io.numberoftriangles = 0; 
+  triangle_io.numberofcorners = 0;
+  triangle_io.numberoftriangleattributes = 0;
+
+  // Initialize the segment list 
+  triangle_io.segmentlist = (int *) NULL;
+  triangle_io.segmentmarkerlist = (int *) NULL;
+  triangle_io.numberofsegments = 0;
+  
+  // Initialise hole list
+  triangle_io.holelist = (double *) NULL;
+  triangle_io.numberofholes = 0;
+
+  // Initialize region list 
+  triangle_io.regionlist = (double *) NULL;
+  triangle_io.numberofregions = 0;
+
+  // Initialize edge list 
+  triangle_io.edgelist = (int *) NULL;
+  triangle_io.edgemarkerlist = (int *) NULL;
+  triangle_io.normlist = (double *) NULL;
+  triangle_io.numberofedges = 0;
+ }
+
+
+ /// \short Make (partial) deep copy of TriangulateIO object. We only copy
+ /// those items we need within oomph-lib's adaptation procedures.
+ /// Warnings are issued if triangulate_io contains data that is not
+ /// not copied, unless quiet=true;
+ TriangulateIO deep_copy_of_triangulateio_representation(
+  TriangulateIO& triangle_io, const bool& quiet)
+ {
+  // Create the struct
+  TriangulateIO triangle_out;
+  
+  // Initialise
+  initialise_triangulateio(triangle_out);
+
+  // Point data
+  triangle_out.numberofpoints = triangle_io.numberofpoints;
+  triangle_out.pointlist = (double *) 
+   malloc(triangle_out.numberofpoints * 2 * sizeof(double));
+  for (int j=0;j<triangle_out.numberofpoints*2;j++)
+   {
+    triangle_out.pointlist[j]=triangle_io.pointlist[j];
+   }
+  
+  triangle_out.pointmarkerlist = 
+   (int *) malloc(triangle_out.numberofpoints * sizeof(int));
+  for (int j=0;j<triangle_out.numberofpoints;j++)
+   {
+    triangle_out.pointmarkerlist[j]=triangle_io.pointmarkerlist[j];
+   }
+  
+  // Warn about laziness...
+  if (!quiet)
+   {
+    if ((triangle_io.pointattributelist!=0)||
+        (triangle_io.numberofpointattributes!=0))
+     {
+      OomphLibWarning(
+       "Point attributes are not currently copied across",
+       "TriangleHelper::deep_copy_of_triangulateio_representation",
+       OOMPH_EXCEPTION_LOCATION);  
+     }
+   }
+
+
+  // Triangle data
+  triangle_out.numberoftriangles=triangle_io.numberoftriangles;
+  triangle_out.trianglelist = 
+   (int *) malloc(triangle_out.numberoftriangles * 3 * sizeof(int)); 
+  for (int j=0;j<triangle_out.numberoftriangles*3;j++)
+   {
+    triangle_out.trianglelist[j]=triangle_io.trianglelist[j];
+   }
+
+
+  //Copy over the triangle attribute data
+  triangle_out.numberoftriangleattributes =
+   triangle_io.numberoftriangleattributes;
+  triangle_out.triangleattributelist =
+   (double *) malloc(triangle_out.numberoftriangles * 
+                     triangle_out.numberoftriangleattributes * sizeof(double));
+  for(int j=0;
+      j<(triangle_out.numberoftriangles*
+         triangle_out.numberoftriangleattributes);++j)
+   {
+    triangle_out.triangleattributelist[j] = 
+     triangle_io.triangleattributelist[j];
+   }
+
+  
+  // Warn about laziness...
+  if (!quiet)
+   {
+    /* if ((triangle_io.triangleattributelist!=0)||
+        (triangle_io.numberoftriangleattributes!=0))
+     {
+      OomphLibWarning(
+       "Triangle attributes are not currently copied across",
+       "TriangleHelper::deep_copy_of_triangulateio_representation",
+       OOMPH_EXCEPTION_LOCATION);  
+       }*/
+
+    if ((triangle_io.trianglearealist!=0))
+     {
+      OomphLibWarning(
+       "Triangle areas are not currently copied across",
+       "TriangleHelper::deep_copy_of_triangulateio_representation",
+       OOMPH_EXCEPTION_LOCATION);  
+     }
+    
+    if ((triangle_io.neighborlist!=0))
+     {
+      OomphLibWarning(
+       "Triangle neighbours are not currently copied across",
+       "TriangleHelper::deep_copy_of_triangulateio_representation",
+       OOMPH_EXCEPTION_LOCATION);  
+     }
+   }
+  
+  
+  triangle_out.numberofcorners=triangle_io.numberofcorners;
+
+  // Segment data
+  triangle_out.numberofsegments=triangle_io.numberofsegments;
+  triangle_out.segmentlist = 
+   (int *) malloc(triangle_out.numberofsegments * 2 * sizeof(int));
+  for (int j=0;j<triangle_out.numberofsegments*2;j++)
+   {
+    triangle_out.segmentlist[j]=triangle_io.segmentlist[j];
+   }
+  triangle_out.segmentmarkerlist = 
+   (int *) malloc(triangle_out.numberofsegments * sizeof(int));
+  for (int j=0;j<triangle_out.numberofsegments;j++)
+   {
+    triangle_out.segmentmarkerlist[j]=triangle_io.segmentmarkerlist[j];
+   }
+  
+
+  //Region data
+  triangle_out.numberofregions=triangle_io.numberofregions;
+  triangle_out.regionlist =
+   (double*) malloc(triangle_out.numberofregions * 4 * sizeof(double));
+  for(int j=0;j<triangle_out.numberofregions*4;++j)
+   {
+    triangle_out.regionlist[j] = triangle_io.regionlist[j];
+   }
+  
+  // Hole data
+  triangle_out.numberofholes=triangle_io.numberofholes;
+  triangle_out.holelist =
+   (double*) malloc(triangle_out.numberofholes * 2 * sizeof(double));
+  for (int j=0;j<triangle_out.numberofholes*2;j++)
+   {
+    triangle_out.holelist[j]=triangle_io.holelist[j];
+   }
+  
+  
+  // Warn about laziness...
+  if (!quiet)
+   {
+    /* if ((triangle_io.regionlist!=0)||
+        (triangle_io.numberofregions!=0))
+     {
+      OomphLibWarning(
+       "Regions are not currently copied across",
+       "TriangleHelper::deep_copy_of_triangulateio_representation",
+       OOMPH_EXCEPTION_LOCATION);  
+       }*/
+    
+    if ((triangle_io.edgelist!=0)||
+        (triangle_io.numberofedges!=0))
+     {
+      OomphLibWarning(
+       "Edges are not currently copied across",
+       "TriangleHelper::deep_copy_of_triangulateio_representation",
+       OOMPH_EXCEPTION_LOCATION);  
+     } 
+
+    if ((triangle_io.edgemarkerlist!=0))
+     {
+      OomphLibWarning(
+       "Edge markers are not currently copied across",
+       "TriangleHelper::deep_copy_of_triangulateio_representation",
+       OOMPH_EXCEPTION_LOCATION);  
+     } 
+    
+    if ((triangle_io.normlist!=0))
+     {
+      OomphLibWarning(
+       "Normals are not currently copied across",
+       "TriangleHelper::deep_copy_of_triangulateio_representation",
+       OOMPH_EXCEPTION_LOCATION);  
+     } 
+   }
+
+  // Give it back!
+  return triangle_out;
+  
+ }
+
+ /// \short Write the triangulateio data to disk as a poly file,
+ /// mainly used for debugging
+ void write_triangulateio_to_polyfile(TriangulateIO &triangle_io,
+                                      std::ostream &poly_file)
+ {
+  //Up the precision dramatiacally
+  poly_file.precision(20);
+
+  //Output the number of points and their attributes
+  //Store the number of attributes
+  const int n_attr = triangle_io.numberofpointattributes;
+  poly_file << triangle_io.numberofpoints << "  " << 2 << " " 
+            << n_attr << " " ;
+  //Determine whether there are point markers
+  bool point_markers=true;
+  if(triangle_io.pointmarkerlist==NULL) {point_markers=false;}
+  //Indicate this in the file
+  poly_file << point_markers << "\n";
+  
+  //Now output the point data
+  poly_file << "#Points\n";
+  for(int n=0;n<triangle_io.numberofpoints;++n)
+   {
+    //Output the point number and x and y coordinates
+    poly_file << n+1 << " " 
+              << triangle_io.pointlist[2*n] << " "
+              << triangle_io.pointlist[2*n+1] << " ";
+    //Output any attributes
+    for(int i=0;i<n_attr;++i)
+     {
+      poly_file << triangle_io.pointattributelist[n_attr*n+i] << " ";
+     }
+    //Output the boundary marker
+    if(point_markers)
+     {
+      poly_file << triangle_io.pointmarkerlist[n] << " ";
+     }
+    poly_file << "\n";
+   }
+
+  //Now move onto the segments
+  poly_file << "#Lines\n";
+  poly_file << triangle_io.numberofsegments << " ";
+  //Determine whether there are segment markers
+  bool seg_markers=true;
+  if(triangle_io.segmentmarkerlist==NULL) {seg_markers=false;}
+  //Output this info in the file
+  poly_file << seg_markers << "\n";
+
+  //Now output the segment data
+  for(int n=0;n<triangle_io.numberofsegments;++n)
+   {
+    poly_file << n+1 << " "  
+              << triangle_io.segmentlist[2*n] << " "
+              << triangle_io.segmentlist[2*n+1] << " ";
+    //If there is a boundary marker output
+    if(seg_markers)
+     {
+      poly_file << triangle_io.segmentmarkerlist[n] << " ";
+     }
+    poly_file << "\n";
+   }
+
+  //Now output the number of holes
+  poly_file << "#No holes\n";
+  poly_file << triangle_io.numberofholes << "\n";
+  //Output the hole data
+  for(int h=0;h<triangle_io.numberofholes;++h)
+   {
+    poly_file << h+1 << " " 
+              << triangle_io.holelist[2*h] << " "
+              << triangle_io.holelist[2*h+1] << "\n";
+   }
+
+  //Now output the number of regions
+  poly_file << "#Assignment of attributes to regions\n";
+  poly_file << triangle_io.numberofregions << "\n";
+  
+  //Loop over the regions
+  for(int r=0;r<triangle_io.numberofregions;++r)
+   {
+    poly_file << r+1 << " ";
+    for(unsigned i=0;i<4;i++)
+     {
+      poly_file << triangle_io.regionlist[4*r+i] << " ";
+     }
+    poly_file << "\n";
+   }
+ }
+
+
+
+ /// Create a triangulateio data file from ele node and poly
+ /// files. This is used if the mesh is generated by using Triangle externally.
+ /// The triangulateio structure is required to dump the mesh topology for
+ /// restarts.
+ void create_triangulateio_from_polyfiles(
+  const std::string& node_file_name,
+  const std::string& element_file_name,
+  const std::string& poly_file_name, TriangulateIO &triangle_io)
+ {
+  //Initialise the TriangulateIO data structure
+  initialise_triangulateio(triangle_io);
+  
+  // Process element file
+  std::ifstream element_file(element_file_name.c_str(),std::ios_base::in);
+   
+  // Read in the number of elements
+  element_file >> triangle_io.numberoftriangles;
+  const unsigned n_element = 
+   static_cast<unsigned>(triangle_io.numberoftriangles);
+
+  //Read in the number of nodes per element
+  element_file >> triangle_io.numberofcorners;
+  const unsigned n_local_node =
+   static_cast<unsigned>(triangle_io.numberofcorners);
+
+  //Read in the element attributes
+  element_file >> triangle_io.numberoftriangleattributes;
+  const unsigned n_attributes =
+   static_cast<unsigned>(triangle_io.numberoftriangleattributes);
+
+  //Allocate storage in the data structure
+  triangle_io.trianglelist =
+   (int *) malloc(triangle_io.numberoftriangles *
+                     triangle_io.numberofcorners * sizeof(int));
+
+  if(n_attributes > 0)
+   {
+    triangle_io.triangleattributelist =
+     (double *) malloc(triangle_io.numberoftriangles * 
+                       triangle_io.numberoftriangleattributes 
+                       * sizeof(double));
+   }
+
+  //Dummy storage
+  int dummy_element_number;
+
+  //Initialise counter
+  unsigned counter=0;
+  unsigned counter2=0;
+
+  // Read global node numbers for all elements
+  for(unsigned e=0;e<n_element;e++)
+   {
+    element_file >> dummy_element_number;
+    for(unsigned j=0;j<n_local_node;j++)
+     {
+      element_file >> triangle_io.trianglelist[counter];
+      ++counter;
+     }
+    for(unsigned j=0;j<n_attributes;j++)
+     {
+      element_file >> triangle_io.triangleattributelist[counter2];
+      ++counter2;
+     }
+   }
+  //Close the element file
+  element_file.close();
+   
+  // Process node file
+  // -----------------
+  std::ifstream node_file(node_file_name.c_str(),std::ios_base::in);
+
+  // Read number of nodes
+  node_file >> triangle_io.numberofpoints;
+  unsigned n_node = 
+   static_cast<unsigned>(triangle_io.numberofpoints);
+   
+  // Spatial dimension of nodes
+  unsigned dimension;
+  node_file>>dimension;
+   
+#ifdef PARANOID
+  if(dimension!=2)
+   {
+    throw OomphLibError("The dimension must be 2\n",
+                        "TriangleScaffoldMesh::TriangleScaffoldMesh()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+   
+  // Flag for attributes
+  node_file >> triangle_io.numberofpointattributes;
+  unsigned n_point_attributes = 
+   static_cast<unsigned>(triangle_io.numberofpointattributes);
+  
+  // Flag for boundary markers
+  unsigned boundary_markers_flag;
+  node_file >> boundary_markers_flag;
+
+  //Allocate storage
+  triangle_io.pointlist = 
+   (double*) malloc(triangle_io.numberofpoints * 2 * sizeof(double));
+  triangle_io.pointattributelist =
+   (double*) malloc(triangle_io.numberofpoints * 
+                    triangle_io.numberofpointattributes * sizeof(double));
+  if(boundary_markers_flag)
+   {
+    triangle_io.pointmarkerlist =
+     (int*) malloc(triangle_io.numberofpoints * sizeof(int));
+   }
+   
+  // Dummy for node number
+  unsigned dummy_node_number;
+   
+  //Reset counter
+  counter=0;
+  // Load in nodal posititions, point attributes
+  // and boundary markers
+  for(unsigned i=0;i<n_node;i++)
+   {
+    node_file>>dummy_node_number;
+    node_file>>triangle_io.pointlist[2*i];
+    node_file>>triangle_io.pointlist[2*i+1];
+    for(unsigned j=0;j<n_point_attributes;++j)
+     {
+      node_file>>triangle_io.pointattributelist[counter];
+      ++counter;
+     }
+    if(boundary_markers_flag)
+     {
+      node_file>>triangle_io.pointmarkerlist[i];
+     }
+   }
+  node_file.close();
+   
+   
+  // Process poly file to extract edges
+  //-----------------------------------
+   
+  // Open poly file
+  std::ifstream poly_file(poly_file_name.c_str(),std::ios_base::in);
+
+  // Number of nodes in poly file --- these will be ignore
+  unsigned n_node_poly;
+  poly_file >> n_node_poly;
+
+  // Dimension
+  poly_file >> dimension;
+
+  // Attribute flag
+  unsigned attribute_flag;
+  poly_file >> attribute_flag;
+
+  // Boundary markers flag
+  poly_file >> boundary_markers_flag;
+
+
+  // Ignore node information: Note: No, we can't extract the
+  // actual nodes themselves from here!
+  unsigned dummy;
+  for(unsigned i=0;i<n_node_poly;i++)
+   {
+    //Read in (and discard) node number and x and y coordinates
+    poly_file>>dummy;
+    poly_file>>dummy;
+    poly_file>>dummy;
+    //read in the attributes
+    for(unsigned j=0;j<attribute_flag;++j)
+     {
+      poly_file >> dummy;
+     }
+    //read in the boundary marker
+    if(boundary_markers_flag==1)
+     {
+      
+      poly_file>>dummy;
+     }
+   }
+ 
+  // Now extract the segment information
+  //------------------------------------
+
+  // Number of segments
+  poly_file>> triangle_io.numberofsegments;
+  unsigned n_segment = 
+   static_cast<unsigned>(triangle_io.numberofsegments);
+
+  // Boundary marker flag
+  poly_file >> boundary_markers_flag;
+
+  //Allocate storage
+  triangle_io.segmentlist = 
+   (int *) malloc(triangle_io.numberofsegments * 2 * sizeof(int));
+  if(boundary_markers_flag)
+   {
+    triangle_io.segmentmarkerlist =
+     (int *) malloc(triangle_io.numberofsegments * sizeof(int));
+   }
+
+  // Dummy for global segment number
+  unsigned dummy_segment_number;
+
+  // Extract information for each segment
+  for(unsigned i=0;i<n_segment;i++)
+   {
+    poly_file >> dummy_segment_number;
+    poly_file >> triangle_io.segmentlist[2*i];
+    poly_file >> triangle_io.segmentlist[2*i+1];
+    if(boundary_markers_flag)
+     {
+      poly_file >> triangle_io.segmentmarkerlist[i];
+     }
+   }
+  
+  // Extract hole center information
+  poly_file >> triangle_io.numberofholes;
+  unsigned n_hole = static_cast<unsigned>(triangle_io.numberofholes);
+
+  //Allocate memory
+  triangle_io.holelist = 
+   (double*) malloc(triangle_io.numberofholes * 2 * sizeof(double));
+
+
+  // Dummy for hole number
+  unsigned dummy_hole;
+  // Loop over the holes to get centre coords
+  for(unsigned ihole=0;ihole<n_hole;ihole++)
+   {
+    // Read the centre value
+    poly_file >> dummy_hole;
+    poly_file >> triangle_io.holelist[2*ihole];
+    poly_file >> triangle_io.holelist[2*ihole+1];
+   }
+  poly_file.close();
+ }
+
+  
+
+
+ /// \short Write all the triangulateio data to disk in a dump file
+ /// that can then be used to restart simulations
+ void dump_triangulateio(TriangulateIO &triangle_io,
+                         std::ostream &dump_file)
+ {
+  //Dump the triangles first
+  dump_file << triangle_io.numberoftriangles 
+            << " # number of elements in TriangulateIO" << std::endl;
+
+  dump_file << triangle_io.numberofcorners
+            << " # number of nodes in each triangle" << std::endl;
+
+  dump_file << triangle_io.numberoftriangleattributes 
+            << " # number of triangle attributes" << std::endl;
+
+  //Loop over and dump the triangle information
+  const int n_element = triangle_io.numberoftriangles;
+  const int n_local_node = triangle_io.numberofcorners;
+  const int n_attribute = triangle_io.numberoftriangleattributes;
+  unsigned counter=0, counter2=0;
+  for(int e=0;e<n_element;++e)
+   {
+    //Dump the corners
+    dump_file << e 
+              << " # element number " << std::endl;
+    for(int n=0;n<n_local_node;++n)
+     {
+      dump_file << triangle_io.trianglelist[counter] << std::endl;
+      ++counter;
+     }
+    //Dump the attributes
+    dump_file << n_attribute
+              << " # number of attributes" << std::endl;
+    for(int n=0;n<n_attribute;++n)
+     {
+      dump_file << triangle_io.triangleattributelist[counter2];
+      ++counter2;
+     }
+   }
+  
+
+  //Dump the points (nodes) next
+  dump_file << triangle_io.numberofpoints 
+            << " # number of points in TriangulateIO" << std::endl; 
+  dump_file << triangle_io.numberofpointattributes 
+            << " # number of point attributes" << std::endl;
+  //Test whether there are point markers
+  bool point_marker_flag = true;
+  if(triangle_io.pointmarkerlist==NULL) {point_marker_flag=false;}
+  dump_file << point_marker_flag
+              << " # point marker flag" << std::endl;
+  
+
+  //Now output the point data
+  const int n_nodes = triangle_io.numberofpoints;
+  const int n_point_attributes = triangle_io.numberofpointattributes;
+  counter=0; counter2=0;
+  for(int n=0;n<n_nodes;++n)
+   {
+    dump_file << n << " # point number " << std::endl;
+    for(int i=0;i<2;++i)
+     {
+      dump_file << triangle_io.pointlist[counter] << std::endl;
+      ++counter;
+     }
+    dump_file << n_point_attributes << " # number of point attributes " 
+              << std::endl;
+    //Output any attributes
+    for(int i=0;i<n_point_attributes;++i)
+     {
+      dump_file << 
+       triangle_io.pointattributelist[counter2] 
+                << std::endl;
+      ++counter2;
+     }
+    dump_file << point_marker_flag << " # point marker flag "
+              << std::endl;
+    //Output the boundary marker
+    if(point_marker_flag)
+     {
+      dump_file << triangle_io.pointmarkerlist[n] << std::endl;
+     }
+   }
+  
+  //Now move onto the segments
+  dump_file << triangle_io.numberofsegments 
+            << " # Number of segments in TriangulateIO " << std::endl;
+  
+  //Determine whether there are segment markers
+  bool seg_marker_flag=true;
+  if(triangle_io.segmentmarkerlist==NULL) {seg_marker_flag=false;}
+  //Output this info in the file
+  dump_file << seg_marker_flag << " # segment marker flag " << std::endl;
+
+  const int n_segments = triangle_io.numberofsegments;
+  counter=0;
+  //Now output the segment data
+  for(int n=0;n<n_segments;++n)
+   {
+    dump_file << n << " # segment number " << std::endl;
+    for(int i=0;i<2;++i)
+     {
+      dump_file << triangle_io.segmentlist[counter] << std::endl;
+      ++counter;
+     }
+
+    //If there is a boundary marker output
+    dump_file << seg_marker_flag << " # segment marker flag " << std::endl;
+    if(seg_marker_flag)
+     {
+      dump_file << triangle_io.segmentmarkerlist[n] << std::endl;
+     }
+   }
+
+  //Now output the number of holes
+  dump_file << triangle_io.numberofholes << " # number of holes " << std::endl;
+  const int n_hole = triangle_io.numberofholes;
+  //Output the hole data
+  for(int h=0;h<n_hole;++h)
+   {
+    dump_file << h << " # hole number " << std::endl;
+    dump_file << triangle_io.holelist[2*h] << std::endl;
+    dump_file << triangle_io.holelist[2*h+1] << std::endl;
+   }
+
+  //Now output the number of regions
+  dump_file << triangle_io.numberofregions 
+            << " # number of regions " << std::endl;
+
+  const int n_region = triangle_io.numberofregions;
+  //Loop over the regions
+  counter=0;
+  for(int r=0;r<n_region;++r)
+   {
+    dump_file << r << " # region number " << std::endl;
+    for(unsigned i=0;i<4;i++)
+     {
+      dump_file << triangle_io.regionlist[counter] << std::endl;
+      ++counter;
+     }
+   }
+ }
+
+ /// \short Read the triangulateio data from a dump file on 
+ /// disk, which can then be used to restart simulations
+void read_triangulateio(std::istream &restart_file,TriangulateIO &triangle_io)
+{
+ //String for reading
+ std::string input_string;
+
+ //Initialise the triangulate data structure
+ initialise_triangulateio(triangle_io);
+
+ //Read the first line up to termination sign
+ getline(restart_file,input_string,'#');
+ //Ignore the rest of the line
+ restart_file.ignore(80,'\n');
+ //Convert the number
+ triangle_io.numberoftriangles = atoi(input_string.c_str());
+
+ //Read the next line up to termination sign
+ getline(restart_file,input_string,'#');
+ //Ignore the rest of the line
+ restart_file.ignore(80,'\n');
+ //Convert the number
+ triangle_io.numberofcorners = atoi(input_string.c_str());
+ 
+//Read the next line up to termination sign
+ getline(restart_file,input_string,'#');
+ //Ignore the rest of the line
+ restart_file.ignore(80,'\n');
+ //Convert the number
+ triangle_io.numberoftriangleattributes = atoi(input_string.c_str());
+ 
+ //Convert numbers into register variables
+ const int n_element = triangle_io.numberoftriangles;
+ const int n_local_node = triangle_io.numberofcorners;
+ const int n_attribute = triangle_io.numberoftriangleattributes;
+
+ //Allocate storage in the data structure
+ triangle_io.trianglelist =
+  (int *) malloc(triangle_io.numberoftriangles *
+                 triangle_io.numberofcorners * sizeof(int));
+ 
+ if(n_attribute > 0)
+  {
+   triangle_io.triangleattributelist =
+    (double *) malloc(triangle_io.numberoftriangles * 
+                      triangle_io.numberoftriangleattributes 
+                      * sizeof(double));
+  }
+ 
+ //Loop over elements and load in data
+ unsigned counter=0, counter2=0;
+ for(int e=0;e<n_element;++e)
+  {
+   //Read the next line and ignore it
+   getline(restart_file,input_string);
+   for(int n=0;n<n_local_node;++n)
+    {
+     getline(restart_file,input_string);
+     triangle_io.trianglelist[counter] = atof(input_string.c_str());
+     ++counter;
+    }
+   //Read the attributes
+   getline(restart_file,input_string);
+   for(int n=0;n<n_attribute;++n)
+    {
+     getline(restart_file,input_string);
+     triangle_io.triangleattributelist[counter2] = atof(input_string.c_str());
+     ++counter2;
+    }
+  }
+ 
+
+  //Read the points (nodes) next up to termination string
+  getline(restart_file,input_string,'#');
+  //ignore the rest
+  restart_file.ignore(80,'\n');
+  triangle_io.numberofpoints = atoi(input_string.c_str());
+
+  //Read the point attributes next up to termination string
+  getline(restart_file,input_string,'#');
+  //ignore the rest
+  restart_file.ignore(80,'\n');
+  triangle_io.numberofpointattributes = atoi(input_string.c_str());
+
+  //Read whether there are point markers
+  getline(restart_file,input_string,'#');
+  //ignore the rest
+  restart_file.ignore(80,'\n');
+  int point_marker_flag = atoi(input_string.c_str());
+
+  //Allocate storage
+  triangle_io.pointlist = 
+   (double*) malloc(triangle_io.numberofpoints * 2 * sizeof(double));
+  triangle_io.pointattributelist =
+   (double*) malloc(triangle_io.numberofpoints * 
+                    triangle_io.numberofpointattributes * sizeof(double));
+  if(point_marker_flag)
+   {
+    triangle_io.pointmarkerlist =
+     (int*) malloc(triangle_io.numberofpoints * sizeof(int));
+   }
+  
+
+  //Now read the point data
+  const int n_nodes = triangle_io.numberofpoints;
+  const int n_point_attributes = triangle_io.numberofpointattributes;
+  counter=0; counter2=0;
+  for(int n=0;n<n_nodes;++n)
+   {
+    //Ignore the first line
+    getline(restart_file,input_string);
+    //Get the positions
+    for(int i=0;i<2;++i)
+     {
+      getline(restart_file,input_string);
+      triangle_io.pointlist[counter] = atof(input_string.c_str());
+      ++counter;
+     }
+    
+    //Ignore the next line about point attributes
+    getline(restart_file,input_string);
+
+    //Read any attributes
+    for(int i=0;i<n_point_attributes;++i)
+     {
+      getline(restart_file,input_string);
+      triangle_io.pointattributelist[counter2] =
+       atof(input_string.c_str());
+      ++counter2;
+     }
+
+    //Ignore the next line
+    getline(restart_file,input_string);
+    //Output the boundary marker
+    if(point_marker_flag)
+     {
+      getline(restart_file,input_string);
+      triangle_io.pointmarkerlist[n] = atoi(input_string.c_str());
+     }
+   }
+  
+  //Next read the segments
+  getline(restart_file,input_string,'#');
+  restart_file.ignore(80,'\n');
+  triangle_io.numberofsegments  = atoi(input_string.c_str());
+  
+  //Determine whether there are segment markers
+  getline(restart_file,input_string,'#');
+  //ignore the rest
+  restart_file.ignore(80,'\n');
+  int seg_marker_flag = atoi(input_string.c_str());
+  
+  //Allocate storage
+  triangle_io.segmentlist = 
+   (int *) malloc(triangle_io.numberofsegments * 2 * sizeof(int));
+  if(seg_marker_flag)
+   {
+    triangle_io.segmentmarkerlist =
+     (int *) malloc(triangle_io.numberofsegments * sizeof(int));
+   }
+
+  const int n_segments = triangle_io.numberofsegments;
+  counter=0;
+  //Now output the segment data
+  for(int n=0;n<n_segments;++n)
+   {
+    getline(restart_file,input_string);
+    //get input
+    for(int i=0;i<2;++i)
+     {
+      getline(restart_file,input_string);
+      triangle_io.segmentlist[counter] = atoi(input_string.c_str());
+      ++counter;
+     }
+
+    //Ignore the next line
+    getline(restart_file,input_string);
+    if(seg_marker_flag)
+     {
+      getline(restart_file,input_string);
+      triangle_io.segmentmarkerlist[n] = atoi(input_string.c_str());
+     }
+   }
+  
+  //Now read the holes
+  getline(restart_file,input_string,'#');
+  restart_file.ignore(80,'\n');
+  triangle_io.numberofholes = atoi(input_string.c_str());
+  
+  //Allocate memory
+  triangle_io.holelist = 
+   (double*) malloc(triangle_io.numberofholes * 2 * sizeof(double));
+  
+  const int n_hole = triangle_io.numberofholes;
+  //Output the hole data
+  for(int h=0;h<n_hole;++h)
+   {
+    //Ignore the first line
+    getline(restart_file,input_string);
+    //get the centre
+    getline(restart_file,input_string);
+    triangle_io.holelist[2*h] = atof(input_string.c_str());
+    getline(restart_file,input_string);
+    triangle_io.holelist[2*h+1] = atof(input_string.c_str());
+   }
+
+  //Now read the number of regions
+  getline(restart_file,input_string,'#');
+  restart_file.ignore(80,'\n');
+  triangle_io.numberofregions = atoi(input_string.c_str());
+
+  const int n_region = triangle_io.numberofregions;
+
+  //Allocate memory
+  triangle_io.regionlist = 
+   (double*) malloc(triangle_io.numberofregions * 4 * sizeof(double));
+
+  //Loop over the regions
+  counter=0;
+  for(int r=0;r<n_region;++r)
+   {
+    getline(restart_file,input_string);
+    for(unsigned i=0;i<4;i++)
+     {
+      getline(restart_file,input_string);
+      triangle_io.regionlist[counter] = atof(input_string.c_str());
+      ++counter;
+     }
+   }
+}
+                         
+
+} //End of TriangleHelper namespace
+
+
+
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
+
+
 
 /// Namespace that allows the specification of a tolerance 
 /// between vertices at the ends of polylines that are supposed
@@ -219,6 +1207,196 @@ namespace TriangleBoundaryHelper
  };
  
 }
+
+
+
+//==============================================================
+/// Write a Triangulateio_object file of the TriangulateIO object
+/// String s is add to assign a different value for
+/// input and/or output structure.
+/// The function give the same result of the "report" function
+/// included in the tricall.c, esternal_src.
+//==============================================================
+ void TriangleMeshBase::write_triangulateio(TriangulateIO& triangle, 
+                                            std::string &s)
+ {
+
+  std::ofstream outfile;
+  char filename[100];
+
+  sprintf(filename,"Triangulateio_object_%s.dat",s.c_str());
+  outfile.open(filename);
+  outfile <<"# Triangulateio object values:\n\n"<<std::endl;
+
+  // Write points coordinates
+  if(triangle.numberofpoints!=0)
+   {
+    outfile <<"# Triangulateio number of points is:"
+            <<triangle.numberofpoints <<std::endl;
+   }
+  if(triangle.pointlist != NULL)
+   {
+    outfile <<"# Vertex coordinates are:"<<std::endl;
+    for(int k=0;k<triangle.numberofpoints*2;k+=2)
+     {
+      outfile << (k*0.5)+1 << " "
+              << triangle.pointlist[k] << " "
+              << triangle.pointlist[k+1] << std::endl;
+     }
+   }
+
+  // Write points attribute list
+  if(triangle.numberofpointattributes!=0)
+   {
+    outfile <<"# Triangulateio number of points attributelist is:"
+            <<triangle.numberofpointattributes <<std::endl;
+   }
+  if(triangle.pointattributelist != NULL)
+   {
+       
+    outfile <<"# Vertex attribute are:"<<std::endl;
+    for(int k=0;k<triangle.numberofpointattributes;k++)
+     {
+      outfile << triangle.pointattributelist[k] << std::endl;
+     }
+   }
+
+  // Write point markers list
+  if(triangle.pointmarkerlist != NULL)
+   {
+    outfile <<"# Vertex Markers are:"<<std::endl;
+    for(int k=0;k<triangle.numberofpoints;k++)
+     {
+      outfile << triangle.pointmarkerlist[k] << std::endl;
+     }
+   }
+  
+  // Write the 1.node file used by the showme function  
+  std::ofstream nodefile;
+  char nodename[100];
+
+  sprintf(nodename,"file_%s.1.node",s.c_str());
+  nodefile.open(nodename);
+  nodefile <<triangle.numberofpoints<<" 2 "
+           <<triangle.numberofpointattributes
+           <<" 0"<<std::endl;
+  for(int j=0;j<triangle.numberofpoints*2;j+=2)
+   {
+    nodefile <<(j/2)+1<<" " << triangle.pointlist[j] << " "
+            << triangle.pointlist[j+1] << std::endl;
+   }
+  nodefile.close();
+  
+
+  // Write segments edge elements
+  if(triangle.numberofsegments!=0)
+   {
+    outfile <<"# The number of segments is:"
+            <<triangle.numberofsegments<<std::endl;
+   }
+  if(triangle.segmentlist != NULL)
+   {
+    outfile <<"# Segments are:"<<std::endl;
+    for(int k=0;k<triangle.numberofsegments*2;k+=2)
+     {
+      outfile << triangle.segmentlist[k] << "  "
+              << triangle.segmentlist[k+1] <<std::endl;
+     }
+   }
+
+  // Write segments markers list
+  if(triangle.segmentmarkerlist != NULL)
+   {
+    outfile <<"# Segments Markers are:"<<std::endl;
+    for(int k=0;k<triangle.numberofsegments;k++)
+     {
+      outfile << triangle.segmentmarkerlist[k] << std::endl;
+     }
+   }
+
+  // Write regions
+  if(triangle.numberofregions!=0)
+   {
+    outfile <<"# The number of region is:"
+            <<triangle.numberofregions<<std::endl;
+   }
+
+  // Write holes
+  if(triangle.numberofholes!=0)
+   {
+    outfile <<"# The number of holes is:"
+            <<triangle.numberofholes<<std::endl;
+   }
+  if(triangle.holelist != NULL)
+   {
+    outfile <<"#  Holes are:"<<std::endl;
+    for(int k=0;k<triangle.numberofholes*2;k+=2)
+     {
+      outfile << triangle.holelist[k] << "  "
+              << triangle.holelist[k+1] <<std::endl;
+     }
+   }
+
+  // Write triangles
+  if(triangle.numberoftriangles!=0)
+   {
+    outfile <<"# Triangulateio number of triangles:"
+            <<triangle.numberoftriangles <<std::endl;
+   }
+  if(triangle.numberofcorners!=0)
+   {
+    outfile <<"# Triangulateio number of corners:"
+            <<triangle.numberofcorners<<std::endl;
+   }
+  if(triangle.numberoftriangleattributes!=0)
+   {
+    outfile <<"# Triangulateio number of triangles attributes:"
+            <<triangle.numberoftriangleattributes <<std::endl;
+   }
+  if(triangle.trianglelist != NULL)
+   {
+       
+    outfile <<"# Traingles are:"<<std::endl;
+    for(int k=0;k<triangle.numberoftriangles*3;k+=3)
+     {
+      outfile << triangle.trianglelist[k] << " "
+              << triangle.trianglelist[k+1] << " "
+              << triangle.trianglelist[k+2] << std::endl;
+     }
+   }
+
+  if(triangle.trianglearealist != NULL)
+   {
+    outfile <<"# Triangle's areas are:"<<std::endl;
+     for(int k=0;k<triangle.numberoftriangles;k++)
+     {
+      outfile << triangle.trianglearealist[k] << std::endl;
+     }
+   }
+
+  if(triangle.trianglelist != NULL)
+   {
+    
+    // Write the 1.ele file used by the showme function  
+    std::ofstream elefile;
+    char elename[100];
+  
+    sprintf(elename,"file_%s.1.ele",s.c_str());
+    elefile.open(elename);
+    elefile <<triangle.numberoftriangles<<" 3 0"<<std::endl;
+    for(int j=0;j<triangle.numberoftriangles*3;j+=3)
+     {
+      elefile <<(j/3)+1<<" "<< triangle.trianglelist[j] << " "
+              << triangle.trianglelist[j+1] << " "
+              << triangle.trianglelist[j+2] << std::endl;
+     }
+    elefile.close();
+   }
+  
+  outfile.close();
+ }
+
+
 
 //================================================================
 /// Setup lookup schemes which establish which elements are located

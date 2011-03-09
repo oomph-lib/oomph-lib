@@ -48,7 +48,7 @@ namespace PseudoSolidHelper
  extern double Zero;
 
 }
-
+ 
 
 //==========================================================================
 /// A templated class that permits combination two different element types,
@@ -61,11 +61,15 @@ template<class BASIC, class SOLID>
  : public virtual BASIC, public virtual SOLID
 
 {
+ /// Boolean flag to indicate shape derivative method
+ bool Shape_derivs_by_direct_fd;
+
   public: 
 
  /// \short Constructor, call the BASIC and SOLID elements' constructors and
  /// set the "density" parameter for solid element to zero
- PseudoSolidNodeUpdateElement() : BASIC(), SOLID()
+ PseudoSolidNodeUpdateElement() : BASIC(), SOLID(), 
+  Shape_derivs_by_direct_fd(true)
   {
    SOLID::lambda_sq_pt()=&PseudoSolidHelper::Zero;
   }
@@ -113,7 +117,7 @@ template<class BASIC, class SOLID>
    SOLID::fill_in_contribution_to_jacobian(residuals,jacobian);
    
    // Now fill in the off-diagonal entries (the shape derivatives),
-   fill_in_shape_derivatives_by_fd(jacobian); 
+   fill_in_shape_derivatives(jacobian); 
   }
 
  /// \short Final override for mass matrix function: contributions
@@ -130,12 +134,89 @@ template<class BASIC, class SOLID>
     residuals,jacobian,mass_matrix);
    
    // Now fill in the off-diagonal entries (the shape derivatives),
-   fill_in_shape_derivatives_by_fd(jacobian); 
+   fill_in_shape_derivatives(jacobian); 
+  }
+
+
+ /// Evaluate shape derivatives by direct finite differencing
+ void evaluate_shape_derivs_by_direct_fd()
+  {Shape_derivs_by_direct_fd = true;}
+
+ /// Evaluate shape derivatives by chain rule
+ void evaluate_shape_derivs_by_chain_rule() 
+  {Shape_derivs_by_direct_fd = false;}
+
+
+ /// \short Fill in the shape derivatives of the BASIC equations
+ /// w.r.t. the solid position dofs
+ void fill_in_shape_derivatives(DenseMatrix<double> &jacobian)
+  {
+   //Default is to use finite differences
+   if(Shape_derivs_by_direct_fd)
+    {
+     this->fill_in_shape_derivatives_by_fd(jacobian);
+    }
+   //Otherwise need to do a bit more work
+   else
+    {
+     //Calculate storage requirements
+     const unsigned n_dof = this->ndof();
+     const unsigned n_node = this->nnode();
+     const unsigned nodal_dim = this->nodal_dimension();
+
+     //If there are no nodes or dofs return
+     if((n_dof==0) || (n_node==0)) {return;}
+
+     //Generalised dofs have NOT been considered, shout
+     if(this->nnodal_position_type()!=1) 
+      {
+       throw OomphLibError(
+        "Shape derivatives do not (yet) allow for generalised position dofs\n",
+        "PseudoSolid::fill_in_shape_derivatives()",
+        OOMPH_EXCEPTION_LOCATION);
+      }
+     
+     //Storage for derivatives of residuals w.r.t. nodal coordinates
+     RankThreeTensor<double> dresidual_dnodal_coordinates(
+      n_dof,nodal_dim,n_node,0.0);
+     
+     //Get the analytic derivatives for the BASIC equations
+     BASIC::get_dresidual_dnodal_coordinates(dresidual_dnodal_coordinates);
+
+     //Now add the appropriate contributions to the Jacobian
+     int local_unknown=0;
+     
+     //Loop over dofs 
+     //(this will include the solid dofs, 
+     // but all those contributions should be zero)
+     for(unsigned l=0;l<n_dof;l++)
+      {
+       //Loop over the nodes
+       for(unsigned n=0;n<n_node;n++)
+        {
+         //Loop over the position_types (only one)
+         unsigned k=0;
+         //Loop over the coordinates
+         for(unsigned i=0;i<nodal_dim;i++)
+          {
+           //Get the equation of the local unknown
+           local_unknown = this->position_local_eqn(n,k,i);
+           
+           //If not pinned, add the contribution to the Jacobian
+           if(local_unknown >= 0)
+            {
+             jacobian(l,local_unknown) += 
+              dresidual_dnodal_coordinates(l,i,n);
+            }
+          }
+        }
+      }
+    }
   }
 
 
  /// \short Fill in the derivatives of the BASIC equations
- /// w.r.t. to the solid position dofs
+ /// w.r.t. the solid position dofs
  void fill_in_shape_derivatives_by_fd(DenseMatrix<double> &jacobian)
   {
   

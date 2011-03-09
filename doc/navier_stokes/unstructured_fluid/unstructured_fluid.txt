@@ -115,13 +115,16 @@ The constructor calls the constructor of the underlying
 to the current nodal positions, making the current configuration
 stress-free.
 
-\until set_lagrangian_nodal_coordinates()
+\until }
 
 The \c TriangleMesh constructor associates each polyline in the
 \c xfig drawing with a distinct \c oomph-lib mesh boundary. Hence
-the boundary nodes are initially located on the same, single boundary. 
-To facilitate the application of boundary conditions, we divide the single
-boundary into three:
+the boundary nodes are initially located on the same, single boundary.
+The boundary conditions can be more easily applied if the boundary is
+divided into three boundaries, which is the task of the function
+\c TriangleMesh::identify_boundaries().
+
+We first allocate storage for three boundaries:
 
 \until set_nboundary
 
@@ -164,13 +167,13 @@ equation for the pseudo-elasticity, specifying the Poisson ratio.
 
 We create the \c Problem object and output the domain boundaries
 and the initial guess for the flow field.
-
+\skipline Build
 \until ()++
 
 Finally, we perform a straightforward parameter study by
 slowly increasing the Reynolds number of the flow from zero.
 
-\until end_of_main
+\until end_of_parameter_study
 
 
 <HR>
@@ -191,8 +194,6 @@ pointer to the problem's one-and-only mesh directly in
 \skipline start_of_problem_class
 \until };
 
-
-
 <HR>
 <HR>
 
@@ -206,7 +207,29 @@ by <A HREF="http://www.cs.cmu.edu/~quake/triangle.html">\c Triangle
 \until fluid_poly_file_name);
  
 Next, we apply the boundary conditions for the fluid and the 
-pseudo-solid equations. We pin the pseudo-solid nodes along
+pseudo-solid equations using the function \c
+set_boundary_conditions(), which also completes the build of the
+elements by setting the appropriate pointers to the physical
+variables.
+
+\until set_boundary_conditions()
+
+We add the fluid mesh as a single sub-mesh to the \c Problem and build
+the global mesh (see the comment in \ref class .)
+
+\until build_global
+
+Finally, we assign the equation numbers
+
+\until end_of_constructor
+
+<HR>
+<HR>
+
+\section bound Setting the boundary conditions
+
+
+We pin the pseudo-solid nodes along
 all domain boundaries, apply a no-slip condition for the fluid velocity 
 along the solid boundary  (boundary 0), pin the velocity at the inflow
 (boundary 1, where we will impose a Poiseuille flow profile), and impose
@@ -223,11 +246,6 @@ that illustrates what can go wrong.
 
 \until solid_bc_file.close();
 
-We add the fluid mesh as a single sub-mesh to the \c Problem and build
-the global mesh (see the comment in \ref class .)
-
-\until build_global
-
 We complete the build of the elements by specifying
 the Reynolds number and the constitutive equation for the pseudo-solid
 equations. 
@@ -235,9 +253,9 @@ equations.
 \until }
 
 Finally, we impose a Poiseuille profile at the inflow boundary (boundary
-1) and assign the equation numbers.
+1).
 
-\until end_of_constructor
+\until end_of_set_boundary_conditions
 
 
 <HR>
@@ -247,7 +265,7 @@ Finally, we impose a Poiseuille profile at the inflow boundary (boundary
 
 The post-processing routine outputs the flow field.
 
-\until }
+\until end_of_doc
 
 
 <HR>

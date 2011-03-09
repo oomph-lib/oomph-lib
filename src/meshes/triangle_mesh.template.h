@@ -91,9 +91,14 @@ namespace oomph
     // Store Timestepper used to build elements
     Time_stepper_pt=time_stepper_pt;
     
-    // Using this constructor no Triangulateio object is built
-    Triangulateio_exists=false;
-    
+    // Using this constructor build the triangulatio
+    TriangleHelper::create_triangulateio_from_polyfiles(node_file_name,
+                                                        element_file_name,
+                                                        poly_file_name,
+                                                        Triangulateio);
+    //Record that the triangulateio object has been created      
+    Triangulateio_exists=true;
+
     // Build scaffold
     Tmp_mesh_pt= new 
      TriangleScaffoldMesh(node_file_name,
@@ -726,31 +731,6 @@ namespace oomph
   unsigned nregion_element(const unsigned &i) 
   {return Region_element_pt[i].size();}
   
-  /// Access to the triangulateio representation of the mesh
-  TriangulateIO& triangulateio_representation()
-   {
-    // Check if the triangulateio object exists or not
-    if(Triangulateio_exists)
-     {
-      return Triangulateio;
-     }
-    else
-     // Shout!
-     {
-      std::ostringstream error_stream;
-      error_stream<<"Function triangulateio_representation()\n"
-                  <<"cannot be called if no TriangulateIO object\n"
-                  <<"has been built. Check if a wrong constructor\n"
-                  <<"has been called or if the Triangulateio\n"
-                  <<"has been alredy deleted."<<std::endl;
-      throw OomphLibError(error_stream.str(),
-                          "TriangleMesh<ELEMENT>::"
-                          "triangulateio_representation()",
-                          OOMPH_EXCEPTION_LOCATION); 
-     }
-   }
-  
-  
   /// Return the attribute associated with region i
   double region_attribute(const unsigned &i)
   {return Region_attribute[i];}
@@ -796,12 +776,6 @@ namespace oomph
       return Boundary_coordinate_limits[b];
      }
    }
-
-
-  /// \short Helper function. Write a TriangulateIO object file with all the 
-  /// triangulateio fields. String s is add to assign a different value for
-  /// the input and/or output structure
-  void write_triangulateio(TriangulateIO& triangulate_io, std::string& s);
   
   /// \short Update the TriangulateIO object to the current nodal position
   /// and the centre hole coordinates.
@@ -848,6 +822,60 @@ namespace oomph
     }
   }
   
+  /// \short Completely regenerate the mesh from the trianglateio structure
+  void remesh_from_internal_triangulateio()
+   {
+    //Remove all the boundary node information
+    this->remove_boundary_nodes();
+
+    //Delete exisiting nodes
+    unsigned n_node = this->nnode();
+    for(unsigned n=n_node;n>0;--n)
+     {
+      delete this->Node_pt[n-1];
+      this->Node_pt[n-1] = 0;
+     }
+    //Delete exisiting elements
+    unsigned n_element = this->nelement();
+    for(unsigned e=n_element;e>0;--e)
+     {
+      delete this->Element_pt[e-1];
+      this->Element_pt[e-1] = 0;
+     }
+    //Flush the storage
+    this->flush_element_and_node_storage();
+
+    //Delete all boundary element information
+    //ALH: Kick up the object hierarchy?
+    this->Boundary_element_pt.clear();
+    this->Face_index_at_boundary.clear();
+    this->Region_element_pt.clear();
+    this->Region_attribute.clear();
+    this->Boundary_region_element_pt.clear();
+    this->Face_index_region_at_boundary.clear();
+
+    //Now build the new scaffold
+    Tmp_mesh_pt= new TriangleScaffoldMesh(this->Triangulateio);
+        
+    // Triangulation has been created -- remember to wipe it!
+    Triangulateio_exists=true;
+    
+    // Convert mesh from scaffold to actual mesh
+    build_from_scaffold(this->Time_stepper_pt,this->Use_attributes);
+    
+    // Kill the scaffold
+    delete Tmp_mesh_pt;
+    Tmp_mesh_pt=0;
+
+    // Setup boundary coordinates for boundaries
+    unsigned nb=nboundary();
+    for (unsigned b=0;b<nb;b++)
+     {
+      this->setup_boundary_coordinates(b);
+     }
+   }
+
+
   /// \short Get a map containing Vectors of sub-boundary IDs. One
   /// for each each Polyline boundary.
   std::map<unsigned,Vector<unsigned> >& sub_boundary_id()
@@ -1009,10 +1037,7 @@ namespace oomph
   
   /// Temporary scaffold mesh
   TriangleScaffoldMesh* Tmp_mesh_pt;
-  
-  /// TriangulateIO representation of the mesh
-  TriangulateIO Triangulateio;
-  
+    
   /// \short Vector storing oomph-lib node number
   /// for all vertex nodes in the TriangulateIO representation of the mesh
   Vector<unsigned> Oomph_vertex_nodes_id;

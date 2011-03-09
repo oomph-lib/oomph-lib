@@ -25,7 +25,7 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-//Non-inline functions for NS elements
+// Non-inline functions for NS elements
 #include "axisym_navier_stokes_elements.h"
 
 
@@ -1004,14 +1004,12 @@ fill_in_generic_residual_contribution_axi_nst(Vector<double> &residuals,
    //r is the first position component
    double r = interpolated_x[0];
 
-
    //MOMENTUM EQUATIONS
    //------------------
    
    //Loop over the test functions
    for(unsigned l=0;l<n_node;l++)
     {
-
      //FIRST (RADIAL) MOMENTUM EQUATION
      local_eqn = nodal_local_eqn(l,u_nodal_index[0]);
      //If it's not a boundary condition
@@ -1159,7 +1157,7 @@ fill_in_generic_residual_contribution_axi_nst(Vector<double> &residuals,
         } /*End of Jacobian calculation*/
        
       } //End of if not boundary condition statement
-       
+
      //SECOND (AXIAL) MOMENTUM EQUATION
      local_eqn = nodal_local_eqn(l,u_nodal_index[1]);
      //If it's not a boundary condition
@@ -1274,7 +1272,7 @@ fill_in_generic_residual_contribution_axi_nst(Vector<double> &residuals,
                 }
               }
             }
-           
+
            //There are no azimithal terms in the axial momentum equation
           } //End of loop over velocity shape functions
        
@@ -1479,10 +1477,841 @@ fill_in_generic_residual_contribution_axi_nst(Vector<double> &residuals,
         } /*End of Jacobian calculation*/
        
       } //End of if not boundary condition
+
     } //End of loop over l
   }
  
 }
+
+
+
+//======================================================================
+/// Compute derivatives of elemental residual vector with respect
+/// to nodal coordinates. 
+/// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
+/// Overloads the FD-based version in the FiniteElement base class.
+//======================================================================
+void AxisymmetricNavierStokesEquations::
+get_dresidual_dnodal_coordinates(
+ RankThreeTensor<double>& dresidual_dnodal_coordinates)
+{
+ // Return immediately if there are no dofs
+ if(ndof()==0) { return; }
+
+ // Determine number of nodes in element
+ const unsigned n_node = nnode();
+ 
+ // Determine number of pressure dofs in element
+ const unsigned n_pres = npres_axi_nst();
+
+ // Find the indices at which the local velocities are stored
+ unsigned u_nodal_index[3];
+ for(unsigned i=0;i<3;i++) { u_nodal_index[i] = u_index_axi_nst(i); }
+
+ // Set up memory for the shape and test functions
+ // Note that there are only two dimensions, r and z, in this problem
+ Shape psif(n_node), testf(n_node);
+ DShape dpsifdx(n_node,2), dtestfdx(n_node,2);
+
+ // Set up memory for pressure shape and test functions
+ Shape psip(n_pres), testp(n_pres);
+
+ // Deriatives of shape fct derivatives w.r.t. nodal coords
+ RankFourTensor<double> d_dpsifdx_dX(2,n_node,n_node,2);
+ RankFourTensor<double> d_dtestfdx_dX(2,n_node,n_node,2);
+
+ // Derivative of Jacobian of mapping w.r.t. to nodal coords
+ DenseMatrix<double> dJ_dX(2,n_node);
+
+ // Derivatives of derivative of u w.r.t. nodal coords
+ // Note that the entry d_dudx_dX(p,q,i,k) contains the derivative w.r.t.
+ // nodal coordinate X_pq of du_i/dx_k. Since there are three velocity
+ // components, i can take on the values 0, 1 and 2, while k and p only
+ // take on the values 0 and 1 since there are only two spatial dimensions.
+ RankFourTensor<double> d_dudx_dX(2,n_node,3,2);
+
+ // Derivatives of nodal velocities w.r.t. nodal coords:
+ // Assumption: Interaction only local via no-slip so 
+ // X_pq only affects U_iq.
+ // Note that the entry d_U_dX(p,q,i) contains the derivative w.r.t. nodal
+ // coordinate X_pq of nodal value U_iq. In other words this entry is the
+ // derivative of the i-th velocity component w.r.t. the p-th spatial
+ // coordinate, taken at the q-th local node.
+ RankThreeTensor<double> d_U_dX(2,n_node,3,0.0);
+
+ // Determine the number of integration points
+ const unsigned n_intpt = integral_pt()->nweight();
+   
+ // Vector to hold local coordinates (two dimensions)
+ Vector<double> s(2);
+
+ // Get physical variables from element
+ // (Reynolds number must be multiplied by the density ratio)
+ const double scaled_re = re()*density_ratio();
+ const double scaled_re_st = re_st()*density_ratio();
+ const double scaled_re_inv_fr = re_invfr()*density_ratio();
+ const double scaled_re_inv_ro = re_invro()*density_ratio();
+ const double visc_ratio = viscosity_ratio();
+ const Vector<double> G = g();
+ 
+ // FD step 
+ double eps_fd = GeneralisedElement::Default_fd_jacobian_step;
+   
+ // Pre-compute derivatives of nodal velocities w.r.t. nodal coords:
+ // Assumption: Interaction only local via no-slip so 
+ // X_ij only affects U_ij.
+ bool element_has_node_with_aux_node_update_fct=false;
+ for(unsigned q=0;q<n_node;q++)
+  {
+   // Get pointer to q-th local node
+   Node* nod_pt = node_pt(q);
+
+   // Only compute if there's a node-update fct involved
+   if(nod_pt->has_auxiliary_node_update_fct_pt())
+    {
+     element_has_node_with_aux_node_update_fct=true;
+
+     // This functionality has not been tested so issue a warning
+     // to this effect
+     std::ostringstream warning_stream;
+     warning_stream << "\nThe functionality to evaluate the additional"
+                    << "\ncontribution to the deriv of the residual eqn"
+                    << "\nw.r.t. the nodal coordinates which comes about"
+                    << "\nif a node's values are updated using an auxiliary"
+                    << "\nnode update function has NOT been tested for"
+                    << "\naxisymmetric Navier-Stokes elements. Use at your"
+                    << "\nown risk"
+                    << std::endl;
+     OomphLibWarning(
+      warning_stream.str(),
+      "AxisymmetricNavierStokesEquations::get_dresidual_dnodal_coordinates",
+      OOMPH_EXCEPTION_LOCATION);
+
+     // Current nodal velocity
+     Vector<double> u_ref(3);
+     for(unsigned i=0;i<3;i++)
+      {
+       u_ref[i]=*(nod_pt->value_pt(u_nodal_index[i]));
+      }
+     
+     // FD
+     for(unsigned p=0;p<2;p++)
+      {
+       // Make backup
+       double backup=nod_pt->x(p);
+       
+       // Do FD step. No node update required as we're
+       // attacking the coordinate directly...
+       nod_pt->x(p) += eps_fd;
+       
+       // Do auxiliary node update (to apply no slip)
+       nod_pt->perform_auxiliary_node_update_fct();
+       
+       // Loop over velocity components
+       for(unsigned i=0;i<3;i++)
+        {
+         // Evaluate
+         d_U_dX(p,q,i)=(*(nod_pt->value_pt(u_nodal_index[i]))-u_ref[i])/eps_fd;
+        }
+       
+       // Reset 
+       nod_pt->x(p)=backup;
+       
+       // Do auxiliary node update (to apply no slip)
+       nod_pt->perform_auxiliary_node_update_fct();
+      }
+    }
+  }
+
+ // Integer to store the local equation number
+ int local_eqn=0;
+
+ // Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   // Assign values of s
+   for(unsigned i=0;i<2;i++) { s[i] = integral_pt()->knot(ipt,i); }
+
+   // Get the integral weight
+   const double w = integral_pt()->weight(ipt);
+   
+   // Call the derivatives of the shape and test functions
+   const double J = dshape_and_dtest_eulerian_at_knot_axi_nst(
+    ipt,psif,dpsifdx,d_dpsifdx_dX,testf,dtestfdx,d_dtestfdx_dX,dJ_dX);
+   
+   // Call the pressure shape and test functions
+   pshape_axi_nst(s,psip,testp);
+   
+   // Allocate storage for the position and the derivative of the 
+   // mesh positions w.r.t. time
+   Vector<double> interpolated_x(2,0.0);
+   Vector<double> mesh_velocity(2,0.0);
+
+   // Allocate storage for the pressure, velocity components and their
+   // time and spatial derivatives
+   double interpolated_p=0.0;
+   Vector<double> interpolated_u(3,0.0);
+   Vector<double> dudt(3,0.0);
+   DenseMatrix<double> interpolated_dudx(3,2,0.0);    
+
+   // Calculate pressure at integration point
+   for(unsigned l=0;l<n_pres;l++) { interpolated_p += p_axi_nst(l)*psip[l]; }
+   
+   // Calculate velocities and derivatives at integration point
+   // ---------------------------------------------------------
+
+   // Loop over nodes
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     // Cache the shape function
+     const double psif_ = psif(l);
+
+     // Loop over the two coordinate directions
+     for(unsigned i=0;i<2;i++)
+      {
+       interpolated_x[i] += this->raw_nodal_position(l,i)*psif_;
+      }
+
+     // Loop over the three velocity directions
+     for(unsigned i=0;i<3;i++)
+      {
+       // Get the nodal value
+       const double u_value = this->raw_nodal_value(l,u_nodal_index[i]);
+       interpolated_u[i] += u_value*psif_;
+       dudt[i] += du_dt_axi_nst(l,i)*psif_;
+       
+       // Loop over derivative directions
+       for(unsigned j=0;j<2;j++)
+        {                               
+         interpolated_dudx(i,j) += u_value*dpsifdx(l,j);
+        }
+      }
+    }
+
+   // Get the mesh velocity if ALE is enabled
+   if(!ALE_is_disabled)
+    {
+     // Loop over nodes
+     for(unsigned l=0;l<n_node;l++) 
+      {
+       // Loop over the two coordinate directions
+       for(unsigned i=0;i<2;i++)
+        {
+         mesh_velocity[i] += this->raw_dnodal_position_dt(l,i)*psif[l];
+        }
+      }
+    }
+
+   // Calculate derivative of du_i/dx_k w.r.t. nodal positions X_{pq}
+   for(unsigned q=0;q<n_node;q++)
+    {
+     // Loop over the two coordinate directions
+     for(unsigned p=0;p<2;p++)
+      {
+       // Loop over the three velocity components
+       for(unsigned i=0;i<3;i++)
+        {
+         // Loop over the two coordinate directions
+         for(unsigned k=0;k<2;k++)
+          {
+           double aux = 0.0;
+
+           // Loop over nodes and add contribution
+           for(unsigned j=0;j<n_node;j++)
+            {
+             aux += 
+              this->raw_nodal_value(j,u_nodal_index[i])*d_dpsifdx_dX(p,q,j,k);
+            }
+           d_dudx_dX(p,q,i,k) = aux;
+          }
+        }
+      }
+    }
+
+   // Get weight of actual nodal position/value in computation of mesh
+   // velocity from positional/value time stepper
+   const double pos_time_weight
+    = node_pt(0)->position_time_stepper_pt()->weight(1,0);
+   const double val_time_weight = node_pt(0)->time_stepper_pt()->weight(1,0);
+
+   // Get the user-defined body force terms
+   Vector<double> body_force(3);
+   get_body_force_axi_nst(time(),ipt,s,interpolated_x,body_force);
+   
+   // Get the user-defined source function
+   const double source = get_source_fct(time(),ipt,interpolated_x);
+
+   // Note: Can use raw values and avoid bypassing hanging information
+   // because this is the non-refineable version! 
+
+   // Get gradient of body force function
+   DenseMatrix<double> d_body_force_dx(3,2,0.0);
+   get_body_force_gradient_axi_nst(time(),ipt,s,interpolated_x,
+                                   d_body_force_dx);
+
+   // Get gradient of source function
+   Vector<double> source_gradient(2,0.0);
+   get_source_fct_gradient(time(),ipt,interpolated_x,source_gradient);
+
+   // Cache r (the first position component)
+   const double r = interpolated_x[0];
+
+   // Assemble shape derivatives
+   // --------------------------
+
+   // ==================
+   // MOMENTUM EQUATIONS
+   // ==================
+   
+   // Loop over the test functions
+   for(unsigned l=0;l<n_node;l++)
+    {
+     // Cache the test function
+     const double testf_ = testf[l];
+
+     // --------------------------------
+     // FIRST (RADIAL) MOMENTUM EQUATION
+     // --------------------------------
+     local_eqn = nodal_local_eqn(l,u_nodal_index[0]);;
+       
+     // If it's not a boundary condition
+     if(local_eqn >= 0)
+      {
+       // Loop over the two coordinate directions
+       for(unsigned p=0;p<2;p++)
+        {              
+         // Loop over nodes
+         for(unsigned q=0;q<n_node;q++)
+          {       
+           
+           // Residual x deriv of Jacobian
+           // ----------------------------
+
+           // Add the user-defined body force terms
+           double sum = r*body_force[0]*testf_;
+
+           // Add the gravitational body force term
+           sum += r*scaled_re_inv_fr*testf_*G[0];
+           
+           // Add the pressure gradient term
+           sum += interpolated_p*(testf_ + r*dtestfdx(l,0));
+           
+           // Add the stress tensor terms
+           // The viscosity ratio needs to go in here to ensure
+           // continuity of normal stress is satisfied even in flows
+           // with zero pressure gradient!
+           sum -= visc_ratio*
+            r*(1.0+Gamma[0])*interpolated_dudx(0,0)*dtestfdx(l,0);
+           
+           sum -= visc_ratio*r*
+            (interpolated_dudx(0,1) + Gamma[0]*interpolated_dudx(1,0))*
+            dtestfdx(l,1);
+           
+           sum -= visc_ratio*(1.0 + Gamma[0])*interpolated_u[0]*testf_/r;
+           
+           // Add the du/dt term
+           sum -= scaled_re_st*r*dudt[0]*testf_;
+           
+           // Add the convective terms
+           sum -= 
+            scaled_re*(r*interpolated_u[0]*interpolated_dudx(0,0) 
+                       - interpolated_u[2]*interpolated_u[2] 
+                       + r*interpolated_u[1]*interpolated_dudx(0,1))*testf_;
+           
+           // Add the mesh velocity terms
+           if(!ALE_is_disabled)
+            {
+             for(unsigned k=0;k<2;k++)
+              {
+               sum += scaled_re_st*r*mesh_velocity[k]
+                *interpolated_dudx(0,k)*testf_;
+              }
+            }
+           
+           // Add the Coriolis term
+           sum += 2.0*r*scaled_re_inv_ro*interpolated_u[2]*testf_;
+
+           // Multiply through by deriv of Jacobian and integration weight
+           dresidual_dnodal_coordinates(local_eqn,p,q) += sum*dJ_dX(p,q)*w;
+             
+           // Derivative of residual x Jacobian
+           // ---------------------------------
+
+           // Body force
+           sum = r*d_body_force_dx(0,p)*psif[q]*testf_;
+           if(p==0) { sum += body_force[0]*psif[q]*testf_; }
+
+           // Gravitational body force
+           if(p==0) { sum += scaled_re_inv_fr*G[0]*psif[q]*testf_; }
+
+           // Pressure gradient term
+           sum += r*interpolated_p*d_dtestfdx_dX(p,q,l,0);
+           if(p==0) { sum += interpolated_p*psif[q]*dtestfdx(l,0); }
+
+           // Viscous terms
+           sum -= r*visc_ratio*(
+            (1.0+Gamma[0])*(
+             d_dudx_dX(p,q,0,0)*dtestfdx(l,0)
+             + interpolated_dudx(0,0)*d_dtestfdx_dX(p,q,l,0))
+            + (d_dudx_dX(p,q,0,1)
+               + Gamma[0]*d_dudx_dX(p,q,1,0))*dtestfdx(l,1)
+            + (interpolated_dudx(0,1)
+               + Gamma[0]*interpolated_dudx(1,0))
+            *d_dtestfdx_dX(p,q,l,1));
+           if(p==0)
+            {
+             sum -= visc_ratio*(
+              (1.0+Gamma[0])*(
+               interpolated_dudx(0,0)*psif[q]*dtestfdx(l,0)
+               - interpolated_u[0]*psif[q]*testf_/(r*r))
+              + (interpolated_dudx(0,1)
+                 + Gamma[0]*interpolated_dudx(1,0))*psif[q]*dtestfdx(l,1));
+            }
+           
+           // Convective terms, including mesh velocity
+           for(unsigned k=0;k<2;k++)
+            {
+             double tmp = scaled_re*interpolated_u[k];
+             if(!ALE_is_disabled) { tmp -= scaled_re_st*mesh_velocity[k]; }
+             sum -= r*tmp*d_dudx_dX(p,q,0,k)*testf_;
+             if(p==0) { sum -= tmp*interpolated_dudx(0,k)*psif[q]*testf_; }
+            }
+           if(!ALE_is_disabled)
+            {
+             sum += scaled_re_st*r*pos_time_weight*interpolated_dudx(0,p)
+              *psif[q]*testf_;
+            }
+
+           // du/dt term
+           if(p==0) { sum -= scaled_re_st*dudt[0]*psif[q]*testf_; }
+
+           // Coriolis term
+           if(p==0)
+            {
+             sum += 2.0*scaled_re_inv_ro*interpolated_u[2]*psif[q]*testf_;
+            }
+
+           // Multiply through by Jacobian and integration weight
+           dresidual_dnodal_coordinates(local_eqn,p,q) += sum*J*w;
+
+           // Derivs w.r.t. nodal velocities
+           // ------------------------------
+           if(element_has_node_with_aux_node_update_fct)
+            {
+             // Contribution from deriv of first velocity component
+             double tmp = scaled_re_st*r*val_time_weight*psif[q]*testf_;
+             tmp += r*scaled_re*interpolated_dudx(0,0)*psif[q]*testf_;
+             for(unsigned k=0;k<2;k++)
+              {
+               double tmp2 = scaled_re*interpolated_u[k];
+               if(!ALE_is_disabled) { tmp2 -= scaled_re_st*mesh_velocity[k]; }
+               tmp += r*tmp2*dpsifdx(q,k)*testf_;
+              }
+
+             tmp += r*visc_ratio*(1.0+Gamma[0])*dpsifdx(q,0)*dtestfdx(l,0);
+             tmp += r*visc_ratio*dpsifdx(q,1)*dtestfdx(l,1);
+             tmp += visc_ratio*(1.0+Gamma[0])*psif[q]*testf_/r;
+
+             // Multiply through by dU_0q/dX_pq
+             sum = -d_U_dX(p,q,0)*tmp;
+
+             // Contribution from deriv of second velocity component
+             tmp = scaled_re*r*interpolated_dudx(0,1)*psif[q]*testf_;
+             tmp += r*visc_ratio*Gamma[0]*dpsifdx(q,0)*dtestfdx(l,1);
+
+             // Multiply through by dU_1q/dX_pq
+             sum -= d_U_dX(p,q,1)*tmp;
+
+             // Contribution from deriv of third velocity component
+             tmp = 2.0*(r*scaled_re_inv_ro
+                        + scaled_re*interpolated_u[2])*psif[q]*testf_;
+
+             // Multiply through by dU_2q/dX_pq
+             sum += d_U_dX(p,q,2)*tmp;
+             
+             // Multiply through by Jacobian and integration weight
+             dresidual_dnodal_coordinates(local_eqn,p,q) += sum*J*w; 
+            }
+          } // End of loop over q
+        } // End of loop over p
+      } // End of if it's not a boundary condition
+
+     // --------------------------------
+     // SECOND (AXIAL) MOMENTUM EQUATION
+     // --------------------------------
+     local_eqn = nodal_local_eqn(l,u_nodal_index[1]);;
+       
+     // If it's not a boundary condition
+     if(local_eqn >= 0)
+      {
+       // Loop over the two coordinate directions
+       for(unsigned p=0;p<2;p++)
+        {              
+         // Loop over nodes
+         for(unsigned q=0;q<n_node;q++)
+          {       
+           
+           // Residual x deriv of Jacobian
+           // ----------------------------
+
+           // Add the user-defined body force terms
+           double sum = r*body_force[1]*testf_;
+           
+           // Add the gravitational body force term
+           sum += r*scaled_re_inv_fr*testf_*G[1];
+           
+           // Add the pressure gradient term
+           sum  += r*interpolated_p*dtestfdx(l,1);
+           
+           // Add the stress tensor terms
+           // The viscosity ratio needs to go in here to ensure
+           // continuity of normal stress is satisfied even in flows
+           // with zero pressure gradient!
+           sum -= visc_ratio*
+            r*(interpolated_dudx(1,0) + Gamma[1]*interpolated_dudx(0,1))
+            *dtestfdx(l,0);
+           
+           sum -= visc_ratio*r*
+            (1.0 + Gamma[1])*interpolated_dudx(1,1)*dtestfdx(l,1);
+           
+           // Add the du/dt term
+           sum -= scaled_re_st*r*dudt[1]*testf_;
+           
+           // Add the convective terms
+           sum -=
+            scaled_re*(r*interpolated_u[0]*interpolated_dudx(1,0) 
+                       + r*interpolated_u[1]*interpolated_dudx(1,1))*testf_;
+           
+           // Add the mesh velocity terms
+           if(!ALE_is_disabled)
+            {
+             for(unsigned k=0;k<2;k++)
+              {
+               sum += 
+                scaled_re_st*r*mesh_velocity[k]*interpolated_dudx(1,k)*testf_;
+              }
+            }
+
+           // Multiply through by deriv of Jacobian and integration weight
+           dresidual_dnodal_coordinates(local_eqn,p,q) += sum*dJ_dX(p,q)*w;
+             
+           // Derivative of residual x Jacobian
+           // ---------------------------------
+
+           // Body force
+           sum = r*d_body_force_dx(1,p)*psif[q]*testf_;
+           if(p==0) { sum += body_force[1]*psif[q]*testf_; }
+
+           // Gravitational body force
+           if(p==0) { sum += scaled_re_inv_fr*G[1]*psif[q]*testf_; }
+
+           // Pressure gradient term
+           sum += r*interpolated_p*d_dtestfdx_dX(p,q,l,1);
+           if(p==0) { sum += interpolated_p*psif[q]*dtestfdx(l,1); }
+
+           // Viscous terms
+           sum -= r*visc_ratio*(
+            (d_dudx_dX(p,q,1,0) + Gamma[1]*d_dudx_dX(p,q,0,1))*dtestfdx(l,0)
+            + (interpolated_dudx(1,0)
+               + Gamma[1]*interpolated_dudx(0,1))*d_dtestfdx_dX(p,q,l,0)
+            + (1.0+Gamma[1])*d_dudx_dX(p,q,1,1)*dtestfdx(l,1)
+            + (1.0+Gamma[1])*interpolated_dudx(1,1)*d_dtestfdx_dX(p,q,l,1));
+           if(p==0)
+            {
+             sum -= visc_ratio*(
+              (interpolated_dudx(1,0)
+               + Gamma[1]*interpolated_dudx(0,1))*psif[q]*dtestfdx(l,0)
+              + (1.0+Gamma[1])*interpolated_dudx(1,1)*psif[q]*dtestfdx(l,1));
+            }
+
+           // Convective terms, including mesh velocity
+           for(unsigned k=0;k<2;k++)
+            {
+             double tmp = scaled_re*interpolated_u[k];
+             if(!ALE_is_disabled) { tmp -= scaled_re_st*mesh_velocity[k]; }
+             sum -= r*tmp*d_dudx_dX(p,q,1,k)*testf_;
+             if(p==0) { sum -= tmp*interpolated_dudx(1,k)*psif[q]*testf_; }
+            }
+           if(!ALE_is_disabled)
+            {
+             sum += scaled_re_st*r*pos_time_weight*interpolated_dudx(1,p)
+              *psif[q]*testf_;
+            }
+
+           // du/dt term
+           if(p==0) { sum -= scaled_re_st*dudt[1]*psif[q]*testf_; }
+
+           // Multiply through by Jacobian and integration weight
+           dresidual_dnodal_coordinates(local_eqn,p,q) += sum*J*w;
+
+           // Derivs w.r.t. to nodal velocities
+           // ---------------------------------
+           if(element_has_node_with_aux_node_update_fct)
+            {
+             // Contribution from deriv of first velocity component
+             double tmp = scaled_re*r*interpolated_dudx(1,0)*psif[q]*testf_;
+             tmp += r*visc_ratio*Gamma[1]*dpsifdx(q,1)*dtestfdx(l,0);
+             
+             // Multiply through by dU_0q/dX_pq
+             sum = -d_U_dX(p,q,0)*tmp;
+
+             // Contribution from deriv of second velocity component
+             tmp = scaled_re_st*r*val_time_weight*psif[q]*testf_;
+             tmp += r*scaled_re*interpolated_dudx(1,1)*psif[q]*testf_;
+             for(unsigned k=0;k<2;k++)
+              {
+               double tmp2 = scaled_re*interpolated_u[k];
+               if(!ALE_is_disabled) { tmp2 -= scaled_re_st*mesh_velocity[k]; }
+               tmp += r*tmp2*dpsifdx(q,k)*testf_;
+              }
+             tmp += r*visc_ratio*(dpsifdx(q,0)*dtestfdx(l,0)
+                                  + (1.0+Gamma[1])*dpsifdx(q,1)*dtestfdx(l,1));
+             
+             // Multiply through by dU_1q/dX_pq
+             sum -= d_U_dX(p,q,1)*tmp;
+
+             // Multiply through by Jacobian and integration weight
+             dresidual_dnodal_coordinates(local_eqn,p,q) += sum*J*w; 
+            }
+          } // End of loop over q
+        } // End of loop over p
+      } // End of if it's not a boundary condition
+
+     // -----------------------------------
+     // THIRD (AZIMUTHAL) MOMENTUM EQUATION
+     // -----------------------------------
+     local_eqn = nodal_local_eqn(l,u_nodal_index[2]);;
+       
+     // If it's not a boundary condition
+     if(local_eqn >= 0)
+      {
+       // Loop over the two coordinate directions
+       for(unsigned p=0;p<2;p++)
+        {              
+         // Loop over nodes
+         for(unsigned q=0;q<n_node;q++)
+          {       
+           
+           // Residual x deriv of Jacobian
+           // ----------------------------
+
+           // Add the user-defined body force terms
+           double sum = r*body_force[2]*testf_;
+           
+           // Add the gravitational body force term
+           sum += r*scaled_re_inv_fr*testf_*G[2];
+       
+           // There is NO pressure gradient term
+       
+           // Add in the stress tensor terms
+           // The viscosity ratio needs to go in here to ensure
+           // continuity of normal stress is satisfied even in flows
+           // with zero pressure gradient!
+           sum -= visc_ratio*(r*interpolated_dudx(2,0) - 
+                              Gamma[0]*interpolated_u[2])*dtestfdx(l,0);
+       
+           sum -= visc_ratio*r*interpolated_dudx(2,1)*dtestfdx(l,1);
+            
+           sum -= visc_ratio*((interpolated_u[2]/r)
+                              - Gamma[0]*interpolated_dudx(2,0))*testf_;
+            
+           // Add the du/dt term
+           sum -= scaled_re_st*r*dudt[2]*testf_;
+
+           // Add the convective terms
+           sum -= 
+            scaled_re*(r*interpolated_u[0]*interpolated_dudx(2,0)
+                       + interpolated_u[0]*interpolated_u[2]
+                       + r*interpolated_u[1]*interpolated_dudx(2,1))*testf_;
+       
+           // Add the mesh velocity terms
+           if(!ALE_is_disabled)
+            {
+             for(unsigned k=0;k<2;k++)
+              {
+               sum += 
+                scaled_re_st*r*mesh_velocity[k]*interpolated_dudx(2,k)*testf_;
+              }
+            }
+
+           // Add the Coriolis term
+           sum -= 2.0*r*scaled_re_inv_ro*interpolated_u[0]*testf_;
+           
+           // Multiply through by deriv of Jacobian and integration weight
+           dresidual_dnodal_coordinates(local_eqn,p,q) += sum*dJ_dX(p,q)*w;
+             
+           // Derivative of residual x Jacobian
+           // ---------------------------------
+
+           // Body force
+           sum = r*d_body_force_dx(2,p)*psif[q]*testf_;
+           if(p==0) { sum += body_force[2]*psif[q]*testf_; }
+
+           // Gravitational body force
+           if(p==0) { sum += scaled_re_inv_fr*G[2]*psif[q]*testf_; }
+
+           // There is NO pressure gradient term
+
+           // Viscous terms
+           sum -= visc_ratio*r*(
+            d_dudx_dX(p,q,2,0)*dtestfdx(l,0)
+            + interpolated_dudx(2,0)*d_dtestfdx_dX(p,q,l,0)
+            + d_dudx_dX(p,q,2,1)*dtestfdx(l,1)
+            + interpolated_dudx(2,1)*d_dtestfdx_dX(p,q,l,1));
+
+           sum += visc_ratio*Gamma[0]*d_dudx_dX(p,q,2,0)*testf_;
+
+           if(p==0)
+            {
+             sum -= visc_ratio*(interpolated_dudx(2,0)*psif[q]*dtestfdx(l,0)
+                                + interpolated_dudx(2,1)*psif[q]*dtestfdx(l,1)
+                                + interpolated_u[2]*psif[q]*testf_/(r*r));
+            }
+
+           // Convective terms, including mesh velocity
+           for(unsigned k=0;k<2;k++)
+            {
+             double tmp = scaled_re*interpolated_u[k];
+             if(!ALE_is_disabled) { tmp -= scaled_re_st*mesh_velocity[k]; }
+             sum -= r*tmp*d_dudx_dX(p,q,2,k)*testf_;
+             if(p==0) { sum -= tmp*interpolated_dudx(2,k)*psif[q]*testf_; }
+            }
+           if(!ALE_is_disabled)
+            {
+             sum += scaled_re_st*r*pos_time_weight*interpolated_dudx(2,p)
+              *psif[q]*testf_;
+            }
+
+           // du/dt term
+           if(p==0) { sum -= scaled_re_st*dudt[2]*psif[q]*testf_; }
+
+           // Coriolis term
+           if(p==0)
+            {
+             sum -= 2.0*scaled_re_inv_ro*interpolated_u[0]*psif[q]*testf_;
+            }
+
+           // Multiply through by Jacobian and integration weight
+           dresidual_dnodal_coordinates(local_eqn,p,q) += sum*J*w;
+
+           // Derivs w.r.t. to nodal velocities
+           // ---------------------------------
+           if(element_has_node_with_aux_node_update_fct)
+            {
+             // Contribution from deriv of first velocity component
+             double tmp = (2.0*r*scaled_re_inv_ro
+                           + r*scaled_re*interpolated_dudx(2,0)
+                           - scaled_re*interpolated_u[2])*psif[q]*testf_;
+
+             // Multiply through by dU_0q/dX_pq
+             sum = -d_U_dX(p,q,0)*tmp;
+
+             // Contribution from deriv of second velocity component
+             // Multiply through by dU_1q/dX_pq
+             sum -= d_U_dX(p,q,1)*scaled_re*r*interpolated_dudx(2,1)
+              *psif[q]*testf_;
+
+             // Contribution from deriv of third velocity component
+             tmp = scaled_re_st*r*val_time_weight*psif[q]*testf_;
+             tmp -= scaled_re*interpolated_u[0]*psif[q]*testf_;
+             for(unsigned k=0;k<2;k++)
+              {
+               double tmp2 = scaled_re*interpolated_u[k];
+               if(!ALE_is_disabled) { tmp2 -= scaled_re_st*mesh_velocity[k]; }
+               tmp += r*tmp2*dpsifdx(q,k)*testf_;
+              }
+             tmp += visc_ratio*(r*dpsifdx(q,0)
+                                - Gamma[0]*psif[q])*dtestfdx(l,0);
+             tmp += r*visc_ratio*dpsifdx(q,1)*dtestfdx(l,1);
+             tmp += visc_ratio*((psif[q]/r) - Gamma[0]*dpsifdx(q,0))*testf_;
+             
+             // Multiply through by dU_2q/dX_pq
+             sum -= d_U_dX(p,q,2)*tmp;
+
+             // Multiply through by Jacobian and integration weight
+             dresidual_dnodal_coordinates(local_eqn,p,q) += sum*J*w; 
+            }
+          } // End of loop over q
+        } // End of loop over p
+      } // End of if it's not a boundary condition
+
+    } // End of loop over test functions
+   
+
+   // ===================
+   // CONTINUITY EQUATION
+   // ===================
+   
+   // Loop over the shape functions
+   for(unsigned l=0;l<n_pres;l++)
+    {
+     local_eqn = p_local_eqn(l);
+  
+     // Cache the test function
+     const double testp_ = testp[l];
+
+     // If not a boundary conditions
+     if(local_eqn >= 0)
+      {
+
+       // Loop over the two coordinate directions
+       for(unsigned p=0;p<2;p++)
+        {              
+         // Loop over nodes
+         for(unsigned q=0;q<n_node;q++)
+          {       
+           
+           // Residual x deriv of Jacobian
+           //-----------------------------
+           
+           // Source term
+           double aux = -r*source;
+
+           // Gradient terms
+           aux += (interpolated_u[0]
+                   + r*interpolated_dudx(0,0) 
+                   + r*interpolated_dudx(1,1));
+
+           // Multiply through by deriv of Jacobian and integration weight
+           dresidual_dnodal_coordinates(local_eqn,p,q) +=
+            aux*dJ_dX(p,q)*testp_*w;
+
+           // Derivative of residual x Jacobian
+           // ---------------------------------          
+
+           // Gradient of source function
+           aux = -r*source_gradient[p]*psif[q];
+           if(p==0) { aux -= source*psif[q]; }
+
+           // Gradient terms
+           aux += r*(d_dudx_dX(p,q,0,0) + d_dudx_dX(p,q,1,1));
+           if(p==0)
+            {
+             aux += (interpolated_dudx(0,0) + interpolated_dudx(1,1))*psif[q];
+            }
+
+           // Derivs w.r.t. nodal velocities
+           // ------------------------------
+           if(element_has_node_with_aux_node_update_fct)
+            {
+             aux += d_U_dX(p,q,0)*(psif[q] + r*dpsifdx(q,0));
+             aux += d_U_dX(p,q,1)*r*dpsifdx(q,1);
+            }
+
+           // Multiply through by Jacobian, test fct and integration weight
+           dresidual_dnodal_coordinates(local_eqn,p,q) += aux*testp_*J*w;
+            
+          }
+        }
+      }
+    } // End of loop over shape functions for continuity eqn
+
+  } // End of loop over integration points
+}   
+
+
+
+
 
 //==============================================================
 ///  Compute the residuals for the Navier--Stokes 

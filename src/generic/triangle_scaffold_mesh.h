@@ -39,99 +39,12 @@
 #endif
 
 
-#include "mesh.h"
+#include "triangle_mesh.h"
 #include "Telements.h"
+
 
 namespace oomph
 {
-
-//=====================================================================
-/// The Triangle data structure, modified from the triangle.h header
-/// supplied with triangle 1.6. by J. R. Schewchuk. We need to define
-/// this here separately because we can't include a c header directly
-/// into C++ code!
-//=====================================================================
-struct TriangulateIO 
-{
- ///Pointer to list of points x coordinate followed by y coordinate
- double *pointlist;
-
- ///Pointer to list of point attributes
- double *pointattributelist;
-
- ///Pointer to list of point markers
- int *pointmarkerlist;
- int numberofpoints;
- int numberofpointattributes;
- 
- int *trianglelist;
- double *triangleattributelist;
- double *trianglearealist;
- int *neighborlist;
- int numberoftriangles;
- int numberofcorners;
- int numberoftriangleattributes;
- 
- int *segmentlist;
- int *segmentmarkerlist;
- int numberofsegments;
- 
- double *holelist;
- int numberofholes;
- 
- double *regionlist;
- int numberofregions;
- 
- int *edgelist;
- int *edgemarkerlist;  // <---- contains boundary ID (offset by one)
- double *normlist;
- int numberofedges;
-
-};
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-
-
-//==================================================================
-/// Helper namespace for triangle meshes
-//==================================================================
-namespace TriangleHelper
-{
-
- /// Clear TriangulateIO structure
- extern void clear_triangulateio(TriangulateIO& triangulate_io,
-                                 const bool& clear_hole_data=true);
-
- /// Initialise TriangulateIO structure
- extern void initialise_triangulateio(TriangulateIO& triangle_io);
-
- /// \short Make (partial) deep copy of TriangulateIO object. We only copy
- /// those items we need within oomph-lib's adaptation procedures.
- /// Warnings are issued if triangulate_io contains data that is not
- /// not copied, unless quiet=true;
- extern TriangulateIO deep_copy_of_triangulateio_representation(
-  TriangulateIO& triangle_io, const bool& quiet=false);
-
- /// \short Write the triangulateio data to disk as a poly file,
- /// mainly used for debugging
- extern void write_triangulateio_to_polyfile(TriangulateIO &triangle_io,
-                                             std::ostream &poly_file);
-}
-
-
-////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////
-
 
 
 

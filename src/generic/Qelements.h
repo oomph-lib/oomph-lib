@@ -308,8 +308,6 @@ class QElementBase : public virtual FiniteElement
 class QSolidElementBase : public virtual QElementBase,
                           public virtual SolidFiniteElement
 {
-
-
   public:
 
  /// Constructor: Empty
@@ -462,21 +460,12 @@ template<unsigned NNODE_1D>
 class QElement<1,NNODE_1D> : public virtual LineElementBase
 {
   private:
- 
- // Spatial dimension of nodes in this element
- static const unsigned Every_node_ndim;
 
  /// \short Default integration rule: Gaussian integration of same 'order' 
  /// as the element
  //This is sort of optimal, because it means that the integration is exact
  //for the shape functions. Can overwrite this in specific element defintion.
  static Gauss<1,NNODE_1D> Default_integration_scheme;
-
- /// Min value of local coordinate
- static const double S_min;
-
- /// Max. value of local coordinate
- static const double S_max;
 
 public:
 
@@ -525,10 +514,10 @@ public:
   {return FiniteElement::invert_jacobian<1>(jacobian,inverse_jacobian);}
 
  /// Min. value of local coordinate
- double s_min() const {return S_min;}
+ double s_min() const {return -1.0;}
 
  /// Max. value of local coordinate
- double s_max() const {return S_max;}
+ double s_max() const {return  1.0;}
 
  /// \short Number of vertex nodes in the element
  unsigned nvertex_node() const
@@ -563,7 +552,8 @@ public:
  void local_coordinate_of_node(const unsigned& j, Vector<double>& s)
   {
    s.resize(1);
-   s[0]=S_min+double(j)/double(NNODE_1D-1)*(S_max-S_min);
+   s[0]=this->s_min()+double(j)/double(NNODE_1D-1)*
+    (this->s_max()-this->s_min());
   }
 
  
@@ -674,22 +664,13 @@ template<unsigned NNODE_1D>
 class QElement<2,NNODE_1D> : public virtual QuadElementBase
 {
   private:
- 
- //Dimension of each node in this element
- static const unsigned Every_node_ndim;
- 
+  
  /// \short Default integration rule: Gaussian integration of same 'order' 
  /// as the element
  //N.B. This is sort of optimal, because it means that the integration is exact
  //for the shape functions. Can overwrite this in specific element defintion 
  static Gauss<2,NNODE_1D> Default_integration_scheme; 
  
- /// Min value of local coordinate
- static const double S_min;
-
- /// Max. value of local coordinate
- static const double S_max;
-
 public: 
 
  ///Constructor
@@ -739,10 +720,10 @@ public:
   {return FiniteElement::invert_jacobian<2>(jacobian,inverse_jacobian);}
  
  /// Min. value of local coordinate
- double s_min() const {return S_min;}
+ double s_min() const {return -1.0;}
 
  /// Max. value of local coordinate
- double s_max() const {return S_max;}
+ double s_max() const {return  1.0;}
 
 
  /// \short Number of vertex nodes in the element
@@ -787,8 +768,10 @@ public:
    s.resize(2);
    unsigned j0=j%NNODE_1D;
    unsigned j1=unsigned(double(j)/double(NNODE_1D));
-   s[0]=S_min+double(j0)/double(NNODE_1D-1)*(S_max-S_min);
-   s[1]=S_min+double(j1)/double(NNODE_1D-1)*(S_max-S_min);
+   const double S_min = this->s_min();
+   const double S_range = this->s_max() - S_min;
+   s[0]=S_min+double(j0)/double(NNODE_1D-1)*S_range;
+   s[1]=S_min+double(j1)/double(NNODE_1D-1)*S_range;
   }
 
  /// Get the local fraction of node j in the element
@@ -905,22 +888,13 @@ template<unsigned NNODE_1D>
 class QElement<3,NNODE_1D> : public virtual BrickElementBase
 {
   private:
- 
- /// Dimension of each node in this element
- static const unsigned Every_node_ndim;
- 
+  
  /// \short Default integration rule: Gaussian integration of same 'order' 
  /// as the element
  //N.B. This is sort of optimal, because it means that the integration is exact
  //for the shape functions. Can overwrite this in specific element defintion 
  static Gauss<3,NNODE_1D> Default_integration_scheme; 
  
- /// Min value of local coordinate
- static const double S_min;
-
- /// Max. value of local coordinate
- static const double S_max;
-
 public: 
 
  /// Constructor
@@ -975,10 +949,10 @@ public:
   {return FiniteElement::invert_jacobian<3>(jacobian,inverse_jacobian);}
 
  /// Min. value of local coordinate
- double s_min() const {return S_min;}
+ double s_min() const {return -1.0;}
 
  /// Max. value of local coordinate
- double s_max() const {return S_max;}
+ double s_max() const {return  1.0;}
  
  /// \short Number of vertex nodes in the element
  unsigned nvertex_node() const
@@ -1034,9 +1008,12 @@ public:
    unsigned j0=j%NNODE_1D;
    unsigned j1=unsigned(double(j)/double(NNODE_1D))%NNODE_1D;
    unsigned j2=unsigned(double(j)/double(NNODE_1D*NNODE_1D));
-   s[0]=S_min+double(j0)/double(NNODE_1D-1)*(S_max-S_min);
-   s[1]=S_min+double(j1)/double(NNODE_1D-1)*(S_max-S_min);
-   s[2]=S_min+double(j2)/double(NNODE_1D-1)*(S_max-S_min);
+   const double S_min = this->s_min();
+   const double S_range = this->s_max() - S_min;
+
+   s[0]=S_min+double(j0)/double(NNODE_1D-1)*S_range;
+   s[1]=S_min+double(j1)/double(NNODE_1D-1)*S_range;
+   s[2]=S_min+double(j2)/double(NNODE_1D-1)*S_range;
   }
 
  /// Get the local fraction of node j in the element
@@ -1323,11 +1300,6 @@ template <unsigned NNODE_1D>
 class SolidQElement<2,NNODE_1D> : public virtual QElement<2,NNODE_1D>, 
  public virtual QSolidElementBase
 {
-  private:
-
- /// Lagrangian dimension of every node in this element
- static const unsigned Every_node_nlagrangian;
-
   public:
 
  /// Constructor
@@ -1498,10 +1470,6 @@ template <unsigned NNODE_1D>
 class SolidQElement<3,NNODE_1D> : public virtual QElement<3,NNODE_1D>, 
  public virtual QSolidElementBase
 {
-  private:
-
- /// Lagrangian dimension of every node in this element
- static const unsigned Every_node_nlagrangian;
 
   public:
 

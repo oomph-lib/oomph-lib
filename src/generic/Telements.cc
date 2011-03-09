@@ -35,32 +35,6 @@
 namespace oomph
 {
 
-
-//Assign the static dimension of each node
-template<unsigned NNODE_1D>
-const unsigned TElement<1,NNODE_1D>::Every_node_ndim = 1;
-template<unsigned NNODE_1D>
-const unsigned TElement<2,NNODE_1D>::Every_node_ndim = 2;
-template<unsigned NNODE_1D>
-const unsigned TElement<3,NNODE_1D>::Every_node_ndim = 3;
-
-/// Assign min value of local coordinate
-template<unsigned NNODE_1D>
-const double TElement<1,NNODE_1D>::S_min=0.0;
-template<unsigned NNODE_1D>
-const double TElement<2,NNODE_1D>::S_min=0.0;
-template<unsigned NNODE_1D>
-const double TElement<3,NNODE_1D>::S_min=0.0;
-
-/// Assign max. value of local coordinate
-template<unsigned NNODE_1D>
-const double TElement<1,NNODE_1D>::S_max=1.0;
-template<unsigned NNODE_1D>
-const double TElement<2,NNODE_1D>::S_max=1.0;
-template<unsigned NNODE_1D>
-const double TElement<3,NNODE_1D>::S_max=1.0;
-
-
 //=======================================================================
 /// Assign the static integral
 //=======================================================================

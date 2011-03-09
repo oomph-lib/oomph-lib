@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=2
+NUM_TESTS=3
 
 # Setup validation directory
 #---------------------------
@@ -41,6 +41,16 @@ else
 ../../../../bin/fpdiff.py ../validata/results.dat.gz  \
          results_TH.dat >> validation.log
 fi
+
+echo "Restarted Taylor Hood " >> validation.log
+
+if test "$1" = "no_fpdiff"; then
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+else
+../../../../bin/fpdiff.py RESLT_TH/soln2.dat RESLT_TH/soln3.dat  \
+  >> validation.log
+fi
+
 
 echo "Crouzeix Raviart" >> validation.log
 cat  RESLT_CR/soln0.dat  RESLT_CR/soln1.dat RESLT_CR/soln2.dat > results_CR.dat

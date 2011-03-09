@@ -1224,23 +1224,13 @@ class TElement<1,NNODE_1D> : public virtual TElementBase,
  public TElementShape<1,NNODE_1D>
 {
   private:
- 
- /// Spatial dimension of nodes in this element
- static const unsigned Every_node_ndim;
- 
+  
  /// \short Default integration rule: Gaussian integration of same 'order' as 
  /// the element
  //This is sort of optimal, because it means that the integration is exact
  //for the shape functions. Can overwrite this in specific element defintion.
  static TGauss<1,NNODE_1D> Default_integration_scheme;
- 
- /// Min value of local coordinate
- static const double S_min;
-
- /// Max. value of local coordinate
- static const double S_max;
-
- 
+  
 public:
  
  /// Constructor
@@ -1323,10 +1313,10 @@ public:
   {return FiniteElement::invert_jacobian<1>(jacobian,inverse_jacobian);}
   
  /// Min. value of local coordinate
- double s_min() const {return S_min;}
+ double s_min() const {return 0.0;}
 
  /// Max. value of local coordinate
- double s_max() const {return S_max;}
+ double s_max() const {return 1.0;}
 
  /// Return local coordinates of node j
  inline void local_coordinate_of_node(const unsigned& j,Vector<double>& s)
@@ -1395,9 +1385,6 @@ class TElement<2,NNODE_1D> : public virtual TElementBase,
  public TElementShape<2,NNODE_1D>
 {
   private:
- 
- /// Spatial dimension of nodes in this element
- static const unsigned Every_node_ndim;
 
  /// Nodal translation scheme for use when generating face elements
  static const unsigned NodeOnFace[3][NNODE_1D];
@@ -1408,12 +1395,6 @@ class TElement<2,NNODE_1D> : public virtual TElementBase,
  //for the shape functions. Can overwrite this in specific element defintion.
  static TGauss<2,NNODE_1D> Default_integration_scheme;
  
- /// Min value of local coordinate
- static const double S_min;
-
- /// Max. value of local coordinate
- static const double S_max;
-
  
 public:
  
@@ -1497,10 +1478,10 @@ public:
   {return FiniteElement::invert_jacobian<2>(jacobian,inverse_jacobian);}
   
  /// Min. value of local coordinate
- double s_min() const {return S_min;}
+ double s_min() const {return 0.0;}
 
  /// Max. value of local coordinate
- double s_max() const {return S_max;}
+ double s_max() const {return 1.0;}
 
  /// Return local coordinates of node j
  inline void local_coordinate_of_node(const unsigned& j,Vector<double>& s)
@@ -2726,10 +2707,7 @@ class TElement<3,NNODE_1D> : public virtual TElementBase,
                   public TElementShape<3,NNODE_1D>
 {
   private:
- 
- /// Spatial dimension of nodes in this element
- static const unsigned Every_node_ndim;
- 
+  
  /// Nodal translation scheme for use when generating face elements
  static const unsigned NodeOnFace[4][(NNODE_1D*(NNODE_1D+1))/2];
  
@@ -2738,14 +2716,7 @@ class TElement<3,NNODE_1D> : public virtual TElementBase,
  //This is sort of optimal, because it means that the integration is exact
  //for the shape functions. Can overwrite this in specific element defintion.
  static TGauss<3,NNODE_1D> Default_integration_scheme;
- 
- /// Min value of local coordinate
- static const double S_min;
-
- /// Max. value of local coordinate
- static const double S_max;
-
- 
+  
 public:
  
  /// Constructor
@@ -2835,10 +2806,10 @@ public:
   {return FiniteElement::invert_jacobian<3>(jacobian,inverse_jacobian);}
     
   /// Min. value of local coordinate
-  double s_min() const {return S_min;}
+  double s_min() const {return 0.0;}
   
   /// Max. value of local coordinate
-  double s_max() const {return S_max;}
+  double s_max() const {return 1.0;}
   
   /// Return local coordinates of node j
   inline void local_coordinate_of_node(const unsigned& j,Vector<double>& s)
@@ -3253,11 +3224,6 @@ template <unsigned NNODE_1D>
 class SolidTElement<2,NNODE_1D> : public virtual TElement<2,NNODE_1D>, 
  public virtual TSolidElementBase
 {
-  private:
-
- /// Lagrangian dimension of every node in this element
- static const unsigned Every_node_nlagrangian;
-
   public:
 
  /// Constructor
@@ -3323,11 +3289,6 @@ template <unsigned NNODE_1D>
 class SolidTElement<3,NNODE_1D> : public virtual TElement<3,NNODE_1D>, 
  public virtual TSolidElementBase
 {
-  private:
-
- /// Lagrangian dimension of every node in this element
- static const unsigned Every_node_nlagrangian;
-
   public:
 
  /// Constructor

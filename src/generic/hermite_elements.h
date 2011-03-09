@@ -70,12 +70,6 @@ class QHermiteElement : public virtual FiniteElement
  //static Gauss_Rescaled<DIM,3> Default_integration_scheme;
  static Gauss<DIM,3> Default_integration_scheme;
 
- /// Min value of local coordinate
- static const double S_min;
-
- /// Max. value of local coordinate
- static const double S_max;
-
 public:
 
  /// Constructor
@@ -203,10 +197,10 @@ public:
   }
                                              
  /// Min. value of local coordinate
- double s_min() const {return S_min;}
+ double s_min() const {return -1.0;}
 
  /// Max. value of local coordinate
- double s_max() const {return S_max;}
+ double s_max() const {return 1.0;}
 
  
  /// Get local coordinates of node j in the element; vector sets its own size
@@ -216,11 +210,13 @@ public:
    Vector<unsigned> j_sub(DIM);
    unsigned j_copy = j;
    unsigned NNODE_1D=2;
+   const double S_min = this->s_min();
+   const double S_range = this->s_max() - S_min;
    for(unsigned i=0;i<DIM;i++)
     {
      j_sub[i] = j_copy%NNODE_1D;
      j_copy = (j_copy - j_sub[i])/NNODE_1D;
-     s[i]= S_min + double(j_sub[i])/(double)(NNODE_1D-1)*(S_max-S_min);
+     s[i]= S_min + double(j_sub[i])/(double)(NNODE_1D-1)*S_range;
     }
   }
 

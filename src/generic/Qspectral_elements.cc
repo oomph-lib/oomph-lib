@@ -40,17 +40,6 @@ std::map<unsigned,Vector<double> > OneDLegendreShapeParam::z;
 ///                   1D QLegendreElements
 //////////////////////////////////////////////////////////////////////////
 
-//Assign the static dimension of each node
-template<unsigned NNODE_1D>
-const unsigned QSpectralElement<1,NNODE_1D>::Every_node_ndim=1;
-
- /// Assign min value of local coordinate
-template<unsigned NNODE_1D>
-const double QSpectralElement<1,NNODE_1D>::S_min=-1.0;
-
- /// Assign max. value of local coordinate
-template<unsigned NNODE_1D>
-const double QSpectralElement<1,NNODE_1D>::S_max=1.0;
 
 //=======================================================================
 /// Assign the static integral
@@ -233,18 +222,6 @@ build_face_element(const int &face_index,
 //////////////////////////////////////////////////////////////////////////
 ///                   2D QLegendreElements
 //////////////////////////////////////////////////////////////////////////
-
-//Assign the static dimension of each node
-template<unsigned NNODE_1D>
-const unsigned QSpectralElement<2,NNODE_1D>::Every_node_ndim=2;
-
- /// Assign min value of local coordinate
-template<unsigned NNODE_1D>
-const double QSpectralElement<2,NNODE_1D>::S_min=-1.0;
-
- /// Assign max. value of local coordinate
-template<unsigned NNODE_1D>
-const double QSpectralElement<2,NNODE_1D>::S_max=1.0;
 
 //=======================================================================
 /// Assign the static integral
@@ -472,18 +449,6 @@ void QSpectralElement<2,NNODE_1D>::build_face_element(
 //////////////////////////////////////////////////////////////////////////
 ///                   3D QLegendreElements
 //////////////////////////////////////////////////////////////////////////
-
-//Assign the static dimension of each node
-template<unsigned NNODE_1D>
-const unsigned QSpectralElement<3,NNODE_1D>::Every_node_ndim=3;
-
- /// Assign min value of local coordinate
-template<unsigned NNODE_1D>
-const double QSpectralElement<3,NNODE_1D>::S_min=-1.0;
-
- /// Assign max. value of local coordinate
-template<unsigned NNODE_1D>
-const double QSpectralElement<3,NNODE_1D>::S_max=1.0;
 
 //=======================================================================
 /// Assign the static integral

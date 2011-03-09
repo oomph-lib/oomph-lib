@@ -38,11 +38,13 @@
 #include "timesteppers.h"
 #include "explicit_timesteppers.h"
 #include "refineable_mesh.h"
+#include "triangle_mesh.h"
 #include "linear_solver.h"
 #include "eigen_solver.h"
 #include "assembly_handler.h"
 #include "dg_elements.h"
 #include "partitioning.h"
+
 
 namespace oomph
 {
@@ -8738,6 +8740,12 @@ void Problem::dump(std::ofstream& dump_file)
     { 
      mmesh_pt->dump_refinement(dump_file);
     }
+   // Dump triangle mesh TriangulateIO which represents mesh topology
+   if(TriangleMeshBase* mmesh_pt =
+      dynamic_cast<TriangleMeshBase*>(mesh_pt(0)))
+    {
+     mmesh_pt->dump_triangulateio(dump_file);
+    }
   }
  
  //Multiple submeshes
@@ -8753,8 +8761,14 @@ void Problem::dump(std::ofstream& dump_file)
       {
        mmesh_pt->dump_refinement(dump_file);
       }
+     // Dump triangle mesh TriangulateIO which represents mesh topology
+     if(TriangleMeshBase* mmesh_pt =
+        dynamic_cast<TriangleMeshBase*>(mesh_pt(imesh)))
+      {
+       mmesh_pt->dump_triangulateio(dump_file);
+      }
     } // End of loop over submeshes
-  } 
+  }
 
  // Dump time
  // ---------
@@ -8835,6 +8849,17 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
      // when the problem was dumped to disk.
      mmesh_pt->refine(this->communicator_pt(),restart_file);
     }
+   // Regenerate mesh from triangulate IO if it's a triangular mesh
+   if(TriangleMeshBase* mmesh_pt =
+      dynamic_cast<TriangleMeshBase*>(mesh_pt(0)))
+    {
+     //The function reads the TriangulateIO data structure from the dump
+     //file and then completely regenerates the mesh using the 
+     //data structure
+     mmesh_pt->remesh_from_triangulateio(restart_file);
+    }
+
+
   }
  
  //Multiple submeshes
@@ -8857,8 +8882,17 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
        // when the problem was dumped to disk.
        mmesh_pt->refine(this->communicator_pt(),restart_file);
       }
+     // Regenerate mesh from triangulate IO if it's a triangular mesh
+     if(TriangleMeshBase* mmesh_pt =
+        dynamic_cast<TriangleMeshBase*>(mesh_pt(imesh)))
+      {
+       //The function reads the TriangulateIO data structure from the dump
+       //file and then completely regenerates the mesh using the 
+       //data structure
+       mmesh_pt->remesh_from_triangulateio(restart_file);
+      }
     } // End of loop over submeshes
-
+   
    // Rebuild the global mesh
    rebuild_global_mesh();
   } 

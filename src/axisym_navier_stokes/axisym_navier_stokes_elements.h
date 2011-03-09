@@ -301,6 +301,19 @@ protected:
                                                           DShape &dtestdx) 
   const=0;
 
+ /// \short Shape/test functions and derivs w.r.t. to global coords at 
+ /// integration point ipt; return Jacobian of mapping (J). Also compute
+ /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
+ virtual double dshape_and_dtest_eulerian_at_knot_axi_nst(
+  const unsigned &ipt,
+  Shape &psi, 
+  DShape &dpsidx,
+  RankFourTensor<double> &d_dpsidx_dX,
+  Shape &test, 
+  DShape &dtestdx,
+  RankFourTensor<double> &d_dtestdx_dX,
+  DenseMatrix<double> &djacobian_dX) const=0;
+
  /// Compute the pressure shape functions at local coordinate s
  virtual void pshape_axi_nst(const Vector<double> &s, Shape &psi) const=0;
 
@@ -329,22 +342,90 @@ protected:
     }
   }
 
- /// \short Calculate the source fct at given time and
- /// Eulerian position 
- double get_source_fct(const double& time, 
-                       const unsigned& ipt,
-                       const Vector<double> &x)
+ /// \short Get gradient of body force term at (Eulerian) position x.
+ /// Computed via function pointer (if set) or by finite differencing
+ /// (default)
+ inline virtual void get_body_force_gradient_axi_nst(
+  const double& time,
+  const unsigned& ipt,
+  const Vector<double> &s, 
+  const Vector<double> &x, 
+  DenseMatrix<double> &d_body_force_dx)
   {
-   //If the function pointer is zero return zero
-   if (Source_fct_pt == 0)
-    {
-     return 0;
-    }
-   //Otherwise call the function
-   else
-    {
-     return (*Source_fct_pt)(time,x);
-    }
+// hierher: Implement function pointer version
+/*    //If no gradient function has been set, FD it */
+/*    if(Body_force_fct_gradient_pt==0) */
+   {
+    // Reference value
+    Vector<double> body_force(3,0.0);
+    get_body_force_axi_nst(time,ipt,s,x,body_force);
+    
+    // FD it
+    const double eps_fd=GeneralisedElement::Default_fd_jacobian_step;
+    Vector<double> body_force_pls(3,0.0);
+    Vector<double> x_pls(x);
+    for(unsigned i=0;i<2;i++)
+     {
+      x_pls[i] += eps_fd;
+      get_body_force_axi_nst(time,ipt,s,x_pls,body_force_pls);
+      for(unsigned j=0;j<3;j++)
+       {
+        d_body_force_dx(j,i)=(body_force_pls[j]-body_force[j])/eps_fd;
+       }
+      x_pls[i]=x[i];
+     }
+   }
+/*    else */
+/*     { */
+/*      // Get gradient */
+/*      (*Source_fct_gradient_pt)(time,x,gradient); */
+/*     } */
+  }
+ 
+ /// Calculate the source fct at given time and Eulerian position 
+ double get_source_fct(const double& time, 
+                           const unsigned& ipt,
+                           const Vector<double> &x)
+ {
+  // If the function pointer is zero return zero
+  if(Source_fct_pt == 0) { return 0; }
+
+  // Otherwise call the function
+  else { return (*Source_fct_pt)(time,x); }
+ }
+
+ /// Get gradient of source term at (Eulerian) position x. Computed
+ /// via function pointer (if set) or by finite differencing (default)
+ inline virtual void get_source_fct_gradient(
+  const double& time,
+  const unsigned& ipt,
+  const Vector<double>& x, 
+  Vector<double>& gradient)
+  {
+// hierher: Implement function pointer version
+/*    //If no gradient function has been set, FD it */
+/*    if(Source_fct_gradient_pt==0) */
+   {
+    // Reference value
+    const double source = get_source_fct(time,ipt,x);
+    
+    // FD it
+    const double eps_fd = GeneralisedElement::Default_fd_jacobian_step;
+    double source_pls = 0.0;
+    Vector<double> x_pls(x);
+    for(unsigned i=0;i<2;i++)
+     {
+      x_pls[i] += eps_fd;
+      source_pls = get_source_fct(time,ipt,x_pls);
+      gradient[i] = (source_pls-source)/eps_fd;
+      x_pls[i] = x[i];
+     }
+   }
+/*    else */
+/*     { */
+/*      // Get gradient */
+/*      (*Source_fct_gradient_pt)(time,x,gradient); */
+/*     } */
   }
 
  /// \short Calculate the viscosity ratio relative to the 
@@ -652,6 +733,12 @@ public:
     residuals,jacobian,mass_matrix,2);
   }
 
+ /// \short Compute derivatives of elemental residual vector with respect to
+ /// nodal coordinates. This function computes these terms analytically and
+ /// overwrites the default implementation in the FiniteElement base class.
+ /// dresidual_dnodal_coordinates(l,i,j) = d res(l) / dX_{ij}
+ virtual void get_dresidual_dnodal_coordinates(RankThreeTensor<double>&
+                                               dresidual_dnodal_coordinates);
 
  /// Compute the element's residual Vector
  void fill_in_contribution_to_dresiduals_dparameter(
@@ -664,7 +751,7 @@ public:
     GeneralisedElement::Dummy_matrix,0);
   }
 
- ///\short Compute the element's residual Vector and the jacobian matrix
+ /// \short Compute the element's residual Vector and the jacobian matrix
  /// Virtual function can be overloaded by hanging-node version
  void fill_in_contribution_to_djacobian_dparameter(
   double* const &parameter_pt,Vector<double> &dres_dparam,
@@ -858,7 +945,7 @@ public:
    Shape psif(n_node);
    DShape dpsifdx(n_node,2);
 
-   //Find values of shape function (ignore jacobian)
+   // Find values of shape function (ignore jacobian)
    (void)this->dshape_eulerian(s,psif,dpsifdx);
    
    // Get the index at which the velocity is stored
@@ -875,6 +962,135 @@ public:
    
    return(interpolated_dudx);
   }
+
+ /// Return FE interpolated derivatives of velocity component u[i]
+ /// w.r.t time at local coordinate s
+ double interpolated_dudt_axi_nst(const Vector<double> &s, 
+                                  const unsigned &i) const
+  {
+   // Determine number of nodes
+   const unsigned n_node = nnode();
+
+   // Allocate storage for local shape function
+   Shape psif(n_node);
+
+   // Find values of shape function
+   shape(s,psif);
+   
+   // Initialise value of dudt
+   double interpolated_dudt = 0.0;
+
+   // Loop over the local nodes and sum
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     interpolated_dudt += du_dt_axi_nst(l,i)*psif[l];
+    }
+   
+   return(interpolated_dudt);
+  }
+
+ /// \short Return FE interpolated derivatives w.r.t. nodal coordinates
+ /// X_{pq} of the spatial derivatives of the velocity components
+ /// du_i/dx_k at local coordinate s
+ double interpolated_d_dudx_dX_axi_nst(const Vector<double> &s, 
+                                       const unsigned &p,
+                                       const unsigned &q,
+                                       const unsigned &i,
+                                       const unsigned &k) const
+  {
+   // Determine number of nodes
+   const unsigned n_node = nnode();
+
+   // Allocate storage for local shape function and its derivatives
+   // with respect to space
+   Shape psif(n_node);
+   DShape dpsifds(n_node,2);
+
+   // Find values of shape function (ignore jacobian)
+   (void)this->dshape_local(s,psif,dpsifds);
+
+   // Allocate memory for the jacobian and the inverse of the jacobian
+   DenseMatrix<double> jacobian(2), inverse_jacobian(2);
+
+   // Allocate memory for the derivative of the jacobian w.r.t. nodal coords
+   DenseMatrix<double> djacobian_dX(2,n_node);
+
+   // Allocate memory for the derivative w.r.t. nodal coords of the
+   // spatial derivatives of the shape functions
+   RankFourTensor<double> d_dpsifdx_dX(2,n_node,3,2);
+
+   // Now calculate the inverse jacobian
+   const double det =
+    local_to_eulerian_mapping(dpsifds,jacobian,inverse_jacobian);
+
+   // Calculate the derivative of the jacobian w.r.t. nodal coordinates
+   // Note: must call this before "transform_derivatives(...)" since this
+   // function requires dpsids rather than dpsidx
+   dJ_eulerian_dnodal_coordinates(jacobian,dpsifds,djacobian_dX);
+
+   // Calculate the derivative of dpsidx w.r.t. nodal coordinates
+   // Note: this function also requires dpsids rather than dpsidx
+   d_dshape_eulerian_dnodal_coordinates(det,jacobian,djacobian_dX,
+                                        inverse_jacobian,dpsifds,d_dpsifdx_dX);
+   
+   // Get the index at which the velocity is stored
+   const unsigned u_nodal_index = u_index_axi_nst(i);
+
+   // Initialise value of dudx
+   double interpolated_d_dudx_dX = 0.0;
+
+   // Loop over the local nodes and sum
+   for(unsigned l=0;l<n_node;l++) 
+    {
+     interpolated_d_dudx_dX +=
+      nodal_value(l,u_nodal_index)*d_dpsifdx_dX(p,q,l,k);
+    }
+   
+   return(interpolated_d_dudx_dX);
+  }
+
+ /// Compute the volume of the element
+ double compute_volume() const
+ {
+  // Initialise result
+  double result = 0.0;
+
+  // Figure out the global (Eulerian) spatial dimension of the
+  // element by checking the Eulerian dimension of the nodes
+  const unsigned n_dim_eulerian = nodal_dimension();
+  
+  // Allocate Vector of global Eulerian coordinates
+  Vector<double> x(n_dim_eulerian);
+
+  // Set the value of n_intpt
+  const unsigned n_intpt = integral_pt()->nweight();
+
+  // Vector of local coordinates
+  const unsigned n_dim = dim();
+  Vector<double> s(n_dim);
+
+  // Loop over the integration points
+  for(unsigned ipt=0;ipt<n_intpt;ipt++)
+   {
+    // Assign the values of s 
+    for(unsigned i=0;i<n_dim;i++) {s[i] = integral_pt()->knot(ipt,i);}
+
+    // Assign the values of the global Eulerian coordinates
+    for(unsigned i=0;i<n_dim_eulerian;i++) {x[i] = interpolated_x(s,i);}
+
+    // Get the integral weight
+    const double w = integral_pt()->weight(ipt);
+     
+    // Get Jacobian of mapping
+    const double J = J_eulerian(s);
+     
+    // The integrand at the current integration point is r
+    result += x[0]*w*J;
+   }
+
+  // Multiply by 2pi (integrating in azimuthal direction)
+  return (2*MathematicalConstants::Pi*result);
+ }
 
 }; 
 
@@ -918,6 +1134,20 @@ class AxisymmetricQCrouzeixRaviartElement : public virtual QElement<2,3>,
                                                          DShape &dpsidx, 
                                                          Shape &test, 
                                                          DShape &dtestdx) const;
+
+ /// \short Shape/test functions and derivs w.r.t. to global coords at 
+ /// integration point ipt; return Jacobian of mapping (J). Also compute
+ /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
+ inline double dshape_and_dtest_eulerian_at_knot_axi_nst(
+  const unsigned &ipt, 
+  Shape &psi, 
+  DShape &dpsidx,
+  RankFourTensor<double> &d_dpsidx_dX,
+  Shape &test, 
+  DShape &dtestdx,
+  RankFourTensor<double> &d_dtestdx_dX,
+  DenseMatrix<double> &djacobian_dX) const;
+
 
  /// Pressure shape functions at local coordinate s
  inline void pshape_axi_nst(const Vector<double> &s, Shape &psi) const;
@@ -1052,6 +1282,50 @@ dshape_and_dtest_eulerian_at_knot_axi_nst(const unsigned &ipt, Shape &psi,
 }
 
 //=======================================================================
+/// Define the shape functions (psi) and test functions (test) and
+/// their derivatives w.r.t. global coordinates (dpsidx and dtestdx)
+/// and return Jacobian of mapping (J). Additionally compute the
+/// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
+///
+/// Galerkin: Test functions = shape functions
+//=======================================================================
+inline double AxisymmetricQCrouzeixRaviartElement::
+ dshape_and_dtest_eulerian_at_knot_axi_nst(
+  const unsigned &ipt, Shape &psi, DShape &dpsidx,
+  RankFourTensor<double> &d_dpsidx_dX,
+  Shape &test, DShape &dtestdx,
+  RankFourTensor<double> &d_dtestdx_dX,
+  DenseMatrix<double> &djacobian_dX) const
+ {
+  // Call the geometrical shape functions and derivatives  
+  const double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx,
+                                                 djacobian_dX,d_dpsidx_dX);
+  
+  // Loop over the test functions and derivatives and set them equal to the
+  // shape functions
+  for(unsigned i=0;i<9;i++)
+   {
+    test[i] = psi[i];
+
+    for(unsigned k=0;k<2;k++)
+     {
+      dtestdx(i,k) = dpsidx(i,k);
+
+      for(unsigned p=0;p<2;p++)
+       {
+        for(unsigned q=0;q<9;q++)
+         {
+          d_dtestdx_dX(p,q,i,k) = d_dpsidx_dX(p,q,i,k);
+         }
+       }
+     }
+   }
+
+  // Return the jacobian
+  return J;
+ }
+
+//=======================================================================
 /// Pressure shape functions
 //=======================================================================
 inline void AxisymmetricQCrouzeixRaviartElement::
@@ -1136,6 +1410,19 @@ public virtual AxisymmetricNavierStokesEquations
                                                          DShape &dpsidx, 
                                                          Shape &test, 
                                                          DShape &dtestdx) const;
+
+ /// \short Shape/test functions and derivs w.r.t. to global coords at 
+ /// integration point ipt; return Jacobian of mapping (J). Also compute
+ /// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
+ inline double dshape_and_dtest_eulerian_at_knot_axi_nst(
+  const unsigned &ipt, 
+  Shape &psi, 
+  DShape &dpsidx,
+  RankFourTensor<double> &d_dpsidx_dX,
+  Shape &test, 
+  DShape &dtestdx,
+  RankFourTensor<double> &d_dtestdx_dX,
+  DenseMatrix<double> &djacobian_dX) const;
 
  /// Pressure shape functions at local coordinate s
  inline void pshape_axi_nst(const Vector<double> &s, Shape &psi) const;
@@ -1270,7 +1557,51 @@ dshape_and_dtest_eulerian_at_knot_axi_nst(const unsigned &ipt,
 }
 
 //==========================================================================
-///Pressure shape functions
+/// Define the shape functions (psi) and test functions (test) and
+/// their derivatives w.r.t. global coordinates (dpsidx and dtestdx)
+/// and return Jacobian of mapping (J). Additionally compute the
+/// derivatives of dpsidx, dtestdx and J w.r.t. nodal coordinates.
+///
+/// Galerkin: Test functions = shape functions
+//==========================================================================
+inline double AxisymmetricQTaylorHoodElement::
+ dshape_and_dtest_eulerian_at_knot_axi_nst(
+  const unsigned &ipt, Shape &psi, DShape &dpsidx,
+  RankFourTensor<double> &d_dpsidx_dX,
+  Shape &test, DShape &dtestdx,
+  RankFourTensor<double> &d_dtestdx_dX,
+  DenseMatrix<double> &djacobian_dX) const
+ {
+  // Call the geometrical shape functions and derivatives  
+  const double J = this->dshape_eulerian_at_knot(ipt,psi,dpsidx,
+                                                 djacobian_dX,d_dpsidx_dX);
+
+  // Loop over the test functions and derivatives and set them equal to the
+  // shape functions
+  for(unsigned i=0;i<9;i++)
+   {
+    test[i] = psi[i];
+
+    for(unsigned k=0;k<2;k++)
+     {
+      dtestdx(i,k) = dpsidx(i,k);
+
+      for(unsigned p=0;p<2;p++)
+       {
+        for(unsigned q=0;q<9;q++)
+         {
+          d_dtestdx_dX(p,q,i,k) = d_dpsidx_dX(p,q,i,k);
+         }
+       }
+     }
+   }
+
+  // Return the jacobian
+  return J;
+ }
+
+//==========================================================================
+/// Pressure shape functions
 //==========================================================================
 inline void AxisymmetricQTaylorHoodElement::
 pshape_axi_nst(const Vector<double> &s, Shape &psi)

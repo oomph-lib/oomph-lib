@@ -66,8 +66,16 @@ public:
   {
    //Assign the Lagrangian coordinates
    set_lagrangian_nodal_coordinates();
+   
+   //Identify the domain boundaries
+   this->identify_boundaries();
+  }
 
-   // Identify special boundaries
+
+ ///\short Function used to identify the domain boundaries
+ void identify_boundaries()
+  {
+   // We will have three boundaries
    this->set_nboundary(3);
 
    unsigned n_node=this->nnode();
@@ -100,7 +108,6 @@ public:
       }
     }
    this->setup_boundary_element_info();
-
   }
 
  /// Empty Destructor
@@ -157,6 +164,9 @@ public:
    return Fluid_mesh_pt;
   }
 
+ /// Set the boundary conditions
+ void set_boundary_conditions();
+
  /// Doc the solution
  void doc_solution(DocInfo& doc_info);
 
@@ -183,7 +193,30 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  Fluid_mesh_pt = new ElasticTriangleMesh<ELEMENT>(fluid_node_file_name,
                                                   fluid_element_file_name,
                                                   fluid_poly_file_name);
+
+ //Set the boundary conditions
+ this->set_boundary_conditions();
  
+ // Add fluid mesh
+ add_sub_mesh(fluid_mesh_pt());
+ 
+ // Build global mesh
+ build_global_mesh();
+ 
+ // Setup equation numbering scheme
+ cout <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
+
+} // end_of_constructor
+
+ 
+
+//============start_of_set_boundary_conditions=============================
+/// Set the boundary conditions for the problem and document the boundary
+/// nodes
+//==========================================================================
+template<class ELEMENT>
+void UnstructuredFluidProblem<ELEMENT>::set_boundary_conditions()
+{ 
  // Doc pinned nodes
  std::ofstream solid_bc_file("pinned_solid_nodes.dat");
  std::ofstream u_bc_file("pinned_u_nodes.dat");
@@ -231,13 +264,6 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
 
  // Close
  solid_bc_file.close();
- 
- // Add fluid mesh
- add_sub_mesh(fluid_mesh_pt());
- 
- // Build global mesh
- build_global_mesh();
-
  
  // Complete the build of all elements so they are fully functional
  unsigned n_element = fluid_mesh_pt()->nelement();
@@ -294,19 +320,19 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
        fluid_mesh_pt()->boundary_node_pt(ibound,inod)->set_value(0,veloc);
        fluid_mesh_pt()->boundary_node_pt(ibound,inod)->set_value(1,0.0);
       }
-     // Zero flow elsewhere 
+     // Zero flow elsewhere apart from x-velocity on outflow boundary
      else
       {
-       fluid_mesh_pt()->boundary_node_pt(ibound,inod)->set_value(0,0.0);
+       if(ibound!=2)
+        {
+         fluid_mesh_pt()->boundary_node_pt(ibound,inod)->set_value(0,0.0);
+        }
        fluid_mesh_pt()->boundary_node_pt(ibound,inod)->set_value(1,0.0);
       }
     }
   }
- 
- // Setup equation numbering scheme
- cout <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
+} // end_of_set_boundary_conditions
 
-} // end_of_constructor
 
 
 
@@ -329,11 +355,7 @@ void UnstructuredFluidProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  some_file.open(filename);
  fluid_mesh_pt()->output(some_file,npts);
  some_file.close();
-}
- 
-
-
-
+} //end_of_doc_solution
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -374,7 +396,7 @@ int main()
   // Output boundaries 
   problem.fluid_mesh_pt()->output_boundaries("RESLT_TH/boundaries.dat");
   
-  // Outpt the initial guess for the solution
+  // Output the initial guess for the solution
   problem.doc_solution(doc_info);
   doc_info.number()++;
   
@@ -392,8 +414,38 @@ int main()
     
     // Bump up Re
     Global_Physical_Variables::Re+=re_increment;
-   }
+   }  //end_of_parameter_study
+
+  //Dump the current solution
+  std::ofstream dump_file("dump.dat");
+  dump_file.precision(20);
+  problem.dump(dump_file);
+  dump_file.close();
+
+  //Create a brand new probem for the restart
+  UnstructuredFluidProblem<PseudoSolidNodeUpdateElement<
+   TTaylorHoodElement<2>, 
+   TPVDElement<2,3> > > reloaded_problem;
+
+  //Load the previous information from the disk
+  std::ifstream read_file("dump.dat");
+  reloaded_problem.read(read_file);
+  read_file.close();
+  
+  //Reset the Reynolds number
+  Global_Physical_Variables::Re -=re_increment;
+  //(Re) setup new boundary conditions
+  reloaded_problem.fluid_mesh_pt()->set_lagrangian_nodal_coordinates();
+  reloaded_problem.fluid_mesh_pt()->identify_boundaries();
+  reloaded_problem.set_boundary_conditions();
+  reloaded_problem.rebuild_global_mesh();
+  std::cout << "Number of equations: " << 
+   reloaded_problem.assign_eqn_numbers() << std::endl;
+  reloaded_problem.newton_solve();
+  reloaded_problem.doc_solution(doc_info);
+  doc_info.number()++;
  }
+
 
 
  //Crouzeix--Raviart formulation
@@ -407,7 +459,7 @@ int main()
  // Reset Reynolds number
  Global_Physical_Variables::Re = 0.0;
  
- // Build the problem with TTaylorHoodElements
+ // Build the problem with TCrouzeixRaviartElements
  UnstructuredFluidProblem<PseudoSolidNodeUpdateElement<
   TCrouzeixRaviartElement<2>, 
   TPVDBubbleEnrichedElement<2,3> > > problem;
@@ -415,7 +467,7 @@ int main()
  // Output boundaries 
   problem.fluid_mesh_pt()->output_boundaries("RESLT_CR/boundaries.dat");
   
-  // Outpt the initial guess for the solution
+  // Output the initial guess for the solution
   problem.doc_solution(doc_info);
   doc_info.number()++;
   

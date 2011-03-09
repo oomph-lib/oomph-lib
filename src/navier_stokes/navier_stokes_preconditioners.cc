@@ -2022,6 +2022,14 @@ namespace oomph
     Using_default_p_preconditioner = true;
    }
 
+    std::stringstream junk;
+    junk << "p_matrix" << problem_pt->communicator_pt()->my_rank()
+         << ".dat";
+    p_matrix_pt->sparse_indexed_output_with_offset(junk.str());
+    oomph_info << "Done output of " << junk.str() << std::endl;
+
+
+
   // Setup the preconditioner for the Pressure matrix
   double t_p_prec_start = TimingHelpers::timer();
   P_preconditioner_pt->setup(problem_pt, p_matrix_pt);

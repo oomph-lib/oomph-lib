@@ -295,20 +295,11 @@ class QSpectralElement<1,NNODE_1D> : public virtual SpectralElement,
 {
   private:
  
- // Spatial dimension of nodes in this element
- static const unsigned Every_node_ndim;
-
  /// \short Default integration rule: Gaussian integration of same 'order' 
  /// as the element
  //This is sort of optimal, because it means that the integration is exact
  //for the shape functions. Can overwrite this in specific element defintion.
  static GaussLobattoLegendre<1,NNODE_1D> integral;
-
- /// Min value of local coordinate
- static const double S_min;
-
- /// Max. value of local coordinate
- static const double S_max;
 
 public:
 
@@ -329,10 +320,10 @@ public:
   }
 
  /// Min. value of local coordinate
- double s_min() const {return S_min;}
+ double s_min() const {return -1.0;}
 
  /// Max. value of local coordinate
- double s_max() const {return S_max;}
+ double s_max() const {return 1.0;}
 
  /// Number of vertex nodes in the element
  unsigned nvertex_node() const
@@ -546,20 +537,11 @@ class QSpectralElement<2,NNODE_1D> : public virtual SpectralElement,
 {
   private:
  
- // Spatial dimension of nodes in this element
- static const unsigned Every_node_ndim;
-
  /// \short Default integration rule: Gaussian integration of same 'order' 
  /// as the element
  //This is sort of optimal, because it means that the integration is exact
  //for the shape functions. Can overwrite this in specific element defintion.
  static GaussLobattoLegendre<2,NNODE_1D> integral;
-
- /// Min value of local coordinate
- static const double S_min;
-
- /// Max. value of local coordinate
- static const double S_max;
 
 public:
 
@@ -580,10 +562,10 @@ public:
   }
 
  /// Min. value of local coordinate
- double s_min() const {return S_min;}
+ double s_min() const {return -1.0;}
 
  /// Max. value of local coordinate
- double s_max() const {return S_max;}
+ double s_max() const {return 1.0;}
 
  /// Number of vertex nodes in the element
  unsigned nvertex_node() const
@@ -835,20 +817,11 @@ class QSpectralElement<3,NNODE_1D> : public virtual SpectralElement,
 {
   private:
  
- // Spatial dimension of nodes in this element
- static const unsigned Every_node_ndim;
-
  /// \short Default integration rule: Gaussian integration of same 'order' 
  /// as the element
  //This is sort of optimal, because it means that the integration is exact
  //for the shape functions. Can overwrite this in specific element defintion.
  static GaussLobattoLegendre<3,NNODE_1D> integral;
-
- /// Min value of local coordinate
- static const double S_min;
-
- /// Max. value of local coordinate
- static const double S_max;
 
 public:
 
@@ -869,10 +842,10 @@ public:
   }
 
  /// Min. value of local coordinate
- double s_min() const {return S_min;}
+ double s_min() const {return -1.0;}
 
  /// Max. value of local coordinate
- double s_max() const {return S_max;}
+ double s_max() const {return 1.0;}
 
  /// Number of vertex nodes in the element
  unsigned nvertex_node() const

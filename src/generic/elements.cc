@@ -1837,6 +1837,322 @@ assemble_local_to_eulerian_jacobian(const DShape &dpsids,
   return 1.0;
  }
 
+//============================================================================
+/// Zero-d specialisation of function to calculate the derivative of the
+/// jacobian of a mapping with respect to the nodal coordinates X_ij.
+//============================================================================
+ template<>
+ void FiniteElement::dJ_eulerian_dnodal_coordinates_templated_helper<0>(
+  const DenseMatrix<double> &jacobian,const DShape &dpsids,
+  DenseMatrix<double> &djacobian_dX) const
+ {
+  // Issue a warning
+  oomph_info << "\nWarning: You are trying to calculate derivatives of "
+             << "a jacobian w.r.t. nodal coordinates for a 'point' "
+             << "element." << std::endl
+             << "This makes no sense and is almost certainly an error."
+             << std::endl << std::endl;
+ }
+
+//===========================================================================
+/// One-d specialisation of function to calculate the derivative of the
+/// jacobian of a mapping with respect to the nodal coordinates X_ij.
+//===========================================================================
+ template<>
+ void FiniteElement::dJ_eulerian_dnodal_coordinates_templated_helper<1>(
+  const DenseMatrix<double> &jacobian,const DShape &dpsids,
+  DenseMatrix<double> &djacobian_dX) const
+ {
+  // Determine the number of nodes in the element
+  const unsigned n_node = nnode();
+  
+  // Loop over nodes
+  for(unsigned j=0;j<n_node;j++)
+   {
+    djacobian_dX(0,j) = dpsids(j,0);
+   }
+ }
+
+//===========================================================================
+/// Two-d specialisation of function to calculate the derivative of the
+/// jacobian of a mapping with respect to the nodal coordinates X_ij.
+//===========================================================================
+ template<>
+ void FiniteElement::dJ_eulerian_dnodal_coordinates_templated_helper<2>(
+  const DenseMatrix<double> &jacobian,const DShape &dpsids,
+  DenseMatrix<double> &djacobian_dX) const
+ {
+  // Determine the number of nodes in the element
+  const unsigned n_node = nnode();
+
+  // Loop over nodes
+  for(unsigned j=0;j<n_node;j++)
+   {
+    // i=0
+    djacobian_dX(0,j) = dpsids(j,0)*jacobian(1,1) - dpsids(j,1)*jacobian(0,1);
+
+    // i=1
+    djacobian_dX(1,j) = dpsids(j,1)*jacobian(0,0) - dpsids(j,0)*jacobian(1,0);
+   }
+ }
+
+//=============================================================================
+/// Three-d specialisation of function to calculate the derivative of the
+/// jacobian of a mapping with respect to the nodal coordinates X_ij.
+//=============================================================================
+ template<>
+ void FiniteElement::dJ_eulerian_dnodal_coordinates_templated_helper<3>(
+  const DenseMatrix<double> &jacobian,const DShape &dpsids,
+  DenseMatrix<double> &djacobian_dX) const
+ {
+  // Determine the number of nodes in the element
+  const unsigned n_node = nnode();
+
+  // Loop over nodes
+  for(unsigned j=0;j<n_node;j++)
+   {
+    // i=0
+    djacobian_dX(0,j)
+     = dpsids(j,0)*(jacobian(1,1)*jacobian(2,2)
+                    - jacobian(1,2)*jacobian(2,1))
+     + dpsids(j,1)*(jacobian(0,2)*jacobian(2,1)
+                    - jacobian(0,1)*jacobian(2,2))
+     + dpsids(j,2)*(jacobian(0,1)*jacobian(1,2)
+                    - jacobian(0,2)*jacobian(1,1));
+    
+    // i=1
+    djacobian_dX(1,j)
+     = dpsids(j,0)*(jacobian(1,2)*jacobian(2,0)
+                    - jacobian(1,0)*jacobian(2,2))
+     + dpsids(j,1)*(jacobian(0,0)*jacobian(2,2)
+                    - jacobian(0,2)*jacobian(2,0))
+     + dpsids(j,2)*(jacobian(0,2)*jacobian(1,0)
+                    - jacobian(0,0)*jacobian(1,2));
+
+    // i=2
+    djacobian_dX(2,j)
+     = dpsids(j,0)*(jacobian(1,0)*jacobian(2,1)
+                    - jacobian(1,1)*jacobian(2,0))
+     + dpsids(j,1)*(jacobian(0,1)*jacobian(2,0)
+                    - jacobian(0,0)*jacobian(2,1))
+     + dpsids(j,2)*(jacobian(0,0)*jacobian(1,1)
+                    - jacobian(0,1)*jacobian(1,0));
+   }
+ }
+
+//============================================================================
+/// Zero-d specialisation of function to calculate the derivative w.r.t. the
+/// nodal coordinates \f$ X_{pq} \f$ of the derivative of the shape functions
+/// w.r.t. the global eulerian coordinates \f$ x_i \f$.
+//============================================================================
+ template<>
+ void FiniteElement::d_dshape_eulerian_dnodal_coordinates_templated_helper<0>(
+  const double &det_jacobian,
+  const DenseMatrix<double> &jacobian,
+  const DenseMatrix<double> &djacobian_dX,
+  const DenseMatrix<double> &inverse_jacobian,
+  const DShape &dpsids,
+  RankFourTensor<double> &d_dpsidx_dX) const
+ {
+  // Issue a warning
+  oomph_info << "\nWarning: You are trying to calculate derivatives of "
+             << "eulerian derivatives of shape functions w.r.t. nodal "
+             << "coordinates for a 'point' element." << std::endl
+             << "This makes no sense and is almost certainly an error."
+             << std::endl << std::endl;
+ }
+
+//===========================================================================
+/// One-d specialisation of function to calculate the derivative w.r.t. the
+/// nodal coordinates \f$ X_{pq} \f$ of the derivative of the shape functions
+/// w.r.t. the global eulerian coordinates \f$ x_i \f$.
+//===========================================================================
+ template<>
+ void FiniteElement::d_dshape_eulerian_dnodal_coordinates_templated_helper<1>(
+  const double &det_jacobian,
+  const DenseMatrix<double> &jacobian,
+  const DenseMatrix<double> &djacobian_dX,
+  const DenseMatrix<double> &inverse_jacobian,
+  const DShape &dpsids,
+  RankFourTensor<double> &d_dpsidx_dX) const
+ {
+  // Find inverse of determinant of jacobian of mapping
+  const double inv_det_jac = 1.0/det_jacobian;
+
+  // Determine the number of nodes in the element
+  const unsigned n_node = nnode();
+
+  // Loop over the shape functions
+  for(unsigned q=0;q<n_node;q++)
+   {
+    // Loop over the shape functions
+    for(unsigned j=0;j<n_node;j++)
+     {
+      d_dpsidx_dX(0,q,j,0)
+       = - djacobian_dX(0,q)*dpsids(j,0)*inv_det_jac*inv_det_jac;
+     }
+   }
+ }
+
+//===========================================================================
+/// Two-d specialisation of function to calculate the derivative w.r.t. the
+/// nodal coordinates \f$ X_{pq} \f$ of the derivative of the shape functions
+/// w.r.t. the global eulerian coordinates \f$ x_i \f$.
+//===========================================================================
+ template<>
+ void FiniteElement::d_dshape_eulerian_dnodal_coordinates_templated_helper<2>(
+  const double &det_jacobian,
+  const DenseMatrix<double> &jacobian,
+  const DenseMatrix<double> &djacobian_dX,
+  const DenseMatrix<double> &inverse_jacobian,
+  const DShape &dpsids,
+  RankFourTensor<double> &d_dpsidx_dX) const
+ {
+  // Find inverse of determinant of jacobian of mapping
+  const double inv_det_jac = 1.0/det_jacobian;
+
+  // Determine the number of nodes in the element
+  const unsigned n_node = nnode();
+
+  // Loop over the spatial dimension (this must be 2)
+  for(unsigned p=0;p<2;p++)
+   {
+    // Loop over the shape functions
+    for(unsigned q=0;q<n_node;q++)
+     {
+      // Loop over the shape functions
+      for(unsigned j=0;j<n_node;j++)
+       {
+        // i=0
+        d_dpsidx_dX(p,q,j,0) = - djacobian_dX(p,q)*
+         (inverse_jacobian(0,0)*dpsids(j,0)
+          + inverse_jacobian(0,1)*dpsids(j,1));
+        
+        if(p==1)
+         {
+          d_dpsidx_dX(p,q,j,0)
+           += dpsids(j,0)*dpsids(q,1) - dpsids(j,1)*dpsids(q,0);
+         }
+        d_dpsidx_dX(p,q,j,0) *= inv_det_jac;
+
+        // i=1
+        d_dpsidx_dX(p,q,j,1) = - djacobian_dX(p,q)*
+         (inverse_jacobian(1,1)*dpsids(j,1)
+          + inverse_jacobian(1,0)*dpsids(j,0));
+        
+        if(p==0)
+         {
+          d_dpsidx_dX(p,q,j,1)
+           += dpsids(j,1)*dpsids(q,0) - dpsids(j,0)*dpsids(q,1);
+         }
+        d_dpsidx_dX(p,q,j,1) *= inv_det_jac;
+       }
+     }
+   }
+ }
+
+//=============================================================================
+/// Three-d specialisation of function to calculate the derivative w.r.t. the
+/// nodal coordinates \f$ X_{pq} \f$ of the derivative of the shape functions
+/// w.r.t. the global eulerian coordinates \f$ x_i \f$.
+//=============================================================================
+ template<>
+ void FiniteElement::d_dshape_eulerian_dnodal_coordinates_templated_helper<3>(
+  const double &det_jacobian,
+  const DenseMatrix<double> &jacobian,
+  const DenseMatrix<double> &djacobian_dX,
+  const DenseMatrix<double> &inverse_jacobian,
+  const DShape &dpsids,
+  RankFourTensor<double> &d_dpsidx_dX) const
+ {
+  // Find inverse of determinant of jacobian of mapping
+  const double inv_det_jac = 1.0/det_jacobian;
+  
+  // Determine the number of nodes in the element
+  const unsigned n_node = nnode();
+  
+  // Loop over the spatial dimension (this must be 3)
+  for(unsigned p=0;p<3;p++)
+   {
+    // Loop over the shape functions
+    for(unsigned q=0;q<n_node;q++)
+     {
+      // Loop over the shape functions
+      for(unsigned j=0;j<n_node;j++)
+       {
+        // Terms not multiplied by delta function
+        for(unsigned i=0;i<3;i++)
+         {
+          d_dpsidx_dX(p,q,j,i)
+           = - djacobian_dX(p,q)*(inverse_jacobian(i,0)*dpsids(j,0)
+                                  + inverse_jacobian(i,1)*dpsids(j,1)
+                                  + inverse_jacobian(i,2)*dpsids(j,2));
+         }
+
+        // Delta function terms
+        switch(p)
+         {
+         case 0:
+          d_dpsidx_dX(p,q,j,1)+=((dpsids(q,2)*jacobian(1,2)
+                                  - dpsids(q,1)*jacobian(2,2))*dpsids(j,0)
+                                 + (dpsids(q,0)*jacobian(2,2)
+                                    - dpsids(q,2)*jacobian(0,2))*dpsids(j,1)
+                                 + (dpsids(q,1)*jacobian(0,2)
+                                    - dpsids(q,0)*jacobian(1,2))*dpsids(j,2));
+
+          d_dpsidx_dX(p,q,j,2)+=((dpsids(q,1)*jacobian(2,1)
+                                  - dpsids(q,2)*jacobian(1,1))*dpsids(j,0)
+                                 + (dpsids(q,2)*jacobian(0,1)
+                                    - dpsids(q,0)*jacobian(2,1))*dpsids(j,1)
+                                 + (dpsids(q,0)*jacobian(1,1)
+                                    - dpsids(q,1)*jacobian(0,1))*dpsids(j,2));
+          break;
+
+         case 1:
+        
+          d_dpsidx_dX(p,q,j,0)+=((dpsids(q,1)*jacobian(2,2)
+                                  - dpsids(q,2)*jacobian(1,2))*dpsids(j,0)
+                                 + (dpsids(q,2)*jacobian(0,2)
+                                    - dpsids(q,0)*jacobian(2,2))*dpsids(j,1)
+                                 + (dpsids(q,0)*jacobian(1,2)
+                                    - dpsids(q,1)*jacobian(0,2))*dpsids(j,2));
+
+          d_dpsidx_dX(p,q,j,2)+=((dpsids(q,2)*jacobian(1,0)
+                                  - dpsids(q,1)*jacobian(2,0))*dpsids(j,0)
+                                 + (dpsids(q,0)*jacobian(2,0)
+                                    - dpsids(q,2)*jacobian(0,0))*dpsids(j,1)
+                                 + (dpsids(q,1)*jacobian(0,0)
+                                    - dpsids(q,0)*jacobian(1,0))*dpsids(j,2));
+          break;
+         
+         case 2:
+
+          d_dpsidx_dX(p,q,j,0)+=((dpsids(q,2)*jacobian(1,1)
+                                  - dpsids(q,1)*jacobian(2,1))*dpsids(j,0)
+                                 + (dpsids(q,0)*jacobian(2,1)
+                                    - dpsids(q,2)*jacobian(0,1))*dpsids(j,1)
+                                 + (dpsids(q,1)*jacobian(0,1)
+                                    - dpsids(q,0)*jacobian(1,1))*dpsids(j,2));
+
+          d_dpsidx_dX(p,q,j,1)+=((dpsids(q,1)*jacobian(2,0)
+                                  - dpsids(q,2)*jacobian(1,0))*dpsids(j,0)
+                                 + (dpsids(q,2)*jacobian(0,0)
+                                    - dpsids(q,0)*jacobian(2,0))*dpsids(j,1)
+                                 + (dpsids(q,0)*jacobian(1,0)
+                                    - dpsids(q,1)*jacobian(0,0))*dpsids(j,2));
+          break;
+         }
+        
+        // Divide through by the determinant of the Jacobian mapping
+        for(unsigned i=0;i<3;i++)
+         {
+          d_dpsidx_dX(p,q,j,i) *= inv_det_jac;
+         }
+       }
+     }
+   }
+ }
+
 //=======================================================================
 /// Default value for the number of values at a node
 //=======================================================================
@@ -1944,6 +2260,160 @@ bool FiniteElement::Suppress_output_while_checking_for_inverted_elements=false;
   //Return the value of the Jacobian
   return(det);
  }
+
+//========================================================================
+/// Template-free interface calculating the derivative of the jacobian
+/// of a mapping with respect to the nodal coordinates X_ij. This is
+/// slightly inefficient, given that it uses a switch statement. It can
+/// always be overloaded in specific geometric elements, for efficiency
+/// reasons.
+//========================================================================
+void FiniteElement::dJ_eulerian_dnodal_coordinates(
+ const DenseMatrix<double> &jacobian,const DShape &dpsids,
+ DenseMatrix<double> &djacobian_dX) const
+{
+ // Determine the spatial dimension of the element
+ const unsigned el_dim = dim();
+ 
+#ifdef PARANOID
+ // Determine the number of nodes in the element
+ const unsigned n_node = nnode();
+ 
+ // Check that djacobian_dX has the correct number of rows (= el_dim)
+ if(djacobian_dX.nrow()!=el_dim)
+  {
+   std::ostringstream error_message;
+   error_message << "djacobian_dX must have the same number of rows as the"
+                 << "\nspatial dimension of the element.";
+   throw OomphLibError(error_message.str(),
+                       "FiniteElement::dJ_eulerian_dnodal_coordinates()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ // Check that djacobian_dX has the correct number of columns (= n_node)
+ if(djacobian_dX.ncol()!=n_node)
+  {
+   std::ostringstream error_message;
+   error_message << "djacobian_dX must have the same number of columns as the"
+                 << "\nnumber of nodes in the element.";
+   throw OomphLibError(error_message.str(),
+                       "FiniteElement::dJ_eulerian_dnodal_coordinates()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+ // Call the appropriate templated function, depending on the 
+ // element dimension
+ switch(el_dim)
+  {
+  case 0:
+   dJ_eulerian_dnodal_coordinates_templated_helper<0>(jacobian,dpsids,
+                                                      djacobian_dX);
+   break;
+  case 1:
+   dJ_eulerian_dnodal_coordinates_templated_helper<1>(jacobian,dpsids,
+                                                      djacobian_dX);
+   break;
+  case 2:
+   dJ_eulerian_dnodal_coordinates_templated_helper<2>(jacobian,dpsids,
+                                                      djacobian_dX);
+   break;
+  case 3:
+   dJ_eulerian_dnodal_coordinates_templated_helper<3>(jacobian,dpsids,
+                                                      djacobian_dX);
+   break;
+   // Catch-all default case: issue warning and die
+  default:
+   std::ostringstream error_stream;
+   error_stream 
+    << "Dimension of the element must be 0,1,2 or 3, not " << el_dim 
+    << std::endl;
+   
+   throw OomphLibError(error_stream.str(),
+                       "FiniteElement::dJ_eulerian_dnodal_coordinates(..)",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+}
+
+//========================================================================
+/// Template-free interface calculating the derivative w.r.t. the nodal
+/// coordinates \f$ X_{pq} \f$ of the derivative of the shape functions
+/// \f$ \psi_j \f$ w.r.t. the global eulerian coordinates \f$ x_i \f$.
+/// I.e. this function calculates
+/// \f[
+/// \frac{\partial}{\partial X_{pq}}
+/// \left( \frac{\partial \psi_j}{\partial x_i} \right).
+/// \f]
+/// To do this it requires the determinant of the jacobian mapping, its
+/// derivative w.r.t. the nodal coordinates \f$ X_{pq} \f$, the inverse
+/// jacobian and the derivatives of the shape functions w.r.t. the local
+/// coordinates. The result is returned as a tensor of rank four.
+/// \n\n Numbering: \n
+/// d_dpsidx_dX(p,q,j,i) = \f$ \frac{\partial}{\partial X_{pq}}
+/// \left( \frac{\partial \psi_j}{\partial x_i} \right) \f$ \n
+/// This function is slightly inefficient, given that it uses a switch
+/// statement. It can always be overloaded in specific geometric elements,
+/// for efficiency reasons.
+//========================================================================
+void FiniteElement::d_dshape_eulerian_dnodal_coordinates(
+ const double &det_jacobian,
+ const DenseMatrix<double> &jacobian,
+ const DenseMatrix<double> &djacobian_dX,
+ const DenseMatrix<double> &inverse_jacobian,
+ const DShape &dpsids,
+ RankFourTensor<double> &d_dpsidx_dX) const
+{
+ // Determine the spatial dimension of the element
+ const unsigned el_dim = dim();
+
+#ifdef PARANOID
+ // Determine the number of nodes in the element
+ const unsigned n_node = nnode();
+ 
+ // Check that d_dpsidx_dX is of the correct size
+ if(d_dpsidx_dX.nindex1()!=el_dim || d_dpsidx_dX.nindex2()!=n_node
+    || d_dpsidx_dX.nindex3()!=n_node || d_dpsidx_dX.nindex4()!=el_dim)
+  {
+   std::ostringstream error_message;
+   error_message << "d_dpsidx_dX must be of the following dimensions:"
+                 << "\nd_dpsidx_dX(el_dim,n_node,n_node,el_dim)";
+   throw OomphLibError(error_message.str(),
+                       "FiniteElement::d_dshape_eulerian_dnodal_coordinates(...)",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+ // Call the appropriate templated function, depending on the 
+ // element dimension
+ switch(el_dim)
+  {
+  case 0:
+   d_dshape_eulerian_dnodal_coordinates_templated_helper<0>(
+    det_jacobian,jacobian,djacobian_dX,inverse_jacobian,dpsids,d_dpsidx_dX);
+   break;
+  case 1:
+   d_dshape_eulerian_dnodal_coordinates_templated_helper<1>(
+    det_jacobian,jacobian,djacobian_dX,inverse_jacobian,dpsids,d_dpsidx_dX);
+   break;
+  case 2:
+   d_dshape_eulerian_dnodal_coordinates_templated_helper<2>(
+    det_jacobian,jacobian,djacobian_dX,inverse_jacobian,dpsids,d_dpsidx_dX);
+   break;
+  case 3:
+   d_dshape_eulerian_dnodal_coordinates_templated_helper<3>(
+    det_jacobian,jacobian,djacobian_dX,inverse_jacobian,dpsids,d_dpsidx_dX);
+   break;
+   // Catch-all default case: issue warning and die
+  default:
+   std::ostringstream error_stream;
+   error_stream 
+    << "Dimension of the element must be 0,1,2 or 3, not " << el_dim 
+    << std::endl;
+   
+   throw OomphLibError(error_stream.str(),
+                       "FiniteElement::d_dshape_eulerian_dnodal_coordinates(...)",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+}
 
 //=====================================================================
 /// Convert derivatives w.r.t local coordinates to derivatives w.r.t the
@@ -2463,6 +2933,54 @@ bool FiniteElement::Suppress_output_while_checking_for_inverted_elements=false;
   return det;
  }
 
+
+//========================================================================
+/// \short Compute the geometric shape functions (psi) and first
+/// derivatives w.r.t. global coordinates (dpsidx) at integration point
+/// ipt. Return the determinant of the jacobian of the mapping (detJ).
+/// Additionally calculate the derivatives of both "detJ" and "dpsidx"
+/// w.r.t. the nodal coordinates.
+/// Most general form of function, but may be over-loaded if desired.
+//========================================================================
+ double FiniteElement::dshape_eulerian_at_knot(
+  const unsigned &ipt,
+  Shape &psi, 
+  DShape &dpsi,
+  DenseMatrix<double> &djacobian_dX,
+  RankFourTensor<double> &d_dpsidx_dX) const
+ {
+  // Find the element dimension
+  const unsigned el_dim = dim();
+ 
+  // Get the values of the shape function and local derivatives
+  // Temporarily store in dpsi
+  dshape_local_at_knot(ipt,psi,dpsi);
+ 
+  // Allocate memory for the jacobian and the inverse of the jacobian
+  DenseMatrix<double> jacobian(el_dim), inverse_jacobian(el_dim);
+
+  // Now calculate the inverse jacobian
+  const double det = local_to_eulerian_mapping(dpsi,jacobian,inverse_jacobian);
+
+  // Calculate the derivative of the jacobian w.r.t. nodal coordinates
+  // Note: must call this before "transform_derivatives(...)" since this
+  // function requires dpsids rather than dpsidx
+  dJ_eulerian_dnodal_coordinates(jacobian,dpsi,djacobian_dX);
+
+  // Calculate the derivative of dpsidx w.r.t. nodal coordinates
+  // Note: this function also requires dpsids rather than dpsidx
+  d_dshape_eulerian_dnodal_coordinates(det,jacobian,djacobian_dX,
+                                       inverse_jacobian,dpsi,d_dpsidx_dX);
+                                                            
+  // Now set the values of the derivatives to dpsidx
+  transform_derivatives(inverse_jacobian,dpsi);
+
+  // Return the determinant of the jacobian
+  return det;
+ }
+
+
+
 //===========================================================================
 /// \short Compute the geometric shape functions and also first
 /// and second derivatives w.r.t. global coordinates at local coordinate s;
@@ -2568,6 +3086,8 @@ bool FiniteElement::Suppress_output_while_checking_for_inverted_elements=false;
   //Return the determinant of the mapping
   return det;
  }
+
+
 
 //==========================================================================
 /// This function loops over the nodal data of the element, adds the
