@@ -1594,6 +1594,52 @@ namespace oomph
    }  
  }
 
+//======================================================================
+/// Move the nodes on boundaries with associated Geometric Objects so 
+/// that the exactly coincide with the geometric object. This requires
+/// that the boundary coordinates are set up consistently
+//======================================================================
+ template <class ELEMENT>
+ void TriangleMesh<ELEMENT>::snap_nodes_onto_geometric_objects()
+ {
+  //Loop over all boundaries
+  const unsigned n_bound = this->nboundary();
+  for(unsigned b=0;b<n_bound;b++)
+   {
+    //Find the geometric object
+    GeomObject* const geom_object_pt = this->boundary_geom_object_pt(b);
+    //If there is one
+    if(geom_object_pt!=0)
+     {
+      Vector<double> b_coord(1);
+      Vector<double> new_x(2);
+      const unsigned n_boundary_node = this->nboundary_node(b);
+      for(unsigned n=0;n<n_boundary_node;++n)
+       {
+        //Get the boundary node and coordinates
+        Node* const nod_pt = this->boundary_node_pt(b,n);
+        nod_pt->get_coordinates_on_boundary(b,b_coord);
+
+        //Get the position and time history according to the underlying
+        //geometric object, assuming that it has the same timestepper
+        //as the nodes....
+        unsigned n_tstorage = nod_pt->ntstorage();
+        for(unsigned t=0;t<n_tstorage;++t)
+         {
+          //Get the position according to the underlying geometric object
+          geom_object_pt->position(t,b_coord,new_x);
+          //Move the node
+          for(unsigned i=0;i<2;i++)
+           {
+            nod_pt->x(t,i) = new_x[i];
+           }
+         }
+       }
+     }
+   }
+ }
+
+
 
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
@@ -2174,7 +2220,10 @@ namespace oomph
        } //End of loop over boundaries
 
      } //End of case when more than one region
-   
+
+    //Snap the newly created nodes onto any geometric objects
+    this->snap_nodes_onto_geometric_objects();
+
     // Copy the IDs of the vertex nodes
     this->Oomph_vertex_nodes_id=new_mesh_pt->oomph_vertex_nodes_id();
     

@@ -6981,7 +6981,8 @@ newton_solve_continuation(double* const &parameter_pt,
       }
 
      //If we are below the Tolerance, then return immediately
-     if(maxres < Newton_solver_tolerance) {LOOP_FLAG=0; count=0; continue;}
+     if((maxres < Newton_solver_tolerance) && 
+     (!Always_take_one_newton_step)) {LOOP_FLAG=0; count=0; continue;}
     }
    
    //If it's the block hopf solver we need to solve for both rhs's

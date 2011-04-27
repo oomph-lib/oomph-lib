@@ -674,7 +674,7 @@ namespace TriangleHelper
               << " # number of attributes" << std::endl;
     for(int n=0;n<n_attribute;++n)
      {
-      dump_file << triangle_io.triangleattributelist[counter2];
+      dump_file << triangle_io.triangleattributelist[counter2] << std::endl;
       ++counter2;
      }
    }

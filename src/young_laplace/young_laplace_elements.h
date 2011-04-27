@@ -37,8 +37,8 @@
 
 
 //OOMPH-LIB headers
-#include "../../src/generic/nodes.h"
-#include "../../src/generic/Qelements.h"
+#include "../generic/nodes.h"
+#include "../generic/Qelements.h"
 
 
 

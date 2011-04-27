@@ -532,9 +532,10 @@ namespace oomph
       this->setup_boundary_coordinates(b);
      }
 
+
     //Excatly map the outer boundary onto the geometric object
     //This may be overwritten later in the driver
-    for(unsigned s=0;s<n_outer_seg;s++)
+    /*for(unsigned s=0;s<n_outer_seg;s++)
      {
       Vector<double> b_coord(1);
       Vector<double> new_x(2);
@@ -553,7 +554,8 @@ namespace oomph
           nod_pt->x(i) = new_x[i];
          }
        }
-     }
+       }*/
+    this->snap_nodes_onto_geometric_objects();
    }
 
   
@@ -873,6 +875,9 @@ namespace oomph
      {
       this->setup_boundary_coordinates(b);
      }
+
+    //Deform the boundary onto any geometric objects
+    this->snap_nodes_onto_geometric_objects();
    }
 
 
@@ -933,6 +938,13 @@ namespace oomph
   /// triangulate_io) from the .poly file 
   void build_triangulateio(const std::string& poly_file_name,
                            TriangulateIO& triangulate_io);
+
+
+   
+  /// \short Snap the boundary nodes onto any curvilinear boundaries
+  /// defined by geometric objects
+  void snap_nodes_onto_geometric_objects();
+
 
   /// \short A general-purpose construction function that builds the
   /// mesh once the different specific constructors have assembled the

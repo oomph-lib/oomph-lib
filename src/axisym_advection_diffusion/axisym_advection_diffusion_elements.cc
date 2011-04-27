@@ -272,11 +272,11 @@ void AxisymAdvectionDiffusionEquations::output(std::ostream &outfile,
    outfile << this->interpolated_u_axi_adv_diff(s) << " ";
    
    //Get the wind
-   Vector<double> wind(2);
+   Vector<double> wind(3);
    //Dummy ipt argument needed... ?
    unsigned ipt = 0;
    get_wind_axi_adv_diff(ipt,s,x,wind);
-   for(unsigned i=0;i<2;i++) 
+   for(unsigned i=0;i<3;i++) 
     {
      outfile << wind[i] << " ";
     }

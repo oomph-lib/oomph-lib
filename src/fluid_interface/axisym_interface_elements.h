@@ -206,7 +206,7 @@ class ElasticAxisymmetricFluidInterfaceElement :
 public virtual Hijacked<FaceGeometry<ELEMENT> >,
 public AxisymmetricFluidInterfaceElement
 {
-  private:
+  protected:
  
  int kinematic_local_eqn(const unsigned &n)
   {return this->nodal_local_eqn(n,Nbulk_value[n]);}

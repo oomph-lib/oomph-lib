@@ -39,7 +39,7 @@
 
 
 // oomph-lib ncludes
-#include "../../src/generic/Qelements.h"
+#include "../generic/Qelements.h"
 
 namespace oomph
 {

@@ -41,7 +41,7 @@
 #include <ostream>
 
 // General headers
-#include "../../src/generic/Vector.h"
+#include "Vector.h"
 #include "communicator.h"
 #include "oomph_utilities.h"
 

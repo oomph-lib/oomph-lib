@@ -502,6 +502,12 @@ public:
    unsigned nhole=this->inner_hole_pt().size();
    for(unsigned ihole=0;ihole<nhole;ihole++)
     {
+     //Shift the values for the centre displacement
+     Problem_Parameter::Centre_displacement_data_pt[ihole]->time_stepper_pt()
+      ->shift_time_values(
+       Problem_Parameter::Centre_displacement_data_pt[ihole]);
+
+     //Now backup
      double old_x=
       Problem_Parameter::Centre_displacement_data_pt[ihole]->value(0);     
      double old_y=
