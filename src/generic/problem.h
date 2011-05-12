@@ -209,6 +209,13 @@ namespace oomph
 
   public:
 
+ /// \short Hook for debugging. Can be overloaded in driver code; argument
+ /// allows identification of where we're coming from
+ virtual void debug_hook_fct(const unsigned& i)
+ {
+  oomph_info << "Called empty hook fct with i=" << i << std::endl;
+}
+ 
  /// \short Function to turn on analytic calculation of the parameter
  /// derivatives in continuation and bifurcation detection problems
  inline void set_analytic_dparameter(double* const &parameter_pt)
@@ -261,6 +268,11 @@ namespace oomph
  void set_pinned_values_to_zero();
 
   private:
+
+ /// \short Helper function to re-setup the Base_mesh enumeration 
+ /// (used during load balancing) after pruning
+ void setup_base_mesh_info_after_pruning();
+
  /// \short Private helper function that is used to assemble the Jacobian 
  /// matrix in the case when the storage is row or column compressed.
  /// The boolean Flag indicates
@@ -388,6 +400,13 @@ namespace oomph
  /// for the Mesh in the argument
  void copy_haloed_eqn_numbers_helper(Mesh* &mesh_pt);
 
+ /// \short Private helper function to remove repeated data
+ /// in external haloed elements in specified mesh. Bool is true if some data 
+ /// was removed -- this usually requires re-running through certain
+ /// parts of the equation numbering procedure.
+ void remove_duplicate_data(Mesh* const &mesh_pt,
+                            bool& actually_removed_some_data);
+
  /// \short Helper function to re-assign the first and last elements to be 
  /// assembled by each processor during parallel assembly for 
  /// non-distributed problem. On each processor the vector 
@@ -416,12 +435,14 @@ namespace oomph
  bool Must_recompute_load_balance_for_assembly;
 
  /// \short Map which stores the correspondence between a root element and
- /// its element number within the global mesh at the point when it is 
+ /// its element number (plus one) within the global mesh at the point 
+ /// when it is 
  /// distributed. NB a root element in this instance is one of the elements
  /// in the uniformly-refined mesh at the point when Problem::distribute()
  /// is called, since these elements become roots on each of the processors
- /// involved in the distribution.
- std::map<GeneralisedElement*,unsigned> Base_mesh_element_number; 
+ /// involved in the distribution. Null when element doesn't exist
+ /// following the adjustment of this when pruning
+ std::map<GeneralisedElement*,unsigned> Base_mesh_element_number_plus_one; 
 
 
  /// \short Vector to store the correspondence between a root element and
@@ -429,7 +450,8 @@ namespace oomph
  /// distributed. NB a root element in this instance is one of the elements
  /// in the uniformly-refined mesh at the point when Problem::distribute()
  /// is called, since these elements become roots on each of the processors
- /// involved in the distribution.
+ /// involved in the distribution. Null when element doesn't exist
+ /// following the adjustment of this when pruning
  Vector<GeneralisedElement*> Base_mesh_element_pt; 
 
 #endif

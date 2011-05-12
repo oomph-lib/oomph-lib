@@ -564,9 +564,27 @@ FSIRingProblem::FSIRingProblem(const unsigned& N,
    xi_lo,fract_mid,xi_hi,Fluid_time_stepper_pt);
 
  // Set the error estimator
- Z2ErrorEstimator* error_estimator_pt=new Z2ErrorEstimator;
- Fluid_mesh_pt->spatial_error_estimator_pt()=error_estimator_pt;
-  
+ //Z2ErrorEstimator* error_estimator_pt=new Z2ErrorEstimator;
+ // hierherFluid_mesh_pt->spatial_error_estimator_pt()=error_estimator_pt;
+
+
+ 
+ // Setup fake error estimator: Boundaries of refiment region
+ Vector<double> lower_left(2);
+ Vector<double> upper_right(2);
+
+ lower_left[0]=0.51;
+ lower_left[1]=0.67;
+ upper_right[0]=0.733;
+ upper_right[1]=0.853;
+   
+ unsigned central_node_number=8;
+ bool use_lagrangian_coordinates=false;
+ Fluid_mesh_pt->spatial_error_estimator_pt()=
+  new DummyErrorEstimator(Fluid_mesh_pt,lower_left,upper_right,
+                          central_node_number,
+                          use_lagrangian_coordinates);  
+
  // Extract pointer to node at center of mesh
  unsigned nnode=Fluid_mesh_pt->finite_element_pt(0)->nnode();
  Veloc_trace_node_pt=Fluid_mesh_pt->finite_element_pt(0)->node_pt(nnode-1);
@@ -903,7 +921,7 @@ void FSIRingProblem::dynamic_run()
    doc_info.doc_flag()=false;
 
    // Solve
-   unsigned max_adapt=1;
+   unsigned max_adapt=3; // hierher 1;
    unsteady_newton_solve(dt,max_adapt,first);
 
    // Now we've done the first step
@@ -929,6 +947,18 @@ int main(int argc, char* argv[])
 #ifdef OOMPH_HAS_MPI
  MPI_Helpers::init(argc,argv);
 #endif
+
+  // Switch off output modifier
+ oomph_info.output_modifier_pt() = &default_output_modifier;
+
+ // Define processor-labeled output file for all on-screen stuff
+ std::ofstream output_stream;
+ char filename[100];
+ sprintf(filename,"OUTPUT.%i",MPI_Helpers::communicator_pt()->my_rank());
+ output_stream.open(filename);
+ oomph_info.stream_pt() = &output_stream;
+ OomphLibWarning::set_stream_pt(&output_stream);
+ OomphLibError::set_stream_pt(&output_stream);   
 
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);

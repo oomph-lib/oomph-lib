@@ -9,7 +9,7 @@
 
 
 // oomph-lib headers
-#include "generic/refineable_line_element.h"
+#include "refineable_line_element.h"
 
 namespace oomph
 {

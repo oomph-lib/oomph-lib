@@ -41,8 +41,8 @@
 #endif
 
 // ooomph-lib includes
-#include "../generic/Vector.h"
-#include "../generic/problem.h"
+#include "Vector.h"
+#include "problem.h"
 
 
 namespace oomph

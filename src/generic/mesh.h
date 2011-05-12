@@ -55,6 +55,9 @@
 namespace oomph
 {
 
+
+
+
 //=================================================================
 /// \short  A general mesh class.
 ///
@@ -66,8 +69,10 @@ namespace oomph
 //=================================================================
 class Mesh
 {
-  
- /// Problem is a friend
+
+  public:
+
+  /// Problem is a friend
  friend class Problem;
 
  
@@ -130,11 +135,8 @@ class Mesh
  /// Map of vectors holding the pointers to the external haloed elements
  std::map<unsigned, Vector<GeneralisedElement*> > External_haloed_element_pt;
 
-#endif
 
-#ifdef OOMPH_HAS_MPI
-
- /// External halo(ed) nodes are on the external halo(ed) elements
+ // External halo(ed) nodes are on the external halo(ed) elements
 
  /// Map of vectors holding the pointers to the external halo nodes
  std::map<unsigned, Vector<Node*> > External_halo_node_pt;
@@ -564,6 +566,7 @@ public:
  unsigned check_for_repeated_nodes(const double& epsilon=1.0e-12)
   {
    oomph_info <<"\n\nStarting check for repeated nodes...";
+   bool failed=false;
    unsigned nnod=nnode();
    for (unsigned j=0;j<nnod;j++)
     {
@@ -593,10 +596,12 @@ public:
            oomph_info << nod1_pt->x(i) << " ";
           }
          oomph_info << std::endl << std::endl;
-         return 1;
+         failed=true;
         }
       }
     }
+   if (failed) return 1;
+
    // If we made it to here, we must have passed the test.
    oomph_info <<"...done: Test passed!" << std::endl << std::endl;
    return 0;
@@ -829,21 +834,26 @@ public:
    return Keep_all_elements_as_halos;
   }
 
- /// Distribute the problem and doc; make this virtual to allow
- /// overloading for particular meshes where further work is required
+ /// \short Distribute the problem and doc; make this virtual to allow
+ /// overloading for particular meshes where further work is required.
+ /// Add to vector of pointers to deleted elements.
  virtual void distribute(OomphCommunicator* comm_pt,
                          const Vector<unsigned>& element_domain,
+                         Vector<GeneralisedElement*>& deleted_element_pt,
                          DocInfo& doc_info,
                          const bool& report_stats);
-  
- /// Distribute the problem
+ 
+ /// \short Distribute the problem
+ /// Add to vector of pointers to deleted elements.
  void distribute(OomphCommunicator* comm_pt,
                  const Vector<unsigned>& element_domain,
+                 Vector<GeneralisedElement*>& deleted_element_pt,
                  const bool& report_stats=false)
-  {
+ {
    DocInfo doc_info;
    doc_info.doc_flag()=false;
-   distribute(comm_pt,element_domain,doc_info,report_stats);
+   return distribute(comm_pt,element_domain,deleted_element_pt,
+                     doc_info,report_stats);
   }
 
  /// \short (Irreversibly) prune halo(ed) elements and nodes, usually
@@ -853,11 +863,14 @@ public:
  /// relative to it will be possible once this function 
  /// has been called.
  void prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
+                                    Vector<GeneralisedElement*>& 
+                                    deleted_element_pt,
                                     const bool& report_stats=false)
   {
    DocInfo doc_info;
    doc_info.doc_flag()=false;
-   prune_halo_elements_and_nodes(comm_pt,doc_info,report_stats);
+   prune_halo_elements_and_nodes(comm_pt,deleted_element_pt,
+                                 doc_info,report_stats);
   }
 
 
@@ -868,6 +881,8 @@ public:
  /// relative to it will be possible once this function 
  /// has been called.
  void prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
+                                    Vector<GeneralisedElement*>& 
+                                    deleted_element_pt,
                                     DocInfo& doc_info,
                                     const bool& report_stats);
 
@@ -1016,6 +1031,15 @@ public:
    return Root_halo_element_pt[p].size();
   }
 
+
+ /// \short Vector of pointers to root halo elements in this Mesh 
+ /// whose non-halo counterpart is held on processor p.
+ Vector<GeneralisedElement*> root_halo_element_pt(const unsigned& p)
+  {
+   return Root_halo_element_pt[p];
+  }
+
+
  /// \short Access fct to the e-th root halo element in this Mesh 
  /// whose non-halo counterpart is held on processor p.
  GeneralisedElement* &root_halo_element_pt(const unsigned& p, 
@@ -1087,6 +1111,14 @@ public:
    return Root_haloed_element_pt[p].size();
   }
 
+
+ /// \short Vector of pointers to root haloed elements in this Mesh 
+ /// whose non-halo counterpart is held on processor p.
+ Vector<GeneralisedElement*> root_haloed_element_pt(const unsigned& p)
+  {
+   return Root_haloed_element_pt[p];
+  }
+
  /// \short Access fct to the e-th root haloed element in this Mesh 
  /// whose non-halo counterpart is held on processor p.
  GeneralisedElement* &root_haloed_element_pt(const unsigned& p, 
@@ -1155,6 +1187,10 @@ public:
    Output_halo_elements=true;
   }
 
+
+ /// Setup shared node scheme
+ void setup_shared_node_scheme();
+
  /// \short Total number of shared nodes in this Mesh
  unsigned nshared_node()
   {
@@ -1165,6 +1201,28 @@ public:
      n+=it->second.size();
     }
    return n;
+  }
+
+ /// \short Doc shared nodes
+ void doc_shared_nodes()
+  {
+   for (std::map<unsigned,Vector<Node*> >::iterator it=
+         Shared_node_pt.begin();it!=Shared_node_pt.end();it++)
+    {
+     unsigned n=it->second.size();
+     for (unsigned j=0;j<n;j++)
+      {
+       oomph_info << "Shared node with proc " << it->first << " ";
+       Node* nod_pt=it->second[j];
+       unsigned ndim=nod_pt->ndim();
+       for (unsigned i=0;i<ndim;i++)
+        {
+         oomph_info << nod_pt->x(i) << " ";
+        }
+       oomph_info << nod_pt->is_hanging() << " ";
+       oomph_info << j << " " << nod_pt << std::endl;
+      }
+    }
   }
 
  /// \short Number of shared nodes in this Mesh who have a counterpart
@@ -1180,6 +1238,8 @@ public:
   {
    return Shared_node_pt[p][j];
   }
+
+
 
  /// \short Add shared node whose counterpart is held 
  /// on processor p to the storage scheme for shared nodes.
@@ -1211,7 +1271,7 @@ public:
  // on different processes to the element for which they are the source
 
  /// \short Total number of external halo elements in this Mesh
- unsigned nexternal_halo_element()
+ unsigned nexternal_halo_element() 
   {
    unsigned n=0;
    for (std::map<unsigned,Vector<GeneralisedElement*> >::iterator it=
@@ -1243,11 +1303,12 @@ public:
  void add_external_halo_element_pt(const unsigned& p, 
                                    GeneralisedElement*& el_pt)
   {
+   el_pt->is_halo()=true;
    External_halo_element_pt[p].push_back(el_pt);
   }
 
  /// \short Total number of external haloed elements in this Mesh
- unsigned nexternal_haloed_element()
+ unsigned nexternal_haloed_element() 
   {
    unsigned n=0;
    for (std::map<unsigned,Vector<GeneralisedElement*> >::iterator it=
@@ -1261,7 +1322,7 @@ public:
 
  /// \short Number of external haloed elements in this Mesh whose non-halo
  /// counterpart is held on processor p.
- unsigned nexternal_haloed_element(const unsigned& p)
+ unsigned nexternal_haloed_element(const unsigned& p) 
   {
    return External_haloed_element_pt[p].size();
   }
@@ -1302,6 +1363,7 @@ public:
  /// is held on processor p to the storage scheme for halo nodes.
  void add_external_halo_node_pt(const unsigned& p, Node*& nod_pt)
   {
+   nod_pt->is_halo()=true;
    External_halo_node_pt[p].push_back(nod_pt);
   }
 
@@ -1313,8 +1375,16 @@ public:
    return External_halo_node_pt[p][j];
   }
 
+ /// Null out specified external halo node (used when deleting duplicates)
+ void null_external_halo_node(const unsigned& p, Node* nod_pt);
+
+ /// \short Consolidate external halo node storage by removing nulled out
+ /// pointes in external halo and haloed schemes
+ void remove_null_pointers_from_external_halo_node_storage(OomphCommunicator* 
+                                                           comm_pt);
+
  /// \short Total number of external haloed nodes in this Mesh
- unsigned nexternal_haloed_node()
+ unsigned nexternal_haloed_node() 
   {
    unsigned n=0;
    for (std::map<unsigned,Vector<Node*> >::iterator it=
@@ -1343,14 +1413,18 @@ public:
  /// is held on processor p to the storage scheme for haloed nodes.
  unsigned add_external_haloed_node_pt(const unsigned& p, Node*& nod_pt);
 
- /// \short Return the size of the External_halo(ed)_node_pt storage
- /// (which should always be the same as the number of processors used
- ///  by the communicator passed into Mesh::distribute(...))  This is
+ /// \short Return the set of processors that hold external halo nodes. This is
  /// required to avoid having to pass a communicator into the node_update 
  /// functions for Algebraic-based and MacroElement-based Meshes
- unsigned nexternal_halo_proc()
+ std::set<int> external_halo_proc()
   {
-   return External_halo_node_pt.size();
+   std::set<int> procs;
+   for (std::map<unsigned,Vector<Node*> >::iterator it=
+         External_halo_node_pt.begin();it!=External_halo_node_pt.end();it++)
+    {
+     procs.insert((*it).first);
+    }
+   return procs;
   }
 
 #endif 
@@ -1629,9 +1703,6 @@ class SolidMesh : public virtual Mesh
   Node* Node2_pt;
  };
  
-
-
-
 }
 
 #endif

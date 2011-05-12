@@ -25,5 +25,4 @@ adaptive_two_fluid_LDADD = -L@libdir@ \
                        $(EXTERNAL_LIBS) $(FLIBS)
 
 
-#EXTRA_DIST+=big_moving_block.mcr  check_navier_stokes_projection.mcr  \
-#            moving_block.mcr
+EXTRA_DIST+=fix_vol_int_elastic_elements.h 

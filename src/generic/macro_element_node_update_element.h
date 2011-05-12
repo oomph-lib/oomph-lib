@@ -449,9 +449,10 @@ class MacroElementNodeUpdateMesh : public virtual Mesh
 #ifdef OOMPH_HAS_MPI
    // Update positions for external halo nodes attached to this mesh
    // Loop over processors
-   int n_proc=nexternal_halo_proc();
-   for (int iproc=0;iproc<n_proc;iproc++)
+   for (std::map<unsigned,Vector<Node*> >::iterator it=
+         External_halo_node_pt.begin();it!=External_halo_node_pt.end();it++)
     {
+     int iproc=(*it).first;
      unsigned n_ext_halo_node=nexternal_halo_node(iproc);
      for (unsigned n=0;n<n_ext_halo_node;n++)
       {
@@ -482,11 +483,13 @@ class MacroElementNodeUpdateMesh : public virtual Mesh
  /// to macro elements that no longer exist
  void distribute(OomphCommunicator* comm_pt,
                  const Vector<unsigned>& element_domain,
+                 Vector<GeneralisedElement*>& deleted_element_pt,
                  DocInfo& doc_info,
                  const bool& report_stats)
   {
    // Call underlying Mesh::distribute first
-   Mesh::distribute(comm_pt,element_domain,doc_info,report_stats);
+   Mesh::distribute(comm_pt,element_domain,deleted_element_pt,
+                    doc_info,report_stats);
 
    // Storage for number of processors
    int n_proc=comm_pt->nproc();

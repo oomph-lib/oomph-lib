@@ -117,6 +117,17 @@ class Tree
    else {return Son_pt[son_index];}
   }
 
+
+ /// \short Set vector of pointers to sons, indexed by the
+ /// appropriate enum that identies son types. 
+ /// (To aid code readability specific enums have been defined for
+ /// specific trees. However, these are simply aliases for ints and
+ /// the general interface can be implemented once, here). 
+ void set_son_pt(const Vector<Tree*>& son_pt)
+  {
+   Son_pt=son_pt;
+  }
+
  /// Return number of sons (zero if it's a leaf node)
  unsigned nsons() const {return Son_pt.size();}
 
@@ -127,7 +138,7 @@ class Tree
   }
  
  /// Return pointer to root of the tree
- TreeRoot* root_pt() {return Root_pt;}
+ TreeRoot*& root_pt() {return Root_pt;}
  
  /// Return pointer to root of the tree (const version) 
  TreeRoot* root_pt() const {return Root_pt;}
@@ -213,7 +224,7 @@ class Tree
   public:
  
  /// Default value for an unassigned neighbour
- static int OMEGA;
+ static const int OMEGA;
 
   protected:
 

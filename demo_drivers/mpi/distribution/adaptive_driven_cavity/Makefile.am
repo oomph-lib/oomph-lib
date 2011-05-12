@@ -37,7 +37,7 @@ adaptive_driven_cavity_load_balance_LDADD = \
 
 EXTRA_DIST += adaptive_cavity_1_partition.dat \
               adaptive_cavity_2_partition.dat \
-              load_balance.mcr
+              load_balance.mcr prune_and_balance.mcr
 
 
 # Include path for library headers: All library headers live in 

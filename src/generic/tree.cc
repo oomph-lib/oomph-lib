@@ -50,7 +50,7 @@ namespace oomph
 /// This has to remain consistent with the enumerations in
 /// the Octree and Quadtree namespaces!
 //========================================================================
-int Tree::OMEGA=26;
+const int Tree::OMEGA=26;
 
 //========================================================================
 /// Maximum tolerance for neighbour finding (distance between points

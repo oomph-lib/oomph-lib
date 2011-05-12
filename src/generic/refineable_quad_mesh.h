@@ -28,6 +28,8 @@
 #ifndef QMESH2OOMPH_D_HEADER
 #define QMESH2OOMPH_D_HEADER
 
+#include<limits.h>
+
 #include "quad_mesh.h"
 #include "refineable_mesh.h"
 #include "refineable_quad_element.h"
@@ -89,6 +91,8 @@ public:
  /// as the root trees in the forest.
  void setup_quadtree_forest()
   {
+   // A forst pointer is setup at least once when the mesh is initially
+   // created in serial and stays around
    if (this->Forest_pt!=0)
     {
      // Get all the tree nodes
@@ -96,9 +100,44 @@ public:
      this->Forest_pt->stick_all_tree_nodes_into_vector(all_tree_nodes_pt);
 
      // Get min and max refinement level from the tree
-     unsigned min_ref;
-     unsigned max_ref;
-     this->get_refinement_levels(min_ref,max_ref);
+     unsigned local_min_ref=0;
+     unsigned local_max_ref=0;
+     this->get_refinement_levels(local_min_ref,local_max_ref);
+     
+#ifdef OOMPH_HAS_MPI
+
+     // Reconcile between processors: If (e.g. following distribution/pruning)
+     // the mesh has no elements on this processor) then ignore its
+     // contribution to the poll of max/min refinement levels
+     int int_local_min_ref=local_min_ref;
+
+     if (this->nelement()==0)
+      {
+       int_local_min_ref=INT_MAX;
+      }
+
+   
+     oomph_info 
+      << "hierher Warning: Using MPI_Helpers::Communicator_pt in mesh\n";
+     int int_min_ref=0;
+     MPI_Allreduce(&int_local_min_ref,&int_min_ref,1,
+                   MPI_INT,MPI_MIN,
+                   MPI_Helpers::communicator_pt()->mpi_comm());
+
+     unsigned min_ref=unsigned(int_min_ref);
+
+#else
+
+     unsigned min_ref=local_min_ref;
+
+#endif
+
+     // If we have no elements there's nothing more to be done --
+     // we only came in here to participate in the communication
+     if (this->nelement()==0)
+      {
+       return;
+      }
 
      // Vector to store trees for new Forest
      Vector<TreeRoot*> trees_pt;
@@ -117,7 +156,7 @@ public:
          RefineableElement* el_pt=dynamic_cast<RefineableElement*>
           (tree_pt->object_pt());
          unsigned level=el_pt->refinement_level();
-
+         
          // If we are below the minimum refinement level, remove tree
          if (level<min_ref)
           {
@@ -140,18 +179,40 @@ public:
              backed_up_sons[i_son]=tree_pt->son_pt(i_son);
             }
 
-           // Make the element into a new treeroot
+           // Make the element into a new tree-root
            QuadTreeRoot* tree_root_pt=new QuadTreeRoot(el_pt);
+
+           // Pass sons
+           tree_root_pt->set_son_pt(backed_up_sons);
 
            // Loop over sons and make the new treeroot their father
            for (unsigned i_son=0;i_son<n_sons;i_son++)
             {
              Tree* son_pt=backed_up_sons[i_son];
-             son_pt->set_father_pt(tree_root_pt);
-            }
 
-           // Add treeroot to the trees_pt vector
+             // Tell the son about its new father (which is also the root)
+             son_pt->set_father_pt(tree_root_pt);
+             son_pt->root_pt()=tree_root_pt;
+
+             // ...and then tell all the descendants too
+             Vector<Tree*> all_sons_pt;
+             son_pt->stick_all_tree_nodes_into_vector(all_sons_pt);
+             unsigned n=all_sons_pt.size();
+             for (unsigned i=0;i<n;i++)
+              {
+               all_sons_pt[i]->root_pt()=tree_root_pt;
+              }
+            }
+           
+           // Add tree-root to the trees_pt vector
            trees_pt.push_back(tree_root_pt);
+
+           // Now kill the original (non-root) tree: First
+           // flush sons for this tree
+           tree_pt->flush_sons();
+
+           // ...then delete the tree (no recursion)
+           delete tree_pt;
           }
 
         }

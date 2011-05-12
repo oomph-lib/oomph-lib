@@ -177,7 +177,7 @@ mkdir RESLT_MULTI
 # the existence of the new directory
 sleep 5
 
-$MPI_RUN_COMMAND ../multi_domain_ref_b_convection validate > OUTPUT_multi_domain_ref_b_convection
+$MPI_RUN_COMMAND  ../multi_domain_ref_b_convection validate > OUTPUT_multi_domain_ref_b_convection
 echo "done"
 echo " " >> validation.log
 echo "Refineable Boussinesq convection (multi-domain) validation" >> validation.log
@@ -191,6 +191,10 @@ cat RESLT_MULTI/fluid_soln0_on_proc0.dat RESLT_MULTI/fluid_soln0_on_proc1.dat \
     RESLT_MULTI/fluid_soln1_on_proc0.dat RESLT_MULTI/fluid_soln1_on_proc1.dat \
     RESLT_MULTI/temperature_soln0_on_proc0.dat RESLT_MULTI/temperature_soln0_on_proc1.dat \
     RESLT_MULTI/temperature_soln1_on_proc0.dat RESLT_MULTI/temperature_soln1_on_proc1.dat \
+    RESLT_MULTI/temperature_soln2_on_proc0.dat RESLT_MULTI/temperature_soln2_on_proc1.dat \
+    RESLT_MULTI/temperature_soln3_on_proc0.dat RESLT_MULTI/temperature_soln3_on_proc1.dat \
+    RESLT_MULTI/temperature_soln4_on_proc0.dat RESLT_MULTI/temperature_soln4_on_proc1.dat \
+    RESLT_MULTI/temperature_soln5_on_proc0.dat RESLT_MULTI/temperature_soln5_on_proc1.dat \
     > multi_domain_ref_b_convection_results.dat
 
 if test "$1" = "no_fpdiff"; then

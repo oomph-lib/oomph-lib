@@ -1776,9 +1776,10 @@ class BoundaryNodeBase
       << "Pointer must be set via call to: \n\n"
       << "  BoundaryNode::index_of_first_value_assigned_by_face_element_pt(), \n\n" 
       << "typically from FaceElement::add_additional_values(...).";
-      throw OomphLibError(error_message.str(),
-                          "BoundaryNode::index_of_first_value_assigned_by_face_element()",
-                          OOMPH_EXCEPTION_LOCATION);
+     throw OomphLibError(error_message.str(),
+                         "BoundaryNode::index_of_first_value_assigned_by_face_element()",
+                         OOMPH_EXCEPTION_LOCATION);
+     return UINT_MAX;
     }
 #endif
    return (*Index_of_first_value_assigned_by_face_element_pt)[face_id];

@@ -85,6 +85,9 @@ public:
  /// Update the problem specs befor solve (also empty)
  void actions_before_newton_solve() {}
 
+ /// hierher kill
+ void actions_before_adapt() {oomph_info << "Min/max about to adapt\n";}
+
  /// \short Overloaded version of the problem's access function to 
  /// the mesh. Recasts the pointer to the base Mesh object to 
  /// the actual mesh type.
@@ -163,6 +166,18 @@ template<class ELEMENT>
 void RefineableFishPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 { 
 
+ unsigned min_refinement_level=0;
+ unsigned max_refinement_level=0;
+ mesh_pt()->get_refinement_levels(min_refinement_level,
+                                  max_refinement_level);
+
+ oomph_info << "Min/max actual and max/min allowed refinement level" 
+            << min_refinement_level << " " 
+            << max_refinement_level << " "
+            << mesh_pt()->min_refinement_level() << " "
+            << mesh_pt()->max_refinement_level() << "\n";
+
+
  ofstream some_file;
  char filename[100];
 
@@ -175,6 +190,11 @@ void RefineableFishPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
          doc_info.number(),this->communicator_pt()->my_rank());
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
+ some_file << "TEXT X=25,Y=93,F=HELV,HU=POINT,C=BLUE,H=10,T=\"" 
+           << doc_info.label() << "; Min/max: "
+           << min_refinement_level << " " 
+           << max_refinement_level << " "
+           << "\"" << std::endl; 
  some_file.close();
  
 } // end of doc
@@ -193,6 +213,8 @@ void RefineableFishPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 void solve_with_incremental_adaptation()
 {
  
+ oomph_info << "Min/max about to start incremental\n";
+
  //Set up the problem with nine-node refineable Poisson elements
  RefineableFishPoissonProblem<RefineableQPoissonElement<2,3> > problem;
  
@@ -220,6 +242,7 @@ void solve_with_incremental_adaptation()
  problem.newton_solve();
   
  //Output solution
+ doc_info.label()="initial";
  problem.doc_solution(doc_info);
  
  //Increment counter for solutions 
@@ -266,6 +289,7 @@ void solve_with_incremental_adaptation()
    problem.newton_solve();
  
    //Output solution
+   doc_info.label()="after first solve after distribution and uniform refinement";
    problem.doc_solution(doc_info);
  
    //Increment counter for solutions 
@@ -319,6 +343,7 @@ void solve_with_incremental_adaptation()
     }
    
    //Output solution
+   doc_info.label()="solve after adapt";
    problem.doc_solution(doc_info);
    
    //Increment counter for solutions 
@@ -329,18 +354,21 @@ void solve_with_incremental_adaptation()
  for(unsigned myn=0;myn<10;myn++)
   {
    // Test the unrefine_uniformly command and re-solve
-   //--------------------------------------------------------
+   //-------------------------------------------------
    problem.unrefine_uniformly();
  
    // Solve the problem 
    problem.newton_solve();
  
    //Output solution
+   doc_info.label()="solve after uniform unrefinement";
    problem.doc_solution(doc_info);
  
    //Increment counter for solutions 
    doc_info.number()++;
   }
+
+ oomph_info << "Min/max end incremental\n";
 
 } // end of incremental
 

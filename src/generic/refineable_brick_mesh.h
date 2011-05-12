@@ -34,6 +34,8 @@
   #include <oomph-lib-config.h>
 #endif
 
+#include<limits.h>
+
 
 // ooomph-lib includes
 #include "brick_mesh.h"
@@ -102,9 +104,46 @@ public:
      this->Forest_pt->stick_all_tree_nodes_into_vector(all_tree_nodes_pt);
 
      // Get min and max refinement level from the tree
-     unsigned min_ref;
-     unsigned max_ref;
-     this->get_refinement_levels(min_ref,max_ref);
+     unsigned local_min_ref=0;
+     unsigned local_max_ref=0;
+     this->get_refinement_levels(local_min_ref,local_max_ref);
+
+#ifdef OOMPH_HAS_MPI
+
+     // Reconcile between processors: If (e.g. following distribution/pruning)
+     // the mesh has no elements on this processor) then ignore its
+     // contribution to the poll of max/min refinement levels
+     int int_local_min_ref=local_min_ref;
+
+     if (this->nelement()==0)
+      {
+       int_local_min_ref=INT_MAX;
+      }
+
+
+     oomph_info 
+      << "hierher Warning: Using MPI_Helpers::Communicator_pt in mesh\n";
+
+     int int_min_ref=0;
+     MPI_Allreduce(&int_local_min_ref,&int_min_ref,1,
+                   MPI_INT,MPI_MIN,
+                   MPI_Helpers::communicator_pt()->mpi_comm());
+
+     unsigned min_ref=int_min_ref;
+
+#else
+
+     unsigned min_ref=local_min_ref;
+
+#endif
+   
+     // If we have no elements there's nothing more to be done --
+     // we only came in here to participate in the communication
+     if (this->nelement()==0)
+      {
+       return;
+      }
+
 
      // Vector to store trees for new Forest
      Vector<TreeRoot*> trees_pt;

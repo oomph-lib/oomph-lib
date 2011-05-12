@@ -195,6 +195,28 @@ namespace oomph
  }
 
 
+
+ //=================================================================
+ /// Sort the sampling points in the specified bin by distance from 
+ /// sampling point
+ //=================================================================
+ void MeshAsGeomObject::sort_the_bin(
+  const Vector<double>& zeta,
+  Vector<std::pair<FiniteElement*,Vector<double> > >& sample_point_pairs)
+ {
+
+  // Set current zeta coordinate
+  Multi_domain_functions::Zeta_coords_for_further_away_comparison=zeta;
+
+  // Sort the bin
+  std::sort(sample_point_pairs.begin(),
+            sample_point_pairs.end(),
+            Multi_domain_functions::first_closer_than_second);
+
+ }
+
+
+
 //========================================================================
 /// \short Find the sub geometric object and local coordinate therein that
 /// corresponds to the intrinsic coordinate zeta. If sub_geom_object_pt=0
@@ -287,6 +309,12 @@ namespace oomph
        // Don't do anything if this bin has no sample points
        if (n_sample>0)
         {
+         // Sort the bin if required
+         if (Multi_domain_functions::Sort_bin_entries)
+          {
+           sort_the_bin(zeta,Bin_object_coord_pairs[neighbour_bin[i_nbr]]);
+          }
+
          for (unsigned i_sam=0;i_sam<n_sample;i_sam++)
           {
            // Get the element
@@ -362,6 +390,12 @@ namespace oomph
          // Don't do anything if this bin has no sample points
          if (n_sample>0)
           {
+           // Sort the bin if required
+           if (Multi_domain_functions::Sort_bin_entries)
+            {
+             sort_the_bin(zeta,Bin_object_coord_pairs[neighbour_bin[i_nbr]]);
+            }
+
            for (unsigned i_sam=0;i_sam<n_sample;i_sam++)
             {
              // Get the element

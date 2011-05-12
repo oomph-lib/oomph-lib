@@ -510,9 +510,6 @@ TurekProblem(const double &length,
  // and specify the velocity of the fluid nodes based on the wall motion
  if (!Global_Parameters::Ignore_fluid_loading)
   {
-   // Only remove duplicates after the final call
-   Multi_domain_functions::Check_for_duplicates=false;
-
    // Work out which fluid dofs affect the residuals of the wall elements:
    // We pass the boundary between the fluid and solid meshes and 
    // pointers to the meshes. The interaction boundary are boundaries 5,6,7
@@ -522,9 +519,6 @@ TurekProblem(const double &length,
    
    FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
     (this,6,Fluid_mesh_pt,Traction_mesh_pt[2]);
-
-   // Now remove duplicates
-   Multi_domain_functions::Check_for_duplicates=true;
 
    FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
     (this,7,Fluid_mesh_pt,Traction_mesh_pt[1]); 
@@ -1057,18 +1051,12 @@ const bool& called_from_adapt)
  // and specify the velocity of the fluid nodes based on the wall motion
  if (!Global_Parameters::Ignore_fluid_loading)
   {
-   // Only remove duplicates after the final call
-   Multi_domain_functions::Check_for_duplicates=false;
-
    // Re-setup the fluid load information for fsi solid traction elements
    FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
     (this,5,Fluid_mesh_pt,Traction_mesh_pt[0]); 
 
    FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
     (this,6,Fluid_mesh_pt,Traction_mesh_pt[2]); 
-
-   // Now remove duplicates
-   Multi_domain_functions::Check_for_duplicates=true;
 
    FSI_functions::setup_fluid_load_info_for_solid_elements<FLUID_ELEMENT,2>
     (this,7,Fluid_mesh_pt,Traction_mesh_pt[1]); 

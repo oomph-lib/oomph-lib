@@ -675,6 +675,7 @@ namespace FSI_functions
    Mesh* const &solid_mesh_pt,
    const unsigned& face=0)
   {
+
    // Create a face mesh adjacent to the fluid mesh's b-th boundary. 
    // The face mesh consists of FaceElements that may also be 
    // interpreted as GeomObjects
@@ -846,9 +847,11 @@ void doc_fsi(Mesh* fluid_mesh_pt,
 
 #ifdef OOMPH_HAS_MPI
  // External halo elements must also be included in this check
- unsigned n_proc=fluid_mesh_pt->nexternal_halo_proc();
- for (unsigned d=0;d<n_proc;d++)
+ std::set<int> procs=fluid_mesh_pt->external_halo_proc();
+ for (std::set<int>::iterator it=procs.begin();
+      it!=procs.end();it++)
   {
+   unsigned d=unsigned((*it));
    unsigned n_ext_halo_f=fluid_mesh_pt->nexternal_halo_element(d);
    for (unsigned e=0;e<n_ext_halo_f;e++)
     {
@@ -1002,8 +1005,6 @@ void doc_fsi(Mesh* fluid_mesh_pt,
        Node* node_pt=dynamic_cast<Node*>(unique_data_pt);
        if (node_pt==0)
         {
-         //oomph_info << "Is not a node: Repeats:" << it->second;
-
          // Is it a solid node? NOTE: This query makes sense as we're
          //----------------------------------------------------------
          // checking for the SolidNode's *positional* Data, not for
@@ -1012,7 +1013,6 @@ void doc_fsi(Mesh* fluid_mesh_pt,
          //----------------------
          if (solid_node_pt[unique_data_pt]!=0)
           {
-           //oomph_info << "... it's a solid node! " ;
            some_file << "TEXT " ;
            for (unsigned j=0;j<ndim_eulerian;j++)
             {
@@ -1028,7 +1028,6 @@ void doc_fsi(Mesh* fluid_mesh_pt,
          //---------------------------------------------------
          else if (internal_data_element_pt[unique_data_pt]!=0)
           {
-           //oomph_info << "... it's internal (pressure) Data! " ;
            if (!element_internal_data_has_been_plotted[
                 internal_data_element_pt[unique_data_pt]])
             {
@@ -1081,7 +1080,6 @@ void doc_fsi(Mesh* fluid_mesh_pt,
        //-----------------------
        else
         {
-         //oomph_info << "Is a node: Repeats:"  << it->second << std::endl;
          some_file << "TEXT " ;
          for (unsigned j=0;j<ndim_eulerian;j++)
           {
@@ -1161,7 +1159,6 @@ void doc_fsi(Mesh* fluid_mesh_pt,
      // Is it a solid node?
      if (solid_node_pt[unique_data_pt]!=0)
       {
-       //oomph_info << "Fluid node is affected by solid node! " ;
        some_file << "TEXT " ;
        for (unsigned j=0;j<ndim_eulerian;j++)
         {

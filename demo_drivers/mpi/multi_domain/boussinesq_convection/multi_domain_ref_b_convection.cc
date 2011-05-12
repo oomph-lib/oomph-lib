@@ -477,6 +477,8 @@ void RefineableConvectionProblem<NST_ELEMENT,AD_ELEMENT>::doc_solution()
  // Number of plot points: npts x npts
  unsigned npts=5;
 
+ Doc_info.label()="";
+
  // Output Navier-Stokes solution
  sprintf(filename,"%s/fluid_soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
          Doc_info.number(),this->communicator_pt()->my_rank());
@@ -491,6 +493,16 @@ void RefineableConvectionProblem<NST_ELEMENT,AD_ELEMENT>::doc_solution()
  some_file.open(filename);
  adv_diff_mesh_pt()->output(some_file,npts);
  some_file.close();
+
+ /// Doc the mesh distribution
+ Doc_info.label()="temperature_";
+ adv_diff_mesh_pt()->doc_mesh_distribution(this->communicator_pt(),Doc_info);
+ 
+ /// Doc the mesh distribution
+ Doc_info.label()="fluid_";
+ nst_mesh_pt()->doc_mesh_distribution(this->communicator_pt(),Doc_info);
+ 
+
 
  Doc_info.number()++;
 
@@ -507,6 +519,18 @@ int main(int argc, char **argv)
 #ifdef OOMPH_HAS_MPI
  MPI_Helpers::init(argc,argv);
 #endif
+
+  // Switch off output modifier
+ oomph_info.output_modifier_pt() = &default_output_modifier;
+
+ // Define processor-labeled output file for all on-screen stuff
+ std::ofstream output_stream;
+ char filename[100];
+ sprintf(filename,"OUTPUT.%i",MPI_Helpers::communicator_pt()->my_rank());
+ output_stream.open(filename);
+ oomph_info.stream_pt() = &output_stream;
+ OomphLibWarning::set_stream_pt(&output_stream);
+ OomphLibError::set_stream_pt(&output_stream);   
 
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
@@ -545,26 +569,29 @@ int main(int argc, char **argv)
   }
  else
   {
-   // Command line argument(s), so read in partition from file
-   std::ifstream input_file;
-   std::ofstream output_file;
-   char filename[100];
-
-   // Get distribution from file
+   // Make up some distribution in which both meshes get some elements
    unsigned n_element=problem.mesh_pt()->nelement();
    Vector<unsigned> element_partition(n_element);
-   sprintf(filename,"multi_domain_ref_b_partition.dat");
-   input_file.open(filename);
    std::string input_string;
    for (unsigned e=0;e<n_element;e++)
     {
-     getline(input_file,input_string,'\n');
-     element_partition[e]=atoi(input_string.c_str());
+     
+     unsigned target_part=0;
+     if ( (e<unsigned(0.25*double(n_element))) ||
+          ( (e>unsigned(0.5*double(n_element))) &&
+            (e<unsigned(0.75*double(n_element))) ) )
+      {
+       target_part=1;
+      }
+     element_partition[e]=target_part;
     }
    problem.distribute(element_partition,mesh_doc_info,report_stats);
   }
 #endif
 
+ //Document the solution
+ problem.doc_solution();
+ 
  //Solve the problem with (up to) two levels of adaptation
  problem.newton_solve(2);
  
@@ -578,6 +605,19 @@ int main(int argc, char **argv)
  // the perturbation
  problem.use_imperfection() = false;
  problem.newton_solve(2);
+ problem.doc_solution();
+
+ // Refine unformly to give us something to prune
+ oomph_info << "About to refine uniformly\n";
+ problem.refine_uniformly();
+ problem.doc_solution();
+
+ oomph_info << "About to prune\n";
+ problem.prune_halo_elements_and_nodes();
+ problem.doc_solution();
+
+ oomph_info << "About to solve again\n";
+ problem.newton_solve(1);
  problem.doc_solution();
 
 #ifdef OOMPH_HAS_MPI

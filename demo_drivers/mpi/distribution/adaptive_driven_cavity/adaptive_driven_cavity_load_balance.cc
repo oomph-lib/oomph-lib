@@ -126,22 +126,48 @@ public:
      if (mesh_pt()->finite_element_pt(e)->node_pt(0)->x(0)==0.0 && 
          mesh_pt()->finite_element_pt(e)->node_pt(0)->x(1)==0.0) // 2d problem
       {
-       oomph_info << "I'm fixing the pressure " << std::endl;
        // Fix the pressure in element e at pdof=0 to 0.0
        unsigned pdof=0;
        fix_pressure(e,pdof,0.0);
       }
     }
 
+   // Set the boundary conditions for this problem: All nodes are
+   // free by default -- just pin the ones that have Dirichlet conditions
+   // here: All boundaries are Dirichlet boundaries.
+   unsigned num_bound = mesh_pt()->nboundary();
+   for(unsigned ibound=0;ibound<num_bound;ibound++)
+    {
+     unsigned num_nod= mesh_pt()->nboundary_node(ibound);
+     for (unsigned inod=0;inod<num_nod;inod++)
+      {
+       // Loop over values (u and v velocities)
+       for (unsigned i=0;i<2;i++)
+        {
+         mesh_pt()->boundary_node_pt(ibound,inod)->pin(i); 
+        }
+      }
+    } // end loop over boundaries
+   
   } // end_of_actions_after_adapt
+
+ /// hierher I think we need this because of pinning in load balance
+ void actions_after_distribute()
+  {
+   // hierher tidy up by calling separate fct.
+   actions_after_adapt();
+  }
 
  /// Build the mesh
  void build_mesh();
 
  /// Doc the solution
- void doc_solution(DocInfo& doc_info);
-  
+ void doc_solution(const std::string& header);
+
 private:
+
+ /// Doc info object
+ DocInfo Doc_info;
 
  ///Fix pressure in element e at pressure dof pdof and set to pvalue
  void fix_pressure(const unsigned &e, const unsigned &pdof, 
@@ -163,6 +189,10 @@ private:
 template<class ELEMENT>
 RefineableDrivenCavityProblem<ELEMENT>::RefineableDrivenCavityProblem()
 { 
+
+ // Set output directory
+ Doc_info.set_directory("RESLT_LOAD_BALANCE");
+
  // Build the mesh
  build_mesh();
 
@@ -202,6 +232,13 @@ void RefineableDrivenCavityProblem<ELEMENT>::build_mesh()
  dynamic_cast<RefineableRectangularQuadMesh<ELEMENT>*>(mesh_pt())->
   spatial_error_estimator_pt()=error_estimator_pt;
  
+ // Fine tune error targets to get "interesting" refinement pattern
+ dynamic_cast<RefineableRectangularQuadMesh<ELEMENT>*>(mesh_pt())->
+  max_permitted_error()=1.0e-5;
+ 
+ dynamic_cast<RefineableRectangularQuadMesh<ELEMENT>*>(mesh_pt())->
+  min_permitted_error()=1.0e-6;
+ 
  // Set the boundary conditions for this problem: All nodes are
  // free by default -- just pin the ones that have Dirichlet conditions
  // here: All boundaries are Dirichlet boundaries.
@@ -229,7 +266,7 @@ void RefineableDrivenCavityProblem<ELEMENT>::build_mesh()
   {
    // Upcast from GeneralisedElement to the present element
    ELEMENT* el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(e));
-   //Set the Reynolds number, etc
+   //Set the Reynolds number
    el_pt->re_pt() = &Global_Physical_Variables::Re;
   } // end loop over elements
  
@@ -247,10 +284,12 @@ void RefineableDrivenCavityProblem<ELEMENT>::build_mesh()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
+void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(
+ const std::string& header)
 { 
 
  ofstream some_file;
+ ofstream some_file2;
  char filename[100];
 
  // Number of plot points
@@ -258,16 +297,106 @@ void RefineableDrivenCavityProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
  // Get current process rank
  int my_rank=this->communicator_pt()->my_rank();
-
+ 
  // Output solution 
- sprintf(filename,"%s/soln%i_on_proc%i.dat",doc_info.directory().c_str(),
-         doc_info.number(),my_rank);
+ sprintf(filename,"%s/soln%i_on_proc%i.dat",Doc_info.directory().c_str(),
+         Doc_info.number(),my_rank);
  some_file.open(filename);
  mesh_pt()->output(some_file,npts);
+ some_file << "TEXT X=25,Y=93,F=HELV,HU=POINT,C=BLUE,H=26,T=\"" 
+           << header << "\"" << std::endl; 
+ some_file.close();
+
+
+ // Output solution 
+ sprintf(filename,"%s/soln_with_haloes%i_on_proc%i.dat",
+         Doc_info.directory().c_str(),
+         Doc_info.number(),my_rank);
+ some_file.open(filename);
+ mesh_pt()->enable_output_of_halo_elements();
+ mesh_pt()->output(some_file,npts);
+ some_file << "TEXT X=25,Y=93,F=HELV,HU=POINT,C=BLUE,H=26,T=\"" 
+           << header << "\"" << std::endl; 
+ mesh_pt()->disable_output_of_halo_elements();
  some_file.close();
  
- doc_info.number()++;
+// Output mesh distribution
+ mesh_pt()->doc_mesh_distribution(this->communicator_pt(),
+                                  Doc_info);
 
+ // Output boundaries
+ sprintf(filename,"%s/boundaries%i_on_proc%i.dat",
+         Doc_info.directory().c_str(),
+         Doc_info.number(),my_rank);
+ some_file.open(filename);
+ mesh_pt()->output_boundaries(some_file);
+ some_file << "TEXT X=25,Y=93,F=HELV,HU=POINT,C=BLUE,H=26,T=\"" 
+           << header << "\"" << std::endl; 
+ some_file.close();
+
+
+ {
+  unsigned count_non_halo=0;
+  unsigned nel=mesh_pt()->nelement();
+  for (unsigned e=0;e<nel;e++)
+   {
+    if (!(mesh_pt()->element_pt(e)->is_halo())) count_non_halo++;
+   }
+  unsigned total_count_non_halo=0;
+  MPI_Allreduce(&count_non_halo,&total_count_non_halo,1,MPI_UNSIGNED,MPI_SUM,
+                communicator_pt()->mpi_comm());
+  
+  oomph_info << "Number of non halo elements: " 
+             << total_count_non_halo << " " 
+             << count_non_halo << "\n"; 
+ }
+ 
+ {
+  
+  sprintf(filename,"%s/soln_non_halo_nodes%i_on_proc%i.dat",
+          Doc_info.directory().c_str(),
+          Doc_info.number(),my_rank);
+  some_file.open(filename);
+  
+  sprintf(filename,"%s/ndof%i_on_proc%i.dat",
+          Doc_info.directory().c_str(),
+          Doc_info.number(),my_rank);
+  some_file2.open(filename);
+  unsigned count_non_halo=0;
+  unsigned nnod=mesh_pt()->nnode();
+  for (unsigned j=0;j<nnod;j++)
+   {
+    Node* nod_pt=mesh_pt()->node_pt(j);
+    if (!(nod_pt->is_halo()))
+     {
+      count_non_halo++;
+      some_file << nod_pt->x(0) << " " 
+                << nod_pt->x(1) << "\n"; 
+      unsigned nval=nod_pt->nvalue();
+      unsigned cnt=0;
+      for (unsigned i=0;i<nval;i++)
+       {
+        if (!(nod_pt->is_pinned(i))) cnt++;
+       }
+      some_file2 << nod_pt->x(0) << " " 
+                 << nod_pt->x(1) << " " 
+                 << cnt << "\n"; 
+     }
+   }
+  some_file2.close();
+  some_file.close();
+  unsigned total_count_non_halo=0;
+  MPI_Allreduce(&count_non_halo,&total_count_non_halo,1,MPI_UNSIGNED,MPI_SUM,
+                communicator_pt()->mpi_comm());
+  
+  oomph_info << "Number of non halo nodes: " 
+             << total_count_non_halo << " " 
+             << count_non_halo << "\n"; 
+ }
+ 
+ 
+ Doc_info.number()++;
+ 
 } // end_of_doc_solution
 
 
@@ -286,234 +415,136 @@ int main(int argc, char **argv)
 
 #endif
 
+  // Switch off output modifier
+ oomph_info.output_modifier_pt() = &default_output_modifier;
+
+ // Define processor-labeled output file for all on-screen stuff
+ std::ofstream output_stream;
+ char filename[100];
+ sprintf(filename,"OUTPUT.%i",MPI_Helpers::communicator_pt()->my_rank());
+ output_stream.open(filename);
+ oomph_info.stream_pt() = &output_stream;
+ OomphLibWarning::set_stream_pt(&output_stream);
+ OomphLibError::set_stream_pt(&output_stream);   
+
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
-
- // Set output directory
- DocInfo doc_info;
- doc_info.set_directory("RESLT_LOAD_BALANCE");
-
- // Solve problem with Taylor Hood elements
- //---------------------------------------
- {
-  //Build problem
-  RefineableDrivenCavityProblem<RefineableQTaylorHoodElement<2> > problem;
-
-  //Are there command-line arguments?
-  if (CommandLineArgs::Argc==1)
-   {
-
-#ifdef OOMPH_HAS_MPI
-
-    // Provide storage for each element's partition number
-    const unsigned n_element=problem.mesh_pt()->nelement();
-    Vector<unsigned> out_element_partition(n_element);
-
-    // Distribute the problem
-    bool report_stats=true;
-    out_element_partition=problem.distribute(report_stats);
-
-    // Write partition to disk
-    std::ofstream output_file;
-    char filename[100];
-    sprintf(filename,"out_adaptive_cavity_1_partition.dat");
-    output_file.open(filename);
-    for (unsigned e=0;e<n_element;e++)
-     {
-      output_file << out_element_partition[e] << std::endl;
-     }
-
-    // Check halo schemes (optional)
-    problem.check_halo_schemes(doc_info);
-
-#endif
-
-    // Doc initial mesh
-    problem.doc_solution(doc_info);
-
-    // Solve the problem with automatic adaptation for two steps
-    problem.newton_solve(2);
-
-    //Output solution
-    oomph_info << "Outputting before load balance: " << doc_info.number() 
-               << std::endl;
-    problem.doc_solution(doc_info);
-
-    // Balance the load of the problem
-    problem.load_balance();
-
-    //Output solution
-    oomph_info << "Outputting after load balance: " << doc_info.number() 
-               << std::endl;
-    problem.doc_solution(doc_info);
-
-    // Solve the problem again with automatic adaptation for one further step
-    problem.newton_solve(1);
-  
-    //Output solution
-    problem.doc_solution(doc_info);
-
-   } 
-  // Validation run - read in partition from file
-  else 
-   {
-
-#ifdef OOMPH_HAS_MPI
-
-    // DocInfo object specifies directory in which we document
-    // the distribution
-    DocInfo mesh_doc_info;
-    mesh_doc_info.set_directory("RESLT_TH_MESH");
-
-    // Create storage for pre-determined partitioning
-    const unsigned n_element=problem.mesh_pt()->nelement();
-    Vector<unsigned> element_partition(n_element);
-
-    // Read in partitioning from disk
-    std::ifstream input_file;
-    char filename[100];
-    sprintf(filename,"adaptive_cavity_1_partition.dat");
-    input_file.open(filename);
-    std::string input_string;
-    for (unsigned e=0;e<n_element;e++)
-     {
-      getline(input_file,input_string,'\n');
-      element_partition[e]=atoi(input_string.c_str());
-     }
-
-    // Now perform the distribution and document it
-    bool report_stats=true;
-    problem.distribute(element_partition,mesh_doc_info,report_stats);
-
-    // This is a validation run: use the default partition when load balancing
-    problem.use_default_partition_in_load_balance()=true;
-
-#endif
-
-    // Solve the problem with automatic adaptation for two steps
-    problem.newton_solve(2);
-
-    // Balance the load of the problem
-    problem.load_balance(mesh_doc_info,report_stats);
-
-    // Solve the problem again with automatic adaptation for one further step
-    problem.newton_solve(1);
-  
-    //Output solution
-    problem.doc_solution(doc_info);
-
-#ifdef OOMPH_HAS_MPI
-
-    problem.mesh_pt()->doc_mesh_distribution(problem.communicator_pt(),
-                                             mesh_doc_info);
-#endif
-   }
-
- } // end of Taylor Hood elements
+ 
+ //Build problem
+ RefineableDrivenCavityProblem<RefineableQTaylorHoodElement<2> > problem;
  
 
- // Solve problem with Crouzeix Raviart elements
- //--------------------------------------------
- {
-  // Build problem
-  RefineableDrivenCavityProblem<RefineableQCrouzeixRaviartElement<2> > problem;
+ // Tell us what you're doing
+ bool report_stats=true;
 
-  //Are there command-line arguments?
-  if (CommandLineArgs::Argc==1)
-   {
-#ifdef OOMPH_HAS_MPI
-    // Distribute the problem
-    problem.distribute();
-
-    // Check halo schemes (optional)
-    problem.check_halo_schemes(doc_info);
-#endif
-
-    // Doc initial mesh
-    problem.doc_solution(doc_info);
-
-    // Solve the problem with automatic adaptation for two steps
-    problem.newton_solve(2);
-
-    //Output solution
-    oomph_info << "Outputting before load balance: " << doc_info.number() 
-               << std::endl;
-    problem.doc_solution(doc_info);
-
-    // Balance the load of the problem
-    problem.load_balance();
-
-    //Output solution
-    oomph_info << "Outputting after load balance: " << doc_info.number() 
-               << std::endl;
-    problem.doc_solution(doc_info);
-
-    // Solve the problem again with automatic adaptation for one further step
-    problem.newton_solve(1);
+ //Are there command-line arguments?
+ if (CommandLineArgs::Argc==1)
+  {
+   // Just distribute
+   problem.distribute(report_stats);
+  }
+ else
+  {    
+   // Make up some distribution
+   unsigned n_element=problem.mesh_pt()->nelement();
+   Vector<unsigned> element_partition(n_element);
+   std::string input_string;
+   for (unsigned e=0;e<n_element;e++)
+    {
+     unsigned target_part=0;
+     if ( (e<unsigned(0.25*double(n_element))) ||
+          ( (e>unsigned(0.5*double(n_element))) &&
+            (e<unsigned(0.75*double(n_element))) ) )
+      {
+       target_part=1;
+      }
+     element_partition[e]=target_part;
+    }
+   problem.distribute(element_partition,report_stats);
+   
+   // This is a validation run: use the default partition when load balancing
+   problem.use_default_partition_in_load_balance()=true;    
+  }
+ 
+ //Output initial mesh
+ problem.doc_solution("Initial mesh");
+ 
+ // Solve the problem with automatic adaptation
+ problem.newton_solve(1);
+ 
+ //Output solution
+ problem.doc_solution("First adapted solution");
+ 
+ // Prune
+ problem.prune_halo_elements_and_nodes(report_stats);
+ 
+ //Output solution
+ problem.doc_solution("After first prune");
+ 
+ // Solve the problem again with automatic adaptation 
+ problem.newton_solve(1);
+ 
+ //Output solution
+ problem.doc_solution("Second adapted solution after pruning");
+ 
+ // Do load balancing
+ problem.load_balance(report_stats);
   
-    //Output solution
-    problem.doc_solution(doc_info);
-   } // end of no command-line arguments
-  else // Validation run - read in partition from file
-   {
+ //Output solution
+ problem.doc_solution("After load balancing");
 
-#ifdef OOMPH_HAS_MPI
-
-    DocInfo mesh_doc_info;
-    mesh_doc_info.set_directory("RESLT_CR_MESH");
-    mesh_doc_info.number()=0;
-    std::ifstream input_file;
-    char filename[100];
-
-    // Get the partition to be used from file
-    const unsigned n_element=problem.mesh_pt()->nelement();
-    Vector<unsigned> element_partition(n_element);
-    sprintf(filename,"adaptive_cavity_2_partition.dat");
-    input_file.open(filename);
-    std::string input_string;
-    for (unsigned e=0;e<n_element;e++)
-     {
-      getline(input_file,input_string,'\n');
-      element_partition[e]=atoi(input_string.c_str());
-     }
-
-    // Now perform the distribution
-    bool report_stats=true;
-    problem.distribute(element_partition,mesh_doc_info,report_stats);
-
-    // This is a validation run: use the default partition when load balancing
-    problem.use_default_partition_in_load_balance()=true;
-
-#endif
-
-    // Solve the problem with automatic adaptation for two steps
-    problem.newton_solve(2);
-
-    // Balance the load of the problem
-    problem.load_balance(mesh_doc_info,report_stats);
-
-    // Solve the problem again with automatic adaptation for one further step
-    problem.newton_solve(1);
+ // Prune
+ problem.prune_halo_elements_and_nodes(report_stats);
+ 
+ //Output solution
+ problem.doc_solution("After second pruning");
+ 
+ // Solve the problem again with automatic adaptation
+ problem.newton_solve(1);
+ 
+ //Output solution
+ problem.doc_solution("Third adapted solution after pruning");
+ 
+ // Do a uniform refinement
+ problem.refine_uniformly();
+ 
+ //Output solution
+ problem.doc_solution("After uniform refinement");
+ 
+ // Prune
+ problem.prune_halo_elements_and_nodes(report_stats);
+ 
+ //Output solution
+ problem.doc_solution("After third pruning");
+ 
+ // Solve the problem again with automatic adaptation
+ problem.newton_solve(1);
+ 
+ //Output solution
+ problem.doc_solution("Fourth adapted solution after pruning");
+ 
+ // Do load balancing
+ problem.load_balance(report_stats);
+ 
+ //Output solution
+ problem.doc_solution("After load balancing");
   
-    //Output solution
-    problem.doc_solution(doc_info);
-
+ // Solve the problem again with automatic adaptation
+ problem.newton_solve(1);
+ 
+ //Output solution
+ problem.doc_solution("Fifth adapted solution after load balancing");
+ 
+ oomph_info << "done\n";
+ std::cout << "done\n";
+ 
+  // Finalise MPI
 #ifdef OOMPH_HAS_MPI
-    mesh_doc_info.number()=1;
-    problem.mesh_pt()->doc_mesh_distribution(problem.communicator_pt(),
-                                             mesh_doc_info);
+  
+  MPI_Helpers::finalize();
+  
 #endif
-   }
-
- } // end of Crouzeix Raviart elements
-
-
-// Finalise MPI
-#ifdef OOMPH_HAS_MPI
-
- MPI_Helpers::finalize();
-
-#endif
-
+  
+  
 } // end_of_main
 

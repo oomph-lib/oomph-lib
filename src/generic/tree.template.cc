@@ -77,6 +77,28 @@ void Tree::split_if_required()
      throw OomphLibError(error_message,"Tree::split_if_required()",
                          OOMPH_EXCEPTION_LOCATION);
     }
+
+   if (Object_pt==0)
+    {
+     std::stringstream error_message;
+     error_message << "No object defined in split_if_required. Father nodes:\n";
+
+     RefineableElement* el_pt=Father_pt->object_pt();
+     unsigned nnod=el_pt->nnode();
+     for (unsigned j=0;j<nnod;j++)
+      {
+       Node* nod_pt=el_pt->node_pt(j);
+       unsigned n=nod_pt->ndim();
+       for (unsigned i=0;i<n;i++)
+        {
+         error_message << nod_pt->x(i) << " ";
+        }
+       error_message << "\n";
+      } 
+     throw OomphLibError(error_message.str(),"Tree::split_if_required()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+
 #endif
 
  // Check if refinement is required
@@ -86,9 +108,10 @@ void Tree::split_if_required()
    // of pointers to the newly created elements
    Vector<ELEMENT*> new_elements_pt;
    Object_pt->split(new_elements_pt);
-
+   
    //Find the number of sons constructed by the element
    unsigned n_sons = new_elements_pt.size();
+
    // Turn the new elements into QuadTrees and assign
    // the pointers to the present element's sons
    Son_pt.resize(n_sons);

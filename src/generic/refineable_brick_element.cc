@@ -206,7 +206,7 @@ void RefineableQElement<3>::setup_father_bounds()
 
 //==================================================================
 /// Determine Vector of boundary conditions along the element's boundary 
-/// (or vertex) bound (S/W/N/E/SW/SE/NW/NE). 
+/// bound.
 ///
 /// This function assumes that the same boundary condition is applied
 /// along the entire area of an element's face (of course, the
@@ -904,13 +904,21 @@ case UB:
    break;
    
 default:
-   std::ostringstream error_stream;
-   error_stream
-    << "Wrong face " << face << " passed" << std::endl;
 
-   throw OomphLibError(error_stream.str(),
-                       "RefineableQElement<3>::interpolated_zeta_on_edge()",
-                       OOMPH_EXCEPTION_LOCATION);
+ std::ostringstream error_stream;
+ error_stream
+  << "Wrong face " << OcTree::Direct_string[face] << " passed" << std::endl;
+ error_stream << "Trouble at : s= ["  
+              << s[0] << " " << s[1] << " " << s[2]
+              << "]\n";
+ Vector<double> x(3);
+ this->interpolated_x(s,x);
+ error_stream << "corresponding to : x= ["  
+              << x[0] << " " << x[1] << " " << x[2]
+              << "]\n";
+ throw OomphLibError(error_stream.str(),
+                     "RefineableQElement<3>::interpolated_zeta_on_edge()",
+                     OOMPH_EXCEPTION_LOCATION);
   }
 
  //Initialise the intrinsic coordinate
@@ -1079,45 +1087,86 @@ node_created_by_neighbour(const Vector<double> &s_fraction)
  //------------------------------------------
  for(unsigned j=0;j<n_edge;j++)
   {
-   // Find pointer to neighbouring element along edge
-   OcTree* neigh_pt;
-   neigh_pt = octree_pt()->
-    gteq_true_edge_neighbour(edges[j],translate_s,
-                             s_lo_neigh,s_hi_neigh,neigh_face,
-                             diff_level);
+
+   // Even if we restrict ourselves to true edge neighbours (i.e.
+   // elements that are not also face neighbours) there may be multiple
+   // edge neighbours across the edges between multiple root octrees.
+   // When making the first call to OcTree::gteq_true_edge_neighbour(...)
+   // we simply return the first one of these multiple edge neighbours
+   // (if there are any at all, of course) and also return the total number
+   // of true edge neighbours. If the node in question already exists
+   // on the first edge neighbour we're done. If it doesn't it may exist
+   // on other edge neighbours so we repeat the process over all
+   // other edge neighbours (bailing out if a node is found, of course).
+
+   // Initially return the zero-th true edge neighbour
+   unsigned i_root_edge_neighbour=0;
+
+   // Initialise the total number of true edge neighbours
+   unsigned nroot_edge_neighbour=0;
    
-   // Neighbour exists
-   if(neigh_pt!=0)
+   // Keep searching until we've found the node or until we've checked
+   // all available edge neighbours
+   bool keep_searching=true;
+   while (keep_searching)
     {
-     // Have its nodes been created yet?
-     if(neigh_pt->object_pt()->nodes_built())
+ 
+     // Find pointer to neighbouring element along edge
+     OcTree* neigh_pt;
+     neigh_pt = octree_pt()->
+      gteq_true_edge_neighbour(edges[j],
+                               i_root_edge_neighbour,
+                               nroot_edge_neighbour, 
+                               translate_s,
+                               s_lo_neigh,s_hi_neigh,neigh_face,
+                               diff_level);
+     
+     // Neighbour exists
+     if(neigh_pt!=0)
       {
-       //We now need to translate the nodal location, defined in terms
-       //of the fractional coordinates of the present element into
-       //those of its neighbour. For this we use the information returned
-       //to use from the octree function.
-       
-       //Calculate the local coordinate in the neighbour
-       //Note that we need to use the translation scheme in case
-       //the local coordinates are swapped in the neighbour.
-       for(unsigned i=0;i<3;i++)
-        {
-         s[i] = s_lo_neigh[i] + s_fraction[translate_s[i]]*
-          (s_hi_neigh[i] - s_lo_neigh[i]);
-        }
-       
-       //Find the node in the neighbour
-       Node* neighbour_node_pt =
-        neigh_pt->object_pt()->get_node_at_local_coordinate(s);
-       
-       //If there is a node, return it
-       if(neighbour_node_pt!=0)
-        {
-         return neighbour_node_pt;
+
+       // Have its nodes been created yet?
+       if(neigh_pt->object_pt()->nodes_built())
+        {         
+         //We now need to translate the nodal location, defined in terms
+         //of the fractional coordinates of the present element into
+         //those of its neighbour. For this we use the information returned
+         //to use from the octree function.
+         
+         //Calculate the local coordinate in the neighbour
+         //Note that we need to use the translation scheme in case
+         //the local coordinates are swapped in the neighbour.
+         for(unsigned i=0;i<3;i++)
+          {
+           s[i] = s_lo_neigh[i] + s_fraction[translate_s[i]]*
+            (s_hi_neigh[i] - s_lo_neigh[i]);
+          }
+         
+         //Find the node in the neighbour
+         Node* neighbour_node_pt =
+          neigh_pt->object_pt()->get_node_at_local_coordinate(s);
+         
+         //If there is a node, return it
+         if(neighbour_node_pt!=0)
+          {
+           return neighbour_node_pt;
+          }
         }
       }
-    }
-  } //End of loop over faces
+     
+     // Keep searching, but only if there are further edge neighbours
+     // Try next root edge neighbour
+     i_root_edge_neighbour++;
+     
+     // Have we exhausted the search 
+     if (i_root_edge_neighbour>=nroot_edge_neighbour)
+      {
+       keep_searching=false;
+      }
+   
+    } // End of while keep searching over all true edge neighbours
+
+  } //End of loop over edges
 
  //Node not found, return null
  return 0;
@@ -1331,8 +1380,12 @@ void RefineableQElement<3>::build(Mesh*& mesh_pt,
 
            // Does this node already exist in father element?
            //------------------------------------------------
+           bool node_exists_in_father=false;
            if(created_node_pt!=0)
             {
+             // Remember this!
+             node_exists_in_father=true;
+
              // Copy node across
              node_pt(jnod) = created_node_pt;
 
@@ -1362,11 +1415,16 @@ void RefineableQElement<3>::build(Mesh*& mesh_pt,
                node_done = true;
               }
             } // Node does not exist in father element         
-
-
-           // Node has not been built anywhere ---> build it here
-           if(!node_done)
+           
+           
+           // Node already exists in father: No need to do anything else!
+           // otherwise deal with boundary information etc.
+           if(!node_exists_in_father)
             {
+             
+             // Check boundary status
+             //----------------------
+             
              //Firstly, we need to determine whether or not a node lies
              //on the boundary before building it, because 
              //we actually assign a different type of node on boundaries.
@@ -1383,6 +1441,7 @@ void RefineableQElement<3>::build(Mesh*& mesh_pt,
              // and therefore only live on one boundary but just to 
              // play it safe...]
              std::set<unsigned> boundaries;
+             
              //Only get the boundaries if we are at the edge of
              //an element. Nodes in the centre of an element cannot be
              //on Mesh boundaries
@@ -1390,121 +1449,139 @@ void RefineableQElement<3>::build(Mesh*& mesh_pt,
               {father_el_pt->get_boundaries(father_bound,boundaries);}
              
 #ifdef PARANOID
-               //Case where a new node lives on more than two boundaries
-               // seems fishy enough to flag
-               if (boundaries.size()>2)
-                {
-                 throw OomphLibError(
-                  "boundaries.size()>2 seems a bit strange..\n",
-                  "RefineableQElement<3>::build()",
-                  OOMPH_EXCEPTION_LOCATION);
-                }
+           //Case where a new node lives on more than two boundaries
+           // seems fishy enough to flag
+           if (boundaries.size()>2)
+            {
+             throw OomphLibError(
+              "boundaries.size()>2 seems a bit strange..\n",
+              "RefineableQElement<3>::build()",
+              OOMPH_EXCEPTION_LOCATION);
+            }
 #endif
-               
-               //If the node lives on a mesh boundary, 
-               //then we need to create a boundary node
-               if(boundaries.size()> 0)
+             
+             //If the node lives on a mesh boundary, 
+             //then we need to create a boundary node
+             if(boundaries.size()> 0)
+              {
+               // Do we need a new node?
+               if(!node_done)
                 {
                  // Create node and set the internal pointer
                  created_node_pt = 
                   construct_boundary_node(jnod,time_stepper_pt);
                  // Add to vector of new nodes
                  new_node_pt.push_back(created_node_pt);
-                 
-                 //Now we need to work out whether to pin the values at
-                 //the new node based on the boundary conditions applied at
-                 //its Mesh boundary 
-                 
-                 //Get the boundary conditions from the father
-                 Vector<int> bound_cons(ncont_interpolated_values());
-                 father_el_pt-> get_bcs(father_bound,bound_cons);
-                 
-                 //Loop over the values and pin, if necessary
-                 unsigned n_value = created_node_pt->nvalue();
-                 for(unsigned k=0;k<n_value;k++)
-                  {
-                   if (bound_cons[k]) {created_node_pt->pin(k);}
-                  }
-
-                 // Solid node? If so, deal with the positional boundary
-                 // conditions:
-                 SolidNode* solid_node_pt = 
-                  dynamic_cast<SolidNode*>(created_node_pt);
-                 if (solid_node_pt!=0)
-                  {
-                   //Get the positional boundary conditions from the father:
-                   unsigned n_dim = created_node_pt->ndim();
-                   Vector<int> solid_bound_cons(n_dim);
-                   RefineableSolidQElement<3>* father_solid_el_pt=
-                    dynamic_cast<RefineableSolidQElement<3>*>(father_el_pt);
-#ifdef PARANOID
-                   if (father_solid_el_pt==0)
-                    {
-                     std::string error_message =
-                      "We have a SolidNode outside a refineable SolidElement\n";
-                     error_message +=
-                      "during mesh refinement -- this doesn't make sense";
-                     
-                     throw OomphLibError(error_message,
-                                         "RefineableQElement<3>::build()",
-                                         OOMPH_EXCEPTION_LOCATION);
-                    }
-#endif
-                   father_solid_el_pt->
-                    get_solid_bcs(father_bound,solid_bound_cons);
+                }
                
-                   //Loop over the positions and pin, if necessary
-                   for(unsigned k=0;k<n_dim;k++)
-                    {
-                     if (solid_bound_cons[k]) {solid_node_pt->pin_position(k);}
-                    }
-                  } //End of if solid_node_pt
-
-                 //Next update the boundary look-up schemes
-
-                 //Loop over the boundaries in the set
-                 for(std::set<unsigned>::iterator it = boundaries.begin();
-                     it != boundaries.end(); ++it)
+               //Now we need to work out whether to pin the values at
+               //the new node based on the boundary conditions applied at
+               //its Mesh boundary 
+               
+               // Get the boundary conditions from the father.
+               // Note: We can only deal with the values that are 
+               //       continuously interpolated in the bulk element.
+               unsigned n_cont=ncont_interpolated_values();
+               Vector<int> bound_cons(n_cont);
+               father_el_pt->get_bcs(father_bound,bound_cons);
+               
+               // Loop over the continuously interpolated values and pin, 
+               // if necessary
+               for(unsigned k=0;k<n_cont;k++)
+                {                
+                 if (bound_cons[k])
                   {
-                   //Add the node to the bounadry
-                   mesh_pt->add_boundary_node(*it,created_node_pt);
-                   
-                   //If we have set an intrinsic coordinate on this
-                   //mesh boundary then it must also be interpolated on
-                   //the new node
-                   //Now interpolate the intrinsic boundary coordinate
-                   if(mesh_pt->boundary_coordinate_exists(*it)==true)
-                    {
-                     //Usually there will be two coordinates
-                     Vector<double> zeta(2);
-                     father_el_pt->interpolated_zeta_on_face(*it,
-                                                             father_bound,
-                                                             s,zeta);
-
-                     created_node_pt->set_coordinates_on_boundary(*it,zeta);
-                    }
+                   created_node_pt->pin(k);
                   }
                 }
-               //Otherwise the node is not on a Mesh boundary and 
-               //we create a normal "bulk" node
-               else
+               
+               // Solid node? If so, deal with the positional boundary
+               // conditions:
+               SolidNode* solid_node_pt = 
+                dynamic_cast<SolidNode*>(created_node_pt);
+               if (solid_node_pt!=0)
+                {
+                 //Get the positional boundary conditions from the father:
+                 unsigned n_dim = created_node_pt->ndim();
+                 Vector<int> solid_bound_cons(n_dim);
+                 RefineableSolidQElement<3>* father_solid_el_pt=
+                  dynamic_cast<RefineableSolidQElement<3>*>(father_el_pt);
+#ifdef PARANOID
+                 if (father_solid_el_pt==0)
+                  {
+                   std::string error_message =
+                    "We have a SolidNode outside a refineable SolidElement\n";
+                   error_message +=
+                    "during mesh refinement -- this doesn't make sense";
+                   
+                   throw OomphLibError(error_message,
+                                       "RefineableQElement<3>::build()",
+                                       OOMPH_EXCEPTION_LOCATION);
+                  }
+#endif
+                 father_solid_el_pt->
+                  get_solid_bcs(father_bound,solid_bound_cons);
+                 
+                 //Loop over the positions and pin, if necessary
+                 for(unsigned k=0;k<n_dim;k++)
+                  {
+                   if (solid_bound_cons[k]) {solid_node_pt->pin_position(k);}
+                  }
+                } //End of if solid_node_pt
+               
+               //Next update the boundary look-up schemes
+               
+               //Loop over the boundaries in the set
+               for(std::set<unsigned>::iterator it = boundaries.begin();
+                   it != boundaries.end(); ++it)
+                {
+                 //Add the node to the bounadry
+                 mesh_pt->add_boundary_node(*it,created_node_pt);
+                 
+                 //If we have set an intrinsic coordinate on this
+                 //mesh boundary then it must also be interpolated on
+                 //the new node
+                 //Now interpolate the intrinsic boundary coordinate
+                 if(mesh_pt->boundary_coordinate_exists(*it)==true)
+                  {
+                   //Usually there will be two coordinates
+                   Vector<double> zeta(2);
+                   father_el_pt->interpolated_zeta_on_face(*it,
+                                                           father_bound,
+                                                           s,zeta);
+                   
+                   created_node_pt->set_coordinates_on_boundary(*it,zeta);
+                  }
+                }
+              }
+             //Otherwise the node is not on a Mesh boundary and 
+             //we create a normal "bulk" node
+             else
+              {
+               // Do we need a new node?
+               if(!node_done)
                 {
                  // Create node and set the pointer to it from the element 
                  created_node_pt = construct_node(jnod,time_stepper_pt);
                  // Add to vector of new nodes
                  new_node_pt.push_back(created_node_pt);
                 }
-
-               // In the first instance use macro element or FE representation
-               // to create past and present nodal positions.
-               // (THIS STEP SHOULD NOT BE SKIPPED FOR ALGEBRAIC
-               // ELEMENTS AS NOT ALL OF THEM NECESSARILY IMPLEMENT
-               // NONTRIVIAL NODE UPDATE FUNCTIONS. CALLING
-               // THE NODE UPDATE FOR SUCH ELEMENTS/NODES WILL LEAVE
-               // THEIR NODAL POSITIONS WHERE THEY WERE (THIS IS APPROPRIATE
-               // ONCE THEY HAVE BEEN GIVEN POSITIONS) BUT WILL
-               // NOT ASSIGN SENSIBLE INITIAL POSITONS!
-               
+              }
+             
+             // In the first instance use macro element or FE representation
+             // to create past and present nodal positions.
+             // (THIS STEP SHOULD NOT BE SKIPPED FOR ALGEBRAIC
+             // ELEMENTS AS NOT ALL OF THEM NECESSARILY IMPLEMENT
+             // NONTRIVIAL NODE UPDATE FUNCTIONS. CALLING
+             // THE NODE UPDATE FOR SUCH ELEMENTS/NODES WILL LEAVE
+             // THEIR NODAL POSITIONS WHERE THEY WERE (THIS IS APPROPRIATE
+             // ONCE THEY HAVE BEEN GIVEN POSITIONS) BUT WILL
+             // NOT ASSIGN SENSIBLE INITIAL POSITONS!
+             
+             
+             // Have we created a new node?
+             if(!node_done)
+              {  
                // Loop over # of history values
                for (unsigned t=0;t<ntstorage;t++)
                 {
@@ -1543,9 +1620,11 @@ void RefineableQElement<3>::build(Mesh*& mesh_pt,
                // Add new node to mesh
                mesh_pt->add_node_pt(created_node_pt);
                
-            } //End of whether the node has been created by us or not
-
+              } //End of whether the node has been created by us or not
            
+            } // End of if node already existed in father in which case 
+              // everything above gets bypassed.
+
            // Check if the element is an algebraic element
            AlgebraicElementBase* alg_el_pt=
             dynamic_cast<AlgebraicElementBase*>(this);		

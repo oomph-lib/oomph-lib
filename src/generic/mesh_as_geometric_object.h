@@ -69,6 +69,12 @@ private:
  void construct_it(Mesh* const &mesh_pt, OomphCommunicator* comm_pt,
                    const bool& compute_extreme_bin_coords);
 
+ /// \short Sort the sampling points in the specified bin by distance from 
+ /// sampling point
+ void sort_the_bin(const Vector<double>& zeta,
+                   Vector<std::pair<FiniteElement*,Vector<double> > >&
+                   sample_point_pairs);
+ 
  /// \short Vector of pointers to Data items that affects the object's shape
  Vector<Data*> Geom_data_pt;
 

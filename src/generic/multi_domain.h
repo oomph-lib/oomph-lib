@@ -28,6 +28,11 @@
 //Header file for multi-domain functions, including the class
 //ElementWithExternalElement which stores pointers to external elements
 
+// Temporary flag to enable full annotation of multi domain
+// comms (but keep alive because it would be such a bloody pain to
+// rewrite it if things ever go wrong again...)
+//#define ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+
 //Include guards to prevent multiple inclusion of the header
 #ifndef OOMPH_MULTI_DOMAIN_HEADER
 #define OOMPH_MULTI_DOMAIN_HEADER
@@ -48,6 +53,7 @@
 #include "macro_element_node_update_element.h"
 #include "Qelements.h"
 #include "element_with_external_element.h"
+
 
 namespace oomph
 {
@@ -119,6 +125,15 @@ namespace Multi_domain_functions
   /// to avoid having to pass the array between the various helper 
   /// functions
   extern Vector<unsigned> Flat_packed_unsigneds;
+
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+
+  // Temporary vector of strings to enable full annotation of multi domain
+  // comms (but keep alive because it would be such a bloody pain to
+  // rewrite it if things ever go wrong again...)
+  extern Vector<std::string> Flat_packed_unsigneds_string;
+
+#endif
 
   /// \short Counter used when processing vector of flat-packed 
   /// unsigneds -- this is really "private" data, declared here
@@ -201,11 +216,6 @@ namespace Multi_domain_functions
   ///        during setup_multi_domain_interaction() routines
   extern bool Doc_full_stats;
 
-#ifdef OOMPH_HAS_MPI
-  /// \short Boolean to indicate when to check for duplicate data
-  ///        between the external halo storage schemes  
-  extern bool Check_for_duplicates;
-#endif
 
   // Functions for multi-domain method
 
@@ -284,13 +294,6 @@ namespace Multi_domain_functions
                                            Mesh* const &external_mesh_pt,
                                            const unsigned& interaction_index,
                                            Mesh* const &external_face_mesh_pt=0);
-  
-#ifdef OOMPH_HAS_MPI
-  /// \short A helper function to remove duplicate data that 
-  /// are created due to coincident nodes between external halo elements 
-  /// on different processors
-  void remove_duplicate_data(Problem* problem_pt, Mesh* const &mesh_pt);
-#endif
   
   /// \short Helper function to locate "local" zeta coordinates
    void locate_zeta_for_local_coordinates
@@ -416,6 +419,23 @@ namespace Multi_domain_functions
   /// \short Helper function that clears all the intermediate information used
   /// during the external storage creation at the end of the procedure
   void clean_up();
+
+
+  /// \short Bool to decide if to sort entries in bin during locate_zeta
+  /// operation (default: false)
+  extern bool Sort_bin_entries;
+
+  /// \short Vector of zeta coordinates that we're currently trying to locate;
+  /// used in sorting of bin entries in further_away() comparison function
+  extern Vector<double> Zeta_coords_for_further_away_comparison;
+  
+  /// \short Comparison function for sorting entries in bin: Returns true if
+  /// point identified by p1 (comprising pointer to finite element and
+  /// vector of local coordinates within that element) is closer to
+  /// Zeta_coords_for_further_away_comparison than p2
+  bool first_closer_than_second(
+   const std::pair<FiniteElement*,Vector<double> >& p1,
+   const std::pair<FiniteElement*,Vector<double> >& p2);
 
  }
 

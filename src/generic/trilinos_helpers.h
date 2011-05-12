@@ -54,7 +54,7 @@
 #endif
 
 // oomph-lib headers
-#include "../generic/matrices.h"
+#include "matrices.h"
 
 // mpi includes
 #ifdef OOMPH_HAS_MPI

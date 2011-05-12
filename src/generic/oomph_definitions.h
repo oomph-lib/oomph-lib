@@ -283,6 +283,25 @@ public:
 
 
 //=======================================================================
+/// Namespace containing an output stream that can be used for
+/// debugging. Use at your own risk -- global data is evil!
+//=======================================================================
+namespace Global_output_stream
+{
+
+ /// Output stream
+ extern std::ofstream* Outfile;
+
+}
+
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
+//=======================================================================
 /// Namespace containing a vector of strings that can be used to
 /// to store global output modifiers. This is global data
 /// and you use it at your own risk!

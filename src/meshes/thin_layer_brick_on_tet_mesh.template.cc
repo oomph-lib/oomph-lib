@@ -289,6 +289,7 @@ namespace oomph
   // Figure out which boundaries are on the identified in/outflow boundaries
   unsigned n=in_out_boundary_id.size();
   Vector<std::vector<bool> > is_on_in_out_boundary(n);
+  Vector<std::set<unsigned> > in_out_boundary_id_set(n);
   for (unsigned j=0;j<n;j++)
    {
     is_on_in_out_boundary[j].resize(highest_fluid_bound_id+1,false);
@@ -1527,7 +1528,7 @@ namespace oomph
                  {
                   if (is_on_in_out_boundary[jj][(*it)])
                    {
-                    In_out_boundary_id[jj].push_back((*it));
+                    in_out_boundary_id_set[jj].insert((*it));
                    }
                  }
                }
@@ -1556,7 +1557,21 @@ namespace oomph
      }
    }
    
-   
+  
+  // Copy boundary IDs across
+  for (unsigned jj=0;jj<n;jj++)
+   {
+    for (std::set<unsigned>::iterator it=
+          in_out_boundary_id_set[jj].begin();
+         it!=in_out_boundary_id_set[jj].end();it++)
+     {
+      In_out_boundary_id[jj].push_back((*it));
+     }
+   }
+
+
+
+
 #ifdef PARANOID
   // Check 
   unsigned nel=Element_pt.size();

@@ -77,16 +77,9 @@ namespace oomph
    second_mesh_pt->flush_all_external_storage();
 
    // Call setup_multi_domain_interaction in both directions
-   // Don't check for duplicates after setting the first interaction
-#ifdef OOMPH_HAS_MPI
-   Check_for_duplicates=false;
-#endif
    setup_multi_domain_interaction<ELEMENT_1>
     (problem_pt,first_mesh_pt,second_mesh_pt,first_interaction);
 
-#ifdef OOMPH_HAS_MPI
-   Check_for_duplicates=true;
-#endif
    setup_multi_domain_interaction<ELEMENT_0>
     (problem_pt,second_mesh_pt,first_mesh_pt,second_interaction);
 
@@ -213,8 +206,9 @@ namespace oomph
   {
 
 #ifdef OOMPH_HAS_MPI
-   // Storage for number of processors
+   // Storage for number of processors and my rank
    int n_proc=problem_pt->communicator_pt()->nproc();
+   int my_rank=problem_pt->communicator_pt()->my_rank();
 #endif
 
    // Timing
@@ -324,7 +318,7 @@ namespace oomph
    if (Doc_timings) 
     {
      t_set=TimingHelpers::timer();
-     oomph_info << "CPU for createion of MeshAsGeomObject and bin structure: "
+     oomph_info << "CPU for creation of MeshAsGeomObject and bin structure: "
                 << t_set-t_start << std::endl;
      t_setup_lookups=TimingHelpers::timer();
     }
@@ -337,6 +331,7 @@ namespace oomph
    External_element_located.resize(n_element);
    for (unsigned e=0;e<n_element;e++)
     {
+     // Zero-sized vector means its a halo
      External_element_located[e].resize(0);
 
      ElementWithExternalElement *el_pt=
@@ -368,7 +363,7 @@ namespace oomph
      double t=TimingHelpers::timer();
      oomph_info 
       << "CPU for setup of lookup schemes for located elements/coords: "
-      << t_setup_lookups-t << std::endl;
+      << t-t_setup_lookups << std::endl;
     }
 
    // Find maximum spiral level within the cartesian bin structure
@@ -388,21 +383,28 @@ namespace oomph
       }
     }
 
-   // Storage for info about coordinate location
-   Vector<double> percentage_coords_located_locally(n_max_level,0.0);
-   Vector<double> percentage_coords_located_elsewhere(n_max_level,0.0);
+   // Storage for info about coordinate location -- initialise to 100%.
+   // Gets overwritten below if we've actually had any location to do here.
+   Vector<double> percentage_coords_located_locally(n_max_level,100.0);
+   Vector<double> percentage_coords_located_elsewhere(n_max_level,100.0);
    unsigned max_level_reached=1;
 
    // Initialise spiral levels
    mesh_geom_obj_pt->current_min_spiral_level()=0;
    mesh_geom_obj_pt->current_max_spiral_level()=N_spiral_chunk-1;
 
+   // Limit it so that we search at least once
+   if (mesh_geom_obj_pt->current_max_spiral_level()>n_max_level)
+    {
+     mesh_geom_obj_pt->current_max_spiral_level()=n_max_level-1;
+    }
+
    // Loop over "spirals/levels" away from the current position
    unsigned i_level=0;
-   while (mesh_geom_obj_pt->current_max_spiral_level()<n_max_level)
+   while (mesh_geom_obj_pt->current_max_spiral_level()<n_max_level) 
     {
      // Record time at start of spiral loop
-     if (Doc_timings) 
+     if (Doc_timings)
       {
        t_spiral_start=TimingHelpers::timer();
       }
@@ -431,9 +433,14 @@ namespace oomph
             }
           }
         }
-       // Store percentage of integration points successfully located
-       percentage_coords_located_locally[i_level]=
-        100.0*double(count_locates)/double(tot_int);
+       // Store percentage of integration points successfully located.
+       // Only assign if we had anything to allocte, otherwise 100%
+       // (default assignment; see above) is correct
+       if (tot_int!=0)
+        {
+         percentage_coords_located_locally[i_level]=
+          100.0*double(count_locates)/double(tot_int);
+        }
       }
 
      if (Doc_timings) 
@@ -444,6 +451,7 @@ namespace oomph
         << i_level << "]: "
         << t_local-t_spiral_start << std::endl;
       }
+
 
      // Now test whether anything needs to be broadcast elsewhere
      // (i.e. were there any failures in the locate method above?)
@@ -558,7 +566,8 @@ namespace oomph
          if (problem_pt->communicator_pt()->nproc() > 1)
           {
            int count_local_zetas=n_zeta_not_found;
-           MPI_Allreduce(&count_local_zetas,&n_zeta_not_found,1,MPI_INT,MPI_SUM,
+           MPI_Allreduce(&count_local_zetas,&n_zeta_not_found,1,
+                         MPI_INT,MPI_SUM,
                          problem_pt->communicator_pt()->mpi_comm());
           }
 #endif
@@ -566,6 +575,14 @@ namespace oomph
          // If  its is now zero then break out of the spirals loop
          if (n_zeta_not_found==0) 
           {
+           if (Doc_timings)
+            {
+             t_local=TimingHelpers::timer(); 
+             oomph_info 
+              << "BREAK N-1: CPU for entrire spiral [spiral level "
+              << i_level << "]: "
+              << t_local-t_spiral_start << std::endl;
+            }
            break;
           }
         }
@@ -574,29 +591,34 @@ namespace oomph
        // Doc timings
        if (Doc_timings)
         {
-         oomph_info << "Ring-based search continued until iteration " 
-                    << ring_count << " out of a maximum of" 
-                    << problem_pt->communicator_pt()->nproc() << "\n";
-         oomph_info << "Total, av, max, min CPU for send/recv of remaining zeta coordinates: "
-                    << t_sendrecv_tot << " "
-                    << t_sendrecv_tot/double(ring_count) << " "
-                    << t_sendrecv_max << " " 
-                    << t_sendrecv_min << "\n";
-         oomph_info << "Total, av, max, min CPU for location of missing zeta coordinates   : "
-                    << t_missing_tot << " "
-                    << t_missing_tot/double(ring_count) << " "
-                    << t_missing_max << " " 
-                    << t_missing_min << "\n";
-         oomph_info << "Total, av, max, min CPU for send/recv of new element info          : "
-                    << t_send_info_tot << " "
-                    << t_send_info_tot/double(ring_count) << " "
-                    << t_send_info_max << " " 
-                    << t_send_info_min << "\n";
-         oomph_info << "Total, av, max, min CPU for local creation of external halo objects: "
-                    << t_create_halo_tot << " "
-                    << t_create_halo_tot/double(ring_count) << " "
-                    << t_create_halo_max << " " 
-                    << t_create_halo_min << "\n";
+         oomph_info 
+          << "Ring-based search continued until iteration " 
+          << ring_count << " out of a maximum of " 
+          << problem_pt->communicator_pt()->nproc()-1 << "\n";
+         oomph_info 
+          << "Total, av, max, min CPU for send/recv of remaining zeta coordinates: "
+          << t_sendrecv_tot << " "
+          << t_sendrecv_tot/double(ring_count) << " "
+          << t_sendrecv_max << " " 
+          << t_sendrecv_min << "\n";
+         oomph_info 
+          << "Total, av, max, min CPU for location of missing zeta coordinates   : "
+          << t_missing_tot << " "
+          << t_missing_tot/double(ring_count) << " "
+          << t_missing_max << " " 
+          << t_missing_min << "\n";
+         oomph_info 
+          << "Total, av, max, min CPU for send/recv of new element info          : "
+          << t_send_info_tot << " "
+          << t_send_info_tot/double(ring_count) << " "
+          << t_send_info_max << " " 
+          << t_send_info_min << "\n";
+         oomph_info 
+          << "Total, av, max, min CPU for local creation of external halo objects: "
+          << t_create_halo_tot << " "
+          << t_create_halo_tot/double(ring_count) << " "
+          << t_create_halo_max << " " 
+          << t_create_halo_min << "\n";
         }
 
       } // end if for missing zetas on any process
@@ -621,9 +643,14 @@ namespace oomph
             }
           }
         }
-       // Store total percentage of locates so far
-       percentage_coords_located_elsewhere[i_level]=
-        100.0*double(count_locates)/double(tot_int);
+       // Store total percentage of locates so far.
+       // Only assign if we had anything to allocte, otherwise 100%
+       // (default assignment; see above) is correct
+       if (tot_int!=0)
+        {
+         percentage_coords_located_elsewhere[i_level]=
+          100.0*double(count_locates)/double(tot_int);
+        }
       }
 
      // Do we have any further locating to do?
@@ -640,19 +667,38 @@ namespace oomph
 #endif
 
      // Specify max level reached for later loop
-     max_level_reached=i_level+1;
+      max_level_reached=i_level+1; 
      
      /// If it's is now zero then break out of the spirals loop
-     if (n_zeta_not_found==0) { break; }
+     if (n_zeta_not_found==0) 
+      {
+       if (Doc_timings)
+        {
+         t_local=TimingHelpers::timer(); 
+         oomph_info 
+          << "BREAK N: CPU for entrire spiral [spiral level "
+          << i_level << "]: "
+          << t_local-t_spiral_start << std::endl;
+        }
+       break; 
+      }
 
-
+     if (Doc_timings) 
+      {
+       t_local=TimingHelpers::timer();
+       oomph_info 
+        << "CPU for entrire spiral [spiral level "
+        << i_level << "]: "
+        << t_local-t_spiral_start << std::endl;
+      }
+     
      // Bump up spiral levels
      i_level++;
      mesh_geom_obj_pt->current_min_spiral_level()+=N_spiral_chunk;
      mesh_geom_obj_pt->current_max_spiral_level()+=N_spiral_chunk;
      
+     
     } // end of "spirals" loop
-
 
    // If we haven't found all zetas we're dead now...
    if (n_zeta_not_found!=0)
@@ -660,9 +706,17 @@ namespace oomph
      std::ostringstream error_stream;
      error_stream 
       << "Multi_domain_functions::locate_zeta_for_local_coordinates()"
-      << "\nhas failed\n";
+      << "\nhas failed ";
+
+#ifdef OOMPH_HAS_MPI
+     if (problem_pt->communicator_pt()->nproc() > 1)
+      {
+       error_stream << " on proc: " << problem_pt->communicator_pt()->my_rank()
+                    << std::endl;
+      }
+#endif
      error_stream 
-      << "\n\nThis is most likely to arise because the two meshes\n"
+      << "\n\n\nThis is most likely to arise because the two meshes\n"
       << "that are to be matched don't overlap perfectly or\n"
       << "because the elements are distorted and too small a \n"
       << "number of sampling points has been used when setting\n"
@@ -671,28 +725,51 @@ namespace oomph
       << "Multi_domain_functions::Nsample_points from \n"
       << "its current value of " 
       << Multi_domain_functions::Nsample_points << "\n";
+     
+     std::ostringstream modifier;     
+#ifdef OOMPH_HAS_MPI
+     if (problem_pt->communicator_pt()->nproc() > 1)
+      {
+       modifier << "_proc" << problem_pt->communicator_pt()->my_rank();
+      }
+#endif
 
      std::ofstream outfile;
-     outfile.open("missing_coords_mesh.dat");
+     char filename[100];
+     sprintf(filename,"missing_coords_mesh%s.dat",modifier.str().c_str());
+     outfile.open(filename); 
      mesh_pt->output(outfile);
      outfile.close();
-     outfile.open("missing_coords_ext_mesh.dat");
+
+     sprintf(filename,"missing_coords_ext_mesh%s.dat",modifier.str().c_str());
+     outfile.open(filename); 
      external_mesh_pt->output(outfile);
      outfile.close();
-     outfile.open("missing_coords_bin.dat");
+
+     sprintf(filename,"missing_coords_bin%s.dat",modifier.str().c_str());
+     outfile.open(filename); 
      mesh_geom_obj_pt->output_bins(outfile);
      outfile.close();
 
-     outfile.open("missing_coords.dat");     
-     error_stream << "Failure at element/intpt:\n";
+     sprintf(filename,"missing_coords%s.dat",modifier.str().c_str());
+     outfile.open(filename); 
      unsigned n=External_element_located.size();
+     error_stream << "Number of unlocated elements " << n << std::endl;
      for (unsigned e=0;e<n;e++)
       {
        unsigned n_intpt=External_element_located[e].size();
+       if (n_intpt==0)
+        {
+         error_stream 
+          << "Failure to locate in halo element! Why are we searching there?"
+          << std::endl;
+        }
        for (unsigned ipt=0;ipt<n_intpt;ipt++)
         {
          if (External_element_located[e][ipt]==0)
           {
+           error_stream << "Failure at element/intpt: " 
+                        << e << " " << ipt << std::endl;
 
            // Cast
            ElementWithExternalElement *el_pt=
@@ -720,14 +797,14 @@ namespace oomph
      outfile.close();
 
      error_stream 
-      << "Mesh and external mesh documented in missing_coords_mesh.dat\n"
-      << "and missing_coords_ext_mesh.dat, respectively. Missing \n"
-      << "coordinates in missing_coords.dat\n";
-    throw OomphLibError
+      << "Mesh and external mesh documented in missing_coords_mesh*.dat\n"
+      << "and missing_coords_ext_mesh*.dat, respectively. Missing \n"
+      << "coordinates in missing_coords*.dat\n";
+     OomphLibError
      (error_stream.str(),
       "Multi_domain_functions::locate_zeta_for_local_coordinates()",
-      OOMPH_EXCEPTION_LOCATION);
-    }               
+      OOMPH_EXCEPTION_LOCATION);     
+    }
    
 
    // Doc timings if required
@@ -751,6 +828,7 @@ namespace oomph
    if (Doc_stats)
     {
      // Report stats regarding location method
+     bool comm_was_required=false;
      oomph_info << "-------------------------------------------" << std::endl;
      oomph_info << "- Cumulative percentage of locate success -" << std::endl; 
      oomph_info << "--- Spiral -- Found local -- Found else ---" << std::endl;
@@ -760,8 +838,80 @@ namespace oomph
                   << percentage_coords_located_locally[level] << " -- "
                   << percentage_coords_located_elsewhere[level] << " ---" 
                   << std::endl;
+       // Has communication with other processors at this level actually
+       // produced any results?
+       if (percentage_coords_located_elsewhere[level]>
+           percentage_coords_located_locally[level])
+        {
+         comm_was_required=true;
+        }
       }
      oomph_info << "-------------------------------------------" << std::endl;
+
+     // Initialise to indicate that none of the zetas required
+     // on this processor were located through parallel ring search,
+     // i.e. comm was not required and we could have done some
+     // more local searching first
+     oomph_info << std::endl;
+     oomph_info <<"ASSESSMENT OF NEED FOR PARALLEL SEARCH: \n";
+     oomph_info <<"=======================================\n";
+     unsigned status=0;
+     if (comm_was_required) 
+      {
+       oomph_info 
+        <<"- Ring-based parallel search did successfully locate zetas on proc "
+        << my_rank << std::endl;
+       status=1;
+      }
+     else
+      {
+       if (max_level_reached>1)
+        {
+         oomph_info 
+          << "- Ring-based parallel search did NOT locate zetas on proc"
+          << my_rank << std::endl;
+        }
+       else
+        {
+         oomph_info 
+          << "- No ring-based parallel search was performed on proc"
+          << my_rank << std::endl;
+        }
+      }
+     
+     // Allreduce to check if anyone has benefitted from parallel ring
+     // search
+     unsigned overall_status=0;
+     MPI_Allreduce(&status,&overall_status,1,
+                   MPI_UNSIGNED,MPI_MAX,
+                   problem_pt->communicator_pt()->mpi_comm());
+     
+     // Report of mpi was useful to anyone
+     if (overall_status==1) 
+      {
+       oomph_info << "- Ring-based, parallel search did succesfully\n";
+       oomph_info << "  locate zetas on at least one other proc, so it\n";
+       oomph_info << "  was worthwhile.\n";
+       oomph_info << std::endl;
+      }
+     else
+      {
+       if (max_level_reached>1)
+        {
+         oomph_info << "- Ring-based, parallel search did NOT locate zetas\n";
+         oomph_info << "  on ANY other procs, i.e it was useless.\n";
+         oomph_info << "  --> We should really have done more local search\n";
+         oomph_info << "   by reducing number of bins, or doing more spirals\n";
+         oomph_info << "   in one go before initiating parallel search.\n";
+         oomph_info << std::endl;
+        }
+       else
+        {
+         oomph_info << "- No ring-based, parallel search was performed\n";
+         oomph_info << "  or necessary. Perfect!\n";
+         oomph_info << std::endl;
+        }
+      }
 
 
      // How many external elements does the external mesh have now?
@@ -821,58 +971,7 @@ namespace oomph
                 << std::endl;
     }
 
-   // Check for and remove duplicate equation numbers between external halo
-   // storage across different processors
-   // NB this only needs to be called in parallel
-   if (Check_for_duplicates)
-    {
-
-
-     // Doc timings if required
-     double tt=0.0;
-     if (Doc_timings)
-      {
-       tt=TimingHelpers::timer();
-      }
-
-     // Only necessary to do this on a multi-processor job
-     if (n_proc!=1)
-      {
-       if (Doc_stats)
-        {
-         oomph_info << "Duplicate removal, number of global equation numbers:"
-                    << problem_pt->assign_eqn_numbers(false) << std::endl;
-        }
-       else
-        {
-         problem_pt->assign_eqn_numbers(false);
-        }
-
-       // Doc timings if required
-       if (Doc_timings)
-        {
-          oomph_info 
-           << "Total CPU for assign_eqn_numbers before remove_duplicate_data: "
-           << TimingHelpers::timer()-tt << std::endl;
-          tt=TimingHelpers::timer();
-         }
-
-
-       // Must remove duplicates from both meshes in a two-way interaction
-       remove_duplicate_data(problem_pt,external_mesh_pt);
-       remove_duplicate_data(problem_pt,mesh_pt);
-
-       // Doc timings if required
-       if (Doc_timings)
-        {
-          oomph_info 
-           << "Total CPU for remove_duplicate_data: "
-           << TimingHelpers::timer()-tt << std::endl;
-          tt=TimingHelpers::timer();
-        }
-      }
-    }
-#endif
+ #endif
 
    // Doc timings if required
    if (Doc_timings)
@@ -975,20 +1074,34 @@ namespace oomph
                 }
 
                // If we're using macro elements to update
-               if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]==1)
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+               oomph_info 
+                << "Rec:" << Counter_for_flat_packed_unsigneds 
+                << "  Using macro element node update "
+                << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+                << std::endl;
+#endif
+               if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++]
+                   ==1)
                 {
-                 Counter_for_flat_packed_unsigneds++;
-
                  // Set the macro element
                  MacroElementNodeUpdateMesh* macro_mesh_pt=
                   dynamic_cast<MacroElementNodeUpdateMesh*>
                   (external_mesh_pt);
+                 
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+                 oomph_info 
+                  << "Rec:" << Counter_for_flat_packed_unsigneds 
+                  << "  Number of macro element "
+                  << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+                  << std::endl;
+#endif
                  unsigned macro_el_num=
-                  Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds];
+                  Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++];
                  f_el_pt->set_macro_elem_pt
                   (macro_mesh_pt->macro_domain_pt()->
                    macro_element_pt(macro_el_num));
-                 Counter_for_flat_packed_unsigneds++;
+
 
                  // We need to receive the lower left
                  // and upper right coordinates of the macro element
@@ -1000,11 +1113,9 @@ namespace oomph
                    for (unsigned i_dim=0;i_dim<el_dim;i_dim++)
                     {
                      q_el_pt->s_macro_ll(i_dim)=
-                      Flat_packed_doubles[Counter_for_flat_packed_doubles];
-                     Counter_for_flat_packed_doubles++;
+                      Flat_packed_doubles[Counter_for_flat_packed_doubles++];
                      q_el_pt->s_macro_ur(i_dim)=
-                      Flat_packed_doubles[Counter_for_flat_packed_doubles];
-                     Counter_for_flat_packed_doubles++;
+                      Flat_packed_doubles[Counter_for_flat_packed_doubles++];
                     }
                   }
                  else // Throw an error, since this is only implemented for Q
@@ -1019,10 +1130,6 @@ namespace oomph
                      OOMPH_EXCEPTION_LOCATION);
 
                   }
-                }
-               else // Not using macro elements
-                {
-                 Counter_for_flat_packed_unsigneds++;
                 }
 
                // Now we add nodes to the new element
@@ -1039,10 +1146,16 @@ namespace oomph
               }
              else // the element already exists as an external_halo
               {
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+               oomph_info 
+                << "Rec:" << Counter_for_flat_packed_unsigneds 
+                << "  Index of existing external halo element "
+                << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+                << std::endl;
+#endif
                // The index itself is in Flat_packed_unsigneds[...]
                unsigned external_halo_el_index=
-                Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds];
-               Counter_for_flat_packed_unsigneds++;
+                Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++];
 
                // Use this index to get the element
                f_el_pt=dynamic_cast<FiniteElement*>(external_mesh_pt->
@@ -1051,7 +1164,7 @@ namespace oomph
 
                //If it's not a finite element die
                if(f_el_pt==0)
-                {
+                {                 
                  throw OomphLibError(
                   "External halo element is not a FiniteElement\n",
                   "Multi_domain_functions::create_external_halo_elements",
@@ -1083,14 +1196,10 @@ namespace oomph
 
            // Increment the integration point counter
            zeta_counter++;
-
           }
-
         } // end loop over integration points
-
       }
     } // end loop over local processor's elements
-
   }
 
 
@@ -1112,12 +1221,26 @@ namespace oomph
    
    for (int i_cont=-1;i_cont<n_cont_inter_values;i_cont++)
     {
-     if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]==1)
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+     oomph_info 
+      << "Rec:" << Counter_for_flat_packed_unsigneds 
+      << " Boolean to indicate that continuously interpolated variable i_cont "
+      << i_cont << " is hanging " 
+      << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+      << std::endl;
+#endif
+     if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++]==1)
       {
-       Counter_for_flat_packed_unsigneds++;
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+       oomph_info 
+        << "Rec:" << Counter_for_flat_packed_unsigneds 
+        << "  Number of master nodes "
+        << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+        << std::endl;
+#endif
        unsigned n_master=Flat_packed_unsigneds
-        [Counter_for_flat_packed_unsigneds];
-       Counter_for_flat_packed_unsigneds++;
+        [Counter_for_flat_packed_unsigneds++];
+
        // Setup new HangInfo
        HangInfo* hang_pt=new HangInfo(n_master);
        for (unsigned m=0;m<n_master;m++)
@@ -1130,15 +1253,10 @@ namespace oomph
 
          // Get the weight and set the HangInfo
          double master_weight=Flat_packed_doubles
-          [Counter_for_flat_packed_doubles];
-         Counter_for_flat_packed_doubles++;
+          [Counter_for_flat_packed_doubles++];
          hang_pt->set_master_node_pt(m,master_nod_pt,master_weight);
         }
        new_nod_pt->set_hanging_pt(hang_pt,i_cont);
-      }
-     else // Not a hanging node
-      {
-       Counter_for_flat_packed_unsigneds++;
       }
     } // end loop over continous interpolated values
 
@@ -1154,23 +1272,31 @@ template<class EXT_ELEMENT>
  {
   // Given the node and the external mesh, and received information
   // about them from process loc_p, construct them on the current process
-  if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]==1)
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+  oomph_info 
+   << "Rec:" << Counter_for_flat_packed_unsigneds 
+   << "  Boolean to trigger construction of new external halo master node "
+   << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+   << std::endl;
+#endif
+  if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++]==1)
    {
-    // Increment counter
-    Counter_for_flat_packed_unsigneds++;
     // Construct a new node based upon sent information
     construct_new_external_halo_master_node_helper<EXT_ELEMENT>
      (new_master_nod_pt,new_nod_pt,loc_p,external_mesh_pt,problem_pt);
    }
   else
    {
-    // Increment counter (node already exists)
-    Counter_for_flat_packed_unsigneds++;
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+    oomph_info 
+     << "Rec:" << Counter_for_flat_packed_unsigneds 
+     << "  index of existing external halo master node "
+     << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+     << std::endl;
+#endif
     // Copy node from received location
     new_master_nod_pt=external_mesh_pt->external_halo_node_pt
-     (loc_p,Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]);
-    // Increment counter
-    Counter_for_flat_packed_unsigneds++;
+     (loc_p,Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++]);
    }
  }
 
@@ -1185,15 +1311,32 @@ template<class EXT_ELEMENT>
  {
   // First three sent numbers are dimension, position type and nvalue
   // (to be used in Node constructors)
-  unsigned n_dim=Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds];
-  Counter_for_flat_packed_unsigneds++;
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+  oomph_info 
+   << "Rec:" << Counter_for_flat_packed_unsigneds 
+   << "  ndim for external halo master node "
+   << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+   << std::endl;
+#endif
+  unsigned n_dim=Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++];
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+  oomph_info 
+   << "Rec:" << Counter_for_flat_packed_unsigneds 
+   << "  nposition type for external halo master node "
+   << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+   << std::endl;
+#endif
   unsigned n_position_type=Flat_packed_unsigneds
-   [Counter_for_flat_packed_unsigneds];
-  Counter_for_flat_packed_unsigneds++;
+   [Counter_for_flat_packed_unsigneds++];
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+  oomph_info 
+   << "Rec:" << Counter_for_flat_packed_unsigneds 
+   << "  nvalue for external halo master node "
+   << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+   << std::endl;
+#endif
   unsigned n_value=Flat_packed_unsigneds
-   [Counter_for_flat_packed_unsigneds];
-  Counter_for_flat_packed_unsigneds++;
-  
+   [Counter_for_flat_packed_unsigneds++];
 
   // If it's a solid node also receive the lagrangian dimension and pos type
   SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
@@ -1201,10 +1344,22 @@ template<class EXT_ELEMENT>
   unsigned n_lag_type;
   if (solid_nod_pt!=0)
    {
-    n_lag_dim=Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds];
-    Counter_for_flat_packed_unsigneds++;
-    n_lag_type=Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds];
-    Counter_for_flat_packed_unsigneds++;
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+    oomph_info 
+     << "Rec:" << Counter_for_flat_packed_unsigneds 
+     << "  nlagrdim for external halo master solid node "
+     << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+     << std::endl;
+#endif
+    n_lag_dim=Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++];
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+    oomph_info 
+     << "Rec:" << Counter_for_flat_packed_unsigneds 
+     << "  nlagrtype for external halo master solid node "
+     << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+     << std::endl;
+#endif
+    n_lag_type=Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++];
    }
 
   // Null TimeStepper for now
@@ -1214,19 +1369,28 @@ template<class EXT_ELEMENT>
 
   // The first entry in nodal_info indicates
   // the timestepper required for this halo node
-  if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]==1)
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION  
+  oomph_info 
+   << "Rec:" << Counter_for_flat_packed_unsigneds 
+   << "  Boolean: need timestepper "
+   << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+   << std::endl;
+#endif
+  if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++]==1)
    {
-    Counter_for_flat_packed_unsigneds++;
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+    oomph_info 
+     << "Rec:" << Counter_for_flat_packed_unsigneds 
+     << "  Index minus one of timestepper "
+     << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+     << std::endl;
+#endif
     // Index minus one!
     time_stepper_pt=problem_pt->time_stepper_pt
-     (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]);
-    Counter_for_flat_packed_unsigneds++;
+     (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++]);
+
     // Check whether number of prev values is "sent" across
     n_prev=time_stepper_pt->ntstorage(); 
-   }
-  else
-   {
-    Counter_for_flat_packed_unsigneds++;
    }
 
   // Is the node for which the master is required Algebraic, Macro or Solid?
@@ -1238,12 +1402,17 @@ template<class EXT_ELEMENT>
   if (alg_nod_pt!=0)
    {
     // The master node should also be algebraic
-
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+    oomph_info 
+     << "Rec:" << Counter_for_flat_packed_unsigneds 
+     << "  Boolean for algebraic boundary node "
+     << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+     << std::endl;
+#endif
     // If this master node's haloed copy is on a boundary then 
     // it needs to be on the same boundary here
-    if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]==1)
+    if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++]==1)
      {
-      Counter_for_flat_packed_unsigneds++;
       // Create a new BoundaryNode (not attached to an element)
       if (time_stepper_pt!=0)
        {
@@ -1255,28 +1424,101 @@ template<class EXT_ELEMENT>
         new_master_nod_pt = new BoundaryNode<AlgebraicNode>
          (n_dim,n_position_type,n_value);
        }
-      // How many boundaries on the external mesh?
-      unsigned n_bnd=external_mesh_pt->nboundary();
-      for (unsigned i_bnd=0;i_bnd<n_bnd;i_bnd++)
+
+      // How many boundaries does the algebraic master node live on?
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+      oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+                 << " Number of boundaries the algebraic master node is on: " 
+                 << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+                 << std::endl;
+#endif
+      unsigned nb=Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++];
+      for (unsigned i=0;i<nb;i++)
        {
-        if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]==1)
+        // Boundary number
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+        oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+                   << "  Algebraic master node is on boundary " 
+                   << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+                   << std::endl;
+#endif
+        unsigned i_bnd=
+         Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++];
+        external_mesh_pt->add_boundary_node(i_bnd,new_master_nod_pt);
+       }
+
+      
+      // Do we have additional values created by face elements?
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+      oomph_info 
+       << "Rec:" << Counter_for_flat_packed_unsigneds << " "
+       << "Number of additional values created by face element "
+       << "for master node " 
+       << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+       << std::endl;
+#endif
+      unsigned n_entry=Flat_packed_unsigneds[
+       Counter_for_flat_packed_unsigneds++];
+      if (n_entry>0)
+       {
+        // Create storage, if it doesn't already exist, for the map 
+        // that will contain the position of the first entry of 
+        // this face element's additional values, 
+        BoundaryNodeBase* bnew_master_nod_pt=
+         dynamic_cast<BoundaryNodeBase*>(new_master_nod_pt);
+#ifdef PARANOID
+        if (bnew_master_nod_pt==0)
          {
-          // Add to current boundary; increment counter
-          external_mesh_pt->add_boundary_node(i_bnd,new_master_nod_pt);
-          Counter_for_flat_packed_unsigneds++;
+          throw OomphLibError(
+           "Failed to cast new node to boundary node\n",
+           "Multi_domain_functions::add_external_halo_master_node_helper()",
+           OOMPH_EXCEPTION_LOCATION);
          }
-        else
+#endif
+        if(bnew_master_nod_pt->
+           index_of_first_value_assigned_by_face_element_pt()==0)
          {
-          // Not on this boundary; incremenet counter
-          Counter_for_flat_packed_unsigneds++;
+          bnew_master_nod_pt->
+           index_of_first_value_assigned_by_face_element_pt()= 
+           new std::map<unsigned, unsigned>; 
+         }
+        
+        // Get pointer to the map of indices associated with
+        // additional values created by face elements
+        std::map<unsigned, unsigned>* map_pt=
+         bnew_master_nod_pt->index_of_first_value_assigned_by_face_element_pt();
+        
+        // Loop over number of entries in map
+        for (unsigned i=0;i<n_entry;i++)
+         {
+          // Read out pairs...
+          
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+          oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+                     << " Key of map entry for master node" 
+                     << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+                     << std::endl;
+#endif
+          unsigned first=Flat_packed_unsigneds[
+           Counter_for_flat_packed_unsigneds++];
+          
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+          oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+                     << " Value of map entry for master node" 
+                     << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+                     << std::endl;
+#endif
+          unsigned second=Flat_packed_unsigneds[
+           Counter_for_flat_packed_unsigneds++];
+          
+          // ...and assign
+          (*map_pt)[first]=second;
          }
        }
+
      }
     else
      {
-      // Not on any boundary, incremenet counter
-      Counter_for_flat_packed_unsigneds++;
-
       // Create node (not attached to any element)
       if (time_stepper_pt!=0)
        {
@@ -1297,44 +1539,70 @@ template<class EXT_ELEMENT>
     AlgebraicMesh* alg_mesh_pt=dynamic_cast<AlgebraicMesh*>
      (external_mesh_pt);
 
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION    
+    oomph_info 
+     << "Rec:" << Counter_for_flat_packed_unsigneds 
+     << "  algebraic node update id for master node " 
+     << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+     << std::endl;
+#endif
     /// The first entry of All_unsigned_values is the default node update id
     unsigned update_id=Flat_packed_unsigneds
-     [Counter_for_flat_packed_unsigneds];
-    Counter_for_flat_packed_unsigneds++;
+     [Counter_for_flat_packed_unsigneds++];
 
     // Setup algebraic node update info for this new node
     Vector<double> ref_value;
 
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+    oomph_info 
+     << "Rec:" << Counter_for_flat_packed_unsigneds 
+     << "  algebraic node number of ref values for master node " 
+     << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+     << std::endl;
+#endif
     // The size of this vector is in the next entry
     unsigned n_ref_val=Flat_packed_unsigneds
-     [Counter_for_flat_packed_unsigneds];
-    Counter_for_flat_packed_unsigneds++;
+     [Counter_for_flat_packed_unsigneds++];
 
     // The reference values are in the subsequent entries of All_double_values
     ref_value.resize(n_ref_val);
     for (unsigned i_ref=0;i_ref<n_ref_val;i_ref++)
      {
       ref_value[i_ref]=Flat_packed_doubles
-       [Counter_for_flat_packed_doubles];
-      Counter_for_flat_packed_doubles++;
+       [Counter_for_flat_packed_doubles++];
      }
 
     // Also require a Vector of geometric objects
     Vector<GeomObject*> geom_object_pt;
 
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+    oomph_info 
+     << "Rec:" << Counter_for_flat_packed_unsigneds 
+     << "  algebraic node number of geom objects for master node " 
+     << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+     << std::endl;
+#endif
+
     // The size of this vector is in the next entry of All_unsigned_values
     unsigned n_geom_obj=Flat_packed_unsigneds
-     [Counter_for_flat_packed_unsigneds];
-    Counter_for_flat_packed_unsigneds++;
+     [Counter_for_flat_packed_unsigneds++];
 
     // The remaining indices are in the rest of 
     // All_alg_nodal_info
     geom_object_pt.resize(n_geom_obj);
     for (unsigned i_geom=0;i_geom<n_geom_obj;i_geom++)
      {
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+      oomph_info 
+       << "Rec:" << Counter_for_flat_packed_unsigneds 
+       << "  algebraic node: " << i_geom << "-th out of "
+       << n_geom_obj << "-th geom index " 
+       << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+       << std::endl;
+#endif
       unsigned geom_index=Flat_packed_unsigneds
-       [Counter_for_flat_packed_unsigneds];
-      Counter_for_flat_packed_unsigneds++;
+       [Counter_for_flat_packed_unsigneds++];
+
       // This index indicates which (if any) of the AlgebraicMesh's
       // stored geometric objects should be used
       geom_object_pt[i_geom]=alg_mesh_pt->geom_object_list_pt(geom_index);
@@ -1356,9 +1624,14 @@ template<class EXT_ELEMENT>
     // The master node should also be a macro node
     // If this master node's haloed copy is on a boundary then 
     // it needs to be on the same boundary here
-    if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]==1)
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+    oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+               << "  Boolean for master algebraic node is boundary node "
+               << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+               << std::endl;
+#endif
+    if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++]==1)
      {
-      Counter_for_flat_packed_unsigneds++;
       // Create a new BoundaryNode (not attached to an element)
       if (time_stepper_pt!=0)
        {
@@ -1370,28 +1643,102 @@ template<class EXT_ELEMENT>
         new_master_nod_pt = new BoundaryNode<MacroElementNodeUpdateNode>
          (n_dim,n_position_type,n_value);
        }
-      // How many boundaries on the external mesh?
-      unsigned n_bnd=external_mesh_pt->nboundary();
-      for (unsigned i_bnd=0;i_bnd<n_bnd;i_bnd++)
+
+
+      // How many boundaries does the macro element master node live on?
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+      oomph_info 
+       << "Rec:" << Counter_for_flat_packed_unsigneds 
+       << " Number of boundaries the macro element master node is on: " 
+       << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+       << std::endl;
+#endif
+      unsigned nb=Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++];
+      for (unsigned i=0;i<nb;i++)
        {
-        if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]==1)
+        // Boundary number
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+        oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+                   << "  Macro element master node is on boundary " 
+                   << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+                   << std::endl;
+#endif
+        unsigned i_bnd=
+         Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++];
+        external_mesh_pt->add_boundary_node(i_bnd,new_master_nod_pt);
+       }
+      
+      // Do we have additional values created by face elements?
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+      oomph_info 
+       << "Rec:" << Counter_for_flat_packed_unsigneds 
+       << " Number of additional values created by face element "
+       << "for macro element master node " 
+       << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+       << std::endl;
+#endif
+      unsigned n_entry=Flat_packed_unsigneds[
+       Counter_for_flat_packed_unsigneds++];
+      if (n_entry>0)
+       {
+        // Create storage, if it doesn't already exist, for the map 
+        // that will contain the position of the first entry of 
+        // this face element's additional values, 
+        BoundaryNodeBase* bnew_master_nod_pt=
+         dynamic_cast<BoundaryNodeBase*>(new_master_nod_pt);
+#ifdef PARANOID
+        if (bnew_master_nod_pt==0)
          {
-          // Add to current boundary; increment counter
-          external_mesh_pt->add_boundary_node(i_bnd,new_master_nod_pt);
-          Counter_for_flat_packed_unsigneds++;
+          throw OomphLibError(
+           "Failed to cast new node to boundary node\n",
+           "Multi_domain_functions::construct_new_external_halo_master_node_helper()",
+           OOMPH_EXCEPTION_LOCATION);
          }
-        else
+#endif
+        if(bnew_master_nod_pt->
+           index_of_first_value_assigned_by_face_element_pt()==0)
          {
-          // Not on this boundary; incremenet counter
-          Counter_for_flat_packed_unsigneds++;
+          bnew_master_nod_pt->
+           index_of_first_value_assigned_by_face_element_pt()= 
+           new std::map<unsigned, unsigned>; 
+         }
+        
+        // Get pointer to the map of indices associated with
+        // additional values created by face elements
+        std::map<unsigned, unsigned>* map_pt=
+         bnew_master_nod_pt->index_of_first_value_assigned_by_face_element_pt();
+        
+        // Loop over number of entries in map
+        for (unsigned i=0;i<n_entry;i++)
+         {
+          // Read out pairs...
+          
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+          oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+                     << " Key of map entry for macro element master node" 
+                     << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+                     << std::endl;
+#endif
+          unsigned first=Flat_packed_unsigneds[
+           Counter_for_flat_packed_unsigneds++];
+          
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+          oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+                     << " Value of map entry for macro element master node" 
+                     << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+                     << std::endl;
+#endif
+          unsigned second=Flat_packed_unsigneds[
+           Counter_for_flat_packed_unsigneds++];
+          
+          // ...and assign
+          (*map_pt)[first]=second;
          }
        }
+
      }
     else
      {
-      // Not on boundary, incremenet counter
-      Counter_for_flat_packed_unsigneds++;
-
       // Create node (not attached to any element)
       if (time_stepper_pt!=0)
        {
@@ -1410,9 +1757,14 @@ template<class EXT_ELEMENT>
 
     // Create a new node update element for this master node if required
     FiniteElement *new_node_update_f_el_pt=0;
-    if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]==1)
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+    oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+               << "  Bool: need new external halo element "
+               << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+               << std::endl;
+#endif
+    if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++]==1)
      {
-      Counter_for_flat_packed_unsigneds++;
       GeneralisedElement* new_node_update_el_pt = new EXT_ELEMENT; 
 
       //Add external hal element to this mesh
@@ -1434,21 +1786,30 @@ template<class EXT_ELEMENT>
        {
         n_cont_inter_values=-1;
        }
-
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+      oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+                 << "  Bool: we have a macro element mesh "
+                 << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+                 << std::endl;
+#endif
       // If we're using macro elements to update,
-      if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]==1)
+      if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++]==1)
        {
-        Counter_for_flat_packed_unsigneds++;
-
         // Set the macro element
         MacroElementNodeUpdateMesh* macro_mesh_pt=
          dynamic_cast<MacroElementNodeUpdateMesh*>
          (external_mesh_pt);
+
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+      oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+                 << "  Number of macro element "
+                 << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+                 << std::endl;
+#endif
         unsigned macro_el_num=
-         Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds];
+         Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++];
         new_node_update_f_el_pt->set_macro_elem_pt
          (macro_mesh_pt->macro_domain_pt()->macro_element_pt(macro_el_num));
-        Counter_for_flat_packed_unsigneds++;
 
         // we need to receive
         // the lower left and upper right coordinates of the macro
@@ -1460,11 +1821,9 @@ template<class EXT_ELEMENT>
           for (unsigned i_dim=0;i_dim<el_dim;i_dim++)
            {
             q_el_pt->s_macro_ll(i_dim)=Flat_packed_doubles
-             [Counter_for_flat_packed_doubles];
-            Counter_for_flat_packed_doubles++;
+             [Counter_for_flat_packed_doubles++];
             q_el_pt->s_macro_ur(i_dim)=Flat_packed_doubles
-             [Counter_for_flat_packed_doubles];
-            Counter_for_flat_packed_doubles++;
+             [Counter_for_flat_packed_doubles++];
            }
          }
         else // Throw an error
@@ -1479,11 +1838,6 @@ template<class EXT_ELEMENT>
             OOMPH_EXCEPTION_LOCATION);
          }
        }
-      else // No macro element
-       {
-        Counter_for_flat_packed_unsigneds++;
-       }
-
 
       unsigned n_node=new_node_update_f_el_pt->nnode();
       for (unsigned j=0;j<n_node;j++)
@@ -1497,11 +1851,15 @@ template<class EXT_ELEMENT>
      }
     else // The node update element exists already
      {
-      Counter_for_flat_packed_unsigneds++;
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+      oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+                 << "  Number of already existing external halo element "
+                 << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+                 << std::endl;
+#endif
       new_node_update_f_el_pt=dynamic_cast<FiniteElement*>(
        external_mesh_pt->external_halo_element_pt
-       (loc_p,Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]));
-      Counter_for_flat_packed_unsigneds++;
+       (loc_p,Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++]));
      }
 
     // Remaining required information to create functioning
@@ -1549,9 +1907,14 @@ template<class EXT_ELEMENT>
     // The master node should also be a SolidNode
     // If this node was on a boundary then it needs to
     // be on the same boundary here
-    if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]==1)
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+      oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+                 << "  Bool master is a boundary (solid) node "
+                 << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+                 << std::endl;
+#endif
+    if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++]==1)
      {
-      Counter_for_flat_packed_unsigneds++;
       // Construct a new boundary node
       if (time_stepper_pt!=0)
        {
@@ -1563,28 +1926,102 @@ template<class EXT_ELEMENT>
         new_master_nod_pt=new BoundaryNode<SolidNode>
          (n_lag_dim,n_lag_type,n_dim,n_position_type,n_value);
        }
-      // How many boundaries on the external mesh?
-      unsigned n_bnd=external_mesh_pt->nboundary();
-      for (unsigned i_bnd=0;i_bnd<n_bnd;i_bnd++)
+
+
+      // How many boundaries does the macro element master node live on?
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+      oomph_info 
+       << "Rec:" << Counter_for_flat_packed_unsigneds 
+       << " Number of boundaries the solid master node is on: " 
+       << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+       << std::endl;
+#endif
+      unsigned nb=Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++];
+      for (unsigned i=0;i<nb;i++)
        {
-        if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]==1)
-         {
-          // Add to current boundary; increment counter
-          external_mesh_pt->add_boundary_node(i_bnd,
-                                              new_master_nod_pt);
-          Counter_for_flat_packed_unsigneds++;
-         }
-        else
-         {
-          // Not on this boundary; increment counter
-          Counter_for_flat_packed_unsigneds++;
-         }
+        // Boundary number
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+        oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+                   << " Solid master node is on boundary " 
+                   << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+                   << std::endl;
+#endif
+        unsigned i_bnd=
+         Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++];
+        external_mesh_pt->add_boundary_node(i_bnd,new_master_nod_pt);
+       }
+      
+      // Do we have additional values created by face elements?
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+      oomph_info 
+       << "Rec:" << Counter_for_flat_packed_unsigneds 
+       << " Number of additional values created by face element "
+       << "for solid master node " 
+       << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+       << std::endl;
+#endif
+      unsigned n_entry=Flat_packed_unsigneds[
+       Counter_for_flat_packed_unsigneds++];
+      if (n_entry>0)
+       {
+        // Create storage, if it doesn't already exist, for the map 
+        // that will contain the position of the first entry of 
+        // this face element's additional values, 
+        BoundaryNodeBase* bnew_master_nod_pt=
+         dynamic_cast<BoundaryNodeBase*>(new_master_nod_pt);
+#ifdef PARANOID
+      if (bnew_master_nod_pt==0)
+       {
+        throw OomphLibError(
+         "Failed to cast new node to boundary node\n",
+         "Multi_domain_functions::construct_new_external_halo_master_node_helper()",
+         OOMPH_EXCEPTION_LOCATION);
+       }
+#endif
+      if(bnew_master_nod_pt->
+         index_of_first_value_assigned_by_face_element_pt()==0)
+       {
+        bnew_master_nod_pt->
+         index_of_first_value_assigned_by_face_element_pt()= 
+         new std::map<unsigned, unsigned>; 
+       }
+      
+      // Get pointer to the map of indices associated with
+      // additional values created by face elements
+      std::map<unsigned, unsigned>* map_pt=
+       bnew_master_nod_pt->index_of_first_value_assigned_by_face_element_pt();
+      
+      // Loop over number of entries in map
+      for (unsigned i=0;i<n_entry;i++)
+       {
+        // Read out pairs...
+        
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+        oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+                   << " Key of map entry for solid master node" 
+                   << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+                   << std::endl;
+#endif
+        unsigned first=Flat_packed_unsigneds[
+         Counter_for_flat_packed_unsigneds++];
+        
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+        oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+                   << " Value of map entry for solid master node" 
+                   << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+                   << std::endl;
+#endif
+        unsigned second=Flat_packed_unsigneds[
+         Counter_for_flat_packed_unsigneds++];
+        
+        // ...and assign
+        (*map_pt)[first]=second;
        }
      }
-    else
+    
+   }
+   else
      {
-      // Not on boundary, increment counter
-      Counter_for_flat_packed_unsigneds++;
       // Construct an ordinary (non-boundary) node
       if (time_stepper_pt!=0)
        {
@@ -1611,18 +2048,23 @@ template<class EXT_ELEMENT>
        {
         solid_master_nod_pt->variable_position_pt()->
          set_value(t,i_val,
-                   Flat_packed_doubles[Counter_for_flat_packed_doubles]);
-	Counter_for_flat_packed_doubles++;
+                   Flat_packed_doubles[Counter_for_flat_packed_doubles++]);
        }
      }
    }
   else // Just an ordinary node!
    {
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+    oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+               << "  Bool node is on boundary "
+               << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+               << std::endl;
+#endif
+
     // If this node was on a boundary then it needs to
     // be on the same boundary here
-    if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]==1)
+    if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++]==1)
      {
-      Counter_for_flat_packed_unsigneds++;
       // Construct a new boundary node
       if (time_stepper_pt!=0)
        {
@@ -1634,28 +2076,100 @@ template<class EXT_ELEMENT>
         new_master_nod_pt=new BoundaryNode<Node>
          (n_dim,n_position_type,n_value);
        }
-      // How many boundaries on the external mesh?
-      unsigned n_bnd=external_mesh_pt->nboundary();
-      for (unsigned i_bnd=0;i_bnd<n_bnd;i_bnd++)
+      
+      // How many boundaries does the master node live on?
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+      oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+                 << " Number of boundaries the master node is on: " 
+                 << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+                 << std::endl;
+#endif
+      unsigned nb=Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++];
+      for (unsigned i=0;i<nb;i++)
        {
-        if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]==1)
+        // Boundary number
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+        oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+                   << "  Master node is on boundary " 
+                   << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+                   << std::endl;
+#endif
+        unsigned i_bnd=
+         Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++];
+        external_mesh_pt->add_boundary_node(i_bnd,new_master_nod_pt);
+       }
+      
+      
+      // Do we have additional values created by face elements?
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+      oomph_info 
+       << "Rec:" << Counter_for_flat_packed_unsigneds 
+       << " Number of additional values created by face element "
+       << "for master node " 
+       << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+       << std::endl;
+#endif
+      unsigned n_entry=Flat_packed_unsigneds[
+       Counter_for_flat_packed_unsigneds++];
+      if (n_entry>0)
+       {
+        // Create storage, if it doesn't already exist, for the map 
+        // that will contain the position of the first entry of 
+        // this face element's additional values, 
+        BoundaryNodeBase* bnew_master_nod_pt=
+         dynamic_cast<BoundaryNodeBase*>(new_master_nod_pt);
+#ifdef PARANOID
+        if (bnew_master_nod_pt==0)
          {
-          // Add to current boundary; increment counter
-          external_mesh_pt->add_boundary_node(i_bnd,
-                                              new_master_nod_pt);
-          Counter_for_flat_packed_unsigneds++;
+          throw OomphLibError(
+           "Failed to cast new node to boundary node\n",
+           "Multi_domain_functions::construct_new_external_halo_master_node_helper()",
+           OOMPH_EXCEPTION_LOCATION);
          }
-        else
+#endif
+        if(bnew_master_nod_pt->
+           index_of_first_value_assigned_by_face_element_pt()==0)
          {
-          // Not on this boundary; increment counter
-          Counter_for_flat_packed_unsigneds++;
+          bnew_master_nod_pt->
+           index_of_first_value_assigned_by_face_element_pt()= 
+           new std::map<unsigned, unsigned>; 
+         }
+        
+        // Get pointer to the map of indices associated with
+        // additional values created by face elements
+        std::map<unsigned, unsigned>* map_pt=
+         bnew_master_nod_pt->index_of_first_value_assigned_by_face_element_pt();
+        
+        // Loop over number of entries in map
+        for (unsigned i=0;i<n_entry;i++)
+         {
+          // Read out pairs...
+          
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+          oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+                     << " Key of map entry for master node" 
+                     << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+                     << std::endl;
+#endif
+          unsigned first=Flat_packed_unsigneds[
+           Counter_for_flat_packed_unsigneds++];
+          
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+          oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+                     << " Value of map entry for master node" 
+                     << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+                     << std::endl;
+#endif
+          unsigned second=Flat_packed_unsigneds[
+           Counter_for_flat_packed_unsigneds++];
+          
+          // ...and assign
+          (*map_pt)[first]=second;
          }
        }
      }
     else
      {
-      // Not on boundary, increment counter
-      Counter_for_flat_packed_unsigneds++;
       // Construct an ordinary (non-boundary) node
       if (time_stepper_pt!=0)
        {
@@ -1670,7 +2184,6 @@ template<class EXT_ELEMENT>
 
     // Add this as an external halo node
     external_mesh_pt->add_external_halo_node_pt(loc_p,new_master_nod_pt);
-
    }
 
   // Remaining info received for all node types
@@ -1681,8 +2194,7 @@ template<class EXT_ELEMENT>
     for (unsigned t=0;t<n_prev;t++)
      {
       new_master_nod_pt->set_value(t,i_val,Flat_packed_doubles
-                                   [Counter_for_flat_packed_doubles]);
-      Counter_for_flat_packed_doubles++;
+                                   [Counter_for_flat_packed_doubles++]);
      }
    }
 
@@ -1694,8 +2206,7 @@ template<class EXT_ELEMENT>
      {
       // Copy to coordinate
       new_master_nod_pt->x(t,idim)=Flat_packed_doubles
-       [Counter_for_flat_packed_doubles];
-      Counter_for_flat_packed_doubles++;
+       [Counter_for_flat_packed_doubles++];
      }
    }
 

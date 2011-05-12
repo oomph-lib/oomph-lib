@@ -764,9 +764,10 @@ class AlgebraicMesh : public virtual Mesh
 #ifdef OOMPH_HAS_MPI
    // Update positions for external halo nodes attached to this mesh
    // Loop over processors
-   int n_proc=nexternal_halo_proc();
-   for (int iproc=0;iproc<n_proc;iproc++)
+   for (std::map<unsigned,Vector<Node*> >::iterator it=
+         External_halo_node_pt.begin();it!=External_halo_node_pt.end();it++)
     {
+     int iproc=(*it).first;
      AlgebraicNode* alg_nod_pt=0;
      unsigned n_ext_halo_node=nexternal_halo_node(iproc);
      // Only act if there are any external halo nodes

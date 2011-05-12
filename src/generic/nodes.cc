@@ -613,9 +613,11 @@ void Data::assign_eqn_numbers(unsigned long &global_number,
   }
 }
 
+
 //================================================================
 ///  Self-test: Have all values been classified as pinned/unpinned?
 /// Return 0 if OK. 
+
 //================================================================
 unsigned Data::self_test()
 {

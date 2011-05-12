@@ -1902,7 +1902,7 @@ complete_hanging_nodes(const int& ncont_interpolated_values)
 void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
 (OomphCommunicator* comm_pt, const unsigned& ncont_interpolated_values)
 {
- // This synchronisation necessarily takes place before the classification 
+ // This synchronisation necesarily takes place before the classification 
  // of halo/haloed nodes, so it must be performed on the halo/haloed elements
 
  // Store number of processors and current process
@@ -1910,156 +1910,8 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
  int n_proc=comm_pt->nproc();
  int my_rank=comm_pt->my_rank();
 
- // Determine the shared nodes lookup scheme - all nodes located on the 
- // halo(ed) elements between two domains.  This scheme is necessary in order
- // to identify master nodes that may not be present in the halo-haloed
- // element lookup scheme between two processors (for example, if the node
- // is on an element which is in a lookup scheme between two higher-numbered
- // processors)
-
  double t_start = 0.0;
- if (Global_timings::Doc_comprehensive_timings)
-  {
-   t_start=TimingHelpers::timer();
-  }
-
- // Need to clear the shared node scheme first
- Shared_node_pt.clear();
-
- for (int d=0;d<n_proc;d++)
-  {
-   // map of bools for whether the node has been shared,
-   // initialised to 0 (false) for each domain d
-   std::map<Node*,bool> node_shared;
-
-   // For all domains lower than the current domain
-   if (d<my_rank)
-    {
-     // Get the nodes from the halo elements first
-     Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(d));
-     unsigned nhalo_elem=halo_elem_pt.size();
-
-     for (unsigned e=0;e<nhalo_elem;e++)
-      {
-       // Get element
-       FiniteElement* el_pt=dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
-       unsigned nnod=el_pt->nnode();
-
-       // Loop over nodes
-       for (unsigned j=0;j<nnod;j++)
-        {
-         Node* nod_pt=el_pt->node_pt(j);
-
-         // Add it as a shared node from current domain
-         if (!node_shared[nod_pt])
-          {
-           this->add_shared_node_pt(d,nod_pt);
-           node_shared[nod_pt]=true;
-          }
-
-        } // end loop over nodes
-
-      } // end loop over elements
-
-     // Now get any left over nodes on the haloed elements
-     Vector<GeneralisedElement*> haloed_elem_pt(this->haloed_element_pt(d));
-     unsigned nhaloed_elem=haloed_elem_pt.size();
-
-     for (unsigned e=0;e<nhaloed_elem;e++)
-      {
-       // Get element
-       FiniteElement* el_pt=dynamic_cast<FiniteElement*>(haloed_elem_pt[e]);
-       unsigned nnod=el_pt->nnode();
-
-       // Loop over the nodes
-       for (unsigned j=0;j<nnod;j++)
-        {
-         Node* nod_pt=el_pt->node_pt(j);
-
-         // Add it as a shared node from current domain
-         if (!node_shared[nod_pt])
-          {
-           this->add_shared_node_pt(d,nod_pt);
-           node_shared[nod_pt]=true;
-          }
-
-        } // end loop over nodes
-
-      } // end loop over elements
-
-    }
-
-   // If the domain is bigger than the current rank
-   if (d>my_rank)
-    {
-     // Get the nodes from the haloed elements first
-     Vector<GeneralisedElement*> haloed_elem_pt(this->haloed_element_pt(d));
-     unsigned nhaloed_elem=haloed_elem_pt.size();
-
-     for (unsigned e=0;e<nhaloed_elem;e++)
-      {
-       // Get element
-       FiniteElement* el_pt=dynamic_cast<FiniteElement*>(haloed_elem_pt[e]);
-       unsigned nnod=el_pt->nnode();
-
-       // Loop over nodes
-       for (unsigned j=0;j<nnod;j++)
-        {
-         Node* nod_pt=el_pt->node_pt(j);
-
-         // Add it as a shared node from current domain
-         if (!node_shared[nod_pt])
-          {
-           this->add_shared_node_pt(d,nod_pt);
-           node_shared[nod_pt]=true;
-          }
-
-        } // end loop over nodes
-
-      } // end loop over elements
-
-     // Now get the nodes from any halo elements left over
-     Vector<GeneralisedElement*> halo_elem_pt(this->halo_element_pt(d));
-     unsigned nhalo_elem=halo_elem_pt.size();
-
-     for (unsigned e=0;e<nhalo_elem;e++)
-      {
-       // Get element
-       FiniteElement* el_pt=dynamic_cast<FiniteElement*>(halo_elem_pt[e]);
-       unsigned nnod=el_pt->nnode();
-
-       // Loop over nodes
-       for (unsigned j=0;j<nnod;j++)
-        {
-         Node* nod_pt=el_pt->node_pt(j);
-
-         // Add it as a shared node from current domain
-         if (!node_shared[nod_pt])
-          {
-           this->add_shared_node_pt(d,nod_pt);
-           node_shared[nod_pt]=true;
-          }
-
-        } // end loop over nodes
-
-      } // end loop over elements
-
-    } // end if (d ...)
-    
-  } // end loop over processes
-
-
- double t_end=0.0;
- if (Global_timings::Doc_comprehensive_timings)
-  {
-   t_end = TimingHelpers::timer();
-   oomph_info << "Time for identification of shared nodes: " 
-              << t_end-t_start << std::endl;
-  }
-
-
- // Now we are in a position to synchronise the hanging status
- // of nodes on halo/haloed elements
+ double t_end = 0.0;
 
  // Storage for the hanging status of halo/haloed nodes on elements
  Vector<Vector<int> > vector_haloed_hanging(n_proc);
@@ -2070,8 +1922,7 @@ void TreeBasedRefineableMeshBase::synchronise_hanging_nodes
 
  // Loop over the hanging status for each interpolated variable
  for (int icont=-1; icont<ncont_inter_values; icont++)
-  { //-- hierher 
-
+  { 
    if (Global_timings::Doc_comprehensive_timings)
     {
      t_start = TimingHelpers::timer();

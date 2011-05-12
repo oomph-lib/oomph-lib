@@ -58,8 +58,8 @@ class ElementWithExternalElement: public virtual FiniteElement
   {
     public:
 
-   /// Constructor. Initialise member data and pointers to data associated
-   /// with the external elements to zero.
+   /// \short Constructor. Initialise member data and pointers to data 
+   /// associated with the external elements to zero.
    ElementWithExternalElement() : FiniteElement(),
     Add_external_interaction_data(true),  
     Add_external_geometric_data(true),  
@@ -93,6 +93,23 @@ class ElementWithExternalElement: public virtual FiniteElement
      BrokenCopy::broken_assign("ElementWithExternalElement");
     }
    
+
+   /// \short Helper function to check if storage has actually been allocated
+   bool storage_has_been_allocated() const
+    {
+     //If either of the storage arrays is zero, then storage has not
+     //yet been allocated. Both arrays are allocated at once, so 
+     //if one is zero both will (should) be
+     if((External_element_pt==0) || (External_element_local_coord==0))
+      {
+       return false;
+      }
+     else
+      {
+       return true;
+      }
+    }
+
    /// \short Access function to source element for specified interaction
    /// index at specified integration point
    FiniteElement*& external_element_pt(const unsigned &interaction_index,

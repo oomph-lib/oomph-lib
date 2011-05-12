@@ -267,6 +267,9 @@ public:
    
    // Initialise the forest pointer to NULL
    Forest_pt = 0;
+
+   // Mesh hasn't been pruned yet
+   Uniform_refinement_level_when_pruned=0;
   }
 
 
@@ -414,6 +417,21 @@ public:
  virtual void read_refinement(std::ifstream& restart_file, 
                               Vector<Vector<unsigned> >& to_be_refined); 
 
+
+ /// \short Level to which the mesh was uniformly refined when it was pruned
+ /// (const version)
+ unsigned uniform_refinement_level_when_pruned() const
+ {
+  return Uniform_refinement_level_when_pruned;
+ }
+
+
+ /// \short Level to which the mesh was uniformly refined when it was pruned
+ unsigned& uniform_refinement_level_when_pruned()
+ {
+  return Uniform_refinement_level_when_pruned;
+ }
+ 
 #ifdef OOMPH_HAS_MPI
  /// Synchronise the hanging nodes if the mesh is distributed
  void synchronise_hanging_nodes(OomphCommunicator* comm_pt,
@@ -436,6 +454,9 @@ protected:
                                          Vector<Node*>& master_nodes,
                                          Vector<double>& hang_weights,
                                          const int &ival);
+ 
+ /// \short Level to which the mesh was uniformly refined when it was pruned
+ unsigned Uniform_refinement_level_when_pruned;
  
  /// Max. permissible refinement level (relative to base mesh)
  unsigned Max_refinement_level;

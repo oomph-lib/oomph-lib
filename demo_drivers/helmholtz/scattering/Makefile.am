@@ -28,3 +28,6 @@ scattering_SOURCES = scattering.cc validate.sh
 scattering_LDADD = -L@libdir@ -lhelmholtz -lgeneric -loomph_crbond_bessel $(EXTERNAL_LIBS) $(FLIBS)
 
 
+
+
+EXTRA_DIST += annular_meshes.h

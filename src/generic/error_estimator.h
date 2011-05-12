@@ -540,6 +540,47 @@ class Z2ErrorEstimator : public virtual ErrorEstimator
   }
 
 
+
+ /// \short Constructor. Provide vectors to "lower left" and "upper right" 
+ /// vertices of refinement region
+ /// Also specify the node number of a central node 
+ /// within elements -- it's used to determine if an element is
+ /// in the region where refinement is supposed to take place.
+ /// Optional boolean flag (defaulting to false) indicates that 
+ /// refinement decision is based on Lagrangian coordinates -- only 
+ /// applicable to solid meshes.
+ DummyErrorEstimator(Mesh* mesh_pt, 
+                     const Vector<double>& lower_left, 
+                     const Vector<double>& upper_right, 
+                     const unsigned& central_node_number,
+                     const bool& use_lagrangian_coordinates=false) :
+  Use_lagrangian_coordinates(use_lagrangian_coordinates),
+   Central_node_number(central_node_number)
+   {
+    
+    unsigned dim=mesh_pt->finite_element_pt(0)->node_pt(0)->ndim();
+    if (use_lagrangian_coordinates)
+     {
+      SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(
+       mesh_pt->finite_element_pt(0)->node_pt(0));
+      if (solid_nod_pt!=0)
+       {
+        dim=solid_nod_pt-> nlagrangian();
+       }
+     }
+    unsigned nregion=1;
+    Region_low_bound.resize(nregion);
+    Region_upp_bound.resize(nregion);
+    Region_low_bound[0]=lower_left;
+    Region_upp_bound[0]=upper_right;
+   }
+
+
+
+
+
+
+
  /// Broken copy constructor
  DummyErrorEstimator(const DummyErrorEstimator&) 
   { 

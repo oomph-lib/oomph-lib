@@ -111,6 +111,16 @@ namespace Multi_domain_functions
   /// functions
   Vector<unsigned> Flat_packed_unsigneds;
 
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+
+  // Temporary vector of strings to enable full annotation of multi domain
+  // comms (but keep alive because it would be such a bloody pain to
+  // rewrite it if things ever go wrong again...)
+  Vector<std::string> Flat_packed_unsigneds_string;
+
+
+#endif
+
   /// \short Counter used when processing vector of flat-packed 
   /// unsigneds -- this is really "private" data, declared here
   /// to avoid having to pass it (and the associated array)
@@ -195,514 +205,8 @@ namespace Multi_domain_functions
 
 #ifdef OOMPH_HAS_MPI
 
-  /// \short Boolean to indicate when to check for duplicate data
-  ///        between the external halo storage schemes
-  bool Check_for_duplicates=true;
 
   // Functions for location method in multi-domain problems 
-
-
-  //======================================================================
-  /// Function which removes duplicate data that exist because
-  /// they have been distinctly created by communications from different
-  /// processors, whereas the data are in fact the same
-  //======================================================================
-  void remove_duplicate_data(Problem* problem_pt, Mesh* const &mesh_pt)
-  {
-   // Each individual container of external halo nodes has unique
-   // nodes/equation numbers, but there may be some duplication between
-   // two or more different containers; the following code checks for this
-   // and removes the duplication by overwriting any data point with an already
-   // existing eqn number with the original data point which had the eqn no.
-
-   // Storage for existing global equation numbers for each node
-   Vector<std::pair<Vector<int>,Node*> > existing_global_eqn_numbers;
-
-   // Doc timings if required
-   double t_start=0.0;
-   if (Doc_timings)
-    {
-     t_start=TimingHelpers::timer();
-    }
-
-   // Loop over existing "normal" elements in mesh
-   unsigned n_element=mesh_pt->nelement();
-   for (unsigned e=0;e<n_element;e++)
-    {
-     FiniteElement* el_pt = mesh_pt->finite_element_pt(e);
-     if (el_pt!=0)
-      {
-       // Loop over nodes
-       unsigned n_node=el_pt->nnode();
-       for (unsigned j=0;j<n_node;j++)
-        {
-         Node* nod_pt=el_pt->node_pt(j);
-         unsigned n_val=nod_pt->nvalue();
-         Vector<int> nodal_eqn_numbers(n_val);
-         for (unsigned i_val=0;i_val<n_val;i_val++)
-          {
-           nodal_eqn_numbers[i_val]=nod_pt->eqn_number(i_val);
-          }
-         
-         // All these nodes have unique equation numbers, so add all
-         existing_global_eqn_numbers.push_back
-          (make_pair(nodal_eqn_numbers,nod_pt));
-         
-         // If it's a SolidNode then add its extra equation numbers
-         SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
-         if (solid_nod_pt!=0)
-          {
-           unsigned n_val_solid=solid_nod_pt->variable_position_pt()->nvalue();
-           Vector<int> solid_nodal_eqn_numbers(n_val_solid);
-           for (unsigned i_val=0;i_val<n_val_solid;i_val++)
-            {
-             solid_nodal_eqn_numbers[i_val]=solid_nod_pt->
-              variable_position_pt()->eqn_number(i_val);
-            }
-           // Add these equation numbers to the existing storage
-           existing_global_eqn_numbers.push_back
-            (make_pair(solid_nodal_eqn_numbers,solid_nod_pt));
-          }
-         
-         // Take into account master nodes too
-         if (dynamic_cast<RefineableElement*>(el_pt)!=0)
-          {
-           int n_cont_int_values=dynamic_cast<RefineableElement*>
-            (el_pt)->ncont_interpolated_values();
-           for (int i_cont=-1;i_cont<n_cont_int_values;i_cont++)
-            {
-             if (nod_pt->is_hanging(i_cont))
-              {
-               HangInfo* hang_pt=nod_pt->hanging_pt(i_cont);
-               unsigned n_master=hang_pt->nmaster();
-               for (unsigned m=0;m<n_master;m++)
-                {
-                 Node* master_nod_pt=hang_pt->master_node_pt(m);
-                 unsigned n_val=master_nod_pt->nvalue();
-                 Vector<int> master_nodal_eqn_numbers(n_val);
-                 for (unsigned i_val=0;i_val<n_val;i_val++)
-                  {
-                   master_nodal_eqn_numbers[i_val]=
-                    master_nod_pt->eqn_number(i_val);
-                  }
-                 
-                 // Add these equation numbers to the existing storage
-                 existing_global_eqn_numbers.push_back
-                  (make_pair(master_nodal_eqn_numbers,master_nod_pt));
-                 
-                 // If this master is a SolidNode then add its extra 
-                 // eqn numbers
-                 SolidNode* master_solid_nod_pt=dynamic_cast<SolidNode*>
-                  (master_nod_pt);
-                 if (master_solid_nod_pt!=0)
-                  {
-                   unsigned n_val_mst_solid=master_solid_nod_pt->
-                    variable_position_pt()->nvalue();
-                   Vector<int> master_solid_nodal_eqn_numbers(n_val_mst_solid);
-                   for (unsigned i_val=0;i_val<n_val_mst_solid;i_val++)
-                    {
-                     master_solid_nodal_eqn_numbers[i_val]=
-                      master_solid_nod_pt->
-                      variable_position_pt()->eqn_number(i_val);
-                    }
-                   // Add these equation numbers to the existing storage
-                   existing_global_eqn_numbers.push_back
-                    (make_pair(master_solid_nodal_eqn_numbers,
-                               master_solid_nod_pt));
-                  }
-                }
-              }
-            }
-          }
-        }
-      } //End of FiniteElement data
-
-     // Internal data equation numbers do not need to be added since 
-     // internal data cannot be shared between distinct elements, so 
-     // internal data on locally-stored elements can never be halo.
-    }
-   
-
-   // Doc timings if required
-   if (Doc_timings)
-    {
-     double t_locate=TimingHelpers::timer();
-     oomph_info 
-      <<"CPU for assembly of existing global eqns in remove_duplicate_data(): "
-      << t_locate-t_start << std::endl;
-    }
-
-
-   // Now loop over the other processors from highest to lowest
-   // (i.e. if there is a duplicate between these containers
-   //  then this will use the node on the highest numbered processor)
-   int n_proc=problem_pt->communicator_pt()->nproc();
-   int my_rank=problem_pt->communicator_pt()->my_rank();
-   for (int iproc=n_proc-1;iproc>=0;iproc--)
-    {
-     // Don't have external halo elements with yourself!
-     if (iproc!=my_rank)
-      {
-       // Loop over external halo elements with iproc for internal data
-       // to remove the duplicates in the external halo element storage
-       unsigned n_element=mesh_pt->nexternal_halo_element(iproc);
-       for (unsigned e_ext=0;e_ext<n_element;e_ext++)
-        {
-         GeneralisedElement* ext_el_pt=mesh_pt->
-          external_halo_element_pt(iproc,e_ext);
-
-         FiniteElement* finite_ext_el_pt = 
-          dynamic_cast<FiniteElement*>(ext_el_pt);
-         
-         if(finite_ext_el_pt!=0)
-          {
-           // Loop over nodes
-           unsigned n_node=finite_ext_el_pt->nnode();
-           for (unsigned j=0;j<n_node;j++)
-            {
-             Node* nod_pt=finite_ext_el_pt->node_pt(j);
-             unsigned n_val=nod_pt->nvalue();
-             Vector<int> nodal_eqn_numbers(n_val);
-             for (unsigned i_val=0;i_val<n_val;i_val++)
-              {
-               nodal_eqn_numbers[i_val]=nod_pt->eqn_number(i_val);
-               
-              }
-             // Check for duplicates with the existing set of 
-             //global eqn numbers
-             
-             // Test to see if there is a duplicate with current
-             unsigned n_exist_eqn=existing_global_eqn_numbers.size();
-             bool is_a_duplicate=false;
-             // Loop over the existing global equation numbers
-             for (unsigned i=0;i<n_exist_eqn;i++)
-              {
-               // If the number of values is different from the size of the 
-               // vector then they are already different, so only test if 
-               // the sizes are the same
-               if (n_val==(existing_global_eqn_numbers[i].first).size())
-                {
-                 // Loop over values
-                 for (unsigned i_val=0;i_val<n_val;i_val++)
-                  {
-                   // Make sure it isn't a pinned dof already
-                   if (nodal_eqn_numbers[i_val]>=0)
-                    {
-                     // Test it against the equivalent entry in existing...
-                     if (nodal_eqn_numbers[i_val]==
-                         (existing_global_eqn_numbers[i].first)[i_val])
-                      {
-                       is_a_duplicate=true;
-                       // It's a duplicate, so point the current node at the
-                       // other position instead!
-                       finite_ext_el_pt->node_pt(j)=
-                        existing_global_eqn_numbers[i].second;
-                       break;
-                      }
-                    }
-                  }
-                }
-               // Break out of the loop if we have already found a duplicate
-               if (is_a_duplicate)
-                {
-                 break;
-                }
-              }
-             
-             // If it's not a duplicate, add it to the existing storage
-             if (!is_a_duplicate)
-              {
-               existing_global_eqn_numbers.push_back
-                (make_pair(nodal_eqn_numbers,nod_pt));
-               // These external halo nodes need to be unclassified in 
-               // order for
-               // them to be bypassed in assign_(local)_eqn_numbers; they
-               // receive the correct global equation numbers during the
-               // synchronisation process in 
-               // Problem::copy_external_haloed_eqn_numbers_helper(...)   
-               for (unsigned i_val=0;i_val<n_val;i_val++)
-                {
-                 nod_pt->eqn_number(i_val)=Data::Is_unclassified;
-                }
-              }
-             
-             // Do the same for any SolidNodes
-             SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
-             if (solid_nod_pt!=0)
-              {
-               unsigned n_val_solid=solid_nod_pt->
-                variable_position_pt()->nvalue();
-               Vector<int> solid_nodal_eqn_numbers(n_val_solid);
-               for (unsigned i_val=0;i_val<n_val_solid;i_val++)
-                {
-                 solid_nodal_eqn_numbers[i_val]=solid_nod_pt->
-                  variable_position_pt()->eqn_number(i_val);
-                }
-               
-               // Check for duplicate equation numbers
-               
-               // Test to see if there is a duplicate with current
-               unsigned n_exist_eqn=existing_global_eqn_numbers.size();
-               bool is_a_duplicate=false;
-               // Loop over the existing global equation numbers
-               for (unsigned i=0;i<n_exist_eqn;i++)
-                {
-                 // If the number of values is different from the size of the 
-                 // vector then they are already different, so only test if 
-                 // the sizes are the same
-                 if (n_val_solid==
-                     (existing_global_eqn_numbers[i].first).size())
-                  {
-                   // Loop over values
-                   for (unsigned i_val=0;i_val<n_val_solid;i_val++)
-                    {
-                     // Make sure it isn't a pinned dof already
-                     if (solid_nodal_eqn_numbers[i_val]>=0)
-                      {
-                       // Test it against the equivalent entry in existing...
-                       if (solid_nodal_eqn_numbers[i_val]==
-                           (existing_global_eqn_numbers[i].first)[i_val])
-                        {
-                         is_a_duplicate=true;
-                         // It's a duplicate, so point the current node at the
-                         // other position instead!
-                         solid_nod_pt=dynamic_cast<SolidNode*>
-                          (existing_global_eqn_numbers[i].second);
-                         break;
-                        }
-                      }
-                    }
-                  }
-                 // Break out of the loop if we have already found a duplicate
-                 if (is_a_duplicate)
-                  {
-                   break;
-                  }
-                }
-               
-               // If it's not a duplicate, add it to the existing storage
-               if (!is_a_duplicate)
-                {
-                 existing_global_eqn_numbers.push_back
-                  (make_pair(solid_nodal_eqn_numbers,nod_pt));
-                 // These external halo nodes need to be unclassified in order
-                 // for them to be bypassed in assign_(local)_eqn_numbers; they
-                 // receive the correct global equation numbers during the
-                 // synchronisation process in 
-                 // Problem::copy_external_haloed_eqn_numbers_helper(...)   
-                 for (unsigned i_val=0;i_val<n_val_solid;i_val++)
-                  {
-                   solid_nod_pt->variable_position_pt()->
-                    eqn_number(i_val)=Data::Is_unclassified;
-                  }
-                }
-               
-              }
-             
-             // Do the same for any master nodes
-             if (dynamic_cast<RefineableElement*>(ext_el_pt)!=0)
-              {
-               int n_cont_inter_values=dynamic_cast<RefineableElement*>
-                (ext_el_pt)->ncont_interpolated_values();
-               for (int i_cont=-1;i_cont<n_cont_inter_values;i_cont++)
-                {
-                 if (nod_pt->is_hanging(i_cont))
-                  {
-                   HangInfo* hang_pt=nod_pt->hanging_pt(i_cont);
-                   unsigned n_master=hang_pt->nmaster();
-                   for (unsigned m=0;m<n_master;m++)
-                    {
-                     Node* master_nod_pt=hang_pt->master_node_pt(m);
-                     unsigned n_val=master_nod_pt->nvalue();
-                     Vector<int> master_nodal_eqn_numbers(n_val);
-                     for (unsigned i_val=0;i_val<n_val;i_val++)
-                      {
-                       master_nodal_eqn_numbers[i_val]=
-                        master_nod_pt->eqn_number(i_val);
-                      }
-                     
-                     // Check for duplicate master eqn numbers
-                     
-                     // Test to see if there is a duplicate with current
-                     unsigned n_exist_eqn=existing_global_eqn_numbers.size();
-                     bool is_a_duplicate=false;
-                     // Loop over the existing global equation numbers
-                     for (unsigned i=0;i<n_exist_eqn;i++)
-                      {
-                       // If the number of values is different from the size
-                       // of the vector then they are already different,
-                       // only test if the sizes are the same
-                       if (n_val==
-                           (existing_global_eqn_numbers[i].first).size())
-                        {
-                         // Loop over values
-                         for (unsigned i_val=0;i_val<n_val;i_val++)
-                          {
-                           // Make sure it isn't a pinned dof already
-                           if (master_nodal_eqn_numbers[i_val]>=0)
-                            {
-                             // Test it against the equivalent existing entry
-                             if (master_nodal_eqn_numbers[i_val]==
-                                 (existing_global_eqn_numbers[i].first)
-                                 [i_val])
-                              {
-                               is_a_duplicate=true;
-                               // It's a duplicate, so point this node's
-                               // master at the original node instead!
-                               // Need the weight of the original node
-                               double m_weight=hang_pt->master_weight(m);
-                               // Set master
-                               finite_ext_el_pt->node_pt(j)->hanging_pt(i_cont)
-                                ->set_master_node_pt
-                                (m,existing_global_eqn_numbers[i].second,
-                                 m_weight);
-                               break;
-                              }
-                            }
-                          }
-                        }
-                       // Break out of the loop if we have found a duplicate
-                       if (is_a_duplicate)
-                        {
-                         break;
-                        }
-                      }
-                     
-                     // If it's not a duplicate, add it to the existing storage
-                     if (!is_a_duplicate)
-                      {
-                       existing_global_eqn_numbers.push_back
-                        (make_pair(master_nodal_eqn_numbers,master_nod_pt));
-                       // These external halo nodes need to be unclassified in
-                       // order for them to be bypassed in assign_eqn_numbers;
-                       // they receive the correct global equation numbers 
-                       // during
-                       // the synchronisation process in
-                       // Problem::copy_external_haloed_eqn_numbers_helper(...)
-                       for (unsigned i_val=0;i_val<n_val;i_val++)
-                        {
-                         master_nod_pt->eqn_number(i_val)
-                          =Data::Is_unclassified;
-                        }
-                      }
-                     
-                     // Do the same again for SolidNodes
-                     SolidNode* solid_master_nod_pt=dynamic_cast<SolidNode*>
-                      (master_nod_pt);
-                     if (solid_master_nod_pt!=0)
-                      {
-                       unsigned n_val_solid=solid_master_nod_pt->
-                        variable_position_pt()->nvalue();
-                       Vector<int> sld_master_nodal_eqn_numbers(n_val_solid);
-                       for (unsigned i_val=0;i_val<n_val_solid;i_val++)
-                        {
-                         sld_master_nodal_eqn_numbers[i_val]=
-                          solid_master_nod_pt
-                          ->variable_position_pt()->eqn_number(i_val);
-                        }
-                       
-                       // Check for duplicate master eqn numbers
-                       
-                       // Test to see if there is a duplicate with current
-                       unsigned n_exist_eqn=existing_global_eqn_numbers.size();
-                       bool is_a_duplicate=false;
-                       // Loop over the existing global equation numbers
-                       for (unsigned i=0;i<n_exist_eqn;i++)
-                        {
-                         // If the number of values is different from the size
-                         // of the vector then they are already different,
-                         // only test if the sizes are the same
-                         if (n_val_solid==
-                             (existing_global_eqn_numbers[i].first).size())
-                          {
-                           // Loop over values
-                           for (unsigned i_val=0;i_val<n_val_solid;i_val++)
-                            {
-                             // Make sure it isn't a pinned dof already
-                             if (sld_master_nodal_eqn_numbers[i_val]>=0)
-                              {
-                               // Test it against the equivalent existing entry
-                               if (sld_master_nodal_eqn_numbers[i_val]==
-                                   (existing_global_eqn_numbers[i].first)
-                                   [i_val])
-                                {
-                                 is_a_duplicate=true;
-                                 // It's a duplicate, 
-                                 // so point the current master
-                                 // node at the original node instead!
-                                 // Need the weight of the original node
-                                 double m_weight=hang_pt->master_weight(m);
-                                 // Set master
-                                 finite_ext_el_pt->node_pt(j)->
-                                  hanging_pt(i_cont)
-                                  ->set_master_node_pt
-                                  (m,existing_global_eqn_numbers[i].second,
-                                   m_weight);
-                                 break;
-                                }
-                              }
-                            }
-                          }
-                         // Break out of the loop if we have found a duplicate
-                         if (is_a_duplicate)
-                          {
-                           break;
-                          }
-                        }
-                       
-                       // If it's not a duplicate then 
-                       // add it to existing storage
-                       if (!is_a_duplicate)
-                        {
-                         existing_global_eqn_numbers.push_back
-                          (make_pair(sld_master_nodal_eqn_numbers,
-                                     master_nod_pt));
-                         // These external halo nodes need to be 
-                         // unclassified in
-                         // order for them to be bypassed in 
-                         // assign__eqn_numbers;
-                         // they receive the correct global equation numbers
-                         // during the synchronisation process in 
-                         // Problem::copy_external_haloed_eqn_numbers_helper(.)
-                         for (unsigned i_val=0;i_val<n_val_solid;i_val++)
-                          {
-                           solid_master_nod_pt->variable_position_pt()->
-                            eqn_number(i_val)=Data::Is_unclassified;
-                          }
-                        }
-                       
-                       
-                      }
-                     
-                    }
-                  }
-                } // end hanging loop over continous interpolated variables
-              }
-             
-            } // end loop over nodes on external halo elements
-           
-          } //End of check for finite element
- 
-         // Reset any internal data to Is_unclassified as there
-         // cannot be any duplication (a halo element cannot be an 
-         // external halo element)
-         unsigned n_int_data=ext_el_pt->ninternal_data();
-         for (unsigned i=0;i<n_int_data;i++)
-          {
-           unsigned n_val=ext_el_pt->internal_data_pt(i)->nvalue();
-           for (unsigned i_val=0;i_val<n_val;i_val++)
-            {
-             ext_el_pt->internal_data_pt(i)->eqn_number(i_val)=
-              Data::Is_unclassified;
-            }
-          }
-        } // end loop over external halo elements
-      }
-    } // end loop over processors
-
-  }
-
-
 
 
 
@@ -761,6 +265,10 @@ namespace Multi_domain_functions
               comm_pt->mpi_comm(),&status);
      MPI_Wait(&request,MPI_STATUS_IGNORE);
     }
+   else
+    {
+     Received_flat_packed_zetas_to_be_found.resize(0);
+    }
    
    // Now we should have the Zeta arrays set up correctly
    // for the next round of locations
@@ -794,8 +302,6 @@ namespace Multi_domain_functions
    if (my_rank<iproc) { orig_send_proc=n_proc+orig_send_proc; }
    int orig_recv_proc=my_rank+iproc;
    if ((my_rank+iproc)>=n_proc) { orig_recv_proc=orig_recv_proc-n_proc; }
-
-
 
    // Send the double values associated with external halos
    //------------------------------------------------------
@@ -838,7 +344,7 @@ namespace Multi_domain_functions
    if (send_count_unsigned_values!=0)
     {     
      MPI_Isend(&Flat_packed_unsigneds[0],send_count_unsigned_values,MPI_INT,
-              orig_send_proc,15,comm_pt->mpi_comm(),&request);
+               orig_send_proc,15,comm_pt->mpi_comm(),&request);
     }
    if (receive_count_unsigned_values!=0)
     {
@@ -927,8 +433,6 @@ namespace Multi_domain_functions
      MPI_Wait(&request,MPI_STATUS_IGNORE);
     }
 
-
-
    // Copy across into original containers -- these can now
    //------------------------------------------------------
    // be processed by create_external_halo_elements() to generate
@@ -943,7 +447,7 @@ namespace Multi_domain_functions
    Flat_packed_unsigneds.resize(receive_count_unsigned_values);
    for (int ii=0;ii<receive_count_unsigned_values;ii++)
     {
-     Flat_packed_unsigneds[ii]=received_unsigned_values[ii];
+     Flat_packed_unsigneds[ii]=received_unsigned_values[ii];     
     }
    Proc_id_plus_one_of_external_element.resize(receive_count);
    Located_element_status.resize(receive_count);
@@ -982,14 +486,20 @@ namespace Multi_domain_functions
        // Indicate that this node is a hanging node so the other
        // process knows to create HangInfo and masters, etc.
        Flat_packed_unsigneds.push_back(1);
-
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+       Flat_packed_unsigneds_string.push_back("Is hanging");
+#endif
        // If this is a hanging node then add all its masters as
        // external halo nodes if they have not yet been added
        HangInfo* hang_pt=nod_pt->hanging_pt(i_cont);
        // Loop over masters
        unsigned n_master=hang_pt->nmaster();
+
        // Indicate number of master nodes to add on other process
        Flat_packed_unsigneds.push_back(n_master);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+       Flat_packed_unsigneds_string.push_back("nmaster");
+#endif
        for (unsigned m=0;m<n_master;m++)
         {
          Node* master_nod_pt=hang_pt->master_node_pt(m);
@@ -1008,6 +518,9 @@ namespace Multi_domain_functions
       {
        // Indicate that it's not a hanging node in this variable
        Flat_packed_unsigneds.push_back(0);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+       Flat_packed_unsigneds_string.push_back("Not hanging");
+#endif
       }
     } // end loop over continously interpolated values
 
@@ -1023,16 +536,21 @@ namespace Multi_domain_functions
   {
    // Attempt to add this node as an external haloed node
    unsigned n_ext_haloed_nod=external_mesh_pt->nexternal_haloed_node(iproc);
-   unsigned external_haloed_node_index;
-   external_haloed_node_index=
+   unsigned external_haloed_node_index=
     external_mesh_pt->add_external_haloed_node_pt(iproc,nod_pt);
 
    // If it was added then the new index should match the size of the storage
    if (external_haloed_node_index==n_ext_haloed_nod)
     {
-     // Indicate that this node needs to be constructed on
-     // the other process
      Flat_packed_unsigneds.push_back(1);
+ 
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+     std::stringstream junk;
+     junk << "Node needs to be constructed [size=" 
+          << Flat_packed_unsigneds.size() << "]; last entry: "
+          << Flat_packed_unsigneds[Flat_packed_unsigneds.size()-1];
+     Flat_packed_unsigneds_string.push_back(junk.str());
+#endif
 
      // This helper function gets all the required information for the 
      // specified node and stores it into MPI-sendable information
@@ -1043,11 +561,26 @@ namespace Multi_domain_functions
     }
    else // It was already added
     {
-     Flat_packed_unsigneds.push_back(0);
+     Flat_packed_unsigneds.push_back(0); 
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+     std::stringstream junk;
+     junk << "Node was already added [size=" 
+          << Flat_packed_unsigneds.size() << "]; last entry: "
+          << Flat_packed_unsigneds[Flat_packed_unsigneds.size()-1];
+
+     Flat_packed_unsigneds_string.push_back(junk.str());
+#endif
+
      // This node is already an external haloed node, so tell
      // the other process its index in the equivalent external halo storage
      Flat_packed_unsigneds.push_back(external_haloed_node_index);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+     Flat_packed_unsigneds_string.push_back("external haloed node index");
+#endif
     }
+
+
+
   }
 
 
@@ -1071,6 +604,9 @@ namespace Multi_domain_functions
      // Indicate that this node needs to be constructed on
      // the other process
      Flat_packed_unsigneds.push_back(1);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+     Flat_packed_unsigneds_string.push_back("Node needs to be constructed[2]");
+#endif
 
      // This gets all the required information for the specified
      // master node and stores it into MPI-sendable information
@@ -1083,10 +619,16 @@ namespace Multi_domain_functions
    else // It was already added
     {
      Flat_packed_unsigneds.push_back(0);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+     Flat_packed_unsigneds_string.push_back("Node was already added[2]");
+#endif
 
      // This node is already an external haloed node, so tell
      // the other process its index in the equivalent external halo storage
      Flat_packed_unsigneds.push_back(external_haloed_node_index);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+     Flat_packed_unsigneds_string.push_back("external haloed node index[2]");
+#endif
     }
   }
 
@@ -1108,6 +650,9 @@ namespace Multi_domain_functions
    //  when using Lagrange multipliers]
    unsigned n_val=nod_pt->nvalue();
    Flat_packed_unsigneds.push_back(n_val);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+   Flat_packed_unsigneds_string.push_back("Number of values");
+#endif
 
    unsigned n_dim=nod_pt->ndim();
    TimeStepper* time_stepper_pt=nod_pt->time_stepper_pt();
@@ -1130,11 +675,20 @@ namespace Multi_domain_functions
    if (found_timestepper)
     {
      Flat_packed_unsigneds.push_back(1);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+     Flat_packed_unsigneds_string.push_back("Found timestepper");
+#endif
      Flat_packed_unsigneds.push_back(time_stepper_index);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+     Flat_packed_unsigneds_string.push_back("Timestepper index");
+#endif
     }
    else
     {
      Flat_packed_unsigneds.push_back(0);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+     Flat_packed_unsigneds_string.push_back("Not found timestepper");
+#endif
     }
 
    // Default number of previous values to 1
@@ -1149,18 +703,87 @@ namespace Multi_domain_functions
    if (nod_pt->is_on_boundary())
     {
      Flat_packed_unsigneds.push_back(1);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+     Flat_packed_unsigneds_string.push_back("Node is on boundary");
+#endif
+
      // Loop over the boundaries of the external mesh
+     Vector<unsigned> boundaries;
      unsigned n_bnd=external_mesh_pt->nboundary();
      for (unsigned i_bnd=0;i_bnd<n_bnd;i_bnd++)
       {
        // Which boundaries (could be more than one) is it on?
        if (nod_pt->is_on_boundary(i_bnd))
         {
-         Flat_packed_unsigneds.push_back(1);
+         boundaries.push_back(i_bnd);
         }
-       else
+      }
+     unsigned nb=boundaries.size();
+     Flat_packed_unsigneds.push_back(nb);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+     std::stringstream junk;
+     junk << "Node is on "<< nb << " boundaries";
+     Flat_packed_unsigneds_string.push_back(junk.str());
+#endif
+     for (unsigned i=0;i<nb;i++)
+      {
+       Flat_packed_unsigneds.push_back(boundaries[i]);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+       std::stringstream junk;
+       junk << "Node is on boundary " << boundaries[i] << " of " << n_bnd;
+       Flat_packed_unsigneds_string.push_back(junk.str());
+#endif
+      }
+
+     // Get pointer to the map of indices associated with
+     // additional values created by face elements
+     BoundaryNodeBase* bnod_pt=
+      dynamic_cast<BoundaryNodeBase*>(nod_pt);
+#ifdef PARANOID
+     if (bnod_pt==0)
+      {
+       throw OomphLibError(
+        "Failed to cast new node to boundary node\n",
+        "Multi_domain_functions::get_required_nodal_information_helper()",
+        OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+     std::map<unsigned, unsigned>* map_pt=
+      bnod_pt->index_of_first_value_assigned_by_face_element_pt();
+     
+     // No additional values created
+     if (map_pt==0)
+      {
+       Flat_packed_unsigneds.push_back(0);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+       std::stringstream junk;
+       Flat_packed_unsigneds_string.push_back("No additional values were created by face element");
+#endif
+      }
+     // Created additional values
+     else
+      {
+       // How many?
+       Flat_packed_unsigneds.push_back(map_pt->size());
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+       std::stringstream junk;
+       junk << "Map size " << map_pt->size() << n_bnd;
+       Flat_packed_unsigneds_string.push_back(junk.str());
+#endif
+       // Loop over entries in map and add to send data
+       for (std::map<unsigned, unsigned>::iterator p=
+             map_pt->begin();
+            p!=map_pt->end();p++)
         {
-         Flat_packed_unsigneds.push_back(0);
+         Flat_packed_unsigneds.push_back((*p).first);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+         std::stringstream junk;
+         Flat_packed_unsigneds_string.push_back("Key of map entry");
+#endif
+         Flat_packed_unsigneds.push_back((*p).second);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+         Flat_packed_unsigneds_string.push_back("Value of map entry");
+#endif
         }
       }
     }
@@ -1168,6 +791,9 @@ namespace Multi_domain_functions
     {
      // Not on any boundary
      Flat_packed_unsigneds.push_back(0);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+     Flat_packed_unsigneds_string.push_back("Node is not on any boundary");
+#endif
     }
 
    // Is the Node algebraic?  If so, send its ref values and
@@ -1183,10 +809,16 @@ namespace Multi_domain_functions
      // Get default node update function ID
      unsigned update_id=alg_nod_pt->node_update_fct_id();
      Flat_packed_unsigneds.push_back(update_id);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+     Flat_packed_unsigneds_string.push_back("Alg Node update id");
+#endif
 
      // Get reference values at default...
      unsigned n_ref_val=alg_nod_pt->nref_value();
      Flat_packed_unsigneds.push_back(n_ref_val);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+     Flat_packed_unsigneds_string.push_back("Alg Node n ref values");
+#endif
      for (unsigned i_ref_val=0;i_ref_val<n_ref_val;i_ref_val++)
       {
        Flat_packed_doubles.push_back(alg_nod_pt->ref_value(i_ref_val));
@@ -1195,11 +827,16 @@ namespace Multi_domain_functions
      // Access geometric objects at default...
      unsigned n_geom_obj=alg_nod_pt->ngeom_object();
      Flat_packed_unsigneds.push_back(n_geom_obj);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+     Flat_packed_unsigneds_string.push_back("Alg Node n geom objects");
+#endif
      for (unsigned i_geom=0;i_geom<n_geom_obj;i_geom++)
       {
        GeomObject* geom_obj_pt=alg_nod_pt->geom_object_pt(i_geom);
+
        // Check this against the stored geometric objects in mesh
        unsigned n_geom_list=alg_mesh_pt->ngeom_object_list_pt();
+
        // Default found index to zero
        unsigned found_geom_object=0;
        for (unsigned i_list=0;i_list<n_geom_list;i_list++)
@@ -1210,6 +847,9 @@ namespace Multi_domain_functions
           }
         }
        Flat_packed_unsigneds.push_back(found_geom_object);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+       Flat_packed_unsigneds_string.push_back("Found geom object");
+#endif
       }
     }
 
@@ -1261,15 +901,30 @@ namespace Multi_domain_functions
   {
    // Need to send over dimension, position type and number of values
    Flat_packed_unsigneds.push_back(master_nod_pt->ndim());
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+   Flat_packed_unsigneds_string.push_back("Master node ndim");
+#endif
    Flat_packed_unsigneds.push_back(master_nod_pt->nposition_type());
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+   Flat_packed_unsigneds_string.push_back("Master node npos_type");
+#endif
    Flat_packed_unsigneds.push_back(master_nod_pt->nvalue());
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+   Flat_packed_unsigneds_string.push_back("Master node nvalue");
+#endif
    
    // If it's a solid node, also need to send lagrangian dim and type
    SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(master_nod_pt);
    if (solid_nod_pt!=0)
     {
      Flat_packed_unsigneds.push_back(solid_nod_pt->nlagrangian());
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+     Flat_packed_unsigneds_string.push_back("Master solid node nlagr");
+#endif
      Flat_packed_unsigneds.push_back(solid_nod_pt->nlagrangian_type());
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+     Flat_packed_unsigneds_string.push_back("Master solid node nlagr_type");
+#endif
     }
 
    unsigned n_dim=master_nod_pt->ndim();
@@ -1294,11 +949,20 @@ namespace Multi_domain_functions
    if (found_timestepper)
     {
      Flat_packed_unsigneds.push_back(1);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+     Flat_packed_unsigneds_string.push_back("Master node Found timestepper");
+#endif
      Flat_packed_unsigneds.push_back(time_stepper_index);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+     Flat_packed_unsigneds_string.push_back("Master node Timestepper index");
+#endif
     }
    else
     {
      Flat_packed_unsigneds.push_back(0);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+     Flat_packed_unsigneds_string.push_back("Master node Not found timestepper");
+#endif
     }
 
    // Default number of previous values to 1
@@ -1313,18 +977,89 @@ namespace Multi_domain_functions
    if (master_nod_pt->is_on_boundary())
     {
      Flat_packed_unsigneds.push_back(1);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+     Flat_packed_unsigneds_string.push_back("Master node is on boundary");
+#endif
      // Loop over the boundaries of the external mesh
+     Vector<unsigned> boundaries;
      unsigned n_bnd=external_mesh_pt->nboundary();
      for (unsigned i_bnd=0;i_bnd<n_bnd;i_bnd++)
       {
        // Which boundaries (could be more than one) is it on?
        if (master_nod_pt->is_on_boundary(i_bnd))
         {
-         Flat_packed_unsigneds.push_back(1);
+         boundaries.push_back(i_bnd);
         }
-       else
+      }
+     unsigned nb=boundaries.size();
+     Flat_packed_unsigneds.push_back(nb);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+     std::stringstream junk;
+     junk << "Master node is on "<< nb << " boundaries";
+     Flat_packed_unsigneds_string.push_back(junk.str());
+#endif
+     for (unsigned i=0;i<nb;i++)
+      {
+       Flat_packed_unsigneds.push_back(boundaries[i]);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+       std::stringstream junk;
+       junk << "Master noode is on boundary "
+            << boundaries[i] << " of " << n_bnd;
+       Flat_packed_unsigneds_string.push_back(junk.str());
+#endif
+      }
+
+     // Get pointer to the map of indices associated with
+     // additional values created by face elements
+     BoundaryNodeBase* bnod_pt=
+      dynamic_cast<BoundaryNodeBase*>(master_nod_pt);
+#ifdef PARANOID
+     if (bnod_pt==0)
+      {
+       throw OomphLibError(
+        "Failed to cast new node to boundary node\n",
+        "Multi_domain_functions::get_required_master_nodal_information_helper()",
+        OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+     std::map<unsigned, unsigned>* map_pt=
+      bnod_pt->index_of_first_value_assigned_by_face_element_pt();
+     
+     // No additional values created
+     if (map_pt==0)
+      {
+       Flat_packed_unsigneds.push_back(0);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+       std::stringstream junk;
+       Flat_packed_unsigneds_string.push_back("No additional values were created by face element for this master node");
+#endif
+      }
+     // Created additional values
+     else
+      {
+       // How many?
+       Flat_packed_unsigneds.push_back(map_pt->size());
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+       std::stringstream junk;
+       junk << "Map size for master node " << map_pt->size() << n_bnd;
+       Flat_packed_unsigneds_string.push_back(junk.str());
+#endif
+       // Loop over entries in map and add to send data
+       for (std::map<unsigned, unsigned>::iterator p=
+             map_pt->begin();
+            p!=map_pt->end();p++)
         {
-         Flat_packed_unsigneds.push_back(0);
+         Flat_packed_unsigneds.push_back((*p).first);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+         std::stringstream junk;
+         Flat_packed_unsigneds_string.push_back(
+          "Key of map entry for master node");
+#endif
+         Flat_packed_unsigneds.push_back((*p).second);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+         Flat_packed_unsigneds_string.push_back(
+          "Value of map entry for master node");
+#endif
         }
       }
     }
@@ -1332,6 +1067,9 @@ namespace Multi_domain_functions
     {
      // Not on any boundary
      Flat_packed_unsigneds.push_back(0);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+     Flat_packed_unsigneds_string.push_back("Master node is not on any boundary");
+#endif
     }
 
    // Is the Node algebraic?  If so, send its ref values and
@@ -1347,10 +1085,16 @@ namespace Multi_domain_functions
      // Get default node update function ID
      unsigned update_id=alg_nod_pt->node_update_fct_id();
      Flat_packed_unsigneds.push_back(update_id);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+     Flat_packed_unsigneds_string.push_back("Master Alg Node update id");
+#endif
 
      // Get reference values at default...
      unsigned n_ref_val=alg_nod_pt->nref_value();
      Flat_packed_unsigneds.push_back(n_ref_val);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+     Flat_packed_unsigneds_string.push_back("Master Alg Node n ref values");
+#endif
      for (unsigned i_ref_val=0;i_ref_val<n_ref_val;i_ref_val++)
       {
        Flat_packed_doubles.push_back(alg_nod_pt->ref_value(i_ref_val));
@@ -1359,6 +1103,9 @@ namespace Multi_domain_functions
      // Access geometric objects at default...
      unsigned n_geom_obj=alg_nod_pt->ngeom_object();
      Flat_packed_unsigneds.push_back(n_geom_obj);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+     Flat_packed_unsigneds_string.push_back("Master Alg Node n geom objects");
+#endif
      for (unsigned i_geom=0;i_geom<n_geom_obj;i_geom++)
       {
        GeomObject* geom_obj_pt=alg_nod_pt->geom_object_pt(i_geom);
@@ -1374,6 +1121,9 @@ namespace Multi_domain_functions
           }
         }
        Flat_packed_unsigneds.push_back(found_geom_object);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+       Flat_packed_unsigneds_string.push_back("Master node Found geom object");
+#endif
       }
     } // end AlgebraicNode check
 
@@ -1397,7 +1147,9 @@ namespace Multi_domain_functions
      if (external_haloed_el_index==n_ext_haloed_el)
       {
        Flat_packed_unsigneds.push_back(1);
-       
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+       Flat_packed_unsigneds_string.push_back("Master Node needs to be constructed");
+#endif
        //Cast to a finite elemnet
        FiniteElement* macro_node_update_finite_el_pt 
         = dynamic_cast<FiniteElement*>(macro_node_update_el_pt);
@@ -1408,13 +1160,17 @@ namespace Multi_domain_functions
        if (macro_mesh_pt!=0)
         {
          Flat_packed_unsigneds.push_back(1);
-         
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+         Flat_packed_unsigneds_string.push_back("Mesh is macro element mesh");
+#endif
          // Need to send the macro element number in the mesh across
          MacroElement* macro_el_pt= macro_node_update_finite_el_pt
           ->macro_elem_pt();
          unsigned macro_el_num=macro_el_pt->macro_element_number();
          Flat_packed_unsigneds.push_back(macro_el_num);
-
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+         Flat_packed_unsigneds_string.push_back("Number of macro element");
+#endif
          // Also need to send
          // the lower left and upper right coordinates of the macro element
          QElementBase* q_el_pt=dynamic_cast<QElementBase*>
@@ -1449,6 +1205,9 @@ namespace Multi_domain_functions
             // should never get here... an error should be thrown I suppose
         {
          Flat_packed_unsigneds.push_back(0);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+         Flat_packed_unsigneds_string.push_back("Mesh is not a macro element mesh");
+#endif
         }
 
        // This element needs to be fully functioning on the other
@@ -1466,7 +1225,13 @@ namespace Multi_domain_functions
      else // The external haloed element already exists
       {
        Flat_packed_unsigneds.push_back(0);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+       Flat_packed_unsigneds_string.push_back("External haloed element already exists");
+#endif
        Flat_packed_unsigneds.push_back(external_haloed_el_index);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+       Flat_packed_unsigneds_string.push_back("Index of existing external haloed element");
+#endif
       }
 
     } // end of MacroElementNodeUpdateNode check 
@@ -1525,11 +1290,14 @@ namespace Multi_domain_functions
  {
   // Given the node and the external mesh, and received information
   // about them from process loc_p, construct them on the current process
-  if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]==1)
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+  oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+             << " Bool: New node needs to be constructed " 
+             << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+             << std::endl;
+#endif
+  if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++]==1)
    {
-    // Increment counter
-    Counter_for_flat_packed_unsigneds++;
-
     // Construct a new node based upon sent information
     construct_new_external_halo_node_helper(new_nod_pt,loc_p,
                                             node_index,new_el_pt,
@@ -1537,15 +1305,20 @@ namespace Multi_domain_functions
    }
   else
    {
-    // Increment counter (node already exists)
-    Counter_for_flat_packed_unsigneds++;
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+    oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+               << "  Index of existing external halo node " 
+               << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+               << std::endl;
+#endif
 
     // Copy node from received location
     new_nod_pt=external_mesh_pt->external_halo_node_pt
-     (loc_p,Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]);
+     (loc_p,Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++]);
+
     new_el_pt->node_pt(node_index)=new_nod_pt;
-    // Increment counter
-    Counter_for_flat_packed_unsigneds++;
+
+
    }
  }
 
@@ -1563,8 +1336,13 @@ namespace Multi_domain_functions
  {
   // The first entry indicates the number of values at this new Node
   // (which may be different across the same element e.g. Lagrange multipliers)
-  unsigned n_val=Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds];
-  Counter_for_flat_packed_unsigneds++;
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+  oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+             << "  Number of values of external halo node " 
+             << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+             << std::endl;
+#endif
+  unsigned n_val=Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++];
 
   // Null TimeStepper for now
   TimeStepper* time_stepper_pt=0;
@@ -1573,28 +1351,38 @@ namespace Multi_domain_functions
 
   // The next entry in Flat_packed_unsigneds indicates
   // if a timestepper is required for this halo node
-  if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]==1)
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+  oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+             << "  Timestepper req'd for node " 
+             << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+             << std::endl;
+#endif
+  if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++]==1)
    {
-    Counter_for_flat_packed_unsigneds++;
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+    oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+               << "  Index of timestepper " 
+               << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+               << std::endl;
+#endif
     // Index
     time_stepper_pt=problem_pt->time_stepper_pt
-     (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]);
-    Counter_for_flat_packed_unsigneds++;
+     (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++]);
+
     // Check whether number of prev values is "sent" across
     n_prev=time_stepper_pt->ntstorage(); 
-   }
-  else
-   {
-    // No timestepper, increment counter
-    Counter_for_flat_packed_unsigneds++;
    }
 
   // If this node was on a boundary then it needs to
   // be on the same boundary here
-  if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]==1)
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+  oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+             << "  Is node on boundary? " 
+             << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+             << std::endl;
+#endif
+  if (Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++]==1)
    {
-    Counter_for_flat_packed_unsigneds++;
-
     // Construct a new boundary node
     if (time_stepper_pt!=0)
      {
@@ -1605,31 +1393,94 @@ namespace Multi_domain_functions
      {
       new_nod_pt=new_el_pt->construct_boundary_node(node_index);
      }
-
-    // How many boundaries on the external mesh?
-    unsigned n_bnd=external_mesh_pt->nboundary();
-    for (unsigned i_bnd=0;i_bnd<n_bnd;i_bnd++)
+    
+    // How many boundaries does the node live on?
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+    oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+               << " Number of boundaries the node is on: " 
+               << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+               << std::endl;
+#endif
+    unsigned nb=Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++];
+    for (unsigned i=0;i<nb;i++)
      {
-      if (Flat_packed_unsigneds
-          [Counter_for_flat_packed_unsigneds]==1)
+      // Boundary number
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+      oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+                 << "  Node is on boundary " 
+                 << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+                 << std::endl;
+#endif
+      unsigned i_bnd=
+       Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++];
+      external_mesh_pt->add_boundary_node(i_bnd,new_nod_pt);
+     }
+
+    // Do we have additional values created by face elements?
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+    oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+               << " Number of additional values created by face element " 
+               << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+               << std::endl;
+#endif
+    unsigned n_entry=Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++];
+    if (n_entry>0)
+     {
+      // Create storage, if it doesn't already exist, for the map 
+      // that will contain the position of the first entry of 
+      // this face element's additional values, 
+      BoundaryNodeBase* bnew_nod_pt=
+       dynamic_cast<BoundaryNodeBase*>(new_nod_pt);
+#ifdef PARANOID
+      if (bnew_nod_pt==0)
        {
-        // Add to current boundary; increment counter
-        external_mesh_pt->add_boundary_node(i_bnd,
-                                            new_nod_pt);
-        Counter_for_flat_packed_unsigneds++;
+        throw OomphLibError(
+         "Failed to cast new node to boundary node\n",
+         "Multi_domain_functions::construct_new_external_halo_node_helper()",
+         OOMPH_EXCEPTION_LOCATION);
        }
-      else
+#endif
+      if(bnew_nod_pt->
+         index_of_first_value_assigned_by_face_element_pt()==0)
        {
-        // Not on this boundary; increment counter
-        Counter_for_flat_packed_unsigneds++;
+        bnew_nod_pt->
+         index_of_first_value_assigned_by_face_element_pt()= 
+         new std::map<unsigned, unsigned>; 
+       }
+      
+      // Get pointer to the map of indices associated with
+      // additional values created by face elements
+      std::map<unsigned, unsigned>* map_pt=
+       bnew_nod_pt->index_of_first_value_assigned_by_face_element_pt();
+      
+      // Loop over number of entries in map
+      for (unsigned i=0;i<n_entry;i++)
+       {
+        // Read out pairs...
+
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+        oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+                   << " Key of map entry" 
+                   << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+                   << std::endl;
+#endif
+        unsigned first=Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++];
+
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+        oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+                   << " Value of map entry" 
+                   << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+                   << std::endl;
+#endif
+        unsigned second=Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds++];
+        
+        // ...and assign
+        (*map_pt)[first]=second;
        }
      }
    }
   else
    {
-    // Not on boundary, increment counter
-    Counter_for_flat_packed_unsigneds++;
-
     // Construct an ordinary (non-boundary) node
     if (time_stepper_pt!=0)
      {
@@ -1661,17 +1512,28 @@ namespace Multi_domain_functions
     /// the default node update id
     /// e.g. for the quarter circle there are 
     /// "Upper_left_box", "Lower right box" etc...
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+    oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+               << "  Alg node update id "
+               << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+               << std::endl;
+#endif
+
     unsigned update_id=Flat_packed_unsigneds
-     [Counter_for_flat_packed_unsigneds];
-    Counter_for_flat_packed_unsigneds++;
+     [Counter_for_flat_packed_unsigneds++];
 
     Vector<double> ref_value;
 
     // The size of this vector is in the next entry
     // of All_alg_nodal_info
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+    oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+               << "  Alg node # of ref values "
+               << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+               << std::endl;
+#endif
     unsigned n_ref_val=Flat_packed_unsigneds
-     [Counter_for_flat_packed_unsigneds];
-    Counter_for_flat_packed_unsigneds++;
+     [Counter_for_flat_packed_unsigneds++];
 
     // The reference values themselves are in
     // All_alg_ref_value
@@ -1679,8 +1541,7 @@ namespace Multi_domain_functions
     for (unsigned i_ref=0;i_ref<n_ref_val;i_ref++)
      {
       ref_value[i_ref]=Flat_packed_doubles
-       [Counter_for_flat_packed_doubles];
-      Counter_for_flat_packed_doubles++;
+       [Counter_for_flat_packed_doubles++];
      }
 
     Vector<GeomObject*> geom_object_pt;
@@ -1690,18 +1551,28 @@ namespace Multi_domain_functions
 
     // The size of this vector is in the next entry
     // of All_alg_nodal_info
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION    
+    oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+               << "  Alg node # of geom objects "
+               << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+               << std::endl;
+#endif
     unsigned n_geom_obj=Flat_packed_unsigneds
-     [Counter_for_flat_packed_unsigneds];
-    Counter_for_flat_packed_unsigneds++;
+     [Counter_for_flat_packed_unsigneds++];
 
     // The remaining indices are in the rest of 
     // All_alg_nodal_info
     geom_object_pt.resize(n_geom_obj);
     for (unsigned i_geom=0;i_geom<n_geom_obj;i_geom++)
      {
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+      oomph_info << "Rec:" << Counter_for_flat_packed_unsigneds 
+                 << "  Alg node: geom object index "
+                 << Flat_packed_unsigneds[Counter_for_flat_packed_unsigneds]
+                 << std::endl;
+#endif
       unsigned geom_index=Flat_packed_unsigneds
-       [Counter_for_flat_packed_unsigneds];
-      Counter_for_flat_packed_unsigneds++;
+       [Counter_for_flat_packed_unsigneds++];
       // This index indicates which of the AlgebraicMesh's
       // stored geometric objects should be used
       // (0 is a null pointer; everything else should have
@@ -1761,8 +1632,7 @@ namespace Multi_domain_functions
        {
         solid_nod_pt->variable_position_pt()->
          set_value(t,i_val,
-                   Flat_packed_doubles[Counter_for_flat_packed_doubles]);
-        Counter_for_flat_packed_doubles++;
+                   Flat_packed_doubles[Counter_for_flat_packed_doubles++]);
        }
      }
    }
@@ -1781,8 +1651,7 @@ namespace Multi_domain_functions
     for (unsigned t=0;t<n_prev;t++)
      {
       new_nod_pt->set_value(t,i_val,Flat_packed_doubles
-                            [Counter_for_flat_packed_doubles]);
-      Counter_for_flat_packed_doubles++;
+                            [Counter_for_flat_packed_doubles++]);
      }
    }
 
@@ -1794,8 +1663,7 @@ namespace Multi_domain_functions
      {
       // Copy to coordinate
       new_nod_pt->x(t,idim)=Flat_packed_doubles
-       [Counter_for_flat_packed_doubles];
-      Counter_for_flat_packed_doubles++;
+       [Counter_for_flat_packed_doubles++];
      }
    }
  }
@@ -1813,8 +1681,11 @@ namespace Multi_domain_functions
    int n_proc=comm_pt->nproc();
    int my_rank=comm_pt->my_rank();
 
-   // Resize vectors containing data to be setn
+   // Clear vectors containing data to be sent
    Flat_packed_doubles.resize(0);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+   Flat_packed_unsigneds_string.resize(0);
+#endif
    Flat_packed_unsigneds.resize(0);
    Flat_packed_located_coordinates.resize(0);
 
@@ -1825,7 +1696,7 @@ namespace Multi_domain_functions
    
    // Number of zeta tuples to be dealt with
    unsigned n_zeta=Received_flat_packed_zetas_to_be_found.size()/Dim;
-   
+ 
    // Create storage for the processor id (plus one) on which
    // the zetas stored in Flat_packed_zetas_not_found_locally[...]
    // were located 
@@ -1885,6 +1756,7 @@ namespace Multi_domain_functions
          // external halo copy needs to be created on the current process
          // minus wherever we are in the "ring-loop"
          int halo_copy_proc=my_rank-iproc;
+
          // If iproc is bigger than my_rank then we've "gone through" nproc-1
          if (my_rank<iproc) { halo_copy_proc=n_proc+halo_copy_proc; }
           
@@ -1901,7 +1773,7 @@ namespace Multi_domain_functions
          unsigned external_haloed_el_index=
           external_mesh_pt->add_external_haloed_element_pt(halo_copy_proc,
                                                            source_el_pt);
-          
+
          // If it was added to the storage then the returned index
          // will be the same as the (old) size of the storage
          if (external_haloed_el_index==n_extern_haloed)
@@ -1929,7 +1801,9 @@ namespace Multi_domain_functions
            if (macro_mesh_pt!=0)
             {
              Flat_packed_unsigneds.push_back(1);
-              
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+             Flat_packed_unsigneds_string.push_back("Mesh is macro element mesh[2]");
+#endif
              //Cast to finite element... this must work because it's
              //a macroelement no update mesh
              FiniteElement* source_finite_el_pt 
@@ -1939,7 +1813,9 @@ namespace Multi_domain_functions
              // Send the macro element number across
              unsigned macro_el_num=macro_el_pt->macro_element_number();
              Flat_packed_unsigneds.push_back(macro_el_num);
-              
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+             Flat_packed_unsigneds_string.push_back("Number of macro element[2]");
+#endif              
              // we need to send
              // the lower left and upper right coordinates of the macro
              QElementBase* q_el_pt=dynamic_cast<QElementBase*>(source_el_pt);
@@ -1971,6 +1847,9 @@ namespace Multi_domain_functions
            else // Not using macro elements to update
             {
              Flat_packed_unsigneds.push_back(0);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+             Flat_packed_unsigneds_string.push_back("Mesh is not a macro element mesh [2]");
+#endif
             }
             
             
@@ -2011,6 +1890,9 @@ namespace Multi_domain_functions
            // already been added
            Located_element_status[i]=Exists;
            Flat_packed_unsigneds.push_back(external_haloed_el_index);
+#ifdef ANNOTATE_MULTI_DOMAIN_COMMUNICATION
+           Flat_packed_unsigneds_string.push_back("Index of existing external haloed element[2]");
+#endif
           }
           
          // The coordinates returned by locate_zeta are also needed
@@ -2095,11 +1977,12 @@ namespace Multi_domain_functions
 #ifdef OOMPH_HAS_MPI
      // Only visit non-halo elements
      if (!el_pt->is_halo())
-#endif
+#endif 
       {
        // Find number of Gauss points and element dimension
        unsigned n_intpt=el_pt->integral_pt()->nweight();
        unsigned el_dim=el_pt->dim();
+
        // Set storage for local and global coordinates
        Vector<double> s_local(el_dim);
        Vector<double> x_global(el_dim);
@@ -2203,9 +2086,8 @@ namespace Multi_domain_functions
             }
           }
         } // end loop over integration points
-      }
+      } //end for halo
     } // end loop over local elements
-   
   }
 
 
@@ -2293,6 +2175,57 @@ namespace Multi_domain_functions
   }
 
 
+  /// \short Bool to decide if to sort entries in bin during locate_zeta
+  /// operation (default: false)
+  bool Sort_bin_entries=false;
+
+  /// Vector of zeta coordinates that we're currently trying to locate;
+  /// used in sorting of bin entries in further_away() comparison function
+  Vector<double> Zeta_coords_for_further_away_comparison;
+  
+  /// Comparison function for sorting entries in bin: Returns true if
+  /// point identified by p1 (comprising pointer to finite element and
+  /// vector of local coordinates within that element) is closer to
+  /// Zeta_coords_for_further_away_comparison than p2
+  bool first_closer_than_second(
+   const std::pair<FiniteElement*,Vector<double> >& p1,
+   const std::pair<FiniteElement*,Vector<double> >& p2)
+  {
+   // First point
+   FiniteElement* el_pt=p1.first;
+   Vector<double> s(p1.second);
+   Vector<double> zeta(Dim);
+   el_pt->interpolated_zeta(s,zeta);
+   double dist_squared1=0.0;
+   for (unsigned i=0;i<Dim;i++)
+    {
+     dist_squared1+=
+      (zeta[i]-Zeta_coords_for_further_away_comparison[i])*
+      (zeta[i]-Zeta_coords_for_further_away_comparison[i]);
+    }
+   
+   // Second point
+   el_pt=p2.first;
+   s=p2.second;
+   el_pt->interpolated_zeta(s,zeta);
+   double dist_squared2=0.0;
+   for (unsigned i=0;i<Dim;i++)
+    {
+     dist_squared2+=
+      (zeta[i]-Zeta_coords_for_further_away_comparison[i])*
+      (zeta[i]-Zeta_coords_for_further_away_comparison[i]);
+    }
+
+   // Which one is further
+   if (dist_squared1<dist_squared2)
+    {
+     return true;
+    }
+   else
+    {
+     return false;
+    }
+  }
 }
 
 }

@@ -872,7 +872,7 @@ void OcTree::setup_static_data()
    std::ostringstream error_stream;
    error_stream 
     << "Inconsistent enumeration!  \n  Tree::OMEGA=" << Tree::OMEGA
-                               << "\nOcTree::OMEGA=" << QuadTree::OMEGA 
+                               << "\nOcTree::OMEGA=" << OcTree::OMEGA 
     << std::endl;
    throw OomphLibError(error_stream.str(),
                        "OcTree::setup_static_data()",
@@ -3375,6 +3375,14 @@ OcTree* OcTree::gteq_face_neighbour(const int& direction,
 /// L[eft]U[p]B[ack]; etc
 /// \n
 /// The interpretation of the arguments is as follows:
+/// - In a forest, an OcTree can have multiple edge neighbours
+///   (across an edge where multiple trees meet). \c i_root_edge_neighbour
+///   specifies which of these is used. Use this as "reverse communication":
+///   First call with \c i_root_edge_neighbour=0 and \c n_root_edge_neighour
+///   initialised to anything you want (zero, ideally). On return from
+///   the fct, \c n_root_edge_neighour contains the total number of true
+///   edge neighbours, so additional calls to the fct with 
+///   \c i_root_edge_neighbour>0 can be made until they've all been visited.
 /// - The vector \c translate_s turns the index of the local coordinate
 ///   in the present octree into that of the neighbour. If there are no
 ///   rotations then \c translate_s[i] = i.
@@ -3406,6 +3414,8 @@ OcTree* OcTree::gteq_face_neighbour(const int& direction,
 /// is no neighbour, then this function returns NULL.
 //=================================================================
 OcTree* OcTree::gteq_true_edge_neighbour(const int& direction,
+                                         const unsigned& i_root_edge_neighbour,
+                                         unsigned& nroot_edge_neighbour,
                                          Vector<unsigned> &translate_s,
                                          Vector<double>& s_lo,
                                          Vector<double>& s_hi,
@@ -3444,9 +3454,12 @@ OcTree* OcTree::gteq_true_edge_neighbour(const int& direction,
  diff_level=0;
 
  // Find edge neighbour
- OcTree* return_pt=gteq_edge_neighbour(direction,s_diff,
-                                            diff_level,max_level,
-                                            orig_root_pt);
+ OcTree* return_pt=gteq_edge_neighbour(direction,
+                                       i_root_edge_neighbour,
+                                       nroot_edge_neighbour,
+                                       s_diff,
+                                       diff_level,max_level,
+                                       orig_root_pt);
 
  // Only use "true" edge neighbours
  if (edge_neighbour_is_face_neighbour(direction,return_pt))
@@ -3795,6 +3808,14 @@ using namespace OcTreeNames;
 /// Parameters:
 ///
 /// - direction: (LB,RB/...) Direction in which neighbour has to be found.
+/// - In a forest, an OcTree can have multiple edge neighbours
+///   (across an edge where multiple trees meet). \c i_root_edge_neighbour
+///   specifies which of these is used. Use this as "reverse communication":
+///   First call with \c i_root_edge_neighbour=0 and \c n_root_edge_neighour
+///   initialised to anything you want (zero, ideally). On return from
+///   the fct, \c n_root_edge_neighour contains the total number of true
+///   edge neighbours, so additional calls to the fct with 
+///   \c i_root_edge_neighbour>0 can be made until they've all been visited.
 /// - s_diff: Offset of left/down/back vertex from
 ///   corresponding vertex in
 ///   neighbour. Note that this is input/output as it needs to be incremented/
@@ -3808,6 +3829,8 @@ using namespace OcTreeNames;
 ///   neighbour we're really trying to find by all these recursive calls.
 //===========================================================================
 OcTree* OcTree::gteq_edge_neighbour(const int& direction,
+                                    const unsigned& i_root_edge_neighbour,
+                                    unsigned& nroot_edge_neighbour,
                                     double& s_diff,
                                     int& diff_level,
                                     int max_level,
@@ -3831,6 +3854,10 @@ using namespace OcTreeNames;
   }
 #endif
 
+ // Initialise total number of edge neighbours available across
+ // edges of octree roots
+ nroot_edge_neighbour=0;
+
 
  OcTree* next_el_pt=0;
  OcTree* return_el_pt=0;
@@ -3853,6 +3880,8 @@ using namespace OcTreeNames;
     {
      next_el_pt=dynamic_cast<OcTree*>(Father_pt)->
       gteq_edge_neighbour(direction,
+                          i_root_edge_neighbour,
+                          nroot_edge_neighbour,
                           s_diff,diff_level,max_level,
                           orig_root_pt);
     }
@@ -3954,17 +3983,24 @@ using namespace OcTreeNames;
  // tree in the appropriate direction
  else
    {
-     // Find  neighbouring root
-     if(Root_pt->neighbour_pt(direction)!=0)
-      {
-       return_el_pt=dynamic_cast<OcTree*>(Root_pt->neighbour_pt(direction));
-      }
-     
-     //No neighbouring tree, so there really is no neighbour --> return NULL
-     else
-      {
-       return_el_pt=0;
-      }
+    // Get total number of edge neighbours available across
+    // edges of octree roots for return
+    nroot_edge_neighbour=
+     dynamic_cast<OcTreeRoot*>(Root_pt)->nedge_neighbour(direction);
+    
+    // Get vector of edge neighbours (if any) in appropriate direction 
+    Vector<TreeRoot*> edge_neighbour_pt=
+     dynamic_cast<OcTreeRoot*>(Root_pt)->edge_neighbour_pt(direction);
+    unsigned n_neigh=edge_neighbour_pt.size();
+    if (n_neigh>0)
+     {
+      return_el_pt=dynamic_cast<OcTree*>(
+       edge_neighbour_pt[i_root_edge_neighbour]);
+     }
+    else
+     {
+      return_el_pt=0;
+     }      
    }
  
  return return_el_pt;
@@ -4374,11 +4410,18 @@ void OcTree::doc_true_edge_neighbours(Vector<Tree*> forest_nodes_pt,
      // Initialise difference in levels 
      diff_level=0;
 
-     // Find greater-or-equal-sized edge neighbour...
-      OcTree* neighb_pt=el_pt->gteq_true_edge_neighbour(direction, translate_s,
-                                                   s_lo, s_hi,
-                                                   edge,diff_level);
+     // For now simply doc the zero-th edge neighbour (if any)
+     unsigned i_root_edge_neighbour=0;
+     unsigned nroot_edge_neighbour=0; 
 
+     // Find greater-or-equal-sized edge neighbour...
+     OcTree* neighb_pt=el_pt->gteq_true_edge_neighbour(direction,
+                                                       i_root_edge_neighbour,
+                                                       nroot_edge_neighbour, 
+                                                       translate_s,
+                                                       s_lo, s_hi,
+                                                       edge,diff_level);
+     
       // If neighbour exists and nodes are created
       if((neighb_pt!=0) && (neighb_pt->object_pt()->nodes_built()))
        {
@@ -4704,6 +4747,10 @@ void OcTreeForest::find_neighbours()
  //Loop over all trees
  for(unsigned i=0;i<numtrees;i++)
   {
+
+   // Cast to OcTreeRoot
+   OcTreeRoot* octree_root_i_pt=dynamic_cast<OcTreeRoot*>(Trees_pt[i]);
+
    // Loop over their potential neighbours
    for(std::set<unsigned>::iterator it=potentially_neighb_tree[i].begin();
        it!=potentially_neighb_tree[i].end();it++)
@@ -4889,326 +4936,80 @@ void OcTreeForest::find_neighbours()
            Trees_pt[i]->object_pt()->node_pt((n*n*n-n)))!=-1) &&
          (Trees_pt[j]->object_pt()->get_node_number(
           Trees_pt[i]->object_pt()->node_pt((n*n*n-1)))!=-1));
-                  
 
+
+                  
+       // Add to storage scheme for edge neighbours (only!)
+       
        if(is_left_back_neighbour)
         {
-         Trees_pt[i]->neighbour_pt(LB)=Trees_pt[j];
+         //Trees_pt[i]->neighbour_pt(LB)=Trees_pt[j];
+         octree_root_i_pt->add_edge_neighbour_pt(Trees_pt[j],LB);
         }
        if(is_right_back_neighbour)
         {
-         Trees_pt[i]->neighbour_pt(RB)=Trees_pt[j];
+         //Trees_pt[i]->neighbour_pt(RB)=Trees_pt[j];
+         octree_root_i_pt->add_edge_neighbour_pt(Trees_pt[j],RB);
         }
        if(is_down_back_neighbour)
         {
-         Trees_pt[i]->neighbour_pt(DB)=Trees_pt[j];
+         //Trees_pt[i]->neighbour_pt(DB)=Trees_pt[j];
+         octree_root_i_pt->add_edge_neighbour_pt(Trees_pt[j],DB);
         }
        if(is_up_back_neighbour)
         {
-         Trees_pt[i]->neighbour_pt(UB)=Trees_pt[j];
+         //Trees_pt[i]->neighbour_pt(UB)=Trees_pt[j];
+         octree_root_i_pt->add_edge_neighbour_pt(Trees_pt[j],UB);
         }
          
          
        if(is_left_down_neighbour)
         {
-         Trees_pt[i]->neighbour_pt(LD)=Trees_pt[j];
+         //Trees_pt[i]->neighbour_pt(LD)=Trees_pt[j];
+         octree_root_i_pt->add_edge_neighbour_pt(Trees_pt[j],LD);
         }
        if(is_right_down_neighbour)
         {
-         Trees_pt[i]->neighbour_pt(RD)=Trees_pt[j];
+         //Trees_pt[i]->neighbour_pt(RD)=Trees_pt[j];
+         octree_root_i_pt->add_edge_neighbour_pt(Trees_pt[j],RD);
         }
        if(is_left_up_neighbour)
         {
-         Trees_pt[i]->neighbour_pt(LU)=Trees_pt[j];
+         //Trees_pt[i]->neighbour_pt(LU)=Trees_pt[j];
+         octree_root_i_pt->add_edge_neighbour_pt(Trees_pt[j],LU);
         }
        if(is_right_up_neighbour)
         {
-         Trees_pt[i]->neighbour_pt(RU)=Trees_pt[j];
+         //Trees_pt[i]->neighbour_pt(RU)=Trees_pt[j];
+         octree_root_i_pt->add_edge_neighbour_pt(Trees_pt[j],RU);
         }
-         
-         
          
          
        if(is_left_front_neighbour)
         {
-         Trees_pt[i]->neighbour_pt(LF)=Trees_pt[j];
+         //Trees_pt[i]->neighbour_pt(LF)=Trees_pt[j];
+         octree_root_i_pt->add_edge_neighbour_pt(Trees_pt[j],LF);
         }
        if(is_right_front_neighbour)
         {
-         Trees_pt[i]->neighbour_pt(RF)=Trees_pt[j];
+         //Trees_pt[i]->neighbour_pt(RF)=Trees_pt[j];
+         octree_root_i_pt->add_edge_neighbour_pt(Trees_pt[j],RF);
         }
        if(is_down_front_neighbour)
         {
-         Trees_pt[i]->neighbour_pt(DF)=Trees_pt[j];
+         //Trees_pt[i]->neighbour_pt(DF)=Trees_pt[j];
+         octree_root_i_pt->add_edge_neighbour_pt(Trees_pt[j],DF);
         }
        if(is_up_front_neighbour)
         {
-         Trees_pt[i]->neighbour_pt(UF)=Trees_pt[j];
+         //Trees_pt[i]->neighbour_pt(UF)=Trees_pt[j];
+         octree_root_i_pt->add_edge_neighbour_pt(Trees_pt[j],UF);
         }
-         
-         
+
       }
     }
   }
 
-
-
- // Old inefficient version
- if (false)
-  {
-   
-   //Loop over all trees/elements
-   for(unsigned i=0;i<numtrees;i++)
-    {
-
-     // Loop over all the other elements
-     for(unsigned j=0;j<numtrees;j++)
-      {
-       if(j!=i) //make sure we are not looking at the element itself
-        {
-
-         // So far, we haven't identified the candidate element as a face
-         // neighbour of element/tree i
-         bool is_face_neighbour=false;
-
-         // is it the Up neighbour ?
-         bool is_Up_neighbour=
-          ((Trees_pt[j]->object_pt()->get_node_number(
-             Trees_pt[i]->object_pt()->node_pt(n*(n*n-1)))!=-1) &&
-           (Trees_pt[j]->object_pt()->get_node_number(
-            Trees_pt[i]->object_pt()->node_pt(n*n-1))!=-1));
-       
-         // is it the Down neighbour ?
-         bool is_Down_neighbour=
-          ((Trees_pt[j]->object_pt()->get_node_number(
-             Trees_pt[i]->object_pt()->node_pt(n*n*(n-1)))!=-1) &&
-           (Trees_pt[j]->object_pt()->get_node_number(
-            Trees_pt[i]->object_pt()->node_pt(n-1))!=-1));
-      
-         // is it the Right neighbour ?
-         bool is_Right_neighbour=
-          ((Trees_pt[j]->object_pt()->get_node_number(
-             Trees_pt[i]->object_pt()->node_pt(n*n*n-1))!=-1) &&
-           (Trees_pt[j]->object_pt()->get_node_number(
-            Trees_pt[i]->object_pt()->node_pt(n-1))!=-1));
-       
-         // is it the Left neighbour ?
-         bool is_Left_neighbour=
-          ((Trees_pt[j]->object_pt()->get_node_number(
-             Trees_pt[i]->object_pt()->node_pt(n*(n*n-1)))!=-1) &&
-           (Trees_pt[j]->object_pt()->get_node_number(
-            Trees_pt[i]->object_pt()->node_pt(0))!=-1));
- 
-         // is it the Back neighbour ?
-         bool is_Back_neighbour=
-          ((Trees_pt[j]->object_pt()->get_node_number(
-             Trees_pt[i]->object_pt()->node_pt(n*n-1))!=-1) &&
-           (Trees_pt[j]->object_pt()->get_node_number(
-            Trees_pt[i]->object_pt()->node_pt(0))!=-1));
-
-         // is it the Front neighbour ?
-         bool is_Front_neighbour=
-          ((Trees_pt[j]->object_pt()->get_node_number(
-             Trees_pt[i]->object_pt()->node_pt(n*n*n-1))!=-1) &&
-           (Trees_pt[j]->object_pt()->get_node_number(
-            Trees_pt[i]->object_pt()->node_pt(n*n*(n-1)))!=-1));
-      
-
-         if(is_Down_neighbour)
-          {
-           is_face_neighbour=true;
-           Trees_pt[i]->neighbour_pt(D)=Trees_pt[j];
-          }
-         if(is_Up_neighbour)
-          {
-           is_face_neighbour=true; 
-           Trees_pt[i]->neighbour_pt(U)=Trees_pt[j];
-          }
-         if(is_Right_neighbour)
-          {
-           is_face_neighbour=true; 
-           Trees_pt[i]->neighbour_pt(R)=Trees_pt[j];
-          }
-         if(is_Left_neighbour)
-          {
-           is_face_neighbour=true; 
-           Trees_pt[i]->neighbour_pt(L)=Trees_pt[j];
-          }
-         if(is_Back_neighbour)
-          {
-           is_face_neighbour=true; 
-           Trees_pt[i]->neighbour_pt(B)=Trees_pt[j];
-          }
-         if(is_Front_neighbour)
-          {
-           is_face_neighbour=true; 
-           Trees_pt[i]->neighbour_pt(F)=Trees_pt[j];
-          }
-
-
-         // If it's not a face neighbour, it may still be an edge
-         // neighbour. We check this by checking if the
-         // vertex nodes coincide. Note: This test would also
-         // evaluate to true for face neighbours but we've already
-         // determined that the element is not a face neighbour!
-         if (!is_face_neighbour)
-          {
-         
-           // is it the left back neighbour ?
-           bool is_left_back_neighbour=
-            ((Trees_pt[j]->object_pt()->get_node_number(
-               Trees_pt[i]->object_pt()->node_pt(0))!=-1) &&
-             (Trees_pt[j]->object_pt()->get_node_number(
-              Trees_pt[i]->object_pt()->node_pt(n*(n-1)))!=-1));
-
-           // is it the right back neighbour ?
-           bool is_right_back_neighbour=
-            ((Trees_pt[j]->object_pt()->get_node_number(
-               Trees_pt[i]->object_pt()->node_pt(n-1))!=-1) &&
-             (Trees_pt[j]->object_pt()->get_node_number(
-              Trees_pt[i]->object_pt()->node_pt(n*n-1))!=-1));
-
-
-           // is it the down back neighbour ?
-           bool is_down_back_neighbour=
-            ((Trees_pt[j]->object_pt()->get_node_number(
-               Trees_pt[i]->object_pt()->node_pt(n-1))!=-1) &&
-             (Trees_pt[j]->object_pt()->get_node_number(
-              Trees_pt[i]->object_pt()->node_pt(0))!=-1));
-
-           // is it the up back neighbour ?
-           bool is_up_back_neighbour=
-            ((Trees_pt[j]->object_pt()->get_node_number(
-               Trees_pt[i]->object_pt()->node_pt(n*(n-1)))!=-1) &&
-             (Trees_pt[j]->object_pt()->get_node_number(
-              Trees_pt[i]->object_pt()->node_pt(n*n-1))!=-1));
-
-
-           // is it the left down neighbour ?
-           bool is_left_down_neighbour=
-            ((Trees_pt[j]->object_pt()->get_node_number(
-               Trees_pt[i]->object_pt()->node_pt(n*n*(n-1)))!=-1) &&
-             (Trees_pt[j]->object_pt()->get_node_number(
-              Trees_pt[i]->object_pt()->node_pt(0))!=-1));
-
-
-           // is it the right down neighbour ?
-           bool is_right_down_neighbour=
-            ((Trees_pt[j]->object_pt()->get_node_number(
-               Trees_pt[i]->object_pt()->node_pt((n*n+1)*(n-1)))!=-1) &&
-             (Trees_pt[j]->object_pt()->get_node_number(
-              Trees_pt[i]->object_pt()->node_pt(n-1))!=-1));
-
-
-           // is it the left up neighbour ?
-           bool is_left_up_neighbour=
-            ((Trees_pt[j]->object_pt()->get_node_number(
-               Trees_pt[i]->object_pt()->node_pt((n*n*n-n)))!=-1) &&
-             (Trees_pt[j]->object_pt()->get_node_number(
-              Trees_pt[i]->object_pt()->node_pt(n*(n-1)))!=-1));
-
-
-           // is it the right up neighbour ?
-           bool is_right_up_neighbour=
-            ((Trees_pt[j]->object_pt()->get_node_number(
-               Trees_pt[i]->object_pt()->node_pt((n*n*n-1)))!=-1) &&
-             (Trees_pt[j]->object_pt()->get_node_number(
-              Trees_pt[i]->object_pt()->node_pt(n*n-1))!=-1));
-
-
-           // is it the left front neighbour ?
-           bool is_left_front_neighbour=
-            ((Trees_pt[j]->object_pt()->get_node_number(
-               Trees_pt[i]->object_pt()->node_pt((n*n*n-n)))!=-1) &&
-             (Trees_pt[j]->object_pt()->get_node_number(
-              Trees_pt[i]->object_pt()->node_pt(n*n*(n-1)))!=-1));
-
-
-           // is it the right front neighbour ?
-           bool is_right_front_neighbour=
-            ((Trees_pt[j]->object_pt()->get_node_number(
-               Trees_pt[i]->object_pt()->node_pt((n*n*n-1)))!=-1) &&
-             (Trees_pt[j]->object_pt()->get_node_number(
-              Trees_pt[i]->object_pt()->node_pt((n*n+1)*(n-1)))!=-1));
-                  
-
-           // is it the down front neighbour ?
-           bool is_down_front_neighbour=
-            ((Trees_pt[j]->object_pt()->get_node_number(
-               Trees_pt[i]->object_pt()->node_pt(n*n*(n-1)))!=-1) &&
-             (Trees_pt[j]->object_pt()->get_node_number(
-              Trees_pt[i]->object_pt()->node_pt((n*n+1)*(n-1)))!=-1));
-
-
-           // is it the up front neighbour ?
-           bool is_up_front_neighbour=
-            ((Trees_pt[j]->object_pt()->get_node_number(
-               Trees_pt[i]->object_pt()->node_pt((n*n*n-n)))!=-1) &&
-             (Trees_pt[j]->object_pt()->get_node_number(
-              Trees_pt[i]->object_pt()->node_pt((n*n*n-1)))!=-1));
-                  
-
-           if(is_left_back_neighbour)
-            {
-             Trees_pt[i]->neighbour_pt(LB)=Trees_pt[j];
-            }
-           if(is_right_back_neighbour)
-            {
-             Trees_pt[i]->neighbour_pt(RB)=Trees_pt[j];
-            }
-           if(is_down_back_neighbour)
-            {
-             Trees_pt[i]->neighbour_pt(DB)=Trees_pt[j];
-            }
-           if(is_up_back_neighbour)
-            {
-             Trees_pt[i]->neighbour_pt(UB)=Trees_pt[j];
-            }
-         
-         
-           if(is_left_down_neighbour)
-            {
-             Trees_pt[i]->neighbour_pt(LD)=Trees_pt[j];
-            }
-           if(is_right_down_neighbour)
-            {
-             Trees_pt[i]->neighbour_pt(RD)=Trees_pt[j];
-            }
-           if(is_left_up_neighbour)
-            {
-             Trees_pt[i]->neighbour_pt(LU)=Trees_pt[j];
-            }
-           if(is_right_up_neighbour)
-            {
-             Trees_pt[i]->neighbour_pt(RU)=Trees_pt[j];
-            }
-         
-         
-         
-         
-           if(is_left_front_neighbour)
-            {
-             Trees_pt[i]->neighbour_pt(LF)=Trees_pt[j];
-            }
-           if(is_right_front_neighbour)
-            {
-             Trees_pt[i]->neighbour_pt(RF)=Trees_pt[j];
-            }
-           if(is_down_front_neighbour)
-            {
-             Trees_pt[i]->neighbour_pt(DF)=Trees_pt[j];
-            }
-           if(is_up_front_neighbour)
-            {
-             Trees_pt[i]->neighbour_pt(UF)=Trees_pt[j];
-            }
-         
-         
-          }
-        }
-      }
-    }
-  }
 }
    
  
@@ -5231,6 +5032,8 @@ void OcTreeForest::construct_up_right_equivalents()
 
  OcTreeRoot* neigh_pt=0;
  
+
+
  //Loop over all the trees
  //------------------------
  for(unsigned i=0;i<numtrees;i++)
@@ -5238,7 +5041,7 @@ void OcTreeForest::construct_up_right_equivalents()
 
    //Find the pointer to the Up neighbour
    //------------------------------------
-   neigh_pt = oc_neigh_pt(i,U);
+   neigh_pt = oc_face_neigh_pt(i,U);
 
    //If there is a neighbour?
    if(neigh_pt!=0)
@@ -5252,8 +5055,8 @@ void OcTreeForest::construct_up_right_equivalents()
        //The direction to the element in the neighbour 
        //must be equivalent to the down direction in this element
        //Hence, the up equivalent is the reflection of that direction
-       octree_pt(i)->up_equivalent(neigh_pt)
-        = OcTree::Reflect_face[direction];
+       octree_pt(i)->set_up_equivalent(neigh_pt,
+                                       OcTree::Reflect_face[direction]);
 
        //The right equivalent is the direction to the equivalent of
        //the right face in the present element, which will
@@ -5271,8 +5074,9 @@ void OcTreeForest::construct_up_right_equivalents()
                                                        
        //Now get the other face connected to that edge in the
        //neighbour. It is the right equivalent
-       octree_pt(i)->right_equivalent(neigh_pt)=
-        OcTree::get_the_other_face(nod1,nod2,nnode1d,direction);
+       octree_pt(i)->set_right_equivalent(
+        neigh_pt,
+        OcTree::get_the_other_face(nod1,nod2,nnode1d,direction));
       }
      else     
       //If U neighbour does not have pointer to this tree, die
@@ -5292,7 +5096,7 @@ void OcTreeForest::construct_up_right_equivalents()
    
    //Find the pointer to the Right neighbour
    //---------------------------------------
-   neigh_pt = oc_neigh_pt(i,R);
+   neigh_pt = oc_face_neigh_pt(i,R);
 
    //If there is a neighbour?
    if(neigh_pt!=0)
@@ -5307,8 +5111,8 @@ void OcTreeForest::construct_up_right_equivalents()
        //The direction to the element in the neighbour
        //must be equivalent to the left direction in this element
        //Hence, the right equivalent is the reflection of that direction
-       octree_pt(i)->right_equivalent(neigh_pt)=
-        OcTree::Reflect_face[direction];
+       octree_pt(i)->set_right_equivalent(neigh_pt,
+                                          OcTree::Reflect_face[direction]);
        
        //The up equivalent will be the direction to the equivalent of
        //the up face in the neighbour, which will be connected to the
@@ -5325,8 +5129,9 @@ void OcTreeForest::construct_up_right_equivalents()
    
        //Now get the other face connected to that edge in the 
        //neighbour. It is the up equivalent
-       octree_pt(i)->up_equivalent(neigh_pt)=
-        OcTree::get_the_other_face(nod1,nod2,nnode1d,direction);
+       octree_pt(i)->set_up_equivalent(
+        neigh_pt,
+        OcTree::get_the_other_face(nod1,nod2,nnode1d,direction));
 
       }
      else
@@ -5348,7 +5153,7 @@ void OcTreeForest::construct_up_right_equivalents()
    
    //Find the pointer to the Down neighbour
    //--------------------------------------
-   neigh_pt = oc_neigh_pt(i,D);
+   neigh_pt = oc_face_neigh_pt(i,D);
 
    //If there is a neighbour?
    if(neigh_pt!=0)
@@ -5361,7 +5166,7 @@ void OcTreeForest::construct_up_right_equivalents()
       {
        //The direction to the element in the neighbour must be
        //equivalent to the up direction
-       octree_pt(i)->up_equivalent(neigh_pt) = direction;
+       octree_pt(i)->set_up_equivalent(neigh_pt,direction);
 
        //The right equivalent is the direction to the equivalent of
        //the right face in the present element, which will be 
@@ -5379,10 +5184,10 @@ void OcTreeForest::construct_up_right_equivalents()
 
        //Now get the other face connected to that edge in the neighbour.
        //It is the right equivalent
-       octree_pt(i)->right_equivalent(neigh_pt)=
-        OcTree::get_the_other_face(nod1,nod2,nnode1d,direction);
-      }
-    
+       octree_pt(i)->set_right_equivalent(
+        neigh_pt,
+        OcTree::get_the_other_face(nod1,nod2,nnode1d,direction));
+      }    
      else
       {
        //If D neighbour does not have pointer to this tree, die
@@ -5402,7 +5207,7 @@ void OcTreeForest::construct_up_right_equivalents()
    
    //Find the pointer to the Left neighbour
    //--------------------------------------
-   neigh_pt = oc_neigh_pt(i,L);
+   neigh_pt = oc_face_neigh_pt(i,L);
 
    //If there is a neighbour
    if(neigh_pt!=0)
@@ -5416,7 +5221,7 @@ void OcTreeForest::construct_up_right_equivalents()
       {
        //The direction to the element in the neighbour is
        //must be equivalent to the right direction
-       octree_pt(i)->right_equivalent(neigh_pt) = direction;
+       octree_pt(i)->set_right_equivalent(neigh_pt,direction);
        
        //The up equivalent is the direction to the equivalent of the
        //up face in the present element, which will be connected to
@@ -5434,8 +5239,9 @@ void OcTreeForest::construct_up_right_equivalents()
   
        //Now get the other face connected to that edge in the
        //neighbour.It is the up equivalent
-       octree_pt(i)->up_equivalent(neigh_pt)=
-        OcTree::get_the_other_face(nod1,nod2,nnode1d,direction);
+       octree_pt(i)->set_up_equivalent(
+        neigh_pt,
+        OcTree::get_the_other_face(nod1,nod2,nnode1d,direction));
        
       }
      else
@@ -5457,7 +5263,7 @@ void OcTreeForest::construct_up_right_equivalents()
    
    //Find the pointer to the Front neighbour
    //---------------------------------------
-   neigh_pt = oc_neigh_pt(i,F);
+   neigh_pt = oc_face_neigh_pt(i,F);
 
    //If there is a neighbour?
    if(neigh_pt!=0)
@@ -5482,8 +5288,9 @@ void OcTreeForest::construct_up_right_equivalents()
 
        //We now get the other face connected to that edge
        //It is the up equivalent.
-       octree_pt(i)->up_equivalent(neigh_pt)=
-        OcTree::get_the_other_face(nod1,nod2,nnode1d,direction);
+       octree_pt(i)->set_up_equivalent(
+        neigh_pt,
+        OcTree::get_the_other_face(nod1,nod2,nnode1d,direction));
        
        //The direction to the right face will be given by the
        //other face connected to the RF edge in the neighbour
@@ -5499,8 +5306,9 @@ void OcTreeForest::construct_up_right_equivalents()
 
        //We now get the other face connected to that edge
        //It is the right equivalent
-       octree_pt(i)->right_equivalent(neigh_pt)=
-        OcTree::get_the_other_face(nod1,nod2,nnode1d,direction);
+       octree_pt(i)->set_right_equivalent(
+        neigh_pt,
+        OcTree::get_the_other_face(nod1,nod2,nnode1d,direction));
       }
      else
       {
@@ -5520,7 +5328,7 @@ void OcTreeForest::construct_up_right_equivalents()
    
    //Find the pointer to the Back neighbour
    //--------------------------------------
-   neigh_pt = oc_neigh_pt(i,B);
+   neigh_pt = oc_face_neigh_pt(i,B);
 
    //If there is a neighbour?
    if(neigh_pt!=0)
@@ -5545,8 +5353,9 @@ void OcTreeForest::construct_up_right_equivalents()
 
        //We now get the other face connected to that edge
        //It is the up equivalent
-       octree_pt(i)->up_equivalent(neigh_pt)=
-        OcTree::get_the_other_face(nod1,nod2,nnode1d,direction);
+       octree_pt(i)->set_up_equivalent(
+        neigh_pt,
+        OcTree::get_the_other_face(nod1,nod2,nnode1d,direction));
        
        
        //The direction to the right face will be given by
@@ -5563,8 +5372,9 @@ void OcTreeForest::construct_up_right_equivalents()
 
        //We now get the other face connected to that edge
        //It is the right equivalent
-       octree_pt(i)->right_equivalent(neigh_pt)=
-        OcTree::get_the_other_face(nod1,nod2,nnode1d,direction);
+       octree_pt(i)->set_right_equivalent(
+        neigh_pt,
+        OcTree::get_the_other_face(nod1,nod2,nnode1d,direction));
       }
      else
       {
@@ -5581,7 +5391,6 @@ void OcTreeForest::construct_up_right_equivalents()
       }
     }
 
-   
 
    // EDGE NEIGHBOURS
    //----------------
@@ -5589,64 +5398,63 @@ void OcTreeForest::construct_up_right_equivalents()
    // Loop over all edges:
    for (int edge=LB;edge<=UF;edge++)
     {
-
-     //Find the pointer to the edge neighbour
-     neigh_pt=oc_neigh_pt(i,edge);
+     // Get vector to pointers of edge neighbours
+     Vector<TreeRoot*> edge_neigh_pt=oc_edge_neigh_pt(i,edge);
      
-     //If there is a neighbour
-     if(neigh_pt!=0)
+     // Loop over all edge neighbours
+     unsigned n_neigh=edge_neigh_pt.size();
+     for (unsigned e=0;e<n_neigh;e++)
       {
-       
-       // Here are the two vertices at the two ends of the edge
-       // in the present element
-       int vertex      =OcTree::Vertex_at_end_of_edge[edge][0];       
-       int other_vertex=OcTree::Vertex_at_end_of_edge[edge][1];       
-       
-       // Get node numbers of the two vertices on edge
-       unsigned nod1=OcTree::vertex_to_node_number(vertex,nnode1d);       
-       unsigned nod2=OcTree::vertex_to_node_number(other_vertex,nnode1d);
-       
+       //If there is a neighbour
+       if(edge_neigh_pt[e]!=0)
+        {         
+         // Here are the two vertices at the two ends of the edge
+         // in the present element
+         int vertex      =OcTree::Vertex_at_end_of_edge[edge][0];       
+         int other_vertex=OcTree::Vertex_at_end_of_edge[edge][1];       
+         
+         // Get node numbers of the two vertices on edge
+         unsigned nod1=OcTree::vertex_to_node_number(vertex,nnode1d);       
+         unsigned nod2=OcTree::vertex_to_node_number(other_vertex,nnode1d);
+         
+         
+         // Here are the local node numbers (in the neighbouring element)
+         // of the start/end nodes of present element's edge:
+         unsigned neighb_nod1=edge_neigh_pt[e]->object_pt()->
+          get_node_number(octree_pt(i)->object_pt()
+                          ->node_pt(nod1));
+         
+         unsigned neighb_nod2=edge_neigh_pt[e]->object_pt()->
+          get_node_number(octree_pt(i)->object_pt()
+                          ->node_pt(nod2));
+         
+         // Convert to vertices
+         int neighb_vertex=
+          OcTree::node_number_to_vertex(neighb_nod1,nnode1d);
+         int neighb_other_vertex=
+          OcTree::node_number_to_vertex(neighb_nod2,nnode1d);
+                  
+         //Up equivalent is stored first in the pair that's returned
+         //by the lookup table
+         octree_pt(i)->set_up_equivalent(
+          edge_neigh_pt[e],
+          OcTree::Up_and_right_equivalent_for_pairs_of_vertices[
+           std::make_pair(std::make_pair(neighb_vertex,vertex),
+                          std::make_pair(neighb_other_vertex,other_vertex))].
+          first);
 
-       // Here are the local node numbers (in the neighbouring element)
-       // of the start/end nodes of present element's edge:
-       unsigned neighb_nod1=neigh_pt->object_pt()->
-        get_node_number(octree_pt(i)->object_pt()
-                        ->node_pt(nod1));
-
-       unsigned neighb_nod2=neigh_pt->object_pt()->
-        get_node_number(octree_pt(i)->object_pt()
-                        ->node_pt(nod2));
-
-       // Convert to vertices
-       int neighb_vertex=
-        OcTree::node_number_to_vertex(neighb_nod1,nnode1d);
-       int neighb_other_vertex=
-        OcTree::node_number_to_vertex(neighb_nod2,nnode1d);
-
-       //Up equivalent is stored first in the pair that's returned
-       //by the lookup table
-       octree_pt(i)->up_equivalent(neigh_pt)=
-        OcTree::Up_and_right_equivalent_for_pairs_of_vertices[
-         std::make_pair(std::make_pair(neighb_vertex,vertex),
-                        std::make_pair(neighb_other_vertex,other_vertex))].
-        first;
-
-
-       //Right equivalent is stored second in the pair that's returned
-       //by the lookup table
-       octree_pt(i)->right_equivalent(neigh_pt)=
-        OcTree::Up_and_right_equivalent_for_pairs_of_vertices[
-         std::make_pair(std::make_pair(neighb_vertex,vertex),
-                        std::make_pair(neighb_other_vertex,other_vertex))].
-        second;
-      
+         //Right equivalent is stored second in the pair that's returned
+         //by the lookup table
+         octree_pt(i)->set_right_equivalent(edge_neigh_pt[e],
+          OcTree::Up_and_right_equivalent_for_pairs_of_vertices[
+           std::make_pair(std::make_pair(neighb_vertex,vertex),
+                          std::make_pair(neighb_other_vertex,other_vertex))].
+                                            second);
+         
+        }
       }
-     
     }
-
-
   } //end of loop over all trees.
- 
 }
 
 

@@ -195,6 +195,14 @@ class OcTree : public virtual Tree
 /// L[eft]U[p]B[ack]; etc
 /// \n
 /// The interpretation of the arguments is as follows:
+/// - In a forest, an OcTree can have multiple edge neighbours
+///   (across an edge where multiple trees meet). \c i_root_edge_neighbour
+///   specifies which of these is used. Use this as "reverse communication":
+///   First call with \c i_root_edge_neighbour=0 and \c n_root_edge_neighour
+///   initialised to anything you want (zero, ideally). On return from
+///   the fct, \c n_root_edge_neighour contains the total number of true
+///   edge neighbours, so additional calls to the fct with 
+///   \c i_root_edge_neighbour>0 can be made until they've all been visited.
 /// - The vector \c translate_s turns the index of the local coordinate
 ///   in the present octree into that of the neighbour. If there are no
 ///   rotations then \c translate_s[i] = i.
@@ -225,6 +233,8 @@ class OcTree : public virtual Tree
 /// in a certain direction is not a true edge neighbour, or if there
 /// is no neighbour, then this function returns NULL.
  OcTree* gteq_true_edge_neighbour(const int& direction,
+                                  const unsigned& i_root_edge_neighbour,
+                                  unsigned& nroot_edge_neighbour,
                                   Vector<unsigned> &translate_s,
                                   Vector<double>& s_lo,
                                   Vector<double>& s_hi, 
@@ -430,6 +440,14 @@ class OcTree : public virtual Tree
  /// \n
  /// Parameters:
  /// - direction: (LB/RB/...) Direction in which neighbour has to be found.
+ /// - In a forest, an OcTree can have multiple edge neighbours
+ ///   (across an edge where multiple trees meet). \c i_root_edge_neighbour
+ ///   specifies which of these is used. Use this as "reverse communication":
+ ///   First call with \c i_root_edge_neighbour=0 and \c n_root_edge_neighour
+ ///   initialised to anything you want (zero, ideally). On return from
+ ///   the fct, \c n_root_edge_neighour contains the total number of true
+ ///   edge neighbours, so additional calls to the fct with 
+ ///   \c i_root_edge_neighbour>0 can be made until they've all been visited.
  /// - s_diff: Offset of the edge's "low" vertex from 
  ///   corresponding vertex in 
  ///   neighbour. Note that this is input/output as it needs to be incremented/
@@ -446,11 +464,13 @@ class OcTree : public virtual Tree
  /// the neighbour is not a true edge neighbour.  We don't care because
  /// we're not dealing with those!
  OcTree* gteq_edge_neighbour(const int& direction, 
-                                  double& s_diff, 
-                                  int& diff_level ,
-                                  int max_level, 
-                                  OcTreeRoot* orig_root_pt) const;
-
+                             const unsigned& i_root_edge_neighbour,
+                             unsigned& nroot_edge_neighbour,
+                             double& s_diff, 
+                             int& diff_level ,
+                             int max_level, 
+                             OcTreeRoot* orig_root_pt) const;
+ 
 
  /// \short Is the edge neighbour (for edge "edge")  specified via the pointer 
  /// also a face neighbour for one of the two adjacent faces?
@@ -582,6 +602,11 @@ class OcTreeRoot : public virtual OcTree, public virtual TreeRoot
 {
   private:
 
+ /// \short Map of pointers to the edge-neighbouring [Oc]TreeRoots:
+ /// Edge_neighbour_pt[direction] is Vector to the pointers to the
+ /// [Oc]TreeRoot's edge neighbours in the (enumerated) (edge) direction.
+ std::map<int,Vector<TreeRoot*> > Edge_neighbour_pt;
+
  /// \short Map giving the Up equivalent of the neighbour specified by 
  /// pointer: When viewed from the current octree's neighbour,
  /// our up direction is the neighbour's Up_equivalent[neighbour_pt]
@@ -592,8 +617,6 @@ class OcTreeRoot : public virtual OcTree, public virtual TreeRoot
  /// say, we have \c Up_equivalent[neighbour_pt]=D (read as: "in my 
  /// neighbour, my Up is its Down"); etc.
  std::map<TreeRoot*,int> Up_equivalent;
-
-
 
  /// \short Map giving the Right equivalent of the neighbour specified by 
  /// pointer: When viewed from the current octree's neighbour,
@@ -643,7 +666,91 @@ class OcTreeRoot : public virtual OcTree, public virtual TreeRoot
   }
 
 
+ /// \short Return vector of pointers to the edge-neighbouring TreeRoots
+ /// in the (enumerated) (edge) direction.
+ Vector<TreeRoot*> edge_neighbour_pt(const unsigned& edge_direction)
+  {
+   
+#ifdef PARANOID
+   using namespace OcTreeNames;
+   if ((edge_direction!=LB)&&(edge_direction!=RB)&&(edge_direction!=DB)&&
+       (edge_direction!=UB)&&
+       (edge_direction!=LD)&&(edge_direction!=RD)&&(edge_direction!=LU)&&
+       (edge_direction!=RU)&&
+       (edge_direction!=LF)&&(edge_direction!=RF)&&(edge_direction!=DF)&&
+       (edge_direction!=UF))
+    {
+     std::ostringstream error_stream;
+     error_stream << "Wrong edge_direction: " << Direct_string[edge_direction] 
+                  << std::endl;
+     throw OomphLibError(error_stream.str(),
+                         "OcTreeRoot::edge_neighbour_pt()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
 
+   return Edge_neighbour_pt[edge_direction];
+  }
+
+
+ /// \short Return number of edge-neighbouring OcTreeRoot
+ /// in the (enumerated) (edge) direction.
+ unsigned nedge_neighbour(const unsigned& edge_direction)
+ {
+
+#ifdef PARANOID
+   using namespace OcTreeNames;
+   if ((edge_direction!=LB)&&(edge_direction!=RB)&&(edge_direction!=DB)&&
+       (edge_direction!=UB)&&
+       (edge_direction!=LD)&&(edge_direction!=RD)&&(edge_direction!=LU)&&
+       (edge_direction!=RU)&&
+       (edge_direction!=LF)&&(edge_direction!=RF)&&(edge_direction!=DF)&&
+       (edge_direction!=UF))
+    {
+     std::ostringstream error_stream;
+     error_stream << "Wrong edge_direction: " << Direct_string[edge_direction] 
+                  << std::endl;
+     throw OomphLibError(error_stream.str(),
+                         "OcTreeRoot::nedge_neighbour()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+  return Edge_neighbour_pt[edge_direction].size();
+ }
+ 
+ /// \short Add pointer to the edge-neighbouring [Oc]TreeRoot
+ /// in the (enumerated) (edge) direction -- maintains uniqueness
+ void add_edge_neighbour_pt(TreeRoot* oc_tree_root_pt,
+                            const unsigned& edge_direction)
+  {
+
+#ifdef PARANOID
+   using namespace OcTreeNames;
+   if ((edge_direction!=LB)&&(edge_direction!=RB)&&(edge_direction!=DB)&&
+       (edge_direction!=UB)&&
+       (edge_direction!=LD)&&(edge_direction!=RD)&&(edge_direction!=LU)&&
+       (edge_direction!=RU)&&
+       (edge_direction!=LF)&&(edge_direction!=RF)&&(edge_direction!=DF)&&
+       (edge_direction!=UF))
+    {
+     std::ostringstream error_stream;
+     error_stream << "Wrong edge_direction: " << Direct_string[edge_direction] 
+                  << std::endl;
+     throw OomphLibError(error_stream.str(),
+                         "OcTreeRoot::add_edge_neighbour_pt()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+   Vector<TreeRoot*>::iterator it=
+    find(Edge_neighbour_pt[edge_direction].begin(),
+         Edge_neighbour_pt[edge_direction].end(),
+         oc_tree_root_pt);
+   if (it==Edge_neighbour_pt[edge_direction].end())
+    {
+     Edge_neighbour_pt[edge_direction].push_back(oc_tree_root_pt);
+    }
+  }
 
 
  /// \short Return up equivalent of the neighbours specified by
@@ -656,7 +763,7 @@ class OcTreeRoot : public virtual OcTree, public virtual TreeRoot
  /// say, we have \c Up_equivalent[neighbour_pt]=D (read as: "in my 
  /// neighbour, my Up is its Down"); etc. Returns OMEGA if the Octree 
  /// specified by the pointer argument is not a neighbour. 
- int &up_equivalent(TreeRoot* tree_root_pt)
+ int up_equivalent(TreeRoot* tree_root_pt)
   {
    if (direction_of_neighbour(tree_root_pt)==OMEGA)
     {
@@ -669,12 +776,27 @@ class OcTreeRoot : public virtual OcTree, public virtual TreeRoot
   }
 
 
+ /// \short Set up equivalent of the neighbours specified by
+ /// pointer: When viewed from the current octree's neighbour,
+ /// our up direction is the neighbour's Up_equivalent[neighbour_pt] 
+ /// direction. If there's no rotation, this map contains the identify
+ /// so that, e.g. \c Up_equivalent[neighbour_pt]=U (read as: "in my
+ /// neighbour, my Up is its Up"). If the neighbour is rotated
+ /// by 180 degrees relative to the current octree (around the back-front axis)
+ /// say, we have \c Up_equivalent[neighbour_pt]=D (read as: "in my 
+ /// neighbour, my Up is its Down"); etc.
+ void set_up_equivalent(TreeRoot* tree_root_pt, const int& dir)
+  {
+   Up_equivalent[tree_root_pt]=dir;
+  }
+
+
  /// \short The same thing as up_equivalent, but for the right direction: 
  /// When viewed from the current octree neighbour, our 
  /// right direction is the neighbour's Right_equivalent[neighbour_pt] 
  /// direction. Returns OMEGA if the Octree specified by the pointer
  /// argument is not a neighbour. 
- int &right_equivalent(TreeRoot* tree_root_pt)
+ int right_equivalent(TreeRoot* tree_root_pt)
   {
    if (direction_of_neighbour(tree_root_pt)==OMEGA)
     {
@@ -684,6 +806,15 @@ class OcTreeRoot : public virtual OcTree, public virtual TreeRoot
     {
      return Right_equivalent[tree_root_pt];
     }
+  }
+
+ /// \short The same thing as up_equivalent, but for the right direction: 
+ /// When viewed from the current octree neighbour, our 
+ /// right direction is the neighbour's Right_equivalent[neighbour_pt] 
+ /// direction.
+ void set_right_equivalent(TreeRoot* tree_root_pt, const int& dir)
+  {
+   Right_equivalent[tree_root_pt]=dir;
   }
 
  /// \short If octree_root_pt is a neighbour, return the direction
@@ -714,6 +845,22 @@ class OcTreeRoot : public virtual OcTree, public virtual TreeRoot
    if(Neighbour_pt[RF]==octree_root_pt) {return RF;}
    if(Neighbour_pt[DF]==octree_root_pt) {return DF;}
    if(Neighbour_pt[UF]==octree_root_pt) {return UF;}
+
+
+   // Search over all edge neighbours
+   for (int dir=LB;dir<=UF;dir++)
+    {
+     Vector<TreeRoot*> edge_neigh_pt=this->edge_neighbour_pt(dir);
+     unsigned n_neigh=edge_neigh_pt.size();
+     for (unsigned e=0;e<n_neigh;e++)
+      {
+       if (edge_neigh_pt[e]==octree_root_pt) 
+        {
+         return dir;
+        }
+      }
+    }
+
 
    //If we get here, it's not a neighbour
    return OMEGA;
@@ -792,14 +939,40 @@ class OcTreeForest : public TreeForest
  OcTreeRoot* octree_pt(const unsigned &i) const 
   {return dynamic_cast<OcTreeRoot*>(Trees_pt[i]);}
  
-
  /// \short Given the number i of the root octree in this forest, return
- /// pointer to its neighbour in the specified direction. NULL
+ /// pointer to its face neighbour in the specified direction. NULL
  /// if neighbour doesn't exist. (This does the dynamic cast 
  /// from a TreeRoot to a OcTreeRoot internally).
- OcTreeRoot* oc_neigh_pt(const unsigned &i, const int &direction)
-  {return dynamic_cast<OcTreeRoot*>(Trees_pt[i]->neighbour_pt(direction));}
+ OcTreeRoot* oc_face_neigh_pt(const unsigned &i, const int &direction)
+  {
+#ifdef PARANOID
+   using namespace OcTreeNames;
+   if ((direction!=U)&&(direction!=D)&&
+       (direction!=F)&&(direction!=B)&&
+       (direction!=L)&&(direction!=R))
+    {
+     std::ostringstream error_stream;
+     error_stream << "Wrong edge_direction: " 
+                  << OcTree::Direct_string[direction] 
+                  << std::endl;
+     throw OomphLibError(error_stream.str(),
+                         "OcTreeRoot::oc_face_neigh_pt()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+   return dynamic_cast<OcTreeRoot*>(Trees_pt[i]->neighbour_pt(direction));
+  }
 
+ /// \short Given the number i of the root octree in this forest, return
+ /// the vector of pointers to the true edge neighbours in the specified 
+ /// (edge) direction.
+ Vector<TreeRoot*> oc_edge_neigh_pt(const unsigned &i, const int &direction)
+  {
+   // Note: paranoia check is done in edge_neighbour_pt
+   return dynamic_cast<OcTreeRoot*>(
+    Trees_pt[i])->edge_neighbour_pt(direction);
+  }
+ 
 
 private:
 
