@@ -550,7 +550,7 @@ int main(int argc, char* argv[])
 
  // Distribute the problem
  DocInfo mesh_doc_info;
- mesh_doc_info.set_directory("RESLT_MESH");
+ mesh_doc_info.set_directory("RESLT");
  mesh_doc_info.number()=38;
 
  std::ifstream input_file;

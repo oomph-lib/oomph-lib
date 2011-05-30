@@ -59,11 +59,13 @@ directory).
     - <A HREF="#unsteady_heat">The unsteady heat equation; with an
               introduction to timestepping</A>
     - <A HREF="#wave">The linear wave equation</A>
+    - <A HREF="#helmholtz">The Helmholtz equation</A>
     - <A HREF="#young_laplace">The Young-Laplace equations</A>
     - <A HREF="#nst">The Navier-Stokes equations</A>
     - <A HREF="#axisym_nst">The axisymmetric Navier-Stokes equations</A>
     - <A HREF="#free_surface_nst">The free-surface Navier-Stokes equations</A>
-    - <A HREF="#solid">Solid mechanics problems</A>
+    - <A HREF="#solid">Nonlinear solid mechanics problems</A>
+    - <A HREF="#linear_elasticity">Linear elasticity</A>
     - <A HREF="#beam">Beam structures</A>
     - <A HREF="#shell">Shell structures</A>
     .
@@ -619,6 +621,34 @@ only be used to "manually" refine meshes before the start of the simulation.
 </TD>
 <TD>
 <CENTER>driver code only</CENTER>
+</TD>
+</TR>
+#####################################################################
+######################################################################
+<TR>
+<TD COLSPAN=3 bgcolor="lightcyan">
+<A NAME="helmholtz"><CENTER><B>The Helmholtz equation</B></CENTER></A>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
+<A HREF="../../helmholtz/scattering/html/index.html">
+<B>The Helmholtz equation.
+</B>
+</A>
+\n\n
+We solve a 2D Helmholtz problem, simulating scattering of a planar
+wave from a circular cylinder. 
+</TD>
+<TD>
+- The Helmholtz equation and its discretisation.
+- The Sommerfeld radiation condition and its approximation by
+  approximate/absorbing boundary conditions and Dirichlet-to-Neumann mappings.
+  \n\n
+</TD>
+<TD>
+<CENTER>complete</CENTER>
 </TD>
 </TR>
 #####################################################################
@@ -1227,24 +1257,24 @@ non-trivial free surface problem.
 ######################################################################
 <TR>
 <TD COLSPAN=3 bgcolor="lightcyan">
-<A NAME="solid"><CENTER><B>Solid mechanics problems</B></CENTER></A>
+<A NAME="solid"><CENTER><B>Nonlinear solid mechanics problems</B></CENTER></A>
 </TD>
 </TR>
 ######################################################################
 <TR>
 <TD>
 <A HREF="../../solid/solid_theory/html/index.html">
-<B>Solid mechanics: Theory and implementation
+<B>Nonlinear solid mechanics: Theory and implementation
 </B>
 </A>
 \n\n
 In this document we discuss the theoretical background and the
-practical implementation of \c oomph-lib's solid mechanics
+practical implementation of \c oomph-lib's nonlinear solid mechanics
 capabilities. 
 </TD>
 <TD>
 - Theory:
- - Solid mechanics problems -- Lagrangian coordinates
+ - Nonlinear solid mechanics problems -- Lagrangian coordinates
  - The geometry
  - Equilibrium and the Principle of Virtual Displacements
  - Constitutive Equations for Purely Elastic Behaviour
@@ -1529,6 +1559,62 @@ comprare against Green and Zerna's exact solution.
 #<CENTER>driver code and pretty pictures</CENTER>
 #</TD>
 #</TR>
+
+
+######################################################################
+######################################################################
+<TR>
+<TD COLSPAN=3 bgcolor="lightcyan">
+<A NAME="linear_elasticity"><CENTER><B>Linear elasticity</B></CENTER></A>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
+<A HREF="../../linear_elasticity/periodic_load/html/index.html">
+<B>Linear Elasticity: Theory and implementation
+</B>
+</A>
+\n\n
+In this document we discuss the theoretical background and the
+practical implementation of \c oomph-lib's linear elasticity
+elements and demonstrate their use in a 2D model problem.
+</TD>
+<TD>
+- The equations of linear elasticity and their non-dimensionalisation.
+- Implementation of the equations, based on a displacement formulation.
+- The solution of a 2D model problem: The deformation of a linearly
+  elastic strip, loaded by a spatially periodic surface traction.
+.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+######################################################################
+<TR>
+<TD>
+<A HREF="../../linear_elasticity/refineable_periodic_load/html/index.html">
+<B>Spatially-adaptive simulation of the deformation of a linearly
+elastic strip, loaded by a spatially periodic surface traction.
+</B>
+</A>
+\n\n
+We demonstrate how to compute the deformation of a linearly
+elastic strip, loaded by a spatially periodic surface traction, using
+spatial adaptivity.
+</TD>
+<TD>
+- How to apply periodic boundary conditions in spatially adaptive
+  computations.
+</TD>
+<TD>
+<CENTER>complete</CENTER>
+</TD>
+</TR>
+######################################################################
+
+
 #####################################################################
 ######################################################################
 <TR>

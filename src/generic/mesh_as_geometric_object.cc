@@ -543,7 +543,7 @@ namespace oomph
    // Decrease/increase min and max to allow for any overshoot in
    // meshes that may move around
    // There's no point in doing this for DIM_LAGRANGIAN==1
-   double percentage_offset=5.0;
+   double percentage_offset=Multi_domain_functions::Percentage_offset;
    for(int i=0;i<n_lagrangian;i++)
     {
      double length = zeta_max[i] - zeta_min[i];

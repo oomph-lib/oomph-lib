@@ -1389,18 +1389,6 @@ quad_hang_helper(const int &value_id,
      //with those of the neighbour of the neighbour
      if(is_periodic)
       {
-#ifdef PARANOID
-       //Issue an oomphlib warning
-       std::ostringstream warning_stream;
-       warning_stream    
-        << "Constructing a periodic hanging node\n" 
-        << "This functionality has not been comprehensively tested\n"
-        << "USE WITH CAUTION....\n";
-       OomphLibWarning(warning_stream.str(),
-                       "RefineableQElement<2>::quad_hang_helper()",
-                       OOMPH_EXCEPTION_LOCATION);
-#endif
-
        //Required data for the neighbour finding routine
        Vector<unsigned> translate_s_in_neigh(2);
        Vector<double> s_lo_neigh_of_neigh(2);

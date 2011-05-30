@@ -175,7 +175,25 @@ class Mesh
  /// schemes and in the mesh's Node_pt vector. The new node is also 
  /// addressed by node_pt on return from the function.
  void convert_to_boundary_node(Node* &node_pt);
+
+#ifdef OOMPH_HAS_MPI
+
+
+ /// Set this to true to suppress resizing of halo nodes (at your own risk!)
+ bool Resize_halo_nodes_not_required;
+
+ /// \short Helper function that resizes halo nodes to the same
+ /// size as their non-halo counterparts if required. (A discrepancy
+ /// can arise if a FaceElement that introduces additional unknowns
+ /// are attached to a bulk element that shares a node with a haloed element.
+ /// In that case the joint node between haloed and non-haloed element
+ /// is resized on that processor but not on the one that holds the
+ /// halo counterpart (because no FaceElement is attached to the halo
+ /// element)
+ void resize_halo_nodes(OomphCommunicator* comm_pt);
      
+#endif
+
 public:
 
 
@@ -203,6 +221,8 @@ public:
    Keep_all_elements_as_halos=false;
    // Don't output halo elements
    Output_halo_elements=false;
+   // Don't suppress automatic resizing of halo nodes
+   Resize_halo_nodes_not_required=false;
 #endif
   }
 
@@ -1171,9 +1191,25 @@ public:
   {
    Haloed_node_pt[p].push_back(nod_pt);
   }
-
+ 
  /// Bool for output of halo elements
  bool Output_halo_elements;
+ 
+ 
+ /// \short Function to suppress resizing of halo nodes -- optmisation
+ /// but call it at your own risk!
+ void disable_resizing_of_halo_nodes()
+ {
+  Resize_halo_nodes_not_required=true;
+ }
+ 
+ 
+ /// \short Function to (re-)enable resizing of halo nodes -- this returns
+ /// things to the default behaviour.
+ void enable_resizing_of_halo_nodes()
+ {
+  Resize_halo_nodes_not_required=false;
+ }
 
  /// Function to disable halo element output
  void disable_output_of_halo_elements()

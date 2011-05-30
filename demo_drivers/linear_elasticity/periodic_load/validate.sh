@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=3
+NUM_TESTS=2
 
 # Setup validation directory
 #---------------------------
@@ -15,12 +15,14 @@ mkdir Validation
 cd Validation
 
 echo "Running periodic load on linear elastic solid"
-mkdir RESLT_fixed 
+mkdir RESLT 
 ../periodic_load  > OUTPUT_periodic_load
+mv RESLT RESLT_periodic_load
 echo "done"
 echo "Running periodic load on linear elastic solid (adaptive mesh)"
-mkdir RESLT_adaptive RESLT_adaptive_periodic_hanging 
+mkdir RESLT
 ../refineable_periodic_load  > OUTPUT_refineable_periodic_load
+mv RESLT RESLT_refineable_periodic_load
 echo "done"
 echo " " >> validation.log
 echo "Periodic load on linearly elastic solid" >> validation.log
@@ -30,9 +32,8 @@ echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat  RESLT_fixed/soln1.dat > ./period.dat
-cat  RESLT_adaptive/soln1.dat > ./adapt.dat
-cat  RESLT_adaptive_periodic_hanging/soln1.dat > ./adapt_hang.dat
+cat  RESLT_periodic_load/soln.dat > ./period.dat
+cat  RESLT_refineable_periodic_load/soln.dat > ./adapt.dat
 
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
@@ -43,9 +44,6 @@ echo "Fixed mesh" >> validation.log
 echo "Adaptive mesh" >> validation.log
 ../../../../bin/fpdiff.py ../validata/adapt.dat.gz  \
          ./adapt.dat 0.1 2.0e-12 >> validation.log
-echo "Adaptive mesh with periodic hanging nodes" >> validation.log
-../../../../bin/fpdiff.py ../validata/adapt.dat.gz  \
-         ./adapt_hang.dat 0.1 2.0e-12 >> validation.log
 fi
 
 

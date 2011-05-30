@@ -214,7 +214,6 @@ public:
            // ...then delete the tree (no recursion)
            delete tree_pt;
           }
-
         }
        else // tree_pt->object_pt() is null, so delete tree
         {

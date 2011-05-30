@@ -188,17 +188,39 @@ public:
            // Make the element into a new treeroot
            OcTreeRoot* tree_root_pt=new OcTreeRoot(el_pt);
 
+
+           // Pass sons
+           tree_root_pt->set_son_pt(backed_up_sons);
+
            // Loop over sons and make the new treeroot their father
            for (unsigned i_son=0;i_son<n_sons;i_son++)
             {
              Tree* son_pt=backed_up_sons[i_son];
+
+             // Tell the son about its new father (which is also the root)
              son_pt->set_father_pt(tree_root_pt);
+             son_pt->root_pt()=tree_root_pt;
+
+             // ...and then tell all the descendants too
+             Vector<Tree*> all_sons_pt;
+             son_pt->stick_all_tree_nodes_into_vector(all_sons_pt);
+             unsigned n=all_sons_pt.size();
+             for (unsigned i=0;i<n;i++)
+              {
+               all_sons_pt[i]->root_pt()=tree_root_pt;
+              }
             }
 
-           // Add treeroot to the trees_pt vector
+           // Add tree root to the trees_pt vector
            trees_pt.push_back(tree_root_pt);
-          }
 
+           // Now kill the original (non-root) tree: First
+           // flush sons for this tree
+           tree_pt->flush_sons();
+
+           // ...then delete the tree (no recursion)
+           delete tree_pt;
+          }
         }
        else // tree_pt->object_pt() is null, so delete tree
         {

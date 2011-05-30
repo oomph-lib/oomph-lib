@@ -1,4 +1,5 @@
 SUBDIRS = \
+hanging_node_reconciliation \
 restart \
 adaptive_driven_cavity \
 circular_driven_cavity \

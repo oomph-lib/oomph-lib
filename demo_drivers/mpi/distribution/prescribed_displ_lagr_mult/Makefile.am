@@ -6,7 +6,8 @@ include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 # Name of executable
 check_PROGRAMS= \
-prescribed_displ_lagr_mult
+prescribed_displ_lagr_mult \
+resize_hanging_node_tester
 
 #-----------------------------------------------------------------------
 
@@ -20,8 +21,19 @@ prescribed_displ_lagr_mult_LDADD = -L@libdir@ -lsolid -lconstitutive \
 
 #-----------------------------------------------------------------------
 
+# Sources for executable
+resize_hanging_node_tester_SOURCES = resize_hanging_node_tester.cc
 
-EXTRA_DIST += presc_displ_lagr_mult_partition.dat
+# Required libraries:
+# $(FLIBS) is included in case the  solver involves fortran sources.
+resize_hanging_node_tester_LDADD = -L@libdir@ -lsolid -lconstitutive \
+                        -lgeneric $(EXTERNAL_LIBS) $(FLIBS)
+
+
+#-----------------------------------------------------------------------
+
+
+EXTRA_DIST += presc_displ_lagr_mult_partition.dat load_balance.mcr
 
 # Include path for library headers: All library headers live in 
 # the include directory which we specify with -I

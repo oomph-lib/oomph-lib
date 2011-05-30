@@ -521,6 +521,85 @@ void LinearElasticityEquations<DIM>::output(FILE* file_pt,
 }
 
 
+//======================================================================
+/// Validate against exact velocity solution
+/// Solution is provided via function pointer.
+/// Plot at a given number of plot points and compute L2 error
+/// and L2 norm of velocity solution over element.
+//=======================================================================
+template<unsigned DIM>
+void LinearElasticityEquations<DIM>::compute_error(
+ std::ostream &outfile,
+ FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
+ double& error, double& norm)
+{
+ 
+ error=0.0;
+ norm=0.0;
+
+ //Vector of local coordinates
+ Vector<double> s(DIM);
+
+ // Vector for coordinates
+ Vector<double> x(DIM);
+
+ //Set the value of n_intpt
+ unsigned n_intpt = this->integral_pt()->nweight();
+   
+ outfile << "ZONE" << std::endl;
+ 
+ // Exact solution Vector (u,v,[w])
+ Vector<double> exact_soln(DIM);
+   
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+
+   //Assign values of s
+   for(unsigned i=0;i<DIM;i++)
+    {
+     s[i] = this->integral_pt()->knot(ipt,i);
+    }
+
+   //Get the integral weight
+   double w = this->integral_pt()->weight(ipt);
+
+   // Get jacobian of mapping
+   double J=this->J_eulerian(s);
+
+   //Premultiply the weights and the Jacobian
+   double W = w*J;
+
+   // Get x position as Vector
+   this->interpolated_x(s,x);
+
+   // Get exact solution at this point
+   (*exact_soln_pt)(x,exact_soln);
+
+   // Displacement error
+   for(unsigned i=0;i<DIM;i++)
+    {
+     norm+=exact_soln[i]*exact_soln[i]*W;
+     error+=(exact_soln[i]-this->interpolated_u_linear_elasticity(s,i))*
+      (exact_soln[i]-this->interpolated_u_linear_elasticity(s,i))*W;
+    }
+
+   //Output x,y,[z]
+   for(unsigned i=0;i<DIM;i++)
+    {
+     outfile << x[i] << " ";
+    }
+
+   //Output u_error,v_error,[w_error]
+   for(unsigned i=0;i<DIM;i++)
+    {
+     outfile << exact_soln[i]-this->interpolated_u_linear_elasticity(s,i) 
+             << " ";
+    }
+   outfile << std::endl;   
+  }
+}
+
 
 //Instantiate the required elements
 template class LinearElasticityEquationsBase<2>;

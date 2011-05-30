@@ -8,7 +8,7 @@ $!VARSET |n_proc|=2
 $!VARSET |postfix|=".plt"
 $!VARSET |postfix|=".dat"
 $!VARSET |PNG|=0
-$!VARSET |dir|="RESLT"
+$!VARSET |dir|="Validation/RESLT_resize_test"
 
 
 $!NEWLAYOUT 

@@ -379,6 +379,13 @@ namespace oomph
    /// Output: x,y,[z],u,v,[w]
    void output(FILE* file_pt, const unsigned &n_plot);
    
+   /// \short Validate against exact solution.
+   /// Solution is provided via function pointer.
+   /// Plot at a given number of plot points and compute L2 error
+   /// and L2 norm of displacement solution over element
+   void compute_error(std::ostream &outfile,
+                      FiniteElement::SteadyExactSolutionFctPt exact_soln_pt,
+                      double& error, double& norm);
    
     private:
 

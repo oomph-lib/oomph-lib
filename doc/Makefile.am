@@ -39,7 +39,8 @@ preconditioners \
 to_be_written \
 young_laplace \
 mpi \
-creating_doc
+creating_doc \
+linear_elasticity
 
 
 include $(top_srcdir)/config/makefile_templates/doc
