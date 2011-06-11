@@ -45,7 +45,6 @@
 #include "oomph_utilities.h"
 #include "problem.h"
 
-using namespace std;
 
 namespace oomph
 {

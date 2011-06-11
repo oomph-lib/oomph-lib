@@ -446,11 +446,12 @@ UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
  boundary_segment_pt[1] = new TriangleMeshPolyLine(bound_seg,bound_id);
  
  
- // Create the triangle mesh polygon for outer boundary using boundary segment
- TriangleMeshPolygon* 
-  Outer_boundary_polyline_pt = new TriangleMeshPolygon(boundary_segment_pt);
+//  // Create the triangle mesh polygon for outer boundary using boundary segment
+//  TriangleMeshPolygon* 
+//   Outer_boundary_polyline_pt = new TriangleMeshPolygon(boundary_segment_pt);
 
- Vector<TriangleMeshHolePolygon*> Inner_hole_pt;
+ // No holes
+ Vector<TriangleMeshInternalClosedCurve*> Inner_hole_pt;
  
  //Now create the mesh
  double uniform_element_area = 0.2;
@@ -460,17 +461,52 @@ UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
  // uniform_element_area,
  // this->time_stepper_pt());
  
- //Set the boundaries
- Vector<Vector<double> > outer_split_coord(2);
- outer_split_coord[0].resize(2);
- outer_split_coord[0][0] = 0.0; outer_split_coord[0][1] = 4.0*atan(1.0);
- outer_split_coord[1].resize(2);
- outer_split_coord[1][0] = outer_split_coord[0][1]; 
- outer_split_coord[1][1] = 8.0*atan(1.0);
+
+
+
+
+ // Build the two parts of the curvilinear boundary
+ Vector<TriangleMeshCurviLine*> curvilinear_boundary_pt(2);
+ 
+ double zeta_start=0.0;
+ double zeta_end=MathematicalConstants::Pi;
+ unsigned nsegment=8; // hierher check this for consistency with old validata
+ unsigned boundary_id=1; // hierher check this for consistency with old validata
+ curvilinear_boundary_pt[0]=new TriangleMeshCurviLine(
+  area_pt,zeta_start,zeta_end, 
+  nsegment,boundary_id);
+ 
+ zeta_start=MathematicalConstants::Pi;
+ zeta_end=2.0*MathematicalConstants::Pi;
+ nsegment=8; // hierher check this for consistency with old validata
+ boundary_id=2; // hierher check this for consistency with old validata
+ curvilinear_boundary_pt[1]=new TriangleMeshCurviLine(
+  area_pt,zeta_start,zeta_end, 
+  nsegment,boundary_id);
+ 
+ 
+ // Combine to hole
+ Vector<double> hole_coords(2);
+ hole_coords[0]=0.0;
+ hole_coords[1]=0.0;
+ TriangleMeshClosedCurve* curvilinear_outer_boundary_pt=
+  new TriangleMeshCurvilinearClosedCurve(curvilinear_boundary_pt);
+ 
+
+//  //Set the boundaries
+//  Vector<Vector<double> > outer_split_coord(2);
+//  outer_split_coord[0].resize(2);
+//  outer_split_coord[0][0] = 0.0; outer_split_coord[0][1] = 4.0*atan(1.0);
+//  outer_split_coord[1].resize(2);
+//  outer_split_coord[1][0] = outer_split_coord[0][1]; 
+//  outer_split_coord[1][1] = 8.0*atan(1.0);
+
+
+
 
  Problem::mesh_pt() = new RefineableTriangleMesh<ELEMENT>(
-  area_pt,
-  outer_split_coord,
+  curvilinear_outer_boundary_pt, //area_pt,
+//  outer_split_coord,
   Inner_hole_pt,
   uniform_element_area,
   this->time_stepper_pt());
@@ -661,8 +697,8 @@ void UnstructuredTorusProblem<ELEMENT>::solve_system(const double &dt,
 //Main driver loop
 int main()
 {
- Multi_domain_functions::Nx_bin = 100;
- Multi_domain_functions::Ny_bin = 100;
+//  Multi_domain_functions::Nx_bin = 100;
+//  Multi_domain_functions::Ny_bin = 100;
 
  //Construct and solve the problem
  //This maximum refinement level means that we fit (easily) into a 
@@ -673,15 +709,6 @@ int main()
  double max_error = 1.0e-3;
  double min_error = 1.0e-5;
 
- {
-  UnstructuredTorusProblem<MyAxisymmetricFluidElement<
-   ProjectableAxisymmetricTaylorHoodElement<
-   AxisymmetricTTaylorHoodElement> > >  problem(
-    min_error,max_error);
-  
-  //Now timestep
-  problem.solve_system(0.01,2,"RESLT_TH");
- }
 
 {
   UnstructuredTorusProblem<MyAxisymmetricFluidElement<
@@ -691,6 +718,16 @@ int main()
   
   //Now timestep
   problem.solve_system(0.01,2,"RESLT_CR");
+ }
+
+ {
+  UnstructuredTorusProblem<MyAxisymmetricFluidElement<
+   ProjectableAxisymmetricTaylorHoodElement<
+   AxisymmetricTTaylorHoodElement> > >  problem(
+    min_error,max_error);
+  
+  //Now timestep
+  problem.solve_system(0.01,2,"RESLT_TH");
  }
 
 

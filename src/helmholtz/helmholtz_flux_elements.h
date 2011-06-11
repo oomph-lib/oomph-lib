@@ -41,10 +41,6 @@
 #include "math.h"
 #include <complex>
 
-using namespace std;
-
-
-
 namespace oomph
 {
 

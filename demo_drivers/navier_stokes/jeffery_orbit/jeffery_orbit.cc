@@ -501,8 +501,8 @@ public:
 /// Unstructured Navier-Stokes ALE Problem
 //====================================================================
 template<class ELEMENT>
-class UnstructuredFluidProblem :
- public virtual ProjectionProblem<ELEMENT>
+class UnstructuredFluidProblem : public Problem
+                                 // public virtual ProjectionProblem<ELEMENT>
 
 {
 
@@ -1019,7 +1019,7 @@ public:
 
 //==start_constructor=====================================================
 /// Constructor: build the first mesh with TriangleMeshPolygon and
-///              TriangleMeshHolePolygon object
+///              TriangleMeshInternalPolygon object
 //========================================================================
 template<class ELEMENT>
 UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
@@ -1066,7 +1066,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  bound_seg[1][1]=half_height;
  
  // Specify 1st boundary id
- unsigned bound_id = 1;
+ unsigned bound_id = 0;
 
  // Build the 1st boundary segment
  boundary_segment_pt[0] = new TriangleMeshPolyLine(bound_seg,bound_id);
@@ -1078,7 +1078,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  bound_seg[1][1]=half_height;
 
  // Specify 2nd boundary id
- bound_id = 2;
+ bound_id = 1;
 
  // Build the 2nd boundary segment
  boundary_segment_pt[1] = new TriangleMeshPolyLine(bound_seg,bound_id);
@@ -1090,7 +1090,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  bound_seg[1][1]=-half_height;
 
  // Specify 3rd boundary id
- bound_id = 3;
+ bound_id = 2;
 
  // Build the 3rd boundary segment
  boundary_segment_pt[2] = new TriangleMeshPolyLine(bound_seg,bound_id);
@@ -1102,7 +1102,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  bound_seg[1][1]=-half_height;
 
  // Specify 4th boundary id
- bound_id = 4;
+ bound_id = 3;
 
  // Build the 4th boundary segment
  boundary_segment_pt[3] = new TriangleMeshPolyLine(bound_seg,bound_id);
@@ -1116,6 +1116,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
 
  // We have one rigid body
  Rigid_body_pt.resize(1);
+ Vector<TriangleMeshInternalClosedCurve*> hole_pt(1);
 
  // Build first hole
  //-----------------
@@ -1127,24 +1128,57 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  Rigid_body_pt[0] = new RigidBodyElement(temp_hole_pt,
                                          this->time_stepper_pt(1));
    
- //Now set the split coordinates
- Vector<Vector<double> > split_coord(2);
- split_coord[0].resize(2);
- split_coord[0][0] = 0.0;
- split_coord[0][1] = MathematicalConstants::Pi;
- split_coord[1].resize(2);
- split_coord[1][0] = MathematicalConstants::Pi;
- split_coord[1][1] = 2.0*MathematicalConstants::Pi;
+ this->pin_rigid_body();
+
+ // Build the two parts of the curvilinear boundary
+ Vector<TriangleMeshCurviLine*> curvilinear_boundary_pt(2);
+ 
+ double zeta_start=0.0;
+ double zeta_end=MathematicalConstants::Pi;
+ unsigned nsegment=8; // hierher check this for consistency with old validata
+ unsigned boundary_id=4; // hierher check this for consistency with old validata
+ curvilinear_boundary_pt[0]=new TriangleMeshCurviLine(
+  Rigid_body_pt[0],zeta_start,zeta_end, 
+  nsegment,boundary_id);
+ 
+ zeta_start=MathematicalConstants::Pi;
+ zeta_end=2.0*MathematicalConstants::Pi;
+ nsegment=8; // hierher check this for consistency with old validata
+ boundary_id=5; // hierher check this for consistency with old validata
+ curvilinear_boundary_pt[1]=new TriangleMeshCurviLine(
+  Rigid_body_pt[0],zeta_start,zeta_end, 
+  nsegment,boundary_id);
+ 
+ 
+ // Combine to hole
+ Vector<double> hole_coords(2);
+ hole_coords[0]=0.0;
+ hole_coords[1]=0.0;
+ Vector<TriangleMeshInternalClosedCurve*> curvilinear_hole_pt(1);
+ hole_pt[0]=
+  new TriangleMeshInternalCurvilinearClosedCurve(curvilinear_boundary_pt,hole_coords);
+ 
+//  //Now set the split coordinates
+//  Vector<Vector<double> > split_coord(2);
+//  split_coord[0].resize(2);
+//  split_coord[0][0] = 0.0;
+//  split_coord[0][1] = MathematicalConstants::Pi;
+//  split_coord[1].resize(2);
+//  split_coord[1][0] = MathematicalConstants::Pi;
+//  split_coord[1][1] = 2.0*MathematicalConstants::Pi;
  
  // Now build the mesh, based on the boundaries specified by
  //---------------------------------------------------------
  // polygons just created
  //----------------------
+
+ TriangleMeshClosedCurve* closed_curve_pt=Outer_boundary_polyline_pt;
+
  double uniform_element_area=0.2;
  Fluid_mesh_pt = 
-  new RefineableSolidTriangleMesh<ELEMENT>(Outer_boundary_polyline_pt, 
-                                           Rigid_body_pt,
-                                           split_coord,
+  new RefineableSolidTriangleMesh<ELEMENT>(closed_curve_pt, //Outer_boundary_polyline_pt, 
+                                           hole_pt, //Rigid_body_pt,
+                                           //split_coord,
                                            uniform_element_area,
                                            this->time_stepper_pt());
  

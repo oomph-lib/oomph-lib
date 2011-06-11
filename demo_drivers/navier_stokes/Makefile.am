@@ -28,8 +28,10 @@ vmtk_fluid \
 unstructured_fluid \
 unstructured_three_d_fluid \
 flux_control \
-schur_complement_preconditioner \
-unstructured_adaptive_ALE \
-unstructured_adaptive_fs \
-jeffery_orbit
+schur_complement_preconditioner 
+
+if SUPPRESS_TRIANGLE_LIB
+else
+  SUBDIRS += unstructured_adaptive_ALE unstructured_adaptive_fs jeffery_orbit
+endif
 

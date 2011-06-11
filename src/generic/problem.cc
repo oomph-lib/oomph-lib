@@ -567,7 +567,7 @@ namespace oomph
         error_stream 
          << "Number of dofs in distribute() has changed " 
          << "from " << old_ndof << " to " << n_dof << "\n"
-         << "Check that you've implemented any necessary actions_before/after\n"
+         <<"Check that you've implemented any necessary actions_before/after\n"
          << "distribute functions, e.g. to pin redundant pressure dofs"
          << " etc.\n";
         throw OomphLibError(error_stream.str(),
@@ -1032,7 +1032,7 @@ namespace oomph
         error_stream 
          << "Number of dofs in prune_halo_elements_and_nodes() has changed " 
          << "from " << old_ndof << " to " << n_dof << "\n"
-         << "Check that you've implemented any necessary actions_before/after\n"
+         <<"Check that you've implemented any necessary actions_before/after\n"
          << "adapt/distribute functions, e.g. to pin redundant pressure dofs"
          << " etc.\n";
         throw OomphLibError(error_stream.str(),
@@ -1189,7 +1189,7 @@ namespace oomph
         std::ostringstream warning_stream;
         warning_stream << "WARNING: " << std::endl
                        << "Node " << n << " in submesh " << imesh 
-                       << " is a duplicate \n and was ignored when assembling " 
+                       << " is a duplicate\n and was ignored when assembling " 
                        << "global mesh." << std::endl;
         OomphLibWarning(warning_stream.str(),
                         "Problem::rebuild_global_mesh()",
@@ -1608,7 +1608,8 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
       {
        t_end=TimingHelpers::timer();
        oomph_info 
-        << "Time for synchronise_hanging_nodes in assign_eqn_numbers: " 
+        << "Time for Mesh::synchronise_hanging_nodes in "
+        << "Problem::assign_eqn_numbers: " 
         << t_end-t_start << std::endl;
        t_start = TimingHelpers::timer();
       }
@@ -1626,7 +1627,8 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
       {
        t_end = TimingHelpers::timer();
        oomph_info 
-        << "Time for classify_halo_and_haloed_nodes in assign_eqn_numbers: " 
+        << "Time for Mesh::classify_halo_and_haloed_nodes in "
+        << "Problem::assign_eqn_numbers: " 
         << t_end-t_start << std::endl;
       }
 
@@ -1719,7 +1721,8 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
       {
        t_end = TimingHelpers::timer();
        oomph_info 
-        << "Time for classify_halo_and_haloed_nodes in assign_eqn_numbers: " 
+        << "Total time for all Mesh::classify_halo_and_haloed_nodes "
+        << "in Problem::assign_eqn_numbers: " 
         << t_end-t_start << std::endl;
       }
 
@@ -1909,7 +1912,8 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
     {
      t_end = TimingHelpers::timer();
      oomph_info 
-      << "Time for synchronise_eqn_numbers in assign_eqn_numbers: " 
+      << "Time for Problem::synchronise_eqn_numbers in "
+      << "Problem::assign_eqn_numbers: " 
       << t_end-t_start << std::endl;
     }
   
@@ -1966,7 +1970,8 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
       {
        t_end = TimingHelpers::timer();
        std::stringstream tmp;
-       tmp << "Time for remove_duplicate_data in assign_eqn_numbers: " 
+       tmp << "Time for Problem::remove_duplicate_data in "
+           << "Problem::assign_eqn_numbers: " 
            << t_end-t_start << "; have ";
        if (!actually_removed_some_data)
         {
@@ -2024,7 +2029,8 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
   {
    t_end = TimingHelpers::timer();
    oomph_info 
-    << "Time for assign_local_eqn_numbers in assign_eqn_numbers: " 
+    << "Total time for all Mesh::assign_local_eqn_numbers in "
+    << "Problem::assign_eqn_numbers: " 
     << t_end-t_start << std::endl;
   }
 
@@ -2226,7 +2232,8 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
                           }
                         }
                       }
-                     // Associate node with first non negative global eqn number
+                     // Associate node with first non negative global 
+                     // eqn number
                      if (first_non_negative_eqn_number_plus_one>0)
                       {
                        global_node_pt[first_non_negative_eqn_number_plus_one-1]
@@ -2471,7 +2478,7 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
                            killed_nodes.insert(duplicated_node_pt);
                            unsigned i_proc=unsigned(iproc);
                            mesh_pt->null_external_halo_node(i_proc,
-                                                            duplicated_node_pt);
+                                                           duplicated_node_pt);
                           }
                          
                          // Weight of the original node
@@ -3320,8 +3327,9 @@ else
     if (residuals.distribution_pt()->distributed())
      {
       std::ostringstream error_stream;
-      error_stream << "If the DoubleVector residuals is setup then it must not "
-                   << "be distributed.";
+      error_stream 
+       << "If the DoubleVector residuals is setup then it must not "
+       << "be distributed.";
       throw OomphLibError(error_stream.str(),
                           "Problem::get_jacobian(...)",
                           OOMPH_EXCEPTION_LOCATION);
@@ -3329,8 +3337,9 @@ else
     if (residuals.distribution_pt()->nrow() != n_dof)
      {
       std::ostringstream error_stream;
-      error_stream << "If the DoubleVector residuals is setup then it must have"
-                   << " the correct number of rows";
+      error_stream
+       << "If the DoubleVector residuals is setup then it must have"
+       << " the correct number of rows";
       throw OomphLibError(error_stream.str(),
                           "Problem::get_jacobian(...)",
                           OOMPH_EXCEPTION_LOCATION);
@@ -3338,8 +3347,9 @@ else
     if (!(*Communicator_pt == *residuals.distribution_pt()->communicator_pt()))
      {
       std::ostringstream error_stream;
-      error_stream << "If the DoubleVector residuals is setup then it must have"
-                   << " the same communicator as the problem.";
+      error_stream 
+       << "If the DoubleVector residuals is setup then it must have"
+       << " the same communicator as the problem.";
       throw OomphLibError(error_stream.str(),
                           "Problem::get_jacobian(...)",
                           OOMPH_EXCEPTION_LOCATION);
@@ -9410,8 +9420,9 @@ adaptive_unsteady_newton_solve(const double &dt_desired,
         }
        else
         {
-         oomph_info << "TIMESTEP REJECTED -- HALVING TIMESTEP AND TRYING AGAIN" 
-                    << std::endl;
+         oomph_info 
+          << "TIMESTEP REJECTED -- HALVING TIMESTEP AND TRYING AGAIN" 
+          << std::endl;
          //Reject the timestep, if we have an exception
          REJECT_TIMESTEP=1;
          //Essentially all I do here is half the next timestep
@@ -10008,12 +10019,15 @@ void Problem::dump(std::ofstream& dump_file)
     { 
      mmesh_pt->dump_refinement(dump_file);
     }
+#ifdef OOMPH_HAS_TRIANGLE_LIB  
    // Dump triangle mesh TriangulateIO which represents mesh topology
    if(TriangleMeshBase* mmesh_pt =
       dynamic_cast<TriangleMeshBase*>(mesh_pt(0)))
     {
      mmesh_pt->dump_triangulateio(dump_file);
     }
+#endif
+
   }
  
  //Multiple submeshes
@@ -10029,12 +10043,14 @@ void Problem::dump(std::ofstream& dump_file)
       {
        mmesh_pt->dump_refinement(dump_file);
       }
+#ifdef OOMPH_HAS_TRIANGLE_LIB  
      // Dump triangle mesh TriangulateIO which represents mesh topology
      if(TriangleMeshBase* mmesh_pt =
         dynamic_cast<TriangleMeshBase*>(mesh_pt(imesh)))
       {
        mmesh_pt->dump_triangulateio(dump_file);
       }
+#endif
     } // End of loop over submeshes
   }
 
@@ -10117,6 +10133,7 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
      // when the problem was dumped to disk.
      mmesh_pt->refine(this->communicator_pt(),restart_file);
     }
+#ifdef OOMPH_HAS_TRIANGLE_LIB  
    // Regenerate mesh from triangulate IO if it's a triangular mesh
    if(TriangleMeshBase* mmesh_pt =
       dynamic_cast<TriangleMeshBase*>(mesh_pt(0)))
@@ -10126,6 +10143,7 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
      //data structure
      mmesh_pt->remesh_from_triangulateio(restart_file);
     }
+#endif
 
 
   }
@@ -10150,6 +10168,7 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
        // when the problem was dumped to disk.
        mmesh_pt->refine(this->communicator_pt(),restart_file);
       }
+#ifdef OOMPH_HAS_TRIANGLE_LIB  
      // Regenerate mesh from triangulate IO if it's a triangular mesh
      if(TriangleMeshBase* mmesh_pt =
         dynamic_cast<TriangleMeshBase*>(mesh_pt(imesh)))
@@ -10159,6 +10178,7 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
        //data structure
        mmesh_pt->remesh_from_triangulateio(restart_file);
       }
+#endif
     } // End of loop over submeshes
    
    // Rebuild the global mesh
@@ -10352,8 +10372,9 @@ unsigned Problem::self_test()
    if (Global_data_pt[iglobal]->self_test()!=0)
     {
      passed=false;
-     oomph_info << "\n ERROR: Failed Data::self_test() for global data iglobal" 
-                << iglobal << std::endl;
+     oomph_info 
+      << "\n ERROR: Failed Data::self_test() for global data iglobal" 
+      << iglobal << std::endl;
     }
   }
 
@@ -10754,6 +10775,8 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
     { 
      if (mmesh_pt->adapt_flag())
       {
+       double t_start = TimingHelpers::timer();
+       
        // Get pointer to error estimator
        ErrorEstimator* error_estimator_pt=mmesh_pt->
         spatial_error_estimator_pt();
@@ -10794,7 +10817,17 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
 
        oomph_info << "\n Max/min error: " 
                   << mmesh_pt->max_error() << " "
-                  << mmesh_pt->min_error() << std::endl;
+                  << mmesh_pt->min_error() 
+                  << std::endl << std::endl;
+
+
+       if (Global_timings::Doc_comprehensive_timings)
+        {
+         t_end = TimingHelpers::timer();
+         oomph_info << "Time for error estimation: " 
+                    << t_end-t_start << std::endl;
+         t_start = TimingHelpers::timer();
+        }
        
        // Adapt mesh
        mmesh_pt->adapt(this->communicator_pt(),elemental_error);
@@ -10802,6 +10835,15 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
        // Add to counters
        n_refined+=mmesh_pt->nrefined(); 
        n_unrefined+=mmesh_pt->nunrefined(); 
+
+       if (Global_timings::Doc_comprehensive_timings)
+        {
+         t_end = TimingHelpers::timer();
+         oomph_info << "Time for complete mesh adaptation "
+                    << "(but excluding comp of error estimate): " 
+                    << t_end-t_start << std::endl;
+         t_start = TimingHelpers::timer();
+        }
 
       }
      else
@@ -10815,7 +10857,6 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
     }
 
   }
-
  //Multiple submeshes
  //------------------
  else
@@ -10827,6 +10868,8 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
      if(RefineableMeshBase* mmesh_pt =
         dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
       {
+       double t_start = TimingHelpers::timer();
+
        // Get pointer to error estimator
        ErrorEstimator* error_estimator_pt=mmesh_pt->
         spatial_error_estimator_pt();
@@ -10877,12 +10920,31 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
                     << mmesh_pt->max_error() << " "
                     << mmesh_pt->min_error() << std::endl;
 
+
+         if (Global_timings::Doc_comprehensive_timings)
+          {
+           t_end = TimingHelpers::timer();
+           oomph_info << "Time for error estimation: " 
+                      << t_end-t_start << std::endl;
+           t_start = TimingHelpers::timer();
+          }
+
          // Adapt mesh
          mmesh_pt->adapt(this->communicator_pt(),elemental_error); 
   
          // Add to counters
          n_refined+=mmesh_pt->nrefined(); 
          n_unrefined+=mmesh_pt->nunrefined(); 
+
+
+         if (Global_timings::Doc_comprehensive_timings)
+          {
+           t_end = TimingHelpers::timer();
+           oomph_info << "Time for complete mesh adaptation "
+                      << "(but excluding comp of error estimate): " 
+                      << t_end-t_start << std::endl;
+           t_start = TimingHelpers::timer();
+          }
 
         }
        else
@@ -10901,13 +10963,14 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
    // Rebuild the global mesh
    rebuild_global_mesh();
 
-  } 
+  }
 
 
  if (Global_timings::Doc_comprehensive_timings)
   {
    t_end = TimingHelpers::timer();
-   oomph_info << "Time for actual adaptation: " 
+   oomph_info << "Total time for actual adaptation "
+              << "(all meshes; incl error estimates): " 
               << t_end-t_start << std::endl;
    t_start = TimingHelpers::timer();
   }
@@ -10922,6 +10985,10 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
    oomph_info << "Time for actions after adapt: " 
               << t_end-t_start << std::endl;
    t_start = TimingHelpers::timer();
+
+   oomph_info << "About to start re-assigning eqn numbers "
+              << "with Problem::assign_eqn_numbers() at end of "
+              << "Problem::adapt().\n";
   }
 
  //Attach the boundary conditions to the mesh
@@ -10932,7 +10999,8 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
  if (Global_timings::Doc_comprehensive_timings)
   {
    t_end = TimingHelpers::timer();
-   oomph_info << "Time for re-assigning eqn numbers after adapt: " 
+   oomph_info << "Time for re-assigning eqn numbers with "
+              << "Problem::assign_eqn_numbers() at end of Problem::adapt(): " 
               << t_end-t_start << std::endl;
    oomph_info << "Total time for adapt: " 
               << t_end-t_start_total << std::endl;
@@ -13160,7 +13228,7 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
      unsigned objective=0; 
      bool bypass_metis=true;
      METIS::partition_distributed_mesh(this,objective,
-                                       target_domain_for_local_non_halo_element,
+                                      target_domain_for_local_non_halo_element,
                                        bypass_metis);
     }
    else
@@ -13168,7 +13236,7 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
      // Use METIS to perform the partitioning
      unsigned objective=0; 
      METIS::partition_distributed_mesh(this,objective,
-                                       target_domain_for_local_non_halo_element);
+                                     target_domain_for_local_non_halo_element);
     }
 
    if (report_stats)
@@ -14405,7 +14473,8 @@ void Problem::send_data_to_be_sent_during_load_balancing(
         {
          // Get all leaves associated with this base/root element
          Vector<Tree*> all_leaf_nodes_pt;
-         ref_root_el_pt->tree_pt()->stick_leaves_into_vector(all_leaf_nodes_pt);
+         ref_root_el_pt->tree_pt()->
+          stick_leaves_into_vector(all_leaf_nodes_pt);
          
          // How many leaves are there?
          unsigned n_leaf=all_leaf_nodes_pt.size();
@@ -14540,7 +14609,8 @@ void Problem::send_data_to_be_sent_during_load_balancing(
                    // Get pointer to the map of indices associated with
                    // additional values created by face elements
                    std::map<unsigned, unsigned>* map_pt=
-                    bnod_pt->index_of_first_value_assigned_by_face_element_pt();
+                    bnod_pt->
+                    index_of_first_value_assigned_by_face_element_pt();
                    
                    // Loop over number of entries in map
                    for (unsigned i=0;i<n_entry;i++)
@@ -14819,7 +14889,8 @@ void Problem::get_data_to_be_sent_during_load_balancing(
          for (unsigned i_leaf=0;i_leaf<n_leaf;i_leaf++)
           {
            // Add element object at leaf
-           RefineableElement* leaf_el_pt=all_leaf_nodes_pt[i_leaf]->object_pt();
+           RefineableElement* leaf_el_pt=
+            all_leaf_nodes_pt[i_leaf]->object_pt();
            element_for_processor[target_domain].push_back(leaf_el_pt);
 
            // Monitor/update maximum refinement level
@@ -15220,7 +15291,8 @@ void Problem::get_flat_packed_refinement_pattern_for_load_balancing(
 
                // If it's at this level, and not a leaf, then it will 
                // need to be refined in the new mesh
-               if ((level==current_level) && (!all_tree_nodes_pt[e]->is_leaf()))
+               if ((level==current_level) && 
+                   (!all_tree_nodes_pt[e]->is_leaf()))
                 {
                  flat_packed_refinement_info_for_root[root_element_number].
                   push_back(1);
@@ -15341,7 +15413,7 @@ void Problem::refine_distributed_base_mesh
             }
            // Refinement code 1: Element should not be refined at this
            // level -- keep going
-           else if (refinement_info_for_root_elements[root_el_no][level][ee]==1)
+           else if(refinement_info_for_root_elements[root_el_no][level][ee]==1)
             {
              el_count_on_this_proc[level]++;
             }

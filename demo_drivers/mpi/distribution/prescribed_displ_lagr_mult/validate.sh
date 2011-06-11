@@ -68,16 +68,13 @@ fi
 
 mv RESLT RESLT_prescribed_displ_lagr_mult
 
+
 #------------------------------------------------------
 
 
 # Validation for testing resizing halo nodes
 #-------------------------------------------
-mkdir RESLT
-
-# Wait for a bit to allow parallel file systems to realise
-# the existence of the new directory
-sleep 5
+mkdir RESLT_resize_test
 
 echo "Running test for resizing halo nodes "
 $MPI_RUN_COMMAND ../resize_hanging_node_tester --validation > OUTPUT_resize_hanging_node_tester
@@ -91,11 +88,11 @@ echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 
-cat RESLT/soln0_on_proc0.dat RESLT/soln1_on_proc1.dat RESLT/soln2_on_proc0.dat \
-    RESLT/lagr0_on_proc1.dat RESLT/lagr1_on_proc0.dat RESLT/lagr2_on_proc1.dat \
-    RESLT/nodes0_on_proc0.dat RESLT/nodes0_on_proc1.dat \
-    RESLT/nodes1_on_proc0.dat RESLT/nodes1_on_proc1.dat \
-    RESLT/nodes2_on_proc0.dat RESLT/nodes2_on_proc1.dat \
+cat RESLT_resize_test/soln0_on_proc0.dat RESLT_resize_test/soln1_on_proc1.dat RESLT_resize_test/soln2_on_proc0.dat \
+    RESLT_resize_test/lagr0_on_proc1.dat RESLT_resize_test/lagr1_on_proc0.dat RESLT_resize_test/lagr2_on_proc1.dat \
+    RESLT_resize_test/nodes0_on_proc0.dat RESLT_resize_test/nodes0_on_proc1.dat \
+    RESLT_resize_test/nodes1_on_proc0.dat RESLT_resize_test/nodes1_on_proc1.dat \
+    RESLT_resize_test/nodes2_on_proc0.dat RESLT_resize_test/nodes2_on_proc1.dat \
     > resize_test_results.dat
 
 if test "$1" = "no_fpdiff"; then
@@ -106,12 +103,12 @@ else
 fi
 
 
-cat RESLT/soln3_on_proc0.dat RESLT/soln3_on_proc1.dat \
-    RESLT/soln4_on_proc0.dat RESLT/soln4_on_proc1.dat \
-    RESLT/lagr3_on_proc0.dat RESLT/lagr3_on_proc1.dat  \
-    RESLT/lagr4_on_proc0.dat RESLT/lagr4_on_proc1.dat  \
-    RESLT/nodes3_on_proc0.dat RESLT/nodes3_on_proc1.dat  \
-    RESLT/nodes4_on_proc0.dat RESLT/nodes4_on_proc1.dat  \
+cat RESLT_resize_test/soln3_on_proc0.dat RESLT_resize_test/soln3_on_proc1.dat \
+    RESLT_resize_test/soln4_on_proc0.dat RESLT_resize_test/soln4_on_proc1.dat \
+    RESLT_resize_test/lagr3_on_proc0.dat RESLT_resize_test/lagr3_on_proc1.dat  \
+    RESLT_resize_test/lagr4_on_proc0.dat RESLT_resize_test/lagr4_on_proc1.dat  \
+    RESLT_resize_test/nodes3_on_proc0.dat RESLT_resize_test/nodes3_on_proc1.dat  \
+    RESLT_resize_test/nodes4_on_proc0.dat RESLT_resize_test/nodes4_on_proc1.dat  \
     > resize_test_load_balanced.dat
 
 if test "$1" = "no_fpdiff"; then
@@ -120,8 +117,6 @@ else
 ../../../../../bin/fpdiff.py ../validata/resize_test_load_balanced.dat.gz  \
          resize_test_load_balanced.dat >> validation.log
 fi
-
-mv RESLT RESLT_resize_test
 
 #------------------------------------------------------
 

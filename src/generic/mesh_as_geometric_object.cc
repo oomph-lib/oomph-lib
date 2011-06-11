@@ -644,6 +644,32 @@ namespace oomph
        // Loop over the dimension
        for(unsigned i=0;i<n_lagrangian;i++)
         {
+#ifdef PARANOID
+         if ((global_coord[i]<Min_coords[i])||
+             (global_coord[i]>Max_coords[i]))
+          {
+           std::ostringstream error_message;
+           error_message 
+            << "Bin sample point " << iplot << " in element " << e << "\n"
+            << "is outside bin limits in coordinate direction " << i << ":\n"
+            << "Sample point coordinate: " << global_coord[i] << "\n"
+            << "Max bin coordinate     : " << Max_coords[i] << "\n"
+            << "Min bin coordinate     : " << Min_coords[i] << "\n"
+            << "You should either setup the bin boundaries manually\n"
+            << "or increase the percentage offset by which the\n"
+            << "automatically computed bin limits are increased \n"
+            << "beyond their sampled max/mins. This is defined in\n"
+            << "the (public) namespace member\n\n"
+            << "Multi_domain_functions::Percentage_offset \n\n which \n"
+            << "currently has the value: "
+            << Multi_domain_functions::Percentage_offset << "\n";
+           throw OomphLibError(
+            error_message.str(),
+            "MeshAsGeomObject::create_bins_of_objects()",
+            OOMPH_EXCEPTION_LOCATION);
+          }
+          
+#endif
          unsigned bin_number_i = 
           int(Nbin[i]*(
                (global_coord[i] - Min_coords[i])/

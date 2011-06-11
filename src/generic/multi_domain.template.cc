@@ -799,8 +799,8 @@ namespace oomph
      error_stream 
       << "Mesh and external mesh documented in missing_coords_mesh*.dat\n"
       << "and missing_coords_ext_mesh*.dat, respectively. Missing \n"
-      << "coordinates in missing_coords*.dat\n";
-     OomphLibError
+      << "coordinates in missing_coords*.dat hierher don' throw\n";
+     throw OomphLibError // hierher don't throw
      (error_stream.str(),
       "Multi_domain_functions::locate_zeta_for_local_coordinates()",
       OOMPH_EXCEPTION_LOCATION);     

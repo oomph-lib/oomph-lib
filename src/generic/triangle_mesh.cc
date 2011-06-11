@@ -46,6 +46,9 @@ namespace oomph
 //==================================================================
 namespace TriangleHelper
 {
+
+#ifdef OOMPH_HAS_TRIANGLE_LIB
+
  /// Clear TriangulateIO structure
  void clear_triangulateio(TriangulateIO& triangulate_io,
                           const bool& clear_hole_data)
@@ -840,7 +843,7 @@ void read_triangulateio(std::istream &restart_file,TriangulateIO &triangle_io)
    for(int n=0;n<n_local_node;++n)
     {
      getline(restart_file,input_string);
-     triangle_io.trianglelist[counter] = atof(input_string.c_str());
+     triangle_io.trianglelist[counter] = atoi(input_string.c_str());
      ++counter;
     }
    //Read the attributes
@@ -1013,6 +1016,7 @@ void read_triangulateio(std::istream &restart_file,TriangulateIO &triangle_io)
    }
 }
                          
+#endif
 
 } //End of TriangleHelper namespace
 
@@ -1031,7 +1035,7 @@ void read_triangulateio(std::istream &restart_file,TriangulateIO &triangle_io)
 namespace ToleranceForVertexMismatchInPolygons
 {
  
- ///  Acceptable discrepancy for mismatch in vertex coordinates.
+ /// Acceptable discrepancy for mismatch in vertex coordinates.
  /// In paranoid mode, the code will die if the beginning/end of
  /// two adjacent polylines differ by more than that. If the
  /// discrepancy is smaller (but nonzero) one of the vertex coordinates
@@ -1046,11 +1050,14 @@ namespace ToleranceForVertexMismatchInPolygons
 /// Constructor: Specify vector of pointers to TriangleMeshPolyLines
 /// that define the boundary of the segments of the polygon.
 /// Each TriangleMeshPolyLine has its own boundary ID and can contain
-/// multiple (straight-line) segments. If there is just a single
-/// polyline, the first and last vertices should not coincide -- we 
-/// will close the polygon for you! However, if there multiple
-/// polylines their joint vertices must be specified in both
-/// polylines (since the polylines may be used in isolation). 
+/// multiple (straight-line) segments. For consistency across the
+/// various uses of this class, we insist that the closed boundary
+/// is represented by at least two separate TriangleMeshPolyLines
+/// whose joint vertices must be specified in both.
+/// (This is to allow the setup of unique boundary coordinate(s)
+/// around the polygon.) This may seem slightly annoying
+/// in cases where a polygon really only represents a single
+/// boundary, but...
 //=========================================================================
 TriangleMeshPolygon::TriangleMeshPolygon(const Vector<TriangleMeshPolyLine*>& 
                                          boundary_polyline_pt) :
@@ -1064,116 +1071,91 @@ TriangleMeshPolygon::TriangleMeshPolygon(const Vector<TriangleMeshPolyLine*>&
    unsigned i_offensive=0;
    unsigned nbound=Boundary_polyline_pt.size();
 
-   // Multiple polylines
-   if (nbound>1)
+   // Need at least two
+   if (nbound<2)
     {
-     // Does the last node of the polyline connect to the first one
-     // of the next one (only up the last but one!)
-     for(unsigned i=0;i<nbound-1;i++)
-      {
-       // Get vector last vertex in current polyline
-       unsigned last_vertex = (Boundary_polyline_pt[i]->nvertex())-1;
-       Vector<double> v1=Boundary_polyline_pt[i]->
-        vertex_coordinate(last_vertex);
-       
-       // Get vector to first vertex in next polyline
-       Vector<double> v2=Boundary_polyline_pt[i+1]->vertex_coordinate(0);
+     std::ostringstream error_stream;
+     error_stream
+      << "Sorry -- I'm afraid we insist that the polygon is specified\n"
+      << "by at least two separate PolyLines. You've only specied "
+      << nbound << std::endl;
+     throw OomphLibError(error_stream.str(),
+                         "TriangleMeshPolygon::TriangleMeshPolygon()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
 
-       // Work out error
-       double error=sqrt(pow(v1[0]-v2[0],2)+pow(v1[1]-v2[1],2));
-       
-       // Is error accetable?
-       if (error>ToleranceForVertexMismatchInPolygons::Tolerable_error)       
-        {
-         contiguous=false;
-         i_offensive=i;
-         break;
-        }
-       // Align
-       else
-        {
-         Boundary_polyline_pt[i+1]->vertex_coordinate(0)=
-          Boundary_polyline_pt[i]->vertex_coordinate(last_vertex);
-        }
-      }
-     
-     // Does the last one connect to the first one?
-     
-     // Get vector last vertex last polyline
-     unsigned last_vertex = (Boundary_polyline_pt[nbound-1]->nvertex())-1;
-     Vector<double> v1=Boundary_polyline_pt[nbound-1]->
+   
+   // Does the last node of the polyline connect to the first one
+   // of the next one (only up the last but one!)
+   for(unsigned i=0;i<nbound-1;i++)
+    {
+     // Get vector last vertex in current polyline
+     unsigned last_vertex = (Boundary_polyline_pt[i]->nvertex())-1;
+     Vector<double> v1=Boundary_polyline_pt[i]->
       vertex_coordinate(last_vertex);
      
-     // Get vector first vertex first polyline
-     Vector<double> v2=Boundary_polyline_pt[0]->vertex_coordinate(0);
+     // Get vector to first vertex in next polyline
+     Vector<double> v2=Boundary_polyline_pt[i+1]->vertex_coordinate(0);
+     
+     // Work out error
      double error=sqrt(pow(v1[0]-v2[0],2)+pow(v1[1]-v2[1],2));
-     if (error>ToleranceForVertexMismatchInPolygons::Tolerable_error)
+     
+     // Is error accetable?
+     if (error>ToleranceForVertexMismatchInPolygons::Tolerable_error)       
       {
        contiguous=false;
-       i_offensive=nbound-1;
-      } 
+       i_offensive=i;
+       break;
+      }
+     // Align
      else
       {
-       Boundary_polyline_pt[0]->vertex_coordinate(0)=
-        Boundary_polyline_pt[nbound-1]->vertex_coordinate(last_vertex);
+       Boundary_polyline_pt[i+1]->vertex_coordinate(0)=
+        Boundary_polyline_pt[i]->vertex_coordinate(last_vertex);
       }
-     
-     if (!contiguous)
-      {
-       std::ostringstream error_stream;
-       error_stream
-        << "When a Polygon is defined by multiple polylines, the polylines\n"
-        << "should define a closed geometry, i.e. the first/last vertex of\n"
-        << "adjacent polylines should match.\n\n"
-        << "Your polyline number "<< i_offensive 
-        <<" has no contiguous neighbour, when judged \nwith the tolerance of "
-        << ToleranceForVertexMismatchInPolygons::Tolerable_error
-        << " which is specified in the namespace \nvariable "
-        << "ToleranceForVertexMismatchInPolygons::Tolerable_error.\n\n"
-        << "Feel free to adjust this or to recompile the code without\n"
-        << "paranoia if you think this is OK...\n"
-        << std::endl;
-       throw OomphLibError(error_stream.str(),
-                           "TriangleMeshPolygon::TriangleMeshPolygon()",
-                           OOMPH_EXCEPTION_LOCATION);
-      }
-
     }
-   // Single polyline
+   
+   // Does the last one connect to the first one?
+   
+   // Get vector last vertex last polyline
+   unsigned last_vertex = (Boundary_polyline_pt[nbound-1]->nvertex())-1;
+   Vector<double> v1=Boundary_polyline_pt[nbound-1]->
+    vertex_coordinate(last_vertex);
+   
+   // Get vector first vertex first polyline
+   Vector<double> v2=Boundary_polyline_pt[0]->vertex_coordinate(0);
+   double error=sqrt(pow(v1[0]-v2[0],2)+pow(v1[1]-v2[1],2));
+   if (error>ToleranceForVertexMismatchInPolygons::Tolerable_error)
+    {
+     contiguous=false;
+     i_offensive=nbound-1;
+    } 
    else
     {
-     // Should not be closed
-     
-     // Get vector last vertex in polyline
-     unsigned last_vertex = (Boundary_polyline_pt[0]->nvertex())-1;
-     Vector<double> v1=Boundary_polyline_pt[0]->
-      vertex_coordinate(last_vertex);
-     
-     // Get vector first vertex first polyline
-     Vector<double> v2=Boundary_polyline_pt[0]->vertex_coordinate(0);
-
-     // Gatp
-     double gap=sqrt(pow(v1[0]-v2[0],2)+pow(v1[1]-v2[1],2));
-     if (gap<ToleranceForVertexMismatchInPolygons::Tolerable_error)
-      {
-       std::ostringstream error_stream;
-       error_stream
-        << "When a Polygon is defined by a single polyline, the polyline\n"
-        << "should define an open geometry, i.e. the first/last vertex of\n"
-        << "the polyline should differ.\n\n"
-        << "The first and last vertices of your polyline appear to coincide "
-        <<" when judged \nwith the tolerance of "
-        << ToleranceForVertexMismatchInPolygons::Tolerable_error
-        << " which is specified in the namespace \nvariable "
-        << "ToleranceForVertexMismatchInPolygons::Tolerable_error.\n\n"
-        << "Feel free to adjust this (e.g. set it to a negative value) or\n"
-        << "to recompile the code withoutparanoia if you think this is OK...\n"
-        << std::endl;
-       throw OomphLibError(error_stream.str(),
-                           "TriangleMeshPolygon::TriangleMeshPolygon()",
-                           OOMPH_EXCEPTION_LOCATION);
-      }
+     Boundary_polyline_pt[0]->vertex_coordinate(0)=
+      Boundary_polyline_pt[nbound-1]->vertex_coordinate(last_vertex);
     }
+   
+   if (!contiguous)
+    {
+     std::ostringstream error_stream;
+     error_stream
+      << "The polylines specified \n"
+      << "should define a closed geometry, i.e. the first/last vertex of\n"
+      << "adjacent polylines should match.\n\n"
+      << "Your polyline number "<< i_offensive 
+      <<" has no contiguous neighbour, when judged \nwith the tolerance of "
+      << ToleranceForVertexMismatchInPolygons::Tolerable_error
+      << " which is specified in the namespace \nvariable "
+      << "ToleranceForVertexMismatchInPolygons::Tolerable_error.\n\n"
+      << "Feel free to adjust this or to recompile the code without\n"
+      << "paranoia if you think this is OK...\n"
+      << std::endl;
+     throw OomphLibError(error_stream.str(),
+                         "TriangleMeshPolygon::TriangleMeshPolygon()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+   
 #endif
    
   }
@@ -1208,7 +1190,7 @@ namespace TriangleBoundaryHelper
  
 }
 
-
+#ifdef OOMPH_HAS_TRIANGLE_LIB
 
 //==============================================================
 /// Write a Triangulateio_object file of the TriangulateIO object
@@ -1396,7 +1378,7 @@ namespace TriangleBoundaryHelper
   outfile.close();
  }
 
-
+#endif
 
 //================================================================
 /// Setup lookup schemes which establish which elements are located

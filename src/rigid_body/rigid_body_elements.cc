@@ -41,13 +41,15 @@ namespace oomph
 /// the two displacements of and the rotation angle about the polygon's 
 /// centre of mass.
 //=======================================================================
-RigidBodyTriangleMeshHolePolygon::RigidBodyTriangleMeshHolePolygon(
+RigidBodyTriangleMeshInternalPolygon::RigidBodyTriangleMeshInternalPolygon(
  const Vector<double>& hole_center,
  const Vector<TriangleMeshPolyLine*>& 
  boundary_polyline_pt,
  TimeStepper* const &time_stepper_pt,
  Data* const &centre_displacement_data_pt) :
- TriangleMeshHolePolygon(hole_center,boundary_polyline_pt), 
+ TriangleMeshPolygon(boundary_polyline_pt),
+ TriangleMeshInternalClosedCurve(hole_center),
+ TriangleMeshInternalPolygon(hole_center,boundary_polyline_pt), 
  RigidBodyElement(time_stepper_pt,centre_displacement_data_pt)
 {  
  // Original rotation angle is zero
@@ -171,19 +173,21 @@ RigidBodyTriangleMeshHolePolygon::RigidBodyTriangleMeshHolePolygon(
 
  //Assign the intrinsic coordinate
  this->assign_zeta();
- {
-  unsigned n_poly = this->npolyline();
-  for(unsigned p=0;p<n_poly;++p)
-   {
-    std::cout << "Polyline " << p << "\n";
-    std::cout << "-----------------------\n";
-    unsigned n_vertex = Zeta_vertex[p].size();
-    for(unsigned v=0;v<n_vertex;v++)
-     {
-      std::cout << v << " " << Zeta_vertex[p][v] << "\n";
-     }
-   }
- }
+
+//  {
+//   unsigned n_poly = this->npolyline();
+//   for(unsigned p=0;p<n_poly;++p)
+//    {
+//     std::cout << "Polyline " << p << "\n";
+//     std::cout << "-----------------------\n";
+//     unsigned n_vertex = Zeta_vertex[p].size();
+//     for(unsigned v=0;v<n_vertex;v++)
+//      {
+//       std::cout << v << " " << Zeta_vertex[p][v] << "\n";
+//      }
+//    }
+// }
+
 }
  
 
@@ -194,7 +198,7 @@ RigidBodyTriangleMeshHolePolygon::RigidBodyTriangleMeshHolePolygon(
 /// original position of the centre of mass, and the displacements 
 /// and rotations relative to it
 //===============================================================
-void RigidBodyTriangleMeshHolePolygon::reset_reference_configuration()
+void RigidBodyTriangleMeshInternalPolygon::reset_reference_configuration()
 {
  Vector<double> x_orig(2);
  Vector<double> r(2);
@@ -214,8 +218,8 @@ void RigidBodyTriangleMeshHolePolygon::reset_reference_configuration()
   }
 
  // Update coordinates of hole
- Vector<double> orig_hole_coord(this->hole_coordinate());
- this->apply_rigid_body_motion(0,orig_hole_coord,this->hole_coordinate());
+ Vector<double> orig_hole_coord(this->internal_point());
+ this->apply_rigid_body_motion(0,orig_hole_coord,this->internal_point());
 
  // Update centre of gravity
  double x_displ=Centre_displacement_data_pt->value(0);

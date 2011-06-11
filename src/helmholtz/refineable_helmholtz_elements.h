@@ -44,8 +44,6 @@
 #include "math.h"
 #include <complex>
 
-using namespace std;
-
 namespace oomph
 {
 
@@ -88,7 +86,7 @@ class RefineableHelmholtzEquations : public virtual HelmholtzEquations<DIM>,
   /// Get 'flux' for Z2 error recovery:  Standard flux.from Helmholtz equations
   void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
   {
-   Vector< complex<double> > actual_flux(DIM);
+   Vector<std::complex<double> > actual_flux(DIM);
    this->get_flux(s,actual_flux);
    unsigned count=0;
    for (unsigned i=0;i<DIM;i++)

@@ -65,8 +65,12 @@ public:
                       const std::string& element_file_name,
                       const std::string& poly_file_name);
  
+#ifdef OOMPH_HAS_TRIANGLE_LIB  
+
  /// \short Constructor: Pass the TriangulateIO object
  TriangleScaffoldMesh(TriangulateIO& triangle_data); 
+
+#endif
 
  /// Broken copy constructor
  TriangleScaffoldMesh(const TriangleScaffoldMesh&) 
@@ -96,7 +100,7 @@ public:
   {return Element_attribute[e];}
 
  /// Vectors of hole centre coordinates
- Vector<Vector<double> >& hole_centre(){return Hole_centre;}
+ Vector<Vector<double> >& internal_point(){return Hole_centre;}
  
  protected: 
 

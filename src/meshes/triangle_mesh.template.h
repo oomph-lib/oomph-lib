@@ -49,6 +49,8 @@
 #include "../generic/triangle_mesh.h"
 #include "../generic/refineable_mesh.h"
 
+#ifdef OOMPH_HAS_TRIANGLE_LIB
+
 // Interface to triangulate function
 extern "C" {
  void triangulate(char *triswitches, struct oomph::TriangulateIO *in,
@@ -56,6 +58,7 @@ extern "C" {
                   struct oomph::TriangulateIO *vorout);
 }
 
+#endif
 
 namespace oomph
 {
@@ -73,8 +76,10 @@ namespace oomph
    /// \short Empty constructor 
   TriangleMesh()
    {
+#ifdef OOMPH_HAS_TRIANGLE_LIB  
     // Using this constructor no Triangulateio object is built
     Triangulateio_exists=false;
+#endif
    }
   
   /// \short Constructor with the input files
@@ -90,6 +95,8 @@ namespace oomph
 
     // Store Timestepper used to build elements
     Time_stepper_pt=time_stepper_pt;
+
+#ifdef OOMPH_HAS_TRIANGLE_LIB  
     
     // Using this constructor build the triangulatio
     TriangleHelper::create_triangulateio_from_polyfiles(node_file_name,
@@ -98,6 +105,8 @@ namespace oomph
                                                         Triangulateio);
     //Record that the triangulateio object has been created      
     Triangulateio_exists=true;
+
+#endif
 
     // Build scaffold
     Tmp_mesh_pt= new 
@@ -121,6 +130,8 @@ namespace oomph
    }
   
   
+#ifdef OOMPH_HAS_TRIANGLE_LIB
+
   /// \short Constructor based on TriangulateIO object 
   TriangleMesh(TriangulateIO& triangulate_io,
                TimeStepper* time_stepper_pt=
@@ -161,97 +172,15 @@ namespace oomph
       this->setup_boundary_coordinates(b);
      }
    }
-  
-  /// \short Build mesh, based on TriangleMeshPolygon that specifies
+
+
+  /// \short Build mesh, based on a TriangleMeshClosedCurve that specifies
   /// the outer boundary of the domain and any number of internal
-  /// holes, specified by TriangleMeshHolePolygons. Also specify
-  /// target area for uniform element size.
-  TriangleMesh(TriangleMeshPolygon* &outer_boundary_pt,
-               Vector<TriangleMeshHolePolygon*> &inner_hole_pt,
-               const double &element_area,
-               TimeStepper* time_stepper_pt=
-               &Mesh::Default_TimeStepper,
-               std::set<unsigned> &fill_index
-               = Empty_fill_index,
-               const bool &use_attributes=false) 
-   {
-    //Find out how many boundaries there are before we get to the holes
-    unsigned boundary_index = outer_boundary_pt->nsegment();
-    
-    //So loop over the remaning boundaries
-    unsigned n_total_boundary = boundary_index;
-    
-    //Loop over the holes
-    unsigned n_hole = inner_hole_pt.size();
-    for(unsigned h=0;h<n_hole;++h)
-     {
-      //Add the number of boundaries to the total
-      //Each boundary is assumed to be a separate polyline
-      n_total_boundary += inner_hole_pt[h]->npolyline();
-     }
-
-    //Now resize the storage for the boundary geometric objects
-    this->Boundary_geom_object_pt.resize(n_total_boundary,0);
-    this->Boundary_coordinate_limits.resize(n_total_boundary);
-
-    //Loop over the holes again and store the associated geometric objects
-    //and coordinates
-    for(unsigned h=0;h<n_hole;h++)
-     {
-      //Can the Polygon be cast to a geometric object incarnation
-      GeomObject* bound_geom_obj_pt 
-       = dynamic_cast<GeomObject*>(inner_hole_pt[h]);
-      
-      //If cast successful set up the coordinates 
-      if(bound_geom_obj_pt!=0) 
-       {
-        unsigned n_poly = inner_hole_pt[h]->npolyline();
-        for(unsigned p=0;p<n_poly;p++)
-         {
-          //Read out the index of the boundary from the polyline
-          unsigned b_index = inner_hole_pt[h]->polyline_pt(p)->boundary_id();
-          //Set the geometric object
-          this->Boundary_geom_object_pt[b_index] = bound_geom_obj_pt;
-          //The coordinates along each polyline boundary are scaled to
-          //of unit length so the total coordinate limits are simply
-          //(p,p+1)
-          this->Boundary_coordinate_limits[b_index].resize(2);
-          this->Boundary_coordinate_limits[b_index][0] = p;
-          this->Boundary_coordinate_limits[b_index][1] = p + 1.0;
-         }
-       }
-     }
-
-
-    Vector<GeomObject*> hole_geom_object_pt;
-    Vector<Vector<double> > split_coord;
-
-    this->generic_constructor(outer_boundary_pt,
-                              inner_hole_pt,
-                              hole_geom_object_pt,
-                              split_coord,
-                              fill_index,
-                              element_area,
-                              time_stepper_pt,
-                              use_attributes);
-
-    // Setup boundary coordinates for boundaries
-    unsigned nb=nboundary();
-    for (unsigned b=0;b<nb;b++)
-     {
-      this->setup_boundary_coordinates(b);
-     }
-   }
-
-  /// \short Build mesh, based on a TriangleMeshPolygon that specifies
-  /// the outer boundary of the domain and any number of internal
-  /// holes, specified by geometric objects. Boundary numbers will
-  /// be assigned based on the split coordinates of the geometric objects.
-  /// The assumption is that the geometric objects are closed.
+  /// closed curves, specified by TriangleMeshInternalClosedCurves.
   /// Also specify target area for uniform element size.
-  TriangleMesh(TriangleMeshPolygon* &outer_boundary_pt,
-               Vector<GeomObject*> &hole_geom_object_pt,
-               Vector<Vector<double> > &split_coord,
+  TriangleMesh(TriangleMeshClosedCurve* &outer_boundary_pt,
+               Vector<TriangleMeshInternalClosedCurve*>& 
+               internal_closed_curve_pt,
                const double &element_area,
                TimeStepper* time_stepper_pt=
                &Mesh::Default_TimeStepper,
@@ -260,119 +189,401 @@ namespace oomph
                const bool &use_attributes=false) 
    {
     //Create the PolyLine representation of the boundary and
-    //then call an alternative constructor
-    
-    // Number of points defining hole (should be passed in)
-    unsigned ppoints = 8; 
+    //then call the generic constructor
 
-    //Set the id of the first hole boundary (the number of segments 
-    //in the boundary plus one)
-    unsigned hole_id = outer_boundary_pt->nsegment() + 1;
-    
-    //Find the number of holes
-    unsigned n_hole = hole_geom_object_pt.size();
-
-    Vector<double> x_centre(2);
-    Vector<double> y_centre(2);
-
-    x_centre[0] = 0.0; x_centre[1] = 0.5;
-    y_centre[0] = 0.0; y_centre[1] = 0.6;                     
-                        
-    // Define the vector of angle value to build the hole
+    // Intrinsic coordinate along GeomObjects
     Vector<double> zeta(1);
-    // Initialize the vector of coordinates
-    Vector<double> coord(2); 
-
-    //Storage for the triangle polygons that define the boundary
-    Vector<TriangleMeshHolePolygon*> inner_hole_pt(n_hole);
-
     
-    //Find out the total number of boundaries so far
-    unsigned n_total_boundary = hole_id - 1;
+    // Position vector to point on GeomObject
+    Vector<double> posn(2); 
+
+    // Initialise highest boundary id
+    unsigned max_boundary_id = 0;
+
+    // Storage for outer boundary in incarnation as polygon
+    TriangleMeshPolygon* outer_boundary_polygon_pt=0;
+
+    // What type of outer boundary is it? Try to cast
+    TriangleMeshCurvilinearClosedCurve* curvilinear_boundary_pt=
+     dynamic_cast<TriangleMeshCurvilinearClosedCurve*>(outer_boundary_pt);
     
-    //Loop over the number of holes
-    for(unsigned h=0;h<n_hole;++h)
+    TriangleMeshPolygon* polygon_pt=
+     dynamic_cast<TriangleMeshPolygon*>(outer_boundary_pt);
+    
+    // It's a curvilinear boundary
+    if (curvilinear_boundary_pt!=0)
      {
-      //How many segments are there
-      unsigned n_seg = split_coord.size();
-      //Add to the total number of boundaries
-      n_total_boundary += n_seg;
+      // How many separate boundaries do we have 
+      unsigned nb=curvilinear_boundary_pt->ncurvilinear_boundary();
 
-      // Each hole is bounded by  distinct boundaries, each
-      // represented by its own polyline
-      Vector<TriangleMeshPolyLine*> hole_segment_pt(n_seg);    
-      
-      //Loop over the segments
-      for(unsigned s=0;s<n_seg;s++)
+#ifdef PARANOID
+      if (nb<2)
        {
+        std::ostringstream error_message;
+        error_message 
+         << "TriangleMeshClosedCurve that defines outer boundary\n"
+         << "must be made up of at least two "
+         << "TriangleMeshCurvilinearClosedCurves\n"
+         << "to allow the automatic set up boundary coordinates.\n"
+         << "Yours only has " << nb << std::endl;
+        throw OomphLibError(error_message.str(),
+                            "TriangleMesh::TriangleMesh()",
+                            OOMPH_EXCEPTION_LOCATION);
+       }
+#endif
+
+      // Provide storage for accompanying polylines
+      Vector<TriangleMeshPolyLine*> boundary_polyline_pt(nb);    
+      
+      // Loop over boundaries that make up this boundary
+      for (unsigned b=0;b<nb;b++)
+       {
+        // Get pointer to curvilinear boundary that makes up this part
+        // of the boundary
+        TriangleMeshCurviLine* boundary_pt=
+         curvilinear_boundary_pt->curvilinear_boundary_pt(b);
+        
+        //How many segments do we want on this one?
+        unsigned n_seg = boundary_pt->nsegment();
+        
         // Vertex coordinates
-        Vector<Vector<double> > bound_hole(ppoints);
+        Vector<Vector<double> > bound(n_seg+1);
         
-        //Read the values of the coordinates, assuming equal
+        //Read the values of the limiting coordinates, assuming equal
         //spacing of the nodes
-        double zeta_initial = split_coord[s][0];
+        double zeta_initial = boundary_pt->zeta_start();
         double zeta_increment = 
-         (split_coord[s][1] - split_coord[s][0])/(double)(ppoints-1);
+         (boundary_pt->zeta_end()-boundary_pt->zeta_start())/(double(n_seg));
         
-        // Create points on boundary
-        for(unsigned ipoint=0; ipoint<ppoints;ipoint++)
+        //Loop over the n_seg+1 points bounding the segments
+        for(unsigned s=0;s<n_seg+1;s++)
          {
           // Resize the vector 
-          bound_hole[ipoint].resize(2);
+          bound[s].resize(2);
           
           // Get the coordinates
-          zeta[0]= zeta_initial + zeta_increment*double(ipoint);
+          zeta[0]= zeta_initial + zeta_increment*double(s);
           
-          hole_geom_object_pt[h]->position(zeta,coord);
-          bound_hole[ipoint][0]=coord[0];
-          bound_hole[ipoint][1]=coord[1];
+          boundary_pt->geom_object_pt()->position(zeta,posn);
+          bound[s][0]=posn[0];
+          bound[s][1]=posn[1];
          }
         
-        // Build the 1st hole polyline
-        hole_segment_pt[s] = 
-         new TriangleMeshPolyLine(bound_hole,hole_id);
+        // Boundary id
+        unsigned bnd_id=boundary_pt->boundary_id();
         
-        //Increment the boundary id
-        ++hole_id;
-       } //end of loop over segments
+        // Build associated polyline
+        boundary_polyline_pt[b] = new TriangleMeshPolyLine(bound,bnd_id);
+        
+        // Keep track...
+        if (bnd_id>max_boundary_id) max_boundary_id=bnd_id;
+        
+       } //end of loop over boundaries
       
-      // Inner hole center coordinates
-      Vector<double> hole_center(2);
-      hole_center[0]=x_centre[h];
-      hole_center[1]=y_centre[h];
-      
-      // Fill in the vector of holes. Specify data that define centre's
-      // displacement
-      inner_hole_pt[h] = new TriangleMeshHolePolygon(
-       hole_center,hole_segment_pt);
+      // Create polygonal bundary from all the polylines
+      outer_boundary_polygon_pt=new TriangleMeshPolygon(boundary_polyline_pt);
+     }
+    // It's a polygonal boundary
+    else if (polygon_pt!=0)
+     {
+      // We're already a polygon
+      outer_boundary_polygon_pt=polygon_pt;
+
+      //Max boundary ID in outer boundary 
+      max_boundary_id=polygon_pt->max_polygon_boundary_id();
+     }
+    // It's neither -- die on your arse
+    else
+     {
+      std::ostringstream error_message;
+      error_message 
+       << "TriangleMeshClosedCurve that defines outer boundary\n"
+       << "is neither a TriangleMeshCurvilinearClosedCurve\n"
+       << "nor a TriangleMeshPolygon. This doesn't make sense.\n";
+      throw OomphLibError(error_message.str(),
+                          "TriangleMesh::TriangleMesh()",
+                          OOMPH_EXCEPTION_LOCATION);
      }
     
-    //now resize the storage
-    this->Boundary_geom_object_pt.resize(n_total_boundary,0);
-    this->Boundary_coordinate_limits.resize(n_total_boundary);
-    
-    //Initialise the boudary counter
-    unsigned boundary_index = outer_boundary_pt->nsegment();
-    //Loop over the holes again and store the associated geometric objects
-    //and coordinates
+    // Now deal with the internal closed curves
 
-    for(unsigned h=0;h<n_hole;h++)
+    //Find the number of internal closed curves
+    unsigned n_internal_closed_curve = internal_closed_curve_pt.size();
+
+    //Storage for the triangle polygons that define the internal boundaries
+    Vector<TriangleMeshInternalPolygon*> 
+     internal_polygon_pt(n_internal_closed_curve);
+    
+    //Loop over the number of internal closed curves
+    for(unsigned h=0;h<n_internal_closed_curve;++h)
      {
-      unsigned n_seg = split_coord.size();
-      for(unsigned s=0;s<n_seg;s++)
+      // What type of internal closed curve is it? Try to cast
+      TriangleMeshInternalCurvilinearClosedCurve* curvilinear_hole_pt=
+       dynamic_cast<TriangleMeshInternalCurvilinearClosedCurve*>(
+        internal_closed_curve_pt[h]);
+
+      TriangleMeshInternalPolygon* polygon_hole_pt=
+       dynamic_cast<TriangleMeshInternalPolygon*>(internal_closed_curve_pt[h]);
+
+      // It's a curvilinear curve
+      if (curvilinear_hole_pt!=0)
        {
+        // How many separate boundaries do we have 
+        unsigned nb=curvilinear_hole_pt->ncurvilinear_boundary();
+
+#ifdef PARANOID 
+        if (nb<2)
+         {     
+          std::ostringstream error_message;
+          error_message 
+           << "TriangleMeshClosedCurve that defines internal closed curve\n"
+           << "must be made up of at least two "
+           << "TriangleMeshCurvilinearClosedCurves\n"
+           << "to allow the automatic set up boundary coordinates.\n"
+           << "The one defining your internal curve " << h << " only has " 
+           << nb << std::endl;
+          throw OomphLibError(error_message.str(),
+                              "TriangleMesh::TriangleMesh()",
+                              OOMPH_EXCEPTION_LOCATION);
+         }
+#endif
+
+        // Provide storage for accompanying polylines
+        Vector<TriangleMeshPolyLine*> hole_polyline_pt(nb);    
+        
+        // Loop over boundaries that make up this interal curve
+        for (unsigned b=0;b<nb;b++)
+         {
+          // Get pointer to curvilinear boundary that makes up this part
+          // of the closed curve
+          TriangleMeshCurviLine* boundary_pt=
+           curvilinear_hole_pt->curvilinear_boundary_pt(b);
+          
+          //How many segments do we want on this one?
+          unsigned n_seg = boundary_pt->nsegment();
+          
+          // Vertex coordinates
+          Vector<Vector<double> > bound_hole(n_seg+1);
+          
+          //Read the values of the limiting coordinates, assuming equal
+          //spacing of the nodes
+          double zeta_initial = boundary_pt->zeta_start();
+          double zeta_increment = 
+           (boundary_pt->zeta_end()-boundary_pt->zeta_start())/(double(n_seg));
+          
+          //Loop over the n_seg+1 points bounding the segments
+          for(unsigned s=0;s<n_seg+1;s++)
+           {
+            // Resize the vector 
+            bound_hole[s].resize(2);
+            
+            // Get the coordinates
+            zeta[0]= zeta_initial + zeta_increment*double(s);
+            
+            boundary_pt->geom_object_pt()->position(zeta,posn);
+            bound_hole[s][0]=posn[0];
+            bound_hole[s][1]=posn[1];
+           }
+          
+          // Boundary id
+          unsigned bnd_id=boundary_pt->boundary_id();
+          
+          // Build associated polyline
+          hole_polyline_pt[b] = 
+           new TriangleMeshPolyLine(bound_hole,bnd_id);
+
+          // Keep track...
+          if (bnd_id>max_boundary_id) max_boundary_id=bnd_id;
+          
+         } //end of loop over boundaries
+        
+        // Internal point coordinates by copy operation
+        Vector<double> internal_point(curvilinear_hole_pt->internal_point());
+
+        // Create polygonal hole from all the polylines
+        internal_polygon_pt[h] = new TriangleMeshInternalPolygon(
+         internal_point,hole_polyline_pt);
+       }
+      // It's polygon hole
+      else if (polygon_hole_pt!=0)
+       {
+        // Get the max. boundary ID
+        unsigned max_hole_boundary_id = 
+         polygon_hole_pt->max_polygon_boundary_id();
+        if (max_hole_boundary_id>max_boundary_id)
+         {
+          max_boundary_id=max_hole_boundary_id;
+         }
+        
+        // Set pointer to Polygon representation (it is one already!)
+        internal_polygon_pt[h]=polygon_hole_pt;
+       }
+      // Neither: Die on your arse!
+      else
+       {
+        std::ostringstream error_message;
+        error_message 
+         << "TriangleMeshClosedCurve that defines the " << h 
+         << "-th internal closed curve\n"
+         << "is neither a TriangleMeshInternalCurvilinearClosedCurve\n"
+         << "nor a TriangleMeshInternalPolygon. This doesn't make sense.\n";
+         throw OomphLibError(error_message.str(),
+                             "TriangleMesh::TriangleMesh()",
+                             OOMPH_EXCEPTION_LOCATION);
+       }
+     }
+
+    // Now resize the storage
+    this->Boundary_geom_object_pt.resize(max_boundary_id+1,0);
+    this->Boundary_coordinate_limits.resize(max_boundary_id+1);
+
+    // If it's a curvilinear boundary store the associated geometric objects
+    //and coordinates
+    if (curvilinear_boundary_pt!=0)
+     {
+      // How many separate boundaries do we have 
+      unsigned nb=curvilinear_boundary_pt->ncurvilinear_boundary();
+      
+#ifdef PARANOID
+      if (nb<2)
+       {
+        std::ostringstream error_message;
+        error_message 
+         << "TriangleMeshClosedCurve that defines outer boundary\n"
+         << "must be made up of at least two "
+         << "TriangleMeshCurvilinearClosedCurves\n"
+         << "to allow the automatic set up boundary coordinates.\n"
+         << "Yours only has " << nb << std::endl;
+        throw OomphLibError(error_message.str(),
+                            "TriangleMesh::TriangleMesh()",
+                            OOMPH_EXCEPTION_LOCATION);
+       }
+#endif
+
+      // Loop over boundaries that make up this boundary
+      for (unsigned b=0;b<nb;b++)
+       {
+        // Get pointer to curvilinear boundary that makes up this part
+        // of the boundary
+        TriangleMeshCurviLine* boundary_pt=
+         curvilinear_boundary_pt->curvilinear_boundary_pt(b);
+        
+        //Read the values of the limiting coordinates
+        Vector<double> zeta_bound(2);
+        zeta_bound[0] = boundary_pt->zeta_start();
+        zeta_bound[1] = boundary_pt->zeta_end(); 
+        
+        // Boundary id
+        unsigned bnd_id=boundary_pt->boundary_id();
+        
         //Set the boundary geometric object and limits
-        Boundary_geom_object_pt[boundary_index] = hole_geom_object_pt[h];
-        Boundary_coordinate_limits[boundary_index] = split_coord[s];
-        ++boundary_index;
+        Boundary_geom_object_pt[bnd_id] = boundary_pt->geom_object_pt();
+        Boundary_coordinate_limits[bnd_id] = zeta_bound;        
+       }
+     }
+
+    // Loop over the interla closed curves again and store the 
+    // associated geometric objects and coordinates
+    for(unsigned h=0;h<n_internal_closed_curve;h++)
+     {
+      // What type of internal curve is it? Try to cast
+      TriangleMeshInternalCurvilinearClosedCurve* curvilinear_hole_pt=
+       dynamic_cast<TriangleMeshInternalCurvilinearClosedCurve*>(
+        internal_closed_curve_pt[h]);
+
+      TriangleMeshInternalPolygon* polygon_hole_pt=
+       dynamic_cast<TriangleMeshInternalPolygon*>(internal_closed_curve_pt[h]);
+      
+      // It's a curvilinear closed curve
+      if (curvilinear_hole_pt!=0)
+       {
+        
+        // How many separate boundaries do we have 
+        unsigned nb=curvilinear_hole_pt->ncurvilinear_boundary();
+        
+#ifdef PARANOID
+        if (nb<2)
+         {
+          std::ostringstream error_message;
+          error_message 
+           << "TriangleMeshClosedCurve that defines outer boundary\n"
+           << "must be made up of at least two "
+           << "TriangleMeshCurvilinearClosedCurves\n"
+           << "to allow the automatic set up boundary coordinates.\n"
+           << "Yours only has " << nb << std::endl;
+          throw OomphLibError(error_message.str(),
+                              "TriangleMesh::TriangleMesh()",
+                              OOMPH_EXCEPTION_LOCATION);
+         }
+#endif
+
+        // Loop over boundaries that make up this internal closed curve
+        for (unsigned b=0;b<nb;b++)
+         {
+          // Get pointer to curvilinear boundary that makes up this part
+          // of the internal closed curve
+          TriangleMeshCurviLine* boundary_pt=
+           curvilinear_hole_pt->curvilinear_boundary_pt(b);
+          
+          //Read the values of the limiting coordinates
+          Vector<double> zeta_bound(2);
+          zeta_bound[0] = boundary_pt->zeta_start();
+          zeta_bound[1] = boundary_pt->zeta_end(); 
+          
+          // Boundary id
+          unsigned bnd_id=boundary_pt->boundary_id();
+          
+          //Set the boundary geometric object and limits
+          Boundary_geom_object_pt[bnd_id] = boundary_pt->geom_object_pt();
+          Boundary_coordinate_limits[bnd_id] = zeta_bound;
+         }
+       }
+      // It's polygon 
+      else if (polygon_hole_pt!=0)
+       {
+        //Can the Polygon be cast to a geometric object incarnation
+        GeomObject* bound_geom_obj_pt 
+         = dynamic_cast<GeomObject*>(polygon_hole_pt);
+        
+        //If cast successful set up the coordinates 
+        if(bound_geom_obj_pt!=0) 
+         {
+          unsigned n_poly = polygon_hole_pt->npolyline();
+          for(unsigned p=0;p<n_poly;p++)
+           {
+            //Read out the index of the boundary from the polyline
+            unsigned b_index = polygon_hole_pt->polyline_pt(p)->boundary_id();
+            
+            //Set the geometric object
+            this->Boundary_geom_object_pt[b_index] = bound_geom_obj_pt;
+            
+            //The coordinates along each polyline boundary are scaled to
+            //of unit length so the total coordinate limits are simply
+            //(p,p+1)
+            this->Boundary_coordinate_limits[b_index].resize(2);
+            this->Boundary_coordinate_limits[b_index][0] = p;
+            this->Boundary_coordinate_limits[b_index][1] = p + 1.0;
+           }
+         }
+       }
+      // Neither: Die on your arse!
+      else
+       {
+        std::ostringstream error_message;
+        error_message 
+         << "TriangleMeshClosedCurve that defines the " << h 
+         << "-th internal closed curve\n"
+         << "is neither a TriangleMeshInternalCurvilinearClosedCurve\n"
+         << "nor a TriangleMeshInternalPolygon. This doesn't make sense.\n";
+         throw OomphLibError(error_message.str(),
+                             "TriangleMesh::TriangleMesh()",
+                             OOMPH_EXCEPTION_LOCATION);
        }
      }
 
     //Call the method used in the alternative constructor
-    this->generic_constructor(outer_boundary_pt,
-                              inner_hole_pt,
-                              hole_geom_object_pt,
-                              split_coord,
+    this->generic_constructor(outer_boundary_polygon_pt,
+                              internal_polygon_pt,
                               fill_index,
                               element_area,
                               time_stepper_pt,
@@ -385,191 +596,20 @@ namespace oomph
       this->setup_boundary_coordinates(b);
      }
 
-   }
-  
-
-  /// \short Build mesh, based on GeometricObject that specifies
-  /// the outer boundary of the domain and any number of internal
-  /// holes, specified by TriangleMeshHolePolygons. Also specify
-  /// target area for uniform element size.
-  TriangleMesh(GeomObject* &outer_geom_object_pt,
-               Vector<Vector<double> > &outer_split_coord,
-               Vector<TriangleMeshHolePolygon*> &inner_hole_pt,
-               const double &element_area,
-               TimeStepper* time_stepper_pt=
-               &Mesh::Default_TimeStepper,
-               std::set<unsigned> &fill_index
-               = Empty_fill_index,
-               const bool &use_attributes=false) 
-   {
-    //Find the number of boundaries 
-    unsigned boundary_index = outer_split_coord.size();
-     
-    // Number of points defining hole (should be passed in)
-    unsigned ppoints = 21;//11; 
-
-    //Set the id of the first outer segment (1)
-    unsigned outer_id = 1;
-                        
-    // Define the vector of angle value to build the hole
-    Vector<double> zeta(1);
-    // Initialize the vector of coordinates
-    Vector<double> coord(2); 
-    
-    //How many segments are there
-    unsigned n_outer_seg = outer_split_coord.size();
-    
-    //Each segment is represented by a polyline
-    Vector<TriangleMeshPolyLine*> outer_boundary_segment_pt(n_outer_seg);    
-    
-    //Loop over the segments
-    for(unsigned s=0;s<n_outer_seg;s++)
-     {
-      // Vertex coordinates
-      Vector<Vector<double> > bound_outer(ppoints);
-      
-      //Read the values of the coordinates, assuming equal
-      //spacing of the nodes
-      double zeta_initial = outer_split_coord[s][0];
-      double zeta_increment = 
-       (outer_split_coord[s][1] - outer_split_coord[s][0])/(double)(ppoints-1);
-        
-      // Create points on boundary
-      for(unsigned ipoint=0; ipoint<ppoints;ipoint++)
-       {
-        // Resize the vector 
-        bound_outer[ipoint].resize(2);
-        
-        // Get the coordinates
-        zeta[0]= zeta_initial + zeta_increment*double(ipoint);
-        
-        outer_geom_object_pt->position(zeta,coord);
-        bound_outer[ipoint][0]=coord[0];
-        bound_outer[ipoint][1]=coord[1];
-       }
-        
-      // Build the outer boundary polyline
-      outer_boundary_segment_pt[s] = 
-       new TriangleMeshPolyLine(bound_outer,outer_id);
-      
-      //Increment the boundary id
-      ++outer_id;
-     } //end of loop over segments
-      
-
-    //Now make the polygon
-    TriangleMeshPolygon* outer_boundary_pt 
-     = new TriangleMeshPolygon(outer_boundary_segment_pt);
-
-    //So loop over the remaning boundaries
-    unsigned n_total_boundary = boundary_index;
-    
-    //Loop over the holes
-    unsigned n_hole = inner_hole_pt.size();
-    for(unsigned h=0;h<n_hole;++h)
-     {
-      //Add the number of boundaries to the total
-      //Each boundary is assumed to be a separate polyline
-      n_total_boundary += inner_hole_pt[h]->npolyline();
-     }
-
-    //Now resize the storage for the boundary geometric objects
-    this->Boundary_geom_object_pt.resize(n_total_boundary,0);
-    this->Boundary_coordinate_limits.resize(n_total_boundary);
-
-    //Set the boundary objects and limits for the outer boundary
-    for(unsigned s=0;s<n_outer_seg;s++)
-     {
-      this->Boundary_geom_object_pt[s] = outer_geom_object_pt;
-      this->Boundary_coordinate_limits[s] = outer_split_coord[s];
-     }
-
-
-    //Loop over the holes again and store the associated geometric objects
-    //and coordinates
-    for(unsigned h=0;h<n_hole;h++)
-     {
-      //Can the Polygon be cast to a geometric object incarnation
-      GeomObject* bound_geom_obj_pt 
-       = dynamic_cast<GeomObject*>(inner_hole_pt[h]);
-      
-      //If cast successful set up the coordinates 
-      if(bound_geom_obj_pt!=0) 
-       {
-        unsigned n_poly = inner_hole_pt[h]->npolyline();
-        for(unsigned p=0;p<n_poly;p++)
-         {
-          //Read out the index of the boundary from the polyline
-          unsigned b_index = inner_hole_pt[h]->polyline_pt(p)->boundary_id();
-          //Set the geometric object
-          this->Boundary_geom_object_pt[b_index] = bound_geom_obj_pt;
-          //The coordinates along each polyline boundary are scaled to
-          //of unit length so the total coordinate limits are simply
-          //(p,p+1)
-          this->Boundary_coordinate_limits[b_index].resize(2);
-          this->Boundary_coordinate_limits[b_index][0] = p;
-          this->Boundary_coordinate_limits[b_index][1] = p + 1.0;
-         }
-       }
-     }
-
-    Vector<GeomObject*> hole_geom_object_pt;
-    Vector<Vector<double> > split_coord;
-
-    this->generic_constructor(outer_boundary_pt,
-                              inner_hole_pt,
-                              hole_geom_object_pt,
-                              split_coord,
-                              fill_index,
-                              element_area,
-                              time_stepper_pt,
-                              use_attributes);
-
-    // Setup boundary coordinates for boundaries
-    unsigned nb=nboundary();
-    for (unsigned b=0;b<nb;b++)
-     {
-      this->setup_boundary_coordinates(b);
-     }
-
-
-    //Excatly map the outer boundary onto the geometric object
-    //This may be overwritten later in the driver
-    /*for(unsigned s=0;s<n_outer_seg;s++)
-     {
-      Vector<double> b_coord(1);
-      Vector<double> new_x(2);
-      const unsigned n_boundary_node = this->nboundary_node(s);
-      for(unsigned n=0;n<n_boundary_node;++n)
-       {
-        //Can do this from the standard boundary_node interfaces 
-        //because there is only one
-        //region that neighbours the outer boundary
-        Node* const nod_pt = this->boundary_node_pt(s,n);
-        nod_pt->get_coordinates_on_boundary(s,b_coord);
-        //Get the position according to the underlying geometric object
-        outer_geom_object_pt->position(b_coord,new_x);
-        for(unsigned i=0;i<2;i++)
-         {
-          nod_pt->x(i) = new_x[i];
-         }
-       }
-       }*/
+    // Snap it!
     this->snap_nodes_onto_geometric_objects();
    }
+  
 
-  
-  
-  /// Build mesh from poly file, with specified target
+
+  /// \short Build mesh from poly file, with specified target
   /// area for all elements.
   TriangleMesh(const std::string& poly_file_name,
                const double& element_area,
                TimeStepper* time_stepper_pt=
                &Mesh::Default_TimeStepper,
                const bool &use_attributes=false)
-   
    {  
-
     // Disclaimer
     std::string message=
      "This constructor hasn't been tested since last cleanup.\n";
@@ -621,6 +661,9 @@ namespace oomph
       this->setup_boundary_coordinates(b);
      }
    }
+
+#endif
+
   
   /// Broken copy constructor
   TriangleMesh(const TriangleMesh& dummy) 
@@ -637,10 +680,12 @@ namespace oomph
   /// Destructor 
   virtual ~TriangleMesh() 
    {     
+#ifdef OOMPH_HAS_TRIANGLE_LIB
     if (Triangulateio_exists) 
      {
       TriangleHelper::clear_triangulateio(Triangulateio);
      }
+#endif
    }
   
   /// \short Setup boundary coordinate on boundary b.
@@ -779,9 +824,11 @@ namespace oomph
      }
    }
   
+#ifdef OOMPH_HAS_TRIANGLE_LIB
+
   /// \short Update the TriangulateIO object to the current nodal position
   /// and the centre hole coordinates.
-  void update_triangulateio(Vector<Vector<double> >&hole_centre)
+  void update_triangulateio(Vector<Vector<double> >&internal_point)
   {
     // Move the hole center
     // Get number of holes
@@ -789,8 +836,8 @@ namespace oomph
    unsigned count_coord=0;
    for(unsigned ihole=0;ihole<nhole;ihole++)
     {
-     Triangulateio.holelist[count_coord]+=hole_centre[ihole][0];  
-     Triangulateio.holelist[count_coord+1]+=hole_centre[ihole][1]; 
+     Triangulateio.holelist[count_coord]+=internal_point[ihole][0];  
+     Triangulateio.holelist[count_coord+1]+=internal_point[ihole][1]; 
      
      // Increment counter
      count_coord+=2;
@@ -880,42 +927,19 @@ namespace oomph
     this->snap_nodes_onto_geometric_objects();
    }
 
-
-  /// \short Get a map containing Vectors of sub-boundary IDs. One
-  /// for each each Polyline boundary.
-  std::map<unsigned,Vector<unsigned> >& sub_boundary_id()
-   {
-    // Check if the  sub-boundary enumeration exists or not
-    if(Sub_boundary_id_exists)
-     {
-      return Sub_boundary_id;
-     }
-    else
-     // Shout!
-     {
-      std::ostringstream error_stream;
-      error_stream<<"Function sub_boundary_id()"
-                   <<"cannot be called if\n no sub_boundary_id vector"
-                  <<"has been built. Please call a different constructor.\n "
-                  <<std::endl;
-       throw OomphLibError(error_stream.str(),
-                           "TriangleMesh<ELEMENT>::"
-                           "sub_boundary_id()",
-                           OOMPH_EXCEPTION_LOCATION); 
-      }
-   }
-  
-  
-  /// Boolean defining if sub-boundary enumeration has been built or not
-  bool sub_boundary_id_exists(){return Sub_boundary_id_exists;}
-  
   /// Boolean defining if Triangulateio object has been built or not
   bool triangulateio_exists(){return Triangulateio_exists;}
-  
+
+#endif
+
+
   /// \short Return the vector that contains the oomph-lib node number
   /// for all vertex nodes in the TriangulateIO representation of the mesh
   Vector<unsigned> oomph_vertex_nodes_id(){return Oomph_vertex_nodes_id;}
-    
+   
+  /// \short Snap the boundary nodes onto any curvilinear boundaries
+  /// defined by geometric objects
+  void snap_nodes_onto_geometric_objects();    
   
     protected:
 
@@ -926,11 +950,14 @@ namespace oomph
   /// Build mesh from scaffold
   void build_from_scaffold(TimeStepper* time_stepper_pt,
                            const bool &use_attributes);
+
+#ifdef OOMPH_HAS_TRIANGLE_LIB  
   
   /// \short Build TriangulateIO object from TriangleMeshPolyLine and 
-  /// TriangleMeshHolePolyLine
+  /// TriangleMeshInternalClosedCurvePolyLine
   void build_triangulateio(TriangleMeshPolygon* &outer_boundary_pt,
-                           Vector<TriangleMeshHolePolygon*> &inner_hole,
+                           Vector<TriangleMeshInternalPolygon*>&
+                           internal_closed_curve_pt,
                            std::set<unsigned> &fill_index,
                            TriangulateIO& triangulate_io);
   
@@ -940,21 +967,11 @@ namespace oomph
                            TriangulateIO& triangulate_io);
 
 
-   
-  /// \short Snap the boundary nodes onto any curvilinear boundaries
-  /// defined by geometric objects
-  void snap_nodes_onto_geometric_objects();
-
-
   /// \short A general-purpose construction function that builds the
   /// mesh once the different specific constructors have assembled the
-  /// appropriate information: in the case of curvilinear boundaries, the 
-  /// PSLG must be generated; in the case of a PSLG input, the boundary
-  /// geometric objects must be generated.
+  /// appropriate information.
   void generic_constructor(TriangleMeshPolygon* &outer_boundary_pt,
-                           Vector<TriangleMeshHolePolygon*> &inner_hole_pt,
-                           Vector<GeomObject*> &hole_geom_object_pt,
-                           Vector<Vector<double> > &split_coord,
+                           Vector<TriangleMeshInternalPolygon*> &internal_polygon_pt,
                            std::set<unsigned> &fill_index,
                            const double &element_area,
                            TimeStepper* time_stepper_pt,
@@ -969,8 +986,8 @@ namespace oomph
     // Store outer polygon
     Outer_boundary_pt=outer_boundary_pt;
     
-    // Store inner holes by copy constructor
-    Inner_hole_pt=inner_hole_pt;
+    // Store internal polygons by copy constructor
+    Internal_polygon_pt=internal_polygon_pt;
     
     // Store the fill index
     Fill_index = fill_index;
@@ -981,16 +998,12 @@ namespace oomph
     // Initialize TriangulateIO structure
     TriangleHelper::initialise_triangulateio(triangulate_io);
     
-    // Convert TriangleMeshPolyLine and TriangleMeshHolePolyLine
+    // Convert TriangleMeshPolyLine and TriangleMeshInternalClosedCurvePolyLine
     // to a triangulateio object
     build_triangulateio(outer_boundary_pt,
-                        inner_hole_pt,
+                        internal_polygon_pt,
                         fill_index,
                         triangulate_io);
-
-    // Sub_boundary_id vector is generated using this constructor only
-    // set the boolean to true
-    Sub_boundary_id_exists=true;
     
     // Initialize TriangulateIO structure
     TriangleHelper::initialise_triangulateio(Triangulateio);
@@ -1039,14 +1052,9 @@ namespace oomph
  
   /// Boolean defining if Triangulateio object has been built or not
   bool Triangulateio_exists;
-  
-  /// Boolean defining if sub-boundary lookup scheme has been built or not
-  bool Sub_boundary_id_exists;
-  
-  /// \short Map of Vectors containing the sub-boundary IDs associated
-  /// with each Polyline
-  std::map<unsigned,Vector<unsigned> > Sub_boundary_id;
-  
+
+#endif
+    
   /// Temporary scaffold mesh
   TriangleScaffoldMesh* Tmp_mesh_pt;
     
@@ -1063,8 +1071,8 @@ namespace oomph
   /// Polygon that defines outer boundaries
   TriangleMeshPolygon* Outer_boundary_pt;
   
-  /// Vector to polygons that define inner holes
-  Vector<TriangleMeshHolePolygon*> Inner_hole_pt;
+  /// Vector to polygons that define internal polygons
+  Vector<TriangleMeshInternalPolygon*> Internal_polygon_pt;
   
   /// Storage for the geometric objects associated with any boundaries
   Vector<GeomObject*> Boundary_geom_object_pt;
@@ -1098,6 +1106,7 @@ namespace oomph
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
+#ifdef OOMPH_HAS_TRIANGLE_LIB  
  
 //=========================================================================
 // Unstructured refineable Triangle Mesh 
@@ -1108,81 +1117,28 @@ template<class ELEMENT>
   {
    
     public:
-   
-   
-   /// \short Build mesh, based on TriangleMeshPolygon that specifies
-   /// the outer boundary of the domain and any number of internal
-   /// holes, specified by TriangleMeshHolePolygons. Specify
-   /// target area for uniform element size.
-    RefineableTriangleMesh(TriangleMeshPolygon* &outer_boundary_polyline_pt,
-                           Vector<TriangleMeshHolePolygon*> &inner_hole_pt,
-                           const double& element_area,
-                           TimeStepper* time_stepper_pt=
-                           &Mesh::Default_TimeStepper,
-                           std::set<unsigned> &fill_index
-                           = TriangleMesh<ELEMENT>::Empty_fill_index,
-                           const bool &use_attributes=false):
-   TriangleMesh<ELEMENT>(outer_boundary_polyline_pt, 
-                         inner_hole_pt, 
-                         element_area,
-                         time_stepper_pt,
-                         fill_index,
-                         use_attributes)
-    {
-     // Initialise the data associated with adaptation
-     initialise();
-    }
-   
-    /// \short Build mesh, based on TriangleMeshPolygon that specifies
+
+    /// \short Build mesh, based on closed curve that specifies
     /// the outer boundary of the domain and any number of internal
-    /// holes, specified by TriangleMeshHolePolygons. Specify
+    /// closed curves, specified by TriangleMeshInternalClosedCurves. Specify
     /// target area for uniform element size.
-    RefineableTriangleMesh(TriangleMeshPolygon* &outer_boundary_polyline_pt,
-                           Vector<GeomObject*> &hole_geom_object_pt,
-                           Vector<Vector<double> > &split_coord,
-                           const double& element_area,
-                           TimeStepper* time_stepper_pt=
-                           &Mesh::Default_TimeStepper,
-                           std::set<unsigned> &fill_index
-                           = TriangleMesh<ELEMENT>::Empty_fill_index,
-                           const bool &use_attributes=false):
-     TriangleMesh<ELEMENT>(outer_boundary_polyline_pt, 
-                           hole_geom_object_pt,
-                           split_coord,
+    RefineableTriangleMesh(
+     TriangleMeshClosedCurve* &outer_boundary_pt,
+     Vector<TriangleMeshInternalClosedCurve*>& internal_closed_curve_pt,
+     const double &element_area,
+     TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper,
+     std::set<unsigned> &fill_index=TriangleMesh<ELEMENT>::Empty_fill_index,
+     const bool &use_attributes=false) :
+     TriangleMesh<ELEMENT>(outer_boundary_pt,
+                           internal_closed_curve_pt,
                            element_area,
                            time_stepper_pt,
                            fill_index,
                            use_attributes)
      {
       // Initialise the data associated with adaptation
-      initialise();
+      initialise_adaptation_data();
      }
-
-    /// \short Build mesh, based on geometric object that specifies
-    /// the outer boundary of the domain and any number of internal
-    /// holes, specified by TriangleMeshHolePolygons. Specify
-    /// target area for uniform element size.
-    RefineableTriangleMesh(GeomObject* &outer_geom_object_pt,
-                          Vector<Vector<double> > &outer_split_coord,
-                          Vector<TriangleMeshHolePolygon*> &inner_hole_pt,
-                          const double &element_area,
-                          TimeStepper* time_stepper_pt=
-                          &Mesh::Default_TimeStepper,
-                          std::set<unsigned> &fill_index
-                          = TriangleMesh<ELEMENT>::Empty_fill_index,
-                           const bool &use_attributes=false) :
-     TriangleMesh<ELEMENT>(outer_geom_object_pt,
-                           outer_split_coord,
-                           inner_hole_pt,
-                           element_area,
-                           time_stepper_pt,
-                           fill_index,
-                           use_attributes)
-     {
-      // Initialise the data associated with adaptation
-      initialise();
-     }
-
 
    /// \short Build mesh from specified triangulation and
    /// associated target areas for elements in it
@@ -1193,7 +1149,7 @@ template<class ELEMENT>
                           const bool &use_attributes=false)  
     {
      // Initialise the data associated with adaptation
-     initialise();
+     initialise_adaptation_data();
      
      // Store Timestepper used to build elements
      this->Time_stepper_pt=time_stepper_pt;
@@ -1312,9 +1268,10 @@ template<class ELEMENT>
    /// polygon.
    void update_polygon_using_face_mesh(TriangleMeshPolygon* polygon_pt);
    
-   /// \short Generate a new PSLG representation of the inner hole boundaries
+   /// \short Generate a new PSLG representation of the inner hole
+   /// boundaries
    virtual void surface_remesh_for_inner_hole_boundaries(
-    Vector<Vector<double> > &hole_centre_coord);
+    Vector<Vector<double> > &internal_point_coord);
    
    
    /// \short Generate a new PSLG representation of the outer boundary
@@ -1327,7 +1284,7 @@ template<class ELEMENT>
 
    
    /// Helper function to initialise data associated with adaptation
-   void initialise()
+   void initialise_adaptation_data()
    {
     // Set max and min targets for adaptation
     this->Max_element_size=1.0;
@@ -1447,238 +1404,121 @@ template<class ELEMENT>
    
   }; 
 
+#endif
+
+
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
 
 
+#ifdef OOMPH_HAS_TRIANGLE_LIB  
 
 //=========================================================================
 // Unstructured Triangle Mesh upgraded to solid mesh
 //=========================================================================
  template<class ELEMENT>
   class SolidTriangleMesh : public virtual TriangleMesh<ELEMENT>,
-  public virtual SolidMesh 
+  public virtual SolidMesh
   {
    
     public:
-
-
-   /// \short Build mesh, based on TriangleMeshPolygon that specifies
-   /// the outer boundary of the domain and any number of internal
-   /// holes, specified by TriangleMeshHolePolygons. Specify
-   /// target area for uniform element size.
-    SolidTriangleMesh(TriangleMeshPolygon* &outer_boundary_polyline_pt,
-                      Vector<TriangleMeshHolePolygon*> &inner_hole_pt,
-                      const double& element_area,
-                      TimeStepper* time_stepper_pt=
-                      &Mesh::Default_TimeStepper,
-                      std::set<unsigned> &fill_index
-                      = TriangleMesh<ELEMENT>::Empty_fill_index,
-                      const bool &use_attributes=false):
-   TriangleMesh<ELEMENT>(outer_boundary_polyline_pt, 
-                         inner_hole_pt, 
-                         element_area,
-                         time_stepper_pt,
-                         fill_index,
-                         use_attributes)
+   
+  /// \short Build mesh, based on closed curve that specifies
+  /// the outer boundary of the domain and any number of internal
+  /// clsed curves. Specify target area for uniform element size.
+   SolidTriangleMesh(
+    TriangleMeshClosedCurve* &outer_boundary_pt,
+    Vector<TriangleMeshInternalClosedCurve*>& internal_closed_curve_pt,
+    const double &element_area,
+    TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper,
+    std::set<unsigned> &fill_index=TriangleMesh<ELEMENT>::Empty_fill_index,
+    const bool &use_attributes=false) :
+    TriangleMesh<ELEMENT>(outer_boundary_pt,
+                          internal_closed_curve_pt,
+                          element_area,
+                          time_stepper_pt,
+                          fill_index,
+                          use_attributes)
     {
      //Assign the Lagrangian coordinates
      set_lagrangian_nodal_coordinates();
     }
-   
-   /// \short Build mesh, based on TriangleMeshPolygon that specifies
-   /// the outer boundary of the domain and any number of internal
-   /// holes, specified by TriangleMeshHolePolygons. Specify
-   /// target area for uniform element size.
-    SolidTriangleMesh(TriangleMeshPolygon* &outer_boundary_polyline_pt,
-                      Vector<GeomObject*> &hole_geom_object_pt,
-                      Vector<Vector<double> > &split_coord,
-                      const double& element_area,
-                      TimeStepper* time_stepper_pt=
-                      &Mesh::Default_TimeStepper,
-                      std::set<unsigned> &fill_index
-                      = TriangleMesh<ELEMENT>::Empty_fill_index,
-                      const bool &use_attributes=false):
-     TriangleMesh<ELEMENT>(outer_boundary_polyline_pt, 
-                           hole_geom_object_pt,
-                           split_coord,
-                           element_area,
-                           time_stepper_pt,
-                           fill_index,
-                           use_attributes)
-     {
-      //Assign the Lagrangian coordinates
-      set_lagrangian_nodal_coordinates();
-     }
     
-    /// \short Build mesh, based on geometrric object that specifies
-    /// the outer boundary of the domain and any number of internal
-    /// holes, specified by TriangleMeshHolePolygons. Specify
-    /// target area for uniform element size.
-    SolidTriangleMesh(GeomObject* &outer_geom_object_pt,
-                      Vector<Vector<double> > &outer_split_coord,
-                      Vector<TriangleMeshHolePolygon*> &inner_hole_pt,
-                      const double &element_area,
-                      TimeStepper* time_stepper_pt=
-                      &Mesh::Default_TimeStepper,
-                      std::set<unsigned> &fill_index
-                      = TriangleMesh<ELEMENT>::Empty_fill_index,
-                      const bool &use_attributes=false) :
-     TriangleMesh<ELEMENT>(outer_geom_object_pt,
-                           outer_split_coord,
-                           inner_hole_pt,
-                           element_area,
-                           time_stepper_pt,
-                           fill_index,
-                           use_attributes)
-     {
-      //Assign the Lagrangian coordinates
-      set_lagrangian_nodal_coordinates();
-     }
-
-
-
+    
   };
 
+#endif
 
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
+#ifdef OOMPH_HAS_TRIANGLE_LIB  
 
 //=========================================================================
 // Unstructured refineable Triangle Mesh upgraded to solid mesh
 //=========================================================================
  template<class ELEMENT>
   class RefineableSolidTriangleMesh : 
- public virtual RefineableTriangleMesh<ELEMENT>,
-  public virtual SolidMesh
-  {
-   
-    public:
-   
-    /// \short Build mesh, based on TriangleMeshPolygon that specifies
-    /// the outer boundary of the domain and any number of internal
-    /// holes, specified by TriangleMeshHolePolygons. Specify
-    /// target area for uniform element size.
-   RefineableSolidTriangleMesh(TriangleMeshPolygon*&
-                               outer_boundary_polyline_pt,
-                               Vector<TriangleMeshHolePolygon*> &inner_hole_pt,
-                               const double& element_area,
-                               TimeStepper* time_stepper_pt=
-                               &Mesh::Default_TimeStepper,
-                               std::set<unsigned> &fill_index
-                               = TriangleMesh<ELEMENT>::Empty_fill_index,
-                               const bool &use_attributes=false):
-    TriangleMesh<ELEMENT>(outer_boundary_polyline_pt, 
-                          inner_hole_pt, 
-                          element_area,
-                          time_stepper_pt,
-                          fill_index,
-                          use_attributes),
-    RefineableTriangleMesh<ELEMENT>(outer_boundary_polyline_pt, 
-                                    inner_hole_pt, 
-                                    element_area,
-                                    time_stepper_pt,
-                                    fill_index,
-                                    use_attributes)
-     {
-      //Assign the Lagrangian coordinates
-      set_lagrangian_nodal_coordinates();
-     }
-   
-   
-   
-   /// \short Build mesh, based on TriangleMeshPolygon that specifies
-   /// the outer boundary of the domain and any number of internal
-   /// holes, specified by TriangleMeshHolePolygons. Specify
-   /// target area for uniform element size.
-   RefineableSolidTriangleMesh(TriangleMeshPolygon*&
-                               outer_boundary_polyline_pt,
-                               Vector<GeomObject*> &hole_geom_object_pt,
-                               Vector<Vector<double> > &split_coord,
-                               const double& element_area,
-                               TimeStepper* time_stepper_pt=
-                                 &Mesh::Default_TimeStepper,
-                               std::set<unsigned> &fill_index
-                               = TriangleMesh<ELEMENT>::Empty_fill_index,
-                               const bool &use_attributes=false):
-    TriangleMesh<ELEMENT>(outer_boundary_polyline_pt, 
-                          hole_geom_object_pt,
-                          split_coord,
-                          element_area,
-                          time_stepper_pt,
-                          fill_index,
-                          use_attributes),
-    RefineableTriangleMesh<ELEMENT>(outer_boundary_polyline_pt, 
-                                    hole_geom_object_pt,
-                                    split_coord,
-                                    element_area,
-                                    time_stepper_pt,
-                                    fill_index,
-                                    use_attributes)
-    {
-     //Assign the Lagrangian coordinates
-     set_lagrangian_nodal_coordinates();
-    }
-
-
-    /// \short Build mesh, based on geometric object that specifies
-    /// the outer boundary of the domain and any number of internal
-    /// holes, specified by TriangleMeshHolePolygons. Specify
-    /// target area for uniform element size.
-   RefineableSolidTriangleMesh(GeomObject* &outer_geom_object_pt,
-                               Vector<Vector<double> > &outer_split_coord,
-                               Vector<TriangleMeshHolePolygon*> &inner_hole_pt,
-                               const double &element_area,
-                               TimeStepper* time_stepper_pt=
-                               &Mesh::Default_TimeStepper,
-                               std::set<unsigned> &fill_index
-                               = TriangleMesh<ELEMENT>::Empty_fill_index,
-                               const bool &use_attributes=false) :
-    TriangleMesh<ELEMENT>(outer_geom_object_pt,
-                          outer_split_coord,
-                          inner_hole_pt,
-                          element_area,
-                          time_stepper_pt,
-                          fill_index,
-                          use_attributes),
-    RefineableTriangleMesh<ELEMENT>(outer_geom_object_pt,
-                                    outer_split_coord,
-                                    inner_hole_pt,
-                                    element_area,
-                                    time_stepper_pt,
-                                    fill_index,
-                                    use_attributes)
-    {
-     //Assign the Lagrangian coordinates
-     set_lagrangian_nodal_coordinates();
-    }
-
-   
-   /// \short Build mesh from specified triangulation and
-   /// associated target areas for elements in it.
-    RefineableSolidTriangleMesh(const Vector<double> &target_area,
-                                TriangulateIO& triangulate_io,
-                                TimeStepper* time_stepper_pt=
-                                &Mesh::Default_TimeStepper,
-                                const bool &use_attributes=false)  :
-   RefineableTriangleMesh<ELEMENT>(target_area,
-                                   triangulate_io,
+public virtual RefineableTriangleMesh<ELEMENT>,
+ public virtual SolidMesh
+ {
+  
+   public:
+  
+  /// \short Build mesh, based on closed curve that specifies
+  /// the outer boundary of the domain and any number of internal
+  /// closed curves. Specify target area for uniform element size.
+  RefineableSolidTriangleMesh(
+   TriangleMeshClosedCurve* &outer_boundary_pt,
+   Vector<TriangleMeshInternalClosedCurve*>& internal_closed_curve_pt,
+   const double &element_area,
+   TimeStepper* time_stepper_pt=&Mesh::Default_TimeStepper,
+   std::set<unsigned> &fill_index=TriangleMesh<ELEMENT>::Empty_fill_index,
+   const bool &use_attributes=false) :
+   TriangleMesh<ELEMENT>(outer_boundary_pt,
+                         internal_closed_curve_pt,
+                         element_area,
+                         time_stepper_pt,
+                         fill_index,
+                         use_attributes),
+   RefineableTriangleMesh<ELEMENT>(outer_boundary_pt,
+                                   internal_closed_curve_pt,
+                                   element_area,
                                    time_stepper_pt,
+                                   fill_index,
                                    use_attributes)
     {
      //Assign the Lagrangian coordinates
      set_lagrangian_nodal_coordinates();
     }
    
-   /// Empty Destructor
-   virtual ~RefineableSolidTriangleMesh() {}
    
-  };
- 
- 
+   
+   /// \short Build mesh from specified triangulation and
+   /// associated target areas for elements in it.
+   RefineableSolidTriangleMesh(const Vector<double> &target_area,
+                               TriangulateIO& triangulate_io,
+                               TimeStepper* time_stepper_pt=
+                               &Mesh::Default_TimeStepper,
+                               const bool &use_attributes=false)  :
+    RefineableTriangleMesh<ELEMENT>(target_area,
+                                    triangulate_io,
+                                    time_stepper_pt,
+                                    use_attributes)
+    {
+     //Assign the Lagrangian coordinates
+     set_lagrangian_nodal_coordinates();
+    }
+    
+    /// Empty Destructor
+    virtual ~RefineableSolidTriangleMesh() {}
+    
+ };
+
+#endif
+
 }
 
 #endif

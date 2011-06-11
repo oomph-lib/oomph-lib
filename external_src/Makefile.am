@@ -1,5 +1,16 @@
 # Subdirectories get built into individual libraries
-SUBDIRS = oomph_hsl oomph_crbond_bessel oomph_arpack oomph_triangle
+SUBDIRS = oomph_hsl oomph_crbond_bessel oomph_arpack
+
+
+
+
+
+# Suppress triangle?
+if SUPPRESS_TRIANGLE_LIB
+else
+  SUBDIRS += oomph_triangle
+endif
+
 
 
 # Check if metis is already available

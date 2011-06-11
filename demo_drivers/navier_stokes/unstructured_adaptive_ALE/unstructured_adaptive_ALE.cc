@@ -388,8 +388,8 @@ namespace oomph
 /// Unstructured Navier-Stokes ALE Problem
 //====================================================================
 template<class ELEMENT>
-class UnstructuredFluidProblem :
- public virtual ProjectionProblem<ELEMENT>
+class UnstructuredFluidProblem : public Problem
+// public virtual ProjectionProblem<ELEMENT>
 
 {
 
@@ -671,8 +671,8 @@ public:
  /// Sanity check: Doc boundary coordinates from mesh and GeomObject
  void doc_boundary_coordinates();
  
- /// Get the TriangleMeshHolePolygon objects
- Vector<TriangleMeshHolePolygon*>& inner_hole_pt()
+ /// Get the TriangleMeshInternalPolygon objects
+ Vector<TriangleMeshInternalPolygon*>& inner_hole_pt()
   {return Inner_hole_pt;}
  
 private:
@@ -708,7 +708,7 @@ private:
  RefineableSolidTriangleMesh<ELEMENT>* Fluid_mesh_pt;
  
  /// Vector storing pointer to the hole polygon
- Vector<TriangleMeshHolePolygon*> Inner_hole_pt;
+ Vector<TriangleMeshInternalPolygon*> Inner_hole_pt;
 
  /// Triangle mesh polygon for outer boundary 
  TriangleMeshPolygon* Outer_boundary_polyline_pt; 
@@ -719,7 +719,7 @@ private:
 
 //==start_constructor=====================================================
 /// Constructor: build the first mesh with TriangleMeshPolygon and
-///              TriangleMeshHolePolygon object
+///              TriangleMeshInternalPolygon object
 //========================================================================
 template<class ELEMENT>
 UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
@@ -759,7 +759,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  bound_seg[1][1]=1.0;
  
  // Specify 1st boundary id
- unsigned bound_id = 1;
+ unsigned bound_id = 0;
 
  // Build the 1st boundary segment
  boundary_segment_pt[0] = new TriangleMeshPolyLine(bound_seg,bound_id);
@@ -771,7 +771,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  bound_seg[1][1]=1.0;
 
  // Specify 2nd boundary id
- bound_id = 2;
+ bound_id = 1;
 
  // Build the 2nd boundary segment
  boundary_segment_pt[1] = new TriangleMeshPolyLine(bound_seg,bound_id);
@@ -783,7 +783,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  bound_seg[1][1]=0.0;
 
  // Specify 3rd boundary id
- bound_id = 3;
+ bound_id = 2;
 
  // Build the 3rd boundary segment
  boundary_segment_pt[2] = new TriangleMeshPolyLine(bound_seg,bound_id);
@@ -795,7 +795,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  bound_seg[1][1]=0.0;
 
  // Specify 4th boundary id
- bound_id = 4;
+ bound_id = 3;
 
  // Build the 4th boundary segment
  boundary_segment_pt[3] = new TriangleMeshPolyLine(bound_seg,bound_id);
@@ -873,7 +873,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  hole_center[1]=y_center;
  
  // Specify the hole boundary id
- unsigned hole_id = 5;
+ unsigned hole_id = 4;
 
  // Build the 1st hole polyline
  hole_segment_pt[0] = new TriangleMeshPolyLine(bound_hole,hole_id);
@@ -892,7 +892,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
   }
 
  // Specify the hole boundary id
- hole_id=6;
+ hole_id=5;
 
  // Build the 2nd hole polyline
  hole_segment_pt[1] = new TriangleMeshPolyLine(bound_hole,hole_id);
@@ -900,7 +900,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  
  // Fill in the vector of holes. Specify data that define centre's
  // displacement
- Inner_hole_pt[0] = new RigidBodyTriangleMeshHolePolygon(
+ Inner_hole_pt[0] = new RigidBodyTriangleMeshInternalPolygon(
   hole_center,hole_segment_pt,this->time_stepper_pt(),
   Problem_Parameter::Centre_displacement_data_pt[0]);
  
@@ -931,7 +931,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
   }
  
  // Specify the hole boundary id
- hole_id=7;
+ hole_id=6;
  
  // Build the 1st hole polyline
  hole_segment_pt[0] = new TriangleMeshPolyLine(bound_hole,hole_id);
@@ -957,14 +957,14 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  delete egg_hole_pt;
 
  // Specify the hole boundary id
- hole_id=8;
+ hole_id=7;
 
  // Build the 2nd hole polyline
  hole_segment_pt[1] = new TriangleMeshPolyLine(bound_hole,hole_id);
  
  // Fill in the second hole. Specify data that define centre's
  // displacement
- Inner_hole_pt[1] = new RigidBodyTriangleMeshHolePolygon(
+ Inner_hole_pt[1] = new RigidBodyTriangleMeshInternalPolygon(
   hole_center,hole_segment_pt,this->time_stepper_pt(),
   Problem_Parameter::Centre_displacement_data_pt[1]);
  
@@ -973,9 +973,19 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  // polygons just created
  //----------------------
  double uniform_element_area=0.2;
+
+ TriangleMeshClosedCurve* closed_curve_pt=Outer_boundary_polyline_pt;
+ unsigned nh=Inner_hole_pt.size();
+ Vector<TriangleMeshInternalClosedCurve*> hole_pt(nh);
+ for (unsigned i=0;i<nh;i++)
+  {
+   hole_pt[i]=Inner_hole_pt[i];
+  }
+ 
+
  Fluid_mesh_pt = 
-  new RefineableSolidTriangleMesh<ELEMENT>(Outer_boundary_polyline_pt, 
-                                           Inner_hole_pt,
+  new RefineableSolidTriangleMesh<ELEMENT>(closed_curve_pt,
+                                           hole_pt,
                                            uniform_element_area,
                                            this->time_stepper_pt());
  
@@ -1247,6 +1257,16 @@ void UnstructuredFluidProblem<ELEMENT>::doc_solution(
 
  oomph_info << "Docing step: " << Problem_Parameter::Doc_info.number()
             << std::endl;
+
+
+ oomph_info 
+  << "Docing step: " << Problem_Parameter::Doc_info.number() 
+  << "\n cenrelinedispl = "
+  <<Problem_Parameter::Centre_displacement_data_pt[0]->value(0)<< "\n"
+  << "centre of mass: " << dynamic_cast<RigidBodyTriangleMeshInternalPolygon*>(
+   Inner_hole_pt[0])->initial_centre_of_mass(0) 
+  << std::endl;
+
 
  ofstream some_file;
  char filename[100];

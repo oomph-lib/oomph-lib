@@ -180,8 +180,8 @@ namespace Multi_domain_functions
   double Z_max=-1.0;
 
   /// \short Percentage offset to add to each extreme of the bin structure.
-  /// Default value of 0.05.
-  double Percentage_offset=0.05;
+  /// Default value of 5 (note that this is in percent!)
+  double Percentage_offset=5.0;
 
 
   // Other parameters

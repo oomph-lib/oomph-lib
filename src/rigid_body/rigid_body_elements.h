@@ -641,12 +641,12 @@ namespace oomph
 /// If added to a mesh in the Problem (in its incarnation as a 
 /// GeneralisedElement) the displacement/rotation of the polygon
 /// is computed in response to (i) user-specifiable applied forces
-/// and a torque and (ii) the net drag (and assocated torque) from
+/// and a torque and (ii) the net drag (and associated torque) from
 /// a mesh of elements that can exert a drag onto the polygon (typically
 /// Navier-Stokes FaceElements that apply a viscous drag to an 
 /// immersed body, represented by the polygon.)
 //=====================================================================
-class RigidBodyTriangleMeshHolePolygon : public TriangleMeshHolePolygon, 
+class RigidBodyTriangleMeshInternalPolygon : public TriangleMeshInternalPolygon, 
  public RigidBodyElement
 {
  
@@ -661,14 +661,14 @@ public:
  /// is a pointer to a Data object whose three values represent 
  /// the two displacements of and the rotation angle about the polygon's 
  /// centre of mass.
- RigidBodyTriangleMeshHolePolygon(const Vector<double>& hole_center,
+ RigidBodyTriangleMeshInternalPolygon(const Vector<double>& hole_center,
                                   const Vector<TriangleMeshPolyLine*>& 
                                   boundary_polyline_pt,
                                   TimeStepper* const &time_stepper_pt,
                                   Data* const &centre_displacement_data_pt=0);
  
  /// \short Empty Destuctor
- ~RigidBodyTriangleMeshHolePolygon() 
+ ~RigidBodyTriangleMeshInternalPolygon() 
   {
 
   }
@@ -724,7 +724,7 @@ private:
        "greater than maximum " << zeta_max << "\n";
       throw 
        OomphLibError(error_message.str(),
-                     "TriangleMeshHolePolygon::position()",
+                     "TriangleMeshInternalPolygon::position()",
                      OOMPH_EXCEPTION_LOCATION);
      }
 
@@ -757,7 +757,7 @@ private:
       
 
       throw OomphLibError(error_message.str(),
-                          "TriangleMeshHolePolygon::position()",
+                          "TriangleMeshInternalPolygon::position()",
                           OOMPH_EXCEPTION_LOCATION);
      }
 

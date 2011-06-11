@@ -232,14 +232,14 @@ private:
 template<class ELEMENT>
 PrescribedBoundaryDisplacementProblem<ELEMENT>::PrescribedBoundaryDisplacementProblem() 
 {
+ // Set output directory
+ Doc_info.set_directory("RESLT_resize_test");
+
  // Create the mesh
  build_mesh();
 
  // Setup equation numbering scheme
  cout << "Number of dofs: " << assign_eqn_numbers() << std::endl; 
-
- // Set output directory
- Doc_info.set_directory("RESLT");
 
 } //end of constructor
 

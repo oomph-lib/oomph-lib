@@ -547,6 +547,7 @@ namespace oomph
    }
  } 
 
+#ifdef OOMPH_HAS_TRIANGLE_LIB  
 
 //=====================================================================
 /// \short Constructor: Pass a data structure obtained from the triangulate
@@ -903,6 +904,8 @@ namespace oomph
        }
      }
    }
- } 
+ }
+
+#endif
 
 }

@@ -40,6 +40,7 @@
 #include "../generic/nodes.h"
 #include "../generic/oomph_utilities.h"
 #include "../generic/Telements.h"
+#include "../generic/error_estimator.h"
 #include "poisson_elements.h"
 
 namespace oomph
@@ -59,8 +60,9 @@ namespace oomph
 /// element edge. Inherits from TElement and PoissonEquations
 //======================================================================
 template <unsigned DIM, unsigned NNODE_1D>
-class TPoissonElement : public TElement<DIM,NNODE_1D>, 
-                        public PoissonEquations<DIM>
+class TPoissonElement : public virtual TElement<DIM,NNODE_1D>, 
+                        public virtual PoissonEquations<DIM>,
+                        public virtual ElementWithZ2ErrorEstimator
 {
  
  public:
@@ -154,6 +156,26 @@ protected:
                                                          Shape &test,
                                                          DShape &dtestdx) 
   const;
+
+
+ /// \short Order of recovery shape functions for Z2 error estimation:
+ /// Same order as shape functions.
+ unsigned nrecovery_order() {return (NNODE_1D-1);}
+ 
+ /// Number of 'flux' terms for Z2 error estimation 
+ unsigned num_Z2_flux_terms() {return DIM;}
+
+ /// Get 'flux' for Z2 error recovery:  Standard flux.from Poisson equations
+ void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
+  {this->get_flux(s,flux);}
+
+ /// \short Number of vertex nodes in the element
+ unsigned nvertex_node() const
+  {return TElement<DIM,NNODE_1D>::nvertex_node();}
+
+ /// \short Pointer to the j-th vertex node in the element
+ Node* vertex_node_pt(const unsigned& j) const
+  {return TElement<DIM,NNODE_1D>::vertex_node_pt(j);}
 
 private:
 
@@ -267,6 +289,15 @@ class FaceGeometry<TPoissonElement<1,NNODE_1D> >:
  FaceGeometry() : PointElement() {}
 
 };
+
+
+
+
+
+
+
+
+
 
 
 }

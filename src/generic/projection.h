@@ -37,8 +37,12 @@
 #ifndef PROJECTION_H
 #define PROJECTION_H
 
-#include "element_with_external_element.h"
+
+#include "mesh.h"
 #include "problem.h"
+#include "multi_domain.h"
+#include "shape.h"
+#include "element_with_external_element.h"
 
 namespace oomph
 {

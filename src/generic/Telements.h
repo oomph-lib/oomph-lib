@@ -1199,6 +1199,15 @@ template<>
    return false;
 
   }
+
+
+/*  /// \short Number of vertex nodes in the element: One more */
+/*  /// than spatial dimension */
+/*  virtual unsigned nvertex_node() const=0; */
+ 
+/*  /// \short Pointer to the j-th vertex node in the element */
+/*  virtual Node* vertex_node_pt(const unsigned& j) const=0; */
+
  
 };
 
@@ -1208,7 +1217,7 @@ template<>
 /// Empty, just establishes the template parameters
 //=======================================================================
 template<unsigned DIM, unsigned NNODE_1D>
-class TElement
+class TElement 
 {
 };			 
 
@@ -1286,6 +1295,38 @@ public:
  /// Number of nodes along each element edge
  unsigned nnode_1d() const {return NNODE_1D;} 
 
+
+ /// \short Number of vertex nodes in the element: One more
+ /// than spatial dimension
+ unsigned nvertex_node() const {return 2;}
+ 
+ /// \short Pointer to the j-th vertex node in the element
+ Node* vertex_node_pt(const unsigned& j) const
+  {
+   switch (j)
+    {
+    case 0:
+
+     return node_pt(0);
+     break;
+
+    case 1:
+
+     return node_pt(NNODE_1D-1);
+     break;
+
+    default:
+     
+     std::ostringstream error_message;
+     error_message 
+      << "Element only has two vertex nodes; called with node number " 
+      << j << std::endl;     
+     throw OomphLibError(error_message.str(),
+                         "TElement::vertex_node_pt()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+
  /// Calculate the geometric shape functions at local coordinate s
  inline void shape(const Vector<double> &s, Shape &psi) const
   {TElementShape<1,NNODE_1D>::shape(s,psi);}
@@ -1296,7 +1337,7 @@ public:
                           DShape &dpsids) const
   {TElementShape<1,NNODE_1D>::dshape_local(s,psi,dpsids);}
 
- /// \short Computer the geometric shape functions, derivatives and
+ /// \short Compute the geometric shape functions, derivatives and
  /// second derivatives w.r.t local coordinates at local coordinate s \n
  /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
  /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
@@ -1451,6 +1492,29 @@ public:
  /// Number of nodes along each element edge
  unsigned nnode_1d() const {return NNODE_1D;} 
 
+ /// \short Number of vertex nodes in the element: One more
+ /// than spatial dimension
+ unsigned nvertex_node() const {return 3;}
+ 
+ /// \short Pointer to the j-th vertex node in the element
+ Node* vertex_node_pt(const unsigned& j) const
+  {
+   // Vertex nodes come first:
+#ifdef PARANOID
+   if (j>2)
+    {
+     std::ostringstream error_message;
+     error_message 
+      << "Element only has three vertex nodes; called with node number " 
+      << j << std::endl;     
+     throw OomphLibError(error_message.str(),
+                         "TElement::vertex_node_pt()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+   return node_pt(j);
+  }
+
  /// Calculate the geometric shape functions at local coordinate s
  inline void shape(const Vector<double> &s, Shape &psi) const
   {TElementShape<2,NNODE_1D>::shape(s,psi);}
@@ -1461,7 +1525,7 @@ public:
                           DShape &dpsids) const
   {TElementShape<2,NNODE_1D>::dshape_local(s,psi,dpsids);}
 
- /// \short Computer the geometric shape functions, derivatives and
+ /// \short Compute the geometric shape functions, derivatives and
  /// second derivatives w.r.t local coordinates at local coordinate s \n
  /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
  /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
@@ -2770,23 +2834,47 @@ public:
   }
 
   
-  /// Destructor
-  ~TElement() {}
-  
-  /// Number of nodes along each element edge
-  unsigned nnode_1d() const {return NNODE_1D;}
-  
-  /// Calculate the geometric shape functions at local coordinate s
-  inline void shape(const Vector<double> &s, Shape &psi) const
-   {TElementShape<3,NNODE_1D>::shape(s,psi);}
-  
-  /// \short Compute the  geometric shape functions and
-  /// derivatives w.r.t. local coordinates at local coordinate s
-  inline void dshape_local(const Vector<double> &s, Shape &psi,
-                           DShape &dpsids) const
-   {TElementShape<3,NNODE_1D>::dshape_local(s,psi,dpsids);}
-
-  /// \short Computer the geometric shape functions, derivatives and
+ /// Destructor
+ ~TElement() {}
+ 
+ /// Number of nodes along each element edge
+ unsigned nnode_1d() const {return NNODE_1D;}
+ 
+ 
+ /// \short Number of vertex nodes in the element: One more
+ /// than spatial dimension
+ unsigned nvertex_node() const {return 4;}
+ 
+ /// \short Pointer to the j-th vertex node in the element
+ Node* vertex_node_pt(const unsigned& j) const
+  {
+   // Vertex nodes come first:
+#ifdef PARANOID
+   if (j>3)
+    {
+     std::ostringstream error_message;
+     error_message 
+      << "Element only has four vertex nodes; called with node number " 
+      << j << std::endl;     
+     throw OomphLibError(error_message.str(),
+                         "TElement::vertex_node_pt()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+   return node_pt(j);
+  }
+ 
+ /// Calculate the geometric shape functions at local coordinate s
+ inline void shape(const Vector<double> &s, Shape &psi) const
+  {TElementShape<3,NNODE_1D>::shape(s,psi);}
+ 
+ /// \short Compute the  geometric shape functions and
+ /// derivatives w.r.t. local coordinates at local coordinate s
+ inline void dshape_local(const Vector<double> &s, Shape &psi,
+                          DShape &dpsids) const
+  {TElementShape<3,NNODE_1D>::dshape_local(s,psi,dpsids);}
+ 
+  /// \short Compute the geometric shape functions, derivatives and
   /// second derivatives w.r.t local coordinates at local coordinate s. \n
   /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
   /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n
@@ -3080,7 +3168,7 @@ public:
   {TBubbleEnrichedElementShape<DIM,3>::dshape_local(s,psi,dpsids);}
 
  
- /// \short Computer the geometric shape functions, derivatives and
+ /// \short Compute the geometric shape functions, derivatives and
  /// second derivatives w.r.t local coordinates at local coordinate s \n
  /// d2psids(i,0) = \f$ \partial^2 \psi_j / \partial s_0^2 \f$ \n
  /// d2psids(i,1) = \f$ \partial^2 \psi_j / \partial s_1^2 \f$ \n

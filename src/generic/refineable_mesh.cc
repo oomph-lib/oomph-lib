@@ -855,6 +855,15 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
    Vector<Tree*> leaf_nodes_pt;
    Forest_pt->stick_leaves_into_vector(leaf_nodes_pt);
 
+
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     double t_end = TimingHelpers::timer();
+     oomph_info << "Time for stick_leaves_into_vector: " 
+                << t_end-t_start << std::endl;
+     t_start = TimingHelpers::timer();
+    }
+
    //If we are documenting the output, create the filename
    std::ostringstream fullname;
    std::ofstream new_nodes_file;
@@ -864,6 +873,8 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
               << doc_info.number() << ".dat";
      new_nodes_file.open(fullname.str().c_str());
     }
+
+
 
    // Build all elements and store vector of pointers to new nodes
    // (Note: build() checks if the element has been built 
@@ -882,7 +893,7 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
    if (Global_timings::Doc_comprehensive_timings)
     {
      t_end = TimingHelpers::timer();
-     oomph_info << "Time for building new elements: " 
+     oomph_info << "Time for building " << num_tree_nodes << " new elements: " 
                 << t_end-t_start << std::endl;
      t_start = TimingHelpers::timer();
     }
@@ -1062,6 +1073,17 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
    //for the streams
    Forest_pt->close_hanging_node_files(doc_info,hanging_output_files);
 
+
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     t_end = TimingHelpers::timer();
+     oomph_info 
+     <<"Time for setup_hanging_nodes() and further_setup_hanging_nodes() for " 
+     << num_tree_nodes << " elements: "
+     << t_end-t_start << std::endl;
+     t_start = TimingHelpers::timer();
+    }
+
    // Read out the number of continously interpolated values
    // from one of the elements (assuming it's the same in all elements)
    unsigned ncont_interpolated_values=
@@ -1070,6 +1092,16 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
    // Complete the hanging nodes schemes by dealing with the
    // recursively hanging nodes
    complete_hanging_nodes(ncont_interpolated_values);
+
+
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     t_end = TimingHelpers::timer();
+     oomph_info 
+      <<"Time for complete_hanging_nodes: "
+      << t_end-t_start << std::endl;
+     t_start = TimingHelpers::timer();
+    }
 
    /// Update the boundary element info -- this can be a costly procedure
    /// and for this reason the mesh writer might have decided not to 
@@ -1080,12 +1112,11 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
      this->setup_boundary_element_info(); 
     }
 
-
    if (Global_timings::Doc_comprehensive_timings)
     {
      t_end = TimingHelpers::timer();
      oomph_info
-      <<"Time for actual hanging node setup and boundary element info: " 
+      <<"Time for boundary element info: " 
       << t_end-t_start << std::endl;
      t_start = TimingHelpers::timer();
     }
@@ -1155,6 +1186,16 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
       << RefineableElement::max_integrity_tolerance() << std::endl;
     }
  
+
+   if (Global_timings::Doc_comprehensive_timings)
+    {
+     t_end = TimingHelpers::timer();
+     oomph_info
+      <<"Time for (paranoid only) checking of integrity: " 
+      << t_end-t_start << std::endl;
+     t_start = TimingHelpers::timer();
+    }
+
 #endif
 
    //Loop over all elements other than the final level and deactivate the
@@ -1188,7 +1229,7 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
    if (Global_timings::Doc_comprehensive_timings)
     {
      t_end = TimingHelpers::timer();
-     oomph_info << "Time for reordering nodes: " 
+     oomph_info << "Time for reordering " << nnode() << " nodes: " 
                 << t_end-t_start << std::endl;
      t_start = TimingHelpers::timer();
     }
