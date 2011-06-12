@@ -48,7 +48,7 @@ namespace oomph
    /// \short Global boolean to switch on comprehensive timing -- can 
    /// probably be declared const false when development on hector
    /// is complete
-   bool Doc_comprehensive_timings=true;
+   bool Doc_comprehensive_timings=false;
   };
 
 
