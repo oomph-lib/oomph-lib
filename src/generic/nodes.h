@@ -44,7 +44,7 @@
 // C++ headers
 #include<map>
 #include<set>
-
+#include <limits.h>
 
 //oomph-lib headers
 #include "Vector.h"

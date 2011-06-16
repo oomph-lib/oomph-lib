@@ -242,36 +242,19 @@ namespace oomph
         // of the boundary
         TriangleMeshCurviLine* boundary_pt=
          curvilinear_boundary_pt->curvilinear_boundary_pt(b);
-        
-        //How many segments do we want on this one?
-        unsigned n_seg = boundary_pt->nsegment();
-        
-        // Vertex coordinates
-        Vector<Vector<double> > bound(n_seg+1);
-        
-        //Read the values of the limiting coordinates, assuming equal
-        //spacing of the nodes
-        double zeta_initial = boundary_pt->zeta_start();
-        double zeta_increment = 
-         (boundary_pt->zeta_end()-boundary_pt->zeta_start())/(double(n_seg));
-        
-        //Loop over the n_seg+1 points bounding the segments
-        for(unsigned s=0;s<n_seg+1;s++)
-         {
-          // Resize the vector 
-          bound[s].resize(2);
-          
-          // Get the coordinates
-          zeta[0]= zeta_initial + zeta_increment*double(s);
-          
-          boundary_pt->geom_object_pt()->position(zeta,posn);
-          bound[s][0]=posn[0];
-          bound[s][1]=posn[1];
-         }
-        
+
+        // Create vertex coordinates for polygonal representation
+        Vector<Vector<double> > bound;
+        Vector<std::pair<double,double> > polygonal_vertex_arclength;
+        create_vertex_coordinates_for_polyline(boundary_pt,
+                                               bound,
+                                               polygonal_vertex_arclength);
         // Boundary id
         unsigned bnd_id=boundary_pt->boundary_id();
         
+        // Store
+        Polygonal_vertex_arclength_info[bnd_id]=polygonal_vertex_arclength;
+
         // Build associated polyline
         boundary_polyline_pt[b] = new TriangleMeshPolyLine(bound,bnd_id);
         
@@ -359,35 +342,19 @@ namespace oomph
           TriangleMeshCurviLine* boundary_pt=
            curvilinear_hole_pt->curvilinear_boundary_pt(b);
           
-          //How many segments do we want on this one?
-          unsigned n_seg = boundary_pt->nsegment();
-          
-          // Vertex coordinates
-          Vector<Vector<double> > bound_hole(n_seg+1);
-          
-          //Read the values of the limiting coordinates, assuming equal
-          //spacing of the nodes
-          double zeta_initial = boundary_pt->zeta_start();
-          double zeta_increment = 
-           (boundary_pt->zeta_end()-boundary_pt->zeta_start())/(double(n_seg));
-          
-          //Loop over the n_seg+1 points bounding the segments
-          for(unsigned s=0;s<n_seg+1;s++)
-           {
-            // Resize the vector 
-            bound_hole[s].resize(2);
-            
-            // Get the coordinates
-            zeta[0]= zeta_initial + zeta_increment*double(s);
-            
-            boundary_pt->geom_object_pt()->position(zeta,posn);
-            bound_hole[s][0]=posn[0];
-            bound_hole[s][1]=posn[1];
-           }
+          // Create vertex coordinates for polygonal represetation
+          Vector<Vector<double> > bound_hole;
+          Vector<std::pair<double,double> > polygonal_vertex_arclength;
+          create_vertex_coordinates_for_polyline(boundary_pt,
+                                                 bound_hole,
+                                                 polygonal_vertex_arclength);
           
           // Boundary id
           unsigned bnd_id=boundary_pt->boundary_id();
           
+          // Store
+          Polygonal_vertex_arclength_info[bnd_id]=polygonal_vertex_arclength;
+
           // Build associated polyline
           hole_polyline_pt[b] = 
            new TriangleMeshPolyLine(bound_hole,bnd_id);
@@ -807,7 +774,7 @@ namespace oomph
   Vector<Vector<double> > &boundary_coordinate_limits()
    {return Boundary_coordinate_limits;}
   
-  /// \short Return access to the coordinate limits assocaieted with 
+  /// \short Return access to the coordinate limits associated with 
   /// the geometric object associated with boundary b
   Vector<double> &boundary_coordinate_limits(const unsigned &b)
    {
@@ -1048,8 +1015,181 @@ namespace oomph
     bool clear_hole_data=false;
     TriangleHelper::clear_triangulateio(triangulate_io,clear_hole_data);
    }
+  
+  
+  /// \short Helper function to create polyline vertex coordinates for 
+  /// curvilinear boundary specified by boundary_pt, using either
+  /// equal increments in zeta or in (approximate) arclength
+  /// along the curviline. vertex_coord[i_vertex][i_dim] stores
+  /// i_dim-th coordinate of i_vertex-th vertex. 
+  /// polygonal_vertex_arclength_info[i_vertex] contains the pair of doubles
+  /// made of the arclength of the i_vertex-th vertex along the polygonal 
+  /// representation (.first), and the corresponding coordinate on the
+  /// GeomObject (.second)
+  void create_vertex_coordinates_for_polyline(
+   TriangleMeshCurviLine* boundary_pt,
+   Vector<Vector<double> >& vertex_coord,
+   Vector<std::pair<double,double> >& polygonal_vertex_arclength_info)
+  {
+   
+   // Intrinsic coordinate along GeomObjects
+   Vector<double> zeta(1);
+   
+   // Position vector to point on GeomObject
+   Vector<double> posn(2); 
+   
+   // Start coordinate
+   double zeta_initial = boundary_pt->zeta_start();
+
+   //How many segments do we want on this polyline?
+   unsigned n_seg = boundary_pt->nsegment();
+   vertex_coord.resize(n_seg+1);
+   polygonal_vertex_arclength_info.resize(n_seg+1);
+   polygonal_vertex_arclength_info[0].first=0.0;
+   polygonal_vertex_arclength_info[0].second=zeta_initial;
+  
+  
+
+   // Vertices placed in equal zeta increments
+   if (!(boundary_pt->space_vertices_evenly_in_arclength()))
+    {
+     //Read the values of the limiting coordinates, assuming equal
+     //spacing of the nodes
+     double zeta_increment = 
+      (boundary_pt->zeta_end()-boundary_pt->zeta_start())/(double(n_seg));
+   
+     //Loop over the n_seg+1 points bounding the segments
+     for(unsigned s=0;s<n_seg+1;s++)
+      {
+       // Get the coordinates
+       zeta[0]= zeta_initial + zeta_increment*double(s);            
+       boundary_pt->geom_object_pt()->position(zeta,posn);
+       vertex_coord[s]=posn;
+
+       // Bump up the polygonal arclength
+       if (s>0)
+        {
+         polygonal_vertex_arclength_info[s].first=
+          polygonal_vertex_arclength_info[s-1].first+
+          sqrt(pow(vertex_coord[s][0]-vertex_coord[s-1][0],2)+
+               pow(vertex_coord[s][1]-vertex_coord[s-1][1],2));
+         polygonal_vertex_arclength_info[s].second=zeta[0];
+
+        }
+      }
+    }
+   // Vertices placed in equal increments in (approximate) arclength
+   else
+    {
+     // Number of sampling points to compute arclength and
+     // arclength increments
+     unsigned nsample_per_segment=100;
+     unsigned nsample=nsample_per_segment*n_seg;
+   
+     // Work out start and increment
+     double zeta_increment=(boundary_pt->zeta_end()-
+                            boundary_pt->zeta_start())/(double(nsample));
+   
+     // Get coordinate of first point
+     Vector<double> start_point(2);
+     zeta[0]=zeta_initial;
+     boundary_pt->geom_object_pt()->position(zeta,start_point);
+   
+     // Storage for coordinates of end point
+     Vector<double> end_point(2);          
+   
+     // Compute total arclength
+     double total_arclength=0.0;
+     for (unsigned i=1;i<nsample;i++)
+      {
+       // Next point
+       zeta[0]+=zeta_increment;
+     
+       // Get coordinate of end point
+       boundary_pt->geom_object_pt()->position(zeta,end_point);
+     
+       // Increment arclength
+       total_arclength+=sqrt(pow(end_point[0]-start_point[0],2)+
+                             pow(end_point[1]-start_point[1],2));
+     
+       // Shift back
+       start_point=end_point;
+      }
+   
+     // Desired arclength increment
+     double target_s_increment=total_arclength/(double(n_seg));
+
+     // Get coordinate of first point again
+     zeta[0]=zeta_initial;
+     boundary_pt->geom_object_pt()->position(zeta,start_point);
+   
+     // Assign as coordinate
+     vertex_coord[0]=start_point;
+   
+     // Start sampling point 
+     unsigned i_lo=1;
+   
+     //Loop over the n_seg-1 internal points bounding the segments
+     for(unsigned s=1;s<n_seg;s++)
+      {
+       // Visit potentially all sample points until we've found
+       // the one at which we exceed the target arclength increment
+       double arclength_increment=0.0;
+       for (unsigned i=i_lo;i<nsample;i++)
+        {
+         // Next point
+         zeta[0]+=zeta_increment;
+       
+         // Get coordinate of end point
+         boundary_pt->geom_object_pt()->position(zeta,end_point);
+       
+         // Increment arclength increment
+         arclength_increment+=sqrt(pow(end_point[0]-start_point[0],2)+
+                                   pow(end_point[1]-start_point[1],2));
+       
+       
+         // Shift back
+         start_point=end_point;
+       
+         // Are we there yet?
+         if (arclength_increment>target_s_increment)
+          {
+           // Remember how far we've got
+           i_lo=i;
+
+           // And bail out
+           break;
+          }
+        }
+     
+       // Store the coordinates
+       vertex_coord[s]=end_point;
+       
+       // Bump up the polygonal arclength
+       if (s>0)
+        {
+         polygonal_vertex_arclength_info[s].first=
+          polygonal_vertex_arclength_info[s-1].first+
+          sqrt(pow(vertex_coord[s][0]-vertex_coord[s-1][0],2)+
+               pow(vertex_coord[s][1]-vertex_coord[s-1][1],2));
+         polygonal_vertex_arclength_info[s].second=zeta[0];
+        }
+      }
+   
+     // Final point
+     unsigned s=n_seg;
+     zeta[0]=boundary_pt->zeta_end();
+     boundary_pt->geom_object_pt()->position(zeta,end_point);
+     vertex_coord[s]=end_point;
+     polygonal_vertex_arclength_info[s].first=
+      polygonal_vertex_arclength_info[s-1].first+
+      sqrt(pow(vertex_coord[s][0]-vertex_coord[s-1][0],2)+
+           pow(vertex_coord[s][1]-vertex_coord[s-1][1],2));
+     polygonal_vertex_arclength_info[s].second=zeta[0];    
+    }
+  }
  
- 
+  
   /// Boolean defining if Triangulateio object has been built or not
   bool Triangulateio_exists;
 
@@ -1074,7 +1214,8 @@ namespace oomph
   /// Vector to polygons that define internal polygons
   Vector<TriangleMeshInternalPolygon*> Internal_polygon_pt;
   
-  /// Storage for the geometric objects associated with any boundaries
+  /// \short Storage for the geometric objects associated with any boundaries
+  /// hierher should this be a map?
   Vector<GeomObject*> Boundary_geom_object_pt;
 
   /// Storage of indices of any inner holes that should be filled
@@ -1089,8 +1230,19 @@ namespace oomph
   Vector<std::map<unsigned,Vector<int> > > Face_index_region_at_boundary;
 
   /// \short  Storage for the limits of the boundary coordinates 
-  /// defined by the of geometric objects
+  /// defined by the of geometric objects. Only used for curvilinear
+  /// boundaries. hierher should this be a map?
   Vector<Vector<double> > Boundary_coordinate_limits;
+
+  /// \short Storage for pairs of doubles representing:
+  /// .first: the arclength along the polygonal representation of
+  ///         the curviline 
+  /// .second: the corresponding intrinsic coordinate on the associated
+  ///          geometric object
+  /// at which the vertices on the specified boundary are located.
+  /// Only used for boundaries represented by geom objects.
+  std::map<unsigned,Vector<std::pair<double,double> > > 
+   Polygonal_vertex_arclength_info;
 
   /// Timestepper used to build elements
   TimeStepper* Time_stepper_pt;

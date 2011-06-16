@@ -202,14 +202,20 @@ public:
  /// of the relevant boundary in terms of the GeomObject's intrinsic
  /// coordinate, the number of (initially straight-line) segments that 
  /// this GeomObject is to be split up into, and the boundary ID.
+ /// The final optional boolean argument specifies if vertices in 
+ /// polygonhal represenation are spaced 
+ /// (approximately) evenly in arclength along the GeomObject [true,
+ /// default] or in equal increments in zeta.
  /// This is the curvlinear equivalent of PolyLine.
  TriangleMeshCurviLine(GeomObject* geom_object_pt,
-                                 const double& zeta_start,
-                                 const double& zeta_end,
-                                 const unsigned& nsegment,
-                                 const unsigned& boundary_id) :
+                       const double& zeta_start,
+                       const double& zeta_end,
+                       const unsigned& nsegment,
+                       const unsigned& boundary_id,
+                       const bool& space_vertices_evenly_in_arclength=true) :
   Geom_object_pt(geom_object_pt), Zeta_start(zeta_start),
-  Zeta_end(zeta_end), Nsegment(nsegment), Boundary_id(boundary_id)
+  Zeta_end(zeta_end), Nsegment(nsegment), Boundary_id(boundary_id),
+  Space_vertices_evenly_in_arclength(space_vertices_evenly_in_arclength)
   {}
  
  /// \short Empty Destuctor
@@ -245,6 +251,15 @@ public:
     }
   }
 
+ /// \short Boolean to indicate if vertices in polygonal representation
+ /// of the Curvline are spaced (approximately) evenly in arclength 
+ /// along the GeomObject [true] or in equal increments in zeta [false]
+ bool space_vertices_evenly_in_arclength() const
+ {
+  return Space_vertices_evenly_in_arclength;
+ }
+
+
   private:
 
  /// Pointer to GeomObject that represents this part of the boundary
@@ -262,6 +277,11 @@ public:
 
  /// Boundary ID
  unsigned Boundary_id;
+
+ /// \short Boolean to indicate if vertices in polygonal representation
+ /// of the Curvline are spaced (approximately) evenly in arclength 
+ /// along the GeomObject [true] or in equal increments in zeta [false]
+ bool Space_vertices_evenly_in_arclength;
 
 };
 

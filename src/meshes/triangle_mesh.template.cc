@@ -907,7 +907,7 @@ namespace oomph
      }
 
     //The nodes have been assigned arc-length coordinates
-    //from one end or the other of the connected segement.
+    //from one end or the other of the connected segment.
 
     //If the boundary has a geometric object representation then
     //scale the coordinates to match those of the geometric object
@@ -966,20 +966,39 @@ namespace oomph
        }
       rev_error += sqrt(tmp_error);
       
+      // Number of polyline vertices along this boundary
+      unsigned n_vertex=Polygonal_vertex_arclength_info[b].size();
+
+      // Get polygonal vertex data
+      Vector<std::pair<double,double> > polygonal_vertex_arclength=
+       Polygonal_vertex_arclength_info[b];
+
       //If the (normal) error is small than reversed then we have the 
       //coordinate direction correct.
       //If not then we must reverse it
+      bool reversed=false;
       if(error < rev_error)
        {
         oomph_info << "Coordinates are aligned\n";
        }
       else if(error > rev_error)
        {
+        reversed=true;
         oomph_info << "Coordinates are reversed\n";
-        //Reverse the boundary coordinates
+
+        //Reverse the limits of the boundary coordinates along the
+        //geometric object
         double temp = bound_coord_limits[0];
         bound_coord_limits[0] = bound_coord_limits[1];
         bound_coord_limits[1] = temp;
+        for (unsigned v=0;v<n_vertex;v++)
+         {
+          polygonal_vertex_arclength[v].first=
+           Polygonal_vertex_arclength_info[b][v].first;
+
+          polygonal_vertex_arclength[v].second=
+           Polygonal_vertex_arclength_info[b][n_vertex-v-1].second;
+         }
        }
       else
        {
@@ -1000,14 +1019,94 @@ namespace oomph
       double zeta_old_range = zeta[0]; 
       double zeta_new_range = bound_coord_limits[1] - bound_coord_limits[0];
 
+      // Re-assign boundary coordinate for the case where boundary
+      // is represented by polygon
+      unsigned use_old=false; 
+      if (n_vertex==0) use_old=true;
+      
       //Now scale the coordinates accordingly
       for (std::set<Node*>::iterator it=all_nodes_pt.begin();
            it!=all_nodes_pt.end();it++)
-       {    
+       {            
         Node* nod_pt=(*it);
+
+        // Get coordinate based on arclength along polygonal repesentation
         nod_pt->get_coordinates_on_boundary(b,zeta);
-        zeta[0] = bound_coord_limits[0] + 
-         (zeta_new_range/zeta_old_range)*zeta[0];
+        
+        if (use_old)
+         {
+          // Boundary is actually a polygon -- simply rescale
+          zeta[0] = bound_coord_limits[0] + 
+           (zeta_new_range/zeta_old_range)*zeta[0];
+         }
+        else
+         {
+          // Scale such that vertex nodes stay where they were
+          bool found=false;
+
+          // Loop over vertex nodes
+          for (unsigned v=1;v<n_vertex;v++)
+           {
+            if ((zeta[0]>=polygonal_vertex_arclength[v-1].first)&&
+                (zeta[0]<=polygonal_vertex_arclength[v].first))
+             {
+              
+              // Increment in intrinsic coordinate along geom object
+              double delta_zeta=(polygonal_vertex_arclength[v].second-
+                                 polygonal_vertex_arclength[v-1].second);
+              // Increment in arclength along segment
+              double delta_polyarc=(polygonal_vertex_arclength[v].first-
+                                    polygonal_vertex_arclength[v-1].first);
+
+              // Mapped arclength coordinate
+              double zeta_new=polygonal_vertex_arclength[v-1].second+
+               delta_zeta*(zeta[0]-polygonal_vertex_arclength[v-1].first)/
+               delta_polyarc;
+              zeta[0]=zeta_new;
+
+              // Success!
+              found=true;
+
+              // Bail out
+              break;
+             }
+           }
+          
+          // If we still haven't found it's probably the last point along
+          if (!found)
+           {
+#ifdef PARANOID
+            double diff=abs(zeta[0]-
+                            polygonal_vertex_arclength[n_vertex-1].first);
+            if (diff>ToleranceForVertexMismatchInPolygons::Tolerable_error)
+             {
+              std::ostringstream error_stream;
+              error_stream 
+               << "Wasn't able to locate the polygonal arclength exactly\n"
+               << "during re-setup of boundary coordinates and have\n"
+               << "assumed that we're dealing with the final point along\n"
+               << "the curvilinear segment and encountered some roundoff\n"
+               << "However, the difference in the polygonal zeta coordinates\n"
+               << "between zeta[0] " << zeta[0] 
+               << " and the originallly stored value " 
+               << polygonal_vertex_arclength[n_vertex-1].first << "\n"
+               << "is " << diff << " which exceeds the threshold specified\n"
+               << "in the publically modifiable variable\n"
+               << "ToleranceForVertexMismatchInPolygons::Tolerable_error\n"
+               << "whose current value is: "
+               << ToleranceForVertexMismatchInPolygons::Tolerable_error
+               << "\nPlease check your mesh carefully and increase the\n"
+               << "threshold if you're sure this is appropriate\n";
+              throw OomphLibError(error_stream.str(),
+                                  "TriangleMesh::setup_boundary_coordinates()",
+                                  OOMPH_EXCEPTION_LOCATION);
+             }
+#endif
+            zeta[0]=polygonal_vertex_arclength[n_vertex-1].second;
+           }
+         }
+
+        // Assign updated coordinate
         nod_pt->set_coordinates_on_boundary(b,zeta);
        }
      }

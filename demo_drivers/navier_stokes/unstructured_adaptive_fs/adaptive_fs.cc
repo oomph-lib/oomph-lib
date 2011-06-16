@@ -37,10 +37,11 @@
 #include "constitutive.h"
 
 // The mesh
-//#include "my_triangle_mesh.template.h"
-//#include "my_triangle_mesh.template.cc"
 #include "meshes/triangle_mesh.h"
 
+// Elements that impose the volume constraint for discretisations in which
+// the fluid mesh is updated by pseudo-elasticity 
+// hierher shouldn't they be moved elsewhere?
 #include "fix_vol_int_elastic_elements.h"
 
 using namespace std;
@@ -70,16 +71,13 @@ namespace oomph
   double Radius = 0.25;
 
   /// Volume of the interface
-  double Volume = 4.0*atan(1.0)*Radius*Radius;
+  double Volume = MathematicalConstants::Pi*Radius*Radius;
 
-  /// Scaling for velocity
-  double Alpha = 0.0;
+  /// \short Scaling factor for inflow velocity (allows it to be switched off
+  /// to do hydrostatics)
+  double Inflow_veloc_magnitude = 0.0;
 
-  /// \short Pseudo solid "density" -- set to zero because we don't want
-  /// inertia in the node update!
-  double Lambda_sq=0.0;
-
-  /// \short Length of the tube
+  /// \short Length of the channel
   double Length = 3.0;
 
   /// Constitutive law used to determine the mesh deformation
@@ -88,7 +86,10 @@ namespace oomph
   /// Trace file
   ofstream Trace_file;
 
-  /// File to document the norm of the solution (for validation purposes)
+  /// \short File to document the norm of the solution (for validation 
+  /// purposes -- triangle doesn't give fully reproducible results so
+  /// mesh generation/adaptation may generate slightly different numbers
+  /// of elements on different machines!)
   ofstream Norm_file;
 
  } // end_of_namespace
@@ -363,9 +364,6 @@ namespace oomph
  };
 
 
-
-
-
 //=======================================================================
 /// Face geometry for element is the same as that for the underlying
 /// wrapped element
@@ -393,11 +391,6 @@ namespace oomph
  };
 
 
-
-// ////////////////////////////////////////////////////////////////////
-// ////////////////////////////////////////////////////////////////////
-// ////////////////////////////////////////////////////////////////////
-
 } //End of namespace extension
 
 
@@ -409,21 +402,19 @@ namespace oomph
 
 
 //==start_of_problem_class============================================
-/// Unstructured Navier-Stokes ALE Problem
+/// Problem class to simulate inviscid bubble propagating along 2D channel
 //====================================================================
 template<class ELEMENT>
-class UnstructuredFluidProblem : public Problem
-                                 // public virtual ProjectionProblem<ELEMENT>
-
+class BubbleInChannelProblem : public Problem
 {
 
 public:
 
  /// Constructor
- UnstructuredFluidProblem();
+ BubbleInChannelProblem();
  
  /// Destructor
- ~UnstructuredFluidProblem()
+ ~BubbleInChannelProblem()
   {
    // Fluid timestepper
    delete this->time_stepper_pt(0);
@@ -436,20 +427,19 @@ public:
     }
    delete Outer_boundary_polyline_pt;
 
-
-   //Kill data associated with inner holes
-   unsigned n_hole = Inner_hole_pt.size();
-   for(unsigned ihole=0;ihole<n_hole;ihole++)
+   //Kill data associated with bubbles
+   unsigned n_bubble = Bubble_polygon_pt.size();
+   for(unsigned ibubble=0;ibubble<n_bubble;ibubble++)
     {
-     unsigned n=Inner_hole_pt[ihole]->npolyline();
+     unsigned n=Bubble_polygon_pt[ibubble]->npolyline();
      for (unsigned j=0;j<n;j++)
       {
-       delete Inner_hole_pt[ihole]->polyline_pt(j);
+       delete Bubble_polygon_pt[ibubble]->polyline_pt(j);
       }
-     delete Inner_hole_pt[ihole];
+     delete Bubble_polygon_pt[ibubble];
     }
    
-   // Flush Lagrange multiplier mesh
+   // Flush element of free surface elements
    delete_free_surface_elements();
    delete Free_surface_mesh_pt;
 
@@ -471,7 +461,7 @@ public:
   }
  
 
- /// Actions before adapt: Wipe the mesh of Lagrange multiplier elements
+ /// Actions before adapt: Wipe the mesh of free surface elements
  void actions_before_adapt()
   {
    // Kill the  elements and wipe surface mesh
@@ -483,7 +473,7 @@ public:
   }// end of actions_before_adapt
 
  
- /// Actions after adapt: Rebuild the mesh of Lagrange multiplier elements
+ /// Actions after adapt: Rebuild the mesh of free surface elements
  void actions_after_adapt()
   {
    // Create the elements that impose the displacement constraint 
@@ -498,22 +488,10 @@ public:
    complete_problem_setup();
 
    // Output solution after adaptation/projection
-   //bool doc_projection=true;
-   //doc_solution("new mesh with projected solution",doc_projection);
+   //doc_solution("new mesh with projected solution");
    
   }// end of actions_after_adapt
 
-
- /// \short Update before implicit timestep: Move hole boundary
- void actions_before_implicit_timestep() { }
-
- /// \short Re-apply the no slip condition (imposed indirectly via enslaved
- /// velocities)
- void actions_before_newton_convergence_check()
-  {
-   // Update mesh -- this applies the auxiliary node update function
-   //Fluid_mesh_pt->node_update();
-  }
  
  /// Update the after solve (empty)
  void actions_after_newton_solve(){}
@@ -522,58 +500,38 @@ public:
  void actions_before_newton_solve(){}
  
  
- /// \short Set boundary condition, assign auxiliary node update fct.
- /// Complete the build of all elements, attach power elements that allow
- /// computation of drag vector
+ /// \short Set boundary conditions and complete the build of all elements
  void complete_problem_setup()
-  {   
-//    // Get the sub-boundary IDs of the various boundaries
-//    map<unsigned,Vector<unsigned> > sub_boundary_id=
-//     Fluid_mesh_pt->sub_boundary_id(); 
+  {      
+   // Map to record if a given boundary is on a bubble or not
+   map<unsigned,bool> is_on_bubble_bound;
    
-   // Get the hole boundary and sub-boundary id
-   unsigned nhole=Inner_hole_pt.size();
-     
-//    // Map storing hole sub boundary id
-//    map<unsigned,bool> is_on_hole_sub_bound;
-   
-   // Map storing hole boundary id
-   map<unsigned,bool> is_on_hole_bound;
-
-   // Loop over the holes and fill in the boundary and sub boundary id vector
-   for(unsigned ihole=0;ihole<nhole;ihole++)
+   // Loop over the bubbles 
+   unsigned nbubble=Bubble_polygon_pt.size();
+   for(unsigned ibubble=0;ibubble<nbubble;ibubble++)
     {
-     // Get the hole boundary id vector
-     Vector<unsigned> hole_bound_id=this->Inner_hole_pt[ihole]->
+     // Get the vector all boundary IDs associated with the polylines that
+     // make up the closed polygon
+     Vector<unsigned> bubble_bound_id=this->Bubble_polygon_pt[ibubble]->
       polygon_boundary_id();
-    
-     // Get the number of boundary
-     unsigned nbound=hole_bound_id.size();
      
-     // Fill in the map of boundary and sub boundary
+     // Get the number of boundary
+     unsigned nbound=bubble_bound_id.size();
+     
+     // Fill in the map
      for(unsigned ibound=0;ibound<nbound;ibound++)
       {
-       // Get the boundary id
-       unsigned bound_id=hole_bound_id[ibound];
+       // This boundary...
+       unsigned bound_id=bubble_bound_id[ibound];
        
-       // Fill in the map of boundary
-       is_on_hole_bound[bound_id]=true;
-       
-//        // Get the number of subbound for each boundary
-//        unsigned nsub_bound=sub_boundary_id[bound_id].size();
-//        for(unsigned isub_bound=0;isub_bound<nsub_bound;isub_bound++)
-//         {
-//          // Get the sub bound id and store in the map
-//          unsigned sub_bound_id=sub_boundary_id[bound_id][isub_bound];
-//          is_on_hole_sub_bound[sub_bound_id]=true;
-//         }
+       // ...is on the bubble
+       is_on_bubble_bound[bound_id]=true;
       }
     }
    
-   // Set the boundary conditions for fluid problem: All nodes are
+   // Re-set the boundary conditions for fluid problem: All nodes are
    // free by default -- just pin the ones that have Dirichlet conditions
    // here. 
-   //bool First_solid = false;
    unsigned nbound=Fluid_mesh_pt->nboundary();
    for(unsigned ibound=0;ibound<nbound;ibound++)
     {
@@ -592,74 +550,63 @@ public:
        
        //If it's the outflow pin only the vertical velocity
        if(ibound==2) {nod_pt->pin(1);}
-
-       // Pin pseudo-solid positions apart from hole boundary we want to move
-       SolidNode* solid_node_pt = dynamic_cast<SolidNode*>(nod_pt);
        
-       // Unpin the position of all the nodes on hole boundaries
-       // since they will be moved using Lagrange Multiplier
-       if(is_on_hole_bound[ibound])
+       // Pin pseudo-solid positions apart from bubble boundary which
+       // we allow to move
+       SolidNode* solid_node_pt = dynamic_cast<SolidNode*>(nod_pt);
+       if(is_on_bubble_bound[ibound])
         {
-         //Pin a single node horizontally
-         //  if((First_solid==false) && (Problem_Parameter::Alpha==0.0))
-         // {
-         //  solid_node_pt->pin_position(0);
-         //  First_solid=true;
-         // }
-         //else
-          {
-           solid_node_pt->unpin_position(0);
-           solid_node_pt->unpin_position(1);
-          }
-         
-         // Assign auxiliary node update fct if we're dealing with a 
-         // hole boundary
-         //nod_pt->set_auxiliary_node_update_fct_pt(
-         // FSI_functions::apply_no_slip_on_moving_wall); 
+         solid_node_pt->unpin_position(0);
+         solid_node_pt->unpin_position(1);
         }
-        else
+       else
         {
          solid_node_pt->pin_position(0);
          solid_node_pt->pin_position(1);
         }
       }
-
     } // end loop over boundaries
    
    // Complete the build of all elements so they are fully functional
+   // Remember that adaptation for triangle meshes involves a complete
+   // regneration of the mesh (rather than splitting as in tree-based
+   // meshes where such parameters can be passed down from the father
+   // element!)
    unsigned n_element = Fluid_mesh_pt->nelement();
    for(unsigned e=0;e<n_element;e++)
     {
      // Upcast from GeneralisedElement to the present element
      ELEMENT* el_pt = dynamic_cast<ELEMENT*>(Fluid_mesh_pt->element_pt(e));
-
+     
      // Set pointer to continous time
      el_pt->time_pt()=this->time_pt();
-   
+     
      // Set the Reynolds number
      el_pt->re_pt() = &Problem_Parameter::Re;
 
-     // Set the Wormesley number (same as Re since St=1)
+     // Set the Womersley number (same as Re since St=1)
      el_pt->re_st_pt() = &Problem_Parameter::Re;
-
+     
      // Set the constitutive law for pseudo-elastic mesh deformation
      el_pt->constitutive_law_pt()=Problem_Parameter::Constitutive_law_pt;
-
-     // Set the "density" for pseudo-elastic mesh deformation
-     el_pt->lambda_sq_pt()=&Problem_Parameter::Lambda_sq;
     }
-
-   // Re-apply Dirichlet boundary conditions (projection ignores
-   // boundary conditions!)
    
-   // Set velocity and history values of velocity on walls and inlet 
-   // (boundaries 0, 1 and 3)
+   // Re-apply boundary values on Dirichlet boundary conditions 
+   // (Boundary conditions are ignored when the solution is transferred
+   // from the old to the new mesh by projection; this leads to a slight
+   // change in the boundary values (which are, of course, never changed,
+   // unlike the actual unknowns for which the projected values only
+   // serve as an initial guess)
+
+   // Set velocity and history values of velocity on walls
    nbound=this->Fluid_mesh_pt->nboundary();
-   for(unsigned ibound=0;ibound<4;++ibound)
+   for(unsigned ibound=0;ibound<nbound;++ibound)
     {
-     //Don't set anything on the outlet
-     if(ibound!=2)
+     if ((ibound==Upper_wall_boundary_id)||
+         (ibound==Bottom_wall_boundary_id)||
+         (ibound==Outflow_boundary_id))
       {
+       // Loop over nodes on this boundary
        unsigned num_nod=this->Fluid_mesh_pt->nboundary_node(ibound);
        for (unsigned inod=0;inod<num_nod;inod++)
         {
@@ -669,59 +616,48 @@ public:
          // Get number of previous (history) values
          unsigned n_prev=nod_pt->time_stepper_pt()->nprev_values();
          
-         // Zero all current and previous veloc values
+         // Velocity is and was zero at all previous times
          for (unsigned t=0;t<=n_prev;t++)
           {
-           nod_pt->set_value(t,0,0.0); 
+           // Parallel outflow
+           if (ibound!=Outflow_boundary_id)
+            {
+             nod_pt->set_value(t,0,0.0); 
+            }
            nod_pt->set_value(t,1,0.0);
           }
         }
       }
     }
 
-   this->set_boundary_velocity();
-  }
-
- ///Set the boundary velocity
- void set_boundary_velocity()
-  {
-   unsigned ibound=0;
-   unsigned num_nod=this->Fluid_mesh_pt->nboundary_node(ibound);
+   // Re-assign prescribed inflow velocity at inlet
+   unsigned num_nod=this->Fluid_mesh_pt->nboundary_node(Inflow_boundary_id);
    for (unsigned inod=0;inod<num_nod;inod++)
     {
      // Get node
-     Node* nod_pt=this->Fluid_mesh_pt->boundary_node_pt(ibound,inod);
+     Node* nod_pt=this->Fluid_mesh_pt->boundary_node_pt(Inflow_boundary_id,
+                                                        inod);
      
      //Now set the boundary velocity
      double y = nod_pt->x(1);
-     nod_pt->set_value(0,Problem_Parameter::Alpha*y*(1-y));
+     nod_pt->set_value(0,Problem_Parameter::Inflow_veloc_magnitude*y*(1-y));
     }
   }
-
      
  /// Doc the solution
- void doc_solution(const std::string& comment="", const bool& project=false);
+ void doc_solution(const std::string& comment="");
  
  /// Compute the error estimates and assign to elements for plotting
  void compute_error_estimate(double& max_err,
                              double& min_err);
-  
- /// Sanity check: Doc boundary coordinates from mesh and GeomObject
- //void doc_boundary_coordinates();
- 
- /// Get the TriangleMeshInternalPolygon objects
- Vector<TriangleMeshInternalPolygon*>& inner_hole_pt()
-  {return Inner_hole_pt;}
  
 private:
  
 
- /// \short Create elements that enforce prescribed boundary motion
- /// for the pseudo-solid fluid mesh by Lagrange multipliers
+ /// \short Create free surface elements
  void create_free_surface_elements();
 
- /// \short Delete elements that impose the prescribed boundary displacement
- /// and wipe the associated mesh
+ /// \short Delete free surface elements 
  void delete_free_surface_elements()
   {
    // How many surface elements are in the surface mesh
@@ -739,17 +675,18 @@ private:
    
   } // end of delete_free_surface_elements
  
- /// Pointers to mesh of Lagrange multiplier elements
+
+ /// Pointers to mesh of free surface elements
  Mesh* Free_surface_mesh_pt;
  
- /// Pointer to mesh containing single volume constraing
+ /// Pointer to mesh containing single element that imposes volume constraint
  Mesh* Volume_constraint_mesh_pt;
 
- /// Pointers to Fluid_mesh
+ /// Pointer to Fluid_mesh
  RefineableSolidTriangleMesh<ELEMENT>* Fluid_mesh_pt;
  
- /// Vector storing pointer to the hole polygon
- Vector<TriangleMeshInternalPolygon*> Inner_hole_pt;
+ /// Vector storing pointer to the bubble polygons
+ Vector<TriangleMeshInternalPolygon*> Bubble_polygon_pt;
 
  /// Triangle mesh polygon for outer boundary 
  TriangleMeshPolygon* Outer_boundary_polyline_pt; 
@@ -757,209 +694,207 @@ private:
  /// Pointer to a global bubble pressure datum
  Data* Bubble_pressure_data_pt;
 
+ /// Enumeration of channel boundaries
+ enum 
+ {
+  Inflow_boundary_id=0,
+  Upper_wall_boundary_id=1,
+  Outflow_boundary_id=2,
+  Bottom_wall_boundary_id=3
+ };
+ 
+
 }; // end_of_problem_class
 
 
 //==start_constructor=====================================================
-/// Constructor: build the first mesh with TriangleMeshPolygon and
-///              TriangleMeshInternalPolygon object
+/// Constructor
 //========================================================================
 template<class ELEMENT>
-UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
+BubbleInChannelProblem<ELEMENT>::BubbleInChannelProblem()
 { 
- // Allow for rough startup
- //this->Problem::Max_residuals=1000.0;
-
  // Output directory
  Problem_Parameter::Doc_info.set_directory("RESLT");
-
+ 
  // Allocate the timestepper -- this constructs the Problem's 
  // time object with a sufficient amount of storage to store the
  // previous timsteps. 
  this->add_time_stepper_pt(new BDF<2>);
 
- // Define the boundaries: Polyline with 4 different
- // boundaries for the outer boundary and 2 internal holes, 
- // egg shaped, with 2 boundaries each
-
- double Length = 3.0; //10.0
- 
- // Set the global pressure data
+  // Create bubble pressure as global Data
  Bubble_pressure_data_pt =  new Data(1);
  this->add_global_data(Bubble_pressure_data_pt);
- //Provide a reasonable initial guess
+ 
+ //Provide a reasonable initial guess (hydrostatics)
  Bubble_pressure_data_pt->set_value(0,
-  Problem_Parameter::Ca/Problem_Parameter::Radius);
+                                    Problem_Parameter::Ca/
+                                    Problem_Parameter::Radius);
+ 
 
  // Build the boundary segments for outer boundary, consisting of
  //--------------------------------------------------------------
- // four separeate polyline segments
- //---------------------------------
- Vector<TriangleMeshPolyLine*> boundary_segment_pt(4);
+ // four separate polylines
+ //------------------------
+ Vector<TriangleMeshPolyLine*> boundary_polyline_pt(4);
  
- // Initialize boundary segment
- Vector<Vector<double> > bound_seg(2);
+ // Each polyline only has two vertices -- provide storage for their
+ // coordinates
+ Vector<Vector<double> > vertex_coord(2);
  for(unsigned i=0;i<2;i++)
   {
-   bound_seg[i].resize(2);
+   vertex_coord[i].resize(2);
   }
  
- // First boundary segment
- bound_seg[0][0]=0.0;
- bound_seg[0][1]=0.0;
- bound_seg[1][0]=0.0;
- bound_seg[1][1]=1.0;
+ // First polyline: Inflow
+ vertex_coord[0][0]=0.0;
+ vertex_coord[0][1]=0.0;
+ vertex_coord[1][0]=0.0;
+ vertex_coord[1][1]=1.0;
  
- // Specify 1st boundary id
- unsigned bound_id = 0;
-
- // Build the 1st boundary segment
- boundary_segment_pt[0] = new TriangleMeshPolyLine(bound_seg,bound_id);
+ // Build the 1st boundary polyline
+ boundary_polyline_pt[0] = new TriangleMeshPolyLine(vertex_coord,
+                                                   Inflow_boundary_id);
  
- // Second boundary segment
- bound_seg[0][0]=0.0;
- bound_seg[0][1]=1.0;
- bound_seg[1][0]=Problem_Parameter::Length;
- bound_seg[1][1]=1.0;
+ // Second boundary polyline: Upper wall
+ vertex_coord[0][0]=0.0;
+ vertex_coord[0][1]=1.0;
+ vertex_coord[1][0]=Problem_Parameter::Length;
+ vertex_coord[1][1]=1.0;
 
- // Specify 2nd boundary id
- bound_id = 1;
+ // Build the 2nd boundary polyline
+ boundary_polyline_pt[1] = new TriangleMeshPolyLine(vertex_coord,
+                                                   Upper_wall_boundary_id);
 
- // Build the 2nd boundary segment
- boundary_segment_pt[1] = new TriangleMeshPolyLine(bound_seg,bound_id);
+ // Third boundary polyline: Outflow
+ vertex_coord[0][0]=Problem_Parameter::Length;
+ vertex_coord[0][1]=1.0;
+ vertex_coord[1][0]=Problem_Parameter::Length;
+ vertex_coord[1][1]=0.0;
 
- // Third boundary segment
- bound_seg[0][0]=Problem_Parameter::Length;
- bound_seg[0][1]=1.0;
- bound_seg[1][0]=Problem_Parameter::Length;
- bound_seg[1][1]=0.0;
+ // Build the 3rd boundary polyline
+ boundary_polyline_pt[2] = new TriangleMeshPolyLine(vertex_coord,
+                                                   Outflow_boundary_id);
 
- // Specify 3rd boundary id
- bound_id = 2;
+ // Fourth boundary polyline: Bottom wall
+ vertex_coord[0][0]=Problem_Parameter::Length;
+ vertex_coord[0][1]=0.0;
+ vertex_coord[1][0]=0.0;
+ vertex_coord[1][1]=0.0;
 
- // Build the 3rd boundary segment
- boundary_segment_pt[2] = new TriangleMeshPolyLine(bound_seg,bound_id);
-
- // Fourth boundary segment
- bound_seg[0][0]=Problem_Parameter::Length;
- bound_seg[0][1]=0.0;
- bound_seg[1][0]=0.0;
- bound_seg[1][1]=0.0;
-
- // Specify 4th boundary id
- bound_id = 3;
-
- // Build the 4th boundary segment
- boundary_segment_pt[3] = new TriangleMeshPolyLine(bound_seg,bound_id);
-  
- // Create the triangle mesh polygon for outer boundary using boundary segment
- Outer_boundary_polyline_pt = new TriangleMeshPolygon(boundary_segment_pt);
-
-
- // Now deal with the moving holes
- //-------------------------------
-
- // We have one holes
- Inner_hole_pt.resize(1);
+ // Build the 4th boundary polyline
+ boundary_polyline_pt[3] = new TriangleMeshPolyLine(vertex_coord,
+                                                    Bottom_wall_boundary_id);
  
- // Build first hole
- //-----------------
+ // Create the triangle mesh polygon for outer boundary
+ Outer_boundary_polyline_pt = new TriangleMeshPolygon(boundary_polyline_pt);
+ 
+
+ // Now define initial shape of bubble(s) with polygon
+ //---------------------------------------------------
+
+ // Counter for number of boundaries (bit over the top but future
+ // proof for multiple bubbles...)
+ unsigned boundary_id=Bottom_wall_boundary_id+1;
+
+ // We have one bubble
+ Bubble_polygon_pt.resize(1);
+
+ // Place it smack in the middle of the channel
  double x_center = 0.5*Problem_Parameter::Length;
  double y_center = 0.5;
- double A = Problem_Parameter::Radius;
- double B = Problem_Parameter::Radius;
- Ellipse * egg_hole_pt = new Ellipse(A,B);
+ Ellipse * bubble_pt = new Ellipse(Problem_Parameter::Radius,
+                                       Problem_Parameter::Radius);
  
- // Define the vector of angle value to build the hole
+ // Intrinsic coordinate along GeomObject defining the bubble
  Vector<double> zeta(1);
  
- // Initialize the vector of coordinates
+ // Position vector to GeomObject defining the bubble
  Vector<double> coord(2);
  
- // Number of points defining hole
- unsigned ppoints = 16; //8 
- double unit_zeta = MathematicalConstants::Pi/double(ppoints-1);
+ // Number of points defining bubble
+ unsigned npoints = 16; 
+ double unit_zeta = MathematicalConstants::Pi/double(npoints-1);
  
- // This hole is bounded by two distinct boundaries, each
+ // This bubble is bounded by two distinct boundaries, each
  // represented by its own polyline
- Vector<TriangleMeshPolyLine*> hole_segment_pt(2);
+ Vector<TriangleMeshPolyLine*> bubble_polyline_pt(2);
  
  // Vertex coordinates
- Vector<Vector<double> > bound_hole(ppoints);
+ Vector<Vector<double> > bubble_vertex(npoints);
  
  // Create points on boundary
- for(unsigned ipoint=0; ipoint<ppoints;ipoint++)
+ for(unsigned ipoint=0; ipoint<npoints;ipoint++)
   {
    // Resize the vector 
-   bound_hole[ipoint].resize(2);
+   bubble_vertex[ipoint].resize(2);
    
    // Get the coordinates
    zeta[0]=unit_zeta*double(ipoint);
-   egg_hole_pt->position(zeta,coord);
-   bound_hole[ipoint][0]=coord[0]+x_center;
-   bound_hole[ipoint][1]=coord[1]+y_center;
+   bubble_pt->position(zeta,coord);
+
+   // Shift
+   bubble_vertex[ipoint][0]=coord[0]+x_center;
+   bubble_vertex[ipoint][1]=coord[1]+y_center;
   }
  
- // Inner hole center coordinates
- Vector<double> hole_center(2);
- hole_center[0]=x_center;
- hole_center[1]=y_center;
- 
- // Specify the hole boundary id
- unsigned hole_id = 4;
+ // Build the 1st bubble polyline
+ bubble_polyline_pt[0] = new TriangleMeshPolyLine(bubble_vertex,boundary_id++);
 
- // Build the 1st hole polyline
- hole_segment_pt[0] = new TriangleMeshPolyLine(bound_hole,hole_id);
-
- // Second boundary of hole
- for(unsigned ipoint=0; ipoint<ppoints;ipoint++)
+ // Second boundary of bubble
+ for(unsigned ipoint=0; ipoint<npoints;ipoint++)
   {
    // Resize the vector 
-   bound_hole[ipoint].resize(2);
+   bubble_vertex[ipoint].resize(2);
    
    // Get the coordinates
    zeta[0]=(unit_zeta*double(ipoint))+MathematicalConstants::Pi;
-   egg_hole_pt->position(zeta,coord);
-   bound_hole[ipoint][0]=coord[0]+x_center;
-   bound_hole[ipoint][1]=coord[1]+y_center;
+   bubble_pt->position(zeta,coord);
+
+   // Shift
+   bubble_vertex[ipoint][0]=coord[0]+x_center;
+   bubble_vertex[ipoint][1]=coord[1]+y_center;
   }
 
- // Specify the hole boundary id
- hole_id=5;
+ // Build the 2nd bubble polyline
+ bubble_polyline_pt[1] = new TriangleMeshPolyLine(bubble_vertex,boundary_id++);
 
- // Build the 2nd hole polyline
- hole_segment_pt[1] = new TriangleMeshPolyLine(bound_hole,hole_id);
 
+ // Define coordinates of a point inside the bubble
+ Vector<double> bubble_center(2);
+ bubble_center[0]=x_center;
+ bubble_center[1]=y_center;
  
- // Fill in the vector of holes. Specify data that define centre's
- // displacement
- Inner_hole_pt[0] = new TriangleMeshInternalPolygon(
-  hole_center,hole_segment_pt);
  
+ // Create closed polygon from two polylines
+ Bubble_polygon_pt[0] = new TriangleMeshInternalPolygon(
+  bubble_center,bubble_polyline_pt);
+ 
+
  // Now build the mesh, based on the boundaries specified by
  //---------------------------------------------------------
  // polygons just created
  //----------------------
 
- TriangleMeshClosedCurve* closed_curve_pt=Outer_boundary_polyline_pt;
- unsigned nh=Inner_hole_pt.size();
- Vector<TriangleMeshInternalClosedCurve*> hole_pt(nh);
- for (unsigned i=0;i<nh;i++)
+ // Convert to "closed curve" objects
+ TriangleMeshClosedCurve* outer_closed_curve_pt=Outer_boundary_polyline_pt;
+ unsigned nb=Bubble_polygon_pt.size();
+ Vector<TriangleMeshInternalClosedCurve*> bubble_closed_curve_pt(nb);
+ for (unsigned i=0;i<nb;i++)
   {
-   hole_pt[i]=Inner_hole_pt[i];
+   bubble_closed_curve_pt[i]=Bubble_polygon_pt[i];
   }
- 
+
+ // Target area for initial mesh
  double uniform_element_area=0.2;
  Fluid_mesh_pt = 
-  new RefineableSolidTriangleMesh<ELEMENT>(closed_curve_pt, //Outer_boundary_polyline_pt, 
-                                           hole_pt, //Inner_hole_pt,
+  new RefineableSolidTriangleMesh<ELEMENT>(outer_closed_curve_pt, 
+                                           bubble_closed_curve_pt,
                                            uniform_element_area,
                                            this->time_stepper_pt());
  
  // Set error estimator for bulk mesh
  Z2ErrorEstimator* error_estimator_pt=new Z2ErrorEstimator;
  Fluid_mesh_pt->spatial_error_estimator_pt()=error_estimator_pt;
-
 
  // Set targets for spatial adaptivity
  Fluid_mesh_pt->max_permitted_error()=0.005;
@@ -973,32 +908,30 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
    Fluid_mesh_pt->min_element_size()=0.01; 
   }
 
- // Set the problem pointer
+ // Set the problem pointer (required for mesh adaptation/projection)
  Fluid_mesh_pt->problem_pt()=this;
    
- // Output boundary and mesh
+ // Output boundary and mesh initial mesh for information
  this->Fluid_mesh_pt->output_boundaries("boundaries.dat");
  this->Fluid_mesh_pt->output("mesh.dat");
-   
- // Set boundary condition, assign auxiliary node update fct,
- // complete the build of all elements, attach power elements that allow
- // computation of drag vector
+ 
+ // Set boundary condition and complete the build of all elements
  complete_problem_setup();
  
- // Create Free surface elements 
- //----------------------------------------------------
- // Construct the mesh of elements that enforce prescribed boundary motion
- // of pseudo-solid fluid mesh by Lagrange multipliers
+ // Construct the mesh of free surface elements
  Free_surface_mesh_pt=new Mesh;
  create_free_surface_elements();
- 
 
- //Create volume constraint element
+ //Create volume constraint element and store in its own mesh
  Volume_constraint_mesh_pt = new Mesh;
  Volume_constraint_mesh_pt->add_element_pt(new ElasticVolumeConstraintElement);
+
+ // Specify constrained pressure hierher
  dynamic_cast<ElasticVolumeConstraintElement*>(
   Volume_constraint_mesh_pt->element_pt(0))
   ->set_traded_pressure_data(this->global_data_pt(0));
+
+ // Specify target volume for bubble
  dynamic_cast<ElasticVolumeConstraintElement*>(
   Volume_constraint_mesh_pt->element_pt(0))
   ->volume_pt() = &Problem_Parameter::Volume;
@@ -1019,143 +952,22 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  // Build global mesh
  this->build_global_mesh();
   
- // Sanity check: Doc boundary coordinates from mesh and GeomObject
- //doc_boundary_coordinates();
-  
  // Setup equation numbering scheme
  cout <<"Number of equations: " << this->assign_eqn_numbers() << std::endl;
  
 } // end_of_constructor
 
 
-
-
-//============start_doc_solid_zeta=======================================
-/// Doc boundary coordinates in mesh and plot GeomObject representation
-/// of inner boundary.
-//=======================================================================
-/*template<class ELEMENT>
-void UnstructuredFluidProblem<ELEMENT>::doc_boundary_coordinates()
-{
-
- ofstream some_file;
- char filename[100];
- 
- // Number of plot points
- unsigned npoints = 5;
- 
- // Output solution and projection files
- sprintf(filename,"RESLT/inner_hole_boundary_from_geom_obj.dat");
- some_file.open(filename);
-
- //Initialize zeta and r
- Vector<double> zeta(1);
- zeta[0]=0;
- 
- Vector<double> r(2);
- r[0]=0;
- r[1]=0;
-
-   
- // Get the boundary geometric objects associated with the fluid mesh
- unsigned n_boundary = Fluid_mesh_pt->nboundary();
- for(unsigned b=0;b<n_boundary;b++)
-  {
-   //A vector of geometric objects
-   GeomObject* boundary_geom_obj_pt = 0;
-   Fluid_mesh_pt->boundary_geom_object_pt(b);
-   
-   //Only bother to do anything if there is a geometric object
-   if(boundary_geom_obj_pt!=0)
-    {
-     // Zone label 
-     some_file <<"ZONE T=boundary"<<b<<std::endl;
-     
-     //Get the coordinate limits
-     Vector<double> zeta_limits = 
-      Fluid_mesh_pt->boundary_coordinate_limits(b);
-     
-     //Set the increment
-     double zeta_inc = 
-      (zeta_limits[1] - zeta_limits[0])/(double)(npoints-1);
-     
-     for(unsigned i=0;i<npoints;i++)
-      {
-       // Get coordinate
-       zeta[0] = zeta_limits[0] + i*zeta_inc;
-       //Get the position
-       boundary_geom_obj_pt->position(zeta,r);
-       
-       // Print it
-       some_file <<r[0]<<" "<<r[1]<<" "<<zeta[0]<<std::endl;  
-      }
-    }
-  }
- some_file.close();
-
- // Doc boundary coordinates using Free_surface_mesh_pt
- std::ofstream the_file("RESLT/inner_hole_boundary_from_mesh.dat");
-
- // Initialise max/min boundary coordinate
- double zeta_min= DBL_MAX;
- double zeta_max=-DBL_MAX;
-
- // Loop over Free_surface elements
- unsigned n_face_element = this->Free_surface_mesh_pt->nelement();
- 
- for(unsigned e=0;e<n_face_element;e++)
-  {
-   
-   //Cast the element pointer
-   FixedVolumeElasticLineFluidInterfaceElement<ELEMENT>* el_pt=
-    dynamic_cast<FixedVolumeElasticLineFluidInterfaceElement<ELEMENT>*>
-    (Free_surface_mesh_pt->element_pt(e));
-
-   // Doc boundary coordinate
-   Vector<double> s(1);
-   Vector<double> zeta(1);
-   Vector<double> x(2);
-   unsigned n_plot=5;
-
-   the_file << el_pt->tecplot_zone_string(n_plot);
-   
-   // Loop over plot points
-   unsigned num_plot_points=el_pt->nplot_points(n_plot);
-   for (unsigned iplot=0;iplot<num_plot_points;iplot++)
-    {         
-     // Get local coordinates of plot point
-     el_pt->get_s_plot(iplot,n_plot,s);         
-     el_pt->interpolated_zeta(s,zeta);
-     el_pt->interpolated_x(s,x);
-     for (unsigned i=0;i<2;i++)
-      {
-       the_file << x[i] << " ";
-      }
-     the_file << zeta[0] << " ";
-
-     // Update max/min boundary coordinate
-     if (zeta[0]<zeta_min) zeta_min=zeta[0];
-     if (zeta[0]>zeta_max) zeta_max=zeta[0];
-
-     the_file << std::endl;
-    }
-  }
- // Close doc file
- the_file.close();
- 
-  
-} //end doc_solid_zeta
-*/
-
 //============start_of_create_free_surface_elements===============
 /// Create elements that impose the prescribed boundary displacement
 /// for the pseudo-solid fluid mesh
 //=======================================================================
 template<class ELEMENT>
-void UnstructuredFluidProblem<ELEMENT>::create_free_surface_elements()
+void BubbleInChannelProblem<ELEMENT>::create_free_surface_elements()
 { 
  //Loop over the free surface boundaries
- for(unsigned b=4;b<6;b++)
+ unsigned nb=Fluid_mesh_pt->nboundary();
+ for(unsigned b=Bottom_wall_boundary_id+1;b<nb;b++)
   {
    // How many bulk fluid elements are adjacent to boundary b?
    unsigned n_element = Fluid_mesh_pt->nboundary_element(b);
@@ -1171,9 +983,7 @@ void UnstructuredFluidProblem<ELEMENT>::create_free_surface_elements()
      //Find the index of the face of element e along boundary b
      int face_index = Fluid_mesh_pt->face_index_at_boundary(b,e);
      
-     // Create new element. Note that we use different Lagrange
-     // multiplier fields for each distinct boundary (here indicated
-     // by b.
+     // Create new element
      FixedVolumeElasticLineFluidInterfaceElement<ELEMENT>* el_pt =
       new FixedVolumeElasticLineFluidInterfaceElement<ELEMENT>(
        bulk_elem_pt,face_index);   
@@ -1186,11 +996,14 @@ void UnstructuredFluidProblem<ELEMENT>::create_free_surface_elements()
      
      //Specify the capillary number
      el_pt->ca_pt() = &Problem_Parameter::Ca;
-     //Specify the external pressure
+
+     //Specify the external pressure hierher ???
      el_pt->set_external_pressure_data(this->global_data_pt(0));
+
      //Set the traded pressure
      el_pt->set_traded_pressure_data(this->global_data_pt(0));
-    } // end loop over the element
+
+    } 
   }
 }
 // end of create_free_surface_elements
@@ -1200,9 +1013,7 @@ void UnstructuredFluidProblem<ELEMENT>::create_free_surface_elements()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void UnstructuredFluidProblem<ELEMENT>::doc_solution(
- const std::string& comment,
- const bool& project)
+void BubbleInChannelProblem<ELEMENT>::doc_solution(const std::string& comment)
 { 
 
  oomph_info << "Docing step: " << Problem_Parameter::Doc_info.number()
@@ -1210,32 +1021,19 @@ void UnstructuredFluidProblem<ELEMENT>::doc_solution(
 
  ofstream some_file;
  char filename[100];
+ sprintf(filename,"%s/soln%i.dat",
+         Problem_Parameter::Doc_info.directory().c_str(),
+         Problem_Parameter::Doc_info.number());
 
  // Number of plot points
  unsigned npts;
  npts=5; 
-
 
  // Compute errors and assign to each element for plotting
  double max_err;
  double min_err;
  compute_error_estimate(max_err,min_err);
  
- // Output solution and projection files
- if(!project)
-  {
-   sprintf(filename,"%s/soln%i.dat",
-           Problem_Parameter::Doc_info.directory().c_str(),
-           Problem_Parameter::Doc_info.number());
-  }
- else
-  {
-   sprintf(filename,"%s/proj%i.dat",
-           Problem_Parameter::Doc_info.directory().c_str(),
-           Problem_Parameter::Doc_info.number()-1);
-  }
-
-
  // Assemble square of L2 norm 
  double square_of_l2_norm=0.0;
  unsigned nel=Fluid_mesh_pt->nelement();
@@ -1256,9 +1054,6 @@ void UnstructuredFluidProblem<ELEMENT>::doc_solution(
            << Problem_Parameter::Doc_info.number() << "  " 
            << comment << "\"\n";
  some_file.close();
-
- // No trace file writing after projection
- if(project) return;
 
  // Get max/min area
  double max_area;
@@ -1286,8 +1081,8 @@ void UnstructuredFluidProblem<ELEMENT>::doc_solution(
 /// Compute error estimates and assign to elements for plotting
 //========================================================================
 template<class ELEMENT>
-void UnstructuredFluidProblem<ELEMENT>::compute_error_estimate(double& max_err,
-                                                               double& min_err)
+void BubbleInChannelProblem<ELEMENT>::compute_error_estimate(double& max_err,
+                                                             double& min_err)
 { 
  // Get error estimator
  ErrorEstimator* err_est_pt=Fluid_mesh_pt->spatial_error_estimator_pt();
@@ -1324,11 +1119,9 @@ void UnstructuredFluidProblem<ELEMENT>::compute_error_estimate(double& max_err,
 //============================================================
 int main(int argc, char **argv)
 {
- Multi_domain_functions::Nx_bin = 40;
- Multi_domain_functions::Ny_bin = 10;
-
+ 
  // feenableexcept(FE_INVALID | FE_DIVBYZERO | FE_OVERFLOW | FE_UNDERFLOW);
-
+ 
  // Store command line arguments
  CommandLineArgs::setup(argc,argv);
 
@@ -1356,29 +1149,40 @@ int main(int argc, char **argv)
  
 
  // Create problem in initial configuration
- UnstructuredFluidProblem<ProjectableTaylorHoodElement<MyTaylorHoodElement> > 
+ BubbleInChannelProblem<ProjectableTaylorHoodElement<MyTaylorHoodElement> > 
   problem;  
 
+
+ // Output the problem's state with the bubble in its
+ // initial polygonal representation
+ problem.doc_solution();
+ 
+ // Before starting the time-integration we want to "inflate" it to form 
+ // a proper circular bubble. We do this by setting the inflow to zero
+ // and doing a steady solve (with one adaptation)
+ Problem_Parameter::Inflow_veloc_magnitude=0.0;
  problem.steady_newton_solve(1);
+
+ // If all went well, this should show us a nice circular bubble
+ // in a stationary fluid
  problem.doc_solution();
 
- //FiniteElement::Accept_negative_jacobian=true;
-
- // Initialise timestepper
+  // Initialise timestepper
  double dt=0.025;
  problem.initialise_dt(dt);
  
- // Perform impulsive start
+ // Perform impulsive start from current state
  problem.assign_initial_values_impulsive();
 
- // Output initial conditions
- problem.doc_solution();
-
- Problem_Parameter::Alpha = 1.0;
+ // Now switch on the inflow and re-assign the boundary conditions
+ // (Call to complete_problem_setup() is a bit expensive given that we
+ // we only want to set the inflow velocity but who cares -- it's just
+ // a one off.
+ Problem_Parameter::Inflow_veloc_magnitude=1.0;
  problem.complete_problem_setup();
-
- // Solve problem once on given mesh
- unsigned nstep=1;
+ 
+ // Solve problem on fixed mesh
+ unsigned nstep=2;
  for (unsigned i=0;i<nstep;i++)
   {
    // Solve the problem
@@ -1386,8 +1190,8 @@ int main(int argc, char **argv)
    problem.doc_solution();
   }
 
- // Now do a couple of adaptations
- nstep = 2;
+ // Now do a proper loop, doing nstep timesteps before adapting/remeshing
+ // and repeating the lot ncycle times
  unsigned ncycle=1000;
  if (CommandLineArgs::command_line_flag_has_been_set("--validation"))
   {
@@ -1395,6 +1199,7 @@ int main(int argc, char **argv)
    oomph_info << "Only doing one cycle during validation\n";
   }
 
+ // Do the cycles
  for(unsigned j=0;j<ncycle;j++)
   {       
    // Adapt
@@ -1408,7 +1213,7 @@ int main(int argc, char **argv)
      
      // Build the label for doc
      std::stringstream label;
-     label << "Cycle " <<j << " Step "<< i;
+     label << "Adaptation " <<j << " Step "<< i;
      problem.doc_solution(label.str());
     }
   }
