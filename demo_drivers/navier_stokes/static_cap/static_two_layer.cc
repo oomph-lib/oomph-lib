@@ -351,7 +351,7 @@ void CapProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
 
 
  // Number of interface elements
- unsigned ninterface=mesh_pt()->ninterface_element();
+// unsigned ninterface=mesh_pt()->ninterface_element();
 
  // Number of spines
  unsigned nspine=mesh_pt()->nspine();
@@ -361,16 +361,16 @@ void CapProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  Trace_file << " "  << mesh_pt()->spine_pt(0)->height();
  Trace_file << " "  << mesh_pt()->spine_pt(nspine-1)->height();
  Trace_file << " "  
-            << dynamic_cast<FixedVolumeSpineLineFluidInterfaceElement<
-               SpineElement<ELEMENT> >*>(
-               mesh_pt()->interface_element_pt(0))->
-               actual_contact_angle_left()*
-               180.0/MathematicalConstants::Pi << " " ;
- Trace_file << " "  
-            << dynamic_cast<FixedVolumeSpineLineFluidInterfaceElement<
-               SpineElement<ELEMENT> >*>(
-               mesh_pt()->interface_element_pt(ninterface-1))->
-               actual_contact_angle_right()*180.0/MathematicalConstants::Pi 
+ //            << dynamic_cast<FixedVolumeSpineLineFluidInterfaceElement<
+//                SpineElement<ELEMENT> >*>(
+//                mesh_pt()->interface_element_pt(0))->
+//                actual_contact_angle_left()*
+//                180.0/MathematicalConstants::Pi << " " ;
+//  Trace_file << " "  
+//             << dynamic_cast<FixedVolumeSpineLineFluidInterfaceElement<
+//                SpineElement<ELEMENT> >*>(
+//                mesh_pt()->interface_element_pt(ninterface-1))->
+//                actual_contact_angle_right()*180.0/MathematicalConstants::Pi 
             << " ";
  Trace_file << " " 
             << dynamic_cast<ELEMENT*>(

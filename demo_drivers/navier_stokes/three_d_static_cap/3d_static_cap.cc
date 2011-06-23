@@ -682,7 +682,7 @@ FreeSurfaceRotationProblem<ELEMENT>::FreeSurfaceRotationProblem(DocInfo& doc_inf
   }
 
 
- VolumeConstraintElement *Const_el = new VolumeConstraintElement;
+ hierherVolumeConstraintElement *Const_el = new hierherVolumeConstraintElement;
  //Set it up
  Const_el->volume_pt() = &Volume;
  Const_el->set_traded_pressure_data(traded_data_pt);
@@ -1273,7 +1273,7 @@ ElasticFreeSurfaceRotationProblem(DocInfo& doc_info,
   }
 
 
- VolumeConstraintElement *Const_el = new VolumeConstraintElement;
+ hierherVolumeConstraintElement *Const_el = new hierherVolumeConstraintElement;
  //Set it up
  Const_el->volume_pt() = &Volume;
  Const_el->set_traded_pressure_data(traded_data_pt);

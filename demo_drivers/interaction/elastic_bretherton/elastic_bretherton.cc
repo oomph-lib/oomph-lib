@@ -2042,7 +2042,7 @@ void AirwayReopeningProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  unsigned npts=5; 
 
  // Number of interface elements
- unsigned ninterface=Bulk_mesh_pt->ninterface_element();
+// unsigned ninterface=Bulk_mesh_pt->ninterface_element();
  
  // Number of spines
  //unsigned nspine=Bulk_mesh_pt->nspine();
@@ -2080,15 +2080,15 @@ void AirwayReopeningProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
  Trace_file << " " << Control_element_pt->interpolated_u_nst(s,0);
  Trace_file << " " << Control_element_pt->interpolated_u_nst(s,1);
  Trace_file << " "  
-            << abs(dynamic_cast<SpineLineFluidInterfaceElement<ELEMENT>*>(
-               Bulk_mesh_pt->interface_element_pt(0))->
-               actual_contact_angle_left())*
-               180.0/MathematicalConstants::Pi << " " ;
- Trace_file << " "  
-            << abs(dynamic_cast<SpineLineFluidInterfaceElement<ELEMENT>*>(
-               Bulk_mesh_pt->interface_element_pt(ninterface-1))->
-               actual_contact_angle_right())*
-               180.0/MathematicalConstants::Pi 
+//             << abs(dynamic_cast<SpineLineFluidInterfaceElement<ELEMENT>*>(
+//                Bulk_mesh_pt->interface_element_pt(0))->
+//                actual_contact_angle_left())*
+//                180.0/MathematicalConstants::Pi << " " ;
+//  Trace_file << " "  
+//             << abs(dynamic_cast<SpineLineFluidInterfaceElement<ELEMENT>*>(
+//                Bulk_mesh_pt->interface_element_pt(ninterface-1))->
+//                actual_contact_angle_right())*
+//                180.0/MathematicalConstants::Pi 
             << " ";
  //Trace_file << get_outlet_flux() << " ";
  Trace_file << std::endl;

@@ -43,8 +43,11 @@
 namespace oomph
 {
 
+
+// hierher yet to be tidied/assessed from here....
+
 //========================================================================
-/// Base class for elements at the edge of free surfaces or intefaces.
+/// Base class for elements at the edge of free surfaces or interfaces.
 /// The elemental dimensions will be one less than those of the
 /// surface elements, or two less than those of the original bulk elements.
 /// Thus in two-dimensional and axi-symmetric problems, they will be points,
@@ -230,7 +233,7 @@ class PointFluidInterfaceEdgeElement :
   /// (if flag==true) the Jacobian -- this function only deals with
   /// the part of the Jacobian that can be handled generically. 
   /// Specific additional contributions may be provided in
-  /// add_additional_residuals_contributions
+  /// add_additional_residuals_contributions(...)
   void fill_in_generic_residual_contribution_contact_edge(
    Vector<double> &residuals, 
    DenseMatrix<double> &jacobian, 
@@ -504,12 +507,22 @@ public LineFluidInterfaceEdgeElement, public virtual SolidFiniteElement
 
 }; 
 
+// hierher ...yet to be tidied/assessed until here
+
+
+
+//#########################################################
+//#########################################################
+//#########################################################
+
 
 
 //=======================================================================
-/// Base class establishing common interfaces and functions for all fluid
+/// Base class establishing common interfaces and functions for all 
+/// Navier-Stokes-like fluid
 /// interface elements. That is elements that represent either a free 
-/// surface or an inteface between two fluids.
+/// surface or an inteface between two fluids that have distinct
+/// momentum-like equation for each velocity component.
 //======================================================================
 class FluidInterfaceElement : public virtual FaceElement
 {
@@ -527,50 +540,78 @@ class FluidInterfaceElement : public virtual FaceElement
  
   protected:
 
- /// Index at which the i-th velocity component is stored.
+ /// Nodal index at which the i-th velocity component is stored.
  Vector<unsigned> U_index_interface;
 
  /// \short The Data that contains the external  pressure is stored
  /// as external Data for the element. Which external Data item is it?
- unsigned External_data_number_of_external_pressure;
-
+ /// (int so it can be initialised to -1, indicating that external
+ /// pressure hasn't been set).
+ int External_data_number_of_external_pressure;
+ 
  /// \short Pointer to the Data item that stores the external pressure
  Data* Pext_data_pt;
+
+ /// \short Which of the values in Pext_data_pt stores the external pressure
+ unsigned Index_of_external_pressure_value;
  
  /// \short Access function that returns the local equation number
- /// for the kinematic equation that corresponds to the n-th local
+ /// for the (scalar) kinematic equation associated with the j-th local
  /// node. This must be overloaded by specific interface elements
  /// and depends on the method for handing the free-surface deformation.
- virtual int kinematic_local_eqn(const unsigned &n)=0;
-
-  public:
- /// \short Hijack the kinematic condition at the nodes passed in the vector
- /// This is required so that contact-angle conditions can be applied
- /// by the FluidInterfaceEdgeElements.
- virtual void hijack_kinematic_conditions(const Vector<unsigned> 
-                                          &bulk_node_number)=0;
- 
-  protected:
+ virtual int kinematic_local_eqn(const unsigned &j)=0;
  
  /// \short Access function for the local equation number that
  /// corresponds to the external pressure.
  int pext_local_eqn() 
-  {
-   //This should only be called after a test for Pext_data_pt, so
-   //this will have been set
-   return external_local_eqn(External_data_number_of_external_pressure,0);
-  }
+ {
+#ifdef PARANOID
+  if (External_data_number_of_external_pressure<0)
+   {
+    throw OomphLibError("No external pressure has been set\n",
+                        "FluidInterfaceElement:: pext_local_eqn()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+#endif
+  return external_local_eqn(External_data_number_of_external_pressure,
+                            Index_of_external_pressure_value);
+ }
 
  /// \short Helper function to calculate the residuals and 
- /// (if flag==true) the Jacobian of the equations. This must
+ /// (if flag==1) the Jacobian of the equations. This must
  /// be overloaded by specific implementations of different
- /// geometricla interface element i.e. axisymmetric, two- or three-
- /// dimensional
+ /// geometrical interface element i.e. axisymmetric, two- or three-
+ /// dimensional.
  virtual void fill_in_generic_residual_contribution_interface(
   Vector<double> &residuals, 
   DenseMatrix<double> &jacobian, 
   unsigned flag)=0;
  
+ /// \short Helper function to calculate the additional contributions
+ /// to the resisuals and Jacobian that arise from specific node update 
+ /// strategies. This is called within the integration loop over the
+ /// element (for efficiency) and therefore requires a fairly large
+ /// number of input parameters:
+ /// - the velocity shape functions and their derivatives .w.r.t.
+ ///   the local coordinates
+ /// - the Eulerian coordinates (whatever they may represent in the 
+ ///   specific dimension/geometry: cartesian (x,y,[z]), axisymmetric
+ ///   polar (r,z), ...
+ /// - the outer unit normal,
+ /// - the integration weight from the integration scheme 
+ /// - the Jacobian of the mapping between the local and global coordinates
+ ///   along the element.
+ virtual void add_additional_residual_contributions(
+  Vector<double> &residuals, 
+  DenseMatrix<double> &jacobian,
+  const unsigned &flag,
+  const Shape &psif,
+  const DShape &dpsifds,
+  const Vector<double> &interpolated_x, 
+  const Vector<double> &interpolated_n, 
+  const double &W, 
+  const double &J)=0;
+
 public:
 
  /// Constructor, set the default values of the booleans and pointers (null)
@@ -578,103 +619,62 @@ public:
   {
    //Set the capillary number to a default value
    Ca_pt = &Default_Physical_Constant_Value;
+   
    //Set the Strouhal number to the default value
    St_pt = &Default_Physical_Constant_Value;
   }
-
- /// \short Virtual function that specifies the surface tension as 
- /// a function of local position within the element
- /// The default behaviour is a constant surface tension of value 1.0
- /// It is expected that this function will be overloaded in more
- /// specialised elements to incorporate variations in surface tension.
- virtual double sigma(const Vector<double> &s_local)
+  
+  /// \short Virtual function that specifies the non-dimensional 
+  ///  surface tension as a function of local position within the element.
+  /// The default behaviour is a constant surface tension of value 1.0
+  /// This function can be overloaded in more
+  /// specialised elements to incorporate variations in surface tension.
+  virtual double sigma(const Vector<double> &s_local)
   {return 1.0;}
-
- /// Calculate the residuals by calling the generic residual contribution.
- void fill_in_contribution_to_residuals(Vector<double> &residuals)
+  
+  /// Calculate the residuals by calling the generic residual contribution.
+  void fill_in_contribution_to_residuals(Vector<double> &residuals)
   {
    //Add the residual contributions
    fill_in_generic_residual_contribution_interface(
     residuals,GeneralisedElement::Dummy_matrix,0);
   }
-
- /// Return the value of the Capillary number
- const double &ca() const {return *Ca_pt;}
- 
- /// Return a pointer to the Capillary number
- double* &ca_pt() {return Ca_pt;}
-
- /// Return the value of the Strouhal number
- const double &st() const {return *St_pt;}
- 
- /// Return a pointer to the Strouhal number
- double* &st_pt() {return St_pt;}
-
- /// Actual contact angle at left end of element
- /// ALH: COULD KILL THIS??
- double actual_contact_angle_left()
-  {
-   //The coordinate on the LHS is s_min()
-   Vector<double> s(1);
-   s[0] = s_min();
-   return actual_contact_angle(s);
-  }
-
-
- /// Actual contact angle at right end of element
- double actual_contact_angle_right()
-  {
-   //The coordinate on the RHS is s_max()
-   Vector<double> s(1);
-   s[0] = s_max();
-   return actual_contact_angle(s);
-  }
-
- /// "Contact angle" at specified local coordinate
- double actual_contact_angle(const Vector<double>& s)
-  {
-   //Find out how many nodes there are
-   unsigned n_node = nnode();
-
-   //Call the derivatives of the shape function
-   Shape psif(n_node);
-   DShape dpsifds(n_node,1);
-   dshape_local(s,psif,dpsifds);
-   
-   //Define and zero the tangent vectors 
-   double interpolated_t1[2] = {0.0,0.0};
-   
-   //Loop over the shape functions
-   for(unsigned l=0;l<n_node;l++)
-    {
-     //Loop over directional components
-     for(unsigned i=0;i<2;i++) 
-      {interpolated_t1[i] += nodal_position(l,i)*dpsifds(l,0);}
-    }
-   
-   // Return contact angle
-   return atan2(interpolated_t1[0],-interpolated_t1[1]);
-  }
- 
- /// \short Return the i-th velocity component at local node n 
- /// The use of the array U_index_interface allows the velocity
- /// components to be stored in any location at the node.
- double u(const unsigned &n, const unsigned &i)
-  {return node_pt(n)->value(U_index_interface[i]);}
   
+  /// The value of the Capillary number
+  const double& ca() const {return *Ca_pt;}
+  
+  /// Pointer to the Capillary number
+  double*& ca_pt() {return Ca_pt;}
+  
+  /// The value of the Strouhal number
+  const double &st() const {return *St_pt;}
+  
+  /// The pointer to the Strouhal number
+  double* &st_pt() {return St_pt;}
+ 
+ /// \short Return the i-th velocity component at local node j.
+ double u(const unsigned &j, const unsigned &i)
+  {return node_pt(j)->value(U_index_interface[i]);}
+ 
  /// \short Calculate the i-th velocity component at the local coordinate s.
  double interpolated_u(const Vector<double> &s, const unsigned &i); 
-
+ 
  /// Return the value of the external pressure
  double pext() const 
-  {
-   //If the external pressure has not been set, then return a 
-   //default value of zero.
-   if(Pext_data_pt==0) {return 0.0;}
-   //Otherwise return the appropriate value
-   else {return Pext_data_pt->value(0);}
-  }
-
+ {
+  //If the external pressure has not been set, then return a 
+  //default value of zero.
+  if(Pext_data_pt==0)
+   {
+    return 0.0;
+   }
+  //Otherwise return the appropriate value
+  else
+   {
+    return Pext_data_pt->value(Index_of_external_pressure_value);
+   }
+ }
+ 
  /// \short Set the Data that contains the single pressure value
  /// that specifies the "external pressure" for the 
  /// interface/free-surface. Setting this only makes sense
@@ -699,14 +699,61 @@ public:
  
    // Store pointer explicitly
    Pext_data_pt=external_pressure_data_pt;
+ 
    // Add the external pressure to the element's external Data?
    // But do not finite-difference with respect to it
    this->add_external_data(Pext_data_pt,false);
+
+   // The external pressure has just been promoted to become
+   // external Data of this element -- what is its number?
+   External_data_number_of_external_pressure=this->nexternal_data()-1;
+
+   // Index of pressure value in Data object 
+   Index_of_external_pressure_value=0;
+  }
+ 
+ /// \short Set the Data that contains the pressure value
+ /// that specifies the "external pressure" for the 
+ /// interface/free-surface. Setting this only makes sense
+ /// if the interface is, in fact, a free surface (well,
+ /// an interface to another inviscid fluid if you want to be picky). 
+ /// Second argument specifies the index of the pressure
+ /// value within the Data object.
+ void set_external_pressure_data(Data* external_pressure_data_pt,
+                                 const unsigned& 
+                                 index_of_external_pressure_value)
+  {
+   // Index of pressure value in Data object 
+   Index_of_external_pressure_value=index_of_external_pressure_value;
+
+#ifdef PARANOID
+   if (index_of_external_pressure_value>=external_pressure_data_pt->nvalue())
+    {
+     std::ostringstream error_message;
+     error_message
+      << "External pressure Data only contains " 
+      << external_pressure_data_pt->nvalue() <<  " values\n"
+      << "You have declared value " << index_of_external_pressure_value
+      << " to be the value representing the pressure\n" << std::endl;
+     throw OomphLibError(error_message.str(),
+                         "FluidInterfaceElement::set_external_pressure_data()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+ 
+   // Store pointer explicitly
+   Pext_data_pt=external_pressure_data_pt;
+ 
+   // Add the external pressure to the element's external Data?
+   // But do not finite-difference with respect to it
+   this->add_external_data(Pext_data_pt,false);
+
    // The external pressure has just been promoted to become
    // external Data of this element -- what is its number?
    External_data_number_of_external_pressure=this->nexternal_data()-1;
   }
  
+
  /// Create an edge element
  virtual FluidInterfaceEdgeElement* make_edge_element(const int &face_index)
   {
@@ -715,59 +762,61 @@ public:
                        OOMPH_EXCEPTION_LOCATION);
    return 0;
   }
-  
+
+
+ // hierher Check this again when contact angle elements 
+ // have been cleaned up
+
+ /// \short Hijack the kinematic condition at the nodes passed in the vector
+ /// This is required so that contact-angle conditions can be applied
+ /// by the FluidInterfaceEdgeElements.
+ virtual void hijack_kinematic_conditions(const Vector<unsigned> 
+                                          &bulk_node_number)=0;
+ 
 };
 
 
 
 //========================================================================
 /// Base class establishing common interfaces and functions for
-/// 1D Navier Stokes interface elements.
+/// 1D Navier Stokes interface elements (for use with 2D cartesian 
+/// Navier Stokes elements). This implements the kinematic and dynamic
+/// boundary conditions. 
 //========================================================================
 class LineFluidInterfaceElement : public FluidInterfaceElement
 {
   protected:
  
- /// \short Overload the helper function to calculate the residuals and 
- /// (if flag==true) the Jacobian -- this function only deals with
+ ///\short Implementation of the helper function to calculate the residuals 
+ /// and (if flag==1) the Jacobian associated with the kinematic and
+ /// dynamic boundary conditions -- this function only deals with
  /// the part of the Jacobian that can be handled generically. 
  /// Specific additional contributions may be provided in
- /// add_additional_residuals_contributions
+ /// add_additional_residuals_contributions(...), to be provided in
+ /// any derived class that implements the specific node update
+ /// strategy.
  void fill_in_generic_residual_contribution_interface(
   Vector<double> &residuals, 
   DenseMatrix<double> &jacobian, 
   unsigned flag);
  
- /// \short Helper function to calculate the additional contributions
- /// to the jacobian. This will be overloaded by elements that
- /// require contributions to their underlying equations from surface
- /// integrals. The only example at the moment are elements that
- /// use the equations of elasticity to handle the deformation of the
- /// bulk elements. The shape functions, normal, integral weight,
- /// and jacobian are passed so that they do not have to be recalculated.
- virtual void add_additional_residual_contributions(
-  Vector<double> &residuals, DenseMatrix<double> &jacobian,
-  const unsigned &flag,
-  const Shape &psif, const DShape &dpsifds,
-  const Vector<double> &interpolated_n, const double &W,
-  const double &J) {}
+
+  public:
+ 
+ /// Constructor
+ LineFluidInterfaceElement() : FluidInterfaceElement() {}
   
-public:
-
- /// Constructor, set the default values of the booleans and pointers (null)
- LineFluidInterfaceElement(): FluidInterfaceElement() {}
-
- /// Overload the output functions
- void output(std::ostream &outfile) {FiniteElement::output(outfile);}
-
- /// Output the element
- void output(std::ostream &outfile, const unsigned &n_plot);
-
- ///Overload the C-style output function
- void output(FILE* file_pt) {FiniteElement::output(file_pt);}
-
- ///C-style Output function: x,y,[z],u,v,[w],p in tecplot format
- void output(FILE* file_pt, const unsigned &n_plot);
+  /// Overload the output functions
+  void output(std::ostream &outfile) {FiniteElement::output(outfile);}
+  
+  /// Output the element
+  void output(std::ostream &outfile, const unsigned &n_plot);
+  
+  ///Overload the C-style output function
+  void output(FILE* file_pt) {FiniteElement::output(file_pt);}
+  
+  ///C-style Output function
+  void output(FILE* file_pt, const unsigned &n_plot);
   
 };
 
@@ -775,101 +824,117 @@ public:
 
 //========================================================================
 /// Base class establishing common interfaces and functions for
-/// Axisymmetric fluid interface elements.
+/// 1D Navier Stokes interface elements (for use with axisymmetric
+/// Navier Stokes elements). This implements the kinematic and dynamic
+/// boundary conditions. 
 //========================================================================
 class AxisymmetricFluidInterfaceElement : public FluidInterfaceElement
 {
   protected:
  
- /// \short Overload the helper function to calculate the residuals and 
- /// (if flag==true) the Jacobian -- this function only deals with
- /// part of the Jacobian.
+ ///\short Implementation of the helper function to calculate the residuals 
+ /// and (if flag==1) the Jacobian associated with the kinematic and
+ /// dynamic boundary conditions -- this function only deals with
+ /// the part of the Jacobian that can be handled generically. 
+ /// Specific additional contributions may be provided in
+ /// add_additional_residuals_contributions(...), to be provided in
+ /// any derived class that implements the specific node update
+ /// strategy.
  void fill_in_generic_residual_contribution_interface(
   Vector<double> &residuals, 
   DenseMatrix<double> &jacobian, 
   unsigned flag);
  
- /// \short Helper function to calculate the additional contributions
- /// to the jacobian. This will be overloaded by elements that
- /// require contributions to their underlying equations from surface
- /// integrals. The only example at the moment are elements that
- /// use the equations of elasticity to handle the deformation of the
- /// bulk elements. The shape functions, normal, integral weight,
- /// and jacobian are passed so that they do not have to be recalculated.
- virtual void add_additional_residual_contributions(
-  Vector<double> &residuals, DenseMatrix<double> &jacobian,
-  const unsigned &flag,
-  const Shape &psif, const DShape &dpsifds,
-  const Vector<double> &interpolated_n, 
-  const double &r, const double &W,
-  const double &J) {}
+/*  /// \short Helper function to calculate the additional contributions */
+/*  /// to the jacobian. This will be overloaded by elements that */
+/*  /// require contributions to their underlying equations from surface */
+/*  /// integrals. The only example at the moment are elements that */
+/*  /// use the equations of elasticity to handle the deformation of the */
+/*  /// bulk elements. The shape functions, normal, integral weight, */
+/*  /// and jacobian are passed so that they do not have to be recalculated. */
+/*  virtual void add_additional_residual_contributions( */
+/*   Vector<double> &residuals, DenseMatrix<double> &jacobian, */
+/*   const unsigned &flag, */
+/*   const Shape &psif, const DShape &dpsifds, */
+/*   const Vector<double> &interpolated_n,  */
+/*   const double &r, const double &W, */
+/*   const double &J) {} */
   
 public:
 
- /// Constructor, set the default values of the booleans and pointers (null)
+ /// Constructor
  AxisymmetricFluidInterfaceElement(): FluidInterfaceElement() {}
-
- /// Overload the output functions
- void output(std::ostream &outfile) {FiniteElement::output(outfile);}
- 
- /// Output the element
- void output(std::ostream &outfile, const unsigned &n_plot);
-
- ///Overload the C-style output function
- void output(FILE* file_pt) {FiniteElement::output(file_pt);}
-
- ///C-style Output function: x,y,[z],u,v,[w],p in tecplot format
- void output(FILE* file_pt, const unsigned &n_plot);
+  
+  /// Overload the output functions
+  void output(std::ostream &outfile) {FiniteElement::output(outfile);}
+  
+  /// Output the element
+  void output(std::ostream &outfile, const unsigned &n_plot);
+  
+  ///Overload the C-style output function
+  void output(FILE* file_pt) {FiniteElement::output(file_pt);}
+  
+  ///C-style Output function: r,z,u,v,w,p in tecplot format
+  // hierher check that this is true
+  void output(FILE* file_pt, const unsigned &n_plot);
   
 };
 
+
 //========================================================================
-/// Base class establishing common interfaces and functions for
-/// surface (two-dimensional) fluid interface elements.
+///  Base class establishing common interfaces and functions for
+/// 2D Navier Stokes interface elements (for use with 3D cartesian 
+/// Navier Stokes elements). This implements the kinematic and dynamic
+/// boundary conditions. 
 //========================================================================
 class SurfaceFluidInterfaceElement : public FluidInterfaceElement
 {
   protected:
  
- /// \short Overload the helper function to calculate the residuals and 
- /// (if flag==true) the Jacobian -- this function only deals with
- /// part of the Jacobian.
+ ///\short Implementation of the helper function to calculate the residuals 
+ /// and (if flag==1) the Jacobian associated with the kinematic and
+ /// dynamic boundary conditions -- this function only deals with
+ /// the part of the Jacobian that can be handled generically. 
+ /// Specific additional contributions may be provided in
+ /// add_additional_residuals_contributions(...), to be provided in
+ /// any derived class that implements the specific node update
+ /// strategy.
  void fill_in_generic_residual_contribution_interface(
   Vector<double> &residuals, 
   DenseMatrix<double> &jacobian, 
   unsigned flag);
  
- /// \short Helper function to calculate the additional contributions
- /// to the jacobian. This will be overloaded by elements that
- /// require contributions to their underlying equations from surface
- /// integrals. The only example at the moment are elements that
- /// use the equations of elasticity to handle the deformation of the
- /// bulk elements. The shape functions, normal, integral weight,
- /// and jacobian are passed so that they do not have to be recalculated.
- virtual void add_additional_residual_contributions(
-  Vector<double> &residuals, DenseMatrix<double> &jacobian,
-  const unsigned &flag,
-  const Shape &psif, 
-  const DShape &dpsifds, 
-  const Vector<double> &interpolated_n, 
-  const double &W) {}
+/*  /// \short Helper function to calculate the additional contributions */
+/*  /// to the jacobian. This will be overloaded by elements that */
+/*  /// require contributions to their underlying equations from surface */
+/*  /// integrals. The only example at the moment are elements that */
+/*  /// use the equations of elasticity to handle the deformation of the */
+/*  /// bulk elements. The shape functions, normal, integral weight, */
+/*  /// and jacobian are passed so that they do not have to be recalculated. */
+/*  virtual void add_additional_residual_contributions( */
+/*   Vector<double> &residuals, DenseMatrix<double> &jacobian, */
+/*   const unsigned &flag, */
+/*   const Shape &psif,  */
+/*   const DShape &dpsifds,  */
+/*   const Vector<double> &interpolated_n,  */
+/*   const double &W) {} */
   
 public:
 
- /// Constructor, set the default values of the booleans and pointers (null)
+ /// Constructor
  SurfaceFluidInterfaceElement(): FluidInterfaceElement() {}
- 
- /// Overload the output functions
- void output(std::ostream &outfile) {FiniteElement::output(outfile);}
- 
- /// Output the element
- void output(std::ostream &outfile, const unsigned &n_plot);
-
- ///Overload the C-style output function
- void output(FILE* file_pt) {FiniteElement::output(file_pt);}
-
- ///C-style Output function: x,y,[z],u,v,[w],p in tecplot format
- void output(FILE* file_pt, const unsigned &n_plot);
+  
+  /// Overload the output functions
+  void output(std::ostream &outfile) {FiniteElement::output(outfile);}
+  
+  /// Output the element
+  void output(std::ostream &outfile, const unsigned &n_plot);
+  
+  ///Overload the C-style output function
+  void output(FILE* file_pt) {FiniteElement::output(file_pt);}
+  
+  ///C-style Output function
+  void output(FILE* file_pt, const unsigned &n_plot);
   
 };
 

@@ -35,14 +35,10 @@
 #include "navier_stokes.h"
 #include "solid.h"
 #include "constitutive.h"
+#include "fluid_interface.h"
 
 // The mesh
 #include "meshes/triangle_mesh.h"
-
-// Elements that impose the volume constraint for discretisations in which
-// the fluid mesh is updated by pseudo-elasticity 
-// hierher shouldn't they be moved elsewhere?
-#include "fix_vol_int_elastic_elements.h"
 
 using namespace std;
 using namespace oomph;
@@ -62,12 +58,12 @@ namespace oomph
   double Re=0.0;
 
   /// Capillary number
-  double Ca = 10.0;
+  double Ca = 1.0; 
 
   /// Pseudo-solid Poisson ratio
   double Nu=0.3;
 
-  /// Initial radius of bubble
+  /// Initial radius of drop
   double Radius = 0.25;
 
   /// Volume of the interface
@@ -96,11 +92,11 @@ namespace oomph
  
 
 //==============================================================
-/// Overload TaylorHood element to modify output
+/// Overload CrouzeixRaviart element to modify output
 //==============================================================
- class MyTaylorHoodElement : 
-  public virtual PseudoSolidNodeUpdateElement<TTaylorHoodElement<2>, 
-  TPVDElement<2,3> >
+ class MyCrouzeixRaviartElement : 
+  public virtual PseudoSolidNodeUpdateElement<TCrouzeixRaviartElement<2>, 
+  TPVDBubbleEnrichedElement<2,3> >
  {
   
  private:
@@ -111,7 +107,7 @@ namespace oomph
  public:
 
   /// Constructor initialise error
-  MyTaylorHoodElement()
+  MyCrouzeixRaviartElement()
    {
     Error=0.0;
    }
@@ -369,7 +365,7 @@ namespace oomph
 /// wrapped element
 //=======================================================================
  template<>
- class FaceGeometry<MyTaylorHoodElement>
+ class FaceGeometry<MyCrouzeixRaviartElement>
   : public virtual SolidTElement<1,3> 
  {
  public:
@@ -383,7 +379,7 @@ namespace oomph
 /// wrapped element
 //=======================================================================
  template<>
- class FaceGeometry<FaceGeometry<MyTaylorHoodElement> >
+ class FaceGeometry<FaceGeometry<MyCrouzeixRaviartElement> >
   : public virtual SolidPointElement 
  {
  public:
@@ -402,19 +398,19 @@ namespace oomph
 
 
 //==start_of_problem_class============================================
-/// Problem class to simulate inviscid bubble propagating along 2D channel
+/// Problem class to simulate inviscid drop propagating along 2D channel
 //====================================================================
 template<class ELEMENT>
-class BubbleInChannelProblem : public Problem
+class DropInChannelProblem : public Problem
 {
 
 public:
 
  /// Constructor
- BubbleInChannelProblem();
+ DropInChannelProblem();
  
  /// Destructor
- ~BubbleInChannelProblem()
+ ~DropInChannelProblem()
   {
    // Fluid timestepper
    delete this->time_stepper_pt(0);
@@ -427,21 +423,23 @@ public:
     }
    delete Outer_boundary_polyline_pt;
 
-   //Kill data associated with bubbles
-   unsigned n_bubble = Bubble_polygon_pt.size();
-   for(unsigned ibubble=0;ibubble<n_bubble;ibubble++)
+   //Kill data associated with drops
+   unsigned n_drop = Drop_polygon_pt.size();
+   for(unsigned idrop=0;idrop<n_drop;idrop++)
     {
-     unsigned n=Bubble_polygon_pt[ibubble]->npolyline();
+     unsigned n=Drop_polygon_pt[idrop]->npolyline();
      for (unsigned j=0;j<n;j++)
       {
-       delete Bubble_polygon_pt[ibubble]->polyline_pt(j);
+       delete Drop_polygon_pt[idrop]->polyline_pt(j);
       }
-     delete Bubble_polygon_pt[ibubble];
+     delete Drop_polygon_pt[idrop];
     }
    
    // Flush element of free surface elements
    delete_free_surface_elements();
    delete Free_surface_mesh_pt;
+   delete_volume_constraint_elements();
+   delete Volume_constraint_mesh_pt;
 
    // Delete error estimator
    delete Fluid_mesh_pt->spatial_error_estimator_pt();
@@ -449,11 +447,8 @@ public:
    // Delete fluid mesh
    delete Fluid_mesh_pt;
 
-   // Delete the volume constraint mesh
-   delete Volume_constraint_mesh_pt;
-
-   // Delete the global pressure bubble data
-   delete Bubble_pressure_data_pt;
+   // Delete the global pressure drop data
+   delete Drop_pressure_data_pt;
 
    // Kill const eqn
    delete Problem_Parameter::Constitutive_law_pt;
@@ -466,7 +461,8 @@ public:
   {
    // Kill the  elements and wipe surface mesh
    delete_free_surface_elements();
-   
+   delete_volume_constraint_elements();
+
    // Rebuild the Problem's global mesh from its various sub-meshes
    this->rebuild_global_mesh();
   
@@ -477,8 +473,9 @@ public:
  void actions_after_adapt()
   {
    // Create the elements that impose the displacement constraint 
+   create_volume_constraint_elements();
    create_free_surface_elements();
-   
+
    // Rebuild the Problem's global mesh from its various sub-meshes
    this->rebuild_global_mesh();
    
@@ -503,29 +500,29 @@ public:
  /// \short Set boundary conditions and complete the build of all elements
  void complete_problem_setup()
   {      
-   // Map to record if a given boundary is on a bubble or not
-   map<unsigned,bool> is_on_bubble_bound;
+   // Map to record if a given boundary is on a drop or not
+   map<unsigned,bool> is_on_drop_bound;
    
-   // Loop over the bubbles 
-   unsigned nbubble=Bubble_polygon_pt.size();
-   for(unsigned ibubble=0;ibubble<nbubble;ibubble++)
+   // Loop over the drops 
+   unsigned ndrop=Drop_polygon_pt.size();
+   for(unsigned idrop=0;idrop<ndrop;idrop++)
     {
      // Get the vector all boundary IDs associated with the polylines that
      // make up the closed polygon
-     Vector<unsigned> bubble_bound_id=this->Bubble_polygon_pt[ibubble]->
+     Vector<unsigned> drop_bound_id=this->Drop_polygon_pt[idrop]->
       polygon_boundary_id();
      
      // Get the number of boundary
-     unsigned nbound=bubble_bound_id.size();
+     unsigned nbound=drop_bound_id.size();
      
      // Fill in the map
      for(unsigned ibound=0;ibound<nbound;ibound++)
       {
        // This boundary...
-       unsigned bound_id=bubble_bound_id[ibound];
+       unsigned bound_id=drop_bound_id[ibound];
        
-       // ...is on the bubble
-       is_on_bubble_bound[bound_id]=true;
+       // ...is on the drop
+       is_on_drop_bound[bound_id]=true;
       }
     }
    
@@ -551,10 +548,10 @@ public:
        //If it's the outflow pin only the vertical velocity
        if(ibound==2) {nod_pt->pin(1);}
        
-       // Pin pseudo-solid positions apart from bubble boundary which
+       // Pin pseudo-solid positions apart from drop boundary which
        // we allow to move
        SolidNode* solid_node_pt = dynamic_cast<SolidNode*>(nod_pt);
-       if(is_on_bubble_bound[ibound])
+       if(is_on_drop_bound[ibound])
         {
          solid_node_pt->unpin_position(0);
          solid_node_pt->unpin_position(1);
@@ -630,6 +627,14 @@ public:
       }
     }
 
+   // Set the inlet velocity
+   set_inlet_velocity();
+  }
+     
+
+ ///Set the inlet velocity
+ void set_inlet_velocity()
+  {
    // Re-assign prescribed inflow velocity at inlet
    unsigned num_nod=this->Fluid_mesh_pt->nboundary_node(Inflow_boundary_id);
    for (unsigned inod=0;inod<num_nod;inod++)
@@ -643,14 +648,55 @@ public:
      nod_pt->set_value(0,Problem_Parameter::Inflow_veloc_magnitude*y*(1-y));
     }
   }
-     
+
  /// Doc the solution
  void doc_solution(const std::string& comment="");
  
  /// Compute the error estimates and assign to elements for plotting
  void compute_error_estimate(double& max_err,
                              double& min_err);
- 
+
+
+ /// Change the boundary conditions to remove the volume constraint
+ void remove_volume_constraint()
+  {
+   // Ignore all volume constraint stuff from here onwwards
+   Use_volume_constraint=false;
+
+   //Unhijack the data in the internal element
+   Hijacked_element_pt->unhijack_all_data();
+
+   //Delete the volume constraint elements
+   delete_volume_constraint_elements();
+
+   // Internal pressure is gone -- null it out
+   Drop_pressure_data_pt=0;
+
+   // Kill the mesh too
+   delete Volume_constraint_mesh_pt;
+   Volume_constraint_mesh_pt=0;
+
+   // Delete free surface elements and rebuild from scratch
+   delete_free_surface_elements();
+   create_free_surface_elements();
+
+   //Remove the sub meshes
+   this->flush_sub_meshes();
+
+    // Add Fluid_mesh_pt sub meshes
+   this->add_sub_mesh(Fluid_mesh_pt);
+
+    // Add Free_surface sub meshes
+   this->add_sub_mesh(this->Free_surface_mesh_pt);
+
+   //Rebuild the global mesh
+   this->rebuild_global_mesh();
+   
+   //Renumber the equations
+   std::cout << "Removed volume constraint to obtain "
+             << this->assign_eqn_numbers() << " new equation numbers\n";
+  }
+
 private:
  
 
@@ -669,30 +715,76 @@ private:
      // Kill surface element
      delete Free_surface_mesh_pt->element_pt(e);
     }
-   
+  
+
    // Wipe the mesh
    Free_surface_mesh_pt->flush_element_and_node_storage();
    
+
   } // end of delete_free_surface_elements
  
 
+/// Create elements that impose volume constraint on the drop
+ void create_volume_constraint_elements();
+
+ /// \short Delete volume constraint elements
+ void delete_volume_constraint_elements()
+  {
+   if (Volume_constraint_mesh_pt==0) return;
+
+   // Backup 
+   if (Vol_constraint_el_pt!=0)
+    {
+     Initial_value_for_drop_pressure=Vol_constraint_el_pt->p_traded();
+    }
+
+   // How many surface elements are in the surface mesh
+   unsigned n_element = Volume_constraint_mesh_pt->nelement();
+   
+   // Loop over all
+   unsigned first_el_to_be_killed=0;
+   for(unsigned e=first_el_to_be_killed;e<n_element;e++) 
+    {
+     delete Volume_constraint_mesh_pt->element_pt(e);
+    }
+
+   // We've just killed the volume constraint element
+   Vol_constraint_el_pt=0;
+   
+   // Wipe the mesh
+   Volume_constraint_mesh_pt->flush_element_and_node_storage();
+   
+  } // end of delete_volume_constraint_elements
+ 
  /// Pointers to mesh of free surface elements
  Mesh* Free_surface_mesh_pt;
  
- /// Pointer to mesh containing single element that imposes volume constraint
+ /// Pointer to mesh containing elements that impose volume constraint
  Mesh* Volume_constraint_mesh_pt;
 
  /// Pointer to Fluid_mesh
  RefineableSolidTriangleMesh<ELEMENT>* Fluid_mesh_pt;
  
- /// Vector storing pointer to the bubble polygons
- Vector<TriangleMeshInternalPolygon*> Bubble_polygon_pt;
+ /// Vector storing pointer to the drop polygons
+ Vector<TriangleMeshInternalPolygon*> Drop_polygon_pt;
 
  /// Triangle mesh polygon for outer boundary 
  TriangleMeshPolygon* Outer_boundary_polyline_pt; 
+
+ /// Pointer to a global drop pressure datum
+ Data* Drop_pressure_data_pt;
+
+ /// Pointer to element that imposes volume constraint for drop
+ VolumeConstraintElement* Vol_constraint_el_pt;
+
+ /// Backed up drop pressure between adaptations
+ double Initial_value_for_drop_pressure;
+
+ /// Pointer to hijacked element
+ ELEMENT* Hijacked_element_pt;
  
- /// Pointer to a global bubble pressure datum
- Data* Bubble_pressure_data_pt;
+ /// Bool to indicate if volume constraint is applied (only for steady run)
+ bool Use_volume_constraint;
 
  /// Enumeration of channel boundaries
  enum 
@@ -711,7 +803,7 @@ private:
 /// Constructor
 //========================================================================
 template<class ELEMENT>
-BubbleInChannelProblem<ELEMENT>::BubbleInChannelProblem()
+DropInChannelProblem<ELEMENT>::DropInChannelProblem()
 { 
  // Output directory
  Problem_Parameter::Doc_info.set_directory("RESLT");
@@ -721,15 +813,7 @@ BubbleInChannelProblem<ELEMENT>::BubbleInChannelProblem()
  // previous timsteps. 
  this->add_time_stepper_pt(new BDF<2>);
 
-  // Create bubble pressure as global Data
- Bubble_pressure_data_pt =  new Data(1);
- this->add_global_data(Bubble_pressure_data_pt);
- 
- //Provide a reasonable initial guess (hydrostatics)
- Bubble_pressure_data_pt->set_value(0,
-                                    Problem_Parameter::Ca/
-                                    Problem_Parameter::Radius);
- 
+
 
  // Build the boundary segments for outer boundary, consisting of
  //--------------------------------------------------------------
@@ -789,85 +873,85 @@ BubbleInChannelProblem<ELEMENT>::BubbleInChannelProblem()
  Outer_boundary_polyline_pt = new TriangleMeshPolygon(boundary_polyline_pt);
  
 
- // Now define initial shape of bubble(s) with polygon
+ // Now define initial shape of drop(s) with polygon
  //---------------------------------------------------
 
  // Counter for number of boundaries (bit over the top but future
- // proof for multiple bubbles...)
+ // proof for multiple drops...)
  unsigned boundary_id=Bottom_wall_boundary_id+1;
 
- // We have one bubble
- Bubble_polygon_pt.resize(1);
+ // We have one drop
+ Drop_polygon_pt.resize(1);
 
  // Place it smack in the middle of the channel
  double x_center = 0.5*Problem_Parameter::Length;
  double y_center = 0.5;
- Ellipse * bubble_pt = new Ellipse(Problem_Parameter::Radius,
+ Ellipse * drop_pt = new Ellipse(Problem_Parameter::Radius,
                                        Problem_Parameter::Radius);
  
- // Intrinsic coordinate along GeomObject defining the bubble
+ // Intrinsic coordinate along GeomObject defining the drop
  Vector<double> zeta(1);
  
- // Position vector to GeomObject defining the bubble
+ // Position vector to GeomObject defining the drop
  Vector<double> coord(2);
  
- // Number of points defining bubble
+ // Number of points defining drop
  unsigned npoints = 16; 
  double unit_zeta = MathematicalConstants::Pi/double(npoints-1);
  
- // This bubble is bounded by two distinct boundaries, each
+ // This drop is bounded by two distinct boundaries, each
  // represented by its own polyline
- Vector<TriangleMeshPolyLine*> bubble_polyline_pt(2);
+ Vector<TriangleMeshPolyLine*> drop_polyline_pt(2);
  
  // Vertex coordinates
- Vector<Vector<double> > bubble_vertex(npoints);
+ Vector<Vector<double> > drop_vertex(npoints);
  
  // Create points on boundary
  for(unsigned ipoint=0; ipoint<npoints;ipoint++)
   {
    // Resize the vector 
-   bubble_vertex[ipoint].resize(2);
+   drop_vertex[ipoint].resize(2);
    
    // Get the coordinates
    zeta[0]=unit_zeta*double(ipoint);
-   bubble_pt->position(zeta,coord);
+   drop_pt->position(zeta,coord);
 
    // Shift
-   bubble_vertex[ipoint][0]=coord[0]+x_center;
-   bubble_vertex[ipoint][1]=coord[1]+y_center;
+   drop_vertex[ipoint][0]=coord[0]+x_center;
+   drop_vertex[ipoint][1]=coord[1]+y_center;
   }
  
- // Build the 1st bubble polyline
- bubble_polyline_pt[0] = new TriangleMeshPolyLine(bubble_vertex,boundary_id++);
+ // Build the 1st drop polyline
+ drop_polyline_pt[0] = new TriangleMeshPolyLine(drop_vertex,boundary_id++);
 
- // Second boundary of bubble
+ // Second boundary of drop
  for(unsigned ipoint=0; ipoint<npoints;ipoint++)
   {
    // Resize the vector 
-   bubble_vertex[ipoint].resize(2);
+   drop_vertex[ipoint].resize(2);
    
    // Get the coordinates
    zeta[0]=(unit_zeta*double(ipoint))+MathematicalConstants::Pi;
-   bubble_pt->position(zeta,coord);
+   drop_pt->position(zeta,coord);
 
    // Shift
-   bubble_vertex[ipoint][0]=coord[0]+x_center;
-   bubble_vertex[ipoint][1]=coord[1]+y_center;
+   drop_vertex[ipoint][0]=coord[0]+x_center;
+   drop_vertex[ipoint][1]=coord[1]+y_center;
   }
 
- // Build the 2nd bubble polyline
- bubble_polyline_pt[1] = new TriangleMeshPolyLine(bubble_vertex,boundary_id++);
+ // Build the 2nd drop polyline
+ drop_polyline_pt[1] = new TriangleMeshPolyLine(drop_vertex,boundary_id++);
 
 
- // Define coordinates of a point inside the bubble
- Vector<double> bubble_center(2);
- bubble_center[0]=x_center;
- bubble_center[1]=y_center;
+ // Define coordinates of a point inside the drop
+ Vector<double> drop_center(2);
+ drop_center[0]=x_center;
+ drop_center[1]=y_center;
  
  
  // Create closed polygon from two polylines
- Bubble_polygon_pt[0] = new TriangleMeshInternalPolygon(
-  bubble_center,bubble_polyline_pt);
+ Drop_polygon_pt[0] = new TriangleMeshInternalPolygon(
+  drop_center,drop_polyline_pt);
  
 
  // Now build the mesh, based on the boundaries specified by
@@ -877,20 +961,28 @@ BubbleInChannelProblem<ELEMENT>::BubbleInChannelProblem()
 
  // Convert to "closed curve" objects
  TriangleMeshClosedCurve* outer_closed_curve_pt=Outer_boundary_polyline_pt;
- unsigned nb=Bubble_polygon_pt.size();
- Vector<TriangleMeshInternalClosedCurve*> bubble_closed_curve_pt(nb);
+ unsigned nb=Drop_polygon_pt.size();
+ Vector<TriangleMeshInternalClosedCurve*> drop_closed_curve_pt(nb);
  for (unsigned i=0;i<nb;i++)
   {
-   bubble_closed_curve_pt[i]=Bubble_polygon_pt[i];
+   drop_closed_curve_pt[i]=Drop_polygon_pt[i];
   }
+
+
+ //Create a set to indicate that the hole should be filled
+ // hierher: Andrew stick this information into internal boundary information
+ std::set<unsigned> fill_index;
+ fill_index.insert(0);
+
 
  // Target area for initial mesh
  double uniform_element_area=0.2;
  Fluid_mesh_pt = 
   new RefineableSolidTriangleMesh<ELEMENT>(outer_closed_curve_pt, 
-                                           bubble_closed_curve_pt,
+                                           drop_closed_curve_pt,
                                            uniform_element_area,
-                                           this->time_stepper_pt());
+                                           this->time_stepper_pt(),
+                                           fill_index);
  
  // Set error estimator for bulk mesh
  Z2ErrorEstimator* error_estimator_pt=new Z2ErrorEstimator;
@@ -903,7 +995,7 @@ BubbleInChannelProblem<ELEMENT>::BubbleInChannelProblem()
  Fluid_mesh_pt->min_element_size()=0.001; 
 
  // Use coarser mesh during validation
- if (CommandLineArgs::command_line_flag_has_been_set("--validation"))
+ // hierherif (CommandLineArgs::command_line_flag_has_been_set("--validation"))
   {
    Fluid_mesh_pt->min_element_size()=0.01; 
   }
@@ -915,40 +1007,34 @@ BubbleInChannelProblem<ELEMENT>::BubbleInChannelProblem()
  this->Fluid_mesh_pt->output_boundaries("boundaries.dat");
  this->Fluid_mesh_pt->output("mesh.dat");
  
+ // Provide initial value for drop pressure
+ Initial_value_for_drop_pressure=Problem_Parameter::Ca/
+  Problem_Parameter::Radius;
+
  // Set boundary condition and complete the build of all elements
  complete_problem_setup();
  
+ // Construct the mesh of elements that impose the volume constraint
+ Use_volume_constraint=true;
+ Volume_constraint_mesh_pt = new Mesh;
+ create_volume_constraint_elements();
+
  // Construct the mesh of free surface elements
  Free_surface_mesh_pt=new Mesh;
  create_free_surface_elements();
 
- //Create volume constraint element and store in its own mesh
- Volume_constraint_mesh_pt = new Mesh;
- Volume_constraint_mesh_pt->add_element_pt(new ElasticVolumeConstraintElement);
-
- // Specify constrained pressure hierher
- dynamic_cast<ElasticVolumeConstraintElement*>(
-  Volume_constraint_mesh_pt->element_pt(0))
-  ->set_traded_pressure_data(this->global_data_pt(0));
-
- // Specify target volume for bubble
- dynamic_cast<ElasticVolumeConstraintElement*>(
-  Volume_constraint_mesh_pt->element_pt(0))
-  ->volume_pt() = &Problem_Parameter::Volume;
-
-
  // Combine meshes
  //---------------
  
+ // Add volume constraint sub mesh
+ this->add_sub_mesh(this->Volume_constraint_mesh_pt);
+
  // Add Fluid_mesh_pt sub meshes
  this->add_sub_mesh(Fluid_mesh_pt);
 
  // Add Free_surface sub meshes
  this->add_sub_mesh(this->Free_surface_mesh_pt);
  
- // Add volume constraint sub mesh
- this->add_sub_mesh(this->Volume_constraint_mesh_pt);
-
  // Build global mesh
  this->build_global_mesh();
   
@@ -959,33 +1045,35 @@ BubbleInChannelProblem<ELEMENT>::BubbleInChannelProblem()
 
 
 //============start_of_create_free_surface_elements===============
-/// Create elements that impose the prescribed boundary displacement
+/// Create elements that impose the kinematic and dynamic bcs
 /// for the pseudo-solid fluid mesh
 //=======================================================================
 template<class ELEMENT>
-void BubbleInChannelProblem<ELEMENT>::create_free_surface_elements()
+void DropInChannelProblem<ELEMENT>::create_free_surface_elements()
 { 
+
  //Loop over the free surface boundaries
  unsigned nb=Fluid_mesh_pt->nboundary();
  for(unsigned b=Bottom_wall_boundary_id+1;b<nb;b++)
   {
-   // How many bulk fluid elements are adjacent to boundary b?
-   unsigned n_element = Fluid_mesh_pt->nboundary_element(b);
+   // hierher Note: region is important
+   // How many bulk fluid elements are adjacent to boundary b in region 0?
+   unsigned n_element = Fluid_mesh_pt->nboundary_element_in_region(b,0);
    
    // Loop over the bulk fluid elements adjacent to boundary b?
    for(unsigned e=0;e<n_element;e++)
     {
      // Get pointer to the bulk fluid element that is 
-     // adjacent to boundary b
+     // adjacent to boundary b in region 0
      ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
-      Fluid_mesh_pt->boundary_element_pt(b,e));
+      Fluid_mesh_pt->boundary_element_pt_in_region(b,0,e));
      
-     //Find the index of the face of element e along boundary b
-     int face_index = Fluid_mesh_pt->face_index_at_boundary(b,e);
+     //Find the index of the face of element e along boundary b in region 0
+     int face_index = Fluid_mesh_pt->face_index_at_boundary_in_region(b,0,e);
      
      // Create new element
-     FixedVolumeElasticLineFluidInterfaceElement<ELEMENT>* el_pt =
-      new FixedVolumeElasticLineFluidInterfaceElement<ELEMENT>(
+     ElasticLineFluidInterfaceElement<ELEMENT>* el_pt =
+      new ElasticLineFluidInterfaceElement<ELEMENT>(
        bulk_elem_pt,face_index);   
      
      // Add it to the mesh
@@ -996,29 +1084,92 @@ void BubbleInChannelProblem<ELEMENT>::create_free_surface_elements()
      
      //Specify the capillary number
      el_pt->ca_pt() = &Problem_Parameter::Ca;
-
-     //Specify the external pressure hierher ???
-     el_pt->set_external_pressure_data(this->global_data_pt(0));
-
-     //Set the traded pressure
-     el_pt->set_traded_pressure_data(this->global_data_pt(0));
-
-    } 
+    }
   }
 }
 // end of create_free_surface_elements
+
+
+
+
+
+//============start_of_create_volume_constraint_elements=================
+/// Create elements that impose volume constraint on the drop
+//=======================================================================
+template<class ELEMENT>
+void DropInChannelProblem<ELEMENT>::create_volume_constraint_elements()
+{ 
+
+ // Do we need it?
+ if (!Use_volume_constraint) return;
+
+ // Store pointer to element whose pressure we're trading/hi-jacking:
+ // Element 0 in region 1
+ Hijacked_element_pt= dynamic_cast<ELEMENT*>(
+  Fluid_mesh_pt->region_element_pt(1,0));
+
+ // Set the global pressure data by hijacking one of the pressure values
+ // from inside the droplet
+ unsigned index_of_traded_pressure=0;
+ Drop_pressure_data_pt=Hijacked_element_pt->
+  hijack_internal_value(0,index_of_traded_pressure);
+ 
+ // Build volume constraint element -- pass traded pressure to it
+ Vol_constraint_el_pt= 
+  new VolumeConstraintElement(&Problem_Parameter::Volume,
+                              Drop_pressure_data_pt,
+                              index_of_traded_pressure);
+
+  //Provide a reasonable initial guess for drop pressure (hydrostatics):
+ Drop_pressure_data_pt->set_value(index_of_traded_pressure,
+                                    Initial_value_for_drop_pressure);
+
+ // Add volume constraint element to the mesh
+ Volume_constraint_mesh_pt->add_element_pt(Vol_constraint_el_pt);
+ 
+ //Loop over the free surface boundaries
+ unsigned nb=Fluid_mesh_pt->nboundary();
+ for(unsigned b=Bottom_wall_boundary_id+1;b<nb;b++)
+  {
+   // hierher Note region is important
+   // How many bulk fluid elements are adjacent to boundary b in region 0?
+   unsigned n_element = Fluid_mesh_pt->nboundary_element_in_region(b,0);
+   
+   // Loop over the bulk fluid elements adjacent to boundary b?
+   for(unsigned e=0;e<n_element;e++)
+    {
+     // Get pointer to the bulk fluid element that is 
+     // adjacent to boundary b in region 0?
+     // hierher move _pt to end
+     ELEMENT* bulk_elem_pt = dynamic_cast<ELEMENT*>(
+      Fluid_mesh_pt->boundary_element_pt_in_region(b,0,e));
+     
+     //Find the index of the face of element e along boundary b in region 0
+     int face_index = Fluid_mesh_pt->face_index_at_boundary_in_region(b,0,e);
+     
+     // Create new element
+     LineVolumeConstraintBoundingSolidElement<ELEMENT>* el_pt =
+      new LineVolumeConstraintBoundingSolidElement<ELEMENT>(
+       bulk_elem_pt,face_index,Vol_constraint_el_pt);   
+     
+     // Add it to the mesh
+     Volume_constraint_mesh_pt->add_element_pt(el_pt);     
+    } 
+  }
+}
+// end of create_volume_constraint_elements
 
 
 //==start_of_doc_solution=================================================
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void BubbleInChannelProblem<ELEMENT>::doc_solution(const std::string& comment)
+void DropInChannelProblem<ELEMENT>::doc_solution(const std::string& comment)
 { 
 
  oomph_info << "Docing step: " << Problem_Parameter::Doc_info.number()
             << std::endl;
-
+ 
  ofstream some_file;
  char filename[100];
  sprintf(filename,"%s/soln%i.dat",
@@ -1081,7 +1232,7 @@ void BubbleInChannelProblem<ELEMENT>::doc_solution(const std::string& comment)
 /// Compute error estimates and assign to elements for plotting
 //========================================================================
 template<class ELEMENT>
-void BubbleInChannelProblem<ELEMENT>::compute_error_estimate(double& max_err,
+void DropInChannelProblem<ELEMENT>::compute_error_estimate(double& max_err,
                                                              double& min_err)
 { 
  // Get error estimator
@@ -1104,7 +1255,7 @@ void BubbleInChannelProblem<ELEMENT>::compute_error_estimate(double& max_err,
  min_err=DBL_MAX;
  for (unsigned e=0;e<nel;e++)
   {
-   dynamic_cast<MyTaylorHoodElement*>(Fluid_mesh_pt->element_pt(e))->
+   dynamic_cast<MyCrouzeixRaviartElement*>(Fluid_mesh_pt->element_pt(e))->
     set_error(elemental_error[e]);
 
    max_err=std::max(max_err,elemental_error[e]);
@@ -1149,40 +1300,40 @@ int main(int argc, char **argv)
  
 
  // Create problem in initial configuration
- BubbleInChannelProblem<ProjectableTaylorHoodElement<MyTaylorHoodElement> > 
-  problem;  
+ DropInChannelProblem<Hijacked<ProjectableCrouzeixRaviartElement<
+ MyCrouzeixRaviartElement> > > problem;  
 
-
- // Output the problem's state with the bubble in its
- // initial polygonal representation
- problem.doc_solution();
- 
  // Before starting the time-integration we want to "inflate" it to form 
- // a proper circular bubble. We do this by setting the inflow to zero
+ // a proper circular drop. We do this by setting the inflow to zero
  // and doing a steady solve (with one adaptation)
  Problem_Parameter::Inflow_veloc_magnitude=0.0;
- problem.steady_newton_solve(1);
+ problem.set_inlet_velocity();
+ problem.steady_newton_solve(1); 
 
- // If all went well, this should show us a nice circular bubble
+ // If all went well, this should show us a nice circular drop 
  // in a stationary fluid
  problem.doc_solution();
 
-  // Initialise timestepper
+ // Switch off volume constraint
+ problem.remove_volume_constraint();
+
+ // Initialise timestepper
  double dt=0.025;
  problem.initialise_dt(dt);
  
  // Perform impulsive start from current state
  problem.assign_initial_values_impulsive();
 
- // Now switch on the inflow and re-assign the boundary conditions
- // (Call to complete_problem_setup() is a bit expensive given that we
- // we only want to set the inflow velocity but who cares -- it's just
- // a one off.
+ // Output initial conditions // hierher kill this is only in there
+ // for constitency with old validata
+ problem.doc_solution();
+
+ // Now switch on the inflow
  Problem_Parameter::Inflow_veloc_magnitude=1.0;
- problem.complete_problem_setup();
+ problem.set_inlet_velocity();
  
- // Solve problem on fixed mesh
- unsigned nstep=2;
+ // Solve problem once on fixed mesh
+ unsigned nstep=1;
  for (unsigned i=0;i<nstep;i++)
   {
    // Solve the problem
@@ -1190,6 +1341,9 @@ int main(int argc, char **argv)
    problem.doc_solution();
   }
 
+
+ // Now do a couple of steps before remeshing
+ nstep=2;
  // Now do a proper loop, doing nstep timesteps before adapting/remeshing
  // and repeating the lot ncycle times
  unsigned ncycle=1000;

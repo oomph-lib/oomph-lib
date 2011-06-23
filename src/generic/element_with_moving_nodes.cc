@@ -266,7 +266,7 @@ namespace oomph
  //==================================================================
  /// Calculate the node-update--related entries in the
  /// Jacobian. The vector passed
- /// in residuals has to contain the nonlinear reasiduals
+ /// in residuals has to contain the nonlinear residuals,
  /// evaluated for the current values of the unknowns, in
  /// case FDing is used to computed the derivatives.
  //==================================================================

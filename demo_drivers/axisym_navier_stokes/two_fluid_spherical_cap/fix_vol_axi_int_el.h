@@ -92,6 +92,12 @@ class SpineAxisymmetricVolumeConstraintPointElement :
  SpineAxisymmetricVolumeConstraintPointElement() : 
   SpinePointFluidInterfaceEdgeElement<ELEMENT>()
   {
+
+
+   oomph_info << "hierher: Replace/move to "
+              << "src/fluid_interface/constrained_volume_elements.h \n";
+
+
    // Initialise pointer to prescribed volume of fluid
    Volume_pt=0;
    // Initialise pointer to "traded" pressure Data.
@@ -200,9 +206,13 @@ public SpineAxisymmetricFluidInterfaceElement<ELEMENT>
   Vector<double> &residuals, DenseMatrix<double> &jacobian,
   const unsigned &flag,
   const Shape &psif, const DShape &dpsifds,
-  const Vector<double> &interpolated_n, const double &r,
+  const Vector<double> &interpolated_x, 
+  const Vector<double> &interpolated_n, 
   const double &W, const double &J)
   {
+   double r=interpolated_x[0]; 
+
+
    //Add in the volume constraint term if required -- HACKY!
    //The volume of the fluid is found by integrating x.n around the boundary
    int local_eqn= ptraded_local_eqn(); 
@@ -241,6 +251,12 @@ public:
   SpineAxisymmetricFluidInterfaceElement<ELEMENT>
   (element_pt,face_index)
   {
+
+
+   oomph_info << "hierher: Replace/move to "
+              << "src/fluid_interface/constrained_volume_elements.h \n";
+
+
    // Initialise pointer to pressure data that has been traded
    // for volume constraint
    Ptraded_data_pt=0;

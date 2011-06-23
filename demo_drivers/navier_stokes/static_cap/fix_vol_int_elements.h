@@ -92,6 +92,12 @@ class SpineVolumeConstraintPointElement :
  SpineVolumeConstraintPointElement() : 
   SpinePointFluidInterfaceEdgeElement<ELEMENT>()
   {
+
+
+   oomph_info << "hierher: Replace/move to "
+              << "src/fluid_interface/constrained_volume_elements.h \n";
+
+
    // Initialise pointer to prescribed volume of fluid
    Volume_pt=0;
    // Initialise pointer to "traded" pressure Data.
@@ -195,11 +201,21 @@ public SpineLineFluidInterfaceElement<ELEMENT>
  /// jacobian entries. This particular function ensures that the
  /// additional entries are calculated inside the integration loop
  void add_additional_residual_contributions(
-  Vector<double> &residuals, DenseMatrix<double> &jacobian,
+  Vector<double> &residuals, 
+  DenseMatrix<double> &jacobian,
   const unsigned &flag,
-  const Shape &psif, const DShape &dpsifds,
-  const Vector<double> &interpolated_n, const double &W,
+  const Shape &psif,
+  const DShape &dpsifds,
+  const Vector<double> &interpolated_x, 
+  const Vector<double> &interpolated_n, 
+  const double &W, 
   const double &J)
+ // hierher
+/*   Vector<double> &residuals, DenseMatrix<double> &jacobian, */
+/*   const unsigned &flag, */
+/*   const Shape &psif, const DShape &dpsifds, */
+/*   const Vector<double> &interpolated_n, const double &W, */
+/*   const double &J) */
   {
    //Add in the volume constraint term if required -- HACKY!
    //The volume of the fluid is found by integrating x.n around the boundary
@@ -238,6 +254,12 @@ public:
   SpineLineFluidInterfaceElement<ELEMENT>
   (element_pt,face_index)
   {
+
+
+   oomph_info << "hierher: Replace/move to "
+              << "src/fluid_interface/constrained_volume_elements.h \n";
+
+
    // Initialise pointer to pressure data that has been traded
    // for volume constraint
    Ptraded_data_pt=0;

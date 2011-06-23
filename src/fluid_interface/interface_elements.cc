@@ -25,12 +25,15 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-//Non-inline functions for one-dimensional free surface elements
+//Non-inline functions for fluid free surface elements
 
 //OOMPH-LIB headers
 #include "interface_elements.h"
 #include "../generic/integral.h"
 
+
+//##########################################################
+// hierher tidy up
 
 namespace oomph
 {
@@ -364,6 +367,10 @@ namespace oomph
    }
  }
 
+// hierher tidy up to here...
+
+//##########################################################
+
 
 //============================================================
 /// Default value for physical constant (static)
@@ -379,21 +386,34 @@ interpolated_u(const Vector<double> &s, const unsigned &i)
 {
  //Find number of nodes
  unsigned n_node = FiniteElement::nnode();
+
  //Storage for the local shape function
  Shape psi(n_node);
+
  //Get values of shape function at local coordinate s
  this->shape(s,psi);
  
  //Initialise value of u
  double interpolated_u = 0.0;
+
  //Loop over the local nodes and sum
  for(unsigned l=0;l<n_node;l++) {interpolated_u += u(l,i)*psi(l);}
 
  return(interpolated_u);
 }
 
+
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+
+
+
 //=======================================================================
-/// Calculate the residuals for the one-dimensional interface element
+/// Calculate the residual contribution (kinematic and dynamic BC)
+/// for the one-dimensional fluid interface element (plus, indirectly, 
+/// any contributions due to node update strategy involving e.g.
+/// Lagrange multipliers).
 //=======================================================================
 void LineFluidInterfaceElement::
 fill_in_generic_residual_contribution_interface(Vector<double> &residuals, 
@@ -412,8 +432,10 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
 
  //Get the value of the Capillary number
  double Ca = ca();
+
  //Get the value of the Strouhal numer
  double St = st();
+
  //Get the value of the external pressure
  double p_ext = pext();
 
@@ -428,6 +450,7 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
   {
    //Get the local coordinate at the integration point
    s[0] = integral_pt()->knot(ipt,0);
+
    //Get the integral weight
    double W = this->integral_pt()->weight(ipt);
 
@@ -435,8 +458,10 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
    this->dshape_local_at_knot(ipt,psif,dpsifds);
 
    //Define and zero the tangent Vectors and local velocities
-   double interpolated_t1[2] = {0.0,0.0}, interpolated_u[2] = {0.0,0.0};
-   double interpolated_x[2] = {0.0,0.0}, interpolated_dx_dt[2] = {0.0,0.0};
+   Vector<double> interpolated_t1(2,0.0);
+   Vector<double> interpolated_u(2,0.0);
+   Vector<double> interpolated_x(2,0.0);
+   Vector<double> interpolated_dx_dt(2,0.0);
 
    //Loop over the shape functions
    for(unsigned l=0;l<n_node;l++)
@@ -456,8 +481,10 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
    //Calculate the length of the tangent Vector
    double tlength = interpolated_t1[0]*interpolated_t1[0] + 
     interpolated_t1[1]*interpolated_t1[1];
+
    //Set the Jacobian of the line element
    double J = sqrt(tlength);
+
    //Normalise the tangent Vector
    interpolated_t1[0] /= J; interpolated_t1[1] /= J;
 
@@ -502,8 +529,7 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
         } //End of contribution to momentum equation
       }
     
-     //Using the same shape functions for the spines, so can stay in the loop
-     //If the spine is not a boundary condition
+     //Kinematic condition
      local_eqn = kinematic_local_eqn(l);
      if(local_eqn >= 0)
       {
@@ -538,14 +564,23 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
       }
     } //End of loop over shape functions
 
-   //Call the additional contributions to the residuals
-   add_additional_residual_contributions(residuals,jacobian,flag,
-                                         psif,dpsifds,interpolated_n,W,J);
+   // Add additional contribution required from the implementation
+   // of the node update (e.g. Lagrange multpliers etc)
+   add_additional_residual_contributions(residuals,
+                                         jacobian,
+                                         flag,
+                                         psif,
+                                         dpsifds,
+                                         interpolated_x,
+                                         interpolated_n,
+                                         W,
+                                         J);
    
    
 
   } //End of loop over integration points
 }
+
 
 //===========================================================================
 ///Overload the output function
@@ -567,6 +602,7 @@ output(std::ostream &outfile, const unsigned &n_plot)
    //Output the x,y,u,v 
    for(unsigned i=0;i<2;i++) outfile << this->interpolated_x(s,i) << " ";
    for(unsigned i=0;i<2;i++) outfile << interpolated_u(s,i) << " ";      
+
    //Output a dummy pressure
    outfile << 0.0 << std::endl;
   }
@@ -594,6 +630,7 @@ output(FILE* file_pt, const unsigned &n_plot)
    //Output the x,y,u,v 
    for(unsigned i=0;i<2;i++) fprintf(file_pt,"%g ",this->interpolated_x(s,i));
    for(unsigned i=0;i<2;i++) fprintf(file_pt,"%g ",this->interpolated_u(s,i));
+
    //Output a dummy pressure
    fprintf(file_pt,"0.0 \n");
   }
@@ -602,8 +639,16 @@ output(FILE* file_pt, const unsigned &n_plot)
 
 
 
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+
 //=======================================================================
-/// Calculate the residuals for the axisymmetric interface element
+/// Calculate the residuals contribution (kinematic and dynamic BC)
+/// for the axisymmetric interface element (plus, indirectly, 
+/// any contributions due to node update strategy involving e.g.
+/// Lagrange multipliers).
 //=======================================================================
 void AxisymmetricFluidInterfaceElement::
 fill_in_generic_residual_contribution_interface(Vector<double> &residuals, 
@@ -619,10 +664,13 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
 
  //Set the value of n_intpt
  unsigned n_intpt = this->integral_pt()->nweight();
+
  //Get the value of the Capillary number
  double Ca = ca();
+
  //Get the value of the Strouhal numer
  double St = st();
+
  //Get the value of the external pressure
  double p_ext = pext();
  
@@ -637,6 +685,7 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
   {
    //Get the local coordinate at the integration point
    s[0] = integral_pt()->knot(ipt,0);
+
    //Get the integral weight
    double W = this->integral_pt()->weight(ipt);
 
@@ -644,9 +693,10 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
    this->dshape_local_at_knot(ipt,psif,dpsifds);
 
    //Define and zero the tangent Vectors and local velocities
-   double interpolated_t1[2] = {0.0,0.0}, interpolated_u[2] = {0.0,0.0};
-   double interpolated_x[2] = {0.0,0.0}, interpolated_dx_dt[2] = {0.0,0.0};
-
+   Vector<double> interpolated_t1(2,0.0);
+   Vector<double> interpolated_u(2,0.0);
+   Vector<double> interpolated_x(2,0.0);
+   Vector<double> interpolated_dx_dt(2,0.0);
 
    //Loop over the shape functions
    for(unsigned l=0;l<n_node;l++)
@@ -669,8 +719,10 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
    //Calculate the length of the tangent Vector
    double tlength = interpolated_t1[0]*interpolated_t1[0] + 
     interpolated_t1[1]*interpolated_t1[1];
+
    //Set the Jacobian of the line element
    double J = sqrt(tlength);
+
    //Normalise the tangent Vector
    interpolated_t1[0] /= J; interpolated_t1[1] /= J;
 
@@ -741,8 +793,7 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
         }
       }
     
-     //Using the same shape functions for the spines, so can do this
-     //If the spine is not a boundary condition
+     //Kinematic condition
      local_eqn = kinematic_local_eqn(l);
      if(local_eqn >= 0) 
       {
@@ -771,15 +822,25 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
               }
             }
           }
-        }     //End of Jacobian contribution
+        } //End of Jacobian contribution
       }
     } //End of loop over shape functions
    
-   //Call the additional contributions to the residuals
-   add_additional_residual_contributions(residuals,jacobian,flag,
-                                         psif,dpsifds,interpolated_n,r,W,J);
 
+   // Add additional contribution required from the implementation
+   // of the node update (e.g. Lagrange multpliers etc)
+   add_additional_residual_contributions(residuals,
+                                         jacobian,
+                                         flag,
+                                         psif,
+                                         dpsifds,
+                                         interpolated_x,
+                                         interpolated_n,
+                                         W,
+                                         J);
+   
   } //End of loop over integration points
+
 }
 
 //===========================================================================
@@ -803,6 +864,7 @@ output(std::ostream &outfile, const unsigned &n_plot)
 
    for(unsigned i=0;i<2;i++) outfile << this->interpolated_x(s,i) << " ";
    for(unsigned i=0;i<3;i++) outfile << interpolated_u(s,i) << " ";      
+
    //Output a dummy pressure
    outfile << 0.0 << std::endl;
   }
@@ -813,24 +875,6 @@ output(std::ostream &outfile, const unsigned &n_plot)
  //Output a final blank line
  outfile << std::endl;
 
- /*//Set output Vector
- Vector<double> s(1);
- 
- //Tecplot header info 
- outfile << "ZONE I=" << n_plot << std::endl;
- 
- //Loop over plot points
- for(unsigned l=0;l<n_plot;l++)
-  {
-   s[0] = -1.0 + l*2.0/(n_plot-1);
-   
-   //Output the x,y,u,v 
-   for(unsigned i=0;i<2;i++) outfile << this->interpolated_x(s,i) << " ";
-   for(unsigned i=0;i<3;i++) outfile << interpolated_u(s,i) << " ";      
-   //Output a dummy pressure
-   outfile << 0.0 << std::endl;
-  }
-  outfile << std::endl;*/
 }
 
 
@@ -854,6 +898,7 @@ output(FILE* file_pt, const unsigned &n_plot)
    //Output the x,y,u,v 
    for(unsigned i=0;i<2;i++) fprintf(file_pt,"%g ",this->interpolated_x(s,i));
    for(unsigned i=0;i<3;i++) fprintf(file_pt,"%g ",this->interpolated_u(s,i));
+
    //Output a dummy pressure
    fprintf(file_pt,"0.0 \n");
   }
@@ -862,10 +907,16 @@ output(FILE* file_pt, const unsigned &n_plot)
 
 
 
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
 
 //=======================================================================
-/// Calculate the residuals for the two-dimensional (surface) 
-/// interface element
+/// Calculate the residuals (kinematic and dynamic BC) for the 
+/// two-dimensional (surface) interface element (plus, indirectly, 
+/// any contributions due to node update strategy involving e.g.
+/// Lagrange multipliers).
 //=======================================================================
 void SurfaceFluidInterfaceElement::
 fill_in_generic_residual_contribution_interface(Vector<double> &residuals, 
@@ -877,6 +928,7 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
 
  //Set up memeory for the shape functions
  Shape psif(n_node);
+
  //We have two local surface coordinates
  DShape dpsifds(n_node,2);
 
@@ -885,8 +937,10 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
 
  //Get the value of the Capillary number
  double Ca = ca();
+
  //Get the value of the Strouhal numer
  double St = st();
+
  //Get the value of the external pressure
  double p_ext = pext();
  
@@ -901,6 +955,7 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
   {
    //Get the value of the local coordiantes at the integration point
    for(unsigned i=0;i<2;i++) {s[i] = this->integral_pt()->knot(ipt,i);}
+
    //Get the integral weight
    double W = this->integral_pt()->weight(ipt);
 
@@ -908,16 +963,20 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
    this->dshape_local_at_knot(ipt,psif,dpsifds);
    
    //Define and zero the tangent Vectors and local velocities
+   Vector<double> interpolated_x(3,0.0);
    double interpolated_g[2][3] = {{0.0,0.0,0.0},{0.0,0.0,0.0}};
    double interpolated_u[3] = {0.0,0.0,0.0};
    double interpolated_dx_dt[3] = {0.0,0.0,0.0};
-
+   
    //Loop over the shape functions
    for(unsigned l=0;l<n_node;l++)
     {
      //Loop over directional components (now three)
      for(unsigned i=0;i<3;i++)
       {
+       // Coordinate
+       interpolated_x[i] += this->nodal_position(l,i)*psif(l);
+
        //Calculate velocity of mesh
        interpolated_dx_dt[i] += this->dnodal_position_dt(l,i)*psif(l);
        
@@ -950,7 +1009,6 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
 
    // Define the normal vector (cross product of tangent vectors)
    Vector<double> interpolated_n(3); 
-   // Calulate the components
    interpolated_n[0] = 
     interpolated_g[0][1]*interpolated_g[1][2] - 
     interpolated_g[0][2]*interpolated_g[1][1];
@@ -959,6 +1017,7 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
     interpolated_g[0][0]*interpolated_g[1][2]; 
    interpolated_n[2] = interpolated_g[0][0]*interpolated_g[1][1] - 
     interpolated_g[0][1]*interpolated_g[1][0];
+
    // Calculate the length of the vector
    double slength =  interpolated_n[0]*interpolated_n[0] +
                      interpolated_n[1]*interpolated_n[1] +
@@ -966,7 +1025,7 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
   
    //Set the determinant of the local metric tensor, 
    //which is equal to the length of the normal vector
-   double local_G = sqrt(slength);
+   double J = sqrt(slength);
    
    //We can now set the sign to get the OUTER unit normal
    for(unsigned i=0;i<3;i++) {interpolated_n[i] *= normal_sign();}
@@ -982,6 +1041,7 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
       {
        //Get the equation number for the momentum equation
        local_eqn = this->nodal_local_eqn(l,this->U_index_interface[i]);
+
        //If it's not a boundary condition
        if(local_eqn >= 0)
         {
@@ -993,13 +1053,13 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
            //G1 contribution
            interpolated_g[1][i]*(gmet[0][0]*dpsifds(l,1) 
                                  -gmet[0][1]*dpsifds(l,0)))
-          *(Sigma/Ca)*W/local_G;
+          *(Sigma/Ca)*W/J;
 
          //If the element is a free surface, add in the external pressure
          if(Pext_data_pt!=0)
           {
-           //External pressure term no need to multiply by local_G
-           //because the length of the vector is equal to local_G
+           //External pressure term no need to multiply by J
+           //because the length of the vector is equal to J
           //exactly.
            residuals[local_eqn] -= p_ext*interpolated_n[i]*psif(l)*W;
            //Add in the Jacobian term for the external pressure
@@ -1019,8 +1079,7 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
       } //End of contribution to momentum equation
 
     
-     //Using the same shape functions for the spines, so can do this
-     //If the spine is not a boundary condition
+     // Kinematic BC
      local_eqn = kinematic_local_eqn(l);
      if(local_eqn >= 0) 
       {
@@ -1029,7 +1088,7 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
        for(unsigned k=0;k<3;k++)
         {
          residuals[local_eqn] += 
-         (interpolated_u[k] - St*interpolated_dx_dt[k])
+          (interpolated_u[k] - St*interpolated_dx_dt[k])
           *interpolated_n[k]*psif(l)*W;
         }
        
@@ -1052,13 +1111,22 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
               }
             }
           }
-        }     //End of Jacobian contribution
+        } //End of Jacobian contribution
       }
     } //End of loop over shape functions
    
-   //Call the additional contributions to the residuals
-   add_additional_residual_contributions(residuals,jacobian,flag,
-                                         psif,dpsifds,interpolated_n,W);
+
+   // Add additional contribution required from the implementation
+   // of the node update (e.g. Lagrange multpliers etc)
+   add_additional_residual_contributions(residuals,
+                                         jacobian,
+                                         flag,
+                                         psif,
+                                         dpsifds,
+                                         interpolated_x,
+                                         interpolated_n,
+                                         W,
+                                         J);
 
   } //End of loop over integration points
 }
@@ -1082,9 +1150,11 @@ output(std::ostream &outfile, const unsigned &n_plot)
       {
        s[0] = -1.0 + l*2.0/(n_plot-1);
        s[1] = -1.0 + k*2.0/(n_plot-1);  
+
        //Output the x,y,z, u,v,w
        for(unsigned i=0;i<3;i++) outfile << this->interpolated_x(s,i) << " ";
        for(unsigned i=0;i<3;i++) outfile << interpolated_u(s,i) << " ";      
+
        //Output a dummy pressure
        outfile << 0.0 << std::endl;
       }
@@ -1115,8 +1185,10 @@ output(FILE* file_pt, const unsigned &n_plot)
      //Output the x,y,u,v 
      for(unsigned i=0;i<3;i++) 
       {fprintf(file_pt,"%g ",this->interpolated_x(s,i));}
+
      for(unsigned i=0;i<3;i++) 
       {fprintf(file_pt,"%g ",this->interpolated_u(s,i));}
+
      //Output a dummy pressure
      fprintf(file_pt,"0.0 \n");
     }

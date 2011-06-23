@@ -10,7 +10,8 @@ incl_cc_files =
 
 # Define the headers
 headers = interface_elements.h line_interface_elements.h \
-axisym_interface_elements.h surface_interface_elements.h
+axisym_interface_elements.h surface_interface_elements.h \
+constrained_volume_elements.h
 
 # Template only files. These should be included in include directory
 # but should not be listed in combined header file

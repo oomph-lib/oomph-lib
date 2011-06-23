@@ -1202,9 +1202,9 @@ void RefineableRotatingCylinderProblem<ELEMENT>::solve()
 { 
  Newton_solver_tolerance = 1.0e-8;
  //Document the solution
- //ofstream filename("input.dat");
- //mesh_pt()->output(filename,5);
- //filename.close();
+ ofstream filenamee("input.dat");
+ mesh_pt()->output(filenamee,5);
+ filenamee.close();
 
  //Solve the initial value problem
  newton_solve();

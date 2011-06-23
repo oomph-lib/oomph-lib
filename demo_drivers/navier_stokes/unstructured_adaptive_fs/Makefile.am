@@ -2,27 +2,26 @@
 include $(top_srcdir)/config/makefile_templates/demo_drivers
 
 # Name of executable
-check_PROGRAMS=adaptive_fs adaptive_two_fluid
+check_PROGRAMS=adaptive_bubble_in_channel adaptive_drop_in_channel
 
 # Sources for executable
-adaptive_fs_SOURCES = adaptive_fs.cc
+adaptive_bubble_in_channel_SOURCES = adaptive_bubble_in_channel.cc
 
 # Required libraries: 
 # $(FLIBS) is included in case the solver involves fortran sources.
-adaptive_fs_LDADD = -L@libdir@ \
+adaptive_bubble_in_channel_LDADD = -L@libdir@ \
                        -lsolid -lconstitutive -lnavier_stokes \
                        -lfluid_interface -lrigid_body -lgeneric \
                        $(EXTERNAL_LIBS) $(FLIBS)
 
 # Sources for executable
-adaptive_two_fluid_SOURCES = adaptive_two_fluid.cc
+adaptive_drop_in_channel_SOURCES = adaptive_drop_in_channel.cc
 
 # Required libraries: 
 # $(FLIBS) is included in case the solver involves fortran sources.
-adaptive_two_fluid_LDADD = -L@libdir@ \
+adaptive_drop_in_channel_LDADD = -L@libdir@ \
                        -lsolid -lconstitutive -lnavier_stokes \
                        -lfluid_interface -lrigid_body -lgeneric \
                        $(EXTERNAL_LIBS) $(FLIBS)
 
 
-EXTRA_DIST+=fix_vol_int_elastic_elements.h 

@@ -311,7 +311,9 @@ protected:
   Vector<double> &residuals, DenseMatrix<double> &jacobian,
   const unsigned &flag,
   const Shape &psif, const DShape &dpsifds,
-  const Vector<double> &interpolated_n, const double &W,
+  const Vector<double> &interpolated_x, 
+  const Vector<double> &interpolated_n, 
+  const double &W,
   const double &J)
   {
    //Find the index at which the temperature is stored
