@@ -28,7 +28,7 @@
 # - F77 =  F77 compiler (defaults to gcc/g77 if not specified)
 # 
 # - CXXFLAGS = flags for the C++ compiler. Specify optmisation flags
-#              for your compiler (e.g. -O6 for maximum optimisation
+#              for your compiler (e.g. -O3 for maximum optimisation
 #              with the gcc compiler suite, enable debugging (-g for
 #              the gcc compilers), etc.)
 #
@@ -58,7 +58,7 @@
 #                         of the library.
 # 
 # - CFLAGS   = flags for the C compiler. Specify optimisation flags
-#              for your compiler (e.g. -O6 for maximum optimisation
+#              for your compiler (e.g. -O3 for maximum optimisation
 #              with the gcc compiler suite, enable debugging (-g for
 #              the gcc compilers), etc.) The C-compiler is only used
 #              to compile certain external libraries, such as superlu.
@@ -66,7 +66,7 @@
 #              oomph-lib's own compilation flags.
 # 
 # - FFLAGS   = flags for the f77 compiler. Specify optimisation flags
-#              for your compiler (e.g. -O6 for maximum optimisation
+#              for your compiler (e.g. -O3 for maximum optimisation
 #              with the gcc compiler suite, enable debugging (-g for
 #              the gcc compilers), etc.) The f77-compiler is only used
 #              to compile certain external libraries, such as the
@@ -80,30 +80,41 @@
 #              other libraries.
 #=====================================================================
 #
-# gcc-based compilation with full optimisation.
-# Library headers in the build directory are replaced by symbolic
-# links to the src directory -- this ensures that you don't
-# accidentally edit a file in the include directory only to have
-# it immediately wiped out when you re-install the library after
-# finishing your changes. We specify the location of the blas,
-# lapack, hypre and trilinos libraries, the latter two assumed
-# to have been compiled with mpi support. 
+#--with-blas=/home/e173/e173/mheil/local/gnu/lib/blas/blas.a
+#--with-lapack=/home/e173/e173/mheil/local/gnu/lib/lapack/lapack.a
+#--with-trilinos=/home/e173/e173/mheil/local/gnu/trilinos_default_installation
+#--with-hypre=/home/e173/e173/mheil/local/gnu/hypre_default_installation
 --enable-MPI
 --enable-symbolic-links-for-headers
---with-blacs=/home/mheil/local/lib/blacs_with_copy
---with-scalapack=/home/mheil/local/lib/scalapack/libscalapack.a
---with-pord=/home/mheil/local/lib/pord/libpord.a 
---with-mumps=/home/mheil/local/mumps
---with-blas=/home/mheil/local/lib/blas/blas.a
---with-lapack=/home/mheil/local/lib/lapack/lapack.a
---with-hypre=/home/mheil/local/hypre_default_installation_mpi
---with-trilinos=/home/mheil/local/trilinos_default_installation_mpi
---with-mpi-self-tests="mpirun -np 2"
-CXXFLAGS="-O6 -Wall"
-CFLAGS="-O6"
-FFLAGS="-O6"
-CXX=mpic++
-CC=mpicc
-F77=mpif77
-LD=mpif77
+--enable-static-cxx-libs
+CXXFLAGS="-O3 -Wall"
+CFLAGS="-O3"
+FFLAGS="-O3"
+CXX=CC
+CC=cc
+F77=ftn
+LD=ftn
+
+
+#CXXFLAGS="-O3 -Wall"
+#CFLAGS="-O3"
+#FFLAGS="-O3"
+
+# Use these petsc/trilinos module-based build
+#--enable-suppress-oomph-metis
+#--enable-suppress-oomph-parmetis
+#--enable-suppress-oomph-superlu
+#--enable-suppress-oomph-superlu_dist
+#--with-mumps=auto
+#--with-blas=auto
+#--with-lapack=auto
+#--with-hypre=auto
+#--with-trilinos=auto
+
+
+#--with-trilinos=/work/e173/e173/mheil/local/trilinos_default_installation
+#CXXFLAGS="-O3 -g -Wall"
+#--with-trilinos=auto
+#--enable-suppress-doc
+#--enable-suppress-demo
 

@@ -2729,13 +2729,13 @@ void Mesh::get_halo_node_stats(OomphCommunicator* comm_pt,
  Vector<int> nhalo_nodes(n_proc);
  
  // Stick own number of halo nodes into appropriate entry 
- nhalo_nodes[my_rank]=nhalo_node();
+ int nhalo_node_local=nhalo_node();
 
  // Gather information on root processor: First argument group
  // specifies what is to be sent (one int from each procssor, indicating
  // the number of dofs on it), the second group indicates where
  // the results are to be gathered (in rank order) on root processor.
- MPI_Gather(&nhalo_nodes[my_rank],1,MPI_INT,
+ MPI_Gather(&nhalo_node_local,1,MPI_INT,
             &nhalo_nodes[0],1, MPI_INT,
             0,comm_pt->mpi_comm());
 
@@ -2785,13 +2785,13 @@ void Mesh::get_halo_node_stats(OomphCommunicator* comm_pt,
  Vector<int> nhaloed_nodes(n_proc);
  
  // Stick own number of haloed nodes into appropriate entry
- nhaloed_nodes[my_rank]=nhaloed_node();
+ int nhaloed_node_local=nhaloed_node();
 
  // Gather information on root processor: First argument group
  // specifies what is to be sent (one int from each procssor, indicating
  // the number of dofs on it), the second group indicates where
  // the results are to be gathered (in rank order) on root processor.
- MPI_Gather(&nhaloed_nodes[my_rank],1,MPI_INT,
+ MPI_Gather(&nhaloed_node_local,1,MPI_INT,
             &nhaloed_nodes[0],1, MPI_INT,
             0,comm_pt->mpi_comm());
 
@@ -4129,17 +4129,17 @@ void Mesh::get_efficiency_of_mesh_distribution(OomphCommunicator* comm_pt,
   }
 
  // Stick own number into appropriate entry
- nhalo_elements[my_rank]=count;
- n_elements[my_rank]=nelement();
+ int nhalo_element_local=count;
+ int n_element_local=nelement();
 
  // Gather information on root processor: First argument group
  // specifies what is to be sent (one int from each procssor, indicating
  // the number of elements on it), the second group indicates where
  // the results are to be gathered (in rank order) on root processor.
- MPI_Gather(&nhalo_elements[my_rank],1,MPI_INT,
+ MPI_Gather(&nhalo_element_local,1,MPI_INT,
             &nhalo_elements[0],1, MPI_INT,
             0,comm_pt->mpi_comm());
- MPI_Gather(&n_elements[my_rank],1,MPI_INT,
+ MPI_Gather(&n_element_local,1,MPI_INT,
             &n_elements[0],1, MPI_INT,
             0,comm_pt->mpi_comm());
 
@@ -4152,7 +4152,12 @@ void Mesh::get_efficiency_of_mesh_distribution(OomphCommunicator* comm_pt,
   {
    for (int i=0;i<n_proc;i++)
     {
-     double eff=double(n_elements[i]-nhalo_elements[i])/double(n_elements[i]);
+     unsigned nel=n_elements[i];
+     double eff=0.0;
+     if (nel!=0)
+      {
+       eff=double(n_elements[i]-nhalo_elements[i])/double(nel);
+      }
      av_efficiency+=eff;
      if (eff>max) max=eff;
      if (eff<min) min=eff;

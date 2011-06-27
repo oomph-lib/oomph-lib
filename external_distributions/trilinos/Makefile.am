@@ -42,7 +42,9 @@ all:
 	cp build_script.bash junk.bash
 	cat junk.bash $(srcdir)/build_scripts/build_script.part3 > build_script.bash
 	rm -f junk.bash
-
+	sed 's/--with-blas=auto//g'  build_script.bash > junk.bash
+	sed 's/--with-lapack=auto//g'  junk.bash > build_script.bash
+	rm -f junk.bash
 	chmod a+x build_script.bash
 
 	./build_script.bash 
