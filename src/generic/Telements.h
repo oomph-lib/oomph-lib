@@ -3109,6 +3109,42 @@ class TBubbleEnrichedElement
 {
 };			 
 
+//=====================================================================
+/// Define integration schemes that are required to exactly integrate
+/// the mass matrices of the bubble-enriched elements. The enrichement
+/// increases the polynomial order which means that higher-order Gauss
+/// rules must be used.
+//====================================================================
+template<unsigned DIM, unsigned NPTS_1D>
+ class TBubbleEnrichedGauss
+{
+};
+
+//====================================================================
+///Specialisation for two-dimensional elements, in which the highest
+///order polynomial is cubic, so we need the integration scheme
+///for the unenriched cubic element
+//====================================================================== 
+template<>
+class TBubbleEnrichedGauss<2,3> : public TGauss<2,4>
+{
+  public:
+  TBubbleEnrichedGauss() : TGauss<2,4>() {}
+};
+
+//====================================================================
+///Specialisation for three-dimensional elements, in which the highest
+///order polynomial is quartic, so we need the integration scheme
+///for the unenriched quartic element
+//====================================================================== 
+template<>
+class TBubbleEnrichedGauss<3,3> : public TGauss<3,5>
+{
+  public:
+  TBubbleEnrichedGauss() : TGauss<3,5>() {}
+};
+
+
 
 //=======================================================================
 /// Enriched TElement class specialised to two spatial dimensions
@@ -3127,6 +3163,9 @@ class TBubbleEnrichedElement<DIM,3> : public virtual TElement<DIM,3>,
 {
   private:
  
+ //Static storage for a new integration scheme
+ static TBubbleEnrichedGauss<DIM,3> Default_enriched_integration_scheme;
+
  //Static storage for central node
  static const unsigned CentralNodeOnFace[DIM+1];
 
@@ -3140,7 +3179,9 @@ public:
    unsigned n_node = this->nnode();
    this->set_n_node(n_node+
                     TBubbleEnrichedElementShape<DIM,3>::n_enriched_nodes());
-  }
+   //Set the new integration scheme
+   this->set_integration_scheme(&Default_enriched_integration_scheme);
+ }
 
  /// Broken copy constructor
  TBubbleEnrichedElement(const TBubbleEnrichedElement&) 

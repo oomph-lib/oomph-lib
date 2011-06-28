@@ -87,6 +87,12 @@ public:
 
  /// Empty destructor 
  ~TriangleScaffoldMesh() {}
+
+ /// \short Return the global node of each local node 
+ /// listed element-by-element e*n_local_node + n_local
+ /// Note that the node numbers are indexed from 1
+ unsigned global_node_number(const unsigned &i)
+ {return Global_node[i];}
  
  /// \short Return the boundary id of the i-th edge in the e-th element:
  /// This is zero-based as in triangle. Zero means the edge is not
@@ -94,6 +100,15 @@ public:
  /// Will be reduced by one to identify the oomph-lib boundary. 
  unsigned edge_boundary(const unsigned& e, const unsigned& i) const
   {return Edge_boundary[e][i];}
+
+ /// \short Return the number of internal edges
+ unsigned nglobal_edge()
+ {return Nglobal_edge;}
+
+ /// \short Return the global index of the i-th edge in the e-th element:
+ /// The global index starts from zero
+ unsigned edge_index(const unsigned& e, const unsigned& i) const
+  {return Edge_index[e][i];}
 
  /// \short Return the attribute of the element e
  double element_attribute(const unsigned &e) const
@@ -104,9 +119,19 @@ public:
  
  protected: 
 
+ /// \short Number of internal edges
+ unsigned Nglobal_edge;
+
+ /// \short Storage for global node numbers listed element-by-element
+ Vector<unsigned> Global_node;
+
  /// \short Vector of vectors containing the boundary ids of the
  /// elements' edges
  Vector<Vector<unsigned> > Edge_boundary;
+
+ /// \short Vector of vectors containing the global edge index of
+ // the elements' edges
+ Vector<Vector<unsigned> > Edge_index;
 
  /// \short Vector of double attributes for each element
  Vector<double> Element_attribute;

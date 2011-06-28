@@ -397,7 +397,6 @@ int main(int argc, char* argv[])
   
   // Solve the problem
   problem.newton_solve();
-  
 
   //Output solution with 2 points per edge
   nplot=2;

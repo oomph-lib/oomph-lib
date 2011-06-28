@@ -440,7 +440,7 @@ fill_in_generic_residual_contribution_helmholtz_flux(
     }
    
    //Get the imposed flux
-   complex<double> flux(0.0,0.0);
+   std::complex<double> flux(0.0,0.0);
    get_flux(interpolated_x,flux);
    
    //Now add to the appropriate equations

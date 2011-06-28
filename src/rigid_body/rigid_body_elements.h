@@ -46,14 +46,14 @@ namespace oomph
 /// two-dimensional rigid body subject to a particular force and torque
 /// distribution. The Data object whose three values
 /// represent the x and y displacements of its centre of gravity and
-/// the polygon's rotation about its centre of gravity.
+/// its rotation about its centre of gravity.
 /// If added to a mesh in the Problem (in its incarnation as a 
-/// GeneralisedElement) the displacement/rotation of the polygon
+/// GeneralisedElement) the displacement/rotation of the body
 /// is computed in response to (i) user-specifiable applied forces
-/// and a torque and (ii) the net drag (and assocated torque) from
-/// a mesh of elements that can exert a drag onto the polygon (typically
+/// and a torque and (ii) the net drag (and associated torque) from
+/// a mesh of elements that can exert a drag onto the body (typically
 /// Navier-Stokes FaceElements that apply a viscous drag to an 
-/// immersed body, represented by the polygon.)
+/// immersed body, represented by the body.)
 //=====================================================================
  class RigidBodyElement : public GeneralisedElement, public GeomObject
  {
@@ -199,14 +199,12 @@ namespace oomph
     }
   }
   
-  /// Access to "mass" (area) of polygon
+  /// Access to dimensionless "mass" (this absorbs any timescale ratio)
   double &mass() {return Mass;}
   
-  /// Access to polar moment of inertia of polygon
+  /// Access to dimensionless polar "moment of inertia"
   double &moment_of_inertia() {return Moment_of_inertia;}
-  
-  // hierher provide lambda squared and use it
-   
+     
  /// \short Pointer to Data for centre of gravity displacement. 
  /// Values: 0: x-displ; 1: y-displ; 2: rotation angle.
  Data*& centre_displacement_data_pt()
@@ -281,7 +279,7 @@ namespace oomph
    bool flag=false;
 
    // Get generic function
-   get_residuals_hole_polygon_generic(residuals,jacobian,flag);
+   get_residuals_rigid_body_generic(residuals,jacobian,flag);
   }
 
 
@@ -292,7 +290,7 @@ namespace oomph
     // Get generic function
     //bool flag=true;
     bool flag = false;
-    get_residuals_hole_polygon_generic(residuals,jacobian,flag);
+    get_residuals_rigid_body_generic(residuals,jacobian,flag);
     this->fill_in_jacobian_from_internal_by_fd(residuals,jacobian);
     //Get the effect of the fluid loading on the rigid body
     this->fill_in_jacobian_from_external_by_fd(residuals,jacobian);
@@ -377,7 +375,7 @@ namespace oomph
      External_torque_fct_pt(time,torque);
     }
    
-   // Add drag from any (fluid) mesh attached to surface of polygon     
+   // Add drag from any (fluid) mesh attached to surface of body     
    Vector<double> element_drag_force(2);
    Vector<double> element_drag_torque(1);
    if (Drag_mesh_pt==0)
@@ -417,7 +415,7 @@ namespace oomph
 
 
  /// \short Access fct to mesh containing face elements that allow 
- /// the computation of the drag on the polygon
+ /// the computation of the drag on the body
  Mesh*& drag_mesh_pt()
   {
    return Drag_mesh_pt;
@@ -518,7 +516,7 @@ namespace oomph
  
  
  /// Get residuals and/or Jacobian
- void get_residuals_hole_polygon_generic(Vector<double> &residuals,
+ void get_residuals_rigid_body_generic(Vector<double> &residuals,
                                          DenseMatrix<double> &jacobian,
                                          const bool& flag)
   {   
@@ -587,10 +585,10 @@ namespace oomph
   /// Original rotation angle 
   double Initial_Phi;
 
-  // Mass of polygon
+  // Mass of body
   double Mass;
   
-  /// Polar moment of inertia of polygon
+  /// Polar moment of inertia of body
   double Moment_of_inertia;
   
    private:
@@ -610,7 +608,7 @@ namespace oomph
    private:
 
   /// \short Mesh containing face elements that allow the computation of
-  /// the drag on the polygon
+  /// the drag on the body
   Mesh* Drag_mesh_pt;
 
   /// The direction of gravity

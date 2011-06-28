@@ -1051,6 +1051,56 @@ class TGauss<3,3> : public Integral
 };
 
 
+//=========================================================
+/// 3D Gaussian integration class for tets.
+/// 45 integration points. This integration scheme can 
+/// integrate up to eighth-order polynomials exactly and
+/// is therefore a suitable "full" integration scheme
+/// for quartic elements in which the
+/// highest-order polynomial is fourth order.
+/// The numbers are from Keast CMAME 55 pp339-348 (1986)
+//=========================================================
+template<>
+class TGauss<3,5> : public Integral
+{
+  private:
+
+ /// Number of integration points in the scheme
+ static const unsigned Npts=45;
+ /// Array to hold the weights and knots (defined in cc file)
+ static const double Knot[45][3], Weight[45];
+
+  public:
+
+
+ /// Default constructor (empty)
+ TGauss(){};
+
+ /// Broken copy constructor
+ TGauss(const TGauss& dummy) 
+  { 
+   BrokenCopy::broken_copy("TGauss");
+  } 
+ 
+ /// Broken assignment operator
+ void operator=(const TGauss&) 
+  {
+   BrokenCopy::broken_assign("TGauss");
+  }
+
+ /// Number of integration points of the scheme
+ unsigned nweight() const {return Npts;}
+
+ /// Return coordinate x[j] of integration point i
+ double knot(const unsigned &i, const unsigned &j) const
+  {return Knot[i][j];}
+
+ /// Return weight of integration point i
+ double weight(const unsigned &i) const {return Weight[i];}
+
+};
+
+
 
 //===================================================================
 /// Class for multidimensional Gauss Lobatto Legendre integration 

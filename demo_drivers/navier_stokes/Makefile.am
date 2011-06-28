@@ -35,3 +35,7 @@ else
   SUBDIRS += unstructured_adaptive_ALE unstructured_adaptive_fs jeffery_orbit
 endif
 
+if SUPPRESS_TETGEN_LIB
+else
+  SUBDIRS += unstructured_adaptive_3d_ALE
+endif

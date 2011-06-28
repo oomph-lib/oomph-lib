@@ -167,7 +167,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
                                           split_corner_elements);
  
  // Find elements next to boundaries
- Fluid_mesh_pt->setup_boundary_element_info();
+ //Fluid_mesh_pt->setup_boundary_element_info();
 
  // The following corresponds to the boundaries as specified by
  // facets in the tetgen input:

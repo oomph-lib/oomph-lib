@@ -30,6 +30,8 @@
 
 #include "mesh.h"
 #include "Telements.h"
+//Include the data structure from tetgen
+#include "../../external_src/oomph_tetgen/tetgen.h"
 
 namespace oomph
 {
@@ -51,8 +53,19 @@ public:
                     const std::string& element_file_name,
                     const std::string& face_file_name);
 
+ /// \short Constructor using direct tetgenio object
+ TetgenScaffoldMesh(tetgenio& tetgen_data);
+
  /// Empty destructor 
  ~TetgenScaffoldMesh() {}
+
+ /// \short Return the global node of each local node 
+ /// listed element-by-element e*n_local_node + n_local
+ /// Note that the node numbers are indexed from 1
+ unsigned global_node_number(const unsigned &i)
+ {return Global_node[i];}
+
+
 
  /// \short Return the boundary id of the i-th face in the e-th element:
  /// This is zero-based as in tetgen. Zero means the face is not
@@ -61,11 +74,63 @@ public:
  unsigned face_boundary(const unsigned& e, const unsigned& i) const
   {return Face_boundary[e][i];}
 
+ /// \short Return the number of internal edges
+ unsigned nglobal_edge()
+ {return Nglobal_edge;}
+
+ /// \short Return a boolean indicating whether the i-th global 
+ /// edge is on a boundary
+ bool edge_boundary(const unsigned &i)
+ {return Edge_boundary[i];}
+
+ /// \short Return the global index of the i-th edge in the e-th element:
+ /// The global index starts from zero
+ unsigned edge_index(const unsigned& e, const unsigned& i) const
+  {return Edge_index[e][i];}
+
+ /// \short Return the number of internal face
+ unsigned nglobal_face()
+ {return Nglobal_face;}
+
+ /// \short Return the global index of the i-th face in the e-th element:
+ /// The global index starts from zero
+ unsigned face_index(const unsigned& e, const unsigned& i) const
+  {return Face_index[e][i];}
+
+ /// \short Return the attribute of the element e
+ double element_attribute(const unsigned &e) const
+  {return Element_attribute[e];}
+
+
 protected:
+
+ /// \short Storage for the number of global faces
+ unsigned Nglobal_face;
+
+ /// \short Storage for the number of global edges
+ unsigned Nglobal_edge;
+
+ /// \short Storage for global node numbers listed element-by-element
+ Vector<unsigned> Global_node;
+
+ /// \short Vector of booleans to indicate whether a global edge lies
+ /// on a boundary
+ std::vector<bool>  Edge_boundary;
 
  /// \short Vector of vectors containing the boundary ids of the
  /// elements' faces
  Vector<Vector<unsigned> > Face_boundary;
+
+ /// \short Vector of vectors containing the global edge index of
+ // the elements' edges
+ Vector<Vector<unsigned> > Edge_index;
+
+ /// \short Vector of vectors containing the global edge index of
+ // the elements' edges
+ Vector<Vector<unsigned> > Face_index;
+
+ /// \short Vector of double attributes for each element
+ Vector<double> Element_attribute;
 
 };
 

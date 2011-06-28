@@ -1044,6 +1044,13 @@ const unsigned TElement<3,3>::NodeOnFace[4][6] =
 }
 
 
+//==================================================================
+//Default integration scheme for the TBubbleEnrichedElement<2,3>
+//===================================================================
+template<unsigned DIM>
+TBubbleEnrichedGauss<DIM,3> 
+TBubbleEnrichedElement<DIM,3>::Default_enriched_integration_scheme;
+
 //===================================================================
 //Central node on the face of the TBubbleEnrichedelement<2,3>
 //===================================================================
@@ -1165,4 +1172,6 @@ template class TBubbleEnrichedElement<2,3>;
 template class TBubbleEnrichedElement<3,3>;
 template class SolidTBubbleEnrichedElement<2,3>;
 template class SolidTBubbleEnrichedElement<3,3>;
+template class TBubbleEnrichedGauss<2,3>;
+template class TBubbleEnrichedGauss<3,3>;
 }

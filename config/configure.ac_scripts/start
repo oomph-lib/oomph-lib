@@ -879,7 +879,7 @@ if test x$suppress_triangle = xtrue; then
         echo "necessary where the compiler struggles to compile the"    
         echo "triangle sources. In that case, triangle should be "
         echo "installed separately (by whatever method it takes) "
-        echo "and linked against (similar to the way we handle "
+        echo "and included in the linker path (similar to the way we handle "
         echo "blas and lapack, say), but this hasn't been implemented"
         echo "in our build machinery. Please contact the developers if you"
         echo "need this..."      
@@ -894,6 +894,47 @@ AM_CONDITIONAL(SUPPRESS_TRIANGLE_LIB, test x$suppress_triangle = xtrue)
 # Add flag 
 if test x$suppress_triangle = xfalse; then \
     accumulated_cpp_flags=`echo $accumulated_cpp_flags " -DOOMPH_HAS_TRIANGLE_LIB"`; \
+fi;
+
+
+#................................................................
+
+
+
+#----------------------------------------------------------------
+# Allow suppression of oomph-lib's tetgen build (there may be subtle
+# comiler problems on some machines; if they exist we'd rather bin 
+# the third-party code rather than endangering the entire oomph-lib
+# build
+#----------------------------------------------------------------
+have_tetgen_lib=false
+AC_ARG_ENABLE(suppress-tetgen, 
+              [  --enable-suppress-tetgen Supress build/use of
+                                 oomph-lib's own copy of the tetgen library. ],
+        [suppress_tetgen=true],
+        [suppress_tetgen=false])       
+
+if test x$suppress_tetgen = xtrue; then 
+        echo "Suppressing build of oomph-lib's own copy of the tetgen library."
+        echo "This disables a lot of useful functionality but may be"
+        echo "necessary where the compiler struggles to compile the"    
+        echo "tetgen sources. In that case, tetgen should be "
+        echo "installed separately (by whatever method it takes) "
+        echo "and included in the linker path (similar to the way we handle "
+        echo "blas and lapack, say), but this hasn't been implemented"
+        echo "in our build machinery. Please contact the developers if you"
+        echo "need this..."      
+else 
+        echo "Building/using oomph-lib's own copy of the tetgen library"
+fi
+
+#Tell everybody about it...
+AM_CONDITIONAL(SUPPRESS_TETGEN_LIB, test x$suppress_tetgen = xtrue)
+
+
+# Add flag 
+if test x$suppress_tetgen = xfalse; then \
+    accumulated_cpp_flags=`echo $accumulated_cpp_flags " -DOOMPH_HAS_TETGEN_LIB"`; \
 fi;
 
 
@@ -1553,6 +1594,16 @@ else
   echo "it locally. Could/should provide option to link against external"
   echo "version..."
 fi
+
+# Tetgen?
+if test x$suppress_tetgen = xfalse; then \
+  external_libs=`echo $external_libs " -loomph_tetgen "`
+else 
+  echo "Omitting specification of tetgen library as we haven't built"
+  echo "it locally. Could/should provide option to link against external"
+  echo "version..."
+fi
+
 
 # SuperLU?
 if test x$have_superlu = xfalse; then  

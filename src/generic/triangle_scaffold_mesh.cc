@@ -34,7 +34,11 @@ namespace oomph
 
 
 //=====================================================================
-/// \short Constructor: Pass the filenames of the triangle files
+/// Constructor: Pass the filenames of the triangle files
+/// The assumptions are that the nodes have been assigned boundary 
+/// information which is used in the nodal construction to ensure that
+/// BoundaryNodes are indeed constructed when necessary. Additional
+/// boundary information is added from the segment boundaries.
 //=====================================================================
  TriangleScaffoldMesh::TriangleScaffoldMesh(const std::string& node_file_name,
                                             const std::string& ele_file_name,
@@ -74,8 +78,8 @@ namespace oomph
   // Dummy storage for element numbers
   unsigned dummy_element_number;
    
-  // Temporary stoorage for global node numbers listed element-by-element
-  Vector<unsigned> global_node(n_element*n_local_node);
+  // Resize stoorage for global node numbers listed element-by-element
+  Global_node.resize(n_element*n_local_node);
    
   // Initialise counter
   unsigned k=0;
@@ -92,7 +96,7 @@ namespace oomph
       element_file>>dummy_element_number;
       for(unsigned j=0;j<n_local_node;j++)
        {
-        element_file>>global_node[k];
+        element_file>>Global_node[k];
         k++;
        }
      }
@@ -104,7 +108,7 @@ namespace oomph
       element_file>>dummy_element_number;
       for(unsigned j=0;j<n_local_node;j++)
        {
-        element_file>>global_node[k];
+        element_file>>Global_node[k];
         k++;
        }
       element_file>> Element_attribute[i];
@@ -115,9 +119,6 @@ namespace oomph
   // Resize the Element vector
   Element_pt.resize(n_element);
    
-   
-   
-   
   // Process node file
   // -----------------
   std::ifstream node_file(node_file_name.c_str(),std::ios_base::in);
@@ -127,8 +128,7 @@ namespace oomph
   node_file>>n_node;
    
   // Create a vector of boolean so as not to create the same node twice
-  std::vector<bool> done(n_node);
-  for (unsigned i=0;i<n_node;i++){done[i]=false;}
+  std::vector<bool> done(n_node,false);
    
   // Resize the Node vector
   Node_pt.resize(n_node);
@@ -218,25 +218,18 @@ namespace oomph
    
   // Determine highest boundary index
   // --------------------------------
-  unsigned d=0;
+  unsigned n_bound=0;
   if(boundary_markers_flag==1)
    {  
-    d=bound[0];
+    n_bound=bound[0];
     for(unsigned i=1;i<n_node;i++)
      {
-      if (bound[i]>d)
+      if (bound[i]>n_bound)
        {
-        d=bound[i];
+        n_bound=bound[i];
        }
      }
    }
-   
-  // Set number of boundaries
-  if(d>0)
-   {
-    set_nboundary(d);
-   }
-   
    
   // Process poly file to extract edges
   //-----------------------------------
@@ -312,7 +305,8 @@ namespace oomph
    } 
  
   // Now extract the segment information
-  //------------------------------------
+  // Segements are lines that lie on boundaries of the domain
+  //----------------------------------------------------------
 
   // Number of segments
   unsigned n_segment;
@@ -332,6 +326,10 @@ namespace oomph
   // Dummy for global segment number
   unsigned dummy_segment_number;
 
+  // Storage for the edges associated with each node. Nodes are indexed
+  // using the Triangle 1-based index which is why there is a +1 here.
+  Vector<std::set<unsigned> > node_on_edges(n_node+1);
+
   // Extract information for each segment
   for(unsigned i=0;i<n_segment;i++)
    {
@@ -339,6 +337,11 @@ namespace oomph
     poly_file >> first_node[i];
     poly_file >> second_node[i];
     poly_file >> segment_boundary[i];
+    //Check that we don't have a higher segment boundary number
+    if(segment_boundary[i] > n_bound) {n_bound = segment_boundary[i];}
+    //Add the segment index to each node
+    node_on_edges[first_node[i]].insert(i);
+    node_on_edges[second_node[i]].insert(i);
    } 
   
   // Extract hole center information
@@ -367,8 +370,13 @@ namespace oomph
    }
   poly_file.close();
 
-
+  //Set the number of boundaries
+  if(n_bound > 0)
+   {
+    this->set_nboundary(n_bound);
+   }
   
+
   // Create the elements
   //--------------------
   
@@ -380,7 +388,7 @@ namespace oomph
     Element_pt[e]=new TElement<2,2>;
     for(unsigned j=0;j<n_local_node;j++)
      {
-      unsigned global_node_number=global_node[counter];
+      unsigned global_node_number=Global_node[counter];
       if(done[global_node_number-1]==false) //... -1 because node number
        // begins at 1 in triangle
        {
@@ -415,137 +423,103 @@ namespace oomph
   // Resize the "matrix" that stores the boundary id for each
   // edge in each element.
   Edge_boundary.resize(n_element);
+  Edge_index.resize(n_element);
   
   // Storage for the global node numbers (in triangle's 1-based 
   // numbering scheme) for the zero-th, 1st, and 2nd node in each
   // triangle.
-  unsigned zeroth_glob_num=0;
-  unsigned first_glob_num=0;
-  unsigned second_glob_num=0;
+  unsigned glob_num[3]={0,0,0};
+
+  //0-based index used to construct a global index-based lookup scheme
+  //for each edge that will be used to uniquely construct mid-side
+  //nodes.
+  //The segments (edges that lie on boundaries) have already
+  //been added to the scheme, so we start with the number of segments.
+  Nglobal_edge=n_segment;
   
   // Loop over the elements
   for(unsigned e=0;e<n_element;e++)
    {
     // Each element has three edges
     Edge_boundary[e].resize(3);
+    Edge_index[e].resize(3);
     // By default each edge is NOT on a boundary
     for(unsigned i=0;i<3;i++)
      {
       Edge_boundary[e][i]=0;
      }
-    
-    // Loop over all the nodes in the mesh to find out the
-    // global node numbers of the element's three nodes.
-    // Only search until all three have been found
-    unsigned found=0;
-    for(unsigned i=0;i<n_node;i++)
+
+    //Read out the global node numbers from the triangle data structure
+    const unsigned element_offset = e*n_local_node;
+    for(unsigned i=0;i<3;i++) 
      {
-      Node* nod_pt=Node_pt[i];
-      
-      // Is the 0th node in the element the same as the
-      // candidate node in the mesh?
-      if (finite_element_pt(e)->node_pt(0)==nod_pt)
-       {
-        // The global node number of the zero-th node in that element is
-        // (in triangle's 1-based numbering!):
-        zeroth_glob_num=i+1; 
-        found++;
-       }
-      
-      // Is the 1st node in the element the same as the
-      // candidate node in the mesh?
-      if (finite_element_pt(e)->node_pt(1)==nod_pt)
-       {
-        // The global node number of the first node in that element is
-        // (in triangle's 1-based numbering!):
-        first_glob_num=i+1; 
-        found++;
-       }
-      
-      
-      // Is the 2nd node in the element the same as the
-      // candidate node in the mesh?
-      if (finite_element_pt(e)->node_pt(2)==nod_pt)
-       {
-        // The global node number of the second node in that element is
-        // (in triangle's 1-based numbering!):
-        second_glob_num=i+1; 
-        found++;
-       }
-      
-      // We've found three -- bail out...
-      if (found==3) break;
+      glob_num[i] = Global_node[element_offset+i];
      }
-    
-    //If we haven't found all the nodes then complain
-    if(found < 3)
-     {
-      std::ostringstream error_stream;
-      error_stream << "Only found global node numbers of " 
-                   << found << " nodes in element " << e << std::endl; 
-      throw OomphLibError(error_stream.str(),
-                          "TriangleScaffoldMesh::TriangleScaffoldMesh()",
-                          OOMPH_EXCEPTION_LOCATION);
-     }
-    
 
     // Now we know the global node numbers of the elements' three nodes
     // in triangle's 1-based numbering. 
-    
-    // Loop over all the boundary segments and check if 
-    // the edges in the element coincide with it. If so,
-    // copy the boundary id across.
-    for(unsigned i=0;i<n_segment;i++)
-     {
-      // Zero-th edge
-      if ( ( (zeroth_glob_num== first_node[i]) || 
-             (zeroth_glob_num==second_node[i])   ) &&
-           ( ( first_glob_num== first_node[i]) || 
-             ( first_glob_num==second_node[i]) )     )
-       {
-        // Copy boundary id across
-        Edge_boundary[e][0]=segment_boundary[i];
 
-        //Add to the boundary node look-up scheme
-        add_boundary_node(segment_boundary[i]-1,
-                          Node_pt[zeroth_glob_num-1]);
-        add_boundary_node(segment_boundary[i]-1,
-                          Node_pt[first_glob_num-1]); 
+    // Determine whether any of the elements edges have already been 
+    // allocated an index. This may be because they are on boundaries
+    // (segments) or because they have already occured.
+    // The global index for the i-th edge will be stored in edge_index[i]
+    for(unsigned i=0;i<3;i++)
+     {
+      std::vector<unsigned>  local_edge_index;
+      
+      //Find the common global edge index for the nodes on 
+      //the i-th element edge (note the use of moular arithmetic here)
+      std::set_intersection(node_on_edges[glob_num[i]].begin(),
+                            node_on_edges[glob_num[i]].end(),
+                            node_on_edges[glob_num[(i+1)%3]].begin(),
+                            node_on_edges[glob_num[(i+1)%3]].end(),
+                            std::insert_iterator<std::vector<unsigned> >(
+                             local_edge_index,local_edge_index.begin()));
+      
+      //If the nodes share more than one global edge index, then
+      //we have a problem
+      if(local_edge_index.size() > 1) 
+       {
+        throw OomphLibError(
+         "Nodes in scaffold mesh share more than one global edge",
+         "TriangleScaffoldMesh::TriangleScaffoldMesh()",
+         OOMPH_EXCEPTION_LOCATION);
        }
       
-      // First edge
-      if ( ( ( first_glob_num== first_node[i]) ||
-             ( first_glob_num==second_node[i])   ) &&
-           ( (second_glob_num== first_node[i]) || 
-             (second_glob_num==second_node[i]) )     )
+      //If the element's edge is not already allocated, the intersection
+      //will be empty
+      if(local_edge_index.size()==0)
        {
-        // Copy boundary id across
-        Edge_boundary[e][1]=segment_boundary[i];
-
-        //Add to the boundary node look-up scheme
-        add_boundary_node(segment_boundary[i]-1,
-                          Node_pt[second_glob_num-1]);
-        add_boundary_node(segment_boundary[i]-1,
-                          Node_pt[first_glob_num-1]);
+        //Allocate the next global index
+        Edge_index[e][i] = Nglobal_edge;
+        //Associate the new edge index with the nodes
+        node_on_edges[glob_num[i]].insert(Nglobal_edge);
+        node_on_edges[glob_num[(i+1)%3]].insert(Nglobal_edge);
+        //Increment the global edge index
+        ++Nglobal_edge;
        }
-      // Second edge
-      if ( ( (zeroth_glob_num==first_node[i]) ||
-             (zeroth_glob_num==second_node[i])  ) && 
-           ( (second_glob_num==first_node[i]) ||
-             (second_glob_num==second_node[i]) )    )
+      //Otherwise we already have an edge
+      else if(local_edge_index.size()==1)
        {
-        // Copy boundary id across
-        Edge_boundary[e][2]=segment_boundary[i];
+        //Set the edge index
+        Edge_index[e][i] = local_edge_index[0];
+        //Allocate the boundary index, if it is a segment
+        if(local_edge_index[0] < n_segment)
+         {
+          Edge_boundary[e][i] = segment_boundary[local_edge_index[0]]; 
+          //Add the nodes to the boundary look-up scheme in 
+          //oomph-lib (0-based) index
+          add_boundary_node(segment_boundary[local_edge_index[0]]-1,
+                            Node_pt[glob_num[i]-1]);
+          add_boundary_node(segment_boundary[local_edge_index[0]]-1,
+                            Node_pt[glob_num[(i+1)%3]-1]); 
 
-        //Add to the boundary node look-up scheme
-        add_boundary_node(segment_boundary[i]-1,
-                          Node_pt[second_glob_num-1]);
-        add_boundary_node(segment_boundary[i]-1,
-                          Node_pt[zeroth_glob_num-1]);
+         }
        }
      }
+
    }
- } 
+ }
 
 #ifdef OOMPH_HAS_TRIANGLE_LIB  
 
@@ -555,7 +529,6 @@ namespace oomph
 //=====================================================================
  TriangleScaffoldMesh::TriangleScaffoldMesh(TriangulateIO& triangle_data)
  {
-
   
   // Number of elements
   unsigned n_element = static_cast<unsigned>(triangle_data.numberoftriangles);
@@ -578,8 +551,8 @@ namespace oomph
   //Element attributes may be used if we have internal boundaries
   Element_attribute.resize(n_element,0.0);
   
-  // Temporary stoorage for global node numbers listed element-by-element
-  Vector<unsigned> global_node(n_element*n_local_node);
+  // Resizestoorage for global node numbers listed element-by-element
+  Global_node.resize(n_element*n_local_node);
   
   // Initialise counter
   unsigned k=0;
@@ -595,7 +568,7 @@ namespace oomph
      {
       for(unsigned j=0;j<n_local_node;j++)
        {
-        global_node[k] = static_cast<unsigned>(triangle_data.trianglelist[k]);
+        Global_node[k] = static_cast<unsigned>(triangle_data.trianglelist[k]);
         k++;
        }
      }
@@ -606,7 +579,7 @@ namespace oomph
      {
       for(unsigned j=0;j<n_local_node;j++)
        {
-        global_node[k] = static_cast<unsigned>(triangle_data.trianglelist[k]);
+        Global_node[k] = static_cast<unsigned>(triangle_data.trianglelist[k]);
         k++;
        }
       Element_attribute[i] = triangle_data.triangleattributelist[i];
@@ -620,8 +593,7 @@ namespace oomph
   unsigned n_node = triangle_data.numberofpoints;
   
   // Create a vector of boolean so as not to create the same node twice
-  std::vector<bool> done(n_node);
-  for (unsigned i=0;i<n_node;i++){done[i]=false;}
+  std::vector<bool> done(n_node,false);
   
   // Resize the Node vector
   Node_pt.resize(n_node);
@@ -654,6 +626,22 @@ namespace oomph
       bound[i]=0;
      }
    }
+
+  // Determine highest boundary index
+  // --------------------------------
+  unsigned n_bound=0;
+  if(boundary_markers_flag==1)
+   {  
+    n_bound=bound[0];
+    for(unsigned i=1;i<n_node;i++)
+     {
+      if (bound[i]>n_bound)
+       {
+        n_bound=bound[i];
+       }
+     }
+   }
+
   
   // Now extract the segment information
   //------------------------------------
@@ -669,6 +657,10 @@ namespace oomph
   // Storage for the boundary marker for each segment
   Vector<unsigned> segment_boundary(n_segment);
   
+  // Storage for the edges associated with each node. Nodes are indexed
+  // using the Triangle 1-based index which is why there is a +1 here.
+  Vector<std::set<unsigned> > node_on_edges(n_node+1);
+
   // Extract information for each segment
   for(unsigned i=0;i<n_segment;i++)
    {
@@ -676,7 +668,12 @@ namespace oomph
     second_node[i] = static_cast<unsigned>(triangle_data.segmentlist[2*i+1]);
     segment_boundary[i] =  
      static_cast<unsigned>(triangle_data.segmentmarkerlist[i]);
-   } 
+    //Check that we don't have a higher segment boundary number
+    if(segment_boundary[i] > n_bound) {n_bound = segment_boundary[i];}
+    //Add the segment index to each node
+    node_on_edges[first_node[i]].insert(i);
+    node_on_edges[second_node[i]].insert(i);
+   }
 
   // Extract hole center information
   unsigned nhole=triangle_data.numberofholes;
@@ -705,27 +702,10 @@ namespace oomph
     Hole_centre.resize(0);
    }
 
-  // Determine highest boundary index using the segment_boundary_markers
-  // (and not the vertex_boundary_markers!) segment marker value may be 
-  // greater than the vertex one.
-  // --------------------------------
-  unsigned d=0;
-  if(boundary_markers_flag==1)
-   {  
-    d=segment_boundary[0];
-    for(unsigned i=1;i<n_segment;i++)
-     {
-      if (segment_boundary[i]>d)
-       {
-        d=segment_boundary[i];
-       }
-     }
-   }
-   
   // Set number of boundaries
-  if(d>0)
+  if(n_bound>0)
    {
-    set_nboundary(d);
+    set_nboundary(n_bound);
    }
 
   
@@ -740,7 +720,7 @@ namespace oomph
     Element_pt[e]=new TElement<2,2>;
     for(unsigned j=0;j<n_local_node;j++)
      {
-      unsigned global_node_number=global_node[counter];
+      unsigned global_node_number=Global_node[counter];
       if(done[global_node_number-1]==false) //... -1 because node number
        // begins at 1 in triangle
        {
@@ -775,134 +755,102 @@ namespace oomph
   // Resize the "matrix" that stores the boundary id for each
   // edge in each element.
   Edge_boundary.resize(n_element);
+  Edge_index.resize(n_element);
   
   // Storage for the global node numbers (in triangle's 1-based 
   // numbering scheme) for the zero-th, 1st, and 2nd node in each
   // triangle.
-  unsigned zeroth_glob_num=0;
-  unsigned first_glob_num=0;
-  unsigned second_glob_num=0;
-  
+  unsigned glob_num[3]={0,0,0};
+ 
+  //0-based index used to construct a global index-based lookup scheme
+  //for each edge that will be used to uniquely construct mid-side
+  //nodes.
+  //The segments (edges that lie on boundaries) have already
+  //been added to the scheme, so we start with the number of segments.
+  Nglobal_edge=n_segment;
+
   // Loop over the elements
   for(unsigned e=0;e<n_element;e++)
    {
     // Each element has three edges
     Edge_boundary[e].resize(3);
+    Edge_index[e].resize(3);
     // By default each edge is NOT on a boundary
     for(unsigned i=0;i<3;i++)
      {
       Edge_boundary[e][i]=0;
      }
     
-    // Loop over all the nodes in the mesh to find out the
-    // global node numbers of the element's three nodes.
-    // Only search until all three have been found
-    unsigned found=0;
-    for(unsigned i=0;i<n_node;i++)
+    //Read out the global node numbers from the triangle data structure
+    const unsigned element_offset = e*n_local_node;
+    for(unsigned i=0;i<3;i++) 
      {
-      Node* nod_pt=Node_pt[i];
-      
-      // Is the 0th node in the element the same as the
-      // candidate node in the mesh?
-      if (finite_element_pt(e)->node_pt(0)==nod_pt)
-       {
-        // The global node number of the zero-th node in that element is
-        // (in triangle's 1-based numbering!):
-        zeroth_glob_num=i+1; 
-        found++;
-       }
-      
-      // Is the 1st node in the element the same as the
-      // candidate node in the mesh?
-      if (finite_element_pt(e)->node_pt(1)==nod_pt)
-       {
-        // The global node number of the first node in that element is
-        // (in triangle's 1-based numbering!):
-        first_glob_num=i+1; 
-        found++;
-       }
-      
-      
-      // Is the 2nd node in the element the same as the
-      // candidate node in the mesh?
-      if (finite_element_pt(e)->node_pt(2)==nod_pt)
-       {
-        // The global node number of the second node in that element is
-        // (in triangle's 1-based numbering!):
-        second_glob_num=i+1; 
-        found++;
-       }
-      
-      // We've found three -- bail out...
-      if (found==3) break;
+      glob_num[i] = Global_node[element_offset+i];
      }
-    
-    //If we haven't found all the nodes then complain
-    if(found < 3)
-     {
-      std::ostringstream error_stream;
-      error_stream << "Only found global node numbers of " 
-                   << found << " nodes in element " << e << std::endl; 
-      throw OomphLibError(error_stream.str(),
-                          "TriangleScaffoldMesh::TriangleScaffoldMesh()",
-                          OOMPH_EXCEPTION_LOCATION);
-     }
-    
 
     // Now we know the global node numbers of the elements' three nodes
     // in triangle's 1-based numbering. 
-    
-    // Loop over all the boundary segments and check if 
-    // the edges in the element coincide with it. If so,
-    // copy the boundary id across.
-    for(unsigned i=0;i<n_segment;i++)
+
+    // Determine whether any of the elements edges have already been 
+    // allocated an index. This may be because they are on boundaries
+    // (segments) or because they have already occured.
+    // The global index for the i-th edge will be stored in edge_index[i]
+    for(unsigned i=0;i<3;i++)
      {
-      // Zero-th edge
-      if ( ( (zeroth_glob_num== first_node[i]) || 
-             (zeroth_glob_num==second_node[i])   ) &&
-           ( ( first_glob_num== first_node[i]) || 
-             ( first_glob_num==second_node[i]) )     )
-       {
-        // Copy boundary id across
-        Edge_boundary[e][0]=segment_boundary[i];
+      std::vector<unsigned>  local_edge_index;
+      
+      //Find the common global edge index for the nodes on 
+      //the i-th element edge (note the use of moular arithmetic here)
+      std::set_intersection(node_on_edges[glob_num[i]].begin(),
+                            node_on_edges[glob_num[i]].end(),
+                            node_on_edges[glob_num[(i+1)%3]].begin(),
+                            node_on_edges[glob_num[(i+1)%3]].end(),
+                            std::insert_iterator<std::vector<unsigned> >(
+                             local_edge_index,local_edge_index.begin()));
 
-        //Add to the boundary node look-up scheme
-        add_boundary_node(segment_boundary[i]-1,
-                          Node_pt[zeroth_glob_num-1]);
-        add_boundary_node(segment_boundary[i]-1,
-                          Node_pt[first_glob_num-1]);
+      //If the nodes share more than one global edge index, then
+      //we have a problem
+      if(local_edge_index.size() > 1) 
+       {
+        throw OomphLibError(
+         "Nodes in scaffold mesh share more than one global edge",
+         "TriangleScaffoldMesh::TriangleScaffoldMesh()",
+         OOMPH_EXCEPTION_LOCATION);
        }
-      // First edge
-      if ( ( ( first_glob_num== first_node[i]) ||
-             ( first_glob_num==second_node[i])   ) &&
-           ( (second_glob_num== first_node[i]) || 
-             (second_glob_num==second_node[i]) )     )
-       {
-        // Copy boundary id across
-        Edge_boundary[e][1]=segment_boundary[i];
 
-        //Add to the boundary node look-up scheme
-        add_boundary_node(segment_boundary[i]-1,
-                          Node_pt[second_glob_num-1]);
-        add_boundary_node(segment_boundary[i]-1,
-                          Node_pt[first_glob_num-1]);
+      
+      //If the element's edge is not already allocated, the intersection
+      //will be empty
+      if(local_edge_index.size()==0)
+       {
+        //Allocate the next global index
+        Edge_index[e][i] = Nglobal_edge;
+        //Associate the new edge index with the nodes
+        node_on_edges[glob_num[i]].insert(Nglobal_edge);
+        node_on_edges[glob_num[(i+1)%3]].insert(Nglobal_edge);
+        //Increment the global edge index
+        ++Nglobal_edge;
        }
-      // Second edge
-      if ( ( (zeroth_glob_num==first_node[i]) ||
-             (zeroth_glob_num==second_node[i])  ) && 
-           ( (second_glob_num==first_node[i]) ||
-             (second_glob_num==second_node[i]) )    )
+      //Otherwise we already have an edge
+      else if(local_edge_index.size()==1)
        {
-        // Copy boundary id across
-        Edge_boundary[e][2]=segment_boundary[i];
+        //Set the edge index
+        Edge_index[e][i] = local_edge_index[0];
+        //Allocate the boundary index, if it is a segment
+        if(local_edge_index[0] < n_segment)
+         {
+          Edge_boundary[e][i] = segment_boundary[local_edge_index[0]]; 
+          //Add the nodes to the boundary look-up scheme in 
+          //oomph-lib (0-based) index
+          add_boundary_node(segment_boundary[local_edge_index[0]]-1,
+                            Node_pt[glob_num[i]-1]);
+          add_boundary_node(segment_boundary[local_edge_index[0]]-1,
+                            Node_pt[glob_num[(i+1)%3]-1]); 
 
-        //Add to the boundary node look-up scheme
-        add_boundary_node(segment_boundary[i]-1,
-                          Node_pt[second_glob_num-1]);
-        add_boundary_node(segment_boundary[i]-1,
-                          Node_pt[zeroth_glob_num-1]);
+         }
        }
      }
+
    }
  }
 

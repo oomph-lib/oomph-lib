@@ -11,6 +11,11 @@ else
   SUBDIRS += oomph_triangle
 endif
 
+# Suppress tetgen?
+if SUPPRESS_TETGEN_LIB
+else
+  SUBDIRS += oomph_tetgen
+endif
 
 
 # Check if metis is already available
