@@ -23,7 +23,7 @@ headers = tetgen.h
 tetgen.lo : tetgen.cxx
 	$(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 	--mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
-	$(AM_CPPFLAGS) $(AM_CXXFLAGS) -g -O0 -Wall \
+	$(AM_CPPFLAGS) $(AM_CXXFLAGS) -O2 -Wall \
 	-MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
 	$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
 
@@ -32,7 +32,7 @@ tetgen.lo : tetgen.cxx
 predicates.lo : predicates.cxx
 	$(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 	--mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
-	$(AM_CPPFLAGS) $(AM_CXXFLAGS) -g -O0 -Wall \
+	$(AM_CPPFLAGS) $(AM_CXXFLAGS) -O0 -Wall \
 	-MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
 	$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
 

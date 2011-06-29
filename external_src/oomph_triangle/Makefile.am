@@ -12,6 +12,14 @@ sources = triangle.c
 # C...
 headers = triangle.h
 
+#Specific compilation for triangle with no optimisation
+triangle.lo : triangle.c
+	$(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+	--mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+	$(AM_CPPFLAGS) $(AM_CFLAGS) -O0 -Wall \
+	-MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
+	$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
+
 
 # Define name of library
 libname = oomph_triangle
