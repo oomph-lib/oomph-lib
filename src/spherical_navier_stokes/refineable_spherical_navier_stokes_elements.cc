@@ -284,6 +284,9 @@ int local_eqn=0, local_unknown=0;
              sum += (scaled_re_st*dudt[0]*r2 + scaled_re*r*conv)*
               sin_theta*testf(l);
 
+             //Add the user-defined body force term
+             sum -= r2*sin_theta*body_force[0]*testf(l);
+
              //Add the Coriolis term
              sum -= 2.0*scaled_re_inv_ro*sin_theta*u_phi*r2*sin_theta*testf(l);
              
@@ -315,6 +318,9 @@ int local_eqn=0, local_unknown=0;
              //Add the time-derivative and convective terms to the residual
              sum += (scaled_re_st*r2*sin_theta*dudt[1] + 
                      scaled_re*r*conv)*testf(l);
+
+             //Add the user-defined body force term
+             sum -= r2*sin_theta*body_force[1]*testf(l);
 
               //Add the Coriolis term
              sum -= 2.0*scaled_re_inv_ro*cos_theta*u_phi*r2*sin_theta*testf(l);
@@ -356,6 +362,8 @@ int local_eqn=0, local_unknown=0;
              sum += (scaled_re_st*r2*dudt[2]*sin_theta 
                      + scaled_re*conv*r)*testf(l);
              
+             sum -= r2*sin_theta*body_force[2]*testf(l);
+
              //Add the Coriolis term
              sum += 2.0*scaled_re_inv_ro*
               (cos_theta*u_theta + sin_theta*u_r)*r2*sin_theta*testf(l);

@@ -165,7 +165,7 @@ class SphericalNavierStokesEquations : public virtual FSIFluidElement
  /// Eulerian position. This function is virtual so that it can be 
  /// overloaded in multi-physics elements where the body force might
  /// depend on another variable.
- virtual void get_body_force_spherical_nst(double time,
+ virtual void get_body_force_spherical_nst(const double &time,
                                            const unsigned& ipt,
                                            const Vector<double> &s,
                                            const Vector<double> &x, 
