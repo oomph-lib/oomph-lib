@@ -284,9 +284,9 @@ public:
   }
   
 
- /// Fill in the geometric Jacobian, which in this case is r
+ /// Fill in the geometric Jacobian, which in this case is r*r*sin(theta)
  double geometric_jacobian(const Vector<double> &x) 
-  {return x[0];}
+ {return x[0]*x[0]*sin(x[1]);}
 
 
 

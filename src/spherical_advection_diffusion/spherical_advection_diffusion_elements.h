@@ -236,7 +236,7 @@ public:
   //If no wind function has been set, return zero
   if(Wind_fct_pt==0)
    {
-    for(unsigned i=0;i<2;i++) 
+    for(unsigned i=0;i<3;i++) 
      { 
       wind[i] = 0.0;
      }

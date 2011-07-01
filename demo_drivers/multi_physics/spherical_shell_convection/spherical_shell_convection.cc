@@ -383,7 +383,7 @@ int main(int argc, char **argv)
  problem.set_boundary_conditions(0.0);
  
  //Set the maximum adaptation
- unsigned max_adapt = 3;
+ unsigned max_adapt = 2;
   
  // Solve the problem
  problem.steady_newton_solve(max_adapt);
@@ -401,7 +401,7 @@ int main(int argc, char **argv)
  problem.assign_initial_values_impulsive(dt);
 
  //Set the number of timesteps to our default value
- unsigned n_steps = 40; //This is enough to get to steady state
+ unsigned n_steps = 100; //This is enough to get to steady state
 
  //If we have a command line argument, perform fewer steps
  if(argc > 1) {n_steps = 5;}

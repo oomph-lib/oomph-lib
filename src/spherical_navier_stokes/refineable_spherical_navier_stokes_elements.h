@@ -87,10 +87,10 @@ public virtual ElementWithZ2ErrorEstimator
    unsigned DIM=3;
 #ifdef PARANOID
    unsigned num_entries=DIM+((DIM*DIM)-DIM)/2;
-   if (flux.size()!=num_entries)
+   if (flux.size() < num_entries)
     {
      std::ostringstream error_message;
-     error_message << "The flux vector has the wrong number of entries, " 
+     error_message << "The flux vector is too small, size " 
                    << flux.size() << ", whereas it should be " 
                    << num_entries << std::endl;
      throw OomphLibError(
