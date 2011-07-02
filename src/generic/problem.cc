@@ -228,14 +228,39 @@ namespace oomph
  Vector<unsigned>& Problem::distribute
  (const Vector<unsigned>& element_partition, const bool& report_stats)
   {
+#ifdef PARANOID
+   bool has_non_zero_entry=false;
+   unsigned n=element_partition.size();
+   for (unsigned i=0;i<n;i++)
+    {
+     if (element_partition[i]!=0)
+      {
+       has_non_zero_entry=true;
+       break;
+      }
+    }
+   if (!has_non_zero_entry)
+    {
+     std::ostringstream warn_message;
+     warn_message << "WARNING: All entries in specified partitioning vector \n"
+                  << "         are zero -- will ignore this and use METIS\n"
+                  << "         to perform the partitoning\n";
+     OomphLibWarning(warn_message.str(),
+                     "Problem::distribute()",
+                     OOMPH_EXCEPTION_LOCATION); 
+    }
+#endif
    // Set dummy doc paramemters
    DocInfo doc_info;
    doc_info.doc_flag()=false;
+
    // Set the size of the output vector
    unsigned n_element=element_partition.size();
    Element_partition.resize(n_element);
+
    // Distribute
    Element_partition=distribute(element_partition,doc_info,report_stats);
+
    // Return the partition that was used
    return Element_partition;
   }
@@ -267,6 +292,7 @@ namespace oomph
  {
   // Storage for number of processors and number of elements in global mesh
   int n_proc=this->communicator_pt()->nproc();
+  int my_rank=this->communicator_pt()->my_rank();
   int n_element=mesh_pt()->nelement();
 
   // Vector to be returned
@@ -393,27 +419,40 @@ namespace oomph
       unsigned nelem=global_mesh_pt->nelement();
       Vector<unsigned> element_domain(nelem);
 
+      // Number of elements that I'm in charge of, based on any
+      // incoming partitioning
+      unsigned n_my_elements=0;
+
+      // Have we used the pre-set partitioning
+      bool used_preset_partitioning=false;
+
       // Partition the mesh, unless the partition has already been passed in
       // If it hasn't then the sum of all the entries of the vector should be 0
       unsigned sum_element_partition=0;
       unsigned n_part=element_partition.size();
       for (unsigned e=0;e<n_part;e++)
        {
+        // ... another one for me.
+        if (int(element_partition[e])==my_rank) n_my_elements++;
+        
         sum_element_partition+=element_partition[e];
        }
       if (sum_element_partition==0)
        {
+        oomph_info << "INFO: using METIS to partition elements"
+                   << std::endl;
         partition_global_mesh(global_mesh_pt,doc_info,element_domain);
+        used_preset_partitioning=false;
        }
       else
        {
-        if (report_stats)
-         {
-          oomph_info << "INFO: using pre-set partition of elements"
-                     << std::endl;
-         }
+        oomph_info << "INFO: using pre-set partition of elements"
+                   << std::endl;
+        used_preset_partitioning=true;
         element_domain=element_partition;
        }
+
+
 
       // Set the GLOBAL Mesh_has_been_distributed flag
       global_mesh_pt->mesh_has_been_distributed()=true;
@@ -483,6 +522,23 @@ namespace oomph
         Base_mesh_element_pt[e]=el_pt;
        }
 
+      // Wipe everything if a pre-determined partitioning
+      // didn't specify ANY elements for this processor 
+      // (typically happens during restarts with larger number
+      // of processors -- in this case we really want an empty
+      // processor rather than one with any "kept" halo elements)
+      bool overrule_keep_as_halo_element_status=false;
+      if ((n_my_elements==0)&&(used_preset_partitioning))
+       {
+        oomph_info << "INFO: We're over-ruling the \"keep as halo element\"\n"
+                   << "      status because the preset partitioning\n"
+                   << "      didn't place ANY elements on this processor,\n"
+                   << "      probably because of a restart on a larger \n"
+                   << "      number of processors\n";
+        overrule_keep_as_halo_element_status=true;
+       }
+
+
       // Distribute the (sub)meshes (i.e. sort out their halo lookup schemes)
       Vector<GeneralisedElement*> deleted_element_pt;
       if (n_mesh==0)
@@ -490,7 +546,8 @@ namespace oomph
         global_mesh_pt->distribute(this->communicator_pt(),
                                    element_domain,
                                    deleted_element_pt,
-                                   doc_info,report_stats);
+                                   doc_info,report_stats,
+                                   overrule_keep_as_halo_element_status);
        }
       else // There are submeshes, "distribute" each one separately
        {
@@ -506,7 +563,8 @@ namespace oomph
           mesh_pt(i_mesh)->distribute(this->communicator_pt(),
                                       submesh_element_domain[i_mesh],
                                       deleted_element_pt,
-                                      doc_info,report_stats);
+                                      doc_info,report_stats,
+                                      overrule_keep_as_halo_element_status);
          }
         // Rebuild the global mesh
         rebuild_global_mesh();
@@ -1596,9 +1654,20 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
      if(TreeBasedRefineableMeshBase* mmesh_pt = 
         dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(0)))
       {
-       unsigned ncont_interpolated_values=dynamic_cast<RefineableElement*>
-           (mmesh_pt->element_pt(0))->ncont_interpolated_values();
-
+       // Bypass if we have no elements and then get overall
+       // value by reduction
+       unsigned local_ncont_interpolated_values=0;
+       if (mmesh_pt->nelement()>0)
+        {         
+         local_ncont_interpolated_values=dynamic_cast<RefineableElement*>
+          (mmesh_pt->element_pt(0))->ncont_interpolated_values();
+        }
+       unsigned ncont_interpolated_values=0;
+       MPI_Allreduce(&local_ncont_interpolated_values,
+                     &ncont_interpolated_values,1,
+                     MPI_UNSIGNED,MPI_MAX,this->communicator_pt()->mpi_comm());
+       
+       
        mmesh_pt->synchronise_hanging_nodes(this->communicator_pt(),
                                            ncont_interpolated_values);
       }
@@ -1688,7 +1757,8 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
           // Need to use the largest value of n_int_values 
           // when calling the routine
           MPI_Allreduce(&n_int_values,&ncont_interpolated_values,1,
-                        MPI_INT,MPI_MAX,this->communicator_pt()->mpi_comm());
+                        MPI_UNSIGNED,MPI_MAX,
+                        this->communicator_pt()->mpi_comm());
            
           // All processes call the routine to ensure correct communications
           mmesh_pt->synchronise_hanging_nodes(this->communicator_pt(),
@@ -2079,12 +2149,12 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
  actually_removed_some_data=false;
  
 
- // hierher
- bool use_new=true;
+ // // hierher
+ // const bool use_new=true;
 
- // NEW VERSION // hierher kill old version in next commit
- //============
- if (use_new)
+ // // NEW VERSION // hierher kill old version in next commit
+ // //============
+ // if (use_new)
   {
    
 
@@ -2526,468 +2596,470 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
     this->communicator_pt());
 
   }
- // OLD VERSION
- //============
- else //--
-  {
+
+
+ // // OLD VERSION
+ // //============
+ // else //--
+ //  {
 
 
 
-   // Each individual container of external halo nodes has unique
-   // nodes/equation numbers, but there may be some duplication between
-   // two or more different containers; the following code checks for this
-   // and removes the duplication by overwriting any data point with an already
-   // existing eqn number with the original data point which had the eqn no.
+ //   // Each individual container of external halo nodes has unique
+ //   // nodes/equation numbers, but there may be some duplication between
+ //   // two or more different containers; the following code checks for this
+ //   // and removes the duplication by overwriting any data point with an already
+ //   // existing eqn number with the original data point which had the eqn no.
 
-   // Storage for existing global equation numbers for each node
-   Vector<std::pair<Vector<int>,Node*> > existing_global_eqn_numbers;
+ //   // Storage for existing global equation numbers for each node
+ //   Vector<std::pair<Vector<int>,Node*> > existing_global_eqn_numbers;
  
-   // Doc timings if required
-   double t_start=0.0;
-   if (Global_timings::Doc_comprehensive_timings)
-    {
-     t_start=TimingHelpers::timer();
-    }
+ //   // Doc timings if required
+ //   double t_start=0.0;
+ //   if (Global_timings::Doc_comprehensive_timings)
+ //    {
+ //     t_start=TimingHelpers::timer();
+ //    }
 
-   // Only do each node once
-   std::map<Node*,bool> node_done;
+ //   // Only do each node once
+ //   std::map<Node*,bool> node_done;
 
-   // Loop over existing "normal" elements in mesh
-   unsigned n_element=mesh_pt->nelement();
-   for (unsigned e=0;e<n_element;e++)
-    {
-     FiniteElement* el_pt = dynamic_cast<FiniteElement*>(
-      mesh_pt->element_pt(e));
-     if (el_pt!=0)
-      {
-       // Loop over nodes
-       unsigned n_node=el_pt->nnode();
-       for (unsigned j=0;j<n_node;j++)
-        {
-         Node* nod_pt=el_pt->node_pt(j);
+ //   // Loop over existing "normal" elements in mesh
+ //   unsigned n_element=mesh_pt->nelement();
+ //   for (unsigned e=0;e<n_element;e++)
+ //    {
+ //     FiniteElement* el_pt = dynamic_cast<FiniteElement*>(
+ //      mesh_pt->element_pt(e));
+ //     if (el_pt!=0)
+ //      {
+ //       // Loop over nodes
+ //       unsigned n_node=el_pt->nnode();
+ //       for (unsigned j=0;j<n_node;j++)
+ //        {
+ //         Node* nod_pt=el_pt->node_pt(j);
 
-         // Have we already done the node?
-         if (!node_done[nod_pt])
-          {
-           node_done[nod_pt]=true;
+ //         // Have we already done the node?
+ //         if (!node_done[nod_pt])
+ //          {
+ //           node_done[nod_pt]=true;
          
-           unsigned n_val=nod_pt->nvalue();
-           Vector<int> nodal_eqn_numbers(n_val);
-           for (unsigned i_val=0;i_val<n_val;i_val++)
-            {
-             nodal_eqn_numbers[i_val]=nod_pt->eqn_number(i_val);
-            }
+ //           unsigned n_val=nod_pt->nvalue();
+ //           Vector<int> nodal_eqn_numbers(n_val);
+ //           for (unsigned i_val=0;i_val<n_val;i_val++)
+ //            {
+ //             nodal_eqn_numbers[i_val]=nod_pt->eqn_number(i_val);
+ //            }
          
-           // All these nodes have unique equation numbers, so add all
-           existing_global_eqn_numbers.push_back
-            (make_pair(nodal_eqn_numbers,nod_pt));
+ //           // All these nodes have unique equation numbers, so add all
+ //           existing_global_eqn_numbers.push_back
+ //            (make_pair(nodal_eqn_numbers,nod_pt));
          
-           // If it's a SolidNode then add its extra equation numbers
-           SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
-           if (solid_nod_pt!=0)
-            {
-             unsigned n_val_solid=solid_nod_pt->variable_position_pt()->nvalue();
-             Vector<int> solid_nodal_eqn_numbers(n_val_solid);
-             for (unsigned i_val=0;i_val<n_val_solid;i_val++)
-              {
-               solid_nodal_eqn_numbers[i_val]=solid_nod_pt->
-                variable_position_pt()->eqn_number(i_val);
-              }
-             // Add these equation numbers to the existing storage
-             existing_global_eqn_numbers.push_back
-              (make_pair(solid_nodal_eqn_numbers,solid_nod_pt));
-            }
+ //           // If it's a SolidNode then add its extra equation numbers
+ //           SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
+ //           if (solid_nod_pt!=0)
+ //            {
+ //             unsigned n_val_solid=solid_nod_pt->variable_position_pt()->nvalue();
+ //             Vector<int> solid_nodal_eqn_numbers(n_val_solid);
+ //             for (unsigned i_val=0;i_val<n_val_solid;i_val++)
+ //              {
+ //               solid_nodal_eqn_numbers[i_val]=solid_nod_pt->
+ //                variable_position_pt()->eqn_number(i_val);
+ //              }
+ //             // Add these equation numbers to the existing storage
+ //             existing_global_eqn_numbers.push_back
+ //              (make_pair(solid_nodal_eqn_numbers,solid_nod_pt));
+ //            }
          
-           // Take into account master nodes too
-           if (dynamic_cast<RefineableElement*>(el_pt)!=0)
-            {
-             int n_cont_int_values=dynamic_cast<RefineableElement*>
-              (el_pt)->ncont_interpolated_values();
-             for (int i_cont=-1;i_cont<n_cont_int_values;i_cont++)
-              {
-               if (nod_pt->is_hanging(i_cont))
-                {
-                 HangInfo* hang_pt=nod_pt->hanging_pt(i_cont);
-                 unsigned n_master=hang_pt->nmaster();
-                 for (unsigned m=0;m<n_master;m++)
-                  {
-                   Node* master_nod_pt=hang_pt->master_node_pt(m);
-                   unsigned n_val=master_nod_pt->nvalue();
-                   Vector<int> master_nodal_eqn_numbers(n_val);
-                   for (unsigned i_val=0;i_val<n_val;i_val++)
-                    {
-                     master_nodal_eqn_numbers[i_val]=
-                      master_nod_pt->eqn_number(i_val);
-                    }
+ //           // Take into account master nodes too
+ //           if (dynamic_cast<RefineableElement*>(el_pt)!=0)
+ //            {
+ //             int n_cont_int_values=dynamic_cast<RefineableElement*>
+ //              (el_pt)->ncont_interpolated_values();
+ //             for (int i_cont=-1;i_cont<n_cont_int_values;i_cont++)
+ //              {
+ //               if (nod_pt->is_hanging(i_cont))
+ //                {
+ //                 HangInfo* hang_pt=nod_pt->hanging_pt(i_cont);
+ //                 unsigned n_master=hang_pt->nmaster();
+ //                 for (unsigned m=0;m<n_master;m++)
+ //                  {
+ //                   Node* master_nod_pt=hang_pt->master_node_pt(m);
+ //                   unsigned n_val=master_nod_pt->nvalue();
+ //                   Vector<int> master_nodal_eqn_numbers(n_val);
+ //                   for (unsigned i_val=0;i_val<n_val;i_val++)
+ //                    {
+ //                     master_nodal_eqn_numbers[i_val]=
+ //                      master_nod_pt->eqn_number(i_val);
+ //                    }
                  
-                   // Add these equation numbers to the existing storage
-                   existing_global_eqn_numbers.push_back
-                    (make_pair(master_nodal_eqn_numbers,master_nod_pt));
+ //                   // Add these equation numbers to the existing storage
+ //                   existing_global_eqn_numbers.push_back
+ //                    (make_pair(master_nodal_eqn_numbers,master_nod_pt));
                  
-                   // If this master is a SolidNode then add its extra 
-                   // eqn numbers
-                   SolidNode* master_solid_nod_pt=dynamic_cast<SolidNode*>
-                    (master_nod_pt);
-                   if (master_solid_nod_pt!=0)
-                    {
-                     unsigned n_val_mst_solid=master_solid_nod_pt->
-                      variable_position_pt()->nvalue();
-                     Vector<int> master_solid_nodal_eqn_numbers(n_val_mst_solid);
-                     for (unsigned i_val=0;i_val<n_val_mst_solid;i_val++)
-                      {
-                       master_solid_nodal_eqn_numbers[i_val]=
-                        master_solid_nod_pt->
-                        variable_position_pt()->eqn_number(i_val);
-                      }
-                     // Add these equation numbers to the existing storage
-                     existing_global_eqn_numbers.push_back
-                      (make_pair(master_solid_nodal_eqn_numbers,
-                                 master_solid_nod_pt));
-                    }
-                  }
-                }
-              }
-            }
-          } // endif for node already done
-        }// End of loop over nodes
-      } //End of FiniteElement 
+ //                   // If this master is a SolidNode then add its extra 
+ //                   // eqn numbers
+ //                   SolidNode* master_solid_nod_pt=dynamic_cast<SolidNode*>
+ //                    (master_nod_pt);
+ //                   if (master_solid_nod_pt!=0)
+ //                    {
+ //                     unsigned n_val_mst_solid=master_solid_nod_pt->
+ //                      variable_position_pt()->nvalue();
+ //                     Vector<int> master_solid_nodal_eqn_numbers(n_val_mst_solid);
+ //                     for (unsigned i_val=0;i_val<n_val_mst_solid;i_val++)
+ //                      {
+ //                       master_solid_nodal_eqn_numbers[i_val]=
+ //                        master_solid_nod_pt->
+ //                        variable_position_pt()->eqn_number(i_val);
+ //                      }
+ //                     // Add these equation numbers to the existing storage
+ //                     existing_global_eqn_numbers.push_back
+ //                      (make_pair(master_solid_nodal_eqn_numbers,
+ //                                 master_solid_nod_pt));
+ //                    }
+ //                  }
+ //                }
+ //              }
+ //            }
+ //          } // endif for node already done
+ //        }// End of loop over nodes
+ //      } //End of FiniteElement 
    
-     // Internal data equation numbers do not need to be added since 
-     // internal data cannot be shared between distinct elements, so 
-     // internal data on locally-stored elements can never be halo.
-    }
+ //     // Internal data equation numbers do not need to be added since 
+ //     // internal data cannot be shared between distinct elements, so 
+ //     // internal data on locally-stored elements can never be halo.
+ //    }
  
  
-   // Doc timings if required
-   if (Global_timings::Doc_comprehensive_timings)
-    {
-     double t_locate=TimingHelpers::timer();
-     oomph_info 
-      <<"CPU for assembly of existing global eqns in remove_duplicate_data(): "
-      << t_locate-t_start << std::endl;
-    }
+ //   // Doc timings if required
+ //   if (Global_timings::Doc_comprehensive_timings)
+ //    {
+ //     double t_locate=TimingHelpers::timer();
+ //     oomph_info 
+ //      <<"CPU for assembly of existing global eqns in remove_duplicate_data(): "
+ //      << t_locate-t_start << std::endl;
+ //    }
  
  
-   // Now loop over the other processors from highest to lowest
-   // (i.e. if there is a duplicate between these containers
-   //  then this will use the node on the highest numbered processor)
-   int n_proc=this->communicator_pt()->nproc();
-   int my_rank=this->communicator_pt()->my_rank();
-   for (int iproc=n_proc-1;iproc>=0;iproc--)
-    {
-     // Don't have external halo elements with yourself!
-     if (iproc!=my_rank)
-      {
-       // Loop over external halo elements with iproc for internal data
-       // to remove the duplicates in the external halo element storage
-       unsigned n_element=mesh_pt->nexternal_halo_element(iproc);
-       for (unsigned e_ext=0;e_ext<n_element;e_ext++)
-        {
-         GeneralisedElement* ext_el_pt=mesh_pt->
-          external_halo_element_pt(iproc,e_ext);
+ //   // Now loop over the other processors from highest to lowest
+ //   // (i.e. if there is a duplicate between these containers
+ //   //  then this will use the node on the highest numbered processor)
+ //   int n_proc=this->communicator_pt()->nproc();
+ //   int my_rank=this->communicator_pt()->my_rank();
+ //   for (int iproc=n_proc-1;iproc>=0;iproc--)
+ //    {
+ //     // Don't have external halo elements with yourself!
+ //     if (iproc!=my_rank)
+ //      {
+ //       // Loop over external halo elements with iproc for internal data
+ //       // to remove the duplicates in the external halo element storage
+ //       unsigned n_element=mesh_pt->nexternal_halo_element(iproc);
+ //       for (unsigned e_ext=0;e_ext<n_element;e_ext++)
+ //        {
+ //         GeneralisedElement* ext_el_pt=mesh_pt->
+ //          external_halo_element_pt(iproc,e_ext);
 
-         FiniteElement* finite_ext_el_pt = 
-          dynamic_cast<FiniteElement*>(ext_el_pt);  
-         if(finite_ext_el_pt!=0)
-          {
-           // Loop over nodes
-           unsigned n_node=finite_ext_el_pt->nnode();
-           for (unsigned j=0;j<n_node;j++)
-            {
-             Node* nod_pt=finite_ext_el_pt->node_pt(j);
+ //         FiniteElement* finite_ext_el_pt = 
+ //          dynamic_cast<FiniteElement*>(ext_el_pt);  
+ //         if(finite_ext_el_pt!=0)
+ //          {
+ //           // Loop over nodes
+ //           unsigned n_node=finite_ext_el_pt->nnode();
+ //           for (unsigned j=0;j<n_node;j++)
+ //            {
+ //             Node* nod_pt=finite_ext_el_pt->node_pt(j);
 
-             unsigned n_val=nod_pt->nvalue();
-             Vector<int> nodal_eqn_numbers(n_val);
-             for (unsigned i_val=0;i_val<n_val;i_val++)
-              {
-               nodal_eqn_numbers[i_val]=nod_pt->eqn_number(i_val);   
-              }
+ //             unsigned n_val=nod_pt->nvalue();
+ //             Vector<int> nodal_eqn_numbers(n_val);
+ //             for (unsigned i_val=0;i_val<n_val;i_val++)
+ //              {
+ //               nodal_eqn_numbers[i_val]=nod_pt->eqn_number(i_val);   
+ //              }
 
-             // Check for duplicates with the existing set of 
-             //global eqn numbers
+ //             // Check for duplicates with the existing set of 
+ //             //global eqn numbers
              
-             // Test to see if there is a duplicate with current
-             unsigned n_exist_eqn=existing_global_eqn_numbers.size();
-             bool is_a_duplicate=false;
-             // Loop over the existing global equation numbers
-             for (unsigned i=0;i<n_exist_eqn;i++)
-              {
-               // If the number of values is different from the size of the 
-               // vector then they are already different, so only test if 
-               // the sizes are the same
-               if (n_val==(existing_global_eqn_numbers[i].first).size())
-                {
-                 // Loop over values
-                 for (unsigned i_val=0;i_val<n_val;i_val++)
-                  {
-                   // Make sure it isn't a pinned dof already
-                   if (nodal_eqn_numbers[i_val]>=0)
-                    {
-                     // Test it against the equivalent entry in existing...
-                     if (nodal_eqn_numbers[i_val]==
-                         (existing_global_eqn_numbers[i].first)[i_val])
-                      {
-                       is_a_duplicate=true;
-                       actually_removed_some_data=true;
+ //             // Test to see if there is a duplicate with current
+ //             unsigned n_exist_eqn=existing_global_eqn_numbers.size();
+ //             bool is_a_duplicate=false;
+ //             // Loop over the existing global equation numbers
+ //             for (unsigned i=0;i<n_exist_eqn;i++)
+ //              {
+ //               // If the number of values is different from the size of the 
+ //               // vector then they are already different, so only test if 
+ //               // the sizes are the same
+ //               if (n_val==(existing_global_eqn_numbers[i].first).size())
+ //                {
+ //                 // Loop over values
+ //                 for (unsigned i_val=0;i_val<n_val;i_val++)
+ //                  {
+ //                   // Make sure it isn't a pinned dof already
+ //                   if (nodal_eqn_numbers[i_val]>=0)
+ //                    {
+ //                     // Test it against the equivalent entry in existing...
+ //                     if (nodal_eqn_numbers[i_val]==
+ //                         (existing_global_eqn_numbers[i].first)[i_val])
+ //                      {
+ //                       is_a_duplicate=true;
+ //                       actually_removed_some_data=true;
 
-                       // It's a duplicate, so point the current node at the
-                       // other position instead!
-                       finite_ext_el_pt->node_pt(j)=
-                        existing_global_eqn_numbers[i].second;
-                       break;
-                      }
-                    }
-                  }
-                }
-               // Break out of the loop if we have already found a duplicate
-               if (is_a_duplicate)
-                {
-                 break;
-                }
-              }
+ //                       // It's a duplicate, so point the current node at the
+ //                       // other position instead!
+ //                       finite_ext_el_pt->node_pt(j)=
+ //                        existing_global_eqn_numbers[i].second;
+ //                       break;
+ //                      }
+ //                    }
+ //                  }
+ //                }
+ //               // Break out of the loop if we have already found a duplicate
+ //               if (is_a_duplicate)
+ //                {
+ //                 break;
+ //                }
+ //              }
              
-             // If it's not a duplicate, add it to the existing storage
-             if (!is_a_duplicate)
-              {
-               existing_global_eqn_numbers.push_back
-                (make_pair(nodal_eqn_numbers,nod_pt));
-              }
+ //             // If it's not a duplicate, add it to the existing storage
+ //             if (!is_a_duplicate)
+ //              {
+ //               existing_global_eqn_numbers.push_back
+ //                (make_pair(nodal_eqn_numbers,nod_pt));
+ //              }
              
-             // Do the same for any SolidNodes
-             SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
-             if (solid_nod_pt!=0)
-              {
-               unsigned n_val_solid=solid_nod_pt->
-                variable_position_pt()->nvalue();
-               Vector<int> solid_nodal_eqn_numbers(n_val_solid);
-               for (unsigned i_val=0;i_val<n_val_solid;i_val++)
-                {
-                 solid_nodal_eqn_numbers[i_val]=solid_nod_pt->
-                  variable_position_pt()->eqn_number(i_val);
-                }
+ //             // Do the same for any SolidNodes
+ //             SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
+ //             if (solid_nod_pt!=0)
+ //              {
+ //               unsigned n_val_solid=solid_nod_pt->
+ //                variable_position_pt()->nvalue();
+ //               Vector<int> solid_nodal_eqn_numbers(n_val_solid);
+ //               for (unsigned i_val=0;i_val<n_val_solid;i_val++)
+ //                {
+ //                 solid_nodal_eqn_numbers[i_val]=solid_nod_pt->
+ //                  variable_position_pt()->eqn_number(i_val);
+ //                }
                
-               // Check for duplicate equation numbers
+ //               // Check for duplicate equation numbers
                
-               // Test to see if there is a duplicate with current
-               unsigned n_exist_eqn=existing_global_eqn_numbers.size();
-               bool is_a_duplicate=false;
-               // Loop over the existing global equation numbers
-               for (unsigned i=0;i<n_exist_eqn;i++)
-                {
-                 // If the number of values is different from the size of the 
-                 // vector then they are already different, so only test if 
-                 // the sizes are the same
-                 if (n_val_solid==
-                     (existing_global_eqn_numbers[i].first).size())
-                  {
-                   // Loop over values
-                   for (unsigned i_val=0;i_val<n_val_solid;i_val++)
-                    {
-                     // Make sure it isn't a pinned dof already
-                     if (solid_nodal_eqn_numbers[i_val]>=0)
-                      {
-                       // Test it against the equivalent entry in existing...
-                       if (solid_nodal_eqn_numbers[i_val]==
-                           (existing_global_eqn_numbers[i].first)[i_val])
-                        {
-                         is_a_duplicate=true;
-                         actually_removed_some_data=true;
+ //               // Test to see if there is a duplicate with current
+ //               unsigned n_exist_eqn=existing_global_eqn_numbers.size();
+ //               bool is_a_duplicate=false;
+ //               // Loop over the existing global equation numbers
+ //               for (unsigned i=0;i<n_exist_eqn;i++)
+ //                {
+ //                 // If the number of values is different from the size of the 
+ //                 // vector then they are already different, so only test if 
+ //                 // the sizes are the same
+ //                 if (n_val_solid==
+ //                     (existing_global_eqn_numbers[i].first).size())
+ //                  {
+ //                   // Loop over values
+ //                   for (unsigned i_val=0;i_val<n_val_solid;i_val++)
+ //                    {
+ //                     // Make sure it isn't a pinned dof already
+ //                     if (solid_nodal_eqn_numbers[i_val]>=0)
+ //                      {
+ //                       // Test it against the equivalent entry in existing...
+ //                       if (solid_nodal_eqn_numbers[i_val]==
+ //                           (existing_global_eqn_numbers[i].first)[i_val])
+ //                        {
+ //                         is_a_duplicate=true;
+ //                         actually_removed_some_data=true;
 
-                         // It's a duplicate, so point the current node at the
-                         // other position instead!
-                         finite_ext_el_pt->node_pt(j)=
-                          existing_global_eqn_numbers[i].second;
-                         break;
-                        }
-                      }
-                    }
-                  }
-                 // Break out of the loop if we have already found a duplicate
-                 if (is_a_duplicate)
-                  {
-                   break;
-                  }
-                }
+ //                         // It's a duplicate, so point the current node at the
+ //                         // other position instead!
+ //                         finite_ext_el_pt->node_pt(j)=
+ //                          existing_global_eqn_numbers[i].second;
+ //                         break;
+ //                        }
+ //                      }
+ //                    }
+ //                  }
+ //                 // Break out of the loop if we have already found a duplicate
+ //                 if (is_a_duplicate)
+ //                  {
+ //                   break;
+ //                  }
+ //                }
                
-               // If it's not a duplicate, add it to the existing storage
-               if (!is_a_duplicate)
-                {
-                 existing_global_eqn_numbers.push_back
-                  (make_pair(solid_nodal_eqn_numbers,nod_pt));
-                }
+ //               // If it's not a duplicate, add it to the existing storage
+ //               if (!is_a_duplicate)
+ //                {
+ //                 existing_global_eqn_numbers.push_back
+ //                  (make_pair(solid_nodal_eqn_numbers,nod_pt));
+ //                }
                
-              }
+ //              }
              
-             // Do the same for any master nodes
-             if (dynamic_cast<RefineableElement*>(ext_el_pt)!=0)
-              {
-               int n_cont_inter_values=dynamic_cast<RefineableElement*>
-                (ext_el_pt)->ncont_interpolated_values();
-               for (int i_cont=-1;i_cont<n_cont_inter_values;i_cont++)
-                {
-                 if (nod_pt->is_hanging(i_cont))
-                  {
-                   HangInfo* hang_pt=nod_pt->hanging_pt(i_cont);
-                   unsigned n_master=hang_pt->nmaster();
-                   for (unsigned m=0;m<n_master;m++)
-                    {
-                     Node* master_nod_pt=hang_pt->master_node_pt(m);
-                     unsigned n_val=master_nod_pt->nvalue();
-                     Vector<int> master_nodal_eqn_numbers(n_val);
-                     for (unsigned i_val=0;i_val<n_val;i_val++)
-                      {
-                       master_nodal_eqn_numbers[i_val]=
-                        master_nod_pt->eqn_number(i_val);
-                      }
+ //             // Do the same for any master nodes
+ //             if (dynamic_cast<RefineableElement*>(ext_el_pt)!=0)
+ //              {
+ //               int n_cont_inter_values=dynamic_cast<RefineableElement*>
+ //                (ext_el_pt)->ncont_interpolated_values();
+ //               for (int i_cont=-1;i_cont<n_cont_inter_values;i_cont++)
+ //                {
+ //                 if (nod_pt->is_hanging(i_cont))
+ //                  {
+ //                   HangInfo* hang_pt=nod_pt->hanging_pt(i_cont);
+ //                   unsigned n_master=hang_pt->nmaster();
+ //                   for (unsigned m=0;m<n_master;m++)
+ //                    {
+ //                     Node* master_nod_pt=hang_pt->master_node_pt(m);
+ //                     unsigned n_val=master_nod_pt->nvalue();
+ //                     Vector<int> master_nodal_eqn_numbers(n_val);
+ //                     for (unsigned i_val=0;i_val<n_val;i_val++)
+ //                      {
+ //                       master_nodal_eqn_numbers[i_val]=
+ //                        master_nod_pt->eqn_number(i_val);
+ //                      }
                      
-                     // Check for duplicate master eqn numbers
+ //                     // Check for duplicate master eqn numbers
                      
-                     // Test to see if there is a duplicate with current
-                     unsigned n_exist_eqn=existing_global_eqn_numbers.size();
-                     bool is_a_duplicate=false;
-                     // Loop over the existing global equation numbers
-                     for (unsigned i=0;i<n_exist_eqn;i++)
-                      {
-                       // If the number of values is different from the size
-                       // of the vector then they are already different,
-                       // only test if the sizes are the same
-                       if (n_val==
-                           (existing_global_eqn_numbers[i].first).size())
-                        {
-                         // Loop over values
-                         for (unsigned i_val=0;i_val<n_val;i_val++)
-                          {
-                           // Make sure it isn't a pinned dof already
-                           if (master_nodal_eqn_numbers[i_val]>=0)
-                            {
-                             // Test it against the equivalent existing entry
-                             if (master_nodal_eqn_numbers[i_val]==
-                                 (existing_global_eqn_numbers[i].first)
-                                 [i_val])
-                              {
-                               is_a_duplicate=true;
-                               actually_removed_some_data=true;
+ //                     // Test to see if there is a duplicate with current
+ //                     unsigned n_exist_eqn=existing_global_eqn_numbers.size();
+ //                     bool is_a_duplicate=false;
+ //                     // Loop over the existing global equation numbers
+ //                     for (unsigned i=0;i<n_exist_eqn;i++)
+ //                      {
+ //                       // If the number of values is different from the size
+ //                       // of the vector then they are already different,
+ //                       // only test if the sizes are the same
+ //                       if (n_val==
+ //                           (existing_global_eqn_numbers[i].first).size())
+ //                        {
+ //                         // Loop over values
+ //                         for (unsigned i_val=0;i_val<n_val;i_val++)
+ //                          {
+ //                           // Make sure it isn't a pinned dof already
+ //                           if (master_nodal_eqn_numbers[i_val]>=0)
+ //                            {
+ //                             // Test it against the equivalent existing entry
+ //                             if (master_nodal_eqn_numbers[i_val]==
+ //                                 (existing_global_eqn_numbers[i].first)
+ //                                 [i_val])
+ //                              {
+ //                               is_a_duplicate=true;
+ //                               actually_removed_some_data=true;
 
-                               // It's a duplicate, so point this node's
-                               // master at the original node instead!
-                               // Need the weight of the original node
-                               double m_weight=hang_pt->master_weight(m);
-                               // Set master
-                               finite_ext_el_pt->node_pt(j)->hanging_pt(i_cont)
-                                ->set_master_node_pt
-                                (m,existing_global_eqn_numbers[i].second,
-                                 m_weight);
-                               break;
-                              }
-                            }
-                          }
-                        }
-                       // Break out of the loop if we have found a duplicate
-                       if (is_a_duplicate)
-                        {
-                         break;
-                        }
-                      }
+ //                               // It's a duplicate, so point this node's
+ //                               // master at the original node instead!
+ //                               // Need the weight of the original node
+ //                               double m_weight=hang_pt->master_weight(m);
+ //                               // Set master
+ //                               finite_ext_el_pt->node_pt(j)->hanging_pt(i_cont)
+ //                                ->set_master_node_pt
+ //                                (m,existing_global_eqn_numbers[i].second,
+ //                                 m_weight);
+ //                               break;
+ //                              }
+ //                            }
+ //                          }
+ //                        }
+ //                       // Break out of the loop if we have found a duplicate
+ //                       if (is_a_duplicate)
+ //                        {
+ //                         break;
+ //                        }
+ //                      }
                      
-                     // If it's not a duplicate, add it to the existing storage
-                     if (!is_a_duplicate)
-                      {
-                       existing_global_eqn_numbers.push_back
-                        (make_pair(master_nodal_eqn_numbers,master_nod_pt));
-                      }
+ //                     // If it's not a duplicate, add it to the existing storage
+ //                     if (!is_a_duplicate)
+ //                      {
+ //                       existing_global_eqn_numbers.push_back
+ //                        (make_pair(master_nodal_eqn_numbers,master_nod_pt));
+ //                      }
                      
-                     // Do the same again for SolidNodes
-                     SolidNode* solid_master_nod_pt=dynamic_cast<SolidNode*>
-                      (master_nod_pt);
-                     if (solid_master_nod_pt!=0)
-                      {
-                       unsigned n_val_solid=solid_master_nod_pt->
-                        variable_position_pt()->nvalue();
-                       Vector<int> sld_master_nodal_eqn_numbers(n_val_solid);
-                       for (unsigned i_val=0;i_val<n_val_solid;i_val++)
-                        {
-                         sld_master_nodal_eqn_numbers[i_val]=
-                          solid_master_nod_pt
-                          ->variable_position_pt()->eqn_number(i_val);
-                        }
+ //                     // Do the same again for SolidNodes
+ //                     SolidNode* solid_master_nod_pt=dynamic_cast<SolidNode*>
+ //                      (master_nod_pt);
+ //                     if (solid_master_nod_pt!=0)
+ //                      {
+ //                       unsigned n_val_solid=solid_master_nod_pt->
+ //                        variable_position_pt()->nvalue();
+ //                       Vector<int> sld_master_nodal_eqn_numbers(n_val_solid);
+ //                       for (unsigned i_val=0;i_val<n_val_solid;i_val++)
+ //                        {
+ //                         sld_master_nodal_eqn_numbers[i_val]=
+ //                          solid_master_nod_pt
+ //                          ->variable_position_pt()->eqn_number(i_val);
+ //                        }
                        
-                       // Check for duplicate master eqn numbers
+ //                       // Check for duplicate master eqn numbers
                        
-                       // Test to see if there is a duplicate with current
-                       unsigned n_exist_eqn=existing_global_eqn_numbers.size();
-                       bool is_a_duplicate=false;
-                       // Loop over the existing global equation numbers
-                       for (unsigned i=0;i<n_exist_eqn;i++)
-                        {
-                         // If the number of values is different from the size
-                         // of the vector then they are already different,
-                         // only test if the sizes are the same
-                         if (n_val_solid==
-                             (existing_global_eqn_numbers[i].first).size())
-                          {
-                           // Loop over values
-                           for (unsigned i_val=0;i_val<n_val_solid;i_val++)
-                            {
-                             // Make sure it isn't a pinned dof already
-                             if (sld_master_nodal_eqn_numbers[i_val]>=0)
-                              {
-                               // Test it against the equivalent existing entry
-                               if (sld_master_nodal_eqn_numbers[i_val]==
-                                   (existing_global_eqn_numbers[i].first)
-                                   [i_val])
-                                {
-                                 is_a_duplicate=true;
-                                 actually_removed_some_data=true;
+ //                       // Test to see if there is a duplicate with current
+ //                       unsigned n_exist_eqn=existing_global_eqn_numbers.size();
+ //                       bool is_a_duplicate=false;
+ //                       // Loop over the existing global equation numbers
+ //                       for (unsigned i=0;i<n_exist_eqn;i++)
+ //                        {
+ //                         // If the number of values is different from the size
+ //                         // of the vector then they are already different,
+ //                         // only test if the sizes are the same
+ //                         if (n_val_solid==
+ //                             (existing_global_eqn_numbers[i].first).size())
+ //                          {
+ //                           // Loop over values
+ //                           for (unsigned i_val=0;i_val<n_val_solid;i_val++)
+ //                            {
+ //                             // Make sure it isn't a pinned dof already
+ //                             if (sld_master_nodal_eqn_numbers[i_val]>=0)
+ //                              {
+ //                               // Test it against the equivalent existing entry
+ //                               if (sld_master_nodal_eqn_numbers[i_val]==
+ //                                   (existing_global_eqn_numbers[i].first)
+ //                                   [i_val])
+ //                                {
+ //                                 is_a_duplicate=true;
+ //                                 actually_removed_some_data=true;
 
-                                 // It's a duplicate, 
-                                 // so point the current master
-                                 // node at the original node instead!
-                                 // Need the weight of the original node
-                                 double m_weight=hang_pt->master_weight(m);
-                                 // Set master
-                                 finite_ext_el_pt->node_pt(j)->
-                                  hanging_pt(i_cont)
-                                  ->set_master_node_pt
-                                  (m,existing_global_eqn_numbers[i].second,
-                                   m_weight);
-                                 break;
-                                }
-                              }
-                            }
-                          }
-                         // Break out of the loop if we have found a duplicate
-                         if (is_a_duplicate)
-                          {
-                           break;
-                          }
-                        }
+ //                                 // It's a duplicate, 
+ //                                 // so point the current master
+ //                                 // node at the original node instead!
+ //                                 // Need the weight of the original node
+ //                                 double m_weight=hang_pt->master_weight(m);
+ //                                 // Set master
+ //                                 finite_ext_el_pt->node_pt(j)->
+ //                                  hanging_pt(i_cont)
+ //                                  ->set_master_node_pt
+ //                                  (m,existing_global_eqn_numbers[i].second,
+ //                                   m_weight);
+ //                                 break;
+ //                                }
+ //                              }
+ //                            }
+ //                          }
+ //                         // Break out of the loop if we have found a duplicate
+ //                         if (is_a_duplicate)
+ //                          {
+ //                           break;
+ //                          }
+ //                        }
                        
-                       // If it's not a duplicate then 
-                       // add it to existing storage
-                       if (!is_a_duplicate)
-                        {
-                         existing_global_eqn_numbers.push_back
-                          (make_pair(sld_master_nodal_eqn_numbers,
-                                     master_nod_pt));
-                        }
+ //                       // If it's not a duplicate then 
+ //                       // add it to existing storage
+ //                       if (!is_a_duplicate)
+ //                        {
+ //                         existing_global_eqn_numbers.push_back
+ //                          (make_pair(sld_master_nodal_eqn_numbers,
+ //                                     master_nod_pt));
+ //                        }
                        
                        
-                      }
+ //                      }
                      
-                    }
-                  }
-                } // end hanging loop over continous interpolated variables
-              }
+ //                    }
+ //                  }
+ //                } // end hanging loop over continous interpolated variables
+ //              }
              
-            } // end loop over nodes on external halo elements
+ //            } // end loop over nodes on external halo elements
            
-          } //End of check for finite element
+ //          } //End of check for finite element
  
-        } // end loop over external halo elements
-      }
-    } // end loop over processors
+ //        } // end loop over external halo elements
+ //      }
+ //    } // end loop over processors
 
-  } // END OLD VS NEW VERSION
+ //  } // END OLD VS NEW VERSION
 
 }
 
@@ -10189,49 +10261,34 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
  actions_after_adapt();
     
  // Setup equation numbering scheme
- oomph_info <<"\nNumber of equations: " << assign_eqn_numbers() 
+ oomph_info <<"\nNumber of equations in Problem::read(): " 
+            << assign_eqn_numbers() 
             << std::endl<< std::endl; 
 
  std::string input_string;
  
- // Read time
- //----------
+ // Read time info
+ //---------------
+ unsigned local_unsteady_restart_flag=0;
+ double local_time=-DBL_MAX;
+ unsigned local_n_dt=0;
+ unsigned local_sync_needed_flag=0;
+  Vector<double> local_dt;
 
- // Read line up to termination sign
- getline(restart_file,input_string,'#');
-
- // Ignore rest of line
- restart_file.ignore(80,'\n');
-
- // Is the restart data from an unsteady run?
- unsteady_restart=atol(input_string.c_str());
-
- // Read line up to termination sign
- getline(restart_file,input_string,'#');
-
- // Ignore rest of line
- restart_file.ignore(80,'\n');
-
- // Read in initial time and set
- double time=atof(input_string.c_str());
- if (unsteady_restart) time_pt()->time()=time;
- 
-
- // Read line up to termination sign
- getline(restart_file,input_string,'#');
-
- // Ignore rest of line
- restart_file.ignore(80,'\n');
-
- // Read & set number of timesteps
- unsigned n_dt=atoi(input_string.c_str());
- if (unsteady_restart) time_pt()->resize(n_dt);
- Vector<double> dt(n_dt);
-
-
- // Read in timesteps:
- for (unsigned i=0;i<n_dt;i++)
+ if (restart_file.is_open())
   {
+   oomph_info <<"Restart file exists" << std::endl;
+   local_sync_needed_flag=0;
+
+   // Read line up to termination sign
+   getline(restart_file,input_string,'#');
+   
+   // Ignore rest of line
+   restart_file.ignore(80,'\n');
+   
+   // Is the restart data from an unsteady run?
+   local_unsteady_restart_flag=atoi(input_string.c_str());
+   
    // Read line up to termination sign
    getline(restart_file,input_string,'#');
    
@@ -10239,13 +10296,144 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
    restart_file.ignore(80,'\n');
    
    // Read in initial time and set
-   double prev_dt=atof(input_string.c_str());
-   dt[i]=prev_dt;
+   local_time=atof(input_string.c_str());
+   
+   // Read line up to termination sign
+   getline(restart_file,input_string,'#');
+   
+   // Ignore rest of line
+   restart_file.ignore(80,'\n');
+   
+   // Read & set number of timesteps
+   local_n_dt=atoi(input_string.c_str());
+   local_dt.resize(local_n_dt);
+   
+   // Read in timesteps:
+   for (unsigned i=0;i<local_n_dt;i++)
+    {
+     // Read line up to termination sign
+     getline(restart_file,input_string,'#');
+     
+     // Ignore rest of line
+     restart_file.ignore(80,'\n');
+     
+     // Read in initial time and set
+     double prev_dt=atof(input_string.c_str());
+     local_dt[i]=prev_dt;
+    }
   }
+ else
+  {
+   oomph_info <<"Restart file does not exist" << std::endl;
+   local_sync_needed_flag=1;
+  }
+
+
+ // No prepare global values, possibly via sync
+ Vector<double> dt;
+
+ // Do we need to sync? 
+ unsigned sync_needed_flag=0;
+ 
+#ifdef OOMPH_HAS_MPI
+ if (Problem_has_been_distributed)
+  {
+   // Get need to sync by max
+   MPI_Allreduce(&local_sync_needed_flag,&sync_needed_flag,1,
+                 MPI_UNSIGNED,MPI_MAX,this->communicator_pt()->mpi_comm());
+  }
+#endif 
+
+ // Synchronise
+ if (sync_needed_flag==1)
+  {
+
+#ifdef OOMPH_HAS_MPI
+
+
+#ifdef PARANOID   
+   if (!Problem_has_been_distributed)
+    {
+     std::ostringstream error_message;
+     error_message 
+      << "Synchronisation of temporal restart data \n" 
+      << "required even though Problem hasn't been distributed -- very odd!\n";
+      throw OomphLibError(error_message.str(),
+                          "Problem::read()",
+                          OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+   
+   // Get unsteady restart flag by max-based reduction
+   unsigned unsteady_restart_flag=0;
+   MPI_Allreduce(&local_unsteady_restart_flag,&unsteady_restart_flag,1,
+                 MPI_UNSIGNED,MPI_MAX,this->communicator_pt()->mpi_comm());
+
+   // So, is it an unsteady restart?
+   unsteady_restart=false;
+   if (unsteady_restart_flag==1)
+    {
+     unsteady_restart=true;
+     
+     // Get time by max
+     double time=-DBL_MAX;
+     MPI_Allreduce(&local_time,&time,1,
+                   MPI_DOUBLE,MPI_MAX,this->communicator_pt()->mpi_comm());
+     time_pt()->time()=time;
+     
+     // Get number of timesteps by max-based reduction
+     unsigned n_dt=0;
+     MPI_Allreduce(&local_n_dt,&n_dt,1,
+                   MPI_UNSIGNED,MPI_MAX,this->communicator_pt()->mpi_comm());
+     
+     // Resize whatever needs resizing
+     time_pt()->resize(n_dt);
+     dt.resize(n_dt);
+     if (local_dt.size()==0)
+      {
+       local_dt.resize(n_dt,-DBL_MAX);
+      }
+
+     // Get timesteps increments by max-based reduction
+     MPI_Allreduce(&local_dt[0],&dt[0],n_dt,
+                   MPI_DOUBLE,MPI_MAX,this->communicator_pt()->mpi_comm());   
+    }
+
+#else
+
+   std::ostringstream error_message;
+   error_message 
+    << "Synchronisation of temporal restart data \n" 
+    << "required even though we don't have mpi support -- very odd!\n"
+    throw OomphLibError(error_message.str(),
+                       "Problem::read()",
+                       OOMPH_EXCEPTION_LOCATION);
+   
+#endif
+
+  }
+ // No sync needed -- just copy across
+ else
+  {
+   unsteady_restart=false;
+   if (local_unsteady_restart_flag==1)
+    {
+     unsteady_restart=true;
+     time_pt()->time()=local_time;
+     time_pt()->resize(local_n_dt);
+     dt.resize(local_n_dt);
+     for (unsigned i=0;i<local_n_dt;i++)
+      {
+       dt[i]=local_dt[i];
+      }
+    }
+  }
+
  
  // Initialise timestep -- also sets the weights for all timesteppers
  // in the problem.
  if (unsteady_restart) initialise_dt(dt);
+
 
  // Loop over submeshes:
  unsigned nmesh=nsub_mesh();
@@ -13510,10 +13698,14 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
                            OOMPH_EXCEPTION_LOCATION);
       }
 #endif
+     // No pre-set distribution from restart that may leave some
+     // processors empty so no need to overrule deletion of elements
+     bool overrule_keep_as_halo_element_status=false;
      mesh_pt()->distribute(this->communicator_pt(),
                            new_domain_for_base_element,
                            deleted_element_pt,
-                           doc_info,report_stats);
+                           doc_info,report_stats,
+                           overrule_keep_as_halo_element_status);
     }
    else // There are submeshes, "distribute" each one separately
     {
@@ -13526,10 +13718,15 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
         }
        // Set the doc_info number to reflect the submesh
        doc_info.number()=i_mesh;
+
+       // No pre-set distribution from restart that may leave some
+       // processors empty so no need to overrule deletion of elements
+       bool overrule_keep_as_halo_element_status=false;
        mesh_pt(i_mesh)->distribute(this->communicator_pt(),
                                    submesh_element_partition[i_mesh],
                                    deleted_element_pt,
-                                   doc_info,report_stats);
+                                   doc_info,report_stats,
+                                   overrule_keep_as_halo_element_status);
       }
      // Rebuild the global mesh
      rebuild_global_mesh();

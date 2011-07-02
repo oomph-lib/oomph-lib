@@ -32,8 +32,9 @@
 #endif
 
 #include <cstdlib>
-#include<stdlib.h>
-
+#include <stdlib.h>
+#include <limits>
+ 
 #include "refineable_mesh.h"
 
 namespace oomph
@@ -144,13 +145,19 @@ void TreeBasedRefineableMeshBase::refine_base_mesh(OomphCommunicator* comm_pt,
  // Get mesh back to unrefined state
  unsigned my_max,my_min;
  get_refinement_levels(my_min,my_max);
- for (unsigned i=0;i<my_max;i++)
+ unsigned global_max=0;
+ if (this->mesh_has_been_distributed())
+  {
+   MPI_Allreduce(&my_max,&global_max,1,MPI_UNSIGNED,MPI_MAX,
+                 comm_pt->mpi_comm());
+  }
+ else
+  {
+   global_max=my_max;
+  }
+ for (unsigned i=0;i<global_max;i++)
   {
    unrefine_uniformly(comm_pt); 
-   {
-    unsigned my_max,my_min;
-    get_refinement_levels(my_min,my_max);
-   }
   }
 
  // Max refinement level:
@@ -730,20 +737,29 @@ get_refinement_levels(unsigned& min_refinement_level,
                       unsigned& max_refinement_level)
 { 
  // Initialise
- min_refinement_level=10000;
+ min_refinement_level=UINT_MAX;
  max_refinement_level=0;
  
  //Loop over all elements
- unsigned long Nelement=this->nelement();
- for (unsigned long e=0;e<Nelement;e++)
+ unsigned long n_element=this->nelement();
+ if (n_element==0)
   {
-   //Get the refinement level of the element
-   unsigned level =
-    dynamic_cast<RefineableElement*>(this->element_pt(e))->refinement_level();
- 
-   if (level>max_refinement_level) max_refinement_level=level;
-   if (level<min_refinement_level) min_refinement_level=level;
+   min_refinement_level=0;
+   max_refinement_level=0;
   }
+ else
+  {
+   for (unsigned long e=0;e<n_element;e++)
+    {
+     //Get the refinement level of the element
+     unsigned level =
+      dynamic_cast<RefineableElement*>(this->element_pt(e))->refinement_level();
+     
+     if (level>max_refinement_level) max_refinement_level=level;
+     if (level<min_refinement_level) min_refinement_level=level;
+    }
+  }
+
 }
 
 

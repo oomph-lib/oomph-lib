@@ -1533,6 +1533,7 @@ void Z2ErrorEstimator::doc_flux(OomphCommunicator* comm_pt, Mesh* mesh_pt,
                                 const Vector<double>& elemental_error,
                                 DocInfo& doc_info)
 {
+
  // Setup output files
  std::ofstream some_file,feflux_file;
  std::ostringstream filename;
@@ -1544,95 +1545,98 @@ void Z2ErrorEstimator::doc_flux(OomphCommunicator* comm_pt, Mesh* mesh_pt,
          << "_on_proc_" << comm_pt->my_rank() << ".dat";
  feflux_file.open(filename.str().c_str());
 
- // Extract first element to determine spatial dimension
- FiniteElement* el_pt=mesh_pt->finite_element_pt(0);
- unsigned dim=el_pt->dim();
- Vector<double> s(dim);   
-
- // Decide on the number of plot points
- unsigned nplot=5;
-
- //Loop over all elements
  unsigned nel=mesh_pt->nelement();
- for (unsigned e=0;e<nel;e++)
+ if (nel>0)
   {
-   ElementWithZ2ErrorEstimator* el_pt=
-    dynamic_cast<ElementWithZ2ErrorEstimator*>(mesh_pt->element_pt(e));
+   // Extract first element to determine spatial dimension
+   FiniteElement* el_pt=mesh_pt->finite_element_pt(0);
+   unsigned dim=el_pt->dim();
+   Vector<double> s(dim);   
    
-   // Write tecplot header
-   feflux_file << el_pt->tecplot_zone_string(nplot);
-   some_file << el_pt->tecplot_zone_string(nplot);
+   // Decide on the number of plot points
+   unsigned nplot=5;
 
-   unsigned num_plot_points=el_pt->nplot_points(nplot);
-   for (unsigned iplot=0;iplot<num_plot_points;iplot++)
-    {     
-     // Get local coordinates of plot point
-     el_pt->get_s_plot(iplot,nplot,s);
+   //Loop over all elements
+   for (unsigned e=0;e<nel;e++)
+    {
+     ElementWithZ2ErrorEstimator* el_pt=
+      dynamic_cast<ElementWithZ2ErrorEstimator*>(mesh_pt->element_pt(e));
+   
+     // Write tecplot header
+     feflux_file << el_pt->tecplot_zone_string(nplot);
+     some_file << el_pt->tecplot_zone_string(nplot);
+
+     unsigned num_plot_points=el_pt->nplot_points(nplot);
+     for (unsigned iplot=0;iplot<num_plot_points;iplot++)
+      {     
+       // Get local coordinates of plot point
+       el_pt->get_s_plot(iplot,nplot,s);
      
-     //Coordinate
-     Vector<double> x(dim);
-     el_pt->interpolated_x(s,x);
+       //Coordinate
+       Vector<double> x(dim);
+       el_pt->interpolated_x(s,x);
      
-     // Number of FE nodes
-     unsigned n_node=el_pt->nnode();
+       // Number of FE nodes
+       unsigned n_node=el_pt->nnode();
      
-     // FE shape function
-     Shape psi(n_node);
+       // FE shape function
+       Shape psi(n_node);
      
-     //Get values of FE shape function
-     el_pt->shape(s,psi);
+       //Get values of FE shape function
+       el_pt->shape(s,psi);
      
-     // Initialise recovered flux Vector
-     Vector<double> rec_flux(num_flux_terms,0.0);
+       // Initialise recovered flux Vector
+       Vector<double> rec_flux(num_flux_terms,0.0);
      
-     // Loop over nodes to assemble contribution
-     for (unsigned n=0;n<n_node;n++)
-      {
+       // Loop over nodes to assemble contribution
+       for (unsigned n=0;n<n_node;n++)
+        {
        
-       Node* nod_pt=el_pt->node_pt(n);
+         Node* nod_pt=el_pt->node_pt(n);
        
-       // Loop over components
+         // Loop over components
+         for (unsigned i=0;i<num_flux_terms;i++)
+          {
+           rec_flux[i]+=rec_flux_map(nod_pt,i)*psi[n];
+          }
+        }
+     
+       // FE flux
+       Vector<double> fe_flux(num_flux_terms);
+       el_pt->get_Z2_flux(s,fe_flux);
+     
+       for (unsigned i=0;i<dim;i++)
+        {
+         some_file << x[i] << " ";
+        }
        for (unsigned i=0;i<num_flux_terms;i++)
         {
-         rec_flux[i]+=rec_flux_map(nod_pt,i)*psi[n];
+         some_file << rec_flux[i] << " ";
         }
-      }
-     
-     // FE flux
-     Vector<double> fe_flux(num_flux_terms);
-     el_pt->get_Z2_flux(s,fe_flux);
-     
-     for (unsigned i=0;i<dim;i++)
-      {
-       some_file << x[i] << " ";
-      }
-     for (unsigned i=0;i<num_flux_terms;i++)
-      {
-       some_file << rec_flux[i] << " ";
-      }
-     some_file << elemental_error[e]  << " " 
-               << std::endl;
-     
-     
-     for (unsigned i=0;i<dim;i++)
-      {
-       feflux_file << x[i] << " ";
-      }
-     for (unsigned i=0;i<num_flux_terms;i++)
-      {
-       feflux_file << fe_flux[i] << " ";
-      }
-     feflux_file << elemental_error[e]  << " " 
+       some_file << elemental_error[e]  << " " 
                  << std::endl;
+     
+     
+       for (unsigned i=0;i<dim;i++)
+        {
+         feflux_file << x[i] << " ";
+        }
+       for (unsigned i=0;i<num_flux_terms;i++)
+        {
+         feflux_file << fe_flux[i] << " ";
+        }
+       feflux_file << elemental_error[e]  << " " 
+                   << std::endl;
+      }
     }
+
+
+   // Write tecplot footer (e.g. FE connectivity lists)
+   // using the first element's output info.
+   FiniteElement* first_el_pt=mesh_pt->finite_element_pt(0);
+   first_el_pt->write_tecplot_zone_footer(some_file,nplot);
+   first_el_pt->write_tecplot_zone_footer(feflux_file,nplot);
   }
-
-
- // Write tecplot footer (e.g. FE connectivity lists)
- // using the first element's output info.
- FiniteElement* first_el_pt=mesh_pt->finite_element_pt(0);
- first_el_pt->write_tecplot_zone_footer(some_file,nplot);
- first_el_pt->write_tecplot_zone_footer(feflux_file,nplot);
 
  some_file.close();
  feflux_file.close();

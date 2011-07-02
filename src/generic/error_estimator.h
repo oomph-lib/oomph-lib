@@ -492,6 +492,16 @@ class Z2ErrorEstimator : public virtual ErrorEstimator
     }
 #endif
 #endif
+  
+#ifdef PARANOID
+    if (mesh_pt->nelement()==0)
+     {
+      throw OomphLibError(
+       "Can't build error estimator if there are no elements in mesh\n",
+       "DummyErrorEstimator::DummyErrorEstimator(...)",
+       OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
 
    unsigned dim=mesh_pt->finite_element_pt(0)->node_pt(0)->ndim();
    if (use_lagrangian_coordinates)
@@ -558,6 +568,16 @@ class Z2ErrorEstimator : public virtual ErrorEstimator
    Central_node_number(central_node_number)
    {
     
+#ifdef PARANOID
+    if (mesh_pt->nelement()==0)
+     {
+      throw OomphLibError(
+       "Can't build error estimator if there are no elements in mesh\n",
+       "DummyErrorEstimator::DummyErrorEstimator(...)",
+       OOMPH_EXCEPTION_LOCATION);
+     }
+#endif
+
     unsigned dim=mesh_pt->finite_element_pt(0)->node_pt(0)->ndim();
     if (use_lagrangian_coordinates)
      {

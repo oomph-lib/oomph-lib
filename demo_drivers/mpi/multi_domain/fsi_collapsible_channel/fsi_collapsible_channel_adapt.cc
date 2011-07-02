@@ -42,7 +42,7 @@ using namespace std;
 
 using namespace oomph;
 
-//#include<fenv.h>
+#include<fenv.h>
 
 
 
@@ -1002,7 +1002,7 @@ void FSICollapsibleChannelProblem<ELEMENT>::actions_after_adapt()
 int main(int argc, char* argv[])
 {
 
- //feenableexcept(FE_INVALID | FE_DIVBYZERO); 
+// feenableexcept(FE_INVALID | FE_DIVBYZERO | FE_OVERFLOW | FE_UNDERFLOW);
 
 
 #ifdef OOMPH_HAS_MPI
@@ -1018,6 +1018,19 @@ int main(int argc, char* argv[])
   {
    coarsening_factor=4;
   }
+
+
+  // Switch off output modifier
+ oomph_info.output_modifier_pt() = &default_output_modifier;
+
+ // Define processor-labeled output file for all on-screen stuff
+ std::ofstream output_stream;
+ char filename[100];
+ sprintf(filename,"OUTPUT.%i",MPI_Helpers::communicator_pt()->my_rank());
+ output_stream.open(filename);
+ oomph_info.stream_pt() = &output_stream;
+ OomphLibWarning::set_stream_pt(&output_stream);
+ OomphLibError::set_stream_pt(&output_stream);  
 
  // Number of elements in the domain
  unsigned nup=20/coarsening_factor;
@@ -1109,7 +1122,6 @@ int main(int argc, char* argv[])
  
  // Open a trace file 
  ofstream trace_file;
- char filename[100];   
  sprintf(filename,"%s/trace.dat",doc_info.directory().c_str());
  trace_file.open(filename);
 

@@ -419,7 +419,7 @@ RefineableUnsteadyHeatProblem<ELEMENT>::RefineableUnsteadyHeatProblem(
  double b=1.0;
 
  // Variations of half axes
- double a_hat= 0.1;
+ double a_hat= 0.1; 
  double b_hat=-0.1;
 
  // Period of the oscillation
@@ -475,7 +475,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::build_mesh()
  Bulk_mesh_pt->max_permitted_error()=0.001;
  Bulk_mesh_pt->min_permitted_error()=0.0001;
 
- // hierher need to to this in build_mesh()
+ // hierher need to do this in build_mesh()
  Bulk_mesh_pt->refine_uniformly();
  Bulk_mesh_pt->refine_uniformly();
 
@@ -848,7 +848,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution()
  cout << std::endl;
  cout << "=================================================" << std::endl;
  cout << "Docing solution " << Doc_info.number() << " for t=" 
-      << time_pt()->time() << std::endl;
+      << time_pt()->time() << " [ndof=" << ndof() << "\n";
  cout << "=================================================" << std::endl;
 
  // Output solution 
@@ -1171,30 +1171,61 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::dump_it(ofstream& dump_file)
 template<class ELEMENT>
 void RefineableUnsteadyHeatProblem<ELEMENT>::restart(ifstream& restart_file)
 {
- // Read line up to termination sign
- string input_string;
- getline(restart_file,input_string,'#');
 
- // Ignore rest of line
- restart_file.ignore(80,'\n');
+ double local_next_dt=0.0;
+ unsigned local_doc_info_number=0;
+ 
+ if (restart_file.is_open())
+  {
+   oomph_info <<"restart file exists"<<endl;
+     
+   // Read line up to termination sign
+   string input_string;
+   getline(restart_file,input_string,'#');
+   
+   // Ignore rest of line
+   restart_file.ignore(80,'\n');
+   
+   // Read in step number
+   local_doc_info_number=unsigned(atof(input_string.c_str()));
+   
+   // Read line up to termination sign
+   getline(restart_file,input_string,'#');
+   
+   // Ignore rest of line
+   restart_file.ignore(80,'\n');
+   
+   // Read suggested next timestep
+   local_next_dt=double(atof(input_string.c_str()));
+   
+  }
+ else
+  {
+   oomph_info <<"restart file does not exist"<<endl;
+  }
 
- // Read in step number
- Doc_info.number()=unsigned(atof(input_string.c_str()));
+ 
+ // Get next dt
+ double next_dt=0.0;
+ MPI_Allreduce(&local_next_dt,&next_dt,1,MPI_DOUBLE,MPI_MAX,
+               communicator_pt()->mpi_comm());
+ Next_dt=next_dt;
+ oomph_info << "Next dt: " << Next_dt << std::endl;
 
+ // Get doc info
+ unsigned doc_info_number=0; 
+ MPI_Allreduce(&local_doc_info_number,&doc_info_number,1,MPI_UNSIGNED,MPI_MAX,
+               communicator_pt()->mpi_comm());
+ Doc_info.number()=doc_info_number;
+ oomph_info << "Next doc_info.number(): " << doc_info_number << std::endl;
+ 
  // Increment number for next solution
  Doc_info.number()++;
 
- // Read line up to termination sign
- getline(restart_file,input_string,'#');
-
- // Ignore rest of line
- restart_file.ignore(80,'\n');
-
- // Read suggested next timestep
- Next_dt=double(atof(input_string.c_str()));
 
  // Refine the mesh and read in the generic problem data
  Problem::read(restart_file);
+
 
 } // end of restart
 
@@ -1317,6 +1348,7 @@ int main(int argc, char* argv[])
     {
      getline(input_file,input_string,'\n');
      element_partition[e]=atoi(input_string.c_str());
+     oomph_info << "e: " << e << " [ " << input_string << " ] " << element_partition[e] << std::endl;
     }
    
    // Now perform the distribution 
@@ -1328,7 +1360,7 @@ int main(int argc, char* argv[])
   {
    problem.restart();
   }
- 
+
  // Initial timestep: Use the one used when setting up the initial
  // condition or the "suggested next dt" from the restarted run
  double dt=problem.next_dt();
@@ -1351,6 +1383,8 @@ int main(int argc, char* argv[])
    // Fake but repeatable load balancing for self-test
    problem.use_default_partition_in_load_balance()=true;
   }
+
+
  for (unsigned i_cycle=0;i_cycle<ncycle;i_cycle++)
   {
    unsigned max_step=10;
@@ -1397,7 +1431,7 @@ int main(int argc, char* argv[])
 
        // Load balance
        element_partition=problem.load_balance(); 
-       
+
        // Write partition to disk
        std::ofstream output_file;
        char filename[100];

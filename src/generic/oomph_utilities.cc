@@ -1187,7 +1187,7 @@ namespace CommandLineArgs
       //Construct the error message
       std::string error_message = "Command line argument\n\n";
       error_message += argv[arg_index];
-      error_message += "\n\nwas is not recognised. This may be legal\n";
+      error_message += "\n\nwas not recognised. This may be legal\n";
       error_message += "but seems sufficiently suspicious to flag up.\n";
       error_message += "If it should have been recognised, make sure you\n";
       error_message += "used the right number of \"-\" signs...\n";

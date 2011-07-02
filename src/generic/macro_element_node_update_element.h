@@ -442,7 +442,7 @@ class MacroElementNodeUpdateMesh : public virtual Mesh
                            "MacroElementNodeUpdateMesh::node_update()",
                            OOMPH_EXCEPTION_LOCATION);
       }
-#endif
+#endif      
      nod_pt->node_update();
     }
 
@@ -485,11 +485,13 @@ class MacroElementNodeUpdateMesh : public virtual Mesh
                  const Vector<unsigned>& element_domain,
                  Vector<GeneralisedElement*>& deleted_element_pt,
                  DocInfo& doc_info,
-                 const bool& report_stats)
-  {
-   // Call underlying Mesh::distribute first
-   Mesh::distribute(comm_pt,element_domain,deleted_element_pt,
-                    doc_info,report_stats);
+                 const bool& report_stats,
+                 const bool& overrule_keep_as_halo_element_status)
+ {
+  // Call underlying Mesh::distribute first
+  Mesh::distribute(comm_pt,element_domain,deleted_element_pt,
+                   doc_info,report_stats,
+                   overrule_keep_as_halo_element_status);
 
    // Storage for number of processors
    int n_proc=comm_pt->nproc();

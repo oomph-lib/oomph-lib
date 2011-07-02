@@ -6,7 +6,7 @@ NUM_TESTS=1
 
 
 #MPI_RUN_COMMAND=`echo $MPI_RUN_COMMAND --output-filename output `
-#echo $MPI_RUN_COMMAND
+echo $MPI_RUN_COMMAND
 
 # Setup validation directory
 #---------------------------
@@ -23,7 +23,7 @@ cd Validation
 echo "Running distributed load-balanced doubly adaptive 2D unsteady heat validation "
 mkdir RESLT
 mkdir RESLT_after_load_balance
-$MPI_RUN_COMMAND ../two_d_unsteady_heat_2adapt_load_balance --validation_run --partitioning_file doubly_adaptive_partitioning_load_balance.dat > OUTPUT_doubly_adaptive_load_balanced_for_restart
+$MPI_RUN_COMMAND ../two_d_unsteady_heat_2adapt_load_balance --validation_run --partitioning_file ../doubly_adaptive_partitioning_load_balance.dat > OUTPUT_doubly_adaptive_load_balanced_for_restart
 echo "done run for restart"
 echo " " >> validation.log
 echo "2D distributed load-balanced doubly adaptive unsteady heat validation " >> validation.log
@@ -43,8 +43,10 @@ mv RESLT RESLT_doubly_adaptive_load_balanced_for_restart
 #exit
 
 mkdir RESLT
-$MPI_RUN_COMMAND ../two_d_unsteady_heat_2adapt_load_balance --validation_run --restart_file RESLT_doubly_adaptive_load_balanced_for_restart/restart3 --partitioning_file RESLT_doubly_adaptive_load_balanced_for_restart/partitioning.dat > OUTPUT_doubly_adaptive_load_balanced_restarted
+$MPI_RUN_COMMAND ../two_d_unsteady_heat_2adapt_load_balance --validation_run --restart_file RESLT_doubly_adaptive_load_balanced_for_restart/restart3 --partitioning_file ../doubly_adaptive_partitioning_load_balance.dat  > OUTPUT_doubly_adaptive_load_balanced_restarted
 echo "done restarted run"
+
+
 
 sleep 5
 cat RESLT/soln9_on_proc0.dat  RESLT/soln9_on_proc1.dat  \

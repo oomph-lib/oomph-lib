@@ -748,6 +748,11 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
  // (concatenated in processor-by-processor order)
  Vector<unsigned> number_of_dofs_for_global_root_element(
   total_number_of_root_elements);
+ // Create at least one entry so we don't get a seg fault below
+ if (number_of_dofs_for_root_element.size()==0)
+  {
+   number_of_dofs_for_root_element.resize(1);
+  }
  MPI_Gatherv(&number_of_dofs_for_root_element[0], // pointer to first entry in 
                                              // vector to be gathered on root
              number_of_root_elements,    // Number of entries to be sent
@@ -773,6 +778,12 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
  // ditto for number of non-halo elements associated with root element
  Vector<unsigned> number_of_non_halo_elements_for_global_root_element(
   total_number_of_root_elements);
+
+ // Create at least one entry so we don't get a seg fault below
+ if (number_of_non_halo_elements_for_root_element.size()==0)
+  {
+   number_of_non_halo_elements_for_root_element.resize(1);
+  }
  MPI_Gatherv(&number_of_non_halo_elements_for_root_element[0], 
                                       // pointer to first entry in 
                                       // vector to be gathered on root
@@ -801,6 +812,12 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
  // Big vector to store the long sequence of global equation numbers 
  // associated with the long sequence of root elements
  Vector<unsigned> eqn_numbers_with_root_elements(total_n_eqn);
+
+ // Create at least one entry so we don't get a seg fault below
+ if (eqn_numbers_with_root_elements_on_this_proc.size()==0)
+  {
+   eqn_numbers_with_root_elements_on_this_proc.resize(1);
+  }
  MPI_Gatherv(&eqn_numbers_with_root_elements_on_this_proc[0], 
              n_eqns_on_this_proc, 
              MPI_INT,
@@ -1094,6 +1111,12 @@ void METIS::partition_mesh(Problem* problem_pt, const unsigned& ndomain,
  // decided to line up its root elements).
  cpu_start=clock();
  Vector<unsigned> root_element_domain_on_this_proc(number_of_root_elements);
+
+ // Create at least one entry so we don't get a seg fault below
+ if (root_element_domain_on_this_proc.size()==0)
+  {
+   root_element_domain_on_this_proc.resize(1);
+  }
  MPI_Scatterv(&root_element_domain[0],
               &number_of_root_elements_on_each_proc[0],
               &start_index[0],

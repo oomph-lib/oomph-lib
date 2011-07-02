@@ -7,10 +7,10 @@ $!VarSet |postfix| = '.plt'
 $!VarSet |postfix| = '.dat'
 
 
-$!VARSET |nproc|=2
+$!VARSET |nproc|=4
 
-$!VARSET |lostep|=0
-$!VARSET |nstep|=12
+$!VARSET |lostep|=1
+$!VARSET |nstep|=13
 $!VARSET |dstep|=1
 
 $!NEWLAYOUT 

@@ -256,6 +256,8 @@ public:
  template<class BULK_ELEMENT>
   void doc_boundary_coordinates(const unsigned& b, std::ofstream& the_file)
   { 
+   if (nelement()==0) return;
+
    // Get spatial dimension
    unsigned dim=finite_element_pt(0)->node_pt(0)->ndim();
    
@@ -861,7 +863,8 @@ public:
                          const Vector<unsigned>& element_domain,
                          Vector<GeneralisedElement*>& deleted_element_pt,
                          DocInfo& doc_info,
-                         const bool& report_stats);
+                         const bool& report_stats,
+                         const bool& overrule_keep_as_halo_element_status);
  
  /// \short Distribute the problem
  /// Add to vector of pointers to deleted elements.
@@ -872,8 +875,10 @@ public:
  {
    DocInfo doc_info;
    doc_info.doc_flag()=false;
+   bool overrule_keep_as_halo_element_status=false;
    return distribute(comm_pt,element_domain,deleted_element_pt,
-                     doc_info,report_stats);
+                     doc_info,report_stats,
+                     overrule_keep_as_halo_element_status);
   }
 
  /// \short (Irreversibly) prune halo(ed) elements and nodes, usually

@@ -2828,7 +2828,8 @@ void Mesh::get_halo_node_stats(OomphCommunicator* comm_pt,
                        const Vector<unsigned>& element_domain,
                        Vector<GeneralisedElement*>& deleted_element_pt,
                        DocInfo& doc_info,
-                       const bool& report_stats)
+                       const bool& report_stats,
+                       const bool& overrule_keep_as_halo_element_status)
  { 
 
  // Storage for number of processors and current processor
@@ -2907,7 +2908,7 @@ void Mesh::get_halo_node_stats(OomphCommunicator* comm_pt,
    if(el_pt!=0)
     {
      unsigned el_domain=element_domain[e];
-     
+
      // Associate nodes with highest numbered processor
      unsigned nnod=el_pt->nnode();
      for (unsigned j=0;j<nnod;j++)
@@ -3016,8 +3017,7 @@ void Mesh::get_halo_node_stats(OomphCommunicator* comm_pt,
  // be missed the first time round but which contain nodes from this process
  
  //double t_start=clock();
- 
- bool elements_retained=true;
+  bool elements_retained=true;
  int myi=1;
  while (elements_retained) 
   {
@@ -3045,14 +3045,16 @@ void Mesh::get_halo_node_stats(OomphCommunicator* comm_pt,
        // If this current mesh has been told to keep all elements as halos,
        // OR the element itself knows that it must be kept then
        // keep it
-       if ((keep_all_elements_as_halos())
-           || (el_pt->must_be_kept_as_halo()))
+       if ((keep_all_elements_as_halos()) || (el_pt->must_be_kept_as_halo()))
         {
-         // Add as root halo element whose non-halo counterpart is
-         // located on processor el_domain
-         root_halo_element[el_domain].push_back(e); 
-         element_retained[e]=true;
-         number_of_retained_elements++;
+         if (!overrule_keep_as_halo_element_status)
+          {
+           // Add as root halo element whose non-halo counterpart is
+           // located on processor el_domain
+           root_halo_element[el_domain].push_back(e); 
+           element_retained[e]=true;
+           number_of_retained_elements++;
+          }
         }
        //Otherwise: Is one of the nodes associated with the current processor?
        else
@@ -3604,13 +3606,6 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
      // Need to go back to the level indicated by min_ref
      unsigned base_level=n_ref-(max_ref-min_ref);
    
-
-     oomph_info << "base_level n_ref max_ref min_ref: "
-                << base_level << " " 
-                << n_ref << " " 
-                << max_ref << " " 
-                << min_ref << "\n";
-
      // This is the new minimum uniform refinement level
      // relative to total unrefined base mesh
      ref_mesh_pt->uniform_refinement_level_when_pruned()=min_ref;
@@ -3626,6 +3621,7 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
       {
        // Extract correct element...
        RefineableElement* ref_el_pt=base_level_elements_pt[e];
+
 
        // Check it exists
        if (ref_el_pt!=0)
@@ -3643,6 +3639,7 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
             }
           }
         }
+
       } // end loop over base level elements
     }
    

@@ -505,15 +505,6 @@ class ProjectionProblem : public virtual Problem
 /// extend this to the case of multiple sub-meshes.
  void project(Mesh* base_mesh_pt)
   {
-   // How many fields do we have to project?
-   unsigned n_fields = dynamic_cast<PROJECTABLE_ELEMENT*>
-    (Problem::mesh_pt()->element_pt(0))->nfields_for_projection();
-
-   // Spatial dimension of the problem
-   unsigned n_dim = Problem::mesh_pt()->node_pt(0)->ndim();
-
-   // Default number of history values
-   unsigned n_history_values=0;
 
    //Display stats 
    unsigned n_element = Problem::mesh_pt()->nelement();
@@ -527,6 +518,23 @@ class ProjectionProblem : public virtual Problem
    oomph_info << "Target mesh has " << n_node << " nodes\n";
    oomph_info <<"=============================\n\n";
    
+   if (n_element==0)
+    {
+     oomph_info 
+      << "Very odd -- no elements in target mesh; "
+      << " not doing anything in ProjectionProblem::project()\n";
+     return;
+    }
+
+   // How many fields do we have to project?
+   unsigned n_fields = dynamic_cast<PROJECTABLE_ELEMENT*>
+    (Problem::mesh_pt()->element_pt(0))->nfields_for_projection();
+
+   // Spatial dimension of the problem
+   unsigned n_dim = Problem::mesh_pt()->node_pt(0)->ndim();
+
+   // Default number of history values
+   unsigned n_history_values=0;
 
    // Store pinned status and values of current values
    this->store_pinned_status_and_values();
@@ -785,6 +793,11 @@ class ProjectionProblem : public virtual Problem
  /// before doing projection
  void store_pinned_status_and_values()
  {
+
+  // No need to do anything if there are no elements (in fact, we
+  // probably never get here...)
+  if (Problem::mesh_pt()->nelement()==0) return;
+
   // Get number of fields from first element, and create storage
   PROJECTABLE_ELEMENT * new_el_pt = 
    dynamic_cast<PROJECTABLE_ELEMENT*>
@@ -850,6 +863,10 @@ class ProjectionProblem : public virtual Problem
  /// \short Pin solid positions (if required)
  void pin_solid_positions()
  {
+  // No need to do anything if there are no elements (in fact, we
+  // probably never get here...)
+  if (Problem::mesh_pt()->nelement()==0) return;
+
   /// Do we have a solid mesh?
   SolidFiniteElement* solid_el_pt = dynamic_cast<SolidFiniteElement*>
    (Problem::mesh_pt()->element_pt(0));
@@ -873,6 +890,10 @@ class ProjectionProblem : public virtual Problem
  /// \short Restore pin status for solid positions (if required)
  void restore_solid_pin_status()
  {
+  // No need to do anything if there are no elements (in fact, we
+  // probably never get here...)
+  if (Problem::mesh_pt()->nelement()==0) return;
+  
   /// Do we have a solid mesh?
   SolidFiniteElement* solid_el_pt = dynamic_cast<SolidFiniteElement*>
    (Problem::mesh_pt()->element_pt(0));
