@@ -34,7 +34,7 @@ predicates.lo : predicates.cxx
 	--mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(AM_CXXFLAGS) -O0 -Wall \
 	-MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
-	$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
+	mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
 
 
 # Define name of library
