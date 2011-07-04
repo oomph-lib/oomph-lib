@@ -25,7 +25,7 @@ tetgen.lo : tetgen.cxx
 	--mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(AM_CXXFLAGS) -O2 -Wall \
 	-MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
-	$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
+	mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
 
 
 #Specific compilation for predicates without any optimisation

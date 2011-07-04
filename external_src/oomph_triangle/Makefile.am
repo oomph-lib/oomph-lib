@@ -18,7 +18,7 @@ triangle.lo : triangle.c
 	--mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(AM_CFLAGS) -O0 -Wall \
 	-MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
-	$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
+	mv -f $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
 
 
 # Define name of library
