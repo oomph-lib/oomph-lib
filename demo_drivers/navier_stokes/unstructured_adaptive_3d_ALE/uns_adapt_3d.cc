@@ -417,8 +417,8 @@ void RefineableTetgenMesh<ELEMENT>::adapt(OomphCommunicator* comm_pt,
   oomph_info << "Max edge ratio "<< max_edge_ratio << std::endl;
 
   double orig_max_size, orig_min_size;
-  this->max_and_min_area(orig_max_size, orig_min_size);
-  oomph_info << "Max/min size in original mesh: " 
+  this->max_and_min_element_size(orig_max_size, orig_min_size);
+  oomph_info << "Max/min element size in original mesh: " 
              << orig_max_size  << " "
              << orig_min_size << std::endl;    
 
@@ -880,8 +880,8 @@ void RefineableTetgenMesh<ELEMENT>::adapt(OomphCommunicator* comm_pt,
     
     double max_area;
     double min_area;
-    this->max_and_min_area(max_area, min_area);
-    oomph_info << "Max/min area in adapted mesh: " 
+    this->max_and_min_element_size(max_area, min_area);
+    oomph_info << "Max/min element size in adapted mesh: " 
                << max_area  << " "
                << min_area << std::endl;    
    }

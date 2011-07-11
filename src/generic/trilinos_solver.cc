@@ -311,9 +311,17 @@ void TrilinosAztecOOSolver::solver_setup(DoubleMatrixBase* const& matrix_pt)
  // in the required order but totally and utterly kills trilinos' parallel
  // performance. 
  double start_t_matrix = TimingHelpers::timer();
- Epetra_matrix_pt = TrilinosEpetraHelpers
-  ::create_distributed_epetra_matrix(cast_matrix_pt,
-                                     cast_matrix_pt->distribution_pt());
+ if (Use_aztecoo_workaround_for_epetra_matrix_setup)
+  {
+   Epetra_matrix_pt = TrilinosEpetraHelpers
+    ::create_distributed_epetra_matrix_for_aztecoo(cast_matrix_pt);
+  }
+ else
+  {
+   Epetra_matrix_pt = TrilinosEpetraHelpers
+    ::create_distributed_epetra_matrix(cast_matrix_pt,
+                                       cast_matrix_pt->distribution_pt());
+  }
 
  // record the end time and compute the matrix setup time
  double end_t_matrix = TimingHelpers::timer();

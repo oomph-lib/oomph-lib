@@ -85,6 +85,18 @@ private:
  Vector<Vector<std::pair<FiniteElement*,Vector<double> > > > 
   Bin_object_coord_pairs;
 
+ /// \short In parallel computation, suppress synchronisation of bins
+ /// Default is false. If set to true, each processor will create
+ /// its own bin structure, spanning only its own elements
+ bool Suppress_synchronisation_of_bins;
+
+ /// \short Max radius beyond which we stop searching the bin. Initialised
+ /// to DBL_MAX so keep going until the point is found or until
+ /// we've searched every single bin. Overwriting this means we won't search
+ /// in bins whose closest vertex is at a distance greater than
+ /// Max_search_radius from the point to be located.
+ double Max_search_radius;
+  
  ///Storage for min coordinates in the mesh
  Vector<double> Min_coords;
 
@@ -111,41 +123,94 @@ private:
 
 public:
  
- ///\short Constructor, pass the pointer to the mesh
-  MeshAsGeomObject(Mesh* const &mesh_pt) : GeomObject()
+ ///\short Constructor, pass the pointer to the mesh. 
+ /// Final flag (default 0) allows
+ /// the suppression of synchronisation of bin boundaries on multiple
+ /// processors so if set to 1 each processor only creates a bin 
+ /// structure that contains its own elements, rather than a bin
+ /// bin structure that is identical for each processor. Obviously
+ /// only relevant for distributed problems. 
+ MeshAsGeomObject(Mesh* const &mesh_pt,
+                  const unsigned& suppress_synchronisation_of_bins_flag=0) 
+  : GeomObject()
   {
+   Max_search_radius=DBL_MAX;
+   Suppress_synchronisation_of_bins=false;
+   if (suppress_synchronisation_of_bins_flag==1) 
+    {
+     Suppress_synchronisation_of_bins=true;
+    }
    OomphCommunicator* comm_pt=0;
    bool compute_extreme_bin_coords=true;
    this->construct_it(mesh_pt,comm_pt,compute_extreme_bin_coords);
   }
 
-
- ///\short Constructor, pass the pointer to the mesh and communicator
+ ///\short Constructor, pass the pointer to the mesh and communicator. 
+ /// Final flag (default 0) allows
+ /// the suppression of synchronisation of bin boundaries on multiple
+ /// processors so if set to 1 each processor only creates a bin 
+ /// structure that contains its own elements, rather than a bin
+ /// bin structure that is identical for each processor. Obviously
+ /// only relevant for distributed problems. 
   MeshAsGeomObject(Mesh* const &mesh_pt,
-                   OomphCommunicator* comm_pt) : GeomObject()
+                   OomphCommunicator* comm_pt,
+                   const unsigned& suppress_synchronisation_of_bins_flag=0) 
+   : GeomObject()
   {
+   Max_search_radius=DBL_MAX;
+   Suppress_synchronisation_of_bins=false;
+   if (suppress_synchronisation_of_bins_flag==1) 
+    {
+     Suppress_synchronisation_of_bins=true;
+    }
    bool compute_extreme_bin_coords=true;
    this->construct_it(mesh_pt,comm_pt,compute_extreme_bin_coords);
   }
 
  ///\short Constructor, pass the pointer to the mesh and 
  /// boolean to bypass the computation of the extreme coordinates
- ///of the bin used in the locate_zeta method
+ ///of the bin used in the locate_zeta method. Final flag (default 0) allows
+ /// the suppression of synchronisation of bin boundaries on multiple
+ /// processors so if set to 1 each processor only creates a bin 
+ /// structure that contains its own elements, rather than a bin
+ /// bin structure that is identical for each processor. Obviously
+ /// only relevant for distributed problems. 
  MeshAsGeomObject(Mesh* const &mesh_pt,
-                  const bool& compute_extreme_bin_coords) : GeomObject()
+                  const bool& compute_extreme_bin_coords,
+                  const unsigned& suppress_synchronisation_of_bins_flag=0) : 
+  GeomObject()
   {
+   Max_search_radius=DBL_MAX;
+   Suppress_synchronisation_of_bins=false;
+   if (suppress_synchronisation_of_bins_flag==1) 
+    {
+     Suppress_synchronisation_of_bins=true;
+    }
    OomphCommunicator* comm_pt=0;
    this->construct_it(mesh_pt,comm_pt,compute_extreme_bin_coords);
   }
 
 
- ///\short Constructor, pass the pointer to the mesh, communicator, and 
+ /// \short Constructor, pass the pointer to the mesh, communicator, and 
  /// boolean to bypass the computation of the extreme coordinates
- ///of the bin used in the locate_zeta method
+ /// of the bin used in the locate_zeta method. Final flag (default 0) allows
+ /// the suppression of synchronisation of bin boundaries on multiple
+ /// processors so if set to 1 each processor only creates a bin 
+ /// structure that contains its own elements, rather than a bin
+ /// bin structure that is identical for each processor. Obviously
+ /// only relevant for distributed problems. 
  MeshAsGeomObject(Mesh* const &mesh_pt,
                   OomphCommunicator* comm_pt,
-                  const bool& compute_extreme_bin_coords) : GeomObject()
+                  const bool& compute_extreme_bin_coords,
+                  const unsigned& suppress_synchronisation_of_bins_flag=0) : 
+  GeomObject()
   {
+   Max_search_radius=DBL_MAX;
+   if (suppress_synchronisation_of_bins_flag==1) 
+    {
+     Suppress_synchronisation_of_bins=true;
+    }
+   Suppress_synchronisation_of_bins=false;
    this->construct_it(mesh_pt,comm_pt,compute_extreme_bin_coords);
   }
  
@@ -165,6 +230,13 @@ public:
   }
 
 
+ /// \short In parallel computation, suppress synchronisation of bins
+ /// Default is false. If set to true, each processor will create
+ /// its own bin structure, spanning only its own elements
+ bool& suppress_synchronisation_of_bins()
+  {
+   return Suppress_synchronisation_of_bins;
+  }
 
  /// How many items of Data does the shape of the object depend on?
  unsigned ngeom_data() const {return Geom_data_pt.size();}
@@ -270,6 +342,17 @@ public:
                        OOMPH_EXCEPTION_LOCATION);
   }
 
+
+ /// \short Set maximum search radius for locate zeta. This is initialised
+ /// do DBL_MAX so we brutally search through the entire bin structure,
+ /// no matter how big it is until we've found the required point (or 
+ /// failed to do so. This can be VERY costly with fine meshes.
+ /// Here the user takes full responsibility and states that we have
+ /// no chance in hell to find the required point in
+ /// a bin whose closest vertex is further than the specified
+ /// max search radius.
+ double& max_search_radius() {return Max_search_radius;}
+
  ///Access function to current min. spiral level
  unsigned& current_min_spiral_level() {return Current_min_spiral_level;}
 
@@ -297,6 +380,32 @@ public:
  ///Get the min and max coordinates for the mesh, in each dimension
  void get_min_and_max_coordinates(Mesh* const &mesh_pt);
 
+ /// \short Compute the minimum distance of any vertex in the specified bin
+ /// from the specified Lagrangian coordinate zeta
+ double min_distance(const unsigned& i_bin,
+                     const Vector<double>& zeta);
+ 
+
+ /// \short Output bin vertices (allowing display of bins as zones).
+ /// Final argument specifies the coordinates of a point (defaults to
+ /// zero vector) and output includes the minimum distance of any of
+ /// the bin vertices to this point. 
+ void output_bin_vertices(std::ofstream& outfile,
+                          const Vector<double>& zeta);
+ 
+ /// \short Output bin vertices (allowing display of bins as zones).
+ void output_bin_vertices(std::ofstream& outfile)
+ {
+  Vector<double> zeta( this->nlagrangian(),0.0);
+  output_bin_vertices(outfile,zeta);
+ }
+  
+ /// \short Get vector of vectors containing the coordinates of the
+ /// vertices of the i_bin-th bin: bin_vertex[j][i] contains the
+ /// i-th coordinate of the j-th vertex.
+ void get_bin_vertices(const unsigned& i_bin,
+                       Vector<Vector<double> >& bin_vertex);
+ 
  ///Initialise and populate the "bin" structure for locating coordinates
  void create_bins_of_objects();
 

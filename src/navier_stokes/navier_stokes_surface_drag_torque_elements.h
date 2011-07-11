@@ -84,15 +84,6 @@ class NavierStokesSurfaceDragTorqueElement :
   double &centre_of_rotation(const unsigned &i) 
    {return this->Centre_of_rotation[i];}
   
-  /// \short The "global" intrinsic coordinate of the element when
-  /// viewed as part of a geometric object should be given by
-  /// the FaceElement representation, by default
-  /// This final over-ride is required for cases where the
-  /// FaceElement is a SolidFiniteElement because both SolidFiniteElements 
-  /// and FaceElements overload zeta_nodal.
-  double zeta_nodal(const unsigned &n, const unsigned &k,           
-                    const unsigned &i) const 
-   {return FaceElement::zeta_nodal(n,k,i);}     
    
  /// \short Function that specifies the drag force and the torque about
  /// the origin
@@ -224,6 +215,17 @@ class NavierStokesSurfaceDragTorqueElement :
    //std::cout << "Forces " << drag_force[0] << " " << drag_force[1] << " " 
    //          << drag_torque[0] << "\n";
   }
+
+
+ /// \short Specify the value of nodal zeta from the face geometry
+ /// The "global" intrinsic coordinate of the element when
+ /// viewed as part of a geometric object should be given by
+ /// the FaceElement representation, by default (needed to break
+ /// indeterminacy if bulk element is SolidElement)
+ double zeta_nodal(const unsigned &n, const unsigned &k,           
+                   const unsigned &i) const 
+ {return FaceElement::zeta_nodal(n,k,i);}     
+
 
 private:
 

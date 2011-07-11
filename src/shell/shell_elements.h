@@ -61,6 +61,9 @@ class KirchhoffLoveShellEquations : public virtual SolidFiniteElement
  /// Static default value for the thickness ratio
  static double Default_h_value;
 
+ /// Boolean flag to ignore membrane terms
+ bool Ignore_membrane_terms;
+
  /// Pointer to Poisson's ratio
  double *Nu_pt;
 
@@ -144,6 +147,9 @@ public:
    Lambda_sq_pt = &Default_lambda_sq_value;
    H_pt = &Default_h_value;
 
+   // Don't ignore membrane terms
+   Ignore_membrane_terms=false;
+   
    //Default load is zero traction
    Load_vector_fct_pt = &Zero_traction_fct;
 
@@ -197,6 +203,9 @@ public:
    return *Prestress_pt(i,j);
   }
 
+ /// Boolean flag to ignore membrane terms
+ bool& ignore_membrane_terms(){return Ignore_membrane_terms;}
+
  /// Return the Poisson's ratio
  const double &nu() const {return *Nu_pt;}
 
@@ -237,11 +246,13 @@ public:
  void get_energy(double& pot_en, double& kin_en);
 
  
- /// Get strain and bending tensors
- void get_strain_and_bend(const Vector<double>& s, 
-                          DenseDoubleMatrix& strain, 
-                          DenseDoubleMatrix& bend);
-
+ /// \short Get strain and bending tensors; returns pair comprising the
+ /// determinant of the undeformed (*.first) and deformed (*.second) 
+ /// midplane metric tensor.
+ std::pair<double,double> get_strain_and_bend(const Vector<double>& s, 
+                                              DenseDoubleMatrix& strain, 
+                                              DenseDoubleMatrix& bend);
+ 
 
  /// \short Get integral of instantaneous rate of work done on 
  /// the wall due to the load returned by the virtual 

@@ -1643,8 +1643,8 @@ namespace oomph
   oomph_info << "Min angle "<< min_angle << std::endl;
 
   double orig_max_area, orig_min_area;
-  this->max_and_min_area(orig_max_area, orig_min_area);
-  oomph_info << "Max/min area in original mesh: " 
+  this->max_and_min_element_size(orig_max_area, orig_min_area);
+  oomph_info << "Max/min element size in original mesh: " 
              << orig_max_area  << " "
              << orig_min_area << std::endl;    
 
@@ -2101,8 +2101,8 @@ namespace oomph
     
     double max_area;
     double min_area;
-    this->max_and_min_area(max_area, min_area);
-    oomph_info << "Max/min area in adapted mesh: " 
+    this->max_and_min_element_size(max_area, min_area);
+    oomph_info << "Max/min element size in adapted mesh: " 
                << max_area  << " "
                << min_area << std::endl;    
    }

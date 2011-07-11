@@ -250,6 +250,7 @@ namespace oomph
     return *Operator_map_pt;
    }
 
+
    private:
 
   /// A pointer to the oomph-lib preconditioner
@@ -295,6 +296,12 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
  /// Constructor.
  TrilinosAztecOOSolver()
  {
+  
+  // By default don't use workaround for creating of epetra matrix that 
+  // respects aztecoo's ordering requirements (but can be very detrimental
+  // to parallel performance)
+  Use_aztecoo_workaround_for_epetra_matrix_setup=false;
+  
   // set pointer to Null
   AztecOO_solver_pt = 0;
 
@@ -347,6 +354,12 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
  {
   BrokenCopy::broken_assign("TrilinosAztecOOSolver");
  }
+
+ /// \short Use workaround for creating of epetra matrix that respects
+ /// aztecoo's ordering requirements (but can be very detrimental
+ /// to parallel performance)
+ bool& use_aztecoo_workaround_for_epetra_matrix_setup()
+  {return Use_aztecoo_workaround_for_epetra_matrix_setup;}
 
  /// Clean up method - deletes the solver, the matrices and the preconditioner
  void clean_up_memory()
@@ -464,6 +477,11 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
  /// parameters.
  void solver_setup(DoubleMatrixBase* const& matrix_pt);
 
+ /// \short Use workaround for creating of epetra matrix that respects
+ /// aztecoo's ordering requirements (but can be very detrimental
+ /// to parallel performance)
+ bool Use_aztecoo_workaround_for_epetra_matrix_setup;
+ 
  /// Stores number of iterations used
  unsigned Iterations;
 

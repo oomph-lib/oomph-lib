@@ -113,6 +113,17 @@ public:
    fill_in_generic_residual_contribution_helmholtz_flux(residuals,jacobian,1);
   }
 
+
+ /// \short Specify the value of nodal zeta from the face geometry
+ /// The "global" intrinsic coordinate of the element when
+ /// viewed as part of a geometric object should be given by
+ /// the FaceElement representation, by default (needed to break
+ /// indeterminacy if bulk element is SolidElement)
+ double zeta_nodal(const unsigned &n, const unsigned &k,           
+                   const unsigned &i) const 
+ {return FaceElement::zeta_nodal(n,k,i);}     
+
+
  /// Output function -- forward to broken version in FiniteElement
  /// until somebody decides what exactly they want to plot here...
  void output(std::ostream &outfile) {FiniteElement::output(outfile);}

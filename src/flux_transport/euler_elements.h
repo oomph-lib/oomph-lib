@@ -444,7 +444,16 @@ public virtual QSpectralElement<DIM-1,NNODE_1D>
        dynamic_cast<ELEMENT*>(element_pt)->face_integration_pt());
      }
    }
-
+   
+   /// Specify the value of nodal zeta from the face geometry
+   /// \short The "global" intrinsic coordinate of the element when
+   /// viewed as part of a geometric object should be given by
+   /// the FaceElement representation, by default (needed to break
+   /// indeterminacy if bulk element is SolidElement)
+   double zeta_nodal(const unsigned &n, const unsigned &k,           
+                     const unsigned &i) const 
+   {return FaceElement::zeta_nodal(n,k,i);}     
+   
 
   //There is a single required n_flux
   unsigned required_nflux() {return Nflux;}
@@ -661,6 +670,15 @@ public virtual QSpectralElement<DIM-1,NNODE_1D>
    }
 
 
+   /// Specify the value of nodal zeta from the face geometry
+   /// \short The "global" intrinsic coordinate of the element when
+   /// viewed as part of a geometric object should be given by
+   /// the FaceElement representation, by default (needed to break
+   /// indeterminacy if bulk element is SolidElement)
+   double zeta_nodal(const unsigned &n, const unsigned &k,           
+                     const unsigned &i) const 
+   {return FaceElement::zeta_nodal(n,k,i);}     
+   
   //There is a single required n_flux
   unsigned required_nflux() {return Nflux;}
 

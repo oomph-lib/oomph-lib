@@ -2369,6 +2369,30 @@ public:
  // ALH: Only virtual so that it can be overloaded in axisymmetric
  // elements
  virtual double size() const; 
+ 
+ 
+ /// \short Virtual function to write the double precision numbers that
+ /// appear in a single line of output into the data vector. Empty virtual,
+ /// can be overloaded for specific elements; used e.g. by LineVisualiser.
+ virtual void point_output_data(const Vector<double> &s, Vector<double>& data)
+ {}
+ 
+ /// \short Output solution (as defined by point_output_data()) 
+ /// at local cordinates s
+ void point_output(std::ostream &outfile, const Vector<double> &s)
+ {
+  // Get point data
+  Vector<double> data;
+  this->point_output_data(s,data);
+  
+  // Output
+  unsigned n=data.size();
+  for (unsigned i=0;i<n;i++)
+   {
+    outfile << data[i] << " ";
+   }
+ }
+ 
 
  /// \short Output the element data --- typically the values at the 
  /// nodes in a format suitable for post-processing.

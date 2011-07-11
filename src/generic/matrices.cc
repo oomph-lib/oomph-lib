@@ -3055,7 +3055,7 @@ CRDoubleMatrix* CRDoubleMatrix::global_matrix() const
  }
 
 //=============================================================================
-///  Multiply the matrix by the vector x
+/// Compute infinity (maximum) norm of matrix
 //=============================================================================
 double CRDoubleMatrix::inf_norm() const
   {
@@ -3064,13 +3064,13 @@ double CRDoubleMatrix::inf_norm() const
    if (!this->distribution_built())
     {
      std::ostringstream error_message;
-     error_message << "This vector must be setup."; 
+     error_message << "This matrix must be setup."; 
      throw OomphLibError(error_message.str(),
-                         "DoubleVector::norm()",
+                         "CRDoubleMatrix::norm()",
                          OOMPH_EXCEPTION_LOCATION);
     }
 #endif
-
+   
    // compute the local norm
    unsigned nrow_local = this->nrow_local();
    double n = 0;
@@ -3085,20 +3085,21 @@ double CRDoubleMatrix::inf_norm() const
       }
      n = std::max(n,a);
     }
-
+   
    // if this vector is distributed and on multiple processors then gather
 #ifdef OOMPH_HAS_MPI
    double n2 = n;
-   if (this->distributed() && this->distribution_pt()->communicator_pt()->nproc() > 1)
+   if ( this->distributed() && 
+        this->distribution_pt()->communicator_pt()->nproc() > 1)
     {
      MPI_Allreduce(&n,&n2,1,MPI_DOUBLE,MPI_MAX,
                    this->distribution_pt()->communicator_pt()->mpi_comm());
     }
    n = n2;
 #endif
-
-   // sqrt the norm
-   n = sqrt(n);
+   
+   // sqrt the norm // hierher
+   // hierher n = sqrt(n);
 
    // and return
    return n;

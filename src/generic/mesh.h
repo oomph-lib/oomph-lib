@@ -543,16 +543,16 @@ public:
 
  /// \short Determine max and min area for all FiniteElements in the mesh
  /// (non-FiniteElements are ignored)
- void max_and_min_area(double& max_area, double& min_area)
+ void max_and_min_element_size(double& max_size, double& min_size)
  {
-  max_area=0.0;
-  min_area=DBL_MAX;
+  max_size=0.0;
+  min_size=DBL_MAX;
   unsigned nel=nelement();
   for (unsigned e=0;e<nel;e++)
    {
-    max_area=std::max(max_area,
+    max_size=std::max(max_size,
                       finite_element_pt(e)->size());
-    min_area=std::min(min_area,
+    min_size=std::min(min_size,
                       finite_element_pt(e)->size());   }
  }
 

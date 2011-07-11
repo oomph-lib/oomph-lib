@@ -147,7 +147,7 @@ void KirchhoffLoveShellEquations::get_normal(const Vector<double>& s,
 //======================================================================
 /// Get strain and bending tensors
 //=====================================================================
- void KirchhoffLoveShellEquations::get_strain_and_bend(
+ std::pair<double,double> KirchhoffLoveShellEquations::get_strain_and_bend(
   const Vector<double>& s, DenseDoubleMatrix& strain, DenseDoubleMatrix& bend)
  {
   //Set the dimension of the coordinates
@@ -330,7 +330,11 @@ void KirchhoffLoveShellEquations::get_normal(const Vector<double>& s,
       bend(i,j) = b[i][j] - B[i][j];
      }
    }
-  
+
+  // Return undeformed and deformed determinant of in-plane metric
+  // tensor
+  return std::make_pair(adet,Adet);
+
  }
 
 
@@ -661,11 +665,14 @@ fill_in_contribution_to_residuals_shell(Vector<double> &residuals)
                 {
                  for(unsigned de=0;de<2;de++)
                   {
-                   //Pure membrane term
-                   other_residual_terms += 
-                    Et[al][be][ga][de]*gamma[al][be]
-                    *interpolated_A(ga,i)
-                    *dpsidxi(l,k,de);
+                   if (!Ignore_membrane_terms)
+                    {
+                     //Pure membrane term
+                     other_residual_terms += 
+                      Et[al][be][ga][de]*gamma[al][be]
+                      *interpolated_A(ga,i)
+                      *dpsidxi(l,k,de);
+                    }
 
                    //Bending terms
                    other_residual_terms -=  

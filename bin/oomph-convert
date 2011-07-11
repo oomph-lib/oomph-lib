@@ -80,6 +80,6 @@ while [ $# -ne 0 ] ; do
     echo -- Processing $filename
     # Remove everything after first "." in filename, "." included
     filenametrunc=${filename%\.*} 
-    oomph-convert.py $zeroflag $filename $filenametrunc.vtu
+    /home/mheil/version_for_annes_plate_and_hele_shaw/bin/oomph-convert.py $zeroflag $filename $filenametrunc.vtu
     shift
 done

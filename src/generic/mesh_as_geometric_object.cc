@@ -238,30 +238,22 @@ namespace oomph
    const unsigned n_lagrangian = this->nlagrangian();
 
    // Does the zeta coordinate lie within the current bin structure?
-   // If not then modify Min/Max_coords and re-populate the bin structure
 
-   //Boolean to indicate whether bin structure should be repopulated
-   bool recreate_bins = false;
    //Loop over the lagrangian dimension
    for(unsigned i=0;i<n_lagrangian;i++)
     {
      //If the i-th coordinate is less than the minimum
      if(zeta[i] < Min_coords[i]) 
       {
-       Min_coords[i] = zeta[i];
-       recreate_bins = true;
+       return; 
       }
      //Otherwise coordinate may be bigger than the maximum
      else if(zeta[i] > Max_coords[i])
       {
-       Max_coords[i] = zeta[i];
-       recreate_bins = true;
+       return; 
       }
     }
    
-   //Recreate bins if necessary
-   if(recreate_bins==true) {create_bins_of_objects();}
-
    // Use the min and max coords of the bin structure, to find
    // the bin structure containing the current zeta cooordinate
    unsigned bin_number=0;
@@ -302,60 +294,68 @@ namespace oomph
      bool found_zeta=false;
      for (unsigned i_nbr=0;i_nbr<n_nbr_bin;i_nbr++)
       {
-       // Get the number of element-sample point pairs in this bin
-       unsigned n_sample=
-        Bin_object_coord_pairs[neighbour_bin[i_nbr]].size();
-
-       // Don't do anything if this bin has no sample points
-       if (n_sample>0)
-        {
-         // Sort the bin if required
-         if (Multi_domain_functions::Sort_bin_entries)
+       // Only search if bin is within the max. radius
+       if (min_distance(neighbour_bin[i_nbr],zeta)<Max_search_radius)
+        {         
+         // Get the number of element-sample point pairs in this bin
+         unsigned n_sample=
+          Bin_object_coord_pairs[neighbour_bin[i_nbr]].size();
+         
+         // Don't do anything if this bin has no sample points
+         if (n_sample>0)
           {
-           sort_the_bin(zeta,Bin_object_coord_pairs[neighbour_bin[i_nbr]]);
+           // Sort the bin if required
+           if (Multi_domain_functions::Sort_bin_entries)
+            {
+             sort_the_bin(zeta,Bin_object_coord_pairs[neighbour_bin[i_nbr]]);
+            }
+           
+           for (unsigned i_sam=0;i_sam<n_sample;i_sam++)
+            {
+             // Get the element
+             FiniteElement* el_pt=Bin_object_coord_pairs
+              [neighbour_bin[i_nbr]][i_sam].first;
+             
+             // Get the local coordinate
+             s=Bin_object_coord_pairs[neighbour_bin[i_nbr]][i_sam].second;
+             
+             // Use this coordinate as the initial guess
+             bool use_coordinate_as_initial_guess=true;
+             
+             // Attempt to find zeta within a sub-object
+             el_pt->locate_zeta(zeta,sub_geom_object_pt,s,
+                                use_coordinate_as_initial_guess);
+             
+#ifdef OOMPH_HAS_MPI
+             // Dynamic cast the result to a FiniteElement
+             FiniteElement* test_el_pt=
+              dynamic_cast<FiniteElement*>(sub_geom_object_pt);
+             if (test_el_pt!=0)
+              {
+               // We only want to exit if this is a non-halo element
+               if (test_el_pt->is_halo()) {sub_geom_object_pt=0;}
+              }
+#endif
+             
+             // If the FiniteElement is non-halo and has been located, exit
+             if (sub_geom_object_pt!=0)
+              {
+               found_zeta=true;
+               break;
+              }
+            } // end loop over sample points
+          }
+         
+         if (found_zeta)
+          {
+           break;
           }
 
-         for (unsigned i_sam=0;i_sam<n_sample;i_sam++)
-          {
-           // Get the element
-           FiniteElement* el_pt=Bin_object_coord_pairs
-            [neighbour_bin[i_nbr]][i_sam].first;
-
-           // Get the local coordinate
-           s=Bin_object_coord_pairs[neighbour_bin[i_nbr]][i_sam].second;
-
-           // Use this coordinate as the initial guess
-           bool use_coordinate_as_initial_guess=true;
-
-           // Attempt to find zeta within a sub-object
-           el_pt->locate_zeta(zeta,sub_geom_object_pt,s,
-                              use_coordinate_as_initial_guess);
-
-#ifdef OOMPH_HAS_MPI
-           // Dynamic cast the result to a FiniteElement
-           FiniteElement* test_el_pt=
-            dynamic_cast<FiniteElement*>(sub_geom_object_pt);
-           if (test_el_pt!=0)
-            {
-             // We only want to exit if this is a non-halo element
-             if (test_el_pt->is_halo()) {sub_geom_object_pt=0;}
-            }
-#endif
-
-           // If the FiniteElement is non-halo and has been located, exit
-           if (sub_geom_object_pt!=0)
-            {
-             found_zeta=true;
-             break;
-            }
-          } // end loop over sample points
-        }
-
-       if (found_zeta)
+        } //end of don't search if outside search radius
+       else
         {
-         break;
+         //oomph_info << "Terminating: Outside search radius [1]\n";
         }
-
       } // end loop over bins at this level
 
     }
@@ -379,52 +379,61 @@ namespace oomph
        Vector<unsigned> neighbour_bin;
        get_neighbouring_bins_helper(bin_number,i_level,neighbour_bin);
        unsigned n_nbr_bin=neighbour_bin.size();
-
+       
        // Loop over neighbouring bins
        for (unsigned i_nbr=0;i_nbr<n_nbr_bin;i_nbr++)
         {
-         // Get the number of element-sample point pairs in this bin
-         unsigned n_sample=
-          Bin_object_coord_pairs[neighbour_bin[i_nbr]].size();
-
-         // Don't do anything if this bin has no sample points
-         if (n_sample>0)
-          {
-           // Sort the bin if required
-           if (Multi_domain_functions::Sort_bin_entries)
+         
+         // Only search if bin is within the max. radius
+         if (min_distance(neighbour_bin[i_nbr],zeta)<Max_search_radius)
+          {         
+           // Get the number of element-sample point pairs in this bin
+           unsigned n_sample=
+            Bin_object_coord_pairs[neighbour_bin[i_nbr]].size();
+           
+           // Don't do anything if this bin has no sample points
+           if (n_sample>0)
             {
-             sort_the_bin(zeta,Bin_object_coord_pairs[neighbour_bin[i_nbr]]);
-            }
-
-           for (unsigned i_sam=0;i_sam<n_sample;i_sam++)
-            {
-             // Get the element
-             FiniteElement* el_pt=Bin_object_coord_pairs
-              [neighbour_bin[i_nbr]][i_sam].first;
-
-             // Get the local coordinate
-             s=Bin_object_coord_pairs[neighbour_bin[i_nbr]][i_sam].second;
-
-             // Use this coordinate as the initial guess in locate_zeta
-             bool use_coordinate_as_initial_guess=true;
-
-             // Attempt to loacte the correct sub-object
-             el_pt->locate_zeta(zeta,sub_geom_object_pt,s,
-                                use_coordinate_as_initial_guess);
-
-             // If it was found then break
-             if (sub_geom_object_pt!=0)
+             // Sort the bin if required
+             if (Multi_domain_functions::Sort_bin_entries)
               {
-               found_zeta=true;
-               break;
+               sort_the_bin(zeta,Bin_object_coord_pairs[neighbour_bin[i_nbr]]);
               }
-            } // end loop over sample points
-          }
-
-         // Break out of the bin loop if locate was successful
-         if (found_zeta)
+             
+             for (unsigned i_sam=0;i_sam<n_sample;i_sam++)
+              {
+               // Get the element
+               FiniteElement* el_pt=Bin_object_coord_pairs
+                [neighbour_bin[i_nbr]][i_sam].first;
+               
+               // Get the local coordinate
+               s=Bin_object_coord_pairs[neighbour_bin[i_nbr]][i_sam].second;
+               
+               // Use this coordinate as the initial guess in locate_zeta
+               bool use_coordinate_as_initial_guess=true;
+               
+               // Attempt to loacte the correct sub-object
+               el_pt->locate_zeta(zeta,sub_geom_object_pt,s,
+                                  use_coordinate_as_initial_guess);
+               
+               // If it was found then break
+               if (sub_geom_object_pt!=0)
+                {
+                 found_zeta=true;
+                 break;
+                }
+              } // end loop over sample points
+            }
+           
+           // Break out of the bin loop if locate was successful
+           if (found_zeta)
+            {
+             break;
+            }
+          } //end of don't search if outside search radius
+         else
           {
-           break;
+           //oomph_info << "Terminating: Outside search radius [2]\n";
           }
 
         } // end loop over bins at this level
@@ -496,8 +505,10 @@ namespace oomph
    for(int i=0;i<n_lagrangian;i++) {zeta_min[i] = 0.0; zeta_max[i] = 0.0;}
 
 #ifdef OOMPH_HAS_MPI
-   // If the mesh has been distributed...
-   if (mesh_pt->mesh_has_been_distributed())
+   // If the mesh has been distributed and we want consistent bins
+   // across all processors
+   if ( mesh_pt->mesh_has_been_distributed() && 
+        (!Suppress_synchronisation_of_bins) )
     {
      // .. we need a non-null communicator!
      if (Communicator_pt!=0)
@@ -719,6 +730,219 @@ namespace oomph
    }
  }
   
+  
+//========================================================================
+/// Compute the minimum distance of any vertex in the specified bin
+/// from the specified Lagrangian coordinate zeta.
+//========================================================================
+ double MeshAsGeomObject::min_distance(const unsigned& i_bin,
+                                       const Vector<double>& zeta)
+ {
+  // Spatial dimension of bin
+  const unsigned n_lagrangian = this->nlagrangian();
+  
+  // Get bin vertices
+  Vector<Vector<double> > bin_vertex;
+  get_bin_vertices(i_bin, bin_vertex);
+
+  double min_dist=DBL_MAX;
+  unsigned nvertex=bin_vertex.size();
+  for (unsigned v=0;v<nvertex;v++)
+   {
+    double dist=0.0;
+    for (unsigned i=0;i<n_lagrangian;i++)
+     {
+      dist+=pow(bin_vertex[v][i]-zeta[i],2);
+     }
+    dist=sqrt(dist);
+    if (dist<min_dist) min_dist=dist;
+   }
+  return min_dist;
+ }
+
+
+
+//========================================================================
+/// Output bin vertices (allowing display of bins as zones). 
+/// Final argument specifies the coordinates of a point (defaults to
+/// zero vector) and output includes the minimum distance of any of
+/// the bin vertices to this point. 
+//========================================================================
+ void MeshAsGeomObject::output_bin_vertices(std::ofstream& outfile,
+  const Vector<double>& zeta)
+ {
+  
+  // Spatial dimension of bin
+  const unsigned n_lagrangian = this->nlagrangian();
+  
+  unsigned nbin=Nbin_x;
+  if (n_lagrangian>1) nbin*=Nbin_y; 
+  if (n_lagrangian>2) nbin*=Nbin_z;
+
+  for (unsigned i_bin=0;i_bin<nbin;i_bin++)
+   {
+    // Get bin vertices
+    Vector<Vector<double> > bin_vertex;
+    get_bin_vertices(i_bin, bin_vertex);
+    switch(n_lagrangian)
+     {
+     case 1:
+      outfile << "ZONE I=2\n";
+      break;
+
+     case 2:
+      outfile << "ZONE I=2, J=2\n";
+      break;
+
+     case 3:
+      outfile << "ZONE I=2, J=2, K=2\n";
+      break;
+     }
+
+    unsigned nvertex=bin_vertex.size();
+    for (unsigned i=0;i<nvertex;i++)
+     {
+      for (unsigned j=0;j<n_lagrangian;j++)
+       {
+        outfile 
+         << bin_vertex[i][j] << " ";
+       }
+      outfile << i_bin << " "
+              << min_distance(i_bin,zeta) << "\n";
+     }
+   }
+ }
+
+
+//========================================================================
+/// Get vector of vectors containing the coordinates of the
+/// vertices of the i_bin-th bin: bin_vertex[j][i] contains the
+/// i-th coordinate of the j-th vertex.
+//========================================================================
+ void MeshAsGeomObject::get_bin_vertices(const unsigned& i_bin,
+                                         Vector<Vector<double> >& bin_vertex)
+ {
+ 
+  // Spatial dimension of bin
+  const unsigned n_lagrangian = this->nlagrangian();
+  
+  // How many vertices do we have?
+  unsigned n_vertices=1;
+  for (unsigned i=0;i<n_lagrangian;i++)
+   {
+    n_vertices*=2;
+   }
+  bin_vertex.resize(n_vertices);
+  
+  // Vectors for min [0] and max [1] coordinates of the bin in each 
+  // coordinate direction
+  Vector<Vector<double> > zeta_vertex_bin(2);
+  zeta_vertex_bin[0].resize(n_lagrangian);
+  zeta_vertex_bin[1].resize(n_lagrangian);
+  
+  unsigned Nbin[3]={Nbin_x,Nbin_y,Nbin_z};
+  Vector<double> dzeta;
+  unsigned count=0;
+  Vector<unsigned> i_1d;
+
+  // Deal with different spatial dimensions separately
+  switch (n_lagrangian)
+   {
+    
+   case 1:
+    
+    // Assign vertex coordinates of the bin directly
+    dzeta.resize(1);
+    dzeta[0]=(Max_coords[0]-Min_coords[0])/double(Nbin[0]);
+    bin_vertex[0].resize(1);
+    bin_vertex[0][0]=Min_coords[0]+double(i_bin)*dzeta[0];
+    bin_vertex[1].resize(1);
+    bin_vertex[1][0]=Min_coords[0]+double(i_bin+1)*dzeta[0];
+
+    break;
+
+   case 2:
+
+    dzeta.resize(2);
+    dzeta[0]=(Max_coords[0]-Min_coords[0])/double(Nbin[0]);
+    dzeta[1]=(Max_coords[1]-Min_coords[1])/double(Nbin[1]);
+
+    i_1d.resize(2);
+    i_1d[0]=i_bin%Nbin[0];
+    i_1d[1]=(i_bin-i_1d[0])/Nbin[0];
+
+    // Max/min coordinates of the bin
+    for (unsigned i=0;i<n_lagrangian;i++)
+     {
+      zeta_vertex_bin[0][i]=Min_coords[i]+double(i_1d[i])*dzeta[i];
+      zeta_vertex_bin[1][i]=Min_coords[i]+double(i_1d[i]+1)*dzeta[i];
+     }
+
+    // Build 4 vertex coordinates
+    count=0;
+    for (unsigned i_min_max=0;i_min_max<2;i_min_max++)
+     {
+      for (unsigned j_min_max=0;j_min_max<2;j_min_max++)
+       {
+        bin_vertex[count].resize(2);
+        bin_vertex[count][0]=zeta_vertex_bin[i_min_max][0];
+        bin_vertex[count][1]=zeta_vertex_bin[j_min_max][1];
+        count++;
+       }
+     }
+
+    break;
+
+   case 3:
+
+    dzeta.resize(3);
+    dzeta[0]=(Max_coords[0]-Min_coords[0])/double(Nbin[0]);
+    dzeta[1]=(Max_coords[1]-Min_coords[1])/double(Nbin[1]);
+    dzeta[2]=(Max_coords[2]-Min_coords[2])/double(Nbin[2]);
+
+    i_1d.resize(3);
+    i_1d[0]=i_bin%Nbin[0];
+    i_1d[1]=((i_bin-i_1d[0])/Nbin[0])%Nbin[1];
+    i_1d[2]=(i_bin-(i_1d[1]*Nbin[0]+i_1d[0]))/(Nbin[0]*Nbin[1]);
+
+    // Max/min coordinates of the bin
+    for (unsigned i=0;i<n_lagrangian;i++)
+     {
+      zeta_vertex_bin[0][i]=Min_coords[i]+double(i_1d[i])*dzeta[i];
+      zeta_vertex_bin[1][i]=Min_coords[i]+double(i_1d[i]+1)*dzeta[i];
+     }
+
+    // Build 8 vertex coordinates
+    count=0;
+    for (unsigned i_min_max=0;i_min_max<2;i_min_max++)
+     {
+      for (unsigned j_min_max=0;j_min_max<2;j_min_max++)
+       {
+        for (unsigned k_min_max=0;k_min_max<2;k_min_max++)
+         {
+          bin_vertex[count].resize(3);
+          bin_vertex[count][0]=zeta_vertex_bin[i_min_max][0];
+          bin_vertex[count][1]=zeta_vertex_bin[j_min_max][1];
+          bin_vertex[count][2]=zeta_vertex_bin[k_min_max][2];
+          count++;
+         }
+       }
+     }
+
+    break;
+
+   default:
+    
+    std::ostringstream error_message;
+    error_message 
+     << "Can't deal with bins in dimension " << n_lagrangian << "\n";
+    throw OomphLibError(
+     error_message.str(),
+     "MeshAsGeomObject::min_distance()",
+     OOMPH_EXCEPTION_LOCATION);
+   }
+
+ }
 
 
 

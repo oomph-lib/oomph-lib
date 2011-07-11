@@ -182,14 +182,7 @@ class FpPressureAdvDiffRobinBCElement : public virtual FaceGeometry<ELEMENT>,
  void output(std::ostream &outfile, const unsigned &nplot)
  {FiniteElement::output(outfile,nplot);}
  
-
-}; 
-
-
-
-
-
-
+};
 
 ///////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
@@ -1242,6 +1235,7 @@ public:
                                                dresidual_dnodal_coordinates);
   
 
+
  /// Compute vector of FE interpolated velocity u at local coordinate s
  void interpolated_u_nst(const Vector<double> &s, Vector<double>& veloc) const
   {
@@ -1393,6 +1387,26 @@ public:
    return(interpolated_p);
   }
 
+
+ /// \short Output solution in data vector at local cordinates s:
+ /// x,y [,z], u,v,[w], p
+ void point_output_data(const Vector<double> &s, Vector<double>& data)
+ {
+  // Dimension
+  unsigned dim=s.size();
+  
+  // Resize data for values
+  data.resize(2*dim+1);
+  
+  // Write values in the vector
+  for (unsigned i=0; i<dim; i++)
+   {
+    data[i]=interpolated_x(s,i);
+    data[i+dim]=this->interpolated_u_nst(s,i);
+   }
+  data[2*dim]=this->interpolated_p_nst(s);
+ }
+
 }; 
 
 //////////////////////////////////////////////////////////////////////////////
@@ -1525,6 +1539,7 @@ public:
  /// load computed in the \c get_load(...) function.
  void identify_pressure_data(
   std::set<std::pair<Data*,unsigned> > &paired_pressure_data);
+
 
  /// Redirect output to NavierStokesEquations output
  void output(std::ostream &outfile)

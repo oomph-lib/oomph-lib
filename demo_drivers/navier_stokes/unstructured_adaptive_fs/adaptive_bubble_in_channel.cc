@@ -1154,7 +1154,7 @@ void BubbleInChannelProblem<ELEMENT>::doc_solution(const std::string& comment)
  // Get max/min area
  double max_area;
  double min_area;
- Fluid_mesh_pt->max_and_min_area(max_area, min_area);
+ Fluid_mesh_pt->max_and_min_element_size(max_area, min_area);
 
  // Write trace file
  Problem_Parameter::Trace_file 
