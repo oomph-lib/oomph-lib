@@ -146,12 +146,14 @@ void TreeBasedRefineableMeshBase::refine_base_mesh(OomphCommunicator* comm_pt,
  unsigned my_max,my_min;
  get_refinement_levels(my_min,my_max);
  unsigned global_max=0;
+#ifdef OOMPH_HAS_MPI
  if (this->mesh_has_been_distributed())
   {
    MPI_Allreduce(&my_max,&global_max,1,MPI_UNSIGNED,MPI_MAX,
                  comm_pt->mpi_comm());
   }
  else
+#endif
   {
    global_max=my_max;
   }

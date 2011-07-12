@@ -532,7 +532,7 @@ namespace oomph
        }
     
       // Declaration of variables
-      string line; 
+      std::string line; 
       Vector<Vector<double> > coord_vec_tmp; // Coord array
     
       // Loop over the lines of the input file

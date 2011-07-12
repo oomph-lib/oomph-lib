@@ -10404,7 +10404,7 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
    std::ostringstream error_message;
    error_message 
     << "Synchronisation of temporal restart data \n" 
-    << "required even though we don't have mpi support -- very odd!\n"
+    << "required even though we don't have mpi support -- very odd!\n";
     throw OomphLibError(error_message.str(),
                        "Problem::read()",
                        OOMPH_EXCEPTION_LOCATION);
