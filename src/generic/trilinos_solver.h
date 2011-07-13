@@ -298,9 +298,8 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
  {
   
   // By default don't use workaround for creating of epetra matrix that 
-  // respects aztecoo's ordering requirements (but can be very detrimental
-  // to parallel performance)
-  Use_aztecoo_workaround_for_epetra_matrix_setup=false;
+  // respects aztecoo's ordering requirements
+  Use_aztecoo_workaround_for_epetra_matrix_setup=true;
   
   // set pointer to Null
   AztecOO_solver_pt = 0;
@@ -355,10 +354,19 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
   BrokenCopy::broken_assign("TrilinosAztecOOSolver");
  }
 
- /// \short Use workaround for creating of epetra matrix that respects
- /// aztecoo's ordering requirements (but can be very detrimental
- /// to parallel performance)
- bool& use_aztecoo_workaround_for_epetra_matrix_setup()
+ /// \short Enable workaround for creating of epetra matrix that respects
+ /// aztecoo's ordering requirements
+ void enable_aztecoo_workaround_for_epetra_matrix_setup()
+  {Use_aztecoo_workaround_for_epetra_matrix_setup=true;}
+
+ /// \short Disable workaround for creating of epetra matrix that respects
+ /// aztecoo's ordering requirements
+ void disable_aztecoo_workaround_for_epetra_matrix_setup()
+  {Use_aztecoo_workaround_for_epetra_matrix_setup=false;}
+
+ /// \short Is workaround for creating of epetra matrix that respects
+ /// aztecoo's ordering requirements enabled?
+ bool is_aztecoo_workaround_for_epetra_matrix_setup_enabled()
   {return Use_aztecoo_workaround_for_epetra_matrix_setup;}
 
  /// Clean up method - deletes the solver, the matrices and the preconditioner
@@ -478,8 +486,7 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
  void solver_setup(DoubleMatrixBase* const& matrix_pt);
 
  /// \short Use workaround for creating of epetra matrix that respects
- /// aztecoo's ordering requirements (but can be very detrimental
- /// to parallel performance)
+ /// aztecoo's ordering requirements
  bool Use_aztecoo_workaround_for_epetra_matrix_setup;
  
  /// Stores number of iterations used

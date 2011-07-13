@@ -7,7 +7,7 @@
 #
 #
 # Created on 20070905
-# Last revision by AS on 20080514
+# Last revision by Jeremy CHU VAN on 20110708
 #
 # Report bugs to a.simone@tudelft.nl
 #
@@ -21,12 +21,14 @@ NAME\n
 \n
 \n
 SYNOPSIS\n
-\toomph-convert [OPTION] [input_file.dat] \n
+\toomph-convert [OPTIONS] [input_file.dat] \n
 \n
 \n
 OPTIONS\n
 \t-h  \t display this help text and exit\n
 \t-z  \t add trailing zeros to the output filename \n
+\t-p2  \t extract only 2D points with values in data\n
+\t-p3  \t extract only 3D points with values in data\n
 \n
 \n
 TYPICAL USAGE EXAMPLES\n
@@ -39,6 +41,8 @@ TYPICAL USAGE EXAMPLES\n
 \toomph-convert -z soln\*.dat           \t\t\t  -> generate soln0000\*.vtu \n
 \toomph-convert soln.dat soln12.dat       \t\t  -> generate soln.vtu and soln12.vtu \n
 \toomph-convert -z soln.dat soln12.dat    \t\t  -> generate soln00000.vtu and soln00012.vtu \n
+\toomph-convert -p2 soln.dat soln12.dat    \t\t  -> generate soln.vtp and soln12.vtp \n
+\toomph-convert -p2 -z soln.dat soln12.dat    \t\t  -> generate soln00000.vtp and soln00012.vtp \n
   "
 
 usage() {
@@ -53,13 +57,21 @@ fi
 
 # -- parse command line arguments
 zeroflag=
-while getopts "hz" OPTIONS; do
+pointflag=
+dimflag=0
+while getopts "hzp23" OPTIONS; do
     case ${OPTIONS} in
         h)      echo -e $USAGE
                 exit 0
                 ;;
         z)      zeroflag=-z
                 ;;
+	p)      pointflag=-p
+	        ;;
+	2)      dimflag=2
+	        ;;
+	3)      dimflag=3
+	        ;;
         \?)     # getopts issues an error message
                 usage
                 ;;
@@ -73,13 +85,28 @@ if [ $# -eq 0 ]; then
 fi
 
 # -- convert the files
-while [ $# -ne 0 ] ; do
-    filename=$1
-    echo  
-    echo  
-    echo -- Processing $filename
+if [ $dimflag -eq 0 ] ; then
+    while [ $# -ne 0 ] ; do
+	filename=$1
+	echo  
+	echo  
+	echo -- Processing $filename
     # Remove everything after first "." in filename, "." included
-    filenametrunc=${filename%\.*} 
-    /home/mheil/version_for_annes_plate_and_hele_shaw/bin/oomph-convert.py $zeroflag $filename $filenametrunc.vtu
-    shift
-done
+	filenametrunc=${filename%\.*} 
+	oomph-convert.py $zeroflag $filename $filenametrunc.vtu
+	shift
+    done
+
+else
+    while [ $# -ne 0 ] ; do
+	filename=$1
+	echo  
+	echo  
+	echo -- Processing $filename
+    # Remove everything after first "." in filename, "." included
+	filenametrunc=${filename%\.*} 
+	oomph-convert.py $zeroflag $pointflag$dimflag $filename $filenametrunc.vtp
+	shift
+    done
+
+fi

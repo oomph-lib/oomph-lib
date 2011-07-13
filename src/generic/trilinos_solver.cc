@@ -305,19 +305,16 @@ void TrilinosAztecOOSolver::solver_setup(DoubleMatrixBase* const& matrix_pt)
   }
 
  // create the matrix
- // hierher: The matrix created here does not always work with oomph-lib's
- // enumeration. Richard has written an alternative, 
- // create_distributed_epetra_matrix_for_aztecoo() which gets the entries
- // in the required order but totally and utterly kills trilinos' parallel
- // performance. 
  double start_t_matrix = TimingHelpers::timer();
  if (Use_aztecoo_workaround_for_epetra_matrix_setup)
   {
+   //oomph_info << "hierher Going into oo version\n";
    Epetra_matrix_pt = TrilinosEpetraHelpers
     ::create_distributed_epetra_matrix_for_aztecoo(cast_matrix_pt);
   }
  else
   {
+   //oomph_info << "hierher Going into orig version\n";
    Epetra_matrix_pt = TrilinosEpetraHelpers
     ::create_distributed_epetra_matrix(cast_matrix_pt,
                                        cast_matrix_pt->distribution_pt());

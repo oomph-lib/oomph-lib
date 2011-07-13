@@ -119,9 +119,9 @@ def main(argv):
         if opt in ("-h"):
             usage()
             sys.exit()
-        elif opt in ("-z"):
+        if opt in ("-z"):
             flag = 1
-        elif opt in ("-p"):
+        if opt in ("-p"):
             flag2 = 1
             argdim = arg
             if argdim not in ("2","3"):    
@@ -146,13 +146,14 @@ def main(argv):
         ofilename = args[1]
         isuffix = ifilename.split(".")[-1]
         osuffix = ofilename.split(".")[-1]
+            
     else:
         usage()
         sys.exit(2)
 
     if isuffix == "dat" and osuffix == "vtu":
         if flag == 1:
-            ofilename = addTrailingZeros(ofilename)
+            ofilename = addTrailingZeros(ofilename,osuffix)
         # Convert from oomph-lib Tecplot format to VTK XML format
         start = time.time()
         tecplot_to_vtkxml(ifilename, ofilename)
@@ -160,6 +161,8 @@ def main(argv):
         print "* Conversion done in %d seconds" % (end - start)
         print '* Output file name: %(fn)s ' %{'fn': ofilename}
     elif isuffix == "dat" and osuffix == "vtp" and flag2 == 1 :
+        if flag == 1:
+            ofilename = addTrailingZeros(ofilename,osuffix)
         # Convert from oomph-lib Tecplot format to VTP XML format
         start = time.time()
         tecplot_to_vtpxml(ifilename, ofilename,string.atoi(argdim))
@@ -173,14 +176,14 @@ def main(argv):
 ################################################################################
 #
 
-def addTrailingZeros(filename):
+def addTrailingZeros(filename,osuffix):
 
     # -- Rename file by adding trailing zeros
 
     # 1) Define the number of digits in file name (up to limit_digits)
 
     # Assumption:
-    # - the last four characters in ofilename define the extension of filename(".vtu")
+    # - the last four characters in ofilename define the extension of filename(".vtu" or ".vtp")
 
     limit_digits = 11
     extension_len = 4
@@ -206,7 +209,7 @@ def addTrailingZeros(filename):
     else:
         cifer = int(filename[-extension_len-digits:-extension_len])
 
-    return filename[:lenBaseName]+"%05i.vtu" % cifer
+    return filename[:lenBaseName]+"%05i." % cifer+"%s" % osuffix
 
 #
 ################################################################################
@@ -249,7 +252,7 @@ def tecplot_to_vtkxml(inputFilename, outputFilename):
     nbzones = len(zones)
     sys.stdout.write("* %d lines ignored\n" % ignoredlines)
     if nbzones == 0:
-        error("The input file does not contain any Tecplot zone ! Try to convert to point Data with -p option")
+        error("The input file does not contain any Tecplot zone ! \n Try to convert to point Data with -p2 option if dim == 2 or -p3 option if dim == 3")
 
     #---------------------------------------------------------------------------
     # Compute global informations

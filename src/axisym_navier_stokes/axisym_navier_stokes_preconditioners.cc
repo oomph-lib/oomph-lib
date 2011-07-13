@@ -710,23 +710,32 @@ namespace oomph
 
     // determine the rows for which we have lookup rows
 
+//     // if the problem is NOT distributed then we only classify global equation
+//     // on this processor to avoid duplication (as every processor holds 
+//     // elvery element)
+//     unsigned first_lookup_row = 0; 
+//     unsigned last_lookup_row = 0;
+//     if (!problem_pt->distributed())
+//      {
+//       first_lookup_row = this->master_distribution_pt()->first_row();
+//       last_lookup_row = first_lookup_row + 
+//        this->master_distribution_pt()->nrow_local() - 1;
+//      }
+//     // attempt to classify every degree of freedom
+//     else
+//      {
+//       first_lookup_row = this->first_lookup_row();
+//       last_lookup_row = first_lookup_row + this->nlookup_rows() - 1;
+//      }
+
     // if the problem is NOT distributed then we only classify global equation
     // on this processor to avoid duplication (as every processor holds 
     // elvery element)
     unsigned first_lookup_row = 0; 
     unsigned last_lookup_row = 0;
-    if (!problem_pt->distributed())
-     {
-      first_lookup_row = this->master_distribution_pt()->first_row();
-      last_lookup_row = first_lookup_row + 
-       this->master_distribution_pt()->nrow_local() - 1;
-     }
-    // attempt to classify every degree of freedom
-    else
-     {
-      first_lookup_row = this->first_lookup_row();
-      last_lookup_row = first_lookup_row + this->nlookup_rows() - 1;
-     }
+    first_lookup_row = this->master_distribution_pt()->first_row();
+    last_lookup_row = first_lookup_row + 
+     this->master_distribution_pt()->nrow_local() - 1;
 
     // find number of local elements
     unsigned n_el = Navier_stokes_mesh_pt->nelement();

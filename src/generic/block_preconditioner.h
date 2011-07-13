@@ -49,7 +49,6 @@
 namespace oomph
 {
 
-
  //============================================================================
  /// Block Preconditioner base class. The block structure of the
  /// overall problem is determined from the \c Mesh's constituent
@@ -126,14 +125,6 @@ namespace oomph
      // preconditioner 
      Nblock_types=0;
      Ndof_types=0;
-
-#ifdef OOMPH_HAS_MPI
-     // initially set the number of rows of the lookup scheme stored
-     // by this preconditioner to zero.
-     // Note these variables are only used by the master preconditioner
-     Min_global_index = 0;
-     Nglobal_indices = 0;
-#endif
 
      // null the preconditioner matrix distribution pt
      Preconditioner_matrix_distribution_pt = 0;
@@ -503,44 +494,6 @@ namespace oomph
      return -1;
     }
 
-   /// \short Returns the first global index for which there is 
-   /// block mapping data. \n
-   /// In parallel the each processor only holds a subset of the 
-   /// global index to block index lookup scheme data.
-   /// The methods block_number(...) and index_in_block(...) will only
-   /// work for global indices between first_lookup_row() and 
-   /// first_lookup_row()+nlookup_rows()
-   unsigned first_lookup_row() 
-    {
-     if (Master_block_preconditioner_pt == 0)
-      {
-       return Min_global_index; 
-      }
-     else
-      {
-       return Master_block_preconditioner_pt->first_lookup_row();
-      }
-    }
-
-   /// \short Returns the number of global indices for which there is 
-   /// block mapping data. \n
-   /// In parallel the each processor only holds a subset of the 
-   /// global index to block index lookup scheme data.
-   /// The methods block_number(...) and index_in_block(...) will only
-   /// work for global indices between first_lookup_row() and 
-   /// first_lookup_row()+nlookup_rows()
-   unsigned nlookup_rows() 
-    { 
-     if (Master_block_preconditioner_pt == 0)
-      {
-       return Nglobal_indices; 
-      }
-     else
-      {
-       return Master_block_preconditioner_pt->nlookup_rows();
-      }
-    }
-
    /// \short What is the size of  the "block" i, i.e. 
    // how many degrees of freedom
    /// are associated with it? Note that if this preconditioner
@@ -614,9 +567,14 @@ namespace oomph
     {
      if (Master_block_preconditioner_pt == 0)
       {
-       Index_in_dof_block.clear();
-       Dof_number.clear();
+       Index_in_dof_block_dense.clear();
+       Dof_number_dense.clear();
+       Index_in_dof_block_sparse.clear();
+       Dof_number_sparse.clear();
        Dof_dimension.clear();
+       Global_index_sparse.clear();
+       Index_in_dof_block_sparse.clear();
+       Dof_number_sparse.clear();
       }
      Ndof_in_block.clear();
      Dof_number_to_block_number_lookup.clear();
@@ -684,9 +642,6 @@ namespace oomph
      Rows_to_send_for_get_ordered.clear();
      Nrows_to_send_for_get_ordered.clear();
 
-     // zero
-     Min_global_index = 0;
-     Nglobal_indices = 0;
 #endif
 
      // zero
@@ -742,7 +697,7 @@ namespace oomph
        oomph_info << "Block " << b << " distribution:" << std::endl;
        oomph_info << *Block_distribution_pt[b] << std::endl;
       }
-     if (Master_block_preconditioner_pt == 0)
+    if (Master_block_preconditioner_pt == 0)
       {
        oomph_info << "First look-up row: " << this->first_lookup_row()
                   << std::endl;
@@ -762,7 +717,30 @@ namespace oomph
                           const unsigned& j,
                           const MATRIX* block_matrix_pt);
 
-    protected:
+   ///
+   int get_index_of_element(const Vector<unsigned>& vec, unsigned el) const
+   {
+    int lo = 0;
+    int hi = vec.size();
+    int mid = (hi+lo)/2;
+    while (vec[mid] != el)
+     {
+      if (vec[mid] < el) 
+       {
+        if (hi==mid) return -1;
+        lo = mid;
+       }
+      else 
+       {
+        if (lo==mid) return -1;
+        hi = mid;
+       }
+      mid = (hi+lo)/2;
+    }
+    return mid;
+   }
+
+    protected: 
 
    /// \short Which block is the global unknown i_dof associated with? If this
    /// preconditioner is a subsidiary block preconditioner then the 
@@ -771,27 +749,37 @@ namespace oomph
    /// then -1 is returned
    int dof_number(const unsigned& i_dof) const
     {
+
      // I'm a stand-alone block preconditioner
      if (Master_block_preconditioner_pt == 0)
       {
 #ifdef OOMPH_HAS_MPI
-#ifdef PARANOID
-       if (!(i_dof >= Min_global_index &&
-             (i_dof < Min_global_index + Nglobal_indices)))
+       unsigned first_row = this->distribution_pt()->first_row();
+       unsigned nrow_local = this->distribution_pt()->nrow_local();
+       unsigned last_row = first_row+nrow_local-1;
+       if (i_dof >= first_row && i_dof <= last_row)
         {
-         std::ostringstream error_message;
-         error_message 
-          << "Requested dof_number(...) for global DOF " << i_dof << ".\n"
-          << "This processor only contains lookup schemes for global DOFS "
-          <<  "between " << Min_global_index << " and " 
-          << Min_global_index + Nglobal_indices -1 << "." << std::endl;
-         throw OomphLibError(
-          error_message.str(),
-          "BlockPreconditioner::dof_number(...)",
-          OOMPH_EXCEPTION_LOCATION);
+         return static_cast<int>(Dof_number_dense[i_dof-first_row]);
         }
+       else
+        {
+         int index = this->get_index_of_element(Global_index_sparse,i_dof);
+         if (index >= 0)
+          {
+           return Dof_number_sparse[index];
+          }
+        }
+       // if we here we couldn't find the i_dof
+#ifdef PARANOID
+       std::ostringstream error_message;
+       error_message 
+        << "Requested dof_number(...) for global DOF " << i_dof << "\n"
+        << "cannot be found.\n";
+       throw OomphLibError(
+        error_message.str(),
+        "BlockPreconditioner::dof_number(...)",
+        OOMPH_EXCEPTION_LOCATION);
 #endif
-       return static_cast<int>(Dof_number[i_dof-Min_global_index]);
 #else
        return static_cast<int>(Dof_number[i_dof]);
 #endif
@@ -813,6 +801,13 @@ namespace oomph
        // if the master block preconditioner number is not found return -1
        return -1;
       }
+
+     // Shouldn't get here
+     throw OomphLibError("Never get here\n",
+                         "BlockPreconditioner::dof_number(...)",
+                         OOMPH_EXCEPTION_LOCATION);
+     // Dummy return
+     return -1;
     }
 
    /// \short What's the index (i.e. the row/column number) of global
@@ -822,31 +817,47 @@ namespace oomph
      if (Master_block_preconditioner_pt == 0)
       {
 #ifdef OOMPH_HAS_MPI
-#ifdef PARANOID
-       if (!(i_dof >= Min_global_index &&
-             (i_dof < Min_global_index + Nglobal_indices)))
+       unsigned first_row = this->distribution_pt()->first_row();
+       unsigned nrow_local = this->distribution_pt()->nrow_local();
+       unsigned last_row = first_row+nrow_local-1;
+       if (i_dof >= first_row && i_dof <= last_row)
         {
-         std::ostringstream error_message;
-         error_message 
-          << "Requested index_in_dof(...) for global DOF " << i_dof << ".\n"
-          << "This processor only contains lookup schemes for global DOFS "
-          <<  "between " << Min_global_index << " and " 
-          << Min_global_index + Nglobal_indices -1 << "." << std::endl;
-         throw OomphLibError(
-          error_message.str(),
-          "BlockPreconditioner::index_in_dof(...)",
-          OOMPH_EXCEPTION_LOCATION);
+         return static_cast<int>(Index_in_dof_block_dense[i_dof-first_row]);
         }
+       else
+        {
+         int index = this->get_index_of_element(Global_index_sparse,i_dof);
+         if (index >= 0)
+          {
+           return Index_in_dof_block_sparse[index];
+          }
+        }
+       // if we here we couldn't find the i_dof
+#ifdef PARANOID
+       std::ostringstream error_message;
+       error_message 
+        << "Requested index_in_dof(...) for global DOF " << i_dof << "\n"
+        << "cannot be found.\n";
+       throw OomphLibError(
+        error_message.str(),
+        "BlockPreconditioner::index_in_dof(...)",
+        OOMPH_EXCEPTION_LOCATION);
 #endif
-       return Index_in_dof_block[i_dof-Min_global_index];
 #else
-       return Index_in_dof_block[i_dof];
+       return Index_in_dof_block_dense[i_dof];
 #endif
       }
      else
       {
        return Master_block_preconditioner_pt->index_in_dof(i_dof);
       }
+
+     // Shouldn't get here
+     throw OomphLibError("Never get here\n",
+                         "BlockPreconditioner::index_in_dof(...)",
+                         OOMPH_EXCEPTION_LOCATION);
+     // Dummy return
+     return -1;
     }
 
    /// \short What is the size of  the dof "block" i, i.e. 
@@ -961,16 +972,43 @@ namespace oomph
    /// the block number in the master preconditioner. Otherwise empty
    Vector<unsigned> Dof_number_in_master_preconditioner;
 
-   /// \short Vector to store the mapping from the global dof number
-   ///  to the index (row/colum number) within its block (Empty if this 
-   /// preconditioner has a master preconditioner as this information is 
-   /// obtained from the master preconditioner)
-   Vector<unsigned> Index_in_dof_block;
+
+   Vector<unsigned> Index_in_dof_block_dense;
 
    /// \short Vector to store the mapping from the global dof number to
    /// its block (Empty if this preconditioner has a master preconditioner as 
    /// this information is obtained from the master preconditioner)
-   Vector<unsigned> Dof_number;
+   Vector<unsigned> Dof_number_dense;
+
+#ifdef OOMPH_HAS_MPI
+
+   /// \short for global indices outside of the range this->first_row()
+   /// to this->first_row()+this->nrow_local(), the Index_in_dof_block
+   /// and Dof_number are stored sparsely in the vectors:
+   /// + Index_in_dof_block_sparse;
+   /// + Dof_number_sparse;
+   /// The corresponding global indices are stored in this vector.
+   Vector<unsigned> Global_index_sparse;
+   
+   /// \short Vector to store the mapping from the global dof number
+   ///  to the index (row/colum number) within its block (Empty if this 
+   /// preconditioner has a master preconditioner as this information is 
+   /// obtained from the master preconditioner)
+   /// Sparse version, for global indices outside of the range this->first_row()
+   /// to this->first_row()+this->nrow_local().
+   /// The global index of an element in this vector is defined in
+   /// Global_index_sparse.
+   Vector<unsigned> Index_in_dof_block_sparse;
+   
+   /// \short Vector to store the mapping from the global dof number to
+   /// its block (Empty if this preconditioner has a master preconditioner as 
+   /// this information is obtained from the master preconditioner)
+   /// Sparse version, for global indices outside of the range this->first_row()
+   /// to this->first_row()+this->nrow_local().
+   /// The global index of an element in this vector is defined in
+   /// Global_index_sparse.
+   Vector<unsigned> Dof_number_sparse;
+#endif
 
    /// \short Vector containing the size of each block, i.e. the number of
    /// global dofs associated with it. (Empty if this preconditioner has a 
@@ -1035,20 +1073,6 @@ namespace oomph
    /// p for get_block_ordered_... type methods
    Vector<unsigned> Nrows_to_recv_for_get_ordered;
 #endif
-
-   /// \short the minimum global index for which index_in_dof(...) and
-   /// dof_number(...) is accessible on this processor.\n
-   /// For distributed matrices the only lookup schemes for the row / column
-   /// indices on a particular processor are stored. \n
-   /// The variable is only used by the master preconditioner
-   unsigned Min_global_index;
-
-   /// \short the number of global indices for which index_in_dof(...) and
-   /// dof_number(...) is accessible on this processor.\n
-   /// For distributed matrices the only lookup schemes for the row / column
-   /// indices on a particular processor are stored. \n
-   /// The variable is only used by the master preconditioner
-   unsigned Nglobal_indices;
 
    /// \short the distribution of the preconditioner matrix - only used if
    /// this preconditioner is a master preconditioner. WARNING - always use
@@ -1163,6 +1187,24 @@ namespace oomph
 
    unsigned nproc = problem_pt->communicator_pt()->nproc();
 
+	 
+   /////////////////////////////////////////////////////////////////////////////
+   // start of master block preconditioner only operations
+   /////////////////////////////////////////////////////////////////////////////
+#ifdef OOMPH_HAS_MPI
+   unsigned* nreq_sparse = new unsigned[nproc];
+   unsigned* nreq_sparse_for_proc = new unsigned[nproc];
+   unsigned** index_in_dof_block_sparse_send = new unsigned*[nproc];
+   unsigned** dof_number_sparse_send = new unsigned*[nproc];
+   for (unsigned p = 0; p < nproc; p++)
+    {
+     index_in_dof_block_sparse_send[p] = 0;
+     dof_number_sparse_send[p] = 0;
+    }
+   Vector<MPI_Request> send_requests_sparse;
+   Vector<MPI_Request> recv_requests_sparse;
+#endif
+
    // if this preconditioner is the master preconditioner then we need
    // to assemble the vectors : Dof_number
    //                           Index_in_dof_block
@@ -1194,64 +1236,181 @@ namespace oomph
        matrix_distributed = true;
       }
 
-     // determine the global rows for which we should store the 
-     // Dof_index and Index_in_dof_block for
-     int min_matrix_index = 0;
-     int max_matrix_index = matrix_pt->nrow()-1;
-     if (matrix_distributed)
-      {
-       // determine the minimum and maximum global column indices on the 
-       // processor
-       CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
-       if (cr_matrix_pt)
-        {
-         min_matrix_index = cr_matrix_pt->first_row();
-         max_matrix_index = min_matrix_index + cr_matrix_pt->nrow_local() - 1;
-         unsigned nnz = cr_matrix_pt->nnz();
-         int* column_index = cr_matrix_pt->column_index();
-         for (unsigned i = 0; i < nnz; i++)
-          {
-           min_matrix_index = std::min(min_matrix_index,column_index[i]);
-           max_matrix_index = std::max(max_matrix_index,column_index[i]);
-          }
-        }
-       else
-        {
+     // matrix must be CR
+     CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
+     if (!cr_matrix_pt) {
          std::ostringstream error_message;
          error_message << "Block setup for distributed matrices only works "
                        << "for CRDoubleMatrices";
          throw OomphLibError(error_message.str(),
                              "BlockPreconditioner::block_setup(...)",
-                             OOMPH_EXCEPTION_LOCATION);         
+                             OOMPH_EXCEPTION_LOCATION);                
+     }
+
+     // my distribution
+     unsigned first_row = this->distribution_pt()->first_row();
+     unsigned nrow_local = this->distribution_pt()->nrow_local();
+     unsigned last_row = first_row+nrow_local-1;
+
+     // storage for the rows required by each processor in the dense
+     // block lookup storage scheme
+     // dense_required_rows(p,0) is the minimum global index required by proc p
+     //                 ...(p,1) is the maximum global index required by proc p
+     DenseMatrix<unsigned> dense_required_rows(nproc,2);
+     for (unsigned p = 0; p < nproc; p++)
+      {
+       dense_required_rows(p,0) = this->distribution_pt()->first_row(p);
+       dense_required_rows(p,1) = this->distribution_pt()->first_row(p)
+        +this->distribution_pt()->nrow_local(p);
+      }
+
+     // determine the global rows That are not in the range first_row to 
+     // first_row+nrow_local for which we should store the 
+     // Dof_index and Index_in_dof_block for
+     // then send the lists to other processors
+     Vector<unsigned> sparse_global_rows_for_block_lookup;
+     if (matrix_distributed)
+      {
+       unsigned nnz = cr_matrix_pt->nnz();
+       int* column_index = cr_matrix_pt->column_index();
+       for (unsigned i = 0; i < nnz; i++)
+        {
+         unsigned ci = column_index[i];
+         if (ci<first_row || ci>last_row) 
+          {
+           if (find(sparse_global_rows_for_block_lookup.begin(),
+                    sparse_global_rows_for_block_lookup.end(),
+                    ci) == 
+               sparse_global_rows_for_block_lookup.end())
+            {
+             sparse_global_rows_for_block_lookup.push_back(ci);
+            }
+          }
         }
       }
-
-     // number of rows to be stored
-     unsigned nlookup_rows = max_matrix_index - min_matrix_index + 1;
-
-     // update the member data
-     Nglobal_indices = nlookup_rows;
-     Min_global_index = min_matrix_index;
-
-     // resize the storage
-     Dof_number.resize(nlookup_rows);
-     Index_in_dof_block.resize(nlookup_rows);
+     sort(sparse_global_rows_for_block_lookup.begin(),
+          sparse_global_rows_for_block_lookup.end());
+     int nsparse = sparse_global_rows_for_block_lookup.size();
+     Global_index_sparse.resize(nsparse);
+     Index_in_dof_block_sparse.resize(nsparse);
+     Dof_number_sparse.resize(nsparse);
+     for (int i = 0; i < nsparse; i++)
+      {
+       Global_index_sparse[i]=sparse_global_rows_for_block_lookup[i];
+      }
+     sparse_global_rows_for_block_lookup.clear();
 
 #ifdef OOMPH_HAS_MPI
-     // Check size of these (possibly enormous) arrays
-     unsigned max_nlookup_rows=nlookup_rows;
-     if (problem_pt->communicator_pt()->nproc()>1)
+     Vector<MPI_Request> recv_requests_sparse_nreq;
+     if (matrix_distributed)
       {
-       MPI_Allreduce(&nlookup_rows,&max_nlookup_rows,1,
-                     MPI_UNSIGNED,MPI_MAX,
-                     problem_pt->communicator_pt()->mpi_comm());
+       MPI_Aint base_displacement_sparse;
+       MPI_Address(nreq_sparse,&base_displacement_sparse);
+       int zero = 0;
+       for (unsigned p = 0; p < nproc; p++)
+        {
+         nreq_sparse[p] = 0;
+         nreq_sparse_for_proc[p] = 0;
+         
+         // determine the global eqn numbers required by this processor
+         // that can be classified by processor p
+         int begin = 0;
+         for (int i = 0; i < nsparse; ++i)
+          {
+           if (Global_index_sparse[i]<dense_required_rows(p,0))
+            {
+             ++begin;
+            }
+           else
+            {
+             if (Global_index_sparse[i]<=dense_required_rows(p,1))
+              {
+               ++nreq_sparse[p];
+              }
+             else
+              {
+               break;
+              }
+            }
+          }
+         
+         // if this processor has rows to be classified by proc p
+         if (nreq_sparse[p]>0)
+          {
+           
+           // send the number of global eqn numbers
+           MPI_Request req1;
+           MPI_Isend(&nreq_sparse[p],1,MPI_UNSIGNED,p,31,
+                     problem_pt->communicator_pt()->mpi_comm(),&req1);
+           send_requests_sparse.push_back(req1);
+           
+           // send the global eqn numbers
+           MPI_Request req2;
+           MPI_Isend(&Global_index_sparse[begin],
+                     nreq_sparse[p],MPI_UNSIGNED,p,32,
+                     problem_pt->communicator_pt()->mpi_comm(),&req2);
+           send_requests_sparse.push_back(req2);
+           
+           // post the recvs for the data that will be returned
+           
+           // the datatypes, displacements, lengths for the two datatypes
+           MPI_Datatype types[2];
+           MPI_Aint displacements[2];
+           int lengths[2];
+           
+           // index in dof block
+           MPI_Type_contiguous(nreq_sparse[p],MPI_UNSIGNED,&types[0]);
+           MPI_Type_commit(&types[0]);
+           MPI_Address(&Index_in_dof_block_sparse[begin],&displacements[0]);
+           displacements[0] -= base_displacement_sparse;
+           lengths[0] = 1;
+           
+           // dof number
+           MPI_Type_contiguous(nreq_sparse[p],MPI_UNSIGNED,&types[1]);
+           MPI_Type_commit(&types[1]);
+           MPI_Address(&Dof_number_sparse[begin],&displacements[1]);
+           displacements[1] -= base_displacement_sparse;
+           lengths[1] = 1;           
+           
+           // build the final type
+           MPI_Datatype recv_type;
+           MPI_Type_struct(2,lengths,displacements,types,&recv_type);
+           MPI_Type_commit(&recv_type);
+           MPI_Type_free(&types[0]);
+           MPI_Type_free(&types[1]);
+           
+           // and recv
+           MPI_Request req;
+           MPI_Irecv(nreq_sparse,1,recv_type,p,33,
+                     problem_pt->communicator_pt()->mpi_comm(),&req);
+           recv_requests_sparse.push_back(req);
+           MPI_Type_free(&recv_type);
+          }
+         
+         // if no communication required, confirm this
+         if (nreq_sparse[p]==0)
+          {
+           MPI_Request req1;
+           MPI_Isend(&zero,1,MPI_UNSIGNED,p,31,
+                     problem_pt->communicator_pt()->mpi_comm(),&req1);
+           send_requests_sparse.push_back(req1);
+          }
+         
+         //
+         MPI_Request req;
+         MPI_Irecv(&nreq_sparse_for_proc[p],1,MPI_UNSIGNED,p,31,
+                   problem_pt->communicator_pt()->mpi_comm(),&req);
+         recv_requests_sparse_nreq.push_back(req);
+        }
       }
-     oomph_info << "Max. number of nlookup_rows on any processor: "
-                << max_nlookup_rows << std::endl;
-#endif     
+#endif
+
+     // resize the storage
+     Dof_number_dense.resize(nrow_local);
+     Index_in_dof_block_dense.resize(nrow_local);
 
      // Set Mesh_pt to the Problem' Mesh if nobody has made any
-     // other assigment
+     // other assigment1
      if (Nmesh==0)
       {
        this->set_nmesh(1);
@@ -1275,46 +1434,16 @@ namespace oomph
       }
      // Vector to keep track of previously assigned block numbers
      // to check consistency between multple assignements.
-     Vector<int> previously_assigned_block_number(Nglobal_indices,
+     Vector<int> previously_assigned_block_number(nrow_local,
                                                   Data::Is_unclassified);
 #endif
 
      // determine whether the problem is distribution
      bool problem_distributed = false;
-#ifdef OOMPH_HAS_MPI
+
      // the problem method distributed() is only accessible with MPI
+#ifdef OOMPH_HAS_MPI
      problem_distributed = problem_pt->distributed();
-
-     // storage for the rows required by each processor
-     // required_rows(p,0) is the minimum global index required by proc p
-     //           ...(p,1) is the maximum global index required by proc p
-     DenseMatrix<unsigned> required_rows(nproc,2);
-
-     // populate required rows
-     // every processor tells every other processor which rows
-     // it is interested in
-     if (nproc > 1)
-      {
-       unsigned* send_req_rows = new unsigned[2];
-       send_req_rows[0] = min_matrix_index;
-       send_req_rows[1] = max_matrix_index;
-       unsigned* recv_req_rows = new unsigned[2*nproc];
-       MPI_Allgather(send_req_rows,2,MPI_UNSIGNED,
-                     recv_req_rows,2,MPI_UNSIGNED,
-                     problem_pt->communicator_pt()->mpi_comm());
-       delete[] send_req_rows;
-       for (unsigned p = 0; p < nproc; p++)
-        {
-         required_rows(p,0) = recv_req_rows[2*p];
-         required_rows(p,1) = recv_req_rows[2*p+1];
-        }
-       delete[] recv_req_rows;
-      }
-     else
-      {
-       required_rows(0,0) = min_matrix_index;
-       required_rows(0,1) = max_matrix_index;
-      }
 #endif
 
      // if the problem is not distributed
@@ -1355,26 +1484,27 @@ namespace oomph
            for (IT it=dof_lookup_list.begin();
                 it!=dof_lookup_list.end();it++)
             {
+
              unsigned long global_dof = it->first;
-             if (global_dof >= unsigned(min_matrix_index) &&
-                 global_dof <= unsigned(max_matrix_index))
+             if (global_dof >= unsigned(first_row) &&
+                 global_dof <= unsigned(last_row))
               {
                unsigned dof_number = (it->second)+dof_offset;
-               Dof_number[global_dof-min_matrix_index] 
+               Dof_number_dense[global_dof-first_row] 
                 = dof_number;
-
+               
 #ifdef PARANOID
                // Check consistency of block numbers if assigned multiple times
                if (previously_assigned_block_number[global_dof-
-                                                    min_matrix_index]<0)
+                                                    first_row]<0)
                 {
-                 previously_assigned_block_number[global_dof-min_matrix_index]
+                 previously_assigned_block_number[global_dof-first_row]
                   =dof_number;
                 }
                else
                 {
                  if (previously_assigned_block_number[global_dof
-                                                      -min_matrix_index]!=
+                                                      -first_row]!=
                      int(dof_number))
                   {
                    std::ostringstream error_message;
@@ -1383,7 +1513,7 @@ namespace oomph
                     << "Global dof " <<  global_dof << " from mesh " << m
                     << " was previously assigned to block "
                     << previously_assigned_block_number[global_dof-
-                                                        min_matrix_index]
+                                                        first_row]
                     << "\nNow it's been reassigned to block "
                     << dof_number << ".\n"
                     << "This is most likely because one of your\n"
@@ -1416,7 +1546,7 @@ namespace oomph
 #ifdef PARANOID
        // check that every DOF number has been allocated
        bool success = true;
-       for (unsigned i = 0; i < nlookup_rows; i++)
+       for (unsigned i = 0; i < nrow_local; i++)
         {
          if (previously_assigned_block_number[i] < 0)
           {
@@ -1438,6 +1568,7 @@ namespace oomph
      else
       {
 #ifdef OOMPH_HAS_MPI
+
 
        // Offset for the block type in the overall system.
        // Different meshes contain different block-preconditionable
@@ -1518,17 +1649,17 @@ namespace oomph
        // count up how many DOFs need to be sent to each processor
        int* first_dof_to_send = new int[nproc];
        int* ndof_to_send = new int[nproc];
+       unsigned ptr = 0;
        for (unsigned p = 0; p < nproc; p++)
         {
          first_dof_to_send[p] = 0;
          ndof_to_send[p] = 0;
-         unsigned ptr = 0;
-         while (ptr < my_ndof && my_global_dofs[ptr] < required_rows(p,0)) 
+         while (ptr < my_ndof && my_global_dofs[ptr] < dense_required_rows(p,0)) 
           {
            ptr++;
           }
          first_dof_to_send[p] = ptr;
-         while (ptr < my_ndof && my_global_dofs[ptr] <= required_rows(p,1))
+         while (ptr < my_ndof && my_global_dofs[ptr] <= dense_required_rows(p,1))
           {
            ndof_to_send[p]++;
            ptr++;
@@ -1547,7 +1678,7 @@ namespace oomph
 #ifdef PARANOID
        // storage for paranoid check to ensure that every row as been
        // imported
-       std::vector<bool> dof_recv(nlookup_rows,false);
+       std::vector<bool> dof_recv(nrow_local,false);
 #endif
 
        // next send and recv
@@ -1560,11 +1691,10 @@ namespace oomph
         {
          if (p != my_rank)
           {
+
            // send
            if (ndof_to_send[p] > 0)
             {
-             // hierher: sample for continuguous sends.
-
              // the datatypes, displacements, lengths for the two datatypes
              MPI_Datatype types[2];
              MPI_Aint displacements[2];
@@ -1642,6 +1772,7 @@ namespace oomph
              recv_requests.push_back(req);
              MPI_Type_free(&recv_type);
             }
+           
           }
          // send to self
          else
@@ -1653,9 +1784,9 @@ namespace oomph
              // paranoid check
              // check that if row has been imported the block number is the 
              // same
-             if (dof_recv[my_global_dofs[i]-min_matrix_index])
+             if (dof_recv[my_global_dofs[i]-first_row])
               {
-               if (Dof_number[my_global_dofs[i]-min_matrix_index] 
+               if (Dof_number_dense[my_global_dofs[i]-first_row] 
                    != my_dof_numbers[i])
                 {
                  std::ostringstream error_message;
@@ -1663,7 +1794,7 @@ namespace oomph
                   << "Inconsistency in assigment of block numbers\n"
                   << "Global dof " <<  my_global_dofs[i]
                   << "was previously assigned to block " 
-                  <<  Dof_number[my_global_dofs[i]-min_matrix_index]
+                  <<  Dof_number_dense[my_global_dofs[i]-first_row]
                   << "\nNow it's been reassigned to block "
                   << my_dof_numbers[i] << ".\n"
                   << "This is most likely because one of your\n"
@@ -1681,9 +1812,9 @@ namespace oomph
                 }
               }
              // indicate that this dof has ben recv
-             dof_recv[my_global_dofs[i]-min_matrix_index] = true;
+             dof_recv[my_global_dofs[i]-first_row] = true;
 #endif
-             Dof_number[my_global_dofs[i]-min_matrix_index] = 
+             Dof_number_dense[my_global_dofs[i]-first_row] = 
               my_dof_numbers[i];   
             }
           }
@@ -1710,9 +1841,9 @@ namespace oomph
 #ifdef PARANOID
            // paranoid check
            // check that if row has been imported the block number is the same
-           if (dof_recv[global_dofs_recv[p][i]-min_matrix_index])
+           if (dof_recv[global_dofs_recv[p][i]-first_row])
             {
-             if (Dof_number[global_dofs_recv[p][i]-min_matrix_index] 
+             if (Dof_number_dense[global_dofs_recv[p][i]-first_row] 
                  != dof_numbers_recv[p][i])
               {
                std::ostringstream error_message;
@@ -1721,8 +1852,8 @@ namespace oomph
                 << "Global dof " 
                 <<  global_dofs_recv[p][i]
                 << " was previously assigned to block " 
-                <<  Dof_number[global_dofs_recv[p][i]
-                               -min_matrix_index]
+                <<  Dof_number_dense[global_dofs_recv[p][i]
+                               -first_row]
                 << "\nNow it's been reassigned to block "
                 << dof_numbers_recv[p][i] << ".\n" 
                 << "This is most likely because one of your\n"
@@ -1740,9 +1871,9 @@ namespace oomph
               }
             }
            // indicate that this dof has ben recv
-           dof_recv[global_dofs_recv[p][i]-min_matrix_index] = true;
+           dof_recv[global_dofs_recv[p][i]-first_row] = true;
 #endif
-           Dof_number[global_dofs_recv[p][i]-min_matrix_index] 
+           Dof_number_dense[global_dofs_recv[p][i]-first_row] 
             = dof_numbers_recv[p][i];
           }
 
@@ -1767,7 +1898,7 @@ namespace oomph
        delete[] my_dof_numbers;
 #ifdef PARANOID
        unsigned all_recv = true;
-       for (unsigned i = 0; i < nlookup_rows; i++)
+       for (unsigned i = 0; i < nrow_local; i++)
         {
          if (!dof_recv[i])
           {
@@ -1783,8 +1914,6 @@ namespace oomph
                              OOMPH_EXCEPTION_LOCATION);
         }
 #endif
-
-
 #else
        std::ostringstream error_message;
        error_message
@@ -1794,6 +1923,36 @@ namespace oomph
                            OOMPH_EXCEPTION_LOCATION);
 #endif
       }
+
+#ifdef OOMPH_HAS_MPI       
+     Vector<unsigned*> sparse_rows_for_proc(nproc,0);
+     Vector<MPI_Request> sparse_rows_for_proc_requests;
+     if (matrix_distributed)
+      {
+       // wait for number of sparse rows each processor requires 
+       // post recvs for that data
+
+       if (recv_requests_sparse_nreq.size()>0)
+        {
+         MPI_Waitall(recv_requests_sparse_nreq.size(),
+                     &recv_requests_sparse_nreq[0],
+                     MPI_STATUS_IGNORE);
+        }
+       for (unsigned p = 0; p < nproc; ++p)
+        {
+         if (nreq_sparse_for_proc[p] > 0)
+          {
+           MPI_Request req;
+           sparse_rows_for_proc[p] = new unsigned[nreq_sparse_for_proc[p]];
+           MPI_Irecv(sparse_rows_for_proc[p],nreq_sparse_for_proc[p],
+                     MPI_UNSIGNED,p,32,
+                     problem_pt->communicator_pt()->mpi_comm(),&req);
+           sparse_rows_for_proc_requests.push_back(req);
+          }
+        }
+      }
+#endif
+
 
      // for every global degree of freedom required by this processor we now 
      // have the corresponding dof number
@@ -1808,12 +1967,12 @@ namespace oomph
 
        // set the Index_in_dof_block
        unsigned nrow  = this->distribution_pt()->nrow();
-       Index_in_dof_block.resize(nrow);
-       Index_in_dof_block.initialise(0);
+       Index_in_dof_block_dense.resize(nrow);
+       Index_in_dof_block_dense.initialise(0);
        for (unsigned i = 0; i < nrow; i++)
         {
-         Index_in_dof_block[i] = Dof_dimension[Dof_number[i]];
-         Dof_dimension[Dof_number[i]]++;
+         Index_in_dof_block_dense[i] = Dof_dimension[Dof_number_dense[i]];
+         Dof_dimension[Dof_number_dense[i]]++;
         }
       }
 
@@ -1829,11 +1988,9 @@ namespace oomph
         {
          my_nrows_in_dof_block[i] = 0;
         }
-       unsigned nrow_local = this->distribution_pt()->nrow_local();
-       unsigned first_row = this->distribution_pt()->first_row();
        for (unsigned i = 0; i < nrow_local; i++)
         {
-         my_nrows_in_dof_block[Dof_number[first_row+i-Min_global_index]]++;
+         my_nrows_in_dof_block[Dof_number_dense[i]]++;
         }
 
        // next share the data
@@ -1860,89 +2017,97 @@ namespace oomph
        delete[] nrow_in_dof_block_recv;
 
        // next compute Index in dof block
-       Index_in_dof_block.resize(nlookup_rows);
-       Index_in_dof_block.initialise(0);
+       Index_in_dof_block_dense.resize(nrow_local);
+       Index_in_dof_block_dense.initialise(0);
        Vector<unsigned> dof_counter(Ndof_types,0);
        for (unsigned i = 0; i < nrow_local; i++)
         {
-         unsigned j = i + first_row - min_matrix_index;
-         Index_in_dof_block[j] = my_first_dof_index[Dof_number[j]] + 
-          dof_counter[Dof_number[j]];
-         dof_counter[Dof_number[j]]++;
+         Index_in_dof_block_dense[i] = 
+          my_first_dof_index[Dof_number_dense[i]] + 
+          dof_counter[Dof_number_dense[i]];
+         dof_counter[Dof_number_dense[i]]++;
         }
 
-       // next we send and recv in the Index_in_dof_block with the 
-       // other processors
-       // so far we have only computed the local Index_in_dof_block
-       Vector<MPI_Request> requests;
-       for (unsigned p = 0; p < nproc; p++)
+       // the base displacements for the sends
+       if (sparse_rows_for_proc_requests.size()>0) 
         {
-         if (p != my_rank)
+         MPI_Waitall(sparse_rows_for_proc_requests.size(),
+                     &sparse_rows_for_proc_requests[0],
+                     MPI_STATUS_IGNORE);
+        }
+       MPI_Aint base_displacement;
+       MPI_Address(dof_number_sparse_send,&base_displacement);
+       unsigned first_row = this->distribution_pt()->first_row();
+       for (unsigned p = 0; p < nproc; ++p)
+        {
+         if (nreq_sparse_for_proc[p]>0)
           {
-           // first the sends
-           unsigned first_row_send = 0;
-           unsigned nrow_send = 0;
-           if ((required_rows(p,0) < (this->distribution_pt()->first_row() +
-                                      this->distribution_pt()->nrow_local())) &&
-               (this->distribution_pt()->first_row() <= required_rows(p,1)))
+           // construct the data
+           index_in_dof_block_sparse_send[p] = 
+            new unsigned[nreq_sparse_for_proc[p]];
+           dof_number_sparse_send[p] = 
+            new unsigned[nreq_sparse_for_proc[p]];
+           for (unsigned i = 0; i < nreq_sparse_for_proc[p]; ++i)
             {
-             first_row_send = std::max(this->distribution_pt()->first_row(),
-                                       required_rows(p,0));
-             nrow_send = std::min((this->distribution_pt()->first_row() + 
-                                   this->distribution_pt()->nrow_local()),
-                                  required_rows(p,1)+1)
-              - first_row_send;
-            }
-           if (nrow_send)
-            {
-             MPI_Request sreq;
-             MPI_Isend(&Index_in_dof_block[first_row_send-Min_global_index],
-                       nrow_send,MPI_UNSIGNED,p,3,
-                       problem_pt->communicator_pt()->mpi_comm(),&sreq);
-             requests.push_back(sreq);
+             unsigned r = sparse_rows_for_proc[p][i];
+             r -= first_row;
+             index_in_dof_block_sparse_send[p][i]
+              = Index_in_dof_block_dense[r];
+             dof_number_sparse_send[p][i]
+              = Dof_number_dense[r];
+//             std::cout << "p=" << p << " | "
+//                       << "r=" << sparse_rows_for_proc[p][i] << " | "
+//                       << index_in_dof_block_sparse_send[p][i] << ", "
+//                       << dof_number_sparse_send[p][i] << std::endl;
             }
 
-           // and then the recvs
-           unsigned first_row_recv = 0;
-           unsigned nrow_recv = 0;
-           if ((required_rows(my_rank,0) < 
-                (this->distribution_pt()->first_row(p) +
-                 this->distribution_pt()->nrow_local(p)))
-               && (this->distribution_pt()->first_row(p) <= 
-                   required_rows(my_rank,1)))
-            {
-             first_row_recv = std::max(this->distribution_pt()->first_row(p),
-                                       required_rows(my_rank,0));
-             nrow_recv = std::min(this->distribution_pt()->first_row(p) + 
-                                  this->distribution_pt()->nrow_local(p),
-                                  required_rows(my_rank,1)+1) - first_row_recv;
-            }
-
-           if (nrow_recv)
-            {
-             MPI_Request rreq;
-             MPI_Irecv(&Index_in_dof_block[first_row_recv-Min_global_index],
-                       nrow_recv,MPI_UNSIGNED,p,3,
-                       problem_pt->communicator_pt()->mpi_comm(),&rreq);
-             requests.push_back(rreq);
-            }
+           // send the data
+           // the datatypes, displacements, lengths for the two datatypes
+           MPI_Datatype types[2];
+           MPI_Aint displacements[2];
+           int lengths[2];
+           
+           // index in dof block
+           MPI_Type_contiguous(nreq_sparse_for_proc[p],MPI_UNSIGNED,&types[0]);
+           MPI_Type_commit(&types[0]);
+           MPI_Address(index_in_dof_block_sparse_send[p],&displacements[0]);
+           displacements[0] -= base_displacement;
+           lengths[0] = 1;
+           
+           // dof number
+           MPI_Type_contiguous(nreq_sparse_for_proc[p],MPI_UNSIGNED,&types[1]);
+           MPI_Type_commit(&types[1]);
+           MPI_Address(dof_number_sparse_send[p],&displacements[1]);
+           displacements[1] -= base_displacement;
+           lengths[1] = 1;           
+           
+           // build the final type
+           MPI_Datatype send_type;
+           MPI_Type_struct(2,lengths,displacements,types,&send_type);
+           MPI_Type_commit(&send_type);
+           MPI_Type_free(&types[0]);
+           MPI_Type_free(&types[1]);
+           
+           // and recv
+           MPI_Request req;
+           MPI_Isend(dof_number_sparse_send,1,send_type,p,33,
+                     problem_pt->communicator_pt()->mpi_comm(),&req);
+           send_requests_sparse.push_back(req);
+           MPI_Type_free(&send_type);
           }
-        }
-
-       // and then wait
-       unsigned nreq = requests.size();
-       if (nreq)
-        {
-         MPI_Waitall(nreq,&requests[0],MPI_STATUS_IGNORE);
+         else 
+          {
+           index_in_dof_block_sparse_send[p] = 0;
+           dof_number_sparse_send[p] = 0;
+          }
         }
 #endif
       }
     }
-   else
-    {
-     Min_global_index = Master_block_preconditioner_pt->first_lookup_row();
-     Nglobal_indices = Master_block_preconditioner_pt->nlookup_rows();
-    }
+
+   /////////////////////////////////////////////////////////////////////////////
+   // end of master block preconditioner only operations
+   /////////////////////////////////////////////////////////////////////////////
 
    // compute the number of rows in each block
 
@@ -2091,6 +2256,52 @@ namespace oomph
                                   p_matrix_nrow_local,Nrow);
       }
     }
+
+   // clearing up after comm to assemble sparse lookup schemes
+#ifdef OOMPH_HAS_MPI
+   if (send_requests_sparse.size()>0)
+    {
+     MPI_Waitall(send_requests_sparse.size(),
+                 &send_requests_sparse[0],MPI_STATUS_IGNORE);
+    }
+   if (recv_requests_sparse.size()>0)
+    {
+     MPI_Waitall(recv_requests_sparse.size(),
+                 &recv_requests_sparse[0],MPI_STATUS_IGNORE);
+    }
+   for (unsigned p = 0; p < nproc; p++)
+    {
+     delete[] index_in_dof_block_sparse_send[p];
+     delete[] dof_number_sparse_send[p];
+    }
+   delete[] index_in_dof_block_sparse_send;
+   delete[] dof_number_sparse_send;
+   delete[] nreq_sparse;
+   delete[] nreq_sparse_for_proc;
+#endif
+
+   /* /\* */
+   /* for (unsigned i = 0; i < Global_index_down_sparse.size(); i++) */
+   /*  { */
+   /*   std::cout << Global_index_down_sparse[i] << " : " */
+   /*             << Dof_number_down_sparse[i] << " " */
+   /*             << Index_in_dof_block_down_sparse[i] << "\n"; */
+   /*  } */
+   /* std:: cout << "-------------------------------------------\n"; */
+   /* for (unsigned i = 0; i < Dof_number_dense.size(); i++) */
+   /*  { */
+   /*   std::cout << this->distribution_pt()->first_row()+i << " : " */
+   /*             << Dof_number_dense[i] << " " */
+   /*             << Index_in_dof_block_dense[i] << "\n"; */
+   /*  } */
+   /* std:: cout << "-------------------------------------------\n"; */
+   /* for (unsigned i = 0; i < Global_index_up_sparse.size(); i++) */
+   /*  { */
+   /*   std::cout << Global_index_up_sparse[i] << " : " */
+   /*             << Dof_number_up_sparse[i] << " " */
+   /*             << Index_in_dof_block_up_sparse[i] << "\n"; */
+   /*  } */
+   /* *\/ */
 
    // next we assemble the lookup schemes for the rows
    // if the matrix is not distributed then we assemble Global_index
