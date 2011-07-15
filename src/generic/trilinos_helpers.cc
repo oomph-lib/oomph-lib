@@ -521,17 +521,17 @@ create_distributed_epetra_matrix_for_aztecoo
   // Add all colum indices encountered anywhere into set
   std::set<int> col_index_set(column,column+oomph_matrix_pt->nnz());
   
-// Richard: This isn't needed -- they're all in there already, aren't they?
-//   oomph_info << "hierher Size after Richard's odd set constructor: "
-//              << col_index_set.size();
-//   // Insert the global column indices associated with locally
-//   // held rows
-//   for (int c = 0; c < ncol_local; c++)
-//    {
-//     col_index_set.insert(c+first_col);
-//    }
+  //Richard: This isn't needed -- they're all in there already, aren't they?
+ //  oomph_info << "hierher Size after Richard's odd set constructor: "
+//              << col_index_set.size() << std::endl;
+  // Insert the global column indices associated with locally
+  // held rows
+  for (int c = 0; c < ncol_local; c++)
+   {
+    col_index_set.insert(c+first_col);
+   }
 //   oomph_info << "hierher Size after addition of locally held rows: "
-//              << col_index_set.size();
+//              << col_index_set.size() << std::endl;
   
   // Transform into vector
   std::vector<int> col_index_vector(col_index_set.begin(),col_index_set.end());

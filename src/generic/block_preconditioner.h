@@ -25,7 +25,7 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-//Include guards
+//Include guards 
 #ifndef OOMPH_BLOCK_PRECONDITION_HEADER
 #define OOMPH_BLOCK_PRECONDITION_HEADER
 
@@ -740,7 +740,7 @@ namespace oomph
     return mid;
    }
 
-    protected: 
+    protected:
 
    /// \short Which block is the global unknown i_dof associated with? If this
    /// preconditioner is a subsidiary block preconditioner then the 
@@ -809,7 +809,7 @@ namespace oomph
      // Dummy return
      return -1;
     }
-
+ 
    /// \short What's the index (i.e. the row/column number) of global
    /// unknown i_dof within its block?
    unsigned index_in_dof(const unsigned& i_dof) const
@@ -840,7 +840,7 @@ namespace oomph
         << "cannot be found.\n";
        throw OomphLibError(
         error_message.str(),
-        "BlockPreconditioner::index_in_dof(...)",
+        "BlockPreconditioner::dof_number(...)",
         OOMPH_EXCEPTION_LOCATION);
 #endif
 #else
@@ -1261,7 +1261,7 @@ namespace oomph
       {
        dense_required_rows(p,0) = this->distribution_pt()->first_row(p);
        dense_required_rows(p,1) = this->distribution_pt()->first_row(p)
-        +this->distribution_pt()->nrow_local(p);
+        +this->distribution_pt()->nrow_local(p) - 1;
       }
 
      // determine the global rows That are not in the range first_row to 
@@ -1302,16 +1302,17 @@ namespace oomph
 
 #ifdef OOMPH_HAS_MPI
      Vector<MPI_Request> recv_requests_sparse_nreq;
-     if (matrix_distributed)
+     if (matrix_distributed) // hierher mh added if
       {
        MPI_Aint base_displacement_sparse;
        MPI_Address(nreq_sparse,&base_displacement_sparse);
+
        int zero = 0;
        for (unsigned p = 0; p < nproc; p++)
         {
          nreq_sparse[p] = 0;
          nreq_sparse_for_proc[p] = 0;
-         
+
          // determine the global eqn numbers required by this processor
          // that can be classified by processor p
          int begin = 0;
@@ -1333,26 +1334,26 @@ namespace oomph
               }
             }
           }
-         
+
          // if this processor has rows to be classified by proc p
          if (nreq_sparse[p]>0)
           {
-           
+         
            // send the number of global eqn numbers
            MPI_Request req1;
            MPI_Isend(&nreq_sparse[p],1,MPI_UNSIGNED,p,31,
                      problem_pt->communicator_pt()->mpi_comm(),&req1);
            send_requests_sparse.push_back(req1);
-           
+         
            // send the global eqn numbers
            MPI_Request req2;
            MPI_Isend(&Global_index_sparse[begin],
                      nreq_sparse[p],MPI_UNSIGNED,p,32,
                      problem_pt->communicator_pt()->mpi_comm(),&req2);
            send_requests_sparse.push_back(req2);
-           
+         
            // post the recvs for the data that will be returned
-           
+         
            // the datatypes, displacements, lengths for the two datatypes
            MPI_Datatype types[2];
            MPI_Aint displacements[2];
@@ -1364,21 +1365,21 @@ namespace oomph
            MPI_Address(&Index_in_dof_block_sparse[begin],&displacements[0]);
            displacements[0] -= base_displacement_sparse;
            lengths[0] = 1;
-           
+         
            // dof number
            MPI_Type_contiguous(nreq_sparse[p],MPI_UNSIGNED,&types[1]);
            MPI_Type_commit(&types[1]);
            MPI_Address(&Dof_number_sparse[begin],&displacements[1]);
            displacements[1] -= base_displacement_sparse;
            lengths[1] = 1;           
-           
+         
            // build the final type
            MPI_Datatype recv_type;
            MPI_Type_struct(2,lengths,displacements,types,&recv_type);
            MPI_Type_commit(&recv_type);
            MPI_Type_free(&types[0]);
            MPI_Type_free(&types[1]);
-           
+         
            // and recv
            MPI_Request req;
            MPI_Irecv(nreq_sparse,1,recv_type,p,33,
@@ -1386,7 +1387,7 @@ namespace oomph
            recv_requests_sparse.push_back(req);
            MPI_Type_free(&recv_type);
           }
-         
+
          // if no communication required, confirm this
          if (nreq_sparse[p]==0)
           {
@@ -1395,14 +1396,14 @@ namespace oomph
                      problem_pt->communicator_pt()->mpi_comm(),&req1);
            send_requests_sparse.push_back(req1);
           }
-         
+
          //
          MPI_Request req;
          MPI_Irecv(&nreq_sparse_for_proc[p],1,MPI_UNSIGNED,p,31,
                    problem_pt->communicator_pt()->mpi_comm(),&req);
          recv_requests_sparse_nreq.push_back(req);
         }
-      }
+      } // hierher mh added if
 #endif
 
      // resize the storage
@@ -1924,14 +1925,13 @@ namespace oomph
 #endif
       }
 
-#ifdef OOMPH_HAS_MPI       
+#ifdef OOMPH_HAS_MPI
      Vector<unsigned*> sparse_rows_for_proc(nproc,0);
-     Vector<MPI_Request> sparse_rows_for_proc_requests;
-     if (matrix_distributed)
+     Vector<MPI_Request> sparse_rows_for_proc_requests;     
+     if (matrix_distributed)// hierher mh added if
       {
        // wait for number of sparse rows each processor requires 
        // post recvs for that data
-
        if (recv_requests_sparse_nreq.size()>0)
         {
          MPI_Waitall(recv_requests_sparse_nreq.size(),
@@ -1950,7 +1950,7 @@ namespace oomph
            sparse_rows_for_proc_requests.push_back(req);
           }
         }
-      }
+      } // hierher mh added if
 #endif
 
 
@@ -2060,6 +2060,7 @@ namespace oomph
 //                       << index_in_dof_block_sparse_send[p][i] << ", "
 //                       << dof_number_sparse_send[p][i] << std::endl;
             }
+           delete[] sparse_rows_for_proc[p];
 
            // send the data
            // the datatypes, displacements, lengths for the two datatypes
@@ -2280,28 +2281,28 @@ namespace oomph
    delete[] nreq_sparse_for_proc;
 #endif
 
-   /* /\* */
-   /* for (unsigned i = 0; i < Global_index_down_sparse.size(); i++) */
-   /*  { */
-   /*   std::cout << Global_index_down_sparse[i] << " : " */
-   /*             << Dof_number_down_sparse[i] << " " */
-   /*             << Index_in_dof_block_down_sparse[i] << "\n"; */
-   /*  } */
-   /* std:: cout << "-------------------------------------------\n"; */
-   /* for (unsigned i = 0; i < Dof_number_dense.size(); i++) */
-   /*  { */
-   /*   std::cout << this->distribution_pt()->first_row()+i << " : " */
-   /*             << Dof_number_dense[i] << " " */
-   /*             << Index_in_dof_block_dense[i] << "\n"; */
-   /*  } */
-   /* std:: cout << "-------------------------------------------\n"; */
-   /* for (unsigned i = 0; i < Global_index_up_sparse.size(); i++) */
-   /*  { */
-   /*   std::cout << Global_index_up_sparse[i] << " : " */
-   /*             << Dof_number_up_sparse[i] << " " */
-   /*             << Index_in_dof_block_up_sparse[i] << "\n"; */
-   /*  } */
-   /* *\/ */
+   
+/*    for (unsigned i = 0; i < Global_index_down_sparse.size(); i++) */
+/*     { */
+/*      std::cout << Global_index_down_sparse[i] << " : " */
+/*                << Dof_number_down_sparse[i] << " " */
+/*                << Index_in_dof_block_down_sparse[i] << "\n"; */
+/*     } */
+/*    std:: cout << "-------------------------------------------\n"; */
+/*    for (unsigned i = 0; i < Dof_number_dense.size(); i++) */
+/*     { */
+/*      std::cout << this->distribution_pt()->first_row()+i << " : " */
+/*                << Dof_number_dense[i] << " " */
+/*                << Index_in_dof_block_dense[i] << "\n"; */
+/*     } */
+/*    std:: cout << "-------------------------------------------\n"; */
+/*    for (unsigned i = 0; i < Global_index_up_sparse.size(); i++) */
+/*     { */
+/*      std::cout << Global_index_up_sparse[i] << " : " */
+/*                << Dof_number_up_sparse[i] << " " */
+/*                << Index_in_dof_block_up_sparse[i] << "\n"; */
+/*     } */
+   
 
    // next we assemble the lookup schemes for the rows
    // if the matrix is not distributed then we assemble Global_index
@@ -2568,8 +2569,6 @@ namespace oomph
            Rows_to_recv_for_get_block(b,p)
             = new int[Nrows_to_recv_for_get_block(b,p)];
           }
-         Rows_to_recv_for_get_ordered[p] // -- hierher leak?
-          = new int [Nrows_to_recv_for_get_ordered[p]];
         }
       }
 
