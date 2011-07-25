@@ -66,6 +66,15 @@ namespace Global_Physical_Variables
  /// Pseudo-solid Young's modulus
  double E=2.2;
 
+ ///Direction of the wall normal vector
+ Vector<double> Wall_normal;
+
+ /// \short Function that specifies the wall unit normal
+ void wall_unit_normal_fct(const Vector<double> &x, 
+                      Vector<double> &normal)
+ {
+  normal=Wall_normal;
+ }
 }
 
 //============================================================================
@@ -120,7 +129,7 @@ this->element_reorder();
   SpineElement<ELEMENT> >*>(this->Interface_element_pt[this->Nx-1]);
 
  //Now make our edge (point)  element
- Point_element_pt  = el_pt->make_edge_element(1);
+ Point_element_pt  = el_pt->make_bounding_element(1);
  //Add it to the stack
  this->Element_pt.push_back(Point_element_pt);
 
@@ -182,7 +191,7 @@ private:
  double Angle;
 
  /// The normal to the wall
- Vector<double> Wall_normal;
+ //Vector<double> Wall_normal;
 
  /// Trace file
  ofstream Trace_file;
@@ -206,9 +215,9 @@ CapProblem<ELEMENT>::CapProblem(const bool& hijack_internal) :
  Pext(1.23),  //Initialise the external pressure to some random value
  Angle(0.5*MathematicalConstants::Pi) //Initialise the contact angle
 {
- Wall_normal.resize(2);
- Wall_normal[0] = 1.0; Wall_normal[1] = 0.0;
-
+ Global_Physical_Variables::Wall_normal.resize(2);
+ Global_Physical_Variables::Wall_normal[0] = 1.0;
+ Global_Physical_Variables::Wall_normal[1] = 0.0;
 
  // Number of elements in the horizontal direction
  unsigned nx=4;
@@ -352,9 +361,15 @@ CapProblem<ELEMENT>::CapProblem(const bool& hijack_internal) :
  //(mesh_pt()->interface_element_pt(n_interface-1))->
  // set_contact_angle_right(&Angle)
 
- dynamic_cast<FluidInterfaceEdgeElement*>(mesh_pt()->element_pt(mesh_pt()->nelement()-1))->set_contact_angle(&Angle);
+ dynamic_cast<FluidInterfaceBoundingElement*>(
+  mesh_pt()->element_pt(mesh_pt()->nelement()-1))->set_contact_angle(&Angle);
 
- dynamic_cast<FluidInterfaceEdgeElement*>(mesh_pt()->element_pt(mesh_pt()->nelement()-1))->wall_normal_pt() = &Wall_normal;
+ dynamic_cast<FluidInterfaceBoundingElement*>(
+  mesh_pt()->element_pt(mesh_pt()->nelement()-1))->ca_pt() = &Ca;
+
+ dynamic_cast<FluidInterfaceBoundingElement*>(
+  mesh_pt()->element_pt(mesh_pt()->nelement()-1))->wall_unit_normal_fct_pt() 
+  =  &Global_Physical_Variables::wall_unit_normal_fct;
 
  
  //Setup all the equation numbering and look-up schemes 
@@ -537,7 +552,7 @@ public:
     dynamic_cast<INTERFACE_ELEMENT*>(this->Interface_element_pt[nx-1]);
 
    //Now add the one additional volumetric constraint point
-   Point_element_pt = el_pt->make_edge_element(1);
+   Point_element_pt = el_pt->make_bounding_element(1);
 
    this->Element_pt.push_back(Point_element_pt);
   }
@@ -870,11 +885,16 @@ ElasticCapProblem<ELEMENT>::ElasticCapProblem(const bool& hijack_internal) :
  //(mesh_pt()->interface_element_pt(n_interface-1))->
  // set_contact_angle_right(&Angle)
 
- dynamic_cast<FluidInterfaceEdgeElement*>(mesh_pt()->
-                                          element_pt(mesh_pt()->nelement()-1))
+ dynamic_cast<FluidInterfaceBoundingElement*>(
+  mesh_pt()->element_pt(mesh_pt()->nelement()-1))
   ->set_contact_angle(&Angle);
+ 
+ dynamic_cast<FluidInterfaceBoundingElement*>(
+  mesh_pt()->element_pt(mesh_pt()->nelement()-1))->ca_pt() = &Ca;
 
- dynamic_cast<FluidInterfaceEdgeElement*>(mesh_pt()->element_pt(mesh_pt()->nelement()-1))->wall_normal_pt() = &Wall_normal;
+ dynamic_cast<FluidInterfaceBoundingElement*>(
+  mesh_pt()->element_pt(mesh_pt()->nelement()-1))->wall_unit_normal_fct_pt() 
+  =  &Global_Physical_Variables::wall_unit_normal_fct;
 
  
  //Setup all the equation numbering and look-up schemes 

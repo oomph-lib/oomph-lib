@@ -38,7 +38,7 @@
 //OOMPH-LIB headers
 #include "generic/Qelements.h"
 #include "fluid_interface/surface_interface_elements.h"
-
+ 
 namespace oomph
 {
 
@@ -59,7 +59,7 @@ namespace oomph
 //=========================================================================
 template<class ELEMENT>
 class ElasticVolumeConstraintLineElement : 
-public ElasticLineFluidInterfaceEdgeElement<ELEMENT>
+public ElasticLineFluidInterfaceBoundingElement<ELEMENT>
 {
   private:
  
@@ -83,7 +83,7 @@ public ElasticLineFluidInterfaceEdgeElement<ELEMENT>
  ///Constructor, there are no internal values. The pointer to the 
  ///element's (single) spine has to be set manually "from the outside"
  ElasticVolumeConstraintLineElement() : 
-  ElasticLineFluidInterfaceEdgeElement<ELEMENT>() 
+  ElasticLineFluidInterfaceBoundingElement<ELEMENT>() 
   {
    oomph_info << "hierher: Replace/move to "
               << "src/fluid_interface/constrained_volume_elements.h \n";
@@ -121,17 +121,26 @@ public ElasticLineFluidInterfaceEdgeElement<ELEMENT>
  //in the underlying SpineElement.
   }
  
- void add_additional_residual_contributions(
+ void add_additional_residual_contributions_interface_boundary(
   Vector<double> &residuals, DenseMatrix<double> &jacobian,
   const unsigned &flag,const Shape &psif,
   const DShape &dpsifds,
   const Vector<double> &interpolated_n, const double &W)
   {
-   ElasticLineFluidInterfaceEdgeElement<ELEMENT>::
-    add_additional_residual_contributions(residuals,jacobian,
-                                          flag,psif,dpsifds,
-                                          //interpolated_x,
-                                          interpolated_n,W); //,J);
+   ElasticLineFluidInterfaceBoundingElement<ELEMENT>::
+    add_additional_residual_contributions_interface_boundary(
+     residuals, 
+     jacobian,
+     flag,
+     psif,
+     dpsifds,
+     interpolated_n, 
+     W);
+   // hierher
+    /* add_additional_residual_contributions(residuals,jacobian, */
+    /*                                       flag,psif,dpsifds, */
+    /*                                       //interpolated_x, */
+    /*                                       interpolated_n,W); //,J); */
    
    int local_eqn = Ptraded_local_eqn;
    if(local_eqn >= 0)
@@ -219,7 +228,7 @@ public ElasticSurfaceFluidInterfaceElement<ELEMENT>
  /// \short Overload the Helper function to calculate the residuals and 
  /// jacobian entries. This particular function ensures that the
  /// additional entries are calculated inside the integration loop
- void add_additional_residual_contributions(
+ void add_additional_residual_contributions_interface(
   Vector<double> &residuals, 
   DenseMatrix<double> &jacobian,
   const unsigned &flag,
@@ -236,11 +245,11 @@ public ElasticSurfaceFluidInterfaceElement<ELEMENT>
 /*   const Vector<double> &interpolated_n, const double &W) */
   {
    ElasticSurfaceFluidInterfaceElement<ELEMENT>::
-    add_additional_residual_contributions(residuals,jacobian,
-                                          flag,psif,dpsifds,
-                                          interpolated_x,
-                                          interpolated_n,W,J);
-
+    add_additional_residual_contributions_interface(residuals,jacobian,
+                                                    flag,psif,dpsifds,
+                                                    interpolated_x,
+                                                    interpolated_n,W,J);
+   
    //Add in the volume constraint term if required -- HACKY!
    //The volume of the fluid is found by integrating x.n around the boundary
    int local_eqn= Ptraded_local_eqn; 
@@ -267,7 +276,7 @@ public ElasticSurfaceFluidInterfaceElement<ELEMENT>
 
      //This is the component of x.n (divide by 3 because we are working
      //in 3D)
-     residuals[local_eqn] += dot*W/3.0;
+     residuals[local_eqn] += dot*J*W/3.0;
     }
   }
  
@@ -359,8 +368,8 @@ public:
 
   
  /// \short Create a volume constraint element at given face of the surface element
- FluidInterfaceEdgeElement*
-  make_edge_element(const int &face_index)
+ FluidInterfaceBoundingElement*
+  make_bounding_element(const int &face_index)
   {
    //Create a temporary pointer to the appropriate FaceElement
    ElasticVolumeConstraintLineElement<ELEMENT> *Temp_pt =

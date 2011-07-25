@@ -60,7 +60,7 @@ namespace oomph
 //=========================================================================
 template<class ELEMENT>
 class ElasticVolumeConstraintPointElement : 
- public ElasticPointFluidInterfaceEdgeElement<ELEMENT>
+ public ElasticPointFluidInterfaceBoundingElement<ELEMENT>
  {
   private:
 
@@ -89,7 +89,7 @@ class ElasticVolumeConstraintPointElement :
 
  ///Constructor
  ElasticVolumeConstraintPointElement() : 
-  ElasticPointFluidInterfaceEdgeElement<ELEMENT>()
+  ElasticPointFluidInterfaceBoundingElement<ELEMENT>()
   {
 
    oomph_info << "hierher: Replace/move to "
@@ -104,9 +104,13 @@ class ElasticVolumeConstraintPointElement :
  double* &volume_pt() {return Volume_pt;}
 
  ///Custom overload the additional volume constraint
- void add_additional_residual_contributions(
+ void  add_additional_residual_contributions_interface_boundary(
   Vector<double> &residuals, DenseMatrix<double> &jacobian,
-  const unsigned &flag) 
+  const unsigned &flag,
+  const Shape &psif,
+  const DShape &dpsifds,
+  const Vector<double> &interpolated_n, 
+  const double &W) 
   {
    //If we have an external pressure, add the final term
    //to the volumetric constraint equation
@@ -191,7 +195,7 @@ public ElasticLineFluidInterfaceElement<ELEMENT>
  /// \short Overload the Helper function to calculate the residuals and 
  /// and jacobian entries. This particular function ensures that the
  /// additional entries are calculated inside the integration loop
- void add_additional_residual_contributions(
+ void add_additional_residual_contributions_interface(
   Vector<double> &residuals, 
   DenseMatrix<double> &jacobian,
   const unsigned &flag,
@@ -210,10 +214,11 @@ public ElasticLineFluidInterfaceElement<ELEMENT>
   {
    //Call the underlying additional residual terms
    ElasticLineFluidInterfaceElement<ELEMENT>::
-    add_additional_residual_contributions(residuals,jacobian,flag,psif,
-                                          dpsifds,interpolated_x,
-                                          interpolated_n,W,J);
- 
+    add_additional_residual_contributions_interface(residuals,
+                                                    jacobian,flag,psif,
+                                                    dpsifds,interpolated_x,
+                                                    interpolated_n,W,J);
+   
    //Add in the volume constraint term if required -- HACKY!
    //The volume of the fluid is found by integrating x.n around the boundary
    int local_eqn= ptraded_local_eqn(); 
@@ -287,7 +292,7 @@ public ElasticLineFluidInterfaceElement<ELEMENT>
 
  ///\short Overload the making of the edge element to create out
  ///volume constraint edge element.
- FluidInterfaceEdgeElement* make_edge_element(const int &face_index)
+ FluidInterfaceBoundingElement* make_bounding_element(const int &face_index)
   {
    //Create a temporary pointer to the appropriate FaceElement
    ElasticVolumeConstraintPointElement<ELEMENT> *Temp_pt = 
@@ -297,7 +302,7 @@ public ElasticLineFluidInterfaceElement<ELEMENT>
    this->build_face_element(face_index,Temp_pt);
 
    //Set the index at which the unknowns are stored from the element
-   Temp_pt->u_index_interface_edge() = this->U_index_interface;
+   Temp_pt->u_index_interface_boundary() = this->U_index_interface;
 
    //Set the value of the nbulk_value, the node is not resized
    //in this problem, so it will just be the actual nvalue - 1

@@ -269,30 +269,30 @@ public:
 
            
            //Now if we have a match make the element
-           FluidInterfaceEdgeElement* interface_edge_element_pt=0;
+           FluidInterfaceBoundingElement* interface_edge_element_pt=0;
            if(adjacent[0])
             {
              interface_edge_element_pt
               = dynamic_cast<INTERFACE_ELEMENT*>(interface_element_pt)
-              ->make_edge_element(-2);
+              ->make_bounding_element(-2);
             }
            else if(adjacent[1])
             {
              interface_edge_element_pt
               = dynamic_cast<INTERFACE_ELEMENT*>(interface_element_pt)
-              ->make_edge_element(1);
+              ->make_bounding_element(1);
             }
            else if(adjacent[2])
             {
              interface_edge_element_pt
               = dynamic_cast<INTERFACE_ELEMENT*>(interface_element_pt)
-              ->make_edge_element(2);
+              ->make_bounding_element(2);
            }
           else if(adjacent[3])
            {
             interface_edge_element_pt
              = dynamic_cast<INTERFACE_ELEMENT*>(interface_element_pt)
-             ->make_edge_element(-1);
+             ->make_bounding_element(-1);
             
            }
           
@@ -300,13 +300,19 @@ public:
            {
             Element_pt.push_back(interface_edge_element_pt);
             Interface_edge_element_pt.push_back(interface_edge_element_pt);
-            dynamic_cast<FluidInterfaceEdgeElement*>
-             (interface_edge_element_pt)->wall_normal_fct_pt() 
+            dynamic_cast<FluidInterfaceBoundingElement*>
+             (interface_edge_element_pt)->wall_unit_normal_fct_pt() 
              = WallFunction::normal;
+
             //Set the contact angle
-            dynamic_cast<FluidInterfaceEdgeElement*>
+            dynamic_cast<FluidInterfaceBoundingElement*>
              (interface_edge_element_pt)->
              set_contact_angle(&Global_Physical_Variables::Angle);
+
+            //Set the capillary number
+            dynamic_cast<FluidInterfaceBoundingElement*>
+             (interface_edge_element_pt)->
+             ca_pt()=&Global_Physical_Variables::Ca;
            }
           } //End of final layer stuff
         }
@@ -597,7 +603,7 @@ FreeSurfaceRotationProblem<ELEMENT>::FreeSurfaceRotationProblem(DocInfo& doc_inf
 
    //Set the Reynolds number, etc
    el_pt->re_pt() = &Global_Physical_Variables::Re;
-
+  
    //Set the gravitational force
    el_pt->re_invfr_pt() = &Global_Physical_Variables::ReInvFr; 
    el_pt->g_pt() = &Global_Physical_Variables::G;
@@ -892,30 +898,30 @@ public:
           
           
           //Now if we have a match make the element
-          FluidInterfaceEdgeElement* interface_edge_element_pt=0;
+          FluidInterfaceBoundingElement* interface_edge_element_pt=0;
           if(adjacent[0])
            {
             interface_edge_element_pt
              = dynamic_cast<INTERFACE_ELEMENT*>(interface_element_pt)
-             ->make_edge_element(-2);
+             ->make_bounding_element(-2);
            }
            else if(adjacent[1])
             {
              interface_edge_element_pt
               = dynamic_cast<INTERFACE_ELEMENT*>(interface_element_pt)
-              ->make_edge_element(1);
+              ->make_bounding_element(1);
             }
           else if(adjacent[2])
            {
             interface_edge_element_pt
               = dynamic_cast<INTERFACE_ELEMENT*>(interface_element_pt)
-             ->make_edge_element(2);
+             ->make_bounding_element(2);
            }
           else if(adjacent[3])
            {
             interface_edge_element_pt
              = dynamic_cast<INTERFACE_ELEMENT*>(interface_element_pt)
-             ->make_edge_element(-1);
+             ->make_bounding_element(-1);
             
            }
           
@@ -923,13 +929,19 @@ public:
            {
             Element_pt.push_back(interface_edge_element_pt);
             Interface_edge_element_pt.push_back(interface_edge_element_pt);
-            dynamic_cast<FluidInterfaceEdgeElement*>
-             (interface_edge_element_pt)->wall_normal_fct_pt() 
+            dynamic_cast<FluidInterfaceBoundingElement*>
+             (interface_edge_element_pt)->wall_unit_normal_fct_pt() 
              = WallFunction::normal;
+            
             //Set the contact angle
-            dynamic_cast<FluidInterfaceEdgeElement*>
+            dynamic_cast<FluidInterfaceBoundingElement*>
              (interface_edge_element_pt)->
-              set_contact_angle(&Global_Physical_Variables::Angle);
+             set_contact_angle(&Global_Physical_Variables::Angle);
+            
+            //Set the capillary number
+            dynamic_cast<FluidInterfaceBoundingElement*>
+             (interface_edge_element_pt)->
+             ca_pt()=&Global_Physical_Variables::Ca;
            }
           } //End of final layer stuff
        }

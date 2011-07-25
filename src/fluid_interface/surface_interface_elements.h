@@ -71,7 +71,7 @@ namespace oomph
    int kinematic_local_eqn(const unsigned &n) 
    {return this->spine_local_eqn(n);}
    
-   // hierher clarify this
+   // hierher Andrew please clarify this
    /// \short Hijacking the kinematic condition corresponds to hijacking the
    /// spine heights.
    void hijack_kinematic_conditions(const Vector<unsigned> &bulk_node_number)
@@ -149,16 +149,16 @@ namespace oomph
     
     
 
-    /// \short Create an "edge" element (here actually a 2D line element
-    /// of type  SpineLineFluidInterfaceEdgeElement<ELEMENT> that allows
+    /// \short Create an "bounding" element (here actually a 2D line element
+    /// of type  SpineLineFluidInterfaceBoundingElement<ELEMENT> that allows
     /// the application of a contact angle boundary condition on the
     /// the specified face.
-    virtual FluidInterfaceEdgeElement* make_edge_element(
+    virtual FluidInterfaceBoundingElement* make_bounding_element(
      const int &face_index)
     {
      //Create a temporary pointer to the appropriate FaceElement
-     SpineLineFluidInterfaceEdgeElement<ELEMENT> *face_el_pt = 
-      new SpineLineFluidInterfaceEdgeElement<ELEMENT>;
+     SpineLineFluidInterfaceBoundingElement<ELEMENT> *face_el_pt = 
+      new SpineLineFluidInterfaceBoundingElement<ELEMENT>;
      
      //Attach the geometrical information to the new element
      this->build_face_element(face_index,face_el_pt);
@@ -199,7 +199,7 @@ namespace oomph
     /// \short Helper function to calculate the additional contributions
     /// to be added at each integration point. Empty as there's nothing
     /// to be done
-    void add_additional_residual_contributions(
+    void add_additional_residual_contributions_interface(
      Vector<double> &residuals, 
      DenseMatrix<double> &jacobian,
      const unsigned &flag,
@@ -247,15 +247,16 @@ namespace oomph
    {return this->nodal_local_eqn(j,Nbulk_value[j]);}
    
    
-   /// hierher clarify this
+   /// hierher Andrew please clarify this
    void hijack_kinematic_conditions(const Vector<unsigned> &bulk_node_number)
    {    
     //Loop over all the passed nodes
     for(Vector<unsigned>::const_iterator it=bulk_node_number.begin();
         it!=bulk_node_number.end();++it)
      {
-      //Make sure that we delete the returned value
-      delete this->hijack_nodal_value(*it,Nbulk_value[*it]); // hierher generalise?
+      // Make sure that we delete the returned value
+      // hierher Andrew: generalise to Amine's machinery?
+      delete this->hijack_nodal_value(*it,Nbulk_value[*it]); 
      }
    }
    
@@ -311,11 +312,7 @@ namespace oomph
      // Now add storage for Lagrange multipliers and set the map containing 
      // the position of the first entry of this face element's 
      // additional values.
-     add_additional_values(additional_data_values,id);
-     
-     // hierher kill
-     // //Resize the data arrays accordingly 
-     //resize_nodes(additional_data_values);
+     add_additional_values(additional_data_values,id);     
     }
     
     /// \short The "global" intrinsic coordinate of the element when 
@@ -331,11 +328,7 @@ namespace oomph
       // Get the index of the nodal value associated with Lagrange multiplier
       unsigned lagr_index=dynamic_cast<BoundaryNodeBase*>(node_pt(j))->
        index_of_first_value_assigned_by_face_element(Id);
-      
-      // hierher Andrew: Why dereference the value_pt?
       return *node_pt(j)->value_pt(lagr_index); 
-      
-      //return *node_pt(j)->value_pt(Nbulk_value[j]);  // hierher genearlise
      }
     
 
@@ -368,7 +361,7 @@ namespace oomph
     /// \short Helper function to calculate the additional contributions
     /// to be added at each integration point. This deals with 
     /// Lagrange multiplier contribution
-    void add_additional_residual_contributions(
+    void add_additional_residual_contributions_interface(
      Vector<double> &residuals, 
      DenseMatrix<double> &jacobian,
      const unsigned &flag,
@@ -389,6 +382,7 @@ namespace oomph
       }
      
      int local_eqn=0, local_unknown = 0;
+
      //Loop over the shape functions
      for(unsigned l=0;l<n_node;l++)
       {
@@ -401,11 +395,8 @@ namespace oomph
          if(local_eqn >= 0)
           {
            //Add in the Lagrange multiplier contribution
-           //(The normal vector includes the appropriate area contribution)
-           // hierher check statement in brackets -- is interpolated_n
-           // not normalised?
            residuals[local_eqn] -= 
-            interpolated_lagrange*interpolated_n[i]*psif(l)*W;
+            interpolated_lagrange*interpolated_n[i]*psif(l)*J*W;
            
            //Do the Jacobian calculation
            if(flag)
@@ -419,7 +410,7 @@ namespace oomph
                if(local_unknown >= 0)
                 {
                  jacobian(local_eqn,local_unknown) -=
-                  psif(l2)*interpolated_n[i]*psif(l)*W;
+                  psif(l2)*interpolated_n[i]*psif(l)*J*W;
                 }
               }
             } //End of Jacobian calculation
@@ -431,15 +422,16 @@ namespace oomph
     
     
  
-    /// \short Create an "edge" element (here actually a 2D line element
-    /// of type ElasticLineFluidInterfaceEdgeElement<ELEMENT> that allows
+    /// \short Create an "bounding" element (here actually a 2D line element
+    /// of type ElasticLineFluidInterfaceBoundingElement<ELEMENT> that allows
     /// the application of a contact angle boundary condition on the
     /// the specified face. 
-    virtual FluidInterfaceEdgeElement* make_edge_element(const int &face_index)
+    virtual FluidInterfaceBoundingElement* make_bounding_element(
+     const int &face_index)
     {
      //Create a temporary pointer to the appropriate FaceElement
-     ElasticLineFluidInterfaceEdgeElement<ELEMENT> *face_el_pt = 
-      new ElasticLineFluidInterfaceEdgeElement<ELEMENT>;
+     ElasticLineFluidInterfaceBoundingElement<ELEMENT> *face_el_pt = 
+      new ElasticLineFluidInterfaceBoundingElement<ELEMENT>;
      
      //Attach the geometrical information to the new element
      this->build_face_element(face_index,face_el_pt);

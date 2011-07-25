@@ -44,14 +44,14 @@
 using namespace std;
 
 //-------------------------------------------
-// hierher This is still (tidy up) work 
+// hierher This is still work 
 // in progress. Need to create versions
 // for axisymmetric and cartesian 3D
 // bulk equations, as well as spine
 // version for all of these (resulting
 // in six elements in total). These
-// will gradually replace the fix_*.h
-// files that currently live in 
+// will gradually replace the very hacky 
+// fix_*.h files that currently live in 
 // various demo driver codes. 
 //-------------------------------------------
 
@@ -60,8 +60,7 @@ namespace oomph
 
 //==========================================================================
 /// A class that is used to implement the constraint that the fluid volume
-/// in a region bounded by associated FaceElements of type 
-/// LineVolumeConstraintElement (attached, e.g., to the
+/// in a region bounded by associated FaceElements (attached, e.g., to the
 /// mesh boundaries that enclose a bubble) must take a specific value. 
 /// This GeneralisedElement is used only to store the desired volume and
 /// a pointer to the (usually pressure) freedom that must be traded 
@@ -112,11 +111,12 @@ class VolumeConstraintElement : public GeneralisedElement
   Vector<double> &residuals)
  {
   // Note: This element can only be used with the associated 
-  // hierher [fill in name] elements which compute the actual
+  // VolumeConstraintBoundingElement elements which compute the actual
   // enclosed volume; here we only add the contribution to the
   // residual; everything else, incl. the derivatives of this
-  // residual w.r.t. the nodal positions of the hierher [fill in name]
-  // elements is handled by them
+  // residual w.r.t. the nodal positions of the 
+  // VolumeConstraintBoundingElements
+  // is handled by them
   int local_eqn = ptraded_local_eqn();
   if(local_eqn >= 0)
    {
@@ -217,16 +217,16 @@ class VolumeConstraintElement : public GeneralisedElement
  
  /// \short Fill in the residuals, jacobian and mass matrix for the volume
  /// constraint
-  void fill_in_contribution_to_jacobian_and_mass_matrix(
-    Vector<double> &residuals,
-    DenseMatrix<double> &jacobian,
-    DenseMatrix<double> &mass_matrix)
-    {
-     //No contribution to jacobian or mass matrix; see comment in that function
-     this->fill_in_generic_contribution_to_residuals_volume_constraint(
-      residuals);
-    }
-
+ void fill_in_contribution_to_jacobian_and_mass_matrix(
+  Vector<double> &residuals,
+  DenseMatrix<double> &jacobian,
+  DenseMatrix<double> &mass_matrix)
+ {
+  //No contribution to jacobian or mass matrix; see comment in that function
+  this->fill_in_generic_contribution_to_residuals_volume_constraint(
+   residuals);
+ }
+ 
 
 
 }; 
@@ -411,7 +411,8 @@ template<class ELEMENT>
         dot += interpolated_x[k]*interpolated_n[k];
        }
 
-      // Add to residual // hierher don't we need a sign here for cases
+      // Add to residual 
+      // hierher Andrew don't we need a sign here for cases
       // when the outer unit normal points into or out of the 
       // constrained volume?
       residuals[local_eqn] += 0.5*dot*W*J;
@@ -432,10 +433,6 @@ template<class ELEMENT>
   VolumeConstraintBoundingElement<ELEMENT>(element_pt, face_index,
                                            vol_constraint_el_pt) 
   {}
-  
-  
-
-  
 
 };
 
@@ -443,8 +440,6 @@ template<class ELEMENT>
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
-
-
 
 
 //=======================================================================

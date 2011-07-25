@@ -43,130 +43,153 @@
 namespace oomph
 {
 
-
-// hierher yet to be tidied/assessed from here....
-
 //========================================================================
-/// Base class for elements at the edge of free surfaces or interfaces.
-/// The elemental dimensions will be one less than those of the
+/// Base class for elements at the boundary of free surfaces or interfaces,
+/// used typically to impose contact angle boundary conditions.
+/// The elemental dimensions are one less than those of the
 /// surface elements, or two less than those of the original bulk elements.
-/// Thus in two-dimensional and axi-symmetric problems, they will be points,
-/// but in three-dimensional problems, they will be lines.
-/// These edges may be in contact with a solid surface, in which case
+/// Thus in two-dimensional and axi-symmetric problems, are points,
+/// but in three-dimensional problems, they are lines.
+/// These boundaries may be in contact with a solid surface, in which case
 /// the normal to that surface must be provided.
 //=========================================================================
-class FluidInterfaceEdgeElement : public virtual FaceElement
+ class FluidInterfaceBoundingElement : public virtual FaceElement
  {
    private:
   
-  /// \short Function pointer to a wall normal function
-  typedef void (*WallNormalFctPt)(const Vector<double> &x, 
-                                  Vector<double> &normal);
-  
-  /// \short Pointer to a wall unit normal for the case of a 
-  /// simple constant wall
-  Vector<double> *Wall_normal_pt;
+  /// \short Function pointer to a wall unit normal function. Returns the
+  /// unit normal on the wall, at the specified Eulerian coordinate.
+  typedef void (*WallUnitNormalFctPt)(const Vector<double> &x, 
+                                      Vector<double> &unit_normal);
   
   /// \short Pointer to a wall normal function that returns
-  /// the wall normal as a function of position in global
-  /// coordinates.
-  WallNormalFctPt Wall_normal_fct_pt;
+  /// the wall unit normal as a function of position in global
+  /// Eulerian coordinates.
+  WallUnitNormalFctPt Wall_unit_normal_fct_pt;
   
-  /// Pointer to a face element that defines the position of the wall
-  /// adjacent to the contact line
-  //FaceElement *Wall_element_pt;
- 
-  /// Pointer to the desired value of the contact angle
+  /// Pointer to the desired value of the contact angle (if any)
   double *Contact_angle_pt;
   
-  /// Pointer to the desired value of the capillary numbe
+  /// Pointer to the desired value of the capillary number
   double *Ca_pt;
   
    protected:
   
-  /// \short Integer used to determine whether the contact angle is to be
-  /// used and whether it will be applied as a force term in the momentum
-  /// equations or by hijacking the kinematic condition
-  unsigned Contact_angle;
+  /// \short Flag used to determine whether the contact angle is to be
+  /// used (0 if not), and whether it will be applied weakly as a force term 
+  /// in the momentum equations (1) or by hijacking the kinematic
+  /// condition (2).
+  unsigned Contact_angle_flag;
   
-  /// Index at which the i-th velocity component is stored.
-  Vector<unsigned> U_index_interface_edge;
+  /// \short Index at which the i-th velocity component is stored in the 
+  /// element's nodes
+  Vector<unsigned> U_index_interface_boundary;
   
-  /// Function that is used to determine the local equation number of
-  /// the kinematic equation associated with the nodes of the elementt
+  /// \short Function that is used to determine the local equation number of
+  /// the kinematic equation associated with the nodes of the element
   virtual int kinematic_local_eqn(const unsigned &n)=0;
   
-  /// Function that returns the unit normal of the bounding wall
+  /// \short Function that returns the unit normal of the bounding wall
   /// directed out of the fluid
   void wall_unit_normal(const Vector<double> &x, Vector<double> &normal)
    {
-    //Firstly test to see whether a wall normal has been set
-    if(Wall_normal_pt)
+#ifdef PARANOID
+    if(Wall_unit_normal_fct_pt)
      {
-      //Set the normal from the wall normal pointer
-      normal = *Wall_normal_pt;
+#endif
+      (*Wall_unit_normal_fct_pt)(x,normal);
+#ifdef PARANOID
      }
-    else if(Wall_normal_fct_pt)
-     {
-      (*Wall_normal_fct_pt)(x,normal);
-     }
-    //Otherwise throw exceptoin
     else
      {
       throw 
-       OomphLibError("Wall normal has not been set",
-                     "FluidInterfaceEdgeElement::wall_unit_normal()",
+       OomphLibError("Wall unit normal fct has not been set",
+                     "FluidInterfaceBoundingElement::wall_unit_normal()",
                      OOMPH_EXCEPTION_LOCATION);
      }
+#endif
    }
   
-  ///\short The geometric data of the parent element will be included as 
+  ///\short The geometric data of the parent element is included as 
   ///external data and so a (bulk) node update must take place after
   ///the variation of any of this external data
   inline void update_in_external_fd(const unsigned &i) 
-   {this->node_update();}
-
+  {
+   //Update the bulk element
+   bulk_element_pt()->node_update();
+  }
+  
   ///\short The only external data are these geometric data so 
   ///We can omit the reset function (relying on the next update
   //function to take care of the remesh)
-  inline void reset_in_external_fd(const unsigned &i) { }
-
-  ///\short We require a final node update after all finite differencing
-  inline void reset_after_external_fd() {this->node_update();}
-
-
+  inline void reset_in_external_fd(const unsigned &i) {}
+  
+  /// \short We require a final node update in the bulk element
+  /// after all finite differencing
+  inline void reset_after_external_fd() 
+  {
+   //Update the bulk element
+   bulk_element_pt()->node_update();
+  }
+  
    public:
   
-  ///Constructor, set sensible defaults
-  FluidInterfaceEdgeElement() : Wall_normal_pt(0), 
-   Wall_normal_fct_pt(0), Contact_angle_pt(0),
-   Ca_pt(0), Contact_angle(0) { } 
+  ///Constructor
+   FluidInterfaceBoundingElement() :
+   Wall_unit_normal_fct_pt(0), Contact_angle_pt(0),
+   Ca_pt(0), Contact_angle_flag(0) { } 
   
-  /// Access function: Pointer to wall normal function
-  WallNormalFctPt &wall_normal_fct_pt() {return Wall_normal_fct_pt;}
+  /// Access function: Pointer to wall unit normal function
+  WallUnitNormalFctPt &wall_unit_normal_fct_pt() 
+   {return Wall_unit_normal_fct_pt;}
   
-  /// Access function: Pointer to wall normal function. Const version
-  WallNormalFctPt wall_normal_fct_pt() const {return Wall_normal_fct_pt;}
+  /// Access function: Pointer to wall unit normal function. Const version
+  WallUnitNormalFctPt wall_unit_normal_fct_pt() const 
+  {return Wall_unit_normal_fct_pt;}
   
-  ///Access function for the pointer to the wall normal
-  Vector<double>* &wall_normal_pt() {return Wall_normal_pt;}
+  ///Access for nodal index at which the velocity components are stored
+  Vector<unsigned> &u_index_interface_boundary() 
+   {
+    return U_index_interface_boundary;
+   }
   
-  ///Access for U_index
-  Vector<unsigned> &u_index_interface_edge() {return U_index_interface_edge;}
-  
-  /// Set a pointer to the desired contact angle
+  /// \short Set a pointer to the desired contact angle. Optional boolean
+  /// (defaults to true)
+  /// 
+  /// hierher: Andrew Surely we want weak imposition as default?!
+  ///
+  /// chooses strong imposition via hijacking (true) or weak imposition
+  /// via addition to momentum equation (false).
   void set_contact_angle(double* const &angle_pt, 
                          const bool &strong=true);
   
-  /// Access function to the prescribed volume fluid 
+  /// Access function to the pointer specifying the prescribed contact angle
   double*& contact_angle_pt() {return Contact_angle_pt;}
   
-  /// Access function to the capillary number
+  /// Access function to the pointer specifying the capillary number
   double* &ca_pt() {return Ca_pt;}
   
   /// Return the value of the capillary number
-  double ca() {if(Ca_pt) {return *Ca_pt;} else {return 1.0;}}
+  double ca() 
+  {
+#ifdef PARANOID
+   if(Ca_pt!=0)
+    {
+#endif
+     return *Ca_pt;
+#ifdef PARANOID
+    }
+   else
+    {
+     throw 
+       OomphLibError("Capillary number has not been set",
+                     "FluidInterfaceBoundingElement::ca()",
+                     OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+  }
   
+
   /// Return value of the contact angle
   double &contact_angle()
    {
@@ -175,10 +198,9 @@ class FluidInterfaceEdgeElement : public virtual FaceElement
      {
       std::string error_message = "Contact angle not set\n";
       error_message += 
-       "Please use FluidInterfaceEdgeElement::set_contact_angle()\n";
-
+       "Please use FluidInterfaceBoundingElement::set_contact_angle()\n";
       throw OomphLibError(error_message,
-                          "FluidInterfaceEdgeElement::contact_angle()",
+                          "FluidInterfaceBoundingElement::contact_angle()",
                           OOMPH_EXCEPTION_LOCATION);
      }
 #endif
@@ -187,45 +209,96 @@ class FluidInterfaceEdgeElement : public virtual FaceElement
   
   /// Calculate the residuals
   void fill_in_contribution_to_residuals(Vector<double> &residuals)
-   {
-    //Add the residual contributions using a dummy matrix
-    fill_in_generic_residual_contribution_contact_edge(
-     residuals,GeneralisedElement::Dummy_matrix,0);
-   }
+  {
+   //Add the residual contributions using a dummy matrix
+   fill_in_generic_residual_contribution_interface_boundary(
+    residuals,GeneralisedElement::Dummy_matrix,0);
+  }
   
   /// Calculate the generic residuals contribution
-  virtual void fill_in_generic_residual_contribution_contact_edge(
+  virtual void fill_in_generic_residual_contribution_interface_boundary(
    Vector<double> &residuals,  DenseMatrix<double> &jacobian, 
    unsigned flag)=0;
+
+
+  /// \short Empty helper function to calculate the additional contributions
+  /// arising from the node update strategy to the Jacobian within the 
+  /// integration loop. This will be overloaded by elements that require 
+  /// contributions to their underlying equations from boundary integrals.  
+  /// The shape functions, their derivatives w.r.t. to the local coordinates, 
+  /// the unit normal and integral weight are passed in so that they do not 
+  /// have to be recalculated.
+  virtual void add_additional_residual_contributions_interface_boundary(
+   Vector<double> &residuals, 
+   DenseMatrix<double> &jacobian,
+   const unsigned &flag,
+   const Shape &psif,
+   const DShape &dpsifds,
+   const Vector<double> &interpolated_n, 
+   const double &W) {}
+
   
-  //Update the parent element when updating the nodes locally
-  void node_update()
-   {//Update the parent element
-    bulk_element_pt()->node_update();
-   }
+// hierher: Andrew: have moved this directly into actions_before/after_fd
+// which appeared the only fct to call this. Not obvious that
+// bulk nodes should be updated automatically in any other context
+// Please check and then delete
+  /* //Update the parent element when updating the nodes locally */
+  /* void node_update() */
+  /* {//Update the parent element */
+  /*  bulk_element_pt()->node_update(); */
+  /*  } */
   
+
   ///Overload the output function
   void output(std::ostream &outfile) {FiniteElement::output(outfile);}
   
-  ///Output function: x,y,[z],u,v,[w],p in tecplot format
+  ///Output function
   void output(std::ostream &outfile, const unsigned &n_plot)
    {FiniteElement::output(outfile,n_plot);}
   
   ///Overload the C-style output function
   void output(FILE* file_pt) {FiniteElement::output(file_pt);}
   
-  ///C-style Output function: x,y,[z],u,v,[w],p in tecplot format
+  ///C-style Output function
   void output(FILE* file_pt, const unsigned &n_plot)
    {FiniteElement::output(file_pt,n_plot);}
   
  }; 
 
 
+
 //==========================================================================
-///Specialisation of the edge constraint to a point
+///Specialisation of the interface boundary constraint to a point
 //========================================================================== 
-class PointFluidInterfaceEdgeElement : 
- public FluidInterfaceEdgeElement
+ class PointFluidInterfaceBoundingElement : 
+ public FluidInterfaceBoundingElement
+ {
+   protected:
+  
+  /// \short Overload the helper function to calculate the residuals and 
+  /// (if flag==1) the Jacobian -- this function only deals with
+  /// the part of the Jacobian that can be handled generically. 
+  /// Specific additional contributions may be provided in
+  /// add_additional_residual_contributions_interface_boundary(...)
+  void fill_in_generic_residual_contribution_interface_boundary(
+   Vector<double> &residuals, 
+   DenseMatrix<double> &jacobian, 
+   unsigned flag);
+  
+   public:
+  
+  /// Constructor
+   PointFluidInterfaceBoundingElement(): 
+  FluidInterfaceBoundingElement() {}
+  
+};
+
+
+//==========================================================================
+///Specialisation of the interface boundary constraint to a line
+//========================================================================== 
+ class LineFluidInterfaceBoundingElement : 
+ public FluidInterfaceBoundingElement
  {
    protected:
   
@@ -233,288 +306,267 @@ class PointFluidInterfaceEdgeElement :
   /// (if flag==true) the Jacobian -- this function only deals with
   /// the part of the Jacobian that can be handled generically. 
   /// Specific additional contributions may be provided in
-  /// add_additional_residuals_contributions(...)
-  void fill_in_generic_residual_contribution_contact_edge(
-   Vector<double> &residuals, 
-   DenseMatrix<double> &jacobian, 
-   unsigned flag);
- 
-  /// \short Helper function to calculate the additional contributions
-  /// to the jacobian. This will be overloaded by elements that
-  /// require contributions to their underlying equations from surface
-  /// integrals. The only example at the moment are elements that
-  /// use the equations of elasticity to handle the deformation of the
-  /// bulk elements. The shape functions, normal, integral weight,
-  /// and jacobian are passed so that they do not have to be recalculated.
-  virtual void add_additional_residual_contributions(
-   Vector<double> &residuals, DenseMatrix<double> &jacobian,
-   const unsigned &flag) {}
-  
-public:
-
- /// Constructor, set the default values of the booleans and pointers (null)
- PointFluidInterfaceEdgeElement(): 
-  FluidInterfaceEdgeElement() {}
-};
-
-
-//==========================================================================
-///Specialisation of the edge constraint to a line
-//========================================================================== 
-class LineFluidInterfaceEdgeElement : 
- public FluidInterfaceEdgeElement
- {
-   protected:
-  
-  /// \short Overload the helper function to calculate the residuals and 
-  /// (if flag==true) the Jacobian -- this function only deals with
-  /// the part of the Jacobian that can be handled generically. 
-  /// Specific additional contributions may be provided in
-  /// add_additional_residuals_contributions
-  void fill_in_generic_residual_contribution_contact_edge(
+  /// add_additional_residual_contributions_interface_boundary()
+  void fill_in_generic_residual_contribution_interface_boundary(
    Vector<double> &residuals, 
    DenseMatrix<double> &jacobian, 
    unsigned flag);
   
-  /// \short Helper function to calculate the additional contributions
-  /// to the jacobian. This will be overloaded by elements that
-  /// require contributions to their underlying equations from surface
-  /// integrals. The only example at the moment are elements that
-  /// use the equations of elasticity to handle the deformation of the
-  /// bulk elements. The shape functions, normal, integral weight,
-  /// and jacobian are passed so that they do not have to be recalculated.
-  virtual void add_additional_residual_contributions(
-   Vector<double> &residuals, DenseMatrix<double> &jacobian,
-   const unsigned &flag,const Shape &psif,
-   const DShape &dpsifds,
-   const Vector<double> &interpolated_n, const double &W) {}
-  
 public:
+  
+  /// Constructor
+   LineFluidInterfaceBoundingElement(): 
+  FluidInterfaceBoundingElement() {}
+  
+ };
 
- /// Constructor, set the default values of the booleans and pointers (null)
- LineFluidInterfaceEdgeElement(): 
-  FluidInterfaceEdgeElement() {}
-};
 
 
 
 //=====================================================================
-///Spine version of the PointInterfaceEdgeElement
+///Spine version of the PointFluidInterfaceBoundingElement
 //===================================================================== 
-template<class ELEMENT>
-class SpinePointFluidInterfaceEdgeElement : 
-public Hijacked< SpineElement<FaceGeometry<FaceGeometry<ELEMENT> > > >,
-public PointFluidInterfaceEdgeElement
-                                       
-{
+ template<class ELEMENT>
+  class SpinePointFluidInterfaceBoundingElement : 
+ public Hijacked< SpineElement<FaceGeometry<FaceGeometry<ELEMENT> > > >,
+  public PointFluidInterfaceBoundingElement
+   
+  {
   public:
  
- SpinePointFluidInterfaceEdgeElement() : 
-  Hijacked<SpineElement<FaceGeometry<FaceGeometry<ELEMENT> > > >(),
-  PointFluidInterfaceEdgeElement() {}
 
+ /// Constructor
+ SpinePointFluidInterfaceBoundingElement() : 
+ Hijacked<SpineElement<FaceGeometry<FaceGeometry<ELEMENT> > > >(),
+  PointFluidInterfaceBoundingElement() {}
+ 
  /// Overload the output function
  void output(std::ostream &outfile) {FiniteElement::output(outfile);}
-
+ 
  /// Output the element
  void output(std::ostream &outfile, const unsigned &n_plot)
-  {FluidInterfaceEdgeElement::output(outfile,n_plot);}
-
+ {FluidInterfaceBoundingElement::output(outfile,n_plot);}
+ 
  ///Overload the C-style output function
  void output(FILE* file_pt) {FiniteElement::output(file_pt);}
-
- ///C-style Output function: x,y,[z],u,v,[w],p in tecplot format
+ 
+ ///C-style Output function
  void output(FILE* file_pt, const unsigned &n_plot)
-  {FluidInterfaceEdgeElement::output(file_pt,n_plot);}
-
- /// Calculate the jacobian
+ {FluidInterfaceBoundingElement::output(file_pt,n_plot);}
+ 
+ /// Calculate the elemental residual vector and the Jacobian
  void fill_in_contribution_to_jacobian(Vector<double> &residuals, 
-                                   DenseMatrix<double> &jacobian)
+                                       DenseMatrix<double> &jacobian)
+ {
+  //Call the generic routine with the flag set to 1
+  this->fill_in_generic_residual_contribution_interface_boundary(residuals,
+                                                                 jacobian,1);
+  //Call generic FD routine for the external data
+  this->fill_in_jacobian_from_external_by_fd(jacobian);
+  
+  //Call the generic routine to handle the spine variables
+  this->fill_in_jacobian_from_geometric_data(jacobian);
+ }
+ 
+ /// \short Return local equation number associated with the kinematic
+ /// constraint for local node n
+ int kinematic_local_eqn(const unsigned &n) 
+ {return this->spine_local_eqn(n);}
+ 
+  }; 
+
+ 
+//=========================================================================
+/// Pseudo-elasticity version of the PointFluidInterfaceBoundingElement
+//========================================================================
+ template<class ELEMENT>
+  class ElasticPointFluidInterfaceBoundingElement : 
+ public  FaceGeometry<FaceGeometry<ELEMENT> > ,
+  public PointFluidInterfaceBoundingElement, public virtual SolidFiniteElement
+  
+ {
+   public:
+  
+  
+  /// \short Specify the value of nodal zeta from the face geometry
+  /// The "global" intrinsic coordinate of the element when
+  /// viewed as part of a geometric object should be given by
+  /// the FaceElement representation, by default
+  double zeta_nodal(const unsigned &n, const unsigned &k,           
+                   const unsigned &i) const 
+  {return FaceElement::zeta_nodal(n,k,i);}     
+  
+  
+  /// Constructor
+   ElasticPointFluidInterfaceBoundingElement() : 
+  FaceGeometry<FaceGeometry<ELEMENT> >(),
+   PointFluidInterfaceBoundingElement() {}
+  
+  /// Overload the output function
+  void output(std::ostream &outfile) {FiniteElement::output(outfile);}
+  
+  /// Output the element
+  void output(std::ostream &outfile, const unsigned &n_plot)
+  {FluidInterfaceBoundingElement::output(outfile,n_plot);}
+  
+  ///Overload the C-style output function
+  void output(FILE* file_pt) {FiniteElement::output(file_pt);}
+  
+  ///C-style Output function
+  void output(FILE* file_pt, const unsigned &n_plot)
+  {FluidInterfaceBoundingElement::output(file_pt,n_plot);}
+  
+  /// Calculate the element's residual vector and Jacobian
+  void fill_in_contribution_to_jacobian(Vector<double> &residuals, 
+                                        DenseMatrix<double> &jacobian)
   {
    //Call the generic routine with the flag set to 1
-   this->fill_in_generic_residual_contribution_contact_edge(residuals,
+   fill_in_generic_residual_contribution_interface_boundary(residuals,
                                                             jacobian,1);
-   //Call generic FD routine for the externals
+   //Call the generic FD routine to get external data
    this->fill_in_jacobian_from_external_by_fd(jacobian);
-   //Call the generic routine to handle the spine variables
-   this->fill_in_jacobian_from_geometric_data(jacobian);
- }
-
- int kinematic_local_eqn(const unsigned &n) 
-  {return this->spine_local_eqn(n);}
-
-}; 
+   
+   //Call the generic finite difference routine to handle the solid variables
+   this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
+  }
+  
+  /// \short Return local eqn number of the kinematic boundary condition 
+  /// associated with local node n.
+  int kinematic_local_eqn(const unsigned &n) 
+  {
+   // hierher: Andrew are we sure that the kinematic constraint is always
+   // stored at that entry or should we use Amine's more general
+   // machinery? 
+   return this->nodal_local_eqn(n,Nbulk_value[n]);
+  }
+  
+ }; 
+ 
 
 
 //=========================================================================
-/// Elastic free surface stuff
+/// Spine version of the LineFluidInterfaceBoundingElement
 //========================================================================
 template<class ELEMENT>
-class ElasticPointFluidInterfaceEdgeElement : 
-public  FaceGeometry<FaceGeometry<ELEMENT> > ,
-public PointFluidInterfaceEdgeElement, public virtual SolidFiniteElement
-
-{
-  public:
-
-
- /// Specify the value of nodal zeta from the face geometry
- /// \short The "global" intrinsic coordinate of the element when
- /// viewed as part of a geometric object should be given by
- /// the FaceElement representation, by default
- double zeta_nodal(const unsigned &n, const unsigned &k,           
-                          const unsigned &i) const 
-  {return FaceElement::zeta_nodal(n,k,i);}     
-
- 
- ElasticPointFluidInterfaceEdgeElement() : 
-  FaceGeometry<FaceGeometry<ELEMENT> >(),
-  PointFluidInterfaceEdgeElement() {}
-
- /// Overload the output function
- void output(std::ostream &outfile) {FiniteElement::output(outfile);}
-
- /// Output the element
- void output(std::ostream &outfile, const unsigned &n_plot)
-  {FluidInterfaceEdgeElement::output(outfile,n_plot);}
-
- ///Overload the C-style output function
- void output(FILE* file_pt) {FiniteElement::output(file_pt);}
-
- ///C-style Output function: x,y,[z],u,v,[w],p in tecplot format
- void output(FILE* file_pt, const unsigned &n_plot)
-  {FluidInterfaceEdgeElement::output(file_pt,n_plot);}
-
- /// Calculate the jacobian
- void fill_in_contribution_to_jacobian(Vector<double> &residuals, 
-                                   DenseMatrix<double> &jacobian)
-  {
-   //Call the generic routine with the flag set to 1
-   fill_in_generic_residual_contribution_contact_edge(residuals,jacobian,1);
-   //Call the generic FD routine to get externals
-   this->fill_in_jacobian_from_external_by_fd(jacobian);
-   //Call the generic finite difference routine to handle the solid variables
-   this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
- }
-
- int kinematic_local_eqn(const unsigned &n) 
-  {return this->nodal_local_eqn(n,Nbulk_value[n]);}
-
-}; 
-
-
-
-template<class ELEMENT>
-class SpineLineFluidInterfaceEdgeElement : public 
+class SpineLineFluidInterfaceBoundingElement : public 
  Hijacked<SpineElement<FaceGeometry<FaceGeometry<ELEMENT> > > >,
- public LineFluidInterfaceEdgeElement
+ public LineFluidInterfaceBoundingElement
                                        
 {
   public:
  
- SpineLineFluidInterfaceEdgeElement() : 
-  Hijacked<SpineElement<FaceGeometry<FaceGeometry<ELEMENT> > > >(),
-  LineFluidInterfaceEdgeElement() {}
-
+ /// Constructor
+  SpineLineFluidInterfaceBoundingElement() : 
+ Hijacked<SpineElement<FaceGeometry<FaceGeometry<ELEMENT> > > >(),
+  LineFluidInterfaceBoundingElement() {}
+ 
  /// Overload the output function
  void output(std::ostream &outfile) {FiniteElement::output(outfile);}
-
+ 
  /// Output the element
  void output(std::ostream &outfile, const unsigned &n_plot)
-  {FluidInterfaceEdgeElement::output(outfile,n_plot);}
-
+ {FluidInterfaceBoundingElement::output(outfile,n_plot);}
+ 
  ///Overload the C-style output function
  void output(FILE* file_pt) {FiniteElement::output(file_pt);}
-
- ///C-style Output function: x,y,[z],u,v,[w],p in tecplot format
+ 
+ ///C-style Output function
  void output(FILE* file_pt, const unsigned &n_plot)
-  {FluidInterfaceEdgeElement::output(file_pt,n_plot);}
-
+ {FluidInterfaceBoundingElement::output(file_pt,n_plot);}
+ 
+ 
  /// Calculate the jacobian
  void fill_in_contribution_to_jacobian(Vector<double> &residuals, 
-                                   DenseMatrix<double> &jacobian)
-  {
-   //Call the generic routine with the flag set to 1
-   this->fill_in_generic_residual_contribution_contact_edge(residuals,
-                                                            jacobian,1);
-   //Call generic FD routine for the externals
-   this->fill_in_jacobian_from_external_by_fd(jacobian);
-   //Call the generic routine to handle the spine variables
-   this->fill_in_jacobian_from_geometric_data(jacobian);
-  }
+                                       DenseMatrix<double> &jacobian)
+ {
+  //Call the generic routine with the flag set to 1
+  this->fill_in_generic_residual_contribution_interface_boundary(residuals,
+                                                                 jacobian,1);
+  //Call generic FD routine for the external data
+  this->fill_in_jacobian_from_external_by_fd(jacobian);
+  
+  //Call the generic routine to handle the spine variables
+  this->fill_in_jacobian_from_geometric_data(jacobian);
+ }
+ 
 
+ /// Local eqn number of the kinematic bc associated with local node n
  int kinematic_local_eqn(const unsigned &n) 
-  {return this->spine_local_eqn(n);}
-
+ {
+  // hierher: Andrew: Are we sure that the kinematic constraint is always
+  // stored at that entry or should we use Amine's more general
+  // machinery? 
+  return this->spine_local_eqn(n);
+ }
+ 
 }; 
 
 
 //=========================================================================
-/// Elastic free surface stuff
+/// Pseudo-elasticity version of the LineFluidInterfaceBoundingElement
 //========================================================================
 template<class ELEMENT>
-class ElasticLineFluidInterfaceEdgeElement : 
+ class ElasticLineFluidInterfaceBoundingElement : 
 public  FaceGeometry<FaceGeometry<ELEMENT> > ,
-public LineFluidInterfaceEdgeElement, public virtual SolidFiniteElement
-
+ public LineFluidInterfaceBoundingElement, public virtual SolidFiniteElement
+ 
 {
   public:
  
- ElasticLineFluidInterfaceEdgeElement() : 
-  FaceGeometry<FaceGeometry<ELEMENT> >(),
-  LineFluidInterfaceEdgeElement() {}
-
- /// Specify the value of nodal zeta from the face geometry
- /// \short The "global" intrinsic coordinate of the element when
+ /// Constructor
+  ElasticLineFluidInterfaceBoundingElement() : 
+ FaceGeometry<FaceGeometry<ELEMENT> >(),
+  LineFluidInterfaceBoundingElement() {}
+ 
+ /// \short Specify the value of nodal zeta from the face geometry
+ /// The "global" intrinsic coordinate of the element when
  /// viewed as part of a geometric object should be given by
  /// the FaceElement representation, by default
  double zeta_nodal(const unsigned &n, const unsigned &k,           
                           const unsigned &i) const 
   {return FaceElement::zeta_nodal(n,k,i);}     
 
-
+ 
  /// Overload the output function
  void output(std::ostream &outfile) {FiniteElement::output(outfile);}
-
+ 
  /// Output the element
  void output(std::ostream &outfile, const unsigned &n_plot)
-  {
-   FluidInterfaceEdgeElement::output(outfile,n_plot);
-   //FaceGeometry<FaceGeometry<ELEMENT> >::output(outfile,n_plot);
-  }
-
+ {
+  FluidInterfaceBoundingElement::output(outfile,n_plot);
+ }
+ 
  ///Overload the C-style output function
  void output(FILE* file_pt) {FiniteElement::output(file_pt);}
-
- ///C-style Output function: x,y,[z],u,v,[w],p in tecplot format
+ 
+ ///C-style Output function
  void output(FILE* file_pt, const unsigned &n_plot)
-  {FluidInterfaceEdgeElement::output(file_pt,n_plot);}
-
- /// Calculate the jacobian
+ {FluidInterfaceBoundingElement::output(file_pt,n_plot);}
+ 
+ /// Calculate the elemental residual vector and Jacobian
  void fill_in_contribution_to_jacobian(Vector<double> &residuals, 
-                                   DenseMatrix<double> &jacobian)
-  {
-   //Call the generic routine with the flag set to 1
-   fill_in_generic_residual_contribution_contact_edge(residuals,jacobian,1);
-   //Call the generic FD routine to get externals
-   this->fill_in_jacobian_from_external_by_fd(jacobian);
-   //Call the generic finite difference routine to handle the solid variables
-   this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
+                                       DenseMatrix<double> &jacobian)
+ {
+  //Call the generic routine with the flag set to 1
+  fill_in_generic_residual_contribution_interface_boundary(residuals,jacobian,1);
+  
+  //Call the generic FD routine to get externals
+  this->fill_in_jacobian_from_external_by_fd(jacobian);
+
+  //Call the generic finite difference routine to handle the solid variables
+  this->fill_in_jacobian_from_solid_position_by_fd(jacobian);
  }
-
+ 
+ /// Local eqn number of kinematic bc associated with local node n
  int kinematic_local_eqn(const unsigned &n) 
-  {return this->nodal_local_eqn(n,Nbulk_value[n]);}
-
+ {
+  // hierher: Andrew: Are we sure that the kinematic constraint is always
+  // stored at that entry or should we use Amine's more general
+  // machinery? 
+  return this->nodal_local_eqn(n,Nbulk_value[n]);
+ }
+ 
 }; 
-
-// hierher ...yet to be tidied/assessed until here
-
-
-
-//#########################################################
-//#########################################################
-//#########################################################
-
 
 
 //=======================================================================
@@ -587,12 +639,13 @@ class FluidInterfaceElement : public virtual FaceElement
   DenseMatrix<double> &jacobian, 
   unsigned flag)=0;
  
+
  /// \short Helper function to calculate the additional contributions
  /// to the resisuals and Jacobian that arise from specific node update 
  /// strategies. This is called within the integration loop over the
  /// element (for efficiency) and therefore requires a fairly large
  /// number of input parameters:
- /// - the velocity shape functions and their derivatives .w.r.t.
+ /// - the velocity shape functions and their derivatives w.r.t.
  ///   the local coordinates
  /// - the Eulerian coordinates (whatever they may represent in the 
  ///   specific dimension/geometry: cartesian (x,y,[z]), axisymmetric
@@ -601,7 +654,7 @@ class FluidInterfaceElement : public virtual FaceElement
  /// - the integration weight from the integration scheme 
  /// - the Jacobian of the mapping between the local and global coordinates
  ///   along the element.
- virtual void add_additional_residual_contributions(
+ virtual void add_additional_residual_contributions_interface(
   Vector<double> &residuals, 
   DenseMatrix<double> &jacobian,
   const unsigned &flag,
@@ -617,8 +670,8 @@ public:
  /// Constructor, set the default values of the booleans and pointers (null)
  FluidInterfaceElement():   Pext_data_pt(0) 
   {
-   //Set the capillary number to a default value
-   Ca_pt = &Default_Physical_Constant_Value;
+   // Initialise pointer to capillary number
+   Ca_pt = 0;
    
    //Set the Strouhal number to the default value
    St_pt = &Default_Physical_Constant_Value;
@@ -640,8 +693,26 @@ public:
     residuals,GeneralisedElement::Dummy_matrix,0);
   }
   
+
+
   /// The value of the Capillary number
-  const double& ca() const {return *Ca_pt;}
+  const double& ca() const {
+#ifdef PARANOID
+   if(Ca_pt!=0)
+    {
+#endif
+     return *Ca_pt;
+#ifdef PARANOID
+    }
+   else
+    {
+     throw 
+      OomphLibError("Capillary number has not been set",
+                    "FluidInterfaceElement::ca()",
+                    OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+  }
   
   /// Pointer to the Capillary number
   double*& ca_pt() {return Ca_pt;}
@@ -754,22 +825,23 @@ public:
   }
  
 
- /// Create an edge element
- virtual FluidInterfaceEdgeElement* make_edge_element(const int &face_index)
-  {
-   throw OomphLibError("Virtual function not yet implemented",
-                       "FluidInterfaceElement::make_edge_element()",
-                       OOMPH_EXCEPTION_LOCATION);
-   return 0;
+ /// \short Create a bounding element e.g. to apply a contact angle boundary
+ /// condition
+ virtual FluidInterfaceBoundingElement* make_bounding_element(
+  const int &face_index)
+ {
+  throw OomphLibError("Virtual function not yet implemented",
+                      "FluidInterfaceElement::make_bounding_element()",
+                      OOMPH_EXCEPTION_LOCATION);
+  return 0;
   }
 
 
- // hierher Check this again when contact angle elements 
- // have been cleaned up
-
- /// \short Hijack the kinematic condition at the nodes passed in the vector
+ /// \short Hijack the kinematic condition at the nodes passed in the vector.
+ /// hierher Andrew: So the the argument specifies the local numbers of
+ /// nodes in the associated bulk element? Please check then delete query.
  /// This is required so that contact-angle conditions can be applied
- /// by the FluidInterfaceEdgeElements.
+ /// by the FluidInterfaceBoundingElements.
  virtual void hijack_kinematic_conditions(const Vector<unsigned> 
                                           &bulk_node_number)=0;
  
@@ -792,7 +864,7 @@ class LineFluidInterfaceElement : public FluidInterfaceElement
  /// dynamic boundary conditions -- this function only deals with
  /// the part of the Jacobian that can be handled generically. 
  /// Specific additional contributions may be provided in
- /// add_additional_residuals_contributions(...), to be provided in
+ /// add_additional_residual_contributions_interface(...), to be provided in
  /// any derived class that implements the specific node update
  /// strategy.
  void fill_in_generic_residual_contribution_interface(
@@ -837,28 +909,13 @@ class AxisymmetricFluidInterfaceElement : public FluidInterfaceElement
  /// dynamic boundary conditions -- this function only deals with
  /// the part of the Jacobian that can be handled generically. 
  /// Specific additional contributions may be provided in
- /// add_additional_residuals_contributions(...), to be provided in
+ /// add_additional_residual_contributions_interface(...), to be provided in
  /// any derived class that implements the specific node update
  /// strategy.
  void fill_in_generic_residual_contribution_interface(
   Vector<double> &residuals, 
   DenseMatrix<double> &jacobian, 
   unsigned flag);
- 
-/*  /// \short Helper function to calculate the additional contributions */
-/*  /// to the jacobian. This will be overloaded by elements that */
-/*  /// require contributions to their underlying equations from surface */
-/*  /// integrals. The only example at the moment are elements that */
-/*  /// use the equations of elasticity to handle the deformation of the */
-/*  /// bulk elements. The shape functions, normal, integral weight, */
-/*  /// and jacobian are passed so that they do not have to be recalculated. */
-/*  virtual void add_additional_residual_contributions( */
-/*   Vector<double> &residuals, DenseMatrix<double> &jacobian, */
-/*   const unsigned &flag, */
-/*   const Shape &psif, const DShape &dpsifds, */
-/*   const Vector<double> &interpolated_n,  */
-/*   const double &r, const double &W, */
-/*   const double &J) {} */
   
 public:
 
@@ -874,8 +931,7 @@ public:
   ///Overload the C-style output function
   void output(FILE* file_pt) {FiniteElement::output(file_pt);}
   
-  ///C-style Output function: r,z,u,v,w,p in tecplot format
-  // hierher check that this is true
+  ///C-style Output function
   void output(FILE* file_pt, const unsigned &n_plot);
   
 };
@@ -896,28 +952,13 @@ class SurfaceFluidInterfaceElement : public FluidInterfaceElement
  /// dynamic boundary conditions -- this function only deals with
  /// the part of the Jacobian that can be handled generically. 
  /// Specific additional contributions may be provided in
- /// add_additional_residuals_contributions(...), to be provided in
+ /// add_additional_residuals_contributions_interface(...), to be provided in
  /// any derived class that implements the specific node update
  /// strategy.
  void fill_in_generic_residual_contribution_interface(
   Vector<double> &residuals, 
   DenseMatrix<double> &jacobian, 
   unsigned flag);
- 
-/*  /// \short Helper function to calculate the additional contributions */
-/*  /// to the jacobian. This will be overloaded by elements that */
-/*  /// require contributions to their underlying equations from surface */
-/*  /// integrals. The only example at the moment are elements that */
-/*  /// use the equations of elasticity to handle the deformation of the */
-/*  /// bulk elements. The shape functions, normal, integral weight, */
-/*  /// and jacobian are passed so that they do not have to be recalculated. */
-/*  virtual void add_additional_residual_contributions( */
-/*   Vector<double> &residuals, DenseMatrix<double> &jacobian, */
-/*   const unsigned &flag, */
-/*   const Shape &psif,  */
-/*   const DShape &dpsifds,  */
-/*   const Vector<double> &interpolated_n,  */
-/*   const double &W) {} */
   
 public:
 

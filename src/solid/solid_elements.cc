@@ -920,7 +920,7 @@ void PVDEquationsBase<DIM>::get_principal_stress(
 {
 
  /// Compute contravariant ("upper") 2nd Piola Kirchhoff stress 
- DenseDoubleMatrix sigma(2,2);
+ DenseDoubleMatrix sigma(DIM,DIM);
  get_stress(s,sigma);
 
  // Get covariant base vectors in deformed configuration

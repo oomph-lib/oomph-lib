@@ -81,7 +81,7 @@ namespace oomph
 //=========================================================================
 template<class ELEMENT>
 class SpineVolumeConstraintPointElement : 
- public SpinePointFluidInterfaceEdgeElement<ELEMENT>
+ public SpinePointFluidInterfaceBoundingElement<ELEMENT>
 {
   private:
  
@@ -111,7 +111,7 @@ class SpineVolumeConstraintPointElement :
  ///Constructor, there are no internal values. The pointer to the 
  ///element's (single) spine has to be set manually "from the outside"
  SpineVolumeConstraintPointElement() : 
-  SpinePointFluidInterfaceEdgeElement<ELEMENT>()
+  SpinePointFluidInterfaceBoundingElement<ELEMENT>()
   {
    // Initialise pointer to prescribed volume of fluid
    Volume_pt=0;
@@ -123,9 +123,18 @@ class SpineVolumeConstraintPointElement :
  double* &volume_pt() {return Volume_pt;}
 
  ///Custom overload the additional volume constraint
- void add_additional_residual_contributions(
-  Vector<double> &residuals, DenseMatrix<double> &jacobian,
-  const unsigned &flag) 
+ void add_additional_residual_contributions_interface_boundary(
+   Vector<double> &residuals, 
+   DenseMatrix<double> &jacobian,
+   const unsigned &flag,
+   const Shape &psif,
+   const DShape &dpsifds,
+   const Vector<double> &interpolated_n, 
+   const double &W)
+ // hierher
+// add_additional_residual_contributions(
+//   Vector<double> &residuals, DenseMatrix<double> &jacobian,
+//   const unsigned &flag) 
   {
    //If we have an external pressure, add the final term
    //to the volumetric constraint equation
@@ -315,7 +324,7 @@ protected:
  /// \short Overload the Helper function to calculate the residuals and 
  /// jacobian entries. This particular function ensures that the
  /// additional entries are calculated inside the integration loop
- void add_additional_residual_contributions(
+ void add_additional_residual_contributions_interface(
   Vector<double> &residuals, DenseMatrix<double> &jacobian,
   const unsigned &flag,
   const Shape &psif, const DShape &dpsifds,
@@ -460,7 +469,7 @@ public:
  
  //// \short Overload the making of the edge element to create out
  /// volume constraint edge element
- FluidInterfaceEdgeElement* make_edge_element(const int &face_index)
+ FluidInterfaceBoundingElement* make_bounding_element(const int &face_index)
   {
    //Create a temporary pointer to the appropriate FaceElement
    SpineVolumeConstraintPointElement<ELEMENT> *Temp_pt =
@@ -470,7 +479,7 @@ public:
    this->build_face_element(face_index,Temp_pt);
    
    //Set the index at which the unknowns are stored from the element
-   Temp_pt->u_index_interface_edge() = this->U_index_interface;
+   Temp_pt->u_index_interface_boundary() = this->U_index_interface;
 
    //Set the value of the nbulk_value, the node is not resized
    //in this problem, so it will just be the actual nvalue
@@ -564,7 +573,7 @@ StaticSingleLayerSpineMesh(const unsigned &nx,
   dynamic_cast<INTERFACE_ELEMENT*>(this->Interface_element_pt[0]);
  
  //Now make our edge (point)  element
- Left_point_element_pt  = el_pt->make_edge_element(-1);
+ Left_point_element_pt  = el_pt->make_bounding_element(-1);
  //Add it to the stack
  this->Element_pt.push_back(Left_point_element_pt);
 
@@ -574,7 +583,7 @@ StaticSingleLayerSpineMesh(const unsigned &nx,
   dynamic_cast<INTERFACE_ELEMENT*>(this->Interface_element_pt[this->Nx-1]);
  
  //Now make our edge (point)  element
- Right_point_element_pt  = el_pt->make_edge_element(1);
+ Right_point_element_pt  = el_pt->make_bounding_element(1);
  //Add it to the stack
  this->Element_pt.push_back(Right_point_element_pt);
 }
@@ -626,7 +635,27 @@ namespace Global_Physical_Variables
 
  ///The external pressure
  double Pext = 0.0;
-  
+
+ /// \short Function that specifies the wall unit normal
+ void wall_unit_normal_left_fct(const Vector<double> &x, 
+                                Vector<double> &normal)
+ {
+  normal[0]=-1.0;
+  normal[1]= 0.0;
+
+ }
+
+
+ /// \short Function that specifies the wall unit normal
+ void wall_unit_normal_right_fct(const Vector<double> &x, 
+                                Vector<double> &normal)
+ {
+  normal[0]=1.0;
+  normal[1]=0.0;
+ }
+
+
+
 } // end_of_namespace
 
 //////////////////////////////////////////////////////////////////////
@@ -726,8 +755,8 @@ private:
  Data* External_pressure_data_pt;
 
  ///The wall normal (out of the fluid)
- Vector<double> Wall_normal_left;
- Vector<double> Wall_normal_right;
+// Vector<double> Wall_normal_left;
+// Vector<double> Wall_normal_right;
 
 }; // end of problem class
 
@@ -737,11 +766,11 @@ private:
 template<class ELEMENT, class INTERFACE_ELEMENT>
 ConvectionProblem<ELEMENT,INTERFACE_ELEMENT>::ConvectionProblem()
 {
- //Set the wall normal values
- Wall_normal_left.resize(2);
- Wall_normal_left[0] = -1.0; Wall_normal_left[1] = 0.0;
- Wall_normal_right.resize(2);
- Wall_normal_right[0] = 1.0; Wall_normal_right[1] = 0.0;
+ // //Set the wall normal values
+ // Wall_normal_left.resize(2);
+ // Wall_normal_left[0] = -1.0; Wall_normal_left[1] = 0.0;
+ // Wall_normal_right.resize(2);
+ // Wall_normal_right[0] = 1.0; Wall_normal_right[1] = 0.0;
 
  //Allocate a timestepper
  add_time_stepper_pt(new BDF<2>);
@@ -915,24 +944,34 @@ ConvectionProblem<ELEMENT,INTERFACE_ELEMENT>::ConvectionProblem()
 
  // Set the contact angle boundary condition for the leftmost element
  // (pass pointer to double that specifies the contact angle)
- dynamic_cast<FluidInterfaceEdgeElement*>(
+ dynamic_cast<FluidInterfaceBoundingElement*>(
   mesh_pt()->left_point_element_pt())->
   set_contact_angle(&Global_Physical_Variables::Angle);
  
- dynamic_cast<FluidInterfaceEdgeElement*>(
-  mesh_pt()->left_point_element_pt())->wall_normal_pt() = 
-  &Wall_normal_left; 
+ // Set the Capillary number
+ dynamic_cast<FluidInterfaceBoundingElement*>(
+  mesh_pt()->left_point_element_pt())->ca_pt() = 
+  &Global_Physical_Variables::Capillary;
+
+ dynamic_cast<FluidInterfaceBoundingElement*>(
+  mesh_pt()->left_point_element_pt())->wall_unit_normal_fct_pt() = 
+  &Global_Physical_Variables::wall_unit_normal_left_fct; 
 
 
  // Set the contact angle boundary condition for the rightmost element
  // (pass pointer to double that specifies the contact angle)
- dynamic_cast<FluidInterfaceEdgeElement*>(
+ dynamic_cast<FluidInterfaceBoundingElement*>(
   mesh_pt()->right_point_element_pt())->
   set_contact_angle(&Global_Physical_Variables::Angle);
  
- dynamic_cast<FluidInterfaceEdgeElement*>(
-  mesh_pt()->right_point_element_pt())->wall_normal_pt() = 
-  &Wall_normal_right; 
+ // Set the Capillary number
+ dynamic_cast<FluidInterfaceBoundingElement*>(
+  mesh_pt()->right_point_element_pt())->ca_pt() = 
+  &Global_Physical_Variables::Capillary;
+ 
+ dynamic_cast<FluidInterfaceBoundingElement*>(
+  mesh_pt()->right_point_element_pt())->wall_unit_normal_fct_pt() = 
+    &Global_Physical_Variables::wall_unit_normal_right_fct; 
 
 
  // Setup equation numbering scheme

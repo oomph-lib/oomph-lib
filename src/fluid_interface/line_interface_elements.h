@@ -71,9 +71,8 @@ public virtual LineFluidInterfaceElement
   {return this->spine_local_eqn(n);}
 
 
- // hierher clarify this
  /// \short Hijacking the kinematic condition corresponds to hijacking the
- /// spine heights.
+ /// spine heights. hierher Andrew please elborate
  void hijack_kinematic_conditions(const Vector<unsigned> &bulk_node_number)
  {
   //Loop over all the passed nodes
@@ -125,7 +124,7 @@ public virtual LineFluidInterfaceElement
  /// \short Helper function to calculate the additional contributions
  /// to be added at each integration point. Empty as there's nothing
  /// to be done
- void add_additional_residual_contributions(
+ void add_additional_residual_contributions_interface(
   Vector<double> &residuals, 
   DenseMatrix<double> &jacobian,
   const unsigned &flag,
@@ -151,21 +150,22 @@ public virtual LineFluidInterfaceElement
   {LineFluidInterfaceElement::output(file_pt,n_plot);}
 
 
- /// \short Create an "edge" element (here actually a 1D point element
- /// of type SpinePointFluidInterfaceEdgeElement<ELEMENT> that allows
+ /// \short Create an "bounding" element (here actually a 1D point element
+ /// of type SpinePointFluidInterfaceBoundingElement<ELEMENT> that allows
  /// the application of a contact angle boundary condition on the
  /// the specified face.
- virtual FluidInterfaceEdgeElement* make_edge_element(const int &face_index)
+ virtual FluidInterfaceBoundingElement* make_bounding_element(
+  const int &face_index)
  {
   //Create a temporary pointer to the appropriate FaceElement
-  SpinePointFluidInterfaceEdgeElement<ELEMENT> *face_el_pt = 
-   new SpinePointFluidInterfaceEdgeElement<ELEMENT>;
+  SpinePointFluidInterfaceBoundingElement<ELEMENT> *face_el_pt = 
+   new SpinePointFluidInterfaceBoundingElement<ELEMENT>;
   
   //Attach the geometrical information to the new element
   this->build_face_element(face_index,face_el_pt);
   
   //Set the index at which the unknowns are stored from the element
-  face_el_pt->u_index_interface_edge() = this->U_index_interface;
+  face_el_pt->u_index_interface_boundary() = this->U_index_interface;
   
   //Set the value of the nbulk_value, the node is not resized
   //in this problem, so it will just be the actual nvalue
@@ -241,21 +241,21 @@ public LineFluidInterfaceElement
  } 
 
 
- /// hierher clarify this
+ /// hierher Andrew please elaborate
  void hijack_kinematic_conditions(const Vector<unsigned> &bulk_node_number)
   {
-   
    //Loop over all the passed nodes
    for(Vector<unsigned>::const_iterator it=bulk_node_number.begin();
        it!=bulk_node_number.end();++it)
     {
      //Make sure that we delete the returned value
-     delete this->hijack_nodal_value(*it,Nbulk_value[*it]);    // hierher: change to Amine's generalisation?
+     // hierher: Andrew: Change this to Amine's generalisation?
+     // If so, grep for Nbulk_value in entire directory
+     delete this->hijack_nodal_value(*it,Nbulk_value[*it]);  
     }
   }
  
   public:
-
 
  /// \short The "global" intrinsic coordinate of the element when
  /// viewed as part of a geometric object should be given by
@@ -306,9 +306,6 @@ public LineFluidInterfaceElement
    // additional values.
    add_additional_values(additional_data_values,id);
    
-// hierher kill
-/*    //Resize the data arrays accordingly  */
-/*    resize_nodes(additional_data_values); */
   }
   
  /// Return the Lagrange multiplier at local node j
@@ -317,8 +314,6 @@ public LineFluidInterfaceElement
    // Get the index of the nodal value associated with Lagrange multiplier
    unsigned lagr_index=dynamic_cast<BoundaryNodeBase*>(node_pt(j))->
     index_of_first_value_assigned_by_face_element(Id);
-   
-   // hierher Andrew: Why dereference the value_pt?
    return *node_pt(j)->value_pt(lagr_index); 
   }
  
@@ -351,7 +346,7 @@ public LineFluidInterfaceElement
  /// \short Helper function to calculate the additional contributions
  /// to be added at each integration point. This deals with 
  /// Lagrange multiplier contribution
- void add_additional_residual_contributions(
+ void add_additional_residual_contributions_interface(
   Vector<double> &residuals, 
   DenseMatrix<double> &jacobian,
   const unsigned &flag,
@@ -413,21 +408,22 @@ public LineFluidInterfaceElement
  }
  
  
- /// \short Create an "edge" element (here actually a 1D point element
- /// of type ElasticPointFluidInterfaceEdgeElement<ELEMENT> that allows
+ /// \short Create an "bounding" element (here actually a 1D point element
+ /// of type ElasticPointFluidInterfaceBoundingElement<ELEMENT> that allows
  /// the application of a contact angle boundary condition on the
  /// the specified face. 
- virtual FluidInterfaceEdgeElement* make_edge_element(const int &face_index)
+ virtual FluidInterfaceBoundingElement* make_bounding_element(
+  const int &face_index)
  {
   //Create a temporary pointer to the appropriate FaceElement
-  ElasticPointFluidInterfaceEdgeElement<ELEMENT> *face_el_pt = 
-   new ElasticPointFluidInterfaceEdgeElement<ELEMENT>;
+  ElasticPointFluidInterfaceBoundingElement<ELEMENT> *face_el_pt = 
+   new ElasticPointFluidInterfaceBoundingElement<ELEMENT>;
   
   //Attach the geometrical information to the new element
   this->build_face_element(face_index,face_el_pt);
   
   //Set the index at which the unknowns are stored from the element
-  face_el_pt->u_index_interface_edge() = this->U_index_interface;
+  face_el_pt->u_index_interface_boundary() = this->U_index_interface;
   
   //Set the value of the nbulk_value, the node is not resized
   //in this problem, so it will just be the actual nvalue - 1

@@ -52,6 +52,16 @@ namespace Global_Physical_Variables
  /// Pseudo-solid Young's modulus
  double E=2.2;
 
+ ///Direction of the wall normal vector
+ Vector<double> Wall_normal;
+
+ /// \short Function that specifies the wall unit normal
+ void wall_unit_normal_fct(const Vector<double> &x, 
+                      Vector<double> &normal)
+ {
+  normal=Wall_normal;
+ }
+
 } // end_of_namespace
 
 
@@ -806,7 +816,7 @@ public:
    //Make the edge point
    Point_element_pt = 
     dynamic_cast<FixedVolumeElasticLineFluidInterfaceElement<ELEMENT>*>
-    (Free_surface_pt[Nfree-1])->make_edge_element(1);
+    (Free_surface_pt[Nfree-1])->make_bounding_element(1);
 
    //Add it to the stack
    Element_pt.push_back(Point_element_pt);
@@ -890,7 +900,7 @@ public:
 
  double Angle;
 
- Vector<double> Wall_normal;
+ //Vector<double> Wall_normal;
 
  Vector<double> G;
 
@@ -942,8 +952,9 @@ RefineableRotatingCylinderProblem<ELEMENT>::RefineableRotatingCylinderProblem(
                                                Volume(12.0),
                                                Angle(1.57)
 { 
- Wall_normal.resize(2);
- Wall_normal[0] = 1.0; Wall_normal[1] = 0.0;
+ Global_Physical_Variables::Wall_normal.resize(2);
+ Global_Physical_Variables::Wall_normal[0] = 1.0; 
+ Global_Physical_Variables::Wall_normal[1] = 0.0;
 
  G.resize(2);
  G[0] = 0.0; G[1] = -1.0;
@@ -1057,13 +1068,13 @@ void RefineableRotatingCylinderProblem<ELEMENT>::finish_problem_setup()
   }
 
   
-  dynamic_cast<FluidInterfaceEdgeElement*>
+  dynamic_cast<FluidInterfaceBoundingElement*>
    (mesh_pt()->element_pt(mesh_pt()->nelement()-1))->
     set_contact_angle(&Angle);
   
-  dynamic_cast<FluidInterfaceEdgeElement*>
+  dynamic_cast<FluidInterfaceBoundingElement*>
    (mesh_pt()->element_pt(mesh_pt()->nelement()-1))->
-   wall_normal_pt() = &Wall_normal;
+   wall_unit_normal_fct_pt() = &Global_Physical_Variables::wall_unit_normal_fct;
 
   //Pin one pressure
   dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(0))->fix_pressure(0,0.0);

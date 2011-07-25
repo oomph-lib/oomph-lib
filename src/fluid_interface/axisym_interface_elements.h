@@ -71,9 +71,10 @@ namespace oomph
    int kinematic_local_eqn(const unsigned &n) 
    {return this->spine_local_eqn(n);}
    
-   // hierher clarify this
+
    /// \short Hijacking the kinematic condition corresponds to hijacking the
-   /// spine heights.
+   /// spine heights -- used for strong imposition of contact angle condition
+   /// hierher Andrew please elaborate on the argument.
    void hijack_kinematic_conditions(const Vector<unsigned> &bulk_node_number)
    {
     //Loop over all the passed nodes
@@ -121,8 +122,8 @@ namespace oomph
     
     /// \short Helper function to calculate the additional contributions
     /// to be added at each integration point. Empty as there's nothing
-    /// to be done
-    void add_additional_residual_contributions(
+    /// to be done.
+    void add_additional_residual_contributions_interface(
      Vector<double> &residuals, 
      DenseMatrix<double> &jacobian,
      const unsigned &flag,
@@ -143,26 +144,27 @@ namespace oomph
     ///Overload the C-style output function
     void output(FILE* file_pt) {FiniteElement::output(file_pt);}
     
-    ///C-style Output function: x,y,[z],u,v,[w],p in tecplot format
+    ///C-style Output function
     void output(FILE* file_pt, const unsigned &n_plot)
     {AxisymmetricFluidInterfaceElement::output(file_pt,n_plot);}
     
     
-    /// \short Create an "edge" element (here actually a 1D point element
-    /// of type SpinePointFluidInterfaceEdgeElement<ELEMENT> that allows
+    /// \short Create an "bounding" element (here actually a 1D point element
+    /// of type SpinePointFluidInterfaceBoundingElement<ELEMENT>) that allows
     /// the application of a contact angle boundary condition on the
     /// the specified face.
-    virtual FluidInterfaceEdgeElement* make_edge_element(const int& face_index)
+    virtual FluidInterfaceBoundingElement* make_bounding_element(
+     const int& face_index)
     {
      //Create a temporary pointer to the appropriate FaceElement
-     SpinePointFluidInterfaceEdgeElement<ELEMENT> *face_el_pt = 
-      new SpinePointFluidInterfaceEdgeElement<ELEMENT>;
+     SpinePointFluidInterfaceBoundingElement<ELEMENT> *face_el_pt = 
+      new SpinePointFluidInterfaceBoundingElement<ELEMENT>;
      
      //Attach geometric information to the new element
      this->build_face_element(face_index,face_el_pt);
      
      //Set the index at which the unknowns are stored from the element
-     face_el_pt->u_index_interface_edge() = this->U_index_interface;
+     face_el_pt->u_index_interface_boundary() = this->U_index_interface;
      
      //Set the value of the nbulk_value, the node is not resized
      //in this problem, so it will just be the actual nvalue
@@ -236,13 +238,13 @@ namespace oomph
     
     // Return nodal value
     return this->nodal_local_eqn(j,lagr_index);
-
-    //return this->nodal_local_eqn(j,Nbulk_value[j]);} // hierher kill
    }
 
    
    
-   // hierher clarify this
+   /// \short Hijacking the kinematic condition corresponds to hijacking the
+   /// spine heights -- used for strong imposition of contact angle condition
+   /// hierher Andrew please elaborate on the argument.
    void hijack_kinematic_conditions(const Vector<unsigned> &bulk_node_number)
    {
     
@@ -298,16 +300,11 @@ namespace oomph
       //There is one additional values at each node, in this case
       Vector<unsigned> additional_data_values(n_node_face);
       for(unsigned i=0;i<n_node_face;i++) additional_data_values[i] = 1;
-      
 
       // Now add storage for Lagrange multipliers and set the map containing 
       // the position of the first entry of this face element's 
       // additional values.
       add_additional_values(additional_data_values,id);
-      
-      // hierher kill
-      //Resize the data arrays accordingly 
-      //resize_nodes(additional_data_values);
      }
     
 
@@ -317,11 +314,7 @@ namespace oomph
       // Get the index of the nodal value associated with Lagrange multiplier
       unsigned lagr_index=dynamic_cast<BoundaryNodeBase*>(node_pt(j))->
        index_of_first_value_assigned_by_face_element(Id);
-      
-      // hierher Andrew: Why dereference the value_pt?
-      return *node_pt(j)->value_pt(lagr_index); 
-      
-      //return *node_pt(j)->value_pt(Nbulk_value[j]); // hierher generalise
+            return *node_pt(j)->value_pt(lagr_index); 
      }
     
 
@@ -353,8 +346,8 @@ namespace oomph
 
     /// \short Helper function to calculate the additional contributions
     /// to be added at each integration point. This deals with 
-    /// Lagrange multiplier contribution
-    void add_additional_residual_contributions(
+    /// Lagrange multiplier contribution.
+    void add_additional_residual_contributions_interface(
      Vector<double> &residuals,DenseMatrix<double> &jacobian,
      const unsigned &flag,
      const Shape &psif, const DShape &dpsifds,
@@ -412,21 +405,22 @@ namespace oomph
     }
     
 
-    /// \short Create an "edge" element (here actually a 1D point element
-    /// of type ElasticPointFluidInterfaceEdgeElement<ELEMENT> that allows
+    /// \short Create an "bounding" element (here actually a 1D point element
+    /// of type ElasticPointFluidInterfaceBoundingElement<ELEMENT>) that allows
     /// the application of a contact angle boundary condition on the
     /// the specified face. 
-    virtual FluidInterfaceEdgeElement* make_edge_element(const int& face_index)
+    virtual FluidInterfaceBoundingElement* make_bounding_element(
+     const int& face_index)
     {
      //Create a temporary pointer to the appropriate FaceElement
-     ElasticPointFluidInterfaceEdgeElement<ELEMENT> *face_el_pt = 
-      new ElasticPointFluidInterfaceEdgeElement<ELEMENT>;
+     ElasticPointFluidInterfaceBoundingElement<ELEMENT> *face_el_pt = 
+      new ElasticPointFluidInterfaceBoundingElement<ELEMENT>;
      
      //Attach the geometrical information to the new element
      this->build_face_element(face_index,face_el_pt);
      
      //Set the index at which the unknowns are stored from the element
-     face_el_pt->u_index_interface_edge() = this->U_index_interface;
+     face_el_pt->u_index_interface_boundary() = this->U_index_interface;
      
      //Set the value of the nbulk_value, the node is not resized
      //in this problem, so it will just be the actual nvalue - 1

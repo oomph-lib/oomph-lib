@@ -32,153 +32,64 @@
 #include "../generic/integral.h"
 
 
-//##########################################################
-// hierher tidy up
-
 namespace oomph
 {
- void FluidInterfaceEdgeElement::
- set_contact_angle(double* const &angle_pt, const bool &strong)
-{
- //Set the contact angle
- Contact_angle_pt = angle_pt;
- //If we are hijacking the kinematic condition (the default)
- //to do the strong (pointwise form of the contact-angle condition)
- if(strong)
-  {
-   Contact_angle = 1;
-   //Hijack the bulk element residuals
-   dynamic_cast<FluidInterfaceElement*>(bulk_element_pt())
-    ->hijack_kinematic_conditions(Bulk_node_number);
-  }
- //Otherwise, we'll impose it weakly via the momentum equations
- //This will require that the appropriate velocity node is unpinned
- else
-  {
-   Contact_angle = 2;
-  }
-}
+
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
 
 
- void PointFluidInterfaceEdgeElement::
- fill_in_generic_residual_contribution_contact_edge(Vector<double> &residuals, 
-                                      DenseMatrix<double> &jacobian, 
-                                       unsigned flag)
+
+ //=========================================================================
+ /// \short Set a pointer to the desired contact angle. Optional boolean
+ /// (defaults to true)
+ /// 
+ /// hierher Andrew : Surely we want weak imposition as default?!)
+ /// 
+ /// chooses strong imposition via hijacking (true) or weak imposition
+ /// via addition to momentum equation (false).
+//=========================================================================
+ void FluidInterfaceBoundingElement::set_contact_angle(double* const &angle_pt, 
+                                                   const bool &strong)
  {
-  //Let's get the info from the parent
-  FiniteElement* parent_pt = bulk_element_pt();
+  //Set the pointer to the contact angle
+  Contact_angle_pt = angle_pt;
   
-  //Find the dimension of the problem
-  unsigned spatial_dim = this->nodal_dimension();
-  
-  //Get the outer unit normal to the wall
-  Vector<double> wall_normal(spatial_dim);
-  
-  //Get the outer unit normal to the free surface
-  Vector<double> unit_normal(spatial_dim);
-  
-  //Storage for the coordinate
-  Vector<double> x(spatial_dim);
-  
-  //Find the dimension of the parent
-  unsigned n_dim = parent_pt->dim();
-
-  //Dummy local coordinate, of size zero
-  Vector<double> s_local(0); 
-  //Get the x coordinate
-  this->interpolated_x(s_local,x);
-  //Get the unit normal to the wall
-  wall_unit_normal(x,wall_normal);
-
-  
-  //Find the local coordinates in the parent
-  Vector<double> s_parent(n_dim);
-  this->get_local_coordinate_in_bulk(s_local,s_parent);
-  
-  //Just get the outer unit normal
-  dynamic_cast<FaceElement*>(parent_pt)->
-   outer_unit_normal(s_parent,unit_normal);
-  
-  //Find the dot product
-  double dot = 0.0;
-  for(unsigned i=0;i<spatial_dim;i++) 
-   {dot += unit_normal[i]*wall_normal[i];}
-
-  //Get the value of sigma from the parent
-  double Sigma = dynamic_cast<FluidInterfaceElement*>(parent_pt)->
-   sigma(s_parent);
-
-  //Are we doing the weak form replacement
-  if(Contact_angle==2)
+  // If we are hijacking the kinematic condition (the default)
+  // hierher Andrew correct if we change the default setting
+  // to do the strong (pointwise form of the contact-angle condition)
+  if(strong)
    {
-    //Get the wall tangent vector
-    Vector<double> wall_tangent(spatial_dim);
-    wall_tangent[0] = - wall_normal[1];
-    wall_tangent[1] = wall_normal[0];
+    // Remember what we're doing
+    Contact_angle_flag = 1;
     
-    //Get the capillary number
-    double Ca = ca();
-
-    //Just add the appropriate contribution to the momentum equations
-    for(unsigned i=0;i<2;i++)
-     {
-      int local_eqn = nodal_local_eqn(0,this->U_index_interface_edge[i]);
-
-      if(local_eqn >= 0)
-       {
-        residuals[local_eqn] += 
-         (Sigma/Ca)*(sin(contact_angle())*wall_normal[i]
-                     + cos(contact_angle())*wall_tangent[i]);
-       }
-     }
+    //Hijack the bulk element residuals
+    dynamic_cast<FluidInterfaceElement*>(bulk_element_pt())
+     ->hijack_kinematic_conditions(Bulk_node_number);
    }
-  //Otherwise add the appropriate contribution to the momentum equation
+  //Otherwise, we'll impose it weakly via the momentum equations.
+  //This will require that the appropriate velocity node is unpinned
+  // hierher Andrew:what is this last comment supposed to mean? It's either
+  // trivial or suggests that we should do something here that isn't done.
   else
    {
-    //Need to find the outer normal of this point, which 
-    //is the outer unit normal
-    Vector<double> m(spatial_dim);
-    this->outer_unit_normal(s_local,m);
-    
-    //Get the capillary number
-    double Ca = ca();
-    
-    //Just add the appropriate contribution to the momentum equations
-    for(unsigned i=0;i<2;i++)
-     {
-      int local_eqn = nodal_local_eqn(0,this->U_index_interface_edge[i]);
-      
-      if(local_eqn >= 0)
-       {
-        residuals[local_eqn] += (Sigma/Ca)*m[i];
-       }
-     }
+    Contact_angle_flag = 2;
    }
-
-  //If we are doing the strong form, then overload the kinematic equation
-  if(Contact_angle==1)
-   {
-    //Read out the kinematic equation number
-    int local_eqn = kinematic_local_eqn(0);
-    //If it's not a degree of freedom, set the residuals
-    //Note that because we have outer unit normals for the free surface
-    //and the wall, the cosine of the contact angle is equal to 
-    //MINUS the dot product
-    if(local_eqn >= 0)
-     {
-      residuals[local_eqn] = cos(contact_angle()) + dot; 
-     }
-    //NOTE: The jacobian entries will be computed automatically
-    //by finite differences.
-   }
-
-  add_additional_residual_contributions(residuals,jacobian,flag);
  }
+ 
+ 
+
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
 
 
-
- void LineFluidInterfaceEdgeElement::
- fill_in_generic_residual_contribution_contact_edge(
+//=========================================================================
+ /// Add contribution to element's residual vector and Jacobian
+//=========================================================================
+ void PointFluidInterfaceBoundingElement::
+ fill_in_generic_residual_contribution_interface_boundary(
   Vector<double> &residuals, 
   DenseMatrix<double> &jacobian, 
   unsigned flag)
@@ -189,10 +100,155 @@ namespace oomph
   //Find the dimension of the problem
   unsigned spatial_dim = this->nodal_dimension();
   
-  //Get the outer unit normal to the wall
+  // Outer unit normal to the wall
   Vector<double> wall_normal(spatial_dim);
   
-  //Get the outer unit normal to the free surface
+  // Outer unit normal to the free surface
+  Vector<double> unit_normal(spatial_dim);
+  
+  //Storage for the coordinate
+  Vector<double> x(spatial_dim);
+  
+  //Find the dimension of the parent
+  unsigned n_dim = parent_pt->dim();
+  
+  //Dummy local coordinate, of size zero
+  Vector<double> s_local(0); 
+  
+  //Get the x coordinate
+  this->interpolated_x(s_local,x);
+  
+  //Get the unit normal to the wall
+  wall_unit_normal(x,wall_normal);
+  
+  //Find the local coordinates in the parent
+  Vector<double> s_parent(n_dim);
+  this->get_local_coordinate_in_bulk(s_local,s_parent);
+  
+  //Just get the outer unit normal
+  dynamic_cast<FaceElement*>(parent_pt)->
+   outer_unit_normal(s_parent,unit_normal);
+  
+  //Find the dot product of the two vectors
+  double dot = 0.0;
+  for(unsigned i=0;i<spatial_dim;i++) 
+   {dot += unit_normal[i]*wall_normal[i];}
+  
+  //Get the value of sigma from the parent
+  double sigma_local = dynamic_cast<FluidInterfaceElement*>(parent_pt)->
+   sigma(s_parent);
+  
+  //Are we doing the weak form replacement
+  if(Contact_angle_flag==2)
+   {
+    //Get the wall tangent vector
+    Vector<double> wall_tangent(spatial_dim);
+    wall_tangent[0] = - wall_normal[1];
+    wall_tangent[1] = wall_normal[0];
+    
+    //Get the capillary number
+    double ca_local = ca();
+    
+    //Just add the appropriate contribution to the momentum equations
+    for(unsigned i=0;i<2;i++)
+     {
+      int local_eqn = nodal_local_eqn(0,this->U_index_interface_boundary[i]);
+      if(local_eqn >= 0)
+       {
+        residuals[local_eqn] += 
+         (sigma_local/ca_local)*(sin(contact_angle())*wall_normal[i]
+                                 + cos(contact_angle())*wall_tangent[i]);
+       }
+     }
+   }
+  // Otherwise [strong imposition (by hijacking) of contact angle or
+  // "no constraint at all"], add the appropriate contribution to 
+  // the momentum equation
+  else
+   {
+    // Need to find the outer normal of this point, which 
+    // is the outer unit normal // hierher Andrew nonsensical comment
+    // or am I missing something.
+    // hierher Andrew: Also, how does this differ from the weak imposition?
+    Vector<double> m(spatial_dim);
+    this->outer_unit_normal(s_local,m);
+    
+    // Get the capillary number
+    double ca_local = ca();
+    
+    //Just add the appropriate contribution to the momentum equations
+    for(unsigned i=0;i<2;i++)
+     {
+      int local_eqn = nodal_local_eqn(0,this->U_index_interface_boundary[i]);
+      if(local_eqn >= 0)
+       {
+        residuals[local_eqn] += (sigma_local/ca_local)*m[i];
+       }
+     }
+   }
+  
+  //If we are imposing the contact angle strongly (by hijacking) 
+  // overwrite the kinematic equation
+  if(Contact_angle_flag==1)
+   {
+    //Read out the kinematic equation number
+    int local_eqn = kinematic_local_eqn(0);
+    
+    //Note that because we have outer unit normals for the free surface
+    //and the wall, the cosine of the contact angle is equal to 
+    //MINUS the dot product computed above
+    if(local_eqn >= 0)
+     {
+      residuals[local_eqn] = cos(contact_angle()) + dot; 
+     }
+    //NOTE: The jacobian entries will be computed automatically
+    //by finite differences.
+   }
+  
+  // Dummy arguments
+  Shape psif(1);
+  DShape dpsifds(1,1);
+  Vector<double> interpolated_n(1);
+  double W=0.0;
+ 
+  // Now add the additional contributions
+  add_additional_residual_contributions_interface_boundary(
+   residuals,
+   jacobian,
+   flag,
+   psif,
+   dpsifds,
+   interpolated_n, 
+   W);
+ }
+ 
+
+ 
+
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+
+
+//=========================================================================
+ /// Add contribution to element's residual vector and Jacobian
+//=========================================================================
+ void LineFluidInterfaceBoundingElement::
+ fill_in_generic_residual_contribution_interface_boundary(
+  Vector<double> &residuals, 
+  DenseMatrix<double> &jacobian, 
+  unsigned flag)
+ {
+  //Let's get the info from the parent
+  FiniteElement* parent_pt = bulk_element_pt();
+  
+  //Find the dimension of the problem
+  unsigned spatial_dim = this->nodal_dimension();
+  
+  //Outer unit normal to the wall
+  Vector<double> wall_normal(spatial_dim);
+  
+  //Outer unit normal to the free surface
   Vector<double> unit_normal(spatial_dim);
   
   //Find the dimension of the parent
@@ -200,26 +256,27 @@ namespace oomph
   
   //Find the local coordinates in the parent
   Vector<double> s_parent(n_dim);
-
-  //We need to loop over the integration points
-  unsigned n_intpt = this->integral_pt()->nweight();
-  unsigned n_node = this->nnode();
+  
   //Storage for the shape functions
+  unsigned n_node = this->nnode();
   Shape psi(n_node);
   DShape dpsids(n_node,1);
   Vector<double> s_local(1);
-
+  
+  // Loop over intergration points
+  unsigned n_intpt = this->integral_pt()->nweight();
   for(unsigned ipt=0;ipt<n_intpt;++ipt)
    {
     //Get the local coordinate of the integration point
     s_local[0] = this->integral_pt()->knot(ipt,0);
     get_local_coordinate_in_bulk(s_local,s_parent);
- 
+    
     //Get the local shape functions
     this->dshape_local(s_local,psi,dpsids);
-
+    
     //Zero the position
     Vector<double> x(spatial_dim,0.0);
+
     //Now construct the position and the tangent
     Vector<double> interpolated_t1(spatial_dim,0.0);
     for(unsigned n=0;n<n_node;n++)
@@ -233,15 +290,15 @@ namespace oomph
         x[i] += pos*psi_local;
        }
      }
-
-    //Now we can calculate the jacobian term
+    
+    //Now we can calculate the Jacobian term
     double t_length = 0.0;
     for(unsigned i=0;i<spatial_dim;++i) 
      {t_length += interpolated_t1[i]*interpolated_t1[i];}
     double W = std::sqrt(t_length)*this->integral_pt()->weight(ipt);
-
-    //Are we doing the weak form replacement
-    if(Contact_angle==2)
+    
+    // Imposition of contact angle in weak form
+    if(Contact_angle_flag==2)
      {
       //Get the outer unit normal of the entire interface
       dynamic_cast<FaceElement*>(parent_pt)->
@@ -259,13 +316,13 @@ namespace oomph
       Vector<double> binorm(spatial_dim);
       for(unsigned i=0;i<spatial_dim;i++)
        {binorm[i] = unit_normal[i] - dot*wall_normal[i];}
-
+      
       //Get the value of sigma from the parent
-      const double Sigma = dynamic_cast<FluidInterfaceElement*>(parent_pt)->
-       sigma(s_parent);
+      const double sigma_local =
+       dynamic_cast<FluidInterfaceElement*>(parent_pt)->sigma(s_parent);
       
       //Get the capillary number
-      const double Ca = ca();
+      const double ca_local = ca();
       
       //Get the contact angle
       const double theta = contact_angle();
@@ -280,34 +337,37 @@ namespace oomph
          {
           //Get the equation number for the momentum equation
           int local_eqn =  this->nodal_local_eqn(l,i);
+
           //If it's not a boundary condition
           if(local_eqn >= 0 )
            {
             //Add the surface-tension contribution to the momentum equation
-            residuals[local_eqn] +=  (Sigma/Ca)*
+            residuals[local_eqn] +=  (sigma_local/ca_local)*
              (sin(theta)*wall_normal[i]
               + cos(theta)*binorm[i])*psi(l)*W;
            }
          }
        }
      }
-    //Otherwise add the line integral terms to the Momentum equations
+    // Otherwise [strong imposition (by hijacking) of contact angle or
+    // "no constraint at all"], add the appropriate contribution to 
+    // the momentum equation
     else
      {
       //Storage for the outer vector
       Vector<double> m(3);
+      
       // Get the outer unit normal of the line
       this->outer_unit_normal(s_local,m);  
-
+      
       //Get the value of sigma from the parent
-      const double Sigma = dynamic_cast<FluidInterfaceElement*>(parent_pt)->
+      const double sigma_local = 
+       dynamic_cast<FluidInterfaceElement*>(parent_pt)->
        sigma(s_parent);
       
       //Get the capillary number
-      const double Ca = ca();
-        
-      // Add the contributions
-
+      const double ca_local = ca();
+      
       // Loop over the shape functions
       for(unsigned l=0;l<n_node;l++)
        {
@@ -316,19 +376,21 @@ namespace oomph
          {
           //Get the equation number for the momentum equation
           int local_eqn =  this->nodal_local_eqn(l,i);
+          
           //If it's not a boundary condition
           if(local_eqn >= 0 )
            {
             //Add the surface-tension contribution to the momentum equation
-            residuals[local_eqn] +=  m[i]*(Sigma/Ca)*psi(l)*W;
+            residuals[local_eqn] +=  m[i]*(sigma_local/ca_local)*psi(l)*W;
            }
          }
        }
      } //End of the line integral terms
     
     
-    //If we are doing the strong form, then overload the kinematic equation
-    if(Contact_angle==1)
+    //If we are imposing the contact angle strongly (by hijacking) 
+    // overwrite the kinematic equation
+    if(Contact_angle_flag==1)
      {
       //Get the outer unit normal of the whole interface
       dynamic_cast<FaceElement*>(parent_pt)->
@@ -347,7 +409,7 @@ namespace oomph
        {
         //Read out the kinematic equation number
         int local_eqn = kinematic_local_eqn(l);
-        //If it's not a degree of freedom, set the residuals
+        
         //Note that because we have outer unit normals for the free surface
         //and the wall, the cosine of the contact angle is equal to 
         //MINUS the dot product
@@ -361,15 +423,16 @@ namespace oomph
        }
      } //End of strong form of contact angle condition
     
-    //Call any additional residual contributinos
-    add_additional_residual_contributions(
+    // Add any additional residual contributions
+    add_additional_residual_contributions_interface_boundary(
      residuals,jacobian,flag,psi,dpsids,unit_normal,W);
    }
  }
 
-// hierher tidy up to here...
 
-//##########################################################
+/////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
 
 
 //============================================================
@@ -566,15 +629,15 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
 
    // Add additional contribution required from the implementation
    // of the node update (e.g. Lagrange multpliers etc)
-   add_additional_residual_contributions(residuals,
-                                         jacobian,
-                                         flag,
-                                         psif,
-                                         dpsifds,
-                                         interpolated_x,
-                                         interpolated_n,
-                                         W,
-                                         J);
+   add_additional_residual_contributions_interface(residuals,
+                                                   jacobian,
+                                                   flag,
+                                                   psif,
+                                                   dpsifds,
+                                                   interpolated_x,
+                                                   interpolated_n,
+                                                   W,
+                                                   J);
    
    
 
@@ -829,15 +892,15 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
 
    // Add additional contribution required from the implementation
    // of the node update (e.g. Lagrange multpliers etc)
-   add_additional_residual_contributions(residuals,
-                                         jacobian,
-                                         flag,
-                                         psif,
-                                         dpsifds,
-                                         interpolated_x,
-                                         interpolated_n,
-                                         W,
-                                         J);
+   add_additional_residual_contributions_interface(residuals,
+                                                   jacobian,
+                                                   flag,
+                                                   psif,
+                                                   dpsifds,
+                                                   interpolated_x,
+                                                   interpolated_n,
+                                                   W,
+                                                   J);
    
   } //End of loop over integration points
 
@@ -1027,8 +1090,11 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
    //which is equal to the length of the normal vector
    double J = sqrt(slength);
    
-   //We can now set the sign to get the OUTER unit normal
-   for(unsigned i=0;i<3;i++) {interpolated_n[i] *= normal_sign();}
+   //We can now set the sign to get the OUTER UNIT normal
+   for(unsigned i=0;i<3;i++)
+    {
+     interpolated_n[i] *= normal_sign()/J;
+    }
 
    //Now also get the (possible variable) surface tension
    double Sigma = this->sigma(s);
@@ -1058,10 +1124,9 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
          //If the element is a free surface, add in the external pressure
          if(Pext_data_pt!=0)
           {
-           //External pressure term no need to multiply by J
-           //because the length of the vector is equal to J
-          //exactly.
-           residuals[local_eqn] -= p_ext*interpolated_n[i]*psif(l)*W;
+           //External pressure term
+           residuals[local_eqn] -= p_ext*interpolated_n[i]*psif(l)*J*W;
+
            //Add in the Jacobian term for the external pressure
            //The correct area is included in the length of the normal
            //vector
@@ -1071,7 +1136,7 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
              if(local_unknown >= 0)
               {
                jacobian(local_eqn,local_unknown) -=
-                interpolated_n[i]*psif(l)*W;
+                interpolated_n[i]*psif(l)*J*W;
               }
             }
           } //End of pressure contribution
@@ -1089,7 +1154,7 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
         {
          residuals[local_eqn] += 
           (interpolated_u[k] - St*interpolated_dx_dt[k])
-          *interpolated_n[k]*psif(l)*W;
+          *interpolated_n[k]*psif(l)*J*W;
         }
        
        //Add in the jacobian
@@ -1107,7 +1172,7 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
              if(local_unknown >= 0)
               {
                jacobian(local_eqn,local_unknown) +=
-                psif(l2)*interpolated_n[i2]*psif(l)*W;
+                psif(l2)*interpolated_n[i2]*psif(l)*J*W;
               }
             }
           }
@@ -1118,15 +1183,15 @@ fill_in_generic_residual_contribution_interface(Vector<double> &residuals,
 
    // Add additional contribution required from the implementation
    // of the node update (e.g. Lagrange multpliers etc)
-   add_additional_residual_contributions(residuals,
-                                         jacobian,
-                                         flag,
-                                         psif,
-                                         dpsifds,
-                                         interpolated_x,
-                                         interpolated_n,
-                                         W,
-                                         J);
+   add_additional_residual_contributions_interface(residuals,
+                                                   jacobian,
+                                                   flag,
+                                                   psif,
+                                                   dpsifds,
+                                                   interpolated_x,
+                                                   interpolated_n,
+                                                   W,
+                                                   J);
 
   } //End of loop over integration points
 }

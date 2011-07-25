@@ -147,25 +147,25 @@ public:
        if(bottom)
         {
          Interface_edge_element_pt.push_back(interface_element_pt
-                                             ->make_edge_element(-2));
+                                             ->make_bounding_element(-2));
         }
        
        if(top)
         {
          Interface_edge_element_pt.push_back(interface_element_pt
-                                             ->make_edge_element(2));
+                                             ->make_bounding_element(2));
         }
        
        if(left)
         {
          Interface_edge_element_pt.push_back(interface_element_pt
-                                             ->make_edge_element(-1));
+                                             ->make_bounding_element(-1));
         }
        
        if(right)
         {
          Interface_edge_element_pt.push_back(interface_element_pt
-                                             ->make_edge_element(1));
+                                             ->make_bounding_element(1));
         }
       } //End of loop over the top and the bottom
     }
@@ -497,8 +497,8 @@ EntryFlowProblem<ELEMENT>::EntryFlowProblem(DocInfo& doc_info,
  unsigned n_interface_edge = mesh_pt()->ninterface_edge_element();
  for(unsigned e=0;e<n_interface_edge;e++)
   {
-   ElasticLineFluidInterfaceEdgeElement<ELEMENT>* el_pt
-    = dynamic_cast<ElasticLineFluidInterfaceEdgeElement<ELEMENT>*>(
+   ElasticLineFluidInterfaceBoundingElement<ELEMENT>* el_pt
+    = dynamic_cast<ElasticLineFluidInterfaceBoundingElement<ELEMENT>*>(
      mesh_pt()->interface_edge_element_pt(e));
 
    //Set the capillary number

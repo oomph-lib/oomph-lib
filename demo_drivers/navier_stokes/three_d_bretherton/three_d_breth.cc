@@ -490,10 +490,10 @@ ThreeDimBethertonProblem<ELEMENT>::ThreeDimBethertonProblem()
    {
     //Cast the return type to  the edge element and also 
     //cast the interface element to the specific interface element
-    SpineLineFluidInterfaceEdgeElement<ELEMENT>* line_element_pt = 
-     dynamic_cast<SpineLineFluidInterfaceEdgeElement<ELEMENT>*>(
+    SpineLineFluidInterfaceBoundingElement<ELEMENT>* line_element_pt = 
+     dynamic_cast<SpineLineFluidInterfaceBoundingElement<ELEMENT>*>(
      dynamic_cast<SpineSurfaceFluidInterfaceElement<ELEMENT>*>
-     ( mesh_pt()->interface_line_element_pt(i))->make_edge_element(
+     ( mesh_pt()->interface_line_element_pt(i))->make_bounding_element(
       mesh_pt()->face_index_outlet()));
      
     //Set the capillary number

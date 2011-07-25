@@ -46,6 +46,13 @@ namespace Global_Physical_Variables
  ///Direction of the wall normal vector
  Vector<double> Wall_normal;
 
+ /// \short Function that specifies the wall unit normal
+ void wall_unit_normal_fct(const Vector<double> &x, 
+                      Vector<double> &normal)
+ {
+  normal=Wall_normal;
+ }
+
  ///Set the wavenumber
  double K = 0.5;
 
@@ -171,28 +178,32 @@ class InclinedPlaneMesh :
      //first surface element
      if(e==0)
       {
-       FluidInterfaceEdgeElement* point_element_pt =
-        surface_element_pt->make_edge_element(-1);
+       FluidInterfaceBoundingElement* point_element_pt =
+        surface_element_pt->make_bounding_element(-1);
        //Add ot mesh's elements
        this->Element_pt.push_back(point_element_pt);
        //Set the capillary number
        point_element_pt->ca_pt() = &Global_Physical_Variables::Ca;
-       point_element_pt->wall_normal_pt() = 
-        &Global_Physical_Variables::Wall_normal;
+       point_element_pt->wall_unit_normal_fct_pt() = 
+        &Global_Physical_Variables::wall_unit_normal_fct;
       }
       
      //Make another point element from the right-hand side of the 
      //last surface element
      if(e==n_boundary_element-1)
       {
-       FluidInterfaceEdgeElement* point_element_pt =
-        surface_element_pt->make_edge_element(1);
+       FluidInterfaceBoundingElement* point_element_pt =
+        surface_element_pt->make_bounding_element(1);
+
        //Add to the mesh's elements
        this->Element_pt.push_back(point_element_pt);
+
        //Set the capillary number
        point_element_pt->ca_pt() = &Global_Physical_Variables::Ca;
-       point_element_pt->wall_normal_pt() = 
-        &Global_Physical_Variables::Wall_normal;
+
+       // Set the function that specifies the wall normal
+       point_element_pt->wall_unit_normal_fct_pt() = 
+        &Global_Physical_Variables::wall_unit_normal_fct;
       }
     }
   } //end of make_free_surface_elements

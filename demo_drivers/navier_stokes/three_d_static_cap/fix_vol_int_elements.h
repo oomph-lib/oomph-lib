@@ -186,7 +186,7 @@ class hierherVolumeConstraintElement : public GeneralisedElement
 //=========================================================================
 template<class ELEMENT>
 class SpineVolumeConstraintLineElement : 
-public SpineLineFluidInterfaceEdgeElement<ELEMENT>
+public SpineLineFluidInterfaceBoundingElement<ELEMENT>
 {
   private:
  
@@ -210,7 +210,7 @@ public SpineLineFluidInterfaceEdgeElement<ELEMENT>
  ///Constructor, there are no internal values. The pointer to the 
  ///element's (single) spine has to be set manually "from the outside"
  SpineVolumeConstraintLineElement() : 
-  SpineLineFluidInterfaceEdgeElement<ELEMENT>() 
+  SpineLineFluidInterfaceBoundingElement<ELEMENT>() 
   {
 
 
@@ -250,11 +250,19 @@ public SpineLineFluidInterfaceEdgeElement<ELEMENT>
  //in the underlying SpineElement.
   }
 
- void add_additional_residual_contributions(
+ void add_additional_residual_contributions_interface_boundary(
   Vector<double> &residuals, DenseMatrix<double> &jacobian,
-  const unsigned &flag,const Shape &psif,
+  const unsigned &flag,
+  const Shape &psif,
   const DShape &dpsifds,
-  const Vector<double> &interpolated_n, const double &W)
+  const Vector<double> &interpolated_n, 
+  const double &W) 
+ // hierher
+/* add_additional_residual_contributions( */
+/*   Vector<double> &residuals, DenseMatrix<double> &jacobian, */
+/*   const unsigned &flag,const Shape &psif, */
+/*   const DShape &dpsifds, */
+/*   const Vector<double> &interpolated_n, const double &W) */
   {
    int local_eqn = Ptraded_local_eqn;
    if(local_eqn >= 0)
@@ -343,7 +351,7 @@ public SpineSurfaceFluidInterfaceElement<ELEMENT>
  /// \short Overload the Helper function to calculate the residuals and 
  /// jacobian entries. This particular function ensures that the
  /// additional entries are calculated inside the integration loop
- void add_additional_residual_contributions(
+ void add_additional_residual_contributions_interface(
   Vector<double> &residuals, 
   DenseMatrix<double> &jacobian,
   const unsigned &flag,
@@ -385,7 +393,7 @@ public SpineSurfaceFluidInterfaceElement<ELEMENT>
 
      //This is the component of x.n (divide by 3 because we are working
      //in 3D)
-     residuals[local_eqn] += dot*W/3.0;
+     residuals[local_eqn] += dot*W*J/3.0;
     }
   }
  
@@ -477,8 +485,8 @@ public:
   
  /// \short Create a volume constraint element at face of the element given
  /// by the fac_index
- FluidInterfaceEdgeElement*
-  make_edge_element(const int &face_index)
+ FluidInterfaceBoundingElement*
+  make_bounding_element(const int &face_index)
   {
    //Create a temporary pointer to the appropriate FaceElement
    SpineVolumeConstraintLineElement<ELEMENT> *Temp_pt =

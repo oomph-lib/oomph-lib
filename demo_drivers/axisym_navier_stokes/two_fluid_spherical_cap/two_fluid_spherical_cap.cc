@@ -49,6 +49,23 @@ using namespace std;
 
 using namespace oomph;
 
+
+
+//The global physical variables
+namespace Global_Physical_Variables
+{
+ ///Direction of the wall normal vector
+ Vector<double> Wall_normal;
+
+ /// \short Function that specifies the wall unit normal
+ void wall_unit_normal_fct(const Vector<double> &x, 
+                      Vector<double> &normal)
+ {
+  normal=Wall_normal;
+ }
+}
+
+
 //============================================================================
 /// Specific mesh for the spherical cap problem: Essentially a 
 /// standard two-layer mesh with an additional element that applies
@@ -104,7 +121,7 @@ this-> element_reorder();
   SpineElement<ELEMENT> >*>(this->Interface_element_pt[this->Nx-1]);
 
  //Create the volume constraint edge element
- Point_element_pt = el_pt->make_edge_element(1);
+ Point_element_pt = el_pt->make_bounding_element(1);
 
  //Push it back onto the stack
  this->Element_pt.push_back(Point_element_pt);
@@ -133,7 +150,7 @@ private:
  double Angle;
 
  /// The normal to the wall of contact
- Vector<double> Wall_normal;
+ //Vector<double> Wall_normal;
 
 public:
  //Constructor:
@@ -171,7 +188,9 @@ CapProblem<ELEMENT>::CapProblem
  Angle(1.57)     //Initialise the value of the contact angle
 {
  //Set the wall normal (in the r-direction)
- Wall_normal.resize(2); Wall_normal[0] = 1.0; Wall_normal[1] = 0.0;
+ Global_Physical_Variables::Wall_normal.resize(2); 
+ Global_Physical_Variables::Wall_normal[0] = 1.0; 
+ Global_Physical_Variables::Wall_normal[1] = 0.0;
 
  //Construct our mesh
  Problem::mesh_pt() = 
@@ -247,12 +266,16 @@ CapProblem<ELEMENT>::CapProblem
  }
  
  //Set the contact angle on the RHS
- dynamic_cast<FluidInterfaceEdgeElement*>
+ dynamic_cast<FluidInterfaceBoundingElement*>
   (mesh_pt()->element_pt(mesh_pt()->nelement()-1))->set_contact_angle(&Angle);
+ 
+ dynamic_cast<FluidInterfaceBoundingElement*>
+  (mesh_pt()->element_pt(mesh_pt()->nelement()-1))->ca_pt() = &Ca;
+ 
  //Set the wall normal on the rhs
- dynamic_cast<FluidInterfaceEdgeElement*>
-  (mesh_pt()->element_pt(mesh_pt()->nelement()-1))->wall_normal_pt() = 
-  &Wall_normal;;
+ dynamic_cast<FluidInterfaceBoundingElement*>
+  (mesh_pt()->element_pt(mesh_pt()->nelement()-1))->wall_unit_normal_fct_pt() = 
+  &Global_Physical_Variables::wall_unit_normal_fct;
  
 
  //Pin a single pressure value
