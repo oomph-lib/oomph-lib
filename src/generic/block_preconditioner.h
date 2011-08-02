@@ -569,12 +569,14 @@ namespace oomph
       {
        Index_in_dof_block_dense.clear();
        Dof_number_dense.clear();
+#ifdef OOMPH_HAS_MPI
        Index_in_dof_block_sparse.clear();
        Dof_number_sparse.clear();
-       Dof_dimension.clear();
        Global_index_sparse.clear();
        Index_in_dof_block_sparse.clear();
        Dof_number_sparse.clear();
+#endif
+       Dof_dimension.clear();
       }
      Ndof_in_block.clear();
      Dof_number_to_block_number_lookup.clear();
@@ -781,7 +783,7 @@ namespace oomph
         OOMPH_EXCEPTION_LOCATION);
 #endif
 #else
-       return static_cast<int>(Dof_number[i_dof]);
+       return static_cast<int>(Dof_number_dense[i_dof]); // hierher mh added "_dense"
 #endif
       }
      // else this preconditioner  is a subsidiary one, and its Block_number
@@ -1247,10 +1249,15 @@ namespace oomph
                              OOMPH_EXCEPTION_LOCATION);                
      }
 
+
+     
+
      // my distribution
      unsigned first_row = this->distribution_pt()->first_row();
      unsigned nrow_local = this->distribution_pt()->nrow_local();
      unsigned last_row = first_row+nrow_local-1;
+
+#ifdef OOMPH_HAS_MPI // hierher mh moved this up from below
 
      // storage for the rows required by each processor in the dense
      // block lookup storage scheme
@@ -1300,7 +1307,7 @@ namespace oomph
       }
      sparse_global_rows_for_block_lookup.clear();
 
-#ifdef OOMPH_HAS_MPI
+//#ifdef OOMPH_HAS_MPI // hierher mh commented out and moved up
      Vector<MPI_Request> recv_requests_sparse_nreq;
      if (matrix_distributed) // hierher mh added if
       {
@@ -2743,6 +2750,45 @@ namespace oomph
       }
 #endif
     }
+   
+
+/*    if (Master_block_preconditioner_pt == 0) */
+/*     { */
+/*      std::stringstream name; */
+/*      name << "lookup_new_" */
+/*           << Global_unsigned::Number */
+/*           << "_proc" << my_rank << ".txt"; */
+/*      std::ofstream file(name.str().c_str()); */
+/*      for (unsigned p = 0; p < nproc; p++) */
+/*       { */
+/*        if (p == my_rank) */
+/*         { */
+/*          unsigned j = 0; */
+/*          for (; Global_index_sparse[j] < this->distribution_pt()->first_row() */
+/*                && j < Global_index_sparse.size(); j++) */
+/*           { */
+/*            file << Global_index_sparse[j] << " : " */
+/*                 << Dof_number_sparse[j] << " " */
+/*                 << Index_in_dof_block_sparse[j] << "\n"; */
+/*           } */
+/*          for (unsigned i = 0; i < Dof_number_dense.size(); i++) */
+/*           { */
+/*            file << this->distribution_pt()->first_row()+i << " : " */
+/*                 << Dof_number_dense[i] << " " */
+/*                 << Index_in_dof_block_dense[i] << "\n"; */
+/*           } */
+/*          for (; j < Global_index_sparse.size(); j++) */
+/*           { */
+/*            file << Global_index_sparse[j] << " : " */
+/*                 << Dof_number_sparse[j] << " " */
+/*                 << Index_in_dof_block_sparse[j] << "\n"; */
+/*           } */
+/*         } */
+/*       } */
+/*      file.close(); */
+/*      Global_unsigned::Number++; */
+/*     } */
+   
   }
 
 
