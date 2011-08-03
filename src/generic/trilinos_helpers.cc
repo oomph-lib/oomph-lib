@@ -518,50 +518,112 @@ create_distributed_epetra_matrix_for_aztecoo
   int first_col = oomph_matrix_pt->first_row();
   int ncol_local = oomph_matrix_pt->nrow_local();
 
-  // Add all colum indices encountered anywhere into set
-  std::set<int> col_index_set(column,column+oomph_matrix_pt->nnz());
-  
-  //Richard: This isn't needed -- they're all in there already, aren't they?
- //  oomph_info << "hierher Size after Richard's odd set constructor: "
-//              << col_index_set.size() << std::endl;
-  // Insert the global column indices associated with locally
-  // held rows
-  for (int c = 0; c < ncol_local; c++)
-   {
-    col_index_set.insert(c+first_col);
-   }
-//   oomph_info << "hierher Size after addition of locally held rows: "
-//              << col_index_set.size() << std::endl;
-  
-  // Transform into vector
-  std::vector<int> col_index_vector(col_index_set.begin(),col_index_set.end());
-
-  // Rearranges the entries in such a way that all the elements for which 
-  // pred returns true precede all those for which it returns false. The 
-  // iterator returned points to the first element of the second group.
-  // This sorts the entries such that the on-processor columns come first
-  // as required by aztec
-  Vector<int>::iterator mid = std::partition(col_index_vector.begin(),
-                                             col_index_vector.end(),
-                                             DistributionPredicate(first_col,
-                                                                   ncol_local));
-
-  // Now sort entries within their respective ranges (on and off processor)
-  // Richard: Why is this necessary/beneficial?
-  std::sort(mid,col_index_vector.end());
-  std::sort(col_index_vector.begin(),mid--);
-
   // Build colum map
-  Epetra_Map* epetra_col_map_pt = 
-   new Epetra_Map(-1,col_index_vector.size(),
-                  &col_index_vector[0],0,
-                  Epetra_MpiComm(oomph_matrix_pt->
-                                 distribution_pt()->
-                                 communicator_pt()->mpi_comm()));
+  Epetra_Map* epetra_col_map_pt = 0;
+
+// hierher kill next three lines next time
+//   // ------new version-------
+//   const bool use_new_version=true;
+//   if (use_new_version)
+   {
+    
+    // Vector of column indices; on processor goes first
+    std::vector<int> col_index_vector;
+    col_index_vector.reserve(oomph_matrix_pt->nnz()+ncol_local);
+    col_index_vector.resize(ncol_local);
+
+    // Global column indices corresponding to on-processor rows
+    for (int c = 0; c < ncol_local; ++c)
+     {
+      col_index_vector[c] = c+first_col;
+     }
+    
+    // Remember where the on-processor rows (columns) end
+    std::vector<int>::iterator mid = col_index_vector.end();
+
+    // Now insert ALL column indices of ALL entries
+    col_index_vector.insert(mid,column,column+oomph_matrix_pt->nnz());
+    
+    // Loop over the newly added entries and remove them if they
+    // refer to on-processor columns 
+    std::vector<int>::iterator end = 
+     std::remove_if(mid,col_index_vector.end(),
+                    DistributionPredicate(first_col,ncol_local));
+    
+    // Now sort the newly added entries 
+    std::sort(mid,end);
+
+    //...and remove duplicates
+    end = std::unique(mid,end);
+
+    // Make the map
+    epetra_col_map_pt = 
+     new Epetra_Map(-1,end - col_index_vector.begin(),
+                    &col_index_vector[0],0,
+                    Epetra_MpiComm(oomph_matrix_pt->
+                                   distribution_pt()->
+                                   communicator_pt()->mpi_comm()));
+
+    // Hack to clear memory
+    std::vector<int>().swap(col_index_vector);
+
+   }
+
+// hierher kill next time
+//   // ----end new version --------
+//   else
+//    {
+
+//     // Add all colum indices encountered anywhere into set
+//     std::set<int> col_index_set(column,column+oomph_matrix_pt->nnz());
+    
+// //Richard: This isn't needed -- they're all in there already, aren't they?
+// //  oomph_info << "hierher Size after Richard's odd set constructor: "
+// //              << col_index_set.size() << std::endl;
+//     // Insert the global column indices associated with locally
+//     // held rows
+//     for (int c = 0; c < ncol_local; c++)
+//      {
+//       col_index_set.insert(c+first_col);
+//      }
+// //   oomph_info << "hierher Size after addition of locally held rows: "
+// //              << col_index_set.size() << std::endl;
+    
+//     // Transform into vector
+//     std::vector<int> col_index_vector(col_index_set.begin(),col_index_set.end());
+    
+//     // Rearranges the entries in such a way that all the elements for which 
+//     // pred returns true precede all those for which it returns false. The 
+//     // iterator returned points to the first element of the second group.
+//     // This sorts the entries such that the on-processor columns come first
+//     // as required by aztec
+//     Vector<int>::iterator mid = std::partition(col_index_vector.begin(),
+//                                                col_index_vector.end(),
+//                                                DistributionPredicate(first_col,
+//                                                                      ncol_local));
+    
+//     // Now sort entries within their respective ranges (on and off processor)
+//     // Richard: Why is this necessary/beneficial?
+//     std::sort(mid,col_index_vector.end());
+//     std::sort(col_index_vector.begin(),mid--);
+    
+//     // Build colum map
+//     epetra_col_map_pt = 
+//      new Epetra_Map(-1,col_index_vector.size(),
+//                     &col_index_vector[0],0,
+//                     Epetra_MpiComm(oomph_matrix_pt->
+//                                    distribution_pt()->
+//                                    communicator_pt()->mpi_comm()));
+
+//    }
+//   //------end old version------
+
 #else
+
   int ncol = oomph_matrix_pt->ncol();
   Epetra_Map* epetra_col_map_pt = 
    new Epetra_LocalMap(ncol,0,Epetra_SerialComm());
+
 #endif
 
  // first first coefficient of the oomph vector to be inserted into the 
