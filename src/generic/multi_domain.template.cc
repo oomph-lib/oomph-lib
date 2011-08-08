@@ -738,12 +738,20 @@ namespace oomph
      char filename[100];
      sprintf(filename,"missing_coords_mesh%s.dat",modifier.str().c_str());
      outfile.open(filename); 
-     mesh_pt->output(outfile);
+     unsigned nel=mesh_pt->nelement();
+     for (unsigned e=0;e<nel;e++)
+      {
+       mesh_pt->finite_element_pt(e)->FiniteElement::output(outfile);
+      }
      outfile.close();
-
+     
      sprintf(filename,"missing_coords_ext_mesh%s.dat",modifier.str().c_str());
      outfile.open(filename); 
-     external_mesh_pt->output(outfile);
+     nel=external_mesh_pt->nelement();
+     for (unsigned e=0;e<nel;e++)
+      {
+       external_mesh_pt->finite_element_pt(e)->FiniteElement::output(outfile);
+      }
      outfile.close();
 
      sprintf(filename,"missing_coords_bin%s.dat",modifier.str().c_str());
