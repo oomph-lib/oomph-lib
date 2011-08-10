@@ -264,6 +264,10 @@ class ProjectableElement : public virtual ELEMENT,
   public: 
 
 
+ /// \short Constructor [this was only required explicitly
+ /// from gcc 4.5.2 onwards...]
+ ProjectableElement(){}
+
  /// Residual for the projection step. Flag indicates if we
  /// want the Jacobian (1) or not (0)
  void residual_for_projection(Vector<double> &residuals, 

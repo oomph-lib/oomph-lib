@@ -436,6 +436,13 @@ class FSIHermiteBeamElement : public virtual HermiteBeamElement,
 template<>
 class FaceGeometry<HermiteBeamElement> : public virtual SolidPointElement
 {
+
+  public: 
+
+ /// \short Constructor [this was only required explicitly
+ /// from gcc 4.5.2 onwards...]
+ FaceGeometry(){}
+
 };
 
 

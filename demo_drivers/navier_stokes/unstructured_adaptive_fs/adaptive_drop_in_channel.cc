@@ -107,7 +107,8 @@ namespace oomph
  public:
 
   /// Constructor initialise error
-  MyCrouzeixRaviartElement()
+  MyCrouzeixRaviartElement() : PseudoSolidNodeUpdateElement<TCrouzeixRaviartElement<2>, 
+                                                            TPVDBubbleEnrichedElement<2,3> >()
    {
     Error=0.0;
    }

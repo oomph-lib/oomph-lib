@@ -378,6 +378,13 @@ template<>
 class FaceGeometry<HermiteShellElement> : 
   public virtual SolidQHermiteElement<1>
 {
+
+public:
+
+ /// \short Constructor [this was only required explicitly
+ /// from gcc 4.5.2 onwards...]
+ FaceGeometry() : SolidQHermiteElement<1>() {}
+
 };
 
 

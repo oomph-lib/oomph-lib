@@ -2327,6 +2327,11 @@ public virtual QElement<1,3>
 
  public:
 
+  /// \short Constructor [this was only required explicitly
+  /// from gcc 4.5.2 onwards...]
+  ProjectableTaylorHoodElement(){}
+  
+
   /// \short Specify the values associated with field fld. 
   /// The information is returned in a vector of pairs which comprise 
   /// the Data object and the value within it, that correspond to field fld. 
@@ -2540,6 +2545,10 @@ public virtual QElement<1,3>
 
  public:
 
+  /// \short Constructor [this was only required explicitly
+  /// from gcc 4.5.2 onwards...]
+  ProjectableCrouzeixRaviartElement(){}
+  
   /// \short Specify the values associated with field fld. 
   /// The information is returned in a vector of pairs which comprise 
   /// the Data object and the value within it, that correspond to field fld. 

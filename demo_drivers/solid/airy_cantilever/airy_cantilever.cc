@@ -121,6 +121,12 @@ template<class ELEMENT>
 class FaceGeometry<MySolidElement<ELEMENT> > :
  public virtual FaceGeometry<ELEMENT>
 {
+public:
+
+ /// \short Constructor [this was only required explicitly
+ /// from gcc 4.5.2 onwards...]
+ FaceGeometry() : FaceGeometry<ELEMENT>() {}
+
 };
 
 
