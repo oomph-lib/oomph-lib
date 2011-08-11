@@ -470,11 +470,14 @@ public:
  /// throw and OomphLibError
  void set_directory(const std::string& directory);
 
- /// Doc or no doc?
- bool& doc_flag() {return Doc_flag;}
+ /// \short Enable documentation
+ void enable_doc() {Doc_flag=true;}
 
- /// Doc or no doc? Const version.
- bool doc_flag() const {return Doc_flag;}
+ /// \short Disable documentation
+ void disable_doc() {Doc_flag=false;}
+
+ /// \short Are we documenting?
+ bool is_doc_enabled() const {return Doc_flag;}
 
  /// Number used (e.g.) for labeling output files
  unsigned& number() {return Number;}
@@ -488,11 +491,11 @@ public:
  /// String used (e.g.) for labeling output files. Const version.
  std::string label() const {return Label;}
 
- /// \short What do to do if an output directory doesn't exist:
- /// If true, we terminate code execution by throwing an OomphLibError 
- /// rather than  just issuing a warning. Default: false.
- bool& directory_must_exist()
-  {return Directory_must_exist;}
+ /// \short Call to throw an error if directory does not exist
+ void enable_error_if_directory_does_not_exist() {Directory_must_exist=true;}
+
+ /// \short Call to issue a warning if the directory does not exists
+ void disable_error_if_directory_does_not_exist() {Directory_must_exist=false;}
  
 private:
 

@@ -150,7 +150,7 @@ void HSL_MA42::solve(Problem* const &problem_pt, DoubleVector &result)
   }
 
  // Reorder?
- if (reorder_flag())
+ if (this->Reorder_flag)
   {
    reorder_elements(problem_pt);
   }
@@ -406,7 +406,7 @@ void HSL_MA42::solve(Problem* const &problem_pt, DoubleVector &result)
    //----------------------------------
    if (Use_direct_access_files)
     {
-     if (doc_stats())
+     if (Doc_stats)
       {
        oomph_info << "Using direct access files" << std::endl;
       }
@@ -480,7 +480,7 @@ void HSL_MA42::solve(Problem* const &problem_pt, DoubleVector &result)
 
 
 
-   if (doc_stats())
+   if (Doc_stats)
     {
      oomph_info << "\n FRONT SIZE (min and actual): " 
                <<  ifsize[0] << " " << nfront[0] << std::endl;
@@ -748,7 +748,7 @@ void HSL_MA42::solve(Problem* const &problem_pt, DoubleVector &result)
  for(int i=0;i<n_dof;i++) result[i] = dx[0][i];
  
  //Print the actual memory used
- if (doc_stats())
+ if (Doc_stats)
   {
    if (!Use_direct_access_files)
     {
@@ -897,7 +897,7 @@ void HSL_MA42::reorder_elements(Problem* const &problem_pt)
 
 
  // Suppress printing of error and warning messages?
- if (!doc_stats())
+ if (!Doc_stats)
   {
    icntl[0]=-1;
    icntl[1]=-1;
@@ -973,7 +973,7 @@ void HSL_MA42::reorder_elements(Problem* const &problem_pt)
     //If not enough space in iw or w, allocate enough and try again
     if(info[0] == -4)
       {
-       if (doc_stats()) oomph_info << " Reallocating liw to " 
+       if (Doc_stats) oomph_info << " Reallocating liw to " 
                                   << info[4] << std::endl;
        delete[] iw;
        liw = info[4];
@@ -983,7 +983,7 @@ void HSL_MA42::reorder_elements(Problem* const &problem_pt)
     //If not enough space in w, allocate enough and try again
     if(info[0] == -2)
      {
-      if (doc_stats()) oomph_info << " Reallocating lw to " 
+      if (Doc_stats) oomph_info << " Reallocating lw to " 
                                  << info[5] << std::endl;
       delete[] w;
       lw = info[5];
@@ -993,7 +993,7 @@ void HSL_MA42::reorder_elements(Problem* const &problem_pt)
    } while(info[0] < 0);
 
 
- if (doc_stats())
+ if (Doc_stats)
   {
    oomph_info <<"\n Initial wavefront details  :\n      max "
              << rinfo[0] << "\tmean "

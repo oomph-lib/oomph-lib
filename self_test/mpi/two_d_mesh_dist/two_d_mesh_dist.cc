@@ -291,7 +291,6 @@ void parallel_test(const unsigned& n_refine_first,
 
  DocInfo quiet_doc_info;
  quiet_doc_info.set_directory("RESLT");
- quiet_doc_info.doc_flag()=true;
 
     
  // Create the problem
@@ -543,7 +542,7 @@ void parallel_test(const unsigned& n_refine_first,
       
       t_start = clock();   
       bool report_stats=false;
-      doc_info.doc_flag()=false;
+      doc_info.disable_doc();
       problem_pt->prune_halo_elements_and_nodes(doc_info, 
                                                 report_stats);
       t_end = clock();

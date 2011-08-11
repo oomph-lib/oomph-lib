@@ -1250,7 +1250,7 @@ public:
 
    /// By default, we do want to suppress the output from the
    /// Newton solver
-   Womersley_problem_pt->shut_up_in_newton_solve()=true;
+   Womersley_problem_pt->disable_info_in_newton_solve();
    oomph_info
     << "NOTE: We're suppressing timings etc from \n"
     << "      Newton solver in WomersleyImpedanceTubeBase. "

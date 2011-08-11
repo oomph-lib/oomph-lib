@@ -296,8 +296,8 @@ protected:
   
   /// \short Document and check all the neighbours of all the nodes in
   /// the forest. DocInfo object specifies the output directory and file
-  /// numbers for the various files. If \c doc_info.doc_flag()=false no
-  /// output is created.
+  /// numbers for the various files. If \c doc_info.disable_doc() has been
+  /// called, no output is created.
   void check_all_neighbours(DocInfo &doc_info);
   
   /// A line mesh cannot have hanging nodes so make this function empty

@@ -46,8 +46,8 @@ class SuperLUPreconditioner : public Preconditioner
  /// Constructor.
  SuperLUPreconditioner()
   {
-   Solver.doc_stats() = false;
-   Solver.doc_time() = false;
+   Solver.disable_doc_stats();
+   Solver.disable_doc_time();
   }
  
  /// Destructor.

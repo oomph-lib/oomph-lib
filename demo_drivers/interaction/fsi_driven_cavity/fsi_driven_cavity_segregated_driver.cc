@@ -457,8 +457,6 @@ int main(int argc, char* argv[])
    // Solve the problem
    //------------------
 
-   doc_info.doc_flag()=true;
-
    conv_data=problem.unsteady_segregated_solve(dt);
 
    niter=conv_data.niter();

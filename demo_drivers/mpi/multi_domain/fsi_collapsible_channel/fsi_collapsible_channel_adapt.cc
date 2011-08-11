@@ -1165,7 +1165,7 @@ int main(int argc, char* argv[])
 
  bool report_stats=false;
  DocInfo mesh_doc_info;
- mesh_doc_info.doc_flag()=false;
+ mesh_doc_info.disable_doc();
  problem.distribute(element_partition,mesh_doc_info,report_stats);
 
  // Check halo schemes (on submeshes)

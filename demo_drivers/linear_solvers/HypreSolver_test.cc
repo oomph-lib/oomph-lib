@@ -349,8 +349,8 @@ int main(int argc, char **argv)
  hypre_linear_solver_pt->max_iter() = 100;
  hypre_linear_solver_pt->tolerance() = 1e-10;
  hypre_linear_solver_pt->amg_simple_smoother() = 1;
- hypre_linear_solver_pt->doc_time() = false;
- hypre_linear_solver_pt->hypre_error_messages() = true;
+ hypre_linear_solver_pt->disable_doc_time();
+ hypre_linear_solver_pt->enable_hypre_error_messages();
  hypre_linear_solver_pt->amg_print_level() = 0;
  hypre_linear_solver_pt->krylov_print_level() = 0;
  
@@ -445,7 +445,7 @@ int main(int argc, char **argv)
  HyprePreconditioner* hypre_preconditioner_pt = new HyprePreconditioner;
  
  // Set preconditioner parameters
- hypre_preconditioner_pt->hypre_error_messages() = true;
+ hypre_preconditioner_pt->enable_hypre_error_messages();
  
  // Test CG
  //========

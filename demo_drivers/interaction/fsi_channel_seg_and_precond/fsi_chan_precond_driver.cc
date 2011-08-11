@@ -474,7 +474,7 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
          set_p_preconditioner(P_matrix_preconditioner_pt);
         
         // Shut up
-        P_matrix_preconditioner_pt->doc_time()=false;
+        P_matrix_preconditioner_pt->disable_doc_time();
        }
 #endif
 

@@ -183,9 +183,13 @@ public :
   {
    return Navier_stokes_preconditioner_pt;
   }
+
+ ///Enable documentation of time
+ void enable_doc_time() {Doc_time = true;}
  
- /// Access function for Doc_time
- bool& doc_time() {return Doc_time;}
+ ///Disable documentation of time
+ void disable_doc_time() {Doc_time = false;}
+
 
 private:
 

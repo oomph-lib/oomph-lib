@@ -315,7 +315,7 @@ int main(int argc, char **argv)
   SuperLUSolver solver;
   solver.set_solver_type(SuperLUSolver::Distributed);
   problem.get_jacobian(b,A);
-  solver.doc_time() = true;
+  solver.enable_doc_time();
   solver.solve(&A,b,x);
   x.output("RESLT/SuperLU_dist_CRDoubleMatrix_global.dat");
  }
@@ -342,7 +342,7 @@ int main(int argc, char **argv)
   SuperLUSolver solver;
   solver.set_solver_type(SuperLUSolver::Distributed);
   problem.get_jacobian(b,A);
-  solver.doc_time() = true;
+  solver.enable_doc_time();
   solver.solve(&A,b,x);
   x.output("RESLT/SuperLU_dist_CRDoubleMatrix_distributed.dat");
  }

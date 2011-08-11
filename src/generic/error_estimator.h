@@ -68,7 +68,7 @@ class ErrorEstimator
   {
    // Create dummy doc info object and switch off output
    DocInfo doc_info;
-   doc_info.doc_flag()=false;
+   doc_info.disable_doc();
    // Forward call to version with doc.
    get_element_errors(comm_pt,mesh_pt,elemental_error,doc_info);
   }
@@ -353,14 +353,14 @@ class Z2ErrorEstimator : public virtual ErrorEstimator
   {
    // Create dummy doc info object and switch off output
    DocInfo doc_info;
-   doc_info.doc_flag()=false;
+   doc_info.disable_doc();
    // Forward call to version with doc.
    get_element_errors(comm_pt,mesh_pt,elemental_error,doc_info);
   }
   
   /// \short Compute the elemental error measures for a given mesh
   /// and store them in a vector.  
-  /// If doc_info.doc_flag()=true, doc FE and recovered fluxes in 
+  /// If doc_info.enable_doc(), doc FE and recovered fluxes in 
   /// - flux_fe*.dat
   /// - flux_rec*.dat 
   void get_element_errors(OomphCommunicator* comm_pt, Mesh*& mesh_pt, 
@@ -626,7 +626,7 @@ class Z2ErrorEstimator : public virtual ErrorEstimator
                                  DocInfo& doc_info)
   {
 #ifdef PARANOID
-   if (doc_info.doc_flag())
+   if (doc_info.is_doc_enabled())
     {
      std::ostringstream warning_stream;
      warning_stream 

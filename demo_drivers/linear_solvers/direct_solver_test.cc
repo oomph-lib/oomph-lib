@@ -307,7 +307,7 @@ int main(int argc, char **argv)
   DoubleVector x;
   DenseLU solver;
   problem.get_jacobian(b,A);
-  solver.doc_time() = true;
+  solver.enable_doc_time();
   solver.solve(&A,b,x);
   x.output("RESLT/DenseLU_DenseDoubleMatrix.dat");
  }
@@ -380,7 +380,7 @@ int main(int argc, char **argv)
   DoubleVector x(&global_dist,0.0);
   SuperLUSolver solver;
   problem.get_jacobian(b,A);
-  solver.doc_time() = true;
+  solver.enable_doc_time();
   solver.solve(&A,b,x);
   x.output("RESLT/SuperLU_CRDoubleMatrix.dat");
  }
@@ -402,7 +402,7 @@ int main(int argc, char **argv)
   DoubleVector x;
   SuperLUSolver solver;
   problem.get_jacobian(b,A);
-  solver.doc_time() = true;
+  solver.enable_doc_time();
   solver.solve(&A,b,x);
   x.output("RESLT/SuperLU_CCDoubleMatrix.dat");
  }

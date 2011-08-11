@@ -2844,7 +2844,7 @@ void Mesh::get_halo_node_stats(OomphCommunicator* comm_pt,
 
  // Doc the partitioning (only on processor 0) 
  //-------------------------------------------
- if (doc_info.doc_flag())
+ if (doc_info.is_doc_enabled())
   {
    if (my_rank==0)
     {
@@ -2927,7 +2927,7 @@ void Mesh::get_halo_node_stats(OomphCommunicator* comm_pt,
 
  // Doc the partitioning (only on processor 0) 
  //-------------------------------------------
- if (doc_info.doc_flag())
+ if (doc_info.is_doc_enabled())
   {
    if (my_rank==0)
     {
@@ -3455,7 +3455,7 @@ void Mesh::get_halo_node_stats(OomphCommunicator* comm_pt,
 
  // Doc?
  //-----
- if (doc_info.doc_flag())
+ if (doc_info.is_doc_enabled())
   {
    doc_mesh_distribution(comm_pt,doc_info);
   }
@@ -4049,7 +4049,7 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
    
    // Doc?
    //-----
-   if (doc_info.doc_flag())
+   if (doc_info.is_doc_enabled())
     {
      oomph_info << "Outputting distribution in "
                 << doc_info.directory() << " " 
@@ -4553,7 +4553,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
 
  // Doc shared nodes lookup schemes
  //-------------------------------------
- if (doc_info.doc_flag())
+ if (doc_info.is_doc_enabled())
   {
    // Loop over domains for shared nodes
    for (int dd=0;dd<n_proc;dd++)
@@ -4741,7 +4741,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
 
  // Doc halo/haoloed element lookup schemes
  //-----------------------------------------
- if (doc_info.doc_flag())
+ if (doc_info.is_doc_enabled())
   {
    // Loop over domains for halo elements
    for (int dd=0;dd<n_proc;dd++)
@@ -4921,7 +4921,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
                       1,comm_pt->mpi_comm(),&status);
 
              //If documenting, open the output files
-             if(doc_info.doc_flag())
+             if(doc_info.is_doc_enabled())
               {
                filename.str("");
                filename << doc_info.directory() << "/error_haloed_check"
@@ -5028,7 +5028,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
                       }
 
                      //If documenting, write to output files
-                     if(doc_info.doc_flag())
+                     if(doc_info.is_doc_enabled())
                       {
                        for(unsigned i=0;i<nod_dim;i++)
                         {
@@ -5049,7 +5049,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
               } // e<nelem_haloed
              
              //If documenting, close output files
-             if(doc_info.doc_flag())
+             if(doc_info.is_doc_enabled())
               {
                haloed_file.close();
                halo_file.close();  
@@ -5147,7 +5147,7 @@ void Mesh::check_halo_schemes(OomphCommunicator* comm_pt, DocInfo& doc_info,
  
  // Doc halo/haloed nodes lookup schemes
  //-------------------------------------
- if (doc_info.doc_flag())
+ if (doc_info.is_doc_enabled())
   {
    // Loop over domains for halo nodes
    for (int dd=0;dd<n_proc;dd++)

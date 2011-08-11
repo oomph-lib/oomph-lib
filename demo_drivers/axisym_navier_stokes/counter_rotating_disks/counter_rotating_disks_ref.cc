@@ -514,10 +514,10 @@ PerturbedStateProblem(const unsigned& n_r,
    Domain_height(domain_height)
 {
  // Be less verbose during newton solve
- Problem::shut_up_in_newton_solve()=true;
+ this->disable_info_in_newton_solve();
 
  // Be less verbose about linear solve timings
- linear_solver_pt()->doc_time()=false;
+ linear_solver_pt()->disable_doc_time();
 
  // Tell problem that it is linear (avoid doing unnecessary checks)
  Problem::Problem_is_nonlinear = false;

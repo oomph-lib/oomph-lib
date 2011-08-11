@@ -475,11 +475,21 @@ void get_wind_spherical_adv_diff(const unsigned& ipt,
  void fill_in_contribution_to_jacobian_and_mass_matrix(
   Vector<double> &residuals, DenseMatrix<double> &jacobian, 
   DenseMatrix<double> &mass_matrix)
-  {
-   //Call the (broken) version in the base class
-   FiniteElement::fill_in_contribution_to_jacobian_and_mass_matrix(
-     residuals,jacobian,mass_matrix);
-  }
+ {
+   //Calculate the Navier-Stokes contributions (diagonal block and residuals)
+   RefineableSphericalNavierStokesEquations::
+    fill_in_contribution_to_jacobian_and_mass_matrix(residuals,jacobian,
+                                                     mass_matrix);
+
+   //Calculate the advection-diffusion contributions 
+   //(diagonal block and residuals)
+   RefineableSphericalAdvectionDiffusionEquations::
+    fill_in_contribution_to_jacobian_and_mass_matrix(residuals,jacobian,
+                                                     mass_matrix);
+   
+   //We now fill in the off-diagonal (interaction) blocks analytically
+   this->fill_in_off_diagonal_jacobian_blocks_analytic(residuals,jacobian);
+ }
 
  /// \short Compute the contribution of the off-diagonal blocks
  /// analytically.

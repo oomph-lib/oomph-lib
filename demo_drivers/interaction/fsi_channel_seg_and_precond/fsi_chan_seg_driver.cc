@@ -1046,7 +1046,7 @@ void SegregatedFSICollapsibleChannelProblem<ELEMENT>::steady_run()
     {
      Max_picard =50;
      // Doc convergence history?
-     if (doc_info.doc_flag())
+     if (doc_info.is_doc_enabled())
       { 
        // Initialise timer that allows doc of iteration/cpu time
        reset_timer();
@@ -1100,7 +1100,7 @@ void SegregatedFSICollapsibleChannelProblem<ELEMENT>::steady_run()
    else
     {
      // Doc convergence history?
-     if (doc_info.doc_flag())
+     if (doc_info.is_doc_enabled())
       { 
        // Initialise timer that allows doc of iteration/cpu time
        reset_timer();
@@ -1291,9 +1291,8 @@ void SegregatedFSICollapsibleChannelProblem<ELEMENT>::unsteady_run()
     if (Flags::Use_segregated_solver)
      {
       Max_picard = 50;
-      //doc_info.doc_flag()=true;
       // Doc convergence history?
-      if (doc_info.doc_flag())
+      if (doc_info.is_doc_enabled())
        { 
         // Initialise timer that allows doc of iteration/cpu time
         reset_timer();
@@ -1347,7 +1346,7 @@ void SegregatedFSICollapsibleChannelProblem<ELEMENT>::unsteady_run()
      {
       
       // Doc convergence history?
-      if (doc_info.doc_flag())
+      if (doc_info.is_doc_enabled())
        { 
         // Initialise timer that allows doc of iteration/cpu time
         reset_timer();

@@ -81,7 +81,7 @@ namespace oomph
   // record the end time and compute the matrix setup time
   double end_t = TimingHelpers::timer();
   Jacobian_setup_time = end_t-start_t;
-  if (this->doc_time())
+  if (this->Doc_time)
    {
     oomph_info << "Time to generate Jacobian [sec]    : "
                << Jacobian_setup_time << std::endl;
@@ -207,7 +207,7 @@ void TrilinosAztecOOSolver::solve(DoubleMatrixBase* const& matrix_pt,
  solve_using_AztecOO(epetra_r_pt,epetra_z_pt);            
 
  double end_t_trilinos = TimingHelpers::timer();
- if (this->doc_time())
+ if (this->Doc_time)
  {
   oomph_info << "Time for trilinos solve itself                 : "
              << end_t_trilinos-start_t_trilinos
@@ -231,7 +231,7 @@ void TrilinosAztecOOSolver::solve(DoubleMatrixBase* const& matrix_pt,
  Linear_solver_solution_time = end_t-start_t;
 
  // output timings and info
- if (this->doc_time())
+ if (this->Doc_time)
  {
   oomph_info << "Time for complete trilinos solve                  : "
              << Linear_solver_solution_time
@@ -525,7 +525,7 @@ void TrilinosAztecOOSolver::resolve(const DoubleVector &rhs,
  Linear_solver_solution_time = end_t-start_t;
 
  // output timings and info
- if (this->doc_time())
+ if (this->Doc_time)
  {
   oomph_info << "Time for resolve                        : "
              << Linear_solver_solution_time

@@ -531,7 +531,7 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
    HyprePreconditioner* p_preconditioner_pt = new HyprePreconditioner;
    
    // Shut up!
-   p_preconditioner_pt->doc_time() = false;
+   p_preconditioner_pt->disable_doc_time();
    
    // Set defaults parameters for use as preconditioner on Poisson-type problem
    Hypre_default_settings::
@@ -546,7 +546,7 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
    HyprePreconditioner* f_preconditioner_pt = new HyprePreconditioner;
    
    // Shut up!
-   f_preconditioner_pt->doc_time() = false;
+   f_preconditioner_pt->disable_doc_time();
    
    // Set default parameters for use as preconditioner in for momentum 
    // block in Navier-Stokes problem

@@ -705,7 +705,7 @@ public:
  {
   // Dummy doc info
   DocInfo doc_info;
-  doc_info.doc_flag()=false;
+  doc_info.disable_doc();
   snap_to_quadratic_surface(boundary_id,quadratic_surface_file_name,
                             switch_normal,doc_info);
   

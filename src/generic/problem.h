@@ -1108,7 +1108,7 @@ protected:
   {
    // Dummy DocInfo
    DocInfo doc_info;
-   doc_info.doc_flag()=false;
+   doc_info.disable_doc();
 
    // Don't report stats
    bool report_stats=false;
@@ -1128,7 +1128,7 @@ protected:
   {
    // Dummy DocInfo
    DocInfo doc_info;
-   doc_info.doc_flag()=false;
+   doc_info.disable_doc();
 
    return load_balance(doc_info,report_stats);
   }
@@ -1575,7 +1575,7 @@ protected:
  void check_halo_schemes()
   {
    DocInfo tmp_doc_info;
-   tmp_doc_info.doc_flag()=false;
+   tmp_doc_info.disable_doc();
    check_halo_schemes(tmp_doc_info);
   }
 
@@ -1625,7 +1625,7 @@ protected:
  void prune_halo_elements_and_nodes(const bool& report_stats=false)
   {
    DocInfo doc_info;
-   doc_info.doc_flag()=false;
+   doc_info.disable_doc();
    prune_halo_elements_and_nodes(doc_info,report_stats);
   }
   
@@ -1918,7 +1918,7 @@ protected:
  void refine_uniformly()
   {
    DocInfo doc_info;
-   doc_info.doc_flag()=false;
+   doc_info.disable_doc();
    refine_uniformly(doc_info);
   }
 
@@ -1929,7 +1929,7 @@ protected:
  void refine_uniformly(const unsigned& i_mesh)
   {  
    DocInfo doc_info;
-   doc_info.doc_flag()=false;
+   doc_info.disable_doc();
    refine_uniformly(i_mesh,doc_info);
   }
 
@@ -2044,14 +2044,15 @@ protected:
  void doc_errors()
   {
    DocInfo tmp_doc_info;
-   tmp_doc_info.doc_flag()=false;
+   tmp_doc_info.disable_doc();
    doc_errors(tmp_doc_info);
   }
 
- /// \short Access fct to bool that controls if all output is suppressed
- /// in Problem::newton_solve(). (Default setting is false).
- bool& shut_up_in_newton_solve() {return Shut_up_in_newton_solve;}
+ /// \short Enable the output of information when in the newton solver (Default)
+ void enable_info_in_newton_solve() {Shut_up_in_newton_solve=false;}
 
+ /// \short Disable the output of information when in the  newton solver
+ void disable_info_in_newton_solve() {Shut_up_in_newton_solve=true;}
 
 };
 

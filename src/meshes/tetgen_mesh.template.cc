@@ -1643,7 +1643,7 @@ void TetgenMesh<ELEMENT>::snap_to_quadratic_surface(
    std::ofstream the_file;
    std::ofstream the_file_before;
    std::ofstream the_file_after;
-   if (doc_info.doc_flag())
+   if (doc_info.is_doc_enabled())
     {
      std::ostringstream filename;
      filename << doc_info.directory() << "/quadratic_coordinates_" 
@@ -1665,7 +1665,7 @@ void TetgenMesh<ELEMENT>::snap_to_quadratic_surface(
    FreeStandingFaceElement<ELEMENT>* el_pt=face_el_pt[b];
    
    // Doc boundary coordinate on quadratic facet representation
-   if (doc_info.doc_flag())
+   if (doc_info.is_doc_enabled())
     {
      Vector<double> s(2);
      Vector<double> zeta(2);
@@ -1721,7 +1721,7 @@ void TetgenMesh<ELEMENT>::snap_to_quadratic_surface(
          nod_pt->get_coordinates_on_boundary(boundary_id[b],boundary_zeta);
          
          // Doc it?
-         if (doc_info.doc_flag())
+         if (doc_info.is_doc_enabled())
           {
            the_file_before << nod_pt->x(0) << " " 
                            << nod_pt->x(1) << " " 
@@ -1767,7 +1767,7 @@ void TetgenMesh<ELEMENT>::snap_to_quadratic_surface(
           }
          
          // Doc it?
-         if (doc_info.doc_flag())
+         if (doc_info.is_doc_enabled())
           {
            the_file_after << nod_pt->x(0) << " " 
                           << nod_pt->x(1) << " " 

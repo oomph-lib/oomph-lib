@@ -115,11 +115,11 @@ class NewMumpsSolver : public LinearSolver
  /// Note: returns the global result Vector.
  void resolve(const DoubleVector &rhs, DoubleVector &result);
 
- /// Return the Doc_stats flag
- bool& doc_stats()
-  {
-   return Doc_stats;
-  }
+ /// Enable documentation of statistics
+ void enable_doc_stats() {Doc_stats = true;}
+
+ /// Disable documentation of statistics
+ void disable_doc_stats() {Doc_stats = false;}
 
  /// \short Returns the time taken to assemble the Jacobian matrix and 
  /// residual vector
@@ -325,11 +325,12 @@ class NewMumpsPreconditioner : public Preconditioner
    Solver.clean_up_memory();
   }
   
-  /// Enable documentation of time
-  bool& doc_time() 
-   {
-    return Solver.doc_time();
-   }
+
+  /// Enable documentation of timings
+  void  enable_doc_time() {Solver.enable_doc_time();}
+  
+  /// Disable the documentation of timings
+  void disable_doc_time() {Solver.disable_doc_time();}
   
   private:
   

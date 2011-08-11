@@ -314,7 +314,7 @@ FpTestProblem::FpTestProblem(
    
    // Shut up!
    static_cast<HyprePreconditioner*>(P_matrix_preconditioner_pt)->
-    doc_time()=false;
+    disable_doc_time();
    
 #endif
   }

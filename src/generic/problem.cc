@@ -211,7 +211,7 @@ namespace oomph
   {
    // Set dummy doc paramemters
    DocInfo doc_info;
-   doc_info.doc_flag()=false;
+   doc_info.disable_doc();
    // Set the sizes of the input and output vectors
    unsigned n_element=mesh_pt()->nelement();
    Vector<unsigned> element_partition(n_element,0);
@@ -252,7 +252,7 @@ namespace oomph
 #endif
    // Set dummy doc paramemters
    DocInfo doc_info;
-   doc_info.doc_flag()=false;
+   doc_info.disable_doc();
 
    // Set the size of the output vector
    unsigned n_element=element_partition.size();
@@ -662,7 +662,7 @@ namespace oomph
 
   // Doc the original mesh on proc 0
   //--------------------------------
-  if (doc_info.doc_flag())
+  if (doc_info.is_doc_enabled())
    {
     if (rank==0)
      {
@@ -8265,7 +8265,7 @@ newton_solve_continuation(double* const &parameter_pt,
  double arc_length_constraint_residual=0.0;
 
  //Are we storing the matrix in the linear solve
- bool enable_resolve = Linear_solver_pt->resolve_is_enabled();
+ bool enable_resolve = Linear_solver_pt->is_resolve_enabled();
  
  //For this problem, we must store the residuals
  Linear_solver_pt->enable_resolve();
@@ -8566,7 +8566,7 @@ calculate_continuation_derivatives(double* const &parameter_pt)
  else
   {
    //Save the status before entry to this routine
-   bool enable_resolve = Linear_solver_pt->resolve_is_enabled();
+   bool enable_resolve = Linear_solver_pt->is_resolve_enabled();
    
    //We need to do resolves
    Linear_solver_pt->enable_resolve();
@@ -10573,7 +10573,7 @@ unsigned Problem::self_test()
   {
    // Note: This throws an error if it fails so no return is required.
    DocInfo tmp_doc_info;
-   tmp_doc_info.doc_flag()=false;
+   tmp_doc_info.disable_doc();
    check_halo_schemes(tmp_doc_info);
   }
 
@@ -11504,7 +11504,7 @@ void Problem::doc_errors(DocInfo& doc_info)
 
      // Get error for all elements
      Vector<double> elemental_error(mmesh_pt->nelement());
-     if (!doc_info.doc_flag())
+     if (!doc_info.is_doc_enabled())
       {
        error_estimator_pt->get_element_errors(this->communicator_pt(),
                                               mesh_pt(0),
@@ -12513,7 +12513,7 @@ void Problem::check_halo_schemes(DocInfo& doc_info)
     {
      oomph_info << "Checking halo schemes on submesh " << i_mesh << std::endl;
      doc_info.number()=i_mesh;
-     if (i_mesh!=0) doc_info.doc_flag()=false;
+     if (i_mesh!=0) doc_info.disable_doc();
      mesh_pt(i_mesh)->check_halo_schemes(this->communicator_pt(),doc_info,
                                          Max_permitted_error_for_halo_check);
     }

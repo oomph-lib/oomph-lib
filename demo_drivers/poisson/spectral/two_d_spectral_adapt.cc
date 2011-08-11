@@ -366,8 +366,6 @@ int main()
  // Set output directory
  doc_info.set_directory("RESLT_2d");
 
- doc_info.doc_flag() = true;
-
  // Step number
  doc_info.number()=0;
 

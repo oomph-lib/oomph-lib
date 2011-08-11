@@ -189,7 +189,7 @@ void ARPACK::solve_eigenproblem(Problem* const &problem_pt,
  Linear_solver_pt->enable_resolve();
  
  //Do not report the time taken
- Linear_solver_pt->doc_time() = false;
+ Linear_solver_pt->disable_doc_time();
 
  do
   {

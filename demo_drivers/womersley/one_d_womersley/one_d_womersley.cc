@@ -1882,7 +1882,7 @@ int main(int argc, char *argv[])
     {
      // Construct the FSI preconditioner
      fsi_preconditioner_pt = new FSIPreconditioner;
-     fsi_preconditioner_pt->doc_time() = true;
+     fsi_preconditioner_pt->enable_doc_time();
 
      // Get a pointer to the LSC preconditioner
      ns_preconditioner_pt = dynamic_cast<NavierStokesLSCPreconditioner*>
@@ -1916,7 +1916,7 @@ int main(int argc, char *argv[])
    // Settings for the LCS preconditioner
    ns_preconditioner_pt->set_navier_stokes_mesh(
     problem.create_mesh_for_navier_stokes_preconditioner());
-   ns_preconditioner_pt->doc_time() = true;
+   ns_preconditioner_pt->enable_doc_time();
    
    // Set up the P sub block preconditioner
 #ifdef OOMPH_HAS_HYPRE

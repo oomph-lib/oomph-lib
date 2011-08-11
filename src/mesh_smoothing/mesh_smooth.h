@@ -123,7 +123,7 @@ public:
  {
   // Dummy doc_info
   DocInfo doc_info;
-  doc_info.doc_flag()=false;
+  doc_info.disable_doc();
   NonLinearElasticitySmoothMesh<ELEMENT>()(orig_mesh_pt,
                                            copy_of_mesh_pt,
                                            controlled_boundary_id,
@@ -463,7 +463,7 @@ public:
  {
   
   // Bail out
-  if (!doc_info.doc_flag()) return;
+  if (!doc_info.is_doc_enabled()) return;
   
   std::ofstream some_file;
   std::ostringstream filename;

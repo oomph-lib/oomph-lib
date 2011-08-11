@@ -311,7 +311,7 @@ void TreeBasedRefineableMeshBase::adapt(OomphCommunicator* comm_pt,
 
   // Setup doc info
   DocInfo local_doc_info;
-  if (doc_info_pt()==0) {local_doc_info.doc_flag()=false;}
+  if (doc_info_pt()==0) {local_doc_info.disable_doc();}
   else {local_doc_info=doc_info();}
                               
 
@@ -885,7 +885,7 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
    //If we are documenting the output, create the filename
    std::ostringstream fullname;
    std::ofstream new_nodes_file;
-   if(doc_info.doc_flag())
+   if(doc_info.is_doc_enabled())
     {
      fullname << doc_info.directory() << "/new_nodes" 
               << doc_info.number() << ".dat";
@@ -917,7 +917,7 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
     }
 
    //Close the new nodes files, if it was opened
-   if(doc_info.doc_flag()) {new_nodes_file.close();}
+   if(doc_info.is_doc_enabled()) {new_nodes_file.close();}
 
    // Loop over all nodes in mesh and free the dofs of those that were
    //-----------------------------------------------------------------
@@ -1076,7 +1076,7 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
    Vector<std::ofstream*> hanging_output_files;
    //Setup the output files for hanging nodes, this must be called
    //precisely once for the forest. Note that the files will only
-   //actually be opened if doc_info.doc_flag() is true
+   //actually be opened if doc_info.is_doc_enabled() is true
    Forest_pt->open_hanging_node_files(doc_info,hanging_output_files);
 
    for(unsigned long e=0;e<num_tree_nodes;e++)
@@ -1254,7 +1254,7 @@ void TreeBasedRefineableMeshBase::adapt_mesh(DocInfo& doc_info)
 
    // Final doc
    //-----------
-   if (doc_info.doc_flag())
+   if (doc_info.is_doc_enabled())
     {
      // Doc the boundary conditions ('0' for non-existent, '1' for free, 
      //----------------------------------------------------------------

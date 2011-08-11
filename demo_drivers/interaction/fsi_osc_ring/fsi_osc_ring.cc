@@ -361,21 +361,21 @@ void FSIRingProblem::doc_solution(const unsigned& i,
   // If we at an integer multiple of nskip, full documentation.
   if (i%nskip==0)
    {
-    doc_info.doc_flag()=true;
+    doc_info.enable_doc();
     cout << "Full doc step " <<  doc_info.number()
          << " for time " << time_stepper_pt()->time_pt()->time() << std::endl;
    }
   //Otherwise, just output the trace file
   else
    {
-    doc_info.doc_flag()=false;
+    doc_info.disable_doc();
     cout << "Only trace for time " 
          << time_stepper_pt()->time_pt()->time() << std::endl;
    }
   
     
   // If we are at a full documentation step, output the fluid solution
-  if (doc_info.doc_flag())
+  if (doc_info.is_doc_enabled())
    {
     //Variables used in the output file.
     ofstream some_file; char filename[100];
@@ -413,14 +413,15 @@ void FSIRingProblem::doc_solution(const unsigned& i,
 
   // Output the number of the corresponding full documentation  
   // file number (or -1 if no full doc was made)
-  if (doc_info.doc_flag()) {trace_file << " " <<doc_info.number()  << " ";}
+  if (doc_info.is_doc_enabled()) 
+   {trace_file << " " <<doc_info.number()  << " ";}
   else {trace_file << " " <<-1  << " ";}
   
   //End the trace file
   trace_file << std::endl;
   
   // Increment counter for full doc
-  if (doc_info.doc_flag()) {doc_info.number()++;}
+  if (doc_info.is_doc_enabled()) {doc_info.number()++;}
 }
 
 //======================================================================
@@ -793,7 +794,7 @@ void FSIRingProblem::dynamic_run()
  for(unsigned i=1;i<=nstep;i++)
   {
    // Switch doc off during solve
-   doc_info.doc_flag()=false;
+   doc_info.disable_doc();
 
    // Solve
    unsigned max_adapt=1; 

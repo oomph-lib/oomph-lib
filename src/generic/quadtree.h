@@ -426,8 +426,8 @@ class QuadTreeForest : public TreeForest
  
  /// \short Document and check all the neighbours of all the nodes
  /// in the forest. DocInfo object specifies the output directory
- /// and file numbers for the various files. If \c doc_info.doc_flag()=false
- /// no output is created.
+ /// and file numbers for the various files. If \c doc_info.disable_doc()
+ /// has been called no output is created.
  void check_all_neighbours(DocInfo &doc_info);
 
  /// \short Open output files that will store any hanging nodes in

@@ -977,7 +977,7 @@ RefineableRotatingCylinderProblem<ELEMENT>::RefineableRotatingCylinderProblem(
 
  
  /// Switch off full doc for frontal solver
- //static_cast<HSL_MA42*>(linear_solver_pt())->doc_stats()=false;
+ //static_cast<HSL_MA42*>(linear_solver_pt())->disable_doc_stats();
 
  //Allocate the timestepper (no timedependence)
  add_time_stepper_pt(new Steady<0>);

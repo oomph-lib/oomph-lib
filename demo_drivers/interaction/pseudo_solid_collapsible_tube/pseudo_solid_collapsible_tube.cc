@@ -167,7 +167,7 @@ namespace LSC_Preconditioner_Helper
   hypre_preconditioner_pt->amg_strength() = 0.25;
   hypre_preconditioner_pt->amg_coarsening() = 6;
   hypre_preconditioner_pt->amg_damping() = 0.5;
-  hypre_preconditioner_pt->doc_time()=false;
+  hypre_preconditioner_pt->disable_doc_time();
   return hypre_preconditioner_pt;
  }
 }
@@ -188,7 +188,7 @@ namespace Real_Solid_Preconditioner_Helper
   hypre_preconditioner_pt->hypre_method() = HyprePreconditioner::BoomerAMG;
   hypre_preconditioner_pt->amg_strength() = 0.25;
   hypre_preconditioner_pt->amg_coarsening() = 6;
-  hypre_preconditioner_pt->doc_time()=false;
+  hypre_preconditioner_pt->disable_doc_time();
   return hypre_preconditioner_pt;;
  }
 }
@@ -1669,7 +1669,7 @@ void set_pseudo_elastic_fsi_solver(PseudoElasticFSIProblem& problem)
  p_prec_pt->amg_strength() = 0.25;
  // Use 6 for parallel (Falgout) or 3 (Ruge Stuben)or serial
  p_prec_pt->amg_coarsening() = 6; 
- p_prec_pt->doc_time() = false;
+ p_prec_pt->disable_doc_time();
  ns_prec_pt->set_p_preconditioner(p_prec_pt);
 */
  

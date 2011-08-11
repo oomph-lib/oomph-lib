@@ -101,14 +101,14 @@ class Problem;
  /// Empty virtual destructor
  virtual ~LinearSolver() {}
 
- /// \short Access function for the Doc_times flag
- bool &doc_time() {return Doc_time;}
+ /// \short Enable documentation of solve times
+ void enable_doc_time() {Doc_time=true;}
 
- /// \short Access function for the Doc_times flag (const version)
- const bool &doc_time() const {return Doc_time;}
+ /// \short Disable documentation of solve times
+ void disable_doc_time() {Doc_time=false;}
 
  /// \short Boolean flag indicating if resolves are enabled
- bool resolve_is_enabled() const {return Enable_resolve;}
+ bool is_resolve_enabled() const {return Enable_resolve;}
 
  /// \short Enable resolve (i.e. store matrix and/or LU decomposition, say)
  /// Virtual so it can be overloaded to perform additional tasks
@@ -255,9 +255,6 @@ class DenseLU : public LinearSolver
   {
    return Solution_time;
   }
-
- /// access function to Doc_time
- bool& doc_time() { return Doc_time; }
 
   protected:
 
@@ -459,11 +456,11 @@ class SuperLUSolver : public LinearSolver
  /// Note: returns the global result Vector.
  void resolve(const DoubleVector &rhs, DoubleVector &result);
 
- /// Return the Doc_stats flag
- bool& doc_stats()
-  {
-   return Doc_stats;
-  }
+ /// Enable documentation of solver statistics
+ void enable_doc_stats() {Doc_stats = true;}
+
+ /// Disable documentation of solver statistics
+ void disable_doc_stats() {Doc_stats = false;}
 
  /// \short returns the time taken to assemble the jacobian matrix and 
  /// residual vector
@@ -503,11 +500,13 @@ class SuperLUSolver : public LinearSolver
  // SuperLU (serial) methods
  ///////////////////////////
 
- /// Access function to compressed row flag for superlu serial
- bool& compressed_row_flag_for_superlu_serial() 
-  {
-   return Serial_compressed_row_flag;
-  }
+ /// Use the compressed row format in superlu serial
+ void use_compressed_row_for_superlu_serial()
+ {Serial_compressed_row_flag=true;}
+
+ /// Use the compressed column format in superlu serial
+ void use_compressed_column_for_superlu_serial()
+ {Serial_compressed_row_flag=false;}
 
 #ifdef OOMPH_HAS_MPI
 

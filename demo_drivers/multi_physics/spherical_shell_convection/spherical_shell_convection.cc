@@ -29,7 +29,7 @@
 //an electromagnetic (rather than gravitational) central body force. 
 //The problem is described in Feudel et al. (2011) Phys Rev E 83, 046304
 //There is a loss of spherical symmetry at Ra=2491, which leads to an
-//axisymmetric branch of solutions. 
+//axisymmetric branch of solutions at a transcritical bifurcation.
 
 
 //Generic includes

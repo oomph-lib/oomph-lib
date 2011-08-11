@@ -709,7 +709,7 @@ unsigned Z2ErrorEstimator::nrecovery_terms(const unsigned& dim)
 
 //======================================================================
 /// Get Vector of Z2-based error estimates for all elements in mesh.
-/// If doc_info.doc_flag()=true, doc FE and recovered fluxes in 
+/// If doc_info.is_doc_enabled()=true, doc FE and recovered fluxes in 
 /// - flux_fe*.dat
 /// - flux_rec*.dat 
 //======================================================================
@@ -1515,7 +1515,7 @@ void Z2ErrorEstimator::get_element_errors(OomphCommunicator* comm_pt,
      }
 
   // Doc global fluxes?
-  if (doc_info.doc_flag())
+  if (doc_info.is_doc_enabled())
    {
     doc_flux(comm_pt,mesh_pt,num_flux_terms,
              rec_flux_map,elemental_error,doc_info);

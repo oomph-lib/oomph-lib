@@ -1173,7 +1173,7 @@ void QuadTreeForest::check_all_neighbours(DocInfo &doc_info)
  std::ofstream neigh_txt_file;
 
  //If we are documenting the results, then open the files
- if (doc_info.doc_flag())
+ if (doc_info.is_doc_enabled())
   {
    std::ostringstream fullname;
    fullname << doc_info.directory() << "/neighbours"
@@ -1205,7 +1205,7 @@ void QuadTreeForest::check_all_neighbours(DocInfo &doc_info)
     << Tree::max_neighbour_finding_tolerance() << std::endl;
    
    //Close the files if they were opened
-   if(doc_info.doc_flag())
+   if(doc_info.is_doc_enabled())
     {
      neigh_file.close();
      neigh_txt_file.close();
@@ -1224,7 +1224,7 @@ void QuadTreeForest::check_all_neighbours(DocInfo &doc_info)
   }
  
  //Close the files if they were opened
- if(doc_info.doc_flag())
+ if(doc_info.is_doc_enabled())
   {
    neigh_file.close();
    neigh_txt_file.close();
@@ -1244,7 +1244,7 @@ void QuadTreeForest::open_hanging_node_files(DocInfo &doc_info,
   {output_stream.push_back(new std::ofstream);}
  
  //If we are documenting the output, open the files
- if (doc_info.doc_flag())
+ if (doc_info.is_doc_enabled())
   {
    std::ostringstream fullname;
    fullname << doc_info.directory() << "/hang_nodes_s"

@@ -441,10 +441,10 @@ int main()
    
    /// Use compressed row storage
    static_cast<SuperLUSolver*>(linear_solver_pt)
-    ->compressed_row_flag_for_superlu_serial()=true;
+    ->use_compressed_row_for_superlu_serial();
    
    /// Switch on full doc
-   static_cast<SuperLUSolver*>(linear_solver_pt)->doc_stats()=true;
+   static_cast<SuperLUSolver*>(linear_solver_pt)->enable_doc_stats();
    
    // Choose result directory
    dir_name="RESLT_cr";
@@ -486,10 +486,10 @@ int main()
    
    /// Use compressed row storage
    static_cast<SuperLUSolver*>(linear_solver_pt)
-    ->compressed_row_flag_for_superlu_serial()=false;
+    ->use_compressed_column_for_superlu_serial();
    
    /// Switch on full doc
-   static_cast<SuperLUSolver*>(linear_solver_pt)->doc_stats()=true;
+   static_cast<SuperLUSolver*>(linear_solver_pt)->enable_doc_stats();
 
    // Choose result directory
    dir_name="RESLT_cc";
@@ -528,7 +528,7 @@ int main()
    linear_solver_pt = new HSL_MA42;
    
    /// Switch on full doc
-   static_cast<HSL_MA42*>(linear_solver_pt)->doc_stats()=true;
+   static_cast<HSL_MA42*>(linear_solver_pt)->enable_doc_stats();
    
    // Choose result directory
    dir_name="RESLT_frontal";
@@ -568,11 +568,11 @@ int main()
    linear_solver_pt = new HSL_MA42;
    
    /// Switch on full doc
-   static_cast<HSL_MA42*>(linear_solver_pt)->doc_stats()=true;
+   static_cast<HSL_MA42*>(linear_solver_pt)->enable_doc_stats();
    
    
    /// Switch on re-ordering
-   static_cast<HSL_MA42*>(linear_solver_pt)->reorder_flag()=true;
+   static_cast<HSL_MA42*>(linear_solver_pt)->enable_reordering();
    
    // Choose result directory
    dir_name="RESLT_frontal_reordered";

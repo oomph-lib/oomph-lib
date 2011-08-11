@@ -632,7 +632,6 @@ TestPoissonProblem<ELEMENT>::TestPoissonProblem(
  // Document the mesh adaptation
  DocInfo doc_info;
  doc_info.set_directory("RESLT");
- doc_info.doc_flag()=true;
  mesh_pt()->doc_info_pt()=&doc_info;
 
  // Impose the specific refinement
@@ -910,7 +909,7 @@ void TestPoissonProblem<ELEMENT>::doc_solution(DocInfo& doc_info)
    some_file2.close();
   
    // Doc neighbours
-   doc_info.doc_flag()=true;
+   doc_info.enable_doc();
    mesh_pt()->forest_pt()->check_all_neighbours(doc_info);
   
   

@@ -182,7 +182,7 @@ public:
   {
    DocInfo doc_info;
    doc_info.directory()="";
-   doc_info.doc_flag()=false;
+   doc_info.disable_doc();
    refine_uniformly(doc_info);
   }
 
@@ -354,7 +354,7 @@ public:
    //Create a dummy doc_info object
    DocInfo doc_info;
    doc_info.directory()="";
-   doc_info.doc_flag()=false;
+   doc_info.disable_doc();
    //Call the other adapt mesh
    adapt_mesh(doc_info);
   }

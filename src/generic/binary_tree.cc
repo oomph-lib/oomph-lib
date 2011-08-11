@@ -526,7 +526,7 @@ namespace oomph
   std::ofstream neigh_txt_file;
   
   // If we are documenting the results, then open the files
-  if(doc_info.doc_flag())
+  if(doc_info.is_doc_enabled())
    {
     std::ostringstream fullname;
     fullname << doc_info.directory() << "/neighbours"
@@ -558,7 +558,7 @@ namespace oomph
          << Tree::max_neighbour_finding_tolerance() << std::endl;
         
         // Close the files if they were opened
-        if(doc_info.doc_flag())
+        if(doc_info.is_doc_enabled())
          {
           neigh_file.close();
           neigh_txt_file.close();
@@ -578,7 +578,7 @@ namespace oomph
    }
   
   // Close the files if they were opened
-  if(doc_info.doc_flag())
+  if(doc_info.is_doc_enabled())
    {
     neigh_file.close();
     neigh_txt_file.close();

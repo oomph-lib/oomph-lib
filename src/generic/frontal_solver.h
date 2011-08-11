@@ -202,15 +202,23 @@ class HSL_MA42 : public LinearSolver
  /// \short Function to reorder the elements based on Sloan's algorithm
  void reorder_elements(Problem* const &problem_pt);
 
- /// Flag determining if solver stats get doced
- bool& doc_stats() {return Doc_stats;}
+ /// \short Enable documentation of statistics
+ void enable_doc_stats() {Doc_stats = true;}
 
- /// Flag determining if elements get re-ordered by Sloan's algorithm
- bool& reorder_flag() {return Reorder_flag;}
+ /// \short Disable documentation of statistics
+ void disable_doc_stats() {Doc_stats = false;}
 
- /// \short Flag determining if direct access files are to be used to hold
- /// LU factors (slower but more memory efficient)
- bool& use_direct_access_files() {return Use_direct_access_files;}
+ /// \short Enable reordering using Sloan's algorithm
+ void enable_reordering() {Reorder_flag = true;}
+
+ /// \short Disable reordering 
+ void disable_reordering() {Reorder_flag = false;}
+ 
+ /// \short Enable use of direct access files
+ void enable_direct_access_files() {Use_direct_access_files = true;}
+
+ /// \short Disable use of direct access files
+ void disable_direct_access_files() {Use_direct_access_files = false;}
 
  /// \short Factor to increase storage for lenbuf[0]; see MA42 documentation
  /// for details. 

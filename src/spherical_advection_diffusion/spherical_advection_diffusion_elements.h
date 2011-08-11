@@ -305,6 +305,21 @@ public:
     jacobian,
     GeneralisedElement::Dummy_matrix,1);
   }
+
+ /// \short Add the element's contribution to its residual vector and 
+ /// the element Jacobian matrix (wrapper) and mass matrix
+ void fill_in_contribution_to_jacobian_and_mass_matrix(
+  Vector<double> &residuals,
+  DenseMatrix<double> &jacobian,
+  DenseMatrix<double> &mass_matrix)
+  {
+   //Call the generic routine with the flag set to 2
+   fill_in_generic_residual_contribution_spherical_adv_diff(
+    residuals,
+    jacobian,
+    mass_matrix,2);
+  }
+
  
 
  /// Return FE representation of function value u(s) at local coordinate s

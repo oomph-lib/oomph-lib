@@ -840,7 +840,7 @@ TurekProblem(const double &length,
   set_p_preconditioner(P_matrix_preconditioner_pt);
 
  // Shut up
- P_hypre_solver_pt->doc_time()=false;
+ P_hypre_solver_pt->disable_doc_time();
 
 #endif
 #endif

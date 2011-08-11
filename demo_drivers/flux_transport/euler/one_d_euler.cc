@@ -303,7 +303,7 @@ class EulerProblem : public Problem
   {
    this->set_explicit_time_stepper_pt(new RungeKutta<4>);
    this->add_time_stepper_pt(new BDF<4>);
-   this->shut_up_in_newton_solve() = true;
+   this->disable_info_in_newton_solve();
   }
  
  /// Destructor: clean up memory

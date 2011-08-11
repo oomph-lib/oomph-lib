@@ -90,7 +90,7 @@ public :
 
    // Create the Navier Stokes LSC preconditioner
    Navier_stokes_preconditioner_pt = new NavierStokesLSCPreconditioner;
-   Navier_stokes_preconditioner_pt->doc_time()=true;
+   Navier_stokes_preconditioner_pt->disable_doc_time();
 
    //Set the temperature preconditioner
    Temperature_preconditioner_pt = new SuperLUPreconditioner;
@@ -219,9 +219,13 @@ public :
   {
    return Navier_stokes_preconditioner_pt;
   }
+
+ /// Enable documentation of timings
+ void enable_doc_time() {Doc_time = true;}
+
+ /// Disable documentation of timings
+ void disable_doc_time() {Doc_time = false;}
  
- /// Access function for Doc_time
- bool& doc_time() {return Doc_time;}
 
 private:
 

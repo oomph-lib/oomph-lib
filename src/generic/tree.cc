@@ -411,7 +411,7 @@ void TreeForest::close_hanging_node_files(DocInfo &doc_info,
  //Find the number of files
  unsigned n_file = output_stream.size();
  //If we opened the files, close them
- if(doc_info.doc_flag())
+ if(doc_info.is_doc_enabled())
   {
    for(unsigned n=0;n<n_file;n++) {output_stream[n]->close();}
   }

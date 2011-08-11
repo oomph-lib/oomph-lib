@@ -311,7 +311,7 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem(
      
      // Shut up!
      static_cast<HyprePreconditioner*>(P_matrix_preconditioner_pt)->
-      doc_time()=false;
+      disable_doc_time();
     }
 #endif    
 #endif
@@ -349,7 +349,7 @@ RectangularDrivenCavityProblem<ELEMENT>::RectangularDrivenCavityProblem(
        
        // Shut up!
        static_cast<HyprePreconditioner*>(F_matrix_preconditioner_pt)->
-        doc_time()=false;
+        disable_doc_time();
        
        // Set parameters for use as preconditioner in for momentum 
        // block in Navier-Stokes problem

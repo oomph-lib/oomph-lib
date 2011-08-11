@@ -5529,7 +5529,8 @@ unsigned OcTreeForest::self_test()
 //================================================================
 /// Document and check all the neighbours of all the nodes
 /// in the forest. DocInfo object specifies the output directory
-/// and file numbers for the various files. If \c doc_info.doc_flag()=false
+/// and file numbers for the various files. If 
+/// \c doc_info.is_doc_enabled()=false
 /// no output is created.
 //================================================================
 void OcTreeForest::check_all_neighbours(DocInfo &doc_info)
@@ -5545,7 +5546,7 @@ void OcTreeForest::check_all_neighbours(DocInfo &doc_info)
   std::ofstream neigh_file;
   std::ofstream neigh_txt_file;
   //If we are documenting, then do so
-  if (doc_info.doc_flag())
+  if (doc_info.is_doc_enabled())
    {
     std::ostringstream fullname;
     fullname << doc_info.directory() << "/neighbours"
@@ -5575,7 +5576,7 @@ void OcTreeForest::check_all_neighbours(DocInfo &doc_info)
      << Tree::max_neighbour_finding_tolerance() << std::endl;
     
     //Close the files if they were opened
-    if(doc_info.doc_flag())
+    if(doc_info.is_doc_enabled())
      {
       neigh_file.close();
       neigh_txt_file.close();
@@ -5594,7 +5595,7 @@ void OcTreeForest::check_all_neighbours(DocInfo &doc_info)
    }
   
   //Close the documentation files if they were opened
-  if(doc_info.doc_flag())
+  if(doc_info.is_doc_enabled())
    {
     neigh_file.close();
     neigh_txt_file.close();
@@ -5609,7 +5610,7 @@ void OcTreeForest::check_all_neighbours(DocInfo &doc_info)
   std::ofstream no_true_edge_file;
   std::ofstream neigh_txt_file;
   //If we are documenting, then do so
-  if (doc_info.doc_flag())
+  if (doc_info.is_doc_enabled())
    {
     std::ostringstream fullname;
     fullname << doc_info.directory() << "/edge_neighbours"
@@ -5640,7 +5641,7 @@ void OcTreeForest::check_all_neighbours(DocInfo &doc_info)
      << Tree::max_neighbour_finding_tolerance() << std::endl;
     
     //Close the files if they were opened
-    if(doc_info.doc_flag())
+    if(doc_info.is_doc_enabled())
      {
       neigh_file.close();
       no_true_edge_file.close();
@@ -5660,7 +5661,7 @@ void OcTreeForest::check_all_neighbours(DocInfo &doc_info)
    }
   
   //Close the documentation files if they were opened
-  if(doc_info.doc_flag())
+  if(doc_info.is_doc_enabled())
    {
     neigh_file.close();
     no_true_edge_file.close();
@@ -5686,7 +5687,7 @@ void OcTreeForest::open_hanging_node_files(DocInfo &doc_info,
   {output_stream.push_back(new std::ofstream);}
 
  //If we are documenting the output, open the files
- if (doc_info.doc_flag())
+ if (doc_info.is_doc_enabled())
   {
    std::ostringstream fullname;
    fullname << doc_info.directory() << "/hang_nodes_u"

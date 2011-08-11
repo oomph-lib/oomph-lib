@@ -378,7 +378,7 @@ int main(int argc, char **argv)
   // Set linear solver
   problem.linear_solver_pt() = linear_solver_pt;
   
-  linear_solver_pt->doc_time() = true;
+  linear_solver_pt->enable_doc_time();
   
   // Loop over specific built-in Trilinos solvers
   for (unsigned s=0; s<=2; s++)
@@ -447,7 +447,7 @@ int main(int argc, char **argv)
   // Set linear solver
   problem.linear_solver_pt() = linear_solver_pt;
   
-  linear_solver_pt->doc_time() = true;
+  linear_solver_pt->enable_doc_time();
   
   // Loop over specific built-in Trilinos solvers
   for (unsigned s=0; s<=2; s++)
@@ -644,7 +644,7 @@ int main(int argc, char **argv)
   // Set linear solver
   problem.linear_solver_pt() = linear_solver_pt;
   
-  linear_solver_pt->doc_time() = true;
+  linear_solver_pt->enable_doc_time();
   
   // Loop over specific built-in Trilinos solvers
   for (unsigned s=0; s<=2; s++)

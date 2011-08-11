@@ -874,7 +874,7 @@ public:
                  const bool& report_stats=false)
  {
    DocInfo doc_info;
-   doc_info.doc_flag()=false;
+   doc_info.disable_doc();
    bool overrule_keep_as_halo_element_status=false;
    return distribute(comm_pt,element_domain,deleted_element_pt,
                      doc_info,report_stats,
@@ -893,7 +893,7 @@ public:
                                     const bool& report_stats=false)
   {
    DocInfo doc_info;
-   doc_info.doc_flag()=false;
+   doc_info.disable_doc();
    prune_halo_elements_and_nodes(comm_pt,deleted_element_pt,
                                  doc_info,report_stats);
   }
@@ -937,7 +937,7 @@ public:
                                      const bool& report_stats=false)
   {
    DocInfo doc_info;
-   doc_info.doc_flag()=false;
+   doc_info.disable_doc();
    classify_halo_and_haloed_nodes(comm_pt,doc_info,report_stats);
   }
 

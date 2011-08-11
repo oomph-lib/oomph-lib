@@ -71,7 +71,7 @@ namespace oomph
    // of iterations...
    // prec_pt->max_iter() = 4;
    prec_pt->solver_pt()->solver_type() = TrilinosAztecOOSolver::CG;
-   prec_pt->solver_pt()->doc_time()=false;
+   prec_pt->solver_pt()->disable_doc_time();
    return prec_pt;
   }
 #endif

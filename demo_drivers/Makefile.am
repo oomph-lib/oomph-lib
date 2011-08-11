@@ -13,6 +13,7 @@ spherical_advection_diffusion \
 steady_axisym_advection_diffusion \
 navier_stokes \
 axisym_navier_stokes \
+polar_navier_stokes \
 spherical_navier_stokes \
 solid \
 beam \

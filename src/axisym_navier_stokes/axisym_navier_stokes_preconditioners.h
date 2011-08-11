@@ -289,8 +289,11 @@ namespace oomph
      }
    }
 
-   /// Access function for Doc_time
-   bool& doc_time() {return Doc_time;}
+   ///Enable documentation of time
+   void enable_doc_time() {Doc_time = true;}
+
+   ///Disable documentation of time
+   void disable_doc_time() {Doc_time = false;}
 
    /// boolean indicating how the matrix vector product with BFBt should
    /// be performed.\n

@@ -799,7 +799,7 @@ namespace oomph
   LinearSolver* const linear_solver_pt = problem_pt->linear_solver_pt();
 
   //Save the status before entry to this routine
-  bool enable_resolve = linear_solver_pt->resolve_is_enabled();
+  bool enable_resolve = linear_solver_pt->is_resolve_enabled();
 
   //We need to do a resolve
   linear_solver_pt->enable_resolve();
@@ -4054,7 +4054,7 @@ namespace oomph
   LinearSolver* const linear_solver_pt = problem_pt->linear_solver_pt();
 
   //Save the status before entry to this routine
-  bool enable_resolve = linear_solver_pt->resolve_is_enabled();
+  bool enable_resolve = linear_solver_pt->is_resolve_enabled();
 
   //We need to do a resolve
   linear_solver_pt->enable_resolve();

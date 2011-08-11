@@ -791,7 +791,7 @@ void OscRingNStProblem<ELEMENT>::unsteady_run(const unsigned& ntsteps,
  doc_info.number()++;
 
  // Switch off doc during solve
- doc_info.doc_flag()=false;
+ doc_info.disable_doc();
 
  // If we set first to true, then initial guess will be re-assigned
  // after mesh adaptation. Don't want this if we've done a restart.
@@ -815,7 +815,7 @@ void OscRingNStProblem<ELEMENT>::unsteady_run(const unsigned& ntsteps,
  unsteady_newton_solve(dt,max_adapt,first,shift);
 
  // Switch doc back on
- doc_info.doc_flag()=true;
+ doc_info.enable_doc();
 
  // Doc initial solution
  doc_solution(doc_info);
@@ -829,14 +829,14 @@ void OscRingNStProblem<ELEMENT>::unsteady_run(const unsigned& ntsteps,
   {
 
    // Switch off doc during solve
-   doc_info.doc_flag()=false;
+   doc_info.disable_doc();
 
    //Take fixed timestep
    first=false;
    unsteady_newton_solve(dt,max_adapt,first);
 
    // Switch doc back on
-   doc_info.doc_flag()=true;
+   doc_info.enable_doc();
 
    // Doc solution
    //if (icount%10==0)

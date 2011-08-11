@@ -202,8 +202,11 @@ namespace oomph
      BrokenCopy::broken_assign("HypreInterface");
     }
 
-   /// Access function to Hypre_error_messages flag
-   bool& hypre_error_messages() {return Hypre_error_messages;}
+   /// Turn on  the hypre error messages
+   void enable_hypre_error_messages() {Hypre_error_messages=true;}
+
+   /// Turn off hypre error messages
+   void disable_hypre_error_messages() {Hypre_error_messages=false;}
 
    /// \short Enumerated flag to define which Hypre methods are used
    /// CAREFUL: DON'T CHANGE THE ORDER OF THESE!
@@ -705,8 +708,11 @@ namespace oomph
      BrokenCopy::broken_assign("HyprePreconditioner");
     }
 
-   /// Access function to Doc_time
-   bool& doc_time() {return Doc_time;}
+   /// Enable documentation of preconditioner timings
+   void enable_doc_time() {Doc_time = true;}
+
+   /// Disable documentation of preconditioner timings
+   void disable_doc_time() {Doc_time = false;}
    
    /// Access function to Hypre_method flag -- specified via enumeration.
    unsigned& hypre_method() {return Hypre_method;}

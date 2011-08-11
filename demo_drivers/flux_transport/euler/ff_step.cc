@@ -844,7 +844,7 @@ public:
  TwoDDGProblem(const unsigned &Nx, const unsigned &Ny)
   {
    this->set_explicit_time_stepper_pt(new SSP_RungeKutta<2>);
-   this->shut_up_in_newton_solve() = true;
+   this->disable_info_in_newton_solve();
 
    this->enable_discontinuous_formulation();
 
