@@ -440,7 +440,7 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
    // FSIHermiteElements points away from the fluid rather than 
    // into the fluid (as assumed by default) when viewed from
    // the "front" (face 0).
-   elem_pt->normal_points_into_fluid()=false;
+   elem_pt->set_normal_pointing_out_of_fluid();
 
   } // end of loop over elements
 

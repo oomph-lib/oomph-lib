@@ -232,9 +232,13 @@ namespace oomph
      Navier_stokes_mesh_pt = mesh_pt;
     }
 
-   /// \short Flag which is true if velocity mass matrix diagonal
-   /// scaling is used in the Schur complement approximation
-   bool& p_matrix_using_scaling() {return P_matrix_using_scaling;}
+   /// \short Enable velocity mass matrix diagonal scaling in the 
+   /// Schur complement approximation
+   void enable_p_matrix_scaling() {P_matrix_using_scaling=true;}
+
+    /// \short Enable velocity mass matrix diagonal scaling in the 
+   /// Schur complement approximation
+   void disable_p_matrix_scaling() {P_matrix_using_scaling=false;}
 
    /// Method used in the matrix-matrix multiplications
    unsigned& mult_method() {return Mult_method;}

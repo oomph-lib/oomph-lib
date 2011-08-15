@@ -517,7 +517,7 @@ public:
      // This only needs to be set once and is then passed
      // on automatically:
      dynamic_cast<ELEMENT*>(finite_element_pt(e))->
-      use_undeformed_macro_element_for_new_lagrangian_coords()=true;
+      enable_use_of_undeformed_macro_element_for_new_lagrangian_coords();
 
      //Read out the number of linear points in the element
      unsigned Np = 

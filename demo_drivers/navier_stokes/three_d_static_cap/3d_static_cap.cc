@@ -829,7 +829,7 @@ public:
       // Upcast from GeneralisedElement to the present element
       ELEMENT* el_pt = dynamic_cast<ELEMENT*>(element_pt(i));
       
-      el_pt->use_undeformed_macro_element_for_new_lagrangian_coords()=true;
+      el_pt->enable_use_of_undeformed_macro_element_for_new_lagrangian_coords();
      }
     
     // Refine uniformly

@@ -234,13 +234,13 @@ CompressedSquareProblem<ELEMENT>::CompressedSquareProblem(
      // associated tutorial) or not (formulation II)
      if (incompress)
       {     
-       test_pt->incompressible()=true;
+       test_pt->set_incompressible();
       }
      else
       {
        // Note that this assignment isn't strictly necessary as it's the
        // default setting, but it doesn't do any harm to be explicit.
-       test_pt->incompressible()=false;
+       test_pt->set_compressible();
       }
     }
   } // end compressibility

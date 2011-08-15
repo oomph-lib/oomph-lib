@@ -325,10 +325,14 @@ class CRComplexMatrix : public CRMatrix<std::complex<double> >,
  /// Destructor: Kill the LU decomposition if it has been computed
  virtual ~CRComplexMatrix() {clean_up_memory();}
  
- /// \short Flag to indicate if stats are to be displayed during
+ /// \short Set flag to indicate that stats are to be displayed during
  /// solution of linear system with SuperLU
- bool& doc_stats_during_solve() {return Doc_stats_during_solve;}
+ void enable_doc_stats() {Doc_stats_during_solve=true;}
  
+ // \short Set flag to indicate that stats are not to be displayed during
+ /// the solve
+ void disable_doc_stats() {Doc_stats_during_solve=false;}
+
    /// Return the number of rows of the matrix
  inline unsigned long nrow() const 
   {return CRMatrix<std::complex<double> >::nrow();}
@@ -436,10 +440,14 @@ class CCComplexMatrix : public ComplexMatrixBase,
  /// Destructor: Kill the LU factors if they have been setup.
  virtual ~CCComplexMatrix() {clean_up_memory();}
 
- /// \short Flag to indicate if stats are to be displayed during
+ /// \short Set flag to indicate that stats are to be displayed during
  /// solution of linear system with SuperLU
- bool& doc_stats_during_solve() {return Doc_stats_during_solve;}
+ void enable_doc_stats() {Doc_stats_during_solve=true;}
  
+ // \short Set flag to indicate that stats are not to be displayed during
+ /// the solve
+ void disable_doc_stats() {Doc_stats_during_solve=false;}
+
  /// Return the number of rows of the matrix
  inline unsigned long nrow() const 
   {return CCMatrix<std::complex<double> >::nrow();}

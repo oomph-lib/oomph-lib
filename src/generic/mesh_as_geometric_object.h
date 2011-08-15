@@ -229,15 +229,6 @@ public:
    BrokenCopy::broken_assign("MeshAsGeomObject");
   }
 
-
- /// \short In parallel computation, suppress synchronisation of bins
- /// Default is false. If set to true, each processor will create
- /// its own bin structure, spanning only its own elements
- bool& suppress_synchronisation_of_bins()
-  {
-   return Suppress_synchronisation_of_bins;
-  }
-
  /// How many items of Data does the shape of the object depend on?
  unsigned ngeom_data() const {return Geom_data_pt.size();}
  

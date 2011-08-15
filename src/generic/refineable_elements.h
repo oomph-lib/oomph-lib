@@ -755,7 +755,7 @@ void assemble_local_to_lagrangian_jacobian(
  void fill_in_jacobian_from_solid_position_by_fd(Vector<double> & residuals,
                                              DenseMatrix<double> &jacobian);
 
- /// \short Access fct to flag deciding if the Lagrangian coordinates of 
+ /// \short Return the flag deciding if the Lagrangian coordinates of 
  /// newly-created interior SolidNodes are to be determined by the father 
  /// element's undeformed MacroElement representation (if it has one). 
  /// Default: False as it means that, following a refinement an element 
@@ -766,9 +766,20 @@ void assemble_local_to_lagrangian_jacobian(
  /// either way as the difference between the two formulations only matters
  /// at finite resolution so we have no right to say that one is "more correct"
  /// than the other...
- bool& use_undeformed_macro_element_for_new_lagrangian_coords()
-  {return Use_undeformed_macro_element_for_new_lagrangian_coords;}
+ bool is_undeformed_macro_element_used_for_new_lagrangian_coords() const
+ {return  Use_undeformed_macro_element_for_new_lagrangian_coords;}
 
+ /// \short Set the flag deciding if the Lagrangian coordinates of 
+ /// newly-created interior SolidNodes are to be determined by the father 
+ /// element's undeformed MacroElement representation (if it has one). 
+ void enable_use_of_undeformed_macro_element_for_new_lagrangian_coords()
+  {Use_undeformed_macro_element_for_new_lagrangian_coords=true;}
+
+ /// \short Unset the flag deciding if the Lagrangian coordinates of 
+ /// newly-created interior SolidNodes are to be determined by the father 
+ /// element's undeformed MacroElement representation (if it has one). 
+ void disable_use_of_undeformed_macro_element_for_new_lagrangian_coords()
+  {Use_undeformed_macro_element_for_new_lagrangian_coords=false;}
 
  /// \short Access the local equation number of of hanging node variables
  /// associated with nodal positions. The function returns a dense
@@ -785,7 +796,7 @@ void assemble_local_to_lagrangian_jacobian(
   {
    Use_undeformed_macro_element_for_new_lagrangian_coords=
     dynamic_cast<RefineableSolidElement*>(father_element_pt())
-    ->use_undeformed_macro_element_for_new_lagrangian_coords();
+    ->is_undeformed_macro_element_used_for_new_lagrangian_coords();
    
    RefineableElement::further_build();
   }

@@ -74,7 +74,7 @@ namespace oomph
   // even when no elements are assigned to a certain processor
 #ifdef OOMPH_HAS_MPI
   //Only a problem if the mesh has been distributed
-  if(mesh_pt->mesh_has_been_distributed())
+  if(mesh_pt->is_mesh_distributed())
    {
     //Need a non-null communicator
     if(Communicator_pt!=0)
@@ -507,7 +507,7 @@ namespace oomph
 #ifdef OOMPH_HAS_MPI
    // If the mesh has been distributed and we want consistent bins
    // across all processors
-   if ( mesh_pt->mesh_has_been_distributed() && 
+   if ( mesh_pt->is_mesh_distributed() && 
         (!Suppress_synchronisation_of_bins) )
     {
      // .. we need a non-null communicator!

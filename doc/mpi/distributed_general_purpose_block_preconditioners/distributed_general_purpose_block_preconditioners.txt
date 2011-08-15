@@ -194,12 +194,12 @@ We introduced four general purpose block preconditioning methodologies in the
 \until prec_pt = new BlockDiagonalPreconditioner<CRDoubleMatrix>;
 - \b Enabling \b Two-\b Level \b Block \b Diagonal \b Preconditioning. By default
   two-level preconditioning is disabled and hence \c
-  use_two_level_parallelisation() must be set to \c true.
+  enable_two_level_parallelisation() must have been called.
   Once this is done, each subsidiary system will be solved on an (as near to) equal size
   subset of processes.
 \dontinclude airy_cantilever.cc
 \skipline Two Level Block Diagonal
-\until (prec_pt)->use_two_level_parallelisation() = true;
+\until (prec_pt)->enable_two_level_parallelisation();
 - \b Block \b Upper \b Triangular \b Preconditioning. Both block
   triangular preconditioners are implemented in the class \c
   BlockTriangularPreconditioner. By default this employs the

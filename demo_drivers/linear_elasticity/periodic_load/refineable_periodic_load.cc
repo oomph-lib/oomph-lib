@@ -210,12 +210,12 @@ RefineablePeriodicLoadProblem<ELEMENT>::RefineablePeriodicLoadProblem
     // The western neighbours of the elements on the left
     // boundary are those on the right
     left_root_pt[i]->neighbour_pt(W) = right_root_pt[i];
-    left_root_pt[i]->neighbour_periodic(W) = true; 
+    left_root_pt[i]->set_neighbour_periodic(W); 
     
     // The eastern neighbours of the elements on the right
     // boundary are those on the left
     right_root_pt[i]->neighbour_pt(E) = left_root_pt[i];
-    right_root_pt[i]->neighbour_periodic(E) = true;     
+    right_root_pt[i]->set_neighbour_periodic(E);     
    } // done
 
 

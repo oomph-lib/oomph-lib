@@ -711,8 +711,14 @@ public virtual SolidFiniteElement
     calculate_second_piola_kirchhoff_stress(g,G,sigma,Gup,detG);
   }
  
- /// Return the boolean incompressible
- bool &incompressible() {return Incompressible;}
+ /// Return whether the material is incompressible
+ bool is_incompressible() const {return Incompressible;}
+ 
+ /// Set the material to be incompressible
+ void set_incompressible() {Incompressible=true;}
+ 
+ /// Set the material to be compressible
+ void set_compressible() {Incompressible=false;}
  
  /// Return the number of solid pressure degrees of freedom
  virtual unsigned nsolid_pres() const=0;

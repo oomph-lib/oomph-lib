@@ -315,7 +315,7 @@ void QElement<1,NNODE_1D>::build_face_element(const int &face_index,
  // If the bulk element is halo then the face element must be too
  if (this->is_halo())
   {
-   face_element_pt->is_halo()=true;
+   face_element_pt->set_halo();
   }
 #endif
  
@@ -748,7 +748,7 @@ void QElement<2,NNODE_1D>::build_face_element(const int &face_index,
  // If the bulk element is halo then the face element must be too
  if (this->is_halo())
   {
-   face_element_pt->is_halo()=true;
+   face_element_pt->set_halo();
   }
 #endif
 
@@ -1257,7 +1257,7 @@ void QElement<3,NNODE_1D>::output(FILE* file_pt, const unsigned &n_plot)
  // If the bulk element is halo then the face element must be too
  if (this->is_halo())
   {
-   face_element_pt->is_halo()=true;
+   face_element_pt->set_halo();
   }
 #endif
 

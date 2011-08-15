@@ -89,12 +89,14 @@ class NewMumpsSolver : public LinearSolver
    clean_up_memory();
   }
 
-
- /// Boolean to suppress warning about communicator not equal to MPI_COMM_WORLD
- bool& suppress_warning_about_MPI_COMM_WORLD()
-  {
-   return Suppress_warning_about_MPI_COMM_WORLD;
-  }
+ /// \short Set boolean to suppress warning about communicator 
+ /// not equal to MPI_COMM_WORLD
+ void enable_suppress_warning_about_MPI_COMM_WORLD()
+ {Suppress_warning_about_MPI_COMM_WORLD=true;}
+ 
+ /// Don't  suppress warning about communicator not equal to MPI_COMM_WORLD
+ void disable_suppress_warning_about_MPI_COMM_WORLD()
+ {Suppress_warning_about_MPI_COMM_WORLD=false;}
  
  /// \short Solver: Takes pointer to problem and returns the results Vector
  /// which contains the solution of the linear system defined by
@@ -135,25 +137,30 @@ class NewMumpsSolver : public LinearSolver
    return Solution_time;
   }
 
-
- /// \short Return the flag that decides if we're actually solving the
- /// system or just assembling the Jacobian and the rhs.
+ /// \short Set the flag to avoid solution of the system, so
+ /// just assemble the Jacobian and the rhs.
  /// (Used only for timing runs, obviously)
- bool &suppress_solve() 
-  {
-   return Suppress_solve;
-  }
+ void enable_suppress_solve() {Suppress_solve = true;}
+
+ /// \short Unset the flag so that the system is actually solved again
+ /// This is the default (obviously)
+ void disable_suppress_solve() {Suppress_solve = false;}
  
- /// \short Returns Delete_matrix_data flag. NewMumpsSolver needs its own copy 
+ /// \short Set Delete_matrix_data flag. MumpsSolver needs its own copy 
  /// of the input matrix, therefore a copy must be made if any matrix 
  /// used with this solver is to be preserved. If the input matrix can be 
  /// deleted the flag can be set to true to reduce the amount of memory 
  /// required, and the matrix data will be wiped using its clean_up_memory()
  /// function.  Default value is false.
- bool &delete_matrix_data()
-  {
-   return Delete_matrix_data;
-  }
+ void enable_delete_matrix_data() {Delete_matrix_data=true;}
+
+ /// \short Unset Delete_matrix_data flag. MumpsSolver needs its own copy 
+ /// of the input matrix, therefore a copy must be made if any matrix 
+ /// used with this solver is to be preserved. If the input matrix can be 
+ /// deleted the flag can be set to true to reduce the amount of memory 
+ /// required, and the matrix data will be wiped using its clean_up_memory()
+ /// function.  Default value is false.
+ void disable_delete_matrix_data() {Delete_matrix_data=false;}
   
  /// \short Do the factorisation stage
  /// Note: if Delete_matrix_data is true the function 

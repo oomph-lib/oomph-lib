@@ -164,13 +164,13 @@ private:
        el_pt->evaluate_shape_derivs_by_chain_rule();
        if (Case_id==1)
         {
-         el_pt->evaluate_dresidual_dnodal_coordinates_by_fd()=true;
+         el_pt->enable_always_evaluate_dresidual_dnodal_coordinates_by_fd();
          if (!done) std::cout << "\n\n [CR residuals] Chain rule and FD" 
                               << std::endl;
         }
        else
         {
-         el_pt->evaluate_dresidual_dnodal_coordinates_by_fd()=false;
+         el_pt->disable_always_evaluate_dresidual_dnodal_coordinates_by_fd();
          if (!done) std::cout << "\n\n [CR residuals] Chain rule and analytic" 
                               << std::endl;
         }
@@ -181,13 +181,13 @@ private:
        el_pt->evaluate_shape_derivs_by_fastest_method();
        if (Case_id==3)
         {
-         el_pt->evaluate_dresidual_dnodal_coordinates_by_fd()=true;
+         el_pt->enable_always_evaluate_dresidual_dnodal_coordinates_by_fd();
          if (!done) std::cout << "\n\n [CR residuals] Fastest and FD" 
                               << std::endl;
         }
        else
         {
-         el_pt->evaluate_dresidual_dnodal_coordinates_by_fd()=false;
+         el_pt->disable_always_evaluate_dresidual_dnodal_coordinates_by_fd();
          if (!done) std::cout << "\n\n [CR residuals] Fastest and analytic" 
                               << std::endl;
          

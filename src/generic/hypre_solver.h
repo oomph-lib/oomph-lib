@@ -568,12 +568,19 @@ namespace oomph
    /// for ILU(k) factorization
    int& euclid_level() {return Euclid_level;}
 
-   /// Access function to Euclid rowScale flag
-   bool& euclid_rowScale() {return Euclid_rowScale;}
+   /// Enable euclid rowScaling
+   void enable_euclid_rowScale() {Euclid_rowScale=true;}
+   
+   /// Disable euclid row scaling
+   void disable_euclid_rowScale() {Euclid_rowScale=false;}
 
-   /// \short Access function to flag which determines if Block Jacobi
-   /// or PILU is used
-   bool& euclid_using_BJ() {return Euclid_using_BJ;}
+   /// \short Enable use of Block Jacobi
+   /// as opposed to PILU 
+   void enable_euclid_using_BJ() {Euclid_using_BJ=true;}
+
+    /// \short Disable use of Block Jacobi,
+   /// so PILU will be used
+   void disable_euclid_using_BJ() {Euclid_using_BJ=false;}
 
    /// \short Function to switch on ILU(k) factorization for Euclid
    /// (default is ILU(k) factorization)
@@ -599,9 +606,17 @@ namespace oomph
    /// As far as the Hypre solvers are concerned the oomph-lib matrix
    /// is no longer required and could be deleted to save memory.
    /// However, this will not be the expected behaviour and therefore
-   /// needs to be requested explicitly by the user by changing this
+   /// needs to be requested explicitly by the user by calling this function
+   /// which changes the
    /// flag from false (its default) to true.
-   bool& delete_matrix() {return Delete_matrix;}
+   void enable_delete_matrix() {Delete_matrix=true;}
+
+    /// \short Hypre copies matrix data from oomph-lib's CRDoubleMatrix
+   /// or DistributedCRDoubleMatrix into its own data structures,
+   /// doubling the memory requirements for the matrix.
+   /// Calling this function ensures that the matrix is not deleted.
+   void disable_delete_matrix() {Delete_matrix=false;}
+
 
    /// \short Function which uses problem_pt's get_jacobian(...) function to
    /// generate a linear system which is then solved. This function deletes
@@ -620,8 +635,8 @@ namespace oomph
    /// As far as the Hypre solvers are concerned, the oomph-lib matrix
    /// is no longer required and could be deleted to save memory.
    /// However, this will not be the expected behaviour and therefore
-   /// needs to be requested explicitly by the user with the
-   /// delete_matrix() function.
+   /// needs to be requested explicitly by the user by calling the
+   /// enable_delete_matrix() function.
    void solve(DoubleMatrixBase* const &matrix_pt,
               const DoubleVector &rhs,
               DoubleVector &solution);
@@ -792,12 +807,19 @@ namespace oomph
    /// Access function to Euclid level parameter for ILU(k) factorization
    int& euclid_level() {return Euclid_level;}
 
-   /// Access function to Euclid rowScale flag
-   bool& euclid_rowScale() {return Euclid_rowScale;}
+    /// Enable euclid rowScaling
+   void enable_euclid_rowScale() {Euclid_rowScale=true;}
+   
+   /// Disable euclid row scaling
+   void disable_euclid_rowScale() {Euclid_rowScale=false;}
 
-   /// \short Access function to flag which determines if Block Jacobi
-   /// or PILU is used
-   bool& euclid_using_BJ() {return Euclid_using_BJ;}
+   /// \short Enable use of Block Jacobi
+   /// as opposed to PILU 
+   void enable_euclid_using_BJ() {Euclid_using_BJ=true;}
+
+    /// \short Disable use of Block Jacobi,
+   /// so PILU will be used
+   void disable_euclid_using_BJ() {Euclid_using_BJ=false;}
 
    /// \short Function to switch on ILU(k) factorization for Euclid
    /// (default is ILU(k) factorization)
@@ -815,14 +837,21 @@ namespace oomph
    unsigned& euclid_print_level() {return Euclid_print_level;}
 
    /// \short Hypre copies matrix data from oomph-lib's CRDoubleMatrix
-   /// or DistributedCRDoubleMatrix into its own data structures, 
+   /// or DistributedCRDoubleMatrix into its own data structures,
    /// doubling the memory requirements for the matrix.
    /// As far as the Hypre solvers are concerned the oomph-lib matrix
    /// is no longer required and could be deleted to save memory.
    /// However, this will not be the expected behaviour and therefore
-   /// needs to be requested explicitly by the user by changing this
+   /// needs to be requested explicitly by the user by calling this function
+   /// which changes the
    /// flag from false (its default) to true.
-   bool& delete_matrix() {return Delete_matrix;}
+   void enable_delete_matrix() {Delete_matrix=true;}
+
+    /// \short Hypre copies matrix data from oomph-lib's CRDoubleMatrix
+   /// or DistributedCRDoubleMatrix into its own data structures,
+   /// doubling the memory requirements for the matrix.
+   /// Calling this function ensures that the matrix is not deleted.
+   void disable_delete_matrix() {Delete_matrix=false;}
 
    /// \short Function to set up a preconditioner for the linear
    /// system defined by matrix_pt. This function is required when
@@ -838,8 +867,8 @@ namespace oomph
    /// As far as the Hypre solvers are concerned, the oomph-lib matrix
    /// is no longer required and could be deleted to save memory.
    /// However, this will not be the expected behaviour and therefore
-   /// needs to be requested explicitly by the user with the
-   /// delete_matrix() function.
+   /// needs to be requested explicitly by the user by calling the
+   /// enable_delete_matrix() function.
    void setup(Problem* problem_pt, DoubleMatrixBase* matrix_pt);
 
    /// \short Function applies solver to vector r for preconditioning.

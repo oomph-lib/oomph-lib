@@ -457,13 +457,27 @@ SegregatedFSICollapsibleChannelProblem(const unsigned& nup,
  //Selet a convergence-acceleration technique based on control flags
 
  // Pointwise Aitken extrapolation
- use_pointwise_aitken()=Flags::Use_pointwise_aitken;
+ if(Flags::Use_pointwise_aitken)
+  {
+   this->enable_pointwise_aitken();
+  }
+ else
+  {
+   this->disable_pointwise_aitken();
+  }
 
  // Under-relaxation
- use_under_relaxation(Flags::Omega_under_relax);
+ this->enable_under_relaxation(Flags::Omega_under_relax);
 
  // Irons and Tuck's extrapolation
- use_irons_and_tuck_extrapolation()=Flags::Use_irons_and_tuck_extrapolation;
+ if(Flags::Use_irons_and_tuck_extrapolation)
+  {
+   this->enable_irons_and_tuck_extrapolation();
+  }
+ else
+  {
+   this->disable_irons_and_tuck_extrapolation();
+  }
 
  //Initialise the number of Picard iterations
  Picard_iter = -1;

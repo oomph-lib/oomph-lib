@@ -333,8 +333,16 @@ class TreeRoot : public virtual Tree
 
  /// \short Return whether the neighbour in the particular direction
  /// is periodic. 
- bool &neighbour_periodic(const int &direction)
+ bool is_neighbour_periodic(const int &direction)
   {return Neighbour_periodic[direction];}
+
+ ///\short Set the neighbour in particular direction to be periodic
+ void set_neighbour_periodic(const int &direction)
+ {Neighbour_periodic[direction] = true;}
+
+ ///\short Set the neighbour in particular direction to be nonperiodic
+ void set_neighbour_nonperiodic(const int &direction)
+ {Neighbour_periodic[direction] = false;}
 
  ///Return the number of neighbours
  unsigned nneighbour() 

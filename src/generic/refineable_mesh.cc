@@ -147,7 +147,7 @@ void TreeBasedRefineableMeshBase::refine_base_mesh(OomphCommunicator* comm_pt,
  get_refinement_levels(my_min,my_max);
  unsigned global_max=0;
 #ifdef OOMPH_HAS_MPI
- if (this->mesh_has_been_distributed())
+ if (this->is_mesh_distributed())
   {
    MPI_Allreduce(&my_max,&global_max,1,MPI_UNSIGNED,MPI_MAX,
                  comm_pt->mpi_comm());
@@ -478,7 +478,7 @@ void TreeBasedRefineableMeshBase::adapt(OomphCommunicator* comm_pt,
   unsigned total_n_refine=0;
 #ifdef OOMPH_HAS_MPI
   // Sum n_refine across all processors
-  if (mesh_has_been_distributed())
+  if (this->is_mesh_distributed())
    {
     MPI_Allreduce(&n_refine,&total_n_refine,1,MPI_INT,MPI_SUM,
                   comm_pt->mpi_comm());
@@ -502,7 +502,7 @@ void TreeBasedRefineableMeshBase::adapt(OomphCommunicator* comm_pt,
   unsigned total_n_unrefine=0;
 #ifdef OOMPH_HAS_MPI
   // Sum n_unrefine across all processors
-  if (mesh_has_been_distributed())
+  if (this->is_mesh_distributed())
    {
     MPI_Allreduce(&n_unrefine,&total_n_unrefine,1,MPI_INT,MPI_SUM,
                   comm_pt->mpi_comm());
@@ -529,7 +529,7 @@ void TreeBasedRefineableMeshBase::adapt(OomphCommunicator* comm_pt,
     // Sanity check: Each processor checks if the enforced unrefinement of
     // its haloed element is matched by enforced unrefinement of the
     // corresponding halo elements on the other processors.
-    if (Mesh_has_been_distributed)
+    if (Mesh_is_distributed)
      {
       // Store number of processors and current process
       MPI_Status status;

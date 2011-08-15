@@ -776,7 +776,7 @@ void Z2ErrorEstimator::get_element_errors(OomphCommunicator* comm_pt,
 
   // Now communicate these via an MPI_Allreduce to every process
   // if the mesh has been distributed
-  if (mesh_pt->mesh_has_been_distributed())
+  if (mesh_pt->is_mesh_distributed())
    {
     MPI_Allreduce(&num_flux_terms_local,&num_flux_terms,1,MPI_INT,
                   MPI_MAX,comm_pt->mpi_comm());
@@ -875,7 +875,7 @@ void Z2ErrorEstimator::get_element_errors(OomphCommunicator* comm_pt,
   int range=n_patch;
 
   // Work out values for parallel non-distributed problem
-  if (!(mesh_pt->mesh_has_been_distributed()))
+  if (!(mesh_pt->is_mesh_distributed()))
    {
     // setup the loop variables
     range = n_patch/n_proc; // number of patches on each proc
@@ -948,7 +948,7 @@ void Z2ErrorEstimator::get_element_errors(OomphCommunicator* comm_pt,
 
 #ifdef OOMPH_HAS_MPI
 
-  if (!mesh_pt->mesh_has_been_distributed() 
+  if (!mesh_pt->is_mesh_distributed() 
       && MPI_Helpers::mpi_has_been_initialised())
    {
     // All local recovered fluxes have been calculated, so now share result
@@ -1029,7 +1029,7 @@ void Z2ErrorEstimator::get_element_errors(OomphCommunicator* comm_pt,
      } // end loop over processors
    
    }
-  else // mesh_has_been_distributed=true
+  else // is_mesh_distributed=true
    {
 
 #endif // end ifdef OOMPH_HAS_MPI for parallel job without mesh distribution
@@ -1080,7 +1080,7 @@ void Z2ErrorEstimator::get_element_errors(OomphCommunicator* comm_pt,
 
 
 #ifdef OOMPH_HAS_MPI
-   } // End if(mesh_has_been_distributed)
+   } // End if(is_mesh_distributed)
 #endif
 
   // Cleanup patch storage scheme
@@ -1343,7 +1343,7 @@ void Z2ErrorEstimator::get_element_errors(OomphCommunicator* comm_pt,
   // guarantees that they get through in the correct order
 #ifdef OOMPH_HAS_MPI
 
-  if (mesh_pt->mesh_has_been_distributed())
+  if (mesh_pt->is_mesh_distributed())
    {
     for (int iproc=0; iproc<n_proc; iproc++)
      {
@@ -1460,7 +1460,7 @@ void Z2ErrorEstimator::get_element_errors(OomphCommunicator* comm_pt,
    {
     // In parallel, perform reduction operation to get global value
 #ifdef OOMPH_HAS_MPI
-    if (mesh_pt->mesh_has_been_distributed())
+    if (mesh_pt->is_mesh_distributed())
      {
       Vector<double> total_flux_norm(n_compound_flux);
       // every process needs to know the sum

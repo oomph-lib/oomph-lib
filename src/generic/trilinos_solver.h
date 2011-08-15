@@ -431,8 +431,11 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
   clean_up_memory();
  }
 
- /// Access function to Delete_matrix
- bool& delete_matrix() {return Delete_matrix;}
+ /// \short Call if the matrix can be deleted
+ void enable_delete_matrix() {Delete_matrix=true;}
+
+ ///\ short Call if the matrix can not be deleted (default)
+ void disable_delete_matrix() {Delete_matrix=false;}
 
  /// Access function to Max_iter
  unsigned& max_iter() {return Max_iter;}
@@ -452,21 +455,22 @@ class TrilinosAztecOOSolver : public IterativeLinearSolver
  /// Function to return Linear_solver_solution_time
  double linear_solver_solution_time() {return Linear_solver_solution_time;}
 
- /// Access function to Assemble serial jacobian
- bool& assemble_serial_jacobian() { return Assemble_serial_jacobian; }
+ /// \short Set the assembly of the serial jacobian 
+ /// when performing a problem-based solve
+ void enable_assemble_serial_jacobian() {Assemble_serial_jacobian=true;}
 
- /// Access function to Assemble serial jacobian (const version)
- bool assemble_serial_jacobian() const { return Assemble_serial_jacobian; }
+ /// Unset the assembly of the serial jacobian
+ void disable_assemble_serial_jacobian() {Assemble_serial_jacobian=false;}
 
  /// if this solver is using an oomph-lib preconditioner then the vectors
  /// passed to preconditioner_solve(...) should be using the values in the
  /// epetra vector as external data. If the vectors are using external
  /// data then rebuild(...) methods cannot be used be used in the 
  /// preconditioner.
- bool& if_oomphlib_preconditioner_use_epetra_values()
-  {
-   return If_oomphlib_preconditioner_use_epetra_values;
-  }
+ //bool& if_oomphlib_preconditioner_use_epetra_values()
+ // {
+ //  return If_oomphlib_preconditioner_use_epetra_values;
+ // }
 
  /// \short Enumerated list to define which AztecOO solver is used
  enum AztecOO_solver_types{CG,

@@ -463,7 +463,7 @@ int main(int argc, char **argv)
    problem.distribute(element_partition,report_stats);
    
    // This is a validation run: use the default partition when load balancing
-   problem.use_default_partition_in_load_balance()=true;    
+   problem.set_default_partition_in_load_balance();    
   }
  
  //Output initial mesh

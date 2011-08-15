@@ -553,7 +553,7 @@ ShellProblem<ELEMENT>::ShellProblem(const unsigned &nx, const unsigned &ny,
 
  //This mesh must be retained as halo on all processors
 #ifdef OOMPH_HAS_MPI
- Displacement_control_mesh_pt->keep_all_elements_as_halos() = true;
+ Displacement_control_mesh_pt->set_keep_all_elements_as_halos();
 #endif
 
 

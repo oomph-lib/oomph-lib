@@ -983,11 +983,24 @@ public:
 
 #ifdef OOMPH_HAS_MPI
 
- /// Is this element a halo?
- bool& is_halo() {return Is_halo;}
+ /// \short Label the element as halo
+ void set_halo() {Is_halo=true;}
 
- /// Does this element need to be kept as a halo element during a distribute?
- bool& must_be_kept_as_halo() {return Must_be_kept_as_halo;}
+ /// \short Label the element as not being a halo
+ void set_nonhalo() {Is_halo=false;}
+
+ /// \short Is this element a halo?
+ bool is_halo() const {return Is_halo;} 
+
+ /// Insist that this element be kept as a halo element during a distribute?
+ void set_must_be_kept_as_halo() {Must_be_kept_as_halo = true;}
+
+ /// \short Do not insist that this element be kept as a halo element during
+ /// distribution
+ void unset_must_be_kept_as_halo() {Must_be_kept_as_halo = false;}
+
+ /// \short Test whether the element must be kept as a halo element
+ bool must_be_kept_as_halo() const {return Must_be_kept_as_halo;}
 
 #endif
 
@@ -3086,18 +3099,18 @@ public:
   return Solid_ic_pt;
   }
 
- /// \short  Access function to flag which indicates which system of 
- /// equations to solve
- /// when assigning initial conditions for time-dependent problems.
- /// If true, solve for the history value that
+ /// \short Set to alter the problem being solved when 
+ /// assigning the initial conditions for time-dependent problems:
+ /// solve for the history value that
  /// corresponds to the acceleration in the Newmark scheme by demanding
  /// that the PDE is satisifed at the initial time.  In this case
  /// the Jacobian is replaced by the mass matrix.
- bool& solve_for_consistent_newmark_accel_flag()
-  {
-   return  Solve_for_consistent_newmark_accel_flag;
-  }
+ void enable_solve_for_consistent_newmark_accel()
+ {Solve_for_consistent_newmark_accel_flag=true;}
 
+ /// \short Set to reset the problem being solved to be the standard problem
+ void disable_solve_for_consistent_newmark_accel()
+ {Solve_for_consistent_newmark_accel_flag=false;}
 
  /// \short Access function: Pointer to multiplicator function for assignment
  /// of consistent assignement of initial conditions for Newmark scheme

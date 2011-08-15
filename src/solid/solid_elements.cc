@@ -270,7 +270,7 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
          interpolated_xi[i] += this->lagrangian_position_gen(l,k,i)*psi_;
 
          // Only compute accelerations if inertia is switched on
-         if ((lambda_sq>0.0)&&(this->unsteady()))
+         if ((lambda_sq>0.0)&&(this->Unsteady))
           {
            accel[i] += this->dnodal_position_gen_dt(2,l,k,i)*psi_;
           }
@@ -1111,7 +1111,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
      (!Incompressible))
   {
    throw OomphLibError(
-    "The constitutive law requires the use of the incompressible formulation by setting the element's member function incompressible()",
+    "The constitutive law requires the use of the incompressible formulation by setting the element's member function set_incompressible()",
     "PVDEquationsWithPressure<DIM>::fill_in_generic_contribution_to_residuals_pvd_with_pressure()",
     OOMPH_EXCEPTION_LOCATION);   
   }
@@ -1213,7 +1213,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
          // Only compute accelerations if inertia is switched on
          // otherwise the timestepper might not be able to 
          // work out dx_gen_dt(2,...)
-         if ((lambda_sq>0.0)&&(this->unsteady()))
+         if ((lambda_sq>0.0)&&(this->Unsteady))
           {
            accel[i] += this->dnodal_position_gen_dt(2,l,k,i)*psi(l,k);
           }

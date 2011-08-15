@@ -203,8 +203,11 @@ public:
    return *Prestress_pt(i,j);
   }
 
- /// Boolean flag to ignore membrane terms
- bool& ignore_membrane_terms(){return Ignore_membrane_terms;}
+ /// Set to disable the calculation of membrane terms
+ void disable_membrane_terms() {Ignore_membrane_terms=true;}
+
+ /// Set to renable the calculation of membrane terms (default)
+ void enable_membrane_terms() {Ignore_membrane_terms=false;}
 
  /// Return the Poisson's ratio
  const double &nu() const {return *Nu_pt;}
@@ -446,8 +449,8 @@ class FSIDiagHermiteShellElement : public virtual DiagHermiteShellElement,
  /// and 3 Eulerian coordinates. By default, we assume that the
  /// normal vector computed by KirchhoffLoveShellEquations::get_normal(...)
  /// points into the fluid. 
- /// If this is not the case, overwrite this with the access function
- /// FSIDiagHermiteShellElement::normal_points_into_fluid().
+ /// If this is not the case, call the access function
+ /// FSIDiagHermiteShellElement::set_normal_pointing_out_of_fluid()
  FSIDiagHermiteShellElement() : DiagHermiteShellElement(),
   Normal_points_into_fluid(true),
   Compute_rate_of_work_by_load_with_fluid_load_only(false)
@@ -459,12 +462,17 @@ class FSIDiagHermiteShellElement : public virtual DiagHermiteShellElement,
  
  /// \short Destructor: empty
  ~FSIDiagHermiteShellElement(){}
- 
- /// \short Does the normal computed by
- /// KirchhoffLoveShellEquations::get_normal(...) point into the fluid?
- bool &normal_points_into_fluid() {return Normal_points_into_fluid;}
 
- /// \short Derivative of position vector w.r.t. the SolidFiniteElement's
+ /// \short Set the normal computed by 
+ /// KirchhoffLoveShellEquations::get_normal(...) to point into the fluid
+ void set_normal_pointing_into_fluid() {Normal_points_into_fluid=true;}
+
+ /// \short Set the normal computed by 
+ /// KirchhoffLoveShellEquations::get_normal(...) to point out of the fluid
+ void set_normal_pointing_out_of_fluid() {Normal_points_into_fluid=false;}
+
+ 
+/// \short Derivative of position vector w.r.t. the SolidFiniteElement's
  /// Lagrangian coordinates; evaluated at current time.
  void dposition_dlagrangian_at_local_coordinate(
   const Vector<double>& s, DenseMatrix<double> &drdxi) const;

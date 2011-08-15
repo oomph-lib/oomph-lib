@@ -95,9 +95,9 @@
 --enable-MPI
 --enable-symbolic-links-for-headers
 --with-mpi-self-tests="mpirun -np 2"
-CXXFLAGS="-g -DRANGE_CHECKING -DPARANOID -Wall"
-CFLAGS="-g"
-FFLAGS="-g"
+CXXFLAGS="-O3 -DPARANOID -Wall"
+CFLAGS="-O3"
+FFLAGS="-O3"
 CXX=mpic++
 CC=mpicc
 F77=mpif77

@@ -444,7 +444,7 @@ void SolidICProblem::reset_original_state()
    
    // Switch back to normal Jacobian
    dynamic_cast<SolidFiniteElement*>(elem_pt)->
-    solve_for_consistent_newmark_accel_flag()=false;
+    disable_solve_for_consistent_newmark_accel();
 
    // Switch off flag for setting initial condition
    dynamic_cast<SolidFiniteElement*>(elem_pt)->solid_ic_pt() = 0;

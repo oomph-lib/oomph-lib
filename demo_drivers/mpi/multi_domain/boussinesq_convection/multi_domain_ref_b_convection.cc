@@ -161,13 +161,16 @@ public:
    dynamic_cast<NST_ELEMENT*>(nst_mesh_pt()->element_pt(e))->
     fix_pressure(pdof,pvalue);
   }
-
  
- /// \short Access function to boolean flag that determines if the
- /// boundary condition on the upper wall is perturbed slightly
+ /// \short Set the
+ /// boundary condition on the upper wall to be perturbed slightly
  /// to force the solution into the symmetry broken state.
- bool& use_imperfection() {return Imperfect;}
- 
+ void enable_imperfection() {Imperfect = true;}
+
+ /// \short Set the
+ /// boundary condition on the upper wall to be unperturbed.
+ void disable_imperfection() {Imperfect = false;}
+
  /// \short Doc the solution.
  void doc_solution();
 
@@ -551,7 +554,7 @@ int main(int argc, char **argv)
 
  // Apply a perturbation to the upper boundary condition to
  // force the solution into the symmetry-broken state.
- problem.use_imperfection() = true;
+ problem.enable_imperfection();
 
  // Distribute the problem
 #ifdef OOMPH_HAS_MPI
@@ -603,7 +606,7 @@ int main(int argc, char **argv)
  // above is used as the initial condition and the Newton solver
  // converges to the symmetry broken solution, even without
  // the perturbation
- problem.use_imperfection() = false;
+ problem.disable_imperfection();
  problem.newton_solve(2);
  problem.doc_solution();
 

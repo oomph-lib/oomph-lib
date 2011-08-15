@@ -297,7 +297,7 @@ void QHermiteElement<1>::build_face_element(const int &face_index,
  // If the bulk element is halo then the face element must be too
  if (this->is_halo())
   {
-   face_element_pt->is_halo()=true;
+   face_element_pt->set_halo();
   }
 #endif
 
@@ -953,7 +953,7 @@ void QHermiteElement<2>::build_face_element(const int &face_index,
  // If the bulk element is halo then the face element must be too
  if (this->is_halo())
   {
-   face_element_pt->is_halo()=true;
+   face_element_pt->set_halo();
   }
 #endif
 

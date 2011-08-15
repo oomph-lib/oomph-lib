@@ -128,7 +128,7 @@ namespace oomph
         // Only compute accelerations if inertia is switched on
         // otherwise the timestepper might not be able to 
         // work out dx_gen_dt(2,...)
-        //if (this->unsteady())
+        //if (this->Unsteady)
         // {
         //  // hierher accel[i] += this->dnodal_position_dt(2,l,i)*psi(l);
         // }

@@ -470,7 +470,7 @@ void parallel_test(const unsigned& n_refine_first,
 
   // Set linear solver
   problem_pt->linear_solver_pt() = linear_solver_pt;
-  linear_solver_pt->doc_time() = false;
+  linear_solver_pt->disable_doc_time();
     
 #endif
 

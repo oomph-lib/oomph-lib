@@ -1858,14 +1858,14 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
    Node* nod_pt=this->node_pt(j);
 
    // Reset halo status of node to false
-   nod_pt->is_halo()=false;
+   nod_pt->set_nonhalo();
 
    // If it's a SolidNode then the halo status of the data 
    // associated with that must also be reset to false
    SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
    if (solid_nod_pt!=0)
     {
-     solid_nod_pt->variable_position_pt()->is_halo()=false;
+     solid_nod_pt->variable_position_pt()->set_nonhalo();
     }
 
    // Now put the highest-numbered one in charge
@@ -1946,14 +1946,14 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
                this->add_halo_node_pt(proc_in_charge,nod_pt);
 
                // The node itself needs to know it is a halo
-               nod_pt->is_halo()=true;
+               nod_pt->set_halo();
                
                // If it's a SolidNode then the data associated with that
                // must also be halo
                SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
                if (solid_nod_pt!=0)
                 {
-                 solid_nod_pt->variable_position_pt()->is_halo()=true;
+                 solid_nod_pt->variable_position_pt()->set_halo();
                 }
                
                // We're done with this node
@@ -1969,7 +1969,7 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
      unsigned nintern_data = el_pt->ninternal_data();
      for (unsigned iintern=0;iintern<nintern_data;iintern++)
       {
-       el_pt->internal_data_pt(iintern)->is_halo()=true;
+       el_pt->internal_data_pt(iintern)->set_halo();
       }
     }
   }
@@ -2065,14 +2065,14 @@ void Mesh::classify_halo_and_haloed_nodes(OomphCommunicator* comm_pt,
          this->add_halo_node_pt(proc_in_charge,nod_pt);
          
          // The node itself needs to know it is a halo
-         nod_pt->is_halo()=true;
+         nod_pt->set_halo();
          
          // If it's a SolidNode then the data associated with that
          // must also be halo
          SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
          if (solid_nod_pt!=0)
           {
-           solid_nod_pt->variable_position_pt()->is_halo()=true;
+           solid_nod_pt->variable_position_pt()->set_halo();
           }
 
          // Send shared node ID and processor in charge info to
@@ -3045,7 +3045,8 @@ void Mesh::get_halo_node_stats(OomphCommunicator* comm_pt,
        // If this current mesh has been told to keep all elements as halos,
        // OR the element itself knows that it must be kept then
        // keep it
-       if ((keep_all_elements_as_halos()) || (el_pt->must_be_kept_as_halo()))
+       if ((this->Keep_all_elements_as_halos) || 
+           (el_pt->must_be_kept_as_halo()))
         {
          if (!overrule_keep_as_halo_element_status)
           {
@@ -3451,7 +3452,7 @@ void Mesh::get_halo_node_stats(OomphCommunicator* comm_pt,
 
  // Mesh has now been distributed 
  // (required for Z2ErrorEstimator::get_element_errors)
- Mesh_has_been_distributed=true;
+ Mesh_is_distributed=true;
 
  // Doc?
  //-----

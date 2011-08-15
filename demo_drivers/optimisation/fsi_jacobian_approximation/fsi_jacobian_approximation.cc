@@ -483,8 +483,10 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
 
    // Set flag which controls whether geometric data is ignored
    // when calculating the fluid Jacobian
-   el_pt->bypass_fill_in_jacobian_from_geometric_data() = 
-    Fluid_jacobian_ignores_geometric_data;
+   if(Fluid_jacobian_ignores_geometric_data)
+    {
+     el_pt->enable_bypass_fill_in_jacobian_from_geometric_data();
+    }
    
    //Set the Reynolds number
    el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -647,8 +649,14 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
     dynamic_cast<FSIHermiteBeamElement*>(wall_mesh_pt()->element_pt(e));
 
    // Do elememts take account of fluid shear stress when calculating Jacobian?
-   elem_pt->ignore_shear_stress_in_jacobian() =
-    Wall_jacobian_ignores_fluid_shear_stress_data;
+   if(Wall_jacobian_ignores_fluid_shear_stress_data)
+    {
+     elem_pt->disable_shear_stress_in_jacobian();
+    }
+   else
+    {
+     elem_pt->enable_shear_stress_in_jacobian();
+    }
     
    // Set physical parameters for each element:
    elem_pt->sigma0_pt() = &Global_Physical_Variables::Sigma0;
@@ -667,7 +675,7 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
    // The normal on the wall elements as computed by the FSIHermiteElements
    // points away from the fluid rather than into the fluid (as assumed
    // by default)
-   elem_pt->normal_points_into_fluid()=false;
+   elem_pt->set_normal_pointing_out_of_fluid();
 
    // Displacement control for steady problem? If so, the load on *all* 
    // elements is affected by an unknown -- the external pressure, stored

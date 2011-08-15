@@ -566,7 +566,7 @@ FpTestProblem::FpTestProblem(const unsigned& n_el,
 
  // Build solve and preconditioner
  Solver_pt = new GMRES<CRDoubleMatrix>;
- dynamic_cast<GMRES<CRDoubleMatrix>*>(Solver_pt)->preconditioner_LHS()=false;
+ dynamic_cast<GMRES<CRDoubleMatrix>*>(Solver_pt)->set_preconditioner_RHS();
 
 #endif
 

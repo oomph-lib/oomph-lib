@@ -181,12 +181,13 @@ namespace oomph
    Lagrange_multiplier_mesh_pt = mesh_pt;
   }
   
-  /// \short access function to determine whether the inf norm of S should be
-  /// used as scaling. Otherwise no scaling.
-  bool& use_inf_norm_of_s_scaling() 
-   {
-    return Use_inf_norm_of_s_scaling;
-   }
+  /// \short Call to use the inf norm of S as scaling
+  void enable_inf_norm_of_s_scaling() 
+  {Use_inf_norm_of_s_scaling=true;}
+
+  /// \short Call to use no scaling
+  void disable_inf_norm_of_s_scaling() 
+  {Use_inf_norm_of_s_scaling=false;}
   
   /// \short By default the Lagrange multiplier subsidiary systems are 
   /// preconditioner with SuperLUPreconditioner. For a different 

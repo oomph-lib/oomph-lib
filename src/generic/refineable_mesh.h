@@ -160,8 +160,14 @@ public:
  ///  Access fct for pointer to DocInfo
  DocInfo*& doc_info_pt() {return Doc_info_pt;}
  
- /// Access fct for flag that requests adaptation
- bool& adapt_flag() {return Adapt_flag;}
+ /// Enable adaptation
+ void enable_adaptation() {Adapt_flag=true;}
+
+ /// Disable adaptation
+ void disable_adaptation() {Adapt_flag=false;}
+
+ /// Return whether the mesh is to be adapted
+ bool is_adaptation_enabled() const {return Adapt_flag;}
  
  ///  Access fct for DocInfo
  DocInfo doc_info()

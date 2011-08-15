@@ -122,8 +122,8 @@ class Mesh
  /// the halo(ed) lookup scheme between the two lowest-numbered processors)
  std::map<unsigned, Vector<Node*> > Shared_node_pt;
 
- /// bool to say whether the mesh has been distributed yet
- bool Mesh_has_been_distributed;
+ /// bool to say whether the mesh is distributed
+ bool Mesh_is_distributed;
 
  /// External halo(ed) elements are created as and when they are needed
  /// to act as source elements for the particular process's mesh.
@@ -216,7 +216,7 @@ public:
    // Set defaults for distributed meshes
 
    // Mesh hasn't been distributed
-   Mesh_has_been_distributed=false;
+   Mesh_is_distributed=false;
    // Don't keep all objects as halos
    Keep_all_elements_as_halos=false;
    // Don't output halo elements
@@ -530,9 +530,9 @@ public:
 
 #ifdef OOMPH_HAS_MPI
    // If the bulk mesh has been distributed then the face mesh is too
-   if (this->mesh_has_been_distributed())
+   if (this->is_mesh_distributed())
     {
-     face_mesh_pt->mesh_has_been_distributed()=true;
+     face_mesh_pt->set_mesh_distributed();
     }
 #endif
   }
@@ -844,17 +844,21 @@ public:
 
 #ifdef OOMPH_HAS_MPI
 
- /// Access function for Mesh_has_been_distributed
- bool& mesh_has_been_distributed() 
-  {
-   return Mesh_has_been_distributed;
-  }
+ /// \short Set the flag to indicate that the mesh has been distributed
+ void set_mesh_distributed() {Mesh_is_distributed=true;}
 
- /// Access function for Keep_all_elements_as_halos
- bool& keep_all_elements_as_halos()
-  {
-   return Keep_all_elements_as_halos;
-  }
+ /// \short Unset the flag to indicate that the mesh has been distributed
+ void unset_mesh_distributed() {Mesh_is_distributed=false;}
+
+ /// Access function for Mesh_has_been_distributed
+ bool is_mesh_distributed() const {return Mesh_is_distributed;}
+
+ /// \short Call this function to keep all the elements as halo elements
+ void set_keep_all_elements_as_halos() {Keep_all_elements_as_halos=true;}
+
+ /// \short Calll this function to unset the flag that keeps all elements
+ /// in the mesh as halo elements
+ void unset_keep_all_elements_as_halos() {Keep_all_elements_as_halos=false;}
 
  /// \short Distribute the problem and doc; make this virtual to allow
  /// overloading for particular meshes where further work is required.
@@ -1079,7 +1083,7 @@ public:
  void add_root_halo_element_pt(const unsigned& p, GeneralisedElement*& el_pt)
   {
    Root_halo_element_pt[p].push_back(el_pt);
-   el_pt->is_halo()=true; 
+   el_pt->set_halo(); 
   }
 
  /// \short Total number of halo nodes in this Mesh
@@ -1344,7 +1348,7 @@ public:
  void add_external_halo_element_pt(const unsigned& p, 
                                    GeneralisedElement*& el_pt)
   {
-   el_pt->is_halo()=true;
+   el_pt->set_halo();
    External_halo_element_pt[p].push_back(el_pt);
   }
 
@@ -1404,7 +1408,7 @@ public:
  /// is held on processor p to the storage scheme for halo nodes.
  void add_external_halo_node_pt(const unsigned& p, Node*& nod_pt)
   {
-   nod_pt->is_halo()=true;
+   nod_pt->set_halo();
    External_halo_node_pt[p].push_back(nod_pt);
   }
 

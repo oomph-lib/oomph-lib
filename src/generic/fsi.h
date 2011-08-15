@@ -292,19 +292,20 @@ class FSIWallElement : public virtual SolidFiniteElement,
    Ignore_shear_stress_in_jacobian=false;
   }
 
- /// \short Access function to Ignore_shear_stress_in_jacobian, 
- /// set this flag to true to ignore shear stress component
+ /// \short Call this function to ignore shear stress component
  /// of load when calculating the Jacobian, i.e. to ignore
  /// fluid velocity Data in the FSIFluidElement and "far away" 
  /// geometric Data that affects nodal positions in the FSIFluidElement,
  /// also to bypass node updates in the FSIFluidElement. 
  /// This functionality is provided to allow the user to deem the coupling 
  /// to the shear stress component of the fluid equations to be irrelevant.
- bool& ignore_shear_stress_in_jacobian()
-  {
-   return Ignore_shear_stress_in_jacobian;
-  }
+ void disable_shear_stress_in_jacobian()
+ {Ignore_shear_stress_in_jacobian=true; }
 
+ /// Call thi function to re-enable calculation of the shear stress
+ /// componnent of load when calculating the Jacobian (the default)
+ void enable_shear_stress_in_jacobian()
+ {Ignore_shear_stress_in_jacobian=false; }
 
  /// \short Update the nodal positions in all fluid elements that affect 
  /// the traction on this FSIWallElement

@@ -149,11 +149,16 @@ public:
  ///Access function to the period
  double& period(){return T;}
  
- /// Access function to the Remain_steady_at_maximum_amplitude flag
- bool& remain_steady_at_maximum_amplitude()
-  {
-   return Remain_steady_at_maximum_amplitude;
-  }
+
+ /// \short Set the flag so that the wall remains steady 
+ /// once it reaches maximum amplitude
+ void enable_remain_steady_at_maximum_amplitude()
+  {Remain_steady_at_maximum_amplitude = true;}
+
+ /// \short Set the flag so that the wall continues to oscillate after it
+ /// reaches maximum amplitude
+ void disable_remain_steady_at_maximum_amplitude()
+  {Remain_steady_at_maximum_amplitude = false;}
 
  /// \short Position vector at Lagrangian coordinate zeta 
  /// at time level t.
@@ -324,7 +329,7 @@ class CollapsibleChannelProblem : public Problem
  /// Function to switch off wall oscillations
  void switch_off_wall_oscillations() 
   {
-   Wall_pt->remain_steady_at_maximum_amplitude()=true;
+   Wall_pt->enable_remain_steady_at_maximum_amplitude();
   }
 
  /// Create a mesh for the NavierStokesLSCPreconditioner
@@ -1877,7 +1882,7 @@ int main(int argc, char *argv[])
   {
    // Set up the solver and pass to the problem
    iterative_solver_pt = new GMRES<CRDoubleMatrix>;
-   //  iterative_solver_pt->preconditioner_LHS() = false;
+   //  iterative_solver_pt->set_preconditioner_RHS();
    iterative_solver_pt->max_iter() = 200;
    iterative_solver_pt->tolerance() = 1.0e-8;
    problem.linear_solver_pt() = iterative_solver_pt;

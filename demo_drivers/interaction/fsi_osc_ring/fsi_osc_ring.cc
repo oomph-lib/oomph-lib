@@ -594,15 +594,15 @@ FSIRingProblem::FSIRingProblem(const unsigned& N,
    el_pt->evaluate_shape_derivs_by_direct_fd();       
 
 //   el_pt->evaluate_shape_derivs_by_chain_rule();
-//   el_pt->evaluate_dresidual_dnodal_coordinates_by_fd()=true;
+//   el_pt->enable_always_evaluate_dresidual_dnodal_coordinates_by_fd();
 
 //    if (e==0)
 //     {
-//      el_pt->evaluate_dresidual_dnodal_coordinates_by_fd()=false;
+//      el_pt->disable_always_evaluate_dresidual_dnodal_coordinates_by_fd();
 //     }
 //    else
 //     {
-//      el_pt->evaluate_dresidual_dnodal_coordinates_by_fd()=true;
+//      el_pt->enable_always_evaluate_dresidual_dnodal_coordinates_by_fd();
 //     }
 
    //el_pt->evaluate_shape_derivs_by_direct_fd();       

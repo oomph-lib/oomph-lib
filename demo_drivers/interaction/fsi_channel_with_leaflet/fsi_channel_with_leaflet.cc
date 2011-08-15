@@ -441,7 +441,7 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
    // FSIHermiteElements points away from the fluid rather than 
    // into the fluid (as assumed by default) when viewed from
    // the "front" (face 0).
-   elem_pt->normal_points_into_fluid()=false;
+   elem_pt->set_normal_pointing_out_of_fluid();
 
   } // end of loop over elements
 
@@ -514,7 +514,7 @@ FSIChannelWithLeafletProblem<ELEMENT>::FSIChannelWithLeafletProblem(
    prec_pt->set_wall_mesh(Wall_mesh_pt);
    
    // Set flags in the underlying Navier-Stokes preconditioner
-   prec_pt->navier_stokes_preconditioner_pt()->p_matrix_using_scaling() = true;
+   prec_pt->navier_stokes_preconditioner_pt()->enable_p_matrix_scaling();
    
    // By default, the LSC Preconditioner uses SuperLU as
    // an exact preconditioner (i.e. a solver) for the

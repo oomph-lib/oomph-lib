@@ -75,8 +75,13 @@ class PicardConvergenceData
   double& tol_achieved(){return Tol_achieved;}
   
   /// Flag to indicate if the solver has converged
-  bool& has_converged(){return Has_converged;}
+  bool has_converged() const {return Has_converged;}
   
+  /// Set the flag to indicate that the solver has converged
+  void set_solver_converged() {Has_converged=true;}
+
+  /// Set the flag to indicate that the solver has not converged
+  void set_solver_not_converged() {Has_converged=false;}
 
    private:
   
@@ -345,37 +350,38 @@ class SegregatedSolverError
     }
 
 
-   /// \short Use pointwise Aitken extrapolation? The argument is used to 
+   /// \short Use pointwise Aitken extrapolation. The argument is used to 
    /// specify the Picard iteration after which pointwise Aitken extrapolation 
    /// is to be used for the first time. 
-   bool& use_pointwise_aitken(const unsigned& pointwise_aitken_start)
+   void enable_pointwise_aitken(const unsigned& pointwise_aitken_start)
     {
      Pointwise_aitken_start = pointwise_aitken_start;
-     return Use_pointwise_aitken;
+     Use_pointwise_aitken = true;
     }
 
-   /// \short Use pointwise Aitken extrapolation? This interface has
+   /// \short Use pointwise Aitken extrapolation. This interface has
    /// no argument and the current value of Pointwise_aitken_start will
    /// be used. The default is zero, extrapolation starts immediately
-   bool& use_pointwise_aitken() {return Use_pointwise_aitken;}
+   void enable_pointwise_aitken() {Use_pointwise_aitken = true;}
 
-
+   /// \short Disable the use of pointwise Aitken extrapolation
+   void disable_pointwise_aitken() {Use_pointwise_aitken = false;}
 
    ///\short Use under-relaxation and (optionally) specify under-relaxation 
    /// parameter. Default: omega=1.0 (i.e. no actual under-relaxation; 
    /// Other extreme: omega=0.0 (freeze wall shape). Under-relaxation
    /// parameter can also be computed dynamically by setting
    /// use_irons_and_tuck_extrapolation()
-   void use_under_relaxation(const double& omega=1.0)
-    {
-     Omega_relax=omega;
-    }
+   void enable_under_relaxation(const double& omega=1.0)
+    {Omega_relax=omega;}
 
    ///\short Use Irons and Tuck extrapolation for solid dofs
-   bool& use_irons_and_tuck_extrapolation()
-    {
-     return Use_irons_and_tuck_extrapolation;
-    }
+   void enable_irons_and_tuck_extrapolation()
+   {Use_irons_and_tuck_extrapolation = true;}
+
+   ///\short Do not use Irons and Tuck extrapolation for solid dofs
+   void disable_irons_and_tuck_extrapolation()
+   {Use_irons_and_tuck_extrapolation = false;}
    
    /// Enumerated flags for convergence criteria
    enum convergence_criteria{Assess_convergence_based_on_absolute_solid_change,

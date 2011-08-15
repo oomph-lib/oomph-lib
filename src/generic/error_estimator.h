@@ -483,7 +483,7 @@ class Z2ErrorEstimator : public virtual ErrorEstimator
   {
 #ifdef PARANOID
 #ifdef OOMPH_HAS_MPI
-   if (mesh_pt->mesh_has_been_distributed())
+   if (mesh_pt->is_mesh_distributed())
     {
      throw OomphLibError(
       "Can't use this error estimator on distributed meshes!",

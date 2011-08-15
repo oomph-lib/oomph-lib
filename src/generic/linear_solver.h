@@ -513,25 +513,31 @@ class SuperLUSolver : public LinearSolver
  // SuperLU Dist methods
  ///////////////////////
 
- /// \short Returns Delete_matrix_data flag. SuperLU_dist needs its own copy 
+ /// \short Set Delete_matrix_data flag. SuperLU_dist needs its own copy 
  /// of the input matrix, therefore a copy must be made if any matrix 
  /// used with this solver is to be preserved. If the input matrix can be 
  /// deleted the flag can be set to true to reduce the amount of memory 
  /// required, and the matrix data will be wiped using its clean_up_memory()
  /// function.  Default value is false.
- bool &delete_matrix_data_in_superlu_dist()
-  {
-   return Dist_delete_matrix_data;
-  }
+ void enable_delete_matrix_data_in_superlu_dist()
+ {Dist_delete_matrix_data=true;}
   
- /// \short Access function to Allow_row_and_col_permutations, if this flag
- /// is true then SuperLU_DIST is allowed to permute matrix rows
+ /// \short Unset Delete_matrix_data flag. SuperLU_dist needs its own copy 
+ /// of the input matrix, therefore a copy must be made if any matrix 
+ /// used with this solver is to be preserved. If the input matrix can be 
+ void disable_delete_matrix_data_in_superlu_dist()
+ {Dist_delete_matrix_data=false;}
+
+ /// \short Set flag so that SuperLU_DIST is allowed to permute matrix rows
  /// and columns during factorisation. This is the default for SuperLU_DIST, 
  /// and can lead to significantly faster solves.
- bool &allow_row_and_col_permutations_in_superlu_dist()
-  {
-   return Dist_allow_row_and_col_permutations;
-  }
+ void enable_row_and_col_permutations_in_superlu_dist()
+ {Dist_allow_row_and_col_permutations=true;}
+
+ /// \short Set flag so that SuperLU_DIST is not allowed to permute matrix rows
+ /// and columns during factorisation. 
+ void disable_row_and_col_permutations_in_superlu_dist()
+ {Dist_allow_row_and_col_permutations=false;}
 
   /// \short Calling this method will ensure that when the problem based
   /// solve interface is used, a global (serial) jacobian will be 

@@ -690,7 +690,7 @@ int main(int argc, char* argv[])
 #endif
  problem.linear_solver_pt() = solver_pt;
  solver_pt->tolerance() = 10e-5;
- solver_pt->doc_convergence_history() = true;
+ solver_pt->enable_doc_convergence_history();
 
  // Pointer to general purpose block preconditioner base class
  GeneralPurposeBlockPreconditioner<CRDoubleMatrix>* prec_pt = 0;
@@ -708,7 +708,7 @@ int main(int argc, char* argv[])
    // Two Level Block Diagonal
    prec_pt = new BlockDiagonalPreconditioner<CRDoubleMatrix>;
    dynamic_cast<BlockDiagonalPreconditioner<CRDoubleMatrix>* >
-    (prec_pt)->use_two_level_parallelisation() = true;
+    (prec_pt)->enable_two_level_parallelisation();
    break;
   case 2:
 

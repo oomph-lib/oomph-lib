@@ -164,14 +164,14 @@ SegregatedFSIDrivenCavityProblem< ELEMENT>::
 
 
  // Pointwise Aitken extrapolation?
- use_pointwise_aitken()=false; // Flags::Use_pointwise_aitken;
+ this->disable_pointwise_aitken(); // Flags::Use_pointwise_aitken;
 
  // Use under-relaxation?
- //use_under_relaxation(Flags::Omega_under_relax);
- use_under_relaxation(1.0e-2);
+ //enable_under_relaxation(Flags::Omega_under_relax);
+ this->enable_under_relaxation(1.0e-2);
 
  // Use Irons and Tuck's extrapolation
- //use_irons_and_tuck_extrapolation()=true;
+ //this->enable_irons_and_tuck_extrapolation();
 
  // Doc max. global residual during Picard iteration
  Doc_max_global_residual=true;

@@ -828,18 +828,27 @@ namespace oomph
    /// \short Helper function to delete preconditioner data.
    void clean_up_memory();
 
-   /// Use Robin BC elements for Fp preconditioner?
-   bool& use_robin_for_fp() {return Use_robin_for_fp;}
+   /// \short Use  Robin BC elements for the Fp preconditioner
+   void enable_robin_for_fp() {Use_robin_for_fp = true;}
 
-   /// \short Boolean indicating if we want to pin first pressure 
+   /// \short Don't use Robin BC elements for the Fp preconditioenr
+   void disable_robin_for_fp() {Use_robin_for_fp = false;}
+
+   /// \short Set boolean indicating that we want to pin first pressure 
    /// dof in Navier Stokes mesh when
    /// assembling the pressure advection diffusion system for
    /// Fp preconditoner -- needed at zero Reynolds number
    /// for non-enclosed flows but seems harmless in any case
-   bool& pin_first_pressure_dof_in_press_adv_diff()
-   {
-    return Pin_first_pressure_dof_in_press_adv_diff;
-   }
+   void pin_first_pressure_dof_in_press_adv_diff()
+   {Pin_first_pressure_dof_in_press_adv_diff=true;}
+
+    /// \short Set boolean indicating that we do not want to pin first pressure 
+   /// dof in Navier Stokes mesh when
+   /// assembling the pressure advection diffusion system for
+   /// Fp preconditoner -- needed at zero Reynolds number
+   /// for non-enclosed flows but seems harmless in any case
+   void unpin_first_pressure_dof_in_press_adv_diff()
+   {Pin_first_pressure_dof_in_press_adv_diff=false;}
 
    /// \short Validate auxiliary pressure advection diffusion problem
    /// in 2D
@@ -1379,9 +1388,17 @@ namespace oomph
      Navier_stokes_mesh_pt = mesh_pt;
     }
 
-   /// \short Flag which is true if velocity mass matrix diagonal
-   /// scaling is used in the Schur complement approximation
-   bool& p_matrix_using_scaling() {return P_matrix_using_scaling;}
+   /// \short Enable velocity mass matrix diagonal scaling in the 
+   /// Schur complement approximation
+   void enable_p_matrix_scaling() {P_matrix_using_scaling=true;}
+
+    /// \short Enable velocity mass matrix diagonal scaling in the 
+   /// Schur complement approximation
+   void disable_p_matrix_scaling() {P_matrix_using_scaling=false;}
+
+   /// \short Return whether the velocity mass matrix is using diagonal
+   /// scaling or not
+   bool is_p_matrix_using_scaling() const {return P_matrix_using_scaling;}
 
    /// Function to set a new pressure matrix preconditioner (inexact solver)
    void set_p_preconditioner(Preconditioner* new_p_preconditioner_pt)
@@ -1438,20 +1455,20 @@ namespace oomph
    ///Disable documentation of time
    void disable_doc_time() {Doc_time = false;}
 
-
-   /// boolean indicating how the matrix vector product with BFBt should
-   /// be performed.\n
-   /// if true then:\n
+   /// \short If this function is called then:\n
    /// in setup(...) : BFBt is computed.\n
    /// in preconditioner_solve(...) : a single matrix vector product with 
    /// BFBt is performed.\n
-   /// if false then:\n
-   /// in setup(...) : the matrices B, F are assembled and stored.\n
+   void enable_form_BFBt_product() {Form_BFBt_product = true; }
+
+   /// \short if this function is called  then:\n
+   /// in setup(...) : the matrices B, F are assembled and stored 
+   /// (the default behaviour) .\n
    /// in preconditioner_solve(...) : a sequence of matrix vector products
    /// with B, F, and Bt is performed.\n
    /// (Note: in this discussion no scaling was considered but B and Bt 
    ///  are replaced with BQ and QBt with scaling)\n
-   bool& form_BFBt_product() { return Form_BFBt_product; }
+   void disable_form_BFBt_product() {Form_BFBt_product = false;}
 
    /// \short Helper function to delete preconditioner data.
    void clean_up_memory();
@@ -1510,6 +1527,16 @@ namespace oomph
 
    /// \short indicates whether BFBt should be formed or the component matrices
    /// should be retained.
+   /// If true then:\n
+   /// in setup(...) : BFBt is computed.\n
+   /// in preconditioner_solve(...) : a single matrix vector product with 
+   /// BFBt is performed.\n
+   /// if false then:\n
+   /// in setup(...) : the matrices B, F are assembled and stored.\n
+   /// in preconditioner_solve(...) : a sequence of matrix vector products
+   /// with B, F, and Bt is performed.\n
+   /// (Note: in this discussion no scaling was considered but B and Bt 
+   ///  are replaced with BQ and QBt with scaling)\n
    bool Form_BFBt_product;
 
    /// \short the pointer to the mesh of block preconditionable Navier

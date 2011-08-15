@@ -170,11 +170,15 @@ public:
  /// Update the problem after solve (empty)
  void actions_after_newton_solve(){}
 
- /// Regard problem as linear or nonlinear?
- bool& regard_as_nonlinear()
-  {
-   return Problem::Problem_is_nonlinear;
-  }
+ /// Treat the problem as being nonlinear
+ void set_problem_is_nonlinear() {Problem::Problem_is_nonlinear = true;}
+
+ /// Treat the problem as being linear
+ void set_problem_is_linear() {Problem::Problem_is_nonlinear = false;}
+
+ /// \short Return the flag to determine whether the problem is being
+ /// treated as linear or nonlinear
+ bool is_problem_nonlinear() const {return Problem::Problem_is_nonlinear;}
 
  /// \short Doc the solution. DocInfo object stores flags/labels for where the
  /// output gets written to
@@ -530,7 +534,7 @@ int main(int argc, char* argv[])
    
    // Solve as linear and nonlinear problem
    //--------------------------------------
-   problem.regard_as_nonlinear()=true;
+   problem.set_problem_is_nonlinear();
    
    unsigned nstep=2;
    for (unsigned istep=0;istep<nstep;istep++)
@@ -539,7 +543,7 @@ int main(int argc, char* argv[])
      //  Initialise timers
      clock_t t_start = clock();
      
-     if (problem.regard_as_nonlinear())
+     if (problem.is_problem_nonlinear())
       {
        cout << std::endl << std::endl;
        cout << "============================ " << std::endl;
@@ -575,7 +579,7 @@ int main(int argc, char* argv[])
      doc_info.number()++;
      
      // Next time around solve as linear problem
-     problem.regard_as_nonlinear()=false;
+     problem.set_problem_is_linear();
      
     }
 

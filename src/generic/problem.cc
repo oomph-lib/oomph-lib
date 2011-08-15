@@ -454,8 +454,8 @@ namespace oomph
 
 
 
-      // Set the GLOBAL Mesh_has_been_distributed flag
-      global_mesh_pt->mesh_has_been_distributed()=true;
+      // Set the GLOBAL Mesh_is_distributed flag
+      global_mesh_pt->set_mesh_distributed();
 
       // Set the returned vector
       Element_partition=element_domain;
@@ -10651,7 +10651,7 @@ void Problem::bifurcation_adapt_helper(
            Copy_of_problem_pt[c]->mesh_pt(0)))
         {
          //Is the adapt flag set
-         if(mmesh_pt->adapt_flag())
+         if(mmesh_pt->is_adaptation_enabled())
           {
            //Now get the original problem's mesh if it's refineable
            if(TreeBasedRefineableMeshBase* original_mesh_pt
@@ -10691,7 +10691,7 @@ void Problem::bifurcation_adapt_helper(
              Copy_of_problem_pt[c]->mesh_pt(m)))
           {
            //Is the adapt flag set
-           if(mmesh_pt->adapt_flag())
+           if(mmesh_pt->is_adaptation_enabled())
             {
              //Now get the original problem's mesh
              if(TreeBasedRefineableMeshBase* original_mesh_pt
@@ -10961,7 +10961,7 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
    if(RefineableMeshBase* mmesh_pt = 
       dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
     { 
-     if (mmesh_pt->adapt_flag())
+     if (mmesh_pt->is_adaptation_enabled())
       {
        double t_start = TimingHelpers::timer();
        
@@ -11072,7 +11072,7 @@ void Problem::adapt(unsigned &n_refined, unsigned &n_unrefined)
         }
 #endif
         
-       if (mmesh_pt->adapt_flag())
+       if (mmesh_pt->is_adaptation_enabled())
         {
          // Get error for all elements
          Vector<double> elemental_error(mmesh_pt->nelement());
@@ -11233,7 +11233,7 @@ void Problem::adapt_based_on_error_estimates(unsigned &n_refined,
    if(RefineableMeshBase* mmesh_pt = 
       dynamic_cast<RefineableMeshBase*>(Problem::mesh_pt(0)))
     { 
-     if (mmesh_pt->adapt_flag())
+     if (mmesh_pt->is_adaptation_enabled())
       {
        // Adapt mesh
        mmesh_pt->adapt(this->communicator_pt(),elemental_error[0]);
@@ -11267,7 +11267,7 @@ void Problem::adapt_based_on_error_estimates(unsigned &n_refined,
       if(RefineableMeshBase* mmesh_pt =
          dynamic_cast<RefineableMeshBase*>(Problem::mesh_pt(imesh)))
        {
-        if (mmesh_pt->adapt_flag())
+        if (mmesh_pt->is_adaptation_enabled())
          {
           // Adapt mesh
           mmesh_pt->adapt(this->communicator_pt(),elemental_error[imesh]); 
@@ -11325,7 +11325,7 @@ void Problem::get_all_error_estimates(Vector<Vector<double> > &elemental_error)
       dynamic_cast<RefineableMeshBase*>(Problem::mesh_pt(0)))
     { 
      //If we can adapt the mesh
-     if(mmesh_pt->adapt_flag())
+     if(mmesh_pt->is_adaptation_enabled())
       {
        // Get pointer to error estimator
        ErrorEstimator* error_estimator_pt=mmesh_pt->
@@ -11412,7 +11412,7 @@ void Problem::get_all_error_estimates(Vector<Vector<double> > &elemental_error)
         }
 #endif
        //If we can adapt the mesh
-       if (mmesh_pt->adapt_flag())
+       if (mmesh_pt->is_adaptation_enabled())
         {
          // Get error for all elements
          elemental_error[imesh].resize(mmesh_pt->nelement());

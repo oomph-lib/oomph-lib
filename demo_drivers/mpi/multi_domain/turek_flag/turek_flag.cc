@@ -1016,7 +1016,7 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::actions_before_distribute()
      // Require bulk to be kept as a (possible) halo element
      // Note: The traction element itself will "become" a halo element 
      // when it is recreated after the distribution has taken place
-     solid_elem_pt->must_be_kept_as_halo()=true;
+     solid_elem_pt->set_must_be_kept_as_halo();
     }
   } // end of loop over meshes of fsi traction elements
  

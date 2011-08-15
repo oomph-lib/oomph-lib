@@ -110,13 +110,12 @@ class IterativeLinearSolver : public LinearSolver
  /// Number of iterations taken 
  virtual unsigned iterations()=0;
  
- /// \short Access to flag indicating if the convergence history is to be
- /// documented. By default history is doced on oomph_info stream.
- bool& doc_convergence_history() 
-  {
-   return Doc_convergence_history;
-  }
+ /// Enable documentation of the convergence history
+ void enable_doc_convergence_history() {Doc_convergence_history = true;}
  
+ /// Disable documentation of the convergence history
+ void disable_doc_convergence_history() {Doc_convergence_history = false;}
+
  /// \short Write convergence history into file with specified filename
  /// (automatically switches on doc). Optional second argument is a string
  /// that can be used (as a zone title) to identify what case
@@ -170,13 +169,14 @@ class IterativeLinearSolver : public LinearSolver
    return Preconditioner_setup_time;
   }
 
- /// \short boolean indicating whether a preconditioner should be set up
- /// before solve
- bool& setup_preconditioner_before_solve()
-  {
-   return Setup_preconditioner_before_solve;
-  }
+ /// Setup the preconditioner before the solve
+ void enable_setup_preconditioner_before_solve()
+ {Setup_preconditioner_before_solve = true;}
 
+ /// Don't set up the preconditioner before the solve
+ void disable_setup_preconditioner_before_solve()
+ {Setup_preconditioner_before_solve = false;}
+ 
   protected:
 
  /// \short Flag indicating if the convergence history is to be
@@ -778,9 +778,11 @@ class GMRES : public IterativeLinearSolver
    Iteration_restart = false;
   }
 
- /// \short Access function to Preconditioner_LHS, the flag which determines
- /// if left hand or right hand preconditioning is used
- bool& preconditioner_LHS() {return Preconditioner_LHS;}
+ /// \short Set left preconditioning (the default)
+ void set_preconditioner_LHS() {Preconditioner_LHS=true;}
+
+ /// \short Enable right preconditioning 
+ void set_preconditioner_RHS() {Preconditioner_LHS=false;}
  
   private:
 

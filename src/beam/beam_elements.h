@@ -321,7 +321,8 @@ class FSIHermiteBeamElement : public virtual HermiteBeamElement,
  /// by inheritance, a GeomObject). By default, we assume that the
  /// normal vector computed by KirchhoffLoveBeamEquations::get_normal(...)
  /// points into the fluid. If this is not the case, overwrite this
- /// with the access function FSIHermiteBeamElement::normal_points_into_fluid()
+ /// with the access function 
+ /// FSIHermiteBeamElement::set_normal_pointing_out_of_fluid()
  FSIHermiteBeamElement() : HermiteBeamElement(), 
   Normal_points_into_fluid(true) 
   {
@@ -333,10 +334,15 @@ class FSIHermiteBeamElement : public virtual HermiteBeamElement,
  /// \short Destructor: empty
  ~FSIHermiteBeamElement(){}
 
- /// \short Does the normal computed by 
- /// KirchhoffLoveBeamEquations::get_normal(...) point into the fluid?
- bool &normal_points_into_fluid() {return Normal_points_into_fluid;}
+ /// \short Set the normal computed by 
+ /// KirchhoffLoveBeamEquations::get_normal(...) to point into the fluid
+ void set_normal_pointing_into_fluid() {Normal_points_into_fluid=true;}
+
+ /// \short Set the normal computed by 
+ /// KirchhoffLoveBeamEquations::get_normal(...) to point out of the fluid
+ void set_normal_pointing_out_of_fluid() {Normal_points_into_fluid=false;}
  
+
  /// \short Derivative of position vector w.r.t. the SolidFiniteElement's
  /// Lagrangian coordinates; evaluated at current time.
  void dposition_dlagrangian_at_local_coordinate(

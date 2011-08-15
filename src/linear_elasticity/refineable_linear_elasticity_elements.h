@@ -169,7 +169,7 @@ namespace oomph
     this->Lambda_sq_pt = cast_father_element_pt->lambda_sq_pt();
     
     /// Set the flag that switches inertia on/off
-    this->Unsteady = cast_father_element_pt->unsteady();
+    this->Unsteady = cast_father_element_pt->is_inertia_enabled();
    }
    
    

@@ -916,7 +916,7 @@ void TurekProblem<FLUID_ELEMENT,SOLID_ELEMENT>::generic_actions_before(
        // Require bulk to be kept as a (possible) halo element
        // Note: The traction element itself will "become" a halo element 
        // when it is recreated after the distribution has taken place
-       solid_elem_pt->must_be_kept_as_halo()=true;
+       solid_elem_pt->set_must_be_kept_as_halo();
       }
     } // end of loop over meshes of fsi traction elements
    
@@ -1367,7 +1367,7 @@ int main(int argc, char* argv[])
    problem.distribute(in_element_partition,report_stats);
 
    // This is a validation run, so use the default partition in load_balance()
-   problem.use_default_partition_in_load_balance()=true;
+   problem.set_default_partition_in_load_balance();
   }
  else
   {

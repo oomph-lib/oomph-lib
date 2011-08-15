@@ -103,12 +103,15 @@ public:
  /// Update the problem after solve (empty)
  void actions_after_newton_solve(){}
 
+ /// Treat the problem as being nonlinear
+ void set_problem_is_nonlinear() {Problem::Problem_is_nonlinear = true;}
 
- /// Regard problem as linear or nonlinear?
- bool& regard_as_nonlinear()
-  {
-   return Problem::Problem_is_nonlinear;
-  }
+ /// Treat the problem as being linear
+ void set_problem_is_linear() {Problem::Problem_is_nonlinear = false;}
+
+ /// \short Return the flag to determine whether the problem is being
+ /// treated as linear or nonlinear
+ bool is_problem_nonlinear() const {return Problem::Problem_is_nonlinear;}
 
  /// \short Doc the solution. DocInfo object stores flags/labels for where the
  /// output gets written to
@@ -322,7 +325,7 @@ void PoissonProblem<ELEMENT>::run_it(DocInfo& doc_info)
 
 
  // Solve as linear problem only
- regard_as_nonlinear()=false;
+ this->set_problem_is_linear();
  
  //  Initialise timers
  clock_t t_start = clock();

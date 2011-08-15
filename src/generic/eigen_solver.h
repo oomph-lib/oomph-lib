@@ -142,13 +142,11 @@ class ARPACK : public EigenSolver
  /// Access function for the number of Arnoldi vectors (const version)
  const int &narnoldi() const {return NArnoldi;}
 
+ /// \short Set to enable the computation of the eigenvectors (default)
+ void enable_compute_eigenvectors() {Compute_eigenvectors=true;}
 
- /// Access boolean to determine whether to compute the  eigenvectors
- bool &compute_eigenvectors() {return Compute_eigenvectors;}
-
- /// Access boolean to determine whether to compute the  eigenvectors
- const bool &compute_eigenvectors() const {return Compute_eigenvectors;}
-
+ /// \short Set to disable the computation of the eigenvectors
+ void disable_compute_eigenvectors() {Compute_eigenvectors=false;}
 
  /// Solve the eigen problem
  void solve_eigenproblem(Problem* const &problem_pt,

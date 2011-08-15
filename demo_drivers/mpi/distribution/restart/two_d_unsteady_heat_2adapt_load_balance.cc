@@ -1381,7 +1381,7 @@ int main(int argc, char* argv[])
    ncycle=1;
 
    // Fake but repeatable load balancing for self-test
-   problem.use_default_partition_in_load_balance()=true;
+   problem.set_default_partition_in_load_balance();
   }
 
 

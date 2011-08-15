@@ -587,7 +587,7 @@ int main(int argc, char* argv[])
  if (CommandLineArgs::command_line_flag_has_been_set("--validation"))
   {
    // Fake but repeatable load balancing for self-test
-   problem.use_default_partition_in_load_balance()=true;
+   problem.set_default_partition_in_load_balance();
   }
 
 #ifdef OOMPH_HAS_MPI

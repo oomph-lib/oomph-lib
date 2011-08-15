@@ -799,7 +799,7 @@ refineable_fill_in_contribution_to_residuals_solid_traction(
  /// normal vector computed by the underlying FaceElement 
  /// points into the fluid. If this is not the case, overwrite this
  /// with the access function 
- /// FSISolidTractionElement::normal_points_into_fluid().
+ /// FSISolidTractionElement::set_normal_pointing_out_of_fluid()
  /// Constructor for GeomObject is called explicitly because
  /// of virtual inheritance!
  FSISolidTractionElement(FiniteElement* const &element_pt, 
@@ -817,9 +817,14 @@ refineable_fill_in_contribution_to_residuals_solid_traction(
  /// \short Destructor: empty
  ~FSISolidTractionElement(){}
 
- /// \short Does the normal computed by the underlying FaceElement
- /// point into the fluid?
- bool &normal_points_into_fluid() {return Normal_points_into_fluid;}
+
+ /// \short Set the normal computed by underlying FaceElement
+ /// to point into the fluid
+ void set_normal_pointing_into_fluid() {Normal_points_into_fluid=true;}
+
+ /// \short Set the normal computed by underlying FaceElement
+ /// to point out of the fluid
+ void set_normal_pointing_out_of_fluid() {Normal_points_into_fluid=false;}
 
  /// \short Derivative of position vector w.r.t. the SolidFiniteElement's
  /// Lagrangian coordinates; evaluated at current time.
@@ -1058,7 +1063,7 @@ template<class ELEMENT, unsigned DIM>
  /// normal vector computed by the underlying FaceElement 
  /// points into the fluid. If this is not the case, overwrite this
  /// with the access function 
- /// FSISolidTractionElement::normal_points_into_fluid().
+ /// FSISolidTractionElement::set_normal_pointing_out_of_fluid()
  /// Constructor for GeomObject is called explicitly because
  /// of virtual inheritance!
   RefineableFSISolidTractionElement(FiniteElement* const &element_pt, 

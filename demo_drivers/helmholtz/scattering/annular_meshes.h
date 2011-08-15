@@ -206,10 +206,10 @@ public:
       for(unsigned i=0;i<nr;i++) 
        {
         left_root_pt[i]->neighbour_pt(W) = right_root_pt[i];
-        left_root_pt[i]->neighbour_periodic(W) = true; 
+        left_root_pt[i]->set_neighbour_periodic(W); 
         
         right_root_pt[i]->neighbour_pt(E) = left_root_pt[i];
-        right_root_pt[i]->neighbour_periodic(E) = true; 
+        right_root_pt[i]->set_neighbour_periodic(E); 
        }
      }
    }
@@ -551,12 +551,12 @@ public:
 
      left_el_pt[i]->tree_pt()->root_pt()->neighbour_pt(W) = 
       right_el_pt[i]->tree_pt()->root_pt();
-     left_el_pt[i]->tree_pt()->root_pt()->neighbour_periodic(W) = true; 
+     left_el_pt[i]->tree_pt()->root_pt()->set_neighbour_periodic(W); 
      
      right_el_pt[i]->output(right);
      right_el_pt[i]->tree_pt()->root_pt()->neighbour_pt(E) = 
       left_el_pt[i]->tree_pt()->root_pt();
-     right_el_pt[i]->tree_pt()->root_pt()->neighbour_periodic(E) = true; 
+     right_el_pt[i]->tree_pt()->root_pt()->set_neighbour_periodic(E); 
     }
    left.close();
    right.close();
@@ -636,10 +636,10 @@ public:
    for(unsigned i=0;i<nr;i++) 
     {
      left_root_pt[i]->neighbour_pt(W) = right_root_pt[i];
-     left_root_pt[i]->neighbour_periodic(W) = true; 
+     left_root_pt[i]->set_neighbour_periodic(W); 
    
      right_root_pt[i]->neighbour_pt(E) = left_root_pt[i];
-     right_root_pt[i]->neighbour_periodic(E) = true; 
+     right_root_pt[i]->set_neighbour_periodic(E); 
     }
    
    

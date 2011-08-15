@@ -104,8 +104,7 @@ public:
      // Use MacroElement representation for 
      // Lagrangian coordinates of newly created 
      // nodes
-     el_pt->use_undeformed_macro_element_for_new_lagrangian_coords()
-      =true;
+     el_pt->enable_use_of_undeformed_macro_element_for_new_lagrangian_coords();
     }      
   }
 

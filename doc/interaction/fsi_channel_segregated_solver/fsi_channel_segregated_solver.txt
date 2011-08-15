@@ -332,7 +332,7 @@ specific actions during the distinct sub-solves.
     //Boolean flag that controls whether Irons & Tuck extrapolation
     //is used to dynamically modify the under-relaxation parameter for
     //the under-relaxation of the solid degrees of freedom.
-    bool &use_irons_and_tuck_extrapolation ()
+    void enable_irons_and_tuck_extrapolation ()
     \endcode
     If this function is called (and if under-relaxation is enabled)
     the under-relaxation parameter \f$ \omega \f$ is adjusted
@@ -349,7 +349,7 @@ specific actions during the distinct sub-solves.
     //extrapolation is used. The optional argument specifies the Picard
     //Iteration after which the extrapolation is to be used for the first
     //time. The default value is zero.
-    bool &use_pointwise_aitken (const unsigned &pointwise_aitken_start)
+    void enable_pointwise_aitken (const unsigned &pointwise_aitken_start)
     \endcode
     If this function is called,  the classical Aitken extrapolation is
     used to accelerate the convergence of (individual) solid degrees of freedom

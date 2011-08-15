@@ -140,7 +140,7 @@ class SimpleShearProblem : public Problem
 {
  double Shear;
 
- void set_incompressible_flag(ELEMENT *el_pt,const bool &incompressible);
+ void set_incompressible(ELEMENT *el_pt,const bool &incompressible);
 
 public:
 
@@ -263,7 +263,7 @@ SimpleShearProblem<ELEMENT>::SimpleShearProblem(const bool &incompressible)
    el_pt->constitutive_law_pt() =
     Global_Physical_Variables::Constitutive_law_pt;
 
-   set_incompressible_flag(el_pt,incompressible);
+   set_incompressible(el_pt,incompressible);
    
    // Set the body force
    //el_pt->body_force_fct_pt()=Global_Physical_Variables::body_force;
@@ -378,7 +378,7 @@ void SimpleShearProblem<ELEMENT>::run(const std::string &dirname)
 }
 
 template<class ELEMENT>
-void SimpleShearProblem<ELEMENT>::set_incompressible_flag(
+void SimpleShearProblem<ELEMENT>::set_incompressible(
  ELEMENT *el_pt, const bool &incompressible)
 {
  //Does nothing
@@ -386,18 +386,20 @@ void SimpleShearProblem<ELEMENT>::set_incompressible_flag(
 
 
 template<>
-void SimpleShearProblem<QPVDElementWithPressure<3> >::set_incompressible_flag(
+void SimpleShearProblem<QPVDElementWithPressure<3> >::set_incompressible(
  QPVDElementWithPressure<3> *el_pt, const bool &incompressible)
 {
- el_pt->incompressible() = incompressible;
+ if(incompressible) {el_pt->set_incompressible();}
+ else {el_pt->set_compressible();}
 }
 
 template<>
 void SimpleShearProblem<QPVDElementWithContinuousPressure<3> >::
-set_incompressible_flag(
+set_incompressible(
  QPVDElementWithContinuousPressure<3> *el_pt, const bool &incompressible)
 {
- el_pt->incompressible() = incompressible;
+ if(incompressible) {el_pt->set_incompressible();}
+ else {el_pt->set_compressible();}
 }
 
 

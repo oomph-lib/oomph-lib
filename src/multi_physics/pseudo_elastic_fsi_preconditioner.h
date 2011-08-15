@@ -194,13 +194,16 @@ namespace oomph {
      return Navier_stokes_schur_complement_preconditioner_pt;
     }
 
-   /// \short Set to true to use the Navier Stokes Schur complement 
-   /// preconditioner. If false the SuperLUPreconditioner is used for the 
+   /// \short Call to use the Navier Stokes Schur complement 
+   /// preconditioner. 
+   void enable_navier_stokes_schur_complement_preconditioner()
+    {Use_navier_stokes_schur_complement_preconditioner=true;}
+
+   /// \short Call to use the SuperLUPreconditioner is used for the 
    /// Navier Stokes subsidiary system.
-   bool& use_navier_stokes_schur_complement_preconditioner()
-    {
-     return Use_navier_stokes_schur_complement_preconditioner;
-    }
+   void disable_navier_stokes_schur_complement_preconditioner()
+    {Use_navier_stokes_schur_complement_preconditioner=false;}
+
 
    /// \short This preconditioner allows any solid elements to be used
    /// for the "real" solid, and for the "real" solid subsidiary system

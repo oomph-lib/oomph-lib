@@ -131,7 +131,7 @@ class MatrixBasedLumpedPreconditioner : public Preconditioner
 
   /// \short Access function to the Positive_matrix which indicates whether 
   /// lumped matrix was positive
-  bool& positive_matrix()
+  bool positive_matrix() const
    {
     /// paranoid check that preconditioner has been setup
 #ifdef PARANOID
@@ -422,7 +422,7 @@ class InnerIterationPreconditioner : public Preconditioner
 #endif
 
    // ensure the solver does not re-setup the preconditioner
-   Solver_pt->setup_preconditioner_before_solve() = false;
+   Solver_pt->disable_setup_preconditioner_before_solve();
 
    // pass the preconditioner to the solver
    Solver_pt->preconditioner_pt() = Preconditioner_pt;

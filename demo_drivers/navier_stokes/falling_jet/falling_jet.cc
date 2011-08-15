@@ -467,7 +467,7 @@ EntryFlowProblem<ELEMENT>::EntryFlowProblem(DocInfo& doc_info,
    // hierher -- change this when Pseudo-solid elements have 
    // been updated to take availability of analytical solid 
    // Jacobian into account
-   // hierher el_pt->evaluate_jacobian_by_fd()=true;
+   // hierher el_pt->enable_evaluate_jacobian_by_fd();
 
    //Set the Reynolds number, etc
    el_pt->re_pt() = &Global_Physical_Variables::Re;
@@ -475,7 +475,7 @@ EntryFlowProblem<ELEMENT>::EntryFlowProblem(DocInfo& doc_info,
    el_pt->g_pt() = &Global_Physical_Variables::G;
 
    // hierher: Temporary fix to retain validata
-   el_pt->use_undeformed_macro_element_for_new_lagrangian_coords()=true;
+   el_pt->enable_use_of_undeformed_macro_element_for_new_lagrangian_coords();
 
   }
 

@@ -504,7 +504,7 @@ public:
 
 
  /// Boolen defining whether tetgenio object has been built or not
- bool &tetgenio_exists() {return Tetgenio_exists;}
+ bool tetgenio_exists() const {return Tetgenio_exists;}
 
 
  /// Access to the triangulateio representation of the mesh

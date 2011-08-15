@@ -1445,7 +1445,7 @@ void QuadTree::doc_neighbours(Vector<Tree*> forest_nodes_pt,
           {
            //is the node periodic
            is_periodic = 
-            el_pt->root_pt()->neighbour_periodic(direction);
+            el_pt->root_pt()->is_neighbour_periodic(direction);
           }
 
          double error= 0.0;

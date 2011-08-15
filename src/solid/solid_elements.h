@@ -109,11 +109,14 @@ namespace oomph
    /// Access function: Pointer to body force function (const version)
    BodyForceFctPt body_force_fct_pt() const {return Body_force_fct_pt;}
    
-   ///Access function to flag that switches inertia on/off
-   bool& unsteady() {return Unsteady;}
+   /// Switch on solid inertia
+   void enable_inertia() {Unsteady=true;}
+
+   /// Switch off solid inertia
+   void disable_inertia() {Unsteady=false;}
    
    ///Access function to flag that switches inertia on/off (const version)
-   bool unsteady() const {return Unsteady;}
+   bool is_inertia_enabled() const {return Unsteady;}
    
    /// \short Unpin all solid pressure dofs in the element 
    virtual void unpin_elemental_solid_pressure_dofs()=0;
@@ -296,9 +299,15 @@ namespace oomph
         }
       }
     }
-      
-   /// Is Jacobian evaluated by FD? Else: Analytically.
-   bool& evaluate_jacobian_by_fd() {return Evaluate_jacobian_by_fd;}
+
+   /// Set Jacobian to be evaluated by FD? Else: Analytically.
+   void enable_evaluate_jacobian_by_fd() {Evaluate_jacobian_by_fd=true;}
+
+   /// Set Jacobian to be evaluated analytically Else: by FD
+   void disable_evaluate_jacobian_by_fd() {Evaluate_jacobian_by_fd=false;}
+
+   /// Return the flag indicating whether the jacobian is evaluated by fd
+   bool is_jacobian_evaluated_by_fd() const {return Evaluate_jacobian_by_fd;}
    
   protected:
    
@@ -650,9 +659,15 @@ template<unsigned NNODE_1D>
    /// from the constitutive law at specified local coordinate
    void get_stress(const Vector<double> &s, DenseMatrix<double> &sigma);
    
-   /// Return the boolean incompressible
-   bool &incompressible() {return Incompressible;}
+   /// Return whether the material is incompressible
+   bool is_incompressible() const {return Incompressible;}
    
+   /// Set the material to be incompressible
+   void set_incompressible() {Incompressible=true;}
+
+   /// Set the material to be compressible
+   void set_compressible() {Incompressible=false;}
+
    /// Return the number of solid pressure degrees of freedom
    virtual unsigned npres_solid() const=0;
    

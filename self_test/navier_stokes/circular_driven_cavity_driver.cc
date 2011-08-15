@@ -165,7 +165,7 @@ DrivenCavityProblem<ELEMENT,MESH>::DrivenCavityProblem()
  //linear_solver_pt() = new HSL_MA42;
  
  // Switch off full doc for frontal solver
- //static_cast<HSL_MA42*>(linear_solver_pt())->doc_stats()=false;
+ //static_cast<HSL_MA42*>(linear_solver_pt())->disable_doc_stats();
 
  // Half axes for ellipse
  double a_ellipse=1.0;

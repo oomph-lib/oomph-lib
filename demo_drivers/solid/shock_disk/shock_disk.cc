@@ -377,14 +377,13 @@ DiskShockWaveProblem<ELEMENT,TIMESTEPPER>::DiskShockWaveProblem()
     Global_Physical_Variables::Constitutive_law_pt;
    
    // Switch on inertia
-   el_pt->unsteady()=true;
+   el_pt->enable_inertia();
 
    // Use MacroElement representation for 
    // Lagrangian coordinates of newly created 
    // nodes hierher simply retained to let self tests pass during
    // re-development of code
-   el_pt->use_undeformed_macro_element_for_new_lagrangian_coords()
-    =true;
+   el_pt->enable_use_of_undeformed_macro_element_for_new_lagrangian_coords();
   }
 
  // Pin the redundant solid pressures

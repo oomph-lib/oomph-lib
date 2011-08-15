@@ -671,7 +671,7 @@ namespace oomph
         iter_taken=0;
            
         // We have converged (overwrites default of false)
-        conv_data.has_converged()=true;
+        conv_data.set_solver_converged();
            
         // Break loop using a GO TO! This is the first (and hopefully 
         // the last) one in the whole of oomph-lib. Here it's 
@@ -842,7 +842,7 @@ namespace oomph
         iter_taken=iter;
 
         // We have converged (overwrites default of false)
-        conv_data.has_converged()=true;
+        conv_data.set_solver_converged();
 
         // Break loop using a GO TO! This is the first (and hopefully 
         // the last) one in the whole of oomph-lib. Here it's 

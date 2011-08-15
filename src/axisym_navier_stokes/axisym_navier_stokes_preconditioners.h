@@ -237,9 +237,13 @@ namespace oomph
      Navier_stokes_mesh_pt = mesh_pt;
     }
 
-   /// \short Flag which is true if velocity mass matrix diagonal
-   /// scaling is used in the Schur complement approximation
-   bool& p_matrix_using_scaling() {return P_matrix_using_scaling;}
+   /// \short Enable velocity mass matrix diagonal scaling in the 
+   /// Schur complement approximation
+   void enable_p_matrix_scaling() {P_matrix_using_scaling=true;}
+
+    /// \short Enable velocity mass matrix diagonal scaling in the 
+   /// Schur complement approximation
+   void disable_p_matrix_scaling() {P_matrix_using_scaling=false;}
 
    /// Function to set a new pressure matrix preconditioner (inexact solver)
    void set_p_preconditioner(Preconditioner* new_p_preconditioner_pt)
@@ -295,19 +299,21 @@ namespace oomph
    ///Disable documentation of time
    void disable_doc_time() {Doc_time = false;}
 
-   /// boolean indicating how the matrix vector product with BFBt should
-   /// be performed.\n
-   /// if true then:\n
+    /// \short If this function is called then:\n
    /// in setup(...) : BFBt is computed.\n
    /// in preconditioner_solve(...) : a single matrix vector product with 
    /// BFBt is performed.\n
-   /// if false then:\n
-   /// in setup(...) : the matrices B, F are assembled and stored.\n
+   void enable_form_BFBt_product() {Form_BFBt_product = true; }
+
+   /// \short if this function is called  then:\n
+   /// in setup(...) : the matrices B, F are assembled and stored 
+   /// (the default behaviour) .\n
    /// in preconditioner_solve(...) : a sequence of matrix vector products
    /// with B, F, and Bt is performed.\n
    /// (Note: in this discussion no scaling was considered but B and Bt 
    ///  are replaced with BQ and QBt with scaling)\n
-   bool& form_BFBt_product() { return Form_BFBt_product; }
+   void disable_form_BFBt_product() {Form_BFBt_product = false;}
+
 
    /// \short Helper function to delete preconditioner data.
    void clean_up_memory();

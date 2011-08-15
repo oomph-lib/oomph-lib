@@ -362,8 +362,15 @@ CantileverProblem<ELEMENT>::CantileverProblem(const bool& incompress,
    el_pt->body_force_fct_pt() = Global_Physical_Variables::gravity;
    
    // Get Jacobian by FD?
-   el_pt->evaluate_jacobian_by_fd()=use_fd;
-  
+   if(use_fd)
+    {
+     el_pt->enable_evaluate_jacobian_by_fd();
+    }
+   else
+    {
+     el_pt->disable_evaluate_jacobian_by_fd();
+    }
+
    // Is it incompressible -- hierher switch to const eqn
    if (incompress)
     {     
@@ -372,7 +379,7 @@ CantileverProblem<ELEMENT>::CantileverProblem(const bool& incompress,
        solid_mesh_pt()->element_pt(i));
      if (test_pt!=0)
       {
-       test_pt->incompressible()=true;
+       test_pt->set_incompressible();
       }
     }
   }

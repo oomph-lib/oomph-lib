@@ -552,7 +552,7 @@ FSIRingProblem::FSIRingProblem(const unsigned& N,
  double fract_mid=0.5;
 
  // Flag to tell the wall mesh that all its elements should be halo
- Wall_mesh_pt->keep_all_elements_as_halos()=true;
+ Wall_mesh_pt->set_keep_all_elements_as_halos();
  
  //Create a geometric object that represents the wall geometry from the
  //wall mesh (one Lagrangian, two Eulerian coordinates).
@@ -675,15 +675,15 @@ FSIRingProblem::FSIRingProblem(const unsigned& N,
    el_pt->evaluate_shape_derivs_by_direct_fd();       
 
 //   el_pt->evaluate_shape_derivs_by_chain_rule();
-//   el_pt->evaluate_dresidual_dnodal_coordinates_by_fd()=true;
+//   el_pt->enable_always_evaluate_dresidual_dnodal_coordinates_by_fd();
 
 //    if (e==0)
 //     {
-//      el_pt->evaluate_dresidual_dnodal_coordinates_by_fd()=false;
+//      el_pt->disable_always_evaluate_dresidual_dnodal_coordinates_by_fd();
 //     }
 //    else
 //     {
-//      el_pt->evaluate_dresidual_dnodal_coordinates_by_fd()=true;
+//      el_pt->enable_always_evaluate_dresidual_dnodal_coordinates_by_fd();
 //     }
 
    //el_pt->evaluate_shape_derivs_by_direct_fd();       

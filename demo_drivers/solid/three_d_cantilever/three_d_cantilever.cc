@@ -319,7 +319,7 @@ CantileverProblem<ELEMENT>::CantileverProblem()
     dynamic_cast<PVDEquationsWithPressure<3>*>(mesh_pt()->element_pt(i));
    if (cast_el_pt!=0)
     {
-     cast_el_pt->incompressible()=true;
+     cast_el_pt->set_incompressible();
     }
 
   } // done build of elements
@@ -409,7 +409,14 @@ void CantileverProblem<ELEMENT>::run_tests(const unsigned& i_case,
    ELEMENT *el_pt = dynamic_cast<ELEMENT*>(mesh_pt()->element_pt(i));
    
    // Get Jacobian by FD?
-   el_pt->evaluate_jacobian_by_fd()=use_fd;
+   if(use_fd)
+    {
+     el_pt->enable_evaluate_jacobian_by_fd();
+    }
+   else
+    {
+     el_pt->disable_evaluate_jacobian_by_fd();
+    }
    
    // Is the material actually not incompressible?
    if (!incompress)
@@ -419,7 +426,7 @@ void CantileverProblem<ELEMENT>::run_tests(const unsigned& i_case,
        mesh_pt()->element_pt(i));
      if (cast_el_pt!=0)
       {
-       cast_el_pt->incompressible()=false;
+       cast_el_pt->set_compressible();
       }
     }
   }

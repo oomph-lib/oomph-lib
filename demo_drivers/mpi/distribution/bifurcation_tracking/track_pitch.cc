@@ -299,7 +299,7 @@ RotatingProblem<ELEMENT>::RotatingProblem
 
 //  NewMumpsSolver* solver_pt=new NewMumpsSolver;
 //  this->linear_solver_pt() = solver_pt;
-//  solver_pt->suppress_warning_about_MPI_COMM_WORLD()=true;
+//  solver_pt->enable_suppress_warning_about_MPI_COMM_WORLD();
 
  //Build iterative linear solver
  /*GMRES<CRDoubleMatrix>* iterative_linear_solver_pt = new

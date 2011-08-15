@@ -750,7 +750,7 @@ namespace oomph
            if(in_neighbouring_tree)
             {
              // Is the node periodic?
-             is_periodic = el_pt->root_pt()->neighbour_periodic(direction);
+             is_periodic = el_pt->root_pt()->is_neighbour_periodic(direction);
             }
            
            double error = 0.0;

@@ -1676,7 +1676,7 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
    element_pt->q_pt() = &Global_Physical_Variables::Q;
 
    //In this case the normal is directed out of the fluid
-   element_pt->normal_points_into_fluid() = false;
+   element_pt->set_normal_pointing_out_of_fluid();
  }
 
  //Create a geometric object that represents the wall geometry
@@ -1715,7 +1715,7 @@ AirwayReopeningProblem<ELEMENT>::AirwayReopeningProblem()
    element_pt->q_pt() = &Global_Physical_Variables::Q;
 
    //In this case the normal is OK
-   //element_pt->normal_points_into_fluid() = true;
+   //element_pt->set_normal_pointing_into_fluid();
  }
 
  //Create a geometric object that represents the wall geometry

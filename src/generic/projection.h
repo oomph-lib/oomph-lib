@@ -454,10 +454,11 @@ class ProjectableElement : public virtual ELEMENT,
   }
 
 
- ///Project (history values of) coordintes (true) or values (false)
- bool& project_coordinates()
-  {return Project_coordinates;}
+ ///Project (history values of) coordintes 
+ void set_project_coordinates() {Project_coordinates=true;}
 
+ /// Project (history values of) values
+ void set_project_values() {Project_coordinates=false;}
 
 ///Field that is currently being projected
  unsigned& projected_field()
@@ -554,7 +555,7 @@ class ProjectionProblem : public virtual Problem
      el_pt->enable_projection();
      
      //We first project history values of coordinates
-     el_pt->project_coordinates()=true;
+     el_pt->set_project_coordinates();
     }
 
 
@@ -663,7 +664,7 @@ class ProjectionProblem : public virtual Problem
       dynamic_cast<PROJECTABLE_ELEMENT*>
       (Problem::mesh_pt()->element_pt(e));
      
-     el_pt->project_coordinates()=false;
+     el_pt->set_project_values();
     }
    
    //Loop over fields 

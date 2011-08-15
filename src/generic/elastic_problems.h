@@ -548,7 +548,7 @@ SolidFiniteElement::MultiplierFctPt multiplier_fct_pt)
    
    // Switch system to the one that determines the Newmark accelerations
    // by setting the Jacobian to the mass matrix
-   elem_pt->solve_for_consistent_newmark_accel_flag()=true;
+   elem_pt->enable_solve_for_consistent_newmark_accel();
 
    // Set pointer to multiplier function
    elem_pt->multiplier_fct_pt() = multiplier_fct_pt;

@@ -138,7 +138,7 @@ build_face_element(const int &face_index,
  // If the bulk element is halo then the face element must be too
  if (this->is_halo())
   {
-   face_element_pt->is_halo()=true;
+   face_element_pt->set_halo();
   }
 #endif
  
@@ -324,7 +324,7 @@ void QSpectralElement<2,NNODE_1D>::build_face_element(
  // If the bulk element is halo then the face element must be too
  if (this->is_halo())
   {
-   face_element_pt->is_halo()=true;
+   face_element_pt->set_halo();
   }
 #endif
 
@@ -559,7 +559,7 @@ output(std::ostream &outfile, const unsigned &n_plot)
  // If the bulk element is halo then the face element must be too
  if (this->is_halo())
   {
-   face_element_pt->is_halo()=true;
+   face_element_pt->set_halo();
   }
 #endif
 

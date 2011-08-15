@@ -289,7 +289,7 @@ void LinearElasticityEquations<DIM>::get_stress(const Vector<double> &s,
         // Only compute accelerations if inertia is switched on
         // otherwise the timestepper might not be able to 
         // work out dx_gen_dt(2,...)
-        //if (this->unsteady())
+        //if (this->Unsteady)
         // {
         //  accel[i] += this->dnodal_position_dt(2,l,i)*psi(l);
         // }

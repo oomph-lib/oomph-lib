@@ -159,12 +159,16 @@ namespace oomph
    /// Access function: Pointer to body force function (const version)
    BodyForceFctPt body_force_fct_pt() const {return Body_force_fct_pt;}
    
-   ///Access function to flag that switches inertia on/off
-   bool& unsteady() {return Unsteady;}
+
+   /// Switch on solid inertia
+   void enable_inertia() {Unsteady=true;}
+
+   /// Switch off solid inertia
+   void disable_inertia() {Unsteady=false;}
    
    ///Access function to flag that switches inertia on/off (const version)
-   bool unsteady() const {return Unsteady;}
-   
+   bool is_inertia_enabled() const {return Unsteady;}
+      
    ///Pin the element's redundant solid pressures (needed for refinement)
    virtual void pin_elemental_redundant_nodal_solid_pressures() {}
    

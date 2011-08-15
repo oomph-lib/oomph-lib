@@ -236,18 +236,24 @@ namespace oomph
    }
    
 #ifdef OOMPH_HAS_MPI
-   /// \short access function to the two level parallelisation flag
-   bool& use_two_level_parallelisation() 
-    { 
-     return Use_two_level_parallelisation; 
-    }
+   /// \short Use two level parallelisation 
+   void enable_two_level_parallelisation() 
+   { Use_two_level_parallelisation = true;}
+
+    /// \short Don't use two-level parallelisation
+   void disable_two_level_parallelisation() 
+   { Use_two_level_parallelisation = false;}
+
 #endif
 
-   /// Doc timings in application of block sub-preconditioners
-   bool& doc_time_during_preconditioner_solve()
-   {
-    return Doc_time_during_preconditioner_solve;
-   }
+   /// Enable Doc timings in application of block sub-preconditioners
+   void enable_doc_time_during_preconditioner_solve()
+   {Doc_time_during_preconditioner_solve=true;}
+
+   /// Disable Doc timings in application of block sub-preconditioners
+   void disable_doc_time_during_preconditioner_solve()
+   {Doc_time_during_preconditioner_solve=false;}
+
 
    private :
   

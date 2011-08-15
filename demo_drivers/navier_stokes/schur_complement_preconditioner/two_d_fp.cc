@@ -353,11 +353,11 @@ FpTestProblem::FpTestProblem(
    prec_pt->use_fp();
    if (use_robin)
     {
-     prec_pt->use_robin_for_fp()=true;
+     prec_pt->enable_robin_for_fp();
     }
    else
     {
-     prec_pt->use_robin_for_fp()=false;
+     prec_pt->disable_robin_for_fp();
     }
   }
 
@@ -541,7 +541,7 @@ FpTestProblem::FpTestProblem(
 
  // Build solve and preconditioner
  Solver_pt = new GMRES<CRDoubleMatrix>;
- dynamic_cast<GMRES<CRDoubleMatrix>*>(Solver_pt)->preconditioner_LHS()=false;
+ dynamic_cast<GMRES<CRDoubleMatrix>*>(Solver_pt)->set_preconditioner_RHS();
 
 #endif
 

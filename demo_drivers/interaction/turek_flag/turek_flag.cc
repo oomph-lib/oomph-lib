@@ -511,7 +511,7 @@ TurekProblem(const double &length,
  solid_mesh_pt()->refine_uniformly();
 
  //Do not allow the solid mesh to be refined again
- solid_mesh_pt()->adapt_flag()=false;
+ solid_mesh_pt()->disable_adaptation();
 
 
  // Build mesh of solid traction elements that apply the fluid
@@ -805,7 +805,7 @@ TurekProblem(const double &length,
  prec_pt->set_wall_mesh(solid_mesh_pt());
 
  // Set flags in the underlying Navier-Stokes preconditioner
- prec_pt->navier_stokes_preconditioner_pt()->p_matrix_using_scaling() = true;
+ prec_pt->navier_stokes_preconditioner_pt()->enable_p_matrix_scaling();
 
  // Retain fluid onto solid terms
  prec_pt->use_block_triangular_version_with_fluid_on_solid();

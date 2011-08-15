@@ -559,7 +559,7 @@ node_created_by_neighbour(const Vector<double> &s_fraction,
           {
            //Return whether the neighbour is periodic 
            is_periodic = 
-            quadtree_pt()->root_pt()->neighbour_periodic(edges[j]);
+            quadtree_pt()->root_pt()->is_neighbour_periodic(edges[j]);
           }
          //Return the pointer to the neighbouring node
          return neighbour_node_pt;
@@ -1241,12 +1241,26 @@ void RefineableQElement<2>::build(Mesh*& mesh_pt,
                              OOMPH_EXCEPTION_LOCATION);
         }
 #endif
-
-       aux_el_pt->evaluate_dresidual_dnodal_coordinates_by_fd()=
-        aux_father_el_pt->evaluate_dresidual_dnodal_coordinates_by_fd();
+       
+       //If evaluating the residuals by finite differences in the father
+       //continue to do so in the child
+       if(aux_father_el_pt
+          ->are_dresidual_dnodal_coordinates_always_evaluated_by_fd())
+        {
+         aux_el_pt->
+          enable_always_evaluate_dresidual_dnodal_coordinates_by_fd();
+        }
        
        aux_el_pt->method_for_shape_derivs()=
         aux_father_el_pt->method_for_shape_derivs();
+
+        //If bypassing the evaluation of fill_in_jacobian_from_geometric_data
+        //continue to do so
+       if(aux_father_el_pt
+           ->is_fill_in_jacobian_from_geometric_data_bypassed())
+         {
+          aux_el_pt->enable_bypass_fill_in_jacobian_from_geometric_data();
+         }
       }
 
 
@@ -1379,7 +1393,7 @@ quad_hang_helper(const int &value_id,
      //Are we crossing a periodic boundary
      bool is_periodic = false;
      if(in_neighbouring_tree)
-      {is_periodic = tree_pt()->root_pt()->neighbour_periodic(my_edge);}
+      {is_periodic = tree_pt()->root_pt()->is_neighbour_periodic(my_edge);}
      
      //If it is periodic we actually need to get the node in
      //the neighbour of the neighbour (which will be a parent of
@@ -1698,7 +1712,7 @@ void RefineableQElement<2>::check_integrity(double& max_error)
       {
        //Is it periodic
        is_periodic = 
-        tree_pt()->root_pt()->neighbour_periodic(edges[edge_counter]);
+        tree_pt()->root_pt()->is_neighbour_periodic(edges[edge_counter]);
       }
 
      // Loop over nodes along the edge

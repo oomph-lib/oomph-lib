@@ -771,7 +771,7 @@ ElasticCapProblem<ELEMENT>::ElasticCapProblem(const bool& hijack_internal) :
    // hierher -- change this when Pseudo-solid elements have 
    // been updated to take availability of analytical solid 
    // Jacobian into account
-   el_pt->evaluate_jacobian_by_fd()=true;
+   el_pt->enable_evaluate_jacobian_by_fd();
   
   }
 

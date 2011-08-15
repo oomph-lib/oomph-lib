@@ -1264,7 +1264,7 @@ void PseudoElasticCollapsibleChannelProblem<FLUID_ELEMENT,SOLID_ELEMENT>
    // Require bulk to be kept as a (possible) halo element
    // Note: The traction element itself will "become" a halo element 
    // when it is recreated after the distribution has taken place
-   solid_elem_pt->must_be_kept_as_halo()=true;
+   solid_elem_pt->set_must_be_kept_as_halo();
   }
 
  // Flush all the submeshes out but keep the meshes of 
@@ -1651,7 +1651,7 @@ void set_pseudo_elastic_fsi_solver(PseudoElasticFSIProblem& problem)
  // inexact navier stokes preconditioning
   NavierStokesSchurComplementPreconditioner*
   ns_prec_pt = prec_pt->navier_stokes_schur_complement_preconditioner_pt();
- prec_pt->use_navier_stokes_schur_complement_preconditioner()=true;
+ prec_pt->enable_navier_stokes_schur_complement_preconditioner();
 
  // ns momentum
  BlockDiagonalPreconditioner<CRDoubleMatrix>*

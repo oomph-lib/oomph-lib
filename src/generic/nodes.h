@@ -423,11 +423,14 @@ class Data
  
 #ifdef OOMPH_HAS_MPI
 
+ /// \short Label the node as halo
+ void set_halo() {Is_halo=true;}
+
+ /// \short Label the node as not being a halo
+ void set_nonhalo() {Is_halo=false;}
+
  /// \short Is this Data a halo?
- bool& is_halo() 
-  {
-   return Is_halo;
-  } 
+ bool is_halo() const {return Is_halo;} 
 
  /// \short Add all data and time history values to the vector in 
  /// the internal storage order

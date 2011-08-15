@@ -10,9 +10,13 @@
 #cd poisson; make check; cd ..
 #cd unsteady_heat; make check; cd ..
 #cd advection_diffusion; make check; cd ..
+#cd helmholtz; make check; cd ..
+#cd spherical_advection_diffusion; make check; cd ..
+#cd steady_axisym_advection_diffusion; make check; cd ..
 #cd navier_stokes; make check; cd ..
-cd axisym_navier_stokes; make check; cd ..
-cd solid; make check; cd ..
+#cd axisym_navier_stokes; make check; cd ..
+#cd polar_navier_stokes; make check; cd ..
+#cd solid; make check; cd ..
 cd beam; make check; cd ..
 cd shell; make check; cd ..
 cd linear_wave; make check; cd ..

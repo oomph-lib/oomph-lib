@@ -175,13 +175,22 @@ namespace oomph
     }
   }
 
- /// \short Access to boolean which decides if shape derivatives are to be 
- /// evaluated by fd (using FiniteElement::get_dresidual_dnodal_coordinates())
- /// or analytically, using the overloaded version of this function
- /// that may have been implemented in a derived class. 
- bool& evaluate_dresidual_dnodal_coordinates_by_fd() 
-  {return Evaluate_dresidual_dnodal_coordinates_by_fd;}
+ /// \short Return whether shape derivatives are evaluated by fd
+ bool are_dresidual_dnodal_coordinates_always_evaluated_by_fd() const
+ {return Evaluate_dresidual_dnodal_coordinates_by_fd;}
 
+ /// \short Insist that shape derivatives are always
+ /// evaluated by fd (using FiniteElement::get_dresidual_dnodal_coordinates())
+  void enable_always_evaluate_dresidual_dnodal_coordinates_by_fd() 
+  {Evaluate_dresidual_dnodal_coordinates_by_fd = true;}
+
+ /// \short Insist that shape derivatives are always
+ /// evaluated using the overloaded version of this function
+ /// that may have been implemented in a derived class. 
+ /// (The default behaviour will still be finite differences unless the 
+ /// function has actually been overloaded
+  void disable_always_evaluate_dresidual_dnodal_coordinates_by_fd() 
+  {Evaluate_dresidual_dnodal_coordinates_by_fd = false;}
 
  /// Evaluate shape derivatives by direct finite differencing
  void evaluate_shape_derivs_by_direct_fd()
@@ -205,11 +214,17 @@ namespace oomph
  /// Access to method (enumerated flag) for determination of shape derivs
  int& method_for_shape_derivs() {return Method_for_shape_derivs;}
 
- /// Access function for Bypass_fill_in_jacobian_from_geometric_data
- bool &bypass_fill_in_jacobian_from_geometric_data()
-  {
-   return Bypass_fill_in_jacobian_from_geometric_data;
-  }
+ /// Bypass the call to fill_in_jacobian_from_geometric_data
+ void enable_bypass_fill_in_jacobian_from_geometric_data()
+ {Bypass_fill_in_jacobian_from_geometric_data = true;}
+
+ /// Do not bypass the call to fill_in_jacobian_from_geometric_data 
+ void disable_bypass_fill_in_jacobian_from_geometric_data()
+ {Bypass_fill_in_jacobian_from_geometric_data = false;}
+ 
+ /// Test whether the call to fill_in_jacobian_from_geometric_data is bypassed
+ bool is_fill_in_jacobian_from_geometric_data_bypassed() const
+  {return Bypass_fill_in_jacobian_from_geometric_data;}
  
   protected:
 

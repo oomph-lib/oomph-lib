@@ -433,7 +433,7 @@ int main()
      
      //If the cast was successful, it's a bulk element, 
      //so set the incompressibilty flag
-     if(cast_el_pt) {cast_el_pt->incompressible() = true;}
+     if(cast_el_pt) {cast_el_pt->set_incompressible();}
     }
   }
 

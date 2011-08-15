@@ -313,10 +313,10 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
       prec_pt->set_wall_mesh(combined_solid_mesh_pt);
         
       // Set flags in the underlying Navier-Stokes preconditioner
-      prec_pt->navier_stokes_preconditioner_pt()->p_matrix_using_scaling() = true;
-
-
-      if (!prec_pt->navier_stokes_preconditioner_pt()->p_matrix_using_scaling())
+      prec_pt->navier_stokes_preconditioner_pt()->enable_p_matrix_scaling();
+      
+      if (!prec_pt->navier_stokes_preconditioner_pt()->
+          is_p_matrix_using_scaling())
        {
         std::cout << "SCALING SWITCHED OFF !!!! " << std::endl;
         std::cout << "SCALING SWITCHED OFF !!!! " << std::endl;
@@ -432,10 +432,10 @@ PreconditionedFSICollapsibleChannelProblem(const unsigned& nup,
       prec_pt->set_wall_mesh(combined_solid_mesh_pt);
         
       // Set flags in the underlying Navier-Stokes preconditioner
-      prec_pt->navier_stokes_preconditioner_pt()->p_matrix_using_scaling() = true;
+      prec_pt->navier_stokes_preconditioner_pt()->enable_p_matrix_scaling();
 
-
-      if (!prec_pt->navier_stokes_preconditioner_pt()->p_matrix_using_scaling())
+      if (!prec_pt->navier_stokes_preconditioner_pt()->
+          is_p_matrix_using_scaling())
        {
         std::cout << "SCALING SWITCHED OFF !!!! " << std::endl;
         std::cout << "SCALING SWITCHED OFF !!!! " << std::endl;

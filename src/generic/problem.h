@@ -1146,13 +1146,16 @@ protected:
 
  /// \short Flag to use "default partition" during load balance.
  /// Should only be set to true when run in validation mode.
+ /// hierher: Why is this not private?
  bool Use_default_partition_in_load_balance;
 
- /// \short Access function to flag to use default partition in load balance
- bool& use_default_partition_in_load_balance()
-  {
-   return Use_default_partition_in_load_balance;
-  }
+ /// \short Set the use of the default partition in the load balance
+ void set_default_partition_in_load_balance()
+ {Use_default_partition_in_load_balance=true;}
+
+ /// \short Do not use the default partition in the load balance
+ void unset_default_partition_in_load_balance()
+ {Use_default_partition_in_load_balance=false;}
 
  /// \short Load balance helper routine: refine each new base (sub)mesh 
  /// based upon the elements to be refined within each tree at each root

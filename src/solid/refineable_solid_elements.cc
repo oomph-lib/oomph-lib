@@ -129,7 +129,7 @@ fill_in_generic_contribution_to_residuals_pvd(Vector<double> &residuals,
          // Only compute accelerations if inertia is switched on
          // otherwise the timestepper might not be able to 
          // work out dx_gen_dt(2,...)
-         if ((lambda_sq>0.0)&&(this->unsteady()))
+         if ((lambda_sq>0.0)&&(this->Unsteady))
           {
            accel[i] += dnodal_position_gen_dt(2,l,k,i)*psi_;
           }
@@ -557,7 +557,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
      (!this->Incompressible))
   {
    throw OomphLibError(
-    "The constitutive law requires the use of the incompressible formulation by setting the element's member function incompressible()",
+    "The constitutive law requires the use of the incompressible formulation by setting the element's member function set_incompressible()",
     "RefineablePVDEquationsWithPressure<DIM>::fill_in_generic_contribution_to_residuals_pvd_with_pressure()",
     OOMPH_EXCEPTION_LOCATION);   
   }
@@ -673,7 +673,7 @@ fill_in_generic_residual_contribution_pvd_with_pressure(
          // Only compute accelerations if inertia is switched on
          // otherwise the timestepper might not be able to 
          // work out dx_gen_dt(2,...)
-         if ((lambda_sq>0.0)&&(this->unsteady()))
+         if ((lambda_sq>0.0)&&(this->Unsteady))
           {
            accel[i] += dnodal_position_gen_dt(2,l,k,i)*psi_;
           }
