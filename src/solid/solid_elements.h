@@ -435,6 +435,9 @@ class PVDEquations : public PVDEquationsBase<DIM>
    /// components
    void extended_output(std::ostream &outfile, const unsigned &n_plot);
    
+   /// Get potential (strain) and kinetic energy
+   void get_energy(double &pot_en, double &kin_en);
+
     protected:
    
    /// \short Compute element residual Vector only (if flag=and/or element 

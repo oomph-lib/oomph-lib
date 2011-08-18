@@ -793,6 +793,110 @@ void PVDEquations<DIM>::extended_output(std::ostream &outfile,
 
 
 //=======================================================================
+/// Get potential (strain) and kinetic energy
+//=======================================================================
+template <unsigned DIM>
+void PVDEquations<DIM>::get_energy(double &pot_en, double &kin_en)
+{
+ // Initialise
+ pot_en=0;
+ kin_en=0;
+
+ //Set the value of n_intpt
+ unsigned n_intpt = this->integral_pt()->nweight();
+ 
+ //Set the Vector to hold local coordinates
+ Vector<double> s(DIM);
+
+ //Find out how many nodes there are
+ const unsigned n_node = this->nnode();
+
+ //Find out how many positional dofs there are
+ const unsigned n_position_type = this->nnodal_position_type();
+ 
+ //Set up memory for the shape functions
+ Shape psi(n_node,n_position_type);
+ DShape dpsidxi(n_node,n_position_type,DIM);
+ 
+ // Timescale ratio (non-dim density)
+ double lambda_sq = this->lambda_sq();
+ 
+ //Loop over the integration points
+ for(unsigned ipt=0;ipt<n_intpt;ipt++)
+  {
+   //Assign values of s
+   for(unsigned i=0;i<DIM;i++) { s[i] = this->integral_pt()->knot(ipt,i); }
+   
+   //Get the integral weight
+   double w = this->integral_pt()->weight(ipt);
+   
+   // Call the derivatives of the shape functions and get Jacobian
+   double J = this->dshape_lagrangian_at_knot(ipt,psi,dpsidxi);
+
+   //Storage for Lagrangian coordinates and velocity (initialised to zero)
+   Vector<double> interpolated_xi(DIM,0.0);
+   Vector<double> veloc(DIM,0.0);
+
+   //Calculate lagrangian coordinates
+   for(unsigned l=0;l<n_node;l++)
+    {
+     //Loop over positional dofs
+     for(unsigned k=0;k<n_position_type;k++)
+      {
+       //Loop over displacement components (deformed position)
+       for(unsigned i=0;i<DIM;i++)
+        {
+         //Calculate the Lagrangian coordinates
+         interpolated_xi[i] += this->lagrangian_position_gen(l,k,i)*psi(l,k);
+
+         //Calculate the velocity components (if unsteady solve)
+         if (this->Unsteady)
+          {
+           veloc[i] += this->dnodal_position_gen_dt(l,k,i)*psi(l,k);
+          }
+        }
+      }
+    }
+
+   //Get isotropic growth factor
+   double gamma=1.0;
+   this->get_isotropic_growth(ipt,s,interpolated_xi,gamma);
+
+   //Premultiply the undeformed volume ratio (from the isotropic
+   // growth), the weights and the Jacobian
+   double W = gamma*w*J; 
+
+   DenseMatrix<double> sigma(DIM,DIM);
+   DenseMatrix<double> strain(DIM,DIM);
+
+   //Now calculate the stress tensor from the constitutive law
+   this->get_stress(s,sigma);
+
+   //get the strain
+   this->get_strain(s,strain);
+
+   // Initialise
+   double local_pot_en=0;
+   double veloc_sq=0;
+
+   // Compute integrals
+   for(unsigned i=0;i<DIM;i++) 
+    {
+     for(unsigned j=0;j<DIM;j++) 
+      {    
+       local_pot_en+=sigma(i,j)*strain(i,j);
+      }
+     veloc_sq += veloc[i]*veloc[i];
+    }
+   
+   pot_en+=0.5*local_pot_en*W;
+   kin_en+=lambda_sq*0.5*veloc_sq*W;
+  }
+}
+
+
+
+//=======================================================================
 /// Compute the contravariant second Piola Kirchoff stress at a given local
 /// coordinate. Note: this replicates a lot of code that is already
 /// coontained in get_residuals() but without sacrificing efficiency

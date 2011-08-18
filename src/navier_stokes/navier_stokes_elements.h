@@ -889,6 +889,15 @@ public:
  void get_traction(const Vector<double>& s, const Vector<double>& N, 
                    Vector<double>& traction);
 
+ /// \short Compute traction (on the viscous scale) exerted onto 
+ /// the fluid at local coordinate s, decomposed into pressure and
+ /// normal and tangential viscous components.
+ /// N has to be outer unit normal to the fluid.
+ void get_traction(const Vector<double>& s, const Vector<double>& N,
+                   Vector<double>& traction_p,
+                   Vector<double>& traction_visc_n,
+                   Vector<double>& traction_visc_t);
+
  /// \short This implements a pure virtual function defined
  /// in the FSIFluidElement class. The function computes
  /// the traction (on the viscous scale), at the element's local 

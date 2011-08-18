@@ -121,12 +121,14 @@ private:
  static double Default_lambda_sq_value;
 
  /// Static default value for non-dim wall thickness
+ // i.e. The reference value 'h_0'
  static double Default_h_value;
 
  /// Pointer to axial prestress
  double* Sigma0_pt;
 
  /// Pointer to wall thickness
+ // i.e. The reference value 'h_0'
  double* H_pt;
 
  /// Pointer to Timescale ratio (non-dim. density)
@@ -150,6 +152,20 @@ protected:
                             const Vector<double>& N,
                             Vector<double>& load);
 
+ /// Default profile function (constant thickness 'h_0')
+ static void Unit_profile_fct(const Vector<double>& xi,
+                              const Vector<double>& x,
+                              double& h_ratio);
+
+ /// \short Pointer to wall profile function: Its arguments are: 
+ /// Lagrangian coordinate, Eulerian coordinate, and 
+ /// profile itself (not all of the input arguments will be
+ /// required for all specific profile functions but the list should
+ /// cover all cases)
+ void (*Wall_profile_fct_pt)(const Vector<double>& xi,
+                             const Vector<double>& x,
+                             double& h_ratio);
+
  /// \short Pointer to the GeomObject that specifies the beam's
  /// undeformed midplane
  GeomObject* Undeformed_beam_pt;
@@ -163,9 +179,12 @@ public:
    //Set physical parameter pointers to the default values
    Sigma0_pt = &Default_sigma0_value;
    Lambda_sq_pt = &Default_lambda_sq_value;
+   // The reference thickness 'h_0'
    H_pt = &Default_h_value;
    // Zero traction
    Load_vector_fct_pt=&Zero_traction_fct;
+   // Unit thickness profile
+   Wall_profile_fct_pt=&Unit_profile_fct;
   }
 
 
@@ -192,7 +211,27 @@ public:
    Load_vector_fct_pt(xi,x,N,load);
   }
 
+ /// Reference to the wall thickness ratio profile function pointer
+ void (* &wall_profile_fct_pt())(const Vector<double>& xi,
+                                 const Vector<double>& x,
+                                 double& h_ratio)
+  {return Wall_profile_fct_pt;}
+
+
+ /// \short Get the wall profile: Pass Lagrangian & Eulerian coordinate
+ /// and return the wall profile (not all of the input arguments will be
+ /// required for all specific thickness functions but the list should cover
+ /// all cases).
+ void wall_profile(const Vector<double>& xi,
+                   const Vector<double>& x,
+                   double& h_ratio)
+  {
+   Wall_profile_fct_pt(xi,x,h_ratio);
+  }
+
+
   /// Return the non-dimensional wall thickness
+  // i.e. the reference value 'h_0'
   const double &h() const {return *H_pt;}
 
   /// Return the timescale ratio (non-dimensional density)
@@ -205,6 +244,7 @@ public:
   double* &sigma0_pt() {return Sigma0_pt;}
   
   /// Return a pointer to non-dim. wall thickness
+  //  i.e. the reference value 'h_0'
   double* &h_pt() {return H_pt;}
   
   /// Return a pointer to timescale ratio (nondim density)
@@ -257,7 +297,7 @@ public:
   /// \short Get potential (strain) and kinetic energy of the element
   void get_energy(double& pot_en, double& kin_en);
 
-  /// \short Get the energy due to stretching and bending and the
+  /// \short Get the potential energy due to stretching and bending and the
   /// kinetic energy of the element
   void get_energy(double &stretch, double &bend, double &kin_en);
 

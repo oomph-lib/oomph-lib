@@ -1011,6 +1011,45 @@ template<unsigned DIM>
 }
 
 //==============================================================
+/// Compute traction (on the viscous scale) exerted onto 
+/// the fluid at local coordinate s, decomposed into pressure and
+/// normal and tangential viscous components.
+/// N has to be outer unit normal to the fluid.
+//==============================================================
+template<unsigned DIM>
+ void  NavierStokesEquations<DIM>::get_traction(const Vector<double>& s,
+                                                const Vector<double>& N,
+                                                Vector<double>& traction_p,
+                                                Vector<double>& traction_visc_n,
+                                                Vector<double>& traction_visc_t)
+{
+ Vector<double> traction_visc(DIM);
+
+ // Get velocity gradients
+ DenseMatrix<double> strainrate(DIM,DIM);
+ strain_rate(s,strainrate);
+
+ // Get pressure
+ double press=interpolated_p_nst(s);
+
+ // Loop over traction components
+ for (unsigned i=0;i<DIM;i++)
+  {
+   // pressure
+   traction_p[i]=-press*N[i];
+   for (unsigned j=0;j<DIM;j++)
+    {
+     // viscous stress
+     traction_visc[i]+=2.0*strainrate(i,j)*N[j];
+    }
+   // Decompose viscous stress into normal and tangential components
+   traction_visc_n[i]=traction_visc[i]*N[i];
+   traction_visc_t[i]=traction_visc[i]-traction_visc_n[i];
+  }
+
+}
+
+//==============================================================
 /// Return dissipation at local coordinate s
 //==============================================================
 template<unsigned DIM>

@@ -375,6 +375,205 @@ public:
 
 
 
+ /// \short Get integral of instantaneous rate of work done by 
+ /// the traction that's exerted onto the fluid, decomposed into pressure
+ /// and normal and tangential viscous components.
+ void get_rate_of_traction_work_components(double& rate_of_work_integral_p,
+                                           double& rate_of_work_integral_n,
+                                           double& rate_of_work_integral_t)
+  {
+   std::ofstream dummy_file;
+   get_rate_of_traction_work_components(dummy_file,
+                                        rate_of_work_integral_p,
+                                        rate_of_work_integral_n,
+                                        rate_of_work_integral_t);
+  }
+
+
+
+ /// \short Get integral of instantaneous rate of work done by 
+ /// the traction that's exerted onto the fluid, decomposed into pressure
+ /// and normal and tangential viscous components.  Doc in outfile.
+ void get_rate_of_traction_work_components(std::ofstream& outfile,
+                                           double& rate_of_work_integral_p,
+                                           double& rate_of_work_integral_n,
+                                           double& rate_of_work_integral_t)
+  {
+
+   // Initialise
+   rate_of_work_integral_p=0;
+   rate_of_work_integral_n=0;
+   rate_of_work_integral_t=0;
+
+   // Spatial dimension of element
+   unsigned ndim=dim();
+
+   //Vector of local coordinates in face element
+   Vector<double> s(ndim);
+
+   // Vector for global Eulerian coordinates
+   Vector<double> x(ndim+1);
+
+   // Vector for local coordinates in bulk element
+   Vector<double> s_bulk(ndim+1);
+
+   //Set the value of n_intpt
+   unsigned n_intpt = integral_pt()->nweight();
+   
+
+   // Get pointer to assocated bulk element
+   ELEMENT* bulk_el_pt=dynamic_cast<ELEMENT*>(bulk_element_pt());
+
+   // Hacky: This is only appropriate for 3x3 integration of
+   // 2D quad elements
+   if (outfile.is_open()) outfile << "ZONE I=3, J=3" << std::endl;
+
+   //Loop over the integration points
+   for (unsigned ipt=0;ipt<n_intpt;ipt++)
+    {
+
+     //Assign values of s in FaceElement and local coordinates in bulk element
+     for(unsigned i=0;i<ndim;i++)
+      {
+       s[i] = integral_pt()->knot(ipt,i);
+      }
+
+     //Get the bulk coordinates
+     this->get_local_coordinate_in_bulk(s,s_bulk);
+
+     //Get the integral weight
+     double w = integral_pt()->weight(ipt);
+
+     // Get jacobian of mapping
+     double J=J_eulerian(s);
+
+     //Premultiply the weights and the Jacobian
+     double W = w*J;
+
+     // Get x position as Vector
+     interpolated_x(s,x);
+
+#ifdef PARANOID
+
+     // Get x position as Vector from bulk element
+     Vector<double> x_bulk(ndim+1);
+     bulk_el_pt->interpolated_x(s_bulk,x_bulk);
+
+     double max_legal_error=1.0e-5;
+     double error=0.0;
+     for(unsigned i=0;i<ndim+1;i++)
+      {
+       error+=fabs(x[i]- x_bulk[i]);
+      }
+     if (error>max_legal_error)
+      {
+       std::ostringstream error_stream;
+       error_stream << "difference in Eulerian posn from bulk and face: " 
+                    << error << " exceeds threshold " << max_legal_error 
+                    << std::endl;
+       throw OomphLibError(
+        error_stream.str(),
+        "NavierStokesSurfacePowerElement::get_rate_of_traction_work()",
+        OOMPH_EXCEPTION_LOCATION);
+      }
+#endif
+
+     // Outer unit normal
+     Vector<double> normal(ndim+1);
+     outer_unit_normal(s,normal);
+
+
+     // Get velocity from bulk element
+     Vector<double> veloc(ndim+1);
+     bulk_el_pt->interpolated_u_nst(s_bulk,veloc);
+
+     // Get traction from bulk element
+     Vector<double> traction_p(ndim+1);
+     Vector<double> traction_n(ndim+1);
+     Vector<double> traction_t(ndim+1);
+     bulk_el_pt->get_traction(s_bulk,normal,traction_p,traction_n,traction_t);
+
+
+     // Local rate of work:
+     double rate_of_work_p=0.0;
+     double rate_of_work_n=0.0;
+     double rate_of_work_t=0.0;
+     for (unsigned i=0;i<ndim+1;i++)
+      {
+       rate_of_work_p+=traction_p[i]*veloc[i];
+       rate_of_work_n+=traction_n[i]*veloc[i];
+       rate_of_work_t+=traction_t[i]*veloc[i];
+      }
+
+     // Add rate of work
+     rate_of_work_integral_p+=rate_of_work_p*W;
+     rate_of_work_integral_n+=rate_of_work_n*W;
+     rate_of_work_integral_t+=rate_of_work_t*W;
+
+     if (outfile.is_open())
+      {
+       //Output x,y,...,
+       for(unsigned i=0;i<ndim+1;i++)
+        {
+         outfile << x[i] << " ";
+        }
+       
+       //Output traction due to pressure
+       for(unsigned i=0;i<ndim+1;i++)
+        {
+         outfile << traction_p[i] << " ";
+        }
+
+       //Output traction due to viscous normal stress
+       for(unsigned i=0;i<ndim+1;i++)
+        {
+         outfile << traction_n[i] << " ";
+        }
+
+       //Output traction due to viscous tangential stress
+       for(unsigned i=0;i<ndim+1;i++)
+        {
+         outfile << traction_t[i] << " ";
+        }
+
+       //Output veloc
+       for(unsigned i=0;i<ndim+1;i++)
+        {
+         outfile << veloc[i] << " ";
+        }
+       
+       //Output normal
+       for(unsigned i=0;i<ndim+1;i++)
+        {
+         outfile << normal[i] << " ";
+        }
+       
+       //Output local rate of work due to pressure
+       for(unsigned i=0;i<ndim+1;i++)
+        {
+         outfile << rate_of_work_p << " ";
+        }
+
+       //Output local rate of work due to viscous normal stress
+       for(unsigned i=0;i<ndim+1;i++)
+        {
+         outfile << rate_of_work_n << " ";
+        }
+
+       //Output local rate of work due to viscous tangential stress
+       for(unsigned i=0;i<ndim+1;i++)
+        {
+         outfile << rate_of_work_t << " ";
+        }
+
+       outfile << std::endl;
+      }
+    }
+   
+  }
+
+
+
 
  /// \short Get integral of kinetic energy flux
  double get_kinetic_energy_flux()
