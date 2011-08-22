@@ -1620,6 +1620,10 @@ namespace oomph
  void RefineableTriangleMesh<ELEMENT>::adapt(OomphCommunicator* comm_pt,
                                              const Vector<double>& elem_error)
  {    
+
+
+  double t_start_overall=TimingHelpers::timer();
+
   // Get refinement targets
   Vector<double> target_area(elem_error.size());
   double min_angle=compute_area_target(elem_error,
@@ -1755,22 +1759,11 @@ namespace oomph
     // Get the TriangulateIO object associated with that mesh
     TriangulateIO tmp_new_triangulateio=
      tmp_new_mesh_pt->triangulateio_representation();
-    
-#ifdef PARANOID
-    if (this->Problem_pt==0) 
-     {
-      throw OomphLibError("Problem pointer must be set with problem_pt()",
-                          "TriangleMesh::adapt()",
-                          OOMPH_EXCEPTION_LOCATION);
-     }
-#endif
-
     RefineableTriangleMesh<ELEMENT>* new_mesh_pt=0;
 
     // Map storing target areas for elements in temporary 
     // TriangulateIO mesh
     std::map<GeneralisedElement*,double> target_area_map;
-
 
     //////////////////////////////////////////////////////////////
     // NOTE: Repeated setup of multidomain interaction could
@@ -1785,61 +1778,179 @@ namespace oomph
     unsigned iter=0;
     while (!done)
      {
-      
-      // "Project" target areas from current mesh onto uniform
-      //------------------------------------------------------
-      // background mesh
-      //----------------
-      
-      // Temporarily switch on projection capabilities to allow
-      // storage of pointer to external element.
-      // Need to do this for both meshes to ensure that 
-      // matching is done based on Eulerian coordinates for both
-      // (in case we're dealing with solid meshes where the
-      // locate_zeta would otherwise use the Lagrangian coordintes).
-      unsigned nelem=this->nelement();
-      for (unsigned e=0;e<nelem;e++)
+      double t_start=TimingHelpers::timer();
+      if (Do_area_transfer_by_projection)
        {
-        dynamic_cast<ELEMENT*>(this->element_pt(e))->enable_projection();
-       }
-      unsigned nelem2=tmp_new_mesh_pt->nelement();
-      for (unsigned e=0;e<nelem2;e++)
-       {
-        dynamic_cast<ELEMENT*>(tmp_new_mesh_pt->element_pt(e))->
-         enable_projection();
-       }
-
-      // Set up multi domain interactions so we can figure out
-      // which element in the intermediate uniform mesh is co-located
-      // with given element in current mesh (which is to be refined)
-      Multi_domain_functions::setup_multi_domain_interaction
-       <ELEMENT>(this->Problem_pt,this,tmp_new_mesh_pt);
-      
-      target_area_map.clear();
-      for (unsigned e=0;e<nelem;e++)
-       {
-        ELEMENT* el_pt=dynamic_cast<ELEMENT*>(this->element_pt(e));
-        unsigned nint=el_pt->integral_pt()->nweight();
-        for (unsigned ipt=0;ipt<nint;ipt++)
+        
+        // "Project" target areas from current mesh onto uniform
+        //------------------------------------------------------
+        // background mesh
+        //----------------
+        
+        // Temporarily switch on projection capabilities to allow
+        // storage of pointer to external element.
+        // Need to do this for both meshes to ensure that 
+        // matching is done based on Eulerian coordinates for both
+        // (in case we're dealing with solid meshes where the
+        // locate_zeta would otherwise use the Lagrangian coordintes).
+        unsigned nelem=this->nelement();
+        for (unsigned e=0;e<nelem;e++)
          {
-          GeneralisedElement* ext_el_pt=el_pt->external_element_pt(0,ipt);
+          dynamic_cast<ELEMENT*>(this->element_pt(e))->enable_projection();
+         }
+        unsigned nelem2=tmp_new_mesh_pt->nelement();
+        for (unsigned e=0;e<nelem2;e++)
+         {
+          dynamic_cast<ELEMENT*>(tmp_new_mesh_pt->element_pt(e))->
+           enable_projection();
+         }
+        
+        // Set up multi domain interactions so we can figure out
+        // which element in the intermediate uniform mesh is co-located
+        // with given element in current mesh (which is to be refined)
+        double t_start=TimingHelpers::timer();
+        Problem* tmp_problem_pt=new Problem; 
+        Multi_domain_functions::setup_multi_domain_interaction
+         <ELEMENT>(tmp_problem_pt,this,tmp_new_mesh_pt);      
+        delete tmp_problem_pt;
+        tmp_problem_pt=0;
+        oomph_info  
+         <<"CPU for multi-domain setup for projection of areas (iter "
+         << iter << ") " << TimingHelpers::timer()-t_start 
+         << std::endl;
+        
+        
+        target_area_map.clear();
+        for (unsigned e=0;e<nelem;e++)
+         {
+          ELEMENT* el_pt=dynamic_cast<ELEMENT*>(this->element_pt(e));
+          unsigned nint=el_pt->integral_pt()->nweight();
+          for (unsigned ipt=0;ipt<nint;ipt++)
+           {
+            GeneralisedElement* ext_el_pt=el_pt->external_element_pt(0,ipt);
+            
+            // Use max. rather than min area of any element overlapping the
+            // the current element, otherwise we get a rapid outward diffusion
+            // of small elements
+            target_area_map[ext_el_pt]=std::max(target_area_map[ext_el_pt],
+                                                target_area[e]);
+           }
+          
+          // Switch off projection capability          
+          dynamic_cast<ELEMENT*>(this->element_pt(e))->disable_projection();
+         }
+        for (unsigned e=0;e<nelem2;e++)
+         {
+          dynamic_cast<ELEMENT*>(tmp_new_mesh_pt->element_pt(e))->
+           disable_projection();
+         }      
+       }
+      // Do by direct diffused bin lookup
+      else
+       {
+        
+        
+        // Adjust size of bins
+        unsigned backup_bin_x=Multi_domain_functions::Nx_bin;
+        unsigned backup_bin_y=Multi_domain_functions::Ny_bin;
+        Multi_domain_functions::Nx_bin=Nbin_x_for_area_transfer;
+        Multi_domain_functions::Ny_bin=Nbin_y_for_area_transfer;
+        
+        // Make a mesh as geom object representation of the temporary
+        // mesh -- this also builds up the internal bin structure 
+        // from which we'll recover the target areas
+        MeshAsGeomObject* tmp_mesh_geom_obj_pt = 
+         new MeshAsGeomObject(tmp_new_mesh_pt);
+        
+        // Reset
+        Multi_domain_functions::Nx_bin=backup_bin_x;
+        Multi_domain_functions::Ny_bin=backup_bin_y;
+        
+        // Fill bin by diffusion
+        tmp_mesh_geom_obj_pt->fill_bin_by_diffusion();
 
-          // Use max. rather than min area of any element overlapping the
-          // the current element, otherwise we get a rapid outward diffusion
-          // of small elements
-          target_area_map[ext_el_pt]=std::max(target_area_map[ext_el_pt],
-                                              target_area[e]);
+        // Get ready for next assignment of target areas
+        target_area_map.clear();
+        
+        // Loop over elements in current (fine) mesh and visit all
+        // its integration points. Check where it's located in the bin
+        // structure of the temporary mesh and pass the target area
+        // to the associated element(s)
+        unsigned nelem=this->nelement();
+        for (unsigned e=0;e<nelem;e++)
+         {
+          ELEMENT* el_pt=dynamic_cast<ELEMENT*>(this->element_pt(e));
+          unsigned nint=el_pt->integral_pt()->nweight();
+          for (unsigned ipt=0;ipt<nint;ipt++)
+           {
+            // Get the coordinate of current point
+            Vector<double> s(2);
+            for(unsigned i=0;i<2;i++)
+             {
+              s[i] = el_pt->integral_pt()->knot(ipt,i);
+             }
+            Vector<double> x(2);
+            el_pt->interpolated_x(s,x);
+            
+            // Find the bin that contains that point and its contents
+            int bin_number=0;
+            Vector<std::pair<FiniteElement*,Vector<double> > > 
+             sample_point_pairs;
+            tmp_mesh_geom_obj_pt->get_bin(x,bin_number,sample_point_pairs);
+            
+            // Did we find it?
+            if (bin_number<0)
+             {
+              // Not even within bin boundaries... odd
+#ifdef PARANOID
+              std::stringstream error_message;
+              error_message 
+               << "Very odd -- we're looking for a point that's not even \n"
+               << "located within the bin boundaries.\n";
+              OomphLibWarning(error_message.str(),
+                              "RefineableTriangleMesh::adapt()",
+                              OOMPH_EXCEPTION_LOCATION);
+#endif
+             }
+            else
+             {
+              // Pass target area to all new elements associated
+              // with this bin
+              unsigned n=sample_point_pairs.size();
+              if (n>0)
+               {
+                for (unsigned ee=0;ee<n;ee++)
+                 {
+                  // Get ee-th new element in bin
+                  GeneralisedElement* ext_el_pt=sample_point_pairs[ee].first;
+
+                  // Use max. rather than min area of any element overlapping 
+                  // the current element, otherwise we get a rapid outward 
+                  // diffusion of small elements
+                  target_area_map[ext_el_pt]=
+                   std::max(target_area_map[ext_el_pt],
+                            target_area[e]);
+                }
+               }
+              else
+               {
+                std::stringstream error_message;
+                error_message 
+                 << "Point not found within bin structure\n";
+                throw OomphLibError(error_message.str(),
+                                    "RefineableTriangleMesh::adapt()",
+                                    OOMPH_EXCEPTION_LOCATION);
+               }
+             }
+           }
          }
 
-        // Switch off projection capability          
-        dynamic_cast<ELEMENT*>(this->element_pt(e))->disable_projection();
-       }
-      for (unsigned e=0;e<nelem2;e++)
-       {
-        dynamic_cast<ELEMENT*>(tmp_new_mesh_pt->element_pt(e))->
-         disable_projection();
-       }      
-
+       } // endif for projection/diffused bin
+      
+      oomph_info << "CPU for transfer of target areas (iter "
+                 << iter << ") " << TimingHelpers::timer()-t_start 
+                 << std::endl;
+      
       // Now copy into target area for temporary mesh but limit to
       // the equivalent of one sub-division per iteration
       done=true;
@@ -1870,8 +1981,6 @@ namespace oomph
            }
          }
        }
-      
-      
 
       // Now create the new mesh from TriangulateIO structure
       //-----------------------------------------------------
@@ -2112,6 +2221,10 @@ namespace oomph
     Nrefined=0;
     Nunrefined=0;
    }
+
+   oomph_info  <<"CPU for adaptation: "
+               << TimingHelpers::timer()-t_start_overall << std::endl;
+
  }
 
  //======================================================================

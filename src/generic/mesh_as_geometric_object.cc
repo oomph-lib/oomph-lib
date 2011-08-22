@@ -200,9 +200,9 @@ namespace oomph
  /// Sort the sampling points in the specified bin by distance from 
  /// sampling point
  //=================================================================
- void MeshAsGeomObject::sort_the_bin(
-  const Vector<double>& zeta,
-  Vector<std::pair<FiniteElement*,Vector<double> > >& sample_point_pairs)
+ void MeshAsGeomObject::sort_the_bin(const Vector<double>& zeta,
+                                     Vector<std::pair<FiniteElement*,
+                                     Vector<double> > >& sample_point_pairs)
  {
 
   // Set current zeta coordinate
@@ -216,6 +216,170 @@ namespace oomph
  }
 
 
+
+
+ //=================================================================
+ /// Get the number of the bin containing the specified coordinate; also
+ /// return the contents of that bin. Bin number is negative if 
+ /// the coordinate is outside the bin structure.
+ //=================================================================
+ void MeshAsGeomObject::get_bin(const Vector<double>& zeta, int& bin_number,
+  Vector<std::pair<FiniteElement*,Vector<double> > >& sample_point_pairs)
+ {
+
+  // Default for point not found
+  sample_point_pairs.clear();
+  bin_number=-1;
+  
+  get_bin(zeta,bin_number);
+  if (bin_number>=0)
+   {
+    sample_point_pairs=bin_content(bin_number);
+   }
+ }
+
+
+ //=================================================================
+ /// Get the number of the bin containing the specified coordinate.
+ /// Bin number is negative if the coordinate is outside
+ /// the bin structure.
+ //=================================================================
+ void MeshAsGeomObject::get_bin(const Vector<double>& zeta, int& bin_number)
+ {
+  
+  // Default for point not found
+  bin_number=-1;
+  
+  //Get the lagrangian dimension
+  const unsigned n_lagrangian = this->nlagrangian();
+  
+  // Does the zeta coordinate lie within the current bin structure?
+  
+  //Loop over the lagrangian dimension
+  for(unsigned i=0;i<n_lagrangian;i++)
+   {
+    //If the i-th coordinate is less than the minimum
+    if(zeta[i] < Min_coords[i]) 
+     {
+      return; 
+     }
+    //Otherwise coordinate may be bigger than the maximum
+    else if(zeta[i] > Max_coords[i])
+     {
+      return; 
+     }
+   }
+  
+  // Use the min and max coords of the bin structure, to find
+  // the bin structure containing the current zeta cooordinate
+  
+  //Offset for rows/matrices in higher dimensions
+  unsigned multiplier=1;
+  unsigned Nbin[3]={Nbin_x,Nbin_y,Nbin_z};
+  
+  // Loop over the dimension
+  for(unsigned i=0;i<n_lagrangian;i++)
+   {
+    //Find the bin number of the current coordinate
+    unsigned bin_number_i = 
+     int(Nbin[i]*((zeta[i]-Min_coords[i])/
+                  (Max_coords[i] - Min_coords[i])));
+     //Buffer the case when we are exactly on the edge
+     if(bin_number_i==Nbin[i]) {bin_number_i -= 1;}
+     //Now add to the bin number using the multiplier
+     bin_number += multiplier*bin_number_i;
+     //Increase the current row/matrix multiplier for the next loop
+     multiplier *= Nbin[i];
+    }
+
+ }
+ 
+
+ 
+ //=================================================================
+ /// Get the contents of the specified bin
+ //=================================================================
+ Vector<std::pair<FiniteElement*,Vector<double> > >& 
+ MeshAsGeomObject::bin_content(const unsigned& bin_number)
+ {
+  return Bin_object_coord_pairs[bin_number];
+ }
+ 
+
+
+//========================================================================
+/// Fill bin by diffusion, populating each empty bin with the same content
+/// as the first non-empty bin found during a spiral-based search 
+/// up to the specified "radius" (default 1)
+//========================================================================
+ void MeshAsGeomObject::fill_bin_by_diffusion(const unsigned& 
+                                              bin_diffusion_radius)
+ {
+  // Loop over all bins to check if they're empty
+  std::list<unsigned> empty_bins;
+  unsigned nbin=Bin_object_coord_pairs.size();
+  for (unsigned i=0;i<nbin;i++)
+   {
+    if (Bin_object_coord_pairs[i].size()==0)
+     {
+      empty_bins.push_front(i);
+     }
+   }
+
+  // Now keep processing the empty bins until there are none left
+  while (empty_bins.size()!=0)
+   {
+    // std::list<std::list<unsigned>::iterator> now_filled_bins;
+    for (std::list<unsigned>::iterator it=empty_bins.begin();
+         it!=empty_bins.end();it++)
+     {
+      unsigned bin=(*it);
+
+      // Look for immediate neighbours within the specified "bin radius"
+      unsigned level=bin_diffusion_radius;
+      Vector<unsigned> neighbour_bin;
+      get_neighbouring_bins_helper(bin,level,neighbour_bin);
+
+      unsigned n_neigh=neighbour_bin.size();
+      for (unsigned i=0;i<n_neigh;i++)
+       {
+        unsigned neigh_bin=neighbour_bin[i];
+        if (Bin_object_coord_pairs[neigh_bin].size()!=0)
+         {
+          // Copy the nearest one across and then stop
+          Bin_object_coord_pairs[bin]=Bin_object_coord_pairs[neigh_bin];
+
+          // Wipe entry without breaking the linked list (Andrew's trick -- nice!)
+          std::list<unsigned>::iterator it_to_be_deleted=it;
+          it--;
+          empty_bins.erase(it_to_be_deleted);
+          break;
+         }
+       }
+     }
+   }
+
+
+#ifdef PARANOID
+  // Loop over all bins to check if they're empty
+  nbin=Bin_object_coord_pairs.size();
+  for (unsigned i=0;i<nbin;i++)
+   {
+    if (Bin_object_coord_pairs[i].size()==0)
+     {
+      std::ostringstream error_message_stream;                           
+      error_message_stream                                        
+       << "Bin " << i << " is still empty\n"
+       << "after trying to fill it by diffusion\n";
+      throw OomphLibError(error_message_stream.str(),                  
+                          "MeshAsGeomObject::fill_bin_by_diffusion(..)",
+                          OOMPH_EXCEPTION_LOCATION);
+     }
+   }  
+#endif
+
+
+ }
 
 //========================================================================
 /// \short Find the sub geometric object and local coordinate therein that
@@ -710,22 +874,42 @@ namespace oomph
 //========================================================================
  void MeshAsGeomObject::output_bins(std::ofstream& outfile)
  {
-  unsigned nbin=Bin_object_coord_pairs.size();
-  for (unsigned b=0;b<nbin;b++)
+  // Spatial dimension of bin
+  const unsigned n_lagrangian = this->nlagrangian();
+  
+  unsigned nbin_x=Nbin_x;
+  unsigned nbin_y=1;
+  if (n_lagrangian>1) nbin_y=Nbin_y; 
+  unsigned nbin_z=1;
+  if (n_lagrangian>2) nbin_z=Nbin_z;
+
+  unsigned b=0;
+  for (unsigned iz=0;iz<nbin_z;iz++)
    {
-    unsigned nentry=Bin_object_coord_pairs[b].size();
-    for (unsigned e=0;e<nentry;e++)
+    for (unsigned iy=0;iy<nbin_y;iy++)
      {
-      FiniteElement* el_pt=Bin_object_coord_pairs[b][e].first;
-      Vector<double> s(Bin_object_coord_pairs[b][e].second);
-      unsigned dim=this->nlagrangian();
-      Vector<double> zeta(dim);
-      el_pt->interpolated_zeta(s,zeta);
-      for (unsigned i=0;i<dim;i++)
+      for (unsigned ix=0;ix<nbin_x;ix++)
        {
-        outfile << zeta[i] << " ";
+        unsigned nentry=Bin_object_coord_pairs[b].size();
+        for (unsigned e=0;e<nentry;e++)
+         {
+          FiniteElement* el_pt=Bin_object_coord_pairs[b][e].first;
+          Vector<double> s(Bin_object_coord_pairs[b][e].second);
+          unsigned dim=this->nlagrangian();
+          Vector<double> zeta(dim);
+          el_pt->interpolated_zeta(s,zeta);
+          for (unsigned i=0;i<dim;i++)
+           {
+            outfile << zeta[i] << " ";
+           }
+          outfile << ix << " " 
+                  << iy << " " 
+                  << iz << " " 
+                  << b  << " " 
+                  << std::endl;
+         }
+        b++;
        }
-      outfile << b << std::endl;
      }
    }
  }

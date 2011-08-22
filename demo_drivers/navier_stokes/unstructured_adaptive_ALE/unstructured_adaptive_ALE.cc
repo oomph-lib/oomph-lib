@@ -1005,9 +1005,6 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
   {
    Fluid_mesh_pt->min_element_size()=0.01; 
   }
-
- // Set the problem pointer
- Fluid_mesh_pt->problem_pt()=this;
    
  // Output boundary and mesh
  this->Fluid_mesh_pt->output_boundaries("boundaries.dat");

@@ -1,4 +1,5 @@
 SUBDIRS = \
+mesh_from_inline_triangle \
 mesh_from_triangle \
 mesh_from_geompack \
 mesh_from_tetgen \

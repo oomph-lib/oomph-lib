@@ -1036,176 +1036,6 @@ AM_CONDITIONAL(ALREADY_HAVE_SUPERLU_DIST, test x$have_superlu_dist = xtrue)
 
 
 
-
-#................................................................
-#................................................................
-
-
-#---------------------------------------------------
-# Potential location for the scalapack libraries.
-#
-# If the complete scalapack library is available on
-# your machine, specify the absolute path to the
-# library with --with-scalapack
-#----------------------------------------------------
-SCALAPACK_LIB=
-check_for_scalapack=false
-
-AC_ARG_WITH(scalapack,
-[  --with-scalapack[=ABSOLUTE_PATH] use scalapack library specified via ABSOLUTE PATH
-                               e.g. /usr/local/lib/scalapack.a],[
-  if test "$withval" != "no" -a "$withval" != "yes"; then
-    check_for_scalapack=true
-    SCALAPACK_LIB=$withval
-  fi
-])
-
-
-
-# Do they exist?
-have_scalapack=false
-if test x$check_for_scalapack = xtrue; then \
-if test -e $SCALAPACK_LIB; then \
-    have_scalapack=true; \
-    echo "Found the scalapack library "; \
-    echo " "; \
-    echo "   "  $SCALAPACK_LIB ; \
-    echo " "; \
-    # Make the variable available to all Makefile.am-s
-    AC_SUBST(SCALAPACK_LIB)
-else \
-    have_scalapack=false; \
-    echo "Did NOT find the scalapack library"; \
-    echo " "; \
-    echo "   "  $SCALAPACK_LIB ; \
-    echo " "; \
-fi; \
-else \
-    echo "No scalapack library specified"; \ 
-fi
-
-
-#Tell everybody about it...
-AM_CONDITIONAL(ALREADY_HAVE_SCALAPACK, test x$have_scalapack = xtrue)
-
-
-
-
-
-#................................................................
-#................................................................
-
-
-
-#---------------------------------------------------
-# Potential location for the blacs libraries with 
-# copy of blacs.a called blacs_copy.a. 
-#
-# If the complete blacs library is available on
-# your machine, specify the absolute path to the
-# library directory (!) with --with-blacs
-#----------------------------------------------------
-BLACS_LIB=
-check_for_blacs=false
-
-AC_ARG_WITH(blacs,
-[  --with-blacs[=ABSOLUTE_PATH] ABSOLUTE PATH to blacs libraries
-                               e.g. /usr/local/lib/ 
-                               This specified directory must contain
-                               the files blacs.a blacsF77.a and blacs_copy.a
-                               where blacs_copy.a is a copy of (or 
-                               symbolic link to) blacs.a -- needed to
-                               deal with some linking problems in mumps.],[
-  if test "$withval" != "no" -a "$withval" != "yes"; then
-    check_for_blacs=true
-    BLACS_LIB=$withval
-  fi
-])
-
-
-# Do they exist?
-have_blacs=false
-if test x$check_for_blacs = xtrue; then \
-if test -e $BLACS_LIB; then \
-    have_blacs=true; \
-    echo "Found the blacs library "; \
-    echo " "; \
-    echo "   "  $BLACS_LIB ; \
-    echo " "; \
-    # Make the variable available to all Makefile.am-s
-    AC_SUBST(BLACS_LIB)
-else \
-    have_blacs=false; \
-    echo "Did NOT find the blacs library"; \
-    echo " "; \
-    echo "   "  $BLACS_LIB ; \
-    echo " "; \
-fi; \
-else \
-    echo "No blacs library specified"; \ 
-fi
-
-
-#Tell everybody about it...
-AM_CONDITIONAL(ALREADY_HAVE_BLACS, test x$have_blacs = xtrue)
-
-
-
-#................................................................
-#................................................................
-
-
-
-#---------------------------------------------------
-# Potential location for the pord library 
-#
-# If the complete pord library is available on
-# your machine, specify the absolute path to the
-# library with --with-pord
-#----------------------------------------------------
-PORD_LIB=
-check_for_pord=false
-
-AC_ARG_WITH(pord,
-[  --with-pord[=ABSOLUTE_PATH] ABSOLUTE PATH to pord libraries
-                               e.g. /usr/local/lib/libpord.a ],[
-  if test "$withval" != "no" -a "$withval" != "yes"; then
-    check_for_pord=true
-    PORD_LIB=$withval
-  fi
-])
-
-
-# Do they exist?
-have_pord=false
-if test x$check_for_pord = xtrue; then \
-if test -e $PORD_LIB; then \
-    have_pord=true; \
-    echo "Found the pord library "; \
-    echo " "; \
-    echo "   "  $PORD_LIB ; \
-    echo " "; \
-    # Make the variable available to all Makefile.am-s
-    AC_SUBST(PORD_LIB)
-else \
-    have_pord=false; \
-    echo "Did NOT find the pord library"; \
-    echo " "; \
-    echo "   "  $PORD_LIB ; \
-    echo " "; \
-fi; \
-else \
-    echo "No pord library specified"; \ 
-fi
-
-
-#Tell everybody about it...
-AM_CONDITIONAL(ALREADY_HAVE_PORD, test x$have_pord = xtrue)
-
-
-
-
-
 #................................................................
 #................................................................
 
@@ -1455,6 +1285,300 @@ AC_SUBST(TRILINOS_INCLUDE)
 
 
 
+#................................................................
+#................................................................
+
+# Will mumps and scalapack be built?
+#-----------------------------------
+
+will_build_mumps_and_scalapack=false; 
+
+
+# Specify the mpi include directory that contains mpi.h
+AC_ARG_WITH(mpi-include-directory,
+[  --with-mpi-include-directory[=MPI_INCLUDE_DIRECTORY] specify mpi include
+                          directory that contains mpi.h. Needed for scalapack
+                          build.],[
+  if test "$withval" != "no" -a "$withval" != "yes"; then
+    mpi_include_dir=$withval
+    have_mpi_include_directory=true
+    MPI_INCLUDE_DIRECTORY=$withval
+  fi
+])
+AC_SUBST(MPI_INCLUDE_DIRECTORY)
+
+
+if test x$have_mpi_include_directory = xfalse; then \
+        echo "Nobody has specified mpi include directory (the directory"; \
+        echo "that contains mpi.h) with --with-mpi-include-directory"; \
+        echo "therefore I cannot do mumps/scalapack build from source"; \
+else \
+        echo "mpi include directory (the directory that contains mpi.h) "; \
+        echo "has been specified with --with-mpi-include-directory"; \
+        echo "therefore I can do mumps/scalapack build from source"; \
+fi;
+
+
+AC_CHECK_FILES($mpi_include_dir/mpi.h,
+                echo "Found mpi.h for scalapack build"; 
+                found_mpi_h_file=true, 
+                echo "Not found mpi.h for scalapack build"; 
+                found_mpi_h_file=false)
+
+
+if test x$found_mpi_h_file = xfalse; then \
+        echo "Did not find mpi.h in $mpi_include_dir for scalapack build"; \
+fi;
+
+
+AC_CHECK_FILES(external_distributions/mumps_and_scalapack/MUMPS_4.8.4.tar.gz,
+                echo "Found MUMPS_4.8.4.tar.gz"; 
+                found_mumps_tar_file=true, 
+                echo "Not found MUMPS_4.8.4.tar.gz"; 
+                found_mumps_tar_file=false)
+
+AC_CHECK_FILES(external_distributions/mumps_and_scalapack/scalapack_installer.tgz,
+                echo "Found scalapack_installer.tgz"; 
+                found_scalapack_tar_file=true, 
+                echo "Not found scalapack_installer.tgz"; 
+                found_scalapack_tar_file=false)
+
+
+if test x$found_mumps_tar_file = xtrue; then \
+if test x$found_scalapack_tar_file = xfalse; then \
+        echo "Need external_distributions/mumps_and_scalapack/MUMPS_4.8.4.tar.gz *and* "; \
+        echo "external_distributions/mumps_and_scalapack/scalapack_installer.tgz "; \
+        echo "to build mumps"; \
+fi \
+fi;
+
+if test x$found_mumps_tar_file = xfalse; then \
+if test x$found_scalapack_tar_file = xtrue; then \
+        echo "Need external_distributions/mumps_and_scalapack/MUMPS_4.8.4.tar.gz *and* "; \
+        echo "external_distributions/mumps_and_scalapack/scalapack_installer.tgz "; \
+        echo "to build mumps"; \
+fi \
+fi;
+
+if test x$found_mpi_h_file = xfalse; then \
+        echo "Not doing mumps/scalapack build"; \
+        will_build_mumps_and_scalapack=false; \
+else \
+        if test x$found_mumps_tar_file = xtrue; then \
+        if test x$found_scalapack_tar_file = xtrue; then \
+        if test x$want_mpi = xfalse; then \
+             echo "Currently I can only build mumps/scalapack with mpi support"; \
+             will_build_mumps_and_scalapack=false; \
+        else \
+             echo "Will build mumps/scalapack with mpi support"; \
+             will_build_mumps_and_scalapack=true; \
+             MUMPS_AND_SCALAPACK_DIR="`pwd`/external_distributions/mumps_and_scalapack/mumps_and_scalapack_default_installation"
+             MUMPS_AND_SCALAPACK_LIB="`pwd`/external_distributions/mumps_and_scalapack/mumps_and_scalapack_default_installation/lib"
+             MUMPS_AND_SCALAPACK_INCLUDE="`pwd`/external_distributions/mumps_and_scalapack/mumps_and_scalapack_default_installation/include"
+        fi \
+        fi \
+        fi \
+fi;
+
+# Make thes variables available to all Makefile.am-s
+AC_SUBST(MUMPS_AND_SCALAPACK_LIB)
+AC_SUBST(MUMPS_AND_SCALAPACK_INCLUDE)
+
+AM_CONDITIONAL(WILL_BUILD_MUMPS_AND_SCALAPACK, test x$will_build_mumps_and_scalapack = xtrue)
+
+#................................................................
+#................................................................
+
+
+
+#---------------------------------------------------
+# Potential location for the scalapack libraries.
+#
+# If the complete scalapack library is available on
+# your machine, specify the absolute path to the
+# library with --with-scalapack
+#----------------------------------------------------
+SCALAPACK_LIB=
+check_for_scalapack=false
+
+AC_ARG_WITH(scalapack,
+[  --with-scalapack[=ABSOLUTE_PATH] use scalapack library specified via ABSOLUTE PATH
+                               e.g. /usr/local/lib/scalapack.a],[
+  if test "$withval" != "no" -a "$withval" != "yes"; then
+    check_for_scalapack=true
+    SCALAPACK_LIB=$withval
+  fi
+])
+
+
+
+# Do they exist?
+have_scalapack=false
+if test x$check_for_scalapack = xtrue; then \
+if test -e $SCALAPACK_LIB; then \
+    have_scalapack=true; \
+    echo "Found the scalapack library "; \
+    echo " "; \
+    echo "   "  $SCALAPACK_LIB ; \
+    echo " "; \
+    # Make the variable available to all Makefile.am-s
+    AC_SUBST(SCALAPACK_LIB)
+else \
+    have_scalapack=false; \
+    echo "Did NOT find the scalapack library"; \
+    echo " "; \
+    echo "   "  $SCALAPACK_LIB ; \
+    echo " "; \
+fi; \
+else \
+    echo "No scalapack library specified"; \ 
+    if test x$will_build_mumps_and_scalapack = xtrue; then \
+        echo "...but building it from source"; \
+        SCALAPACK_LIB=$MUMPS_AND_SCALAPACK_LIB/libscalapack.a ; \
+        echo "after which it will be: " $SCALAPACK_LIB ; \
+        AC_SUBST(SCALAPACK_LIB) \
+        have_scalapack=true; \
+    fi
+fi
+
+
+#Tell everybody about it...
+AM_CONDITIONAL(ALREADY_HAVE_SCALAPACK, test x$have_scalapack = xtrue)
+
+
+
+
+
+#................................................................
+#................................................................
+
+
+
+#---------------------------------------------------
+# Potential location for the blacs libraries with 
+# copy of blacs.a called blacs_copy.a. 
+#
+# If the complete blacs library is available on
+# your machine, specify the absolute path to the
+# library directory (!) with --with-blacs
+#----------------------------------------------------
+BLACS_LIB=
+check_for_blacs=false
+
+AC_ARG_WITH(blacs,
+[  --with-blacs[=ABSOLUTE_PATH] ABSOLUTE PATH to blacs libraries
+                               e.g. /usr/local/lib/ 
+                               This specified directory must contain
+                               the files blacs.a blacsF77.a and blacs_copy.a
+                               where blacs_copy.a is a copy of (or 
+                               symbolic link to) blacs.a -- needed to
+                               deal with some linking problems in mumps.],[
+  if test "$withval" != "no" -a "$withval" != "yes"; then
+    check_for_blacs=true
+    BLACS_LIB=$withval
+  fi
+])
+
+
+# Do they exist?
+have_blacs=false
+if test x$check_for_blacs = xtrue; then \
+if test -e $BLACS_LIB; then \
+    have_blacs=true; \
+    echo "Found the blacs library "; \
+    echo " "; \
+    echo "   "  $BLACS_LIB ; \
+    echo " "; \
+    # Make the variable available to all Makefile.am-s
+    AC_SUBST(BLACS_LIB)
+else \
+    have_blacs=false; \
+    echo "Did NOT find the blacs library"; \
+    echo " "; \
+    echo "   "  $BLACS_LIB ; \
+    echo " "; \
+fi; \
+else \
+    echo "No blacs library specified"; \ 
+    if test x$will_build_mumps_and_scalapack = xtrue; then \
+        echo "...but building it from source"; \
+        BLACS_LIB=$MUMPS_AND_SCALAPACK_LIB ; \
+        echo "after which it will be: " $BLACS_LIB ; \
+        AC_SUBST(BLACS_LIB) \
+        have_blacs=true; \
+    fi
+fi
+
+
+#Tell everybody about it...
+AM_CONDITIONAL(ALREADY_HAVE_BLACS, test x$have_blacs = xtrue)
+
+
+
+#................................................................
+#................................................................
+
+
+
+#---------------------------------------------------
+# Potential location for the pord library 
+#
+# If the complete pord library is available on
+# your machine, specify the absolute path to the
+# library with --with-pord
+#----------------------------------------------------
+PORD_LIB=
+check_for_pord=false
+
+AC_ARG_WITH(pord,
+[  --with-pord[=ABSOLUTE_PATH] ABSOLUTE PATH to pord libraries
+                               e.g. /usr/local/lib/libpord.a ],[
+  if test "$withval" != "no" -a "$withval" != "yes"; then
+    check_for_pord=true
+    PORD_LIB=$withval
+  fi
+])
+
+
+# Do they exist?
+have_pord=false
+if test x$check_for_pord = xtrue; then \
+if test -e $PORD_LIB; then \
+    have_pord=true; \
+    echo "Found the pord library "; \
+    echo " "; \
+    echo "   "  $PORD_LIB ; \
+    echo " "; \
+    # Make the variable available to all Makefile.am-s
+    AC_SUBST(PORD_LIB)
+else \
+    have_pord=false; \
+    echo "Did NOT find the pord library"; \
+    echo " "; \
+    echo "   "  $PORD_LIB ; \
+    echo " "; \
+fi; \
+else \
+    echo "No pord library specified"; \ 
+    if test x$will_build_mumps_and_scalapack = xtrue; then \
+        echo "...but building it from source"; \
+        PORD_LIB=$MUMPS_AND_SCALAPACK_LIB/libpord.a ; \
+        echo "after which it will be: " $PORD_LIB ; \
+        AC_SUBST(PORD_LIB) \
+        have_pord=true; \
+    fi
+fi
+
+
+#Tell everybody about it...
+AM_CONDITIONAL(ALREADY_HAVE_PORD, test x$have_pord = xtrue)
+
+
+#................................................................
+#................................................................
+
+
+
 #---------------------------------------------------
 # Potential location of the MUMPS libraries.
 #
@@ -1527,6 +1651,14 @@ else \
 fi; \
 else \
     echo "No mumps library directory specified"; \ 
+    if test x$will_build_mumps_and_scalapack = xtrue; then \
+        echo "...but building it from source"; \
+        MUMPS_DIR=$MUMPS_AND_SCALAPACK_DIR ; \
+        MUMPS_LIB=$MUMPS_AND_SCALAPACK_LIB ; \
+        MUMPS_INCLUDE=$MUMPS_AND_SCALAPACK_INCLUDE ; \
+        echo "after which it will be: " $MUMPS_DIR ; \
+        have_mumps=true; \
+    fi
 fi
 
 

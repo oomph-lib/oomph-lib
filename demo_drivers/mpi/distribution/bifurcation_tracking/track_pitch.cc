@@ -339,7 +339,7 @@ this->linear_solver_pt() = iterative_linear_solver_pt;*/
  
  // Shut up!
  static_cast<HyprePreconditioner*>(P_matrix_preconditioner_pt)->
-  disable_doc_time();
+   disable_doc_time();
 #endif
 #endif
 */ 

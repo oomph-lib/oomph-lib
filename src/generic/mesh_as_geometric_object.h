@@ -371,6 +371,15 @@ public:
  ///Get the min and max coordinates for the mesh, in each dimension
  void get_min_and_max_coordinates(Mesh* const &mesh_pt);
 
+ ///Number of bins in x direction
+ unsigned nbin_x(){return Nbin_x;}
+
+ ///Number of bins in y direction
+ unsigned nbin_y(){return Nbin_y;}
+
+ ///Number of bins in z direction
+ unsigned nbin_z(){return Nbin_z;}
+
  /// \short Compute the minimum distance of any vertex in the specified bin
  /// from the specified Lagrangian coordinate zeta
  double min_distance(const unsigned& i_bin,
@@ -406,12 +415,43 @@ public:
    Bin_object_coord_pairs.clear();
   }
 
+ /// \short Get the number of the bin containing the specified coordinate.
+ /// Bin number is negative if the coordinate is outside
+ /// the bin structure.
+ void get_bin(const Vector<double>& zeta, int& bin_number);
+ 
+ /// \short Get the number of the bin containing the specified coordinate; also
+ /// return the contents of that bin. Bin number is negative if the 
+ /// coordinate is outside the bin structure.
+ void get_bin(const Vector<double>& zeta, int& bin_number,
+              Vector<std::pair<FiniteElement*,
+              Vector<double> > >& sample_point_pairs);
+ 
+ /// Get the contents of the specified bin
+ Vector<std::pair<FiniteElement*,Vector<double> > >& bin_content(
+  const unsigned& bin_number);
+ 
  ///Calculate the bin numbers of all the neighbours to "bin" given the level
- void get_neighbouring_bins_helper(const unsigned& bin, const unsigned& level,
+ void get_neighbouring_bins_helper(const unsigned& bin_number, 
+                                   const unsigned& level,
                                    Vector<unsigned>& neighbour_bin);
+
+ /// \short Fill bin by diffusion, populating each empty bin with the same content
+ /// as the first non-empty bin found during a spiral-based search 
+ /// up to the specified "radius" (default 1)
+ void fill_bin_by_diffusion(const unsigned& bin_diffusion_radius=1);
 
  /// Output bins
  void output_bins(std::ofstream& outfile);
+
+ /// Output bins
+ void output_bins(std::string& filename)
+ {
+  std::ofstream outfile;
+  outfile.open(filename.c_str());
+  output_bins(outfile);
+  outfile.close();
+ }
 
 };
 

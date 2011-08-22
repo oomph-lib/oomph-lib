@@ -89,10 +89,10 @@ namespace oomph
                TimeStepper* time_stepper_pt=
                &Mesh::Default_TimeStepper,
                const bool &use_attributes=false)   
-   {
+   {    
     //Store the attributes
     Use_attributes = use_attributes;
-
+    
     // Store Timestepper used to build elements
     Time_stepper_pt=time_stepper_pt;
 
@@ -654,6 +654,9 @@ namespace oomph
      }
 #endif
    }
+
+
+
   
   /// \short Setup boundary coordinate on boundary b.
   /// Boundary coordinate increases continously along
@@ -1355,35 +1358,53 @@ template<class ELEMENT>
    /// Empty Destructor
    virtual ~RefineableTriangleMesh() {}
    
-   /// \short Problem pointer (needed for multi-domain machinery during
-   /// adaptation)
-   Problem*& problem_pt(){return Problem_pt;}
-   
-   /// Max element size allowed during adaptation
-   double& max_element_size(){return Max_element_size;}
-   
-   /// Min element size allowed during adaptation
-   double& min_element_size(){return Min_element_size;}
-   
-   /// Min angle before remesh gets triggered
-   double& min_permitted_angle(){return Min_permitted_angle;}
-   
-   /// Doc the targets for mesh adaptation
-   void doc_adaptivity_targets(std::ostream &outfile)
-   {
-    outfile << std::endl;
-    outfile << "Targets for mesh adaptation: " << std::endl;
-    outfile << "---------------------------- " << std::endl;
-    outfile << "Target for max. error: " << Max_permitted_error << std::endl;
-    outfile << "Target for min. error: " << Min_permitted_error << std::endl;
-    outfile << "Target min angle: " << Min_permitted_angle << std::endl;
-    outfile << "Min. allowed element size: " << Min_element_size << std::endl;
-    outfile << "Max. allowed element size: " << Max_element_size << std::endl;
-    outfile << "Don't unrefine if less than " << Max_keep_unrefined 
-            << " elements need unrefinement." << std::endl;
-    outfile << std::endl;
-   }
-   
+  /// \short Enable transfer of target areas between meshes by 
+  /// bin method (fast but diffusive; default)
+  void enable_area_transfer_by_bins()
+  {
+   Do_area_transfer_by_projection=false;
+  }
+
+  /// \short Enable transfer of target areas between meshes by 
+  /// multi-domain method (slow but expensive)
+  void enable_area_transfer_by_multi_domain()
+  {
+   Do_area_transfer_by_projection=true;
+  }
+  
+  /// \short Read/write access to number of bins in the x-direction
+  /// when transferring target areas by bin method
+  unsigned& nbin_x_for_area_transfer(){return Nbin_x_for_area_transfer;}
+  
+  /// \short Read/write access to number of bins in the y-direction
+  /// when transferring target areas by bin method
+  unsigned& nbin_y_for_area_transfer(){return Nbin_y_for_area_transfer;}
+
+  /// Max element size allowed during adaptation
+  double& max_element_size(){return Max_element_size;}
+  
+  /// Min element size allowed during adaptation
+  double& min_element_size(){return Min_element_size;}
+  
+  /// Min angle before remesh gets triggered
+  double& min_permitted_angle(){return Min_permitted_angle;}
+  
+  /// Doc the targets for mesh adaptation
+  void doc_adaptivity_targets(std::ostream &outfile)
+  {
+   outfile << std::endl;
+   outfile << "Targets for mesh adaptation: " << std::endl;
+   outfile << "---------------------------- " << std::endl;
+   outfile << "Target for max. error: " << Max_permitted_error << std::endl;
+   outfile << "Target for min. error: " << Min_permitted_error << std::endl;
+   outfile << "Target min angle: " << Min_permitted_angle << std::endl;
+   outfile << "Min. allowed element size: " << Min_element_size << std::endl;
+   outfile << "Max. allowed element size: " << Max_element_size << std::endl;
+   outfile << "Don't unrefine if less than " << Max_keep_unrefined 
+           << " elements need unrefinement." << std::endl;
+   outfile << std::endl;
+  }
+  
    
    /// Refine mesh uniformly and doc process
    void refine_uniformly(DocInfo& doc_info)
@@ -1438,13 +1459,23 @@ template<class ELEMENT>
    /// Helper function to initialise data associated with adaptation
    void initialise_adaptation_data()
    {
+    // Boolean flag to choose method for transfer of target areas
+    // between meshes: Bin (fast but more diffusive; false; default)
+    // or projection (slow; true)
+    this->Do_area_transfer_by_projection=false;
+    
+    // Number of bins in the x-direction
+    // when transferring target areas by bin method
+    this->Nbin_x_for_area_transfer=100;
+    
+    // Number of bins in the y-direction
+    // when transferring target areas by bin method
+    this->Nbin_y_for_area_transfer=100;
+
     // Set max and min targets for adaptation
     this->Max_element_size=1.0;
     this->Min_element_size=0.001;
     this->Min_permitted_angle=15.0;
-    
-    // Initialise problem pointer
-    this->Problem_pt=0;
    }
    
    /// \short Build a new TriangulateIO object from previous TriangulateIO
@@ -1540,10 +1571,20 @@ template<class ELEMENT>
     
     return min_angle;
    }
-   
-   /// \short Problem pointer (needed for multi-domain machinery during
-   /// adaptation
-   Problem* Problem_pt;
+  
+ 
+   /// \short Boolean flag to choose method for transfer of target areas
+   /// between meshes: Bin (fast but more diffusive; false; default)
+   /// or projection (slow; true)
+   bool Do_area_transfer_by_projection;
+
+   /// \short Number of bins in the x-direction
+   /// when transferring target areas by bin method
+   unsigned Nbin_x_for_area_transfer;
+
+   /// \short Number of bins in the y-direction
+   /// when transferring target areas by bin method
+   unsigned Nbin_y_for_area_transfer;
    
    /// Max permitted element size
    double Max_element_size;

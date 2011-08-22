@@ -511,10 +511,6 @@ UnstructuredTorusProblem<ELEMENT>::UnstructuredTorusProblem(
   uniform_element_area,
   this->time_stepper_pt());
 
-
-//Set the problem pointer
- this->mesh_pt()->problem_pt() = this;
-
  // Set error estimator 
  Z2ErrorEstimator* error_estimator_pt=new Z2ErrorEstimator;
  mesh_pt()->spatial_error_estimator_pt()=error_estimator_pt;

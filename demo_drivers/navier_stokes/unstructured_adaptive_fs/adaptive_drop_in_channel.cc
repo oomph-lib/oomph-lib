@@ -1001,9 +1001,6 @@ DropInChannelProblem<ELEMENT>::DropInChannelProblem()
    Fluid_mesh_pt->min_element_size()=0.01; 
   }
 
- // Set the problem pointer (required for mesh adaptation/projection)
- Fluid_mesh_pt->problem_pt()=this;
-   
  // Output boundary and mesh initial mesh for information
  this->Fluid_mesh_pt->output_boundaries("boundaries.dat");
  this->Fluid_mesh_pt->output("mesh.dat");

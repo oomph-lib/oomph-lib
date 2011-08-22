@@ -572,14 +572,19 @@ class ProjectionProblem : public virtual Problem
      el_pt->enable_projection();
     }
    
+   
    // Set up multi domain interactions so we can locate the
    // values in the base mesh.
    // Note that it's important to switch elements to projection
    // mode first to ensure that matching is done based on Eulerian
    // rather than Lagrangian coordinates if pseudo-solid elements
    // are used.
+   double t_start=TimingHelpers::timer();
    Multi_domain_functions::setup_multi_domain_interaction
     <PROJECTABLE_ELEMENT>(this,Problem::mesh_pt(),base_mesh_pt);
+   oomph_info  <<"CPU for setup of multi-domain interaction for projection: "
+               << TimingHelpers::timer()-t_start << std::endl;
+   t_start=TimingHelpers::timer();
 
    // Pin all solid position dofs (if required)
    pin_solid_positions();
