@@ -33,7 +33,8 @@
 #include "../generic/mesh.h"
 #include "../generic/brick_mesh.h"
 #include "../generic/refineable_brick_mesh.h"
-#include "simple_cubic_mesh.h"
+#include "simple_cubic_mesh.template.h"
+#include "simple_cubic_mesh.template.cc"
 #include "quarter_pipe_domain.h"
 
 #include "../generic/macro_element.h"

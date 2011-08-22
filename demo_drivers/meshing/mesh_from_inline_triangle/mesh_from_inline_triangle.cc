@@ -103,8 +103,8 @@ public:
  /// Actions before adapt. Empty
  void actions_before_adapt() {}
  
- /// \short Actions after adapt: Re-setup problem
- /// Setup the problem again -- remember that mesh has been
+ /// \short Actions after adapt: 
+ /// Setup the problem again -- remember that the mesh has been
  /// completely rebuilt and its element's don't have any
  /// pointers to source fcts etc. yet
  void actions_after_adapt()
@@ -112,7 +112,7 @@ public:
    complete_problem_setup();
   }
  
- /// Update the after solve (empty)
+ /// Update after solve (empty)
  void actions_after_newton_solve(){}
 
  /// Update the problem specs before solve: Re-apply boundary conditons
@@ -413,9 +413,6 @@ UnstructuredPoissonProblem<ELEMENT>::UnstructuredPoissonProblem()
  // Set element size limits
  My_mesh_pt->max_element_size()=0.2;
  My_mesh_pt->min_element_size()=0.002; 
-
- // Set the problem pointer (needed for adaptation/projection)
- //My_mesh_pt->problem_pt()=this; // hierher kill
  
  // Set boundary condition and complete the build of all elements
  complete_problem_setup();

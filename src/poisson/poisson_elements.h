@@ -613,14 +613,14 @@ class FaceGeometry<QPoissonElement<1,NNODE_1D> >:
 #endif
   
     // Create the vector
-    Vector<std::pair<Data*,unsigned> > data_values;
+    unsigned nnod=this->nnode();
+    Vector<std::pair<Data*,unsigned> > data_values(nnod);
    
     // Loop over all nodes
-    unsigned nnod=this->nnode();
     for (unsigned j=0;j<nnod;j++)
      {
       // Add the data value associated field: The node itself
-      data_values.push_back(std::make_pair(this->node_pt(j),fld));
+      data_values[j]=std::make_pair(this->node_pt(j),fld);
      }
    
     // Return the vector
