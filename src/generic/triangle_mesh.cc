@@ -29,8 +29,6 @@
 #include <algorithm>
 #include "map_matrix.h"
 #include "triangle_mesh.h"
-#include "../rigid_body/rigid_body_elements.h"
-
 
 namespace oomph
 {

@@ -627,6 +627,18 @@ protected:
 class TriangleMeshInternalPolygon : public virtual TriangleMeshPolygon, 
  public virtual TriangleMeshInternalClosedCurve
 {
+  private:
+ ///\short Boolean flag to indicate whether the polygon can move
+ /// (default false because if it doesn't move this will just lead to
+ ///  wasted work)
+ bool Polygon_fixed;
+
+  protected:
+
+ ///\short Boolean flag to indicate whether the polygon can update its
+ ///own reference configuration after it has moved i.e. if it is
+ ///upgraded to a rigid body rather than being a free surface (default false)
+ bool Can_update_configuration;
  
 public:
  
@@ -646,7 +658,8 @@ public:
                              const Vector<TriangleMeshPolyLine*>& 
                              boundary_polyline_pt) :
   TriangleMeshPolygon(boundary_polyline_pt), 
-  TriangleMeshInternalClosedCurve(internal_point)
+   TriangleMeshInternalClosedCurve(internal_point), Polygon_fixed(false),
+   Can_update_configuration(false)
   {
 #ifdef PARANOID
 
@@ -785,6 +798,38 @@ public:
   
  /// \short Empty Destuctor
  virtual ~TriangleMeshInternalPolygon() { }
+
+ /// \short Test whether the polygon is fixed or not
+ bool is_fixed() const {return Polygon_fixed;}
+
+ /// \short Set the polygon to be fixed
+ void set_fixed() {Polygon_fixed = true;}
+
+ /// \short Set the polygon to be allowed to move (default)
+ void set_unfixed() {Polygon_fixed = false;}
+
+ /// \short Test whether polygon can update reference
+ bool can_update_reference_configuration() const 
+ {return Can_update_configuration;}
+
+ /// \short Virtual function that should be overloaded to update the polygons
+ /// reference configuration
+ virtual void reset_reference_configuration()
+ {
+  std::ostringstream error_stream;
+  error_stream 
+   << "Broken Default Called\n"
+   << "This function should be overloaded if Can_update_configuration = true,\n"
+   << "which indicates that the polygon can update its own position (i.e. it\n"
+   << "may be a rigid body. Otherwise the update will be via a FaceMesh \n"
+   << "representation of the boundary which is appropriate for \n"
+   << "general deforming surfaces\n";
+  
+ throw OomphLibError(
+  error_stream.str(),
+  "TriangleMeshInternalPolygon::reset_reference_configuration()",
+  OOMPH_EXCEPTION_LOCATION);
+ }
  
   /// Output each sub-boundary at n_sample (default: 50) points
   /// and internal point

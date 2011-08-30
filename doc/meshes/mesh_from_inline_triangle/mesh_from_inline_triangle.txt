@@ -10,9 +10,9 @@ This complements the discussion in
 another tutorial</a>
 where we illustrated how to build \c oomph-lib meshes using the
 output generated when <A HREF="http://www.cs.cmu.edu/~quake/triangle.html">
-\c Triangle </A> is used to create the mesh "offline". 
+\c Triangle </A> is used to create the mesh externally. 
 
- Specifically, we demonstrate 
+ In addition, we demonstrate 
 - how to create meshes with polygonal or curvilinear boundaries
 .
 and 
@@ -21,7 +21,7 @@ and
 Here we restrict ourselves to the solution of problems in fixed
 domains. Other tutorials discuss more advanced applications involving
 moving meshes, e.g.
-- <A HREF="../../../../doc/bla/bla/html/index.html">
+- <A HREF="../../../../doc/navier_stokes/jeffery_orbit/html/index.html">
   the motion of an ellipse in a shear flow</a>
   \n\n
 - <A HREF="../../../../doc/bla/bla/html/index.html">free-surface
@@ -35,25 +35,32 @@ moving meshes, e.g.
 
 \subsection polygonal Meshes with polygonal boundaries
 If the domain has polygonal outer (and possibly internal) 
-boundaries, the mesh generation process follows the pattern 
-familiar from the offline use
-of <A HREF="http://www.cs.cmu.edu/~quake/triangle.html">\c Triangle </A>:
-We define the polygonal boundaries in terms of \c
+boundaries, the mesh generation process follows a similar pattern 
+to that required in the external use
+of <A HREF="http://www.cs.cmu.edu/~quake/triangle.html">\c Triangle
+</A>, but using \c oomph-lib classes to represent the required data.
+We define the polygonal boundaries using \c
 TriangleMeshPolyLines, 
-which represent distinct mesh boundaries and are defined by their
-vertex coordinates. Multiple \c TriangleMeshPolyLines are then 
+which represent distinct mesh boundaries and are defined by a series of
+vertex coordinates. Multiple \c TriangleMeshPolyLines can be 
 combined to define
-(closed) \c TriangleMeshPolygons. These are used by
-<A HREF="http://www.cs.cmu.edu/~quake/triangle.html">\c Triangle </A>
+(closed) \c TriangleMeshPolygons. These are then used 
 to create an unstructured mesh with a pre-determined target area for
-all elements.  
+all elements, via an interface to
+<A HREF="http://www.cs.cmu.edu/~quake/triangle.html">\c Triangle </A>.
 
 One particular feature of \c oomph-lib's interface
 to  <A HREF="http://www.cs.cmu.edu/~quake/triangle.html">\c Triangle </A>
 is that each closed \c TriangleMeshPolygon must contain at least two
-distinct \c TriangleMeshPolyLines, each with its own boundary ID. This 
-is necessary to allow \c oomph-lib to generate boundary coordinates 
-automatically. The sketch below shows a representative domain 
+distinct \c TriangleMeshPolyLines, each with its own boundary ID. 
+This is because every \c Node can only have a single-valued boundary
+coordinate, and so if boundary is closed there will be a discontinuity
+in the coordinate value. (For example, a standard representation 
+would have \f$\zeta = [0,\2pi]\f$, but the node at 
+\f$\zeta=0\f$ should also have \f$\zeta=2\pi\f$ and this is not possible.)
+Thus, \c oomph-lib will not be able to refine automatically 
+along the boundary unless it is split in two.
+ The sketch below shows a representative domain 
 as well as two legal and one illegal representations of the domain
 boundaries. Note that the boundaries can be enumerated in an arbitrary 
 fashion. 
@@ -109,11 +116,11 @@ adjust the element sizes guided by spatial error estimates
 when re-meshing the domain is a simple fringe benefit.
 
 A number of issues are important: 
-- Since the mesh (and thus its constituent elements) are completely 
-  re-generated when the mesh is adapted, it is necessary to "complete
+- The mesh (and thus its constituent elements) are completely 
+  re-generated when the mesh is adapted, and so it is necessary to "complete
   the build" of all elements after each mesh adaptation. For instance,
   pointers to problem parameters (Reynolds numbers, source functions,
-  etc) have to be re-set after the adaptation since they cannot 
+  etc) must  be re-set after the adaptation since they cannot 
   (easily) be passed from the old to the new mesh. 
   \n\n
 - When projecting the solution from the old to the new mesh, we
@@ -133,9 +140,10 @@ A number of issues are important:
   (such as the number of fields to be projected, the number of history 
   values, etc) in the form of virtual functions. This is much more
   straightforward than upgrading an existing element to become a refineable
-  element that can be used in an adaptive computation on a structured
+  element for use in an adaptive computation on a structured
   mesh because the "mesh adaptation by mesh re-generation" avoids the
-  creation of hanging nodes. See the section \ref wrapper for a more detailed 
+  creation of hanging nodes. See the section \ref wrapper for a
+  slightly more detailed 
   discussion of this aspect.  
   \n\n
 - Note that we do \b not apply any boundary conditions 
@@ -155,7 +163,8 @@ Apart from these issues, the user interfaces to the mesh adaptation
 functions are exactly the same as for structured meshes. Specifically,
 it is possible to specify maximum and minimum element sizes and
 target values for the error such that the mesh is refined in regions
-where the error estimate is too large and unrefined where it is "too small".
+where the error estimate is ``too large'' and unrefined where it is 
+``too small''.
 
 Typically, the most computationally expensive stage of the mesh 
 regeneration procedure is the multi-domain setup procedure which identifies
@@ -175,7 +184,7 @@ As an example we consider the adaptive solution of Poisson's equation
 \f[
 \frac{\partial^2 u}{\partial x_i^2} = f(x_1,x_2)
 \f]
-in a circular domain which contains an elliptical and a polygonal
+in a circular domain that contains an elliptical and a polygonal
 hole. As in many previous examples, we apply Dirichlet boundary
 conditions on all domain boundaries and choose the boundary
 values and the source function  \f$ f(x_1,x_2) \f$ such that 
@@ -267,7 +276,7 @@ providing a pointer to this (yet-to-be-built) object.
 
 As discussed above, the closed outer boundary must be broken up into 
 (at least) two distinct sub-boundaries to allow \c oomph-lib
-to automatically setup boundary coordinates. We therefore create
+to automatically refine and setup boundary coordinates. We therefore create
 two \c TriangleMeshCurviLines, specifying
 - the \c GeomObject that provides the exact curvilinear representation
   of the boundary,
@@ -331,7 +340,7 @@ We repeat the exercise for the lower half which we turn into boundary
 
 Finally, we build the polygonal hole itself, specifying its constituent
 \c TriangleMeshPolyLines and the coordinate of a point inside the
-hole.
+hole, which is required by \c Triangle.
 
 \until hole_pt[0]
 
@@ -398,7 +407,7 @@ in the namespace \c TanhSolnForPoisson.
 
 
 \section doc Post-processing
-As usual we compare the computed solution against the exact solution:
+We compare the computed solution against the exact solution:
 
 \skipline start_of_doc
 \until end of doc
@@ -467,7 +476,8 @@ compromise between two conflicting demands:
   curvilinear boundary. This often
   manifests itself in inverted elements. (An element is
   considered inverted if the Jacobian of the mapping between local
-  and global coordinates becomes non-positive. Note that negative Jacobians may
+  and global coordinates becomes non-positive anywhere. 
+  Note that negative Jacobians may
   occur in the interior of elements (e.g. at their Gauss points) even
   if a plot of the element, based on its nodal positions still looks "OK").
 .
@@ -476,10 +486,6 @@ compromise between two conflicting demands:
 
 \subsection ex Exercises
 -# Change the outer curvilinear boundary to a polygonal boundary.
-   \n\n
--# Experiment with different element types, e.g. by solving the
-   problem with ten-noded  \c
-   ProjectablePoissonElement<TPoissonElement<2,4> >.
    \n\n
 -# Vary the number of vertices used for the initial polygonal
    representation of the curvilinear hole to establish what number

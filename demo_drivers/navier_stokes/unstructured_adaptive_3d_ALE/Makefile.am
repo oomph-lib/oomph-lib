@@ -10,7 +10,7 @@ uns_adapt_3d_SOURCES = uns_adapt_3d.cc
 # Required libraries: 
 # $(FLIBS) is included in case the solver involves fortran sources.
 uns_adapt_3d_LDADD = -L@libdir@ \
-                       -lsolid -lconstitutive -lnavier_stokes -lrigid_body \
+                       -lsolid -lconstitutive -lnavier_stokes \
                       -lgeneric \
                        $(EXTERNAL_LIBS) $(FLIBS)
 

@@ -19,7 +19,7 @@ mkdir RESLT
 ../jeffery_hamel > OUTPUT_jeffery_hamel
 echo "done"
 echo " " >> validation.log
-echo "Rectangular jeffery_hamel validation" >> validation.log
+echo "Polar Jeffery--Hamel (Phil Haines) validation" >> validation.log
 echo "------------------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log

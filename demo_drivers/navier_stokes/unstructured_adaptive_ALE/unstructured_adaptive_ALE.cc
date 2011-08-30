@@ -900,7 +900,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  
  // Fill in the vector of holes. Specify data that define centre's
  // displacement
- Inner_hole_pt[0] = new RigidBodyTriangleMeshInternalPolygon(
+ Inner_hole_pt[0] = new ImmersedRigidBodyTriangleMeshInternalPolygon(
   hole_center,hole_segment_pt,this->time_stepper_pt(),
   Problem_Parameter::Centre_displacement_data_pt[0]);
  
@@ -964,7 +964,7 @@ UnstructuredFluidProblem<ELEMENT>::UnstructuredFluidProblem()
  
  // Fill in the second hole. Specify data that define centre's
  // displacement
- Inner_hole_pt[1] = new RigidBodyTriangleMeshInternalPolygon(
+ Inner_hole_pt[1] = new ImmersedRigidBodyTriangleMeshInternalPolygon(
   hole_center,hole_segment_pt,this->time_stepper_pt(),
   Problem_Parameter::Centre_displacement_data_pt[1]);
  
@@ -1260,7 +1260,8 @@ void UnstructuredFluidProblem<ELEMENT>::doc_solution(
   << "Docing step: " << Problem_Parameter::Doc_info.number() 
   << "\n cenrelinedispl = "
   <<Problem_Parameter::Centre_displacement_data_pt[0]->value(0)<< "\n"
-  << "centre of mass: " << dynamic_cast<RigidBodyTriangleMeshInternalPolygon*>(
+  << "centre of mass: " 
+  << dynamic_cast<ImmersedRigidBodyTriangleMeshInternalPolygon*>(
    Inner_hole_pt[0])->initial_centre_of_mass(0) 
   << std::endl;
 

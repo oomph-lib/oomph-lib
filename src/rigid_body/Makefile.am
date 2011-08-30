@@ -3,14 +3,14 @@
 
 # Define the sources
 sources =  \
-rigid_body_elements.cc 
+immersed_rigid_body_elements.cc 
 
 # Include files which shouldn't be compiled
 incl_cc_files =
 
 # Define the headers
 headers =  \
-rigid_body_elements.h 
+immersed_rigid_body_elements.h 
 
 
 # Define name of library

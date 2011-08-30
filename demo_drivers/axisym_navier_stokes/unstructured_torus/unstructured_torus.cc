@@ -630,7 +630,7 @@ void UnstructuredTorusProblem<ELEMENT>::solve_system(const double &dt,
  ofstream file;
 
  //Set the Reynolds number
- Re = 1000.0;
+ Re = 10.0;//1000.0;
 
  //Set an impulsive start from rest
  assign_initial_values_impulsive(dt);

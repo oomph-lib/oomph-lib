@@ -361,7 +361,7 @@ WARN_LOGFILE           =
 # directories like "/usr/src/myproject". Separate the files or directories 
 # with spaces.
 
-INPUT =  ../../src/multi_physics  ../../src/navier_stokes ../../src/generic ../../src/poisson ../../src/meshes . ../../src/axisym_navier_stokes ../../src/fluid_interface ../../src/solid ../../src/constitutive ../../src/axisym_spherical_solid  ../../src/beam ../../src/shell  ../../src/advection_diffusion  ../../src/unsteady_heat  ../../src/linear_wave ../../src/womersley ../../src/linear_elasticity ../../src/advection_diffusion_reaction ../../src/rigid_body .
+INPUT                  = . ../../../demo_drivers/navier_stokes/jeffery_orbit
 
 # If the value of the INPUT tag contains directories, you can use the 
 # FILE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp 
@@ -382,7 +382,7 @@ RECURSIVE              = NO
 # excluded from the INPUT source files. This way you can easily exclude a 
 # subdirectory from a directory tree whose root is specified with the INPUT tag.
 
-EXCLUDE                = ../../src/meshes/simple_rectangular_quadmesh.h ../../src/meshes/one_d_mesh.h ../../src/meshes/fish_mesh.h
+EXCLUDE                = 
 
 # The EXCLUDE_SYMLINKS tag can be used select whether or not files or directories 
 # that are symbolic links (a Unix filesystem feature) are excluded from the input.
@@ -399,7 +399,7 @@ EXCLUDE_PATTERNS       =
 # directories that contain example code fragments that are included (see 
 # the \include command).
 
-EXAMPLE_PATH           = 
+EXAMPLE_PATH           =  ../../../demo_drivers/navier_stokes/jeffery_orbit
 
 # If the value of the EXAMPLE_PATH tag contains directories, you can use the 
 # EXAMPLE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp 
@@ -419,7 +419,7 @@ EXAMPLE_RECURSIVE      = NO
 # directories that contain image that are included in the documentation (see 
 # the \image command).
 
-IMAGE_PATH             = ./figures 
+IMAGE_PATH             = ./figures
 
 # The INPUT_FILTER tag can be used to specify a program that doxygen should 
 # invoke to filter for each input file. Doxygen will invoke the filter program 
@@ -488,7 +488,7 @@ ALPHABETICAL_INDEX     = YES
 # the COLS_IN_ALPHA_INDEX tag can be used to specify the number of columns 
 # in which this list will be split (can be a number in the range [1..20])
 
-COLS_IN_ALPHA_INDEX    = 2
+COLS_IN_ALPHA_INDEX    = 5
 
 # In case all classes in a project start with a common prefix, all 
 # classes will be put under the same header in the alphabetical index. 
@@ -521,21 +521,21 @@ HTML_FILE_EXTENSION    = .html
 # The HTML_HEADER tag can be used to specify a personal HTML header for 
 # each generated HTML page. If it is left blank doxygen will generate a 
 # standard header.
-
-HTML_HEADER  = oomph-lib_header.html #  ../oomph-lib_header.html
+ 
+HTML_HEADER  = oomph-lib_header.html #  ../../oomph-lib_header.html 
 
 # The HTML_FOOTER tag can be used to specify a personal HTML footer for 
-# each generated HTML page. If it is left blank doxygen will generate a 
+# each generated HTML page. If it is left blank doxygen will generate a  
 # standard footer.
 
 HTML_FOOTER            = 
 
 # The HTML_STYLESHEET tag can be used to specify a user-defined cascading 
-# style sheet that is used by each HTML page. It can be used to 
+# style sheet that is used by each HTML page. It can be used to  
 # fine-tune the look of the HTML output. If the tag is left blank doxygen 
 # will generate a default style sheet
-
-HTML_STYLESHEET        = 
+   
+HTML_STYLESHEET        =   
 
 # If the HTML_ALIGN_MEMBERS tag is set to YES, the members of classes, 
 # files or namespaces will be aligned in HTML using tables. If set to 
@@ -585,7 +585,7 @@ TOC_EXPAND             = NO
 # top of each HTML page. The value NO (the default) enables the index and 
 # the value YES disables it.
 
-DISABLE_INDEX          = NO
+DISABLE_INDEX          = YES
 
 # This tag can be used to set the number of enum values (range [1..20]) 
 # that doxygen will group on one line in the generated HTML documentation.
@@ -922,7 +922,7 @@ GENERATE_TAGFILE       =
 # in the class index. If set to NO only the inherited external classes 
 # will be listed.
 
-ALLEXTERNALS           = NO
+ALLEXTERNALS           = YES
 
 # If the EXTERNAL_GROUPS tag is set to YES all external groups will be listed 
 # in the modules index. If set to NO, only the current project's groups will 
@@ -1075,4 +1075,4 @@ DOT_CLEANUP            = YES
 # The SEARCHENGINE tag specifies whether or not a search engine should be 
 # used. If set to NO the values of all tags below this one will be ignored.
 
-SEARCHENGINE           = NO
+SEARCHENGINE           = NO 

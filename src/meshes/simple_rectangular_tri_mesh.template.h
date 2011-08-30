@@ -40,7 +40,6 @@
 // Oomph-lib includes
 #include "../generic/mesh.h"
 #include "../generic/triangle_mesh.h"
-#include "../rigid_body/rigid_body_elements.h"
 
 namespace oomph
 {

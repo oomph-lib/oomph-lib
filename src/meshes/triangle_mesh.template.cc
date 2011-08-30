@@ -35,8 +35,6 @@
 #include "../generic/multi_domain.h"
 #include "../generic/projection.h"
 #include "../generic/face_element_as_geometric_object.h"
-#include "../rigid_body/rigid_body_elements.h"
-
 
 namespace oomph
 {
@@ -2480,80 +2478,81 @@ namespace oomph
  surface_remesh_for_inner_hole_boundaries(Vector<Vector<double> >
                                           &internal_point_coord)
  {
+  //Loop over the number of internal boundaries
   unsigned n_hole = internal_point_coord.size();
   for(unsigned ihole=0;ihole<n_hole;ihole++)
    {
-    //Can I cast it
-    RigidBodyTriangleMeshInternalPolygon* poly_pt
-     = dynamic_cast<RigidBodyTriangleMeshInternalPolygon*>
-     (this->Internal_polygon_pt[ihole]);
+    //Cache the pointer to the polygon representation
+    TriangleMeshInternalPolygon* const poly_pt 
+     = this->Internal_polygon_pt[ihole];
 
-    //If it's a polygon, this is easy!
-    if(poly_pt!=0)
+    //Only bother to do anything if the body is not fixed
+    if(!poly_pt->is_fixed())
      {
-      poly_pt->reset_reference_configuration();
-      
-      // Initialize Vector hole_coordinates
-      internal_point_coord[ihole].resize(2);
-      
-      // Get the vector of hole coordinates
-      internal_point_coord[ihole]=
-       this->Internal_polygon_pt[ihole]->internal_point();
-     }
-    //Otherwise we have to work much harder
-    else
-     {
-      //Update the polygon associated with the ihole-th hole
-      this->update_polygon_using_face_mesh(this->Internal_polygon_pt[ihole]);
-
-      //Now sort out the hole coordinates
-      Vector<double> vertex_coord;
-      unsigned n_polyline = this->Internal_polygon_pt[ihole]->npolyline();
-      
-      vertex_coord.resize(2);
-      // Initialize Vector hole_coordinates
-      internal_point_coord[ihole].resize(2);
-      
-      //Hole centre will be found by averaging the position of 
-      //all vertex nodes
-      internal_point_coord[ihole][0] = 0.0;
-      internal_point_coord[ihole][1] = 0.0;
-      
-      for(unsigned p=0;p<n_polyline;p++)
+      //Can the polygon update its own configuration, in which case this
+      //is easy
+      if(poly_pt->can_update_reference_configuration())
        {
-        Vector<double> poly_ave(2,0.0);
-        //How many vertices are there in the segment
-        unsigned n_vertex =
-         this->Internal_polygon_pt[ihole]->polyline_pt(p)->nvertex();
-        for(unsigned v=0;v<n_vertex;v++)
+        //Call the function to update the reference configuration
+        poly_pt->reset_reference_configuration();
+        
+        // Initialize Vector hole_coordinates
+        internal_point_coord[ihole].resize(2);
+        
+        // Get the vector of hole coordinates
+        internal_point_coord[ihole] = poly_pt->internal_point();
+       }
+      //Otherwise we have to work much harder
+      else
+       {
+        //Update the polygon associated with the ihole-th hole
+        this->update_polygon_using_face_mesh(poly_pt);
+        
+        //Now sort out the hole coordinates
+        Vector<double> vertex_coord;
+        unsigned n_polyline = poly_pt->npolyline();
+        
+        vertex_coord.resize(2);
+        // Initialize Vector hole_coordinates
+        internal_point_coord[ihole].resize(2);
+        
+        //Hole centre will be found by averaging the position of 
+        //all vertex nodes
+        internal_point_coord[ihole][0] = 0.0;
+        internal_point_coord[ihole][1] = 0.0;
+        
+        for(unsigned p=0;p<n_polyline;p++)
          {
-          vertex_coord = 
-           this->Internal_polygon_pt[ihole]->polyline_pt(p)->
-           vertex_coordinate(v);
+          Vector<double> poly_ave(2,0.0);
+          //How many vertices are there in the segment
+          unsigned n_vertex = poly_pt->polyline_pt(p)->nvertex();
+          for(unsigned v=0;v<n_vertex;v++)
+           {
+            vertex_coord = poly_pt->polyline_pt(p)->vertex_coordinate(v);
+            for(unsigned i=0;i<2;i++)
+             {
+              poly_ave[i] += vertex_coord[i];
+             }
+           }
+          
+          //Add the average polyline coordinate to the hole centre
           for(unsigned i=0;i<2;i++)
            {
-            poly_ave[i] += vertex_coord[i];
+            internal_point_coord[ihole][i] += poly_ave[i]/n_vertex;
            }
          }
         
-        //Add the average polyline coordinate to the hole centre
+        //Now average out the hole centre
         for(unsigned i=0;i<2;i++)
          {
-          internal_point_coord[ihole][i] += poly_ave[i]/n_vertex;
+          internal_point_coord[ihole][i] /= n_polyline;
          }
+        
+        //Set the new hole centre 
+        poly_pt->internal_point() = internal_point_coord[ihole];
        }
-      
-      //Now average out the hole centre
-      for(unsigned i=0;i<2;i++)
-       {
-        internal_point_coord[ihole][i] /= n_polyline;
-       }
-      
-      //Set the new hole centre 
-      this->Internal_polygon_pt[ihole]->internal_point() =
-       internal_point_coord[ihole];
-     }
-   }
+     } //End of the action
+   } //End of the loop of internal boundaries
  }
 
 

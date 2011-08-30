@@ -471,6 +471,27 @@ guards and library includes.
    write access functions instead, as they can be overloaded more 
    easily.
 
+\subsection boolean Boolean member data
+ - Avoid access to boolean member data via trivial wrapper functions
+   that return references. These constructions lead to somewhat ugly 
+   driver codes and can lead to code that appears to set a boolean,
+   when it does not. Instead the status of the boolean should be
+   modified by two set/unset or enable/disable subroutines
+   (i.e. returning void) and tested using a (const) has_ or is_ 
+   function that returns a bool . For example
+   \code
+    private:
+      /// Boolean to indicate whether documentation should be on or off
+      bool Doc_flag;
+    public:
+      /// Enable documentation
+      void enable_doc() {Doc_flag=true;}
+      /// Disable documentation
+      void disable_doc() {Doc_flag=false;}
+      /// Test whether documentation is on or off
+      bool is_doc_enabled() const {return Doc_flag;}
+   \endcode
+
 \subsection dont_use_macros Macros
 - Don't use macros! There is a single exception to this rule:
   We use the macro  \c OOMPH_EXCEPTION_LOCATION to make
