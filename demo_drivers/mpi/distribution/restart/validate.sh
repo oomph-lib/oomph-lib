@@ -2,11 +2,12 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=1
+NUM_TESTS=12
 
+validation_run_flag=--validation_run
+#validation_run_flag=
+echo $validation_run_flag
 
-#MPI_RUN_COMMAND=`echo $MPI_RUN_COMMAND --output-filename output `
-echo $MPI_RUN_COMMAND
 
 # Setup validation directory
 #---------------------------
@@ -16,64 +17,68 @@ mkdir Validation
 
 cd Validation
 
+# Loop over first pruning / first load balancing
+#-----------------------------------------------
+first_list="0 1"
+for first in `echo $first_list`; do
 
+    prune_first_flag=" " 
+    first_flag="prune"
+    if [ $first -eq "0" ]; then
+        prune_first_flag=" --load_balance_first "
+        first_flag="load_balance"
+    fi
 
-# Validation for load-balanced doubly adaptive unsteady heat
-#-----------------------------------------------------------
-echo "Running distributed load-balanced doubly adaptive 2D unsteady heat validation "
-mkdir RESLT
-mkdir RESLT_after_load_balance
-$MPI_RUN_COMMAND ../two_d_unsteady_heat_2adapt_load_balance --validation_run --partitioning_file ../doubly_adaptive_partitioning_load_balance.dat > OUTPUT_doubly_adaptive_load_balanced_for_restart
-echo "done run for restart"
-echo " " >> validation.log
-echo "2D distributed load-balanced doubly adaptive unsteady heat validation " >> validation.log
-echo "---------------------------------------------------------------------" >> validation.log
-echo " " >> validation.log
-echo "Validation directory: " >> validation.log
-echo " " >> validation.log
-echo "  " `pwd` >> validation.log
-echo " " >> validation.log
+    
+    # Validation for load-balanced doubly adaptive unsteady heat
+    #-----------------------------------------------------------
+    echo "Running distributed load-balanced doubly adaptive 2D unsteady heat validation; first: $first_flag "
+    mkdir RESLT
+    $MPI_RUN_COMMAND ../two_d_unsteady_heat_2adapt_load_balance $validation_run_flag $prune_first_flag > OUTPUT_`echo $first_flag`_first_for_restart
+    echo "done run for restart"
+    echo " " >> validation.log
+    echo "2D distributed load-balanced doubly adaptive unsteady heat validation; first: $first_flag " >> validation.log
+    echo "---------------------------------------------------------------------------------" >> validation.log
+    echo " " >> validation.log
+    echo "Validation directory: " >> validation.log
+    echo " " >> validation.log
+    echo "  " `pwd` >> validation.log
+    echo " " >> validation.log
+    
+    sleep 5
+    cat RESLT/soln21_on_proc0.dat  RESLT/soln21_on_proc1.dat  \
+        > result_`echo $first_flag`_first_for_restart.dat
+    mv RESLT RESLT_`echo $first_flag`_first_for_restart
+    
+    
+    if test "$1" = "no_fpdiff"; then
+        echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+    else
+        ../../../../../bin/fpdiff.py ../validata/result_`echo $first_flag`_first_for_restart.dat.gz  result_`echo $first_flag`_first_for_restart.dat  >> validation.log
+    fi
 
-sleep 5
-cat RESLT/soln0_on_proc0.dat  RESLT/soln0_on_proc1.dat  \
-    RESLT/soln9_on_proc0.dat  RESLT/soln9_on_proc1.dat  \
-    > result_doubly_adaptive_load_balanced.dat
-mv RESLT RESLT_doubly_adaptive_load_balanced_for_restart
+    restart_list="2 7 11 16 20"
+    for restart_step in `echo $restart_list`; do
+        
+        mkdir RESLT
+        $MPI_RUN_COMMAND ../two_d_unsteady_heat_2adapt_load_balance $validation_run_flag  $prune_first_flag --restart_file RESLT_`echo $first_flag`_first_for_restart/restart$restart_step --partitioning_file RESLT_`echo $first_flag`_first_for_restart/partitioning.dat  > OUTPUT_`echo $first_flag`_first_restarted_from_step$restart_step
+        echo "done restarted run from step $restart_step"
+        
+        sleep 5
+        cat RESLT/soln21_on_proc0.dat  RESLT/soln21_on_proc1.dat  >> result_`echo $first_flag`_first_restarted_from_step`echo $restart_step`.dat
+        mv RESLT RESLT_`echo $first_flag`_first_restarted_from_step`echo $restart_step`
+    
 
-#exit
-
-mkdir RESLT
-$MPI_RUN_COMMAND ../two_d_unsteady_heat_2adapt_load_balance --validation_run --restart_file RESLT_doubly_adaptive_load_balanced_for_restart/restart3 --partitioning_file ../doubly_adaptive_partitioning_load_balance.dat  > OUTPUT_doubly_adaptive_load_balanced_restarted
-echo "done restarted run"
-
-
-
-sleep 5
-cat RESLT/soln9_on_proc0.dat  RESLT/soln9_on_proc1.dat  \
-    >> result_doubly_adaptive_load_balanced.dat
-mv RESLT RESLT_doubly_adaptive_load_balanced_restarted
-
-sleep 5
-mkdir RESLT
-sleep 20
-$MPI_RUN_COMMAND ../two_d_unsteady_heat_2adapt_load_balance --validation_run --restart_file RESLT_doubly_adaptive_load_balanced_for_restart/restart7 --partitioning_file RESLT_doubly_adaptive_load_balanced_for_restart/load_balanced_partitioning.dat > OUTPUT_doubly_adaptive_load_balanced_restarted_from_load_balanced
-echo "done restarted run from load balanced solution"
-
-sleep 5
-cat RESLT/soln9_on_proc0.dat  RESLT/soln9_on_proc1.dat  \
-    metis_input_for_validation.dat \
-    >> result_doubly_adaptive_load_balanced.dat
-mv RESLT RESLT_doubly_adaptive_load_balanced_restarted_from_load_balanced
-
-
-
-if test "$1" = "no_fpdiff"; then
-  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
-else
-../../../../../bin/fpdiff.py ../validata/result_doubly_adaptive_load_balanced.dat.gz \
-    result_doubly_adaptive_load_balanced.dat  >> validation.log
-fi
-
+        if test "$1" = "no_fpdiff"; then
+            echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+        else
+            # Note: Should all agree with last file from non-restarted run!
+            ../../../../../bin/fpdiff.py ../validata/result_`echo $first_flag`_first_for_restart.dat.gz result_`echo $first_flag`_first_restarted_from_step`echo $restart_step`.dat   >> validation.log
+        fi
+    
+    done
+    
+done
 
 
 

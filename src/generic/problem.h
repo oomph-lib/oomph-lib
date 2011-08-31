@@ -214,7 +214,7 @@ namespace oomph
  virtual void debug_hook_fct(const unsigned& i)
  {
   oomph_info << "Called empty hook fct with i=" << i << std::endl;
-}
+ }
  
  /// \short Function to turn on analytic calculation of the parameter
  /// derivatives in continuation and bifurcation detection problems
@@ -436,12 +436,11 @@ namespace oomph
 
  /// \short Map which stores the correspondence between a root element and
  /// its element number (plus one) within the global mesh at the point 
- /// when it is 
- /// distributed. NB a root element in this instance is one of the elements
- /// in the uniformly-refined mesh at the point when Problem::distribute()
- /// is called, since these elements become roots on each of the processors
- /// involved in the distribution. Null when element doesn't exist
- /// following the adjustment of this when pruning
+ /// when it is distributed. NB a root element in this instance is one 
+ /// of the elements in the uniformly-refined mesh at the point when 
+ /// Problem::distribute() is called, since these elements become roots 
+ /// on each of the processors involved in the distribution. Null when 
+ /// element doesn't exist following the adjustment of this when pruning.
  std::map<GeneralisedElement*,unsigned> Base_mesh_element_number_plus_one; 
 
 
@@ -451,7 +450,7 @@ namespace oomph
  /// in the uniformly-refined mesh at the point when Problem::distribute()
  /// is called, since these elements become roots on each of the processors
  /// involved in the distribution. Null when element doesn't exist
- /// following the adjustment of this when pruning
+ /// following the adjustment of this when pruning.
  Vector<GeneralisedElement*> Base_mesh_element_pt; 
 
 #endif
@@ -472,6 +471,7 @@ protected:
 
  /// \short Function that is used to setup the halo scheme
  void setup_dof_halo_scheme();
+
 #endif
 
  //--------------------- Newton solver parameters
@@ -796,13 +796,9 @@ protected:
   last_el_for_assembly=Last_el_for_assembly;
  }
 
+#endif
 
   protected:
-
- /// Vector of the partitioning of the elements
- Vector<unsigned> Element_partition;
-
-#endif
 
  /// \short Any actions that are to be performed before a complete 
  /// Newton solve (e.g. adjust boundary conditions). CAREFUL: This
@@ -1077,10 +1073,10 @@ protected:
  /// by the user if they wish to use the load_balance() functionality,
  /// which is only available to problems that have already been distributed.
  /// If the problem has multiple meshes, each mesh must be built, added as
- /// as a submesh, and a call to build_global_mesh() must be made.
- /// On return from this function all meshes must have been refined
- /// to the same level that they were in the when Problem::distribute()
- /// was first called.
+ /// as a submesh, and a call to build_global_mesh() must be made
+ /// in this function. On return from this function all meshes must 
+ /// have been refined to the same level that they were in the when 
+ /// Problem::distribute() was first called.
  virtual void build_mesh()
   {
    std::string error_message =
@@ -1096,53 +1092,71 @@ protected:
                        OOMPH_EXCEPTION_LOCATION);
   }
 
-
- /// \short  Balance the load of a (possibly non-uniformly refined) problem that
- /// has already been distributed, by re-distributing elements over processors. 
- /// The function returns the new partitioning 
- /// of the elements in the base mesh produced by Problem::build_mesh(), so that
- /// the e-th entry in the vector returned by this function contains the
- /// target domain of the e-th element in that mesh before it's being 
- /// distributed. This information can be used in restarts, say.
- Vector<unsigned> load_balance()
-  {
-   // Dummy DocInfo
-   DocInfo doc_info;
-   doc_info.disable_doc();
-
-   // Don't report stats
-   bool report_stats=false;
-
-   return load_balance(doc_info,report_stats);
-  }
-
- /// \short Balance the load of a (possibly non-uniformly refined) problem that
- /// has already been distributed, by re-distributing elements over processors. 
- /// Produce explicit stats of load balancing process if boolean, report_stats,
- /// is set to true.  Returns the new partitioning 
- /// of the elements in the base mesh produced by Problem::build_mesh(), so that
- /// the e-th entry in the vector returned by this function contains the
- /// target domain of the e-th element in that mesh before it's being 
- /// distributed. This information can be used in restarts, say.
- Vector<unsigned> load_balance(const bool& report_stats)
-  {
-   // Dummy DocInfo
-   DocInfo doc_info;
-   doc_info.disable_doc();
-
-   return load_balance(doc_info,report_stats);
-  }
+ /// \short  Balance the load of a (possibly non-uniformly refined) problem 
+ /// that has already been distributed, by re-distributing elements over 
+ /// processors. 
+ void load_balance()
+ {
+  // Dummy DocInfo
+  DocInfo doc_info;
+  doc_info.disable_doc();
+  
+  // Don't report stats
+  bool report_stats=false;
+  
+  // Dummy imposed partioning vector
+  Vector<unsigned> input_target_domain_for_local_non_halo_element;
+  
+  // Do it!
+  load_balance(doc_info,report_stats,
+               input_target_domain_for_local_non_halo_element);
+ }
 
  /// \short Balance the load of a (possibly non-uniformly refined) problem that
- /// has already been distributed, by re-distributing elements over processors. 
- /// Produce explicit stats of load balancing process if boolean, report_stats,
- /// is set to true and doc various bits of data (mainly for debugging) 
- /// in directory specified by DocInfo object.  Returns the new partitioning 
- /// of the elements in the base mesh produced by Problem::build_mesh(), so that
- /// the e-th entry in the vector returned by this function contains the
- /// target domain of the e-th element in that mesh before it's being 
- /// distributed. This information can be used in restarts, say.
- Vector<unsigned> load_balance(DocInfo& doc_info, const bool& report_stats);
+ /// has already been distributed, by re-distributing elements over 
+ /// processors.  Produce explicit stats of load balancing process if 
+ /// boolean, report_stats, is set to true. 
+ void load_balance(const bool& report_stats)
+ {
+  // Dummy DocInfo
+  DocInfo doc_info;
+  doc_info.disable_doc();
+  
+  // Dummy imposed partioning vector
+  Vector<unsigned> input_target_domain_for_local_non_halo_element;
+  
+  // Do it
+  load_balance(doc_info,report_stats,
+               input_target_domain_for_local_non_halo_element);
+ }
+ 
+ 
+ /// \short Balance the load of a (possibly non-uniformly refined) problem that
+ /// has already been distributed, by re-distributing elements over 
+ /// processors.  Produce explicit stats of load balancing process if 
+ /// boolean, report_stats, is set to true. 
+ void load_balance(DocInfo& doc_info, 
+                   const bool& report_stats)
+ {
+  // Dummy imposed partioning vector
+  Vector<unsigned> input_target_domain_for_local_non_halo_element;
+  
+  // Do it
+  load_balance(doc_info,report_stats,
+               input_target_domain_for_local_non_halo_element); 
+ }
+
+ /// \short Balance the load of a (possibly non-uniformly refined) problem that
+ /// has already been distributed, by re-distributing elements over 
+ /// processors. Produce explicit stats of load balancing process if
+ /// boolean, report_stats, is set to true and doc various bits of 
+ /// data (mainly for debugging) in directory specified by DocInfo object.  
+ /// If final input vector is non-zero-sized it provides an imposed
+ /// partitioning.
+ void load_balance(DocInfo& doc_info, 
+                   const bool& report_stats,
+                   const Vector<unsigned>& 
+                   input_target_domain_for_local_non_halo_element);
 
  /// \short Flag to use "default partition" during load balance.
  /// Should only be set to true when run in validation mode.
@@ -1584,23 +1598,23 @@ protected:
 
  /// \short Distribute the problem and doc, using the specified partition; 
  /// returns a vector which details the partitioning
- Vector<unsigned>& distribute(const Vector<unsigned>& element_partition,
+ Vector<unsigned> distribute(const Vector<unsigned>& element_partition,
                               DocInfo& doc_info, 
                               const bool& report_stats=false);
  
  /// \short Distribute the problem; returns a vector which
  /// details the partitioning
- Vector<unsigned>& distribute(DocInfo& doc_info, 
+ Vector<unsigned> distribute(DocInfo& doc_info, 
                               const bool& report_stats=false);
 
  /// \short Distribute the problem using the specified partition; 
  /// returns a vector which details the partitioning
- Vector<unsigned>& distribute(const Vector<unsigned>& element_partition,
+ Vector<unsigned> distribute(const Vector<unsigned>& element_partition,
                               const bool& report_stats=false);
 
  /// \short Distribute the problem; returns a vector which
  /// details the partitioning
- Vector<unsigned>& distribute(const bool& report_stats=false);
+ Vector<unsigned> distribute(const bool& report_stats=false);
 
  /// /short Partition the global mesh, return vector specifying the processor
  /// number for each element. Virtual so that it can be overloaded by
@@ -1618,29 +1632,29 @@ protected:
  /// has been called.
  void prune_halo_elements_and_nodes(DocInfo& doc_info,
                                     const bool& report_stats);
-
+ 
  /// \short (Irreversibly) prune halo(ed) elements and nodes, usually
  /// after another round of refinement, to get rid of
  /// excessively wide halo layers. Note that the current
  /// mesh will be now regarded as the base mesh and no unrefinement
  /// relative to it will be possible once this function 
- /// has been called.
+ /// has been called. 
  void prune_halo_elements_and_nodes(const bool& report_stats=false)
-  {
-   DocInfo doc_info;
-   doc_info.disable_doc();
-   prune_halo_elements_and_nodes(doc_info,report_stats);
-  }
-  
-  /// Threshold for error throwing in Problem::check_halo_schemes()
-  double Max_permitted_error_for_halo_check;
-
-  /// Access to Problem_has_been_distributed flag
-  bool problem_has_been_distributed()
-   {
-    return Problem_has_been_distributed;
-   }
-
+ {
+  DocInfo doc_info;
+  doc_info.disable_doc();
+  prune_halo_elements_and_nodes(doc_info,report_stats);
+ }
+ 
+ /// Threshold for error throwing in Problem::check_halo_schemes()
+ double Max_permitted_error_for_halo_check;
+ 
+ /// Access to Problem_has_been_distributed flag
+ bool problem_has_been_distributed()
+ {
+  return Problem_has_been_distributed;
+ }
+ 
 #endif
 
   /// \short Wrapper function to call flush_external_storage for
@@ -1912,9 +1926,31 @@ protected:
  ///\short Return whether the mass matrix is being reused
  bool mass_matrix_reuse_is_enabled() {return Mass_matrix_reuse_is_enabled;}
 
+ /// \short Refine refineable sub-meshes, each as many times as
+ /// specified in the vector and rebuild problem
+ void refine_uniformly(const Vector<unsigned>& nrefine_for_mesh)
+ {  
+  DocInfo doc_info;
+  doc_info.disable_doc();
+  refine_uniformly(nrefine_for_mesh,doc_info);
+ }
+
+ /// \short Refine refineable sub-meshes, each as many times as
+ /// specified in the vector and rebuild problem; doc refinement process
+ void refine_uniformly(const Vector<unsigned>& nrefine_for_mesh,
+                       DocInfo& doc_info);
+
  /// \short  Refine (all) refineable (sub)mesh(es) uniformly and 
  /// rebuild problem; doc refinement process.
- void refine_uniformly(DocInfo& doc_info);
+ void refine_uniformly(DocInfo& doc_info)
+ {
+  // Number of (sub)meshes
+  unsigned nmesh=std::max(unsigned(1),nsub_mesh());
+
+  // Refine each mesh once
+  Vector<unsigned> nrefine_for_mesh(nmesh,1);
+  refine_uniformly(nrefine_for_mesh);
+ }
 
  /// \short  Refine (all) refineable (sub)mesh(es) uniformly and 
  /// rebuild problem

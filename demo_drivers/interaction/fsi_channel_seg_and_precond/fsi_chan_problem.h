@@ -582,6 +582,35 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
 
  // Normal load incrementation or unsteady run
  //===========================================
+ Displ_control_mesh_pt=new Mesh;
+
+ // Choose element in which displacement control is applied:
+ SolidFiniteElement* controlled_element_pt=
+  dynamic_cast<SolidFiniteElement*>(Ctrl_geom_obj_pt);
+ 
+ // Fix the displacement in the vertical (1) direction...
+ unsigned controlled_direction=1;
+ 
+ // Pointer to displacement control element
+ DisplacementControlElement* displ_control_el_pt;
+ 
+ // Build displacement control element
+ displ_control_el_pt=
+  new DisplacementControlElement(controlled_element_pt,
+                                 S_displ_ctrl,
+                                 controlled_direction,
+                                 &Global_Physical_Variables::Yprescr);
+ 
+ // The constructor of the  DisplacementControlElement has created
+ // a new Data object whose one-and-only value contains the
+ // adjustable load: Use this Data object in the load function:
+ Global_Physical_Variables::P_ext_data_pt=displ_control_el_pt->
+  displacement_control_load_pt();
+ 
+ // Add the displacement-control element to its own mesh
+ Displ_control_mesh_pt->add_element_pt(displ_control_el_pt); 
+ 
+
  if (!Displ_control) 
   {
    // Create Data object whose one-and-only value contains the
@@ -591,38 +620,6 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
    //Pin the external pressure because it isn't actually adjustable.
    Global_Physical_Variables::P_ext_data_pt->pin(0);
   }
- // Displacement control
- //=====================
- else
-  {   
-   // Choose element in which displacement control is applied:
-   SolidFiniteElement* controlled_element_pt=
-    dynamic_cast<SolidFiniteElement*>(Ctrl_geom_obj_pt);
-   
-   // Fix the displacement in the vertical (1) direction...
-   unsigned controlled_direction=1;
-   
-   // Pointer to displacement control element
-   DisplacementControlElement* displ_control_el_pt;
-   
-   // Build displacement control element
-   displ_control_el_pt=
-    new DisplacementControlElement(controlled_element_pt,
-                                   S_displ_ctrl,
-                                   controlled_direction,
-                                   &Global_Physical_Variables::Yprescr);
-
-   // The constructor of the  DisplacementControlElement has created
-   // a new Data object whose one-and-only value contains the
-   // adjustable load: Use this Data object in the load function:
-   Global_Physical_Variables::P_ext_data_pt=displ_control_el_pt->
-    displacement_control_load_pt();
-   
-   // Add the displacement-control element to its own mesh
-   Displ_control_mesh_pt=new Mesh;
-   Displ_control_mesh_pt->add_element_pt(displ_control_el_pt); 
-
-  }
 
  //Build bulk (fluid) mesh
  Bulk_mesh_pt = 
@@ -630,17 +627,13 @@ FSICollapsibleChannelProblem<ELEMENT>::FSICollapsibleChannelProblem(
   (nup, ncollapsible, ndown, ny,
    lup, lcollapsible, ldown, ly,
    Wall_geom_object_pt,
-//   &BL_Squash::squash_fct,
    time_stepper_pt());
 
 
  // Add the sub meshes to the problem
  add_sub_mesh(Bulk_mesh_pt);
  add_sub_mesh(Wall_mesh_pt);
- if (Displ_control)
-  {
-   add_sub_mesh(Displ_control_mesh_pt);
-  }
+ add_sub_mesh(Displ_control_mesh_pt);
 
  // Combine all submeshes into a single Mesh
  build_global_mesh();
@@ -978,12 +971,36 @@ template <class ELEMENT>
 void FSICollapsibleChannelProblem<ELEMENT>::dump_it(ofstream& dump_file)
 {
 
+ // Number of submeshes must agree when dumping/restarting so 
+ // temporarily add displacement control mesh back in before dumping...
+ if (!Displ_control)
+  {
+   flush_sub_meshes();
+   add_sub_mesh(Bulk_mesh_pt);
+   add_sub_mesh(Wall_mesh_pt);
+   add_sub_mesh(Displ_control_mesh_pt);
+   rebuild_global_mesh();
+   assign_eqn_numbers();
+  }
+
  // Write current external pressure
  dump_file <<  Global_Physical_Variables::P_ext_data_pt->value(0) 
            << " # external pressure" << std::endl;
 
  // Call generic dump()
  Problem::dump(dump_file); 
+
+ // ...strip displacement control mesh back out after dumping if
+ // we don't actually need it
+ if (!Displ_control)
+  {
+   flush_sub_meshes();
+   add_sub_mesh(Bulk_mesh_pt);
+   add_sub_mesh(Wall_mesh_pt);
+   rebuild_global_mesh();
+   assign_eqn_numbers();
+  }
+
 
 } // end of dump_it
 
@@ -1030,6 +1047,17 @@ void FSICollapsibleChannelProblem<ELEMENT>::restart(ifstream& restart_file)
  //Now update the position of the nodes to be consistent with
  //the possible precision loss caused by reading in the data from disk
  this->Bulk_mesh_pt->node_update();
+
+ // Strip out displacement control mesh if we don't need it
+ if (!Displ_control)
+  {
+   flush_sub_meshes();
+   add_sub_mesh(Bulk_mesh_pt);
+   add_sub_mesh(Wall_mesh_pt);
+   rebuild_global_mesh();
+   assign_eqn_numbers();
+  }
+
 
 } // end of restart
 

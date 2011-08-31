@@ -4058,6 +4058,11 @@ void Mesh::prune_halo_elements_and_nodes(OomphCommunicator* comm_pt,
      doc_mesh_distribution(comm_pt,doc_info);
     }
 
+   // Finally: Reorder the nodes within the mesh's node vector
+   // to establish a standard ordering regardless of the sequence
+   // of mesh refinements -- this is required to allow dump/restart
+   // on refined meshes
+   this->reorder_nodes();
 
    // Doc stats
    if (report_stats)

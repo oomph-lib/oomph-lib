@@ -205,27 +205,30 @@ namespace oomph
  }
 
  //==================================================================
- /// Distribute the problem without doc; report stats if required
+ /// Distribute the problem without doc; report stats if required.
+ /// Returns actual partitioning used, e.g. for restart.
  //==================================================================
- Vector<unsigned>& Problem::distribute(const bool& report_stats)
+ Vector<unsigned> Problem::distribute(const bool& report_stats)
   {
    // Set dummy doc paramemters
    DocInfo doc_info;
    doc_info.disable_doc();
+
    // Set the sizes of the input and output vectors
    unsigned n_element=mesh_pt()->nelement();
    Vector<unsigned> element_partition(n_element,0);
-   Element_partition.resize(n_element);
-   // Distribute
-   Element_partition=distribute(element_partition,doc_info,report_stats);
-   // Return partition that was used
-   return Element_partition;
+
+   // Distribute and return partitioning
+   return distribute(element_partition,doc_info,report_stats);
   }
 
  //==================================================================
- /// Distribute the problem according to specified partition
+ /// Distribute the problem according to specified partition.
+ /// If all entries in partitioning vector are zero we use METIS
+ /// to do the partitioning after all.
+ /// Returns actual partitioning used, e.g. for restart.
  //==================================================================
- Vector<unsigned>& Problem::distribute
+ Vector<unsigned> Problem::distribute
  (const Vector<unsigned>& element_partition, const bool& report_stats)
   {
 #ifdef PARANOID
@@ -244,7 +247,7 @@ namespace oomph
      std::ostringstream warn_message;
      warn_message << "WARNING: All entries in specified partitioning vector \n"
                   << "         are zero -- will ignore this and use METIS\n"
-                  << "         to perform the partitoning\n";
+                  << "         to perform the partitioning\n";
      OomphLibWarning(warn_message.str(),
                      "Problem::distribute()",
                      OOMPH_EXCEPTION_LOCATION); 
@@ -254,39 +257,34 @@ namespace oomph
    DocInfo doc_info;
    doc_info.disable_doc();
 
-   // Set the size of the output vector
-   unsigned n_element=element_partition.size();
-   Element_partition.resize(n_element);
-
-   // Distribute
-   Element_partition=distribute(element_partition,doc_info,report_stats);
-
-   // Return the partition that was used
-   return Element_partition;
+   // Distribute and return partitioning
+   return distribute(element_partition,doc_info,report_stats);
   }
 
  //==================================================================
- /// Distribute the problem and doc to specified DocInfo
+ /// Distribute the problem and doc to specified DocInfo.
+ /// Returns actual partitioning used, e.g. for restart.
  //==================================================================
- Vector<unsigned>& Problem::distribute(DocInfo& doc_info,
-                                       const bool& report_stats)
-  {
-   // Set the sizes of the input and output vectors
-   unsigned n_element=mesh_pt()->nelement();
-   // Dummy input vector
-   Vector<unsigned> element_partition(n_element,0);
-   // Set size of output vector
-   Element_partition.resize(n_element);
-   // Distribute
-   Element_partition=distribute(element_partition,doc_info,report_stats);
-   // Return partition that was used
-   return Element_partition;
+ Vector<unsigned> Problem::distribute(DocInfo& doc_info,
+                                      const bool& report_stats)
+ {
+  // Set the sizes of the input and output vectors
+  unsigned n_element=mesh_pt()->nelement();
+
+  // Dummy input vector
+  Vector<unsigned> element_partition(n_element,0);
+
+  // Distribute and return partitioning
+  return distribute(element_partition,doc_info,report_stats);
   }
 
  //==================================================================
- /// Distribute the problem and doc
+ /// Distribute the problem according to specified partition.
+ /// (If all entries in partitioning vector are zero we use METIS
+ /// to do the partitioning after all) and doc.
+ /// Returns actual partitioning used, e.g. for restart.
  //==================================================================
- Vector<unsigned>& Problem::distribute
+ Vector<unsigned> Problem::distribute
  (const Vector<unsigned>& element_partition,
   DocInfo& doc_info, const bool& report_stats)
  {
@@ -296,8 +294,8 @@ namespace oomph
   int n_element=mesh_pt()->nelement();
 
   // Vector to be returned
-  Element_partition.resize(n_element);
-
+  Vector<unsigned> return_element_domain;
+  
   // Buffer extreme cases
   if (n_proc==1) // single-process job - don't do anything
    {
@@ -453,12 +451,8 @@ namespace oomph
        }
 
 
-
       // Set the GLOBAL Mesh_is_distributed flag
       global_mesh_pt->set_mesh_distributed();
-
-      // Set the returned vector
-      Element_partition=element_domain;
 
       double t_end = 0.0;
       if (Doc_time_in_distribute)
@@ -467,6 +461,20 @@ namespace oomph
         oomph_info << "Time for partitioning of global mesh: " 
                    << t_end-t_start << std::endl;
         t_start = TimingHelpers::timer();
+       }
+
+
+      // Store how many elements we had in the various sub-meshes
+      // before actions_before_distribute() (which may empty some of
+      // them). 
+      Vector<unsigned> n_element_in_old_submesh(n_mesh);
+      if (n_mesh!=0)
+       {
+        for (unsigned i_mesh=0;i_mesh<n_mesh;i_mesh++)
+         {
+          unsigned nsub_elem=mesh_pt(i_mesh)->nelement();
+          n_element_in_old_submesh[i_mesh]=nsub_elem;
+         }
        }
 
       // Partitioning complete; call actions before distribute
@@ -486,10 +494,14 @@ namespace oomph
       //                          actions_after_distribute())
       n_mesh=nsub_mesh();
 
+
       // Prepare vector of vectors for submesh element domains
       Vector<Vector<unsigned> > submesh_element_domain(n_mesh);
   
-      // The submeshes need to know their own element domains
+      // The submeshes need to know their own element domains. 
+      // Also if any meshes have been emptied we ignore their
+      // partitioning in the vector that we return from here
+      return_element_domain.reserve(element_domain.size());
       if (n_mesh!=0)
        {
         unsigned count=0;
@@ -497,9 +509,14 @@ namespace oomph
          {
           unsigned nsub_elem=mesh_pt(i_mesh)->nelement();
           submesh_element_domain[i_mesh].resize(nsub_elem);
-          for (unsigned e=0; e<nsub_elem; e++)
+          unsigned nsub_elem_old=n_element_in_old_submesh[i_mesh];
+          for (unsigned e=0; e<nsub_elem_old; e++)
            {
-            submesh_element_domain[i_mesh][e]=element_domain[count];
+            if (nsub_elem_old==nsub_elem)
+             {
+              submesh_element_domain[i_mesh][e]=element_domain[count];
+              return_element_domain.push_back(element_domain[count]);
+             }
             count++;
            }
          }
@@ -570,8 +587,6 @@ namespace oomph
         rebuild_global_mesh();
        }
 
-
-
       // Null out information associated with deleted elements
       unsigned n_del=deleted_element_pt.size();
       for (unsigned e=0;e<n_del;e++)
@@ -581,7 +596,6 @@ namespace oomph
         Base_mesh_element_number_plus_one[el_pt]=0;
         Base_mesh_element_pt[old_el_number]=0;
        }
-
 
       if (Doc_time_in_distribute)
        {      
@@ -639,7 +653,7 @@ namespace oomph
    } // end if to check number of processors vs. number of elements etc.
 
   // Return the partition vector used in the distribution
-  return Element_partition;
+  return return_element_domain; 
 
  }
 
@@ -816,15 +830,15 @@ namespace oomph
  /// excessively wide halo layers. Note that the current
  /// mesh will be now regarded as the base mesh and no unrefinement
  /// relative to it will be possible once this function 
- /// has been called.
+ /// has been called. 
  //==================================================================
  void Problem::prune_halo_elements_and_nodes(DocInfo& doc_info, 
                                              const bool& report_stats)
  {  
-
+  
   // Storage for number of processors and current processor
   int n_proc=this->communicator_pt()->nproc();
-
+  
   // Has the problem been distributed yet?
   if (!Problem_has_been_distributed)
    {
@@ -1009,7 +1023,7 @@ namespace oomph
         nel_base_new+=n_new_root[e];
         
 #ifdef PARANOID
-        // If we already data for this root previously then
+        // If we already had data for this root previously then
         // the data ought to be consistent afterwards (since taking
         // the max of consistent numbers shouldn't change things -- this
         // deals with halo/haloed elements)
@@ -1076,7 +1090,7 @@ namespace oomph
       // Re-setup the map between "root" element and number in global mesh
       // (used in the load_balance() routines)
       setup_base_mesh_info_after_pruning();
-
+      
       // Call actions after distribute
       actions_after_distribute();
   
@@ -1104,8 +1118,6 @@ namespace oomph
    }
 
  }
-
-
 
  
 #endif
@@ -2140,926 +2152,451 @@ unsigned long Problem::assign_eqn_numbers(const bool& assign_local_eqn_numbers)
 //======================================================================
  void Problem::remove_duplicate_data(Mesh* const &mesh_pt,
                                      bool& actually_removed_some_data)
-{
+ {
  
- int n_proc=this->communicator_pt()->nproc();
- int my_rank=this->communicator_pt()->my_rank();
+  int n_proc=this->communicator_pt()->nproc();
+  int my_rank=this->communicator_pt()->my_rank();
 
- // Initialise
- actually_removed_some_data=false;
+  // Initialise
+  actually_removed_some_data=false;
  
-
- // // hierher
- // const bool use_new=true;
-
- // // NEW VERSION // hierher kill old version in next commit
- // //============
- // if (use_new)
-  {
-   
-
-   // Each individual container of external halo nodes has unique
-   // nodes/equation numbers, but there may be some duplication between
-   // two or more different containers; the following code checks for this
-   // and removes the duplication by overwriting any data point with an already
-   // existing eqn number with the original data point which had the eqn no.
+  // Each individual container of external halo nodes has unique
+  // nodes/equation numbers, but there may be some duplication between
+  // two or more different containers; the following code checks for this
+  // and removes the duplication by overwriting any data point with an already
+  // existing eqn number with the original data point which had the eqn no.
 
 
-   // Storage for existing nodes, enumerated by first non-negative
-   // global equation number
-   unsigned n_dof=ndof();
-   Vector<Node*> global_node_pt(n_dof,0);
+  // Storage for existing nodes, enumerated by first non-negative
+  // global equation number
+  unsigned n_dof=ndof();
+  Vector<Node*> global_node_pt(n_dof,0);
  
-   // Doc timings if required
-   double t_start=0.0;
-   if (Global_timings::Doc_comprehensive_timings)
-    {
-     t_start=TimingHelpers::timer();
-    }
+  // Doc timings if required
+  double t_start=0.0;
+  if (Global_timings::Doc_comprehensive_timings)
+   {
+    t_start=TimingHelpers::timer();
+   }
 
-   // Only do each retained node once
-   std::map<Node*,bool> node_done;
+  // Only do each retained node once
+  std::map<Node*,bool> node_done;
 
-   // Loop over existing "normal" elements in mesh
-   unsigned n_element=mesh_pt->nelement();
-   for (unsigned e=0;e<n_element;e++)
-    {
-     FiniteElement* el_pt = dynamic_cast<FiniteElement*>(
-      mesh_pt->element_pt(e));
-     if (el_pt!=0)
-      {
-       // Loop over nodes
-       unsigned n_node=el_pt->nnode();
-       for (unsigned j=0;j<n_node;j++)
-        {
-         Node* nod_pt=el_pt->node_pt(j);
+  // Loop over existing "normal" elements in mesh
+  unsigned n_element=mesh_pt->nelement();
+  for (unsigned e=0;e<n_element;e++)
+   {
+    FiniteElement* el_pt = dynamic_cast<FiniteElement*>(
+     mesh_pt->element_pt(e));
+    if (el_pt!=0)
+     {
+      // Loop over nodes
+      unsigned n_node=el_pt->nnode();
+      for (unsigned j=0;j<n_node;j++)
+       {
+        Node* nod_pt=el_pt->node_pt(j);
 
-         // Have we already done the node?
-         if (!node_done[nod_pt])
-          {
-           node_done[nod_pt]=true;
+        // Have we already done the node?
+        if (!node_done[nod_pt])
+         {
+          node_done[nod_pt]=true;
            
-           // Loop over values stored at node (if any) to find
-           // the first non-negative eqn number
-           unsigned first_non_negative_eqn_number_plus_one=0;
-           unsigned n_val=nod_pt->nvalue();
-           for (unsigned i_val=0;i_val<n_val;i_val++)
-            {
-             int eqn_no=nod_pt->eqn_number(i_val);
-             if (eqn_no>=0)
-              {
-               first_non_negative_eqn_number_plus_one=eqn_no+1;
-               break;
-              }
-            }
+          // Loop over values stored at node (if any) to find
+          // the first non-negative eqn number
+          unsigned first_non_negative_eqn_number_plus_one=0;
+          unsigned n_val=nod_pt->nvalue();
+          for (unsigned i_val=0;i_val<n_val;i_val++)
+           {
+            int eqn_no=nod_pt->eqn_number(i_val);
+            if (eqn_no>=0)
+             {
+              first_non_negative_eqn_number_plus_one=eqn_no+1;
+              break;
+             }
+           }
 
-           // If we haven't found a non-negative eqn number check
-           // eqn numbers associated with solid data (if any)
-           if (first_non_negative_eqn_number_plus_one==0)
-            {
-             // Is it a solid node?
-             SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
-             if (solid_nod_pt!=0)
-              {
-               // Loop over values stored at node (if any) to find
-               // the first non-negative eqn number
-               unsigned n_val=solid_nod_pt->variable_position_pt()->nvalue();
-               for (unsigned i_val=0;i_val<n_val;i_val++)
-                {
-                 int eqn_no=solid_nod_pt->
-                  variable_position_pt()->eqn_number(i_val);
-                 if (eqn_no>=0)
-                  {
-                   first_non_negative_eqn_number_plus_one=eqn_no+1;
-                   break;
-                  }
-                }
-              }
-            }
+          // If we haven't found a non-negative eqn number check
+          // eqn numbers associated with solid data (if any)
+          if (first_non_negative_eqn_number_plus_one==0)
+           {
+            // Is it a solid node?
+            SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
+            if (solid_nod_pt!=0)
+             {
+              // Loop over values stored at node (if any) to find
+              // the first non-negative eqn number
+              unsigned n_val=solid_nod_pt->variable_position_pt()->nvalue();
+              for (unsigned i_val=0;i_val<n_val;i_val++)
+               {
+                int eqn_no=solid_nod_pt->
+                 variable_position_pt()->eqn_number(i_val);
+                if (eqn_no>=0)
+                 {
+                  first_non_negative_eqn_number_plus_one=eqn_no+1;
+                  break;
+                 }
+               }
+             }
+           }
            
-           // Associate node with first non negative global eqn number
-           if (first_non_negative_eqn_number_plus_one>0)
-            {
-             global_node_pt[first_non_negative_eqn_number_plus_one-1]=nod_pt;
-            }
+          // Associate node with first non negative global eqn number
+          if (first_non_negative_eqn_number_plus_one>0)
+           {
+            global_node_pt[first_non_negative_eqn_number_plus_one-1]=nod_pt;
+           }
 
            
-           // Take into account master nodes too
-           if (dynamic_cast<RefineableElement*>(el_pt)!=0)
-            {
-             int n_cont_int_values=dynamic_cast<RefineableElement*>
-              (el_pt)->ncont_interpolated_values();
-             for (int i_cont=-1;i_cont<n_cont_int_values;i_cont++)
-              {
-               if (nod_pt->is_hanging(i_cont))
-                {
-                 HangInfo* hang_pt=nod_pt->hanging_pt(i_cont);
-                 unsigned n_master=hang_pt->nmaster();
-                 for (unsigned m=0;m<n_master;m++)
-                  {
-                   Node* master_nod_pt=hang_pt->master_node_pt(m);
-                   if (!node_done[master_nod_pt])
-                    {
-                     node_done[master_nod_pt]=true;
+          // Take into account master nodes too
+          if (dynamic_cast<RefineableElement*>(el_pt)!=0)
+           {
+            int n_cont_int_values=dynamic_cast<RefineableElement*>
+             (el_pt)->ncont_interpolated_values();
+            for (int i_cont=-1;i_cont<n_cont_int_values;i_cont++)
+             {
+              if (nod_pt->is_hanging(i_cont))
+               {
+                HangInfo* hang_pt=nod_pt->hanging_pt(i_cont);
+                unsigned n_master=hang_pt->nmaster();
+                for (unsigned m=0;m<n_master;m++)
+                 {
+                  Node* master_nod_pt=hang_pt->master_node_pt(m);
+                  if (!node_done[master_nod_pt])
+                   {
+                    node_done[master_nod_pt]=true;
                      
-                     // Loop over values stored at node (if any) to find
-                     // the first non-negative eqn number
-                     unsigned first_non_negative_eqn_number_plus_one=0;
-                     unsigned n_val=master_nod_pt->nvalue();
-                     for (unsigned i_val=0;i_val<n_val;i_val++)
-                      {
-                       int eqn_no=master_nod_pt->eqn_number(i_val);
-                       if (eqn_no>=0)
-                        {
-                         first_non_negative_eqn_number_plus_one=eqn_no+1;
-                         break;
-                        }
-                      }
+                    // Loop over values stored at node (if any) to find
+                    // the first non-negative eqn number
+                    unsigned first_non_negative_eqn_number_plus_one=0;
+                    unsigned n_val=master_nod_pt->nvalue();
+                    for (unsigned i_val=0;i_val<n_val;i_val++)
+                     {
+                      int eqn_no=master_nod_pt->eqn_number(i_val);
+                      if (eqn_no>=0)
+                       {
+                        first_non_negative_eqn_number_plus_one=eqn_no+1;
+                        break;
+                       }
+                     }
                      
-                     // If we haven't found a non-negative eqn number check
-                     // eqn numbers associated with solid data (if any)
-                     if (first_non_negative_eqn_number_plus_one==0)
-                      { 
-                       // If this master is a SolidNode then add its extra 
-                       // eqn numbers
-                       SolidNode* master_solid_nod_pt=dynamic_cast<SolidNode*>
-                        (master_nod_pt);
-                       if (master_solid_nod_pt!=0)
-                        {
-                         // Loop over values stored at node (if any) to find
-                         // the first non-negative eqn number
-                         unsigned n_val=master_solid_nod_pt->
-                          variable_position_pt()->nvalue();
-                         for (unsigned i_val=0;i_val<n_val;i_val++)
-                          {
-                           int eqn_no=master_solid_nod_pt->
-                            variable_position_pt()->eqn_number(i_val);
-                           if (eqn_no>=0)
-                            {
-                             first_non_negative_eqn_number_plus_one=eqn_no+1;
-                             break;
-                            }
-                          }
-                        }
-                      }
-                     // Associate node with first non negative global 
-                     // eqn number
-                     if (first_non_negative_eqn_number_plus_one>0)
-                      {
-                       global_node_pt[first_non_negative_eqn_number_plus_one-1]
-                        =master_nod_pt;
-                      }
+                    // If we haven't found a non-negative eqn number check
+                    // eqn numbers associated with solid data (if any)
+                    if (first_non_negative_eqn_number_plus_one==0)
+                     { 
+                      // If this master is a SolidNode then add its extra 
+                      // eqn numbers
+                      SolidNode* master_solid_nod_pt=dynamic_cast<SolidNode*>
+                       (master_nod_pt);
+                      if (master_solid_nod_pt!=0)
+                       {
+                        // Loop over values stored at node (if any) to find
+                        // the first non-negative eqn number
+                        unsigned n_val=master_solid_nod_pt->
+                         variable_position_pt()->nvalue();
+                        for (unsigned i_val=0;i_val<n_val;i_val++)
+                         {
+                          int eqn_no=master_solid_nod_pt->
+                           variable_position_pt()->eqn_number(i_val);
+                          if (eqn_no>=0)
+                           {
+                            first_non_negative_eqn_number_plus_one=eqn_no+1;
+                            break;
+                           }
+                         }
+                       }
+                     }
+                    // Associate node with first non negative global 
+                    // eqn number
+                    if (first_non_negative_eqn_number_plus_one>0)
+                     {
+                      global_node_pt[first_non_negative_eqn_number_plus_one-1]
+                       =master_nod_pt;
+                     }
 
 
-                    } // End of not-yet-done hang node
-                  }
-                }
-              }
-            }
-          } // endif for node already done
-        }// End of loop over nodes
-      } //End of FiniteElement 
+                   } // End of not-yet-done hang node
+                 }
+               }
+             }
+           }
+         } // endif for node already done
+       }// End of loop over nodes
+     } //End of FiniteElement 
      
-     // Internal data equation numbers do not need to be added since 
-     // internal data cannot be shared between distinct elements, so 
-     // internal data on locally-stored elements can never be halo.
-    }
+    // Internal data equation numbers do not need to be added since 
+    // internal data cannot be shared between distinct elements, so 
+    // internal data on locally-stored elements can never be halo.
+   }
  
  
-   // Doc timings if required
-   if (Global_timings::Doc_comprehensive_timings)
-    {
-     double t_locate=TimingHelpers::timer();
-     oomph_info 
-      <<"CPU for assembly of existing global eqns in remove_duplicate_data(): "
-      << t_locate-t_start << std::endl;
-    }
+  // Doc timings if required
+  if (Global_timings::Doc_comprehensive_timings)
+   {
+    double t_locate=TimingHelpers::timer();
+    oomph_info 
+     <<"CPU for assembly of existing global eqns in remove_duplicate_data(): "
+     << t_locate-t_start << std::endl;
+   }
 
-   // Set to record duplicate nodes scheduled to be killed
-   std::set<Node*> killed_nodes;
+  // Set to record duplicate nodes scheduled to be killed
+  std::set<Node*> killed_nodes;
  
-   // Now loop over the other processors from highest to lowest
-   // (i.e. if there is a duplicate between these containers
-   //  then this will use the node on the highest numbered processor)
-   for (int iproc=n_proc-1;iproc>=0;iproc--)
-    {
-     // Don't have external halo elements with yourself!
-     if (iproc!=my_rank)
-      {
-       // Loop over external halo elements with iproc for internal data
-       // to remove the duplicates in the external halo element storage
-       unsigned n_element=mesh_pt->nexternal_halo_element(iproc);
-       for (unsigned e_ext=0;e_ext<n_element;e_ext++)
-        {
-         GeneralisedElement* ext_el_pt=mesh_pt->
-          external_halo_element_pt(iproc,e_ext);
+  // Now loop over the other processors from highest to lowest
+  // (i.e. if there is a duplicate between these containers
+  //  then this will use the node on the highest numbered processor)
+  for (int iproc=n_proc-1;iproc>=0;iproc--)
+   {
+    // Don't have external halo elements with yourself!
+    if (iproc!=my_rank)
+     {
+      // Loop over external halo elements with iproc for internal data
+      // to remove the duplicates in the external halo element storage
+      unsigned n_element=mesh_pt->nexternal_halo_element(iproc);
+      for (unsigned e_ext=0;e_ext<n_element;e_ext++)
+       {
+        GeneralisedElement* ext_el_pt=mesh_pt->
+         external_halo_element_pt(iproc,e_ext);
 
-         FiniteElement* finite_ext_el_pt = 
-          dynamic_cast<FiniteElement*>(ext_el_pt);  
-         if(finite_ext_el_pt!=0)
-          {
-           // Loop over nodes
-           unsigned n_node=finite_ext_el_pt->nnode();
-           for (unsigned j=0;j<n_node;j++)
-            {
-             Node* nod_pt=finite_ext_el_pt->node_pt(j);
+        FiniteElement* finite_ext_el_pt = 
+         dynamic_cast<FiniteElement*>(ext_el_pt);  
+        if(finite_ext_el_pt!=0)
+         {
+          // Loop over nodes
+          unsigned n_node=finite_ext_el_pt->nnode();
+          for (unsigned j=0;j<n_node;j++)
+           {
+            Node* nod_pt=finite_ext_el_pt->node_pt(j);
              
-             // Loop over values stored at node (if any) to find
-             // the first non-negative eqn number
-             unsigned first_non_negative_eqn_number_plus_one=0;
-             unsigned n_val=nod_pt->nvalue();
-             for (unsigned i_val=0;i_val<n_val;i_val++)
-              {
-               int eqn_no=nod_pt->eqn_number(i_val);
-               if (eqn_no>=0)
-                {
-                 first_non_negative_eqn_number_plus_one=eqn_no+1;
-                 break;
-                }
-              }
+            // Loop over values stored at node (if any) to find
+            // the first non-negative eqn number
+            unsigned first_non_negative_eqn_number_plus_one=0;
+            unsigned n_val=nod_pt->nvalue();
+            for (unsigned i_val=0;i_val<n_val;i_val++)
+             {
+              int eqn_no=nod_pt->eqn_number(i_val);
+              if (eqn_no>=0)
+               {
+                first_non_negative_eqn_number_plus_one=eqn_no+1;
+                break;
+               }
+             }
 
-             // If we haven't found a non-negative eqn number check
-             // eqn numbers associated with solid data (if any)
-             if (first_non_negative_eqn_number_plus_one==0)
-              {
-               // Is it a solid node?
-               SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
-               if (solid_nod_pt!=0)
-                {
-                 // Loop over values stored at node (if any) to find
-                 // the first non-negative eqn number
-                 unsigned n_val=solid_nod_pt->variable_position_pt()->nvalue();
-                 for (unsigned i_val=0;i_val<n_val;i_val++)
-                  {
-                   int eqn_no=solid_nod_pt->
-                    variable_position_pt()->eqn_number(i_val);
-                   if (eqn_no>=0)
-                    {
-                     first_non_negative_eqn_number_plus_one=eqn_no+1;
-                     break;
-                    }
-                  }
-                }
-              }
+            // If we haven't found a non-negative eqn number check
+            // eqn numbers associated with solid data (if any)
+            if (first_non_negative_eqn_number_plus_one==0)
+             {
+              // Is it a solid node?
+              SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
+              if (solid_nod_pt!=0)
+               {
+                // Loop over values stored at node (if any) to find
+                // the first non-negative eqn number
+                unsigned n_val=solid_nod_pt->variable_position_pt()->nvalue();
+                for (unsigned i_val=0;i_val<n_val;i_val++)
+                 {
+                  int eqn_no=solid_nod_pt->
+                   variable_position_pt()->eqn_number(i_val);
+                  if (eqn_no>=0)
+                   {
+                    first_non_negative_eqn_number_plus_one=eqn_no+1;
+                    break;
+                   }
+                 }
+               }
+             }
              
-             // Identified which node we're dealing with via first non-negative
-             // global eqn number (if there is none, everything is pinned
-             // and we don't give a damn...)
-             if (first_non_negative_eqn_number_plus_one>0)
-              {
-               Node* existing_node_pt=
-                global_node_pt[first_non_negative_eqn_number_plus_one-1];
+            // Identified which node we're dealing with via first non-negative
+            // global eqn number (if there is none, everything is pinned
+            // and we don't give a damn...)
+            if (first_non_negative_eqn_number_plus_one>0)
+             {
+              Node* existing_node_pt=
+               global_node_pt[first_non_negative_eqn_number_plus_one-1];
 
-               // Does this node already exist?
-               if (existing_node_pt!=0)
-                {
-                 // Record that we're about to cull one
-                 actually_removed_some_data=true;
+              // Does this node already exist?
+              if (existing_node_pt!=0)
+               {
+                // Record that we're about to cull one
+                actually_removed_some_data=true;
                  
-                 // It's a duplicate, so store the duplicated one for 
-                 // later killing...
-                 Node* duplicated_node_pt=nod_pt; 
-                 if (!node_done[duplicated_node_pt])
-                  {
+                // It's a duplicate, so store the duplicated one for 
+                // later killing...
+                Node* duplicated_node_pt=nod_pt; 
+                if (!node_done[duplicated_node_pt])
+                 {
 
-                   // Remove node from all boundaries 
-                   std::set<unsigned>* boundaries_pt;
-                   duplicated_node_pt->
-                    get_boundaries_pt(boundaries_pt);
-                   if (boundaries_pt!=0)
-                    {
-                     for (std::set<unsigned>::iterator it=
-                           (*boundaries_pt).begin(); it!=
-                           (*boundaries_pt).end(); it++)
-                      {
-                       mesh_pt->remove_boundary_node((*it),duplicated_node_pt);
-                      }
-                    }
+                  // Remove node from all boundaries 
+                  std::set<unsigned>* boundaries_pt;
+                  duplicated_node_pt->
+                   get_boundaries_pt(boundaries_pt);
+                  if (boundaries_pt!=0)
+                   {
+                    for (std::set<unsigned>::iterator it=
+                          (*boundaries_pt).begin(); it!=
+                          (*boundaries_pt).end(); it++)
+                     {
+                      mesh_pt->remove_boundary_node((*it),duplicated_node_pt);
+                     }
+                   }
                    
-                   // Get ready to kill it
-                   killed_nodes.insert(duplicated_node_pt);
-                   unsigned i_proc=unsigned(iproc);
-                   mesh_pt->null_external_halo_node(i_proc,
-                                                    duplicated_node_pt);
-                  }
+                  // Get ready to kill it
+                  killed_nodes.insert(duplicated_node_pt);
+                  unsigned i_proc=unsigned(iproc);
+                  mesh_pt->null_external_halo_node(i_proc,
+                                                   duplicated_node_pt);
+                 }
 
-                 // ...and point to the existing one
-                 finite_ext_el_pt->node_pt(j)=existing_node_pt;
-                }
-               // If it doesn't add it to the list of existing ones
-               else
-                {
-                 global_node_pt[first_non_negative_eqn_number_plus_one-1]=
-                  nod_pt;
-                 node_done[nod_pt]=true;
-                }
-              }
+                // ...and point to the existing one
+                finite_ext_el_pt->node_pt(j)=existing_node_pt;
+               }
+              // If it doesn't add it to the list of existing ones
+              else
+               {
+                global_node_pt[first_non_negative_eqn_number_plus_one-1]=
+                 nod_pt;
+                node_done[nod_pt]=true;
+               }
+             }
              
                
-             // Do the same for any master nodes
-             if (dynamic_cast<RefineableElement*>(ext_el_pt)!=0)
-              { 
-               int n_cont_inter_values=dynamic_cast<RefineableElement*>
-                (ext_el_pt)->ncont_interpolated_values();
-               for (int i_cont=-1;i_cont<n_cont_inter_values;i_cont++)
-                {
-                 if (nod_pt->is_hanging(i_cont))
-                  {
-                   HangInfo* hang_pt=nod_pt->hanging_pt(i_cont);
-                   unsigned n_master=hang_pt->nmaster();
-                   for (unsigned m=0;m<n_master;m++)
-                    {
-                     Node* master_nod_pt=hang_pt->master_node_pt(m);
-                     unsigned n_val=master_nod_pt->nvalue();
-                     unsigned first_non_negative_eqn_number_plus_one=0;
-                     for (unsigned i_val=0;i_val<n_val;i_val++)
-                      {
-                       int eqn_no=master_nod_pt->eqn_number(i_val);
-                       if (eqn_no>=0)
-                        {
-                         first_non_negative_eqn_number_plus_one=eqn_no+1;
-                         break;
-                        }
-                      }
+            // Do the same for any master nodes
+            if (dynamic_cast<RefineableElement*>(ext_el_pt)!=0)
+             { 
+              int n_cont_inter_values=dynamic_cast<RefineableElement*>
+               (ext_el_pt)->ncont_interpolated_values();
+              for (int i_cont=-1;i_cont<n_cont_inter_values;i_cont++)
+               {
+                if (nod_pt->is_hanging(i_cont))
+                 {
+                  HangInfo* hang_pt=nod_pt->hanging_pt(i_cont);
+                  unsigned n_master=hang_pt->nmaster();
+                  for (unsigned m=0;m<n_master;m++)
+                   {
+                    Node* master_nod_pt=hang_pt->master_node_pt(m);
+                    unsigned n_val=master_nod_pt->nvalue();
+                    unsigned first_non_negative_eqn_number_plus_one=0;
+                    for (unsigned i_val=0;i_val<n_val;i_val++)
+                     {
+                      int eqn_no=master_nod_pt->eqn_number(i_val);
+                      if (eqn_no>=0)
+                       {
+                        first_non_negative_eqn_number_plus_one=eqn_no+1;
+                        break;
+                       }
+                     }
 
-                     // If we haven't found a non-negative eqn number check
-                     // eqn numbers associated with solid data (if any)
-                     if (first_non_negative_eqn_number_plus_one==0)
-                      {
-                       SolidNode* solid_master_nod_pt=dynamic_cast<SolidNode*>
-                        (master_nod_pt);
-                       if (solid_master_nod_pt!=0)
-                        {
-                         // Loop over values stored at node (if any) to find
-                         // the first non-negative eqn number
-                         unsigned n_val=solid_master_nod_pt->
-                          variable_position_pt()->nvalue();
-                         for (unsigned i_val=0;i_val<n_val;i_val++)
-                          {
-                           int eqn_no=solid_master_nod_pt->
-                            variable_position_pt()->eqn_number(i_val);
-                           if (eqn_no>=0)
-                            {
-                             first_non_negative_eqn_number_plus_one=eqn_no+1;
-                             break;
-                            }
-                          }
-                        }
-                      }
+                    // If we haven't found a non-negative eqn number check
+                    // eqn numbers associated with solid data (if any)
+                    if (first_non_negative_eqn_number_plus_one==0)
+                     {
+                      SolidNode* solid_master_nod_pt=dynamic_cast<SolidNode*>
+                       (master_nod_pt);
+                      if (solid_master_nod_pt!=0)
+                       {
+                        // Loop over values stored at node (if any) to find
+                        // the first non-negative eqn number
+                        unsigned n_val=solid_master_nod_pt->
+                         variable_position_pt()->nvalue();
+                        for (unsigned i_val=0;i_val<n_val;i_val++)
+                         {
+                          int eqn_no=solid_master_nod_pt->
+                           variable_position_pt()->eqn_number(i_val);
+                          if (eqn_no>=0)
+                           {
+                            first_non_negative_eqn_number_plus_one=eqn_no+1;
+                            break;
+                           }
+                         }
+                       }
+                     }
                      
-                     // Identified which node we're dealing with via 
-                     // first non-negative global eqn number (if there 
-                     // is none, everything is pinned and we don't give a 
-                     // damn...)
-                     if (first_non_negative_eqn_number_plus_one>0)
-                      {
-                       Node* existing_node_pt=
-                        global_node_pt[
-                         first_non_negative_eqn_number_plus_one-1];
+                    // Identified which node we're dealing with via 
+                    // first non-negative global eqn number (if there 
+                    // is none, everything is pinned and we don't give a 
+                    // damn...)
+                    if (first_non_negative_eqn_number_plus_one>0)
+                     {
+                      Node* existing_node_pt=
+                       global_node_pt[
+                        first_non_negative_eqn_number_plus_one-1];
                        
-                       // Does this node already exist?
-                       if (existing_node_pt!=0)
-                        {
-                         // Record that we're about to cull one
-                         actually_removed_some_data=true;
+                      // Does this node already exist?
+                      if (existing_node_pt!=0)
+                       {
+                        // Record that we're about to cull one
+                        actually_removed_some_data=true;
                          
-                         // It's a duplicate, so store the duplicated one for 
-                         // later killing...
-                         Node* duplicated_node_pt=master_nod_pt;
+                        // It's a duplicate, so store the duplicated one for 
+                        // later killing...
+                        Node* duplicated_node_pt=master_nod_pt;
                          
                          
-                         if (!node_done[duplicated_node_pt])
-                          {
-                           // Remove node from all boundaries 
-                           std::set<unsigned>* boundaries_pt;
-                           duplicated_node_pt->
-                            get_boundaries_pt(boundaries_pt);
-                           if (boundaries_pt!=0)
-                            {
-                             for (std::set<unsigned>::iterator it=
-                                   (*boundaries_pt).begin(); it!=
-                                   (*boundaries_pt).end(); it++)
-                              {
-                               mesh_pt->remove_boundary_node(
-                                (*it),duplicated_node_pt);
-                              }
-                            }
+                        if (!node_done[duplicated_node_pt])
+                         {
+                          // Remove node from all boundaries 
+                          std::set<unsigned>* boundaries_pt;
+                          duplicated_node_pt->
+                           get_boundaries_pt(boundaries_pt);
+                          if (boundaries_pt!=0)
+                           {
+                            for (std::set<unsigned>::iterator it=
+                                  (*boundaries_pt).begin(); it!=
+                                  (*boundaries_pt).end(); it++)
+                             {
+                              mesh_pt->remove_boundary_node(
+                               (*it),duplicated_node_pt);
+                             }
+                           }
 
-                           killed_nodes.insert(duplicated_node_pt);
-                           unsigned i_proc=unsigned(iproc);
-                           mesh_pt->null_external_halo_node(i_proc,
+                          killed_nodes.insert(duplicated_node_pt);
+                          unsigned i_proc=unsigned(iproc);
+                          mesh_pt->null_external_halo_node(i_proc,
                                                            duplicated_node_pt);
-                          }
+                         }
                          
-                         // Weight of the original node
-                         double m_weight=hang_pt->master_weight(m);
+                        // Weight of the original node
+                        double m_weight=hang_pt->master_weight(m);
                          
-                         // And re-set master
-                         finite_ext_el_pt->node_pt(j)->
-                          hanging_pt(i_cont)->
-                          set_master_node_pt(m,existing_node_pt,
-                                             m_weight);
+                        // And re-set master
+                        finite_ext_el_pt->node_pt(j)->
+                         hanging_pt(i_cont)->
+                         set_master_node_pt(m,existing_node_pt,
+                                            m_weight);
                          
-                        }
-                       // If it doesn't, add it to the list of existing ones
-                       else
-                        {
-                         global_node_pt[
-                          first_non_negative_eqn_number_plus_one-1]=
-                          master_nod_pt;
-                         node_done[master_nod_pt]=true;
-                        }
-                      }
+                       }
+                      // If it doesn't, add it to the list of existing ones
+                      else
+                       {
+                        global_node_pt[
+                         first_non_negative_eqn_number_plus_one-1]=
+                         master_nod_pt;
+                        node_done[master_nod_pt]=true;
+                       }
+                     }
                      
-                    } // End of loop over master nodes
-                  } // end of hanging
-                } // end of loop over continously interpolated variables
-              } // end refineable element (with potentially hanging node
+                   } // End of loop over master nodes
+                 } // end of hanging
+               } // end of loop over continously interpolated variables
+             } // end refineable element (with potentially hanging node
              
-            } // end loop over nodes on external halo elements
+           } // end loop over nodes on external halo elements
            
-          } //End of check for finite element
+         } //End of check for finite element
  
-        } // end loop over external halo elements
-      }
-    } // end loop over processors
+       } // end loop over external halo elements
+     }
+   } // end loop over processors
 
-   // Now kill all the deleted nodes
-   for (std::set<Node*>::iterator it=killed_nodes.begin();
-        it!=killed_nodes.end();it++)
-    {
-     delete (*it);
-    }
+  // Now kill all the deleted nodes
+  for (std::set<Node*>::iterator it=killed_nodes.begin();
+       it!=killed_nodes.end();it++)
+   {
+    delete (*it);
+   }
 
-   // Now consolidate external halo node storage
-   mesh_pt->remove_null_pointers_from_external_halo_node_storage(
-    this->communicator_pt());
+  // Now consolidate external halo node storage
+  mesh_pt->remove_null_pointers_from_external_halo_node_storage(
+   this->communicator_pt());
 
-  }
-
-
- // // OLD VERSION
- // //============
- // else //--
- //  {
-
-
-
- //   // Each individual container of external halo nodes has unique
- //   // nodes/equation numbers, but there may be some duplication between
- //   // two or more different containers; the following code checks for this
- //   // and removes the duplication by overwriting any data point with an already
- //   // existing eqn number with the original data point which had the eqn no.
-
- //   // Storage for existing global equation numbers for each node
- //   Vector<std::pair<Vector<int>,Node*> > existing_global_eqn_numbers;
- 
- //   // Doc timings if required
- //   double t_start=0.0;
- //   if (Global_timings::Doc_comprehensive_timings)
- //    {
- //     t_start=TimingHelpers::timer();
- //    }
-
- //   // Only do each node once
- //   std::map<Node*,bool> node_done;
-
- //   // Loop over existing "normal" elements in mesh
- //   unsigned n_element=mesh_pt->nelement();
- //   for (unsigned e=0;e<n_element;e++)
- //    {
- //     FiniteElement* el_pt = dynamic_cast<FiniteElement*>(
- //      mesh_pt->element_pt(e));
- //     if (el_pt!=0)
- //      {
- //       // Loop over nodes
- //       unsigned n_node=el_pt->nnode();
- //       for (unsigned j=0;j<n_node;j++)
- //        {
- //         Node* nod_pt=el_pt->node_pt(j);
-
- //         // Have we already done the node?
- //         if (!node_done[nod_pt])
- //          {
- //           node_done[nod_pt]=true;
-         
- //           unsigned n_val=nod_pt->nvalue();
- //           Vector<int> nodal_eqn_numbers(n_val);
- //           for (unsigned i_val=0;i_val<n_val;i_val++)
- //            {
- //             nodal_eqn_numbers[i_val]=nod_pt->eqn_number(i_val);
- //            }
-         
- //           // All these nodes have unique equation numbers, so add all
- //           existing_global_eqn_numbers.push_back
- //            (make_pair(nodal_eqn_numbers,nod_pt));
-         
- //           // If it's a SolidNode then add its extra equation numbers
- //           SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
- //           if (solid_nod_pt!=0)
- //            {
- //             unsigned n_val_solid=solid_nod_pt->variable_position_pt()->nvalue();
- //             Vector<int> solid_nodal_eqn_numbers(n_val_solid);
- //             for (unsigned i_val=0;i_val<n_val_solid;i_val++)
- //              {
- //               solid_nodal_eqn_numbers[i_val]=solid_nod_pt->
- //                variable_position_pt()->eqn_number(i_val);
- //              }
- //             // Add these equation numbers to the existing storage
- //             existing_global_eqn_numbers.push_back
- //              (make_pair(solid_nodal_eqn_numbers,solid_nod_pt));
- //            }
-         
- //           // Take into account master nodes too
- //           if (dynamic_cast<RefineableElement*>(el_pt)!=0)
- //            {
- //             int n_cont_int_values=dynamic_cast<RefineableElement*>
- //              (el_pt)->ncont_interpolated_values();
- //             for (int i_cont=-1;i_cont<n_cont_int_values;i_cont++)
- //              {
- //               if (nod_pt->is_hanging(i_cont))
- //                {
- //                 HangInfo* hang_pt=nod_pt->hanging_pt(i_cont);
- //                 unsigned n_master=hang_pt->nmaster();
- //                 for (unsigned m=0;m<n_master;m++)
- //                  {
- //                   Node* master_nod_pt=hang_pt->master_node_pt(m);
- //                   unsigned n_val=master_nod_pt->nvalue();
- //                   Vector<int> master_nodal_eqn_numbers(n_val);
- //                   for (unsigned i_val=0;i_val<n_val;i_val++)
- //                    {
- //                     master_nodal_eqn_numbers[i_val]=
- //                      master_nod_pt->eqn_number(i_val);
- //                    }
-                 
- //                   // Add these equation numbers to the existing storage
- //                   existing_global_eqn_numbers.push_back
- //                    (make_pair(master_nodal_eqn_numbers,master_nod_pt));
-                 
- //                   // If this master is a SolidNode then add its extra 
- //                   // eqn numbers
- //                   SolidNode* master_solid_nod_pt=dynamic_cast<SolidNode*>
- //                    (master_nod_pt);
- //                   if (master_solid_nod_pt!=0)
- //                    {
- //                     unsigned n_val_mst_solid=master_solid_nod_pt->
- //                      variable_position_pt()->nvalue();
- //                     Vector<int> master_solid_nodal_eqn_numbers(n_val_mst_solid);
- //                     for (unsigned i_val=0;i_val<n_val_mst_solid;i_val++)
- //                      {
- //                       master_solid_nodal_eqn_numbers[i_val]=
- //                        master_solid_nod_pt->
- //                        variable_position_pt()->eqn_number(i_val);
- //                      }
- //                     // Add these equation numbers to the existing storage
- //                     existing_global_eqn_numbers.push_back
- //                      (make_pair(master_solid_nodal_eqn_numbers,
- //                                 master_solid_nod_pt));
- //                    }
- //                  }
- //                }
- //              }
- //            }
- //          } // endif for node already done
- //        }// End of loop over nodes
- //      } //End of FiniteElement 
-   
- //     // Internal data equation numbers do not need to be added since 
- //     // internal data cannot be shared between distinct elements, so 
- //     // internal data on locally-stored elements can never be halo.
- //    }
- 
- 
- //   // Doc timings if required
- //   if (Global_timings::Doc_comprehensive_timings)
- //    {
- //     double t_locate=TimingHelpers::timer();
- //     oomph_info 
- //      <<"CPU for assembly of existing global eqns in remove_duplicate_data(): "
- //      << t_locate-t_start << std::endl;
- //    }
- 
- 
- //   // Now loop over the other processors from highest to lowest
- //   // (i.e. if there is a duplicate between these containers
- //   //  then this will use the node on the highest numbered processor)
- //   int n_proc=this->communicator_pt()->nproc();
- //   int my_rank=this->communicator_pt()->my_rank();
- //   for (int iproc=n_proc-1;iproc>=0;iproc--)
- //    {
- //     // Don't have external halo elements with yourself!
- //     if (iproc!=my_rank)
- //      {
- //       // Loop over external halo elements with iproc for internal data
- //       // to remove the duplicates in the external halo element storage
- //       unsigned n_element=mesh_pt->nexternal_halo_element(iproc);
- //       for (unsigned e_ext=0;e_ext<n_element;e_ext++)
- //        {
- //         GeneralisedElement* ext_el_pt=mesh_pt->
- //          external_halo_element_pt(iproc,e_ext);
-
- //         FiniteElement* finite_ext_el_pt = 
- //          dynamic_cast<FiniteElement*>(ext_el_pt);  
- //         if(finite_ext_el_pt!=0)
- //          {
- //           // Loop over nodes
- //           unsigned n_node=finite_ext_el_pt->nnode();
- //           for (unsigned j=0;j<n_node;j++)
- //            {
- //             Node* nod_pt=finite_ext_el_pt->node_pt(j);
-
- //             unsigned n_val=nod_pt->nvalue();
- //             Vector<int> nodal_eqn_numbers(n_val);
- //             for (unsigned i_val=0;i_val<n_val;i_val++)
- //              {
- //               nodal_eqn_numbers[i_val]=nod_pt->eqn_number(i_val);   
- //              }
-
- //             // Check for duplicates with the existing set of 
- //             //global eqn numbers
-             
- //             // Test to see if there is a duplicate with current
- //             unsigned n_exist_eqn=existing_global_eqn_numbers.size();
- //             bool is_a_duplicate=false;
- //             // Loop over the existing global equation numbers
- //             for (unsigned i=0;i<n_exist_eqn;i++)
- //              {
- //               // If the number of values is different from the size of the 
- //               // vector then they are already different, so only test if 
- //               // the sizes are the same
- //               if (n_val==(existing_global_eqn_numbers[i].first).size())
- //                {
- //                 // Loop over values
- //                 for (unsigned i_val=0;i_val<n_val;i_val++)
- //                  {
- //                   // Make sure it isn't a pinned dof already
- //                   if (nodal_eqn_numbers[i_val]>=0)
- //                    {
- //                     // Test it against the equivalent entry in existing...
- //                     if (nodal_eqn_numbers[i_val]==
- //                         (existing_global_eqn_numbers[i].first)[i_val])
- //                      {
- //                       is_a_duplicate=true;
- //                       actually_removed_some_data=true;
-
- //                       // It's a duplicate, so point the current node at the
- //                       // other position instead!
- //                       finite_ext_el_pt->node_pt(j)=
- //                        existing_global_eqn_numbers[i].second;
- //                       break;
- //                      }
- //                    }
- //                  }
- //                }
- //               // Break out of the loop if we have already found a duplicate
- //               if (is_a_duplicate)
- //                {
- //                 break;
- //                }
- //              }
-             
- //             // If it's not a duplicate, add it to the existing storage
- //             if (!is_a_duplicate)
- //              {
- //               existing_global_eqn_numbers.push_back
- //                (make_pair(nodal_eqn_numbers,nod_pt));
- //              }
-             
- //             // Do the same for any SolidNodes
- //             SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(nod_pt);
- //             if (solid_nod_pt!=0)
- //              {
- //               unsigned n_val_solid=solid_nod_pt->
- //                variable_position_pt()->nvalue();
- //               Vector<int> solid_nodal_eqn_numbers(n_val_solid);
- //               for (unsigned i_val=0;i_val<n_val_solid;i_val++)
- //                {
- //                 solid_nodal_eqn_numbers[i_val]=solid_nod_pt->
- //                  variable_position_pt()->eqn_number(i_val);
- //                }
-               
- //               // Check for duplicate equation numbers
-               
- //               // Test to see if there is a duplicate with current
- //               unsigned n_exist_eqn=existing_global_eqn_numbers.size();
- //               bool is_a_duplicate=false;
- //               // Loop over the existing global equation numbers
- //               for (unsigned i=0;i<n_exist_eqn;i++)
- //                {
- //                 // If the number of values is different from the size of the 
- //                 // vector then they are already different, so only test if 
- //                 // the sizes are the same
- //                 if (n_val_solid==
- //                     (existing_global_eqn_numbers[i].first).size())
- //                  {
- //                   // Loop over values
- //                   for (unsigned i_val=0;i_val<n_val_solid;i_val++)
- //                    {
- //                     // Make sure it isn't a pinned dof already
- //                     if (solid_nodal_eqn_numbers[i_val]>=0)
- //                      {
- //                       // Test it against the equivalent entry in existing...
- //                       if (solid_nodal_eqn_numbers[i_val]==
- //                           (existing_global_eqn_numbers[i].first)[i_val])
- //                        {
- //                         is_a_duplicate=true;
- //                         actually_removed_some_data=true;
-
- //                         // It's a duplicate, so point the current node at the
- //                         // other position instead!
- //                         finite_ext_el_pt->node_pt(j)=
- //                          existing_global_eqn_numbers[i].second;
- //                         break;
- //                        }
- //                      }
- //                    }
- //                  }
- //                 // Break out of the loop if we have already found a duplicate
- //                 if (is_a_duplicate)
- //                  {
- //                   break;
- //                  }
- //                }
-               
- //               // If it's not a duplicate, add it to the existing storage
- //               if (!is_a_duplicate)
- //                {
- //                 existing_global_eqn_numbers.push_back
- //                  (make_pair(solid_nodal_eqn_numbers,nod_pt));
- //                }
-               
- //              }
-             
- //             // Do the same for any master nodes
- //             if (dynamic_cast<RefineableElement*>(ext_el_pt)!=0)
- //              {
- //               int n_cont_inter_values=dynamic_cast<RefineableElement*>
- //                (ext_el_pt)->ncont_interpolated_values();
- //               for (int i_cont=-1;i_cont<n_cont_inter_values;i_cont++)
- //                {
- //                 if (nod_pt->is_hanging(i_cont))
- //                  {
- //                   HangInfo* hang_pt=nod_pt->hanging_pt(i_cont);
- //                   unsigned n_master=hang_pt->nmaster();
- //                   for (unsigned m=0;m<n_master;m++)
- //                    {
- //                     Node* master_nod_pt=hang_pt->master_node_pt(m);
- //                     unsigned n_val=master_nod_pt->nvalue();
- //                     Vector<int> master_nodal_eqn_numbers(n_val);
- //                     for (unsigned i_val=0;i_val<n_val;i_val++)
- //                      {
- //                       master_nodal_eqn_numbers[i_val]=
- //                        master_nod_pt->eqn_number(i_val);
- //                      }
-                     
- //                     // Check for duplicate master eqn numbers
-                     
- //                     // Test to see if there is a duplicate with current
- //                     unsigned n_exist_eqn=existing_global_eqn_numbers.size();
- //                     bool is_a_duplicate=false;
- //                     // Loop over the existing global equation numbers
- //                     for (unsigned i=0;i<n_exist_eqn;i++)
- //                      {
- //                       // If the number of values is different from the size
- //                       // of the vector then they are already different,
- //                       // only test if the sizes are the same
- //                       if (n_val==
- //                           (existing_global_eqn_numbers[i].first).size())
- //                        {
- //                         // Loop over values
- //                         for (unsigned i_val=0;i_val<n_val;i_val++)
- //                          {
- //                           // Make sure it isn't a pinned dof already
- //                           if (master_nodal_eqn_numbers[i_val]>=0)
- //                            {
- //                             // Test it against the equivalent existing entry
- //                             if (master_nodal_eqn_numbers[i_val]==
- //                                 (existing_global_eqn_numbers[i].first)
- //                                 [i_val])
- //                              {
- //                               is_a_duplicate=true;
- //                               actually_removed_some_data=true;
-
- //                               // It's a duplicate, so point this node's
- //                               // master at the original node instead!
- //                               // Need the weight of the original node
- //                               double m_weight=hang_pt->master_weight(m);
- //                               // Set master
- //                               finite_ext_el_pt->node_pt(j)->hanging_pt(i_cont)
- //                                ->set_master_node_pt
- //                                (m,existing_global_eqn_numbers[i].second,
- //                                 m_weight);
- //                               break;
- //                              }
- //                            }
- //                          }
- //                        }
- //                       // Break out of the loop if we have found a duplicate
- //                       if (is_a_duplicate)
- //                        {
- //                         break;
- //                        }
- //                      }
-                     
- //                     // If it's not a duplicate, add it to the existing storage
- //                     if (!is_a_duplicate)
- //                      {
- //                       existing_global_eqn_numbers.push_back
- //                        (make_pair(master_nodal_eqn_numbers,master_nod_pt));
- //                      }
-                     
- //                     // Do the same again for SolidNodes
- //                     SolidNode* solid_master_nod_pt=dynamic_cast<SolidNode*>
- //                      (master_nod_pt);
- //                     if (solid_master_nod_pt!=0)
- //                      {
- //                       unsigned n_val_solid=solid_master_nod_pt->
- //                        variable_position_pt()->nvalue();
- //                       Vector<int> sld_master_nodal_eqn_numbers(n_val_solid);
- //                       for (unsigned i_val=0;i_val<n_val_solid;i_val++)
- //                        {
- //                         sld_master_nodal_eqn_numbers[i_val]=
- //                          solid_master_nod_pt
- //                          ->variable_position_pt()->eqn_number(i_val);
- //                        }
-                       
- //                       // Check for duplicate master eqn numbers
-                       
- //                       // Test to see if there is a duplicate with current
- //                       unsigned n_exist_eqn=existing_global_eqn_numbers.size();
- //                       bool is_a_duplicate=false;
- //                       // Loop over the existing global equation numbers
- //                       for (unsigned i=0;i<n_exist_eqn;i++)
- //                        {
- //                         // If the number of values is different from the size
- //                         // of the vector then they are already different,
- //                         // only test if the sizes are the same
- //                         if (n_val_solid==
- //                             (existing_global_eqn_numbers[i].first).size())
- //                          {
- //                           // Loop over values
- //                           for (unsigned i_val=0;i_val<n_val_solid;i_val++)
- //                            {
- //                             // Make sure it isn't a pinned dof already
- //                             if (sld_master_nodal_eqn_numbers[i_val]>=0)
- //                              {
- //                               // Test it against the equivalent existing entry
- //                               if (sld_master_nodal_eqn_numbers[i_val]==
- //                                   (existing_global_eqn_numbers[i].first)
- //                                   [i_val])
- //                                {
- //                                 is_a_duplicate=true;
- //                                 actually_removed_some_data=true;
-
- //                                 // It's a duplicate, 
- //                                 // so point the current master
- //                                 // node at the original node instead!
- //                                 // Need the weight of the original node
- //                                 double m_weight=hang_pt->master_weight(m);
- //                                 // Set master
- //                                 finite_ext_el_pt->node_pt(j)->
- //                                  hanging_pt(i_cont)
- //                                  ->set_master_node_pt
- //                                  (m,existing_global_eqn_numbers[i].second,
- //                                   m_weight);
- //                                 break;
- //                                }
- //                              }
- //                            }
- //                          }
- //                         // Break out of the loop if we have found a duplicate
- //                         if (is_a_duplicate)
- //                          {
- //                           break;
- //                          }
- //                        }
-                       
- //                       // If it's not a duplicate then 
- //                       // add it to existing storage
- //                       if (!is_a_duplicate)
- //                        {
- //                         existing_global_eqn_numbers.push_back
- //                          (make_pair(sld_master_nodal_eqn_numbers,
- //                                     master_nod_pt));
- //                        }
-                       
-                       
- //                      }
-                     
- //                    }
- //                  }
- //                } // end hanging loop over continous interpolated variables
- //              }
-             
- //            } // end loop over nodes on external halo elements
-           
- //          } //End of check for finite element
- 
- //        } // end loop over external halo elements
- //      }
- //    } // end loop over processors
-
- //  } // END OLD VS NEW VERSION
 
 }
 
@@ -6006,6 +5543,9 @@ void Problem::parallel_sparse_assemble
  Vector<unsigned > &nnz, 
  Vector<double* > &residuals)
 {
+
+ double t_start=TimingHelpers::timer();
+
  // my rank and nproc
  unsigned my_rank = Communicator_pt->my_rank();
  unsigned nproc = Communicator_pt->nproc();
@@ -6412,6 +5952,13 @@ void Problem::parallel_sparse_assemble
   {
    recompute_load_balanced_assembly(elemental_assembly_time);
   }
+
+ 
+ double t_end=TimingHelpers::timer();
+ oomph_info << "CPU for local Jacobian/residual computation          : "
+            << t_end-t_start << std::endl;
+ t_start=TimingHelpers::timer();
+
 
  // next we compute the number of equations and number of non-zeros to be
  // sent to each processor, and send/recv that information
@@ -7103,6 +6650,12 @@ void Problem::parallel_sparse_assemble
       }
     }
   }
+
+
+ t_end=TimingHelpers::timer();
+ oomph_info << "CPU for distribution in Jacobian/residual computation: "
+            << t_end-t_start << std::endl;
+
 }
 #endif
 
@@ -10080,7 +9633,105 @@ void Problem::dump(std::ofstream& dump_file)
 
  // Number of submeshes?
  unsigned n_mesh=nsub_mesh();
+
+ dump_file << std::max(unsigned(1),n_mesh)
+           << " # number of (sub)meshes " << std::endl;
+
+ // Single mesh:
+ //------------
+ if(n_mesh==0)
+  {
+   // Dump level of refinement before pruning
+   if(TreeBasedRefineableMeshBase* mmesh_pt = 
+      dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(0)))
+    { 
+     dump_file << mmesh_pt->uniform_refinement_level_when_pruned()
+               << " # uniform refinement when pruned " << std::endl;
+    }
+   else
+    {     
+     dump_file << 0
+               << " # (fake) uniform refinement when pruned " << std::endl;
+    }
+   dump_file << 9999 << " # test flag for end of sub-meshes " << std::endl;
+  }
  
+ //Multiple submeshes
+ //------------------
+ else
+  {
+   // Loop over submeshes to dump level of refinement before pruning
+   for (unsigned imesh=0;imesh<n_mesh;imesh++)
+    {
+     if(TreeBasedRefineableMeshBase* mmesh_pt =
+        dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(imesh)))
+      {
+       dump_file << mmesh_pt->uniform_refinement_level_when_pruned()
+                 << " # uniform refinement when pruned " << std::endl;
+      }
+     else
+      {     
+       dump_file << 0
+                 << " # (fake) uniform refinement when pruned " << std::endl;
+      }
+    }
+   dump_file << 9999 << " # test flag for end of sub-meshes " << std::endl;
+  }
+
+#ifdef OOMPH_HAS_MPI
+ 
+ const int my_rank=this->communicator_pt()->my_rank();
+
+ // Record destination of all base elements
+ unsigned n=Base_mesh_element_pt.size();
+ Vector<int> local_base_element_processor(n,-1);
+ Vector<int> base_element_processor(n,-1);
+ for (unsigned e=0;e<n;e++)
+  {
+   GeneralisedElement* el_pt=Base_mesh_element_pt[e];
+   if (el_pt!=0)
+    {
+     if (!el_pt->is_halo())
+      {
+       local_base_element_processor[e]=my_rank;
+      }
+    }
+  }
+ 
+
+ 
+ // Get target for all base elements by reduction
+ if (Problem_has_been_distributed)
+  {
+   MPI_Allreduce(&local_base_element_processor[0],
+                 &base_element_processor[0],
+                 n,MPI_INT,MPI_MAX,
+                 this->communicator_pt()->mpi_comm());
+  }
+ else
+  {
+   // All the same...
+   base_element_processor=local_base_element_processor;
+  }
+ 
+
+// hierher
+//#else
+// 
+// // All the same...
+// base_element_processor=local_base_element_processor;
+// 
+
+ 
+ dump_file << n << " # Number of base elements; partitioning follows.\n";
+ for (unsigned e=0;e<n;e++)
+  {
+   dump_file << base_element_processor[e] << "\n";
+  }
+ dump_file << "8888 #test flag for end of base element distribution\n";
+
+#endif
+
  // Single mesh:
  //------------
  if(n_mesh==0)
@@ -10125,6 +9776,7 @@ void Problem::dump(std::ofstream& dump_file)
 #endif
     } // End of loop over submeshes
   }
+
 
  // Dump time
  // ---------
@@ -10182,11 +9834,322 @@ void Problem::dump(std::ofstream& dump_file)
 void Problem::read(std::ifstream& restart_file, bool& unsteady_restart) 
 {
 
+ // Number of (sub)meshes?
+ unsigned n_mesh=std::max(unsigned(1),nsub_mesh());
+ 
+ std::string input_string;
+
+ // Read line up to termination sign
+ getline(restart_file,input_string,'#');
+ 
+ // Ignore rest of line
+ restart_file.ignore(80,'\n');
+ 
+ // Read in number of sub-meshes
+ unsigned n_submesh_read;
+ n_submesh_read=std::atoi(input_string.c_str());
+ 
+
+#ifdef PARANOID   
+ if (n_submesh_read!=n_mesh)
+    {
+     std::ostringstream error_message;
+     error_message 
+      << "Number of sub-meshes specified in restart file, " 
+      << n_submesh_read << " doesn't \n match the my number of sub-meshes,"
+      << n_mesh << std::endl
+      << "Make sure all sub-meshes have been added to the global mesh\n"
+      << "when calling the Problem::dump() function.\n";
+     throw OomphLibError(error_message.str(),
+                         "Problem::read()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+
+ // Read levels of refinement before pruning
+ bool refine_and_prune_required=false;
+ Vector<unsigned> nrefinement_for_mesh(n_mesh);
+ for (unsigned i=0;i<n_mesh;i++)
+  {
+   // Read line up to termination sign
+   getline(restart_file,input_string,'#');
+   
+   // Ignore rest of line
+   restart_file.ignore(80,'\n');
+   
+   // Convert
+   nrefinement_for_mesh[i]=std::atoi(input_string.c_str());
+
+   // Get pointer to sub-mesh in incarnation as tree-based refineable mesh
+   TreeBasedRefineableMeshBase* ref_mesh_pt=
+    dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(i));
+
+   // If it's not a tree-based refineable mesh, ignore the following
+   if (ref_mesh_pt==0)
+    {
+     if (nrefinement_for_mesh[i]!=0)
+      {
+       std::ostringstream error_stream;
+       error_stream << "Nonzero uniform-refinement-when-pruned specified\n" 
+                    << "even though mesh is not tree-based. Odd. May want\n"
+                    << "to check this carefully before disabling this \n"
+                    << "warning/error -- most likely if/when we start to\n"
+                    << "prune unstructured meshes [though I can't see why\n"
+                    << "we would want to do this, given that they are \n"
+                    << "currently totally re-generated...]\n";
+       throw OomphLibError(error_stream.str(),"Problem::read()",
+                           OOMPH_EXCEPTION_LOCATION);
+      }
+    }
+   else
+    {
+     // Get min and max refinement level
+     unsigned local_min_ref=0;
+     unsigned local_max_ref=0;
+     ref_mesh_pt->get_refinement_levels(local_min_ref,local_max_ref);
+
+     // Overall min refinement level over all meshes
+     unsigned min_ref=local_min_ref;
+
+#ifdef OOMPH_HAS_MPI
+     if (Problem_has_been_distributed)
+      {
+       // Reconcile between processors: If (e.g. following 
+       // distribution/pruning) the mesh has no elements on this 
+       // processor) then ignore its contribution to the poll of 
+       // max/min refinement levels
+       int int_local_min_ref=local_min_ref;         
+       if (ref_mesh_pt->nelement()==0)
+        {
+         int_local_min_ref=INT_MAX;
+        }         
+       int int_min_ref=0;         
+       MPI_Allreduce(&int_local_min_ref,&int_min_ref,1,
+                     MPI_INT,MPI_MIN,
+                     MPI_Helpers::communicator_pt()->mpi_comm());
+       
+       // Overall min refinement level over all meshes
+       min_ref=unsigned(int_min_ref);
+      }
+#endif
+
+     // Need to refine less
+     if (nrefinement_for_mesh[i]>=min_ref)
+      {
+       nrefinement_for_mesh[i]-=min_ref;
+      }
+    }
+   
+   if (nrefinement_for_mesh[i]>0)
+    {
+     refine_and_prune_required=true;
+    }
+  }
+ 
+ // Read line up to termination sign
+ getline(restart_file,input_string,'#');
+ 
+ // Ignore rest of line
+ restart_file.ignore(80,'\n');
+ 
+ // Check flag that indicates that we've read the final data
+ unsigned tmp;
+ tmp=std::atoi(input_string.c_str());
+
+#ifdef PARANOID   
+ if (tmp!=9999)
+    {
+     std::ostringstream error_message;
+     error_message 
+      << "Error in reading restart data: Uniform refinement when pruned \n"
+      << "flags should be followed by 9999.\n";
+     throw OomphLibError(error_message.str(),
+                         "Problem::read()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+#endif
+
+#ifdef OOMPH_HAS_MPI
+
+ // Refine and prune if required
+ if (refine_and_prune_required)
+  {
+   oomph_info << "Doing uniform refinement in anticipation of pruning\n";
+   refine_uniformly(nrefinement_for_mesh);
+   oomph_info << "Done uniform refinement in anticipation of pruning\n";
+   oomph_info << "Doing pruning\n";
+   prune_halo_elements_and_nodes();
+   oomph_info << "Done pruning\n";
+  }
+ 
+ // target_domain_for_local_non_halo_element[e] contains the number
+ // of the domain [0,1,...,nproc-1] to which non-halo element e on THE
+ // CURRENT PROCESSOR ONLY has been assigned. The order of the non-halo
+ // elements is the same as in the Problem's mesh, with the halo
+ // elements being skipped.
+ Vector<unsigned> target_domain_for_local_non_halo_element;
+ 
+ // Read line up to termination sign
+ getline(restart_file,input_string,'#');
+ 
+ // Ignore rest of line
+ restart_file.ignore(80,'\n');
+ 
+ // Get number of base elements as recorded
+ unsigned n_base_element_read_in=atoi(input_string.c_str());
+ unsigned nbase=Base_mesh_element_pt.size();   
+ if (n_base_element_read_in!=nbase)
+  {
+   std::ostringstream error_message;
+   error_message 
+    << "About to read " << n_base_element_read_in << " base elements \n"
+    << "though we only have " << nbase << " base elements in mesh.\n";
+   throw OomphLibError(error_message.str(),
+                       "Problem::read()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ 
+ // Read in target_domain_for_base_element[e] for all base elements
+ Vector<unsigned> target_domain_for_base_element(nbase);
+ for (unsigned e=0;e<nbase;e++)
+  {
+   // Read line 
+   getline(restart_file,input_string);
+   
+   // Get target domain
+   target_domain_for_base_element[e]=atoi(input_string.c_str()); 
+  }
+ 
+ // Read line up to termination sign
+ getline(restart_file,input_string,'#');
+ 
+ // Ignore rest of line
+ restart_file.ignore(80,'\n');
+ 
+ // Check flag that indicates that we've read the final data
+ tmp=std::atoi(input_string.c_str());
+ 
+ 
+#ifdef PARANOID   
+ if (tmp!=8888)
+  {
+   std::ostringstream error_message;
+   error_message 
+    << "Error in reading restart data: Target proc for base elements \n"
+    << "should be followed by 8888.\n";
+   throw OomphLibError(error_message.str(),
+                       "Problem::read()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+  
+ // Loop over all elements (incl. any FaceElements) and assign
+ // target domain for all local non-halo elements and check if
+ // load balancing is required -- no need to do this if problem is 
+ // not distributed.
+ unsigned load_balance_required_flag=0;
+ if (Problem_has_been_distributed)
+  {
+   const int my_rank=this->communicator_pt()->my_rank();
+   unsigned local_load_balance_required_flag=0;
+   unsigned nel=mesh_pt()->nelement();
+   for (unsigned e=0;e<nel;e++)
+    {
+     GeneralisedElement* el_pt=mesh_pt()->element_pt(e);
+     if (!el_pt->is_halo())
+      {
+       // Get element number (plus one) in base element enumeration
+       unsigned el_number_in_base_mesh_plus_one=
+        Base_mesh_element_number_plus_one[el_pt];
+       
+       // If it's zero then we haven't found it, it may be a FaceElement 
+       // (in which case we move it to the same processor as its bulk element
+       if (el_number_in_base_mesh_plus_one==0)
+        {
+         FaceElement* face_el_pt=dynamic_cast<FaceElement*>(el_pt);
+         if (face_el_pt!=0)
+          {
+           // Get corresponding bulk element
+           FiniteElement* bulk_el_pt=face_el_pt->bulk_element_pt();
+           
+           // Use its element number (plus one) in base element enumeration
+           el_number_in_base_mesh_plus_one=
+            Base_mesh_element_number_plus_one[bulk_el_pt];
+           
+           // If this is zero too we have a problem
+           if (el_number_in_base_mesh_plus_one==0)
+            {
+             throw OomphLibError("el_number_in_base_mesh_plus_one=0 for bulk",
+                                 "Problem::read()",
+                                 OOMPH_EXCEPTION_LOCATION);
+            }
+          }
+        }
+       
+       // If we've made it here then we're not dealing with a FaceElement
+       // but with an element that doesn't exist locally --> WTF?
+       if (el_number_in_base_mesh_plus_one==0)
+        {
+         throw OomphLibError("el_number_in_base_mesh_plus_one=0",
+                             "Problem::read()",
+                             OOMPH_EXCEPTION_LOCATION);
+        }
+       
+       // Assign target domain for next local non-halo element in 
+       // the order in which it's encountered in the global mesh
+       target_domain_for_local_non_halo_element.push_back(
+        target_domain_for_base_element[el_number_in_base_mesh_plus_one-1]);
+       
+       // Do elements on this processor to be moved elsewhere?
+       if (int(target_domain_for_base_element
+               [el_number_in_base_mesh_plus_one-1])
+           !=my_rank)
+        {
+         local_load_balance_required_flag=1;
+        }
+      }
+    }
+
+   // Get overall need to load balance by max
+   MPI_Allreduce(&local_load_balance_required_flag,
+                 &load_balance_required_flag,1,
+                 MPI_UNSIGNED,MPI_MAX,this->communicator_pt()->mpi_comm());
+
+
+//#else   
+//
+//   // Never get here but this is what we'd do if we did...
+//   load_balance_required_flag=local_load_balance_required_flag;
+//   
+//#endif
+   
+ }
+ 
+ // Do we need to load balance?
+ if (load_balance_required_flag==1)
+  {
+   oomph_info << "Doing load balancing after pruning\n";
+   DocInfo doc_info;
+   doc_info.disable_doc();
+   bool report_stats=false;
+   load_balance(doc_info,report_stats,
+                target_domain_for_local_non_halo_element);
+   oomph_info << "Done load balancing after pruning\n";
+  }
+ else
+  {
+   oomph_info << "No need for load balancing after pruning\n";
+  }
+ 
+#endif
+
  //Call the actions before adaptation
  actions_before_adapt();
  
- // Number of submeshes?
- unsigned n_mesh=nsub_mesh();
+ // Update number of submeshes
+ n_mesh=nsub_mesh();
  
  // Single mesh:
  //------------
@@ -10265,7 +10228,6 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
             << assign_eqn_numbers() 
             << std::endl<< std::endl; 
 
- std::string input_string;
  
  // Read time info
  //---------------
@@ -11882,10 +11844,11 @@ void Problem::refine_selected_elements(const
 
 
 //========================================================================
-/// Refine (all) refineable (sub)mesh(es) uniformly and rebuild problem
-/// and doc refinement process.
+/// Refine (all) refineable (sub)mesh(es) uniformly as many times as 
+/// specified in vector and rebuild problem; doc refinement process.
 //========================================================================
-void Problem::refine_uniformly(DocInfo& doc_info)
+void Problem::refine_uniformly(const Vector<unsigned>& nrefine_for_mesh,
+                               DocInfo& doc_info)
 {
 
  double t_start = 0.0;
@@ -11906,16 +11869,20 @@ void Problem::refine_uniformly(DocInfo& doc_info)
   }
 
  // Number of submeshes?
- unsigned Nmesh=nsub_mesh();
+ unsigned n_mesh=nsub_mesh();
   
  // Single mesh:
- if (Nmesh==0)
+ if (n_mesh==0)
   {
    // Refine single mesh uniformly if possible
    if(RefineableMeshBase* mmesh_pt = 
       dynamic_cast<RefineableMeshBase*>(mesh_pt(0)))
     {
-     mmesh_pt->refine_uniformly(doc_info);
+     unsigned nref=nrefine_for_mesh[0];
+     for (unsigned i=0;i<nref;i++)
+      {
+       mmesh_pt->refine_uniformly(doc_info);
+      }
     }
    else
     {
@@ -11927,13 +11894,17 @@ void Problem::refine_uniformly(DocInfo& doc_info)
  else
   {
    // Loop over submeshes
-   for (unsigned imesh=0;imesh<Nmesh;imesh++)
+   for (unsigned imesh=0;imesh<n_mesh;imesh++)
     {
      // Refine i-th submesh uniformly if possible
      if (RefineableMeshBase* mmesh_pt =
          dynamic_cast<RefineableMeshBase*>(mesh_pt(imesh)))
       {
-       mmesh_pt->refine_uniformly(doc_info);
+       unsigned nref=nrefine_for_mesh[imesh];
+       for (unsigned i=0;i<nref;i++)
+        {
+         mmesh_pt->refine_uniformly(doc_info);
+        }
       }
      else
       {
@@ -11966,7 +11937,7 @@ void Problem::refine_uniformly(DocInfo& doc_info)
   }
 
  //Do equation numbering
- oomph_info <<"Number of equations: " 
+ oomph_info <<"Number of equations after Problem::refine_uniformly(): " 
             << assign_eqn_numbers() << std::endl; 
 
 
@@ -12042,10 +12013,10 @@ unsigned Problem::unrefine_uniformly()
  unsigned success_flag=0;
 
  // Number of submeshes?
- unsigned Nmesh=nsub_mesh();
+ unsigned n_mesh=nsub_mesh();
 
  // Single mesh:
- if (Nmesh==0)
+ if (n_mesh==0)
   {
    // Unrefine single mesh uniformly if possible
    if(RefineableMeshBase* mmesh_pt = 
@@ -12063,7 +12034,7 @@ unsigned Problem::unrefine_uniformly()
  else
   {
    // Loop over submeshes
-   for (unsigned imesh=0;imesh<Nmesh;imesh++)
+   for (unsigned imesh=0;imesh<n_mesh;imesh++)
     {
      // Unrefine i-th submesh uniformly if possible
      if (RefineableMeshBase* mmesh_pt=
@@ -13316,21 +13287,13 @@ void Problem::copy_external_haloed_eqn_numbers_helper(Mesh* &mesh_pt)
 /// already been distributed, by re-distributing elements over the processors. 
 /// Produce explicit stats of load balancing process if boolean, report_stats,
 /// is set to true and doc various bits of data (mainly for debugging) 
-/// in directory specified by DocInfo object.  Returns the new partitioning 
-/// of the elements in the base mesh produced by Problem::build_mesh(), so that
-/// the e-th entry in the vector returned by this function contains the
-/// target domain of the e-th element in that mesh before it's being 
-/// distributed. This information can be used in restarts, say.
+/// in directory specified by DocInfo object. 
 //==========================================================================
-Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
-                                       const bool& report_stats)
-{
-
- // Storage for actual distribution of elements in the order in which
- // they appear in the non-distributed base mesh. This information
- // is to be returned by this function.
- Vector<unsigned> actual_element_partition;
- 
+ void Problem::load_balance(DocInfo& doc_info,
+                            const bool& report_stats,
+                            const Vector<unsigned>& 
+                            input_target_domain_for_local_non_halo_element)
+ {
  // Number of processes
  const unsigned n_proc=this->communicator_pt()->nproc();
  
@@ -13407,24 +13370,37 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
    // elements being skipped.
    Vector<unsigned> target_domain_for_local_non_halo_element;
 
-   // Metis does not always produce repeatable results which is
-   // a disaster for validation runs -- this bypasses metis and
-   // comes up with a stupid but repeatable partioning.
-   if (Use_default_partition_in_load_balance)   
-    {     
-     // Bypass METIS to perform the partitioning
-     unsigned objective=0; 
-     bool bypass_metis=true;
-     METIS::partition_distributed_mesh(this,objective,
-                                      target_domain_for_local_non_halo_element,
-                                       bypass_metis);
+   // External prescribed partitioning
+   if (input_target_domain_for_local_non_halo_element.size()!=0)
+    {
+     oomph_info 
+      << "Using externally prescribed partitioning for load balancing\n";
+     target_domain_for_local_non_halo_element=
+      input_target_domain_for_local_non_halo_element;
     }
    else
     {
-     // Use METIS to perform the partitioning
-     unsigned objective=0; 
-     METIS::partition_distributed_mesh(this,objective,
-                                     target_domain_for_local_non_halo_element);
+     // Metis does not always produce repeatable results which is
+     // a disaster for validation runs -- this bypasses metis and
+     // comes up with a stupid but repeatable partioning.
+     if (Use_default_partition_in_load_balance)   
+      {     
+       // Bypass METIS to perform the partitioning
+       unsigned objective=0; 
+       bool bypass_metis=true;
+       METIS::partition_distributed_mesh(
+        this,objective,
+        target_domain_for_local_non_halo_element,
+        bypass_metis);
+      }
+     else
+      {
+       // Use METIS to perform the partitioning
+       unsigned objective=0; 
+       METIS::partition_distributed_mesh(
+        this,objective,
+        target_domain_for_local_non_halo_element);
+      }
     }
 
    if (report_stats)
@@ -13432,6 +13408,21 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
      t_metis=TimingHelpers::timer();
     }
    
+   // Setup map linking element with target domain
+   std::map<GeneralisedElement*,unsigned> 
+    target_domain_for_local_non_halo_element_map;
+   unsigned n_elem=mesh_pt()->nelement();
+   unsigned count_non_halo_el=0;
+   for (unsigned e=0;e<n_elem;e++)
+    { 
+     GeneralisedElement* el_pt=mesh_pt()->element_pt(e);
+     if (!el_pt->is_halo())
+      {
+       target_domain_for_local_non_halo_element_map[el_pt]=
+        target_domain_for_local_non_halo_element[count_non_halo_el];
+       count_non_halo_el++;
+      }
+    }
 
    // Load balancing is equivalent to distribution so call the
    // appropriate "actions before". NOTE: This acts on the 
@@ -13441,6 +13432,21 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
    // new, not-yet refined, distributed etc. problem!
    actions_before_distribute();
 
+   // Re-setup target domains for remaining elements (FaceElements
+   // are likely to have been stripped out in actions_before_distribute()
+   n_elem=mesh_pt()->nelement();
+   target_domain_for_local_non_halo_element.clear();
+   target_domain_for_local_non_halo_element.reserve(n_elem);
+   count_non_halo_el=0;
+   for (unsigned e=0;e<n_elem;e++)
+    { 
+     GeneralisedElement* el_pt=mesh_pt()->element_pt(e);
+     if (!el_pt->is_halo())
+      {
+       target_domain_for_local_non_halo_element.push_back(
+        target_domain_for_local_non_halo_element_map[el_pt]);
+      }
+    }
 
    // Extract data to be sent to various processors after the
    //--------------------------------------------------------
@@ -13561,7 +13567,32 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
         dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt());
        if (ref_mesh_pt!=0)
         {
-         unsigned nref=pruned_refinement_level[0];
+         
+         // Get min and max refinement level
+         unsigned local_min_ref=0;
+         unsigned local_max_ref=0;
+         ref_mesh_pt->get_refinement_levels(local_min_ref,local_max_ref);
+         
+         // Reconcile between processors: If (e.g. following 
+         // distribution/pruning) the mesh has no elements on this 
+         // processor) then ignore its contribution to the poll of 
+         // max/min refinement levels
+         int int_local_min_ref=local_min_ref;         
+         if (ref_mesh_pt->nelement()==0)
+          {
+           int_local_min_ref=INT_MAX;
+          }         
+         int int_min_ref=0;         
+         MPI_Allreduce(&int_local_min_ref,&int_min_ref,1,
+                       MPI_INT,MPI_MIN,
+                       MPI_Helpers::communicator_pt()->mpi_comm());
+         
+         // Overall min refinement level over all meshes
+         unsigned min_ref=unsigned(int_min_ref);
+         
+         // Refine as many times as required to get refinement up to
+         // uniform refinement level after last prune
+         unsigned nref=pruned_refinement_level[0]-min_ref;
          for (unsigned i=0;i<nref;i++)
           {
            ref_mesh_pt->refine_uniformly();
@@ -13576,7 +13607,33 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
           dynamic_cast<TreeBasedRefineableMeshBase*>(mesh_pt(i_mesh));
          if (ref_mesh_pt!=0)
           {
-           unsigned nref=pruned_refinement_level[i_mesh];
+           
+           
+           // Get min and max refinement level
+           unsigned local_min_ref=0;
+           unsigned local_max_ref=0;
+           ref_mesh_pt->get_refinement_levels(local_min_ref,local_max_ref);
+           
+           // Reconcile between processors: If (e.g. following 
+           // distribution/pruning) the mesh has no elements on this 
+           // processor) then ignore its contribution to the poll of 
+           // max/min refinement levels
+           int int_local_min_ref=local_min_ref;
+           if (ref_mesh_pt->nelement()==0)
+            {
+             int_local_min_ref=INT_MAX;
+            }         
+           int int_min_ref=0;         
+           MPI_Allreduce(&int_local_min_ref,&int_min_ref,1,
+                         MPI_INT,MPI_MIN,
+                         MPI_Helpers::communicator_pt()->mpi_comm());
+           
+           // Overall min refinement level over all meshes
+           unsigned min_ref=unsigned(int_min_ref);
+           
+           // Refine as many times as required to get refinement up to
+           // uniform refinement level after last prune
+           unsigned nref=pruned_refinement_level[i_mesh]-min_ref;
            for (unsigned i=0;i<nref;i++)
             {             
              ref_mesh_pt->refine_uniformly();
@@ -13625,7 +13682,6 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
     }
    
    // Setup the map between "root" element and number in global mesh again
-   //setup_base_mesh_info();
    unsigned n_el=mesh_pt()->nelement();
    Base_mesh_element_pt.resize(n_el);
    Base_mesh_element_number_plus_one.clear();
@@ -13788,104 +13844,6 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
 
     }
 
-   // Now record actual distribution of elements in the order in which
-   //-----------------------------------------------------------------
-   // they appear in the non-distributed base mesh. This information
-   //----------------------------------------------------------------
-   // is to be returned by this function.
-   //------------------------------------
-  
-   // Distribution is reconstructed from the non-halo elements that are 
-   // still alive on each processor.
-   // (This slightly convoluted procedure is required because
-   // element_partition above still includes FaceElements at a refined
-   // level. NOTE: Again not sure if the acrobatics associated with
-   // possible FaceElements is still required in this form; see above.
-   Vector<int> local_actual_element_partition(n_element,0);
-   Vector<int> int_actual_element_partition(n_element,-1);
-   
-   // Loop over non-halo elements
-   unsigned my_rank=this->communicator_pt()->my_rank();
-   unsigned nel=mesh_pt()->nelement();
-   for (unsigned e=0;e<nel;e++)
-    {
-     GeneralisedElement* el_pt=mesh_pt()->element_pt(e);
-     if (!(el_pt->is_halo()))
-      {
-       FaceElement* face_el_pt=dynamic_cast<FaceElement*>(el_pt);
-       if (face_el_pt!=0)
-        {
-         // [If face element is non-halo associated bulk is also nonhalo]
-         FiniteElement* bulk_elem_pt=face_el_pt->bulk_element_pt();
-         unsigned e_bulk=Base_mesh_element_number_plus_one[bulk_elem_pt];
-#ifdef PARANOID
-         if (e_bulk==0)
-          {
-           throw OomphLibError("Base_mesh_element_number_plus_one[...]=0",
-                               "Problem::load_balance()",
-                               OOMPH_EXCEPTION_LOCATION);
-          }
-#endif
-         e_bulk-=1;
-         int face_index=face_el_pt->face_index();       
-         local_actual_element_partition[
-          face_element_number[e_bulk][face_index]]=my_rank;
-        }
-       else
-        {
-         unsigned e=Base_mesh_element_number_plus_one[el_pt];
-#ifdef PARANOID
-         if (e==0)
-          {
-           throw OomphLibError("Base_mesh_element_number_plus_one[...]=0",
-                               "Problem::load_balance()",
-                               OOMPH_EXCEPTION_LOCATION);
-          }
-#endif
-         e-=1;
-         local_actual_element_partition[e]=my_rank;
-        }
-      }
-    }
-
-   // Now collate by summing entries (remember they were initialised
-   // to zero -- clever!). This stores the actual element partition
-   // for each entry in a vector. If there are any "-1"s left in
-   // in the result, we've made a mistake...
-   MPI_Allreduce(&local_actual_element_partition[0],
-                 &int_actual_element_partition[0],n_element,
-                 MPI_INT,MPI_SUM,
-                 this->communicator_pt()->mpi_comm());
-
-
-   // (Recall that n_element refers to the total number of elements
-   // in the mesh before distribution)
-   actual_element_partition.resize(n_element);
-  
-   // Copy across, with optional error check
-   for (unsigned e=0;e<n_element;e++)
-    {
-#ifdef PARANOID
-     if (int_actual_element_partition[e]==-1)
-      {       
-       std::ostringstream error_stream;
-       error_stream 
-        << "Trouble: Negative partition number, most likely to be caused\n"
-        << "         by problems with flushed/re-attached FaceElement\n"
-        << "         meshes...\n";
-       throw OomphLibError(
-        error_stream.str(),
-        "Problem::load_balance()",
-        OOMPH_EXCEPTION_LOCATION);
-      }
-#endif
-     actual_element_partition[e]=int_actual_element_partition[e];
-    }
-   
-   // Clean up 
-   local_actual_element_partition.clear();
-   int_actual_element_partition.clear();
-   
    if (report_stats) 
     {
      t_distribute=TimingHelpers::timer();
@@ -13975,11 +13933,10 @@ Vector<unsigned> Problem::load_balance(DocInfo& doc_info,
 #endif
   }
 
- // Return the element partitioning for mesh produced by build_mesh().
- // (useful for restarts etc.)
- return actual_element_partition;
-
 }
+
+
+
 
 
 //==========================================================================
@@ -14979,7 +14936,7 @@ void Problem::get_data_to_be_sent_during_load_balancing(
  unsigned count_non_halo_el=0;
  unsigned n_elem=mesh_pt()->nelement();
  for (unsigned e=0;e<n_elem;e++)
-  {
+  { 
    GeneralisedElement* el_pt=mesh_pt()->element_pt(e);
    if (!el_pt->is_halo())
     {
@@ -15097,8 +15054,8 @@ void Problem::get_data_to_be_sent_during_load_balancing(
              max_refinement_level=level;
             }
           }
-         
         }
+
 #ifdef PARANOID
        // Root element has already been visited
        else
@@ -15119,10 +15076,29 @@ void Problem::get_data_to_be_sent_during_load_balancing(
           }
         }
 #endif
+
       }
     }
-  }        
+  }
 
+  
+#ifdef PARANOID
+ // Have we processed all target domains?
+ if (target_domain_for_local_non_halo_element.size()!=count_non_halo_el)
+  {
+   std::ostringstream error_message;
+   error_message 
+    << "Have processed " << count_non_halo_el << " of " 
+    << target_domain_for_local_non_halo_element.size() 
+    << " target domains for local non-halo elelemts. \n "
+    << "Very Odd -- we do (now) strip out the information for elements\n"
+    << "that are removed in actions_before_distribute()...\n";
+   throw OomphLibError(
+    error_message.str(),
+    "Problem::get_data_to_be_sent_during_load_balancing()",
+    OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
 
 
  // Determine max. refinement level and origin/destination scheme

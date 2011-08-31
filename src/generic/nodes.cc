@@ -417,14 +417,14 @@ void Data::dump(std::ostream& dump_file)
  //Find the amount of storage used
  const unsigned value_pt_range = nvalue();
  const unsigned time_steps_range = ntstorage();
-
+ 
  //Only write data if there is some stored
  if (value_pt_range*time_steps_range > 0)
   {
    dump_file << value_pt_range << " # number of data values" << std::endl;
    dump_file << time_steps_range << " # number of doubles for time history" 
-           << std::endl;
-
+             << std::endl;
+   
    // Write data
    for(unsigned t=0;t<time_steps_range;t++)
     {
@@ -442,11 +442,11 @@ void Data::dump(std::ostream& dump_file)
 void Data::read(std::ifstream& restart_file)
 {
  std::string input_string;
-
+ 
  //Find the amount of data stored 
  const unsigned value_pt_range = nvalue();
  const unsigned time_steps_range = ntstorage();
-
+ 
  //Only read in data if there is some storage available
  if (value_pt_range*time_steps_range > 0)
   {
@@ -463,7 +463,17 @@ void Data::read(std::ifstream& restart_file)
       << "Number of values stored in dump file is not equal to the amount "
       << "of storage allocated in Data object "
       <<  check_nvalues << " " << value_pt_range << std::endl;
-     
+     Node* nod_pt=dynamic_cast<Node*>(this);
+     if (nod_pt!=0)
+      {
+       unsigned n_dim=nod_pt->ndim();
+       error_stream << "Node coordinates: ";
+       for (unsigned i=0;i<n_dim;i++)
+        {
+         error_stream << nod_pt->x(i) << " ";
+        }
+       error_stream << std::endl;
+      }
      throw OomphLibError(error_stream.str(),
                          "Data::read()",
                          OOMPH_EXCEPTION_LOCATION);
@@ -475,7 +485,7 @@ void Data::read(std::ifstream& restart_file)
    restart_file.ignore(80,'\n');
    // Check # of values:
    const unsigned check_ntvalues=atoi(input_string.c_str());
-
+   
    // Dynamic run restarted from steady run
    if (check_ntvalues<time_steps_range)
     {
@@ -528,7 +538,7 @@ void Data::read(std::ifstream& restart_file)
      OomphLibWarning(warning_stream.str(),
                      "Data::read()",
                      OOMPH_EXCEPTION_LOCATION);
-
+     
      // Read data
      for(unsigned t=0;t<check_ntvalues;t++)
       {
@@ -561,6 +571,7 @@ void Data::read(std::ifstream& restart_file)
     }
   }
 }
+
 
 //===================================================================
 /// Return the total number of doubles stored per value to record

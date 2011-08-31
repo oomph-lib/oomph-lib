@@ -26,10 +26,7 @@
 //LIC// 
 //LIC//====================================================================
 // Driver for doubly adaptive 2D unsteady heat problem in moving domain
-// with restart and load balancing
-
-#include <fenv.h> 
-
+// with restart and load balancing and pruning all in one code
 
 //Generic routines
 #include "generic.h"
@@ -229,6 +226,7 @@ class RefineableUnsteadyHeatProblem : public Problem
 
 public:
 
+
  /// Constructor: Pass pointer to source function and timestep
  RefineableUnsteadyHeatProblem(
   UnsteadyHeatEquations<2>::UnsteadyHeatSourceFctPt source_fct_pt);
@@ -297,7 +295,7 @@ public:
  void delete_flux_elements(Mesh* const &surface_mesh_pt);
 
  /// Doc the solution
- void doc_solution();
+ void doc_solution(const std::string& comment="");
 
  /// Return DocInfo object
  DocInfo& doc_info(){return Doc_info;}
@@ -432,7 +430,7 @@ RefineableUnsteadyHeatProblem<ELEMENT>::RefineableUnsteadyHeatProblem(
  build_mesh();
 
  // Do equation numbering
- cout <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
+ oomph_info <<"Number of equations: " << assign_eqn_numbers() << std::endl; 
 
 } // end of constructor
 
@@ -475,7 +473,8 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::build_mesh()
  Bulk_mesh_pt->max_permitted_error()=0.001;
  Bulk_mesh_pt->min_permitted_error()=0.0001;
 
- // hierher need to do this in build_mesh()
+ // hierher need to do this in build_mesh() because it's supposed to
+ // get the problem into the state it was when it was distributed.
  Bulk_mesh_pt->refine_uniformly();
  Bulk_mesh_pt->refine_uniformly();
 
@@ -706,7 +705,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::set_initial_condition()
    // to continous time 
    time_pt()->time()=time;
    
-   cout << "setting IC at time =" << time << std::endl;
+   oomph_info << "setting IC at time =" << time << std::endl;
    
    // Update the mesh for this value of the continuous time
    // (The wall object reads the continous time from the same
@@ -820,7 +819,8 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::write_trace_file_header()
               <<  time_pt()->dt() << "; ";
    if (time_stepper_pt()->adaptive_flag())
     {
-     Trace_file << "adaptive; target error " << Epsilon_t << " \"" << std::endl;
+     Trace_file << "adaptive; target error " << Epsilon_t 
+                << " \"" << std::endl;
     }
    else
     {
@@ -836,7 +836,8 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::write_trace_file_header()
 /// Doc the solution
 //========================================================================
 template<class ELEMENT>
-void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution()
+void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution(const 
+                                                          std::string& comment)
 { 
  ofstream some_file;
  char filename[100];
@@ -845,11 +846,17 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution()
  unsigned npts;
  npts=5;
 
- cout << std::endl;
- cout << "=================================================" << std::endl;
- cout << "Docing solution " << Doc_info.number() << " for t=" 
-      << time_pt()->time() << " [ndof=" << ndof() << "\n";
- cout << "=================================================" << std::endl;
+ oomph_info << std::endl;
+ oomph_info << "=================================================" 
+            << std::endl;
+ oomph_info << "Docing solution " << Doc_info.number() << " for t=" 
+      << time_pt()->time() << " [ndof=" << ndof() << "]\n";
+ oomph_info << "=================================================" 
+            << std::endl;
+
+ // Doc halo schemes 
+ //-----------------
+ Bulk_mesh_pt->doc_mesh_distribution(this->communicator_pt(),Doc_info);
 
  // Output solution 
  //-----------------
@@ -858,7 +865,7 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::doc_solution()
  some_file.open(filename);
  Bulk_mesh_pt->output(some_file,npts);
  some_file << "TEXT X=2.5,Y=93.6,F=HELV,HU=POINT,C=BLUE,H=26,T=\"time = " 
-           << time_pt()->time() << "\"";
+           << time_pt()->time() << "; "<< comment << "\"";
  some_file << "GEOMETRY X=2.5,Y=98,T=LINE,C=BLUE,LT=0.4" << std::endl;
  some_file << "1" << std::endl;
  some_file << "2" << std::endl;
@@ -1070,7 +1077,6 @@ template<class ELEMENT>
 double RefineableUnsteadyHeatProblem<ELEMENT>::global_temporal_error_norm()
 {
 
-
 #ifdef OOMPH_HAS_MPI
 
  double global_error = 0.0;
@@ -1204,7 +1210,6 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::restart(ifstream& restart_file)
    oomph_info <<"restart file does not exist"<<endl;
   }
 
- 
  // Get next dt
  double next_dt=0.0;
  MPI_Allreduce(&local_next_dt,&next_dt,1,MPI_DOUBLE,MPI_MAX,
@@ -1217,14 +1222,17 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::restart(ifstream& restart_file)
  MPI_Allreduce(&local_doc_info_number,&doc_info_number,1,MPI_UNSIGNED,MPI_MAX,
                communicator_pt()->mpi_comm());
  Doc_info.number()=doc_info_number;
- oomph_info << "Next doc_info.number(): " << doc_info_number << std::endl;
+ oomph_info << "Restarted doc_info.number(): " << doc_info_number << std::endl;
  
- // Increment number for next solution
- Doc_info.number()++;
-
 
  // Refine the mesh and read in the generic problem data
  Problem::read(restart_file);
+ 
+ // Output restarted solution
+ std::stringstream comment_stream;
+ comment_stream << "Restarted; Step " 
+                << doc_info().number();
+ doc_solution(comment_stream.str());
 
 
 } // end of restart
@@ -1242,8 +1250,6 @@ void RefineableUnsteadyHeatProblem<ELEMENT>::restart(ifstream& restart_file)
 int main(int argc, char* argv[])
 {
 
- feenableexcept(FE_INVALID | FE_DIVBYZERO | FE_OVERFLOW );// | FE_UNDERFLOW);
-
 #ifdef OOMPH_HAS_MPI
  MPI_Helpers::init(argc,argv);
 #endif
@@ -1260,17 +1266,13 @@ int main(int argc, char* argv[])
  
  // Name of file that specifies the problem partitioning
  CommandLineArgs::specify_command_line_flag(
-  "--partitioning_file",
-  &GlobalParameters::Partitioning_file); 
+  "--partitioning_file",&GlobalParameters::Partitioning_file); 
 
-
- // Max number of load adaptation cycles
- unsigned ncycle=20; // hierher 
- CommandLineArgs::specify_command_line_flag("--ncycle",
-                                            &ncycle); 
-
- // Name of file that specifies the problem partitioning
+ // Flag to indicate that we're doing a validation run
  CommandLineArgs::specify_command_line_flag("--validation_run");
+
+ // Flag to indicate that we do load_balance first (before prune)
+ CommandLineArgs::specify_command_line_flag("--load_balance_first");
  
  // Parse command line
  CommandLineArgs::parse_and_assign(); 
@@ -1278,8 +1280,23 @@ int main(int argc, char* argv[])
  // Doc what has actually been specified on the command line
  CommandLineArgs::doc_specified_flags();
 
+  // Switch off output modifier
+ oomph_info.output_modifier_pt() = &default_output_modifier;
 
-  // Build problem: Pass pointer to source function and initial timestep
+ // Define processor-labeled output file for all on-screen stuff
+ std::ofstream output_stream;
+ char filename[100];
+ sprintf(filename,"RESLT/OUTPUT.%i",
+         MPI_Helpers::communicator_pt()->my_rank());
+ output_stream.open(filename);
+ oomph_info.stream_pt() = &output_stream;
+ OomphLibWarning::set_stream_pt(&output_stream);
+ OomphLibError::set_stream_pt(&output_stream);  
+
+ // Doc what has actually been specified on the command line
+ CommandLineArgs::doc_specified_flags();
+ 
+ // Build problem: Pass pointer to source function and initial timestep
  RefineableUnsteadyHeatProblem<RefineableQUnsteadyHeatElement<2,3> >
   problem(&GlobalParameters::get_source);
    
@@ -1305,15 +1322,20 @@ int main(int argc, char* argv[])
    max_adapt=1;
   }
  
+
+ // Prune first or load balance first?
+ unsigned first_load_balance=9;
+ unsigned second_load_balance=18;
+ unsigned first_prune=4;
+ unsigned second_prune=13;
+
  // Create storage for partitioning
- const unsigned n_element=problem.mesh_pt()->nelement();
- Vector<unsigned> element_partition(n_element);
+ Vector<unsigned> element_partition;
  
  // No partitioning specified -- simply distribute problem and
  // record distribution in file to allow restart
  if (!CommandLineArgs::command_line_flag_has_been_set("--partitioning_file"))
   {
-   
    oomph_info << "Distributing problem with METIS \n"
               << "Documenting partitioning in RESLT/partitioning.dat.\n";
    
@@ -1325,7 +1347,9 @@ int main(int argc, char* argv[])
    char filename[100];
    sprintf(filename,"RESLT/partitioning.dat");
    output_file.open(filename);
-   for (unsigned e=0;e<n_element;e++)
+   unsigned n=element_partition.size();
+   output_file << element_partition.size() << std::endl;
+   for (unsigned e=0;e<n;e++)
     {
      output_file << element_partition[e] << std::endl;
     }
@@ -1343,22 +1367,53 @@ int main(int argc, char* argv[])
    // as command line argument
    std::ifstream input_file;
    input_file.open(GlobalParameters::Partitioning_file.c_str());
-   std::string input_string;
-   for (unsigned e=0;e<n_element;e++)
+   if (!input_file.is_open())
     {
-     getline(input_file,input_string,'\n');
-     element_partition[e]=atoi(input_string.c_str());
-     oomph_info << "e: " << e << " [ " << input_string << " ] " << element_partition[e] << std::endl;
+     oomph_info << "Error opening input file\n";
+     assert(false);
+    }
+   std::string input_string;
+   unsigned n=0;
+   if (getline(input_file,input_string,'\n'))
+    {
+     n=atoi(input_string.c_str());
+    }
+   else
+    {
+     oomph_info << "Reached end of file when reading partitioning file\n";
+     assert(false);
+    }
+   element_partition.resize(n);
+   for (unsigned e=0;e<n;e++)
+    {
+     if (getline(input_file,input_string,'\n'))
+      {
+       element_partition[e]=atoi(input_string.c_str());
+      }
+     else
+      {
+       oomph_info << "Reached end of file when reading partitioning file\n";
+       assert(false);
+      }
     }
    
    // Now perform the distribution 
    problem.distribute(element_partition);
   }
 
- // Restart file specified via command line 
+
+ // Doc
+ std::stringstream comment_stream0;
+ comment_stream0 << "Distributed; Step " 
+                 << problem.doc_info().number();
+ problem.doc_solution(comment_stream0.str());
+ oomph_info << "Finished distribution\n";
+ 
+// Restart file specified via command line 
  if (CommandLineArgs::command_line_flag_has_been_set("--restart_file"))
   {
    problem.restart();
+   oomph_info << "Finished restart\n";
   }
 
  // Initial timestep: Use the one used when setting up the initial
@@ -1368,97 +1423,107 @@ int main(int argc, char* argv[])
  // Write header for trace file
  problem.write_trace_file_header();
  
- DocInfo mesh_doc_info;
- mesh_doc_info.set_directory("RESLT");
- 
- // Initial step number, following restart
- unsigned step0=problem.doc_info().number();
-
  // Timestepping loop
  if (CommandLineArgs::command_line_flag_has_been_set("--validation_run"))
   {
-   // Only do a single cycle for self test
-   ncycle=1;
-
    // Fake but repeatable load balancing for self-test
    problem.set_default_partition_in_load_balance();
   }
 
 
- for (unsigned i_cycle=0;i_cycle<ncycle;i_cycle++)
+ // Keep solving...
+ while (problem.doc_info().number()<22)  
   {
-   unsigned max_step=10;
-   for (unsigned i=step0;i<max_step;i++)
+   
+   oomph_info << "Doing solve\n";
+   
+   // Take timestep with temporal and spatial adaptivity
+   double dt_new=
+    problem.doubly_adaptive_unsteady_newton_solve(dt,problem.epsilon_t(),
+                                                  max_adapt,first);
+   oomph_info << "Suggested new dt: " << dt_new << std::endl;
+   dt=dt_new;
+   
+   // Store for restart
+   problem.next_dt()=dt;
+   
+   // Now we've done the first timestep -- don't re-set the IC
+   // in subsequent steps
+   first=false;
+   
+   // Reduce the number of spatial adaptations to one per 
+   // timestep -- too scared that the interpolation error will 
+   // wipe out any further gains...
+   max_adapt=1;
+   
+   //Output solution
+   std::stringstream comment_stream;
+   comment_stream << "Step " << problem.doc_info().number();
+   problem.doc_solution(comment_stream.str());
+   
+   // Prune
+   if ((problem.doc_info().number()==first_prune)||
+       (problem.doc_info().number()==second_prune))
     {
-     // Take timestep with temporal and spatial adaptivity
-     double dt_new=
-      problem.doubly_adaptive_unsteady_newton_solve(dt,problem.epsilon_t(),
-                                                    max_adapt,first);
-     cout << "Suggested new dt: " << dt_new << std::endl;
-     dt=dt_new;
-     
-     // Store for restart
-     problem.next_dt()=dt;
-     
-     // Now we've done the first timestep -- don't re-set the IC
-     // in subsequent steps
-     first=false;
-     
-     // Reduce the number of spatial adaptations to one per 
-     // timestep -- too scared that the interpolation error will 
-     // wipe out any further gains...
-     max_adapt=1;
-     
-     //Output solution
-     problem.doc_solution();
-     
-     // Load balance?
-     if (i==5) 
+     std::stringstream comment_stream1;
+     if ((problem.doc_info().number()==second_prune)||
+         ((problem.doc_info().number()==first_prune)&&
+          (!CommandLineArgs::command_line_flag_has_been_set(
+            "--load_balance_first"))))
       {
-       cout << "\n\n\n LOAD BALANCING \n\n\n";
-       
-       // Output problem before load balance
-       {
-        unsigned backup_number=problem.doc_info().number();
-        problem.doc_info().number()--;
-        oomph_info << "Outptting before load balance " 
-                   << problem.doc_info().number() << std::endl;
-        problem.doc_info().set_directory("RESLT_after_load_balance");
-        problem.doc_solution();
-        problem.doc_info().number()=backup_number;
-        problem.doc_info().set_directory("RESLT");
-       }
-
-       // Load balance
-       element_partition=problem.load_balance(); 
-
-       // Write partition to disk
-       std::ofstream output_file;
-       char filename[100];
-       sprintf(filename,"RESLT/load_balanced_partitioning.dat");
-       output_file.open(filename);
-       unsigned nel=element_partition.size();
-       for (unsigned e=0;e<nel;e++)
-        {
-         output_file << element_partition[e] << std::endl;
-        }
-       output_file.close();
-       
-       // Output problem after load balance
-       unsigned backup_number=problem.doc_info().number();
-       problem.doc_info().set_directory("RESLT_after_load_balance");
-       problem.doc_solution();
-       problem.doc_info().number()=backup_number;
-       problem.doc_info().set_directory("RESLT");
-
-
-       cout << "\n\n\n DONE LOAD BALANCING \n\n\n";
+       oomph_info << "Refining uniformly before pruning\n";
+       problem.refine_uniformly();       
+       comment_stream1 << "Uniform refinement; Step " 
+                       << problem.doc_info().number();
       }
+     else
+      {
+       comment_stream1 << "Skipped uniform refinement; Step " 
+                       << problem.doc_info().number();
+      }
+     problem.doc_solution(comment_stream1.str());
+
+     std::stringstream comment_stream2;
+     if ((problem.doc_info().number()==second_prune+1)||
+         ((problem.doc_info().number()==first_prune+1)&&
+          (!CommandLineArgs::command_line_flag_has_been_set(
+            "--load_balance_first"))))
+      {
+       oomph_info << "Pruning\n";
+       problem.prune_halo_elements_and_nodes();
+       comment_stream2 << "Pruned; Step " 
+                       << problem.doc_info().number();
+      }
+     else
+      {
+       comment_stream2 << "Skipped prune; Step " 
+                       << problem.doc_info().number();
+      }
+     problem.doc_solution(comment_stream2.str());
     }
-   // Done one cycle, now just continue
-   step0=0;
+   
+   
+   
+   // Load balance?
+   if ((problem.doc_info().number()==first_load_balance)||
+       (problem.doc_info().number()==second_load_balance))
+    {
+     oomph_info << "\n\n\n LOAD BALANCING \n\n\n";
+     
+     // Load balance
+     problem.load_balance(); 
+     
+     std::stringstream comment_stream3;
+     comment_stream3 << "Load balanced; Step " 
+                     << problem.doc_info().number();
+     problem.doc_solution(comment_stream3.str());
+     
+     
+     oomph_info << "\n\n\n DONE LOAD BALANCING \n\n\n";
+    }
   }
 
+ oomph_info << "Done\n";
 #ifdef OOMPH_HAS_MPI
  MPI_Helpers::finalize();
 #endif

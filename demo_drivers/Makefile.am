@@ -9,6 +9,7 @@ poisson \
 unsteady_heat \
 advection_diffusion \
 helmholtz \
+time_harmonic_linear_elasticity \
 spherical_advection_diffusion \
 steady_axisym_advection_diffusion \
 navier_stokes \
