@@ -9714,14 +9714,6 @@ void Problem::dump(std::ofstream& dump_file)
    base_element_processor=local_base_element_processor;
   }
  
-
-// hierher
-//#else
-// 
-// // All the same...
-// base_element_processor=local_base_element_processor;
-// 
-
  
  dump_file << n << " # Number of base elements; partitioning follows.\n";
  for (unsigned e=0;e<n;e++)
@@ -10116,14 +10108,6 @@ void Problem::read(std::ifstream& restart_file, bool& unsteady_restart)
    MPI_Allreduce(&local_load_balance_required_flag,
                  &load_balance_required_flag,1,
                  MPI_UNSIGNED,MPI_MAX,this->communicator_pt()->mpi_comm());
-
-
-//#else   
-//
-//   // Never get here but this is what we'd do if we did...
-//   load_balance_required_flag=local_load_balance_required_flag;
-//   
-//#endif
    
  }
  
