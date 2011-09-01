@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 #
 # Copyright (C) 2007- Angelo Simone (TU Delft)
 # Licensed under the GNU LGPL Version 2.1
@@ -8,8 +8,6 @@
 #
 #
 # Created on 20070905
-#
-# Last revision by AS on 20080514	
 # Last revision by Jeremy CHU VAN on 20110708
 # 
 # Report bugs to a.simone@tudelft.nl
@@ -20,41 +18,99 @@
 # -- usage string and function
 usagestr="\n
 NAME\n
-\tmakePvd - generate a PVD XML file with a collection of VTU files\n
+\tmakePvd - generate a PVD XML file from a collection of VTU files\n
+\tto allow the files to be animated in paraview.\n
 \n
 \n
 SYNOPSIS\n
-\tmakePvd [OPT] basename output.pvd \n
+\tmakePvd [NPROC] basename output.pvd \n
 \n
 \n
-\tOPT: number of process (only if multiple) \n
+\tNPROC: number of processes in a parallel computation \n
 \n
 \n
 TYPICAL USAGE EXAMPLES\n
 \n
 \n
-\tNo option: \n
+\tAssuming that the oomph-lib output files (in tecplot format) have been \n
+\tconverted to vtu files (using the oomph-convert script),  pvd \n
+\tfiles can be created as follows: \n\n
 \n
-\t1) for filenames like plot.out001.vtu, plot.out002.vtu... type\n
-\tmakePvd plot.out myplot.pvd  \t -> generate myplot.pvd\n \v
-\t2) for filenames like soln0.vtu soln1.vtu soln2.vtu... type\n
-\tmakePvd  soln mysoln.pvd \t  -> generate mysoln.pvd\n
+\tData from serial computations: \n
+\t------------------------------ \n
+\n
+\t   For data files from a serial computation where separate files\n
+\t   represent, e.g., results at different time steps, where the filenames\n
+\t   have the format such as \n\n
+\t \t   plot001.vtu \n
+\t \t   plot002.vtu \n
+\t \t   plot003.vtu \n
+\t \t \t     :       \n \n
+\t \t   plot009.vtu \n
+\t \t   plot010.vtu \n
+\t \t   plot011.vtu \n
+\t \t \t     :        \n \n
+\t   (i.e. a stem, (here \"plot\"), followed by a padded number \n
+\t   and the \".vtu\" suffix), the pvd file can be generated with \n\n
+\t \t makePvd [stem] myplot.pvd  \n\n 
+\t So for the files listed above we would use the command\n\n
+\t \t makePvd plot myplot.pvd  \n\n 
+\t   which generates the file myplot.pvd\n \v
+\tNote that the numbers do not have to be padded, so files whose names \n
+\thave the format\n\n
+\t \t   plot1.vtu \n
+\t \t   plot2.vtu \n
+\t \t   plot3.vtu \n
+\t \t \t     :        \n \n
+\t \t   plot9.vtu \n
+\t \t   plot10.vtu \n
+\t \t   plot11.vtu \n
+\t \t \t     :        \n \n
+\t can be processed using the same command as above. However, \n 
+\t the combined pvd file will then contain the data in lexicographic\n
+\t order (e.g.  plot1.vtu,  plot10.vtu,  plot11.vtu, ..., plot19.vtu,\n
+\t plot2.vtu, plot20.vtu , plot21.vtu, ...) which is likely to create\n
+\t an odd animation... To create vtu files with padded enumeration \n
+\t from non-padded data files, use the -z option in the oomph-convert \n
+\t script. \n
 \n
 \n
-\tWith option (2 here for example): \n
+\tData from parallel computations: \n
+\t--------------------------------\n
 \n
-\t1) for filenames like plot_proc0_001.vtu,plot_proc0_002.vtu ... type\n
-\tmakePvd 2 plot_ myplot.pvd  \t -> generate myplot.pvd\n 
+\t oomph-lib typically outputs results from parallel (distributed) \n
+\t computations on a processor-by-processor basis, resulting in filenames \n
+\t of the form\n\n
+\t solid_soln_proc0_00000.vtu \t \t \ \n
+\t solid_soln_proc1_00000.vtu \t \t | \n
+\t \t : \t \t \t \t |  Data for timestep 0 \n
+\t solid_soln_proc[NPROC-1]_00000.vtu \t / \n
+\t \t \n \n
+\t solid_soln_proc0_00001.vtu  \t \t \ \n
+\t solid_soln_proc1_00001.vtu  \t \t | \n
+\t \t : \t \t \t \t |  Data for timestep 1 \n
+\t solid_soln_proc[NPROC-1]_00001.vtu,  \t /\n \n
+\t \t : \n \n
+\t where NPROC is the number of processors. An animation of such data \n
+\t obviously requires the output from different processors (but for the \n
+\t the same timestep) to be combined. Provided, the filenames have \n
+\t the pattern \n \n
+\t \t [stem]proc[processor_number]_[timestep_number].vtu \n\n
+\t (note the \"proc\" and \"_\", both of which are required), the pvd file \n
+\t can be generated with \n \n
+\t \t makePvd [NPROC] [stem] myplot.pvd  \n\n 
+\t So, for the files listed above, to produce a pvd file that \n
+\t contains data from a computation with four processors the command\n\n
+\t \t makePvd 4  solid_soln_ solid_soln.pvd  \n\n 
+\t would create the file solid_soln.pvd from which paraview \n
+\t can create an animation of the solution. \n
 \n
-\v
-NOTE\n
-\t The PVD XML file can be used by Paraview to generate an animation"
+\v"
 
 usage() {
   echo -e $usagestr
   exit 1
 }
-
 
 # -- check for correct usage and assign variables
 if [ $# -eq 3 ]; then
@@ -67,18 +123,13 @@ if [ $# -eq 3 ]; then
     echo "<?xml version="'"1.0"'"?>"> $pvdfile
     echo "<VTKFile type="'"Collection"'" version="'"0.1"'">">> $pvdfile
     echo "<Collection>">> $pvdfile
- 
-
-
-
-   
-
-    for ((j=0;j<$nbproc;j++))
+    
+    for ((jj=0;$jj<$nbproc;jj++))
     do 
 	ii=1
-	for file in $basefile'proc'$j'_'*.vtu
+	for file in $basefile'proc'$jj'_'*.vtu
 	do 
-	    echo "<DataSet timestep= "'" '$ii' "'" part="'" '$j' "'" file="'"'$file'"'"/>" >> $pvdfile
+	    echo "<DataSet timestep= "'" '$ii' "'" part="'" '$jj' "'" file="'"'$file'"'"/>" >> $pvdfile
 	    ii=$(($ii+1))
 	done
     done

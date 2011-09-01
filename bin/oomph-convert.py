@@ -16,7 +16,7 @@
 #
 # Scan the script for "Assumption" and "Note"
 #
-################################################################################
+###############################################################################
 # CHANGELOG
 #
 # 20070905: Angelo Simone
@@ -27,16 +27,14 @@
 #           - 3d quad meshes support added
 #           - Trailing zeros option improved (do not rename the file afterward)
 #
-# 20110531: Jeremy Chu Van
-#           - Can treat 1d, 2d, 3d elements (line, quad, hexaedron) in the same 2d/3d mesh
-#
 # 20110610: Angelo Simone
 #           - Added support for triangle and tetrahedral meshes
 #
 # 20110615: Jeremy Chu Van
-#           - Added point-only exctraction (if there are non implemented zones or an invalid output file)
+#           - Added point-only extraction (if there are zones that cannot
+#             be handled or an invalid file)
 #
-################################################################################
+###############################################################################
 
 import getopt
 import string
@@ -45,7 +43,7 @@ import time
 from commands import getoutput
 
 #
-################################################################################
+###############################################################################
 #
 
 def usage():
@@ -87,7 +85,7 @@ TYPICAL USAGE EXAMPLES
         oomph-convert.py -p -z soln.dat                    -> generate soln00000.vtp"""
 
 #
-################################################################################
+###############################################################################
 #
 
 def main(argv):
@@ -901,6 +899,12 @@ class InputPoints():
 
     @staticmethod
     def parse(file, line, dim): 
+
+        #-----------------------------------------------------------------------
+        # Create the point
+        #-----------------------------------------------------------------------
+        point = InputPoints()
+
         #-----------------------------------------------------------------------
         # Seek to the next point
         #-----------------------------------------------------------------------
@@ -919,21 +923,14 @@ class InputPoints():
                     ispoint=0
                     break
             if lg > 3 and ispoint > 0:
-                # We got a point !
-                break
+                #Read the line
+                values = list()
+                values = pointline.strip().split(" ")
+                if len(values) > dim:
+                    # We got a point !
+                    break
 
-        #-----------------------------------------------------------------------
-        # Create the point
-        #-----------------------------------------------------------------------
-        point = InputPoints()
         
-        #Read the line
-        values = list()
-        values = pointline.strip().split(" ")
-
-        if len(values) < dim:
-            raise TecplotParsingError("Invalid zone", "not enough values for this node !", line)
-
         #Stores values
         for i, value in enumerate(values):
             try:

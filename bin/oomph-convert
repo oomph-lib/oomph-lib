@@ -19,6 +19,9 @@ usagestr="\n
 NAME\n
 \toomph-convert - wrapper to oomph-converter.py for converting from oomph-lib tecplot format to VTK XML\n
 \n
+\n Make sure that the directory that contains this script is in the path
+\n because it contains other helper scripts.
+\n 
 \n
 SYNOPSIS\n
 \toomph-convert [OPTIONS] [input_file.dat] \n
@@ -91,8 +94,10 @@ if [ $dimflag -eq 0 ] ; then
 	echo  
 	echo  
 	echo -- Processing $filename
-    # Remove everything after first "." in filename, "." included
+        # Remove everything after first "." in filename, "." included
 	filenametrunc=${filename%\.*} 
+        # Assume that this lives in the bin directory (or some other
+        # directory that's in the path...
 	oomph-convert.py $zeroflag $filename $filenametrunc.vtu
 	shift
     done
@@ -103,8 +108,11 @@ else
 	echo  
 	echo  
 	echo -- Processing $filename
-    # Remove everything after first "." in filename, "." included
+         # Remove everything after first "." in filename, "." included
 	filenametrunc=${filename%\.*} 
+
+        # Assume that this lives in the bin directory (or some other
+        # directory that's in the path...
 	oomph-convert.py $zeroflag $pointflag$dimflag $filename $filenametrunc.vtp
 	shift
     done
