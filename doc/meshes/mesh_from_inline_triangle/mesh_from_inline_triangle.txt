@@ -56,7 +56,7 @@ distinct \c TriangleMeshPolyLines, each with its own boundary ID.
 This is because every \c Node can only have a single-valued boundary
 coordinate, and so if boundary is closed there will be a discontinuity
 in the coordinate value. (For example, a standard representation 
-would have \f$\zeta = [0,\2pi]\f$, but the node at 
+would have \f$\zeta = [0,2\pi]\f$, but the node at 
 \f$\zeta=0\f$ should also have \f$\zeta=2\pi\f$ and this is not possible.)
 Thus, \c oomph-lib will not be able to refine automatically 
 along the boundary unless it is split in two.

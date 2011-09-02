@@ -521,6 +521,10 @@ namespace oomph
            }
          }
        }
+      else
+       {
+        return_element_domain=element_domain;
+       }
 
       if (Doc_time_in_distribute)
        {

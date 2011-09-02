@@ -343,7 +343,7 @@ The trick is to specify the \c using option in
 plot commands -- in this mode 
 <A HREF="http://www.gnuplot.info">gnuplot</A> 
 ignores tecplot's "ZONE" commands.
-<a href="http://www.mechanics.citg.tudelft.nl/~simone/"><B>Angelo 
+<a href="http://cm.strumech.citg.tudelft.nl/simone/"><B>Angelo 
 Simone</B></a> wrote python scripts that convert \c oomph-lib's
 output to the vtu format that can be read by 
 <a href="http://www.paraview.org/New/index.html">paraview</a>;
@@ -361,6 +361,29 @@ The \c oomph-lib "architects" are (in no particular order)
 collaborators who made 
 (or are still making) signficant contributions to the development of
 the library (listed in reverse chronological order):
+- \b Nico \b Bergemann made (and continues to make) significant
+  contributions to the adaptive unstructured mesh (re-)generation
+  capabilities for free-surface problems.
+- \b Peter \b Ashcroft worked on eigenvalue problems. 
+- \b Jeremy \b van \b Chu contributed to the completion the tecplot to paraview
+   conversion scripts and signficiantly extended the 
+   <a href="../paraview/html/index.html">the paraview tutorial.</a>
+   He also developed the \c LineVisualiser machinery (which allows
+   the extraction of computational data along lines in a
+   higher-dimensional domain) and wrote the domain-based tube mesh.
+- \b Guilherme \b Rocha developed elements to simulate Hele-Shaw 
+  problems (by solving the free-surface Reynolds lubrication
+  equations).
+- \b Ahmed \b Wassfi extended \b Tarak \b Kharrat's work on the Helmholtz
+  equation and implemented the Fourier-decomposed version of this
+  equation.
+- \b Alexandre \b Raczynski keeps providing bug fixes and contributed 
+   to the completion the tecplot to paraview conversion scripts
+   discussed in the <a href="../paraview/html/index.html">the 
+   paraview tutorial.</a>
+- \b David \b Rutter wrote the 
+   <a href="../linear_elasticity/periodic_load/html/index.html">
+   tutorial for the linear elasticity equations.</a>
 - \b Tarak \b Kharrat implemented the Helmholtz elements and the
   methodology to apply the Sommerfeld radiation condition.
 - \b Luigi \b Collucci continued Benjamin Metz's work and developed the
@@ -377,7 +400,7 @@ the library (listed in reverse chronological order):
 - <a href="http://www.maths.man.ac.uk/~agait/"><B>Andy Gait</B></a>
   worked on parallelisation, in particular
   the problem distribution and the subsequent distributed mesh adaptation.
-- <a href="http://www.mechanics.citg.tudelft.nl/~simone/"><B>Angelo 
+- <a href="http://cm.strumech.citg.tudelft.nl/simone/"><B>Angelo 
   Simone</B></a> wrote python scripts that convert \c oomph-lib's
   output to the vtu format that can be read by 
   <a href="http://www.paraview.org/New/index.html">paraview</a>;
