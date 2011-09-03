@@ -1099,7 +1099,8 @@ namespace oomph
       actions_after_distribute();
   
       // Re-assign the equation numbers (incl synchronisation if reqd)
-      unsigned n_dof=assign_eqn_numbers();
+      unsigned n_dof;
+      n_dof=assign_eqn_numbers();
       
 #ifdef PARANOID
       if (n_dof!=old_ndof)
@@ -5603,6 +5604,12 @@ void Problem::parallel_sparse_assemble
  //Locally cache pointer to assembly handler
  AssemblyHandler* const assembly_handler_pt = Assembly_handler_pt;
    
+ bool doing_residuals=false;
+ if (dynamic_cast<ParallelResidualsHandler*>(Assembly_handler_pt)!=0)
+  {
+   doing_residuals=true;
+  }
+
 //Error check dimensions
 #ifdef PARANOID
  if(row_start.size() != n_matrix)
@@ -5959,10 +5966,39 @@ void Problem::parallel_sparse_assemble
 
  
  double t_end=TimingHelpers::timer();
- oomph_info << "CPU for local Jacobian/residual computation          : "
-            << t_end-t_start << std::endl;
+ double t_local=t_end-t_start;
+ double t_max=0.0;
+ double t_min=0.0;
+ double t_sum=0.0;
+ MPI_Allreduce(&t_local,&t_max,1,
+               MPI_DOUBLE,MPI_MAX,
+               this->communicator_pt()->mpi_comm());
+ MPI_Allreduce(&t_local,&t_min,1,
+               MPI_DOUBLE,MPI_MIN,
+               this->communicator_pt()->mpi_comm());
+ MPI_Allreduce(&t_local,&t_sum,1,
+               MPI_DOUBLE,MPI_SUM,
+               this->communicator_pt()->mpi_comm());
+ double imbalance=(t_max-t_min)/(t_sum/double(nproc))*100.0;
+ 
+ if (doing_residuals)
+  {
+   oomph_info 
+    << "CPU for residual computation (loc/max/min/imbal): ";
+  }
+ else
+  {
+   oomph_info 
+    << "CPU for Jacobian computation (loc/max/min/imbal): ";
+  }
+ oomph_info
+  << t_local << " " 
+  << t_max << " " 
+  << t_min << " " 
+  << imbalance << "%\n";
+ 
  t_start=TimingHelpers::timer();
-
+ 
 
  // next we compute the number of equations and number of non-zeros to be
  // sent to each processor, and send/recv that information
@@ -6657,8 +6693,35 @@ void Problem::parallel_sparse_assemble
 
 
  t_end=TimingHelpers::timer();
- oomph_info << "CPU for distribution in Jacobian/residual computation: "
-            << t_end-t_start << std::endl;
+ t_local=t_end-t_start;
+ t_max=0.0;
+ t_min=0.0;
+ t_sum=0.0;
+ MPI_Allreduce(&t_local,&t_max,1,
+               MPI_DOUBLE,MPI_MAX,
+               this->communicator_pt()->mpi_comm());
+ MPI_Allreduce(&t_local,&t_min,1,
+               MPI_DOUBLE,MPI_MIN,
+               this->communicator_pt()->mpi_comm());
+ MPI_Allreduce(&t_local,&t_sum,1,
+               MPI_DOUBLE,MPI_SUM,
+               this->communicator_pt()->mpi_comm());
+ imbalance=(t_max-t_min)/(t_sum/double(nproc))*100.0;
+ if (doing_residuals)
+  {
+   oomph_info 
+    << "CPU for residual distribut.  (loc/max/min/imbal): ";
+  }
+ else
+  {
+   oomph_info 
+    << "CPU for Jacobian distribut.  (loc/max/min/imbal): ";
+  }
+ oomph_info
+  << t_local << " " 
+  << t_max << " " 
+  << t_min << " " 
+  << imbalance << "%\n";
 
 }
 #endif
