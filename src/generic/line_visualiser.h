@@ -525,12 +525,20 @@ namespace oomph
       if (!file_input)
        {
         std::ostringstream error_message;
-        error_message << "Cannot open file\n";
+        error_message << "Cannot open file " << file_name << "\n";
         throw OomphLibError(error_message.str(),
                             "LineVisualiser::LineVisualiser()",
                             OOMPH_EXCEPTION_LOCATION);
        }
-    
+      if (!file_input.is_open())
+       {
+        std::ostringstream error_message;
+        error_message << "Cannot open file " << file_name << "\n";
+        throw OomphLibError(error_message.str(),
+                            "LineVisualiser::LineVisualiser()",
+                            OOMPH_EXCEPTION_LOCATION);
+       }
+      
       // Declaration of variables
       std::string line; 
       Vector<Vector<double> > coord_vec_tmp; // Coord array

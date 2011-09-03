@@ -56,6 +56,17 @@ namespace oomph
   unsigned n_element;
   unsigned n_bound_face;
  
+  if (!infile.is_open())
+   {
+    std::ostringstream error_stream;
+    error_stream  
+     << "Failed to open " << xda_file_name 
+     << "\n";
+    throw OomphLibError(error_stream.str(),
+                        "XdaTetMesh::XdaTetMesh()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  
   // Dummy storage to jump lines
   char dummy[101];
     
