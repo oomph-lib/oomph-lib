@@ -3273,6 +3273,8 @@ public:
  /// \short Pointer to object that specifies the initial condition
  SolidInitialCondition* Solid_ic_pt;
 
+  public:
+
  /// \short Access function that returns the local equation number that
  /// corresponds to the j-th coordinate of the k-th position-type at the 
  /// n-th local node.

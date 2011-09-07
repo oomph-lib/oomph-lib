@@ -389,8 +389,6 @@ namespace oomph
 //====================================================================
 template<class ELEMENT>
 class UnstructuredFluidProblem : public Problem
-// public virtual ProjectionProblem<ELEMENT>
-
 {
 
 public:
@@ -460,6 +458,9 @@ public:
  /// Actions after adapt: Rebuild the mesh of Lagrange multiplier elements
  void actions_after_adapt()
   {
+   //Reassign the lagrangian coordinates (an updated lagrangian approach)
+   Fluid_mesh_pt->set_lagrangian_nodal_coordinates();
+
    // Create the elements that impose the displacement constraint 
    create_lagrange_multiplier_elements();
    

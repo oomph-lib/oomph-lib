@@ -340,7 +340,6 @@ template<class BASIC, class SOLID>
     }
   }
 
-
  
  ///Overload the output function: Call that of the basic element
  void output(std::ostream &outfile) {BASIC::output(outfile);}
@@ -356,6 +355,29 @@ template<class BASIC, class SOLID>
  ///Output function is just the same as the basic equations
  void output(FILE* file_pt, const unsigned &n_p)
   {BASIC::output(file_pt,n_p);}
+
+ /// \short Number of 'flux' terms for Z2 error estimation: Error estimation
+ /// is based on error in BASIC element
+ unsigned num_Z2_flux_terms() {return BASIC::num_Z2_flux_terms();}
+ 
+ /// 'Flux' vector for Z2 error estimation: Error estimation
+ /// is based on error in BASIC element
+ void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
+  {
+   BASIC::get_Z2_flux(s,flux);
+  }
+
+ /// \short Number of vertex nodes in the element
+ unsigned nvertex_node() const
+  {return BASIC::nvertex_node();}
+
+ /// \short Pointer to the j-th vertex node in the element
+ Node* vertex_node_pt(const unsigned& j) const
+  {return BASIC::vertex_node_pt(j);}
+
+ /// \short Order of recovery shape functions for Z2 error estimation: Done
+ /// for BASIC element since it determines the refinement
+ unsigned nrecovery_order() {return BASIC::nrecovery_order();}
 
 
  /// \short The number of "blocks" that degrees of freedom in this element

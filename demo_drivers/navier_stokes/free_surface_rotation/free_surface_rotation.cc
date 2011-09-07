@@ -292,6 +292,10 @@ public:
             dynamic_cast<FluidInterfaceBoundingElement*>
              (interface_edge_element_pt)->
              set_contact_angle(&Global_Physical_Variables::Angle);
+            //and pass the capillary number
+            dynamic_cast<FluidInterfaceBoundingElement*>
+             (interface_edge_element_pt)->ca_pt() = 
+             &Global_Physical_Variables::Ca;
            }
           } //End of final layer stuff
         }

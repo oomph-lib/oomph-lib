@@ -427,6 +427,11 @@ void get_wind_spherical_adv_diff(const unsigned& ipt,
    // Get vector that indicates the direction of gravity from
    // the Navier-Stokes equations
    Vector<double> gravity(SphericalNavierStokesEquations::g());
+
+   // This is for the eye problem
+   //gravity[0] = -cos(x[1]);
+   //gravity[1] = sin(x[1]);
+   //gravity[2] = 0.0;
    
    // Temperature-dependent body force:
    for (unsigned i=0;i<3;i++)
@@ -573,7 +578,12 @@ void get_wind_spherical_adv_diff(const unsigned& ipt,
      double r2 = r*r;
      double sin_theta = sin(theta);
 
-     
+     //Overwrite gravity for the eye problem
+     //gravity[0] = -cos(theta);
+     //gravity[1] = sin(theta);
+     //gravity[2] = 0.0;
+
+
      //Assemble the Jacobian terms
      //---------------------------
      

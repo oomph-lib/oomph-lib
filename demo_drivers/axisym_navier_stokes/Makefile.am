@@ -6,7 +6,8 @@ torus \
 single_layer_free_surface_axisym \
 two_layer_interface_axisym \
 rayleigh_instability \
-fibre 
+fibre \
+counter_rotating_disks
 
 if SUPPRESS_TRIANGLE_LIB
 else

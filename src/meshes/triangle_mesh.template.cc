@@ -2188,23 +2188,6 @@ namespace oomph
     // Delete the mesh and the problem
     delete new_mesh_pt;
     delete project_problem_pt;
-
-    // Solid mesh?
-    if (solid_mesh_pt!=0)
-     {
-      // Warning
-      std::stringstream error_message;
-      error_message 
-       << "Lagrangian coordinates are currently not projected but are\n"
-       << "are re-set during adaptation. This is not appropriate for\n"
-       << "real solid mechanics problems!\n";
-      OomphLibWarning(error_message.str(),
-                      "RefineableTriangleMesh::adapt()",
-                      OOMPH_EXCEPTION_LOCATION);
-      
-      // Reset Lagrangian coordinates
-      dynamic_cast<SolidMesh*>(this)->set_lagrangian_nodal_coordinates();
-     }
     
     double max_area;
     double min_area;

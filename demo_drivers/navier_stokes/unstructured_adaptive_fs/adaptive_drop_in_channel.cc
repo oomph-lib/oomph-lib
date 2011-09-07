@@ -473,6 +473,10 @@ public:
  /// Actions after adapt: Rebuild the mesh of free surface elements
  void actions_after_adapt()
   {
+   //Reset the Lagrangian coordinates of the nodes to be the current
+   //Eulerian coordinates (an updated Lagrangian approach)
+   Fluid_mesh_pt->set_lagrangian_nodal_coordinates();
+
    // Create the elements that impose the displacement constraint 
    create_volume_constraint_elements();
    create_free_surface_elements();

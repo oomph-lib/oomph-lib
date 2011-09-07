@@ -13,5 +13,6 @@ three_d_traction \
 pseudo_solid_collapsible_channel \
 vmtk_solid \
 unstructured_solid \
-unstructured_three_d_solid
+unstructured_three_d_solid \
+unstructured_adaptive_solid
 

@@ -90,18 +90,10 @@
 # to have been compiled with mpi support. 
 --enable-MPI
 --enable-symbolic-links-for-headers
---with-blacs=/home/mheil/local/lib/blacs_with_copy
---with-scalapack=/home/mheil/local/lib/scalapack/libscalapack.a
---with-pord=/home/mheil/local/lib/pord/libpord.a 
---with-mumps=/home/mheil/local/mumps
---with-blas=/home/mheil/local/lib/blas/blas.a
---with-lapack=/home/mheil/local/lib/lapack/lapack.a
---with-hypre=/home/mheil/local/hypre_default_installation_mpi
---with-trilinos=/home/mheil/local/trilinos_default_installation_mpi
 --with-mpi-self-tests="mpirun -np 2"
-CXXFLAGS="-O6 -Wall"
-CFLAGS="-O6"
-FFLAGS="-O6"
+CXXFLAGS="-O3 -Wall"
+CFLAGS="-O3"
+FFLAGS="-O3"
 CXX=mpic++
 CC=mpicc
 F77=mpif77

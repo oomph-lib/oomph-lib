@@ -598,6 +598,10 @@ void UnstructuredImmersedEllipseProblem<ELEMENT>::actions_before_adapt()
 template<class ELEMENT>
 void UnstructuredImmersedEllipseProblem<ELEMENT>::actions_after_adapt()
 {
+ //Reset the lagrangian coordinates for the solid mechanics
+ //an updated lagrangian approach
+ Fluid_mesh_pt->set_lagrangian_nodal_coordinates();
+
  // Create the elements that impose the displacement constraint 
  create_lagrange_multiplier_elements();
  

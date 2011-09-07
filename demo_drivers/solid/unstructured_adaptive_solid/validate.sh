@@ -1,71 +1,56 @@
 #! /bin/sh
 
+exit
 
 #Set the number of tests to be checked
-NUM_TESTS=2
+NUM_TESTS=3
 
 # Setup validation directory
 #---------------------------
-touch Validation
-rm -r -f Validation
+rm -rf Validation
 mkdir Validation
 
-# Validation for unstructured drop
-#---------------------------------
+#######################################################################
+
+# Validation for static fish deformation
+#---------------------------------------
+
 cd Validation
+mkdir RESLT RESLT_pres_disp RESLT_pres_disp_incomp
 
-echo "Running 2D unstructured adaptive drop in channel validation" 
-mkdir RESLT
+echo "Running unstructured adaptive solid validation "
+../unstructured_adaptive_solid > OUTPUT_adaptive_solid
 
-../adaptive_drop_in_channel --validation > OUTPUT_drop
+
 echo "done"
 echo " " >> validation.log
-echo "2D unstructured adaptive drop in channel validation" >> validation.log
-echo "---------------------------------------------------" >> validation.log
+echo "Unstructured adaptive solid validation" >> validation.log
+echo "--------------------------------------" >> validation.log
 echo " " >> validation.log
 echo "Validation directory: " >> validation.log
 echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
-cat RESLT/norm.dat > results_int.dat
+cat RESLT/soln2.dat > res.dat
+cat RESLT_pres_disp/soln2.dat > res_pres_disp.dat
+cat RESLT_pres_disp_incomp/soln2.dat > res_pres_disp_incomp.dat
+
 
 if test "$1" = "no_fpdiff"; then
-    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
+  echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
-    ../../../../bin/fpdiff.py ../validata/results_int.dat.gz  \
-        results_int.dat 0.1 5.0e-9 >> validation.log
+../../../../bin/fpdiff.py ../validata/res.dat.gz \
+    res.dat 0.1 1.0e-12 >> validation.log
+../../../../bin/fpdiff.py ../validata/res_pres_disp.dat.gz \
+    res_pres_disp.dat 0.1 1.0e-12 >> validation.log
+../../../../bin/fpdiff.py ../validata/res_pres_disp_incomp.dat.gz \
+    res_pres_disp_incomp.dat 0.1 1.0e-12 >> validation.log
 fi
 
-mv RESLT RESLT_int
-
-
-echo "Running 2D unstructured adaptive bubble in channel validation" 
-mkdir RESLT
-../adaptive_bubble_in_channel --validation > OUTPUT_bubble
-echo "done"
-echo " " >> validation.log
-echo "2D unstructured adaptive bubble in channel validation" >> validation.log
-echo "-----------------------------------------------------" >> validation.log
-echo " " >> validation.log
-echo "Validation directory: " >> validation.log
-echo " " >> validation.log
-echo "  " `pwd` >> validation.log
-echo " " >> validation.log
-cat RESLT/norm.dat > results_fs.dat
-
-if test "$1" = "no_fpdiff"; then
-    echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
-else
-    ../../../../bin/fpdiff.py ../validata/results_fs.dat.gz  \
-        results_fs.dat 0.1 1.0e-10 >> validation.log
-fi
-
-mv RESLT RESLT_fs
-
-
-
-# Append log to main validation log
+# Append output to global validation log file
+#--------------------------------------------
 cat validation.log >> ../../../../validation.log
+
 
 cd ..
 
@@ -113,3 +98,4 @@ else
    echo " "
   fi
 fi
+

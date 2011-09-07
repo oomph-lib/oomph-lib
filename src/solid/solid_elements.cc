@@ -796,7 +796,7 @@ void PVDEquations<DIM>::extended_output(std::ostream &outfile,
 /// Get potential (strain) and kinetic energy
 //=======================================================================
 template <unsigned DIM>
-void PVDEquations<DIM>::get_energy(double &pot_en, double &kin_en)
+void PVDEquationsBase<DIM>::get_energy(double &pot_en, double &kin_en)
 {
  // Initialise
  pot_en=0;
@@ -2114,7 +2114,6 @@ void PVDEquationsWithPressure<DIM>::output(FILE* file_pt,
                          OOMPH_EXCEPTION_LOCATION);
   }
 }
-
 
 
 //=======================================================================

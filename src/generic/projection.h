@@ -47,75 +47,16 @@
 namespace oomph
 {
 
- //======================================================================
- /// Helper namespace for objects needed during projection between meshes
- //======================================================================
- namespace ProjectionHelper
- {
-
-  /// \short Struct to backup value and pin status of various degrees of
-  /// freedom 
-  struct BackupValue
-  {
-   /// Data object
-   Data* Data_pt;
-
-   /// Index of value in Data object
-   unsigned Index;
-
-   /// Pin status of value
-   bool Pinned;
-
-   /// Original (current) value 
-   double Value;
-   
-  };
-
-
-  /// \short "Less-than" comparison operator class for BackupValue. Required
-  /// so it can be inserted into set.
-  class BackupValueLessThan
-  {
-    public:
-
-   /// Less-than operator
-   bool operator() (const BackupValue& lhs, const BackupValue& rhs) const
-   {
-    // Primary sort on pointer to Data
-    if (lhs.Data_pt<rhs.Data_pt)
-     {
-      return true;
-     }
-    else if (lhs.Data_pt==rhs.Data_pt)
-     {
-      // If equality sort on index
-      if (lhs.Index<rhs.Index)
-       {
-        return true;
-       }
-      // Data is the same and index isn't "less than"
-      else
-       {
-        return false;
-       }
-     }
-    // If we get here comparison based on Data_pt is unique
-    else
-     {
-      return false;
-     }
-   }
-   
-  };
-
- }
-
-
 //==================================================================
 ///Template-free Base class for projectable elements
 //==================================================================
  class ProjectableElementBase 
 {
+  private:
+
+ ///\short Enumerated collection to specify which projection problem
+ ///is to be solved.
+ enum Projection_Type {Coordinate, Lagrangian, Value};
 
 protected:
  
@@ -129,14 +70,20 @@ protected:
  /// this is the coordinate we're projecting
  unsigned Projected_coordinate; 
 
+ ///\short When projecting the Lagrangain coordinates indicate which
+ ///coordiante is to be projected
+ unsigned Projected_lagrangian;
+
+ /// \short Variable to indicate if we're projecting the history values of the
+ /// nodal coordinates (Coordinate) the values themselves (Value), or
+ /// the Lagrangian coordinates in Solid Mechanics problems (Lagrangian)
+ Projection_Type Projection_type;
+
  /// \short Bool to know if we do projection or not. If false (the default)
  /// we solve the element's "real" equations rather than the projection
  /// equations
  bool Do_projection;
 
- /// \short Bool to indicate if we're projecting the history values of the
- /// nodal coordinates (true) or the values themselves (false)
- bool Project_coordinates; 
 
  /// \short Store number of "external" interactions that were assigned to
  /// the element before doing the projection.
@@ -159,11 +106,13 @@ public:
 
  /// Constructor: Initialise data so that we don't project but solve
  /// the "normal" equations associated with the element.
- ProjectableElementBase() : Do_projection(false), Project_coordinates(false) {}
+  ProjectableElementBase() : Projected_field(0), Time_level_for_projection(0),
+  Projected_coordinate(0), Projected_lagrangian(0),
+  Projection_type(Value), Do_projection(false), 
+  Backup_ninteraction(0), Backup_external_geometric_data(false) {}
  
  ///Virtual destructor
  virtual ~ProjectableElementBase() { }
-
 
  /// \short Pure virtual function in which the element writer
  /// must specify the values associated with field fld. 
@@ -274,46 +223,39 @@ class ProjectableElement : public virtual ELEMENT,
                               DenseMatrix<double> &jacobian, 
                               const unsigned& flag)
   {
+   //Am I a solid element
+   SolidFiniteElement* solid_el_pt = 
+    dynamic_cast<SolidFiniteElement*>(this);
+
    unsigned n_dim=dim();
    
    //Allocate storage for local coordinates
    Vector<double> s(n_dim);
 
    //Current field
-    unsigned fld=Projected_field;
+   unsigned fld=Projected_field;
     
+   //Number of nodes
+   const unsigned n_node = this->nnode();
+   //Number of positional dofs
+   const unsigned n_position_type = this->nnodal_position_type();
+   
    //Number of dof for current field
-   unsigned n_value=nvalue_of_field(fld);  
-  
+   const unsigned n_value=nvalue_of_field(fld);  
+
    //Set the value of n_intpt
    const unsigned n_intpt = integral_pt()->nweight();
    
    //Loop over the integration points
    for(unsigned ipt=0;ipt<n_intpt;ipt++)
     {
-
      // Get the local coordinates of Gauss point
      for(unsigned i=0;i<n_dim;i++) s[i] = integral_pt()->knot(ipt,i);
 
      //Get the integral weight
      double w = integral_pt()->weight(ipt);
-     
-     //Field shape function
-     Shape psi(n_value);
 
-     //Calculate jacobian and shape functions for that field
-     double J=jacobian_and_shape_of_field
-      (fld, s, psi);
-              
-     //Premultiply the weights and the Jacobian
-     double W = w*J;
-       
-     //Value of field in current element
-     unsigned now=0;
-     double interpolated_value_proj = this->get_field(now,fld,s);
-                 
-     // Find same point in base mesh
-     // Using external storage
+     // Find same point in base mesh using external storage
      FiniteElement* other_el_pt=0;
      other_el_pt=this->external_element_pt(0,ipt);
      Vector<double> other_s(n_dim);
@@ -322,50 +264,243 @@ class ProjectableElement : public virtual ELEMENT,
      ProjectableElement<ELEMENT>* cast_el_pt = 
       dynamic_cast<ProjectableElement<ELEMENT>*>(other_el_pt);
 
-     //Value of the interpolation of element located in base mesh
-     double interpolated_value_bar = 0.0;
-
-     if (Project_coordinates)
+     //Storage for the local equation and local unknown
+     int local_eqn=0, local_unknown=0;
+     
+     //Now set up the three different projection problems
+     switch(Projection_type)
       {
-       //Interpolation of current dimension
-       interpolated_value_bar=
+      case Lagrangian:
+      {
+       //If we don't have a solid element there is a problem
+       if(solid_el_pt==0)
+        {
+         throw OomphLibError(
+          "Trying to project Lagrangian coordinates in non-SolidElement\n",
+          "ProjectableElement::residual_for_projection()",
+          OOMPH_EXCEPTION_LOCATION);
+        }
+
+       //Find the position shape functions
+       Shape psi(n_node,n_position_type);
+       //Get the position shape functions
+       this->shape(s,psi);
+       //Get the jacobian
+       double J = this->J_eulerian(s);
+
+       //Premultiply the weights and the Jacobian
+       double W = w*J;
+
+       //Get the value of the current position of the 0th coordinate
+       //in the current element
+       //at the current time level (which is the unkown)
+       double interpolated_xi_proj = this->interpolated_x(s,0);
+       
+       //Get the Lagrangian position in the other element
+       double interpolated_xi_bar=
+        dynamic_cast<SolidFiniteElement*>(cast_el_pt)
+        ->interpolated_xi(other_s,Projected_lagrangian);
+       
+       //Now loop over the nodes and position dofs
+       for(unsigned l=0;l<n_node;++l)
+        {
+         //Loop over position unknowns
+         for(unsigned k=0;k<n_position_type;++k)
+          {   
+           //The local equation is going to be the positional local equation
+           local_eqn = solid_el_pt->position_local_eqn(l,k,0);
+           
+           //Now assemble residuals
+           if(local_eqn >= 0)
+            {
+             //calculate residuals
+             residuals[local_eqn] += 
+              (interpolated_xi_proj - interpolated_xi_bar)*psi(l,k)*W;
+             
+             //Calculate the jacobian
+             if(flag==1)
+              {
+               for(unsigned l2=0;l2<n_node;l2++)
+                {
+                 //Loop over position dofs
+                 for(unsigned k2=0;k2<n_position_type;k2++)
+                  {
+                   local_unknown = 
+                    solid_el_pt->position_local_eqn(l2,k2,0);
+                    if(local_unknown >= 0)
+                     {
+                      jacobian(local_eqn,local_unknown) 
+                      += psi(l2,k2)*psi(l,k)*W;  
+                     }
+                  }
+                }
+              } //end of jacobian
+            }
+          }
+        }
+      } //End of Lagrangian coordinate case
+      
+      break;
+
+      //Now the coordinate history case
+      case Coordinate:
+      {
+       //Find the position shape functions
+       Shape psi(n_node,n_position_type);
+       //Get the position shape functions
+       this->shape(s,psi);
+       //Get the jacobian
+       double J = this->J_eulerian(s);
+
+       //Premultiply the weights and the Jacobian
+       double W = w*J;
+
+       //Get the value of the current position in the current element
+       //at the current time level (which is the unkown)
+       double interpolated_x_proj = 0.0;
+       //If we are a solid element read it out directly from the data
+       if(solid_el_pt!=0)
+        {
+         interpolated_x_proj = this->interpolated_x(s,Projected_coordinate);
+        }
+       //Otherwise it's the field value at the current time
+       else
+        {
+         interpolated_x_proj = this->get_field(0,fld,s);
+        }
+
+       //Get the position in the other element
+       double interpolated_x_bar=
         cast_el_pt->interpolated_x(Time_level_for_projection,
                                    other_s,Projected_coordinate);
-      }
-     
-     else
-      {
-       //Interpolation of current field
-       interpolated_value_bar=
-        cast_el_pt->get_field(Time_level_for_projection,fld,other_s);
-      }
-     
-     //Loop over dofs of field fld
-     for(unsigned l=0;l<n_value;l++)
-      {
-       int local_eqn = local_equation(fld,l);      
-       if(local_eqn >= 0)
+
+       //Now loop over the nodes and position dofs
+       for(unsigned l=0;l<n_node;++l)
         {
-         //calculate residuals
-         residuals[local_eqn] += 
-          (interpolated_value_proj - interpolated_value_bar)*psi[l]*W;
-         
-         //Calculate the jacobian
-         if(flag==1)
-          {
-           for(unsigned l2=0;l2<n_value;l2++)
+         //Loop over position unknowns
+         for(unsigned k=0;k<n_position_type;++k)
+          {   
+           //If I'm a solid element
+           if(solid_el_pt!=0)
             {
-             int local_unknown = local_equation(fld,l2);
-             if(local_unknown >= 0)
-              {
-               jacobian(local_eqn,local_unknown) 
-                += psi[l2]*psi[l]*W;  
-              }
+             //The local equation is going to be the positional local equation
+             local_eqn = 
+              solid_el_pt->position_local_eqn(l,k,Projected_coordinate);
             }
-          } //end of jacobian
-         
+           //Otherwise just pick the local unknown of a field to
+           //project into
+           else
+            {
+             //Complain if using generalised position types
+             //but this is not a solid element, because the storage
+             //is then not clear
+             if(n_position_type!=1)
+              {
+               throw OomphLibError(
+                "Trying to project generalised positions not in SolidElement\n",
+                "ProjectableElement::residual_for_projection()",
+                OOMPH_EXCEPTION_LOCATION);
+              }
+             local_eqn = local_equation(fld,l);
+            }
+           
+           //Now assemble residuals
+           if(local_eqn >= 0)
+            {
+             //calculate residuals
+             residuals[local_eqn] += 
+              (interpolated_x_proj - interpolated_x_bar)*psi(l,k)*W;
+             
+             //Calculate the jacobian
+             if(flag==1)
+              {
+               for(unsigned l2=0;l2<n_node;l2++)
+                {
+                 //Loop over position dofs
+                 for(unsigned k2=0;k2<n_position_type;k2++)
+                  {
+                   //If I'm a solid element
+                   if(solid_el_pt!=0)
+                    {
+                     local_unknown = solid_el_pt
+                      ->position_local_eqn(l2,k2,Projected_coordinate);
+                    }
+                   else
+                   {
+                    local_unknown = local_equation(fld,l2);
+                   }
+                   
+                   if(local_unknown >= 0)
+                    {
+                     jacobian(local_eqn,local_unknown) 
+                      += psi(l2,k2)*psi(l,k)*W;  
+                    }
+                  }
+                }
+              } //end of jacobian
+            }
+          }
+        }
+      } //End of coordinate case
+      break;
+
+      //Now the value case
+      case Value:
+      {
+       //Field shape function
+       Shape psi(n_value);
+       
+       //Calculate jacobian and shape functions for that field
+       double J=jacobian_and_shape_of_field(fld,s,psi);
+       
+       //Premultiply the weights and the Jacobian
+       double W = w*J;
+       
+       //Value of field in current element at current time level 
+       //(the unknown)
+       unsigned now=0;
+       double interpolated_value_proj = this->get_field(now,fld,s);
+       
+       //Value of the interpolation of element located in base mesh
+       double interpolated_value_bar = 
+        cast_el_pt->get_field(Time_level_for_projection,fld,other_s);
+
+       //Loop over dofs of field fld
+       for(unsigned l=0;l<n_value;l++)
+        {
+         //If we're projecting the coordinates
+         local_eqn = local_equation(fld,l);      
+         if(local_eqn >= 0)
+          {
+           //calculate residuals
+           residuals[local_eqn] += 
+            (interpolated_value_proj - interpolated_value_bar)*psi[l]*W;
+           
+           //Calculate the jacobian
+           if(flag==1)
+            {
+             for(unsigned l2=0;l2<n_value;l2++)
+              {
+               local_unknown = local_equation(fld,l2);
+               if(local_unknown >= 0)
+                {
+                 jacobian(local_eqn,local_unknown) 
+                  += psi[l2]*psi[l]*W;  
+                }
+              }
+            } //end of jacobian
+          }
         }
       }
+      break;
+
+      default:
+       throw OomphLibError(
+        "Wrong type specificied in Projection_type. This should never happen\n",
+        "ProjectableElement::residuals_for_projection()",
+        OOMPH_EXCEPTION_LOCATION);
+      } //End of the switch statement
+
     }//End of loop over ipt
    
   }//End of residual_for_projection function
@@ -455,12 +590,16 @@ class ProjectableElement : public virtual ELEMENT,
 
 
  ///Project (history values of) coordintes 
- void set_project_coordinates() {Project_coordinates=true;}
+ void set_project_coordinates() {Projection_type=Coordinate;}
 
  /// Project (history values of) values
- void set_project_values() {Project_coordinates=false;}
+ void set_project_values() {Projection_type=Value;}
 
-///Field that is currently being projected
+ /// Project (current and only values of) lagrangian coordinates
+ void set_project_lagrangian() {Projection_type=Lagrangian;}
+  
+
+ ///Field that is currently being projected
  unsigned& projected_field()
   {return Projected_field;}
  
@@ -472,6 +611,11 @@ class ProjectableElement : public virtual ELEMENT,
  /// this is the coordinate we're projecting
  unsigned& projected_coordinate()
   {return Projected_coordinate;}
+
+ /// \short When projecting the Lagrangian coordinates this is
+ /// the coordinate that is being projected
+ unsigned& projected_lagrangian_coordinate()
+ {return Projected_lagrangian;}
 
 
 };//End of class
@@ -494,17 +638,24 @@ class FaceGeometry<ProjectableElement<ELEMENT> >
 
 
 
-//==================================================================
-/// Projection problem
-//==================================================================
+//=======================================================================
+/// Projection problem. This is created during the adaptation
+/// of unstructured meshes and it is assumed that no boundary conditions
+/// have been set. If they have, they will be unset during the projection
+/// and must be reset afterwards. 
+//=======================================================================
 template<class PROJECTABLE_ELEMENT>
 class ProjectionProblem : public virtual Problem
 {
   public:
   
  ///Default constructor 
- ProjectionProblem() {}
-
+ ProjectionProblem() 
+  {
+   //This is a linear problem, which avoids checking the residual
+   //after the solve and means that we don't get a singular matrix
+   Problem_is_nonlinear=false;
+  }
 
 ///\short Project from base into the problem's own mesh. hierher: Need to
 /// extend this to the case of multiple sub-meshes.
@@ -541,9 +692,6 @@ class ProjectionProblem : public virtual Problem
    // Default number of history values
    unsigned n_history_values=0;
 
-   // Store pinned status and values of current values
-   this->store_pinned_status_and_values();
-
    // Set things up for coordinate projection
    for(unsigned e=0;e<n_element;e++)
     {  
@@ -553,12 +701,8 @@ class ProjectionProblem : public virtual Problem
      
      // Switch to projection
      el_pt->enable_projection();
-     
-     //We first project history values of coordinates
-     el_pt->set_project_coordinates();
     }
-
-
+   
    // Switch elements in base mesh to projection mode (required
    // to switch to use of Eulerian coordinates when identifying
    // corresponding points in the two meshes)
@@ -586,82 +730,231 @@ class ProjectionProblem : public virtual Problem
                << TimingHelpers::timer()-t_start << std::endl;
    t_start=TimingHelpers::timer();
 
-   // Pin all solid position dofs (if required)
-   pin_solid_positions();
 
-   // Prepare for projection in value 0: hierher Note that this 
-   // assumes that field 0 can actually hold the coordinates
-   // i.e. that it's interpolated isoparametrically!
-   this->set_current_field_for_projection(0);
-   this->unpin_dofs_of_field(0);
-   this->pin_dofs_of_other_fields(0);
+   //Let us first pin every degree of freedom
+   //We shall unpin selected dofs for each different projection problem
+   this->pin_all();
 
-   //Check number of history values for coordinates
-   n_history_values = dynamic_cast<PROJECTABLE_ELEMENT*>
-    (Problem::mesh_pt()->element_pt(0))->
-    nhistory_values_for_coordinate_projection();
+   //------------------Project coordinates first------------------------
+   //If we have a solid element then we should also project Lagrangian 
+   //coordinates, but we can use the storage that MUST be provided for
+   //the unknown positions for this.
+   //If we can cast the first element of the mesh to a solid element,
+   //then assume that we have solid elements
+   if(dynamic_cast<SolidFiniteElement*>(
+       Problem::mesh_pt()->element_pt(0)))
+    {
+     // Store current positions
+     this->store_positions();
+
+     //There are no history values for the Lagrangian coordinates
+     //Set coordinate 0 for projection
+     this->set_coordinate_for_projection(0);
+     this->unpin_dofs_of_coordinate(0);
      
-   //Projection the coordinates
-   for (unsigned i=0;i<n_dim;i++)
-    {     
-     oomph_info <<"\n\n=============================================\n";
-     oomph_info <<    "Projecting history values for coordinate " << i
-                << std::endl;
-     oomph_info <<"=============================================\n\n";
+     //Loop over the Lagrangian coordinate
+     const unsigned n_lagrangian = 
+      dynamic_cast<SolidNode*>(Problem::mesh_pt()->node_pt(0))->nlagrangian();
 
-     // Setup projection for i-th coordinate
-     for(unsigned e=0;e<n_element;e++)
+     //Now loop over the lagrangian coordinates
+     for(unsigned i=0;i<n_lagrangian;++i)
       {
-       PROJECTABLE_ELEMENT * new_el_pt =
-        dynamic_cast<PROJECTABLE_ELEMENT*>
-        (Problem::mesh_pt()->element_pt(e));
+       oomph_info <<"\n\n=============================================\n";
+       oomph_info <<    "Projecting values for Lagrangian coordinate " << i
+                  << std::endl;
+       oomph_info <<"=============================================\n\n";
        
-       //Set current field
-       new_el_pt->projected_coordinate()=i;
-      }
-     
-     // Loop over number of history values, beginning with the latest one.
-     // Don't deal with current time.
-     for (unsigned h_tim=n_history_values;h_tim>1;h_tim--)
-      {
-       unsigned time_level=h_tim-1;
-       
-       //Set time_level we are dealing with
-       this->set_time_level_for_projection(time_level);
+       //Set the coordinate for projection
+       this->set_lagrangian_coordinate_for_projection(i);
        
        //Assign equation number
-       oomph_info << "Number of equations for projection of coordinate " 
-                  << i << " at time level " << time_level
+       oomph_info << 
+        "Number of equations for projection of Lagrangian coordinate " 
                   << " : "<< assign_eqn_numbers() <<std::endl << std::endl;
        
        //Projection and interpolation
        Problem::newton_solve();
        
-       //Move values back into history value of coordinate
-       unsigned n_element = Problem::mesh_pt()->nelement();
-       for(unsigned e=0;e<n_element;e++)
+       //Move values back into Lagrangian coordinate for all nodes
+       unsigned n_node = Problem::mesh_pt()->nnode();
+       for(unsigned n=0;n<n_node;++n)
         {
-         PROJECTABLE_ELEMENT * new_el_pt =
-          dynamic_cast<PROJECTABLE_ELEMENT*>
-          (Problem::mesh_pt()->element_pt(e));
+         //Cast it to a solid node
+         SolidNode* solid_node_pt = 
+          dynamic_cast<SolidNode*>(Problem::mesh_pt()->node_pt(n));
+         //Now find number of types
+         const unsigned n_position_type = solid_node_pt->nposition_type();
+         //Find number of lagrangian types
+         const unsigned n_lagrangian_type = solid_node_pt->nlagrangian_type();
          
-         Vector<std::pair<Data*,unsigned> >
-          data=new_el_pt->data_values_of_field(0);
-         
-         unsigned d_size=data.size();
-         for(unsigned d=0;d<d_size;d++)
+         //If these are not the same, throw an error
+         if(n_position_type != n_lagrangian_type)
           {
-           //Replace as coordinates
-           double coord=data[d].first->value(0,0);
-           dynamic_cast<Node*>(data[d].first)->x(time_level,i) = coord;
+           std::ostringstream error_stream;
+           error_stream 
+            << "The number of generalised position dofs " 
+            << n_position_type 
+            << "\n not the same as the number of generalised lagrangian dofs "
+            << n_lagrangian_type << ".\n"
+            << "Projection cannot be done at the moment, sorry.\n";
+           
+           throw OomphLibError(error_stream.str(),
+                               "ProjectionProblem::project()",
+                               OOMPH_EXCEPTION_LOCATION);
+          }
+
+         //Now transfer the information across
+         //from the first coordinate which was used during the projection
+         for(unsigned k=0;k<n_position_type;++k)
+          {
+           solid_node_pt->xi_gen(k,i) = solid_node_pt->x_gen(k,0);
+           //Reset real values so that the Jacobians are correctly
+           //computed next time around
+           solid_node_pt->x_gen(k,0) = Solid_backup[n](k,0);
           }
         }
-      }
-    }
-   
-   //Restore field 0 to current values
-   this->restore_current_values_of_field(0);
+      } //End of loop over lagrangian coordinates
 
+     //Now repin the dofs 
+     this->pin_dofs_of_coordinate(0);
+
+     //Now project the position histories
+     
+     //Check number of history values for coordinates
+     n_history_values = dynamic_cast<PROJECTABLE_ELEMENT*>
+      (Problem::mesh_pt()->element_pt(0))->
+      nhistory_values_for_coordinate_projection();
+     
+     //Projection the coordinates only if there are history values
+     if(n_history_values > 1)
+      {
+       for (unsigned i=0;i<n_dim;i++)
+        {     
+         oomph_info <<"\n\n=============================================\n";
+         oomph_info <<    "Projecting history values for coordinate " << i
+                    << std::endl;
+         oomph_info <<"=============================================\n\n";
+         
+         //Set the coordinate for projection
+         this->set_coordinate_for_projection(i);
+         this->unpin_dofs_of_coordinate(i);
+         
+         // Loop over number of history values, beginning with the latest one.
+         // Don't deal with current time.
+         for (unsigned h_tim=n_history_values;h_tim>1;h_tim--)
+          {
+           unsigned time_level=h_tim-1;
+           
+           //Set time_level we are dealing with
+           this->set_time_level_for_projection(time_level);
+           
+           //Assign equation number
+           oomph_info << "Number of equations for projection of coordinate " 
+                      << i << " at time level " << time_level
+                      << " : "<< assign_eqn_numbers() <<std::endl << std::endl;
+           
+           //Projection and interpolation
+           Problem::newton_solve();
+           
+           //Move values back into history value of coordinate
+           unsigned n_node = Problem::mesh_pt()->nnode();
+           for(unsigned n=0;n<n_node;++n)
+            {
+             //Cache the pointer to the node
+             Node* nod_pt = Problem::mesh_pt()->node_pt(n);
+             //Find the number of generalised dofs
+             const unsigned n_position_type = nod_pt->nposition_type();
+             //Now copy all back
+             for(unsigned k=0;k<n_position_type;++k)
+              {
+               nod_pt->x_gen(time_level,k,i) = nod_pt->x_gen(0,k,i);
+               //Reset real values so that the Jacobians are computed
+               //correctly next time around
+               nod_pt->x_gen(0,k,i) = Solid_backup[n](k,i);
+              }
+            }
+          }
+         //Repin the positions
+         this->pin_dofs_of_coordinate(i);
+        }
+      } //End of history value projection
+    } //End of SolidElement case
+  
+   //Now for non solid elements, we are going to hijack the 
+   //first value as storage to be used for the projection of the history
+   //values
+   else
+    {
+     // Prepare for projection in value 0: hierher Note that this 
+     // assumes that field 0 can actually hold the coordinates
+     // i.e. that it's interpolated isoparametrically!
+     this->set_current_field_for_projection(0);
+     this->unpin_dofs_of_field(0);
+     
+     //Check number of history values for coordinates
+     n_history_values = dynamic_cast<PROJECTABLE_ELEMENT*>
+      (Problem::mesh_pt()->element_pt(0))->
+      nhistory_values_for_coordinate_projection();
+     
+     //Projection the coordinates only if there are history values
+     if(n_history_values > 1)
+      {
+       for (unsigned i=0;i<n_dim;i++)
+        {     
+         oomph_info <<"\n\n=============================================\n";
+         oomph_info <<    "Projecting history values for coordinate " << i
+                    << std::endl;
+         oomph_info <<"=============================================\n\n";
+         
+         //Set the coordinate for projection
+         this->set_coordinate_for_projection(i);
+         
+         // Loop over number of history values, beginning with the latest one.
+         // Don't deal with current time.
+         for (unsigned h_tim=n_history_values;h_tim>1;h_tim--)
+          {
+           unsigned time_level=h_tim-1;
+           
+           //Set time_level we are dealing with
+           this->set_time_level_for_projection(time_level);
+           
+           //Assign equation number
+           oomph_info << "Number of equations for projection of coordinate " 
+                      << i << " at time level " << time_level
+                      << " : "<< assign_eqn_numbers() <<std::endl << std::endl;
+           
+           //Projection and interpolation
+           Problem::newton_solve();
+           
+           //Move values back into history value of coordinate
+           unsigned n_element = Problem::mesh_pt()->nelement();
+           for(unsigned e=0;e<n_element;e++)
+            {
+             PROJECTABLE_ELEMENT * new_el_pt =
+              dynamic_cast<PROJECTABLE_ELEMENT*>
+              (Problem::mesh_pt()->element_pt(e));
+             
+             Vector<std::pair<Data*,unsigned> >
+              data=new_el_pt->data_values_of_field(0);
+             
+             unsigned d_size=data.size();
+             for(unsigned d=0;d<d_size;d++)
+              {
+               //Replace as coordinates
+               double coord=data[d].first->value(0,0);
+               dynamic_cast<Node*>(data[d].first)->x(time_level,i) = coord;
+              }
+            }
+          }
+        }
+      } //End of history value projection
+     
+     //Repin the dofs for field 0
+     this->pin_dofs_of_field(0);
+
+    } //End of non-SolidElement case
+
+   
    //Disable projection of coordinates
    for(unsigned e=0;e<n_element;e++)
     {  
@@ -677,9 +970,8 @@ class ProjectionProblem : public virtual Problem
     {
      //Do actions for this field
      this->set_current_field_for_projection(fld);
-     this->restore_pin_status_of_field(fld);
-     this->pin_dofs_of_other_fields(fld);
-      
+     this->unpin_dofs_of_field(fld);
+       
      //Check number of history values
      n_history_values = dynamic_cast<PROJECTABLE_ELEMENT*>
       (Problem::mesh_pt()->element_pt(0))->nhistory_values_for_projection(fld);
@@ -697,30 +989,6 @@ class ProjectionProblem : public virtual Problem
        //Set time_level we are dealing with
        this->set_time_level_for_projection(time_level);
        
-/*        std::cout<<"NOT APPLYING ANY BOUNDARY CONDITIONS DURING PROJECTION\n"; */
- /*       // Apply boundary conditions for the actual field */
-/*        if(time_level==0) */
-/*         { */
-/*          // Undo the changes to boundary conditions that were */
-/*          // applied to deal with the history values (for which */
-/*          // we don't apply bcs). Remember that we do these first! */
-/*          if (n_history_values>1) */
-/*           { */
-/*            //Restore pinned status as it has been modified */
-/*            //for other history values */
-/*            restore_pin_status_of_field(fld); */
-/*            pin_dofs_of_other_fields(fld); */
-/*           } */
-/*          //Restore values */
-/*          restore_current_values_of_field(fld); */
-/*         } */
-/*        // Don't apply any BCs for the history values */
-/*        else */
-        {
-         //Unpin dofs for history values
-         this->unpin_dofs_of_field(fld);
-        }
-
        //Assign equation number
        oomph_info << "Number of equations for projection of field " 
                   << fld << " at time level " << time_level
@@ -752,9 +1020,10 @@ class ProjectionProblem : public virtual Problem
             }
           }
         }
-       
       } //End of loop over time levels
-     
+  
+     //Repin the dofs of the field
+     this->pin_dofs_of_field(fld);
     } //End of loop over fields
    
    
@@ -774,223 +1043,281 @@ class ProjectionProblem : public virtual Problem
       dynamic_cast<PROJECTABLE_ELEMENT*>
       (base_mesh_pt->element_pt(e));
      
-     // Switch to projection
+     // Disable  projection
      el_pt->disable_projection();
     }
 
-   //Restore pinned status for all fields
-   for (unsigned f=0;f<n_fields;f++)
-    {
-     this->restore_pin_status_of_field(f);
-    }
-   restore_solid_pin_status();
-
+   //Now unpin everything to restore the problem to its virgin state
+   this->unpin_all();
    
    // Now cleanup the storage
-   Data_backup.clear();
-   Solid_pin_backup.clear();
+   Solid_backup.clear();
 
    oomph_info << "Number of unknowns after project: " 
               << this->assign_eqn_numbers() << std::endl;
 
   } //End of function Projection
-
-  
+ 
   private:
 
 
- /// \short Helper function to store pinned status and current values
- /// before doing projection
- void store_pinned_status_and_values()
+ /// \short Helper function to store positions (the only things that
+ /// have been set before doing projection
+ void store_positions()
  {
-
   // No need to do anything if there are no elements (in fact, we
   // probably never get here...)
   if (Problem::mesh_pt()->nelement()==0) return;
 
-  // Get number of fields from first element, and create storage
-  PROJECTABLE_ELEMENT * new_el_pt = 
-   dynamic_cast<PROJECTABLE_ELEMENT*>
+  // Deal with positional dofs if (pseudo-)solid element
+  //If we can cast the first element to a SolidFiniteElement then
+  //assume that we have a solid mesh
+  SolidFiniteElement* solid_el_pt = dynamic_cast<SolidFiniteElement*>
    (Problem::mesh_pt()->element_pt(0));
-  unsigned n_fields = new_el_pt->nfields_for_projection();
-  Data_backup.resize(n_fields);
-  
-  // Now extract data from all elements
-  unsigned n_element = Problem::mesh_pt()->nelement();
-  for(unsigned e=0;e<n_element;e++)
-   {  
+  if(solid_el_pt!=0)
+   {
+    const unsigned n_node = this->mesh_pt()->nnode();
+    Solid_backup.resize(n_node);
+    //Read dimension and number of position values from the first node
+    const unsigned n_dim = this->mesh_pt()->node_pt(0)->ndim();
+    const unsigned n_position_type = 
+     this->mesh_pt()->node_pt(0)->nposition_type();
+    //Loop over the nodes
+    for (unsigned n=0;n<n_node;n++)
+     {      
+      //Cache a pointer to a solid node
+      SolidNode* const solid_nod_pt =
+       dynamic_cast<SolidNode*>(this->mesh_pt()->node_pt(n));
+      //Now resize the appropriate storage
+      Solid_backup[n].resize(n_position_type,n_dim);
+
+      for (unsigned i=0;i<n_dim;i++)
+       {
+        for(unsigned k=0;k<n_position_type;k++)
+         {
+          Solid_backup[n](k,i)= solid_nod_pt->x_gen(k,i);
+         }
+       }
+     }
+   }
+ }
+
+ /// \short Helper function to restore positions (the only things that
+ /// have been set before doing projection
+ void restore_positions()
+ {
+  // No need to do anything if there are no elements (in fact, we
+  // probably never get here...)
+  if (Problem::mesh_pt()->nelement()==0) return;
+
+  // Deal with positional dofs if (pseudo-)solid element
+  //If we can cast the first element to a SolidFiniteElement then
+  //assume that we have a solid mesh
+  SolidFiniteElement* solid_el_pt = dynamic_cast<SolidFiniteElement*>
+   (Problem::mesh_pt()->element_pt(0));
+  if(solid_el_pt!=0)
+   {
+    const unsigned n_node = this->mesh_pt()->nnode();
+    //Read dimension and number of position values from the first node
+    const unsigned n_dim = this->mesh_pt()->node_pt(0)->ndim();
+    const unsigned n_position_type = 
+     this->mesh_pt()->node_pt(0)->nposition_type();
+    //Loop over the nodes
+    for (unsigned n=0;n<n_node;n++)
+     {      
+      //Cache a pointer to a solid node
+      SolidNode* const solid_nod_pt =
+       dynamic_cast<SolidNode*>(this->mesh_pt()->node_pt(n));
+ 
+      for (unsigned i=0;i<n_dim;i++)
+       {
+        for(unsigned k=0;k<n_position_type;k++)
+         {
+          solid_nod_pt->x_gen(k,i) = Solid_backup[n](k,i);
+         }
+       }
+     }
+   }
+ }
+ 
+ ///\short Pin all the field values and position unknowns (bit inefficient)
+ void pin_all()
+ {
+  // No need to do anything if there are no elements (in fact, we
+  // probably never get here...)
+  if (Problem::mesh_pt()->nelement()==0) return;
+
+  //Loop over all the elements
+  const unsigned n_element = Problem::mesh_pt()->nelement();
+  for(unsigned e=0;e<n_element;++e)
+   {
+    //Cast the first element
     PROJECTABLE_ELEMENT * new_el_pt = 
      dynamic_cast<PROJECTABLE_ELEMENT*>
      (Problem::mesh_pt()->element_pt(e));
-    
-    //Backup pin and values for all fields
-    for (unsigned f=0;f<n_fields;f++)
+    //Find the number of fields
+    unsigned n_fields = new_el_pt->nfields_for_projection();
+
+    //Now loop over all fields
+    for(unsigned f=0;f<n_fields;f++)
      {
+      //Extract the data and value for the field
       Vector<std::pair<Data*,unsigned> >
        data=new_el_pt->data_values_of_field(f);
-
-      // Backup
-      unsigned d_size=data.size();
+      //Now loop over all the data and pin the appropriate values
+      unsigned d_size=data.size();     
       for(unsigned d=0;d<d_size;d++)
        {
-        // Package up in Backup item
-        ProjectionHelper::BackupValue backup_item;
-        backup_item.Data_pt=data[d].first;
-        backup_item.Index=data[d].second;
-        backup_item.Pinned=backup_item.Data_pt->is_pinned(backup_item.Index);
-        backup_item.Value=backup_item.Data_pt->value(0,backup_item.Index);
-
-        // Make backup
-        Data_backup[f].insert(backup_item);
-       }
+        data[d].first->pin(data[d].second);
+       }   
      }
    }
-
-
-  // Deal with positional dofs if (pseudo-)solid element
-  SolidFiniteElement* solid_el_pt = dynamic_cast<SolidFiniteElement*>
-   (Problem::mesh_pt()->element_pt(0));
-  if (solid_el_pt!=0)
-   {
-    unsigned nnod=this->mesh_pt()->nnode();
-    Solid_pin_backup.resize(nnod);
-    for (unsigned j=0;j<nnod;j++)
-     {      
-      SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(
-       this->mesh_pt()->node_pt(j));
-      unsigned dim=solid_nod_pt->ndim();
-      Solid_pin_backup[j].resize(dim);
-      for (unsigned i=0;i<dim;i++)
-       {
-        Solid_pin_backup[j][i]=solid_nod_pt->position_is_pinned(i);
-       }
-     }
-   }
- }
- 
-
-
- /// \short Pin solid positions (if required)
- void pin_solid_positions()
- {
-  // No need to do anything if there are no elements (in fact, we
-  // probably never get here...)
-  if (Problem::mesh_pt()->nelement()==0) return;
 
   /// Do we have a solid mesh?
   SolidFiniteElement* solid_el_pt = dynamic_cast<SolidFiniteElement*>
    (Problem::mesh_pt()->element_pt(0));
   if (solid_el_pt!=0)
    {
-    unsigned nnod=this->mesh_pt()->nnode();
-    for (unsigned j=0;j<nnod;j++)
+    //Find number of nodes
+    const unsigned n_node=this->mesh_pt()->nnode();
+    //If no nodes then return 
+    if(n_node==0) {return;}
+
+    //Read dimension and number of position values from the first node
+    const unsigned n_dim = this->mesh_pt()->node_pt(0)->ndim();
+    const unsigned n_position_type = 
+     this->mesh_pt()->node_pt(0)->nposition_type();
+
+    //Loop over the nodes
+    for (unsigned n=0;n<n_node;n++)
      {      
       SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(
-       this->mesh_pt()->node_pt(j));
-      unsigned dim=solid_nod_pt->ndim();
-      for (unsigned i=0;i<dim;i++)
+       this->mesh_pt()->node_pt(n));
+      for (unsigned i=0;i<n_dim;i++)
        {
-        solid_nod_pt->pin_position(i);
+        for(unsigned k=0;k<n_position_type;k++)
+         {
+          solid_nod_pt->pin_position(k,i);
+         }
        }
      }
    }
  }
 
- 
- /// \short Restore pin status for solid positions (if required)
- void restore_solid_pin_status()
+
+ ///\short Unpin all the field values and position unknowns (bit inefficient)
+ void unpin_all()
  {
   // No need to do anything if there are no elements (in fact, we
   // probably never get here...)
   if (Problem::mesh_pt()->nelement()==0) return;
-  
+
+  //Loop over all the elements
+  const unsigned n_element = Problem::mesh_pt()->nelement();
+  for(unsigned e=0;e<n_element;++e)
+   {
+    //Cast the first element
+    PROJECTABLE_ELEMENT * new_el_pt = 
+     dynamic_cast<PROJECTABLE_ELEMENT*>
+     (Problem::mesh_pt()->element_pt(e));
+    //Find the number of fields
+    unsigned n_fields = new_el_pt->nfields_for_projection();
+
+    //Now loop over all fields
+    for(unsigned f=0;f<n_fields;f++)
+     {
+      //Extract the data and value for the field
+      Vector<std::pair<Data*,unsigned> >
+       data=new_el_pt->data_values_of_field(f);
+      //Now loop over all the data and unpin the appropriate values
+      unsigned d_size=data.size();     
+      for(unsigned d=0;d<d_size;d++)
+       {
+        data[d].first->unpin(data[d].second);
+       }   
+     }
+   }
+
   /// Do we have a solid mesh?
   SolidFiniteElement* solid_el_pt = dynamic_cast<SolidFiniteElement*>
    (Problem::mesh_pt()->element_pt(0));
   if (solid_el_pt!=0)
    {
-    unsigned nnod=this->mesh_pt()->nnode();
-    for (unsigned j=0;j<nnod;j++)
+    //Find number of nodes
+    const unsigned n_node=this->mesh_pt()->nnode();
+    //If no nodes then return 
+    if(n_node==0) {return;}
+
+    //Read dimension and number of position values from the first node
+    const unsigned n_dim = this->mesh_pt()->node_pt(0)->ndim();
+    const unsigned n_position_type = 
+     this->mesh_pt()->node_pt(0)->nposition_type();
+
+    //Loop over the nodes
+    for (unsigned n=0;n<n_node;n++)
      {      
       SolidNode* solid_nod_pt=dynamic_cast<SolidNode*>(
-       this->mesh_pt()->node_pt(j));
-      unsigned dim=solid_nod_pt->ndim();
-      for (unsigned i=0;i<dim;i++)
+       this->mesh_pt()->node_pt(n));
+      for (unsigned i=0;i<n_dim;i++)
        {
-        if (Solid_pin_backup[j][i])
+        for(unsigned k=0;k<n_position_type;k++)
          {
-          solid_nod_pt->pin_position(i);
-         }
-        else
-         {
-          solid_nod_pt->unpin_position(i);
+          solid_nod_pt->unpin_position(k,i);
          }
        }
      }
    }
  }
 
- /// \short Helper function to restore pinned status of field fld; typically 
- /// called after projection for the field
- void restore_pin_status_of_field(const unsigned &fld)
+ /// \short Helper function to unpin the values of coordinate coord
+ void unpin_dofs_of_coordinate(const unsigned &coord)
  {
-  std::cout << "Number of unique backed up items for field " << fld << ": "
-       << Data_backup[fld].size() << std::endl;
+  //Loop over the nodes
+  const unsigned n_node = Problem::mesh_pt()->nnode();
+  //If there are no nodes return immediately
+  if(n_node==0) {return;}
   
-  for (std::set<ProjectionHelper::BackupValue>::iterator it=
-        Data_backup[fld].begin();it!=Data_backup[fld].end();it++)
+  //Find the number of position values (should be the same for all nodes)
+  const unsigned n_position_type = 
+   Problem::mesh_pt()->node_pt(0)->nposition_type();
+
+  for(unsigned n=0;n<n_node;++n)
    {
-    // Recover Backup item
-    ProjectionHelper::BackupValue backup=*it;
-    
-    // Extract Data
-    Data* data_pt=backup.Data_pt;
-    
-    // Extract index
-    unsigned index=backup.Index;
-    
-    // Restore
-    if (backup.Pinned)
+    //Cache access to the Node as a solid node
+    SolidNode* solid_nod_pt = 
+     static_cast<SolidNode*>(Problem::mesh_pt()->node_pt(n));
+    //Unpin all position types associated with the given coordinate
+    for(unsigned k=0;k<n_position_type;++k)
      {
-      data_pt->pin(index);
+      solid_nod_pt->unpin_position(k,coord);
      }
-    else
-     {
-      data_pt->unpin(index);
-     }     
    }
  }
 
-
- /// \short Helper function to pin the values of other fields than fld
- void pin_dofs_of_other_fields(const unsigned &fld)
-  {
-   unsigned n_element = Problem::mesh_pt()->nelement();
-   for(unsigned e=0;e<n_element;e++)
-    {
-     PROJECTABLE_ELEMENT * new_el_pt =
-      dynamic_cast<PROJECTABLE_ELEMENT*>
-      (Problem::mesh_pt()->element_pt(e));
-
-     //Pin dofs of other fields
-     unsigned n_fields = new_el_pt->nfields_for_projection();
-     for (unsigned f=0;f<n_fields;f++)
-      {
-       //Deal with field != fld
-       if (f!=fld)
-        {
-         Vector<std::pair<Data*,unsigned> >
-          data=new_el_pt->data_values_of_field(f);         
-         unsigned d_size=data.size();         
-         for(unsigned d=0;d<d_size;d++)
-          {
-           data[d].first->pin(data[d].second);
-          }
-        }
-      }
-    }
-  }
-
+ /// \short Helper function to unpin the values of coordinate coord
+ void pin_dofs_of_coordinate(const unsigned &coord)
+ {
+  //Loop over the nodes
+  const unsigned n_node = Problem::mesh_pt()->nnode();
+  //If there are no nodes return immediately
+  if(n_node==0) {return;}
+  
+  //Find the number of position values (should be the same for all nodes)
+  const unsigned n_position_type = 
+   Problem::mesh_pt()->node_pt(0)->nposition_type();
+  
+  for(unsigned n=0;n<n_node;++n)
+   {
+    //Cache access to the Node as a solid node
+    SolidNode* solid_nod_pt = 
+     static_cast<SolidNode*>(Problem::mesh_pt()->node_pt(n));
+    //Unpin all position types associated with the given coordinate
+    for(unsigned k=0;k<n_position_type;++k)
+     {
+      solid_nod_pt->pin_position(k,coord);
+     }
+   }
+ }
 
 
  ///Helper function to unpin dofs of fld-th field
@@ -1013,32 +1340,27 @@ class ProjectionProblem : public virtual Problem
       }   
     }
   }
-  
- /// Helper function to restore current values of fld-th field
- void restore_current_values_of_field(const unsigned &fld)
- {
-  for (std::set<ProjectionHelper::BackupValue>::iterator it=
-        Data_backup[fld].begin();it!=Data_backup[fld].end();it++)
-   {
-    // Recover Backup item
-    ProjectionHelper::BackupValue backup=*it;
-    
-    // Recover Data
-    Data* data_pt=backup.Data_pt;
-    
-    // Recover index
-    unsigned index=backup.Index;
-    
-    // Recover value
-    double value=backup.Value;
-    
-    // Assign
-    data_pt->set_value(index,value);
-   }
- }
 
-
-
+ ///Helper function to unpin dofs of fld-th field
+ void pin_dofs_of_field(const unsigned &fld)
+  {
+   unsigned n_element = Problem::mesh_pt()->nelement();
+   for(unsigned e=0;e<n_element;e++)
+    {
+     PROJECTABLE_ELEMENT * new_el_pt =
+      dynamic_cast<PROJECTABLE_ELEMENT*>
+      (Problem::mesh_pt()->element_pt(e));
+     
+     Vector<std::pair<Data*,unsigned> >
+      data=new_el_pt->data_values_of_field(fld);
+     
+     unsigned d_size=data.size();     
+     for(unsigned d=0;d<d_size;d++)
+      {
+       data[d].first->pin(data[d].second);
+      }   
+    }
+  }
 
  /// Helper function to set time level for projection
  void set_time_level_for_projection(const unsigned &time_level)
@@ -1055,6 +1377,41 @@ class ProjectionProblem : public virtual Problem
     }
   }
  
+ ///Set the coordinate for projection
+ void set_coordinate_for_projection(const unsigned &i)
+ {
+  unsigned n_element = Problem::mesh_pt()->nelement();
+  for(unsigned e=0;e<n_element;e++)
+   {
+    PROJECTABLE_ELEMENT * new_el_pt =
+     dynamic_cast<PROJECTABLE_ELEMENT*>
+     (Problem::mesh_pt()->element_pt(e));
+
+    //Set that we are solving a projected coordinate problem
+    new_el_pt->set_project_coordinates();
+
+    //Set the projected coordinate
+    new_el_pt->projected_coordinate()=i;
+   }
+ }
+
+ ///Set the Lagrangian coordinate for projection
+ void set_lagrangian_coordinate_for_projection(const unsigned &i)
+ {
+  unsigned n_element = Problem::mesh_pt()->nelement();
+  for(unsigned e=0;e<n_element;e++)
+   {
+    PROJECTABLE_ELEMENT * new_el_pt =
+     dynamic_cast<PROJECTABLE_ELEMENT*>
+     (Problem::mesh_pt()->element_pt(e));
+
+    //Set that we are solving a projected Lagrangian coordinate problem
+    new_el_pt->set_project_lagrangian();
+
+    //Set the projected coordinate
+    new_el_pt->projected_lagrangian_coordinate()=i;
+   }
+ }
 
  ///Set current field for projection
  void set_current_field_for_projection(const unsigned &fld)
@@ -1073,12 +1430,8 @@ class ProjectionProblem : public virtual Problem
 
   private:
 
- /// Backup for current values and pin status
- Vector<std::set<ProjectionHelper::BackupValue,
-  ProjectionHelper::BackupValueLessThan> > Data_backup;
-
  /// Backup for pin status of solid node's position Data
- Vector<std::vector<bool> > Solid_pin_backup;
+ Vector<DenseMatrix<double> > Solid_backup;
 
 };
 

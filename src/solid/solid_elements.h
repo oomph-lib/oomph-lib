@@ -43,6 +43,8 @@
 #include "../generic/mesh.h"
 #include "../generic/hermite_elements.h"
 #include "../constitutive/constitutive_laws.h"
+#include "../generic/error_estimator.h"
+#include "../generic/projection.h"
 
 
 namespace oomph
@@ -169,6 +171,9 @@ namespace oomph
    /// \short Return the strain tensor
    void get_strain(const Vector<double> &s, DenseMatrix<double> &strain) const;
    
+   /// Get potential (strain) and kinetic energy
+   void get_energy(double &pot_en, double &kin_en);
+
    /// \short Return the deformed covariant basis vectors
    /// at specified local coordinate: \c def_covariant_basis(i,j)
    /// is the j-th component of the i-th basis vector.
@@ -435,8 +440,6 @@ class PVDEquations : public PVDEquationsBase<DIM>
    /// components
    void extended_output(std::ostream &outfile, const unsigned &n_plot);
    
-   /// Get potential (strain) and kinetic energy
-   void get_energy(double &pot_en, double &kin_en);
 
     protected:
    
@@ -625,6 +628,125 @@ template<unsigned NNODE_1D>
     {SolidQHermiteElement<DIM>::output(file_pt,n_plot);}
    
   };
+
+
+
+
+//==========================================================
+/// PVDElementWithContinuousPressure upgraded to become projectable
+//==========================================================
+ template<class PVD_ELEMENT>
+ class ProjectablePVDElement : 
+  public virtual ProjectableElement<PVD_ELEMENT>
+ {
+
+ public:
+
+  /// \short Constructor [this was only required explicitly
+  /// from gcc 4.5.2 onwards...]
+  ProjectablePVDElement(){}
+  
+
+  /// \short Specify the values associated with field fld. 
+  /// The information is returned in a vector of pairs which comprise 
+  /// the Data object and the value within it, that correspond to field fld. 
+  /// In the underlying PVD elements there are no field values
+  Vector<std::pair<Data*,unsigned> > data_values_of_field(const unsigned& fld)
+   {   
+    // Create the vector
+    Vector<std::pair<Data*,unsigned> > data_values;
+
+    // Loop over all vertex nodes
+    //const unsigned n_solid_pres=this->npres_solid();
+    //for(unsigned j=0;j<n_solid_pres;j++)
+    // {
+    //  // Add the data value associated with the pressure components
+    //  unsigned vertex_index=this->Pconv[j];
+    //  data_values.push_back(std::make_pair(this->node_pt(vertex_index),0));
+    // }
+
+    // Return the vector
+    return data_values;
+   }
+  
+  /// \short Number of fields to be projected: 0 
+  unsigned nfields_for_projection() {return 0;}
+ 
+  /// \short Number of history values to be stored for fld-th field. Whatever
+  /// the timestepper has set up for the velocity components and
+  /// none for the pressure field.
+  unsigned nhistory_values_for_projection(const unsigned &fld)
+  {return 0;}
+ 
+  ///\short Number of positional history values
+  unsigned nhistory_values_for_coordinate_projection()
+   {
+    return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
+   }
+  
+  /// \short Return Jacobian of mapping and shape functions of field fld
+  /// at local coordinate s
+  double jacobian_and_shape_of_field(const unsigned &fld, 
+                                     const Vector<double> &s, 
+                                     Shape &psi)
+   {
+    //Return the Jacobian of the eulerian mapping
+    return this->J_eulerian(s);
+   }
+
+  /// \short Return interpolated field fld at local coordinate s, at time level
+  /// t (t=0: present; t>0: history values)
+  double get_field(const unsigned &t, 
+                   const unsigned &fld,
+                   const Vector<double>& s)
+   {
+    //Dummy return
+    return 0.0;
+   }
+
+
+  ///Return number of values in field fld
+  unsigned nvalue_of_field(const unsigned &fld)
+   {
+    return 0;
+   }
+
+ 
+  ///Return local equation number of value j in field fld.
+  int local_equation(const unsigned &fld,
+                     const unsigned &j)
+   {
+    return -1;
+   }
+  
+ };
+
+
+//=======================================================================
+/// Face geometry for element is the same as that for the underlying
+/// wrapped element
+//=======================================================================
+ template<class ELEMENT>
+ class FaceGeometry<ProjectablePVDElement<ELEMENT> > 
+  : public virtual FaceGeometry<ELEMENT>
+ {
+ public:
+  FaceGeometry() : FaceGeometry<ELEMENT>() {}
+ };
+
+
+//=======================================================================
+/// Face geometry of the Face Geometry for element is the same as 
+/// that for the underlying wrapped element
+//=======================================================================
+ template<class ELEMENT>
+ class FaceGeometry<FaceGeometry<
+ ProjectablePVDElement<ELEMENT> > >
+ : public virtual FaceGeometry<FaceGeometry<ELEMENT> >
+ {
+   public:
+   FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT> >() {}
+ };
 
 
 
@@ -844,7 +966,6 @@ template<unsigned NNODE_1D>
    
    /// C-style output: x,y,[z],xi0,xi1,[xi2],p,gamma
    void output(FILE* file_pt, const unsigned &n_plot);
-   
    
     protected:
    
@@ -1378,7 +1499,8 @@ public virtual PointElement
 //============================================================================
 template<unsigned DIM, unsigned NNODE_1D>
  class TPVDElement : public virtual SolidTElement<DIM,NNODE_1D>,
- public virtual PVDEquations<DIM>
+ public virtual PVDEquations<DIM>,
+ public virtual ElementWithZ2ErrorEstimator
 {
   public:
  
@@ -1399,6 +1521,68 @@ template<unsigned DIM, unsigned NNODE_1D>
  /// C-style output function
  void output(FILE* file_pt, const unsigned &n_plot)
  {PVDEquations<DIM>::output(file_pt,n_plot);}
+
+ /// \short Order of recovery shape functions for Z2 error estimation:
+ /// Same order as shape functions.
+ unsigned nrecovery_order() {return (NNODE_1D-1);}
+
+ /// \short Number of vertex nodes in the element
+ unsigned nvertex_node() const
+ {return TElement<DIM,NNODE_1D>::nvertex_node();}
+ 
+ /// \short Pointer to the j-th vertex node in the element
+ Node* vertex_node_pt(const unsigned& j) const
+ {return TElement<DIM,NNODE_1D>::vertex_node_pt(j);}
+ 
+ /// Number of 'flux' terms for Z2 error estimation
+ unsigned num_Z2_flux_terms()
+ {
+  // DIM Diagonal strain rates and DIM*(DIM-1)/2 off diagonal terms
+  return DIM + DIM*(DIM-1)/2;
+ }
+
+ /// \short Get 'flux' for Z2 error recovery:   Upper triangular entries
+ /// in strain tensor.
+ void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
+ {
+#ifdef PARANOID
+ unsigned num_entries=DIM+((DIM*DIM)-DIM)/2;
+ if (flux.size()!=num_entries)
+  {
+   std::ostringstream error_message;
+   error_message << "The flux vector has the wrong number of entries, "
+                 << flux.size() << ", whereas it should be "
+                 << num_entries << std::endl;
+   throw OomphLibError(error_message.str(),
+                       "TPVDElement::get_Z2_flux()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+ // Get strain matrix
+ DenseMatrix<double> strain(DIM);
+ this->get_strain(s,strain);
+
+ // Pack into flux Vector
+ unsigned icount=0;
+ 
+ // Start with diagonal terms
+ for(unsigned i=0;i<DIM;i++)
+  {
+   flux[icount]=strain(i,i);
+   icount++;
+  }
+ //Off diagonals row by row
+ for(unsigned i=0;i<DIM;i++)
+  {
+   for(unsigned j=i+1;j<DIM;j++)
+    {
+     flux[icount]=strain(i,j);
+     icount++;
+    }
+  }
+ }
+
 
 };
 
@@ -1470,7 +1654,8 @@ class FaceGeometry<FaceGeometry<TPVDElement<3,NNODE_1D> > > :
 template<unsigned DIM, unsigned NNODE_1D>
  class TPVDBubbleEnrichedElement : 
 public virtual SolidTBubbleEnrichedElement<DIM,NNODE_1D>,
- public virtual PVDEquations<DIM>
+ public virtual PVDEquations<DIM>,
+ public virtual ElementWithZ2ErrorEstimator
 {
   public:
  
@@ -1492,6 +1677,69 @@ public virtual SolidTBubbleEnrichedElement<DIM,NNODE_1D>,
  /// C-style output function
  void output(FILE* file_pt, const unsigned &n_plot)
  {PVDEquations<DIM>::output(file_pt,n_plot);}
+
+
+ /// \short Order of recovery shape functions for Z2 error estimation:
+ /// Same order as shape functions.
+ unsigned nrecovery_order() {return (NNODE_1D-1);}
+
+ /// \short Number of vertex nodes in the element
+ unsigned nvertex_node() const
+ {return TElement<DIM,NNODE_1D>::nvertex_node();}
+ 
+ /// \short Pointer to the j-th vertex node in the element
+ Node* vertex_node_pt(const unsigned& j) const
+ {return TElement<DIM,NNODE_1D>::vertex_node_pt(j);}
+ 
+ /// Number of 'flux' terms for Z2 error estimation
+ unsigned num_Z2_flux_terms()
+ {
+  // DIM Diagonal strain rates and DIM*(DIM-1)/2 off diagonal terms
+  return DIM + DIM*(DIM-1)/2;
+ }
+
+ /// \short Get 'flux' for Z2 error recovery:   Upper triangular entries
+ /// in strain tensor.
+ void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
+ {
+#ifdef PARANOID
+ unsigned num_entries=DIM+((DIM*DIM)-DIM)/2;
+ if (flux.size()!=num_entries)
+  {
+   std::ostringstream error_message;
+   error_message << "The flux vector has the wrong number of entries, "
+                 << flux.size() << ", whereas it should be "
+                 << num_entries << std::endl;
+   throw OomphLibError(error_message.str(),
+                       "TPVDElement::get_Z2_flux()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+ // Get strain matrix
+ DenseMatrix<double> strain(DIM);
+ this->get_strain(s,strain);
+
+ // Pack into flux Vector
+ unsigned icount=0;
+ 
+ // Start with diagonal terms
+ for(unsigned i=0;i<DIM;i++)
+  {
+   flux[icount]=strain(i,i);
+   icount++;
+  }
+ //Off diagonals row by row
+ for(unsigned i=0;i<DIM;i++)
+  {
+   for(unsigned j=i+1;j<DIM;j++)
+    {
+     flux[icount]=strain(i,j);
+     icount++;
+    }
+  }
+ }
+
 
 };
 
@@ -1559,7 +1807,8 @@ class FaceGeometry<FaceGeometry<TPVDBubbleEnrichedElement<3,NNODE_1D> > > :
 //=======================================================================
 template <unsigned DIM>
 class TPVDElementWithContinuousPressure : public virtual SolidTElement<DIM,3>,
- public virtual PVDEquationsWithPressure<DIM>
+ public virtual PVDEquationsWithPressure<DIM>,
+ public virtual ElementWithZ2ErrorEstimator
 {
   private:
  
@@ -1654,6 +1903,67 @@ public:
  /// C-style PVDEquationsWithPressure output function
  void output(FILE* file_pt, const unsigned &n_plot)
   {PVDEquationsWithPressure<DIM>::output(file_pt,n_plot);}
+ 
+ /// \short Order of recovery shape functions for Z2 error estimation:
+ /// Same order as shape functions.
+ unsigned nrecovery_order() {return 2;}
+
+ /// \short Number of vertex nodes in the element
+ unsigned nvertex_node() const
+ {return TElement<DIM,3>::nvertex_node();}
+ 
+ /// \short Pointer to the j-th vertex node in the element
+ Node* vertex_node_pt(const unsigned& j) const
+ {return TElement<DIM,3>::vertex_node_pt(j);}
+ 
+ /// Number of 'flux' terms for Z2 error estimation
+ unsigned num_Z2_flux_terms()
+ {
+  // DIM Diagonal strain rates and DIM*(DIM-1)/2 off diagonal terms
+  return DIM + DIM*(DIM-1)/2;
+ }
+
+ /// \short Get 'flux' for Z2 error recovery:   Upper triangular entries
+ /// in strain tensor.
+ void get_Z2_flux(const Vector<double>& s, Vector<double>& flux)
+ {
+#ifdef PARANOID
+ unsigned num_entries=DIM+((DIM*DIM)-DIM)/2;
+ if (flux.size()!=num_entries)
+  {
+   std::ostringstream error_message;
+   error_message << "The flux vector has the wrong number of entries, "
+                 << flux.size() << ", whereas it should be "
+                 << num_entries << std::endl;
+   throw OomphLibError(error_message.str(),
+                       "TPVDElement::get_Z2_flux()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+#endif
+
+ // Get strain matrix
+ DenseMatrix<double> strain(DIM);
+ this->get_strain(s,strain);
+
+ // Pack into flux Vector
+ unsigned icount=0;
+ 
+ // Start with diagonal terms
+ for(unsigned i=0;i<DIM;i++)
+  {
+   flux[icount]=strain(i,i);
+   icount++;
+  }
+ //Off diagonals row by row
+ for(unsigned i=0;i<DIM;i++)
+  {
+   for(unsigned j=i+1;j<DIM;j++)
+    {
+     flux[icount]=strain(i,j);
+     icount++;
+    }
+  }
+ }
 
 
 };
@@ -1863,6 +2173,133 @@ namespace SolidHelpers
   }
  
 };
+
+
+
+//==========================================================
+/// PVDElementWithContinuousPressure upgraded to become projectable
+//==========================================================
+ template<class PVD_ELEMENT>
+ class ProjectablePVDElementWithContinuousPressure : 
+  public virtual ProjectableElement<PVD_ELEMENT>
+ {
+
+ public:
+
+  /// \short Constructor [this was only required explicitly
+  /// from gcc 4.5.2 onwards...]
+  ProjectablePVDElementWithContinuousPressure(){}
+  
+
+  /// \short Specify the values associated with field fld. 
+  /// The information is returned in a vector of pairs which comprise 
+  /// the Data object and the value within it, that correspond to field fld. 
+  /// In the underlying PVD elements  the pressures (the first 
+  /// field) are the first values at the vertex nodes etc. 
+  Vector<std::pair<Data*,unsigned> > data_values_of_field(const unsigned& fld)
+   {   
+    // Create the vector
+    Vector<std::pair<Data*,unsigned> > data_values;
+
+    // Loop over all vertex nodes
+    const unsigned n_solid_pres=this->npres_solid();
+    for(unsigned j=0;j<n_solid_pres;j++)
+     {
+      // Add the data value associated with the pressure components
+      unsigned vertex_index=this->Pconv[j];
+      data_values.push_back(std::make_pair(this->node_pt(vertex_index),0));
+     }
+
+    // Return the vector
+    return data_values;
+   }
+  
+  /// \short Number of fields to be projected: 1, corresponding to 
+  /// the pressure only
+  unsigned nfields_for_projection() {return 1;}
+ 
+  /// \short Number of history values to be stored for fld-th field. Whatever
+  /// the timestepper has set up for the velocity components and
+  /// none for the pressure field.
+  unsigned nhistory_values_for_projection(const unsigned &fld)
+   {
+    //pressure doesn't have history values
+    return 1; 
+   }
+
+  ///\short Number of positional history values
+  unsigned nhistory_values_for_coordinate_projection()
+   {
+    return this->node_pt(0)->position_time_stepper_pt()->ntstorage();
+   }
+  
+  /// \short Return Jacobian of mapping and shape functions of field fld
+  /// at local coordinate s
+  double jacobian_and_shape_of_field(const unsigned &fld, 
+                                     const Vector<double> &s, 
+                                     Shape &psi)
+   {
+    //Get the solid pressure shape function
+    this->solid_pshape(s,psi);
+    //Return the Jacobian of the eulerian mapping
+    return this->J_eulerian(s);
+   }
+
+  /// \short Return interpolated field fld at local coordinate s, at time level
+  /// t (t=0: present; t>0: history values)
+  double get_field(const unsigned &t, 
+                   const unsigned &fld,
+                   const Vector<double>& s)
+   {
+    return this->interpolated_solid_p(s);
+   }
+
+
+
+  ///Return number of values in field fld
+  unsigned nvalue_of_field(const unsigned &fld)
+   {
+    return this->npres_solid();
+   }
+
+ 
+  ///Return local equation number of value j in field fld.
+  int local_equation(const unsigned &fld,
+                     const unsigned &j)
+   {
+    return this->solid_p_local_eqn(j);
+   }
+  
+ };
+
+
+//=======================================================================
+/// Face geometry for element is the same as that for the underlying
+/// wrapped element
+//=======================================================================
+ template<class ELEMENT>
+ class FaceGeometry<ProjectablePVDElementWithContinuousPressure<ELEMENT> > 
+  : public virtual FaceGeometry<ELEMENT>
+ {
+ public:
+  FaceGeometry() : FaceGeometry<ELEMENT>() {}
+ };
+
+
+//=======================================================================
+/// Face geometry of the Face Geometry for element is the same as 
+/// that for the underlying wrapped element
+//=======================================================================
+ template<class ELEMENT>
+ class FaceGeometry<FaceGeometry<
+ ProjectablePVDElementWithContinuousPressure<ELEMENT> > >
+ : public virtual FaceGeometry<FaceGeometry<ELEMENT> >
+ {
+   public:
+   FaceGeometry() : FaceGeometry<FaceGeometry<ELEMENT> >() {}
+ };
+
+
 
 }
 
