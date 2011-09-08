@@ -1331,10 +1331,10 @@ if test x$found_mpi_h_file = xfalse; then \
 fi;
 
 
-AC_CHECK_FILES(external_distributions/mumps_and_scalapack/MUMPS_4.8.4.tar.gz,
-                echo "Found MUMPS_4.8.4.tar.gz"; 
+AC_CHECK_FILES(external_distributions/mumps_and_scalapack/MUMPS_4.10.0.tar.gz,
+                echo "Found MUMPS_4.10.0.tar.gz"; 
                 found_mumps_tar_file=true, 
-                echo "Not found MUMPS_4.8.4.tar.gz"; 
+                echo "Not found MUMPS_4.10.0.tar.gz"; 
                 found_mumps_tar_file=false)
 
 AC_CHECK_FILES(external_distributions/mumps_and_scalapack/scalapack_installer.tgz,
@@ -1346,7 +1346,7 @@ AC_CHECK_FILES(external_distributions/mumps_and_scalapack/scalapack_installer.tg
 
 if test x$found_mumps_tar_file = xtrue; then \
 if test x$found_scalapack_tar_file = xfalse; then \
-        echo "Need external_distributions/mumps_and_scalapack/MUMPS_4.8.4.tar.gz *and* "; \
+        echo "Need external_distributions/mumps_and_scalapack/MUMPS_4.10.0.tar.gz *and* "; \
         echo "external_distributions/mumps_and_scalapack/scalapack_installer.tgz "; \
         echo "to build mumps"; \
 fi \
@@ -1354,7 +1354,7 @@ fi;
 
 if test x$found_mumps_tar_file = xfalse; then \
 if test x$found_scalapack_tar_file = xtrue; then \
-        echo "Need external_distributions/mumps_and_scalapack/MUMPS_4.8.4.tar.gz *and* "; \
+        echo "Need external_distributions/mumps_and_scalapack/MUMPS_4.10.0.tar.gz *and* "; \
         echo "external_distributions/mumps_and_scalapack/scalapack_installer.tgz "; \
         echo "to build mumps"; \
 fi \

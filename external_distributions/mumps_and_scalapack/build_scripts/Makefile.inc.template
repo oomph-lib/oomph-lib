@@ -1,12 +1,10 @@
 #--------------------------------------------------------
 # Customised for use with MH's build script. Based on
 # MUMPS_4.8.4/Make.inc/Makefile.gfortran.PAR 
+# with modifications introduced when upgrading to 4.10.0.
 #--------------------------------------------------------
 
-
-#
-#  This file is part of MUMPS 4.8.4, built on Mon Dec 15 15:31:38 UTC 2008
-#
+LIBEXT=.a
 
 LPORDDIR = $(topdir)/PORD/lib/
 IPORD    = -I$(topdir)/PORD/include/
@@ -18,13 +16,16 @@ ORDERINGSF  = -Dpord
 ORDERINGSC  = $(ORDERINGSF)
 LORDERINGS = $(LMETIS) $(LPORD) $(LSCOTCH)
 IORDERINGS = $(IMETIS) $(IPORD) $(ISCOTCH)
+IORDERINGSC = $(IMETIS) $(IPORD) $(ISCOTCH)
 
 PLAT    =
+OUTC    = -o 
+OUTF    = -o 
 RM = /bin/rm -f  
 CC = @mpicc@   
 FC = @mpif90@  
 FL = @mpif90@  
-AR = ar vr
+AR = ar vr 
 RANLIB  = echo
 SCALAP  = ../../../local/lib/libscalapack.a \
           ../../../local/lib/blacs.a \

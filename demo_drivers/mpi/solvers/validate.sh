@@ -2,7 +2,7 @@
 
 
 #Set the number of tests to be checked
-NUM_TESTS=27
+NUM_TESTS=28
 
 # Doc what we're using to run tests on two processors
 echo " " 
@@ -244,6 +244,7 @@ echo " " >> validation.log
 echo "  " `pwd` >> validation.log
 echo " " >> validation.log
 
+
 if test "$1" = "no_fpdiff"; then
   echo "dummy [OK] -- Can't run fpdiff.py because we don't have python or validata" >> validation.log
 else
@@ -259,6 +260,15 @@ echo "SuperLU_dist global problem based solve" >> validation.log
 echo "SuperLU_dist global problem based solve" >> validation.log
 ../../../../bin/fpdiff.py ../validata/direct_solver_problem_solve_result.dat.gz  \
          RESLT/soln_direct_solver_2.dat >> validation.log
+
+echo "MUMPS-based global problem based solve" >> validation.log
+if [ -f RESLT/dummy_mumps.dat ]; then
+    echo "Using dummy data for MUMPS self-test (don't have mumps!)"  
+    echo "[OK] (Dummy for non-existent MUMPS)"  >> validation.log
+else
+    ../../../../bin/fpdiff.py ../validata/direct_solver_problem_solve_result.dat.gz  \
+        RESLT/soln_direct_solver_3.dat >> validation.log
+fi
 fi
 
 mv RESLT RESLT_test

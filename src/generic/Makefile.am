@@ -45,7 +45,7 @@ matrix_vector_product.cc
 #face_element_as_geometric_object.cc
 
 if OOMPH_HAS_MUMPS
-sources+=mumps_fortran_solver.F mumps_solver.cc new_mumps_solver.cc
+sources+=mumps_fortran_solver.F mumps_solver.cc
 endif
 
 if WANT_MPI
@@ -99,8 +99,7 @@ general_purpose_block_preconditioners.h SuperLU_preconditioner.h \
 matrix_vector_product.h projection.h line_visualiser.h
 
 if OOMPH_HAS_MUMPS
-
-headers+=mumps_solver.h new_mumps_solver.h 
+headers+=mumps_solver.h
 endif
 
 if WANT_MPI
@@ -142,7 +141,7 @@ endif
 # be included into the include directory
 extra_headers = cfortran.h frontal.h arpack.h lapack_qz.h mumps.h
 
-# Define name of library
+# Define name of library 
 libname = generic
 
 # Combine headers and sources
@@ -178,10 +177,6 @@ library_include_HEADERS=$(headers) $(templates)
 # in src as they will not have been installed yet! 
 INCLUDES = -I$(top_srcdir)/external_src 
 
-
-
-
-# -I/home/mheil/local/include/mumps
 
 
 

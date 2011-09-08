@@ -25,7 +25,7 @@
 //LIC// The authors may be contacted at oomph-lib@maths.man.ac.uk.
 //LIC// 
 //LIC//====================================================================
-//Interface to MUMPS solver (fortran)
+//Interface to MUMPS solver
 
 
 #ifdef OOMPH_HAS_MPI
@@ -38,8 +38,6 @@
 
 
 //oomph-lib headers
-#include "cfortran.h"
-#include "mumps.h"
 #include "mumps_solver.h"
 #include "Vector.h"
 #include "oomph_utilities.h"
@@ -51,92 +49,9 @@ namespace oomph
 
  
 
-//====================================================================
-/// \short Namespace for pool of fortran mumps solvers
-//====================================================================
-namespace MumpsSolverPool 
-{
-
- ///Stack containing the IDs of available mumps solvers
- std::stack<int> Available_solver_ids;
-
- /// Bool indicating that the pool has been set up
- bool Pool_has_been_setup=false;
- 
- /// Default max. number of mumps solvers
- int Max_n_solvers=10;
- 
- /// Get new solver from pool and return its id
- void get_new_solver_id(unsigned& solver_id)
- {
-  if (Available_solver_ids.size()==0)
-   {
-    std::ostringstream error_message_stream;
-    error_message_stream 
-     << "Sorry, all available mumps solvers are in use.\n" 
-     << "Please increase MumpsSolverPool::Max_n_solvers from its \n" 
-     << "current value of " << Max_n_solvers << " and try again." 
-     << std::endl;
-    
-    throw OomphLibError(error_message_stream.str(),
-                        "MumpsSolverPool::get_new_solver_id()",
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-  else
-   {
-    // Get solver id from top of stack and pops it
-    solver_id=Available_solver_ids.top();
-    Available_solver_ids.pop();
-   }
- }
- 
- /// Return solver to pool
- void return_solver(const unsigned& solver_id)
- {
-  // Put it back on stack
-  Available_solver_ids.push(solver_id);
- }
-
- /// \short Setup namespace -- specify the max. number of solver
- /// instantiations required.
- void setup(const unsigned& max_n_solvers=Max_n_solvers)
- {
-  if (!Pool_has_been_setup)
-   {
-    Pool_has_been_setup=true;
-
-    // Setup pool in fortran
-    mumps_setup_solver_pool(int(max_n_solvers));
-    Max_n_solvers=max_n_solvers;
-
-    // Declare available IDs -- Fortran 1-based indexing!
-    for (unsigned i=1;i<=max_n_solvers;i++)
-     {
-      Available_solver_ids.push(i);
-     }
-   }
-  else
-   {
-    std::ostringstream error_message_stream;
-    error_message_stream 
-     << "Mumps solver pool has already been set up. Can't do it again.\n";
-    throw OomphLibError(error_message_stream.str(),
-                        "MumpsSolverPool::setup()",
-                        OOMPH_EXCEPTION_LOCATION);
-   }
-
- }
-
-}
-
-
-
-
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
-
-
 
 
 
@@ -144,58 +59,121 @@ namespace MumpsSolverPool
  /// \short Default factor for workspace -- static so it can be overwritten
  /// globally.
  //=========================================================================
- int MumpsSolver::Default_workspace_scaling_factor=1;
+ int MumpsSolver::Default_workspace_scaling_factor=5;
 
 
+//=========================================================================
+///Static warning to suppress warnings about incorrect distribution of
+///RHS vector. Default is false
+//=========================================================================
+bool MumpsSolver::Suppress_incorrect_rhs_distribution_warning_in_resolve
+=false;
 
 //=============================================================================
 /// Constructor: Call setup
 //=============================================================================
  MumpsSolver::MumpsSolver()
  {
-  // Setup pool
-  if (!MumpsSolverPool::Pool_has_been_setup)
-   {
-    // Setup with default number of solver instantiations
-    MumpsSolverPool::setup();
-   }
-
-  // Get new solver ID from pool
-  MumpsSolverPool::get_new_solver_id(Solver_ID_in_pool);
-
-  oomph_info << "New solver id: " << Solver_ID_in_pool << std::endl;
-
   Doc_stats=false;
   Suppress_solve=false;
   Delete_matrix_data=false;
-  mumps_setup(Solver_ID_in_pool,Default_workspace_scaling_factor);
+  Suppress_warning_about_MPI_COMM_WORLD=false;
+  Workspace_scaling_factor=Default_workspace_scaling_factor;
+  Mumps_is_initialised=false;
+  Mumps_struc_pt=0;
+ }
+  
+
+//=============================================================================
+/// Initialise instance of mumps data structure
+//=============================================================================
+ void MumpsSolver::initialise_mumps()
+ {
+
+  // Make new instance of Mumps data structure
+  Mumps_struc_pt=new DMUMPS_STRUC_C;
+
+  // Mumps' hack to indicate that mpi_comm_world is used. Conversion of any
+  // other communicators appears to be non-portable, so we simply
+  // issue a warning if we later discover that oomph-lib's communicator
+  // is not MPI_COMM_WORLD
+  Mumps_struc_pt->comm_fortran = -987654;
+  
+  // Root processor participates in solution
+  Mumps_struc_pt->par = 1;
+  
+  // Matrix is unsymmetric
+  Mumps_struc_pt->sym = 0; 
+  
+  // First call does the initialise phase
+  Mumps_struc_pt->job = -1;
+
+  // Call c interface to double precision mumps to initialise
+  dmumps_c(Mumps_struc_pt);
+  Mumps_is_initialised=true;
+
+  //Output stream for global info on host. Negative value suppresses printing
+  Mumps_struc_pt->icntl[2]=-1;
+  
+  //Only show error messages and stats
+  Mumps_struc_pt->icntl[3]=2;// 4 for full doc; creates huge amount of output
+  
+  //Write matrix
+  // sprintf(Mumps_struc_pt->write_problem,"/work/e173/e173/mheil/matrix");
+  
+  // Assembled matrix (rather than element-by_element)
+  Mumps_struc_pt->icntl[4]=0;
+  
+  // Distributed problem with user-specified distribution
+  Mumps_struc_pt->icntl[17]=3;
+  
+  // Dense RHS
+  Mumps_struc_pt->icntl[19]=0;
+   
+  // Non-distributed solution
+  Mumps_struc_pt->icntl[20]=0;   
  }
  
+
+
+//=============================================================================
+/// Shutdown mumps
+//=============================================================================
+ void MumpsSolver::shutdown_mumps()
+ {
+  if (Mumps_is_initialised)
+   {
+    // Shut down flag
+    Mumps_struc_pt->job = -2;
+    
+    // Call c interface to double precision mumps to shut down
+    dmumps_c(Mumps_struc_pt);
+    
+    // Cleanup
+    delete Mumps_struc_pt;
+    Mumps_struc_pt=0;
+    
+    Mumps_is_initialised=false;
+
+    // Cleanup storage
+    Irn_loc.clear();
+    Jcn_loc.clear();
+    A_loc.clear();
+ 
+   }
+
+ }
+
+
 //=============================================================================
 /// Destructor: Shutdown mumps
 //=============================================================================
 MumpsSolver::~MumpsSolver()
- {
-
-  oomph_info << "Returning solver id: " << Solver_ID_in_pool << std::endl;
-
-  /// Return solver to pool
-  MumpsSolverPool::return_solver(Solver_ID_in_pool);
-  
-  /// Shut it down
-  mumps_shutdown(Solver_ID_in_pool);
+ { 
+  shutdown_mumps();
  }
  
-
-//=============================================================================
-/// Set scaling factor for workspace (defaults is 2)
-//=============================================================================
-void MumpsSolver::set_workspace_scaling_factor(const unsigned& s)
-{
- mumps_set_workspace_scaling_factor(Solver_ID_in_pool,int(s));
-}
- 
-
+  
 //=============================================================================
 /// LU decompose the matrix addressed by matrix_pt using
 /// mumps. The resulting matrix factors are stored internally.
@@ -204,6 +182,26 @@ void MumpsSolver::set_workspace_scaling_factor(const unsigned& s)
 //=============================================================================
 void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
 {
+
+
+ // Initialise timer
+ double t_start = TimingHelpers::timer(); 
+
+ // set the distribution
+ DistributableLinearAlgebraObject* dist_matrix_pt=
+  dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt);
+ if (dist_matrix_pt)
+  {
+   // the solver has the same distribution as the matrix if possible
+   this->build_distribution(dist_matrix_pt->distribution_pt());
+  }
+ else
+  {
+   throw OomphLibError("Matrix must be distributable",
+                       "MumpsSolver::factorise()",
+                       OOMPH_EXCEPTION_LOCATION);
+  }
+ 
 
  //Check that we have a square matrix
 #ifdef PARANOID
@@ -219,28 +217,56 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
                        "MumpsSolver::factorise()",
                        OOMPH_EXCEPTION_LOCATION);
   }
+ if (!Suppress_warning_about_MPI_COMM_WORLD)
+  {
+   if (this->distribution_pt()->communicator_pt()->mpi_comm()!=
+       MPI_COMM_WORLD)
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "Warning: Mumps wrapper assumes that communicator is MPI_COMM_WORLD\n"
+      << "         which is not the case, so mumps may die...\n"
+      << "         If it does initialise oomph-lib's mpi without requesting\n"
+      << "         the communicator to be a duplicate of MPI_COMM_WORLD\n"
+      << "         (done via an optional boolean to MPI_Helpers::init(...)\n\n"
+      << "         (You can suppress this warning by recompiling without\n"
+      << "         paranoia or setting \n\n"
+      << "         MumpsSolver::suppress_warning_about_MPI_COMM_WORLD()\n\n"
+      << "         to true.\n";
+     OomphLibWarning(error_message_stream.str(),
+                     "MumpsSolver::factorise()",
+                     OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+ 
 #endif
 
- // Doc stats?
- if (Doc_stats) mumps_switch_on_doc(Solver_ID_in_pool);
-
- // number of processors
- unsigned nproc = this->distribution_pt()->communicator_pt()->nproc();
- if(dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt) != 0)
+ // Initialise
+ if (Mumps_is_initialised)
   {
-   nproc = dynamic_cast<DistributableLinearAlgebraObject*>
-    (matrix_pt)->distribution_pt()->communicator_pt()->nproc();
+   shutdown_mumps();
+  }
+ initialise_mumps();
+
+
+ // Doc stats?
+ if (Doc_stats)
+  {
+   //Output stream for global info on host. Negative value suppresses printing
+   Mumps_struc_pt->icntl[2]=6;
   }
 
- // Make sure any existing factors are deleted
- clean_up_memory();
+ // number of processors
+ unsigned nproc = 1;
+ if (dist_matrix_pt != 0)
+  {
+   nproc = dist_matrix_pt->distribution_pt()->communicator_pt()->nproc();
+  }
    
  // Is it a CRDoubleMatrix?
- if(dynamic_cast<CRDoubleMatrix*>(matrix_pt) != 0)
+ CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
+ if (cr_matrix_pt != 0)
   {
-   // Get a cast pointer to the matrix
-   CRDoubleMatrix* cr_matrix_pt = dynamic_cast<CRDoubleMatrix*>(matrix_pt);
-
 #ifdef PARANOID
    // paranoid check that the matrix has been set up
    if (!cr_matrix_pt->built())
@@ -252,9 +278,10 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
 #endif
    
    // if the matrix is distributed then set up solver
-   if ((cr_matrix_pt->distribution_pt()->communicator_pt()->nproc()==1)||
-       (cr_matrix_pt->distributed()))
+   if ((nproc==1)||(cr_matrix_pt->distributed()))
     {
+     double t_start_copy = TimingHelpers::timer(); 
+
      // Find the number of rows and non-zero entries in the matrix
      const int nnz_loc = int(cr_matrix_pt->nnz());
      const int n = matrix_pt->nrow();
@@ -262,13 +289,13 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
      // Create mumps storage
      
      // Create vector for row numbers
-     Vector<int> irn_loc(nnz_loc);
+     Irn_loc.resize(nnz_loc);
      
      // Create vector for column numbers
-     Vector<int> jcn_loc(nnz_loc);
+     Jcn_loc.resize(nnz_loc);
      
      // Vector for entries
-     Vector<double> a_loc(nnz_loc);
+     A_loc.resize(nnz_loc);
      
      // First row held on this processor
      int first_row = cr_matrix_pt->first_row();
@@ -280,35 +307,127 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
      int i_row=0;
      for(int count=0;count<nnz_loc;count++) 
       {
-       a_loc[count] = matrix_value_pt[count];
-       jcn_loc[count] = matrix_index_pt[count]+1;
+       A_loc[count] = matrix_value_pt[count];
+       Jcn_loc[count] = matrix_index_pt[count]+1;
        if (count<matrix_start_pt[i_row+1])
         {
-         irn_loc[count] = first_row+i_row+1;
+         Irn_loc[count] = first_row+i_row+1;
         }
        else
         {
          i_row++;
-         irn_loc[count] = first_row+i_row+1;
+         Irn_loc[count] = first_row+i_row+1;
         }
       }
       
      // Now delete the matrix if we are allowed
      if (Delete_matrix_data==true)
       {
-       oomph_info << "MUMPS is clearing the matrix" << std::endl;
        cr_matrix_pt->clear();
       }
 
-     // Call mumps factorisation
-     mumps_factorise(Solver_ID_in_pool,n,nnz_loc,
-                     &irn_loc[0],&jcn_loc[0],&a_loc[0]);
+     if ((Doc_time) && 
+         (this->distribution_pt()->communicator_pt()->my_rank()==0))
+      {   
+       double t_end_copy = TimingHelpers::timer(); 
+       oomph_info 
+        << "Time for copying matrix into MumpsSolver data structure [sec]       : "
+        << t_end_copy-t_start_copy << std::endl;
+      }
      
+     // Call mumps factorisation
+     //-------------------------
+
+     //Specify size of system
+     Mumps_struc_pt->n=n;
+
+     // Number of nonzeroes 
+     Mumps_struc_pt->nz_loc=nnz_loc;
+     
+     //The entries
+     Mumps_struc_pt->irn_loc=&Irn_loc[0];
+     Mumps_struc_pt->jcn_loc=&Jcn_loc[0];
+     Mumps_struc_pt->a_loc=&A_loc[0];
+
+     double t_start_analyse = TimingHelpers::timer(); 
+
+     // Do analysis
+     Mumps_struc_pt->job = 1;
+     dmumps_c(Mumps_struc_pt);
+
+
+     if ((Doc_time) && 
+         (this->distribution_pt()->communicator_pt()->my_rank()==0))
+      {   
+       double t_end_analyse = TimingHelpers::timer(); 
+       oomph_info 
+        << "Time for mumps analysis stage in MumpsSolver [sec]       : "
+        << t_end_analyse-t_start_analyse << std::endl;
+      }
+     
+
+     int my_rank=this->distribution_pt()->communicator_pt()->my_rank();
+
+     // Document estimate for size of workspace
+     if (my_rank==0)
+      {
+       oomph_info <<  "Estimated max. workspace in MB: "
+                  << Mumps_struc_pt->infog[25] << std::endl;
+      }
+      
+     double t_start_factor = TimingHelpers::timer(); 
+
+      // Loop until successfully factorised
+      bool factorised=false;
+      while (!factorised)
+       {
+        
+        // Set workspace to multiple of that -- ought to be "significantly
+        // larger than infog(26)", according to the manual :(
+        Mumps_struc_pt->icntl[22]=Workspace_scaling_factor*
+         Mumps_struc_pt->infog[25];
+        oomph_info << "Attempting factorisation with workspace estimate: "
+                   << Mumps_struc_pt->icntl[22] << " MB\n";
+        oomph_info << "corresponding to Workspace_scaling_factor = "
+                   << Workspace_scaling_factor << "\n";
+
+        // Do factorisation
+        Mumps_struc_pt->job = 2;
+        dmumps_c(Mumps_struc_pt);
+        
+        // Check for error
+        if (Mumps_struc_pt->infog[0]!=0)
+         {
+          oomph_info << "Error during mumps factorisation!\n";
+          oomph_info << "Error codes: "
+                     << Mumps_struc_pt->info[0] << " " 
+                     << Mumps_struc_pt->info[1] << std::endl;
+          
+          // Increase scaling factor for workspace and run again 
+          Workspace_scaling_factor*=2;
+          
+          oomph_info << "Increasing workspace_scaling_factor to " 
+                     << Workspace_scaling_factor << std::endl;
+         }
+        else
+         {
+          factorised=true;
+         }
+       }
+
+
+      if ((Doc_time) && 
+          (this->distribution_pt()->communicator_pt()->my_rank()==0))
+       {   
+        double t_end_factor = TimingHelpers::timer(); 
+        oomph_info 
+         << "Time for actual mumps factorisation in MumpsSolver [sec]       : "
+         << t_end_factor-t_start_factor<< std::endl;
+       }
     }
    // else the CRDoubleMatrix is not distributed
    else
-    {
-
+    {     
      std::ostringstream error_message_stream;
      error_message_stream << "MumpsSolver only works for a "
                           << " distributed CRDoubleMatrix\n";
@@ -330,9 +449,17 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
   }
 
 
- // Switch off docing again
- mumps_switch_off_doc(Solver_ID_in_pool);
- 
+ if ((Doc_time) && (this->distribution_pt()->communicator_pt()->my_rank()==0))
+  {
+   
+   double t_end = TimingHelpers::timer(); 
+   oomph_info << "Time for MumpsSolver factorisation [sec]       : "
+              << t_end-t_start << std::endl;
+  }
+
+ // Switch off docing again by setting output stream for global info on 
+ // to negative number
+ Mumps_struc_pt->icntl[2]=-1;
 
 }
 
@@ -342,12 +469,115 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
 /// vectors
 //=============================================================================
  void MumpsSolver::backsub(const DoubleVector &rhs,
-                           DoubleVector &result)
+                              DoubleVector &result)
  {
-  
-  // Doc stats?
-  if (Doc_stats) mumps_switch_on_doc(Solver_ID_in_pool);
 
+  double t_start = TimingHelpers::timer(); 
+
+#ifdef PARANOID
+  if (!Suppress_warning_about_MPI_COMM_WORLD)
+   {
+    if (this->distribution_pt()->communicator_pt()->mpi_comm()!=MPI_COMM_WORLD)
+     {
+      std::ostringstream error_message_stream;
+      error_message_stream 
+       << "Warning: Mumps wrapper assumes that communicator is MPI_COMM_WORLD\n"
+       << "         which is not the case, so mumps may die...\n"
+       << "         If it does initialise oomph-lib's mpi without requesting\n"
+       << "         the communicator to be a duplicate of MPI_COMM_WORLD\n"
+       << "         (done via an optional boolean to MPI_Helpers::init(...)\n\n"
+       << "         (You can suppress this warning by recompiling without\n"
+       << "         paranoia or setting \n\n"
+       << "         MumpsSolver::suppress_warning_about_MPI_COMM_WORLD()\n\n"
+       << "         to true.\n";
+      OomphLibWarning(error_message_stream.str(),
+                      "MumpsSolver::backsub()",
+                      OOMPH_EXCEPTION_LOCATION);
+     }
+   }
+
+  // Initialised?
+  if (!Mumps_is_initialised)
+   {
+    std::ostringstream error_message_stream;
+    error_message_stream 
+     << "Mumps has not been initialised.";
+    throw OomphLibError(error_message_stream.str(),
+                        "MumpsSolver::backsub()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  
+  // check that the rhs vector is setup
+  if (!rhs.distribution_pt()->built())
+   {
+    std::ostringstream error_message_stream;
+    error_message_stream 
+     << "The vectors rhs must be setup";
+    throw OomphLibError(error_message_stream.str(),
+                        "MumpsSolver::resolve()",
+                        OOMPH_EXCEPTION_LOCATION);
+   }
+  
+#endif
+  
+  // Check that the rhs distribution is the same as the distribution as this 
+  // solver. If not redistribute and issue a warning
+  LinearAlgebraDistribution rhs_distribution(rhs.distribution_pt());
+  if (!(*rhs.distribution_pt() == *this->distribution_pt()))
+   {
+    if(!Suppress_incorrect_rhs_distribution_warning_in_resolve)
+     {
+      std::ostringstream warning_stream;
+      warning_stream 
+       << "The distribution of rhs vector does not match that ofthe solver.\n";
+      warning_stream
+       << "The rhs will be redistributed, which is likely to  be inefficient\n";
+      warning_stream
+       << "To remove this warning you can either:\n"
+       << "    i) Ensure that the rhs vector has the correct distribution\n"
+       << "       before calling the resolve() function\n"
+       << "or ii) Set the flag \n"
+       << " MumpsSolver::Suppress_incorrect_rhs_distribution_warning_in_resolve\n"
+       << "       to be true\n\n";
+      
+      OomphLibWarning(warning_stream.str(),
+                      "MumpsSolver::resolve()",
+                      OOMPH_EXCEPTION_LOCATION);
+     }
+    
+    //Have to cast away const-ness (which tells us that we shouldn't really
+    //be doing this!)
+    const_cast<DoubleVector&>(rhs).redistribute(this->distribution_pt());
+   }
+ 
+
+
+#ifdef PARANOID
+ // if the result vector is setup then check it has the same distribution
+ // as the rhs
+ if (result.distribution_built())
+  {
+   if (!(*result.distribution_pt() == *rhs.distribution_pt()))
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The result vector distribution has been setup; it must have the "
+      << "same distribution as the rhs vector.";
+     throw OomphLibError(error_message_stream.str(),
+                         "MumpsSolver::resolve()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }   
+#endif
+  
+
+  // Doc stats?
+  if (Doc_stats)
+   {
+    //Output stream for global info on host. Negative value suppresses printing
+    Mumps_struc_pt->icntl[2]=6;
+   }
+  
   // number of DOFs
   int ndof = this->distribution_pt()->nrow();
   
@@ -361,19 +591,28 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
   // Make a global distribution (i.e. one that isn't distributed)
   LinearAlgebraDistribution global_distribution(
    this->distribution_pt()->communicator_pt(),ndof,false);
-   
+  
   // Redistribute the tmp_rhs vector with this distribution -- it's
   // now "global", as required for mumps
   tmp_rhs.redistribute(&global_distribution);
   
   // Do the backsubsitution phase -- overwrites the tmp_rhs vector with the
   // solution
-  mumps_backsub(Solver_ID_in_pool,ndof,&tmp_rhs[0]);
+  Mumps_struc_pt->rhs=&tmp_rhs[0];
+  Mumps_struc_pt->job=3;
+  dmumps_c(Mumps_struc_pt);
+
+  // Copy back
+  unsigned n=Mumps_struc_pt->n;
+  for (unsigned j=0;j<n;j++)
+   {
+    tmp_rhs[j]=Mumps_struc_pt->rhs[j];
+   }
   
   // Broadcast the result which is only held on root
   MPI_Bcast(&tmp_rhs[0],ndof,MPI_DOUBLE,0,
             this->distribution_pt()->communicator_pt()->mpi_comm());
-
+  
   // If the result vector is distributed, re-distribute the
   // non-distributed tmp_rhs vector to match
   if (result.built()) 
@@ -387,21 +626,27 @@ void MumpsSolver::factorise(DoubleMatrixBase* const &matrix_pt)
   
   // Now copy the tmp_rhs vector into the (matching) result
   result = tmp_rhs;
- 
+  
+ if ((Doc_time) && (this->distribution_pt()->communicator_pt()->my_rank()==0))
+  {   
+   double t_end = TimingHelpers::timer(); 
+   oomph_info << "Time for MumpsSolver backsub [sec]       : "
+              << t_end-t_start << std::endl;
+  }
 
-  // Switch off docing again
-  mumps_switch_off_doc(Solver_ID_in_pool);
+  // Switch off docing again by setting output stream for global info on 
+  // to negative number
+  Mumps_struc_pt->icntl[2]=-1;
 
 }
 
-
-//===============================================================
-/// Clean up the memory allocated for the MumpsSolver solver
-//===============================================================
+//=========================================================================
+/// Clean up the memory allocated for the MumpsSolver solver -- 
+/// don't think this is needed any more... hierher check
+//=========================================================================
 void MumpsSolver::clean_up_memory()
 {
- //Cleanup
- mumps_cleanup_memory(Solver_ID_in_pool);
+ shutdown_mumps();
 }
 
 
@@ -414,15 +659,36 @@ void MumpsSolver::clean_up_memory()
 /// matrix_pt->clean_up_memory() will be used to wipe the matrix data.
 //=========================================================================
 void MumpsSolver::solve(DoubleMatrixBase* const &matrix_pt,
-                        const DoubleVector &rhs,
-                        DoubleVector &result)
+                           const DoubleVector &rhs,
+                           DoubleVector &result)
 {
+#ifdef PARANOID
+ if (!Suppress_warning_about_MPI_COMM_WORLD)
+  {
+   if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt)
+       ->distribution_pt()->communicator_pt()->mpi_comm()!=
+       MPI_COMM_WORLD)
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "Warning: Mumps wrapper assumes that communicator is MPI_COMM_WORLD\n"
+      << "         which is not the case, so mumps may die...\n"
+      << "         If it does initialise oomph-lib's mpi without requesting\n"
+      << "         the communicator to be a duplicate of MPI_COMM_WORLD\n"
+      << "         (done via an optional boolean to MPI_Helpers::init(...)\n\n"
+      << "         (You can suppress this warning by recompiling without\n"
+      << "         paranoia or setting \n\n"
+      << "         MumpsSolver::suppress_warning_about_MPI_COMM_WORLD()\n\n"
+      << "         to true.\n";
+     OomphLibWarning(error_message_stream.str(),
+                     "MumpsSolver::solve()",
+                     OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+#endif
 
  // Initialise timer
  double t_start = TimingHelpers::timer(); 
- 
- // Doc stats?
- if (Doc_stats) mumps_switch_on_doc(Solver_ID_in_pool);
 
 #ifdef PARANOID
  // check that the rhs vector is setup
@@ -457,18 +723,75 @@ void MumpsSolver::solve(DoubleMatrixBase* const &matrix_pt,
                        "MumpsSolver::solve()",
                        OOMPH_EXCEPTION_LOCATION);
   }
-#endif
 
  
- // Setup the distribution of the solver to match that of the matrix
- if (dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt))
+ // if the matrix is distributable then should have the same distribution
+ // as the rhs vector
+ DistributableLinearAlgebraObject* ddist_matrix_pt = 
+  dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt);
+ if (ddist_matrix_pt != 0)
   {
-   this->distribution_pt()
-    ->build(dynamic_cast<DistributableLinearAlgebraObject*>
-            (matrix_pt)->distribution_pt());
+   if (!(*ddist_matrix_pt->distribution_pt() == *rhs.distribution_pt()))
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The matrix matrix_pt must have the same distribution as the "
+      << "rhs vector.";
+     throw OomphLibError(error_message_stream.str(),
+                         "MumpsSolver::solve()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
   }
+ // if the matrix is not distributable then it the rhs vector should not be
+ // distributed
+ else
+  {
+   if (rhs.distribution_pt()->distributed())
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The matrix (matrix_pt) is not distributable and therefore the rhs"
+      << " vector must not be distributed";
+     throw OomphLibError(error_message_stream.str(),
+                         "MumpsSolver::solve()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+ // if the result vector is setup then check it has the same distribution
+ // as the rhs
+ if (result.built())
+  {
+   if (!(*result.distribution_pt() == *rhs.distribution_pt()))
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "The result vector distribution has been setup; it must have the "
+      << "same distribution as the rhs vector.";
+     throw OomphLibError(error_message_stream.str(),
+                         "MumpsSolver::solve()",
+                         OOMPH_EXCEPTION_LOCATION);
+    }
+  }   
 
- //Factorise the matrix
+#endif
+
+
+
+ // set the distribution
+ DistributableLinearAlgebraObject* dist_matrix_pt=
+  dynamic_cast<DistributableLinearAlgebraObject*>(matrix_pt);
+ if (dist_matrix_pt)
+  {
+   // the solver has the same distribution as the matrix if possible
+   this->build_distribution(dist_matrix_pt->distribution_pt());
+  }
+ else
+  {
+   // the solver has the same distribution as the RHS
+   this->build_distribution(rhs.distribution_pt());
+  }
+ 
+ // Factorise the matrix
  factorise(matrix_pt);
  
  //Now do the back solve
@@ -481,10 +804,13 @@ void MumpsSolver::solve(DoubleMatrixBase* const &matrix_pt,
  if ((Doc_time) && (this->distribution_pt()->communicator_pt()->my_rank()==0))
   {
    
-   oomph_info << std::endl 
-              << "Time for MumpsSolver solve [sec]       : "
-              << t_end-t_start << std::endl << std::endl;
+   oomph_info << "Time for MumpsSolver solve [sec]       : "
+              << t_end-t_start << std::endl;
   }
+
+ // Switch off docing again by setting output stream for global info on 
+ // to negative number
+ Mumps_struc_pt->icntl[2]=-1;
  
  // If we are not storing the solver data for resolves, delete it
  if (!Enable_resolve) 
@@ -492,9 +818,6 @@ void MumpsSolver::solve(DoubleMatrixBase* const &matrix_pt,
    clean_up_memory();
   }
 
-
- // Switch off docing again
- mumps_switch_off_doc(Solver_ID_in_pool);
  
  }
 
@@ -505,16 +828,36 @@ void MumpsSolver::solve(DoubleMatrixBase* const &matrix_pt,
 //==================================================================
 void MumpsSolver::solve(Problem* const &problem_pt, DoubleVector &result)
 {
+ 
+#ifdef PARANOID
+ if (!Suppress_warning_about_MPI_COMM_WORLD)
+  {
+   if (problem_pt->communicator_pt()->mpi_comm()!=MPI_COMM_WORLD)
+    {
+     std::ostringstream error_message_stream;
+     error_message_stream 
+      << "Warning: Mumps wrapper assumes that communicator is MPI_COMM_WORLD\n"
+      << "         which is not the case, so mumps may die...\n"
+      << "         If it does initialise oomph-lib's mpi without requesting\n"
+      << "         the communicator to be a duplicate of MPI_COMM_WORLD\n"
+      << "         (done via an optional boolean to MPI_Helpers::init(...)\n\n"
+      << "         (You can suppress this warning by recompiling without\n"
+      << "         paranoia or setting \n\n"
+      << "         MumpsSolver::suppress_warning_about_MPI_COMM_WORLD()\n\n"
+      << "         to true.\n";
+     OomphLibWarning(error_message_stream.str(),
+                     "MumpsSolver::solve()",
+                     OOMPH_EXCEPTION_LOCATION);
+    }
+  }
+#endif
 
  // Initialise timer
  double t_start = TimingHelpers::timer();
-
- // Doc stats?
- if (Doc_stats) mumps_switch_on_doc(Solver_ID_in_pool);
   
  // number of dofs
  unsigned n_dof = problem_pt->ndof();
-
+ 
  // Set the distribution for the solver.
  this->distribution_pt()->build(problem_pt->communicator_pt(),n_dof);
   
@@ -544,93 +887,96 @@ void MumpsSolver::solve(Problem* const &problem_pt, DoubleVector &result)
               << Jacobian_setup_time << std::endl;
   }
 
+
  //Now call the linear algebra solve, if desired
  if(!Suppress_solve) 
   {
-   solve(&jacobian,residuals,result);
+   //If the distribution of the result has been build and 
+   //does not match that of
+   //the solver then redistribute before the solve and return
+   //to the incoming distribution afterwards.
+   if((result.built()) && 
+      (!(*result.distribution_pt() == *this->distribution_pt())))
+    {
+     LinearAlgebraDistribution 
+      temp_global_dist(result.distribution_pt());       
+     result.build(this->distribution_pt(),0.0);
+     solve(&jacobian,residuals,result);
+     result.redistribute(&temp_global_dist);
+    }
+   else
+    {
+     solve(&jacobian,residuals,result);
+    }
   }
- 
+
  // Set Delete_matrix back to original value
  Delete_matrix_data = copy_of_Delete_matrix_data;
  
- // Switch off docing again
- mumps_switch_off_doc(Solver_ID_in_pool);
-
  // Finalise/doc timings
  if ((Doc_time) && (my_rank==0))
   {
    double t_end = TimingHelpers::timer();
-   oomph_info << std::endl << "Total time for MumpsSolver " << "(np=" 
-              << this->distribution_pt()->communicator_pt()->nproc() << ",N=" << problem_pt->ndof()
-              <<") [sec] : " << t_end-t_start << std::endl << std::endl;
+   oomph_info << "Total time for MumpsSolver " << "(np=" 
+              << this->distribution_pt()->communicator_pt()->nproc() 
+              << ",N=" << problem_pt->ndof()
+              <<") [sec] : " << t_end-t_start << std::endl;
   }
  
 }
-
-
+ 
+ 
 //===============================================================
 /// Resolve the system defined by the last assembled jacobian
 /// and the specified rhs vector if resolve has been enabled.
 /// Note: returns the global result Vector.
 //===============================================================
-void MumpsSolver::resolve(const DoubleVector &rhs, DoubleVector &result)
-{
+ void MumpsSolver::resolve(const DoubleVector &rhs, DoubleVector &result)
+ {
+
 #ifdef PARANOID
- // check that the rhs vector is setup
- if (!rhs.distribution_pt()->built())
-  {
-   std::ostringstream error_message_stream;
-   error_message_stream 
-    << "The vectors rhs must be setup";
-   throw OomphLibError(error_message_stream.str(),
-                       "MumpsSolver::resolve()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
- // check that the rhs distribution is the same as the distribution as this 
- // solver
- if (!(*rhs.distribution_pt() == *distribution_pt()))
-  {
-   std::ostringstream error_message_stream;
-   error_message_stream 
-    << "The distribution of rhs vector must match the solver";
-   throw OomphLibError(error_message_stream.str(),
-                       "MumpsSolver::resolve()",
-                       OOMPH_EXCEPTION_LOCATION);
-  }
- 
- // if the result vector is distributed then check it has the same distribution
- // as the rhs
- if (result.distributed())
-  {
-   if (!(*result.distribution_pt() == *rhs.distribution_pt()))
-    {
-     std::ostringstream error_message_stream;
-     error_message_stream 
-      << "The result vector distribution has been setup; it must have the "
-      << "same distribution as the rhs vector.";
-     throw OomphLibError(error_message_stream.str(),
-                         "MumpsSolver::resolve()",
-                         OOMPH_EXCEPTION_LOCATION);
-    }
-  }   
+  if (!Suppress_warning_about_MPI_COMM_WORLD)
+   {
+    if (this->distribution_pt()->communicator_pt()->mpi_comm()!=MPI_COMM_WORLD)
+     {
+      std::ostringstream error_message_stream;
+      error_message_stream 
+       << "Warning: Mumps wrapper assumes communicator is MPI_COMM_WORLD\n"
+       << "         which is not the case, so mumps may die...\n"
+       << "         If it does initialise oomph-lib's mpi without requesting\n"
+       << "         the communicator to be a duplicate of MPI_COMM_WORLD\n"
+       << "         (done via an optional boolean to MPI_Helpers::init(...)\n\n"
+       << "         (You can suppress this warning by recompiling without\n"
+       << "         paranoia or setting \n\n"
+       << "         MumpsSolver::suppress_warning_about_MPI_COMM_WORLD()\n\n"
+       << "         to true.\n";
+      OomphLibWarning(error_message_stream.str(),
+                      "MumpsSolver::resolve()",
+                      OOMPH_EXCEPTION_LOCATION);
+     }
+   }
 #endif
- 
+
  // Store starting time for solve
  double t_start = TimingHelpers::timer();
  
-
  // Doc stats?
- if (Doc_stats) mumps_switch_on_doc(Solver_ID_in_pool);
-  
+ if (Doc_stats)
+  {
+   //Output stream for global info on host. Negative value suppresses printing
+   Mumps_struc_pt->icntl[2]=6;
+  }
+ 
  //Now do the back substitution phase
  backsub(rhs,result);
-
+ 
  // Doc time for solve
  double t_end = TimingHelpers::timer();
  Solution_time = t_end-t_start;
-
- // Switch off docing again
- mumps_switch_off_doc(Solver_ID_in_pool);
+ 
+ // Switch off docing again by setting output stream for global info on 
+ // to negative number
+ Mumps_struc_pt->icntl[2]=-1;
  
  if ((Doc_time) && (this->distribution_pt()->communicator_pt()->my_rank()==0))
   {
@@ -638,7 +984,7 @@ void MumpsSolver::resolve(const DoubleVector &rhs, DoubleVector &result)
               << t_end-t_start << std::endl;
   }
  
-}
+ }
 
 
 

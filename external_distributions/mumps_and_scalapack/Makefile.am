@@ -5,7 +5,7 @@ build_scripts
 oomph_abs_top_srcdir=`cd $(top_builddir); pwd`
 
 # Define mumps tar file
-mumps_tar_file=MUMPS_4.8.4.tar.gz
+mumps_tar_file=MUMPS_4.10.0.tar.gz
 
 # Define gzipped scalapack installer
 scalapack_tar_file=scalapack_installer.tgz
@@ -153,9 +153,9 @@ all:
 	echo "" >> build_script.bash
 	echo "# Update Makefile" >> build_script.bash
 	echo -e "escaped_blas_lib=\`echo \044blas_lib | awk '{gsub(\"/\",\"\0134\0134\0134/\"); print}' \`" >> build_script.bash
-	echo -e "sed \"s/@mpicc@/"$(CC)"/g\" Makefile.inc.template  | sed \"s/@mpif90@/"$(F77)"/g\"  | sed \"s/@blas_lib@/\044escaped_blas_lib/g\" > MUMPS_4.8.4/Makefile.inc" >> build_script.bash
+	echo -e "sed \"s/@mpicc@/"$(CC)"/g\" Makefile.inc.template  | sed \"s/@mpif90@/"$(F77)"/g\"  | sed \"s/@blas_lib@/\044escaped_blas_lib/g\" > MUMPS_4.10.0/Makefile.inc" >> build_script.bash
 	echo "" >> build_script.bash
-	echo "cd MUMPS_4.8.4" >> build_script.bash
+	echo "cd MUMPS_4.10.0" >> build_script.bash
 	echo "echo \"Building...\""
 	echo "make d" >> build_script.bash
 	echo "echo \"...done\" " >> build_script.bash
@@ -169,10 +169,11 @@ all:
 	echo "mkdir mumps_and_scalapack_default_installation"  >> build_script.bash
 	echo "mkdir mumps_and_scalapack_default_installation/lib"  >> build_script.bash
 	echo "mkdir mumps_and_scalapack_default_installation/include"  >> build_script.bash
-	echo "cp mumps/MUMPS_4.8.4/lib/libdmumps.a mumps/MUMPS_4.8.4/lib/libmumps_common.a mumps/MUMPS_4.8.4/lib/libpord.a mumps_and_scalapack_default_installation/lib"  >> build_script.bash
+	echo "cp mumps/MUMPS_4.10.0/lib/libdmumps.a mumps/MUMPS_4.10.0/lib/libmumps_common.a mumps/MUMPS_4.10.0/lib/libpord.a mumps_and_scalapack_default_installation/lib"  >> build_script.bash
 	echo "cp scalapack/scalapack_installer_0.94/lib/libscalapack.a scalapack/scalapack_installer_0.94/lib/blacs.a scalapack/scalapack_installer_0.94/lib/blacsC.a scalapack/scalapack_installer_0.94/lib/blacsF77.a mumps_and_scalapack_default_installation/lib "  >> build_script.bash
 	echo "cp mumps_and_scalapack_default_installation/lib/blacs.a  mumps_and_scalapack_default_installation/lib/blacs_copy.a"  >> build_script.bash
-	echo "cp mumps/MUMPS_4.8.4/lib/libdmumps.a mumps/MUMPS_4.8.4/include/*  mumps_and_scalapack_default_installation/include"  >> build_script.bash
+	echo "cp mumps/MUMPS_4.10.0/lib/libdmumps.a mumps/MUMPS_4.10.0/include/*  mumps_and_scalapack_default_installation/include"  >> build_script.bash
+	chmod a+x build_script.bash 
 	./build_script.bash 
 
 clean-local:

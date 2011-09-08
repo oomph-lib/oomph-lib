@@ -297,7 +297,7 @@ RotatingProblem<ELEMENT>::RotatingProblem
  //dynamic_cast<SuperLUSolver*>(this->linear_solver_pt())
  //->set_solver_type(SuperLUSolver::Serial);
 
-//  NewMumpsSolver* solver_pt=new NewMumpsSolver;
+//  MumpsSolver* solver_pt=new MumpsSolver;
 //  this->linear_solver_pt() = solver_pt;
 //  solver_pt->enable_suppress_warning_about_MPI_COMM_WORLD();
 
